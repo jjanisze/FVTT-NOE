@@ -1,0 +1,876 @@
+{
+  "NEUROSHIMA": {
+    "ModuleTitle": "Neuroshima: Ostatnia Era"
+  },
+
+  "TYPES": {
+    "Actor": {
+      "character": "Bohater Gracza",
+      "characterPl": "Bohaterowie Graczy",
+      "npc": "BN (Postać Niezależna)",
+      "npcPl": "BN (Postacie Niezależne)",
+      "group": "Grupa",
+      "groupPl": "Grupy",
+      "vehicle": "Pojazd",
+      "vehiclePl": "Pojazdy",
+      "encounter": "Spotkanie",
+      "encounterPl": "Spotkania"
+    },
+    "Item": {
+      "background": "Pochodzenie",
+      "backgroundPl": "Pochodzenia",
+      "class": "Klasa",
+      "classPl": "Klasy",
+      "consumable": "Używka",
+      "consumablePl": "Używki",
+      "container": "Pojemnik",
+      "containerPl": "Pojemniki",
+      "equipment": "Ekwipunek",
+      "equipmentPl": "Ekwipunek",
+      "facility": "Placówka",
+      "facilityPl": "Placówki",
+      "feat": "Zdolność",
+      "featurePl": "Zdolności",
+      "loot": "Łup",
+      "lootPl": "Łupy",
+      "race": "Pochodzenie",
+      "racePl": "Pochodzenia",
+      "raceLegacy": "Rasa",
+      "raceLegacyPl": "Rasy",
+      "spell": "Zaklęcie",
+      "spellPl": "Zaklęcia",
+      "subclass": "Podklasa",
+      "subclassPl": "Podklasy",
+      "tool": "Narzędzia",
+      "toolPl": "Narzędzia",
+      "weapon": "Broń",
+      "weaponPl": "Broń"
+    }
+  },
+
+  "EFFECT": {
+    "DND5E": {
+      "StatusBleeding": "Krwawienie",
+      "StatusBloodied": "Zakrwawiony",
+      "StatusBurning": "Płonący",
+      "StatusBurrowing": "Kopanie",
+      "StatusConcentrating": "Koncentracja",
+      "StatusCursed": "Przeklęty",
+      "StatusDead": "Martwy",
+      "StatusDehydration": "Odwodnienie",
+      "StatusDodging": "Unik",
+      "StatusEncumbered": "Obciążony",
+      "StatusEthereal": "Eteryczny",
+      "StatusExceedingCarryingCapacity": "Przekroczenie udźwigu",
+      "StatusFalling": "Spadanie",
+      "StatusFlying": "Latanie",
+      "StatusHalfCover": "Połowiczna osłona",
+      "StatusHeavilyEncumbered": "Silnie obciążony",
+      "StatusHiding": "Ukrywanie się",
+      "StatusHovering": "Lewitacja",
+      "StatusMalnutrition": "Niedożywienie",
+      "StatusMarked": "Oznaczony",
+      "StatusSilenced": "Uciszony",
+      "StatusSleeping": "Śpiący",
+      "StatusStable": "Stabilny",
+      "StatusSuffocation": "Duszenie się",
+      "StatusSurprised": "Zaskoczony",
+      "StatusThreeQuartersCover": "Trzy-czwarte osłony",
+      "StatusTotalCover": "Pełna osłona",
+      "StatusTransformed": "Przemieniony"
+    }
+  },
+
+  "DND5E": {
+    "Abilities": "Cechy",
+    "AbilityStr": "Siła",
+    "AbilityStrAbbr": "SIŁ",
+    "AbilityDex": "Zręczność",
+    "AbilityDexAbbr": "ZRC",
+    "AbilityCon": "Kondycja",
+    "AbilityConAbbr": "KON",
+    "AbilityInt": "Inteligencja",
+    "AbilityIntAbbr": "INT",
+    "AbilityWis": "Mądrość",
+    "AbilityWisAbbr": "MDR",
+    "AbilityCha": "Charyzma",
+    "AbilityChaAbbr": "CHA",
+    "AbilityScore": "Wartość Cechy",
+    "AbilityModifier": "Modyfikator Cechy",
+    "AbilityModifierShort": "Mod",
+
+    "ABILITY": {
+      "Configure": {
+        "CheckLabel": "Test {ability}",
+        "SaveLabel": "Obronny {ability}",
+        "Title": "Konfiguruj {ability}"
+      },
+      "SECTIONS": {
+        "Bonuses": {
+          "Hint": "Te premie dotyczą testów i rzutów obronnych z {ability}.",
+          "Label": "Premie {ability}"
+        },
+        "Global": {
+          "Hint": "Te premie dotyczą testów i rzutów obronnych z dowolnej cechy.",
+          "Label": "Premie globalne"
+        },
+        "Score": "Wartość {ability}"
+      }
+    },
+
+    "Skills": "Umiejętności",
+    "Skill": "Umiejętność",
+    "PassivePerception": "Pasywna Percepcja",
+
+    "SKILL": {
+      "SECTIONS": {
+        "Bonuses": {
+          "Hint": "Te premie dotyczą pasywnych wyników i testów {label}.",
+          "Label": "Premie {label}"
+        },
+        "Details": "Szczegóły {label}",
+        "Global": {
+          "Hint": "Te premie dotyczą testów z dowolnej umiejętności.",
+          "Label": "Premie globalne"
+        }
+      }
+    },
+
+    "ArmorClass": "Trudność Trafienia",
+    "AC": "TT",
+    "Armor": "Pancerz",
+    "ArmorClassUnarmored": "Bez pancerza",
+    "ArmorClassNatural": "Naturalny pancerz",
+    "ArmorClassEquipment": "Założony pancerz",
+    "ArmorHeavyProficiency": "Ciężki",
+    "ArmorLightProficiency": "Lekki",
+    "ArmorMediumProficiency": "Średni",
+    "EquipmentShield": "Tarcza",
+
+    "HitPoints": "Punkty Wytrzymałości",
+    "HP": "PW",
+    "HitPointsCurrent": "Aktualne Punkty Wytrzymałości",
+    "HitPointsMax": "Maksymalne Punkty Wytrzymałości",
+    "HitPointsTemp": "Tymczasowe Punkty Wytrzymałości",
+    "HitPointsTempShort": "Tymczasowe PW",
+    "HitPointsTempMax": "Tymczasowe maksimum",
+    "HitDice": "Kości Wytrzymałości",
+    "HitDie": "Kość Wytrzymałości",
+    "HitDiceRoll": "Rzuć Kośćmi Wytrzymałości",
+
+    "HITDICE": {
+      "Abbreviation": "KW",
+      "Action": {
+        "Decrease": "Zmniejsz",
+        "Increase": "Zwiększ"
+      },
+      "Available": "{number} dostępne",
+      "Config": "Dostosuj Kości Wytrzymałości",
+      "Counted": {
+        "one": "{number} kość wytrzymałości",
+        "other": "{number} kości wytrzymałości"
+      }
+    },
+
+    "Initiative": "Inicjatywa",
+    "InitiativeAbbr": "Ini",
+
+    "Proficiency": "Biegłość",
+    "ProficiencyBonus": "Premia z Biegłości",
+    "ProficiencyBonusAbbr": "PB",
+    "Proficient": "Biegłość",
+    "NotProficient": "Brak biegłości",
+    "HalfProficient": "Połowa biegłości",
+    "Expertise": "Specjalizacja",
+
+    "Speed": "Szybkość",
+    "Movement": "Ruch",
+
+    "MOVEMENT": {
+      "Action": {
+        "Configure": "Konfiguruj szybkość ruchu"
+      },
+      "FIELDS": {
+        "bonus": { "label": "Premia do ruchu" },
+        "ignoredDifficultTerrain": { "label": "Ignorowany trudny teren" },
+        "special": { "label": "Ruch specjalny" },
+        "speeds": { "label": "Szybkości ruchu" },
+        "units": { "label": "Jednostka" }
+      },
+      "Hover": "Lewitacja",
+      "HoverSpeed": "{speed} (lewitacja)",
+      "Speed": "Szybkość w walce",
+      "Type": {
+        "Burrow": "Kopanie",
+        "Climb": "Wspinaczka",
+        "Fly": "Latanie",
+        "Jump": "Skok",
+        "Speed": "Szybkość",
+        "Swim": "Pływanie",
+        "Walk": "Chód"
+      }
+    },
+
+    "Senses": "Zmysły",
+    "SenseDarkvision": "Widzenie w ciemności",
+    "SenseBlindsight": "Widzenie bez wzroku",
+    "SenseTremorsense": "Wyczucie wibracji",
+    "SenseTruesight": "Prawdziwe widzenie",
+
+    "SavingThrow": "Rzut Obronny",
+    "SavingThrowShort": "Obronny",
+    "SavingThrows": "Rzuty Obronne",
+    "ClassSaves": "Rzuty Obronne",
+    "ActionSave": "Rzut Obronny",
+    "DeathSave": "Rzuty Przeciw Śmierci",
+    "DeathSavingThrow": "Rzut Przeciw Śmierci",
+    "DeathSaveBonus": "Bonus do Rzutu Przeciw Śmierci",
+    "DeathSaveConfigure": "Konfiguracja Rzutów Przeciw Śmierci",
+    "DeathSaveCriticalSuccess": "{name} — krytyczny sukces Rzutu Przeciw Śmierci! Odzyskuje 1 PW!",
+    "DeathSaveHide": "Ukryj Rzuty Przeciw Śmierci",
+    "DeathSaveShow": "Pokaż Rzuty Przeciw Śmierci",
+    "DeathSaveSuccess": "{name} przeżył z 3 sukcesami — stan stabilny!",
+    "DeathSaveSuccessLabel": "Sukces Rzutu Przeciw Śmierci",
+    "DeathSaveSuccessLabelN.one": "1. sukces Rzutu Przeciw Śmierci",
+    "DeathSaveSuccessLabelN.two": "2. sukces Rzutu Przeciw Śmierci",
+    "DeathSaveSuccessLabelN.few": "3. sukces Rzutu Przeciw Śmierci",
+    "DeathSaveSuccesses": "Sukcesy",
+    "DeathSaveFailure": "{name} umiera z 3 porażkami Rzutu Przeciw Śmierci!",
+    "DeathSaveFailureLabel": "Porażka Rzutu Przeciw Śmierci",
+    "DeathSaveFailureLabelN.one": "1. porażka Rzutu Przeciw Śmierci",
+    "DeathSaveFailureLabelN.two": "2. porażka Rzutu Przeciw Śmierci",
+    "DeathSaveFailureLabelN.few": "3. porażka Rzutu Przeciw Śmierci",
+    "DeathSaveFailures": "Porażki",
+    "DeathSaveRoll": "Wykonaj Rzut Przeciw Śmierci",
+    "DeathSaveUnnecessary": "Nie musisz wykonywać Rzutu Przeciw Śmierci — masz dodatnie PW lub osiągnąłeś już 3 sukcesy/porażki.",
+    "SavePromptTitle": "Rzut Obronny — {ability}",
+
+    "SAVE": {
+      "FIELDS": {
+        "damage": {
+          "label": "Obrażenia od rzutu",
+          "onSave": {
+            "Full": "Pełne obrażenia",
+            "Half": "Połowa obrażeń",
+            "None": "Brak obrażeń",
+            "hint": "Ile obrażeń zadawane jest przy udanym rzucie obronnym?",
+            "label": "Obrażenia przy udanym rzucie"
+          },
+          "parts": {
+            "hint": "Poszczególne części obrażeń.",
+            "label": "Części obrażeń"
+          }
+        },
+        "effects": {
+          "onSave": {
+            "hint": "Ten efekt zawsze zostanie zastosowany, nawet przy udanym rzucie obronnym.",
+            "label": "Zawsze zastosuj"
+          }
+        },
+        "save": {
+          "ability": {
+            "hint": "Cechy, z których można wykonać rzut obronny.",
+            "label": "Cechy wyzwania"
+          },
+          "dc": {
+            "CustomFormula": "Własny wzór",
+            "DefaultFormula": "8 + @mod + @prof",
+            "calculation": {
+              "hint": "Metoda obliczania stopnia trudności.",
+              "label": "Obliczanie ST"
+            },
+            "formula": {
+              "hint": "Własny wzór lub stała wartość ST.",
+              "label": "Wzór ST"
+            },
+            "label": "Stopień Trudności"
+          },
+          "label": "Szczegóły rzutu"
+        }
+      },
+      "Hint": "Wymagaj rzutu obronnego z opcją rzutu na obrażenia.",
+      "OnSave": "Przy sukcesie",
+      "Title": {
+        "one": "Obronny",
+        "other": "Obronne"
+      }
+    },
+
+    "Advantage": "Ułatwienie",
+    "Disadvantage": "Utrudnienie",
+    "Inspiration": "Fuks",
+    "Exhaustion": "Wyczerpanie",
+
+    "Attack": "Atak",
+    "AttackRoll": "Test Ataku",
+    "Damage": "Obrażenia",
+    "DamageRoll": "Rzut na obrażenia",
+    "Critical": "Krytyczny",
+    "CriticalHit": "Trafienie krytyczne",
+    "ToHit": "Trafienie",
+    "Cover": "Osłona",
+
+    "ATTACK": {
+      "Attack": {
+        "mwak": "Atak wręcz",
+        "rwak": "Atak dystansowy"
+      },
+      "Classification": {
+        "Spell": "Zaklęcie",
+        "Unarmed": "Bez broni",
+        "Weapon": "Broń"
+      },
+      "FIELDS": {
+        "attack": {
+          "ability": {
+            "hint": "Cecha używana do ataku i obrażeń. Dostępna jako @mod we wzorach.",
+            "label": "Cecha ataku"
+          },
+          "bonus": {
+            "hint": "Premia do trafienia.",
+            "label": "Premia do trafienia"
+          },
+          "critical": {
+            "threshold": {
+              "hint": "Minimalna wartość na k20 wymagana do trafienia krytycznego.",
+              "label": "Próg krytyczny"
+            }
+          },
+          "flat": {
+            "hint": "Ignoruj modyfikator cechy, biegłość i inne premie aktora.",
+            "label": "Stałe trafienie"
+          },
+          "label": "Szczegóły ataku"
+        },
+        "damage": {
+          "critical": {
+            "bonus": {
+              "hint": "Dodatkowe obrażenia przy trafieniu krytycznym.",
+              "label": "Dodatkowe obrażenia krytyczne"
+            }
+          },
+          "includeBase": {
+            "hint": "Dołącz bazowe obrażenia przedmiotu.",
+            "label": "Dołącz bazowe obrażenia"
+          },
+          "label": "Obrażenia ataku",
+          "parts": {
+            "hint": "Poszczególne części obrażeń.",
+            "label": "Części obrażeń"
+          }
+        }
+      },
+      "Formatted": {
+        "2014": "{type} atak {classification}",
+        "2024": "{type} test ataku"
+      },
+      "Hint": "Wykonaj test ataku i rzuć na obrażenia.",
+      "Mode": {
+        "Label": "Tryb ataku",
+        "Offhand": "Ręka wolna",
+        "OneHanded": "Jednoręczny",
+        "Ranged": "Dystansowy",
+        "Thrown": "Rzucony",
+        "ThrownOffhand": "Rzut wolną ręką",
+        "TwoHanded": "Dwuręczny"
+      },
+      "Title": {
+        "one": "Atak",
+        "other": "Ataki"
+      },
+      "Type": {
+        "Melee": "Wręcz",
+        "Ranged": "Dystansowy"
+      },
+      "Warning": {
+        "NoQuantity": "Próba ataku bronią o ilości zero."
+      },
+      "Weapon": {
+        "Melee": "Broń biała",
+        "Ranged": "Broń dystansowa"
+      }
+    },
+
+    "DAMAGE": {
+      "Type": {
+        "Acid": "Od kwasu",
+        "Bludgeoning": "Obuchowe",
+        "Cold": "Od zimna",
+        "Fire": "Od ognia",
+        "Force": "Od siły",
+        "Lightning": "Elektryczne",
+        "Necrotic": "Nekrotyczne",
+        "Piercing": "Kłute",
+        "Poison": "Od trucizny",
+        "Psychic": "Psychiczne",
+        "Radiant": "Radioaktywne",
+        "Slashing": "Sieczne",
+        "Thunder": "Wybuchowe"
+      }
+    },
+
+    "HEAL": {
+      "FIELDS": {
+        "healing": {
+          "bonus": {
+            "hint": "Premia do rzutu na leczenie.",
+            "label": "Premia do leczenia"
+          },
+          "label": "Leczenie",
+          "types": {
+            "hint": "Typ leczenia.",
+            "label": "Typy leczenia"
+          }
+        }
+      },
+      "HealingButton": "Leczenie",
+      "HealingRoll": "Rzut na leczenie",
+      "Hint": "Ulecz postać",
+      "Title": "Leczenie",
+      "Type": {
+        "Healing": "Punkty Wytrzymałości",
+        "HealingShort": "Leczenie",
+        "Maximum": "Maksymalne Punkty Wytrzymałości",
+        "MaximumShort": "Maks. PW",
+        "Temporary": "Tymczasowe Punkty Wytrzymałości",
+        "TemporaryShort": "Tymcz. PW"
+      }
+    },
+
+    "ACTIVATION": {
+      "Category": {
+        "Combat": "Walka",
+        "Monster": "Potwór",
+        "Rest": "Odpoczynek",
+        "Standard": "Standardowe",
+        "Time": "Czas",
+        "Vehicle": "Pojazd"
+      },
+      "FIELDS": {
+        "activation": {
+          "condition": {
+            "hint": "Warunek wymagany do aktywacji.",
+            "label": "Warunek aktywacji"
+          },
+          "label": "Aktywacja",
+          "override": {
+            "hint": "Użyj tych wartości aktywacji zamiast domyślnych przedmiotu.",
+            "label": "Nadpisz aktywację"
+          },
+          "type": {
+            "hint": "Typ aktywacji (np. akcja, akcja legendarna, minuty).",
+            "label": "Koszt aktywacji"
+          },
+          "value": {
+            "hint": "Wartość liczbowa aktywacji.",
+            "label": "Wartość aktywacji"
+          }
+        }
+      },
+      "Type": {
+        "Action": {
+          "Header": "Akcje",
+          "Label": "Akcja"
+        },
+        "BonusAction": {
+          "Header": "Akcje dodatkowe",
+          "Label": "Akcja dodatkowa"
+        },
+        "Crew": {
+          "Counted": {
+            "one": "{number} akcja załogi",
+            "other": "{number} akcje załogi"
+          },
+          "Header": "Akcje załogi",
+          "Label": "Akcja załogi"
+        },
+        "Day": {
+          "Header": "Dni",
+          "Label": "Dzień"
+        },
+        "Encounter": {
+          "Label": "Początek spotkania"
+        },
+        "Hour": {
+          "Header": "Godziny",
+          "Label": "Godzina"
+        },
+        "Lair": {
+          "Header": "Akcje legowiska",
+          "Label": "Akcja legowiska"
+        },
+        "Legendary": {
+          "Counted": {
+            "one": "{number} akcja legendarna",
+            "other": "{number} akcje legendarne"
+          },
+          "Header": "Akcje legendarne",
+          "Label": "Akcja legendarna"
+        },
+        "LongRest": {
+          "Label": "Koniec długiego odpoczynku"
+        },
+        "Minute": {
+          "Header": "Minuty",
+          "Label": "Minuta"
+        },
+        "Mythic": {
+          "Counted": {
+            "one": "{number} akcja mityczna",
+            "other": "{number} akcje mityczne"
+          },
+          "Header": "Akcje mityczne",
+          "Label": "Akcja mityczna"
+        },
+        "Reaction": {
+          "Header": "Reakcje",
+          "Label": "Reakcja"
+        },
+        "ShortRest": {
+          "Label": "Koniec krótkiego odpoczynku"
+        },
+        "TurnEnd": {
+          "Label": "Koniec tury"
+        },
+        "TurnStart": {
+          "Label": "Początek tury"
+        }
+      }
+    },
+
+    "REST": {
+      "Configuration": "Konfiguracja odpoczynku",
+      "HitDice": {
+        "AutoSpend": {
+          "Hint": "Automatycznie wydawaj kości wytrzymałości, aż się skończą lub PW będą pełne.",
+          "Label": "Automatyczne wydawanie KW"
+        },
+        "None": "Brak kości wytrzymałości do rzucenia.",
+        "Select": "Wybierz kości do rzutu"
+      },
+      "Label": "Odpoczynek",
+      "Long": {
+        "Abbreviation": "DO",
+        "Hint": {
+          "Group": "Podczas długiego odpoczynku członkowie grupy odzyskają PW, kości wytrzymałości, zasoby klasowe i ładunki przedmiotów.",
+          "GroupLegacy": "Podczas długiego odpoczynku członkowie grupy odzyskają PW, połowę maks. kości wytrzymałości, zasoby klasowe i ładunki przedmiotów.",
+          "Normal": "Podczas długiego odpoczynku odzyskujesz PW, kości wytrzymałości, zasoby klasowe i ładunki przedmiotów.",
+          "NormalLegacy": "Podczas długiego odpoczynku odzyskujesz PW, połowę maks. kości wytrzymałości, zasoby klasowe i ładunki przedmiotów."
+        },
+        "Label": "Długi odpoczynek",
+        "LabelShort": "D. odp.",
+        "Recovery": "Odzyskuje po długim odpoczynku",
+        "Result": {
+          "Full": "{name} odpoczywa i odzyskuje {health} i {dice}.",
+          "HitDice": "{name} odpoczywa i odzyskuje {dice}.",
+          "HitPoints": "{name} odpoczywa i odzyskuje {health}.",
+          "Short": "{name} odbywa długi odpoczynek."
+        }
+      },
+      "NewDay": {
+        "Hint": "Odzyskaj zdolności odnawiające się o świcie, zmierzchu lub nowego dnia.",
+        "Label": "Nowy dzień"
+      },
+      "RecoverTempHP": {
+        "Label": "Usuń tymczasowe PW"
+      },
+      "RecoverTempMaxHP": {
+        "Hint": "Usuń wszelkie modyfikacje maks. PW postaci.",
+        "Label": "Odzyskaj maks. PW"
+      },
+      "Short": {
+        "Abbreviation": "KO",
+        "Hint": {
+          "Group": "Podczas krótkiego odpoczynku członkowie grupy mogą wydać kości wytrzymałości i odzyskają ładunki przedmiotów.",
+          "Normal": "Podczas krótkiego odpoczynku możesz wydać kości wytrzymałości i odzyskasz ładunki przedmiotów."
+        },
+        "Label": "Krótki odpoczynek",
+        "LabelShort": "K. odp.",
+        "Recovery": "Odzyskuje po krótkim odpoczynku",
+        "Result": {
+          "Full": "{name} odpoczywa, wydając {dice} i odzyskując {health}.",
+          "Short": "{name} odbywa krótki odpoczynek."
+        }
+      },
+      "Warning": {
+        "OnlyByRequest": "Odpoczynek może być wykonany tylko na polecenie MG."
+      }
+    },
+
+    "Action": "Akcja",
+    "ActionPl": "Akcje",
+    "BonusAction": "Akcja dodatkowa",
+    "Reaction": "Reakcja",
+    "ReactionPl": "Reakcje",
+    "ActionAction": "Akcja",
+    "ActionBonus": "Akcja dodatkowa",
+    "ActionReaction": "Reakcja",
+    "ActionFree": "Darmowa interakcja",
+    "ActionSpecial": "Specjalna",
+    "ActionLegendary": "Akcja legendarna",
+    "ActionLair": "Akcja legowiska",
+    "ActionMythic": "Akcja mityczna",
+
+    "NPC": {
+      "SECTIONS": {
+        "Actions": "Akcje",
+        "BonusActions": "Akcje dodatkowe",
+        "LegendaryActions": "Akcje legendarne",
+        "MythicActions": "Akcje mityczne",
+        "Reactions": "Reakcje",
+        "Traits": "Cechy"
+      }
+    },
+
+    "Conditions": "Stany",
+    "ConBlinded": "Oślepiony",
+    "ConCharmed": "Oczarowany",
+    "ConDeafened": "Ogłuszony",
+    "ConDiseased": "Chory",
+    "ConExhaustion": "Wyczerpanie",
+    "ConFrightened": "Przestraszony",
+    "ConGrappled": "Schwytany",
+    "ConIncapacitated": "Obezwładniony",
+    "ConInvisible": "Niewidzialny",
+    "ConParalyzed": "Sparaliżowany",
+    "ConPetrified": "Skamieniały",
+    "ConPoisoned": "Zatruty",
+    "ConProne": "Powalony",
+    "ConRestrained": "Unieruchomiony",
+    "ConStunned": "Oszołomiony",
+    "ConUnconscious": "Nieprzytomny",
+    "ConImm": "Odporność na stany",
+
+    "DamImm": "Odporności na obrażenia (immunitet)",
+    "DamRes": "Odporności na obrażenia",
+    "DamVuln": "Podatności na obrażenia",
+    "Immunities": "Odporności",
+    "Resistances": "Odporności",
+    "Vulnerabilities": "Podatności",
+
+    "Inventory": "Ekwipunek",
+    "Features": "Zdolności",
+    "Spellbook": "Księga zaklęć",
+    "Biography": "Biografia",
+    "Effects": "Efekty",
+    "Details": "Szczegóły",
+    "Attributes": "Atrybuty",
+    "Favorites": "Ulubione",
+    "Resources": "Zasoby",
+    "Notes": "Notatki",
+    "Traits": "Cechy",
+    "Description": "Opis",
+
+    "ItemTypeWeapon": "Broń",
+    "ItemTypeArmor": "Pancerz",
+    "ItemTypeEquipment": "Ekwipunek",
+    "ItemTypeConsumable": "Używka",
+    "ItemTypeTool": "Narzędzia",
+    "ItemTypeLoot": "Łup",
+
+    "ITEM": {
+      "Property": {
+        "Adamantine": "Adamantynowy",
+        "Ammunition": "Amunicja",
+        "Concentration": "Koncentracja",
+        "Finesse": "Finezja",
+        "Firearm": "Broń palna",
+        "Focus": "Ogniskująca",
+        "Gear": "Sprzęt",
+        "Heavy": "Ciężka",
+        "Light": "Lekka",
+        "Loading": "Ładowanie",
+        "Magical": "Magiczna",
+        "Material": "Materialna",
+        "Reach": "Zasięg",
+        "Reload": "Przeładowanie",
+        "Returning": "Powracająca",
+        "Ritual": "Rytuał",
+        "Sidekick": "Pomocnik",
+        "Silvered": "Posrebrzana",
+        "Somatic": "Somatyczna",
+        "Special": "Specjalna",
+        "StealthDisadvantage": "Utrudnienie Skradania",
+        "Thrown": "Rzucana",
+        "Trait": "Cecha pasywna",
+        "TwoHanded": "Dwuręczna",
+        "Verbal": "Werbalna",
+        "Versatile": "Uniwersalna",
+        "WeightlessContents": "Lekka zawartość"
+      }
+    },
+
+    "WEAPON": {
+      "FIELDS": {
+        "ammunition": {
+          "type": { "label": "Typ amunicji" }
+        },
+        "armor": {
+          "value": { "label": "Trudność Trafienia" }
+        },
+        "damage": {
+          "hint": "Bazowe kości obrażeń broni. Modyfikator cechy i dodatkowe obrażenia są dodawane automatycznie."
+        },
+        "mastery": {
+          "hint": "Specjalna zdolność broni odblokowana przez Biegłość w Broni.",
+          "label": "Mistrzostwo"
+        }
+      },
+      "Mastery": {
+        "Cleave": "Rozłupanie",
+        "Flavor": "Mistrzostwo",
+        "Graze": "Draśnięcie",
+        "Label": "Mistrzostwo broni",
+        "Nick": "Nacięcie",
+        "Push": "Odepchnięcie",
+        "Sap": "Osłabienie",
+        "Slow": "Spowolnienie",
+        "Topple": "Powalenie",
+        "Vex": "Irytacja"
+      }
+    },
+
+    "WeaponSimpleM": "Prosta biała",
+    "WeaponSimpleR": "Prosta dystansowa",
+    "WeaponMartialM": "Wojenna biała",
+    "WeaponMartialR": "Wojenna dystansowa",
+    "WeaponNatural": "Naturalna",
+    "WeaponSiege": "Broń oblężnicza",
+
+    "WeaponBiala": "Broń Biała",
+    "WeaponMiotana": "Broń Miotana",
+    "WeaponPalnaKrotka": "Palna Krótka",
+    "WeaponPalnaPosr": "Palna Pośrednia",
+    "WeaponPalnaDluga": "Palna Długa",
+    "WeaponPalnaCiezka": "Palna Ciężka",
+
+    "ITEM": {
+      "Property": {
+        "Wmag": "Wmag.",
+        "Beb": "Bęb.",
+        "TrybP": "P (Ogień Pojedynczy)",
+        "TrybKS": "KS (Krótka Seria)",
+        "TrybDS": "DS (Długa Seria)",
+        "TrybMS": "MS (Miażdżąca Seria)",
+        "TrybOZ": "OZ (Ogień Zaporowy)",
+        "Obalajaca": "Obalająca",
+        "Burzaca": "Burząca",
+        "Finezyjna": "Finezyjna",
+        "Cicha": "Cicha",
+        "Unieruchamiajaca": "Unieruchamiająca",
+        "Powracajaca": "Powracająca"
+      }
+    },
+
+    "Spellcasting": "Rzucanie zaklęć",
+    "SpellAbility": "Cecha zaklęć",
+    "SpellDC": "ST zaklęć",
+    "SpellSaveDC": "ST rzutu obronnego",
+    "Prepared": "Przygotowane",
+    "Concentration": "Koncentracja",
+    "Ritual": "Rytuał",
+
+    "Equipped": "Wyposażone",
+    "Unequipped": "Niewyposażone",
+    "Attuned": "Dostrojone",
+    "Attunement": "Dostrojenie",
+
+    "Quantity": "Ilość",
+    "QuantityAbbr": "Il.",
+    "Weight": "Waga",
+    "Price": "Cena",
+    "Cost": "Koszt",
+    "Range": "Zasięg",
+    "Duration": "Czas trwania",
+    "Target": "Cel",
+    "Uses": "Użycia",
+    "Charges": "Ładunki",
+    "Bonus": "Premia",
+    "Modifier": "Modyfikator",
+    "Formula": "Wzór",
+    "Properties": "Właściwości",
+    "Requirements": "Wymagania",
+    "Encumbrance": "Obciążenie",
+    "Remaining": "Pozostałe",
+    "Spent": "Wydane",
+    "Identified": "Zidentyfikowane",
+    "None": "Brak",
+
+    "SheetModeEdit": "Edycja",
+    "SheetModePlay": "Gra",
+
+    "Level": "Poziom",
+    "LevelUp": "Awans",
+    "Experience": "Punkty Doświadczenia",
+    "ExperiencePoints": {
+      "Label": "Punkty Doświadczenia"
+    },
+
+    "Name": "Imię postaci",
+    "Background": "Pochodzenie",
+    "Alignment": "Charakter",
+    "Appearance": "Wygląd",
+    "PersonalityTraits": "Cechy osobowości",
+    "Ideals": "Ideały",
+    "Bonds": "Więzi",
+    "Flaws": "Słabości",
+    "Age": "Wiek",
+    "Height": "Wzrost",
+    "Gender": "Płeć",
+    "Eyes": "Oczy",
+    "Skin": "Skóra",
+    "Hair": "Włosy",
+    "Faith": "Wiara",
+
+    "Size": "Rozmiar",
+    "SizeTiny": "Malutki",
+    "SizeSmall": "Mały",
+    "SizeMedium": "Średni",
+    "SizeLarge": "Duży",
+    "SizeHuge": "Ogromny",
+    "SizeGargantuan": "Gigantyczny",
+
+    "CreatureType": "Typ stworzenia",
+    "CreatureAberration": "Aberracja",
+    "CreatureBeast": "Bestia",
+    "CreatureCelestial": "Istota niebiańska",
+    "CreatureConstruct": "Konstrukt",
+    "CreatureDragon": "Smok",
+    "CreatureElemental": "Żywiołak",
+    "CreatureFey": "Fey",
+    "CreatureFiend": "Demon",
+    "CreatureGiant": "Gigant",
+    "CreatureHumanoid": "Humanoid",
+    "CreatureMonstrosity": "Potworność",
+    "CreatureOoze": "Szlam",
+    "CreaturePlant": "Roślina",
+    "CreatureUndead": "Nieumarły",
+
+    "Rarity": "Rzadkość",
+    "ItemRarityMundane": "pospolity",
+    "ItemRarityCommon": "zwykły",
+    "ItemRarityUncommon": "niepospolity",
+    "ItemRarityRare": "rzadki",
+    "ItemRarityVeryRare": "bardzo rzadki",
+    "ItemRarityLegendary": "legendarny",
+    "ItemRarityArtifact": "artefakt",
+
+    "Currency": "Waluta",
+    "CurrencyGP": "Gamble",
+    "CurrencyAbbrGP": "gb",
+    "CurrencyCP": "Gamble",
+    "CurrencyAbbrCP": "gb",
+    "CurrencySP": "Gamble",
+    "CurrencyAbbrSP": "gb",
+    "CurrencyEP": "Gamble",
+    "CurrencyAbbrEP": "gb",
+    "CurrencyPP": "Gamble",
+    "CurrencyAbbrPP": "gb",
+
+    "Rest": "Odpoczynek",
+    "ShortRest": "Krótki odpoczynek",
+    "LongRest": "Długi odpoczynek",
+
+    "Healing": "Leczenie"
+  }
+}

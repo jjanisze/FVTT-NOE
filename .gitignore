@@ -1,0 +1,24 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+dist/
+build/
+
+# Logs
+logs/*.txt
+logs/*.log
+*.log
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/settings.json
+*.bak
+*.tmp
+
+# FoundryVTT runtime artifacts
+*.lock

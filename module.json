@@ -1,0 +1,35 @@
+{
+  "id": "neuroshima-2026-overrides",
+  "title": "Neuroshima: Ostatnia Era",
+  "description": "Neuroshima 5e overrides for dnd5e — skills, combat, equipment, and post-apo survival mechanics.",
+  "version": "0.2.0",
+  "authors": [{ "name": "Jacek Janiszewski" }],
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "relationships": {
+    "systems": [{
+      "id": "dnd5e",
+      "type": "system",
+      "compatibility": {
+        "minimum": "5.0.0",
+        "verified": "5.3.0"
+      }
+    }]
+  },
+  "esmodules": ["scripts/main.mjs"],
+  "styles": ["styles/neuroshima.css"],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "Neuroshima PL",
+      "path": "lang/pl.json"
+    },
+    {
+      "lang": "pl",
+      "name": "Polski",
+      "path": "lang/pl.json"
+    }
+  ]
+}
