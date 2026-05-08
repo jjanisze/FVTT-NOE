@@ -18,6 +18,7 @@
       }
     }]
   },
+  "socket": true,
   "esmodules": ["scripts/main.mjs"],
   "styles": ["styles/neuroshima.css"],
   "languages": [

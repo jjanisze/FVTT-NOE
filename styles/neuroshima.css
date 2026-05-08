@@ -179,3 +179,106 @@
   background: #34495e;
   border-color: #95a5a6;
 }
+
+/* ============================================= */
+/* Chat Warning Bar — pusty magazynek / reload   */
+/* ============================================= */
+
+.neuro-chat-warning {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 4px 0 2px;
+  padding: 5px 8px;
+  background: #3a0f0a;
+  border-left: 3px solid #c0392b;
+  border-radius: 0 4px 4px 0;
+  color: #f5ddd8;
+  font-size: 0.82em;
+  line-height: 1.35;
+}
+
+.neuro-chat-warning .neuro-chat-warning-icon {
+  flex-shrink: 0;
+  font-size: 1em;
+  margin-top: 1px;
+}
+
+.neuro-chat-warning strong {
+  color: #ff7b6b;
+}
+
+/* ============================================= */
+/* Ammo / Caliber system — chat & sheet styles   */
+/* ============================================= */
+
+/* "Obrażenia" button injected into attack roll chat cards */
+.neuro-damage-btn {
+  display: block;
+  width: calc(100% - 8px);
+  margin: 6px 4px 2px;
+  padding: 5px 10px;
+  background: #1e3a1e;
+  border: 1px solid #2e6b2e;
+  border-radius: 4px;
+  color: #8fcf8f;
+  font-size: 0.85em;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.neuro-damage-btn:hover {
+  background: #2a4f2a;
+  border-color: #4a9b4a;
+  color: #b8e8b8;
+}
+
+/* Red variant — shown when no targets are set (manual GM application) */
+.neuro-damage-btn.neuro-damage-btn--red {
+  background: #3a0f0a;
+  border-color: #c0392b;
+  color: #f5a59a;
+}
+
+.neuro-damage-btn.neuro-damage-btn--red:hover {
+  background: #5a1810;
+  border-color: #e74c3c;
+  color: #ffc5bd;
+}
+
+/* Auto-damage chat message */
+.neuro-auto-damage-msg {
+  margin: 2px 0;
+  padding: 5px 8px;
+  background: #1a0a0a;
+  border-left: 3px solid #c0392b;
+  border-radius: 0 4px 4px 0;
+  font-size: 0.85em;
+  color: #e8d5d0;
+}
+
+.neuro-auto-damage-header {
+  display: block;
+  color: #ff7b6b;
+  margin-bottom: 3px;
+}
+
+.neuro-auto-damage-msg ul {
+  margin: 2px 0 4px 14px;
+  padding: 0;
+}
+
+.neuro-auto-damage-props {
+  margin: 3px 0 0;
+  color: #d4b896;
+  font-style: italic;
+  font-size: 0.9em;
+}
+
+.neuro-auto-damage-aoe {
+  margin: 3px 0 0;
+  color: #f0c040;
+  font-size: 0.9em;
+}

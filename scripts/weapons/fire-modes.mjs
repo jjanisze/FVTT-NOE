@@ -1,5 +1,6 @@
 import { getMag, spendRounds } from "./magazine.mjs";
 import { isDamaged, isJammed, rollJamCheck } from "./jams.mjs";
+import { playWeaponSound, WeaponSound } from "./sounds.mjs";
 import { describeCoverDecision, promptCoverDecision } from "../combat/cover.mjs";
 import { ABILITY_KEYS, buildAbilityRuleChangeNotice, hasAbility } from "../actors/abilities.mjs";
 
@@ -139,6 +140,7 @@ function registerShortBurstActivityType() {
       if (!spent) return;
 
       await _markBurstModeUsed(liveItem, KS_FIRE_MODE, KS_BULLET_COST);
+      playWeaponSound(WeaponSound.BURST_SHORT);
       await _announceLeadHailUse(liveItem, results);
       await super._triggerSubsequentActions(config, results);
     }
@@ -311,6 +313,7 @@ function registerLongBurstActivityType() {
       results.message = await activity._createUsageMessage(messageConfig);
       await activity._finalizeUsage(usageConfig, results);
       await rollJamCheck(liveItem, { label: _getLongBurstLabel(liveItem, selection), chat: true });
+      playWeaponSound(WeaponSound.BURST_LONG);
       await _announceMobileHmgNestUse(liveItem, selection, results);
 
       if (Hooks.call("dnd5e.postUseActivity", activity, usageConfig, results) === false) return results;
@@ -398,6 +401,7 @@ function registerSuppressiveFireActivityType() {
 
       const jamResult = await rollJamCheck(liveItem, { label: _getSuppressiveFireLabel(liveItem, selection), chat: true });
       if (jamResult?.jammed) return;
+      playWeaponSound(WeaponSound.SUPPRESSIVE);
 
       if (!this.item.isEmbedded || this.item.pack) return;
       if (!this.item.isOwner) {
@@ -649,6 +653,7 @@ function registerCrushingBurstActivityType() {
       results.message = await activity._createUsageMessage(messageConfig);
       await activity._finalizeUsage(usageConfig, results);
       await rollJamCheck(liveItem, { label: _getCrushingBurstLabel(liveItem, selection), chat: true });
+      playWeaponSound(WeaponSound.BURST_CRUSHING);
 
       if (Hooks.call("dnd5e.postUseActivity", activity, usageConfig, results) === false) return results;
       if (usageConfig.subsequentActions !== false) {

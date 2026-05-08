@@ -5,6 +5,7 @@ const CLEAR_JAM_DC = 10;
 const REPAIR_WEAPON_DC = 15;
 const GUNSMITH_TOOL_KEY = "rusznikarza";
 import { ABILITY_KEYS, buildAbilityRuleChangeNotice, getAbilityLabel, hasAbility } from "../actors/abilities.mjs";
+import { playWeaponSound, WeaponSound } from "./sounds.mjs";
 
 export function registerWeaponJams() {
   Hooks.on("dnd5e.postRollAttack", onPostRollAttack);
@@ -85,6 +86,7 @@ export async function setJammed(item, { reason = "", chat = true } = {}) {
     });
   }
 
+  playWeaponSound(WeaponSound.JAM);
   liveItem.sheet?.render?.(true);
   return true;
 }
@@ -102,6 +104,7 @@ export async function clearJam(item, { chat = true } = {}) {
     });
   }
 
+  playWeaponSound(WeaponSound.UNJAM);
   liveItem.sheet?.render?.(true);
   return true;
 }
@@ -126,6 +129,7 @@ export async function setDamaged(item, { reason = "", chat = true } = {}) {
     });
   }
 
+  playWeaponSound(WeaponSound.WEAPON_BREAK);
   liveItem.sheet?.render?.(true);
   return true;
 }

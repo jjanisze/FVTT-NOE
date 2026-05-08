@@ -25,6 +25,8 @@
 
 import { ABILITY_KEYS, buildAbilityRuleChangeNotice, hasAbility } from "../actors/abilities.mjs";
 import { isJamImmune } from "./jams.mjs";
+import { playWeaponSound, WeaponSound, getShotSoundKey } from "./sounds.mjs";
+import { AMMO_CALIBERS, AMMO_CALIBER_MAP, buildCaliberSelect } from "../config/ammo-data.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 const MAGAZINE_TYPES = Object.freeze({
   INTERNAL: "wmag",
@@ -94,6 +96,7 @@ export async function spendRound(item) {
   if (!mag) return true; // no magazine tracked — allow firing
   if (mag.current <= 0) {
     ui.notifications.warn(`${item.name}: magazynek pusty!`);
+    playWeaponSound(WeaponSound.EMPTY_CLICK);
     return false;
   }
   await setMag(item, { current: mag.current - 1 });
@@ -178,13 +181,17 @@ function onRenderItemSheet(app, html) {
   if (!item || item.type !== "weapon") return;
   const isPlayMode = app._mode === app.constructor?.MODES?.PLAY;
 
-  // Only show for firearms (palna* types) or items that already have mag flag
+  // Only show for firearms (palna* types), miotana weapons, or items that already have mag flag
   const weapType = item.system.type?.value ?? "";
   const isPalna = weapType.startsWith("palna");
+  const isMiotana = weapType === "miotana";
   const hasMag = getMag(item) !== null;
-  if (!isPalna && !hasMag) return;
+  if (!isPalna && !isMiotana && !hasMag) return;
 
-  const mag = getMag(item) ?? { current: 0, max: 0, ammoType: "" };
+  // Read ammoType directly from raw flag so it's available even on weapons
+  // that have a caliber set but no magazine capacity configured yet (max is null).
+  const rawAmmoType = item.getFlag(MODULE_ID, "mag")?.ammoType ?? "";
+  const mag = getMag(item) ?? { current: 0, max: 0, ammoType: rawAmmoType };
   const magazineType = getMagazineType(item);
   const ui = _getMagazineUi(magazineType, item);
   const reloadState = _getReloadState(item);
@@ -207,9 +214,7 @@ function onRenderItemSheet(app, html) {
              value="${mag.max}" min="0"
              data-dtype="Number" style="width:50px" ${isPlayMode ? "disabled" : ""}>
       <span style="padding:0 6px; color:#888">kaliber:</span>
-      <input type="text" name="flags.${MODULE_ID}.mag.ammoType"
-             value="${mag.ammoType ?? ""}" placeholder="9mm"
-             style="flex:1" ${isPlayMode ? "disabled" : ""}>
+      ${buildCaliberSelect(rawAmmoType, isPlayMode, `flags.${MODULE_ID}.mag.ammoType`)}
       <button type="button" class="neuro-reload-btn"
               title="${ui.buttonTitle}"
               style="margin-left:6px">
@@ -219,6 +224,7 @@ function onRenderItemSheet(app, html) {
     <p style="margin:4px 0 0;font-size:12px;opacity:0.75;">${ui.hint}</p>
     ${_shouldShowChamberStatus(item) ? `<p style="margin:4px 0 0;font-size:12px;opacity:0.75;">${_getChamberStateHint(item, chamberState, mag)}</p>` : ""}
     ${reloadState.required ? `<p style="margin:4px 0 0;font-size:12px;color:#8f3a2b;">${_getReloadStateHint(item, reloadState)}</p>` : ""}
+    ${_getCaliberNote(mag.ammoType)}
   `;
   detailsSection.after(magRow);
 }
@@ -329,6 +335,9 @@ async function _onClickReload(item) {
   await setMag(item, { current: mag.current + toLoad });
   await _clearReloadState(item);
 
+  // Sound: removable magazine = full swap sound; internal/cylinder = single-round load.
+  playWeaponSound(magazineType === MAGAZINE_TYPES.REMOVABLE ? WeaponSound.RELOAD_MAG : WeaponSound.RELOAD_SINGLE);
+
   // If in combat, spend the actor's action
   if (inCombat) {
     await _spendCombatResource(actor, reloadPlan.actionType);
@@ -408,6 +417,22 @@ function _getMagazineUi(magazineType, item = null) {
   const canQuickReload = item?.actor ? hasAbility(item.actor, ABILITY_KEYS.SZYBKIE_PRZELADOWANIE, { tokenDocument }) : false;
   const reloadState = item ? _getReloadState(item) : {};
   const cycleOnly = item ? _canCycleReloadWithoutAmmo(item, getMag(item), reloadState) : false;
+
+  /* Broń Miotana — quiver / ammo pouch */
+  const weapType = item?.system?.type?.value ?? "";
+  if (weapType === "miotana") {
+    const caliberId = getMag(item)?.ammoType ?? "";
+    const isArrow = caliberId === "strzala";
+    const isBolt  = caliberId === "belt";
+    const label   = isArrow ? "Kołczan (strzały)" : isBolt ? "Kołczan (bełty)" : "Ładunki";
+    return {
+      label,
+      buttonLabel: "+1 ładunek",
+      buttonTitle: "Uzupełnij ładunki z ekwipunku",
+      hint: "Broń miotana: odlicza ładunki przy każdym strzale/rzucie."
+    };
+  }
+
   if (magazineType === MAGAZINE_TYPES.INTERNAL) {
     return {
       label: "Wmag.",
@@ -448,6 +473,19 @@ function onPreUseActivity(activity) {
     ui.notifications.warn(_getReloadRequiredWarning(liveItem));
     return false;
   }
+}
+
+/**
+ * Return an optional rules-note paragraph for the current caliber (from ammo-data).
+ * Shown below the magazine row in the item sheet.
+ * @param {string} caliberId
+ * @returns {string} HTML string (may be empty)
+ */
+function _getCaliberNote(caliberId) {
+  if (!caliberId) return "";
+  const caliber = AMMO_CALIBER_MAP[caliberId];
+  if (!caliber?.note) return "";
+  return `<p style="margin:4px 0 0;font-size:11px;color:#6b7280;font-style:italic;">${caliber.note}</p>`;
 }
 
 async function onPostUseActivity(activity) {
@@ -820,6 +858,13 @@ function registerAttackReloadGuard() {
       return false;
     }
 
+    const mag = getMag(liveItem);
+    if (mag && mag.current <= 0 && !_getManualReloadMode(liveItem)) {
+      playWeaponSound(WeaponSound.EMPTY_CLICK);
+      await _announceEmptyMagazine(liveItem);
+      return false;
+    }
+
     const snapshot = {
       spent: Number(liveItem.system.uses?.spent ?? 0),
       current: Number(getMag(liveItem)?.current ?? 0),
@@ -836,6 +881,7 @@ function registerAttackReloadGuard() {
     }
 
     await _processSingleShotAttack(this, liveItem, snapshot);
+    playWeaponSound(getShotSoundKey(liveItem));
     return result;
   };
 
@@ -923,6 +969,17 @@ function _getReloadRequiredWarning(item) {
   return `${item.name}: po każdym strzale trzeba załadować nową sztukę amunicji.`;
 }
 
+async function _announceEmptyMagazine(item) {
+  const mag = getMag(item);
+  const magType = getMagazineType(item);
+  const label = magType === MAGAZINE_TYPES.CYLINDER ? "bębenek" : "magazynek";
+  const warningHtml = `<div class="neuro-chat-warning"><span class="neuro-chat-warning-icon">⚠</span><span><strong>${item.name}</strong> — ${label} pusty. Trzeba przeładować.</span></div>`;
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor: item.actor }),
+    content: warningHtml
+  });
+}
+
 function _getChamberStateHint(item, chamberState = _getChamberState(item), mag = getMag(item)) {
   const current = Number(mag?.current ?? 0);
   const max = Number(mag?.max ?? 0);
@@ -1008,7 +1065,8 @@ async function _performReloadAction(item, { chat = true, spendResource = true, s
     });
   }
 
-  liveItem.sheet?.render?.(true);
+  const _isFirearm = liveItem.system.type?.value?.startsWith?.("palna") ?? false;
+  playWeaponSound(_isFirearm ? WeaponSound.RELOAD_SINGLE : WeaponSound.RELOAD_OTHER);
   return { ejectedLiveRound, chamberLoaded, current };
 }
 
@@ -1062,7 +1120,7 @@ async function _performLoadOneAction(item, { chat = true, spendResource = true, 
     });
   }
 
-  liveItem.sheet?.render?.(true);
+  playWeaponSound(WeaponSound.RELOAD_SINGLE);
   return true;
 }
 
@@ -1075,11 +1133,6 @@ function _getReloadActionChatContent(item, { ejectedLiveRound, chamberLoaded, cu
   }
 
   if (ejectedLiveRound) {
-
-  function _getReloadRuleChangeNotice(reloadPlan, { inCombat = false } = {}) {
-    if (!inCombat || !reloadPlan?.ruleChangeAbilityKey || !reloadPlan?.ruleChangeText) return "";
-    return buildAbilityRuleChangeNotice(reloadPlan.ruleChangeAbilityKey, reloadPlan.ruleChangeText);
-  }
     return `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em>, wyrzucając ostatni niezbitą sztukę z komory.<br><em>Magazynek wewnętrzny jest pusty.</em>${resourceLine}</div>`;
   }
 
@@ -1088,6 +1141,11 @@ function _getReloadActionChatContent(item, { ejectedLiveRound, chamberLoaded, cu
   }
 
   return `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em>, ale mechanizm chodzi na sucho.<br><em>Magazynek wewnętrzny jest pusty.</em>${resourceLine}</div>`;
+}
+
+function _getReloadRuleChangeNotice(reloadPlan, { inCombat = false } = {}) {
+  if (!inCombat || !reloadPlan?.ruleChangeAbilityKey || !reloadPlan?.ruleChangeText) return "";
+  return buildAbilityRuleChangeNotice(reloadPlan.ruleChangeAbilityKey, reloadPlan.ruleChangeText);
 }
 
 async function _consumeSingleShotAmmo(item, snapshot) {

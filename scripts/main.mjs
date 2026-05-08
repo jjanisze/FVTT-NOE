@@ -28,6 +28,8 @@ import { registerCoverSystem } from "./combat/cover.mjs";
 import { registerMagazines } from "./weapons/magazine.mjs";
 import { registerWeaponJams } from "./weapons/jams.mjs";
 import { registerFireModes } from "./weapons/fire-modes.mjs";
+import { registerWeaponSounds } from "./weapons/sounds.mjs";
+import { registerAmmoSystem } from "./weapons/ammo.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -57,6 +59,7 @@ Hooks.once("init", () => {
   registerMagazines();
   registerWeaponJams();
   registerFireModes();
+  registerAmmoSystem();
 
   // Ostatnia Akcja needs preUpdateActor to track previous death failures
   Hooks.on("preUpdateActor", onPreUpdateActorDeathSaves);
@@ -78,6 +81,7 @@ Hooks.once("i18nInit", async () => {
  */
 Hooks.once("ready", () => {
   console.log(`${MODULE_ID} | Neuroshima 5e module ready`);
+  registerWeaponSounds();
 
   // Validate overrides
   const skillCount = Object.keys(CONFIG.DND5E.skills).length;

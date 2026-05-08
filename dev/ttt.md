@@ -1,0 +1,22 @@
+neuroshima-2026-overrides/
+  sounds/
+    firearms/
+      shot_pistol.ogg
+      shot_rifle.ogg
+      shot_silenced.ogg
+      burst_short.ogg
+      burst_long.ogg
+      burst_crushing.ogg
+      suppressive.ogg
+      click_empty.ogg
+      reload_mag.ogg
+      reload_single.ogg
+      unjam.ogg
+      break_permanent.ogg
+    ranged/
+      bow_shot.ogg
+      crossbow_shot.ogg
+      sling_shot.ogg
+  scripts/
+    weapons/
+      sounds.mjs   ← nowy moduł (sound map + playWeaponSound helper)
