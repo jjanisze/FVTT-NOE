@@ -73,6 +73,9 @@ function _patchBuildTargetListEntry(DamageApplicationElement) {
     const li = orig.call(this, { uuid, name });
     if (!li) return li;
 
+    /* Read the CURRENT reduction so buttons reflect persisted state after re-open */
+    const currentReduction = this.getTargetOptions(uuid)[OPTION_KEY] ?? 0;
+
     /* Build the reduction menu — same grid layout as .damage-multipliers */
     const menu = document.createElement("menu");
     menu.classList.add("neuro-reduction-buttons", "unlist");
@@ -88,7 +91,7 @@ function _patchBuildTargetListEntry(DamageApplicationElement) {
         <button class="reduction-button" type="button"
                 data-reduction="${mat.reduction}"
                 title="${mat.label}${mat.reduction > 0 ? ` (−${mat.reduction})` : ''}"
-                aria-pressed="${mat.reduction === 0 ? "true" : "false"}">
+                aria-pressed="${mat.reduction === currentReduction ? "true" : "false"}">
           <span>${mat.label}</span>
         </button>
       `;
