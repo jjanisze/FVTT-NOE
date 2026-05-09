@@ -350,9 +350,9 @@ async function _onClickReload(item) {
       <strong>${actor.name}</strong> ${reloadPlan.chatVerb} <em>${item.name}</em>.<br>
       Załadowano: ${toLoad} ${_formatRoundWord(toLoad)} ${mag.ammoType}.<br>
       ${uiForChat(magazineType)}: ${mag.current + toLoad}/${mag.max}.
-      ${inCombat ? `<br><em style='color:#c0392b'>Zużyto ${reloadPlan.actionLabelAccusative}.</em>` : ""}
       ${_getReloadRuleChangeNotice(reloadPlan, { inCombat })}
-    </div>`,
+    </div>
+    ${inCombat ? `<ul class="card-footer pills unlist"><li class="pill transparent"><span class="label">${reloadPlan.actionLabel}</span></li></ul>` : ""}`,
   });
 }
 
@@ -401,13 +401,13 @@ function _getReloadPlan(item, mag, { magazineType = getMagazineType(item) } = {}
     dialogTitle: canQuickSwap ? "Zmiana magazynka (Akcja bonusowa)" : "Zmiana magazynka",
     containerAccusative: "magazynek",
     fullAdjective: "pełny",
-    chatVerb: "zmienia magazynek w",
+    chatVerb: "wsadza zapasowy magazynek w",
     actionType,
     actionLabel: actionType === "bonus" ? "Akcja bonusowa" : "Akcja",
     actionLabelAccusative: actionType === "bonus" ? "Akcję bonusową" : "Akcję",
     ruleChangeAbilityKey: canQuickSwap ? ABILITY_KEYS.SZYBKA_WYMIANA : null,
     ruleChangeText: canQuickSwap ? "wymiana całego magazynka została wykonana jako Akcja bonusowa zamiast Akcji." : "",
-    confirmationText: (weapon, currentMag, toLoad, actionCost) => `Załadować <strong>${toLoad}</strong> ${_formatRoundWord(toLoad)} ${currentMag.ammoType} do <strong>${weapon.name}</strong>${actionCost}?`,
+    confirmationText: (weapon, currentMag, toLoad, actionCost) => `Podmiana magazynka w <strong>${weapon.name}</strong>, na taki z <strong>${toLoad}</strong> ${_formatRoundWord(toLoad)} ${currentMag.ammoType} ${actionCost}?`,
   };
 }
 
@@ -457,8 +457,8 @@ function _getMagazineUi(magazineType, item = null) {
 
   return {
     label: "Magazynek",
-    buttonLabel: cycleOnly ? "⟳ Przeładuj" : "↺ Zmień mag",
-    buttonTitle: cycleOnly ? "Przeładuj broń po strzale" : "Wymień magazynek",
+    buttonLabel: cycleOnly ? "⟳ Przeładuj" : "↺ Zapasowy magazynek",
+    buttonTitle: cycleOnly ? "Przeładuj broń po strzale" : "Wymień magazynek na zapasowy z ekwipunku",
     hint: canQuickSwap
       ? "Magazynek wymienny: Szybka wymiana pozwala wymienić cały magazynek w Akcji bonusowej."
       : "Magazynek wymienny: jedna akcja wymienia cały magazynek."
@@ -1114,9 +1114,11 @@ async function _performLoadOneAction(item, { chat = true, spendResource = true, 
 
   if (chat) {
     const nextMag = getMag(liveItem);
+    const inCombatSpent = !!(actor.inCombat && spendResource);
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor }),
-      content: `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actor.name}</strong> doładowuje <em>${liveItem.name}</em> o 1 nabój do ${magazineType === MAGAZINE_TYPES.CYLINDER ? "bębenka" : "magazynka wewnętrznego"}.<br>Stan broni: ${Number(nextMag?.current ?? 0)}/${Number(nextMag?.max ?? 0)}.${actor.inCombat && spendResource ? `<br><em style='color:#c0392b'>Zużyto ${reloadPlan.actionLabelAccusative}.</em>` : ""}${_getReloadRuleChangeNotice(reloadPlan, { inCombat: !!actor.inCombat && spendResource })}</div>`
+      content: `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actor.name}</strong> doładowuje <em>${liveItem.name}</em> o 1 nabój do ${magazineType === MAGAZINE_TYPES.CYLINDER ? "bębenka" : "magazynka wewnętrznego"}.<br>Stan broni: ${Number(nextMag?.current ?? 0)}/${Number(nextMag?.max ?? 0)}.${_getReloadRuleChangeNotice(reloadPlan, { inCombat: inCombatSpent })}</div>
+      ${inCombatSpent ? `<ul class="card-footer pills unlist"><li class="pill transparent"><span class="label">${reloadPlan.actionLabel}</span></li></ul>` : ""}`
     });
   }
 
@@ -1126,21 +1128,21 @@ async function _performLoadOneAction(item, { chat = true, spendResource = true, 
 
 function _getReloadActionChatContent(item, { ejectedLiveRound, chamberLoaded, current, max, spentBonus = false } = {}) {
   const actorName = item.actor?.name ?? "Postać";
-  const resourceLine = spentBonus ? "<br><em style='color:#c0392b'>Zużyto Akcję bonusową.</em>" : "";
+  const pill = spentBonus ? `<ul class="card-footer pills unlist"><li class="pill transparent"><span class="label">Akcja bonusowa</span></li></ul>` : "";
 
   if (ejectedLiveRound && chamberLoaded) {
-    return `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em>, wyrzucając niezbitą sztukę z komory. Kolejny nabój wchodzi na miejsce.<br>Stan broni: ${current}/${max}.${resourceLine}</div>`;
+    return `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em>, wyrzucając niezbitą sztukę z komory. Kolejny nabój wchodzi na miejsce.<br>Stan broni: ${current}/${max}.</div>${pill}`;
   }
 
   if (ejectedLiveRound) {
-    return `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em>, wyrzucając ostatni niezbitą sztukę z komory.<br><em>Magazynek wewnętrzny jest pusty.</em>${resourceLine}</div>`;
+    return `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em>, wyrzucając ostatni niezbitą sztukę z komory.<br><em>Magazynek wewnętrzny jest pusty.</em></div>${pill}`;
   }
 
   if (chamberLoaded) {
-    return `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em> po strzale. Broń znów jest gotowa.<br>Stan broni: ${current}/${max}.${resourceLine}</div>`;
+    return `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em> po strzale. Broń znów jest gotowa.<br>Załadowa: ${current}/${max}.</div>${pill}`;
   }
 
-  return `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em>, ale mechanizm chodzi na sucho.<br><em>Magazynek wewnętrzny jest pusty.</em>${resourceLine}</div>`;
+  return `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em>, ale mechanizm chodzi na sucho.<br><em>Magazynek wewnętrzny jest pusty.</em></div>${pill}`;
 }
 
 function _getReloadRuleChangeNotice(reloadPlan, { inCombat = false } = {}) {

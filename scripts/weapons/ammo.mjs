@@ -14,6 +14,7 @@
  */
 
 import { AMMO_CALIBER_MAP } from "../config/ammo-data.mjs";
+import { getLastAttackCoverDecision } from "../combat/cover.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const AMMO_PROPS_FLAG = "ammoProps";
@@ -36,7 +37,9 @@ export function registerAmmoSystem() {
   Hooks.on("dnd5e.postRollAttack", _onPostRollAttackAutoApply);
 
   // 3. Add "Obrażenia" button to attack-roll chat cards.
-  Hooks.on("renderChatMessage", _onRenderAttackChatMessage);
+  //    Use renderChatMessageHTML (FVTT v14) which passes HTMLElement directly.
+  //    Fall back to renderChatMessage for older versions.
+  Hooks.on("renderChatMessageHTML", _onRenderAttackChatMessage);
 
   console.log("Neuroshima 5e | Ammo system registered");
 }
@@ -128,58 +131,54 @@ async function _onPostRollAttackAutoApply(rolls, { subject } = {}) {
   const actor = subject.actor;
   const speaker = ChatMessage.getSpeaker({ actor });
 
-  const results = [];
+  /* Separate targets into hits and misses */
+  const hits = [];
+  const misses = [];
 
   for (const target of game.user.targets) {
     const targetActor = target.document?.actor ?? target.actor;
     if (!targetActor) continue;
-
-    /* Hit check: compare attack total to target's AC if available */
     const targetAC = targetActor.system?.attributes?.ac?.value;
     const isHit = (targetAC == null) || (attackRoll.total >= targetAC);
-    if (!isHit) {
-      results.push({ name: target.name, hit: false, total: 0 });
-      continue;
-    }
-
-    /* Roll damage */
-    const roll = new Roll(caliber.formula, actor?.getRollData?.() ?? {});
-    await roll.evaluate();
-
-    const damages = [{
-      value: Math.max(0, roll.total),
-      type: caliber.type,
-      properties: new Set(caliber.props ?? [])
-    }];
-
-    await targetActor.applyDamage(damages, { isDelta: true, multiplier: 1 });
-    results.push({ name: target.name, hit: true, total: roll.total, formula: roll.formula });
+    if (isHit) hits.push({ target, targetActor });
+    else misses.push(target.name ?? "?");
   }
 
-  if (!results.length) return;
+  if (!hits.length && !misses.length) return;
 
-  /* Build summary chat message */
-  const typeLabel = CONFIG.DND5E.damageTypes?.[caliber.type]?.label ?? caliber.type;
-  const lines = results.map(r =>
-    r.hit
-      ? `<li><strong>${r.name}</strong>: ${r.total} (${r.formula}) ${typeLabel}</li>`
-      : `<li><strong>${r.name}</strong>: pudło (AC ${_getTargetAC(r.name)})</li>`
-  ).join("");
+  /* Nothing to apply if all shots missed — GM can use the button to see damage */
+  if (!hits.length) return;
 
-  const propLabels = (caliber.props ?? [])
-    .map(p => CONFIG.DND5E.itemProperties?.[p]?.label ?? p)
-    .join(", ");
+  /* Roll damage once, apply to every hit target */
+  const roll = new CONFIG.Dice.DamageRoll(caliber.formula, actor?.getRollData?.() ?? {}, { type: caliber.type });
+  await roll.evaluate();
 
-  await ChatMessage.create({
+  /* Apply cover damage reduction if a through-cover shot was made */
+  const coverDecision = getLastAttackCoverDecision(item, subject.id);
+  const coverReduction = coverDecision?.applyDamageReduction ? (coverDecision.damageReduction ?? 0) : 0;
+  const rawDamage = Math.max(0, roll.total);
+  const finalDamage = Math.max(0, rawDamage - coverReduction);
+
+  const damages = [{
+    value: finalDamage,
+    type: caliber.type,
+    properties: new Set(caliber.props ?? [])
+  }];
+
+  for (const { targetActor } of hits) {
+    await targetActor.applyDamage(damages, { isDelta: true, multiplier: 1 });
+  }
+
+  /* Build flavor: caliber name + cover reduction note + hit/miss list */
+  const hitNames = hits.map(h => h.target.name ?? "?").join(", ");
+  const missLine = misses.length ? ` | <em>pudło: ${misses.join(", ")}</em>` : "";
+  const reductionLine = coverReduction > 0 ? ` <em>(osłona −${coverReduction})</em>` : "";
+  const flavor = `<i class="fa-solid fa-burst"></i> Obrażenia (${caliber.label})${reductionLine} → ${hitNames}${missLine}`;
+
+  await roll.toMessage({
     speaker,
-    content: `<div class="neuro-auto-damage-msg">
-      <strong class="neuro-auto-damage-header">
-        <i class="fa-solid fa-burst"></i> Auto-obrażenia (${caliber.label})
-      </strong>
-      <ul>${lines}</ul>
-      ${propLabels ? `<p class="neuro-auto-damage-props">${propLabels}</p>` : ""}
-      ${caliber.aoe ? `<p class="neuro-auto-damage-aoe"><i class="fa-solid fa-circle-exclamation"></i> ${caliber.aoe}</p>` : ""}
-    </div>`,
+    flavor,
+    flags: { dnd5e: { roll: { type: "damage" } } }
   });
 }
 
@@ -198,28 +197,58 @@ async function _onPostRollAttackAutoApply(rolls, { subject } = {}) {
  * Hidden for burst-mode activities (neuroKs / neuroDs / …).
  */
 function _onRenderAttackChatMessage(message, html) {
-  /* Attack roll messages only */
-  if (message.flags?.dnd5e?.roll?.type !== "attack") return;
+  /* Attack activity cards only — dnd5e v5.3 uses activity.type, not roll.type */
+  const activityType = message.flags?.dnd5e?.activity?.type;
+  if (activityType !== "attack") return;
 
   /* Skip burst fire modes */
-  const activityType = message.flags?.dnd5e?.activity?.type;
   if (BURST_ACTIVITY_TYPES.has(activityType)) return;
 
-  /* Get associated weapon */
-  const item = message.getAssociatedItem?.();
+  /* Get associated weapon via flags (getAssociatedItem may not exist on usage cards) */
+  const itemUuid = message.flags?.dnd5e?.item?.uuid;
+  if (!itemUuid) return;
+
+  const item = fromUuidSync(itemUuid);
   if (!item || item.type !== "weapon") return;
 
   const caliberId = item.getFlag(MODULE_ID, "mag")?.ammoType ?? "";
   if (!caliberId) return;
 
-  const caliber = AMMO_CALIBER_MAP[caliberId];
-  if (!caliber) return;
+  /* Only visible to GM and the weapon owner */
+  if (!game.user.isGM && !item.isOwner) return;
+
+  /* Defer by one macrotask — dnd5e injects its rollDamage button via async
+     microtasks (Promise.resolve chains). Using setTimeout(0) ensures we run
+     AFTER all of dnd5e's microtasks have settled, so querySelector finds the
+     built-in button and removes it before we inject our own. */
+  setTimeout(() => _injectDamageButton(message, html, item, caliberId), 0);
+}
+
+/**
+ * Build and inject the "Obrażenia" button into the message DOM element.
+ * Called deferred (via Promise.resolve) to wait for dnd5e's own rendering.
+ */
+function _injectDamageButton(message, html, item, caliberId) {
+  /* Caliber may not be in AMMO_CALIBER_MAP (legacy/custom id) — build a fallback
+     so the button still appears and the GM can manually roll damage. */
+  const caliber = AMMO_CALIBER_MAP[caliberId] ?? {
+    id: caliberId,
+    label: caliberId,
+    formula: (() => {
+      const n = item.system.damage?.base?.number ?? 0;
+      const d = item.system.damage?.base?.denomination ?? 0;
+      return (n && d) ? `${n}d${d}` : "";
+    })(),
+    type: [...(item.system.damage?.base?.types ?? [])][0] ?? "piercing",
+    props: [],
+  };
 
   const el = html instanceof HTMLElement ? html : html?.[0];
   if (!el) return;
 
-  /* Only visible to GM and the weapon owner */
-  if (!game.user.isGM && !item.isOwner) return;
+  // Remove the built-in dnd5e "Obrażenia" button — our button replaces it
+  const builtinDamageBtn = el.querySelector('[data-action="rollDamage"]');
+  builtinDamageBtn?.remove();
 
   const inCombat = !!game.combat;
   const hasTargets = (game.user.targets?.size ?? 0) > 0;
@@ -283,7 +312,7 @@ async function _applyDamageFromButton(caliber, sourceItem) {
   }
 
   const actor = sourceItem.actor;
-  const roll = new Roll(caliber.formula, actor?.getRollData?.() ?? {});
+  const roll = new CONFIG.Dice.DamageRoll(caliber.formula, actor?.getRollData?.() ?? {}, { type: caliber.type });
   await roll.evaluate();
 
   const damages = [{
@@ -299,22 +328,13 @@ async function _applyDamageFromButton(caliber, sourceItem) {
     }
   }
 
-  const typeLabel = CONFIG.DND5E.damageTypes?.[caliber.type]?.label ?? caliber.type;
   const targetNames = targets.map(t => t.document?.name ?? t.name ?? "?").join(", ");
-  const propLabels = (caliber.props ?? [])
-    .map(p => CONFIG.DND5E.itemProperties?.[p]?.label ?? p)
-    .join(", ");
+  const flavor = `<i class="fa-solid fa-burst"></i> Obrażenia (${caliber.label}) → ${targetNames}`;
 
-  await ChatMessage.create({
+  await roll.toMessage({
     speaker: ChatMessage.getSpeaker({ actor }),
-    content: `<div class="neuro-auto-damage-msg">
-      <strong class="neuro-auto-damage-header">
-        <i class="fa-solid fa-burst"></i> Obrażenia (${caliber.label})
-      </strong>
-      <p><strong>${roll.total}</strong> (${roll.formula}) ${typeLabel} → ${targetNames}</p>
-      ${propLabels ? `<p class="neuro-auto-damage-props">${propLabels}</p>` : ""}
-      ${caliber.aoe ? `<p class="neuro-auto-damage-aoe"><i class="fa-solid fa-circle-exclamation"></i> ${caliber.aoe}</p>` : ""}
-    </div>`,
+    flavor,
+    flags: { dnd5e: { roll: { type: "damage" } } }
   });
 }
 
@@ -346,14 +366,4 @@ function _getLiveItem(item) {
   return actor.items.get(item.id) ?? item;
 }
 
-/**
- * Helper used in auto-damage summary to label a missed target with its AC.
- * @param {string} name
- * @returns {string}
- */
-function _getTargetAC(name) {
-  for (const t of (game.user.targets ?? [])) {
-    if (t.name === name) return t.document?.actor?.system?.attributes?.ac?.value ?? "?";
-  }
-  return "?";
-}
+

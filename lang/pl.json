@@ -82,6 +82,7 @@
   },
 
   "DND5E": {
+    "TimeInst": "Natychmiastowe",
     "Abilities": "Cechy",
     "AbilityStr": "Siła",
     "AbilityStrAbbr": "SIŁ",

@@ -216,33 +216,46 @@ export async function attemptRepair(item) {
   const liveItem = _getLiveItem(item);
   if (!liveItem?.actor || !isDamaged(liveItem)) return false;
 
-  if (!_hasGunsmithTools(liveItem.actor)) {
-    ui.notifications.warn(`${liveItem.name}: naprawa wymaga Narzędzi małego rusznikarza.`);
+  if (_hasGunsmithTools(liveItem.actor)) {
+    // Actor has tools — roll the actual check
+    const repairCheck = _getRepairCheckConfig(liveItem.actor);
+    const rolls = await repairCheck.roll({
+      target: REPAIR_WEAPON_DC
+    }, {}, {
+      data: {
+        flavor: `${liveItem.name} - Naprawa broni (${repairCheck.label}, ST ${REPAIR_WEAPON_DC})`
+      }
+    });
+
+    const roll = rolls?.[0];
+    if (!roll) return false;
+
+    if ((roll.total ?? 0) >= REPAIR_WEAPON_DC) {
+      await clearDamage(liveItem, { chat: true });
+      return true;
+    }
+
+    await ChatMessage.create({
+      speaker: ChatMessage.getSpeaker({ actor: liveItem.actor }),
+      content: `<div><strong>${liveItem.name}</strong> pozostaje uszkodzona. Naprawa się nie udała.</div>`
+    });
     return false;
   }
 
-  const repairCheck = _getRepairCheckConfig(liveItem.actor);
-  const rolls = await repairCheck.roll({
-    target: REPAIR_WEAPON_DC
-  }, {}, {
-    data: {
-      flavor: `${liveItem.name} - Naprawa broni (${repairCheck.label}, ST ${REPAIR_WEAPON_DC})`
-    }
+  // No tools on the sheet — GM narrates repair (e.g. paid gunsmith).
+  // Ask the player/GM whether the repair check succeeded.
+  const confirmed = await foundry.applications.api.DialogV2.confirm({
+    window: { title: `Naprawa broni: ${liveItem.name}` },
+    content: `<p>Czy udał się test<br><strong>Mały Rusznikarz — Zręczność lub Inteligencja ST ${REPAIR_WEAPON_DC}</strong>?</p>`,
+    yes: { label: "Tak — broń naprawiona", icon: "fas fa-check" },
+    no: { label: "Nie — naprawa nieudana", icon: "fas fa-times" },
+    rejectClose: false
   });
 
-  const roll = rolls?.[0];
-  if (!roll) return false;
+  if (!confirmed) return false;
 
-  if ((roll.total ?? 0) >= REPAIR_WEAPON_DC) {
-    await clearDamage(liveItem, { chat: true });
-    return true;
-  }
-
-  await ChatMessage.create({
-    speaker: ChatMessage.getSpeaker({ actor: liveItem.actor }),
-    content: `<div><strong>${liveItem.name}</strong> pozostaje uszkodzona. Naprawa się nie udała.</div>`
-  });
-  return false;
+  await clearDamage(liveItem, { chat: true });
+  return true;
 }
 
 export async function cleanWeapon(item, { chat = true } = {}) {
@@ -479,9 +492,10 @@ function _buildJamBlock(item) {
 
 function _buildDamageBlock(item) {
   const repairCheck = _getRepairCheckConfig(item.actor);
-  const requirement = _hasGunsmithTools(item.actor)
+  const hasTools = _hasGunsmithTools(item.actor);
+  const requirement = hasTools
     ? `Test: ${repairCheck.label} ST ${REPAIR_WEAPON_DC}.`
-    : "Wymaga Narzędzi małego rusznikarza.";
+    : `Brak narzędzi — potwierdź przez dialog czy zewnętrzny rusznikarz naprawił broń (ST ${REPAIR_WEAPON_DC}).`;
   return `
     <div style="margin-top:10px;padding:8px 10px;border:1px solid #7a2c1d;background:rgba(90,18,10,0.18);border-radius:6px;">
       <strong>Uszkodzenie</strong> — ta broń nie może teraz strzelać i wymaga naprawy.

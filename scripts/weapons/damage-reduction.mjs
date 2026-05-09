@@ -77,11 +77,17 @@ function _patchBuildTargetListEntry(DamageApplicationElement) {
     const menu = document.createElement("menu");
     menu.classList.add("neuro-reduction-buttons", "unlist");
 
+    /* First grid cell: "R:" label to match the "×" prefix in the multiplier row */
+    const labelLi = document.createElement("li");
+    labelLi.innerHTML = `<span class="neuro-reduction-label" title="Redukcja materiału">R:</span>`;
+    menu.append(labelLi);
+
     for (const mat of MATERIAL_REDUCTIONS) {
       const entry = document.createElement("li");
       entry.innerHTML = `
         <button class="reduction-button" type="button"
                 data-reduction="${mat.reduction}"
+                title="${mat.label}${mat.reduction > 0 ? ` (−${mat.reduction})` : ''}"
                 aria-pressed="${mat.reduction === 0 ? "true" : "false"}">
           <span>${mat.label}</span>
         </button>

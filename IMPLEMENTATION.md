@@ -22,8 +22,11 @@
 | `scripts/combat/knockout.mjs` | Nokautowanie + Ostatnia Akcja |
 | `scripts/combat/cover.mjs` | Dynamiczna osłona per atak + redukcja dla strzału przez |
 | `scripts/weapons/jams.mjs` | Zacięcie i uszkodzenie broni palnej |
-| `scripts/weapons/magazine.mjs` | Magazynki + synchronizacja `system.uses` |
+| `scripts/config/ammo-data.mjs` | 20 definicji kalibru (edytowalnych) — formuły, typy obrażeń, efekty |
+| `scripts/weapons/ammo.mjs` | System amunicji — sync obrażeń, auto-apply, przycisk Obrażenia |
+| `scripts/weapons/magazine.mjs` | Magazynki + synchronizacja `system.uses` + dropdown kalibru |
 | `scripts/weapons/fire-modes.mjs` | KS/DS/MS/OZ + synchronizacja aktywności |
+| `scripts/migration/migrate-weapon-ammo.js` | Migracja istniejących broni → kalibry |
 | `styles/neuroshima.css` | CSS — post-apo visual + hide spellcasting |
 
 ---
@@ -78,6 +81,13 @@
 - [x] Rest recovery: only clears sources with `restClears: true`
 
 ### 1.7 Ammo & Magazine Tracking
+- [x] `scripts/config/ammo-data.mjs` — 20 kalibru w 5 grupach (Pistoletowa / Karabinowa / Śrutowa / Granatnikowa / Miotana), edytowalne author-time; każdy kaliber: id, label, formula, type, props, note, aoe, price, avail
+- [x] Dropdown `<select>` kalibru w arkuszu broni (grouped optgroup); zastąpił wolne pole tekstowe; dostępny dla palna\* i miotana; disabled w trybie play
+- [x] `updateItem` hook: zmiana kalibru → automatyczny sync `system.damage.base.number` + `denomination` + `types` + właściwości broni (stare ammo-props usuwane, nowe dodawane; śledzone w `flags.ammoProps`)
+- [x] `dnd5e.postRollAttack`: auto-roll obrażeń z kalibru + `actor.applyDamage()` dla zacelowanych tokenów gdy aktywna walka; sprawdza hit (roll.total ≥ AC celu); pomija burst-mode (KS/DS/MS/OZ)
+- [x] Czerwony przycisk „Obrażenia" w wiadomościach czatu ataku (weapon z ustawionym kalibrem); GM/właściciel może ręcznie nałożyć obrażenia na zacelowane/zaznaczone tokeny
+- [x] Notatka kalibru (np. „Obalająca", „Śrut vs. małe istoty") wyświetlana pod wierszem magazynka w arkuszu broni
+- [x] Migracja `migrate-weapon-ammo.js`: 101 broni skalibrowanych przez regex (2026-05-08); formuły obrażeń ustawione przez `number`/`denomination`
 - [x] Flagi per broń: `ammo.type`, `ammo.current`, `ammo.max`
 - [x] Obsługa typów magazynków: Wmag., Bęb., wymienny
 - [x] `Szybka wymiana` i `Szybkie przeładowanie` podpięte do prototypowej warstwy zdolności dla reloadu
@@ -216,6 +226,17 @@
   - Registered for both "en" and "pl" languages
   - Async fallback in `localization.mjs` with sentinel verification
 - **Direct Polish labels**: all CONFIG entries use literal strings (bypass preLocalize timing issue)
+
+### v0.2.1 — Ammo / Caliber System (2026-05-08)
+- **ammo-data.mjs**: 20 kalibru w 5 grupach (Pistoletowa / Karabinowa / Śrutowa / Granatnikowa / Miotana); każdy z formułą, typem obrażeń, właściwościami broni, notatką reguł, ceną, dostępnością
+- **magazine.mjs refactor**: pole tekstowe `kaliber:` → grupowany `<select>` z `buildCaliberSelect()`; miotana dodana do warunku wyświetlania wiersza mag; `_getCaliberNote()` wyświetla notatki reguł kalibru; `rawAmmoType` czytany z flagi bezpośrednio (działa też gdy brak `max`)
+- **ammo.mjs** (nowy): `registerAmmoSystem()` rejestruje trzy hooki:
+  - `updateItem` → sync `system.damage.base.{number,denomination,types}` + `system.properties` przy zmianie kalibru
+  - `dnd5e.postRollAttack` → auto-apply obrażeń do trafionych zacelowanych tokenów (tylko w walce)
+  - `renderChatMessage` → przycisk „Obrażenia" na wiadomościach rzutu ataku: zielony (auto zadziałał) / czerwony (brak celu — ręczne nałożenie przez GM)
+- **main.mjs**: `registerAmmoSystem()` dodane do hooka `init`
+- **migrate-weapon-ammo.js** (nowy): regex-based mapowanie nazwy broni → kaliber; używa `number`/`denomination` (dnd5e v5.3 `formula` to computed getter, nie pole); 101 broni skalibrowanych w świecie
+- **neuroshima.css**: `.neuro-damage-btn` (zielony / czerwony), `.neuro-auto-damage-msg` i subklasy
 
 ### v0.1.1 — Phase 1 Combat & Mechanics (2026-04-26)
 - **Wyczerpanie**: speed penalty 1.5m/level, rolls -2/level (modern rules), EXHAUSTION_SOURCES enum, full source tracking (flags, dialogs, tooltips, rest integration)

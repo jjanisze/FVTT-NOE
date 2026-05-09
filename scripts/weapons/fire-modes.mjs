@@ -1082,6 +1082,7 @@ function _canUseBurstMode(item, mode, minBullets) {
   }
   if (isJammed(item)) {
     ui.notifications.warn(`${item.name}: broń jest zacięta.`);
+    playWeaponSound(WeaponSound.EMPTY_CLICK);
     return false;
   }
 
@@ -1562,6 +1563,7 @@ function _canUseSuppressiveFire(item) {
   }
   if (isJammed(item)) {
     ui.notifications.warn(`${item.name}: broń jest zacięta.`);
+    playWeaponSound(WeaponSound.EMPTY_CLICK);
     return false;
   }
   if (_hasProperty(item, "ladowanie") || _hasProperty(item, "przeladowanie")) {

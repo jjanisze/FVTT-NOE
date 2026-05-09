@@ -1,8 +1,11 @@
 const MODULE_ID = "neuroshima-2026-overrides";
 const LAST_ATTACK_COVER_FLAG = "lastAttackCover";
 const ATTACK_PATCH_FLAG = Symbol("neuro-cover-attack-patched");
+const TRIGGER_PATCH_FLAG = Symbol("neuro-cover-trigger-patched");
 const DAMAGE_PATCH_FLAG = Symbol("neuro-cover-damage-patched");
 const DAMAGE_CONFIG_PATCH_FLAG = Symbol("neuro-cover-damage-config-patched");
+const DIALOG_PATCH_FLAG = Symbol("neuro-cover-dialog-patched");
+const DAMAGE_DIALOG_PATCH_FLAG = Symbol("neuro-cover-damage-dialog-patched");
 
 export const COVER_EXPOSURES = Object.freeze({
   none: {
@@ -59,6 +62,7 @@ const COVER_SELECTIONS = Object.freeze({
 
 export function registerCoverSystem() {
   registerAttackCoverIntegration();
+  _registerTargetsTrayEnrichment();
 
   const mod = game.modules.get(MODULE_ID);
   if (mod) {
@@ -74,6 +78,75 @@ export function registerCoverSystem() {
   }
 
   console.log("Neuroshima 5e | Dynamic cover system registered");
+}
+
+/**
+ * Hook into dnd5e.renderChatMessage to enrich the Targets tray of attack rolls:
+ * - Appends a cover badge showing the selected cover option.
+ * - Corrects the displayed AC and hit/miss indicator when a cover AC bonus applies.
+ */
+function _registerTargetsTrayEnrichment() {
+  Hooks.on("dnd5e.renderChatMessage", (message, html) => {
+    if (message.getFlag("dnd5e", "roll")?.type !== "attack") return;
+
+    const attackRoll = message.rolls?.[0];
+    const neuroCover = attackRoll?.options?.neuroCover;
+    if (!neuroCover || neuroCover.selection === "none") return;
+
+    const targetRows = html.querySelectorAll(".targets-tray li.target");
+    if (!targetRows.length) return;
+
+    // Build display label for the cover selection
+    const cvSelection = COVER_SELECTIONS[neuroCover.selection];
+    const isThroughShot = cvSelection?.shotMode === COVER_SHOT_MODES.through.key;
+    const coverMainLabel = cvSelection?.label ?? neuroCover.selection;
+    let coverSubLabel = "";
+    if (isThroughShot && neuroCover.penetrationLevel > 0) {
+      const pen = COVER_PENETRATION_LEVELS[neuroCover.penetrationLevel];
+      if (pen) coverSubLabel = `Redukcja ${pen.reduction}`;
+    }
+
+    // Adjusted AC stored in roll options — set by our _buildConfig patch
+    const adjustedAc = attackRoll.options.target;
+    const visibility = game.settings.get("dnd5e", "attackRollVisibility");
+    const canSeeAc = game.user.isGM || visibility === "all";
+
+    for (const row of targetRows) {
+      // Fix AC value and hit/miss indicator when an AC bonus was applied
+      if (canSeeAc && Number.isFinite(adjustedAc)) {
+        const acSpan = row.querySelector(".ac span");
+        if (acSpan) {
+          const rawAc = parseInt(acSpan.textContent.trim());
+          if (Number.isFinite(rawAc) && adjustedAc !== rawAc) {
+            acSpan.textContent = adjustedAc;
+            // Recalculate hit/miss using the cover-adjusted AC
+            const isMiss = !attackRoll.isCritical
+              && ((attackRoll.total < adjustedAc) || attackRoll.isFumble);
+            row.classList.toggle("hit", !isMiss);
+            row.classList.toggle("miss", isMiss);
+            row.dataset.miss = String(isMiss);
+            const icon = row.querySelector("i.fas");
+            if (icon) {
+              icon.classList.toggle("fa-check", !isMiss);
+              icon.classList.toggle("fa-times", isMiss);
+            }
+          }
+        }
+      }
+
+      // Append cover badge
+      const badge = document.createElement("div");
+      badge.classList.add("neuro-cover-badge");
+      badge.innerHTML = `
+        <i class="fas fa-shield-halved" inert></i>
+        <div class="neuro-cover-badge-text">
+          <span>${_escapeHtml(coverMainLabel)}</span>
+          ${coverSubLabel ? `<span>${_escapeHtml(coverSubLabel)}</span>` : ""}
+        </div>
+      `;
+      row.appendChild(badge);
+    }
+  });
 }
 
 export function describeCoverDecision(decision, { includeReduction = true } = {}) {
@@ -131,9 +204,8 @@ export async function promptCoverDecision({
   const penetrationKey = String(formData.penetrationLevel ?? 0);
   const penetrationLevel = COVER_PENETRATION_LEVELS[penetrationKey] ?? COVER_PENETRATION_LEVELS[0];
   const usesThroughCover = shotMode === COVER_SHOT_MODES.through.key;
-  const damageReduction = (usesThroughCover && (exposure.key !== COVER_EXPOSURES.none.key))
-    ? penetrationLevel.reduction
-    : 0;
+  const damageReduction = usesThroughCover && penetrationLevel.level > 0
+    ? penetrationLevel.reduction : 0;
 
   const decision = {
     attackerName: resolvedAttacker,
@@ -164,6 +236,31 @@ function registerAttackCoverIntegration() {
   const BaseAttackActivity = CONFIG.DND5E.activityTypes.attack?.documentClass;
   if (!BaseAttackActivity) return;
 
+  // --- Patch AttackRollConfigurationDialog — inject cover fields into the attack config dialog ---
+  _patchAttackConfigDialog();
+
+  // --- Patch DamageRollConfigurationDialog — inject editable cover reduction field ---
+  _patchDamageConfigDialog();
+
+  // --- Patch _triggerSubsequentActions() — await rollAttack and delete card on cancel ---
+  if (!BaseAttackActivity.prototype._triggerSubsequentActions?.[TRIGGER_PATCH_FLAG]) {
+    BaseAttackActivity.prototype._triggerSubsequentActions = async function(config, results) {
+      const messageId = results.message?.id;
+      const rolls = await this.rollAttack(
+        { event: config.event },
+        {},
+        { data: { "flags.dnd5e.originatingMessage": messageId } }
+      );
+      const cancelled = !rolls || (Array.isArray(rolls) && rolls.length === 0);
+      if (cancelled && messageId) {
+        const msg = game.messages?.get(messageId);
+        if (msg?.isOwner) await msg.delete();
+      }
+    };
+    BaseAttackActivity.prototype._triggerSubsequentActions[TRIGGER_PATCH_FLAG] = true;
+  }
+
+  // --- Patch rollAttack() — inject cover context into dialog options, build decision from result ---
   if (!BaseAttackActivity.prototype.rollAttack?.[ATTACK_PATCH_FLAG]) {
     const originalRollAttack = BaseAttackActivity.prototype.rollAttack;
     BaseAttackActivity.prototype.rollAttack = async function(config = {}, dialog = {}, message = {}) {
@@ -173,32 +270,74 @@ function registerAttackCoverIntegration() {
         return originalRollAttack.call(this, config, dialog, message);
       }
 
-      const decision = await promptCoverDecision({
-        activity: this,
-        attacker: this.actor,
-        target: targetContext.token,
-        attackLabel: _getAttackLabel(this),
+      // Pass cover context into the dialog options so fields appear inside the attack config dialog
+      const coverContext = {
+        baseAc: targetContext.baseAc,
+        targetName: targetContext.token?.name ?? "cel",
         allowThrough: _isFirearmItem(this.item)
-      });
-      if (!decision) return null;
-      if (decision.blocksAttack) {
-        ui.notifications.warn(`${targetContext.token.name}: pełna osłona blokuje strzał prowadzony wokół osłony.`);
-        return null;
+      };
+      const nextDialog = foundry.utils.mergeObject(
+        foundry.utils.deepClone(dialog),
+        { options: { neuroCoverContext: coverContext } },
+        { inplace: false }
+      );
+
+      const rolls = await originalRollAttack.call(this, config, nextDialog, message);
+
+      if (!rolls || (Array.isArray(rolls) && rolls.length === 0)) {
+        // Cancelled or blocked by full cover (handled in _finalizeRolls)
+        return rolls;
       }
 
-      const nextConfig = foundry.utils.deepClone(config);
-      if (Number.isFinite(targetContext.baseAc) && decision.adjustedAcBonus > 0) {
-        nextConfig.target = targetContext.baseAc + decision.adjustedAcBonus;
+      // Build full decision from roll options written by _buildConfig in the dialog
+      const neuroCoverRaw = rolls[0]?.options?.neuroCover;
+      if (!neuroCoverRaw) return rolls;
+
+      const cvSelection = _resolveCoverSelection(neuroCoverRaw.selection, coverContext.allowThrough);
+      const exposure = COVER_EXPOSURES[cvSelection.exposure] ?? COVER_EXPOSURES.none;
+      const shotMode = cvSelection.shotMode;
+      const penetrationKey = String(neuroCoverRaw.penetrationLevel ?? 0);
+      const penetrationLevel = COVER_PENETRATION_LEVELS[penetrationKey] ?? COVER_PENETRATION_LEVELS[0];
+      const usesThroughCover = shotMode === COVER_SHOT_MODES.through.key;
+      const damageReduction = usesThroughCover && penetrationLevel.level > 0
+        ? penetrationLevel.reduction : 0;
+
+      const decision = {
+        attackerName: this.actor?.name ?? "Atakujący",
+        targetName: coverContext.targetName,
+        attackLabel: _getAttackLabel(this),
+        exposure,
+        shotMode,
+        penetrationLevel,
+        damageReduction,
+        adjustedAcBonus: usesThroughCover ? 0 : exposure.acBonus,
+        adjustedDexSaveBonus: usesThroughCover ? 0 : exposure.dexSaveBonus,
+        blocksAttack: false,
+        applyDamageReduction: damageReduction > 0,
+        allowThrough: coverContext.allowThrough,
+        summary: ""
+      };
+      decision.summary = describeCoverDecision(decision);
+
+      // Add cover summary to the attack roll chat message flavor retroactively
+      // (rolls[0].parent is set to the ChatMessage by buildPost)
+      const effectiveAC = rolls[0]?.options?.target;
+      const summaryWithAC = _buildCoverSummaryWithAC(decision, effectiveAC);
+      if (summaryWithAC) {
+        const attackMsg = rolls[0]?.parent;
+        if (attackMsg?.isOwner) {
+          const newFlavor = _mergeFlavor(attackMsg.flavor, summaryWithAC);
+          await attackMsg.update({ flavor: newFlavor });
+        }
       }
 
-      const nextMessage = decision.summary
-        ? foundry.utils.mergeObject(foundry.utils.deepClone(message), {
-          data: {
-            flavor: _mergeFlavor(message?.data?.flavor, decision.summary)
-          }
-        }, { inplace: false })
-        : message;
-      return originalRollAttack.call(this, nextConfig, dialog, nextMessage);
+      // Write to the real embedded item, not the clone that use() operates on.
+      const realItem = this.actor?.items.get(this.item.id) ?? this.item;
+      if (realItem && this.id) {
+        await _setLastAttackCoverDecision(realItem, this.id, decision);
+      }
+
+      return rolls;
     };
     BaseAttackActivity.prototype.rollAttack[ATTACK_PATCH_FLAG] = true;
   }
@@ -213,10 +352,13 @@ function registerAttackCoverIntegration() {
       const primaryRoll = rollConfig.rolls?.[0];
       if (!primaryRoll?.parts?.length) return rollConfig;
 
-      primaryRoll.parts = [`max(0, (${primaryRoll.parts.join(" + ")}) - ${decision.damageReduction})`];
       primaryRoll.options ??= {};
+      primaryRoll.options.neuroCoverOriginalParts = [...primaryRoll.parts];
       primaryRoll.options.neuroCoverReduction = decision.damageReduction;
       primaryRoll.options.neuroCoverSummary = decision.summary;
+      if (decision.damageReduction > 0) {
+        primaryRoll.parts = [`max(0, (${primaryRoll.parts.join(" + ")}) - ${decision.damageReduction})`];
+      }
       return rollConfig;
     };
     BaseAttackActivity.prototype.getDamageConfig[DAMAGE_CONFIG_PATCH_FLAG] = true;
@@ -233,10 +375,188 @@ function registerAttackCoverIntegration() {
           }
         }, { inplace: false })
         : message;
-      return originalRollDamage.call(this, config, dialog, nextMessage);
+      // Pass damage reduction to dialog so MG can correct it before rolling
+      const nextDialog = (decision?.damageReduction != null)
+        ? foundry.utils.mergeObject(
+            foundry.utils.deepClone(dialog),
+            { options: { neuroCoverDamageReduction: decision.damageReduction } },
+            { inplace: false }
+          )
+        : dialog;
+      return originalRollDamage.call(this, config, nextDialog, nextMessage);
     };
     BaseAttackActivity.prototype.rollDamage[DAMAGE_PATCH_FLAG] = true;
   }
+}
+
+/**
+ * Patch AttackRollConfigurationDialog to inject cover selection fields directly
+ * into the main attack configuration dialog (instead of a separate popup).
+ * Called once during registerAttackCoverIntegration().
+ */
+function _patchAttackConfigDialog() {
+  const AttackDialog = dnd5e?.applications?.dice?.AttackRollConfigurationDialog;
+  const D20Dialog = dnd5e?.applications?.dice?.D20RollConfigurationDialog;
+  if (!AttackDialog || !D20Dialog) {
+    console.warn("Neuroshima 5e | Could not find AttackRollConfigurationDialog — cover integration skipped");
+    return;
+  }
+  if (AttackDialog.prototype[DIALOG_PATCH_FLAG]) return;
+  AttackDialog.prototype[DIALOG_PATCH_FLAG] = true;
+
+  // 1. Add cover selection (and optional penetration level) fields to the dialog
+  const origPrepareCfg = AttackDialog.prototype._prepareConfigurationContext;
+  AttackDialog.prototype._prepareConfigurationContext = async function(context, options) {
+    context = await origPrepareCfg.call(this, context, options);
+    const coverCtx = this.options.neuroCoverContext;
+    if (!coverCtx) return context;
+
+    // Pełna osłona nie jest dostępna jako wybór — cel jest niewidoczny, gracz anuluje rzut lub wybiera przebicie.
+    const coverOptions = Object.values(COVER_SELECTIONS)
+      .filter(o => o.key !== "full")
+      .filter(o => coverCtx.allowThrough || o.key !== "through")
+      .map(o => ({ value: o.key, label: o.label }));
+
+    const coverField = {
+      field: new foundry.data.fields.StringField({ label: "Osłona celu", blank: false, required: true }),
+      name: "neuroCoverSelection",
+      options: coverOptions,
+      value: "none"
+    };
+
+    context.fields = [coverField, ...context.fields];
+
+    if (coverCtx.allowThrough) {
+      const penOptions = Object.values(COVER_PENETRATION_LEVELS)
+        .map(o => ({ value: String(o.level), label: `${o.label} (${o.reduction})` }));
+      const penField = {
+        field: new foundry.data.fields.StringField({
+          label: "Poziom osłony (przez osłonę)", blank: false, required: true
+        }),
+        name: "neuroPenetrationLevel",
+        options: penOptions,
+        value: "0"
+      };
+      context.fields.splice(1, 0, penField);
+    }
+
+    return context;
+  };
+
+  // 2. Read cover from formData, apply AC bonus, flag blocked attacks on the roll config
+  const origBuildCfg = AttackDialog.prototype._buildConfig;
+  AttackDialog.prototype._buildConfig = function(config, formData, index) {
+    config = origBuildCfg.call(this, config, formData, index);
+    const coverCtx = this.options.neuroCoverContext;
+    if (!coverCtx || !formData || index !== 0) return config;
+
+    const selKey = formData.get("neuroCoverSelection") ?? "none";
+    const penLevel = Number(formData.get("neuroPenetrationLevel") ?? 0);
+
+    config.options ??= {};
+    config.options.neuroCover = { selection: selKey, penetrationLevel: penLevel };
+
+    const cvSelection = _resolveCoverSelection(selKey, coverCtx.allowThrough);
+    const exposure = COVER_EXPOSURES[cvSelection.exposure] ?? COVER_EXPOSURES.none;
+    const isThroughShot = cvSelection.shotMode === COVER_SHOT_MODES.through.key;
+    const acBonus = isThroughShot ? 0 : exposure.acBonus;
+
+    if (Number.isFinite(coverCtx.baseAc) && acBonus > 0) {
+      config.options.target = coverCtx.baseAc + acBonus;
+    }
+
+    return config;
+  };
+
+  // 3. Show/hide penetration level row depending on cover selection value
+  const origOnRender = AttackDialog.prototype._onRender;
+  AttackDialog.prototype._onRender = async function(context, options) {
+    if (origOnRender) await origOnRender.call(this, context, options);
+    if (!this.options.neuroCoverContext?.allowThrough) return;
+
+    const form = this.element?.querySelector("form");
+    if (!form || form.dataset.neuroCoverInit) return;
+
+    const coverSelect = form.querySelector("[name='neuroCoverSelection']");
+    const penSelect = form.querySelector("[name='neuroPenetrationLevel']");
+    if (!coverSelect || !penSelect) return;
+
+    const penGroup = penSelect.closest(".form-group");
+    if (!penGroup) return;
+
+    const updateVisibility = () => {
+      penGroup.style.display = coverSelect.value === "through" ? "" : "none";
+    };
+    updateVisibility();
+    coverSelect.addEventListener("change", updateVisibility);
+    form.dataset.neuroCoverInit = "1";
+  };
+}
+
+/**
+ * Patch DamageRollConfigurationDialog to inject an editable "Redukcja osłony" number field.
+ * Default value comes from the cover decision's damageReduction (passed via dialog.options).
+ * MG can override it before rolling.
+ */
+function _patchDamageConfigDialog() {
+  const DamageDialog = dnd5e?.applications?.dice?.DamageRollConfigurationDialog;
+  if (!DamageDialog) {
+    console.warn("Neuroshima 5e | Could not find DamageRollConfigurationDialog — damage reduction field skipped");
+    return;
+  }
+  if (DamageDialog.prototype[DAMAGE_DIALOG_PATCH_FLAG]) return;
+  DamageDialog.prototype[DAMAGE_DIALOG_PATCH_FLAG] = true;
+
+  // 1. Inject "Redukcja osłony" field into configuration section
+  const origPrepareCfg = DamageDialog.prototype._prepareConfigurationContext;
+  DamageDialog.prototype._prepareConfigurationContext = async function(context, options) {
+    context = await origPrepareCfg.call(this, context, options);
+    const defaultReduction = this.options.neuroCoverDamageReduction;
+    if (defaultReduction == null) return context;
+
+    context.fields = [
+      ...context.fields,
+      {
+        field: new foundry.data.fields.NumberField({
+          label: "Redukcja osłony",
+          min: 0,
+          step: 1,
+          nullable: false,
+          initial: 0,
+          integer: true
+        }),
+        name: "neuroCoverReduction",
+        value: defaultReduction
+      }
+    ];
+    return context;
+  };
+
+  // 2. Apply the reduction from the field to the roll formula
+  const origBuildCfg = DamageDialog.prototype._buildConfig;
+  DamageDialog.prototype._buildConfig = function(config, formData, index) {
+    config = origBuildCfg.call(this, config, formData, index);
+    if (index !== 0) return config;
+
+    const originalParts = config.options?.neuroCoverOriginalParts;
+    if (!originalParts) return config;
+
+    const reduction = Number(formData?.get("neuroCoverReduction") ?? config.options?.neuroCoverReduction ?? 0);
+    if (reduction > 0) {
+      config.parts = [`max(0, (${originalParts.join(" + ")}) - ${reduction})`];
+    } else {
+      config.parts = [...originalParts];
+    }
+    return config;
+  };
+}
+
+function _buildCoverSummaryWithAC(decision, effectiveAC) {
+  if (!decision.summary && effectiveAC == null) return "";
+  const parts = [];
+  if (decision.summary) parts.push(decision.summary);
+  if (effectiveAC != null) parts.push(`KP ${effectiveAC}`);
+  return parts.join(", ");
 }
 
 async function _setLastAttackCoverDecision(item, activityId, decision) {
