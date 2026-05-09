@@ -30,6 +30,7 @@ import { registerWeaponJams } from "./weapons/jams.mjs";
 import { registerFireModes } from "./weapons/fire-modes.mjs";
 import { registerWeaponSounds } from "./weapons/sounds.mjs";
 import { registerAmmoSystem } from "./weapons/ammo.mjs";
+import { registerDamageReductionUI } from "./weapons/damage-reduction.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -60,6 +61,44 @@ Hooks.once("init", () => {
   registerWeaponJams();
   registerFireModes();
   registerAmmoSystem();
+
+  // Phase 2: Damage application UI
+  registerDamageReductionUI();
+
+  // Clean up activity chat card pills: remove NaN range, duration, empty strings for weapon cards
+  Hooks.on("renderChatMessageHTML", (message, html) => {
+    const activityType = message.flags?.dnd5e?.activity?.type;
+    if (!activityType) return;
+
+    // Only clean weapon-based activities
+    const itemType = message.flags?.dnd5e?.item?.type;
+    if (itemType !== "weapon") return;
+
+    const el = html instanceof HTMLElement ? html : html?.[0];
+    if (!el) return;
+
+    // Defer via macrotask — same reason as ammo.mjs: dnd5e renders pills async
+    setTimeout(() => {
+      const footer = el.querySelector("ul.card-footer.pills");
+      if (!footer) return;
+
+      for (const pill of [...footer.querySelectorAll("li.pill")]) {
+        const text = pill.querySelector(".label")?.textContent?.trim() ?? "";
+        if (
+          !text ||
+          text === "Instantaneous" ||
+          text === "Natychmiastowe" ||
+          /NaN/.test(text) ||
+          text === "—"
+        ) {
+          pill.remove();
+        }
+      }
+
+      // Hide footer if nothing left
+      if (!footer.querySelector("li.pill")) footer.remove();
+    });
+  });
 
   // Ostatnia Akcja needs preUpdateActor to track previous death failures
   Hooks.on("preUpdateActor", onPreUpdateActorDeathSaves);
