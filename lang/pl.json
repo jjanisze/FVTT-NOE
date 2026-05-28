@@ -82,6 +82,26 @@
   },
 
   "DND5E": {
+    "Details": "Szczegóły",
+    "ItemEdit": "Edycja",
+    "ItemWeaponDetails": "Szczegóły Broni",
+    "ItemWeaponType": "Typ Broni",
+    "Proficient": "Premia z Biegłości",
+    "ItemWeaponProperties": "Właściwości Broni",
+    "WEAPON": {
+      "FIELDS": {
+        "ammunition": {
+          "type": {
+            "label": "Typ Amunicji"
+          }
+        }
+      }
+    },
+    "ITEM": {
+      "Tab": {
+        "Details": "Szczegóły"
+      }
+    },
     "TimeInst": "Natychmiastowe",
     "Abilities": "Cechy",
     "AbilityStr": "Siła",
@@ -123,7 +143,7 @@
     "Skill": "Umiejętność",
     "PassivePerception": "Pasywna Percepcja",
 
-    "SKILL": {
+    "SKILL_CONFIG": {
       "SECTIONS": {
         "Bonuses": {
           "Hint": "Te premie dotyczą pasywnych wyników i testów {label}.",
@@ -738,12 +758,13 @@
     "WeaponNatural": "Naturalna",
     "WeaponSiege": "Broń oblężnicza",
 
-    "WeaponBiala": "Broń Biała",
-    "WeaponMiotana": "Broń Miotana",
-    "WeaponPalnaKrotka": "Palna Krótka",
-    "WeaponPalnaPosr": "Palna Pośrednia",
-    "WeaponPalnaDluga": "Palna Długa",
-    "WeaponPalnaCiezka": "Palna Ciężka",
+    "WeaponBiala": "Broń biała",
+    "WeaponMiotana": "Broń miotana",
+    "WeaponPalnaKrotka": "Broń palna krótka",
+    "WeaponPalnaPosr": "Broń palna pośrednia",
+    "WeaponPalnaDluga": "Broń palna długa",
+    "WeaponPalnaCiezka": "Broń palna ciężka",
+    "WeaponSpecjalna": "Broń specjalna",
 
     "ITEM": {
       "Property": {
@@ -875,3 +896,4 @@
     "Healing": "Leczenie"
   }
 }
+

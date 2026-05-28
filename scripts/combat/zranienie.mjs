@@ -44,8 +44,9 @@ export function registerZranienie() {
   // Hook into damage rolls to detect critical hits
   Hooks.on("dnd5e.rollDamage", onRollDamage);
 
-  // Inject zranienie display on character sheet
-  Hooks.on("renderCharacterActorSheet", onRenderSheet);
+  // Inject zranienie display on character and NPC sheets
+  Hooks.on("renderCharacterActorSheet", onRenderCharacterSheet);
+  Hooks.on("renderNPCActorSheet", onRenderNPCSheet);
 
   // Sync flag when the AE is deleted manually from Effects tab
   Hooks.on("deleteActiveEffect", onDeleteActiveEffect);
@@ -175,19 +176,13 @@ export async function applyZranienie(actor, reason = "") {
 
   const levelInfo = ZRANIENIE_LEVELS[newLevel];
 
-  // Build penalty description
-  const penalties = [];
-  if (levelInfo.speedPenalty) penalties.push(`Szybkość -${levelInfo.speedPenalty} m`);
-  if (levelInfo.noReaction) penalties.push("brak Reakcji");
-  if (levelInfo.noBonusAction) penalties.push("brak Akcji dodatkowej");
-  if (levelInfo.exhaustion) penalties.push("+1 Wyczerpanie");
-
   // Apply/update Active Effect for mechanical penalties
   await _syncZranieniEffect(actor, newLevel);
 
   // Chat message
+  const penalties = _buildZranieniDescription(newLevel);
   await ChatMessage.create({
-    content: `<strong>${actor.name}</strong> otrzymuje Stopień Zranienia: <strong>${levelInfo.label}</strong> (poziom ${newLevel}/4). ${reason ? `(${reason})` : ""}<br>Kary: ${penalties.join(", ") || "brak"}.`,
+    content: `<strong>${actor.name}</strong> otrzymuje Stopień Zranienia: <strong>${levelInfo.label}</strong> (poziom ${newLevel}/4). ${reason ? `(${reason})` : ""}<br>Kary: ${penalties || "brak"}.`,
     speaker: ChatMessage.getSpeaker({ actor })
   });
 
@@ -326,47 +321,15 @@ async function _applyZeroHPConditions(actor) {
 /* -------------------------------------------- */
 
 /**
- * Inject a wound-level indicator into the character sheet sidebar,
- * placed between the AC/exhaustion row and the lozenges (init/speed/prof).
+ * Build the 4-pip wound indicator row (pips container + "ZRANIENIE" label).
+ * Shared between character sheet and NPC sheet injection.
+ * @param {Actor} actor
+ * @returns {HTMLElement}
  */
-function onRenderSheet(app, html, context) {
-  const actor = app.document ?? app.actor;
-  if (!actor) return;
-
-  const el = html instanceof HTMLElement ? html : html?.[0];
-  if (!el) return;
-
+function _buildZranieniRow(actor) {
   const level = actor.getFlag(MODULE_ID, "zranienie")?.level ?? 0;
+  const isOwner = actor.isOwner;
 
-  // Find insertion point: after .top (AC + exhaustion), before .lozenges
-  const statsDiv = el.querySelector(".sidebar .stats");
-  if (!statsDiv) return;
-  const lozenges = statsDiv.querySelector(".lozenges");
-  if (!lozenges) return;
-
-  // Remove any existing indicators (re-render safe)
-  statsDiv.querySelector(".neuro-zranienie-row")?.remove();
-  statsDiv.querySelector(".neuro-exhaustion-label")?.remove();
-
-  // "WYCZERPANIE" label — between exhaustion pips row and wound pips
-  const exhaustionLabel = document.createElement("div");
-  exhaustionLabel.classList.add("neuro-exhaustion-label");
-  Object.assign(exhaustionLabel.style, {
-    textAlign: "center",
-    fontSize: "9px",
-    color: "var(--dnd5e-color-gold, #c9a96e)",
-    textTransform: "uppercase",
-    letterSpacing: "1px",
-    fontFamily: "var(--dnd5e-font-roboto-condensed, 'Roboto Condensed', sans-serif)",
-    fontWeight: "bold",
-    lineHeight: "12px",
-    margin: "0 0 5px 0",
-    padding: "0"
-  });
-  exhaustionLabel.textContent = "Wyczerpanie";
-  statsDiv.insertBefore(exhaustionLabel, lozenges);
-
-  // Build the zranienie row: pips on top, label below
   const row = document.createElement("div");
   row.classList.add("neuro-zranienie-row");
   Object.assign(row.style, {
@@ -386,8 +349,6 @@ function onRenderSheet(app, html, context) {
     justifyContent: "center",
     gap: "5px"
   });
-
-  const isOwner = actor.isOwner;
 
   // 4 pips — matching exhaustion pip size (16px) with red theme
   for (let n = 1; n <= 4; n++) {
@@ -443,8 +404,9 @@ function onRenderSheet(app, html, context) {
 
   row.appendChild(pipsContainer);
 
-  // "ZRANIENIE" label — overflows into the hex lozenges whitespace below
+  // "ZRANIENIE" label
   const zranieniLabel = document.createElement("div");
+  zranieniLabel.classList.add("neuro-zranienie-label");
   Object.assign(zranieniLabel.style, {
     fontSize: "9px",
     color: "#c0392b",
@@ -453,15 +415,116 @@ function onRenderSheet(app, html, context) {
     fontFamily: "var(--dnd5e-font-roboto-condensed, 'Roboto Condensed', sans-serif)",
     fontWeight: "bold",
     lineHeight: "12px",
-    marginBottom: "-10px",
     position: "relative",
     zIndex: "1"
   });
   zranieniLabel.textContent = "Zranienie";
   row.appendChild(zranieniLabel);
 
+  return row;
+}
+
+/**
+ * Build the "WYCZERPANIE" section label.
+ * Used only on the character sheet to label the exhaustion pips above the wound row.
+ * @returns {HTMLElement}
+ */
+function _buildExhaustionSectionLabel() {
+  const div = document.createElement("div");
+  div.classList.add("neuro-exhaustion-label");
+  Object.assign(div.style, {
+    textAlign: "center",
+    fontSize: "9px",
+    color: "var(--dnd5e-color-gold, #c9a96e)",
+    textTransform: "uppercase",
+    letterSpacing: "1px",
+    fontFamily: "var(--dnd5e-font-roboto-condensed, 'Roboto Condensed', sans-serif)",
+    fontWeight: "bold",
+    lineHeight: "12px",
+    margin: "0 0 5px 0",
+    padding: "0"
+  });
+  div.textContent = "Wyczerpanie";
+  return div;
+}
+
+/**
+ * Inject the wound indicator into the character sheet sidebar.
+ * Placed between the exhaustion pips row and the lozenges (init/speed/prof).
+ * @param {HTMLElement} el - Sheet root element
+ * @param {Actor} actor
+ */
+function _injectIntoCharacterSheet(el, actor) {
+  const statsDiv = el.querySelector(".sidebar .stats");
+  if (!statsDiv) return;
+  const lozenges = statsDiv.querySelector(".lozenges");
+  if (!lozenges) return;
+
+  // Remove existing indicators (re-render safe)
+  statsDiv.querySelector(".neuro-zranienie-row")?.remove();
+  statsDiv.querySelector(".neuro-exhaustion-label")?.remove();
+
+  statsDiv.insertBefore(_buildExhaustionSectionLabel(), lozenges);
+
+  const row = _buildZranieniRow(actor);
+  // Overlap the label into the lozenges whitespace below
+  row.querySelector(".neuro-zranienie-label").style.marginBottom = "-10px";
   statsDiv.insertBefore(row, lozenges);
 
-  // Override the negative margin on lozenges — pull them up into zranienie space
+  // Pull lozenges up to close the gap
   lozenges.style.marginTop = "-12px";
+}
+
+/**
+ * Inject the wound indicator into the NPC sheet.
+ * Placed in the header's portrait column, directly below the AC+HP vitals bar.
+ * This keeps it visually grouped with the portrait rather than the trait pills.
+ * Falls back to top of sidebar if the header structure is missing.
+ * @param {HTMLElement} el - Sheet root element
+ * @param {Actor} actor
+ */
+function _injectIntoNPCSheet(el, actor) {
+  // Clean up any previous injection in either location
+  el.querySelector(".sheet-header .left .neuro-zranienie-row")?.remove();
+  el.querySelector(".sidebar .neuro-zranienie-row")?.remove();
+
+  const row = _buildZranieniRow(actor);
+
+  const headerLeft = el.querySelector(".sheet-header .left");
+  const vitals = headerLeft?.querySelector(".vitals");
+
+  if (headerLeft && vitals) {
+    // Insert directly after the AC+HP bar — header flexes to accommodate
+    Object.assign(row.style, { margin: "4px 0 0 0", padding: "0" });
+    vitals.after(row);
+    return;
+  }
+
+  // Fallback: top of sidebar
+  const sidebar = el.querySelector(".sidebar");
+  if (!sidebar) return;
+  Object.assign(row.style, { margin: "4px 0 8px 0" });
+  sidebar.insertBefore(row, sidebar.firstChild);
+}
+
+/**
+ * Hook: renderCharacterActorSheet — inject wound indicator into character sheets.
+ */
+function onRenderCharacterSheet(app, html, context) {
+  const actor = app.document ?? app.actor;
+  if (!actor) return;
+  const el = html instanceof HTMLElement ? html : html?.[0];
+  if (!el) return;
+  _injectIntoCharacterSheet(el, actor);
+}
+
+/**
+ * Hook: renderNPCActorSheet — inject wound indicator into NPC sheets.
+ */
+function onRenderNPCSheet(app, html, context) {
+  const actor = app.document ?? app.actor;
+  if (!actor) return;
+  const el = html instanceof HTMLElement ? html : html?.[0];
+  if (!el) return;
+  _injectIntoNPCSheet(el, actor);
 }

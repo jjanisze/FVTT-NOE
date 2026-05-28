@@ -24,7 +24,8 @@
     // Palna Pośrednia
     "hk universal":"palnaPosr","hk ump":"palnaPosr","h&k ump":"palnaPosr","empepiątka":"palnaPosr",
     "tommy gun":"palnaPosr","uzi":"palnaPosr","kałach":"palnaPosr","scar ":"palnaPosr",
-    "fn scar":"palnaPosr","xm-8":"palnaPosr",
+    "fn scar":"palnaPosr","xm-8":"palnaPosr","ar ":"palnaPosr","ar (":"palnaPosr",
+    "krótka seria":"palnaPosr",
     // Palna Długa
     "deer hunter":"palnaDluga","r700":"palnaDluga","lewar m95":"palnaDluga","field 03":"palnaDluga",
     "m1 garand":"palnaDluga","h&k g3":"palnaDluga","hk g3":"palnaDluga","kusz":"palnaDluga",
@@ -36,23 +37,25 @@
     // Broń Biała
     "bejsbol":"biala","bejzbol":"biala","berdysz":"biala","buzdygan":"biala","kastet":"biala",
     "katana":"biala","miecz":"biala","szabla":"biala","kilof":"biala","łańcuch":"biala",
-    "maczeta":"biala","nadziak":"biala","nóż":"biala","piła":"biala","piłomiecz":"biala",
+    "maczeta":"biala","nadziak":"biala","nóż":"biala","piła":"biala","piły":"biala","piłomiecz":"biala",
     "siekierka":"biala","szoker":"biala","paralizator":"biala","topór":"biala","widły":"biala",
     "włócznia":"biala","laska":"biala","łopatka":"biala","rura stalowa":"biala","maczuga":"biala",
     "stalowe maczugi":"biala","pałka":"biala","scyzoryk":"biala","skalpel":"biala",
     "klucz francuski":"biala","pochodnia":"biala","kafar":"biala","bat ":"biala",
     // Broń Miotana
     "oszczep":"miotana","raca drogowa":"miotana","granat":"miotana",
+    // Broń Specjalna
+    "moździerz":"specjalna","miotacz":"specjalna",
   };
 
   // Naturalne ataki potworów / placeholder — NIE migruj
   const skipPrefixes = [
     "atak","pięść","ugryzienie","odnóże","macka","zęby","pazury",
-    "splunięcie","żądło","ukłucie","ryjossawka","strzał ","bez broni",
-    "piąchopiryna","tulipan","atak wielokrotny","krótka seria (kur",
+    "splunięcie","żądło","ukłucie","ryjossawka","strzał","bez broni",
+    "piąchopiryna","tulipan","atak wielokrotny",
   ];
 
-  const neuroTypes = new Set(["biala","miotana","palnaKrotka","palnaPosr","palnaDluga","palnaCiezka"]);
+  const neuroTypes = new Set(["biala","miotana","palnaKrotka","palnaPosr","palnaDluga","palnaCiezka","specjalna"]);
 
   const allWeapons = [
     ...game.items.filter(i => i.type === "weapon"),
@@ -65,6 +68,12 @@
   for (const w of allWeapons) {
     const low = w.name.toLowerCase();
     if (skipPrefixes.some(s => low.startsWith(s))) { skipped++; continue; }
+
+    if (low === "ar") {
+      await w.update({ "system.type.value": "palnaPosr" });
+      updated++;
+      continue;
+    }
 
     const found = Object.entries(exactMap).find(([k]) => low.includes(k));
     if (!found) { unknown.push(`${w.name} (${w.parent?.name ?? "world"})`); continue; }

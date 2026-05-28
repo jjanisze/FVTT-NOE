@@ -234,6 +234,73 @@
 /* Ammo / Caliber system — chat & sheet styles   */
 /* ============================================= */
 
+/* Ammo inventory — quantity input (brak ramki, złoty glow jak defaultowy dnd5e) */
+.neuro-ammo-list .item-quantity input {
+  background: none;
+  border: none;
+  padding: 0;
+  font-weight: bold;
+  text-align: center;
+  width: 30px;
+  color: var(--color-text-light-primary, #e0e0e0);
+  transition: box-shadow 250ms ease;
+  outline: none;
+}
+
+.neuro-ammo-list .item-quantity input:hover,
+.neuro-ammo-list .item-quantity input:focus-visible {
+  box-shadow: 0 0 6px var(--dnd5e-color-gold, #c9a227);
+}
+
+.neuro-ammo-list .item-quantity .adjustment-button {
+  cursor: pointer;
+  color: var(--color-text-secondary, #aaa);
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.neuro-ammo-list .item-quantity .adjustment-button:hover {
+  color: var(--dnd5e-color-gold, #c9a227);
+}
+
+/* Magazine inventory — identyczne reguły co ammo, ale też dla item-ready */
+.neuro-magazine-list .item-quantity input,
+.neuro-magazine-list .item-ready input {
+  background: none;
+  border: none;
+  padding: 0;
+  font-weight: bold;
+  text-align: center;
+  width: 30px;
+  color: var(--color-text-light-primary, #e0e0e0);
+  transition: box-shadow 250ms ease;
+  outline: none;
+}
+
+.neuro-magazine-list .item-quantity input:hover,
+.neuro-magazine-list .item-quantity input:focus-visible,
+.neuro-magazine-list .item-ready input:hover,
+.neuro-magazine-list .item-ready input:focus-visible {
+  box-shadow: 0 0 6px var(--dnd5e-color-gold, #c9a227);
+}
+
+.neuro-magazine-list .item-quantity .adjustment-button,
+.neuro-magazine-list .item-ready .adjustment-button {
+  cursor: pointer;
+  color: var(--color-text-secondary, #aaa);
+  font-size: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.neuro-magazine-list .item-quantity .adjustment-button:hover,
+.neuro-magazine-list .item-ready .adjustment-button:hover {
+  color: var(--dnd5e-color-gold, #c9a227);
+}
+
 /* "Obrażenia" button injected into attack roll chat cards */
 .neuro-damage-btn {
   display: block;

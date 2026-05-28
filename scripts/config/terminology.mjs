@@ -68,5 +68,22 @@ export function registerTerminology() {
   // but maxAbilityScore stays 20
   CONFIG.DND5E.maxAbilityScore = 20;
 
+  // Add Magazine consumable subtype
+  if (CONFIG.DND5E.consumableTypes) {
+    CONFIG.DND5E.consumableTypes.magazine = {
+      label: "Magazynki i Kołczany",
+      subtypes: {
+         palnaKrotka: "Mag. do broni krótkiej",
+         palnaPosr: "Mag. do broni pośredniej",
+         palnaDluga: "Mag. do broni długiej",
+         palnaCiezka: "Mag. do broni ciężkiej",
+         miotana: "Kołczan / Ładownica"
+      }
+    };
+    
+    // Sort keys or adjust order? We want it near Amunicja.
+    // DND5e sorts categories alphabetically typically, but we can't force index directly.
+  }
+
   console.log("Neuroshima 5e | Terminology overrides applied");
 }

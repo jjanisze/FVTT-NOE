@@ -39,6 +39,10 @@ const OZ_SHAPES = Object.freeze([
 ]);
 const syncingItems = new Set();
 let suppressiveHooksRegistered = false;
+// Cache selekcji serii — przechowuje wybór gracza między use() a rollDamage().
+// Używamy Map zamiast liveItem.update(), bo update() triggeruje syncWeaponFireModes
+// który natychmiast resetuje damage.parts i flagi do wartości domyślnych.
+const _burstSelectionCache = new Map();
 
 export function registerFireModes() {
   registerShortBurstActivityType();
@@ -75,7 +79,8 @@ function registerShortBurstActivityType() {
     static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
       type: KS_ACTIVITY_TYPE,
       title: "Krótka seria",
-      hint: "Neuroshima: 3 naboje, atak z utrudnieniem, raz na rundę. Grad ołowiu pozwala wykonać kolejną KS w tej samej rundzie; limit ataków pilnuje gracz lub MG."
+      hint: "Neuroshima: 3 naboje, atak z utrudnieniem, raz na rundę. Grad ołowiu pozwala wykonać kolejną KS w tej samej rundzie; limit ataków pilnuje gracz lub MG.",
+      img: "modules/neuroshima-2026-overrides/icons/activities/activity_short_burst.svg"
     }, { inplace: false }));
 
     async use(usage = {}, dialog = {}, message = {}) {
@@ -169,6 +174,7 @@ function registerLongBurstActivityType() {
       type: DS_ACTIVITY_TYPE,
       title: "Długa seria",
       hint: "Neuroshima: 10-30 naboi, linia 1,5 m x 36 m, RO Zręczność, raz na rundę.",
+      img: "modules/neuroshima-2026-overrides/icons/activities/activity_long_burst.svg",
       usage: {
         actions: {
           rollSave(event, target, message) {
@@ -242,6 +248,15 @@ function registerLongBurstActivityType() {
 
       const selection = await _promptLongBurstSelection(liveItem);
       if (!selection) return;
+
+      // Zapisz wybór w module-level cache (dla natychmiastowego rollDamage w tej samej sesji)
+      // oraz przez liveItem.update() (dla cross-session — sync go teraz zachowuje zamiast resetować).
+      _burstSelectionCache.set(liveItem.uuid, selection);
+      await liveItem.update({
+        [`system.activities.${this.id}.flags.${MODULE_ID}.burstBullets`]: selection.bullets,
+        [`system.activities.${this.id}.flags.${MODULE_ID}.burstMultiplier`]: selection.multiplier,
+      });
+
       if (!(await spendRounds(liveItem, selection.bullets))) return;
       await _markBurstModeUsed(liveItem, DS_FIRE_MODE, selection.bullets);
 
@@ -328,7 +343,17 @@ function registerLongBurstActivityType() {
     }
 
     async rollDamage(config = {}, dialog = {}, message = {}) {
-      const selection = _getLongBurstSelection(this);
+      const liveItem = _getLiveItem(this.item);
+      // Odczytaj selekcję z cache (set przez use()), z fallbackiem na zapisane flagi.
+      const cachedSelection = _burstSelectionCache.get(liveItem.uuid);
+      const selection = cachedSelection ?? _getLongBurstSelection(this);
+
+      // Patchuj in-memory bez DB write — updateSource nie triggeruje syncWeaponFireModes.
+      this.updateSource({
+        damage: { parts: [_buildBurstDamagePart(this.item, selection.multiplier)] },
+        flags: { [MODULE_ID]: { ...(_getActivityModuleFlags(this)), burstBullets: selection.bullets, burstMultiplier: selection.multiplier } }
+      });
+
       const nextMessage = foundry.utils.mergeObject({
         data: {
           flavor: `${_getLongBurstLabel(this.item, selection)} - ${game.i18n.localize("DND5E.DamageRoll")}`
@@ -362,6 +387,7 @@ function registerSuppressiveFireActivityType() {
       type: OZ_ACTIVITY_TYPE,
       title: "Ogień zaporowy",
       hint: "Neuroshima: 6 naboi, linia lub strefa, RO Mądrość, blokada Akcji i BA.",
+      img: "modules/neuroshima-2026-overrides/icons/activities/activity_suppressive_fire.svg",
       usage: {
         actions: {
           rollSave(event, target, message) {
@@ -486,6 +512,7 @@ function registerCrushingBurstActivityType() {
       type: MS_ACTIVITY_TYPE,
       title: "Miażdżąca seria",
       hint: "Neuroshima: 50-200 naboi, linia 3 m x 150 m, RO Zręczność i Siła ST 15, raz na rundę.",
+      img: "modules/neuroshima-2026-overrides/icons/activities/activity_crushing_burst.svg",
       usage: {
         actions: {
           rollSave(event, target, message) {
@@ -582,6 +609,14 @@ function registerCrushingBurstActivityType() {
 
       const selection = await _promptCrushingBurstSelection(liveItem);
       if (!selection) return;
+
+      // Cache (in-session) + update (cross-session, sync teraz zachowuje selekcję).
+      _burstSelectionCache.set(liveItem.uuid, selection);
+      await liveItem.update({
+        [`system.activities.${this.id}.flags.${MODULE_ID}.burstBullets`]: selection.bullets,
+        [`system.activities.${this.id}.flags.${MODULE_ID}.burstMultiplier`]: selection.multiplier,
+      });
+
       if (!(await spendRounds(liveItem, selection.bullets))) return;
       await _markBurstModeUsed(liveItem, MS_FIRE_MODE, selection.bullets);
 
@@ -667,7 +702,15 @@ function registerCrushingBurstActivityType() {
     }
 
     async rollDamage(config = {}, dialog = {}, message = {}) {
-      const selection = _getCrushingBurstSelection(this);
+      const liveItem = _getLiveItem(this.item);
+      const cachedSelection = _burstSelectionCache.get(liveItem.uuid);
+      const selection = cachedSelection ?? _getCrushingBurstSelection(this);
+
+      this.updateSource({
+        damage: { parts: [_buildBurstDamagePart(this.item, selection.multiplier)] },
+        flags: { [MODULE_ID]: { ...(_getActivityModuleFlags(this)), burstBullets: selection.bullets, burstMultiplier: selection.multiplier } }
+      });
+
       const nextMessage = foundry.utils.mergeObject({
         data: {
           flavor: `${_getCrushingBurstLabel(this.item, selection)} - ${game.i18n.localize("DND5E.DamageRoll")}`
@@ -734,11 +777,17 @@ async function syncWeaponFireModes(item) {
 
 async function syncBaseAttackActivityName(item) {
   const LABEL = "Ogień pojedynczy";
+  const IMG = "modules/neuroshima-2026-overrides/icons/activities/activity_single_fire.svg";
   for (const activity of item.system.activities ?? []) {
     if (activity.type !== "attack") continue;
     if (_getActivityModuleFlag(activity, "managedActivity")) continue;
-    if (activity.name === LABEL) continue;
-    await item.updateActivity(activity.id, { name: LABEL });
+    const needsName = activity.name !== LABEL;
+    const needsImg = activity.img !== IMG;
+    if (!needsName && !needsImg) continue;
+    const update = {};
+    if (needsName) update.name = LABEL;
+    if (needsImg) update.img = IMG;
+    await item.updateActivity(activity.id, update);
   }
 }
 
@@ -786,6 +835,15 @@ async function syncLongBurstActivity(item) {
   if (!managed) {
     await item.createActivity(DS_ACTIVITY_TYPE, data, { renderSheet: false });
     return;
+  }
+
+  // Zachowaj bieżącą selekcję serii (ustawioną przez use()) — nie resetuj do DS_THRESHOLDS[0].
+  const existingBullets = _getActivityModuleFlag(managed, "burstBullets");
+  const existingMultiplier = _getActivityModuleFlag(managed, "burstMultiplier");
+  if (existingBullets != null && existingMultiplier != null) {
+    data.flags[MODULE_ID].burstBullets = existingBullets;
+    data.flags[MODULE_ID].burstMultiplier = existingMultiplier;
+    data.damage.parts = [_buildBurstDamagePart(item, existingMultiplier)];
   }
 
   await item.updateActivity(managed.id, {
@@ -843,6 +901,15 @@ async function syncCrushingBurstActivity(item) {
   if (!managed) {
     await item.createActivity(MS_ACTIVITY_TYPE, data, { renderSheet: false });
     return;
+  }
+
+  // Zachowaj bieżącą selekcję serii.
+  const existingBullets = _getActivityModuleFlag(managed, "burstBullets");
+  const existingMultiplier = _getActivityModuleFlag(managed, "burstMultiplier");
+  if (existingBullets != null && existingMultiplier != null) {
+    data.flags[MODULE_ID].burstBullets = existingBullets;
+    data.flags[MODULE_ID].burstMultiplier = existingMultiplier;
+    data.damage.parts = [_buildBurstDamagePart(item, existingMultiplier)];
   }
 
   await item.updateActivity(managed.id, {
@@ -1093,7 +1160,7 @@ function _canUseBurstMode(item, mode, minBullets) {
   }
 
   const combat = game.combat;
-  if (!combat?.started) return true;
+  if (!combat?.started || !item.actor?.inCombat) return true;
 
   const lastUse = item.getFlag(MODULE_ID, BURST_STATE_FLAG) ?? {};
   const sameCombat = lastUse.combatId === combat.id;
@@ -1578,7 +1645,7 @@ function _canUseSuppressiveFire(item) {
   }
 
   const combat = game.combat;
-  if (!combat?.started) return true;
+  if (!combat?.started || !item.actor?.inCombat) return true;
 
   const lastUse = item.getFlag(MODULE_ID, SUPPRESSIVE_FIRE_USE_FLAG) ?? {};
   if ((lastUse.combatId === combat.id) && (lastUse.round === combat.round) && (lastUse.turn === combat.turn)) {

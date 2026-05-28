@@ -15,6 +15,7 @@
 
 import { AMMO_CALIBER_MAP } from "../config/ammo-data.mjs";
 import { getLastAttackCoverDecision } from "../combat/cover.mjs";
+import { playExplosionSoundForItem } from "./sounds.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const AMMO_PROPS_FLAG = "ammoProps";
@@ -168,6 +169,9 @@ async function _onPostRollAttackAutoApply(rolls, { subject } = {}) {
   for (const { targetActor } of hits) {
     await targetActor.applyDamage(damages, { isDelta: true, multiplier: 1 });
   }
+
+  /* Play explosion sound if weapon is explosive (Bazooka, LAW, MGL1S, Thumper, Moździerz) */
+  playExplosionSoundForItem(item);
 
   /* Build flavor: caliber name + cover reduction note + hit/miss list */
   const hitNames = hits.map(h => h.target.name ?? "?").join(", ");
@@ -327,6 +331,9 @@ async function _applyDamageFromButton(caliber, sourceItem) {
       await targetActor.applyDamage(damages, { isDelta: true, multiplier: 1 });
     }
   }
+
+  /* Play explosion sound if weapon is explosive */
+  playExplosionSoundForItem(sourceItem);
 
   const targetNames = targets.map(t => t.document?.name ?? t.name ?? "?").join(", ");
   const flavor = `<i class="fa-solid fa-burst"></i> Obrażenia (${caliber.label}) → ${targetNames}`;

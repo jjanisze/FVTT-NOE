@@ -14,12 +14,13 @@ const MODULE_ID = "neuroshima-2026-overrides";
 /* -------------------------------------------- */
 
 const NEURO_WEAPON_TYPES = {
-  biala:        "Broń Biała",
-  miotana:      "Broń Miotana",
-  palnaKrotka:  "Palna Krótka",
-  palnaPosr:    "Palna Pośrednia",
-  palnaDluga:   "Palna Długa",
-  palnaCiezka:  "Palna Ciężka",
+  biala:        "Broń biała",
+  miotana:      "Broń miotana",
+  palnaKrotka:  "Broń palna krótka",
+  palnaPosr:    "Broń palna pośrednia",
+  palnaDluga:   "Broń palna długa",
+  palnaCiezka:  "Broń palna ciężka",
+  specjalna:    "Broń specjalna",
 };
 
 const NEURO_WEAPON_TYPE_MAP = {
@@ -29,6 +30,7 @@ const NEURO_WEAPON_TYPE_MAP = {
   palnaPosr:    "ranged",
   palnaDluga:   "ranged",
   palnaCiezka:  "ranged",
+  specjalna:    "ranged",
 };
 
 /* -------------------------------------------- */
@@ -144,8 +146,14 @@ const WEAPON_TYPE_PROPERTIES = {
   palnaCiezka: new Set([
     "wmag", "beb",
     "tryb_p", "tryb_ks", "tryb_ds", "tryb_ms", "tryb_oz",
-    "cicha", "ciezka", "co", "dluga", "dublet", "jednorazowa", "ladowanie",
+    "burzaca", "cicha", "ciezka", "co", "dluga", "dublet", "jednorazowa", "ladowanie",
     "obalajaca", "ppanc", "przeladowanie", "sm",
+  ]),
+
+  // Broń specjalna — mortars, flamethrowers, etc.
+  specjalna: new Set([
+    "wmag", "beb",
+    "burzaca", "ciezka", "dluga", "ladowanie", "obalajaca", "ppanc", "przeladowanie", "sm", "zasilana", "spalinowa",
   ]),
 };
 
@@ -153,6 +161,112 @@ const WEAPON_TYPE_PROPERTIES = {
 const ALL_WEAPON_PROPERTIES = new Set(
   Object.values(WEAPON_TYPE_PROPERTIES).flatMap(s => [...s])
 );
+
+/* -------------------------------------------- */
+/*  Weapon → icon map                             */
+/* -------------------------------------------- */
+
+/**
+ * Canonical name → icon filename (in icons/weapons/) for every Neuroshima weapon.
+ * Used by the preCreateItem hook to auto-assign icons when a weapon item is created
+ * without a custom icon (i.e. still has the dnd5e default icon).
+ */
+const WEAPON_ICON_MAP = {
+  // Broń biała
+  "Bat":                  "baseball_bat.svg",
+  "Bejsbol/Rurka":        "iron_pipe_club.svg",
+  "Crash":                "crash_halberd.svg",
+  "Kafar":                "kafar_piledriver.svg",
+  "Kastet":               "brass_knuckles.svg",
+  "Katana":               "katana.svg",
+  "Kilof":                "pickaxe.svg",
+  "Łańcuch":              "chain.svg",
+  "Maczeta":              "machete.svg",
+  "Nadziak":              "horsemans_pick.svg",
+  "Nóż taktyczny":        "combat_knife.svg",
+  "Piła spalinowa":       "combat_chainsaw.svg",
+  "Piłomiecz":            "machine_sword.svg",
+  "Siekierka":            "hatchet.svg",
+  "Szabla":               "saber.svg",
+  "Szoker":               "paralyzer.svg",
+  "Topór strażacki":      "fireman_axe.svg",
+  "Widły":                "pitchfork.svg",
+  "Włócznia":             "spear.svg",
+  // Broń miotana
+  "Bolas":                "bola.svg",
+  "Bumerang":             "boomerang.svg",
+  "Dmuchawka":            "blowgun.svg",
+  "Kusza bloczkowa":      "crossbow.svg",
+  "Kusza Cobra":          "cobra_crossbow.svg",
+  "Kusza pistoletowa":    "crossbow.svg",
+  "Łuk bloczkowy":        "bow.svg",
+  "Łuk tradycyjny":       "bow.svg",
+  "Nóż do rzucania":      "combat_knife.svg",
+  "Oszczep":              "javelin.svg",
+  "Proca":                "slingshot.svg",
+  // Palna krótka
+  ".44 Magnum":           "magnum_44.svg",
+  "B 92":                 "beretta_b92.svg",
+  "B 93R":                "beretta_b93r.svg",
+  "Desert Eagle":         "desert_eagle.svg",
+  "G17":                  "glock_17.svg",
+  "Jedenastka":           "colt_1911.svg",
+  "K-22":                 "k_22_revolver.svg",
+  "Mark 23":              "hk_mark_23.svg",
+  "Mk IV":                "ruger_mark_iv.svg",
+  "Obrzyn":               "sawed_off_shotgun.svg",
+  "Peacemaker":           "peacemaker_revolver.svg",
+  "Samoróbka":            "pipe_gun.svg",
+  "Trzydziestka":         "m642_revolver.svg",
+  // Palna pośrednia
+  "AK":                   "ak_47.svg",
+  "AR":                   "armalite_carbine.svg",
+  "Empepiątka":           "hk_mp5.svg",
+  "HK Universal":         "hk_ump.svg",
+  "Scar":                 "scar_heavy.svg",
+  "Tommy gun":            "tommy_gun.svg",
+  "UZI":                  "uzi.svg",
+  "XM-8":                 "xm_8_rifle.svg",
+  // Palna długa
+  "Deer Hunter":          "deer_hunter.svg",
+  "Dwururka":             "double_barreled_shotgun.svg",
+  "Field 03":             "field_03_rifle.svg",
+  "HK G3":                "hk_g3.svg",
+  "Lewar M95":            "lever_action_rifle.svg",
+  "Light Fifty":          "light_fifty.svg",
+  "M1 US Rifle":          "m1_us_rifle.svg",
+  "M14":                  "m14_rifle.svg",
+  "Pompka":               "pump_shotgun.svg",
+  "R700":                 "remington_700.svg",
+  "SP12 Tactical":        "sp12_tactical.svg",
+  "SR 25":                "sr_25.svg",
+  "Strzelba Palmera":     "strzelba_palmera.svg",
+  // Palna ciężka
+  "Bazooka":              "bazooka.svg",
+  "Browning":             "browning_m2.svg",
+  "LAW":                  "law_launcher.svg",
+  "MGL1S":                "mgl1s.svg",
+  "Minigun":              "minigun.svg",
+  "Minimi":               "fn_minimi.svg",
+  "The Pig":              "m60_machine_gun.svg",
+  "Thumper":              "thumper_grenade_launcher.svg",
+  // Specjalna
+  "Miotacz ognia":        "flamethrower.svg",
+  "Moździerz":            "light_mortar.svg",
+};
+
+/** Default fallback icons per weapon type (when name is not in WEAPON_ICON_MAP). */
+const WEAPON_TYPE_DEFAULT_ICONS = {
+  biala:        "machete.svg",
+  miotana:      "javelin.svg",
+  palnaKrotka:  "semi_auto_pistol.svg",
+  palnaPosr:    "submachinegun.svg",
+  palnaDluga:   "bolt_action_rifle.svg",
+  palnaCiezka:  "heavy_machine_gun.svg",
+  specjalna:    "flamethrower.svg",
+};
+
+const DEFAULT_DND5E_WEAPON_ICON = "systems/dnd5e/icons/svg/items/weapon.svg";
 
 /* -------------------------------------------- */
 /*  Sheet context hook — filter per type          */
@@ -186,22 +300,123 @@ function onPrepareSheetContext(sheet, partId, context, _options) {
 }
 
 /* -------------------------------------------- */
+/*  Tooltips for weapon properties                */
+/* -------------------------------------------- */
+
+const WEAPON_PROPERTY_TOOLTIPS = {
+  // Palna i wspólne
+  co: "Broń jest fabrycznie wyposażona w celownik optyczny i posiada związane z nim właściwości.",
+  cicha: "Pomaga ukryć pozycję. Atakując niewidocznym, nie tracisz Niewidoczności wobec celów dalej niż 18m.",
+  ciezka: "Wymaga dwójnogu, trójnogu lub Siły 15+. Inaczej ataki z Utrudnieniem, a cele mają Ułatwienie do RO przeciw seriom.",
+  dluga: "Posiada długą lufę. Strzelanie do istot w promieniu 3m to Utrudnienie do ataku (chyba że cel ma Szybkość 0).",
+  dublet: "Pozwala wystrzelić dwa pociski naraz. Jeden Test Ataku, w przypadku trafienia podwójne kości obrażeń.",
+  jednorazowa: "Z broni można wystrzelić tylko raz; nie da się do niej załadować ponownie amunicji.",
+  ladowanie: "Wymaga załadowania po każdym strzale (kosztuje akcję Używanie lub Akcję Bonusową).",
+  obalajaca: "Może posłużyć do powalenia celu (max średni). RO na Siłę o ST 10 (inaczej Powalenie).",
+  poreczna: "Z broni można strzelać jedną ręką bez Utrudnienia do ataku.",
+  przeladowanie: "Trzeba przeładować po strzale. Wymaga darmowej interakcji lub Akcji Bonusowej.",
+  ppanc: "Przeciwpancerna. Ignoruje Odporności na obrażenia i Progi obrażeń.",
+  sm: "Szyna montażowa. Do broni można zamontować ulepszenia.",
+  wmag: "Magazynek wewnętrzny, niewymienny. Załadowanie pojedynczego naboju to akcja Używanie.",
+  beb: "Bębenek. Przeładowanie całego bębenka lub jednego naboju to akcja Używanie.",
+  tryb_p: "Podstawowy ogień pojedynczy. Możesz strzelać tyle razy, ile masz ataków w turze.",
+  tryb_ks: "Krótka seria [Akcja]. 3 naboje. Test z Utrudnieniem. Obrażenia k. broni x3 (bez mod. z atrybutów/biegłości).",
+  tryb_ds: "Długa seria [Akcja]. Min 10 naboi. Linia 1.5x36m. RO Zręczność. Połowa obrażeń przy sukcesie.",
+  tryb_ms: "Miażdżąca seria [Akcja]. Linia 3x150m. RO Zręczność (połowa) i RO Siła (obalenie).",
+  tryb_oz: "Ogień zaporowy [Akcja]. Min 6 naboi. RO Mądrość. Porażka: brak akcji i akcji bonusowych w nast. turze.",
+  
+  // Biała i Miotana
+  burzaca: "Broń zadaje podwójne obrażenia obiektom.",
+  two: "Dwuręczna. Wymaga dwóch rąk do ataku.",
+  fin: "Finezyjna. Do Testu Ataku i obrażeń dodajesz Zręczność albo Siłę.",
+  karczujaca: "Zadaje podwójne obrażenia (cięte) roślinom i przedmiotom wykonanym z drewna.",
+  lgt: "Lekka. Pozwala na dodatkowy atak w drugiej ręce jako Akcja Bonusowa.",
+  ver: "Oburęczna (Versatile). Trzymając dwiema rękami zadajesz zwiększone obrażenia.",
+  porazajaca: "Trafiona istota musi zdać RO na Kondycję o ST 10, inaczej otrzymuje stan Powalenie.",
+  powalajaca: "Cele max Duże przy obrażeniach obuchowych muszą zdać RO na Siłę (ST 8+Sił+PB) albo są Powalone.",
+  przebijajaca: "Ignoruje odporność na obrażenia i Próg obrażeń.",
+  powracajaca: "Wraca do rzucającego na końcu jego tury, można bezpiecznie złapać jedną wolną ręką.",
+  thr: "Rzucana. Atak dystansowy korzystający z cechy ataku wręcz tej broni.",
+  spalinowa: "Wymaga paliwa i akcji Używanie by ją włączyć. 0.5 litra starcza na 30min.",
+  unieruchamiajaca: "Zamiast obrażeń narzuca (na Śr/Duży cel) RO na Zręczność. Porażka = Unieruchomienie (Escape DC ten sam).",
+  rch: "Zasięgowa. Pozwala zaatakować w walce wręcz istoty odległe o 3 metry.",
+  zasilana: "Wymaga prądu. Zwykła bateria pozwala na ~5 ataków.",
+};
+
+function onRenderItemSheetWeaponTooltips(app, html, data) {
+  // W V12 dla ApplicationV2 html to HTMLElement, ale może być jQuery array.
+  const el = html instanceof HTMLElement ? html : html[0];
+  if (!el) return;
+
+  const item = app.document ?? app.item;
+  if (item?.type !== "weapon") return;
+
+  // W V12 (ApplicationV2) używane są komponenty <dnd5e-checkbox> zamiast zwykłych <input>.
+  // Dla kompatybilności wstecznej (V1) zostawiamy też zwykłe inputy.
+  const propCheckboxes = el.querySelectorAll('dnd5e-checkbox[name^="system.properties."], input[type="checkbox"][name="system.properties"]');
+  
+  propCheckboxes.forEach(checkbox => {
+    let propName = checkbox.value;
+    if (checkbox.tagName.toLowerCase() === 'dnd5e-checkbox') {
+      // name="system.properties.cicha" -> wyciągamy ostatni człon
+      propName = checkbox.getAttribute('name').split('.').pop();
+    }
+    
+    const tooltip = WEAPON_PROPERTY_TOOLTIPS[propName];
+    if (tooltip) {
+      // Przeważnie dnd5e-checkbox znajduje się wewnątrz <label class="checkbox">...
+      const label = checkbox.closest('label');
+      if (label) {
+        label.setAttribute('data-tooltip', tooltip);
+        label.setAttribute('data-tooltip-direction', 'UP');
+      }
+    }
+  });
+}
+
+/* -------------------------------------------- */
 /*  Public registration                           */
 /* -------------------------------------------- */
 
 export function registerWeapons() {
-  // 1. Replace weapon types with Neuroshima categories.
-  CONFIG.DND5E.weaponTypes = NEURO_WEAPON_TYPES;
-  CONFIG.DND5E.weaponTypeMap = NEURO_WEAPON_TYPE_MAP;
-  CONFIG.DND5E.weaponProficienciesMap = {};
-  CONFIG.DND5E.weaponClassificationMap = {};
+  const patchWeaponTypes = () => {
+    // 1. Replace weapon types with Neuroshima categories.
+    // We must mutate the existing objects because DataModels cache their references.
+    for (const k of Object.keys(CONFIG.DND5E.weaponTypes)) delete CONFIG.DND5E.weaponTypes[k];
+    Object.assign(CONFIG.DND5E.weaponTypes, NEURO_WEAPON_TYPES);
 
-  // 1b. Remove the blank option from the weapon type select.
-  //     ItemTypeField defines type.value with blank:true (allows empty selection).
-  //     In Neuroshima every weapon must have a type — blank is meaningless.
-  //     We patch the schema field directly since it's the same object formField reads.
-  const typeValueField = CONFIG.Item.dataModels.weapon?.schema?.fields?.type?.fields?.value;
-  if (typeValueField) typeValueField.blank = false;
+    for (const k of Object.keys(CONFIG.DND5E.weaponTypeMap)) delete CONFIG.DND5E.weaponTypeMap[k];
+    Object.assign(CONFIG.DND5E.weaponTypeMap, NEURO_WEAPON_TYPE_MAP);
+
+    // 1a. Replace weapon proficiency categories with Neuroshima weapon types.
+    //     These appear in the character sheet's weapon proficiency picker.
+    for (const k of Object.keys(CONFIG.DND5E.weaponProficiencies)) delete CONFIG.DND5E.weaponProficiencies[k];
+    Object.assign(CONFIG.DND5E.weaponProficiencies, NEURO_WEAPON_TYPES);  // same labels
+
+    // 1b. Each weapon type maps to its own proficiency category (1-to-1).
+    for (const k of Object.keys(CONFIG.DND5E.weaponProficienciesMap)) delete CONFIG.DND5E.weaponProficienciesMap[k];
+    for (const k of Object.keys(NEURO_WEAPON_TYPES)) CONFIG.DND5E.weaponProficienciesMap[k] = k;
+
+    // 1c. Clear individual SRD weapon IDs — Neuroshima doesn't use compendium weapon subtypes.
+    for (const k of Object.keys(CONFIG.DND5E.weaponIds)) delete CONFIG.DND5E.weaponIds[k];
+
+    for (const k of Object.keys(CONFIG.DND5E.weaponClassificationMap)) delete CONFIG.DND5E.weaponClassificationMap[k];
+
+    // 1b. Remove the blank option from the weapon type select.
+    //     ItemTypeField defines type.value with blank:true (allows empty selection).
+    //     In Neuroshima every weapon must have a type — blank is meaningless.
+    //     We patch the schema field directly since it's the same object formField reads.
+    const typeValueField = CONFIG.Item?.dataModels?.weapon?.schema?.fields?.type?.fields?.value;
+    if (typeValueField) {
+      typeValueField.blank = false;
+    }
+  };
+
+  // Run on init
+  patchWeaponTypes();
+  // Run on later hooks just in case other modules (like dnd5e-pl translation) overwrite the lists later
+  Hooks.once("setup", patchWeaponTypes);
+  Hooks.once("i18nInit", patchWeaponTypes);
 
   // 2. Add Neuroshima properties to itemProperties.
   //    Do NOT delete existing dnd5e keys — DB items reference them.
@@ -234,6 +449,22 @@ export function registerWeapons() {
 
   // 7. Filter properties per weapon type before Handlebars renders the details tab.
   Hooks.on("dnd5e.prepareSheetContext", onPrepareSheetContext);
+  Hooks.on("renderItemSheet5e", onRenderItemSheetWeaponTooltips);
+
+  // 8. Auto-assign weapon icons on item creation.
+  //    Intercepts new weapon items that still have the dnd5e default icon and
+  //    replaces it with the canonical Neuroshima icon (by name, or type fallback).
+  Hooks.on("preCreateItem", (item, _data, _options, _userId) => {
+    if (item.type !== "weapon") return;
+    if (item.img && item.img !== DEFAULT_DND5E_WEAPON_ICON) return; // already has a custom icon
+
+    const named = WEAPON_ICON_MAP[item.name];
+    const byType = WEAPON_TYPE_DEFAULT_ICONS[item.system?.type?.value];
+    const file = named ?? byType;
+    if (file) {
+      item.updateSource({ img: `modules/${MODULE_ID}/icons/weapons/${file}` });
+    }
+  });
 
   console.log("Neuroshima 5e | Weapon config overrides applied");
 }

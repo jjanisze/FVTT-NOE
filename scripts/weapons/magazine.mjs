@@ -146,6 +146,10 @@ export function registerMagazines() {
   });
   Hooks.on("dnd5e.preUseActivity", onPreUseActivity);
   Hooks.on("dnd5e.postUseActivity", onPostUseActivity);
+  
+  // Quantum Magazines Restore Hook
+  Hooks.on("deleteCombat", _restoreQuantumMagazines);
+  Hooks.on("deleteCombatant", (combatant) => _restoreQuantumMagazinesForActor(combatant?.actor));
 
   Hooks.once("ready", () => {
     const mod = game.modules.get(MODULE_ID);
@@ -205,27 +209,39 @@ function onRenderItemSheet(app, html) {
   magRow.classList.add("form-group", "neuro-mag-row");
   magRow.innerHTML = `
     <label>${ui.label}</label>
-    <div class="form-fields">
-      <input type="number" name="flags.${MODULE_ID}.mag.current"
-             value="${mag.current}" min="0" max="${mag.max}"
-             data-dtype="Number" style="width:50px">
-      <span style="padding:0 4px">/</span>
-      <input type="number" name="flags.${MODULE_ID}.mag.max"
-             value="${mag.max}" min="0"
-             data-dtype="Number" style="width:50px" ${isPlayMode ? "disabled" : ""}>
-      <span style="padding:0 6px; color:#888">kaliber:</span>
-      ${buildCaliberSelect(rawAmmoType, isPlayMode, `flags.${MODULE_ID}.mag.ammoType`)}
+    <div class="form-fields" style="display:flex; flex-wrap:wrap; gap:4px; align-items:center;">
+      <div style="display:flex; align-items:center; gap:2px;">
+        <input type="number" name="flags.${MODULE_ID}.mag.current"
+               value="${mag.current}" min="0" max="${mag.max}"
+               data-dtype="Number" style="width:36px; text-align:center;">
+        <span>/</span>
+        <input type="number" name="flags.${MODULE_ID}.mag.max"
+               value="${mag.max}" min="0"
+               data-dtype="Number" style="width:36px; text-align:center;" ${isPlayMode ? "disabled" : ""}>
+      </div>
+      <span style="font-size:11px; color:#888;">kaliber:</span>
+      <div style="flex: 1 1 80px; min-width:80px;">
+        ${buildCaliberSelect(rawAmmoType, isPlayMode, `flags.${MODULE_ID}.mag.ammoType`)}
+      </div>
       <button type="button" class="neuro-reload-btn"
               title="${ui.buttonTitle}"
-              style="margin-left:6px">
+              style="flex:0 0 auto; width:auto; padding:0 6px; line-height:normal; height:24px;">
         ${ui.buttonLabel}
       </button>
     </div>
-    <p style="margin:4px 0 0;font-size:12px;opacity:0.75;">${ui.hint}</p>
-    ${_shouldShowChamberStatus(item) ? `<p style="margin:4px 0 0;font-size:12px;opacity:0.75;">${_getChamberStateHint(item, chamberState, mag)}</p>` : ""}
-    ${reloadState.required ? `<p style="margin:4px 0 0;font-size:12px;color:#8f3a2b;">${_getReloadStateHint(item, reloadState)}</p>` : ""}
-    ${_getCaliberNote(mag.ammoType)}
   `;
+
+  const notes = [
+    ui.hint,
+    _shouldShowChamberStatus(item) ? `<span style="color:#6b7280">${_getChamberStateHint(item, chamberState, mag)}</span>` : "",
+    reloadState.required ? `<span style="color:#ba3c24">${_getReloadStateHint(item, reloadState)}</span>` : "",
+    _getCaliberNote(mag.ammoType) ? `<i style="color:#6b7280">${_getCaliberNote(mag.ammoType)}</i>` : ""
+  ].filter(n => n?.trim()).join(" ");
+
+  if (notes) {
+    magRow.innerHTML += `<div style="grid-column: 1/-1; margin-top:2px; font-size:11px; line-height:1.2; opacity:0.9;">${notes}</div>`;
+  }
+
   detailsSection.after(magRow);
 }
 
@@ -287,6 +303,8 @@ async function _onClickReload(item) {
   }
 
   const magazineType = getMagazineType(item);
+  const inCombat = !!actor.inCombat;
+
   const reloadPlan = _getReloadPlan(item, mag, { magazineType });
   const needed = mag.max - mag.current;
   if (needed <= 0) {
@@ -294,65 +312,108 @@ async function _onClickReload(item) {
     return;
   }
 
-  // Find matching ammo in inventory
-  const ammoItem = _findAmmo(actor, mag.ammoType);
-  if (!ammoItem) {
-    ui.notifications.warn(
-      `Brak amunicji (${mag.ammoType || "dowolnej"}) w ekwipunku.`
+  // --- 1. Quantum Magazine Check for Removable Magazines in Combat ---
+  if (inCombat && magazineType === MAGAZINE_TYPES.REMOVABLE) {
+    const weapType = item.system.type?.value; 
+    
+    // Używamy ustandaryzowanego typu
+    const qMag = actor.items.find(i => 
+      i.type === "consumable" && 
+      i.system.type?.value === "magazine" && 
+      i.system.type?.subtype === weapType &&
+      (i.system.uses?.value > 0)
     );
+
+    if (!qMag) {
+      ui.notifications.warn(`Zabrakło ci przygotowanych magazynków zapasowych w ekwipunku dla tej broni! Przeładowanie luzem niemożliwe w walce.`);
+      return; 
+    }
+    // Odbierz jedno użycie magazynkowi kwantowemu
+    await qMag.update({ "system.uses.value": Math.max(0, qMag.system.uses.value - 1) });
+  }
+
+  // --- 2. Dual-Ammo Shotgun Logic (.12 Ga) ---
+  let ammoIdToLoad = mag.ammoType;
+  let ammoItem = null;
+  const is12Ga = mag.ammoType?.startsWith("12ga");
+  
+  if (is12Ga) {
+    const sItem = _findAmmo(actor, "12ga_s");
+    const bItem = _findAmmo(actor, "12ga_b");
+    if (sItem && bItem) {
+      const choice = await Dialog.wait({
+        title: "Wybór Amunicji (.12 Ga)",
+        content: "<p>Masz oba rodzaje amunicji do strzelby (Śrut i Brenekę). Jaką ładujesz?</p>",
+        buttons: {
+          s: { label: ".12 Ga (ś – śrut)", callback: () => sItem },
+          b: { label: ".12 Ga (b – breneka)", callback: () => bItem }
+        },
+        close: () => null
+      });
+      if (!choice) return;
+      ammoItem = choice;
+      ammoIdToLoad = choice.system.type?.subtype; 
+    } else {
+      ammoItem = sItem || bItem;
+      ammoIdToLoad = ammoItem?.system?.type?.subtype ?? mag.ammoType;
+    }
+  } else {
+    ammoItem = _findAmmo(actor, mag.ammoType);
+  }
+
+  if (!ammoItem) {
+    ui.notifications.warn(`Brak amunicji (${mag.ammoType || "dowolnej"}) w ekwipunku.`);
     return;
   }
 
+  // --- 3. Determine how much to load ---
   const available = ammoItem.system.quantity ?? 0;
-  const toLoad = Math.min(reloadPlan.roundsPerAction, needed, available);
+  
+  let toLoadAmount = Math.min(needed, available);
+  if (magazineType !== MAGAZINE_TYPES.REMOVABLE && reloadPlan.roundsPerAction && reloadPlan.roundsPerAction !== 99) {
+    toLoadAmount = Math.min(reloadPlan.roundsPerAction, needed, available);
+  }
 
-  if (toLoad <= 0) {
-    ui.notifications.warn(`${ammoItem.name}: wyczerpana.`);
+  if (toLoadAmount <= 0) {
+    ui.notifications.warn(`${ammoItem.name}: wyczerpana amunicja.`);
     return;
   }
 
-  // Check if in combat — reload costs an Action
-  const inCombat = !!actor.inCombat;
-  const actionCost = inCombat ? ` (zużywa ${reloadPlan.actionLabelAccusative})` : "";
-
-  const confirmed = await Dialog.confirm({
-    title: reloadPlan.dialogTitle,
-    content: `<p>${reloadPlan.confirmationText(item, mag, toLoad, actionCost)}</p>
-              <p style="color:#888;font-size:0.85em">Dostępne: ${available} szt. | Brakujące: ${needed}${inCombat ? ` | Koszt: ${reloadPlan.actionLabel}` : ""}</p>`,
-    defaultYes: false,
-  });
-  if (!confirmed) return;
+  // Zaktualizuj kaliber w broni, jeśli się zmienił (strzelba)
+  let newMagData = { current: mag.current + toLoadAmount };
+  if (ammoIdToLoad !== mag.ammoType) {
+    newMagData.ammoType = ammoIdToLoad;
+  }
 
   // Deduct ammo from inventory
-  const newQty = available - toLoad;
+  const newQty = available - toLoadAmount;
   if (newQty <= 0) {
     await ammoItem.delete();
   } else {
     await ammoItem.update({ "system.quantity": newQty });
   }
 
-  // Fill magazine
-  await setMag(item, { current: mag.current + toLoad });
+  // Update weapon's mag
+  await setMag(item, newMagData);
   await _clearReloadState(item);
 
-  // Sound: removable magazine = full swap sound; internal/cylinder = single-round load.
+  // Sound
   playWeaponSound(magazineType === MAGAZINE_TYPES.REMOVABLE ? WeaponSound.RELOAD_MAG : WeaponSound.RELOAD_SINGLE);
 
-  // If in combat, spend the actor's action
   if (inCombat) {
     await _spendCombatResource(actor, reloadPlan.actionType);
   }
 
-  // Chat message
+  // Chat message formatting
+  const justFull = (newMagData.current === mag.max) ? " do pełna" : "";
+  const justAll = (newQty === 0) ? " wszystkie swoje" : "";
+
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor }),
-    content: `<div style="border-left:3px solid #888;padding-left:8px">
-      <strong>${actor.name}</strong> ${reloadPlan.chatVerb} <em>${item.name}</em>.<br>
-      Załadowano: ${toLoad} ${_formatRoundWord(toLoad)} ${mag.ammoType}.<br>
-      ${uiForChat(magazineType)}: ${mag.current + toLoad}/${mag.max}.
-      ${_getReloadRuleChangeNotice(reloadPlan, { inCombat })}
-    </div>
-    ${inCombat ? `<ul class="card-footer pills unlist"><li class="pill transparent"><span class="label">${reloadPlan.actionLabel}</span></li></ul>` : ""}`,
+    content: `<div style="border-left:3px solid #888;padding-left:8px;font-size:1.1em;">
+      <strong>${actor.name}</strong> załadował${justFull}${justAll} ${toLoadAmount} x ${ammoItem.name} do <em>${item.name}</em>.<br>
+      <span style="font-size:0.85em;color:#888;">[Stan: ${newMagData.current}/${mag.max}]</span>
+    </div>`
   });
 }
 
@@ -427,9 +488,9 @@ function _getMagazineUi(magazineType, item = null) {
     const label   = isArrow ? "Kołczan (strzały)" : isBolt ? "Kołczan (bełty)" : "Ładunki";
     return {
       label,
-      buttonLabel: "+1 ładunek",
+      buttonLabel: "+1 ład",
       buttonTitle: "Uzupełnij ładunki z ekwipunku",
-      hint: "Broń miotana: odlicza ładunki przy każdym strzale/rzucie."
+      hint: "Z broni miotanej odliczasz ładunek na atak."
     };
   }
 
@@ -438,9 +499,7 @@ function _getMagazineUi(magazineType, item = null) {
       label: "Wmag.",
       buttonLabel: cycleOnly ? "⟳ Przeładuj" : "+1 nabój",
       buttonTitle: cycleOnly ? "Przeładuj broń po strzale" : "Załaduj 1 nabój do magazynka wewnętrznego",
-      hint: canQuickReload
-        ? "Wmag.: magazynek wewnętrzny. Doładuj 1 nabój jest activity; Szybkie przeładowanie pozwala zrobić to w Akcji bonusowej."
-        : "Wmag.: magazynek wewnętrzny. Doładuj 1 nabój jest osobną activity kosztującą Akcję."
+      hint: canQuickReload ? "Doładowanie 1 szt: Akcja bonusowa." : "Doładowanie 1 szt: 1 Akcja."
     };
   }
 
@@ -449,19 +508,15 @@ function _getMagazineUi(magazineType, item = null) {
       label: "Bębenek",
       buttonLabel: cycleOnly ? "⟳ Przeładuj" : "+1 nabój",
       buttonTitle: cycleOnly ? "Przeładuj broń po strzale" : "Załaduj 1 nabój do bębenka",
-      hint: canQuickReload
-        ? "Bęb.: bębenek rewolweru. Doładuj 1 nabój jest activity; Szybkie przeładowanie pozwala zrobić to w Akcji bonusowej."
-        : "Bęb.: bębenek rewolweru. Doładuj 1 nabój jest osobną activity kosztującą Akcję."
+      hint: canQuickReload ? "Doładowanie 1 szt: Akcja bonusowa." : "Doładowanie 1 szt: 1 Akcja."
     };
   }
 
   return {
     label: "Magazynek",
-    buttonLabel: cycleOnly ? "⟳ Przeładuj" : "↺ Zapasowy magazynek",
+    buttonLabel: cycleOnly ? "⟳ Przeładuj" : "↺ Zapasowy",
     buttonTitle: cycleOnly ? "Przeładuj broń po strzale" : "Wymień magazynek na zapasowy z ekwipunku",
-    hint: canQuickSwap
-      ? "Magazynek wymienny: Szybka wymiana pozwala wymienić cały magazynek w Akcji bonusowej."
-      : "Magazynek wymienny: jedna akcja wymienia cały magazynek."
+    hint: canQuickSwap ? "Wymiana: Akcja bonusowa." : "Wymiana magazynka: 1 Akcja."
   };
 }
 
@@ -484,8 +539,7 @@ function onPreUseActivity(activity) {
 function _getCaliberNote(caliberId) {
   if (!caliberId) return "";
   const caliber = AMMO_CALIBER_MAP[caliberId];
-  if (!caliber?.note) return "";
-  return `<p style="margin:4px 0 0;font-size:11px;color:#6b7280;font-style:italic;">${caliber.note}</p>`;
+  return caliber?.note || "";
 }
 
 async function onPostUseActivity(activity) {
@@ -531,11 +585,23 @@ function _findAmmo(actor, ammoType) {
       i => (i.system.type?.subtype ?? "").toLowerCase() === lower
         || i.name.toLowerCase().includes(lower)
     );
-    if (exact) return exact;
+    return exact || null;
   }
+  return null;
+}
 
-  // Fallback: first available ammo
-  return ammos[0] ?? null;
+function _restoreQuantumMagazines(combat) {
+  for(let combatant of combat.combatants) {
+    _restoreQuantumMagazinesForActor(combatant.actor);
+  }
+}
+
+function _restoreQuantumMagazinesForActor(actor) {
+  if (!actor) return;
+  // Restore any item that is a magazine 
+  actor.items.filter(i => i.type === "consumable" && i.system.type?.value === "magazine").forEach(i => {
+    i.update({"system.uses.value": i.system.uses.max || 1 });
+  });
 }
 
 async function syncAllMagazineUses() {
@@ -644,6 +710,7 @@ function registerReloadActivityType() {
     static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
       type: RELOAD_ACTIVITY_TYPE,
       title: "Przeładowanie",
+      img: "modules/neuroshima-2026-overrides/icons/activities/activity_reload.svg",
       hint: "Neuroshima: ręczne przeładowanie komory po strzale albo demonstracyjne przeładowanie z wyrzuceniem naboju."
     }, { inplace: false }));
 
@@ -675,6 +742,7 @@ function registerLoadOneActivityType() {
     static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
       type: LOAD_ONE_ACTIVITY_TYPE,
       title: "Doładuj 1 nabój",
+      img: "modules/neuroshima-2026-overrides/icons/activities/activity_load_one.svg",
       hint: "Neuroshima: doładowanie pojedynczego naboju do magazynka wewnętrznego albo bębenka."
     }, { inplace: false }));
 
@@ -850,7 +918,15 @@ function registerAttackReloadGuard() {
   BaseAttackActivity.prototype.rollAttack = async function neuroRollAttack(config = {}, dialog = {}, message = {}) {
     const liveItem = _getLiveItem(this.item);
     if (!_isTrackedRangedWeapon(liveItem) || _isCustomActivity(this)) {
-      return originalRollAttack.call(this, config, dialog, message);
+      const result = await originalRollAttack.call(this, config, dialog, message);
+      // Untracked firearms (e.g. jednorazowa) still get a shot sound
+      const isUntrackedFirearm = !_isTrackedRangedWeapon(liveItem) && !_isCustomActivity(this)
+        && liveItem?.system?.type?.value?.startsWith("palna");
+      if (isUntrackedFirearm) {
+        const cancelled = (result === false) || (result == null) || (Array.isArray(result) && result.length === 0);
+        if (!cancelled) playWeaponSound(getShotSoundKey(liveItem));
+      }
+      return result;
     }
 
     if (_requiresManualReloadBeforeUse(liveItem)) {
@@ -982,33 +1058,26 @@ async function _announceEmptyMagazine(item) {
 
 function _getChamberStateHint(item, chamberState = _getChamberState(item), mag = getMag(item)) {
   const current = Number(mag?.current ?? 0);
-  const max = Number(mag?.max ?? 0);
-  if (chamberState.loaded) {
-    return `Komora: nabój gotowy. Załadowane łącznie: ${current}/${max}.`;
-  }
+  if (chamberState.loaded) return "Komora: załadowana.";
 
   if (_getManualReloadMode(item) === "przeladowanie") {
-    return current > 0
-      ? `Komora: pusta. W broni zostało jeszcze ${current} ${_formatRoundWord(current)}.`
-      : "Komora: pusta. Magazynek wewnętrzny jest pusty.";
+    return current > 0 ? "Komora: pusta (wymaga przeładowania)." : "Komora: pusta (i pusty magazynek).";
   }
 
-  return current > 0
-    ? `Komora: pusta. Załadowane łącznie: ${current}/${max}.`
-    : "Komora: pusta. Broń jest całkowicie rozładowana.";
+  return current > 0 ? "Komora: pusta." : "Komora: pusta (rozładowana).";
 }
 
 function _getReloadStateHint(item, reloadState = _getReloadState(item)) {
   const mag = getMag(item);
   if (reloadState.mode === "przeladowanie") {
-    return _canCycleReloadWithoutAmmo(item, getMag(item), reloadState)
-      ? "Ta broń wymaga przeładowania po strzale, ale nie zużyje dodatkowej amunicji."
+    return _canCycleReloadWithoutAmmo(item, mag, reloadState)
+      ? "Przeładuj po strzale (bez użycia amunicji)."
       : (Number(mag?.current ?? 0) > 0
-        ? "Ta broń wymaga przeładowania po strzale, zanim znowu wystrzeli."
-        : "Ta broń wymaga przeładowania, ale magazynek wewnętrzny jest już pusty.");
+        ? "Przeładuj po strzale."
+        : "Przeładuj (ale brak amunicji).");
   }
 
-  return "Ta broń wymaga załadowania nowej sztuki amunicji po poprzednim strzale.";
+  return "Załaduj nową po strzale.";
 }
 
 function _shouldAnnounceQuickReload(item, mode = _getManualReloadMode(item), mag = getMag(item)) {
@@ -1073,10 +1142,14 @@ async function _performReloadAction(item, { chat = true, spendResource = true, s
 async function _performLoadOneAction(item, { chat = true, spendResource = true, source = "activity" } = {}) {
   const liveItem = _getLiveItem(item);
   const actor = liveItem?.actor;
-  const mag = getMag(liveItem);
-  if (!liveItem || !actor || !mag) return false;
+  if (!liveItem || !actor) return false;
 
   const magazineType = getMagazineType(liveItem);
+  const mag = getMag(liveItem);
+  if (!mag) {
+    ui.notifications.warn(`${liveItem.name}: pojemność magazynka nie jest ustawiona. Otwórz kartę broni i ustaw pojemność w sekcji „Magazynek".`);
+    return false;
+  }
   if (![MAGAZINE_TYPES.INTERNAL, MAGAZINE_TYPES.CYLINDER].includes(magazineType)) {
     ui.notifications.warn(`${liveItem.name}: ta broń nie jest doładowywana po jednym naboju.`);
     return false;
@@ -1118,7 +1191,7 @@ async function _performLoadOneAction(item, { chat = true, spendResource = true, 
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor }),
       content: `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actor.name}</strong> doładowuje <em>${liveItem.name}</em> o 1 nabój do ${magazineType === MAGAZINE_TYPES.CYLINDER ? "bębenka" : "magazynka wewnętrznego"}.<br>Stan broni: ${Number(nextMag?.current ?? 0)}/${Number(nextMag?.max ?? 0)}.${_getReloadRuleChangeNotice(reloadPlan, { inCombat: inCombatSpent })}</div>
-      ${inCombatSpent ? `<ul class="card-footer pills unlist"><li class="pill transparent"><span class="label">${reloadPlan.actionLabel}</span></li></ul>` : ""}`
+      <ul class="card-footer pills unlist"><li class="pill transparent"><span class="label">${reloadPlan.actionLabel}${inCombatSpent ? "" : " (poza walką)"}</span></li></ul>`
     });
   }
 
@@ -1128,7 +1201,7 @@ async function _performLoadOneAction(item, { chat = true, spendResource = true, 
 
 function _getReloadActionChatContent(item, { ejectedLiveRound, chamberLoaded, current, max, spentBonus = false } = {}) {
   const actorName = item.actor?.name ?? "Postać";
-  const pill = spentBonus ? `<ul class="card-footer pills unlist"><li class="pill transparent"><span class="label">Akcja bonusowa</span></li></ul>` : "";
+  const pill = `<ul class="card-footer pills unlist"><li class="pill transparent"><span class="label">Akcja bonusowa${spentBonus ? "" : " (poza walką)"}</span></li></ul>`;
 
   if (ejectedLiveRound && chamberLoaded) {
     return `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em>, wyrzucając niezbitą sztukę z komory. Kolejny nabój wchodzi na miejsce.<br>Stan broni: ${current}/${max}.</div>${pill}`;

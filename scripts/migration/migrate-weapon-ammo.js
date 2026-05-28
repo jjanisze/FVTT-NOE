@@ -86,7 +86,7 @@
   ];
 
   const neuroWeaponTypes = new Set([
-    "biala","miotana","palnaKrotka","palnaPosr","palnaDluga","palnaCiezka"
+    "biala","miotana","palnaKrotka","palnaPosr","palnaDluga","palnaCiezka","specjalna"
   ]);
 
   const skipPrefixes = [

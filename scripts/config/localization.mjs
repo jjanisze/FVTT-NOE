@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Neuroshima 5e — localization runtime injection (safety fallback).
  * 
  * Primary translations come from lang/pl.json, loaded natively by FVTT
@@ -22,7 +22,7 @@ export async function injectLocalization() {
   try {
     const resp = await fetch("modules/neuroshima-2026-overrides/lang/pl.json");
     const translations = await resp.json();
-    foundry.utils.mergeObject(game.i18n.translations, translations);
+    foundry.utils.mergeObject(game.i18n.translations, foundry.utils.expandObject(translations));
     console.log("Neuroshima 5e | Translations injected manually (fallback)");
   } catch (err) {
     console.error("Neuroshima 5e | Failed to load translations:", err);

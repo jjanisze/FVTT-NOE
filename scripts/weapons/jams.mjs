@@ -273,10 +273,23 @@ export async function cleanWeapon(item, { chat = true } = {}) {
     cleanedAt: Date.now()
   });
 
+  playWeaponSound(WeaponSound.CLEAN_WEAPON);
+
   if (chat) {
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: liveItem.actor }),
-      content: `<div><strong>${liveItem.actor.name}</strong> spędza godzinę na czyszczeniu broni <strong>${liveItem.name}</strong>. To aktywność odpoczynku, nie akcja bojowa.</div>`
+      content: `
+        <div class="dnd5e2 chat-card">
+          <div style="border-left:3px solid #888;padding-left:8px">
+            <strong>${liveItem.actor.name}</strong> przez godzinę czyści <strong>${liveItem.name}</strong>.
+          </div>
+          <ul class="card-footer pills unlist">
+            <li class="pill transparent"><span class="label">Wyposażenie</span></li>
+            <li class="pill transparent"><span class="label">1 H</span></li>
+            <li class="pill transparent"><span class="label">Odpoczynek</span></li>
+          </ul>
+        </div>
+      `
     });
   }
 
@@ -434,19 +447,19 @@ function _buildMaintenancePanelHtml(item) {
   ` : "";
 
   return `
-    <div style="margin:8px 0;padding:10px;border:1px solid #556270;background:rgba(45,55,72,0.08);border-radius:6px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
-        <strong>Konserwacja broni</strong>
+    <fieldset>
+      <legend>Konserwacja broni</legend>
+      <div style="margin-bottom: 8px;">
         <span style="font-size:11px;padding:2px 6px;border-radius:999px;border:1px solid #5d6d7e;background:rgba(93,109,126,0.15);">Aktywność odpoczynku</span>
       </div>
       ${statusRow}
       <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-        <button type="button" class="neuro-clean-weapon-btn">Wyczyść broń (1h)</button>
-        <span style="font-size:12px;opacity:0.8;">Postać spędza godzinę na czyszczeniu. To nie jest akcja 6-sekundowa.</span>
+        <button type="button" class="neuro-clean-weapon-btn" style="flex:0 0 auto; padding: 2px 8px; line-height: normal;">Wyczyść broń (1h)</button>
+        <span style="font-size:12px;opacity:0.8;flex:1 1 auto; line-height: 1.2;">Postać spędza godzinę na czyszczeniu. To nie jest akcja 6-sekundowa.</span>
       </div>
       ${pamperedControl}
       ${faultBlock}
-    </div>
+    </fieldset>
   `;
 }
 

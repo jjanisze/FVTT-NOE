@@ -1,0 +1,18 @@
+{
+    "version": "1.0",
+    "capabilities": ["download", "normalize", "trim", "convert"],
+    "sounds": [
+        {
+            "name": "clean_weapon",
+            "sourceUrl": "https://cdn.freesound.org/previews/406/406226_6068748-lq.ogg",
+            "outputFilePath": "../../sounds/firearms/clean_weapon.ogg",
+            "parameters": {
+                "lufs": -18,
+                "lra": 11,
+                "tp": -1.5,
+                "trimStart": 0,
+                "trimDuration": 3
+            }
+        }
+    ]
+}
