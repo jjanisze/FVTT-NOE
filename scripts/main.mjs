@@ -39,6 +39,9 @@ import { registerMagazineInventory } from "./actors/magazine-inventory.mjs";
 import { registerGrenadeInventory } from "./actors/grenade-inventory.mjs";
 import { registerSheetPositionStability } from "./actors/sheet-position-stability.mjs";
 import { registerDamageReductionUI } from "./weapons/damage-reduction.mjs";
+import { registerWeaponAddons } from "./weapons/addons.mjs";
+import { registerAddonInventoryUI } from "./actors/addons-inventory.mjs";
+import { registerDozownik } from "./weapons/dozownik.mjs";
 import { registerSettings } from "./config/settings.mjs";
 import { AMMO_CALIBERS, AMMO_CALIBER_MAP, GRENADE_TYPES, GRENADE_MAP } from "./config/ammo-data.mjs";
 import { registerZbrojowniaSync } from "./actors/zbrojownia-sync.mjs";
@@ -81,6 +84,9 @@ Hooks.once("init", () => {
   registerFireModes();
   registerThrownWeapons();
   registerAmmoSystem();
+  registerWeaponAddons();
+  registerAddonInventoryUI();
+  registerDozownik();
   registerZbrojowniaSync();
 
   // Phase 2: Damage application UI

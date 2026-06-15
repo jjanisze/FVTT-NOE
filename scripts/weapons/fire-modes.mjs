@@ -1,4 +1,6 @@
 import { getMag, spendRounds } from "./magazine.mjs";
+import { hasAddon } from "../config/addons-data.mjs";
+import { getSetup } from "./addons.mjs";
 import { isDamaged, isJammed, rollJamCheck } from "./jams.mjs";
 import { playWeaponSound, WeaponSound } from "./sounds.mjs";
 import { describeCoverDecision, promptCoverDecision } from "../combat/cover.mjs";
@@ -1271,18 +1273,34 @@ function _resolveActivitySaveDc(activity) {
   if (Number.isFinite(existing)) return existing;
 
   const formula = activity?.save?.dc?.formula;
+  let base = 0;
   if (formula) {
     try {
       const roll = Roll.create(String(formula), activity.getRollData({ deterministic: true }));
       const total = Number(roll.evaluateSync().total);
-      if (Number.isFinite(total)) return total;
+      if (Number.isFinite(total)) base = total;
     } catch (_error) {
       // Fall back to the baseline below.
     }
   }
 
-  const actor = activity?.actor;
-  return 8 + Number(actor?.system?.attributes?.prof ?? 0);
+  if (!base) {
+    const actor = activity?.actor;
+    base = 8 + Number(actor?.system?.attributes?.prof ?? 0);
+  }
+
+  // Addon bonuses: chwyt-przedni (+1) and trojnog (+2, when deployed) raise the DS save DC.
+  const fireMode = activity?.flags?.[MODULE_ID]?.fireMode;
+  if (fireMode === DS_FIRE_MODE) {
+    const item = activity?.item;
+    if (item) {
+      if (hasAddon(item, "chwyt-przedni")) base += 1;
+      const setup = getSetup(item);
+      if (hasAddon(item, "trojnog") && setup.trojnog) base += 2;
+    }
+  }
+
+  return base;
 }
 
 function _localizeSaveButtons(activity, buttons) {

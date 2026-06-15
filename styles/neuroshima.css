@@ -385,9 +385,72 @@ damage-application .neuro-reduction-buttons {
   display: grid;
   grid-template-columns: auto repeat(6, minmax(0, 1fr));
   gap: 2px;
+}
+
+/* ============================================= */
+/* Broń z zainstalowanymi ulepszeniami           */
+/* ============================================= */
+
+/* Rząd broni z addonami — subtelne złote tło */
+.item.neuro-has-addons > .item-row {
+  background: linear-gradient(90deg, rgba(120, 90, 20, 0.22) 0%, rgba(60, 45, 10, 0.12) 100%) !important;
+  border-left: 2px solid rgba(201, 162, 39, 0.55);
+}
+
+/* Ikona — złota obwódka + cień */
+.item.neuro-has-addons .item-name .item-image {
+  outline: 1.5px solid rgba(201, 162, 39, 0.7);
+  box-shadow: 0 0 5px rgba(201, 162, 39, 0.45);
+  border-radius: 3px;
+}
+
+/* Mały znaczek klucza w prawym górnym rogu ikony */
+.item.neuro-has-addons .item-name {
+  position: relative;
+}
+
+.item.neuro-has-addons .item-name::after {
+  content: "\f0ad"; /* fa-wrench */
+  font-family: "Font Awesome 6 Pro", "Font Awesome 6 Free";
+  font-weight: 900;
+  font-size: 8px;
+  position: absolute;
+  top: 2px;
+  left: 26px;
+  color: var(--dnd5e-color-gold, #c9a227);
+  background: rgba(10, 8, 5, 0.85);
+  border-radius: 50%;
+  width: 11px;
+  height: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 1;
+}
   margin-inline: 3px;
   margin-block-start: 2px;
   font-size: 9px;
+}
+
+/* ============================================= */
+/* Ulepszenia broni — plakietki w oknie chatu    */
+/* Dołączają do natywnej listy .card-footer.pills */
+/* ============================================= */
+
+/* Ikona klucza przed etykietą */
+.neuro-addon-pill .fa-wrench {
+  font-size: 0.75em;
+  opacity: 0.7;
+  margin-right: 2px;
+}
+
+/* Stępione ulepszenie — przekreślone, szare */
+.neuro-addon-pill.neuro-addon-pill--blunted {
+  opacity: 0.45;
+  text-decoration: line-through;
+  text-decoration-color: currentColor;
 }
 
 /* "R:" label — styled like the "×" prefix of multiplier row */

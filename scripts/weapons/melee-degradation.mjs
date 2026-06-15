@@ -1,4 +1,5 @@
 import { playWeaponSound, WeaponSound } from "./sounds.mjs";
+import { hasAddon } from "../config/addons-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const DEGRADATION_FLAG = "degradation";
@@ -49,6 +50,8 @@ function getNextSmallerDie(current) {
 
 export async function degradeWeapon(item, { chat = true } = {}) {
   if (!isMeleeWeapon(item)) return false;
+  // Utwardzenie: broń nie ulega uszkodzeniu podczas walki
+  if (hasAddon(item, "utwardzenie")) return false;
 
   const currentDamage = item.system.damage?.base;
   if (!currentDamage) return false;
@@ -83,14 +86,23 @@ export async function degradeWeapon(item, { chat = true } = {}) {
     });
   }
 
+  // Naostrzenie blunts: remove its +1/+1 bonus and the addon record entirely (no refund)
+  const hadNaostrzenie = hasAddon(item, "naostrzenie");
+  if (hadNaostrzenie) {
+    const { removeAddonEffects } = await import("./addons.mjs");
+    await removeAddonEffects(item, "naostrzenie");
+  }
+
   if (chat) {
-    const actorName = item.actor?.name ?? "Ktoś";
+    const naostrzenieNote = hadNaostrzenie
+      ? " Naostrzenie zostaje zniszczone." : "";
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: item.actor }),
-      content: `<div><strong>Pechowa jedynka!</strong> Broń <strong>${item.name}</strong> stępia się lub wyszczerbia! Jej kość obrażeń spada do k${nextToken === 1 ? '1 / 1 obl.' : nextToken} i wymaga naprawy.</div>`
-    });    
+      content: `<div><strong>Pechowa jedynka!</strong> Broń <strong>${item.name}</strong> stępia się lub wyszczerbia! Jej kość obrażeń spada do k${nextToken === 1 ? '1 / 1 obl.' : nextToken} i wymaga naprawy.${naostrzenieNote}</div>`
+    });
     // Play katana chipping / degradation sound
-    playWeaponSound(WeaponSound.MELEE_DEGRADE);  }
+    playWeaponSound(WeaponSound.MELEE_DEGRADE);
+  }
 
   return true;
 }

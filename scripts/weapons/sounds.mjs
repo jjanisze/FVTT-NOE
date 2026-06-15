@@ -169,7 +169,7 @@ export function registerWeaponSounds() {
     if (_isFirearmItem(item)) return;           // handled separately
     if (!rolls?.length) return;                 // cancelled / no roll
       
-      const attackType = subject?.attack?.type?.value ?? "";
+      const attackType = subject?.attack?.type?.value || item.system?.attackType || "";
       
       // Ranged shot
       if (attackType === "ranged") {
@@ -206,7 +206,8 @@ export function registerWeaponSounds() {
 
       if (_isFirearmItem(item)) return;  // other firearms handled in rollAttack
 
-      const attackType = subject?.attack?.type?.value ?? "";
+      // subject?.attack?.type?.value may be empty if DataModel getter hasn't run — fallback to item
+      const attackType = subject?.attack?.type?.value || item.system?.attackType || "";
       if (attackType === "melee") {
         const dmgTotal = rolls.reduce((acc, r) => acc + r.total, 0);
         const dmgType = rolls[0]?.options?.type ?? "bludgeoning"; // heurystyka

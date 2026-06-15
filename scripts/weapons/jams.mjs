@@ -6,6 +6,7 @@ const REPAIR_WEAPON_DC = 15;
 const GUNSMITH_TOOL_KEY = "rusznikarza";
 import { ABILITY_KEYS, buildAbilityRuleChangeNotice, getAbilityLabel, hasAbility } from "../actors/abilities.mjs";
 import { playWeaponSound, WeaponSound } from "./sounds.mjs";
+import { hasAddon } from "../config/addons-data.mjs";
 
 export function registerWeaponJams() {
   Hooks.on("dnd5e.postRollAttack", onPostRollAttack);
@@ -360,6 +361,8 @@ async function onPostRollAttack(rolls, { subject } = {}) {
   const liveItem = _getLiveItem(subject?.item);
   if (!_isFirearmItem(liveItem)) return;
   if (!rolls?.some(roll => roll?.isFumble)) return;
+  // Zestaw sprężyn: broń nigdy się nie zacina
+  if (hasAddon(liveItem, "zestaw-sprezyn")) return;
   const immunityAbilityKey = _getJamImmunityAbilityKey(liveItem);
   if (immunityAbilityKey) {
     await _announcePreventedFumbleJam(liveItem, immunityAbilityKey);
