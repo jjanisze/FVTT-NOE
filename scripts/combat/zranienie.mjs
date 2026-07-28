@@ -17,6 +17,7 @@
  */
 
 import { addExhaustion } from "../config/exhaustion.mjs";
+import { seqScrollText } from "../weapons/sequencer.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -185,6 +186,10 @@ export async function applyZranienie(actor, reason = "") {
     content: `<strong>${actor.name}</strong> otrzymuje Stopień Zranienia: <strong>${levelInfo.label}</strong> (poziom ${newLevel}/4). ${reason ? `(${reason})` : ""}<br>Kary: ${penalties || "brak"}.`,
     speaker: ChatMessage.getSpeaker({ actor })
   });
+
+  const scrollText = newLevel >= 4 ? "KRYTYCZNE ZRANIENIE!" : "ZRANIONY!";
+  const scrollColor = newLevel >= 4 ? "#8e44ad" : "#e74c3c";
+  seqScrollText(scrollText, actor, { color: scrollColor, fontSize: 30, duration: 2000 });
 
   // Auto-apply exhaustion at Krytyczny level
   if (levelInfo.exhaustion) {

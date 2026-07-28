@@ -323,7 +323,7 @@ function _onRenderActorSheetInjectMagazines(app, html) {
 
     // Ukryj natywne renderowanie (jeśli pojawia się w "Używki")
     const nativeLi = inventoryTab.querySelector(`li[data-item-id="${mag.id}"]`);
-    if (nativeLi?.parentElement) nativeLi.style.display = "none";
+    nativeLi?.remove();
 
     uiList.appendChild(li);
   }

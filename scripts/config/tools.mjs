@@ -38,7 +38,7 @@ export function registerTools() {
       label: "Narzędzia małego jubilera"
     },
     kartografa: {
-      ability: "wis",
+      ability: "int",
       label: "Narzędzia małego kartografa"
     },
     klusownika: {
@@ -100,9 +100,25 @@ export function registerTools() {
     tool: "Narzędzia"
   };
 
+  // dnd5e's Trait.keyLabel() resolves a tool's display name via its base-item `id`
+  // (CONFIG.DND5E.tools[key].id → compendium Item). Our tools are custom and have no
+  // base item, so we set an empty `id`: this prevents getBaseItemUUID() from crashing on
+  // `undefined.startsWith` and lets keyLabel() fall through to return our `label`.
+  for ( const tool of Object.values(CONFIG.DND5E.tools) ) {
+    if ( tool.id === undefined ) tool.id = "";
+  }
+
   CONFIG.DND5E.toolProficiencies = {
     1: "Biegłość w narzędziach"
   };
+
+  // keyLabel() reads the tool trait's `configKey` (= "toolProficiencies") as the label
+  // source for the fallthrough. Mirror each tool's label there so chat-card tool-check
+  // buttons and proficiency dialogs show "Narzędzia małego X" instead of the raw key.
+  // NOTE: must run AFTER the toolProficiencies reassignment above.
+  for ( const [key, cfg] of Object.entries(CONFIG.DND5E.tools) ) {
+    CONFIG.DND5E.toolProficiencies[key] = cfg.label;
+  }
 
   console.log("Neuroshima 5e | Tools overridden (22 Neuroshima tool sets)");
 }

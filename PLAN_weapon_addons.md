@@ -3,6 +3,11 @@
 > Plik projektowy — implementuj w `scripts/weapons/addons.mjs` i `scripts/actors/addons-inventory.mjs`.  
 > Źródło zasad: `Tabele/Bronie/Ulepszenia.md`
 
+> **STATUS: ZAIMPLEMENTOWANE I ZWERYFIKOWANE LIVE** (FVTT 14.361 / dnd5e 5.3, v0.4.0 — 2026-06-18).  
+> Wszystkie 5 klas ulepszeń (`direct` / `property` / `conditional` / `activity` / toggle setup) działają
+> install/roll/remove odwracalnie. Naostrzenie zgodne z RAW (niszczone przy uszkodzeniu broni — patrz §9).
+> Ten plik pozostaje jako dokumentacja architektury; kroki w §11 są wykonane.
+
 ---
 
 ## 0. Filozofia
@@ -343,7 +348,22 @@ Przełącznik: button w sekcji ulepszeń arkusza broni.
 
 `naostrzenie` dodaje `attackBonus: 1, damageBonus: 1` przy instalacji.
 
-Kiedy broń biała ulega uszkodzeniu (`melee-degradation.mjs`): sprawdź czy Naostrzenie jest zainstalowane → usuń jego bonus bez zwrotu przedmiotu (`removeAddonEffects(weapon, "naostrzenie")` bez `createEmbeddedDocuments`). Ustaw `flags.addons[naostrzenie].blunted = true` — bonus stracony, ale ulepszenie dalej jest zainstalowane (żeby można było je odinstalować/powtórzyć po naprawie broni).
+RAW: *„+1 do Testów Ataku i obrażeń, **do czasu uszkodzenia broni**."* — bonus trwa
+tylko do momentu, gdy broń ulegnie uszkodzeniu.
+
+Kiedy broń biała ulega uszkodzeniu (`melee-degradation.mjs`, pechowa 1 w teście ataku):
+- kość obrażeń broni spada (k12→k10→…→1) jak dotychczas,
+- jeśli Naostrzenie jest zainstalowane, zostaje **trwale zniszczone** —
+  `removeAddon(weapon, "naostrzenie", { refund: false })`. Usuwamy efekt (+1/+1)
+  **oraz** sam wpis ulepszenia, **bez zwrotu** przedmiotu do ekwipunku (ostrze zostało
+  fizycznie zniszczone razem z ostrzeniem).
+- Naprawa broni (`repairWeapon`) przywraca **tylko kość obrażeń**. Naostrzenie nie wraca —
+  gracz musi kupić i zainstalować nowe.
+
+> Uwaga: ze względu na powyższe nie ma stanu „stępione/blunted" — Naostrzenie jest albo
+> w pełni aktywne, albo go nie ma. (Wcześniejszy pomysł z `blunted` został wycofany jako
+> niezgodny z RAW.)
+
 
 ---
 
@@ -376,4 +396,4 @@ registerAddonInventoryUI();
 6. **Krok 6**: Warunkowe bonusy (`conditional` tryb, roll hook)
 7. **Krok 7**: Integracje jams + degradation
 8. **Krok 8**: Activities (bagnet, granatnik, śrutówka)
-9. **Krok 9**: Edge cases (Kolba składana toggle, Naostrzenie blunting, Konwersja komory)
+9. **Krok 9**: Edge cases (Kolba składana toggle, Naostrzenie — zniszczenie przy uszkodzeniu broni, Konwersja komory)

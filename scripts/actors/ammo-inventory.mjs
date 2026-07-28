@@ -142,11 +142,11 @@ function _onRenderActorSheetInjectAmmoButton(app, html) {
 
      uiList.appendChild(li);
 
-     // Ukryj go na liście natywnej (żeby nie było podwójnego wyświetlania w "Używki")
+     // Usuń go z listy natywnej (żeby nie było podwójnego wyświetlania w "Używki").
+     // remove() zamiast display:none — natywny wiersz i tak jest odbudowywany przy
+     // każdym renderze, a usunięcie odchudza DOM arkusza.
      const nativeLi = inventoryTab.querySelector(`li[data-item-id="${am.id}"]`);
-     if (nativeLi && nativeLi.parentElement) {
-        nativeLi.style.display = "none";
-     }
+     nativeLi?.remove();
   }
 
   // Stwórz panel Ammo wzorowany na oryginalnym dnd5e

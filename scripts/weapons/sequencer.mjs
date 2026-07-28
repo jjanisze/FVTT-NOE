@@ -1,0 +1,236 @@
+/**
+ * Neuroshima 5e — Sequencer integration layer.
+ *
+ * Soft dependency on the Sequencer module (https://foundryvtt.com/packages/sequencer).
+ * All functions are no-ops / fall back to legacy behavior when Sequencer is absent.
+ *
+ * Public API:
+ *   seqPlayAudio(src, vol, opts)          — play audio via Sequencer; returns false if unavailable
+ *   seqStartLoop(src, vol, origin, opts)  — start a persisted, indefinitely-looping sound
+ *   seqStopLoop(origin)                   — end a loop started with seqStartLoop, for all clients
+ *   seqScrollText(text, source, opts)     — floating combat text above a token
+ *
+ * Docs: C:\Git\FoundryVTT-Sequencer\docs\api\sound.md
+ *       C:\Git\FoundryVTT-Sequencer\docs\api\scrolling-text.md
+ *       C:\Git\FoundryVTT-Sequencer\typings\types.d.ts
+ */
+
+/* -------------------------------------------- */
+/*  Internals                                     */
+/* -------------------------------------------- */
+
+function _getSequencer() {
+  return game.modules.get("sequencer")?.active ? window.Sequence : null;
+}
+
+/**
+ * Resolve an Actor, TokenDocument, or Token placeable to a canvas Token placeable.
+ * Returns null when no token can be found on the current scene.
+ * @param {Actor|TokenDocument|Token|null} source
+ * @returns {Token|null}
+ */
+function _resolveToken(source) {
+  if (!source) return null;
+  // Token placeable (has a TokenDocument as .document)
+  if (source.document?.documentName === "Token") return source;
+  // TokenDocument → return its canvas placeable object
+  if (source.documentName === "Token") return source.object ?? null;
+  // Actor → first active token on the current canvas scene
+  if (source.documentName === "Actor") return source.getActiveTokens()[0] ?? null;
+  return null;
+}
+
+/* -------------------------------------------- */
+/*  Radius table (feet) per WeaponSound key       */
+/* -------------------------------------------- */
+
+/** Default hearing radius (in scene grid units, typically feet) per sound type. */
+const SOUND_RADIUS = {
+  shot_firearm:        50,
+  shot_silenced:       20,
+  shot_ranged:         30,
+  burst_short:         60,
+  burst_long:          70,
+  burst_crushing:      90,
+  suppressive:         70,
+  jam:                 10,
+  empty_click:          8,
+  reload_mag:           8,
+  reload_single:        8,
+  reload_other:         8,
+  unjam:                8,
+  weapon_break:        10,
+  clean_weapon:         6,
+  shot_rocket:         90,
+  shot_grenade:        60,
+  explosion_large:    120,
+  explosion_small:     80,
+  exp_flashbang:       60,
+  exp_gas:             50,
+  exp_molotov:         60,
+  exp_pipebomb:        70,
+  exp_blast:           80,
+  exp_blast_short:     80,
+  exp_detonator:       15,
+  mine_arm:            10,
+  melee_miss:          15,
+  melee_hit_blunt:     15,
+  melee_hit_slashing:  15,
+  melee_hit_heavy:     20,
+  melee_hit_massive:   25,
+  melee_degrade:       10,
+  engine_start:        30,
+  engine_stop:         25,
+  engine_idle_loop:    20,
+  // Impact is emitted at the TARGET, not the shooter. Kept fairly tight: a
+  // round striking a body is a much quieter event than the report that sent it.
+  impact:              25,
+};
+
+/* -------------------------------------------- */
+/*  Public API — Audio                            */
+/* -------------------------------------------- */
+
+/**
+ * Play an audio file via Sequencer.
+ *
+ * Phase 1 (current): .globalSound() — all players on the scene hear it at the same volume.
+ * Phase 2 (future):  .atLocation(token) — positional audio with distance falloff and panning.
+ *
+ * @param {string}  src             Full file path (relative to FVTT data root, e.g. modules/…/shot.ogg).
+ * @param {number}  vol             Linear volume 0–1 (exponential scaling already applied by caller).
+ * @param {object}  [opts]
+ * @param {Actor|TokenDocument|Token|null} [opts.token]  Origin for positional audio (Phase 2).
+ * @param {string}  [opts.soundKey] WeaponSound enum key, used to look up radius in SOUND_RADIUS.
+ * @returns {boolean} true = Sequencer handled playback; false = caller must use legacy fallback.
+ */
+export function seqPlayAudio(src, vol, { token, soundKey } = {}) {
+  const Seq = _getSequencer();
+  if (!Seq) return false;
+
+  const resolvedToken = _resolveToken(token);
+
+  let section = new Seq().sound().file(src).volume(vol);
+
+  if (resolvedToken) {
+    // Phase 2: positional audio from the firing token
+    const radius = SOUND_RADIUS[soundKey] ?? 50;
+    section = section
+      .atLocation(resolvedToken)
+      .radius(radius)
+      .distanceEasing(true)
+      .panSound()
+      .constrainedByWalls(false)
+      .muffledEffect({ type: "lowpass", intensity: 5 })
+      .alwaysForGMs();
+  } else {
+    // Phase 1: global broadcast to all connected clients on the scene
+    section = section.globalSound();
+  }
+
+  section.play();
+  return true;
+}
+
+/**
+ * Start a persisted, indefinitely-looping audio track via Sequencer (e.g. an
+ * idling engine). The loop keeps playing — including for clients who join or
+ * reload later — until stopped with {@link seqStopLoop} using the same origin.
+ *
+ * No-op (returns false) when Sequencer is inactive; the caller is expected to
+ * treat that as "no ambient loop available" rather than falling back to a
+ * legacy `<audio loop>`, since only Sequencer's Sound Manager can end it
+ * cleanly and in sync for every connected client.
+ *
+ * @param {string}  src     Full file path (relative to FVTT data root).
+ * @param {number}  vol     Linear volume 0–1 (exponential scaling already applied by caller).
+ * @param {string}  origin  UUID (e.g. the item's) used to find and end this loop later.
+ * @param {object}  [opts]
+ * @param {Actor|TokenDocument|Token|null} [opts.token]  Origin for positional audio.
+ * @param {string}  [opts.soundKey] WeaponSound enum key, used to look up radius in SOUND_RADIUS.
+ * @returns {boolean} true = loop started; false = Sequencer unavailable.
+ */
+export function seqStartLoop(src, vol, origin, { token, soundKey } = {}) {
+  const Seq = _getSequencer();
+  if (!Seq || !origin) return false;
+
+  const resolvedToken = _resolveToken(token);
+
+  let section = new Seq().sound().file(src).volume(vol)
+    .origin(origin)
+    .persist(true)
+    .loopOptions({ loops: 0 })
+    .fadeInAudio(250)
+    .fadeOutAudio(400)
+    .extraEndDuration(400);
+
+  if (resolvedToken) {
+    const radius = SOUND_RADIUS[soundKey] ?? 30;
+    section = section
+      .atLocation(resolvedToken)
+      .radius(radius)
+      .distanceEasing(true)
+      .panSound()
+      .constrainedByWalls(false)
+      .muffledEffect({ type: "lowpass", intensity: 5 })
+      .alwaysForGMs();
+  } else {
+    section = section.globalSound();
+  }
+
+  section.play();
+  return true;
+}
+
+/**
+ * Stop a loop previously started with {@link seqStartLoop}, for every
+ * connected client. No-op when Sequencer is inactive or nothing is playing
+ * for that origin.
+ *
+ * @param {string} origin  Same UUID passed to seqStartLoop.
+ * @returns {boolean} true = Sequencer handled it; false = Sequencer unavailable.
+ */
+export function seqStopLoop(origin) {
+  if (!game.modules.get("sequencer")?.active || !origin) return false;
+  window.Sequencer.SoundManager.endSounds({ origin });
+  return true;
+}
+
+/* -------------------------------------------- */
+/*  Public API — Scrolling Combat Text           */
+/* -------------------------------------------- */
+
+/**
+ * Display floating scrolling text above a token on the canvas.
+ * No-op when Sequencer is not active or no token can be resolved.
+ *
+ * API reference: C:\Git\FoundryVTT-Sequencer\docs\api\scrolling-text.md
+ *
+ * @param {string}  text
+ * @param {Actor|TokenDocument|Token|null} source  Token or actor to float text above.
+ * @param {object}  [opts]
+ * @param {string}  [opts.color="#ffffff"]    PIXI fill color (hex string).
+ * @param {number}  [opts.fontSize=28]
+ * @param {number}  [opts.duration=1500]      Total visible time in ms.
+ */
+export function seqScrollText(text, source, { color = "#ffffff", fontSize = 28, duration = 1500 } = {}) {
+  const Seq = _getSequencer();
+  if (!Seq) return;
+
+  const token = _resolveToken(source);
+  if (!token) return;
+
+  new Seq()
+    .scrollingText()
+      .atLocation(token)
+      .text(text, {
+        fill: color,
+        fontSize,
+        fontFamily: "Arial Black, Arial, sans-serif",
+        strokeThickness: 4,
+        stroke: "#000000",
+      })
+      .duration(duration)
+      .direction("TOP")
+    .play();
+}

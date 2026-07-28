@@ -39,6 +39,33 @@ const OZ_SHAPES = Object.freeze([
   { key: "square", label: "Strefa 3 m x 3 m", size: "3", width: "3" },
   { key: "line", label: "Linia 6 m x 1,5 m", size: "6", width: "1.5" }
 ]);
+const BASE_ATTACK_LABEL = "Ogień pojedynczy";
+const BASE_ATTACK_IMG = "modules/neuroshima-2026-overrides/icons/activities/activity_single_fire.svg";
+// Domyślny szkielet aktywności "attack" — używany do (a) odtworzenia trybu P, gdy
+// broń odzyskuje właściwość tryb_p, oraz (b) jako wzorzec dla builderów KS/DS/MS/OZ,
+// gdy broń w ogóle nie ma trybu P (np. Minigun ma tylko MS — patrz tryb_p gating niżej).
+const DEFAULT_ATTACK_ACTIVITY_TEMPLATE = Object.freeze({
+  type: "attack",
+  name: BASE_ATTACK_LABEL,
+  img: BASE_ATTACK_IMG,
+  activation: { type: "action", override: false },
+  consumption: { scaling: { allowed: false }, spellSlot: true, targets: [] },
+  description: {},
+  duration: { units: "inst", concentration: false, override: false },
+  effects: [],
+  flags: {},
+  range: { units: "self", override: false },
+  target: {
+    template: { contiguous: false, stationary: false, units: "m" },
+    affects: { choice: false },
+    override: false,
+    prompt: true
+  },
+  uses: { spent: 0, recovery: [] },
+  visibility: { level: {}, requireAttunement: false, requireIdentification: false, requireMagic: false },
+  attack: { critical: {}, flat: false, type: {} },
+  damage: { critical: {}, includeBase: true, parts: [] }
+});
 const syncingItems = new Set();
 let suppressiveHooksRegistered = false;
 // Cache selekcji serii — przechowuje wybór gracza między use() a rollDamage().
@@ -259,9 +286,6 @@ function registerLongBurstActivityType() {
         [`system.activities.${this.id}.flags.${MODULE_ID}.burstMultiplier`]: selection.multiplier,
       });
 
-      if (!(await spendRounds(liveItem, selection.bullets))) return;
-      await _markBurstModeUsed(liveItem, DS_FIRE_MODE, selection.bullets);
-
       if (!this.item.isEmbedded || this.item.pack) return;
       if (!this.item.isOwner) {
         ui.notifications.error("DND5E.DocumentUseWarn", { localize: true });
@@ -329,6 +353,9 @@ function registerLongBurstActivityType() {
       activity._finalizeMessageConfig(usageConfig, messageConfig, results);
       results.message = await activity._createUsageMessage(messageConfig);
       await activity._finalizeUsage(usageConfig, results);
+      if (!results.templates.length) return results;
+      if (!(await spendRounds(liveItem, selection.bullets))) return results;
+      await _markBurstModeUsed(liveItem, DS_FIRE_MODE, selection.bullets);
       await rollJamCheck(liveItem, { label: _getLongBurstLabel(liveItem, selection), chat: true });
       playWeaponSound(WeaponSound.BURST_LONG);
       await _announceMobileHmgNestUse(liveItem, selection, results);
@@ -424,12 +451,8 @@ function registerSuppressiveFireActivityType() {
 
       const selection = await _promptSuppressiveFireSelection(liveItem);
       if (!selection) return;
-      if (!(await spendRounds(liveItem, OZ_BULLET_COST))) return;
-      await _markSuppressiveFireUsed(liveItem);
-
       const jamResult = await rollJamCheck(liveItem, { label: _getSuppressiveFireLabel(liveItem, selection), chat: true });
       if (jamResult?.jammed) return;
-      playWeaponSound(WeaponSound.SUPPRESSIVE);
 
       if (!this.item.isEmbedded || this.item.pack) return;
       if (!this.item.isOwner) {
@@ -489,6 +512,11 @@ function registerSuppressiveFireActivityType() {
         dc: _getSuppressiveFireDc(liveItem),
         selection
       }));
+
+      if (!results.templates.length) return results;
+      if (!(await spendRounds(liveItem, OZ_BULLET_COST))) return results;
+      await _markSuppressiveFireUsed(liveItem);
+      playWeaponSound(WeaponSound.SUPPRESSIVE);
 
       if (Hooks.call("dnd5e.postUseActivity", activity, usageConfig, results) === false) return results;
       return results;
@@ -619,9 +647,6 @@ function registerCrushingBurstActivityType() {
         [`system.activities.${this.id}.flags.${MODULE_ID}.burstMultiplier`]: selection.multiplier,
       });
 
-      if (!(await spendRounds(liveItem, selection.bullets))) return;
-      await _markBurstModeUsed(liveItem, MS_FIRE_MODE, selection.bullets);
-
       if (!this.item.isEmbedded || this.item.pack) return;
       if (!this.item.isOwner) {
         ui.notifications.error("DND5E.DocumentUseWarn", { localize: true });
@@ -689,6 +714,9 @@ function registerCrushingBurstActivityType() {
       activity._finalizeMessageConfig(usageConfig, messageConfig, results);
       results.message = await activity._createUsageMessage(messageConfig);
       await activity._finalizeUsage(usageConfig, results);
+      if (!results.templates.length) return results;
+      if (!(await spendRounds(liveItem, selection.bullets))) return results;
+      await _markBurstModeUsed(liveItem, MS_FIRE_MODE, selection.bullets);
       await rollJamCheck(liveItem, { label: _getCrushingBurstLabel(liveItem, selection), chat: true });
       playWeaponSound(WeaponSound.BURST_CRUSHING);
 
@@ -767,7 +795,7 @@ async function syncWeaponFireModes(item) {
 
   syncingItems.add(item.uuid);
   try {
-    await syncBaseAttackActivityName(item);
+    await syncBaseAttackActivity(item);
     await syncShortBurstActivity(item);
     await syncLongBurstActivity(item);
     await syncCrushingBurstActivity(item);
@@ -777,20 +805,39 @@ async function syncWeaponFireModes(item) {
   }
 }
 
-async function syncBaseAttackActivityName(item) {
-  const LABEL = "Ogień pojedynczy";
-  const IMG = "modules/neuroshima-2026-overrides/icons/activities/activity_single_fire.svg";
-  for (const activity of item.system.activities ?? []) {
-    if (activity.type !== "attack") continue;
-    if (_getActivityModuleFlag(activity, "managedActivity")) continue;
-    const needsName = activity.name !== LABEL;
-    const needsImg = activity.img !== IMG;
-    if (!needsName && !needsImg) continue;
-    const update = {};
-    if (needsName) update.name = LABEL;
-    if (needsImg) update.img = IMG;
-    await item.updateActivity(activity.id, update);
+// Ogień pojedynczy (P) — jak KS/DS/MS/OZ, jest bramkowany właściwością (tryb_p).
+// Bronie takie jak Minigun (RAW: tylko "MS", brak "P" w tabeli broni) nie powinny mieć
+// trybu pojedynczego wcale — usuwamy bazową aktywność "attack", jeśli jej brakuje,
+// i odtwarzamy ją, jeśli tryb_p zostanie z powrotem dodany do broni.
+async function syncBaseAttackActivity(item) {
+  const hasMode = _hasProperty(item, "tryb_p");
+  const existing = _findUnmanagedAttackActivity(item);
+
+  if (!hasMode) {
+    if (existing) await item.deleteActivity(existing.id);
+    return;
   }
+
+  if (!existing) {
+    await item.createActivity("attack", foundry.utils.deepClone(DEFAULT_ATTACK_ACTIVITY_TEMPLATE), { renderSheet: false });
+    return;
+  }
+
+  const needsName = existing.name !== BASE_ATTACK_LABEL;
+  const needsImg = existing.img !== BASE_ATTACK_IMG;
+  if (!needsName && !needsImg) return;
+  const update = {};
+  if (needsName) update.name = BASE_ATTACK_LABEL;
+  if (needsImg) update.img = BASE_ATTACK_IMG;
+  await item.updateActivity(existing.id, update);
+}
+
+function _findUnmanagedAttackActivity(item) {
+  return Array.from(item.system.activities ?? []).find(activity => {
+    if (activity.type !== "attack") return false;
+    if (_getActivityModuleFlag(activity, "managedActivity")) return false;
+    return true;
+  }) ?? null;
 }
 
 async function syncShortBurstActivity(item) {
@@ -1110,11 +1157,14 @@ function _buildNoModifierDamageRoll(item, activityId, damage, rollConfig, rollDa
 }
 
 function _findReferenceAttackActivity(item) {
-  return Array.from(item.system.activities ?? []).find(activity => {
-    if (activity.type !== "attack") return false;
-    if (_getActivityModuleFlag(activity, "managedActivity")) return false;
-    return true;
-  }) ?? Array.from(item.system.activities ?? []).find(activity => activity.type === "attack") ?? null;
+  const existing = _findUnmanagedAttackActivity(item)
+    ?? Array.from(item.system.activities ?? []).find(activity => activity.type === "attack")
+    ?? null;
+  if (existing) return existing;
+  // Broń bez trybu P (np. Minigun) nie ma bazowej aktywności "attack" do sklonowania —
+  // podstaw syntetyczny szkielet, żeby KS/DS/MS/OZ wciąż miały sensowny wzorzec (zasięg,
+  // aktywacja, itd.) do zbudowania własnej aktywności.
+  return { toObject: () => foundry.utils.deepClone(DEFAULT_ATTACK_ACTIVITY_TEMPLATE) };
 }
 
 function _findManagedActivity(item, fireMode) {

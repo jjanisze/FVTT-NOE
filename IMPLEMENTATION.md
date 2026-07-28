@@ -22,6 +22,7 @@
 | `scripts/combat/knockout.mjs` | Nokautowanie + Ostatnia Akcja |
 | `scripts/combat/cover.mjs` | Dynamiczna osłona per atak + redukcja dla strzału przez |
 | `scripts/combat/obalajaca.mjs` | Obsługa właściwości broni "Obalająca" i wymuszania RO na Siłę |
+| `scripts/combat/weapon-save-properties.mjs` | Cechy "RO przy trafieniu": Porażająca/Powalająca/Unieruchamiająca — przycisk + save + stan, respektuje odporności |
 | `scripts/weapons/jams.mjs` | Zacięcie i uszkodzenie broni palnej |
 | `scripts/config/ammo-data.mjs` | 20 definicji kalibru (edytowalnych) — formuły, typy obrażeń, efekty |
 | `scripts/weapons/ammo.mjs` | System amunicji — sync obrażeń, auto-apply, przycisk Obrażenia |
@@ -32,7 +33,14 @@
 | `scripts/weapons/magazine.mjs` | Magazynki Kwantowe + Strzelba Dual-Ammo (.12 Ga) + synchronizacja `system.uses` |
 | `scripts/weapons/fire-modes.mjs` | KS/DS/MS/OZ + synchronizacja aktywności |
 | `scripts/weapons/sounds.mjs` | Dźwięki broni i materiałów wybuchowych (strzały, eksplozje, zapalniki, miny) |
+| `scripts/weapons/sequencer.mjs` | Integracja Sequencera — wrapper audio, scrolling text, VFX helpers (soft dependency) |
 | `scripts/weapons/damage-reduction.mjs` | Rozszerzenie panelu Apply Damage o redukcję materiałową |
+| `scripts/weapons/addons.mjs` | System Ulepszeń Broni — install/remove, delta, bonusy warunkowe, aktywności (bagnet/granatnik/śrutówka), toggle setup |
+| `scripts/weapons/melee-degradation.mjs` | Degradacja kości obrażeń broni białej (k12→…→1) + naprawa; Naostrzenie niszczone przy uszkodzeniu (RAW) |
+| `scripts/weapons/dozownik.mjs` | Ulepszenie Dozownik — zasób dawek (np. trucizna na ostrzu) |
+| `scripts/weapons/thrown.mjs` | Obsługa broni miotanej (rzut, zasięg) |
+| `scripts/actors/addons-inventory.mjs` | UI Ulepszeń — context menu na loot, panel na arkuszu broni, chat tagi, przyciski toggle setup |
+| `scripts/config/addons-data.mjs` | Statyczny słownik ADDON_DEFS (definicje wszystkich ulepszeń) |
 | `scripts/config/weapons.mjs` | Override kategorii broni D&D 5e na kategorie Neuroshimy |
 | `scripts/migration/migrate-weapon-ammo.js` | Migracja istniejących broni → kalibry |
 | `scripts/migration/migrate-weapon-types.js` | Migracja istniejących broni → poprawne kategorie Neuroshimy |
@@ -140,6 +148,7 @@
 
 ### 1.8 Fire Modes (Tryby Ognia)
 - [x] Ogień pojedynczy (P) — bazowa aktywność `attack` broni palnej automatycznie przemianowana na „Ogień pojedynczy" przy sync
+- [x] **Bugfix (2026-07-04)**: P był zawsze obecny niezależnie od `tryb_p` (broń bez tej właściwości, np. Minigun — RAW ma tylko MS — i tak dostawała pojedynczy strzał). `syncBaseAttackActivity` teraz bramkuje bazową aktywność `attack` przez `_hasProperty(item,"tryb_p")`, symetrycznie jak KS/DS/MS/OZ (tworzy/usuwa). `_findReferenceAttackActivity` ma fallback do `DEFAULT_ATTACK_ACTIVITY_TEMPLATE`, żeby buildery KS/DS/MS/OZ nadal miały wzorzec (zasięg/aktywacja) nawet gdy broń nie ma trybu P. Zweryfikowano na całym świecie (188 broni palnych, 0 anomalii po fixie); przy okazji naprawiono niezwiązaną korupcję danych na „H&K UMP (uszkodzone)" (klucz mapy `system.activities` różnił się od wewnętrznego `_id` aktywności, przez co natywny `item.deleteActivity()` cicho nic nie robił).
 - [x] Krótka seria (KS): 3 naboje, Utrudnienie, 3× obrażenia, bez mod.
 - [x] PROTOTYP: `Grad ołowiu` zdejmuje limit `1 KS/rundę`; limit ataków w turze pozostaje po stronie gracza / MG, nie karty
 - [x] PROTOTYP: `Szturmowiec` zmienia domyślny rzut `KS` z utrudnienia na normalny; MG może ręcznie nadpisać wybór w dialogu
@@ -153,7 +162,29 @@
 - [x] **Bugfix**: DS/MS `rollDamage` z chat carda używał zawsze domyślnego mnożnika — root cause: `syncLongBurstActivity` resetuje `damage.parts`/flagi do `DS_THRESHOLDS[0]` przy każdym `updateItem`; fix: `_burstSelectionCache` (module Map) + `sync*BurstActivity` teraz zachowuje istniejącą selekcję
 - [x] Ikony aktywności: `icons/activities/` — 9 SVG (process_grid_13.py); `metadata.img` ustawione dla wszystkich neuro* typów; `syncBaseAttackActivityName` ustawia też `img` dla „Ogień pojedynczy"
 
-### 1.9 Melee Weapon Degradation
+### 1.19 Sequencer Integration
+Szczegółowy plan: `PLAN_sequencer.md`
+
+**Phase 0 — Setup (soft dependency)**
+- [ ] `module.json` — Sequencer jako `relationships.optional` (min 4.0.0)
+- [ ] `scripts/weapons/sequencer.mjs` — `_getSequencer()` helper + `_legacyPlay()` fallback
+- [ ] `seqSound(soundKey, { volume, token })` — jedyny punkt wyjścia dla audio
+- [ ] `seqScrollText(text, token, opts)` — no-op bez Sequencera
+
+**Phase 1 — Audio Migration (globalne dźwięki, identyczne zachowanie)**
+- [ ] `seqSound()` zastępuje `playWeaponSound()` + `_playLocal()` + socket emit
+- [ ] Usunięcie `game.socket.on(SOCKET_EVENT)` listenera z `registerWeaponSounds()`
+- [ ] Usunięcie `game.socket.emit()` z `playWeaponSound()`
+- [ ] Walidacja: wieloosobowo — wszyscy słyszą strzał bez custom socketu
+
+**Phase 3 — Scrolling Combat Text (zero nowych assetów)**
+- [ ] `ZACIĘCIE!` (czerwony) nad tokenem strzelca — `jams.mjs`
+- [ ] `PUSTE!` (pomarańczowy) + `ZAŁADOWANO` (żółty) — `magazine.mjs`
+- [ ] `ZRANIONY!` / `KRYTYCZNE ZRANIENIE!` (czerwony/fioletowy) — `zranienie.mjs`
+- [ ] `WYCZERPANIE` (niebieski) — `exhaustion.mjs` `addExhaustion` path
+- [ ] `FUKS!` (zielony) — `rerolls.mjs` po użyciu Fuksa
+
+### 1.20 Melee Weapon Degradation
 - [x] Nat 1 → kość obrażeń spada (k12→k10→k8→k6→k4)
 - [x] Tracking current vs base damage die per weapon
 - [x] Naprawa przez kowala lub narzędzia
@@ -208,12 +239,30 @@
 - [x] Podpięcie hooków `setup` oraz `i18nInit` dla uniknięcia cache'owania UI Dropdownu
 - [x] Skrypt `migrate-weapon-types.js` do aktualizacji przedmiotów na the Aktorach i w świecie
 
+### 1.18 Ulepszenia Broni (Weapon Addons)
+- [x] Architektura: ulepszenie = loot item z flagą `ulepszenie: ID`; instalacja zużywa przedmiot, deinstalacja zwraca go do ekwipunku (`PLAN_weapon_addons.md`)
+- [x] `addons-data.mjs` — statyczny słownik `ADDON_DEFS` (kategorie, ceny, wymagania, tryby `direct`/`property`/`conditional`/`activity`, sloty SM)
+- [x] `installAddon` / `removeAddon` — system delta (reversible): `_computeDelta`/`_applyDelta`/`_reverseDelta`; rollback przy błędzie (`try/catch`)
+- [x] Kaskadowe usuwanie zależnych ulepszeń (`removeAddon(..., {cascade})`, `_getDependentAddons`); blokada gdy `cascade:false`
+- [x] Tryb `direct` — statyczne bonusy: +1 TA wstrzykiwany w `dnd5e.postBuildAttackRollConfig` (dnd5e 5.3 nie ma `system.attack.bonus`), +1 obrażeń na `system.damage.base.bonus`
+- [x] Tryb `property` — nadanie/odebranie właściwości broni (`cicha`, `porazajaca`, `dluga`…) przez `system.properties`
+- [x] Tryb `conditional` — bonusy zależne od strefy zasięgu / braku celownika / toggle, liczone w hooku roll-time
+- [x] Tryb `activity` — ulepszenia tworzące własną aktywność (bagnet, granatnik, śrutówka) przez `item.createActivity`; oznaczone `flags.managedActivity`+`addonActivity`; `damage.includeBase:false`, `range.override:true`
+- [x] Szyna montażowa (SM) — sloty (max 3), walidacja kompatybilności, `countSMSlots`
+- [x] Toggle setup (Kolba składana, laser, dwójnóg) — `flags.setup`, przyciski na arkuszu + checkbox w dialogu ataku
+- [x] UI: context menu „Zainstaluj na broni" na loot, panel ulepszeń na arkuszu broni, piny w chat cardzie
+- [x] Integracja z jams (`zestaw-sprezyn`), degradacją (`utwardzenie` = odporność na uszkodzenie), trybami ognia (`chwyt-przedni`+1, `trojnog`+2, `ruchome-gniazdo`)
+- [x] Dozownik (`dozownik.mjs`) — zasób dawek, klucz `clearDose`/`initDose`
+- [x] **Naostrzenie (RAW)**: +1 TA / +1 obrażeń „do czasu uszkodzenia broni" — przy degradacji broni Naostrzenie jest **trwale niszczone** (`removeAddon(..., {refund:false})`), nie wraca po naprawie; gracz musi kupić nowe. Usunięto błędny system „blunted/stępione"
+- [x] Walidacja live (FVTT 14.361 / dnd5e 5.3): wszystkie 5 klas ulepszeń install/roll/remove odwracalnie; testy awaryjne (głęboka kaskada, podwójne usunięcie, duplikat) nie rzucają wyjątków
+
 ---
 
 ## Phase 2: Full Equipment Layer
-- [ ] Weapon properties (cicha, ppanc, Wmag, etc.)
+- [ ] **Sequencer: Spatial Audio** — pozycjonowanie dźwięku z tokena, zanikanie z odległością, stereo pan, muffling przez ściany (`PLAN_sequencer.md` Phase 2)
+- [~] Weapon properties (cicha, ppanc, Wmag, etc.) — zdefiniowane + filtrowane per typ + tooltipy; egzekwowanie mechaniczne częściowe. Porażająca/Powalająca/Unieruchamiająca egzekwowane (`weapon-save-properties.mjs`, live-verified). Reszta: patrz `PLAN_weapon_properties.md`
 - [x] Właściwość "Obalająca" (skrypt wymuszający rzut obronny na celach, sprawdzenie rozmiaru celów)
-- [ ] Weapon attachments/upgrades
+- [x] Weapon attachments/upgrades — patrz §1.18 Ulepszenia Broni (`addons.mjs`, live-verified)
 - [ ] Armor handling (lekki/średni/ciężki + powered armor)
 - [ ] Armor durability (opcjonalnie)
 - [ ] Carry thresholds (SIŁ×5 / SIŁ×10 kg)
@@ -243,6 +292,7 @@
 - [ ] Drones
 
 ## Phase 5: Content & Polish
+- [ ] **Sequencer: VFX** — muzzle flash, bullet tracer, eksplozje na templatech, iskry trafienia (`PLAN_sequencer.md` Phase 4, wymaga assetów webm)
 - [ ] Compendia (weapons, ammo, armor, tools, origins, classes, etc.)
 - [ ] Enemy sheets + bestiary imports
 - [ ] Color profiles (Stal, Rdza, Rtęć, Chrom)
@@ -252,6 +302,24 @@
 ---
 
 ## Changelog
+
+### v0.4.1 — Cechy „RO przy trafieniu": Porażająca/Powalająca/Unieruchamiająca (2026-06-18)
+- **weapon-save-properties.mjs** (nowy): generyczny system trzech cech broni wymuszających Rzut Obronny i stan przy trafieniu, uogólnienie wzorca `obalajaca.mjs`. Jeden słownik `SAVE_PROPERTIES` + jeden hook wstrzykujący przycisk (`renderChatMessageHTML`) + jeden handler kliknięcia (`renderChatLog`).
+  - **Porażająca** → RO Kondycja (`con`) ST 10 albo Powalenie (`prone`); każdy rozmiar.
+  - **Powalająca** → RO Siła (`str`) ST `8+SIŁ+PB` napastnika albo Powalenie; cel ≤ Duży (poza zakresem dialog potwierdzenia MG).
+  - **Unieruchamiająca** → RO Zręczność (`dex`) ST `8+SIŁ+PB` albo Unieruchomienie (`restrained`); cel Średni/Duży.
+- **Odporności na stany**: `_isImmuneToCondition` czyta `system.traits.ci.value`; cel odporny nie wykonuje RO i otrzymuje komunikat o odporności (zgodnie z dnd5e `prepareResistImmune`, które i tak usuwa stan odporny).
+- **ST**: `target` (nie `targetValue`) — zweryfikowany klucz dnd5e 5.3 `rollSavingThrow`. Czyta właściwość z broni i z amunicji.
+- **Walidacja live** (Foundry 14.361 / dnd5e 5.3): wszystkie 3 cechy — ścieżka zdanego i oblanego RO (np. con 9<10→prone, str 2<9→prone, dex 5<9→restrained), poprawne ST i cecha. Odporność: stworzono testowego NPC (ci = prone+restrained) — RO pominięty, raport odporności, brak stanu. Testowy aktor/token i spam czatu posprzątane.
+
+### v0.4.0 — System Ulepszeń Broni + Naostrzenie RAW (2026-06-18)
+- **addons.mjs / addons-inventory.mjs / addons-data.mjs** (nowe): pełny system Ulepszeń Broni. Ulepszenie = loot item z flagą `ulepszenie:ID`; instalacja zużywa przedmiot, deinstalacja zwraca. Cztery tryby: `direct` (statyczne bonusy), `property` (właściwości broni), `conditional` (bonusy zależne od kontekstu rzutu), `activity` (bagnet/granatnik/śrutówka jako osobna aktywność).
+- **System delta**: każda zmiana zapisana jako odwracalny delta (`_computeDelta`/`_applyDelta`/`_reverseDelta`); rollback przy błędzie instalacji; kaskadowe usuwanie zależnych ulepszeń.
+- **Attack-bonus fix**: dnd5e 5.3 nie ma pola `system.attack.bonus` na broni — statyczne +TA wstrzykiwane w hooku `dnd5e.postBuildAttackRollConfig` do `config.parts` (zamiast zapisu na broni). Bonusy warunkowe liczone tym samym hookiem.
+- **Szyna montażowa (SM)**: sloty (max 3), walidacja kompatybilności; toggle setup (Kolba składana, laser, dwójnóg) przez `flags.setup` + checkbox w dialogu ataku.
+- **Naostrzenie wg RAW**: bonus „+1 TA i obrażeń, do czasu uszkodzenia broni" — przy degradacji broni (`degradeWeapon`) Naostrzenie jest **trwale niszczone** przez `removeAddon(item,"naostrzenie",{refund:false})`: cofnięty efekt, usunięty wpis, bez zwrotu przedmiotu. `repairWeapon` przywraca tylko kość obrażeń, NIE Naostrzenie. Usunięto wcześniejszy, niezgodny z RAW mechanizm „blunted/stępione" (funkcje `bluntAddon`/`unbluntAddon`/`removeAddonEffects`, klasa CSS `--blunted`, martwe referencje).
+- **Walidacja live**: install → +1 dmg / +1 TA; degrade → kość spada, Naostrzenie znika, brak zwrotu lootu; repair → kość wraca, Naostrzenie pozostaje usunięte. Brak błędów w konsoli.
+- **PLAN_weapon_properties.md** (nowy): inwentaryzacja egzekwowania właściwości broni (zrobione / do zrobienia / poza zakresem).
 
 ### v0.1.0 — Phase 1 Foundation (2026-04-26)
 - **CONFIG overrides**: 18 skilli, 22 narzędzia, 11 typów obrażeń, polskie cechy

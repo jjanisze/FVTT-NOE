@@ -385,6 +385,9 @@ damage-application .neuro-reduction-buttons {
   display: grid;
   grid-template-columns: auto repeat(6, minmax(0, 1fr));
   gap: 2px;
+  margin-inline: 3px;
+  margin-block-start: 2px;
+  font-size: 9px;
 }
 
 /* ============================================= */
@@ -429,9 +432,20 @@ damage-application .neuro-reduction-buttons {
   pointer-events: none;
   z-index: 1;
 }
-  margin-inline: 3px;
-  margin-block-start: 2px;
-  font-size: 9px;
+
+/* ============================================= */
+/* Prototype Abilities Panel (Details tab)       */
+/* ============================================= */
+
+/* The details tab uses a 2-column CSS grid (.col-2 > .left, .right). Prepending
+   our panel as a plain sibling turns it into a 3rd implicit grid item, which
+   knocks .left/.right out of their intended columns/rows — so toggling the
+   <details> inside the panel never visibly resizes the "Rzuty obronne" (saves)
+   box below it. Spanning both columns keeps it as its own full-width row above
+   .left/.right, restoring normal document flow so expand/collapse pushes the
+   rest of the tab down/up correctly. */
+.dnd5e2.character .tab[data-tab="details"] .neuro-abilities-prototype-panel {
+  grid-column: 1 / -1;
 }
 
 /* ============================================= */
@@ -444,13 +458,6 @@ damage-application .neuro-reduction-buttons {
   font-size: 0.75em;
   opacity: 0.7;
   margin-right: 2px;
-}
-
-/* Stępione ulepszenie — przekreślone, szare */
-.neuro-addon-pill.neuro-addon-pill--blunted {
-  opacity: 0.45;
-  text-decoration: line-through;
-  text-decoration-color: currentColor;
 }
 
 /* "R:" label — styled like the "×" prefix of multiplier row */
@@ -510,4 +517,37 @@ damage-application .neuro-reduction-badge {
   padding-inline: 2px;
   align-self: center;
   cursor: help;
+}
+
+/* ============================================= */
+/* Ikony zestawów narzędzi ("narzędzia małego X")*/
+/* Białe sylwetki SVG (fill: var(--icon-fill,#fff))*/
+/* — jako <img> (karty czatu, nagłówki) bywają    */
+/* niewidoczne na jasnym tle i drobne w ekwipunku.*/
+/* Zwiększamy kontrast, rozmiar i przycinamy       */
+/* nadmiar pustej przestrzeni.                     */
+/* ============================================= */
+
+/* Ekwipunek / lista aktywności — <dnd5e-icon> ma `display:contents` (brak własnego
+   boksu), więc transform/rozmiar hosta nie działają; sterujemy KONTRASTEM przez
+   --icon-fill (jaśniejszy odcień niż domyślne przygaszone złoto). Rozmiar/whitespace
+   tych ikon reguluje się najlepiej przy regeneracji SVG (ciaśniejszy kadr). */
+dnd5e-icon.item-image[src*="/neuroshima-2026-overrides/icons/tools/"] {
+  --icon-fill: #e7d7a6;
+}
+
+/* Ikona zestawu w NASZYCH kartach czatu (jasne tło karty dnd5e2):
+   biała sylwetka <img> → pełna czerń + powiększenie. */
+.neuro-kit-icon {
+  filter: brightness(0);
+  transform: scale(1.25);
+  transform-origin: center;
+}
+
+/* Każde inne <img> ikony narzędzi (podglądy, nagłówek karty przedmiotu):
+   ciemna obwódka utrzymuje czytelność na jasnym I ciemnym tle. */
+img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
+  filter:
+    drop-shadow(0 0 1px rgba(0, 0, 0, .9))
+    drop-shadow(0 0 1px rgba(0, 0, 0, .9));
 }

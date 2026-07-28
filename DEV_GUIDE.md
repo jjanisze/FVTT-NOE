@@ -40,6 +40,8 @@ neuroshima-2026-overrides/
 │   └── main.js              # Entry point (esmodule)
 ├── styles/
 │   └── neuroshima.css        # Stylesheet
+├── dev/
+│   └── validate-css.mjs     # Structural CSS validator (patrz 2.5) — uruchamiaj po KAŻDEJ ręcznej edycji neuroshima.css
 ├── neuroshima_5e_modifications.md  # Plan nadpisań
 └── DEV_GUIDE.md              # Ten plik
 ```
@@ -87,6 +89,27 @@ Compiled bundle jest trudny do czytania. Referencje:
 - **Official**: `https://foundryvtt.com/api/` (TypeDoc, v14)
 - **Community wiki**: `https://foundryvtt.wiki/en/development/api`
 - **dnd5e wiki**: `https://github.com/foundryvtt/dnd5e/wiki` (jeśli istnieje)
+
+### 2.5 CSS Structural Validator (`dev/validate-css.mjs`)
+
+**UŻYWAJ TEGO PO KAŻDEJ RĘCZNEJ EDYCJI `styles/neuroshima.css`.**
+
+Zero-dependency skrypt Node, który wykrywa klasę błędów CSS łamiących parser przeglądarki
+*po cichu* — bez żadnego błędu w konsoli, po prostu wszystkie reguły za miejscem błędu znikają
+z `document.styleSheets`. Typowy scenariusz: edycja wstawia nową regułę w środku istniejącej,
+zostawiając osierocone deklaracje (`property: value;`) bez selektora i/lub nadmiarowy `}`.
+
+```bash
+node dev/validate-css.mjs        # sprawdza styles/*.css (domyślnie)
+node dev/validate-css.mjs styles/neuroshima.css
+npm run validate:css             # alias w package.json
+```
+
+- Exit code `0` = OK, `1` = NOK (drukuje `plik:linia:kolumna` + fragment dla każdego błędu).
+- Wykrywa: deklaracje poza blokiem reguły, osierocone `}`, niezamknięte bloki, puste selektory.
+- NIE jest pełnym walidatorem CSS (nie sprawdza nazw/wartości właściwości ani poprawności selektorów) —
+  tylko integralność strukturalną (nawiasy klamrowe / średniki na poziomie pliku).
+- Brak automatycznego hooka (CI/pre-commit) na 2026-07-02 — uruchamiaj ręcznie po edycji.
 
 ---
 
@@ -292,8 +315,11 @@ Source map (`dnd5e-compiled.mjs.map`) pozwala na breakpointy w oryginalnym źró
 1. **Czytanie dnd5e**: grepuj `dnd5e.mjs` po wzorcach (`grep_search` z `includePattern` na ścieżkę systemu) lub użyj subagenta Explore
 2. **Czytanie danych kampanii**: użyj MCP tools (`mcp_foundry-vtt_foundry_*`) gdy FVTT jest offline
 3. **Edycja modułu**: bezpośrednio przez `replace_string_in_file` / `create_file` w `MODULE_DIR`
-4. **Tworzenie compendiów**: JSON files w `packs/_source/`, potem `fvtt package pack`
-5. **Testowanie**: informuj użytkownika żeby odświeżył FVTT (`F5`)
+4. **Edycja `styles/neuroshima.css`**: po KAŻDEJ zmianie uruchom `node dev/validate-css.mjs` (patrz 2.5) —
+   błędnie sklejone reguły CSS nie rzucają żadnego błędu w przeglądarce, tylko po cichu tracą wszystko
+   co jest za nimi w pliku
+5. **Tworzenie compendiów**: JSON files w `packs/_source/`, potem `fvtt package pack`
+6. **Testowanie**: informuj użytkownika żeby odświeżył FVTT (`F5`)
 
 ---
 

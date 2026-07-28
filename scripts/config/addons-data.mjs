@@ -5,11 +5,14 @@
  * Imported by addons.mjs (logic) and addons-inventory.mjs (UI).
  *
  * applyMode values (array):
- *   "direct"     — modifies system.attack.bonus / system.damage.base.bonus / system.range directly on install
+ *   "direct"     — modifies system.damage.base.bonus / system.range directly on install.
+ *                  NOTE: attackBonus is NOT written to the weapon (dnd5e 5.3 has no
+ *                  system.attack.bonus field); it is injected at roll-time via the
+ *                  dnd5e.postBuildAttackRollConfig hook in addons.mjs.
  *   "property"   — modifies system.properties Set
- *   "conditional"— bonus injected at roll-time via dnd5e.preRollAttackV2
+ *   "conditional"— bonus injected at roll-time via dnd5e.postBuildAttackRollConfig
  *   "flag-only"  — flag set on weapon; other modules read it (jams, degradation, fire-modes)
- *   "activity"   — creates an embedded Activity on the weapon
+ *   "activity"   — creates an Activity on the weapon (via Item5e#createActivity)
  *   "range-x2"   — doubles both range values (special case for Wyważenie)
  */
 
@@ -218,13 +221,14 @@ export const ADDON_DEFS = {
     id: "uchwyt-bagnetu",
     label: "Uchwyt bagnetu",
     category: "dystansowa",
+    // RAW: wymaga BPD i BPP; montowany bezpośrednio, nie zajmuje slotu SM.
     price: 10,
     weight: 0.05,
     requiresProperties: [],
     requiresWeaponTypes: ["palnaPosr", "palnaDluga"],
     requiresAddons: [],
     exclusiveWith: [],
-    usesSMSlot: true,
+    usesSMSlot: false,
     applyMode: ["flag-only"],
     grantProperties: [],
     removeProperties: [],
@@ -340,13 +344,20 @@ export const ADDON_DEFS = {
     requiresAddons: [],
     exclusiveWith: [],
     usesSMSlot: true,
-    applyMode: ["direct", "flag-only"],
+    applyMode: ["conditional"],
     grantProperties: [],
     removeProperties: [],
-    attackBonus: 1,
+    attackBonus: 0,
     damageBonus: 0,
     rangeNormalBonus: 0,
     rangeLongBonus: 0,
+    // Toggle: laser on → +1 TA, but reveals the shooter's position (RAW).
+    revealsPositionWhenActive: true,
+    conditionalBonus: {
+      type: "toggle",
+      setupKey: "laserActive",
+      setupBonus: 1,
+    },
   },
 
   dwojnog: {
@@ -368,7 +379,7 @@ export const ADDON_DEFS = {
     rangeNormalBonus: 0,
     rangeLongBonus: 0,
     conditionalBonus: {
-      type: "setup",
+      type: "toggle",
       setupKey: "dwojnog",
       setupBonus: 1,
     },

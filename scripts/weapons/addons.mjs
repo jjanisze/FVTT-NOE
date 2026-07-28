@@ -2,7 +2,8 @@
  * Neuroshima 5e — Weapon addons core logic.
  *
  * Implements installAddon / removeAddon, SM slot guard,
- * Kolba składana toggle, and the preRollAttackV2 hook for conditional bonuses.
+ * Kolba składana toggle, and the dnd5e.postBuildAttackRollConfig hook that
+ * injects both static (Naostrzenie) and conditional (sights, laser) attack bonuses.
  *
  * Does NOT handle UI — that lives in actors/addons-inventory.mjs.
  */
@@ -22,7 +23,19 @@ const SETUP_FLAG  = "setup";
  * ============================================================ */
 
 export function registerWeaponAddons() {
-  Hooks.on("dnd5e.preRollAttackV2", _onPreRollAttackV2);
+  // Conditional attack bonuses are injected AFTER dnd5e assembles the roll parts.
+  // (dnd5e.preRollAttackV2 is too early — AttackActivity._buildAttackConfig clobbers
+  //  config.parts/config.data afterwards, so anything set there is lost.)
+  Hooks.on("dnd5e.postBuildAttackRollConfig", _onPostBuildAttackRollConfig);
+
+  // Inject toggle fields (laser on/off, bipod deployed) into the attack roll dialog.
+  Hooks.on("renderAttackRollConfigurationDialog", _onRenderAttackDialog);
+
+  // Clear captured per-roll toggle state once the attack roll is complete.
+  Hooks.on("dnd5e.postRollAttack", (rolls, { subject } = {}) => {
+    if (subject?.uuid) _rollToggleState.delete(subject.uuid);
+  });
+
   Hooks.on("renderChatMessageHTML", _onRenderAddonsChatMessage);
 
   const mod = game.modules.get(MODULE_ID);
@@ -31,7 +44,6 @@ export function registerWeaponAddons() {
     mod.api.addons = {
       installAddon,
       removeAddon,
-      removeAddonEffects,
       hasAddon,
       getAddon,
       getAddons,
@@ -170,8 +182,16 @@ export async function installAddon(weapon, addonLootItem) {
   // Compute what we will change (the delta)
   const delta = _computeDelta(liveWeapon, def);
 
-  // Apply changes to the weapon
-  await _applyDelta(liveWeapon, def, delta);
+  // Apply changes to the weapon. If anything throws, roll back so we never
+  // leave the weapon in a half-modified state or consume the loot item.
+  try {
+    await _applyDelta(liveWeapon, def, delta);
+  } catch (err) {
+    console.error(`Neuroshima 5e | installAddon(${addonId}) failed during _applyDelta`, err);
+    try { await _reverseDelta(_getLiveItem(liveWeapon), def, delta); } catch (_) { /* best effort */ }
+    ui.notifications.error(`Nie udało się zainstalować: ${def.label}. Zmiany cofnięto.`);
+    return false;
+  }
 
   // Record the addon in flags
   const existing = getAddons(liveWeapon);
@@ -208,13 +228,48 @@ export async function installAddon(weapon, addonLootItem) {
  * ============================================================ */
 
 /**
- * Remove an installed addon from a weapon and return its loot item to inventory.
+ * Find addons currently installed that DEPEND on `addonId` and would be
+ * orphaned if it were removed. Two dependency sources:
+ *  1. explicit `requiresAddons` (e.g. bagnet → uchwyt-bagnetu)
+ *  2. SM-slot addons depend on whatever grants the `sm` property (szyna)
  *
  * @param {Item5e} weapon
  * @param {string} addonId
+ * @returns {string[]} dependent addon ids (installed)
+ */
+function _getDependentAddons(weapon, addonId) {
+  const def = ADDON_DEFS[addonId];
+  if (!def) return [];
+  const installedIds = getAddons(weapon).map(a => a.id);
+  const grantsSm = (def.grantProperties ?? []).includes("sm");
+
+  return installedIds.filter(id => {
+    if (id === addonId) return false;
+    const d = ADDON_DEFS[id];
+    if (!d) return false;
+    if ((d.requiresAddons ?? []).includes(addonId)) return true;
+    if (grantsSm && d.usesSMSlot) return true;
+    return false;
+  });
+}
+
+/**
+ * Remove an installed addon from a weapon and return its loot item to inventory.
+ * If other installed addons depend on this one (SM-mounted addons depend on the
+ * rail; bagnet depends on its mount), they are cascade-removed first so the
+ * weapon never ends up in an inconsistent (orphaned) state.
+ *
+ * @param {Item5e} weapon
+ * @param {string} addonId
+ * @param {object} [opts]
+ * @param {boolean} [opts.cascade=true]  Auto-remove dependents (returns them to inventory too).
+ * @param {boolean} [opts.refund=true]   Return the loot item to inventory. Set false when the
+ *                                        addon is destroyed/consumed (e.g. Naostrzenie lost on
+ *                                        weapon damage — RAW: "do czasu uszkodzenia broni").
  * @returns {Promise<boolean>}
  */
-export async function removeAddon(weapon, addonId) {
+export async function removeAddon(weapon, addonId, opts = {}) {
+  const { cascade = true, refund = true } = opts;
   const liveWeapon = _getLiveItem(weapon);
   if (!liveWeapon) return false;
 
@@ -227,63 +282,46 @@ export async function removeAddon(weapon, addonId) {
   const def = ADDON_DEFS[addonId];
   if (!def) return false;
 
-  // Reverse the delta
-  await _reverseDelta(liveWeapon, def, installed.delta);
+  // Cascade: remove anything that depends on this addon first.
+  const dependents = _getDependentAddons(liveWeapon, addonId);
+  if (dependents.length && !cascade) {
+    const names = dependents.map(id => ADDON_DEFS[id]?.label ?? id).join(", ");
+    ui.notifications.warn(`Najpierw odinstaluj zależne ulepszenia: ${names}.`);
+    return false;
+  }
+  for (const depId of dependents) {
+    await removeAddon(liveWeapon, depId, { cascade: true });
+  }
+
+  // Reverse the delta (re-read live weapon — cascade above mutated it)
+  const fresh = _getLiveItem(liveWeapon);
+  const freshInstalled = getAddon(fresh, addonId) ?? installed;
+  await _reverseDelta(fresh, def, freshInstalled.delta);
 
   // Remove from flags
-  const remaining = getAddons(liveWeapon).filter(a => a.id !== addonId);
+  const remaining = getAddons(fresh).filter(a => a.id !== addonId);
   if (remaining.length > 0) {
-    await liveWeapon.setFlag(MODULE_ID, ADDONS_FLAG, remaining);
+    await fresh.setFlag(MODULE_ID, ADDONS_FLAG, remaining);
   } else {
-    await liveWeapon.unsetFlag(MODULE_ID, ADDONS_FLAG);
+    await fresh.unsetFlag(MODULE_ID, ADDONS_FLAG);
   }
 
   // Dozownik: clear dose resource
-  if (addonId === "dozownik") await clearDose(liveWeapon);
+  if (addonId === "dozownik") await clearDose(fresh);
 
-  // Return loot item to actor inventory
-  const actor = liveWeapon.actor;
-  if (actor) {
+  // Return loot item to actor inventory (unless the addon was destroyed/consumed)
+  const actor = fresh.actor;
+  if (actor && refund) {
     await actor.createEmbeddedDocuments("Item", [_buildLootItemData(def)]);
   }
 
   // Chat message
   await ChatMessage.create({
-    speaker: ChatMessage.getSpeaker({ actor: liveWeapon.actor }),
-    content: _buildRemoveMessage(def, liveWeapon),
+    speaker: ChatMessage.getSpeaker({ actor: fresh.actor }),
+    content: _buildRemoveMessage(def, fresh, dependents, { refund }),
   });
 
-  liveWeapon.sheet?.render?.(true);
-  return true;
-}
-
-/**
- * Remove addon effects from a weapon WITHOUT returning the loot item.
- * Used by melee-degradation.mjs when Naostrzenie blunts on weapon damage.
- *
- * @param {Item5e} weapon
- * @param {string} addonId
- */
-export async function removeAddonEffects(weapon, addonId) {
-  const liveWeapon = _getLiveItem(weapon);
-  if (!liveWeapon) return false;
-
-  const installed = getAddon(liveWeapon, addonId);
-  if (!installed) return false;
-
-  const def = ADDON_DEFS[addonId];
-  if (!def) return false;
-
-  await _reverseDelta(liveWeapon, def, installed.delta);
-
-  // Remove addon record entirely (no refund, no blunted marker)
-  const remaining = getAddons(liveWeapon).filter(a => a.id !== addonId);
-  if (remaining.length > 0) {
-    await liveWeapon.setFlag(MODULE_ID, ADDONS_FLAG, remaining);
-  } else {
-    await liveWeapon.unsetFlag(MODULE_ID, ADDONS_FLAG);
-  }
-
+  fresh.sheet?.render?.(true);
   return true;
 }
 
@@ -337,10 +375,9 @@ async function _applyDelta(weapon, def, delta) {
   const updates = {};
 
   if (modes.includes("direct")) {
-    if (delta.attackBonus !== 0) {
-      const cur = _parseBonus(weapon.system?.attack?.bonus);
-      updates["system.attack.bonus"] = String(cur + delta.attackBonus);
-    }
+    // NOTE: attackBonus is intentionally NOT written here. dnd5e 5.3 has no
+    // system.attack.bonus field; the +TA is injected at roll time by
+    // _onPostBuildAttackRollConfig (reads def.attackBonus for installed addons).
     if (delta.damageBonus !== 0) {
       const cur = _parseBonus(weapon.system?.damage?.base?.bonus);
       updates["system.damage.base.bonus"] = String(cur + delta.damageBonus);
@@ -381,10 +418,7 @@ async function _reverseDelta(weapon, def, delta) {
   const updates = {};
 
   if (modes.includes("direct")) {
-    if (delta.attackBonus !== 0) {
-      const cur = _parseBonus(weapon.system?.attack?.bonus);
-      updates["system.attack.bonus"] = String(cur - delta.attackBonus);
-    }
+    // attackBonus not written (see _applyDelta note); nothing to reverse for TA.
     if (delta.damageBonus !== 0) {
       const cur = _parseBonus(weapon.system?.damage?.base?.bonus);
       updates["system.damage.base.bonus"] = String(cur - delta.damageBonus);
@@ -416,7 +450,10 @@ async function _reverseDelta(weapon, def, delta) {
   // Delete activity if one was created
   if (modes.includes("activity") && delta.activityId) {
     try {
-      await weapon.deleteEmbeddedDocuments("Activity", [delta.activityId]);
+      // dnd5e 5.3: remove from the activities collection (not deleteEmbeddedDocuments).
+      if (weapon.system.activities?.has?.(delta.activityId)) {
+        await weapon.update({ [`system.activities.-=${delta.activityId}`]: null });
+      }
     } catch (_) {
       // Activity may already be gone
     }
@@ -430,45 +467,52 @@ async function _reverseDelta(weapon, def, delta) {
 async function _createAddonActivity(weapon, def) {
   let activityData;
 
+  // Marker so fire-modes.mjs skips renaming/managing these, and includeBase:false
+  // so the addon's own damage doesn't inherit the host weapon's base damage.
+  const addonFlags = { [MODULE_ID]: { managedActivity: true, addonActivity: def.id } };
+
   if (def.id === "bagnet") {
     activityData = {
       type: "attack",
       name: "Bagnet",
       img: `modules/${MODULE_ID}/icons/activities/bagnet.svg`,
-      system: {
-        damage: { base: { number: 1, denomination: 6, bonus: "", types: ["piercing"] } },
-        range: { value: 2, units: "m" },
-        attack: { ability: "str", type: { value: "melee", classification: "weapon" } },
-      },
+      damage: { includeBase: false, parts: [{ number: 1, denomination: 6, types: ["piercing"] }] },
+      range: { override: true, value: 2, units: "m" },
+      attack: { ability: "str", type: { value: "melee", classification: "weapon" } },
+      flags: addonFlags,
     };
   } else if (def.id === "granatnik") {
     activityData = {
       type: "attack",
       name: "Granatnik 40mm",
       img: `modules/${MODULE_ID}/icons/activities/granatnik.svg`,
-      system: {
-        damage: { base: { number: 3, denomination: 6, bonus: "", types: ["bludgeoning"] } },
-        range: { value: 100, long: 100, units: "m" },
-        attack: { ability: "dex", type: { value: "ranged", classification: "weapon" } },
-      },
+      damage: { includeBase: false, parts: [{ number: 3, denomination: 6, types: ["bludgeoning"] }] },
+      range: { override: true, value: 100, units: "m" },
+      attack: { ability: "dex", type: { value: "ranged", classification: "weapon" } },
+      flags: addonFlags,
     };
   } else if (def.id === "srutowka-podlufowa") {
     activityData = {
       type: "attack",
       name: "Śrutówka .12 Ga",
       img: `modules/${MODULE_ID}/icons/activities/srutowka.svg`,
-      system: {
-        damage: { base: { number: 2, denomination: 6, bonus: "", types: ["bludgeoning"] } },
-        range: { value: 6, long: 18, units: "m" },
-        attack: { ability: "dex", type: { value: "ranged", classification: "weapon" } },
-      },
+      damage: { includeBase: false, parts: [{ number: 2, denomination: 6, types: ["bludgeoning"] }] },
+      range: { override: true, value: 6, units: "m" },
+      attack: { ability: "dex", type: { value: "ranged", classification: "weapon" } },
+      flags: addonFlags,
     };
   }
 
   if (!activityData) return null;
 
-  const created = await weapon.createEmbeddedDocuments("Activity", [activityData]);
-  return created?.[0]?.id ?? null;
+  // dnd5e 5.3: activities are NOT embedded documents — must use Item5e#createActivity.
+  // (createEmbeddedDocuments("Activity", …) throws.)
+  const { type, ...data } = activityData;
+  const before = new Set(weapon.system.activities?.map(a => a.id) ?? []);
+  await weapon.createActivity(type, data, { renderSheet: false });
+  const liveWeapon = _getLiveItem(weapon);
+  const created = (liveWeapon.system.activities ?? []).find(a => !before.has(a.id));
+  return created?.id ?? null;
 }
 
 /* ============================================================
@@ -535,88 +579,218 @@ async function _applyKolbaState(weapon, folded) {
 }
 
 /* ============================================================
- * preRollAttackV2 — conditional bonuses
+ * Conditional attack bonuses (roll-time)
  * ============================================================ */
 
-function _onPreRollAttackV2(config, _dialog, _message) {
-  const item = config.subject?.item ?? config.subject;
+/**
+ * Per-roll toggle state captured from the attack dialog checkboxes,
+ * keyed by activity uuid. Consumed once by _onPostBuildAttackRollConfig.
+ * @type {Map<string, Record<string, boolean>>}
+ */
+const _rollToggleState = new Map();
+
+/**
+ * Fires AFTER dnd5e has assembled the attack roll parts (survives the
+ * _buildAttackConfig clobber). Appends conditional addon bonuses to config.parts.
+ *
+ * @param {object} process  Full attack process configuration.
+ * @param {object} config   The individual D20 roll configuration (has .parts/.data).
+ * @param {number} index    Roll index.
+ * @param {object} [opts]   { app, formData }
+ */
+function _onPostBuildAttackRollConfig(process, config, index, opts = {}) {
+  const activity = process?.subject;
+  const item = activity?.item;
   if (!item || item.type !== "weapon") return;
 
   const addons = getAddons(item);
   if (!addons.length) return;
 
+  // Resolve toggle state: prefer live form data, then captured dialog state, then persisted flags.
+  const toggles = _resolveToggleState(activity, item, opts?.formData);
+
   let totalBonus = 0;
+  const labels = [];
 
   for (const installed of addons) {
-    if (installed.blunted) continue;
     const def = ADDON_DEFS[installed.id];
-    if (!def?.conditionalBonus) continue;
+    if (!def) continue;
 
-    const bonus = _resolveConditionalBonus(item, def, addons);
-    totalBonus += bonus;
+    // Static attack bonus from "direct" addons (e.g. Naostrzenie +1 TA).
+    // dnd5e 5.3 has no system.attack.bonus field, so static TA bonuses must be
+    // injected here at roll time instead of written onto the weapon.
+    if (def.applyMode?.includes("direct") && (def.attackBonus ?? 0) !== 0) {
+      totalBonus += def.attackBonus;
+      labels.push(def.label);
+    }
+
+    // Conditional bonuses (range-zone, no-sight, toggle).
+    if (def.conditionalBonus) {
+      const bonus = _resolveConditionalBonus(item, def, addons, toggles);
+      if (bonus !== 0) {
+        totalBonus += bonus;
+        labels.push(def.label);
+      }
+    }
   }
 
   if (totalBonus !== 0) {
-    // Append to existing parts bonus string
-    const existing = config.data?.bonus ?? config.parts?.bonus ?? "";
-    const newBonus = existing
-      ? `${existing} + ${totalBonus}`
-      : String(totalBonus);
-
-    if (config.data) {
-      config.data.bonus = newBonus;
-    } else if (config.parts) {
-      config.parts.bonus = newBonus;
-    }
+    config.parts ??= [];
+    config.parts.push(String(totalBonus));
+    // Stash applied labels so the chat card can show exactly what was added.
+    foundry.utils.setProperty(config, "options.neuroAddonBonus", { total: totalBonus, labels });
   }
 }
 
-function _resolveConditionalBonus(item, def, allInstalled) {
+/**
+ * Resolve the active toggle map for a roll (laser on/off, bipod deployed).
+ * @returns {Record<string, boolean>}
+ */
+function _resolveToggleState(activity, item, formData) {
+  const persisted = item.getFlag(MODULE_ID, SETUP_FLAG) ?? {};
+  const captured = _rollToggleState.get(activity?.uuid) ?? {};
+  const live = {};
+
+  if (formData?.get) {
+    for (const key of TOGGLE_KEYS) {
+      const raw = formData.get(`neuroToggle.${key}`);
+      if (raw !== null && raw !== undefined) live[key] = raw === "true" || raw === "on" || raw === true;
+    }
+  }
+
+  return { ...persisted, ...captured, ...live };
+}
+
+/**
+ * Compute the bonus a single conditional addon contributes to this attack.
+ * @param {Item5e} item
+ * @param {AddonDef} def
+ * @param {Array} allInstalled
+ * @param {Record<string, boolean>} toggles
+ * @returns {number}
+ */
+function _resolveConditionalBonus(item, def, allInstalled, toggles = {}) {
   const cb = def.conditionalBonus;
   if (!cb) return 0;
 
   if (cb.type === "range-zone") {
-    // Determine if the attack is at normal or long range
+    // Range-dependent sight. Only applies when we can measure the shot;
+    // without a target we cannot know the zone, so it does not apply.
     const isLong = _isLongRange(item);
-    if (isLong === null) {
-      // No target selected — assume normal range; apply normalBonus
-      return cb.normalBonus ?? 0;
-    }
+    if (isLong === null) return 0;
     return isLong ? (cb.longBonus ?? 0) : (cb.normalBonus ?? 0);
   }
 
   if (cb.type === "no-sight") {
-    // +1 if no other sight addon is installed
+    // +1 only if no other sighting device is installed.
     const hasSight = allInstalled.some(a => a.id !== def.id && SIGHT_ADDON_IDS.has(a.id));
     return hasSight ? 0 : (cb.normalBonus ?? 0);
   }
 
-  if (cb.type === "setup") {
-    // +bonus only if the weapon is set up (folded / deployed)
-    const setup = item.getFlag(MODULE_ID, SETUP_FLAG) ?? {};
-    return setup[cb.setupKey] ? (cb.setupBonus ?? 0) : 0;
+  if (cb.type === "toggle") {
+    // Driven by a per-roll dialog checkbox (laser on, bipod deployed, …).
+    return toggles[cb.setupKey] ? (cb.setupBonus ?? 0) : 0;
   }
 
   return 0;
 }
 
 /**
- * Returns true if the first selected target is beyond weapon's normal range.
- * Returns null if no targets are selected.
+ * Returns true if the first selected target is beyond the weapon's normal range.
+ * Returns null if range cannot be measured (no normal range, no token, no target).
  */
 function _isLongRange(item) {
   const normalRange = item.system?.range?.value ?? 0;
   if (!normalRange) return null;
 
-  const targets = [...game.user.targets];
+  const targets = [...(game.user?.targets ?? [])];
   if (!targets.length) return null;
 
-  const token = item.actor?.getActiveTokens()?.[0];
+  const token = item.actor?.getActiveTokens?.()?.[0];
   if (!token) return null;
 
   const target = targets[0];
-  const dist = canvas.grid.measurePath([token.center, target.center])?.distance ?? 0;
-  return dist > normalRange;
+  try {
+    const dist = canvas.grid.measurePath([token.center, target.center])?.distance ?? 0;
+    return dist > normalRange;
+  } catch (_) {
+    return null;
+  }
+}
+
+/* ============================================================
+ * Attack dialog — addon toggle checkboxes
+ * ============================================================ */
+
+/** Toggle keys that may appear as dialog checkboxes (conditional-toggle addons). */
+const TOGGLE_KEYS = ["laserActive", "dwojnog"];
+
+/**
+ * Inject toggle checkboxes (laser on/off, bipod deployed) into the attack roll dialog
+ * for any installed conditional-toggle addon. Captures their state per roll.
+ */
+function _onRenderAttackDialog(app, html) {
+  const activity = app?.config?.subject ?? app?.options?.subject;
+  const item = activity?.item;
+  if (!item || item.type !== "weapon") return;
+
+  const addons = getAddons(item);
+  if (!addons.length) return;
+
+  const root = html instanceof HTMLElement ? html : html?.[0];
+  if (!root) return;
+  if (root.querySelector(".neuro-addon-toggles")) return; // avoid double inject
+
+  const persisted = item.getFlag(MODULE_ID, SETUP_FLAG) ?? {};
+  const toggleDefs = [];
+  for (const installed of addons) {
+    const def = ADDON_DEFS[installed.id];
+    const cb = def?.conditionalBonus;
+    if (cb?.type !== "toggle") continue;
+    toggleDefs.push({
+      key: cb.setupKey,
+      label: def.label,
+      bonus: cb.setupBonus ?? 0,
+      checked: persisted[cb.setupKey] ?? false,
+      reveals: !!def.revealsPositionWhenActive,
+    });
+  }
+  if (!toggleDefs.length) return;
+
+  // Seed captured state with defaults so a roll without interaction still respects persistence.
+  const seed = {};
+  for (const t of toggleDefs) seed[t.key] = t.checked;
+  _rollToggleState.set(activity.uuid, seed);
+
+  const container = document.createElement("div");
+  container.className = "neuro-addon-toggles form-group";
+  container.innerHTML = `
+    <label style="font-weight:bold">Ulepszenia</label>
+    <div class="form-fields" style="flex-direction:column;align-items:flex-start;gap:4px">
+      ${toggleDefs.map(t => `
+        <label class="checkbox" style="display:flex;align-items:center;gap:6px">
+          <input type="checkbox" name="neuroToggle.${t.key}" ${t.checked ? "checked" : ""}>
+          ${t.label} <span style="opacity:0.7">(+${t.bonus} TA${t.reveals ? ", ujawnia pozycję" : ""})</span>
+        </label>
+      `).join("")}
+    </div>
+  `;
+
+  // Wire up state capture
+  container.querySelectorAll("input[type=checkbox]").forEach(input => {
+    input.addEventListener("change", () => {
+      const key = input.name.replace("neuroToggle.", "");
+      const state = _rollToggleState.get(activity.uuid) ?? {};
+      state[key] = input.checked;
+      _rollToggleState.set(activity.uuid, state);
+    });
+  });
+
+  // Insert before the dialog buttons (footer), else append to the form.
+  const form = root.querySelector("form") ?? root;
+  const buttons = form.querySelector(".dialog-buttons") ?? form.querySelector("footer");
+  if (buttons) form.insertBefore(container, buttons);
+  else form.appendChild(container);
 }
 
 /* ============================================================
@@ -660,8 +834,7 @@ function _injectAddonBadges(html, addons) {
 
     const li = document.createElement("li");
     li.className = "pill transparent neuro-addon-pill";
-    if (a.blunted) li.classList.add("neuro-addon-pill--blunted");
-    li.title = a.blunted ? `${def.label} (stępione)` : def.label;
+    li.title = def.label;
     li.innerHTML = `<i class="fa-solid fa-wrench"></i> <span class="label">${def.label}</span>`;
 
     if (pillsList) {
@@ -695,11 +868,21 @@ function _buildInstallMessage(def, weapon) {
   `;
 }
 
-function _buildRemoveMessage(def, weapon) {
+function _buildRemoveMessage(def, weapon, dependents = [], opts = {}) {
+  const { refund = true } = opts;
+  const cascadeNote = dependents.length
+    ? `<div style="margin-top:4px;font-size:12px;opacity:0.85">Odinstalowano też zależne: ${
+        dependents.map(id => ADDON_DEFS[id]?.label ?? id).join(", ")
+      }.</div>`
+    : "";
+  const outcome = refund
+    ? `→ wrócił do ekwipunku.`
+    : `→ <span style="color:#c0392b">zniszczone</span>.`;
   return `
     <div class="dnd5e2 chat-card">
       <div style="border-left:3px solid #7a4a4a;padding:4px 8px">
-        Odinstalowano <strong>${def.label}</strong> z <strong>${weapon.name}</strong> → wrócił do ekwipunku.
+        Odinstalowano <strong>${def.label}</strong> z <strong>${weapon.name}</strong> ${outcome}
+        ${cascadeNote}
       </div>
     </div>
   `;
@@ -721,7 +904,7 @@ function _describeEffects(def) {
       if (cb.normalBonus) parts.push(`+${cb.normalBonus} TA (normalny zasięg)`);
       if (cb.longBonus)   parts.push(`+${cb.longBonus} TA (daleki zasięg)`);
     }
-    if (cb.type === "setup") parts.push(`+${cb.setupBonus} TA (po rozłożeniu)`);
+    if (cb.type === "toggle")   parts.push(`+${cb.setupBonus} TA (po włączeniu)`);
     if (cb.type === "no-sight") parts.push(`+${cb.normalBonus} TA (brak innych przyrządów)`);
   }
   return parts.join("; ");

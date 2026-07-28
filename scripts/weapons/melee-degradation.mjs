@@ -86,16 +86,19 @@ export async function degradeWeapon(item, { chat = true } = {}) {
     });
   }
 
-  // Naostrzenie blunts: remove its +1/+1 bonus and the addon record entirely (no refund)
+  // Naostrzenie is LOST when the weapon is damaged (RAW: "+1 ... do czasu
+  // uszkodzenia broni"). The sharpening is physically ruined together with the
+  // edge — remove it entirely, without refunding the loot item, and do not
+  // restore it on repair (the player must buy/install it again).
   const hadNaostrzenie = hasAddon(item, "naostrzenie");
   if (hadNaostrzenie) {
-    const { removeAddonEffects } = await import("./addons.mjs");
-    await removeAddonEffects(item, "naostrzenie");
+    const { removeAddon } = await import("./addons.mjs");
+    await removeAddon(item, "naostrzenie", { refund: false });
   }
 
   if (chat) {
     const naostrzenieNote = hadNaostrzenie
-      ? " Naostrzenie zostaje zniszczone." : "";
+      ? " Naostrzenie zostało zniszczone wraz z ostrzem." : "";
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor: item.actor }),
       content: `<div><strong>Pechowa jedynka!</strong> Broń <strong>${item.name}</strong> stępia się lub wyszczerbia! Jej kość obrażeń spada do k${nextToken === 1 ? '1 / 1 obl.' : nextToken} i wymaga naprawy.${naostrzenieNote}</div>`
@@ -126,6 +129,9 @@ export async function repairWeapon(item, { chat = true } = {}) {
 
   // Oczyść flagę po naprawie
   await item.unsetFlag(MODULE_ID, DEGRADATION_FLAG);
+
+  // Naostrzenie is NOT restored on repair — it was destroyed when the weapon
+  // was damaged (RAW). The player must install a new one.
 
   if (chat) {
     await ChatMessage.create({

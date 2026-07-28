@@ -15,7 +15,7 @@
 
 import { AMMO_CALIBER_MAP } from "../config/ammo-data.mjs";
 import { getLastAttackCoverDecision } from "../combat/cover.mjs";
-import { playExplosionSoundForItem } from "./sounds.mjs";
+import { playExplosionSoundForItem, playImpactSound } from "./sounds.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const AMMO_PROPS_FLAG = "ammoProps";
@@ -166,8 +166,20 @@ async function _onPostRollAttackAutoApply(rolls, { subject } = {}) {
     properties: new Set(caliber.props ?? [])
   }];
 
-  for (const { targetActor } of hits) {
+  for (const { target, targetActor } of hits) {
     await targetActor.applyDamage(damages, { isDelta: true, multiplier: 1 });
+    // Impact SFX, emitted at the target rather than the shooter. This is the
+    // only path with both the firing weapon and the struck actor in scope —
+    // dnd5e's own applyDamage hooks receive the victim but not the weapon, so
+    // they cannot pick the right bank or material.
+    //
+    // fireMode is left at its "p" default: this path only runs for single-shot
+    // attacks. Burst modes go through Activity.rollDamage (fire-modes.mjs) and
+    // are applied by the GM from the chat card, so they never arrive here — the
+    // `impact-burst-*` recordings are consequently unreachable in play for now,
+    // and only .50 BMG / symbol `#` have any. Wiring them up needs a hook on the
+    // burst damage-application path that still knows which weapon fired.
+    playImpactSound(item, targetActor, { caliberId: caliber.id, token: target });
   }
 
   /* Play explosion sound if weapon is explosive (Bazooka, LAW, MGL1S, Thumper, Moździerz) */
@@ -329,6 +341,7 @@ async function _applyDamageFromButton(caliber, sourceItem) {
     const targetActor = target.document?.actor ?? target.actor ?? target;
     if (targetActor?.applyDamage) {
       await targetActor.applyDamage(damages, { isDelta: true, multiplier: 1 });
+      playImpactSound(sourceItem, targetActor, { caliberId: caliber.id, token: target });
     }
   }
 

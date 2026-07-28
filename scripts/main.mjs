@@ -13,6 +13,7 @@
 
 import { registerSkills } from "./config/skills.mjs";
 import { registerTools } from "./config/tools.mjs";
+import { registerToolProficiency } from "./config/tool-proficiency.mjs";
 import { registerDamageTypes } from "./config/damage-types.mjs";
 import { registerTerminology } from "./config/terminology.mjs";
 import { removeSpellcasting } from "./config/spellcasting.mjs";
@@ -24,6 +25,7 @@ import { registerWeapons } from "./config/weapons.mjs";
 import { registerZranienie } from "./combat/zranienie.mjs";
 import { registerRerolls } from "./combat/rerolls.mjs";
 import { registerObalajaca } from './combat/obalajaca.mjs';
+import { registerWeaponSaveProperties } from './combat/weapon-save-properties.mjs';
 import { registerKnockoutAndLastAction, onPreUpdateActorDeathSaves } from "./combat/knockout.mjs";
 import { registerCoverSystem } from "./combat/cover.mjs";
 import { registerMagazines } from "./weapons/magazine.mjs";
@@ -33,10 +35,15 @@ import { registerFireModes } from "./weapons/fire-modes.mjs";
 import { registerThrownWeapons } from "./weapons/thrown.mjs";
 import { registerValidation } from "./config/validation.mjs";
 import { registerWeaponSounds } from "./weapons/sounds.mjs";
+import { registerEngineControls } from "./weapons/engine.mjs";
+import { registerTracerVfx } from "./weapons/tracer-vfx.mjs";
+import { openTracerDebugPanel, registerTracerDebugPanelControls } from "./weapons/tracer-debug-panel.mjs";
+import { openSoundDebugPanel, registerSoundDebugPanelControls } from "./weapons/sound-debug-panel.mjs";
 import { registerAmmoSystem } from "./weapons/ammo.mjs";
 import { registerAmmoInventory } from "./actors/ammo-inventory.mjs";
 import { registerMagazineInventory } from "./actors/magazine-inventory.mjs";
 import { registerGrenadeInventory } from "./actors/grenade-inventory.mjs";
+import { registerSurowceInventory } from "./actors/surowce-inventory.mjs";
 import { registerSheetPositionStability } from "./actors/sheet-position-stability.mjs";
 import { registerDamageReductionUI } from "./weapons/damage-reduction.mjs";
 import { registerWeaponAddons } from "./weapons/addons.mjs";
@@ -45,6 +52,10 @@ import { registerDozownik } from "./weapons/dozownik.mjs";
 import { registerSettings } from "./config/settings.mjs";
 import { AMMO_CALIBERS, AMMO_CALIBER_MAP, GRENADE_TYPES, GRENADE_MAP } from "./config/ammo-data.mjs";
 import { registerZbrojowniaSync } from "./actors/zbrojownia-sync.mjs";
+import { TOOLKITS, createToolkits } from "./config/toolkits-data.mjs";
+import { registerMedyk } from "./items/toolkit-medyk.mjs";
+import { registerToolkitChecks } from "./items/toolkit-check.mjs";
+import { registerToolAvailability } from "./actors/tool-availability.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -55,11 +66,17 @@ const MODULE_ID = "neuroshima-2026-overrides";
 Hooks.once("init", () => {
   console.log(`${MODULE_ID} | Initializing Neuroshima 5e overrides`);
 
+  // Registered at init (not ready) so it's in place before the Token scene-controls
+  // toolbar's first render — getSceneControlButtons can fire as early as canvasReady.
+  registerTracerDebugPanelControls();
+  registerSoundDebugPanelControls();
+
   // Phase 1: CONFIG overrides
   registerSettings();
   registerTerminology();
   registerSkills();
   registerTools();
+  registerToolProficiency();
   registerDamageTypes();
   removeSpellcasting();
   registerExhaustion();
@@ -68,6 +85,7 @@ Hooks.once("init", () => {
   registerAmmoInventory();
   registerMagazineInventory();
   registerGrenadeInventory();
+  registerSurowceInventory();
   registerSheetPositionStability();
   registerWeapons();
   registerValidation();
@@ -76,6 +94,7 @@ Hooks.once("init", () => {
   registerZranienie();
   registerRerolls();
   registerObalajaca();
+  registerWeaponSaveProperties();
   registerKnockoutAndLastAction();
   registerCoverSystem();
   registerMagazines();
@@ -88,6 +107,9 @@ Hooks.once("init", () => {
   registerAddonInventoryUI();
   registerDozownik();
   registerZbrojowniaSync();
+  registerMedyk();
+  registerToolkitChecks();
+  registerToolAvailability();
 
   // Phase 2: Damage application UI
   registerDamageReductionUI();
@@ -151,9 +173,15 @@ Hooks.once("ready", () => {
   // Expose caliber data globally for use in macros and CDP scripts.
   // Usage: game.neuroshima.AMMO_CALIBERS  /  game.neuroshima.AMMO_CALIBER_MAP
   // Grenades stay separate from ammo, but are exposed in the same namespace for automation.
-  game.neuroshima = { AMMO_CALIBERS, AMMO_CALIBER_MAP, GRENADE_TYPES, GRENADE_MAP };
+  game.neuroshima = { AMMO_CALIBERS, AMMO_CALIBER_MAP, GRENADE_TYPES, GRENADE_MAP, TOOLKITS, createToolkits };
 
   registerWeaponSounds();
+  registerEngineControls();
+  registerTracerVfx();
+  if (game.neuroshima?.vfx) game.neuroshima.vfx.panel = openTracerDebugPanel;
+
+  // Weapon-sound audition panel — game.neuroshima.sounds.panel()
+  game.neuroshima.sounds = { panel: openSoundDebugPanel };
 
   // Validate overrides
   const skillCount = Object.keys(CONFIG.DND5E.skills).length;

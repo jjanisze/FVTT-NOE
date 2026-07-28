@@ -25,7 +25,14 @@
 
 import { ABILITY_KEYS, buildAbilityRuleChangeNotice, hasAbility } from "../actors/abilities.mjs";
 import { isJamImmune } from "./jams.mjs";
-import { playWeaponSound, WeaponSound, getShotSoundKey } from "./sounds.mjs";
+import {
+  playWeaponSound,
+  WeaponSound,
+  playShotSound,
+  playUtilitySound,
+} from "./sounds.mjs";
+import { seqScrollText } from "./sequencer.mjs";
+import { tracerFire } from "./tracer-vfx.mjs";
 import { AMMO_CALIBERS, AMMO_CALIBER_MAP, buildCaliberSelect } from "../config/ammo-data.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 const MAGAZINE_TYPES = Object.freeze({
@@ -37,7 +44,8 @@ const RELOAD_STATE_FLAG = "reloadState";
 const CHAMBER_STATE_FLAG = "chamber";
 const RELOAD_ACTIVITY_TYPE = "neuroReload";
 const LOAD_ONE_ACTIVITY_TYPE = "neuroLoadOne";
-const CUSTOM_ACTIVITY_TYPES = new Set(["neuroKs", "neuroDs", "neuroMs", "neuroOz", RELOAD_ACTIVITY_TYPE, LOAD_ONE_ACTIVITY_TYPE]);
+const MAG_SWAP_ACTIVITY_TYPE = "neuroMagSwap";
+const CUSTOM_ACTIVITY_TYPES = new Set(["neuroKs", "neuroDs", "neuroMs", "neuroOz", RELOAD_ACTIVITY_TYPE, LOAD_ONE_ACTIVITY_TYPE, MAG_SWAP_ACTIVITY_TYPE]);
 const processedSingleShotActivities = new WeakSet();
 const syncingMagazineUses = new Set();
 const syncingManagedActivities = new Set();
@@ -96,7 +104,10 @@ export async function spendRound(item) {
   if (!mag) return true; // no magazine tracked — allow firing
   if (mag.current <= 0) {
     ui.notifications.warn(`${item.name}: magazynek pusty!`);
-    playWeaponSound(WeaponSound.EMPTY_CLICK);
+    playUtilitySound("click", item, WeaponSound.EMPTY_CLICK, {
+      caliberId: mag.ammoType, token: item.actor,
+    });
+    seqScrollText("PUSTE!", item.actor, { color: "#e67e22", fontSize: 30, duration: 1800 });
     return false;
   }
   await setMag(item, { current: mag.current - 1 });
@@ -127,15 +138,11 @@ export async function spendRounds(item, count) {
 export function registerMagazines() {
   registerReloadActivityType();
   registerLoadOneActivityType();
+  registerMagSwapActivityType();
   registerAttackReloadGuard();
 
   // Inject magazine row into weapon item sheet.
-  // Hook name: "render" + class name. ItemSheet5e → "renderItemSheet5e".
-  // Signature (Foundry v14 ApplicationV2): (app, element, context, options)
   Hooks.on("renderItemSheet5e", onRenderItemSheet);
-
-  // Handle reload button clicks (delegated — the element won't exist at register time)
-  Hooks.on("renderItemSheet5e", _attachReloadListener);
 
   Hooks.on("updateItem", onUpdateItemSyncMagazineUses);
   Hooks.on("createItem", item => {
@@ -205,57 +212,35 @@ function onRenderItemSheet(app, html) {
   const detailsSection = html.querySelector(".item-properties, .details-tab, [data-tab='details'] .form-group:last-of-type");
   if (!detailsSection) return;
 
-  const magRow = document.createElement("div");
-  magRow.classList.add("form-group", "neuro-mag-row");
-  magRow.innerHTML = `
-    <label>${ui.label}</label>
-    <div class="form-fields" style="display:flex; flex-wrap:wrap; gap:4px; align-items:center;">
-      <div style="display:flex; align-items:center; gap:2px;">
-        <input type="number" name="flags.${MODULE_ID}.mag.current"
-               value="${mag.current}" min="0" max="${mag.max}"
-               data-dtype="Number" style="width:36px; text-align:center;">
-        <span>/</span>
-        <input type="number" name="flags.${MODULE_ID}.mag.max"
-               value="${mag.max}" min="0"
-               data-dtype="Number" style="width:36px; text-align:center;" ${isPlayMode ? "disabled" : ""}>
-      </div>
-      <span style="font-size:11px; color:#888;">kaliber:</span>
-      <div style="flex: 1 1 80px; min-width:80px;">
-        ${buildCaliberSelect(rawAmmoType, isPlayMode, `flags.${MODULE_ID}.mag.ammoType`)}
-      </div>
-      <button type="button" class="neuro-reload-btn"
-              title="${ui.buttonTitle}"
-              style="flex:0 0 auto; width:auto; padding:0 6px; line-height:normal; height:24px;">
-        ${ui.buttonLabel}
-      </button>
-    </div>
-  `;
-
   const notes = [
-    ui.hint,
     _shouldShowChamberStatus(item) ? `<span style="color:#6b7280">${_getChamberStateHint(item, chamberState, mag)}</span>` : "",
     reloadState.required ? `<span style="color:#ba3c24">${_getReloadStateHint(item, reloadState)}</span>` : "",
     _getCaliberNote(mag.ammoType) ? `<i style="color:#6b7280">${_getCaliberNote(mag.ammoType)}</i>` : ""
   ].filter(n => n?.trim()).join(" ");
 
-  if (notes) {
-    magRow.innerHTML += `<div style="grid-column: 1/-1; margin-top:2px; font-size:11px; line-height:1.2; opacity:0.9;">${notes}</div>`;
-  }
+  const magRow = document.createElement("div");
+  magRow.classList.add("form-group", "neuro-mag-row");
+  magRow.innerHTML = `
+    <label>${ui.label}</label>
+    <div class="form-fields" style="display:flex; flex-direction:column; gap:4px;">
+      <div style="display:flex; align-items:center; gap:4px;">
+        <input type="number" name="flags.${MODULE_ID}.mag.current"
+               value="${mag.current}" min="0" max="${mag.max}"
+               data-dtype="Number" style="width:40px; text-align:center;">
+        <span>/</span>
+        <input type="number" name="flags.${MODULE_ID}.mag.max"
+               value="${mag.max}" min="0"
+               data-dtype="Number" style="width:40px; text-align:center;" ${isPlayMode ? "disabled" : ""}>
+      </div>
+      <div style="display:flex; align-items:center; gap:4px;">
+        <span style="font-size:11px; color:#888; white-space:nowrap;">Kaliber:</span>
+        <div style="flex:1;">${buildCaliberSelect(rawAmmoType, isPlayMode, `flags.${MODULE_ID}.mag.ammoType`)}</div>
+      </div>
+      ${notes ? `<div style="font-size:11px; line-height:1.2; opacity:0.9;">${notes}</div>` : ""}
+    </div>
+  `;
 
   detailsSection.after(magRow);
-}
-
-/**
- * Attach the reload button click handler after sheet renders.
- */
-function _attachReloadListener(app, html) {
-  const item = app.document ?? app.item;
-  if (!item || item.type !== "weapon") return;
-
-  html.querySelector(".neuro-reload-btn")?.addEventListener("click", async (ev) => {
-    ev.preventDefault();
-    await _onClickReload(item);
-  });
 }
 
 async function onUpdateItemSyncMagazineUses(item, changes) {
@@ -398,7 +383,13 @@ async function _onClickReload(item) {
   await _clearReloadState(item);
 
   // Sound
-  playWeaponSound(magazineType === MAGAZINE_TYPES.REMOVABLE ? WeaponSound.RELOAD_MAG : WeaponSound.RELOAD_SINGLE);
+  playUtilitySound(
+    "reload",
+    item,
+    magazineType === MAGAZINE_TYPES.REMOVABLE ? WeaponSound.RELOAD_MAG : WeaponSound.RELOAD_SINGLE,
+    { caliberId: newMagData?.ammoType, token: actor },
+  );
+  seqScrollText("ZAŁADOWANO", actor, { color: "#f1c40f", fontSize: 26, duration: 1500 });
 
   if (inCombat) {
     await _spendCombatResource(actor, reloadPlan.actionType);
@@ -762,6 +753,33 @@ function registerLoadOneActivityType() {
   };
 }
 
+function registerMagSwapActivityType() {
+  if (CONFIG.DND5E.activityTypes[MAG_SWAP_ACTIVITY_TYPE]) return;
+  const BaseUtilityActivity = CONFIG.DND5E.activityTypes.utility?.documentClass;
+  if (!BaseUtilityActivity) {
+    console.warn("Neuroshima 5e | Could not register mag-swap activity: missing base utility activity");
+    return;
+  }
+
+  class NeuroMagSwapActivity extends BaseUtilityActivity {
+    static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+      type: MAG_SWAP_ACTIVITY_TYPE,
+      title: "Wymiana magazynka",
+      img: "modules/neuroshima-2026-overrides/icons/activities/activity_mag_swap.svg",
+      hint: "Neuroshima: wymień pusty magazynek na zapasowy z ekwipunku. Wymaga posiadania przygotowanego magazynka."
+    }, { inplace: false }));
+
+    async use(usage = {}, dialog = {}, message = {}) {
+      const liveItem = _getLiveItem(this.item);
+      return _onClickReload(liveItem);
+    }
+  }
+
+  CONFIG.DND5E.activityTypes[MAG_SWAP_ACTIVITY_TYPE] = {
+    documentClass: NeuroMagSwapActivity
+  };
+}
+
 async function syncAllWeaponMagazineActivities() {
   const items = [
     ...Array.from(game.items ?? []),
@@ -781,6 +799,7 @@ async function syncWeaponMagazineActivities(item) {
   try {
     await syncReloadActivity(item);
     await syncLoadOneActivity(item);
+    await syncMagSwapActivity(item);
   } finally {
     syncingManagedActivities.delete(item.uuid);
   }
@@ -833,6 +852,53 @@ async function syncLoadOneActivity(item) {
     roll: data.roll,
     flags: data.flags
   });
+}
+
+async function syncMagSwapActivity(item) {
+  const managed = _findManagedMagazineActivity(item, "magSwap");
+  const shouldHave = getMag(item) !== null && getMagazineType(item) === MAGAZINE_TYPES.REMOVABLE;
+
+  if (!shouldHave) {
+    if (managed) await item.deleteActivity(managed.id);
+    return;
+  }
+
+  const data = _buildMagSwapActivityData(item);
+  if (!managed) {
+    await item.createActivity(MAG_SWAP_ACTIVITY_TYPE, data, { renderSheet: false });
+    return;
+  }
+
+  await item.updateActivity(managed.id, {
+    name: data.name,
+    activation: data.activation,
+    description: data.description,
+    flags: data.flags
+  });
+}
+
+function _buildMagSwapActivityData(item) {
+  const tokenDocument = _getItemToken(item);
+  const canQuickSwap = item.actor
+    ? hasAbility(item.actor, ABILITY_KEYS.SZYBKA_WYMIANA, { tokenDocument })
+    : false;
+  return {
+    name: canQuickSwap ? "Wymiana magazynka (AB)" : "Wymiana magazynka",
+    activation: {
+      type: canQuickSwap ? "bonus" : "action",
+      value: 1
+    },
+    description: {
+      chat: "",
+      value: "<p>Wymie\u0144 aktualny magazynek na zapasowy z ekwipunku. Wymaga posiadania przygotowanego zapasowego magazynka.</p>"
+    },
+    flags: {
+      [MODULE_ID]: {
+        [MANAGED_ACTIVITY_FLAGS.MANAGED]: true,
+        [MANAGED_ACTIVITY_FLAGS.KIND]: "magSwap"
+      }
+    }
+  };
 }
 
 function _buildReloadActivityData(item) {
@@ -907,7 +973,8 @@ function _shouldManageMagazineActivities(item) {
   const isFirearm = item.system.type?.value?.startsWith?.("palna") ?? false;
   return isFirearm
     || !!_findManagedMagazineActivity(item, "reload")
-    || !!_findManagedMagazineActivity(item, "loadOne");
+    || !!_findManagedMagazineActivity(item, "loadOne")
+    || !!_findManagedMagazineActivity(item, "magSwap");
 }
 
 function registerAttackReloadGuard() {
@@ -924,7 +991,12 @@ function registerAttackReloadGuard() {
         && liveItem?.system?.type?.value?.startsWith("palna");
       if (isUntrackedFirearm) {
         const cancelled = (result === false) || (result == null) || (Array.isArray(result) && result.length === 0);
-        if (!cancelled) playWeaponSound(getShotSoundKey(liveItem));
+        if (!cancelled) {
+          playShotSound(liveItem, {
+            caliberId: getMag(liveItem)?.ammoType, token: liveItem.actor,
+          });
+          _playSingleShotVfx(liveItem, result);
+        }
       }
       return result;
     }
@@ -936,7 +1008,10 @@ function registerAttackReloadGuard() {
 
     const mag = getMag(liveItem);
     if (mag && mag.current <= 0 && !_getManualReloadMode(liveItem)) {
-      playWeaponSound(WeaponSound.EMPTY_CLICK);
+      playUtilitySound("click", liveItem, WeaponSound.EMPTY_CLICK, {
+        caliberId: mag.ammoType, token: liveItem.actor,
+      });
+      seqScrollText("PUSTE!", liveItem.actor, { color: "#e67e22", fontSize: 30, duration: 1800 });
       await _announceEmptyMagazine(liveItem);
       return false;
     }
@@ -957,11 +1032,52 @@ function registerAttackReloadGuard() {
     }
 
     await _processSingleShotAttack(this, liveItem, snapshot);
-    playWeaponSound(getShotSoundKey(liveItem));
+    playShotSound(liveItem, {
+      caliberId: getMag(liveItem)?.ammoType, token: liveItem.actor,
+    });
+    _playSingleShotVfx(liveItem, result);
     return result;
   };
 
   BaseAttackActivity.prototype._neuroReloadWrapped = true;
+}
+
+/**
+ * Fire the single-shot VFX (muzzle flash + tracer + hit impact) via Sequencer.
+ * Hit/miss is derived from the first attack roll vs the current target's AC.
+ * A full downrange payoff (tracer + impact) only shows when a target is selected —
+ * this is intentional, to reward using Foundry's targeting (PLAN_shooting_vfx.md §1).
+ *
+ * @param {Item5e} item             The firearm that was fired.
+ * @param {Array|boolean} result    Roll array returned by rollAttack.
+ */
+function _playSingleShotVfx(item, result) {
+  const shooter = item?.actor;
+  if (!shooter) return;
+  const targetToken = game.user?.targets?.first() ?? null;
+  const roll = Array.isArray(result) ? result[0] : null;
+  const hit = _isAttackHit(roll, targetToken);
+  tracerFire({
+    shooter, target: targetToken, hit, rounds: 1,
+    caliber: getMag(item)?.ammoType, weaponId: item.system?.identifier
+  });
+}
+
+/**
+ * Determine whether an attack roll hit a target token, by comparing the roll
+ * total to the target's AC. Critical hits always hit; fumbles always miss.
+ *
+ * @param {object|null} roll         A dnd5e D20Roll (or null).
+ * @param {Token|null} targetToken   The targeted canvas token (or null).
+ * @returns {boolean}
+ */
+function _isAttackHit(roll, targetToken) {
+  if (!roll || !targetToken) return false;
+  if (roll.isCritical) return true;
+  if (roll.isFumble) return false;
+  const ac = targetToken.actor?.system?.attributes?.ac?.value;
+  if (typeof ac !== "number") return false;
+  return (roll.total ?? 0) >= ac;
 }
 
 function _getReloadState(item) {
@@ -1135,7 +1251,13 @@ async function _performReloadAction(item, { chat = true, spendResource = true, s
   }
 
   const _isFirearm = liveItem.system.type?.value?.startsWith?.("palna") ?? false;
-  playWeaponSound(_isFirearm ? WeaponSound.RELOAD_SINGLE : WeaponSound.RELOAD_OTHER);
+  playUtilitySound(
+    "reload",
+    liveItem,
+    _isFirearm ? WeaponSound.RELOAD_SINGLE : WeaponSound.RELOAD_OTHER,
+    { caliberId: mag?.ammoType, token: liveItem.actor },
+  );
+  seqScrollText("ZAŁADOWANO", liveItem.actor, { color: "#f1c40f", fontSize: 26, duration: 1500 });
   return { ejectedLiveRound, chamberLoaded, current };
 }
 
@@ -1195,7 +1317,10 @@ async function _performLoadOneAction(item, { chat = true, spendResource = true, 
     });
   }
 
-  playWeaponSound(WeaponSound.RELOAD_SINGLE);
+  playUtilitySound("reload", liveItem, WeaponSound.RELOAD_SINGLE, {
+    caliberId: getMag(liveItem)?.ammoType, token: actor,
+  });
+  seqScrollText("ZAŁADOWANO", actor, { color: "#f1c40f", fontSize: 26, duration: 1500 });
   return true;
 }
 

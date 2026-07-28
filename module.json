@@ -16,6 +16,13 @@
         "minimum": "5.0.0",
         "verified": "5.3.0"
       }
+    }],
+    "optional": [{
+      "id": "sequencer",
+      "type": "module",
+      "compatibility": {
+        "minimum": "4.0.0"
+      }
     }]
   },
   "socket": true,

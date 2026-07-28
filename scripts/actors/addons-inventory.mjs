@@ -238,9 +238,6 @@ function _buildAddonPanelHtml(weapon, addons, setup, smCount, hasSM) {
     if (!def) return "";
 
     const effectText = _buildEffectSummary(def);
-    const bluntedNote = a.blunted
-      ? `<span style="color:#c0392b;font-size:11px"> (stępiona — efekty nieaktywne)</span>`
-      : "";
     const toggleBtn = _buildSetupToggleButton(a, setup);
 
     // Dozownik: dose state control
@@ -260,7 +257,7 @@ function _buildAddonPanelHtml(weapon, addons, setup, smCount, hasSM) {
     return `
       <li class="neuro-addon-row" style="display:flex;align-items:center;gap:6px;padding:3px 0;border-bottom:1px solid rgba(128,128,128,0.15)">
         <span style="flex:1;font-size:13px">
-          <strong>${def.label}</strong>${bluntedNote}
+          <strong>${def.label}</strong>
           ${effectText ? `<span style="font-size:11px;opacity:0.75;margin-left:4px">${effectText}</span>` : ""}
         </span>
         ${toggleBtn}
@@ -316,6 +313,18 @@ function _buildSetupToggleButton(installed, setup) {
     `;
   }
 
+  if (id === "laserowy-wskaznik") {
+    const active = setup.laserActive ?? false;
+    return `
+      <button type="button" class="neuro-setup-toggle"
+        data-setup-key="laserActive"
+        title="${active ? "Wyłącz laser (przestaje ujawniać pozycję)" : "Włącz laser (+1 TA, ujawnia pozycję)"}"
+        style="flex:0 0 auto;padding:2px 6px;line-height:normal;${active ? "background:rgba(180,40,40,0.25)" : ""}">
+        ${active ? "✓ Laser wł." : "Laser wył."}
+      </button>
+    `;
+  }
+
   return "";
 }
 
@@ -337,7 +346,7 @@ function _onRenderActorSheetHighlightAddons(app, html) {
     const item = actor.items.get(row.dataset.itemId);
     if (!item || item.type !== "weapon") return;
     const addons = item.getFlag(MODULE_ID, "addons");
-    if (addons && Object.keys(addons).length > 0) {
+    if (Array.isArray(addons) && addons.length > 0) {
       row.classList.add("neuro-has-addons");
     }
   });
@@ -366,7 +375,6 @@ function _onRenderChatMessage(message, html) {
   const setup = getSetup(item);
 
   const tags = addons
-    .filter(a => !a.blunted)
     .map(a => {
       const def = ADDON_DEFS[a.id];
       if (!def) return null;
@@ -411,10 +419,10 @@ function _buildChatTag(def, item, allInstalled, setup) {
 
     if (cb.type === "range-zone") {
       bonusText = `+${cb.normalBonus || cb.longBonus} TA`;
-    } else if (cb.type === "setup") {
-      const deployed = setup[cb.setupKey] ?? false;
-      if (!deployed) return null; // not deployed = not active, don't show
-      bonusText = `+${cb.setupBonus} TA (rozłożony)`;
+    } else if (cb.type === "toggle") {
+      const active = setup[cb.setupKey] ?? false;
+      if (!active) return null; // not active = don't show
+      bonusText = `+${cb.setupBonus} TA`;
     } else if (cb.type === "no-sight") {
       const hasSight = allInstalled.some(a => a.id !== def.id && SIGHT_ADDON_IDS.has(a.id));
       if (hasSight) return null;
@@ -459,7 +467,7 @@ function _buildEffectSummary(def) {
     const cb = def.conditionalBonus;
     if (cb.type === "range-zone" && cb.normalBonus) parts.push(`+${cb.normalBonus} TA (normalny)`);
     if (cb.type === "range-zone" && cb.longBonus)   parts.push(`+${cb.longBonus} TA (daleki)`);
-    if (cb.type === "setup")    parts.push(`+${cb.setupBonus} TA (rozłożony)`);
+    if (cb.type === "toggle")   parts.push(`+${cb.setupBonus} TA (po włączeniu)`);
     if (cb.type === "no-sight") parts.push(`+${cb.normalBonus} TA (brak przyrządu)`);
   }
   if (def.applyMode?.includes("range-x2")) parts.push("zasięgi ×2");

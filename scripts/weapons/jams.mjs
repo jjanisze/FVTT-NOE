@@ -6,6 +6,7 @@ const REPAIR_WEAPON_DC = 15;
 const GUNSMITH_TOOL_KEY = "rusznikarza";
 import { ABILITY_KEYS, buildAbilityRuleChangeNotice, getAbilityLabel, hasAbility } from "../actors/abilities.mjs";
 import { playWeaponSound, WeaponSound } from "./sounds.mjs";
+import { seqScrollText } from "./sequencer.mjs";
 import { hasAddon } from "../config/addons-data.mjs";
 
 export function registerWeaponJams() {
@@ -88,6 +89,7 @@ export async function setJammed(item, { reason = "", chat = true } = {}) {
   }
 
   playWeaponSound(WeaponSound.JAM);
+  seqScrollText("ZACIĘCIE!", liveItem.actor, { color: "#e74c3c", fontSize: 32, duration: 2000 });
   liveItem.sheet?.render?.(true);
   return true;
 }

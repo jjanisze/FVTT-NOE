@@ -22,6 +22,7 @@
  */
 
 import { addExhaustion } from "../config/exhaustion.mjs";
+import { seqScrollText } from "../weapons/sequencer.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const MAX_FUKSY = 3;
@@ -416,6 +417,7 @@ async function _onClickFuks(event) {
 
   // Decrement Fuksy
   await setFuksy(actor, fuksy - 1);
+  seqScrollText("FUKS!", actor, { color: "#2ecc71", fontSize: 36, duration: 2000 });
 
   // Mark source message as rerolled
   if (originalMessage) {

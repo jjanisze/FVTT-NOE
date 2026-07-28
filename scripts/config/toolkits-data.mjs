@@ -1,0 +1,385 @@
+/**
+ * Neuroshima 5e — Toolkits ("Narzędzia małego X").
+ *
+ * Source of truth for stats/ST: `Tabele/Narzedzia.md`.
+ *
+ * Each toolkit is a dnd5e `tool` item with:
+ *  - native ability + proficiency wiring via `system.type.baseItem` (= toolkit key),
+ *  - a generic "Test narzędzi" Check activity (no DC) — the Test Cechy z narzędziem,
+ *  - one Check activity per "Używanie" action with its flat ST (DC).
+ *
+ * Dual-ability kits store the FIRST-listed ability as `system.ability`; the player can
+ * re-pick the ability in the roll dialog. `altAbility` is informational (description).
+ *
+ * Mały medyk is intentionally DEFERRED (skip:true) — needs a tiered heal table + a
+ * 5-charge resource + refill flow (later batch).
+ */
+
+const MODULE_ID = "neuroshima-2026-overrides";
+
+/** Activity flag marking the medyk "Przywracanie PW" heal activity (read by toolkit-medyk.mjs). */
+export const MEDYK_HEAL_FLAG = "medykHeal";
+/** Item flag holding the medyk medicine supply (number of remaining heals). */
+export const MEDYK_CHARGES_FLAG = "medyk-charges";
+/** Default / full medicine supply. */
+export const MEDYK_MAX_CHARGES = 5;
+
+/** Abbrev. label for an ability key. */
+const ABILITY_LABEL = { str: "Siła", dex: "Zręczność", con: "Kondycja", int: "Inteligencja", wis: "Mądrość", cha: "Charyzma" };
+
+/**
+ * @typedef {object} ToolkitAction
+ * @property {string} name  Display name (the ST is appended automatically).
+ * @property {number} dc    Suggested ST (flat DC).
+ */
+
+/**
+ * @typedef {object} Toolkit
+ * @property {string} id            Key in CONFIG.DND5E.tools (and item baseItem).
+ * @property {string} label         Item name.
+ * @property {string} ability       Primary ability key (default for checks).
+ * @property {string|null} altAbility  Alternate ability (informational).
+ * @property {number} weight        kg.
+ * @property {number} price         gb.
+ * @property {number} avail         Base availability %.
+ * @property {boolean} iconReady    True if a dedicated icon exists in icons/tools/.
+ * @property {ToolkitAction[]} actions
+ * @property {string} [produkcja]   Crafting outputs (description only).
+ * @property {string} [special]     Special note (description only, HTML allowed).
+ * @property {boolean} [skip]       Skip generation (deferred kit).
+ */
+
+/** @type {Toolkit[]} */
+export const TOOLKITS = [
+  {
+    id: "aptekarza", label: "Narzędzia małego aptekarza", ability: "int", altAbility: null,
+    weight: 10, price: 40, avail: 20, iconReady: true,
+    actions: [
+      { name: "Identyfikacja rośliny lub grzyba", dc: 10 },
+      { name: "Rozpoznanie choroby", dc: 15 }
+    ],
+    produkcja: "krem do rąk, painkillery, uzupełnienie zestawu małego medyka."
+  },
+  {
+    id: "charakteryzatora", label: "Narzędzia małego charakteryzatora", ability: "dex", altAbility: null,
+    weight: 5, price: 30, avail: 50, iconReady: true,
+    actions: [
+      { name: "Makijaż", dc: 10 }
+    ],
+    produkcja: "zmiana wyglądu, maskowanie twarzy, przebranie się.",
+    special: "Umiejętne użycie (ST 10) daje <strong>Ułatwienie</strong> w Testach Cech opartych na Charyzmie lub w Testach Zręczności (Ukrywanie się)."
+  },
+  {
+    id: "chemika", label: "Narzędzia małego chemika", ability: "int", altAbility: null,
+    weight: 10, price: 50, avail: 30, iconReady: true,
+    actions: [
+      { name: "Identyfikacja substancji", dc: 15 },
+      { name: "Rozpalenie ognia", dc: 10 },
+      { name: "Odrdzewienie mechanizmu", dc: 15 }
+    ],
+    produkcja: "Koktajl Mołotowa, kwas, nafta, papier, proch, paliwo chrzczone, super klej, środki czyszczące i dezynfekujące, świeczka, uzdatnianie wody, zapałki."
+  },
+  {
+    id: "elektronika", label: "Narzędzia małego elektronika", ability: "dex", altAbility: "int",
+    weight: 10, price: 40, avail: 30, iconReady: true,
+    actions: [
+      { name: "Wyłączenie prądu w okolicy", dc: 10 },
+      { name: "Znalezienie kabla z prądem", dc: 15 },
+      { name: "Uruchomienie latarki", dc: 10 },
+      { name: "Otwarcie zamka elektronicznego", dc: 15 }
+    ],
+    produkcja: "baterie, bezpiecznik, bebeszenie maszyn Molocha, latarka, naprawa sprzętu RTV i AGD."
+  },
+  {
+    id: "falszerza", label: "Narzędzia małego fałszerza", ability: "dex", altAbility: null,
+    weight: 10, price: 30, avail: 20, iconReady: true,
+    actions: [
+      { name: "Podrobienie podpisu lub pieczątki", dc: 15 },
+      { name: "Napisanie oficjalnego rozkazu", dc: 15 },
+      { name: "Stenotypowanie", dc: 10 }
+    ],
+    produkcja: "fałszywe papiery, kopiowanie dokumentacji, pieczątki, akty zgonu, ślubu, glejty."
+  },
+  {
+    id: "gorzelnika", label: "Narzędzia małego gorzelnika", ability: "wis", altAbility: "int",
+    weight: 25, price: 40, avail: 60, iconReady: true,
+    actions: [
+      { name: "Wykrycie zatrutego alkoholu", dc: 15 },
+      { name: "Identyfikacja alkoholu", dc: 10 },
+      { name: "Dezynfekcja powierzchni 1,5 × 1,5 m", dc: 10 }
+    ],
+    produkcja: "alkohol, środki dezynfekujące i czyszczące, woda filtrowana."
+  },
+  {
+    id: "hakera", label: "Narzędzia małego hakera", ability: "int", altAbility: null,
+    weight: 10, price: 50, avail: 20, iconReady: true,
+    actions: [
+      { name: "Otwarcie zamka elektronicznego", dc: 15 },
+      { name: "Zakłócenie działania maszyny Molocha", dc: 20 },
+      { name: "Złamanie hasła dostępu", dc: 20 }
+    ],
+    produkcja: "kopiowanie danych, proste gry, programy i wirusy."
+  },
+  {
+    id: "jubilera", label: "Narzędzia małego jubilera", ability: "int", altAbility: "wis",
+    weight: 5, price: 30, avail: 40, iconReady: true,
+    actions: [
+      { name: "Ocena wartości biżuterii", dc: 15 },
+      { name: "Rozpoznanie metalu i kamienia", dc: 10 }
+    ],
+    produkcja: "elegancka lub modna biżuteria."
+  },
+  {
+    id: "kartografa", label: "Narzędzia małego kartografa", ability: "int", altAbility: "dex",
+    weight: 3, price: 50, avail: 20, iconReady: true,
+    actions: [
+      { name: "Narysowanie mapy małej lokalizacji", dc: 15 }
+    ],
+    produkcja: "mapy."
+  },
+  {
+    id: "klusownika", label: "Narzędzia małego kłusownika", ability: "dex", altAbility: "wis",
+    weight: 10, price: 10, avail: 90, iconReady: true,
+    actions: [
+      { name: "Rozbrojenie nieelektronicznej pułapki", dc: 15 },
+      { name: "Zastawienie sideł", dc: 10 }
+    ],
+    produkcja: "lina, prowiant, sidła, sieć, wnyki."
+  },
+  {
+    id: "kowala", label: "Narzędzia małego kowala", ability: "str", altAbility: "wis",
+    weight: 30, price: 50, avail: 60, iconReady: true,
+    actions: [
+      { name: "Wyważenie drzwi lub otwarcie skrzyni", dc: 20 },
+      { name: "Naostrzenie broni", dc: 10 },
+      { name: "Naprawa zdegradowanej broni białej", dc: 15 }
+    ],
+    produkcja: "bełty, broń biała, hełm, igły, kłódka, kolczatki, łom, łopata, naczynia metalowe, podkowy, płyty pancerne, sidła, sprzęt do wspinaczki, strzały, tarcze, wózek, zbroje śmieciowe.",
+    special: "<strong>Naprawa zdegradowanej broni białej:</strong> broń, której kość obrażeń spadła po naturalnej 1 (k12→k10→k8→k6→k4), można naprawić (test ST 15)."
+  },
+  {
+    id: "krawca", label: "Narzędzia małego krawca", ability: "dex", altAbility: null,
+    weight: 15, price: 30, avail: 60, iconReady: true,
+    actions: [
+      { name: "Zszycie rozdarcia lub dwóch kawałków materiału", dc: 10 },
+      { name: "Haft", dc: 15 }
+    ],
+    produkcja: "bandaże, hamak, lekkie pancerze, lina, maska przeciwgazowa, namiot, skafander ochronny, śpiwór, ubrania."
+  },
+  {
+    id: "kucharza", label: "Narzędzia małego kucharza", ability: "wis", altAbility: null,
+    weight: 10, price: 20, avail: 70, iconReady: true,
+    actions: [
+      { name: "Poprawa smaku potrawy", dc: 10 },
+      { name: "Wykrycie zatrutego lub nieświeżego jedzenia", dc: 10 },
+      { name: "Zwabienie istoty zapachem jedzenia", dc: 15 }
+    ],
+    produkcja: "gotowanie w czasie postoju, prowiant, kanapki, środek przeczyszczający."
+  },
+  {
+    id: "mechanika", label: "Narzędzia małego mechanika", ability: "dex", altAbility: "int",
+    weight: 15, price: 50, avail: 50, iconReady: true,
+    actions: [
+      { name: "Otwarcie drzwi pojazdu", dc: 15 },
+      { name: "Otwarcie zamkniętych drzwi", dc: 20 }
+    ],
+    produkcja: "bebeszenie maszyn Molocha, naprawianie pojazdów, wózek.",
+    special: "<strong>Naprawa pojazdu (fachowa):</strong> wymaga kilkugodzinnego postoju, odpowiednich części i biegłości w narzędziach małego mechanika."
+  },
+  {
+    id: "medyka", label: "Narzędzia małego medyka", ability: "int", altAbility: null,
+    weight: 10, price: 50, avail: 40, iconReady: true, heal: true,
+    actions: [
+      { name: "Ustabilizowanie istoty", dc: 10 },
+      { name: "Powstrzymanie krwawienia", dc: 10 }
+    ],
+    produkcja: "painkiller, bandaże.",
+    special: "<strong>Przywracanie PW</strong> (akcja, biegłość wymagana): Test Inteligencji (narzędzia małego medyka) względem oznaczonego pacjenta — 5+: 1k4, 10+: 1k4+INT, 15+: 2k4+INT, 20+: 3k4+INT, 25+: 4k4+INT. Zapas na 5 leczeń (uzupełnienie 5 gb). Bez biegłości: tylko automatyczna stabilizacja sojusznika."
+  },
+  {
+    id: "rusznikarza", label: "Narzędzia małego rusznikarza", ability: "dex", altAbility: "int",
+    weight: 20, price: 50, avail: 40, iconReady: true,
+    actions: [
+      { name: "Flara świecąca przez 1 minutę", dc: 15 },
+      { name: "Elaboracja amunicji", dc: 10 }
+    ],
+    produkcja: "broń typu samoróbka, elaboracja amunicji, ulepszanie broni palnej.",
+    special: "<strong>Odblokowanie zaciętej broni</strong> obsługiwane przez system zacięć. <strong>Elaboracja amunicji:</strong> patrz tabela w podręczniku."
+  },
+  {
+    id: "rzeznika", label: "Narzędzia małego rzeźnika", ability: "wis", altAbility: "str",
+    weight: 10, price: 30, avail: 80, iconReady: true,
+    actions: [
+      { name: "Prezentacja narzędzi — zastraszanie", dc: 10 },
+      { name: "Przecięcie liny", dc: 10 }
+    ],
+    produkcja: "bebeszenie potworów i zwierząt."
+  },
+  {
+    id: "stolarza", label: "Narzędzia małego stolarza", ability: "dex", altAbility: "str",
+    weight: 5, price: 20, avail: 30, iconReady: true,
+    actions: [
+      { name: "Otwarcie drzwi lub pojemnika", dc: 20 },
+      { name: "Ocena wytrzymałości drewnianej konstrukcji", dc: 15 }
+    ],
+    produkcja: "bełty, bejsbol, dmuchawka, łuk, meble, narty, pochodnia, gwizdek, skrzynia, strzały, taran, tratwa."
+  },
+  {
+    id: "szulera", label: "Narzędzia małego szulera", ability: "wis", altAbility: "cha",
+    weight: 2, price: 20, avail: 10, iconReady: true,
+    actions: [
+      { name: "Zauważenie oszustwa w grze", dc: 10 },
+      { name: "Wygranie gry w karty lub kości", dc: 20 }
+    ],
+    produkcja: "fałszowane kostki, znaczone karty."
+  },
+  {
+    id: "szklarza", label: "Narzędzia małego szklarza", ability: "int", altAbility: "dex",
+    weight: 20, price: 40, avail: 20, iconReady: true,
+    actions: [
+      { name: "Rozbicie szkła pancernego", dc: 15 },
+      { name: "Wycięcie dziury w szybie", dc: 10 }
+    ],
+    produkcja: "szklane naczynia, szkło powiększające, luneta, lupa, lustro, żarówka."
+  },
+  {
+    id: "slusarza", label: "Narzędzia małego ślusarza", ability: "dex", altAbility: null,
+    weight: 5, price: 30, avail: 20, iconReady: true,
+    actions: [
+      { name: "Otwarcie zamka mechanicznego", dc: 15 },
+      { name: "Otwarcie zamka elektronicznego", dc: 25 },
+      { name: "Rozbrojenie pułapki", dc: 15 },
+      { name: "Rozbrojenie miny", dc: 20 }
+    ],
+    produkcja: "dmuchawka, dorobienie klucza, potykacz, prosta pułapka."
+  },
+  {
+    id: "tatuazysty", label: "Narzędzia małego tatuażysty", ability: "dex", altAbility: null,
+    weight: 5, price: 40, avail: 30, iconReady: true,
+    actions: [
+      { name: "Oznakowanie istoty", dc: 15 }
+    ],
+    produkcja: "tatuowanie skóry."
+  }
+];
+
+/** Core fallback icon for kits without a dedicated icon yet. */
+const FALLBACK_ICON = "icons/svg/item-bag.svg";
+
+/** Resolve the item image for a toolkit. */
+function _toolkitImg(kit) {
+  return kit.iconReady
+    ? `modules/${MODULE_ID}/icons/tools/${kit.id}.svg`
+    : FALLBACK_ICON;
+}
+
+/** Build the HTML description for a toolkit item. */
+function _toolkitDescription(kit) {
+  const abil = ABILITY_LABEL[kit.ability] ?? kit.ability;
+  const abilLine = kit.altAbility
+    ? `${abil} lub ${ABILITY_LABEL[kit.altAbility] ?? kit.altAbility}`
+    : abil;
+  const uses = kit.actions.map(a => `<li>${a.name} (ST ${a.dc})</li>`).join("");
+  let html = `<p><strong>Cecha:</strong> ${abilLine} &nbsp;|&nbsp; <strong>Waga:</strong> ${kit.weight} kg</p>`;
+  html += `<p><strong>Używanie:</strong></p><ul>${uses}</ul>`;
+  if ( kit.produkcja ) html += `<p><strong>Produkcja:</strong> ${kit.produkcja}</p>`;
+  if ( kit.special ) html += `<p>${kit.special}</p>`;
+  return html;
+}
+
+/**
+ * Build the bare `tool` item data for a toolkit (WITHOUT activities — those are created
+ * afterwards via `item.createActivity`, per dnd5e 5.3 quirk).
+ * @param {Toolkit} kit
+ * @returns {object}
+ */
+export function buildToolkitItemData(kit) {
+  return {
+    name: kit.label,
+    type: "tool",
+    img: _toolkitImg(kit),
+    system: {
+      type: { value: "tool", baseItem: kit.id },
+      ability: kit.ability,
+      proficient: null,
+      description: { value: _toolkitDescription(kit) },
+      weight: { value: kit.weight, units: "kg" },
+      price: { value: kit.price, denomination: "gp" },
+      quantity: 1
+    },
+    flags: { [MODULE_ID]: { toolkit: kit.id } }
+  };
+}
+
+/** Build the check-activity payload for one ST action (or the generic test). */
+function _buildCheckActivity(kit, { name, dc }) {
+  return {
+    name,
+    check: {
+      ability: kit.ability,
+      associated: [kit.id],
+      dc: { calculation: "", formula: dc == null ? "" : String(dc) }
+    }
+  };
+}
+
+/**
+ * Create (or refresh) all toolkit `tool` items on the given actor (the Zbrojownia master).
+ * Upserts by `system.type.baseItem`; rebuilds activities on every run.
+ * @param {Actor} [actor]  Defaults to the flagged Zbrojownia actor.
+ * @returns {Promise<{created:number, updated:number}>}
+ */
+export async function createToolkits(actor) {
+  actor ??= game.actors.find(a => a.getFlag(MODULE_ID, "isZbrojownia"));
+  if ( !actor ) {
+    ui.notifications.error("Brak aktora Zbrojownia (flaga isZbrojownia).");
+    return { created: 0, updated: 0 };
+  }
+
+  let created = 0;
+  let updated = 0;
+
+  for ( const kit of TOOLKITS ) {
+    if ( kit.skip ) continue;
+
+    const data = buildToolkitItemData(kit);
+    let item = actor.items.find(i => i.type === "tool" && i.system.type?.baseItem === kit.id);
+
+    if ( item ) {
+      await item.update(data);
+      updated++;
+    } else {
+      const [doc] = await actor.createEmbeddedDocuments("Item", [data]);
+      item = doc;
+      created++;
+    }
+
+    // Wipe ALL activities (incl. dnd5e's auto-created default "Check"), then rebuild.
+    for ( const a of Array.from(item.system.activities) ) await item.deleteActivity(a.id);
+
+    // Generic "Test narzędzi" (no DC) + one Check per ST action.
+    await item.createActivity("check", _buildCheckActivity(kit, { name: "Test narzędzi", dc: null }), { renderSheet: false });
+    for ( const action of kit.actions ) {
+      await item.createActivity("check", _buildCheckActivity(kit, action), { renderSheet: false });
+    }
+
+    // Mały medyk: special "Przywracanie PW" utility activity (tiered heal handled by
+    // toolkit-medyk.mjs via the dnd5e.postUseActivity hook) + initialise medicine supply.
+    if ( kit.heal ) {
+      await item.createActivity("utility", {
+        name: "Przywracanie PW",
+        img: `modules/${MODULE_ID}/icons/tools/${kit.id}.svg`
+      }, { renderSheet: false });
+      const healAct = Array.from(item.system.activities).find(a => a.name === "Przywracanie PW");
+      if ( healAct ) {
+        await item.updateActivity(healAct.id, { flags: { [MODULE_ID]: { [MEDYK_HEAL_FLAG]: true } } });
+      }
+      // Medicine supply = native item charges (editable in inventory / item sheet → restock).
+      await item.update({ "system.uses.max": String(MEDYK_MAX_CHARGES), "system.uses.spent": 0 });
+    }
+  }
+
+  ui.notifications.info(`✔ Narzędzia: ${created} nowych, ${updated} odświeżonych na „${actor.name}”.`);
+  console.log(`Neuroshima 5e | Toolkits: created ${created}, updated ${updated}`);
+  return { created, updated };
+}

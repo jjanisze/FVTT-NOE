@@ -133,7 +133,7 @@ function _onRenderActorSheetInjectGrenadeSection(app, html) {
     uiList.appendChild(li);
 
     const nativeLi = inventoryTab.querySelector(`li[data-item-id="${item.id}"]`);
-    if (nativeLi && nativeLi.parentElement) nativeLi.style.display = "none";
+    nativeLi?.remove();
   }
 
   const panel = document.createElement("div");

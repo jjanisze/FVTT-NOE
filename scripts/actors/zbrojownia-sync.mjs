@@ -25,6 +25,7 @@ const PARENT_FOLDER_NAME = "Weapons (PC)";
 const AMMO_FOLDER_NAME     = "Amunicja";
 const MAGAZINE_FOLDER_NAME = "Magazynki";
 const GRENADE_FOLDER_NAME  = "Granaty";
+const TOOL_FOLDER_NAME      = "Narzędzia";
 
 /** Weapon type key → folder label (must match NEURO_WEAPON_TYPES in weapons.mjs). */
 const TYPE_FOLDER_LABELS = {
@@ -88,7 +89,15 @@ async function _ensureFolders() {
     grenadeFolder = await Folder.create({ name: GRENADE_FOLDER_NAME, type: "Item", folder: parent.id });
   }
 
-  return { parent, byType, ammoFolder, magazineFolder, grenadeFolder };
+  // Tools (Narzędzia) folder
+  let toolFolder = game.folders.find(f =>
+    f.name === TOOL_FOLDER_NAME && f.type === "Item" && f.folder?.id === parent.id
+  );
+  if (!toolFolder) {
+    toolFolder = await Folder.create({ name: TOOL_FOLDER_NAME, type: "Item", folder: parent.id });
+  }
+
+  return { parent, byType, ammoFolder, magazineFolder, grenadeFolder, toolFolder };
 }
 
 /* -------------------------------------------- */
@@ -102,6 +111,7 @@ async function _ensureFolders() {
 async function syncZbrojownia(actor) {
   const items = actor.items.filter(i =>
     i.type === "weapon" ||
+    i.type === "tool" ||
     (i.type === "consumable" && i.system.type?.value === "ammo")
   );
 
@@ -112,7 +122,7 @@ async function syncZbrojownia(actor) {
 
   ui.notifications.info(`Synchronizuję zbrojownię… (${items.size} pozycji)`);
 
-  const { byType, ammoFolder, magazineFolder, grenadeFolder } = await _ensureFolders();
+  const { byType, ammoFolder, magazineFolder, grenadeFolder, toolFolder } = await _ensureFolders();
 
   let created = 0;
   let updated = 0;
@@ -120,7 +130,9 @@ async function syncZbrojownia(actor) {
   for (const item of items) {
     // Determine target folder
     let targetFolder;
-    if (item.type === "consumable") {
+    if (item.type === "tool") {
+      targetFolder = toolFolder;
+    } else if (item.type === "consumable") {
       const sub = item.system.type?.subtype ?? "";
       if (sub.startsWith("magazine-")) {
         targetFolder = magazineFolder;

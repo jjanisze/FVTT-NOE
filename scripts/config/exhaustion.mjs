@@ -23,6 +23,8 @@
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
+import { seqScrollText } from "../weapons/sequencer.mjs";
+
 /**
  * Known exhaustion sources with Polish labels and whether long rest auto-clears them.
  */
@@ -178,6 +180,7 @@ export async function addExhaustion(actor, sourceKey, { chat = true } = {}) {
     });
   }
 
+  seqScrollText("WYCZERPANIE", actor, { color: "#3498db", fontSize: 26, duration: 1800 });
   return newLevel;
 }
 

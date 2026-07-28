@@ -246,9 +246,13 @@ actor.createEmbeddedDocuments("Item", [{
 | Długi magazynek (karabin) | `icons/magazines/mag_assault_rifle.svg` | ✅ gotowe |
 | Ciężki (taśma/bęben) | `icons/magazines/mag_machine_gun_belt.svg` | ✅ gotowe |
 | Kołczan | `icons/magazines/quiver.svg` | ✅ gotowe |
-| Szybkoładowarka rew. | `icons/magazines/speedloader.svg` | ❌ **POTRZEBNA** |
+| Szybkoładowarka rew. | `icons/magazines/speedloader.svg` | ✅ gotowe (`Weapons_Resize_12` → `process_grid_12.py`) |
 
-### 9.1 Generowanie speedloader.svg
+### 9.1 Generowanie speedloader.svg — ZROBIONE
+
+Ikona została wygenerowana (`process_grid_12.py`, tile z `Weapons_Resize_12.png`) i leży w
+`icons/magazines/speedloader.svg`. Poniższe kroki zachowane jako referencja, gdyby trzeba było
+ją odtworzyć/podmienić.
 
 1. Przygotuj nowy spritesheet lub pojedynczy tile 345×345 px (standard gridu)  
    na czarnym tle, biały rysunek szybkoładowarki rewolwerowej (HK Speed Loader look)

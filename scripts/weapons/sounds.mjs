@@ -14,11 +14,21 @@
  * TODO (future): filter by distance and LOS before playing for remote clients.
  */
 
+import { seqPlayAudio } from "./sequencer.mjs";
+import { getCaliberSoundOverride } from "../config/caliber-vfx.mjs";
+import { getWeaponSoundOverride } from "../config/weapon-vfx.mjs";
+import {
+  bankFireFile,
+  bankUtilityFile,
+  bankImpactFile,
+  impactMaterialFor,
+} from "../config/sound-banks.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 const SOCKET_EVENT = `module.${MODULE_ID}`;
 const SOUNDS_BASE = `modules/${MODULE_ID}/sounds`;
 
-function getDefaultVolume() {
+export function getDefaultVolume() {
   return game.settings.get(MODULE_ID, "weaponSoundVolume") ?? 0.5;
 }
 
@@ -94,8 +104,23 @@ export const WeaponSound = Object.freeze({
     MELEE_HIT_HEAVY:  "melee_hit_heavy",
     /** Massive hit (30+ dmg) */
     MELEE_HIT_MASSIVE:"melee_hit_massive",
+    /** Piła spalinowa hit — chainsaw biting in, overrides the generic slashing tier. */
+    MELEE_HIT_CHAINSAW:"melee_hit_chainsaw",
     /** Melee weapon degradation (Katana crack/chip) */
-    MELEE_DEGRADE:    "melee_degrade"
+    MELEE_DEGRADE:    "melee_degrade",
+
+    // --- SPALINOWA (combustion-engine weapons, e.g. Piła spalinowa) ---
+    /** Engine pull-start / ignition. */
+    ENGINE_START:      "engine_start",
+    /** Engine shutdown. */
+    ENGINE_STOP:       "engine_stop",
+    /** Idle loop while the engine is running (see engine.mjs — persisted via Sequencer). */
+    ENGINE_IDLE_LOOP:  "engine_idle_loop",
+
+    // --- PROJECTILE IMPACT ---
+    /** A round landing on a target. Bank-only: the generic tier has no file,
+     *  so nothing plays unless the weapon's bank has an impact recording. */
+    IMPACT:           "impact"
   });
   
   /* -------------------------------------------- */
@@ -142,7 +167,12 @@ export const WeaponSound = Object.freeze({
     [WeaponSound.MELEE_HIT_SLASHING]: `${SOUNDS_BASE}/melee/hit_slashing.ogg`,
     [WeaponSound.MELEE_HIT_HEAVY]:    `${SOUNDS_BASE}/melee/hit_heavy.ogg`,
     [WeaponSound.MELEE_HIT_MASSIVE]:  `${SOUNDS_BASE}/melee/hit_massive.ogg`,
+    [WeaponSound.MELEE_HIT_CHAINSAW]: `${SOUNDS_BASE}/melee/hit_chainsaw.ogg`,
     [WeaponSound.MELEE_DEGRADE]:      `${SOUNDS_BASE}/melee/degrade_chip.ogg`,
+
+    [WeaponSound.ENGINE_START]:       `${SOUNDS_BASE}/melee/engine_start.ogg`,
+    [WeaponSound.ENGINE_STOP]:        `${SOUNDS_BASE}/melee/engine_stop.ogg`,
+    [WeaponSound.ENGINE_IDLE_LOOP]:   `${SOUNDS_BASE}/melee/engine_idle_loop.ogg`,
   });
 
 /* -------------------------------------------- */
@@ -158,7 +188,7 @@ export function registerWeaponSounds() {
   game.socket.on(SOCKET_EVENT, data => {
     if (data?.type !== "weaponSound") return;
     if (data.sceneId && canvas.scene?.id !== data.sceneId) return;
-    _playLocal(data.soundKey, data.volume);
+    _playLocal(data.soundKey, data.volume, data.src);
   });
 
   // Non-firearm ranged weapons: play shot sound on postRollAttack.
@@ -209,6 +239,14 @@ export function registerWeaponSounds() {
       // subject?.attack?.type?.value may be empty if DataModel getter hasn't run — fallback to item
       const attackType = subject?.attack?.type?.value || item.system?.attackType || "";
       if (attackType === "melee") {
+        // Piła spalinowa: dedicated "chainsaw biting in" sound, regardless of damage tier —
+        // the generic slashing bucket doesn't say "chainsaw", and the tiers below aren't
+        // meaningful for it.
+        if (item.system?.identifier === "pila-spalinowa") {
+          playWeaponSound(WeaponSound.MELEE_HIT_CHAINSAW);
+          return;
+        }
+
         const dmgTotal = rolls.reduce((acc, r) => acc + r.total, 0);
         const dmgType = rolls[0]?.options?.type ?? "bludgeoning"; // heurystyka
 
@@ -238,16 +276,137 @@ export function registerWeaponSounds() {
  * @param {string} soundKey  One of WeaponSound.*
  * @param {object} [opts]
  * @param {number} [opts.volume]  0–1 volume level (defaults to setting)
+ * @param {Actor|TokenDocument|Token|null} [opts.token]  Origin for positional audio.
+ * @param {string} [opts.src]  Explicit file path, overriding the SOUND_PATHS
+ *   lookup. Used by the bank layer (sound-banks.mjs), which resolves a concrete
+ *   per-weapon file — and a random alternate take — that no static enum entry
+ *   could name. `soundKey` is still required and still meaningful: it selects
+ *   the hearing radius in sequencer.mjs's SOUND_RADIUS table.
  */
-export function playWeaponSound(soundKey, { volume } = {}) {
-  if (!SOUND_PATHS[soundKey]) return;
-  _playLocal(soundKey, volume);
+/**
+ * Resolve a WeaponSound key to its file path, for callers that need the raw
+ * path rather than one-shot playback (e.g. engine.mjs building a persisted,
+ * looping Sequencer sound).
+ *
+ * @param {string} soundKey  One of WeaponSound.*
+ * @returns {string|undefined}
+ */
+export function getWeaponSoundPath(soundKey) {
+  return SOUND_PATHS[soundKey];
+}
+
+export function playWeaponSound(soundKey, { volume, token, src: srcOverride } = {}) {
+  const src = srcOverride ?? SOUND_PATHS[soundKey];
+  if (!src) return;
+  const vol = Math.pow(volume ?? getDefaultVolume(), 2);
+  if (seqPlayAudio(src, vol, { soundKey, token })) return;
+  // Legacy fallback: play locally + broadcast via socket.
+  foundry.audio.AudioHelper.play({ src, volume: vol, loop: false }).catch(() => {});
   game.socket.emit(SOCKET_EVENT, {
     type: "weaponSound",
     soundKey,
+    // The resolved path must travel with the event. Remote clients cannot
+    // re-derive it: SOUND_PATHS[soundKey] would give them the generic tier
+    // instead of the bank file, and even a matching bank would re-randomize
+    // to a different take, so each client would hear a different shot.
+    src: srcOverride ?? null,
     sceneId: canvas.scene?.id ?? null,
     volume: volume,
   });
+}
+
+/* -------------------------------------------- */
+/*  Bank-aware playback (see sound-banks.mjs)     */
+/* -------------------------------------------- */
+
+/**
+ * Play the single-shot (P) sound for a weapon, preferring its sound bank.
+ *
+ * Falls back to the generic tier resolved by getShotSoundKey() when the
+ * weapon's caliber has no bank assigned, or its bank has no `shot` recording.
+ *
+ * @param {Item5e|null} item
+ * @param {object} [opts]
+ * @param {string|null} [opts.caliberId]
+ * @param {Actor|TokenDocument|Token|null} [opts.token]
+ */
+export function playShotSound(item, { caliberId, token } = {}) {
+  const key = getShotSoundKey(item, { caliberId });
+  const src = bankFireFile({
+    weaponId: item?.system?.identifier,
+    caliberId,
+    fireMode: "p",
+    // A suppressor overrides the caliber's bank entirely — see SILENCED_BANK.
+    silenced: _isSilenced(item),
+  });
+  playWeaponSound(key, { src, token });
+}
+
+/**
+ * Play the burst sound for a weapon in a given fire mode, preferring its bank.
+ *
+ * @param {Item5e|null} item
+ * @param {string} fireMode  "ks" | "ds" | "ms" | "oz"
+ * @param {object} [opts]
+ * @param {string|null} [opts.caliberId]
+ * @param {Actor|TokenDocument|Token|null} [opts.token]
+ */
+export function playBurstSound(item, fireMode, { caliberId, token } = {}) {
+  const key = getBurstSoundKey(item, fireMode, { caliberId });
+  const src = bankFireFile({
+    weaponId: item?.system?.identifier,
+    caliberId,
+    fireMode,
+  });
+  playWeaponSound(key, { src, token });
+}
+
+/**
+ * Play a reload or dry-fire-click sound, preferring the weapon's bank.
+ *
+ * @param {string} slot  "reload" | "click"
+ * @param {Item5e|null} item
+ * @param {string} fallbackKey  WeaponSound.* used when the bank has no such slot.
+ * @param {object} [opts]
+ * @param {string|null} [opts.caliberId]
+ * @param {Actor|TokenDocument|Token|null} [opts.token]
+ */
+export function playUtilitySound(slot, item, fallbackKey, { caliberId, token } = {}) {
+  const src = bankUtilityFile(slot, {
+    weaponId: item?.system?.identifier,
+    caliberId,
+  });
+  playWeaponSound(fallbackKey, { src, token });
+}
+
+/**
+ * Play the impact sound for a round landing on a target.
+ *
+ * The material is inferred from the target actor (creature type, or an explicit
+ * `flags.neuroshima-2026-overrides.impactMaterial` override) — see
+ * sound-banks.mjs. Silent when the firing weapon's bank has no impact
+ * recording, which is the common case for fire-only prototypes without an
+ * `impact:` delegate.
+ *
+ * @param {Item5e|null} item          The weapon that fired.
+ * @param {Actor|null} targetActor    The actor being hit.
+ * @param {object} [opts]
+ * @param {string|null} [opts.caliberId]
+ * @param {string} [opts.fireMode]  "p" for a single round, or a burst mode.
+ *   Selects the single vs burst impact recording — the burst ones are multi-hit
+ *   strings and are wrong for a single shot. Defaults to "p".
+ * @param {Actor|TokenDocument|Token|null} [opts.token]  Impact origin (the TARGET,
+ *   not the shooter — the sound happens where the round lands).
+ */
+export function playImpactSound(item, targetActor, { caliberId, fireMode = "p", token } = {}) {
+  const src = bankImpactFile({
+    weaponId: item?.system?.identifier,
+    caliberId,
+    material: impactMaterialFor(targetActor),
+    fireMode,
+  });
+  if (!src) return;
+  playWeaponSound(WeaponSound.IMPACT, { src, token: token ?? targetActor });
 }
 
 /**
@@ -274,13 +433,25 @@ export function playExplosiveSoundForSubtype(subtype) {
 }
 
 /**
- * Derive the correct single-shot sound key from a weapon item.
- * Checks for silencer property to select the muffled variant.
+ * Derive the correct single-shot (P) sound key from a weapon item.
+ * Checks the weapon-specific and caliber-specific overrides first (see
+ * weapon-vfx.mjs / caliber-vfx.mjs) — this lookup runs BEFORE the firearm
+ * check below, not nested inside it, so calibers on non-"palna"-typed items
+ * (e.g. Moździerz, type "specjalna") still get consulted rather than being
+ * silently skipped. Falls back to silencer/rocket/grenade/ranged detection
+ * when no override exists.
  *
- * @param {Item5e} item
- * @returns {string}  WeaponSound.SHOT_FIREARM | SHOT_SILENCED | SHOT_RANGED
+ * @param {Item5e|null} item
+ * @param {object} [opts]
+ * @param {string|null} [opts.caliberId]  getMag(item)?.ammoType, if known
+ * @returns {string}  WeaponSound.SHOT_FIREARM | SHOT_SILENCED | SHOT_RANGED | ...
  */
-export function getShotSoundKey(item) {
+export function getShotSoundKey(item, { caliberId } = {}) {
+  const weaponOverride = getWeaponSoundOverride(item?.system?.identifier, "p");
+  if (weaponOverride) return weaponOverride;
+  const caliberOverride = getCaliberSoundOverride(caliberId, "p");
+  if (caliberOverride) return caliberOverride;
+
   if (_isFirearmItem(item)) {
     if (_isRocketLauncher(item)) return WeaponSound.SHOT_ROCKET;
     if (_isGrenadeLauncher(item)) return WeaponSound.SHOT_GRENADE;
@@ -289,18 +460,47 @@ export function getShotSoundKey(item) {
   return WeaponSound.SHOT_RANGED;
 }
 
+/**
+ * Derive the correct burst-mode sound key from a weapon item. Same
+ * weapon-then-caliber-then-default priority as getShotSoundKey; see that
+ * function's doc comment for why the override check must not be nested
+ * inside a firearm-type gate.
+ *
+ * @param {Item5e|null} item
+ * @param {string} fireMode  "ks" | "ds" | "ms" | "oz"
+ * @param {object} [opts]
+ * @param {string|null} [opts.caliberId]  getMag(item)?.ammoType, if known
+ * @returns {string}  WeaponSound.BURST_SHORT | BURST_LONG | BURST_CRUSHING | SUPPRESSIVE
+ */
+export function getBurstSoundKey(item, fireMode, { caliberId } = {}) {
+  const weaponOverride = getWeaponSoundOverride(item?.system?.identifier, fireMode);
+  if (weaponOverride) return weaponOverride;
+  const caliberOverride = getCaliberSoundOverride(caliberId, fireMode);
+  if (caliberOverride) return caliberOverride;
+
+  switch (fireMode) {
+    case "ks": return WeaponSound.BURST_SHORT;
+    case "ds": return WeaponSound.BURST_LONG;
+    case "ms": return WeaponSound.BURST_CRUSHING;
+    case "oz": return WeaponSound.SUPPRESSIVE;
+    default: return WeaponSound.BURST_SHORT;
+  }
+}
+
 /* -------------------------------------------- */
 /*  Private helpers                               */
 /* -------------------------------------------- */
 
-function _playLocal(soundKey, volume) {
+function _playLocal(soundKey, volume, srcOverride) {
   let vol = volume ?? getDefaultVolume();
-  
+
   // Apply an exponential scaling curve to make the volume slider feel more natural (logarithmic perception).
   // This causes 0.5 to be 0.25 actual amplitude (-12dB drop), and 0.05 to be 0.0025 (-52dB).
   vol = Math.pow(vol, 2);
 
-  const src = SOUND_PATHS[soundKey];
+  // Prefer the path the emitting client resolved, so every client hears the
+  // same bank file and the same alternate take.
+  const src = srcOverride ?? SOUND_PATHS[soundKey];
   if (!src) return;
   // foundry.audio.AudioHelper.play is the confirmed-working static API in FVTT v14.
   foundry.audio.AudioHelper.play({ src, volume: vol, loop: false }).catch(() => {});
