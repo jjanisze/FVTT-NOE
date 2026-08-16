@@ -58,12 +58,57 @@ function trudnyTeren(region) {
   return region?.document?.flags?.[MODULE_ID]?.source === "furniture";
 }
 
+/** Ostatnia znana pozycja kursora — aktualizowana biernym nasłuchem. */
+let kursorX = -1;
+let kursorY = -1;
+
 /**
- * Czy którykolwiek pionek gracza pokazuje właśnie miarkę ruchu.
+ * Czy plansza jest **naprawdę** pod kursorem.
+ *
+ * Nie wystarczy `token.hover`. Foundry ustawia je przy najechaniu i zdejmuje
+ * przy zjechaniu — ale gdy nad pionkiem otworzy się okno (podwójne kliknięcie
+ * wysuwa kartę postaci), kursor nigdy z pionka nie zjeżdża, `hoverOut` nie
+ * przychodzi i `hover` zostaje `true` na zawsze. Podświetlenie zostawało wtedy
+ * zapalone aż do kolejnej pary najechanie+zjechanie.
+ *
+ * `elementFromPoint` odpowiada na właściwe pytanie: co jest teraz pod kursorem.
+ * Karta postaci to `DIV` wewnątrz okna, plansza to `CANVAS#board`.
+ */
+function kursorNadPlansza() {
+  if (kursorX < 0) return true;      // jeszcze nie wiemy — nie gasimy na zapas
+  const element = document.elementFromPoint(kursorX, kursorY);
+  return !!element?.closest?.("#board");
+}
+
+/** Pozycja kursora przeliczona z ekranu na współrzędne planszy. */
+function kursorWSwiecie() {
+  const m = canvas.stage.worldTransform;
+  return { x: (kursorX - m.tx) / m.a, y: (kursorY - m.ty) / m.d };
+}
+
+/**
+ * Czy gracz właśnie planuje ruch swoim pionkiem.
+ *
  * Wymagamy własności, żeby najechanie na cudzy pionek nie odsłaniało mapy.
+ *
+ * Kluczowe: **nie ufamy `token.hover`**. To pole potrafi zostać zapalone na
+ * stałe — podwójne kliknięcie w pionek wysuwa kartę postaci, kursor nigdy
+ * z pionka nie zjeżdża, `hoverOut` nie przychodzi i `hover` zostaje `true`
+ * do następnej pary najechanie+zjechanie. Zamiast tego sprawdzamy sami, czy
+ * kursor faktycznie jest nad obrysem pionka. Wystarczy, że gracz ruszy myszą
+ * w stronę karty, a podświetlenie gaśnie — niezależnie od tego, czy Foundry
+ * zdążyło zdjąć `hover`.
  */
 function ktosPlanujeRuch() {
-  return (canvas.tokens?.placeables ?? []).some(t => t.ruler?.visible && t.isOwner);
+  const pionki = canvas.tokens?.placeables ?? [];
+  // Realne przeciąganie wygrywa ze wszystkim: kursor może wtedy wyjechać poza
+  // planszę (nad pasek boczny, nad okno) i ruch dalej trwa.
+  if (pionki.some(t => t.isOwner && t.isDragged)) return true;
+  if (!kursorNadPlansza()) return false;
+  const kursor = kursorWSwiecie();
+  return pionki.some(t => t.isOwner && t.ruler?.visible
+    // showRuler to jawna decyzja gracza (skrót klawiszowy) - nie zależy od myszy
+    && (t.showRuler || t.bounds?.contains(kursor.x, kursor.y)));
 }
 
 /** Zapala albo gasi strefy, jeśli stan się zmienił. */
@@ -122,6 +167,47 @@ export function registerDifficultTerrainHint() {
   Hooks.on("deleteToken", przelicz);
   Hooks.on("controlToken", przelicz);
   Hooks.on("canvasReady", () => { podswietlone = false; przelicz(); });
+
+  // Ruch kursora: bierny nasłuch na całym dokumencie. Przeliczamy przy KAŻDYM
+  // ruchu, bo zjechanie z pionka nie zmienia tego, że kursor dalej jest nad
+  // planszą — a to właśnie zjechanie z pionka ma gasić podświetlenie.
+  //
+  // Dławimy do jednej klatki: `pointermove` potrafi lecieć kilkaset razy na
+  // sekundę, a `przelicz()` i tak wychodzi natychmiast, gdy stan się nie
+  // zmienił.
+  let zaplanowane = false;
+  document.addEventListener("pointermove", (event) => {
+    kursorX = event.clientX;
+    kursorY = event.clientY;
+    if (zaplanowane) return;
+    zaplanowane = true;
+    requestAnimationFrame(() => { zaplanowane = false; przelicz(); });
+  }, { capture: true, passive: true });
+
+  // Okno może się otworzyć albo zamknąć **pod nieruchomym kursorem** — wtedy
+  // żaden `pointermove` nie przyjdzie, a to, co jest pod kursorem, się zmieni.
+  // Hak leci dla wszystkich klas potomnych ApplicationV2.
+  Hooks.on("renderApplicationV2", przelicz);
+  Hooks.on("closeApplicationV2", przelicz);
 }
 
-export const difficultTerrainHintApi = { przelicz, trudnyTeren };
+/**
+ * Podgląd stanu — do diagnozy.
+ *
+ * `region.visible` NIE nadaje się na miarę działania tej funkcji, gdy patrzy
+ * MG: przy widoczności GAMEMASTER rdzeń pokazuje mu strefy zawsze, niezależnie
+ * od podświetlenia. Stąd osobny wgląd w to, co naprawdę policzył moduł.
+ */
+function stan() {
+  const pionki = canvas?.tokens?.placeables ?? [];
+  return {
+    podswietlone,
+    kursor: { x: kursorX, y: kursorY },
+    kursorNadPlansza: kursorNadPlansza(),
+    planujeRuch: ktosPlanujeRuch(),
+    pionkiZMiarka: pionki.filter(t => t.isOwner && t.ruler?.visible).map(t => t.name),
+    przeciagane: pionki.filter(t => t.isOwner && t.isDragged).map(t => t.name)
+  };
+}
+
+export const difficultTerrainHintApi = { przelicz, trudnyTeren, stan };
