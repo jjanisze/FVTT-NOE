@@ -453,6 +453,38 @@ Szczegółowy plan: `PLAN_classes.md`
   - Wszystko zweryfikowane live na Alanie (CDP): efekt terenu doszedł backfillem, rzut na `skr` wyszedł
     jako `1d20adv`
 
+### Bestiariusz
+Dodane do trackera 2026-08-21 — warstwa była kompletna i zweryfikowana od jakiegoś czasu, ale nie
+miała tu własnego miejsca (patrz stary, błędny wpis `[ ] Enemy sheets + bestiary imports` pod
+Phase 5, teraz skreślony). Pełny opis pipeline'u: `DEV_GUIDE.md` §11.
+
+- [x] 51 istot jako kompendium `neuroshima.bestiariusz` (6 folderów) — pipeline
+  `Podrecznik/Bestiariusz/*.md` (Obsidian, źródło treści) → `dev/bestiary/extract_bestiary.py` →
+  `gen_bestiary.py` → `scripts/config/bestiary-data.mjs` → `dev/packs/build-packs.mjs`
+- [x] **89 z 261 zdolności zautomatyzowane** — `RULES` (klucz = nazwa zdolności, powtarzalne
+  między istotami: Pierwsze spotkanie, Algorytm czuwania, Współpraca, Światłowstręt) +
+  `AUTOMATION` (klucz = `"<istota>.<zdolność>"`, przypadki jednostkowe). Reszta: `feat` z samym
+  tekstem, czytelne na karcie, nieautomatyczne
+- [x] Doktryna MG-w-pętli: `combat/crit-riders.mjs` (Palcożerca) wykrywa i czeka na klik MG;
+  `combat/pack-tactics.mjs` (Współpraca) stosuje się automatycznie — czysta geometria, brak decyzji
+- [x] `combat/bestiary-thresholds.mjs` — próg obrażeń (dnd5e ma to tylko na pojazdach; broń `ppanc`
+  go ignoruje), próg awarii maszyn (krytyk lub ≥próg → `MACHINE_FAILURES` k20), Tchórzliwość
+  (podpowiedź dla MG, nie wymusza zachowania)
+- [x] `actors/sp.mjs` — SP ≠ PB dla NPC. `npc.mjs:380` rdzenia liczy PB z CR; Koń (Skażony) ma
+  PB **+1**, którego 5e w ogóle nie zna. `details.cr` trzyma SP, PB wraca z flagi
+- [x] `config/creature-types.mjs` — 5 kategorii Bestiariusza zamiast taksonomii fantasy; też
+  źródło koloru krwi dla Splatter (`prototypeToken.flags.splatter.bloodColor`)
+- [x] `config/detection-termowizja.mjs` — Termowizja jako prawdziwy DetectionMode na żetonie
+  (schemat `senses` w dnd5e jest zamknięty). Widzi przez Niewidoczność, nie przez ściany
+- [x] Żetony top-down: 21/51 aliasy na grafikę systemową już w Data (`tokens/aliases.json`,
+  licencja Forgotten Adventures zabrania kopiowania plików), 30/51 wygenerowane placeholdery
+  (`tokens/_placeholder/`, żółto-czarny pas + kod literowy + trójkąt kierunku), reszta portret w
+  pierścieniu. Token art z Roll20 świadomie zignorowany (okrągłe kadry, nie top-down)
+- [ ] Docelowa grafika (poziom 1 pipeline'u) dla istot bez aliasu/artu — 30 z 51 wciąż na
+  placeholderze, patrz `tokens/README.md`
+- [ ] Zombie (nakładka Death Breath) i Mobsprzęt (losowane podwozie/broń) świadomie poza packiem —
+  patrz `DEV_GUIDE.md` §11.8
+
 ## Phase 4: Long-Term Survival
 
 ### 4.1 Choroby i Fobie (`health-panel.mjs`)
@@ -575,8 +607,13 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 - [x] Sekcja „BRONIE SPECJALNE" Buźki przeniesiona na opis przedmiotu Koktajl Mołotowa
 - [x] `createToolkits(actor, { only })` — nowa opcja, żeby dołożyć pojedynczy zestaw
 
-- [ ] Upojenie (4 levels, Kac mechanic)
-- [ ] Environmental hazards (Podpalenie, Skażenie, Głód, etc.)
+- [x] ~~Upojenie (4 levels, Kac mechanic)~~ — **stale, duplikat.** Zrobione, patrz §1.5b (4 stopnie,
+  kumulatywne, HUD, `game.neuroshima.conditions.drink()`/`soberUp()`). Ten wpis powinien był
+  zniknąć przy zamknięciu §1.5b i zamiast tego przeżył jako martwy TODO — znaleziony przy
+  porządkach 2026-08-21
+- [ ] Environmental hazards (Podpalenie, Głód, Odwodnienie jako pełne mechaniki — dziś same
+  stany bez egzekwowania poza tym, co obejmuje `disease-effects.mjs`). **Skażenie wykreślone
+  stąd** z tego samego powodu co Upojenie wyżej — zrobione, §1.5b
 - [ ] Rest activities (cooking, hunting, gossip, cleaning)
 - [ ] Vehicles (actor type + combat + chase system)
 - [ ] Crafting system (schematy, produkcja, szabrowanie, bebeszenie)
@@ -584,15 +621,49 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Phase 5: Content & Polish
 - [~] **Tracer/Muzzle VFX** — muzzle flash + bullet tracer żywe dla P/KS/DS/MS (własny silnik PIXI, patrz §1.21); OZ świadomie bez tracera (poza zakresem), eksplozje na templatach i iskry/krew trafienia wciąż nie zaimplementowane
-- [ ] Compendia (weapons, ammo, armor, tools, origins, classes, etc.)
-- [ ] Enemy sheets + bestiary imports
+- [ ] Compendia: broń, amunicja, pancerz, Pochodzenia — klasy/profesje/zdolności-klasowe/sztuczki/lekarstwa/bestiariusz **już zbudowane** (patrz Phase 3 wyżej i podsekcja „Bestiariusz" na końcu Phase 3), ten wpis to tylko pozostałe brakujące kompendia
+- [x] **Bestiariusz** — 51 istot, kompendium `neuroshima.bestiariusz`. ~~Enemy sheets + bestiary imports~~
+  było tu jako `[ ]` mimo że warstwa jest gotowa i zweryfikowana — patrz podsekcja „Bestiariusz"
+  na końcu Phase 3 wyżej (dodana przy porządkach 2026-08-21, bo ta praca nigdy nie dostała
+  własnego miejsca w tym trackerze)
 - [ ] Color profiles (Stal, Rdza, Rtęć, Chrom)
 - [ ] Regional price tables
 - [ ] UI polish, tactical HUD
+- [ ] **Ikony broni per-typ** (`weapons/icons.js`, `RULES` — słowa kluczowe nazwy → ikona
+  rewolwer/pistolet/SMG/karabin/...) — **odkryte osierocone 2026-08-21**: jedyny importer,
+  `scripts/main.js`, był martwym duplikatem entry pointu i został usunięty przy porządkach.
+  `setupWeaponIcons()` prawdopodobnie nie działał od dłuższego czasu; nikt tego nie zauważył.
+  Do decyzji: wpiąć `setupWeaponIcons()` do `scripts/main.mjs` (`ready`), przenieść logikę do
+  `config/weapons.mjs`, albo świadomie porzucić i skasować plik
 
 ---
 
 ## Changelog
+
+### v0.8.0 — Bestiariusz, Cichy krok, porządki repo (2026-08-21)
+
+Skonsolidowana dostawa dwóch tygodni pracy, która nigdy nie dostała changelogu ani bumpa
+`module.json` (był zamrożony na 0.2.0 od dawna przed tym wpisem — patrz notatka o porządkach
+niżej). Zakres realny, nie w kolejności chronologicznej co do godziny.
+
+- **Bestiariusz** (51 istot, kompendium `neuroshima.bestiariusz`) — pełny pipeline
+  `Podrecznik/Bestiariusz/` → `dev/bestiary/` → `bestiary-data.mjs` → pack. 89/261 zdolności
+  zautomatyzowane, doktryna MG-w-pętli (`crit-riders.mjs` czeka na klik, `pack-tactics.mjs`
+  stosuje się sam). Nowe statystyki, których dnd5e nie ma: SP≠PB (`sp.mjs`), próg
+  obrażeń/awarii maszyn (`bestiary-thresholds.mjs`), 5 kategorii typów istot
+  (`creature-types.mjs`), Termowizja jako `DetectionMode` (`detection-termowizja.mjs`).
+  Żetony top-down: 21/51 alias, 30/51 placeholder. Szczegóły: nowa podsekcja „Bestiariusz"
+  pod Phase 3 w tym pliku, oraz `DEV_GUIDE.md` §11.
+- **Cichy krok** (`actors/cichy-krok.mjs`, Zwiadowca poz. 3) — pierwsza z 133 zdolności
+  klasowych/profesji z realną mechaniką zamiast samego tekstu. Patrz Phase 3 wyżej.
+- **Porządki repo (2026-08-21)**: 314 zmienionych plików (299 nigdy niezacommitowanych — cały
+  ten wpis siedział tylko w working tree) rozdzielone na commity per warstwa. Naprawione przy
+  okazji: zduplikowane nagłówki §8/§9 w `DEV_GUIDE.md`, martwy `scripts/main.js` (duplikat
+  entry pointu — jedyny prawdziwy jest `scripts/main.mjs` z `module.json`), dwa martwe stany w
+  tym pliku (Upojenie i Skażenie oznaczone `[ ]` mimo że gotowe od §1.5b), stary wpis
+  „Enemy sheets + bestiary imports" `[ ]` mimo gotowej warstwy Bestiariusza, opis
+  nigdy-nieprzyjętego build pipeline'u (Vite/TS/ESLint) w `DEV_GUIDE.md` §4/§6 zastąpiony
+  opisem realnego stanu (NO BUILD). `module.json` `version` doszlusowany do tego wpisu.
 
 ### v0.7.1 — Egzekwowanie stanów chorób, Krwawienie, Spadanie (2026-08-02)
 

@@ -1,3 +1,11 @@
+// ORPHANED (found 2026-08-21): only ever imported by scripts/main.js, a dead
+// duplicate entry point that has now been deleted — module.json's esmodules
+// only lists scripts/main.mjs, which never imported this file. setupWeaponIcons()
+// has not run in the live module for an unknown span of time; nothing currently
+// depends on it. The keyword→icon RULES table below may still be useful reference
+// if weapon-icon auto-assignment gets revived — wire setupWeaponIcons() into
+// scripts/main.mjs's ready hook, or fold it into scripts/config/weapons.mjs. See
+// IMPLEMENTATION.md Phase 5 for the tracked to-do.
 const PATH = "modules/neuroshima-2026-overrides/icons";
 
 const RULES = [

@@ -1,5 +1,9 @@
 # Plan: System Zapasowych Magazynków
 
+> **Status: DONE.** Sekcja „Zapasowe Magazynki" żywa w `actors/magazine-inventory.mjs` — patrz
+> `IMPLEMENTATION.md` §1.7 dla aktualnego stanu. Dopisano 2026-08-21 (dokument projektowy,
+> zostaje jako historia decyzji).
+>
 > Dokument projektowy — pisz tutaj, implementuj w `scripts/actors/magazine-inventory.mjs`  
 > Uzupełnienie do `PLAN_cover_fire_modes.md` i `ARCHITECTURE.md`
 
@@ -231,7 +235,7 @@ actor.createEmbeddedDocuments("Item", [{
 | `scripts/actors/ammo-inventory.mjs` | Wyodrębnić `FILTER_MAG = subtype.startsWith("magazine-")` do odfiltrowania magazynków z sekcji Amunicja |
 | `scripts/config/weapons.mjs` | Dodać `getMagTypeForWeapon()` jako export |
 | `scripts/config/ammo-data.mjs` | Dodać `CALIBER_TO_MAG_TYPE` lookup lub użyć `category` |
-| `scripts/main.js` | `import { registerMagazineInventory } from './actors/magazine-inventory.mjs'` + call w `ready` |
+| `scripts/main.mjs` | `import { registerMagazineInventory } from './actors/magazine-inventory.mjs'` + call w `ready` |
 | `styles/neuroshima.css` | Dodać `.neuro-magazine-list` (analogiczne reguły jak `.neuro-ammo-list`) |
 | `lang/pl.json` | Dodać etykiety magazynków |
 

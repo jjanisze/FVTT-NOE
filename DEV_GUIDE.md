@@ -12,8 +12,8 @@
 |-----------|--------|-------|
 | FoundryVTT | 14.360 | Stable, coreVersion w world.json |
 | dnd5e | 5.3.0 (installed) / 5.3.2 (latest) | Compiled bundle `dnd5e.mjs` ~2.8 MB |
-| Node.js | 18+ wymagany | Przez foundry-mcp i ewentualny build pipeline |
-| Moduł | 1.0.0 | Placeholder — init hook + CSS filter |
+| Node.js | 18+ wymagany | Przez foundry-mcp i skrypty w `dev/` |
+| Moduł | patrz `module.json` (`version`) | Nie placeholder — ~90 plików `.mjs`, Phase 1–4 częściowo/w pełni żywe. Bump + wpis w `IMPLEMENTATION.md` § Changelog przy każdej znaczącej dostawie funkcji. |
 
 ### Ścieżki krytyczne
 
@@ -35,14 +35,23 @@ LIVE_MCP      = C:\Git\Neuroshima\FoundryVTTMCP
 
 ```
 neuroshima-2026-overrides/
-├── module.json              # Manifest — DO AKTUALIZACJI (compatibility stale)
+├── module.json              # Manifest — esmodules: ["scripts/main.mjs"] (jedyny entry point)
 ├── scripts/
-│   └── main.js              # Entry point (esmodule)
+│   ├── main.mjs              # Entry point — importuje i rejestruje ~90 modułów niżej, w kolejności hooków init/ready
+│   ├── config/                # CONFIG.DND5E overrides + statyczne dane (klasy, bestiariusz, choroby, kalibry...)
+│   ├── actors/                # Panele/warstwy per-aktor (zdrowie, PD, PW, hotbar zdolności...)
+│   ├── combat/                 # Hooki walki (Zranienie, Krwawienie, Spadanie, cover, save properties...)
+│   ├── weapons/                 # Amunicja, magazynki, tryby ognia, VFX/audio, ulepszenia
+│   ├── scenes/                   # Warstwa map (propy, sync z Tiled, trudny teren)
+│   └── migration/                 # Migracje jednorazowe (część .mjs importowane, część .js do wklejenia w konsolę GM)
 ├── styles/
-│   └── neuroshima.css        # Stylesheet
-├── dev/
-│   └── validate-css.mjs     # Structural CSS validator (patrz 2.5) — uruchamiaj po KAŻDEJ ręcznej edycji neuroshima.css
-├── neuroshima_5e_modifications.md  # Plan nadpisań
+│   └── neuroshima.css        # Stylesheet — waliduj po KAŻDEJ edycji (patrz 2.5)
+├── packs/                    # Kompendia LevelDB — GENEROWANE, patrz §8.2/§9.2. Nie edytuj plików wprost.
+├── icons/ tokens/            # Assety — patrz icons/statuses/ASSETS.md, tokens/README.md
+├── dev/                      # Skrypty builda/ekstrakcji (patrz §8.1, §9.1, 2.5) — nie runtime modułu
+├── neuroshima_5e_modifications.md  # Plan nadpisań ORYGINALNY — patrz banner na górze tego pliku, IMPLEMENTATION.md jest źródłem aktualnego stanu
+├── IMPLEMENTATION.md          # Tracker: co jest zrobione, co nie, changelog — CZYTAJ TO NAJPIERW
+├── PLAN_*.md                   # Plany projektowe per-subsystem, każdy z nagłówkiem Status:
 └── DEV_GUIDE.md              # Ten plik
 ```
 
@@ -194,99 +203,46 @@ Flagi do przechowywania: Stopień Zranienia, Fuksy, Choroba, Fobia, magazine sta
 
 ---
 
-## 4. Co trzeba zainstalować / skonfigurować
+## 4. Build — co jest, a co świadomie nie jest
 
-### 4.1 Wymagania natychmiastowe (Phase 1 MVP)
+**Decyzja zapadła i jest wdrożona: NO BUILD.** `module.json` (`esmodules: ["scripts/main.mjs"]`)
+ładuje jeden plik, który importuje ~90 innych `.mjs` bezpośrednio — Foundry serwuje je jako
+natywne ESM, bez bundlera. Sekcje poniżej opisują **co faktycznie jest zainstalowane i czemu
+służy**, nie plan na przyszłość.
 
-| Co | Dlaczego | Status |
-|----|----------|--------|
-| Node.js 18+ | Build tools, MCP, ewentualne testy | ✅ Prawdopodobnie jest (foundry-mcp działa) |
-| Git | Version control modułu | ✅ Workspace jest w Git |
-| Foundry CLI (`foundryvtt`) | `npm i -g @foundryvtt/foundryvtt-cli` — pack/unpack compendia | ❌ Do zainstalowania |
-| Source map support | Debugowanie dnd5e.mjs | ✅ .map jest w systemie |
+> ⚠️ Wcześniejsza wersja tej sekcji opisywała hipotetyczny pipeline (Vite/Rollup, `src/`,
+> TypeScript types, ESLint, Foundry CLI) jako "rekomendowany". Nic z tego nie zostało przyjęte —
+> nie ma `vite.config.js`, `tsconfig`, `.eslintrc`, katalogu `src/`, ani `@league-of-foundry-developers/foundry-vtt-types`
+> w `package.json`. Traktuj to jako historię decyzji (odrzucone), nie zaległy TODO.
+> `module.json`'owe `compatibility`/`relationships`, które ta sekcja kiedyś nazywała stale,
+> są już poprawne (`14`/`14`, dnd5e `5.0.0`–`5.3.0`) — nie ma nic do zrobienia tutaj.
 
-### 4.2 Rekomendowany build pipeline
+### 4.1 Co jest faktycznie zainstalowane
 
-Moduł powinien mieć minimalny build:
+| Co | Do czego | Gdzie |
+|----|----------|-------|
+| Node.js 18+ | Skrypty w `dev/` (build packów, ekstrakcja klas/bestiariusza, generowanie ikon) | wymagany lokalnie |
+| Python 3 | Część skryptów `dev/` (ekstrakcja z PDF/Obsidian, generowanie żetonów) | `npm run build:*` woła `python` wprost, patrz `package.json` |
+| Git | Kontrola wersji | ten katalog jest repo od 2026-06 |
+| `foundry-mcp` | Odczyt LevelDB świata offline | `Integracje/foundry-mcp` w `KAMPANIA` |
+| **Foundry CLI, Vite, TypeScript types, ESLint** | — | **nie zainstalowane, nie planowane** |
 
-```
-neuroshima-2026-overrides/
-├── package.json              # npm scripts: build, watch, lint
-├── vite.config.js            # lub rollup — bundling ESM
-├── src/                      # Źródło TypeScript/JS
-│   ├── module.mjs            # Hooks.once('init', ...) entry
-│   ├── config/               # CONFIG.DND5E overrides
-│   │   ├── skills.mjs
-│   │   ├── tools.mjs
-│   │   ├── damage-types.mjs
-│   │   └── conditions.mjs
-│   ├── sheets/               # Custom sheet classes
-│   │   ├── neuroshima-character-sheet.mjs
-│   │   └── neuroshima-npc-sheet.mjs
-│   ├── combat/               # Combat pipeline hooks
-│   │   ├── attack-hooks.mjs  # Nat 1 jam, critical → Zranienie
-│   │   ├── fire-modes.mjs    # P, KS, DS, OZ
-│   │   └── ammo.mjs          # Magazine logic
-│   ├── mechanics/            # Neuroshima-specific subsystems
-│   │   ├── zranienie.mjs
-│   │   ├── wyczerpanie.mjs
-│   │   ├── forsowanie.mjs
-│   │   └── oslona.mjs
-│   ├── lang/                 # Localization
-│   │   └── pl.json           # Polish labels
-│   └── templates/            # Handlebars partials
-│       ├── actors/
-│       └── items/
-├── styles/
-│   └── neuroshima.css
-└── module.json
-```
+### 4.2 Build scripts (`package.json`)
 
-**Dlaczego build pipeline?**
-- TypeScript/JSDoc type checking against FoundryVTT types
-- Multiple source files → single ESM bundle
-- Hot reload during development (Vite)
-- Łatwiejsze zarządzanie templateami i lokalizacją
-
-**Alternatywa: NO BUILD** (prostsze, ale mniej skalowalne):
-- Wiele `.mjs` plików w `scripts/`, importowanych bezpośrednio
-- module.json listuje jeden entry point, który importuje resztę
-- Brak type checking, ale szybszy start
-
-### 4.3 Typy FoundryVTT
+Wszystkie realne komendy builda — dane źródłowe → `scripts/config/*-data.mjs` → kompendia
+LevelDB. Patrz §10.2 (klasy) i §11.2 (bestiariusz) po pełny pipeline per warstwa.
 
 ```bash
-npm install --save-dev @league-of-foundry-developers/foundry-vtt-types
-# lub: @foundryvtt/types (official, jeśli dostępne)
+npm run build:packs           # dev/packs/build-packs.mjs — wszystkie kompendia z aktualnych *-data.mjs
+npm run validate:packs        # regresja: UUID-y, liczba wyborów per poziom, recovery
+npm run build:classes         # gen_features.py → ikony → packi → walidacja (klasy/profesje/zdolności)
+npm run build:bestiary        # extract → gen → pack (bestiariusz)
+npm run validate:css          # dev/validate-css.mjs — patrz §2.5
+npm run build:token-templates / build:token-placeholders
 ```
 
-Albo: JSDoc + ręczne `@type` annotations z referencją do API docs.
-
-### 4.4 Aktualizacja module.json
-
-**NATYCHMIAST** — obecny manifest jest stale:
-
-```json
-{
-  "compatibility": { "minimum": "11", "verified": "12" }
-  // ↑ FVTT jest na v14!
-  
-  "relationships": {
-    "systems": [{ "id": "dnd5e", "version": "3.0.0" }]
-    // ↑ dnd5e jest na v5.3.0!
-  }
-}
-```
-
-Powinno być:
-```json
-{
-  "compatibility": { "minimum": "14", "verified": "14" },
-  "relationships": {
-    "systems": [{ "id": "dnd5e", "type": "system", "compatibility": { "minimum": "5.0.0", "verified": "5.3.0" } }]
-  }
-}
-```
+⚠️ **Foundry musi być zamknięty** dla `build:packs`/`build:classes`/`build:bestiary` — LevelDB
+jest single-writer i blokuje katalog `packs/`.
 
 ---
 
@@ -323,25 +279,18 @@ Source map (`dnd5e-compiled.mjs.map`) pozwala na breakpointy w oryginalnym źró
 
 ---
 
-## 6. Co trzeba zbudować / kupić / skonfigurować
+## 6. Narzędzia custom — co powstało, a co nie
 
-### 6.1 Narzędzia do zainstalowania
+Sekcja 4 pokrywa już, czego **świadomie nie zainstalowano** (Foundry CLI, Vite, types, ESLint —
+nie duplikuj tu tej listy). Poniżej: pomysły na custom tooling z wczesnego planowania, i co się
+z nimi realnie stało.
 
-| Narzędzie | Komenda | Cel |
-|-----------|---------|-----|
-| Foundry CLI | `npm i -g @foundryvtt/foundryvtt-cli` | Pack/unpack compendia, scaffolding |
-| Vite (opcjonalnie) | `npm i -D vite` | Build pipeline, hot reload |
-| FoundryVTT Types | `npm i -D @league-of-foundry-developers/foundry-vtt-types` | Type checking |
-| ESLint | `npm i -D eslint` | Linting |
-
-### 6.2 Narzędzia do zbudowania (custom)
-
-| Narzędzie | Cel | Priorytet |
+| Narzędzie | Cel | Status |
 |-----------|-----|-----------|
-| **Localization generator** | Skrypt generujący `pl.json` z kluczy dnd5e `en.json` + Neuroshima terminologia | Phase 1 |
-| **Config diff tool** | Porównuje aktualny `CONFIG.DND5E` z targetem Neuroshimy — raportuje co już nadpisane, co brakuje | Phase 1 |
-| **Compendium builder** | Skrypt generujący JSON entries dla broni, amunicji, narzędzi z danych w `Tabele/` | Phase 2 |
-| **Sheet data validator** | Sprawdza czy flagi modułu na aktorach mają poprawną strukturę | Phase 2 |
+| **Compendium builder** | Generowanie kompendiów z danych źródłowych | ✅ zbudowane — `dev/packs/build-packs.mjs` + `validate-packs.mjs`, per-warstwa pipeline w §8.2/§9.2 |
+| **Localization generator** | Auto-generacja `pl.json` z kluczy dnd5e `en.json` | ❌ nie zbudowane — 553 tłumaczenia w `lang/pl.json` pisane ręcznie, weryfikowane przez `localization.mjs` (sentinel key fallback) |
+| **Config diff tool** | Porównanie `CONFIG.DND5E` na żywo z targetem Neuroshimy | ❌ nie zbudowane |
+| **Sheet data validator** | Walidacja struktury flag modułu na aktorach | ❌ nie zbudowane jako osobne narzędzie — walidacja dziś jest ad-hoc (backfill-przy-starcie per warstwa: zdrowie, klasy, Zranienie, patrz IMPLEMENTATION.md) |
 
 ### 6.3 Dostępy i uprawnienia
 
@@ -357,6 +306,9 @@ Source map (`dnd5e-compiled.mjs.map`) pozwala na breakpointy w oryginalnym źró
 ---
 
 ## 7. Strategia implementacji Phase 1
+
+> ✅ Historyczna — wszystkie 6 kroków niżej są dawno zrobione (patrz `IMPLEMENTATION.md` Phase 1).
+> Zostawione jako przykład "jak rozbić fazę na kroki", nie jako lista roboczą.
 
 ### Krok 1: Scaffold modułu
 - Zaktualizuj `module.json` (compatibility, relationships)
@@ -467,11 +419,11 @@ Szukaj narzędzi MCP przez `tool_search` z query `mcp foundry`. Nazwy zaczynają
 
 ---
 
-## 8. Warstwa klas (Phase 3) — pipeline i workflow
+## 10. Warstwa klas (Phase 3) — pipeline i workflow
 
 Pełna architektura: `PLAN_classes.md`. Ta sekcja to instrukcja obsługi.
 
-### 8.1 Źródło prawdy
+### 10.1 Źródło prawdy
 
 ```
 Podrecznik/source.txt                    surowy dump PDF (nie edytować)
@@ -489,7 +441,7 @@ scripts/config/classes-data.mjs          RĘCZNIE PISANE: tabele poziomów, PW, 
 ⚠️ **`class-features-data.mjs` jest generowany** — nie edytuj ręcznie. Zmiany automatyki
 (uses/recovery/toggle/hotbar) wprowadzaj w słowniku `AUTOMATION` w `gen_features.py`.
 
-### 8.2 Przebudowa
+### 10.2 Przebudowa
 
 ```bash
 npm run build:classes     # generuj → ikony → packi → walidacja
@@ -510,7 +462,7 @@ await p.configure({ locked: false });
 ⚠️ Przy `import()` modułu z konsoli **dodaj cache-buster**, inaczej dostaniesz starą wersję:
 `await import(url + "?v=" + Date.now())`.
 
-### 8.3 Migracja postaci
+### 10.3 Migracja postaci
 
 ```js
 const api = game.modules.get("neuroshima-2026-overrides").api.migration;
@@ -522,7 +474,7 @@ await api.migrateClasses({ actors: ["Piekarz"], commit: true });
 Zdolności nierozpoznane **nigdy nie są usuwane** — świat zawiera dużo homebrew z realną
 historią gry. Raport wskazuje je MG do ręcznej decyzji.
 
-### 8.4 API modułu
+### 10.4 API modułu
 
 ```js
 const api = game.modules.get("neuroshima-2026-overrides").api;
@@ -533,7 +485,7 @@ api.pd.awardPD(actor, "spotkanie", { note: "..." });  // przyznaj PD
 api.classRules.resolveExclusiveGroups(actor);         // reguły niekumulowania
 ```
 
-### 8.5 Dodanie nowej zdolności
+### 10.5 Dodanie nowej zdolności
 
 1. Dopisz tekst do `dev/classes/classes.json` lub `professions.json`
 2. Dodaj wpis do `AUTOMATION` w `gen_features.py` (jeśli ma uses/toggle/hotbar)
@@ -544,9 +496,9 @@ Walidator złapie literówkę w id (`unresolved grant`) i niezgodność liczby w
 
 ---
 
-## 9. Warstwa bestiariusza — pipeline i workflow
+## 11. Warstwa bestiariusza — pipeline i workflow
 
-### 9.1 Źródło prawdy
+### 11.1 Źródło prawdy
 
 ```
 Podrecznik/Bestiariusz/*.md              52 profile — ŹRÓDŁO TREŚCI (Obsidian)
@@ -564,7 +516,7 @@ stan czy zmysł to **błąd builda**, nie ciche pominięcie — ta sama postawa 
 (brakująca jednostka, brakujący typ obrażeń) idą osobnym kanałem `warnings`,
 żeby literówka w transkrypcji nie blokowała builda.
 
-### 9.2 Przebudowa
+### 11.2 Przebudowa
 
 ```bash
 npm run build:bestiary      # extract → gen → pack
@@ -577,7 +529,7 @@ npm run build:bestiary      # extract → gen → pack
 node dev/packs/build-packs.mjs --only=bestiariusz
 ```
 
-### 9.3 Dwie warstwy automatyki
+### 11.3 Dwie warstwy automatyki
 
 | Warstwa | Gdzie | Zasięg |
 |---|---|---|
@@ -587,7 +539,7 @@ node dev/packs/build-packs.mjs --only=bestiariusz
 Czego nie obejmie żadna z nich, ląduje jako `feat` z samym tekstem — czytelne na
 karcie, nieautomatyczne. **89 z 261 zdolności jest zautomatyzowanych.**
 
-### 9.4 Doktryna: MG w pętli
+### 11.4 Doktryna: MG w pętli
 
 **Automatyzujemy wykrycie i księgowanie. Nigdy zastosowanie.**
 
@@ -602,7 +554,7 @@ geometria, nie ma tam decyzji do podjęcia.
 Natywne `effects` na activity dnd5e **też** spełniają tę doktrynę: karta oferuje
 efekt i czeka na kliknięcie MG. Stąd Pochwycenie/Unieruchomienie nie wymagają kodu.
 
-### 9.5 Czego dnd5e nie ma (i gdzie to dopisaliśmy)
+### 11.5 Czego dnd5e nie ma (i gdzie to dopisaliśmy)
 
 | Statystyka | Plik | Uwaga |
 |---|---|---|
@@ -613,14 +565,14 @@ efekt i czeka na kliknięcie MG. Stąd Pochwycenie/Unieruchomienie nie wymagają
 | **Termowizja** | `config/detection-termowizja.mjs` | Schemat `senses` w dnd5e jest zamknięty, więc to prawdziwy DetectionMode na żetonie. Widzi przez Niewidoczność, nie widzi przez ściany. |
 | **Typy istot** | `config/creature-types.mjs` | 5 kategorii Bestiariusza zamiast taksonomii fantasy. |
 
-### 9.6 Krew (Splatter)
+### 11.6 Krew (Splatter)
 
 Kolor idzie do **`prototypeToken.flags.splatter.bloodColor`**, wprost z `BLOOD_TYPES`
 w `config/creature-types.mjs`. **Nie** do `details.type.custom` — to pole nadpisuje
 wyświetlany typ istoty (każdy potwór miałby na karcie „czerwona"). Override
 per-token wygrywa z globalnym `bloodColor` i z `BloodSheetData`.
 
-### 9.7 Grafika
+### 11.7 Grafika
 
 - **Portrety**: zbierane z `worlds/output/characters/<NNN>_-_<NAZWA>/avatar.{png,jpg}`.
   Trafia **23 z 51**; reszta dostaje `icons/svg/mystery-man.svg`. Builder wypisuje listę braków.
@@ -650,7 +602,7 @@ per-token wygrywa z globalnym `bloodColor` i z `BloodSheetData`.
 - ⚠️ Te żetony to art **Forgotten Adventures** na licencji zabraniającej redystrybucji
   (`systems/dnd5e/tokens/LICENSE`). Wskazywanie ścieżki — OK. Kopiowanie plików do modułu — nie.
 
-### 9.8 Poza kompendium
+### 11.8 Poza kompendium
 
 - **Zombie (Nakładka Death Breath)** — nakładka na nosiciela, nie istota (`overlay: true`).
   Wyłączony z packa; docelowo Active Effect / makro.

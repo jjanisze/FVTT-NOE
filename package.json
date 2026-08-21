@@ -1,8 +1,7 @@
 {
   "name": "neuroshima-2026-overrides",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Dev tooling (compendium/icon/token builders) for the Neuroshima 5e FoundryVTT module. Not the module's own version — that's module.json. No build step for the module itself: scripts/main.mjs is loaded by Foundry as-is (see DEV_GUIDE.md §4).",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "validate:css": "node dev/validate-css.mjs",

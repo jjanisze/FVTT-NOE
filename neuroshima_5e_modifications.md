@@ -1,3 +1,13 @@
+> **This is the original planning document (pre-implementation).** For current, verified
+> implementation status — what's actually live, what's checked off, changelog by version —
+> use `IMPLEMENTATION.md` instead. This file is kept as the initial override-scope reasoning,
+> not as a source of live truth, and it has at least one known factual error inherited by
+> nothing else: **§16.2 gives Skażenie radioaktywne save DCs as 5/10/15/20**, which does not
+> match the rulebook's own POZIOM SKAŻENIA RADIOAKTYWNEGO table (10/15/20/25). The shipped code
+> (`scripts/config/levelled-conditions-data.mjs`) follows the rulebook, not this file — see
+> `IMPLEMENTATION.md` §1.5b for the note. Treat any other numeric claim here as unverified until
+> cross-checked against the rulebook or `IMPLEMENTATION.md`.
+
 This file lists the required override plan for running Neuroshima on top of the dnd5e system in Foundry.
 
 ## Core Assumption

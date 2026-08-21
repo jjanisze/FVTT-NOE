@@ -1,5 +1,10 @@
 # Neuroshima Override Plan: Minimal Cover -> Fire Modes
 
+> **Status: DONE.** Cover (`combat/cover.mjs`) and all four fire modes (P/KS/DS/MS/OZ,
+> `weapons/fire-modes.mjs`) are live and verified — see `IMPLEMENTATION.md` §1.8 (Fire Modes)
+> and §1.10 (Osłona) for current, checkbox-level status. This file is the original design
+> record (delivery order, phase breakdown); added 2026-08-21, kept for history.
+
 ## Goal
 
 Implement the smallest correct cover subsystem first, then build KS, DS, MS, and OZ on top of it without rewriting the same combat plumbing twice.
