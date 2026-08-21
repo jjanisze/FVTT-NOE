@@ -375,6 +375,9 @@ Zastępuje pierwotne podejście z `PLAN_shooting_vfx.md` (Sequencer `.effect()` 
 - [ ] Przerwanie DO po 4h → benefity KO
 
 ### 1.15 Custom Character Sheet Shell
+Szczegółowy plan (pre-dig 2026-08-21: sheet class/PARTS/TABS map, wszystkie 15 istniejących
+punktów wstrzykiwania w arkusz, decyzja architektoniczna do podjęcia): `PLAN_sheet_shell.md`
+
 - [ ] Ukrycie/usunięcie elementów fantasy (spellbook, pact magic, etc.)
 - [ ] Sekcja Zranienie + Wyczerpanie na głównej karcie
 - [ ] Neuroshima-specific layout
