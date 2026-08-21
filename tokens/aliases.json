@@ -1,0 +1,41 @@
+{
+  "//": "Creature id -> token image path, RELATIVE TO THE FOUNDRY DATA ROOT.",
+  "//1": "Lets a creature borrow art that already exists in the data dir instead",
+  "//2": "of copying the file in. The dnd5e system's 662 tokens are Forgotten",
+  "//3": "Adventures art whose licence permits use inside Foundry but forbids",
+  "//4": "redistribution — so pointing at the path is fine, copying it is not.",
+  "//5": "A file dropped at tokens/<id>.webp always overrides nothing: aliases win,",
+  "//6": "so delete the alias line once you have purpose-made art for a creature.",
+  "//7": "Verified present in dnd5e 5.3.0. Rebuild: npm run build:bestiary",
+
+  "//-- Potwory ------------------------------------------------------": "",
+  "bit-boys": "systems/dnd5e/tokens/humanoid/Goblin.webp",
+  "bit-boy-przewodnik": "systems/dnd5e/tokens/humanoid/Hobgoblin.webp",
+
+  "//-- Zwierzęta ----------------------------------------------------": "",
+  "pies-bojowy": "systems/dnd5e/tokens/beast/Wolf.webp",
+  "pies-mutek": "systems/dnd5e/tokens/beast/DireWolf.webp",
+  "mrokoszczur": "systems/dnd5e/tokens/beast/GiantRat.webp",
+  "myslacy-szczur": "systems/dnd5e/tokens/beast/GiantRat.webp",
+  "gigantyczny-pajak": "systems/dnd5e/tokens/beast/GiantSpider.webp",
+  "neogator": "systems/dnd5e/tokens/beast/Crocodile.webp",
+  "neoniedzwiedz": "systems/dnd5e/tokens/beast/CaveBear.webp",
+  "kon-zdrowy": "systems/dnd5e/tokens/beast/DraftHorse.webp",
+  "kon-skazony": "systems/dnd5e/tokens/beast/DraftHorse.webp",
+  "kon-teksanczyk": "systems/dnd5e/tokens/beast/Warhorse.webp",
+
+  "//-- Ludzie -------------------------------------------------------": "",
+  "kanibal": "systems/dnd5e/tokens/humanoid/Berserker.webp",
+  "gangus-zolnierz": "systems/dnd5e/tokens/humanoid/Thug.webp",
+  "konwojent-straznik": "systems/dnd5e/tokens/humanoid/Guard.webp",
+  "cyngiel": "systems/dnd5e/tokens/humanoid/Assassin.webp",
+
+  "//-- Potwory owadzie ----------------------------------------------": "",
+  "kitchin": "systems/dnd5e/tokens/beast/GiantWasp.webp",
+  "techmorwa-malutka": "systems/dnd5e/tokens/beast/GiantCentipede.webp",
+  "techmorwa-srednia": "systems/dnd5e/tokens/beast/GiantCentipede.webp",
+
+  "//-- Maszyny ------------------------------------------------------": "",
+  "spawacz": "systems/dnd5e/tokens/construct/FlyingSword.webp",
+  "gladiator": "systems/dnd5e/tokens/construct/AnimatedArmor.webp"
+}
