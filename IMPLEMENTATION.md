@@ -66,7 +66,9 @@
 | `scripts/config/weapons.mjs` | Override kategorii broni D&D 5e na kategorie Neuroshimy |
 | `scripts/migration/migrate-weapon-ammo.js` | Migracja istniejących broni → kalibry |
 | `scripts/migration/migrate-weapon-types.js` | Migracja istniejących broni → poprawne kategorie Neuroshimy |
-| `styles/neuroshima.css` | CSS — post-apo visual + hide spellcasting |
+| `scripts/actors/surowce-inventory.mjs` | Panel „Surowce" w Ekwipunku — 5 typów (CH/CE/CZ/MK/MO) wyciągnięte z Używek jako osobne pule z paskiem wagi. Żywe, wpięte w `main.mjs`; dopisane do tabeli 2026-08-21, wcześniej brakowało wiersza mimo że kod istniał od dawna |
+| `scripts/actors/zbrojownia-sync.mjs` | Narzędzie GM: jeden NPC jako kanoniczna „Zbrojownia" — przycisk w nagłówku karty synchronizuje broń z jego ekwipunku do folderów w World Items |
+| `styles/neuroshima.css` | CSS — post-apo visual + hide spellcasting (1365 linii, sekcje oznaczone `/* === */`, waliduj po edycji: `npm run validate:css`) |
 
 ---
 
@@ -417,8 +419,12 @@ Zastępuje pierwotne podejście z `PLAN_shooting_vfx.md` (Sequencer `.effect()` 
 - [ ] Armor durability (opcjonalnie)
 - [ ] Carry thresholds (SIŁ×5 / SIŁ×10 kg)
 - [ ] Przedmioty podręczne (3 sloty)
-- [ ] Surowce (5 typów: CH, CE, CZ, MK, MO)
-- [ ] Medical items, Fanty, consumables
+- [x] **Surowce** (5 typów: CH, CE, CZ, MK, MO) — `actors/surowce-inventory.mjs`, panel w Ekwipunku.
+  Był tu jako `[ ]` mimo gotowego, wpiętego kodu — znalezione przy porządkach 2026-08-21 (patrz
+  wiersz w tabeli plików na górze)
+- [x] **Lekarstwa** jako Używki — zrobione, patrz §4.2 (Phase 4). ~~Medical items~~ wykreślone stąd
+  z tego samego powodu co Surowce wyżej
+- [ ] Fanty, pozostałe consumables poza lekarstwami
 - [ ] Gambling/barter UI (k100, location mods, regional prices)
 - [ ] Object destruction (TT/PW by material/size)
 - [ ] Broń improwizowana
