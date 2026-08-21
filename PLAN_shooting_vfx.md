@@ -4,7 +4,18 @@ Visual fidelity for firearms. Fleshes out **Phase 4** of [PLAN_sequencer.md](./P
 into a concrete, per-fire-mode design. Sequencer is the engine (already a soft/optional
 dependency via `scripts/weapons/sequencer.mjs`).
 
-> Status: **design locked, not yet implemented.** Assets are placeholders (`TEMP_*`).
+> Status (updated 2026-07-29): **superseded by a custom PIXI tracer/muzzle-flash engine**
+> (`scripts/weapons/tracer-vfx.mjs`) — the Sequencer `.effect()` + webm/JB2A approach below
+> (§5/§6) was abandoned because it doesn't scale to a Minigun Miażdżąca seria. Baked textures
+> replace `TEMP_*` assets; `CALIBER_VFX`/`WEAPON_VFX` replace `VFX_ASSETS`/`FIRE_VFX`. Single
+> shot, KS, DS and MS (§8 Slices 0-3, part of 4) are **live in production** — DS/MS spray VFX
+> now fire via `tracerFireArea()` (`_playAreaBurstVfx()` in `fire-modes.mjs`), always as
+> terminal impacts across the sampled template (no per-token hit/miss visual — RAW-consistent,
+> every round in the burst lands somewhere). OZ intentionally has no tracer VFX (out of scope,
+> §2). Screen-shake (part of Slice 3/4) is still **not implemented**. Impact spark/blood +
+> token-flash (§3) were dropped, not deferred. See `IMPLEMENTATION.md` §1.21 for the current,
+> authoritative status; treat the rest of this file as historical design rationale, not a live
+> checklist.
 
 ---
 

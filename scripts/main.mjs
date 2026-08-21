@@ -15,14 +15,35 @@ import { registerSkills } from "./config/skills.mjs";
 import { registerTools } from "./config/tools.mjs";
 import { registerToolProficiency } from "./config/tool-proficiency.mjs";
 import { registerDamageTypes } from "./config/damage-types.mjs";
+import { registerCreatureTypes } from "./config/creature-types.mjs";
+import { registerTermowizja } from "./config/detection-termowizja.mjs";
+import { registerSP } from "./actors/sp.mjs";
 import { registerTerminology } from "./config/terminology.mjs";
 import { removeSpellcasting } from "./config/spellcasting.mjs";
+import { registerConditions } from "./config/conditions.mjs";
 import { registerExhaustion } from "./config/exhaustion.mjs";
+import { registerLevelledConditions, levelledConditionsApi } from "./actors/levelled-conditions.mjs";
 import { registerRestOverrides } from "./config/rest.mjs";
 import { injectLocalization } from "./config/localization.mjs";
 import { registerActorAbilities } from "./actors/abilities.mjs";
+import { registerPW } from "./actors/pw.mjs";
+import { registerClassState } from "./actors/class-state.mjs";
+import { registerAbilityHotbar } from "./actors/ability-hotbar.mjs";
+import { registerClassMigration } from "./migration/migrate-classes.mjs";
+import { registerSrdCleanup } from "./config/srd-cleanup.mjs";
+import { registerClassRules } from "./actors/class-rules.mjs";
+import { registerCichyKrok } from "./actors/cichy-krok.mjs";
+import { registerPDPanel } from "./actors/pd-panel.mjs";
+import { registerHealthPanel, healthApi } from "./actors/health-panel.mjs";
+import { registerDiseaseEffects, syncDiseaseEffects } from "./actors/disease-effects.mjs";
+import { registerBleeding, bleedingApi } from "./combat/bleeding.mjs";
+import { registerFalling, fallingApi } from "./combat/falling.mjs";
+import { registerFuksPips } from "./actors/fuks-pips.mjs";
 import { registerWeapons } from "./config/weapons.mjs";
 import { registerZranienie } from "./combat/zranienie.mjs";
+import { registerCritRiders } from "./combat/crit-riders.mjs";
+import { registerPackTactics } from "./combat/pack-tactics.mjs";
+import { registerBestiaryThresholds } from "./combat/bestiary-thresholds.mjs";
 import { registerRerolls } from "./combat/rerolls.mjs";
 import { registerObalajaca } from './combat/obalajaca.mjs';
 import { registerWeaponSaveProperties } from './combat/weapon-save-properties.mjs';
@@ -37,6 +58,10 @@ import { registerValidation } from "./config/validation.mjs";
 import { registerWeaponSounds } from "./weapons/sounds.mjs";
 import { registerEngineControls } from "./weapons/engine.mjs";
 import { registerTracerVfx } from "./weapons/tracer-vfx.mjs";
+import { registerMapProps, mapPropsApi } from "./scenes/map-props.mjs";
+import { registerMapSync, mapSyncApi } from "./scenes/map-sync.mjs";
+import { registerMapWatch, mapWatchApi } from "./scenes/map-watch.mjs";
+import { registerDifficultTerrainHint, difficultTerrainHintApi } from "./scenes/difficult-terrain-hint.mjs";
 import { openTracerDebugPanel, registerTracerDebugPanelControls } from "./weapons/tracer-debug-panel.mjs";
 import { openSoundDebugPanel, registerSoundDebugPanelControls } from "./weapons/sound-debug-panel.mjs";
 import { registerAmmoSystem } from "./weapons/ammo.mjs";
@@ -78,10 +103,37 @@ Hooks.once("init", () => {
   registerTools();
   registerToolProficiency();
   registerDamageTypes();
+  registerCreatureTypes();
+  registerTermowizja();
   removeSpellcasting();
+  // Must precede registerExhaustion: it rebuilds conditionTypes wholesale, and
+  // exhaustion.mjs then tunes the entry it leaves behind.
+  registerConditions();
   registerExhaustion();
+  registerLevelledConditions();
   registerRestOverrides();
   registerActorAbilities();
+
+  // Phase 3: Class / progression layer
+  registerPW();
+  // Bestiariusz: NPC proficiency bonus comes from the rulebook, not from CR.
+  // Wraps prepareDerivedData like registerPW; the two chain safely.
+  registerSP();
+  registerClassState();
+  registerAbilityHotbar();
+  registerClassMigration();
+  registerSrdCleanup();
+  registerClassRules();
+  registerCichyKrok();
+  registerPDPanel();
+
+  // Phase 4: Long-term survival layer
+  registerHealthPanel();
+  registerDiseaseEffects();
+  registerBleeding();
+  registerFalling();
+  registerFuksPips();
+
   registerAmmoInventory();
   registerMagazineInventory();
   registerGrenadeInventory();
@@ -92,6 +144,11 @@ Hooks.once("init", () => {
 
   // Phase 1: Combat systems
   registerZranienie();
+  // Bestiariusz automation. Crit riders announce and wait for the GM;
+  // pack tactics resolves silently (pure geometry, no judgement call).
+  registerCritRiders();
+  registerPackTactics();
+  registerBestiaryThresholds();
   registerRerolls();
   registerObalajaca();
   registerWeaponSaveProperties();
@@ -110,6 +167,12 @@ Hooks.once("init", () => {
   registerMedyk();
   registerToolkitChecks();
   registerToolAvailability();
+
+  // Nasłuch map wypchniętych z Tiled. W init, bo rejestruje ustawienia świata.
+  registerMapWatch();
+
+  // Trudny teren zapalany razem z miarką ruchu (ustawienie klienta).
+  registerDifficultTerrainHint();
 
   // Phase 2: Damage application UI
   registerDamageReductionUI();
@@ -175,6 +238,13 @@ Hooks.once("ready", () => {
   // Grenades stay separate from ammo, but are exposed in the same namespace for automation.
   game.neuroshima = { AMMO_CALIBERS, AMMO_CALIBER_MAP, GRENADE_TYPES, GRENADE_MAP, TOOLKITS, createToolkits };
 
+  // Choroby / Fobie / lekarstwa — game.neuroshima.health.sunset() etc.
+  game.neuroshima.health = { ...healthApi, syncEffects: syncDiseaseEffects, bleeding: bleedingApi };
+  game.neuroshima.falling = fallingApi;
+
+  // Upojenie / Skażenie — game.neuroshima.conditions.drink(actor) etc.
+  game.neuroshima.conditions = levelledConditionsApi;
+
   registerWeaponSounds();
   registerEngineControls();
   registerTracerVfx();
@@ -183,11 +253,23 @@ Hooks.once("ready", () => {
   // Weapon-sound audition panel — game.neuroshima.sounds.panel()
   game.neuroshima.sounds = { panel: openSoundDebugPanel };
 
+  // Propy map z Tiled (szlaban, wrota silosu, pojazdy) —
+  // game.neuroshima.props.toggleProp("silo-hatch")
+  registerMapProps();
+  game.neuroshima.props = mapPropsApi;
+
+  // Aktualizacja sceny po ponownym eksporcie mapy z Tiled —
+  // game.neuroshima.maps.update("UPSIDE")
+  registerMapSync();
+  game.neuroshima.maps = { ...mapSyncApi, ...mapWatchApi };
+  game.neuroshima.trudnyTeren = difficultTerrainHintApi;
+
   // Validate overrides
   const skillCount = Object.keys(CONFIG.DND5E.skills).length;
   const toolCount = Object.keys(CONFIG.DND5E.tools).length;
   const dmgCount = Object.keys(CONFIG.DND5E.damageTypes).length;
   const exhaustionSpeed = CONFIG.DND5E.conditionTypes?.exhaustion?.reduction?.speed;
+  const conditionCount = Object.keys(CONFIG.DND5E.conditionTypes ?? {}).length;
   const shortRestMin = CONFIG.DND5E.restTypes?.short?.duration?.normal;
   const longRestMin = CONFIG.DND5E.restTypes?.long?.duration?.normal;
 
@@ -198,6 +280,8 @@ Hooks.once("ready", () => {
 
   if (skillCount !== 18) console.warn(`${MODULE_ID} | Expected 18 skills, got ${skillCount}`);
   if (toolCount !== 22) console.warn(`${MODULE_ID} | Expected 22 tools, got ${toolCount}`);
+  // 14 z TABELI STANÓW + 8 zagrożeń + Upojenie + Skażenie + Zranienie
+  if (conditionCount !== 25) console.warn(`${MODULE_ID} | Expected 25 conditions, got ${conditionCount}`);
 
   // Warn if not using modern rules (needed for exhaustion -2 per level)
   if (globalThis.dnd5e?.settings?.rulesVersion !== "modern") {

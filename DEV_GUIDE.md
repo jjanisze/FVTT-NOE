@@ -464,3 +464,195 @@ Szukaj narzędzi MCP przez `tool_search` z query `mcp foundry`. Nazwy zaczynają
 | `podrecznik.md` | Treść podręcznika Neuroshima 5e |
 | `dnd5e.mjs` | Compiled source dnd5e (grep-friendly) |
 | `lang/en.json` | Klucze lokalizacyjne dnd5e |
+
+---
+
+## 8. Warstwa klas (Phase 3) — pipeline i workflow
+
+Pełna architektura: `PLAN_classes.md`. Ta sekcja to instrukcja obsługi.
+
+### 8.1 Źródło prawdy
+
+```
+Podrecznik/source.txt                    surowy dump PDF (nie edytować)
+  ↓  dev/classes/extract_classes.py      76 zdolności klasowych  → classes.json
+  ↓  dev/classes/extract_professions.py  61 zdolności profesji   → professions.json
+  ↓  dev/classes/gen_features.py         + metadane automatyki   → scripts/config/class-features-data.mjs
+scripts/config/classes-data.mjs          RĘCZNIE PISANE: tabele poziomów, PW, biegłości, scale values
+  ↓  dev/packs/build-packs.mjs           → packs/{klasy,profesje,zdolnosci-klasowe,sztuczki}
+  ↓  dev/packs/validate-packs.mjs        regresja: UUID-y, liczba wyborów per poziom, recovery
+```
+
+⚠️ **`Tabele/Klasy.md` NIE jest źródłem prawdy** — zawierał realne błędy mechaniczne
+(patrz `PLAN_classes.md` §3.3). Mechanikę bierz z `classes-data.mjs`.
+
+⚠️ **`class-features-data.mjs` jest generowany** — nie edytuj ręcznie. Zmiany automatyki
+(uses/recovery/toggle/hotbar) wprowadzaj w słowniku `AUTOMATION` w `gen_features.py`.
+
+### 8.2 Przebudowa
+
+```bash
+npm run build:classes     # generuj → ikony → packi → walidacja
+npm run validate:packs    # sama walidacja
+```
+
+⚠️ **Foundry musi być zamknięte** — LevelDB trzyma blokadę na katalogu `packs/`.
+Skrypt wykrywa to i wypisuje instrukcję zamiast rzucać `EPERM`.
+
+Dla samych poprawek treści (nazwy, opisy) można edytować żywe kompendium z konsoli
+przeglądarki — zapisuje do tej samej bazy:
+
+```js
+const p = game.packs.get("neuroshima-2026-overrides.zdolnosci-klasowe");
+await p.configure({ locked: false });
+```
+
+⚠️ Przy `import()` modułu z konsoli **dodaj cache-buster**, inaczej dostaniesz starą wersję:
+`await import(url + "?v=" + Date.now())`.
+
+### 8.3 Migracja postaci
+
+```js
+const api = game.modules.get("neuroshima-2026-overrides").api.migration;
+await api.migrateClasses();                     // dry run — raport w konsoli
+await api.migrateClasses({ commit: true });     // zastosuj
+await api.migrateClasses({ actors: ["Piekarz"], commit: true });
+```
+
+Zdolności nierozpoznane **nigdy nie są usuwane** — świat zawiera dużo homebrew z realną
+historią gry. Raport wskazuje je MG do ręcznej decyzji.
+
+### 8.4 API modułu
+
+```js
+const api = game.modules.get("neuroshima-2026-overrides").api;
+api.classState.toggleClassState(actor, "berserk");   // przełącz stan
+api.classState.activeStates(actor);                   // ["neuro-berserk"] — punkt zaczepienia dla VFX
+api.hotbar.sync(actor);                               // przebuduj pasek skrótów
+api.pd.awardPD(actor, "spotkanie", { note: "..." });  // przyznaj PD
+api.classRules.resolveExclusiveGroups(actor);         // reguły niekumulowania
+```
+
+### 8.5 Dodanie nowej zdolności
+
+1. Dopisz tekst do `dev/classes/classes.json` lub `professions.json`
+2. Dodaj wpis do `AUTOMATION` w `gen_features.py` (jeśli ma uses/toggle/hotbar)
+3. Wpisz jej id do tabeli poziomów w `classes-data.mjs`
+4. `npm run build:classes`
+
+Walidator złapie literówkę w id (`unresolved grant`) i niezgodność liczby wyborów per poziom.
+
+---
+
+## 9. Warstwa bestiariusza — pipeline i workflow
+
+### 9.1 Źródło prawdy
+
+```
+Podrecznik/Bestiariusz/*.md              52 profile — ŹRÓDŁO TREŚCI (Obsidian)
+  ↓  dev/bestiary/extract_bestiary.py    czysta transkrypcja → bestiary.json
+  ↓  dev/bestiary/gen_bestiary.py        + RULES/AUTOMATION  → scripts/config/bestiary-data.mjs
+  ↓  dev/packs/build-packs.mjs           → packs/bestiariusz (51 aktorów, 6 folderów)
+```
+
+⚠️ **`bestiary.json` i `bestiary-data.mjs` są generowane** — nie edytuj ręcznie.
+Treść zmieniaj w plikach vaulta, automatykę w `RULES`/`AUTOMATION` w `gen_bestiary.py`.
+
+**Parser jest surowy.** Nieznana etykieta nagłówka, sekcja, umiejętność, typ obrażeń,
+stan czy zmysł to **błąd builda**, nie ciche pominięcie — ta sama postawa co
+`validate-packs.mjs` wobec `unresolved grant`. Defekty samego podręcznika
+(brakująca jednostka, brakujący typ obrażeń) idą osobnym kanałem `warnings`,
+żeby literówka w transkrypcji nie blokowała builda.
+
+### 9.2 Przebudowa
+
+```bash
+npm run build:bestiary      # extract → gen → pack
+```
+
+⚠️ **Foundry musi być zamknięte** przy przebudowie istniejącego packa (blokada LevelDB).
+`--only=<pack>` pozwala przebudować podzbiór:
+
+```bash
+node dev/packs/build-packs.mjs --only=bestiariusz
+```
+
+### 9.3 Dwie warstwy automatyki
+
+| Warstwa | Gdzie | Zasięg |
+|---|---|---|
+| `RULES` | klucz = **nazwa zdolności** | Zdolności powtarzalne między istotami — `Pierwsze spotkanie` (32), `Algorytm czuwania` (11), `Współpraca` (10), `Światłowstręt` (4) |
+| `AUTOMATION` | klucz = `"<istota>.<zdolność>"` | Przypadki jednostkowe |
+
+Czego nie obejmie żadna z nich, ląduje jako `feat` z samym tekstem — czytelne na
+karcie, nieautomatyczne. **89 z 261 zdolności jest zautomatyzowanych.**
+
+### 9.4 Doktryna: MG w pętli
+
+**Automatyzujemy wykrycie i księgowanie. Nigdy zastosowanie.**
+
+Wyzwalacz odpala się sam i wrzuca kartę z przyciskiem; MG zaznacza żeton ofiary
+i klika. Zaznaczenie czytane jest **w momencie kliknięcia**, nie wykrycia, więc MG
+może najpierw rozegrać scenę. Dotyczy `combat/crit-riders.mjs` (Palcożerca)
+i progu awarii maszyn.
+
+Wyjątek: `combat/pack-tactics.mjs` (Współpraca) stosuje się automatycznie — to czysta
+geometria, nie ma tam decyzji do podjęcia.
+
+Natywne `effects` na activity dnd5e **też** spełniają tę doktrynę: karta oferuje
+efekt i czeka na kliknięcie MG. Stąd Pochwycenie/Unieruchomienie nie wymagają kodu.
+
+### 9.5 Czego dnd5e nie ma (i gdzie to dopisaliśmy)
+
+| Statystyka | Plik | Uwaga |
+|---|---|---|
+| **SP ≠ PB** | `actors/sp.mjs` | `npc.mjs:380` wylicza PB z CR. Koń (Skażony) ma PB **+1**, którego 5e w ogóle nie zna. `details.cr` trzyma SP, PB wraca z flagi. |
+| **Próg obrażeń** | `combat/bestiary-thresholds.mjs` | W dnd5e istnieje wyłącznie na pojazdach. Broń `ppanc` go ignoruje. |
+| **Próg awarii** | `combat/bestiary-thresholds.mjs` | Krytyk lub ≥ próg w jednym ataku → `MACHINE_FAILURES` (k20). |
+| **Tchórzliwość** | `combat/bestiary-thresholds.mjs` | Wyłącznie podpowiedź dla MG — nie wymusza zachowania. |
+| **Termowizja** | `config/detection-termowizja.mjs` | Schemat `senses` w dnd5e jest zamknięty, więc to prawdziwy DetectionMode na żetonie. Widzi przez Niewidoczność, nie widzi przez ściany. |
+| **Typy istot** | `config/creature-types.mjs` | 5 kategorii Bestiariusza zamiast taksonomii fantasy. |
+
+### 9.6 Krew (Splatter)
+
+Kolor idzie do **`prototypeToken.flags.splatter.bloodColor`**, wprost z `BLOOD_TYPES`
+w `config/creature-types.mjs`. **Nie** do `details.type.custom` — to pole nadpisuje
+wyświetlany typ istoty (każdy potwór miałby na karcie „czerwona"). Override
+per-token wygrywa z globalnym `bloodColor` i z `BloodSheetData`.
+
+### 9.7 Grafika
+
+- **Portrety**: zbierane z `worlds/output/characters/<NNN>_-_<NAZWA>/avatar.{png,jpg}`.
+  Trafia **23 z 51**; reszta dostaje `icons/svg/mystery-man.svg`. Builder wypisuje listę braków.
+- Nazwy folderów są hex-escapowane, a separator i escape to ten sam znak `_` —
+  „GANGUS_CAPO" rozjeżdża się, bo `_CA` to poprawny hex. Rozstrzyga poprawność UTF-8.
+  Rozbieżności nazw (Jaggernaut, Kidnapper, WILKOLUD) są w `PORTRAIT_ALIASES` — jawnie,
+  bo zły portret jest gorszy niż brak portretu.
+- **Token art z Roll20 jest świadomie ignorowany.** To okrągłe kadry portretu z Roll20,
+  gdzie żetony się nie obracają; FVTT je obraca.
+- **Żetony top-down** — cztery warstwy, sprawdzane w tej kolejności (`tokenArtSource`):
+  1. `tokens/<id>.webp` → `own` — grafika docelowa. **Najwyższy priorytet celowo**:
+     pipeline z assetami wrzuca pliki i one po prostu wygrywają, bez sprzątania
+     aliasów i atrap.
+  2. `tokens/aliases.json` → `alias` — wskazanie na grafikę już obecną w Data
+     (np. `systems/dnd5e/tokens/...`). **21 z 51**.
+  3. `tokens/_placeholder/<id>.webp` → `placeholder` — generowana atrapa
+     (`npm run build:token-placeholders`). **30 z 51**.
+  4. brak → `portrait` — portret w pierścieniu, `lockRotation: true`.
+
+  Cokolwiek z 1–3 **odblokowuje obrót** (`lockRotation: false`) i wyłącza pierścień —
+  o to w tym wszystkim chodzi. `bestiary.tokenArtPending` jest prawdą dla wszystkiego
+  poza `own`, więc lista „do zrobienia" to jeden filtr po fladze.
+- **Wzorzec stylu i wymiarów: `systems/dnd5e/tokens/`** (662 żetony). Zmierzone konwencje:
+  400 px na pole siatki, **głowa w dół (południe)**, wypalony cień w prawo-dół,
+  wypełnienie 85–99%. 330 z 331 potworów dnd5e ma `lockRotation: false`.
+  Szablony: `npm run build:token-templates` → `tokens/_template/`.
+- ⚠️ Te żetony to art **Forgotten Adventures** na licencji zabraniającej redystrybucji
+  (`systems/dnd5e/tokens/LICENSE`). Wskazywanie ścieżki — OK. Kopiowanie plików do modułu — nie.
+
+### 9.8 Poza kompendium
+
+- **Zombie (Nakładka Death Breath)** — nakładka na nosiciela, nie istota (`overlay: true`).
+  Wyłączony z packa; docelowo Active Effect / makro.
+- **Mobsprzęt** — podwozie i broń losowane z tabel (`randomized: true`). W packu jest,
+  ale z jedną, uśrednioną konfiguracją.

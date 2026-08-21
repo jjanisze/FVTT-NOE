@@ -5,7 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "validate:css": "node dev/validate-css.mjs"
+    "validate:css": "node dev/validate-css.mjs",
+    "build:packs": "node dev/packs/build-packs.mjs",
+    "validate:packs": "node dev/packs/validate-packs.mjs",
+    "build:icons": "node dev/icons/gen_class_placeholders.mjs",
+    "build:classes": "python dev/classes/gen_features.py && npm run build:icons && npm run build:packs && npm run validate:packs",
+    "build:token-templates": "python dev/icons/gen_token_template.py",
+    "build:token-placeholders": "python dev/icons/gen_token_placeholders.py",
+    "extract:bestiary": "python dev/bestiary/extract_bestiary.py",
+    "gen:bestiary": "python dev/bestiary/gen_bestiary.py",
+    "build:bestiary": "npm run extract:bestiary && npm run gen:bestiary && node dev/packs/build-packs.mjs --only=bestiariusz"
   },
   "keywords": [],
   "author": "",

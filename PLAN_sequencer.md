@@ -1,5 +1,11 @@
 # Neuroshima Override Plan: Sequencer Integration
 
+> Status (updated 2026-07-29): Phases 0/1/2/3 done (all fire modes — P/KS/DS/MS/OZ — now play
+> positionally from the shooter's token and resolve the sound-bank system), Phase 4 superseded
+> by a custom PIXI tracer engine — see `IMPLEMENTATION.md` §1.21/§1.22 for the authoritative
+> status. Checkboxes below are left as originally written (historical design record), not
+> re-ticked.
+
 ## Goal
 
 Adopt the Sequencer module as the audio/VFX engine for `neuroshima-2026-overrides`, replacing the hand-rolled socket-broadcast system and enabling positional audio, stereo panning, scrolling combat text, and eventually token-level visual effects.

@@ -2,8 +2,15 @@
  * Neuroshima 5e — damage type overrides.
  * Replaces dnd5e damage types with 12 Neuroshima types.
  * Removes: force, necrotic, thunder (no Neuroshima equivalent).
- * Adds: explosive (wybuchowe).
+ * Adds: explosive (wybuchowe), light (od światła).
  * Remaps: radiant → radioaktywne, lightning → elektryczne.
+ *
+ * `light` exists because the Bestiariusz gives Biodroid a laser rifle dealing
+ * "od światła". It cannot fold into `radiant`, which this module renamed to
+ * "Radioaktywne" — a laser reported as radioactive damage reads wrong. Safe to
+ * add: dnd5e stores damage types in a plain `SetField(StringField())` with no
+ * `choices` restriction (module/data/shared/damage-field.mjs:33), so a new key
+ * cannot trigger the DataModelValidationError described in ARCHITECTURE.md §2.
  */
 export function registerDamageTypes() {
   CONFIG.DND5E.damageTypes = {
@@ -29,6 +36,11 @@ export function registerDamageTypes() {
       label: "Od ognia",
       icon: "systems/dnd5e/icons/svg/damage/fire.svg",
       color: new Color(0xFF4500)
+    },
+    light: {
+      label: "Od światła",
+      icon: "systems/dnd5e/icons/svg/damage/radiant.svg",
+      color: new Color(0x00E5FF)
     },
     lightning: {
       label: "Elektryczne",

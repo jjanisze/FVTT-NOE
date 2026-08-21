@@ -26,6 +26,64 @@
     }]
   },
   "socket": true,
+  "packs": [
+    {
+      "name": "klasy",
+      "label": "Neuroshima — Klasy",
+      "path": "packs/klasy",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "profesje",
+      "label": "Neuroshima — Profesje",
+      "path": "packs/profesje",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "zdolnosci-klasowe",
+      "label": "Neuroshima — Zdolności klasowe",
+      "path": "packs/zdolnosci-klasowe",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "sztuczki",
+      "label": "Neuroshima — Sztuczki",
+      "path": "packs/sztuczki",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "lekarstwa",
+      "label": "Neuroshima — Lekarstwa",
+      "path": "packs/lekarstwa",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "bestiariusz",
+      "label": "Neuroshima — Bestiariusz",
+      "path": "packs/bestiariusz",
+      "type": "Actor",
+      "system": "dnd5e",
+      "ownership": { "PLAYER": "NONE", "ASSISTANT": "OWNER" }
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "Neuroshima",
+      "sorting": "m",
+      "color": "#6b3f1f",
+      "packs": ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "lekarstwa", "bestiariusz"]
+    }
+  ],
   "esmodules": ["scripts/main.mjs"],
   "styles": ["styles/neuroshima.css"],
   "languages": [

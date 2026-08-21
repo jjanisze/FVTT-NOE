@@ -13,9 +13,23 @@
 | `scripts/config/spellcasting.mjs` | Usunięcie spellcastingu |
 | `scripts/config/localization.mjs` | Fallback i18n (weryfikacja + ręczny fetch) |
 | `lang/pl.json` | 553 tłumaczeń (zagnieżdżone JSON) |
+| `scripts/config/conditions.mjs` | Stany — 14 z TABELI STANÓW + 8 zagrożeń + 5 znaczników + 3 stopniowane; usunięcie stanów fantasy |
+| `scripts/config/levelled-conditions-data.mjs` | Tabele Upojenia (4 stopnie) i Skażenia (4 poziomy, ST) |
+| `scripts/actors/levelled-conditions.mjs` | Egzekwowanie Upojenia/Skażenia + rejestr HUD dla stanów stopniowanych (też Zranienie) |
+| `icons/statuses/ASSETS.md` | Specyfikacja ikon dla 2 stanów bez odpowiednika w dnd5e |
 | `scripts/config/exhaustion.mjs` | Wyczerpanie (speed penalty override) |
 | `scripts/config/rest.mjs` | Odpoczynki (4h KO / 24h DO) |
 | `scripts/actors/abilities.mjs` | PROTOTYP: warstwa zdolności per aktor / per pionek |
+| `scripts/config/diseases-data.mjs` | 8 chorób przewlekłych (k8) + 4 popularne — tekst stanów wg RAW |
+| `scripts/config/phobias-data.mjs` | 8 fobii (k8) — Efekt + Przełamanie wg RAW |
+| `scripts/config/medicine-data.mjs` | 12 lekarstw jako Używki (ceny/dostępność/dawki) + flavour „Weź dawkę" |
+| `scripts/actors/health-panel.mjs` | Panel Choroby/Fobie (Biografia), pasek w sidebarze, dawki, Przełamanie, Zachód słońca |
+| `scripts/config/disease-effects.mjs` | Mechanika stanów chorób — zmiany AE, ataki, sytuacyjne, szał, krwawienie, mnożnik upadku |
+| `scripts/actors/disease-effects.mjs` | Egzekwowanie: sync Active Effects, Utrudnienie do ataków, przycisk Szału |
+| `scripts/combat/bleeding.mjs` | Krwawienie (Hemofilia) — wyzwalacz, RO na koniec tury, trzy drogi zatrzymania |
+| `scripts/combat/falling.mjs` | Spadanie [ZAGROŻENIE] — 1k6/1,5 m, Powalenie, upadek do cieczy, mnożnik Osteoporozy |
+| `scripts/actors/fuks-pips.mjs` | Trzy piki Fuksa w nagłówku karty (zastępują gwiazdkę Inspiration) |
+| `scripts/migration/migrate-health.mjs` | Migracja Chorób/Fobii/Fuksów z pól tekstowych na flagi |
 | `scripts/combat/zranienie.mjs` | Stopień Zranienia (wound levels 0–4) |
 | `scripts/combat/forsowanie.mjs` | Forsowanie (push failed checks) — DEPRECATED, replaced by rerolls.mjs |
 | `scripts/combat/rerolls.mjs` | Przerzuty: Forsowanie + Fuks (reroll mechanics) |
@@ -33,7 +47,15 @@
 | `scripts/weapons/magazine.mjs` | Magazynki Kwantowe + Strzelba Dual-Ammo (.12 Ga) + synchronizacja `system.uses` |
 | `scripts/weapons/fire-modes.mjs` | KS/DS/MS/OZ + synchronizacja aktywności |
 | `scripts/weapons/sounds.mjs` | Dźwięki broni i materiałów wybuchowych (strzały, eksplozje, zapalniki, miny) |
-| `scripts/weapons/sequencer.mjs` | Integracja Sequencera — wrapper audio, scrolling text, VFX helpers (soft dependency) |
+| `scripts/weapons/sequencer.mjs` | Integracja Sequencera — `seqPlayAudio`/`seqStartLoop`/`seqStopLoop`/`seqScrollText` (soft dependency, legacy fallback) |
+| `scripts/weapons/engine.mjs` | Silnik (`spalinowa`) — start/stop pętli dźwięku przez `seqStartLoop`/`seqStopLoop`, auto-tworzenie aktywności uruchom/zgaś |
+| `scripts/weapons/tracer-vfx.mjs` | Własny silnik PIXI smug/błysków lufy (baked textures, nie Sequencer webm) — `tracerFire`/`tracerFireArea`, cache wizualny per kaliber/broń |
+| `scripts/weapons/tracer-debug-panel.mjs` | Panel GM do tuningu VFX na żywo (suwaki TUNE, testowe salwy, eksport configu) |
+| `scripts/weapons/sound-debug-panel.mjs` | Panel GM do audiobanków (odsłuch pojedynczych plików, audyt rozwiązania kaliber→bank) |
+| `scripts/config/caliber-vfx.mjs` | Warianty VFX per kaliber (14 kalibrów: długość/kolor/prędkość smugi, rozrzut) |
+| `scripts/config/weapon-vfx.mjs` | Nadpisania VFX dla broni sygnaturowych (Minigun, Świnia, Browning, Light Fifty 2K20, Miotacz ognia, LAW) |
+| `scripts/config/sound-bank-manifest.mjs` | Auto-generowana lista plików audio (wejście do `sound-banks.mjs`) |
+| `scripts/config/sound-banks.mjs` | Redakcyjne mapowanie kaliber/broń → bank → slot → losowy take |
 | `scripts/weapons/damage-reduction.mjs` | Rozszerzenie panelu Apply Damage o redukcję materiałową |
 | `scripts/weapons/addons.mjs` | System Ulepszeń Broni — install/remove, delta, bonusy warunkowe, aktywności (bagnet/granatnik/śrutówka), toggle setup |
 | `scripts/weapons/melee-degradation.mjs` | Degradacja kości obrażeń broni białej (k12→…→1) + naprawa; Naostrzenie niszczone przy uszkodzeniu (RAW) |
@@ -87,6 +109,106 @@
 - [x] Stopień Zranienia wyświetlany na karcie BN (renderNPCActorSheet) — piki w kolumnie portretu, pod paskiem HP
 - [x] Ostatnia Akcja prompt (3 death save failures)
 - [x] Nokautowanie — melee bludgeoning at 0 PW → choice: 1 PW + Nieprzytomność
+- [x] **Stan `zranienie` na pionku (2026-08-03)** — trzeci *widok* tej samej flagi, obok efektu
+  i pików. Nie drugie miejsce przechowywania: `flags.<mod>.zranienie.level` pozostaje jedynym
+  magazynem, wszystko inne z niego wynika i zapisuje przez `setZranienie`/`applyZranienie`.
+  Ten sam układ, którym dnd5e trzyma w ryzach Wyczerpanie (jeden magazyn, N widoków, jeden lejek
+  zapisu) — z tą różnicą, że dnd5e trzyma poziom na efekcie i wylicza atrybut aktora
+  (`prepareExhaustionLevel` + `_onUpdateExhaustion`), a tu jest odwrotnie. Kierunek jest obojętny;
+  dwa magazyny nie
+- [x] **Statyczne `_id` efektu** (`dnd5ezranienie00`, czytane z `CONFIG.statusEffects`, nie wpisane
+  na sztywno) — bez tego `toggleStatusEffect("zranienie")` z makra lub innego modułu tworzyłby
+  **drugi, niezarządzany** efekt rany obok właściwego. To była realna wersja obawy o duplikację.
+  Zweryfikowane na żywo: włączenie statusu z zewnątrz trafia w dokument modułu, nie tworzy rywala
+- [x] Ikona zmieniona z `bleeding.svg` na `bloodied.svg` — po rejestracji Krwawienia jako osobnego
+  stanu stara ikona była nie do odróżnienia od niego na pionku. `bloodied.svg` zwolniło się,
+  bo moduł zeruje `bloodied.threshold` (Neuroshima mierzy obrażenia Stopniem Zranienia), więc
+  ikona ląduje na mechanice, która ją zastąpiła — zero nowych assetów
+- [x] Klik w HUD idzie przez `setZranienie`, ten sam zapis co piki na karcie, więc oba gesty robią
+  dokładnie to samo — w tym **nie** odpalają sprawdzenia śmierci ani auto-Wyczerpania, które
+  należą do `applyZranienie` (rany od obrażeń) i z ręcznej edycji pików nigdy nie leciały
+- [x] **Backfill przy starcie** — jak przy chorobach i stanach stopniowanych. Wykrył i naprawił
+  realny, wcześniejszy rozjazd: Piekarz i Victor von Blitz mieli flagę Zranienia 2 i **zero
+  efektu**, czyli od jakiegoś czasu nie płacili −4,5 m (Victor chodził 9 m zamiast 4,5)
+
+### 1.5a Stany (Conditions / Status Effects)
+Źródło: **TABELA STANÓW** (*Walka*) + **ZAGROŻENIA** (*Zasady szczegółowe*).
+
+- [x] **14 stanów z TABELI STANÓW** — wszystkie mapują się 1:1 na istniejące id dnd5e:
+  Nieprzytomność=`unconscious`, Niewidoczność=`invisible`, Obezwładnienie=`incapacitated`,
+  Ogłuchnięcie=`deafened`, Ogłuszenie=`stunned`, Oślepienie=`blinded`, Pochwycenie=`grappled`,
+  Powalenie=`prone`, Przerażenie=`frightened`, Sparaliżowanie=`paralyzed`,
+  Unieruchomienie=`restrained`, Wyczerpanie=`exhaustion`, Zatrucie=`poisoned`, Zauroczenie=`charmed`
+- [x] **Kolizja nazw naprawiona**: `lang/pl.json` tłumaczyło `ConDeafened` jako „Ogłuszony", a w
+  Neuroshimie **Ogłuszenie to `stunned`**, zaś `deafened` to Ogłuchnięcie. Nazwy ustawiane są
+  teraz literalnie w `conditions.mjs` (przechodzą przez `preLocalize` bez zmian, jak
+  `exhaustion.name` już wcześniej), więc rulebookowe brzmienie stoi obok rulebookowego tekstu
+- [x] **8 zagrożeń** zachowanych: Krwawienie, Podpalenie, Uduszenie, Niedożywienie, Odwodnienie,
+  Spadanie, Choroba, Zaskoczenie. Każde z nich albo jest nazwanym [ZAGROŻENIEM] z podręcznika,
+  albo jest już sterowane kodem modułu (`bleeding.mjs`, `falling.mjs`)
+- [x] **5 znaczników** technicznych: Martwy (`DEFEATED` — wymagany przez rdzeń), Ustabilizowany,
+  Unikanie, Ukrywanie się, Sen
+- [x] **13 usuniętych**: `petrified`, `cursed`, `transformed`, `silenced`, `concentrating`,
+  `ethereal`, `flying`, `hovering`, `burrowing`, `marked`, `coverHalf/ThreeQuarters/Total`.
+  Osłona jest rozstrzygana per atak w dialogu (`cover.mjs`) i nigdy nie czytana z pionka, więc
+  trzy znaczniki osłony były wyłącznie dekoracją
+- [x] `reference` usuwane ze wszystkich stanów — wskazywały na strony reguł SRD opisujące
+  **D&D-ową** wersję stanu; zastąpione tekstem z podręcznika w `description`
+- [x] **Bugfix: `conditionEffects`** — dnd5e stosuje drabinkę Wyczerpania z 2024 (Utrudnienie do
+  testów na 1, ½ ruchu na 2, Utrudnienie do RO i ataków na 3, **½ maks. PW na 4**, brak ruchu na 5).
+  Neuroshima ma płaskie −2/poziom i −1,5 m/poziom i nic więcej. Bez tej poprawki postać
+  z Wyczerpaniem 2 dostawała modułowe −3 m **oraz** dnd5e-owe ×0,5, a na poziomie 4 po cichu
+  traciła połowę maksymalnych PW. Wszystkie wpisy `exhaustion-N` wycięte
+- [x] **Przerażenie** dopisane do `abilityCheckDisadvantage`/`attackDisadvantage` — w 5e Utrudnienie
+  działa tylko przy widocznym źródle, więc dnd5e zostawia to MG; wpis Neuroshimy jest bezwarunkowy
+- [x] `bloodied.threshold = 0` — Zakrwawiony (≤50% PW) wyłączony; Neuroshima mierzy obrażenia
+  Stopniem Zranienia i dwa konkurujące wskaźniki „jak bardzo oberwałem" są gorsze niż jeden
+- [x] Ostrzeżenie w konsoli, gdy aktualizacja dnd5e wprowadzi stan spoza list — cicha akceptacja
+  wpuszczałaby reguły 5e z powrotem, ciche usunięcie mogłoby zepsuć silnik
+
+### 1.5b Stany stopniowane — Upojenie, Skażenie, Zranienie
+Stany z drabinką poziomów. **Ograniczenie**: mechanika stopni w dnd5e jest
+zaszyta pod literalne `exhaustion` i `system.attributes.exhaustion`
+(`active-effect.mjs` → `_prepareExhaustionLevel`, `_manageExhaustion`), więc `levels: 4` samo
+z siebie nic nie daje — poziomy, piki i cykl kliknięć musiały powstać od zera.
+
+- [x] **Upojenie** (4 stopnie, tabela z *Zasad szczegółowych*) — kumulatywne: stopień 3 niesie
+  też 1 i 2. Stopień 1: Utrudnienie CHA/INT; 2: + MDR; 3: + wszystkie Testy Cech i Testy Ataku,
+  ½ Szybkości; 4: `unconscious`
+- [x] **Skażenie radioaktywne** (4 poziomy: Niski ST 10 / Niebezpieczny ST 15 / Krytyczny ST 20 /
+  Zabójczy ST 25). Poziom **nie** nakłada kar wprost — niesie ST godzinowego RO na Kondycję,
+  a szkoda przychodzi jako Wyczerpanie. Licznik oblanych RO na aktorze; trzeci = choroba popromienna
+- [x] **Uwaga**: `neuroshima_5e_modifications.md` §16.2 podaje ST 5/10/15/20 — to **nie zgadza się
+  z RAW**. Tabela POZIOM SKAŻENIA RADIOAKTYWNEGO daje 10/15/20/25. Kod idzie za podręcznikiem
+- [x] Poziomy trzymane w fladze `flags.<mod>.upojenie` / `.skazenie` (0–4); jeden hook `updateActor`
+  obsługuje wszystkie ścieżki zmiany
+- [x] Active Effects budowane z poziomu, własność modułu przez flagę `levelledCondition` —
+  ten sam kontrakt co `disease-effects.mjs`; ręcznie dodanych efektów nie rusza
+- [x] Utrudnienie do ataków (Upojenie 3) przez `dnd5e.postBuildAttackRollConfig` — dnd5e nie ma
+  pola `attack.roll.mode`; `advantageMode` pisany wprost, bo `applyKeybindings` rozwiązuje
+  `options.disadvantage` **przed** hookiem
+- [x] Cykl poziomów w HUD pionka: LPM w górę, PPM w dół — ten sam gest co Wyczerpanie; nakładka
+  z numerem stopnia (`.neuro-condition-level`) zamiast ośmiu numerowanych ikon
+- [x] **Nakładka musi wisieć na palecie, nie na ikonie** — Foundry buduje każdy przycisk statusu
+  jako goły `<img class="effect-control">`, a `<img>` to element pusty: `append()` przechodzi
+  w DOM i nigdy się nie renderuje. Nakładka trafia więc do palety (`position: absolute`, czyli
+  blok zawierający i `offsetParent` ikon) i jest pozycjonowana nad swoją ikoną. Pozycję trzeba
+  zmierzyć, a w chwili renderu paleta jest jeszcze zwinięta i wszystkie offsety wynoszą 0 —
+  `ResizeObserver` przelicza ją, gdy paleta faktycznie dostanie layout
+- [x] **Rejestr HUD** (`registerHudLevelled`) — Upojenie i Skażenie rejestrują się z tabel w tym
+  pliku, **Zranienie z `combat/zranienie.mjs`**. Odwrócona zależność: warstwa HUD dostaje gest
+  i nakładkę, a nie dowiaduje się, jak działają rany
+- [x] API `game.neuroshima.conditions`: `drink()` (RO KON ST 15), `soberUp()` (Kac — RO KON ST 10,
+  porażka = Wyczerpanie), `radiationSave()`, `clearRadiation()` (RadOff), `get/set/adjust/sync`
+- [x] Backfill przy starcie świata dla GM — jak przy chorobach; sync jest no-opem, gdy nic się nie różni
+- [ ] Świadomie **poza automatyką** (wyzwalacze czasu i miejsca, per wybór zakresu):
+  odliczanie 4 h do kolejnego stopnia Kaca, godzinowy tick skażenia, tagowanie sceny/strefy
+  poziomem skażenia. Warstwa daje przyciski i arytmetykę; kiedy je nacisnąć, decyduje MG
+- [ ] Świadomie poza automatyką (brak pola w dnd5e / czysty opis): „Ułatwienie do RO przeciw
+  Przerażeniu" (RO są kluczowane cechą, nie odpieranym stanem), „nie potrafisz przejść 3 m
+  w linii prostej". Wypisywane w opisie efektu jako „Poza automatyką: …"
+- [x] Ikony: placeholdery `icons/statuses/upojenie.svg` / `skazenie.svg` + pełna specyfikacja
+  do podmiany w `icons/statuses/ASSETS.md`
 
 ### 1.6 Wyczerpanie (Neuroshima rules)
 - [x] -2 do każdego testu k20 per level (dnd5e modern rules — `rolls: 2`)
@@ -163,26 +285,50 @@
 - [x] Ikony aktywności: `icons/activities/` — 9 SVG (process_grid_13.py); `metadata.img` ustawione dla wszystkich neuro* typów; `syncBaseAttackActivityName` ustawia też `img` dla „Ogień pojedynczy"
 
 ### 1.19 Sequencer Integration
-Szczegółowy plan: `PLAN_sequencer.md`
+Szczegółowy plan: `PLAN_sequencer.md` (status w planie był nieaktualny — patrz commit 2026-07-29, poniższe odzwierciedla stan faktyczny)
 
-**Phase 0 — Setup (soft dependency)**
-- [ ] `module.json` — Sequencer jako `relationships.optional` (min 4.0.0)
-- [ ] `scripts/weapons/sequencer.mjs` — `_getSequencer()` helper + `_legacyPlay()` fallback
-- [ ] `seqSound(soundKey, { volume, token })` — jedyny punkt wyjścia dla audio
-- [ ] `seqScrollText(text, token, opts)` — no-op bez Sequencera
+**Phase 0 — Setup (soft dependency)** — [x] DONE
+- [x] `module.json` — Sequencer jako `relationships.optional` (min 4.0.0)
+- [x] `scripts/weapons/sequencer.mjs` — `_getSequencer()` helper, legacy fallback pozostaje po stronie wołających (`sounds.mjs`)
+- [x] `seqPlayAudio(src, vol, { token, soundKey })` — jedyny punkt wyjścia dla audio przez Sequencer
+- [x] `seqScrollText(text, token, opts)` — no-op bez Sequencera
 
-**Phase 1 — Audio Migration (globalne dźwięki, identyczne zachowanie)**
-- [ ] `seqSound()` zastępuje `playWeaponSound()` + `_playLocal()` + socket emit
-- [ ] Usunięcie `game.socket.on(SOCKET_EVENT)` listenera z `registerWeaponSounds()`
-- [ ] Usunięcie `game.socket.emit()` z `playWeaponSound()`
-- [ ] Walidacja: wieloosobowo — wszyscy słyszą strzał bez custom socketu
+**Phase 1 — Audio Migration (globalne dźwięki, identyczne zachowanie)** — [x] DONE
+- [x] `playWeaponSound()` (`sounds.mjs`) woła `seqPlayAudio()` jako pierwsze; `AudioHelper.play()` + `game.socket.emit()` to **świadomie zachowany** fallback na wypadek braku Sequencera, nie dług techniczny
+- [x] `SOCKET_EVENT`/listener celowo pozostają żywe dopóki fallback jest w użyciu (zgodnie z pierwotnym planem — usunięcie odłożone, nie zapomniane)
+- [x] Walidacja: wieloosobowo — wszyscy słyszą strzał bez custom socketu (gdy Sequencer aktywny)
 
-**Phase 3 — Scrolling Combat Text (zero nowych assetów)**
-- [ ] `ZACIĘCIE!` (czerwony) nad tokenem strzelca — `jams.mjs`
-- [ ] `PUSTE!` (pomarańczowy) + `ZAŁADOWANO` (żółty) — `magazine.mjs`
-- [ ] `ZRANIONY!` / `KRYTYCZNE ZRANIENIE!` (czerwony/fioletowy) — `zranienie.mjs`
-- [ ] `WYCZERPANIE` (niebieski) — `exhaustion.mjs` `addExhaustion` path
-- [ ] `FUKS!` (zielony) — `rerolls.mjs` po użyciu Fuksa
+**Phase 2 — Positional Audio** — [x] DONE
+- [x] `seqPlayAudio` — gałąź pozycyjna (`SOUND_RADIUS` per soundKey, `distanceEasing`/`panSound`/`muffledEffect`, `alwaysForGMs`)
+- [x] Pojedynczy strzał / przeładowanie / puste kliknięcie (`magazine.mjs`) i trafienie (`ammo.mjs`, impact na celu) przekazują `token`
+- [x] **(2026-07-29)** KS/DS/MS/OZ w `fire-modes.mjs` przełączone z `playWeaponSound(WeaponSound.BURST_*)` na `playBurstSound(liveItem, mode, { caliberId, token })` — serie ogniowe grają się teraz pozycyjnie z tokena strzelca, tak samo jak P
+
+**Phase 3 — Scrolling Combat Text (zero nowych assetów)** — [x] DONE
+- [x] `ZACIĘCIE!` (czerwony) nad tokenem strzelca — `jams.mjs`
+- [x] `PUSTE!` (pomarańczowy) + `ZAŁADOWANO` (żółty) — `magazine.mjs`
+- [x] `ZRANIONY!` / `KRYTYCZNE ZRANIENIE!` (czerwony/fioletowy) — `zranienie.mjs`
+- [x] `WYCZERPANIE` (niebieski) — `exhaustion.mjs` `addExhaustion` path
+- [x] `FUKS!` (zielony) — `rerolls.mjs` po użyciu Fuksa
+- [x] Bonus poza planem: `toolkit-medyk.mjs` (tekst stabilizacji/leczenia)
+
+### 1.21 Tracer/Muzzle VFX Engine
+Zastępuje pierwotne podejście z `PLAN_shooting_vfx.md` (Sequencer `.effect()` + webm JB2A) — nie skaluje się do serii Minigunu. Zamiast tego własny silnik PIXI z wypiekanymi (baked) teksturami.
+
+- [x] `tracer-vfx.mjs` — `tracerFire()` (pojedynczy cel), `tracerFireArea()` (linia/szablon, per-token trafienie), `_bakeTracerTexture`/`_bakeMuzzleTexture`, pula obiektów, licznik FPS
+- [x] Warianty wizualne per kaliber (`caliber-vfx.mjs`, 14 kalibrów) i per broń sygnaturowa (`weapon-vfx.mjs`, 5 broni: Minigun, Świnia, Browning, Light Fifty 2K20, Miotacz ognia, LAW) — kaskada broń > kaliber > globalny TUNE
+- [x] **Pojedynczy strzał**: `magazine.mjs` `_playSingleShotVfx()` woła `tracerFire()` z realnego `neuroRollAttack` — trafienie/pudło rozstrzygane przez `_isAttackHit()` (krytyk=trafienie, pech=pudło, inaczej rzut≥TT)
+- [x] **KS**: `fire-modes.mjs` `_playShortBurstVfx()` analogicznie
+- [x] **(2026-07-29) DS/MS**: `_playAreaBurstVfx()` (nowy helper, mirror `_playShortBurstVfx`) woła `tracerFireArea(liveItem, results.templates[0], selection.bullets)` z produkcyjnych handlerów `use()` — serie obszarowe mają teraz tracer na stole. Bez per-tokenowego trafienie/pudło: `tracerFireArea` zawsze kończy próbkowane impakty (`hit:true`), zgodnie z RAW, gdzie każdy nabój serii ląduje gdzieś w szablonie niezależnie od indywidualnych RO celów. OZ świadomie pominięte (poza zakresem VFX per `PLAN_shooting_vfx.md` §2), dostało tylko poprawkę dźwięku (patrz Phase 2 wyżej)
+- [ ] Screen shake (zaplanowany w `PLAN_sequencer.md` §6.3 dla DS/MS) — nieobecny w kodzie
+- [ ] Impact spark/blood + błysk tokena (`PLAN_shooting_vfx.md` §3, warstwy "impact"/"token flash") — porzucone, nie tylko odłożone; trafienie ma dziś tylko warstwę dźwiękową
+- [x] Panel debug (`tracer-debug-panel.mjs`) — rejestrowany w `init`, przycisk widoczny tylko dla GM (`visible: game.user?.isGM`), testowe salwy wszystkich 6 trybów + eksport configu
+
+### 1.22 Sound Banks (Audiobanki)
+- [x] `sound-bank-manifest.mjs` (auto-lista plików) + `sound-banks.mjs` (redakcyjne mapowanie kaliber/broń → bank → slot → losowy take), w tym syntezowane banki serii (`smg-synth`/`ar-synth`/`fnfal-synth`) tam, gdzie nie istniało nagranie
+- [x] Żywe dla: pojedynczy strzał, przeładowanie, puste kliknięcie (`magazine.mjs`), trafienie pojedynczym strzałem (`ammo.mjs`)
+- [x] **(2026-07-29)** `fire-modes.mjs` KS/DS/MS/OZ przełączone na `playBurstSound()` — banki serii (w tym syntezowane `smg-synth`/`ar-synth`/`fnfal-synth`) rozwiązują się teraz w realnej rozgrywce, nie tylko w panelu debug
+- [ ] Dźwięki trafienia serią (`impact-burst-*`) nieosiągalne strukturalnie — obrażenia serii idą przez `Activity.rollDamage` + ręczny Apply Damage, z pominięciem ścieżki w `ammo.mjs`, która zna kaliber+broń (udokumentowane w komentarzu `ammo.mjs:178-181`)
+- [x] Panel debug (`sound-debug-panel.mjs`) — 3 zakładki (BANKI/KALIBRY/NIEZNANE), rejestrowany w `init`, GM-only, odtwarzanie lokalne bez broadcastu
 
 ### 1.20 Melee Weapon Degradation
 - [x] Nat 1 → kość obrażeń spada (k12→k10→k8→k6→k4)
@@ -206,6 +352,10 @@ Szczegółowy plan: `PLAN_sequencer.md`
 - [x] Przyciski dostępne tylko dla aktorów typu `character` (BG), nie dla BN (`npc`)
 - [x] Fuks (Lucky Break) — reroll any d20 test, costs 1 Fuks (max 3)
 - [x] Fuks button greyed out when 0 Fuksy
+- [x] **Fuks na karcie (`fuks-pips.mjs`)**: natywna gwiazdka Inspiration usunięta z nagłówka
+  (była binarna i podpięta pod `system.attributes.inspiration`, czyli pod nic — realny zasób
+  od zawsze siedzi w `flags.<mod>.fuksy`). W jej miejsce trzy klikalne koniczyny 0–3, ta sama
+  semantyka klikania co piki Zranienia (klik w najwyższy zapalony cofa o jeden)
 - [x] Confirmation dialogs for both Forsowanie and Fuks
 - [x] Styled chat messages (amber for Forsowanie, green for Fuks)
 
@@ -259,7 +409,7 @@ Szczegółowy plan: `PLAN_sequencer.md`
 ---
 
 ## Phase 2: Full Equipment Layer
-- [ ] **Sequencer: Spatial Audio** — pozycjonowanie dźwięku z tokena, zanikanie z odległością, stereo pan, muffling przez ściany (`PLAN_sequencer.md` Phase 2)
+- [x] **Sequencer: Spatial Audio** — pozycjonowanie dźwięku z tokena, zanikanie z odległością, stereo pan, muffling przez ściany — żywe dla P/KS/DS/MS/OZ oraz trafienia (patrz §1.19 Phase 2)
 - [~] Weapon properties (cicha, ppanc, Wmag, etc.) — zdefiniowane + filtrowane per typ + tooltipy; egzekwowanie mechaniczne częściowe. Porażająca/Powalająca/Unieruchamiająca egzekwowane (`weapon-save-properties.mjs`, live-verified). Reszta: patrz `PLAN_weapon_properties.md`
 - [x] Właściwość "Obalająca" (skrypt wymuszający rzut obronny na celach, sprawdzenie rozmiaru celów)
 - [x] Weapon attachments/upgrades — patrz §1.18 Ulepszenia Broni (`addons.mjs`, live-verified)
@@ -274,16 +424,157 @@ Szczegółowy plan: `PLAN_sequencer.md`
 - [ ] Broń improwizowana
 
 ## Phase 3: Progression Layer
-- [ ] 6 klas z progression tables
-- [ ] Professions (subklasy)
-- [ ] Sztuczki (feat-like items)
+Szczegółowy plan: `PLAN_classes.md`
+- [x] 6 klas z progression tables — `config/classes-data.mjs`, pack `neuroshima.klasy` (165 advancementów)
+- [x] Professions (subklasy) — 18 profesji, pack `neuroshima.profesje`
+- [x] 133 zdolności klasowych/profesji — pack `neuroshima.zdolnosci-klasowe`, tekst dosłownie z podręcznika
+- [x] PW wg Neuroshimy (16+KON / 4+KON, 12+KON / 3+KON) — `actors/pw.mjs`; natywny `HitPoints` advancement tego nie wyraża
+- [x] Zdolności stanowe (Berserk, Kondycha) — `actors/class-state.mjs`, AE + czas trwania + warunki przerwania
+- [x] Pasek skrótów zdolności — `actors/ability-hotbar.mjs`, auto-makra + licznik ładunków + grafika stanu aktywnego
+- [x] Odnawianie na odpoczynkach — **bez własnego kodu**, natywne `uses.recovery` (`sr`/`lr`) działa na przedefiniowanych 4h/24h
+- [x] Multiclass rules (nie kumulują się: TT bez pancerza, Drugi atak) — `actors/class-rules.mjs`
+- [x] XP panel + personal PD tracking — `actors/pd-panel.mjs` (progi 0…3400, auto-PD za Stopień Zranienia)
+- [x] Migracja 22 istniejących postaci — `migration/migrate-classes.mjs` (11 rozpoznanych, homebrew zachowany)
+- [x] Usunięcie pozostałości SRD — `config/srd-cleanup.mjs` (klasy/zaklęcia/rasy ukryte i zablokowane)
+- [ ] Sztuczki (feat-like items) — pack `neuroshima.sztuczki` utworzony **pusty**, ItemChoice już podpięte
 - [ ] 12 Pochodzeń (origins) z bonusami cech
-- [ ] Multiclass rules
-- [ ] XP panel + personal PD tracking
+- [x] **Cichy krok** (Zwiadowca poz. 3, `actors/cichy-krok.mjs`, 2026-08-21) — pierwsza z 133 zdolności
+  klasowych/profesji, która dostała mechanikę zamiast samego tekstu. Trzy klauzule:
+  - Trudny teren nie spowalnia ruchu — Active Effect (`ADD "all"` na natywnym
+    `movement.ignoredDifficultTerrain`), sync przy `createItem`/`deleteItem`/`advancementManagerComplete`
+    + backfill na `ready` (ten sam wzorzec co `zranienie.mjs`)
+  - Ułatwienie do Skradania bez ciężkiej zbroi — `dnd5e.postBuildSkillRollConfig`, bo dnd5e liczy
+    Utrudnienie ze zbroi wprost w `prepareDerivedData` (żadne pole do nadpisania przez AE, jak przy
+    Utrudnieniu z ataku w `pack-tactics.mjs`)
+  - **Bugfix sąsiedni, nieusunięty**: Utrudnienie ze zbroi w rdzeniu dnd5e ląduje na sztywno pod
+    `skills.ste.roll.mode`, a Skradanie się w tym świecie ma klucz `skr` (`config/skills.mjs`) — więc
+    ta gałąź rdzenia jest dziś martwym kodem, zbroja nigdy nie daje Utrudnienia do Skradania.
+    Zweryfikowane na żywo. Nieszkodliwe (Cichy krok i tak daje Ułatwienie), ale osobny fix na przyszłość
+  - Wszystko zweryfikowane live na Alanie (CDP): efekt terenu doszedł backfillem, rzut na `skr` wyszedł
+    jako `1d20adv`
 
 ## Phase 4: Long-Term Survival
-- [ ] Choroby (3 stages, daily saves)
-- [ ] Fobie (trigger checks, Przełamanie)
+
+### 4.1 Choroby i Fobie (`health-panel.mjs`)
+- [x] **Panel na zakładce Biografia** — dwa bloki (Choroby / Fobie) nad polem biografii.
+  Pusty blok to jedna linia z listą wyboru + `+`; każdy wpis to jeden wiersz ze wszystkimi
+  kontrolkami. Obsługuje 0, 1 i wiele wpisów bez zmiany „ciężaru" layoutu
+- [x] **Pasek statusu w sidebarze** — pod pikami Zranienia, tylko do odczytu (kontrolki są
+  na Biografii, więc pasek wyłącznie raportuje); znika całkowicie, gdy nie ma czego pokazać
+- [x] `diseases-data.mjs` — 8 chorób przewlekłych z tabeli k8 + 4 popularne (popromienna,
+  szczurza gorączka, zakaźna, Death Breath); tekst stanów dosłownie z podręcznika
+- [x] Wybór z listy prefilluje nazwę/lek/stany; **wszystko pozostaje edytowalne**, a wpis
+  „własna…" pozwala napisać własną chorobę z własną drabinką stanów
+- [x] Choroba z samym „stanem ogólnym" (Hemofilia) nie bierze udziału w RO o zachodzie słońca (RAW str. 109)
+- [x] `phobias-data.mjs` — 8 fobii z tabeli k8 (Efekt + Przełamanie), również edytowalne
+- [x] **Przełamanie**: przycisk rzuca RO na Mądrość ST 15; sukces = Przełamanie i +1 do serii,
+  trzy z rzędu leczą fobię na stałe (wpis znika); porażka zeruje serię i zapala stan „Lęk!"
+- [x] Piki serii 0/3 na wierszu fobii + przełącznik „wyzwalacz w zasięgu"
+### 4.1a Egzekwowanie stanów chorób (`disease-effects.mjs`)
+Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie może dryfować;
+`config/disease-effects.mjs` koduje decyzje, jak to zdanie przekłada się na dnd5e).
+**22 z 24 stanów** ma egzekwowaną część mechaniczną; wszystkie zweryfikowane na żywo.
+
+- [x] **Active Effects, jeden per (wpis choroby, stan)** — realne, widoczne efekty w zakładce
+  Efekty, nie ukryta matematyka przy rzucie. Gracz z Utrudnieniem może pokazać palcem powód.
+  Moduł jest właścicielem tylko swoich efektów (flaga `diseaseEffect`); ręcznie dodanych nie rusza,
+  a ręcznie wyłączonego nie włącza z powrotem
+- [x] **Kluczowe odkrycie**: dnd5e 5.3 ma `AdvantageModeField` na `abilities.<x>.check.roll.mode`,
+  `.save.roll.mode` i `skills.<id>.roll.mode` (tryb ADD, −1 = Utrudnienie), a rzut umiejętności
+  **łączy** tryb cechy z trybem umiejętności (`AdvantageModeField.combineFields`). Dlatego
+  „Utrudnienie w Testach Cech opartych na Charyzmie" to **jedna** zmiana, obejmująca też testy
+  umiejętności opartych na CHA — zgodnie z tym, jak Neuroshima rozumie „Test Cechy"
+- [x] Nadpisania wartości: `int.value` → 6 / 2 (Thurman), `movement.walk` → 0 (OVERRIDE)
+  lub ×0.5 (MULTIPLY, Osteoporoza), `senses.darkvision` → 18 (UPGRADE, Draculi)
+- [x] Stany i odporności: `prone` (Niewydolność krytyczny), `frightened` (Paranoja krytyczny),
+  **odporność** na `frightened` przez `traits.ci` (Thurman krytyczny)
+- [x] **Utrudnienie do ataków** — dnd5e nie ma pola `attack.roll.mode`, więc jedzie na
+  `dnd5e.postBuildAttackRollConfig` (ten sam hook co bonusy ulepszeń). Zakres per cecha
+  („Testach Ataku opartych na Sile" trafia tylko w broń na SIŁ) albo globalny.
+  **Uwaga na kolejność**: `BasicRoll.buildConfigure` woła `applyKeybindings` (które rozwiązuje
+  `options.disadvantage` w `options.advantageMode`) **przed** `buildConfig`/hookiem — ustawienie
+  booleana w hooku jest cichym no-opem. Kod pisze `advantageMode` wprost, a istniejące Ułatwienie
+  znosi się do normalnego zamiast być nadpisane, tak jak stackuje to 5e
+- [x] **Przełączniki sytuacyjne** — stany warunkowe, których system nie widzi („w świetle dziennym",
+  „jako pasażer pojazdu"), dostają chip na wierszu choroby; włączenie tworzy drugi AE, wyłączenie
+  go usuwa. Syndrom Draculi ostry/krytyczny dokłada przycisk `1k4`/`1k6` za minutę ekspozycji
+- [x] **Szał** (Szaleństwo bostońskie) — przycisk pod nieudanym rzutem, tylko dla MG.
+  Zasada domowa MG: **każdy nieudany k20 poza Rzutem Obronnym**. RAW mówi „Testach Cech" przy
+  ostrym i „każda porażka" przy krytycznym; dosłowne czytanie tego drugiego odpalałoby prompt
+  przy RO, czyli praktycznie co rundę walki. Stan ostry reaguje tylko na testy INT/CHA
+  (jak w RAW), krytyczny na wszystko poza RO. ST bywa tylko w głowie MG, więc przycisk pojawia się
+  na każdym kwalifikującym się rzucie **poza** tym, o którym wiadomo, że się udał. Nic nie
+  rozstrzyga się samo — k100 leci dopiero po kliknięciu
+- [x] Backfill przy starcie świata: karty sprzed tej warstwy i zmiany w tabeli efektów
+  dojeżdżają same; sync jest no-opem, gdy nic się nie różni
+- [ ] Świadomie **poza automatyką** (2 stany bez części mechanicznej + zdania czysto opisowe):
+  „atakujesz wszystkich wokół", „jedyną akcją jest Unikanie", „tylko broń improwizowana",
+  „nie przejdziesz 3 m w linii prostej". Panel wypisuje je pod stanem jako „Poza automatyką: …",
+  żeby było widać, która połowa stanu jest egzekwowana
+
+### 4.1b Krwawienie — Hemofilia (`bleeding.mjs`)
+- [x] Wyzwalacz: obrażenia **cięte lub kłute**. Czytane z `dnd5e.calculateDamage`, nie
+  `preApplyDamage` — ten drugi dostaje wyłącznie sumę, typy są już wtedy stracone. Dzięki temu
+  trafienie mieszane (bagnet + rider) łapie, a czysto obuchowe nie
+- [x] Stan `bleeding` na pionku + flaga z serią; RO na Kondycję ST 10 na koniec **swojej** tury
+  (hook `updateCombat` patrzy na `combat.previous`, więc RO ląduje tam, gdzie stawia je RAW)
+- [x] Porażka = 1k4 obrażeń i zerowanie serii; trzy sukcesy pod rząd kończą krwawienie
+- [x] Trzy drogi zatrzymania z RAW: wstrzyknięcie leku (zużywa realną dawkę przez normalną ścieżkę
+  Używek), Test Medycyny ST 15 **wymagający narzędzi małego medyka** u leczącego, oraz seria 3 RO
+
+### 4.1c Spadanie [ZAGROŻENIE] (`falling.mjs`)
+- [x] dnd5e 5.3 ma tylko **ikonę statusu** `falling` — zero obrażeń od upadku w całym systemie.
+  Zaimplementowane wg RAW: 1k6 obuchowych za każde 1,5 m, Powalenie po uderzeniu (chyba że
+  obrażenia wyniosły 0), upadek do cieczy = Reakcja + Test Siły (Atletyka) lub Zręczności
+  (Akrobatyka) ST 10, sukces znosi obrażenia, porażka je połowi
+- [x] **Mnożnik Osteoporozy** (×2 przewlekły/ostry, ×4 krytyczny) czytany z tabeli efektów, nie
+  wpisany na sztywno — mnożniki się nie kumulują, wygrywa najgorszy, żeby „poczwórne" zastępowało
+  „podwójne" zamiast zbijać się do ×8. Rozliczany po teście na ciecz, więc czyste wejście do wody
+  oznacza brak obrażeń, a choroba nie ma czego mnożyć
+- [x] Przycisk MG na pasku narzędzi + `game.neuroshima.falling.fall(actor, { metres, intoLiquid })`;
+  dialog pokazuje mnożnik z góry, zanim cokolwiek poleci
+
+### 4.2 Lekarstwa i dawkowanie
+- [x] `medicine-data.mjs` — 12 lekarstw jako **Używki** (`consumable`, typ `lekarstwo`
+  zarejestrowany w `terminology.mjs`), z cenami/dostępnością z tabeli LEKARSTWA (str. 111)
+  i aktywnością „Zażyj dawkę" (`itemUses` + `autoDestroy`)
+- [x] Kompendium `neuroshima-2026-overrides.lekarstwa` budowane z tego samego pliku
+      (`dev/packs/build-packs.mjs`) — jedno źródło prawdy, bez ręcznej edycji packa
+- [x] **Przycisk „Weź dawkę"** na wierszu choroby: zużycie idzie przez **natywną ścieżkę
+  aktywności przedmiotu**, więc lek zachowuje się tak samo brany z panelu i z listy Używek
+  (uses → quantity → autoDestroy). Stary loot bez aktywności (np. „Wapniak (20)") ma fallback
+  na dekrementację `quantity` — dzięki temu istniejące karty działają bez migracji ekwipunku
+- [x] Rozwiązywanie zapasu: jawny link do przedmiotu → dopasowanie po kluczu leku →
+  luźne dopasowanie po nazwie (to ostatnie sprawia, że „Wapniak" trafia w „Wapniak (20)",
+  a „Actinix" w „Actinix/Rephidal")
+- [x] Brak leku w ekwipunku → dialog „dodać opakowanie?" importujący z kompendium
+  (fallback: budowa przedmiotu wprost z `medicine-data.mjs`, gdy pack nie jest zbudowany)
+- [x] Karta czatu z narracją — losowa linia per lek („*Góra chrupie kredową tabletkę wapniaka,
+  krzywiąc się na smak tynku*"), plus zapas i ostrzeżenie przy ≤1 dawce
+- [x] **Zachód słońca** (przycisk MG na pasku narzędzi + `game.neuroshima.health.sunset()`):
+  każdy, kto nie wziął dziś dawki, rzuca RO na Kondycję ST 10 — naturalna 20 wraca do stanu
+  przewlekłego, naturalna 1 pogarsza o dwa stany, porażka o jeden. Raport zbiorczy szeptem do MG
+- [x] „Dzień" to licznik świata (`dayCounter`), **nie** `game.time.worldTime` — przy tym stole
+  czas świata nie jest przesuwany, więc oparcie o niego dawałoby ciche fałszywe trafienia
+
+### 4.3 Migracja z pól tekstowych (`migrate-health.mjs`)
+- [x] Stan chorób/fobii/Fuksów żył wcześniej w trzech miejscach i trzech formatach:
+  biografii (`<h1>CHOROBA: X</h1>`), `system.details.bond` („Zdrowy na X (lek)") oraz
+  `.ideal`/`.flaw` („Fuksy: 3", „Zranienie: 2" + ręczny opis choroby)
+- [x] 11 postaci zmigrowanych; plan jest **jawną tabelą per aktor**, nie regexem — formaty
+  są niespójne, a to są żywe karty BG
+- [x] Homebrew zachowany: „Lekarz i Farmaceuta" Raynalda (tabela k20 podmienianych tabletek)
+  wylądował w notatkach choroby; „Narkoleptyk"/„Wyczulony" zostawione w polu Słabości,
+  bo to nie choroba ani fobia
+- [x] Sprzeczność u Góry rozstrzygnięta: pole Więzi mówiło „Zaburzenia błędnika (Actinix)"
+  (kopiuj-wklej z Buźki), biografia i realny przedmiot mówiły Osteoporoza/Wapniak — wygrały te drugie
+- [x] Reptiliofobia Carsona (spoza tabeli k8) przelosowana → **Pirofobia** (k8 = 6);
+  przełamania wyrównane do RAW (1h/8h zamiast rozjechanych 24h)
+- [x] Loot udający narzędzia zamieniony na realne przedmioty `tool` z `toolkits-data.mjs`:
+  Rusznikarz (Carson), Kowal (Dante), Kucharz (Góra), Medyk (Iris), Ślusarz (Kluczyk)
+- [x] Sekcja „BRONIE SPECJALNE" Buźki przeniesiona na opis przedmiotu Koktajl Mołotowa
+- [x] `createToolkits(actor, { only })` — nowa opcja, żeby dołożyć pojedynczy zestaw
+
 - [ ] Upojenie (4 levels, Kac mechanic)
 - [ ] Environmental hazards (Podpalenie, Skażenie, Głód, etc.)
 - [ ] Rest activities (cooking, hunting, gossip, cleaning)
@@ -292,7 +583,7 @@ Szczegółowy plan: `PLAN_sequencer.md`
 - [ ] Drones
 
 ## Phase 5: Content & Polish
-- [ ] **Sequencer: VFX** — muzzle flash, bullet tracer, eksplozje na templatech, iskry trafienia (`PLAN_sequencer.md` Phase 4, wymaga assetów webm)
+- [~] **Tracer/Muzzle VFX** — muzzle flash + bullet tracer żywe dla P/KS/DS/MS (własny silnik PIXI, patrz §1.21); OZ świadomie bez tracera (poza zakresem), eksplozje na templatach i iskry/krew trafienia wciąż nie zaimplementowane
 - [ ] Compendia (weapons, ammo, armor, tools, origins, classes, etc.)
 - [ ] Enemy sheets + bestiary imports
 - [ ] Color profiles (Stal, Rdza, Rtęć, Chrom)
@@ -302,6 +593,115 @@ Szczegółowy plan: `PLAN_sequencer.md`
 ---
 
 ## Changelog
+
+### v0.7.1 — Egzekwowanie stanów chorób, Krwawienie, Spadanie (2026-08-02)
+
+Domknięcie luki z v0.7.0 („stany chorób nie nakładają efektów"). **22 z 24 stanów** ma teraz
+egzekwowaną część mechaniczną; reszta jest jawnie oznaczona na karcie jako „Poza automatyką".
+
+- **`disease-effects.mjs`** (dane + egzekwowanie): mechanika trzymana osobno od cytatu
+  z podręcznika, bo to osobna klasa decyzji. Active Effects są **widoczne** w zakładce Efekty —
+  gracz z Utrudnieniem ma gdzie pokazać powód. Moduł rusza wyłącznie własne efekty.
+- **Odkrycie, które zdecydowało o kształcie tabeli**: rzut umiejętności w dnd5e 5.3 łączy
+  `abilities.<x>.check.roll.mode` z `skills.<id>.roll.mode`, więc „Utrudnienie w Testach Cech
+  opartych na Charyzmie" to jedna zmiana obejmująca też testy CHA-umiejętności — dokładnie tak,
+  jak Neuroshima rozumie „Test Cechy".
+- **Ataki**: `postBuildAttackRollConfig` z zakresem per cecha. Pułapka kolejności: `applyKeybindings`
+  rozwiązuje `options.disadvantage` **przed** hookiem, więc ustawianie booleana jest no-opem —
+  kod pisze `advantageMode`, a Ułatwienie znosi się do normalnego zamiast zniknąć.
+- **Przełączniki sytuacyjne**: „w świetle dziennym" / „jako pasażer pojazdu" jako chip na wierszu
+  choroby; Draculi dokłada przycisk ekspozycji 1k4/1k6 na minutę.
+- **Szał**: przycisk pod nieudanym rzutem, GM-only, k100 dopiero po kliknięciu. Zasada domowa —
+  każdy nieudany k20 poza RO (dosłowne „każda porażka" z krytycznego odpalałoby prompt co rundę).
+- **Krwawienie (Hemofilia)**: pełna pętla — wyzwalacz na obrażeniach ciętych/kłutych czytany
+  z `dnd5e.calculateDamage` (`preApplyDamage` dostaje już tylko sumę, bez typów), RO ST 10 na koniec
+  swojej tury, 1k4 przy porażce, i trzy drogi wyjścia z RAW: lek, Medycyna ST 15 z narzędziami
+  małego medyka, albo trzy zdane RO pod rząd.
+- **Spadanie**: dnd5e ma tylko ikonę statusu `falling` i zero mechaniki, więc zagrożenie
+  zaimplementowane wg RAW (1k6 za 1,5 m, Powalenie, Reakcja Atletyka/Akrobatyka ST 10 przy upadku
+  do cieczy). Mnożnik Osteoporozy ×2/×4 czytany z tabeli efektów; mnożniki nie kumulują się.
+- **Walidacja live**: wszystkie 22 stany przebadane na aktorze testowym (wartości cech, Szybkość,
+  widzenie w ciemności, stany, odporności, tryby rzutów), 6 scenariuszy Utrudnienia do ataków,
+  7 przypadków bramkowania Szału, pełna pętla krwawienia z dwiema drogami zatrzymania,
+  ×1/×2/×4 dla Spadania. Zero błędów w konsoli; aktor testowy i 39 wiadomości posprzątane.
+
+### v0.7.0 — Choroby, Fobie, Lekarstwa, Fuks na karcie (2026-08-01)
+
+- **Choroby i Fobie** (`health-panel.mjs`, `diseases-data.mjs`, `phobias-data.mjs`): panel na
+  zakładce Biografia + pasek statusu w sidebarze. Postać może mieć dowolnie wiele chorób i fobii;
+  pusty blok kosztuje jedną linię, każdy wpis jeden wiersz, kontrolki nie powtarzają się per wpis.
+  Wybór z tabeli k8 prefilluje tekst RAW, ale każde pole zostaje edytowalne, a wpis „własna…"
+  pozwala napisać schorzenie od zera (z własną drabinką stanów).
+- **Lekarstwa jako Używki** (`medicine-data.mjs`, kompendium `lekarstwa`): 12 leków jako
+  `consumable` z aktywnością „Zażyj dawkę". Przycisk na karcie zużywa dawkę **natywną ścieżką
+  aktywności**, więc lek działa identycznie z panelu i z listy Używek. Stary loot (`Wapniak (20)`)
+  nadal działa dzięki fallbackowi na `quantity` — nie było potrzeby migrować ekwipunku.
+  Karta czatu opisuje, jak postać *widocznie* bierze leki (losowa linia per lek).
+- **Zachód słońca**: przycisk MG wykonuje RO na Kondycję ST 10 dla każdego, kto nie wziął dawki
+  (nat 20 → powrót do przewlekłego, nat 1 → dwa stany w dół) i przesuwa licznik dnia.
+  Świadomie oparte o własny licznik, nie o `game.time.worldTime` — czas świata przy tym stole stoi.
+- **Fuks** (`fuks-pips.mjs`): natywna gwiazdka Inspiration w nagłówku była binarna i nie była
+  podpięta pod nic — realny zasób 0–3 od zawsze żył w `flags.<mod>.fuksy` i tam sięgał przycisk
+  przerzutu. Gwiazdka usunięta, w jej miejsce trzy klikalne koniczyny zgodne z RAW.
+- **Migracja 11 postaci** (`migrate-health.mjs`): choroby/fobie/Fuksy/Zranienie ściągnięte
+  z pól `biography` / `bond` / `ideal` / `flaw` do flag. Plan to jawna tabela per aktor, nie regex.
+  Reptiliofobia Carsona (spoza tabeli) przelosowana na Pirofobię (k8 = 6), przełamania wyrównane
+  do RAW. Pięć zestawów narzędzi udających loot zamienionych na realne przedmioty `tool`.
+  Homebrew (tabela k20 „Lekarz i Farmaceuta" Raynalda) zachowany w notatkach choroby.
+### v0.6.0 — Warstwa Klas: 6 klas, 18 profesji, 133 zdolności, kompendia, pasek skrótów (2026-07-31)
+Plan: `PLAN_classes.md`. Zastępuje w całości klasy dnd5e (nie ma klerykа).
+
+- **Ekstrakcja z podręcznika** (`dev/classes/`): 76 zdolności klasowych + 61 z profesji wyciągniętych
+  z `Podrecznik/source.txt` wraz z tagami akcji `[A]/[B]/[R]`, odmyślnikowane, zweryfikowane
+  względem listy nazw (0 niedopasowań). Pipeline jest odtwarzalny: `npm run build:classes`.
+- **⚠ `Tabele/Klasy.md` zawierał realne błędy mechaniczne** — poprawione w repozytorium vaulta:
+  kolumna *Berserki* Brutala (było 1,1,2… zamiast 2,2,2,3,3,3,4,4,4,5,5,5), *Mój wróg* i *Mój biom*
+  Zwiadowcy, poziomy profesji Twardziela (3/**7**/11, nie 3/6/11), pula umiejętności Cwaniaka (4 z **8**),
+  lista *Wyjadacza* Zwiadowcy. Dodatkowo **9 zdolności** oznaczonych `(?)`/`—` faktycznie istnieje
+  (Szósty zmysł, Brutalny cios, Szaleńcza szarża, Solówa, Paranoja, Zabójczy cios, Sportowiec,
+  Wyczulone zmysły, Pogoń). Źródłem prawdy jest teraz `config/classes-data.mjs`.
+  Znany błąd podręcznika: **Samouk** ma nagłówek „POZIOM 7", tabela podaje 9 — przyjęto 9.
+- **Kompendia** (`dev/packs/build-packs.mjs`, `classic-level` z instalacji Foundry, bez `npm install`):
+  `klasy` (6), `profesje` (18), `zdolnosci-klasowe` (133), `sztuczki` (pusty, ale podpięty).
+  Deterministyczne ID z hasha slugu, więc przebudowa nie psuje UUID-ów w advancementach.
+  ⚠ Przebudowa wymaga **zamkniętego Foundry** (LevelDB trzyma blokadę) — skrypt to wykrywa i podpowiada.
+- **`pw.mjs`**: PW liczone płasko per poziom. dnd5e `HitPoints` advancement jest przywiązany do
+  średniej z kości (k8→5), więc **nie potrafi** dać 16 na 1. poziomie. Wieloklasowość: pierwsza klasa
+  postaci wnosi wartość „poz. 1", pozostałe poziomy swoją wartość „kolejne". Zweryfikowane 1→12.
+- **`class-state.mjs`**: Berserk jako realny przełącznik — zużywa użycie, nakłada AE na 10 rund,
+  przerywa się na Nieprzytomności/Obezwładnieniu/Zauroczeniu, ogłasza „brak akcji w następnej turze".
+  *Obłęd Berserkera* zeruje swoją premię do TT gdy postać założy pancerz, zamiast znikać.
+- **`ability-hotbar.mjs`**: makra tworzone/usuwane automatycznie wraz z poziomami; na slocie rysowany
+  licznik ładunków (`●●○○`, wyszarzenie przy 0) i podmiana grafiki + pulsująca ramka przy aktywnym stanie.
+  **Bugfix**: `createEmbeddedDocuments` odpala `createItem` raz na dokument — równoległe synchronizacje
+  tworzyły duplikaty makr (5× na zdolność). Naprawione debounce + szeregowanie per aktor + reuse istniejącego makra.
+- **Odpoczynki**: potwierdzone empirycznie, że **nie trzeba własnego kodu** — `rest.mjs` zmienia tylko
+  czas trwania, więc natywne `uses.recovery {period:"lr"}` odnawia Berserki po Długim, a nie po Krótkim.
+- **`migrate-classes.mjs`**: 11 z 22 postaci rozpoznanych i zmigrowanych (klasa + profesja + zdolności
+  z kompendium). **Zdolności niepasujące NIE są usuwane** — świat zawiera dużo homebrew
+  (`Urodzony Morderca`, `Młynek`, `Telepata`, `Fart`, `Patriota`), które ma realną historię gry.
+  Cztery pod-zdolności Berserka scalane w jeden przedmiot. Pozostałe 8 postaci nie ma żadnych
+  rozpoznawalnych zdolności — raport wskazuje je MG do ręcznego przypisania.
+- **`srd-cleanup.mjs`**: kompendia klas/zaklęć/ras/pochodzeń D&D ukryte i zablokowane (przełącznik w
+  ustawieniach świata). Bestiariusze i ekwipunek zostają jako materiał źródłowy. Ukryty natywny pasek XP
+  i slot „Add Species". **Wsparcie potworów nietknięte** — BN-i używają `feat`, mogą teraz odwoływać się
+  do prawdziwych zdolności z kompendium.
+- **`pd-panel.mjs`**: progi PD 0…3400 (poz. 1–12), osobiste kategorie (Pierwsze Spotkanie / Nowy obszar
+  z notatką, Stopień Zranienia auto-przyznawane w walce), Przechwałki, Nagroda publiczności, PD grupowe MG.
+  Pasek postępu do następnego poziomu + log wpisów z możliwością cofnięcia.
+- **`abilities.mjs`**: prototypowa warstwa flag dostaje nowe, najwyższe źródło — realny przedmiot
+  zdolności klasowej (`source: "feature"`). `fire-modes.mjs` / `jams.mjs` / `magazine.mjs` bez zmian.
+- **Assety**: 159 zastępczych SVG (`dev/icons/gen_class_placeholders.mjs`), kolorowane per klasa,
+  z wariantami `_active` dla zdolności przełączanych. Podmiana po nazwie pliku, bez zmian w kodzie.
+
+### v0.5.0 — Tracer VFX Engine, Sound Banks, Sequencer Audio/Scrolling-Text (2026-07-29)
+- **`sequencer.mjs`**: Sequencer jako soft dependency w pełni działa dla audio (`seqPlayAudio`, globalne + pozycyjne z `SOUND_RADIUS`/`distanceEasing`/`panSound`/`muffledEffect`), scrolling text (`seqScrollText` — ZACIĘCIE/PUSTE/ZAŁADOWANO/ZRANIONY/KRYTYCZNE ZRANIENIE/WYCZERPANIE/FUKS, plus tekst stabilizacji w `toolkit-medyk.mjs`) i nowe pętle audio (`seqStartLoop`/`seqStopLoop`, poza pierwotnym planem) dla silnika (`engine.mjs`, `spalinowa`). Legacy socket fallback (`sounds.mjs`) **celowo** zachowany, nie usunięty.
+- **Pozycyjność serii (2026-07-29)**: KS/DS/MS/OZ w `fire-modes.mjs` przełączone z `playWeaponSound(WeaponSound.BURST_*)` na `playBurstSound(liveItem, mode, { caliberId, token })` — serie ogniowe grają się teraz pozycyjnie z tokena strzelca i rozwiązują bank audio, tak samo jak strzał pojedynczy.
+- **`tracer-vfx.mjs`** (nowy, 916 linii): zastępuje pierwotny plan Sequencer `.effect()` + webm/JB2A z `PLAN_shooting_vfx.md` (nie skalował się do Minigunu) własnym silnikiem PIXI z wypiekanymi teksturami smug/błysków lufy, per-caliber/per-broń wariantami (`caliber-vfx.mjs` × 14, `weapon-vfx.mjs` × 5 broni sygnaturowych), pulą obiektów i licznikiem FPS. `tracerFire()` (pojedynczy cel) jest **żywe w produkcji** dla strzału pojedynczego (`magazine.mjs`) i KS (`fire-modes.mjs`). **(2026-07-29)** `tracerFireArea()` (linia/szablon) podłączone do DS/MS przez nowy helper `_playAreaBurstVfx()` — serie obszarowe mają teraz tracer na stole (zawsze pełny impakt na próbkowanych punktach, bez per-tokenowego trafienie/pudło — RAW: każdy nabój serii ląduje gdzieś w szablonie). OZ świadomie bez tracera (poza zakresem §2 planu). Impact spark/blood + błysk tokena z pierwotnego planu **porzucone** (nie tylko odłożone) — trafienie ma dziś wyłącznie warstwę dźwiękową. Screen shake dla serii **nie zaimplementowany**.
+- **`sound-banks.mjs`** (nowy, 637 linii) + `sound-bank-manifest.mjs`: redakcyjne mapowanie kaliber/broń → bank → slot → losowy take, w tym syntezowane banki serii (`smg-synth`/`ar-synth`/`fnfal-synth`) tam, gdzie nie istniało nagranie. **Żywe dla wszystkich trybów ognia** (P/KS/DS/MS/OZ) po podłączeniu `playBurstSound()` do `fire-modes.mjs` (patrz wyżej). Dźwięki trafienia serią pozostają nieosiągalne strukturalnie (obrażenia serii idą przez `Activity.rollDamage` + ręczny Apply Damage, z pominięciem `ammo.mjs`, jedynego miejsca, które zna kaliber+broń w momencie trafienia).
+- **Panele debug** (`tracer-debug-panel.mjs`, `sound-debug-panel.mjs`): rejestrowane w hooku `init`, przyciski na pasku scenoombardowym widoczne tylko dla GM. Tracer panel: 22 suwaki/kolory tuningu, testowe salwy wszystkich 6 trybów (w tym obszarowych — jedyny sposób na przetestowanie DS/MS/OZ), eksport configu. Sound panel: 3 zakładki (BANKI/KALIBRY/NIEZNANE), audyt rzeczywistego rozwiązania kaliber→bank.
+- **Nowe assety audio**: dziesiątki nowych `.wav` (firearms/melee/energy/weapon-adjacent) + `dev/audio/*` (build_sound_banks.ps1, build_synth_bursts.ps1, build_audition_set.ps1, process_f2_caliber_sfx.ps1) do budowy/przetwarzania/odsłuchu banków.
+- **Poza zakresem tego commita, ale dodane przy okazji**: `surowce-inventory.mjs`, `tool-availability.mjs`, `tool-proficiency.mjs`, `toolkits-data.mjs`, `toolkit-check.mjs`, `toolkit-medyk.mjs` — szkielet warstwy narzędzi/surowców (`PLAN_tool_proficiency.md`, `PLAN_toolkits.md`), nie broń — nieopisane szczegółowo tutaj.
 
 ### v0.4.1 — Cechy „RO przy trafieniu": Porażająca/Powalająca/Unieruchamiająca (2026-06-18)
 - **weapon-save-properties.mjs** (nowy): generyczny system trzech cech broni wymuszających Rzut Obronny i stan przy trafieniu, uogólnienie wzorca `obalajaca.mjs`. Jeden słownik `SAVE_PROPERTIES` + jeden hook wstrzykujący przycisk (`renderChatMessageHTML`) + jeden handler kliknięcia (`renderChatLog`).
