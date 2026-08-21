@@ -1,0 +1,488 @@
+{
+  "brutal": {
+    "abilities": [
+      {
+        "level": 1,
+        "name": "BERSERK",
+        "action": "B",
+        "text": "W Akcji Bonusowej możesz wpaść w Berserk. W tym swoistym szale otrzymujesz następujące korzyści: Siła Berserkera. Masz Ułatwienie w testach Siły i RO na Siłę. Obrażenia Berserkera. Kiedy wykonujesz atak oparty na Sile — bronią lub bez broni i zadajesz obrażenia, dorzucasz dodatkową kość obrażeń rosnącą wraz z poziomem Brutala, zgodnie z kolumną Obrażenia Berserkera w tabeli Zdolności Klasowych Brutala. Szarża Berserkera [B]. Jeśli przeznaczysz całą swoją Szybkość na zbliżenie się do przeciwnika, którego widzisz lub słyszysz, możesz w Akcji Bonusowej wykonać Przyspieszenie w jego kierunku. Obłęd Berserkera. Jeśli nie nosisz żadnego pancerza, hełmu ani tarczy, twoja TT rośnie o wartość modyfikatora Siły. Czas trwania. Berserk trwa 10 rund (do końca twojej ostatniej tury), chyba że otrzymasz stan Nieprzytomność, Obezwładnienie czy Zauroczenie, które go przerywają. Kiedy Berserk się zakończy, zmęczenie sprawia, że nie wykonujesz żadnej akcji do końca twojej następnej tury. Liczbę dostępnych na danym poziomie Berserków, znajdziesz w tabeli Zdolności klasowe Brutala. Liczba ta odnawia się po odbyciu Długiego odpoczynku."
+      },
+      {
+        "level": 1,
+        "name": "GOŁA KLATA",
+        "action": null,
+        "text": "Kiedy nie nosisz żadnego pancerza, hełmu ani tarczy twoja Trudność Trafienia wynosi 10 + twoje modyfikatory Zręczności i Kondycji. Ta zdolność nie łączy się z podobnie działającymi zdolnościami innych klas."
+      },
+      {
+        "level": 2,
+        "name": "WŚCIEKŁY CIOS",
+        "action": null,
+        "text": "Raz w rundzie, kiedy trafisz atakiem opartym na Sile, możesz dodać do obrażeń kości Wściekłego ciosu. Masz ich tyle, ile poziomów Brutala, a każda z nich zadaje dodatkowo 1k6 obrażeń."
+      },
+      {
+        "level": 2,
+        "name": "Z BARA!",
+        "action": "B",
+        "text": "Kiedy jesteś pod wpływem zdolności Berserk, to w Akcji Bonusowej możesz wykonać Odepchnięcie istoty dużej lub mniejszej od ciebie. Cel musi zdać RO na Siłę lub Zręczność, inaczej go odpychasz o 1,5 metra od siebie lub przewracasz, nakładając na niego stan Powalenie. Stopień Trudności RO wynosi 8 plus twój modyfikator Siły i Premia Biegłości."
+      },
+      {
+        "level": 3,
+        "name": "SZÓSTY ZMYSŁ",
+        "action": null,
+        "text": "Masz pierwsze objawy paranoi. Wszędzie widzisz niebezpieczeństwo, ale dzięki temu łatwiej ci uniknąć zagrożenia. Otrzymujesz Ułatwienie w RO na Zręczność przeciw zagrożeniom, które jesteś w stanie zarejestrować zmysłami, np. pułapki, śliska nawierzchnia, spadający sufit, granat czy długa seria z karabinu maszynowego. Szósty zmysł nie działa, jeśli jesteś pod wpływem stanu Oślepienie, Ogłuszenie lub Nieprzytomność."
+      },
+      {
+        "level": 3,
+        "name": "ZDOLNOŚĆ Z PROFESJI",
+        "action": null,
+        "text": "Wybierasz profesję, wyznaczającą kierunek rozwoju twojej bezwzględnej brutalności. Masz do wyboru profesję Gladiatora, Najemnika i Gangera. Ten wybór określa, jakie zdolności z profesji możesz wybrać na 3., 6. i 10. poziomie Brutala. Opcjonalnie, zamiast zdolności z profesji na poziomie 6 i 10, możesz wybrać nową Sztuczkę."
+      },
+      {
+        "level": 4,
+        "name": "SZTUCZKA",
+        "action": null,
+        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki str. XXX), jeśli spełniasz jej wymagania. Kolejną Sztuczkę możesz wybrać na 8. i 12. poziomie Brutala."
+      },
+      {
+        "level": 5,
+        "name": "BRUTALNY CIOS",
+        "action": null,
+        "text": "Kiedy używasz kości Wściekłego ciosu w ataku wręcz, możesz nałożyć na cel jeden dodatkowy efekt zgodny z poniższą tabelą. Efekty o tym samym działaniu się nie kumulują. PRZYKŁAD: Na 5. poziomie Brutala masz 5 kości Wściekłego ciosu. Do pojedynczego ataku możesz dodać maksymalnie 3 kości Wściekłego ciosu. Kości tej zdolności odnawiają się po odbyciu Długiego odpoczynku."
+      },
+      {
+        "level": 5,
+        "name": "DRUGI ATAK",
+        "action": null,
+        "text": "Kiedy wykonujesz w swojej turze akcję Atakowanie, możesz zaatakować dwukrotnie."
+      },
+      {
+        "level": 7,
+        "name": "SOLÓWA",
+        "action": "B",
+        "text": "W Akcji Bonusowej możesz wybrać istotę, którą widzisz w zasięgu 18 metrów. Prowokujesz ją do atakowania tylko ciebie, jeśli nie zda ona RO na Inteligencję o ST 8 plus twoja Premia Biegłości i modyfikator Siły. Efekt trwa, dopóki istota cię widzi lub zda Rzut Obronny na końcu swojej następnej tury."
+      },
+      {
+        "level": 7,
+        "name": "SZALEŃCZA SZARŻA",
+        "action": null,
+        "text": "Twoja szybkość rośnie o 3 m, a jeśli wykonasz akcję Przyspieszenie, przeciwnicy mają Utrudnienie do Testów Ataków dystansowych przeciw tobie, do początku twojej następnej tury."
+      },
+      {
+        "level": 9,
+        "name": "PARANOJA",
+        "action": null,
+        "text": "Twój lęk przed zagrożeniem jest tak wielki, że wszędzie spodziewasz się zasadzki. Nikt nie jest w stanie cię zaskoczyć i otrzymujesz Ułatwienie w testach Inicjatywy. 000 68 TYP OBRAŻEŃ EFEKT Obuchowe Powalenie. Automatyczne powalenie istoty, maksymalnie o jeden rozmiar większej od ciebie. Cięte Osłabienie. Cel otrzymuje karę -1k4 do Testów Ataku (tj. jego wynik pomniejszany jest o 1k4) do początku twojej następnej tury. Kłute Okulawienie. Szybkość istoty spada o 6 m, do początku twojej następnej tury.KLASY"
+      },
+      {
+        "level": 11,
+        "name": "ZABÓJCZY CIOS",
+        "action": null,
+        "text": "Wiesz już gdzie uderzać, żeby wyrządzić największe szkody. Kiedy trafiasz krytycznie atakiem wręcz, zamiast podwajać, potrajasz kostki obrażeń."
+      }
+    ],
+    "base": "PODSTAWOWE ATRYBUTY BRUTALA Ulubiona Cecha Bazowa Siła Wymaganie wstępne Siła 15+ Kość Wytrzymałości k8 na każdym poziomie Brutala Punkty Wytrzymałości 1 poziom: 16 plus mod. KON. Kolejne poziomy: 4 plus mod. KON Biegłości w Rzutach Obronnych Kondycja i Siła Biegłości w umiejętnościach Wybierz dwie z listy: Atletyka, Tresura, Percepcja, Przyroda, Survival, Zastraszanie Biegłość w narzędziach Brak Biegłości w broni Broń biała, Broń palna krótka Wyszkolenie w pancerzu Lekkie i średnie pancerze oraz tarcze Sprzęt początkowy Plecak turysty oraz (wybierz jedno): (A) 150 gb lub (B) kafar, nóż taktyczny, medpak, obrzyn, 10 naboi .12 Ga (breneka), oszczep x 3 TWORZENIE POSTACI BRUTALA Jako postać 1. poziomu • Otrzymujesz wszystkie podstawowe atrybuty Brutala z powyższej tabeli. • Otrzymujesz wszystkie pierwszopoziomowe zdolno- ści, spisane w tabeli Zdolności klasowych Brutala. Jako postać wieloklasowa • Otrzymujesz tylko te atrybuty Brutala: Kość Wytrzymałości, biegłości w broni i wyszkolenie w używaniu tarczy. • Otrzymujesz wszystkie pierwszopoziomowe zdolno- ści, spisane w tabeli Zdolności klasowych Brutala. Plecak turysty (22 kg) Zawartość: 3 kg prowiantu, 4 l wody pitnej, 3 m stalowej linki, butelka smaru, flaszka oliwy, kompas, lina (15 m), latarka czołówka, manierka, menażka, saperka, scyzoryk, śpiwór, WD-Tabs (10 tabletek), zestaw do rozpalania ognia, żyłka (20 m). 000 67 ZASADY PODSTAWOWE EKSPLORACJA POCHODZENIE TWORZENIE POSTACI SZTUCZKI EKWIPUNEK TECZKA MG ŚWIAT NOTATNIK ŁO"
+  },
+  "cwaniak": {
+    "abilities": [
+      {
+        "level": 1,
+        "name": "MOTYWACJA",
+        "action": "R",
+        "text": "Motywujesz towarzysza za pomocą słów lub muzyki. Kiedy twój sojusznik wykonuje dowolny test, możesz w swojej Reakcji zwiększyć jego szanse na sukces. Sojusznik musi się znajdować w zasięgu 18 metrów od ciebie, a twoja Reakcja musi nastąpić przed poznaniem efektu testu. Sojusznik dodaje kość Motywacji, do swojego Testu k20. Wartość kości Motywacji określa tabela Zdolności klasowych Cwaniaka. Możesz użyć tej zdolność tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po Krótkim odpoczynku."
+      },
+      {
+        "level": 1,
+        "name": "SZCZĘŚCIE",
+        "action": null,
+        "text": "Raz w rundzie możesz powtórzyć dowolny test, którego wynik ci nie odpowiada. Powtórzony test zawiera takie samo Ułatwienie lub Utrudnienie, jak test pierwotny. Wynik, który otrzymasz w przerzucie, musisz zaakceptować. Możesz użyć tej zdolności tyle razy, ile wskazuje kolumna Szczęście w tabeli Zdolności klasowych Cwaniaka. Zdolność Szczęście odnawia się po Długim odpoczynku."
+      },
+      {
+        "level": 2,
+        "name": "KOLEJKA",
+        "action": null,
+        "text": "Podczas Krótkiego odpoczynku, puszczasz wśród towarzyszy kolejkę z napitkiem własnej roboty. Każdy, kto pije, odzyskuje dodatkowo +1k4 PW za każdą wydaną Kość Wytrzymałości, podczas tego odpoczynku. Pokrzepiająca siła płynąca ze zdolności Kolejka rośnie zgodnie z ostatnią kolumną w tabeli Zdolności klasowych Cwaniaka."
+      },
+      {
+        "level": 2,
+        "name": "SPIEPRZYSZ TO!",
+        "action": "R",
+        "text": "Potrafisz każdego wytrącić z równowagi. Kiedy istota, którą widzisz w promieniu 18 m, wykonała udany Test Ataku lub Rzut Obronny, możesz w swojej Reakcji sprawić, by powtórzyła rzut i wybrała gorszy wynik. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po ukończeniu Krótkiego odpoczynku."
+      },
+      {
+        "level": 3,
+        "name": "SZYBKA GADKA",
+        "action": "B",
+        "text": "W czasie walki możesz wykonać akcję Wpływanie w swojej Akcji Bonusowej. Swoimi błyskawicznymi i celnymi słowami, możesz np. oszukać przeciwnika, zdezorientować go lub przekonać do wycofania się. PRZYKŁAD: Wykonując Test Charyzmy (Zastraszanie) o ST 15, próbujesz nastraszyć gangusa, żeby uciekł z pola walki. Albo wykonując Test Charyzmy (Oszustwo) o ST 15, próbujesz przekonać mutanta, żeby nie robił ci krzywdy, bo też jesteś mutantem. Lub wykonując test Mądrości (Tresura) o ST 15, próbujesz uspokoić rozwścieczonego neoniedźwiedzia. Po więcej szczegółów zajrzyj do podrozdziału Interakcje z istotami (str XXX)."
+      },
+      {
+        "level": 3,
+        "name": "ZDOLNOŚĆ Z PROFESJI",
+        "action": null,
+        "text": "Wybierasz profesję, wyznaczającą kierunek rozwoju twojej cwaniackiej kariery. Masz do wyboru profesję Gwiazdy, Kaznodziei Nowej Ery lub Mafiozo. Ten wybór określa, jakie zdolności z profesji możesz wybrać na 3., 6. i 10. poziomie Cwaniaka. Opcjonalnie, zamiast zdolności z profesji na poziomie 6 i 10, możesz wybrać nową Sztuczkę. 000 72KLASY"
+      },
+      {
+        "level": 4,
+        "name": "EKSPERT",
+        "action": null,
+        "text": "Wybierasz dwie umiejętności lub jedną umiejętność i jedno narzędzie, w których masz biegłość. Od tej pory specjalizujesz się w nich, więc Premia Biegłości ulega podwojeniu."
+      },
+      {
+        "level": 4,
+        "name": "SZTUCZKA",
+        "action": null,
+        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki str. XXX), jeśli spełniasz jej wymagania. Kolejną sztuczkę możesz wybrać na 8. i 12. poziomie Cwaniaka."
+      },
+      {
+        "level": 5,
+        "name": "CWANIACKI ZWÓD",
+        "action": "B",
+        "text": "Jeśli nie nosisz ciężkiego pancerza, to w Akcji Bonusowej możesz wykonać akcję Odstąpienie i przemieścić się przez obszar zajmowany przez przeciwników, nie prowokując ataków okazyjnych."
+      },
+      {
+        "level": 5,
+        "name": "OBELGA",
+        "action": "A",
+        "text": "Zamiast wykonywać akcję Atakowanie, możesz obrazić istotę w zasięgu 18 metrów, która cię widzi i słyszy. Istota nie musi cię rozumieć, ponieważ sam ton twojego głosu ocieka pogardą. Jeżeli do końca twojej następnej tury cel zaatakuje kogoś innego niż ty, wykonuje Testy Ataku z Utrudnieniem. Tej zdolności możesz użyć tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po ukończeniu Krótkiego odpoczynku."
+      },
+      {
+        "level": 7,
+        "name": "GŁOWA DO GÓRY!",
+        "action": "A",
+        "text": "Kiedy ty lub twoi towarzysze jesteście pod wpływem stanu Przerażenie, możesz wlać odwagę w wasze serca. W swojej akcji rozpoczynasz występ (deklamację, przemowę, modlitwę, grę na instrumencie) trwający do końca twojej następnej tury. Ty i wszyscy słyszący cię sojusznicy w zasięgu 18 metrów automatycznie zdajecie RO przeciw Przerażeniu."
+      },
+      {
+        "level": 7,
+        "name": "SAMOUK",
+        "action": null,
+        "text": "Otrzymujesz biegłość w dwóch wybranych umiejętnościach lub jednej wybranej umiejętności i jednym dowolnym zestawie narzędzi."
+      },
+      {
+        "level": 11,
+        "name": "ŚMIERTELNA OBELGA",
+        "action": null,
+        "text": "Kiedy rzucasz Obelgę, twoje słowa zadają dodatkowo 1k6 x twój modyfikator Charyzmy obrażeń psychicznych, osłabiających wolę walki przeciwnika. Jeśli twoja zdolność Obelga zmniejszy PW celu do 0, upada on i osuwa się w bezdenną otchłań rozpaczy. 000 73"
+      }
+    ],
+    "base": null
+  },
+  "spec": {
+    "abilities": [
+      {
+        "level": 1,
+        "name": "DOBRA RADA",
+        "action": "B",
+        "text": "W Akcji Bonusowej możesz wybrać jednego sojusznika, który cię słyszy i dać mu dobrą radę. Do początku twojej następnej tury otrzymuje premię do Testu Cechy, Ataku lub Rzutu Obronnego, równą twojemu modyfikatorowi Inteligencji. Możesz użyć tej zdolności tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po odbyciu Krótkiego odpoczynku."
+      },
+      {
+        "level": 1,
+        "name": "INTELIGENTNA OBRONA",
+        "action": "R",
+        "text": "Kiedy zostajesz trafiony atakiem, przed poznaniem ilości obrażeń, możesz w Reakcji zwiększyć swoją Trudność Trafienia o wartość modyfikatora Inteligencji, do początku swojej następnej tury, by w ten sposób uniknąć trafienia. Możesz użyć tej zdolności tyle razy, ile wynosi twój modyfikator Inteligencji. Zdolność odnawia się po odbyciu Krótkiego odpoczynku."
+      },
+      {
+        "level": 2,
+        "name": "SZYBKIE BADANIE",
+        "action": "B",
+        "text": "W czasie walki możesz wykonać akcję Badanie w swojej Akcji Bonusowej. Jesteś w stanie bardzo szybko zdobyć cenne informacje dotyczące np. miejsca walki, najbliższych urządzeń lub wybranych statystyk przeciwnika, zależnie od używanej umiejętności (patrz akcja Badanie w rozdziale Eksploracja str. XXX). PRZYKŁAD: Wykonując Test Inteligencji (Technika) o ST 15, dotyczący wrogiej maszyny Molocha, możesz się dowiedzieć, ile ma PW lub jak wysoka jest jej TT."
+      },
+      {
+        "level": 2,
+        "name": "ŁEB JAK SKLEP",
+        "action": null,
+        "text": "Miewasz przebłyski prawdziwego geniuszu. Kiedy wykonujesz Test Inteligencji lub dowolnego zestawu narzędzi, możesz dorzucić 1k4 do wyniku. Masz tyle tych kostek, ile wynosi twoja Premia Biegłości. Im masz wyższy poziom, tym wartość kostek rośnie, zgodnie z kolumną Łeb jak sklep w poniższej tabeli Zdolności klasowych Speca. Zdolność odnawia się po Długim odpoczynku."
+      },
+      {
+        "level": 3,
+        "name": "SZYBKA PRODUKCJA",
+        "action": null,
+        "text": "Raz na Krótki lub Długi odpoczynek, poza normalnymi zasadami produkcji, możesz stworzyć niewielkie przedmioty, jeśli masz odpowiednie narzędzia, surowce i schematy. Sumaryczna wartość tych przedmiotów nie może przekraczać 25 gb, a czas produkcji to 1 minuta x 1 gb wartości. PRZYKŁAD: Potrzebujesz 20 minut, żeby wyprodukować samoróbkę (20 gb), granat improwizowany (20 gb), medpak (20 gb), 2 noże do rzucania (2 x 10 gb) lub 12 naboi 9 mm (10 x 2 gb). Na poziomie 11 możesz szybko wyprodukować przedmioty warte sumarycznie 50 gb (patrz podrozdział Produkcja przedmiotów str. XXX)."
+      },
+      {
+        "level": 3,
+        "name": "ZDOLNOŚĆ Z PROFESJI",
+        "action": null,
+        "text": "Wybierasz profesję, wyznaczającą kierunek rozwoju twojej kariery naukowej. Masz do wyboru profesję Chemika, Medyka i Montera. Ten wybór określa, jakie zdolności z profesji możesz wybrać na 3., 6. i 10. poziomie Speca. Opcjonalnie, zamiast zdolności z profesji na poziomie 6. i 10., możesz wybrać Sztuczkę. 000 78KLASY"
+      },
+      {
+        "level": 4,
+        "name": "SZTUCZKA",
+        "action": null,
+        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki str. XXX), jeśli spełniasz jej wymagania. Kolejną Sztuczkę możesz wybrać na 8. i 12. poziomie Speca."
+      },
+      {
+        "level": 4,
+        "name": "SZYBKIE RĘCE",
+        "action": null,
+        "text": "Wczasie walki jesteś w stanie robić dwie rzeczy naraz. W swojej turze możesz wykonać jedną akcję więcej oprócz zwykłej akcji i możliwej Akcji Bonusowej. Akcja ta może być przeznaczona jedynie na akcję Używanie. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Zręczności. Zdolność odnawia się po odbyciu Krótkiego odpoczynku."
+      },
+      {
+        "level": 5,
+        "name": "WYKSZTAŁCIUCH",
+        "action": null,
+        "text": "Jeśli jeszcze nie wiesz wszystkiego, to dobierz sobie dwie umiejętności lub dwie biegłości w narzędziach. Jesteś Specem, ty zawsze wiesz wszystko!"
+      },
+      {
+        "level": 5,
+        "name": "ZDOLNOŚĆ Z POCHODZENIA",
+        "action": null,
+        "text": "Wybierasz sobie drugą zdolność z listy zdolności twojego pochodzenia (szczegóły w rozdziale Pochodzenie str. XXX)."
+      },
+      {
+        "level": 7,
+        "name": "SPECJALIZACJA",
+        "action": null,
+        "text": "Wybierasz dwie ze swoich biegłości w umiejętnościach albo dwie biegłości w narzędziach, lub jedną biegłość w umiejętności i jedną biegłość w narzędziach. W każdym teście wykonywanym z ich użyciem Premia Biegłości liczy się podwójnie."
+      },
+      {
+        "level": 7,
+        "name": "TRAJEKTORIA",
+        "action": null,
+        "text": "Kiedy wykonujesz Test Ataku dystansowego, możesz dodać do niego swój modyfikator Inteligencji. Tej zdolności możesz użyć tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po odbyciu Długiego odpoczynku."
+      },
+      {
+        "level": 9,
+        "name": "BYSTRZACHA",
+        "action": null,
+        "text": "Dodajesz połowę swojej Premii Biegłości (zaokrągloną w dół) do wszystkich umiejętności, w których nie masz biegłości."
+      },
+      {
+        "level": 11,
+        "name": "W CZUŁY PUNKT",
+        "action": null,
+        "text": "Do wszystkich obrażeń, które zadajesz, możesz dodać swój modyfikator Inteligencji. 000 79"
+      }
+    ],
+    "base": null
+  },
+  "twardziel": {
+    "abilities": [
+      {
+        "level": 1,
+        "name": "KONDYCHA",
+        "action": "B",
+        "text": "Kiedy brakuje ci sił, bierzesz głęboki oddech i walczysz dalej. W Akcji Bonusowej możesz odzyskać Punkty Wytrzymałości w liczbie 1k8 + twój poziom Twardziela. Możesz skorzystać z tej zdolności tyle razy, ile wynosi twój modyfikator Kondycji. Zdolność odnawia się po ukończeniu Długiego odpoczynku."
+      },
+      {
+        "level": 1,
+        "name": "ULUBIONA BROŃ",
+        "action": "B",
+        "text": "Wybierz jeden model broni (np. Peacemaker), której lubisz używać. Od tej pory, jeśli wykonujesz ulubioną bronią akcję Atakowanie, możesz w Akcji Bonusowej wykonać nią jeszcze jeden atak (broń dystansowa musi mieć załadowaną amunicję). Na wyższych poziomach Twardziela, liczba twoich ulubionych broni rośnie zgodnie z kolumną Ulubiona broń w tabeli Zdolności klasowych Twardziela. Możesz zmienić jedną Ulubioną broń na inną w czasie Długiego odpoczynku, poświęcając godzinę na trening."
+      },
+      {
+        "level": 1,
+        "name": "WYJADACZ",
+        "action": null,
+        "text": "Twardziel to zawodowiec, jeśli chodzi o obsługę broni i pancerzy. Wybierz jedną zdolność z poniższej listy, która podkreśli ten fakt. Na 7. poziomie Twardziela możesz wybrać kolejną zdolność z listy, ale każdą z nich wybierasz tylko raz. Obsługa pancerza Kiedy nosisz pancerz, otrzymujesz +2 do TT. Rzeźnik Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią. Sokole oko Otrzymujesz modyfikator +3 do Testów Ataku bronią palną, dystansową i rzucaną. Stalowy nadgarstek Kiedy strzelasz z broni palnej krótkiej i pistoletów maszynowych jedną ręką, nie otrzymujesz związanego z tym Utrudnienia do Testów Ataku (tak jakby miały właściwość poręczna). Dodatkowo każda broń palna krótka w twoich rękach zyskuje właściwość lekka."
+      },
+      {
+        "level": 2,
+        "name": "PRZYCELOWANIE",
+        "action": "B",
+        "text": "Możesz użyć Akcji Bonusowej, żeby przed atakiem wycelować w konkretną kończynę żywej istoty lub element maszyny Molocha. TT celu zostaje zwiększona, ale jeśli uzyskasz trafienie, nakładasz na cel efekty zgodne z poniższą tabelą."
+      },
+      {
+        "level": 2,
+        "name": "ZRYW",
+        "action": null,
+        "text": "000 86KLASY Wspinasz się na szczyt swoich możliwości. W swojej turze możesz wykonać jeszcze jedną Akcję lub Akcję Bonusową. Po użyciu tej zdolności musisz ukończyć Krótki lub Długi odpoczynek, zanim będziesz mógł jej ponownie użyć."
+      },
+      {
+        "level": 3,
+        "name": "TWARDOŚĆ",
+        "action": null,
+        "text": "Posiadasz wrodzoną „odporność na śmierć” i ogromną ilość szczęścia. Do każdego Rzutu Obronnego (oraz do Rzutu Przeciw Śmierci), którego nie zdasz, możesz dodać wynik z jednej kości Twardości, zgodnie z kolumną Twardość w tabeli Zdolności klasowych Twardziela. Masz tych kości tyle, ile wynosi twój modyfikator Kondycji. Pula kości Twardości odnawia się po ukończeniu Długiego odpoczynku."
+      },
+      {
+        "level": 3,
+        "name": "ZDOLNOŚĆ Z PROFESJI",
+        "action": null,
+        "text": "Wybierasz profesję, wyznaczającą kierunek twojego rozwoju. Masz do wyboru profesję Kowboja, Wojownika Autostrady i Żołnierza. Ten wybór określa, jakie zdolności z profesji możesz wybrać na 3., 7. i 11. poziomie."
+      },
+      {
+        "level": 4,
+        "name": "SZTUCZKA",
+        "action": null,
+        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki str. XXX), jeśli spełniasz jej wymagania. Kolejną Sztuczkę możesz wybrać na 6., 8., 10. i 12. poziomie Twardziela."
+      },
+      {
+        "level": 5,
+        "name": "DRUGI ATAK",
+        "action": null,
+        "text": "Kiedy wykonujesz w swojej turze akcję Atakowanie, możesz zaatakować dwukrotnie."
+      },
+      {
+        "level": 9,
+        "name": "NIE KLĘKAM",
+        "action": null,
+        "text": "Twoje doświadczenie bojowe pozwala ci przetrwać w najtrudniejszych sytuacjach. Masz biegłość we wszystkich Rzutach Obronnych."
+      },
+      {
+        "level": 10,
+        "name": "TRZECI ATAK",
+        "action": null,
+        "text": "Kiedy wykonujesz w swojej turze akcję Atakowanie, możesz zaatakować trzykrotnie. 000 87"
+      }
+    ],
+    "base": null
+  },
+  "zlodziej": {
+    "abilities": [
+      {
+        "level": 1,
+        "name": "BOLESNY ATAK",
+        "action": null,
+        "text": "Potrafisz wykorzystać każdą słabość przeciwnika, żeby wykonać Bolesny atak. Raz na turę, kiedy atakujesz bronią z Ułatwieniem, używając Zręczności, możesz zadać jednemu celowi dodatkowo 1k6 obrażeń. Nie musisz mieć Ułatwienia w tym ataku, jeśli cel stoi w zasięgu 1,5 metra od twojego sojusznika, który nie jest pod wpływem stanu Obezwładnienie, a ty nie masz Utrudnienia w Teście Ataku. Dodatkowe obrażenia zwiększają się w miarę twojego rozwoju w klasie Złodzieja, zgodnie z kolumną Bolesny atak w tabeli Zdolności klasowych Złodzieja."
+      },
+      {
+        "level": 1,
+        "name": "SPECJALIZACJA",
+        "action": null,
+        "text": "Wybierasz jedną ze swoich biegłości w umiejętnościach i jedną z biegłości w używaniu narzędzi. W każdym teście wykonywanym z ich użyciem Premia Biegłości liczy się podwójnie. Na 5. poziomie wybierasz kolejną biegłość w umiejętnościach lub w narzędziach i zyskujesz dla niej ten sam efekt."
+      },
+      {
+        "level": 1,
+        "name": "SZYBKIE NOGI",
+        "action": "B",
+        "text": "Łączysz swoją zwinność i szybkość, w celu zwiększenia szansy przetrwania na polu walki. Możesz w Akcji Bonusowej wykonać Odstąpienie, Przyspieszenie lub Ukrywanie się."
+      },
+      {
+        "level": 2,
+        "name": "KOCIE KOŚCI",
+        "action": null,
+        "text": "Kot zawsze spada na cztery łapy tak jak ty. Możesz użyć jednej lub więcej Kocich kości w Reakcji na niekorzystny obrót spraw w poniższych sytuacjach: Ciche łapy [R]. Podczas akcji Ukrywania się, kiedy przeciwnik odkryje twoją obecność, możesz w Reakcji dorzucić je do wyniku swojego testu. Cztery łapy [R]. Kiedy spadasz z dużej wysokości, możesz w Reakcji wykorzystać je, żeby zmniejszyć obrażenia od upadku. Otrzymane obrażenia zmniejszają się o wynik, który wypadł na użytych Kocich kościach. 000 91"
+      },
+      {
+        "level": 2,
+        "name": "ULUBIONA BROŃ",
+        "action": "B",
+        "text": "Wybierz jeden model broni (np. szoker), w którym masz biegłość. Od tej pory, jeśli wykonujesz tą bronią akcję Atakowanie, możesz w Akcji Bonusowej wykonać nią jeszcze jeden atak (broń dystansowa musi mieć załadowaną amunicję). Możesz zmienić Ulubioną broń na inną w czasie Długiego odpoczynku, poświęcając godzinę na trening."
+      },
+      {
+        "level": 3,
+        "name": "PODSTĘPNY ATAK",
+        "action": null,
+        "text": "Twoje ataki są nie tylko bolesne, ale i upierdliwe. Kiedy zadajesz obrażenia, używając Bolesnego ataku, możesz zamiast dodatkowych obrażeń nałożyć specjalny efekt (wymieniony poniżej) na cel. Kilka takich samych efektów się nie kumuluje. Krwawienie. Żywa istota otrzymuje 1k8 obrażeń na początku swojej tury. Krwawienie ustaje po opatrzeniu rany. Spowolnienie. Szybkość celu spada o 1k6 x 1,5 m do końca twojej następnej tury. Oślepienie. Cel zostaje Oślepiony do końca twojej następnej tury."
+      },
+      {
+        "level": 3,
+        "name": "ZŁODZIEJSKA PROFESJA",
+        "action": null,
+        "text": "Wybierasz profesję, wyznaczającą kierunek rozwoju twojej złodziejskiej kariery. Masz do wyboru profesję Kuriera, Szczura lub Zabójcy. Ten wybór określa, jakie zdolności z profesji możesz wybrać na 3., 6. i 10. poziomie. Opcjonalnie, zamiast zdolności z profesji na poziomie 6. i 10., możesz wybrać nową Sztuczkę."
+      },
+      {
+        "level": 4,
+        "name": "ELEKTRONIK",
+        "action": null,
+        "text": "Elektroniczne zabezpieczenia rozgryzasz równie łatwo, co te tradycyjne. A nawet łatwiej. Zawsze, kiedy mierzysz się z elektronicznym systemem zabezpieczeń, otrzymujesz Ułatwienie do testu narzędzi małego ślusarza lub małego elektronika."
+      },
+      {
+        "level": 4,
+        "name": "SZTUCZKA",
+        "action": null,
+        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki str. XXX), jeśli spełniasz jej wymagania. Kolejną Sztuczkę możesz wybrać na 8. i 12. poziomie Złodzieja."
+      },
+      {
+        "level": 5,
+        "name": "SZYBKOŚĆ KOTA",
+        "action": null,
+        "text": "Uczysz się unikać kul i ataków wręcz, jak na przedwojennych filmach akcji. Odskok [R]. Kiedy otrzymujesz obrażenia w wyniku bezpośredniego ataku, możesz w Reakcji zmniejszyć je o połowę (zaokrąglając w dół). Odskok nie działa, kiedy otrzymujesz obrażenia psychiczne. Szybkie łapy. Twoja Szybkość rośnie o 3 metry. Refleks. Możesz dorzucić jedną Kocią kość do testu Inicjatywy."
+      },
+      {
+        "level": 7,
+        "name": "MATRIX",
+        "action": null,
+        "text": "Zyskujesz niezwykłą zdolność unikania seryjnego ostrzału, wybuchów granatów czy miotaczy ognia. Kiedy jesteś w polu rażenia ataku obszarowego, który umożliwia ci wykonanie Rzutu Obronnego na Zręczność, żeby zmniejszyć obrażenia o połowę, to po udanym RO, nie otrzymujesz żadnych obrażeń, a w przypadku niepowodzenia — tylko połowę (zaokrągloną w dół). Tej zdolności możesz użyć tyle razy, ile wynosi twoja Premia Biegłości. Matrix odnawia się po odbyciu Długiego odpoczynku."
+      },
+      {
+        "level": 9,
+        "name": "DZIEWIĘĆ ŻYĆ",
+        "action": null,
+        "text": "Łatwiej ustrzelić nocą czarnego kota niż cię trafić. Zyskujesz nowe sposoby na wykorzystanie Kocich kości."
+      },
+      {
+        "level": 11,
+        "name": "SAPER",
+        "action": null,
+        "text": "Jesteś jak saper, tyle że ty się nie mylisz, nawet raz. Przy każdym teście umiejętności, w której masz Specjalizację, możesz traktować każdy wynik 9 lub mniej na k20, jak 10. Ta zdolność odnawia się po ukończeniu Krótkiego lub Długiego odpoczynku."
+      }
+    ],
+    "base": null
+  },
+  "zwiadowca": {
+    "abilities": [
+      {
+        "level": 1,
+        "name": "MÓJ BIOM",
+        "action": null,
+        "text": "Twoje doświadczenie i naturalny talent sprawiają, że umiesz przetrwać tam, gdzie innych zjadają mrokoszczury. Wybierz dwa ulubione biomy z listy: Bagna, Góry, Las, Miasto, Neodżungla, Podziemia, Preria, Pustynia, Ruiny, Tereny Maszyn. W Testach Inteligencji i Mądrości związanych z tymi biomami masz Ułatwienie. Podróżując przez te specyficzne obszary, otrzymujesz dodatkowe korzyści: • Kiedy poruszacie się pieszo, trudny teren nie spowalnia cię, ani twojej drużyny, • Nikt i nic nie jest w stanie cię zaskoczyć. • Kiedy podróżujesz samotnie, możesz się skradać w tempie normalnego ruchu. • Jeśli poświęcisz 8 godzin na szukanie wody i pożywienia, jesteś w stanie wyżywić cztery osoby przez jedną dobę. • Tropiąc istoty, poznajesz ich dokładną liczebność, rozmiar i wiesz, kiedy zostawiły ślady. Wraz z awansem na kolejne poziomy Zwiadowcy, następne rodzaje biomów stają się dla ciebie swojskie i znane. Ich liczba podana jest w kolumnie Mój biom w tabeli Zdolności klasowych Zwiadowcy. 000 96KLASY"
+      },
+      {
+        "level": 1,
+        "name": "MÓJ WRÓG",
+        "action": null,
+        "text": "Masz doświadczenie w zabijaniu określonego typu przeciwników. Wybierasz, czy specjalizujesz się w tropieniu i zabijaniu Ludzi, Maszyn, Mutantów, Potworów czy Zwierząt. Masz Ułatwienie w Testach Mądrości (Survival), kiedy tropisz swoich wrogów i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg w tabeli Zdolności klasowych Zwiadowcy. PRZYKŁAD: Pierwszopoziomowy Zwiadowca, którego wrogiem są Potwory, dodaje +1 do Testów Ataków wykonywanych przeciwko wszelkim potworom oraz każdy jego atak zadaje im dodatkowo 1k6 obrażeń. Na 5. i 9. poziomie, możesz wybrać kolejny typ wroga."
+      },
+      {
+        "level": 1,
+        "name": "ULUBIONA BROŃ",
+        "action": "B",
+        "text": "Wybierz jeden konkretny model broni, której lubisz używać (np. nóż taktyczny lub pistolet G17). Od tej pory, jeśli wykonujesz Ulubioną bronią akcję Atakowanie, możesz w Akcji Bonusowej wykonać nią jeszcze jeden atak (broń dystansowa musi mieć załadowaną amunicję). Możesz zmienić ulubioną broń na inną w czasie Długiego odpoczynku, poświęcając godzinę na trening. Na 9. poziomie możesz mieć jednocześnie dwie ulubione bronie."
+      },
+      {
+        "level": 2,
+        "name": "KŁUSOWNIK",
+        "action": null,
+        "text": "Masz doświadczenie w zakładaniu pułapek. Wystarczy chwila, żeby z tego, co masz pod ręką, zmontować coś przydatnego. Jeśli masz zestaw narzędzi małego kłusownika, poświęcisz minutę i wykonasz Test Survivalu lub narzędzi małego kłusownika, możesz zbudować pułapkę. Skonsultuj jej szczegóły i działanie z MG. ST zauważenia pułapki, wyzwolenia się z niej lub uniknięcia części obrażeń, to 8 plus twój modyfikator Mądrości i Premia Biegłości. ST zakładania i działanie przykładowych pułapek podajemy w tabeli poniżej."
+      },
+      {
+        "level": 2,
+        "name": "WYJADACZ",
+        "action": null,
+        "text": "Zwiadowca to prawdziwy zawodowiec. Wybierz jedną z poniższych zdolności, która podkreśli ten fakt. Na 11. poziomie możesz wybrać kolejną zdolność z tej listy, ale każdą z nich możesz wybrać tylko raz. Jeździec Kiedy dosiadasz wierzchowca, nie musisz używać rąk, żeby nim kierować. Nie otrzymujesz Utrudnienia do Testów Ataków dystansowych związanego z niestabilnym podłożem, kiedy na nim jedziesz. Wsiadanie i zsiadanie z wierzchowca kosztuje cię tylko 1,5 metra ruchu. Trudność Trafienia twojego wierzchowca zwiększa się o wartość twojej Premii Biegłości."
+      },
+      {
+        "level": 3,
+        "name": "CICHY KROK",
+        "action": null,
+        "text": "Nie otrzymujesz Utrudnienia do testów Skradania się za noszenie pancerza. Otrzymujesz Ułatwienie w Testach Ukrywania się, jeśli nie nosisz ciężkiego pancerza. Trudny teren nie spowalnia twojego ruchu."
+      },
+      {
+        "level": 3,
+        "name": "ZDOLNOŚĆ Z PROFESJI",
+        "action": null,
+        "text": "Wybierasz profesję, wyznaczającą kierunek rozwoju twojej kariery. Masz do wyboru profesję Łowcy Mutantów, Sędziego i Zabójcy Maszyn. Ten wybór określa, jakie zdolności z profesji możesz wybrać na 3., 6. i 10. poziomie Zwiadowcy. Opcjonalnie, zamiast zdolności z profesji na poziomie 6 i 10, możesz wybrać Sztuczkę."
+      },
+      {
+        "level": 4,
+        "name": "SZTUCZKA",
+        "action": null,
+        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki str. XXX), jeśli spełniasz jej wymagania. Kolejną Sztuczkę możesz wybrać na 8. i 12. poziomie Zwiadowcy."
+      },
+      {
+        "level": 5,
+        "name": "DRUGI ATAK",
+        "action": null,
+        "text": "Kiedy wykonujesz w swojej turze akcję Atakowanie, możesz zaatakować dwukrotnie."
+      },
+      {
+        "level": 7,
+        "name": "SPORTOWIEC",
+        "action": null,
+        "text": "Twoja Szybkość rośnie o 3 metry. Zyskujesz również Ułatwienie w testach Atletyki, kiedy się wspinasz, pływasz lub skaczesz."
+      },
+      {
+        "level": 7,
+        "name": "WYCZULONE ZMYSŁY",
+        "action": null,
+        "text": "Masz stałe Ułatwienie do testów Percepcji, więc twoja Pasywna Percepcja rośnie o 5."
+      },
+      {
+        "level": 11,
+        "name": "POGOŃ",
+        "action": null,
+        "text": "Rzuty Obronne, w których porażka oznacza otrzymanie stanu Wyczerpanie, wykonujesz z Ułatwieniem."
+      }
+    ],
+    "base": null
+  }
+}

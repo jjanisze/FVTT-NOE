@@ -2,7 +2,8 @@ import { getMag, spendRounds } from "./magazine.mjs";
 import { hasAddon } from "../config/addons-data.mjs";
 import { getSetup } from "./addons.mjs";
 import { isDamaged, isJammed, rollJamCheck } from "./jams.mjs";
-import { playWeaponSound, WeaponSound } from "./sounds.mjs";
+import { playWeaponSound, playBurstSound, WeaponSound } from "./sounds.mjs";
+import { tracerFire, tracerFireArea } from "./tracer-vfx.mjs";
 import { describeCoverDecision, promptCoverDecision } from "../combat/cover.mjs";
 import { ABILITY_KEYS, buildAbilityRuleChangeNotice, hasAbility } from "../actors/abilities.mjs";
 
@@ -170,13 +171,28 @@ function registerShortBurstActivityType() {
 
     async _triggerSubsequentActions(config, results) {
       const liveItem = _getLiveItem(this.item);
+
+      // Roll the attack FIRST — the base implementation does this too (see
+      // AttackActivity._triggerSubsequentActions), but fires it without awaiting,
+      // which used to let us "commit" (spend bullets, mark KS used, play the
+      // burst sound) before the roll even happened. That meant cancelling the
+      // attack-roll dialog still left the sound played and the bullets spent.
+      // Awaiting it here and gating everything below on a non-empty result
+      // means a cancelled roll leaves no trace.
+      const rolls = await this.rollAttack(
+        { event: config.event },
+        {},
+        { data: { "flags.dnd5e.originatingMessage": results.message?.id } }
+      );
+      if (!rolls?.length) return;
+
       const spent = await spendRounds(liveItem, KS_BULLET_COST);
       if (!spent) return;
 
       await _markBurstModeUsed(liveItem, KS_FIRE_MODE, KS_BULLET_COST);
-      playWeaponSound(WeaponSound.BURST_SHORT);
+      playBurstSound(liveItem, KS_FIRE_MODE, { caliberId: getMag(liveItem)?.ammoType, token: liveItem.actor });
+      _playShortBurstVfx(liveItem, rolls);
       await _announceLeadHailUse(liveItem, results);
-      await super._triggerSubsequentActions(config, results);
     }
 
     _processDamagePart(damage, rollConfig, rollData, index = 0) {
@@ -357,7 +373,8 @@ function registerLongBurstActivityType() {
       if (!(await spendRounds(liveItem, selection.bullets))) return results;
       await _markBurstModeUsed(liveItem, DS_FIRE_MODE, selection.bullets);
       await rollJamCheck(liveItem, { label: _getLongBurstLabel(liveItem, selection), chat: true });
-      playWeaponSound(WeaponSound.BURST_LONG);
+      playBurstSound(liveItem, DS_FIRE_MODE, { caliberId: getMag(liveItem)?.ammoType, token: liveItem.actor });
+      _playAreaBurstVfx(liveItem, results.templates[0], selection.bullets);
       await _announceMobileHmgNestUse(liveItem, selection, results);
 
       if (Hooks.call("dnd5e.postUseActivity", activity, usageConfig, results) === false) return results;
@@ -516,7 +533,7 @@ function registerSuppressiveFireActivityType() {
       if (!results.templates.length) return results;
       if (!(await spendRounds(liveItem, OZ_BULLET_COST))) return results;
       await _markSuppressiveFireUsed(liveItem);
-      playWeaponSound(WeaponSound.SUPPRESSIVE);
+      playBurstSound(liveItem, OZ_FIRE_MODE, { caliberId: getMag(liveItem)?.ammoType, token: liveItem.actor });
 
       if (Hooks.call("dnd5e.postUseActivity", activity, usageConfig, results) === false) return results;
       return results;
@@ -718,7 +735,8 @@ function registerCrushingBurstActivityType() {
       if (!(await spendRounds(liveItem, selection.bullets))) return results;
       await _markBurstModeUsed(liveItem, MS_FIRE_MODE, selection.bullets);
       await rollJamCheck(liveItem, { label: _getCrushingBurstLabel(liveItem, selection), chat: true });
-      playWeaponSound(WeaponSound.BURST_CRUSHING);
+      playBurstSound(liveItem, MS_FIRE_MODE, { caliberId: getMag(liveItem)?.ammoType, token: liveItem.actor });
+      _playAreaBurstVfx(liveItem, results.templates[0], selection.bullets);
 
       if (Hooks.call("dnd5e.postUseActivity", activity, usageConfig, results) === false) return results;
       if (usageConfig.subsequentActions !== false) {
@@ -1257,6 +1275,50 @@ function _getShortBurstLabel(item) {
 
 function _getShortBurstSummary() {
   return "Atak krótką serią. Koszt: 3 naboje. Domyślnie: utrudnienie. Grad ołowiu znosi ograniczenie KS -> kolejna KS w tej samej rundzie; limit ataków pilnuje gracz lub MG.";
+}
+
+/**
+ * Fire the KS muzzle flash + tracer burst via the tracer VFX engine, mirroring
+ * how plain single fire does it in magazine.mjs's _playSingleShotVfx. Only the
+ * attack roll (not the damage roll) decides hit/miss here — KS has no separate
+ * to-hit check at damage time.
+ */
+function _playShortBurstVfx(item, rolls) {
+  const shooter = item?.actor;
+  if (!shooter) return;
+  const targetToken = game.user?.targets?.first() ?? null;
+  const roll = Array.isArray(rolls) ? rolls[0] : null;
+  const hit = _isKsAttackHit(roll, targetToken);
+  tracerFire({
+    shooter, target: targetToken, hit, rounds: KS_BULLET_COST,
+    caliber: getMag(item)?.ammoType, weaponId: item.system?.identifier
+  });
+}
+
+/**
+ * Fire the DS/MS tracer stream into the placed line/area template via the
+ * tracer VFX engine. Unlike the beam family (single/KS), area bursts have no
+ * per-token to-hit roll to visualize — tracerFireArea() always terminates its
+ * sampled impacts (hit: true is baked into that function), matching the RAW
+ * resolution where every round in the burst lands somewhere in the template
+ * regardless of individual target saves.
+ */
+function _playAreaBurstVfx(item, template, rounds) {
+  const shooter = item?.actor;
+  if (!shooter || !template) return;
+  tracerFireArea({
+    shooter, template, rounds,
+    caliber: getMag(item)?.ammoType, weaponId: item.system?.identifier
+  });
+}
+
+function _isKsAttackHit(roll, targetToken) {
+  if (!roll || !targetToken) return false;
+  if (roll.isCritical) return true;
+  if (roll.isFumble) return false;
+  const ac = targetToken.actor?.system?.attributes?.ac?.value;
+  if (typeof ac !== "number") return false;
+  return (roll.total ?? 0) >= ac;
 }
 
 function _hasLeadHail(item) {

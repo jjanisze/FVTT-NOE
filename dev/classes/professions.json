@@ -1,0 +1,409 @@
+{
+  "brutal": {
+    "GANGER": {
+      "proficiencies": "Zyskujesz biegłość w kategorii broń palna pośrednia oraz biegłość w umiejętności Pojazdy.",
+      "abilities": [
+        {
+          "name": "DWÓCH NA JEDNEGO",
+          "action": null,
+          "text": "Uwielbiasz kopać leżącego frajera wspólnie z kumplami. Jeśli zaatakujesz wręcz istotę, która została zaatakowana w ten sam sposób przez twojego sojusznika, otrzymujesz +2 do Testów Ataku wręcz przeciwko niej, do końca twojej tury."
+        },
+        {
+          "name": "JA I MÓJ GANG!",
+          "action": null,
+          "text": "Kiedy jesteś w Berserku, twoi towarzysze stają się twoim gangiem, walczącym niczym wataha zmutowanych wilków. Jeśli sojusznicy stoją w promieniu 3 metrów od ciebie, otrzymują Ułatwienie w Testach Ataku przeciw wrogim istotom, które widzisz. Zawsze prowadzisz swój gang do krwawego zwycięstwa!"
+        },
+        {
+          "name": "JEDEN Z NICH",
+          "action": null,
+          "text": "Tatuujesz sobie symbol przynależności do siejącego grozę gangu. Byle kto ci nie podskoczy, a reszta nie ma odwagi się z tobą sprzeczać. Postrach okolicy. Otrzymujesz biegłość w umiejętności Zastraszanie. Jeśli już ją masz, otrzymujesz zamiast tego Specjalizację. Sami swoi. Bandziory traktują cię jak swojego. Masz Ułatwienie w testach opartych na Charyzmie, kiedy gadasz z typami twojego pokroju."
+        },
+        {
+          "name": "ODWAŻNY CZY GŁUPI",
+          "action": null,
+          "text": "Nie ma na tym świecie istot, które byłyby w stanie ci zagrozić. Głupi. Zyskujesz niewrażliwość na stan Przerażenie. Odważny. Wszyscy sojusznicy w odległości 9 metrów od ciebie, otrzymują premię +1k4 do RO przeciwko Przerażeniu. GLADIATOR Wysportowana blondynka o stalowym spojrzeniu, mocnym makijażu i z pieszczochem na szyi, stoi na środku areny. Jej topór ocieka krwią zmutowanych psów, które na nią wypuszczono w ramach rozgrzewki. Krata się unosi i na arenę wjeżdża przeciwnik, z piłami tarczowymi zamiast rąk. Widownia wyje, łaknąc krwi."
+        }
+      ]
+    },
+    "GLADIATOR": {
+      "proficiencies": "Zyskujesz biegłość w umiejętności Atletyka lub Akrobatyka, lub jeśli którąś z nich już posiadasz, możesz zyskać Specjalizację w jednej z nich. Otrzymujesz również biegłość w broni improwizowanej.",
+      "abilities": [
+        {
+          "name": "NIE DO ZDARCIA",
+          "action": null,
+          "text": "Każde trafienie, które zadałoby ci obrażenia krytyczne, zadaje zamiast tego normalne obrażenia. To nic, że obrywasz siekierą w głowę lub kulką prosto w serce. To wcale nie było w głowę tylko w ucho, a serce masz po drugiej stronie!"
+        },
+        {
+          "name": "ŁYŻECZKA",
+          "action": null,
+          "text": "Długopis, felga, wąż ogrodowy, hydrant, kula bilardowa czy mała zardzewiała łyżeczka, stanowi broń, w której masz biegłość. Możesz tym przedmiotem walczyć wręcz lub nim rzucać na dystans do 6 metrów. Maksymalna waga tej tzw. „łyżeczki” to wartość twojej Siły. Kość i typ obrażeń zależne są od wagi i rodzaju przedmiotu (ustal to z MG). Jeśli w Teście ataku „łyżeczką” wypadnie naturalna 1, rozpada się ona na dwie równe części. 000 69"
+        },
+        {
+          "name": "ZEW ARENY",
+          "action": null,
+          "text": "Podczas walki słyszysz doping widzów, nawet jeśli ich wokół ciebie nie ma. Kiedy jesteś w Berserku, zyskujesz: Doping. Otrzymujesz niewrażliwość na stan Przerażenie. Praca nóg. Przeciwnicy mają Utrudnienie w testach ataków okazyjnych przeciw tobie. Skok Gladiatora. Maksymalna wysokość i odległość twojego skoku ulega podwojeniu. Jeśli twój skok zakończy się na polu istoty nie większej od ciebie o więcej niż jeden rozmiar, musi ona zdać RO na Siłę, inaczej otrzyma stan Powalenie oraz 1k6 obrażeń obuchowych za każde 3 metry długości lub wysokości twojego skoku. ST Rzutu Obronnego to 8 plus twój modyfikator Siły plus Premia Biegłości."
+        },
+        {
+          "name": "ZAWOŁAJCIE KOLEGÓW",
+          "action": null,
+          "text": "Jeśli w zasięgu 1,5 metra od ciebie znajduje się co najmniej dwóch przeciwników, otrzymujesz Ułatwienie do Testów Ataków wręcz. NAJEMNIK Umięśniony brunet odziany w skóry i łańcuchy, dźwigający minimi jak zabawkę, z radością na poparzonej twarzy biegnie przez skąpane w ogniu pole bitwy. Zza wzgórza wyłania się juggernaut, któremu ten gość wpakuje pięćdziesiąt kilo ołowiu prosto w jego niebieski ryj."
+        }
+      ]
+    },
+    "NAJEMNIK": {
+      "proficiencies": "Zyskujesz biegłość w dwóch wybranych kategoriach broni i biegłość w jednym dowolnym zestawie narzędzi.",
+      "abilities": [
+        {
+          "name": "MASZYNA DO ZABIJANIA",
+          "action": null,
+          "text": "Kiedy jesteś w Berserku, zyskujesz: Promocja [B]. Możesz wykonać dodatkowo jeden Atak wręcz w Akcji Bonusowej. Zwód. Raz w rundzie możesz wykonać jeden Atak wręcz oparty na Sile z Ułatwieniem."
+        },
+        {
+          "name": "REPUTACJA",
+          "action": null,
+          "text": "Ty nie nawalasz. Zawsze kończysz podjęte zlecenie. Twoja reputacja podąża za tobą krok w krok. Kiedy negocjujesz stawkę, masz Ułatwienie w testach Wpływania. A kiedy zadanie zostanie wykonane, otrzymujesz premię 1k4 x 10% wynegocjowanej stawki."
+        },
+        {
+          "name": "SKUTECZNY CIOS",
+          "action": null,
+          "text": "Twoje Wściekłe ciosy stają się skuteczniejsze, ale kosztem siły uderzenia. Możesz zużyć jedną kostkę Wściekłego ciosu, żeby zyskać jedną z poniższych przewag w walce. Potężny cios! Kiedy trafisz istotę atakiem wręcz, możesz w jego ramach wykonać Odepchnięcie. Sprytny cios! Kiedy trafisz istotę atakiem wręcz, możesz w jego ramach wykonać Wytrącenie. Zamaszysty cios! Jeśli w zasięgu 1,5 m od trafionej przez ciebie istoty, znajduje się druga istota, znajdująca się w zasięgu twojego ataku wręcz, możesz wykonać przeciw niej dodatkowo jeden atak wręcz. 000 70 WAGA PRZEDMIOTU OBRAŻENIA WŁADANIE do 5 kg 1k6 Jednoręczne 6 - 11 kg 2k6 Oburęczne 12 -17 kg 3k6 Oburęczne 18 - 20 kg 4k6 OburęczneKLASY CWANIAK Niezależnie od tego, czy cwaniak działa z egoistycznych pobudek, czy robi coś dla dobra ogółu, ma nieprawdopodobny wpływ na ludzi i swoje cwaniackie szczęście. Swój dar może wykorzystać do wyciągnięcia ostatniej kromki od bezdomnego, przejęcia władzy w okolicy czy poprowadzenia ludzi do beznadziejnej walki. Cwaniak to urodzony lider, który wykorzysta każdego, żeby dotrzeć na szczyt. 000 71"
+        }
+      ]
+    }
+  },
+  "cwaniak": {
+    "GWIAZDA": {
+      "proficiencies": "Zyskujesz biegłość w umiejętności Występy i w dwóch dowolnych innych umiejętnościach lub w jednej umiejętności i w jednym zestawie narzędzi. Otrzymujesz też Specjalizację w jednym instrumencie muzycznym.",
+      "abilities": [
+        {
+          "name": "KAKOFONIA",
+          "action": "A",
+          "text": "W swojej Akcji możesz wydobyć ze swojego instrumentu lub z gardła zestaw głośnych nieharmonicznych dźwięków, który może zdezorientować twoich wrogów. Każda słysząca istota w promieniu 9 metrów wokół ciebie, wykonuje RO na Kondycję o ST równym 8 plus twój modyfikator Charyzmy i twoja Premia Biegłości. Porażka w Rzucie Obronnym oznacza Obezwładnienie istoty do początku twojej następnej tury. Twoi sojusznicy mają Ułatwienie w tym RO."
+        },
+        {
+          "name": "LET’S ROCK!",
+          "action": "A",
+          "text": "Potrafisz swoją muzyką lub śpiewem zagrzewać towarzyszy do boju. W swojej akcji wykonujesz „bojowy kawałek”, który pomaga się skupić i dodaje sił. Wszyscy sojusznicy, którzy cię słyszą i są w zasięgu 27 metrów od ciebie, otrzymują premię do Testów Ataku lub Rzutów Obronnych, zależną od wyniku testu umiejętności Występy lub instrumentu muzycznego. Premia działa do początku twojej następnej tury. Zdolność Let’s rock możesz powtarzać w nieskończoność, za każdym razem ponownie testując umiejętność Występy. Jeśli w czasie występu otrzymasz stan Nieprzytomność, Obezwładnienie lub Ogłuchnięcie, efekt natychmiast się kończy."
+        },
+        {
+          "name": "STYLÓWA",
+          "action": null,
+          "text": "Wygląd jest twoją wizytówką, ma robić wrażenie i podkreślać wyjątkowość twojego charakteru. Ubierasz się w drogie ciuchy, nosisz na widoku cenne gadżety i drogą biżuterię. Te błyskotki mogą przyciągać złodziei, ale kij im w oko, bo to robi ci imidż na dzielni. Każde 50 gambli towarów luksusowych, które nosisz na sobie, zapewnia ci premię +1 do testów Wpływania."
+        },
+        {
+          "name": "ZA GARŚĆ GAMBLI",
+          "action": null,
+          "text": "Każda dziura i miasteczko w Podzielonych Stanach potrzebuje muzyki. Każdy klub i śmierdzący bar bez okien, przyjmie twoje usługi zapewniające rozrywkę stałej klienteli. Zawsze dostaniesz dach nad głową i żarcie, a może i będzie za co się napić. Raz dziennie dajesz czterogodzinny koncert w lokalnej knajpie lub klubie, a od twoich umiejętności zależy, ile zarobisz (patrz tabela poniżej). Po skończeniu koncertu otrzymujesz jeden poziom Wyczerpania. PRZYKŁAD: Siadasz przy ruchliwej ulicy, wyciągasz saksofon i po czterech godzinach koncertu wykonujesz test Zręczności (Saksofon). Twój wynik to 15, więc do czapki wpadła ci równowartość ok. 7 gambli. Gdybyś dał koncert w drogim klubie, zgarnąłbyś 6 razy tyle. 000 74 WYNIK TESTU PREMIA DO TESTÓW SOJUSZNIKÓW 5 – 9 +1 10 – 14 +2 15 – 19 +3 20 – 24 +4 25 + +5 MIEJSCE KONCERTU MNOŻNIK WYNIKU TESTU CHARYZMA (WYSTĘPY) LUB TESTU INSTRUMENTU Ulica x 0,5 gb Tania knajpa x 1 gb Dobra knajpa x 2 gb Drogi klub x 3 gbKLASY KAZNODZIEJA NOWEJ ERY Dziewczyna w czerwieni przynosi nadzieję do upadającej wioski. Bogini zapewnia ochronę przed mutacją i Molochem. Pani obdarzy wiernych plonami, jeśli najstarszy członek społeczności złoży się w dobrowolnej ofierze, a swoje dobra odda na rzecz świątyni. Dziewczyna w czerwieni na objuczonym osiołku zmierza do kolejnej osady, pozostawiając za sobą dopalający się stos..."
+        }
+      ]
+    },
+    "KAZNODZIEJA NOWEJ ERY": {
+      "proficiencies": "Otrzymujesz biegłość w broni palnej długiej oraz w jednej dowolnej umiejętności i jednym dowolnym zestawie narzędzi.",
+      "abilities": [
+        {
+          "name": "AMEN",
+          "action": null,
+          "text": "Kiedy odniesiesz porażkę w Teście Cechy, Ataku lub Rzucie Obronnym, wypowiadasz słowo AMEN i dorzucasz do wyniku testu 1k6. Musisz zaakceptować nowy wynik. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po Długim odpoczynku."
+        },
+        {
+          "name": "ŁASKA BOŻA",
+          "action": "B",
+          "text": "W Akcji Bonusowej możesz natchnąć swoich sojuszników w promieniu 18 metrów łaską bożą. Sojusznicy muszą słyszeć twój głos. Obdarzony Łaską bożą otrzymuje +1k4 do Testów Ataków i Rzutów Obronnych, do początku twojej następnej tury. Możesz obdarzyć tą premią tylu sojuszników, ile masz poziomów Cwaniaka."
+        },
+        {
+          "name": "MÓJ BÓG KULE NOSI",
+          "action": null,
+          "text": "Twoja broń prowadzona jest ręką bóstwa, by skuteczniej wykańczać grzeszników. Raz na turę, kiedy zadasz obrażenia w Teście Ataku bronią palną, możesz dodać 1k10 obrażeń."
+        },
+        {
+          "name": "TARCZA WIARY",
+          "action": null,
+          "text": "Jeśli nie nosisz pancerza, możesz dodać modyfikator Charyzmy do swojej Trudności Trafienia. Tej zdolności nie można łączyć z innymi podobnymi (np. Goła Klata). MAFIOZO Masz idealnie skrojony garnitur, mokasyny ze skóry aligatora i rolexa na ręce. Odliczasz sekundy do wdrożenia planu. Za 8 sekund eksplodują ładunki. Za 16 sekund do hangaru wkroczy ekipa. Za 64 sekundy wchodzisz ty i składasz Grubemu propozycję nie do odrzucenia."
+        }
+      ]
+    },
+    "MAFIOZO": {
+      "proficiencies": "Zyskujesz biegłość w dwóch kategoriach broni i w narzędziach małego tatuażysty. Jeśli masz wspomniany zestaw narzędzi, możesz przyjąć do swojej mafii sojuszników, wykonując im odpowiednie tatuaże.",
+      "abilities": [
+        {
+          "name": "BEZLITOSNY PRZYWÓDCA",
+          "action": null,
+          "text": "Twoja mafia to twoja rodzina. Zabijesz każdego, kto choćby krzywo spojrzy na twojego brata, siostrę, matkę czy psa. Wszyscy, którzy noszą wytatuowany symbol twojej mafijnej rodziny, są pod twoją ochroną i twoim skutecznym przywództwem. Vendetta: Otrzymujesz Ułatwienie w Teście Ataku przeciw istocie, która zadała obrażenia członkowi twojej mafii w przeciągu ostatniej rundy. Szef każe [B]: W Akcji Bonusowej możesz wydać rozkaz ataku członkowi swojej grupy. Ten w Reakcji, może zaatakować wskazaną przez ciebie istotę, znajdującą się w zasięgu jego ataku."
+        },
+        {
+          "name": "RENOMA",
+          "action": null,
+          "text": "Nie można strzelić człowiekowi w głowę, mając ubłocone buty. Chciałbyś, żeby ktoś cię potrącił nieumytym pontiakiem? Trzeba szanować klientów i wrogów. Trudno nie uwierzyć człowiekowi takiemu jak ty. Człowiekowi, który ma swoją renomę i wie, że ubiór świadczy o szacunku. Każde 50 gambli towarów luksusowych, które nosisz na sobie, daje ci premię +1 do testów Wpływania."
+        },
+        {
+          "name": "MOJA PRAWA RĘKA",
+          "action": null,
+          "text": "Zaczynasz budować własną mafię. Werbujesz obiecującego człowieka, który wykonuje twoje polecenia aż po grób. Skąd go wziąć? Wyrzutka, który potrzebuje szefa, znajdziesz w każdej dziurze i ruinie. Wystarczy obiecać mu lepsze życie, dać spluwę do ręki, wydziarać tatuaż i wcielić do twojej mafijnej rodziny. Będzie robić, co każesz. Nosić plecak, pociągać za spust i nadstawiać tyłka. Ty zapewniasz mu wikt i dziesiątą część swojej doli. Jeśli nie masz odpowiedniego kandydata lub ostatni zginął, możesz poświęcić 24 godziny na szukanie nowego w miejscowości, w której przebywasz. Prawa ręka działa natychmiast po twojej turze, ale masz pełną kontrolę nad akcjami tej postaci. 000 75"
+        }
+      ]
+    }
+  },
+  "spec": {
+    "CHEMIK": {
+      "proficiencies": "Zyskujesz biegłość w narzędziach małego chemika i małego rusznikarza.",
+      "abilities": [
+        {
+          "name": "SMAKUJE JAK ARSZENIK",
+          "action": null,
+          "text": "Lata babrania się w toksycznych świństwach zrobiły swoje. Zyskujesz odporność na obrażenia od kwasu i trucizny. Masz też Ułatwienie w Rzutach Obronnych na Kondycję, przeciw działaniu kwasów, trucizn i skażenia radioaktywnego."
+        },
+        {
+          "name": "PIROTECHNIKA",
+          "action": null,
+          "text": "Zupełnie ci już odwaliło i bierzesz się za robienie BUM. Dynamit i granaty, czego chcieć więcej? Potrzebne ci tylko narzędzia małego chemika, małego rusznikarza, surowce i czas. Otrzymujesz wylistowane obok schematy pirotechniczne. SUROWCE CH - Chemia CE - Części elektroniczne CZ - Części zamienne MK - Materiały konstrukcyjne MO - Materiały organiczne 000 80 SCHEMATY PIROTECHNICZNE NAZWA ST PRODUKCJA SUROWCE Dynamit (laska) 15 20 godzin 19 CH, 1 MK Granat dymny 15 20 godzin 15 CH, 4 CZ, 1 MK Granat gazowy 20 30 godzin 25 CH, 4 CZ, 1 MK Granat hukowy 20 30 godzin 25 CH, 4 CZ, 1 MK Granat improwizowany 10 10 godzin 9 CH, 1 MK/MO Granat odłamkowy 20 35 godzin 30 CH, 4 CZ, 1 MK Granat zapalający 20 35 godzin 30 CH, 4 CZ, 1 MK Granat 40 mm 15 15 godzin 10 CH, 3 CZ, 2 MK IED 15 20 godzin 5 CE, 10 CH, 4 CZ, 1 MK Koktajl Mołotowa 5 1 minuta 4 CH, 1 MK Mina przeciwpiechotna 25 40 godzin 30 CH, 5 CZ, 5 MK Mina przeciwpancerna 25 60 godzin 5 CE, 40 CH, 5 CZ, 10 MK Plastik C4 (100 g) 25 50 godzin 50 CH Pocisk 60 mm 20 30 godzin 25 CH, 1 CZ, 4 MK Proch czarny (20 g) 10 5 godzin 2 CH, 3 MK/MO Proch strzelniczy (20 g) 15 10 godzin 5 CH, 5 MK/MOKLASY"
+        },
+        {
+          "name": "RUSZNIKARSTWO",
+          "action": null,
+          "text": "Nie ma nic lepszego niż zapach prochu o poranku. Broń palna to twoja największa miłość. Potrafisz ją wytwarzać i ulepszać. Potrzebne ci tylko narzędzia małego kowala i małego rusznikarza, surowce i czas. Otrzymujesz wylistowane poniżej schematy rusznikarskie. MEDYK Niska, szarowłosa dziewczyna w poplamionym krwią fartuchu biega po polu bitwy, taszcząc ciężką torbę. Wśród eksplozji i świstu kul, szuka umierających żołnierzy, którzy nie stracili żadnej kończyny. Znajduje jednego i aplikuje mu mieszankę painkillerów, adrenaliny i narkotyków. Żołnierz wstaje, podnosi karabin i biegnie na spotkanie z Molochem."
+        }
+      ]
+    },
+    "MEDYK": {
+      "proficiencies": "Zyskujesz biegłość w Medycynie i w narzędziach małego chemika lub małego medyka.",
+      "abilities": [
+        {
+          "name": "DOKTOR BRAIN",
+          "action": null,
+          "text": "Chcesz być jajogłowym mutantem geniuszem? Proszę bardzo. Znajdujesz martwego mutanta i tworzysz serum z jego rdzenia mózgowego, które sobie aplikujesz. Wartość twojej Cechy Inteligencja rośnie na stałe o 4 (do maksymalnie 20). Twój organizm płaci jednak za to wielką cenę. Zmniejsz na stałe swoją Kondycję lub Zręczność o 2."
+        },
+        {
+          "name": "KRWAWY ANIOŁ",
+          "action": null,
+          "text": "Potrafisz używać leków skuteczniej niż ktokolwiek inny. Wiesz, gdzie wbić strzykawkę, żeby pacjent szybko stanął na nogi i zyskał więcej energii do walki. Od tej pory, kiedy używasz zestawu małego medyka, przywracasz więcej Punktów Wytrzymałości. Zamiast kostki k4 używasz na 3. poz. - k6, na 6. poz. - k8, na 9. poz. - k10, a na 12. poz. - k12."
+        },
+        {
+          "name": "ŁAPIDUCH",
+          "action": null,
+          "text": "Kiedy inni tracą nadzieję, ty wciąż walczysz o życie pacjenta. Podejmujesz reanimację i liczysz na cud, uciskając serce i robiąc usta-usta. Reanimacja trwa 1 minutę, a jej sukces zależy od twoich umiejętności i czasu, który upłynął od zatrzymania akcji serca. Udana akcja reanimacji przywraca pacjentowi funkcje życiowe, lecz jego stan wciąż nie jest stabilny. Ta zdolność nie działa na pacjenta, który otrzymał Olbrzymie obrażenia (patrz rozdział Walka str. XXX). 000 81"
+        },
+        {
+          "name": "FARMACJA",
+          "action": null,
+          "text": "Podobno medyk to nie jest maszynka do skręcania leków z piasku. Ale ty znasz się na chemii i farmakologii, więc wiesz, że lekarstwa można ukręcić ze wszystkiego innego. Zyskujesz biegłość w narzędziach małego aptekarza. Potrafisz produkować leki i substancje leczące, używając składników chemicznych, jak i organicznych. Potrzebne ci narzędzia małego chemika, małego aptekarza, surowce i czas. Otrzymujesz wylistowane poniżej schematy farmaceutyczne. MONTER Doświadczona hakerka w hawajskiej koszuli i w różowych okularach na nosie, wstukuje linie kodu maszynowego w rdzeń pamięci uszkodzonego Łowcy. Wprowadza kroplę swojej krwi do pokładowego analizatora DNA i próbuje uruchomić autorski tryb defensywny. Do drzwi jej skromnej klitki dobija się zdenerwowany klient, któremu sprzedała felerny silnik. Diody Łowcy zaczynają mrugać czerwonym blaskiem."
+        }
+      ]
+    },
+    "MONTER": {
+      "proficiencies": "Zyskujesz biegłość w umiejętności Technika i biegłość w dwóch wybranych zestawach narzędzi.",
+      "abilities": [
+        {
+          "name": "MECHANIKA",
+          "action": null,
+          "text": "Smar zastępuje ci krem do rąk, benzyna pachnie jak najlepsze perfumy, a dźwięk dobrze pracującego silnika jest milszy niż miłosne szepty. Jesteś w stanie zbudować swój własny pojazd i zabrać go na rajd! Otrzymujesz biegłość w narzędziach małego mechanika. Potrafisz naprawiać, ulepszać i budować pojazdy, a nawet konstruować mechaniczne pancerze. Potrzebne ci narzędzia małego mechanika i małego kowala, surowce i czas. Otrzymujesz wylistowane poniżej schematy mechaniczne. 000 82 SCHEMATY FARMACEUTYCZNE NAZWA ST PRODUKCJA SUROWCE Antybiotyk (10 dawek) 10 20 godzin 20 CH/MO Alkohol tani (1 l) 10 3 godziny 3 CH/MO AR 23 (1 szt) 25 35 godzin 33 CH, 1 CZ, 1 MK AR-35 BETA (1 szt) 25 50 godzin 49 CH, 1 CZ,1 MK Deadline (1 szt) 20 25 godzin 25 CH/MO, 1 MK Detoks (5 fiolek) 10 20 godzin 20 CH/MO Medpak (1 szt) 15 13 godzin 11 CH/MO, 1 CZ, 1 MK Nitrogliceryna (20 g) 15 10 godzin 10 CH/MO Painkiller (10 tabletek) 10 10 godzin 10 CH/ MO Pocisk - strzykawka (1 szt) 10 3 godziny 2 CZ, 1 MK Proch czarny (20 g) 10 5 godzin 2 CH, 3 MK/MO Proch strzelniczy (20 g) 15 10 godzin 5 CH, 5 MK/MO RadOff (1 szt) 15 15 godzin 14 CH/MO, 1 MK Środki dezynfekujące (1 l) 10 5 godzin 5 CH/MO Środek usypiający (1 fiol.) 10 10 godzin 10 CH/MO Tornado (1 działka) 25 50 godzin 50 CH/MO Trybiotyl (1 porcja) 15 15 godzin 15 CH/MO Trucizna (1 fiolka) 10 10 godzin 10 CH/MO Uzupełnienie zestawu małego medyka (1 użycie) 10 5 godzin 5 CH/MO, 1 MK WD-TABS (10 tabletek) 10 10 godzin 10 CH/MO Zamiennik dowolnego leku (5 dawek) 20 10 godzin 10 CH/MO SCHEMATY MECHANICZNE NAZWA ST PRODUKCJA SUROWCE Buggy 20 500 godzin 50 CZ, 200 MK Deskorolka 5 20 godzin 5 CZ, 5 MK Motorower 20 200 godzin 50 CZ, 50 MK Motocykl 25 300 godzin 50 CZ, 100 MK Osobówka (składak) 20 1000 godzin 100 CZ, 400 MK Paralotnia 25 100 godzin 20 CZ, 30 MK Pancerz wspomagany 30 1000 godzin 100 CE, 100 CZ, 300 MK Rower 10 40 godzin 10 CZ, 10 MK Traktor (mały) 20 1000 godzin 100 CZ, 400 MK Wózek typu dwukółka 10 20 godzin 1 CZ, 19 MKKLASY"
+        },
+        {
+          "name": "HAKERSTWO",
+          "action": null,
+          "text": "Czerwone oczy, blada cera, skrzywione plecy i słownictwo, którego nikt nie rozumie. Już raz pomylili cię z mutantem i drogo za to zapłacili. W Posterunku byłbyś szychą, ale nie przyjmujesz rozkazów od głupszych od siebie. Otrzymujesz biegłość w narzędziach małego hakera. Potrafisz produkować sprzęt komputerowy i drony, ale potrzebujesz do tego narzędzi małego hakera, małego elektronika, surowców i czasu. Otrzymujesz wylistowane poniżej schematy hakerskie. Drony. Jako Haker możesz zbudować własnego drona, który działa według poniższych zasad. Kierowanie. Aby móc kierować dronem, potrzebny jest kontroler zdalnego sterowania. W Akcji Bonusowej możesz wydawać proste polecenia, tj., broń się, idź tam, podążaj za mną, podnieś to, upuść to, zostań. Dron nie atakuje samodzielnie. W Akcji możesz przejąć pełne sterowanie i używając zamontowanych kamer, wykorzystać wszystkie jego zdolności. Naprawianie. Poświęcając godzinę pracy, możesz przy pomocy odpowiednich narzędzi przywrócić swojej maszynie PW, w ilości 2k6 + twój modyfikator Inteligencji. Zasilanie. Akumulator 24V wystarcza na 1 godzinę pracy średniego drona i 4 godziny pracy małego. Instalacja agregatu prądotwórczego pozwala na dodatkowe zasilanie spalinowe (0,5 l paliwa/1 h). SIŁ ZRC KON INT MDR CHA 14 (+2) 14 (+2) 10 (+0) – – – DRON KROCZĄCY Średnia maszyna TT: 10 plus mod. Inteligencji i Premia Biegłości twórcy PW: 10 x modyfikator Inteligencji twórcy; PRÓG OBRAŻEŃ 5 PRÓG AWARII 15. SZYBKOŚĆ: 9 m NIEWRAŻLIWOŚĆ NA OBRAŻENIA psychiczne, od trucizny NIEWRAŻLIWOŚĆ NA STANY Przerażenie, Zatrucie, Zauroczenie ZMYSŁY Noktowizja 18 m ZDOLNOŚCI Modyfikacje. Dron może mieć zainstalowane liczne urządzenia tj. broń, kamery, oświetlenie czy skomplikowane urządzenia elektroniczne. Dokładne modyfikacje oraz ich koszt, należy ustalić z MG. Udźwig. Użytkowy: 70 kg. Maksymalny: 140 kg. AKCJE Atak. Dron może wykonać w swojej akcji jeden atak, którego zasięg i obrażenia zależą od zamontowanej broni. Wzór premii ataku drona. 2 plus Premia Biegłości twórcy i modyfikator Zręczności operatora. Wzór na obrażenia drona. Kość zamontowanej broni plus modyfikator Inteligencji twórcy. Wzór na RO w przypadku ataku obszarowego. 8 plus Premia Biegłości twórcy i modyfikator Zręczności operatora. 000 83"
+        },
+        {
+          "name": "SERWISOWANIE",
+          "action": null,
+          "text": "Kiedyś był taki serial o kolesiu, który ze sreberka, spinacza i butelki po denaturacie robił telefon. Otrzymujesz biegłość w narzędziach małego elektronika. Potrafisz naprawiać i produkować urządzenia elektroniczne i drobne mechanizmy. Potrzebne ci tylko narzędzia małego chemika, małego elektronika, surowce i czas. Otrzymujesz wylistowane poniżej schematy elektroniczne. 000 84 SCHEMATY ELEKTRONICZNE NAZWA ST PRODUKCJA SUROWCE Agregat 20 50 godzin 1 CE, 15 CZ, 9 MK Akumulator 15 40 godzin 5 CH, 10 CZ, 5 MK Alternator 15 40 godzin 15 CZ, 1 CE, 4 MK Baterie 10 20 godzin 9 CH, 1 MK Celownik optyczny 15 20 godzin 5 CE, 5 CZ, 10 MK Defibrylator 20 60 godzin 5 CE, 20 CZ, 5 MK Detektor ruchu 25 80 godzin 30 CE, 5 CZ, 5 MK Krótkofalówka 10 24 godziny 1 CE, 10 CZ, 1 MK Kompas 5 4 godziny 1 CZ, 1 MK Laserowy wskaźnik celu 20 60 godzin 9 CE, 20 CZ, 1 MK Latarka 10 20 godzin 9 CZ, 1 MK Miernik skażenia chemicznego 20 50 godzin 5 CE, 5 CH, 10 CZ, 5 MK Miernik promieniowania 15 30 godzin 3 CE, 2 CH, 8 CZ, 2 MK Noktowizor 20 70 godzin 25 CE, 7 CZ, 3 MK Palnik acetylenowo-tlenowy 10 20 godzin 2 CH, 5 CZ, 3 MK Odtwarzacz CD 15 40 godzin 15 CE, 4 CZ, 1 MK Powiększalnik 20 60 godzin 9 CE, 20 CZ, 1 MK Radio 10 15 godzin 3 CE, 3 CZ, 1 MK Termowizor 30 200 godzin 90 CE, 5 CZ, 5 MK Turbina wiatrowa/wodna 20 60 godzin 5 CE, 10 CZ, 15 MK Wykrywacz metalu 15 30 godzin 5 CE, 5 CZ, 5 MK Wytrychy elektroniczne 20 50 godzin 20 CE, 4 CZ, 1 MK Zapalnik elektryczny 5 5 godzin 5 CZ Zegarek 10 20 godzin 9 CZ, 1MKKLASY TWARDZIEL Bycie twardzielem, to nie tylko napinanie muskułów, noszenie ciężkich pancerzy i szpanowanie po okolicy fajnym gnatem. Prawdziwy Twardziel sam podejmuje największe ryzyko, robiąc rzeczy, od których inni wymiękają. To ktoś w stylu: Ja tego nie zrobię? Potrzymaj mi piwo. Twardziele są wyspecjalizowani w używaniu wszystkich kategorii broni i pancerzy, które mogą zmaksymalizować ich siłę ognia i defensywę na polu walki. Potrafią celnie wystrzelić największą ilość kul i używać pojazdów, jako broni. Jednej rzeczy nie cierpią najbardziej. Przegrywać. 000 85"
+        }
+      ]
+    }
+  },
+  "twardziel": {
+    "KOWBOJ": {
+      "proficiencies": "Otrzymujesz biegłość w umiejętności Pojazdy lub Tresura oraz biegłość w używaniu narzędzi małego kowala i biegłość w jednym dowolnym instrumencie.",
+      "abilities": [
+        {
+          "name": "CLINT",
+          "action": null,
+          "text": "Poprawka. Raz na walkę możesz powtórzyć jeden Test Ataku bronią palną. Zabójcza spluwa. Rewolwery w twoich rękach zadają jedną dodatkową kość obrażeń. PRZYKŁAD: Peacemaker w twoich dłoniach zadaje 2k8, zamiast 1k8 obrażeń."
+        },
+        {
+          "name": "REWOLWEROWIEC",
+          "action": null,
+          "text": "Wyciągasz rewolwer i strzelasz, zanim ktokolwiek zdąży mrugnąć okiem. Dobywanie. Jeśli nosisz jeden lub dwa rewolwery w kaburach, możesz je dobyć lub schować, bez zużywania darmowej interakcji z przedmiotem. Niezawodny. Rewolwer w twoich rękach nigdy się nie zacina. Jednoręki. Możesz strzelać z rewolweru jedną ręką, bez otrzymywania Utrudnienia do ataku z tego tytułu. Rewolwery traktujesz jako broń o właściwości lekka i poręczna. Strzał z biodra. Otrzymujesz +5 do testów Inicjatywy, jeśli trzymasz w ręce lub będziesz dobywać rewolwer. Szybkoładowacz [B]. Jeśli masz wolną rękę, to w Akcji Bonusowej, możesz z pomocą pełnego szybkoładowcza (aka speedloadera) uzupełnić pusty bębenek rewolweru."
+        },
+        {
+          "name": "ZAWSZE W SIODLE",
+          "action": null,
+          "text": "Prawdziwy kowboj piechotą chodzi tylko do kibla, baru i burdelu. Jeśli nie masz konia lub motocykla, los zsyła ci okazję do jego zdobycia na najbliższym Długim odpoczynku. Porzucony harley lub koń bez jeźdźca, to coś, co po prostu ci się przydarza. Pamiętaj, żeby nadać mu imię i módl się do zapomnianych bogów, żeby nie spotkać jego prawowitego właściciela. I pamiętaj - nie możesz go nikomu sprzedać. WOJOWNIK AUTOSTRADY Stuningowany Dodge Challenger wzbija tumany pyłu, ścigany przez foodtrackowców z gangu Pikantnych Kiełbasek. Nazwę mają debilną, ale zmonopolizowali rynek mięsny w Vegas, mieląc (dosłownie) swoją konkurencję na parówki. Ostrzeliwują Challengera, którego kierowca wjechał na dawno zbombardowany węzeł nr 95 na międzystanowej 15. Zbiornik w jego bagażniku otwiera się, rozlewając stary olej z frytkownicy. Ścigany wyciska siódme poty z ukochanej maszyny i skacze nad brakującym fragmentem estakady. Kiedy ląduje, foodtrackowcy jeszcze lecą. Ostatni raz podali mu zimne frytki."
+        }
+      ]
+    },
+    "WOJOWNIK AUTOSTRADY": {
+      "proficiencies": "Otrzymujesz biegłość w umiejętności Pojazdy oraz biegłość w używaniu narzędzi małego mechanika. Jeśli posiadasz już te biegłości, otrzymujesz w nich Specjalizację.",
+      "abilities": [
+        {
+          "name": "DRZWI W DRZWI",
+          "action": null,
+          "text": "Twój pojazd to twoja broń. Samochód, motor czy autobus to równie zabójcze zabawki, co twój gnat. Rajdowiec. Podczas walki, wyścigu i pościgu wykonujesz wszystkie Testy Mądrości (Pojazdy) z Ułatwieniem. Szybkość twojego pojazdu rośnie o 50%. Konwojent. Nie otrzymujesz Utrudnienia do Testów Ataków, wynikających z niestabilnego podłoża, kiedy jedziesz pojazdem, zarówno jako pasażer, jak i kierowca. Taranowanie. Istoty, które taranujesz swoim pojazdem, otrzymują Utrudnienie do RO na Zręczność."
+        },
+        {
+          "name": "KASKADER",
+          "action": null,
+          "text": "Twoje wyczyny za kierownicą przerażają twoich pasażerów. Kierując dowolnym pojazdem silnikowym, potrafisz wykonywać triki jak filmowy kaskader. Schody to też jezdnia. Potrafisz jeździć pojazdem po schodach (jeśli się zmieścisz wszerz i na zakrętach) z pełną Szybkością pojazdu. Skoczek. Przeskakujesz pojazdem przez dziury i przepaści o czterokrotnej długości twojego pojazdu, jeśli się rozpędzisz na odległości 60 metrów. 000 88KLASY Na dwóch kółkach. Umiesz jechać na dwóch bocznych kołach, żeby zmieścić się w wąskiej uliczce lub pomiędzy dwiema ciężarówkami. Każda z tych czynności wymaga Testu Mądrości (Pojazdy) o ST 15, który wykonujesz z Ułatwieniem. Porażka w teście oznacza, że pojazd uległ małym uszkodzeniom. Porażka o 5 i więcej, oznacza awarię pojazdu i obrażenia u pasażerów."
+        },
+        {
+          "name": "PANCERNA FURA",
+          "action": null,
+          "text": "Twoja maszyna jest twoją twierdzą. OC. Jeśli prowadzisz pojazd mechaniczny, który daje jakąś Osłonę pasażerom, to ty i twoi pasażerowie otrzymujecie dodatkową premię do Trudności Trafienia, równą twojemu modyfikatorowi Mądrości. Premia działa, tylko kiedy pojazd jest w ruchu. AC [B]. W Akcji Bonusowej możesz uruchomić lub zatrzymać pojazd, wykonać nim Przyspieszenie, Odstąpienie lub Unikanie. ŻOŁNIERZ Major piechoty wydaje rozkaz bandzie żółtodziobów. Mundur z zapomnianą przez większość ludzi flagą na ramieniu, poplamiony jest smarem i prochem strzelniczym. Cudem wyremontowane działo artyleryjskie bije aż miło w pozycje maszerujących oddziałów Molocha. W okopach kryje się setka ochotników, którzy stawią im zaciekły opór. Major z dumą pójdzie z nimi wprost do piekła."
+        }
+      ]
+    },
+    "ŻOŁNIERZ": {
+      "proficiencies": "Zostając żołnierzem, decydujesz się służyć sprawie obrony ojczyzny. Otrzymujesz biegłość w umiejętności Technika oraz biegłość w używaniu narzędzi małego rusznikarza lub kowala.",
+      "abilities": [
+        {
+          "name": "JAK DBASZ, TAK MASZ",
+          "action": "B",
+          "text": "Nikt nie potrafi składać, rozkładać i czyścić broni szybciej od ciebie. Robisz to z zamkniętymi oczami, paląc papierosa i śpiewając Oh my darling. Broń palna w twoich rękach nigdy się nie zacina, a jeśli już masz taką w dłoniach, wystarczy ci Akcja Bonusowa, żeby ją naprawić. Z kolei uszkodzoną broń białą, naprawiasz w czasie Krótkiego odpoczynku."
+        },
+        {
+          "name": "RUTYNA",
+          "action": null,
+          "text": "Kiedy inni panikują, ty wykonujesz rutynowe działania na polu walki. Ostrzał artylerii, eksplodujące granaty, czy seria z karabinu, to tylko elementy taktyczne, utrudniające wykonanie misji. Kalkulujesz i oceniasz ryzyko, będąc tam, gdzie są największe szanse na przeżycie. W czasie walki masz Ułatwienie w Rzutach Obronnych na Zręczność i Mądrość."
+        },
+        {
+          "name": "TRENING W ZBROI",
+          "action": null,
+          "text": "Robienie pompek w pancerzu i z kowadłem na plecach, to twoje codzienne zajęcie. Nie otrzymujesz kar do Testów Zręczności (Skradanie się) wynikających z noszenia pancerza. Twoja maksymalna premia ze Zręczności do Trudności Trafienia wynikająca z ograniczeń noszonego pancerza, zwiększa się o 1. 000 89"
+        }
+      ]
+    }
+  },
+  "zlodziej": {
+    "KURIER": {
+      "proficiencies": "Zyskujesz biegłość w posługiwaniu się narzędziami małego mechanika i otrzymujesz biegłość w umiejętności Pojazdy. Jeżeli masz już te umiejętności, otrzymujesz w nich Specjalizację.",
+      "abilities": [
+        {
+          "name": "SKRYTKA",
+          "action": null,
+          "text": "Potrafisz schować kontrabandę w wozie tak, żeby żaden pies jej nie wyniuchał, i ukryć niewielką broń tak, żeby obmacujący cię zbok niczego nie wymacał. Kiedy ukrywasz przedmiot lub istotę o rozmiarze nie większym niż mały, testujesz swoją umiejętność Skradanie się i wykonujesz test z Ułatwieniem. Przedmiot lub istota otrzymuje stan Niewidoczność."
+        },
+        {
+          "name": "SLANG",
+          "action": null,
+          "text": "Wiesz, jak gadać z tubylcami w każdym zakątku Podzielonych Stanów. Szybko rozpoznajesz lokalnych złodziejaszków, prawidłowo oceniasz zakapiorów i wiesz, co powiedzieć, żeby zrobić jakiś biznes. W kilka chwil zdobywasz informacje o tym, kto tu rządzi, jakie ma problemy i z kim lepiej nie zadzierać. Na to wszystko wystarczy ci godzina i kilka fajek. A kiedy MG prosi cię o testy Perswazji lub Śledztwa związane z tym półświatkiem, masz w nich Ułatwienie. Dlaczego? Bo jesteś: spoko ziom, swój na każdej dzielni, co złego to nie ja."
+        },
+        {
+          "name": "ZNAJOMOŚCI",
+          "action": null,
+          "text": "Podzielone Stany to twój dom i prawie wszędzie masz jakiegoś znajomka. Kiedy jesteś w cywilizowanym miejscu, wykonaj Test Charyzmy. Im lepszy wynik, tym bardziej znaczący w lokalnej społeczności jest twój znajomy. SZCZUR Nikt nie zwraca uwagi na brudnego pijaczynę w ciuchach śmierdzących szambem. Nikt nie dostrzega zwinnych dłoni, sprawnie zbierających gamble w tłumie. Nikt nie zauważył plecaka pozostawionego pod autocysterną, zaparkowaną pod więzieniem. Za 60 sekund na miasto tych religijnych popaprańców, spadnie ognisty deszcz."
+        }
+      ]
+    },
+    "SZCZUR": {
+      "proficiencies": "Zyskujesz biegłość w posługiwaniu się narzędziami małego chemika oraz w umiejętności Akrobatyka lub Zwinne dłonie.",
+      "abilities": [
+        {
+          "name": "A CO MI TAM!",
+          "action": null,
+          "text": "Masz Ułatwienie w Rzutach Obronnych przeciw chorobom, truciznom i radiacji. Masz również odporność na obrażenia od trucizn, chorób i promieniowania. Tak, na alkohol niestety też, bo to przecież trucizna. Jeśli masz chorobę przewlekłą, nie doznasz jednak cudownego ozdrowienia. 000 93"
+        },
+        {
+          "name": "SZARY",
+          "action": null,
+          "text": "Szczurów jest pełno. Żebracy, włóczędzy, ludzkie wraki. Nikt z nimi nie gada. Nikt nie zwraca na nich uwagi. Jeśli zachowujesz się inteligentnie, wykorzystując ludzką pogardę, potrafisz stać się niezauważalny (otrzymujesz stan Niewidoczność). Mądra kryjówka. Dodajesz modyfikator Inteligencji lub Mądrości do testów Skradania się. Nie widzisz mnie. Możesz próbować ukrywać się na otwartym terenie, nawet w jasnym świetle dnia, czy na środku pustego hangaru, np. jako zwykły żul szukający złomu. Jeśli nic nie mówisz i nie robisz hałasu, masz Ułatwienie w Testach Ukrywania się, dopóki kogoś nie zaatakujesz lub nie zrobisz czegoś głośnego."
+        },
+        {
+          "name": "TRUCICIEL",
+          "action": "B",
+          "text": "Jeśli posiadasz narzędzia małego chemika, możesz w czasie Długiego odpoczynku wyprodukować jedną porcję trucizny. Ta porcja zawiera 10 ml trującego olejku. W Akcji Bonusowej możesz nałożyć ją na ostrze broni lub na maksymalnie trzy groty. Trucizna pozostaje aktywna przez 1 minutę lub do momentu aplikacji, zależnie od tego, co wydarzy się pierwsze. Cel trafiony zatrutą bronią lub pociskiem musi zdać RO na Kondycję (ST 8 plus twój modyfikator Inteligencji i Premia Biegłości), lub otrzymuje stan Zatrucie na 1 minutę. Cel powtarza Rzut Obronny na końcu swojej tury."
+        },
+        {
+          "name": "ZWINNOŚĆ SZCZURA",
+          "action": null,
+          "text": "Wspinacz. Potrafisz szybko i efektywnie się wspinać. Otrzymujesz Szybkość wspinania równą twojej Szybkości ruchu. Skoczek. Kiedy skaczesz, możesz testować Akrobatykę zamiast Atletyki. Maksymalną odległość skoku wyliczasz, uwzględniając wartość Zręczności, a nie Siły. ZABÓJCA Zdjęcie po cichu patrolu gangusów i zajęcie ich miejscówki na klifie było formalnością. U dołu rozciąga się obóz wyznawców Bano, gdzie przetrzymują jeńców złapanych w poprzednim rajdzie. Na centralny plac właśnie wyciągają ogromnego mutasa zakutego w kajdany. Jest zły, poraniony i gotowy zabijać. Przestrzelenie kłódki w jego kajdanach też będzie formalnością. Jeszcze tylko chwilka. Zakontraktowany cel powinien zaraz się pojawić."
+        }
+      ]
+    },
+    "ZABÓJCA": {
+      "proficiencies": "Zyskujesz biegłość w posługiwaniu się narzędziami małego charakteryzatora oraz biegłość we wszystkich broniach.",
+      "abilities": [
+        {
+          "name": "JEDEN STRZAŁ",
+          "action": null,
+          "text": "Potrafisz się przygotować do zabijania lepiej niż ktokolwiek inny. Jeśli atakujesz bronią finezyjną lub strzelasz ogniem pojedynczym, otrzymujesz nowe możliwości. Pierwszy atak. W pierwszej rundzie walki, jeśli wykonujesz atak przed turą swojego celu, otrzymujesz Ułatwienie do pierwszego Testu Ataku przeciwko temu celowi. Celowanie [B]. W czasie walki i poza nią możesz zastygnąć w bezruchu i lepiej wycelować. Jeśli w swojej turze nie wykonasz ruchu, możesz poświęcić Akcję Bonusową na lepsze wycelowanie i wykonać jeden atak z Ułatwieniem."
+        },
+        {
+          "name": "KAMUFLAŻ",
+          "action": null,
+          "text": "Jesteś w stanie przygotować sobie kamuflaż tak dobrze pasujący do otoczenia, że nawet po oddaniu strzału, trudno cię dostrzec. Ghillie. Jeśli przygotujesz sobie strój maskujący i pomalujesz twarz zgodnie z barwami otoczenia, otrzymujesz Ułatwienie do Testów Skradania się. Niewidoczny. Jeśli przed strzałem z broni dystansowej lub rzucanej, masz stan Niewidoczność, to nie stajesz się widoczny po wykonaniu ataku, dopóki się nie przemieścisz. Warunkiem jest noszenie stroju maskującego i malowanie twarzy, które pasują do otoczenia. Cel pozna jedynie kierunek, z którego wykonano atak, chyba że używasz broni o właściwości cicha."
+        },
+        {
+          "name": "STRZELEC",
+          "action": null,
+          "text": "Jedni lubią zabijać nożem, inni cenią truciznę, a ty wolisz zabijać z daleka. Jeżeli przygotujesz stanowisko snajperskie z bronią z celownikiem optycznym i poświęcisz 5 rund na precyzyjne mierzenie do celu, to dopóki się nie poruszysz, zyskujesz dwie poniższe, dodatkowe korzyści. Powiększenie. Trzykrotne zwiększenie maksymalnego zasięgu dla tej broni. Przewaga balistyczna. Brak Utrudnienia za strzelanie na dalekim dystansie tą bronią. 000 94KLASY ZWIADOWCA Z dala od miast i resztek cywilizacji, tam, gdzie dominują mutanci, maszyny Molocha i zdziczali ludzie, oczy czujnych zwiadowców szukają zwierzyny. Przemierzają niezmierzone dystanse, żywiąc się tym, co znajdą lub upolują. Każdy zwiadowca to wyspecjalizowany drapieżnik, którego napędza nienawiść, obowiązek lub jakiś pokręcony kodeks. Zwiadowcy to odludki, które lepiej dogadują się ze zwierzętami niż z ludźmi, choć często zarabiają jako przewodnicy, zabójcy potworów lub strażnicy. 000 95"
+        }
+      ]
+    }
+  },
+  "zwiadowca": {
+    "ŁOWCA MUTANTÓW": {
+      "proficiencies": "Otrzymujesz biegłość w umiejętności Przyroda lub Tresura i biegłość w jednym dowolnym zestawie narzędzi. Zyskujesz biegłość w jednej wybranej kategorii broni.",
+      "abilities": [
+        {
+          "name": "BEZ TAJEMNIC",
+          "action": "A",
+          "text": "Znasz się na mutantach i potworach jak nikt inny. Jeśli spotkasz mutanta lub potwora i zdasz Test Inteligencji (Przyroda), zyskujesz wiedzę na jego temat. MG zdradza ci jego zwyczajową nazwę (ST 10), słabe punkty (ST 15) i trzy wybrane współczynniki (ST 20)."
+        },
+        {
+          "name": "MUTANT NA ŚNIADANIE",
+          "action": null,
+          "text": "Trochę tego tałatajstwa już zdechło dzięki tobie. Wiesz najlepiej, jak z nimi walczyć i jak się przed nimi bronić. Refleks łowcy. Kiedy rozpoczynasz walkę z mutantem lub potworem, zyskujesz premię do Inicjatywy, równą twojej Premii Biegłości. Zabójca mutantów. Kiedy walczysz z mutantem lub potworem, możesz raz w rundzie zaatakować go z Ułatwieniem. Unik łowcy [R]. Jeśli zostajesz trafiony atakiem przez mutanta lub potwora, możesz użyć Reakcji, żeby wobec tego ataku podnieść swoją TT o wartość twojej Premii Biegłości. 000 98KLASY Nazwa: Pogromca Tryb ognia: Pojedynczy Magazynek: 1 Obrażenia: 4k6 od trucizny/kwasu/ognia Zasięg: 9/18 metrów Właściwości: Ładowanie Koszt produkcji: 10 MK, 10 CE, 80 CZ Koszt produkcji pocisku: 1 MK, 1 CZ, 8 CH"
+        },
+        {
+          "name": "POGROMCA",
+          "action": null,
+          "text": "Jeśli wydasz 100 gambli na surowce i poświęcisz 100 godzin pracy, to zbudujesz strzelbę na mutanty i potwory o wdzięcznej nazwie Pogromca. Strzela ona nabojami przypominającymi małe strzykawki napełnione chemikaliami. W czasie Długiego odpoczynku możesz stworzyć tyle naboi, ile wynosi twoja Premia Biegłości. Koszt stworzenia jednego takiego naboju to 10 gb, a trafiony nim mutant lub potwór otrzymuje obrażenia krytyczne. Naboje mogą zawierać truciznę, kwas lub po prostu eksplodować. Tylko Łowca mutantów jest biegły w używaniu Pogromcy. SIŁ SIŁ ZRC ZRC KON KON INT INT MDR MDR CHA CHA 8 (-1) 18 (+4) 18 (+4) 12 (+1) 14 (+2) 12 (+1) 4 (-3) 6 (-2) 16 (+3) 14 (+2) 4 (-3) 4 (-3) ZMUTOWANY OWAD Małe zwierzę TT: 14 plus twoja Premia Biegłości INICJATYWA +6 (16) PW: 3 plus 10 x twój modyfikator Mądrości SZYBKOŚĆ: 9 m, wspinanie 9 m, kopanie 4,5 m STOPIEŃ ZRANIENIA O O O O KW k6 x ½ twojego poziomu Zwiadowcy ZMUTOWANY SSAK Duże zwierzę TT: 11 plus twoja Premia Biegłości INICJATYWA -1 (9) PW: 9 plus 10 x twój modyfikator Mądrości SZYBKOŚĆ: 12 m, wspinanie 6 m STOPIEŃ ZRANIENIA O O O O KW k10 x ½ twojego poziomu Zwiadowcy UMIEJĘTNOŚCI Skradanie się +6 NIEWRAŻLIWOŚĆ NA OBRAŻENIA radioaktywne, od trucizny ZMYSŁY Ślepowidzenie 9 m, Pasywna Percepcja 13 ZDOLNOŚCI Kopacz. Kiedy zakopuje się w piachu lub w ziemi, nie prowokuje ataków okazyjnych. Pajęcza wspinaczka. Może chodzić po każdej chropowatej powierzchni, nawet do góry nogami. Udźwig. Użytkowy: 16 kg. Maksymalny: 32 kg. AKCJE Ukąszenie. Atak wręcz: +4 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 6 (1k4 + 4) kłute. UMIEJĘTNOŚCI Atletyka +6 ZMYSŁY Noktowizja 18 m, Pasywna Percepcja 12 ZDOLNOŚCI Doskonałe zmysły. Ma Ułatwienie w Testach Mądrości (Percepcja) opartych na węchu i słuchu. Współpraca. Jeśli w zasięgu do 1,5 metra od przeciwnika znajduje się przytomny sojusznik, otrzymuje Ułatwienie do Testów Ataku wręcz. Udźwig. Użytkowy: 180 kg. Maksymalny: 360 kg. AKCJE Atak kończyną. Atak wręcz: +4 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 10 (2k6 + 4) obuchowe i trafiony cel otrzymuje stan Powalenie, jeśli jest rozmiaru średniego lub mniejszego."
+        },
+        {
+          "name": "OSWAJANIE ZWIERZĄT",
+          "action": null,
+          "text": "Znajdujesz zmutowanego zwierzaka i sprawiasz, żeby łaził za tobą i wykonywał twoje polecenia. W czasie walki działa natychmiast po twojej turze, jeśli przeznaczysz swoją Akcję Bonusową na wydanie mu polecenia. Oswojone zwierzę wykonuje pełny zakres swoich akcji i walczy do utraty przytomności. Jeśli nie otrzyma żadnego polecenia, nie przemieszcza się i używa akcji Unikanie. Oswajanie zwierzęcia. Jeśli nie posiadasz żadnego oswojonego zwierzęcia, możesz poświęcić 24 godziny na szukanie odpowiedniego kandydata. Rzuć 1k6, żeby dowiedzieć się, jakie stworzenie znajdujesz (1-2: zmutowany owad, 3-4: zmutowany ssak, 5-6: zmutowany gad). Jest to zwykle osobnik słaby, ranny lub odtrącony przez swoje stado. Czas leczenia i oswajania trwa 3 dni. Oswojonemu zwierzęciu musisz nadać imię i nie możesz go nikomu sprzedać ani oddać. Musisz mu zapewniać wodę i pożywienie. 000 99"
+        }
+      ]
+    },
+    "SĘDZIA": {
+      "proficiencies": "Otrzymujesz biegłość w umiejętności Śledztwo i Zastraszanie oraz biegłość w jednym dowolnym zestawie narzędzi. Zyskujesz biegłość w jednej wybranej kategorii broni.",
+      "abilities": [
+        {
+          "name": "JEDEN Z NAS",
+          "action": null,
+          "text": "Nie musisz się za każdym razem tłumaczyć miejscowym stróżom prawa, kiedy ubijesz jakiegoś gangusa lub złodzieja. Nie tracisz czasu na dyskusje, mówisz, że jesteś z „policji” i że to było konieczne, a oni tylko kiwają głowami. Jesteś jednym z nich. Dodatkowo, kiedy próbujesz przekonać do czegoś lokalnych stróżów prawa, otrzymujesz Ułatwienie w testach Wpływania."
+        },
+        {
+          "name": "RZUĆ BROŃ I GLEBA!",
+          "action": "B",
+          "text": "Siła twojego głosu potrafi zmusić największego cwaniaka do upuszczenia broni. W Akcji Bonusowej możesz krzyknąć polecenie do wybranego człowieka w zasięgu 9 metrów i zmusić go do poddania się. Przeciwnik wykonuje Rzut Obronny na Mądrość o ST równym 8 plus twój modyfikator Charyzmy i Premia Biegłości. Porażka w teście oznacza, że natychmiast upuszcza broń, kładzie się na ziemię i jest pod wpływem stanu Przerażenie do końca twojej następnej tury."
+        },
+        {
+          "name": "PARTNER",
+          "action": null,
+          "text": "Wierny uczeń lub ulubione zwierzę to idealni partnerzy Sędziego. W tym świecie nikt nie przetrwa samotnie. Twój partner ma imię, wykonuje twoje polecenia, nawet walczy u twego boku, jeśli tylko potrafi. Może jednak zginąć, a wtedy będziesz szukać nowego. Sędzia zwykle ciągnie ze sobą młodego człowieka, który chce nauczyć się fachu… albo psa. Partner ma swoją turę zawsze po twojej turze. Nie może dziaSIŁ ZRC KON INT MDR CHA 14 (+2) 14 (+2) 18 (+4) 4 (-3) 12 (+1) 4 (-3) ZMUTOWANY GAD Średnie zwierzę TT: 12 plus twoja Premia Biegłości INICJATYWA +2 (12) PW: 6 plus 10 x twój modyfikator Mądrości SZYBKOŚĆ: 9 m, pływanie 18 m STOPIEŃ ZRANIENIA O O O O KW k8 x ½ twojego poziomu Zwiadowcy. UMIEJĘTNOŚCI Percepcja +3 ZMYSŁY Termowizja 18 m, Pasywna Percepcja 13 ZDOLNOŚCI Ziemnowodny. Potrafi oddychać zarówno na lądzie, jak i pod wodą. Udźwig. Użytkowy: 70 kg. Maksymalny: 140 kg. AKCJE Ugryzienie. Atak wręcz: +2 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 5 (1k6 + 2) kłute. Trafiona istota musi zdać RO na Kondycję o ST 10, inaczej zostanie Zatruta na 1 minutę. Cel wykonuje ponowny RO na końcu swojej tury. 000 100KLASY LUDZKI PARTNER Tworzysz partnera na czystej karcie postaci. Cechy: Wartości Cech Bazowych do przydzielenia: 14,14,12,12,10,8 lub 24 punkty do dowolnego rozdzielenia. Pochodzenie: Otrzymuje Pochodzenie zgodne z miejscem jego werbunku. Punkty Wytrzymałości. 5 x twój poziom Zwiadowcy. Kości Wytrzymałości partnera to k6 i ma ich tyle, ile ty masz poziomów Zwiadowcy. Wyszkolenie w pancerzu: Może korzystać z tych pancerzy, w których ty masz wyszkolenie. Premia Biegłości: +2 (nie rośnie). Rzuty Obronne: Ma biegłość w dwóch RO wybranych przez ciebie. Atak: Może korzystać z każdej broni, w której masz biegłość. Obrażenia. Zależne od broni i jego modyfikatorów Cech Bazowych. Sztuczki. Zna jedną, wybraną przez ciebie Sztuczkę, której wymagania spełnia. Umiejętności. Ma biegłość w dwóch wybranych przez ciebie umiejętnościach lub zestawach narzędzi. Śmierć: Umiera na takich samych zasadach, jak BG, czyli stosuje Stopnie Zranienia i korzysta z Rzutów Przeciw Śmierci. łać samodzielnie, więc w swojej Akcji Bonusowej wydajesz mu komendę. Jeśli nie wydasz mu żadnego polecenia, unika walki, broni się akcją Unikanie i szuka osłony. Szukanie partnera. Jeśli nie masz partnera, możesz poświęcić 24 godziny na szukanie odpowiedniego kandydata. Na zbłąkanego kundla lub pełnego ideałów człowieka natkniesz się zarówno w mieście, jak i w dowolnej, zabitej dechami dziurze. Partnera nie możesz nikomu odstąpić (lub sprzedać w przypadku psa) oraz musisz mu zapewnić wodę i pożywienie."
+        }
+      ]
+    },
+    "ZABÓJCA MASZYN": {
+      "proficiencies": "Otrzymujesz biegłość w umiejętności Technika i jedną wybraną biegłość w narzędziach. Jeśli masz już biegłość w umiejętności Technika, otrzymujesz w niej Specjalizację. Zyskujesz biegłość w jednej wybranej kategorii broni oraz wyszkolenie w ciężkich pancerzach.",
+      "abilities": [
+        {
+          "name": "EMITER EMP",
+          "action": null,
+          "text": "Jeśli wydasz 100 gambli na surowce i poświęcisz 100 godzin pracy, to zbudujesz ciężką, nieporęczną broń wyspecjalizowaną w niszczeniu maszyn. Emiter strzela impulsem elektromagnetycznym, który zakłóca działanie lub niszczy niemal każdą maszynę. Nie działa na istoty żywe i urządzenia, które nie używają mikroprocesorów. Emiter EMP ładuje się prądem elektrycznym 230 V, a akumulator starcza na 6 wystrzałów. Ta broń ignoruje TT pochodzącą z opancerzenia maszyny. Tylko Zabójca Maszyn jest biegły w używaniu tej specyficznej broni. Nazwa: Emiter EMP Tryb ognia: Pojedynczy Magazynek: 6 Obrażenia: 8k6 od elektryczności Zasięg: 9/15 metrów Właściwości: Ładowanie Porażenie: Trafiony cel wykonuje Rzut Obronny na Kondycję o ST 15 inaczej otrzymuje stan Obezwładnienie do końca twojej następnej tury Koszt produkcji: 20 MK, 40 CE, 40 CZ"
+        },
+        {
+          "name": "EMPIRYK",
+          "action": "R",
+          "text": "Nikt nie wie, jak to robisz, ale potrafisz przewidzieć zachowanie każdej maszyny. Jeśli zostajesz trafiony przez maszynę, możesz użyć Reakcji, żeby wobec tego ataku podnieść swoją TT o wartość twojej Premii Biegłości. Zyskujesz również Ułatwienie w Rzutach Obronnych na efekty wywoływane przez maszyny."
+        },
+        {
+          "name": "SŁABY PUNKT",
+          "action": "A",
+          "text": "Każda maszyna ma swój słaby punkt. Wystarczy w niego trafić, żeby idealnie spasowane trybiki, przekładnie, pasy transmisyjne i kable zasilające szlag trafił. Jeśli w czasie walki z maszyną lub tuż przed nią, poświęcisz akcję na Test Inteligencji (Technika) o ST zależnym od jej rozmiaru, MG może ci zdradzić 3 wybrane współczynniki wskazanej maszyny. Mała i malutka (ST 5), średnia (ST 10), duża (ST 15), wielka (20), ogromna (25). Sukces oznacza również, że możesz raz w rundzie zaatakować ją z Ułatwieniem. ZABÓJCA MASZYN Siwobrody weteran zarzucił na plecy starą kapotę maskującą i zakamuflował wierną Light Fifty, załadowaną amunicją przeciwpancerną. Kilkanaście godzin spędzonych w radioaktywnym piachu w końcu się opłaciło. Cel wyjechał z bazy w licznej obstawie. Juggernaut ma tylko jeden słaby punkt. Karabin szarpnął jak diabli, a powietrzem wstrząsnęła eksplozja. Cel zlikwidowany. Pora się zwijać. 000 101"
+        }
+      ]
+    }
+  }
+}

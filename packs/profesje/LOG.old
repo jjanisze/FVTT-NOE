@@ -1,0 +1,7 @@
+2026/08/16-14:54:16.136 98ac Recovering log #33
+2026/08/16-14:54:16.139 98ac Delete type=0 #33
+2026/08/16-14:54:16.139 98ac Delete type=3 #31
+2026/08/16-14:54:22.442 76cc Level-0 table #38: started
+2026/08/16-14:54:22.442 76cc Level-0 table #38: 0 bytes OK
+2026/08/16-14:54:22.443 76cc Delete type=0 #36
+2026/08/16-14:54:22.445 76cc Manual compaction at level-0 from '!items!8ukJ8ADpxLvL2rEk' @ 72057594037927935 : 1 .. '!items!twc9PAhYDWNVhooo' @ 0 : 0; will stop at (end)

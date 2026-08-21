@@ -22,3 +22,6 @@ Thumbs.db
 
 # FoundryVTT runtime artifacts
 *.lock
+# LevelDB compendium lock (bare filename, held by the process with the pack
+# open — Windows denies read access while FVTT is running). Not content.
+packs/*/LOCK

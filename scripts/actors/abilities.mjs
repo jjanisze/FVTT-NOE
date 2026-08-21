@@ -1,3 +1,5 @@
+import { CLASS_FEATURES } from "../config/class-features-data.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 const ABILITIES_FLAG = "abilities";
 
@@ -121,11 +123,49 @@ export function getTokenAbilityFlags(tokenDocument) {
   return tokenDocument?.getFlag?.(MODULE_ID, ABILITIES_FLAG) ?? {};
 }
 
+/**
+ * Legacy key -> real class/profession feature id.
+ *
+ * Built from `class-features-data.mjs`, where the authoritative features carry a
+ * `legacyAbilityKey`. A real compendium feature on the actor is the strongest
+ * possible evidence, so it outranks every flag below.
+ *
+ * Keys with no counterpart yet (the Sztuczki — Grad ołowiu, Szturmowiec, …) simply
+ * never appear here, so the existing flag layer keeps serving them unchanged until
+ * the sztuczki pack is populated.
+ */
+let _legacyIndex = null;
+function _getLegacyIndex() {
+  if (_legacyIndex) return _legacyIndex;
+  _legacyIndex = new Map();
+  try {
+    for (const f of Object.values(CLASS_FEATURES)) {
+      if (f.legacyAbilityKey) _legacyIndex.set(f.legacyAbilityKey, f.id);
+    }
+  } catch (err) {
+    console.warn(`${MODULE_ID} | legacy ability index unavailable`, err);
+  }
+  return _legacyIndex;
+}
+
+/** Does the actor own the real class/profession feat backing this legacy key? */
+function _actorHasClassFeature(actor, abilityKey) {
+  const featureId = _getLegacyIndex().get(abilityKey);
+  if (!featureId) return false;
+  return Array.from(actor?.items ?? [])
+    .some(item => item.getFlag(MODULE_ID, "abilityId") === featureId);
+}
+
 export function getResolvedAbility(actor, abilityKey, { tokenDocument } = {}) {
   const definition = ABILITY_DEFINITIONS[abilityKey];
   if (!definition) return { enabled: false, source: "unknown" };
 
   const resolvedToken = _resolveTokenDocument(actor, tokenDocument);
+
+  // A real class/profession feature outranks every manual flag — but an explicit
+  // token or actor override still wins, so the GM can switch it off situationally.
+  const hasFeature = _actorHasClassFeature(actor, abilityKey);
+
   const tokenValue = getTokenAbilityFlags(resolvedToken)[abilityKey];
   if ((tokenValue === true) || (tokenValue === false)) {
     return { enabled: tokenValue, source: "token", tokenDocument: resolvedToken };
@@ -134,6 +174,10 @@ export function getResolvedAbility(actor, abilityKey, { tokenDocument } = {}) {
   const actorValue = getActorAbilityFlags(actor)[abilityKey];
   if ((actorValue === true) || (actorValue === false)) {
     return { enabled: actorValue, source: "actor", tokenDocument: resolvedToken };
+  }
+
+  if (hasFeature) {
+    return { enabled: true, source: "feature", tokenDocument: resolvedToken };
   }
 
   const itemFallback = _actorHasNamedAbilityItem(actor, definition.aliases ?? []);
@@ -274,6 +318,7 @@ function _formatAbilitySource(source) {
   switch (source) {
     case "token": return "pionek";
     case "actor": return "aktor";
+    case "feature": return "zdolność klasowa";
     case "item": return "item";
     default: return "brak";
   }
