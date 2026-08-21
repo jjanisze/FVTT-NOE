@@ -324,12 +324,15 @@ function _buildCheckActivity(kit, { name, dc }) {
 }
 
 /**
- * Create (or refresh) all toolkit `tool` items on the given actor (the Zbrojownia master).
- * Upserts by `system.type.baseItem`; rebuilds activities on every run.
- * @param {Actor} [actor]  Defaults to the flagged Zbrojownia actor.
+ * Create (or refresh) toolkit `tool` items on the given actor (by default the
+ * Zbrojownia master). Upserts by `system.type.baseItem`; rebuilds activities on
+ * every run.
+ * @param {Actor} [actor]           Defaults to the flagged Zbrojownia actor.
+ * @param {object} [options]
+ * @param {string[]} [options.only] Restrict to these toolkit ids (default: all).
  * @returns {Promise<{created:number, updated:number}>}
  */
-export async function createToolkits(actor) {
+export async function createToolkits(actor, { only } = {}) {
   actor ??= game.actors.find(a => a.getFlag(MODULE_ID, "isZbrojownia"));
   if ( !actor ) {
     ui.notifications.error("Brak aktora Zbrojownia (flaga isZbrojownia).");
@@ -341,6 +344,7 @@ export async function createToolkits(actor) {
 
   for ( const kit of TOOLKITS ) {
     if ( kit.skip ) continue;
+    if ( only && !only.includes(kit.id) ) continue;
 
     const data = buildToolkitItemData(kit);
     let item = actor.items.find(i => i.type === "tool" && i.system.type?.baseItem === kit.id);

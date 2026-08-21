@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <g style="fill: var(--icon-fill, #fff);">
+    <!-- Trefoil: three blades at 120 deg around a central hub -->
+    <path d="M256 20c-30 0-58 8-82 22l70 121c4-2 8-3 12-3s8 1 12 3l70-121c-24-14-52-22-82-22z"/>
+    <path d="M140 66c-26 15-48 36-63 62-15 26-23 55-23 84h140c0-5 1-9 3-13 2-4 5-7 9-10L140 66z"/>
+    <path d="M372 66L296 189c4 3 7 6 9 10 2 4 3 8 3 13h140c0-29-8-58-23-84-15-26-37-47-63-62z"/>
+    <!-- Central hub -->
+    <circle cx="256" cy="256" r="52"/>
+    <!-- Lower blades mirrored to close the trefoil -->
+    <path d="M54 292c0 29 8 58 23 84 15 26 37 47 63 62l70-121c-4-3-7-6-9-10-2-4-3-8-3-13H54z"/>
+    <path d="M308 294c0 5-1 9-3 13-2 4-5 7-9 10l70 121c26-15 48-36 63-62 15-26 23-55 23-84H308z"/>
+    <path d="M244 352l-70 121c24 14 52 22 82 22s58-8 82-22l-70-121c-4 2-8 3-12 3s-8-1-12-3z"/>
+  </g>
+</svg>

@@ -14,10 +14,32 @@
  * 
  * Data stored in module flags:
  *   flags.neuroshima-2026-overrides.zranienie = { level: 0-4 }
+ *
+ * ## Single store, three views
+ *
+ * That flag is the **only** place the wound level is kept. Everything else derives
+ * from it and writes back through `setZranienie` / `applyZranienie`:
+ *
+ *   1. the Active Effect carrying the speed penalty (`_syncZranieniEffect`),
+ *   2. the four pips on the character and NPC sheets (`_buildZranieniRow`),
+ *   3. the status icon on the token (registered in `config/conditions.mjs`, cycled
+ *      by `actors/levelled-conditions.mjs`).
+ *
+ * This mirrors how dnd5e keeps Wyczerpanie honest — one store, N derived views, one
+ * write funnel — except that dnd5e stores the level on the effect and derives the
+ * actor attribute, while this stores it on the actor and derives the effect. Either
+ * direction is fine; having two stores is not.
+ *
+ * The effect is created with the **static id dnd5e assigns to the `zranienie` status**
+ * so that a stray `toggleStatusEffect("zranienie")` from a macro or another module
+ * collides with this document instead of quietly creating a second, unmanaged wound
+ * effect beside it.
  */
 
 import { addExhaustion } from "../config/exhaustion.mjs";
+import { critSkipsZranienie } from "./crit-riders.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
+import { registerHudLevelled } from "../actors/levelled-conditions.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -54,6 +76,34 @@ export function registerZranienie() {
 
   // Fix death saves: remove exhaustion penalty (not a d20 test per Neuroshima rules)
   Hooks.on("dnd5e.preRollDeathSave", onPreRollDeathSave);
+
+  // Token-HUD cycling for the wound pips' third view. Deliberately wired to
+  // `setZranienie`, the same writer the sheet pips use, so a HUD click and a pip
+  // click do exactly the same thing — including *not* firing the death check or the
+  // auto-Wyczerpanie, which belong to `applyZranienie` (damage-driven wounds) and
+  // never fired from manual pip edits either.
+  registerHudLevelled("zranienie", {
+    label: "Stopień Zranienia",
+    max: 4,
+    get: getZranienieLvl,
+    set: setZranienie
+  });
+
+  // Backfill, as the disease and levelled-condition layers already do. A wounded
+  // actor whose effect went missing — deleted before the delete-sync hook existed,
+  // or set by an older code path that only wrote the flag — silently stops paying
+  // the −4,5 m and now would also show no token icon. Re-deriving the effect from
+  // the flag costs nothing when they already agree.
+  Hooks.once("ready", async () => {
+    if (!game.user.isGM) return;
+    for (const actor of game.actors) {
+      const level = getZranienieLvl(actor);
+      if (level <= 0) continue;
+      if (actor.effects.some(e => e.getFlag(MODULE_ID, "zranieniEffect"))) continue;
+      console.warn(`${MODULE_ID} | ${actor.name}: Zranienie ${level} bez efektu — odtwarzam.`);
+      await _syncZranieniEffect(actor, level);
+    }
+  });
 
   console.log("Neuroshima 5e | Zranienie system registered");
 }
@@ -103,6 +153,12 @@ async function onRollDamage(item, roll, data) {
   // Check if the originating attack was a critical hit
   if (!data?.isCritical) return;
 
+  // Some Bestiariusz crit riders replace the wound rather than adding to it —
+  // Palcożerca says outright "Atak nie powoduje otrzymania Stopnia Zranienia".
+  // `combat/crit-riders.mjs` owns that rider and applies its own effect.
+  const attacker = item?.actor ?? item?.parent;
+  if (attacker && critSkipsZranienie(attacker)) return;
+
   // Get the target(s) from the roll
   const targets = data?.targets ?? [];
   for (const target of targets) {
@@ -120,8 +176,13 @@ async function onRollDamage(item, roll, data) {
 async function onDeleteActiveEffect(effect, options, userId) {
   if (!game.user.isGM) return;
   if (!effect.getFlag(MODULE_ID, "zranieniEffect")) return;
+  // A migration swap deletes the old effect only to recreate it under the static id;
+  // treating that as a heal would wipe the level the recreate is about to re-render.
+  if (options?.[MODULE_ID]?.zranienieMigration) return;
   const actor = effect.parent;
   if (!actor || !(actor instanceof Actor)) return;
+  // Already 0 — nothing to sync, and writing anyway would re-enter _syncZranieniEffect.
+  if ((actor.getFlag(MODULE_ID, "zranienie")?.level ?? 0) === 0) return;
   // Reset wound flag to 0 without trying to delete the (already gone) effect
   await actor.setFlag(MODULE_ID, "zranienie", { level: 0 });
 }
@@ -221,7 +282,7 @@ export async function setZranienie(actor, level) {
 /*  Active Effect Management                     */
 /* -------------------------------------------- */
 
-const ZRANIENIE_ICON = "systems/dnd5e/icons/svg/statuses/bleeding.svg";
+const ZRANIENIE_ICON = "systems/dnd5e/icons/svg/statuses/bloodied.svg";
 
 /**
  * Build the description text for a given wound level.
@@ -247,7 +308,11 @@ function _buildZranieniDescription(level) {
  * @param {number} level 0-4 (0 = remove effect)
  */
 async function _syncZranieniEffect(actor, level) {
-  const existing = actor.effects.find(e => e.getFlag(MODULE_ID, "zranieniEffect"));
+  const staticId = _zranienieStaticId();
+  // Prefer the static id; fall back to the ownership flag so effects created before
+  // the status existed are still found (and, below, migrated onto the static id).
+  const existing = (staticId ? actor.effects.get(staticId) : null)
+    ?? actor.effects.find(e => e.getFlag(MODULE_ID, "zranieniEffect"));
 
   if (level <= 0) {
     // Remove effect if wound is healed
@@ -275,17 +340,42 @@ async function _syncZranieniEffect(actor, level) {
     name: `Zranienie: ${info.label}`,
     img: ZRANIENIE_ICON,
     changes,
+    // Lights the token icon. The status id is what makes this effect and the HUD
+    // button the same thing rather than two things that look alike.
+    statuses: ["zranienie"],
     description: _buildZranieniDescription(level),
     flags: {
       [MODULE_ID]: { zranieniEffect: true }
     }
   };
 
-  if (existing) {
+  if (existing && (!staticId || existing.id === staticId)) {
     await existing.update(effectData);
-  } else {
-    await actor.createEmbeddedDocuments("ActiveEffect", [effectData]);
+    return;
   }
+
+  // Either nothing existed, or an effect from before the status did — one created
+  // with a random id cannot be given the static one, so it is replaced. The delete
+  // would normally zero the flag via onDeleteActiveEffect; `zranienieMigration`
+  // tells that handler this is a swap, not a heal.
+  if (existing) {
+    await existing.delete({ [MODULE_ID]: { zranienieMigration: true } });
+  }
+  await actor.createEmbeddedDocuments(
+    "ActiveEffect",
+    [staticId ? { ...effectData, _id: staticId } : effectData],
+    { keepId: !!staticId }
+  );
+}
+
+/**
+ * The id dnd5e assigns to the `zranienie` status when it builds `CONFIG.statusEffects`
+ * (`staticID("dnd5e" + id)`). Read rather than hardcoded, so it cannot drift from
+ * whatever the system actually generates.
+ * @returns {string|null} null before `i18nInit`, or if the status is not registered.
+ */
+function _zranienieStaticId() {
+  return CONFIG.statusEffects?.find(s => s.id === "zranienie")?._id ?? null;
 }
 
 /* -------------------------------------------- */

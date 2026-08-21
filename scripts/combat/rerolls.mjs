@@ -25,7 +25,9 @@ import { addExhaustion } from "../config/exhaustion.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
-const MAX_FUKSY = 3;
+
+/** RAW cap: a character can hold at most three Fuksy. */
+export const MAX_FUKSY = 3;
 
 /* -------------------------------------------- */
 /*  Registration                                 */

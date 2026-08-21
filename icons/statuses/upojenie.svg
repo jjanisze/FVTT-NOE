@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <g style="fill: var(--icon-fill, #fff);">
+    <!-- Bottle: neck, shoulder, body -->
+    <path d="M222 32h68v86c0 14 4 22 13 32l34 39c14 16 21 33 21 55v210c0 15-12 26-26 26H180c-14 0-26-11-26-26V244c0-22 7-39 21-55l34-39c9-10 13-18 13-32V32zm34 40h-14v50c0 24-8 41-23 58l-34 39c-8 9-11 17-11 29v10h164v-10c0-12-3-20-11-29l-34-39c-15-17-23-34-23-58V72h-14z"/>
+    <!-- Liquid level, tilted -->
+    <path d="M174 300h164v154c0 5-4 8-9 8H183c-5 0-9-3-9-8V300z" opacity="0.55"/>
+    <!-- Cork -->
+    <path d="M214 0h84v34h-84z"/>
+  </g>
+</svg>
