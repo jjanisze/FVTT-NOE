@@ -150,8 +150,14 @@ export const CHRONIC_DISEASES = Object.freeze({
 
 /**
  * Popular / acquired diseases (str. 110–111). These are not on the k8 table and
- * have their own save cadence, so they carry `saveDC` / `saveNote` instead of a
- * stage ladder driven by the standard sunset rule.
+ * have no stage ladder, so the standard sunset worsening does not apply to them.
+ *
+ * `dailySave` is the ones the sunset routine *does* roll: `{ dc, success }`, where
+ * `success` is `"chronic"` (becomes a random choroba przewlekła) or `"cured"`.
+ * A failure costs a poziom Wyczerpania and the day's rest benefits. Diseases without
+ * it — Choroba zakaźna, Death Breath — have no daily cadence to automate: their saves
+ * are a contagion check and a one-way transformation, both GM calls. `saveNote` stays
+ * as prose on the panel either way.
  */
 export const COMMON_DISEASES = Object.freeze({
   popromienna: {
@@ -159,7 +165,7 @@ export const COMMON_DISEASES = Object.freeze({
     medicine: "RadOff",
     medicineAlt: ["RadMov"],
     onset: "Po 24 godzinach",
-    saveDC: 20,
+    dailySave: { dc: 20, success: "chronic" },
     saveNote: "RO na Kondycję ST 20 na koniec dnia. Sukces: choroba popromienna zamienia się "
       + "w chorobę przewlekłą (wylosuj którą). Porażka: brak korzyści z Długiego i Krótkiego "
       + "odpoczynku oraz poziom Wyczerpania.",
@@ -172,7 +178,7 @@ export const COMMON_DISEASES = Object.freeze({
     label: "Szczurza gorączka",
     medicine: "Antybiotyk",
     onset: "Po 24 godzinach",
-    saveDC: 15,
+    dailySave: { dc: 15, success: "cured" },
     saveNote: "RO na Kondycję ST 15 na koniec dnia. Sukces: wyleczenie. Porażka: brak korzyści "
       + "z Długiego i Krótkiego odpoczynku oraz poziom Wyczerpania.",
     stages: [
@@ -183,7 +189,6 @@ export const COMMON_DISEASES = Object.freeze({
   zakazna: {
     label: "Choroba zakaźna",
     medicine: "Antybiotyk",
-    saveDC: 10,
     saveNote: "Przebywanie w pomieszczeniu z zarażonym: RO na Kondycję ST 10 albo zarażenie.",
     stages: [
       "Antybiotykoterapia trwająca co najmniej 10 dni leczy chorobę. Po 3 dniach efekty znikają, "
@@ -194,7 +199,6 @@ export const COMMON_DISEASES = Object.freeze({
     label: "Death Breath",
     medicine: "",
     onset: "Po 1k4 godzinach",
-    saveDC: 10,
     saveNote: "RO na Kondycję ST 10, inaczej w ciągu kilku godzin przemiana w zombie.",
     stages: [
       "Wirus przenosi się przez kontakt z krwią lub śliną zarażonego. Lekarstwo: brak. Zakażonemu "
@@ -221,9 +225,27 @@ export function diseaseStages(entry) {
   return def?.stages ?? entry.stages ?? [];
 }
 
+/**
+ * Actor flag holding the day counter value on which a disease denies rest.
+ * Written by the sunset routine when an acquired disease's RO fails, read by the
+ * rest hooks in `actors/disease-effects.mjs`. A stale value is harmless: the day
+ * counter only ever moves forward.
+ */
+export const NO_REST_FLAG = "noRestDay";
+
 /** True when the disease has a stage ladder and so participates in the sunset RO. */
 export function hasStageLadder(entry) {
   return diseaseStages(entry).length > 1;
+}
+
+/** The end-of-day RO this disease rolls, if any. Custom entries never have one. */
+export function dailySaveFor(entry) {
+  return getDisease(entry?.key)?.dailySave ?? null;
+}
+
+/** Chronic disease keys, in k8 order — for rolling a replacement on the table. */
+export function chronicKeys() {
+  return Object.entries(CHRONIC_DISEASES).sort((a, b) => a[1].roll - b[1].roll).map(([key]) => key);
 }
 
 /** Options for the "select a disease" dropdown, grouped for an <optgroup> render. */

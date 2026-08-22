@@ -32,6 +32,15 @@
  * - `fallMultiplier` Multiplies Spadanie damage (see `combat/falling.mjs`).
  * - `manual`      Prose the system deliberately does NOT enforce, shown in the
  *                 panel so it is obvious what is still the GM's job.
+ *
+ * ## Invariant: a stage is never milder than the one below it
+ * Only one stage's effect is live at a time, so each entry states the *total* at that
+ * stage rather than an increment. The rulebook text does not: it often describes the new
+ * symptom and stays silent about what obviously still hurts, which read literally would
+ * cure a haemorrhaging character's back pain as they got worse. Where a stage's text does
+ * not revoke an earlier penalty, that penalty is repeated here. Losing a *benefit* on the
+ * way up (Paranoja's Ułatwienie, Szaleństwo's Ułatwienie w Zastraszaniu) is not a violation
+ * — that is the disease getting worse.
  */
 
 // CONST.ACTIVE_EFFECT_MODES, spelled out: this module is imported by the pack
@@ -87,7 +96,9 @@ export const DISEASE_EFFECTS = Object.freeze({
       attack: "str"
     },
     2: {
-      changes: [...allChecks(), speedZero],
+      // "Utrudnienie we wszystkich Testach" — Testy Cech, Ataku i RO alike.
+      changes: [...allChecks(), ...allSaves(), speedZero],
+      attack: "all",
       statuses: ["prone"],
       manual: "Powalenie utrzymuje się, póki zdrowie się nie poprawi."
     }
@@ -108,14 +119,14 @@ export const DISEASE_EFFECTS = Object.freeze({
       changes: [{ key: "system.attributes.senses.darkvision", mode: UPGRADE, value: "18" }],
       conditional: {
         label: "na słońcu",
-        tick: { formula: "1d4", type: "bludgeoning", period: "minutę" }
+        tick: { formula: "1d4", type: "light", period: "minutę" }
       }
     },
     2: {
       changes: [{ key: "system.attributes.senses.darkvision", mode: UPGRADE, value: "18" }],
       conditional: {
         label: "w świetle",
-        tick: { formula: "1d6", type: "bludgeoning", period: "minutę" }
+        tick: { formula: "1d6", type: "light", period: "minutę" }
       }
     }
   },
@@ -132,6 +143,7 @@ export const DISEASE_EFFECTS = Object.freeze({
     2: {
       changes: [
         { key: "system.abilities.int.value", mode: OVERRIDE, value: "2" },
+        check("cha"),
         { key: "system.traits.ci.value", mode: ADD, value: "frightened" }
       ],
       manual: "W walce używasz tylko broni improwizowanej lub ataków bez broni."
@@ -146,6 +158,7 @@ export const DISEASE_EFFECTS = Object.freeze({
       rage: { chance: 50 }
     },
     2: {
+      changes: [check("int"), check("cha")],
       rage: { chance: 100 },
       manual: "W szale atakujesz wszystkich wokół; uspokajasz się dopiero po utracie przytomności."
     }
@@ -160,7 +173,8 @@ export const DISEASE_EFFECTS = Object.freeze({
       fallMultiplier: 2
     },
     2: {
-      changes: [speedHalf],
+      changes: [check("str"), save("str"), speedHalf],
+      attack: "str",
       fallMultiplier: 4
     }
   },
@@ -172,6 +186,7 @@ export const DISEASE_EFFECTS = Object.freeze({
       changes: [check("int"), check("wis"), save("int"), save("wis"), ...wplywanie()]
     },
     2: {
+      changes: [check("int"), check("wis"), save("int"), save("wis"), ...wplywanie()],
       statuses: ["frightened"],
       manual: "Jedyną akcją, jaką możesz wykonać w walce, jest Unikanie."
     }
@@ -188,10 +203,16 @@ export const DISEASE_EFFECTS = Object.freeze({
     },
     1: {
       attack: "all",
+      conditional: {
+        label: "jako pasażer pojazdu",
+        changes: [...allChecks(), ...allSaves()],
+        attack: "all"
+      },
       manual: "Nie potrafisz przejść więcej niż 3 metry w linii prostej."
     },
     2: {
-      changes: [...allChecks(), speedZero]
+      changes: [...allChecks(), ...allSaves(), speedZero],
+      attack: "all"
     }
   }
 });

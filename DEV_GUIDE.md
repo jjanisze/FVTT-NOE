@@ -496,6 +496,47 @@ Walidator złapie literówkę w id (`unresolved grant`) i niezgodność liczby w
 
 ---
 
+## 10a. Stany stopniowane (Wyczerpanie, Zranienie, Upojenie, Skażenie)
+
+### 10a.1 Kto co posiada
+
+Tory **nie** mają wspólnego magazynu — każdy zostaje przy swoim właścicielu, a rejestr
+`HUD_CYCLE` w `actors/levelled-conditions.mjs` zbiera tylko akcesory.
+
+| Tor | Magazyn | Właściciel |
+|---|---|---|
+| Wyczerpanie | `system.attributes.exhaustion` (natywne dnd5e) + `flags.<mod>.exhaustionSources` | `config/exhaustion.mjs` |
+| Zranienie | `flags.<mod>.zranienie.level` | `combat/zranienie.mjs` |
+| Upojenie, Skażenie | `flags.<mod>.<id>` (liczba) | `actors/levelled-conditions.mjs` |
+
+Rejestracja z zewnątrz: `registerHudLevelled(id, { label, max, get, set, summary })`.
+Rejestr daje HUD-owi cykl klikania, karcie panel Stan, a tooltipom treść — właściciel
+nie musi wiedzieć o żadnym z tych trzech.
+
+### 10a.2 API
+
+```js
+const C = game.neuroshima.conditions;
+C.get(actor, "zranienie");          // 0–4, dowolny zarejestrowany tor
+C.set(actor, "zranienie", 3);       // idzie przez writer właściciela (AE, czat, VFX)
+C.adjust(actor, "upojenie", +1);
+C.tracks();                          // Map<id, LevelledTrack> — wszystkie tory
+C.drink(actor);                      // RO na Kondycję po kielichu
+C.promptRadiationSave(actor);        // wybór pasma ST → RO przeciw skażeniu
+```
+
+**Nieznane id rzuca wyjątkiem.** Wcześniej `set` po cichu zwracało 0 dla `zranienie`
+(bo sięgało tylko do magazynu flagowego tego pliku), co przy stanie 0 wygląda
+identycznie jak sukces — pułapka, która zostawiła osierocone Efekty na żywej postaci.
+
+### 10a.3 Skażenie to nie tor
+
+Jego cztery „poziomy” to **pasma ST** godzinowego RO, nie kumulujące się kary.
+W panelu Stan jest paskiem zagrożenia z trzema znacznikami oblanych rzutów; trzeci
+daje chorobę popromienną i zeruje licznik. Dlatego jako jedyny nie ma `summary`.
+
+---
+
 ## 11. Warstwa bestiariusza — pipeline i workflow
 
 ### 11.1 Źródło prawdy

@@ -28,8 +28,9 @@
  */
 
 import {
-  DISEASE_STAGES, CHRONIC_DISEASES, SUNSET_SAVE,
-  getDisease, diseaseStages, hasStageLadder, diseaseOptions
+  DISEASE_STAGES, CHRONIC_DISEASES, SUNSET_SAVE, NO_REST_FLAG,
+  getDisease, diseaseStages, hasStageLadder, diseaseOptions,
+  dailySaveFor, chronicKeys
 } from "../config/diseases-data.mjs";
 import {
   PHOBIAS, PHOBIA_SAVE, PHOBIA_CURE_STREAK, getPhobia, phobiaOptions
@@ -39,6 +40,7 @@ import {
   getMedicine, medicineKeyByName, medicinesForDisease, medicineItemData
 } from "../config/medicine-data.mjs";
 import { effectsFor } from "../config/disease-effects.mjs";
+import { addExhaustion } from "../config/exhaustion.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const PANEL_CLASS = "neuro-health-panel";
@@ -381,12 +383,57 @@ function _dosesWord(n) {
 /* -------------------------------------------- */
 
 /**
+ * Resolve one acquired disease's end-of-day RO na Kondycję.
+ *
+ * Mutates `entry` in place — the caller writes the whole list back once. A cure marks
+ * `_cured` for the caller to filter out; popromienna instead becomes a rolled choroba
+ * przewlekła, keeping the same entry id so its row on the sheet does not jump around.
+ *
+ * @param {Actor} actor
+ * @param {object} entry     The disease entry, mutated.
+ * @param {{dc: number, success: string}} daily
+ * @param {number} tomorrow  Day counter value the rest block should cover.
+ * @returns {Promise<string>}  HTML verdict for the sunset card.
+ */
+async function _rollDailySave(actor, entry, daily, tomorrow) {
+  const roll = await new Roll("1d20").evaluate();
+  const total = roll.total + (actor.system.abilities?.[SUNSET_SAVE.ability]?.save?.value ?? 0);
+
+  if (total < daily.dc) {
+    await addExhaustion(actor, "choroba", { chat: false });
+    await actor.setFlag(MODULE_ID, NO_REST_FLAG, tomorrow);
+    return `<span class="bad">oblany (${total} vs ST ${daily.dc}) — poziom Wyczerpania, `
+      + `jutro bez korzyści z odpoczynku</span>`;
+  }
+
+  if (daily.success === "cured") {
+    entry._cured = true;
+    return `<span class="good">zdany (${total}) — wyleczenie</span>`;
+  }
+
+  // "chronic": the k8 table decides which one takes its place.
+  const keys = chronicKeys();
+  const pick = await new Roll(`1d${keys.length}`).evaluate();
+  const key = keys[pick.total - 1];
+  const def = getDisease(key);
+  Object.assign(entry, {
+    key, name: def.label, stage: 0, stages: null,
+    medicine: def.medicine ?? "", itemId: null, lastDoseDay: null
+  });
+  return `<span class="good">zdany (${total})</span> — przechodzi w <em>${def.label}</em>`;
+}
+
+/**
  * Run the daily sunset check for every character with a staged disease that was
  * not dosed today, then advance the day counter.
  *
  * RAW (str. 109): RO na Kondycję ST 10 per undosed disease. Failure worsens the
  * disease by one stage; a natural 20 resets it to przewlekły; a natural 1 worsens
  * it by two. Diseases with only a "stan ogólny" never roll.
+ *
+ * Acquired diseases carrying a `dailySave` (str. 110–111) roll their own ST instead:
+ * success cures them or turns them chronic, failure costs a poziom Wyczerpania and
+ * tomorrow's rest — see the rest block in `actors/disease-effects.mjs`.
  *
  * @param {object} [options]
  * @param {Actor[]} [options.actors]  Defaults to every player-owned character.
@@ -396,12 +443,24 @@ export async function sunsetCheck({ actors } = {}) {
 
   const pool = actors ?? game.actors.filter(a => a.type === "character" && a.hasPlayerOwner);
   const lines = [];
+  const tomorrow = _today() + 1;
 
   for (const actor of pool) {
-    const entries = getChoroby(actor);
+    let entries = getChoroby(actor);
     let changed = false;
 
     for (const entry of entries) {
+      const daily = dailySaveFor(entry);
+      if (daily) {
+        if (dosedToday(entry)) {
+          lines.push(`<li><strong>${actor.name}</strong> — ${entry.name}: dawka wzięta.</li>`);
+          continue;
+        }
+        const verdict = await _rollDailySave(actor, entry, daily, tomorrow);
+        lines.push(`<li><strong>${actor.name}</strong> — ${entry.name}: ${verdict}</li>`);
+        changed = true;
+        continue;
+      }
       if (!hasStageLadder(entry)) continue;
       if (dosedToday(entry)) {
         lines.push(`<li><strong>${actor.name}</strong> — ${entry.name}: dawka wzięta.</li>`);
@@ -439,6 +498,8 @@ export async function sunsetCheck({ actors } = {}) {
       await _setFobie(actor, fobie.map(f => ({ ...f, broken: false, active: false })));
     }
 
+    // `_rollDailySave` may have cured an entry outright — drop those before saving.
+    entries = entries.filter(e => !e._cured);
     if (changed || entries.length) await _setChoroby(actor, entries);
   }
 
@@ -904,12 +965,29 @@ function _buildBlock({ title, icon, entries, rowBuilder, options, onAdd, editabl
 /*  DOM — sidebar strip                          */
 /* -------------------------------------------- */
 
+/** Rulebook stage text is one paragraph; the tooltip wants one penalty per line. */
+function _sentences(text) {
+  return String(text ?? "").trim()
+    .split(/(?<=\.)\s+(?=[A-ZĄĆĘŁŃÓŚŹŻ])/)
+    .map(s => s.trim())
+    .filter(Boolean);
+}
+
+/** Same shape as the Stan pips: bold heading, then everything that applies right now. */
+function _tipHtml(head, lines) {
+  const esc = s => foundry.utils.escapeHTML(String(s));
+  return `<strong>${esc(head)}</strong>`
+    + (lines.length ? `<ul>${lines.map(l => `<li>${esc(l)}</li>`).join("")}</ul>` : "");
+}
+
 /**
- * Compact status line under the Zranienie pips. Read-only by design — every
- * control already exists on the Biografia tab, so the strip only reports.
+ * Compact status line for the Stan panel. Read-only by design — every control already
+ * exists on the Biografia tab, so the strip only reports.
  * Returns null when the actor has nothing to report (no wasted space).
+ * @param {Actor} actor
+ * @returns {HTMLElement|null}
  */
-function _buildStrip(actor) {
+export function buildHealthStrip(actor) {
   const choroby = getChoroby(actor);
   const fobie = getFobie(actor);
   if (!choroby.length && !fobie.length) return null;
@@ -933,7 +1011,13 @@ function _buildStrip(actor) {
       + (dosedToday(entry) ? " · dawka wzięta dzisiaj" : " · dawka NIE wzięta");
     if (dosedToday(entry)) supply.classList.add("is-dosed");
     row.appendChild(supply);
-    row.dataset.tooltip = stage ? `${stage.label}: ${diseaseStages(entry)[entry.stage] ?? ""}` : "Stan ogólny";
+
+    const all = diseaseStages(entry);
+    const head = stage
+      ? `${entry.name} ${entry.stage + 1}/${all.length} — ${stage.label}`
+      : `${entry.name} — stan ogólny`;
+    row.dataset.tooltipHtml = _tipHtml(head, _sentences(all[entry.stage ?? 0]));
+    row.dataset.tooltipClass = "neuro-stan-tip";
     strip.appendChild(row);
   }
 
@@ -946,7 +1030,15 @@ function _buildStrip(actor) {
     const state = _el("span", "neuro-health-stripstate",
       entry.active ? "lęk" : entry.broken ? "przeł." : `${entry.streak ?? 0}/${PHOBIA_CURE_STREAK}`);
     row.appendChild(state);
-    row.dataset.tooltip = entry.effect;
+
+    const lines = _sentences(entry.effect);
+    if (!entry.broken) {
+      lines.push(`Zdane RO z rzędu: ${entry.streak ?? 0}/${PHOBIA_CURE_STREAK} — trzy łamią fobię`);
+    }
+    row.dataset.tooltipHtml = _tipHtml(
+      `${entry.name} — ${entry.active ? "lęk aktywny" : entry.broken ? "przełamana" : "uśpiona"}`,
+      lines);
+    row.dataset.tooltipClass = "neuro-stan-tip";
     strip.appendChild(row);
   }
 
@@ -970,7 +1062,6 @@ function _onRenderCharacterSheet(app, html) {
   const editable = actor.isOwner && app.isEditable !== false;
 
   _injectPanel(root, actor, editable);
-  _injectStrip(root, actor);
 }
 
 function _injectPanel(root, actor, editable) {
@@ -1007,19 +1098,4 @@ function _injectPanel(root, actor, editable) {
   const bottom = bio.querySelector(".bottom");
   if (bottom) bottom.before(panel);
   else bio.appendChild(panel);
-}
-
-function _injectStrip(root, actor) {
-  const stats = root.querySelector(".sidebar .stats");
-  if (!stats) return;
-
-  stats.querySelector(`.${STRIP_CLASS}`)?.remove();
-
-  const strip = _buildStrip(actor);
-  if (!strip) return;
-
-  // Sits under the Zranienie pips (zranienie.mjs inserts those before .lozenges).
-  const lozenges = stats.querySelector(".lozenges");
-  if (lozenges) stats.insertBefore(strip, lozenges);
-  else stats.appendChild(strip);
 }

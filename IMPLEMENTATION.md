@@ -12,7 +12,7 @@
 | `scripts/config/terminology.mjs` | Polskie cechy, waluta, jednostki |
 | `scripts/config/spellcasting.mjs` | Usunięcie spellcastingu |
 | `scripts/config/localization.mjs` | Fallback i18n (weryfikacja + ręczny fetch) |
-| `lang/pl.json` | 553 tłumaczeń (zagnieżdżone JSON) |
+Header whitespace — total readout (my pick)| `lang/pl.json` | 553 tłumaczeń (zagnieżdżone JSON) |
 | `scripts/config/conditions.mjs` | Stany — 14 z TABELI STANÓW + 8 zagrożeń + 5 znaczników + 3 stopniowane; usunięcie stanów fantasy |
 | `scripts/config/levelled-conditions-data.mjs` | Tabele Upojenia (4 stopnie) i Skażenia (4 poziomy, ST) |
 | `scripts/actors/levelled-conditions.mjs` | Egzekwowanie Upojenia/Skażenia + rejestr HUD dla stanów stopniowanych (też Zranienie) |
@@ -68,6 +68,8 @@
 | `scripts/migration/migrate-weapon-types.js` | Migracja istniejących broni → poprawne kategorie Neuroshimy |
 | `scripts/actors/surowce-inventory.mjs` | Panel „Surowce" w Ekwipunku — 5 typów (CH/CE/CZ/MK/MO) wyciągnięte z Używek jako osobne pule z paskiem wagi. Żywe, wpięte w `main.mjs`; dopisane do tabeli 2026-08-21, wcześniej brakowało wiersza mimo że kod istniał od dawna |
 | `scripts/actors/zbrojownia-sync.mjs` | Narzędzie GM: jeden NPC jako kanoniczna „Zbrojownia" — przycisk w nagłówku karty synchronizuje broń z jego ekwipunku do folderów w World Items |
+| `scripts/actors/sheet-shell.mjs` | Powłoka arkusza (§1.15) — podklasy `NeuroshimaCharacterSheet`/`NeuroshimaNPCSheet` (tylko `PARTS`/`TABS`), zakładka Zasoby, panel Stan, skrót ZR/WY. Rejestracja w `ready`, hook renderowania rejestrowany jako ostatni w `main.mjs` |
+| `templates/tab-zasoby.hbs` | Pusta skorupa zakładki Zasoby — wypełniana po renderze przez `sheet-shell.mjs` |
 | `styles/neuroshima.css` | CSS — post-apo visual + hide spellcasting (1365 linii, sekcje oznaczone `/* === */`, waliduj po edycji: `npm run validate:css`) |
 
 ---
@@ -378,9 +380,38 @@ Zastępuje pierwotne podejście z `PLAN_shooting_vfx.md` (Sequencer `.effect()` 
 Szczegółowy plan (pre-dig 2026-08-21: sheet class/PARTS/TABS map, wszystkie 15 istniejących
 punktów wstrzykiwania w arkusz, decyzja architektoniczna do podjęcia): `PLAN_sheet_shell.md`
 
-- [ ] Ukrycie/usunięcie elementów fantasy (spellbook, pact magic, etc.)
-- [ ] Sekcja Zranienie + Wyczerpanie na głównej karcie
-- [ ] Neuroshima-specific layout
+Wybrany wariant: **(C) Hybryda** — cienka podklasa `CharacterActorSheet`/`NPCActorSheet`
+posiada wyłącznie `PARTS` i `TABS`, całą treść nadal wstrzykują istniejące hooki `render*`.
+Rejestracja w `ready`, nie w `init`/`setup` — `DocumentSheetConfig.registerSheet` kolejkuje
+wszystko zgłoszone przed `game.ready`, więc `CONFIG.Actor.sheetClasses` jest do tego momentu puste.
+
+- [x] Ukrycie/usunięcie elementów fantasy (spellbook, pact magic, etc.)
+  - Zakładka `spells` usunięta z `PARTS`/`TABS` obu arkuszy, `bastion` usunięty z karty postaci
+  - Reguły CSS ukrywające sloty/koncentrację przepięte z `.dnd5e2.character` na `.dnd5e2.actor` —
+    dotąd wszystkie 69 BN-ów miało w pełni widoczną zakładkę czarów
+- [x] Sekcja Zranienie + Wyczerpanie na głównej karcie
+  - Panel **Stan** w pasku bocznym (obie karty): Wyczerpanie, Zranienie, Upojenie jako klikalne
+    rzędy pipsów, pod nimi rząd Skażenia (przycisk rzutu, nie tor)
+  - Poziomy czytane z rejestru levelled-conditions (`getLevelledRegistry()`), więc panel nie wie,
+    jak działa którykolwiek tor — ta sama inwersja zależności co HUD tokena
+  - Wyczerpanie na pierwszym miejscu, powiększone pipsy, każdy zabarwiony kolorem **źródła** tego
+    poziomu (`EXHAUSTION_SOURCES[key].color`); tooltip `Wyczerpanie n/6 — Kac`. Poziomy bez
+    zapisanego źródła (ustawione surowo przez MG) dostają neutralny pips
+  - Kolumna odczytu `n/max` skasowana z rzędów — pipsy niosą tę informację same, a zwolnione
+    miejsce poszło na większe pipsy Wyczerpania
+  - Tooltip pipsa wylicza **skumulowany** koszt stania na tym poziomie (tor wypełnia się
+    ciągle od lewej, więc pips *n* to zawsze suma 1..*n*): Wyczerpanie liczy z `reduction`,
+    Zranienie i Upojenie dostają go od właściciela toru przez `registerHudLevelled({ summary })`
+  - Nagłówek `♥ STAN` jako legenda na środku górnej krawędzi ramki (tło przykrywa obramowanie)
+  - Aktywne choroby i fobie przeniesione spod pipsów Zranienia na dół panelu, pod przycisk
+    Skażenia — kursywa, listwa z lewej, 9 px; sterowanie nadal na zakładce Biografia
+  - Natywne pipsy Wyczerpania (dzielone 3+3 wokół odznaki KP) ukryte — panel przejął ten tor
+  - Stary wstrzykiwacz rzędu Zranienia w `combat/zranienie.mjs` wycofany (usunięte hooki + 6 funkcji)
+- [x] Neuroshima-specific layout
+  - Nowa zakładka **Zasoby** (za Ekwipunkiem): amunicja, magazynki, ładunki, surowce przeniesione
+    z Ekwipunku po renderze — żaden z czterech wstrzykiwaczy nie wymagał zmiany
+  - Ekwipunek jako domyślna zakładka karty postaci, Akcje i cechy dla BN
+  - Polskie etykiety zakładek, nagłówek arkusza w stylistyce Neuroshimy
 
 ### 1.16 Level Progression
 - [x] Level cap 12
@@ -648,6 +679,195 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### v0.9.6 — Przegląd wszystkich chorób (2026-08-22)
+
+**Gorszy stan nie może być łagodniejszy od poprzedniego.** W danym momencie aktywny jest
+tylko jeden Active Effect na chorobę, więc każdy stan opisuje **sumę**, a nie przyrost.
+Podręcznik tak nie pisze — wymienia nowy objaw i milczy o poprzednich, co czytane
+dosłownie leczyło ból pleców w chwili, gdy zaczynał się krwotok. Brakujące kary są teraz
+wypisane wprost w każdym stanie:
+
+| Choroba | Stan | Było | Jest |
+|---|---|---|---|
+| Szaleństwo bostońskie | 2 | **żadnych kar** — najgorszy stan łagodniejszy niż średni | Utrudnienie do Testu Intelektu i Charyzmy |
+| Osteoporoza | 2 | tylko pół szybkości | + Test/RO Siły, Ataki Siłą |
+| Paranoja | 2 | tylko `frightened` | + kary Intelektu/Roztropności i Wpływania ze stanu 1 |
+| Syndrom Thurmana | 2 | tylko Intelekt = 2 | + Test Charyzmy |
+| Niewydolność krążenia | 2 | same Testy Cech | + wszystkie RO i Ataki („wszystkie Testy”) |
+| Zaburzenia błędnika | 1 | gubił warunek pasażera | warunek wrócił |
+| Zaburzenia błędnika | 2 | same Testy Cech | + wszystkie RO i Ataki |
+
+Utrata *premii* przy pogorszeniu (Ułatwienie Paranoi, Ułatwienie w Zastraszaniu przy
+Szaleństwie) nie jest złamaniem tej zasady — to właśnie choroba postępuje.
+
+**Syndrom Draculi parzy światłem.** `tick` miał typ `bludgeoning`; poparzenia słoneczne
+zadają teraz obrażenia typu `light` („Od światła”), który i tak był już w konfiguracji.
+
+**Choroby nabyte wreszcie coś robią.** `saveDC` przy chorobie popromiennej i szczurzej
+gorączce było martwą daną — nie czytał go żaden kod, a Zachód słońca pomijał te wpisy,
+bo nie mają drabinki stanów. Zastąpiło je `dailySave: { dc, success }` i Zachód słońca
+rzuca za nie RO na Kondycję:
+
+- **zdane** — szczurza gorączka mija; choroba popromienna przechodzi w losową chorobę
+  przewlekłą (k8), zachowując to samo `id` wpisu, żeby wiersz na karcie nie skakał;
+- **oblane** — poziom Wyczerpania ze źródła **Choroba** (nowy klucz, fioletowy pips)
+  i utrata korzyści z odpoczynku na następny dzień.
+
+**Odpoczynek naprawdę nie działa.** Flaga `noRestDay` trzyma numer dnia, a haki
+`dnd5e.preShortRest` / `dnd5e.preLongRest` anulują odpoczynek z komunikatem. dnd5e nie
+ma trybu „odpoczynek, który nic nie leczy”, a odpoczynek cicho nic nie robiący byłby
+gorszy niż taki, który mówi dlaczego. Flaga starzeje się sama — licznik dni idzie tylko
+do przodu.
+
+**Świadomie bez automatyki:** choroba zakaźna (RO to test zarażenia od kogoś innego)
+i Death Breath (jednorazowa przemiana w zombie). Oba mają kadencję, której system nie
+widzi; `saveNote` zostaje jako proza na panelu, żeby było widać, że to robota MG.
+
+### v0.9.5 — Jedno wejście do wszystkich torów (2026-08-22)
+
+`game.neuroshima.conditions.set(actor, "zranienie", n)` **nie robiło nic** — `setLevel`
+sięgało wyłącznie do magazynu flagowego `levelled-conditions.mjs`, a Zranienie ma swój
+własny w `combat/zranienie.mjs`. Zwracało 0, co przy stanie 0 wygląda dokładnie jak
+sukces. Kosztowało to osierocony Efekt „Zranienie: Krytyczny" na Piekarzu przy
+Szybkości 3 m i poziomie rany 0.
+
+- `get`/`set`/`adjust` idą teraz przez rejestr `HUD_CYCLE`, czyli przez writer
+  właściciela toru — ta sama ścieżka co klik w HUD i klik w pips. Efekt, czat i VFX
+  odpalają się tak samo bez względu na to, skąd przyszło wywołanie.
+- **Nieznane id rzuca wyjątkiem** z listą dostępnych. Cicha zerowa odpowiedź była tu
+  gorsza niż błąd, bo nie da się jej odróżnić od stanu czystego.
+- Nowe `C.tracks()` zwraca cały rejestr — to, z czego panel Stan i tak już korzystał
+  przez `getLevelledRegistry()`.
+- Flagowe `getLevel`/`setLevel`/`adjustLevel` przestały być eksportowane: to magazyn
+  dwóch konkretnych stanów, nie API ogólne. Granica jest teraz widoczna w kodzie.
+- `LevelledTrack` jako typedef; `registerHudLevelled` i `getLevelledRegistry` na niego
+  wskazują, więc `summary` przestało ginąć w opisach.
+
+Dokumentacja: `DEV_GUIDE.md` §10a.
+
+Pliki: `scripts/actors/levelled-conditions.mjs`, `scripts/main.mjs`.
+
+### v0.9.4 — Choroba mówi, kiedy zadziałała (2026-08-22)
+
+Utrudnienie z Efektu Aktywnego jest przy stole niewidzialne: okienko rzutu wstaje już
+ustawione i nikt nie pamięta dlaczego. Ułatwienie oczywiście pamiętają wszyscy.
+
+- Pod każdym k20, który choroba nagięła, pojawia się tag z jej nazwą i kierunkiem
+  (`Szaleństwo bostońskie: Utrudnienie`). Widzą go wszyscy, nie tylko MG — to gracz
+  potrzebuje przypomnienia.
+- Atrybucja czyta klucze `roll.mode` Efektów, więc działa dla Testów Umiejętności, Cech
+  i RO bez osobnej tabeli. Ataki korzystają z `neuroDiseasePenalty` zapisanego już wcześniej
+  przez `_onPostBuildAttackRollConfig` — flaga, która do tej pory nie miała odbiorcy.
+- Choroba dająca do tego samego rzutu i Utrudnienie, i Ułatwienie sumuje się do zera
+  i nie dostaje tagu, bo faktycznie niczego nie zmieniła.
+- Wpisy chorób i fobii w panelu Stan dostały ten sam tooltip co pipsy: pogrubiony
+  nagłówek `Nazwa 1/3 — Przewlekły` i tekst etapu rozbity na punkty. Fobia dokłada
+  licznik zdanych RO.
+
+Pliki: `scripts/actors/disease-effects.mjs`, `scripts/actors/health-panel.mjs`,
+`styles/neuroshima.css`.
+
+### v0.9.3 — Tooltipy pipsów liczą sumę kar (2026-08-22)
+
+Tor wypełnia się ciągle od lewej, więc pips *n* nigdy nie znaczy „ten jeden poziom” — znaczy
+„tyle, ile masz, stojąc na *n*”. Tooltipy mówią to wprost, jak wpisy chorób.
+
+- `registerHudLevelled` przyjmuje teraz opcjonalne `summary(level) → { title?, lines[] }`.
+  Właściciel toru zna swoje kary, panel Stan tylko je wyświetla — ta sama inwersja zależności
+  co przy `get`/`set`.
+- **Upojenie** (kumulatywne) zwraca wiersze 1..*n* z `UPOJENIE_LEVELS`, verbatim z podręcznika.
+- **Zranienie** zwraca kary z `ZRANIENIE_LEVELS` plus nazwę stopnia w nagłówku
+  (`Zranienie 2/4 — Znaczny`). `_buildZranieniDescription()` korzysta teraz z tego samego
+  źródła, więc opis w czacie i tooltip nie mogą się rozjechać.
+- **Wyczerpanie** liczy arytmetycznie z `CONFIG.DND5E.conditionTypes.exhaustion.reduction`
+  (−2/poziom do k20, −1,5 m Szybkości), więc zmiana nadpisania w `config/exhaustion.mjs`
+  automatycznie przechodzi do tooltipów. Na 6/6 dochodzi „Śmierć”.
+- **Skażenie** świadomie bez `summary` — jego poziomy to pasma ST, nie kary. Generyczna
+  implementacja daje pustą listę sama z siebie (wiersze `SKAZENIE_LEVELS` nie mają `text`),
+  więc nie ma tu żadnego wyjątku do utrzymania.
+- Tooltipy przeszły z `data-tooltip` na `data-tooltip-html` + `data-tooltip-class`, bo lista
+  wypunktowana nie mieści się w zwykłym tekście.
+
+Pliki: `scripts/actors/levelled-conditions.mjs`, `scripts/actors/sheet-shell.mjs`,
+`scripts/combat/zranienie.mjs`, `styles/neuroshima.css`.
+
+### v0.9.2 — Panel Stan jako jedyne miejsce na stan (2026-08-22)
+
+Sprzątanie po v0.9.1: skoro panel Stan istnieje, wszystko inne rozsypane po arkuszu jest
+dublem. Górna część paska bocznego wraca do dnd5e.
+
+- Pasek skrótu `WY n/6` / `ZR n/4` spod punktów wytrzymałości **usunięty** — powtarzał to,
+  co panel mówi dokładniej dwa cale niżej (`_buildGlance` skasowane).
+- Odczyt `WY n/6` z nagłówka panelu **usunięty** — pipsy już to pokazują.
+- Listwa aktywnych chorób/fobii przeniesiona z `.sidebar .stats` na dół panelu Stan, pod
+  przycisk Skażenia. `health-panel.mjs` eksportuje teraz `buildHealthStrip()`, a `_injectStrip()`
+  zniknęło — panel Stan składa ją sam. Osobna stylistyka (kursywa, listwa z lewej, tło),
+  żeby czytała się jako raport, nie kontrolka; rozmiar pisma bez zmian (9 px).
+- Nagłówek `♥ STAN` przeniesiony na środek górnej krawędzi ramki, w stylu `legend` — panel
+  i nagłówek dzielą `--neuro-stan-bg`, więc tło przykrywa obramowanie bez dobierania koloru
+  do tła arkusza. Zwolniony cały wiersz wysokości panelu.
+
+Pliki: `scripts/actors/sheet-shell.mjs`, `scripts/actors/health-panel.mjs`, `styles/neuroshima.css`.
+
+### v0.9.1 — Skażenie jako rzut, Wyczerpanie ze źródłem (2026-08-22)
+
+Rewizja panelu Stan po pierwszym kontakcie z nim. Skażenie było w nim czwartym torem pipsów,
+ale jego cztery poziomy to **pasma natężenia** — ST godzinowego RO na Kondycję, cecha miejsca,
+nie postaci. Kliknięcie trzeciego pipsa nic nie robiło i nic nie znaczyło, a prawdziwy licznik
+(oblane RO, trzy do choroby popromiennej) był w ogóle niewidoczny. Przy okazji wyszły dwa błędy.
+
+- **Skażenie przestaje być torem.** Rząd `neuro-stan-rad`: etykieta jest przyciskiem
+  (`☢ SKAŻENIE`, taśma ostrzegawcza w tle), a obok trzy nieklikalne znaczniki = oblane rzuty.
+  Kliknięcie otwiera `promptRadiationSave()` — MG wybiera pasmo (`Niski ST 10` … `Zabójczy ST 25`),
+  leci RO na Kondycję, `seqScrollText` pokazuje `ODPORNY` albo `+1 WYCZERPANIE`.
+  **ST jest podawany per rzut** — zapisany poziom `skazenie` nie jest już przez to dotykany
+  (nadal żyje: karmi HUD tokena i ikonę stanu, ale nie udaje toru na arkuszu).
+- **Poprawka: trzecia porażka nagradzała chorobę w kółko.** Warunek `failures >= 3` nigdy nie
+  zerował licznika, więc przy 4., 5., 6. porażce znów ogłaszał chorobę popromienną. Teraz choroba
+  jest przyznawana raz (ze sprawdzeniem `getChoroby`), a licznik wraca do zera.
+- **Poprawka: martwy hook tooltipów Wyczerpania.** `config/exhaustion.mjs` dopisywał źródła do
+  tooltipów **natywnych** pipsów — tych, które §1.15 ukryło CSS-em. Funkcja `onRenderActorSheet`
+  i jej rejestracja usunięte; źródła prezentuje teraz panel Stan.
+- **Wyczerpanie niesie źródło.** `EXHAUSTION_SOURCES` dostało pole `color`; panel maluje nim pipsy,
+  więc rzut oka na tor mówi, *na co* postać cierpi, a nie tylko ile tego ma.
+- Suma Wyczerpania przeniesiona do nagłówka panelu; kolumna `n/max` z rzędów zniknęła.
+
+Pliki: `scripts/actors/sheet-shell.mjs`, `scripts/actors/levelled-conditions.mjs`,
+`scripts/config/exhaustion.mjs`, `styles/neuroshima.css`.
+
+### v0.9.0 — Własna powłoka arkusza (2026-08-22)
+
+Domknięcie §1.15. Do tej pory arkusz był stockowym `dnd5e` z piętnastoma wstrzykiwaczami
+doklejającymi treść po renderze — działało, ale nikt nie kontrolował samej ramy: zakładka czarów
+zostawała, Zranienie i Wyczerpanie siedziały w dwóch osobnych rogach paska bocznego (etykieta
+`WYCZERPANIE` opisywała w praktyce pipsy Zranienia poniżej), a cztery panele zasobów tłoczyły się
+na dole Ekwipunku. Ten wpis dokłada cienką podklasę, która przejmuje `PARTS` i `TABS`, i nic więcej
+— **wariant (C) Hybryda** z `PLAN_sheet_shell.md` §2. Cała treść nadal powstaje z hooków `render*`,
+więc żaden z piętnastu istniejących wstrzykiwaczy nie wymagał zmiany.
+
+- **`actors/sheet-shell.mjs`** (nowy) — `NeuroshimaCharacterSheet` / `NeuroshimaNPCSheet` nad
+  klasami zarejestrowanymi aktualnie przez system (czytane z `CONFIG.Actor.sheetClasses`, nie
+  z globala `dnd5e`). `PARTS` kopiowane klucz po kluczu, nie przepisywane — część dodana przez
+  przyszłą aktualizację dnd5e przeżyje. Rejestracja w `ready`: `registerSheet` kolejkuje wszystko
+  zgłoszone przed `game.ready`, a dnd5e rejestruje własne arkusze w `init`, więc w `setup` rejestr
+  jest jeszcze pusty i klasa bazowa nie istnieje.
+- **Zakładka Zasoby** (`templates/tab-zasoby.hbs`) — amunicja, magazynki, ładunki wybuchowe
+  i surowce przenoszone po renderze z Ekwipunku do własnej zakładki. Ekwipunek wraca do bycia
+  listą przedmiotów.
+- **Panel Stan** — Zranienie, Wyczerpanie, Upojenie i Skażenie w jednej karcie paska bocznego,
+  na karcie postaci i BN. Poziomy przez `getLevelledRegistry()` (nowy eksport
+  `actors/levelled-conditions.mjs`), więc panel nie zna mechaniki żadnego toru. Natywne pipsy
+  Wyczerpania rozbite 3+3 wokół odznaki KP ukryte; zapis idzie w `system.attributes.exhaustion`,
+  czyli przez ten sam guard `preUpdateActor` co natywny klik.
+- **Skrót `ZR`/`WY`** pod punktami wytrzymałości — stan czyta się razem z PW, nie po scrollu.
+- **Fantasy UI na kartach BN** — reguły ukrywające czary były do tej pory scope'owane
+  `.dnd5e2.character`, więc wszystkie 69 BN-ów miało w pełni widoczną zakładkę czarów, sloty
+  i koncentrację. Przepięte na `.dnd5e2.actor`; sama zakładka wypada już z `PARTS`.
+- **Sprzątanie**: usunięty stary wstrzykiwacz Zranienia z `combat/zranienie.mjs` (2 hooki
+  i 6 funkcji budujących inline'owe style) — panel Stan go zastępuje. Naprawiony `wrapper` bez
+  `className` w `actors/magazine-inventory.mjs`, przez który kotwica `.neuro-magazine-wrapper`
+  w `actors/surowce-inventory.mjs` była martwa od początku.
 
 ### v0.8.0 — Bestiariusz, Cichy krok, porządki repo (2026-08-21)
 

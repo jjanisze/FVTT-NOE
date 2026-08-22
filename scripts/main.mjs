@@ -69,6 +69,7 @@ import { registerAmmoInventory } from "./actors/ammo-inventory.mjs";
 import { registerMagazineInventory } from "./actors/magazine-inventory.mjs";
 import { registerGrenadeInventory } from "./actors/grenade-inventory.mjs";
 import { registerSurowceInventory } from "./actors/surowce-inventory.mjs";
+import { registerSheetShell } from "./actors/sheet-shell.mjs";
 import { registerSheetPositionStability } from "./actors/sheet-position-stability.mjs";
 import { registerDamageReductionUI } from "./weapons/damage-reduction.mjs";
 import { registerWeaponAddons } from "./weapons/addons.mjs";
@@ -177,6 +178,10 @@ Hooks.once("init", () => {
   // Phase 2: Damage application UI
   registerDamageReductionUI();
 
+  // Last: its render hook relocates panels the injectors above have already built,
+  // so it must be the final renderActorSheet listener registered.
+  registerSheetShell();
+
   // Clean up activity chat card pills: remove NaN range, duration, empty strings for weapon cards
   Hooks.on("renderChatMessageHTML", (message, html) => {
     const activityType = message.flags?.dnd5e?.activity?.type;
@@ -242,7 +247,8 @@ Hooks.once("ready", () => {
   game.neuroshima.health = { ...healthApi, syncEffects: syncDiseaseEffects, bleeding: bleedingApi };
   game.neuroshima.falling = fallingApi;
 
-  // Upojenie / Skażenie — game.neuroshima.conditions.drink(actor) etc.
+  // Upojenie / Skażenie / Zranienie — game.neuroshima.conditions.drink(actor) etc.
+  // `.get/.set/.adjust` cover all three tracks, whoever owns the store.
   game.neuroshima.conditions = levelledConditionsApi;
 
   registerWeaponSounds();

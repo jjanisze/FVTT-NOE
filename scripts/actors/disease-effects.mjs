@@ -9,7 +9,11 @@
  *     to point at the reason.
  *  2. **Attack-roll disadvantage** — dnd5e has no `attack.roll.mode` field, so this
  *     rides `dnd5e.postBuildAttackRollConfig`, the same hook the weapon addons use.
- *  3. **Szał** — Szaleństwo bostońskie adds a button to eligible failed rolls.
+ *  3. **Roll attribution** — a tag under any d20 the disease bent, naming it and the
+ *     direction. Utrudnienie applied by an Active Effect is otherwise invisible at the
+ *     table: the dialog just comes up pre-set and nobody remembers why. The Ułatwienie
+ *     half, of course, everyone remembers.
+ *  4. **Szał** — Szaleństwo bostońskie adds a button to eligible failed rolls.
  *     It never fires by itself; the GM decides whether to throw the coin.
  *
  * Effects are owned entirely by this module: everything it creates carries
@@ -27,7 +31,7 @@
 
 import { effectsFor } from "../config/disease-effects.mjs";
 import { getChoroby } from "./health-panel.mjs";
-import { DISEASE_STAGES, getDisease, diseaseStages } from "../config/diseases-data.mjs";
+import { DISEASE_STAGES, NO_REST_FLAG, getDisease, diseaseStages } from "../config/diseases-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const EFFECT_FLAG = "diseaseEffect";
@@ -59,12 +63,34 @@ export function registerDiseaseEffects() {
   });
 
   Hooks.on("dnd5e.postBuildAttackRollConfig", _onPostBuildAttackRollConfig);
+  // Attribution before the szał button: both append to `.message-content`, and the
+  // reason for the roll going badly should read above the consequence.
+  Hooks.on("dnd5e.renderChatMessage", _onAnnotateRoll);
   // The listener is attached where the button is built: core's
   // `renderChatMessageHTML` fires *before* `dnd5e.renderChatMessage`, so a
   // separate binding hook would always run against a DOM without the button yet.
   Hooks.on("dnd5e.renderChatMessage", _onRenderRollMessage);
 
+  // "Brak korzyści z Długiego i Krótkiego odpoczynku" — cancelling the rest outright
+  // is the honest reading: dnd5e has no way to grant a rest that heals nothing, and a
+  // rest that silently did nothing would be worse than one that says why.
+  Hooks.on("dnd5e.preShortRest", _onPreRest);
+  Hooks.on("dnd5e.preLongRest", _onPreRest);
+
   console.log("Neuroshima 5e | Disease effects registered");
+}
+
+/**
+ * Block a rest the character's disease has taken away for the day.
+ * @param {Actor} actor
+ * @returns {boolean}  False cancels the rest.
+ */
+function _onPreRest(actor) {
+  const denied = actor.getFlag(MODULE_ID, NO_REST_FLAG);
+  if (denied !== game.settings.get(MODULE_ID, "dayCounter")) return true;
+  ui.notifications.warn(`${actor.name}: choroba nie daje odpocząć — żadnych korzyści `
+    + `z odpoczynku aż do następnego zachodu słońca.`);
+  return false;
 }
 
 /** Exposed on `game.neuroshima.health.syncEffects` for macros / one-off repairs. */
@@ -205,6 +231,99 @@ function _onPostBuildAttackRollConfig(process, config) {
     ? ADV.NORMAL        // a source of advantage and a source of disadvantage cancel
     : ADV.DISADVANTAGE;
   config.options.neuroDiseasePenalty = reasons;
+}
+
+/* -------------------------------------------- */
+/*  Roll attribution                             */
+/* -------------------------------------------- */
+
+/**
+ * Roll-mode fields a rolled d20 passed through, so a change targeting one of them
+ * can be recognised after the fact.
+ *
+ * dnd5e stores only `skillId` for a skill check, never the ability actually used,
+ * so a check rolled with a swapped ability is attributed to the skill's default.
+ * @param {object} rollData  `message.flags.dnd5e.roll`
+ * @returns {string[]}
+ */
+function _rollModeKeys(rollData) {
+  switch (rollData.type) {
+    case "skill": {
+      const abl = CONFIG.DND5E.skills?.[rollData.skillId]?.ability;
+      return [
+        `system.skills.${rollData.skillId}.roll.mode`,
+        ...(abl ? [`system.abilities.${abl}.check.roll.mode`] : [])
+      ];
+    }
+    case "tool": return [`system.tools.${rollData.toolId}.roll.mode`];
+    case "ability": return [`system.abilities.${rollData.ability}.check.roll.mode`];
+    case "save": return [`system.abilities.${rollData.ability}.save.roll.mode`];
+    default: return [];
+  }
+}
+
+/**
+ * Diseases that bent this roll, and which way. A disease granting both advantage and
+ * disadvantage to the same roll nets to zero and is dropped — it changed nothing.
+ * @returns {{name: string, mode: number}[]}
+ */
+function _rollInfluences(actor, rollData, roll) {
+  // Attack rolls never touch a roll-mode field; `_onPostBuildAttackRollConfig`
+  // already recorded its reasons on the roll, which the message persists.
+  if (rollData.type === "attack") {
+    return (roll?.options?.neuroDiseasePenalty ?? []).map(name => ({ name, mode: -1 }));
+  }
+
+  const keys = _rollModeKeys(rollData);
+  if (!keys.length) return [];
+
+  const found = [];
+  for (const entry of getChoroby(actor)) {
+    const spec = effectsFor(entry);
+    if (!spec) continue;
+
+    const sources = [{ name: entry.name, spec }];
+    if (entry.conditionalOn && spec.conditional) {
+      sources.push({ name: `${entry.name} — ${spec.conditional.label}`, spec: spec.conditional });
+    }
+    for (const source of sources) {
+      const mode = (source.spec.changes ?? [])
+        .filter(c => keys.includes(c.key))
+        .reduce((sum, c) => sum + (Number(c.value) || 0), 0);
+      if (mode) found.push({ name: source.name, mode });
+    }
+  }
+  return found;
+}
+
+/**
+ * Hook: `dnd5e.renderChatMessage`. Tag the roll with the disease behind it.
+ * Shown to everyone, not just the GM — the player is the one who needs reminding.
+ */
+function _onAnnotateRoll(message, html) {
+  const rollData = message.flags?.dnd5e?.roll;
+  if (!rollData) return;
+  if (html.querySelector(".neuro-disease-note")) return;
+
+  const actor = game.actors.get(message.speaker?.actor);
+  if (actor?.type !== "character") return;
+
+  const notes = _rollInfluences(actor, rollData, message.rolls?.[0]);
+  if (!notes.length) return;
+
+  const box = document.createElement("div");
+  box.className = "neuro-disease-note";
+  for (const note of notes) {
+    const tag = document.createElement("span");
+    tag.className = `neuro-disease-tag ${note.mode > 0 ? "is-adv" : "is-dis"}`;
+    const icon = document.createElement("i");
+    icon.className = "fa-solid fa-biohazard";
+    tag.appendChild(icon);
+    tag.appendChild(document.createTextNode(
+      `${note.name}: ${note.mode > 0 ? "Ułatwienie" : "Utrudnienie"}`));
+    box.appendChild(tag);
+  }
+  (html.querySelector(".message-content") ?? html).appendChild(box);
 }
 
 /* -------------------------------------------- */

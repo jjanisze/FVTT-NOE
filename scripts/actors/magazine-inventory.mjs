@@ -374,6 +374,7 @@ function _onRenderActorSheetInjectMagazines(app, html) {
 
   /* ── Wrapper — jeden flex-child w dnd5e-inventory ─────────── */
   const wrapper = document.createElement("div");
+  wrapper.className = "neuro-magazine-wrapper";
   wrapper.appendChild(panel);
   wrapper.appendChild(footer);
 

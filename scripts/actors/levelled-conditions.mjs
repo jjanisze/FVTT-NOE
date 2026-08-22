@@ -17,6 +17,9 @@
  *     Wyczerpanie behaves. Registered the same way dnd5e registers its own
  *     (capture-phase document listeners keyed off `data-status-id`).
  *  4. **The saves the tables exist for** — `drink()` and `radiationSave()`.
+ *  5. **One entry point for every track** — `trackLevel` / `setTrackLevel` dispatch
+ *     through the HUD registry, so Zranienie (owned by `combat/zranienie.mjs`) answers
+ *     to the same API as the two conditions stored here.
  *
  * ## Deliberately not automated
  * The *triggers* are left to the table: nothing here watches the clock for the
@@ -29,6 +32,7 @@ import { LEVELLED_CONDITIONS, UPOJENIE_LEVELS, SKAZENIE_LEVELS,
   UPOJENIE_DRINK_DC, UPOJENIE_SOBER_DC, SKAZENIE_DISEASE_THRESHOLD } from "../config/levelled-conditions-data.mjs";
 import { addExhaustion } from "../config/exhaustion.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
+import { addDisease, getChoroby } from "./health-panel.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const EFFECT_FLAG = "levelledCondition";
@@ -48,7 +52,8 @@ export function registerLevelledConditions() {
       label: def.label,
       max: def.max,
       get: actor => getLevel(actor, id),
-      set: (actor, level) => setLevel(actor, id, level)
+      set: (actor, level) => setLevel(actor, id, level),
+      summary: level => _levelSummary(def, level)
     });
   }
 
@@ -99,6 +104,15 @@ export function registerLevelledConditions() {
 /* -------------------------------------------- */
 
 /**
+ * @typedef {object} LevelledTrack
+ * @property {string} label
+ * @property {number} max
+ * @property {(actor: Actor) => number} get
+ * @property {(actor: Actor, level: number) => Promise<any>} set
+ * @property {((level: number) => {title?: string, lines: string[]})} [summary]
+ */
+
+/**
  * Conditions that cycle by level in the token HUD.
  *
  * Upojenie and Skażenie register themselves from `LEVELLED_CONDITIONS` below.
@@ -111,40 +125,116 @@ export function registerLevelledConditions() {
  * write against the same store — which is the whole point. Nothing here caches a
  * level; every read goes back to the owner.
  *
- * @type {Map<string, {label: string, max: number, get: (a: Actor) => number, set: (a: Actor, n: number) => Promise<any>}>}
+ * @type {Map<string, LevelledTrack>}
  */
 const HUD_CYCLE = new Map();
 
 /**
- * Register a levelled condition for token-HUD cycling and level badging.
+ * Register a levelled condition for token-HUD cycling, level badging and the Stan panel.
  * @param {string} id  Status id, as registered in `CONFIG.DND5E.conditionTypes`.
- * @param {object} spec
- * @param {string} spec.label
- * @param {number} spec.max
- * @param {(actor: Actor) => number} spec.get
- * @param {(actor: Actor, level: number) => Promise<any>} spec.set
+ * @param {LevelledTrack} spec
+ *   `summary` reports everything the character suffers *at* that level, already accumulated.
+ *   Conditions whose levels carry no penalty of their own (Skażenie) simply omit it.
  */
-export function registerHudLevelled(id, { label, max, get, set }) {
-  HUD_CYCLE.set(id, { label, max, get, set });
+export function registerHudLevelled(id, { label, max, get, set, summary }) {
+  HUD_CYCLE.set(id, { label, max, get, set, summary });
+}
+
+/**
+ * Cumulative penalty text for a table-driven condition. Skażenie's rows carry no `text`,
+ * because its levels are contamination bands rather than penalties, so it yields nothing.
+ * @param {object} def  A `LEVELLED_CONDITIONS` entry.
+ * @param {number} level
+ * @returns {{lines: string[]}}
+ */
+function _levelSummary(def, level) {
+  if (level <= 0) return { lines: [] };
+  const rows = def.cumulative
+    ? def.levels.filter(r => r.level <= level)
+    : def.levels.filter(r => r.level === level);
+  return { lines: rows.filter(r => r.text).map(r => r.text) };
+}
+
+/**
+ * Read-only view of the levelled-condition registry, for surfaces that render every
+ * track at once (the sheet shell's Stan panel).
+ * @returns {Map<string, LevelledTrack>}
+ */
+export function getLevelledRegistry() {
+  return HUD_CYCLE;
 }
 
 /* -------------------------------------------- */
-/*  Level accessors                              */
+/*  Public track API                             */
 /* -------------------------------------------- */
 
 /**
- * Current level of a levelled condition.
+ * Every registered track, by id — including the ones this file does not own.
+ * `getLevel`/`setLevel` below reach only the flag store, so they cannot see Zranienie;
+ * routing the public API through the registry is what makes one entry point cover all
+ * three tracks. An unknown id throws rather than returning 0, because a silent no-op
+ * here reads exactly like a condition that was already clear.
+ * @param {string} id
+ * @returns {LevelledTrack}
+ */
+function _track(id) {
+  const track = HUD_CYCLE.get(id);
+  if (!track) {
+    throw new Error(`${MODULE_ID} | Nieznany stan stopniowany "${id}". Dostępne: ${[...HUD_CYCLE.keys()].join(", ")}`);
+  }
+  return track;
+}
+
+/**
+ * Current level of any registered track.
+ * @param {Actor} actor
+ * @param {string} id
+ * @returns {number}
+ */
+export function trackLevel(actor, id) {
+  return _track(id).get(actor) ?? 0;
+}
+
+/**
+ * Set any registered track, through its owner's writer — so this and a pip click and a
+ * HUD click are all the same write.
+ * @param {Actor} actor
+ * @param {string} id
+ * @param {number} level
+ * @returns {Promise<number>} The level actually stored.
+ */
+export async function setTrackLevel(actor, id, level) {
+  const track = _track(id);
+  await track.set(actor, Math.clamp(Math.round(level), 0, track.max));
+  return track.get(actor);
+}
+
+/**
+ * Move any registered track by a delta.
+ * @returns {Promise<number>} The new level.
+ */
+export async function adjustTrackLevel(actor, id, delta) {
+  return setTrackLevel(actor, id, trackLevel(actor, id) + delta);
+}
+
+/* -------------------------------------------- */
+/*  Level accessors — flag store                 */
+/* -------------------------------------------- */
+
+/**
+ * Current level of a condition stored in this file's flags.
+ * Only Upojenie and Skażenie live here — for a track-agnostic read use `trackLevel`.
  * @param {Actor} actor
  * @param {string} id  Key in LEVELLED_CONDITIONS.
  * @returns {number} 0 when absent.
  */
-export function getLevel(actor, id) {
+function getLevel(actor, id) {
   const raw = actor?.getFlag(MODULE_ID, id);
   return Number.isFinite(raw) ? Math.clamp(raw, 0, LEVELLED_CONDITIONS[id]?.max ?? 4) : 0;
 }
 
 /**
- * Set a levelled condition outright. Clamped to the condition's max; writing 0
+ * Set a flag-stored condition outright. Clamped to the condition's max; writing 0
  * deletes the flag so actors do not accumulate zeroed keys.
  * @param {Actor} actor
  * @param {string} id
@@ -153,7 +243,7 @@ export function getLevel(actor, id) {
  * @param {boolean} [options.chat=true]  Post a chat message describing the change.
  * @returns {Promise<number>} The level actually stored.
  */
-export async function setLevel(actor, id, level, { chat = true } = {}) {
+async function setLevel(actor, id, level, { chat = true } = {}) {
   const def = LEVELLED_CONDITIONS[id];
   if (!actor || !def) return 0;
 
@@ -183,11 +273,11 @@ export async function setLevel(actor, id, level, { chat = true } = {}) {
 }
 
 /**
- * Move a levelled condition by a delta. The common case for HUD clicks and for the
- * Kac / exposure rules, both of which step by one.
+ * Move a flag-stored condition by a delta. The common case for the Kac / exposure
+ * rules, both of which step by one.
  * @returns {Promise<number>} The new level.
  */
-export async function adjustLevel(actor, id, delta, options = {}) {
+async function adjustLevel(actor, id, delta, options = {}) {
   return setLevel(actor, id, getLevel(actor, id) + delta, options);
 }
 
@@ -457,43 +547,93 @@ async function soberUp(actor) {
 /* -------------------------------------------- */
 
 /**
- * RO na Kondycję against the actor's current contamination level. Failure is a
- * level of Wyczerpanie; three failures give choroba popromienna.
+ * RO na Kondycję against a contamination band. Failure is a level of Wyczerpanie;
+ * the third failure is choroba popromienna and resets the count.
+ *
+ * The ST is passed in per roll rather than read from the stored level: in play the GM
+ * calls a number for the room the character just walked into, and the stored level is
+ * only a token marker.
  *
  * Per RAW the test repeats every hour until RadOff is taken — the repetition is the
  * GM's to call, so this rolls exactly once.
  * @param {Actor} actor
- * @returns {Promise<{success: boolean, failures: number}|null>}
+ * @param {number} dc
+ * @returns {Promise<{success: boolean, failures: number, disease: boolean}|null>}
  */
-async function radiationSave(actor) {
-  const level = getLevel(actor, "skazenie");
-  if (!actor || level <= 0) return null;
+async function radiationSave(actor, dc) {
+  if (!actor || !Number.isFinite(dc)) return null;
 
-  const band = SKAZENIE_LEVELS.find(l => l.level === level);
-  const roll = await actor.rollSavingThrow(
-    { ability: "con", target: band.dc },
-    { configure: false }
-  );
+  const band = SKAZENIE_LEVELS.find(l => l.dc === dc);
+  const bandName = band ? band.name.toLowerCase() : `ST ${dc}`;
+
+  const roll = await actor.rollSavingThrow({ ability: "con", target: dc }, { configure: false });
   const result = Array.isArray(roll) ? roll[0] : roll;
-  const success = (result?.total ?? 0) >= band.dc;
+  const success = (result?.total ?? 0) >= dc;
 
   let failures = actor.getFlag(MODULE_ID, RAD_FAILURES_FLAG) ?? 0;
-  if (!success) {
+  let disease = false;
+  let note = "";
+
+  if (success) {
+    seqScrollText("ODPORNY", actor, { color: "#7fff3f", fontSize: 24 });
+  } else {
     failures += 1;
-    await actor.setFlag(MODULE_ID, RAD_FAILURES_FLAG, failures);
     await addExhaustion(actor, LEVELLED_CONDITIONS.skazenie.exhaustionSource);
+    seqScrollText("+1 WYCZERPANIE", actor, { color: "#7fff3f", fontSize: 24 });
+
+    if (failures >= SKAZENIE_DISEASE_THRESHOLD) {
+      failures = 0;
+      const already = getChoroby(actor).some(e => e.key === "popromienna");
+      if (already) {
+        note = "<br><strong>Trzecia porażka</strong> — choroba popromienna już się rozwija, licznik wraca do zera.";
+      } else {
+        await addDisease(actor, "popromienna");
+        disease = true;
+        note = "<br><strong>Trzecia porażka — choroba popromienna.</strong> Dodana na zakładce Stan zdrowia.";
+      }
+    } else {
+      note = `<br>Oblane RO: ${failures}/${SKAZENIE_DISEASE_THRESHOLD}.`;
+    }
   }
 
-  const warning = !success && failures >= SKAZENIE_DISEASE_THRESHOLD
-    ? `<br><strong>Trzecia porażka — choroba popromienna.</strong> Dodaj ją na zakładce Biografia.`
-    : !success ? `<br>Oblane RO: ${failures}/${SKAZENIE_DISEASE_THRESHOLD}.` : "";
+  await actor.setFlag(MODULE_ID, RAD_FAILURES_FLAG, failures);
 
   await ChatMessage.create({
-    content: `<strong>${actor.name}</strong> — skażenie ${band.name.toLowerCase()} (ST ${band.dc}): `
-      + (success ? "wytrzymuje." : "<em>+1 Wyczerpanie</em>.") + warning,
+    content: `<strong>${actor.name}</strong> — skażenie ${bandName} (ST ${dc}): `
+      + (success ? "wytrzymuje." : "<em>+1 Wyczerpanie</em>.") + note,
     speaker: ChatMessage.getSpeaker({ actor })
   });
-  return { success, failures };
+  return { success, failures, disease };
+}
+
+/**
+ * Ask which band the character is standing in, then roll against it.
+ * @param {Actor} actor
+ */
+async function promptRadiationSave(actor) {
+  if (!actor) return null;
+
+  const buttons = SKAZENIE_LEVELS.map(l => ({
+    action: String(l.dc),
+    label: `${l.name} — ST ${l.dc}`,
+    callback: () => l.dc
+  }));
+
+  const dc = await foundry.applications.api.DialogV2.wait({
+    window: { title: "Skażenie radioaktywne — RO na Kondycję" },
+    classes: ["neuro-rad-dialog"],
+    content: `<p>Jak gorąco jest tam, gdzie stoi <strong>${actor.name}</strong>?</p>`,
+    buttons,
+    rejectClose: false
+  }).catch(() => null);
+
+  if (!dc) return null;
+  return radiationSave(actor, Number(dc));
+}
+
+/** Failed radiation saves so far, toward choroba popromienna. */
+function getRadiationFailures(actor) {
+  return actor?.getFlag(MODULE_ID, RAD_FAILURES_FLAG) ?? 0;
 }
 
 /**
@@ -516,14 +656,19 @@ async function clearRadiation(actor) {
 
 /** Exposed as `game.neuroshima.conditions`. */
 export const levelledConditionsApi = {
-  get: getLevel,
-  set: setLevel,
-  adjust: adjustLevel,
+  get: trackLevel,
+  set: setTrackLevel,
+  adjust: adjustTrackLevel,
+  tracks: getLevelledRegistry,
   sync: syncLevelledConditions,
   drink,
   soberUp,
   radiationSave,
+  promptRadiationSave,
+  getRadiationFailures,
   clearRadiation,
   UPOJENIE_LEVELS,
   SKAZENIE_LEVELS
 };
+
+export { promptRadiationSave, getRadiationFailures, clearRadiation };

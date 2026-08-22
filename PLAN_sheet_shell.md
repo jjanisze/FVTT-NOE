@@ -51,6 +51,33 @@ That doc's specific warning is about `CONFIG.DND5E` object identity, but the sam
 (stale references, dropped functionality) is exactly what's at stake if you register a
 sheet class carelessly — the existing panels' selectors assume specific DOM structure exists.
 
+### DECIDED (2026-08-22): (C) Hybrid — subclass owns the frame, injection owns the content
+
+Neither (A) nor (B) as written. The subclass exists but is deliberately anaemic: it declares
+`PARTS` and `TABS` and nothing else — no `_prepareContext`, no `_onRender`, no template of its
+own beyond an empty `tab-zasoby.hbs` shell. Everything visible still arrives through
+`renderCharacterActorSheet`/`renderNPCActorSheet`, same as the other 15 files.
+
+Why: the three §1.15 bullets split cleanly along that line. *Dropping* the spells and bastion tabs
+is the one thing (A) genuinely cannot do — hiding a tab still pays its render cost and still
+leaves it reachable — and `PARTS`/`TABS` is a two-line override. But consolidating Zranienie +
+Wyczerpanie is pure DOM work over data three other files already own, and moving the four resource
+panels into a Zasoby tab is a `appendChild` loop. Doing those as sheet-class code would mean
+`_prepareContext` re-deriving state that `levelled-conditions.mjs` already derives, and rewriting
+four working injectors to render into a template instead. Injection costs nothing there.
+
+What that buys: the maintenance surface (B) warns about stays at ~15 lines of subclass. dnd5e can
+add, rename or restructure any part and we inherit it, because `PARTS` is copied key-by-key rather
+than retyped (this already paid off — the real `CharacterActorSheet.PARTS` has a `warnings` part
+that §4.2's map below doesn't mention). Verified live: all 15 injection hooks fire unchanged
+against the subclass, and every remaining tab renders.
+
+One thing §4.2 doesn't say and cost real time: **register in `ready`, not `init` or `setup`.**
+`DocumentSheetConfig.registerSheet` queues anything registered before `game.ready` into a private
+pending list and only flushes it into `CONFIG.Actor.sheetClasses` at ready. dnd5e registers its own
+sheets in `init`, so at `setup` the registry is still empty — reading the base class out of it
+returns `null` and the shell silently no-ops.
+
 ## 3. Every existing sheet-injection point — re-verify, don't trust this list
 
 15 files hook `renderActorSheet`/`renderCharacterActorSheet`/`renderNPCActorSheet` today. This

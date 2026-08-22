@@ -27,18 +27,21 @@ import { seqScrollText } from "../weapons/sequencer.mjs";
 
 /**
  * Known exhaustion sources with Polish labels and whether long rest auto-clears them.
+ * `color` tints that level's pip in the Stan panel, so a glance at the track shows what
+ * the character is actually suffering from.
  */
 export const EXHAUSTION_SOURCES = {
-  bezsennosc:   { label: "Bezsenność",            restClears: false },
-  kac:          { label: "Kac",                    restClears: true  },
-  niedozywienie:{ label: "Niedożywienie",          restClears: false },
-  odwodnienie:  { label: "Odwodnienie",            restClears: false },
-  przemarznie:  { label: "Przemarznięcie",         restClears: false },
-  skazenie:     { label: "Skażenie radioaktywne",  restClears: false },
-  zranienie:    { label: "Stopień Zranienia",      restClears: false },
-  uduszenie:    { label: "Uduszenie",              restClears: true  },
-  forsowanie:   { label: "Forsowanie",             restClears: true  },
-  ogolne:       { label: "Ogólne",                 restClears: true  }
+  bezsennosc:   { label: "Bezsenno\u015b\u0107",            restClears: false, color: "#7f8cff" },
+  kac:          { label: "Kac",                    restClears: true,  color: "#d9a441" },
+  niedozywienie:{ label: "Niedo\u017cywienie",          restClears: false, color: "#b07d3a" },
+  odwodnienie:  { label: "Odwodnienie",            restClears: false, color: "#2196f3" },
+  przemarznie:  { label: "Przemarzni\u0119cie",         restClears: false, color: "#9fe8ff" },
+  skazenie:     { label: "Ska\u017cenie radioaktywne",  restClears: false, color: "#7fff3f" },
+  choroba:      { label: "Choroba",                restClears: false, color: "#a569bd" },
+  zranienie:    { label: "Stopie\u0144 Zranienia",      restClears: false, color: "#c0392b" },
+  uduszenie:    { label: "Uduszenie",              restClears: true,  color: "#5d6d7e" },
+  forsowanie:   { label: "Forsowanie",             restClears: true,  color: "#ff8a3d" },
+  ogolne:       { label: "Og\u00f3lne",                 restClears: true,  color: "#9aa0a6" }
 };
 
 /**
@@ -65,60 +68,10 @@ export function registerExhaustion() {
   // Intercept manual exhaustion changes (sheet pip clicks) BEFORE they apply
   Hooks.on("preUpdateActor", onPreUpdateActor);
 
-  // Inject exhaustion source tooltips after sheet renders.
-  // Register multiple hook names to cover FVTT v14 ApplicationV2 naming patterns.
-  // Only one will fire — the others are harmless no-ops.
-  for (const hookName of [
-    "renderActorSheet",         // FVTT v1 legacy
-    "renderCharacterActorSheet", // ApplicationV2 class name
-    "renderNPCActorSheet",       // NPC sheets too
-    "renderBaseActorSheet"       // Base class
-  ]) {
-    Hooks.on(hookName, onRenderActorSheet);
-  }
+  // Source labels on the sheet are the Stan panel's job (actors/sheet-shell.mjs) — it reads
+  // getExhaustionSources() directly. The native pips it used to annotate are now hidden.
 
   console.log("Neuroshima 5e | Exhaustion overrides applied (speed: -1.5 m/level, source tracking)");
-}
-
-/* -------------------------------------------- */
-/*  Sheet Tooltip — Exhaustion Source Display     */
-/* -------------------------------------------- */
-
-/**
- * After the actor sheet renders, modify exhaustion pip tooltips in the DOM
- * to show source information.
- *
- * Handles both ApplicationV1 (html as jQuery) and ApplicationV2 (html as HTMLElement).
- */
-function onRenderActorSheet(app, html, context) {
-  const actor = app.document ?? app.actor;
-  if (!actor) return;
-
-  const sources = getExhaustionSources(actor);
-  if (!sources.length) return;
-
-  // Normalize html to a plain HTMLElement
-  const el = html instanceof HTMLElement ? html
-    : html?.[0] instanceof HTMLElement ? html[0]
-    : html?.element instanceof HTMLElement ? html.element
-    : null;
-  if (!el) return;
-
-  // Find all exhaustion pip buttons
-  const pips = el.querySelectorAll('.pips[data-prop="system.attributes.exhaustion"] .pip');
-  if (!pips.length) return;
-
-  for (const pip of pips) {
-    const n = Number(pip.dataset.n);
-    if (!n) continue;
-
-    const sourceEntry = sources[n - 1]; // sources[0] = level 1
-    if (sourceEntry && pip.classList.contains("filled")) {
-      pip.setAttribute("data-tooltip", `Wyczerpanie ${n}: ${sourceEntry.label}`);
-    } else {
-      pip.setAttribute("data-tooltip", `Wyczerpanie ${n}`);
-    }
-  }
 }
 
 /* -------------------------------------------- */
