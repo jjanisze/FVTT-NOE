@@ -3,7 +3,7 @@
  * Replaces dnd5e English labels with Neuroshima Polish terminology.
  * Removes honor/sanity abilities, cleans up spellcasting references.
  */
-import { MEDICINE_TYPE, MEDICINE_SUBTYPES } from "./medicine-data.mjs";
+import { CHEMIA_TYPE, CHEMIA_SUBTYPES } from "./chemia-data.mjs";
 
 export function registerTerminology() {
   const abilities = CONFIG.DND5E.abilities;
@@ -86,11 +86,11 @@ export function registerTerminology() {
     // Sort keys or adjust order? We want it near Amunicja.
     // DND5e sorts categories alphabetically typically, but we can't force index directly.
 
-    // Lekarstwa — medicines are consumables so they inherit the native
-    // quantity/uses/activity pipeline (see config/medicine-data.mjs).
-    CONFIG.DND5E.consumableTypes[MEDICINE_TYPE] = {
+    // Lekarstwa — leki, chemia i narkotyki są konsumpcyjne, więc dziedziczą
+    // natywny pipeline quantity/uses/activity (patrz config/chemia-data.mjs).
+    CONFIG.DND5E.consumableTypes[CHEMIA_TYPE] = {
       label: "Lekarstwa",
-      subtypes: { ...MEDICINE_SUBTYPES }
+      subtypes: { ...CHEMIA_SUBTYPES }
     };
   }
 
