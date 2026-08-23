@@ -24,12 +24,14 @@ import { registerConditions } from "./config/conditions.mjs";
 import { registerExhaustion } from "./config/exhaustion.mjs";
 import { registerLevelledConditions, levelledConditionsApi } from "./actors/levelled-conditions.mjs";
 import { registerRestOverrides } from "./config/rest.mjs";
+import { registerPauseScreen } from "./config/pause-screen.mjs";
 import { injectLocalization } from "./config/localization.mjs";
 import { registerActorAbilities } from "./actors/abilities.mjs";
 import { registerPW } from "./actors/pw.mjs";
 import { registerClassState } from "./actors/class-state.mjs";
 import { registerAbilityHotbar } from "./actors/ability-hotbar.mjs";
 import { registerClassMigration } from "./migration/migrate-classes.mjs";
+import { registerPochodzeniaMigration } from "./migration/migrate-pochodzenia.mjs";
 import { registerSrdCleanup } from "./config/srd-cleanup.mjs";
 import { registerClassRules } from "./actors/class-rules.mjs";
 import { registerCichyKrok } from "./actors/cichy-krok.mjs";
@@ -40,7 +42,8 @@ import { registerBleeding, bleedingApi } from "./combat/bleeding.mjs";
 import { registerFalling, fallingApi } from "./combat/falling.mjs";
 import { registerFuksPips } from "./actors/fuks-pips.mjs";
 import { registerWeapons } from "./config/weapons.mjs";
-import { registerZranienie } from "./combat/zranienie.mjs";
+import { registerArmor } from "./config/armor.mjs";
+import { registerArmorRules, report as armorReport } from "./actors/armor-rules.mjs";import { registerZranienie } from "./combat/zranienie.mjs";
 import { registerCritRiders } from "./combat/crit-riders.mjs";
 import { registerPackTactics } from "./combat/pack-tactics.mjs";
 import { registerBestiaryThresholds } from "./combat/bestiary-thresholds.mjs";
@@ -70,6 +73,9 @@ import { registerMagazineInventory } from "./actors/magazine-inventory.mjs";
 import { registerGrenadeInventory } from "./actors/grenade-inventory.mjs";
 import { registerSurowceInventory } from "./actors/surowce-inventory.mjs";
 import { registerSheetShell } from "./actors/sheet-shell.mjs";
+import { registerPartySheet } from "./actors/party-sheet.mjs";
+import { registerPartyTravel, travelApi } from "./actors/party-travel.mjs";
+import { suppliesApi } from "./actors/party-supplies.mjs";
 import { registerSheetPositionStability } from "./actors/sheet-position-stability.mjs";
 import { registerDamageReductionUI } from "./weapons/damage-reduction.mjs";
 import { registerWeaponAddons } from "./weapons/addons.mjs";
@@ -79,8 +85,12 @@ import { registerSettings } from "./config/settings.mjs";
 import { AMMO_CALIBERS, AMMO_CALIBER_MAP, GRENADE_TYPES, GRENADE_MAP } from "./config/ammo-data.mjs";
 import { registerZbrojowniaSync } from "./actors/zbrojownia-sync.mjs";
 import { TOOLKITS, createToolkits } from "./config/toolkits-data.mjs";
-import { registerMedyk } from "./items/toolkit-medyk.mjs";
+import { WEAPONS, createWeapons } from "./config/weapons-data.mjs";
+import { ARMORS, createArmors } from "./config/armor-data.mjs";import { registerMedyk } from "./items/toolkit-medyk.mjs";
 import { registerToolkitChecks } from "./items/toolkit-check.mjs";
+import { registerChemia, chemiaApi } from "./items/chemia.mjs";
+import { sztuczkiApi } from "./config/sztuczki-data.mjs";
+import { pochodzeniaApi } from "./config/pochodzenia-data.mjs";
 import { registerToolAvailability } from "./actors/tool-availability.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -113,6 +123,7 @@ Hooks.once("init", () => {
   registerExhaustion();
   registerLevelledConditions();
   registerRestOverrides();
+  registerPauseScreen();
   registerActorAbilities();
 
   // Phase 3: Class / progression layer
@@ -123,6 +134,8 @@ Hooks.once("init", () => {
   registerClassState();
   registerAbilityHotbar();
   registerClassMigration();
+  // Musi iść po registerClassMigration — tamto podmienia całe api.migration, nie dopisuje do niego.
+  registerPochodzeniaMigration();
   registerSrdCleanup();
   registerClassRules();
   registerCichyKrok();
@@ -141,6 +154,8 @@ Hooks.once("init", () => {
   registerSurowceInventory();
   registerSheetPositionStability();
   registerWeapons();
+  registerArmor();
+  registerArmorRules();
   registerValidation();
 
   // Phase 1: Combat systems
@@ -167,6 +182,7 @@ Hooks.once("init", () => {
   registerZbrojowniaSync();
   registerMedyk();
   registerToolkitChecks();
+  registerChemia();
   registerToolAvailability();
 
   // Nasłuch map wypchniętych z Tiled. W init, bo rejestruje ustawienia świata.
@@ -181,6 +197,10 @@ Hooks.once("init", () => {
   // Last: its render hook relocates panels the injectors above have already built,
   // so it must be the final renderActorSheet listener registered.
   registerSheetShell();
+
+  // Karta drużyny: stan członków, podróż, zapasy.
+  registerPartyTravel();
+  registerPartySheet();
 
   // Clean up activity chat card pills: remove NaN range, duration, empty strings for weapon cards
   Hooks.on("renderChatMessageHTML", (message, html) => {
@@ -243,6 +263,17 @@ Hooks.once("ready", () => {
   // Grenades stay separate from ammo, but are exposed in the same namespace for automation.
   game.neuroshima = { AMMO_CALIBERS, AMMO_CALIBER_MAP, GRENADE_TYPES, GRENADE_MAP, TOOLKITS, createToolkits };
 
+  // Broń i pancerze — dane z tabel są źródłem prawdy dla kompendiów i dla
+  // odtworzenia zawartości Zbrojowni: game.neuroshima.createWeapons()
+  game.neuroshima.WEAPONS = WEAPONS;
+  game.neuroshima.createWeapons = createWeapons;
+  game.neuroshima.ARMORS = ARMORS;
+  game.neuroshima.createArmors = createArmors;
+
+  // Pancerze — game.neuroshima.pancerze.report() wypisuje, co moduł liczy sam,
+  // a co zostaje po stronie MG.
+  game.neuroshima.pancerze = { report: armorReport };
+
   // Choroby / Fobie / lekarstwa — game.neuroshima.health.sunset() etc.
   game.neuroshima.health = { ...healthApi, syncEffects: syncDiseaseEffects, bleeding: bleedingApi };
   game.neuroshima.falling = fallingApi;
@@ -250,6 +281,16 @@ Hooks.once("ready", () => {
   // Upojenie / Skażenie / Zranienie — game.neuroshima.conditions.drink(actor) etc.
   // `.get/.set/.adjust` cover all three tracks, whoever owns the store.
   game.neuroshima.conditions = levelledConditionsApi;
+
+  // Chemia, leki i narkotyki — game.neuroshima.chemia.take(actor, "medpak")
+  game.neuroshima.chemia = chemiaApi;
+
+  // Sztuczki — game.neuroshima.sztuczki.report() wypisuje, ile z nich system
+  // naprawdę egzekwuje, a ile zostaje na głowie MG.
+  game.neuroshima.sztuczki = sztuczkiApi;
+
+  // Pochodzenia — ten sam rejestr dla 36 zdolności z 12 regionów.
+  game.neuroshima.pochodzenia = pochodzeniaApi;
 
   registerWeaponSounds();
   registerEngineControls();
@@ -269,6 +310,10 @@ Hooks.once("ready", () => {
   registerMapSync();
   game.neuroshima.maps = { ...mapSyncApi, ...mapWatchApi };
   game.neuroshima.trudnyTeren = difficultTerrainHintApi;
+
+  // Karta drużyny — game.neuroshima.podroz.openBiomePicker(actor), .zapasy.hunt(grupa)
+  game.neuroshima.podroz = travelApi;
+  game.neuroshima.zapasy = suppliesApi;
 
   // Validate overrides
   const skillCount = Object.keys(CONFIG.DND5E.skills).length;

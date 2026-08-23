@@ -708,21 +708,6 @@ damage-application .neuro-reduction-buttons {
 }
 
 /* ============================================= */
-/* Prototype Abilities Panel (Details tab)       */
-/* ============================================= */
-
-/* The details tab uses a 2-column CSS grid (.col-2 > .left, .right). Prepending
-   our panel as a plain sibling turns it into a 3rd implicit grid item, which
-   knocks .left/.right out of their intended columns/rows — so toggling the
-   <details> inside the panel never visibly resizes the "Rzuty obronne" (saves)
-   box below it. Spanning both columns keeps it as its own full-width row above
-   .left/.right, restoring normal document flow so expand/collapse pushes the
-   rest of the tab down/up correctly. */
-.dnd5e2.character .tab[data-tab="details"] .neuro-abilities-prototype-panel {
-  grid-column: 1 / -1;
-}
-
-/* ============================================= */
 /* Ulepszenia broni — plakietki w oknie chatu    */
 /* Dołączają do natywnej listy .card-footer.pills */
 /* ============================================= */
@@ -1558,6 +1543,118 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
 .neuro-rage-body { font-size: 12px; line-height: 1.35; }
 .neuro-rage-roll { font-size: 10px; opacity: 0.7; }
 
+/* ---- Chemia, leki i narkotyki ---- */
+
+.neuro-chemia-card {
+  padding: 6px 8px;
+  border-left: 4px solid #16a085;
+  border-radius: 0 4px 4px 0;
+  background: rgba(22, 160, 133, 0.08);
+}
+
+.neuro-chemia-head {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+}
+
+.neuro-chemia-icon {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  border: none;
+  filter: brightness(0);
+}
+
+.neuro-chemia-flavor {
+  font-size: 12px;
+  font-style: italic;
+  line-height: 1.35;
+  margin-bottom: 3px;
+}
+
+.neuro-chemia-line { font-size: 12px; line-height: 1.4; }
+.neuro-chemia-line .good { color: #1e8449; font-weight: bold; }
+.neuro-chemia-line .bad { color: #c0392b; font-weight: bold; }
+
+.neuro-chemia-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 5px;
+}
+
+.neuro-chemia-resolve,
+.neuro-chemia-dead {
+  padding: 2px 8px;
+  border: 1px solid rgba(22, 160, 133, 0.45);
+  border-radius: 3px;
+  background: rgba(22, 160, 133, 0.14);
+  color: #117a65;
+  font-size: 11px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.neuro-chemia-resolve:hover:not(:disabled),
+.neuro-chemia-dead:hover:not(:disabled) { background: rgba(22, 160, 133, 0.25); }
+.neuro-chemia-resolve:disabled,
+.neuro-chemia-dead:disabled { opacity: 0.5; cursor: default; }
+
+.neuro-chemia-dead {
+  border-color: rgba(192, 57, 43, 0.45);
+  background: rgba(192, 57, 43, 0.14);
+  color: #c0392b;
+}
+
+.neuro-chemia-dead:hover:not(:disabled) { background: rgba(192, 57, 43, 0.25); }
+
+.neuro-chemia-manual {
+  margin-top: 5px;
+  padding: 3px 6px;
+  border-left: 2px dashed rgba(140, 110, 70, 0.5);
+  font-size: 10px;
+  font-style: italic;
+  opacity: 0.75;
+}
+
+/* ---- Zdolności: co system egzekwuje, a czego nie (Sztuczki, Pochodzenia) ---- */
+
+.neuro-sztuczka-cover,
+.neuro-pochodzenie-cover {
+  margin: 6px 0 2px 0;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.neuro-sztuczka-cover.is-auto,
+.neuro-pochodzenie-cover.is-auto { color: #1e8449; }
+.neuro-sztuczka-cover.is-partial,
+.neuro-pochodzenie-cover.is-partial { color: #e67e22; }
+.neuro-sztuczka-cover.is-none,
+.neuro-pochodzenie-cover.is-none { color: #8a7a63; font-style: italic; text-transform: none; letter-spacing: 0; }
+
+.neuro-sztuczka-auto,
+.neuro-pochodzenie-auto { margin: 0 0 0 0; padding-left: 16px; font-size: 11px; line-height: 1.4; }
+.neuro-sztuczka-auto em,
+.neuro-pochodzenie-auto em { opacity: 0.65; }
+
+.neuro-sztuczka-manual,
+.neuro-pochodzenie-manual {
+  margin-top: 4px;
+  padding: 3px 6px;
+  border-left: 2px dashed rgba(140, 110, 70, 0.5);
+  font-size: 11px;
+  font-style: italic;
+  opacity: 0.78;
+}
+
 /* ---- Krwawienie (Hemofilia) ---- */
 
 .neuro-bleed-card {
@@ -1661,3 +1758,670 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
   visibility: hidden;
   z-index: 2;
 }
+
+
+/* ============================================================================
+   KARTA DRUŻYNY (party-sheet.mjs)
+   ============================================================================ */
+
+/* Systemowe `--dnd5e-color-light-gray` to #3d3d3d — na ciemnym tle karty daje kontrast 1,2:1,
+   czyli tekst-widmo. Stąd własna para: szary czynny i szary wyłączony, oba czytelne. */
+.neuro-party {
+  --neuro-szary: #c3c8d1;
+  --neuro-szary-off: #9198a4;
+}
+
+/* ---- Wiersz członka: KW | Wyczerpanie | Zranienie ---- */
+
+.neuro-party .neuro-stan-linia {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
+  gap: 6px;
+}
+
+.neuro-party .neuro-seg {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 0;
+}
+
+.neuro-party .neuro-seg > label {
+  color: var(--neuro-szary);
+  font-family: var(--dnd5e-font-roboto-condensed, "Roboto Condensed", sans-serif);
+  font-size: var(--font-size-9, 9px);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.neuro-party .neuro-seg-hd .meter {
+  flex: 1;
+  min-width: 0;
+  height: 10px;
+}
+
+.neuro-party .neuro-seg-hd .values {
+  font-size: var(--font-size-10, 10px);
+  white-space: nowrap;
+}
+
+/* Wiersz pojazdu ma tylko bak, więc pasek dostaje całą linijkę. */
+.neuro-party .neuro-stan-linia.is-paliwo {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.neuro-party .neuro-seg-paliwo .meter {
+  flex: 1;
+  min-width: 0;
+  height: 10px;
+}
+
+.neuro-party .neuro-seg-paliwo .meter.progress::before {
+  --bar-color-2: #e3c341;
+}
+
+.neuro-party .neuro-seg-paliwo .values {
+  font-size: var(--font-size-10, 10px);
+  white-space: nowrap;
+  color: #e3c341;
+}
+
+.neuro-party .neuro-seg-pips {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 2px;
+}
+
+.neuro-party .neuro-seg-pip {
+  --neuro-pip-color: #8d8d8d;
+  flex: 0 0 auto;
+  width: 9px;
+  height: 9px;
+  padding: 0;
+  border: 1px solid #7a7a7a;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.neuro-party .neuro-seg-pip:hover {
+  filter: brightness(1.4);
+}
+
+.neuro-party .neuro-seg-pip.is-filled {
+  border-color: var(--neuro-pip-color);
+  background: var(--neuro-pip-color);
+  box-shadow: 0 0 4px color-mix(in srgb, var(--neuro-pip-color) 60%, transparent);
+}
+
+.neuro-party .neuro-seg-exhaustion .neuro-seg-pip { --neuro-pip-color: #3498db; }
+.neuro-party .neuro-seg-zranienie .neuro-seg-pip { --neuro-pip-color: #c0392b; }
+
+.neuro-party .neuro-seg-pip.is-terminal.is-filled {
+  box-shadow: 0 0 6px var(--neuro-pip-color), inset 0 0 0 1px rgba(0, 0, 0, 0.45);
+}
+
+/* ---- Panel Podróż ---- */
+
+/* dnd5e trzyma nagłówek grupy na sztywnych 164 px; pas sterowania musi go rozpychać,
+   inaczej wyleje się na nawigację zakładek. */
+.neuro-party .sheet-header,
+.neuro-party .sheet-header > .right {
+  height: auto;
+}
+
+/* Portret jest kwadratem liczonym od stałej szerokości kolumny, nie od wysokości nagłówka —
+   ta skacze 260–344 px razem z listą efektów podróży i szarpałaby obrazkiem. */
+.neuro-party .sheet-header > .left {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.neuro-party .sheet-header .portrait {
+  flex: 0 0 auto;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 1;
+}
+
+/* Systemowe `contain` zostawiłoby pasy nad i pod kwadratowym portretem. */
+.neuro-party .sheet-header .portrait img {
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Karta Rozwoju wycięta — Podróż zajmuje całą szerokość kolumny nagłówka. */
+.neuro-party .sheet-header .bottom > .card {
+  height: auto;
+  min-height: 96px;
+}
+
+.neuro-party .sheet-header .bottom > .neuro-podroz {
+  flex: 1 0 100%;
+  width: auto;
+}
+
+.neuro-party .neuro-podroz-panel {
+  min-width: 0;
+  padding: 4px 0 0;
+}
+
+.neuro-party .neuro-podroz > .info {
+  padding: 6px 0;
+}
+
+.neuro-party .neuro-podroz-dystans .label {
+  font-size: var(--font-size-10, 10px);
+  white-space: nowrap;
+}
+
+.neuro-party .neuro-podroz-dystans .value {
+  white-space: nowrap;
+}
+
+.neuro-party .neuro-trasa .value {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+}
+
+.neuro-party .neuro-trasa input {
+  width: 3.5em;
+  height: 20px;
+  padding: 0 2px;
+  text-align: right;
+}
+
+.neuro-party .neuro-trasa-czas {
+  font-size: var(--font-size-11, 11px);
+  opacity: 0.8;
+}
+
+.neuro-party .neuro-trasa-jedn {
+  font-size: var(--font-size-11, 11px);
+  opacity: 0.7;
+}
+
+.neuro-party .neuro-trasa .neuro-toggle.neuro-trasa-jedz {
+  width: auto;
+  height: 20px;
+  margin-left: auto;
+  padding: 0 8px;
+  font-size: var(--font-size-11, 11px);
+}
+
+/* Pasek paliwa żyje w dwóch miejscach — karcie drużyny i karcie pojazdu — więc bez prefiksu. */
+.neuro-paliwo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  padding: 3px 4px;
+  border: 1px solid rgba(227, 195, 65, 0.35);
+  border-radius: 3px;
+  background: rgba(227, 195, 65, 0.07);
+  font-size: var(--font-size-11, 11px);
+  color: #e3c341;
+}
+
+.neuro-paliwo-pasek {
+  flex: 1 1 auto;
+  min-width: 40px;
+  height: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.6);
+  border-radius: 2px;
+  background: rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.neuro-paliwo-poziom {
+  height: 100%;
+  display: flex;
+  justify-content: flex-end;
+  background: linear-gradient(180deg, #f5e07a 0%, #e3c341 55%, #b7952a 100%);
+}
+
+/* Odcinek, który zniknie po zatwierdzeniu przejazdu — rysowany od czoła słupka. */
+.neuro-paliwo-zuzycie {
+  height: 100%;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(0, 0, 0, 0.45) 0 3px,
+    rgba(0, 0, 0, 0.15) 3px 6px
+  );
+  box-shadow: inset 1px 0 0 rgba(0, 0, 0, 0.6);
+}
+
+.neuro-paliwo-koszt {
+  margin-left: 3px;
+  color: #e08a58;
+  font-weight: bold;
+}
+
+.neuro-paliwo-liczby {
+  flex: 0 0 auto;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.neuro-paliwo-przebieg {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  opacity: 0.75;
+}
+
+/* `button` w selektorze bije ogólne .neuro-party .neuro-toggle, które barwiło ikony na ciemny szary. */
+.neuro-paliwo button.neuro-toggle {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: auto;
+  height: 20px;
+  padding: 0 8px;
+  border: 1px solid rgba(227, 195, 65, 0.4);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #e3c341;
+  font-size: var(--font-size-11, 11px);
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.neuro-paliwo.is-pusty {
+  border-color: #c0392b;
+  background: rgba(192, 57, 43, 0.12);
+  color: #e08a58;
+}
+
+/* Wariant na wąski pasek boczny karty pojazdu. */
+.neuro-paliwo.is-kolumna {
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 4px 6px;
+}
+
+.neuro-paliwo.is-kolumna .neuro-paliwo-przebieg {
+  flex: 1 0 100%;
+  white-space: normal;
+  text-align: center;
+}
+
+.neuro-paliwo.is-kolumna button.neuro-toggle {
+  flex: 1 1 auto;
+  margin-top: 2px;
+}
+
+.neuro-paliwo-grupa h3 {
+  justify-content: center;
+}
+
+/* Zdanie opisowe zastępuje tytuł „Podróż”, więc musi się zawijać zamiast rozpychać kartę. */
+.neuro-party .neuro-podroz > .header.travel-pace {
+  position: relative;
+  align-items: flex-start;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.neuro-party h3.neuro-podroz-opis {
+  position: relative;
+  z-index: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  font-size: var(--font-size-13, 13px);
+  line-height: 1.15;
+  white-space: normal;
+  text-transform: none;
+  color: #e0d0b0;
+}
+
+/* Wyjęte z układu, żeby nie rozpychały nagłówka; SVG samo skaluje się na jego wysokość. */
+.neuro-party .neuro-tempo-chevrony {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: 0;
+  z-index: 0;
+  display: flex;
+  align-items: stretch;
+  pointer-events: none;
+}
+
+.neuro-party .neuro-tempo-chevrony svg {
+  height: 100%;
+  width: auto;
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.18);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.neuro-party .neuro-podroz.is-slowed .neuro-tempo-chevrony svg {
+  stroke: rgba(224, 164, 88, 0.35);
+}
+
+.neuro-party .neuro-podroz-sterowanie {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.neuro-party .neuro-pole {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.neuro-party .neuro-pole > span {
+  font-size: var(--font-size-10, 10px);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.7;
+}
+
+.neuro-party .neuro-podroz-sterowanie select {
+  width: 100%;
+  min-width: 0;
+  height: 24px;
+  font-size: var(--font-size-11, 11px);
+}
+
+.neuro-party .neuro-podroz-przelaczniki {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+}
+
+.neuro-party .neuro-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  flex: 1 1 auto;
+  width: auto;
+  height: 24px;
+  padding: 0 8px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--neuro-szary);
+  font-size: var(--font-size-11, 11px);
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.neuro-party .neuro-toggle.is-on {
+  border-color: #e0a458;
+  background: rgba(224, 164, 88, 0.22);
+  color: #f0d9a0;
+}
+
+/* Wyłączony ma być wyraźnie szary, a nie przezroczysty — stąd własny kolor zamiast `opacity`. */
+.neuro-party .neuro-toggle[disabled] {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--neuro-szary-off);
+  cursor: default;
+}
+
+/* Ko\u0142yska 8 h / 24 h: dwa guziki sklejone w jeden prze\u0142\u0105cznik, zawsze dok\u0142adnie jeden zapalony. */
+.neuro-party .neuro-kolyska {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 4px;
+  color: var(--neuro-szary);
+}
+
+.neuro-party .neuro-kolyska > .neuro-toggle {
+  flex: 0 0 auto;
+  min-width: 40px;
+  border-radius: 0;
+}
+
+.neuro-party .neuro-kolyska > .neuro-toggle:nth-of-type(1) {
+  border-radius: 3px 0 0 3px;
+}
+
+.neuro-party .neuro-kolyska > .neuro-toggle:last-child {
+  margin-left: -1px;
+  border-radius: 0 3px 3px 0;
+}
+
+/* Zapalona po\u0142\u00f3wka wychodzi na wierzch, \u017ceby jej ramka wygra\u0142a na sklejeniu. */
+.neuro-party .neuro-kolyska > .neuro-toggle.is-on {
+  position: relative;
+  z-index: 1;
+}
+
+.neuro-party .neuro-podroz-efekty {
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--font-size-10, 10px);
+  line-height: 1.35;
+}
+
+.neuro-party .neuro-podroz-efekty li {
+  display: flex;
+  gap: 4px;
+  align-items: baseline;
+}
+
+.neuro-party .neuro-podroz-efekty .is-good { color: #7fd18a; }
+.neuro-party .neuro-podroz-efekty .is-bad { color: #e08a58; }
+
+/* ---- Zakładka Zapasy ---- */
+
+/* .active jest konieczne — bez niego display:flex bije systemowe .tab { display: none }
+   i zakładka maluje się na wierzchu pozostałych. */
+.neuro-zapasy.active {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px;
+}
+
+.neuro-zapasy-akcje {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.neuro-zapasy-akcje button {
+  flex: 1 1 auto;
+  height: 26px;
+  font-size: var(--font-size-11, 11px);
+  white-space: nowrap;
+}
+
+.neuro-zapas-blok {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.neuro-zapas-blok.is-krytyczny {
+  border-color: rgba(192, 57, 43, 0.7);
+  box-shadow: inset 0 0 12px rgba(192, 57, 43, 0.18);
+}
+
+.neuro-zapas-naglowek {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: var(--dnd5e-font-roboto-condensed, "Roboto Condensed", sans-serif);
+}
+
+.neuro-zapas-nazwa {
+  flex: 1;
+  text-transform: uppercase;
+  font-size: var(--font-size-12, 12px);
+  letter-spacing: 0.4px;
+}
+
+.neuro-zapas-stan {
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.neuro-zapas-potrzeba {
+  font-size: var(--font-size-10, 10px);
+  opacity: 0.72;
+  white-space: nowrap;
+}
+
+.neuro-zapas-dni {
+  min-width: 52px;
+  text-align: right;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.is-krytyczny .neuro-zapas-dni { color: #e05858; }
+
+.neuro-zapas-lista {
+  margin: 0;
+  padding: 4px 8px 6px;
+  list-style: none;
+  font-size: var(--font-size-11, 11px);
+}
+
+.neuro-zapas-lista li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 0;
+}
+
+.neuro-zapas-lista img {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  border: none;
+  object-fit: cover;
+}
+
+.neuro-zapas-lista a {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.neuro-zapas-owner,
+.neuro-zapas-qty {
+  opacity: 0.65;
+  white-space: nowrap;
+}
+
+.neuro-zapas-ilosc {
+  min-width: 66px;
+  text-align: right;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.neuro-zapas-pusto {
+  margin: 0;
+  padding: 5px 8px;
+  font-size: var(--font-size-11, 11px);
+  font-style: italic;
+  opacity: 0.6;
+}
+
+/* ---- Picker biomów ---- */
+
+.neuro-biomy-strip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+  padding: 4px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.18);
+  font-size: var(--font-size-11, 11px);
+}
+
+.neuro-biomy-label {
+  font-family: var(--dnd5e-font-roboto-condensed, "Roboto Condensed", sans-serif);
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  opacity: 0.8;
+}
+
+.neuro-biomy-list {
+  display: flex;
+  flex: 1;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.neuro-biom-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 6px;
+  border: 1px solid rgba(224, 164, 88, 0.6);
+  border-radius: 10px;
+  background: rgba(224, 164, 88, 0.14);
+}
+
+.neuro-biomy-empty { opacity: 0.55; }
+
+.neuro-biomy-count { opacity: 0.7; }
+
+.neuro-biomy-edit {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  line-height: 1;
+}
+
+.neuro-biom-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+  margin: 6px 0;
+}
+
+.neuro-biom-option {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 5px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.neuro-biom-option:has(input:disabled) { opacity: 0.45; cursor: default; }
+.neuro-biom-option:has(input:checked) { border-color: #e0a458; background: rgba(224, 164, 88, 0.16); }
+
+.neuro-biom-korzysci {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  font-size: var(--font-size-11, 11px);
+  opacity: 0.8;
+}
+
+.neuro-zle { color: #e05858; }

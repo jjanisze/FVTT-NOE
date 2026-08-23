@@ -77,16 +77,14 @@ function _onRenderActorSheetInjectSurowce(app, html) {
     if (!type) continue;
     if (!itemsByCode.has(type.code)) itemsByCode.set(type.code, []);
     itemsByCode.get(type.code).push(item);
-
-    // Usuń natywny wiersz z "Używek", aby uniknąć duplikacji. remove() zamiast
-    // display:none — natywny wiersz jest odbudowywany przy każdym renderze.
-    const nativeLi = inventoryTab.querySelector(`li[data-item-id="${item.id}"]`);
-    nativeLi?.remove();
   }
   if (itemsByCode.size === 0) return;
 
-  // Per-type totals, in canonical order. Empty types render as 0 pools so the
-  // full set of resources is visible at a glance.
+  // Per-type totals, in canonical order.
+  //
+  // Types the actor has nothing of are dropped entirely. Listing every material
+  // at zero turned the panel into a wall of "masz 0 kg nitrogliceryny", which is
+  // noise: the panel is an inventory, not a shopping list.
   const pools = SUROWCE_TYPES.map(type => {
     const items = itemsByCode.get(type.code) ?? [];
     let totalQty = 0;
@@ -97,7 +95,18 @@ function _onRenderActorSheetInjectSurowce(app, html) {
       totalKg += _itemWeightKg(it) * qty;
     }
     return { type, items, totalQty, totalKg };
-  });
+  }).filter(p => p.totalQty > 0);
+
+  if (pools.length === 0) return;
+
+  // Only now hide the native rows, and only for stacks the panel actually shows —
+  // an emptied stack stays reachable in the normal inventory instead of vanishing.
+  // remove() rather than display:none, because the native row is rebuilt on every render.
+  for (const pool of pools) {
+    for (const item of pool.items) {
+      inventoryTab.querySelector(`li[data-item-id="${item.id}"]`)?.remove();
+    }
+  }
 
   const maxKg = Math.max(...pools.map(p => p.totalKg), 0.0001);
 

@@ -83,6 +83,8 @@
 
   "DND5E": {
     "Details": "Szczegóły",
+    "InventorySearch": "Szukaj w ekwipunku",
+    "Contents": "Zawartość",
     "ItemEdit": "Edycja",
     "ItemWeaponDetails": "Szczegóły Broni",
     "ItemWeaponType": "Typ Broni",
@@ -100,6 +102,16 @@
     "ITEM": {
       "Tab": {
         "Details": "Szczegóły"
+      }
+    },
+    "CALENDAR": {
+      "Formatters": {
+        "MonthDay": {
+          "Format": "{d} {B}"
+        },
+        "MonthDayYear": {
+          "Format": "{d} {B}, {y}"
+        }
       }
     },
     "TimeInst": "Natychmiastowe",
@@ -718,6 +730,14 @@
         "Verbal": "Werbalna",
         "Versatile": "Uniwersalna",
         "WeightlessContents": "Lekka zawartość"
+      },
+      "SECTIONS": {
+        "Activities": "Aktywności",
+        "Advancement": "Rozwój",
+        "Contents": "Zawartość",
+        "Description": "Opis",
+        "Details": "Szczegóły",
+        "Effects": "Efekty"
       }
     },
 
@@ -894,6 +914,53 @@
     "LongRest": "Długi odpoczynek",
 
     "Healing": "Leczenie"
+  },
+
+  "CALENDAR": {
+    "GREGORIAN": {
+      "January": "stycznia",
+      "JanuaryAbbr": "Sty",
+      "February": "lutego",
+      "FebruaryAbbr": "Lut",
+      "March": "marca",
+      "MarchAbbr": "Mar",
+      "April": "kwietnia",
+      "AprilAbbr": "Kwi",
+      "May": "maja",
+      "MayAbbr": "Maj",
+      "June": "czerwca",
+      "JuneAbbr": "Cze",
+      "July": "lipca",
+      "JulyAbbr": "Lip",
+      "August": "sierpnia",
+      "AugustAbbr": "Sie",
+      "September": "września",
+      "SeptemberAbbr": "Wrz",
+      "October": "października",
+      "OctoberAbbr": "Paź",
+      "November": "listopada",
+      "NovemberAbbr": "Lis",
+      "December": "grudnia",
+      "DecemberAbbr": "Gru",
+      "Monday": "Poniedziałek",
+      "MondayAbbr": "Pon",
+      "Tuesday": "Wtorek",
+      "TuesdayAbbr": "Wt",
+      "Wednesday": "Środa",
+      "WednesdayAbbr": "Śr",
+      "Thursday": "Czwartek",
+      "ThursdayAbbr": "Czw",
+      "Friday": "Piątek",
+      "FridayAbbr": "Pt",
+      "Saturday": "Sobota",
+      "SaturdayAbbr": "Sob",
+      "Sunday": "Niedziela",
+      "SundayAbbr": "Ndz",
+      "Spring": "Wiosna",
+      "Summer": "Lato",
+      "Fall": "Jesień",
+      "Winter": "Zima"
+    }
   }
 }
 

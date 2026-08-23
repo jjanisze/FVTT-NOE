@@ -2,7 +2,7 @@
   "id": "neuroshima-2026-overrides",
   "title": "Neuroshima: Ostatnia Era",
   "description": "Neuroshima 5e overrides for dnd5e — skills, combat, equipment, and post-apo survival mechanics.",
-  "version": "0.9.6",
+  "version": "0.13.0",
   "authors": [{ "name": "Jacek Janiszewski" }],
   "compatibility": {
     "minimum": "14",
@@ -60,9 +60,65 @@
       "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
     },
     {
+      "name": "pochodzenia",
+      "label": "Neuroshima — Pochodzenia",
+      "path": "packs/pochodzenia",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "zdolnosci-pochodzenia",
+      "label": "Neuroshima — Zdolności z Pochodzenia",
+      "path": "packs/zdolnosci-pochodzenia",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    },
+    {
       "name": "lekarstwa",
       "label": "Neuroshima — Lekarstwa",
       "path": "packs/lekarstwa",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "amunicja",
+      "label": "Neuroshima — Amunicja",
+      "path": "packs/amunicja",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "granaty",
+      "label": "Neuroshima — Granaty i materiały wybuchowe",
+      "path": "packs/granaty",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "narzedzia",
+      "label": "Neuroshima — Narzędzia",
+      "path": "packs/narzedzia",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "bron",
+      "label": "Neuroshima — Broń",
+      "path": "packs/bron",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "pancerze",
+      "label": "Neuroshima — Pancerze",
+      "path": "packs/pancerze",
       "type": "Item",
       "system": "dnd5e",
       "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
@@ -81,7 +137,7 @@
       "name": "Neuroshima",
       "sorting": "m",
       "color": "#6b3f1f",
-      "packs": ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "lekarstwa", "bestiariusz"]
+      "packs": ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "pochodzenia", "zdolnosci-pochodzenia", "bron", "pancerze", "lekarstwa", "amunicja", "granaty", "narzedzia", "bestiariusz"]
     }
   ],
   "esmodules": ["scripts/main.mjs"],

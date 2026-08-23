@@ -85,8 +85,8 @@ export function registerSrdCleanup() {
  * pill no stable selector or data-action, so it is matched by its localised label
  * and tagged with a class the stylesheet hides.
  *
- * "Add Background" is deliberately left in place: Pochodzenia will occupy that slot
- * when origins land (out of scope for this pass).
+ * "Add Background" is deliberately left in place — od v0.13.0 zajmują go Pochodzenia
+ * (pack `pochodzenia`, 12 itemów typu `background`).
  */
 function registerSheetRemnantCleanup() {
   const SPECIES_LABELS = ["add species", "dodaj gatunek", "dodaj rasę", "species", "gatunek"];

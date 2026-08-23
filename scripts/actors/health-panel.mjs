@@ -36,9 +36,9 @@ import {
   PHOBIAS, PHOBIA_SAVE, PHOBIA_CURE_STREAK, getPhobia, phobiaOptions
 } from "../config/phobias-data.mjs";
 import {
-  MEDICINES, MEDICINE_FLAVOR, MEDICINE_FLAVOR_DEFAULT,
-  getMedicine, medicineKeyByName, medicinesForDisease, medicineItemData
-} from "../config/medicine-data.mjs";
+  CHEMIA, CHEMIA_FLAVOR, CHEMIA_FLAVOR_DEFAULT,
+  getChemia, chemiaKeyByName, chemiaForDisease, chemiaItemData
+} from "../config/chemia-data.mjs";
 import { effectsFor } from "../config/disease-effects.mjs";
 import { addExhaustion } from "../config/exhaustion.mjs";
 
@@ -224,9 +224,9 @@ export function resolveMedicineItem(actor, entry) {
     const linked = actor.items.get(entry.itemId);
     if (linked) return linked;
   }
-  const key = medicineKeyByName(entry.medicine);
+  const key = chemiaKeyByName(entry.medicine);
   if (key) {
-    const byKey = actor.items.find(i => i.getFlag(MODULE_ID, "medicineKey") === key);
+    const byKey = actor.items.find(i => i.getFlag(MODULE_ID, "chemiaKey") === key);
     if (byKey) return byKey;
   }
   const wanted = String(entry.medicine ?? "").toLowerCase().trim();
@@ -252,20 +252,20 @@ export function dosesRemaining(item) {
 /**
  * Import (or build) a medicine consumable onto the actor.
  * Prefers the `lekarstwa` compendium so the item stays a single source of truth;
- * falls back to `medicine-data.mjs` when the pack has not been built yet.
+ * falls back to `chemia-data.mjs` when the pack has not been built yet.
  */
 async function _grantMedicine(actor, key, quantity = 1) {
   const pack = game.packs.get(MEDICINE_PACK);
   let data = null;
   if (pack) {
-    const index = pack.index.find(e => e.name === MEDICINES[key]?.label);
+    const index = pack.index.find(e => e.name === CHEMIA[key]?.label);
     if (index) {
       const doc = await pack.getDocument(index._id);
       data = doc.toObject();
       delete data._id;
     }
   }
-  data ??= medicineItemData(key);
+  data ??= chemiaItemData(key);
   data.system.quantity = quantity;
   const [created] = await actor.createEmbeddedDocuments("Item", [data]);
   return created;
@@ -293,8 +293,8 @@ export async function takeDose(actor, entryId) {
   let item = resolveMedicineItem(actor, entry);
 
   if (!item) {
-    const key = medicineKeyByName(entry.medicine) ?? medicinesForDisease(entry.key)[0];
-    const known = getMedicine(key);
+    const key = chemiaKeyByName(entry.medicine) ?? chemiaForDisease(entry.key)[0];
+    const known = getChemia(key);
     const proceed = known && await foundry.applications.api.DialogV2.confirm({
       window: { title: "Brak lekarstwa" },
       content: `<p><strong>${actor.name}</strong> nie ma przy sobie <strong>${known.label}</strong>.</p>`
@@ -335,7 +335,9 @@ async function _consumeOneDose(item) {
 
   if (activity) {
     // Native pipeline: no dialog, no chat card — we post our own below.
-    const result = await activity.use({}, { configure: false }, { create: false });
+    // `neuroSilent` tells `items/chemia.mjs` to stand down for this use, so the
+    // dose does not get announced twice (see its `_onPostUseActivity`).
+    const result = await activity.use({ neuroSilent: true }, { configure: false }, { create: false });
     if (result === undefined || result === null) return false;
     return true;
   }
@@ -349,8 +351,8 @@ async function _consumeOneDose(item) {
 }
 
 async function _postDoseMessage(actor, entry, item, left) {
-  const key = item.getFlag(MODULE_ID, "medicineKey") ?? medicineKeyByName(entry.medicine);
-  const pool = MEDICINE_FLAVOR[key] ?? MEDICINE_FLAVOR_DEFAULT;
+  const key = item.getFlag(MODULE_ID, "chemiaKey") ?? chemiaKeyByName(entry.medicine);
+  const pool = CHEMIA_FLAVOR[key] ?? CHEMIA_FLAVOR_DEFAULT;
   const line = pool[Math.floor(Math.random() * pool.length)]
     .replace("{a}", actor.name)
     .replace("{m}", entry.medicine || item.name);

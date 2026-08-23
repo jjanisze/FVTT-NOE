@@ -38,6 +38,7 @@ export const EXHAUSTION_SOURCES = {
   przemarznie:  { label: "Przemarzni\u0119cie",         restClears: false, color: "#9fe8ff" },
   skazenie:     { label: "Ska\u017cenie radioaktywne",  restClears: false, color: "#7fff3f" },
   choroba:      { label: "Choroba",                restClears: false, color: "#a569bd" },
+  deadline:     { label: "Zej\u015bcie z Deadline'u", restClears: false, color: "#ff4d6d" },
   zranienie:    { label: "Stopie\u0144 Zranienia",      restClears: false, color: "#c0392b" },
   uduszenie:    { label: "Uduszenie",              restClears: true,  color: "#5d6d7e" },
   forsowanie:   { label: "Forsowanie",             restClears: true,  color: "#ff8a3d" },
