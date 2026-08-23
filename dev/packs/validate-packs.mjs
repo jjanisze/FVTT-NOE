@@ -17,6 +17,8 @@ import {
   CLASSES, PROFESSIONS, SZTUCZKA, PROFESJA, PROFESJA_LUB_SZTUCZKA, POCHODZENIE
 } from "../../scripts/config/classes-data.mjs";
 import { CLASS_FEATURES, resolveGrant } from "../../scripts/config/class-features-data.mjs";
+import { SZTUCZKI } from "../../scripts/config/sztuczki-data.mjs";
+import { ORIGIN_ABILITIES, POCHODZENIA, attrBonus } from "../../scripts/config/pochodzenia-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -39,12 +41,14 @@ async function load(name) {
   return docs;
 }
 
-let klasy, profesje, features, sztuczki;
+let klasy, profesje, features, sztuczki, pochodzenia, origins;
 try {
-  [klasy, profesje, features, sztuczki] = await Promise.all(
-    ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki"].map(load));
+  [klasy, profesje, features, sztuczki, pochodzenia, origins] = await Promise.all(
+    ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "zdolnosci-pochodzenia", "pochodzenia"].map(load));
 } catch (err) {
-  if (err.code === "LEVEL_LOCKED" || /lock/i.test(err.message)) {
+  // classic-level wraps the lock error, so the code lives on `cause`, not on `err`.
+  const code = err.cause?.code ?? err.code;
+  if (code === "LEVEL_LOCKED" || /lock/i.test(err.cause?.message ?? err.message)) {
     console.error("FoundryVTT is running — close it before validating packs.");
     process.exit(2);
   }
@@ -55,8 +59,43 @@ try {
 if (klasy.length !== Object.keys(CLASSES).length) fail(`klasy: ${klasy.length} docs, expected ${Object.keys(CLASSES).length}`);
 if (profesje.length !== Object.keys(PROFESSIONS).length) fail(`profesje: ${profesje.length}, expected ${Object.keys(PROFESSIONS).length}`);
 if (features.length !== Object.keys(CLASS_FEATURES).length) fail(`zdolnosci: ${features.length}, expected ${Object.keys(CLASS_FEATURES).length}`);
+if (sztuczki.length !== Object.keys(SZTUCZKI).length) fail(`sztuczki: ${sztuczki.length}, expected ${Object.keys(SZTUCZKI).length}`);
+if (pochodzenia.length !== Object.keys(ORIGIN_ABILITIES).length) fail(`pochodzenia: ${pochodzenia.length}, expected ${Object.keys(ORIGIN_ABILITIES).length}`);
+if (origins.length !== Object.keys(POCHODZENIA).length) fail(`origins: ${origins.length}, expected ${Object.keys(POCHODZENIA).length}`);
 
-const byId = new Set([...features, ...profesje].map(d => d._id));
+const byId = new Set([...features, ...profesje, ...sztuczki, ...pochodzenia].map(d => d._id));
+const originAbilityById = new Set(pochodzenia.map(d => d._id));
+
+/* ---- origins: bonus, ability pool, no leftovers ---- */
+for (const doc of origins) {
+  const key = doc.system.identifier;
+  const def = POCHODZENIA[key];
+  if (!def) { fail(`unknown origin identifier in pack: ${key}`); continue; }
+
+  const asi = doc.system.advancement.find(a => a.type === "AbilityScoreImprovement");
+  if (!asi) fail(`${key}: missing AbilityScoreImprovement`);
+  else {
+    const want = attrBonus(key);
+    const got = asi.configuration.fixed ?? {};
+    if (JSON.stringify(got) !== JSON.stringify(want)) {
+      fail(`${key}: fixed ${JSON.stringify(got)}, expected ${JSON.stringify(want)}`);
+    }
+    // points > 0 would let the player hand out extra increases on top of the origin.
+    if (asi.configuration.points) fail(`${key}: ASI points ${asi.configuration.points}, expected 0`);
+  }
+
+  const choice = doc.system.advancement.find(a => a.type === "ItemChoice");
+  if (!choice) { fail(`${key}: missing ItemChoice`); continue; }
+  const pool = choice.configuration.pool ?? [];
+  const expected = Object.values(ORIGIN_ABILITIES).filter(a => a.origin === key).length;
+  if (pool.length !== expected) fail(`${key}: pool ${pool.length}, expected ${expected}`);
+  for (const { uuid } of pool) {
+    if (!originAbilityById.has(uuid.split(".").pop())) fail(`${key}: dangling uuid ${uuid}`);
+  }
+}
+
+const orphanAbilities = Object.values(ORIGIN_ABILITIES).filter(a => !POCHODZENIA[a.origin]);
+if (orphanAbilities.length) fail(`zdolności bez Pochodzenia: ${orphanAbilities.map(a => a.id).join(", ")}`);
 
 /* ---- every advancement uuid resolves to a built document ---- */
 for (const doc of [...klasy, ...profesje]) {
@@ -125,7 +164,7 @@ for (const doc of klasy) {
     let expectedTraits = 0;
     for (const id of entry) {
       if (id === PROFESJA || id === PROFESJA_LUB_SZTUCZKA || id === SZTUCZKA) { expected++; continue; }
-      if (id === POCHODZENIE) continue;
+      if (id === POCHODZENIE) { expected++; continue; }
       const g = resolveGrant(id);
       if (!g) { fail(`${cid} L${lvl}: unresolved grant ${id}`); continue; }
       if (g.type === "featureWithChoice") expected++;
@@ -159,8 +198,13 @@ for (const doc of profesje) {
     fail(`${pid}: choices at ${levels.join("/")}, expected ${want.join("/")}`);
   }
   for (const a of doc.system.advancement) {
-    if (a.configuration.pool.length !== def.abilities.length) {
-      fail(`${pid} L${a.level}: pool ${a.configuration.pool.length}, expected ${def.abilities.length}`);
+    // "Zdolność z profesji / Sztuczka" is one either/or pick, so its pool is the
+    // profession's own abilities plus every Sztuczka.
+    const entry = CLASSES[def.klasa].levels[a.level] ?? [];
+    const want = def.abilities.length
+      + (entry.includes(PROFESJA_LUB_SZTUCZKA) ? Object.keys(SZTUCZKI).length : 0);
+    if (a.configuration.pool.length !== want) {
+      fail(`${pid} L${a.level}: pool ${a.configuration.pool.length}, expected ${want}`);
     }
   }
 }
@@ -184,8 +228,8 @@ for (const doc of features) {
 }
 
 notes.push(`features: ${features.length} (uses ${withUses}, activities ${withActivity}, art ${withArt})`);
-notes.push(`sztuczki pack: ${sztuczki.length} docs (intentionally empty)`);
-notes.push(`advancements: ${[...klasy, ...profesje].reduce((n, d) => n + d.system.advancement.length, 0)}`);
+notes.push(`sztuczki: ${sztuczki.length} docs; Pochodzenia: ${origins.length}, ich zdolności: ${pochodzenia.length}`);
+notes.push(`advancements: ${[...klasy, ...profesje, ...origins].reduce((n, d) => n + d.system.advancement.length, 0)}`);
 
 /* ---- report ---- */
 console.log("Neuroshima 5e — pack validation\n");

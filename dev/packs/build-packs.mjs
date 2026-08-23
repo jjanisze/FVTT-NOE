@@ -29,7 +29,13 @@ import {
 import {
   CLASS_FEATURES, CHOICE_POOLS, FEATURE_REPEATS, resolveGrant
 } from "../../scripts/config/class-features-data.mjs";
-import { MEDICINES, medicineItemData } from "../../scripts/config/medicine-data.mjs";
+import { CHEMIA, chemiaItemData } from "../../scripts/config/chemia-data.mjs";
+import { SZTUCZKI, sztuczkaItemData } from "../../scripts/config/sztuczki-data.mjs";
+import { ORIGIN_ABILITIES, originAbilityItemData, POCHODZENIA, pochodzenieItemData, abilitiesOf, attrBonus } from "../../scripts/config/pochodzenia-data.mjs";
+import { AMMO_CALIBERS, GRENADE_TYPES } from "../../scripts/config/ammo-data.mjs";
+import { WEAPONS, buildWeaponItemData } from "../../scripts/config/weapons-data.mjs";
+import { ARMORS, buildArmorItemData } from "../../scripts/config/armor-data.mjs";
+import { TOOLKITS, buildToolkitItemData } from "../../scripts/config/toolkits-data.mjs";
 import { BESTIARY } from "../../scripts/config/bestiary-data.mjs";
 import { BLOOD_TYPES, NEUROSHIMA_CREATURE_TYPES } from "../../scripts/config/creature-types.mjs";
 
@@ -47,8 +53,15 @@ const PACK = {
   profesje: "profesje",
   features: "zdolnosci-klasowe",
   sztuczki: "sztuczki",
+  pochodzenia: "zdolnosci-pochodzenia",
+  origins: "pochodzenia",
   lekarstwa: "lekarstwa",
-  bestiariusz: "bestiariusz"
+  amunicja: "amunicja",
+  granaty: "granaty",
+  narzedzia: "narzedzia",
+  bestiariusz: "bestiariusz",
+  bron: "bron",
+  pancerze: "pancerze"
 };
 
 /** Portrait art migrated from Roll20 lives here, one folder per character. */
@@ -71,6 +84,16 @@ function idFor(kind, slug) {
 
 const featureUuid = id => `Compendium.${MODULE_ID}.${PACK.features}.Item.${idFor("feature", id)}`;
 const professionUuid = id => `Compendium.${MODULE_ID}.${PACK.profesje}.Item.${idFor("profession", id)}`;
+const sztuczkaUuid = id => `Compendium.${MODULE_ID}.${PACK.sztuczki}.Item.${idFor("sztuczka", id)}`;
+const originAbilityUuid = id => `Compendium.${MODULE_ID}.${PACK.pochodzenia}.Item.${idFor("origin-ability", id)}`;
+
+/** Every Sztuczka, as an ItemChoice pool. Requirements stay the player's problem: */
+/* dnd5e cannot express "ZRC 15+" as an advancement restriction, so the pool offers */
+/* all 53 and `system.requirements` prints the gate on the item itself. */
+const SZTUCZKI_POOL = Object.keys(SZTUCZKI).map(id => ({ uuid: sztuczkaUuid(id) }));
+
+/** Wszystkie 36 zdolności z Pochodzeń — pula dla Speca poz. 5 i Sztuczki `Patriota`. */
+const ORIGIN_ABILITIES_POOL = Object.keys(ORIGIN_ABILITIES).map(id => ({ uuid: originAbilityUuid(id) }));
 
 /* -------------------------------------------- */
 /*  Helpers                                      */
@@ -203,8 +226,8 @@ function buildProfession(pid, p) {
   //
   // Levels marked "Zdolność z profesji / Sztuczka" are a single either/or pick, not
   // two grants. The subclass owns that choice; `buildClass` deliberately emits
-  // nothing at those levels (see below). `allowDrops` is enabled there so a Sztuczka
-  // can be dropped in until the sztuczki pack is populated and joins the pool.
+  // nothing at those levels (see below). At those levels the pool is the profession's
+  // own abilities PLUS every Sztuczka, which is exactly what the either/or means.
   for (const lvl of parent.professionLevels) {
     const entry = parent.levels[lvl] ?? [];
     const orSztuczka = entry.includes(PROFESJA_LUB_SZTUCZKA);
@@ -213,7 +236,9 @@ function buildProfession(pid, p) {
       orSztuczka ? "Zdolność z profesji / Sztuczka" : "Zdolność z profesji", {
         allowDrops: orSztuczka,
         choices: { [lvl]: { count: 1 } },
-        pool: p.abilities.map(a => ({ uuid: featureUuid(a) })),
+        pool: orSztuczka
+          ? [...p.abilities.map(a => ({ uuid: featureUuid(a) })), ...SZTUCZKI_POOL]
+          : p.abilities.map(a => ({ uuid: featureUuid(a) })),
         restriction: orSztuczka ? { type: "feat" } : {},
         type: "feat"
       }, `${pid}-choice-${lvl}`));
@@ -287,7 +312,19 @@ function buildClass(cid, c) {
 
     for (const id of ids) {
       if (id === PROFESJA) continue;                // handled by the Subclass advancement
-      if (id === POCHODZENIE) continue;             // origins are out of scope this pass
+
+      // Spec poz. 5: druga zdolność z listy własnego Pochodzenia. Pula to wszystkie 36,
+      // bo advancement nie umie jej zawęzić do backgroundu, który postać już nosi.
+      if (id === POCHODZENIE) {
+        adv.push(advancement("ItemChoice", level, "Zdolność z Twojego Pochodzenia", {
+          allowDrops: true,
+          choices: { [level]: { count: 1 } },
+          pool: ORIGIN_ABILITIES_POOL,
+          restriction: { type: "feat" },
+          type: "feat"
+        }, `${cid}-${level}-pochodzenie`));
+        continue;
+      }
 
       // "Zdolność z profesji / Sztuczka" is ONE either/or pick. The subclass owns it
       // (see buildProfession); emitting a class-side choice here too would hand the
@@ -298,7 +335,7 @@ function buildClass(cid, c) {
         adv.push(advancement("ItemChoice", level, "Sztuczka", {
           allowDrops: true,
           choices: { [level]: { count: 1 } },
-          pool: [],                       // sztuczki pack is intentionally empty for now
+          pool: SZTUCZKI_POOL,
           restriction: { type: "feat" },
           type: "feat"
         }, `${cid}-${level}-sztuczka`));
@@ -399,21 +436,217 @@ function buildClass(cid, c) {
 }
 
 /* -------------------------------------------- */
-/*  Medicine consumables                         */
+/*  Lekarstwa / chemia / narkotyki                */
 /* -------------------------------------------- */
 
 /**
- * Medicines are plain consumables ("Używki") so they inherit the whole native
- * item pipeline. `medicine-data.mjs` owns the content; this only stamps ids.
+ * Leki i używki są zwykłymi consumable'ami, więc dziedziczą cały natywny
+ * pipeline przedmiotu. `chemia-data.mjs` trzyma treść; tutaj tylko stemplujemy
+ * deterministyczne id. Materiały pirotechniczne wychodzą z tego samego katalogu
+ * jako `loot`.
+ *
+ * Aktywność „Zażyj" i wszystkie Aktywne Efekty jadą razem z dokumentem — mapa
+ * `activities` przechodzi poprawnie, o ile siedzi pod `system.activities`
+ * (weryfikowane na żywo w dnd5e 5.3; na najwyższym poziomie dokumentu jest
+ * cicho wyrzucana, bo nie jest polem schematu). Dzięki temu przedmiot z packa
+ * działa od razu po przeciągnięciu, bez kroku „dobuduj aktywności".
  */
-function buildMedicine(key) {
-  return { ...medicineItemData(key, { _id: idFor("medicine", key) }), _key: null };
+function buildChemia(key) {
+  return { ...chemiaItemData(key, { _id: idFor("medicine", key) }), _key: null };
+}
+
+/* -------------------------------------------- */
+/*  Sztuczki                                     */
+/* -------------------------------------------- */
+
+/**
+ * Sztuczki to opisowe `feat`y: treść, wymagania i jawna informacja o tym, czy
+ * system cokolwiek z nich egzekwuje (patrz `sztuczki-data.mjs`).
+ */
+function buildSztuczka(key) {
+  return { ...sztuczkaItemData(key, { _id: idFor("sztuczka", key) }), _key: null };
+}
+
+/* -------------------------------------------- */
+/*  Pochodzenia i ich zdolności                  */
+/* -------------------------------------------- */
+
+function buildOriginAbility(key) {
+  const doc = originAbilityItemData(key, { _id: idFor("origin-ability", key) });
+  return { ...doc, img: iconFor("abilities", key), _key: null };
+}
+
+/**
+ * Pochodzenie jako natywny `background`.
+ *
+ * Reguły 2024 dają background dokładnie to, czego Neuroshima chce od Pochodzenia:
+ * podbicie Cech (`AbilityScoreImprovement.fixed`, `points: 0` — gracz nie rozdziela
+ * nic sam) i jedną zdolność z zamkniętej listy (`ItemChoice`). Poziom 0, bo dnd5e
+ * ustawia `level: 1` tylko klasom i podklasom.
+ *
+ * `allowDrops: true`, bo tę samą pulę trzeba móc dobrać drugi raz — Spec na poz. 5
+ * i Sztuczka `Patriota` dokładają kolejne zdolności z listy własnego Pochodzenia,
+ * a advancement nie potrafi warunkować puli od tego, co postać już ma.
+ */
+function buildPochodzenie(key) {
+  const doc = pochodzenieItemData(key, { _id: idFor("origin", key) });
+
+  doc.system.advancement = [
+    advancement("AbilityScoreImprovement", 0, "Premia do Cech Bazowych", {
+      cap: 1, fixed: attrBonus(key), locked: [], points: 0
+    }, `${key}-asi`),
+    advancement("ItemChoice", 0, "Zdolność z Pochodzenia", {
+      allowDrops: true,
+      choices: { 0: { count: 1 } },
+      pool: abilitiesOf(key).map(a => ({ uuid: originAbilityUuid(a.id) })),
+      restriction: { type: "feat" },
+      type: "feat"
+    }, `${key}-ability`)
+  ];
+
+  const icon = iconFor("pochodzenia", key);
+  return { ...doc, img: icon.includes(MODULE_ID) ? icon : doc.img, _key: null };
+}
+
+/* -------------------------------------------- */
+/*  Amunicja / granaty / narzędzia               */
+/* -------------------------------------------- */
+
+/**
+ * Amunicja — luźne naboje jako `consumable` typu `ammo`, po jednej sztuce.
+ * `subtype` to id kalibru, czyli dokładnie ten sam klucz, którym magazynki i
+ * broń dobierają amunicję (`flags.<mod>.mag.ammoType`), więc przedmiot z packa
+ * jest natychmiast rozpoznawany przez `actors/ammo-inventory.mjs`.
+ */
+function buildAmmo(c) {
+  const desc = [
+    `<p><strong>Kategoria:</strong> ${c.category}</p>`,
+    c.formula ? `<p><strong>Obrażenia:</strong> ${c.formula} (${c.type})</p>` : "",
+    c.aoe ? `<p><strong>Obszar:</strong> ${c.aoe}</p>` : "",
+    c.note ? `<p>${c.note}</p>` : ""
+  ].join("");
+
+  return {
+    _id: idFor("ammo", c.id),
+    name: c.label,
+    type: "consumable",
+    img: `modules/${MODULE_ID}/icons/ammo/${c.icon}`,
+    system: {
+      description: { value: desc, chat: "" },
+      source: { custom: "Neuroshima RPG", rules: "2024" },
+      type: { value: "ammo", subtype: c.id },
+      quantity: 1,
+      weight: { value: c.weight ?? 0.02, units: "kg" },
+      price: { value: c.price, denomination: "gp" },
+      properties: [],
+      uses: { max: "", spent: 0, recovery: [], autoDestroy: false },
+      activities: {}
+    },
+    flags: { [MODULE_ID]: { caliber: c.id, availability: c.avail } },
+    _key: null
+  };
+}
+
+/**
+ * Granaty, miny i ładunki. Też `ammo`, bo `actors/grenade-inventory.mjs` szuka
+ * ich po `system.type.subtype` w GRENADE_MAP i dokłada własny przycisk rzutu —
+ * własny typ konsumpcyjny odciąłby je od tego panelu.
+ */
+function buildGrenade(g) {
+  const desc = `<p><strong>Obszar:</strong> ${g.area ?? "—"}</p>`
+    + `<p><strong>RO:</strong> ${g.save ?? "—"}</p>`
+    + `<p>${g.effect ?? ""}</p>`;
+
+  return {
+    _id: idFor("grenade", g.id),
+    name: g.label,
+    type: "consumable",
+    img: `modules/${MODULE_ID}/icons/weapons/${g.icon}`,
+    system: {
+      description: { value: desc, chat: "" },
+      source: { custom: "Neuroshima RPG", rules: "2024" },
+      type: { value: "ammo", subtype: g.id },
+      quantity: 1,
+      weight: { value: g.weight, units: "kg" },
+      price: { value: g.price, denomination: "gp" },
+      properties: [],
+      uses: { max: "", spent: 0, recovery: [], autoDestroy: false },
+      activities: {}
+    },
+    flags: { [MODULE_ID]: { grenade: g.id, availability: g.avail } },
+    _key: null
+  };
+}
+
+/**
+ * Zestawy narzędzi. Kształt itemu pochodzi z `buildToolkitItemData`, żeby pack i
+ * `createToolkits()` nie rozjechały się w opisach; tutaj dochodzą deterministyczne
+ * id oraz aktywności typu `check` — po jednej na każde ST z tabeli użycia.
+ */
+function buildToolkit(kit) {
+  const base = buildToolkitItemData(kit);
+  const activities = {};
+
+  const actions = kit.actions?.length ? kit.actions : [{ name: "Test narzędzi", dc: null }];
+  for (const action of actions) {
+    const aid = idFor("activity", `tool:${kit.id}:${action.name}`);
+    activities[aid] = {
+      _id: aid,
+      type: "check",
+      name: action.dc == null ? action.name : `${action.name} (ST ${action.dc})`,
+      activation: { type: "action", value: 1, condition: "" },
+      consumption: { targets: [], scaling: { allowed: false } },
+      check: {
+        ability: kit.ability,
+        associated: [kit.id],
+        dc: { calculation: "", formula: action.dc == null ? "" : String(action.dc) }
+      }
+    };
+  }
+
+  return {
+    ...base,
+    _id: idFor("toolkit", kit.id),
+    system: { ...base.system, activities },
+    _key: null
+  };
+}
+
+/* -------------------------------------------- */
+/*  Broń i pancerze                              */
+/* -------------------------------------------- */
+
+/**
+ * Broń. Kształt itemu w całości pochodzi z `buildWeaponItemData`, tego samego,
+ * którym `createWeapons()` zasila Zbrojownię — pack i aktor nie mogą się
+ * rozjechać. Tutaj dochodzi wyłącznie deterministyczne id.
+ *
+ * `system.activities` zostaje puste celowo: tryby ognia buduje na żywo
+ * `weapons/fire-modes.mjs` z właściwości broni, więc zapisanie ich do packa
+ * zamroziłoby wynik i podwoiło aktywności po pierwszym przeliczeniu.
+ */
+function buildWeapon(w) {
+  return { ...buildWeaponItemData(w), _id: idFor("weapon", w.id), _key: null };
+}
+
+/**
+ * Pancerze. Jak wyżej — `buildArmorItemData` jest wspólne z `createArmors()`.
+ * Efekty aktywne (bonus do KP z akcesoriów, odporność kinetyczna) przychodzą
+ * stamtąd bez `_id`, bo tylko builder potrafi nadać im id stabilne między
+ * przebudowami; `writePack` wymaga id na każdym efekcie.
+ */
+function buildArmor(a) {
+  const base = buildArmorItemData(a);
+  const effects = (base.effects ?? []).map((e, i) => ({
+    ...e,
+    _id: idFor("armor-effect", `${a.id}.${i}`)
+  }));
+  return { ...base, _id: idFor("armor", a.id), effects, _key: null };
 }
 
 /* -------------------------------------------- */
 /*  Bestiariusz — NPC actors                     */
 /* -------------------------------------------- */
-
 /**
  * Token footprint per size. Neuroshima's six sizes map 1:1 onto dnd5e's.
  */
@@ -999,6 +1232,21 @@ function buildNpc(c) {
 /*  Writer                                       */
 /* -------------------------------------------- */
 
+/**
+ * Write an Item pack.
+ *
+ * Active Effects do NOT ride inside the item document. `effects` is a
+ * *hierarchical* field (`EmbeddedCollectionField.hierarchical === true`, see
+ * `common/data/fields.mjs`), and Foundry gives every hierarchical field its own
+ * key prefix — the same reason `writeActorPack` splits `!actors.items!` out of
+ * the actor. An inline `effects: [{...}]` array is silently read back as empty,
+ * which is exactly how the chemia items first shipped with no effects at all.
+ *
+ *   !items!<itemId>
+ *   !items.effects!<itemId>.<effectId>
+ *
+ * and the item's own `effects` field holds ids, not documents.
+ */
 async function writePack(name, docs) {
   const dir = path.join(PACKS_ROOT, name);
   try {
@@ -1020,13 +1268,19 @@ async function writePack(name, docs) {
   const db = new ClassicLevel(dir, { keyEncoding: "utf8", valueEncoding: "json" });
   await db.open();
   const batch = db.batch();
+  let effectCount = 0;
   for (const doc of docs) {
-    const { _key, ...rest } = doc;
-    batch.put(`!items!${doc._id}`, rest);
+    const { _key, effects = [], ...rest } = doc;
+    batch.put(`!items!${doc._id}`, { ...rest, effects: effects.map(e => e._id) });
+    for (const eff of effects) {
+      batch.put(`!items.effects!${doc._id}.${eff._id}`, eff);
+      effectCount++;
+    }
   }
   await batch.write();
   await db.close();
-  console.log(`  ${name.padEnd(20)} ${String(docs.length).padStart(3)} documents`);
+  console.log(`  ${name.padEnd(20)} ${String(docs.length).padStart(3)} documents`
+    + (effectCount ? `, ${effectCount} effects` : ""));
 }
 
 /**
@@ -1096,15 +1350,25 @@ console.log("Neuroshima 5e — building compendium packs\n");
 const featureDocs = Object.values(CLASS_FEATURES).map(buildFeature);
 const professionDocs = Object.entries(PROFESSIONS).map(([pid, p]) => buildProfession(pid, p));
 const classDocs = Object.entries(CLASSES).map(([cid, c]) => buildClass(cid, c));
-const medicineDocs = Object.keys(MEDICINES).map(buildMedicine);
+const medicineDocs = Object.keys(CHEMIA).map(buildChemia);
+const sztuczkaDocs = Object.keys(SZTUCZKI).map(buildSztuczka);
+const originAbilityDocs = Object.keys(ORIGIN_ABILITIES).map(buildOriginAbility);
+const originDocs = Object.keys(POCHODZENIA).map(buildPochodzenie);
+const ammoDocs = AMMO_CALIBERS.map(buildAmmo);
+const grenadeDocs = GRENADE_TYPES.map(buildGrenade);
+const toolkitDocs = TOOLKITS.filter(k => !k.skip).map(buildToolkit);
+const weaponDocs = WEAPONS.map(buildWeapon);
+const armorDocs = ARMORS.map(buildArmor);
 
 // sanity: every uuid referenced from an advancement must resolve to a built doc
 const built = new Set([
   ...featureDocs.map(d => d._id),
-  ...professionDocs.map(d => d._id)
+  ...professionDocs.map(d => d._id),
+  ...sztuczkaDocs.map(d => d._id),
+  ...originAbilityDocs.map(d => d._id)
 ]);
 const dangling = [];
-for (const doc of [...classDocs, ...professionDocs]) {
+for (const doc of [...classDocs, ...professionDocs, ...originDocs]) {
   for (const a of doc.system.advancement ?? []) {
     const uuids = [
       ...(a.configuration.items ?? []).map(i => i.uuid),
@@ -1146,8 +1410,15 @@ fs.mkdirSync(PACKS_ROOT, { recursive: true });
 if (wanted(PACK.features)) await writePack(PACK.features, featureDocs);
 if (wanted(PACK.profesje)) await writePack(PACK.profesje, professionDocs);
 if (wanted(PACK.klasy)) await writePack(PACK.klasy, classDocs);
-if (wanted(PACK.sztuczki)) await writePack(PACK.sztuczki, []);
+if (wanted(PACK.sztuczki)) await writePack(PACK.sztuczki, sztuczkaDocs);
+if (wanted(PACK.pochodzenia)) await writePack(PACK.pochodzenia, originAbilityDocs);
+if (wanted(PACK.origins)) await writePack(PACK.origins, originDocs);
 if (wanted(PACK.lekarstwa)) await writePack(PACK.lekarstwa, medicineDocs);
+if (wanted(PACK.amunicja)) await writePack(PACK.amunicja, ammoDocs);
+if (wanted(PACK.granaty)) await writePack(PACK.granaty, grenadeDocs);
+if (wanted(PACK.narzedzia)) await writePack(PACK.narzedzia, toolkitDocs);
+if (wanted(PACK.bron)) await writePack(PACK.bron, weaponDocs);
+if (wanted(PACK.pancerze)) await writePack(PACK.pancerze, armorDocs);
 if (wanted(PACK.bestiariusz)) await writeActorPack(PACK.bestiariusz, bestiaryEntries, bestiaryFolders);
 
 if (wanted(PACK.bestiariusz)) {
@@ -1166,7 +1437,8 @@ if (wanted(PACK.bestiariusz)) {
 }
 
 const advCount = classDocs.reduce((n, d) => n + d.system.advancement.length, 0)
-  + professionDocs.reduce((n, d) => n + d.system.advancement.length, 0);
+  + professionDocs.reduce((n, d) => n + d.system.advancement.length, 0)
+  + originDocs.reduce((n, d) => n + d.system.advancement.length, 0);
 console.log(`\n  advancements built: ${advCount}`);
 console.log("  dangling uuids    : none");
 console.log("\nDone. Reload the world to see the packs.");
