@@ -1,0 +1,12 @@
+# LevelDB compendia — bajt w bajt, żadnej konwersji końców linii.
+# `CURRENT` to jedna linia "MANIFEST-NNNNNN\n". Przy core.autocrlf=true git
+# oddałby ją przy checkoucie jako "...\r\n", a LevelDB szukałby wtedy pliku
+# o nazwie z doklejonym \r i pack nie otworzyłby się wcale.
+packs/** -text
+
+# Zasoby binarne
+*.ogg  binary
+*.webp binary
+*.png  binary
+*.jpg  binary
+*.webm binary
