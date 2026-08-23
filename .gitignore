@@ -11,7 +11,10 @@ build/
 # Logs
 logs/*.txt
 logs/*.log
-*.log
+# NOT a bare `*.log` — LevelDB names its write-ahead log `NNNNNN.log`, and that
+# is where a freshly built pack's documents live until a later open compacts
+# them into a `.ldb`. Ignoring it committed `lekarstwa` and `sztuczki` as empty
+# directories. Keep any new log rule anchored to a directory.
 
 # OS / editor
 .DS_Store
