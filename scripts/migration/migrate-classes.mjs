@@ -43,7 +43,7 @@ const PL_MAP = { ą: "a", ć: "c", ę: "e", ł: "l", ń: "n", ó: "o", ś: "s", 
  * Normalise a feat name for matching: lowercase, strip diacritics and punctuation,
  * drop parentheticals and trailing qualifiers ("Ulubiona Broń H&K G3" -> "ulubiona bron").
  */
-function normalize(name) {
+export function normalize(name) {
   let s = String(name ?? "").toLowerCase().trim();
   s = s.replace(/\(.*?\)/g, " ");                 // "Mój Wróg (Maszyny)" -> "Mój Wróg"
   s = s.replace(/[ąćęłńóśźż]/g, c => PL_MAP[c] ?? c);
