@@ -409,9 +409,8 @@ async function _onClickReload(item) {
 }
 
 function _getReloadPlan(item, mag, { magazineType = getMagazineType(item) } = {}) {
-  const tokenDocument = _getItemToken(item);
-  const canQuickSwap = hasAbility(item.actor, ABILITY_KEYS.SZYBKA_WYMIANA, { tokenDocument });
-  const canQuickReload = hasAbility(item.actor, ABILITY_KEYS.SZYBKIE_PRZELADOWANIE, { tokenDocument });
+  const canQuickSwap = hasAbility(item.actor, ABILITY_KEYS.SZYBKA_WYMIANA);
+  const canQuickReload = hasAbility(item.actor, ABILITY_KEYS.SZYBKIE_PRZELADOWANIE);
 
   if (magazineType === MAGAZINE_TYPES.INTERNAL) {
     const actionType = canQuickReload ? "bonus" : "action";
@@ -464,9 +463,8 @@ function _getReloadPlan(item, mag, { magazineType = getMagazineType(item) } = {}
 }
 
 function _getMagazineUi(magazineType, item = null) {
-  const tokenDocument = _getItemToken(item);
-  const canQuickSwap = item?.actor ? hasAbility(item.actor, ABILITY_KEYS.SZYBKA_WYMIANA, { tokenDocument }) : false;
-  const canQuickReload = item?.actor ? hasAbility(item.actor, ABILITY_KEYS.SZYBKIE_PRZELADOWANIE, { tokenDocument }) : false;
+  const canQuickSwap = item?.actor ? hasAbility(item.actor, ABILITY_KEYS.SZYBKA_WYMIANA) : false;
+  const canQuickReload = item?.actor ? hasAbility(item.actor, ABILITY_KEYS.SZYBKIE_PRZELADOWANIE) : false;
   const reloadState = item ? _getReloadState(item) : {};
   const cycleOnly = item ? _canCycleReloadWithoutAmmo(item, getMag(item), reloadState) : false;
 
@@ -685,10 +683,6 @@ async function _spendCombatResource(actor, actionType = "action") {
   await _spendCombatAction(actor);
 }
 
-function _getItemToken(item) {
-  return item?.actor?.token?.document ?? item?.actor?.token ?? item?.actor?.getActiveTokens?.()?.[0]?.document ?? null;
-}
-
 function registerReloadActivityType() {
   if (CONFIG.DND5E.activityTypes[RELOAD_ACTIVITY_TYPE]) return;
   const BaseUtilityActivity = CONFIG.DND5E.activityTypes.utility?.documentClass;
@@ -878,10 +872,7 @@ async function syncMagSwapActivity(item) {
 }
 
 function _buildMagSwapActivityData(item) {
-  const tokenDocument = _getItemToken(item);
-  const canQuickSwap = item.actor
-    ? hasAbility(item.actor, ABILITY_KEYS.SZYBKA_WYMIANA, { tokenDocument })
-    : false;
+  const canQuickSwap = item.actor ? hasAbility(item.actor, ABILITY_KEYS.SZYBKA_WYMIANA) : false;
   return {
     name: canQuickSwap ? "Wymiana magazynka (AB)" : "Wymiana magazynka",
     activation: {
@@ -1137,7 +1128,7 @@ function _shouldShowChamberStatus(item) {
 
 function _ignoresManualReloadMode(item, mode = _getManualReloadMode(item)) {
   if (mode !== "przeladowanie") return false;
-  return hasAbility(item?.actor, ABILITY_KEYS.SZYBKIE_PRZELADOWANIE, { tokenDocument: _getItemToken(item) });
+  return hasAbility(item?.actor, ABILITY_KEYS.SZYBKIE_PRZELADOWANIE);
 }
 
 function _requiresManualReloadBeforeUse(item) {

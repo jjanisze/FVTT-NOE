@@ -65,7 +65,7 @@ export function isCleaned(item) {
 }
 
 export function isPamperedWeapon(item) {
-  if (!hasAbility(item?.actor, ABILITY_KEYS.WYCHUCHANA_SPLUWA, { tokenDocument: _getItemToken(item) })) return false;
+  if (!hasAbility(item?.actor, ABILITY_KEYS.WYCHUCHANA_SPLUWA)) return false;
   return getWeaponMaintenanceState(item).pampered === true;
 }
 
@@ -303,7 +303,7 @@ export async function cleanWeapon(item, { chat = true } = {}) {
 export async function setPamperedWeapon(item, active = true, { chat = true } = {}) {
   const liveItem = _getLiveItem(item);
   if (!liveItem || !_isFirearmItem(liveItem)) return false;
-  if (active && !hasAbility(liveItem.actor, ABILITY_KEYS.WYCHUCHANA_SPLUWA, { tokenDocument: _getItemToken(liveItem) })) {
+  if (active && !hasAbility(liveItem.actor, ABILITY_KEYS.WYCHUCHANA_SPLUWA)) {
     ui.notifications.warn(`${liveItem.name}: ta postać nie ma zdolności Wychuchana spluwa.`);
     return false;
   }
@@ -428,7 +428,7 @@ function onRenderItemSheet(app, html) {
 }
 
 function _buildMaintenancePanelHtml(item) {
-  const canUsePamperedWeapon = hasAbility(item.actor, ABILITY_KEYS.WYCHUCHANA_SPLUWA, { tokenDocument: _getItemToken(item) });
+  const canUsePamperedWeapon = hasAbility(item.actor, ABILITY_KEYS.WYCHUCHANA_SPLUWA);
   const statuses = [];
   if (isCleaned(item)) statuses.push(_buildStatusChip("Wyczyszczona", "#1b5e20", "rgba(27,94,32,0.12)"));
   if (isPamperedWeapon(item)) statuses.push(_buildStatusChip("Wychuchana spluwa", "#7a5a00", "rgba(122,90,0,0.13)"));
@@ -542,7 +542,7 @@ function _getJamImmunityAbilityKey(item) {
 }
 
 function _hasJakDbaszTakMasz(actor) {
-  return hasAbility(actor, ABILITY_KEYS.JAK_DBASZ_TAK_MASZ, { tokenDocument: _getActorToken(actor) });
+  return hasAbility(actor, ABILITY_KEYS.JAK_DBASZ_TAK_MASZ);
 }
 
 function _hasGunsmithTools(actor) {
@@ -555,12 +555,4 @@ function _isFirearmItem(item) {
 
 function _getLiveItem(item) {
   return item?.actor?.items?.get(item.id) ?? item;
-}
-
-function _getActorToken(actor) {
-  return actor?.token?.document ?? actor?.token ?? actor?.getActiveTokens?.()?.[0]?.document ?? null;
-}
-
-function _getItemToken(item) {
-  return _getActorToken(item?.actor);
 }

@@ -7,6 +7,8 @@
  * - Clear item rarity, clear fantasy validProperties
  */
 
+import { WEAPON_ICONS, WEAPON_NAME_ALIASES } from "./weapons-data.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 
 /* -------------------------------------------- */
@@ -110,17 +112,20 @@ const WEAPON_TYPE_PROPERTIES = {
     "przebijajaca", "spalinowa", "unieruchamiajaca", "zasilana",
   ]),
 
-  // Broń Miotana — thrown / non-firearm ranged (axes, knives, grenades)
+  // Broń Miotana — thrown / non-firearm ranged (axes, knives, bows, crossbows)
   miotana: new Set([
     "fin",            // Finezyjna
     "lgt",            // Lekka
     "thr",            // Rzucana
-    "burzaca", "obalajaca", "powracajaca", "przebijajaca", "unieruchamiajaca",
+    "two",            // Dwuręczna (łuki, kusze, proca)
+    "wmag",           // Magazynek wewnętrzny (kusze automatyczne)
+    "burzaca", "cicha", "ladowanie", "obalajaca", "powracajaca",
+    "przebijajaca", "przeladowanie", "sm", "unieruchamiajaca",
   ]),
 
   // Palna Krótka — pistols, pocket SMGs
   palnaKrotka: new Set([
-    "wmag", "beb",
+    "amm", "wmag", "beb",
     "tryb_p", "tryb_ks", "tryb_oz",
     "cicha", "co", "dublet", "jednorazowa", "ladowanie",
     "obalajaca", "poreczna", "ppanc", "przeladowanie", "sm",
@@ -128,7 +133,7 @@ const WEAPON_TYPE_PROPERTIES = {
 
   // Palna Pośrednia — rifles, shotguns, standard SMGs
   palnaPosr: new Set([
-    "wmag", "beb",
+    "amm", "wmag", "beb",
     "tryb_p", "tryb_ks", "tryb_ds", "tryb_oz",
     "cicha", "co", "dluga", "dublet", "jednorazowa", "ladowanie",
     "obalajaca", "poreczna", "ppanc", "przeladowanie", "sm",
@@ -136,15 +141,15 @@ const WEAPON_TYPE_PROPERTIES = {
 
   // Palna Długa — sniper rifles, designated marksman rifles
   palnaDluga: new Set([
-    "wmag", "beb",
+    "amm", "wmag", "beb",
     "tryb_p", "tryb_ks", "tryb_ds", "tryb_oz",
-    "cicha", "ciezka", "co", "dluga", "jednorazowa", "ladowanie",
-    "ppanc", "przeladowanie", "sm",
+    "cicha", "ciezka", "co", "dluga", "dublet", "jednorazowa", "ladowanie",
+    "obalajaca", "ppanc", "przeladowanie", "sm",
   ]),
 
   // Palna Ciężka — machine guns, rocket launchers, heavy support weapons
   palnaCiezka: new Set([
-    "wmag", "beb",
+    "amm", "wmag", "beb",
     "tryb_p", "tryb_ks", "tryb_ds", "tryb_ms", "tryb_oz",
     "burzaca", "cicha", "ciezka", "co", "dluga", "dublet", "jednorazowa", "ladowanie",
     "obalajaca", "ppanc", "przeladowanie", "sm",
@@ -152,7 +157,7 @@ const WEAPON_TYPE_PROPERTIES = {
 
   // Broń specjalna — mortars, flamethrowers, etc.
   specjalna: new Set([
-    "wmag", "beb",
+    "amm", "wmag", "beb", "tryb_p",
     "burzaca", "ciezka", "dluga", "ladowanie", "obalajaca", "ppanc", "przeladowanie", "sm", "zasilana", "spalinowa",
   ]),
 };
@@ -168,91 +173,15 @@ const ALL_WEAPON_PROPERTIES = new Set(
 
 /**
  * Canonical name → icon filename (in icons/weapons/) for every Neuroshima weapon.
- * Used by the preCreateItem hook to auto-assign icons when a weapon item is created
- * without a custom icon (i.e. still has the dnd5e default icon).
+ * Derived from `weapons-data.mjs` so the pack, the Zbrojownia generator and this
+ * hook can never disagree. Aliases cover items still stored under pre-unification
+ * names ("Bejsbol", "Trzydziestka", "AK", …).
  */
 const WEAPON_ICON_MAP = {
-  // Broń biała
-  "Bat":                  "baseball_bat.svg",
-  "Bejsbol/Rurka":        "iron_pipe_club.svg",
-  "Crash":                "crash_halberd.svg",
-  "Kafar":                "kafar_piledriver.svg",
-  "Kastet":               "brass_knuckles.svg",
-  "Katana":               "katana.svg",
-  "Kilof":                "pickaxe.svg",
-  "Łańcuch":              "chain.svg",
-  "Maczeta":              "machete.svg",
-  "Nadziak":              "horsemans_pick.svg",
-  "Nóż taktyczny":        "combat_knife.svg",
-  "Piła spalinowa":       "combat_chainsaw.svg",
-  "Piłomiecz":            "machine_sword.svg",
-  "Siekierka":            "hatchet.svg",
-  "Szabla":               "saber.svg",
-  "Szoker":               "paralyzer.svg",
-  "Topór strażacki":      "fireman_axe.svg",
-  "Widły":                "pitchfork.svg",
-  "Włócznia":             "spear.svg",
-  // Broń miotana
-  "Bolas":                "bola.svg",
-  "Bumerang":             "boomerang.svg",
-  "Dmuchawka":            "blowgun.svg",
-  "Kusza bloczkowa":      "crossbow.svg",
-  "Kusza Cobra":          "cobra_crossbow.svg",
-  "Kusza pistoletowa":    "crossbow.svg",
-  "Łuk bloczkowy":        "bow.svg",
-  "Łuk tradycyjny":       "bow.svg",
-  "Nóż do rzucania":      "combat_knife.svg",
-  "Oszczep":              "javelin.svg",
-  "Proca":                "slingshot.svg",
-  // Palna krótka
-  ".44 Magnum":           "magnum_44.svg",
-  "B 92":                 "beretta_b92.svg",
-  "B 93R":                "beretta_b93r.svg",
-  "Desert Eagle":         "desert_eagle.svg",
-  "G17":                  "glock_17.svg",
-  "Jedenastka":           "colt_1911.svg",
-  "K-22":                 "k_22_revolver.svg",
-  "Mark 23":              "hk_mark_23.svg",
-  "Mk IV":                "ruger_mark_iv.svg",
-  "Obrzyn":               "sawed_off_shotgun.svg",
-  "Peacemaker":           "peacemaker_revolver.svg",
-  "Samoróbka":            "pipe_gun.svg",
-  "Trzydziestka":         "m642_revolver.svg",
-  // Palna pośrednia
-  "AK":                   "ak_47.svg",
-  "AR":                   "armalite_carbine.svg",
-  "Empepiątka":           "hk_mp5.svg",
-  "HK Universal":         "hk_ump.svg",
-  "Scar":                 "scar_heavy.svg",
-  "Tommy gun":            "tommy_gun.svg",
-  "UZI":                  "uzi.svg",
-  "XM-8":                 "xm_8_rifle.svg",
-  // Palna długa
-  "Deer Hunter":          "deer_hunter.svg",
-  "Dwururka":             "double_barreled_shotgun.svg",
-  "Field 03":             "field_03_rifle.svg",
-  "HK G3":                "hk_g3.svg",
-  "Lewar M95":            "lever_action_rifle.svg",
-  "Light Fifty":          "light_fifty.svg",
-  "M1 US Rifle":          "m1_us_rifle.svg",
-  "M14":                  "m14_rifle.svg",
-  "Pompka":               "pump_shotgun.svg",
-  "R700":                 "remington_700.svg",
-  "SP12 Tactical":        "sp12_tactical.svg",
-  "SR 25":                "sr_25.svg",
-  "Strzelba Palmera":     "strzelba_palmera.svg",
-  // Palna ciężka
-  "Bazooka":              "bazooka.svg",
-  "Browning":             "browning_m2.svg",
-  "LAW":                  "law_launcher.svg",
-  "MGL1S":                "mgl1s.svg",
-  "Minigun":              "minigun.svg",
-  "Minimi":               "fn_minimi.svg",
-  "The Pig":              "m60_machine_gun.svg",
-  "Thumper":              "thumper_grenade_launcher.svg",
-  // Specjalna
-  "Miotacz ognia":        "flamethrower.svg",
-  "Moździerz":            "light_mortar.svg",
+  ...WEAPON_ICONS,
+  ...Object.fromEntries(
+    Object.entries(WEAPON_NAME_ALIASES).map(([legacy, canonical]) => [legacy, WEAPON_ICONS[canonical]])
+  ),
 };
 
 /** Default fallback icons per weapon type (when name is not in WEAPON_ICON_MAP). */
@@ -430,6 +359,7 @@ export function registerWeapons() {
   Object.assign(CONFIG.DND5E.itemProperties.ver, { label: "Oburęczna" });
   Object.assign(CONFIG.DND5E.itemProperties.thr, { label: "Rzucana" });
   Object.assign(CONFIG.DND5E.itemProperties.rch, { label: "Zasięgowa" });
+  Object.assign(CONFIG.DND5E.itemProperties.amm, { label: "Mag. (wymienny)" });
 
   // 4. validProperties.weapon = union of all per-type sets.
   //    The render hook (below) then hides entries irrelevant to this weapon's type.

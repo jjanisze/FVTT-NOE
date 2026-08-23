@@ -66,7 +66,10 @@ async function _onUpdateItemSyncCaliberDamage(item, changes) {
   const updates = {};
 
   /* ── Damage formula + type ── */
-  if (caliber?.formula) {
+  // `fixedDamage` = kostki broni biją domyślną formułę kalibru. Bez tego wybór
+  // .12 Ga sprowadziłby Pompkę (4k4) i Dwurówkę (3k4) do wspólnych 2k4.
+  const fixedDamage = item.getFlag(MODULE_ID, "fixedDamage") === true;
+  if (caliber?.formula && !fixedDamage) {
     const parsed = _parseDamageFormula(caliber.formula);
     if (parsed) {
       updates["system.damage.base.number"] = parsed.number;

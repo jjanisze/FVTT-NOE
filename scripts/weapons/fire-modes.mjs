@@ -1322,15 +1322,15 @@ function _isKsAttackHit(roll, targetToken) {
 }
 
 function _hasLeadHail(item) {
-  return hasAbility(item?.actor, ABILITY_KEYS.GRAD_OLOWIU, { tokenDocument: _getItemToken(item) });
+  return hasAbility(item?.actor, ABILITY_KEYS.GRAD_OLOWIU);
 }
 
 function _hasMobileHmgNest(item) {
-  return hasAbility(item?.actor, ABILITY_KEYS.RUCHOME_GNIAZDO_CKM, { tokenDocument: _getItemToken(item) });
+  return hasAbility(item?.actor, ABILITY_KEYS.RUCHOME_GNIAZDO_CKM);
 }
 
 function _hasAssaulter(item) {
-  return hasAbility(item?.actor, ABILITY_KEYS.SZTURMOWIEC, { tokenDocument: _getItemToken(item) });
+  return hasAbility(item?.actor, ABILITY_KEYS.SZTURMOWIEC);
 }
 
 async function _announceLeadHailUse(item, results) {
@@ -1350,10 +1350,6 @@ async function _announceMobileHmgNestUse(item, selection, results) {
     speaker: ChatMessage.getSpeaker({ actor: item.actor }),
     content: buildAbilityRuleChangeNotice(ABILITY_KEYS.RUCHOME_GNIAZDO_CKM, `Chmura ołowiu: ta długa seria zużywa ${selection.bullets} naboi i zadaje ${selection.multiplier}x kości broni.`, { standalone: true })
   });
-}
-
-function _getItemToken(item) {
-  return item?.actor?.token?.document ?? item?.actor?.token ?? item?.actor?.getActiveTokens?.()?.[0]?.document ?? null;
 }
 
 function _getLongBurstLabel(item, selection = DS_THRESHOLDS[0]) {
