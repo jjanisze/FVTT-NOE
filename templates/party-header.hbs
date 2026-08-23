@@ -1,0 +1,186 @@
+<header class="sheet-header">
+
+    {{!-- Akcje drużyny --}}
+    <div class="sheet-header-buttons">
+        <button type="button" class="gold-button" data-action="placeMembers" data-tooltip
+                aria-label="{{ localize "DND5E.Group.PlaceMembers" }}">
+            <i class="fa-solid fa-location-dot" inert></i>
+        </button>
+        <button type="button" class="gold-button" data-action="award" data-tooltip
+                {{#if showXP}}aria-label="{{ localize "DND5E.Group.Distribute.xp" }}"
+                {{else}}aria-label="{{ localize "DND5E.Group.Distribute.noxp" }}"{{/if}}>
+            <i class="fa-solid fa-trophy" inert></i>
+        </button>
+        {{#each CONFIG.restTypes}}
+        <button type="button" class="{{ @key }}-rest gold-button" data-action="rest" data-type="{{ @key }}" data-tooltip
+                aria-label="{{ localize label }}">
+            <i class="{{ icon }}" inert></i>
+        </button>
+        {{/each}}
+    </div>
+
+    {{!-- Portret --}}
+    <div class="left">
+        <div class="portrait">
+            <img src="{{ document.img }}" alt="{{ document.name }}"
+                {{#if editable}}data-action="editImage" data-edit="img"{{/if}}>
+        </div>
+    </div>
+
+    <div class="right">
+
+        <div class="top">
+            {{#if editable}}
+            <input type="text" name="name" class="document-name uninput" value="{{ actor._source.name }}">
+            {{else}}
+            <div class="document-name">{{ document.name }}</div>
+            {{/if}}
+        </div>
+
+        <div class="bottom">
+
+            {{!-- Podróż --}}
+            {{#with podroz}}
+            <div class="movement card neuro-podroz {{#if tempo.spowolnione}}is-slowed{{/if}}">
+                <div class="header travel-pace">
+                    {{!-- Tempo czytamy z liczby chevronów w tle: 1 = Powolne, 4 = Bardzo szybkie. --}}
+                    <div class="neuro-tempo-chevrony" aria-hidden="true">
+                        {{#each tempo.chevrony}}
+                        <svg viewBox="0 0 12 32"><path d="M2 4 L9 16 L2 28"/></svg>
+                        {{/each}}
+                    </div>
+                    <h3 class="neuro-podroz-opis"
+                        {{#if tempo.powod}}data-tooltip="{{ tempo.powod }}"{{/if}}>{{ opis }}</h3>
+                </div>
+
+                <div class="info neuro-podroz-dystans" data-tooltip="{{ tempo.wymog }}">
+                    <div><span class="label">na minutę</span><span class="value">{{ dystans.minuta }} m</span></div>
+                    <div><span class="label">na godzinę</span><span class="value">{{ dystans.godzina }} km</span></div>
+                    <div><span class="label">{{ dystans.dobaLabel }}</span><span class="value">{{ dystans.doba }} km</span></div>
+                    <div class="neuro-trasa">
+                        <span class="label">trasa</span>
+                        <span class="value">
+                            <input type="number" min="0" step="1" data-neuro-trasa value="{{ trasa }}"
+                                   {{#unless @root.owner}}disabled{{/unless}}
+                                   data-tooltip="Długość trasy w kilometrach — przelicza się na czas przejścia w bieżącym tempie.">
+                            <span class="neuro-trasa-jedn">km</span>
+                            <span class="neuro-trasa-czas">{{#if czasTrasy}}≈ {{ czasTrasy }}{{/if}}</span>
+                            <button type="button" class="neuro-toggle neuro-trasa-jedz"
+                                    data-action="neuroTravelSummary" data-tryb="trasa"
+                                    {{#unless @root.owner}}disabled{{/unless}}{{#unless trasaMozliwa}} disabled{{/unless}}{{#if pustyBak}} disabled{{/if}}
+                                    data-tooltip="Zatwierdza przejazd dokładnie wpisanej trasy — tyle km, ile stoi obok.">
+                                <i class="{{ transport.icon }}" inert></i><span>{{ jedzLabel }}</span>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+
+                {{#if paliwo}}{{{ neuroPaliwoPasek paliwo @root.owner }}}{{/if}}
+
+                <div class="neuro-podroz-panel">
+                <div class="neuro-podroz-sterowanie">
+                    <label class="neuro-pole">
+                        <span>Transport</span>
+                        <select data-neuro-transport {{#unless @root.owner}}disabled{{/unless}}
+                                data-tooltip="{{ transport.opis }}">
+                            {{#each transporty}}
+                            <option value="{{ id }}" {{#if wybrany}}selected{{/if}}>{{ label }}</option>
+                            {{/each}}
+                        </select>
+                    </label>
+                    <label class="neuro-pole">
+                        <span>Tempo</span>
+                        <select data-neuro-tempo {{#unless @root.owner}}disabled{{/unless}}
+                                data-tooltip="{{ tempo.wymog }}">
+                            {{#each tempa}}
+                            <option value="{{ id }}" {{#if wybrany}}selected{{/if}}
+                                    {{#if niedostepne}}disabled{{/if}}>{{ label }}</option>
+                            {{/each}}
+                        </select>
+                    </label>
+                    <label class="neuro-pole">
+                        <span>Biom</span>
+                        <select data-neuro-biom {{#unless @root.owner}}disabled{{/unless}}
+                                data-tooltip="Biom, przez który wiedzie trasa. Decyduje, czy zwiadowca z „Mój biom” prowadzi drużynę.">
+                            <option value="">— nie wybrano —</option>
+                            {{#each biomy}}
+                            <option value="{{ id }}" {{#if wybrany}}selected{{/if}}>{{ label }}</option>
+                            {{/each}}
+                        </select>
+                    </label>
+                </div>
+
+                <div class="neuro-podroz-przelaczniki">
+                    <button type="button" class="neuro-toggle {{#if trudnyTeren}}is-on{{/if}}"
+                            data-action="neuroToggleTravel" data-key="trudnyTeren"
+                            {{#unless @root.owner}}disabled{{/unless}}
+                            data-tooltip="Góry, bagna, gęsta dżungla, zaspy. Wymusza tempo Powolne — chyba że drużyna idzie pieszo przez biom znany zwiadowcy.">
+                        <i class="fa-solid fa-mound" inert></i><span>Trudny teren</span>
+                    </button>
+                    <div class="neuro-kolyska" role="group" data-tooltip="{{ dobaTooltip }}">
+                        <i class="fa-solid fa-clock-rotate-left" inert></i>
+                        {{#each zegar}}
+                        <button type="button" class="neuro-toggle {{#if wybrany}}is-on{{/if}}"
+                                data-action="neuroTravelHours" data-godzin="{{ godzin }}"
+                                {{#unless @root.owner}}disabled{{/unless}}{{#if niedostepne}} disabled{{/if}}>
+                            <span>{{ label }}</span>
+                        </button>
+                        {{/each}}
+                    </div>
+                    <button type="button" class="neuro-toggle {{#if @root.wDrodze}}is-on{{/if}}"
+                            data-action="neuroToggleTravel" data-key="aktywna"
+                            {{#unless @root.owner}}disabled{{/unless}}
+                            data-tooltip-html="{{{ wDrodzeOpis }}}">
+                        <i class="fa-solid fa-person-hiking" inert></i><span>W drodze</span>
+                    </button>
+                    <button type="button" class="neuro-toggle" data-action="neuroTravelSummary" data-tryb="segment"
+                            {{#if pustyBak}}disabled{{/if}}
+                            data-tooltip="{{#if pustyBak}}Pusty bak — pojazd nie ruszy.{{else}}Zatwierdza pełny odcinek: {{ segment.km }} km w {{ segment.czas }}. Wysyła podsumowanie na czat i spala paliwo.{{/if}}">
+                        <i class="fa-solid fa-flag-checkered" inert></i><span>{{ wyruszLabel }}</span>
+                    </button>
+                </div>
+
+                <ul class="neuro-podroz-efekty">
+                    {{#if pustyBak}}
+                    <li class="is-bad"><i class="fa-solid fa-gas-pump"></i>
+                        Pusty bak — bez zatankowania pojazd nie ruszy.</li>
+                    {{else if brakPaliwa}}
+                    <li class="is-bad"><i class="fa-solid fa-gas-pump"></i>
+                        Paliwa starczy na {{ trasaMozliwa }} km z {{ trasa }} km trasy — reszta pieszo albo z kanistra.</li>
+                    {{else if segment.obciety}}
+                    <li class="is-bad"><i class="fa-solid fa-gas-pump"></i>
+                        Pełny odcinek {{ segment.czas }} to {{ segment.zadane }} km, a paliwa starczy na {{ segment.km }} km.</li>
+                    {{/if}}
+                    {{#if znosiTeren}}
+                    {{#each znawcy}}
+                    <li class="is-good"><i class="fa-solid fa-map-location-dot"></i>
+                        {{ name }} — {{ powod }}: trudny teren nie spowalnia drużyny.</li>
+                    {{/each}}
+                    {{/if}}
+                    {{#if znawcyBezMarszu}}
+                    <li class="is-bad"><i class="fa-solid fa-map-location-dot"></i>
+                        {{#each znawcy}}{{ name }}{{#unless @last}}, {{/unless}}{{/each}} zna ten biom, ale „Mój biom” znosi trudny teren tylko w marszu pieszym.</li>
+                    {{/if}}
+                    {{#if bezZaskoczenia}}
+                    <li class="is-good"><i class="fa-solid fa-eye"></i> Zwiadowcy nie da się zaskoczyć w znanym biomie.</li>
+                    {{/if}}
+                    {{#each cichoKroczacy}}
+                    <li><i class="fa-solid fa-shoe-prints"></i> {{ name }} — {{ powod }} (tylko dla siebie).</li>
+                    {{/each}}
+                    {{#if zbieractwo}}
+                    <li class="is-good"><i class="fa-solid fa-basket-shopping"></i>
+                        8 h zbieractwa wyżywi {{ zbieractwo }} przez dobę.</li>
+                    {{/if}}
+                    {{#each tempo.efekty}}
+                    <li class="{{#if dobry}}is-good{{else}}is-bad{{/if}}">
+                        <i class="fa-solid {{#if dobry}}fa-circle-plus{{else}}fa-triangle-exclamation{{/if}}"></i> {{ tekst }}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            </div>
+            {{/with}}
+
+        </div>
+
+    </div>
+</header>

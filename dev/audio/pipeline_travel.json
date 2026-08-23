@@ -1,0 +1,30 @@
+{
+    "version": "1.0",
+    "capabilities": ["download", "normalize", "trim", "convert"],
+    "sounds": [
+        {
+            "name": "travel_foot",
+            "sourceUrl": "https://cdn.freesound.org/previews/353/353799_5337613-hq.ogg",
+            "outputFilePath": "../../sounds/travel/travel_foot.ogg",
+            "parameters": { "lufs": -18, "lra": 11, "tp": -1.5, "trimStart": 0.2, "trimDuration": 4 }
+        },
+        {
+            "name": "travel_mount",
+            "sourceUrl": "https://cdn.freesound.org/previews/175/175356_2861652-hq.ogg",
+            "outputFilePath": "../../sounds/travel/travel_mount.ogg",
+            "parameters": { "lufs": -18, "lra": 11, "tp": -1.5, "trimStart": 0, "trimDuration": 4 }
+        },
+        {
+            "name": "travel_vehicle",
+            "sourceUrl": "https://cdn.freesound.org/previews/50/50898_179538-hq.ogg",
+            "outputFilePath": "../../sounds/travel/travel_vehicle.ogg",
+            "parameters": { "lufs": -18, "lra": 11, "tp": -1.5, "trimStart": 0, "trimDuration": 4.8 }
+        },
+        {
+            "name": "refuel",
+            "sourceUrl": "https://cdn.freesound.org/previews/700/700152_8457339-hq.ogg",
+            "outputFilePath": "../../sounds/travel/refuel.ogg",
+            "parameters": { "lufs": -18, "lra": 11, "tp": -1.5, "trimStart": 0, "trimDuration": 1.7 }
+        }
+    ]
+}

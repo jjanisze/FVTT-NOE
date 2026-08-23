@@ -1,0 +1,79 @@
+<section class="tab {{ tab.cssClass }} neuro-zapasy" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    {{#with zapasy}}
+
+    <div class="neuro-zapasy-akcje">
+        {{#if isGM}}
+        <button type="button" data-action="neuroFeed"
+                data-tooltip="Zdejmij dzienną rację każdemu i rozlicz Niedożywienie / Odwodnienie">
+            <i class="fa-solid fa-utensils" inert></i> Dzienne zapotrzebowanie
+        </button>
+        {{/if}}
+        <button type="button" data-action="neuroHunt"
+                data-tooltip="1 h na postoju — Test Mądrości (Survival)">
+            <i class="fa-solid fa-paw" inert></i> Polowanie ST {{ polowanieST }}
+        </button>
+        <button type="button" data-action="neuroCook"
+                data-tooltip="2 h, narzędzia małego kucharza — Ułatwienie w następnym RO, 20+ daje Fuksa">
+            <i class="fa-solid fa-fire-burner" inert></i> Gotowanie ST {{ gotowanieST }}
+        </button>
+    </div>
+
+    {{#each kategorie}}
+    <div class="neuro-zapas-blok {{#if krytyczne}}is-krytyczny{{/if}}">
+        <div class="neuro-zapas-naglowek">
+            <i class="{{ icon }}" inert></i>
+            <span class="neuro-zapas-nazwa">{{ label }}</span>
+            <span class="neuro-zapas-stan">{{ total }} {{ unit }}</span>
+            {{#if naDobe}}
+            <span class="neuro-zapas-potrzeba">zapotrzebowanie {{ naDobe }} {{ unit }}/dobę</span>
+            <span class="neuro-zapas-dni" data-tooltip="Dni autonomii przy pełnych racjach">{{ dni }} dni</span>
+            {{/if}}
+        </div>
+        {{#if pozycje.length}}
+        <ul class="neuro-zapas-lista">
+            {{#each pozycje}}
+            <li>
+                <img src="{{ img }}" alt="{{ name }}">
+                <a data-action="showDocument" data-uuid="{{ uuid }}">{{ name }}</a>
+                <span class="neuro-zapas-owner">{{ owner }}</span>
+                <span class="neuro-zapas-qty">×{{ qty }}</span>
+                <span class="neuro-zapas-ilosc">{{ ilosc }} {{ ../unit }}</span>
+            </li>
+            {{/each}}
+        </ul>
+        {{else}}
+        <p class="neuro-zapas-pusto">Brak.</p>
+        {{/if}}
+    </div>
+    {{/each}}
+
+    <div class="neuro-zapas-blok">
+        <div class="neuro-zapas-naglowek">
+            <i class="fa-solid fa-people-group" inert></i>
+            <span class="neuro-zapas-nazwa">Zapotrzebowanie na dobę</span>
+            <span class="neuro-zapas-stan">{{ potrzeba.jedzenie }} kg &middot; {{ potrzeba.woda }} l</span>
+        </div>
+        <ul class="neuro-zapas-lista">
+            {{#each osoby}}
+            <li>
+                <img src="{{ img }}" alt="{{ name }}">
+                <a data-action="showDocument" data-uuid="{{ uuid }}">{{ name }}</a>
+                <span class="neuro-zapas-owner">{{ sizeLabel }}</span>
+                <span class="neuro-zapas-ilosc">{{ jedzenie }} kg &middot; {{ woda }} l</span>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+    {{#if pojazd}}
+    <div class="neuro-zapas-blok">
+        <div class="neuro-zapas-naglowek">
+            <i class="fa-solid fa-truck-pickup" inert></i>
+            <span class="neuro-zapas-nazwa">Bagażnik</span>
+            <span class="neuro-zapas-stan"><a data-action="showDocument" data-uuid="{{ pojazd.uuid }}">{{ pojazd.name }}</a></span>
+        </div>
+    </div>
+    {{/if}}
+
+    {{/with}}
+</section>
