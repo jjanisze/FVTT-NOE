@@ -19,10 +19,15 @@ Header whitespace — total readout (my pick)| `lang/pl.json` | 553 tłumaczeń 
 | `icons/statuses/ASSETS.md` | Specyfikacja ikon dla 2 stanów bez odpowiednika w dnd5e |
 | `scripts/config/exhaustion.mjs` | Wyczerpanie (speed penalty override) |
 | `scripts/config/rest.mjs` | Odpoczynki (4h KO / 24h DO) |
-| `scripts/actors/abilities.mjs` | PROTOTYP: warstwa zdolności per aktor / per pionek |
+| `scripts/actors/abilities.mjs` | Most: stare klucze zdolności -> realne przedmioty z packów |
 | `scripts/config/diseases-data.mjs` | 8 chorób przewlekłych (k8) + 4 popularne — tekst stanów wg RAW |
 | `scripts/config/phobias-data.mjs` | 8 fobii (k8) — Efekt + Przełamanie wg RAW |
-| `scripts/config/medicine-data.mjs` | 12 lekarstw jako Używki (ceny/dostępność/dawki) + flavour „Weź dawkę" |
+| `scripts/config/chemia-data.mjs` | 35 pozycji chemii: leki, narkotyki, używki, materiały pirotechniczne — dane, Active Effects, activities |
+| `scripts/items/chemia.mjs` | Egzekwowanie chemii: leczenie, dawki dzienne, szał, efekty odroczone, karty czatu |
+| `scripts/config/sztuczki-data.mjs` | 53 Sztuczki + rejestr tego, co system faktycznie automatyzuje |
+| `scripts/config/pochodzenia-data.mjs` | 12 Pochodzeń jako `background` (pack `pochodzenia`) + 36 zdolności (pack `zdolnosci-pochodzenia`) + rejestr automatyki |
+| `scripts/migration/migrate-pochodzenia.mjs` | Wstawienie Pochodzenia w slot `background` postaci z Roll20 (cofa +1/+1 wliczone ręcznie) |
+| `scripts/config/coverage-ledger.mjs` | Wspólna fabryka rejestru automatyki (`status`/`html`/`coverage`/`report`) dla Sztuczek i Pochodzeń |
 | `scripts/actors/health-panel.mjs` | Panel Choroby/Fobie (Biografia), pasek w sidebarze, dawki, Przełamanie, Zachód słońca |
 | `scripts/config/disease-effects.mjs` | Mechanika stanów chorób — zmiany AE, ataki, sytuacyjne, szał, krwawienie, mnożnik upadku |
 | `scripts/actors/disease-effects.mjs` | Egzekwowanie: sync Active Effects, Utrudnienie do ataków, przycisk Szału |
@@ -31,7 +36,6 @@ Header whitespace — total readout (my pick)| `lang/pl.json` | 553 tłumaczeń 
 | `scripts/actors/fuks-pips.mjs` | Trzy piki Fuksa w nagłówku karty (zastępują gwiazdkę Inspiration) |
 | `scripts/migration/migrate-health.mjs` | Migracja Chorób/Fobii/Fuksów z pól tekstowych na flagi |
 | `scripts/combat/zranienie.mjs` | Stopień Zranienia (wound levels 0–4) |
-| `scripts/combat/forsowanie.mjs` | Forsowanie (push failed checks) — DEPRECATED, replaced by rerolls.mjs |
 | `scripts/combat/rerolls.mjs` | Przerzuty: Forsowanie + Fuks (reroll mechanics) |
 | `scripts/combat/knockout.mjs` | Nokautowanie + Ostatnia Akcja |
 | `scripts/combat/cover.mjs` | Dynamiczna osłona per atak + redukcja dla strzału przez |
@@ -64,6 +68,10 @@ Header whitespace — total readout (my pick)| `lang/pl.json` | 553 tłumaczeń 
 | `scripts/actors/addons-inventory.mjs` | UI Ulepszeń — context menu na loot, panel na arkuszu broni, chat tagi, przyciski toggle setup |
 | `scripts/config/addons-data.mjs` | Statyczny słownik ADDON_DEFS (definicje wszystkich ulepszeń) |
 | `scripts/config/weapons.mjs` | Override kategorii broni D&D 5e na kategorie Neuroshimy |
+| `scripts/config/weapons-data.mjs` | 74 bronie z tabel — obrażenia, zasięgi, właściwości, kaliber, magazynek, waga, cena, dostępność. Źródło packa `bron` i `createWeapons()` |
+| `scripts/config/armor-data.mjs` | 17 pancerzy z `Pancerz.md` — KP, wymagana SIŁA, próg obrażeń, odporność kinetyczna, szczelność, czas zakładania |
+| `scripts/config/armor.mjs` | Override `equipmentTypes`/`armorProficiencies`, czyszczenie `armorIds`/`shieldIds`, trzy własne właściwości ekwipunku |
+| `scripts/actors/armor-rules.mjs` | Mechanika pancerzy — próg obrażeń, odporność kinetyczna, kara za brak wyszkolenia, kara Szybkości, Skradanie się, ostrzeżenia o regułach ręcznych |
 | `scripts/migration/migrate-weapon-ammo.js` | Migracja istniejących broni → kalibry |
 | `scripts/migration/migrate-weapon-types.js` | Migracja istniejących broni → poprawne kategorie Neuroshimy |
 | `scripts/actors/surowce-inventory.mjs` | Panel „Surowce" w Ekwipunku — 5 typów (CH/CE/CZ/MK/MO) wyciągnięte z Używek jako osobne pule z paskiem wagi. Żywe, wpięte w `main.mjs`; dopisane do tabeli 2026-08-21, wcześniej brakowało wiersza mimo że kod istniał od dawna |
@@ -73,6 +81,9 @@ Header whitespace — total readout (my pick)| `lang/pl.json` | 553 tłumaczeń 
 | `styles/neuroshima.css` | CSS — post-apo visual + hide spellcasting (1365 linii, sekcje oznaczone `/* === */`, waliduj po edycji: `npm run validate:css`) |
 
 ---
+
+**Znaczniki w trackerze:** `[x]` zrobione · `[~]` częściowo (zakres opisany przy wpisie) ·
+`[ ]` do zrobienia · `[—]` świadoma decyzja, że tego nie robimy — nie zaległość.
 
 ## Phase 1: Playable MVP
 
@@ -205,10 +216,10 @@ z siebie nic nie daje — poziomy, piki i cykl kliknięć musiały powstać od z
 - [x] API `game.neuroshima.conditions`: `drink()` (RO KON ST 15), `soberUp()` (Kac — RO KON ST 10,
   porażka = Wyczerpanie), `radiationSave()`, `clearRadiation()` (RadOff), `get/set/adjust/sync`
 - [x] Backfill przy starcie świata dla GM — jak przy chorobach; sync jest no-opem, gdy nic się nie różni
-- [ ] Świadomie **poza automatyką** (wyzwalacze czasu i miejsca, per wybór zakresu):
+- [—] Świadomie **poza automatyką** (wyzwalacze czasu i miejsca, per wybór zakresu):
   odliczanie 4 h do kolejnego stopnia Kaca, godzinowy tick skażenia, tagowanie sceny/strefy
   poziomem skażenia. Warstwa daje przyciski i arytmetykę; kiedy je nacisnąć, decyduje MG
-- [ ] Świadomie poza automatyką (brak pola w dnd5e / czysty opis): „Ułatwienie do RO przeciw
+- [—] Świadomie poza automatyką (brak pola w dnd5e / czysty opis): „Ułatwienie do RO przeciw
   Przerażeniu" (RO są kluczowane cechą, nie odpieranym stanem), „nie potrafisz przejść 3 m
   w linii prostej". Wypisywane w opisie efektu jako „Poza automatyką: …"
 - [x] Ikony: placeholdery `icons/statuses/upojenie.svg` / `skazenie.svg` + pełna specyfikacja
@@ -248,11 +259,11 @@ z siebie nic nie daje — poziomy, piki i cykl kliknięć musiały powstać od z
 - [x] Flaga `cleaned` per broń + osobny przycisk czyszczenia jako aktywność odpoczynku (1h)
 - [x] `cleaned` znika po następnym użyciu broni
 - [x] Hooki na `Jak Dbasz, Tak Masz` i `Wychuchana spluwa`
-- [x] PROTOTYP: brak automatycznej walidacji wymagań sztuczek / zdolności; warunki zakupu pozostają po stronie MG
-- [x] PROTOTYP: `Grad ołowiu` podpięty do warstwy zdolności; sztuczka znosi tylko blokadę `KS -> kolejna KS` w tej samej rundzie
+- [x] Brak automatycznej walidacji wymagań sztuczek / zdolności; warunki zakupu pozostają po stronie MG
+- [x] `Grad ołowiu` znosi tylko blokadę `KS -> kolejna KS` w tej samej rundzie
 - [x] `Wychuchana spluwa` może być zmieniana tylko poza walką, z komunikatami start/stop i jedną aktywną bronią naraz
-- [x] PROTOTYP: warstwa zdolności per aktor / per pionek (flagi + resolver + panel na karcie aktora)
-- [x] PROTOTYP: `Wychuchana spluwa` działa tylko przy aktywnej zdolności; sama flaga na broni nie wystarcza
+- [x] Zdolności wpływające na broń wynikają wyłącznie z przedmiotów na karcie (zdolność klasowa / Sztuczka / zdolność z Pochodzenia). Panel prototypowy z flagami per aktor / per pionek został usunięty — patrz nagłówek `actors/abilities.mjs`
+- [x] `Wychuchana spluwa` działa tylko przy posiadanej zdolności; sama flaga na broni nie wystarcza
 
 ### 1.7a Materiały Wybuchowe / Granaty
 - [x] Oddzielenie materiałów wybuchowych od sekcji Amunicja — osobna tabela „Materiały wybuchowe" w inventory
@@ -276,10 +287,10 @@ z siebie nic nie daje — poziomy, piki i cykl kliknięć musiały powstać od z
 - [x] Ogień pojedynczy (P) — bazowa aktywność `attack` broni palnej automatycznie przemianowana na „Ogień pojedynczy" przy sync
 - [x] **Bugfix (2026-07-04)**: P był zawsze obecny niezależnie od `tryb_p` (broń bez tej właściwości, np. Minigun — RAW ma tylko MS — i tak dostawała pojedynczy strzał). `syncBaseAttackActivity` teraz bramkuje bazową aktywność `attack` przez `_hasProperty(item,"tryb_p")`, symetrycznie jak KS/DS/MS/OZ (tworzy/usuwa). `_findReferenceAttackActivity` ma fallback do `DEFAULT_ATTACK_ACTIVITY_TEMPLATE`, żeby buildery KS/DS/MS/OZ nadal miały wzorzec (zasięg/aktywacja) nawet gdy broń nie ma trybu P. Zweryfikowano na całym świecie (188 broni palnych, 0 anomalii po fixie); przy okazji naprawiono niezwiązaną korupcję danych na „H&K UMP (uszkodzone)" (klucz mapy `system.activities` różnił się od wewnętrznego `_id` aktywności, przez co natywny `item.deleteActivity()` cicho nic nie robił).
 - [x] Krótka seria (KS): 3 naboje, Utrudnienie, 3× obrażenia, bez mod.
-- [x] PROTOTYP: `Grad ołowiu` zdejmuje limit `1 KS/rundę`; limit ataków w turze pozostaje po stronie gracza / MG, nie karty
-- [x] PROTOTYP: `Szturmowiec` zmienia domyślny rzut `KS` z utrudnienia na normalny; MG może ręcznie nadpisać wybór w dialogu
+- [x] `Grad ołowiu` zdejmuje limit `1 KS/rundę`; limit ataków w turze pozostaje po stronie gracza / MG, nie karty
+- [x] `Szturmowiec` zmienia domyślny rzut `KS` z utrudnienia na normalny; MG może ręcznie nadpisać wybór w dialogu
 - [x] Długa seria (DS): 10–30 nabojów, linia, RO ZRC, progi obrażeń — vertical slice
-- [x] PROTOTYP: `Ruchome gniazdo CKM` podwaja koszt amunicji i liczbę kości obrażeń dla `DS`, z osobnym komunikatem wyjątku reguły
+- [x] `Ruchome gniazdo CKM` podwaja koszt amunicji i liczbę kości obrażeń dla `DS`, z osobnym komunikatem wyjątku reguły
 - [x] Template DS/MS znika automatycznie po wyjściu z tury strzelca
 - [x] Miażdżąca seria (MS): 50–200 nabojów, szerokość 3m, RO ZRC + RO SIŁ
 - [x] Ogień zaporowy (OZ): 6 nabojów, template do początku następnej tury strzelca, RO MDR, blokada Akcji/BA — vertical slice
@@ -324,14 +335,14 @@ Zastępuje pierwotne podejście z `PLAN_shooting_vfx.md` (Sequencer `.effect()` 
 - [x] **KS**: `fire-modes.mjs` `_playShortBurstVfx()` analogicznie
 - [x] **(2026-07-29) DS/MS**: `_playAreaBurstVfx()` (nowy helper, mirror `_playShortBurstVfx`) woła `tracerFireArea(liveItem, results.templates[0], selection.bullets)` z produkcyjnych handlerów `use()` — serie obszarowe mają teraz tracer na stole. Bez per-tokenowego trafienie/pudło: `tracerFireArea` zawsze kończy próbkowane impakty (`hit:true`), zgodnie z RAW, gdzie każdy nabój serii ląduje gdzieś w szablonie niezależnie od indywidualnych RO celów. OZ świadomie pominięte (poza zakresem VFX per `PLAN_shooting_vfx.md` §2), dostało tylko poprawkę dźwięku (patrz Phase 2 wyżej)
 - [ ] Screen shake (zaplanowany w `PLAN_sequencer.md` §6.3 dla DS/MS) — nieobecny w kodzie
-- [ ] Impact spark/blood + błysk tokena (`PLAN_shooting_vfx.md` §3, warstwy "impact"/"token flash") — porzucone, nie tylko odłożone; trafienie ma dziś tylko warstwę dźwiękową
+- [—] Impact spark/blood + błysk tokena (`PLAN_shooting_vfx.md` §3, warstwy "impact"/"token flash") — porzucone, nie tylko odłożone; trafienie ma dziś tylko warstwę dźwiękową
 - [x] Panel debug (`tracer-debug-panel.mjs`) — rejestrowany w `init`, przycisk widoczny tylko dla GM (`visible: game.user?.isGM`), testowe salwy wszystkich 6 trybów + eksport configu
 
 ### 1.22 Sound Banks (Audiobanki)
 - [x] `sound-bank-manifest.mjs` (auto-lista plików) + `sound-banks.mjs` (redakcyjne mapowanie kaliber/broń → bank → slot → losowy take), w tym syntezowane banki serii (`smg-synth`/`ar-synth`/`fnfal-synth`) tam, gdzie nie istniało nagranie
 - [x] Żywe dla: pojedynczy strzał, przeładowanie, puste kliknięcie (`magazine.mjs`), trafienie pojedynczym strzałem (`ammo.mjs`)
 - [x] **(2026-07-29)** `fire-modes.mjs` KS/DS/MS/OZ przełączone na `playBurstSound()` — banki serii (w tym syntezowane `smg-synth`/`ar-synth`/`fnfal-synth`) rozwiązują się teraz w realnej rozgrywce, nie tylko w panelu debug
-- [ ] Dźwięki trafienia serią (`impact-burst-*`) nieosiągalne strukturalnie — obrażenia serii idą przez `Activity.rollDamage` + ręczny Apply Damage, z pominięciem ścieżki w `ammo.mjs`, która zna kaliber+broń (udokumentowane w komentarzu `ammo.mjs:178-181`)
+- [—] Dźwięki trafienia serią (`impact-burst-*`) nieosiągalne strukturalnie — obrażenia serii idą przez `Activity.rollDamage` + ręczny Apply Damage, z pominięciem ścieżki w `ammo.mjs`, która zna kaliber+broń (udokumentowane w komentarzu `ammo.mjs:178-181`)
 - [x] Panel debug (`sound-debug-panel.mjs`) — 3 zakładki (BANKI/KALIBRY/NIEZNANE), rejestrowany w `init`, GM-only, odtwarzanie lokalne bez broadcastu
 
 ### 1.20 Melee Weapon Degradation
@@ -415,8 +426,10 @@ wszystko zgłoszone przed `game.ready`, więc `CONFIG.Actor.sheetClasses` jest d
 
 ### 1.16 Level Progression
 - [x] Level cap 12
-- [ ] PD thresholds (50, 150, 300... 3400)
-- [ ] Pasywna Percepcja display
+- [x] PD thresholds (50, 150, 300… 3400) — `actors/pd-panel.mjs`, progi 0…3400 dla poz. 1–12.
+  **Stał tu jako `[ ]` mimo zamknięcia w v0.6.0**; live: panel pokazuje „poz. 1 · 50 PD do 2"
+- [x] Pasywna Percepcja display — natywne dnd5e, wartość pasywna stoi przy każdej Umiejętności
+  (18 węzłów `.passive` na karcie). Nic do dopisania
 
 ### 1.17 Weapon Types / Kategorie Broni
 - [x] Usunięcie The Simple/Martial D&D weapon types.
@@ -449,8 +462,13 @@ wszystko zgłoszone przed `game.ready`, więc `CONFIG.Actor.sheetClasses` jest d
 - [~] Weapon properties (cicha, ppanc, Wmag, etc.) — zdefiniowane + filtrowane per typ + tooltipy; egzekwowanie mechaniczne częściowe. Porażająca/Powalająca/Unieruchamiająca egzekwowane (`weapon-save-properties.mjs`, live-verified). Reszta: patrz `PLAN_weapon_properties.md`
 - [x] Właściwość "Obalająca" (skrypt wymuszający rzut obronny na celach, sprawdzenie rozmiaru celów)
 - [x] Weapon attachments/upgrades — patrz §1.18 Ulepszenia Broni (`addons.mjs`, live-verified)
-- [ ] Armor handling (lekki/średni/ciężki + powered armor)
-- [ ] Armor durability (opcjonalnie)
+- [x] **Armor handling** (lekki/średni/ciężki + wspomagany) — `config/armor-data.mjs` (17 pozycji),
+  `config/armor.mjs` (override `CONFIG.DND5E` bez zawężania schematu), `actors/armor-rules.mjs`
+  (próg obrażeń, odporność kinetyczna, kara za brak wyszkolenia, kara prędkości za niską SIŁĘ).
+  Patrz v0.11.0 w Changelogu
+- [—] Armor durability — **decyzja: świadomie poza automatyką**, nie „odłożone". Wytrzymałość
+  pancerzy siedzi w polu `manual`, drukuje się w opisie przedmiotu i zbiera przez
+  `game.neuroshima.pancerze.report()`
 - [ ] Carry thresholds (SIŁ×5 / SIŁ×10 kg)
 - [ ] Przedmioty podręczne (3 sloty)
 - [x] **Surowce** (5 typów: CH, CE, CZ, MK, MO) — `actors/surowce-inventory.mjs`, panel w Ekwipunku.
@@ -476,8 +494,18 @@ Szczegółowy plan: `PLAN_classes.md`
 - [x] XP panel + personal PD tracking — `actors/pd-panel.mjs` (progi 0…3400, auto-PD za Stopień Zranienia)
 - [x] Migracja 22 istniejących postaci — `migration/migrate-classes.mjs` (11 rozpoznanych, homebrew zachowany)
 - [x] Usunięcie pozostałości SRD — `config/srd-cleanup.mjs` (klasy/zaklęcia/rasy ukryte i zablokowane)
-- [ ] Sztuczki (feat-like items) — pack `neuroshima.sztuczki` utworzony **pusty**, ItemChoice już podpięte
-- [ ] 12 Pochodzeń (origins) z bonusami cech
+- [x] Sztuczki (feat-like items) — pack `neuroshima.sztuczki` z **53 pozycjami** (`config/sztuczki-data.mjs`),
+  ItemChoice podpięte do puli po obu stronach (klasy i profesje). Mechanikę ma na razie **6/53**
+  (3 pełne, 3 częściowe) — reszta to opis + jawny rejestr „tego nie automatyzujemy"
+  (`game.neuroshima.sztuczki.report()`)
+- [x] 12 Pochodzeń (origins) z bonusami cech — pack `pochodzenia` (12 itemów typu `background`,
+  natywny slot dnd5e) i `zdolnosci-pochodzenia` (36 zdolności z `Tabele/Pochodzenie.md`),
+  oba z `config/pochodzenia-data.mjs`. Premie +1/+1 nakłada `AbilityScoreImprovement` z `fixed`,
+  wybór zdolności — `ItemChoice` z pulą trzech pozycji regionu. Bez własnego kodu.
+  Mechanikę ma **1 z 36** (`Wychuchana spluwa`); reszta to opis + rejestr
+  (`game.neuroshima.pochodzenia.report()`)
+- [x] Migracja Pochodzeń — `migration/migrate-pochodzenia.mjs` (13 postaci: 10 wywnioskowanych
+  z ręcznych featów, 3 wylosowane k12; premie wliczone wcześniej ręcznie cofnięte, cechy bez zmian)
 - [x] **Cichy krok** (Zwiadowca poz. 3, `actors/cichy-krok.mjs`, 2026-08-21) — pierwsza z 133 zdolności
   klasowych/profesji, która dostała mechanikę zamiast samego tekstu. Trzy klauzule:
   - Trudny teren nie spowalnia ruchu — Active Effect (`ADD "all"` na natywnym
@@ -522,7 +550,7 @@ Phase 5, teraz skreślony). Pełny opis pipeline'u: `DEV_GUIDE.md` §11.
   pierścieniu. Token art z Roll20 świadomie zignorowany (okrągłe kadry, nie top-down)
 - [ ] Docelowa grafika (poziom 1 pipeline'u) dla istot bez aliasu/artu — 30 z 51 wciąż na
   placeholderze, patrz `tokens/README.md`
-- [ ] Zombie (nakładka Death Breath) i Mobsprzęt (losowane podwozie/broń) świadomie poza packiem —
+- [—] Zombie (nakładka Death Breath) i Mobsprzęt (losowane podwozie/broń) świadomie poza packiem —
   patrz `DEV_GUIDE.md` §11.8
 
 ## Phase 4: Long-Term Survival
@@ -579,7 +607,7 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   rozstrzyga się samo — k100 leci dopiero po kliknięciu
 - [x] Backfill przy starcie świata: karty sprzed tej warstwy i zmiany w tabeli efektów
   dojeżdżają same; sync jest no-opem, gdy nic się nie różni
-- [ ] Świadomie **poza automatyką** (2 stany bez części mechanicznej + zdania czysto opisowe):
+- [—] Świadomie **poza automatyką** (2 stany bez części mechanicznej + zdania czysto opisowe):
   „atakujesz wszystkich wokół", „jedyną akcją jest Unikanie", „tylko broń improwizowana",
   „nie przejdziesz 3 m w linii prostej". Panel wypisuje je pod stanem jako „Poza automatyką: …",
   żeby było widać, która połowa stanu jest egzekwowana
@@ -607,9 +635,10 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   dialog pokazuje mnożnik z góry, zanim cokolwiek poleci
 
 ### 4.2 Lekarstwa i dawkowanie
-- [x] `medicine-data.mjs` — 12 lekarstw jako **Używki** (`consumable`, typ `lekarstwo`
+- [x] `chemia-data.mjs` — **35 pozycji** (leki przewlekłe, bojowe, popromienne, narkotyki, używki,
+  materiały pirotechniczne) jako **Używki** (`consumable`, typ `lekarstwo`
   zarejestrowany w `terminology.mjs`), z cenami/dostępnością z tabeli LEKARSTWA (str. 111)
-  i aktywnością „Zażyj dawkę" (`itemUses` + `autoDestroy`)
+  i aktywnością „Zażyj dawkę" (`itemUses` + `autoDestroy`). Zastąpił `medicine-data.mjs` (12 pozycji)
 - [x] Kompendium `neuroshima-2026-overrides.lekarstwa` budowane z tego samego pliku
       (`dev/packs/build-packs.mjs`) — jedno źródło prawdy, bez ręcznej edycji packa
 - [x] **Przycisk „Weź dawkę"** na wierszu choroby: zużycie idzie przez **natywną ścieżkę
@@ -620,7 +649,7 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   luźne dopasowanie po nazwie (to ostatnie sprawia, że „Wapniak" trafia w „Wapniak (20)",
   a „Actinix" w „Actinix/Rephidal")
 - [x] Brak leku w ekwipunku → dialog „dodać opakowanie?" importujący z kompendium
-  (fallback: budowa przedmiotu wprost z `medicine-data.mjs`, gdy pack nie jest zbudowany)
+  (fallback: budowa przedmiotu wprost z `chemia-data.mjs`, gdy pack nie jest zbudowany)
 - [x] Karta czatu z narracją — losowa linia per lek („*Góra chrupie kredową tabletkę wapniaka,
   krzywiąc się na smak tynku*"), plus zapas i ostrzeżenie przy ≤1 dawce
 - [x] **Zachód słońca** (przycisk MG na pasku narzędzi + `game.neuroshima.health.sunset()`):
@@ -661,7 +690,12 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Phase 5: Content & Polish
 - [~] **Tracer/Muzzle VFX** — muzzle flash + bullet tracer żywe dla P/KS/DS/MS (własny silnik PIXI, patrz §1.21); OZ świadomie bez tracera (poza zakresem), eksplozje na templatach i iskry/krew trafienia wciąż nie zaimplementowane
-- [ ] Compendia: broń, amunicja, pancerz, Pochodzenia — klasy/profesje/zdolności-klasowe/sztuczki/lekarstwa/bestiariusz **już zbudowane** (patrz Phase 3 wyżej i podsekcja „Bestiariusz" na końcu Phase 3), ten wpis to tylko pozostałe brakujące kompendia
+- [x] **Compendia broń i pancerze** — zbudowane w v0.11.0 (patrz Changelog). `bron` 74 pozycje
+  (złożone z tabel `Tabele/Bronie/*.md` + Zbrojowni), `pancerze` 17 pozycji wraz z czterema
+  regułami, których moduł nie miał. Rozpoznanie: [HANDOFF_bron_pancerze.md](HANDOFF_bron_pancerze.md).
+  **Ten punkt stał tu jako `[ ]` jeszcze po wydaniu v0.11.0** — znalezione przy porządkach 2026-08-22
+- [ ] **Ikony pancerzy** — `icons/armor/<id>.svg` to na razie ścieżki bez plików; przepuszczenie ich
+  przez `dev/icons/process_grid_N.py` odsunięte na osobne zadanie (v0.11.0)
 - [x] **Bestiariusz** — 51 istot, kompendium `neuroshima.bestiariusz`. ~~Enemy sheets + bestiary imports~~
   było tu jako `[ ]` mimo że warstwa jest gotowa i zweryfikowana — patrz podsekcja „Bestiariusz"
   na końcu Phase 3 wyżej (dodana przy porządkach 2026-08-21, bo ta praca nigdy nie dostała
@@ -669,16 +703,325 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 - [ ] Color profiles (Stal, Rdza, Rtęć, Chrom)
 - [ ] Regional price tables
 - [ ] UI polish, tactical HUD
-- [ ] **Ikony broni per-typ** (`weapons/icons.js`, `RULES` — słowa kluczowe nazwy → ikona
-  rewolwer/pistolet/SMG/karabin/...) — **odkryte osierocone 2026-08-21**: jedyny importer,
-  `scripts/main.js`, był martwym duplikatem entry pointu i został usunięty przy porządkach.
-  `setupWeaponIcons()` prawdopodobnie nie działał od dłuższego czasu; nikt tego nie zauważył.
-  Do decyzji: wpiąć `setupWeaponIcons()` do `scripts/main.mjs` (`ready`), przenieść logikę do
-  `config/weapons.mjs`, albo świadomie porzucić i skasować plik
+- [—] **Ikony broni per-typ** (`weapons/icons.js`) — **plik usunięty w v0.13.0**. Był osierocony
+  od 2026-08-21 (jedyny importer, `scripts/main.js`, był martwym duplikatem entry pointu).
+  Zadanie okazało się zrobione gdzie indziej: broń obsługuje hook `preCreateItem`
+  w `config/weapons.mjs` (`WEAPON_ICON_MAP` + aliasy + fallback per typ broni), a amunicja,
+  granaty i materiały wybuchowe mają pole `icon` przy każdej z 34 pozycji w `config/ammo-data.mjs`.
+  Jedyne, co `icons.js` wnosił ponad to, to dopasowanie po słowach kluczowych dla itemów robionych
+  ręcznie — i to wadliwe (reguła `"bolt"` dla karabinów powtarzalnych przechwytywała bełty do kuszy,
+  klucz `"ar"` łapał *Barrett*, a hook nadpisywał też ikony ustawione ręcznie przez MG)
 
 ---
 
 ## Changelog
+
+### v0.13.0 — Pochodzenia w komplecie (2026-08-23)
+
+Pack `zdolnosci-pochodzenia` startował w v0.12.0 z jedną pozycją, bo tylko `Wychuchana spluwa`
+miała kod. Teraz ma **wszystkie 36 zdolności z 12 Pochodzeń** (`config/pochodzenia-data.mjs`,
+źródło: `Tabele/Pochodzenie.md`), a obok stanął drugi pack — **`pochodzenia`, 12 itemów typu
+`background`**.
+
+**Pochodzenie to `background`, nie własny typ.** Reguły dnd5e 2024 dają backgroundowi dokładnie
+to, czego Neuroshima chce od Pochodzenia: podbicie Cech Bazowych i jedną zdolność z zamkniętej
+listy. Slot jest na karcie, Advancement Manager go prowadzi, zdjęcie przedmiotu cofa premie —
+wszystko natywne, zero linii kodu w module. Rozważana alternatywa (feat + Active Effect
++ własny panel) wymagałaby własnego UI i własnej obsługi cofania.
+
+**Automatyzacja: 1 z 36, i tak jest napisane.** Pochodzenia dostały ten sam rejestr co Sztuczki
+— pola `auto: [{what, where}]` i `manual`, badge w opisie przedmiotu, `game.neuroshima.pochodzenia.report()`.
+Trzydzieści pięć wpisów mówi wprost „bez automatyki — efekt rozstrzyga MG przy stole", zamiast
+udawać, że system je pilnuje. Sporo z nich to zwykłe biegłości i Ułatwienia — te dostaną
+`Trait` advancement na przedmiocie zdolności, gdy przyjdzie na nie kolej; część (`Fart`,
+`Telepata`, `Wierzę`) to rzeczy narracyjne, które automatyki nie dostaną nigdy.
+
+**CSS bez przebudowy packa.** Badge'y Pochodzeń nie dostały własnych reguł — istniejące selektory
+`.neuro-sztuczka-*` przyjęły aliasy `.neuro-pochodzenie-*` przecinkiem. Alternatywą było
+przemianowanie klas na wspólną nazwę, ale to wymusiłoby przebudowę packa `sztuczki` (53 opisy
+mają te klasy wpisane w HTML), a LevelDB jest single-writer — czyli zamknięcie gry przy każdej
+kosmetycznej zmianie. Nagłówek sekcji w `styles/neuroshima.css` mówi teraz, że obsługuje oba.
+
+**Premie cech: `AbilityScoreImprovement` z `fixed`, nie Active Effect.** Advancement zna górny
+limit 20, sam się cofa przy zdejmowaniu Pochodzenia i pokazuje się w Advancement Managerze jako
+krok tworzenia postaci. Active Effect na przedmiocie zrobiłby to samo liczbowo, ale byłby modyfikatorem
+doklejonym do wyniku, nie zmianą Cechy Bazowej — a od Cech Bazowych zależy u nas m.in. wymaganie
+wstępne klasy (`requirement.value`). `points: 0`, żeby gracz nie dostał do rozdania nic ponad
+te dwa punkty (dnd5e domyślnie daje `points: 3` backgroundom w regułach 2024 — tu wyłączone).
+
+**Pula zdolności: `allowDrops: true`, świadomie.** Spec na poz. 5 dobiera **drugą** zdolność
+ze swojego Pochodzenia, a Sztuczka `Patriota` **kolejną**. Spec dostał własny `ItemChoice`
+(`classes-data.mjs` miał stałą `POCHODZENIE` od v0.6.0, ale `buildClass` ją pomijał z komentarzem
+„origins are out of scope this pass" — teraz nie jest), tyle że z pulą **wszystkich 36** zdolności:
+dnd5e nie potrafi uzależnić puli advancementu od tego, jaki background nosi postać. `Patriota`
+idzie przez zwykłe przeciągnięcie z kompendium. Alternatywą był hook filtrujący pulę po
+`system.details.background` — odrzucone, bo to kod pilnujący czegoś, co MG i tak widzi na karcie.
+
+**Slot na karcie był zarezerwowany od v0.9.0.** `config/srd-cleanup.mjs` ukrywa pigułkę
+„Dodaj gatunek" (ras w Neuroshimie nie ma), ale „Dodaj Pochodzenie" zostawia — z komentarzem,
+że czeka na origins. Teraz doczekała.
+
+**Walidator: druga awaria tej samej klasy.** Wykrywanie zajętej bazy sprawdzało `err.code`,
+a `classic-level` opakowuje błąd blokady — `code` to `LEVEL_DATABASE_NOT_OPEN`, a `LEVEL_LOCKED`
+siedzi na `err.cause`. Zamiast czytelnego „zamknij FoundryVTT" leciał surowy stack trace.
+Poprawione; `dev/packs/build-packs.mjs` miał to dobrze od początku.
+
+**Migracja postaci wykonana — `migration/migrate-pochodzenia.mjs`.** 13 postaci dostało Pochodzenie
+w slocie: 10 wywnioskowanych z ręcznie zrobionych feat'ów przeniesionych z Roll20 (`Fart` → Vegas,
+`Doktor Quinn` → Teksas, …), 3 wylosowane k12, bo nie było czego wnioskować (Kier, Raynald, Victor).
+Duplikaty feat'ów skasowane — na żadnej postaci nie został już ręczny odpowiednik pozycji z packa.
+
+Kluczowe: **MG miał premie +1/+1 już wliczone w spisane Cechy Bazowe.** Nałożenie Pochodzenia
+podwoiłoby je, więc migracja odejmuje premię tuż przed uruchomieniem Advancement Managera, a ten
+dokłada ją z powrotem. Na karcie zero zmian (zweryfikowane co do punktu na wszystkich 13), ale +1/+1
+siedzi teraz w `value` advancementu — czyli zdjęcie Pochodzenia je poprawnie cofnie. Manifest
+cofania migracji: `dev/backup/pochodzenia-migracja-2026-08-23.json`.
+
+Pominięte świadomie: 6 pustych szablonów po imporcie (jeden placeholder klasy, wszystkie cechy 10)
+i 3 aktorów technicznych bez klasy (`Zbrojownia`, `TESTCHAR`, `TESTER`). Skrypt jest idempotentny —
+przy ponownym uruchomieniu raportuje tylko pominięcia.
+
+**Migracji nie da się napisać bez UI.** `AdvancementManager` trzyma `#forward` i `#complete` jako
+pola prywatne, a `advancement.apply()` pisze przez `actor.updateSource()`, czyli do *klona* managera,
+i dodatkowo czyta `configuration.fixed` wyłącznie przy `{ initial: true }`. Wywołane wprost nie
+zmienia niczego, co przetrwa — pierwsze podejście do testów wyglądało na sukces, a nie zapisało nic.
+Jedyne publiczne wejście to handler `data-action`, więc skrypt klika przyciski własnego managera.
+Skutek uboczny tej samej zasady: **`actor.deleteEmbeddedDocuments("Item", …)` nie cofa advancementów** —
+cofanie żyje w `Item5e#deleteDialog()`, czyli w ścieżce UI. Skrypt kasujący Pochodzenia hurtem
+zostawiłby postacie z zawyżonymi cechami.
+
+**`scripts/weapons/icons.js` skasowany.** Domknięcie sprawy otwartej 2026-08-21. Plik nie był
+importowany przez nic od czasu usunięcia martwego `scripts/main.js`, a jego zadanie przejęły
+dwa lepsze mechanizmy: hook `preCreateItem` w `config/weapons.mjs` (nazwa kanoniczna → ikona,
+plus aliasy i fallback per typ broni) oraz pole `icon` przy każdej z 34 pozycji
+w `config/ammo-data.mjs`. Rozmyte dopasowanie po słowach kluczowych, jedyne czego tam nie ma,
+i tak było wadliwe: reguła `"bolt"` (karabin powtarzalny) stała przed regułą amunicji i zjadała
+bełty do kuszy, klucz `"ar"` łapał *Barrett*, a hook nadpisywał ikony ustawione ręcznie przez MG.
+
+### v0.12.0 — Koniec panelu prototypowego zdolności (2026-08-22)
+
+Na górze zakładki „Szczegóły" każdej karty aktora siedział rozwijany panel
+**„Prototyp: zdolności aktora / pionka"** — siedem zdolności wpływających na broń, każda
+z parą list rozwijanych (aktor / pionek: *dziedzicz / włącz / wyłącz*). Powstał, zanim
+w module istniały jakiekolwiek packi ze zdolnościami: skoro nie było czego posiadać,
+zdolność trzeba było zadeklarować flagą.
+
+Dziś każda z tych siedmiu ma realny przedmiot, więc panel dublował informację, którą i tak
+widać na karcie — i mógł jej zaprzeczyć. Usunięty w całości: panel, obie warstwy flag
+(`flags.<mod>.abilities` na aktorze i na pionku), settery, blok CSS i połowa
+`mod.api.abilities`.
+
+**Co zostało w `actors/abilities.mjs`** — sam most. `hasAbility(actor, KEY)` odpytuje teraz
+wyłącznie przedmioty na karcie, a mapowanie deklarują same dane, nie resolver:
+
+| Klucz | Realny przedmiot | Pack | Deklaracja |
+|---|---|---|---|
+| `jakDbaszTakMasz` | zdolność klasowa | `zdolnosci-klasowe` | `legacyAbilityKey` |
+| `gradOlowiu`, `ruchomeGniazdoCkm`, `szturmowiec` | Sztuczka o tej samej nazwie | `sztuczki` | `legacyAbilityKeys` |
+| `szybkaWymiana` + `szybkiePrzeladowanie` | Sztuczka `Szybkie palce` — obie naraz | `sztuczki` | `legacyAbilityKeys` |
+| `wychuchanaSpluwa` | zdolność z Pochodzenia | `zdolnosci-pochodzenia` | `legacyAbilityKey` |
+
+**Nowy pack `zdolnosci-pochodzenia`** (`config/pochodzenia-data.mjs`, 1 pozycja).
+`Wychuchana spluwa` to zdolność z Pochodzenia (Federacja Appalachów, k6: 3–4), a Pochodzenia
+jako całość czekają na własny przebieg. Pack startuje z tą jedną, bo tylko ona spoza klas
+i Sztuczek jest realnie egzekwowana przez kod (`weapons/jams.mjs` — odporność wybranej broni
+na zacięcia). Kształt wpisu jest taki sam jak u Sztuczek, więc dopisanie pozostałych 35
+zdolności to uzupełnienie tablicy. *(Zrobione w v0.13.0 — patrz wyżej.)*
+
+**Przy okazji**: cztery Sztuczki dostały niepuste `auto: [{what, where}]`, więc
+`game.neuroshima.sztuczki.report()` przestaje je liczyć jako „bez automatyki", a badge
+w opisie przedmiotu mówi prawdę.
+
+**Utracona możliwość**: jawne *wyłączenie* zdolności, którą postać posiada (tri-state dawał
+„Wyłącz" nadpisujące realny przedmiot, osobno per pionek). Nikt tego nie używał — w świecie
+były 3 aktorzy z flagami, wszyscy testowi, i 0 flag na pionkach.
+
+**Sprzątanie po stronie wywołań**: argument `{ tokenDocument }` przy `hasAbility()` był
+resztką po nadpisaniach per pionek i nic już nie robił — usunięty z 12 wywołań w
+`fire-modes.mjs` / `jams.mjs` / `magazine.mjs`, razem z trzema osieroconymi helperami
+`_getItemToken()` / `_getActorToken()`.
+
+**Walidator packów naprawiony przy okazji.** `dev/packs/validate-packs.mjs` nie ruszał się od
+czasu, gdy pack `sztuczki` był pusty: `byId` budował się wyłącznie z zdolności klasowych i profesji,
+więc **każde** UUID Sztuczki w puli klasy raportował jako `dangling`, a pule poziomów
+„Zdolność z profesji / Sztuczka" mierzył wobec samych zdolności profesji (`pool 57, expected 4`).
+Kilkaset fałszywych błędów, `exit 1` od v0.10.0 — czyli walidacja packów nie działała od trzech
+wersji. Teraz liczy też Sztuczki i nowe Pochodzenia: `all checks passed`.
+
+**Audyt trackera.** Skoro walidator zamarł w przeszłości, ten sam test przeszedł cały
+`IMPLEMENTATION.md`. Pięć wpisów opisywało nieistniejący stan: *Compendia broń i pancerze*
+i *Armor handling* stały jako `[ ]` mimo zamknięcia w v0.11.0, *PD thresholds* mimo v0.6.0,
+*Pasywna Percepcja* jest natywna w dnd5e i nigdy nie wymagała kodu, a licznik automatyki
+Sztuczek mówił 2/53 zamiast 6/53. Doszła też legenda znaczników — `[—]` oznacza teraz
+**świadomą decyzję, że czegoś nie robimy**, wcześniej nieodróżnialną od zaległości
+(sześć takich wpisów udawało `[ ]`).
+
+### v0.11.0 — Broń i pancerze jako kompendia (2026-08-23)
+
+Dwa ostatnie brakujące kompendia. Do tej pory broń istniała wyłącznie jako 75 itemów na
+aktorze **Zbrojownia**, a pancerzy nie było w świecie w ogóle — sześć sztuk typu `equipment`
+to były resztki SRD na demo-aktorach.
+
+**Broń** (`config/weapons-data.mjs` → pack `bron`, 74 pozycje)
+
+- Złożone z **dwóch** źródeł, bo żadne nie było kompletne: tabele
+  (`BronPalna.md`, `BronBiala.md`, `BronMiotana.md`) dały wagi i ceny — na Zbrojowni 49/75
+  pozycji miało `weight: 0`, a 28/75 `price: 0` — a Zbrojownia dała ikony i kalibry.
+  Rozstrzygające są tabele; Zbrojownia służyła wyłącznie do kontroli krzyżowej.
+- **Zbrojownia przestaje być źródłem prawdy, ale zostaje jako aktor.**
+  `zbrojownia-sync.mjs` stoi na niej i działa bez zmian; `game.neuroshima.createWeapons(aktor)`
+  zasiewa ją z tego samego pliku danych, co pack — dopisuje i aktualizuje po nazwie,
+  **nigdy nie kasuje**, więc ręczne dopiski MG przeżywają ponowne zasianie.
+- **Trybów ognia nie ma w danych.** Buduje je na żywo `weapons/fire-modes.mjs`
+  z właściwości broni; zapisanie ich do packa zamroziłoby wynik i podwoiło aktywności
+  po pierwszym przeliczeniu. `system.activities` w packu jest celowo puste.
+- `WEAPON_ICON_MAP` w `config/weapons.mjs` nie jest już drugą listą 85 nazw do ręcznego
+  utrzymania — wyprowadza się z `WEAPON_ICONS` plus aliasy nazw ze świata.
+- Zestawy dozwolonych właściwości per kategoria były węźsze niż tabele: broń miotana
+  nie miała `wmag` ani cech RO-przy-trafieniu, żadna broń palna nie miała `amm`,
+  długa nie miała `dublet`. Poszerzone.
+- **Zmiana zachowania w `weapons/ammo.mjs`:** flaga `fixedDamage` blokuje nadpisanie
+  formuły obrażeń przez formułę kalibru. Bez tego wybór .12 Ga sprowadzał Pompę (4k4)
+  i Dwurówkę (3k4) do wspólnych 2k4. Dotyczy 9 sztuk broni, które w tabelach mają
+  własne kostki niezależne od naboju.
+
+**Pancerze** (`config/armor-data.mjs` + `config/armor.mjs` + `actors/armor-rules.mjs` → pack `pancerze`, 17 pozycji)
+
+- **Override `CONFIG.DND5E` bez zawężania schematu.** `equipmentTypes` w dnd5e 5.3 to
+  **płaska kopia** `miscEquipmentTypes` + `armorTypes` robiona raz przy ładowaniu
+  (`config.mjs:1657`) — mutowanie samych źródeł nie wystarcza, trzeba przebudować wszystkie trzy.
+  Kluczy `light`/`medium`/`heavy`/`natural`/`shield` **nie usuwamy**, tylko zmieniamy etykiety:
+  `equipment.mjs:150` liczy `isArmor` przez `type.value in CONFIG.DND5E.armorTypes`,
+  więc usunięcie ich zabiłoby liczenie KP. Zawężenie jest bezpieczne, bo
+  `equipment.mjs:66` używa `ItemTypeField` **bez `choices`** — sprawdzone na żywo:
+  wszystkie 6 przedmiotów SRD na demo-aktorach dalej się ładują z poprawnym KP
+  (ARCHITECTURE.md §2).
+- `armorIds` i `shieldIds` wyczyszczone — SRD-owa lista „Leather/Chain Shirt/Plate" nie ma
+  czego szukać w Neuroshimie.
+- **Cztery reguły, których moduł nie miał:**
+  - **Próg obrażeń** — hak `dnd5e.calculateDamage`. Natywne `attributes.hp.dt` odpada
+    z dwóch powodów: jest zdefiniowane tylko dla NPC/pojazdów, nie dla postaci, i dotyczy
+    **wszystkich** typów obrażeń, a neuroshimowy próg łapi tylko obrażenia kinetyczne.
+    Sumuje cięte + kłute + obuchowe **po** odpornościach.
+  - **Odporność kinetyczna** — zwykły Efekt Aktywny przedmiotu na `system.traits.dr.value`,
+    żeby położyło się na karcie tam, gdzie gracz tego szuka.
+  - **Kara za brak wyszkolenia** — Utrudnienie na `abilities.str|dex.check|save.roll.mode`
+    w danych pochodnych (łapi też Umiejętności i Narzędzia, bo `#rollSkillTool` składa
+    tryb Cechy z trybem Umiejętności) plus hak `dnd5e.preRollAttack` na Testy Ataku.
+    Świadomie **nie** `postBuildAttackRollConfig` — ten odpala się wyłącznie przez okno
+    dialogowe, więc makro z `configure:false` przepuściłoby karę.
+  - **Kara prędkości za zbyt niską SIŁĘ** — −4,5 m. Pole `system.strength` istnieje
+    w schemacie dnd5e 5.3, ale system nic z nim nie robi.
+- **Naprawiony martwy `stealthDisadvantage`.** dnd5e ma na sztywno wpisane
+  `skills.ste.roll.mode`, a `config/skills.mjs` dawno przemianował Skradanie się na `skr` —
+  natywna reguła pisała więc do pola, którego nie ma w `CONFIG.DND5E.skills` i którego nic
+  nie czyta. W świecie **żadna** zbroja nigdy nie dała Utrudnienia do Skradania.
+  Przepięte na `skr`.
+- **Konsekwencja dla Cichego kroku** (`actors/cichy-krok.mjs`): klauzula „nie otrzymujesz
+  Utrudnienia do Skradania się za noszenie pancerza" miała dotąd puste pole do działania.
+  Teraz jest realizowana przez `registerStealthExemption()` w danych pochodnych, a nie
+  w haku rzutu — `dnd5e.postBuildSkillRollConfig` odpala się wyłącznie przez okno dialogowe,
+  więc anulowanie zrobione tam przeciekałoby przy każdym rzucie z pominięciem dialogu.
+- **Czego świadomie nie automatyzujemy** (§5 — reguła wypisywana graczowi, nie milcząca):
+  szczelność i zapas tlenu, „Skradanie niemożliwe" w pancerzach wspomaganych
+  (moduł nakłada tylko Utrudnienie, resztę rozstrzyga MG), Krytyczna ochrona hełmu,
+  trzy akcje tarczy, wytrzymałość pancerzy, sen w pancerzu, pływanie, czas zakładania
+  i zdejmowania oraz mnożniki ceny pancerza dla zwierząt. Wszystko ląduje w polu `manual`,
+  jest drukowane w opisie przedmiotu, wyskakuje jako ostrzeżenie przy zakładaniu
+  i da się zebrać przez `game.neuroshima.pancerze.report()`.
+- **Ikony pancerzy to na razie ścieżki bez plików** (`icons/armor/<id>.svg`) — przepuszczenie
+  ich przez `dev/icons/process_grid_N.py` jest odsunięte na osobne zadanie.
+
+**Znane rozjazdy do decyzji MG** — nazewnictwo w świecie vs tabele: `Bejsbol` i `Rurka`
+to w tabelach jedna pozycja `Bejsbol/Rurka`; `Trzydziestka` → `Trzydziestka ósemka`;
+`AK` → `AK (Kałach)`; obie kusze mają w tabeli dłuższe nazwy. Aliasy w
+`WEAPON_NAME_ALIASES` pilnują, żeby `createWeapons()` nie zrobiło duplikatów, ale samą
+zmianę nazw na istniejących itemach zostawiam MG. Osobno: **Oszczep** jest w tabeli bronią
+białą z właściwością „rzucana", a w świecie ma typ `miotana`.
+
+### v0.10.0 — Chemia, Sztuczki i trzy nowe kompendia (2026-08-23)
+
+**Chemia, leki i narkotyki** (`config/chemia-data.mjs` + `items/chemia.mjs`)
+
+- 35 pozycji z `ChemiaIDrugi.md` w jednym pliku danych: leki przewlekłe, bojowe, popromienne,
+  antybiotyki, narkotyki, używki i materiały pirotechniczne. Zastępuje `medicine-data.mjs` (12 pozycji,
+  skasowany). Jedno źródło prawdy dla kompendium `lekarstwa`, panelu zdrowia i runtime'u.
+- Każda pozycja to `consumable` typu `lekarstwo` z podtypem, `uses` + `autoDestroy`, aktywnością
+  „Zażyj" i item-level Active Effects — dokładnie tak, jak SRD robi mikstury i trucizny.
+- **Efekty odroczone bez hooka od wygaśnięcia.** dnd5e 5.3 nie ma czegoś takiego jak
+  „zrób coś, gdy ten efekt się skończy" (`grep expir` po `module/` daje zero trafień), więc
+  „po zejściu z Anestixu" jest złożone z czterech kawałków, z których każdy sam w sobie jest
+  natywny: (1) prawdziwe `duration` na AE, żeby HUD odliczał; (2) rekord w
+  `flags.<mod>.chemiaPending`; (3) obserwator `updateWorldTime` — uzasadniony tym, że
+  `Combat#nextRound` przesuwa czas świata, więc walka rozlicza się sama; (4) przycisk
+  **Rozlicz teraz** na karcie czatu, na wypadek gdy czas nie idzie. Przetestowane na żywo:
+  Anestix rozlicza się i przez upływ czasu, i przyciskiem.
+- **Painkiller** — kara skalowana dawką: jeden efekt przebudowywany przy każdej tabletce
+  (nigdy stos efektów), −1 do testów MDR za dawkę, `unconscious` gdy liczba dawek przekroczy
+  wartość Mądrości, kasowane na odpoczynku. Zweryfikowane na 9 dawkach przy MDR 8.
+- **Limity dobowe** (Medpak 2/dobę, AR-35 1/dobę) na fladze `chemiaDoses = {klucz: {day, count}}`
+  spiętej ze światowym licznikiem `dayCounter`, tym samym, co obsługuje Zachód słońca.
+- **Przedawkowanie AR-35** — rzut k100 vs 75% jest zautomatyzowany, ale *uśmiercenie postaci
+  nie*: przy porażce karta pokazuje przycisk **Potwierdź śmierć** dla MG. Automat, który sam
+  zabija BG, to nie jest automat, którego się chce.
+- **Szał bojowy** — osobny AE ze stanem, RO Mądrość ST 20 **na końcu tury** przez
+  `combatTurnChange` (nie `updateCombat`: tam `combat.combatant` jest już przesunięty i rzut
+  spadłby na następną postać), a po ustaniu szału `incapacitated` + Wyczerpanie.
+- **Wyczerpanie z własnym kolorem**: nowe źródło `deadline` w `config/exhaustion.mjs`
+  (czerwony pik), tak jak `choroba` dostała swój w v0.9.6.
+- **Zasada domowa: mechanika, która działa po cichu, to błąd.** Wszystko, czego moduł nie
+  egzekwuje, siedzi w polu `mech.manual` i ląduje na karcie czatu pod nagłówkiem
+  „Nie automatyzujemy" — np. przymus atakowania w szale albo regeneracja Deadline'u poza walką
+  (10 minut to 100 tur, tury istnieją tylko w inicjatywie).
+- Podwójne karty rozwiązane markerem `neuroSilent` w konfiguracji użycia aktywności
+  (przetrwa `deepClone` w `_prepareUsageConfig`), a nie ślepym wyciszeniem — lek na chorobę
+  przewlekły wzięty wprost z ekwipunku dalej dostaje własną kartę.
+
+**Sztuczki** (`config/sztuczki-data.mjs`, kompendium `sztuczki`)
+
+- 53 Sztuczki przepisane z `Tabele/Sztuczki.md`, w 9 kategoriach, wpięte w pulę `ItemChoice`
+  po obu stronach (klasy i profesje). Pack przestał być pusty.
+- **Rejestr pokrycia**: każdy wpis deklaruje `auto: [{co, gdzie}]` i opcjonalne `manual`.
+  Z tego wychodzi status `auto`/`partial`/`none`, kolorowa plakietka w opisie przedmiotu
+  i raport `game.neuroshima.sztuczki.report()`. Dziś: 1 auto, 1 partial, 51 bez mechaniki —
+  i to jest widoczne, zamiast udawać, że działa. Bonusy do cech („+1 ZRC lub MDR”) **nie**
+  liczą się jako automatyzacja.
+
+**Nowe kompendia**
+
+- `amunicja` (20, z `ammo-data.mjs`), `granaty` (12, z `GRENADE_TYPES`),
+  `narzedzia` (22, z `toolkits-data.mjs` — każde z aktywnościami typu `check` per zastosowanie).
+  Wszystkie budowane z tych samych plików danych, których używa runtime.
+- Granaty zostają typem `ammo`, żeby `grenade-inventory.mjs` dalej je znajdował.
+- Brakujące kompendia (**broń**, **pancerze**) mają teraz jawne TODO w `build-packs.mjs`
+  z opisem, czego brakuje: nowych `weapons-data.mjs` / `armor-data.mjs` z `podrecznik.md`.
+
+**Poprawki**
+
+- **Kompendium `lekarstwa` było puste.** Winne było gołe `*.log` w `.gitignore`, które łapało
+  WAL LevelDB. Wzorzec zawężony do `logs/*.log`. W repo wendorującym LevelDB gołe `*.log`
+  nigdy nie jest bezpieczne.
+- **Item-level Active Effects nie trafiały do packa.** `effects` to pole *hierarchiczne*
+  (`EmbeddedCollectionField.hierarchical === true`), więc Foundry trzyma je pod własnym
+  prefiksem klucza — `!items.effects!<itemId>.<effectId>` — a w samym przedmiocie zostają
+  tylko identyfikatory. Wpisana inline tablica `effects` czyta się z powrotem jako pusta,
+  po cichu. `writePack` rozbija je tak samo, jak `writeActorPack` rozbija `!actors.items!`.
+- `dnd5e.preUseActivity` przekazuje **cztery** argumenty (`activity, usageConfig, dialogConfig,
+  messageConfig`). Uchwyt chemii deklarował trzy i wyciszał kartę na złym obiekcie.
+- Panel Surowców nie wypisuje już stosów o zerowej ilości — „masz 0 kg nitrogliceryny" to nie
+  jest informacja. Gdy nic nie zostało, panel znika w całości.
+
+**Porządki**
+
+- Skasowane trzy martwe pliki: `add-weights.mjs` (jednorazowa migracja wag amunicji, dawno
+  zastosowana), `main.mjs` w katalogu głównym (pusty, `module.json` ładuje `scripts/main.mjs`)
+  oraz `scripts/combat/forsowanie.mjs` (zastąpiony przez `rerolls.mjs`, nieimportowany od dawna
+  i oznaczony jako DEPRECATED w tabeli plików).
+- `ARCHITECTURE.md` dostał dwa brakujące niezmienniki: „packi to artefakty builda" (z pułapką
+  pól hierarchicznych) i „automatyzacja jest deklarowana, nigdy cicha".
+- TODO na brakujące kompendia w `build-packs.mjs` przepisane z rozpoznaniem w ręku — z liczbami,
+  ścieżkami do tabel źródłowych i wskazaniem, czego naprawdę brakuje (patrz
+  `HANDOFF_bron_pancerze.md`).
 
 ### v0.9.6 — Przegląd wszystkich chorób (2026-08-22)
 
@@ -991,6 +1334,7 @@ Plan: `PLAN_classes.md`. Zastępuje w całości klasy dnd5e (nie ma klerykа).
   Pasek postępu do następnego poziomu + log wpisów z możliwością cofnięcia.
 - **`abilities.mjs`**: prototypowa warstwa flag dostaje nowe, najwyższe źródło — realny przedmiot
   zdolności klasowej (`source: "feature"`). `fire-modes.mjs` / `jams.mjs` / `magazine.mjs` bez zmian.
+  *(Warstwa flag i jej panel zostały usunięte w v0.12.0 — patrz niżej.)*
 - **Assety**: 159 zastępczych SVG (`dev/icons/gen_class_placeholders.mjs`), kolorowane per klasa,
   z wariantami `_active` dla zdolności przełączanych. Podmiana po nazwie pliku, bez zmian w kodzie.
 

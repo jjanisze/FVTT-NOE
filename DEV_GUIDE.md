@@ -537,6 +537,191 @@ daje chorobę popromienną i zeruje licznik. Dlatego jako jedyny nie ma `summary
 
 ---
 
+## 10b. Chemia — efekty odroczone i pola hierarchiczne
+
+### 10b.1 Active Effects w kompendium Itemów mają własny prefiks klucza
+
+`Item#effects` jest polem **hierarchicznym** (`EmbeddedCollectionField.hierarchical === true`,
+`common/data/fields.mjs`). Foundry daje każdemu takiemu polu osobny prefiks klucza w LevelDB —
+to ten sam powód, dla którego pack aktorów rozbija się na `!actors!` / `!actors.items!` /
+`!actors.items.effects!`. Dla packa przedmiotów:
+
+```
+!items!<itemId>                              ← przedmiot; jego "effects" to LISTA ID
+!items.effects!<itemId>.<effectId>           ← każdy efekt osobno
+```
+
+Wpisanie `effects: [{...}]` wprost do dokumentu **nie rzuca błędem** — czyta się z powrotem
+jako pusta kolekcja. Tak właśnie chemia pojechała najpierw bez ani jednego efektu.
+`writePack` w `dev/packs/build-packs.mjs` rozbija to sam; nie „upraszczaj" go z powrotem.
+
+Uwaga na kontrast: **`system.activities` to zwykłe pole obiektowe**, nie hierarchiczne.
+Aktywności (razem z ręcznie nadanymi `_id` i własnymi `flags`) jadą w dokumencie i przeżywają
+round-trip przez pack. Wcześniejsza notatka, że „zapisane na sztywno id aktywności są gubione",
+dotyczy tylko `activities` na najwyższym poziomie, którego dnd5e nie używa.
+
+### 10b.2 dnd5e nie ma hooka „efekt wygasł"
+
+`grep -ri "expir" module/` po źródłach dnd5e 5.3 daje zero trafień. Nie ma czego podpiąć.
+Mechaniki typu „gdy Anestix przestanie działać, rzuć RO Kondycja" składamy z czterech
+natywnych kawałków:
+
+1. prawdziwe `duration` na Active Effekcie — HUD odlicza, gracz widzi, ile zostało;
+2. rekord w `flags.<mod>.chemiaPending` — co, komu i o której się należy;
+3. obserwator `updateWorldTime` — działa, bo `Combat#nextRound` i odpoczynki przesuwają czas
+   świata (`game.time.advance(60 * config.duration)` w `Actor#_rest`);
+4. przycisk **Rozlicz teraz** na karcie czatu — bo poza walką czas świata potrafi stać.
+
+Czwarty punkt nie jest workaroundem, tylko przyznaniem się: nic tu nie tyka samo z siebie.
+
+### 10b.3 Arności hooków, na których łatwo się przejechać
+
+```js
+Hooks.on("dnd5e.preUseActivity",  (activity, usageConfig, dialogConfig, messageConfig) => {});
+Hooks.on("dnd5e.postUseActivity", (activity, usageConfig, results) => {});
+Hooks.on("combatTurnChange",      (combat, previous, current) => {});
+Hooks.on("dnd5e.restCompleted",   (actor, result, config) => {});
+```
+
+- `preUseActivity` ma **cztery** argumenty. Nazwanie trzeciego `messageConfig` nie rzuca błędem,
+  tylko po cichu ustawia `create` na konfiguracji dialogu i natywna karta i tak leci.
+- Koniec tury to `combatTurnChange`, **nie** `updateCombat`. Przy `updateCombat`
+  `combat.combatant` jest już przesunięty, więc rzut „na koniec tury" spada na następną postać.
+  `previous.combatantId` daje tego, komu tura właśnie minęła.
+- Dodatkowe klucze w konfiguracji użycia (`activity.use({ neuroSilent: true }, ...)`) **przeżywają**
+  — `_prepareUsageConfig` robi `deepClone`. To czysty sposób, żeby jeden moduł powiedział
+  drugiemu „tę kartę wystawiam ja".
+
+---
+
+## 10c. Pancerze — cztery reguły, których dnd5e nie ma
+
+### 10c.1 Próg obrażeń: dlaczego nie natywne `hp.dt`
+
+dnd5e ma gotowy próg obrażeń — `system.attributes.hp.dt`, obsługiwany w
+`Actor5e#calculateDamage` (`actor.mjs:882`). Odpada z dwóch niezależnych powodów:
+
+1. Jest zdefiniowany w `AttributesFields.hitPoints` **tylko dla NPC, obiektów i pojazdów**.
+   Postacie graczy nie mają tego pola w schemacie.
+2. Dotyczy **wszystkich** typów obrażeń naraz, a neuroshimowy próg z pancerza łapie wyłącznie
+   obrażenia kinetyczne (cięte, kłute, obuchowe).
+
+Zostaje hak `dnd5e.calculateDamage(actor, damages, options)` — odpala się na samym końcu
+`calculateDamage` (`actor.mjs:901`), czyli **po** odpornościach, co jest dokładnie tym, czego
+wymaga tabela. `damages` to tablica z doliczonym `.amount`; każdy wpis ma `{value, type, properties, active}`.
+Wpis wyzerowany progiem oznaczamy `active.threshold = true`, tak jak robi to natywna ścieżka.
+
+### 10c.2 `AdvantageModeField.setMode` — który model podać
+
+```js
+dnd5e.dataModels.fields.AdvantageModeField.setMode(actor.system, "abilities.str.check.roll.mode", -1);
+```
+
+`setMode(model, keyPath, value)` (`data/fields/advantage-mode-field.mjs:169`) wybiera schemat
+w zależności od ścieżki: gdy zaczyna się od `"system."`, bierze `model.system.schema`, w przeciwnym
+razie `model.schema`. Nasze ścieżki nie mają prefiksu, więc modelem musi być **`actor.system`**,
+a nie `actor`. Podanie `actor` nie rzuca błędem — po prostu nic nie ustawia.
+
+Tryb Cechy dociera do Umiejętności i Narzędzi za darmo: `#rollSkillTool` (`actor.mjs:1278`) składa
+`abilities.<id>.check.roll.mode` z `skills.<id>.roll.mode`. Testy Ataku **nie** — te trzeba złapać
+osobno hakiem `dnd5e.preRollAttack` (patrz ARCHITECTURE.md §6, dlaczego nie `postBuild…`).
+
+### 10c.3 Brak haka po `prepareDerivedData`
+
+dnd5e nie ma niczego w rodzaju `dnd5e.postPrepareDerivedData`. Utarty wzorzec w tym module
+(`actors/pw.mjs`, `actors/sp.mjs`, teraz `actors/armor-rules.mjs`) to owinięcie prototypu:
+
+```js
+const original = CONFIG.Actor.documentClass.prototype.prepareDerivedData;
+CONFIG.Actor.documentClass.prototype.prepareDerivedData = function () {
+  original.apply(this, arguments);
+  applyArmorPenalties(this);
+};
+```
+
+Owijanie się kaskaduje bezpiecznie — kolejne moduły dokładają swoje warstwy.
+
+**Nie waliduj tego przez ręczne `actor.prepareData()`.** Drugie wywołanie rzuca
+`Cannot redefine property: darkvision` — to quirk Foundry, nie objaw błędu w owinięciu.
+Czytaj `actor.system` bezpośrednio albo wymuś przeliczenie prawdziwym `update()`.
+
+---
+
+## 10d. Pochodzenia — pipeline i migracja
+
+### 10d.1 Źródło prawdy
+
+```
+Tabele/Pochodzenie.md                    12 regionów (k12) + 36 zdolności (k6) — treść (Obsidian)
+scripts/config/pochodzenia-data.mjs      RĘCZNIE PISANE: premie cech, teksty, rejestr auto/manual
+  ↓  dev/packs/build-packs.mjs           → packs/{pochodzenia,zdolnosci-pochodzenia}
+  ↓  dev/packs/validate-packs.mjs        regresja: fixed == attrBonus, pula ItemChoice == 3, UUID-y
+```
+
+Pochodzenie jest itemem typu **`background`** — natywny slot dnd5e 2024, nie własny typ.
+Cała mechanika to dwa advancementy na poziomie 0, doklejane przez builder:
+
+| Advancement | Konfiguracja | Efekt |
+|---|---|---|
+| `AbilityScoreImprovement` | `fixed: {con: 1, int: 1}`, `points: 0`, `cap: 1` | +1/+1 do **Cech Bazowych** (nie modyfikator) |
+| `ItemChoice` | `pool` = 3 zdolności regionu, `allowDrops: true` | wybór jednej zdolności |
+
+`points: 0` jest istotne — dnd5e w regułach 2024 domyślnie daje backgroundowi `points: 3`
+do rozdania (`background.mjs::_advancementToCreate`). Tu jest wyłączone.
+
+Spec na poz. 5 dobiera **drugą** zdolność: własny `ItemChoice` w `packs/klasy` z pulą
+**wszystkich 36** pozycji, bo dnd5e nie potrafi uzależnić puli advancementu od noszonego backgroundu.
+
+### 10d.2 Migracja postaci
+
+```js
+const api = game.modules.get("neuroshima-2026-overrides").api.migration;
+await api.migratePochodzenia();                                  // dry run — console.table
+await api.migratePochodzenia({ commit: true });                  // zastosuj
+await api.migratePochodzenia({ actors: ["Piekarz"], commit: true });
+await api.migratePochodzenia({ roll: false });                   // tylko wywnioskowane, bez k12
+```
+
+Pochodzenie jest wnioskowane z ręcznie zrobionych feat'ów przeniesionych z Roll20 (`Fart` → Vegas),
+a gdy nie ma z czego — losowane k12/k6. Pomijane są puste szablony po imporcie i aktorzy techniczni
+bez klasy. Skrypt jest idempotentny (postać z zajętym slotem `background` nie jest ruszana).
+
+⚠️ **Premie +1/+1 są odejmowane przed nałożeniem Pochodzenia**, bo MG miał je już wliczone
+w spisane Cechy Bazowe. Na karcie nic się nie zmienia; zmienia się to, gdzie te punkty *mieszkają*.
+Jeśli kiedyś odpalasz to na postaci zbudowanej **bez** wliczonej premii, cechy spadną o 1 —
+wtedy podnieś je ręcznie po migracji.
+
+Manifest cofania: `dev/backup/pochodzenia-migracja-2026-08-23.json` (cechy przed + pełne
+`toObject()` skasowanych feat'ów).
+
+### 10d.3 Dlaczego migracja klika w UI
+
+`AdvancementManager` nie ma publicznego API do przewijania kroków — `#forward` i `#complete`
+są polami prywatnymi, a jedyne wejście to handler `data-action`. Do tego:
+
+- `advancement.apply()` pisze przez `actor.updateSource()`, czyli do **klona** managera, i czyta
+  `configuration.fixed` **tylko** przy `{ initial: true }`. Wywołane wprost nie zapisuje nic —
+  i nie zgłasza błędu.
+- `actor.deleteEmbeddedDocuments("Item", [bgId])` **nie cofa** advancementów. Cofanie siedzi
+  w `Item5e#deleteDialog()`, czyli też w ścieżce UI. Skrypt kasujący Pochodzenia hurtem zostawi
+  postacie z zawyżonymi cechami i osieroconymi zdolnościami.
+
+Stąd `migration/migrate-pochodzenia.mjs` renderuje prawdziwy manager i klika jego przyciski.
+
+### 10d.4 Rejestr automatyki
+
+```js
+game.neuroshima.pochodzenia.report();      // auto / partial / none
+game.neuroshima.pochodzenia.of("vegas");   // 3 zdolności regionu
+game.neuroshima.pochodzenia.bonus("vegas") // { dex: 1, cha: 1 }
+```
+
+Stan: **1 z 36** zdolności ma kod (`Wychuchana spluwa` → `weapons/jams.mjs`). Reszta drukuje
+badge „bez automatyki" na karcie przedmiotu. Klasy CSS `.neuro-pochodzenie-*` to aliasy
+`.neuro-sztuczka-*` w tej samej regule — patrz nagłówek sekcji w `styles/neuroshima.css`.
+
+---
+
 ## 11. Warstwa bestiariusza — pipeline i workflow
 
 ### 11.1 Źródło prawdy

@@ -97,7 +97,6 @@ As of this writing:
 | `actors/fuks-pips.mjs` | 3 Fuks clovers replacing Inspiration star | `.sheet-header .right`, `.level-badge`, removes `button.inspiration` |
 | `actors/health-panel.mjs` | Choroby/Fobie panel + sidebar status bar | Biography tab, sidebar |
 | `actors/pd-panel.mjs` | PD/XP tracker | (check live — native XP bar is hidden per §4.1) |
-| `actors/abilities.mjs` | PROTOTYP per-actor ability panel | `.tab[data-tab="details"] .neuro-abilities-prototype-panel` (CSS confirms selector) |
 | `actors/class-rules.mjs` | Multiclass exclusivity warnings | — |
 | `actors/ammo-inventory.mjs`, `magazine-inventory.mjs`, `grenade-inventory.mjs`, `surowce-inventory.mjs` | Custom inventory sub-panels (ammo/magazines/grenades/raw materials), native rows hidden to avoid duplication | Inventory tab |
 | `actors/addons-inventory.mjs` | Weapon-addon panel on weapon item sheets, context menu on loot | Item sheet, not actor sheet |
@@ -222,8 +221,10 @@ one command.
 - Two dead-code lessons from this same day's cleanup, worth internalizing: (1) `scripts/main.js`
   (a duplicate, unregistered entry point) sat next to the real `scripts/main.mjs` for who knows
   how long, silently not running. (2) `scripts/weapons/icons.js` was only ever imported by that
-  dead file. **If you add a new file, confirm it's actually imported from `scripts/main.mjs` and
-  actually registered in a hook — don't trust that a file existing means it runs.**
+  dead file — deleted in v0.13.0, once it turned out its job was already done properly by
+  `config/weapons.mjs` and `config/ammo-data.mjs`. **If you add a new file, confirm it's actually
+  imported from `scripts/main.mjs` and actually registered in a hook — don't trust that a file
+  existing means it runs.**
 
 ## 7. Suggested scope split (not a mandate — re-derive if the codebase has moved)
 

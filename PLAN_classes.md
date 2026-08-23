@@ -17,17 +17,19 @@ Scope agreed with GM:
 
 ## 0. Why not the existing `abilities.mjs` prototype
 
-`scripts/actors/abilities.mjs` is a flag-based resolver for 7 weapon-adjacent abilities
+`scripts/actors/abilities.mjs` was a flag-based resolver for 7 weapon-adjacent abilities
 (`Jak Dbasz Tak Masz`, `Wychuchana spluwa`, `Grad ołowiu`, `Ruchome gniazdo CKM`, `Szturmowiec`, …).
 It is consumed by `fire-modes.mjs`, `jams.mjs` and `magazine.mjs` via `hasAbility(actor, KEY)`.
 
 It stays — but demoted to a **compatibility shim**. See §8. Nothing that already calls
-`hasAbility()` needs to change; the resolver gains a new highest-priority source: a real
-class/profession feat item on the actor.
+`hasAbility()` needs to change; the resolver's source of truth becomes a real item on the actor.
 
 Rationale for going native instead of extending the prototype: the prototype cannot express
 level scaling, uses/recovery, advancement choices, compendium reuse, NPC reuse, or the
 level-up dialog. All of those are required here and all are free with native documents.
+
+> **Done (v0.12.0)**: the flag layer and its actor-sheet panel are gone. All 7 keys resolve
+> from items; see §8.
 
 ---
 
@@ -237,7 +239,7 @@ Abilities that turn *on* and persist (not one-shot rolls):
 |---|---|---|---|
 | Berserk | Brutal | 10 rund | Ułatwienie SIŁ testy/RO, +TT (mod SIŁ, no armor), extra damage die |
 | Kondycha | Twardziel | do końca walki | per rulebook |
-| Wychuchana spluwa | (Żołnierz) | poza walką | already in `abilities.mjs`, migrates here |
+| Wychuchana spluwa | (Pochodzenie: Appalachy) | poza walką | pack `zdolnosci-pochodzenia`; toggle per broń w `jams.mjs` |
 | Przycelowanie | Twardziel | 1 tura | |
 
 Implementation: a `neuroshima-<id>` ActiveEffect on the actor, with `duration.rounds`, plus
@@ -264,25 +266,36 @@ Wściekły cios all restore on Długi odpoczynek; `Kolejka` triggers *during* Kr
 
 ## 8. Legacy `abilities.mjs` bridge
 
-`getResolvedAbility()` gains a new source, checked **first**:
+**Done (v0.12.0).** `getResolvedAbility()` reads items only — the flag layer and the actor-sheet
+panel that fed it are deleted:
 
 ```
-item (class/profession feat on actor)  ← NEW, highest priority
-  → token flag override
-  → actor flag
-  → legacy name-match on any item
+class/profession feat  (flags.<mod>.abilityId)
+  → Sztuczka           (flags.<mod>.sztuczka)
+  → origin ability     (flags.<mod>.originAbilityId)
+  → name match on any item   ← last resort, for hand-made feats on migrated PCs
   → none
 ```
 
-The 7 prototype keys map onto real profession abilities:
+The mapping is declared by the data modules, not by the resolver:
 
-| Prototype key | Real source |
-|---|---|
-| `jakDbaszTakMasz` | Twardziel / Żołnierz — `Jak dbasz, tak masz` |
-| `wychuchanaSpluwa` | (retained as module-specific toggle) |
-| `gradOlowiu`, `szturmowiec`, `ruchomeGniazdoCkm`, `szybkaWymiana`, `szybkiePrzeladowanie` | Sztuczki — resolve once the sztuczki pack is populated; until then the flag layer keeps working |
+| Prototype key | Real source | Declared in |
+|---|---|---|
+| `jakDbaszTakMasz` | Twardziel / Żołnierz — `Jak dbasz, tak masz` | `class-features-data.mjs` (`legacyAbilityKey`) |
+| `gradOlowiu`, `szturmowiec`, `ruchomeGniazdoCkm` | Sztuczka of the same name | `sztuczki-data.mjs` (`legacyAbilityKeys`) |
+| `szybkaWymiana`, `szybkiePrzeladowanie` | Sztuczka `Szybkie palce` — grants both | `sztuczki-data.mjs` (`legacyAbilityKeys`) |
+| `wychuchanaSpluwa` | Pochodzenie: Federacja Appalachów (k6 3–4) | `pochodzenia-data.mjs` (`legacyAbilityKey`) |
 
-Existing callers (`fire-modes.mjs`, `jams.mjs`, `magazine.mjs`) are untouched.
+Existing callers (`fire-modes.mjs`, `jams.mjs`, `magazine.mjs`) kept their `hasAbility()` calls;
+only the now-meaningless `{ tokenDocument }` argument was dropped.
+
+The last row is why pack `zdolnosci-pochodzenia` exists ahead of the Pochodzenia pass: one entry,
+same entry shape as a Sztuczka, so finishing the other 35 is filling a table.
+
+**Done (v0.13.0).** All 36 are in, and the Pochodzenia themselves ship as 12 `background` items
+in pack `pochodzenia` — `AbilityScoreImprovement` (`fixed`, `points: 0`) for the +1/+1, `ItemChoice`
+for the ability. Spec poz. 5 finally emits its own `ItemChoice` too; its pool is all 36, because
+an advancement cannot narrow a pool down to the background the character happens to be wearing.
 
 ---
 
