@@ -29,19 +29,20 @@
  * `dnd5e.postBuildAttackRollConfig`, na którym stoi Współpraca
  * (`pack-tactics.mjs`).
  *
- * **Uwaga (bug sąsiedni, nie naprawiany tutaj)**: klucz umiejętności Skradania
- * się w tym świecie to `"skr"` (`config/skills.mjs`), a rdzeń dnd5e ma na
- * sztywno wpisane `"ste"`. Utrudnienie ze zbroi ląduje więc pod
- * `system.skills.ste.roll.mode` — polem, którego już nie ma w
- * `CONFIG.DND5E.skills`, i które nic nie czyta. W tym świecie zbroja **nigdy**
- * nie daje dziś Utrudnienia do Skradania, więc klauzula 2 nie ma w praktyce
- * czego kasować — zweryfikowane na żywo (`dnd5e.postBuildSkillRollConfig` z
- * `skill:"skr"` pokazuje `disadvantage:false` nawet w zbroi). Kod poniżej i
- * tak dodaje Ułatwienie (klauzula 3), które i tak bije ewentualne Utrudnienie,
- * więc efekt końcowy jest poprawny niezależnie od tego bocznego builda; nie
- * kasuje jednak istniejącego Utrudnienia z innych źródeł (Wyczerpanie,
- * Upojenie…) w ciężkiej zbroi, żeby nie ugryźć czegoś niepowiązanego.
+ * **Uwaga historyczna**: klucz umiejętności Skradania się w tym świecie to
+ * `"skr"` (`config/skills.mjs`), a rdzeń dnd5e ma na sztywno `"ste"`.
+ * Utrudnienie ze zbroi lądowało więc pod `system.skills.ste.roll.mode` — polem,
+ * którego nie ma w `CONFIG.DND5E.skills` i którego nic nie czyta, przez co zbroja
+ * **nigdy** nie dawała Utrudnienia do Skradania i klauzula 2 nie miała czego
+ * kasować. Od v0.11.0 `actors/armor-rules.mjs` przepina tę regułę na `skr`.
+ *
+ * Klauzula 2 jest przez to realizowana w danych pochodnych, nie tutaj:
+ * `registerStealthExemption()` mówi regule pancerza, żeby w ogóle nie nakładała
+ * Utrudnienia posiadaczowi zdolności. Hak `dnd5e.postBuildSkillRollConfig`
+ * odpala się wyłącznie przez okno dialogowe rzutu, więc anulowanie zrobione
+ * tutaj przeciekłoby przy każdym rzucie z pominięciem dialogu.
  */
+import { registerStealthExemption } from "./armor-rules.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const ABILITY_ID = "cichy-krok";
@@ -91,15 +92,16 @@ async function syncCichyKrokTerrain(actor) {
 }
 
 /**
- * Klauzula "Ułatwienie do Ukrywania się bez ciężkiej zbroi" (i, przy okazji,
- * "brak Utrudnienia ze zbroi" — patrz uwaga w nagłówku pliku).
+ * Klauzula "Ułatwienie do Ukrywania się bez ciężkiej zbroi".
+ * Klauzula "brak Utrudnienia ze zbroi" siedzi w `armor-rules.mjs` —
+ * patrz nagłówek pliku.
  */
 function onPostBuildSkillRollConfig(process, rollConfig) {
   try {
     if (process?.skill !== STEALTH_SKILL) return;
     const actor = process?.subject;
     if (!actor || !_hasCichyKrok(actor)) return;
-    if (_isWearingHeavyArmor(actor)) return; // klauzula 3 nie ma zastosowania; klauzula 2 dziś i tak martwa (patrz nagłówek)
+    if (_isWearingHeavyArmor(actor)) return; // klauzula 3 nie ma zastosowania
 
     rollConfig.options ??= {};
     rollConfig.options.advantageMode = CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
@@ -111,6 +113,10 @@ function onPostBuildSkillRollConfig(process, rollConfig) {
 
 export function registerCichyKrok() {
   Hooks.on("dnd5e.postBuildSkillRollConfig", onPostBuildSkillRollConfig);
+
+  // Klauzula 2: pancerz w ogóle nie nakłada temu aktorowi Utrudnienia do
+  // Skradania się. Liczone w danych pochodnych, więc działa też bez dialogu.
+  registerStealthExemption(_hasCichyKrok);
 
   const resync = doc => {
     const actor = doc instanceof Actor ? doc : doc?.parent;
