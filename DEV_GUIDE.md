@@ -276,6 +276,23 @@ Source map (`dnd5e-compiled.mjs.map`) pozwala na breakpointy w oryginalnym źró
    co jest za nimi w pliku
 5. **Tworzenie compendiów**: JSON files w `packs/_source/`, potem `fvtt package pack`
 6. **Testowanie**: informuj użytkownika żeby odświeżył FVTT (`F5`)
+7. **Nigdy nie przepisuj `module.json` (ani żadnego JSON-a) przez PowerShell.** PS 5.1 dokłada
+   BOM i potrafi podwójnie zakodować UTF-8. Foundry czyta manifest przez
+   `fs.readFileSync(…, "utf8")`, które BOM-a nie zdejmuje — `JSON.parse` wywala się na pierwszym
+   znaku i **cały moduł znika z listy pakietów**. UI nie mówi nic: `core.moduleConfiguration`
+   dalej ma `true`, więc świat wygląda normalnie, po prostu bez modułu. Jedyny ślad jest w
+   `%LOCALAPPDATA%\FoundryVTT\Logs\debug.*.log` (`Error loading module … is not valid JSON`).
+   Do podbicia wersji służy `npm run bump:version 0.14.3`; do reszty — edytor.
+
+### 5.4 „Moduł się nie ładuje" — kolejność sprawdzania
+
+1. `game.modules.get("neuroshima-2026-overrides")` w konsoli. **`undefined` znaczy, że Foundry
+   odrzucił manifest**, a nie że moduł jest wyłączony — wyłączony byłby obecny z `active: false`.
+2. Zajrzyj do `Logs/debug.<data>.log` i grepuj `Error loading module`.
+3. Sprawdź pierwsze bajty manifestu: `[System.IO.File]::ReadAllBytes("module.json")[0..2]`.
+   `EF BB BF` to BOM — patrz punkt 7 wyżej; przywróć plik `git checkout <commit> -- module.json`.
+4. Manifesty czyta **serwer przy starcie świata**. Po naprawie `F5` nie wystarczy — trzeba wrócić
+   do Setupu i odpalić świat ponownie.
 
 ---
 

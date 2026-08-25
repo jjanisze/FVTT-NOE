@@ -17,7 +17,9 @@
  *   Array length = actor's exhaustion level. Each entry = one level from a specific cause.
  *
  * Recovery: removing a level requires specifying which source is resolved.
- *   - Long rest auto-recovery is intercepted: only removes "ogolne" or "forsowanie".
+ *   - Długi odpoczynek zdejmuje jeden poziom, ale tylko ze źródła `restClears: true`.
+ *     Robi to przez `dnd5e.preRestCompleted` — podmieniamy liczbę w `result.updateData`,
+ *     zamiast pisać poziom samemu; uzasadnienie przy `onPreRestCompleted`.
  *   - Other sources require explicit GM action or specific remedies.
  */
 
@@ -65,6 +67,7 @@ export function registerExhaustion() {
 
   // Intercept long rest exhaustion recovery
   Hooks.on("dnd5e.preRestCompleted", onPreRestCompleted);
+  Hooks.on("dnd5e.restCompleted", onRestCompleted);
 
   // Intercept manual exhaustion changes (sheet pip clicks) BEFORE they apply
   Hooks.on("preUpdateActor", onPreUpdateActor);
@@ -212,64 +215,74 @@ export function formatExhaustionSources(actor) {
 /* -------------------------------------------- */
 
 /**
- * Intercept dnd5e's pre-rest-completed to replace the blanket exhaustion
- * recovery with source-aware recovery.
+ * Intercept dnd5e's long-rest exhaustion recovery and make it source-aware.
  *
- * dnd5e sets `exhaustionDelta: -1` for long rests. We:
- * 1. Cancel the default exhaustion change (set delta to 0)
- * 2. Auto-remove one rest-clearable source if available
- * 3. Report which sources remain
+ * **Dlaczego hak, a nie własna mechanika.** Można by wyzerować
+ * `restTypes.long.exhaustionDelta` i pisać poziom samemu, ale wtedy tracimy cały
+ * szkielet: `_rest` zbiera wszystko w jedno `actor.update(result.updateData,
+ * {isRest: true})`, kartę odpoczynku buduje z tego samego `updateData`
+ * (`ActorDeltasField.getDeltas`), a `_onUpdateExhaustion` z tego zapisu synchronizuje
+ * natywny Active Effect Wyczerpania. Podmieniamy więc jedną liczbę tuż przed zapisem
+ * zamiast dublować trzy mechanizmy.
+ *
+ * **Dlaczego `config`, nie `result`.** `exhaustionDelta` siedzi wyłącznie w konfiguracji
+ * odpoczynku (`actor.mjs:2170` przepisuje je z `restTypes`); `result` go nie niesie.
+ * Czytanie `result.exhaustionDelta` dawało zawsze `undefined` — hak był martwy od
+ * pierwszego commita i nikt tego nie zauważył, bo przy zerowym Wyczerpaniu skutek
+ * jest nieodróżnialny od poprawnego.
+ *
+ * **Dlaczego omijamy bramkę `malnourished`/`dehydrated`.** dnd5e przy tych stanach nie
+ * redukuje Wyczerpania **wcale**; Neuroshima blokuje tylko ten poziom, który z nich
+ * pochodzi (`restClears: false`), a Forsowanie czy Kac mają ustąpić normalnie. Nasz
+ * model jest drobniejszy, więc rozstrzyga.
+ *
+ * **Dlaczego zawsze piszemy `exhaustionSources` razem z poziomem.** `onPreUpdateActor`
+ * niżej blokuje surowy zapis Wyczerpania bez tej flagi, a `false` z `preUpdateActor`
+ * kasuje **cały** dokumentowy update — czyli razem z Wyczerpaniem wyleciałyby PW,
+ * Kości Wytrzymałości i reszta odpoczynku.
  */
-function onPreRestCompleted(actor, result) {
-  const delta = result.exhaustionDelta ?? 0;
-  if (delta >= 0) return; // Only intercept recovery (negative delta)
+function onPreRestCompleted(actor, result, config) {
+  if (!(config?.exhaustionDelta < 0)) return;
 
-  // Cancel dnd5e's blanket recovery
   const path = "system.attributes.exhaustion";
   const currentLevel = foundry.utils.getProperty(result.clone, path) ?? 0;
-  // Undo the delta that dnd5e already applied to updateData
-  if (result.updateData?.[path] !== undefined) {
-    result.updateData[path] = currentLevel; // keep current value
-  }
+  result.updateData[path] = currentLevel;
+  if (!currentLevel) return;
 
-  // Find a rest-clearable source and remove it
   const sources = getExhaustionSources(actor);
-  const clearableIdx = sources.findIndex(s => {
-    const def = EXHAUSTION_SOURCES[s.source];
-    return def?.restClears === true;
-  });
+  const clearableIdx = sources.findIndex(s => EXHAUSTION_SOURCES[s.source]?.restClears === true);
 
-  if (clearableIdx !== -1) {
-    const cleared = sources[clearableIdx];
-    sources.splice(clearableIdx, 1);
-    const newLevel = Math.max(0, currentLevel - 1);
-
-    // Update the rest result to apply our change
-    result.updateData[path] = newLevel;
-    result.updateData[`flags.${MODULE_ID}.exhaustionSources`] = sources;
-
-    // Add info to the rest chat message
-    const remaining = sources.length
-      ? sources.map(s => s.label).join(", ")
-      : "brak";
-
-    // Schedule a follow-up chat message (can't await in sync hook)
-    setTimeout(() => {
-      ChatMessage.create({
-        content: `<strong>${actor.name}</strong> — Długi odpoczynek usuwa Wyczerpanie: <em>${cleared.label}</em>.<br>Pozostałe źródła: ${remaining}.`,
-        speaker: ChatMessage.getSpeaker({ actor })
-      });
-    }, 500);
-  } else if (sources.length > 0) {
-    // Has exhaustion but nothing rest-clearable
-    const remaining = sources.map(s => s.label).join(", ");
-    setTimeout(() => {
-      ChatMessage.create({
-        content: `<strong>${actor.name}</strong> — Długi odpoczynek NIE usuwa Wyczerpania. Żadne ze źródeł nie ustępuje podczas odpoczynku.<br>Źródła: ${remaining}.`,
-        speaker: ChatMessage.getSpeaker({ actor })
-      });
-    }, 500);
+  if (clearableIdx === -1) {
+    // Poziom bez źródła to rozjazd danych (ktoś pisał poza API) — nie ma o czym raportować.
+    if (sources.length) {
+      result.neuroExhaustionNote = `<strong>${actor.name}</strong> — Długi odpoczynek NIE usuwa `
+        + "Wyczerpania. Żadne ze źródeł nie ustępuje podczas odpoczynku.<br>Źródła: "
+        + `${sources.map(s => s.label).join(", ")}.`;
+    }
+    return;
   }
+
+  const [cleared] = sources.splice(clearableIdx, 1);
+  result.updateData[path] = Math.max(0, currentLevel - 1);
+  // Ta sama składnia co w `removeExhaustion`: pusta tablica bywa gubiona przez diff,
+  // więc ostatnie źródło kasujemy kluczem `-=`, a nie zapisem `[]`.
+  if (sources.length) result.updateData[`flags.${MODULE_ID}.exhaustionSources`] = sources;
+  else result.updateData[`flags.${MODULE_ID}.-=exhaustionSources`] = null;
+  result.neuroExhaustionNote = `<strong>${actor.name}</strong> — Długi odpoczynek usuwa `
+    + `Wyczerpanie: <em>${cleared.label}</em>.<br>Pozostałe źródła: `
+    + `${sources.length ? sources.map(s => s.label).join(", ") : "brak"}.`;
+}
+
+/**
+ * `preRestCompleted` jest synchroniczny, a `result` to ten sam obiekt w obu hakach —
+ * notatka czeka na moment, w którym odpoczynek naprawdę się odbył.
+ */
+function onRestCompleted(actor, result) {
+  if (!result.neuroExhaustionNote) return;
+  ChatMessage.create({
+    content: result.neuroExhaustionNote,
+    speaker: ChatMessage.getSpeaker({ actor })
+  });
 }
 
 /* -------------------------------------------- */
@@ -284,7 +297,10 @@ let _apiUpdate = false;
  * If the change didn't come from our API, BLOCK it and show a dialog.
  * The dialog then uses the API to apply the change with proper source tracking.
  *
- * Returning false from preUpdateActor prevents the update entirely.
+ * Returning false from preUpdateActor prevents the update entirely — **cały** dokument,
+ * nie samo Wyczerpanie (`client/data/client-backend.mjs:240` robi `continue`). Dlatego
+ * każdy kod modułu, który pisze poziom w cudzym `updateData` (odpoczynek), musi dołożyć
+ * `exhaustionSources` w tym samym zapisie — inaczej odbierze aktorowi też PW i Kości.
  */
 function onPreUpdateActor(actor, changes, options, userId) {
   if (_apiUpdate) return true; // allow API-driven updates through
@@ -294,8 +310,11 @@ function onPreUpdateActor(actor, changes, options, userId) {
   if (newExhaustion === undefined) return true;
 
   // If our flags are also in the update, it came from our API (addExhaustion/removeExhaustion)
+  // or from the rest interception. Both spellings count — `removeExhaustion` clears the last
+  // source with the `-=` deletion key, which `getProperty` would never see under the plain name.
   const flagUpdate = foundry.utils.getProperty(changes, `flags.${MODULE_ID}.exhaustionSources`);
-  if (flagUpdate !== undefined) return true;
+  const flagDelete = foundry.utils.getProperty(changes, `flags.${MODULE_ID}.-=exhaustionSources`);
+  if ((flagUpdate !== undefined) || (flagDelete !== undefined)) return true;
 
   const currentLevel = actor.system.attributes?.exhaustion ?? 0;
   if (newExhaustion === currentLevel) return true; // no real change

@@ -724,6 +724,59 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### v0.14.2 — Odpoczynek: martwy hak, który zabierał PW (2026-08-25)
+
+**Przechwycenie regeneracji Wyczerpania nie działało od pierwszego commita.**
+`onPreRestCompleted` czytało `result.exhaustionDelta`, a dnd5e trzyma tę liczbę w
+**`config`** — `initiateRest` (`actor.mjs:2170`) przepisuje ją z `restTypes` do konfiguracji,
+`result` jej nigdy nie niesie. `git log -S "result.exhaustionDelta"` wskazuje jeden commit:
+`7f3252b`, czyli wersję początkową. Hak odpalał się poprawnie i za każdym razem wychodził
+w pierwszej linii.
+
+Kaskada, która z tego wyszła, ma trzy piętra:
+
+1. Ryczałtowe `-1` z dnd5e trafiało do `result.updateData` nietknięte — bez oglądania się
+   na źródła Wyczerpania.
+2. Nasz własny `onPreUpdateActor` widział surowy zapis poziomu bez towarzyszącej flagi
+   `exhaustionSources`, uznawał go za zapis „z zewnątrz" i zwracał `false`.
+3. `false` z `preUpdateActor` kasuje w rdzeniu **cały** update dokumentu
+   (`client/data/client-backend.mjs:240` robi `continue`, nie usuwa pojedynczej ścieżki).
+   Czyli długi odpoczynek postaci z Wyczerpaniem nie przywracał ani PW, ani Kości
+   Wytrzymałości, ani zasobów — do tego wyskakiwało niezamówione okienko „które źródło
+   ustępuje?". `updateItems`/`deleteItems` idą osobnymi wywołaniami, więc ładunki i użycia
+   wracały normalnie; to dodatkowo maskowało objaw.
+
+Nikt tego nie zauważył, bo przy zerowym Wyczerpaniu `Math.max(0, 0 - 1) === 0`, więc
+`newExhaustion === currentLevel` i strażnik przepuszczał zapis. Błąd gryzł wyłącznie postacie,
+które faktycznie coś dźwigały.
+
+Poprawka trzyma się szkieletu dnd5e (ARCHITECTURE §8): hak nadal tylko **podmienia liczbę**
+w `result.updateData`, zamiast wyzerować `restTypes.long.exhaustionDelta` i pisać poziom
+samodzielnie. Dzięki temu zostaje jedno `actor.update(…, {isRest: true})`, karta odpoczynku
+liczy delty z tego samego obiektu (`ActorDeltasField.getDeltas`), a `_onUpdateExhaustion`
+dalej synchronizuje natywny efekt Wyczerpania. Poziom zawsze jedzie razem z `exhaustionSources`
+w tym samym zapisie — inaczej strażnik z punktu 2 znów zabrałby aktorowi PW. Ostatnie źródło
+kasujemy kluczem `-=exhaustionSources`, tak jak `removeExhaustion`, bo pusta tablica bywa
+gubiona przez diff; strażnik rozpoznaje teraz obie pisownie.
+
+**Świadome odstępstwo od dnd5e.** System przy `malnourished`/`dehydrated` nie redukuje
+Wyczerpania **wcale**. Neuroshima blokuje tylko ten poziom, który z tych stanów pochodzi
+(`restClears: false`), a Forsowanie czy Kac mają ustąpić normalnie. Nasz model jest drobniejszy,
+więc rozstrzyga — uzasadnienie stoi przy `onPreRestCompleted` i w ARCHITECTURE §8.
+
+Notatka na czat przeniesiona z dwóch `setTimeout(…, 500)` na hak `dnd5e.restCompleted`:
+`result` to ten sam obiekt w obu hakach, więc wiadomość odkłada się w `result.neuroExhaustionNote`
+i wychodzi dopiero wtedy, gdy odpoczynek naprawdę się odbył.
+
+**Osobno: manifest z BOM-em wyłączał cały moduł.** `module.json` został przy v0.14.1 przepisany
+przez PowerShell i dostał `EF BB BF` na początku oraz podwójnie zakodowane myślniki. Foundry
+czyta manifesty przez `fs.readFileSync(…, "utf8")`, które BOM-a nie zdejmuje, więc `JSON.parse`
+wywalał się na pierwszym znaku i pakiet wypadał z listy. W UI nie widać nic: `core.moduleConfiguration`
+dalej mówi `true`, moduł po prostu nie istnieje. Ślad jest wyłącznie w logu serwera
+(`Logs/debug.*.log`: `Error loading module … is not valid JSON`). Manifest odtworzony bajt
+w bajt z gita, a numer wersji podbija teraz `npm run bump:version` (`dev/bump-version.mjs`) —
+Node, UTF-8 bez BOM, z twardą asercją na BOM. **Nie edytuj `module.json` przez PowerShell.**
+
 ### v0.14.1 — `showIcon`: stany, które przestały być widoczne na żetonie (2026-08-24)
 
 **FVTT v14 dołożył `ActiveEffectData.showIcon` i przedefiniował `isTemporary`.** `isTemporary`

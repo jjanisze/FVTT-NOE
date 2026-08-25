@@ -95,8 +95,35 @@ reversing it means reading that record back. All of that bookkeeping happens in
   value, subtract it before applying the advancement, so the net sheet value is unchanged while the
   bonus moves into the advancement's `value` where reversal can find it.
 
-## Dokumentacja towarzysząca
+### 8. Extend the System's Own Write Path; Replace Only When It Refuses
+Order of preference, in every subsystem: **use** the native mechanic, **inherit** from it where it
+must behave differently, **replace** it only when it cannot be bent. Every replacement costs the
+things that hang off the original — chat cards, derived data, migrations, other modules' hooks —
+so a replacement has to be argued for at its call site, not just done.
 
+- **What extension usually looks like**: a `pre*` hook that edits the payload the system is about to
+  write, rather than writing our own. `config/exhaustion.mjs` amends
+  `result.updateData["system.attributes.exhaustion"]` inside `dnd5e.preRestCompleted`; dnd5e still
+  performs the single `actor.update(…, {isRest: true})`, still builds the rest card's deltas from
+  that same object, and `Actor5e#_onUpdateExhaustion` still keeps the native Wyczerpanie effect in
+  sync. Zeroing `restTypes.long.exhaustionDelta` and writing the level ourselves would have meant
+  re-implementing all three.
+- **What inheritance usually looks like**: subclassing a declared extension point.
+  `config/rest.mjs` wraps `restTypes.long.dialogClass` to add one field, so the field renders
+  through dnd5e's own `context.fields` pipeline and its value arrives in `config` by the system's
+  own `mergeObject`.
+- **When we do replace, say why, where a reader will hit it.** `combat/melee-maneuvers.mjs` opens
+  with the argument for being a sibling of `weapon-save-properties.mjs` instead of an extension of
+  it; `config/exhaustion.mjs` explains at `onPreRestCompleted` why our per-source recovery overrules
+  dnd5e's blanket `malnourished`/`dehydrated` block. If the reasoning matters in two places, write
+  it in both — a justification nobody finds is a justification that gets undone.
+- **Reading the payload off the wrong object is the failure mode to watch for.** `exhaustionDelta`
+  lives on the rest *config*, never on the *result*; the module read it off `result` and the whole
+  interception was dead from the first commit — silently, because with zero Wyczerpanie a dead
+  interception and a working one look identical. When a hook takes several arguments, check the
+  system source for which one actually carries the field.
+
+## Dokumentacja towarzysząca
 | Plik | Zawartość |
 |---|---|
 | `IMPLEMENTATION.md` | Status wszystkich mechanik + changelog (źródło prawdy o tym, co działa) |
