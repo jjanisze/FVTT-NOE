@@ -41,6 +41,7 @@ Header whitespace — total readout (my pick)| `lang/pl.json` | 553 tłumaczeń 
 | `scripts/combat/cover.mjs` | Dynamiczna osłona per atak + redukcja dla strzału przez |
 | `scripts/combat/obalajaca.mjs` | Obsługa właściwości broni "Obalająca" i wymuszania RO na Siłę |
 | `scripts/combat/weapon-save-properties.mjs` | Cechy "RO przy trafieniu": Porażająca/Powalająca/Unieruchamiająca — przycisk + save + stan, respektuje odporności |
+| `scripts/combat/melee-maneuvers.mjs` | Pochwycenie / Odepchnięcie / Wytrącenie — okno manewru, RO celu (SIŁ albo ZRC), stan/ruch/wypuszczenie przedmiotu |
 | `scripts/weapons/jams.mjs` | Zacięcie i uszkodzenie broni palnej |
 | `scripts/config/ammo-data.mjs` | 20 definicji kalibru (edytowalnych) — formuły, typy obrażeń, efekty |
 | `scripts/weapons/ammo.mjs` | System amunicji — sync obrażeń, auto-apply, przycisk Obrażenia |
@@ -375,17 +376,24 @@ Zastępuje pierwotne podejście z `PLAN_shooting_vfx.md` (Sequencer `.effect()` 
 - [x] Styled chat messages (amber for Forsowanie, green for Fuks)
 
 ### 1.12 Initiative Variants
-- [ ] Zaskoczenie → Utrudnienie do inicjatywy
-- [ ] Niespodziewany atak → Ułatwienie do inicjatywy
+- [x] Zaskoczenie → Utrudnienie do inicjatywy — **natywny mechanizm dnd5e, zero własnego kodu**.
+  `prepareInitiative()` (`data/actor/templates/attributes.mjs`) czyta `hasConditionEffect("initiativeDisadvantage")`,
+  a `surprised` jest w tej tablicy od startu. Zweryfikowane na żywo: formuła `1d20 + 0` → `1d20dis + 0`.
+  Uwaga: `settings.mjs → applyLegacyRules()` usuwa `surprised` z tej tablicy przy `rulesVersion: "legacy"` —
+  świat jedzie na `modern`, więc nie dotyczy
+- [x] Niespodziewany atak → Ułatwienie do inicjatywy — nowy stan `ambush` („Niespodziewany atak")
+  w `NEUROSHIMA_ZAGROZENIA` + `conditionEffects.initiativeAdvantage`. Nakładany ręcznie z palety
+  stanów żetonu, symetrycznie do `surprised` — kto był gotów w chwili wybuchu walki, rozstrzyga MG,
+  nie mechanika. Ikona po skasowanym `marked`. Zweryfikowane na żywo: `1d20adv + 0`
 
 ### 1.13 Special Melee Actions
-- [ ] Odepchnięcie, Pochwycenie, Wytrącenie jako opcje ataku
+- [x] Odepchnięcie, Pochwycenie, Wytrącenie jako opcje ataku (`combat/melee-maneuvers.mjs`)
 
 ### 1.14 Rest Overrides
 - [x] Krótki odpoczynek = 4h / 240min (nie 1h)
 - [x] Długi odpoczynek = 24h / 1440min (nie 8h)
 - [x] Polskie etykiety (Krótki/Długi odpoczynek)
-- [ ] Przerwanie DO po 4h → benefity KO
+- [x] Przerwanie DO po 4h → benefity KO
 
 ### 1.15 Custom Character Sheet Shell
 Szczegółowy plan (pre-dig 2026-08-21: sheet class/PARTS/TABS map, wszystkie 15 istniejących
@@ -715,6 +723,63 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### v0.14.0 — Manewry wręcz, inicjatywa, przerwany odpoczynek (2026-08-24)
+
+Domknięcie czterech otwartych pozycji Fazy 1 (§1.12–§1.14).
+
+**Zaskoczenie działało od zawsze i nie jest naszym kodem.** `prepareInitiative()` w dnd5e czyta
+`hasConditionEffect("initiativeDisadvantage")`, a `surprised` siedzi w tej tablicy natywnie —
+sprawdzone na żywo, `1d20 + 0` → `1d20dis + 0`. Warto było sprawdzić, bo tablica sama w sobie
+niczego nie gwarantuje (patrz historia `skills.ste`), a `applyLegacyRules()` wycina z niej
+`surprised` przy `rulesVersion: "legacy"`. Świat jedzie na `modern`.
+
+**Niespodziewany atak to nowy stan `ambush`, nakładany ręcznie.** Lustrzane odbicie `surprised`,
+dopisane do `conditionEffects.initiativeAdvantage`. Nie ma jak tego wyliczyć: to rozstrzygnięcie
+MG o tym, kto w chwili wybuchu walki trzymał broń w garści. Świadomie **bez** przycisku
+w trackerze walki — paleta stanów na żetonie jest już gestem używanym dla Zaskoczenia,
+a cała wartość tego stanu leży w symetrii z nim. Ikona po skasowanym `marked`.
+
+**`combat/melee-maneuvers.mjs` (nowy) — brat, nie potomek `weapon-save-properties.mjs`.**
+Tam wyzwalaczem jest cecha broni na karcie czatu i to cecha narzuca, czym cel się broni;
+tutaj wyzwalaczem jest akcja w turze, cechę RO wybiera cel, a ST bywa podmieniane wprost
+(nocny ghul ma Pochwycenie ST 13 zamiast 8 + SIŁ + PB). Wspólne zostawało jedno wywołanie
+`rollSavingThrow`, więc `SAVE_PROPERTIES` musiałby dostać trzy nowe tryby na trzy wyjątki.
+
+- **ST edytowalne w oknie manewru** — to jest cała obsługa istot ze stałym ST z Bestiariusza,
+  bez dotykania generowanego `bestiary-data.mjs` i bez przebudowy packa.
+- **Cechę RO wybiera cel** → bierzemy tę z wyższą premią (`abilities.<ab>.save.value`).
+  Pytanie gracza o wybór bez alternatywy byłoby klikaniem dla klikania.
+- **Rozmiar**: idziemy za „ZASADY SZCZEGÓŁOWE" (cel maksymalnie o jeden rozmiar większy),
+  nie za tabelą akcji w „WALKA" (cel twojego rozmiaru lub mniejszy) — te dwa miejsca
+  w podręczniku się różnią, a szczegółowe mówi o sobie, że jest wspólne dla wszystkich.
+  Przekroczenie limitu to pytanie do MG, nie blokada.
+- **Odepchnięcie** liczy wektor atakujący→cel, przesuwa o 1,5 m i **przerywa ruch o ścianę**
+  (`polygonBackends.move.testCollision`); alternatywa to `prone`.
+- **Wytrącenie** zdejmuje `system.equipped` z wybranej broni — dnd5e nie modeluje rąk,
+  więc „wypadło z ręki" nie ma lepszego odpowiednika. Ułatwienie za trzymanie oburącz
+  to checkbox, bo przedmiot wybiera się dopiero po nieudanym RO.
+- **Brak uprawnień do celu** kończy się kartą w czacie z gotowym ST zamiast wyjątku —
+  gracz może zainicjować manewr na cudzym żetonie, rozstrzyga MG.
+- Wejścia: przycisk w pasku narzędzi Żetonu, `game.neuroshima.manewry.*`, oraz przycisk
+  na karcie czatu **„Z bara!"** (Brutal 2), którego cała mechanika to Odepchnięcie.
+- **Aramis** dostał realne pokrycie: posiadanie Sztuczki domyślnie zaznacza Utrudnienie w RO
+  celu przy Wytrąceniu. Ekonomia Akcji Bonusowej zostaje `manual` — moduł jej nie liczy.
+
+**Przy okazji: przyciski `obalajaca` i `weapon-save-properties` nie wyświetlały się wcale.**
+Oba wisiały na `renderChatMessageHTML`, które leci **przed** `ChatMessageDataModel#getHTML`,
+a to nadpisuje całe `.message-content` przez `innerHTML`. Wstrzyknięcie znikało w tym samym
+tiku. Poprawny hak to `dnd5e.renderChatMessage` — moduł znał tę pułapkę (komentarz
+w `disease-effects.mjs`), ale te dwa pliki jej nie uwzględniały.
+
+**Przerwany Długi odpoczynek** (`config/rest.mjs`): pole „Przerwany po (godz.)" w oknie
+Długiego odpoczynku, podklasa `restTypes.long.dialogClass` zamiast dłubania w DOM. Wartość
+wraca do `config` przez `mergeObject` w `BaseRestDialog`, a hak `dnd5e.longRest` zwraca `false`
+— odpoczynek nigdy się nie liczy, zamiast liczyć się i być cofanym. ≥ 4 h uruchamia Krótki
+odpoczynek, mniej daje wpis w czacie i nic więcej. Zegar świata zostaje nietknięty: żaden
+z `restTypes` w tym świecie nie ma `advanceTime`, więc dnd5e i tak nie przesuwa czasu przy
+odpoczynku. Pułapka przy rozszerzaniu: `BaseRestDialog._prepareContext` składa `formSections`
+**zanim** wróci do podklasy, więc przy pustym `fields` trzeba najpierw dołożyć sekcję.
 
 ### v0.13.0 — Pochodzenia w komplecie (2026-08-23)
 
