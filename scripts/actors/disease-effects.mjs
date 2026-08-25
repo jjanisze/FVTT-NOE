@@ -107,12 +107,14 @@ function _effectKey(entry, conditional) {
 
 /**
  * Active Effect data for one disease entry, or for its situational rider.
+ * Sama choroba zawsze dostaje efekt — nawet bez `changes` niesie znacznik `diseased`,
+ * bo do oznaczenia pionka ten stan istnieje. Rider sytuacyjny bez tre\u015bci \u2014 nie.
  * @returns {object|null} null when there is nothing an effect can carry.
  */
 function _buildEffect(entry, spec, conditional) {
   const source = conditional ? spec.conditional : spec;
   const changes = source.changes ?? [];
-  const statuses = source.statuses ?? [];
+  const statuses = conditional ? (source.statuses ?? []) : ["diseased", ...(source.statuses ?? [])];
   if (!changes.length && !statuses.length) return null;
 
   const stageLabel = DISEASE_STAGES[entry.stage ?? 0]?.label ?? "";
@@ -125,6 +127,9 @@ function _buildEffect(entry, spec, conditional) {
     img: "icons/svg/biohazard.svg",
     changes: changes.map(c => ({ ...c })),
     statuses: [...statuses],
+    // FVTT v14: `isTemporary` liczy tylko czas trwania, a domyślne `CONDITIONAL`
+    // znaczy „rysuj tylko, jeśli tymczasowy" — bez tego ikona nie wchodzi na żeton.
+    showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS,
     disabled: false,
     transfer: false,
     description: conditional
@@ -148,8 +153,8 @@ async function syncDiseaseEffects(actor) {
 
   const wanted = new Map();
   for (const entry of getChoroby(actor)) {
-    const spec = effectsFor(entry);
-    if (!spec) continue;
+    // Choroba bez mechaniki wci\u0105\u017c dostaje efekt \u2014 sam znacznik na \u017cetonie.
+    const spec = effectsFor(entry) ?? {};
 
     const base = _buildEffect(entry, spec, false);
     if (base) wanted.set(_effectKey(entry, false), base);
@@ -174,6 +179,7 @@ async function syncDiseaseEffects(actor) {
     // disease-flag change, and a pointless update re-renders every open sheet.
     const current = effect.toObject();
     const differs = current.name !== target.name
+      || current.showIcon !== target.showIcon
       || JSON.stringify(current.changes) !== JSON.stringify(target.changes)
       || JSON.stringify([...(current.statuses ?? [])].sort())
          !== JSON.stringify([...target.statuses].sort());

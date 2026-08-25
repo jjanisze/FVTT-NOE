@@ -1,8 +1,8 @@
-{
+﻿{
   "id": "neuroshima-2026-overrides",
   "title": "Neuroshima: Ostatnia Era",
-  "description": "Neuroshima 5e overrides for dnd5e — skills, combat, equipment, and post-apo survival mechanics.",
-  "version": "0.14.0",
+  "description": "Neuroshima 5e overrides for dnd5e â€” skills, combat, equipment, and post-apo survival mechanics.",
+  "version": "0.14.1",
   "authors": [{ "name": "Jacek Janiszewski" }],
   "compatibility": {
     "minimum": "14",
@@ -29,7 +29,7 @@
   "packs": [
     {
       "name": "klasy",
-      "label": "Neuroshima — Klasy",
+      "label": "Neuroshima â€” Klasy",
       "path": "packs/klasy",
       "type": "Item",
       "system": "dnd5e",
@@ -37,7 +37,7 @@
     },
     {
       "name": "profesje",
-      "label": "Neuroshima — Profesje",
+      "label": "Neuroshima â€” Profesje",
       "path": "packs/profesje",
       "type": "Item",
       "system": "dnd5e",
@@ -45,7 +45,7 @@
     },
     {
       "name": "zdolnosci-klasowe",
-      "label": "Neuroshima — Zdolności klasowe",
+      "label": "Neuroshima â€” ZdolnoÅ›ci klasowe",
       "path": "packs/zdolnosci-klasowe",
       "type": "Item",
       "system": "dnd5e",
@@ -53,7 +53,7 @@
     },
     {
       "name": "sztuczki",
-      "label": "Neuroshima — Sztuczki",
+      "label": "Neuroshima â€” Sztuczki",
       "path": "packs/sztuczki",
       "type": "Item",
       "system": "dnd5e",
@@ -61,7 +61,7 @@
     },
     {
       "name": "pochodzenia",
-      "label": "Neuroshima — Pochodzenia",
+      "label": "Neuroshima â€” Pochodzenia",
       "path": "packs/pochodzenia",
       "type": "Item",
       "system": "dnd5e",
@@ -69,7 +69,7 @@
     },
     {
       "name": "zdolnosci-pochodzenia",
-      "label": "Neuroshima — Zdolności z Pochodzenia",
+      "label": "Neuroshima â€” ZdolnoÅ›ci z Pochodzenia",
       "path": "packs/zdolnosci-pochodzenia",
       "type": "Item",
       "system": "dnd5e",
@@ -77,7 +77,7 @@
     },
     {
       "name": "lekarstwa",
-      "label": "Neuroshima — Lekarstwa",
+      "label": "Neuroshima â€” Lekarstwa",
       "path": "packs/lekarstwa",
       "type": "Item",
       "system": "dnd5e",
@@ -85,7 +85,7 @@
     },
     {
       "name": "amunicja",
-      "label": "Neuroshima — Amunicja",
+      "label": "Neuroshima â€” Amunicja",
       "path": "packs/amunicja",
       "type": "Item",
       "system": "dnd5e",
@@ -93,7 +93,7 @@
     },
     {
       "name": "granaty",
-      "label": "Neuroshima — Granaty i materiały wybuchowe",
+      "label": "Neuroshima â€” Granaty i materiaÅ‚y wybuchowe",
       "path": "packs/granaty",
       "type": "Item",
       "system": "dnd5e",
@@ -101,7 +101,7 @@
     },
     {
       "name": "narzedzia",
-      "label": "Neuroshima — Narzędzia",
+      "label": "Neuroshima â€” NarzÄ™dzia",
       "path": "packs/narzedzia",
       "type": "Item",
       "system": "dnd5e",
@@ -109,7 +109,7 @@
     },
     {
       "name": "bron",
-      "label": "Neuroshima — Broń",
+      "label": "Neuroshima â€” BroÅ„",
       "path": "packs/bron",
       "type": "Item",
       "system": "dnd5e",
@@ -117,7 +117,7 @@
     },
     {
       "name": "pancerze",
-      "label": "Neuroshima — Pancerze",
+      "label": "Neuroshima â€” Pancerze",
       "path": "packs/pancerze",
       "type": "Item",
       "system": "dnd5e",
@@ -125,7 +125,7 @@
     },
     {
       "name": "bestiariusz",
-      "label": "Neuroshima — Bestiariusz",
+      "label": "Neuroshima â€” Bestiariusz",
       "path": "packs/bestiariusz",
       "type": "Actor",
       "system": "dnd5e",

@@ -99,8 +99,10 @@ export function registerZranienie() {
     for (const actor of game.actors) {
       const level = getZranienieLvl(actor);
       if (level <= 0) continue;
-      if (actor.effects.some(e => e.getFlag(MODULE_ID, "zranieniEffect"))) continue;
-      console.warn(`${MODULE_ID} | ${actor.name}: Zranienie ${level} bez efektu — odtwarzam.`);
+      const effect = actor.effects.find(e => e.getFlag(MODULE_ID, "zranieniEffect"));
+      // `showIcon` sprzed v14 zostawia efekt bez ikony na żetonie — też do odtworzenia.
+      if (effect && (effect.showIcon === CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS)) continue;
+      console.warn(`${MODULE_ID} | ${actor.name}: Zranienie ${level} bez efektu lub bez ikony — odtwarzam.`);
       await _syncZranieniEffect(actor, level);
     }
   });
@@ -353,6 +355,9 @@ async function _syncZranieniEffect(actor, level) {
     // Lights the token icon. The status id is what makes this effect and the HUD
     // button the same thing rather than two things that look alike.
     statuses: ["zranienie"],
+    // FVTT v14: `isTemporary` liczy tylko czas trwania, a domyślne `CONDITIONAL`
+    // znaczy „rysuj tylko, jeśli tymczasowy" — bez tego ikona nie wchodzi na żeton.
+    showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS,
     description: _buildZranieniDescription(level),
     flags: {
       [MODULE_ID]: { zranieniEffect: true }

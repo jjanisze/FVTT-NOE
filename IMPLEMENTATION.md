@@ -724,6 +724,41 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### v0.14.1 — `showIcon`: stany, które przestały być widoczne na żetonie (2026-08-24)
+
+**FVTT v14 dołożył `ActiveEffectData.showIcon` i przedefiniował `isTemporary`.** `isTemporary`
+to teraz wyłącznie „ma czas trwania" — status na efekcie już się nie liczy. `Token#_drawEffects`
+rysuje ikonę tylko dla `showIcon === ALWAYS` albo `CONDITIONAL && isTemporary`, a schemat daje
+domyślnie `CONDITIONAL`. Efekty budowane ręcznie przez moduł — bezterminowe, bo Zranienie ani
+Upojenie nie mają czasu trwania — wypadły z żetonu bez śladu w konsoli. `toggleStatusEffect`
+było odporne: `ActiveEffect.fromStatusEffect` ustawia `showIcon ??= ALWAYS`. Migracja rdzenia
+`migrateTemporary` też podnosi `showIcon`, ale tylko dla danych **wczytywanych z dysku** —
+nowo tworzone dokumenty przechodzą obok niej.
+
+Doszło `showIcon: ALWAYS` w trzech miejscach: `combat/zranienie.mjs`, `actors/levelled-conditions.mjs`,
+`actors/disease-effects.mjs`. Obie synchronizacje porównują teraz `showIcon` przy wykrywaniu
+zmian, a backfill Zranienia odtwarza efekt także wtedy, gdy efekt *jest*, ale bez ikony —
+inaczej naprawa nie dosięgłaby aktorów, którzy już mają stan.
+
+**Przy okazji wyszły trzy stany, które nie wchodziły na żeton z zupełnie innych powodów:**
+
+- **Upojenie i Skażenie** nie niosły własnego `id` w `statuses`, więc nawet z poprawnym
+  `showIcon` żeton i przycisk w HUD były dwiema osobnymi rzeczami. Skażenia w ogóle nie było:
+  `_buildEffect` zwracało `null`, bo ten stan nie ma `changes` — jego konsekwencje przychodzą
+  jako Wyczerpanie. Ale znacznik na żetonie **jest** całą treścią tego stanu, więc dostaje efekt.
+- **Choroba** (`diseased`) — `syncDiseaseEffects` pomijało wpisy bez mechaniki (`effectsFor`
+  zwraca `null` np. dla Hemofilii), więc chory bohater wyglądał na zdrowego. Teraz każda choroba
+  dostaje efekt ze znacznikiem, a mechanika jest opcjonalnym dodatkiem.
+- **Niedożywienie i Odwodnienie** (`actors/party-supplies.mjs`) naliczały Wyczerpanie
+  z oznaczonym źródłem, ale nie stawiały znacznika. To nie jest ozdoba: dnd5e czyta
+  `hasConditionEffect("malnourished" / "dehydrated")` w długim odpoczynku i przy nich nie
+  redukuje Wyczerpania. Zdejmuje je wyłącznie pełna racja — pół racji zostawia stan, zgodnie
+  z „nie da się usunąć, dopóki nie zje pełnej dziennej porcji".
+
+Świadomie bez zmian: **Podpalenie** zostaje ręczne (`weapons-data.mjs` mówi to wprost — moduł
+nie wie, kiedy ogień gaśnie), a `falling` to zdarzenie chwilowe, nie stan — `combat/falling.mjs`
+nakłada z niego Powalenie i to jest cały jego ślad.
+
 ### v0.14.0 — Manewry wręcz, inicjatywa, przerwany odpoczynek (2026-08-24)
 
 Domknięcie czterech otwartych pozycji Fazy 1 (§1.12–§1.14).

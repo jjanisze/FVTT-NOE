@@ -286,9 +286,9 @@ async function adjustLevel(actor, id, delta, options = {}) {
 /* -------------------------------------------- */
 
 /**
- * Active Effect data for a condition at its current level, or null when the level
- * carries nothing an effect can express (Skażenie never does — it is a marker whose
- * consequences arrive as Wyczerpanie).
+ * Active Effect data for a condition at its current level. Skażenie nie niesie
+ * żadnych `changes` — jego konsekwencje przychodzą jako Wyczerpanie — ale i tak
+ * dostaje efekt, bo znacznik na żetonie jest całym sensem tego stanu.
  */
 function _buildEffect(id, level) {
   const def = LEVELLED_CONDITIONS[id];
@@ -300,8 +300,9 @@ function _buildEffect(id, level) {
     : def.levels.filter(r => r.level === level);
 
   const changes = rows.flatMap(r => (r.changes ?? []).map(c => ({ ...c })));
-  const statuses = rows.flatMap(r => r.statuses ?? []);
-  if (!changes.length && !statuses.length) return null;
+  // Własne id stanu na efekcie: to ono zapala ikonę żetonu i łączy efekt z przyciskiem
+  // HUD w jedną rzecz zamiast dwóch, które tylko wyglądają podobnie.
+  const statuses = [id, ...rows.flatMap(r => r.statuses ?? [])];
 
   const text = rows.map(r => `<p><strong>Stopień ${r.level}.</strong> ${r.text}</p>`).join("");
   const manual = rows.filter(r => r.manual).map(r => r.manual);
@@ -311,6 +312,9 @@ function _buildEffect(id, level) {
     img: `modules/${MODULE_ID}/icons/statuses/${id}.svg`,
     changes,
     statuses: [...new Set(statuses)],
+    // FVTT v14: `isTemporary` liczy tylko czas trwania, a domyślne `CONDITIONAL`
+    // znaczy „rysuj tylko, jeśli tymczasowy" — bez tego ikona nie wchodzi na żeton.
+    showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS,
     disabled: false,
     transfer: false,
     description: text + (manual.length
@@ -346,6 +350,7 @@ export async function syncLevelledConditions(actor) {
     // pointless update re-renders every open sheet.
     const current = effect.toObject();
     const differs = current.name !== target.name
+      || current.showIcon !== target.showIcon
       || JSON.stringify(current.changes) !== JSON.stringify(target.changes)
       || JSON.stringify([...(current.statuses ?? [])].sort()) !== JSON.stringify([...target.statuses].sort());
     if (differs) toUpdate.push({ _id: effect.id, ...target });

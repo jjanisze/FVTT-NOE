@@ -29,6 +29,9 @@ import { getFuksy, setFuksy, MAX_FUKSY } from "../combat/rerolls.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const KATEGORIE_MAP = Object.fromEntries(ZASOBY_KATEGORIE.map(c => [c.kind, c]));
+// Te dwa znaczniki dnd5e czyta w długim odpoczynku (`hasConditionEffect("malnourished"
+// / "dehydrated")`), więc nie są tylko ozdobą żetonu.
+const ZNACZNIK = { jedzenie: "malnutrition", woda: "dehydration" };
 
 /* -------------------------------------------- */
 /*  Rozpoznawanie i zliczanie                    */
@@ -226,6 +229,8 @@ export async function consumeDailyNeeds(groupActor) {
       const label = KATEGORIE_MAP[kind].label;
 
       if (got >= wanted - 0.0001) {
+        // Tylko pełna racja zdejmuje znacznik — RAW: „nie da się usunąć, dopóki nie zje pełnej porcji".
+        await actor.toggleStatusEffect(ZNACZNIK[kind], { active: false });
         wynik.notatki.push(`${label}: ${round(got)} ${unit} — pełna racja.`);
         continue;
       }
@@ -234,6 +239,7 @@ export async function consumeDailyNeeds(groupActor) {
         continue;
       }
 
+      await actor.toggleStatusEffect(ZNACZNIK[kind], { active: true });
       if (kind === "woda") {
         await addExhaustion(actor, "odwodnienie");
         wynik.notatki.push(`<span class="neuro-zle">${label}: ${round(got)} / ${wanted} ${unit} — Odwodnienie, +1 Wyczerpanie.</span>`);
