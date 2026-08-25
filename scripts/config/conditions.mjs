@@ -224,6 +224,17 @@ export const NEUROSHIMA_ZAGROZENIA = Object.freeze({
     img: `${SVG}/surprised.svg`,
     description: "<p>Zaskoczona istota rzuca na Inicjatywę z Utrudnieniem.</p>",
     pseudo: true
+  },
+  // Lustrzane odbicie Zaskoczenia i jedyny stan na tej liście, którego dnd5e nie zna.
+  // Nakładany ręcznie, bo Niespodziewany atak nie wynika z mechaniki — to rozstrzygnięcie
+  // MG o tym, kto w chwili wybuchu walki był gotów. Ikona po skasowanym `marked`.
+  ambush: {
+    name: "Niespodziewany atak",
+    img: `${SVG}/marked.svg`,
+    description: "<p>Kiedy niegroźna sytuacja nagle przeradza się w walkę, <strong>atakujący</strong> rzuca "
+      + "na Inicjatywę z Ułatwieniem.</p><p>To samo dotyczy istot, które trzymają broń i są przygotowane "
+      + "na agresję (np. ochroniarze) — one również rzucają z Ułatwieniem.</p>",
+    pseudo: true
   }
 });
 
@@ -317,8 +328,9 @@ export const REMOVED_STATUSES = Object.freeze([
  * The Neuroshima entry is unconditional — "Utrudnienie w Testach Ataku i Testach
  * Cech" with no line-of-sight clause — so it is added here.
  *
- * `initiativeAdvantage` loses `invisible`: TABELA STANÓW says nothing about
- * Niewidoczność affecting Inicjatywa.
+ * `initiativeAdvantage` loses `invisible` — TABELA STANÓW says nothing about
+ * Niewidoczność affecting Inicjatywa — and gains `ambush`, the Neuroshima-only state
+ * behind „Niespodziewany atak" (see NEUROSHIMA_ZAGROZENIA).
  */
 function buildConditionEffects() {
   return {
@@ -333,7 +345,7 @@ function buildConditionEffects() {
     abilitySaveDisadvantage: new Set(),
     attackDisadvantage: new Set(["poisoned", "frightened"]),
     dexteritySaveDisadvantage: new Set(["restrained"]),
-    initiativeAdvantage: new Set(),
+    initiativeAdvantage: new Set(["ambush"]),
     initiativeDisadvantage: new Set(["incapacitated", "surprised"])
   };
 }
