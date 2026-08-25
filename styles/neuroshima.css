@@ -63,13 +63,15 @@
 /* Skażenie (sheet-shell.mjs)                    */
 /* ============================================= */
 
+/* Kolory stanów (`--neuro-color-*`) publikuje `config/state-colors.mjs` na `:root` w `init`,
+   żeby ta sama tabela zasilała arkusz i generator ikon żetonu. */
 .neuro-stan-panel {
   /* Shared by the panel and its legend, so the heading can punch a hole in the top border. */
   --neuro-stan-bg: #191512;
   position: relative;
   margin: 0.9rem 0 0.5rem;
   padding: 0.5rem 0.5rem;
-  border: 1px solid rgba(192, 57, 43, 0.35);
+  border: 1px solid color-mix(in srgb, var(--neuro-color-zranienie) 35%, transparent);
   border-radius: 4px;
   background: var(--neuro-stan-bg);
 }
@@ -92,7 +94,7 @@
   padding: 0 0.35rem;
   border: none;
   background: var(--neuro-stan-bg);
-  color: #c0392b;
+  color: var(--neuro-color-zranienie);
   font-size: var(--font-size-11, 11px);
   letter-spacing: 1px;
   transform: translate(-50%, -50%);
@@ -155,8 +157,8 @@
   box-shadow: 0 0 5px color-mix(in srgb, var(--neuro-pip-color) 60%, transparent);
 }
 
-.neuro-stan-zranienie .neuro-stan-pip { --neuro-pip-color: #c0392b; }
-.neuro-stan-upojenie .neuro-stan-pip { --neuro-pip-color: #9b59b6; }
+.neuro-stan-zranienie .neuro-stan-pip { --neuro-pip-color: var(--neuro-color-zranienie); }
+.neuro-stan-upojenie .neuro-stan-pip { --neuro-pip-color: var(--neuro-color-upojenie); }
 
 /* Wyczerpanie carries a source per level, so its pips are bigger and each one is tinted by
    the source that caused it (colour comes from EXHAUSTION_SOURCES via an inline custom
@@ -173,7 +175,7 @@
 }
 
 .neuro-stan-exhaustion .neuro-stan-pip {
-  --neuro-pip-color: #3498db;
+  --neuro-pip-color: var(--neuro-color-wyczerpanie);
   width: 13px;
   height: 13px;
   min-width: 13px;
@@ -207,18 +209,18 @@
 .neuro-stan-rad {
   gap: 0.35rem;
   padding: 2px 3px;
-  border: 1px solid rgba(127, 255, 63, 0.25);
+  border: 1px solid color-mix(in srgb, var(--neuro-color-skazenie) 25%, transparent);
   border-radius: 3px;
   background:
     repeating-linear-gradient(135deg,
-      rgba(127, 255, 63, 0.09) 0 6px,
+      color-mix(in srgb, var(--neuro-color-skazenie) 9%, transparent) 0 6px,
       rgba(0, 0, 0, 0) 6px 12px),
     rgba(20, 38, 12, 0.55);
 }
 
 .neuro-stan-rad.is-hot {
-  border-color: rgba(127, 255, 63, 0.6);
-  box-shadow: 0 0 7px rgba(127, 255, 63, 0.25);
+  border-color: color-mix(in srgb, var(--neuro-color-skazenie) 60%, transparent);
+  box-shadow: 0 0 7px color-mix(in srgb, var(--neuro-color-skazenie) 25%, transparent);
 }
 
 .neuro-rad-btn {
@@ -1738,17 +1740,19 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
 /*  Stany stopniowane — Upojenie / Skażenie      */
 /* -------------------------------------------- */
 
-/* Level badge on the token HUD status button. dnd5e shows Wyczerpanie's level by
-   swapping in a numbered icon; these two carry the number as an overlay instead. */
+/* Level badge on the token HUD status button. Stany z własnym kompletem ikon (Zranienie,
+   Wyczerpanie) niosą cyfrę w pliku; tu lądują tylko te rysowane ręcznie. Barwę podaje
+   `levelled-conditions.mjs` z palety, żeby badge zgadzał się z pipką tego samego toru. */
 .neuro-condition-level {
+  --neuro-badge-color: #dcbe82;
   position: absolute;
   min-width: 16px;
   height: 16px;
   padding: 0 3px;
   border-radius: 8px;
   background: #1a1a1a;
-  border: 1px solid rgba(220, 190, 130, 0.85);
-  color: #f0d9a0;
+  border: 1px solid var(--neuro-badge-color);
+  color: var(--neuro-badge-color);
   font-size: 11px;
   font-weight: bold;
   line-height: 14px;
@@ -1857,8 +1861,8 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
   box-shadow: 0 0 4px color-mix(in srgb, var(--neuro-pip-color) 60%, transparent);
 }
 
-.neuro-party .neuro-seg-exhaustion .neuro-seg-pip { --neuro-pip-color: #3498db; }
-.neuro-party .neuro-seg-zranienie .neuro-seg-pip { --neuro-pip-color: #c0392b; }
+.neuro-party .neuro-seg-exhaustion .neuro-seg-pip { --neuro-pip-color: var(--neuro-color-wyczerpanie); }
+.neuro-party .neuro-seg-zranienie .neuro-seg-pip { --neuro-pip-color: var(--neuro-color-zranienie); }
 
 .neuro-party .neuro-seg-pip.is-terminal.is-filled {
   box-shadow: 0 0 6px var(--neuro-pip-color), inset 0 0 0 1px rgba(0, 0, 0, 0.45);

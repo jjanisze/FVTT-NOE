@@ -724,6 +724,41 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### v0.14.4 — Jedna paleta stanów (2026-08-25)
+
+Kolory stanów stopniowanych były rozsiane po czterech miejscach jako hexy i zdążyły się
+rozjechać: Upojenie miało pipkę fioletową, a scrolling text złoty; Zranienie i Wyczerpanie
+nosiły na żetonie **tę samą** czerwoną cyfrę dnd5e, więc dwie białe sylwetki różniło tylko
+to, jaki mają kształt. Teraz tabela `config/state-colors.mjs` jest jedynym źródłem:
+
+| Stan | kolor |
+|---|---|
+| Zranienie | `#c0392b` |
+| Wyczerpanie | `#3498db` |
+| Upojenie | `#9b59b6` |
+| Skażenie | `#7fff3f` |
+
+Tabela musi żyć w JS, a nie w arkuszu, bo ma dwóch konsumentów, których CSS nie obsłuży.
+Ikona żetonu idzie do PIXI jako tekstura, więc `var(--icon-fill)` w SVG nigdy się nie
+rozwinie — kolor jest **wpalany w plik** przez generator, który importuje tę samą stałą w
+Node. Drugim jest `EXHAUSTION_SOURCES`, gdzie barwa jedzie inline stylem na pipkę. Runtime
+publikuje tabelę jako `--neuro-color-*` na `:root` w `init`, więc arkusz tylko ją *stosuje*
+i nie powtarza już żadnego hexa.
+
+**Wyczerpanie dostało własny komplet ikon bez nadpisywania czegokolwiek.**
+`ActiveEffect5e._getExhaustionImage()` buduje ścieżkę poziomu z
+`CONFIG.DND5E.conditionTypes.exhaustion.img`, więc wystarczyło wskazać tam
+`icons/statuses/wyczerpanie.svg`, a dnd5e samo poszło po `wyczerpanie-1..6.svg`. Generator
+(`dev/icons/gen_status_numerals.mjs`, `npm run build:status-icons`) kopiuje pliki systemu i
+przemalowuje w nich tylko cyfrę, z twardym sprawdzeniem obecności `#c70000` — cicha porażka
+dałaby ikony w barwie dnd5e i nikt by tego nie zauważył.
+
+**Token HUD mówi jednym językiem.** Zranienie ma teraz komplet ikon z cyfrą, więc pokazuje
+poziom podmianą tła kontrolki — tą samą sztuczką, którą dnd5e stosuje dla Wyczerpania w
+`onTokenHUDRender` — zamiast doklejanego badge'a. Badge zostaje dla Upojenia i Skażenia,
+które są rysowane ręcznie i cyfr w plikach nie mają, ale bierze barwę swojego toru zamiast
+uniwersalnego złota. Rozstrzyga o tym opcjonalne `img` w `registerHudLevelled`.
+
 ### v0.14.3 — Poziom Zranienia na żetonie, koniec z przewlekłym znacznikiem (2026-08-25)
 
 **Zranienie pokazuje teraz stopień tak samo jak Wyczerpanie: czerwoną cyfrą rzymską.**

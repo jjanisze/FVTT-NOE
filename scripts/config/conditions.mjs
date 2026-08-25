@@ -132,6 +132,8 @@ export const NEUROSHIMA_STANY = Object.freeze({
   },
   exhaustion: {
     name: "Wyczerpanie",
+    // Nadpisane w `exhaustion.mjs` na wlasny komplet z niebieska cyfra — dnd5e wyprowadza
+    // sciezke poziomu wlasnie z tego pola, wiec podmiana bazy przekierowuje caly zestaw.
     img: `${SVG}/exhaustion.svg`,
     description: "<p><strong>Kumuluje się.</strong> Każde nałożenie zwiększa poziom o 1. Umierasz na poziomie 6.<br>"
       + "<strong>Testy k20</strong> pomniejszone o 2 × poziom wyczerpania.<br>"

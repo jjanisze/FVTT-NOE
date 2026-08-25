@@ -33,6 +33,7 @@ import { LEVELLED_CONDITIONS, UPOJENIE_LEVELS, SKAZENIE_LEVELS,
 import { addExhaustion } from "../config/exhaustion.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
 import { addDisease, getChoroby } from "./health-panel.mjs";
+import { STATE_COLORS } from "../config/state-colors.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const EFFECT_FLAG = "levelledCondition";
@@ -91,9 +92,9 @@ export function registerLevelledConditions() {
   document.addEventListener("click", _onClickTokenHUD, { capture: true });
   document.addEventListener("contextmenu", _onClickTokenHUD, { capture: true });
 
-  // Show the current level on the HUD badge. dnd5e does the equivalent for
-  // Wyczerpanie by swapping in a numbered `exhaustion-N.svg`; a text overlay gets
-  // the same information across without eight more icon files to keep in sync.
+  // Show the current level on the HUD. Stany z własnym kompletem ikon podmieniają tło
+  // kontrolki tak jak dnd5e dla Wyczerpania; Upojenie i Skażenie — rysowane ręcznie,
+  // bez cyfr w plikach — dostają badge w barwie swojego toru.
   Hooks.on("renderTokenHUD", _onRenderTokenHUD);
 
   console.log(`${MODULE_ID} | Stany stopniowane zarejestrowane (Upojenie, Skażenie)`);
@@ -110,6 +111,7 @@ export function registerLevelledConditions() {
  * @property {(actor: Actor) => number} get
  * @property {(actor: Actor, level: number) => Promise<any>} set
  * @property {((level: number) => {title?: string, lines: string[]})} [summary]
+ * @property {((level: number) => string)} [img]  Ikona z wrysowaną cyfrą poziomu, jeśli stan takową ma.
  */
 
 /**
@@ -135,9 +137,11 @@ const HUD_CYCLE = new Map();
  * @param {LevelledTrack} spec
  *   `summary` reports everything the character suffers *at* that level, already accumulated.
  *   Conditions whose levels carry no penalty of their own (Skażenie) simply omit it.
+ *   `img` podają stany, które mają komplet ikon z cyfrą — wtedy HUD pokazuje poziom tak
+ *   samo jak dnd5e robi to dla Wyczerpania, zamiast doklejać badge.
  */
-export function registerHudLevelled(id, { label, max, get, set, summary }) {
-  HUD_CYCLE.set(id, { label, max, get, set, summary });
+export function registerHudLevelled(id, { label, max, get, set, summary, img }) {
+  HUD_CYCLE.set(id, { label, max, get, set, summary, img });
 }
 
 /**
@@ -429,6 +433,12 @@ function _onClickTokenHUD(event) {
  * Stamp the current level onto the HUD icon, and spell it out in the tooltip so the
  * number is not the only cue.
  *
+ * Stany, które mają własny komplet ikon z cyfrą (`spec.img`), pokazują poziom przez
+ * podmianę tła kontrolki — dokładnie tak, jak dnd5e robi to dla Wyczerpania w
+ * `ActiveEffect5e.onTokenHUDRender`. Powielenie tamtej sztuczki zamiast wymyślania
+ * własnej jest tu celowe: HUD ma mówić jednym językiem niezależnie od tego, kto
+ * rysuje którą ikonę. Badge zostaje dla stanów bez takiego kompletu.
+ *
  * The badge cannot be a child of the icon: Foundry builds each status control as a
  * bare `<img class="effect-control">`, and `<img>` is a void element — appending to
  * it is accepted by the DOM and then never rendered. So the badge goes into the
@@ -457,7 +467,13 @@ function _onRenderTokenHUD(hud, html) {
 
     const level = spec.get(actor);
     control.setAttribute("data-tooltip", level ? `${spec.label} ${level}/${spec.max}` : spec.label);
-    if (level) wanted.push({ control, level });
+    if (!level) continue;
+    if (spec.img) {
+      control.style.objectPosition = "-100px";
+      control.style.background = `url('${spec.img(level)}') no-repeat center / contain`;
+      continue;
+    }
+    wanted.push({ control, level, id });
   }
 
   const palette = wanted[0]?.control?.parentElement;
@@ -465,9 +481,10 @@ function _onRenderTokenHUD(hud, html) {
   root.querySelectorAll(".neuro-condition-level").forEach(b => b.remove());
   if (!palette) return;
 
-  const badges = wanted.map(({ control, level }) => {
+  const badges = wanted.map(({ control, level, id }) => {
     const badge = document.createElement("span");
     badge.className = "neuro-condition-level";
+    if (STATE_COLORS[id]) badge.style.setProperty("--neuro-badge-color", STATE_COLORS[id]);
     badge.textContent = String(level);
     palette.append(badge);
     return { badge, control };

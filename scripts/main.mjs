@@ -21,6 +21,7 @@ import { registerSP } from "./actors/sp.mjs";
 import { registerTerminology } from "./config/terminology.mjs";
 import { removeSpellcasting } from "./config/spellcasting.mjs";
 import { registerConditions } from "./config/conditions.mjs";
+import { registerStateColors } from "./config/state-colors.mjs";
 import { registerExhaustion } from "./config/exhaustion.mjs";
 import { registerLevelledConditions, levelledConditionsApi } from "./actors/levelled-conditions.mjs";
 import { registerRestOverrides } from "./config/rest.mjs";
@@ -121,6 +122,8 @@ Hooks.once("init", () => {
   // Must precede registerExhaustion: it rebuilds conditionTypes wholesale, and
   // exhaustion.mjs then tunes the entry it leaves behind.
   registerConditions();
+  // Przed pierwszym renderem czegokolwiek, bo arkusz czyta te zmienne bez wartosci zapasowych.
+  registerStateColors();
   registerExhaustion();
   registerLevelledConditions();
   registerRestOverrides();

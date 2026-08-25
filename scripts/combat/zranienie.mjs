@@ -86,7 +86,8 @@ export function registerZranienie() {
     max: 4,
     get: getZranienieLvl,
     set: setZranienie,
-    summary: _zranienieSummary
+    summary: _zranienieSummary,
+    img: _zranienieImage
   });
 
   // Backfill, as the disease and levelled-condition layers already do. A wounded

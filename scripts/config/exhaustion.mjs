@@ -26,11 +26,14 @@
 const MODULE_ID = "neuroshima-2026-overrides";
 
 import { seqScrollText } from "../weapons/sequencer.mjs";
+import { STATE_COLORS } from "./state-colors.mjs";
 
 /**
  * Known exhaustion sources with Polish labels and whether long rest auto-clears them.
  * `color` tints that level's pip in the Stan panel, so a glance at the track shows what
- * the character is actually suffering from.
+ * the character is actually suffering from. Źródła, które są jednocześnie osobnymi stanami,
+ * biorą barwę z palety — pipka Wyczerpania ma wtedy dokładnie ten kolor, co tor, z którego
+ * ten poziom przyszedł.
  */
 export const EXHAUSTION_SOURCES = {
   bezsennosc:   { label: "Bezsenno\u015b\u0107",            restClears: false, color: "#7f8cff" },
@@ -38,10 +41,10 @@ export const EXHAUSTION_SOURCES = {
   niedozywienie:{ label: "Niedo\u017cywienie",          restClears: false, color: "#b07d3a" },
   odwodnienie:  { label: "Odwodnienie",            restClears: false, color: "#2196f3" },
   przemarznie:  { label: "Przemarzni\u0119cie",         restClears: false, color: "#9fe8ff" },
-  skazenie:     { label: "Ska\u017cenie radioaktywne",  restClears: false, color: "#7fff3f" },
+  skazenie:     { label: "Ska\u017cenie radioaktywne",  restClears: false, color: STATE_COLORS.skazenie },
   choroba:      { label: "Choroba",                restClears: false, color: "#a569bd" },
   deadline:     { label: "Zej\u015bcie z Deadline'u", restClears: false, color: "#ff4d6d" },
-  zranienie:    { label: "Stopie\u0144 Zranienia",      restClears: false, color: "#c0392b" },
+  zranienie:    { label: "Stopie\u0144 Zranienia",      restClears: false, color: STATE_COLORS.zranienie },
   uduszenie:    { label: "Uduszenie",              restClears: true,  color: "#5d6d7e" },
   forsowanie:   { label: "Forsowanie",             restClears: true,  color: "#ff8a3d" },
   ogolne:       { label: "Og\u00f3lne",                 restClears: true,  color: "#9aa0a6" }
@@ -64,6 +67,12 @@ export function registerExhaustion() {
 
   // Polish label
   exhaustion.name = "Wyczerpanie";
+
+  // Własny komplet ikon, żeby cyfra rzymska miała barwę toru (niebieską), a nie systemową
+  // czerwień, którą nosi też Zranienie. Nie wymaga nadpisania niczego: dnd5e buduje ścieżkę
+  // poziomu z tego właśnie pola (`ActiveEffect5e._getExhaustionImage`), więc dokleja `-N`
+  // do naszego pliku i trafia w `wyczerpanie-N.svg`.
+  exhaustion.img = `modules/${MODULE_ID}/icons/statuses/wyczerpanie.svg`;
 
   // Intercept long rest exhaustion recovery
   Hooks.on("dnd5e.preRestCompleted", onPreRestCompleted);

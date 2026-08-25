@@ -7,10 +7,11 @@ pożyczenia. W repo leżą **placeholdery** narysowane ręcznie (`upojenie.svg`,
 Pozostałe 22 stany używają ikon dnd5e (`systems/dnd5e/icons/svg/statuses/`) i nie
 wymagają żadnej pracy graficznej.
 
-`zranienie-1..4.svg` są **generowane** — nie edytuj ich ręcznie. Powstają z sylwetki
-`bloodied.svg` i czerwonej cyfry rzymskiej wyciętej z `exhaustion-N.svg`, bo dnd5e
-pokazuje poziom stanu wyłącznie przez podmianę pliku ikony (rdzeń rysuje na żetonie
-sam `effect.img`). Przebudowa: `npm run build:zranienie-icons`.
+`zranienie-1..4.svg` oraz `wyczerpanie.svg` + `wyczerpanie-1..6.svg` są **generowane** —
+nie edytuj ich ręcznie. Powstają z assetów dnd5e, z cyfrą rzymską przemalowaną na kolor
+stanu z `scripts/config/state-colors.mjs`. Osobne pliki, bo dnd5e pokazuje poziom wyłącznie
+przez podmianę ikony (rdzeń rysuje na żetonie sam `effect.img`), a barwy nie da się podać
+z CSS — tekstura idzie do PIXI. Przebudowa: `npm run build:status-icons`.
 
 ---
 
