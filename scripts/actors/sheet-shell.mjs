@@ -16,6 +16,7 @@
 
 import { getLevelledRegistry, getRadiationFailures, promptRadiationSave } from "./levelled-conditions.mjs";
 import { buildHealthStrip } from "./health-panel.mjs";
+import { isBurning, promptDouse, PODPALENIE } from "../combat/podpalenie.mjs";
 import { EXHAUSTION_SOURCES, getExhaustionSources } from "../config/exhaustion.mjs";
 import { SKAZENIE_DISEASE_THRESHOLD } from "../config/levelled-conditions-data.mjs";
 
@@ -322,6 +323,37 @@ function _buildRadRow(actor, editable) {
 }
 
 /**
+ * Podpalenie row. Zapala i gasi się przez zwykły klik w palecie stanów — tutaj jest tylko
+ * to, czego paleta nie umie: akcja z RAW, czyli rzucenie się na ziemię i turlanie.
+ * @param {Actor} actor
+ * @param {boolean} editable
+ * @returns {HTMLElement}
+ */
+function _buildFireRow(actor, editable) {
+  const row = document.createElement("div");
+  row.className = "neuro-stan-row neuro-stan-fire";
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "neuro-fire-btn";
+  btn.innerHTML = '<i class="fas fa-fire" inert></i>';
+  const label = document.createElement("span");
+  label.textContent = "Ugaś się";
+  btn.appendChild(label);
+  btn.setAttribute("data-tooltip",
+    `Akcja: padasz i turlasz się — Test Zręczności (Akrobatyka) ST ${PODPALENIE.douseDC}. Dostajesz Powalenie.`);
+  btn.disabled = !editable;
+  if (editable) btn.addEventListener("click", async ev => {
+    ev.preventDefault();
+    ev.stopPropagation();
+    await promptDouse(actor);
+  });
+  row.appendChild(btn);
+
+  return row;
+}
+
+/**
  * The full Stan card. The heading's dead space carries the Wyczerpanie total, which frees
  * every row of its own readout.
  * @param {Actor} actor
@@ -345,6 +377,9 @@ function _buildStanPanel(actor, tracks) {
   body.className = "neuro-stan-body";
   for (const track of tracks) body.appendChild(_buildTrackRow(track, actor.isOwner));
   body.appendChild(_buildRadRow(actor, actor.isOwner));
+
+  // Tylko gdy się pali — poza tym wiersz nie ma o czym mówić, a panel ma być krótki.
+  if (isBurning(actor)) body.appendChild(_buildFireRow(actor, actor.isOwner));
 
   // Read-only — every control for these lives on the Biografia tab.
   const ailments = buildHealthStrip(actor);

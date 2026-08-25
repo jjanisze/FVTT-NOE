@@ -698,11 +698,10 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   RO KON ST 10 dla jedzenia i automatyczne Wyczerpanie dla wody, znaczniki `malnutrition`/`dehydration`,
   źródła `niedozywienie`/`odwodnienie`, których DO nie zdejmie). Wpis przeżył jako martwy TODO,
   tak samo jak Upojenie i Skażenie wyżej — znaleziony przy porządkach 2026-08-25.
-  **Zostaje: Podpalenie** — stan istnieje w `conditions.mjs` z pełnym opisem (1k4 ognia na początku
-  tury, akcja na ugaszenie = Powalenie, gaśnica/woda), ale bez egzekwowania; trzy pozycje treści
-  (miotacz ognia, dwa naboje zapalające, smok z bestiariusza) mówią wprost „nakładany ręcznie".
-  Szkielet gotowy: `combat/bleeding.mjs` ma dokładnie ten kształt (hook `updateCombat` + przyciski w czacie).
-  **Przemarznięcie i Uduszenie** też mają gotowe klucze w `EXHAUSTION_SOURCES` i żadnej automatyki
+  **Podpalenie wykreślone** — `combat/podpalenie.mjs`, v0.14.5 (1k4 ognia na początku tury,
+  `duration` FVTT zamiast własnego licznika, płomień Sequencera na żetonie, akcja „Ugaś się"
+  w panelu STAN). **Zostaje: Przemarznięcie i Uduszenie** — mają gotowe klucze
+  w `EXHAUSTION_SOURCES` i żadnej automatyki
 - [~] Rest activities — **polowanie i gotowanie zrobione** (`party-supplies.mjs`: `hunt()` — 1 h,
   Test Mądrości (Sztuka przetrwania) ST 15; `cook()`). Zostają: plotki i czyszczenie sprzętu
 - [ ] Vehicles (actor type + combat + chase system)
@@ -736,6 +735,63 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### v0.14.5 — Podpalenie: ogień, który sam się liczy (2026-08-25)
+
+Podpalenie było stanem-atrapą: pełny opis w `conditions.mjs`, ikona na żetonie i trzy pozycje
+treści (miotacz ognia, dwa naboje zapalające, smok z bestiariusza) mówiące wprost „nakładany
+ręcznie". Teraz `combat/podpalenie.mjs` egzekwuje RAW: **1k4 obrażeń od ognia na początku
+każdej tury płonącego**, przez dwie rundy, plus akcja na ugaszenie się.
+
+**Czas trwania jedzie schematem FVTT, nie własnym licznikiem.** Kuszące było dopisać flagę
+z licznikiem tur i odejmować ją ręcznie — i byłby to trzeci taki licznik w module. Zamiast
+tego wpis stanu deklaruje `duration: { value: 2, units: "rounds", expiry: "turnStart" }`,
+a `ActiveEffect.fromStatusEffect` kopiuje **cały** wpis z `CONFIG.statusEffects` do efektu.
+Dzięki temu odliczanie, przeliczanie przy zmianie rundy i etykieta „2 rundy" w karcie efektów
+są już napisane przez rdzeń — czytamy tylko `effect.updateDuration().remaining`.
+
+Jednego rdzeń nie zrobi: **nie skasuje wygasłego efektu.** `CONFIG.ActiveEffect.expiryAction`
+domyślnie wynosi `"update"`, więc `ActiveEffectRegistry` tylko stawia `duration.expired = true`
+i zostawia ikonę na żetonie. Przełączenie tego na `"delete"` jest ustawieniem **globalnym** —
+dotknęłoby każdego efektu w świecie, łącznie z cudzymi. Dlatego kasowanie jest po naszej
+stronie, w haku `updateCombat`, i to jedyny fragment systemu, który tu zastępujemy (ARCHITECTURE §8).
+
+**Ile realnie tyknięć.** Rdzeń liczy `remaining = value - (runda_bieżąca - runda_startu)`,
+więc wynik zależy od tego, kiedy w rundzie zapalił się ogień:
+
+| Zapalony | Obrażenia | Gaśnie |
+|---|---|---|
+| przed swoją turą w rundzie R | tury R i R+1 → **2×1k4** | początek tury w R+2 |
+| w swojej turze w rundzie R | tura R+1 → **1×1k4** | początek tury w R+2 |
+
+To ta sama arytmetyka, którą 5e stosuje do każdego efektu na rundy, i zgadza się z językiem
+podręcznika („płonie przez dwie rundy"). Gdyby MG chciał zawsze dokładnie dwa tyknięcia,
+trzeba by liczyć **własne tury ofiary**, a tego `duration.units` nie wyraża — `"turns"` liczy
+tury wszystkich w inicjatywie.
+
+**Poza walką nic nie tyka.** Nie ma rund, więc nie ma początku tury. Płonący NPC pali się,
+dopóki ktoś nie zdejmie stanu — człowiek pochodnia jest sceną, nie błędem.
+
+**Widać, że się pali.** Zapalenie to jednorazowy `jb2a.flames.02.orange` plus doczepiony,
+trwały `jb2a.flames.01.orange` przez Sequencera i scrolling text „PŁONIE!" w kolorze
+`--neuro-color-podpalenie` (`#e8590c`, piąty wpis w palecie z v0.14.4). Ugaszenie ręczne daje
+plusk wody i dym; **wypalenie się z czasu daje sam dym** — rozróżnia je opcja `neuroBurnout`
+przepuszczana przez `effect.delete()` i odczytywana w haku `deleteActiveEffect`.
+JB2A i Sequencer są miękkimi zależnościami: `seqEffect()` sprawdza `Sequencer.Database.entryExists`
+i po cichu odpuszcza, bo brak wtyczki ma kosztować płomień, a nie zasadę.
+Hak `canvasReady` dosynchronizowuje płomienie po przeładowaniu.
+
+**Gaszenie się akcją** (`Ugaś się` w panelu STAN, widoczne tylko gdy postać płonie):
+Powalenie leci **zawsze** — to nie kara za porażkę, tylko sposób, w jaki się gasi — a test
+decyduje wyłącznie o tym, czy ogień zszedł. Sukces gasi od razu, bez drugiego kliknięcia.
+
+> **Interpretacja domowa.** RAW mówi tylko „używając akcji, może spróbować się ugasić,
+> przewracając się i turlając po ziemi" — bez ST i bez nazwania Powalenia. Moduł przyjmuje
+> **Test Zręczności (Akrobatyka) ST 10**. Próg siedzi w `PODPALENIE.douseDC`, umiejętność
+> w `PODPALENIE.douseSkill` (klucz `akr`, nie dnd5e-owe `acr`).
+
+Nowe w `weapons/sequencer.mjs`: `seqEffect()` / `seqEndEffect()` / `seqEffectRunning()` —
+ogólne API do efektów na kanwie, dotąd moduł umiał przez Sequencera tylko dźwięk i tekst.
 
 ### v0.14.4 — Jedna paleta stanów (2026-08-25)
 

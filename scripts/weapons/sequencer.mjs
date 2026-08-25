@@ -8,9 +8,13 @@
  *   seqPlayAudio(src, vol, opts)          — play audio via Sequencer; returns false if unavailable
  *   seqStartLoop(src, vol, origin, opts)  — start a persisted, indefinitely-looping sound
  *   seqStopLoop(origin)                   — end a loop started with seqStartLoop, for all clients
+ *   seqEffect(file, source, opts)         — canvas VFX on a token, one-shot or persistent
+ *   seqEndEffect(name)                    — end a named persistent effect, for all clients
+ *   seqEffectRunning(name)                — is that named effect still playing?
  *   seqScrollText(text, source, opts)     — floating combat text above a token
  *
  * Docs: C:\Git\FoundryVTT-Sequencer\docs\api\sound.md
+ *       C:\Git\FoundryVTT-Sequencer\docs\api\effect.md
  *       C:\Git\FoundryVTT-Sequencer\docs\api\scrolling-text.md
  *       C:\Git\FoundryVTT-Sequencer\typings\types.d.ts
  */
@@ -194,6 +198,79 @@ export function seqStopLoop(origin) {
   if (!game.modules.get("sequencer")?.active || !origin) return false;
   window.Sequencer.SoundManager.endSounds({ origin });
   return true;
+}
+
+/* -------------------------------------------- */
+/*  Public API — Canvas effects                  */
+/* -------------------------------------------- */
+
+/**
+ * Play a JB2A (or any Sequencer-database) effect on a token.
+ *
+ * Both dependencies are soft: no Sequencer, no token, or no such entry in the effect
+ * database and this returns false without throwing. `.file()` on a missing database
+ * path is a hard error in Sequencer, hence the `entryExists` guard — a user who never
+ * installed JB2A should lose the flames, not the burning rules.
+ *
+ * API reference: C:\Git\FoundryVTT-Sequencer\docs\api\effect.md
+ *
+ * @param {string} file   Sequencer database path, e.g. "jb2a.flames.01.orange".
+ * @param {Actor|TokenDocument|Token|null} source
+ * @param {object}  [opts]
+ * @param {number}  [opts.scale=1]      Size relative to the token.
+ * @param {number}  [opts.opacity=1]
+ * @param {boolean} [opts.attach]       Follow the token as it moves, instead of a fixed spot.
+ * @param {string}  [opts.name]         Required with `attach` + persist; the handle for seqEndEffect.
+ * @param {boolean} [opts.persist]      Loop indefinitely and survive a reload.
+ * @param {number}  [opts.fadeIn=0]
+ * @param {number}  [opts.fadeOut=400]
+ * @param {number}  [opts.delay=0]
+ * @returns {boolean} true = Sequencer played it.
+ */
+export function seqEffect(file, source, {
+  scale = 1, opacity = 1, attach = false, name, persist = false,
+  fadeIn = 0, fadeOut = 400, delay = 0
+} = {}) {
+  const Seq = _getSequencer();
+  if (!Seq) return false;
+  if (!window.Sequencer.Database.entryExists(file)) {
+    console.warn(`neuroshima-2026-overrides | brak efektu "${file}" w bazie Sequencera — pomijam`);
+    return false;
+  }
+
+  const token = _resolveToken(source);
+  if (!token) return false;
+
+  let fx = new Seq().effect().file(file).scaleToObject(scale).opacity(opacity);
+  fx = attach ? fx.attachTo(token, { bindAlpha: false }) : fx.atLocation(token);
+  if (persist) fx = fx.persist();
+  if (name) fx = fx.name(name);
+  if (fadeIn) fx = fx.fadeIn(fadeIn);
+  if (fadeOut) fx = fx.fadeOut(fadeOut);
+  if (delay) fx = fx.delay(delay);
+  fx.play();
+  return true;
+}
+
+/**
+ * End a named effect started with {@link seqEffect}, on every client.
+ * @param {string} name
+ * @returns {boolean} true = Sequencer handled it.
+ */
+export function seqEndEffect(name) {
+  if (!game.modules.get("sequencer")?.active || !name) return false;
+  window.Sequencer.EffectManager.endEffects({ name });
+  return true;
+}
+
+/**
+ * Is a named effect currently playing anywhere on the canvas?
+ * @param {string} name
+ * @returns {boolean}
+ */
+export function seqEffectRunning(name) {
+  if (!game.modules.get("sequencer")?.active || !name) return false;
+  return (window.Sequencer.EffectManager.getEffects({ name }) ?? []).length > 0;
 }
 
 /* -------------------------------------------- */

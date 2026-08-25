@@ -180,9 +180,14 @@ export const NEUROSHIMA_ZAGROZENIA = Object.freeze({
   burning: {
     name: "Podpalenie",
     img: `${SVG}/burning.svg`,
+    // Czas trwania jedzie schematem FVTT (`duration.value/units/expiry`), a nie własnym
+    // licznikiem: `fromStatusEffect` kopiuje go do efektu, więc odliczanie, przeliczanie
+    // przy zmianie rundy i etykieta w karcie efektów są już napisane. Reaguje na to
+    // `combat/podpalenie.mjs` — patrz tam, dlaczego kasowanie efektu jest po naszej stronie.
+    duration: { value: 2, units: "rounds", expiry: "turnStart" },
     description: "<p>Otrzymujesz 1k4 obrażeń od ognia na początku każdej swojej tury. Używając akcji, możesz spróbować się ugasić, "
-      + "przewracając się i turlając po ziemi (stan Powalenie). Ogień gaśnie także od gaśnicy, zanurzenia w wodzie "
-      + "lub zduszenia płomieni.</p>",
+      + "przewracając się i turlając po ziemi — Test Zręczności (Akrobatyka) ST 10, przy okazji dostajesz stan Powalenie. "
+      + "Ogień gaśnie także od gaśnicy, zanurzenia w wodzie lub zduszenia płomieni.</p>",
     pseudo: true
   },
   suffocation: {

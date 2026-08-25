@@ -755,6 +755,71 @@ badge „bez automatyki" na karcie przedmiotu. Klasy CSS `.neuro-pochodzenie-*` 
 
 ---
 
+## 10e. Stany na czas — `duration` FVTT zamiast własnego licznika
+
+### 10e.1 Wpis stanu może nieść `duration`
+
+`ActiveEffect.fromStatusEffect` (`client/documents/active-effect.mjs:127`) **głęboko klonuje
+cały wpis** z `CONFIG.statusEffects` do danych efektu, odcinając tylko `id` i `hud`; nadpisanie
+w dnd5e (`module/documents/active-effect.mjs:154`) zdejmuje dodatkowo `reference`. Wystarczy
+więc dopisać `duration` do wpisu w `config/conditions.mjs` i przełączenie stanu z HUD-a już
+odlicza:
+
+```js
+burning: {
+  name: "Podpalenie",
+  duration: { value: 2, units: "rounds", expiry: "turnStart" },
+  ...
+}
+```
+
+Schemat to `{ value, units, expiry, expired }`. Stare `{ rounds: N }` jeszcze się migruje,
+ale jest deprecated — nie pisz tak w nowym kodzie. Dozwolone `expiry` to
+`CONST.ACTIVE_EFFECT_EXPIRY_EVENTS`: `combatStart`, `roundStart`, `turnStart`, `combatEnd`,
+`roundEnd`, `turnEnd`.
+
+Odczyt zostawionej reszty: `effect.updateDuration().remaining` (`active-effect.mjs:289`).
+Metoda przy okazji przelicza `_source.duration`, jeśli jednostki się rozjechały — i to ta sama,
+z której korzysta rdzeń.
+
+### 10e.2 Rdzeń **nie skasuje** wygasłego efektu
+
+`ActiveEffectRegistry.refresh(event)` (`client/helpers/active-effect-registry.mjs:107`) działa
+wedle `CONFIG.ActiveEffect.expiryAction`, które domyślnie wynosi **`"update"`** — stawia
+`duration.expired = true` i nic więcej. Ikona zostaje na żetonie.
+
+Przełączenie na `"delete"` jest **globalne dla świata**, więc dotknęłoby też efektów
+systemowych i cudzych modułów. Dlatego reakcja na wygaśnięcie jest po naszej stronie
+(`combat/podpalenie.mjs`, hak `updateCombat`) i liczy się jako zastąpienie systemu
+w rozumieniu ARCHITECTURE §8. Arytmetykę czasu nadal robi rdzeń — my tylko sprzątamy.
+
+Kolejność w rundzie: haki `updateCombat` → `Combat#_onStartTurn` → `registry.refresh("turnStart")`.
+Czyli w `updateCombat` `remaining` jest jeszcze **sprzed** oznaczenia wygaśnięcia — trzeba
+sprawdzać `<= 0` samemu.
+
+### 10e.3 Dwie pułapki, które kosztowały sesję debugowania
+
+- **Aktor syntetyczny ≠ aktor bazowy.** Dla niepowiązanego żetonu HUD woła
+  `token.actor.toggleStatusEffect(...)`, czyli aktora syntetycznego, i `combat.combatant.actor`
+  też nim jest. Nałożenie stanu na aktora **bazowego** zapali płomień (bo `getActiveTokens()`
+  dopasowuje po `actorId` niezależnie od powiązania), ale żaden hak turowy go nie zobaczy.
+  W danych w czacie i w `dataset` trzymaj `actor.uuid`, nie `actor.id`.
+- **Zabłąkana aktywna walka.** `_prepareCombatBasedDuration` (`:417`) szuka walki jako
+  `game.combats.get(start.combat?.id) ?? game.combat`. Jeśli nie znajdzie w niej komabatanta,
+  **przelicza rundy na sekundy** (`rounds: 2` → `seconds: 12`) i odliczanie przestaje reagować
+  na tury. Objaw: `units` nagle jest `"seconds"`. Przyczyna zwykle nie leży w kodzie, tylko
+  w pustej walce zostawionej jako aktywna.
+
+### 10e.4 Efekty na kanwie — `seqEffect`
+
+`weapons/sequencer.mjs` eksportuje `seqEffect(file, source, opts)`, `seqEndEffect(name)`
+i `seqEffectRunning(name)`. Sequencer i JB2A są **miękkimi zależnościami**: `seqEffect`
+sprawdza `Sequencer.Database.entryExists(file)` i zwraca `false`, zamiast rzucić — brak wtyczki
+ma kosztować efekt, nie zasadę. Trwałe efekty nazywaj deterministycznie
+(`neuro-<stan>-<tokenId>`), żeby dało się je dosynchronizować w haku `canvasReady`.
+
+---
+
 ## 11. Warstwa bestiariusza — pipeline i workflow
 
 ### 11.1 Źródło prawdy

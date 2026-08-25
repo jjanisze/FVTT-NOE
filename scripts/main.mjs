@@ -40,6 +40,7 @@ import { registerPDPanel } from "./actors/pd-panel.mjs";
 import { registerHealthPanel, healthApi } from "./actors/health-panel.mjs";
 import { registerDiseaseEffects, syncDiseaseEffects } from "./actors/disease-effects.mjs";
 import { registerBleeding, bleedingApi } from "./combat/bleeding.mjs";
+import { registerPodpalenie, podpalenieApi } from "./combat/podpalenie.mjs";
 import { registerFalling, fallingApi } from "./combat/falling.mjs";
 import { registerFuksPips } from "./actors/fuks-pips.mjs";
 import { registerWeapons } from "./config/weapons.mjs";
@@ -149,6 +150,7 @@ Hooks.once("init", () => {
   registerHealthPanel();
   registerDiseaseEffects();
   registerBleeding();
+  registerPodpalenie();
   registerFalling();
   registerFuksPips();
 
@@ -281,6 +283,7 @@ Hooks.once("ready", () => {
 
   // Choroby / Fobie / lekarstwa — game.neuroshima.health.sunset() etc.
   game.neuroshima.health = { ...healthApi, syncEffects: syncDiseaseEffects, bleeding: bleedingApi };
+  game.neuroshima.podpalenie = podpalenieApi;
   game.neuroshima.falling = fallingApi;
 
   // Upojenie / Skażenie / Zranienie — game.neuroshima.conditions.drink(actor) etc.

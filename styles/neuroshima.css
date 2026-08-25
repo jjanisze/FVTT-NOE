@@ -288,6 +288,59 @@
   box-shadow: 0 0 8px rgba(231, 76, 60, 0.95);
 }
 
+/* ---- Podpalenie: an action, not a track. Only rendered while the character burns. ---- */
+
+.neuro-stan-fire {
+  gap: 0.35rem;
+  padding: 2px 3px;
+  border: 1px solid color-mix(in srgb, var(--neuro-color-podpalenie) 45%, transparent);
+  border-radius: 3px;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--neuro-color-podpalenie) 22%, transparent),
+      rgba(0, 0, 0, 0));
+  animation: neuro-fire-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes neuro-fire-pulse {
+  0%, 100% { box-shadow: 0 0 4px color-mix(in srgb, var(--neuro-color-podpalenie) 30%, transparent); }
+  50%      { box-shadow: 0 0 10px color-mix(in srgb, var(--neuro-color-podpalenie) 65%, transparent); }
+}
+
+.neuro-fire-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  width: 100%;
+  padding: 1px 2px;
+  border: none;
+  border-radius: 2px;
+  background: none;
+  box-shadow: none;
+  color: var(--neuro-color-podpalenie);
+  font-family: var(--dnd5e-font-roboto-condensed, "Roboto Condensed", sans-serif);
+  font-size: var(--font-size-10, 10px);
+  letter-spacing: 1px;
+  line-height: 1.3;
+  text-align: left;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.neuro-fire-btn > i {
+  font-size: var(--font-size-12, 12px);
+}
+
+.neuro-fire-btn:disabled {
+  color: color-mix(in srgb, var(--neuro-color-podpalenie) 55%, #000);
+  cursor: default;
+}
+
+.neuro-fire-btn:not(:disabled):hover {
+  color: #ffc98a;
+  text-shadow: 0 0 6px color-mix(in srgb, var(--neuro-color-podpalenie) 90%, transparent);
+}
+
 /* Active ailments, relocated out of the sidebar stats block and into the panel. Read-only:
    flatter and dimmer than the tracks above, so it reads as a report, not a control. */
 .neuro-stan-body > .neuro-health-strip {
@@ -1697,6 +1750,31 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
 }
 
 .neuro-bleed-btn:hover { background: rgba(140, 110, 70, 0.2); }
+
+/* ---- Podpalenie ---- */
+
+.neuro-fire-card {
+  padding: 6px 8px;
+  border-left: 4px solid var(--neuro-color-podpalenie);
+  border-radius: 0 4px 4px 0;
+  background: color-mix(in srgb, var(--neuro-color-podpalenie) 10%, transparent);
+}
+
+.neuro-fire-card.is-burning { background: color-mix(in srgb, var(--neuro-color-podpalenie) 18%, transparent); }
+.neuro-fire-card.is-out {
+  border-left-color: #4a6f8a;
+  background: rgba(74, 111, 138, 0.1);
+}
+
+.neuro-fire-head {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+}
+
+.neuro-fire-body { font-size: 12px; line-height: 1.35; }
 
 /* ---- Spadanie ---- */
 

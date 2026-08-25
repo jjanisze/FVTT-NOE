@@ -24,7 +24,8 @@ export const STATE_COLORS = Object.freeze({
   zranienie:   "#c0392b",
   wyczerpanie: "#3498db",
   upojenie:    "#9b59b6",
-  skazenie:    "#7fff3f"
+  skazenie:    "#7fff3f",
+  podpalenie:  "#e8590c"
 });
 
 /**
