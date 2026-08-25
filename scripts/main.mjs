@@ -50,6 +50,7 @@ import { registerBestiaryThresholds } from "./combat/bestiary-thresholds.mjs";
 import { registerRerolls } from "./combat/rerolls.mjs";
 import { registerObalajaca } from './combat/obalajaca.mjs';
 import { registerWeaponSaveProperties } from './combat/weapon-save-properties.mjs';
+import { registerMeleeManeuvers, maneuversApi } from './combat/melee-maneuvers.mjs';
 import { registerKnockoutAndLastAction, onPreUpdateActorDeathSaves } from "./combat/knockout.mjs";
 import { registerCoverSystem } from "./combat/cover.mjs";
 import { registerMagazines } from "./weapons/magazine.mjs";
@@ -168,6 +169,7 @@ Hooks.once("init", () => {
   registerRerolls();
   registerObalajaca();
   registerWeaponSaveProperties();
+  registerMeleeManeuvers();
   registerKnockoutAndLastAction();
   registerCoverSystem();
   registerMagazines();
@@ -291,6 +293,9 @@ Hooks.once("ready", () => {
 
   // Pochodzenia — ten sam rejestr dla 36 zdolności z 12 regionów.
   game.neuroshima.pochodzenia = pochodzeniaApi;
+
+  // Manewry wręcz — game.neuroshima.manewry.pochwycenie(), .odepchniecie(), .wytracenie()
+  game.neuroshima.manewry = maneuversApi;
 
   registerWeaponSounds();
   registerEngineControls();

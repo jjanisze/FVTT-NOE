@@ -64,7 +64,9 @@ const SIZE_LABELS = {
 };
 
 export function registerWeaponSaveProperties() {
-  Hooks.on("renderChatMessageHTML", (message, html) => {
+  // `dnd5e.renderChatMessage`, nie `renderChatMessageHTML`: to drugie leci przed
+  // `ChatMessageDataModel#getHTML`, które nadpisuje całe `.message-content`.
+  Hooks.on("dnd5e.renderChatMessage", (message, html) => {
     const item = _getItemFromMessage(message);
     if (!item) return;
 
