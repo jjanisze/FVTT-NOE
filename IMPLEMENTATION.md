@@ -693,10 +693,18 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   kumulatywne, HUD, `game.neuroshima.conditions.drink()`/`soberUp()`). Ten wpis powinien był
   zniknąć przy zamknięciu §1.5b i zamiast tego przeżył jako martwy TODO — znaleziony przy
   porządkach 2026-08-21
-- [ ] Environmental hazards (Podpalenie, Głód, Odwodnienie jako pełne mechaniki — dziś same
-  stany bez egzekwowania poza tym, co obejmuje `disease-effects.mjs`). **Skażenie wykreślone
-  stąd** z tego samego powodu co Upojenie wyżej — zrobione, §1.5b
-- [ ] Rest activities (cooking, hunting, gossip, cleaning)
+- [~] Environmental hazards. **Głód i Odwodnienie wykreślone** — zrobione w `actors/party-supplies.mjs`
+  (`consumeDailyNeeds`: dzienne zapotrzebowanie z ekwipunku, pół racji bez konsekwencji, poniżej —
+  RO KON ST 10 dla jedzenia i automatyczne Wyczerpanie dla wody, znaczniki `malnutrition`/`dehydration`,
+  źródła `niedozywienie`/`odwodnienie`, których DO nie zdejmie). Wpis przeżył jako martwy TODO,
+  tak samo jak Upojenie i Skażenie wyżej — znaleziony przy porządkach 2026-08-25.
+  **Zostaje: Podpalenie** — stan istnieje w `conditions.mjs` z pełnym opisem (1k4 ognia na początku
+  tury, akcja na ugaszenie = Powalenie, gaśnica/woda), ale bez egzekwowania; trzy pozycje treści
+  (miotacz ognia, dwa naboje zapalające, smok z bestiariusza) mówią wprost „nakładany ręcznie".
+  Szkielet gotowy: `combat/bleeding.mjs` ma dokładnie ten kształt (hook `updateCombat` + przyciski w czacie).
+  **Przemarznięcie i Uduszenie** też mają gotowe klucze w `EXHAUSTION_SOURCES` i żadnej automatyki
+- [~] Rest activities — **polowanie i gotowanie zrobione** (`party-supplies.mjs`: `hunt()` — 1 h,
+  Test Mądrości (Sztuka przetrwania) ST 15; `cook()`). Zostają: plotki i czyszczenie sprzętu
 - [ ] Vehicles (actor type + combat + chase system)
 - [ ] Crafting system (schematy, produkcja, szabrowanie, bebeszenie)
 - [ ] Drones
