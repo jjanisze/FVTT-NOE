@@ -69,7 +69,12 @@ export const SZTUCZKI = Object.freeze({
     req: "ZRC 15+ lub SIŁ 15+",
     text: "+1 SIŁ lub ZRC; Wytrącenie w Akcji Bonusowej; Utrudnienie dla celu przy Rozbrajaniu.",
     category: "rekonesans",
-    auto: []
+    auto: [{
+      what: "Wytrącenie jako manewr (RO Siła/Zręczność celu przeciw ST 8 + mod. + PB, wypadnięcie "
+        + "przedmiotu z ręki); posiadanie Aramisa domyślnie zaznacza Utrudnienie w RO celu.",
+      where: "combat/melee-maneuvers.mjs"
+    }],
+    manual: "Wykonanie Wytrącenia w Akcji Bonusowej zamiast Akcji — moduł nie liczy ekonomii akcji."
   },
   aspirynaIMietusy: {
     label: "Aspiryna i Miętusy",

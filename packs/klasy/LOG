@@ -1,3 +1,5 @@
-2026/08/23-05:44:22.407 8bd8 Recovering log #13
-2026/08/23-05:44:22.410 8bd8 Delete type=0 #13
-2026/08/23-05:44:22.410 8bd8 Delete type=3 #11
+2026/08/25-19:38:26.781 df40 Recovering log #3
+2026/08/25-19:38:26.782 df40 Level-0 table #5: started
+2026/08/25-19:38:26.785 df40 Level-0 table #5: 25096 bytes OK
+2026/08/25-19:38:26.789 df40 Delete type=0 #3
+2026/08/25-19:38:26.790 df40 Delete type=3 #2
