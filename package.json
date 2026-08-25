@@ -9,6 +9,7 @@
     "build:packs": "node dev/packs/build-packs.mjs",
     "validate:packs": "node dev/packs/validate-packs.mjs",
     "build:icons": "node dev/icons/gen_class_placeholders.mjs",
+    "build:zranienie-icons": "node dev/icons/gen_zranienie_levels.mjs",
     "build:classes": "python dev/classes/gen_features.py && npm run build:icons && npm run build:packs && npm run validate:packs",
     "build:token-templates": "python dev/icons/gen_token_template.py",
     "build:token-placeholders": "python dev/icons/gen_token_placeholders.py",

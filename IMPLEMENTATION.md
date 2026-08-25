@@ -724,6 +724,30 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### v0.14.3 — Poziom Zranienia na żetonie, koniec z przewlekłym znacznikiem (2026-08-25)
+
+**Zranienie pokazuje teraz stopień tak samo jak Wyczerpanie: czerwoną cyfrą rzymską.**
+dnd5e nie robi tego runtime'owo — `ActiveEffect5e._getExhaustionImage()` po prostu dokłada
+`-N` do ścieżki ikony, a cyfra jest wrysowana w plik jako druga ścieżka (`id="Numeral"`,
+`fill="#c70000"`). Rdzeń rysuje na żetonie sam `effect.img` (`Token#_drawEffect`), więc nie
+ma innej drogi niż własny komplet plików. `dev/icons/gen_zranienie_levels.mjs` skleja
+`icons/statuses/zranienie-1..4.svg` z sylwetki `bloodied.svg` i cyfr wyciętych z
+`exhaustion-N.svg` — cyfry są kopiowane, nie rysowane od nowa, żeby oba stany wyglądały
+identycznie. `npm run build:zranienie-icons`. Backfill przy `ready` odtwarza teraz efekt
+także wtedy, gdy niesie starą, bezpoziomową ikonę.
+
+**Choroba przewlekła w stanie bazowym schodzi z żetonu.** Znacznik `diseased` na stanie,
+którego gracz nigdy nie zdejmie, nie niesie informacji — jest szumem, tym bardziej że
+żeton ma skończoną liczbę czytelnych ikon. Zostaje dla chorób nabytych i dla przewlekłych
+podbitych na Ostry/Krytyczny, bo te są odwracalne zachodem słońca i wtedy znacznik znaczy
+„coś się pogorszyło". Rozstrzyga `isBaselineChronic()` w `config/diseases-data.mjs`.
+
+Sam efekt nie znika: choroba bazowa z mechaniką (np. Niewydolność krążenia — Utrudnienie
+w Testach Siły i Kondycji) dalej ma Active Effect i dalej płaci. Zmienia się `showIcon` na
+`NEVER`, bo `Token#_drawEffects` filtruje po tym polu **niezależnie od `statuses`** — samo
+odebranie znacznika zostawiłoby ikonę na żetonie. Choroba bazowa bez mechaniki (Hemofilia)
+nie ma już po co istnieć jako efekt i nie jest tworzona.
+
 ### v0.14.2 — Odpoczynek: martwy hak, który zabierał PW (2026-08-25)
 
 **Przechwycenie regeneracji Wyczerpania nie działało od pierwszego commita.**

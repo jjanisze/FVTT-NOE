@@ -238,6 +238,16 @@ export function hasStageLadder(entry) {
   return diseaseStages(entry).length > 1;
 }
 
+/**
+ * True when the entry is a chronic disease sitting at its baseline stage.
+ * Ten stan jest permanentny i gracz go nie zdejmie, więc znacznik na żetonie nie
+ * niesie żadnej informacji — jest szumem. Podbicie na Ostry/Krytyczny to już zmiana
+ * odwracalna zachodem słońca i wtedy znacznik ma co mówić.
+ */
+export function isBaselineChronic(entry) {
+  return (entry?.key in CHRONIC_DISEASES) && !(entry?.stage ?? 0);
+}
+
 /** The end-of-day RO this disease rolls, if any. Custom entries never have one. */
 export function dailySaveFor(entry) {
   return getDisease(entry?.key)?.dailySave ?? null;

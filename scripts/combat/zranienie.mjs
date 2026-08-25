@@ -100,8 +100,11 @@ export function registerZranienie() {
       const level = getZranienieLvl(actor);
       if (level <= 0) continue;
       const effect = actor.effects.find(e => e.getFlag(MODULE_ID, "zranieniEffect"));
-      // `showIcon` sprzed v14 zostawia efekt bez ikony na żetonie — też do odtworzenia.
-      if (effect && (effect.showIcon === CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS)) continue;
+      // `showIcon` sprzed v14 zostawia efekt bez ikony na żetonie — też do odtworzenia,
+      // podobnie jak płaska ikona sprzed wersji z cyfrą poziomu.
+      if (effect
+        && (effect.showIcon === CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS)
+        && (effect.img === _zranienieImage(level))) continue;
       console.warn(`${MODULE_ID} | ${actor.name}: Zranienie ${level} bez efektu lub bez ikony — odtwarzam.`);
       await _syncZranieniEffect(actor, level);
     }
@@ -287,6 +290,19 @@ export async function setZranienie(actor, level) {
 const ZRANIENIE_ICON = "systems/dnd5e/icons/svg/statuses/bloodied.svg";
 
 /**
+ * Ikona z wrysowaną czerwoną cyfrą rzymską — dokładnie ten mechanizm, którym dnd5e
+ * pokazuje poziom Wyczerpania (`ActiveEffect5e._getExhaustionImage`): rdzeń rysuje na
+ * żetonie sam `effect.img`, więc poziom można podać wyłącznie osobnym plikiem.
+ * Komplet składa `dev/icons/gen_zranienie_levels.mjs` z assetów dnd5e.
+ * @param {number} level 1-4
+ */
+function _zranienieImage(level) {
+  return level >= 1 && level <= 4
+    ? `modules/${MODULE_ID}/icons/statuses/zranienie-${level}.svg`
+    : ZRANIENIE_ICON;
+}
+
+/**
  * Everything a wound level costs. The table rows are already absolute rather than
  * incremental — the −4,5 m does not stack — so this is the total at that level.
  * @param {number} level 1-4
@@ -350,7 +366,7 @@ async function _syncZranieniEffect(actor, level) {
 
   const effectData = {
     name: `Zranienie: ${info.label}`,
-    img: ZRANIENIE_ICON,
+    img: _zranienieImage(level),
     changes,
     // Lights the token icon. The status id is what makes this effect and the HUD
     // button the same thing rather than two things that look alike.

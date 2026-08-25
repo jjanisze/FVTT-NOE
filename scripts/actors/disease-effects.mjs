@@ -31,7 +31,7 @@
 
 import { effectsFor } from "../config/disease-effects.mjs";
 import { getChoroby } from "./health-panel.mjs";
-import { DISEASE_STAGES, NO_REST_FLAG, getDisease, diseaseStages } from "../config/diseases-data.mjs";
+import { DISEASE_STAGES, NO_REST_FLAG, getDisease, diseaseStages, isBaselineChronic } from "../config/diseases-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const EFFECT_FLAG = "diseaseEffect";
@@ -107,14 +107,16 @@ function _effectKey(entry, conditional) {
 
 /**
  * Active Effect data for one disease entry, or for its situational rider.
- * Sama choroba zawsze dostaje efekt — nawet bez `changes` niesie znacznik `diseased`,
- * bo do oznaczenia pionka ten stan istnieje. Rider sytuacyjny bez tre\u015bci \u2014 nie.
+ * Znacznik `diseased` dostają tylko choroby nienormalne — popularne i przewlekłe podbite
+ * do stopnia Ostry/Krytyczny. Przewlekła w stanie bazowym zostałaby na żetonie na zawsze,
+ * a stan, którego nie da się zdjąć, niczego nie komunikuje (`isBaselineChronic`).
  * @returns {object|null} null when there is nothing an effect can carry.
  */
 function _buildEffect(entry, spec, conditional) {
   const source = conditional ? spec.conditional : spec;
   const changes = source.changes ?? [];
-  const statuses = conditional ? (source.statuses ?? []) : ["diseased", ...(source.statuses ?? [])];
+  const marker = !conditional && !isBaselineChronic(entry) ? ["diseased"] : [];
+  const statuses = [...marker, ...(source.statuses ?? [])];
   if (!changes.length && !statuses.length) return null;
 
   const stageLabel = DISEASE_STAGES[entry.stage ?? 0]?.label ?? "";
@@ -129,7 +131,11 @@ function _buildEffect(entry, spec, conditional) {
     statuses: [...statuses],
     // FVTT v14: `isTemporary` liczy tylko czas trwania, a domyślne `CONDITIONAL`
     // znaczy „rysuj tylko, jeśli tymczasowy" — bez tego ikona nie wchodzi na żeton.
-    showIcon: CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS,
+    // Choroba bazowa nie ma znacznika, więc nie ma też czego rysować: `showIcon`
+    // filtruje się niezależnie od `statuses`, a sam efekt musi zostać — niesie mechanikę.
+    showIcon: statuses.length
+      ? CONST.ACTIVE_EFFECT_SHOW_ICON.ALWAYS
+      : CONST.ACTIVE_EFFECT_SHOW_ICON.NEVER,
     disabled: false,
     transfer: false,
     description: conditional
@@ -153,7 +159,7 @@ async function syncDiseaseEffects(actor) {
 
   const wanted = new Map();
   for (const entry of getChoroby(actor)) {
-    // Choroba bez mechaniki wci\u0105\u017c dostaje efekt \u2014 sam znacznik na \u017cetonie.
+    // Choroba bez mechaniki wciąż dostaje efekt — o ile ma choć znacznik na żetonie.
     const spec = effectsFor(entry) ?? {};
 
     const base = _buildEffect(entry, spec, false);
