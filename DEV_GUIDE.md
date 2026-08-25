@@ -237,6 +237,7 @@ npm run build:packs           # dev/packs/build-packs.mjs — wszystkie kompendi
 npm run validate:packs        # regresja: UUID-y, liczba wyborów per poziom, recovery
 npm run build:classes         # gen_features.py → ikony → packi → walidacja (klasy/profesje/zdolności)
 npm run build:bestiary        # extract → gen → pack (bestiariusz)
+npm run build:status-icons    # dev/icons/gen_status_numerals.mjs — ikony poziomów Zranienia i Wyczerpania
 npm run validate:css          # dev/validate-css.mjs — patrz §2.5
 npm run build:token-templates / build:token-placeholders
 ```
@@ -526,9 +527,24 @@ Tory **nie** mają wspólnego magazynu — każdy zostaje przy swoim właścicie
 | Zranienie | `flags.<mod>.zranienie.level` | `combat/zranienie.mjs` |
 | Upojenie, Skażenie | `flags.<mod>.<id>` (liczba) | `actors/levelled-conditions.mjs` |
 
-Rejestracja z zewnątrz: `registerHudLevelled(id, { label, max, get, set, summary })`.
+Rejestracja z zewnątrz: `registerHudLevelled(id, { label, max, get, set, summary, img })`.
 Rejestr daje HUD-owi cykl klikania, karcie panel Stan, a tooltipom treść — właściciel
 nie musi wiedzieć o żadnym z tych trzech.
+
+### 10a.1a Poziom na żetonie i kolor toru
+
+Rdzeń rysuje na żetonie **wyłącznie `effect.img`** — nie ma żadnego licznika ani nakładki,
+więc poziom da się pokazać tylko osobnym plikiem ikony. dnd5e robi dokładnie to
+(`ActiveEffect5e._getExhaustionImage` dokleja `-N` do ścieżki) i my robimy to samo.
+
+- Ikony poziomów generuje `dev/icons/gen_status_numerals.mjs` (`npm run build:status-icons`).
+- Wyczerpanie przekierowujemy **bez nadpisywania kodu**: `_getExhaustionImage` buduje ścieżkę
+  z `CONFIG.DND5E.conditionTypes.exhaustion.img`, więc `exhaustion.mjs` podmienia to jedno pole.
+- Tor, który poda `img: level => path`, pokazuje poziom w Token HUD podmianą tła kontrolki
+  (sztuczka z `ActiveEffect5e.onTokenHUDRender`). Tor bez `img` dostaje badge `.neuro-condition-level`.
+- Kolory: `config/state-colors.mjs`. Tabela jest w JS, bo czyta ją też generator w Node —
+  tekstura idzie do PIXI, więc `var(--icon-fill)` w SVG nigdy się nie rozwinie i barwa musi być
+  wpalona w plik. Runtime publikuje ją jako `--neuro-color-<id>` na `:root` w `init`.
 
 ### 10a.2 API
 

@@ -203,8 +203,9 @@ z siebie nic nie daje — poziomy, piki i cykl kliknięć musiały powstać od z
 - [x] Utrudnienie do ataków (Upojenie 3) przez `dnd5e.postBuildAttackRollConfig` — dnd5e nie ma
   pola `attack.roll.mode`; `advantageMode` pisany wprost, bo `applyKeybindings` rozwiązuje
   `options.disadvantage` **przed** hookiem
-- [x] Cykl poziomów w HUD pionka: LPM w górę, PPM w dół — ten sam gest co Wyczerpanie; nakładka
-  z numerem stopnia (`.neuro-condition-level`) zamiast ośmiu numerowanych ikon
+- [x] Cykl poziomów w HUD pionka: LPM w górę, PPM w dół — ten sam gest co Wyczerpanie. Poziom
+  pokazuje nakładka z numerem (`.neuro-condition-level`) w barwie toru; stany, które mają komplet
+  ikon z wrysowaną cyfrą (Zranienie, Wyczerpanie), zamiast niej podmieniają tło kontrolki — patrz v0.14.4
 - [x] **Nakładka musi wisieć na palecie, nie na ikonie** — Foundry buduje każdy przycisk statusu
   jako goły `<img class="effect-control">`, a `<img>` to element pusty: `append()` przechodzi
   w DOM i nigdy się nie renderuje. Nakładka trafia więc do palety (`position: absolute`, czyli
@@ -225,6 +226,8 @@ z siebie nic nie daje — poziomy, piki i cykl kliknięć musiały powstać od z
   w linii prostej". Wypisywane w opisie efektu jako „Poza automatyką: …"
 - [x] Ikony: placeholdery `icons/statuses/upojenie.svg` / `skazenie.svg` + pełna specyfikacja
   do podmiany w `icons/statuses/ASSETS.md`
+- [x] Wspólna paleta torów (`config/state-colors.mjs`) — jedna tabela zasila pipki, cyfry na
+  ikonach żetonu, nakładkę w HUD i akcenty paneli; patrz v0.14.4
 
 ### 1.6 Wyczerpanie (Neuroshima rules)
 - [x] -2 do każdego testu k20 per level (dnd5e modern rules — `rolls: 2`)
@@ -235,6 +238,8 @@ z siebie nic nie daje — poziomy, piki i cykl kliknięć musiały powstać od z
 - [x] preUpdateActor blocks raw pip clicks → source selection dialog
 - [x] renderCharacterActorSheet hook injects source labels into pip tooltips
 - [x] Rest recovery: only clears sources with `restClears: true`
+- [x] Własny komplet ikon poziomów (`wyczerpanie-1..6.svg`, niebieska cyfra) przez podmianę
+  `conditionTypes.exhaustion.img` — bez nadpisywania `_getExhaustionImage`
 
 ### 1.7 Ammo & Magazine Tracking (Native)
 - [x] Natywny Tab Amunicji: Oddzielenie amunicji od `Używek` metodą UI Illusion (własny panel w ekwipunku) + suwak tworzenia per kaliber (baza `ammo-data.mjs`).
@@ -749,7 +754,8 @@ i nie powtarza już żadnego hexa.
 `ActiveEffect5e._getExhaustionImage()` buduje ścieżkę poziomu z
 `CONFIG.DND5E.conditionTypes.exhaustion.img`, więc wystarczyło wskazać tam
 `icons/statuses/wyczerpanie.svg`, a dnd5e samo poszło po `wyczerpanie-1..6.svg`. Generator
-(`dev/icons/gen_status_numerals.mjs`, `npm run build:status-icons`) kopiuje pliki systemu i
+(`dev/icons/gen_status_numerals.mjs`, `npm run build:status-icons` — dawne
+`gen_zranienie_levels.mjs` / `build:zranienie-icons` z wpisu niżej) kopiuje pliki systemu i
 przemalowuje w nich tylko cyfrę, z twardym sprawdzeniem obecności `#c70000` — cicha porażka
 dałaby ikony w barwie dnd5e i nikt by tego nie zauważył.
 

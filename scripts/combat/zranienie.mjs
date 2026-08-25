@@ -294,7 +294,7 @@ const ZRANIENIE_ICON = "systems/dnd5e/icons/svg/statuses/bloodied.svg";
  * Ikona z wrysowaną czerwoną cyfrą rzymską — dokładnie ten mechanizm, którym dnd5e
  * pokazuje poziom Wyczerpania (`ActiveEffect5e._getExhaustionImage`): rdzeń rysuje na
  * żetonie sam `effect.img`, więc poziom można podać wyłącznie osobnym plikiem.
- * Komplet składa `dev/icons/gen_zranienie_levels.mjs` z assetów dnd5e.
+ * Komplet składa `dev/icons/gen_status_numerals.mjs` z assetów dnd5e.
  * @param {number} level 1-4
  */
 function _zranienieImage(level) {

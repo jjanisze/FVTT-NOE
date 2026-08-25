@@ -13,6 +13,10 @@ stanu z `scripts/config/state-colors.mjs`. Osobne pliki, bo dnd5e pokazuje pozio
 przez podmianę ikony (rdzeń rysuje na żetonie sam `effect.img`), a barwy nie da się podać
 z CSS — tekstura idzie do PIXI. Przebudowa: `npm run build:status-icons`.
 
+Do generowanych plików **nie stosuje się poniższa specyfikacja** — dziedziczą geometrię i
+kolorystykę po dnd5e (viewBox 1866,7 i kolorowa cyfra), bo mają wyglądać jak jeden zestaw
+z resztą ikon systemu. Spec niżej opisuje ikony rysowane od zera.
+
 ---
 
 ## Format techniczny (twarde wymagania)

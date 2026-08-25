@@ -460,7 +460,7 @@ function _onRenderTokenHUD(hud, html) {
   const root = html instanceof HTMLElement ? html : html?.[0];
   if (!root) return;
 
-  const wanted = [];
+  const needBadge = [];
   for (const [id, spec] of HUD_CYCLE) {
     const control = root.querySelector(`[data-status-id="${id}"]`);
     if (!control) continue;
@@ -473,15 +473,15 @@ function _onRenderTokenHUD(hud, html) {
       control.style.background = `url('${spec.img(level)}') no-repeat center / contain`;
       continue;
     }
-    wanted.push({ control, level, id });
+    needBadge.push({ control, level, id });
   }
 
-  const palette = wanted[0]?.control?.parentElement;
+  const palette = needBadge[0]?.control?.parentElement;
   // Stale badges from the previous render of this same element.
   root.querySelectorAll(".neuro-condition-level").forEach(b => b.remove());
   if (!palette) return;
 
-  const badges = wanted.map(({ control, level, id }) => {
+  const badges = needBadge.map(({ control, level, id }) => {
     const badge = document.createElement("span");
     badge.className = "neuro-condition-level";
     if (STATE_COLORS[id]) badge.style.setProperty("--neuro-badge-color", STATE_COLORS[id]);
