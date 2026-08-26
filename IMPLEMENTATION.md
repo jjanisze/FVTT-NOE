@@ -736,6 +736,39 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### v0.14.6 — Karta Drużyny: blokada łupu, upływ czasu podróży, poprawki uprawnień (2026-08-26)
+
+Ekwipunek grupy (aktor-grupa, nie pojazd) był wolną wagą za darmo — nic go nie liczyło do
+niczyjego udźwigu, nic nie wymuszało podziału. Nowy `actors/party-loot-lock.mjs`: dopóki worek
+coś zawiera, gra jest zapauzowana (`game.togglePause`, natywny mechanizm — blokuje ruch tokenów
+każdemu poza MG za darmo). Gracze rozdzielają zawartość przeciąganiem na swoje karty; zamknięcie
+karty drużyny przez wymaganego gracza to commitment („biorę, co wzięłam", z potwierdzeniem);
+gdy zamkną wszyscy (albo worek naturalnie opustoszeje) — reszta przepada, pauza znika.
+Baner + pulsująca poświata w zakładce Ekwipunek, link do karty w wiadomości czatu, przyjazny
+komunikat zamiast technicznego błędu uprawnień przy próbie wciśnięcia itemu komuś innemu.
+
+`postTravelSummary()` zyskał guzik **„Zatwierdź upływ czasu"** w karcie czatu — MG jednym
+kliknięciem przesuwa `game.time.advance()` o realny czas przejazdu (był to od zawsze
+kosmetyczny opis, zero wpływu na `game.time`). Wyruszenie odmawia, gdy łup zablokowany albo gra
+zapauzowana z dowolnego innego powodu (wcześniej pauza nie blokowała nic poza canvasem).
+Naprawiony też realny bug w selektorze tempa: trudny teren wymuszał Powolne w wyliczeniach, ale
+selektor nadal pokazywał Normalne/Szybkie jako wybieralne — teraz są `niedostępne`.
+
+**Dwa realne, cichutkie bugi znalezione przy okazji** (opisane szerzej w ARCHITECTURE.md §9):
+
+- `makeDefault: game.user.isGM` przy rejestracji karty drużyny **i** powłoki kart postaci/BN
+  (`sheet-shell.mjs`) — `DocumentSheetConfig#registerSheet` liczy „domyślność" osobno na każdym
+  kliencie, nie zapisuje ustawienia świata wbrew komentarzowi w starym kodzie. Efekt: gracze od
+  nieznanej liczby sesji dostawali **stockową kartę dnd5e** zamiast naszej powłoki — bez błędu,
+  bez ostrzeżenia. Naprawione na `makeDefault: true` w obu miejscach.
+- `Hooks.on("renderActorSheet", …)` nigdy nie odpala się dla karty grupy (inny łańcuch klas,
+  kończy się na `ActorSheetV2`, nie na `ActorSheet`) — zweryfikowane instrumentacją
+  `Hooks.callAll` na żywo. Naprawione przez rejestrację na `renderGroupActorSheet` wprost.
+
+Nowa paczka testów Quench `druzyna` (`tests/party.test.mjs`, 12 testów) pokrywa cykl życia
+blokady i regresję selektora tempa. `DialogV2.confirm`/`ChatMessage.create`/`game.paused` są
+podstawiane przez `stub()` — zero prawdziwych dialogów, zero pauzowania żywego stołu w teście.
+
 ### v0.14.5 — Podpalenie: ogień, który sam się liczy (2026-08-25)
 
 Podpalenie było stanem-atrapą: pełny opis w `conditions.mjs`, ikona na żetonie i trzy pozycje

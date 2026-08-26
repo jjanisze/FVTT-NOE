@@ -25,6 +25,7 @@ import {
   BIOMY, BIOMY_MAP, BIOM_KORZYSCI, BIOM_ZBIERACTWO_OSOB
 } from "../config/podroz-data.mjs";
 import { drawFuel, countSupply } from "./party-supplies.mjs";
+import { isLootLocked } from "./party-loot-lock.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const CICHY_KROK_ID = "cichy-krok";
@@ -436,8 +437,8 @@ export function buildTravelContext(groupActor) {
     tempa: TEMPA.map((t, i) => ({
       id: t.id,
       label: t.label,
-      wybrany: t.id === dozwolone.id, // sufit transportu/Szybkości przycina wybór, więc selektor pokazuje to, co realnie obowiązuje
-      niedostepne: i > sufitLaczny
+      wybrany: t.id === efektywne.id, // trudny teren wymusza Powolne niezależnie od tego, co ustawiono w „STATę”
+      niedostepne: (i > sufitLaczny) || (spowolnienie && t.id !== "powolne")
     })),
     dystans: {
       minuta: efektywne.perMinute,
@@ -485,12 +486,48 @@ export function buildTravelContext(groupActor) {
 }
 
 /**
+ * Delegacja kliknięć w karcie czatu — jeden listener raz na zawsze. Rejestrowany na
+ * `document` w fazie **capture**: coś w natywnym dispatchu akcji czatu dnd5e zatrzymuje
+ * propagację (`stopPropagation`), zanim dociera do listenera dowiązanego przez
+ * `renderChatLog`/bąbelkowanie (zweryfikowane na żywo 2026-08-26 — hook się odpalał,
+ * element zawierał wiadomość, a mimo to zwykły bubble-listener nigdy nie widział kliknięcia).
+ * Tylko MG faktycznie przesuwa `game.time` (world setting), więc gracz dostaje odmowę.
+ */
+function _registerTravelChatListener() {
+  document.addEventListener("click", async event => {
+    const btn = event.target.closest?.(".neuro-czas-uplynelo");
+    if (!btn) return;
+    if (!game.user.isGM) return ui.notifications.warn("Tylko MG zatwierdza upływ czasu.");
+    if (btn.disabled) return;
+    const sekundy = Number(btn.dataset.sekundy) || 0;
+    if (!sekundy) return;
+    btn.disabled = true;
+
+    const cal = game.time.calendar;
+    const przed = cal.format(cal.timeToComponents(game.time.worldTime));
+    await game.time.advance(sekundy);
+    const po = cal.format(cal.timeToComponents(game.time.worldTime));
+
+    btn.textContent = `Czas upłynął (+${btn.dataset.etykieta})`;
+    btn.insertAdjacentHTML("afterend", `<p class="neuro-czas-info"><em>${przed} → ${po}</em></p>`);
+  }, { capture: true });
+}
+
+/**
  * Wyruszenie w trasę: podsumowanie na czat **i** spalone paliwo.
  * Wysłanie wiadomości zatwierdza przejazd — do tego momentu panel jest tylko planem.
  * @param {Actor} groupActor
  * @param {"segment"|"trasa"} tryb Cały segment czasowy (8/24 h) albo dokładnie wpisana trasa.
  */
 export async function postTravelSummary(groupActor, tryb = "segment") {
+  if (isLootLocked(groupActor)) {
+    ui.notifications.warn("Drużyna nie może wyruszyć — łup jeszcze nie został podzielony.");
+    return;
+  }
+  if (game.paused && !game.user.isGM) {
+    ui.notifications.warn("Gra jest zapauzowana — drużyna nie może teraz wyruszyć.");
+    return;
+  }
   const ctx = buildTravelContext(groupActor);
   if (ctx.pustyBak) {
     ui.notifications.warn(`${ctx.paliwo.nazwa}: pusty bak — pojazd nie ruszy.`);
@@ -535,10 +572,19 @@ export async function postTravelSummary(groupActor, tryb = "segment") {
     ? `<ul>${ctx.tempo.efekty.map(e => `<li>${e.tekst}</li>`).join("")}</ul>`
     : "<p><em>Brak modyfikatorów z tempa.</em></p>";
 
+  // Czas gry się sam nie przesuwa — „Wyrusz” planuje przejazd, ale to MG klikając ten
+  // guzik decyduje, KIEDY faktycznie doszli (po scenkach, encounterach po drodze itd.).
+  const godzinyRzeczywiste = plan.km / ctx.dystans.godzina;
+  const sekundy = Math.round(godzinyRzeczywiste * 3600);
+  const czasBtn = sekundy > 0
+    ? `<button type="button" class="neuro-czas-uplynelo" data-sekundy="${sekundy}" data-etykieta="${plan.czas}">`
+      + `<i class="fa-solid fa-hourglass-half" inert></i> Zatwierdź upływ czasu (${plan.czas})</button>`
+    : "";
+
   return ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor: groupActor }),
     content: `<div class="neuro-podroz-card"><h3>Podróż — ${groupActor.name}</h3>`
-      + linie.map(l => `<p>${l}</p>`).join("") + efekty + "</div>"
+      + linie.map(l => `<p>${l}</p>`).join("") + efekty + czasBtn + "</div>"
   });
 }
 
@@ -661,6 +707,7 @@ export function registerPartyTravel() {
   Hooks.on("dnd5e.postBuildSkillRollConfig", onPostBuildSkillRollConfig);
   Hooks.on("renderCharacterActorSheet", injectBiomeStrip);
   Hooks.on("renderVehicleActorSheet", injectVehicleFuel);
+  _registerTravelChatListener();
   console.log("Neuroshima 5e | Podróż drużyny (tempo, biomy, paliwo) registered");
 }
 

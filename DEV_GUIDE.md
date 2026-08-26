@@ -276,7 +276,9 @@ Source map (`dnd5e-compiled.mjs.map`) pozwala na breakpointy w oryginalnym źró
    błędnie sklejone reguły CSS nie rzucają żadnego błędu w przeglądarce, tylko po cichu tracą wszystko
    co jest za nimi w pliku
 5. **Tworzenie compendiów**: JSON files w `packs/_source/`, potem `fvtt package pack`
-6. **Testowanie**: informuj użytkownika żeby odświeżył FVTT (`F5`)
+6. **Testowanie**: dopisz paczkę Quench dla każdej nowej tabeli danych i każdego czystego
+   predykatu reguł (patrz 12 i `TESTING.md`), uruchom `npm test`, poproś użytkownika o `F5`,
+   a potem `game.neuroshima.tests.run()` w konsoli
 7. **Nigdy nie przepisuj `module.json` (ani żadnego JSON-a) przez PowerShell.** PS 5.1 dokłada
    BOM i potrafi podwójnie zakodować UTF-8. Foundry czyta manifest przez
    `fs.readFileSync(…, "utf8")`, które BOM-a nie zdejmuje — `JSON.parse` wywala się na pierwszym
@@ -932,3 +934,110 @@ per-token wygrywa z globalnym `bloodColor` i z `BloodSheetData`.
   Wyłączony z packa; docelowo Active Effect / makro.
 - **Mobsprzęt** — podwozie i broń losowane z tabel (`randomized: true`). W packu jest,
   ale z jedną, uśrednioną konfiguracją.
+
+---
+
+## 12. Testy (Quench)
+
+Pełna metodyka: **[TESTING.md](TESTING.md)**. Tutaj minimum operacyjne.
+
+### 12.1 Uruchamianie
+
+```js
+game.neuroshima.tests.run()           // wszystko
+game.neuroshima.tests.run("choroby")  // filtr po kluczu paczki
+game.neuroshima.tests.list()          // co jest zarejestrowane
+```
+
+Zwraca `{ total, passed, failed, durationMs, batches, failures[] }` — nadaje się do
+odczytania przez CDP, bez zaglądania w UI. Wymaga włączonego modułu `quench`.
+
+`npm test` **nie uruchamia testów** — robi statyczną kontrolę warstwy testowej:
+paczka wpięta w `index.mjs`, klucz z prefiksem id modułu, `node --check` na składni.
+Ta trzecia rzecz łapie polski `„` zamknięty prostym `"`, którego TypeScript nie zgłasza,
+a który wywala import całego `index.mjs` — znikają wtedy wszystkie paczki naraz.
+
+### 12.2 Obowiązek agenta
+
+Dodajesz tabelę danych albo czysty predykat reguł? **Dopisz paczkę.** Konkretnie:
+
+- nowa tabela (broń, pancerz, choroba, Sztuczka, pochodzenie) → asercje na unikalność
+  `id`, domknięcie odwołań między tabelami, obecność kluczy w `CONFIG.DND5E`,
+  `Roll.validate` na formułach, istnienie ikon;
+- nowa funkcja decyzyjna bez efektów ubocznych → wystaw ją przez `export const __testing`
+  na końcu pliku i przetestuj tablicę przypadków brzegowych;
+- nowa rodzina danych ze stopniami/poziomami → napisz **niezmiennik** („kary nie maleją”),
+  nie asercje na konkretne wartości.
+
+Nie testuj: `activity.use()`, przepływów zależnych od `canvas`/celów, dialogów, VFX,
+dźwięku, zawartości kompendiów (testuj generator). Uzasadnienie: TESTING.md §4.
+
+### 12.3 Higiena
+
+Testy chodzą w **prawdziwym świecie kampanii**. `scratchActor()` do tworzenia,
+`scratchCleanup()` w `after()`, `stub()` do podmiany stanu globalnego z przywróceniem
+w `afterEach()`. Wszystko z `scripts/tests/helpers.mjs`.
+
+Dokumenty tymczasowe w dnd5e 5.3 **nie działają** — `prepareData` rzuca w `new HitDice`,
+bo `actor.classes` jeszcze nie istnieje. Stąd prawdziwe dokumenty z prefiksem `[Quench]`.
+
+### 12.4 Dwie pułapki, które kosztują czas
+
+- Foundry nie unieważnia cache'u ESM. Po edycji `scripts/**` wymuś
+  `fetch(url, { cache: "reload" })`, dopiero potem F5. Inaczej testujesz stary plik.
+- Jeśli mocha zgłosi `Mocha instance is currently running tests` — pomaga **wyłącznie F5**.
+  `quench.abort()` nie odblokowuje.
+
+## 13. Karta drużyny — blokada łupu, podróż, upływ czasu (2026-08-26)
+
+### 13.1 Pliki
+
+| Plik | Odpowiedzialność |
+|---|---|
+| `actors/party-sheet.mjs` | Cienka podklasa stockowego `GroupActorSheet` — PARTS, TABS, akcje, `close()` |
+| `actors/party-loot-lock.mjs` | Cykl życia blokady łupu (poniżej), baner w Ekwipunku, przyjazne błędy uprawnień |
+| `actors/party-travel.mjs` | Tempo/biomy/trudny teren, panel Podróż, guzik zatwierdzenia czasu w czacie |
+| `actors/party-supplies.mjs` | Zakładka Zapasy (jedzenie/woda/leki/paliwo) |
+
+### 13.2 Blokada łupu — jak to działa
+
+Ekwipunek grupy (aktor-grupa, **nie** `primaryVehicle`) to wspólny worek na jeszcze
+nieprzydzielony łup. Bez reguły to wolna waga za darmo — nic go nie liczy do niczyjego
+udźwigu. Reguła stołu: dopóki worek coś zawiera, `game.paused = true` (blokuje ruch
+tokenów wszystkim poza MG — natywny mechanizm, zero customowego kodu na canvasie).
+
+- Start/koniec sesji: `createItem`/`deleteItem` na aktorze-grupie, prowadzone wyłącznie
+  przez `isActiveGM` (unika wyścigu przy wielu oknach MG).
+- `flags.<mod>.lootSession = { active, requiredUserIds, closedBy }` — `requiredUserIds`
+  to zrzut właścicieli-graczy żywych członków drużyny, którzy byli online w momencie
+  startu. Offline w tym momencie = pomijani automatycznie (nie blokują sesji na zawsze).
+- Zamknięcie karty drużyny przez wymaganego gracza = commitment: `confirmLootClose()`
+  pyta (`DialogV2.confirm`), po potwierdzeniu zapisuje **tylko własny klucz**
+  `closedBy.<userId>` — osobne klucze pod wspólną flagą mergują się bez wyścigu przy
+  jednoczesnych zapisach różnych klientów.
+- Wszyscy zamknęli (albo worek naturalnie opustoszał) → GM kasuje resztę, zdejmuje
+  flagę, `game.togglePause(false)`.
+- MG ma ręczny override (`forceEndLootSession`) na wypadek gracza offline/AFK.
+- API: `isLootLocked(actor)`, `lootLockContext(actor)` (do szablonów),
+  `confirmLootClose(actor)`, `forceEndLootSession(actor)`.
+
+**Wymóg wdrożeniowy**: gracze muszą mieć permisję **Owner** na aktorze-grupie (żeby w
+ogóle mogli przeciągać itemy do swojego ekwipunku i zapisać własne „zamknięte") — to
+osobne ustawienie w Configure Ownership, moduł tego nie ustawia automatycznie.
+
+### 13.3 Upływ czasu podróży
+
+`postTravelSummary()` nie przesuwa `game.time` automatycznie — tylko dolicza do karty
+czatu guzik **„Zatwierdź upływ czasu (Xh)"** z realną liczbą sekund w `data-sekundy`.
+MG klika, gdy uzna, że drużyna faktycznie doszła (po scenkach/encounterach po drodze),
+`game.time.advance()` przesuwa świat, karta dopisuje `przed → po` z `game.time.calendar`.
+Gracz klikający dostaje `ui.notifications.warn`, nie cichy no-op — `game.time.advance`
+zapisuje world setting, do którego gracz i tak nie ma uprawnień.
+
+Guard: `postTravelSummary` odmawia, jeśli `isLootLocked(actor)` albo
+`game.paused && !game.user.isGM` (pauza z dowolnego innego powodu też blokuje graczy;
+MG może obejść oba celowo).
+
+Zobacz też ARCHITECTURE.md §9 — dwie pułapki ApplicationV2, na które trafiono przy
+budowie tego podsystemu (hook per-subklasa, `makeDefault` per-klient, wstrzykiwanie DOM
+do systemowego CSS gridu, bubble-vs-capture przy customowych guzikach w czacie).

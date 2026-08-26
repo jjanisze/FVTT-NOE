@@ -25,6 +25,7 @@ import { getLevelledRegistry } from "./levelled-conditions.mjs";
 import { EXHAUSTION_SOURCES, getExhaustionSources } from "../config/exhaustion.mjs";
 import { getPodroz, setPodroz, buildTravelContext, postTravelSummary, tankuj, ustawBak, paliwoWidok } from "./party-travel.mjs";
 import { buildSuppliesContext, consumeDailyNeeds, hunt, cook } from "./party-supplies.mjs";
+import { confirmLootClose, forceEndLootSession, lootLockContext } from "./party-loot-lock.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const TPL = `modules/${MODULE_ID}/templates`;
@@ -167,6 +168,11 @@ async function onCook() {
   await cook(this.actor);
 }
 
+/** @this {ApplicationV2} */
+async function onForceEndLoot() {
+  await forceEndLootSession(this.actor);
+}
+
 /* -------------------------------------------- */
 /*  Klasa                                        */
 /* -------------------------------------------- */
@@ -185,7 +191,8 @@ function buildPartySheetClass(Base) {
         neuroBak: onFuelSettings,
         neuroFeed: onFeedParty,
         neuroHunt: onHunt,
-        neuroCook: onCook
+        neuroCook: onCook,
+        neuroForceEndLoot: onForceEndLoot
       }
     };
 
@@ -211,7 +218,14 @@ function buildPartySheetClass(Base) {
       context = await super._prepareHeaderContext(context, options);
       context.podroz = buildTravelContext(this.actor);
       context.wDrodze = !!getPodroz(this.actor).aktywna;
+      context.lootLock = lootLockContext(this.actor);
       return context;
+    }
+
+    /** Zamknięcie karty w trakcie podziału łupu = potwierdzenie „biorę, co wzięłam” — patrz party-loot-lock.mjs. */
+    async close(options = {}) {
+      if (!(await confirmLootClose(this.actor))) return this;
+      return super.close(options);
     }
 
     /** @inheritDoc */
@@ -280,7 +294,10 @@ export function registerPartySheet() {
     foundry.applications.apps.DocumentSheetConfig.registerSheet(
       Actor, MODULE_ID, buildPartySheetClass(Base), {
         types: ["group"],
-        makeDefault: game.user.isGM,
+        // `#registerSheet` liczy "domyślność" osobno na KAŻDYM kliencie (nie zapisuje ustawienia
+        // świata) — gating po `game.user.isGM` sprawiał, że tylko MG dostawał naszą kartę jako
+        // domyślną, a gracze lądowali na stockowej karcie dnd5e bez podróży/paliwa/blokady łupu.
+        makeDefault: true,
         label: "Neuroshima — Karta Drużyny"
       }
     );

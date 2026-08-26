@@ -78,6 +78,7 @@ import { registerSurowceInventory } from "./actors/surowce-inventory.mjs";
 import { registerSheetShell } from "./actors/sheet-shell.mjs";
 import { registerPartySheet } from "./actors/party-sheet.mjs";
 import { registerPartyTravel, travelApi } from "./actors/party-travel.mjs";
+import { registerPartyLootLock } from "./actors/party-loot-lock.mjs";
 import { suppliesApi } from "./actors/party-supplies.mjs";
 import { registerSheetPositionStability } from "./actors/sheet-position-stability.mjs";
 import { registerDamageReductionUI } from "./weapons/damage-reduction.mjs";
@@ -95,6 +96,7 @@ import { registerChemia, chemiaApi } from "./items/chemia.mjs";
 import { sztuczkiApi } from "./config/sztuczki-data.mjs";
 import { pochodzeniaApi } from "./config/pochodzenia-data.mjs";
 import { registerToolAvailability } from "./actors/tool-availability.mjs";
+import { registerQuenchTests, testsApi } from "./tests/index.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -208,6 +210,7 @@ Hooks.once("init", () => {
   // Karta drużyny: stan członków, podróż, zapasy.
   registerPartyTravel();
   registerPartySheet();
+  registerPartyLootLock();
 
   // Clean up activity chat card pills: remove NaN range, duration, empty strings for weapon cards
   Hooks.on("renderChatMessageHTML", (message, html) => {
@@ -246,6 +249,9 @@ Hooks.once("init", () => {
 
   // Ostatnia Akcja needs preUpdateActor to track previous death failures
   Hooks.on("preUpdateActor", onPreUpdateActorDeathSaves);
+
+  // Nasłuch na `quenchReady` — bez modułu Quench hak nigdy nie odpali.
+  registerQuenchTests();
 
   console.log(`${MODULE_ID} | All Phase 1 overrides applied`);
 });
@@ -325,6 +331,9 @@ Hooks.once("ready", () => {
   // Karta drużyny — game.neuroshima.podroz.openBiomePicker(actor), .zapasy.hunt(grupa)
   game.neuroshima.podroz = travelApi;
   game.neuroshima.zapasy = suppliesApi;
+
+  // Testy Quench — game.neuroshima.tests.run() / .run("choroby") / .list()
+  game.neuroshima.tests = testsApi;
 
   // Validate overrides
   const skillCount = Object.keys(CONFIG.DND5E.skills).length;

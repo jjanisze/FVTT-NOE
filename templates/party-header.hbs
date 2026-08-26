@@ -39,6 +39,23 @@
 
         <div class="bottom">
 
+            {{#if lootLock}}
+            <div class="card neuro-loot-lock">
+                <i class="fa-solid fa-triangle-exclamation" inert></i>
+                <div class="neuro-loot-lock-text">
+                    <strong>Łup drużyny czeka na podział.</strong>
+                    Zabierzcie swoje ze wspólnego Ekwipunku i zamknijcie kartę drużyny — gra
+                    jest zapauzowana, dopóki nie zrobią tego wszyscy ({{ lootLock.closedCount }}/{{ lootLock.totalCount }}).
+                </div>
+                {{#if lootLock.isGM}}
+                <button type="button" class="neuro-toggle" data-action="neuroForceEndLoot" data-tooltip
+                        aria-label="Wymuś natychmiastowe zakończenie (np. ktoś jest offline) — reszta worka przepada.">
+                    <i class="fa-solid fa-scissors" inert></i>
+                </button>
+                {{/if}}
+            </div>
+            {{/if}}
+
             {{!-- Podróż --}}
             {{#with podroz}}
             <div class="movement card neuro-podroz {{#if tempo.spowolnione}}is-slowed{{/if}}">

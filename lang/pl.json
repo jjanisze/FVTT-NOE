@@ -85,6 +85,14 @@
     "Details": "Szczegóły",
     "InventorySearch": "Szukaj w ekwipunku",
     "Contents": "Zawartość",
+    "Group": {
+      "Action": {
+        "Inventory": {
+          "Group": "Pokaż zdobycze drużyny",
+          "Vehicle": "Pokaż ekwipunek pojazdu"
+        }
+      }
+    },
     "ItemEdit": "Edycja",
     "ItemWeaponDetails": "Szczegóły Broni",
     "ItemWeaponType": "Typ Broni",

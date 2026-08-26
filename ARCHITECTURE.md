@@ -123,11 +123,54 @@ so a replacement has to be argued for at its call site, not just done.
   interception and a working one look identical. When a hook takes several arguments, check the
   system source for which one actually carries the field.
 
+### 9. ApplicationV2 Hook Names Are Per-Subclass, and `makeDefault` Is Per-Client
+
+Two related traps, both discovered live on 2026-08-26 while shipping the party-loot-lock feature,
+both silent (no error, no console warning) — the module just quietly does nothing.
+
+- **`Hooks.on("renderActorSheet", …)` does not fire for every actor type.** ApplicationV2's
+  `#callHooks` walks `this.constructor.inheritanceChain()` and fires `"render" + cls.name` for
+  *every* ancestor class name. Character sheets happen to have `ActorSheet` in that chain, so
+  `renderActorSheet` fires. The group sheet's chain ends at `ActorSheetV2` — `"ActorSheet"` never
+  appears, so `renderActorSheet` **never fires for it**, at all. Verified by instrumenting
+  `Hooks.callAll` live: the actual names for a group sheet are `renderGroupActorSheet`,
+  `renderMultiActorSheet`, `renderBaseActorSheet`, `renderActorSheetV2`. **Don't assume a
+  "generic" render hook covers every actor type — instrument `Hooks.callAll` once per new
+  actor-type integration and register on the name that's actually in that chain**
+  (`party-loot-lock.mjs` registers `renderGroupActorSheet` explicitly for exactly this reason).
+- **`DocumentSheetConfig.registerSheet({ makeDefault })` is decided independently by each
+  client**, not written to a world setting. `#registerSheet` only *reads*
+  `game.settings.get("core","sheetClasses")` to check for an existing explicit override; if none
+  exists, `isDefault = makeDefault` — evaluated fresh on whichever client is running the code.
+  Gating `makeDefault: game.user.isGM` (the original assumption in this codebase, on the theory
+  that only a GM should write a world default) means **every player's client independently
+  computes `false`** and silently falls back to the stock dnd5e sheet — for both the group sheet
+  and, it turns out, every character/NPC sheet shell, undetected for an unknown number of
+  sessions. Fix: `makeDefault: true` unconditionally; it costs nothing to write since nothing is
+  actually written unless a human explicitly picks a sheet via the Configure Sheet dialog.
+- **Corollary for custom buttons injected into rendered HTML that live inside a system-owned
+  `display: grid` container** (e.g. dnd5e's `[data-application-part=inventory]`, two columns via
+  `grid-template-columns`): inserting a new DOM node as a **direct child of the grid container**
+  adds a grid item, and CSS Grid auto-placement fills cells in document order — a banner prepended
+  ahead of `.sidebar`/`.body` pushes both into the wrong column, which looks exactly like "the
+  columns swapped". Inject into a specific existing grid *cell* (`.body`), never into the grid
+  container itself.
+- **Corollary for chat-card buttons**: `Hooks.on("renderChatLog", (app, html) => html.addEventListener("click", …))`
+  (bubble-phase delegation, the pattern already used by `toolkit-medyk.mjs`) silently failed for a
+  *new* button class — hook fired, `html` genuinely contained the message, the button existed with
+  the right class, dispatching a real bubbling click produced zero errors and zero effect. Root
+  cause not fully isolated (likely something in dnd5e's own chat click dispatch calls
+  `stopPropagation()` unconditionally), but the robust fix is the same shape as the drop-guard
+  above: register once on `document` in the **capture** phase
+  (`document.addEventListener("click", fn, {capture:true})`), which always runs before any
+  bubble-phase listener downstream regardless of what stops propagation later.
+
 ## Dokumentacja towarzysząca
 | Plik | Zawartość |
 |---|---|
 | `IMPLEMENTATION.md` | Status wszystkich mechanik + changelog (źródło prawdy o tym, co działa) |
 | `DEV_GUIDE.md` | Środowisko, narzędzia, wzorce dnd5e/FVTT, pipeline'y |
+| `TESTING.md` | Architektura testów Quench — co da się testować, czego nie i dlaczego |
 | `HANDOFF_*.md` | Przekazanie dla następnego agenta — kasowane, gdy zadanie zamknięte |
 | `PLAN_*.md` | Projekty pojedynczych podsystemów, pisane przed implementacją |
 

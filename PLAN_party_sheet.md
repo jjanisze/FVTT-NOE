@@ -1,7 +1,10 @@
 # Neuroshima Override Plan: Karta Drużyny (Group Actor Sheet)
 
-> **Status: PLAN.** Nic jeszcze nie zaimplementowane. Badania na żywo (FVTT v14.364 / dnd5e 5.3.0,
-> aktor `Psychole z Vegas` = `tDA39MPlvFjc0rlW`) wykonane 2026-XX; wnioski w §0.
+> **Status: FAZY 0–5 WDROŻONE** (`party-sheet.mjs`, `party-travel.mjs`, `party-supplies.mjs`,
+> `party-loot-lock.mjs`). Faza 6 (§5.2–5.3, wirtualne przeszukiwanie ekwipunku członków) **nie
+> powstała w opisanym tu kształcie** — zamiast tego wdrożono §9 (blokada łupu), zobacz tam.
+> Faza 7 (automatyka Utrudnień/Ułatwień tempa, porządek marszu) nadal otwarta. Badania żywe
+> (FVTT v14.364 / dnd5e 5.3.0, aktor `Psychole z Vegas` = `tDA39MPlvFjc0rlW`) z 2026-XX w §0.
 
 ## Cel
 
@@ -436,7 +439,27 @@ Dodać `lang/pl.json` do modułu i nadpisać co najmniej:
 
 ## §8. Poza zakresem
 
-- Kalendarz / upływ czasu podróży (dziś `dayCounter` z `health-panel.mjs` — ewentualne
-  wpięcie później).
+- ~~Kalendarz / upływ czasu podróży~~ — częściowo zaadresowane w §9.3: guzik „Zatwierdź
+  upływ czasu” w karcie czatu woła `game.time.advance()`. Wciąż **poza zakresem**: kalendarz/UI
+  daty jako osobny panel, `dayCounter` z `health-panel.mjs` pozostaje niezależnym licznikiem.
 - Losowe tabele Wydarzeń w podróży (przycisk będzie, tabela osobno).
 - Ekonomia kosztu utrzymania i Długiego postoju (~2790–2830).
+
+---
+
+## §9. Zaimplementowane: Blokada łupu zamiast wirtualnego przeszukiwania (2026-08-26)
+
+§5.2 zakładał wirtualną kolekcję „itemy grupy + pojazdu + wszystkich członków” z właścicielem
+w wierszu. Po analizie ekonomicznej (rozmowa 2026-08-26) odrzucono to na rzecz dużo tańszego
+rozwiązania: **worek grupy zostaje tym, czym jest natywnie — pojedynczym aktorem — ale dopóki
+cokolwiek w nim leży, gra jest zapauzowana.** Żadna z metod bazowego `BaseActorSheet`
+(`_prepareItems`, `_filterItems`, `_onDropItem`, ...) nie wymagała nadpisania — one wszystkie
+zakładają JEDNO Żródło itemów, co wirtualna kolekcja z N aktorów by złamała.
+
+Szczegóły mechanizmu, API i pułapki (hook per-subklasa, `makeDefault` per-klient, CSS grid,
+capture-phase w czacie) — patrz **DEV_GUIDE.md §13** i **ARCHITECTURE.md §9**. Kod:
+`actors/party-loot-lock.mjs`, testy: `tests/party.test.mjs` (paczka `druzyna`).
+
+§5.2–5.3 (search + „jump to” + „do bagażnika”) formalnie nadal w planie, ale nisko
+priorytetowe — blokada łupu rozwiązuje ten sam problem tanio („nikt nie zapomina o łupie”),
+więc wirtualne przeszukiwanie ma sens tylko, jeśli faza 6 kiedyś naprawdę zostanie zamówiona.

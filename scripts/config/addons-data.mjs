@@ -267,7 +267,7 @@ export const ADDON_DEFS = {
     requiresProperties: ["sm"],
     requiresWeaponTypes: ["palnaKrotka", "palnaPosr", "palnaDluga", "palnaCiezka"],
     requiresAddons: [],
-    exclusiveWith: ["kolimator"],
+    exclusiveWith: ["kolimator", "celownik-trytowy"],
     usesSMSlot: true,
     applyMode: ["conditional"],
     grantProperties: [],

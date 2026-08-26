@@ -30,12 +30,15 @@ export function createCoverageLedger({ entries, cssPrefix, noneHtml, title }) {
     const def = entries[key];
     if (!def) return "";
     const state = status(key);
-    if (state === "none") return `<p class="${cssPrefix}-cover is-none">${noneHtml}</p>`;
-
-    const bits = def.auto.map(a => `<li>${a.what} <em>(${a.where})</em></li>`).join("");
     const manual = def.manual
       ? `<p class="${cssPrefix}-manual"><strong>Nie automatyzujemy:</strong> ${def.manual}</p>`
       : "";
+    // Wpis bez automatyki może wciąż mieć powód, dla którego jej nie ma — i ten
+    // powód jest dla MG cenniejszy niż samo „brak”. Doktryna z ARCHITECTURE §5:
+    // automatyka jest deklarowana, nigdy przemilczana. Dotyczy też jej braku.
+    if (state === "none") return `<p class="${cssPrefix}-cover is-none">${noneHtml}</p>${manual}`;
+
+    const bits = def.auto.map(a => `<li>${a.what} <em>(${a.where})</em></li>`).join("");
     return `<p class="${cssPrefix}-cover is-${state}"><strong>`
       + `${state === "auto" ? "Zautomatyzowane" : "Częściowo zautomatyzowane"}:</strong></p>`
       + `<ul class="${cssPrefix}-auto">${bits}</ul>${manual}`;

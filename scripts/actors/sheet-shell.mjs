@@ -494,8 +494,10 @@ export function registerSheetShell() {
       }
       DocumentSheetConfig.registerSheet(Actor, MODULE_ID, _buildSheetClass(Base, { name, drop, tabs, defaultTab }), {
         types: [type],
-        // Writing the world default is a GM-only settings update.
-        makeDefault: game.user.isGM,
+        // `#registerSheet` liczy "domyślność" osobno na KAŻDYM kliencie, nie zapisuje ustawienia
+        // świata (zweryfikowane w źródle v14) — gating po `game.user.isGM` dawał graczom
+        // stockową kartę dnd5e zamiast naszej powłoki, bo na ich kliencie warunek był fałszywy.
+        makeDefault: true,
         label
       });
     }

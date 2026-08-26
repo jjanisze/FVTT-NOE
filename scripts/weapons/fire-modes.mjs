@@ -2017,3 +2017,20 @@ function _templateContainsToken(templateDocument, tokenDocument) {
   const localPoint = template.worldTransform.applyInverse(new PIXI.Point(center.x, center.y));
   return template.shape.contains(localPoint.x, localPoint.y);
 }
+
+/**
+ * Predykaty reguł wystawione dla testów Quench (`scripts/tests/`). Wyłącznie odczyt —
+ * jedyna droga, żeby sprawdzić Grad ołowiu, Szturmowca i Ruchome gniazdo CKM bez
+ * odpalania `activity.use()` z jego dialogami, kartami czatu i efektami.
+ */
+export const __testing = Object.freeze({
+  DS_THRESHOLDS,
+  KS_BULLET_COST,
+  BURST_STATE_FLAG,
+  canUseBurstMode: _canUseBurstMode,
+  longBurstSelection: _getLongBurstSelectionOption,
+  longBurstOptionLabel: _getLongBurstOptionLabel,
+  hasLeadHail: _hasLeadHail,
+  hasAssaulter: _hasAssaulter,
+  hasMobileHmgNest: _hasMobileHmgNest
+});

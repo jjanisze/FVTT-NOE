@@ -1409,3 +1409,15 @@ function _canCycleReloadWithoutAmmo(item, mag = getMag(item), reloadState = _get
 async function _completeCycleReload(item, { chat = true } = {}) {
   return _performReloadAction(item, { chat, spendResource: true, source: "button" });
 }
+
+/**
+ * Predykaty reguł wystawione dla testów Quench (`scripts/tests/`). Wyłącznie odczyt —
+ * pozwalają sprawdzić Sztuczkę „Szybkie palce" bez przechodzenia przez dialog przeładowania.
+ */
+export const __testing = Object.freeze({
+  MAGAZINE_TYPES,
+  reloadPlan: _getReloadPlan,
+  manualReloadMode: _getManualReloadMode,
+  ignoresManualReloadMode: _ignoresManualReloadMode,
+  requiresManualReloadBeforeUse: _requiresManualReloadBeforeUse
+});

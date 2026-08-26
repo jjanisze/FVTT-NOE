@@ -2,7 +2,7 @@
   "id": "neuroshima-2026-overrides",
   "title": "Neuroshima: Ostatnia Era",
   "description": "Neuroshima 5e overrides for dnd5e — skills, combat, equipment, and post-apo survival mechanics.",
-  "version": "0.14.5",
+  "version": "0.14.6",
   "authors": [{ "name": "Jacek Janiszewski" }],
   "compatibility": {
     "minimum": "14",
