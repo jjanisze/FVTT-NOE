@@ -4,6 +4,12 @@
   "description": "Neuroshima 5e overrides for dnd5e — skills, combat, equipment, and post-apo survival mechanics.",
   "version": "0.14.20",
   "authors": [{ "name": "Jacek Janiszewski" }],
+  "url": "https://github.com/jjanisze/neuroshima-2026-overrides",
+  "manifest": "https://github.com/jjanisze/neuroshima-2026-overrides/releases/latest/download/module.json",
+  "download": "https://github.com/jjanisze/neuroshima-2026-overrides/releases/latest/download/module.zip",
+  "readme": "https://github.com/jjanisze/neuroshima-2026-overrides#readme",
+  "bugs": "https://github.com/jjanisze/neuroshima-2026-overrides/issues",
+  "license": "https://github.com/jjanisze/neuroshima-2026-overrides/blob/master/LICENSE",
   "compatibility": {
     "minimum": "14",
     "verified": "14"
