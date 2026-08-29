@@ -35,12 +35,17 @@
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
+// v14+: ActiveEffect change entries take a string `type` (see live example on any
+// effect's `changes[].type`), not the old numeric `mode` from the now-deprecated
+// CONST.ACTIVE_EFFECT_MODES — CONST.ACTIVE_EFFECT_CHANGE_TYPES exists but maps
+// these same string keys to a different set of internal numbers, so the string
+// keys themselves (not that object's values) are what belongs on the document.
 const MODE = {
-  add: CONST.ACTIVE_EFFECT_MODES.ADD,
-  multiply: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
-  override: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-  upgrade: CONST.ACTIVE_EFFECT_MODES.UPGRADE,
-  downgrade: CONST.ACTIVE_EFFECT_MODES.DOWNGRADE
+  add: "add",
+  multiply: "multiply",
+  override: "override",
+  upgrade: "upgrade",
+  downgrade: "downgrade"
 };
 
 /* -------------------------------------------- */
@@ -145,7 +150,7 @@ async function applyRider(victim, source, item, rider) {
 
   const changes = (rider.effect?.changes ?? []).map(c => ({
     key: c.key,
-    mode: MODE[c.mode] ?? CONST.ACTIVE_EFFECT_MODES.ADD,
+    type: MODE[c.mode] ?? MODE.add,
     value: c.value,
     priority: 20
   }));

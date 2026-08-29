@@ -10,7 +10,81 @@ export function registerAmmoInventory() {
   ]) {
     Hooks.on(hookName, _onRenderActorSheetInjectAmmoButton);
   }
+
+  Hooks.on("preCreateItem", _onPreCreateItemGuardAmmoMistype);
+
   console.log("Neuroshima 5e | Ammo inventory UI registered");
+}
+
+/* ============================================================
+ * Guard: ammo landing in inventory as the wrong item type
+ * ============================================================
+ *
+ * The reload system (`_findAmmo` in magazine.mjs) only ever looks at
+ * `actor.itemTypes.consumable` with `system.type.value === "ammo"` — anything
+ * else is invisible to it no matter how it's named. A world-wide sweep found 10
+ * pre-existing items (mostly Roll20-import leftovers) named like ammo
+ * ("Amunicja .12 Ga Breneka", "pociski.38spl", ".44Mag ammo", …) but typed as
+ * generic "loot", silently unusable for reloading until someone actually tried
+ * and got "brak amunicji w ekwipunku" — the mismatch is otherwise undetectable
+ * on the sheet, since the loot item still LOOKS like it's there.
+ *
+ * This intercepts any new item on an actor whose name matches a known caliber
+ * but isn't already a properly-tracked ammo consumable, cancels that creation,
+ * and redirects to `_addAmmoToActor()` — the exact same construction path the
+ * "DODAJ AMUNICJĘ" button uses — so it can never enter the inventory in the
+ * wrong slot, regardless of how it got there (compendium drag, hand-typed loot
+ * item, macro, compendium-browser drop, …). If the actor already has that
+ * caliber tracked, the quantity merges into the existing stack instead of
+ * creating a confusing duplicate.
+ */
+function _onPreCreateItemGuardAmmoMistype(item, data, options, userId) {
+  if (game.user.id !== userId) return true; // only the creating client redirects
+  if (item.parent?.documentName !== "Actor") return true;
+  if (_looksLikeTrackedAmmo(item)) return true;
+  if (!["loot", "consumable"].includes(item.type)) return true;
+
+  const caliber = _matchAmmoCaliber(item.name);
+  if (!caliber) return true;
+
+  const actor = item.parent;
+  const quantity = Number(data?.system?.quantity ?? item.system?.quantity ?? 1) || 1;
+
+  ui.notifications.warn(
+    `"${item.name}" wygląda na amunicję (${caliber.label}), ale trafiała do złego slotu (${item.type}) — `
+    + `tworzę ją od razu jako śledzoną Amunicję, żeby system przeładowania ją widział.`
+  );
+  _addAmmoToActor(actor, caliber.id, quantity);
+
+  return false; // cancel the original, wrongly-typed creation
+}
+
+function _looksLikeTrackedAmmo(item) {
+  return item.type === "consumable" && item.system?.type?.value === "ammo";
+}
+
+/** Lowercase, transliterate ł, strip diacritics and all non-alphanumerics. */
+function _normalizeAmmoName(str) {
+  return (str ?? "")
+    .toLowerCase()
+    .replace(/ł/g, "l")
+    .normalize("NFKD").replace(/\p{Diacritic}/gu, "")
+    .replace(/[^a-z0-9]/g, "");
+}
+
+/**
+ * Match a free-typed item name against a known caliber by its short `id`
+ * (e.g. "45acp", "12gab", "belt") rather than the full display label — ids are
+ * short and distinctive enough to survive the naming drift seen in the wild
+ * ("Nabój .45 ACP (2)", "pociski.38spl", ".44Mag ammo") without the false
+ * negatives a full-label substring match would produce (e.g. the label
+ * ".12 Ga (b – breneka)" normalizes with a doubled "b" that a plain-typed
+ * "Breneka" name never reproduces).
+ */
+function _matchAmmoCaliber(name) {
+  const norm = _normalizeAmmoName(name);
+  if (!norm) return null;
+  return AMMO_CALIBERS.find(c => norm.includes(_normalizeAmmoName(c.id))) ?? null;
 }
 
 function _onRenderActorSheetInjectAmmoButton(app, html) {

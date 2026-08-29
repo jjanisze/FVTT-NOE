@@ -379,6 +379,17 @@ export const GRENADE_TYPES = [
     effect: "Porażka: 6k6 ogień + Podpalenie.",
     price: 70, avail: 20, weight: 1.0
   },
+  {
+    id: "grenade-signal",
+    label: "Granat sygnałowy",
+    // TODO(icons): interim reuse of smoke_grenade.svg — real art not commissioned yet.
+    icon: "smoke_grenade.svg",
+    category: "Granaty",
+    area: "—",
+    save: "—",
+    effect: "Sygnał świetlny/dymny widoczny z dużej odległości. Brak obrażeń.",
+    price: 20, avail: 40, weight: 0.3
+  },
 ];
 
 /** Fast lookup by grenade id. */

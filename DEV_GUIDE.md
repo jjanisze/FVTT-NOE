@@ -310,7 +310,7 @@ z nimi realnie stało.
 | **Compendium builder** | Generowanie kompendiów z danych źródłowych | ✅ zbudowane — `dev/packs/build-packs.mjs` + `validate-packs.mjs`, per-warstwa pipeline w §8.2/§9.2 |
 | **Localization generator** | Auto-generacja `pl.json` z kluczy dnd5e `en.json` | ❌ nie zbudowane — 553 tłumaczenia w `lang/pl.json` pisane ręcznie, weryfikowane przez `localization.mjs` (sentinel key fallback) |
 | **Config diff tool** | Porównanie `CONFIG.DND5E` na żywo z targetem Neuroshimy | ❌ nie zbudowane |
-| **Sheet data validator** | Walidacja struktury flag modułu na aktorach | ❌ nie zbudowane jako osobne narzędzie — walidacja dziś jest ad-hoc (backfill-przy-starcie per warstwa: zdrowie, klasy, Zranienie, patrz IMPLEMENTATION.md) |
+| **Sheet data validator** | Walidacja struktury flag modułu na aktorach | ✅ zbudowane, przyrostowo — `config/weapons-data.mjs` (`auditWeapons`/`repairWeapons`) i `config/inventory-audit.mjs` (`auditSurowce`/`auditPirotechnika`/`auditChemia`/`auditChemiaIcons`/`auditItemCompleteness`, każde z parą `audit*`/`repair*` poza tym ostatnim — read-only na zawsze, patrz §14). Wystawione jako `game.neuroshima.auditWeapons`/`.inventoryAudit.*`. Nadal ad-hoc w tym sensie, że każda warstwa dopisuje własną parę funkcji, nie ma jednego generycznego silnika walidacji. |
 
 ### 6.3 Dostępy i uprawnienia
 
@@ -1041,3 +1041,54 @@ MG może obejść oba celowo).
 Zobacz też ARCHITECTURE.md §9 — dwie pułapki ApplicationV2, na które trafiono przy
 budowie tego podsystemu (hook per-subklasa, `makeDefault` per-klient, wstrzykiwanie DOM
 do systemowego CSS gridu, bubble-vs-capture przy customowych guzikach w czacie).
+
+---
+
+## 14. Ekwipunek — audyt kompletności, aliasy broni, ikony (2026-08-29)
+
+### 14.1 Pliki
+
+| Plik | Odpowiedzialność |
+|---|---|
+| `config/inventory-audit.mjs` | Cross-actor audyt/naprawa: Surowce, Pirotechnika, Chemia (typ dryfuje od ikony/nazwy), ikony Chemii (katalog naprawiony, egzemplarze na kartach — nie), `auditItemCompleteness` (waga/cena/źródło, read-only na zawsze) |
+| `config/weapons-data.mjs` — `WEAPON_NAME_ALIASES` | Mapa alias→nazwa katalogowa; patrz 14.2 dlaczego to nie jest kosmetyka |
+| `config/chemia-data.mjs` — `def.img` | Każda z 35 pozycji ma teraz własną, realną ikonę (wcześniej większość cicho spadała na generyczne `icons/svg/*` rdzenia) |
+
+### 14.2 Alias broni, którego brakuje, nie rzuca błędem — po prostu wyłącza WSZYSTKO
+
+`auditWeapons()` dopasowuje egzemplarz do wpisu katalogowego po nazwie
+(case-insensitive + `WEAPON_NAME_ALIASES`). Brak dopasowania nie loguje ostrzeżenia —
+`if (!cat) continue;` w pętli po prostu pomija przedmiot, na zawsze, dopóki ktoś nie
+zauważy. Znalezione żywo 2026-08-29 na **czterech** różnych broniach u czterech różnych
+graczy/NPC (`H&K G3` vs. katalogowe `HK G3`, `M1 Garand` vs. `M1 US Rifle`, `38-ka` vs.
+`Trzydziestka ósemka`, `Browning M2 (z trójnogiem)` vs. `Browning`) — każdy przypadek to
+opisowy dopisek albo inna pisownia, nic egzotycznego.
+
+Konsekwencja nie ograniczała się do złej wagi/ceny w audycie: brakująca właściwość
+`tryb_p` (bo `repairWeapons()` nigdy nie dostał szansy jej dopisać) = **zero aktywności
+strzeleckich** w `weapons/fire-modes.mjs` — broń nie dawała się w ogóle wystrzelić,
+bez żadnego komunikatu o błędzie. Ta sama broń w rękach dwóch różnych graczy (Alan i
+Victor, oboje z „M1 Garand") miała ten sam problem niezależnie — jeśli katalogowa nazwa
+nie pasuje do popularnego, „naturalnego" sposobu nazywania broni przez graczy, dryf nie
+jest odosobnionym przypadkiem, tylko wzorcem, który wystąpi ponownie na każdej kolejnej
+kopii nazwanej tak samo.
+
+**Wniosek dla przyszłego audytu**: `git grep` po nowo zgłoszonym „X nie działa"/„Y nie
+ma ikony" pod kątem literalnej nazwy przedmiotu w `WEAPONS`/`ARMORS`/`TOOLKITS` zanim
+zacznie się szukać głębiej — jeśli nazwa na karcie nie jest identyczna z katalogową,
+sprawdź `WEAPON_NAME_ALIASES` (i jego odpowiedniki, gdyby powstały gdzie indziej) w
+pierwszej kolejności.
+
+### 14.3 `auditItemCompleteness` — celowo tylko read-only
+
+Jedyny audyt w tym module, który **nigdy** nie dostanie `repair*`. Zgłasza fizyczny
+przedmiot, który ma jednocześnie zerową/brakującą wagę I cenę I nie da się go
+dopasować do żadnego katalogu — to najsilniejszy sygnał „nikt nigdy nie wpisał tu
+prawdziwych danych", ale wycena/wyważenie narracyjnego przedmiotu jednego gracza to
+decyzja MG, nie coś, co bezpiecznie da się zautomatyzować (patrz ARCHITECTURE.md §5,
+„Automation Is Declared, Never Silent"). Pierwszy przebieg party-wide: 56 trafień → 30
+realnych po odsianiu naturalnych ataków SRD (`system.type.value === "natural"`) i
+aktorów `TEST*`. Zobacz IMPLEMENTATION.md v0.14.20 dla pełnej listy i uzasadnień.
+
+Zobacz też ARCHITECTURE.md §10 — `item.system.activities` to `Map`, nie zwykły obiekt;
+`Object.values()` na nim milcząco zwraca `[]` niezależnie od rzeczywistej zawartości.

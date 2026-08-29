@@ -12,6 +12,17 @@
  *   - a world setting lets the GM re-expose everything when converting content
  *
  * Monster support is unaffected: NPCs use `feat` items, which this never touches.
+ *
+ * **Two separate pack-visibility mechanisms, both needed.** Hiding the sidebar
+ * Compendium Directory entry (below) does not touch the dnd5e **Compendium Browser** —
+ * the picker `dnd5e.applications.compendium-browser.mjs` opens for subclass/spell/etc.
+ * advancement steps. That one reads its own world setting,
+ * `dnd5e.packSourceConfiguration` (`compendium-browser-settings.mjs`:
+ * `CompendiumBrowserSettingsConfig.collateSources()` — a pack is included unless this
+ * setting explicitly marks it `false`), entirely independent of whether the pack's
+ * directory entry is hidden. Caught live: picking a Profesja (subclass) for Victor
+ * still listed all 12 SRD fantasy classes (Barbarian…Wizard) despite `hideSrdPacks`
+ * defaulting to on — the directory was hidden, the browser source never was.
  */
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -72,10 +83,30 @@ export function registerSrdCleanup() {
       }
     });
 
+    // Second mechanism (see file header): drop the same packs out of dnd5e's own
+    // Compendium Browser source list, one GM write, idempotent.
+    if (game.user.isGM) await hideFromCompendiumBrowser();
+
     console.log(`${MODULE_ID} | SRD fantasy packs hidden: ${hidden}`);
   });
 
   registerSheetRemnantCleanup();
+}
+
+/**
+ * Mark every `FANTASY_PACKS` entry excluded in dnd5e's `packSourceConfiguration` world
+ * setting, so subclass/spell/etc. advancement pickers (which go through the Compendium
+ * Browser, not the sidebar directory) stop offering fantasy classes. A no-op write when
+ * everything is already excluded.
+ */
+async function hideFromCompendiumBrowser() {
+  const current = game.settings.get("dnd5e", "packSourceConfiguration") ?? {};
+  const next = { ...current };
+  let changed = false;
+  for (const key of FANTASY_PACKS) {
+    if (next[key] !== false) { next[key] = false; changed = true; }
+  }
+  if (changed) await game.settings.set("dnd5e", "packSourceConfiguration", next);
 }
 
 /**

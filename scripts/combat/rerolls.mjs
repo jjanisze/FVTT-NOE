@@ -320,7 +320,7 @@ async function _onClickForsowanie(event) {
     flavor: `
       <div style="border-left: 4px solid #e67e22; background: rgba(230, 126, 34, 0.08); padding: 6px 8px; border-radius: 0 4px 4px 0; margin-bottom: 4px;">
         <div style="font-weight: bold; color: #e67e22; font-size: 13px; margin-bottom: 2px;">⚡ FORSOWANIE</div>
-        <div style="font-size: 11px; color: #aaa;">Test ${abilityLabel} — k20 + ${abilityScore}</div>
+        <div style="font-size: 11px; color: var(--color-text-secondary, #aaa);">Test ${abilityLabel} — k20 + ${abilityScore}</div>
       </div>
     `,
     flags: { [MODULE_ID]: { forsowanie: true } }
@@ -374,7 +374,7 @@ async function _onClickFuks(event) {
           <p style="color: #27ae60; font-weight: bold;">
             Koszt: 1 Fuks (${fuksy} → ${fuksy - 1}/${MAX_FUKSY})
           </p>
-          <p style="font-size: 11px; color: #aaa;">Nowy wynik musisz zaakceptować.</p>
+          <p style="font-size: 11px; color: var(--color-text-secondary, #aaa);">Nowy wynik musisz zaakceptować.</p>
         </div>
       `,
       buttons: {
@@ -411,7 +411,7 @@ async function _onClickFuks(event) {
     flavor: `
       <div style="border-left: 4px solid #27ae60; background: rgba(39, 174, 96, 0.08); padding: 6px 8px; border-radius: 0 4px 4px 0; margin-bottom: 4px;">
         <div style="font-weight: bold; color: #27ae60; font-size: 13px; margin-bottom: 2px;">🍀 FUKS</div>
-        <div style="font-size: 11px; color: #aaa;">${rollDesc} — przerzut</div>
+        <div style="font-size: 11px; color: var(--color-text-secondary, #aaa);">${rollDesc} — przerzut</div>
       </div>
     `,
     flags: { [MODULE_ID]: { fuks: true } }

@@ -43,6 +43,11 @@
  * @property {number}   [conditionalBonus.longBonus]
  * @property {string}   [conditionalBonus.setupKey]  klucz flagi setup (dla dwójnóg/trójnóg)
  * @property {number}   [conditionalBonus.setupBonus]
+ * @property {boolean}  [refundable=true]  Czy `removeAddon` zwraca loot item po zdjęciu.
+ *   `false` dla ulepszeń, które nigdy nie powinny wracać do ekwipunku jako sprzedawalny
+ *   przedmiot — bo są za darmo (i nieograniczenie) odnawialne, np. Naostrzenie samym
+ *   testem narzędzi małego kowala. Wymuszone w `removeAddon` niezależnie od tego, co
+ *   przekaże wywołujący (`opts.refund`).
  */
 
 export const ADDON_DEFS = {
@@ -53,7 +58,7 @@ export const ADDON_DEFS = {
 
   naostrzenie: {
     id: "naostrzenie",
-    label: "Naostrzenie",
+    label: "Osełka",
     category: "biala",
     price: 20,
     weight: 0,
@@ -65,6 +70,10 @@ export const ADDON_DEFS = {
     applyMode: ["direct"],
     grantProperties: [],
     removeProperties: [],
+    // Permanent once installed: never comes back out as a sharpening stone. Kowal's
+    // tools can produce it for free (see items/toolkit-kowal.mjs), so refunding it on
+    // removal would mint an infinitely farmable, sellable loot item.
+    refundable: false,
     attackBonus: 1,
     damageBonus: 1,
     rangeNormalBonus: 0,

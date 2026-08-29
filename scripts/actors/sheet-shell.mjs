@@ -28,6 +28,8 @@ const ZASOBY_PANELS = [
   "neuro-ammo-wrapper",
   "neuro-magazine-wrapper",
   "neuro-grenade-wrapper",
+  "neuro-leki-wrapper",
+  "neuro-prowiant-wrapper",
   "neuro-surowce-wrapper"
 ];
 

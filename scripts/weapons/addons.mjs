@@ -43,6 +43,7 @@ export function registerWeaponAddons() {
     mod.api ??= {};
     mod.api.addons = {
       installAddon,
+      installAddonById,
       removeAddon,
       hasAddon,
       getAddon,
@@ -164,6 +165,32 @@ export async function installAddon(weapon, addonLootItem) {
     return false;
   }
 
+  const ok = await installAddonById(weapon, addonId);
+  if (!ok) return false;
+
+  // Consume the loot item (only once installation actually succeeded)
+  const qty = addonLootItem.system?.quantity ?? 1;
+  if (qty <= 1) {
+    await addonLootItem.delete();
+  } else {
+    await addonLootItem.update({ "system.quantity": qty - 1 });
+  }
+
+  return true;
+}
+
+/**
+ * Install an addon directly by id, with no loot item to consume — for flows where the
+ * upgrade is earned rather than bought (e.g. the kowal toolkit's "Naostrzenie broni"
+ * action honing an edge with a successful check, see `items/toolkit-kowal.mjs`).
+ * Shares every validation/rollback/chat-message/hook step with `installAddon`; only the
+ * loot-item consumption is skipped.
+ *
+ * @param {Item5e} weapon
+ * @param {string} addonId
+ * @returns {Promise<boolean>}
+ */
+export async function installAddonById(weapon, addonId) {
   const def = ADDON_DEFS[addonId];
   if (!def) {
     ui.notifications.warn(`Nieznane ulepszenie: ${addonId}`);
@@ -183,11 +210,11 @@ export async function installAddon(weapon, addonLootItem) {
   const delta = _computeDelta(liveWeapon, def);
 
   // Apply changes to the weapon. If anything throws, roll back so we never
-  // leave the weapon in a half-modified state or consume the loot item.
+  // leave the weapon in a half-modified state.
   try {
     await _applyDelta(liveWeapon, def, delta);
   } catch (err) {
-    console.error(`Neuroshima 5e | installAddon(${addonId}) failed during _applyDelta`, err);
+    console.error(`Neuroshima 5e | installAddonById(${addonId}) failed during _applyDelta`, err);
     try { await _reverseDelta(_getLiveItem(liveWeapon), def, delta); } catch (_) { /* best effort */ }
     ui.notifications.error(`Nie udało się zainstalować: ${def.label}. Zmiany cofnięto.`);
     return false;
@@ -196,14 +223,6 @@ export async function installAddon(weapon, addonLootItem) {
   // Record the addon in flags
   const existing = getAddons(liveWeapon);
   await liveWeapon.setFlag(MODULE_ID, ADDONS_FLAG, [...existing, { id: addonId, delta }]);
-
-  // Consume the loot item
-  const qty = addonLootItem.system?.quantity ?? 1;
-  if (qty <= 1) {
-    await addonLootItem.delete();
-  } else {
-    await addonLootItem.update({ "system.quantity": qty - 1 });
-  }
 
   // Chat message
   await ChatMessage.create({
@@ -266,10 +285,14 @@ function _getDependentAddons(weapon, addonId) {
  * @param {boolean} [opts.refund=true]   Return the loot item to inventory. Set false when the
  *                                        addon is destroyed/consumed (e.g. Naostrzenie lost on
  *                                        weapon damage — RAW: "do czasu uszkodzenia broni").
+ *                                        Forced to `false` regardless if the addon's own def
+ *                                        sets `refundable: false` — a permanent attachment
+ *                                        never comes back out as a loot item, no matter who
+ *                                        asks or how it was installed.
  * @returns {Promise<boolean>}
  */
 export async function removeAddon(weapon, addonId, opts = {}) {
-  const { cascade = true, refund = true } = opts;
+  const { cascade = true, refund: refundRequested = true } = opts;
   const liveWeapon = _getLiveItem(weapon);
   if (!liveWeapon) return false;
 
@@ -281,6 +304,8 @@ export async function removeAddon(weapon, addonId, opts = {}) {
 
   const def = ADDON_DEFS[addonId];
   if (!def) return false;
+
+  const refund = refundRequested && (def.refundable !== false);
 
   // Cascade: remove anything that depends on this addon first.
   const dependents = _getDependentAddons(liveWeapon, addonId);
@@ -379,8 +404,7 @@ async function _applyDelta(weapon, def, delta) {
     // system.attack.bonus field; the +TA is injected at roll time by
     // _onPostBuildAttackRollConfig (reads def.attackBonus for installed addons).
     if (delta.damageBonus !== 0) {
-      const cur = _parseBonus(weapon.system?.damage?.base?.bonus);
-      updates["system.damage.base.bonus"] = String(cur + delta.damageBonus);
+      updates["system.damage.base.bonus"] = _composeBonus(weapon.system?.damage?.base?.bonus, delta.damageBonus);
     }
     if (delta.rangeNormal !== 0) {
       updates["system.range.value"] = (weapon.system?.range?.value ?? 0) + delta.rangeNormal;
@@ -420,8 +444,7 @@ async function _reverseDelta(weapon, def, delta) {
   if (modes.includes("direct")) {
     // attackBonus not written (see _applyDelta note); nothing to reverse for TA.
     if (delta.damageBonus !== 0) {
-      const cur = _parseBonus(weapon.system?.damage?.base?.bonus);
-      updates["system.damage.base.bonus"] = String(cur - delta.damageBonus);
+      updates["system.damage.base.bonus"] = _decomposeBonus(weapon.system?.damage?.base?.bonus, delta.damageBonus);
     }
     if (delta.rangeNormal !== 0) {
       updates["system.range.value"] = (weapon.system?.range?.value ?? 0) - delta.rangeNormal;
@@ -938,11 +961,40 @@ function _buildLootItemData(def) {
  * Utilities
  * ============================================================ */
 
-/** Parse a bonus string like "1", "2", "" → number */
-function _parseBonus(str) {
-  if (!str) return 0;
-  const n = parseInt(str, 10);
-  return isNaN(n) ? 0 : n;
+/**
+ * Add a flat delta to a weapon's `damage.base.bonus`, preserving a formula-valued
+ * bonus (e.g. "@abilities.str.mod", hand-entered by a player — see the live audit
+ * note on this field in `weapons-data.mjs`) instead of collapsing it. `_parseBonus`
+ * alone does `parseInt("@abilities.str.mod") → NaN → 0`, which silently replaced a
+ * character's ability-mod bonus with a bare "1" the moment Naostrzenie/Osełka was
+ * installed — caught live on Piekarz's Nadziak.
+ */
+function _composeBonus(existing, delta) {
+  const trimmed = (existing ?? "").toString().trim();
+  if (!delta) return trimmed;
+  if (!trimmed) return String(delta);
+
+  const n = Number(trimmed);
+  if (Number.isFinite(n)) return String(n + delta); // both plain numbers — keep numeric
+
+  return delta > 0 ? `${trimmed} + ${delta}` : `${trimmed} - ${Math.abs(delta)}`;
+}
+
+/**
+ * Inverse of `_composeBonus` — strips the exact trailing "+ N"/"- N" term a prior
+ * `_composeBonus(existing, delta)` call would have appended; falls back to appending
+ * the negated delta if the trailing term doesn't match (e.g. hand-edited since).
+ */
+function _decomposeBonus(existing, delta) {
+  const trimmed = (existing ?? "").toString().trim();
+  if (!delta) return trimmed;
+
+  const n = Number(trimmed);
+  if (Number.isFinite(n)) return String(n - delta);
+
+  const suffix = delta > 0 ? ` + ${delta}` : ` - ${Math.abs(delta)}`;
+  if (trimmed.endsWith(suffix)) return trimmed.slice(0, -suffix.length);
+  return _composeBonus(trimmed, -delta);
 }
 
 /** Resolve live item from possibly-cloned item. */

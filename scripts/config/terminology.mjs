@@ -4,6 +4,7 @@
  * Removes honor/sanity abilities, cleans up spellcasting references.
  */
 import { CHEMIA_TYPE, CHEMIA_SUBTYPES } from "./chemia-data.mjs";
+import { AMMO_CALIBERS } from "./ammo-data.mjs";
 
 export function registerTerminology() {
   const abilities = CONFIG.DND5E.abilities;
@@ -92,6 +93,19 @@ export function registerTerminology() {
       label: "Lekarstwa",
       subtypes: { ...CHEMIA_SUBTYPES }
     };
+
+    // Replace the D&D fantasy "ammo" subtype list (arrow/bolt/needle/…) with the
+    // Neuroshima caliber catalog. Two native `<select>` fields read their options
+    // straight from here — an ammo consumable item's own "Rodzaj" field
+    // (details-consumable.hbs) and a weapon's "Typ Amunicji" field
+    // (details-weapon.hbs, see buildWeaponItemData in weapons-data.mjs) — so
+    // without this, both show up blank even once the underlying data holds a real
+    // caliber id ("45acp", "12ga_b", …): the <select> just has no matching <option>.
+    if (CONFIG.DND5E.consumableTypes.ammo) {
+      CONFIG.DND5E.consumableTypes.ammo.subtypes = Object.fromEntries(
+        AMMO_CALIBERS.map(c => [c.id, c.label])
+      );
+    }
   }
 
   console.log("Neuroshima 5e | Terminology overrides applied");

@@ -222,11 +222,18 @@ Uruchamiaj przed każdym przeładowaniem świata. Jest natychmiastowy.
 | Paczka | Obszar |
 |---|---|
 | `konfiguracja` | nadpisania `CONFIG.DND5E`, API modułu |
-| `dane-ekwipunku` | broń, amunicja, pancerze, ulepszenia, zestawy narzędziowe |
+| `dane-ekwipunku` | broń, amunicja, pancerze, ulepszenia, zestawy narzędziowe, chemia (leki/narkotyki/używki) |
 | `choroby` | drabina stopni, efekty, lekarstwa |
 | `sztuczki-dane` | tabela Sztuczek, rejestr automatyki, pack |
 | `sztuczki-most` | kontrakty nazw między Sztuczkami a kodem, który ich szuka |
 | `sztuczki-walka` | predykaty trybów ognia i magazynków |
 
 Największe niepokryte obszary (kolejni kandydaci): pochodzenia, manewry, zasady
-podróży i zapasów, generator bestiariusza.
+podróży i zapasów, generator bestiariusza. `config/inventory-audit.mjs`
+(`auditItemCompleteness`/`auditChemiaIcons`/`auditSurowce`/`auditPirotechnika`/
+`auditChemia` i ich `repair*`) skanują `game.actors` na żywo — jak `auditWeapons()`
+przed nimi, nie da się ich przetestować bez złamania reguły z §5 (żadnych zmian w
+stanie świata, które przetrwają test). Kandydat na Warstwę 4 (`__testing`) gdyby
+kiedyś trzeba było je pokryć: wydzielić czyste predykaty dopasowania do katalogu
+(`_hasKnownSource` i siostrzane) tak, jak `diffWeaponItem`/`buildWeaponRepairDelta`
+zostały wydzielone z `auditWeapons`/`repairWeapons`.

@@ -15,7 +15,16 @@
  * 5-charge resource + refill flow (later batch).
  */
 
+import { createGearPlaceholders } from "./gear-data.mjs";
+import { createArmors } from "./armor-data.mjs";
+import { TOOLKIT_CHECK_ACTIVITY_TYPE } from "../items/toolkit-check-activity.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
+
+/** Armor items (created on the same actor via `createArmors`) that "zbroje śmieciowe" expands to. */
+const ZBROJE_SMIECIOWE_NAMES = Object.freeze([
+  "Kiepska zbroja śmieciowa", "Solidna zbroja śmieciowa", "Ciężka zbroja śmieciowa", "Pełna zbroja śmieciowa"
+]);
 
 /** Activity flag marking the medyk "Przywracanie PW" heal activity (read by toolkit-medyk.mjs). */
 export const MEDYK_HEAL_FLAG = "medykHeal";
@@ -31,6 +40,9 @@ const ABILITY_LABEL = { str: "Siła", dex: "Zręczność", con: "Kondycja", int:
  * @typedef {object} ToolkitAction
  * @property {string} name  Display name (the ST is appended automatically).
  * @property {number} dc    Suggested ST (flat DC).
+ * @property {string} [gate]  Check-gate key (see `items/toolkit-check-activity.mjs`
+ *   `registerCheckGate` / `items/toolkit-kowal.mjs`) — opts this action into a
+ *   pre-roll picker dialog and an early "nothing eligible" block.
  */
 
 /**
@@ -149,12 +161,43 @@ export const TOOLKITS = [
   {
     id: "kowala", label: "Narzędzia małego kowala", ability: "str", altAbility: "wis",
     weight: 30, price: 50, avail: 60, iconReady: true,
+    // Vertical slice: native dnd5e "check" activity (stock chevron chat card, roll
+    // buttons, dialog) instead of the module's whole-flow-cancelling short-circuit.
+    // See scripts/items/toolkit-check-activity.mjs.
+    nativeCheck: true,
     actions: [
       { name: "Wyważenie drzwi lub otwarcie skrzyni", dc: 20 },
-      { name: "Naostrzenie broni", dc: 10 },
-      { name: "Naprawa zdegradowanej broni białej", dc: 15 }
+      // `gate` wires these into toolkit-kowal.mjs's check gate: a weapon-picker
+      // dialog before the roll, and an early block (no card, no roll) when there's
+      // nothing eligible to act on — see _buildCheckActivity below.
+      { name: "Naostrzenie broni", dc: 10, gate: "kowalaNaostrzenie" },
+      { name: "Naprawa zdegradowanej broni białej", dc: 15, gate: "kowalaNaprawa" }
     ],
     produkcja: "bełty, broń biała, hełm, igły, kłódka, kolczatki, łom, łopata, naczynia metalowe, podkowy, płyty pancerne, sidła, sprzęt do wspinaczki, strzały, tarcze, wózek, zbroje śmieciowe.",
+    // "Craft:"-style linked variant of the line above (5e-2024 tool parity — see
+    // dnd5e.equipment24 Smith's Tools for the reference shape). `link` keys are
+    // resolved at generation time via `_resolveProdukcjaLinks()`; entries without a
+    // `link` are categories (not a single Item) and stay plain text; `linkGroup`
+    // expands to several links (e.g. the 4 zbroja śmieciowa tiers) in one slot.
+    produkcjaEntries: [
+      { text: "bełty", link: "belty" },
+      { text: "broń biała" },
+      { text: "hełm", link: "helm" },
+      { text: "igły", link: "igly" },
+      { text: "kłódka", link: "klodka" },
+      { text: "kolczatki", link: "kolczatki" },
+      { text: "łom", link: "lom" },
+      { text: "łopata", link: "lopata" },
+      { text: "naczynia metalowe" },
+      { text: "podkowy", link: "podkowy" },
+      { text: "płyty pancerne", link: "plyty_pancerne" },
+      { text: "sidła", link: "sidla" },
+      { text: "sprzęt do wspinaczki", link: "sprzet_wspinaczkowy" },
+      { text: "strzały", link: "strzaly" },
+      { text: "tarcze", link: "tarcza_armor" },
+      { text: "wózek", link: "wozek" },
+      { text: "zbroje śmieciowe", linkGroup: "zbroje_smieciowe" }
+    ],
     special: "<strong>Naprawa zdegradowanej broni białej:</strong> broń, której kość obrażeń spadła po naturalnej 1 (k12→k10→k8→k6→k4), można naprawić (test ST 15)."
   },
   {
@@ -273,8 +316,45 @@ function _toolkitImg(kit) {
     : FALLBACK_ICON;
 }
 
+/**
+ * Resolve `produkcjaEntries` → `@UUID[]{}` content-links, 5e-2024 "Craft:" style.
+ * Link targets are catalog items and always live on the Zbrojownia master — a
+ * toolkit item being created/refreshed on some OTHER actor (e.g. Piekarz's own
+ * copy) links to the same catalog UUIDs, it doesn't get its own private copies of
+ * the gear stubs/armors.
+ * @returns {Promise<Map<string, Item|Item[]>>}
+ */
+async function _resolveProdukcjaLinks() {
+  const zbrojownia = game.actors.find(a => a.getFlag(MODULE_ID, "isZbrojownia"));
+  if ( !zbrojownia ) return new Map();
+
+  const gear = await createGearPlaceholders(zbrojownia);
+  await createArmors(zbrojownia);
+  const byName = name => zbrojownia.items.find(i => i.type === "equipment" && i.name === name);
+
+  const links = new Map(gear);
+  links.set("helm", byName("Hełm"));
+  links.set("tarcza_armor", byName("Tarcza"));
+  links.set("zbroje_smieciowe", ZBROJE_SMIECIOWE_NAMES.map(byName).filter(Boolean));
+  return links;
+}
+
+/** Render one `produkcjaEntries` entry as plain text or an `@UUID[]{}` content-link (or several, for a group). */
+function _produkcjaEntryHtml(entry, links) {
+  if ( !entry.link && !entry.linkGroup ) return entry.text;
+
+  if ( entry.linkGroup ) {
+    const items = links?.get(entry.linkGroup) ?? [];
+    if ( !items.length ) return entry.text;
+    return items.map(i => `@UUID[${i.uuid}]{${i.name}}`).join(", ");
+  }
+
+  const item = links?.get(entry.link);
+  return item ? `@UUID[${item.uuid}]{${entry.text}}` : entry.text;
+}
+
 /** Build the HTML description for a toolkit item. */
-function _toolkitDescription(kit) {
+function _toolkitDescription(kit, links) {
   const abil = ABILITY_LABEL[kit.ability] ?? kit.ability;
   const abilLine = kit.altAbility
     ? `${abil} lub ${ABILITY_LABEL[kit.altAbility] ?? kit.altAbility}`
@@ -282,18 +362,40 @@ function _toolkitDescription(kit) {
   const uses = kit.actions.map(a => `<li>${a.name} (ST ${a.dc})</li>`).join("");
   let html = `<p><strong>Cecha:</strong> ${abilLine} &nbsp;|&nbsp; <strong>Waga:</strong> ${kit.weight} kg</p>`;
   html += `<p><strong>Używanie:</strong></p><ul>${uses}</ul>`;
-  if ( kit.produkcja ) html += `<p><strong>Produkcja:</strong> ${kit.produkcja}</p>`;
+  if ( kit.produkcjaEntries ) {
+    const line = kit.produkcjaEntries.map(e => _produkcjaEntryHtml(e, links)).join(", ");
+    html += `<p><strong>Produkcja:</strong> ${line}.</p>`;
+  } else if ( kit.produkcja ) {
+    html += `<p><strong>Produkcja:</strong> ${kit.produkcja}</p>`;
+  }
   if ( kit.special ) html += `<p>${kit.special}</p>`;
   return html;
+}
+
+/**
+ * Short blurb for `system.description.chat` — dnd5e's chat-card body prefers this over
+ * the full `description.value` (see `ItemDataModel#getCardData`: `description.chat ||
+ * description.value`), and it is NOT per-activity (stock tools don't vary card body text
+ * by which activity fired — only the button/subtitle do). Without this, every action's
+ * card falls back to the full reference description (Cecha/Używanie list/Produkcja
+ * links/special note) — correct on the item sheet, way too much to repeat on every roll.
+ * Which action was actually used is instead carried by the per-activity `chatFlavor`
+ * (→ card subtitle, see `_buildCheckActivity`) and the roll button's own DC label.
+ */
+function _toolkitChatDescription(kit) {
+  const abil = ABILITY_LABEL[kit.ability] ?? kit.ability;
+  const abilLine = kit.altAbility ? `${abil} lub ${ABILITY_LABEL[kit.altAbility] ?? kit.altAbility}` : abil;
+  return `<p><strong>Cecha:</strong> ${abilLine}</p>`;
 }
 
 /**
  * Build the bare `tool` item data for a toolkit (WITHOUT activities — those are created
  * afterwards via `item.createActivity`, per dnd5e 5.3 quirk).
  * @param {Toolkit} kit
+ * @param {Map<string, Item|Item[]>} [links]  Resolved `produkcjaEntries` link targets (see `_resolveProdukcjaLinks`).
  * @returns {object}
  */
-export function buildToolkitItemData(kit) {
+export function buildToolkitItemData(kit, links) {
   return {
     name: kit.label,
     type: "tool",
@@ -302,7 +404,12 @@ export function buildToolkitItemData(kit) {
       type: { value: "tool", baseItem: kit.id },
       ability: kit.ability,
       proficient: null,
-      description: { value: _toolkitDescription(kit) },
+      description: {
+        value: _toolkitDescription(kit, links),
+        // Only kits on the native check activity actually get a chevron chat card per
+        // use — the old preUseActivity-cancelling kits never reach getCardData() at all.
+        ...(kit.nativeCheck ? { chat: _toolkitChatDescription(kit) } : {})
+      },
       weight: { value: kit.weight, units: "kg" },
       price: { value: kit.price, denomination: "gp" },
       quantity: 1
@@ -312,14 +419,23 @@ export function buildToolkitItemData(kit) {
 }
 
 /** Build the check-activity payload for one ST action (or the generic test). */
-function _buildCheckActivity(kit, { name, dc }) {
+function _buildCheckActivity(kit, { name, dc, gate }) {
   return {
     name,
+    // `chatFlavor` becomes the chat card's SUBTITLE (see ActivityMixin#_usageChatContext:
+    // `this.description.chatFlavor || data.subtitle`) — without it every action's card
+    // shows the same generic item-type subtitle ("Narzędzia"), giving no visual cue as to
+    // which of the kit's several actions was actually rolled.
+    description: { chatFlavor: dc == null ? name : `${name} (ST ${dc})` },
     check: {
       ability: kit.ability,
       associated: [kit.id],
       dc: { calculation: "", formula: dc == null ? "" : String(dc) }
-    }
+    },
+    // Opts into a registered check gate (see toolkit-check-activity.mjs) — a pre-roll
+    // picker dialog and an early "nothing eligible" block. Only meaningful together
+    // with `nativeCheck: true` (the gate lives on NeuroToolCheckActivity).
+    ...(gate ? { flags: { [MODULE_ID]: { checkGate: gate } } } : {})
   };
 }
 
@@ -342,11 +458,14 @@ export async function createToolkits(actor, { only } = {}) {
   let created = 0;
   let updated = 0;
 
-  for ( const kit of TOOLKITS ) {
-    if ( kit.skip ) continue;
-    if ( only && !only.includes(kit.id) ) continue;
+  // Resolve produkcja @UUID links once per run, only if a targeted kit needs them
+  // (currently just kowala) — avoids provisioning gear stubs/armors for no reason.
+  const kitsInRun = TOOLKITS.filter(k => !k.skip && (!only || only.includes(k.id)));
+  const links = kitsInRun.some(k => k.produkcjaEntries) ? await _resolveProdukcjaLinks() : undefined;
 
-    const data = buildToolkitItemData(kit);
+  for ( const kit of kitsInRun ) {
+    const activityType = kit.nativeCheck ? TOOLKIT_CHECK_ACTIVITY_TYPE : "check";
+    const data = buildToolkitItemData(kit, links);
     let item = actor.items.find(i => i.type === "tool" && i.system.type?.baseItem === kit.id);
 
     if ( item ) {
@@ -362,9 +481,9 @@ export async function createToolkits(actor, { only } = {}) {
     for ( const a of Array.from(item.system.activities) ) await item.deleteActivity(a.id);
 
     // Generic "Test narzędzi" (no DC) + one Check per ST action.
-    await item.createActivity("check", _buildCheckActivity(kit, { name: "Test narzędzi", dc: null }), { renderSheet: false });
+    await item.createActivity(activityType, _buildCheckActivity(kit, { name: "Test narzędzi", dc: null }), { renderSheet: false });
     for ( const action of kit.actions ) {
-      await item.createActivity("check", _buildCheckActivity(kit, action), { renderSheet: false });
+      await item.createActivity(activityType, _buildCheckActivity(kit, action), { renderSheet: false });
     }
 
     // Mały medyk: special "Przywracanie PW" utility activity (tiered heal handled by
@@ -386,4 +505,28 @@ export async function createToolkits(actor, { only } = {}) {
   ui.notifications.info(`✔ Narzędzia: ${created} nowych, ${updated} odświeżonych na „${actor.name}”.`);
   console.log(`Neuroshima 5e | Toolkits: created ${created}, updated ${updated}`);
   return { created, updated };
+}
+
+/**
+ * Refresh one toolkit's item data (activity type, description, links, …) on EVERY
+ * actor in the world that already carries a copy — not just the Zbrojownia master.
+ * Toolkit items are given to actors as independent copies (see `zbrojownia-sync.mjs`),
+ * so flipping a kit to `nativeCheck: true` or editing its TOOLKITS entry only reaches
+ * the Zbrojownia master unless already-distributed copies are refreshed too.
+ * `createToolkits()` already upserts by `baseItem`, so this is just "run it once per
+ * actor that has a match."
+ * @param {string} kitId  A `TOOLKITS[].id` (e.g. "kowala").
+ * @returns {Promise<{actors:number, created:number, updated:number}>}
+ */
+export async function syncToolkitToAllHolders(kitId) {
+  let actorsTouched = 0, created = 0, updated = 0;
+  for ( const actor of game.actors ) {
+    if ( !actor.items.some(i => i.type === "tool" && i.system.type?.baseItem === kitId) ) continue;
+    const result = await createToolkits(actor, { only: [kitId] });
+    actorsTouched++;
+    created += result.created;
+    updated += result.updated;
+  }
+  console.log(`Neuroshima 5e | Toolkit "${kitId}" synced to ${actorsTouched} actor(s) (${created} new, ${updated} refreshed).`);
+  return { actors: actorsTouched, created, updated };
 }

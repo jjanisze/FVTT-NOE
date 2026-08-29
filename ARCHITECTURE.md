@@ -165,6 +165,28 @@ both silent (no error, no console warning) — the module just quietly does noth
   (`document.addEventListener("click", fn, {capture:true})`), which always runs before any
   bubble-phase listener downstream regardless of what stops propagation later.
 
+### 10. `Item#system.activities` (and Other Foundry Collections) Are Not Plain Objects
+
+Discovered live 2026-08-29 debugging why a freshly-repaired weapon appeared to have
+zero fire-mode activities immediately after `fire-modes.mjs`'s `updateItem` hook should
+have rebuilt them — leading to several minutes of manually deleting and recreating
+activities on a live character before realizing the "empty" reads were never real.
+
+`item.system.activities` is a dnd5e `ActivityCollection` (a `Map` subclass), not a
+plain object. **`Object.values(item.system.activities)` silently returns `[]`
+regardless of actual contents** — `Object.values` only sees a Map's own enumerable
+*properties*, and a Map stores its entries internally, not as properties. No error,
+no warning, just a confidently wrong empty array that looks exactly like "this really
+has nothing in it." The correct read is `[...item.system.activities.values()]` (or
+`.contents`, or `.size` for a count) — same trap applies to any other Foundry
+`Collection`-backed field (`actor.items`, `actor.effects`, a compendium's `.index`,
+etc.), not just this one.
+
+**Corollary**: never trust an "empty" read from a Collection-typed field taken
+immediately after a mutation without also confirming via a fresh, independent read
+(ideally after a full page reload) before concluding data was lost — the read itself
+may be the bug, not the write.
+
 ## Dokumentacja towarzysząca
 | Plik | Zawartość |
 |---|---|

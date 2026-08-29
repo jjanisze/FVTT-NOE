@@ -63,6 +63,7 @@ import { registerThrownWeapons } from "./weapons/thrown.mjs";
 import { registerValidation } from "./config/validation.mjs";
 import { registerWeaponSounds } from "./weapons/sounds.mjs";
 import { registerEngineControls } from "./weapons/engine.mjs";
+import { registerPochodnia, pochodniaApi } from "./weapons/pochodnia.mjs";
 import { registerTracerVfx } from "./weapons/tracer-vfx.mjs";
 import { registerMapProps, mapPropsApi } from "./scenes/map-props.mjs";
 import { registerMapSync, mapSyncApi } from "./scenes/map-sync.mjs";
@@ -75,7 +76,12 @@ import { registerAmmoInventory } from "./actors/ammo-inventory.mjs";
 import { registerMagazineInventory } from "./actors/magazine-inventory.mjs";
 import { registerGrenadeInventory } from "./actors/grenade-inventory.mjs";
 import { registerSurowceInventory } from "./actors/surowce-inventory.mjs";
+import { registerLekiInventory } from "./actors/leki-inventory.mjs";
+import { registerProwiantInventory } from "./actors/prowiant-inventory.mjs";
+import { registerEncumbranceBreakdown } from "./actors/encumbrance-breakdown.mjs";
 import { registerSheetShell } from "./actors/sheet-shell.mjs";
+import { registerVehiclePortraitToggle } from "./actors/vehicle-portrait.mjs";
+import { registerClassResourceDice } from "./actors/class-resource-dice.mjs";
 import { registerPartySheet } from "./actors/party-sheet.mjs";
 import { registerPartyTravel, travelApi } from "./actors/party-travel.mjs";
 import { registerPartyLootLock } from "./actors/party-loot-lock.mjs";
@@ -88,10 +94,20 @@ import { registerDozownik } from "./weapons/dozownik.mjs";
 import { registerSettings } from "./config/settings.mjs";
 import { AMMO_CALIBERS, AMMO_CALIBER_MAP, GRENADE_TYPES, GRENADE_MAP } from "./config/ammo-data.mjs";
 import { registerZbrojowniaSync } from "./actors/zbrojownia-sync.mjs";
-import { TOOLKITS, createToolkits } from "./config/toolkits-data.mjs";
-import { WEAPONS, createWeapons } from "./config/weapons-data.mjs";
+import { TOOLKITS, createToolkits, syncToolkitToAllHolders } from "./config/toolkits-data.mjs";
+import { WEAPONS, createWeapons, auditWeapons, repairWeapons } from "./config/weapons-data.mjs";
+import {
+  auditSurowce, repairSurowce, auditPirotechnika, repairPirotechnika,
+  auditChemia, repairChemia, auditChemiaIcons, repairChemiaIcons,
+  auditItemCompleteness,
+  auditInventory, repairInventory
+} from "./config/inventory-audit.mjs";
 import { ARMORS, createArmors } from "./config/armor-data.mjs";import { registerMedyk } from "./items/toolkit-medyk.mjs";
 import { registerToolkitChecks } from "./items/toolkit-check.mjs";
+import { registerToolkitCheckActivity } from "./items/toolkit-check-activity.mjs";
+import { registerKowalActions } from "./items/toolkit-kowal.mjs";
+import { registerInventoryToggleFix } from "./actors/inventory-toggle-fix.mjs";
+import { GEAR_PLACEHOLDERS, createGearPlaceholders } from "./config/gear-data.mjs";
 import { registerChemia, chemiaApi } from "./items/chemia.mjs";
 import { sztuczkiApi } from "./config/sztuczki-data.mjs";
 import { pochodzeniaApi } from "./config/pochodzenia-data.mjs";
@@ -139,6 +155,7 @@ Hooks.once("init", () => {
   // Wraps prepareDerivedData like registerPW; the two chain safely.
   registerSP();
   registerClassState();
+  registerClassResourceDice();
   registerAbilityHotbar();
   registerClassMigration();
   // Musi iść po registerClassMigration — tamto podmienia całe api.migration, nie dopisuje do niego.
@@ -160,6 +177,9 @@ Hooks.once("init", () => {
   registerMagazineInventory();
   registerGrenadeInventory();
   registerSurowceInventory();
+  registerLekiInventory();
+  registerProwiantInventory();
+  registerEncumbranceBreakdown();
   registerSheetPositionStability();
   registerWeapons();
   registerArmor();
@@ -183,6 +203,11 @@ Hooks.once("init", () => {
   registerWeaponJams();
   registerMeleeDegradation();
   registerFireModes();
+  // Must precede any toolkit item using it (Zbrojownia/actor items are loaded as
+  // part of world init) — same phase as the fire-mode activity types above.
+  registerToolkitCheckActivity();
+  registerKowalActions();
+  registerInventoryToggleFix();
   registerThrownWeapons();
   registerAmmoSystem();
   registerWeaponAddons();
@@ -206,6 +231,10 @@ Hooks.once("init", () => {
   // Last: its render hook relocates panels the injectors above have already built,
   // so it must be the final renderActorSheet listener registered.
   registerSheetShell();
+
+  // Vehicle sheet is still stock dnd5e (no Neuroshima subclass) — it's just missing the
+  // portrait/token toggle every other actor sheet type has. Patches the live DOM, not a sheet.
+  registerVehiclePortraitToggle();
 
   // Karta drużyny: stan członków, podróż, zapasy.
   registerPartyTravel();
@@ -274,12 +303,34 @@ Hooks.once("ready", () => {
   // Expose caliber data globally for use in macros and CDP scripts.
   // Usage: game.neuroshima.AMMO_CALIBERS  /  game.neuroshima.AMMO_CALIBER_MAP
   // Grenades stay separate from ammo, but are exposed in the same namespace for automation.
-  game.neuroshima = { AMMO_CALIBERS, AMMO_CALIBER_MAP, GRENADE_TYPES, GRENADE_MAP, TOOLKITS, createToolkits };
+  game.neuroshima = {
+    AMMO_CALIBERS, AMMO_CALIBER_MAP, GRENADE_TYPES, GRENADE_MAP, TOOLKITS, createToolkits,
+    syncToolkitToAllHolders, GEAR_PLACEHOLDERS, createGearPlaceholders
+  };
 
   // Broń i pancerze — dane z tabel są źródłem prawdy dla kompendiów i dla
   // odtworzenia zawartości Zbrojowni: game.neuroshima.createWeapons()
   game.neuroshima.WEAPONS = WEAPONS;
   game.neuroshima.createWeapons = createWeapons;
+  // game.neuroshima.auditWeapons() — read-only drift report (console + return value).
+  // game.neuroshima.repairWeapons() — applies exactly what the audit finds.
+  game.neuroshima.auditWeapons = auditWeapons;
+  game.neuroshima.repairWeapons = repairWeapons;
+
+  // Cross-actor inventory categorisation (Surowce/Pirotechnika/Chemia) — items whose
+  // icon/name looks right but whose `type` keeps them invisible to the matching Zasoby
+  // panel. Same audit-then-repair shape as weapons above.
+  // game.neuroshima.inventoryAudit.auditInventory() / .repairInventory() — everything.
+  // Per-category variants if you only want to touch one bucket.
+  game.neuroshima.inventoryAudit = {
+    auditSurowce, repairSurowce,
+    auditPirotechnika, repairPirotechnika,
+    auditChemia, repairChemia,
+    auditChemiaIcons, repairChemiaIcons,
+    auditItemCompleteness,
+    auditInventory, repairInventory
+  };
+
   game.neuroshima.ARMORS = ARMORS;
   game.neuroshima.createArmors = createArmors;
 
@@ -311,6 +362,8 @@ Hooks.once("ready", () => {
 
   registerWeaponSounds();
   registerEngineControls();
+  registerPochodnia();
+  game.neuroshima.pochodnia = pochodniaApi;
   registerTracerVfx();
   if (game.neuroshima?.vfx) game.neuroshima.vfx.panel = openTracerDebugPanel;
 
@@ -351,8 +404,9 @@ Hooks.once("ready", () => {
 
   if (skillCount !== 18) console.warn(`${MODULE_ID} | Expected 18 skills, got ${skillCount}`);
   if (toolCount !== 22) console.warn(`${MODULE_ID} | Expected 22 tools, got ${toolCount}`);
-  // 14 z TABELI STANÓW + 8 zagrożeń + Upojenie + Skażenie + Zranienie
-  if (conditionCount !== 25) console.warn(`${MODULE_ID} | Expected 25 conditions, got ${conditionCount}`);
+  // 14 z TABELI STANÓW + 9 zagrożeń (incl. "ambush" — Niespodziewany atak, see
+  // conditions.mjs's NEUROSHIMA_ZAGROZENIA) + Upojenie + Skażenie + Zranienie
+  if (conditionCount !== 26) console.warn(`${MODULE_ID} | Expected 26 conditions, got ${conditionCount}`);
 
   // Warn if not using modern rules (needed for exhaustion -2 per level)
   if (globalThis.dnd5e?.settings?.rulesVersion !== "modern") {

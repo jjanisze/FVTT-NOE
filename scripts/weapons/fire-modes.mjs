@@ -16,6 +16,9 @@ const KS_FIRE_MODE = "ks";
 const DS_FIRE_MODE = "ds";
 const MS_FIRE_MODE = "ms";
 const OZ_FIRE_MODE = "oz";
+const DUBLET_ACTIVITY_TYPE = "neuroDublet";
+const DUBLET_FIRE_MODE = "dublet";
+const DUBLET_BULLET_COST = 2; // also the damage-dice multiplier — "podwójne kości" for 2 rounds spent
 const BURST_STATE_FLAG = "lastBurstUse";
 const BURST_TEMPLATE_FLAG = "burstTemplate";
 const SUPPRESSIVE_FIRE_FLAG = "suppressiveFire";
@@ -76,6 +79,7 @@ const _burstSelectionCache = new Map();
 
 export function registerFireModes() {
   registerShortBurstActivityType();
+  registerDubletActivityType();
   registerLongBurstActivityType();
   registerCrushingBurstActivityType();
   registerSuppressiveFireActivityType();
@@ -202,6 +206,88 @@ function registerShortBurstActivityType() {
 
   CONFIG.DND5E.activityTypes[KS_ACTIVITY_TYPE] = {
     documentClass: NeuroShortBurstActivity
+  };
+}
+
+// Dublet (double-barrel shotguns: Obrzyn, Dwururka) — both barrels at once, one
+// attack roll, double damage dice on a hit. Structurally closest to KS (single
+// pre-multiplied damage part, "commit only if the roll actually happened"), but
+// simpler: no forced disadvantage, no once-per-round limit, no same-round reuse
+// perk — just an ammo cost of 2, gated by the "dublet" property (declared on both
+// weapons in weapons-data.mjs, previously decorative only — see PLAN_weapon_properties.md).
+function registerDubletActivityType() {
+  if (CONFIG.DND5E.activityTypes[DUBLET_ACTIVITY_TYPE]) return;
+
+  const BaseAttackActivity = CONFIG.DND5E.activityTypes.attack?.documentClass;
+  if (!BaseAttackActivity) {
+    console.warn("Neuroshima 5e | Could not register Dublet activity: missing base attack activity");
+    return;
+  }
+
+  class NeuroDubletActivity extends BaseAttackActivity {
+    static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+      type: DUBLET_ACTIVITY_TYPE,
+      title: "Dublet",
+      hint: "Neuroshima: oba naboje naraz, jeden Test Ataku, przy trafieniu podwójne kości obrażeń. Koszt: 2 naboje.",
+      img: "modules/neuroshima-2026-overrides/icons/activities/activity_short_burst.svg"
+    }, { inplace: false }));
+
+    async use(usage = {}, dialog = {}, message = {}) {
+      const liveItem = _getLiveItem(this.item);
+      if (!_canUseDublet(liveItem)) return;
+      const nextMessage = foundry.utils.mergeObject({
+        data: {
+          flavor: _getDubletLabel(this.item)
+        }
+      }, foundry.utils.deepClone(message), { inplace: false });
+      return super.use(usage, dialog, nextMessage);
+    }
+
+    async rollAttack(config = {}, dialog = {}, message = {}) {
+      const nextMessage = foundry.utils.mergeObject({
+        data: {
+          flavor: `${_getDubletLabel(this.item)} - ${game.i18n.localize("DND5E.AttackRoll")}`
+        }
+      }, foundry.utils.deepClone(message), { inplace: false });
+
+      return super.rollAttack(config, dialog, nextMessage);
+    }
+
+    async rollDamage(config = {}, dialog = {}, message = {}) {
+      const nextMessage = foundry.utils.mergeObject({
+        data: {
+          flavor: `${_getDubletLabel(this.item)} - ${game.i18n.localize("DND5E.DamageRoll")}`
+        }
+      }, foundry.utils.deepClone(message), { inplace: false });
+
+      return super.rollDamage(config, dialog, nextMessage);
+    }
+
+    async _triggerSubsequentActions(config, results) {
+      const liveItem = _getLiveItem(this.item);
+
+      // Same "commit only if the roll actually happened" discipline as KS —
+      // see the matching comment on NeuroShortBurstActivity._triggerSubsequentActions.
+      const rolls = await this.rollAttack(
+        { event: config.event },
+        {},
+        { data: { "flags.dnd5e.originatingMessage": results.message?.id } }
+      );
+      if (!rolls?.length) return;
+
+      const spent = await spendRounds(liveItem, DUBLET_BULLET_COST);
+      if (!spent) return;
+
+      playBurstSound(liveItem, DUBLET_FIRE_MODE, { caliberId: getMag(liveItem)?.ammoType, token: liveItem.actor });
+    }
+
+    _processDamagePart(damage, rollConfig, rollData, index = 0) {
+      return _buildNoModifierDamageRoll(this.item, this.id, damage, rollConfig, rollData, index);
+    }
+  }
+
+  CONFIG.DND5E.activityTypes[DUBLET_ACTIVITY_TYPE] = {
+    documentClass: NeuroDubletActivity
   };
 }
 
@@ -815,6 +901,7 @@ async function syncWeaponFireModes(item) {
   try {
     await syncBaseAttackActivity(item);
     await syncShortBurstActivity(item);
+    await syncDubletActivity(item);
     await syncLongBurstActivity(item);
     await syncCrushingBurstActivity(item);
     await syncSuppressiveFireActivity(item);
@@ -872,6 +959,35 @@ async function syncShortBurstActivity(item) {
 
   if (!managed) {
     await item.createActivity(KS_ACTIVITY_TYPE, data, { renderSheet: false });
+    return;
+  }
+
+  await item.updateActivity(managed.id, {
+    name: data.name,
+    activation: data.activation,
+    attack: data.attack,
+    damage: data.damage,
+    description: data.description,
+    range: data.range,
+    target: data.target,
+    flags: data.flags
+  });
+}
+
+async function syncDubletActivity(item) {
+  const managed = _findManagedActivity(item, DUBLET_FIRE_MODE);
+  const hasMode = _hasProperty(item, "dublet");
+
+  if (!hasMode) {
+    if (managed) await item.deleteActivity(managed.id);
+    return;
+  }
+
+  const data = _buildDubletActivityData(item);
+  if (!data) return;
+
+  if (!managed) {
+    await item.createActivity(DUBLET_ACTIVITY_TYPE, data, { renderSheet: false });
     return;
   }
 
@@ -1011,6 +1127,31 @@ function _buildShortBurstActivityData(item) {
     ...(source.flags[MODULE_ID] ?? {}),
     managedActivity: true,
     fireMode: KS_FIRE_MODE
+  };
+
+  return source;
+}
+
+function _buildDubletActivityData(item) {
+  const baseAttack = _findReferenceAttackActivity(item);
+  if (!baseAttack) return null;
+
+  const source = foundry.utils.deepClone(baseAttack.toObject());
+  delete source._id;
+  delete source._stats;
+
+  source.type = DUBLET_ACTIVITY_TYPE;
+  source.name = "Dublet";
+  source.description ??= {};
+  source.description.chatFlavor = _getDubletSummary();
+  source.damage ??= {};
+  source.damage.includeBase = false;
+  source.damage.parts = [_buildBurstDamagePart(item, DUBLET_BULLET_COST)];
+  source.flags ??= {};
+  source.flags[MODULE_ID] = {
+    ...(source.flags[MODULE_ID] ?? {}),
+    managedActivity: true,
+    fireMode: DUBLET_FIRE_MODE
   };
 
   return source;
@@ -1200,7 +1341,39 @@ function _shouldManageItem(item) {
     || !!_findManagedActivity(item, KS_FIRE_MODE)
     || !!_findManagedActivity(item, DS_FIRE_MODE)
     || !!_findManagedActivity(item, MS_FIRE_MODE)
-    || !!_findManagedActivity(item, OZ_FIRE_MODE);
+    || !!_findManagedActivity(item, OZ_FIRE_MODE)
+    || !!_findManagedActivity(item, DUBLET_FIRE_MODE);
+}
+
+function _getDubletLabel(item) {
+  return `${item?.name ?? "Broń"} - Dublet (${DUBLET_BULLET_COST} naboje)`;
+}
+
+function _getDubletSummary() {
+  return `Oba naboje naraz. Koszt: ${DUBLET_BULLET_COST} naboje. Jeden Test Ataku; przy trafieniu podwójne kości obrażeń.`;
+}
+
+// Dedicated check (not _canUseBurstMode) — Dublet has no once-per-round limit, it's
+// just gated by ammo/damage/jam like a normal shot, same shape as _canUseSuppressiveFire.
+function _canUseDublet(item) {
+  if (!item) return false;
+  if (isDamaged(item)) {
+    ui.notifications.warn(`${item.name}: broń jest uszkodzona i wymaga naprawy.`);
+    return false;
+  }
+  if (isJammed(item)) {
+    ui.notifications.warn(`${item.name}: broń jest zacięta.`);
+    playWeaponSound(WeaponSound.EMPTY_CLICK);
+    return false;
+  }
+
+  const mag = getMag(item);
+  if (mag && mag.current < DUBLET_BULLET_COST) {
+    ui.notifications.warn(`${item.name}: potrzeba co najmniej ${DUBLET_BULLET_COST} naboi.`);
+    return false;
+  }
+
+  return true;
 }
 
 function _hasProperty(item, property) {

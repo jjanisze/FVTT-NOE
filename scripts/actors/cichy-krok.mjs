@@ -41,6 +41,23 @@
  * Utrudnienia posiadaczowi zdolności. Hak `dnd5e.postBuildSkillRollConfig`
  * odpala się wyłącznie przez okno dialogowe rzutu, więc anulowanie zrobione
  * tutaj przeciekłoby przy każdym rzucie z pominięciem dialogu.
+ *
+ * ## Bugfix (2026-08-28): race na `createEmbeddedDocuments`
+ * `syncCichyKrokTerrain` wisi na trzech hookach (`createItem`/`deleteItem`/
+ * `dnd5e.advancementManagerComplete`). Awans o poziom, który przyznaje Cichy krok
+ * razem z czymkolwiek innym (np. Profesję — złapane live na Victorze awansującym
+ * na Partnera), tworzy oba itemy w jednym `createEmbeddedDocuments`, więc `createItem`
+ * odpala się kilka razy z rzędu, a `advancementManagerComplete` dokłada jeszcze jedno
+ * wywołanie — wszystkie asynchroniczne, żadne na nic nie czeka. Efekt: dwa-trzy
+ * równoległe wywołania widzą ten sam stan „efektu jeszcze nie ma" (klasyczny
+ * check-then-act), więc więcej niż jedno próbuje stworzyć `ActiveEffect` o tym samym
+ * stałym `_id` — pierwsze wygrywa, reszta rzuca nieobsłużony wyjątek
+ * (`The _id [...] already exists`). Dane nigdy realnie nie psuje się (Foundry
+ * odrzuca duplikat po ID), ale konsola i tak wygląda jak awaria.
+ *
+ * Ten sam kształt błędu (i to samo rozwiązanie) już udokumentowany w
+ * `ability-hotbar.mjs` — debounce + serializacja per aktor, żeby seria zdarzeń z
+ * jednego awansu skolapsowała się do jednego realnego zapisu.
  */
 import { registerStealthExemption } from "./armor-rules.mjs";
 
@@ -63,8 +80,13 @@ function _isWearingHeavyArmor(actor) {
 /**
  * Klauzula "trudny teren cię nie spowalnia" — dopina/odpina statyczny Active
  * Effect w zależności od tego, czy aktor aktualnie posiada zdolność.
+ *
+ * Not safe to call concurrently on the same actor without the serialisation below —
+ * see the bugfix note in the file header. `keepId` means a duplicate create can only
+ * ever fail loudly, never actually duplicate the effect, but the try/catch avoids an
+ * unhandled promise rejection (and the scary error toast) on the losing call(s).
  */
-async function syncCichyKrokTerrain(actor) {
+async function _syncCichyKrokTerrain(actor) {
   if (!actor?.effects) return;
   const existing = actor.effects.get(TERRAIN_EFFECT_ID)
     ?? actor.effects.find(e => e.getFlag(MODULE_ID, TERRAIN_EFFECT_FLAG));
@@ -77,18 +99,51 @@ async function syncCichyKrokTerrain(actor) {
   if (existing) return; // stan binarny, bez poziomów — nic do zsynchronizowania
 
   const featureItem = actor.items.find(i => i.getFlag(MODULE_ID, "abilityId") === ABILITY_ID);
-  await actor.createEmbeddedDocuments("ActiveEffect", [{
-    _id: TERRAIN_EFFECT_ID,
-    name: "Cichy krok",
-    img: featureItem?.img || "icons/svg/upgrade.svg",
-    changes: [{
-      key: "system.attributes.movement.ignoredDifficultTerrain",
-      mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-      value: "all",
-      priority: 20
-    }],
-    flags: { [MODULE_ID]: { [TERRAIN_EFFECT_FLAG]: true } }
-  }], { keepId: true });
+  try {
+    await actor.createEmbeddedDocuments("ActiveEffect", [{
+      _id: TERRAIN_EFFECT_ID,
+      name: "Cichy krok",
+      img: featureItem?.img || "icons/svg/upgrade.svg",
+      changes: [{
+        key: "system.attributes.movement.ignoredDifficultTerrain",
+        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+        value: "all",
+        priority: 20
+      }],
+      flags: { [MODULE_ID]: { [TERRAIN_EFFECT_FLAG]: true } }
+    }], { keepId: true });
+  } catch (err) {
+    // A sibling resync already won the race and created it — not an error from here.
+    if (actor.effects.get(TERRAIN_EFFECT_ID)) return;
+    throw err;
+  }
+}
+
+/**
+ * Debounced, serialised per actor — collapses the burst of `createItem` calls a
+ * single level-up fires (one per granted item, all unawaited) plus the trailing
+ * `dnd5e.advancementManagerComplete` into one real sync. Same shape as
+ * `ability-hotbar.mjs`'s `queueHotbarSync`/`scheduleHotbarSync`.
+ */
+const _syncChain = new Map();   // actorId -> tail promise
+const _syncTimer = new Map();   // actorId -> debounce timeout
+
+function queueCichyKrokSync(actor) {
+  if (!actor?.id) return;
+  const prev = _syncChain.get(actor.id) ?? Promise.resolve();
+  const next = prev.catch(() => {}).then(() => _syncCichyKrokTerrain(actor));
+  _syncChain.set(actor.id, next);
+  next.finally(() => { if (_syncChain.get(actor.id) === next) _syncChain.delete(actor.id); });
+  return next;
+}
+
+function syncCichyKrokTerrain(actor) {
+  if (!actor?.id) return;
+  clearTimeout(_syncTimer.get(actor.id));
+  _syncTimer.set(actor.id, setTimeout(() => {
+    _syncTimer.delete(actor.id);
+    queueCichyKrokSync(actor);
+  }, 150));
 }
 
 /**
@@ -128,12 +183,12 @@ export function registerCichyKrok() {
 
   // Backfill, jak przy Zranieniu/Chorobach/Upojeniu: postacie, które już mają
   // zdolność (np. Alan, level 3 Zwiadowca sprzed tego pliku), dostają efekt
-  // od razu, bez czekania na kolejny createItem/level-up.
-  Hooks.once("ready", async () => {
+  // od razu, bez czekania na kolejny createItem/level-up. `syncCichyKrokTerrain`
+  // tylko planuje (debounce per aktor) — różne aktory nie dzielą żadnego stanu,
+  // więc nie ma potrzeby serializować tej pętli.
+  Hooks.once("ready", () => {
     if (!game.user.isGM) return;
-    for (const actor of game.actors) {
-      await syncCichyKrokTerrain(actor);
-    }
+    for (const actor of game.actors) syncCichyKrokTerrain(actor);
   });
 
   console.log(`${MODULE_ID} | Cichy krok registered`);

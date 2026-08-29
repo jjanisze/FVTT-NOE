@@ -743,7 +743,11 @@ damage-application .neuro-reduction-buttons {
 
 .item.neuro-has-addons .item-name::after {
   content: "\f0ad"; /* fa-wrench */
-  font-family: "Font Awesome 6 Pro", "Font Awesome 6 Free";
+  /* This Foundry install bundles FA7/FA5 Pro, not "6" — verified via document.fonts;
+     "6" was never a real family here and silently tofu'd. Keep the fallback chain wide
+     so a future Foundry version bump (which may add/replace FA versions) degrades
+     gracefully instead of reintroducing the same silent failure. */
+  font-family: "Font Awesome 7 Pro", "Font Awesome 6 Pro", "Font Awesome 5 Pro", "FontAwesome";
   font-weight: 900;
   font-size: 8px;
   position: absolute;
@@ -760,6 +764,123 @@ damage-application .neuro-reduction-buttons {
   line-height: 1;
   pointer-events: none;
   z-index: 1;
+}
+
+/* ============================================= */
+/* Broń wyszczerbiona / zacięta / uszkodzona     */
+/* Ten sam mechanizm co .neuro-has-addons wyżej — */
+/* umyślnie PO nim w kaskadzie, żeby stan "trzeba */
+/* naprawić" wygrywał wizualnie ze złotym blaskiem */
+/* ulepszeń, jeśli oba warunki zajdą naraz. Celowo */
+/* w odcieniach CZERWIENI, nie złota — inaczej    */
+/* zlewa się wizualnie z .neuro-has-addons.       */
+/*                                                 */
+/* Dwa poziomy nasilenia, wspólne dla broni białej */
+/* i palnej: "bad" (1 stopień wyszczerbienia /    */
+/* zacięcie — jaśniejsza czerwień) i "worse" (2+  */
+/* stopnie / trwałe uszkodzenie — głęboka czerwień, */
+/* ta sama co "bad" tylko ciemniejsza, żeby oba    */
+/* poziomy czytały się jako jedna skala, nie dwa   */
+/* niepowiązane stany).                           */
+/* ============================================= */
+
+/* Wspólny "plasterek" plakietki w rogu ikony — treść/kolor nadpisywane per stan. */
+.item.neuro-degraded .item-name,
+.item.neuro-weapon-jammed .item-name,
+.item.neuro-weapon-damaged .item-name {
+  position: relative;
+}
+
+.item.neuro-degraded .item-name::after,
+.item.neuro-weapon-jammed .item-name::after,
+.item.neuro-weapon-damaged .item-name::after {
+  /* See the matching comment on .neuro-has-addons above — "6" isn't a real family here. */
+  font-family: "Font Awesome 7 Pro", "Font Awesome 6 Pro", "Font Awesome 5 Pro", "FontAwesome";
+  font-weight: 900;
+  font-size: 8px;
+  position: absolute;
+  top: 2px;
+  left: 26px;
+  background: rgba(10, 8, 5, 0.85);
+  border-radius: 50%;
+  width: 11px;
+  height: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- "Bad" tier: broń biała lekko wyszczerbiona (1 stopień) ------------------- */
+.item.neuro-degraded-1 > .item-row {
+  background: linear-gradient(90deg, rgba(150, 35, 25, 0.20) 0%, rgba(75, 15, 10, 0.10) 100%) !important;
+  border-left: 2px solid rgba(190, 60, 45, 0.55);
+}
+
+.item.neuro-degraded-1 .item-name .item-image {
+  outline: 1.5px solid rgba(190, 60, 45, 0.6);
+  box-shadow: 0 0 4px rgba(190, 60, 45, 0.4);
+  border-radius: 3px;
+  filter: saturate(0.9);
+}
+
+/* --- "Worse" tier: broń biała mocno wyszczerbiona (2+ stopnie) — dzieli wygląd --- */
+/* z bronią palną trwale uszkodzoną: obie oznaczają "nie do użytku bez prawdziwej */
+/* naprawy", więc czytają się identycznie niezależnie od rodzaju broni. */
+.item.neuro-degraded-2 > .item-row,
+.item.neuro-weapon-damaged > .item-row {
+  background: linear-gradient(90deg, rgba(170, 20, 15, 0.28) 0%, rgba(85, 8, 6, 0.15) 100%) !important;
+  border-left: 2px solid rgba(215, 45, 35, 0.7);
+}
+
+.item.neuro-degraded-2 .item-name .item-image,
+.item.neuro-weapon-damaged .item-name .item-image {
+  outline: 1.5px solid rgba(215, 45, 35, 0.85);
+  box-shadow: 0 0 6px rgba(215, 45, 35, 0.6);
+  border-radius: 3px;
+  filter: saturate(0.6) brightness(0.9);
+}
+
+/* Ikona wyszczerbienia — ten sam trójkąt na obu poziomach broni białej i na trwale */
+/* uszkodzonej broni palnej: to "strukturalne, wymaga prawdziwej naprawy", w */
+/* przeciwieństwie do zacięcia poniżej (fa-ban, tymczasowe). Kolor niesie nasilenie. */
+.item.neuro-degraded-1 .item-name::after,
+.item.neuro-degraded-2 .item-name::after,
+.item.neuro-weapon-damaged .item-name::after {
+  content: "\f071"; /* fa-triangle-exclamation */
+}
+
+.item.neuro-degraded-1 .item-name::after { color: #c8493a; }
+.item.neuro-degraded-2 .item-name::after,
+.item.neuro-weapon-damaged .item-name::after { color: #e0271a; }
+
+/* --- Broń palna zacięta ("bad") — lżejszy, tymczasowy stan (jeden test od --- */
+/* odblokowania), więc dzieli paletę z "bad" wyszczerbienia powyżej, ale pulsuje */
+/* zamiast stać statycznie jak "trzeba naprawić" — animacja zaprasza do akcji TERAZ, */
+/* a jej brak na "worse"/uszkodzonej sygnalizuje "to poczeka do rusznikarza". */
+.item.neuro-weapon-jammed > .item-row {
+  background: linear-gradient(90deg, rgba(150, 35, 25, 0.20) 0%, rgba(75, 15, 10, 0.10) 100%) !important;
+  border-left: 2px solid rgba(190, 60, 45, 0.55);
+}
+
+.item.neuro-weapon-jammed .item-name .item-image {
+  outline: 1.5px solid rgba(190, 60, 45, 0.6);
+  box-shadow: 0 0 5px rgba(190, 60, 45, 0.4);
+  border-radius: 3px;
+  animation: neuro-jam-pulse 1.6s ease-in-out infinite;
+}
+
+.item.neuro-weapon-jammed .item-name::after {
+  content: "\f05e"; /* fa-ban — "zablokowana teraz", odróżnia się kształtem od trójkąta uszkodzenia */
+  color: #c8493a;
+  animation: neuro-jam-pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes neuro-jam-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 
 /* ============================================= */
@@ -1678,6 +1799,79 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
   opacity: 0.75;
 }
 
+/* ---- Pochodnia (zapalanie / gaszenie / wypalenie) ---- */
+
+.neuro-pochodnia-card {
+  padding: 6px 8px;
+  border-left: 4px solid #d35400;
+  border-radius: 0 4px 4px 0;
+  background: rgba(211, 84, 0, 0.08);
+}
+
+.neuro-pochodnia-head {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+  color: #d35400;
+}
+
+.neuro-pochodnia-card p { margin: 0; font-size: 12px; line-height: 1.4; }
+.neuro-pochodnia-card .bad { color: #c0392b; font-weight: bold; }
+
+/* ---- Zdolności klasowe "kości raz na rundę" (Wściekły cios i pokrewne) ---- */
+
+.neuro-resource-dice-card {
+  padding: 6px 8px;
+  border-left: 4px solid #c0392b;
+  border-radius: 0 4px 4px 0;
+  background: rgba(192, 57, 43, 0.08);
+}
+
+.neuro-resource-dice-head {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+  color: #c0392b;
+}
+
+.neuro-resource-dice-card p { margin: 0 0 5px 0; font-size: 12px; line-height: 1.4; }
+
+.neuro-resource-dice-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.neuro-resource-dice-type {
+  font-size: 11px;
+  padding: 1px 4px;
+}
+
+.neuro-resource-dice-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.neuro-resource-dice-buttons button {
+  padding: 2px 8px;
+  border: 1px solid rgba(192, 57, 43, 0.45);
+  border-radius: 3px;
+  background: rgba(192, 57, 43, 0.14);
+  color: #c0392b;
+  font-size: 11px;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.neuro-resource-dice-buttons button:hover:not(:disabled) { background: rgba(192, 57, 43, 0.28); }
+.neuro-resource-dice-buttons button:disabled { opacity: 0.5; cursor: default; }
+
 /* ---- Zdolności: co system egzekwuje, a czego nie (Sztuczki, Pochodzenia) ---- */
 
 .neuro-sztuczka-cover,
@@ -2182,6 +2376,58 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
   padding: 4px 6px;
 }
 
+
+/* ============================================================================
+   OKNO DŁUGIEGO ODPOCZYNKU (config/rest.mjs)
+   ============================================================================ */
+
+/* Notatka o zakłóceniu Długiego odpoczynku — stylizowana na wzór natywnego
+   `.note.info` z dnd5e (`apps.less`), ale samodzielna klasa zamiast tamtej:
+   `.note` u dnd5e wymaga bycia bezpośrednim dzieckiem `section`/`fieldset`
+   wewnątrz `.window-content`, a te dwie notatki są wstrzykiwane luźno na
+   początku okna. `--note-color` przełącza wariant info/warn tak samo jak
+   tam — `.warn` w kolorze `--dnd5e-color-note-warn` (bursztyn), reszta jak
+   `--dnd5e-color-note-info` (błękit). */
+.neuro-rest-note {
+  --note-color: #5c87b9;
+  position: relative;
+  margin: 0 0 8px;
+  padding: 8px 10px 8px 14px;
+  border: 1px solid var(--note-color);
+  border-radius: 4px;
+  background: color-mix(in oklab, var(--note-color), transparent 82%);
+  color: var(--color-text-primary, #ccc);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.neuro-rest-note::before {
+  content: "\f129";
+  position: absolute;
+  top: calc(50% - 7px);
+  left: -7px;
+  width: 14px;
+  height: 14px;
+  border-radius: 100%;
+  background: var(--note-color);
+  color: #f2eee2;
+  font-family: var(--font-awesome, "Font Awesome 6 Free");
+  font-weight: 900;
+  font-size: 10px;
+  line-height: 14px;
+  text-align: center;
+}
+
+.neuro-rest-note.warn {
+  --note-color: #9b6903;
+}
+
+.neuro-rest-note.warn::before {
+  content: "!";
+  font-family: inherit;
+  font-weight: bold;
+}
+
 .neuro-paliwo.is-kolumna .neuro-paliwo-przebieg {
   flex: 1 0 100%;
   white-space: normal;
@@ -2577,3 +2823,54 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
 }
 
 .neuro-zle { color: #e05858; }
+
+/* -------------------------------------------- */
+/*  Ekwipunek — legenda + segmentowany pasek udźwigu (2026-08-29) */
+/* -------------------------------------------- */
+
+.neuro-encumbrance-overlay { z-index: 1; }
+.neuro-encumbrance-seg:first-child { border-top-left-radius: inherit; border-bottom-left-radius: inherit; }
+
+.neuro-ekwipunek-legend {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  margin: 4px 0 8px;
+  padding: 5px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 3px;
+  background: rgba(0, 0, 0, 0.15);
+  font-size: var(--font-size-11, 11px);
+}
+
+.neuro-legend-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+
+.neuro-legend-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.neuro-legend-chip i {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  flex: 0 0 auto;
+}
+
+.neuro-legend-sections {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2px 12px;
+  margin-top: 3px;
+  padding-top: 3px;
+  border-top: 1px dotted rgba(255, 255, 255, 0.1);
+  opacity: 0.75;
+}

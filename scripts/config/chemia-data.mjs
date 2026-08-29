@@ -36,6 +36,15 @@
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
+/**
+ * Custom art (2026-08-29 icon sweep). Most of the catalog was shipping on
+ * generic Foundry core placeholders (`icons/svg/pill.svg` and friends) despite
+ * dedicated commissioned icons already sitting unused in these directories —
+ * `def.img` below just never got pointed at them. See IMPLEMENTATION.md.
+ */
+const DRUGS_ICON_DIR = `modules/${MODULE_ID}/icons/items/drugs`;
+const CHEMIA_LOOT_ICON_DIR = `modules/${MODULE_ID}/icons/items/loot`;
+
 /** Consumable type key registered in `config/terminology.mjs`. */
 export const CHEMIA_TYPE = "lekarstwo";
 
@@ -130,6 +139,7 @@ export const CHEMIA = Object.freeze({
     subtype: "przewlekla",
     price: 1, availability: 30, doses: 1, weight: 0.05,
     treats: ["hemofilia"],
+    img: `${DRUGS_ICON_DIR}/desmopresyna.svg`,
     description: "Zastrzyk podnoszący krzepliwość krwi. Wstrzyknięcie w trakcie krwawienia "
       + "natychmiast je powstrzymuje."
   },
@@ -138,6 +148,7 @@ export const CHEMIA = Object.freeze({
     subtype: "przewlekla",
     price: 1, availability: 20, doses: 1, weight: 0.2,
     treats: ["hemofilia"],
+    img: `${DRUGS_ICON_DIR}/iv_bag_spare.svg`,
     description: "Zamiennik Desmopresyny — trudniejszy w przechowywaniu, równie skuteczny."
   },
   aspirynaK: {
@@ -145,6 +156,7 @@ export const CHEMIA = Object.freeze({
     subtype: "przewlekla",
     price: 2, availability: 80, doses: 1, weight: 0.02,
     treats: ["niewydolnoscKrazenia"],
+    img: `${DRUGS_ICON_DIR}/aspiryna_k.svg`,
     description: "Najpopularniejszy lek na rynku. Rozrzedza krew i odciąża zmęczone serce."
   },
   dracophen: {
@@ -152,6 +164,7 @@ export const CHEMIA = Object.freeze({
     subtype: "przewlekla",
     price: 2, availability: 60, doses: 1, weight: 0.02,
     treats: ["syndromDraculi"],
+    img: `${DRUGS_ICON_DIR}/dracophen.svg`,
     description: "Stabilizuje reakcję skóry i siatkówki na światło."
   },
   reminex: {
@@ -159,6 +172,7 @@ export const CHEMIA = Object.freeze({
     subtype: "przewlekla",
     price: 3, availability: 30, doses: 1, weight: 0.02,
     treats: ["syndromThurmana"],
+    img: `${DRUGS_ICON_DIR}/reminex.svg`,
     description: "Nootropik spowalniający degradację funkcji poznawczych."
   },
   relanium: {
@@ -166,6 +180,7 @@ export const CHEMIA = Object.freeze({
     subtype: "przewlekla",
     price: 2, availability: 30, doses: 1, weight: 0.02,
     treats: ["szalenstwoBostonskie"],
+    img: `${DRUGS_ICON_DIR}/relanium.svg`,
     description: "Silny środek uspokajający. Trzyma furię na smyczy — dopóki bierzesz."
   },
   wapniak: {
@@ -173,6 +188,7 @@ export const CHEMIA = Object.freeze({
     subtype: "przewlekla",
     price: 1, availability: 30, doses: 1, weight: 0.02,
     treats: ["osteoporoza"],
+    img: `${DRUGS_ICON_DIR}/wapniak.svg`,
     description: "Kredowa tabletka o smaku tynku. Utrzymuje kości w jednym kawałku."
   },
   psychotropy: {
@@ -180,6 +196,7 @@ export const CHEMIA = Object.freeze({
     subtype: "przewlekla",
     price: 3, availability: 30, doses: 1, weight: 0.02,
     treats: ["paranoja"],
+    img: `${DRUGS_ICON_DIR}/psychotropy.svg`,
     description: "Tłumi natrętne myśli. Nie leczy — po prostu ścisza."
   },
   actinix: {
@@ -187,6 +204,7 @@ export const CHEMIA = Object.freeze({
     subtype: "przewlekla",
     price: 2, availability: 50, doses: 1, weight: 0.02,
     treats: ["zaburzeniaBledinka"],
+    img: `${DRUGS_ICON_DIR}/actinix.svg`,
     description: "Stabilizuje błędnik. Bez niego świat nie chce stać w miejscu."
   },
 
@@ -200,7 +218,7 @@ export const CHEMIA = Object.freeze({
     subtype: "popromienna",
     price: 30, availability: 20, doses: 1, weight: 0.3,
     treats: ["popromienna"],
-    img: "icons/svg/radiation.svg",
+    img: `${DRUGS_ICON_DIR}/radoff.svg`,
     description: "Kuracja odkażająca. Usuwa wszystkie skutki napromieniowania (w tym Wyczerpanie "
       + "ze Skażenia). Leczy chorobę popromienną, przyjmowany 10 dni z rzędu. "
       + "RO Kondycja ST 15 lub wymioty i biegunka przez 1 minutę (bez akcji).",
@@ -226,7 +244,7 @@ export const CHEMIA = Object.freeze({
     subtype: "popromienna",
     price: 20, availability: 40, doses: 1, weight: 0.05,
     treats: ["popromienna"],
-    img: "icons/svg/radiation.svg",
+    img: `${DRUGS_ICON_DIR}/radmov.svg`,
     description: "Nie leczy, ale daje Ułatwienie w Rzutach Obronnych na Kondycję przeciw "
       + "skażeniu radioaktywnemu przez 1 godzinę.",
     mech: {
@@ -247,6 +265,7 @@ export const CHEMIA = Object.freeze({
     subtype: "antybiotyk",
     price: 40, availability: 40, doses: 10, weight: 0.05,
     treats: ["zakazna", "szczurzaGoraczka"],
+    img: `${DRUGS_ICON_DIR}/antybiotyk.svg`,
     description: "Pigułka lub zawiesina, której regularne stosowanie pozwala wyleczyć cię "
       + "z nabytej choroby. Kuracja trwa co najmniej 10 dni.",
     mech: {
@@ -265,7 +284,7 @@ export const CHEMIA = Object.freeze({
     subtype: "bojowy",
     price: 100, availability: 10, doses: 1, weight: 0.1,
     treats: [],
-    img: "icons/svg/blood.svg",
+    img: `${DRUGS_ICON_DIR}/anestix.svg`,
     description: "Po 1 rundzie: odporność na wszystkie obrażenia przez 1 minutę. "
       + "Po upływie działania: RO Kondycja ST 20 lub +1 Stopień Zranienia; "
       + "jeśli wynik jest o 5 lub więcej niższy od ST — kolejny Stopień Zranienia.",
@@ -292,7 +311,7 @@ export const CHEMIA = Object.freeze({
     subtype: "bojowy",
     price: 70, availability: 10, doses: 1, weight: 0.1,
     treats: [],
-    img: "icons/svg/heal.svg",
+    img: `${DRUGS_ICON_DIR}/ar23.svg`,
     description: "Akcja: przywraca 4k6+4 PW. Efekt uboczny: RO Mądrość ST 15 lub Utrudnienie "
       + "do testów Perswazji i Oszustwa do Długiego Odpoczynku.",
     mech: {
@@ -316,7 +335,7 @@ export const CHEMIA = Object.freeze({
     subtype: "bojowy",
     price: 100, availability: 5, doses: 1, weight: 0.1,
     treats: [],
-    img: "icons/svg/blood.svg",
+    img: `${DRUGS_ICON_DIR}/ar35_beta.svg`,
     description: "Akcja: przywraca 8k6+8 PW; odporność na wszystkie obrażenia przez 1 minutę; "
       + "szał bojowy — musisz atakować co turę (brak wrogów → sojusznicy). RO Mądrość ST 20 "
       + "na końcu tury, by zakończyć szał. Po szale: Obezwładniony przez 1 minutę. "
@@ -360,7 +379,7 @@ export const CHEMIA = Object.freeze({
     subtype: "bojowy",
     price: 50, availability: 20, doses: 1, weight: 0.1,
     treats: [],
-    img: "icons/svg/regen.svg",
+    img: `${DRUGS_ICON_DIR}/deadline.svg`,
     description: "Zastrzyk: regeneracja 1 PW na turę przez 10 minut. Potem RO Kondycja ST 15 — "
       + "przy porażce PW spadają do 1 i otrzymujesz 1 poziom Wyczerpania.",
     mech: {
@@ -387,7 +406,7 @@ export const CHEMIA = Object.freeze({
     subtype: "leczniczy",
     price: 40, availability: 40, doses: 5, weight: 0.15,
     treats: [],
-    img: "icons/svg/poison.svg",
+    img: `${DRUGS_ICON_DIR}/detoks.svg`,
     description: "Usuwa trucizny z organizmu. RO Kondycja ST 10 lub bolesne wydalanie "
       + "przez 1 minutę (bez możliwości podejmowania akcji).",
     mech: {
@@ -411,7 +430,7 @@ export const CHEMIA = Object.freeze({
     subtype: "leczniczy",
     price: 20, availability: 40, doses: 1, weight: 0.25,
     treats: [],
-    img: "icons/svg/heal.svg",
+    img: `${DRUGS_ICON_DIR}/medpak.svg`,
     description: "Akcja: przywraca 2k6+2 PW. Maksymalnie 2 sztuki dziennie.",
     mech: {
       activation: "action",
@@ -430,7 +449,7 @@ export const CHEMIA = Object.freeze({
     subtype: "leczniczy",
     price: 40, availability: 30, doses: 1, weight: 0.4,
     treats: [],
-    img: "icons/svg/aura.svg",
+    img: `${DRUGS_ICON_DIR}/neuro_cola.svg`,
     description: "Przedwojenna puszka. Ułatwienie do jednego wybranego Testu wykonywanego "
       + "w ciągu 1 godziny.",
     mech: {
@@ -452,7 +471,7 @@ export const CHEMIA = Object.freeze({
     subtype: "leczniczy",
     price: 10, availability: 60, doses: 10, weight: 0.05,
     treats: [],
-    img: "icons/svg/pill.svg",
+    img: `${DRUGS_ICON_DIR}/painkiller.svg`,
     description: "1 tabletka przywraca 1 PW. Można wziąć garść: każda tabletka daje −1 "
       + "do testów Mądrości, a gdy kara przekroczy Mądrość — tracisz przytomność. "
       + "Efekty kończą się po Krótkim Odpoczynku. Można podać nieprzytomnej osobie "
@@ -476,7 +495,7 @@ export const CHEMIA = Object.freeze({
     subtype: "leczniczy",
     price: 40, availability: 40, doses: 1, weight: 0.1,
     treats: [],
-    img: "icons/svg/aura.svg",
+    img: `${DRUGS_ICON_DIR}/taurus.svg`,
     description: "Usuwa 1 poziom stanu Wyczerpanie.",
     mech: {
       activation: "action",
@@ -489,7 +508,7 @@ export const CHEMIA = Object.freeze({
     subtype: "leczniczy",
     price: 30, availability: 40, doses: 1, weight: 0.2,
     treats: [],
-    img: "icons/svg/heal.svg",
+    img: `${DRUGS_ICON_DIR}/trybiotyl.svg`,
     description: "Maść. Posmaruj ranę, a po Krótkim Odpoczynku Stopień Zranienia spada o 1.",
     mech: {
       activation: "action",
@@ -507,7 +526,7 @@ export const CHEMIA = Object.freeze({
     subtype: "leczniczy",
     price: 20, availability: 60, doses: 10, weight: 0.05,
     treats: [],
-    img: "icons/svg/pill.svg",
+    img: `${DRUGS_ICON_DIR}/wd_tabs.svg`,
     description: "1 tabletka uzdatnia 1 litr brudnej wody.",
     mech: {
       activation: "action",
@@ -525,7 +544,7 @@ export const CHEMIA = Object.freeze({
     subtype: "narkotyk",
     price: 65, availability: 20, doses: 1, weight: 0.02,
     treats: [],
-    img: "icons/svg/stoned.svg",
+    img: `${DRUGS_ICON_DIR}/tornado.svg`,
     description: "Narkotyczny trans: wizje świata sprzed wojny (5 IX 2020). Czas trwania "
       + "nieobliczalny. Regularne zażywanie prowadzi do „bluesa\" — stanu odrętwienia "
       + "i obojętności, aż po utratę woli życia. W wielu miastach zakazane.",
@@ -549,7 +568,7 @@ export const CHEMIA = Object.freeze({
     subtype: "narkotyk",
     price: 50, availability: 20, doses: 1, weight: 0.02,
     treats: [],
-    img: "icons/svg/stoned.svg",
+    img: `${DRUGS_ICON_DIR}/neodrugs.svg`,
     description: "Syntetyczne narkotyki. Szczegółowe efekty zależą od odmiany.",
     mech: {
       activation: "action",
@@ -562,7 +581,7 @@ export const CHEMIA = Object.freeze({
     subtype: "narkotyk",
     price: 10, availability: 40, doses: 1, weight: 0.02,
     treats: [],
-    img: "icons/svg/stoned.svg",
+    img: `${DRUGS_ICON_DIR}/narkotyki_latwe.svg`,
     description: "Lokalne, improwizowane narkotyki. Efekty według uznania MG.",
     mech: {
       activation: "action",
@@ -575,7 +594,7 @@ export const CHEMIA = Object.freeze({
     subtype: "narkotyk",
     price: 60, availability: 10, doses: 1, weight: 0.02,
     treats: [],
-    img: "icons/svg/stoned.svg",
+    img: `${DRUGS_ICON_DIR}/narkotyki_przedwojenne.svg`,
     description: "Rzadkie, przedwojenne substancje psychoaktywne. Efekty według uznania MG.",
     mech: {
       activation: "action",
@@ -588,7 +607,7 @@ export const CHEMIA = Object.freeze({
     subtype: "uzywka",
     price: 5, availability: 70, doses: 5, weight: 1,
     treats: [],
-    img: "icons/svg/tankard.svg",
+    img: `${DRUGS_ICON_DIR}/alkohol_tani.svg`,
     description: "Bimber, denaturat, cokolwiek pali w gardle. Jedna porcja to 100 ml mocnego "
       + "lub 500 ml słabego trunku. Możliwość ostrego ciągu.",
     mech: {
@@ -604,7 +623,7 @@ export const CHEMIA = Object.freeze({
     subtype: "uzywka",
     price: 10, availability: 30, doses: 5, weight: 1,
     treats: [],
-    img: "icons/svg/tankard.svg",
+    img: `${DRUGS_ICON_DIR}/alkohol_markowy.svg`,
     description: "Używka wyższej jakości. Jedna porcja to 100 ml mocnego lub 500 ml słabego trunku.",
     mech: {
       activation: "action",
@@ -617,7 +636,7 @@ export const CHEMIA = Object.freeze({
     subtype: "uzywka",
     price: 5, availability: 30, doses: 1, weight: 0.02,
     treats: [],
-    img: "icons/svg/aura.svg",
+    img: `${DRUGS_ICON_DIR}/cygaro.svg`,
     description: "Używka. Pali się długo i pachnie lepiej niż wszystko dookoła.",
     mech: { activation: "action", manual: "Bez efektów mechanicznych — czysta fabuła." }
   },
@@ -627,7 +646,7 @@ export const CHEMIA = Object.freeze({
     subtype: "uzywka",
     price: 1, availability: 50, doses: 1, weight: 0.01,
     treats: [],
-    img: "icons/svg/aura.svg",
+    img: `${DRUGS_ICON_DIR}/papieros.svg`,
     description: "Używka. Waluta, rozmowa i pretekst do przerwy w jednym.",
     mech: { activation: "action", manual: "Bez efektów mechanicznych — czysta fabuła." }
   },
@@ -637,7 +656,7 @@ export const CHEMIA = Object.freeze({
     subtype: "uzywka",
     price: 2, availability: 80, doses: 1, weight: 0.02,
     treats: [],
-    img: "icons/svg/aura.svg",
+    img: `${DRUGS_ICON_DIR}/tyton_do_zucia.svg`,
     description: "Używka. Nie zdradza cię ogniem ani dymem.",
     mech: { activation: "action", manual: "Bez efektów mechanicznych — czysta fabuła." }
   },
@@ -653,7 +672,7 @@ export const CHEMIA = Object.freeze({
     itemType: "loot",
     price: 100, availability: 15, doses: 1, weight: 0.15,
     treats: [],
-    img: "icons/svg/explosion.svg",
+    img: `${CHEMIA_LOOT_ICON_DIR}/nitrogliceryna.svg`,
     description: "1 g zastępuje 100 g Chemii przy produkcji materiałów wybuchowych.",
     mech: {
       manual: "Surowiec produkcyjny — przelicznik stosuje się przy wytwarzaniu, "
@@ -667,7 +686,7 @@ export const CHEMIA = Object.freeze({
     itemType: "loot",
     price: 50, availability: 50, doses: 1, weight: 0.15,
     treats: [],
-    img: "icons/svg/barrel.svg",
+    img: `${CHEMIA_LOOT_ICON_DIR}/proch_czarny.svg`,
     description: "1 g zastępuje 100 g Chemii przy elaboracji amunicji. Szansa zacięcia ×2; "
       + "przy wystrzale powstają duże ilości dymu.",
     mech: {
@@ -682,7 +701,7 @@ export const CHEMIA = Object.freeze({
     itemType: "loot",
     price: 100, availability: 30, doses: 1, weight: 0.15,
     treats: [],
-    img: "icons/svg/barrel.svg",
+    img: `${CHEMIA_LOOT_ICON_DIR}/proch_strzelniczy.svg`,
     description: "1 g zastępuje 100 g Chemii przy elaboracji amunicji.",
     mech: {
       manual: "Surowiec produkcyjny — przelicznik stosuje się przy wytwarzaniu, "

@@ -15,6 +15,15 @@ export function registerWeaponJams() {
   Hooks.on("dnd5e.postUseActivity", onPostUseActivity);
   Hooks.on("renderItemSheet5e", onRenderItemSheet);
 
+  // Character-sheet inventory row highlight for a jammed/damaged firearm — same three
+  // hook names as addons-inventory.mjs's own row highlight (covers whichever concrete
+  // sheet class actually renders). Damaged (needs real repair) reuses melee
+  // degradation's tier-3 "badly damaged" styling; jammed (one check away from firing
+  // again) gets its own lighter, pulsing amber treatment.
+  for ( const hookName of ["renderActorSheet", "renderCharacterActorSheet", "renderNPCActorSheet"] ) {
+    Hooks.on(hookName, _onRenderActorSheetHighlightFault);
+  }
+
   const mod = game.modules.get(MODULE_ID);
   if (mod) {
     mod.api ??= {};
@@ -551,6 +560,30 @@ function _hasGunsmithTools(actor) {
 
 function _isFirearmItem(item) {
   return !!item && (item.type === "weapon") && (item.system.type?.value?.startsWith?.("palna") ?? false);
+}
+
+/**
+ * See the matching function in melee-degradation.mjs — same red badge/glow mechanism,
+ * same two-tier severity split: zacięta ("bad", one test away from clearing itself —
+ * pulses to invite action this turn) vs. uszkodzona ("worse", needs a gunsmith — static,
+ * shares `.neuro-weapon-damaged`'s deep-red styling with a melee weapon's worst tier).
+ */
+function _onRenderActorSheetHighlightFault(app, html) {
+  const actor = app.document ?? app.actor;
+  if (!actor) return;
+
+  const root = html instanceof HTMLElement ? html
+    : html?.[0] instanceof HTMLElement ? html[0]
+    : html?.element instanceof HTMLElement ? html.element
+    : null;
+  if (!root) return;
+
+  root.querySelectorAll(".item[data-item-id]").forEach(row => {
+    const item = actor.items.get(row.dataset.itemId);
+    if (!_isFirearmItem(item)) return;
+    if (isDamaged(item)) row.classList.add("neuro-weapon-damaged");
+    else if (isJammed(item)) row.classList.add("neuro-weapon-jammed");
+  });
 }
 
 function _getLiveItem(item) {

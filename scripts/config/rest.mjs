@@ -1,87 +1,58 @@
 /**
  * Neuroshima 5e — Rest duration overrides.
- * 
+ *
  * Neuroshima rest rules:
  * - Krótki odpoczynek (Short Rest): 4 hours (not 1h)
  * - Długi odpoczynek (Long Rest): 24 hours (not 8h)
  * - Long rest reduces exhaustion by 1 (kept from dnd5e)
- * - Interrupted long rest after 4+ hours → short rest benefits
+ * - Interruption (rzut na Inicjatywę / obrażenia / >1h podróży) is left to the
+ *   table, not automated — see LONG_REST_NOTE below. RAW: Podręcznik,
+ *   „Zakłócenie Długiego odpoczynku" (rozdział Eksploracja).
  */
 
 /**
- * Długi odpoczynek z polem „Przerwany po (godz.)".
+ * Reference notes shown in the Long Rest dialog — RAW text, not a mechanic.
+ * An earlier version of this file tried to automate "how many hours before
+ * interruption" with a form field that silently redirected the rest to
+ * `actor.shortRest()`; removed in favour of just stating the rule and letting
+ * the table apply it, matching how most judgment-heavy rules in this module
+ * are handled (a note, not a calculation nobody remembers to fill in).
  *
- * Podklasa zamiast wstrzykiwania w DOM, bo `restTypes.long.dialogClass` jest
- * jawnym punktem rozszerzenia dnd5e, a `context.fields` renderuje się tym samym
- * kodem co natywne pola. Wartość pola wraca do `config` przez `mergeObject`
- * w `BaseRestDialog.#handleFormSubmission`, więc czyta ją hak `dnd5e.longRest`.
+ * Two notes, not one: the native dialog's own "info" box below this one
+ * (`.note.info` — dnd5e's own component, `apps.less`) is what these are
+ * styled after. Split by what kind of information it is — plain fact
+ * (triggers) vs. a consequence worth flagging (`.neuro-rest-note.warn`,
+ * amber, mirrors dnd5e's own `--dnd5e-color-note-warn`) — same reasoning
+ * dnd5e's own info/warn split uses.
+ */
+const LONG_REST_NOTE = `<div class="neuro-rest-note info">`
+  + `Zakłócenie Długiego odpoczynku: rzut na Inicjatywę, obrażenia, lub podróż `
+  + `pieszo/wierzchem dłużej niż godzinę.`
+  + `</div>`
+  + `<div class="neuro-rest-note warn">`
+  + `Bez co najmniej 1 Punktu Wytrzymałości nie można go rozpocząć. Przerwany po `
+  + `co najmniej 4 godzinach — rozlicz ręcznie jako Krótki odpoczynek; krócej, bez `
+  + `żadnych korzyści. Można też wznowić od razu po przerwie (+1 godzina za każdą).`
+  + `</div>`;
+
+/**
+ * Długi odpoczynek z notatką o zakłóceniu zamiast pola do ręcznego wypełniania.
+ *
+ * Podklasa zamiast wstrzykiwania w DOM przez hook renderowania, bo
+ * `restTypes.long.dialogClass` jest jawnym punktem rozszerzenia dnd5e — ta sama
+ * ścieżka, którą wcześniej zajmowało pole „Przerwany po (godz.)".
  */
 function buildLongRestDialog(Base) {
-  const { NumberField } = foundry.data.fields;
-
   return class NeuroshimaLongRestDialog extends Base {
     /** @inheritDoc */
-    async _prepareContext(options) {
-      const context = await super._prepareContext(options);
-      // `BaseRestDialog` składa `formSections` zanim tu wrócimy, więc przy pustym
-      // `fields` sekcji nie ma i samo `push` byłoby niewidoczne.
-      if (!context.fields.length) {
-        context.formSections.unshift({ legend: "DND5E.REST.Configuration", fields: context.fields });
+    async _onRender(context, options) {
+      await super._onRender(context, options);
+      const body = this.element.querySelector(".window-content");
+      if (body && !body.querySelector(".neuro-rest-note")) {
+        body.insertAdjacentHTML("afterbegin", LONG_REST_NOTE);
       }
-      context.fields.push({
-        field: new NumberField({
-          label: "Przerwany po (godz.)",
-          hint: `0 = nieprzerwany. Co najmniej ${INTERRUPT_THRESHOLD_HOURS} h daje korzyści `
-            + "Krótkiego odpoczynku, mniej — nic.",
-          min: 0,
-          max: 24
-        }),
-        input: context.inputs.createNumberInput,
-        name: "neuroInterruptedAfter",
-        value: context.config.neuroInterruptedAfter ?? 0
-      });
-      return context;
     }
   };
-}
-
-/** Godziny Długiego odpoczynku, po których przerwanie daje korzyści Krótkiego. */
-const INTERRUPT_THRESHOLD_HOURS = 4;
-
-function onLongRest(actor, config) {
-  const hours = Number(config.neuroInterruptedAfter ?? 0);
-  if (!(hours > 0)) return;
-
-  // Odłożone poza ten hook, bo zwracamy `false`: długi odpoczynek ma się nigdy
-  // nie policzyć, zamiast policzyć się i być cofanym.
-  setTimeout(() => resolveInterruptedLongRest(actor, hours), 0);
-  return false;
-}
-
-/**
- * Przerwany Długi odpoczynek: ≥ 4 h to korzyści Krótkiego, mniej to nic.
- * @param {Actor5e} actor
- * @param {number} hours
- */
-export async function resolveInterruptedLongRest(actor, hours) {
-  const speaker = ChatMessage.getSpeaker({ actor });
-  const head = `<strong>Długi odpoczynek przerwany</strong> po ${hours} h`;
-
-  if (hours < INTERRUPT_THRESHOLD_HOURS) {
-    await ChatMessage.create({
-      speaker,
-      content: `<div class="neuro-rest-interrupted">${head} — to mniej niż `
-        + `${INTERRUPT_THRESHOLD_HOURS} h, więc <em>bez żadnych korzyści</em>.</div>`
-    });
-    return null;
-  }
-
-  await ChatMessage.create({
-    speaker,
-    content: `<div class="neuro-rest-interrupted">${head} — przysługują korzyści `
-      + "<strong>Krótkiego odpoczynku</strong>.</div>"
-  });
-  return actor.shortRest({ duration: hours * 60, newDay: false });
 }
 
 export function registerRestOverrides() {
@@ -111,7 +82,6 @@ export function registerRestOverrides() {
 
   if (restTypes.long?.dialogClass) {
     restTypes.long.dialogClass = buildLongRestDialog(restTypes.long.dialogClass);
-    Hooks.on("dnd5e.longRest", onLongRest);
   }
 
   console.log("Neuroshima 5e | Rest durations overridden (KO: 4h, DO: 24h)");

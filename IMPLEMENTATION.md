@@ -12,8 +12,8 @@
 | `scripts/config/terminology.mjs` | Polskie cechy, waluta, jednostki |
 | `scripts/config/spellcasting.mjs` | Usunięcie spellcastingu |
 | `scripts/config/localization.mjs` | Fallback i18n (weryfikacja + ręczny fetch) |
-Header whitespace — total readout (my pick)| `lang/pl.json` | 553 tłumaczeń (zagnieżdżone JSON) |
-| `scripts/config/conditions.mjs` | Stany — 14 z TABELI STANÓW + 8 zagrożeń + 5 znaczników + 3 stopniowane; usunięcie stanów fantasy |
+| `lang/pl.json` | 553 tłumaczeń (zagnieżdżone JSON) |
+| `scripts/config/conditions.mjs` | Stany — 14 z TABELI STANÓW + 9 zagrożeń + 5 znaczników + 3 stopniowane; usunięcie stanów fantasy |
 | `scripts/config/levelled-conditions-data.mjs` | Tabele Upojenia (4 stopnie) i Skażenia (4 poziomy, ST) |
 | `scripts/actors/levelled-conditions.mjs` | Egzekwowanie Upojenia/Skażenia + rejestr HUD dla stanów stopniowanych (też Zranienie) |
 | `icons/statuses/ASSETS.md` | Specyfikacja ikon dla 2 stanów bez odpowiednika w dnd5e |
@@ -54,6 +54,7 @@ Header whitespace — total readout (my pick)| `lang/pl.json` | 553 tłumaczeń 
 | `scripts/weapons/sounds.mjs` | Dźwięki broni i materiałów wybuchowych (strzały, eksplozje, zapalniki, miny) |
 | `scripts/weapons/sequencer.mjs` | Integracja Sequencera — `seqPlayAudio`/`seqStartLoop`/`seqStopLoop`/`seqScrollText` (soft dependency, legacy fallback) |
 | `scripts/weapons/engine.mjs` | Silnik (`spalinowa`) — start/stop pętli dźwięku przez `seqStartLoop`/`seqStopLoop`, auto-tworzenie aktywności uruchom/zgaś |
+| `scripts/weapons/pochodnia.mjs` | Pochodnia (broń improwizowana) — 2 warianty, paliwo %, zapal/zgaś, wypalanie przez zegar świata (`updateWorldTime`), best-effort światło tokena |
 | `scripts/weapons/tracer-vfx.mjs` | Własny silnik PIXI smug/błysków lufy (baked textures, nie Sequencer webm) — `tracerFire`/`tracerFireArea`, cache wizualny per kaliber/broń |
 | `scripts/weapons/tracer-debug-panel.mjs` | Panel GM do tuningu VFX na żywo (suwaki TUNE, testowe salwy, eksport configu) |
 | `scripts/weapons/sound-debug-panel.mjs` | Panel GM do audiobanków (odsłuch pojedynczych plików, audyt rozwiązania kaliber→bank) |
@@ -78,6 +79,8 @@ Header whitespace — total readout (my pick)| `lang/pl.json` | 553 tłumaczeń 
 | `scripts/actors/surowce-inventory.mjs` | Panel „Surowce" w Ekwipunku — 5 typów (CH/CE/CZ/MK/MO) wyciągnięte z Używek jako osobne pule z paskiem wagi. Żywe, wpięte w `main.mjs`; dopisane do tabeli 2026-08-21, wcześniej brakowało wiersza mimo że kod istniał od dawna |
 | `scripts/actors/zbrojownia-sync.mjs` | Narzędzie GM: jeden NPC jako kanoniczna „Zbrojownia" — przycisk w nagłówku karty synchronizuje broń z jego ekwipunku do folderów w World Items |
 | `scripts/actors/sheet-shell.mjs` | Powłoka arkusza (§1.15) — podklasy `NeuroshimaCharacterSheet`/`NeuroshimaNPCSheet` (tylko `PARTS`/`TABS`), zakładka Zasoby, panel Stan, skrót ZR/WY. Rejestracja w `ready`, hook renderowania rejestrowany jako ostatni w `main.mjs` |
+| `scripts/actors/vehicle-portrait.mjs` | Karta Pojazdu (§1.15a) — przełącznik Portret/Token na żywym DOM stockowego `VehicleActorSheet` dnd5e (brak własnej podklasy Neuroshimy dla pojazdów) |
+| `scripts/actors/class-resource-dice.mjs` | Zdolności „raz na rundę, N kości" (Phase 3) — Wściekły cios wdrożony i przetestowany, mechanizm generyczny po `resource`/`oncePerTurn`, reszta rodziny czeka na osobny przebieg |
 | `templates/tab-zasoby.hbs` | Pusta skorupa zakładki Zasoby — wypełniana po renderze przez `sheet-shell.mjs` |
 | `styles/neuroshima.css` | CSS — post-apo visual + hide spellcasting (1365 linii, sekcje oznaczone `/* === */`, waliduj po edycji: `npm run validate:css`) |
 
@@ -159,9 +162,10 @@ Header whitespace — total readout (my pick)| `lang/pl.json` | 553 tłumaczeń 
   Neuroshimie **Ogłuszenie to `stunned`**, zaś `deafened` to Ogłuchnięcie. Nazwy ustawiane są
   teraz literalnie w `conditions.mjs` (przechodzą przez `preLocalize` bez zmian, jak
   `exhaustion.name` już wcześniej), więc rulebookowe brzmienie stoi obok rulebookowego tekstu
-- [x] **8 zagrożeń** zachowanych: Krwawienie, Podpalenie, Uduszenie, Niedożywienie, Odwodnienie,
-  Spadanie, Choroba, Zaskoczenie. Każde z nich albo jest nazwanym [ZAGROŻENIEM] z podręcznika,
-  albo jest już sterowane kodem modułu (`bleeding.mjs`, `falling.mjs`)
+- [x] **9 zagrożeń** zachowanych: Krwawienie, Podpalenie, Uduszenie, Niedożywienie, Odwodnienie,
+  Spadanie, Choroba, Zaskoczenie, Niespodziewany atak (`ambush` — lustrzane odbicie Zaskoczenia,
+  jedyny stan bez odpowiednika w dnd5e). Każde z nich albo jest nazwanym [ZAGROŻENIEM] z
+  podręcznika, albo jest już sterowane kodem modułu (`bleeding.mjs`, `falling.mjs`)
 - [x] **5 znaczników** technicznych: Martwy (`DEFEATED` — wymagany przez rdzeń), Ustabilizowany,
   Unikanie, Ukrywanie się, Sen
 - [x] **13 usuniętych**: `petrified`, `cursed`, `transformed`, `silenced`, `concentrating`,
@@ -398,7 +402,7 @@ Zastępuje pierwotne podejście z `PLAN_shooting_vfx.md` (Sequencer `.effect()` 
 - [x] Krótki odpoczynek = 4h / 240min (nie 1h)
 - [x] Długi odpoczynek = 24h / 1440min (nie 8h)
 - [x] Polskie etykiety (Krótki/Długi odpoczynek)
-- [x] Przerwanie DO po 4h → benefity KO
+- [x] Zakłócenie DO — **notatka referencyjna w oknie odpoczynku (`config/rest.mjs`), nie automatyka**. Było: pole „Przerwany po (godz.)" liczące ≥4h → automatyczne przekierowanie na `actor.shortRest()`. Zamienione na statyczny cytat z reguły (triggery zakłócenia, próg 1 PW do rozpoczęcia, próg 4h do korzyści Krótkiego, wznowienie z +1h za przerwę) — świadoma decyzja: mniej pól nikt nie wypełnia poprawnie, GM i tak woli rozstrzygać to sam. Patrz v0.14.12
 
 ### 1.15 Custom Character Sheet Shell
 Szczegółowy plan (pre-dig 2026-08-21: sheet class/PARTS/TABS map, wszystkie 15 istniejących
@@ -436,6 +440,38 @@ wszystko zgłoszone przed `game.ready`, więc `CONFIG.Actor.sheetClasses` jest d
     z Ekwipunku po renderze — żaden z czterech wstrzykiwaczy nie wymagał zmiany
   - Ekwipunek jako domyślna zakładka karty postaci, Akcje i cechy dla BN
   - Polskie etykiety zakładek, nagłówek arkusza w stylistyce Neuroshimy
+
+### 1.15a Karta Pojazdu — przełącznik Portret/Token
+`scripts/actors/vehicle-portrait.mjs`. Pojazdy **nie** mają podklasy Neuroshimy — to wciąż
+gołe `VehicleActorSheet` z dnd5e, więc to jedyne miejsce w module, gdzie łatka idzie na żywy
+DOM stockowego arkusza zamiast przez `sheet-shell.mjs`.
+
+- [x] **Zdiagnozowana luka górna**: `CharacterActorSheet`/`NPCActorSheet` wołają wspólny
+  `_preparePortrait()` (`base-actor-sheet.mjs`), który daje przełącznik
+  `flags.dnd5e.showTokenPortrait` + `<img>` śledzący ścieżkę Portret/Token. `VehicleActorSheet`
+  nigdy tej metody nie woła, a `templates/actors/vehicle/sidebar.hbs` ma na sztywno
+  `document.img` + `data-edit="img"` — zero przełącznika, zero podglądu/edycji tokena z karty.
+  Zweryfikowane w źródle dnd5e (nie w tym module) — to luka stockowa, nie coś, co Neuroshima
+  zepsuła
+- [x] Backend już działa dla każdego typu aktora bez zmian: `Actor5e#getPreferredArtwork()`
+  i akcje arkusza `editImage`/`showArtwork` (rdzeń Foundry, `document-sheet.mjs`) /
+  `configurePrototypeToken` (rdzeń dnd5e, `actor-sheet.mjs`) są generyczne — problem był
+  wyłącznie w szablonie, którego nie da się nadpisać z poziomu modułu bez kopiowania całego
+  pliku systemu
+- [x] Hook `renderVehicleActorSheet` dogrywa na żywym DOM to, czego brakuje w szablonie:
+  przełącznik (`.slide-toggle`, ta sama klasa co reszta dnd5e — darmowe stylowanie, w tym
+  okrągły kadr `.portrait.token`), `<img src>` śledzące flagę, `data-action`/`data-edit`/
+  `data-type` przełączane między `img` a `prototypeToken.texture.src` (lub `token.texture.src`
+  dla zsynchronizowanego tokena na scenie)
+- [x] Przełącznik bez atrybutu `name` — zapis idzie wyłącznie przez jawny `actor.setFlag()`
+  w handlerze `change`, żeby nie ścigać się z generycznym submitem formularza arkusza o tę samą
+  flagę przy okazji edycji innego pola
+- [x] Widoczny tylko gdy `app.isEditable` — usuwany z DOM, gdy odbierze się uprawnienia (np.
+  graczowi bez właściciela), tak samo jak stockowy przełącznik na karcie postaci/BN
+- [x] Live-verified na GMT400 (jedyny pojazd w świecie): kliknięcie przełącza podpis
+  PORTRET ⇄ TOKEN, `<img>` faktycznie zmienia plik (`avatar.png` → `token.png`, różne pliki),
+  kadr staje się okrągły, `data-edit` poprawnie wskazuje `prototypeToken.texture.src` w trybie
+  token — kliknięcie obrazka otwiera FilePicker na właściwym polu
 
 ### 1.16 Level Progression
 - [x] Level cap 12
@@ -492,7 +528,52 @@ wszystko zgłoszone przed `game.ready`, więc `CONFIG.Actor.sheetClasses` jest d
 - [ ] Fanty, pozostałe consumables poza lekarstwami
 - [ ] Gambling/barter UI (k100, location mods, regional prices)
 - [ ] Object destruction (TT/PW by material/size)
-- [ ] Broń improwizowana
+- [~] **Broń improwizowana** — jeden konkretny przykład zrobiony (Pochodnia, patrz §1.23),
+  ogólna zasada „1k4, bez Premii Biegłości, typ wg MG" pozostaje ręczna dla innych przedmiotów
+
+### 1.23 Pochodnia (improvised torch)
+- [x] `weapons/pochodnia.mjs` — homebrew zastępujące zepsuty SRD Torch (jego auto-wygenerowana
+  aktywność ataku niosła `target.template` typu promień 40 stóp — kompendium modeluje zasięg
+  światła jako cel ataku, stąd gigantyczny szablon przy próbie użycia). Zamiast łatać, świeży
+  `weapon` item od zera
+- [x] RAW **Broń improwizowana**: bez Premii Biegłości (`proficient: 0`), 1k4 obuchowe. Zapalona
+  dodaje płaski +1 od ognia (osobna część obrażeń, ten sam wzorzec co „+1 fire" na oryginalnym
+  SRD Torch)
+- [x] 2 warianty: **Pochodnia Improwizowana** (patyk+szmata, 30 min, 0,6 kg, 0 gb) i
+  **Pochodnia Smołowa** (maczana w smole, 1,5 h, 0,4 kg — lżejsza, ma wartość, 8 gb)
+- [x] Paliwo jako flaga itemu 0–100% (nie `system.uses` — Pochodnia bywa nieprzypisanym
+  przedmiotem świata, bez aktora do trzymania recovery). Zapalenie kosztuje **10% maks. paliwa**
+  zawsze, niezależnie od wariantu
+- [x] **Nieudane zapalenie**: przy paliwie ≤10% zapalenie nie odpala światła — reszta paliwa
+  syczy i gaśnie, item od razu staje się Wypaloną Pochodnią (specjalny komunikat czatu)
+- [x] Ręczne zgaszenie (aktywność `special`, bez kosztu akcji w grze) zachowuje niewypalone
+  paliwo — oblicza `elapsed / burnSeconds` względem `game.time.worldTime` w chwili zapalenia
+- [x] **Wypalanie samoistne przez zegar świata** — dnd5e 5.3 nie ma hooka wygaśnięcia efektu
+  (ten sam fakt, co `items/chemia.mjs` już dokumentuje), więc `pochodnia.mjs` planuje absolutny
+  moment wypalenia (`worldTime`) i zamiata go hookiem `updateWorldTime`, tylko GM
+  (`game.user.isActiveGM`) — identyczny kształt co `chemiaPending`/`_onWorldTime` w chemii
+- [x] Wypalenie **w miejscu** (ten sam `_id`) — zmienia nazwę/ikonę/opis/obrażenia na
+  Wypaloną Pochodnię zamiast usuwać i tworzyć nowy przedmiot; nadal używalna jako pałka (1k4
+  obuchowe, bez ognia, bez światła, nie da się ponownie zapalić)
+- [x] **Oświetlenie tokena — best effort, nie warstwowe**. Brak natywnego łącza item→token
+  light w tej wersji dnd5e (Active Effects dotykają tylko Actor, `prototypeToken` nie
+  synchronizuje się z już postawionymi tokenami). `syncTokenLight()` ręcznie nadpisuje
+  `token.document.light` najjaśniejszą zapaloną+założoną Pochodnią aktora przy zapaleniu/
+  zgaszeniu/zmianie `equipped`/nowym tokenie na scenie. **Nadpisuje, nie sumuje** z innym
+  źródłem światła — świadomie bez konfliktu, dopóki to jedyny item ze światłem w module
+- [x] Piekarz: istniejący placeholder „Pochodnia" (finezyjna/lekka, bez ognia/światła)
+  zaktualizowany w miejscu na Pochodnię Smołową (ten sam `_id`) zamiast zostawiony jako martwy
+  duplikat — patrz `game.neuroshima.pochodnia.initialize(item, "smolowa")`
+- [x] Ikony `pochodnia_improwizowana.svg` / `pochodnia_smolowa.svg` / `pochodnia_wypalona.svg` —
+  `dev/icons/process_grid_29.py` (batch 29, 9 ikon: 3 Pochodnia + 6 zaległości Piekarza,
+  patrz niżej). Piekarz przełączony ze stockowego `torch-brown-lit.webp` na docelową ikonę
+- [x] `game.neuroshima.pochodnia` API: `.variants`, `.ignite()`, `.extinguish()`, `.burnOut()`,
+  `.initialize(item, variantKey)`, `.create(variantKey, {actor})`
+- [x] `dev/icons/process_grid_29.py` — 9 ikony z jednego batcha: 3 Pochodnia (`weapons/`) +
+  6 zaległości Piekarza (`items/loot/`: `fajka`, `nabicie_tytoniu`, `manierka`,
+  `zdjecie_kobiety`, `flaga_usa`, `zetony`). Wszystkie 7 (Pochodnia + 6) podpięte na żywo do
+  jego przedmiotów; `Konserwa` (osobny leftover z Roll20) przy okazji podpięta pod już istniejącą,
+  wcześniej niewykorzystaną `weapons/canned_food.svg`
 
 ## Phase 3: Progression Layer
 Szczegółowy plan: `PLAN_classes.md`
@@ -500,13 +581,62 @@ Szczegółowy plan: `PLAN_classes.md`
 - [x] Professions (subklasy) — 18 profesji, pack `neuroshima.profesje`
 - [x] 133 zdolności klasowych/profesji — pack `neuroshima.zdolnosci-klasowe`, tekst dosłownie z podręcznika
 - [x] PW wg Neuroshimy (16+KON / 4+KON, 12+KON / 3+KON) — `actors/pw.mjs`; natywny `HitPoints` advancement tego nie wyraża
-- [x] Zdolności stanowe (Berserk, Kondycha) — `actors/class-state.mjs`, AE + czas trwania + warunki przerwania
+- [x] Zdolności stanowe (Berserk, Kondycha) — `actors/class-state.mjs`, AE + czas trwania + warunki przerwania.
+  **Berserk vs. stock Rage** (2026-08-28, `PLAN_berserk.md`): AE dobite o Obrażenia Berserkera
+  (`bonuses.mwak.damage += @scale.brutal.obrazeniaBerserkera`) i Siłę Berserkera (Ułatwienie
+  `str.check`/`str.save`) — tekst zdolności je obiecywał, żadne nie miało automatyki. Świadomie
+  **nie** dobite: odporność na obrażenia (Rage ją ma, Berserk w ogóle jej nie obiecuje w tekście —
+  to nie luka, to różnica reguł) ani zerwanie stanu przy założeniu ciężkiego pancerza (też nienapisane
+  w tekście). Karta czatu na **każde** zejście stanu (ręczne, przerwane, po czasie), nie tylko po
+  czasie jak wcześniej — patrz plan po szczegóły stylu. Kara „bez akcji po Berserku" zostaje
+  świadomie tylko po naturalnym końcu 10 rund (nie po ręcznym zejściu ani przerwaniu — wyjątek
+  jakości życia, nie błąd). Cztery zdolności czytające `requiresState: "neuro-berserk"`
+  (Z bara!, Ja i mój gang!, Zew areny, Maszyna do zabijania) zostają bez automatyki bramkowania —
+  sprawdzone wprost na źródle dnd5e (`fvtt-dnd5e`, ścieżka Berserkera): nawet oficjalny moduł nie
+  bramkuje swoich odpowiedników (Frenzy, Mindless Rage, Retaliation) stanem Rage
+- [~] **Zdolności „raz na rundę, N kości"** (Wściekły cios i pokrewne) — `actors/class-resource-dice.mjs`.
+  Dane (`resource`/`oncePerTurn` w `class-features-data.mjs`) istniały od dawna dla sześciu zdolności
+  (Wściekły cios, Bolesny atak, Słaby punkt, Mutant na śniadanie, Maszyna do zabijania, Mój bóg kule
+  nosi), ale nic ich nie czytało — aktywacja paliła jedno użycie i drukowała gołą kartę z tekstem
+  zdolności, bez rzutu, bez bramki rundy. Mechanizm napisany generycznie po tych polach, ale
+  **przetestowany end-to-end tylko na Wściekłym ciosie** — reszta rodziny ma inne warunki spustu
+  (bardziej Sneak Attack niż Rage) i celowo czeka na osobny przebieg
+  - Klik zdolności (pasek skrótów lub własny przycisk „Użyj" na karcie) przechwytywany przez
+    `dnd5e.preUseActivity` (ten sam punkt co przełączniki stanowe w `class-state.mjs`, z tego samego
+    powodu: karta postaci ma drugie wejście do tej samej aktywności, które inaczej cicho paliłoby
+    użycie bez żadnego efektu)
+  - Zamiast Dialogu — **karta czatu** z rzędem przycisków `1k6…Nk6` (N = pozostałe użycia) i
+    selektorem typu obrażeń (domyślnie Obuchowe). Jeden klik = cała decyzja, zero dodatkowego
+    potwierdzania — zgodnie z „raz w rundzie" z tekstu zdolności
+  - Bramka rundy: flaga na przedmiocie (`combatId`+`round`), aktywna tylko w trakcie walki — poza
+    walką nie da się policzyć „rundy", więc świadomie bez blokady (stołowa decyzja, jak Forsowanie)
+  - Rzut idzie przez `CONFIG.Dice.DamageRoll` + `roll.toMessage()` (ten sam wzorzec co „Rzuć
+    obrażenia" na kartach granatów) — naturalna, natywna karta Apply Damage, moduł nigdy sam nie
+    rusza PW celu. Cel = to, co jest aktualnie zaznaczone w `game.user.targets` w chwili kliknięcia
+    (to samo założenie, na którym stoi natywny przycisk Apply Damage i już wcześniej wykrywanie trafień
+    w `dozownik.mjs`) — nie osobny tracker „ostatniego celu"
+  - Sequencer (miękka zależność): `seqScrollText` nad atakującym, `jb2a.impact.009.orange` na celu
+    (JB2A zweryfikowany na żywo w bazie Sequencera — klucz istnieje, nie zgadywany)
+  - Live-verified na Piekarzu (Brutal 3): karta z 2 z 3 dostępnych kości, klik „2k6" → zużycie
+    3/3, poprawny rzut 2k6 Obuchowe, natywny panel Apply Damage z realnym celem, bramka rundy
+    potwierdzona (drugi klik w tej samej rundzie walki nie tworzy żadnej nowej wiadomości)
 - [x] Pasek skrótów zdolności — `actors/ability-hotbar.mjs`, auto-makra + licznik ładunków + grafika stanu aktywnego
 - [x] Odnawianie na odpoczynkach — **bez własnego kodu**, natywne `uses.recovery` (`sr`/`lr`) działa na przedefiniowanych 4h/24h
 - [x] Multiclass rules (nie kumulują się: TT bez pancerza, Drugi atak) — `actors/class-rules.mjs`
 - [x] XP panel + personal PD tracking — `actors/pd-panel.mjs` (progi 0…3400, auto-PD za Stopień Zranienia)
 - [x] Migracja 22 istniejących postaci — `migration/migrate-classes.mjs` (11 rozpoznanych, homebrew zachowany)
-- [x] Usunięcie pozostałości SRD — `config/srd-cleanup.mjs` (klasy/zaklęcia/rasy ukryte i zablokowane)
+- [x] Usunięcie pozostałości SRD — `config/srd-cleanup.mjs` (klasy/zaklęcia/rasy ukryte i zablokowane).
+  **Bugfix (2026-08-28)**: to ukrywało tylko wpis w bocznym pasku Compendium Directory — osobny,
+  nigdy nie dotknięty mechanizm dnd5e (`dnd5e.packSourceConfiguration`, czyta go Compendium
+  Browser przy każdym otwarciu, `CompendiumBrowserSettingsConfig.collateSources()`) wciąż wliczał
+  te same pakiety. Złapane na żywo: wybór Profesji (podklasy) dla Victora nadal listował
+  wszystkich 12 fantasy klas SRD (Barbarian…Wizard) obok 6 klas Neuroshimy, mimo że
+  `hideSrdPacks` jest domyślnie włączone. `hideFromCompendiumBrowser()` dopisuje te same
+  `FANTASY_PACKS` do tego drugiego ustawienia. **Uwaga**: `dnd5e.registry.classes` (lista w
+  filtrze „KLASA" po lewej) cache'uje się raz na sesję, leniwie, przy pierwszym otwarciu
+  przeglądarki — działa poprawnie tylko dla przeglądarek otwartych **po** przeładowaniu klienta,
+  które nastąpi po tym ustawieniu (nic do naprawienia, po prostu wymaga F5, tak jak reszta
+  zmian w tej sesji)
 - [x] Sztuczki (feat-like items) — pack `neuroshima.sztuczki` z **53 pozycjami** (`config/sztuczki-data.mjs`),
   ItemChoice podpięte do puli po obu stronach (klasy i profesje). Mechanikę ma na razie **6/53**
   (3 pełne, 3 częściowe) — reszta to opis + jawny rejestr „tego nie automatyzujemy"
@@ -533,6 +663,17 @@ Szczegółowy plan: `PLAN_classes.md`
     Zweryfikowane na żywo. Nieszkodliwe (Cichy krok i tak daje Ułatwienie), ale osobny fix na przyszłość
   - Wszystko zweryfikowane live na Alanie (CDP): efekt terenu doszedł backfillem, rzut na `skr` wyszedł
     jako `1d20adv`
+  - **Bugfix (2026-08-28)**: `_id` na sztywno (`neuroCichyKrok01`) + trzy hooki (`createItem`/`deleteItem`/
+    `advancementManagerComplete`) wołające sync bez żadnej serializacji — awans o poziom, który przyznaje
+    Cichy krok razem z czymkolwiek innym (złapane live: Victor → poziom 3 → Profesja Partner), tworzy oba
+    itemy w jednym `createEmbeddedDocuments`, więc kilka niezależnych, nieawaitowanych wywołań widzi ten sam
+    stan „efektu jeszcze nie ma" i więcej niż jedno próbuje go stworzyć — pierwsze wygrywa, reszta rzuca
+    nieobsłużony `The _id [...] already exists`. Dane nigdy się nie psuły (Foundry odrzuca duplikat po ID —
+    Victor po incydencie miał dokładnie jeden efekt), ale konsola wyglądała jak awaria. Fix: debounce +
+    serializacja per aktor, ten sam kształt co `queueHotbarSync`/`scheduleHotbarSync` w `ability-hotbar.mjs`,
+    plus try/catch połykający przegraną stronę wyścigu jako no-op zamiast rzucać. Live-verified: ten sam
+    ciąg zdarzeń (batch dwóch itemów + dwa `advancementManagerComplete` z rzędu) na świeżym, przeładowanym
+    kliencie — jeden efekt, zero błędów, zero unhandled rejections
 
 ### Bestiariusz
 Dodane do trackera 2026-08-21 — warstwa była kompletna i zweryfikowana od jakiegoś czasu, ale nie
@@ -735,6 +876,450 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### v0.14.20 — Kompletność ekwipunku: brakujące aliasy broni, duplikaty, nowy audyt wagi/ceny/źródła (2026-08-29)
+
+Zgłoszone: „Make sure all items have a weight, value in gabels and are somewhere in the
+compendium" + w trakcie, mimochodem: „Lorentz has a 338 and bejsbol as łup and as
+weapons — duplication. Why is the weapons baseball without an icon?"
+
+**1. `auditWeapons()` miał martwe pole. Cztery bronie były dla niego niewidzialne.**
+Dopasowanie po nazwie (case-insensitive + `WEAPON_NAME_ALIASES`) nie miało wpisu dla
+kilku realnych kopii, więc `diffWeaponItem` nigdy nie dochodził do porównania —
+`auditWeapons()` po prostu je pomijał, bez ostrzeżenia. Skutek nie ograniczał się do
+wagi/ceny: **brakująca właściwość `tryb_p` = ZERO aktywności strzeleckich — broń nie
+dawała się w ogóle wystrzelić**, po cichu. Znalezione i naprawione:
+- Alan „H&K G3" → katalogowe „HK G3" (waga 1→4, cena 0→130, zasięg daleki, dostępność,
+  magazynek 30 naboi, właściwości `amm/tryb_p/tryb_ks/tryb_ds` — bez tego pola broń nie
+  miała żadnej aktywności ataku).
+- Alan i Victor „M1 Garand" → katalogowe „M1 US Rifle" (ta sama drużyna kopii miała ten
+  sam problem niezależnie u dwóch graczy — waga 1→4, cena 0→80, magazynek 8, ustalone
+  obrażenia kalibru).
+- Lorentz „38-ka" → katalogowe „Trzydziestka ósemka" (cena 0→35, zasięg, magazynek 6
+  naboi bębenkowych).
+- GMT400 „Browning M2 (z trójnogiem)" → katalogowe „Browning", Richard Craddock (x2)
+  „FN Minimi (taśma XXL)" → katalogowe „Minimi" — ten sam kształt bugu na ciężkiej broni
+  pojazdowej.
+
+Dodano 5 wpisów do `WEAPON_NAME_ALIASES` (`weapons-data.mjs`). `game.neuroshima.repairWeapons()`
+naprawił wszystkie 7 kopii jedną komendą; pełny zestaw testów (140/140) przeszedł bez zmian.
+
+**2. Lorentz: prawdziwa duplikacja, nie tylko brakująca ikona.** „38-ka" i „bejsbol"
+istniały u niego DWA razy — raz jako właściwa broń (`type: weapon`, z aktywnościami),
+raz jako martwy `loot`-owy relikt z importu (ten sam kształt co Alanowy zduplikowany
+H&K G3 z 2026-08-29 wcześniej). Oba duplikaty usunięte. Ikona broni „Bejsbol" była na
+avatarze Lorentza (nigdy nie ustawiona) — katalogowe „Bejsbol/Rurka" wskazuje na
+`iron_pipe_club.svg` (RAW łączy oba warianty w jeden wpis), ale osobna
+`icons/weapons/baseball_bat.svg` już istniała na dysku i pasuje dokładnie do nazwy
+tego konkretnego egzemplarza — podpięta bezpośrednio, katalog zostawiony bez zmian
+(nie każe wszystkim „Bejsbolom" nosić kij, tylko domyślny wpis łączony).
+
+**3. Nowy audyt: `auditItemCompleteness()`.** Read-only, na zawsze — nie ma bezpiecznej
+automatycznej naprawy dla „wymyśl wagę i cenę przedmiotu, którego nikt nie skatalogował",
+to decyzja MG. Zgłasza fizyczny przedmiot (weapon/equipment/consumable/loot/tool) tylko
+gdy ma **jednocześnie zerową/brakującą wagę I cenę I** nie da się go dopasować do
+żadnego katalogu/flagi modułu (broń, pancerz, addon, chemia, granat/amunicja po
+subtype, toolkit, gear-placeholder, surowiec). Pomija cechy/klasy/podklasy/pochodzenia
+(nie mają wagi z definicji), aktorów `TEST*` (fixtures QA) i naturalne ataki potworów
+SRD (`system.type.value === "natural"` — nikt nie kupuje kłów dzika).
+
+Pierwszy przebieg na całej drużynie: 56 trafień → po odsianiu ataków SRD i fixture'ów
+QA, **30 realnych**. Naprawione ręcznie (GM-owe wartości, nie zgaduje ich audyt):
+- Alanowe resztki flavorowe (Pendrive Rodzinny, okulary, długopis, identyfikator,
+  żeton kasyna — którego nazwa dosłownie podaje wartość: 10 gb) dostały realną wagę i cenę.
+- „Latarka czołówka" i „Zapałki" — wspólna zawartość Plecaka turysty/żołnierza/
+  naukowca (`Podrecznik` §5 Tworzenie postaci: RAW wymienia je jako *Zawartość*
+  plecaka, nigdy nie wycenia osobno) — dostały realną wagę, cena została na 0
+  świadomie, zgodnie ze źródłem, nie przez zaniedbanie. Naprawione na 8 aktorach
+  (Alan, Victor, Buźka, Carson, Dante, Góra, Iris, Kluczyk).
+- Zapalniczka Zippo, Talia kart (Buźka), Odznaka (Evie — pasuje do już podpiętej
+  ikony `odznaka.svg`), Nabicie tytoniu (Piekarz) — osobiste przedmioty z realną
+  wartością handlową, dostały wagę i cenę.
+- Raynald: „Konserwa" była **zdublowana** (dwa identyczne stosy po 2 sztuki) —
+  scalone do jednego stosu ×4, waga naprawiona do 1 kg (reszta drużyny miała 1 kg,
+  jego kopia miała 0 — dryf, nie wybór).
+
+Pozostałe 4 z pierwotnych 56 to świadome wyjątki, nietknięte: dwa czysto narracyjne
+pamiątki bez wartości handlowej (Piekarzowe zdjęcie, Dantego list od Gordona), jeden
+fixture QA („Latarnik" trzyma testowy miecz), jeden SRD-owy loot potwora (Priest
+Acolyte's Holy Symbol — nie treść Neuroshimy).
+
+**Nowe API:** `game.neuroshima.inventoryAudit.auditItemCompleteness()`.
+
+---
+
+### v0.14.19 — Icon sweep: skoroszyt 37, ostatnie braki Alana + wspólny starter-kit (2026-08-29)
+
+`process_grid_37.py` — 9 nowych ikon, `icons/items/loot/`:
+
+- Alanowe 5 czysto flavorowych drobiazgów, wcześniej na `hazard.svg`: Nomeksowy
+  kombinezon, ceramiczny kubek, okulary, długopis, identyfikator.
+- 4 pozycje wspólnego „starter-kitu" wykryte przy okazji audytu ikon lootu: Śpiwór,
+  Menażka, Ubranie (generyczne — pokrywa też warianty „Ubranie Pustynne"/„Ubranie
+  wojskowe" tym samym rysunkiem) na Buźce/Carsonie/Dantem/Górze/Iris/Kluczyku (19
+  przedmiotów na 6 aktorach), plus Zestaw Żołnierza na Lorentzu.
+
+Zero przedmiotów na `hazard.svg` czy `icons/svg/item-bag.svg` u Alana i tej szóstki NPC.
+
+---
+
+### v0.14.18 — Kolimator: prawdziwy addon, nie luźny loot; reużycie ikon na 6 NPC (2026-08-29)
+
+Zgłoszone: „Kolimator is not an attachment that can be mounted." Słusznie — batch 36
+potraktował Alanowe „kolimator" jak zwykły flavor-loot i wygenerował mu nową ikonę w
+`icons/items/loot/`, ale to przeoczenie: `kolimator` to od dawna prawdziwa, w pełni
+zaimplementowana pozycja w katalogu addonów broni (`ADDON_DEFS.kolimator`,
+`weapons/addons.mjs`) z **już istniejącą** grafiką pod `icons/addons/kolimator.svg` —
+tylko Alanowy przedmiot nie miał flagi `flags.neuroshima-2026-overrides.ulepszenie`,
+więc `installAddon()` go nie rozpoznawał. Naprawiono: przedmiot przemianowany na
+„Kolimator + baterie" (etykieta z katalogu), ikona przepięta na `icons/addons/kolimator.svg`,
+cena/waga zrównane z definicją (50 gb / 0,15 kg), dodana flaga `ulepszenie: "kolimator"`.
+Osierocone `items/loot/kolimator.{png,svg}` z batcha 36 usunięte; `process_grid_36.py`
+oznaczony, żeby nie regenerować tego slotu ponownie.
+
+Zastrzeżenie dla gracza: kolimator wymaga właściwości `sm` (Szyna) na broni
+(`requiresProperties`), a katalogowy H&K G3 (`weapons-data.mjs`, `hk-g3`) jej nie ma —
+to zgodne z RAW, nie bug, więc montaż na obecnym karabinie Alana nie zadziała, dopóki
+broń nie dostanie szyny (inna decyzja, nieruszona tutaj).
+
+Przy okazji: audyt całej drużyny pod kątem ikon lootu ujawnił, że sześciu NPC ze
+wspólnym „stater-kitem" (Buźka, Carson, Dante, Góra, Iris, Kluczyk) nosiło Manierkę i
+Zapałki na generycznym `icons/svg/item-bag.svg`, mimo że pasujące ikony (`manierka.svg`,
+`zapalki_sztormowe.svg`) już istnieją w `icons/items/loot/`. Przepięte bez nowej grafiki —
+11 przedmiotów na 6 aktorach.
+
+---
+
+### v0.14.17 — Chemia: cała paleta ikon, sprzątanie Alana (2026-08-29)
+
+Zgłoszone wprost, cztery osobne rzeczy dotyczące Alana:
+
+**1. Ikony chemii, party-wide.** Skan `chemia-data.mjs` wykrył, że 28 z 35 pozycji
+katalogu Chemii renderowało się na generycznych ikonach rdzenia Foundry
+(`icons/svg/pill.svg`, `stoned.svg`, `tankard.svg`, `aura.svg`, `heal.svg`, `blood.svg`,
+`radiation.svg`, `barrel.svg`...), mimo że dedykowana grafika (`icons/items/drugs/*.svg`,
+26 plików) leżała nieużywana na dysku od poprzednich skoroszytów — `def.img` po prostu
+nigdy nie wskazał na nią. Naprawiono katalog (28 wpisów przepięte na realną ikonę; 7 bez
+odpowiednika — `desmopresyna`, `aspirynaK`, `dracophen`, `reminex`, `psychotropy`,
+`actinix`, `nitrogliceryna` — dostały jawny `TODO_ICON` zamiast cichego fallbacku).
+Ponieważ edycja katalogu nie cofa się na przedmioty już stworzone na kartach, dodano
+`auditChemiaIcons`/`repairChemiaIcons` do `inventory-audit.mjs` (zwykły `update()`, nie
+delete+create — `img` to zwykłe pole, nie `type`) i wpięto jako czwartą kategorię
+`auditInventory`/`repairInventory`. Uruchomione: **13 przedmiotów na całej drużynie**
+miało przestarzałą ikonę — teraz 0.
+
+**2. „Bestiariusz" — fałszywy wpis w ekwipunku Alana.** Okazał się ręczną notatką gracza
+(`feat` z `requirements: "spotkane bestie"`, treść: „Wielki pająk / Gladiator (maszyna
+molocha)"), nie prawdziwą mechaniką — „Pierwsze spotkanie" (RO na Mądrość przy pierwszym
+starciu z danym typem wroga) już istnieje, ale po stronie potwora: to metadana
+automatyzacji w `bestiary-data.mjs`/`gen_bestiary.py` (`rule_pierwsze_spotkanie`),
+odpalana ręcznie przez MG, gdy drużyna faktycznie zobaczy stwora — nie coś, co powinno
+siedzieć jako przedmiot na karcie gracza. Skonsumowane: przedmiot usunięty, żaden
+odpowiednik po stronie PC nie jest potrzebny.
+
+**3. „Mój Biom Ruiny, Lasy" — sprzeczny z prawdziwym systemem.** Alan miał martwy,
+zaszyty na sztywno przedmiot z importu (identifier `moj-biom-ruiny-lasy`, tekst
+przerobiony z Ulubionego Terenu Rangera 5e), niezależny od właściwego systemu wyboru
+biomów (`podroz-data.mjs`/`party-travel.mjs`, flaga `biomy` + picker na pasku karty).
+Flaga tymczasem stała na `["ruiny","tereny-maszyn"]` — inny biom niż to, co mówił
+przedmiot. Skan całej drużyny: to jedyny taki hardkodowany przedmiot (Victor korzysta
+z samej flagi, bez duplikatu). Naprawiono: przedmiot usunięty, flaga poprawiona na
+`["ruiny","las"]` zgodnie z tym, co mówił stary tekst.
+
+**4. „Multiple missing item icons and definitions" — pełny przegląd ekwipunku Alana.**
+Poza duplikatem H&K G3 (typu `loot`, obok prawdziwej broni — usunięty) i trzema
+przedmiotami z ikonami pożyczonymi od zupełnie innych rzeczy (Plecak Turysty na
+`ak_47.svg`, Latarka czołówka na `armalite_carbine.svg`, żeton kasyna na avatarze)
+naprawionymi przez podpięcie już istniejącej, poprawnej ikony — trzy przedmioty
+awansowały do prawdziwych systemowych odpowiedników zamiast luźnego lootu:
+„pain kilery" (x4) → prawdziwy `chemiaItemData("painkiller")` (dawkowanie, przycisk
+Zażyj), „Komponenty Amunicji" (x27) → prawdziwy surowiec Chemia (CH) (zgodnie z notatką
+w `surowce-data.mjs`, że zapłonniki amunicji ciągną z puli CH), „Kamizelka kuloodporna"
+→ prawdziwy pancerz `equipment` (Plate carrier typ I — najbliższy RAW odpowiednik,
+„Kamizelka nośna z lekkimi płytami"; nie założony automatycznie). Dziewięć przedmiotów
+bez odpowiednika w żadnym katalogu (7 pozycji Chemii bez grafiki w ogóle — Desmopresyna,
+Aspiryna K, Dracophen, Reminex, Psychotropy, Actinix, Nitrogliceryna — plus Alanowe
+kolimator i Pendrive Rodzinny) dostało tymczasowo uczciwy `icons/svg/hazard.svg`
+zamiast mylącego avatara postaci albo cichego fallbacku, do czasu zamówienia grafiki
+(skoroszyt 36).
+
+**Nowe API:** `game.neuroshima.inventoryAudit.auditChemiaIcons()` /
+`.repairChemiaIcons()`.
+
+**Uzupełnienie tego samego dnia — skoroszyt 36 przetworzony.** Wszystkie 9 pozycji
+z listy wyżej ma teraz docelową grafikę: `process_grid_36.py`,
+`icons/items/drugs/{desmopresyna,aspiryna_k,dracophen,reminex,psychotropy,actinix}.svg`
+i `icons/items/loot/{nitrogliceryna,kolimator,pendrive}.svg`. Katalog Chemii przepięty
+z `hazard.svg` na docelowe ikony (`TODO_ICON` stał się martwym kodem i został usunięty
+z `chemia-data.mjs` — cała trzydziestopięcio-pozycyjna paleta ma teraz realną grafikę);
+`repairInventory()` przeniósł zmianę na 4 już istniejące egzemplarze na kartach; Alanowe
+kolimator i Pendrive Rodzinny przepięte bezpośrednio. Zero nierozwiązanych placeholderów
+w Chemii; z siedmiu czysto flavorowych drobiazgów Alana zostały cztery bez dedykowanej
+grafiki (nomeksowy lombinezon, ceramiczny kubek, okulary, długopis, identyfikator) —
+świadomie, to czysty flavor bez wagi mechanicznej.
+
+**Nadal otwarte, nie ruszone w tym przebiegu:** trzy puste `<no name>` śmieciowe
+przedmioty (Victor, Lorentz, Laffitte) — czeka na decyzję, usuwać czy nie; konwersja
+Cobbler's Tools / Bagpipes / Alchemist's Supplies na lokalne toolkity — czeka na
+potwierdzenie.
+
+---
+
+### v0.14.16 — Ekwipunek całej drużyny: audyt kategorii, Leki/Prowiant w Zasobach, legenda + segmentowany pasek (2026-08-29)
+
+Zgłoszone wprost: „pirotechnika into pirotechnika" — Raynaldowi poprzedniego dnia poprawiono
+ikonę „Litry chemii" na `chemia.svg`, ale przedmiot dalej był `type:"loot"`, więc panel Surowce
+(`getSurowiecType()`) w ogóle nie dochodził do sprawdzania ikony — wymaga `type==="consumable"`
+jako pierwszego warunku. Ten sam kształt błędu miał panel Pirotechniki (potrzebuje
+`consumable`+`ammo`+`grenade-*`, nie tylko wybuchowo brzmiącej nazwy) i cały system Chemii
+(prawdziwy typ `lekarstwo` z działającym dawkowaniem, którego zwykły `loot` nigdy nie dostaje).
+
+- **`config/inventory-audit.mjs` (nowy)** — trzy pary audit/repair (Surowce, Pirotechnika,
+  Chemia) w tym samym kształcie co `auditWeapons()`/`repairWeapons()`: najpierw czytelny
+  raport, naprawa dopiero na wyraźne wywołanie. `game.neuroshima.inventoryAudit.*`.
+  Przeskanowano **całą drużynę** (nie tylko 6 postaci z sesji ikon) — 11 aktorów, 25
+  przedmiotów z rozjazdem, wszystkie naprawione i zweryfikowane live.
+  - Pirotechnika: dopasowanie po polskich aliasach nazw (deklinacja/liczba mnoga psuje
+    prosty substring-match z Chemii — „granaty dymne" nie zawiera „granat dymny"), z
+    wyciąganiem wiodącej liczby z nazwy jako `quantity` („3 granaty dymne" → ×3).
+    Dodano brakujący `grenade-signal` do `GRENADE_TYPES` (`ammo-data.mjs`) — realny,
+    powtarzający się przedmiot bez katalogowego odpowiednika. Tymczasowo dzieli ikonę
+    z `grenade-smoke` (`smoke_grenade.svg`) — TODO w komentarzu, prawdziwa grafika nie
+    zamówiona.
+  - Chemia: użyto istniejącego `chemiaKeyByName()` (już tolerował „Wapniak (20)" w
+    dawkowaniu) do podniesienia luźnego lootu do prawdziwych itemów `lekarstwo` —
+    Relanium/Trybiotyl/Medpak/Taurus itd. dostają teraz realny przycisk „Zażyj"/
+    „Posmaruj ranę" z efektami, zamiast fallbackowego liczenia `quantity`.
+  - **Bugfix po drodze**: `updateEmbeddedDocuments` z kluczem `type` w payloadzie nie
+    rzuca błędu, tylko cicho zwraca pustą tablicę wyników — Foundry nie pozwala zmienić
+    `type` dokumentu przez zwykły update. Wszystkie trzy repairy robią delete+create,
+    nie update; złapane live dopiero po tym, jak pierwsza wersja repairSurowce/
+    repairPirotechnika nic nie zmieniła mimo `total: 25` z audytu.
+- **`actors/leki-inventory.mjs` (nowy)** — panel „Leki" w Zasobach, lista `lekarstwo`
+  z przyciskiem używającym natywnej aktywności itemu (`activity.use()`, nie
+  `neuroSilent` — to jest świeże kliknięcie, nie duplikat). Zweryfikowane live: Relanium
+  3→2 szt. po kliknięciu, karta czatu `neuro-chemia-card` na czacie, brak błędów.
+- **`config/prowiant-data.mjs` + `actors/prowiant-inventory.mjs` (nowe)** — panel
+  „Prowiant" (jedzenie/woda), informacyjny z założenia (decyzja 2026-08-29: żadnej
+  automatycznej kary). Dopasowanie po luźnym regexie nazwy zamiast sztywnego katalogu —
+  live-skan całej drużyny pokazał, że w praktyce liczą się właściwie tylko „Konserwa"
+  i „Litr Wody"; wagi produktu nigdy nie są zgadywane, panel sumuje to, co item i tak
+  już ma w `system.weight × quantity`. Licznik dni zapasu wprost z progów RAW
+  (`Tabele/Zywnosc.md`: 0,5 kg jedzenia / 2 l wody dziennie).
+- **`actors/encumbrance-breakdown.mjs` (nowy)** — pasek udźwigu (`.encumbrance .meter.progress`)
+  podniesiony do 22px i nakładka z 4 kolorowymi segmentami (Broń/Pancerz/Zasoby/Reszta,
+  proporcjonalnie do wagi względem `max`), plus legenda pod paskiem: te same 4 kolory,
+  5 kolorów akcentu Surowców (`SUROWCE_TYPES`) i jednozdaniowy opis każdej sekcji Zasobów.
+  „Zasoby" na pasku to ścisły nadzbiór tego, co pokazują panele w zakładce Zasoby —
+  liczone tymi samymi funkcjami (`getSurowiecType`/`getProwiantCategory`/`chemiaKey`/
+  `ammo`), więc pasek i zakładka fizycznie nie mogą się rozjechać.
+- Zdecydowane wprost (2026-08-29): Prowiant wyłącznie informacyjny (bez automatycznej kary
+  Wyczerpania), legacy leki podniesione do prawdziwych itemów `lekarstwo` (nie zostawione
+  jako luźny loot).
+
+### v0.14.15 — Icon sweep: pancerze w komplecie, część placeholderów craftingu z realną grafiką (2026-08-29)
+
+Wieloetapowa akcja domalowywania ikon (batch 29-35, `dev/icons/process_grid_*.py`), część
+skupiona na sprzęcie sześciu postaci (Piekarz/Victor/Lorentz/Laffitte/Raynald/Evie — bronie,
+plecaki, drobiazgi fabularne), część na lukach systemowych:
+
+- **`icons/armor/` — było puste, teraz 17/17.** Cały katalog pancerzy (`armor-data.mjs`)
+  renderował się jako broken image od początku istnienia modułu; nikt tego nie zauważył, bo
+  żaden gracz nie miał jeszcze pancerza z tej listy w ekwipunku. Samowiążące — nazwa pliku =
+  dokładne `id` z `ARMOR_MAP`, `buildArmorItemData()` już tam wskazywał, więc zero zmian w
+  kodzie / zero per-aktor wiring.
+- **`gear-data.mjs` (`GEAR_PLACEHOLDERS`)** — `buildGearItemData()` miał `img: TODO_ICON`
+  zahardkodowane bez wyjątku dla wszystkich 12 stubów craftingowych. Dodano opcjonalne pole
+  `icon` per wpis; 8/12 (Bełty\*, Igły, Kłódka, Kolczatki, Łom, Łopata, Podkowy, Płyty
+  pancerne) ma teraz realną grafikę zamiast trójkąta z wykrzyknikiem, reszta (Sidła, Sprzęt
+  wspinaczkowy, Strzały, Wózek) świadomie zostaje na `TODO_ICON` do czasu domalowania. Nie
+  zmienia statusu „placeholder" tych itemów — patrz nagłówek pliku, wciąż brak wagi/ceny/ST,
+  zmieniła się wyłącznie ikona.
+  \* „Bełty" okazały się martwym wpisem — prawdziwe groty kuszy już istnieją jako oddzielny
+  item „Bełt" (`ammo_bolt.svg`) w amunicji; nowa ikona `belty.svg` zostaje nieużywana.
+- Testowanie `createGearPlaceholders()` po edycji ujawniło ten sam gotchas co przy naprawie
+  Cichego kroku: dynamiczny `import()` tego samego URL-a w tej samej sesji zwraca modułowy
+  cache sprzed edycji, nie świeży plik — trzeba pełnego przeładowania klienta, żeby zobaczyć
+  zmianę z dysku. Po przeładowaniu `game.neuroshima.createGearPlaceholders()` (publiczne API)
+  poprawnie zaktualizował 7 już istniejących stubów na Zbrojowni + potwierdził 4 zostają na
+  starej ikonie.
+- Przy okazji naprawiono ~30 itemów na sześciu postaciach, które wskazywały na zły, ale już
+  istniejący plik (np. Uzi → `machine_pistol.svg` zamiast własnego `uzi.svg`, „combat knife"
+  → `baseball_bat.svg` zamiast `combat_knife.svg`) — bez generowania nowej grafiki, czysty
+  data-fix.
+
+### v0.14.14 — Bugfix: notatki Długiego odpoczynku 8px w prawo względem reszty okna (2026-08-28)
+
+Zgłoszone wprost po zrzucie ekranu: `.neuro-rest-note` miało `margin: 0 0 8px 8px` — zbędny
+lewy margines (relikt myślenia o miejscu na wystający znacznik-kółko, które i tak korzysta
+z paddingu `.window-content`, nie z marginesu notatki). Zmierzone `getBoundingClientRect`
+przed poprawką: notatki na 835,5px, natywny box i fieldset PW na 827,5px — dokładnie 8px
+różnicy. Poprawka: `margin: 0 0 8px`. Zweryfikowane na żywo po przeładowaniu: wszystkie
+cztery bloki (dwie notatki, natywny `.note.info`, fieldset) na tym samym `left`
+
+### v0.14.13 — Notatka Długiego odpoczynku: dwie, w stylu natywnych `.note` z dnd5e (2026-08-28)
+
+Dopracowanie v0.14.12 na żądanie: jedna gęsta notatka rozbita na dwie — niebieska `info`
+(same triggery zakłócenia) i bursztynowa `warn` (konsekwencje: próg 1 PW, próg 4h, wznowienie
++1h). Obie stylizowane na wzór natywnego pudełka `.note.info` z dnd5e (`less/v2/apps.less`),
+które i tak stoi tuż pod nimi w tym samym oknie — bordered box, kółko-znacznik z ikoną,
+przyciemnione tło koloru obwódki (`color-mix`), `--dnd5e-color-note-warn` dla wariantu warn.
+Własna klasa `.neuro-rest-note` zamiast bezpośredniego użycia `.note` dnd5e, bo tamten selektor
+wymaga bycia bezpośrednim dzieckiem `section`/`fieldset` pod `.window-content` — nowe notatki są
+wstrzykiwane luźno na początku okna i nie spełniają tego wymogu. Rozmiar czcionki i odstęp
+wierszy (był 14px/16px, ledwo mieszczący litery) poprawione na 12px/18px — dokładnie to, na czym
+stoi natywny box obok. CSS w `styles/neuroshima.css` (nowa sekcja „OKNO DŁUGIEGO ODPOCZYNKU"),
+zweryfikowane `npm run validate:css` i na żywo (zrzut ekranu, `getComputedStyle`)
+
+### v0.14.12 — Zakłócenie Długiego odpoczynku: pole zamienione na notatkę referencyjną (2026-08-28)
+
+Na żądanie: usunięcie pola „Przerwany po (godz.)" z okna Długiego odpoczynku (`config/rest.mjs`)
+— dotąd trzeba było ręcznie wpisać liczbę godzin, a hook `dnd5e.longRest` sam przeliczał próg
+≥4h i przekierowywał na `actor.shortRest()`. Zastąpione statyczną notatką (RAW z Podręcznika,
+„Zakłócenie Długiego odpoczynku"): triggery przerwania (Inicjatywa/obrażenia/podróż >1h), próg
+1 PW do rozpoczęcia, próg 4h do korzyści Krótkiego (rozliczane już ręcznie przez GM), możliwość
+wznowienia z +1h za przerwę — żadna z tych czterech klauzul nie miała wcześniej odpowiednika
+w polu, które liczyło tylko próg 4h. Wstrzyknięta przez `_onRender` na podklasie
+`restTypes.long.dialogClass` (ta sama ścieżka rozszerzenia co usunięte pole), nie przez hook
+renderowania — jedna odpowiedzialność, jedna klasa. `onLongRest`/`resolveInterruptedLongRest`
+i stała `INTERRUPT_THRESHOLD_HOURS` usunięte w całości, nieużywane nigdzie indziej. Zweryfikowane
+na żywo: notatka renderuje się raz, na górze okna „Długi odpoczynek", zamknięcie okna bez
+potwierdzenia odpoczynku nie rusza stanu postaci
+
+### v0.14.11 — Bugfix: odpoczynek nie kończył aktywnego Berserku (2026-08-28)
+
+Zgłoszenie: „Długi odpoczynek z jakiegoś powodu nie skończył berserku". Potwierdzone na żywo:
+włączony Berserk na Piekarzu, odpoczynek, efekt został aktywny dalej. Przyczyna: jedyny kod
+kasujący stan po czasie to hook `updateCombat` (sprawdza `duration.remaining <= 0` przy zmianie
+rundy/tury) — odpoczynek (4h/24h w tych zasadach, oba dużo dłuższe niż 10 rund Berserku) nigdy
+nie odpala `updateCombat`, więc nic nie pilnowało „to zostało włączone przez odpoczynek". Efekt
+siedziałby aktywny bezterminowo, dopóki nie wystartowałaby walka albo ktoś nie zauważył i nie
+wyłączył ręcznie
+
+**Naprawa**: hook `dnd5e.restCompleted` w `registerClassState()` — kasuje każdy aktywny efekt
+oznaczony `classState` na odpoczywającym aktorze, przez ten sam `_announceEnd()` co każda inna
+ścieżka zejścia (scrollText + karta „Koniec Berserku", świadomie **bez** kary „bez akcji" — ta
+żyje wyłącznie w gałęzi `updateCombat` i po odpoczynku byłaby bez sensu). Bez blokady `isGM` —
+w przeciwieństwie do `updateCombat` (odpala się na każdym podłączonym kliencie śledzącym tracker
+walki), `dnd5e.restCompleted` odpala się raz, lokalnie, tylko u tego, kto faktycznie wywołał
+odpoczynek. Zweryfikowane end-to-end: włączony Berserk, `actor.longRest()` wprost, efekt zniknął
+natychmiast, poprawna karta, użycia poprawnie zresetowane do 0/2 przez natywną regenerację
+(niepowiązane, bez zmian). Utknięty efekt sprzed poprawki skasowany ręcznie, żeby nie zostawić
+martwego stanu. Pełne rozpoznanie: `PLAN_berserk.md` §5b
+
+### v0.14.10 — Bugfix: karta postaci paliła realny użytek Berserku bez żadnego efektu (2026-08-28)
+
+Zgłoszenie: „nic się nie zmienia, gdy używam Berserku na Piekarzu" / „czy muszę być w trybie
+tury?". Nie tura — `toggleClassState` nigdy nie sprawdzał walki/tury. Prawdziwa przyczyna,
+znaleziona na żywo: `build-packs.mjs` (`buildFeature()`) generuje domyślną, klikalną aktywność
+`"utility"` dla **każdej** zdolności z akcją lub użyciami — bez pojęcia o zdolnościach `toggle`.
+Pasek skrótów (`ability-hotbar.mjs`) już wcześniej omijał ten problem (`toggle` → wprost
+`toggleClassState`, z pominięciem `item.use()`), ale **natywny przycisk „użyj" wprost na karcie
+postaci** — najbardziej naturalny sposób kliknięcia — szedł przez tę domyślną aktywność: zużywał
+realne, ograniczone Długim odpoczynkiem użycie, wysyłał gołą kartę z samym opisem, i **nie
+nakładał żadnej mechaniki** (zero AE, zero automatyki), bo cała logika `class-state.mjs` siedziała
+wyłącznie na ścieżce paska skrótów. Nie hipotetyczne: Piekarz miał już 1 z 2 dziennych Berserków
+zużyte, zanim ta sesja czegokolwiek dotknęła — niemal na pewno spalone dokładnie w ten sposób,
+w realnej rozgrywce, bez żadnego efektu. Odtworzone celowo (`berserkItem.use()`, ta sama ścieżka
+co klik na karcie): licznik użyć poszedł 1→2, poszła goła karta `activation-card`, żaden AE się nie
+pojawił — natychmiast cofnięte do 1, żeby własna diagnostyka nie pogłębiła problemu
+
+**Naprawa**: hook `dnd5e.preUseActivity` w `registerClassState()` — dla przedmiotu oznaczonego
+jako zdolność `toggle`, anuluje natywną aktywność (`return false`, przed jakąkolwiek konsumpcją
+czy kartą) i woła `toggleClassState()` — tę samą funkcję, której pasek skrótów już używał. Każde
+wejście zbiega się teraz do jednej ścieżki mechaniki. Zweryfikowane end-to-end na Piekarzu
+prawdziwym wywołaniem natywnym: pojedyncza konsumpcja (1→2, nie 1→3), właściwa stylizowana
+karta „🩸 BERSERK", realny AE; wyłączenie tą samą drogą — czysto; stan końcowy cofnięty do
+nietkniętego 1/2. Generalizuje się na Kondychę (jedyną drugą zdolność `toggle`) za darmo — hook
+bramkuje po `feature.toggle`, nie po konkretnej zdolności. Pełne rozpoznanie: `PLAN_berserk.md` §5a
+
+### v0.14.9 — Dlaczego Rage widać w Efektach a Berserka nie; VFX wypróbowane i cofnięte (2026-08-28)
+
+- **„Stany" to nie to, o co pytał użytkownik** — to natywna paleta stanów (Nieprzytomność,
+  Ogłuszenie…), osobna od sekcji Efekty (Tymczasowe/Pasywne/Nieaktywne). Rzeczywiste pytanie:
+  dlaczego Rage siedzi pod „Nieaktywne efekty" nawet bez użycia, a Berserk nigdy. Odpowiedź,
+  sprawdzona wprost na Piekarzu (miał oba przedmioty): przedmiot Rage niesie własny, trwały,
+  domyślnie wyłączony efekt (`disabled:true`, `transfer:true`) — samo posiadanie przedmiotu
+  wystarcza, by był widoczny. Przedmiot Berserka nie niesie żadnego efektu (`effects.size === 0`
+  na obu postaciach) — `class-state.mjs` tworzy prawdziwy dokument dopiero przy włączeniu
+  i kasuje go przy wyłączeniu, więc w stanie wyłączonym nie ma czego wylistować. **Decyzja:
+  zostaje bez zmian** — atrapa efektu wyłącznie dla parytetu widoczności w zakładce Efekty była
+  rozważona i odrzucona (więcej ruchomych części, zero realnej korzyści)
+- **Scrolling text już działał** — sprawdzone wprost (dłuższy czas trwania, złapane na ekranie),
+  nie był to brakujący feature. Wyglądał na nieobecny, bo testy szły na Dantem, który nie ma
+  żadnego pionka na żadnej realnej scenie (`seqScrollText` cicho nic nie robi bez pionka do
+  wycelowania — poprawne zachowanie, nie błąd)
+- **Trwała aura VFX (JB2A `on_token_buff.001.001.purplered`) wypróbowana i cofnięta tej samej
+  sesji** — zbudowana z jawną zgodą użytkownika („trwała aura na czas trwania" — wybrana opcja),
+  zweryfikowana na żywo (`Sequencer.EffectManager`, poprawne sprzątanie na wszystkich trzech
+  ścieżkach zejścia stanu przez współdzielony `_announceEnd()`), odrzucona na miejscu po
+  zobaczeniu w akcji („fioletowe gwiazdki i pulsy" — zbyt dużo). Usunięta w całości (config `vfx`,
+  oba miejsca wywołania, martwy import) zamiast zostawiona wyłączona. **Stan obecny: sam
+  scrollText, zero VFX na płótnie**
+- **SFX świadomie pominięte** — brak jakiegokolwiek assetu ryku/okrzyku w module (wszystko
+  w `sounds/` to broń palna/przeładowania/wybuchy); odłożone do czasu realnego pliku audio
+- Pełne rozpoznanie i uzasadnienia: `PLAN_berserk.md` §2b
+
+### v0.14.8 — Karta Berserku: porównana z realną kartą Rage, zły kontrast naprawiony (2026-08-28)
+
+Kontynuacja v0.14.7, tego samego dnia, po bezpośrednim sprawdzeniu na żywo (chrome-devtools MCP,
+dane testowe cofnięte) zamiast czytania samego źródła:
+
+- **Karta Rage rzeczywiście wyzwolona** na jednorazowym aktorze: header ze zwijaną sekcją, opis
+  z akapitów (jedna lista `<ul>` tylko dla sposobów przedłużenia Rage, nie dla przyznawanych
+  korzyści), stopka z pigułkami (`pills`) — jedna z nich to **czas trwania** ("10 minutes" na
+  przedmiocie 2024; starszy przedmiot 2014 `classfeatures.Rage` ma "1 min" i pojedynczy,
+  domyślnie wyłączony efekt widoczny w karcie przedmiotu pod „Nieaktywne efekty" — stąd
+  „Rage Inactive, 1 minute" z pytania). Do tego zasobnik „Efekty" (`<effect-application>`,
+  wstrzykiwany po stronie klienta — nieobecny w zapisanej treści wiadomości, więc niewidoczny
+  przy samym czytaniu źródła) z przyciskiem „Zastosuj do wycelowanych/zaznaczonych". **Użycie
+  przedmiotu samo w sobie NIE włącza efektu** — sprawdzone wprost: aktywność zużyła użycie
+  i wysłała kartę, ale efekt `Rage` na przedmiocie został `disabled: true`, dopóki ktoś nie
+  kliknie „Zastosuj". Berserk jest więc de facto **bardziej** zautomatyzowany niż stockowy Rage:
+  włącza się natychmiast i bezwarunkowo na rzucającym, bez osobnego kliknięcia i bez
+  dwuznaczności celu
+- **Karta Berserku dobita do tego, co Rage faktycznie komunikuje** (decyzja użytkownika: styl
+  modułu, nie natywna otoczka kart dnd5e) — `class-state.mjs`: linia wprowadzająca, wypunktowany
+  rozkład czterech korzyści (Siła/Obrażenia/Obłęd/Szarża Berserkera, z żywymi wartościami kości
+  obrażeń i premii do TT), stopka-pigułka `Akcja Bonusowa · 10 rund · Cel: Ty`
+- **Zgłoszony i naprawiony błąd kontrastu**: „ekstremalnie niski kontrast tekstu z tłem". Przyczyna
+  źródłowa, potwierdzona odczytem `getComputedStyle` na żywo: dziennik czatu tego świata niesie
+  własną klasę `theme-light`, niezależną od ciemnego motywu reszty UI — tło wiadomości to
+  `rgb(241, 235, 232)` (prawie białe). Karty modułu (Berserk i Forsowanie/Fuks w `rerolls.mjs`)
+  używały na sztywno jasnoszarych kolorów tekstu (`#aaa`/`#ccc`/`#888`) zakładających ciemne tło —
+  prawie niewidocznych na jasnym. Naprawa: zamiana na tokeny motywu dnd5e/Foundry
+  (`var(--color-text-primary, ...)`/`var(--color-text-secondary, ...)`), które poprawnie
+  przełączają się z motywem danego dziennika czatu (potwierdzone: `--color-text-primary` to
+  `#191813` pod `theme-light`, `#efe6d8` pod `theme-dark`). Zweryfikowane ponownie na żywo po
+  poprawce: tekst listy `rgb(25, 24, 19)` na tym samym jasnym tle karty — czytelny. Ten sam wzorzec
+  (nienaprawiony, tylko oznaczony) istnieje też w `knockout.mjs`, `exhaustion.mjs`, `magazine.mjs`
+
+### v0.14.7 — Berserk dobity do parytetu z Rage (2026-08-28)
+
+Porównanie z górnej półki: stock D&D 5e (2024) Barbarian Rage vs. Brutal Berserk. Pełne
+rozpoznanie w `PLAN_berserk.md`. `actors/class-state.mjs`:
+
+- **Obrażenia Berserkera** i **Siła Berserkera** dobite jako Active Effect zmiany na tym samym
+  przełączniku, który już dawał premię do TT (Obłęd Berserkera) — tekst zdolności je obiecywał
+  od zawsze, kod tego nie liczył. Te same ścieżki dnd5e co oficjalny efekt Rage
+  (`bonuses.mwak.damage`, `abilities.str.check/save.roll.mode`), ta sama skala co dnd5e's
+  `@scale.barbarian.rage-damage` (tu: `@scale.brutal.obrazeniaBerserkera`, już istniejący w
+  `classes-data.mjs`, tylko nieużywany)
+- **Karta czatu na każde zejście stanu** — wcześniej tylko naturalny koniec po 10 rundach dostawał
+  cokolwiek (scrollText + osobna karta „bez akcji"); ręczne wyłączenie i przerwanie przez stan
+  (Nieprzytomność/Obezwładnienie/Zauroczenie) nie dawały żadnego sygnału na stole. Teraz wszystkie
+  trzy ścieżki przechodzą przez jeden `_announceEnd()`, w tym samym stylu co karty
+  Forsowania/Fuksa (`combat/rerolls.mjs`) — kolorowy border-left, pogrubiony tytuł, szary opis
+- Świadomie **nie** dobite: odporność na obrażenia (Rage ją ma, tekst Berserka jej nigdy nie
+  obiecywał — różnica reguł, nie luka), przerwanie stanu przy założeniu ciężkiego pancerza (też
+  nie w tekście), rozszerzenie kary „bez akcji" na ręczne/przerwane zejście (zapytane wprost,
+  decyzja: zostaje tylko po naturalnym końcu)
+- Cztery zdolności z `requiresState: "neuro-berserk"` (Z bara!, Ja i mój gang!, Zew areny, Maszyna
+  do zabijania) zostają bez bramkowania stanem — flaga deklarowana, nigdzie nieczytana, i tak
+  zostaje. Sprawdzone wprost na źródle `fvtt-dnd5e`: nawet oficjalna Ścieżka Berserkera nie
+  bramkuje swoich odpowiedników (Frenzy — zero warunku aktywacji mimo tekstu „if your Rage is
+  active"; Mindless Rage — AE na odporność istnieje, ale wysyłany `disabled: true` i **nie**
+  włączany automatycznie z Rage, wprost w komentarzu producenta)
 
 ### v0.14.6 — Karta Drużyny: blokada łupu, upływ czasu podróży, poprawki uprawnień (2026-08-26)
 

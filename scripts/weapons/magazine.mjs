@@ -45,7 +45,7 @@ const CHAMBER_STATE_FLAG = "chamber";
 const RELOAD_ACTIVITY_TYPE = "neuroReload";
 const LOAD_ONE_ACTIVITY_TYPE = "neuroLoadOne";
 const MAG_SWAP_ACTIVITY_TYPE = "neuroMagSwap";
-const CUSTOM_ACTIVITY_TYPES = new Set(["neuroKs", "neuroDs", "neuroMs", "neuroOz", RELOAD_ACTIVITY_TYPE, LOAD_ONE_ACTIVITY_TYPE, MAG_SWAP_ACTIVITY_TYPE]);
+const CUSTOM_ACTIVITY_TYPES = new Set(["neuroKs", "neuroDs", "neuroMs", "neuroOz", "neuroDublet", RELOAD_ACTIVITY_TYPE, LOAD_ONE_ACTIVITY_TYPE, MAG_SWAP_ACTIVITY_TYPE]);
 const processedSingleShotActivities = new WeakSet();
 const syncingMagazineUses = new Set();
 const syncingManagedActivities = new Set();
@@ -241,6 +241,122 @@ function onRenderItemSheet(app, html) {
   `;
 
   detailsSection.after(magRow);
+
+  // Bulk restock button — distinct from the Activity-driven reload (neuroReload/
+  // neuroLoadOne/neuroMagSwap, _onClickReload above): that one respects action
+  // economy and is legal in combat; this one ignores capacity-per-action limits
+  // entirely and tops the mag off in one go, which only makes sense as unhurried
+  // downtime prep — hence the hard combat block instead of spending a resource.
+  if (item.actor && mag.max) {
+    const stockItem = _findAmmo(item.actor, mag.ammoType);
+    const available = stockItem?.system?.quantity ?? 0;
+    const inCombat = !!item.actor.inCombat;
+
+    const bulkRow = document.createElement("div");
+    bulkRow.classList.add("form-group", "neuro-bulk-reload-row");
+    bulkRow.innerHTML = `
+      <label></label>
+      <div class="form-fields">
+        <button type="button" class="neuro-bulk-reload-btn" style="width:auto; white-space:nowrap;"
+                ${inCombat ? "disabled" : ""}
+                ${inCombat ? `data-tooltip="Uzupełnianie z zapasu jest niedostępne podczas walki."` : ""}>
+          <i class="fas fa-boxes-stacked"></i> Uzupełnij z zapasu (${available} szt.)
+        </button>
+      </div>
+    `;
+    bulkRow.querySelector(".neuro-bulk-reload-btn").addEventListener("click", async e => {
+      e.preventDefault();
+      await _onClickBulkReload(_getLiveItem(item));
+    });
+    magRow.after(bulkRow);
+  }
+}
+
+/**
+ * Bulk-restock a weapon's magazine from the actor's own ammo stock — as much as
+ * the mag can hold and the inventory can supply, in one go, with no per-action
+ * cap. Represents unhurried downtime prep (topping off before heading out), not a
+ * combat action — hence the hard block below rather than spending a resource like
+ * `_onClickReload` does. Loads the SAME caliber already chambered (`mag.ammoType`);
+ * unlike `_onClickReload` this never prompts a Śrut/Breneka choice — "as many
+ * bullets of this type" per the feature's own spec.
+ */
+async function _onClickBulkReload(item) {
+  const actor = item.actor;
+  if (!actor) {
+    ui.notifications.warn("Broń nie jest przypisana do aktora.");
+    return;
+  }
+
+  if (actor.inCombat) {
+    ui.notifications.warn(`${item.name}: uzupełnianie magazynka z zapasu jest niedostępne podczas walki.`);
+    return;
+  }
+
+  const mag = getMag(item);
+  if (!mag) {
+    ui.notifications.warn(`${item.name}: brak danych magazynka (ustaw Maks najpierw).`);
+    return;
+  }
+
+  const needed = mag.max - mag.current;
+  if (needed <= 0) {
+    ui.notifications.info(`${item.name}: magazynek jest już pełny.`);
+    return;
+  }
+
+  const ammoItem = _findAmmo(actor, mag.ammoType);
+  if (!ammoItem) {
+    ui.notifications.warn(`Brak amunicji (${mag.ammoType || "dowolnej"}) w ekwipunku.`);
+    return;
+  }
+
+  const available = ammoItem.system.quantity ?? 0;
+  const toLoad = Math.min(needed, available);
+  if (toLoad <= 0) {
+    ui.notifications.warn(`${ammoItem.name}: wyczerpana amunicja.`);
+    return;
+  }
+
+  const newQty = available - toLoad;
+  if (newQty <= 0) {
+    await ammoItem.delete();
+  } else {
+    await ammoItem.update({ "system.quantity": newQty });
+  }
+
+  const newCurrent = mag.current + toLoad;
+  await setMag(item, { current: newCurrent });
+  await _clearReloadState(item);
+
+  await _playBulkReloadClicks(item, actor, mag.ammoType, toLoad);
+  seqScrollText("UZUPEŁNIONO", actor, { color: "#f1c40f", fontSize: 26, duration: 1500 });
+
+  const justFull = (newCurrent === mag.max) ? " do pełna" : "";
+  const justAll = (newQty === 0) ? " wszystkie swoje" : "";
+
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    content: `<div style="border-left:3px solid #888;padding-left:8px;font-size:1.1em;">
+      <strong>${actor.name}</strong> uzupełnia magazynek${justFull}, ładując po kolei${justAll} ${toLoad} x ${ammoItem.name} do <em>${item.name}</em>.<br>
+      <span style="font-size:0.85em;color:#888;">[Stan: ${newCurrent}/${mag.max}]</span>
+    </div>`
+  });
+}
+
+/**
+ * Rounds loaded "one by one" — plays the same single-insert click used by
+ * `_onClickReload`'s per-round path, repeated with a short stagger. Capped well
+ * below the actual count for large top-offs (e.g. 30 rounds into an Uzi's stick
+ * mag) so it reads as "loading a bunch of rounds" rather than becoming a
+ * multi-second sound-effect ordeal.
+ */
+async function _playBulkReloadClicks(item, actor, caliberId, count) {
+  const clicks = Math.max(1, Math.min(count, 8));
+  for (let i = 0; i < clicks; i++) {
+    playUtilitySound("reload", item, WeaponSound.RELOAD_SINGLE, { caliberId, token: actor });
+    if (i < clicks - 1) await new Promise(r => setTimeout(r, 180));
+  }
 }
 
 async function onUpdateItemSyncMagazineUses(item, changes) {

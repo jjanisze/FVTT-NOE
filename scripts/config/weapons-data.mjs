@@ -697,9 +697,18 @@ export const WEAPON_NAME_ALIASES = Object.freeze({
   "Bejsbol": "Bejsbol/Rurka",
   "Rurka": "Bejsbol/Rurka",
   "Trzydziestka": "Trzydziestka ósemka",
+  "38-ka": "Trzydziestka ósemka",
   "AK": "AK (Kałach)",
   "Kusza pistoletowa": "Kusza automatyczna pistoletowa",
-  "Kusza Cobra": "Kusza automatyczna Cobra"
+  "Kusza Cobra": "Kusza automatyczna Cobra",
+  // Found live on Alan (2026-08-29): both silently invisible to auditWeapons()
+  // because the name didn't match at all, not even in the wrong case.
+  "H&K G3": "HK G3",
+  "M1 Garand": "M1 US Rifle",
+  // Found live on GMT400/Richard Craddock (2026-08-29): same shape — a
+  // descriptive suffix (mount/belt configuration) kept the name from matching.
+  "Browning M2 (z trójnogiem)": "Browning",
+  "FN Minimi (taśma XXL)": "Minimi"
 });
 
 /* -------------------------------------------- */
@@ -789,6 +798,12 @@ export function buildWeaponItemData(w, extra = {}) {
         long: w.range?.long ?? null,
         units: w.range ? "m" : ""
       },
+      // dnd5e's own "Typ Amunicji" field (details-weapon.hbs) — cosmetic here (our
+      // own mag/caliber flags drive actual reload/consumption), but leaving it null
+      // makes the dropdown show blank, which reads as broken. Its <option> list
+      // comes from CONFIG.DND5E.consumableTypes.ammo.subtypes, registered from this
+      // same AMMO_CALIBERS catalog in terminology.mjs.
+      ammunition: { type: w.caliber ?? "" },
       activities: {}
     },
     flags,
@@ -835,4 +850,389 @@ export async function createWeapons(actor) {
     `Zbrojownia: ${toCreate.length} nowych broni, ${toUpdate.length} zaktualizowanych.`
   );
   return { created: toCreate.length, updated: toUpdate.length };
+}
+
+/* -------------------------------------------- */
+/*  Audit + repair: distributed copies drifted from the catalog */
+/* -------------------------------------------- */
+
+/**
+ * `createWeapons()` only ever refreshes the Zbrojownia MASTER's own copies — a weapon
+ * already handed out to a player/NPC (dragged off the master, or created before some
+ * catalog field was added/changed — `props` like `tryb_p`/`tryb_ds`/`amm`, mag sizes,
+ * ranges, damage dice, … — never gets that update). The first symptom found this way
+ * was `tryb_p` missing → `weapons/fire-modes.mjs` builds a firearm's attack/burst
+ * activities FROM that property, so a copy missing it has ZERO activities: it cannot be
+ * fired at all, silently. But that was one symptom of the same underlying problem —
+ * ANY template field can drift the same way, and mag capacity / range are just as
+ * mechanically load-bearing as properties, they just fail quietly instead of loudly.
+ *
+ * `_TEMPLATE_FIELDS` is the single declarative list of what counts as "template" (must
+ * always match the catalog) vs what is per-instance PLAY STATE this tool must never
+ * touch: quantity, equipped/attuned/identified, `flags.mag.current` (rounds actually
+ * chambered right now), degradation/jam/maintenance flags, installed addons, name, img,
+ * description. `auditWeapons()` is read-only — it reports drift without writing
+ * anything. `repairWeapons()` applies exactly what the audit found. Run the audit after
+ * any catalog edit (or periodically) to see the current blast radius before deciding to
+ * repair; `repairWeapons()` calls `auditWeapons()` itself so there's no separate report
+ * to keep in sync.
+ *
+ * Matching is by name, case-insensitively, with `WEAPON_NAME_ALIASES` also tried — real
+ * copies have been seen drifting in case too (e.g. "Uzi" vs. catalog's "UZI").
+ */
+
+const _MAG_FLAG_PATH_PREFIX = `flags.${MODULE_ID}.mag.`;
+
+/**
+ * True while `melee-degradation.mjs` currently has this weapon's damage die knocked
+ * down from a natural 1 (`flags.<module>.degradation.originalDenomination` set). Its
+ * `degradeWeapon()`/`repairWeapon()` deliberately write the LIVE, degraded value
+ * straight into `system.damage.base.number`/`.denomination` — that's play state, not
+ * catalog drift, even though it lives in a template field instead of a flag. Without
+ * this guard the audit reported (and `repairWeapons()` silently "fixed") every
+ * currently-degraded weapon back to its undamaged catalog die, desyncing the visible
+ * red degraded badge (driven by the flag, untouched) from the actual damage rolled
+ * (silently reset to full) — caught live on Piekarz's Nadziak after a routine
+ * `repairWeapons()` pass.
+ */
+function _hasActiveMeleeDegradation(item) {
+  return item.getFlag(MODULE_ID, "degradation")?.originalDenomination != null;
+}
+
+/**
+ * True while a firearm currently has a DIFFERENT, real caliber chambered than its
+ * catalog default — e.g. an Obrzyn (default `12ga_s` — śrut) loaded with `12ga_b`
+ * (breneka). `weapons/ammo.mjs`'s `_onUpdateItemSyncCaliberDamage` deliberately keeps
+ * `system.damage.base.number`/`.denomination`/`.types` and `system.properties` in
+ * lockstep with WHATEVER caliber is actually chambered, every time `flags.mag.ammoType`
+ * changes — that's correct, live behavior (a shotgun loaded with slugs really does hit
+ * differently), not catalog drift. Without this guard `repairWeapons()` would silently
+ * revert the weapon to its default-ammo damage profile the moment someone ran it after
+ * a caliber swap — caught live on Piekarz's Obrzyn right after loading a Breneka round.
+ * Only trusts the swap if the loaded id is a real, known caliber (`AMMO_CALIBER_MAP`) —
+ * an unrecognized/garbage `ammoType` is still reported as drift, not silently excused.
+ */
+function _hasAlternateAmmoLoaded(item, cat) {
+  if (!cat.caliber) return false;
+  const loaded = item.getFlag(MODULE_ID, "mag")?.ammoType;
+  if (!loaded || loaded === cat.caliber) return false;
+  return !!AMMO_CALIBER_MAP[loaded];
+}
+
+/**
+ * Scalar template fields: `get(item)` reads the live value, `want(cat)` reads the
+ * correct value off a `WEAPONS` catalog entry, `path` is where `repairWeapons()` writes
+ * it (dot-notation, straight into `updateEmbeddedDocuments` delta). A field is only
+ * ever written when `want()` returns non-null — this tool corrects wrong/missing
+ * values, it never blanks a field the catalog leaves undefined.
+ */
+const _TEMPLATE_FIELDS = [
+  { label: "Typ broni", path: "system.type.value",
+    get: i => i.system.type?.value ?? null, want: w => w.type ?? null },
+  // skip — see `_hasActiveMeleeDegradation()`/`_hasAlternateAmmoLoaded()`: either a
+  // currently-degraded weapon's live die (deliberately below the catalog's) or a
+  // firearm currently loaded with a different real caliber than its default is
+  // correct live state, not drift.
+  { label: "Obrażenia — kość (liczba)", path: "system.damage.base.number",
+    skip: (item, cat) => _hasActiveMeleeDegradation(item) || _hasAlternateAmmoLoaded(item, cat),
+    get: i => i.system.damage?.base?.number ?? null, want: w => w.damage?.number ?? null },
+  { label: "Obrażenia — kość (denominacja)", path: "system.damage.base.denomination",
+    skip: (item, cat) => _hasActiveMeleeDegradation(item) || _hasAlternateAmmoLoaded(item, cat),
+    get: i => i.system.damage?.base?.denomination ?? null, want: w => w.damage?.denomination ?? null },
+  // autoFix: false — this is the ONE field the live audit found routinely hand-tuned
+  // per instance (e.g. "@abilities.dex.mod" roll-data bonuses on specific NPCs' guns).
+  // Reported like everything else so a GM sees the drift, but `repairWeapons()` never
+  // writes it — blindly resetting it to the catalog's bare "" would erase a deliberate
+  // per-character bonus, not fix a bug.
+  { label: "Obrażenia — bonus", path: "system.damage.base.bonus", autoFix: false,
+    get: i => i.system.damage?.base?.bonus || "", want: w => w.damage?.bonus || "" },
+  { label: "Oburącz — kość (liczba)", path: "system.damage.versatile.number",
+    get: i => i.system.damage?.versatile?.number ?? null, want: w => w.versatile?.number ?? null },
+  { label: "Oburącz — kość (denominacja)", path: "system.damage.versatile.denomination",
+    get: i => i.system.damage?.versatile?.denomination ?? null, want: w => w.versatile?.denomination ?? null },
+  { label: "Zasięg — normalny", path: "system.range.value",
+    get: i => i.system.range?.value ?? null, want: w => w.range?.value ?? null },
+  { label: "Zasięg — daleki", path: "system.range.long",
+    get: i => i.system.range?.long ?? null, want: w => w.range?.long ?? null },
+  { label: "Waga", path: "system.weight.value",
+    get: i => i.system.weight?.value ?? null, want: w => w.weight ?? null },
+  { label: "Cena", path: "system.price.value",
+    get: i => i.system.price?.value ?? null, want: w => w.price ?? null },
+  { label: "Dostępność", path: `flags.${MODULE_ID}.availability`,
+    get: i => i.getFlag(MODULE_ID, "availability") ?? null, want: w => w.avail ?? null },
+  // dnd5e's native "Typ Amunicji" field — cosmetic (see buildWeaponItemData's
+  // comment), but a copy built before this field existed shows a blank dropdown.
+  // skip while alternate ammo is loaded so this doesn't fight the live caliber swap.
+  { label: "Typ Amunicji (natywne)", path: "system.ammunition.type", skip: _hasAlternateAmmoLoaded,
+    get: i => i.system.ammunition?.type || null, want: w => w.caliber || null },
+  // special: "mag" — reported here like any other field, but repaired through the
+  // dedicated mag block below instead of the generic per-field writer. Magazine state
+  // has a THIRD concern beyond "is this value right" — whether `current` (rounds
+  // actually in the gun) exists as real ammo state at all — which can't be expressed
+  // as an independent max/ammoType diff (both can already be correct while `current`
+  // was never initialized; a live copy with exactly that shape is what caught this).
+  { label: "Magazynek — pojemność", path: `${_MAG_FLAG_PATH_PREFIX}max`, special: "mag",
+    get: i => i.getFlag(MODULE_ID, "mag")?.max ?? null, want: w => w.mag?.max ?? null },
+  // skip — see `_hasAlternateAmmoLoaded()`: a shotgun currently loaded with a
+  // different real caliber than its default (e.g. Breneka in an Obrzyn) is not drift.
+  { label: "Magazynek — kaliber", path: `${_MAG_FLAG_PATH_PREFIX}ammoType`, special: "mag",
+    skip: _hasAlternateAmmoLoaded,
+    get: i => i.getFlag(MODULE_ID, "mag")?.ammoType || null, want: w => w.caliber || null }
+];
+
+/** Array-valued template field(s): compared as sets (order never matters). */
+const _TEMPLATE_ARRAY_FIELDS = [
+  // skip — see `_hasAlternateAmmoLoaded()`: Breneka's obuchowe (bludgeoning) hit
+  // replacing Śrut's kłute (piercing) on an Obrzyn is the ammo-sync hook working,
+  // not the weapon's damage type drifting from the catalog.
+  { label: "Typ obrażeń", path: "system.damage.base.types", skip: _hasAlternateAmmoLoaded,
+    get: i => Array.from(i.system.damage?.base?.types ?? []), want: w => [...(w.damage?.types ?? [])] }
+];
+
+function _sameScalar(a, b) {
+  return (a ?? null) === (b ?? null);
+}
+
+function _sameSet(a, b) {
+  const sa = new Set(a ?? []);
+  const sb = new Set(b ?? []);
+  if (sa.size !== sb.size) return false;
+  for (const v of sa) if (!sb.has(v)) return false;
+  return true;
+}
+
+/** Catalog lookup by item name: exact (case-insensitive), falling back to aliases. */
+function _buildCatalogIndex() {
+  const byNameLower = new Map(WEAPONS.map(w => [w.name.toLowerCase(), w]));
+  for (const [legacyName, canonicalName] of Object.entries(WEAPON_NAME_ALIASES)) {
+    const canonical = WEAPONS.find(w => w.name === canonicalName);
+    if (canonical) byNameLower.set(legacyName.toLowerCase(), canonical);
+  }
+  return byNameLower;
+}
+
+/**
+ * Diff one weapon item against its catalog entry. Returns `[]` if nothing drifted.
+ * Exported (not just used internally by `auditWeapons()`) so it's unit-testable against
+ * a single scratch item without touching `game.actors` — see `tests/ekwipunek-dane.test.mjs`.
+ * @param {Item5e} item
+ * @param {object} cat  A `WEAPONS` entry.
+ * @returns {{label: string, current: *, expected: *}[]}
+ */
+export function diffWeaponItem(item, cat) {
+  const fields = [];
+
+  for (const f of _TEMPLATE_FIELDS) {
+    if (f.skip?.(item, cat)) continue;
+    const current = f.get(item);
+    const expected = f.want(cat);
+    if (expected != null && !_sameScalar(current, expected)) fields.push({ label: f.label, current, expected });
+  }
+
+  for (const f of _TEMPLATE_ARRAY_FIELDS) {
+    if (f.skip?.(item, cat)) continue;
+    const current = f.get(item);
+    const expected = f.want(cat);
+    if (expected.length && !_sameSet(current, expected)) fields.push({ label: f.label, current, expected });
+  }
+
+  // Properties: report only what's MISSING — extra properties a GM added by hand are
+  // never treated as drift.
+  const currentProps = new Set(item.system.properties ?? []);
+  const missingProps = (cat.props ?? []).filter(p => !currentProps.has(p));
+  if (missingProps.length) {
+    fields.push({ label: "Właściwości (brakujące)", current: [...currentProps], expected: missingProps });
+  }
+
+  // fixedDamage: one-directional — the catalog only ever asserts it as `true`
+  // (`buildWeaponItemData` never writes `false`), so only flag it missing, never
+  // flag an instance that has it set when the catalog doesn't ask for it.
+  if (cat.fixedDamage && item.getFlag(MODULE_ID, "fixedDamage") !== true) {
+    fields.push({ label: "Ustalone obrażenia kalibru", current: false, expected: true });
+  }
+
+  // Magazine "current" (rounds actually in the gun): a weapon this system should be
+  // tracking ammo for, but where `current` was never a real number in the first place
+  // (seen live: a copy with `flags.mag = {ammoType}` only — no `max`, no `current`).
+  // Independent of the max/ammoType checks above — both of those can already be
+  // correct while `current` still doesn't exist.
+  if (cat.caliber || cat.mag) {
+    const magFlag = item.getFlag(MODULE_ID, "mag");
+    if (!magFlag || typeof magFlag.current !== "number") {
+      fields.push({ label: "Magazynek — stan naboi (current)", current: magFlag?.current ?? null, expected: "do zainicjowania" });
+    }
+  }
+
+  return fields;
+}
+
+/**
+ * Read-only audit: diff every non-Zbrojownia actor's weapons against the catalog.
+ * Prints a summary (and the full detail) to console; returns the structured report.
+ * @returns {{actors: number, items: number, diffs: Array}}
+ */
+export function auditWeapons() {
+  const byNameLower = _buildCatalogIndex();
+  const diffs = [];
+
+  for (const actor of game.actors) {
+    if (actor.getFlag(MODULE_ID, "isZbrojownia")) continue;
+    for (const item of actor.items) {
+      if (item.type !== "weapon") continue;
+      const cat = byNameLower.get(item.name.toLowerCase());
+      if (!cat) continue;
+
+      const fields = diffWeaponItem(item, cat);
+      if (fields.length) {
+        diffs.push({ actor: actor.name, actorId: actor.id, item: item.name, itemId: item.id, fields });
+      }
+    }
+  }
+
+  const actorsAffected = new Set(diffs.map(d => d.actorId)).size;
+  console.log(`Neuroshima 5e | Weapon audit: ${diffs.length} item(s) drifted across ${actorsAffected} actor(s).`, diffs);
+  ui.notifications.info(
+    diffs.length
+      ? `Audyt broni: ${diffs.length} przedmiotów z rozjazdem na ${actorsAffected} aktorach (szczegóły w konsoli).`
+      : "Audyt broni: brak rozjazdów."
+  );
+  return { actors: actorsAffected, items: diffs.length, diffs };
+}
+
+/**
+ * Compute the `updateEmbeddedDocuments` delta that would repair one weapon item — pure
+ * (reads `item`/`cat`, never writes) so it's unit-testable in isolation; see
+ * `tests/ekwipunek-dane.test.mjs`. Returns `{}` if nothing needs fixing. Only ever
+ * touches template fields (see `_TEMPLATE_FIELDS`/`_TEMPLATE_ARRAY_FIELDS`/properties/
+ * fixedDamage above) — never quantity, equipped/attuned, addon flags, or ammo actually
+ * chambered right now. The damage die/type and mag-caliber fields are additionally
+ * skipped outright while they're currently live play state wearing a template field's
+ * clothes, not catalog drift: `_hasActiveMeleeDegradation` (a knocked-down melee die)
+ * and `_hasAlternateAmmoLoaded` (a firearm currently chambered with a different real
+ * caliber than its default, e.g. Breneka in an Obrzyn — `weapons/ammo.mjs` deliberately
+ * keeps damage/type in sync with whatever's actually loaded).
+ *
+ * Magazine capacity/caliber gets special handling: if the item has no real ammo COUNT
+ * on record (`flags.<module>.mag` missing entirely, or present but never given a
+ * numeric `current` — seen live on copies that only ever got `{ammoType}`), a fresh
+ * block is seeded (`current` = `max`, exactly like at creation) — a bare dot-path write
+ * of just `.max` would otherwise leave `.current` permanently undefined. Only once the
+ * weapon has a real `current` (it's actually been fired/reloaded in play) does this
+ * switch to patching just the drifted sub-field — the rounds chambered are never
+ * touched once they're real.
+ *
+ * Any `_TEMPLATE_FIELDS` entry marked `autoFix: false` (currently just the damage
+ * bonus — see its comment) is reported by `diffWeaponItem()` but never written here;
+ * that drift needs a human to look at it, not a bulk script.
+ *
+ * @param {Item5e} item
+ * @param {object} cat  A `WEAPONS` entry.
+ * @returns {object}  An `updateEmbeddedDocuments`-shaped delta (no `_id`).
+ */
+export function buildWeaponRepairDelta(item, cat) {
+  const delta = {};
+
+  for (const f of _TEMPLATE_FIELDS) {
+    if (f.autoFix === false) continue; // reported by the audit, never auto-written
+    if (f.special === "mag") continue; // handled by the dedicated block below
+    if (f.skip?.(item, cat)) continue; // live play state masquerading as a template field
+    const expected = f.want(cat);
+    if (expected == null || _sameScalar(f.get(item), expected)) continue;
+    foundry.utils.setProperty(delta, f.path, expected);
+  }
+
+  // Magazine: one block covers max/ammoType correctness AND whether `current`
+  // (rounds actually in the gun) exists as real ammo state at all — see
+  // `diffWeaponItem()`'s matching comment for why those can't be independent
+  // per-field diffs. A real `current` (this weapon has actually been tracked in
+  // play) means only the drifted sub-field gets patched; anything else (missing
+  // entirely, or present but never given a real `current`) gets a whole fresh
+  // block instead of leaving `current` permanently undefined.
+  if (cat.caliber || cat.mag) {
+    const magFlag = item.getFlag(MODULE_ID, "mag");
+    if (magFlag && typeof magFlag.current === "number") {
+      const wantMax = cat.mag?.max ?? null;
+      const wantAmmo = cat.caliber ?? "";
+      if (wantMax != null && magFlag.max !== wantMax) {
+        foundry.utils.setProperty(delta, `${_MAG_FLAG_PATH_PREFIX}max`, wantMax);
+      }
+      if (wantAmmo && (magFlag.ammoType || "") !== wantAmmo && !_hasAlternateAmmoLoaded(item, cat)) {
+        foundry.utils.setProperty(delta, `${_MAG_FLAG_PATH_PREFIX}ammoType`, wantAmmo);
+      }
+    } else {
+      const max = cat.mag?.max ?? magFlag?.max ?? null;
+      foundry.utils.setProperty(delta, `flags.${MODULE_ID}.mag`, {
+        ammoType: cat.caliber ?? magFlag?.ammoType ?? "", max, current: max ?? 0
+      });
+    }
+  }
+
+  for (const f of _TEMPLATE_ARRAY_FIELDS) {
+    if (f.skip?.(item, cat)) continue;
+    const expected = f.want(cat);
+    if (expected.length && !_sameSet(f.get(item), expected)) {
+      foundry.utils.setProperty(delta, f.path, expected);
+    }
+  }
+
+  const currentProps = new Set(item.system.properties ?? []);
+  const merged = new Set([...currentProps, ...(cat.props ?? [])]);
+  if (merged.size !== currentProps.size) {
+    foundry.utils.setProperty(delta, "system.properties", [...merged]);
+  }
+
+  if (cat.fixedDamage && item.getFlag(MODULE_ID, "fixedDamage") !== true) {
+    foundry.utils.setProperty(delta, `flags.${MODULE_ID}.fixedDamage`, true);
+  }
+
+  return delta;
+}
+
+/**
+ * Apply what `auditWeapons()` finds, via `buildWeaponRepairDelta()` per item.
+ * @returns {Promise<{actors: number, items: number, details: Array}>}
+ */
+export async function repairWeapons() {
+  const { diffs } = auditWeapons();
+  if (!diffs.length) return { actors: 0, items: 0, details: [] };
+
+  const byActor = new Map();
+  for (const d of diffs) {
+    if (!byActor.has(d.actorId)) byActor.set(d.actorId, []);
+    byActor.get(d.actorId).push(d);
+  }
+
+  let actorsTouched = 0;
+  let itemsFixed = 0;
+  const details = [];
+
+  for (const [actorId, actorDiffs] of byActor) {
+    const actor = game.actors.get(actorId);
+    if (!actor) continue;
+    const byNameLower = _buildCatalogIndex();
+
+    const updates = [];
+    for (const d of actorDiffs) {
+      const item = actor.items.get(d.itemId);
+      const cat = byNameLower.get(item?.name.toLowerCase());
+      if (!item || !cat) continue;
+
+      const delta = buildWeaponRepairDelta(item, cat);
+
+      if (Object.keys(delta).length) {
+        updates.push({ _id: item.id, ...delta });
+        details.push({ actor: actor.name, item: item.name, fields: d.fields.map(f => f.label) });
+      }
+    }
+
+    if (updates.length) {
+      await actor.updateEmbeddedDocuments("Item", updates);
+      actorsTouched++;
+      itemsFixed += updates.length;
+    }
+  }
+
+  ui.notifications.info(`Naprawiono ${itemsFixed} broni na ${actorsTouched} aktorach.`);
+  console.log(`Neuroshima 5e | Weapon repair: ${itemsFixed} item(s) fixed across ${actorsTouched} actor(s).`, details);
+  return { actors: actorsTouched, items: itemsFixed, details };
 }

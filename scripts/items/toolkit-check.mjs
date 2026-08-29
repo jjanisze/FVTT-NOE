@@ -10,6 +10,15 @@
  * Here we intercept the use of any tool-kit `check` activity and instead roll the tool
  * check for the item's own actor, with the activity's DC. This also collapses the old
  * card→button→roll flow into a single click, and makes the "Narzędzia: …" note accurate.
+ *
+ * Kits with `nativeCheck: true` in TOOLKITS (kowala, so far — see toolkits-data.mjs)
+ * are generated with the `neuroToolCheck` activity type instead of stock `check`
+ * (see toolkit-check-activity.mjs), which fixes the SAME owner-resolution problem
+ * without cancelling dnd5e's activation flow — so the stock chevron chat card, roll
+ * buttons and dialog are preserved. `_isToolkitCheck` below only matches `type ===
+ * "check"`, so those kits are automatically skipped here — no explicit exclusion
+ * needed. As kits graduate to `nativeCheck: true` this hook's reach shrinks; once
+ * all 22 have graduated, this whole file can be retired.
  */
 
 const MODULE_ID = "neuroshima-2026-overrides";

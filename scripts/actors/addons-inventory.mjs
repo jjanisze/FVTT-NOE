@@ -163,9 +163,16 @@ function _onRenderItemSheet(app, html) {
       event.preventDefault();
       const addonId = btn.dataset.addonId;
       if (!addonId) return;
+      const def = ADDON_DEFS[addonId];
+      // Permanent addons (e.g. Osełka — trwale zainstalowana, do naprawy/degradacji
+      // się nie liczy jako fizyczny przedmiot) never come back as a loot item; say so
+      // instead of promising a refund `removeAddon` won't actually give.
+      const outcomeNote = def?.refundable === false
+        ? "Zostanie trwale zniszczone — NIE wróci do ekwipunku."
+        : "Trafi z powrotem do ekwipunku.";
       const confirmed = await foundry.applications.api.DialogV2.confirm({
         window: { title: "Odinstaluj ulepszenie" },
-        content: `<p>Odinstalować <strong>${ADDON_DEFS[addonId]?.label ?? addonId}</strong>? Trafi z powrotem do ekwipunku.</p>`,
+        content: `<p>Odinstalować <strong>${def?.label ?? addonId}</strong>? ${outcomeNote}</p>`,
         yes: { label: "Odinstaluj", icon: "fas fa-trash" },
         no:  { label: "Anuluj" },
         rejectClose: false,
