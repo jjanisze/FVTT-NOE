@@ -7,8 +7,8 @@ How a new version gets from a working tree to something Foundry can one-click in
 `module.json` ships with:
 
 ```json
-"manifest": "https://github.com/jjanisze/neuroshima-2026-overrides/releases/latest/download/module.json",
-"download": "https://github.com/jjanisze/neuroshima-2026-overrides/releases/latest/download/module.zip"
+"manifest": "https://github.com/jjanisze/FVTT-NOE/releases/latest/download/module.json",
+"download": "https://github.com/jjanisze/FVTT-NOE/releases/latest/download/module.zip"
 ```
 
 Both point at GitHub's `/releases/latest/download/<asset-name>` redirect, which always resolves
@@ -48,7 +48,7 @@ to whichever release is currently marked **latest** — not a specific tag. That
    - zips the module's runtime files into `module.zip`,
    - creates a GitHub Release for the tag with `module.json` and `module.zip` attached, marked
      **latest**.
-7. Confirm on the [Releases page](https://github.com/jjanisze/neuroshima-2026-overrides/releases)
+7. Confirm on the [Releases page](https://github.com/jjanisze/FVTT-NOE/releases)
    that the new release is there and marked "Latest". Foundry installs/updates will pick it up
    automatically from that point on.
 
@@ -71,7 +71,7 @@ Before the *first* release can happen, the repo needs to actually exist on GitHu
 
 ```
 gh auth login
-gh repo create jjanisze/neuroshima-2026-overrides --public --source=. --remote=origin
+gh repo create jjanisze/FVTT-NOE --public --source=. --remote=origin
 git push -u origin master
 ```
 

@@ -13,7 +13,7 @@
 2. Kliknij **Install Module**.
 3. W polu **Manifest URL** wklej:
    ```
-   https://github.com/jjanisze/neuroshima-2026-overrides/releases/latest/download/module.json
+   https://github.com/jjanisze/FVTT-NOE/releases/latest/download/module.json
    ```
 4. Kliknij **Install**. Foundry pobierze najnowsze wydanie automatycznie.
 5. Wejdź w świat oparty o system `dnd5e` (albo utwórz nowy) i w **Manage Modules** zaznacz
@@ -25,7 +25,7 @@ wydanie).
 
 ## Metoda 2: Ręczna (offline / bez dostępu do internetu z serwera Foundry)
 
-1. Wejdź na [stronę wydań](https://github.com/jjanisze/neuroshima-2026-overrides/releases/latest)
+1. Wejdź na [stronę wydań](https://github.com/jjanisze/FVTT-NOE/releases/latest)
    i pobierz `module.zip`.
 2. Rozpakuj zawartość archiwum do:
    ```
@@ -48,4 +48,4 @@ elementy już skopiowane do świata (np. na kartach postaci) zostają.
 | „This Module is not compatible with the installed version of the dnd5e system" | Masz `dnd5e` starszy niż 5.0.0 albo wydanie z rozjazdem wersji | Zaktualizuj `dnd5e` do 5.3.x |
 | Moduł zainstalowany, ale nie widać go na liście do włączenia | Wybrany świat nie jest oparty o `dnd5e` | Moduł wymaga świata z systemem `dnd5e` — utwórz taki świat lub przełącz się na inny |
 | Po instalacji brak dźwięków/VFX strzałów | Brak modułu **Sequencer** | Zainstaluj Sequencer osobno — patrz [README, sekcja „Modpack"](../README.md#modpack--jak-grać-w-to-samo-co-autor) |
-| Błąd w konsoli przy starcie świata (F12) | Może to być realny błąd, nie problem instalacji | Zgłoś na [GitHub Issues](https://github.com/jjanisze/neuroshima-2026-overrides/issues) z treścią błędu i wersjami (Foundry / dnd5e / moduł) |
+| Błąd w konsoli przy starcie świata (F12) | Może to być realny błąd, nie problem instalacji | Zgłoś na [GitHub Issues](https://github.com/jjanisze/FVTT-NOE/issues) z treścią błędu i wersjami (Foundry / dnd5e / moduł) |

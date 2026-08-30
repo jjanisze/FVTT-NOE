@@ -12,7 +12,7 @@ oficjalnego sklepu. Zamiast tego wszystko jest jawnie opisane tutaj, na GitHubie
 [README, sekcję „O projekcie"](../README.md#o-projekcie) i [CREDITS.md](../CREDITS.md).
 
 **Jak zgłosić błąd albo pomysł?**
-[GitHub Issues](https://github.com/jjanisze/neuroshima-2026-overrides/issues) — zobacz
+[GitHub Issues](https://github.com/jjanisze/FVTT-NOE/issues) — zobacz
 [README, sekcję „Zgłaszanie błędów"](../README.md#zgłaszanie-błędów).
 
 **Czego jeszcze brakuje / co jest niedokończone?**

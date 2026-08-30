@@ -5,7 +5,7 @@ issues, and AI-assisted contributions are all welcome — human review still gat
 
 ## Reporting a bug
 
-Open a [GitHub Issue](https://github.com/jjanisze/neuroshima-2026-overrides/issues/new/choose)
+Open a [GitHub Issue](https://github.com/jjanisze/FVTT-NOE/issues/new/choose)
 using the "Bug report" template. Good bug reports include:
 
 - FoundryVTT version, `dnd5e` system version, and this module's version (all visible in

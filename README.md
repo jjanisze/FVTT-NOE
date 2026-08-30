@@ -43,7 +43,7 @@ uwagi są jak najbardziej mile widziane.
 1. W FoundryVTT: **Add-on Modules → Install Module**.
 2. Wklej w pole „Manifest URL":
    ```
-   https://github.com/jjanisze/neuroshima-2026-overrides/releases/latest/download/module.json
+   https://github.com/jjanisze/FVTT-NOE/releases/latest/download/module.json
    ```
 3. **Install**, potem włącz moduł w świecie opartym o system `dnd5e`.
 
@@ -80,7 +80,7 @@ uporządkowany, ale kompletny).
 ## Zgłaszanie błędów
 
 Coś nie działa, tłumaczenie jest błędne, zasada nie zgadza się z podręcznikiem? Zgłoś przez
-[GitHub Issues](https://github.com/jjanisze/neuroshima-2026-overrides/issues/new/choose).
+[GitHub Issues](https://github.com/jjanisze/FVTT-NOE/issues/new/choose).
 W zgłoszeniu podaj:
 
 - wersję FoundryVTT, wersję systemu `dnd5e` i wersję tego modułu (**Add-on Modules**),

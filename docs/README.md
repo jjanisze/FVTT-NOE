@@ -11,5 +11,5 @@
 4. [FAQ](FAQ.md) — najczęstsze pytania.
 
 Coś jest niejasne albo brakuje strony, której szukasz? Zgłoś to jako
-[issue na GitHubie](https://github.com/jjanisze/neuroshima-2026-overrides/issues) — braki w
+[issue na GitHubie](https://github.com/jjanisze/FVTT-NOE/issues) — braki w
 podręczniku traktujemy tak samo jak błędy w kodzie.
