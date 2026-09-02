@@ -26,6 +26,10 @@ const AMMO_FOLDER_NAME     = "Amunicja";
 const MAGAZINE_FOLDER_NAME = "Magazynki";
 const GRENADE_FOLDER_NAME  = "Granaty";
 const TOOL_FOLDER_NAME      = "Narzędzia";
+const LIGHT_FOLDER_NAME     = "Oświetlenie";
+
+const isLatarkaItem = (i) => i.type === "equipment" && !!i.getFlag(MODULE_ID, "latarkaForm");
+const isBaterieItem = (i) => i.type === "loot" && !!i.getFlag(MODULE_ID, "bateria");
 
 /** Weapon type key → folder label (must match NEURO_WEAPON_TYPES in weapons.mjs). */
 const TYPE_FOLDER_LABELS = {
@@ -97,7 +101,15 @@ async function _ensureFolders() {
     toolFolder = await Folder.create({ name: TOOL_FOLDER_NAME, type: "Item", folder: parent.id });
   }
 
-  return { parent, byType, ammoFolder, magazineFolder, grenadeFolder, toolFolder };
+  // Lighting (Oświetlenie) folder — Latarka/Baterie, see items/latarka.mjs + items/baterie.mjs
+  let lightFolder = game.folders.find(f =>
+    f.name === LIGHT_FOLDER_NAME && f.type === "Item" && f.folder?.id === parent.id
+  );
+  if (!lightFolder) {
+    lightFolder = await Folder.create({ name: LIGHT_FOLDER_NAME, type: "Item", folder: parent.id });
+  }
+
+  return { parent, byType, ammoFolder, magazineFolder, grenadeFolder, toolFolder, lightFolder };
 }
 
 /* -------------------------------------------- */
@@ -112,7 +124,9 @@ async function syncZbrojownia(actor) {
   const items = actor.items.filter(i =>
     i.type === "weapon" ||
     i.type === "tool" ||
-    (i.type === "consumable" && i.system.type?.value === "ammo")
+    (i.type === "consumable" && i.system.type?.value === "ammo") ||
+    isLatarkaItem(i) ||
+    isBaterieItem(i)
   );
 
   if (items.size === 0) {
@@ -122,7 +136,7 @@ async function syncZbrojownia(actor) {
 
   ui.notifications.info(`Synchronizuję zbrojownię… (${items.size} pozycji)`);
 
-  const { byType, ammoFolder, magazineFolder, grenadeFolder, toolFolder } = await _ensureFolders();
+  const { byType, ammoFolder, magazineFolder, grenadeFolder, toolFolder, lightFolder } = await _ensureFolders();
 
   let created = 0;
   let updated = 0;
@@ -130,7 +144,9 @@ async function syncZbrojownia(actor) {
   for (const item of items) {
     // Determine target folder
     let targetFolder;
-    if (item.type === "tool") {
+    if (isLatarkaItem(item) || isBaterieItem(item)) {
+      targetFolder = lightFolder;
+    } else if (item.type === "tool") {
       targetFolder = toolFolder;
     } else if (item.type === "consumable") {
       const sub = item.system.type?.subtype ?? "";

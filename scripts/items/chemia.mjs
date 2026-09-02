@@ -16,10 +16,15 @@
  *
  * ## Deferred effects, and the honest limits of them
  *
- * dnd5e 5.3 has **no effect-expiry hook** — verified: nothing in the system
- * listens for an effect running out, `duration.remaining` is simply computed when
- * something reads it, and an expired effect just sits there. So "when Anestix
- * wears off, roll Kondycja" cannot hang off the effect at all.
+ * dnd5e itself has no effect-expiry hook — but Foundry v13+ CORE does now
+ * (`client/helpers/active-effect-registry.mjs`'s `ActiveEffectRegistry`, ticking on
+ * `updateWorldTime` and every combat round/turn event — see `podpalenie.mjs` for it
+ * already in use here, and DEV_GUIDE.md §10e for the full mechanism). That doesn't
+ * change the conclusion below, though: its default `CONFIG.ActiveEffect.expiryAction`
+ * ("update") only flips `duration.expired = true` — it never deletes the effect or
+ * runs any of our logic on its own. So "when Anestix wears off, roll Kondycja" still
+ * cannot hang directly off the effect; the only thing core buys us is correct
+ * `duration.remaining` arithmetic to read, not the follow-up action itself.
  *
  * What this module does instead:
  *   1. applies the effect with a real dnd5e `duration`, so the token HUD counts down;

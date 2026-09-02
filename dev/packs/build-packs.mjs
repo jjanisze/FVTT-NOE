@@ -34,6 +34,9 @@ import { SZTUCZKI, sztuczkaItemData } from "../../scripts/config/sztuczki-data.m
 import { ORIGIN_ABILITIES, originAbilityItemData, POCHODZENIA, pochodzenieItemData, abilitiesOf, attrBonus } from "../../scripts/config/pochodzenia-data.mjs";
 import { AMMO_CALIBERS, GRENADE_TYPES } from "../../scripts/config/ammo-data.mjs";
 import { WEAPONS, buildWeaponItemData } from "../../scripts/config/weapons-data.mjs";
+import { POCHODNIA_VARIANTS, buildPochodniaItemData } from "../../scripts/weapons/pochodnia.mjs";
+import { LATARKA_FORMS, buildLatarkaItemData } from "../../scripts/items/latarka.mjs";
+import { buildBaterieItemData } from "../../scripts/items/baterie.mjs";
 import { ARMORS, buildArmorItemData } from "../../scripts/config/armor-data.mjs";
 import { TOOLKITS, buildToolkitItemData } from "../../scripts/config/toolkits-data.mjs";
 import { BESTIARY } from "../../scripts/config/bestiary-data.mjs";
@@ -627,6 +630,33 @@ function buildToolkit(kit) {
  */
 function buildWeapon(w) {
   return { ...buildWeaponItemData(w), _id: idFor("weapon", w.id), _key: null };
+}
+
+/**
+ * Pochodnia (torch) — not a `WEAPONS` catalog entry, so it doesn't flow through
+ * `buildWeapon()` above. `buildPochodniaItemData` is the same shared builder
+ * `weapons/pochodnia.mjs`'s own `createPochodniaItem` calls at runtime, so the
+ * compendium copy and a freshly-scripted one can't drift apart. Activities are
+ * empty here for the identical reason `buildWeapon()`'s comment gives for fire
+ * modes — `ensurePochodniaActivities()` backfills Zapal/Zgaś the moment this is
+ * dragged out of the compendium, via the same `createItem` hook fire-modes.mjs uses.
+ */
+function buildPochodnia(variantKey) {
+  return { ...buildPochodniaItemData(variantKey), _id: idFor("weapon", `pochodnia-${variantKey}`), _key: null };
+}
+
+/**
+ * Latarka (flashlight) forms and Baterie — same shared-builder discipline as Pochodnia above,
+ * `buildLatarkaItemData`/`buildBaterieItemData` are the exact functions `items/latarka.mjs` and
+ * `items/baterie.mjs` call at runtime. Parked in the `bron` pack alongside Pochodnia rather than
+ * a dedicated pack — there's no general "gear" compendium pack yet, and Pochodnia (also a light
+ * source, also not really a weapon in spirit) already set the precedent of living here.
+ */
+function buildLatarka(formKey) {
+  return { ...buildLatarkaItemData(formKey), _id: idFor("equipment", `latarka-${formKey}`), _key: null };
+}
+function buildBaterie() {
+  return { ...buildBaterieItemData({ quantity: 1 }), _id: idFor("loot", "baterie"), _key: null };
 }
 
 /**
@@ -1357,7 +1387,12 @@ const originDocs = Object.keys(POCHODZENIA).map(buildPochodzenie);
 const ammoDocs = AMMO_CALIBERS.map(buildAmmo);
 const grenadeDocs = GRENADE_TYPES.map(buildGrenade);
 const toolkitDocs = TOOLKITS.filter(k => !k.skip).map(buildToolkit);
-const weaponDocs = WEAPONS.map(buildWeapon);
+const weaponDocs = [
+  ...WEAPONS.map(buildWeapon),
+  ...Object.keys(POCHODNIA_VARIANTS).map(buildPochodnia),
+  ...Object.keys(LATARKA_FORMS).map(buildLatarka),
+  buildBaterie(),
+];
 const armorDocs = ARMORS.map(buildArmor);
 
 // sanity: every uuid referenced from an advancement must resolve to a built doc

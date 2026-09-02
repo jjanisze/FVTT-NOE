@@ -548,8 +548,9 @@ DOM stockowego arkusza zamiast przez `sheet-shell.mjs`.
   syczy i gaśnie, item od razu staje się Wypaloną Pochodnią (specjalny komunikat czatu)
 - [x] Ręczne zgaszenie (aktywność `special`, bez kosztu akcji w grze) zachowuje niewypalone
   paliwo — oblicza `elapsed / burnSeconds` względem `game.time.worldTime` w chwili zapalenia
-- [x] **Wypalanie samoistne przez zegar świata** — dnd5e 5.3 nie ma hooka wygaśnięcia efektu
-  (ten sam fakt, co `items/chemia.mjs` już dokumentuje), więc `pochodnia.mjs` planuje absolutny
+- [x] **Wypalanie samoistne przez zegar świata** — paliwo to flaga itemu, nie Active Effect
+  (patrz wyżej), więc rdzeniowy `ActiveEffectRegistry` (Foundry v13+, patrz DEV_GUIDE.md §10e)
+  nie ma tu czego pilnować niezależnie od tego, że istnieje. `pochodnia.mjs` planuje absolutny
   moment wypalenia (`worldTime`) i zamiata go hookiem `updateWorldTime`, tylko GM
   (`game.user.isActiveGM`) — identyczny kształt co `chemiaPending`/`_onWorldTime` w chemii
 - [x] Wypalenie **w miejscu** (ten sam `_id`) — zmienia nazwę/ikonę/opis/obrażenia na
@@ -1848,10 +1849,13 @@ białą z właściwością „rzucana", a w świecie ma typ `miotana`.
   skasowany). Jedno źródło prawdy dla kompendium `lekarstwa`, panelu zdrowia i runtime'u.
 - Każda pozycja to `consumable` typu `lekarstwo` z podtypem, `uses` + `autoDestroy`, aktywnością
   „Zażyj" i item-level Active Effects — dokładnie tak, jak SRD robi mikstury i trucizny.
-- **Efekty odroczone bez hooka od wygaśnięcia.** dnd5e 5.3 nie ma czegoś takiego jak
-  „zrób coś, gdy ten efekt się skończy" (`grep expir` po `module/` daje zero trafień), więc
-  „po zejściu z Anestixu" jest złożone z czterech kawałków, z których każdy sam w sobie jest
-  natywny: (1) prawdziwe `duration` na AE, żeby HUD odliczał; (2) rekord w
+- **Efekty odroczone bez hooka od wygaśnięcia.** dnd5e 5.3 samo w sobie nie ma czegoś takiego
+  jak „zrób coś, gdy ten efekt się skończy" (`grep expir` po `module/` daje zero trafień) — ⚠️
+  ale to zły katalog: Foundry v13+ ma taki mechanizm w **rdzeniu** (`ActiveEffectRegistry`,
+  patrz `podpalenie.mjs` i DEV_GUIDE.md §10e). Nie zmienia to wniosku poniżej — rejestr rdzenia
+  domyślnie tylko oznacza `duration.expired = true`, nie odpala żadnej naszej logiki — więc
+  „po zejściu z Anestixu" nadal jest złożone z czterech kawałków, z których każdy sam w sobie
+  jest natywny: (1) prawdziwe `duration` na AE, żeby HUD odliczał; (2) rekord w
   `flags.<mod>.chemiaPending`; (3) obserwator `updateWorldTime` — uzasadniony tym, że
   `Combat#nextRound` przesuwa czas świata, więc walka rozlicza się sama; (4) przycisk
   **Rozlicz teraz** na karcie czatu, na wypadek gdy czas nie idzie. Przetestowane na żywo:

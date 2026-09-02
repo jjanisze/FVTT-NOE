@@ -64,6 +64,10 @@ import { registerValidation } from "./config/validation.mjs";
 import { registerWeaponSounds } from "./weapons/sounds.mjs";
 import { registerEngineControls } from "./weapons/engine.mjs";
 import { registerPochodnia, pochodniaApi } from "./weapons/pochodnia.mjs";
+import { registerLightSources } from "./items/light-sources.mjs";
+import { registerBaterie, baterieApi } from "./items/baterie.mjs";
+import { registerLatarka, latarkaApi } from "./items/latarka.mjs";
+import { registerWorldClock, worldClockApi } from "./world-clock.mjs";
 import { registerTracerVfx } from "./weapons/tracer-vfx.mjs";
 import { registerMapProps, mapPropsApi } from "./scenes/map-props.mjs";
 import { registerMapSync, mapSyncApi } from "./scenes/map-sync.mjs";
@@ -362,8 +366,15 @@ Hooks.once("ready", () => {
 
   registerWeaponSounds();
   registerEngineControls();
+  registerLightSources();
   registerPochodnia();
   game.neuroshima.pochodnia = pochodniaApi;
+  registerBaterie();
+  game.neuroshima.baterie = baterieApi;
+  registerLatarka();
+  game.neuroshima.latarka = latarkaApi;
+  registerWorldClock();
+  game.neuroshima.time = worldClockApi;
   registerTracerVfx();
   if (game.neuroshima?.vfx) game.neuroshima.vfx.panel = openTracerDebugPanel;
 

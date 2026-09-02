@@ -595,11 +595,24 @@ Aktywności (razem z ręcznie nadanymi `_id` i własnymi `flags`) jadą w dokume
 round-trip przez pack. Wcześniejsza notatka, że „zapisane na sztywno id aktywności są gubione",
 dotyczy tylko `activities` na najwyższym poziomie, którego dnd5e nie używa.
 
-### 10b.2 dnd5e nie ma hooka „efekt wygasł"
+### 10b.2 dnd5e nie ma hooka „efekt wygasł" — ale rdzeń FVTT już ma
 
-`grep -ri "expir" module/` po źródłach dnd5e 5.3 daje zero trafień. Nie ma czego podpiąć.
-Mechaniki typu „gdy Anestix przestanie działać, rzuć RO Kondycja" składamy z czterech
-natywnych kawałków:
+⚠️ **Poprawka (wrzesień 2026):** `grep -ri "expir" module/` faktycznie daje zero trafień w
+źródłach **samego dnd5e** — ale to zły katalog do grepowania. Foundry v13+ dorzucił do
+**rdzenia** (`client/helpers/active-effect-registry.mjs`) prawdziwy `ActiveEffectRegistry`,
+który sam odpytuje `duration.remaining` na `updateWorldTime` i na każdym evencie tury/rundy —
+patrz §10e niżej, gdzie ten sam mechanizm jest już poprawnie użyty przez `podpalenie.mjs`.
+Ta sekcja (pisana wcześniej, patrząc tylko na paczkę systemu) i notatka w `items/chemia.mjs`
+były przez to nieaktualne — sprawdź `game.neuroshima` grep-em po „no effect-expiry"/„nie ma
+hooka" przed powtórzeniem tego twierdzenia gdziekolwiek indziej.
+
+To **nie** zmienia wniosku poniżej: rejestr rdzenia domyślnie tylko oznacza
+`duration.expired = true` (patrz §10e.2), nie kasuje ani nie odpala żadnej Twojej logiki —
+więc „co zrobić, gdy Anestix przestanie działać" nadal wymaga własnego haka reagującego na
+upływ czasu, dokładnie jak niżej. Zyskiem z rdzenia jest tylko poprawna arytmetyka
+`duration.remaining` do odczytania (`effect.updateDuration().remaining`), nie sama automatyzacja
+efektu ubocznego. Mechanika typu „gdy Anestix przestanie działać, rzuć RO Kondycja" nadal
+składa się z czterech natywnych kawałków:
 
 1. prawdziwe `duration` na Active Effekcie — HUD odlicza, gracz widzi, ile zostało;
 2. rekord w `flags.<mod>.chemiaPending` — co, komu i o której się należy;

@@ -27,23 +27,33 @@
  *
  * ## Burnout scheduling — same shape as `items/chemia.mjs`
  *
- * dnd5e 5.3 has no effect-expiry hook (verified there, still true here), so a torch that
- * burns all the way down can't detect its own expiry. Same fix as chemia's deferred
- * effects: record an absolute `game.time.worldTime` burnout instant on the item, sweep for
- * due entries on `updateWorldTime` (GM-only — this must run once, not once per client), and
- * ride along whenever combat or a rest actually advances world time. Nothing forces world
- * time to move outside of that, same honest limitation chemia.mjs documents.
+ * Fuel isn't an Active Effect at all (see "Fuel model" above — a Pochodnia can be an
+ * unowned world item with no actor to hang one on), so Foundry v13+'s core
+ * `ActiveEffectRegistry` (see `chemia.mjs`'s note, or DEV_GUIDE.md §10e) doesn't apply here
+ * regardless of what it does or doesn't automate — there's no effect for it to track. A
+ * torch that burns all the way down still can't detect its own expiry on its own, so: record
+ * an absolute `game.time.worldTime` burnout instant on the item, sweep for due entries on
+ * `updateWorldTime` (GM-only — this must run once, not once per client), and ride along
+ * whenever combat or a rest actually advances world time. Nothing forces world time to move
+ * outside of that — same honest limitation chemia.mjs documents, and by design: this GM
+ * always tracks fuel against in-fiction game time, never real wall-clock time, precisely so
+ * that world time standing still (nobody advancing it) means no fuel burns — see the "always
+ * game time" decision in the project's own notes.
  *
- * ## Token illumination — best-effort, not layered
+ * ## Token illumination
  *
  * dnd5e 5.3 has no native link between an item's data and a placed token's `light` field
  * (Active Effects only touch the Actor document; a placed TokenDocument's appearance forks
  * from `prototypeToken` at creation and doesn't sync afterward). This module drives it by
- * hand: on ignite/extinguish/equip-toggle, look at the actor's lit+equipped Pochodnie and
- * push the brightest one's radius onto every active token for that actor. It **overwrites**
- * `token.light` rather than layering with any other light source — fine while this is the
- * only light-granting item in the module, but worth knowing if a second one ever ships.
+ * hand: on ignite/extinguish/equip-toggle, it tells `light-sources.mjs` "here's what I'd want
+ * lit for this actor," and that shared resolver picks the brightest light across every
+ * light-granting item type (Pochodnia, Latarka, …) and pushes it to the actor's tokens. See
+ * `items/light-sources.mjs`'s own doc comment for why this moved out of a private
+ * per-module implementation — this file used to own that logic outright, back when it was the
+ * only light-granting item in the module.
  */
+
+import { registerLightProvider, syncActorLight } from "../items/light-sources.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -160,10 +170,11 @@ async function _postCard(item, html, { flavor } = {}) {
 }
 
 /* -------------------------------------------- */
-/*  Token illumination (best-effort)              */
+/*  Token illumination                            */
 /* -------------------------------------------- */
 
-function _desiredLight(actor) {
+/** Registered once at `registerPochodnia()` — see `items/light-sources.mjs`. */
+function _pochodniaLightProvider(actor) {
   if (!actor) return null;
   let best = null;
   for (const item of actor.items) {
@@ -173,40 +184,53 @@ function _desiredLight(actor) {
     if (!variant) continue;
     if (!best || variant.light.bright > best.bright) best = variant.light;
   }
-  return best;
+  if (!best) return null;
+  return { bright: best.bright, dim: best.dim, color: TORCH_COLOR, alpha: 0.35, animation: TORCH_ANIMATION };
 }
 
-async function syncTokenLight(actor) {
-  if (!actor) return;
-  const desired = _desiredLight(actor);
-  const light = desired
-    ? { bright: desired.bright, dim: desired.dim, color: TORCH_COLOR, alpha: 0.35, animation: TORCH_ANIMATION }
-    : { bright: 0, dim: 0 };
-
-  for (const token of actor.getActiveTokens?.(true) ?? []) {
-    if (!(game.user.isGM || token.isOwner)) continue;
-    const cur = token.document.light;
-    if (cur.bright === light.bright && cur.dim === light.dim) continue;
-    try {
-      await token.document.update({ light });
-    } catch (e) {
-      console.warn("Neuroshima 5e | Pochodnia: nie udało się zsynchronizować światła tokena", e);
-    }
-  }
-}
+/** Thin alias kept so every existing call site below reads the same as before the refactor. */
+const syncTokenLight = syncActorLight;
 
 /* -------------------------------------------- */
 /*  Activities                                    */
 /* -------------------------------------------- */
 
 /**
- * Ensures a Pochodnia item has its attack activity tagged (stable target for damage-part
- * patches) and its Zapal/Zgaś utility activities present. Idempotent — safe to call on
- * every load and on every new item.
+ * Single-flight lock for `ensurePochodniaActivities`, keyed by item — see that function's
+ * doc comment for why a bare check-then-act body isn't enough. Maps to the in-flight
+ * Promise (not just a boolean): a concurrent caller AWAITS the same promise instead of
+ * either duplicating the work or — the bug a plain "skip if busy" boolean guard produces —
+ * returning immediately while the real work is still in flight, so a caller reading the
+ * item's activities right after `await ensurePochodniaActivities(item)` could still see it
+ * mid-build.
  */
-export async function ensurePochodniaActivities(item) {
-  if (!isPochodnia(item)) return;
+const _ensuringActivities = new Map();
 
+/**
+ * Ensures a Pochodnia item has its attack activity tagged (stable target for damage-part
+ * patches) and its Zapal/Zgaś utility activities present. Safe to call on every load and on
+ * every new item — but the check-then-act body below is only idempotent against SEQUENTIAL
+ * calls, not concurrent ones: `createPochodniaItem` explicitly awaits this after creating the
+ * item, but the `registerPochodnia()` `createItem` hook ALSO fires it (needed for a bare
+ * compendium/manual `Item.create` with no explicit caller) — both read `item.system.activities`
+ * before either write lands, both see the Zapal/Zgaś activities missing, both create them,
+ * and the item ends up with two of each. Caught live creating a torch for Piekarz.
+ */
+export function ensurePochodniaActivities(item) {
+  if (!isPochodnia(item)) return Promise.resolve();
+  const key = item.uuid ?? item.id;
+
+  const inFlight = _ensuringActivities.get(key);
+  if (inFlight) return inFlight;
+
+  const promise = _ensurePochodniaActivitiesUnguarded(item).finally(() => {
+    _ensuringActivities.delete(key);
+  });
+  _ensuringActivities.set(key, promise);
+  return promise;
+}
+
+async function _ensurePochodniaActivitiesUnguarded(item) {
   const attack = item.system.activities?.find(a => a.type === "attack");
   if (attack && attack.visibility?.identifier !== ATTACK_ID) {
     await item.update({ [`system.activities.${attack._id}.visibility.identifier`]: ATTACK_ID });
@@ -268,17 +292,33 @@ export async function igniteTorch(item) {
     + `Paliwo: <strong>${Math.round(newFuel)}%</strong>.</p>`);
 }
 
+/**
+ * Fuel percentage right now — while lit this keeps burning down between flag writes
+ * (the flag itself only gets refreshed on ignite/extinguish/burnout), so anything that
+ * needs to *show* current fuel (the item-sheet row, chat cards) must compute it live
+ * with the same formula `extinguishTorch`/`burnOut` use to actually bank it, not just
+ * read the stale flag.
+ */
+function _liveFuelPercent(item) {
+  const fuel = item.getFlag(MODULE_ID, FLAG_FUEL) ?? 0;
+  if (!isLit(item)) return fuel;
+
+  const variant = variantOf(item);
+  if (!variant) return fuel;
+
+  const start = item.getFlag(MODULE_ID, FLAG_START) ?? game.time.worldTime;
+  const elapsedSec = Math.max(0, game.time.worldTime - start);
+  const burnSeconds = variant.burnMinutes * 60;
+  const consumedPct = burnSeconds > 0 ? (elapsedSec / burnSeconds) * 100 : 100;
+  return Math.max(0, fuel - consumedPct);
+}
+
 export async function extinguishTorch(item, { silent = false } = {}) {
   item = _liveItem(item);
   const variant = variantOf(item);
   if (!variant || !isLit(item)) return;
 
-  const start = item.getFlag(MODULE_ID, FLAG_START) ?? game.time.worldTime;
-  const fuel = item.getFlag(MODULE_ID, FLAG_FUEL) ?? 0;
-  const elapsedSec = Math.max(0, game.time.worldTime - start);
-  const burnSeconds = variant.burnMinutes * 60;
-  const consumedPct = burnSeconds > 0 ? (elapsedSec / burnSeconds) * 100 : 100;
-  const remaining = Math.max(0, fuel - consumedPct);
+  const remaining = _liveFuelPercent(item);
   const attack = _attackActivity(item);
 
   const update = {
@@ -382,12 +422,25 @@ export async function initializePochodnia(item, variantKey) {
   return item;
 }
 
-/** Creates a brand new Pochodnia item (world item, or embedded on `actor`). */
-export async function createPochodniaItem(variantKey, { actor } = {}) {
+/**
+ * Full item-data shape for a Pochodnia variant — no `_id`, no live-document calls, so this
+ * runs equally well inside a Foundry client (`createPochodniaItem`) or a plain Node build
+ * script (`dev/packs/build-packs.mjs`, generating the `bron` compendium entry). Keeping both
+ * fed from one function is the same discipline `buildWeaponItemData`/`buildArmorItemData`
+ * already follow — pack and runtime-created copies can't drift apart if there's only one
+ * place that decides the shape.
+ *
+ * `system.activities` is deliberately absent/empty here, same reasoning as `buildWeapon()`'s
+ * comment in build-packs.mjs: the Zapal/Zgaś activities are built live by
+ * `ensurePochodniaActivities()`, which every Pochodnia gets for free via the `createItem`
+ * hook the moment it's dragged out of the compendium — baking them into the packed data
+ * would freeze them and risk duplicating on the first activity-tagging pass.
+ */
+export function buildPochodniaItemData(variantKey) {
   const variant = POCHODNIA_VARIANTS[variantKey];
   if (!variant) throw new Error(`Nieznany wariant Pochodni: ${variantKey}`);
 
-  const data = {
+  return {
     name: variant.label,
     type: "weapon",
     img: variant.img,
@@ -404,6 +457,11 @@ export async function createPochodniaItem(variantKey, { actor } = {}) {
       }
     }
   };
+}
+
+/** Creates a brand new Pochodnia item (world item, or embedded on `actor`). */
+export async function createPochodniaItem(variantKey, { actor } = {}) {
+  const data = buildPochodniaItemData(variantKey);
 
   const created = actor
     ? (await actor.createEmbeddedDocuments("Item", [data]))[0]
@@ -445,7 +503,7 @@ function onPostUseActivity(activity) {
 async function onWorldTime() {
   if (!game.user.isActiveGM) return;
   const now = game.time.worldTime;
-  const items = [...game.items, ...game.actors.flatMap(a => [...a.items])];
+  const items = [...game.items, ...game.actors.map(a => [...a.items]).flat()];
   for (const item of items) {
     const at = item.getFlag(MODULE_ID, FLAG_BURNOUT_AT);
     if (at != null && now >= at) await burnOut(item);
@@ -457,9 +515,58 @@ function onUpdateItem(item, changes) {
   if (foundry.utils.hasProperty(changes, "system.equipped")) syncTokenLight(item.actor);
 }
 
+/**
+ * Paliwo (fuel) row on the item sheet's Details tab — same anchor `magazine.mjs`'s own
+ * Magazynek row uses. Manual refuelling (dolanie oleju, nowa szmata…) is deliberately not
+ * automated — RAW/FVTT convention already lets a player freely edit their own item's
+ * tracked numeric resource (charges, ammo, …), so this is just that: a plain number input
+ * bound straight to the fuel flag, editable by the item's owner.
+ *
+ * Only editable while UNLIT. While lit, the stored flag is stale on purpose — see
+ * `_liveFuelPercent`'s comment — so editing it directly would either show a player a
+ * number that doesn't match what they're watching burn, or get silently overwritten by
+ * the next extinguish/burnout's own recalculation from `FLAG_START`. Extinguish first
+ * (which correctly banks the live remaining %), edit, then relight.
+ */
+function onRenderItemSheet(app, html) {
+  const item = app.document ?? app.item;
+  if (!isPochodnia(item) || isBurnt(item)) return;
+
+  const root = html instanceof HTMLElement ? html : html?.[0];
+  if (!root) return;
+
+  const detailsSection = root.querySelector(".item-properties, .details-tab, [data-tab='details'] .form-group:last-of-type");
+  if (!detailsSection) return;
+
+  const lit = isLit(item);
+  const pct = Math.round(_liveFuelPercent(item));
+  const canEdit = item.isOwner && !lit;
+
+  const row = document.createElement("div");
+  row.classList.add("form-group", "neuro-pochodnia-fuel-row");
+  row.innerHTML = canEdit
+    ? `
+      <label>Paliwo</label>
+      <div class="form-fields" style="display:flex; align-items:center; gap:6px;">
+        <input type="number" name="flags.${MODULE_ID}.${FLAG_FUEL}" value="${pct}" min="0" max="100" step="1"
+               data-dtype="Number" style="width:60px; text-align:center;">
+        <span>%</span>
+        <span style="font-size:11px; color:#888;">Ręczna edycja — dolanie oleju, świeża szmata itp.</span>
+      </div>
+    `
+    : `
+      <label>Paliwo</label>
+      <div class="form-fields">
+        <span>${pct}%${lit ? " — płonie, zgaś by edytować ręcznie" : ""}</span>
+      </div>
+    `;
+
+  detailsSection.after(row);
+}
+
 /** Backfill: any Pochodnia already in the world that's missing its activities gets them. */
 async function ensureAllPochodniaActivities() {
-  const items = [...game.items, ...game.actors.flatMap(a => [...a.items])];
+  const items = [...game.items, ...game.actors.map(a => [...a.items]).flat()];
   for (const item of items) {
     if (isPochodnia(item) && (!_getActivity(item, IGNITE_ID) || !_getActivity(item, EXTINGUISH_ID))) {
       await ensurePochodniaActivities(item);
@@ -468,11 +575,15 @@ async function ensureAllPochodniaActivities() {
 }
 
 export function registerPochodnia() {
+  registerLightProvider(_pochodniaLightProvider);
+
   Hooks.on("dnd5e.preUseActivity", onPreUseActivity);
   Hooks.on("dnd5e.postUseActivity", onPostUseActivity);
   Hooks.on("updateWorldTime", onWorldTime);
   Hooks.on("updateItem", onUpdateItem);
-  Hooks.on("createToken", (tokenDoc) => { if (tokenDoc.actor) syncTokenLight(tokenDoc.actor); });
+  Hooks.on("renderItemSheet5e", onRenderItemSheet);
+  // Token light-sync on creation is handled centrally by light-sources.mjs's own
+  // `createToken` hook — no need to duplicate it here.
 
   Hooks.on("createItem", (item) => { if (game.user.isGM) ensurePochodniaActivities(item); });
   if (game.user.isGM) ensureAllPochodniaActivities();

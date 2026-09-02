@@ -20,6 +20,7 @@ import { AMMO_CALIBERS, AMMO_CALIBER_MAP, GRENADE_TYPES } from "../config/ammo-d
 import { ARMORS, ARMOR_MAP, buildArmorItemData } from "../config/armor-data.mjs";
 import { ADDON_DEFS, ADDON_LIST, SIGHT_ADDON_IDS } from "../config/addons-data.mjs";
 import { installAddonById, removeAddon } from "../weapons/addons.mjs";
+import { POCHODNIA_VARIANTS, buildPochodniaItemData, ensurePochodniaActivities, createPochodniaItem } from "../weapons/pochodnia.mjs";
 import { TOOLKITS, buildToolkitItemData } from "../config/toolkits-data.mjs";
 import { CHEMIA, CHEMIA_TYPE, CHEMIA_SUBTYPES, chemiaKeyByName, chemiaItemData } from "../config/chemia-data.mjs";
 import { ALL_DISEASES } from "../config/diseases-data.mjs";
@@ -434,6 +435,48 @@ export function registerEquipmentDataTests(quench) {
         expect(actor.items.get(item.id).system.damage.base.bonus).to.equal("3");
         await removeAddon(item, "naostrzenie", { refund: false });
         expect(actor.items.get(item.id).system.damage.base.bonus).to.equal("2");
+      });
+    });
+
+    describe("Pochodnia", function () {
+      it("każdy wariant ma dodatnie paliwo, jasność i wagę", function () {
+        for (const [key, variant] of Object.entries(POCHODNIA_VARIANTS)) {
+          expect(variant.burnMinutes, `${key}.burnMinutes`).to.be.above(0);
+          expect(variant.light.bright, `${key}.light.bright`).to.be.above(0);
+          expect(variant.light.dim, `${key}.light.dim`).to.be.above(variant.light.bright);
+          expect(variant.weight, `${key}.weight`).to.be.at.least(0);
+        }
+      });
+
+      describe("provisioning aktywności bez wyścigu", function () {
+        let actor;
+        before(async function () { actor = await scratchActor(); });
+        after(async function () { await scratchCleanup(); });
+
+        it("równoczesne wywołania ensurePochodniaActivities nie duplikują Zapal/Zgaś", async function () {
+          // Regresja: createPochodniaItem() jawnie czeka na to po utworzeniu
+          // przedmiotu, ale createItem hook w registerPochodnia() TEŻ to wywołuje —
+          // oba czytały system.activities, zanim zapis drugiego wylądował, oba
+          // widziały brak Zapal/Zgaś i oba je tworzyły, dając dwa komplety. Złapane
+          // żywcem przy tworzeniu pochodni dla Piekarza. Dorzucamy dwa kolejne
+          // wywołania równolegle z tym, które i tak odpali hook z tego samego
+          // tworzenia, żeby uderzyć w ten sam wyścig.
+          const data = buildPochodniaItemData("improwizowana");
+          const [item] = await actor.createEmbeddedDocuments("Item", [data], { render: false });
+          await Promise.all([ensurePochodniaActivities(item), ensurePochodniaActivities(item)]);
+
+          const names = Array.from(actor.items.get(item.id).system.activities ?? []).map(a => a.name);
+          expect(names.filter(n => n === "Zapal pochodnię")).to.have.lengthOf(1);
+          expect(names.filter(n => n === "Zgaś pochodnię")).to.have.lengthOf(1);
+        });
+
+        it("createPochodniaItem zwraca przedmiot z dokładnie jednym kompletem aktywności", async function () {
+          const item = await createPochodniaItem("smolowa", { actor });
+          const names = Array.from(item.system.activities ?? []).map(a => a.name);
+          expect(names.filter(n => n === "Atak")).to.have.lengthOf(1);
+          expect(names.filter(n => n === "Zapal pochodnię")).to.have.lengthOf(1);
+          expect(names.filter(n => n === "Zgaś pochodnię")).to.have.lengthOf(1);
+        });
       });
     });
 
