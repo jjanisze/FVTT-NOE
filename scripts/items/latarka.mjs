@@ -53,6 +53,7 @@
  */
 
 import { registerLightProvider, syncActorLight } from "./light-sources.mjs";
+import { registerPowerSource, getPowerStatus, renderPowerRow } from "./power-source.mjs";
 import { isBaterie } from "./baterie.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -82,7 +83,10 @@ const LIGHT = { bright: 45, dim: 180, angle: 90, narrowAngle: 45 };
 const LIGHT_COLOR = "#dce8ff"; // cool white — deliberately distinct from Pochodnia's warm flicker
 const NO_ANIMATION = { type: "", speed: 0, intensity: 0 };
 
-const ICON = "icons/svg/light.svg";
+// Reuses the existing generic loot icon for every form until the batch of dedicated
+// per-form icons (czołówka/naramienna/dynamowa look nothing alike) comes back — see the
+// icon-request note tracked alongside this feature.
+const ICON = `modules/${MODULE_ID}/icons/items/loot/latarka.svg`;
 
 export const LATARKA_FORMS = {
   reczna: {
@@ -198,6 +202,30 @@ function _liveChargePercent(item) {
   const elapsedMin = Math.max(0, (game.time.worldTime - start) / 60);
   const consumedPct = (elapsedMin / maxMin) * 100;
   return Math.max(0, charge - consumedPct);
+}
+
+/** Registered once at `registerLatarka()` — see `items/power-source.mjs`. */
+function _latarkaPowerDescriptor(item) {
+  const form = formOf(item);
+  if (!form) return null;
+  const on = isOn(item);
+
+  if (!form.battery) {
+    return { on, unlimited: true, percent: 100, remainingMinutes: 0, unitLabel: "Zasilanie" };
+  }
+
+  const percent = _liveChargePercent(item);
+  return {
+    on,
+    unlimited: false,
+    percent,
+    remainingMinutes: (item.getFlag(MODULE_ID, FLAG_CHARGE_MAX_MIN) ?? 0) * (percent / 100),
+    unitLabel: "Bateria",
+    flagPath: `flags.${MODULE_ID}.${FLAG_CHARGE}`,
+    editable: item.isOwner && !on,
+    onNote: "świeci",
+    offHint: "",
+  };
 }
 
 /* -------------------------------------------- */
@@ -517,8 +545,8 @@ function onUpdateItem(item, changes) {
 }
 
 /**
- * Bateria row on the item sheet's Details tab — same anchor and same "only editable while off"
- * rationale as `pochodnia.mjs`'s Paliwo row.
+ * Bateria row on the item sheet's Details tab — shared markup/logic from
+ * `items/power-source.mjs`. Dynamo forms skip this entirely (nothing to show/edit).
  */
 function onRenderItemSheet(app, html) {
   const item = app.document ?? app.item;
@@ -527,32 +555,8 @@ function onRenderItemSheet(app, html) {
   const root = html instanceof HTMLElement ? html : html?.[0];
   if (!root) return;
 
-  const detailsSection = root.querySelector(".item-properties, .details-tab, [data-tab='details'] .form-group:last-of-type");
-  if (!detailsSection) return;
-
-  const on = isOn(item);
-  const pct = Math.round(_liveChargePercent(item));
-  const canEdit = item.isOwner && !on;
-
-  const row = document.createElement("div");
-  row.classList.add("form-group", "neuro-latarka-charge-row");
-  row.innerHTML = canEdit
-    ? `
-      <label>Bateria</label>
-      <div class="form-fields" style="display:flex; align-items:center; gap:6px;">
-        <input type="number" name="flags.${MODULE_ID}.${FLAG_CHARGE}" value="${pct}" min="0" max="100" step="1"
-               data-dtype="Number" style="width:60px; text-align:center;">
-        <span>%</span>
-      </div>
-    `
-    : `
-      <label>Bateria</label>
-      <div class="form-fields">
-        <span>${pct}%${on ? " — świeci, zgaś by edytować ręcznie" : ""}</span>
-      </div>
-    `;
-
-  detailsSection.after(row);
+  const status = getPowerStatus(item);
+  if (status) renderPowerRow(root, status);
 }
 
 async function ensureAllLatarkaActivities() {
@@ -564,6 +568,7 @@ async function ensureAllLatarkaActivities() {
 
 export function registerLatarka() {
   registerLightProvider(_latarkaLightProvider);
+  registerPowerSource({ test: isLatarka, describe: _latarkaPowerDescriptor });
 
   Hooks.on("dnd5e.preUseActivity", onPreUseActivity);
   Hooks.on("dnd5e.postUseActivity", onPostUseActivity);

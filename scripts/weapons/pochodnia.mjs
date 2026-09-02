@@ -54,6 +54,7 @@
  */
 
 import { registerLightProvider, syncActorLight } from "../items/light-sources.mjs";
+import { registerPowerSource, getPowerStatus, renderPowerRow } from "../items/power-source.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -190,6 +191,26 @@ function _pochodniaLightProvider(actor) {
 
 /** Thin alias kept so every existing call site below reads the same as before the refactor. */
 const syncTokenLight = syncActorLight;
+
+/** Registered once at `registerPochodnia()` — see `items/power-source.mjs`. */
+function _pochodniaPowerDescriptor(item) {
+  if (isBurnt(item)) return null;
+  const variant = variantOf(item);
+  if (!variant) return null;
+  const percent = _liveFuelPercent(item);
+  const lit = isLit(item);
+  return {
+    on: lit,
+    unlimited: false,
+    percent,
+    remainingMinutes: variant.burnMinutes * (percent / 100),
+    unitLabel: "Paliwo",
+    flagPath: `flags.${MODULE_ID}.${FLAG_FUEL}`,
+    editable: item.isOwner && !lit,
+    onNote: "płonie",
+    offHint: "Ręczna edycja — dolanie oleju, świeża szmata itp.",
+  };
+}
 
 /* -------------------------------------------- */
 /*  Activities                                    */
@@ -516,9 +537,9 @@ function onUpdateItem(item, changes) {
 }
 
 /**
- * Paliwo (fuel) row on the item sheet's Details tab — same anchor `magazine.mjs`'s own
- * Magazynek row uses. Manual refuelling (dolanie oleju, nowa szmata…) is deliberately not
- * automated — RAW/FVTT convention already lets a player freely edit their own item's
+ * Paliwo (fuel) row on the item sheet's Details tab — shared markup/logic from
+ * `items/power-source.mjs`. Manual refuelling (dolanie oleju, nowa szmata…) is deliberately
+ * not automated — RAW/FVTT convention already lets a player freely edit their own item's
  * tracked numeric resource (charges, ammo, …), so this is just that: a plain number input
  * bound straight to the fuel flag, editable by the item's owner.
  *
@@ -535,33 +556,8 @@ function onRenderItemSheet(app, html) {
   const root = html instanceof HTMLElement ? html : html?.[0];
   if (!root) return;
 
-  const detailsSection = root.querySelector(".item-properties, .details-tab, [data-tab='details'] .form-group:last-of-type");
-  if (!detailsSection) return;
-
-  const lit = isLit(item);
-  const pct = Math.round(_liveFuelPercent(item));
-  const canEdit = item.isOwner && !lit;
-
-  const row = document.createElement("div");
-  row.classList.add("form-group", "neuro-pochodnia-fuel-row");
-  row.innerHTML = canEdit
-    ? `
-      <label>Paliwo</label>
-      <div class="form-fields" style="display:flex; align-items:center; gap:6px;">
-        <input type="number" name="flags.${MODULE_ID}.${FLAG_FUEL}" value="${pct}" min="0" max="100" step="1"
-               data-dtype="Number" style="width:60px; text-align:center;">
-        <span>%</span>
-        <span style="font-size:11px; color:#888;">Ręczna edycja — dolanie oleju, świeża szmata itp.</span>
-      </div>
-    `
-    : `
-      <label>Paliwo</label>
-      <div class="form-fields">
-        <span>${pct}%${lit ? " — płonie, zgaś by edytować ręcznie" : ""}</span>
-      </div>
-    `;
-
-  detailsSection.after(row);
+  const status = getPowerStatus(item);
+  if (status) renderPowerRow(root, status);
 }
 
 /** Backfill: any Pochodnia already in the world that's missing its activities gets them. */
@@ -576,6 +572,7 @@ async function ensureAllPochodniaActivities() {
 
 export function registerPochodnia() {
   registerLightProvider(_pochodniaLightProvider);
+  registerPowerSource({ test: isPochodnia, describe: _pochodniaPowerDescriptor });
 
   Hooks.on("dnd5e.preUseActivity", onPreUseActivity);
   Hooks.on("dnd5e.postUseActivity", onPostUseActivity);

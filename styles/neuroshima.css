@@ -884,6 +884,59 @@ damage-application .neuro-reduction-buttons {
 }
 
 /* ============================================= */
+/* Zasilanie — urządzenia bateryjne/paliwowe      */
+/* Ten sam mechanizm plakietki co .neuro-has-addons */
+/* i zacięcia/uszkodzenia wyżej. Latarka/Pochodnia  */
+/* i przyszłe gadżety bateryjne nigdy nie są        */
+/* jednocześnie zaciętą bronią palną, wyszczerbioną */
+/* białą czy noszącą ulepszenie SM, więc dzielenie  */
+/* tego samego rogu ikony jest bezpieczne — nie ma  */
+/* realnej kolizji, mimo wspólnego slotu.           */
+/*                                                  */
+/* Celowo BEZ poświaty/gradientu tła jak przy        */
+/* zacięciu/uszkodzeniu: "latarka świeci" to zwykły, */
+/* częsty i niealarmujący stan — sama plakietka w    */
+/* rogu wystarcza, żeby nie zalać listy ekwipunku    */
+/* czerwienią/złotem za każdym razem, gdy coś działa.*/
+/* ============================================= */
+
+.item.neuro-power-on .item-name,
+.item.neuro-power-low .item-name {
+  position: relative;
+}
+
+.item.neuro-power-on .item-name::after,
+.item.neuro-power-low .item-name::after {
+  content: "\f0e7"; /* fa-bolt */
+  font-family: "Font Awesome 7 Pro", "Font Awesome 6 Pro", "Font Awesome 5 Pro", "FontAwesome";
+  font-weight: 900;
+  font-size: 8px;
+  position: absolute;
+  top: 2px;
+  left: 26px;
+  background: rgba(10, 8, 5, 0.85);
+  border-radius: 50%;
+  width: 11px;
+  height: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Normalny stan: świeci, bateria/paliwo w porządku. */
+.item.neuro-power-on .item-name::after { color: #5ec8f4; }
+
+/* Niski poziom (≤ progu ustawionego przez opis źródła, domyślnie 20%) — ta sama pulsująca */
+/* animacja co zacięcie broni: "coś tu wymaga uwagi TERAZ", nie tylko informacyjnie. */
+.item.neuro-power-low .item-name::after {
+  color: #e0271a;
+  animation: neuro-jam-pulse 1.6s ease-in-out infinite;
+}
+
+/* ============================================= */
 /* Ulepszenia broni — plakietki w oknie chatu    */
 /* Dołączają do natywnej listy .card-footer.pills */
 /* ============================================= */

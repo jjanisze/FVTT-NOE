@@ -33,7 +33,7 @@ export const BATERIE_ITEM = {
   // discipline `pochodnia.mjs`'s smołowa variant already uses for its own un-costed price.
   price: 5,
   weight: 0.1,
-  img: "icons/svg/light.svg",
+  img: `modules/${MODULE_ID}/icons/items/loot/bateria.svg`,
   description: "<p>Nie te przedwojenne „paluszki” — samoróbka, wytwór inżynierii wstecznej. "
     + "Zawodna, ale droga. Zasila latarkę, radio, krótkofalówkę, szoker czy miernik "
     + "promieniowania. Starcza na <strong>2k4 godzin</strong> działania urządzenia. Można ją "

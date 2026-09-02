@@ -65,6 +65,7 @@ import { registerWeaponSounds } from "./weapons/sounds.mjs";
 import { registerEngineControls } from "./weapons/engine.mjs";
 import { registerPochodnia, pochodniaApi } from "./weapons/pochodnia.mjs";
 import { registerLightSources } from "./items/light-sources.mjs";
+import { registerPowerSourceUI } from "./items/power-source.mjs";
 import { registerBaterie, baterieApi } from "./items/baterie.mjs";
 import { registerLatarka, latarkaApi } from "./items/latarka.mjs";
 import { registerWorldClock, worldClockApi } from "./world-clock.mjs";
@@ -367,6 +368,7 @@ Hooks.once("ready", () => {
   registerWeaponSounds();
   registerEngineControls();
   registerLightSources();
+  registerPowerSourceUI();
   registerPochodnia();
   game.neuroshima.pochodnia = pochodniaApi;
   registerBaterie();
