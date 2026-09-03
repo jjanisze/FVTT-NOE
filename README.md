@@ -71,6 +71,7 @@ Początek podręcznika użytkownika (po polsku) — [`docs/`](docs/README.md):
 - [Instalacja](docs/Instalacja.md)
 - [Pierwsze kroki](docs/Pierwsze-kroki.md)
 - [Czym różni się od dnd5e](docs/Zmiany-wzgledem-dnd5e.md)
+- [Kolor Kobaltu](docs/Kobalt.md)
 - [FAQ](docs/FAQ.md)
 
 To dopiero początek — pełny, gęsty opis każdej mechaniki na razie mieszka w

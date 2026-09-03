@@ -1,6 +1,28 @@
 const MODULE_ID = "neuroshima-2026-overrides";
 
+/**
+ * Kolor Kobaltu — see `docs/Kobalt.md` (player/GM-facing rule catalog, Polish) and
+ * `PLAN_kobalt.md` (dev-side architecture) for the full writeup. Unlike the book's own Kolory
+ * (Rdza/Stal/Rtęć/Chrom — mutually exclusive campaign-start profiles, undeveloped in code),
+ * Kobalt is a stackable set of home-rule patches to mechanics that are untested or don't hold up
+ * on a VTT. One world-scope boolean, same shape as `forsowanieEnabled` in `combat/rerolls.mjs`.
+ * Default `true`: the GM's assumption is 80%+ of tables play with it on.
+ */
+export function isKobaltEnabled() {
+  return game.settings.get(MODULE_ID, "kobaltEnabled");
+}
+
 export function registerSettings() {
+  game.settings.register(MODULE_ID, "kobaltEnabled", {
+    name: "Kolor Kobaltu",
+    hint: "Włącza zestaw domowych poprawek zasad (zob. docs/Kobalt.md) — zasięgi latarek, "
+      + "doładowanie pochodni itp. Można łączyć z dowolnym innym Kolorem.",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: true,
+  });
+
   game.settings.register(MODULE_ID, "weaponSoundVolume", {
     name: "Głośność efektów dźwiękowych",
     hint: "Ustawienie głośności (od 0 do 1) dla efektów dźwiękowych broni (np. strzał, przeładowanie, zacięcie).",

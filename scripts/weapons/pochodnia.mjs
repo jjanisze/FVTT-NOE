@@ -55,6 +55,7 @@
 
 import { registerLightProvider, syncActorLight } from "../items/light-sources.mjs";
 import { registerPowerSource, getPowerStatus, renderPowerRow } from "../items/power-source.mjs";
+import { getSurowiecType } from "../config/surowce-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -65,6 +66,14 @@ const MODULE_ID = "neuroshima-2026-overrides";
 const ATTACK_ID = "pochodnia-atak";
 const IGNITE_ID = "pochodnia-zapal";
 const EXTINGUISH_ID = "pochodnia-zgas";
+const REFUEL_ID = "pochodnia-dolej-paliwo";
+
+// Kolor Kobaltu (docs/Kobalt.md, rule 3) — 1 kg czystej Chemii (CH) always refills to 100%,
+// regardless of how much fuel remained (locked GM decision, PLAN_kobalt.md). Not gated behind
+// the Kobalt toggle: per that same plan, Pochodnia's whole fuel model ships unconditionally —
+// there's no separate RAW Pochodnia to fall back to (the stock SRD Torch is broken, see this
+// file's top doc comment), so refuelling is just baseline Pochodnia behavior.
+const REFUEL_CH_KG = 1;
 
 const FLAG_VARIANT = "pochodniaVariant";       // "improwizowana" | "smolowa" — set even once burnt (origin record)
 const FLAG_LIT = "pochodniaLit";               // bool
@@ -145,6 +154,56 @@ function variantOf(item) {
 
 function _getActivity(item, identifier) {
   return item.system.activities?.find(a => a.visibility?.identifier === identifier) ?? null;
+}
+
+/** Weight-unit → kilograms, same table `actors/surowce-inventory.mjs` uses for its own totals. */
+const _TO_KG = Object.freeze({ kg: 1, g: 0.001, Mg: 1000, lb: 0.45359237, tn: 907.18474 });
+
+function _itemWeightKg(item) {
+  const w = item.system.weight;
+  const value = w?.value ?? (typeof w === "number" ? w : 0);
+  const units = w?.units ?? "kg";
+  return (isNaN(value) ? 0 : Number(value)) * (_TO_KG[units] ?? 1);
+}
+
+/**
+ * Consumes `kgNeeded` kilograms of a surowiec (raw material) type — e.g. "CH" for Chemia — off
+ * `actor`'s inventory, spread across as many stacks as it takes (smallest total-kg stack first,
+ * so a single big stack isn't fragmented before smaller ones are used up). Not quantity-based
+ * (unlike `latarka.mjs`'s `insertBattery`, which just drops one whole Baterie unit): surowce
+ * stacks carry their own per-unit weight, so "1 kg" doesn't necessarily mean "1 unit" — this
+ * computes real kilograms via the same weight math `actors/surowce-inventory.mjs` uses for its
+ * panel totals, and can spend a fractional slice of a stack when a stack's per-unit weight isn't
+ * an even 1 kg. Returns `false` (no changes made at all) if the actor doesn't have enough total
+ * kg across every matching stack; `true` once the full amount has been deducted.
+ */
+async function _consumeKgOfSurowiec(actor, code, kgNeeded) {
+  const stacks = actor.items
+    .filter(i => getSurowiecType(i)?.code === code)
+    .map(item => ({ item, perUnitKg: _itemWeightKg(item), qty: Number(item.system.quantity ?? 0) }))
+    .filter(s => s.perUnitKg > 0 && s.qty > 0)
+    .sort((a, b) => (a.perUnitKg * a.qty) - (b.perUnitKg * b.qty));
+
+  const totalKg = stacks.reduce((sum, s) => sum + s.perUnitKg * s.qty, 0);
+  if (totalKg < kgNeeded) return false;
+
+  let remaining = kgNeeded;
+  const deletes = [];
+  const updates = [];
+  for (const s of stacks) {
+    if (remaining <= 0) break;
+    const stackKg = s.perUnitKg * s.qty;
+    if (stackKg <= remaining + Number.EPSILON) {
+      remaining -= stackKg;
+      deletes.push(s.item.id);
+    } else {
+      updates.push({ _id: s.item.id, "system.quantity": s.qty - remaining / s.perUnitKg });
+      remaining = 0;
+    }
+  }
+  if (deletes.length) await actor.deleteEmbeddedDocuments("Item", deletes);
+  if (updates.length) await actor.updateEmbeddedDocuments("Item", updates);
+  return true;
 }
 
 function _attackActivity(item) {
@@ -273,6 +332,14 @@ async function _ensurePochodniaActivitiesUnguarded(item) {
       description: { chatFlavor: "Pochodnia gaśnie, niewypalone paliwo zostaje zachowane." },
     }, { renderSheet: false });
   }
+  if (!_getActivity(item, REFUEL_ID)) {
+    await item.createActivity("utility", {
+      name: `Dolej paliwo (${REFUEL_CH_KG} kg CH)`,
+      activation: { type: "special" },
+      visibility: { identifier: REFUEL_ID },
+      description: { chatFlavor: "Dolewa paliwa do pełna." },
+    }, { renderSheet: false });
+  }
 }
 
 /* -------------------------------------------- */
@@ -356,6 +423,50 @@ export async function extinguishTorch(item, { silent = false } = {}) {
     await _postCard(item,
       `<p>Zgaszona. Niewypalone paliwo zachowane: <strong>${Math.round(remaining)}%</strong>.</p>`);
   }
+}
+
+/**
+ * Kolor Kobaltu (docs/Kobalt.md, rule 3) — refuels a Pochodnia to 100% by consuming
+ * `REFUEL_CH_KG` kg of Chemia (CH) from the same actor's inventory. Works while lit or unlit
+ * (unlike `insertBattery` in `latarka.mjs`, which requires the light to be off first) — refilling
+ * while burning just re-banks the burn-out schedule against a full tank from this moment,
+ * mirroring exactly what `igniteTorch` already does when it computes `burnSeconds` from fresh
+ * fuel. A Wypalona Pochodnia (`isBurnt`) can never be refuelled — it's structurally gone, not
+ * just empty.
+ */
+export async function refuelTorch(item) {
+  item = _liveItem(item);
+  const variant = variantOf(item);
+  if (!variant || isBurnt(item)) return;
+
+  const actor = item.actor;
+  if (!actor) {
+    ui.notifications.warn("Doładowanie paliwa wymaga, żeby pochodnia leżała w ekwipunku.");
+    return;
+  }
+
+  if (_liveFuelPercent(item) >= 100) {
+    ui.notifications.warn(`${item.name}: paliwo już pełne.`);
+    return;
+  }
+
+  const ok = await _consumeKgOfSurowiec(actor, "CH", REFUEL_CH_KG);
+  if (!ok) {
+    ui.notifications.warn(`Brak ${REFUEL_CH_KG} kg czystej Chemii (CH) w ekwipunku.`);
+    return;
+  }
+
+  const wasLit = isLit(item);
+  const update = { [`flags.${MODULE_ID}.${FLAG_FUEL}`]: 100 };
+  if (wasLit) {
+    const now = game.time.worldTime;
+    update[`flags.${MODULE_ID}.${FLAG_START}`] = now;
+    update[`flags.${MODULE_ID}.${FLAG_BURNOUT_AT}`] = now + variant.burnMinutes * 60;
+  }
+  await item.update(update);
+
+  await _postCard(item,
+    `<p>Doładowana <strong>${REFUEL_CH_KG} kg CH</strong>. Paliwo: <strong>100%</strong>.</p>`);
 }
 
 /**
@@ -510,6 +621,10 @@ function onPreUseActivity(activity) {
     ui.notifications.warn(`${item.name} nie jest zapalona.`);
     return false;
   }
+  if (identifier === REFUEL_ID) {
+    if (isBurnt(item)) { ui.notifications.warn(`${item.name} jest wypalona — nie da się jej doładować.`); return false; }
+    if (_liveFuelPercent(item) >= 100) { ui.notifications.warn(`${item.name}: paliwo już pełne.`); return false; }
+  }
 }
 
 function onPostUseActivity(activity) {
@@ -518,6 +633,7 @@ function onPostUseActivity(activity) {
   const identifier = activity.visibility?.identifier;
   if (identifier === IGNITE_ID) igniteTorch(item);
   else if (identifier === EXTINGUISH_ID) extinguishTorch(item);
+  else if (identifier === REFUEL_ID) refuelTorch(item);
 }
 
 /** GM-only sweep: burn out anything whose scheduled instant has passed. */
@@ -538,10 +654,12 @@ function onUpdateItem(item, changes) {
 
 /**
  * Paliwo (fuel) row on the item sheet's Details tab — shared markup/logic from
- * `items/power-source.mjs`. Manual refuelling (dolanie oleju, nowa szmata…) is deliberately
- * not automated — RAW/FVTT convention already lets a player freely edit their own item's
- * tracked numeric resource (charges, ammo, …), so this is just that: a plain number input
- * bound straight to the fuel flag, editable by the item's owner.
+ * `items/power-source.mjs`. This raw number input stays freely editable by the item's owner
+ * (RAW/FVTT convention already lets a player edit their own item's tracked numeric resource —
+ * charges, ammo, …) for GM-adjudicated top-ups (dolanie oleju, nowa szmata…) that don't fit the
+ * CH-consuming recipe. The `REFUEL_ID` Activity (`refuelTorch`, Kolor Kobaltu rule 3) is the
+ * *automated* path — 1 kg CH → full refill — and doesn't touch this input at all; the two
+ * coexist rather than one replacing the other.
  *
  * Only editable while UNLIT. While lit, the stored flag is stale on purpose — see
  * `_liveFuelPercent`'s comment — so editing it directly would either show a player a
@@ -564,7 +682,7 @@ function onRenderItemSheet(app, html) {
 async function ensureAllPochodniaActivities() {
   const items = [...game.items, ...game.actors.map(a => [...a.items]).flat()];
   for (const item of items) {
-    if (isPochodnia(item) && (!_getActivity(item, IGNITE_ID) || !_getActivity(item, EXTINGUISH_ID))) {
+    if (isPochodnia(item) && (!_getActivity(item, IGNITE_ID) || !_getActivity(item, EXTINGUISH_ID) || !_getActivity(item, REFUEL_ID))) {
       await ensurePochodniaActivities(item);
     }
   }
@@ -593,6 +711,7 @@ export const pochodniaApi = {
   variants: POCHODNIA_VARIANTS,
   ignite: igniteTorch,
   extinguish: extinguishTorch,
+  refuel: refuelTorch,
   burnOut,
   initialize: initializePochodnia,
   create: createPochodniaItem,

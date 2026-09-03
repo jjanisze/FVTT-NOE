@@ -468,6 +468,8 @@ export function registerEquipmentDataTests(quench) {
           const names = Array.from(actor.items.get(item.id).system.activities ?? []).map(a => a.name);
           expect(names.filter(n => n === "Zapal pochodnię")).to.have.lengthOf(1);
           expect(names.filter(n => n === "Zgaś pochodnię")).to.have.lengthOf(1);
+          // Kolor Kobaltu, rule 3 — same single-flight guard covers this third utility activity.
+          expect(names.filter(n => n === "Dolej paliwo (1 kg CH)")).to.have.lengthOf(1);
         });
 
         it("createPochodniaItem zwraca przedmiot z dokładnie jednym kompletem aktywności", async function () {
@@ -476,6 +478,7 @@ export function registerEquipmentDataTests(quench) {
           expect(names.filter(n => n === "Atak")).to.have.lengthOf(1);
           expect(names.filter(n => n === "Zapal pochodnię")).to.have.lengthOf(1);
           expect(names.filter(n => n === "Zgaś pochodnię")).to.have.lengthOf(1);
+          expect(names.filter(n => n === "Dolej paliwo (1 kg CH)")).to.have.lengthOf(1);
         });
       });
     });
