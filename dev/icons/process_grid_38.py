@@ -10,8 +10,10 @@ TARGET_SIZE = (256, 256)
 # Batch 38 — flashlight family (czołówka/regular/dynamo) plus the "conventional light" and
 # "battery gadget" prerequisites RAW's own Baterie entry names (radio family, geiger counter),
 # and the standalone NVG/thermal goggles for the next phase. "regular" flashlight replaces the
-# existing generic items/loot/latarka.svg placeholder outright (same filename) so reczna/
-# naramienna pick up the new art with no code change; everything else is a new file.
+# existing generic items/loot/latarka.svg placeholder outright (same filename) so reczna
+# picks up the new art with no code change; everything else is a new file. (A fourth form,
+# naramienna/arm-strapped, briefly existed and was cut as mechanically redundant with czolowa —
+# see latarka.mjs's LATARKA_FORMS comment.)
 #
 # Slot 8 was requested without first checking for prior art — icons/items/loot/krotkofalowka.svg
 # already existed and was already in use (Evie/Lorentz/Victor's radio items), so this batch's

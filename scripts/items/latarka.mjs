@@ -101,11 +101,14 @@ export const LATARKA_FORMS = {
     key: "reczna",
     label: "Latarka ręczna",
     battery: true,
-    // Same art as naramienna — a handheld and an arm-strapped flashlight are visually
-    // indistinguishable at icon scale, and the batch this came from only drew one "regular
-    // flashlight" cell (see dev/icons/process_grid_38.py's slot list).
     img: `${ICON_BASE}/latarka.svg`,
-    description: "<p>Trzymana w dłoni. Zajmuje jedną rękę, dopóki świeci.</p>",
+    // RAW also lists "przypinana do ramienia" as a mounting option — dropped as a separate
+    // form (was `naramienna`): identical stats, identical hands-free-ness to `czolowa`, no
+    // mechanical or RAW-stated distinction between "strapped to your head" and "strapped to
+    // your arm." A player who wants that flavor can just call this one that; it doesn't earn
+    // its own catalog entry. See chat log 2026-09-04 for the fuller argument.
+    description: "<p>Trzymana w dłoni (lub przypięta do ramienia/paska szelkami) — zajmuje "
+      + "jedną rękę, dopóki świeci, chyba że przypięta.</p>",
   },
   czolowa: {
     key: "czolowa",
@@ -113,13 +116,6 @@ export const LATARKA_FORMS = {
     battery: true,
     img: `${ICON_BASE}/latarka_czolowa.svg`,
     description: "<p>Opaska na głowę. Nie zajmuje rąk — świeci tam, gdzie patrzysz.</p>",
-  },
-  naramienna: {
-    key: "naramienna",
-    label: "Latarka naramienna",
-    battery: true,
-    img: `${ICON_BASE}/latarka.svg`,
-    description: "<p>Przypięta do ramienia szelkami lub taśmą. Nie zajmuje rąk.</p>",
   },
   dynamowa: {
     key: "dynamowa",
