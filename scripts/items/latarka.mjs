@@ -55,6 +55,7 @@
 import { registerLightProvider, syncActorLight } from "./light-sources.mjs";
 import { registerPowerSource, getPowerStatus, renderPowerRow } from "./power-source.mjs";
 import { isBaterie } from "./baterie.mjs";
+import { isKobaltEnabled } from "../config/settings.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -79,45 +80,70 @@ const FLAG_BURNOUT_AT = "latarkaBurnoutAt";    // worldTime this session would g
 // `angle` — the v1 approximation that collapsed both into one 90°-wide light was simply wrong,
 // not just imprecise: it put bright light in the two side wedges (22.5°–45° off centre) that
 // RAW says should read as dim immediately, not just "dim past 45m."
-const LIGHT = { bright: 45, dim: 180, angle: 90, narrowAngle: 45 };
+//
+// Kolor Kobaltu (docs/Kobalt.md, rule 6) cuts both radii to 1/3 — RAW's ranges are considered
+// too generous on a VTT (a dim 180 m throw is bigger than most scenes). Cone angles are
+// unaffected by Kobalt — locked decision, `PLAN_kobalt.md` — only distance shrinks.
+const LIGHT_RAW = { bright: 45, dim: 180, angle: 90, narrowAngle: 45 };
+const LIGHT_KOBALT = { bright: 15, dim: 60, angle: 90, narrowAngle: 45 };
+
+function _light() {
+  return isKobaltEnabled() ? LIGHT_KOBALT : LIGHT_RAW;
+}
+
 const LIGHT_COLOR = "#dce8ff"; // cool white — deliberately distinct from Pochodnia's warm flicker
 const NO_ANIMATION = { type: "", speed: 0, intensity: 0 };
 
-// Reuses the existing generic loot icon for every form until the batch of dedicated
-// per-form icons (czołówka/naramienna/dynamowa look nothing alike) comes back — see the
-// icon-request note tracked alongside this feature.
-const ICON = `modules/${MODULE_ID}/icons/items/loot/latarka.svg`;
+const ICON_BASE = `modules/${MODULE_ID}/icons/items/loot`;
 
 export const LATARKA_FORMS = {
   reczna: {
     key: "reczna",
     label: "Latarka ręczna",
     battery: true,
+    // Same art as naramienna — a handheld and an arm-strapped flashlight are visually
+    // indistinguishable at icon scale, and the batch this came from only drew one "regular
+    // flashlight" cell (see dev/icons/process_grid_38.py's slot list).
+    img: `${ICON_BASE}/latarka.svg`,
     description: "<p>Trzymana w dłoni. Zajmuje jedną rękę, dopóki świeci.</p>",
   },
   czolowa: {
     key: "czolowa",
     label: "Latarka czołówka",
     battery: true,
+    img: `${ICON_BASE}/latarka_czolowa.svg`,
     description: "<p>Opaska na głowę. Nie zajmuje rąk — świeci tam, gdzie patrzysz.</p>",
   },
   naramienna: {
     key: "naramienna",
     label: "Latarka naramienna",
     battery: true,
+    img: `${ICON_BASE}/latarka.svg`,
     description: "<p>Przypięta do ramienia szelkami lub taśmą. Nie zajmuje rąk.</p>",
   },
   dynamowa: {
     key: "dynamowa",
     label: "Latarka z dynamem",
     battery: false,
+    img: `${ICON_BASE}/latarka_dynamo.svg`,
     description: "<p>Droższa, ale nigdy nie siada jej bateria — bo jej nie ma. Trzeba kręcić "
       + "korbką, żeby świeciła (MG może uznać to za zajętą rękę na czas świecenia).</p>",
   },
 };
 
-const COMMON_DESCRIPTION_TAIL =
-  "<p>Jasne światło w stożku 45° na 45 m, słabe światło w stożku 90° na 180 m.</p>";
+/**
+ * Flavor-text tail describing the light cone, kept in sync with `_light()` — baked into the
+ * item's description at creation/initialization time (like the rest of the catalog data), so it
+ * reflects whatever the Kobalt toggle says *right now*, not necessarily forever: flipping the
+ * toggle later re-syncs the actual light values live (see `registerLatarka`'s `updateSetting`
+ * hook) but does NOT rewrite already-created items' description text. Acceptable per
+ * `PLAN_kobalt.md` — cosmetic drift only, not a mechanical one.
+ */
+function _descriptionTail() {
+  const l = _light();
+  return `<p>Jasne światło w stożku ${l.narrowAngle}° na ${l.bright} m, słabe światło w stożku `
+    + `${l.angle}° na ${l.dim} m.</p>`;
+}
 
 /* -------------------------------------------- */
 /*  Helpers                                       */
@@ -175,7 +201,7 @@ function _latarkaLightProvider(actor) {
   for (const item of actor.items) {
     if (!isLatarka(item) || !isOn(item)) continue;
     if (!item.system?.equipped) continue;
-    if (!best) best = LIGHT;
+    if (!best) best = _light();
   }
   if (!best) return null;
   return { ...best, color: LIGHT_COLOR, alpha: 0.4, animation: NO_ANIMATION };
@@ -401,8 +427,8 @@ export async function initializeLatarka(item, formKey) {
   await item.update({
     name: form.label,
     type: "equipment",
-    img: ICON,
-    "system.description.value": form.description + COMMON_DESCRIPTION_TAIL,
+    img: form.img,
+    "system.description.value": form.description + _descriptionTail(),
     "system.weight.value": 0.3,
     "system.weight.units": "kg",
     "system.price.value": form.battery ? 15 : 60,
@@ -436,10 +462,10 @@ export function buildLatarkaItemData(formKey) {
   return {
     name: form.label,
     type: "equipment",
-    img: ICON,
+    img: form.img,
     system: {
       ..._baseSystemData(),
-      description: { value: form.description + COMMON_DESCRIPTION_TAIL, chat: "" },
+      description: { value: form.description + _descriptionTail(), chat: "" },
       weight: { value: 0.3, units: "kg" },
       price: { value: form.battery ? 15 : 60, denomination: "gp" },
       identifier: `latarka-${formKey}`,
@@ -578,6 +604,17 @@ export function registerLatarka() {
 
   Hooks.on("createItem", (item) => { if (game.user.isGM) ensureLatarkaActivities(item); });
   if (game.user.isGM) ensureAllLatarkaActivities();
+
+  // Kolor Kobaltu (docs/Kobalt.md, rule 6) changes `_light()`'s output live, but nothing
+  // re-pushes that to already-placed tokens on its own — `syncActorLight` only runs when
+  // something *item-side* changes (ignite, equip, battery...). Re-sync every actor's light the
+  // moment the GM flips the world setting, on every client — same "each client independently
+  // reacts to the same document change" pattern `light-sources.mjs`'s own doc comment describes
+  // for the wide/narrow light split.
+  Hooks.on("updateSetting", (setting) => {
+    if (setting.key !== `${MODULE_ID}.kobaltEnabled`) return;
+    for (const actor of game.actors) syncActorLight(actor);
+  });
 
   console.log(`${MODULE_ID} | Latarka registered`);
 }
