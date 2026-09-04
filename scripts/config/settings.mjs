@@ -8,7 +8,15 @@ const MODULE_ID = "neuroshima-2026-overrides";
  * on a VTT. One world-scope boolean, same shape as `forsowanieEnabled` in `combat/rerolls.mjs`.
  * Default `true`: the GM's assumption is 80%+ of tables play with it on.
  */
+/**
+ * `game` doesn't exist outside a running Foundry client — `dev/packs/build-packs.mjs` calls
+ * this (via `latarka.mjs`'s `_light()`/`_descriptionTail()`) from plain Node to bake a
+ * flavor-text description into the compendium, and until now that threw `ReferenceError: game
+ * is not defined`, unnoticed because nobody had rebuilt the `bron`/`sprzet` packs since Kobalt
+ * shipped. Falls back to the setting's own registered default (see below) rather than crashing.
+ */
 export function isKobaltEnabled() {
+  if (typeof game === "undefined") return true; // matches `kobaltEnabled`'s own `default: true`
   return game.settings.get(MODULE_ID, "kobaltEnabled");
 }
 

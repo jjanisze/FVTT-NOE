@@ -64,6 +64,7 @@ const PACK = {
   narzedzia: "narzedzia",
   bestiariusz: "bestiariusz",
   bron: "bron",
+  sprzet: "sprzet",
   pancerze: "pancerze"
 };
 
@@ -648,9 +649,10 @@ function buildPochodnia(variantKey) {
 /**
  * Latarka (flashlight) forms and Baterie — same shared-builder discipline as Pochodnia above,
  * `buildLatarkaItemData`/`buildBaterieItemData` are the exact functions `items/latarka.mjs` and
- * `items/baterie.mjs` call at runtime. Parked in the `bron` pack alongside Pochodnia rather than
- * a dedicated pack — there's no general "gear" compendium pack yet, and Pochodnia (also a light
- * source, also not really a weapon in spirit) already set the precedent of living here.
+ * `items/baterie.mjs` call at runtime. Live in the `sprzet` pack, not `bron`: a flashlight is
+ * equipment first, weapon never — unlike Pochodnia, which stays in `bron` because it genuinely
+ * is a weapon (1k4 obuchowe) that happens to also give light. `sprzet` is the general home for
+ * utility gear that isn't a `narzedzia`-style skill-check toolkit either (2026-09-04).
  */
 function buildLatarka(formKey) {
   return { ...buildLatarkaItemData(formKey), _id: idFor("equipment", `latarka-${formKey}`), _key: null };
@@ -1390,6 +1392,8 @@ const toolkitDocs = TOOLKITS.filter(k => !k.skip).map(buildToolkit);
 const weaponDocs = [
   ...WEAPONS.map(buildWeapon),
   ...Object.keys(POCHODNIA_VARIANTS).map(buildPochodnia),
+];
+const sprzetDocs = [
   ...Object.keys(LATARKA_FORMS).map(buildLatarka),
   buildBaterie(),
 ];
@@ -1453,6 +1457,7 @@ if (wanted(PACK.amunicja)) await writePack(PACK.amunicja, ammoDocs);
 if (wanted(PACK.granaty)) await writePack(PACK.granaty, grenadeDocs);
 if (wanted(PACK.narzedzia)) await writePack(PACK.narzedzia, toolkitDocs);
 if (wanted(PACK.bron)) await writePack(PACK.bron, weaponDocs);
+if (wanted(PACK.sprzet)) await writePack(PACK.sprzet, sprzetDocs);
 if (wanted(PACK.pancerze)) await writePack(PACK.pancerze, armorDocs);
 if (wanted(PACK.bestiariusz)) await writeActorPack(PACK.bestiariusz, bestiaryEntries, bestiaryFolders);
 

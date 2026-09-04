@@ -79,6 +79,55 @@ export function formatRemaining(minutes) {
   return `${h}g ${rem}min`;
 }
 
+/** True if some registered source's `test` claims this item — regardless of what `describe`
+ * would currently return (a burnt-out Pochodnia still has no fuel state worth stacking).
+ * Exported: the quantity-lock UI below and `config/inventory-audit.mjs`'s integrity check
+ * both need to ask "is this item one of the stateful, one-document-per-instance types" without
+ * duplicating the registry lookup. */
+export function isPowerSourceItem(item) {
+  return _sources.some(({ test }) => {
+    try { return test(item); } catch (e) { return false; }
+  });
+}
+
+/* -------------------------------------------- */
+/*  Quantity lock — "one document, one instance's state"                                       */
+/* -------------------------------------------- */
+
+/**
+ * A registered power source keeps its on/off + charge/fuel state as flags on ONE item document
+ * — same place `system.quantity` lives. Letting quantity climb above 1 would silently claim "3
+ * flashlights" while actually modeling one shared on/off switch and one shared battery, which is
+ * simply wrong, not just imprecise (confirmed live: nothing about the charge/on state scales
+ * with quantity — `_liveChargePercent`/`_liveFuelPercent` know nothing about it). This mirrors
+ * how weapons already work in this module — a jammed/modded pistol is one document, not a stack
+ * of three sharing one jam counter; a player who wants three flashlights gets three separate
+ * Latarka items, each with its own battery, exactly like three separate pistols.
+ *
+ * Blocks a deliberate player edit (the quantity input on the sheet) with an explanation; a
+ * creation with quantity already >1 (import, manual `Item.create`, compendium drag with a stale
+ * value) is clamped silently instead — nothing to explain to anyone at that point.
+ */
+function _onPreUpdateItem(item, changes) {
+  if (!foundry.utils.hasProperty(changes, "system.quantity")) return true;
+  const qty = foundry.utils.getProperty(changes, "system.quantity");
+  if (qty == null || qty <= 1) return true;
+  if (!isPowerSourceItem(item)) return true;
+  ui.notifications.warn(
+    `${item.name}: ma własny stan (bateria/paliwo, wł/wył) na tym dokumencie — nie da się go `
+    + `sztaplować. Weź osobną sztukę na każde kolejne urządzenie.`
+  );
+  return false;
+}
+
+function _onPreCreateItem(item, data) {
+  const qty = foundry.utils.getProperty(data, "system.quantity");
+  if (qty == null || qty <= 1) return true;
+  if (!isPowerSourceItem(item)) return true;
+  item.updateSource({ "system.quantity": 1 });
+  return true;
+}
+
 /* -------------------------------------------- */
 /*  Inventory-row badge — "is this thing on right now"                                        */
 /* -------------------------------------------- */
@@ -104,10 +153,55 @@ function _onRenderActorSheetPowerBadge(app, html) {
     const item = actor.items.get(row.dataset.itemId);
     const status = getPowerStatus(item);
     row.classList.remove("neuro-power-on", "neuro-power-low");
-    if (!status?.on) return;
-    const low = !status.unlimited && status.percent <= (status.lowThreshold ?? DEFAULT_LOW_THRESHOLD);
-    row.classList.add(low ? "neuro-power-low" : "neuro-power-on");
+    if (status?.on) {
+      const low = !status.unlimited && status.percent <= (status.lowThreshold ?? DEFAULT_LOW_THRESHOLD);
+      row.classList.add(low ? "neuro-power-low" : "neuro-power-on");
+    }
+    if (isPowerSourceItem(item)) _lockQuantityInput(row.querySelector(".item-quantity"));
   });
+}
+
+/**
+ * `preUpdateItem`/`preCreateItem` above stop the write, but a player who clicks the +/- twice
+ * before the rejection round-trips back still *sees* it climb for a moment — "it complains but I
+ * can still break it," reported live. This closes that gap the way the actor sheet's own
+ * `@root.locked` branch does for a genuinely locked sheet (see `dnd5e`'s
+ * `templates/inventory/columns/quantity.hbs`): disable the two adjustment arrows and make the
+ * number read-only, so there's nothing left to click that could ever produce the illusion of a
+ * pending change. This is deliberately not the same thing as the block above — that one is the
+ * actual integrity guarantee (defends against macros, other clients, anything that skips this
+ * render pass entirely); this is just making the sheet stop offering a control that always loses.
+ */
+function _lockQuantityInput(qtyBlock) {
+  if (!qtyBlock || qtyBlock.dataset.neuroQtyLocked) return;
+  qtyBlock.dataset.neuroQtyLocked = "true";
+  const hint = "Ma własny stan (bateria/paliwo, wł/wył) na tym dokumencie — nie da się go sztaplować.";
+  qtyBlock.querySelectorAll(".adjustment-button").forEach(btn => {
+    btn.classList.add("neuro-qty-locked");
+    btn.title = hint;
+    btn.addEventListener("click", (ev) => { ev.preventDefault(); ev.stopPropagation(); }, true);
+  });
+  // dnd5e's inventory-row quantity input uses `data-name`, not a plain `name` attribute (its own
+  // "always-interactive" row-editing mechanism, distinct from a native form field) — the item
+  // sheet's own header quantity field (a normal DataField widget) uses plain `name` instead.
+  // Confirmed live: the two templates genuinely differ, not an oversight to pick just one.
+  const input = qtyBlock.querySelector("input[name='system.quantity'], input[data-name='system.quantity']");
+  if (input) { input.readOnly = true; input.classList.add("neuro-qty-locked"); input.title = hint; }
+}
+
+/** Same lock, applied to the item sheet's own header quantity field (a plain NumberField
+ * input, no adjustment arrows there — see `templates/items/header.hbs` in dnd5e's source). */
+function _onRenderItemSheetQuantityLock(app, html) {
+  const item = app.document ?? app.item;
+  if (!item || !isPowerSourceItem(item)) return;
+  const root = html instanceof HTMLElement ? html : html?.[0];
+  if (!root) return;
+  const input = root.querySelector(".quantity input[name='system.quantity']");
+  if (input) {
+    input.readOnly = true;
+    input.classList.add("neuro-qty-locked");
+    input.title = "Ma własny stan (bateria/paliwo, wł/wył) na tym dokumencie — nie da się go sztaplować.";
+  }
 }
 
 /* -------------------------------------------- */
@@ -166,5 +260,11 @@ export function registerPowerSourceUI() {
   for (const hookName of ["renderActorSheet", "renderCharacterActorSheet", "renderNPCActorSheet"]) {
     Hooks.on(hookName, _onRenderActorSheetPowerBadge);
   }
+  // Not really "UI" (see the quantity-lock doc comment above) but this is already the one place
+  // every power-source-consuming module calls to wire up the shared paradigm, so it lives here
+  // rather than adding a second registration call every one of them would need to remember.
+  Hooks.on("preUpdateItem", _onPreUpdateItem);
+  Hooks.on("preCreateItem", _onPreCreateItem);
+  Hooks.on("renderItemSheet5e", _onRenderItemSheetQuantityLock);
   console.log(`${MODULE_ID} | Power-source badges registered`);
 }

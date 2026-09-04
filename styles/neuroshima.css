@@ -936,6 +936,16 @@ damage-application .neuro-reduction-buttons {
   animation: neuro-jam-pulse 1.6s ease-in-out infinite;
 }
 
+/* Zablokowana ilość — przedmioty z własnym stanem (bateria/paliwo) nie mogą się sztaplować.
+   Zobacz items/power-source.mjs: preUpdateItem/preCreateItem już to egzekwują niezależnie od
+   tego CSS-a; to tylko usuwa z arkusza kontrolki, które i tak zawsze przegrają. */
+.item-quantity .adjustment-button.neuro-qty-locked,
+input.neuro-qty-locked {
+  pointer-events: none;
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
 /* ============================================= */
 /* Ulepszenia broni — plakietki w oknie chatu    */
 /* Dołączają do natywnej listy .card-footer.pills */

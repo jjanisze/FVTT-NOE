@@ -105,6 +105,8 @@ import {
   auditSurowce, repairSurowce, auditPirotechnika, repairPirotechnika,
   auditChemia, repairChemia, auditChemiaIcons, repairChemiaIcons,
   auditItemCompleteness,
+  auditPowerSourceQuantity, repairPowerSourceQuantity,
+  auditPowerSourceUses, repairPowerSourceUses,
   auditInventory, repairInventory
 } from "./config/inventory-audit.mjs";
 import { ARMORS, createArmors } from "./config/armor-data.mjs";import { registerMedyk } from "./items/toolkit-medyk.mjs";
@@ -333,6 +335,8 @@ Hooks.once("ready", () => {
     auditChemia, repairChemia,
     auditChemiaIcons, repairChemiaIcons,
     auditItemCompleteness,
+    auditPowerSourceQuantity, repairPowerSourceQuantity,
+    auditPowerSourceUses, repairPowerSourceUses,
     auditInventory, repairInventory
   };
 

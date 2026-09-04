@@ -52,7 +52,7 @@
  * swappable object with its own continuity.
  */
 
-import { registerLightProvider, syncActorLight } from "./light-sources.mjs";
+import { registerLightProvider, registerLightOffSwitch, enforceSingleLightSource, syncActorLight } from "./light-sources.mjs";
 import { registerPowerSource, getPowerStatus, renderPowerRow } from "./power-source.mjs";
 import { isBaterie } from "./baterie.mjs";
 import { isKobaltEnabled } from "../config/settings.mjs";
@@ -81,11 +81,17 @@ const FLAG_BURNOUT_AT = "latarkaBurnoutAt";    // worldTime this session would g
 // not just imprecise: it put bright light in the two side wedges (22.5°–45° off centre) that
 // RAW says should read as dim immediately, not just "dim past 45m."
 //
-// Kolor Kobaltu (docs/Kobalt.md, rule 6) cuts both radii to 1/3 — RAW's ranges are considered
-// too generous on a VTT (a dim 180 m throw is bigger than most scenes). Cone angles are
-// unaffected by Kobalt — locked decision, `PLAN_kobalt.md` — only distance shrinks.
+// Kolor Kobaltu (docs/Kobalt.md, rule 6) shrinks both radii — RAW's ranges are considered too
+// generous on a VTT. Bright cuts cleanly to 1/3 (45m -> 15m) and reads right at that scale. Dim
+// does NOT also get the flat 1/3 treatment (that would still be 60m): on the actual silo/dungeon
+// maps this campaign uses, a 60m dim spill lit most of a level at once, which felt less like "a
+// flashlight in the dark" and more like turning on the room lights — it also flattened any reason
+// to want a longer-ranged upgrade later. 22m keeps a real dim halo past the bright cone (RAW's own
+// bright:dim ratio, ~1:4, would be pointless to preserve here) without trivializing exploration.
+// Cone angles are unaffected by either of the above — locked decision, `PLAN_kobalt.md` — only
+// distance shrinks.
 const LIGHT_RAW = { bright: 45, dim: 180, angle: 90, narrowAngle: 45 };
-const LIGHT_KOBALT = { bright: 15, dim: 60, angle: 90, narrowAngle: 45 };
+const LIGHT_KOBALT = { bright: 15, dim: 22, angle: 90, narrowAngle: 45 };
 
 function _light() {
   return isKobaltEnabled() ? LIGHT_KOBALT : LIGHT_RAW;
@@ -200,7 +206,19 @@ function _latarkaLightProvider(actor) {
     if (!best) best = _light();
   }
   if (!best) return null;
-  return { ...best, color: LIGHT_COLOR, alpha: 0.4, animation: NO_ANIMATION };
+  return {
+    ...best,
+    color: LIGHT_COLOR,
+    // Both dialed down from LightData's 0.5/0.5 defaults — see `light-sources.mjs`'s doc comment
+    // for how these were picked (direct pixel-sampling the live rendered canvas, not guesswork):
+    // at the default, both cones read as a flat, blown-out white regardless of alpha, because a
+    // flashlight's radii are large enough to hit Foundry's "Bright"/"Dim" classification across
+    // most of a typical room. `luminosity` is what actually pulls that down to a proper
+    // hotspot-to-fade beam; `alpha` alone barely moves it.
+    alpha: 0.15,
+    luminosity: 0.2,
+    animation: NO_ANIMATION,
+  };
 }
 
 /* -------------------------------------------- */
@@ -276,13 +294,18 @@ export async function turnOn(item) {
     await item.update({ [`flags.${MODULE_ID}.${FLAG_ON}`]: true });
   }
 
+  // Only one light source per actor (locked design decision — see `enforceSingleLightSource`'s
+  // doc comment). Must run after this item's own ON write above (so it isn't the thing that
+  // gets turned back off) but before the sync below, so that sync sees the final, settled state.
+  await enforceSingleLightSource(item.actor, item);
+
   await syncActorLight(item.actor);
   await _postCard(item, `<p>Zapala się.${usesBattery(item)
     ? ` Bateria: <strong>${Math.round(_liveChargePercent(item))}%</strong>.`
     : " Korbka zaczyna kręcić się w dłoni."}</p>`);
 }
 
-export async function turnOff(item, { silent = false } = {}) {
+export async function turnOff(item, { silent = false, reason = null } = {}) {
   item = _liveItem(item);
   if (!formOf(item) || !isOn(item)) return;
 
@@ -296,9 +319,18 @@ export async function turnOff(item, { silent = false } = {}) {
 
   await syncActorLight(item.actor);
   if (!silent) {
-    await _postCard(item, `<p>Gaśnie.${usesBattery(item)
+    const tail = usesBattery(item)
       ? ` Bateria zachowana: <strong>${Math.round(_liveChargePercent(item))}%</strong>.`
-      : ""}</p>`);
+      : "";
+    await _postCard(item, `<p>Gaśnie${reason ? ` — ${reason}` : ""}.${tail}</p>`);
+  }
+}
+
+/** Registered once at `registerLatarka()` — see `light-sources.mjs`'s `enforceSingleLightSource`. */
+async function _turnOffOtherLatarki(actor, keepItem) {
+  for (const item of actor.items) {
+    if (item.id === keepItem?.id) continue;
+    if (isLatarka(item) && isOn(item)) await turnOff(item, { reason: "zapalono inne źródło światła" });
   }
 }
 
@@ -430,6 +462,12 @@ export async function initializeLatarka(item, formKey) {
     "system.price.value": form.battery ? 15 : 60,
     "system.price.denomination": "gp",
     "system.type.value": "trinket",
+    // Explicit clear, not omitted — see `pochodnia.mjs`'s `initializePochodnia` doc comment for
+    // why: this function converts an item that may have carried a real `uses.max` from *its*
+    // pre-conversion type, and leaving it would show a stray "0 / 0" ładunki on the sheet forever.
+    "system.uses.max": "",
+    "system.uses.spent": 0,
+    "system.uses.recovery": [],
     [`flags.${MODULE_ID}.${FLAG_FORM}`]: formKey,
     [`flags.${MODULE_ID}.${FLAG_ON}`]: false,
     [`flags.${MODULE_ID}.${FLAG_HAS_BATTERY}`]: !form.battery,
@@ -447,6 +485,7 @@ export async function initializeLatarka(item, formKey) {
 function _baseSystemData() {
   return {
     type: { value: "trinket", baseItem: "" },
+    uses: { max: "", spent: 0, recovery: [] },
     equipped: false, identified: true, quantity: 1,
   };
 }
@@ -590,6 +629,7 @@ async function ensureAllLatarkaActivities() {
 
 export function registerLatarka() {
   registerLightProvider(_latarkaLightProvider);
+  registerLightOffSwitch(_turnOffOtherLatarki);
   registerPowerSource({ test: isLatarka, describe: _latarkaPowerDescriptor });
 
   Hooks.on("dnd5e.preUseActivity", onPreUseActivity);

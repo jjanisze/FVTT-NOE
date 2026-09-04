@@ -53,7 +53,7 @@
  * only light-granting item in the module.
  */
 
-import { registerLightProvider, syncActorLight } from "../items/light-sources.mjs";
+import { registerLightProvider, registerLightOffSwitch, enforceSingleLightSource, syncActorLight } from "../items/light-sources.mjs";
 import { registerPowerSource, getPowerStatus, renderPowerRow } from "../items/power-source.mjs";
 import { getSurowiecType } from "../config/surowce-data.mjs";
 
@@ -374,6 +374,10 @@ export async function igniteTorch(item) {
   }
   await item.update(update);
 
+  // Only one light source per actor (locked design decision) — see `light-sources.mjs`'s
+  // `enforceSingleLightSource` doc comment. Must run after the item's own LIT write above.
+  await enforceSingleLightSource(item.actor, item);
+
   await syncTokenLight(item.actor);
   await _postCard(item,
     `<p>Zapala się. Ognisty koniec syczy, potem łapie równy płomień. `
@@ -401,7 +405,7 @@ function _liveFuelPercent(item) {
   return Math.max(0, fuel - consumedPct);
 }
 
-export async function extinguishTorch(item, { silent = false } = {}) {
+export async function extinguishTorch(item, { silent = false, reason = null } = {}) {
   item = _liveItem(item);
   const variant = variantOf(item);
   if (!variant || !isLit(item)) return;
@@ -421,7 +425,15 @@ export async function extinguishTorch(item, { silent = false } = {}) {
   await syncTokenLight(item.actor);
   if (!silent) {
     await _postCard(item,
-      `<p>Zgaszona. Niewypalone paliwo zachowane: <strong>${Math.round(remaining)}%</strong>.</p>`);
+      `<p>Zgaszona${reason ? ` — ${reason}` : ""}. Niewypalone paliwo zachowane: <strong>${Math.round(remaining)}%</strong>.</p>`);
+  }
+}
+
+/** Registered once at `registerPochodnia()` — see `light-sources.mjs`'s `enforceSingleLightSource`. */
+async function _turnOffOtherPochodnie(actor, keepItem) {
+  for (const item of actor.items) {
+    if (item.id === keepItem?.id) continue;
+    if (isPochodnia(item) && isLit(item)) await extinguishTorch(item, { reason: "zapalono inne źródło światła" });
   }
 }
 
@@ -520,6 +532,11 @@ function _baseSystemData() {
     },
     equipped: false, identified: true, proficient: 0, properties: ["fin"], quantity: 1,
     range: { value: null, long: null, units: "m" },
+    // Explicit empty, not omitted: dnd5e's native "ładunki"/uses column reads
+    // `system.uses.max` directly, and an empty *string* is what makes it render "-" (no
+    // tracking) instead of "0 / 0". Fuel/charge is tracked entirely via this module's own
+    // flags (see the file's top doc comment) — dnd5e's own limited-uses system plays no part.
+    uses: { max: "", spent: 0, recovery: [] },
   };
 }
 
@@ -527,6 +544,14 @@ function _baseSystemData() {
  * Converts an existing plain `weapon` item into a Pochodnia of the given variant (name,
  * icon, weight, price, description, damage, flags) and provisions its activities. Used to
  * upgrade a placeholder item without losing its `_id` / sheet position / ownership.
+ *
+ * Also clears `system.uses.max` explicitly — confirmed live (Piekarz's "Pochodnia Smołowa"):
+ * this function changes many fields but historically never touched `system.uses`, so a
+ * placeholder item that happened to carry a real `uses.max` from *its* original type (a
+ * consumable with actual charges, before conversion) kept showing "0 / 0" ładunki forever
+ * after becoming a Pochodnia — cosmetic, but reads as "this torch is broken." Same category of
+ * bug as the cross-type update limitation documented elsewhere in this file; the fix here is
+ * just "explicitly overwrite the field," not a workaround for that other limitation.
  */
 export async function initializePochodnia(item, variantKey) {
   const variant = POCHODNIA_VARIANTS[variantKey];
@@ -544,6 +569,9 @@ export async function initializePochodnia(item, variantKey) {
     "system.properties": ["fin"],
     "system.type.value": "biala",
     "system.damage.base": _baseSystemData().damage.base,
+    "system.uses.max": "",
+    "system.uses.spent": 0,
+    "system.uses.recovery": [],
     [`flags.${MODULE_ID}.${FLAG_VARIANT}`]: variantKey,
     [`flags.${MODULE_ID}.${FLAG_LIT}`]: false,
     [`flags.${MODULE_ID}.${FLAG_FUEL}`]: 100,
@@ -690,6 +718,7 @@ async function ensureAllPochodniaActivities() {
 
 export function registerPochodnia() {
   registerLightProvider(_pochodniaLightProvider);
+  registerLightOffSwitch(_turnOffOtherPochodnie);
   registerPowerSource({ test: isPochodnia, describe: _pochodniaPowerDescriptor });
 
   Hooks.on("dnd5e.preUseActivity", onPreUseActivity);

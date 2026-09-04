@@ -122,6 +122,14 @@
       "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
     },
     {
+      "name": "sprzet",
+      "label": "Neuroshima — Sprzęt",
+      "path": "packs/sprzet",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
+    },
+    {
       "name": "pancerze",
       "label": "Neuroshima — Pancerze",
       "path": "packs/pancerze",
@@ -143,7 +151,7 @@
       "name": "Neuroshima",
       "sorting": "m",
       "color": "#6b3f1f",
-      "packs": ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "pochodzenia", "zdolnosci-pochodzenia", "bron", "pancerze", "lekarstwa", "amunicja", "granaty", "narzedzia", "bestiariusz"]
+      "packs": ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "pochodzenia", "zdolnosci-pochodzenia", "bron", "sprzet", "pancerze", "lekarstwa", "amunicja", "granaty", "narzedzia", "bestiariusz"]
     }
   ],
   "esmodules": ["scripts/main.mjs"],

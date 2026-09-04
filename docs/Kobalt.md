@@ -70,9 +70,13 @@ jako osobny mechanicznie przedmiot, tylko jako jedna z fizycznych form Latarki.
 
 ### 6. Skrócone zasięgi latarek
 
-Zasięgi światła latarek są znacznie mniejsze niż w podręczniku — **do 1/3** wartości z RAW: 45 m
-jasne → 15 m, 180 m słabe → 60 m. Kąty stożka (45°/90°) zostają bez zmian — zmienia się tylko
-zasięg, nie szerokość snopu światła.
+Zasięgi światła latarek są znacznie mniejsze niż w podręczniku: **45 m jasne → 15 m** (dokładnie
+1/3 RAW — sprawdzone w praktyce na mapach silosów, dobrze się skaluje). Słabe światło nie
+dziedziczy tej samej proporcji 1/3 (byłoby to 60 m) — **180 m słabe → 22 m** zamiast tego: 60 m
+słabego światła zalewało niemal cały poziom naraz na typowej mapie tej kampanii (silosy budowane
+jak dungeony), co psuło eksplorację i czyniło bezcelowym każdy przyszły sprzęt o większym
+zasięgu. Kąty stożka (45°/90°) zostają bez zmian — zmienia się tylko zasięg, nie szerokość snopu
+światła.
 
 ✅ *Zaimplementowane — działa razem z przełącznikiem Kobaltu: wyłączenie go w Ustawieniach
 świata przywraca latarkom pełny zasięg z podręcznika.*

@@ -18,6 +18,7 @@
  * catalog data, not carried inventory.
  */
 
+import { isPowerSourceItem } from "../items/power-source.mjs";
 import { SUROWCE_TYPES, getSurowiecType } from "./surowce-data.mjs";
 import { GRENADE_TYPES, GRENADE_MAP, AMMO_CALIBER_MAP } from "./ammo-data.mjs";
 import { CHEMIA, chemiaKeyByName, chemiaItemData } from "./chemia-data.mjs";
@@ -354,6 +355,91 @@ export function auditItemCompleteness() {
 }
 
 /* -------------------------------------------- */
+/*  Power-source integrity (Latarka/Pochodnia/…) */
+/* -------------------------------------------- */
+
+/**
+ * A registered power source (`items/power-source.mjs`) keeps its on/off + battery/fuel state
+ * as flags on ONE item document — same document `system.quantity` lives on. Quantity above 1
+ * would silently claim "N flashlights" while modeling one shared switch and one shared battery.
+ * `power-source.mjs`'s own `preUpdateItem`/`preCreateItem` hooks stop this going forward
+ * (2026-09-04 edge-case pass); this is the retroactive sweep for anything that predates that —
+ * a manual DB edit, an import, or a stale value nobody had a reason to notice before quantity
+ * actually meant something. World self-integrity check, per the GM's own framing: this is
+ * exactly the kind of thing that shouldn't be able to exist, not a matter of taste.
+ */
+export function auditPowerSourceQuantity() {
+  const diffs = [];
+  for (const actor of game.actors) {
+    for (const item of actor.items) {
+      if (!isPowerSourceItem(item)) continue;
+      const qty = item.system.quantity ?? 1;
+      if (qty <= 1) continue;
+      diffs.push({ actor: actor.name, actorId: actor.id, item: item.name, itemId: item.id, current: qty, expected: 1 });
+    }
+  }
+  for (const item of game.items) {
+    if (!isPowerSourceItem(item)) continue;
+    const qty = item.system.quantity ?? 1;
+    if (qty <= 1) continue;
+    diffs.push({ actor: null, actorId: null, item: item.name, itemId: item.id, current: qty, expected: 1 });
+  }
+  return diffs;
+}
+
+export async function repairPowerSourceQuantity(diffs) {
+  diffs ??= auditPowerSourceQuantity();
+  for (const d of diffs) {
+    const item = d.actorId ? game.actors.get(d.actorId)?.items.get(d.itemId) : game.items.get(d.itemId);
+    if (!item) continue;
+    await item.update({ "system.quantity": 1 });
+  }
+  return diffs.length;
+}
+
+/**
+ * Fuel/charge for Latarka and Pochodnia is tracked entirely via this module's own flags — never
+ * dnd5e's native `system.uses` (limited-uses/"ładunki"). A stray `uses.max` left over from an
+ * item's pre-conversion type (see `initializePochodnia`'s doc comment — confirmed live on
+ * Piekarz's "Pochodnia Smołowa") makes the sheet's own "ładunki" column read "0 / 0" instead of
+ * "-", which reads as "this weapon is broken" even though it has nothing to do with how it
+ * actually works. `initializePochodnia`/`initializeLatarka` clear this on conversion now; this
+ * sweeps anything created before that fix.
+ */
+export function auditPowerSourceUses() {
+  const diffs = [];
+  for (const actor of game.actors) {
+    for (const item of actor.items) {
+      if (!isPowerSourceItem(item)) continue;
+      // "" (or absent) is the clean state — see `_baseSystemData()` in latarka.mjs/pochodnia.mjs.
+      // A stored "0"/0 is NOT clean, it's the actual bug (dnd5e's own uses column then reads
+      // "has a uses config, capped at zero" and renders "0 / 0" instead of "-") — do not treat
+      // it as fine just because it's falsy.
+      const max = item.system.uses?.max;
+      if (max == null || max === "") continue;
+      diffs.push({ actor: actor.name, actorId: actor.id, item: item.name, itemId: item.id, current: max });
+    }
+  }
+  for (const item of game.items) {
+    if (!isPowerSourceItem(item)) continue;
+    const max = item.system.uses?.max;
+    if (max == null || max === "" || max === 0 || max === "0") continue;
+    diffs.push({ actor: null, actorId: null, item: item.name, itemId: item.id, current: max });
+  }
+  return diffs;
+}
+
+export async function repairPowerSourceUses(diffs) {
+  diffs ??= auditPowerSourceUses();
+  for (const d of diffs) {
+    const item = d.actorId ? game.actors.get(d.actorId)?.items.get(d.itemId) : game.items.get(d.itemId);
+    if (!item) continue;
+    await item.update({ "system.uses.max": "", "system.uses.spent": 0, "system.uses.recovery": [] });
+  }
+  return diffs.length;
+}
+
+/* -------------------------------------------- */
 /*  Combined                                     */
 /* -------------------------------------------- */
 
@@ -362,22 +448,26 @@ export function auditInventory() {
   const pirotechnika = auditPirotechnika();
   const chemia = auditChemia();
   const chemiaIcons = auditChemiaIcons();
-  const all = [...surowce, ...pirotechnika, ...chemia, ...chemiaIcons];
-  const actorsAffected = new Set(all.map(d => d.actorId)).size;
+  const powerQuantity = auditPowerSourceQuantity();
+  const powerUses = auditPowerSourceUses();
+  const all = [...surowce, ...pirotechnika, ...chemia, ...chemiaIcons, ...powerQuantity, ...powerUses];
+  const actorsAffected = new Set(all.map(d => d.actorId).filter(Boolean)).size;
 
   console.log(`Neuroshima 5e | Inventory category audit: Surowce ${surowce.length}, `
-    + `Pirotechnika ${pirotechnika.length}, Chemia ${chemia.length}, Chemia icons ${chemiaIcons.length} `
+    + `Pirotechnika ${pirotechnika.length}, Chemia ${chemia.length}, Chemia icons ${chemiaIcons.length}, `
+    + `Power-source quantity ${powerQuantity.length}, Power-source uses ${powerUses.length} `
     + `— ${all.length} total across ${actorsAffected} actor(s).`,
-    { surowce, pirotechnika, chemia, chemiaIcons });
+    { surowce, pirotechnika, chemia, chemiaIcons, powerQuantity, powerUses });
   ui.notifications.info(
     all.length
       ? `Audyt ekwipunku: ${all.length} przedmiotów z rozjazdem na ${actorsAffected} aktorach `
         + `(Surowce ${surowce.length}, Pirotechnika ${pirotechnika.length}, Chemia ${chemia.length}, `
-        + `ikony chemii ${chemiaIcons.length}) — szczegóły w konsoli.`
+        + `ikony chemii ${chemiaIcons.length}, ilość źródeł zasilania ${powerQuantity.length}, `
+        + `ładunki źródeł zasilania ${powerUses.length}) — szczegóły w konsoli.`
       : "Audyt ekwipunku: brak rozjazdów."
   );
 
-  return { surowce, pirotechnika, chemia, chemiaIcons, actors: actorsAffected, items: all.length };
+  return { surowce, pirotechnika, chemia, chemiaIcons, powerQuantity, powerUses, actors: actorsAffected, items: all.length };
 }
 
 export async function repairInventory() {
@@ -386,8 +476,11 @@ export async function repairInventory() {
   const n2 = await repairPirotechnika(report.pirotechnika);
   const n3 = await repairChemia(report.chemia);
   const n4 = await repairChemiaIcons(report.chemiaIcons);
-  const total = n1 + n2 + n3 + n4;
+  const n5 = await repairPowerSourceQuantity(report.powerQuantity);
+  const n6 = await repairPowerSourceUses(report.powerUses);
+  const total = n1 + n2 + n3 + n4 + n5 + n6;
   ui.notifications.info(`Naprawiono ${total} przedmiotów `
-    + `(Surowce ${n1}, Pirotechnika ${n2}, Chemia ${n3}, ikony chemii ${n4}).`);
+    + `(Surowce ${n1}, Pirotechnika ${n2}, Chemia ${n3}, ikony chemii ${n4}, `
+    + `ilość źródeł zasilania ${n5}, ładunki źródeł zasilania ${n6}).`);
   return total;
 }

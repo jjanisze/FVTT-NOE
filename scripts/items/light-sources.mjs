@@ -54,6 +54,23 @@
  *
  * This module owns no fuel/state of its own — it's pure plumbing between "N items know if
  * they're lit" and "1 token knows what its light looks like."
+ *
+ * ## Brightness — `luminosity`/`attenuation`, not just `alpha`
+ *
+ * A provider may also return `luminosity` and `attenuation` (both passed straight through to
+ * `LightData`, same meaning as the Ambient Light config's "Advanced Options"). Neither has a
+ * hardcoded default *here* beyond LightData's own (0.5/0.5) — but a provider whose light covers
+ * real room-scale radii should set them explicitly rather than trust that default. Confirmed live
+ * (Latarka, `docs/Kobalt.md`-scale radii of 15-60m): at the schema default luminosity, the
+ * rendered floor near the token reads ~194-245/255 — a hard white-out, not a lit-vs-unlit
+ * gradient — regardless of how low `alpha` goes; `alpha` alone was tried first and is nearly
+ * inert here; `luminosity` is the knob that actually pulls peak brightness down (verified via
+ * direct pixel-sampling the rendered canvas, not just eyeballing a screenshot — at this map's
+ * zoom a washed-out cone and a properly-toned-down one look deceptively similar in a small
+ * screenshot). Pochodnia's radii (3-12m) are small enough that the same default has never been
+ * visually objectionable, which is why it was never touched — this isn't "torches are fine,
+ * flashlights are broken," it's "the effect scales with radius, and Latarka's radius is the one
+ * large enough to show it."
  */
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -70,6 +87,42 @@ const _providers = [];
  */
 export function registerLightProvider(fn) {
   _providers.push(fn);
+}
+
+/**
+ * @type {((actor: Actor, keepItem: Item) => Promise<void>)[]}
+ * See `enforceSingleLightSource`'s doc comment.
+ */
+const _offSwitches = [];
+
+/**
+ * Register an "off switch": `fn(actor, keepItem)` turns off every lit item *of this module's
+ * own type* on `actor` except `keepItem` (which may not even be this module's type — that's
+ * fine, it just never matches and nothing gets excluded). Called by `enforceSingleLightSource`.
+ */
+export function registerLightOffSwitch(fn) {
+  _offSwitches.push(fn);
+}
+
+/**
+ * Only one light-emitting item may be active per actor at a time — a player lighting a torch
+ * while their flashlight is already on turns the flashlight off, not both. This is a deliberate
+ * simplicity/performance call (locked, not a bug): the alternative — multiple simultaneous
+ * light sources — would mean tracking N independently-draining batteries/fuel tanks at once for
+ * no in-fiction benefit (you only need the brightest one anyway; `_bestLight` already discards
+ * every dimmer contender when picking what to *render*), while silently continuing to drain the
+ * others' batteries in the background purely because their `on` flag never got told to stop.
+ *
+ * Call this from a light-granting item's own "turn on"/"ignite" function, right after that
+ * item's own state is committed — it fans out to every registered module's off-switch (each
+ * module only knows how to turn off its own type; combining N of those is what makes this work
+ * across Latarka/Pochodnia/future types without either needing to know the other exists).
+ */
+export async function enforceSingleLightSource(actor, keepItem) {
+  if (!actor) return;
+  for (const fn of _offSwitches) {
+    try { await fn(actor, keepItem); } catch (e) { console.warn(`${MODULE_ID} | light-sources: off-switch threw`, e); }
+  }
 }
 
 function _bestLight(actor) {
@@ -111,15 +164,27 @@ async function _doSyncActorLight(actor) {
         angle: desired.angle ?? 360,
         color: desired.color ?? null,
         alpha: desired.alpha ?? 0.35,
+        // Explicit, not left at LightData's 0.5/0.5 defaults: at Latarka-scale radii (15-60m,
+        // much bigger than Pochodnia's 3-12m), the default luminosity pushes the whole cone to
+        // near-peak brightness instead of a hotspot-to-fade gradient — confirmed live via direct
+        // pixel-sampling the rendered canvas (default alpha/luminosity read ~194-245/255 right
+        // around the token; unlit floor sits ~30/255). A provider that doesn't care can just omit
+        // these and get the old defaults back.
+        luminosity: desired.luminosity ?? 0.5,
+        attenuation: desired.attenuation ?? 0.5,
         animation: desired.animation ?? { type: "", speed: 0, intensity: 0 },
       }
-    : { bright: 0, dim: 0, angle: 360, color: null, alpha: 0.5, animation: { type: "", speed: 0, intensity: 0 } };
+    : { bright: 0, dim: 0, angle: 360, color: null, alpha: 0.5, luminosity: 0.5, attenuation: 0.5, animation: { type: "", speed: 0, intensity: 0 } };
 
   for (const token of actor.getActiveTokens?.(true) ?? []) {
     if (game.user.isGM || token.isOwner) {
       const cur = token.document.light;
+      // alpha/luminosity/attenuation included here too — a provider-only tuning change (no
+      // bright/dim/angle/color diff) must still get written, or an already-placed token keeps
+      // its stale intensity until something else happens to touch this actor's light.
       const changed = cur.bright !== wideLight.bright || cur.dim !== wideLight.dim || cur.angle !== wideLight.angle
-        || cur.color !== wideLight.color || cur.animation?.type !== wideLight.animation.type;
+        || cur.color !== wideLight.color || cur.animation?.type !== wideLight.animation.type
+        || cur.alpha !== wideLight.alpha || cur.luminosity !== wideLight.luminosity || cur.attenuation !== wideLight.attenuation;
       if (changed) {
         try {
           await token.document.update({ light: wideLight });
@@ -138,7 +203,9 @@ async function _doSyncActorLight(actor) {
     await _syncCompanionLight(token, hasNarrow ? {
       narrowAngle: desired.narrowAngle,
       bright: desired.bright,
-      color: desired.color, alpha: desired.alpha, animation: desired.animation,
+      color: desired.color, alpha: desired.alpha,
+      luminosity: desired.luminosity, attenuation: desired.attenuation,
+      animation: desired.animation,
     } : null);
   }
 }
@@ -182,6 +249,8 @@ async function _syncCompanionLight(token, desired) {
       dim: desired.bright, // fully bright out to its own radius — the wide cone supplies dim beyond it
       color: desired.color ?? null,
       alpha: desired.alpha ?? 0.5,
+      luminosity: desired.luminosity ?? 0.5, // see `_doSyncActorLight`'s wideLight comment
+      attenuation: desired.attenuation ?? 0.5,
       animation: desired.animation ?? { type: "", speed: 0, intensity: 0 },
     },
   };
@@ -194,7 +263,8 @@ async function _syncCompanionLight(token, desired) {
     const c = e.config;
     const changed = e.x !== cfg.x || e.y !== cfg.y || e.rotation !== cfg.rotation
       || c.angle !== cfg.config.angle || c.bright !== cfg.config.bright || c.dim !== cfg.config.dim
-      || c.color !== cfg.config.color;
+      || c.color !== cfg.config.color || c.alpha !== cfg.config.alpha
+      || c.luminosity !== cfg.config.luminosity || c.attenuation !== cfg.config.attenuation;
     if (changed) {
       try { await existing.update(cfg); } catch (e) { console.warn(`${MODULE_ID} | light-sources: companion update failed`, e); }
     }

@@ -123,11 +123,15 @@ concern, not a runtime rule with an in-fiction mechanical effect — no code cur
 it, and it plausibly doesn't need to. Flag for the GM: does the Zbrojownia's starter-kit template
 still reference the old headlamp placeholder anywhere and need a follow-up pass?
 
-### 6. Latarka range cut to 1/3 — ✅ built
+### 6. Latarka range cut — ✅ built
 
 `LIGHT_RAW`/`LIGHT_KOBALT` replace the old flat `LIGHT` constant; `_light()` picks between them
-via `isKobaltEnabled()`. Kobalt → `{ bright: 15, dim: 60, angle: 90, narrowAngle: 45 }` (1/3 of
-45/180, distance only); RAW → unchanged `{ bright: 45, dim: 180, angle: 90, narrowAngle: 45 }`.
+via `isKobaltEnabled()`. Kobalt → `{ bright: 15, dim: 22, angle: 90, narrowAngle: 45 }`; RAW →
+unchanged `{ bright: 45, dim: 180, angle: 90, narrowAngle: 45 }`. Bright is a clean 1/3 of RAW
+(45→15) and stayed there — confirmed to read right at that scale on the actual silo maps. Dim is
+NOT also a flat 1/3 (that would still be 60m): a 60m dim spill lit most of a level of this
+campaign's dungeon-style maps at once, undermining exploration and any future longer-range vision
+upgrade, so it got a second, independent cut down to 22m instead of inheriting the 1/3 ratio.
 Cone angles never change, per decision 4. Single consuming call site (`_latarkaLightProvider`).
 
 `COMMON_DESCRIPTION_TAIL` became `_descriptionTail()`, reading the same `_light()` so the item's
