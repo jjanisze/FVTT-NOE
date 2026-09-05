@@ -275,6 +275,12 @@ function _latarkaPowerDescriptor(item) {
 export async function turnOn(item) {
   item = _liveItem(item);
   if (!formOf(item) || isOn(item)) return;
+  // Same equipped gate as `onPreUseActivity`'s ON_ID branch — repeated here because this function
+  // is also a public API entry point, which bypasses that hook. Same bug class as `gogle.mjs`'s
+  // identical fix: `_light()` silently skips an unequipped item (correctly), so without this check
+  // the Activity would flip `latarkaOn` true, start draining the battery clock, and post "Zapala
+  // się" for a flashlight sitting unequipped in a backpack — zero visible effect, zero explanation.
+  if (!item.system?.equipped) { ui.notifications.warn(`${item.name}: załóż ją najpierw (nie jest noszona).`); return; }
 
   if (usesBattery(item)) {
     if (!hasBattery(item)) { ui.notifications.warn(`${item.name}: brak baterii.`); return; }
@@ -571,6 +577,11 @@ function onPreUseActivity(activity) {
     if (isOn(item)) { ui.notifications.warn(`${item.name} już świeci.`); return false; }
     if (usesBattery(item) && !hasBattery(item)) {
       ui.notifications.warn(`${item.name}: brak baterii.`);
+      return false;
+    }
+    // See `turnOn()`'s matching comment — `_light()` silently skips an unequipped item.
+    if (!item.system?.equipped) {
+      ui.notifications.warn(`${item.name}: załóż ją najpierw (nie jest noszona).`);
       return false;
     }
   }

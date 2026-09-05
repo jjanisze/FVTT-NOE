@@ -42,6 +42,7 @@ import { ARMORS, buildArmorItemData } from "../../scripts/config/armor-data.mjs"
 import { TOOLKITS, buildToolkitItemData } from "../../scripts/config/toolkits-data.mjs";
 import { BESTIARY } from "../../scripts/config/bestiary-data.mjs";
 import { BLOOD_TYPES, NEUROSHIMA_CREATURE_TYPES } from "../../scripts/config/creature-types.mjs";
+import { computeFovAngle } from "../../scripts/config/fov.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -1227,7 +1228,14 @@ function buildNpc(c) {
         subject: { scale: 1, texture: null }
       },
       sight: {
-        enabled: true, range: c.senses?.darkvision ?? 0, angle: 360,
+        enabled: true, range: c.senses?.darkvision ?? 0,
+        // 220° facing cone by default (podręcznik, "Zmysły") — full 360° only for Ślepowidzenie
+        // and Moloch's camera-driven machines. See `config/fov.mjs` for the exemption rules.
+        angle: computeFovAngle({
+          blindsightRange: c.senses?.blindsight ?? 0,
+          typeValue: NEUROSHIMA_CREATURE_TYPES[c.creatureType] ? c.creatureType : "",
+          typeSubtype: c.typeNote ?? "",
+        }),
         visionMode: "basic", color: null, attenuation: 0.1, saturation: 0, brightness: 0
       },
       // Termowizja has no slot in the dnd5e senses schema, so it lives on the

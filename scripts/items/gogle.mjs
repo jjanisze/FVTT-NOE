@@ -600,7 +600,7 @@ function onPreUseActivity(activity) {
     // `gogleOn` true, drains the battery clock, and posts "Włączone" — with zero visible effect
     // and zero explanation, because nothing downstream ever surfaces *why*. Same bug class as
     // `latarka.mjs`'s own equipped-gated provider (`_light()`'s `if (!item.system?.equipped)
-    // continue`), not yet fixed there.
+    // continue`) — that one now has the matching guard too, for symmetry.
     if (!item.system?.equipped) {
       ui.notifications.warn(`${item.name}: załóż je najpierw (nie są noszone).`);
       return false;
