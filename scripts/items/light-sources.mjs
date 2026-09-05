@@ -125,6 +125,45 @@ export async function enforceSingleLightSource(actor, keepItem) {
   }
 }
 
+/**
+ * Read-only query: does this actor currently have any registered light source lit? Doesn't render
+ * or sync anything — for a *consumer* of light state that isn't itself a light (Termowizor's
+ * sensor-fusion sight range, `gogle.mjs`/`detection-termowizja.mjs`, is the first: its own
+ * `sightRange` only activates while the wearer has real light to fuse in). Deliberately still just
+ * reads this file's own provider registry rather than duplicating "what counts as a light" —
+ * exactly the same one-way dependency shape as `vision-sources.mjs`'s own doc comment anticipated
+ * ("a light-sources.mjs provider checking getPowerStatus-style state on the vision item"), just
+ * the read direction: vision consuming light state, not light consuming vision state. No coupling
+ * back the other way, and `enforceSingleLightSource`'s exclusivity is untouched — this never turns
+ * anything on or off.
+ */
+export function hasActiveLight(actor) {
+  return !!_bestLight(actor);
+}
+
+/** @type {((actor: Actor) => void)[]} */
+const _changeListeners = [];
+
+/**
+ * Register a callback to run after every `syncActorLight` resolves, regardless of whether
+ * anything actually changed — expected to be cheap/idempotent itself (a `syncActorVision`-style
+ * no-op when nothing needs updating), since it fires on *every* light sync, not just ones that
+ * change something. This is the sanctioned way for another module to react to "this actor's light
+ * state may have changed" without a hard import dependency in either direction — same
+ * register-a-callback shape as `registerLightProvider`/`registerLightOffSwitch` above, just for
+ * "notify" instead of "resolve" or "turn off", so this file still doesn't need to know who's
+ * listening or why.
+ *
+ * Added for Termowizor's sensor-fusion sight range (`gogle.mjs`/`detection-termowizja.mjs`): its
+ * `sightRange` is conditional on the wearer having an active light (`hasActiveLight` above), so a
+ * flashlight/torch toggling has to trigger a vision resync too — registered from
+ * `vision-sources.mjs`'s own `registerVisionSources()`, not here; this file still has zero
+ * knowledge that Termowizor or even `vision-sources.mjs` exists.
+ */
+export function registerLightChangeListener(fn) {
+  _changeListeners.push(fn);
+}
+
 function _bestLight(actor) {
   let best = null;
   for (const provider of _providers) {
@@ -327,6 +366,17 @@ export function syncActorLight(actor) {
   const prior = _chains.get(actor.id) ?? Promise.resolve();
   const next = prior
     .then(() => _doSyncActorLight(actor))
+    .then(async () => {
+      // Awaited, not fire-and-forget: a caller that awaits `syncActorLight`/`turnOn`/
+      // `igniteTorch`/etc must get back a promise that only resolves once every downstream
+      // reaction (Termowizor's vision resync included) has actually finished writing, or a
+      // read immediately after would race the still-in-flight listener and see stale data —
+      // caught live: `extinguishTorch` awaited this, then a same-tick `sight.range` read still
+      // showed the old, light-gated value because the listener hadn't landed yet.
+      for (const fn of _changeListeners) {
+        try { await fn(actor); } catch (e) { console.warn(`${MODULE_ID} | light-sources: change listener threw`, e); }
+      }
+    })
     .catch((e) => console.warn(`${MODULE_ID} | light-sources: sync chain error`, e));
   _chains.set(actor.id, next);
   return next;

@@ -33,7 +33,7 @@
  *
  * ── WHY THE OVERRIDE-AWARE BRANCH ────────────────────────────────────────────────
  * A token currently mid-way through a Noktowizor/Termowizor session has `sight.range` sitting at
- * that device's own override (see `gogle.mjs`'s `GOGLE_NOKTO_RANGE`/`GOGLE_TERMO_RANGE`), with the
+ * that device's own override (see `gogle.mjs`'s `GOGLE_NOKTO_RANGE`/`GOGLE_TERMO_SIGHT_RANGE`), with the
  * token's *true* baseline stashed on `flags.MODULE_ID.visionRangeBackup`
  * (`vision-sources.mjs`'s "sightRange is the mechanic" doc section) for `syncActorVision` to
  * restore once the device turns off. Overwriting `sight.range` directly on such a token would

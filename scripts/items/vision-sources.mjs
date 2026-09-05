@@ -83,6 +83,8 @@
  * claim) simply omits `sightRange` and nothing here touches the token's own range at all.
  */
 
+import { registerLightChangeListener } from "./light-sources.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 const VISION_DETECTION_FLAG = "visionDetectionId"; // id of the detectionModes entry we last wrote
 const VISION_RANGE_BACKUP_FLAG = "visionRangeBackup"; // token's own sight.range, before we overrode it
@@ -253,5 +255,14 @@ export function syncActorVision(actor) {
  */
 export function registerVisionSources() {
   Hooks.on("createToken", (tokenDoc) => { if (tokenDoc.actor) syncActorVision(tokenDoc.actor); });
+
+  // Also resync whenever this actor's *light* state changes (`light-sources.mjs`'s own registry,
+  // no import back the other way): Termowizor's sensor-fusion `sightRange` is conditional on the
+  // wearer having an active light (`hasActiveLight`, `gogle.mjs`'s provider) — without this, a
+  // player toggling their flashlight wouldn't see their thermal range update until something else
+  // happened to touch vision. Cheap either way: `syncActorVision` no-ops if nothing changed, and
+  // this fires on light syncs for every actor regardless of whether they even own a Termowizor.
+  registerLightChangeListener((actor) => syncActorVision(actor));
+
   console.log(`${MODULE_ID} | Vision-source resolver registered`);
 }

@@ -25,16 +25,19 @@
  *   (`basicSight`/`DetectionModeDarkvision`, checked purely by range, not by visionMode), which a
  *   pure color-filter VisionMode never touches. No detection-mode change: it doesn't reveal
  *   anything invisible, just extends + re-lights what normal sight would eventually see anyway.
- * - **Termowizor** (thermal): needs *both* halves of `config/detection-termowizja.mjs` —
- *   `TERMOWIZJA_VISION_ID` (custom VisionMode, flat/desaturated backdrop, works in zero light)
- *   for the screen, and `TERMOWIZJA_ID` (the DetectionMode already shipping for Bestiariusz
- *   creatures) added to the wearer's own token so it actually sees through walls-false
- *   concealment/Niewidoczność the same way a monster's innate Termowizja already does. Same
- *   hot-orange outline either direction — one shared filter, not a second one for PCs. Left
- *   without its own `sightRange`: real thermal optics don't render terrain detail either, only
- *   heat blobs against a flat background — the DetectionMode's own range already handles
- *   "spot a creature at N m regardless of light," which is genuinely all RAW asks Termowizja for
- *   here (unlike Noktowizja's explicit "as well as day" general-sight claim).
+ * - **Termowizor** (thermal): needs *both* halves of `config/detection-termowizja.mjs`, and both
+ *   halves carry their own range now — a genuine sensor-fusion device, not "Noktowizja but worse"
+ *   (see that file's own doc comment for the full design and why the first, detection-only cut
+ *   changed). `TERMOWIZJA_ID` (the DetectionMode already shipping for Bestiariusz creatures) added
+ *   to the wearer's own token, long range, works in zero light, sees through walls-false
+ *   concealment/Niewidoczność — but only ever says "something's there," no shape, no size. Same
+ *   hot-orange outline either direction — one shared filter, not a second one for PCs.
+ *   `TERMOWIZJA_VISION_ID` (custom VisionMode) now *also* carries a short `sightRange` — a real,
+ *   if deliberately low-resolution, terrain-sight channel, but only while the wearer actually has
+ *   a light source lit (`hasActiveLight`, `light-sources.mjs` — see `_gogleVisionProvider` below).
+ *   A per-pixel "is *this* spot lit" shader read was tried first and abandoned — see
+ *   `detection-termowizja.mjs`'s own doc comment for the measurements that killed it — so this
+ *   gates at the `sightRange` level instead, one check per sync rather than one per pixel.
  *
  * ## Battery model — identical shape to `latarka.mjs`, no dynamo fork
  *
@@ -86,6 +89,7 @@
 import {
   registerVisionProvider, registerVisionOffSwitch, enforceSingleVisionSource, syncActorVision,
 } from "./vision-sources.mjs";
+import { hasActiveLight } from "./light-sources.mjs";
 import { registerPowerSource, getPowerStatus, renderPowerRow } from "./power-source.mjs";
 import { TERMOWIZJA_ID, TERMOWIZJA_VISION_ID } from "../config/detection-termowizja.mjs";
 import { isBaterie } from "./baterie.mjs";
@@ -108,17 +112,25 @@ const FLAG_CHARGE_MAX_MIN = "gogleChargeMaxMin"; // minutes rolled (2k4h) for th
 const FLAG_START = "gogleStartTime";      // worldTime this ON session started
 const FLAG_BURNOUT_AT = "gogleBurnoutAt"; // worldTime this session would go dark on its own
 
-// No RAW anchor for a range at all — Bestiariusz creatures' innate Termowizja/Noktowizja span
-// 9-300m depending on the beast (`dev/bestiary/bestiary.json`), but that's a biological sense, not
-// a man-portable optic, and RAW's own numbers are exactly the kind of "reasonable for a spec
-// sheet, way too generous for a VTT dungeon map" case Kolor Kobaltu already cut Latarka's dim
-// cone down from (180m -> 22m, `PLAN_kobalt.md` rule 6). Both picked in that same dungeon-pacing
-// ballpark rather than anywhere near the apex-predator end of the creature range — tunable,
-// flagged as a GM balance call, not a derived number.
-const GOGLE_TERMO_RANGE = 24;
-// A bit more generous than Termowizor: Noktowizor grants genuine general sight (RAW: "as well as
-// day"), not just creature-detection, and has no cone restriction (full ambient FOV, unlike
-// Latarka's angled beam) — so it should out-range a flashlight's dim throw, not just match it.
+// Two independent numbers for Termowizor now, not one — see `detection-termowizja.mjs`'s "sensor
+// fusion" doc section for the full design. Both are GM balance calls, not derived numbers.
+//
+// The DetectionMode's own long-range heat-signature spotting. Deliberately generous — a flashlight
+// throwing 180m floods a huge area with full detail and an exact, visible edge (which is why
+// Kolor Kobaltu cut that down to 22m, `PLAN_kobalt.md` rule 6); heat detection at range says only
+// "something's there" (no label, no size, no visible boundary to the range the way a light cone
+// has one), so a big number here costs far less than the same number would for general sight.
+// 500m is RAW-flavoured and known to be far beyond anything this engine will ever actually render
+// on a dungeon-scale map — picked anyway, as a ceiling rather than a real distance, precisely
+// because it will never bind: "this channel doesn't fall off with distance the way eyesight does."
+const GOGLE_TERMO_DETECTION_RANGE = 500;
+// The new fusion channel's general terrain sight — short and deliberately low-resolution ("it's a
+// low-resolution thermal camera. Which is accurate for FLIR cameras. They aren't exactly 4k."),
+// active only where the fusion shader finds real light to amplify (see `detection-termowizja.mjs`).
+const GOGLE_TERMO_SIGHT_RANGE = 16;
+// A bit more generous than Termowizor's fusion range: Noktowizor grants genuine general sight (RAW:
+// "as well as day"), not just creature-detection, and has no cone restriction (full ambient FOV,
+// unlike Latarka's angled beam) — so it should out-range a flashlight's dim throw, not just match it.
 const GOGLE_NOKTO_RANGE = 30;
 
 /* -------------------------------------------- */
@@ -232,11 +244,21 @@ export const GOGLE_VARIANTS = {
     price: 200,  // same anchor as the SM-rail Termowizor addon (`addons-data.mjs`).
     weight: 0.4,
     visionMode: TERMOWIZJA_VISION_ID,
+    sightRange: GOGLE_TERMO_SIGHT_RANGE, // fusion channel — real terrain, only where there's light
+                                          // to amplify; see detection-termowizja.mjs's doc comment.
+    sightRequiresLight: true, // unlike Noktowizor's unconditional sightRange — see
+                               // `_gogleVisionProvider`'s doc comment just below.
     detectionModeId: TERMOWIZJA_ID,
-    detectionRange: GOGLE_TERMO_RANGE,
-    description: `<p>Kamera termowizyjna. Działa w całkowitej ciemności, przenika kamuflaż i `
-      + `Niewidoczność (widzi ciepło, nie kontur) — ale nic nie pokaże, jeśli nosiciel zostanie `
-      + `oślepiony. Zasięg wykrywania: <strong>${GOGLE_TERMO_RANGE} m</strong>.</p>`,
+    detectionRange: GOGLE_TERMO_DETECTION_RANGE, // heat-only channel — long range, "something's
+                                                  // there", nothing else; independent of light.
+    description: `<p>Kamera termowizyjna ze zfuzjowanym torem wizyjnym. Wykrywa ciepło w `
+      + `całkowitej ciemności na duży dystans — przenika kamuflaż i Niewidoczność (widzi ciepło, `
+      + `nie kontur), ale to jedynie „coś tam jest", bez kształtu i rozmiaru. Osobno: rozmyty, `
+      + `czarno-biały obraz otoczenia na krótszym dystansie, tam gdzie faktycznie coś świeci — `
+      + `własna latarka, cudza, dowolne inne źródło światła w polu widzenia. Nic nie pokaże, jeśli `
+      + `nosiciel zostanie oślepiony. Zasięg wykrywania ciepła: <strong>`
+      + `${GOGLE_TERMO_DETECTION_RANGE} m</strong>. Zasięg obrazu otoczenia: <strong>`
+      + `${GOGLE_TERMO_SIGHT_RANGE} m</strong> (przy odpowiednim oświetleniu).</p>`,
   },
 };
 
@@ -290,7 +312,17 @@ async function _postCard(item, html, { flavor } = {}) {
 /*  Token vision                                  */
 /* -------------------------------------------- */
 
-/** Registered once at `registerGogle()` — see `vision-sources.mjs`. */
+/**
+ * Registered once at `registerGogle()` — see `vision-sources.mjs`.
+ *
+ * `sightRange` is unconditional for Noktowizor (its whole point is working in *total* darkness)
+ * but conditional for Termowizor: its fusion channel needs real light to amplify, so
+ * `sightRequiresLight` gates it behind `hasActiveLight` (`light-sources.mjs`) — no light, no
+ * `sightRange` at all, same as before this variant had one (heat-only detection still works
+ * regardless, via `detectionModeId`/`detectionRange` below, untouched by this check). Reacts live
+ * to the flashlight toggling because `vision-sources.mjs` subscribes `syncActorVision` to
+ * `light-sources.mjs`'s own change-listener registry — see that registration's doc comment.
+ */
 function _gogleVisionProvider(actor) {
   if (!actor) return null;
   for (const item of actor.items) {
@@ -298,10 +330,11 @@ function _gogleVisionProvider(actor) {
     if (!item.system?.equipped) continue;
     const variant = variantOf(item);
     if (!variant) continue;
+    const sightRange = variant.sightRequiresLight && !hasActiveLight(actor) ? null : variant.sightRange;
     return {
       visionMode: variant.visionMode,
       color: NO_VISION_TINT,
-      sightRange: variant.sightRange,
+      sightRange,
       detectionModeId: variant.detectionModeId,
       detectionRange: variant.detectionRange,
     };
