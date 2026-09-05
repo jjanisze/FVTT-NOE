@@ -33,6 +33,7 @@ import { registerClassState } from "./actors/class-state.mjs";
 import { registerAbilityHotbar } from "./actors/ability-hotbar.mjs";
 import { registerClassMigration } from "./migration/migrate-classes.mjs";
 import { registerPochodzeniaMigration } from "./migration/migrate-pochodzenia.mjs";
+import { registerSightRangeMigration } from "./migration/normalize-sight-range.mjs";
 import { registerSrdCleanup } from "./config/srd-cleanup.mjs";
 import { registerClassRules } from "./actors/class-rules.mjs";
 import { registerCichyKrok } from "./actors/cichy-krok.mjs";
@@ -171,6 +172,7 @@ Hooks.once("init", () => {
   registerClassMigration();
   // Musi iść po registerClassMigration — tamto podmienia całe api.migration, nie dopisuje do niego.
   registerPochodzeniaMigration();
+  registerSightRangeMigration();
   registerSrdCleanup();
   registerClassRules();
   registerCichyKrok();

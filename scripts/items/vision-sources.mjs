@@ -60,10 +60,15 @@
  * perceive anything at all (independent of ambient light) is `token.sight.range`, consumed by
  * core's `basicSight` DetectionMode (`DetectionModeDarkvision` — unconditional except for
  * blinded/invisible checks, gated purely by that range). A token with no darkvision sits at
- * whatever minimal baseline dnd5e computes (near-zero — confirmed live on Piekarz) regardless of
- * `visionMode`, so swapping to `lightAmplification` alone re-colors and brightens whatever's
- * already lit but never reveals so much as one more unlit tile — exactly the "looks like NVG,
- * doesn't act like Noktowizja" bug reported.
+ * whatever baseline its own `sight.range` happens to hold regardless of `visionMode` — NOT
+ * "near-zero" as first assumed from Piekarz alone: a later audit (`normalize-sight-range.mjs`)
+ * found the whole batch-imported cast sitting on inconsistent per-actor values (0–9m, no
+ * correlation to WIS/Perception/anything else), since normalized to one deliberate small
+ * baseline (`BASELINE_SIGHT_RANGE`, a GM call: enough to spot your own token and feel what's at
+ * arm's reach, not RAW's full "no sense = no sight"). Whatever that baseline is, swapping to
+ * `lightAmplification` alone re-colors and brightens whatever's already lit but never reveals so
+ * much as one more unlit tile beyond it — exactly the "looks like NVG, doesn't act like
+ * Noktowizja" bug reported.
  *
  * The fix, mirroring how this codebase already grants creature darkvision
  * (`dev/packs/build-packs.mjs`'s `sight: {range: c.senses?.darkvision ?? 0, visionMode: "basic"}`
