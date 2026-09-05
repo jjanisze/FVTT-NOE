@@ -355,6 +355,9 @@ export async function turnOn(item) {
   if (!variantOf(item) || isOn(item)) return;
 
   if (!hasBattery(item)) { ui.notifications.warn(`${item.name}: brak baterii.`); return; }
+  // Same equipped gate as `onPreUseActivity`'s ON_ID branch — repeated here because this function
+  // is also the public `game.neuroshima.gogle.turnOn` entry point, which bypasses that hook.
+  if (!item.system?.equipped) { ui.notifications.warn(`${item.name}: załóż je najpierw (nie są noszone).`); return; }
   const charge = item.getFlag(MODULE_ID, FLAG_CHARGE) ?? 0;
   if (charge <= 0) { ui.notifications.warn(`${item.name}: baterie są martwe.`); return; }
 
@@ -590,6 +593,16 @@ function onPreUseActivity(activity) {
     if (isOn(item)) { ui.notifications.warn(`${item.name} już włączone.`); return false; }
     if (!hasBattery(item)) {
       ui.notifications.warn(`${item.name}: brak baterii.`);
+      return false;
+    }
+    // `_gogleVisionProvider` silently skips an unequipped item (correctly — goggles lying in your
+    // backpack don't do anything). Caught live: without this check, the Activity happily flips
+    // `gogleOn` true, drains the battery clock, and posts "Włączone" — with zero visible effect
+    // and zero explanation, because nothing downstream ever surfaces *why*. Same bug class as
+    // `latarka.mjs`'s own equipped-gated provider (`_light()`'s `if (!item.system?.equipped)
+    // continue`), not yet fixed there.
+    if (!item.system?.equipped) {
+      ui.notifications.warn(`${item.name}: załóż je najpierw (nie są noszone).`);
       return false;
     }
   }

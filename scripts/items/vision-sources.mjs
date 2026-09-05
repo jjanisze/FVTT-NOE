@@ -153,9 +153,20 @@ const _chains = new Map();
 async function _doSyncActorVision(actor) {
   const desired = _bestVision(actor);
 
-  for (const token of actor.getActiveTokens?.(true) ?? []) {
-    if (!(game.user.isGM || token.isOwner)) continue;
-    const doc = token.document;
+  // `getActiveTokens()` is scoped to `canvas.scene` (confirmed live against
+  // `client/documents/actor.mjs`: it calls `getDependentTokens({linked, scenes: canvas.scene})`
+  // and drops anything not on the *currently viewed* scene) — the wrong primitive here. A vision
+  // toggle must land on the wearer's placed token regardless of which scene the client that fired
+  // the update happens to be looking at right now: the GM console, a macro, or a hook replaying on
+  // a second connected client can all run this while viewing a different scene than the one the
+  // token actually sits on, and `getActiveTokens` would then silently find nothing and no-op.
+  // Caught live: an equip+turnOn sequence run while the GM's own client was on the wrong scene
+  // updated nothing, with no error anywhere, reproducing exactly the "toggled on, zero visible
+  // effect" bug report this comment is now attached to. `getDependentTokens({linked})` with no
+  // `scenes` filter walks every scene the actor has a token on, which is what a token-document-only
+  // write (no canvas/placeable access needed) should have used from the start.
+  for (const doc of actor.getDependentTokens?.({ linked: true }) ?? []) {
+    if (!(game.user.isGM || doc.isOwner)) continue;
 
     const wantMode = desired?.visionMode ?? "basic";
     const wantColor = desired?.color ?? null;
