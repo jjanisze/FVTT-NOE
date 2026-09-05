@@ -37,6 +37,7 @@ import { WEAPONS, buildWeaponItemData } from "../../scripts/config/weapons-data.
 import { POCHODNIA_VARIANTS, buildPochodniaItemData } from "../../scripts/weapons/pochodnia.mjs";
 import { LATARKA_FORMS, buildLatarkaItemData } from "../../scripts/items/latarka.mjs";
 import { buildBaterieItemData } from "../../scripts/items/baterie.mjs";
+import { GOGLE_VARIANTS, buildGogleItemData } from "../../scripts/items/gogle.mjs";
 import { ARMORS, buildArmorItemData } from "../../scripts/config/armor-data.mjs";
 import { TOOLKITS, buildToolkitItemData } from "../../scripts/config/toolkits-data.mjs";
 import { BESTIARY } from "../../scripts/config/bestiary-data.mjs";
@@ -659,6 +660,15 @@ function buildLatarka(formKey) {
 }
 function buildBaterie() {
   return { ...buildBaterieItemData({ quantity: 1 }), _id: idFor("loot", "baterie"), _key: null };
+}
+
+/**
+ * Gogle (NVG/thermal goggles) — same shared-builder discipline, `buildGogleItemData` is the exact
+ * function `items/gogle.mjs` calls at runtime. See `PLAN_nvg_thermal.md`; also lives in `sprzet`,
+ * same "equipment first" reasoning as Latarka above.
+ */
+function buildGogle(variantKey) {
+  return { ...buildGogleItemData(variantKey), _id: idFor("equipment", `gogle-${variantKey}`), _key: null };
 }
 
 /**
@@ -1396,6 +1406,7 @@ const weaponDocs = [
 const sprzetDocs = [
   ...Object.keys(LATARKA_FORMS).map(buildLatarka),
   buildBaterie(),
+  ...Object.keys(GOGLE_VARIANTS).map(buildGogle),
 ];
 const armorDocs = ARMORS.map(buildArmor);
 

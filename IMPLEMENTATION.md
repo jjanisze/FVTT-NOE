@@ -2389,3 +2389,25 @@ Dodano dwie bronie testowe do aktora „TESTER - Bez sztuczek":
 ### Stabilność arkusza (`sheet-position-stability.mjs`)
 - Dodano lekki mechanizm blokady pozycji arkusza po klikach +/- w custom inventory.
 - Fix eliminuje mikro-przesunięcie karty aktora w dół po aktualizacji ilości podczas rerenderu.
+
+## Zmiany z 5 września 2026 — Gogle NVG/termowizyjne + porządki Kolor Kobaltu
+
+Zobacz `PLAN_nvg_thermal.md` — pełne uzasadnienie architektury.
+
+### Kolor Kobaltu — jasność i zasięg latarki, jedno źródło światła, ładunki (`light-sources.mjs`, `latarka.mjs`, `pochodnia.mjs`, `power-source.mjs`, `inventory-audit.mjs`)
+- Stożki latarki nie prześwietlają się już na biało: `luminosity`/`attenuation` ustawiane jawnie zamiast domyślnych 0.5/0.5 (potwierdzone bezpośrednim próbkowaniem pikseli renderowanej sceny).
+- Słabe światło latarki skrócone z 60 m do 22 m (jasne zostaje przy 1/3 = 15 m) — 60-80 m dominowało całą mapę silosu, niwelując sens dłuższych latarek.
+- Tylko jedno aktywne źródło światła na aktora: zapalenie latarki/pochodni gasi każde inne (`enforceSingleLightSource`).
+- Naprawiono „Pochodnia Smołowa" pokazującą ładunki 0/0 zamiast „-" (stary `system.uses.max: "0"` sprzed konwersji na własne flagi paliwa) — Latarka i Pochodnia jawnie czyszczą `uses` przy inicjalizacji.
+- Ilość przedmiotów zasilanych bateryjnie/paliwem zablokowana na 1 (twardy guard `preUpdateItem`/`preCreateItem` + zablokowane +/- na karcie) — jeden dokument, jeden stan wł/wył, nie da się „sztaplować".
+- `game.neuroshima.inventoryAudit`: dwie nowe kategorie (ilość, ładunki) wykrywają i naprawiają powyższe na już wydanych kopiach.
+- Latarka i Baterie przeniesione z paczki „Broń" do nowej paczki „Sprzęt" — latarka to sprzęt, nie broń; Pochodnia zostaje w Broni (naprawdę jest bronią).
+
+### Gogle noktowizyjne/termowizyjne (`gogle.mjs`, `vision-sources.mjs`, `detection-termowizja.mjs`)
+- Nowy przedmiot „Gogle" (dwa warianty: noktowizyjne/termowizyjne) w paczce „Sprzęt" — brak zasady RAW, w pełni domowa mechanika (`PLAN_nvg_thermal.md`).
+- Noktowizor: `lightAmplification` (zielony odcień, wzmacniacz obrazu) **plus** realny `sightRange` (30 m) nadpisujący `token.sight.range` — dopiero to drugie faktycznie realizuje RAW „widzi w ciemnościach niemal jak w dzień"; sam VisionMode to tylko „malowanie", zasięg wzroku w ciemności steruje osobne pole (`vision-sources.mjs`, sekcja „sightRange is the mechanic").
+- Analogowy szum na obrazie Noktowizora: `NoktowizjaGrainVisionShader`, podklasa `AmplificationBackgroundVisionShader` (warstwa `vision.background`, nie `canvas.shader` — ta pierwsza próba lądowała w przesłanianej warstwie i była niewidoczna mimo poprawnego podłączenia; zob. `gogle.mjs`'s „Analog grain" i skasowany `HANDOFF_nvg_grain.md`). Animowany przez natywny hak `{animated: true}`/`time` (ten sam co `tremorsense`), zero własnego tickera.
+- Termowizor: nowy VisionMode `neuroshimaTermowizjaVision` (płaskie, odbarwione tło, działa w totalnej ciemności) + istniejący DetectionMode `neuroshimaTermowizja` (ten sam, którego już używają bestiariuszowe potwory z Termowizją) dodany na token noszącego — przenika kamuflaż/Niewidoczność, blokowany przez ściany, gaśnie przy Oślepieniu.
+- `vision-sources.mjs`: nowy rejestr providerów/wyłączników na wzór `light-sources.mjs`, ale niezależny od niego (własny slot „jedno urządzenie wizyjne na aktora" — noszenie gogli NVG podczas świecenia latarką nie koliduje, decyzja GM na v1).
+- Model baterii identyczny jak w Latarce (2k4h, „Włóż baterie"), pełne wsparcie shared power-source paradigmatu (`power-source.mjs`) — blokada ilości, badge wł/wył na karcie.
+- Przetestowane na żywo (Piekarz): wymuszanie jednego aktywnego urządzenia wizyjnego, poprawny zapis/kasowanie wpisu w `detectionModes` (potwierdzone, że to `TypedObjectField` — obiekt kluczowany id, nie tablica — bez naruszania `lightPerception`/`basicSight`), niezależność od slotu latarki, blokada ilości.

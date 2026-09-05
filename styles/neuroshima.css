@@ -1883,6 +1883,26 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
 .neuro-pochodnia-card p { margin: 0; font-size: 12px; line-height: 1.4; }
 .neuro-pochodnia-card .bad { color: #c0392b; font-weight: bold; }
 
+/* ---- Gogle NVG/termo (włącz / wyłącz / baterie) ---- */
+
+.neuro-gogle-card {
+  padding: 6px 8px;
+  border-left: 4px solid #16a085;
+  border-radius: 0 4px 4px 0;
+  background: rgba(22, 160, 133, 0.08);
+}
+
+.neuro-gogle-head {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+  color: #16a085;
+}
+
+.neuro-gogle-card p { margin: 0; font-size: 12px; line-height: 1.4; }
+
 /* ---- Zdolności klasowe "kości raz na rundę" (Wściekły cios i pokrewne) ---- */
 
 .neuro-resource-dice-card {

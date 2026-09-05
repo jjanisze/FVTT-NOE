@@ -16,7 +16,7 @@ import { registerTools } from "./config/tools.mjs";
 import { registerToolProficiency } from "./config/tool-proficiency.mjs";
 import { registerDamageTypes } from "./config/damage-types.mjs";
 import { registerCreatureTypes } from "./config/creature-types.mjs";
-import { registerTermowizja } from "./config/detection-termowizja.mjs";
+import { registerTermowizja, registerTermowizjaVision } from "./config/detection-termowizja.mjs";
 import { registerSP } from "./actors/sp.mjs";
 import { registerTerminology } from "./config/terminology.mjs";
 import { removeSpellcasting } from "./config/spellcasting.mjs";
@@ -65,9 +65,11 @@ import { registerWeaponSounds } from "./weapons/sounds.mjs";
 import { registerEngineControls } from "./weapons/engine.mjs";
 import { registerPochodnia, pochodniaApi } from "./weapons/pochodnia.mjs";
 import { registerLightSources } from "./items/light-sources.mjs";
+import { registerVisionSources } from "./items/vision-sources.mjs";
 import { registerPowerSourceUI } from "./items/power-source.mjs";
 import { registerBaterie, baterieApi } from "./items/baterie.mjs";
 import { registerLatarka, latarkaApi } from "./items/latarka.mjs";
+import { registerGogle, gogleApi, registerNoktowizjaVision } from "./items/gogle.mjs";
 import { registerWorldClock, worldClockApi } from "./world-clock.mjs";
 import { registerTracerVfx } from "./weapons/tracer-vfx.mjs";
 import { registerMapProps, mapPropsApi } from "./scenes/map-props.mjs";
@@ -144,6 +146,8 @@ Hooks.once("init", () => {
   registerDamageTypes();
   registerCreatureTypes();
   registerTermowizja();
+  registerTermowizjaVision();
+  registerNoktowizjaVision();
   removeSpellcasting();
   // Must precede registerExhaustion: it rebuilds conditionTypes wholesale, and
   // exhaustion.mjs then tunes the entry it leaves behind.
@@ -372,6 +376,7 @@ Hooks.once("ready", () => {
   registerWeaponSounds();
   registerEngineControls();
   registerLightSources();
+  registerVisionSources();
   registerPowerSourceUI();
   registerPochodnia();
   game.neuroshima.pochodnia = pochodniaApi;
@@ -379,6 +384,8 @@ Hooks.once("ready", () => {
   game.neuroshima.baterie = baterieApi;
   registerLatarka();
   game.neuroshima.latarka = latarkaApi;
+  registerGogle();
+  game.neuroshima.gogle = gogleApi;
   registerWorldClock();
   game.neuroshima.time = worldClockApi;
   registerTracerVfx();
