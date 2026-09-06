@@ -293,7 +293,10 @@ new Sequence()
 
 - [ ] Source or commission 3 priority assets: muzzle flash (light), small explosion, hit sparks
 - [ ] Implement muzzle flash on single-shot firearm attack
-- [ ] Implement explosion VFX on grenade/mine detonation (grenade-inventory.mjs detonation path)
+- [x] Implement explosion VFX on grenade detonation (2026-09-06) — not JB2A/`.webm`
+      as sketched above; uses 5 static PNGs recovered from the GM's own "!!SZABLONY!!"
+      scratch scene instead (`config/explosion-vfx.mjs`). Mine *placement* deliberately
+      still gets no VFX (arming ≠ detonating; no trigger-on-step path exists yet).
 - [ ] Implement hit sparks on successful melee hit
 - [ ] Bullet tracer (optional — high visual impact, needs good asset)
 - [ ] Flashbang full-screen effect (optional — very cinematic)

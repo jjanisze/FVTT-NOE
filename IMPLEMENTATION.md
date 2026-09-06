@@ -2663,3 +2663,78 @@ ręcznie. `_rollPodpalenieSave` kopiuje dokładnie ten wzorzec dla ST 12 Zręczn
 — przycisk pojawia się i poprawnie rzuca RO na zaznaczony/wycelowany token.
 
 Wszystkie 152 testy nadal przechodzą.
+
+## Zmiany z 6 września 2026 (7) — granaty: MG zawsze potrzebny do narysowania strefy, ognisty efekt z SZABLONÓW
+
+Kontekst od gracza (Sonk): „gra od kiedy dołączyło AI nie jest właściwie grana — to tryb
+deweloperski, rzut granatem to byłem ja testujący". Cztery zgłoszenia naraz, wszystkie w
+`actors/grenade-inventory.mjs`.
+
+### Prawdziwy bug: rzut granatem kradł przedmiot graczowi, zawsze, każdemu graczowi
+
+„Rzucam granatem jako Sonk, gra mówi że Sonk nie ma uprawnień do stworzenia Drawing. Granat i tak
+się odejmuje. Nie powinno tak się rozjeżdżać — strefa w ogóle się nie narysowała. Gra ukradła
+graczowi granat."
+
+Sprawdzone na żywo, nie zgadywane: **każdy** granat w katalogu ma obszar „Sześcian …” (tylko
+niewybuchowa raca sygnałowa jest kołem), sześciany rysuje się `Drawing`-iem (osobny bug renderowania
+`MeasuredTemplate` typu „rect” w v14 — patrz komentarz przy odpowiedniej gałęzi w
+`_spawnExplosiveMarker`), a `DrawingDocument.canUserCreate` to płaskie
+`user.hasPermission("DRAWING_CREATE")` bez żadnego wyjątku dla właściciela dokumentu — w
+przeciwieństwie do `MeasuredTemplateDocument`, które przepuszcza zwykłego gracza, gdy `author`
+szablonu to on sam. `DRAWING_CREATE` w tym świecie mają role `TRUSTED/ASSISTANT/GAMEMASTER`;
+wszyscy gracze są zwykłym `PLAYER` (zweryfikowane wprost przez `canUserCreate`/`game.permissions` w
+konsoli, nie założone). Czyli: **każdy** rzut prawdziwym granatem i **każda** mina (zawsze
+`Drawing`, niezależnie od kształtu) zawsze zawodziły każdemu graczowi — a że to był odrzucony
+Promise bez żadnego `catch`, a ilość sztuk odejmowano w tej samej funkcji *przed* tym wywołaniem,
+granat znikał z ekwipunku bez śladu na mapie i bez karty na czacie.
+
+Naprawione dokładnie tym samym wzorcem co własne światło Flary (`flara.mjs`): rzucający zapisuje
+zwykłą, niewymagającą uprawnień flagę na WŁASNYM aktorze (`explosivePendingPlacement`) — to zawsze
+się udaje — a każdy podłączony klient reaguje na `updateActor`; tylko `game.user.isActiveGM`
+faktycznie tworzy `Drawing`/`MeasuredTemplate`. Zweryfikowane na żywo wprost przez zapis tej flagi
+na aktorze (Boar) i obserwację reakcji GM-owego klienta: poprawna pozycja, rozmiar, flagi — dla
+wariantu sześcianu, koła i miny osobno.
+
+### Nowość: efekt wybuchu z tił znalezionych w scenie „!!SZABLONY!!”
+
+Gracz zauważył 5 gotowych sprite'ów w scenie-brudnopisie „!!SZABLONY!!” i zapytał, czy da się ich
+użyć (rozciągniętych?) do wybuchów granatów. Skopiowane do `vfx/` modułu pod opisowymi nazwami
+(`config/explosion-vfx.mjs` — tam pełne wyjaśnienie, dlaczego akurat te dwie rodziny i dlaczego
+rozmiar liczony w KRATKACH sceny docelowej, nie w pikselach referencyjnej sceny SZABLONY — te dwie
+sceny mają różną liczbę pikseli na metr, sprawdzone na żywo, nie założone):
+- 4 warianty koncentrycznych „pierścieni” wybuchu (`explosion_ring_xl/l/m/s.png`) dla obrażeń
+  wybuchowych/siecznych/itp. — dobierany wariant najbliższy naturalnym rozmiarem docelowej strefie,
+  żeby duży wybuch (Odłamkowy, 9 m) nie dostawał tego samego rozciągniętego sprite'u co mały
+  (improwizowany, 3 m);
+- 1 wariant płomienia (`fire_burst.png`) dla Koktajlu Mołotowa / Granatu zapalającego — rozpoznawane
+  po `type: "fire"` z istniejącego już `_parseDamageSpec`, zero nowego parsowania tekstu.
+
+Granaty dymne/gazowe/hukowe świadomie nie dostają żadnego efektu — nie mają w tekście efektu ani
+jednej kości obrażeń, więc nie ma czym rozróżnić „to nie jest wybuch ani ogień”; to prawdziwa,
+otwarta luka w assetach, nie coś naprawionego na pół gwizdka podstawionym złym sprite'em.
+
+### Odpowiedź na „czy da się zgasić efekt razem ze strefą? czy to pora na Midi-QoL?"
+
+Efekt jest `.persist()`owany i `.tieToDocuments(markerDoc)`owany do TEGO SAMEGO `Drawing`/
+`MeasuredTemplate`, który MG i tak usuwa ręcznie, gdy uzna wybuch za rozliczony. Sequencer sam kończy
+powiązany efekt w chwili usunięcia dowiązanego dokumentu — zero nowego kroku dla MG, zero osobnego
+hooka sprzątającego do utrzymania. Zweryfikowane na żywo wprost: usunięcie samego `Drawing` (bez
+żadnego ręcznego `endEffects`) kończy powiązany efekt automatycznie.
+
+Świadomie wybrane zamiast sztywnego czasu „1 runda” — treść katalogu i tak nie jest zgodna sama ze
+sobą (Koktajl Mołotowa: „Obszar pali się 1 rundę”; zwykły granat odłamkowy: żadnego dopalania w
+ogóle), a „rozliczone” zawsze i tak sprowadza się do tego samego, wspólnego momentu: gdy MG usuwa
+strefę. Timer rundowy albo wygasłby za wcześnie, albo zostałby bezsensownie po fakcie — dowiązanie
+do tego, co MG i tak już robi ręcznie, jest ściślejsze niż jakikolwiek zegar.
+
+**Midi-QoL nie jest tu potrzebny.** To, o co proszono, to jeden, dobrze pasujący hak Sequencera
+(`tieToDocuments`), nie brakująca automatyzacja ataku/obrażeń/RO — a te akurat w tym module są
+świadomie ręczne (patrz `feedback_gm_in_the_loop_automation` — automatyzujemy wykrycie, nigdy
+zastosowanie). Midi-QoL wchodziłby głęboko w te właśnie ścieżki i musiałby się pogodzić z całą
+istniejącą, ręcznie pisaną automatyzacją broni/amunicji/granatów w tym module — nieproporcjonalna
+cena za problem, który miał dziesięcioliniowe rozwiązanie.
+
+Zweryfikowane na żywo (zapis flagi na Boarze, symulacja sześcianu/koła/miny, zrzut ekranu wybuchu na
+mapie, automatyczne sprzątnięcie po usunięciu `Drawing`), posprzątane po teście. Wszystkie 152 testy
+nadal przechodzą.

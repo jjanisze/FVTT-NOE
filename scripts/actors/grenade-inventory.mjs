@@ -1,13 +1,76 @@
+/**
+ * Neuroshima 5e — grenade/explosive inventory UI, throw resolution, and battlefield markers.
+ *
+ * ## GM-relay for the blast marker (2026-09-06)
+ *
+ * `_placeExplosionTemplate`/`_placeArmedMineMarker` used to call
+ * `canvas.scene.createEmbeddedDocuments("Drawing"/"MeasuredTemplate", …)` directly
+ * from whoever threw the grenade — fine for a GM, silently fatal for a real player.
+ * Confirmed live against this world's actual permissions (not assumed): every
+ * catalog grenade's `area` is "Sześcian …" (cube — only the non-damaging signal
+ * flare resolves to a circle), cube areas draw a `Drawing` (see the comment on
+ * that branch in `_spawnExplosiveMarker` for why — a separate v14 MeasuredTemplate
+ * rendering bug), and `DrawingDocument.canUserCreate` is a flat
+ * `user.hasPermission("DRAWING_CREATE")` with NO per-document ownership escape
+ * hatch — unlike `MeasuredTemplateDocument`, whose creation check passes for a
+ * normal player as long as the template's own `author` is that player (Foundry's
+ * default when a player creates their own). `DRAWING_CREATE` is granted to roles
+ * `[TRUSTED, ASSISTANT, GAMEMASTER]` in this world; every player is plain
+ * `PLAYER`. So: every real grenade throw, and every mine (always a Drawing,
+ * regardless of area shape), failed for every player, always — not a rare edge
+ * case. And because the failure was a rejected promise with nothing catching it,
+ * and the item's quantity was decremented in the same function *before* that
+ * failing call, the player's grenade vanished from their sheet with no marker,
+ * no chat card, nothing — "the game stole the player's grenade."
+ *
+ * Fixed with the exact same idiom `flara.mjs` already uses for its own GM-only
+ * `AmbientLight`: the throwing client only ever writes a plain, normal-permission
+ * flag on their OWN actor (`FLAG_PENDING_EXPLOSIVE`) — always succeeds, no
+ * permission involved — and every connected client reacts via `updateActor`;
+ * only `game.user.isActiveGM` performs the actual privileged
+ * `createEmbeddedDocuments`. Quantity is still decremented up front (unchanged
+ * order) — that's no longer a desync risk now that the step after it can no
+ * longer fail for a mundane reason, only for the same "actor got deleted
+ * mid-flow" class of edge case nothing else in this file guards against either.
+ *
+ * ## Explosion VFX + why it disappears exactly when the GM says so (2026-09-06)
+ *
+ * `_spawnExplosionVfx` plays a Sequencer sprite (see `config/explosion-vfx.mjs`
+ * for the asset table and why two families exist) at the blast point,
+ * `.persist()`ed and `.tieToDocuments(markerDoc)`ed to the SAME Drawing/
+ * MeasuredTemplate the GM just created. Sequencer ends a tied effect the instant
+ * any tied document is deleted — so the fire disappears together with the zone
+ * marker, automatically, with no new GM step and no separate cleanup hook to
+ * maintain here. Chosen over a fixed per-round timer on purpose: the catalog's
+ * own text disagrees on what "resolved" even means (Koktajl Mołotowa's card
+ * literally says "Obszar pali się 1 rundę"; a plain frag grenade has no
+ * lingering burn at all) — but in every case "resolved" already means "the GM
+ * deletes the zone marker once its rules are done being applied," which is the
+ * one moment already common to all of them and the one the GM already produces
+ * today without being asked to add a second click. Scoped to
+ * `_placeExplosionTemplate`'s callers only (real blasts with a damage formula) —
+ * never mine placement (an armed mine hasn't exploded yet) and never a grenade
+ * whose effect has no dice at all (smoke/gas/flashbang — no matching asset
+ * exists, so it's silently skipped rather than shown wrong; see
+ * `explosion-vfx.mjs`'s own doc comment).
+ */
 import { GRENADE_TYPES, GRENADE_MAP } from "../config/ammo-data.mjs";
 import { playExplosiveSoundForSubtype } from "../weapons/sounds.mjs";
+import { seqEffect } from "../weapons/sequencer.mjs";
+import { pickRingVariant, EXPLOSION_FIRE } from "../config/explosion-vfx.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
+// Actor flag — GM-consumed, mirrors flara.mjs's FLAG_PENDING idiom. Payload:
+// {sceneId, kind: "explosion"|"mine", x, y, area, color, itemName, areaText,
+//  damageType, hasDamageFormula, nonce}
+const FLAG_PENDING_EXPLOSIVE = "explosivePendingPlacement";
 
 export function registerGrenadeInventory() {
   for (const hookName of ["renderActorSheet", "renderCharacterActorSheet", "renderNPCActorSheet"]) {
     Hooks.on(hookName, _onRenderActorSheetInjectGrenadeSection);
   }
   Hooks.on("renderChatMessageHTML", _onRenderExplosiveChatCard);
+  Hooks.on("updateActor", onUpdateActor);
   console.log("Neuroshima 5e | Explosives inventory UI registered");
 }
 
@@ -298,18 +361,23 @@ async function _throwExplosive(actor, item, def) {
   const throwColor = _getThrowBandColor(throwClass);
   const isMine = subtype === "grenade-antipersonnel-mine" || subtype === "grenade-antivehicle-mine";
 
+  const saveData = _parseSaveSpec(resolved.save);
+  const damageData = _parseDamageSpec(resolved.effect);
+
   await item.update({ "system.quantity": qty - 1 });
 
   playExplosiveSoundForSubtype(subtype);
 
-  if (isMine) {
-    await _placeArmedMineMarker(throwContext, throwColor, item.name);
-  } else {
-    await _placeExplosionTemplate(throwContext, throwColor);
-  }
+  // Normal-permission flag write only — see this file's top doc comment,
+  // "GM-relay for the blast marker", for why this replaced a direct
+  // createEmbeddedDocuments call here.
+  await _requestExplosiveMarker(actor, throwContext, throwColor, {
+    isMine,
+    areaText: resolved.area ?? "",
+    damageType: damageData.type,
+    hasDamageFormula: !!damageData.formula
+  });
 
-  const saveData = _parseSaveSpec(resolved.save);
-  const damageData = _parseDamageSpec(resolved.effect);
   const chatPayload = {
     itemName: item.name,
     save: saveData,
@@ -366,39 +434,153 @@ async function _throwExplosive(actor, item, def) {
   });
 }
 
-async function _placeArmedMineMarker(throwContext, color, name) {
-  if (!canvas?.scene) return;
-  const unitsPerGrid = Number(canvas.scene?.grid?.distance ?? 1);
-  const pxPerGrid = Number(canvas.grid?.size ?? 100);
-  const pxPerUnit = pxPerGrid / unitsPerGrid;
-  const side = 1.5;
-  const sidePx = side * pxPerUnit;
+/**
+ * Normal-permission write: record what marker (and optional VFX) should appear,
+ * on the THROWING actor's own flag. Every connected client reacts via
+ * `onUpdateActor` below; only the active GM's client performs the actual
+ * privileged Scene write. See this file's top doc comment for why.
+ */
+async function _requestExplosiveMarker(actor, throwContext, color, opts = {}) {
+  await actor.setFlag(MODULE_ID, FLAG_PENDING_EXPLOSIVE, {
+    sceneId: canvas.scene?.id ?? null,
+    kind: opts.isMine ? "mine" : "explosion",
+    x: throwContext.target.x,
+    y: throwContext.target.y,
+    area: throwContext.area,
+    color,
+    itemName: throwContext.itemName,
+    areaText: opts.areaText ?? "",
+    damageType: opts.damageType ?? null,
+    hasDamageFormula: !!opts.hasDamageFormula,
+    nonce: foundry.utils.randomID(8)
+  });
+}
 
-  await canvas.scene.createEmbeddedDocuments("Drawing", [{
-    x: throwContext.target.x - (sidePx / 2),
-    y: throwContext.target.y - (sidePx / 2),
-    shape: {
-      type: "r",
-      width: sidePx,
-      height: sidePx
-    },
-    strokeWidth: 2,
-    strokeColor: color,
-    strokeAlpha: 0.9,
-    fillType: 1,
-    fillColor: color,
-    fillAlpha: 0.25,
-    text: _buildSceneLabel(name),
-    fontSize: 16,
-    locked: false,
-    flags: {
-      [MODULE_ID]: {
-        explosive: true,
-        explosiveMine: true,
-        explosiveAreaResolved: "Pole miny (1.5 m)"
-      }
+function onUpdateActor(actor, changes) {
+  const pending = foundry.utils.getProperty(changes, `flags.${MODULE_ID}.${FLAG_PENDING_EXPLOSIVE}`);
+  if (!pending) return;
+  if (!game.user.isActiveGM) return;
+  _spawnExplosiveMarker(actor, pending).catch(e => console.warn(`${MODULE_ID} | grenade-inventory: spawn failed`, e));
+}
+
+/** GM-only: create the actual Drawing/MeasuredTemplate (+ paired VFX), then clear the request flag. */
+async function _spawnExplosiveMarker(actor, pending) {
+  try {
+    const scene = game.scenes.get(pending.sceneId) ?? canvas.scene;
+    if (!scene) return;
+
+    const unitsPerGrid = Number(scene.grid?.distance ?? 1);
+    const pxPerGrid = Number(scene.grid?.size ?? 100);
+    const pxPerUnit = pxPerGrid / unitsPerGrid;
+    const area = pending.area ?? { kind: "circle", radius: 1.5, label: "Koło 3 m" };
+
+    let markerDoc = null;
+
+    if (pending.kind === "mine") {
+      const sidePx = 1.5 * pxPerUnit;
+      const [created] = await scene.createEmbeddedDocuments("Drawing", [{
+        x: pending.x - (sidePx / 2),
+        y: pending.y - (sidePx / 2),
+        shape: { type: "r", width: sidePx, height: sidePx },
+        strokeWidth: 2,
+        strokeColor: pending.color,
+        strokeAlpha: 0.9,
+        fillType: 1,
+        fillColor: pending.color,
+        fillAlpha: 0.25,
+        text: _buildSceneLabel(pending.itemName),
+        fontSize: 16,
+        locked: false,
+        flags: {
+          [MODULE_ID]: {
+            explosive: true,
+            explosiveMine: true,
+            explosiveAreaResolved: "Pole miny (1.5 m)"
+          }
+        }
+      }]);
+      markerDoc = created;
+    } else if (area.kind === "cube") {
+      // Foundry v14 potrafi źle renderować MeasuredTemplate typu "rect" (artefakty 3/6).
+      // Dla sześcianu stawiamy Drawing (prostokąt), który jest stabilny i usuwalny jak zwykły rysunek.
+      const side = Math.max(0.5, Number(area.side ?? 3));
+      const sidePx = side * pxPerUnit;
+      const [created] = await scene.createEmbeddedDocuments("Drawing", [{
+        x: pending.x - (sidePx / 2),
+        y: pending.y - (sidePx / 2),
+        shape: { type: "r", width: sidePx, height: sidePx },
+        strokeWidth: 2,
+        strokeColor: pending.color,
+        strokeAlpha: 0.9,
+        fillType: 1,
+        fillColor: pending.color,
+        fillAlpha: 0.2,
+        text: _buildSceneLabel(pending.itemName),
+        fontSize: 16,
+        locked: false,
+        flags: {
+          [MODULE_ID]: {
+            explosive: true,
+            explosiveAreaText: pending.areaText ?? "",
+            explosiveAreaResolved: area.label,
+            explosiveDrawing: true
+          }
+        }
+      }]);
+      markerDoc = created;
+    } else {
+      const [created] = await scene.createEmbeddedDocuments("MeasuredTemplate", [{
+        user: game.user.id,
+        x: pending.x,
+        y: pending.y,
+        direction: 0,
+        t: "circle",
+        distance: Math.max(0.5, Number(area.radius ?? 1.5)),
+        fillColor: pending.color,
+        borderColor: pending.color,
+        flags: {
+          [MODULE_ID]: {
+            explosive: true,
+            explosiveAreaText: pending.areaText ?? "",
+            explosiveAreaResolved: area.label
+          }
+        }
+      }]);
+      markerDoc = created;
     }
-  }]);
+
+    if (pending.kind !== "mine" && pending.hasDamageFormula) {
+      _spawnExplosionVfx(scene, pending.x, pending.y, area, pending.damageType, markerDoc);
+    }
+  } finally {
+    try { await actor.unsetFlag(MODULE_ID, FLAG_PENDING_EXPLOSIVE); } catch (_e) { /* aktor mógł już zniknąć */ }
+  }
+}
+
+/**
+ * Play the matching explosion sprite at (x,y) on `scene`, sized to the blast's
+ * real footprint and tied to `markerDoc` — see this file's top doc comment,
+ * "Explosion VFX" section, for why tieing beats a fixed-round timer.
+ */
+function _spawnExplosionVfx(scene, x, y, area, damageType, markerDoc) {
+  const distancePerSquare = Number(scene.grid?.distance ?? 1.5) || 1.5;
+  const diameterMeters = area.kind === "cube"
+    ? Number(area.side ?? 3)
+    : Number(area.radius ?? 1.5) * 2;
+  const targetSquares = Math.max(0.5, diameterMeters / distancePerSquare);
+
+  const asset = damageType === "fire" ? EXPLOSION_FIRE : pickRingVariant(targetSquares);
+
+  seqEffect(asset.file, { x, y }, {
+    sizeSquares: targetSquares,
+    persist: true,
+    belowTokens: true,
+    randomRotation: damageType === "fire",
+    fadeIn: 150,
+    fadeOut: 500,
+    name: `neuro-explosion-${markerDoc?.id ?? foundry.utils.randomID(6)}`,
+    tieTo: markerDoc ?? undefined
+  });
 }
 
 function _getActorThrowToken(actor) {
@@ -585,68 +767,6 @@ async function _selectExplosionPoint(actor, item, def, areaSpec) {
   }
 
   return { origin, target, distance, range, token: originToken, def, area: areaSpec, itemName: item?.name ?? def?.label ?? "ładunek" };
-}
-
-async function _placeExplosionTemplate(throwContext, color) {
-  const area = throwContext.area ?? { kind: "circle", radius: 1.5, label: "Koło 3 m" };
-  if (!canvas?.scene) return;
-
-  const unitsPerGrid = Number(canvas.scene?.grid?.distance ?? 1);
-  const pxPerGrid = Number(canvas.grid?.size ?? 100);
-  const pxPerUnit = pxPerGrid / unitsPerGrid;
-
-  const doc = {
-    user: game.user.id,
-    x: throwContext.target.x,
-    y: throwContext.target.y,
-    direction: 0,
-    fillColor: color,
-    borderColor: color,
-    flags: {
-      [MODULE_ID]: {
-        explosive: true,
-        explosiveAreaText: throwContext.def?.area ?? "",
-        explosiveAreaResolved: area.label
-      }
-    }
-  };
-
-  if (area.kind === "cube") {
-    // Foundry v14 potrafi źle renderować MeasuredTemplate typu "rect" (artefakty 3/6).
-    // Dla sześcianu stawiamy Drawing (prostokąt), który jest stabilny i usuwalny jak zwykły rysunek.
-    const side = Math.max(0.5, Number(area.side ?? 3));
-    const sidePx = side * pxPerUnit;
-    await canvas.scene.createEmbeddedDocuments("Drawing", [{
-      x: throwContext.target.x - (sidePx / 2),
-      y: throwContext.target.y - (sidePx / 2),
-      shape: {
-        type: "r",
-        width: sidePx,
-        height: sidePx
-      },
-      strokeWidth: 2,
-      strokeColor: color,
-      strokeAlpha: 0.9,
-      fillType: 1,
-      fillColor: color,
-      fillAlpha: 0.2,
-      text: _buildSceneLabel(throwContext.itemName),
-      fontSize: 16,
-      locked: false,
-      flags: {
-        [MODULE_ID]: {
-          explosive: true,
-          explosiveAreaText: throwContext.def?.area ?? "",
-          explosiveAreaResolved: area.label,
-          explosiveDrawing: true
-        }
-      }
-    }]);
-  } else {
-    doc.t = "circle";
-    doc.distance = Math.max(0.5, Number(area.radius ?? 1.5));
-    await canvas.scene.createEmbeddedDocuments("MeasuredTemplate", [doc]);
-  }
 }
 
 function _onRenderExplosiveChatCard(message, html) {

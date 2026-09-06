@@ -8,7 +8,7 @@
  *   seqPlayAudio(src, vol, opts)          — play audio via Sequencer; returns false if unavailable
  *   seqStartLoop(src, vol, origin, opts)  — start a persisted, indefinitely-looping sound
  *   seqStopLoop(origin)                   — end a loop started with seqStartLoop, for all clients
- *   seqEffect(file, source, opts)         — canvas VFX on a token, one-shot or persistent
+ *   seqEffect(file, source, opts)         — canvas VFX on a token or a raw {x,y} point, one-shot or persistent
  *   seqEndEffect(name)                    — end a named persistent effect, for all clients
  *   seqEffectRunning(name)                — is that named effect still playing?
  *   seqScrollText(text, source, opts)     — floating combat text above a token
@@ -205,23 +205,43 @@ export function seqStopLoop(origin) {
 /* -------------------------------------------- */
 
 /**
- * Play a JB2A (or any Sequencer-database) effect on a token.
+ * Play a JB2A (or any Sequencer-database) effect on a token — or, since the
+ * grenade-explosion VFX added 2026-09-06, at a raw canvas point that isn't
+ * anchored to any placeable at all.
  *
- * Both dependencies are soft: no Sequencer, no token, or no such entry in the effect
- * database and this returns false without throwing. `.file()` on a missing database
- * path is a hard error in Sequencer, hence the `entryExists` guard — a user who never
- * installed JB2A should lose the flames, not the burning rules.
+ * Both dependencies are soft: no Sequencer, no resolvable location, or no such
+ * entry in the effect database and this returns false without throwing.
+ * `.file()` on a missing database path is a hard error in Sequencer, hence the
+ * `entryExists` guard — a user who never installed JB2A should lose the flames,
+ * not the burning rules. That guard only applies to Sequencer-database dot
+ * paths (`"jb2a.flames.01.orange"`); a literal file path (anything containing
+ * "/", e.g. `"modules/…/vfx/explosion_ring_xl.png"`) was never registered in
+ * that database and is skipped straight to `.file()`, exactly like Sequencer's
+ * own docs describe both forms working (effect.md, "File").
  *
  * API reference: C:\Git\FoundryVTT-Sequencer\docs\api\effect.md
  *
- * @param {string} file   Sequencer database path, e.g. "jb2a.flames.01.orange".
- * @param {Actor|TokenDocument|Token|null} source
+ * @param {string} file   Sequencer database path OR a literal file path.
+ * @param {Actor|TokenDocument|Token|{x:number,y:number}|null} source  A raw
+ *   `{x,y}` point plays at that exact canvas position instead of on a token —
+ *   distinguished from a placeable/document by having no `.document`/
+ *   `.documentName` of its own, so a real Token/TokenDocument is never
+ *   mistaken for one even though both also expose numeric `.x`/`.y`.
  * @param {object}  [opts]
- * @param {number}  [opts.scale=1]      Size relative to the token.
+ * @param {number}  [opts.scale=1]      Size relative to the token. Ignored when `sizeSquares` is set.
+ * @param {number}  [opts.sizeSquares]  Absolute size in TARGET-scene grid squares (via
+ *   `.size(n, {gridUnits:true})`) — for a raw-point effect that has no token to scale
+ *   relative to. Takes priority over `scale` when set.
  * @param {number}  [opts.opacity=1]
  * @param {boolean} [opts.attach]       Follow the token as it moves, instead of a fixed spot.
+ *   Ignored for a raw-point `source` (nothing to attach to).
  * @param {string}  [opts.name]         Required with `attach` + persist; the handle for seqEndEffect.
  * @param {boolean} [opts.persist]      Loop indefinitely and survive a reload.
+ * @param {*}       [opts.tieTo]        A Document (or array of Documents) to pass to
+ *   `.tieToDocuments()` — ends this effect automatically the instant any of them is
+ *   deleted, instead of requiring a separate cleanup hook.
+ * @param {boolean} [opts.belowTokens=false]   Render under the token layer (ground-level VFX).
+ * @param {boolean} [opts.randomRotation=false]
  * @param {number}  [opts.fadeIn=0]
  * @param {number}  [opts.fadeOut=400]
  * @param {number}  [opts.delay=0]
@@ -229,25 +249,35 @@ export function seqStopLoop(origin) {
  */
 export function seqEffect(file, source, {
   scale = 1, opacity = 1, attach = false, name, persist = false,
+  sizeSquares, tieTo, belowTokens = false, randomRotation = false,
   fadeIn = 0, fadeOut = 400, delay = 0
 } = {}) {
   const Seq = _getSequencer();
   if (!Seq) return false;
-  if (!window.Sequencer.Database.entryExists(file)) {
+
+  const isDbPath = !String(file).includes("/");
+  if (isDbPath && !window.Sequencer.Database.entryExists(file)) {
     console.warn(`neuroshima-2026-overrides | brak efektu "${file}" w bazie Sequencera — pomijam`);
     return false;
   }
 
-  const token = _resolveToken(source);
-  if (!token) return false;
+  const isRawPoint = !!source && typeof source.x === "number" && typeof source.y === "number"
+    && !source.document && !source.documentName;
+  const token = isRawPoint ? null : _resolveToken(source);
+  if (!isRawPoint && !token) return false;
 
-  let fx = new Seq().effect().file(file).scaleToObject(scale).opacity(opacity);
-  fx = attach ? fx.attachTo(token, { bindAlpha: false }) : fx.atLocation(token);
+  let fx = new Seq().effect().file(file).opacity(opacity);
+  fx = isRawPoint ? fx.atLocation(source)
+    : (attach ? fx.attachTo(token, { bindAlpha: false }) : fx.atLocation(token));
+  fx = sizeSquares ? fx.size(sizeSquares, { gridUnits: true }) : fx.scaleToObject(scale);
   if (persist) fx = fx.persist();
+  if (belowTokens) fx = fx.belowTokens();
+  if (randomRotation) fx = fx.randomRotation();
   if (name) fx = fx.name(name);
   if (fadeIn) fx = fx.fadeIn(fadeIn);
   if (fadeOut) fx = fx.fadeOut(fadeOut);
   if (delay) fx = fx.delay(delay);
+  if (tieTo) fx = fx.tieToDocuments(tieTo);
   fx.play();
   return true;
 }
