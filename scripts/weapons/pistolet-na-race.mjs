@@ -63,6 +63,30 @@
  * `return _getChamberState(item).loaded !== true` once the private `reloadState.required` flag
  * (which this file can't set — it's private to `magazine.mjs`) is left unset. Verified live
  * rather than assumed — see this file's registration doc comment below.
+ *
+ * ## ATAK follow-ups (2026-09-06, 2nd pass) — five live-reported issues, three of them here
+ *
+ * A live ATAK test surfaced five things at once. Two turned out to be `weapons/ammo.mjs` bugs
+ * fixed there (see its own doc comment on `_effectiveDamage`): the 1k4 fire damage wasn't
+ * rolling or applying at all, and "Nałóż ponownie" was just that same failure's warning message,
+ * not a broken dialog. A third (the chat card showing "Dostępność" and a "Nie automatyzujemy"
+ * note) turned out not to be a bug — `config/weapons-data.mjs`'s `_description()` is a uniform
+ * template every weapon gets; a plain pistol with no `note`/`manual` just has fewer rows than a
+ * homebrew one with a manual-adjudication caveat (Miotacz ognia/Koktajl Mołotowa get the same
+ * treatment). The other two are real gaps, closed here:
+ *
+ *   - **The flare vanishing on a combat hit/miss** — ATAK never did anything but a normal
+ *     bullet-style attack roll; the Raca itself had no in-fiction consequence. Fixed by
+ *     `onPostRollAttackSpawnImpactFlare`: every ATAK shot (hit or miss alike — deliberately not
+ *     distinguished, see its own comment) drops the SAME standalone light `_fireFlareRound`/a
+ *     thrown Flara make, at the targeted token's position, via the same `requestFlareLight`.
+ *   - **No shorthand for the Podpalenie save** — the weapon's note always said the RO on a
+ *     direct hit isn't automated (GM's call, same as Koktajl Mołotowa), which is a deliberate
+ *     design choice this does NOT reverse. But "not automated" doesn't have to mean "dig through
+ *     the target's sheet by hand" — `actors/grenade-inventory.mjs`'s own explosive chat cards
+ *     already have exactly this convenience (a button that calls `actor.rollSavingThrow` for
+ *     the selected/targeted token and posts the roll, nothing more). `_rollPodpalenieSave`
+ *     mirrors that exact pattern for this weapon's DC 12 Dex save.
  */
 
 import { getMag, spendRound, setChamber } from "./magazine.mjs";
@@ -267,6 +291,123 @@ async function _ensurePistoletRaceActivitiesUnguarded(item) {
 }
 
 /* -------------------------------------------- */
+/*  ATAK: impact flare + Podpalenie RO shorthand  */
+/* -------------------------------------------- */
+
+const PODPALENIE_DC = 12;      // matches this weapon's own note text, config/weapons-data.mjs
+const PODPALENIE_ABILITY = "dex";
+
+/**
+ * A flare fired AT someone doesn't just evaporate — see this file's top doc comment, "ATAK
+ * follow-ups". Deliberately the same outcome whether the shot hit or missed: a live RO/hit
+ * distinction would need re-deriving hit/miss from the roll vs. the target's AC (already done
+ * once, `weapons/magazine.mjs`'s `_isAttackHit`) just to decide "embedded in target" vs. "landed
+ * next to them" flavor text — a real difference in prose, not in mechanics, since the light
+ * itself is identical either way. Skipped for now as not worth the duplication; the flavor text
+ * below stays deliberately vague ("ląduje przy") rather than falsely claiming a clean hit.
+ *
+ * No target selected → no sensible drop point, so this does nothing (same precedent as
+ * `magazine.mjs`'s own tracer VFX, which likewise only pays off with a target chosen).
+ */
+async function onPostRollAttackSpawnImpactFlare(rolls, { subject } = {}) {
+  if (!subject || subject.type !== "attack") return;
+  const item = _liveItem(subject.item);
+  if (!_isPistoletRace(item)) return;
+
+  const actor = item.actor;
+  if (!actor) return;
+  const targetToken = game.user?.targets?.first?.() ?? null;
+  if (!targetToken) return;
+
+  const scene = targetToken.scene ?? canvas.scene;
+  if (!scene) return;
+  const center = _centerOf(targetToken);
+
+  await requestFlareLight(actor, scene, center.x, center.y);
+
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    content: `<div class="neuro-flara-card"><div class="neuro-flara-head">${item.name}</div>`
+      + `<p>Raca ląduje przy <strong>${targetToken.name ?? targetToken.document?.name ?? "celu"}</strong> `
+      + `i zapala się, paląc się jak zwykła Flara przez minutę.</p></div>`,
+  });
+}
+
+/**
+ * Rolls the target's `PODPALENIE_DC` (12) Dex save for the GM — same shorthand pattern
+ * `actors/grenade-inventory.mjs`'s own explosive-card "RO" button already uses
+ * (`actor.rollSavingThrow({ability, target}, {configure:false}, {data:{flavor, speaker}})`),
+ * a real, existing precedent, not a new capability invented for this weapon. Only rolls the
+ * save — does NOT toggle the "burning" status itself, matching the weapon's own note that this
+ * stays GM-adjudicated (`combat/podpalenie.mjs`'s `ignite()` is one Token-HUD click away once the
+ * GM has the number). Targeted-first, controlled-as-fallback, same resolution order as
+ * `weapons/ammo.mjs`'s own manual damage button.
+ */
+async function _rollPodpalenieSave() {
+  const targets = game.user.targets?.size
+    ? [...game.user.targets]
+    : [...(canvas.tokens?.controlled ?? [])];
+
+  if (!targets.length) {
+    ui.notifications.warn("Zaznacz lub wyceluj token celu, aby rzucić RO na Podpalenie.");
+    return;
+  }
+
+  for (const token of targets) {
+    const actor = token.actor;
+    if (!actor?.rollSavingThrow) continue;
+    const speaker = ChatMessage.getSpeaker({ actor, scene: token.scene ?? canvas.scene, token: token.document ?? token });
+    await actor.rollSavingThrow({
+      ability: PODPALENIE_ABILITY,
+      target: PODPALENIE_DC,
+    }, {
+      configure: false,
+    }, {
+      data: { flavor: "Raca sygnałowa — RO Podpalenie", speaker },
+    });
+  }
+}
+
+/** Injects the "RO Podpalenie" button into this weapon's ATAK chat cards — same deferred-render
+ * trick as `weapons/ammo.mjs`'s own "Obrażenia" button injection (dnd5e builds its cards via
+ * async microtasks; `setTimeout(0)` runs after they've settled). */
+function onRenderPodpalenieButton(message, html) {
+  const activityType = message.flags?.dnd5e?.activity?.type;
+  if (activityType !== "attack") return;
+
+  const itemUuid = message.flags?.dnd5e?.item?.uuid;
+  if (!itemUuid) return;
+  const item = fromUuidSync(itemUuid);
+  if (!item || !_isPistoletRace(item)) return;
+
+  if (!game.user.isGM && !item.isOwner) return;
+
+  setTimeout(() => _injectPodpalenieButton(html), 0);
+}
+
+function _injectPodpalenieButton(html) {
+  const el = html instanceof HTMLElement ? html : html?.[0];
+  if (!el || el.querySelector(".neuro-podpalenie-ro-btn")) return;
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.classList.add("neuro-damage-btn", "neuro-podpalenie-ro-btn"); // same look as the Obrażenia button
+  btn.innerHTML = `<i class="fa-solid fa-fire"></i> RO Podpalenie (ST ${PODPALENIE_DC})`;
+  btn.addEventListener("click", async ev => {
+    ev.preventDefault();
+    await _rollPodpalenieSave();
+  });
+
+  // Prefer landing right after ammo.mjs's own "Obrażenia"/"Nałóż ponownie" button when present.
+  const anchor = el.querySelector(".neuro-damage-btn")
+    ?? el.querySelector(".dice-total")
+    ?? el.querySelector(".dice-roll")
+    ?? el.querySelector(".message-content")
+    ?? el;
+  anchor.after(btn);
+}
+
+/* -------------------------------------------- */
 /*  Hooks                                         */
 /* -------------------------------------------- */
 
@@ -302,6 +443,8 @@ async function ensureAllPistoletRaceActivities() {
 export function registerPistoletNaRace() {
   Hooks.on("dnd5e.preUseActivity", onPreUseActivity);
   Hooks.on("dnd5e.postUseActivity", onPostUseActivity);
+  Hooks.on("dnd5e.postRollAttack", onPostRollAttackSpawnImpactFlare);
+  Hooks.on("renderChatMessageHTML", onRenderPodpalenieButton);
 
   Hooks.on("createItem", (item) => { if (game.user.isGM) ensurePistoletRaceActivities(item); });
   if (game.user.isGM) ensureAllPistoletRaceActivities();

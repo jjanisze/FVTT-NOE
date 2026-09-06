@@ -2604,3 +2604,62 @@ przechodzi. Prawdziwie brakujące ikony (Raca sygnałowa jako nabój do Pistolet
 zaślepki craftingowe Narzędzi, opcjonalnie ikona aktywności „Wystrzel flarę" i ~11 generycznych
 ikon efektów Chemii) zostały GM-owi przekazane do narysowania — nie skrócone tu, GM prowadzi
 własną listę.
+
+## Zmiany z 6 września 2026 (6) — ATAK Pistoletu na Race: pięć zgłoszeń na żywo
+
+Test na żywo ATAK-iem zgłosił pięć rzeczy naraz. Trzy okazały się prawdziwymi lukami, jedna to
+osobny, poważniejszy bug w całym systemie amunicji (nie tylko tej broni), jedna to nieporozumienie.
+
+### To jednak nie bug: „karta jest niezwykle rozwlekła"
+
+`_description(w)` w `config/weapons-data.mjs` to jeden, wspólny szablon dla KAŻDEJ broni —
+Dostępność pokazuje się zawsze, a akapit `note` i blok „Nie automatyzujemy" (`manual`) pojawiają
+się tylko wtedy, gdy dana broń je ma. Zwykły pistolet bez homebrew-owego zastrzeżenia ma mniej
+wierszy; Pistolet na Race ma oba, dokładnie tak samo jak Miotacz ognia czy Koktajl Mołotowa —
+to ten sam, świadomie ujednolicony szablon, nie coś wyjątkowego dla tej broni.
+
+### Prawdziwy bug: `fixedDamage` był całkowicie ignorowany przez system obrażeń (`weapons/ammo.mjs`)
+
+To wyjaśnia od razu dwa zgłoszenia: „1k4 nigdzie się nie odbija, nie ma jak nałożyć" oraz
+„Nałóż ponownie" wyskakujące z czymś, co wyglądało jak błąd dialogu. Zobacz pełny doc comment przy
+nowej `_effectiveDamage()` w `ammo.mjs` — w skrócie: `fixedDamage: true` istnieje właśnie po to,
+żeby własna tabela obrażeń broni wygrywała ze wspólnym kalibrem (żeby .12 Ga nie spłaszczyło Pompki
+4k4 i Dwururki 3k4 do wspólnych 2k4) — ale automat nakładania obrażeń, przycisk ręczny I etykieta
+przycisku na karcie czatu wszystkie trzy czytały `caliber.formula` bez wyjątku, ignorując flagę.
+Dwa realne tryby awarii z tej samej przyczyny:
+- kaliber z INNĄ formułą niż faktyczna tabela broni — R700 (2d8 własne) i Deer Hunter (1k12 własne)
+  dzielą kaliber „3006" (formuła „2k6"); Pompka (4k4) dzieli „12ga_s" (formuła „2k4") — po cichu
+  rzucały ZŁE kości, bez żadnego błędu, nic nie wyglądało na zepsute;
+- kaliber BEZ formuły w ogóle — „race" (Pistolet na Race), „strzykawka" (Strzelba Palmera) —
+  automat nic nie robił, ręczny przycisk tylko ostrzegał, a etykieta na karcie pokazywała mglisty
+  placeholder zamiast prawdziwych liczb — dokładnie to, co zgłoszono na żywo.
+
+Naprawione jedną funkcją `_effectiveDamage(item, caliber)`: gdy `fixedDamage` jest ustawione (albo
+kaliber w ogóle nieznany), bierze własne `system.damage.base` broni, przechodząc na kaliber tylko
+gdy broń go nie ma. Naprawia to nie tylko Pistolet na Race, ale też cichy błąd złych obrażeń na
+R700/Deer Hunter/Pompce i pewnie kilku innych. Zweryfikowane na żywo (symulowany `dnd5e.
+postRollAttack`, Boar jako cel, HP przywrócone po teście): 1k4 od ognia realnie naliczone (4 pkt),
+karta czatu prawidłowo pokazuje „OBRAŻENIA — 1K4 OD OGNIA"/„NAŁÓŻ PONOWNIE — 1K4 OD OGNIA" zamiast
+starego placeholdera — także retroaktywnie na już istniejących, starszych kartach w historii czatu.
+
+### Prawdziwa luka: flara znikała bez śladu przy użyciu jako broń (`weapons/pistolet-na-race.mjs`)
+
+ATAK nigdy nie robił nic poza zwykłym strzałem — sama raca nie zostawiała żadnego śladu w fikcji.
+Naprawione: `onPostRollAttackSpawnImpactFlare` — każdy strzał ATAK-iem (trafiony i chybiony
+jednakowo, celowo bez rozróżniania — patrz komentarz przy funkcji) tworzy DOKŁADNIE to samo
+samodzielne światło co rzucona Flara / „Wystrzel flarę", w pozycji zaznaczonego tokena celu, przez
+ten sam `requestFlareLight`. Zweryfikowane na żywo: światło wylądowało dokładnie na pozycji Boara,
+poprawnie posprzątane po teście.
+
+### Prawdziwa luka: brak skrótu do RO Podpalenia (`weapons/pistolet-na-race.mjs`)
+
+„Nie automatyzujemy" RO na Podpalenie to świadoma decyzja z poprzedniej sesji (MG decyduje, jak
+przy Koktajlu Mołotowa) — i to zostaje bez zmian. Ale okazało się, że dokładnie taki skrót już
+istnieje gdzie indziej: karty granatów (`actors/grenade-inventory.mjs`) od dawna mają przycisk
+„RO", który po prostu rzuca `actor.rollSavingThrow` za zaznaczony/wycelowany token i wrzuca wynik
+na czat — MG nadal sam decyduje po wyniku, tylko nie musi szukać przycisku RO na karcie celu
+ręcznie. `_rollPodpalenieSave` kopiuje dokładnie ten wzorzec dla ST 12 Zręczności tej broni; przycisk
+„RO Podpalenie (ST 12)" doczepia się do karty ATAK-u obok przycisku Obrażeń. Zweryfikowane na żywo
+— przycisk pojawia się i poprawnie rzuca RO na zaznaczony/wycelowany token.
+
+Wszystkie 152 testy nadal przechodzą.

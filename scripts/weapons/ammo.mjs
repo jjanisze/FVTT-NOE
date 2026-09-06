@@ -109,7 +109,8 @@ async function _onUpdateItemSyncCaliberDamage(item, changes) {
 /**
  * Fires after dnd5e resolves an attack roll and consumes ammo.
  * If we're in active combat AND the user has targeted tokens, roll the
- * caliber's damage and apply it to each targeted token that was hit.
+ * effective damage (see `_effectiveDamage`) and apply it to each targeted
+ * token that was hit.
  *
  * @param {D20Roll[]} rolls  The resulting attack rolls.
  * @param {{ subject: Activity }} data  The activity that fired the roll.
@@ -127,7 +128,8 @@ async function _onPostRollAttackAutoApply(rolls, { subject } = {}) {
   if (!caliberId) return;
 
   const caliber = AMMO_CALIBER_MAP[caliberId];
-  if (!caliber?.formula) return;
+  const dmg = _effectiveDamage(item, caliber);
+  if (!dmg) return;
 
   const attackRoll = rolls?.[0];
   if (!attackRoll) return;
@@ -154,7 +156,7 @@ async function _onPostRollAttackAutoApply(rolls, { subject } = {}) {
   if (!hits.length) return;
 
   /* Roll damage once, apply to every hit target */
-  const roll = new CONFIG.Dice.DamageRoll(caliber.formula, actor?.getRollData?.() ?? {}, { type: caliber.type });
+  const roll = new CONFIG.Dice.DamageRoll(dmg.formula, actor?.getRollData?.() ?? {}, { type: dmg.type });
   await roll.evaluate();
 
   /* Apply cover damage reduction if a through-cover shot was made */
@@ -165,8 +167,8 @@ async function _onPostRollAttackAutoApply(rolls, { subject } = {}) {
 
   const damages = [{
     value: finalDamage,
-    type: caliber.type,
-    properties: new Set(caliber.props ?? [])
+    type: dmg.type,
+    properties: new Set(dmg.props)
   }];
 
   for (const { target, targetActor } of hits) {
@@ -192,7 +194,7 @@ async function _onPostRollAttackAutoApply(rolls, { subject } = {}) {
   const hitNames = hits.map(h => h.target.name ?? "?").join(", ");
   const missLine = misses.length ? ` | <em>pudło: ${misses.join(", ")}</em>` : "";
   const reductionLine = coverReduction > 0 ? ` <em>(osłona −${coverReduction})</em>` : "";
-  const flavor = `<i class="fa-solid fa-burst"></i> Obrażenia (${caliber.label})${reductionLine} → ${hitNames}${missLine}`;
+  const flavor = `<i class="fa-solid fa-burst"></i> Obrażenia (${caliber?.label ?? item.name})${reductionLine} → ${hitNames}${missLine}`;
 
   await roll.toMessage({
     speaker,
@@ -248,19 +250,9 @@ function _onRenderAttackChatMessage(message, html) {
  * Called deferred (via Promise.resolve) to wait for dnd5e's own rendering.
  */
 function _injectDamageButton(message, html, item, caliberId) {
-  /* Caliber may not be in AMMO_CALIBER_MAP (legacy/custom id) — build a fallback
-     so the button still appears and the GM can manually roll damage. */
-  const caliber = AMMO_CALIBER_MAP[caliberId] ?? {
-    id: caliberId,
-    label: caliberId,
-    formula: (() => {
-      const n = item.system.damage?.base?.number ?? 0;
-      const d = item.system.damage?.base?.denomination ?? 0;
-      return (n && d) ? `${n}d${d}` : "";
-    })(),
-    type: [...(item.system.damage?.base?.types ?? [])][0] ?? "piercing",
-    props: [],
-  };
+  const caliber = AMMO_CALIBER_MAP[caliberId] ?? null;
+  const dmg = _effectiveDamage(item, caliber);
+  const label = caliber?.label ?? item.name;
 
   const el = html instanceof HTMLElement ? html : html?.[0];
   if (!el) return;
@@ -273,9 +265,10 @@ function _injectDamageButton(message, html, item, caliberId) {
   const hasTargets = (game.user.targets?.size ?? 0) > 0;
   const autoApplied = inCombat && hasTargets;
 
-  const typeLabel = CONFIG.DND5E.damageTypes?.[caliber.type]?.label ?? caliber.type;
-  const damageInfo = caliber.formula
-    ? `${caliber.formula} ${typeLabel}`
+  const dmgType = dmg?.type ?? caliber?.type;
+  const typeLabel = CONFIG.DND5E.damageTypes?.[dmgType]?.label ?? dmgType ?? "";
+  const damageInfo = dmg?.formula
+    ? `${dmg.formula} ${typeLabel}`
     : `(${typeLabel} — formuła z broni)`;
 
   const btnLabel = autoApplied
@@ -292,7 +285,7 @@ function _injectDamageButton(message, html, item, caliberId) {
 
   btn.addEventListener("click", async ev => {
     ev.preventDefault();
-    await _applyDamageFromButton(caliber, item);
+    await _applyDamageFromButton(dmg, label, item, caliberId);
   });
 
   /* Append after the dice-total or at end of message-content */
@@ -308,15 +301,18 @@ function _injectDamageButton(message, html, item, caliberId) {
 /* ─────────────────────────────────────────────────────────────────── */
 
 /**
- * Roll and apply caliber damage to targeted tokens (or controlled tokens
- * as fallback). Called when the GM clicks the red "Obrażenia" button.
+ * Roll and apply the effective damage (see `_effectiveDamage`) to targeted tokens (or controlled
+ * tokens as fallback). Called when the GM clicks the red "Obrażenia"/"Nałóż ponownie" button.
  *
- * @param {{ id, label, formula, type, props, aoe }} caliber
- * @param {Item5e} sourceItem  The weapon that was fired.
+ * @param {{ formula, type, props }|null} dmg  Pre-resolved by `_injectDamageButton`.
+ * @param {string} label          Display name for chat flavor (caliber label, or the item's own
+ *                                 name when the caliber is unknown/unset).
+ * @param {Item5e} sourceItem     The weapon that was fired.
+ * @param {string} caliberId      For `playImpactSound`'s bank lookup only.
  */
-async function _applyDamageFromButton(caliber, sourceItem) {
-  if (!caliber.formula) {
-    ui.notifications.warn(`${caliber.label}: ta amunicja nie ma formuły obrażeń — ustaw obrażenia ręcznie na broni.`);
+async function _applyDamageFromButton(dmg, label, sourceItem, caliberId) {
+  if (!dmg?.formula) {
+    ui.notifications.warn(`${label}: brak formuły obrażeń — ustaw obrażenia ręcznie na broni.`);
     return;
   }
 
@@ -331,20 +327,20 @@ async function _applyDamageFromButton(caliber, sourceItem) {
   }
 
   const actor = sourceItem.actor;
-  const roll = new CONFIG.Dice.DamageRoll(caliber.formula, actor?.getRollData?.() ?? {}, { type: caliber.type });
+  const roll = new CONFIG.Dice.DamageRoll(dmg.formula, actor?.getRollData?.() ?? {}, { type: dmg.type });
   await roll.evaluate();
 
   const damages = [{
     value: Math.max(0, roll.total),
-    type: caliber.type,
-    properties: new Set(caliber.props ?? [])
+    type: dmg.type,
+    properties: new Set(dmg.props)
   }];
 
   for (const target of targets) {
     const targetActor = target.document?.actor ?? target.actor ?? target;
     if (targetActor?.applyDamage) {
       await targetActor.applyDamage(damages, { isDelta: true, multiplier: 1 });
-      playImpactSound(sourceItem, targetActor, { caliberId: caliber.id, token: target });
+      playImpactSound(sourceItem, targetActor, { caliberId, token: target });
     }
   }
 
@@ -352,7 +348,7 @@ async function _applyDamageFromButton(caliber, sourceItem) {
   playExplosionSoundForItem(sourceItem);
 
   const targetNames = targets.map(t => t.document?.name ?? t.name ?? "?").join(", ");
-  const flavor = `<i class="fa-solid fa-burst"></i> Obrażenia (${caliber.label}) → ${targetNames}`;
+  const flavor = `<i class="fa-solid fa-burst"></i> Obrażenia (${label}) → ${targetNames}`;
 
   await roll.toMessage({
     speaker: ChatMessage.getSpeaker({ actor }),
@@ -364,6 +360,59 @@ async function _applyDamageFromButton(caliber, sourceItem) {
 /* ─────────────────────────────────────────────────────────────────── */
 /*  Helpers                                                             */
 /* ─────────────────────────────────────────────────────────────────── */
+
+/**
+ * Resolve the {formula, type, props} this weapon should actually roll for damage — everywhere
+ * above used to read `caliber.formula`/`caliber.type` unconditionally, which is right for the
+ * vast majority of weapons but wrong for two real, found-live cases:
+ *
+ * ## Bugfix (2026-09-06), found via Pistolet na Race
+ *
+ * `fixedDamage: true` (`config/weapons-data.mjs` — Magnum .44, .30-06/12 Ga/„.50 BMG" weapons,
+ * Pistolet na Race, Strzelba Palmera, …) exists SPECIFICALLY because a weapon's own table damage
+ * differs from its shared caliber's generic baseline (see this weapon-catalog's own comment on
+ * the flag: ".12 Ga would collapse Pompka's 4k4 and Dwururka's 3k4 into a shared 2k4"). Every
+ * damage-rolling path in this file ignored that flag completely and used `caliber.formula`
+ * regardless — two distinct failure modes from the same root cause, both real:
+ *   - A caliber with a real but DIFFERENT formula than the weapon's actual table value — R700
+ *     (own damage 2d8) and Deer Hunter (own damage 1d12) both share caliber "3006" (formula
+ *     "2d6"); Pompka (4d4) shares "12ga_s" (formula "2d4") — silently rolled the WRONG dice, no
+ *     error, nothing visibly off.
+ *   - A caliber with NO formula at all — Pistolet na Race's "race", Strzelba Palmera's
+ *     "strzykawka" — every path below bailed out entirely: auto-apply did nothing, the manual
+ *     button did nothing but warn "ta amunicja nie ma formuły obrażeń," and the chat-card button
+ *     label fell back to a vague "(TYP — formuła z broni)" placeholder. Exactly the "1d4 fire
+ *     damage isn't reflected anywhere, no way to apply it" symptom reported live, and the
+ *     "Nałóż ponownie" click producing that same warning (misread as a broken dialog).
+ *
+ * Fixed by preferring the weapon's own `system.damage.base` whenever `fixedDamage` is set (or the
+ * caliber id isn't recognised at all — the old per-callsite fallback this replaces), falling back
+ * to the caliber only when the weapon's own base has no usable dice. Dmuchawka's igła caliber also
+ * has an empty formula, but that weapon's own damage is a flat "+1" bonus with no dice at all
+ * (`number`/`denomination` both null) — this correctly still returns `null` for it rather than
+ * inventing a formula that was never there.
+ *
+ * @param {Item5e} item             The weapon (live, embedded).
+ * @param {object|null} caliber     `AMMO_CALIBER_MAP[caliberId]`, or null if unrecognised.
+ * @returns {{formula: string, type: string, props: string[]}|null}
+ */
+function _effectiveDamage(item, caliber) {
+  const preferWeaponDamage = (item.getFlag(MODULE_ID, "fixedDamage") === true) || !caliber;
+  if (preferWeaponDamage) {
+    const base = item.system?.damage?.base;
+    const n = Number(base?.number);
+    const d = Number(base?.denomination);
+    if (Number.isFinite(n) && n > 0 && Number.isFinite(d) && d > 0) {
+      return {
+        formula: `${n}d${d}`,
+        type: base?.types?.[0] ?? caliber?.type ?? "piercing",
+        props: caliber?.props ?? [],
+      };
+    }
+  }
+  if (caliber?.formula) return { formula: caliber.formula, type: caliber.type, props: caliber.props ?? [] };
+  return null;
+}
 
 /**
  * Parse a simple "NdM" damage formula into {number, denomination}.
