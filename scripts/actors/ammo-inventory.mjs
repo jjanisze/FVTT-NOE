@@ -160,10 +160,10 @@ function _onRenderActorSheetInjectAmmoButton(app, html) {
      li.style.marginBottom = "0";
      li.innerHTML = `
         <div class="item-row flexrow" style="display: flex; align-items: center; justify-content: space-between; background-color: #252830; height: 42px; border-bottom: 1px dotted #3B3D46; padding: 0 5px; color: #cacdd5;">
-            <div class="item-name item-action item-tooltip rollable flexrow" role="button" aria-label="${am.name}" style="flex: 2; align-items: center; gap: 8px;">
+            <div class="item-name item-action item-tooltip rollable flexrow" role="button" aria-label="${am.name}" style="flex: 2; min-width: 0; align-items: center; gap: 8px;">
                 ${iconHtml}
-                <div class="name name-stacked flexcol">
-                    <span class="title" style="color: #cacdd5; font-weight: 500;">${am.name}</span>
+                <div class="name name-stacked flexcol" style="min-width: 0;">
+                    <span class="title" title="${am.name}" style="display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; color: #cacdd5; font-weight: 500;">${am.name}</span>
                 </div>
             </div>
             <div class="item-detail item-price" data-column-id="price" style="flex: 0 0 80px; text-align: center; display: flex; align-items: center; justify-content: center;">

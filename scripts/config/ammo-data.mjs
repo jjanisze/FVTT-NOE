@@ -251,7 +251,11 @@ export const AMMO_CALIBERS = [
   /* ── Sygnałowa (Pistolet na Race — homebrew W Kolorze Kobaltu) ──── */
   {
     id: "race",
-    label: "Raca sygnałowa (do Pistoletu na Race)",
+    // Krótka etykieta, jak reszta katalogu — "do X" trafia do `note` poniżej, nie do nazwy (ten
+    // sam wzorzec co "Pocisk-strzykawka", ammo równie ekskluzywne dla jednej broni, Strzelby
+    // Palmera, ale bez tego w nazwie). Dłuższa wersja "Raca sygnałowa (do Pistoletu na Race)"
+    // przelewała się poza pole nazwy w widoku Amunicji na karcie — zgłoszone żywo na Raynaldzie.
+    label: "Raca sygnałowa",
     // TODO(icons): interim reuse — a flare cartridge is shell-shaped, close enough to a shotgun
     // shell, but no dedicated art commissioned yet (same "reuse the closest shape" call already
     // made for grenade-signal reusing smoke_grenade.svg).
