@@ -2552,3 +2552,29 @@ Zweryfikowane end-to-end na żywo: synthetic point-pick → „Wystrzel flarę" 
 prawdziwy `AmbientLight` na scenie (te same wartości co Flara: jasne 12 m / słabe 24 m / kolor
 `#ff1a1a` / animacja torch 10/10) → po 70 s czasu gry światło poprawnie zamiatane przez istniejący
 mechanizm wygasania. Wszystkie 152 istniejące testy nadal przechodzą.
+
+## Zmiany z 6 września 2026 (4) — Podwójne "Doładuj 1 nabój" (`weapons/magazine.mjs`)
+
+Zgłoszenie: Raynaldowy Pistolet na Race miał na karcie DWIE identyczne aktywności „Doładuj 1
+nabój". Sprawdzone na żywo na całym świecie: to samo dotknęło trzy bezwłaścicielskie bronie (AK,
+Light Fifty, UZI — u nich podwójna „Wymiana magazynka"). Wspólna przyczyna: `syncWeaponMagazine
+Activities` (dopisuje aktywności reload/loadOne/magSwap, jeśli ich jeszcze nie ma) była jedynym
+mechanizmem „upewnij się, że X istnieje" w całym module BEZ bramki `game.user.isGM` — każdy
+podłączony klient (GM i gracz jednakowo) niezależnie decydował „nic jeszcze nie ma, stwórzmy", a
+skoro gracz ma prawo zapisu do własnych, osadzonych przedmiotów, oba `item.createActivity(...)`
+się udawały. Realny wyścig między dwoma osobnymi przeglądarkami, którego lokalna blokada
+(`syncingManagedActivities`) nie mogła złapać — ona chroni tylko przed dwoma wywołaniami NA TYM
+SAMYM kliencie w tym samym ticku.
+
+Naprawione dodaniem `if (game.user.isGM)` do obu hooków (`createItem`/`updateItem`) i do
+startowego przemiatania `syncAllWeaponMagazineActivities()` przy `ready` — dokładnie ten sam wzorzec,
+którego już używają Flara/Latarka/Pochodnia/Pistolet na Race dla własnych aktywności. Sync
+magazynek↔uses (`syncAllMagazineUses`) zostaje bez bramki celowo — to deterministyczna funkcja
+`mag → uses`, więc nawet gdyby dwóch klientów policzyło ją "jednocześnie", zapiszą ten sam wynik;
+tylko tworzenie aktywności jest nie-idempotentne między klientami.
+
+Cztery już istniejące duplikaty skasowane ręcznie na żywo (Raynald/Pistolet na Race „Doładuj 1
+nabój"; świat/AK, Light Fifty, UZI „Wymiana magazynka") — zachowany zawsze pierwszy wpis (ten,
+który `_findManagedMagazineActivity` faktycznie od zawsze aktualizował), usunięty osierocony drugi.
+Pełne przemiecenie całego świata po naprawie: zero pozostałych duplikatów. Wszystkie 152 testy
+nadal przechodzą.

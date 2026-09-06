@@ -145,11 +145,16 @@ export function registerMagazines() {
   Hooks.on("renderItemSheet5e", onRenderItemSheet);
 
   Hooks.on("updateItem", onUpdateItemSyncMagazineUses);
+  // GM-gated (2026-09-06 bugfix — see doc comment on `syncWeaponMagazineActivities`): this one
+  // calls `item.createActivity(...)`, which is NOT idempotent across clients like the mag/uses
+  // sync above is — every connected client independently deciding "no managed activity yet,
+  // better create one" is exactly how items ended up with two "Doładuj 1 nabój"/"Wymiana
+  // magazynka" entries.
   Hooks.on("createItem", item => {
-    void syncWeaponMagazineActivities(item);
+    if (game.user.isGM) void syncWeaponMagazineActivities(item);
   });
   Hooks.on("updateItem", item => {
-    void syncWeaponMagazineActivities(item);
+    if (game.user.isGM) void syncWeaponMagazineActivities(item);
   });
   Hooks.on("dnd5e.preUseActivity", onPreUseActivity);
   Hooks.on("dnd5e.postUseActivity", onPostUseActivity);
@@ -173,8 +178,8 @@ export function registerMagazines() {
       };
     }
 
-    void syncAllMagazineUses();
-    void syncAllWeaponMagazineActivities();
+    void syncAllMagazineUses(); // deterministic mag→uses sync — harmless even if every client runs it
+    if (game.user.isGM) void syncAllWeaponMagazineActivities(); // creates activities — GM-only, see above
   });
 
   console.log("Neuroshima 5e | Magazine system registered");
@@ -901,6 +906,27 @@ async function syncAllWeaponMagazineActivities() {
   }
 }
 
+/**
+ * Ensures reload/loadOne/magSwap activities exist and are up to date on `item`, upserting by
+ * the `managedActivity`/`magazineAction` flags (`_findManagedMagazineActivity`).
+ *
+ * ## Bugfix (2026-09-06): why this must only ever run on the GM's client
+ *
+ * Player-reported: Raynald's Pistolet na Race had TWO identical "Doładuj 1 nabój" activities.
+ * Found the same duplication on three world weapon items too (AK/Light Fifty/UZI, both with
+ * doubled "Wymiana magazynka"). Root cause: this function's own callers (the `createItem`/
+ * `updateItem` hooks and the `ready`-time backfill sweep, all in `registerMagazines()`) used to
+ * run on EVERY connected client with no GM gate at all — unlike every other "ensure this
+ * activity/item exists" hook in this module (Flara/Latarka/Pochodnia/Pistolet na Race's own
+ * launch activity), which all check `game.user.isGM` first. `_findManagedMagazineActivity`
+ * correctly finds nothing on a brand-new item and decides to create one — but if TWO clients
+ * (the GM's and a player's, both legitimately allowed to write their own actor's embedded items)
+ * make that same "nothing yet, create one" decision before either sees the other's write, both
+ * `item.createActivity(...)` calls succeed independently. That's a real race between separate
+ * browser processes, not something a same-client guard (`syncingManagedActivities`, still needed
+ * for the unrelated case of two hooks firing on one client in the same tick) can catch. Now
+ * gated to `game.user.isGM` at every call site — see `registerMagazines()`.
+ */
 async function syncWeaponMagazineActivities(item) {
   if (!_shouldManageMagazineActivities(item)) return;
   if (syncingManagedActivities.has(item.uuid)) return;
