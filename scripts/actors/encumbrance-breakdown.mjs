@@ -65,6 +65,7 @@
 
 import { getSurowiecType, SUROWCE_TYPES } from "../config/surowce-data.mjs";
 import { getProwiantCategory } from "../config/prowiant-data.mjs";
+import { ABILITY_KEYS, hasAbility } from "./abilities.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const BAR_HEIGHT_PX = 22;
@@ -227,17 +228,32 @@ function _onRenderInjectBreakdown(app, html) {
   // this file's top doc comment.
   const rowAnchor = card?.closest(".top") ?? card;
   if (rowAnchor && !rowAnchor.parentElement?.querySelector(".neuro-ekwipunek-legend")) {
-    rowAnchor.after(_buildLegend(totals));
+    rowAnchor.after(_buildLegend(totals, actor));
   }
 }
 
-function _buildLegend(totals) {
+/**
+ * "Bez dna" badge — requested live (2026-09-06): a visible sign in the Ekwipunek view for WHY a
+ * carrying-capacity number looks doubled, not just a silent multiplier. `hasAbility` (not a
+ * bespoke check) — same shared bridge `actors/bez-dna.mjs` uses to decide whether the actual
+ * Active Effect exists; this only ever READS that state, never writes anything.
+ */
+function _buildBezDnaBadge(actor) {
+  if (!hasAbility(actor, ABILITY_KEYS.BEZ_DNA)) return "";
+  // `fa-box` (not a guessed/unverified icon name) — already confirmed rendering correctly in
+  // this exact install elsewhere in this codebase (`ammo-inventory.mjs`), see project memory
+  // on FA version mismatches silently tofu'ing unverified icon names.
+  return `<span class="neuro-legend-chip neuro-bez-dna-badge" title="Sztuczka „Pakowanie” — Udźwig użytkowy i maksymalny ×2">`
+    + `<i class="fas fa-box" aria-hidden="true"></i> Bez dna ×2</span>`;
+}
+
+function _buildLegend(totals, actor) {
   const legend = document.createElement("div");
   legend.className = "neuro-ekwipunek-legend";
 
   const row = document.createElement("div");
   row.className = "neuro-legend-row";
-  row.innerHTML = CATEGORY_ORDER
+  row.innerHTML = _buildBezDnaBadge(actor) + CATEGORY_ORDER
     .filter(id => (totals.get(id) ?? 0) > 0)
     .map(id => {
       const def = _categoryDef(id);

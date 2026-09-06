@@ -13,6 +13,7 @@
 import { SZTUCZKI } from "../config/sztuczki-data.mjs";
 import { ABILITY_KEYS, ABILITY_DEFINITIONS, getResolvedAbility, hasAbility } from "../actors/abilities.mjs";
 import { MANEUVERS, hasAramis, maneuverDC } from "../combat/melee-maneuvers.mjs";
+import { __testing as bezDna } from "../actors/bez-dna.mjs";
 import { MODULE_ID, scratchActor, scratchCleanup, sztuczkaItem, namedFeat } from "./helpers.mjs";
 
 /** Kopia normalizatora z `toolkit-medyk.mjs` — test kontraktu, więc celowo zduplikowana. */
@@ -113,6 +114,82 @@ export function registerSztuczkiBridgeTests(quench) {
 
       it("etykieta Sztuczki nadal pasuje do dopasowania po nazwie w module manewrów", function () {
         expect(SZTUCZKI.aramis.label.trim().toLowerCase()).to.equal("aramis");
+      });
+    });
+
+    describe("Bez dna (klauzula Sztuczki „Pakowanie” — Udźwig ×2)", function () {
+      it("rozpoznany po fladze `sztuczka:\"pakowanie\"` z compendium", async function () {
+        await equip(sztuczkaItem("pakowanie", SZTUCZKI.pakowanie.label));
+        expect(hasAbility(actor, ABILITY_KEYS.BEZ_DNA)).to.be.true;
+      });
+
+      it("rozpoznany po samej nazwie klauzuli — dokładnie kształt znaleziony żywcem na Raynaldzie", async function () {
+        await equip(namedFeat("Bez Dna"));
+        expect(hasAbility(actor, ABILITY_KEYS.BEZ_DNA), "„Bez Dna”").to.be.true;
+
+        await equip(namedFeat("Bez dna"));
+        expect(hasAbility(actor, ABILITY_KEYS.BEZ_DNA), "„Bez dna” (druga kapitalizacja)").to.be.true;
+      });
+
+      it("rozpoznany też po pełnej nazwie całej Sztuczki („Pakowanie”), nie tylko klauzuli", async function () {
+        await equip(namedFeat("Pakowanie"));
+        expect(hasAbility(actor, ABILITY_KEYS.BEZ_DNA)).to.be.true;
+      });
+
+      it("inna Sztuczka go nie udaje", async function () {
+        await equip(sztuczkaItem("szturmowiec", SZTUCZKI.szturmowiec.label));
+        expect(hasAbility(actor, ABILITY_KEYS.BEZ_DNA)).to.be.false;
+      });
+
+      describe("Active Effect (actors/bez-dna.mjs)", function () {
+        it("syncBezDnaEffect tworzy efekt, który dokładnie podwaja Udźwig", async function () {
+          await equip();
+          const baselineMax = actor.system.attributes.encumbrance.max;
+
+          await equip(namedFeat("Bez dna"));
+          await bezDna.syncBezDnaEffect(actor);
+
+          expect(actor.effects.get(bezDna.EFFECT_ID), "efekt utworzony").to.exist;
+          expect(actor.system.attributes.encumbrance.max, "dokładnie ×2 względem stanu bez Sztuczki")
+            .to.equal(baselineMax * 2);
+        });
+
+        it("usuwa efekt, gdy Sztuczka znika z aktora", async function () {
+          await equip(namedFeat("Bez dna"));
+          await bezDna.syncBezDnaEffect(actor);
+          expect(actor.effects.get(bezDna.EFFECT_ID), "przed usunięciem Sztuczki").to.exist;
+
+          await equip(); // usuwa wszystkie przedmioty, w tym Sztuczkę
+          await bezDna.syncBezDnaEffect(actor);
+          expect(actor.effects.get(bezDna.EFFECT_ID), "po usunięciu Sztuczki").to.be.undefined;
+        });
+      });
+
+      describe("Blokada duplikatów — „Multiple instances... shouldn't be allowed” (2026-09-06)", function () {
+        it("nie da się dodać drugiej kopii, gdy aktor już ma jedną", async function () {
+          await equip(namedFeat("Bez dna"));
+          const [dup] = await actor.createEmbeddedDocuments(
+            "Item", [{ name: "Bez Dna", type: "feat" }], { render: false }
+          );
+          expect(dup, "druga kopia nie powinna zostać utworzona").to.be.undefined;
+          expect(actor.items.filter(i => /bez\s*dna/i.test(i.name))).to.have.lengthOf(1);
+        });
+
+        it("pierwsza kopia na pustym aktorze nadal przechodzi", async function () {
+          await equip();
+          const [created] = await actor.createEmbeddedDocuments(
+            "Item", [{ name: "Bez dna", type: "feat" }], { render: false }
+          );
+          expect(created, "pierwsza kopia powinna przejść").to.exist;
+        });
+
+        it("nie blokuje innych feat'ów o niepowiązanej nazwie", async function () {
+          await equip(namedFeat("Bez dna"));
+          const [other] = await actor.createEmbeddedDocuments(
+            "Item", [{ name: "Szturmowiec", type: "feat" }], { render: false }
+          );
+          expect(other, "niepowiązany feat nie powinien zostać zablokowany").to.exist;
+        });
       });
     });
 

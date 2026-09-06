@@ -42,6 +42,7 @@ import { registerRescaleSurowceMigration } from "./migration/rescale-surowce-uni
 import { registerSrdCleanup } from "./config/srd-cleanup.mjs";
 import { registerClassRules } from "./actors/class-rules.mjs";
 import { registerCichyKrok } from "./actors/cichy-krok.mjs";
+import { registerBezDna } from "./actors/bez-dna.mjs";
 import { registerPDPanel } from "./actors/pd-panel.mjs";
 import { registerHealthPanel, healthApi } from "./actors/health-panel.mjs";
 import { registerDiseaseEffects, syncDiseaseEffects } from "./actors/disease-effects.mjs";
@@ -189,6 +190,7 @@ Hooks.once("init", () => {
   registerSrdCleanup();
   registerClassRules();
   registerCichyKrok();
+  registerBezDna();
   registerPDPanel();
 
   // Phase 4: Long-term survival layer

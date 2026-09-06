@@ -22,6 +22,7 @@
  * | `szturmowiec` | Sztuczka `Szturmowiec` | `sztuczki` |
  * | `szybkaWymiana` + `szybkiePrzeladowanie` | Sztuczka `Szybkie palce` (obie naraz) | `sztuczki` |
  * | `wychuchanaSpluwa` | zdolność z Pochodzenia `Wychuchana spluwa` | `zdolnosci-pochodzenia` |
+ * | `bezDna` | klauzula „Bez dna" Sztuczki `Pakowanie` | `sztuczki` |
  *
  * Mapowanie nie mieszka tutaj — deklarują je same dane (`legacyAbilityKey` /
  * `legacyAbilityKeys` w `class-features-data.mjs`, `sztuczki-data.mjs`,
@@ -47,7 +48,8 @@ export const ABILITY_KEYS = {
   SZYBKIE_PRZELADOWANIE: "szybkiePrzeladowanie",
   GRAD_OLOWIU: "gradOlowiu",
   RUCHOME_GNIAZDO_CKM: "ruchomeGniazdoCkm",
-  SZTURMOWIEC: "szturmowiec"
+  SZTURMOWIEC: "szturmowiec",
+  BEZ_DNA: "bezDna"
 };
 
 /**
@@ -89,6 +91,15 @@ export const ABILITY_DEFINITIONS = {
     label: "Szturmowiec",
     aliases: ["szturmowiec"],
     noticeColor: "#7a4b2f"
+  },
+  [ABILITY_KEYS.BEZ_DNA]: {
+    label: "Bez dna",
+    // "bez dna" covers Raynald's actual shape: TWO differently-capitalised bare-name feats
+    // ("Bez Dna" AND "Bez dna") for just this one clause — `_normalizeName` lowercases before
+    // matching, so one alias covers both. "pakowanie" covers the OTHER shape: a real compendium
+    // item literally named after the whole Sztuczka ("Pakowanie"), which grants this clause too.
+    aliases: ["bez dna", "pakowanie"],
+    noticeColor: "#4a6b4a"
   }
 };
 

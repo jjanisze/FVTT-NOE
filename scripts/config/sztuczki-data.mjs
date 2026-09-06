@@ -276,7 +276,18 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 MDR lub INT; wyciągnięcie dowolnego przedmiotu z plecaka jako Darmowa Interakcja; "
       + "Udźwig ×2.",
     category: "rekonesans",
-    auto: []
+    // Tylko klauzula „Bez dna" ma legacy-klucz — to jedyna część automatyzowana (zob. `auto`
+    // poniżej). „Mam pod ręką [I]" to osobno nazwana klauzula tej samej Sztuczki (znaleziona
+    // żywcem jako WŁASNY bare-name feat, dokładnie jak Bez Dna) — bez mechaniki, patrz `manual`.
+    legacyAbilityKeys: ["bezDna"],
+    auto: [{
+      what: "Bez dna: Udźwig użytkowy i maksymalny ×2 — Active Effect na "
+        + "system.attributes.encumbrance.multipliers.overall, dopinany/odpinany automatycznie "
+        + "zależnie od posiadania Sztuczki. Plakietka w widoku Ekwipunku.",
+      where: "actors/bez-dna.mjs"
+    }],
+    manual: "„Mam pod ręką [I]” (wyciągnięcie przedmiotu z plecaka jako Darmowa Interakcja) nie jest "
+      + "automatyzowane."
   },
   pancerny: {
     label: "Pancerny",
