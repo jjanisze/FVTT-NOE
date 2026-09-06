@@ -381,30 +381,13 @@ async function _addAmmoToActor(actor, ammoId, quantity) {
     await existing.update({ "system.quantity": newQty });
     ui.notifications.info(`Zwiększono ilość ${caliber.label} do ${newQty}.`);
   } else {
-    // Mapa ikon
-    const fileMap = {
-      "22lr": "ammo_22_lr.svg",
-      "38spl": "ammo_38_spl.svg",
-      "9mm": "ammo_9_mm.svg",
-      "45acp": "ammo_45_acp.svg",
-      "44mag": "ammo_44_mag.svg",
-      "556": "ammo_5_56_mm.svg",
-      "76239ak": "ammo_7_62x39_mm.svg",
-      "762": "ammo_7_62_mm.svg",
-      "3006": "ammo_30_06.svg",
-      "50bmg": "ammo_50_bmg.svg",
-      "12ga_s": "ammo_12_ga.svg",
-      "12ga_b": "ammo_12_ga.svg",
-      "40mm": "ammo_40mm_grenade.svg",
-      "60mm": "ammo_60mm_rocket.svg",
-      "120mm": "ammo_120mm_mortar.svg",
-      "strzala": "ammo_arrow.svg",
-      "belt": "ammo_bolt.svg",
-      "kulka": "ammo_ball_bearing.svg",
-      "igla": "ammo_dart.svg",
-      "strzykawka": "ammo_dart.svg"
-    };
-    const iconFilename = fileMap[caliber.id] || "ammo_9_mm.svg";
+    // Ikona: bierzemy wprost z katalogu (ammo-data.mjs's `AMMO_CALIBERS[].icon` — dokładnie po to
+    // ten pole tam jest udokumentowane: "Used when programmatically creating ammo items…").
+    // Był tu wcześniej osobny, ręcznie utrzymywany fileMap z dokładnie tymi samymi wartościami
+    // dla każdego istniejącego kalibru — czysty risk dryfu (każdy nowy kaliber w AMMO_CALIBERS,
+    // który ktoś zapomni dopisać tutaj, cicho dostawałby ikonę 9 mm zamiast własnej). Usunięty
+    // przy okazji dodawania kalibru "race" (Pistolet na Race), zamiast dopisywać go do dwóch miejsc.
+    const iconFilename = caliber.icon || "ammo_9_mm.svg";
 
     // Utwórz nowy
     const itemData = {

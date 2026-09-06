@@ -378,6 +378,21 @@ const BRON_PALNA_KROTKA = [
     weight: 2, price: 20, avail: 50,
     note: "Tabela podaje kaliber i obrażenia jako „Różne” — 9 mm to wartość domyślna.",
     manual: ["Kaliber i kostkę obrażeń ustala MG przy tworzeniu egzemplarza."]
+  },
+  {
+    // Homebrew, W Kolorze Kobaltu (nie z podręcznika) — patrz docs/Kobalt.md. Jednostrzałowa
+    // (Wmag. 1, ładowanie), tak jak Samoróbka powyżej. Główne zastosowanie to sygnalizacja i
+    // oświetlenie punktu trafienia/rzutu (patrz items/flara.mjs) — obrażenia poniżej to tylko
+    // to, co się dzieje, gdy ktoś strzeli racą prosto w kogoś.
+    id: "pistolet-na-race", name: "Pistolet na Race", type: "palnaKrotka", icon: "pistolet_na_race.svg",
+    damage: { number: 1, denomination: 4, types: ["fire"] },
+    range: { value: 12, long: 30 },
+    props: ["wmag", "tryb_p", "ladowanie"],
+    caliber: "race", mag: { kind: "wmag", max: 1 }, fixedDamage: true,
+    weight: 0.6, price: 30, avail: 30,
+    note: "Wystrzeliwuje race sygnałowe — patrz Flara i Raca sygnałowa. Trafienie bezpośrednie: "
+      + "1k4 od ognia; cel wykonuje RO Zręczność ST 12 albo zostaje Podpalony.",
+    manual: ["RO na Podpalenie przy trafieniu bezpośrednim rozstrzyga MG (jak przy Koktajlu Mołotowa) — nie jest automatyzowane."]
   }
 ];
 

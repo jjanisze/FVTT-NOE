@@ -247,6 +247,27 @@ export const AMMO_CALIBERS = [
     note: "Rzadka amunicja — można napełnić trucizną.",
     price: 4, avail: 20, weight: 0.010
   },
+
+  /* ── Sygnałowa (Pistolet na Race — homebrew W Kolorze Kobaltu) ──── */
+  {
+    id: "race",
+    label: "Raca sygnałowa (do Pistoletu na Race)",
+    // TODO(icons): interim reuse — a flare cartridge is shell-shaped, close enough to a shotgun
+    // shell, but no dedicated art commissioned yet (same "reuse the closest shape" call already
+    // made for grenade-signal reusing smoke_grenade.svg).
+    icon: "ammo_12_ga.svg",
+    category: "Sygnałowa",
+    // Empty formula — the weapon (Pistolet na Race, weapons-data.mjs) carries its own base
+    // damage, same shape as bows/crossbows here. `type` below is otherwise unused (every reader
+    // in weapons/ammo.mjs gates on `caliber.formula` truthy first) but kept for the same
+    // self-documenting reason "strzala"/"kulka"/etc. keep theirs.
+    formula: "",
+    type: "fire",
+    props: [],
+    note: "Amunicja wyłącznie do Pistoletu na Race. Lżejsza i dalej lecąca niż ręczna Flara "
+      + "(patrz items/flara.mjs) — ale bez pistoletu bezużyteczna, w przeciwieństwie do Flary.",
+    price: 5, avail: 40, weight: 0.05
+  },
 ];
 
 /** Fast lookup by id. */

@@ -81,6 +81,31 @@ zasięgu. Kąty stożka (45°/90°) zostają bez zmian — zmienia się tylko za
 ✅ *Zaimplementowane — działa razem z przełącznikiem Kobaltu: wyłączenie go w Ustawieniach
 świata przywraca latarkom pełny zasięg z podręcznika.*
 
+### 7. Flara
+
+Ręczna raca sygnałowa/oświetleniowa — jeden ruch: rzuć i zapal. Ląduje we wskazanym punkcie i
+pali się **czerwonym, mocno migoczącym światłem przez 1 minutę** (jasne 12 m, słabe 24 m — to
+dwa razy więcej niż Pochodnia Smołowa), zanim zgaśnie na dobre. Światło blokują ściany jak
+każde inne. Nie wymaga żadnej broni. Podręcznik nazywa efekt („flara świecąca przez 1 minutę, ST
+15") jako jedno z zastosowań narzędzi Małego Rusznikarza — to jest przedmiot, który ten efekt
+faktycznie daje w ręce.
+
+✅ *Zaimplementowane (`items/flara.mjs`) — prawdziwe, samodzielne światło na scenie w punkcie
+rzutu (nie tylko opisowy sygnał), niezależne od tego, gdzie potem stanie rzucający.*
+
+### 8. Pistolet na Race i Raca sygnałowa
+
+Jednostrzałowa broń domowa (nie z podręcznika) strzelająca racami sygnałowymi — ten sam kształt
+mechaniczny co Samoróbka (Wmag. 1, wymaga ręcznego załadowania po każdym strzale). Główne
+zastosowanie to sygnalizacja/oświetlenie punktu trafienia, tak jak Flara powyżej. Trafienie
+bezpośrednie w cel: **1k4 od ognia**, cel wykonuje RO Zręczność ST 12 albo zostaje Podpalony (RO
+rozstrzyga MG ręcznie, tak jak przy Koktajlu Mołotowa). Raca sygnałowa (amunicja) jest lżejsza i
+lata dalej niż ręczna Flara, ale bez samego pistoletu jest bezużyteczna — odwrotnie niż Flara.
+
+✅ *Zaimplementowane (`config/weapons-data.mjs`, `config/ammo-data.mjs`) — bez przełącznika
+Kobaltu: to całkowicie nowa treść, nie ma czystej wersji RAW, do której dałoby się wrócić po
+wyłączeniu (ta sama logika co przy Pochodni).*
+
 ## Dopisywanie nowej zasady
 
 Każda nowa zasada Kobaltu jako osobny nagłówek `###`, w miarę możności:

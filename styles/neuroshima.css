@@ -1903,6 +1903,26 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
 
 .neuro-gogle-card p { margin: 0; font-size: 12px; line-height: 1.4; }
 
+/* ---- Flara (rzuć i zapal) ---- */
+
+.neuro-flara-card {
+  padding: 6px 8px;
+  border-left: 4px solid #ff1a1a;
+  border-radius: 0 4px 4px 0;
+  background: rgba(255, 26, 26, 0.08);
+}
+
+.neuro-flara-head {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+  color: #ff1a1a;
+}
+
+.neuro-flara-card p { margin: 0; font-size: 12px; line-height: 1.4; }
+
 /* ---- Zdolności klasowe "kości raz na rundę" (Wściekły cios i pokrewne) ---- */
 
 .neuro-resource-dice-card {
