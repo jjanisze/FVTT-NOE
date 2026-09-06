@@ -283,7 +283,16 @@ export function seqEffect(file, source, {
   if (label) {
     fx = fx.text(label, labelStyle ?? {
       fill: "#ffffff", fontFamily: "Arial Black, Arial, sans-serif",
-      fontSize: 24, stroke: "#000000", strokeThickness: 5
+      // Sequencer's own renderer multiplies this by (150 / canvas.grid.size)
+      // before handing it to PIXI — a grid-relative normalization, NOT a literal
+      // px size (canvas-effect.js: `fontSize * (150 / canvas.grid.size)`).
+      // Confirmed live: an unscaled 24 rendered at ~56px on this world's ~64px-
+      // grid scenes — fine-looking on the biggest (6-square) blast tested, but
+      // "absolutely gigantic" against a real, small 2-square one. Pre-dividing
+      // here keeps the actual RENDERED size a fixed, sane ~22px regardless of
+      // whatever grid resolution the current scene happens to use.
+      fontSize: 22 * ((canvas.grid?.size ?? 150) / 150),
+      stroke: "#000000", strokeThickness: 4
     });
   }
   if (name) fx = fx.name(name);

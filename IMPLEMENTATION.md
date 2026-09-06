@@ -2782,3 +2782,28 @@ Zweryfikowane na żywo: zapis flagi + odczyt pól `Drawing` (bare gdy VFX, widoc
 czytelną etykietą na wybuchu. Realny znacznik z rzutu Raynalda (sprzed tej poprawki) zostawiony bez
 zmian — nie dostanie retroaktywnie flagi wygaśnięcia, bo powstał przed tą sesją; do ręcznego usunięcia
 kiedy MG uzna za stosowne. Wszystkie 152 testy nadal przechodzą.
+
+## Zmiany z 6 września 2026 (9) — etykieta na wybuchu była ogromna
+
+Natychmiastowa obserwacja po (8): „tekst «granat improwizowany» jest absolutnie ogromny".
+
+Prześledzone wprost w źródle Sequencera (`canvas-effects/canvas-effect.js`), nie zgadywane:
+`.text()` NIE przyjmuje dosłownego rozmiaru w pikselach — silnik mnoży podany `fontSize` przez
+`(150 / canvas.grid.size)` zanim trafi do PIXI. Na realnych scenach tego świata (siatka ~64 px)
+to mnożnik ×2,34 — wysłane `fontSize: 24` renderowało się jako ~56 px. Na największym granacie,
+którym to testowałem (odłamkowy, 6 kratek), 56 px wyglądało znośnie; na małym, prawdziwym rzucie
+Raynalda (improwizowany, tylko 2 kratki) to samo ~56 px wyglądało absurdalnie wielkie względem
+maleńkiego sprite'a — stąd rozjazd między moim testem a zgłoszeniem.
+
+Naprawione podzieleniem z góry: `fontSize: 22 * (canvas.grid.size / 150)`, co daje stały,
+rozsądny ~22 px na wyjściu niezależnie od rozdzielczości siatki danej sceny. Zweryfikowane na
+żywo liczbowo (`fontSize` wysłane do Sequencera: 9,39 → `9,39 × 150/64 = 22`) i zrzutem ekranu na
+tym samym małym granacie.
+
+Przy okazji: realny znacznik z rzutu Raynalda (ten sam z (8), zostawiony wtedy bez zmian) rzeczywiście
+używał starego, zbyt dużego rozmiaru — to na nim gracz to zauważył. Skoro poprawka jest czysto
+kosmetyczna i odwracalna, podmieniono na żywo tylko jego efekt VFX (ten sam plik, pozycja, rozmiar,
+`tieToDocuments`) na wersję z poprawną czcionką, zamiast zostawiać go brzydkim do czasu aż sam
+wygaśnie/MG go usunie — sam `Drawing` (i jego 60-sekundowe wygaśnięcie z (8)) nietknięty.
+
+Wszystkie 152 testy nadal przechodzą.
