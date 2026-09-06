@@ -33,26 +33,37 @@
  * longer fail for a mundane reason, only for the same "actor got deleted
  * mid-flow" class of edge case nothing else in this file guards against either.
  *
- * ## Explosion VFX + why it disappears exactly when the GM says so (2026-09-06)
+ * ## Explosion VFX + two independent ways it disappears (2026-09-06, + follow-up)
  *
  * `_spawnExplosionVfx` plays a Sequencer sprite (see `config/explosion-vfx.mjs`
  * for the asset table and why two families exist) at the blast point,
  * `.persist()`ed and `.tieToDocuments(markerDoc)`ed to the SAME Drawing/
  * MeasuredTemplate the GM just created. Sequencer ends a tied effect the instant
  * any tied document is deleted — so the fire disappears together with the zone
- * marker, automatically, with no new GM step and no separate cleanup hook to
- * maintain here. Chosen over a fixed per-round timer on purpose: the catalog's
- * own text disagrees on what "resolved" even means (Koktajl Mołotowa's card
- * literally says "Obszar pali się 1 rundę"; a plain frag grenade has no
- * lingering burn at all) — but in every case "resolved" already means "the GM
- * deletes the zone marker once its rules are done being applied," which is the
- * one moment already common to all of them and the one the GM already produces
- * today without being asked to add a second click. Scoped to
- * `_placeExplosionTemplate`'s callers only (real blasts with a damage formula) —
- * never mine placement (an armed mine hasn't exploded yet) and never a grenade
- * whose effect has no dice at all (smoke/gas/flashbang — no matching asset
- * exists, so it's silently skipped rather than shown wrong; see
- * `explosion-vfx.mjs`'s own doc comment).
+ * marker the moment the GM manually deletes it, with no separate cleanup hook
+ * to write for that case. Scoped to real blasts with a damage formula, never
+ * mine placement (an armed mine hasn't exploded yet) and never a grenade whose
+ * effect has no dice at all (smoke/gas/flashbang — no matching asset exists, so
+ * it's silently skipped rather than shown wrong; see `explosion-vfx.mjs`'s own
+ * doc comment).
+ *
+ * That covers "the GM is done with it right now," but a GM who just advances
+ * world time (not the combat tracker's turn counter) and never clicks delete
+ * found neither the rectangle nor the sprite ever went away by themselves —
+ * "I don't see any reason as a GM why I'd want the explosion to stay there."
+ * `_sweepExpiredExplosiveMarkers`, on `updateWorldTime`, is the second,
+ * independent way out: every non-mine marker also carries a plain
+ * `explosiveExpiresAt` (`EXPLOSIVE_MARKER_LIFETIME_SECONDS` from creation,
+ * see that constant's own comment for why 60s), and whichever comes first —
+ * the GM deleting the marker by hand, or the sweep finding its time is up —
+ * ends the tied VFX the same way, because both paths ultimately delete the
+ * same tied document.
+ *
+ * The marker itself is now drawn BARE (no border/fill/label) whenever VFX
+ * will actually show, with the label baked onto the sprite instead — a GM
+ * watching a real throw found the rectangle sitting BELOW the explosion
+ * sprite with its own label half-hidden underneath it, wanted "a single
+ * graphical representation." See the cube branch of `_spawnExplosiveMarker`.
  */
 import { GRENADE_TYPES, GRENADE_MAP } from "../config/ammo-data.mjs";
 import { playExplosiveSoundForSubtype } from "../weapons/sounds.mjs";
@@ -65,13 +76,56 @@ const MODULE_ID = "neuroshima-2026-overrides";
 //  damageType, hasDamageFormula, nonce}
 const FLAG_PENDING_EXPLOSIVE = "explosivePendingPlacement";
 
+// How long a non-mine blast marker (+ its tied VFX) sticks around before the
+// `updateWorldTime` sweep below removes it on its own (2026-09-06 follow-up —
+// a GM advancing world time found neither the rectangle nor the explosion
+// sprite ever went away by themselves). ~10 rounds at 6s/round, per the same
+// math the GM used to describe the problem — and, conveniently, this also
+// covers the catalog's own explicit durations without contradicting any of
+// them: Koktajl Mołotowa's "pali się 1 rundę" (6s) and the smoke/gas/flashbang
+// trio's "(1 min)" (60s) both finish at or before this fires, so nothing is
+// ever swept away before its own written duration is up — only after.
+// Mines are deliberately excluded (never get this flag) — an armed mine is
+// meant to persist until triggered or defused, not time out.
+const EXPLOSIVE_MARKER_LIFETIME_SECONDS = 60;
+
 export function registerGrenadeInventory() {
   for (const hookName of ["renderActorSheet", "renderCharacterActorSheet", "renderNPCActorSheet"]) {
     Hooks.on(hookName, _onRenderActorSheetInjectGrenadeSection);
   }
   Hooks.on("renderChatMessageHTML", _onRenderExplosiveChatCard);
   Hooks.on("updateActor", onUpdateActor);
+  Hooks.on("updateWorldTime", onWorldTime);
   console.log("Neuroshima 5e | Explosives inventory UI registered");
+}
+
+function onWorldTime() {
+  _sweepExpiredExplosiveMarkers().catch(e => console.warn(`${MODULE_ID} | grenade-inventory: expiry sweep failed`, e));
+}
+
+/** GM-only: delete any blast marker (Drawing or MeasuredTemplate) whose time is up, on every scene. */
+async function _sweepExpiredExplosiveMarkers() {
+  if (!game.user.isActiveGM) return;
+  const now = game.time.worldTime;
+
+  for (const scene of game.scenes) {
+    const isExpired = doc => {
+      const exp = doc.getFlag(MODULE_ID, "explosiveExpiresAt");
+      return Number.isFinite(exp) && exp <= now;
+    };
+
+    const drawingIds = scene.drawings.filter(isExpired).map(d => d.id);
+    if (drawingIds.length) {
+      await scene.deleteEmbeddedDocuments("Drawing", drawingIds)
+        .catch(e => console.warn(`${MODULE_ID} | grenade-inventory: drawing expiry cleanup failed`, e));
+    }
+
+    const templateIds = scene.templates.filter(isExpired).map(t => t.id);
+    if (templateIds.length) {
+      await scene.deleteEmbeddedDocuments("MeasuredTemplate", templateIds)
+        .catch(e => console.warn(`${MODULE_ID} | grenade-inventory: template expiry cleanup failed`, e));
+    }
+  }
 }
 
 function _onRenderActorSheetInjectGrenadeSection(app, html) {
@@ -473,6 +527,12 @@ async function _spawnExplosiveMarker(actor, pending) {
     const pxPerGrid = Number(scene.grid?.size ?? 100);
     const pxPerUnit = pxPerGrid / unitsPerGrid;
     const area = pending.area ?? { kind: "circle", radius: 1.5, label: "Koło 3 m" };
+    const now = game.time.worldTime;
+    // VFX only for a real, damaging blast (never a mine — arming isn't detonating)
+    // and only when Sequencer is actually there to play it. When true, the
+    // marker itself goes visually bare — see the cube branch below.
+    const hasVfx = pending.kind !== "mine" && pending.hasDamageFormula && !!game.modules.get("sequencer")?.active;
+    const label = _buildSceneLabel(pending.itemName);
 
     let markerDoc = null;
 
@@ -503,19 +563,37 @@ async function _spawnExplosiveMarker(actor, pending) {
     } else if (area.kind === "cube") {
       // Foundry v14 potrafi źle renderować MeasuredTemplate typu "rect" (artefakty 3/6).
       // Dla sześcianu stawiamy Drawing (prostokąt), który jest stabilny i usuwalny jak zwykły rysunek.
+      //
+      // When `hasVfx`, this rectangle is deliberately drawn BARE (no border, no
+      // fill, no label) — it still exists as the tieToDocuments anchor and the
+      // expiry-sweep target, but the explosion sprite is the only thing anyone
+      // actually sees, with the label baked onto the sprite itself (see
+      // `_spawnExplosionVfx`). Without VFX (smoke/gas/flashbang, or Sequencer
+      // inactive) it keeps the old visible style, since it's then the only
+      // marker there is. 2026-09-06 follow-up: a GM watching a real throw found
+      // the rectangle sitting BELOW the explosion sprite with its label
+      // half-hidden underneath — this is what fixed that, not a z-index tweak,
+      // since two independent rendering systems (core Drawing vs. a Sequencer
+      // effect) don't share one paint order to tweak in the first place.
       const side = Math.max(0.5, Number(area.side ?? 3));
       const sidePx = side * pxPerUnit;
       const [created] = await scene.createEmbeddedDocuments("Drawing", [{
         x: pending.x - (sidePx / 2),
         y: pending.y - (sidePx / 2),
         shape: { type: "r", width: sidePx, height: sidePx },
-        strokeWidth: 2,
+        strokeWidth: hasVfx ? 0 : 2,
         strokeColor: pending.color,
-        strokeAlpha: 0.9,
+        strokeAlpha: hasVfx ? 0 : 0.9,
         fillType: 1,
         fillColor: pending.color,
-        fillAlpha: 0.2,
-        text: _buildSceneLabel(pending.itemName),
+        // Foundry's DrawingDocument rejects one that has no visible text, fill,
+        // OR line at all ("Joint Validation" — confirmed live: creation silently
+        // no-ops, leaving an untied orphan VFX effect behind it). 0.02 keeps a
+        // technically-nonzero fill so validation passes while staying
+        // imperceptible — doubly so once the opaque explosion sprite is sitting
+        // on top of it.
+        fillAlpha: hasVfx ? 0.02 : 0.2,
+        text: hasVfx ? "" : label,
         fontSize: 16,
         locked: false,
         flags: {
@@ -523,12 +601,18 @@ async function _spawnExplosiveMarker(actor, pending) {
             explosive: true,
             explosiveAreaText: pending.areaText ?? "",
             explosiveAreaResolved: area.label,
-            explosiveDrawing: true
+            explosiveDrawing: true,
+            explosiveExpiresAt: now + EXPLOSIVE_MARKER_LIFETIME_SECONDS
           }
         }
       }]);
       markerDoc = created;
     } else {
+      // Circle+damage doesn't occur anywhere in the current catalog (every
+      // damaging grenade is cube-shaped; the only circle is the non-damaging
+      // signal flare) — kept visually as before rather than chasing the same
+      // bare-marker treatment through MeasuredTemplate's more limited styling
+      // fields for a combination nothing today actually creates.
       const [created] = await scene.createEmbeddedDocuments("MeasuredTemplate", [{
         user: game.user.id,
         x: pending.x,
@@ -542,15 +626,16 @@ async function _spawnExplosiveMarker(actor, pending) {
           [MODULE_ID]: {
             explosive: true,
             explosiveAreaText: pending.areaText ?? "",
-            explosiveAreaResolved: area.label
+            explosiveAreaResolved: area.label,
+            explosiveExpiresAt: now + EXPLOSIVE_MARKER_LIFETIME_SECONDS
           }
         }
       }]);
       markerDoc = created;
     }
 
-    if (pending.kind !== "mine" && pending.hasDamageFormula) {
-      _spawnExplosionVfx(scene, pending.x, pending.y, area, pending.damageType, markerDoc);
+    if (hasVfx) {
+      _spawnExplosionVfx(scene, pending.x, pending.y, area, pending.damageType, markerDoc, label);
     }
   } finally {
     try { await actor.unsetFlag(MODULE_ID, FLAG_PENDING_EXPLOSIVE); } catch (_e) { /* aktor mógł już zniknąć */ }
@@ -560,9 +645,11 @@ async function _spawnExplosiveMarker(actor, pending) {
 /**
  * Play the matching explosion sprite at (x,y) on `scene`, sized to the blast's
  * real footprint and tied to `markerDoc` — see this file's top doc comment,
- * "Explosion VFX" section, for why tieing beats a fixed-round timer.
+ * "Explosion VFX" section, for why tieing beats a fixed-round timer. Carries
+ * `label` itself (Sequencer's `.text()`) since the marker Drawing is drawn
+ * bare whenever this is called — see the cube branch of `_spawnExplosiveMarker`.
  */
-function _spawnExplosionVfx(scene, x, y, area, damageType, markerDoc) {
+function _spawnExplosionVfx(scene, x, y, area, damageType, markerDoc, label) {
   const distancePerSquare = Number(scene.grid?.distance ?? 1.5) || 1.5;
   const diameterMeters = area.kind === "cube"
     ? Number(area.side ?? 3)
@@ -579,7 +666,8 @@ function _spawnExplosionVfx(scene, x, y, area, damageType, markerDoc) {
     fadeIn: 150,
     fadeOut: 500,
     name: `neuro-explosion-${markerDoc?.id ?? foundry.utils.randomID(6)}`,
-    tieTo: markerDoc ?? undefined
+    tieTo: markerDoc ?? undefined,
+    label
   });
 }
 

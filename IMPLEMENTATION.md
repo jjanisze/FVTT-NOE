@@ -2738,3 +2738,47 @@ cena za problem, który miał dziesięcioliniowe rozwiązanie.
 Zweryfikowane na żywo (zapis flagi na Boarze, symulacja sześcianu/koła/miny, zrzut ekranu wybuchu na
 mapie, automatyczne sprzątnięcie po usunięciu `Drawing`), posprzątane po teście. Wszystkie 152 testy
 nadal przechodzą.
+
+## Zmiany z 6 września 2026 (8) — pierwsza żywa próba: podwójna grafika i wybuch, który nie znika
+
+Raynald naprawdę rzucił granatem na żywo (poprzednia sesja: pełny GM-relay + VFX). Dwa zgłoszenia z
+tej pierwszej realnej próby.
+
+### „Zielony prostokąt z tekstem POD wybuchem — jedna reprezentacja graficzna?"
+
+`Drawing` i efekt Sequencera to dwa osobne systemy renderowania bez wspólnego z-indexu do
+przestawienia — nie da się tego „naprawić" priorytetem warstwy. Zamiast tego: gdy wybuch faktycznie
+dostaje VFX, `Drawing` rysuje się teraz PRAWIE bez śladu (bez obramowania, bez etykiety), a etykieta
+przenosi się NA sam sprite wybuchu przez `.text()` Sequencera — dzięki temu tekst i grafika to
+dosłownie jeden obiekt, więc nie ma czego przestawiać. Bez VFX (granaty dymne/gazowe/hukowe albo brak
+Sequencera) prostokąt zostaje dokładnie taki jak był — wtedy to jedyna grafika, jaka jest.
+
+Pułapka po drodze: `Drawing` całkiem bez obramowania, wypełnienia i tekstu narusza własną walidację
+Foundry („Joint Validation: Drawings must have visible text, a visible fill, or a visible line") —
+`createEmbeddedDocuments` cicho nic nie tworzy, zostawiając osierocony, niedowiązany efekt Sequencera
+(znaleziono to wprost w logu konsoli, nie zgadnięte). Naprawione zostawieniem znikomego, ale
+niezerowego wypełnienia (`fillAlpha: 0.02`) — technicznie „widoczne" dla walidacji, w praniu
+niewidoczne, tym bardziej pod nieprzezroczystym sprite'em wybuchu na wierzchu. Zweryfikowane na żywo
+zrzutem ekranu — pojedyncza, czytelna etykieta na wybuchu, bez śladu prostokąta.
+
+### „Minęła minuta, wybuch dalej stoi — nie widzę po co"
+
+Zgadza się — `tieToDocuments` kończy efekt razem z `Drawing`, ale tylko gdy MG faktycznie go usunie
+ręcznie; sam upływ czasu w grze nic nie sprzątał. Dodano drugi, niezależny mechanizm:
+`EXPLOSIVE_MARKER_LIFETIME_SECONDS` (60 s) na każdym niebędącym miną znaczniku, zamiatane na
+`updateWorldTime` (wzorem `flara.mjs`) — który z dwóch, usunięcie ręczne czy zamiecenie po czasie,
+nastąpi pierwsze, kończy to samo dowiązanie. 60 s wybrane wprost z matematyki gracza („rundę to 6 s,
+minęła minuta to dziesięć rund") — i, jak się okazało, pasuje też do własnego tekstu katalogu:
+Koktajl Mołotowa („pali się 1 rundę" = 6 s) i trio dymny/gazowy/hukowy („1 min" = 60 s) oba kończą
+się o czasie lub wcześniej, nigdy po fakcie. Miny świadomie wyłączone z zamiatania — uzbrojona mina
+ma trwać do wyzwolenia/rozbrojenia, nie wygasnąć samoistnie.
+
+„Może zostawiłbym wypaloną plamę" — to już zanotowany, nie zbudowany pomysł w `PLAN_shooting_vfx.md`
+(„scorch/burn marks... needs a bespoke decal/tile system"); nie budowane teraz, bo o to akurat nie
+proszono wprost.
+
+Zweryfikowane na żywo: zapis flagi + odczyt pól `Drawing` (bare gdy VFX, widoczny bez VFX), symulacja
+`updateWorldTime` z już-wygasłą flagą (znacznik i powiązany efekt znikają razem), zrzut ekranu z
+czytelną etykietą na wybuchu. Realny znacznik z rzutu Raynalda (sprzed tej poprawki) zostawiony bez
+zmian — nie dostanie retroaktywnie flagi wygaśnięcia, bo powstał przed tą sesją; do ręcznego usunięcia
+kiedy MG uzna za stosowne. Wszystkie 152 testy nadal przechodzą.

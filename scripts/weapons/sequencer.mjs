@@ -242,6 +242,12 @@ export function seqStopLoop(origin) {
  *   deleted, instead of requiring a separate cleanup hook.
  * @param {boolean} [opts.belowTokens=false]   Render under the token layer (ground-level VFX).
  * @param {boolean} [opts.randomRotation=false]
+ * @param {string}  [opts.label]        Text baked ONTO the effect itself (Sequencer's
+ *   `.text()`) — guaranteed to share the effect's own paint order/position, unlike a
+ *   separate Drawing's label, which renders on a different layer with no shared
+ *   z-index to arbitrate (this is what grenade-inventory.mjs's blast marker hit).
+ * @param {object}  [opts.labelStyle]   PIXI TextStyle override; defaults to a bold
+ *   white-on-black-stroke style sized for readability over a bright sprite.
  * @param {number}  [opts.fadeIn=0]
  * @param {number}  [opts.fadeOut=400]
  * @param {number}  [opts.delay=0]
@@ -250,6 +256,7 @@ export function seqStopLoop(origin) {
 export function seqEffect(file, source, {
   scale = 1, opacity = 1, attach = false, name, persist = false,
   sizeSquares, tieTo, belowTokens = false, randomRotation = false,
+  label, labelStyle,
   fadeIn = 0, fadeOut = 400, delay = 0
 } = {}) {
   const Seq = _getSequencer();
@@ -273,6 +280,12 @@ export function seqEffect(file, source, {
   if (persist) fx = fx.persist();
   if (belowTokens) fx = fx.belowTokens();
   if (randomRotation) fx = fx.randomRotation();
+  if (label) {
+    fx = fx.text(label, labelStyle ?? {
+      fill: "#ffffff", fontFamily: "Arial Black, Arial, sans-serif",
+      fontSize: 24, stroke: "#000000", strokeThickness: 5
+    });
+  }
   if (name) fx = fx.name(name);
   if (fadeIn) fx = fx.fadeIn(fadeIn);
   if (fadeOut) fx = fx.fadeOut(fadeOut);
