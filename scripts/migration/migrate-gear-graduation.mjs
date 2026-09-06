@@ -80,6 +80,17 @@ function _resolveGearId(item) {
 }
 
 /**
+ * Czyste predykaty wystawione dla testów Quench (`scripts/tests/`) — Warstwa 4 (TESTING.md).
+ * Żaden z nich pisze do dokumentu ani dotyka `game.actors` — działają na zwykłych obiektach
+ * kształtem udających Item (`type`/`name`/`flags`/`getFlag()`), więc nie potrzebują `scratchActor`.
+ */
+export const __testing = Object.freeze({
+  isStaleGearPlaceholder: _isStaleGearPlaceholder,
+  resolveGearId: _resolveGearId,
+  bareName: _bareName
+});
+
+/**
  * @param {object} [options]
  * @param {boolean} [options.commit=false]
  * @param {string[]} [options.actors] Restrict to these actor names instead of every actor.

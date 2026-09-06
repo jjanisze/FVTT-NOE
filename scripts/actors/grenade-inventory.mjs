@@ -1115,3 +1115,21 @@ function _escapeAttr(value) {
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;");
 }
+
+/**
+ * Czyste predykaty/parsery wystawione dla testów Quench (`scripts/tests/`) — Warstwa 4
+ * (TESTING.md). Wyłącznie funkcje bez efektów ubocznych: parsowanie tekstu katalogu
+ * (`_parseSaveSpec`/`_parseDamageSpec` — regex na polskim opisie z `GRENADE_TYPES`, dokładnie
+ * to, co żywi kartę czatu z przyciskami RO/obrażeń), progi kolorowania paska rzutu, i przeliczenie
+ * obszaru wybuchu na kratki. Celowo NIE wystawia `_resolveAreaSpec` (dla dwuwartościowego
+ * sześcianu otwiera prawdziwy DialogV2 — Warstwa 4 jest tylko dla funkcji bez UI) ani niczego, co
+ * dotyka `canvas`/tworzy dokumenty (`_pickCanvasPoint`, `_spawnExplosiveMarker`, VFX) — to
+ * świadomie poza zasięgiem testów, patrz TESTING.md §4.
+ */
+export const __testing = Object.freeze({
+  parseSaveSpec: _parseSaveSpec,
+  parseDamageSpec: _parseDamageSpec,
+  getThrowBandClass: _getThrowBandClass,
+  getThrowBandColor: _getThrowBandColor,
+  computeTargetSquares: _computeTargetSquares
+});

@@ -222,7 +222,7 @@ Uruchamiaj przed każdym przeładowaniem świata. Jest natychmiastowy.
 | Paczka | Obszar |
 |---|---|
 | `konfiguracja` | nadpisania `CONFIG.DND5E`, API modułu |
-| `dane-ekwipunku` | broń, amunicja, pancerze, ulepszenia, zestawy narzędziowe, chemia (leki/narkotyki/używki) |
+| `dane-ekwipunku` | broń, amunicja (+ parsowanie RO/obrażeń granatów), pancerze, ulepszenia, zestawy narzędziowe, chemia (leki/narkotyki/używki), gear (placeholdery + REAL_GEAR), Kolczatki, migracja gradacji gearu, tabela assetów VFX wybuchów |
 | `choroby` | drabina stopni, efekty, lekarstwa |
 | `sztuczki-dane` | tabela Sztuczek, rejestr automatyki, pack |
 | `sztuczki-most` | kontrakty nazw między Sztuczkami a kodem, który ich szuka |

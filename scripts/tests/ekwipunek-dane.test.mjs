@@ -1,15 +1,27 @@
 /**
  * Neuroshima 5e — integralność tabel ekwipunku.
  *
- * `weapons-data.mjs`, `ammo-data.mjs`, `armor-data.mjs`, `addons-data.mjs` i
- * `toolkits-data.mjs` karmią jednocześnie kompendia, generatory na Zbrojowni i UI
- * karty postaci. Rozjazd między nimi nie rzuca wyjątku — kończy się przedmiotem
- * bez ikony, kalibrem, którego nie ma w słowniku, albo właściwością, której dnd5e
- * nie zna i po cichu wycina przy zapisie.
+ * `weapons-data.mjs`, `ammo-data.mjs`, `armor-data.mjs`, `addons-data.mjs`,
+ * `toolkits-data.mjs` i `gear-data.mjs` karmią jednocześnie kompendia, generatory na
+ * Zbrojowni i UI karty postaci. Rozjazd między nimi nie rzuca wyjątku — kończy się
+ * przedmiotem bez ikony, kalibrem, którego nie ma w słowniku, albo właściwością,
+ * której dnd5e nie zna i po cichu wycina przy zapisie.
  *
  * Każda tabela dostaje ten sam zestaw pytań: unikalne identyfikatory, odwołania
  * prowadzące do istniejących wpisów, pliki ikon na dysku i — najważniejsze —
  * czy wynik `build*ItemData()` w ogóle przechodzi walidację DataModelu dnd5e.
+ *
+ * Dwa dodatki spoza czystych tabel danych (batch 39, 2026-09-06), tym samym wzorcem
+ * co „Pochodnia"/„Ulepszenia broni — instalacja/usunięcie" już w tym pliku — regresja
+ * złapana żywcem, nie wymyślona na zapas:
+ *   - **Kolczatki** (`items/kolczatka.mjs`) — jedyny gearowy przedmiot z prawdziwą
+ *     Aktywnością (reszta REAL_GEAR/GEAR_PLACEHOLDERS to inertny `loot`);
+ *   - **Migracja gradacji gearu** (`migration/migrate-gear-graduation.mjs`) —
+ *     dopasowanie starych kopii testowane przez `__testing`, bo złapało żywy błąd
+ *     (flagless "Kolczatka" na Raynaldzie) i osobno żywy błąd scalania flag
+ *     (`.update()` nie kasuje starego `craftingPlaceholder`).
+ * Parsowanie tekstu granatów (`actors/grenade-inventory.mjs`) i tabela assetów VFX
+ * wybuchów (`config/explosion-vfx.mjs`) też tu mieszkają — patrz ich własne `describe`.
  */
 
 import {
@@ -24,6 +36,19 @@ import { POCHODNIA_VARIANTS, buildPochodniaItemData, ensurePochodniaActivities, 
 import { TOOLKITS, buildToolkitItemData } from "../config/toolkits-data.mjs";
 import { CHEMIA, CHEMIA_TYPE, CHEMIA_SUBTYPES, chemiaKeyByName, chemiaItemData } from "../config/chemia-data.mjs";
 import { ALL_DISEASES } from "../config/diseases-data.mjs";
+import {
+  GEAR_PLACEHOLDERS, REAL_GEAR, buildGearItemData, buildRealGearItemData, createRealGear
+} from "../config/gear-data.mjs";
+import {
+  isKolczatka, buildKolczatkaItemData, createKolczatkaItem, ensureKolczatkaActivities,
+  TILE_SQUARES_LONG, TILE_SQUARES_WIDE
+} from "../items/kolczatka.mjs";
+import {
+  EXPLOSION_RING_VARIANTS, EXPLOSION_FIRE, SCORCH_MARK, SCORCH_SIZE_FRACTION,
+  SCORCH_MARK_LIFETIME_SECONDS, pickRingVariant
+} from "../config/explosion-vfx.mjs";
+import { __testing as grenadeParsing } from "../actors/grenade-inventory.mjs";
+import { __testing as gearMigration } from "../migration/migrate-gear-graduation.mjs";
 import { MODULE_ID, scratchActor, scratchCleanup } from "./helpers.mjs";
 
 /** Jedno zapytanie HEAD na plik; wyniki cache'owane, bo ikony się powtarzają. */
@@ -303,6 +328,74 @@ export function registerEquipmentDataTests(quench) {
 
     /* ---------------------------------------------------------------- */
 
+    describe("Granaty — parsowanie RO/obrażeń z tekstu wolnego (actors/grenade-inventory.mjs)", function () {
+      // `_parseSaveSpec`/`_parseDamageSpec` czytają katalogowe `save`/`effect` — polski tekst
+      // wolny, nie ustrukturyzowane pola — i budują z nich RO/formułę faktycznie rzucaną z karty
+      // czatu (`_rollExplosiveSavesFromCard`/`_rollExplosiveDamageFromCard`). Literówka w treści
+      // katalogu po cichu cofa się do RO/obrażeń domyślnych — nic tu nie rzuca wyjątkiem, więc bez
+      // tego testu regresja jest niewidoczna aż do żywego rzutu granatem.
+      it("parseSaveSpec rozpoznaje Cechę + ST i przepuszcza „—” bez awarii", function () {
+        expect(grenadeParsing.parseSaveSpec("RO Zręczność ST 15"))
+          .to.deep.equal({ ability: "dex", dc: 15, label: "RO Zręczność ST 15" });
+        expect(grenadeParsing.parseSaveSpec("—")).to.deep.equal({ ability: null, dc: null, label: "—" });
+      });
+
+      it("parseDamageSpec sumuje wiele członów kości w jedną formułę i rozpoznaje typ", function () {
+        const result = grenadeParsing.parseDamageSpec("Porażka: 4k6 wybuchowe + 4k6 cięte + Powalenie + Ogłuchnięcie.");
+        expect(result.formula).to.equal("4d6 + 4d6");
+        expect(result.type).to.equal("explosive");
+        expect(Roll.validate(result.formula)).to.be.true;
+      });
+
+      it("parseDamageSpec bez kości w tekście daje pustą formułę, nie awarię", function () {
+        expect(grenadeParsing.parseDamageSpec("Chmura dymu utrzymuje się 1 min.").formula).to.equal("");
+      });
+
+      it("cały katalog GRENADE_TYPES: kości w `effect` parsują się do poprawnej formuły", function () {
+        // Warstwa 1 w duchu TESTING.md — zamyka pętlę między dwoma niezależnymi widokami tych
+        // samych danych (tekst w katalogu / formuła faktycznie rzucana), nie próbką ręcznie
+        // dobranych przykładów jak dwa testy wyżej.
+        for (const grenade of GRENADE_TYPES) {
+          const hasDice = /\d+\s*k\s*\d+/i.test(grenade.effect ?? "");
+          const result = grenadeParsing.parseDamageSpec(grenade.effect);
+          const label = `${grenade.label ?? grenade.id}: "${grenade.effect}"`;
+          if (hasDice) {
+            expect(result.formula, label).to.not.be.empty;
+            expect(Roll.validate(result.formula), `${label} → "${result.formula}"`).to.be.true;
+          } else {
+            expect(result.formula, `${label} (brak kości w tekście, ale sparsowało formułę)`).to.be.empty;
+          }
+        }
+      });
+
+      it("cały katalog GRENADE_TYPES: RO w `save` parsuje się do znanej Cechy i liczbowego ST", function () {
+        for (const grenade of GRENADE_TYPES.filter(g => g.save && g.save !== "—")) {
+          const parsed = grenadeParsing.parseSaveSpec(grenade.save);
+          const label = `${grenade.label ?? grenade.id}: "${grenade.save}"`;
+          expect(parsed.ability, label).to.not.be.null;
+          expect(parsed.dc, label).to.be.a("number");
+        }
+      });
+
+      it("getThrowBandClass/-Color: 50% zasięgu to granica ok/warn, przekroczenie zasięgu to danger", function () {
+        expect(grenadeParsing.getThrowBandClass(5, 10), "dokładnie 50%").to.equal("ok");
+        expect(grenadeParsing.getThrowBandClass(5.1, 10)).to.equal("warn");
+        expect(grenadeParsing.getThrowBandClass(10, 10), "dokładnie na granicy zasięgu").to.equal("warn");
+        expect(grenadeParsing.getThrowBandClass(10.1, 10)).to.equal("danger");
+        expect(grenadeParsing.getThrowBandColor("ok")).to.equal("#54c86a");
+        expect(grenadeParsing.getThrowBandColor("danger")).to.equal("#e06666");
+      });
+
+      it("computeTargetSquares zamienia metry obszaru na kratki SCENY docelowej, z dolnym progiem 0,5", function () {
+        const scene = { grid: { distance: 1.5 } }; // 1,5 m/kratkę — jak na prawdziwych scenach tego świata
+        expect(grenadeParsing.computeTargetSquares(scene, { kind: "cube", side: 3 }), "sześcian 3 m").to.equal(2);
+        expect(grenadeParsing.computeTargetSquares(scene, { kind: "circle", radius: 1.5 }), "koło, promień 1,5 m (średnica 3 m)").to.equal(2);
+        expect(grenadeParsing.computeTargetSquares(scene, { kind: "cube", side: 0.1 }), "próg dolny").to.equal(0.5);
+      });
+    });
+
+    /* ---------------------------------------------------------------- */
+
     describe("Pancerze", function () {
       it("identyfikatory i nazwy są unikalne", function () {
         expect(duplicates(ARMORS.map(a => a.id))).to.be.empty;
@@ -485,6 +578,50 @@ export function registerEquipmentDataTests(quench) {
 
     /* ---------------------------------------------------------------- */
 
+    describe("Kolczatki (items/kolczatka.mjs)", function () {
+      it("rozmiar znacznika na mapie ma dodatnie wymiary", function () {
+        expect(TILE_SQUARES_LONG).to.be.a("number").and.to.be.above(0);
+        expect(TILE_SQUARES_WIDE).to.be.a("number").and.to.be.above(0);
+      });
+
+      it("dane przedmiotu przechodzą walidację dnd5e", function () {
+        expect(buildsCleanly(buildKolczatkaItemData())).to.be.null;
+      });
+
+      it("isKolczatka rozpoznaje tylko oznaczony consumable, nie każdy loot o podobnej nazwie", function () {
+        const data = buildKolczatkaItemData();
+        const flagged = { type: "consumable", getFlag: (m, k) => data.flags[m]?.[k] };
+        expect(isKolczatka(flagged)).to.be.true;
+        expect(isKolczatka({ type: "loot", getFlag: () => true }), "zły typ (np. stary placeholder)").to.be.false;
+        expect(isKolczatka({ type: "consumable", getFlag: () => undefined }), "brak flagi").to.be.false;
+      });
+
+      describe("provisioning aktywności (na prawdziwym aktorze)", function () {
+        let actor;
+        before(async function () { actor = await scratchActor(); });
+        after(async function () { await scratchCleanup(); });
+
+        it("createKolczatkaItem daje dokładnie jedną aktywność „Rozłóż kolczatki”", async function () {
+          const item = await createKolczatkaItem({ actor });
+          const names = Array.from(item.system.activities ?? []).map(a => a.name);
+          expect(names.filter(n => n === "Rozłóż kolczatki")).to.have.lengthOf(1);
+        });
+
+        it("równoczesne wywołania ensureKolczatkaActivities nie duplikują aktywności", async function () {
+          // Ten sam pojedynczy-lot strażnik co Pochodnia/Flara (`_ensuringActivities`) —
+          // ten test sprawdza, że KOPIA tego wzorca w kolczatka.mjs faktycznie działa,
+          // nie tylko że wygląda podobnie na pierwszy rzut oka.
+          const data = buildKolczatkaItemData();
+          const [item] = await actor.createEmbeddedDocuments("Item", [data], { render: false });
+          await Promise.all([ensureKolczatkaActivities(item), ensureKolczatkaActivities(item)]);
+          const names = Array.from(actor.items.get(item.id).system.activities ?? []).map(a => a.name);
+          expect(names.filter(n => n === "Rozłóż kolczatki")).to.have.lengthOf(1);
+        });
+      });
+    });
+
+    /* ---------------------------------------------------------------- */
+
     describe("Zestawy narzędziowe", function () {
       it("identyfikatory są unikalne i zarejestrowane w `CONFIG.DND5E.tools`", function () {
         expect(duplicates(TOOLKITS.map(k => k.id))).to.be.empty;
@@ -605,6 +742,155 @@ export function registerEquipmentDataTests(quench) {
           if (def.itemType === "loot") continue;
           expect(chemiaItemData(key).system.type.value, key).to.equal(CHEMIA_TYPE);
         }
+      });
+    });
+
+    /* ---------------------------------------------------------------- */
+
+    describe("Gear — zaślepki craftingowe i awansowany ekwipunek (config/gear-data.mjs)", function () {
+      it("gearId jest unikalny w OBU tabelach naraz — dzielą jedną przestrzeń kluczy", function () {
+        const ids = [...GEAR_PLACEHOLDERS.map(g => g.id), ...REAL_GEAR.map(g => g.id)];
+        expect(duplicates(ids), "powtórzone gearId między placeholderami a REAL_GEAR").to.be.empty;
+      });
+
+      it("Kolczatki awansowały poza OBIE tabele — mają własny plik (items/kolczatka.mjs)", function () {
+        // Regresja na wyrost: gdyby ktoś dopisał je tu z powrotem, `_resolveProdukcjaLinks`
+        // (toolkits-data.mjs) scaliłby dwa sprzeczne źródła pod tym samym kluczem "kolczatki".
+        expect(GEAR_PLACEHOLDERS.some(g => g.id === "kolczatki"), "GEAR_PLACEHOLDERS").to.be.false;
+        expect(REAL_GEAR.some(g => g.id === "kolczatki"), "REAL_GEAR").to.be.false;
+      });
+
+      it("REAL_GEAR ma dodatnią cenę, nieujemną wagę i dostępność 0-100% — to już nie zaślepki", function () {
+        for (const gear of REAL_GEAR) {
+          expect(gear.price, `${gear.label}.price`).to.be.a("number").and.to.be.above(0);
+          expect(gear.weight, `${gear.label}.weight`).to.be.a("number").and.to.be.at.least(0);
+          expect(gear.avail, `${gear.label}.avail`).to.be.a("number").and.to.be.within(0, 100);
+        }
+      });
+
+      it("pliki ikon istnieją — placeholdery (te, co już je mają) i cały REAL_GEAR", async function () {
+        for (const gear of [...GEAR_PLACEHOLDERS.filter(g => g.icon), ...REAL_GEAR]) {
+          const path = `modules/${MODULE_ID}/icons/items/loot/${gear.icon}`;
+          expect(await assetExists(path), `${gear.label}: ${path}`).to.be.true;
+        }
+      });
+
+      it("dane przedmiotu przechodzą walidację dnd5e — placeholdery i REAL_GEAR", function () {
+        for (const gear of GEAR_PLACEHOLDERS) expect(buildsCleanly(buildGearItemData(gear)), gear.label).to.be.null;
+        for (const gear of REAL_GEAR) expect(buildsCleanly(buildRealGearItemData(gear)), gear.label).to.be.null;
+      });
+
+      it("placeholder wciąż niesie baner TODO w opisie; REAL_GEAR — już nie", function () {
+        for (const gear of GEAR_PLACEHOLDERS) {
+          expect(buildGearItemData(gear).system.description.value, gear.label).to.contain("TODO");
+        }
+        for (const gear of REAL_GEAR) {
+          expect(buildRealGearItemData(gear).system.description.value, gear.label).to.not.contain("TODO");
+        }
+      });
+
+      describe("naprawa już-issued kopii po awansie (createRealGear czyści starą flagę)", function () {
+        let actor;
+        before(async function () { actor = await scratchActor(); });
+        after(async function () { await scratchCleanup(); });
+
+        it("stara flaga craftingPlaceholder znika po upsercie — nie tylko dokłada się gearId", async function () {
+          // Regresja złapana NA ŻYWO (2026-09-06), nie w tym pakiecie testów: `.update()` w
+          // Foundry SCALA `flags`, nie zastępuje ich — pierwsza wersja `createRealGear`
+          // zostawiała `craftingPlaceholder:true` na już-zaktualizowanym, wycenionym przedmiocie.
+          // Kod czytający tę flagę (np. przyszły filtr "pokaż tylko prawdziwe przedmioty")
+          // dalej traktowałby go jak zaślepkę mimo realnej ceny/wagi/opisu.
+          const gear = REAL_GEAR.find(g => g.id === "sidla");
+          const staleData = {
+            name: "Sidła", type: "loot",
+            flags: { [MODULE_ID]: { craftingPlaceholder: true, gearId: "sidla" } }
+          };
+          const [stale] = await actor.createEmbeddedDocuments("Item", [staleData], { render: false });
+          expect(stale.getFlag(MODULE_ID, "craftingPlaceholder"), "przed naprawą").to.equal(true);
+
+          await createRealGear(actor);
+
+          const fixed = actor.items.get(stale.id);
+          expect(fixed.getFlag(MODULE_ID, "craftingPlaceholder"), "po naprawie — flaga ma zniknąć").to.be.undefined;
+          expect(fixed.system.price.value, "cena po naprawie").to.equal(gear.price);
+        });
+      });
+    });
+
+    /* ---------------------------------------------------------------- */
+
+    describe("Migracja gradacji gearu — dopasowanie starych kopii (migration/migrate-gear-graduation.mjs)", function () {
+      const mockItem = overrides => ({
+        type: "loot", name: "", flags: {},
+        getFlag(module, key) { return this.flags?.[module]?.[key]; },
+        ...overrides
+      });
+
+      it("rozpoznaje właściwie oflagowany placeholder (kształt GEAR_PLACEHOLDERS/REAL_GEAR)", function () {
+        const item = mockItem({ name: "Sidła", flags: { [MODULE_ID]: { craftingPlaceholder: true, gearId: "sidla" } } });
+        expect(gearMigration.isStaleGearPlaceholder(item)).to.be.true;
+        expect(gearMigration.resolveGearId(item)).to.equal("sidla");
+      });
+
+      it("rozpoznaje luźny, ręcznie wpisany wpis bez ŻADNYCH flag — dokładnie to, co znaleziono na Raynaldzie", function () {
+        const item = mockItem({ name: "Kolczatka", flags: null });
+        expect(gearMigration.isStaleGearPlaceholder(item)).to.be.true;
+        expect(gearMigration.resolveGearId(item)).to.equal("kolczatki");
+      });
+
+      it("liczba mnoga i warianty z nawiasem też się dopasowują", function () {
+        expect(gearMigration.isStaleGearPlaceholder(mockItem({ name: "Kolczatki", flags: null }))).to.be.true;
+        expect(gearMigration.resolveGearId(mockItem({ name: "Wózek (dwukółka)", flags: null }))).to.equal("wozek");
+        expect(gearMigration.resolveGearId(mockItem({ name: "wózek", flags: null }))).to.equal("wozek");
+      });
+
+      it("ignoruje przedmiot, który ma już INNE flagi modułu — nie nasz, nie ruszamy", function () {
+        const item = mockItem({ name: "Kolczatka", flags: { [MODULE_ID]: { chemiaKey: "coś-innego" } } });
+        expect(gearMigration.isStaleGearPlaceholder(item)).to.be.false;
+      });
+
+      it("ignoruje przedmioty innego typu niż loot (np. już zmigrowane Kolczatki — teraz consumable)", function () {
+        const item = mockItem({ type: "consumable", name: "Kolczatki", flags: null });
+        expect(gearMigration.isStaleGearPlaceholder(item)).to.be.false;
+      });
+
+      it("nie łapie niepowiązanej nazwy", function () {
+        expect(gearMigration.isStaleGearPlaceholder(mockItem({ name: "Nóż taktyczny", flags: null }))).to.be.false;
+      });
+    });
+
+    /* ---------------------------------------------------------------- */
+
+    describe("VFX wybuchów — tabela assetów (config/explosion-vfx.mjs)", function () {
+      it("pickRingVariant wybiera wariant o najbliższym rozmiarze, nigdy nie wywala się poza zakresem", function () {
+        const byName = squares => EXPLOSION_RING_VARIANTS.find(v => v.squares === squares).file;
+        expect(pickRingVariant(6).file).to.equal(byName(6));
+        expect(pickRingVariant(3).file).to.equal(byName(3));
+        expect(pickRingVariant(0).file, "poniżej najmniejszego -> najmniejszy, nie awaria").to.equal(byName(3));
+        expect(pickRingVariant(100).file, "powyżej największego -> największy").to.equal(byName(6));
+        expect(pickRingVariant(4.4).file, "bliżej 4 niż 5").to.equal(byName(4));
+        expect(pickRingVariant(4.6).file, "bliżej 5 niż 4").to.equal(byName(5));
+      });
+
+      it("pliki assetów istnieją na dysku (vfx/, nie icons/)", async function () {
+        const files = [...EXPLOSION_RING_VARIANTS.map(v => v.file), EXPLOSION_FIRE.file, SCORCH_MARK.file];
+        for (const file of files) expect(await assetExists(file), file).to.be.true;
+      });
+
+      it("warianty pierścienia mają unikalny rozmiar w kratkach", function () {
+        expect(duplicates(EXPLOSION_RING_VARIANTS.map(v => v.squares)), "powtórzony rozmiar wariantu").to.be.empty;
+      });
+
+      it("SCORCH_SIZE_FRACTION jest ułamkiem w (0, 1] — ślad zawsze mniejszy niż sam wybuch", function () {
+        expect(SCORCH_SIZE_FRACTION).to.be.above(0).and.to.be.at.most(1);
+      });
+
+      it("SCORCH_MARK_LIFETIME_SECONDS liczy się w miesiącach/latach, nie w sekundach/minutach rundy", function () {
+        // Nieporównywane bezpośrednio z `EXPLOSIVE_MARKER_LIFETIME_SECONDS` (60 s) —
+        // ta stała nie jest eksportowana z grenade-inventory.mjs, i słusznie: to szczegół
+        // implementacyjny znacznika wybuchu, nie coś, na czym scorch mark ma polegać (patrz
+        // doc comment `_spawnScorchMark`). Sprawdzamy więc tylko rząd wielkości.
+        expect(SCORCH_MARK_LIFETIME_SECONDS).to.be.above(60 * 60 * 24 * 30); // > miesiąc gry
       });
     });
   }, { displayName: "Neuroshima: Ekwipunek — integralność tabel" });
