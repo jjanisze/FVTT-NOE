@@ -2836,3 +2836,46 @@ gracza sprzed tej poprawki zostawione bez zmian (nie dostaną retroaktywnie zawi
 rozmiaru — wygasną same po 60 s albo do ręcznego usunięcia).
 
 Wszystkie 152 testy nadal przechodzą.
+
+## Zmiany z 6 września 2026 (11) — ślady po wybuchu (scorch marks)
+
+Propozycja gracza: własny obrazek (`graphicscrate-scorch-mark-1a_prev_sm.webp` — czarny,
+piórkowany rozprysk na białym tle), trwałość ~1 rok, pod wybuchem, 50% krycia, tryb „darken".
+Zapytany wprost „czy to ma sens" — tak, z jedną poprawką: **nie jako Tile**. Sprawdzone wprost
+w źródle rdzenia (`common/documents/tile.mjs`), nie zgadnięte: `TileDocument` w ogóle nie ma
+pola trybu mieszania (blend mode) — tylko `alpha`/`occlusion`/`video`. Prawdziwy Tile z
+nieprzezroczystym białym tłem malowałby biały kwadrat na terenie, nie da się tego obejść bez
+ręcznego grzebania w PIXI przy każdym odświeżeniu. Trwały efekt Sequencera dostaje
+`.blendMode()` od ręki i jest równie trwały — `.persist()` już przeżywa przeładowania tak długo,
+jak każemy, a to jedyne, czego naprawdę potrzebuje „ma trwać z rok".
+
+Zaimplementowane w `_spawnScorchMark` (`grenade-inventory.mjs`) + nowa tabela w
+`config/explosion-vfx.mjs`:
+- rozmiar skalowany proporcjonalnie do wielkości wybuchu (`SCORCH_SIZE_FRACTION = 0.6`, BEZ
+  dolnego progu — mały granat zostawia naprawdę mały ślad, zero „przynajmniej tyle", zgodnie
+  z wyraźnym zastrzeżeniem gracza w trakcie tej sesji);
+- `zIndex:-1` względem sprite'a wybuchu (domyślny 0) — jawnie przypięte, nie zgadywane po
+  kolejności tworzenia;
+- śledzony we WŁASNEJ liście flag na scenie (`activeScorchMarks`, `[{name, expiresAt}]`) —
+  dokładnie ten sam wzorzec co `flara.mjs`'s `FLAG_ACTIVE`/`_sweepExpiredFlareLights`, tylko
+  bez dokumentu do powieszenia flagi (tu nie ma żadnego — sam Sequencer effect), więc lista
+  sama w sobie jest trwałym rekordem;
+- świadomie NIEPOWIĄZANY z `markerDoc`/60-sekundowym wygaśnięciem znacznika wybuchu — cały
+  sens śladu to przeżycie wybuchu o rzędy wielkości, nie zniknięcie razem z nim.
+
+Zweryfikowane na żywo: mały (2 kratki) i duży (6 kratek) test granat — rozmiar śladu wyszedł
+proporcjonalnie 1.2 i 3.6 kratki; zrzut ekranu potwierdza ślad widoczny POD pierścieniem
+wybuchu, dokładnie w jego ciemnym środku; wymuszone wygaśnięcie znacznika wybuchu (60 s) usunęło
+`Drawing` i pierścień/ogień, ale NIE ruszyło śladu (potwierdzone: 2 efekty przed, 2 po); osobno
+wymuszone wygaśnięcie JEDNEGO wpisu w `activeScorchMarks` poprawnie zakończyło tylko ten jeden
+efekt, zostawiając drugi (z prawdziwym ~rocznym terminem) nietknięty.
+
+Na marginesie: nazwa pliku źródłowego („..._prev_sm") sugeruje, że to może być podgląd/próbka
+z marketowego pakietu (GraphicsCrate), nie finalny zakupiony plik — warto sprawdzić przed
+pokazaniem graczom, nieblokujące tutaj. Też: obrazek to miękki, piórkowany gradient szarości, nie
+czysta czerń/biel — `multiply` prawdopodobnie da gładsze, bardziej proporcjonalne przyciemnienie
+niż `darken` (który operuje per-kanał minimum i może wypadać niemal bez efektu na średnio ciemnym
+terenie) — zostawione na `darken` zgodnie z wyraźną prośbą, ale to jedno słowo do zmiany, gdyby
+na żywo nie wyglądało jak trzeba.
+
+Wszystkie 152 testy nadal przechodzą.

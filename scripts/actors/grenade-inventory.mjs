@@ -64,11 +64,26 @@
  * watching a real throw found the rectangle sitting BELOW the explosion
  * sprite with its own label half-hidden underneath it, wanted "a single
  * graphical representation." See the cube branch of `_spawnExplosiveMarker`.
+ *
+ * ## Scorch decal (2026-09-06, further follow-up)
+ *
+ * `_spawnScorchMark` plays a long-lived (~1 year of GAME time) Sequencer
+ * effect under the ring/fire sprite, sized to a fraction of the blast's own
+ * footprint. See that function's own doc comment for why it's a Sequencer
+ * effect rather than a real Tile (TileDocument has no blend-mode field at
+ * all — checked directly, not assumed) and `config/explosion-vfx.mjs` for
+ * the asset/blend-mode/lifetime constants. Tracked independently of the
+ * blast marker's own 60-second lifetime (`FLAG_ACTIVE_SCORCH`, a scene-flag
+ * list mirroring flara.mjs's own expiry idiom) — a scorch mark is supposed
+ * to massively outlive the explosion that made it, not vanish with it.
  */
 import { GRENADE_TYPES, GRENADE_MAP } from "../config/ammo-data.mjs";
 import { playExplosiveSoundForSubtype } from "../weapons/sounds.mjs";
-import { seqEffect } from "../weapons/sequencer.mjs";
-import { pickRingVariant, EXPLOSION_FIRE } from "../config/explosion-vfx.mjs";
+import { seqEffect, seqEndEffect } from "../weapons/sequencer.mjs";
+import {
+  pickRingVariant, EXPLOSION_FIRE,
+  SCORCH_MARK, SCORCH_SIZE_FRACTION, SCORCH_MARK_LIFETIME_SECONDS
+} from "../config/explosion-vfx.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 // Actor flag — GM-consumed, mirrors flara.mjs's FLAG_PENDING idiom. Payload:
@@ -89,6 +104,13 @@ const FLAG_PENDING_EXPLOSIVE = "explosivePendingPlacement";
 // meant to persist until triggered or defused, not time out.
 const EXPLOSIVE_MARKER_LIFETIME_SECONDS = 60;
 
+// Scene flag — list of still-live scorch decals (2026-09-06 follow-up), mirrors
+// flara.mjs's FLAG_ACTIVE/_sweepExpiredFlareLights idiom exactly, just for a
+// bare Sequencer effect instead of a real embedded Document (there's nothing
+// to hang an expiry flag ON, so the list itself is the durable record).
+// Payload: [{name, expiresAt}].
+const FLAG_ACTIVE_SCORCH = "activeScorchMarks";
+
 export function registerGrenadeInventory() {
   for (const hookName of ["renderActorSheet", "renderCharacterActorSheet", "renderNPCActorSheet"]) {
     Hooks.on(hookName, _onRenderActorSheetInjectGrenadeSection);
@@ -101,6 +123,7 @@ export function registerGrenadeInventory() {
 
 function onWorldTime() {
   _sweepExpiredExplosiveMarkers().catch(e => console.warn(`${MODULE_ID} | grenade-inventory: expiry sweep failed`, e));
+  _sweepExpiredScorchMarks().catch(e => console.warn(`${MODULE_ID} | grenade-inventory: scorch expiry sweep failed`, e));
 }
 
 /** GM-only: delete any blast marker (Drawing or MeasuredTemplate) whose time is up, on every scene. */
@@ -125,6 +148,26 @@ async function _sweepExpiredExplosiveMarkers() {
       await scene.deleteEmbeddedDocuments("MeasuredTemplate", templateIds)
         .catch(e => console.warn(`${MODULE_ID} | grenade-inventory: template expiry cleanup failed`, e));
     }
+  }
+}
+
+/** GM-only: end any scorch decal whose (very long) time is up, on every scene. */
+async function _sweepExpiredScorchMarks() {
+  if (!game.user.isActiveGM) return;
+  const now = game.time.worldTime;
+
+  for (const scene of game.scenes) {
+    const list = scene.getFlag(MODULE_ID, FLAG_ACTIVE_SCORCH);
+    if (!list?.length) continue;
+
+    const due = list.filter(s => now >= s.expiresAt);
+    if (!due.length) continue;
+
+    for (const s of due) seqEndEffect(s.name);
+
+    const remaining = list.filter(s => now < s.expiresAt);
+    await scene.setFlag(MODULE_ID, FLAG_ACTIVE_SCORCH, remaining)
+      .catch(e => console.warn(`${MODULE_ID} | grenade-inventory: scorch expiry flag update failed`, e));
   }
 }
 
@@ -635,11 +678,31 @@ async function _spawnExplosiveMarker(actor, pending) {
     }
 
     if (hasVfx) {
-      _spawnExplosionVfx(scene, pending.x, pending.y, area, pending.damageType, markerDoc, label);
+      const targetSquares = _computeTargetSquares(scene, area);
+      // Scorch first: no explicit ordering guarantee between two Sequencer
+      // effects otherwise, and this one needs to sit visually UNDER the
+      // ring/fire sprite (also enforced explicitly via zIndex — see
+      // `_spawnScorchMark` — not relied on implicitly here).
+      _spawnScorchMark(scene, pending.x, pending.y, targetSquares)
+        .catch(e => console.warn(`${MODULE_ID} | grenade-inventory: scorch spawn failed`, e));
+      _spawnExplosionVfx(scene, pending.x, pending.y, targetSquares, pending.damageType, markerDoc, label);
     }
   } finally {
     try { await actor.unsetFlag(MODULE_ID, FLAG_PENDING_EXPLOSIVE); } catch (_e) { /* aktor mógł już zniknąć */ }
   }
+}
+
+/**
+ * Blast diameter/side, converted from the area spec's meters into the TARGET
+ * scene's own grid squares — shared by the ring/fire sprite and the scorch
+ * decal so both size off the exact same number.
+ */
+function _computeTargetSquares(scene, area) {
+  const distancePerSquare = Number(scene.grid?.distance ?? 1.5) || 1.5;
+  const diameterMeters = area.kind === "cube"
+    ? Number(area.side ?? 3)
+    : Number(area.radius ?? 1.5) * 2;
+  return Math.max(0.5, diameterMeters / distancePerSquare);
 }
 
 /**
@@ -649,13 +712,7 @@ async function _spawnExplosiveMarker(actor, pending) {
  * `label` itself (Sequencer's `.text()`) since the marker Drawing is drawn
  * bare whenever this is called — see the cube branch of `_spawnExplosiveMarker`.
  */
-function _spawnExplosionVfx(scene, x, y, area, damageType, markerDoc, label) {
-  const distancePerSquare = Number(scene.grid?.distance ?? 1.5) || 1.5;
-  const diameterMeters = area.kind === "cube"
-    ? Number(area.side ?? 3)
-    : Number(area.radius ?? 1.5) * 2;
-  const targetSquares = Math.max(0.5, diameterMeters / distancePerSquare);
-
+function _spawnExplosionVfx(scene, x, y, targetSquares, damageType, markerDoc, label) {
   const asset = damageType === "fire" ? EXPLOSION_FIRE : pickRingVariant(targetSquares);
 
   seqEffect(asset.file, { x, y }, {
@@ -669,6 +726,48 @@ function _spawnExplosionVfx(scene, x, y, area, damageType, markerDoc, label) {
     tieTo: markerDoc ?? undefined,
     label
   });
+}
+
+/**
+ * Permanent-ish scorch decal (2026-09-06 follow-up) — a Sequencer effect, NOT
+ * a Tile: `TileDocument`'s own schema (checked directly, core's `tile.mjs`)
+ * has no blend-mode field at all, only alpha/occlusion/video, so a real Tile
+ * can't do the "darken"/"multiply" compositing an opaque-white-background
+ * decal needs without fighting Foundry's own redraw on every refresh. A
+ * persisted Sequencer effect gets `.blendMode()` natively and is exactly as
+ * durable — `.persist()` already survives reloads for as long as it's told
+ * to, which is all "should last about a year" actually needs.
+ *
+ * Tracked in its own scene-flag list (`FLAG_ACTIVE_SCORCH`), mirroring
+ * flara.mjs's `FLAG_ACTIVE`/`_sweepExpiredFlareLights` idiom — there's no
+ * backing Document to hang an expiry flag on this time (unlike the blast
+ * marker's Drawing/MeasuredTemplate), so the list itself is the durable
+ * record. Deliberately NOT tied to `markerDoc`/`EXPLOSIVE_MARKER_LIFETIME_
+ * SECONDS` — the whole point of a scorch mark is outliving the blast and its
+ * ring/fire VFX by orders of magnitude, not vanishing with them.
+ *
+ * Sized to a FRACTION of the blast's own footprint (`SCORCH_SIZE_FRACTION`),
+ * with no minimum floor — a tiny charge is meant to leave a correspondingly
+ * tiny mark, not one clamped to some "smallest usable" size the way the
+ * label text is allowed to be.
+ */
+async function _spawnScorchMark(scene, x, y, targetSquares) {
+  const name = `neuro-scorch-${foundry.utils.randomID(8)}`;
+  const played = seqEffect(SCORCH_MARK.file, { x, y }, {
+    sizeSquares: Math.max(0.25, targetSquares * SCORCH_SIZE_FRACTION),
+    persist: true,
+    belowTokens: true,
+    zIndex: -1, // under the ring/fire sprite above (default zIndex 0) — pinned explicitly, not relied on implicitly.
+    blendMode: SCORCH_MARK.blendMode,
+    opacity: SCORCH_MARK.opacity,
+    fadeIn: 300,
+    name
+  });
+  if (!played) return; // no Sequencer active — nothing to track
+
+  const list = foundry.utils.deepClone(scene.getFlag(MODULE_ID, FLAG_ACTIVE_SCORCH) ?? []);
+  list.push({ name, expiresAt: game.time.worldTime + SCORCH_MARK_LIFETIME_SECONDS });
+  await scene.setFlag(MODULE_ID, FLAG_ACTIVE_SCORCH, list);
 }
 
 function _getActorThrowToken(actor) {

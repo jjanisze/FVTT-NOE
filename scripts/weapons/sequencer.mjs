@@ -242,6 +242,14 @@ export function seqStopLoop(origin) {
  *   deleted, instead of requiring a separate cleanup hook.
  * @param {boolean} [opts.belowTokens=false]   Render under the token layer (ground-level VFX).
  * @param {boolean} [opts.randomRotation=false]
+ * @param {string}  [opts.blendMode]    Compositing mode, e.g. "darken"/"multiply" — see
+ *   Sequencer's effect.md ("Blend Mode"). Needed for an opaque-background decal (a scorch
+ *   mark on a white square, say) to actually vanish into the terrain instead of painting
+ *   a visible box; plain alpha compositing alone won't do that.
+ * @param {number}  [opts.zIndex]       Explicit paint-order tiebreak against another effect
+ *   sharing the same `belowTokens`/elevation tier — e.g. a scorch decal UNDER its own
+ *   explosion sprite needs this pinned down explicitly rather than relying on whichever
+ *   order they happened to be created in.
  * @param {string}  [opts.label]        Text baked ONTO the effect itself (Sequencer's
  *   `.text()`) — guaranteed to share the effect's own paint order/position, unlike a
  *   separate Drawing's label, which renders on a different layer with no shared
@@ -256,6 +264,7 @@ export function seqStopLoop(origin) {
 export function seqEffect(file, source, {
   scale = 1, opacity = 1, attach = false, name, persist = false,
   sizeSquares, tieTo, belowTokens = false, randomRotation = false,
+  blendMode, zIndex,
   label, labelStyle,
   fadeIn = 0, fadeOut = 400, delay = 0
 } = {}) {
@@ -280,6 +289,8 @@ export function seqEffect(file, source, {
   if (persist) fx = fx.persist();
   if (belowTokens) fx = fx.belowTokens();
   if (randomRotation) fx = fx.randomRotation();
+  if (blendMode) fx = fx.blendMode(blendMode);
+  if (Number.isFinite(zIndex)) fx = fx.zIndex(zIndex);
   if (label) {
     // Sequencer's own renderer multiplies fontSize by (150 / canvas.grid.size)
     // before handing it to PIXI (canvas-effect.js) — confirmed live, along with

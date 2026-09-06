@@ -250,11 +250,12 @@ Spray modes read the per-target save outcome from the DS/MS resolvers (failed sa
 - **OZ / suppressive zone** visuals.
 - **Broadcast screen shake** to all clients.
 - **Ricochet / environment impacts** on misses (currently: miss = nothing downrange).
-- **Residue beyond blood** — oil/hydraulic-fluid stains for robots and constructs, rubble,
-  scorch/burn marks from explosives and heavy weapons. Extends the §10 "battlefield as
-  record" concept past what Splatter provides (blood only); needs a bespoke decal/tile
-  system, parallel to Splatter's per-elevation container manager, or a simpler GM-placed-Tile
-  workflow post-combat. Not blocked on anything here — just not started.
+- **Residue beyond blood** — oil/hydraulic-fluid stains for robots and constructs, rubble.
+  Scorch/burn marks from **explosives** specifically are done (2026-09-06,
+  `grenade-inventory.mjs`'s `_spawnScorchMark`) — a long-lived (~1 year of game time)
+  Sequencer effect under the ring/fire sprite, not a Tile (TileDocument has no blend-mode
+  field to darken an opaque-background decal with — checked directly). Heavy-weapon scorch
+  and the other residue types (oil, rubble) remain unstarted.
 
 ---
 

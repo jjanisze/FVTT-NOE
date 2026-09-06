@@ -58,6 +58,47 @@ export const EXPLOSION_FIRE = Object.freeze({
 });
 
 /**
+ * Permanent-ish scorch decal (2026-09-06 follow-up), user-supplied — a soft,
+ * feathered black burst on an opaque white background (GraphicsCrate stock
+ * art; the "_prev_sm" in the original filename suggests it may be a
+ * marketplace PREVIEW/sample render rather than the final purchased asset —
+ * worth a second look before this ships to players, not blocking here).
+ *
+ * Deliberately NOT sized like the ring/fire sprites above (nearest-native-
+ * fit): the scorch mark should always read as smaller than the blast that
+ * made it, scaling proportionally with NO minimum floor — a tiny charge
+ * leaves a tiny mark, not a floor-clamped "small-at-worst" one the way the
+ * label text is allowed to be. See `SCORCH_SIZE_FRACTION`'s use in
+ * `grenade-inventory.mjs`'s `_spawnScorchMark`.
+ *
+ * Opaque white background needs a blend mode to disappear into the terrain
+ * (plain alpha compositing would paint a white square) — `darkenMode` names
+ * the specific blend requested; `multiply` is the more common choice for
+ * this exact kind of soft grayscale decal (proportional darkening even
+ * through the feathered edges, where "darken"'s per-channel minimum can go
+ * nearly inert against midtone ground) and is one word to swap to if
+ * "darken" ends up not reading as expected once seen live on more than one
+ * background.
+ */
+export const SCORCH_MARK = Object.freeze({
+  file: "modules/neuroshima-2026-overrides/vfx/scorch_mark.webp",
+  blendMode: "darken",
+  opacity: 0.5,
+});
+
+// Fraction of the blast's own footprint the scorch decal is sized to —
+// proportional, no floor, so a small charge leaves a correspondingly tiny
+// mark rather than something clamped to a "smallest usable" size.
+export const SCORCH_SIZE_FRACTION = 0.6;
+
+// ~1 year of GAME time (game.time.worldTime, seconds) — "permanent for all
+// practical campaign purposes" without being literally forever, so a very
+// long campaign doesn't accumulate scorch marks without end. Independent of
+// EXPLOSIVE_MARKER_LIFETIME_SECONDS in grenade-inventory.mjs — the mark is
+// meant to significantly outlive the blast marker and its fire/ring VFX.
+export const SCORCH_MARK_LIFETIME_SECONDS = 365 * 24 * 60 * 60;
+
+/**
  * Nearest-native-size ring variant for a given target footprint.
  * @param {number} targetSquares  Blast diameter/side, in the TARGET scene's own grid squares.
  * @returns {{file: string, squares: number}}
