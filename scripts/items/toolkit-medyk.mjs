@@ -263,7 +263,14 @@ export function registerMedyk() {
 
   // Uzupełnienie Narzędzi Małego Medyka — same createItem-backfill idiom as flara.mjs/kolczatka.mjs.
   Hooks.on("createItem", (item) => { if (game.user.isGM) ensureMedykRefillActivities(item); });
-  if (game.user.isGM) ensureAllMedykRefillActivities();
+  // Unlike flara.mjs/kolczatka.mjs, registerMedyk() is called from main.mjs's `init` block, not
+  // its `ready` block — `game.user` is unconditionally null during `init` (confirmed in Foundry's
+  // own client/game.mjs: `initialize()` fires the `init` hook before `setupGame()` ever runs
+  // `initializeDocuments()`, which is what populates `game.user`). Reading `.isGM` eagerly here
+  // threw on every load, aborting the rest of main.mjs's shared init callback silently — everything
+  // registered after registerMedyk() (party sheet, sheet-shell, map-watch, …) never ran. Defer the
+  // one-time backfill to `ready`, same as the createItem listener above already defers per-item. (2026-09-07)
+  Hooks.once("ready", () => { if (game.user.isGM) ensureAllMedykRefillActivities(); });
 
   console.log("Neuroshima 5e | Medyk (Przywracanie PW + uzupełnienie) registered");
 }

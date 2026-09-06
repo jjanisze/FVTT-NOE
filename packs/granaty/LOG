@@ -1,1 +1,5 @@
-2026/09/06-23:45:47.649 13714 Delete type=3 #1
+2026/09/07-00:45:33.721 1cec0 Recovering log #3
+2026/09/07-00:45:33.721 1cec0 Level-0 table #5: started
+2026/09/07-00:45:33.729 1cec0 Level-0 table #5: 3692 bytes OK
+2026/09/07-00:45:33.732 1cec0 Delete type=0 #3
+2026/09/07-00:45:33.732 1cec0 Delete type=3 #2

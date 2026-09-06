@@ -2931,6 +2931,20 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
 /*  Ekwipunek — legenda + segmentowany pasek udźwigu (2026-08-29) */
 /* -------------------------------------------- */
 
+/* dnd5e's native Ekwipunek header row splits `.encumbrance` (our bar) and the
+ * `<ul class="containers">` list (backpack/pouch Items) via flex — even when
+ * a character has zero container Items, the empty `<ul>` still claims its
+ * flex share of the row (~1/3 on Raynald: 330px of 522px), starving the far
+ * more informative composition bar next to it. Guarded to only kick in when
+ * there really are no containers — live-verified at 522/522px (100%) with
+ * the guard, vs 330/522px (63%) without; characters who actually have
+ * container Items keep the native split untouched.
+ * NOTE: plain `:empty` does NOT work here — dnd5e's Handlebars template
+ * leaves a whitespace-only text node inside the `<ul>` even when its
+ * `{{#each containers}}` loop produces zero `<li>`s, and `:empty` treats
+ * that as "not empty." `:not(:has(li))` is immune to that. (2026-09-07) */
+.dnd5e2.actor .top > ul.containers:not(:has(li)) { display: none; }
+
 .neuro-encumbrance-overlay { z-index: 1; }
 .neuro-encumbrance-seg:first-child { border-top-left-radius: inherit; border-bottom-left-radius: inherit; }
 
