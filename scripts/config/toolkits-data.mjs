@@ -15,7 +15,8 @@
  * 5-charge resource + refill flow (later batch).
  */
 
-import { createGearPlaceholders } from "./gear-data.mjs";
+import { createGearPlaceholders, createRealGear } from "./gear-data.mjs";
+import { createKolczatkaStock, isKolczatka } from "../items/kolczatka.mjs";
 import { createArmors } from "./armor-data.mjs";
 import { TOOLKIT_CHECK_ACTIVITY_TYPE } from "../items/toolkit-check-activity.mjs";
 
@@ -329,10 +330,22 @@ async function _resolveProdukcjaLinks() {
   if ( !zbrojownia ) return new Map();
 
   const gear = await createGearPlaceholders(zbrojownia);
+  // Batch 39: Sidła/Sprzęt do wspinaczki/Strzały/Wózek graduated out of the
+  // placeholder stub array into real, priced items (`gear-data.mjs`'s own doc
+  // comment, "REAL_GEAR") — merged in here so the kowal's "Produkcja" list
+  // keeps linking to them by the same `gearId`s, now landing on real items.
+  const realGear = await createRealGear(zbrojownia);
+  // Kolczatki graduated even further out — a real Activity means it needed its own file
+  // (`items/kolczatka.mjs`), so it's not in `REAL_GEAR` either. `createKolczatkaStock` only
+  // returns created/updated counts (matching `createFlaraStock`'s own shape), not the item
+  // itself — found separately here so its "kolczatki" produkcja link keeps resolving too.
+  await createKolczatkaStock(zbrojownia);
+  const kolczatkaItem = zbrojownia.items.find(isKolczatka);
   await createArmors(zbrojownia);
   const byName = name => zbrojownia.items.find(i => i.type === "equipment" && i.name === name);
 
-  const links = new Map(gear);
+  const links = new Map([...gear, ...realGear]);
+  if ( kolczatkaItem ) links.set("kolczatki", kolczatkaItem);
   links.set("helm", byName("Hełm"));
   links.set("tarcza_armor", byName("Tarcza"));
   links.set("zbroje_smieciowe", ZBROJE_SMIECIOWE_NAMES.map(byName).filter(Boolean));

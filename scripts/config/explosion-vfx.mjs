@@ -82,7 +82,7 @@ export const EXPLOSION_FIRE = Object.freeze({
  */
 export const SCORCH_MARK = Object.freeze({
   file: "modules/neuroshima-2026-overrides/vfx/scorch_mark.webp",
-  blendMode: "darken",
+  blendMode: "multiply",
   opacity: 0.5,
 });
 

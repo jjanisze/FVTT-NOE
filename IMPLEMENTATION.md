@@ -2879,3 +2879,105 @@ terenie) — zostawione na `darken` zgodnie z wyraźną prośbą, ale to jedno s
 na żywo nie wyglądało jak trzeba.
 
 Wszystkie 152 testy nadal przechodzą.
+
+## Zmiany z 6 września 2026 (12) — Raynaldowy gear: 9 ikon + prawdziwe statystyki (batch 39)
+
+Wsad: arkusz `Weapons_Resize_39.jpg` (siatka 3×3), 9 przedmiotów „dla Raynalda, do podmiany złych
+ikon" + „rozwiń cenę/wagę/opis". Sześć z dziewięciu to domknięcie luk z poprzedniej sesji ikon
+(commit 239813e); trzy to nowe przedmioty (składana kolczatka, laptop wojskowy, emulator kart).
+Każda pozycja sprawdzona wprost w źródłach (podręcznik `Podrecznik/source.txt`, katalogi modułu)
+zanim cokolwiek wymyślono — nie zgadywane hurtowo.
+
+### Co znaleziono w podręczniku (nie zgadnięte)
+
+- **Kolczatki**: pełna, gotowa zasada RAW: RO Zręczność ST 15 przy wejściu na obszar 1,5×1,5 m,
+  inaczej 1 obrażenie kłute + Szybkość 0 do początku następnej tury; zbieranie 10 minut; opona
+  pojazdu automatycznie przebita; nie działa na maszyny gąsienicowe/kroczące. Cena/waga/dostępność:
+  10 gb / 0,5 kg / 40%.
+- **Wózek (dwukółka)**: 20 gb / 50 kg / 70%; osobny blok „WÓZEK TYPU DWUKÓŁKA": PW 50, TT 15,
+  Ładowność 100 kg, ciągnie 1 średnia istota lub 2 małe.
+- **Sprzęt do wspinaczki**: 20 gb / 6 kg / 50% — znaleziony przypadkiem w tej samej tabeli co
+  Kolczatki (forma „wspinaczki" nie pasowała do wcześniejszego wzorca wyszukiwania „wspinaczkow…").
+- **Laptop wojskowy**: 140 gb / 7 kg / 5% (tabela K100 Elektronika/Sprzęt) + osobna zasada:
+  Ułatwienie do Testów Inteligencji tym sprzętem, może zastąpić Narzędzia małego hakera + osobna
+  receptura craftingowa (Schematy hakerskie): ST 30, 140 godzin, 50 CE + 1 CH + 14 CZ + 5 MK.
+- **Strzały** (wiązka 20 szt., pozycja craftingowa, nie amunicja bojowa): brak własnego wpisu w
+  podręczniku — wyprowadzone jako dokładnie 20 × pojedyncza „Strzała" z tabeli Amunicji
+  (1 gb / 0,03 kg), zgodnie z „20 strzał" jako startowym ekwipunkiem gdzie indziej w katalogu.
+- **Sidła** i **Emulator kart magnetycznych**: sprawdzone wprost — brak w podręczniku. Ceny/wagi
+  to szacunek MG (Sidła: 5 gb/0,3 kg/60%; Emulator: 25 gb/0,1 kg/15%, wzorowany na „Wytrychach
+  elektronicznych" 25/0,5 kg/5%), jawnie oznaczone jako takie w opisie przedmiotu, nie ukryte
+  pod pozorem RAW.
+
+### Kolczatki: awans z zaślepki do prawdziwego przedmiotu z akcją
+
+Kolczatki (i cztery inne: Sidła/Sprzęt do wspinaczki/Strzały/Wózek) były `GEAR_PLACEHOLDERS` w
+`gear-data.mjs` — nie wycenione, TODO, tylko cel linku. Cztery zwykłe wygraduowały w miejscu (dalej
+`loot`, teraz w nowej tabeli `REAL_GEAR` w tym samym pliku, z prawdziwą ceną/wagą/opisem). Kolczatki
+dostały coś więcej — realną akcję „Rozłóż kolczatki" (nowy plik `items/kolczatka.mjs`, dokładnie ten
+sam szkielet co `flara.mjs`: gracz wskazuje punkt na mapie, ilość się zmniejsza, zapisywana jest
+zwykła flaga na WŁASNYM aktorze, każdy klient reaguje, tylko aktywny MG tworzy uprzywilejowany
+dokument) — więc przeszły z `type:"loot"` na `type:"consumable"`.
+
+**Dlaczego prawdziwy `Tile`, nie efekt Sequencera**: obrazek gracza (`vfx/spike_strip.png`,
+sprawdzone live przez PIL: 2172×724 px, realna przezroczystość — każdy róg to (0,0,0,0), nie
+zamalowane białe tło) nie potrzebuje trybu mieszania, więc nic nie stoi na przeszkodzie zwykłemu
+Tile'owi. To też naprawia ograniczenie zgłoszone tej samej sesji przy śladach po wybuchu — Tile
+(w przeciwieństwie do trwałego efektu Sequencera) daje MG normalne zaznacz/przesuń/obróć/zmień
+rozmiar/usuń na płótnie, bez Menedżera Sequencera. Rozmiar: 3×1 pola (proporcja 3:1 dokładnie jak
+oryginalny obrazek), środkowany na wskazanym punkcie — **uwaga**: `TileDocument.x/y` w v14 to
+ŚRODEK siatki, nie róg (odwrotnie niż `Drawing`/`MeasuredTemplate` gdzie indziej w tym pliku),
+więc odjęcie połowy szerokości byłoby błędem o pół pola — nieużyte tu celowo.
+
+Świadome odejście od RAW: podręcznikowy obszar efektu to 1,5×1,5 m (jedno pole), rozsypywane
+„na sąsiadującym z tobą obszarze" — nowa grafika to długi, składany pas na drogę, więc postawiono
+na swobodne wskazanie punktu (jak przy granatach), nie ograniczenie do sąsiedniego pola. Opisane
+wprost w opisie przedmiotu jako rozbieżność do rozstrzygnięcia przez MG, nie ukryte. RO/obrażenia/
+przebicie opony pozostają ręczne (MG rozstrzyga) — zautomatyzowane jest tylko postawienie znacznika.
+
+### Podchwycony błąd na żywo: flagi się scalają, nie zastępują
+
+`createRealGear`'s upsert wywoływał `.update(data)` na już-istniejącym placeholderze — ale
+Foundry domyślnie SCALA obiekt `flags`, nie zastępuje go, więc stara flaga
+`craftingPlaceholder:true` zostawała, mimo że przedmiot dostał już prawdziwą cenę/wagę/opis.
+Złapane na żywo (nie w testach — `placeholderFlagGone` sprawdzone wprost po migracji), naprawione
+jawnym kluczem kasującym Foundry (`"flags.MODULE_ID.-=craftingPlaceholder": null`) w obu miejscach,
+które robią ten update (`createRealGear` i migracja poniżej).
+
+### Migracja: `migrate-gear-graduation.mjs`
+
+Jak `migrate-pistolet-race.mjs` (ten sam kształt: `commit:false` = podgląd, `commit:true` =
+zastosuj, opcjonalny filtr `actors`). Znaleziono na żywo DWA różne kształty starych kopii, nie
+tylko ten „czysty": prawdziwy `GEAR_PLACEHOLDERS`-owy stub (flagi `craftingPlaceholder`+`gearId`)
+ORAZ luźny, ręcznie wpisany wiersz bez żadnych flag modułu — dokładnie to znaleziono na Raynaldzie:
+przedmiot nazwany „Kolczatka" (liczba pojedyncza), `type:"loot"`, `img` wskazujący wprost na plik
+portretu jego własnego aktora (`worlds/OUTPUT/characters/.../avatar.png"`) — nie błąd we wspólnym
+katalogu, tylko domyślny obrazek z jakiegoś wcześniejszego hurtowego importu postaci, nigdy
+niczyim kodem nie dotknięty. Migracja dopasowuje więc PO NAZWIE (odporne na liczbę pojedynczą/mnogą,
+bez nawiasów) dla przedmiotów bez żadnych flag modułu, nie tylko po fladze — wystarczająco wąsko
+(pięć charakterystycznych polskich nazw), żeby przypadkowa kolizja z czymś niezwiązanym była
+mało prawdopodobna.
+
+### Zweryfikowane na żywo (nie tylko w Quench)
+
+- `game.neuroshima.tests.run()` — 152/152 przed i po każdej zmianie.
+- Podgląd migracji (`commit:false`) poprawnie znalazł: Raynald/„Kolczatka" ×2 (luźny wpis) i
+  Raynald/„laptop wojskowy (narzedzi hackera)" ×1 (już wcześniej ręcznie dopisany przez gracza/MG —
+  potwierdza, że kierunek „laptop zastępuje narzędzia hakera" był oczekiwany, zanim to zaimplementowano);
+  Zbrojownia: cztery stare zaślepki. Zero fałszywych trafień na reszcie drużyny.
+- Po `commit:true`: wszystkie siedem pozycji poprawnie skonwertowane; Kolczatki na Raynaldzie —
+  `type:"consumable"`, właściwa ikona, aktywność „Rozłóż kolczatki" obecna, ilość zachowana (2).
+- Aktywność „Wystrzel flarę" (Pistolet na Race) — nowa ikona podpięta w kodzie; istniejący
+  egzemplarz na Raynaldzie spatchowany ręcznie na żywo (`activity.update({img})` — działa, choć
+  odczyt tej samej, nieodświeżonej zmiennej zaraz po `await` mylnie pokazuje starą wartość;
+  świeże pobranie z aktora potwierdza poprawny zapis).
+- Kolejność linków „Produkcja" u kowala: sidła/sprzęt do wspinaczki/strzały/wózek/kolczatki
+  wszystkie renderują się teraz jako `@UUID[]{}` do prawdziwych przedmiotów (kolczatki wymagały
+  osobnego scalenia w `_resolveProdukcjaLinks` — nie są ani w `GEAR_PLACEHOLDERS`, ani w
+  `REAL_GEAR`, mają własny plik).
+- Pełny przelot „Rozłóż kolczatki" przetestowany END-TO-END synteycznym sygnałem na WŁASNEJ scenie
+  testowej (nie na scenie gracza): flaga na aktorze → Tile utworzony poprawnie wyśrodkowany,
+  192×64 px (3×1 pola przy siatce 64 px), `rotation:0`, `locked:false`, właściwa tekstura — po
+  weryfikacji usunięty ręcznie, zero śladów zostawionych na żywej scenie.
+
+Wszystkie 152 testy nadal przechodzą.

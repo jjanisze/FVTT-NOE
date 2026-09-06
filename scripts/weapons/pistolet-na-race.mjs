@@ -278,6 +278,10 @@ async function _ensurePistoletRaceActivitiesUnguarded(item) {
   if (!_getActivity(item, LAUNCH_ID)) {
     await item.createActivity("utility", {
       name: "Wystrzel flarę",
+      // Dedicated icon (2026-09-06, batch 39) — was defaulting to dnd5e's generic utility-activity
+      // icon, indistinguishable from ATAK at a glance. A flare arcing mid-launch reads as its own
+      // action instead.
+      img: `modules/${MODULE_ID}/icons/activities/activity_flare_launch.svg`,
       activation: { type: "action" },
       visibility: { identifier: LAUNCH_ID },
       description: {

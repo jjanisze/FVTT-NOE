@@ -36,6 +36,7 @@ import { registerPochodzeniaMigration } from "./migration/migrate-pochodzenia.mj
 import { registerSightRangeMigration } from "./migration/normalize-sight-range.mjs";
 import { registerFovMigration } from "./migration/normalize-fov-angle.mjs";
 import { registerPistoletRaceMigration } from "./migration/migrate-pistolet-race.mjs";
+import { registerGearGraduationMigration } from "./migration/migrate-gear-graduation.mjs";
 import { registerRescaleSurowceMigration } from "./migration/rescale-surowce-units.mjs";
 import { registerSrdCleanup } from "./config/srd-cleanup.mjs";
 import { registerClassRules } from "./actors/class-rules.mjs";
@@ -122,7 +123,8 @@ import { registerToolkitChecks } from "./items/toolkit-check.mjs";
 import { registerToolkitCheckActivity } from "./items/toolkit-check-activity.mjs";
 import { registerKowalActions } from "./items/toolkit-kowal.mjs";
 import { registerInventoryToggleFix } from "./actors/inventory-toggle-fix.mjs";
-import { GEAR_PLACEHOLDERS, createGearPlaceholders } from "./config/gear-data.mjs";
+import { GEAR_PLACEHOLDERS, createGearPlaceholders, REAL_GEAR, createRealGear } from "./config/gear-data.mjs";
+import { registerKolczatka, kolczatkaApi } from "./items/kolczatka.mjs";
 import { registerChemia, chemiaApi } from "./items/chemia.mjs";
 import { sztuczkiApi } from "./config/sztuczki-data.mjs";
 import { pochodzeniaApi } from "./config/pochodzenia-data.mjs";
@@ -180,6 +182,7 @@ Hooks.once("init", () => {
   registerSightRangeMigration();
   registerFovMigration();
   registerPistoletRaceMigration();
+  registerGearGraduationMigration();
   registerRescaleSurowceMigration();
   registerSrdCleanup();
   registerClassRules();
@@ -326,7 +329,7 @@ Hooks.once("ready", () => {
   // Grenades stay separate from ammo, but are exposed in the same namespace for automation.
   game.neuroshima = {
     AMMO_CALIBERS, AMMO_CALIBER_MAP, GRENADE_TYPES, GRENADE_MAP, TOOLKITS, createToolkits,
-    syncToolkitToAllHolders, GEAR_PLACEHOLDERS, createGearPlaceholders
+    syncToolkitToAllHolders, GEAR_PLACEHOLDERS, createGearPlaceholders, REAL_GEAR, createRealGear
   };
 
   // Broń i pancerze — dane z tabel są źródłem prawdy dla kompendiów i dla
@@ -396,6 +399,8 @@ Hooks.once("ready", () => {
   game.neuroshima.latarka = latarkaApi;
   registerFlara();
   game.neuroshima.flara = flaraApi;
+  registerKolczatka();
+  game.neuroshima.kolczatka = kolczatkaApi;
   registerPistoletNaRace();
   registerGogle();
   game.neuroshima.gogle = gogleApi;

@@ -256,10 +256,9 @@ export const AMMO_CALIBERS = [
     // Palmera, ale bez tego w nazwie). Dłuższa wersja "Raca sygnałowa (do Pistoletu na Race)"
     // przelewała się poza pole nazwy w widoku Amunicji na karcie — zgłoszone żywo na Raynaldzie.
     label: "Raca sygnałowa",
-    // TODO(icons): interim reuse — a flare cartridge is shell-shaped, close enough to a shotgun
-    // shell, but no dedicated art commissioned yet (same "reuse the closest shape" call already
-    // made for grenade-signal reusing smoke_grenade.svg).
-    icon: "ammo_12_ga.svg",
+    // Fixed (2026-09-06, batch 39): was reusing ammo_12_ga.svg (a shotgun shell — close enough in
+    // shape, but not this item) as an interim placeholder. Dedicated art now exists.
+    icon: "raca_sygnalowa.svg",
     category: "Sygnałowa",
     // Empty formula — the weapon (Pistolet na Race, weapons-data.mjs) carries its own base
     // damage, same shape as bows/crossbows here. `type` below is otherwise unused (every reader
