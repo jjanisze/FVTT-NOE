@@ -147,12 +147,17 @@ rolls for. Root cause + fix:
   far) renders the Produkcja line as `@UUID[]{}` content-links (icon + click-through)
   instead of plain text, matching stock tools like Smith's Tools. Link targets:
   existing armor items (Hełm, Tarcza, the 4 zbroja śmieciowa tiers) via
-  `createArmors()`, plus 12 new **placeholder** Items (`scripts/config/gear-data.mjs`,
-  `createGearPlaceholders()`) for outputs with no real item yet (bełty, igły, kłódka,
-  kolczatki, łom, łopata, podkowy, płyty pancerne, sidła, sprzęt do wspinaczki,
-  strzały, wózek) — visibly TODO-flagged (hazard icon + banner text), not priced/
-  balanced. "Broń biała" and "naczynia metalowe" are categories, not single items,
-  and stay plain text on purpose.
+  `createArmors()`, plus placeholder Items (`scripts/config/gear-data.mjs`,
+  `createGearPlaceholders()`) for outputs with no real item yet — visibly TODO-flagged
+  (hazard icon + banner text), not priced/balanced. "Broń biała" and "naczynia
+  metalowe" are categories, not single items, and stay plain text on purpose.
+  **Update (2026-09-06, batch 39/40 — see IMPLEMENTATION.md (12)/(14))**: 5 of the
+  original 12 graduated out of this placeholder list into real, priced items — Sidła/
+  Sprzęt do wspinaczki/Strzały/Wózek into `gear-data.mjs`'s own `REAL_GEAR` table
+  (still `loot`, just priced now); Kolczatki further still, into its own file
+  (`items/kolczatka.mjs`) since it needed a real deploy Activity, not just stats. The
+  remaining 7 (bełty, igły, kłódka, łom, łopata, podkowy, płyty pancerne) are still
+  genuinely TODO — a real crafting window is still what they're waiting on, see below.
 - `syncToolkitToAllHolders(kitId)` (also on `game.neuroshima`) refreshes an already-
   distributed kit on every actor that holds a copy, not just the Zbrojownia master —
   needed because kits are handed out as independent item copies, not links.

@@ -6,6 +6,12 @@ Status: **IMPLEMENTED (minimal scope)** — cycle patch live in code; needs worl
 - ✅ Zbrojownia (`4IYaZ7YQ1uy90FOz`): **Biegłość w Narzędziach Małego Medyka**
   (`system.tools.medyka = { value: 1, ability: "int" }`) — verified live (PB applies).
 - ⏭ Reload the world so `registerToolProficiency()` loads (removes the 0.5 step in the panel).
+- ✅ **Second real-world confirmation (2026-09-06, IMPLEMENTATION.md (14))**: Raynald's
+  own sheet was missing FIVE tool proficiencies his Roll20 sheet actually had (medyka,
+  aptekarza, chemika, elektronika, hakera) — restored the same way, `value:1` on each,
+  no new granting mechanism. All five now compute to exactly the total his player
+  reported (6 = INT+4 + PB+2), confirming decision #3 ("no enforcement/guards, trust
+  the GM") still holds on a real character, not just the Zbrojownia example above.
 
 ## Goal
 Wire the Neuroshima **Biegłość** / **Specjalizacja w narzędziach** rule

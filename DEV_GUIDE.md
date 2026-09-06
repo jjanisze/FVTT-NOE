@@ -1105,3 +1105,90 @@ aktorów `TEST*`. Zobacz IMPLEMENTATION.md v0.14.20 dla pełnej listy i uzasadni
 
 Zobacz też ARCHITECTURE.md §10 — `item.system.activities` to `Map`, nie zwykły obiekt;
 `Object.values()` na nim milcząco zwraca `[]` niezależnie od rzeczywistej zawartości.
+
+## 15. Cztery wzorce, które się powtarzają — Ekwipunek/Sztuczki, batch 39/40 (2026-09-06)
+
+Cztery rzeczy z jednej sesji (batch gearu, Kolczatki, Mały medyk, Bez dna) okazały się
+tym samym kształtem po raz drugi lub trzeci. Spisane tu, żeby następny agent rozpoznał
+wzorzec, zamiast wymyślać go od nowa albo — gorzej — inaczej za każdym razem.
+
+### 15.1 Migracja „placeholder z Roll20 → prawdziwy przedmiot"
+
+Trzeci raz w tym module (`migration/migrate-pistolet-race.mjs`, `migrate-gear-
+graduation.mjs`, `migrate-medyk-graduation.mjs`): postać zmigrowana z Roll20 ma
+`type:"loot"` przedmiot, którego NAZWA mówi czym miał być (czasem z użytecznym stanem
+zakodowanym w tekście, np. „Mały Medyk 4/5"), ale zero prawdziwej mechaniki. Kształt za
+każdym razem ten sam:
+1. Dopasowanie luźne po nazwie (`/wzorzec/i.test(item.name)`), nie po fladze — flagi
+   tam nie ma, to cały problem.
+2. Jeśli docelowy typ to TAKŻE `"loot"` (np. `gear-data.mjs`'s `REAL_GEAR`): zwykły
+   `item.update(daneReal)` wystarczy.
+3. Jeśli docelowy typ jest INNY (`"tool"`, `"weapon"`, `"consumable"`): **nie**
+   `item.update({type: "tool", ...})` — to po cichu nic nie robi, `type` się nie
+   zmienia i reszta pól z tego samego wywołania też nie (potwierdzone, nie zgadnięte,
+   `migrate-pistolet-race.mjs`'s własny nagłówek). Zamiast tego: stwórz NOWY przedmiot
+   właściwym budowniczym (`createToolkits`, `buildWeaponItemData`, …), potem dopiero
+   skasuj stary — w tej kolejności, żeby błąd w środku zostawił „stary placeholder
+   nadal jest, nowego nie ma" (bezpieczne), nie „żaden nie istnieje".
+4. Jeśli w nazwie placeholdera jest liczbowy stan wart zachowania (ładunki, ilość) —
+   parsuj go OGÓLNYM regexem (`/(\d+)\s*\/\s*(\d+)/`), nie na sztywno pod jeden
+   konkretny przypadek, który akurat znaleziono.
+5. Zawsze: `{commit:false}` domyślnie (podgląd), `{commit:true}` żeby zastosować,
+   opcjonalny filtr `{actors:[...]}`, wystawione na `game.modules.get(MODULE_ID)
+   .api.migration.migrateX`. Zawsze przemieć CAŁY świat (`game.actors`), nie tylko
+   postać, na której problem zgłoszono — za każdym razem, gdy to sprawdzono, znalazło
+   się coś (albo świadomie NIE znalazło, co też jest wynikiem wartym potwierdzenia).
+
+### 15.2 Rozszerzanie mostka zdolności (`actors/abilities.mjs`) o nową Sztuczkę
+
+Zanim napiszesz kolejny `_hasFeat`/`_norm` per-plik (jak `toolkit-medyk.mjs` robi dla
+Pan Plaster/Aspiryna, albo `melee-maneuvers.mjs` dla Aramisa) — sprawdź, czy nowy
+przypadek pasuje do wspólnego mostka zamiast dokładać trzecią kopię tej samej logiki.
+Trzy kroki (zob. `bez-dna.mjs` jako pełny przykład):
+1. Nowy klucz w `ABILITY_KEYS` (`abilities.mjs`).
+2. Wpis w `ABILITY_DEFINITIONS[klucz]` — `label`, `aliases` (WSZYSTKIE realne nazwy,
+   których szuka dopasowanie po samej nazwie: klauzula osobno wpisana przez Roll20-owy
+   import ORAZ pełna nazwa całej Sztuczki, jeśli różne — `bezDna` ma oba: „bez dna" i
+   „pakowanie"), `noticeColor`.
+3. `legacyAbilityKeys: ["klucz"]` na właściwym wpisie w `SZTUCZKI` (albo
+   `CLASS_FEATURES`/`ORIGIN_ABILITIES`) — to jedyne miejsce, które łączy klucz z
+   prawdziwą Sztuczką; `_getIndex()` w `abilities.mjs` buduje z tego odwrotny indeks
+   automatycznie, nic więcej nie trzeba rejestrować.
+
+`hasAbility(actor, klucz)` i `getResolvedAbility(actor, klucz)` (zwraca też `source`:
+`"sztuczka"`/`"feature"`/`"pochodzenie"`/`"item"` po nazwie) obsługują odtąd i realny
+przedmiot z compendium, i luźny Roll20-owy bare-name feat, tym samym kodem. Test
+kontraktu: `sztuczki-bridge.test.mjs`, opisany w jego własnym nagłówku.
+
+### 15.3 Active Effect na polach Udźwigu — dnd5e już to wspiera
+
+`system.attributes.encumbrance.multipliers.{encumbered,heavilyEncumbered,maximum,
+overall}` — dnd5e's własny komentarz w `attributes.mjs`: „Initialize base encumbrance
+fields to be targeted by active effects". `overall` mnoży WSZYSTKIE trzy progi naraz
+(potwierdzone czytaniem `prepareEncumbrance()` wprost, nie zgadnięte) — właściwe pole,
+gdy reguła mówi „Udźwig rośnie", a nie konkretnie „tylko twardy limit". Zwykły
+`MULTIPLY` Active Effect wystarcza; żaden hook po stronie modułu nie musi przeliczać
+niczego ręcznie — natywny pipeline danych pochodnych dnd5e robi to sam, przy każdym
+odświeżeniu. Pasek udźwigu (`encumbrance-breakdown.mjs`) czyta już-przeliczony,
+natywny `aria-valuemax` — dostaje podwojoną wartość za darmo, bez zmian.
+
+### 15.4 Debounce + serializowana kolejka per aktor — kiedy naprawdę jest potrzebna
+
+Drugi raz w tym module (`actors/cichy-krok.mjs`, potem `actors/bez-dna.mjs`): sync
+Active Effect ↔ „czy aktor ma zdolność X" wisi na `createItem`/`deleteItem`. Pojedynczy
+awans postaci (albo import), który przyznaje kilka Itemów naraz, odpala te hooki kilka
+razy z rzędu, asynchronicznie, bez czekania jedno na drugie — check-then-act na tym
+samym stanie „efektu jeszcze nie ma" potrafi puścić więcej niż jedno tworzenie
+`ActiveEffect`. Rozwiązanie: stały 16-znakowy `_id` (Foundry wymaga dokładnie tyle) +
+`{keepId: true}` (duplikat może co najwyżej głośno się nie udać, nigdy faktycznie
+zduplikować) + kolejka `Map<actorId, Promise>` (`_syncChain`) + debounce per aktor
+(`_syncTimer`, 150 ms) kolapsująca serię wywołań do jednej realnej synchronizacji.
+Kopiuj z `cichy-krok.mjs` albo `bez-dna.mjs` wprost — to nie jest miejsce na
+wariację, sam kształt już dwa razy okazał się właściwy.
+
+Osobny, prostszy wariant tego samego problemu (jedna Aktywność na jednym Itemie, nie
+Active Effect na aktorze) — pojedynczy-lotu strażnik `Map<uuid, Promise>` bez debounce,
+bo tu wystarczy zserializować, nie ma serii zdarzeń do skolapsowania: `flara.mjs`
+(`ensureFlaraActivities`), `kolczatka.mjs`, `toolkit-medyk.mjs`'s uzupełnienie. Który
+wariant pasuje: seria zdarzeń z jednego awansu/importu → pełny kształt z 15.4; jedno
+tworzenie Itemu na raz, ale potencjalnie z dwóch klientów → sam strażnik wystarczy.

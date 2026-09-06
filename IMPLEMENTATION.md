@@ -2981,3 +2981,109 @@ mało prawdopodobna.
   weryfikacji usunięty ręcznie, zero śladów zostawionych na żywej scenie.
 
 Wszystkie 152 testy nadal przechodzą.
+
+## Zmiany z 6 września 2026 (13) — Pokrycie testowe dla batcha 39 (commit `4a589e9`)
+
+Osobna prośba: przejrzeć całą dotychczasową sesję (efekty wybuchów/ślady po wybuchu z (11) +
+gear/Kolczatki z (12)) pod kątem sensownych kandydatów na nowe testy Quench i je dopisać.
+Zrobione w granicach własnej doktryny `TESTING.md` (Warstwa 1 dane, Warstwa 4 `__testing`,
+Warstwa 5 prawdziwy dokument) — bez ruszania canvas/Sequencera/dialogów, zgodnie z jej §4.
+
+Najcenniejsze znalezisko: nic nie sprawdzało, że wolny tekst granatu (`effect`/`save` w
+`GRENADE_TYPES`) faktycznie parsuje się do realnej formuły/RO faktycznie rzucanej z karty czatu
+(`grenade-inventory.mjs`'s `_parseSaveSpec`/`_parseDamageSpec`, wystawione teraz przez `__testing`)
+— literówka w katalogu cofa się po cichu do wartości domyślnych, bez wyjątku. Dopisany test
+przechodzi po całym katalogu, nie próbce. Reszta: `gear-data.mjs` (`GEAR_PLACEHOLDERS`/
+`REAL_GEAR`) dostało dokładnie tę samą Warstwę-1 co każdy sąsiedni katalog (był to jedyny bez
+pokrycia mimo bycia zupełnie nowym), regresja na żywo złapany błąd scalania flag w
+`createRealGear` (`.update()` nie kasuje starego `craftingPlaceholder`), `migrate-gear-
+graduation.mjs`'s dopasowanie starych kopii (`__testing`), `kolczatka.mjs` (walidacja + ten sam
+wyścig pojedynczego-lotu co Pochodnia — sprawdzone, że KOPIA strażnika faktycznie działa, nie
+tylko że wygląda podobnie), tabela assetów `explosion-vfx.mjs`.
+
+152 → 182 testy, wszystkie w istniejącej paczce `dane-ekwipunku` (nowy plik nie był potrzebny —
+wszystko tej sesji było ekwipunkiem). Statyczny walidator i pełny żywy przebieg Quench czyste.
+
+## Zmiany z 6 września 2026 (14) — Mały medyk: z placeholdera na gotowy zestaw (commit `c417be3`)
+
+Zgłoszenie: „Raynald ma «Mały Medyk 4/5» — spraw, żeby to był prawdziwy zestaw z 4/5 ładunkami."
+Znalezisko zanim cokolwiek napisano: zestaw był **już w pełni zbudowany** — tabela leczenia
+warstwowego, zasób na 5 ładunków, integracja Sztuczek (Pan Plaster, Aspiryna i Miętusy), VFX,
+wszystko w `items/toolkit-medyk.mjs` (386 linii). Nagłówek `toolkits-data.mjs` twierdził
+odwrotnie („Mały medyk... DEFERRED (skip:true)") — nieprawda, poprawione. To była więc głównie
+migracja, nie budowa od zera, dokładnie ten sam kształt co Pistolet na Race/Kolczatki.
+
+- **`migration/migrate-medyk-graduation.mjs`** (nowy): konwersja `type:"loot"` → `type:"tool"`
+  (granica typu — ten sam gotcha co Pistolet na Race, udokumentowany tam, nie odkrywany drugi
+  raz) przez `createToolkits()`, z zachowaniem stanu ładunków sparsowanego OGÓLNIE z nazwy
+  placeholdera (`/(\d+)\s*\/\s*(\d+)/`, nie na sztywno „4/5"). Uruchomiona na żywo z
+  `commit:true`; zestaw Raynalda pokazuje teraz `uses:{spent:1,max:5}` (4/5), wszystkie 4
+  aktywności obecne, zweryfikowane trwałe po przeładowaniu.
+- Usunięty **`MEDYK_CHARGES_FLAG`** — eksportowany, ale nigdzie nieużywany (sprawdzone grepem po
+  całym `scripts/`) — zapas zawsze naprawdę mieszkał na natywnym `system.uses`. Skasowana też
+  osierocona wartość `medyk-charges:0` z Zbrojowni.
+- **Nowy prawdziwy przedmiot: „Uzupełnienie Narzędzi Małego Medyka"** (RAW: zestaw bandaży/
+  strzykawek/środków przeciwbólowych, cena 5 gb wprost z podręcznika — „Jedno uzupełnienie
+  kosztuje zazwyczaj 5 gambli") z realną aktywnością „Uzupełnij zapas": jedna sztuka uzupełnia
+  sparowany zestaw medyka do PEŁNA (RAW mówi o zapasie na pięć leczeń jako całości, nie o cenie
+  za pojedynczy ładunek) i zostaje przy tym zużyta. Waga/dostępność to szacunek MG (podręcznik
+  nie ma na to osobnej tabeli), oznaczone jako takie w opisie.
+- Przywrócone dane Raynalda z jego arkusza Roll20 (podane wprost przez gracza/MG na żywo, nie
+  zgadywane): biegłość w 5 narzędziach (medyka/aptekarza/chemika/elektronika/hakera — wszystkie
+  liczą się dokładnie na 6, zgodnie z arkuszem), biegłość w broni (Biała, Palna krótka) i
+  pancerzu (Lekki, Średni).
+- Świadomie NIE wyegzekwowane: RAW-owy wymóg „w odległości nie większej niż 1,5 m od pacjenta i
+  obie ręce wolne" dla Przywracania PW — zostawiony jako reguła rozstrzygana przez MG, na wyraźną
+  prośbę.
+
+10 nowych testów (182→192, paczka `dane-ekwipunku`): walidacja nowego przedmiotu, prowizja
+aktywności + ten sam wyścig pojedynczego-lotu co Kolczatki (sprawdzony wprost, nie zgadnięty),
+pełny przebieg uzupełnienia (kompletne PRZYWRÓCENIE do pełna, zużycie dokładnie jednej sztuki,
+brak zużycia na już-pełnym zestawie), dopasowanie/parsowanie N/M w migracji.
+
+## Zmiany z 6 września 2026 (15) — Bez dna (Pakowanie): Udźwig ×2 + plakietka + blokada duplikatów (commit `9b38bf2`)
+
+RAW (podręcznik, „PAKOWANIE"): „Bez dna. Twój Udźwig użytkowy i maksymalny rośnie dwukrotnie."
+Zgłoszenie: zamodelować tę klauzulę, pokazać plakietkę w widoku Ekwipunku — a w trakcie budowy,
+osobne zgłoszenie: „Multiple instances of Bez Dna don't do anything. They shouldn't be allowed."
+
+- **`actors/bez-dna.mjs`** (nowy): prawdziwy Active Effect na
+  `system.attributes.encumbrance.multipliers.overall` (MULTIPLY ×2) — to własne, udokumentowane
+  miejsce dnd5e do tego („Initialize base encumbrance fields to be targeted by active effects" —
+  komentarz w jego `attributes.mjs`), potwierdzone czytaniem `prepareEncumbrance()` wprost:
+  `overall` mnoży KAŻDY próg (encumbered/heavilyEncumbered/maximum), czyli dokładnie „użytkowy I
+  maksymalny" naraz, nie tylko twardy limit. Ten sam kształt synchronizacji co `cichy-krok.mjs`:
+  stały 16-znakowy `_id` + `keepId`, kolejka debounce+serializowana per aktor, `createItem`/
+  `deleteItem` + przemiatanie na `ready`.
+- Rozpoznanie przez wspólny mostek `actors/abilities.mjs` (`hasAbility`), nie osobny regex —
+  obejmuje realny przedmiot z compendium (flaga `sztuczka:"pakowanie"`) ORAZ luźny, ręcznie
+  wpisany feat Raynalda (alias „bez dna" I „pakowanie" — to drugie też, żeby przyszły realny
+  przedmiot nazwany wprost „Pakowanie" też się liczył, nie tylko wyodrębniona klauzula).
+- **`actors/encumbrance-breakdown.mjs`**: odrębna plakietka „Bez dna ×2" w legendzie Ekwipunku
+  (własny CSS — plakietka koloru-swatcha z pozostałych chipów zgniotłaby prawdziwą ikonę FA do
+  niewidocznego kwadracika 9×9 px, trzeba było jawnie zresetować). Tylko odczyt — nigdy nie
+  tworzy efektu samodzielnie.
+- **Blokada duplikatów** (dopisana w trakcie, na żądanie): `preCreateItem` blokuje drugi feat
+  grantujący Bez dna, gdy aktor już jeden ma — `hasAbility` jest bulowe, więc druga kopia i tak
+  nic by nie dodała, to czysty bałagan na karcie. Zweryfikowane na żywo wprost przeciwko
+  Raynaldowi (próba utworzenia drugiej kopii → `created:false`), nie tylko wyczytane z kodu.
+- Znalezione i naprawione na żywo NA Raynaldzie (nie przez ten kod — rozpoznanie było bulowe od
+  zawsze, nigdy nie ryzykowało podwójnego mnożnika): DWIE pary prawdziwych duplikatów z
+  pierwotnego importu — „Bez Dna"/„Bez dna" (dwie kapitalizacje) i dwa identyczne „Mam pod
+  ręką" — zdeduplikowane do jednego z każdego. Sprawdzone na WSZYSTKICH innych aktorach w
+  świecie: nikt inny nie ma tego wzorca.
+- `sztuczki-data.mjs`: `pakowanie` deklaruje teraz `legacyAbilityKeys` + `auto`/`manual` —
+  pokrycie „częściowe" (rozwój Cechy i „Mam pod ręką [I]" świadomie zostają ręczne, tylko „Bez
+  dna" jest zautomatyzowane).
+
+9 nowych testów (192→201, paczka `sztuczki-most`): obie ścieżki rozpoznania (flaga compendium +
+obie nazwy klauzuli/całej Sztuczki), efekt liczący DOKŁADNIE ×2 względem stanu bez Sztuczki (nie
+tylko „jakiś efekt istnieje"), usunięcie efektu przy zniknięciu Sztuczki, blokada duplikatu +
+kontrola, że niepowiązany feat nie jest przy okazji blokowany.
+
+Po zamknięciu FVTT: `npm run build:packs` + `npm run validate:packs` (wszystkie 14 paczek, nie
+tylko `sztuczki` — kilka sesji danych czekało na przebudowę). Zweryfikowane wprost przeciwko
+przebudowanej LevelDB (nie tylko logowi builda): opis „Pakowanie" w pakcie `sztuczki` faktycznie
+niesie teraz plakietkę „Częściowo zautomatyzowane" z odnośnikiem do `actors/bez-dna.mjs`.
+`validate:packs`: wszystkie sprawdzenia przeszły; liczby dokumentów sensowne (sprzęt 6,
+narzędzia 22, amunicja 21, granaty 13); brak wiszących UUID.
