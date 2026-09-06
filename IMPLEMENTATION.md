@@ -3081,6 +3081,52 @@ obie nazwy klauzuli/całej Sztuczki), efekt liczący DOKŁADNIE ×2 względem st
 tylko „jakiś efekt istnieje"), usunięcie efektu przy zniknięciu Sztuczki, blokada duplikatu +
 kontrola, że niepowiązany feat nie jest przy okazji blokowany.
 
+## Zmiany z 7 września 2026 (16) — Cichy regres: `game.user.isGM` w `init` ucinał pół startu modułu (commit `46ceb39`)
+
+Zgłoszenie GM-a po restarcie FVTT: „W widoku Ekwipunek karty postaci pasek udźwigu zajmuje 2/3
+szerokości zamiast całości" oraz, chwilę później, „kiedy Ekwipunek i Zapasy na karcie drużyny się
+scaliły? Czy to celowe? Czy na pewno nic nie zginęło?"
+
+**Pasek udźwigu.** Natywny wiersz nagłówka Ekwipunku dnd5e dzieli miejsce między `.encumbrance`
+(nasz pasek) i `<ul class="containers">` (przedmioty-kontenery, np. plecaki) po równo przez flex —
+nawet gdy lista kontenerów jest pusta. Raynald nie ma żadnego kontenera, więc pusta lista i tak
+zabierała ~1/3 wiersza (330/522 px na żywo). Naprawione jedną regułą w `neuroshima.css`:
+`.dnd5e2.actor .top > ul.containers:not(:has(li)) { display: none; }` — `:empty` NIE zadziałało,
+bo szablon Handlebars zostawia w pustym `<ul>` węzeł tekstowy z samą spacją/nową linią, co dla
+`:empty` liczy się jako „niepuste". Zweryfikowane na żywo: 522/522 px (100%) po poprawce.
+
+**Karta drużyny — dużo poważniejsze.** „Scalenie" Ekwipunku i Zapasów okazało się fałszywym
+tropem — `git log` na `party-sheet.mjs` pokazuje dokładnie dwa commity, żaden nie ruszał tablicy
+`TABS` (dwie osobne zakładki od samego początku, sierpień 2026). Karta drużyny live pokazywała
+`sheetClass: "GroupActorSheet"` (natywna klasa dnd5e) zamiast `NeuroshimaGroupSheet", i
+`CONFIG.Actor.sheetClasses.group` w ogóle nie zawierał wpisu modułu — `registerPartySheet()`
+nigdy się nie wykonał. Natywna karta grupy nie ma zakładki Zapasy wcale, stąd wrażenie „scalenia".
+
+Przyczyna: `registerMedyk()` jest wołany z bloku `init` w `main.mjs` (musi być — rejestruje typy
+aktywności przed załadowaniem dokumentów świata), ale jego dopisany dziś wcześniej backfill
+uzupełnień Małego Medyka odczytywał `game.user.isGM` **od razu, synchronicznie**. `game.user` jest
+bezwarunkowo `null` przez cały hook `init` — potwierdzone wprost w źródle silnika
+(`client/game.mjs`: `initialize()` odpala hook `init`, zanim `setupGame()` w ogóle zdąży wywołać
+`initializeDocuments()`, które dopiero tworzy `game.user`). Rzucony wyjątek ucinał **resztę
+wspólnego callbacka `init`** w `main.mjs` — cichutko, bez żadnego użytecznego śladu poza jedną
+linijką w konsoli. Wszystko zarejestrowane PO `registerMedyk()` w tym samym bloku nigdy się nie
+uruchamiało, na każdym starcie świata odkąd dziś wcześniej dopisano ten backfill: `registerToolkitChecks`,
+`registerChemia`, `registerToolAvailability`, `registerMapWatch`, `registerDifficultTerrainHint`,
+`registerDamageReductionUI`, `registerSheetShell`, `registerVehiclePortraitToggle`,
+`registerPartyTravel`, `registerPartySheet`, `registerPartyLootLock` i porządkujący hak
+czatowy. (Testy na żywo wcześniej dziś NIE złapały tego — ręczne przeładowanie modułu przez
+`import()` do obejścia flakowatości `quenchReady` woła `registerMedyk()` już po `ready`, kiedy
+`game.user` istnieje, więc przypadkiem maskowało błąd.)
+
+Naprawa: przenieść jednorazowy backfill do `Hooks.once("ready", ...)`, dokładnie tak jak
+sąsiedni listener `createItem` już odkłada sprawdzenie per-przedmiot. Zweryfikowane na żywo:
+pełny łańcuch `init` domyka się bez wyjątku, karta drużyny wraca do `NeuroshimaGroupSheet` z
+kompletem 4 zakładek (Drużyna/Ekwipunek/Zapasy/Kronika), panel Podróży i rozpiska Zapasów
+renderują się poprawnie ze wszystkimi 5 członkami. `npm test` czysto.
+
+Nic nie zostało utracone — dane i kod Zapasów (`party-supplies.mjs`, `party-tab-zapasy.hbs`,
+wpis w `TABS`) były cały czas nietknięte na dysku; funkcja po prostu milczące nie startowała.
+
 Po zamknięciu FVTT: `npm run build:packs` + `npm run validate:packs` (wszystkie 14 paczek, nie
 tylko `sztuczki` — kilka sesji danych czekało na przebudowę). Zweryfikowane wprost przeciwko
 przebudowanej LevelDB (nie tylko logowi builda): opis „Pakowanie" w pakcie `sztuczki` faktycznie
