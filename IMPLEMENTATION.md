@@ -2807,3 +2807,32 @@ kosmetyczna i odwracalna, podmieniono na żywo tylko jego efekt VFX (ten sam pli
 wygaśnie/MG go usunie — sam `Drawing` (i jego 60-sekundowe wygaśnięcie z (8)) nietknięty.
 
 Wszystkie 152 testy nadal przechodzą.
+
+## Zmiany z 6 września 2026 (10) — nadal za duże, i dlaczego nigdy się nie zawijało
+
+Po (9): „poszło z ogromnego na XL. I to MUSI być małe, może być średnie co najwyżej. I czemu nie
+łamie linii przy «granat\n»?"
+
+Sprawdzone na żywo bezpośrednio na drzewie PIXI (nie zgadywane): własne przeskalowanie sprite'a
+wybuchu (z `.size()`) w ogóle NIE dociera do tekstu — realny `worldTransform` etykiety odpowiadał
+dokładnie zoomowi kamery, zero wkładu od skali sprite'a. Więc „ogromne → dalej XL" to nie był
+rozmiar pojedynczej litery ustatkowujący się w dół — to CIĄG ZNAKÓW szedł jedną linią na pełną
+szerokość, bo PIXI nigdy nie zawija tekstu samo z siebie, a `wordWrap` nigdy nie było ustawione.
+Stąd też pytanie o „granat\n" — nie łamało linii, bo zawijanie było zwyczajnie wyłączone.
+
+Naprawione dwiema rzeczami naraz, nie jedną:
+- `fontSize` skaluje się teraz łagodnie Z ROZMIAREM wybuchu (16–24 px efektywnie, dla 2–6 kratek) —
+  „małe" przy małym granacie, „średnie" co najwyżej przy dużym, zamiast jednego sztywnego rozmiaru
+  na wszystko;
+- `wordWrap:true` z `wordWrapWidth` przyciętym do własnej szerokości sprite'a na ekranie
+  (`sizeSquares * canvas.grid.size` — ta sama arytmetyka co `.size()`, i ta sama przestrzeń
+  współrzędnych, w której faktycznie żyje tekst), `breakWords:false` (łamanie tylko MIĘDZY słowami,
+  czyli właśnie po „granat", nie w środku wyrazu), `align:"center"` dla równych wielolinijkowych
+  etykiet pod wyśrodkowanym sprite'em.
+
+Zweryfikowane na żywo wprost na rzeczywistych, świeżych rzutach gracza (nie tylko moich testach) —
+„Is good now!" po ponownym przeładowaniu. Sprzątnięte wyłącznie własne testowe znaczniki; rzuty
+gracza sprzed tej poprawki zostawione bez zmian (nie dostaną retroaktywnie zawijania ani nowego
+rozmiaru — wygasną same po 60 s albo do ręcznego usunięcia).
+
+Wszystkie 152 testy nadal przechodzą.

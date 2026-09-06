@@ -281,18 +281,35 @@ export function seqEffect(file, source, {
   if (belowTokens) fx = fx.belowTokens();
   if (randomRotation) fx = fx.randomRotation();
   if (label) {
+    // Sequencer's own renderer multiplies fontSize by (150 / canvas.grid.size)
+    // before handing it to PIXI (canvas-effect.js) — confirmed live, along with
+    // two things that AREN'T true despite looking plausible: the sprite's own
+    // shrink-to-fit scale from `.size()` above does NOT reach this text (a
+    // live PIXI-tree walk found the text's rendered scale matches the canvas
+    // zoom alone, nothing else), and PIXI never wraps text on its own — no
+    // `wordWrap` was ever set, so a long label just ran on at full width
+    // regardless of font size. So "gigantic" → "still XLARGE" wasn't the
+    // per-glyph size settling down, it was the STRING overflowing a small
+    // sprite with nothing to stop it. Fixed with both pieces together:
+    //  - fontSize scales mildly WITH the effect's own size (16..24 effective
+    //    px across sizeSquares 2..6) — "small" on a small blast, "medium" at
+    //    most on a big one, never fixed-and-oversized for every size alike.
+    //  - wordWrapWidth caps each line at the sprite's own on-screen footprint
+    //    (`sizeSquares * canvas.grid.size` — the same grid-units math `.size()`
+    //    itself uses, and the same coordinate space the text turned out to
+    //    live in), `breakWords:false` so it only breaks BETWEEN words (after
+    //    "granat", not mid-word), `align:"center"` so the wrapped lines don't
+    //    look lopsided under the centered sprite.
+    const squares = Number(sizeSquares) || 3;
+    const effectivePx = Math.min(24, Math.max(16, 16 + 2 * (squares - 2)));
     fx = fx.text(label, labelStyle ?? {
       fill: "#ffffff", fontFamily: "Arial Black, Arial, sans-serif",
-      // Sequencer's own renderer multiplies this by (150 / canvas.grid.size)
-      // before handing it to PIXI — a grid-relative normalization, NOT a literal
-      // px size (canvas-effect.js: `fontSize * (150 / canvas.grid.size)`).
-      // Confirmed live: an unscaled 24 rendered at ~56px on this world's ~64px-
-      // grid scenes — fine-looking on the biggest (6-square) blast tested, but
-      // "absolutely gigantic" against a real, small 2-square one. Pre-dividing
-      // here keeps the actual RENDERED size a fixed, sane ~22px regardless of
-      // whatever grid resolution the current scene happens to use.
-      fontSize: 22 * ((canvas.grid?.size ?? 150) / 150),
-      stroke: "#000000", strokeThickness: 4
+      fontSize: effectivePx * ((canvas.grid?.size ?? 150) / 150),
+      stroke: "#000000", strokeThickness: 4,
+      align: "center",
+      wordWrap: true,
+      breakWords: false,
+      wordWrapWidth: squares * (canvas.grid?.size ?? 150)
     });
   }
   if (name) fx = fx.name(name);
