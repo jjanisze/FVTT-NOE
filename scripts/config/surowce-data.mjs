@@ -33,8 +33,13 @@ export const SUROWCE_TYPES = Object.freeze([
   { code: "CH", id: "chemia",                 label: "Chemia",                  icon: "chemia.svg",                 accent: "#b5c24a", order: 1 },
   { code: "CE", id: "czesci_elektroniczne",   label: "Części elektroniczne",    icon: "czesci_elektroniczne.svg",   accent: "#5ab0c2", order: 2 },
   { code: "CZ", id: "czesci",                 label: "Części zamienne",         icon: "czesci.svg",                 accent: "#c2925a", order: 3 },
-  { code: "MK", id: "materialy_konstrukcyjne", label: "Materiały konstrukcyjne", icon: "materialy_konstrukcyjne.svg", accent: "#9a9a9a", order: 4 },
-  { code: "MO", id: "materialy_organiczne",   label: "Materiały organiczne",    icon: "materialy_organiczne.svg",   accent: "#c25a5a", order: 5 }
+  // MK/MO accents revised 2026-09-06: MK's plain grey (#9a9a9a) was nearly identical to the
+  // Ekwipunek bar's "Reszta" grey (#8f8f8f), and MO's red (#c25a5a) nearly identical to that
+  // same bar's "Broń" red (#b06a6a) — both real collisions once every category shares one bar
+  // (`actors/encumbrance-breakdown.mjs`). Replaced with a muted violet (stone/concrete) and a
+  // green (organic matter reads as green far more intuitively than red anyway).
+  { code: "MK", id: "materialy_konstrukcyjne", label: "Materiały konstrukcyjne", icon: "materialy_konstrukcyjne.svg", accent: "#a179af", order: 4 },
+  { code: "MO", id: "materialy_organiczne",   label: "Materiały organiczne",    icon: "materialy_organiczne.svg",   accent: "#5cb54a", order: 5 }
 ]);
 
 /** Lookup of exact icon basename → type. */

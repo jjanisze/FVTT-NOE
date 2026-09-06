@@ -2934,12 +2934,21 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
 .neuro-encumbrance-overlay { z-index: 1; }
 .neuro-encumbrance-seg:first-child { border-top-left-radius: inherit; border-bottom-left-radius: inherit; }
 
+/* The overlay paints on top of the native `.label` (value/max text) in DOM order —
+ * lifting the label above it (and adding a dark outline/glow) keeps "60.3 / 75"
+ * legible regardless of which category colour happens to sit underneath it. */
+.encumbrance .meter.progress .label {
+  position: relative;
+  z-index: 2;
+  text-shadow: 0 0 3px #000, 0 0 3px #000, 0 0 2px #000, 1px 1px 1px #000, -1px -1px 1px #000;
+}
+
 .neuro-ekwipunek-legend {
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  margin: 4px 0 8px;
-  padding: 5px 8px;
+  gap: 2px;
+  margin: 3px 0 4px;
+  padding: 3px 6px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 3px;
   background: rgba(0, 0, 0, 0.15);
@@ -2949,7 +2958,7 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
 .neuro-legend-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 4px 12px;
+  gap: 3px 10px;
 }
 
 .neuro-legend-chip {
@@ -2966,14 +2975,4 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
   height: 9px;
   border-radius: 2px;
   flex: 0 0 auto;
-}
-
-.neuro-legend-sections {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 2px 12px;
-  margin-top: 3px;
-  padding-top: 3px;
-  border-top: 1px dotted rgba(255, 255, 255, 0.1);
-  opacity: 0.75;
 }

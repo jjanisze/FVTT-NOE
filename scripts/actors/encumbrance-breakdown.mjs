@@ -4,20 +4,38 @@
  * Player-facing ask (2026-08-29): "I want players to see what they're carrying."
  * Two additions to the native `.encumbrance .meter.progress` bar, both display-only:
  *
- *   1. A taller bar, sub-divided by category (Broń / Pancerz / Zasoby / Reszta),
- *      overlaid on top of the native single-colour fill — the native element is
- *      kept untouched underneath for its aria/value semantics, this only adds
- *      DOM on top of it.
- *   2. A small legend under the bar: the four carry-weight categories, plus the
- *      five Surowce accent colours (`surowce-data.mjs`) and a one-line gloss for
- *      every Zasoby sub-panel, since a player who has never opened that tab has
- *      no way to know what "Zasoby" even groups together.
+ *   1. A taller bar, sub-divided by category, overlaid on top of the native
+ *      single-colour fill — the native element is kept untouched underneath for
+ *      its aria/value semantics, this only adds DOM on top of it.
+ *   2. A small legend under the bar, listing only the categories the actor is
+ *      actually carrying right now.
  *
- * "Zasoby" here is a strict superset of the four wrapper panels relocated by
- * `sheet-shell.mjs` (Amunicja/Magazynki/Pirotechnika/Leki/Prowiant/Surowce) —
- * whatever `getSurowiecType`/`getProwiantCategory`/the ammo-or-grenade-or-lekarstwo
- * checks recognise, recognised the same way here, so the bar can never disagree
- * with the tab it's summarising.
+ * ## Readability pass (2026-09-06)
+ *
+ * The original cut lumped every Zasoby sub-panel (Amunicja/Magazynki/Pirotechnika/
+ * Leki/Prowiant/Surowce) into ONE green "Zasoby" bar segment, while the legend
+ * separately listed all 5 Surowce accent colours as if they had their own segment
+ * — they didn't, so the legend promised colours the bar never actually showed.
+ * That's also why "Zasoby" was so often the dominant chunk of a character's carry
+ * weight: it was hiding everything but weapons/armor/misc loot behind one blob.
+ * Fixed by breaking every Zasoby sub-panel out into its own bar segment + legend
+ * entry (`_categoryOf`/`CATEGORY_ORDER` below) — the legend's colours now always
+ * match something real in the bar, and only categories the actor actually carries
+ * ever appear (empty categories are dropped, not greyed out).
+ *
+ * That also meant revisiting the whole colour set: cramming ~13 possible
+ * categories into one bar meant two existing colours turned out to collide
+ * (`Materiały konstrukcyjne`'s plain grey vs. `Reszta`'s grey; `Materiały
+ * organiczne`'s red vs. `Broń`'s red — see `surowce-data.mjs`'s updated accents).
+ * The new set was picked with hue-spacing math and then verified by actually
+ * rendering swatches side by side, not just trusted from the numbers.
+ *
+ * "1/3 bar, 2/3 legend" on a narrow sheet turned out to be a layout bug, not a
+ * design choice: the legend was inserted as `.encumbrance`'s next DOM sibling,
+ * which put it inside the SAME native flex row (`.top`) as the encumbrance card
+ * — squeezing the (otherwise fixed-width) native card down to make room. Fixed
+ * by anchoring the legend after `.top` itself (a full-width block below the row)
+ * and letting `.encumbrance` grow to fill what it no longer has to share.
  */
 
 import { getSurowiecType, SUROWCE_TYPES } from "../config/surowce-data.mjs";
@@ -26,12 +44,41 @@ import { getProwiantCategory } from "../config/prowiant-data.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 const BAR_HEIGHT_PX = 22;
 
-const BUCKETS = [
-  { id: "bron", label: "Broń", color: "#b06a6a" },
-  { id: "pancerz", label: "Pancerz", color: "#6a8ab0" },
-  { id: "zasoby", label: "Zasoby", color: "#7fae6a" },
-  { id: "reszta", label: "Reszta", color: "#8f8f8f" }
+/**
+ * Every non-Surowiec category, in Polish-label + bar/legend colour. Colours were
+ * chosen so that categories likely to appear together (a combat-focused PC easily
+ * carries Broń + Amunicja + Pirotechnika + Materiały zamienne at once, say) stay
+ * visually distinct even at a glance — verified by rendering actual swatches, not
+ * just checking hue distance on paper.
+ */
+const FIXED_CATEGORIES = {
+  bron:         { label: "Broń",         color: "#b06a6a" },
+  pancerz:      { label: "Pancerz",      color: "#6a8ab0" },
+  amunicja:     { label: "Amunicja",     color: "#cec17e" },
+  magazynki:    { label: "Magazynki",    color: "#6656b3" },
+  pirotechnika: { label: "Pirotechnika", color: "#d66329" },
+  leki:         { label: "Leki",         color: "#bf69a2" },
+  prowiant:     { label: "Prowiant",     color: "#5db691" },
+  reszta:       { label: "Reszta",       color: "#8f8f8f" },
+};
+
+/** Category ids in canonical bar/legend order — the 5 Surowce slot in after Pancerz. */
+const CATEGORY_ORDER = [
+  "bron", "pancerz",
+  ...SUROWCE_TYPES.slice().sort((a, b) => a.order - b.order).map(t => `surowiec:${t.code}`),
+  "amunicja", "magazynki", "pirotechnika", "leki", "prowiant",
+  "reszta",
 ];
+
+/** @returns {{label:string, color:string}|null} */
+function _categoryDef(id) {
+  if (id.startsWith("surowiec:")) {
+    const code = id.slice("surowiec:".length);
+    const type = SUROWCE_TYPES.find(t => t.code === code);
+    return type ? { label: `${type.label} (${type.code})`, color: type.accent } : null;
+  }
+  return FIXED_CATEGORIES[id] ?? null;
+}
 
 export function registerEncumbranceBreakdown() {
   for (const hookName of ["renderActorSheet", "renderCharacterActorSheet", "renderNPCActorSheet"]) {
@@ -44,12 +91,21 @@ export function registerEncumbranceBreakdown() {
 /*  Categorisation                               */
 /* -------------------------------------------- */
 
-function _isZasobyItem(item) {
-  if (getSurowiecType(item)) return true;
-  if (getProwiantCategory(item)) return true;
-  if (item.getFlag(MODULE_ID, "chemiaKey")) return true;
-  if (item.type === "consumable" && item.system.type?.value === "ammo") return true; // ammo/magazines/grenades
-  return false;
+/** Which bucket an item's weight counts toward — see `CATEGORY_ORDER`/`FIXED_CATEGORIES`. */
+function _categoryOf(item) {
+  const surowiec = getSurowiecType(item);
+  if (surowiec) return `surowiec:${surowiec.code}`;
+  if (getProwiantCategory(item)) return "prowiant";
+  if (item.getFlag(MODULE_ID, "chemiaKey")) return "leki";
+  if (item.type === "consumable" && item.system.type?.value === "ammo") {
+    const subtype = item.system.type?.subtype ?? "";
+    if (subtype.startsWith("grenade-")) return "pirotechnika";
+    if (subtype.startsWith("magazine-")) return "magazynki";
+    return "amunicja";
+  }
+  if (item.type === "weapon") return "bron";
+  if (item.type === "equipment") return "pancerz";
+  return "reszta";
 }
 
 function _itemWeightKg(item) {
@@ -59,19 +115,20 @@ function _itemWeightKg(item) {
   return (Number.isFinite(value) ? value : 0) * (Number.isFinite(qty) ? qty : 1);
 }
 
-/** @returns {{bron:number, pancerz:number, zasoby:number, reszta:number, total:number}} */
+/** @returns {Map<string, number>} category id → total kg, zero/negative entries never added. */
 function _computeBreakdown(actor) {
-  const totals = { bron: 0, pancerz: 0, zasoby: 0, reszta: 0 };
+  const totals = new Map();
   for (const item of actor.items ?? []) {
     const kg = _itemWeightKg(item);
     if (!kg) continue;
-    if (_isZasobyItem(item)) totals.zasoby += kg;
-    else if (item.type === "weapon") totals.bron += kg;
-    else if (item.type === "equipment") totals.pancerz += kg;
-    else totals.reszta += kg;
+    const cat = _categoryOf(item);
+    totals.set(cat, (totals.get(cat) ?? 0) + kg);
   }
-  totals.total = totals.bron + totals.pancerz + totals.zasoby + totals.reszta;
   return totals;
+}
+
+function _fmtKg(kg) {
+  return kg < 1 ? `${Math.round(kg * 1000)} g` : `${kg.toFixed(1)} kg`;
 }
 
 /* -------------------------------------------- */
@@ -103,57 +160,51 @@ function _onRenderInjectBreakdown(app, html) {
   overlay.className = "neuro-encumbrance-overlay";
   overlay.style.cssText = `position:absolute; inset:0; display:flex; pointer-events:none; overflow:hidden; border-radius:inherit;`;
 
-  for (const bucket of BUCKETS) {
-    const kg = totals[bucket.id] ?? 0;
+  for (const id of CATEGORY_ORDER) {
+    const kg = totals.get(id) ?? 0;
     if (kg <= 0) continue;
+    const def = _categoryDef(id);
+    if (!def) continue;
     const pct = Math.max(0, Math.min(100, (kg / max) * 100));
     const seg = document.createElement("div");
-    seg.className = `neuro-encumbrance-seg neuro-encumbrance-seg--${bucket.id}`;
-    seg.title = `${bucket.label}: ${kg < 1 ? Math.round(kg * 1000) + " g" : kg.toFixed(1) + " kg"}`;
-    seg.style.cssText = `flex:0 0 ${pct}%; background:${bucket.color}; opacity:0.85; pointer-events:auto;`;
+    seg.className = "neuro-encumbrance-seg";
+    seg.title = `${def.label}: ${_fmtKg(kg)}`;
+    seg.style.cssText = `flex:0 0 ${pct}%; background:${def.color}; opacity:0.85; pointer-events:auto;`;
     overlay.appendChild(seg);
   }
 
   meter.appendChild(overlay);
 
-  const inventoryTab = root.querySelector(".tab.inventory")
-    ?? root.querySelector('section[data-tab="inventory"]')
-    ?? root.querySelector('div[data-tab="inventory"]');
-  if (inventoryTab && !inventoryTab.querySelector(".neuro-ekwipunek-legend")) {
-    inventoryTab.querySelector(".encumbrance")?.after(_buildLegend());
+  // The native encumbrance card sits in a flex row (`.top`) alongside other
+  // native widgets (ability-derived carry stats, a containers list). Growing it
+  // in place — instead of leaving its native fixed width — is what "100% bar"
+  // means once the legend (below) is no longer sharing that same row with it.
+  const card = meter.closest(".encumbrance");
+  if (card) card.style.cssText += "flex:1 1 auto; width:auto;";
+
+  // Legend: a full-width block AFTER the whole `.top` row, not a sibling INSIDE
+  // it — that was the actual cause of the old "1/3 bar, 2/3 legend" squeeze, see
+  // this file's top doc comment.
+  const rowAnchor = card?.closest(".top") ?? card;
+  if (rowAnchor && !rowAnchor.parentElement?.querySelector(".neuro-ekwipunek-legend")) {
+    rowAnchor.after(_buildLegend(totals));
   }
 }
 
-function _buildLegend() {
+function _buildLegend(totals) {
   const legend = document.createElement("div");
   legend.className = "neuro-ekwipunek-legend";
 
-  const bucketRow = document.createElement("div");
-  bucketRow.className = "neuro-legend-row";
-  bucketRow.innerHTML = BUCKETS.map(b =>
-    `<span class="neuro-legend-chip"><i style="background:${b.color};"></i>${b.label}</span>`
-  ).join("");
+  const row = document.createElement("div");
+  row.className = "neuro-legend-row";
+  row.innerHTML = CATEGORY_ORDER
+    .filter(id => (totals.get(id) ?? 0) > 0)
+    .map(id => {
+      const def = _categoryDef(id);
+      return `<span class="neuro-legend-chip"><i style="background:${def.color};"></i>${def.label}</span>`;
+    })
+    .join("");
 
-  const surowceRow = document.createElement("div");
-  surowceRow.className = "neuro-legend-row";
-  surowceRow.innerHTML = SUROWCE_TYPES.map(t =>
-    `<span class="neuro-legend-chip"><i style="background:${t.accent};"></i>${t.label} (${t.code})</span>`
-  ).join("");
-
-  const sections = [
-    ["Amunicja", "luźna amunicja do przeładowania"],
-    ["Magazynki", "przygotowane zapasowe magazynki"],
-    ["Pirotechnika", "granaty, miny, ładunki wybuchowe"],
-    ["Leki", "chemia — narkotyki, lekarstwa, używki"],
-    ["Prowiant", "jedzenie i woda, informacyjnie"],
-    ["Surowce", "materiały do craftingu — 5 typów wyżej"]
-  ];
-  const sectionRow = document.createElement("div");
-  sectionRow.className = "neuro-legend-sections";
-  sectionRow.innerHTML = sections.map(([n, d]) => `<div><strong>${n}</strong> — ${d}</div>`).join("");
-
-  legend.appendChild(bucketRow);
-  legend.appendChild(surowceRow);
-  legend.appendChild(sectionRow);
+  legend.appendChild(row);
   return legend;
 }

@@ -36,6 +36,7 @@ import { registerPochodzeniaMigration } from "./migration/migrate-pochodzenia.mj
 import { registerSightRangeMigration } from "./migration/normalize-sight-range.mjs";
 import { registerFovMigration } from "./migration/normalize-fov-angle.mjs";
 import { registerPistoletRaceMigration } from "./migration/migrate-pistolet-race.mjs";
+import { registerRescaleSurowceMigration } from "./migration/rescale-surowce-units.mjs";
 import { registerSrdCleanup } from "./config/srd-cleanup.mjs";
 import { registerClassRules } from "./actors/class-rules.mjs";
 import { registerCichyKrok } from "./actors/cichy-krok.mjs";
@@ -178,6 +179,7 @@ Hooks.once("init", () => {
   registerSightRangeMigration();
   registerFovMigration();
   registerPistoletRaceMigration();
+  registerRescaleSurowceMigration();
   registerSrdCleanup();
   registerClassRules();
   registerCichyKrok();
