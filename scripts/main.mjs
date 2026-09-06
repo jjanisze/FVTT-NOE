@@ -37,6 +37,7 @@ import { registerSightRangeMigration } from "./migration/normalize-sight-range.m
 import { registerFovMigration } from "./migration/normalize-fov-angle.mjs";
 import { registerPistoletRaceMigration } from "./migration/migrate-pistolet-race.mjs";
 import { registerGearGraduationMigration } from "./migration/migrate-gear-graduation.mjs";
+import { registerMedykGraduationMigration } from "./migration/migrate-medyk-graduation.mjs";
 import { registerRescaleSurowceMigration } from "./migration/rescale-surowce-units.mjs";
 import { registerSrdCleanup } from "./config/srd-cleanup.mjs";
 import { registerClassRules } from "./actors/class-rules.mjs";
@@ -118,7 +119,7 @@ import {
   auditPowerSourceUses, repairPowerSourceUses,
   auditInventory, repairInventory
 } from "./config/inventory-audit.mjs";
-import { ARMORS, createArmors } from "./config/armor-data.mjs";import { registerMedyk } from "./items/toolkit-medyk.mjs";
+import { ARMORS, createArmors } from "./config/armor-data.mjs";import { registerMedyk, medykRefillApi } from "./items/toolkit-medyk.mjs";
 import { registerToolkitChecks } from "./items/toolkit-check.mjs";
 import { registerToolkitCheckActivity } from "./items/toolkit-check-activity.mjs";
 import { registerKowalActions } from "./items/toolkit-kowal.mjs";
@@ -183,6 +184,7 @@ Hooks.once("init", () => {
   registerFovMigration();
   registerPistoletRaceMigration();
   registerGearGraduationMigration();
+  registerMedykGraduationMigration();
   registerRescaleSurowceMigration();
   registerSrdCleanup();
   registerClassRules();
@@ -401,6 +403,7 @@ Hooks.once("ready", () => {
   game.neuroshima.flara = flaraApi;
   registerKolczatka();
   game.neuroshima.kolczatka = kolczatkaApi;
+  game.neuroshima.medykRefill = medykRefillApi;
   registerPistoletNaRace();
   registerGogle();
   game.neuroshima.gogle = gogleApi;

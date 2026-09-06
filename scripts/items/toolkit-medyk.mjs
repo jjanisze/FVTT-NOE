@@ -23,6 +23,24 @@
  * single heal produces just TWO chat messages: the tool-check roll + the heal summary.
  *
  * Docs: dnd5e applyDamage (healing type), Sequencer effect/scrolling-text/sound.
+ *
+ * ## Uzupełnienie Narzędzi Małego Medyka (2026-09-06, batch 40) — a real refill item
+ *
+ * RAW anchor (podręcznik, "MAŁY MEDYK" + "UZUPEŁNIENIE NARZĘDZI MAŁEGO MEDYKA"): "Narzędzia
+ * małego medyka posiadają zapas medykamentów na pięciokrotne leczenie. Jedno uzupełnienie
+ * kosztuje zazwyczaj 5 gambli" + a named refill kit ("zestaw bandaży, plastrów, igieł i
+ * strzykawek, ampułki ze środkami przeciwbólowymi, adrenaliną i witaminami"). The doc comment
+ * above already documented restocking as "intentionally NOT a chat action... editable on the
+ * item sheet" — still true as a FALLBACK, but there was never an actual purchasable/trackable
+ * item standing in for "one of these refill kits", despite the book naming one and three
+ * different toolkits (aptekarza/krawca/medyka) listing "bandaże" as a producible output with
+ * nothing behind it. `createMedykRefillItem`/`createMedykRefillStock` below build it as a real
+ * `consumable` with a "Uzupełnij zapas" utility activity — one unit tops the paired Mały medyk
+ * kit back to full (RAW frames refilling as restoring "a supply for five heals", not adding
+ * charges one at a time, so this refills to MAX, it doesn't add +1) and is consumed doing so.
+ * Same GM-relay-FREE shape as Flara/Kolczatki otherwise (`isX`/`buildXItemData`/`createXItem`/
+ * `createXStock`/`ensureXActivities` with a single-flight guard) — no privileged Scene write is
+ * needed here at all, this only ever touches items on the SAME actor.
  */
 
 import { MEDYK_HEAL_FLAG, MEDYK_MAX_CHARGES } from "../config/toolkits-data.mjs";
@@ -33,6 +51,177 @@ const TOOL_KEY   = "medyka";
 const REFILL_COST = 5;            // gb (informational — restock happens on the item, not chat)
 const HEAL_SOUND = `modules/${MODULE_ID}/sounds/misc/medyk_heal.ogg`;
 const HEAL_COLOR = "#39ff14";     // bright green
+
+/* -------------------------------------------- */
+/*  Uzupełnienie Narzędzi Małego Medyka (refill item)                                          */
+/* -------------------------------------------- */
+
+const REFILL_MARKER = "medykRefill";          // bool — identifies a refill-kit item
+const REFILL_USE_ID = "medyk-refill-uzyj";
+const REFILL_NAME = "Uzupełnienie Narzędzi Małego Medyka";
+// TODO(icons): no dedicated art commissioned yet — core Foundry heal icon as an honest interim
+// placeholder (same "not a finished-art claim" role `hazard.svg` plays for gear-data.mjs's own
+// TODO stubs), rather than borrowing Medpak's specific icon and risking two different items
+// reading as the same thing in an inventory list that could plausibly hold both at once.
+const REFILL_IMG = "icons/svg/heal.svg";
+const REFILL_PRICE = REFILL_COST; // 5 gb — RAW, same number the doc comment above already quoted.
+const REFILL_WEIGHT = 0.5;        // kg — GM estimate, not in RAW (book gives no weight for this kit).
+const REFILL_AVAIL = 50;          // % — GM estimate, not in RAW.
+const REFILL_DESCRIPTION =
+  `<p><strong>Cena:</strong> ${REFILL_PRICE} gb &nbsp;|&nbsp; <strong>Waga:</strong> ${REFILL_WEIGHT} kg `
+  + `&nbsp;|&nbsp; <strong>Dostępność:</strong> ${REFILL_AVAIL}%</p>`
+  + `<p>Zestaw bandaży, plastrów, igieł i strzykawek oraz ampułek ze środkami przeciwbólowymi, `
+  + `adrenaliną i witaminami — pozwala szybko opatrzyć rany i uzupełnić `
+  + `<strong>Narzędzia małego medyka</strong> do pełnego zapasu (${MEDYK_MAX_CHARGES}/${MEDYK_MAX_CHARGES}).</p>`
+  + `<p><em>Waga i dostępność to szacunek MG — podręcznik opisuje ten zestaw tylko fabularnie, `
+  + `bez osobnej tabeli wagi/dostępności (cena ${REFILL_PRICE} gb jest za to wprost RAW).</em></p>`;
+
+function _isMedykKit(item) {
+  return item?.type === "tool" && item?.system?.type?.baseItem === TOOL_KEY;
+}
+
+export function isMedykRefill(item) {
+  return item?.type === "consumable" && !!item?.getFlag?.(MODULE_ID, REFILL_MARKER);
+}
+
+function _getRefillActivity(item) {
+  return item.system.activities?.find(a => a.visibility?.identifier === REFILL_USE_ID) ?? null;
+}
+
+/**
+ * Runs the full "Uzupełnij zapas" flow: tops the actor's Mały medyk kit back to full and
+ * consumes one unit of this refill item. Exported directly (not via `__testing`) — same
+ * "significant flow, callable from a macro or a test" precedent as `healWithMedyk` above,
+ * not a bare private predicate.
+ * @param {Item5e} item  The refill-kit item.
+ */
+export async function useMedykRefill(item) {
+  item = item?.actor?.items?.get(item.id) ?? item;
+  const actor = item?.actor;
+  if (!actor) { ui.notifications.warn("Uzupełnienie wymaga, żeby leżało w ekwipunku postaci."); return; }
+
+  const qty = Number(item.system.quantity ?? 0);
+  if (qty <= 0) { ui.notifications.warn(`${item.name}: brak sztuk.`); return; }
+
+  const kit = actor.items.find(_isMedykKit);
+  if (!kit) {
+    ui.notifications.warn(`${actor.name} nie ma Narzędzi małego medyka do uzupełnienia.`);
+    return;
+  }
+
+  const max = Number(kit.system.uses?.max) || MEDYK_MAX_CHARGES;
+  const spent = Number(kit.system.uses?.spent ?? 0);
+  if (spent <= 0) {
+    ui.notifications.info(`${kit.name}: zapas już pełny (${max}/${max}) — uzupełnienie nie zużyte.`);
+    return;
+  }
+
+  await kit.update({ "system.uses.spent": 0 });
+
+  const newQty = qty - 1;
+  if (newQty <= 0) await item.delete();
+  else await item.update({ "system.quantity": newQty });
+
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    content: `<div class="neuro-flara-card"><div class="neuro-flara-head">${REFILL_NAME}</div>`
+      + `<p>Uzupełnia <strong>${kit.name}</strong> do pełna: <strong>${max}/${max}</strong>.</p>`
+      + `<p><em>Zostało uzupełnień: ${newQty} szt.</em></p></div>`
+  });
+}
+
+const _ensuringRefillActivities = new Map();
+
+/** Same single-flight guard as `flara.mjs`'s `ensureFlaraActivities` — see its comment. */
+export function ensureMedykRefillActivities(item) {
+  if (!isMedykRefill(item)) return Promise.resolve();
+  const key = item.uuid ?? item.id;
+
+  const inFlight = _ensuringRefillActivities.get(key);
+  if (inFlight) return inFlight;
+
+  const promise = _ensureMedykRefillActivitiesUnguarded(item).finally(() => {
+    _ensuringRefillActivities.delete(key);
+  });
+  _ensuringRefillActivities.set(key, promise);
+  return promise;
+}
+
+async function _ensureMedykRefillActivitiesUnguarded(item) {
+  if (!_getRefillActivity(item)) {
+    await item.createActivity("utility", {
+      name: "Uzupełnij zapas",
+      img: `modules/${MODULE_ID}/icons/tools/medyka.svg`,
+      activation: { type: "action" },
+      visibility: { identifier: REFILL_USE_ID },
+      description: { chatFlavor: "Uzupełnia zapas medykamentów Narzędzi małego medyka do pełna." }
+    }, { renderSheet: false });
+  }
+}
+
+export function buildMedykRefillItemData() {
+  return {
+    name: REFILL_NAME,
+    type: "consumable",
+    img: REFILL_IMG,
+    system: {
+      type: { value: "trinket", subtype: "" },
+      description: { value: REFILL_DESCRIPTION, chat: "" },
+      weight: { value: REFILL_WEIGHT, units: "kg" },
+      price: { value: REFILL_PRICE, denomination: "gp" },
+      quantity: 1,
+      uses: { max: "", spent: 0, recovery: [] },
+      identifier: "medyk-refill",
+      activities: {}
+    },
+    flags: { [MODULE_ID]: { [REFILL_MARKER]: true } }
+  };
+}
+
+/** Creates a brand new refill-kit item (world item, or embedded on `actor`). */
+export async function createMedykRefillItem({ actor, quantity = 1 } = {}) {
+  const data = buildMedykRefillItemData();
+  data.system.quantity = quantity;
+
+  const created = actor
+    ? (await actor.createEmbeddedDocuments("Item", [data]))[0]
+    : await Item.create(data);
+  if (!created) throw new Error("Medyk refill: createEmbeddedDocuments/Item.create returned nothing");
+
+  await ensureMedykRefillActivities(created);
+  return created;
+}
+
+/** Seeds/refreshes the Zbrojownia's own display copy — same shape as `flara.mjs`'s `createFlaraStock`. */
+export async function createMedykRefillStock(actor) {
+  actor ??= game.actors.find(a => a.getFlag(MODULE_ID, "isZbrojownia"));
+  if (!actor) { ui.notifications.error("Brak aktora Zbrojownia (flaga isZbrojownia)."); return null; }
+
+  const existing = actor.items.find(i => isMedykRefill(i));
+  const data = buildMedykRefillItemData();
+
+  if (existing) await existing.update(data);
+  else await actor.createEmbeddedDocuments("Item", [data]);
+
+  for (const item of actor.items.filter(i => isMedykRefill(i))) await ensureMedykRefillActivities(item);
+
+  ui.notifications.info(`Zbrojownia: ${REFILL_NAME} ${existing ? "zaktualizowane" : "dodane"}.`);
+  return { created: existing ? 0 : 1, updated: existing ? 1 : 0 };
+}
+
+/** Backfill: any refill-kit item already in the world that's missing its activity gets it. */
+async function ensureAllMedykRefillActivities() {
+  const items = [...game.items, ...game.actors.map(a => [...a.items]).flat()];
+  for (const item of items) {
+    if (isMedykRefill(item) && !_getRefillActivity(item)) await ensureMedykRefillActivities(item);
+  }
+}
+
+/** Public API, exposed on `game.neuroshima.medykRefill` from main.mjs. */
+export const medykRefillApi = {
+  create: createMedykRefillItem,
+  stock: createMedykRefillStock,
+};
 
 /** Heal tiers: highest threshold first. `mod` = add INT modifier. */
 const HEAL_TIERS = [
@@ -71,7 +260,12 @@ export function registerMedyk() {
   Hooks.on("dnd5e.postUseActivity", _onPostUseActivity);
   Hooks.on("renderChatLog", _registerChatLogListener);
   Hooks.on("renderSkillToolRollConfigurationDialog", _onRenderRollDialog);
-  console.log("Neuroshima 5e | Medyk (Przywracanie PW) registered");
+
+  // Uzupełnienie Narzędzi Małego Medyka — same createItem-backfill idiom as flara.mjs/kolczatka.mjs.
+  Hooks.on("createItem", (item) => { if (game.user.isGM) ensureMedykRefillActivities(item); });
+  if (game.user.isGM) ensureAllMedykRefillActivities();
+
+  console.log("Neuroshima 5e | Medyk (Przywracanie PW + uzupełnienie) registered");
 }
 
 /* ============================================================
@@ -120,9 +314,15 @@ function _onRenderRollDialog(app, element) {
 /** Suppress the redundant native usage card for the heal activity (3 → 2 messages). */
 function _onPreUseActivity(activity, _usageConfig, _dialogConfig, messageConfig) {
   if ( activity?.flags?.[MODULE_ID]?.[MEDYK_HEAL_FLAG] ) messageConfig.create = false;
+  if ( activity?.visibility?.identifier === REFILL_USE_ID ) messageConfig.create = false;
 }
 
 async function _onPostUseActivity(activity, _usageConfig, _results) {
+  if ( activity?.visibility?.identifier === REFILL_USE_ID ) {
+    const item = activity.item;
+    if ( item ) await useMedykRefill(item);
+    return;
+  }
   if ( !activity?.flags?.[MODULE_ID]?.[MEDYK_HEAL_FLAG] ) return;
   const item  = activity.item;
   const medic = activity.actor;

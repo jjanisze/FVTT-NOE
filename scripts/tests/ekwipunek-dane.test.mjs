@@ -22,6 +22,11 @@
  *     (`.update()` nie kasuje starego `craftingPlaceholder`).
  * Parsowanie tekstu granatów (`actors/grenade-inventory.mjs`) i tabela assetów VFX
  * wybuchów (`config/explosion-vfx.mjs`) też tu mieszkają — patrz ich własne `describe`.
+ *
+ * Batch 40 (2026-09-06): Mały medyk — ten sam wzorzec (placeholder znaleziony żywcem na
+ * Raynaldzie, migracja + nowa treść, zob. `items/toolkit-medyk.mjs` i `migration/migrate-
+ * medyk-graduation.mjs`). Toolkit sam w sobie okazał się już gotowy (błędny komentarz w
+ * `toolkits-data.mjs` twierdził inaczej) — jedyna naprawdę nowa treść to uzupełnienie zapasu.
  */
 
 import {
@@ -33,7 +38,7 @@ import { ARMORS, ARMOR_MAP, buildArmorItemData } from "../config/armor-data.mjs"
 import { ADDON_DEFS, ADDON_LIST, SIGHT_ADDON_IDS } from "../config/addons-data.mjs";
 import { installAddonById, removeAddon } from "../weapons/addons.mjs";
 import { POCHODNIA_VARIANTS, buildPochodniaItemData, ensurePochodniaActivities, createPochodniaItem } from "../weapons/pochodnia.mjs";
-import { TOOLKITS, buildToolkitItemData } from "../config/toolkits-data.mjs";
+import { TOOLKITS, buildToolkitItemData, createToolkits, MEDYK_MAX_CHARGES } from "../config/toolkits-data.mjs";
 import { CHEMIA, CHEMIA_TYPE, CHEMIA_SUBTYPES, chemiaKeyByName, chemiaItemData } from "../config/chemia-data.mjs";
 import { ALL_DISEASES } from "../config/diseases-data.mjs";
 import {
@@ -49,6 +54,11 @@ import {
 } from "../config/explosion-vfx.mjs";
 import { __testing as grenadeParsing } from "../actors/grenade-inventory.mjs";
 import { __testing as gearMigration } from "../migration/migrate-gear-graduation.mjs";
+import { __testing as medykMigration } from "../migration/migrate-medyk-graduation.mjs";
+import {
+  isMedykRefill, buildMedykRefillItemData, createMedykRefillItem, ensureMedykRefillActivities,
+  useMedykRefill
+} from "../items/toolkit-medyk.mjs";
 import { MODULE_ID, scratchActor, scratchCleanup } from "./helpers.mjs";
 
 /** Jedno zapytanie HEAD na plik; wyniki cache'owane, bo ikony się powtarzają. */
@@ -617,6 +627,99 @@ export function registerEquipmentDataTests(quench) {
           const names = Array.from(actor.items.get(item.id).system.activities ?? []).map(a => a.name);
           expect(names.filter(n => n === "Rozłóż kolczatki")).to.have.lengthOf(1);
         });
+      });
+    });
+
+    /* ---------------------------------------------------------------- */
+
+    describe("Mały medyk — uzupełnienie zapasu (items/toolkit-medyk.mjs)", function () {
+      // Batch 40 (2026-09-06): found live on Raynald — a hand-typed "Mały Medyk 4/5" loot
+      // placeholder standing in for what was, underneath, already a fully-built toolkit
+      // (tiered heal table, 5-charge resource — `toolkits-data.mjs`'s `medyka` entry). The one
+      // genuinely NEW piece is this refill item; the toolkit itself is covered by the generic
+      // "Zestawy narzędziowe" describe below (it's just one more entry in `TOOLKITS`).
+      it("dane przedmiotu przechodzą walidację dnd5e", function () {
+        expect(buildsCleanly(buildMedykRefillItemData())).to.be.null;
+      });
+
+      it("isMedykRefill rozpoznaje tylko oznaczony consumable", function () {
+        const data = buildMedykRefillItemData();
+        expect(isMedykRefill({ type: "consumable", getFlag: (m, k) => data.flags[m]?.[k] })).to.be.true;
+        expect(isMedykRefill({ type: "loot", getFlag: () => true }), "zły typ").to.be.false;
+        expect(isMedykRefill({ type: "consumable", getFlag: () => undefined }), "brak flagi").to.be.false;
+      });
+
+      describe("na prawdziwym aktorze (prowizja aktywności + pełny przebieg uzupełnienia)", function () {
+        let actor;
+        before(async function () { actor = await scratchActor(); });
+        after(async function () { await scratchCleanup(); });
+
+        it("createMedykRefillItem daje dokładnie jedną aktywność „Uzupełnij zapas”", async function () {
+          const item = await createMedykRefillItem({ actor });
+          const names = Array.from(item.system.activities ?? []).map(a => a.name);
+          expect(names.filter(n => n === "Uzupełnij zapas")).to.have.lengthOf(1);
+        });
+
+        it("równoczesne wywołania ensureMedykRefillActivities nie duplikują aktywności", async function () {
+          // Regresja na wyrost, złapana żywcem PODCZAS budowy tej funkcji (nie w tym pakiecie
+          // testów): ręczne dwukrotne zaimportowanie tego modułu w konsoli (dwie NIEZALEŻNE
+          // kopie `_ensuringRefillActivities`, każda nieświadoma drugiej) dało dwie identyczne
+          // aktywności na jednym przedmiocie na Zbrojowni. W normalnej pracy modułu istnieje
+          // tylko JEDNA kopia tego pliku, więc pojedynczy-lot strażnik faktycznie chroni — ten
+          // test to sprawdza wprost, zamiast ufać mu na słowo.
+          const data = buildMedykRefillItemData();
+          const [item] = await actor.createEmbeddedDocuments("Item", [data], { render: false });
+          await Promise.all([ensureMedykRefillActivities(item), ensureMedykRefillActivities(item)]);
+          const names = Array.from(actor.items.get(item.id).system.activities ?? []).map(a => a.name);
+          expect(names.filter(n => n === "Uzupełnij zapas")).to.have.lengthOf(1);
+        });
+
+        it("useMedykRefill uzupełnia sparowany zestaw do pełna i zużywa jedną sztukę", async function () {
+          await createToolkits(actor, { only: ["medyka"] });
+          const kit = actor.items.find(i => i.type === "tool" && i.system.type?.baseItem === "medyka");
+          await kit.update({ "system.uses.max": String(MEDYK_MAX_CHARGES), "system.uses.spent": 3 }); // 2/5 zostało
+
+          const refill = await createMedykRefillItem({ actor, quantity: 2 });
+          await useMedykRefill(refill);
+
+          const kitAfter = actor.items.get(kit.id);
+          expect(kitAfter.system.uses.spent, "spent po uzupełnieniu").to.equal(0);
+          expect(actor.items.get(refill.id)?.system.quantity, "ilość uzupełnień po zużyciu jednej").to.equal(1);
+        });
+
+        it("useMedykRefill na PEŁNYM zestawie nie zużywa uzupełnienia", async function () {
+          await createToolkits(actor, { only: ["medyka"] });
+          const kit = actor.items.find(i => i.type === "tool" && i.system.type?.baseItem === "medyka");
+          await kit.update({ "system.uses.max": String(MEDYK_MAX_CHARGES), "system.uses.spent": 0 }); // już pełny
+
+          const refill = await createMedykRefillItem({ actor, quantity: 1 });
+          await useMedykRefill(refill);
+
+          expect(actor.items.get(refill.id)?.system.quantity, "uzupełnienie nietknięte na pełnym zestawie").to.equal(1);
+        });
+      });
+    });
+
+    /* ---------------------------------------------------------------- */
+
+    describe("Migracja „Mały medyk” — dopasowanie starych kopii i parsowanie N/M (migration/migrate-medyk-graduation.mjs)", function () {
+      it("rozpoznaje luźny, ręcznie wpisany placeholder — dokładnie to, co znaleziono na Raynaldzie", function () {
+        expect(medykMigration.isLooseMedykPlaceholder({ type: "loot", name: "Mały Medyk 4/5" })).to.be.true;
+        expect(medykMigration.isLooseMedykPlaceholder({ type: "loot", name: "mały medyk" })).to.be.true;
+      });
+
+      it("ignoruje przedmioty innego typu (np. już zmigrowany zestaw — teraz tool)", function () {
+        expect(medykMigration.isLooseMedykPlaceholder({ type: "tool", name: "Mały Medyk 4/5" })).to.be.false;
+      });
+
+      it("nie łapie niepowiązanej nazwy", function () {
+        expect(medykMigration.isLooseMedykPlaceholder({ type: "loot", name: "Nóż taktyczny" })).to.be.false;
+      });
+
+      it("parseCharges czyta dowolną parę „N/M” z nazwy, nie tylko \"4/5\"", function () {
+        expect(medykMigration.parseCharges("Mały Medyk 4/5")).to.deep.equal({ current: 4, max: 5 });
+        expect(medykMigration.parseCharges("Mały Medyk 0/5")).to.deep.equal({ current: 0, max: 5 });
+        expect(medykMigration.parseCharges("Mały Medyk")).to.be.null;
       });
     });
 

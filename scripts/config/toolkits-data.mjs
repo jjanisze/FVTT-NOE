@@ -11,8 +11,10 @@
  * Dual-ability kits store the FIRST-listed ability as `system.ability`; the player can
  * re-pick the ability in the roll dialog. `altAbility` is informational (description).
  *
- * Mały medyk is intentionally DEFERRED (skip:true) — needs a tiered heal table + a
- * 5-charge resource + refill flow (later batch).
+ * Mały medyk (`heal: true` below) is fully built, NOT deferred — tiered heal table,
+ * 5-charge resource and refill item all exist (`items/toolkit-medyk.mjs`). This comment
+ * used to say otherwise (stale, 2026-09-06 fix) — trust the `medyka` entry's own fields,
+ * not old prose above it.
  */
 
 import { createGearPlaceholders, createRealGear } from "./gear-data.mjs";
@@ -29,10 +31,13 @@ const ZBROJE_SMIECIOWE_NAMES = Object.freeze([
 
 /** Activity flag marking the medyk "Przywracanie PW" heal activity (read by toolkit-medyk.mjs). */
 export const MEDYK_HEAL_FLAG = "medykHeal";
-/** Item flag holding the medyk medicine supply (number of remaining heals). */
-export const MEDYK_CHARGES_FLAG = "medyk-charges";
-/** Default / full medicine supply. */
+/** Default / full medicine supply (RAW: "zapas medykamentów na pięciokrotne leczenie"). */
 export const MEDYK_MAX_CHARGES = 5;
+// Fixed (2026-09-06): `MEDYK_CHARGES_FLAG` ("medyk-charges") used to live here too — dead code,
+// never read or written anywhere (grepped the whole `scripts/` tree to confirm, not assumed).
+// The medicine supply has always actually lived on the item's NATIVE `system.uses` — see
+// `createToolkits`'s `kit.heal` branch and `items/toolkit-medyk.mjs`'s `healWithMedyk`. Removed
+// along with the stray leftover `medyk-charges:0` flag value it left on the Zbrojownia item.
 
 /** Abbrev. label for an ability key. */
 const ABILITY_LABEL = { str: "Siła", dex: "Zręczność", con: "Kondycja", int: "Inteligencja", wis: "Mądrość", cha: "Charyzma" };
