@@ -2578,3 +2578,29 @@ nabój"; świat/AK, Light Fifty, UZI „Wymiana magazynka") — zachowany zawsze
 który `_findManagedMagazineActivity` faktycznie od zawsze aktualizował), usunięty osierocony drugi.
 Pełne przemiecenie całego świata po naprawie: zero pozostałych duplikatów. Wszystkie 152 testy
 nadal przechodzą.
+
+## Zmiany z 6 września 2026 (5) — Odzyskane, już narysowane ikony
+
+Zgłoszenie: „chyba brakuje nam ikon, przynajmniej dla ręcznej flary". Sprawdzone systematycznie
+(każdy `icon:`/`img:` w `scripts/` porównany z rzeczywistą zawartością `icons/`) — okazało się, że
+w większości NIE brakuje ikon, tylko nie były podpięte, dokładnie ten sam wzorzec, który
+`chemia-data.mjs`'s własny komentarz z 29 sierpnia już raz opisał i naprawił dla leków/narkotyków.
+
+- **`items/flara.mjs`**: Flara używała `pochodnia_smolowa.svg` jako tymczasowego zastępstwa —
+  `icons/weapons/raca_oswietleniowa.svg` (płonący kaganek sygnałowy, dokładnie ten przedmiot) leżał
+  nieużywany w tym samym folderze od wcześniejszej paczki ikon. Podpięte.
+- **`config/ammo-data.mjs`** („Granat sygnałowy"): reużywał `smoke_grenade.svg`; dedykowany
+  `granat_sygnalowy.svg` też już istniał, nieużywany. Podpięte; istniejący egzemplarz u Victora von
+  Blitza spatchowany ręcznie na żywo (nowe przedmioty tworzone od teraz dostają go automatycznie).
+- **`weapons/addons.mjs`** (aktywności dodatków Bagnet/Granatnik 40mm/Śrutówka .12 Ga): wszystkie
+  trzy wskazywały na `icons/activities/...` — folder, który nigdy nie zawierał tych plików (tylko
+  generyczne ikony typu akcji). Prawdziwe pliki od dawna czekały w `icons/addons/` (a Śrutówka
+  dodatkowo pod inną nazwą: `srutowka-podlufowa.svg`, nie `srutowka.svg`). Podpięte pod właściwe
+  ścieżki; żaden gracz nie miał jeszcze zainstalowanego żadnego z tych dodatków, więc nie było
+  czego poprawiać na żywo.
+
+Weryfikacja: wszystkie pięć poprawionych ścieżek zwraca HTTP 200 na żywo; 152/152 testów nadal
+przechodzi. Prawdziwie brakujące ikony (Raca sygnałowa jako nabój do Pistoletu na Race, cztery
+zaślepki craftingowe Narzędzi, opcjonalnie ikona aktywności „Wystrzel flarę" i ~11 generycznych
+ikon efektów Chemii) zostały GM-owi przekazane do narysowania — nie skrócone tu, GM prowadzi
+własną listę.

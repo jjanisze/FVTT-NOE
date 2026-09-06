@@ -498,7 +498,9 @@ async function _createAddonActivity(weapon, def) {
     activityData = {
       type: "attack",
       name: "Bagnet",
-      img: `modules/${MODULE_ID}/icons/activities/bagnet.svg`,
+      // Fixed (2026-09-06): pointed at icons/activities/ (only holds generic action-type icons —
+      // this file never existed there), not icons/addons/ where the real bagnet.svg already is.
+      img: `modules/${MODULE_ID}/icons/addons/bagnet.svg`,
       damage: { includeBase: false, parts: [{ number: 1, denomination: 6, types: ["piercing"] }] },
       range: { override: true, value: 2, units: "m" },
       attack: { ability: "str", type: { value: "melee", classification: "weapon" } },
@@ -508,7 +510,8 @@ async function _createAddonActivity(weapon, def) {
     activityData = {
       type: "attack",
       name: "Granatnik 40mm",
-      img: `modules/${MODULE_ID}/icons/activities/granatnik.svg`,
+      // Fixed (2026-09-06): same icons/activities/ vs icons/addons/ mixup as Bagnet above.
+      img: `modules/${MODULE_ID}/icons/addons/granatnik.svg`,
       damage: { includeBase: false, parts: [{ number: 3, denomination: 6, types: ["bludgeoning"] }] },
       range: { override: true, value: 100, units: "m" },
       attack: { ability: "dex", type: { value: "ranged", classification: "weapon" } },
@@ -518,7 +521,9 @@ async function _createAddonActivity(weapon, def) {
     activityData = {
       type: "attack",
       name: "Śrutówka .12 Ga",
-      img: `modules/${MODULE_ID}/icons/activities/srutowka.svg`,
+      // Fixed (2026-09-06): wrong directory (icons/activities/, same mixup as the two above) AND
+      // wrong basename — the real file is srutowka-podlufowa.svg, matching def.id, not srutowka.svg.
+      img: `modules/${MODULE_ID}/icons/addons/srutowka-podlufowa.svg`,
       damage: { includeBase: false, parts: [{ number: 2, denomination: 6, types: ["bludgeoning"] }] },
       range: { override: true, value: 6, units: "m" },
       attack: { ability: "dex", type: { value: "ranged", classification: "weapon" } },

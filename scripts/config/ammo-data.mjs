@@ -407,8 +407,10 @@ export const GRENADE_TYPES = [
   {
     id: "grenade-signal",
     label: "Granat sygnałowy",
-    // TODO(icons): interim reuse of smoke_grenade.svg — real art not commissioned yet.
-    icon: "smoke_grenade.svg",
+    // Fixed (2026-09-06): was reusing smoke_grenade.svg as an interim placeholder, but a
+    // dedicated granat_sygnalowy.svg was already sitting in icons/weapons unused — same class of
+    // gap as Flara's own icon, found in the same sweep.
+    icon: "granat_sygnalowy.svg",
     category: "Granaty",
     area: "—",
     save: "—",

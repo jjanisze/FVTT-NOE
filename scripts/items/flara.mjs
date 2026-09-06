@@ -111,10 +111,11 @@ const FLARE_ATTENUATION = 0.4;
 const FLARE_ANIMATION = { type: "torch", speed: 10, intensity: 10 };
 
 const ICON_BASE = `modules/${MODULE_ID}/icons/weapons`;
-// TODO(icons): interim reuse, no dedicated Flara art commissioned yet — a hand-held glowing
-// stick is at least the right silhouette (same "closest existing shape" call already made for
-// grenade-signal reusing smoke_grenade.svg).
-const FLARA_IMG = `${ICON_BASE}/pochodnia_smolowa.svg`;
+// Fixed (2026-09-06): this was reusing pochodnia_smolowa.svg as an interim placeholder, but
+// `icons/weapons/raca_oswietleniowa.svg` — a lit flare stick, exactly this item — was already
+// sitting in the same directory, unused, from an earlier art batch. Same class of gap the
+// chemia-data.mjs icon sweep found and fixed once already (see its own doc comment).
+const FLARA_IMG = `${ICON_BASE}/raca_oswietleniowa.svg`;
 
 const FLARA_NAME = "Flara";
 const FLARA_DESCRIPTION =
