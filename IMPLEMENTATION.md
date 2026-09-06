@@ -2468,3 +2468,87 @@ Zobacz doc comment na górze `actors/encumbrance-breakdown.mjs` dla pełnego uza
 - **Złapane pierwszym dry-runem, zanim cokolwiek zacommitowano**: aktor z flagą `isZbrojownia` (ten sam wzorcowy aktor, którego `createWeapons()`/`createLatarkaStock()`/`createFlaraStock()` też celują) już miał w katalogu „Chemia (CH) 100 g" przy `weight.value: 0.1` — ktoś już dawno ustawił WZORZEC na konwencję 100 g, tej samej, którą ta migracja miała wprowadzić gdzie indziej. Ślepy przelicznik ×10/÷10 „poprawiłby" ten już poprawny wzorzec do 10 g/jednostkę. To dokładnie ten sam problem co `project_catalog_drift_distributed_copies`, tylko w drugą stronę — tym razem to katalog miał rację, a wydane kopie (Raynalda „Litry chemii", Victora „pół kilo elektroniki" — obie na pełnym 1 kg/jednostkę mimo tej drugiej nazwy) się rozjechały. Naprawione: aktorzy z flagą `isZbrojownia` są bezwarunkowo wykluczeni z tej migracji, nawet jeśli podani wprost po nazwie.
 - Idempotencja: w przeciwieństwie do reszty migracji w tym folderze (które zbiegają do stałej wartości, więc ponowne uruchomienie samo w sobie nic nie robi), „podziel przez 10" nie ma stałego celu do sprawdzenia — powtórne uruchomienie bez zabezpieczenia podzieliłoby przez 100 łącznie. Każdy przeliczony przedmiot dostaje flagę `surowceRescaled100g` i jest pomijany przy każdym kolejnym uruchomieniu.
 - Uruchomione i zacommitowane na żywo: 5 stosów (4 na Raynaldzie, 1 na Victorze von Blitz) przeliczonych; potwierdzona idempotencja (drugi dry-run: 0 wpisów); potwierdzone na pasku udźwigu Raynalda, że łączna waga CH/CE/CZ jest identyczna przed i po (3,0/2,0/1,0 kg — bez zmian, jak powinno być przy czystym przeliczniku).
+
+## Zmiany z 6 września 2026 (3) — Pancerz/Narzędzia/Sprzęt na pasku, naprawa "zablokowanego" Pistoletu na Race
+
+### Pasek udźwigu: trzy nowe kategorie wydzielone z „Reszty" (`actors/encumbrance-breakdown.mjs`)
+
+Żywy przegląd całej drużyny (nie tylko Raynalda) pokazał, że „Reszta" wciąż robiła większość roboty:
+prawie każdy ręcznie dodany przedmiot — plecaki, zestawy, manierki, baterie, a co ważniejsze,
+kilka prawdziwych pancerzy — ma typ zwykłego `loot`, a nie `equipment`/`tool`. Konkretnie:
+Raynalda „Kamizelka Kuloodporna" (6 kg) i Victora „Kurtka ćwiekowana" (prawdziwa nazwa z katalogu
+`armor-data.mjs`!) są typu `loot`, więc dotychczasowy warunek `item.type === "equipment"` ich nie
+widział — ten sam wzorzec rozjazdu co `project_ammo_wrong_item_type`, tylko dla pancerzy zamiast
+amunicji. To zmiana WYŁĄCZNIE na pasku — nie nadaje żadnego realnego bonusu do TT, bo typ
+przedmiotu wciąż jest zły; samą naprawę typu (przepisanie na `equipment`) świadomie zostawiono na
+później, tylko zaznaczono w kodzie jako coś do zrobienia.
+
+Bez katalogu do dopasowania nazw (inaczej niż Surowce/Prowiant) użyto tego samego, sprawdzonego
+wzorca co `prowiant-data.mjs`: luźne dopasowanie po słowach kluczowych w nazwie, nie enumerowana
+lista. `type: "tool"` (prawdziwe narzędzia) i konwencja nazewnicza RAW „Mały X" (potwierdzona na
+żywej drużynie: „Mały Medyk", „Mały Kłusownik", „Narzędzia małego ślusarza"...) trafiają do
+**Narzędzia**. Słowa typu „kamizelka"/"pancerz"/"zbroja"/"kask"/"kurtka ćwiekowana" trafiają do
+**Pancerz**. Każdy pozostały `loot` — czyli faktyczna większość dawnej „Reszty" — trafia teraz do
+nowego **Sprzęt**, zostawiając „Resztę" jako prawdziwie ostateczny wariant, który na normalnym
+arkuszu praktycznie nigdy nie powinien się pojawić.
+
+Dwa nowe kolory (`#7a5230` Narzędzia — ciemny brąz, `#4a5f73` Sprzęt — ciemny błękitno-szary)
+dobrane i zweryfikowane tak samo jak poprzednia rewizja palety — wyrenderowane próbki obok
+wszystkich 13 istniejących kolorów, nie tylko liczenie odległości barw na papierze.
+
+Zweryfikowane na żywo na Raynaldzie, zgodność pozycja-po-pozycji z jego ekwipunkiem: Pancerz 6,0 kg
+(Kamizelka Kuloodporna), Narzędzia 13,0 kg (Mały Medyk 10 kg + laptop wojskowy „narzedzi hackera"
+3 kg), Sprzęt 19,0 kg (Plecak Naukowca, Kolczatka ×2, Puszka Coli, urządzenie do hakowania kart,
+Balclava, 5 żetonów). Suma wszystkich kategorii (57,05 kg) zgadza się z `system.attributes.
+encumbrance.value` (57,1 kg) co do grosza — potwierdza to, że rozbicie jest kompletne, nic nie
+"zniknęło" ani nie zostało policzone podwójnie.
+
+### Pistolet na Race wreszcie strzela flarą, nie tylko w ludzi (`weapons/pistolet-na-race.mjs`, nowy plik)
+
+Zgłoszenie: „zrobiłem ATAK, ale nie ma jak zrzucić flary, która daje efekt". Przyczyna: komentarz
+w `config/weapons-data.mjs` przy tej broni od początku mówił, że „główne zastosowanie to
+sygnalizacja i oświetlenie punktu trafienia (patrz `items/flara.mjs`)" — ale ten link nigdy nie
+został zbudowany, wysłana została tylko strona bojowa (ATAK + OBRAŻENIA, jak każda inna broń
+palna). Broń miała więc dokładnie jedną aktywność, i to niewłaściwą do sygnalizacji.
+
+Naprawione dodaniem drugiej, niezależnej aktywności **„Wystrzel flarę"** (typ `utility`, jak własna
+aktywność rzutu Flary) — wybierasz punkt na mapie zamiast celu, broń zużywa załadowaną Racę
+sygnałową i tworzy DOKŁADNIE to samo samodzielne światło co rzucona Flara (ten sam kolor, promień,
+czas palenia — `items/flara.mjs` eksportuje teraz `requestFlareLight`/`FLARE_LIGHT`/`BURN_SECONDS`
+właśnie po to, żeby to drugie miejsce nie musiało kopiować mechanizmu GM-przekaźnika/wygasania,
+tylko go wywołać). Zasięg strzału to zasięg broni (12/30 m) zamiast przelicznika z SIŁy jak przy
+rzucie ręcznym — pistolet nie zależy od tego, jak silny jest strzelec, i faktycznie lata dalej niż
+ręczna Flara, zgodnie z pierwotnym zamysłem. Aktywność ATAK zostaje bez zmian — strzał w cel to
+wciąż osobna opcja (1k4 od ognia, RO na Podpalenie).
+
+Ponieważ broń już istniała u Raynalda przed tą zmianą (katalogowa broń, nie własny plik jak
+Latarka/Pochodnia/Flara — nie miała gdzie dostać aktywności przy tworzeniu), doszedł ten sam
+mechanizm doszczepiania co przy Flarze: `createItem` + zamiatanie wszystkich istniejących kopii
+przy starcie. Potwierdzone na żywo — Raynaldowa kopia dostała aktywność retroaktywnie, bez migracji.
+
+### Prawdziwa przyczyna „zablokowania": bug w przeładowaniu pojedynczej sztuki (`weapons/magazine.mjs`)
+
+Właściwe źródło problemu „broń nie chce strzelać mimo przeładowania": `_performLoadOneAction`
+(przycisk „Doładuj 1 nabój"/„+1 nabój" — jedyny sposób przeładowania broni jednostrzałowej typu
+Pistolet na Race czy Samoróbka) nigdy nie czyściła stanu komory/przeładowania po włożeniu naboju —
+robi to tylko `_performReloadAction` (ścieżka cyklicznego przeładowania dla broni „przeładowanie").
+Skutek: po pierwszym strzale flaga komory zostaje `{loaded:false}`, a `reloadState.required` —
+`true`; kolejne doładowanie podnosi `mag.current` z powrotem do 1, ale OBIE te flagi zostają
+martwe na starych wartościach, więc `_requiresManualReloadBeforeUse` dalej twierdzi, że broń wymaga
+przeładowania — mimo że nabój faktycznie jest załadowany. Zweryfikowane na żywo dokładnie na
+Pistolecie na Race Raynalda: `mag.current: 1`, ale `chamber.loaded: false` i
+`reloadState.required: true` — broń była realnie zablokowana dla KAŻDEJ aktywności (ATAK i nowe
+Wystrzel flarę jednakowo), nie tylko dla tej nowej.
+
+Naprawa: `_performLoadOneAction` teraz ustawia `chamber.loaded = true` i czyści `reloadState` po
+udanym doładowaniu, tak jak od dawna robi to `_performReloadAction`. Dotyczy każdej broni z
+magazynkiem wewnętrznym/bębenkiem i właściwością „ładowanie"/"przeładowanie" ładowaną po jednej
+sztuce — czyli też Deer Hunter, R700, Lewar M95, Field 03, Pompka, MGL1S, Moździerz, nie tylko
+Pistoletu na Race — więc naprawia ten sam ukryty problem dla każdej takiej broni w drużynie, nie
+tylko dla Raynalda. Raynaldowa broń odblokowana ręcznie na żywo (test-strzał przywrócony do 1/1,
+żeby nic mu nie ubyło).
+
+Zweryfikowane end-to-end na żywo: synthetic point-pick → „Wystrzel flarę" → karta na czacie →
+prawdziwy `AmbientLight` na scenie (te same wartości co Flara: jasne 12 m / słabe 24 m / kolor
+`#ff1a1a` / animacja torch 10/10) → po 70 s czasu gry światło poprawnie zamiatane przez istniejący
+mechanizm wygasania. Wszystkie 152 istniejące testy nadal przechodzą.

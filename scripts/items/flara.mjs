@@ -64,6 +64,17 @@
  * session (that one broke a per-tick vision read on *every* torch toggle; this one needs two
  * throws inside roughly the same network round-trip to even matter, and the failure mode is just
  * "one flare doesn't light up," not stale/wrong data).
+ *
+ * ## Reused by Pistolet na Race (2026-09-06, 2nd pass)
+ *
+ * `weapons/pistolet-na-race.mjs`'s own "Wystrzel flarę" utility activity produces the exact same
+ * standalone light — same colour, radius, burn time — just launched by spending a chambered Raca
+ * sygnałowa round instead of consuming a Flara item stack. Rather than a second copy of the
+ * GM-relay/expiry-sweep machinery above, it calls `requestFlareLight` (exported below), which is
+ * the same `actor.setFlag(FLAG_PENDING, …)` write `_throwFlara` itself makes — `onUpdateActor`/
+ * `_spawnFlareLight`/`_sweepExpiredFlareLights` don't know or care which item triggered it.
+ * `FLARE_LIGHT`/`BURN_SECONDS` are exported alongside it so both items' chat text always quotes
+ * the same numbers, by construction, rather than two hand-copied literals drifting apart later.
  */
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -78,8 +89,10 @@ const FLAG_PENDING = "flarePendingThrow"; // actor flag — {sceneId, x, y, nonc
 const FLAG_ACTIVE = "activeFlares";    // scene flag — [{lightId, expiresAt}]
 
 // 2× Pochodnia Smołowa (6/12 m) — locked live, see this file's top doc comment, point 2.
-const FLARE_LIGHT = { bright: 12, dim: 24 };
-const BURN_SECONDS = 60; // 1 minuta — locked live, point 3.
+// Exported: `weapons/pistolet-na-race.mjs`'s own flare-launch quotes these same two numbers
+// instead of hand-copying them (see this file's "Reused by Pistolet na Race" doc comment).
+export const FLARE_LIGHT = { bright: 12, dim: 24 };
+export const BURN_SECONDS = 60; // 1 minuta — locked live, point 3.
 
 // Colour/animation — my call to make and tune (point 4). Red, distinct from Pochodnia's warm
 // orange (#ff8c3c) and Latarka's cool white (#dce8ff); "torch" animation reused from Pochodnia
@@ -287,6 +300,23 @@ async function _throwFlara(item) {
 /* -------------------------------------------- */
 /*  GM-side: spawn the standalone light, sweep its expiry */
 /* -------------------------------------------- */
+
+/**
+ * Requests a standalone flare light at `(x, y)` on `scene`, via the same GM-relayed
+ * actor-flag `_throwFlara` itself uses (see this file's "Reused by Pistolet na Race" doc
+ * comment) — every connected client's `onUpdateActor` below reacts, only the active GM's
+ * client actually creates the `AmbientLight`. `actor` just needs to be a document any
+ * client can write a flag to; it need not be holding a Flara item itself.
+ * @param {Actor} actor
+ * @param {Scene} scene
+ * @param {number} x
+ * @param {number} y
+ */
+export async function requestFlareLight(actor, scene, x, y) {
+  await actor.setFlag(MODULE_ID, FLAG_PENDING, {
+    sceneId: scene.id, x, y, nonce: foundry.utils.randomID(8),
+  });
+}
 
 async function _spawnFlareLight(actor, pending) {
   try {

@@ -36,6 +36,31 @@
  * — squeezing the (otherwise fixed-width) native card down to make room. Fixed
  * by anchoring the legend after `.top` itself (a full-width block below the row)
  * and letting `.encumbrance` grow to fill what it no longer has to share.
+ *
+ * ## Pancerz / Narzędzia / Sprzęt split-out (2026-09-06, 2nd pass)
+ *
+ * A live scan of the whole party's actual inventories (not just Raynald's) found
+ * that "Reszta" was still doing most of the work: nearly every hand-added item —
+ * backpacks, kits, canteens, batteries, and (importantly) several actual body-armor
+ * items — is typed plain `loot`, the generic dnd5e catch-all, not `equipment`/`tool`.
+ * Concretely: Raynald's own "Kamizelka Kuloodporna" (bulletproof vest, 6 kg) and
+ * Victor's "Kurtka ćwiekowana" (a real `armor-data.mjs` catalog name) are both typed
+ * `loot`, so they were invisible to the existing `item.type === "equipment"` check —
+ * same drift pattern as `project_ammo_wrong_item_type`, just for armor instead of
+ * ammo. This is a display-only fix, not a rules fix: these items still grant no
+ * actual AC bonus in combat because of their wrong `type` — only the bar now shows
+ * them as armor-colored weight. Fixing that for real (retyping them to `equipment`)
+ * is a separate, bigger change and was NOT done here — flagged, not actioned.
+ *
+ * Since there's no catalog to match these ad hoc items against (unlike Surowce/
+ * Prowiant), this follows `prowiant-data.mjs`'s own precedent: loose keyword regex
+ * over the item name instead of an enumerated list (see `PANCERZ_NAME_HINT`,
+ * `NARZEDZIA_NAME_HINT` below). `type: "tool"` (real toolkits) and the RAW "Mały X"
+ * toolkit-name convention (confirmed against the live party: "Mały Medyk", "Mały
+ * Kłusownik", "Narzędzia małego ślusarza", …) both count as Narzędzia. Every
+ * remaining `type: "loot"` item — the actual majority of "Reszta" before this pass
+ * — now falls into a new "Sprzęt" bucket instead, leaving "Reszta" as a true
+ * last-resort that should rarely show anything on a real sheet.
  */
 
 import { getSurowiecType, SUROWCE_TYPES } from "../config/surowce-data.mjs";
@@ -54,19 +79,31 @@ const BAR_HEIGHT_PX = 22;
 const FIXED_CATEGORIES = {
   bron:         { label: "Broń",         color: "#b06a6a" },
   pancerz:      { label: "Pancerz",      color: "#6a8ab0" },
+  narzedzia:    { label: "Narzędzia",    color: "#7a5230" },
   amunicja:     { label: "Amunicja",     color: "#cec17e" },
   magazynki:    { label: "Magazynki",    color: "#6656b3" },
   pirotechnika: { label: "Pirotechnika", color: "#d66329" },
   leki:         { label: "Leki",         color: "#bf69a2" },
   prowiant:     { label: "Prowiant",     color: "#5db691" },
+  sprzet:       { label: "Sprzęt",       color: "#4a5f73" },
   reszta:       { label: "Reszta",       color: "#8f8f8f" },
 };
 
-/** Category ids in canonical bar/legend order — the 5 Surowce slot in after Pancerz. */
+/**
+ * Name-based hints for ad hoc `loot`-typed items that are really armor or tools but
+ * were never retyped (see this file's 2026-09-06 2nd-pass doc comment above) — same
+ * "loose regex, live-scanned against the party" approach as `prowiant-data.mjs`.
+ * Checked ONLY after the real `item.type` checks in `_categoryOf`, so a properly
+ * typed `equipment`/`tool` item never needs to match these.
+ */
+const PANCERZ_NAME_HINT = /kamizelk|kurtka\s*ćwiekowan|zbroj|pancerz|hełm|kask/i;
+const NARZEDZIA_NAME_HINT = /^ma[łl]y\s|narz[eę]dzi/i;
+
+/** Category ids in canonical bar/legend order — the 5 Surowce slot in after Narzędzia. */
 const CATEGORY_ORDER = [
-  "bron", "pancerz",
+  "bron", "pancerz", "narzedzia",
   ...SUROWCE_TYPES.slice().sort((a, b) => a.order - b.order).map(t => `surowiec:${t.code}`),
-  "amunicja", "magazynki", "pirotechnika", "leki", "prowiant",
+  "amunicja", "magazynki", "pirotechnika", "leki", "prowiant", "sprzet",
   "reszta",
 ];
 
@@ -105,6 +142,9 @@ function _categoryOf(item) {
   }
   if (item.type === "weapon") return "bron";
   if (item.type === "equipment") return "pancerz";
+  if (item.type === "tool" || NARZEDZIA_NAME_HINT.test(item.name ?? "")) return "narzedzia";
+  if (PANCERZ_NAME_HINT.test(item.name ?? "")) return "pancerz";
+  if (item.type === "loot") return "sprzet";
   return "reszta";
 }
 

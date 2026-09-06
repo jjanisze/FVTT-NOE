@@ -102,6 +102,12 @@ bezpośrednie w cel: **1k4 od ognia**, cel wykonuje RO Zręczność ST 12 albo z
 rozstrzyga MG ręcznie, tak jak przy Koktajlu Mołotowa). Raca sygnałowa (amunicja) jest lżejsza i
 lata dalej niż ręczna Flara, ale bez samego pistoletu jest bezużyteczna — odwrotnie niż Flara.
 
+✅ *Zaimplementowane (`weapons/pistolet-na-race.mjs`) — broń ma teraz DWIE osobne aktywności:
+zwykły **ATAK** (obrażenia od ognia w cel) oraz **Wystrzel flarę** (wybierz punkt na mapie zamiast
+celu — raca ląduje i świeci dokładnie jak rzucona Flara, tylko na zasięg broni zamiast na SIŁę
+strzelca). Pierwsza wersja miała tylko ATAK — to była właśnie luka, którą zgłosił Sonk ("strzeliłem,
+ale nie ma jak zrzucić flary").*
+
 ✅ *Zaimplementowane (`config/weapons-data.mjs`, `config/ammo-data.mjs`) — bez przełącznika
 Kobaltu: to całkowicie nowa treść, nie ma czystej wersji RAW, do której dałoby się wrócić po
 wyłączeniu (ta sama logika co przy Pochodni).*

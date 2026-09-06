@@ -1409,6 +1409,19 @@ async function _performLoadOneAction(item, { chat = true, spendResource = true, 
 
   await setMag(liveItem, { current: Number(mag.current ?? 0) + 1 });
 
+  // Bugfix (2026-09-06, found via Pistolet na Race): unlike `_performReloadAction` (the
+  // cycle-reload path for "przeładowanie" weapons), this single-round path never used to touch
+  // chamber/reload-state at all. On a "ładowanie" weapon (single load-each-shot: Samoróbka,
+  // Pistolet na Race, most rifles/shotguns/MGL1S/Moździerz — see `weapons-data.mjs` props lists)
+  // that left `chamber.loaded` and `reloadState.required` stuck at whatever the LAST SHOT set
+  // them to (false / true) even after this action just put a live round back in — so
+  // `_requiresManualReloadBeforeUse` kept reporting "trzeba przeładować" and blocking every
+  // activity (ATAK included) on an already-reloaded weapon. Confirmed live: Raynald's Pistolet
+  // na Race, reloaded to 1/1 after its first shot, was still stuck exactly like this. A round is
+  // now genuinely chambered, so both flags must reflect that, same as the cycle-reload path does.
+  await _setChamberState(liveItem, { loaded: true });
+  await _clearReloadState(liveItem);
+
   const reloadPlan = _getReloadPlan(liveItem, mag, { magazineType });
   if (actor.inCombat && spendResource) {
     await _spendCombatResource(actor, reloadPlan.actionType);

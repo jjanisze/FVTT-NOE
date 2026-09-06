@@ -74,6 +74,7 @@ import { registerPowerSourceUI } from "./items/power-source.mjs";
 import { registerBaterie, baterieApi } from "./items/baterie.mjs";
 import { registerLatarka, latarkaApi } from "./items/latarka.mjs";
 import { registerFlara, flaraApi } from "./items/flara.mjs";
+import { registerPistoletNaRace } from "./weapons/pistolet-na-race.mjs";
 import { registerGogle, gogleApi, registerNoktowizjaVision } from "./items/gogle.mjs";
 import { registerWorldClock, worldClockApi } from "./world-clock.mjs";
 import { registerTracerVfx } from "./weapons/tracer-vfx.mjs";
@@ -395,6 +396,7 @@ Hooks.once("ready", () => {
   game.neuroshima.latarka = latarkaApi;
   registerFlara();
   game.neuroshima.flara = flaraApi;
+  registerPistoletNaRace();
   registerGogle();
   game.neuroshima.gogle = gogleApi;
   registerWorldClock();
