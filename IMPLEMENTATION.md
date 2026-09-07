@@ -3200,6 +3200,42 @@ sesji 12 (subagent) — tu tylko punkty 1–4 i 6 poza żetonami.
 
 `npm test` czysto po każdym kroku.
 
+## Zmiany z 7 września 2026 (18) — Żeton Luxor: cztery nazwy/ceny w jedną, plus dług z sesji 12 (część 2/2)
+
+Dokończenie punktu 5 z (17): ten sam fizyczny rekwizyt istniał pod **czterema** nazwami z
+**trzema** różnymi cenami (Alan „żeton kasyna 10g" 10 gp×5, Lorentz „Żetony Luxor" 0 gp×10 —
+dobra nazwa, zła cena, Raynald „5 zetonów" 0 gp — liczba wpisana w NAZWĘ, nie w `quantity`
+(tam było 1!), Piekarz „Żetony" 0 gp×9) plus nieistniejący już klucz waluty `gp`.
+
+Zanim ujednolicono, zlecony subagent przeczesał `Transkrypt Sesja 12.md` (negocjacje płacowe
+z Willem) — bo „każdy powinien coś mieć, a niektórzy więcej" wymagało wiedzieć, co faktycznie
+się wydarzyło, nie zgadywać:
+- **200 gb na głowę** dla całej piątki (Alan/Laffitte/Lorentz/Raynald/Victor) — potwierdzone
+  wprost przez MG dwukrotnie („200 gambli po łebka", „200 gambli w żetonach dla każdego").
+- Fizycznie na scenie padło tylko **5 żetonów** — i **Lorentz** je zabrał („bierze te pięć
+  żetonów, wkłada do kieszeni, ja swoje zainkasowałem"). Nie koliduje z jego obecnym stanem
+  (10) — nie ruszane, tylko nazwa/cena.
+- **Victor** odmówił przyjęcia samych żetonów bez pokwitowania, dostał **papierowy dług**
+  zamiast: kartka podpisana przez Willa, opieczętowana pieczątką Luxoru, warta „200 gb w
+  amunicji", wystawiona imiennie na niego. MG explicite: „albo w żetonach, albo w
+  pokwitowaniu" — nie jedno i drugie.
+- **Alan, Raynald, Laffitte** — należy im się to samo 200 gb, scena nigdy tego nie
+  rozstrzygnęła na ekranie (Raynald pyta „a reszta?" trzy razy, bez odpowiedzi). Otwarty
+  wątek fabularny, nie zrealizowana wypłata.
+
+**Decyzja GM-a: podążyć za historią dosłownie** (a nie „każdemu po trochu dla wygody):
+- Nowy `items/zeton-luxor.mjs` (kanoniczny przedmiot, 10 gb/szt., flaga `zetonLuxor`) +
+  `migration/migrate-zeton-luxor.mjs` (dry-run domyślnie, ten sam kształt co reszta folderu;
+  bez przejścia granicy typu — wszystko już było `loot`, więc zwykły `update()`, `_id`
+  zachowane). Uruchomiona na całym świecie: Alan/Lorentz/Raynald/Piekarz przekonwertowani,
+  ilości **zachowane** (5/10/5/9) — u Raynalda poprawnie wyciągnięte z nazwy, nie z `quantity`.
+- Victor: NIE dostaje Żeton Luxor. Nowy, osobny przedmiot „Pokwitowanie Luxor (200 gb w
+  amunicji)" — flaga `luxorIOU`, cena 0 (to roszczenie, nie gotówka), opis cytujący scenę.
+- Alan/Raynald/Laffitte: świadomie nietknięci — dług zostaje długiem, nie przedmiotem.
+- Piekarz doliczony przy okazji (czysta higiena nazw/cen na NPC-u, nie decyzja fabularna).
+
+`npm test` czysto.
+
 Po zamknięciu FVTT: `npm run build:packs` + `npm run validate:packs` (wszystkie 14 paczek, nie
 tylko `sztuczki` — kilka sesji danych czekało na przebudowę). Zweryfikowane wprost przeciwko
 przebudowanej LevelDB (nie tylko logowi builda): opis „Pakowanie" w pakcie `sztuczki` faktycznie
