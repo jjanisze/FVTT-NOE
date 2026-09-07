@@ -3242,3 +3242,102 @@ przebudowanej LevelDB (nie tylko logowi builda): opis „Pakowanie" w pakcie `sz
 niesie teraz plakietkę „Częściowo zautomatyzowane" z odnośnikiem do `actors/bez-dna.mjs`.
 `validate:packs`: wszystkie sprawdzenia przeszły; liczby dokumentów sensowne (sprzęt 6,
 narzędzia 22, amunicja 21, granaty 13); brak wiszących UUID.
+
+## Zmiany z 7 września 2026 (19) — Victor: ręczny awans zostawił dziury, plus ekwipunek i Evie
+
+Zgłoszenie: „popraw ekwipunek Victora, wszystkie przedmioty; ręcznie wbiłem mu poziom 3 —
+sprawdź spójność builda; zrób listę Sztuczek/mechanik i czego brakuje; prawdopodobnie
+wsparcie dla Evie"; plus osobna prośba o listę 9 ikon do zamówienia albo licznik braków.
+
+**Root cause budowy postaci**: Victor ma prawdziwą klasę (Zwiadowca 3) i prawdziwą profesję
+(Sędzia), ale trafiony ręcznie, z pominięciem części kroków, jakie zrobiłby Advancement
+Manager. Brakowało: **Mój biom** (poziom 1 — sama flaga biomów `["miasto","pustynia"]` była
+już poprawnie ustawiona, tylko opisowy item nigdy nie powstał), **Wyjadacz** (poziom 2 — jego
+DZIECKO wyboru, „Rzeźnik", istniało samo, osierocone, bez rodzica), **Jeden z nas** i **Rzuć
+broń i gleba!** (obie z trzech zdolności Sędziego — tylko „Partner" był obecny). Wszystkie
+cztery dociągnięte 1:1 z kompendium `neuroshima-2026-overrides.zdolnosci-klasowe`
+(`game.packs.get(...).getDocuments()`, filtr po `flags[...].abilityId`, `toObject()` →
+`createEmbeddedDocuments`) — nie odtworzone ręcznie, więc flagi/ikony/coverage-badge są
+bit-w-bit identyczne z tym, co dostałby każdy inny Zwiadowca. Przy okazji: „Ulubiona Katana"
+(feat) miał poprawną, spersonalizowaną treść i ikonę, ale `flags` był `null` — dorobiony
+z kanonicznego `ulubiona-bron-zwiadowca`, żeby przyszłe audyty/migracje go rozpoznawały.
+PW (30, KON+2×3 lvl na bazie `PW_D8{first:16,perLevel:4}`) i biegłość +2 — poprawne,
+niedotknięte. `system.tools` jest pusty (brak wpisów `klusownika`/`rzeznika`) — sprawdzone i
+świadomie zostawione: żaden mechanizm w tym repo nie czyta tego pola dla umiejętności
+narzędziowych Zwiadowcy (obie Sztuczki działają przez tekst, nie przez rzut z biegłością), więc
+to nie jest objaw regresu specyficznego dla Victora, tylko całego systemu nie-automatyzującego
+tej gałęzi — osobna decyzja, gdyby MG chciał to jednak wpiąć.
+
+**Homebrew, świadomie NIETKNIĘTE**: „Osełka"/„Dobycie"/„Zasłona" (bonusy do broni siecznej/
+katany, spójne mechanicznie, bez odpowiednika w katalogu) i „Siódme poty." (biegłość w
+Prowadzeniu Pojazdów + 50% szybciej) — sprawdzone wprost w `migration/migrate-classes.mjs`:
+`"siodme poty."` ma tam JAWNY wpis `null` z komentarzem „homebrew — explicitly leave alone",
+czyli to nie jest zgadywanie, tylko potwierdzenie wcześniejszej decyzji. „Doktor Quinn" też
+się zgadza — to nie ksywka nadana przez gracza, `pochodzenia-data.mjs` ma dokładnie tę etykietę
+jako kanoniczną nazwę zdolności Teksasu (k6 3–4). Żadna z tych czterech nie dostaje automatyki
+(tak jak spora część kanonicznych Sztuczek zostaje ręczna) — tylko poprawka ikon (patrz niżej).
+
+**Ekwipunek — z loota na prawdziwy przedmiot** (ten sam wzorzec co przy Alanie: jeśli coś JEST
+bronią/pancerzem/amunicją, ma nim BYĆ, nie tylko brzmieć):
+- „Kurtka ćwiekowana" (`loot`, opis wprost mówił „KP = 11 + mod. ZRC") → prawdziwy `equipment`
+  (lekki, KP 11, ZRC bez limitu, 30 gb). AC Victora był na sztywno wpisanym `calc:"flat"/14` —
+  ktoś kiedyś policzył 11+3 ręcznie i wpisał na stałe, zamiast założyć zbroję. Po konwersji
+  `calc:"default"` przelicza się sam: **14** (zweryfikowane na żywo) — ale teraz podąży za
+  Zręcznością, jeśli kiedyś się zmieni, zamiast cicho się zdezaktualizować.
+- „4 sztyki 44 magnum" (literówka „sztyki"/„sztuki", `loot`, 0 gb, bez opisu) → prawdziwa
+  amunicja „Naboje .44 Magnum" (`consumable`/`ammo`, katalog `44mag`: 1k10 kłute, 3 gb/0,025 kg
+  za sztukę, ×4).
+- „combat knife(1d2)" (kostka wpisana w NAZWĘ, `loot` — nie do użycia w walce mimo nazwy) →
+  prawdziwy „Nóż taktyczny" (`weapon`, katalog: 1k6 kłute/sieczne, Finezyjna+Lekka, 10 gb),
+  aktywność ataku załatana ręcznie (ten sam gotcha co zawsze: auto-wygenerowana aktywność ma
+  puste `attack.type`/`damage.parts`).
+- „2 race oswietleniowe" (`loot`, 0 gb, ilość w nazwie = 2, `quantity` = 1) → 2× prawdziwa
+  **Flara** przez istniejącą fabrykę `game.neuroshima.flara.create({actor, quantity:2})` —
+  ten sam rzucany-i-świecący system co reszta drużyny, zamiast martwego stub-a.
+- „Medpack 2k6+2" (kostka w nazwie, `loot`) → `Medpak` (`consumable`, jednorazowy, 20 gb —
+  szacunek MG, formuła leczenia zostaje w opisie do ręcznego rzutu, bez własnej aktywności).
+  **Ta sama poprawka zastosowana też u Evie** — identyczny stub siedział na jej karcie.
+- Gotcha złapany w locie: pierwsza próba Medpaka przez zwykłe `item.update({type:"consumable",
+  ...})` zwróciła sukces, ale NIC się nie zmieniło (Foundry cicho odrzuca całą aktualizację,
+  gdy zawiera zmianę `type` na już istniejącym dokumencie) — naprawione przez ten sam wzorzec
+  delete+create, którego reszta tego commita już świadomie używała dla Kurtki/amunicji/noża.
+- „Katana": opis mówił „Finezyjna, **Dwuręczna**", ale właściwości to `fin`+`ver`
+  (Wersatylna) — literalna sprzeczność z własnymi danymi mechanicznymi, poprawiony tekst.
+- „M1 Garand" → „M1 US Rifle" — dokładnie ten sam alias-dryf co u Alana w (17)
+  (`WEAPON_NAME_ALIASES`), ikona już była poprawna, poprawiona tylko nazwa.
+- Puste karteczki wypełnione realnym opisem/ceną/wagą: „Mały Kłusownik" (0 gb → 10 gb, katalog
+  `toolkits-data.mjs`), „Krótkofalówka"/„lornetka"/„klucze" (szacunki MG, jawnie tak opisane).
+- Waluta `gp`→`gb` na wszystkim, czego commit i tak dotykał (jak w (17), bez zamiatania
+  reszty świata) + ikona „Litr Wody" (portret aktora → `woda_filtrowana.svg`, ta sama
+  poprawka co Alan dostał w (17), niedociągnięta wtedy do reszty drużyny).
+
+**Evie (`game.actors` — właścicielka Elessar) — sprawdzona wprost przeciwko własnej
+specyfikacji w `Postacie/NPC/Evie.md`**: PW 15 (5×poziom Zwiadowcy Victora, zgadza się), AC 14
+(Plate carrier typ I, prawdziwy `equipment`, nie `loot`), Premia Biegłości +2 płaska, dokładnie
+2 biegłe RO, Sztuczka „Pierwotny instynkt" + Pochodzenie „Czas patriotów" — wszystko zgodne.
+Jedyna naprawa: ten sam `Medpack 2k6+2` stub co u Victora (patrz wyżej). Nieautomatyzowane
+i świadomie nietknięte: przywołanie na scenę wciąż ręczne (`Evie.md` już to dokumentuje jako
+przyjęty stan, nie TODO) — budowa przycisku/skryptu przywołania to osobna, większa decyzja,
+o którą nikt nie prosił wprost. Reszta jej ekwipunku (Kajdanki, Odznaka, Torba patrolowa,
+Krótkofalówka policyjna, sama broń AR) nieprzejrzana — Victor był przedmiotem zgłoszenia,
+Evie tylko przy okazji.
+
+**Świadomie NIE zbudowane**: generyczny `auditClassProgression()`/`repairClassProgression()`
+(odpowiednik `auditWeapons` dla „czy postać ma wszystkie zdolności klasowe należne jej
+poziomowi"). Przyczyna źródłowa (ręczny awans pomija kroki Advancement Managera) jest
+ogólna, nie specyficzna dla Victora — więc narzędzie miałoby sens, gdyby się powtórzyło.
+Nie budowane teraz, żeby nie rozdmuchiwać zgłoszenia o jedną postać w nowy podsystem bez
+pytania; zanotowane tutaj jako gotowy do podjęcia pomysł, nie zapomniane zadanie.
+
+**Ikony — nowy licznik zamiast gaszenia pojedynczych braków.** Cztery homebrew-owe Sztuczki
+Victora (Osełka/Dobycie/Zasłona/Siódme poty.) nigdy nie dostały ikony — Foundry po cichu
+podstawił portret aktora. To pasuje do zgłoszonego wzorca „to się powtarza": zamiast zamawiać
+pojedynczy obrazek (marnuje 8 z 9 kafelków siatki Gemini) albo znowu nic nie zanotować,
+nowy `dev/icons/MISSING.md` zbiera braki aż do kompletu 9, z gotowym sugerowanym opisem
+promptu na każdy wiersz. Aktualnie 5/9 (cztery powyższe + już wcześniej zgłoszony, dzielony
+`grenade-signal`/`smoke_grenade.svg` z (16)-erowej rundy Pirotechniki). Następny numer
+skoroszytu: **40** (ostatni użyty: `process_grid_39.py`, batch Raynalda z (12)).
+
+Żadne pliki `.mjs` nie zostały zmienione w tym zgłoszeniu — wyłącznie dane na żywo (Victor,
+Evie) plus dwa pliki dokumentacji (ten wpis, `dev/icons/MISSING.md`). `npm test` czysto
+(nic w kodzie się nie zmieniło, uruchomione mimo to jako standardowa kontrola zamykająca).
