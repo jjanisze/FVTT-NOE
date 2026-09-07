@@ -211,7 +211,11 @@ export const ZASOBY_KATEGORIE = [
     icon: "fa-solid fa-droplet",
     unit: "l",
     perUnit: 1,
-    rx: /woda pitna|\bwoda\b|manierk|bukłak|butelka wody|kanister z wod/i
+    // \bwody\b added 2026-09-07: Alan's "Litr Wody" (genitive case) fell through \bwoda\b
+    // entirely — "wody" doesn't contain "woda" as a substring, not a boundary issue. The
+    // bare word boundary keeps this safe against unrelated words like "zawody"/"dowody"
+    // (no internal word break before the fused "wody" in those).
+    rx: /woda pitna|\bwoda\b|\bwody\b|manierk|bukłak|butelka wody|kanister z wod/i
   },
   {
     kind: "lek",

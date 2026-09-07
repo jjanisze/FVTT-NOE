@@ -3127,6 +3127,79 @@ renderują się poprawnie ze wszystkimi 5 członkami. `npm test` czysto.
 Nic nie zostało utracone — dane i kod Zapasów (`party-supplies.mjs`, `party-tab-zapasy.hbs`,
 wpis w `TABS`) były cały czas nietknięte na dysku; funkcja po prostu milczące nie startowała.
 
+## Zmiany z 7 września 2026 (17) — Alanowy ekwipunek: mechaniki, nazewnictwo, śmieci (część 1/2)
+
+Zgłoszenie: sześć punktów na Alanie — kolimator/baterie, nomeksowy kombinezon, śmieci
+handlowe, ukryty identyfikator, ujednolicenie żetonów kasyna w całej drużynie, i „napraw
+co jeszcze zobaczysz". Część 6 (żetony) czeka na odpowiedź GM-a po researchu w transkrypcie
+sesji 12 (subagent) — tu tylko punkty 1–4 i 6 poza żetonami.
+
+- **Kolimator + baterie → prawdziwy addon + prawdziwe Baterie.** `ADDON_DEFS.kolimator`
+  już istniał (+2 zasięg normalny, wymaga Szyny montażowej, wyklucza się z innymi
+  celownikami) — Alanowy luźny `loot` z flagą `ulepszenie:"kolimator"` był dokładnie tym
+  samym „niedokończonym awansem" co gear z batcha 39. Rozdzielone na: (a) realny addon-item
+  „Kolimator" (etykieta `ADDON_DEFS.kolimator.label` skrócona z „Kolimator + baterie" —
+  zmiana widoczna we wszystkich komunikatach systemu addonów, nie tylko u Alana), (b) jeden
+  egzemplarz `Baterie` przez już istniejącą, w pełni gotową fabrykę
+  `game.neuroshima.baterie.create()` (`items/baterie.mjs` — RAW cena/waga/opis, nikt wcześniej
+  jej tu nie użył).
+  **Decyzja GM-a: żadna z dwóch broni Alana NIE dostaje Szyny montażowej — to celowe.**
+  Alan spróbuje zamontować kolimator w grze i mu się nie uda; naprawiony przy okazji
+  komunikat błędu (`weapons.mjs`: właściwość `sm` miała etykietę gołego „SM" — nic nie
+  mówiącą graczowi, który nie zna skrótu — rozpisana na „Szyna montażowa", więc
+  `isAddonCompatible()` teraz mówi wprost, czego brakuje, zamiast rzucać graczem do MG).
+- **HK G3 / M1 US Rifle — poprawiona pisownia + ikony.** `WEAPON_NAME_ALIASES` w
+  `weapons-data.mjs` od 2026-08-29 już wiedział, że „H&K G3"→„HK G3" i „M1 Garand"→„M1 US
+  Rifle" są przestarzałymi nazwami z importu — ale alias istniał tylko, żeby `auditWeapons()`
+  mimo złej nazwy trafił ikonę; nazwa na karcie nigdy się nie zmieniła. `auditWeapons()` na
+  Alanie nie zgłosił żadnego rozjazdu w liczbach (broń była już poprawna statystycznie) —
+  poprawione ręcznie tylko `name`/`img`, których ten audyt świadomie nie dotyka. Odkryta przy
+  okazji prawdziwa ikona `hk_g3.svg` (Alan pokazywał generyczną `fully_automatic_rifle.svg`,
+  zgłoszoną jako „ikona AK") — nowa ikona NIE była potrzebna, tylko podpięcie właściwej.
+  Rozwiązany też pozorny konflikt: feat „Ulubiona Broń H&K G3" miał w treści opis premii dla
+  „M1 US Rifle" — to nie pomyłka nazwy, to KANONICZNA nazwa Alanowego Garanda; przemianowany
+  tytuł feata na zgodny z jego własną (zawsze poprawną) treścią.
+- **Nomeksowy kombinezon** (`combat/podpalenie.mjs`): brak w RAW, zasada domowa. Jedyna
+  dźwignia „obrony przed Podpaleniem", jaką ten system w ogóle wystawia, to rzut na
+  ugaszenie się (Zręczność/Akrobatyka ST 10) — więc stąd Ułatwienie, gated na
+  `system.equipped` + nowa flaga `flags.<module>.nomex`. Wymagało zmiany typu z `loot` na
+  `equipment` (Alan nie miał jak w ogóle założyć/zdjąć wcześniejszej wersji) — `trinket`
+  jak Latarka czołówka, nie zbroja (0 AC).
+- **Identyfikator — sekret MG.** Nowy moduł `items/gm-secret.mjs`: Foundry nie ma natywnego
+  sposobu ukryć JEDEN przedmiot przed właścicielem karty (`_prepareItems` czyta
+  `actor.items` w całości, bez `testUserPermission` per-item — sprawdzone w źródle dnd5e).
+  Flaga `flags.<module>.gmSecret` + hook `renderCharacterActorSheet` usuwający wiersz z DOM
+  wyłącznie u klienta bez `isGM` — dokument zostaje w pełni obecny (liczy się do udźwigu,
+  MG go widzi), znika tylko wizualnie graczowi. Opis Alanowego identyfikatora: plakietka
+  IT-owej technik „Shaniqua Copperfield" ze zdjęciem i czipem — treść od GM-a. Zweryfikowano
+  na żywo, że selektor wiersza (`[data-item-id]`) trafia poprawnie i że MG nadal widzi
+  wiersz normalnie; sama gałąź `!isGM` nie była testowalna z tej sesji (brak drugiego,
+  gracz-owego klienta pod ręką) — do potwierdzenia przy najbliższej sesji.
+- **Śmieci handlowe**: „ceramiczny kubek" ważył 1 kg (absurd dla kubka) — 0,3 kg / 2 gb.
+  „okulary daleko wzroczntch" (literówka) → „Okulary dalekowzroczne". Wszystkie trzy
+  (kubek/okulary/długopis) przestawione z waluty `gp` na `gb` — patrz niżej.
+- **Bonus, znaleziony przy audycie**: `Litr Wody` nie liczył się do zapasów wody drużyny
+  wcale — `ZASOBY_KATEGORIE`'s `\bwoda\b` nie łapie dopełniacza „Wody" (inny rdzeń wyrazu,
+  nie problem granicy słowa). Dodano `\bwody\b` (bezpieczne — nie łapie „zawody"/"dowody",
+  bo tam "wody" nie zaczyna słowa). Naprawiło to od razu WSZYSTKICH: Zapasy drużyny skoczyły
+  z 20 l (sama woda GMT400) na 48 l po przeliczeniu — Lorentz, Alan, Victor i Raynald mieli
+  ten sam martwy `Litr Wody` na kartach. Przy okazji: `Litr Wody`/`Konserwa` na Alanie
+  używały jego WŁASNEGO portretu jako ikony (artefakt importu) — podpięte pod istniejące
+  `woda_filtrowana.svg`/`canned_food.svg`, którymi reszta drużyny już się posługuje.
+- **Znalezisko szersze niż Alan, świadomie NIE naprawione tutaj**: `CONFIG.DND5E.currencies`
+  definiuje wyłącznie `gb` („Gamble") — ale zdecydowana większość istniejących przedmiotów w
+  całym świecie (nie tylko Alana) wciąż nosi `denomination:"gp"`, klucz, który już nie
+  istnieje w konfiguracji. Naprawione tylko na tym, co ten commit i tak tworzył/dotykał
+  (nowy Kolimator, Baterie, poprawki cen śmieci) — pełna migracja wszystkich przedmiotów w
+  świecie to osobna decyzja GM-a, nie coś do zrobienia po cichu przy okazji jednej postaci.
+- `game.neuroshima.auditWeapons()` / `inventoryAudit.auditInventory()` / `.auditItemCompleteness()`
+  uruchomione na całym świecie jako część audytu — zero rozjazdów na Alanie we wszystkich
+  trzech (stąd wiadomo, że reszta jego ekwipunku jest już poprawna); audyt broni zgłosił
+  rozjazdy na 7 innych aktorach, audyt kompletności na 4 — poza zakresem tego zgłoszenia,
+  zostawione GM-owi do przejrzenia osobno.
+
+`npm test` czysto po każdym kroku.
+
 Po zamknięciu FVTT: `npm run build:packs` + `npm run validate:packs` (wszystkie 14 paczek, nie
 tylko `sztuczki` — kilka sesji danych czekało na przebudowę). Zweryfikowane wprost przeciwko
 przebudowanej LevelDB (nie tylko logowi builda): opis „Pakowanie" w pakcie `sztuczki` faktycznie

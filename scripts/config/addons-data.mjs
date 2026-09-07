@@ -294,7 +294,13 @@ export const ADDON_DEFS = {
 
   kolimator: {
     id: "kolimator",
-    label: "Kolimator + baterie",
+    // Was "Kolimator + baterie" — RAW bundles the batteries into the sight's price/weight,
+    // but the GM wants them modelled as two separate carried Items (2026-09-07: Alan's
+    // loose "Kolimator + baterie" loot split into a real addon + a standalone battery
+    // item). This label drives every addon-system message (install/remove chat cards,
+    // the compatible-addons list, the loose-loot factory in weapons/addons.mjs) — once
+    // it's an addon, "+ baterie" no longer describes a second physical object anywhere.
+    label: "Kolimator",
     category: "dystansowa",
     price: 50,
     weight: 0.15,

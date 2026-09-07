@@ -239,12 +239,25 @@ async function _burnOut(actor, effect) {
  * Sukces gasi od razu — akcja jest jedna, więc i kliknięcie ma być jedno.
  * @param {Actor} actor
  */
+/**
+ * Nomeksowy kombinezon (GM homebrew, brak w RAW — zgłoszenie 2026-09-07): ognioodporny
+ * kombinezon kierowcy. Jedyna dźwignia, jaką ten system w ogóle wystawia dla "obrony przed
+ * podpaleniem" to właśnie ten rzut na ugaszenie się, więc stąd Ułatwienie — nie ma tu osobnego
+ * rzutu na "czy się zapalasz". Wymaga założenia (equipment.equipped), nie samego posiadania.
+ */
+function _hasNomexEquipped(actor) {
+  return actor?.items?.some(i =>
+    i.type === "equipment" && i.system?.equipped && i.getFlag(MODULE_ID, "nomex") === true
+  ) ?? false;
+}
+
 export async function promptDouse(actor) {
   if (!isBurning(actor)) return;
 
   await actor.toggleStatusEffect("prone", { active: true });
 
-  const rolls = await actor.rollSkill({ skill: PODPALENIE.douseSkill, target: PODPALENIE.douseDC });
+  const advantage = _hasNomexEquipped(actor);
+  const rolls = await actor.rollSkill({ skill: PODPALENIE.douseSkill, target: PODPALENIE.douseDC, advantage });
   const roll = Array.isArray(rolls) ? rolls[0] : rolls;
   if (!roll) return;
 
@@ -256,7 +269,7 @@ export async function promptDouse(actor) {
     content: `<div class="neuro-fire-card ${ok ? "is-out" : "is-burning"}">
       <div class="neuro-fire-head"><i class="fa-solid fa-person-falling"></i> TURLANIE PO ZIEMI</div>
       <div class="neuro-fire-body">${actor.name} pada na ziemię i turla się —
-        Test Zręczności (${skill}) ST ${PODPALENIE.douseDC}: <strong>${roll.total}</strong>.
+        Test Zręczności (${skill}) ST ${PODPALENIE.douseDC}${advantage ? " (Ułatwienie — nomeksowy kombinezon)" : ""}: <strong>${roll.total}</strong>.
         ${ok ? "Płomienie puszczają." : "Ogień trzyma się dalej."}</div>
     </div>`,
     flags: { [MODULE_ID]: { podpalenie: true } }

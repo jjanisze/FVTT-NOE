@@ -127,6 +127,7 @@ import { registerKowalActions } from "./items/toolkit-kowal.mjs";
 import { registerInventoryToggleFix } from "./actors/inventory-toggle-fix.mjs";
 import { GEAR_PLACEHOLDERS, createGearPlaceholders, REAL_GEAR, createRealGear } from "./config/gear-data.mjs";
 import { registerKolczatka, kolczatkaApi } from "./items/kolczatka.mjs";
+import { registerGmSecretItems } from "./items/gm-secret.mjs";
 import { registerChemia, chemiaApi } from "./items/chemia.mjs";
 import { sztuczkiApi } from "./config/sztuczki-data.mjs";
 import { pochodzeniaApi } from "./config/pochodzenia-data.mjs";
@@ -405,6 +406,7 @@ Hooks.once("ready", () => {
   game.neuroshima.flara = flaraApi;
   registerKolczatka();
   game.neuroshima.kolczatka = kolczatkaApi;
+  registerGmSecretItems();
   game.neuroshima.medykRefill = medykRefillApi;
   registerPistoletNaRace();
   registerGogle();

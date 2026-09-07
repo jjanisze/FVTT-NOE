@@ -84,7 +84,12 @@ const NEURO_WEAPON_PROPERTIES = {
   ladowanie:         { label: "Ładowanie" },         // action to load each round
   poreczna:          { label: "Poręczna" },          // one-handed, no disadvantage
   przeladowanie:     { label: "Przeładowanie" },     // reload after each shot (bonus action)
-  sm:                { label: "SM" },                // szyna montażowa — mounting rail
+  // Was the bare acronym "SM" — every neighbouring property here spells out a real word
+  // (Wmag., Bęb., Ciężka…), and the addon system's own rejection message ("Broń musi mieć
+  // właściwość „SM"." — see weapons/addons.mjs isAddonCompatible) interpolates this label
+  // directly, so a player missing the rail saw only the cryptic "SM" with nothing to look
+  // up. Spelled out (2026-09-07) so that message is actually self-explanatory in play.
+  sm:                { label: "Szyna montażowa" },   // szyna montażowa — mounting rail
 
   // Kept in itemProperties for DB safety (items may have it stored),
   // but excluded from all validProperties sets so it never shows in UI.
