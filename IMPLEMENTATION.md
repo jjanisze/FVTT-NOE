@@ -3341,3 +3341,45 @@ skoroszytu: **40** (ostatni użyty: `process_grid_39.py`, batch Raynalda z (12))
 Żadne pliki `.mjs` nie zostały zmienione w tym zgłoszeniu — wyłącznie dane na żywo (Victor,
 Evie) plus dwa pliki dokumentacji (ten wpis, `dev/icons/MISSING.md`). `npm test` czysto
 (nic w kodzie się nie zmieniło, uruchomione mimo to jako standardowa kontrola zamykająca).
+
+## Zmiany z 7 września 2026 (20) — Korekta (19): profesja to wybór JEDNEJ zdolności, nie trzech
+
+Zgłoszenie użytkownika, dosłownie: „You choose ONE per level up of the subclass every couple
+of levels. Did you add them all???!" — słusznie. (19) rozdało Victorowi wszystkie trzy
+zdolności Sędziego („Jeden z nas", „Rzuć broń i gleba!", „Partner") na podstawie
+`PROFESSIONS.sedzia.abilities` w `classes-data.mjs`, czytając tę tablicę jako „to dostajesz,
+gdy bierzesz profesję". To było zgadywanie z tabeli źródłowej zamiast sprawdzenia
+rzeczywistej konfiguracji Advancement — a ta akurat mówi wprost co innego.
+
+**Zweryfikowane tym razem wprost z przedmiotu podklasy w kompendium**
+(`game.packs.get("neuroshima-2026-overrides.profesje")`, dokument „Sędzia",
+`system.advancement`): to `ItemChoice` na poziomach 3/6/10, każdy z `choices: { count: 1 }`.
+Poziom 3 wybiera 1 z 3 zdolności profesji. Poziomy 6 i 10 wybierają 1 z tej samej puli **albo**
+z całej puli Sztuczek — czyli profesja może się skończyć na 1, 2 lub 3 z 3 zdolności, zależnie
+od tego, czy gracz w ogóle woli przy 6/10 wziąć profesję zamiast Sztuczki. Victor, na poziomie
+3, powinien mieć dokładnie **jedną** — i miał ją od początku: „Partner" (spójne też z tym, że
+Evie w ogóle istnieje). „Jeden z nas" i „Rzuć broń i gleba!" nie były brakiem, tylko czymś,
+czego jeszcze nie zdążył wybrać — dodanie ich obu było błędem, nie naprawą. Usunięte.
+
+Przy tej samej weryfikacji wyszedł na jaw DRUGI, osobny błąd — tym razem przeoczenie, nie
+nadmiar: `ItemGrant` klasy na poziomie 1 to w rzeczywistości **trzy** bezwarunkowe pozycje
+(„Mój wróg" — ogólny rodzic, „Mój biom", „Ulubiona broń"), nie dwie. Victor miał wariant
+wroga („Mój wróg: Ludzie") wzięty za sam ten feature, ale nigdy nie dostał samego rodzica
+„Mój wróg" jako osobnego przedmiotu. Dociągnięty z kompendium tak samo jak reszta w (19).
+
+Stan końcowy na poziomie 3 (14 featów): Mój wróg + Mój wróg: Ludzie + Mój biom +
+Ulubiona Katana (poziom 1) · Wyjadacz + Rzeźnik + Kłusownik (poziom 2) · Cichy krok +
+Partner (poziom 3) · plus pięć nietkniętych homebrew/Pochodzenia (Osełka/Dobycie/Zasłona/
+Siódme poty./Doktor Quinn). To teraz zgadza się 1:1 z realnym Advancement, nie z moim
+odczytem tabeli źródłowej.
+
+**Nauka, zapisana wprost, żeby się nie powtórzyła**: `classes-data.mjs`'s `levels{}` to
+źródło dla generatora paczek (`dev/classes/gen_features.py`), nie API, które samo mówi
+„ile na raz". Znaczenie markerów (`PROFESJA`, `PROFESJA_LUB_SZTUCZKA`) i realna liczba
+wyborów żyje w skompilowanym `system.advancement` konkretnego dokumentu klasy/podklasy w
+kompendium — to jest prawda, którą trzeba czytać, gdy sprawa dotyczy „ile/które". Ten sam
+błąd byłby możliwy na KAŻDEJ profesji w tym pliku (Ganger/Gladiator/Najemnik, Gwiazda/
+Kaznodzieja/Mafiozo, itd.) — jeśli kiedyś wypłynie gdzie indziej, to ten sam kształt, ta
+sama poprawka.
+
+Żadne pliki `.mjs` nie zmienione (jak w (19)) — poprawka wyłącznie na żywych danych Victora.
