@@ -53,7 +53,7 @@ export function buildBaterieItemData({ quantity = 1 } = {}) {
     system: {
       description: { value: BATERIE_ITEM.description, chat: "" },
       weight: { value: BATERIE_ITEM.weight, units: "kg" },
-      price: { value: BATERIE_ITEM.price, denomination: "gp" },
+      price: { value: BATERIE_ITEM.price, denomination: "gb" },
       quantity,
       identified: true,
     },

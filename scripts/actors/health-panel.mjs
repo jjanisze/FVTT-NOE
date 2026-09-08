@@ -33,7 +33,7 @@ import {
   dailySaveFor, chronicKeys
 } from "../config/diseases-data.mjs";
 import {
-  PHOBIAS, PHOBIA_SAVE, PHOBIA_CURE_STREAK, getPhobia, phobiaOptions
+  PHOBIAS, PHOBIA_SAVE, PHOBIA_CURE_STREAK, getPhobia, phobiaOptions, phobiaSaveDc
 } from "../config/phobias-data.mjs";
 import {
   CHEMIA, CHEMIA_FLAVOR, CHEMIA_FLAVOR_DEFAULT,
@@ -187,6 +187,40 @@ export async function addPhobia(actor, key = null, overrides = {}) {
   entries.push(entry);
   await _setFobie(actor, entries);
   return entry;
+}
+
+/**
+ * Renders a Kolor Kobaltu sub-table (`kobaltTable` on a disease definition) plus a button that
+ * actually rolls it and posts the matching result to chat. Rolling is the point: the same rule
+ * lived as un-rollable prose in a `notes` field before IMPLEMENTATION.md (22).
+ */
+function _buildKobaltTable(actor, table) {
+  const box = _el("div", "neuro-health-kobalt");
+  const head = _el("div", "neuro-health-kobalt-head");
+  head.appendChild(_el("strong", null, table.title));
+
+  const roll = _iconButton("fa-solid fa-dice-d20", table.trigger, "neuro-health-kobalt-roll");
+  roll.addEventListener("click", async () => {
+    const r = await new Roll("1d20").evaluate();
+    const hit = table.results.find(x => (r.total >= x.range[0]) && (r.total <= x.range[1]));
+    await r.toMessage({
+      speaker: ChatMessage.getSpeaker({ actor }),
+      flavor: `<strong>${table.title}</strong> — ${hit?.text ?? "brak wyniku w tabeli"}`
+    });
+  });
+  head.appendChild(roll);
+  box.appendChild(head);
+
+  const list = _el("ul", "neuro-health-kobalt-list");
+  for (const r of table.results) {
+    const [lo, hi] = r.range;
+    const li = _el("li");
+    li.innerHTML = `<strong>${lo === hi ? lo : `${lo}–${hi}`}</strong> — `;
+    li.append(r.text);
+    list.appendChild(li);
+  }
+  box.appendChild(list);
+  return box;
 }
 
 /** Replace one disease entry by id. `patch` is shallow-merged. */
@@ -531,13 +565,13 @@ export async function rollPhobiaSave(actor, entryId) {
   if (!entry) return;
 
   const roll = await actor.rollSavingThrow(
-    { ability: PHOBIA_SAVE.ability, target: PHOBIA_SAVE.dc },
+    { ability: PHOBIA_SAVE.ability, target: phobiaSaveDc(entry) },
     { configure: false }
   );
   const result = Array.isArray(roll) ? roll[0] : roll;
   if (!result) return;
 
-  const success = result.total >= PHOBIA_SAVE.dc;
+  const success = result.total >= phobiaSaveDc(entry);
   const streak = success ? (entry.streak ?? 0) + 1 : 0;
   const cured = success && streak >= PHOBIA_CURE_STREAK;
 
@@ -738,6 +772,10 @@ function _buildDiseaseRow(actor, entry, editable) {
   const def = getDisease(entry.key);
   if (def?.flavor) body.appendChild(_el("div", "neuro-health-flavor", `„${def.flavor}”`));
 
+  // Tabela z Koloru Kobaltu (np. „Lekarz i farmaceuta"). Wcześniej takie zasady żyły jako
+  // wolny tekst w `notes` — nieczytelny i nie do rzucenia. Teraz są danymi i mają guzik.
+  if (def?.kobaltTable) body.appendChild(_buildKobaltTable(actor, def.kobaltTable));
+
   const stageList = _el("ul", "neuro-health-stages");
   stages.forEach((text, i) => {
     const s = _el("li", `neuro-health-stagetext ${i === entry.stage ? "is-current" : ""}`.trim());
@@ -869,7 +907,7 @@ function _buildPhobiaRow(actor, entry, editable) {
 
   const actions = _el("div", "neuro-health-actions");
 
-  const save = _iconButton("fa-solid fa-dice-d20", `Przełamanie — RO na Mądrość ST ${PHOBIA_SAVE.dc}`,
+  const save = _iconButton("fa-solid fa-dice-d20", `Przełamanie — RO na Mądrość ST ${phobiaSaveDc(entry)}`,
     "neuro-fobia-save");
   save.disabled = !editable;
   save.addEventListener("click", () => rollPhobiaSave(actor, entry.id));

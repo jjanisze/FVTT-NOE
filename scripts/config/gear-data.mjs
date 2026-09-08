@@ -220,7 +220,7 @@ export function buildRealGearItemData(gear) {
       description: { value: gear.description },
       quantity: 1,
       weight: { value: gear.weight, units: "kg" },
-      price: { value: gear.price, denomination: "gp" }
+      price: { value: gear.price, denomination: "gb" }
     },
     flags: { [MODULE_ID]: { gearId: gear.id } }
   };

@@ -2,7 +2,7 @@
   "id": "neuroshima-2026-overrides",
   "title": "Neuroshima: Ostatnia Era",
   "description": "Neuroshima 5e overrides for dnd5e — skills, combat, equipment, and post-apo survival mechanics.",
-  "version": "0.14.21",
+  "version": "0.14.23",
   "authors": [{ "name": "Jacek Janiszewski" }],
   "url": "https://github.com/jjanisze/FVTT-NOE",
   "manifest": "https://github.com/jjanisze/FVTT-NOE/releases/latest/download/module.json",

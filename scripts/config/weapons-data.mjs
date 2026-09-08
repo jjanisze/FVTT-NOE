@@ -83,6 +83,14 @@ const BRON_BIALA = [
     weight: 3, price: 20, avail: 70
   },
   {
+    // Homebrew (Laffitte). Statystyki nadane w IMPLEMENTATION.md (21), gdy okazało się, że
+    // broń nie ma w ogóle kości obrażeń — do zatwierdzenia przez MG, patrz TODO_mechanika.md §4.
+    id: "laska", name: "Laska", type: "biala", icon: "laska.svg",
+    damage: { number: 1, denomination: 6, types: ["bludgeoning"] },
+    props: ["fin"],
+    weight: 1, price: 15, avail: 60
+  },
+  {
     id: "lancuch", name: "Łańcuch", type: "biala", icon: "chain.svg",
     damage: { number: 1, denomination: 6, types: ["bludgeoning"] },
     props: ["unieruchamiajaca", "rch"],
@@ -93,6 +101,15 @@ const BRON_BIALA = [
     damage: { number: 1, denomination: 8, types: ["slashing"] },
     props: ["lgt", "karczujaca"],
     weight: 1, price: 10, avail: 80
+  },
+  {
+    // Homebrew (Raynald). Statystyki spisane z jego karty w IMPLEMENTATION.md (21) — celowo
+    // 1k10 bez właściwości, żeby nie zmienić broni, którą już gra. Katana (1k10, fin+ver, ta
+    // sama cena) zostaje bronią wyraźnie lepszą, i tak ma być.
+    id: "miecz", name: "Miecz", type: "biala", icon: "miecz.svg",
+    damage: { number: 1, denomination: 10, types: ["slashing"] },
+    props: [],
+    weight: 1.5, price: 40, avail: 40
   },
   {
     id: "nadziak", name: "Nadziak", type: "biala", icon: "horsemans_pick.svg",
@@ -795,7 +812,7 @@ export function buildWeaponItemData(w, extra = {}) {
       type: { value: w.type, baseItem: "" },
       quantity: 1,
       weight: { value: w.weight, units: "kg" },
-      price: { value: w.price, denomination: "gp" },
+      price: { value: w.price, denomination: "gb" },
       properties: [...w.props],
       damage: {
         base: {

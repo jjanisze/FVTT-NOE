@@ -564,7 +564,7 @@ export async function initializePochodnia(item, variantKey) {
     "system.weight.value": variant.weight,
     "system.weight.units": "kg",
     "system.price.value": variant.price,
-    "system.price.denomination": "gp",
+    "system.price.denomination": "gb",
     "system.proficient": 0,
     "system.properties": ["fin"],
     "system.type.value": "biala",
@@ -608,7 +608,7 @@ export function buildPochodniaItemData(variantKey) {
       ..._baseSystemData(),
       description: { value: variant.description, chat: "" },
       weight: { value: variant.weight, units: "kg" },
-      price: { value: variant.price, denomination: "gp" },
+      price: { value: variant.price, denomination: "gb" },
       identifier: `pochodnia-${variantKey}`,
     },
     flags: {

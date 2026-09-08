@@ -1027,7 +1027,7 @@ export function chemiaItemData(key, { quantity = 1, _id } = {}) {
       source: { custom: "Neuroshima RPG", rules: "2024" },
       quantity,
       weight: { value: def.weight, units: "kg" },
-      price: { value: def.price, denomination: "gp" }
+      price: { value: def.price, denomination: "gb" }
     },
     effects: [],
     flags: {

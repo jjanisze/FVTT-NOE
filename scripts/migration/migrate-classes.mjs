@@ -76,7 +76,17 @@ const ALIASES = {
   "jachhhhty amen": "amen",                // player's flavour name, Amen in parens
   "monter serwisowanie": "serwisowanie",
 
-  "siodme poty": null,                     // homebrew — explicitly "leave alone"
+  // Rewolwerowiec (Kowboj) was split into its separately-named sub-benefits on the old
+  // sheets, exactly like Berserk above. Found live on Lorentz as two bare-name feats;
+  // see IMPLEMENTATION.md (21).
+  "jednoreki": "rewolwerowiec",
+  "lekka spluwa": "rewolwerowiec",
+
+  // NOT homebrew, despite what this entry said until IMPLEMENTATION.md (21): "Siódme poty"
+  // is a real *origin* ability (Detroit, k6 1–2), so it is not a class feature and this
+  // resolver must keep ignoring it — but it belongs to `migrate-pochodzenia.mjs`, which
+  // does know it, not to the "leave this alone forever" bucket.
+  "siodme poty": null,
   "siodme poty.": null
 };
 

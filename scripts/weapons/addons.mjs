@@ -953,7 +953,7 @@ function _buildLootItemData(def) {
     img: iconPath,
     system: {
       quantity: 1,
-      price: { value: def.price, denomination: "gp" },
+      price: { value: def.price, denomination: "gb" },
       weight: { value: def.weight, units: "kg" },
     },
     flags: {

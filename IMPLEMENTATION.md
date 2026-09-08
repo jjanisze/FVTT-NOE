@@ -3383,3 +3383,379 @@ Kaznodzieja/Mafiozo, itd.) — jeśli kiedyś wypłynie gdzie indziej, to ten sa
 sama poprawka.
 
 Żadne pliki `.mjs` nie zmienione (jak w (19)) — poprawka wyłącznie na żywych danych Victora.
+
+## Zmiany z 7 września 2026 (21) — Audyt builda i ekwipunku drużyny (Alan, Lorentz, Laffitte, Raynald) + migracja waluty świata
+
+Realizacja `HANDOFF_party_build_audit.md`. **Piekarz i Kier wyłączeni z zakresu wprost przez
+użytkownika w trakcie sesji** — hand-off ich obejmował, ta praca nie. Sekcje 4B (Kier) i
+4C (Piekarz) pozostają nierozstrzygnięte.
+
+### Odkrycie, które zmieniło cały audyt: startowa Sztuczka
+
+`Tabele/Sztuczki.md` mówi wprost: „Na starcie postać może wybrać **jedną Sztuczkę** (jeśli
+spełnia wymagania) lub **50 gambli**". Żadna klasa nie daje Sztuczki na 1 poziomie
+(najwcześniejszy slot to 4), więc przy audycie „czy poziom 3 się zgadza" ta jedna Sztuczka
+łatwo wygląda na nadmiar — i o mało nią nie została uznana.
+
+Punkt wyjścia: **żaden feat w całej drużynie nie miał flagi `sztuczka`**. Wszystkie pięć
+startowych Sztuczek istniało na kartach, ale jako luźne, nieoflagowane fragmenty z importu
+Roll20 — najczęściej **rozbite na osobno nazwane klauzule**, ten sam kształt co Berserk w
+`migrate-classes.mjs`'s `ALIASES`. Metoda, która to rozwiązała: szukać tekstu feata **wewnątrz
+opisów** dokumentów w paczkach, nie po nazwie feata.
+
+| Postać | Startowa Sztuczka | Na karcie figurowała jako |
+|---|---|---|
+| Victor | `Samuraj` | `Osełka` + `Dobycie` + `Zasłona` (3 klauzule) |
+| Alan | `Szybkie palce` | `Quick Change` |
+| Raynald | `Pakowanie` | `Mam pod ręką` + `Bez dna` (2 klauzule) |
+| Laffitte | `Patriota` | `Patriota` (dobra nazwa, zero flag) |
+| Lorentz | — | brak (potwierdzone z kartą Roll20) |
+
+Najdotkliwszy z tego był Alan: `Szybkie palce` mają `coverage: "auto"` i są w pełni
+zaimplementowane w `weapons/magazine.mjs`, więc jego wymiana magazynka w Akcji Bonusowej
+**po prostu nie działała** — kod nie miał po czym poznać, że gracz tę Sztuczkę ma.
+Scalenie w kanoniczne przedmioty załatwiło to bez pisania linijki kodu.
+
+Scalenie `Pakowania` było bezpieczne dla automatyki `Bez dna`, bo
+`ABILITY_DEFINITIONS[BEZ_DNA].aliases` zawiera **oba** kształty (`"bez dna"` i `"pakowanie"`)
+— sprawdzone przed scaleniem, nie po.
+
+### Laffitte — brakująca profesja (hipoteza 4A z hand-offu potwierdzona danymi)
+
+Cwaniak 3 bez podklasy. `Cwaniak.system.advancement` ma na poziomie 3 wpis typu `Subclass`
+(„Profesja"), więc to była realna dziura, nie wybór. Użytkownik wskazał **Kaznodzieję Nowej
+Ery** — i dane to niezależnie potwierdziły: pula poziomu 3 tej profesji to
+`Amen / Łaska boża / Mój bóg kule nosi / Tarcza wiary`, a Laffitte miał już feat
+`Jachhhhty (Amen)`, który `ALIASES` mapuje na `"amen"` („player's flavour name"). Wybór był
+więc dawno dokonany, brakowało wyłącznie dokumentu podklasy. Dograne: podklasa + kanoniczny
+`Amen`. Skasowany bezimienny feat-śmieć (pusta nazwa, pusty opis, ikona-awatar).
+
+Konflikt z `PLAN_berserk.md` §6 (Brutal + Kaznodziej w grupie `unarmoredAc`) **nie jest już
+aktualny** — jedynym Brutalem był Piekarz, którego Laffitte zastąpił (Sesja 12).
+
+### Raynald — realny nadmiar
+
+Build zgadzał się co do jednej pozycji **poza** ośmioma featami. Usunięte za zgodą użytkownika:
+- `Szybkie ręce` (poziom 4) i `Wykształciuch` (poziom 5) — zdolności z przyszłych poziomów;
+  Advancement Manager przyzna je sam przy awansie.
+- `Pełna micha` — okazała się klauzulą zdolności `Za garść gambli`, czyli profesji **Gwiazda**
+  (Cwaniak). Na Specu/Monterze nie miała prawa się znaleźć.
+- `Skarb`, `Prosto z fabryki`, `Do ostatniej kropelki` — nie istnieją w żadnym kompendium.
+  `Skarb` odwołuje się w tekście do „twojego poziomu Speca", więc kiedyś istniał; dziś nie.
+
+### Ekwipunek — martwe bronie
+
+Trzy bronie miały **zero aktywności** (`system.activities` puste), czyli nie dało się nimi
+zaatakować — dokładnie pułapka nr 3 z hand-offu, tyle że zastana, nie stworzona:
+- Lorentz `Złoty Desert Eagle` — odbudowany z katalogowego `Desert Eagle`, zachowany opis i
+  grawer, `+1` do trafienia wprost z jego własnego opisu, cena 300 gb (decyzja użytkownika).
+- Raynald `Pistolet B92` — katalog **ma** wpis `B 92`; sklonowany. Przy okazji magazynek
+  wrócił z 9 na katalogowe 15.
+- Lorentz `Pochodnia` — część obrażeń bez kości; odtworzona przez istniejącą fabrykę
+  `game.neuroshima.pochodnia.create("improwizowana")` (4 aktywności).
+
+Laffitte `Laska` też miała obrażenia bez kości — ustawione 1k6 obuchowe (homebrew, patrz
+`TODO_mechanika.md` §4).
+
+Lorentz miał **duplikaty** `Kastet` i `Desert Eagle` — po dwie sztuki, w każdej parze jedna
+z opisem i jedna bez, identyczne statystyki i flagi. Skasowane te bez opisu. Warto odnotować,
+że pierwsza próba **słusznie się zablokowała**: zabezpieczenie porównywało surową długość
+opisu, a „pusty" opis to w rzeczywistości `<p></p>` (7 znaków). Bez porównania po tekście bez
+tagów skasowałoby się nie te sztuki.
+
+### Karty postaci — dwa błędy systemowe, oba z importu Roll20
+
+1. **Biegłości**: `armorProf` i `weaponProf` były **puste u wszystkich pięciu postaci**.
+   Wyrównane do tabel z `classes-data.mjs`. (Raynald przy okazji stracił `med` — patrz
+   `TODO_mechanika.md` §10.)
+2. **`ac.calc: "flat"`** u czterech z pięciu — KP wpisana na sztywno, pancerz w ogóle się nie
+   liczył. Przełączone na `default` (decyzja użytkownika, świadomie akceptując, że dwie
+   postaci tracą po 1 KP):
+
+   | Postać | Przed | Po | Uwaga |
+   |---|---|---|---|
+   | Lorentz | 13 | **16** | + naprawa kamizelki, patrz niżej |
+   | Alan | 15 | 15 | kamizelkę miał **nie założoną** — założona |
+   | Laffitte | 13 | 12 | nie nosi pancerza |
+   | Raynald | 13 | 12 | Plate carrier typ I, ZRĘ 0 |
+
+Obie kamizelki (`Kamizelka Płytowa` Lorentza, `Kamizelka Kuloodporna ☩` Raynalda) były typu
+`loot`, więc nie dawały KP w ogóle. Przekonwertowane na `equipment` przez create+delete
+(pułapka nr 2 z hand-offu), dopasowane po wadze: typ III (KP 14) i typ I (KP 12). Nazwy
+graczy zachowane, ich opisy dopisane kursywą pod katalogowym.
+
+### Lorentz — Sztuczka od MG
+
+Jako jedyny nie miał startowej Sztuczki (potwierdzone z kartą Roll20). Użytkownik przyznał
+mu ją jako gratis „na tanka / HP / odporności / leczenie". Wybrane **`Ćwiczenie czyni
+mistrza`** (`req: "Brak"`, powtarzalna, „+2 do jednej Cechy"), bo jako jedyna daje +2 do
+Cechy i **nie wymusza noszenia ciężkiego pancerza** (`Pancerny` odrzucony przez użytkownika
+z tego właśnie powodu; `Kuloodporność` i tak odpadała — wymaga CHA/MDR/INT 15+, a on ma 8/14/8).
+Zastosowane wprost: KON 15 → 17, PW 30 → 33.
+
+### Migracja waluty `gp` → `gb` (cały świat)
+
+Decyzja użytkownika po dwukrotnym wcześniejszym odłożeniu. `CONFIG.DND5E.currencies` zna
+tylko `gb`, a świat siedział na `gp`.
+
+- **1055 przedmiotów** zmigrowanych: 522 na 73 aktorach + 533 w katalogu Itemów. Zero błędów,
+  zero pozostałości (zweryfikowane osobnym przebiegiem).
+- **19 miejsc w 18 plikach źródłowych** emitowało `denomination: "gp"` — to była prawdziwa
+  przyczyna, bo każdy nowo tworzony przedmiot odtwarzał błąd. Poprawione; usunięty też
+  nieaktualny komentarz „Traktujemy gp jako gb (gamble)" w `ammo-inventory.mjs`.
+- **Paczki nie zostały przebudowane** — patrz `TODO_mechanika.md` §6. To jedyna otwarta część.
+
+### Opisy, wagi, ceny
+
+**46 przedmiotów** uzupełnionych. Ceny prowiantu wzięte z `Tabele/Zywnosc.md` (Konserwa 15 gb,
+Woda pitna 1 gb/l), surowce z `Tabele/Narzedzia.md` (CH/CZ/CE = 1 gb/100 g). Reszta —
+głównie zbieractwo Lorentza, które miało hurtem wagę 1 kg i cenę 0 — wyceniona ręcznie i
+opatrzona opisem.
+
+Po przebiegu w całej drużynie zostały **dwie** pozycje bez ceny i obie tak mają zostać:
+`Pokwitowanie Luxor` Victora (dokument, nie towar) i `Pochodnia Improwizowana` Lorentza
+(katalogowa cena to 0 — robi się ją ze śmieci).
+
+Naprawione też: `Medpak` Victora i Evie były typu `consumable` zamiast `lekarstwo` —
+zdjęte istniejącym `inventoryAudit.repairChemia()` (2/2, audyt schodzi do zera). `Nóż
+taktyczny` Victora dostał brakującą `availability: 70` z `auditWeapons()`.
+
+### Ikony
+
+**Zero nowych pozycji w `dev/icons/MISSING.md`.** Po audycie każdy przedmiot drużyny
+inny niż feat wskazuje na realną ikonę modułu. Jedyny znaleziony błąd był tego rodzaju,
+który ten plik każe naprawiać w miejscu, a nie kolejkować: `Litr Wody` Lorentza wskazywał na
+portret aktora, choć `woda_filtrowana.svg` istnieje i używają go wszyscy pozostali.
+Pozostałe dwie ikony-awatary siedzą na featach (`Siódme poty.`, `Mizoofobia`), które są
+z tej kolejki wyłączone z definicji.
+
+### Testy
+
+201/201 przechodzi (`game.neuroshima.tests.run()`).
+
+## Zmiany z 8 września 2026 (22) — TODO mechaniczne z audytu (22): Samuraj, Pochodzenie Victora, treść Koloru Kobaltu
+
+Realizacja `TODO_mechanika.md` spisanego przy audycie (21). Zakres bez zmian: Victor, Alan,
+Lorentz, Laffitte, Raynald — Piekarz i Kier nadal poza zleceniem.
+
+### Samuraj — pierwsza Sztuczka wręcz z realną automatyką (`actors/samuraj.mjs`)
+
+Trzy z czterech klauzul, `coverage: none` → `partial`:
+- **+1 do Testu Ataku** bronią sieczną — hak `dnd5e.preRollAttack`
+- **+1 do obrażeń** bronią sieczną — hak `dnd5e.preRollDamage`, dokładany do pierwszego rzutu,
+  nie do każdej części obrażeń
+- **TT +1** z bronią sieczną w ręku — Active Effect na `system.attributes.ac.bonus`
+
+Czwarta („wyciągnięcie finezyjnej broni siecznej bez Darmowej Interakcji") jest zadeklarowana
+w `manual`: ten system nie śledzi darmowych interakcji jako zasobu, więc nie ma czego zaczepić.
+Lepiej powiedzieć to wprost, niż udawać automatykę.
+
+Dwie decyzje warte zapisania:
+- **„Broń sieczna" = broń, której obrażenia zawierają `slashing`**, niekoniecznie wyłącznie.
+  Nóż taktyczny Victora zadaje „kłute+cięte" i wg literalnego brzmienia zasady nadal jest bronią
+  sieczną. Czytamy `system.damage.base.types` **oraz** typy z części obrażeń aktywności, bo broń
+  z katalogu wypełnia jedno albo drugie zależnie od fabryki, którą powstała.
+- ⚠️ `damage.parts[].types` to **Set**, nie tablica. `JSON.stringify` na tym zwraca `{}`, przez co
+  pierwsza wersja wykrywania „widziała" broń bez typów obrażeń. Ta sama klasa pułapki co
+  `system.activities` z ARCHITECTURE.md §10 — stąd `_types()` w tym pliku.
+
+Bonusy biorą broń **z aktywności**, nie „jakąkolwiek założoną" — inaczej katana w plecaku
+podbijałaby strzał z karabinu. Efekt TT dopina się i odpina na `updateItem` przy zmianie
+`system.equipped`, czego „Bez dna" nie musi robić (tam warunkiem jest samo posiadanie Sztuczki).
+
+Zweryfikowane na żywo na Victorze przed zamknięciem świata: KP 14 → 15 z kataną w ręku, 14 po
+jej zdjęciu, 15 po ponownym założeniu; `+1` doklejane kataną, zero przy M1 US Rifle.
+Siedem testów w `sztuczki-combat.test.mjs`.
+
+### Victor — Pochodzenie Teksas → Detroit
+
+Audyt (21) zostawił Victorowi feat `Siódme poty.` jako „homebrew, bo `ALIASES` każe nie ruszać".
+Sprawdzenie pokazało co innego: to **prawdziwa zdolność Pochodzenia Detroit** (k6 1–2), a tekst
+na karcie zgadza się z paczką co do słowa. Victor miał ją mimo Pochodzenia Teksas, z którego
+miał już poprawne `Doktor Quinn` — a Zwiadowca nie dostaje slotu Pochodzenia na żadnym poziomie
+1–12, więc druga zdolność była nadmiarem niezależnie od treści.
+
+Decyzja użytkownika: **to Pochodzenie było wpisane źle, nie zdolność**. Victor przeniesiony na
+Detroit — `Doktor Quinn` usunięty, `Siódme poty` podpięte jako kanoniczna zdolność z paczki.
+
+Premia +1/+1 przeliczona zgodnie z tym, co zakłada `migrate-pochodzenia.mjs`: cofnięta premia
+Teksasu (KON, CHA), naliczona Detroit (ZRĘ, MDR), a `AbilityScoreImprovement` na nowym
+przedmiocie ma zapisane `value`, więc zdjęcie Pochodzenia odwróci to poprawnie.
+ZRĘ 16→17, MDR 16→17, KON 14→13, CHA 10→9. **PW 30→27** (modyfikator KON spadł o 1 na trzech
+poziomach). KP bez zmian — 16 i 17 dają ten sam modyfikator.
+
+⚠️ `item.toObject().system.advancement` to **obiekt kluczowany po `_id`**, nie tablica —
+`.find()` na tym rzuca. Kosztowało to jedno nieudane podejście w trakcie tej sesji.
+
+### Kolor Kobaltu — treść kampanijna nie miesza się z podręcznikiem
+
+Użytkownik zgłosił, że `Mizoofobia` Laffitte'a i `Schizofrenia paranoidalna` Raynalda to
+**house rule tej kampanii**, wymyślone pod te dwie postaci, i nie powinny się pokazywać, gdy
+ktoś wyłączy Kolor Kobaltu. Moduł miał już do tego przełącznik (`kobaltEnabled`,
+`PLAN_kobalt.md`), używany dotąd tylko przez latarki.
+
+Rozstrzygnięcie: **tabel podręcznikowych nie rozszerzamy.** `CHRONIC_DISEASES` i `PHOBIAS` to
+ścisłe k8 (str. 108–112) i dziewiąty wpis zepsułby zarówno kość, jak i zgodność z RAW. Zamiast
+tego dwie osobne mapy — `KOBALT_DISEASES` i `KOBALT_PHOBIAS`, bez pola `roll`, bo tych się nie
+losuje — plus osobna grupa `<optgroup>` w pickerze, dokładana tylko przy włączonym przełączniku.
+`_select()` w `health-panel.mjs` obsługiwał grupy i płaskie wpisy w jednej tablicy, więc renderer
+nie wymagał zmian.
+
+**`getDisease()`/`getPhobia()` rozwiązują treść Kobaltu niezależnie od przełącznika.** To celowe:
+przełącznik decyduje, co da się *wybrać*, a nie kasuje tego, co postać już ma. Inaczej wyłączenie
+Kobaltu zamieniłoby chorobę Raynalda w pustą pozycję „własną".
+
+Co dokładnie doszło:
+- **Mizoofobia** (Laffitte) jako **fobia**, nie choroba — mechanicznie to wyzwalacz + RO na
+  Mądrość + łagodzenie, czyli dokładnie kształt fobii; nie ma drabiny Przewlekły/Ostry/Krytyczny.
+  Ma własne **ST 16** (domyślne to 15), więc doszło `phobiaSaveDc(entry)`. Podpięte w trzech
+  miejscach `health-panel.mjs`, w tym w porównaniu wyniku — **gdzie zostawienie stałej byłoby
+  cichym błędem**: rzut szedłby przeciw 16, a ocena sukcesu przeciw 15.
+- **Schizofrenia paranoidalna** (Raynald) jako choroba Kobaltu. Jej drabina stopni jest
+  **identyczna z podręcznikową `Paranoja`** i to nie przypadek — przy stole to ta sama choroba
+  pod nazwą postaci. Domowa jest wyłącznie tabelka **„Lekarz i farmaceuta"**, która do tej pory
+  żyła jako wolny tekst w `notes`: nie dało się jej ani ładnie wyświetlić, ani rzucić. Teraz jest
+  danymi (`kobaltTable`), renderuje się w szczegółach choroby i ma guzik rzucający k20, który
+  wypisuje trafiony wiersz na czat.
+- W `disease-effects.mjs` doszedł wpis `schizofreniaParanoidalna`, będący kopią `paranoja`.
+  Powtórzenie jest świadome i konieczne: **bez niego przepięcie karty Raynalda na nowy klucz
+  po cichu zabrałoby mu Active Effect**, bo efekty są kluczowane po id choroby.
+
+Siedem testów w `choroby.test.mjs`, w tym pilnujące, że obie tabele podręcznikowe nadal mają
+dokładnie 8 pozycji z rzutami 1–8, że tabelka k20 pokrywa 1–20 bez dziur i zakładek, i że
+wyłączenie przełącznika nie odbiera treści karcie, która już ją ma.
+
+### Bronie homebrew w katalogu
+
+`Miecz` (Raynald) i `Laska` (Laffitte) dopisane do `WEAPONS`, więc `auditWeapons()` wreszcie je
+widzi — wcześniej były dla niego niewidzialne. `Miecz` spisany z karty (1k10 cięte, celowo bez
+właściwości, żeby nie zmienić broni, którą gracz już gra). `Laska` miała obrażenia **bez kości**;
+nadane 1k6 obuchowe + finezyjna, wartości moje, wciąż do zatwierdzenia przez MG.
+
+### `ALIASES` w `migrate-classes.mjs`
+
+- Dopisane `"jednoreki"` i `"lekka spluwa"` → `"rewolwerowiec"`, żeby ponowny import postaci
+  Lorentza nie odtworzył rozbicia zdolności profesji na osobne featy.
+- Wpis `"siodme poty": null` **zostaje `null`** (to zdolność Pochodzenia, więc ten resolver ma ją
+  ignorować), ale komentarz mówi teraz prawdę zamiast „homebrew, zostaw".
+
+### Paczki kompendiów przebudowane
+
+`npm run build:packs` wymaga w pełni zamkniętego Foundry (builder ma na to poprawny guard i
+odmawia, dopóki LevelDB jest zajęty). Po przebudowie zweryfikowane wprost w bazie:
+- **`gp` = 0** we wszystkich paczkach — migracja waluty z (21) domknięta; do tej pory przedmiot
+  przeciągnięty z kompendium wracał z `gp` mimo poprawionych źródeł
+- `bron` = 79 dokumentów, w tym `Miecz 40 gb` i `Laska 15 gb`
+- `Samuraj` ma teraz wypaloną flagę `coverage: "partial"` zamiast nieaktualnej `"none"`
+
+`npm run validate:packs` — wszystkie testy przechodzą, `dangling uuids: none`.
+
+### Czego ta sesja NIE zrobiła
+
+- **Migracja danych na dwóch aktorach** (przepięcie choroby Raynalda z `paranoja` na
+  `schizofreniaParanoidalna` + wyczyszczenie zduplikowanej notatki; zamiana feata `Mizoofobia`
+  Laffitte'a na wpis w `fobie`). Offline'owy serwer MCP nie mógł zapisać: jego auto-backup
+  wykłada się przy kopiowaniu pliku `LOCK`, który trzyma on sam (`EPIPE ... _backups/actors_*`).
+  Odczyty działają, zapisy nie. Do zrobienia na żywym świecie — to dwie małe zmiany.
+- **Pełny przebieg testów.** Przeładowanie strony wyrzuciło sesję na ekran logowania, a
+  użytkownik `MCP` ma hasło. `npm test` (walidator warstwy testowej) i `validate:packs`/
+  `validate:css` przechodzą, ale `game.neuroshima.tests.run()` nie został po tych zmianach
+  uruchomiony.
+- `auditSurowce()` — okazało się, że **nie ma co robić**: wszystkie cztery pozycje surowców
+  drużyny mają już kanoniczne ikony i typ `consumable`, więc `getSurowiecType()` je rozpoznaje.
+  Wpis w `TODO_mechanika.md` (21) był w tym punkcie po prostu błędny.
+- Nadmiarowe `exhaustionSources` u Raynalda: trzy identyczne wpisy „Bezsenność" z tym samym
+  `addedAt`. Zauważone przy okazji, nie ruszane — osobny temat.
+
+## Zmiany z 8 września 2026 (23) — Domknięcie (22) + naprawa pułapki w serwerze `foundry-mcp`
+
+Wpis (22) kończył się listą „czego ta sesja NIE zrobiła". Ten wpis ją zamyka i opisuje błąd,
+który to blokował — bo okazał się poważniejszy niż samo zablokowanie zapisu.
+
+### Pułapka: FoundryVTT nie wstawał, „Loading World Data - 7%"
+
+Po przebudowie paczek świat przestał się uruchamiać. **To nie był ani moduł, ani paczki** —
+`AppData/Local/FoundryVTT/Logs/debug.*.log` pokazywał wprost:
+
+```
+Connected to database "effects"          ← OK
+Launching World | Loading World Data - 7%
+LEVEL_DATABASE_NOT_OPEN: Failed to connect to database "actors"
+```
+
+`effects` wstaje, `actors` nie, a wbudowana auto-naprawa Foundry „kończy się sukcesem" i mimo to
+reconnect dalej pada — bo blokadę trzyma żywy proces. Trzymały ją **trzy instancje serwera
+`foundry-vtt` MCP z 6 i 7 września**, żyjące od poprzednich sesji.
+
+To był skutek uboczny workflow z (22): poprosiłem użytkownika o pełne zamknięcie Foundry pod
+przebudowę paczek, a moje własne narzędzie nigdy nie oddało blokady świata. Użytkownik musiał
+ubić procesy ręcznie **dwa razy** — Claude nie może tego zrobić (klasyfikator auto-mode blokuje
+`Stop-Process`), więc trzeba o to prosić i **podawać konkretne PID-y**: samych `node.exe` jest
+tam kilkanaście od `chrome-devtools-mcp` i „ubij node" trafia w zły proces.
+
+### Dwa błędy w `Neuro 5e/Integracje/foundry-mcp` (osobny projekt, nie moduł)
+
+1. **`getDB()` cache'ował uchwyty LevelDB na całe życie procesu.** Zwalniał je wyłącznie
+   `close()` z handlerów SIGINT/SIGTERM — a stdio-owy serwer MCP na Windows często nie dostaje
+   żadnego z tych sygnałów, gdy klient znika. Efekt: proces-widmo trzymający świat w nieskończoność.
+   Zastąpione przez **`withDB(collection, fn)`**, które otwiera bazę, wykonuje operację i
+   **zawsze zamyka w `finally`**. Blokada żyje teraz tyle, co jedno wywołanie — co zresztą
+   odpowiada temu, do czego ten serwer służy: dostęp „na zimno", gdy Foundry jest zamknięte.
+   Przy okazji nieudane otwarcie zwraca zrozumiały komunikat („FoundryVTT is running…") zamiast
+   surowego błędu `classic-level`.
+2. **`backupCollection()` kopiował plik `LOCK`.** `fs.cpSync` na zablokowanym `LOCK` rzuca na
+   Windows `EPIPE`, co **przerywało cały backup, a więc i zapis, który ten backup miał
+   zabezpieczyć**. To jest dokładna przyczyna, dla której (22) nie mogło zapisać zmian na
+   Raynaldzie. Backup pomija teraz `LOCK`, `LOG` i `LOG.old` — LevelDB odtwarza je przy otwarciu,
+   a przywracanie nieświeżego `LOCK` byłoby w najlepszym razie bezużyteczne. Dane siedzą w
+   `.ldb`/`.log`, `CURRENT` i `MANIFEST`.
+
+Dodatkowo `server.ts` wychodzi teraz przy zamknięciu stdin (`process.stdin.on('close'|'end')`),
+żeby instancje przestały się kumulować — to jedyny sygnał, który zawsze dociera.
+
+⚠️ **Poprawka działa dopiero na świeżo uruchomionej instancji.** Procesy, które już żyją, niosą
+stary kod i trzeba je ubić ręcznie.
+
+### Domknięte pozycje z (22)
+
+Zrobione na żywym świecie przez Chrome DevTools MCP — po tej lekcji offline'owy tor jest
+ostatecznością, nie pierwszym wyborem:
+
+- **Raynald**: `choroby[0].key` przepięty z `paranoja` na `schizofreniaParanoidalna`, notatka
+  (405 znaków) wyczyszczona, bo tabelka „Lekarz i farmaceuta" jest teraz danymi.
+  **Active Effect przeżył** (`Schizofrenia paranoidalna — Przewlekły`) — czyli wpis dodany
+  w (22) do `disease-effects.mjs` zrobił dokładnie to, po co powstał. Pozostałe flagi
+  (`zranienie`, `exhaustionSources`, `fuksy`) nietknięte: `setFlag` jest zakresowy, w
+  przeciwieństwie do płytkiego merge'a z offline'owego MCP.
+- **Laffitte**: feat `Mizoofobia` zamieniony na prawdziwy wpis w `fobie`
+  (`key: "mizoofobia"`), feat skasowany. Fobia ma teraz RO na Mądrość ST 16, licznik trzech
+  sukcesów i Przełamanie.
+
+### Skutek uboczny (21)/(22), złapany dopiero teraz
+
+Dopisanie `miecz` i `laska` do katalogu sprawiło, że `auditWeapons()` **zaczął je widzieć** — i
+od razu zgłosił dwa rozjazdy, wcześniej niewidzialne:
+
+- `Laska` miała kości obrażeń **tylko w części aktywności, a `system.damage.base` puste**.
+  Broń katalogowa trzyma kości w `damage.base`, a część aktywności je lustrzanie powtarza
+  (porównane z `Nóż taktyczny` Victora). Uzupełnione.
+- Obie broni nie miały flagi `availability`.
+
+**Nie użyto `repairWeapons()`** — ta funkcja nie przyjmuje filtra po aktorze i naprawiłaby
+wszystkie 11 rozjazdów w świecie, w tym ręcznie ustawione bonusy obrażeń NPC-ów, które
+użytkownik świadomie kazał zostawić (patrz `TODO_mechanika.md` §9). Poprawione punktowo.
+
+### Stan końcowy
+
+- **Testy: 215/215** (`game.neuroshima.tests.run()`), było 201 przed (22).
+- `auditWeapons()` — **0 rozjazdów w drużynie**; 11 w świecie to wyłącznie tuning NPC-ów.
+- `auditItemCompleteness()` — 0 w drużynie, 4 w świecie (te same, znane, celowe).
+- `auditInventory()` — chemia/surowce/pirotechnika/źródła zasilania: zero.
+- Rejestr Sztuczek: `samuraj` przeszedł do `partial`, obok `pakowanie`, `panPlaster`,
+  `aramis`, `gradOlowiu` i `szturmowiec`.
+- Bramkowanie Kobaltem zweryfikowane na żywo w obie strony: przy włączonym przełączniku picker
+  ma grupę „Kolor Kobaltu" w chorobach i fobiach, przy wyłączonym jej nie ma — a treść **już
+  obecna na kartach** dalej się rozwiązuje, więc Raynald i Laffitte nic nie tracą.
+
+Wersja modułu bez zmian (`0.14.23`) — ta sesja nie ruszyła kodu modułu poza żywymi danymi;
+zmiany kodu poszły do osobnego projektu `Integracje/foundry-mcp`.

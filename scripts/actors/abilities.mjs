@@ -49,7 +49,8 @@ export const ABILITY_KEYS = {
   GRAD_OLOWIU: "gradOlowiu",
   RUCHOME_GNIAZDO_CKM: "ruchomeGniazdoCkm",
   SZTURMOWIEC: "szturmowiec",
-  BEZ_DNA: "bezDna"
+  BEZ_DNA: "bezDna",
+  SAMURAJ: "samuraj"
 };
 
 /**
@@ -100,6 +101,14 @@ export const ABILITY_DEFINITIONS = {
     // item literally named after the whole Sztuczka ("Pakowanie"), which grants this clause too.
     aliases: ["bez dna", "pakowanie"],
     noticeColor: "#4a6b4a"
+  },
+  [ABILITY_KEYS.SAMURAJ]: {
+    label: "Samuraj",
+    // Victor's sheet carried this Sztuczka split into three separately-named clauses
+    // (Osełka / Dobycie / Zasłona) — merged into one canonical item in IMPLEMENTATION.md (21).
+    // The clause names stay as aliases so a re-import of that shape still resolves.
+    aliases: ["samuraj", "osełka", "oselka", "zasłona", "zaslona"],
+    noticeColor: "#6b4a4a"
   }
 };
 

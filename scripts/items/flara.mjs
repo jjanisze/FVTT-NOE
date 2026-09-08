@@ -420,7 +420,7 @@ export function buildFlaraItemData() {
       type: { value: "trinket", subtype: "" },
       description: { value: FLARA_DESCRIPTION, chat: "" },
       weight: { value: 0.3, units: "kg" },
-      price: { value: 15, denomination: "gp" },
+      price: { value: 15, denomination: "gb" },
       quantity: 1,
       uses: { max: "", spent: 0, recovery: [] },
       identifier: "flara",

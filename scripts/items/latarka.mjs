@@ -466,7 +466,7 @@ export async function initializeLatarka(item, formKey) {
     "system.weight.value": 0.3,
     "system.weight.units": "kg",
     "system.price.value": form.battery ? 15 : 60,
-    "system.price.denomination": "gp",
+    "system.price.denomination": "gb",
     "system.type.value": "trinket",
     // Explicit clear, not omitted — see `pochodnia.mjs`'s `initializePochodnia` doc comment for
     // why: this function converts an item that may have carried a real `uses.max` from *its*
@@ -508,7 +508,7 @@ export function buildLatarkaItemData(formKey) {
       ..._baseSystemData(),
       description: { value: form.description + _descriptionTail(), chat: "" },
       weight: { value: 0.3, units: "kg" },
-      price: { value: form.battery ? 15 : 60, denomination: "gp" },
+      price: { value: form.battery ? 15 : 60, denomination: "gb" },
       identifier: `latarka-${formKey}`,
     },
     flags: {

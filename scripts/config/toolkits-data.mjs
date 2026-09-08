@@ -429,7 +429,7 @@ export function buildToolkitItemData(kit, links) {
         ...(kit.nativeCheck ? { chat: _toolkitChatDescription(kit) } : {})
       },
       weight: { value: kit.weight, units: "kg" },
-      price: { value: kit.price, denomination: "gp" },
+      price: { value: kit.price, denomination: "gb" },
       quantity: 1
     },
     flags: { [MODULE_ID]: { toolkit: kit.id } }

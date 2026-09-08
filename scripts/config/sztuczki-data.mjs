@@ -406,7 +406,26 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 SIŁ lub ZRC; +1 do Testów Ataku i obrażeń bronią sieczną; wyciągnięcie finezyjnej "
       + "broni siecznej bez Darmowej Interakcji; TT +1 z taką bronią w ręku.",
     category: "wrecz",
-    auto: []
+    // „Bronią sieczną" = bronią, której obrażenia zawierają typ `slashing` — czyli także
+    // bronią mieszaną (Nóż taktyczny: kłute+cięte), zgodnie z literalnym brzmieniem.
+    legacyAbilityKeys: ["samuraj"],
+    auto: [
+      {
+        what: "+1 do Testów Ataku bronią sieczną — hak `dnd5e.preRollAttack`.",
+        where: "actors/samuraj.mjs"
+      },
+      {
+        what: "+1 do obrażeń bronią sieczną — hak `dnd5e.preRollDamage`.",
+        where: "actors/samuraj.mjs"
+      },
+      {
+        what: "TT +1, gdy trzyma broń sieczną — Active Effect na system.attributes.ac.bonus, "
+          + "dopinany/odpinany przy zmianie ekwipunku.",
+        where: "actors/samuraj.mjs"
+      }
+    ],
+    manual: "„Wyciągnięcie finezyjnej broni siecznej bez Darmowej Interakcji” — dobywanie broni "
+      + "nie jest w tym systemie śledzone jako zasób, więc nie ma czego automatyzować."
   },
   siekierezada: {
     label: "Siekierezada",

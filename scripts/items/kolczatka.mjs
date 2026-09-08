@@ -279,7 +279,7 @@ export function buildKolczatkaItemData() {
       type: { value: "trinket", subtype: "" },
       description: { value: KOLCZATKA_DESCRIPTION, chat: "" },
       weight: { value: 0.5, units: "kg" },
-      price: { value: 10, denomination: "gp" },
+      price: { value: 10, denomination: "gb" },
       quantity: 1,
       uses: { max: "", spent: 0, recovery: [] },
       identifier: "kolczatki",

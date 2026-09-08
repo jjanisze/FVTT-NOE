@@ -1515,6 +1515,33 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
   opacity: 0.7;
 }
 
+/* Tabela z Koloru Kobaltu w szczegółach choroby (np. „Lekarz i farmaceuta"). */
+.neuro-health-kobalt {
+  margin-top: 6px;
+  padding: 5px 7px;
+  border-left: 3px solid #4a6b8a;
+  background: rgba(74, 107, 138, 0.08);
+}
+
+.neuro-health-kobalt-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  margin-bottom: 3px;
+}
+
+.neuro-health-kobalt-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  opacity: 0.85;
+}
+
 .neuro-health-stages {
   margin: 0;
   padding: 0;

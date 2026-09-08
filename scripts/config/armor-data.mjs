@@ -312,7 +312,7 @@ export function buildArmorItemData(a, extra = {}) {
       type: { value: a.armorType, baseItem: "" },
       quantity: 1,
       weight: { value: a.weight, units: "kg" },
-      price: { value: a.price, denomination: "gp" },
+      price: { value: a.price, denomination: "gb" },
       armor: { value: a.ac ?? null, magicalBonus: null, dex: a.dex ?? null },
       strength: a.strength ?? null,
       proficient: null,

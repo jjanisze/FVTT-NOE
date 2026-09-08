@@ -14,6 +14,7 @@ import { SZTUCZKI } from "../config/sztuczki-data.mjs";
 import { ABILITY_KEYS } from "../actors/abilities.mjs";
 import { __testing as fire } from "../weapons/fire-modes.mjs";
 import { __testing as mag } from "../weapons/magazine.mjs";
+import { __testing as samuraj } from "../actors/samuraj.mjs";
 import {
   MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup,
   sztuczkaItem, stub, captureWarnings, waitFor, activitiesOfType
@@ -239,6 +240,102 @@ export function registerSztuczkiCombatTests(quench) {
         await waitFor(() => activitiesOfType(seria, "neuroKs").length === 0, { label: "usunięcie KS" });
         await item.update({ "system.properties": ["tryb_p", "tryb_ks", "tryb_ds"] }, { render: false });
         await waitFor(() => activitiesOfType(seria, "neuroKs").length === 1, { label: "powrót KS" });
+      });
+    });
+
+    /* ------------------------------------------------------------------ */
+    /*  Samuraj — IMPLEMENTATION.md (21)                                   */
+    /* ------------------------------------------------------------------ */
+
+    describe("Samuraj", function () {
+      let sam;            // aktor z Sztuczką
+      let katana;         // sieczna
+      let palna;          // niesieczna — kontrola
+      let mieszana;       // kłute+cięte, ma się liczyć jako sieczna
+
+      const meleeData = (name, types) => ({
+        name: `${SCRATCH_PREFIX} ${name}`,
+        type: "weapon",
+        system: {
+          type: { value: "biala" }, equipped: true,
+          damage: { base: { number: 1, denomination: 8, types } }
+        }
+      });
+
+      // Hooki czyta się przez `Hooks.callAll`, a nie przez `activity.use()` — z tego samego
+      // powodu co reszta tej paczki (dialogi, karty czatu, Sequencer).
+      const rollConfig = item => ({ subject: { actor: sam, item }, rolls: [{ parts: [] }] });
+
+      before(async function () {
+        sam = await scratchActor({ name: `${SCRATCH_PREFIX} samuraj` });
+        const made = await sam.createEmbeddedDocuments("Item", [
+          meleeData("Katana testowa", ["slashing"]),
+          meleeData("Pałka testowa", ["bludgeoning"]),
+          meleeData("Nóż testowy", ["piercing", "slashing"]),
+          sztuczkaItem("samuraj", `${SCRATCH_PREFIX} Samuraj`)
+        ], { render: false });
+        katana   = made.find(i => i.name.includes("Katana"));
+        palna    = made.find(i => i.name.includes("Pałka"));
+        mieszana = made.find(i => i.name.includes("Nóż"));
+      });
+
+      it("rozpoznaje broń sieczną, także o mieszanym typie obrażeń", function () {
+        expect(samuraj.isSlashingWeapon(katana), "katana").to.be.true;
+        expect(samuraj.isSlashingWeapon(mieszana), "kłute+cięte").to.be.true;
+        expect(samuraj.isSlashingWeapon(palna), "obuchowa").to.be.false;
+      });
+
+      it("dokłada +1 do Testu Ataku bronią sieczną", function () {
+        const cfg = rollConfig(katana);
+        Hooks.callAll("dnd5e.preRollAttack", cfg, {}, {});
+        expect(cfg.rolls[0].parts).to.deep.equal(["1"]);
+      });
+
+      it("nie rusza ataku bronią niesieczną", function () {
+        const cfg = rollConfig(palna);
+        Hooks.callAll("dnd5e.preRollAttack", cfg, {}, {});
+        expect(cfg.rolls[0].parts).to.be.empty;
+      });
+
+      it("dokłada +1 do obrażeń bronią sieczną, i tylko raz", function () {
+        const cfg = rollConfig(katana);
+        cfg.rolls.push({ parts: [] });          // druga część obrażeń
+        Hooks.callAll("dnd5e.preRollDamage", cfg, {}, {});
+        expect(cfg.rolls[0].parts, "pierwszy rzut").to.deep.equal(["1"]);
+        expect(cfg.rolls[1].parts, "drugi rzut").to.be.empty;
+      });
+
+      it("nie działa dla postaci bez Sztuczki", async function () {
+        const bez = await scratchActor({ name: `${SCRATCH_PREFIX} bez sztuczki` });
+        const [k] = await bez.createEmbeddedDocuments("Item", [meleeData("Katana", ["slashing"])],
+          { render: false });
+        const cfg = { subject: { actor: bez, item: k }, rolls: [{ parts: [] }] };
+        Hooks.callAll("dnd5e.preRollAttack", cfg, {}, {});
+        expect(cfg.rolls[0].parts).to.be.empty;
+      });
+
+      it("TT +1 pojawia się i znika razem z bronią w ręku", async function () {
+        await waitFor(() => sam.effects.some(e => e.getFlag(MODULE_ID, "samurajEffect")),
+          { label: "efekt TT +1" });
+        const withWeapon = sam.system.attributes.ac.bonus;
+
+        const slashing = sam.items.filter(i => samuraj.isSlashingWeapon(i) && i.system.equipped);
+        await sam.updateEmbeddedDocuments("Item",
+          slashing.map(i => ({ _id: i.id, "system.equipped": false })), { render: false });
+        await waitFor(() => !sam.effects.some(e => e.getFlag(MODULE_ID, "samurajEffect")),
+          { label: "zdjęcie efektu" });
+        expect(sam.system.attributes.ac.bonus).to.equal(withWeapon - 1);
+
+        await sam.updateEmbeddedDocuments("Item",
+          slashing.map(i => ({ _id: i.id, "system.equipped": true })), { render: false });
+        await waitFor(() => sam.effects.some(e => e.getFlag(MODULE_ID, "samurajEffect")),
+          { label: "powrót efektu" });
+        expect(sam.system.attributes.ac.bonus).to.equal(withWeapon);
+      });
+
+      it("rejestr automatyki mówi `partial`, bo klauzula o dobywaniu zostaje MG", function () {
+        expect(SZTUCZKI.samuraj.auto).to.have.lengthOf(3);
+        expect(SZTUCZKI.samuraj.manual).to.be.a("string").and.not.be.empty;
       });
     });
   }, { displayName: "Neuroshima: Sztuczki — reguły walki" });

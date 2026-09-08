@@ -425,7 +425,7 @@ async function _addGrenadeToActor(actor, grenadeId, quantity) {
       type: { value: "ammo", subtype: def.id },
       quantity,
       weight: { value: def.weight, units: "kg" },
-      price: { value: def.price, denomination: "gp" },
+      price: { value: def.price, denomination: "gb" },
       description: { value: description }
     }
   }, { parent: actor });

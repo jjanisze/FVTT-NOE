@@ -1,3 +1,5 @@
+import { isKobaltEnabled } from "./settings.mjs";
+
 /**
  * Neuroshima 5e — Fobie (phobias).
  *
@@ -104,9 +106,46 @@ export const PHOBIAS = Object.freeze({
   }
 });
 
-/** @returns {object|null} phobia definition for a key, or null for custom entries. */
+/**
+ * Fobie z Koloru Kobaltu — treść domowa tej kampanii, **nie** z podręcznika.
+ *
+ * Nie dopisujemy ich do `PHOBIAS`, bo tamto jest ścisłą tabelą k8 (str. 111–112) i dziewiąty
+ * wpis zepsułby zarówno kość, jak i zgodność z RAW. Osobna mapa + osobna grupa w pickerze
+ * (widoczna tylko przy włączonym Kobalcie) załatwia jedno i drugie.
+ *
+ * Brak pola `roll` jest celowy: tych fobii się nie losuje, przydziela je MG.
+ */
+export const KOBALT_PHOBIAS = Object.freeze({
+  mizoofobia: {
+    kobalt: true,
+    label: "Mizoofobia",
+    // ST 16 zamiast domyślnego 15 — patrz `phobiaSaveDc()`.
+    saveDc: 16,
+    effect: "Reagujesz lękiem, kiedy dowolne zwierzę — nawet przyjazne — znajdzie się bliżej "
+      + "niż 1,5 metra od ciebie. Wykonaj Rzut Obronny na Mądrość o ST 16.",
+    breakthrough: "Użycie przemysłowego środka do dezynfekcji obniża ST do 14 i pozwala "
+      + "powtórzyć Rzut Obronny w chwili aplikacji. Kosztuje 1 dawkę środka i akcję.",
+    breakthroughSeconds: HOUR
+  }
+});
+
+/** Wszystkie fobie, podręcznikowe i kampanijne, jako płaski słownik. */
+export const ALL_PHOBIAS = Object.freeze({ ...PHOBIAS, ...KOBALT_PHOBIAS });
+
+/**
+ * @returns {object|null} phobia definition for a key, or null for custom entries.
+ *
+ * Rozwiązuje też fobie Kobaltu **niezależnie od przełącznika**: postać, która już taką fobię
+ * ma, nie może zacząć renderować się jako „własna, bez treści" tylko dlatego, że ktoś wyłączył
+ * Kobalt. Przełącznik decyduje o tym, co da się *wybrać*, nie o tym, co już jest na karcie.
+ */
 export function getPhobia(key) {
-  return key ? (PHOBIAS[key] ?? null) : null;
+  return key ? (ALL_PHOBIAS[key] ?? null) : null;
+}
+
+/** ST Rzutu Obronnego dla wpisu — fobie Kobaltu mogą mieć własne, reszta bierze domyślne. */
+export function phobiaSaveDc(entry) {
+  return getPhobia(entry?.key)?.saveDc ?? PHOBIA_SAVE.dc;
 }
 
 /** How long a Przełamanie lasts for this entry, in seconds. Custom entries default to 1h. */
@@ -114,9 +153,20 @@ export function breakthroughSeconds(entry) {
   return getPhobia(entry?.key)?.breakthroughSeconds ?? HOUR;
 }
 
-/** Options for the "select a phobia" dropdown. */
+/**
+ * Options for the "select a phobia" dropdown. Zwraca płaskie wpisy dla tabeli k8 i — tylko
+ * przy włączonym Kobalcie — dodatkową grupę `<optgroup>`; `_select()` w `health-panel.mjs`
+ * obsługuje obie formy w jednej tablicy.
+ */
 export function phobiaOptions() {
-  return Object.entries(PHOBIAS)
+  const raw = Object.entries(PHOBIAS)
     .sort((a, b) => a[1].roll - b[1].roll)
     .map(([key, p]) => ({ key, label: `${p.roll}. ${p.label}` }));
+
+  if (!isKobaltEnabled()) return raw;
+
+  return [...raw, {
+    group: "Kolor Kobaltu",
+    options: Object.entries(KOBALT_PHOBIAS).map(([key, p]) => ({ key, label: p.label }))
+  }];
 }

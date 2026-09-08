@@ -17,7 +17,13 @@
  */
 
 import { DISEASE_EFFECTS } from "../config/disease-effects.mjs";
-import { ALL_DISEASES, CHRONIC_DISEASES, DISEASE_STAGES, diseaseStages, hasStageLadder } from "../config/diseases-data.mjs";
+import {
+  ALL_DISEASES, CHRONIC_DISEASES, KOBALT_DISEASES, DISEASE_STAGES,
+  diseaseStages, hasStageLadder, diseaseOptions, getDisease
+} from "../config/diseases-data.mjs";
+import {
+  PHOBIAS, KOBALT_PHOBIAS, PHOBIA_SAVE, phobiaOptions, phobiaSaveDc, getPhobia
+} from "../config/phobias-data.mjs";
 import { CHEMIA, chemiaForDisease } from "../config/chemia-data.mjs";
 import { MODULE_ID } from "./helpers.mjs";
 
@@ -277,6 +283,78 @@ export function registerDiseaseTests(quench) {
         for (const [key, entry] of Object.entries(CHRONIC_DISEASES)) {
           expect(names.has(entry.medicine), `${key}: "${entry.medicine}" nie występuje w CHEMIA`).to.be.true;
         }
+      });
+    });
+
+    /* ---------------------------------------------------------------- */
+    /*  Kolor Kobaltu — treść kampanijna, IMPLEMENTATION.md (22)          */
+    /* ---------------------------------------------------------------- */
+
+    describe("Treść Koloru Kobaltu", function () {
+      const KOBALT_SETTING = "kobaltEnabled";
+      let original;
+
+      before(function () { original = game.settings.get(MODULE_ID, KOBALT_SETTING); });
+      after(async function () { await game.settings.set(MODULE_ID, KOBALT_SETTING, original); });
+
+      it("tabele podręcznikowe zostają nietknięte", function () {
+        // k8 musi zostać k8 — dziewiąty wpis zepsułby zarówno kość, jak i zgodność z RAW.
+        expect(Object.keys(CHRONIC_DISEASES), "choroby przewlekłe").to.have.lengthOf(8);
+        expect(Object.keys(PHOBIAS), "fobie").to.have.lengthOf(8);
+        for (const t of [CHRONIC_DISEASES, PHOBIAS]) {
+          expect(Object.values(t).map(e => e.roll).sort((a, b) => a - b))
+            .to.deep.equal([1, 2, 3, 4, 5, 6, 7, 8]);
+        }
+      });
+
+      it("wpisy Kobaltu nie mają `roll` — nie losuje się ich", function () {
+        for (const e of [...Object.values(KOBALT_DISEASES), ...Object.values(KOBALT_PHOBIAS)]) {
+          expect(e).to.not.have.property("roll");
+          expect(e.kobalt).to.be.true;
+        }
+      });
+
+      it("picker pokazuje grupę Kobaltu tylko przy włączonym przełączniku", async function () {
+        await game.settings.set(MODULE_ID, KOBALT_SETTING, true);
+        const onD = diseaseOptions().filter(g => g.group === "Kolor Kobaltu");
+        const onP = phobiaOptions().filter(g => g.group === "Kolor Kobaltu");
+        expect(onD, "choroby, Kobalt on").to.have.lengthOf(1);
+        expect(onP, "fobie, Kobalt on").to.have.lengthOf(1);
+
+        await game.settings.set(MODULE_ID, KOBALT_SETTING, false);
+        expect(diseaseOptions().filter(g => g.group === "Kolor Kobaltu"), "choroby, off").to.be.empty;
+        expect(phobiaOptions().filter(g => g.group === "Kolor Kobaltu"), "fobie, off").to.be.empty;
+      });
+
+      it("karta, która już ma treść Kobaltu, nie traci jej po wyłączeniu przełącznika", async function () {
+        // Przełącznik decyduje, co da się WYBRAĆ — nie kasuje tego, co postać już ma.
+        await game.settings.set(MODULE_ID, KOBALT_SETTING, false);
+        expect(getDisease("schizofreniaParanoidalna"), "choroba").to.be.an("object");
+        expect(getPhobia("mizoofobia"), "fobia").to.be.an("object");
+      });
+
+      it("Schizofrenia paranoidalna ma efekty, więc przepięcie z Paranoi nic nie zabiera", function () {
+        expect(DISEASE_EFFECTS).to.have.property("schizofreniaParanoidalna");
+        expect(DISEASE_EFFECTS.schizofreniaParanoidalna)
+          .to.deep.equal(DISEASE_EFFECTS.paranoja);
+      });
+
+      it("tabelka Kobaltu pokrywa cały zakres k20 bez dziur i zakładek", function () {
+        const t = KOBALT_DISEASES.schizofreniaParanoidalna.kobaltTable;
+        const covered = new Set();
+        for (const r of t.results) {
+          for (let i = r.range[0]; i <= r.range[1]; i++) {
+            expect(covered.has(i), `wynik ${i} opisany dwa razy`).to.be.false;
+            covered.add(i);
+          }
+        }
+        expect(covered.size, "1–20 bez dziur").to.equal(20);
+      });
+
+      it("Mizoofobia ma własne ST, a reszta fobii bierze domyślne", function () {
+        expect(phobiaSaveDc({ key: "mizoofobia" })).to.equal(16);
+        expect(phobiaSaveDc({ key: "akrofobia" })).to.equal(PHOBIA_SAVE.dc);
+        expect(phobiaSaveDc({ key: null }), "fobia własna").to.equal(PHOBIA_SAVE.dc);
       });
     });
   }, { displayName: "Neuroshima: Choroby — drabina stopni" });

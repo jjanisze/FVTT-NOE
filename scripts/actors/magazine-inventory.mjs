@@ -498,7 +498,7 @@ async function _addMagazineToActor(actor, subtype, quantity, ready) {
         type: { value: "ammo", subtype },
         quantity,
         weight: { value: MAG_WEIGHTS[subtype], units: "kg" },
-        price: { value: MAG_PRICES[subtype], denomination: "gp" },
+        price: { value: MAG_PRICES[subtype], denomination: "gb" },
       },
       flags: {
         [MODULE_ID]: { ready },

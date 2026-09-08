@@ -563,7 +563,7 @@ export function buildGogleItemData(variantKey) {
       ..._baseSystemData(),
       description: { value: variant.description, chat: "" },
       weight: { value: variant.weight, units: "kg" },
-      price: { value: variant.price, denomination: "gp" },
+      price: { value: variant.price, denomination: "gb" },
       identifier: `gogle-${variantKey}`,
     },
     flags: {

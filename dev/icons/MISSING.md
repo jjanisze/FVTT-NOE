@@ -9,9 +9,16 @@ it's found, generate a batch once the queue hits 9, then clear it.
 
 **Out of scope for this queue: feat / Sztuczka icons.** Those get one big
 future pass of their own, not a trickle into this queue (2026-09-07). Victor's
-homebrew feats (Osełka/Dobycie/Zasłona/Siódme poty.) found the same session
-this file was created still lack icons — see IMPLEMENTATION.md (19) — but
-belong to that future pass, not here.
+homebrew feats found the same session this file was created still lack icons —
+see IMPLEMENTATION.md (19) — but belong to that future pass, not here.
+
+Update, IMPLEMENTATION.md (21): three of the four feats named here originally
+(Osełka/Dobycie/Zasłona) **no longer exist** — they turned out to be the three
+clauses of the Sztuczka `Samuraj`, split up by the Roll20 import, and were
+merged into one canonical item that already has a proper icon. What is left on
+an actor-portrait icon across the whole party is just two homebrew feats:
+Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. Still that future pass,
+still not this queue — but it is two items, not a pile.
 
 **Next batch number: 40** (last used: `process_grid_39.py` — bump this
 whenever a new batch actually gets processed).

@@ -171,7 +171,7 @@ export async function repairPirotechnika(diffs) {
         type: { value: "ammo", subtype: d.grenadeId },
         quantity: d.quantity,
         weight: { value: def.weight, units: "kg" },
-        price: { value: def.price, denomination: "gp" },
+        price: { value: def.price, denomination: "gb" },
         description: {
           value: `<p><strong>Obszar:</strong> ${def.area ?? "—"}</p><p><strong>RO:</strong> ${def.save ?? "—"}</p><p>${def.effect ?? ""}</p>`
         }

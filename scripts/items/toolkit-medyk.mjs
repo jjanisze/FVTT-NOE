@@ -168,7 +168,7 @@ export function buildMedykRefillItemData() {
       type: { value: "trinket", subtype: "" },
       description: { value: REFILL_DESCRIPTION, chat: "" },
       weight: { value: REFILL_WEIGHT, units: "kg" },
-      price: { value: REFILL_PRICE, denomination: "gp" },
+      price: { value: REFILL_PRICE, denomination: "gb" },
       quantity: 1,
       uses: { max: "", spent: 0, recovery: [] },
       identifier: "medyk-refill",

@@ -406,7 +406,7 @@ async function _addAmmoToActor(actor, ammoId, quantity) {
         },
         price: {
           value: caliber.price,
-          denomination: "gp" // Traktujemy gp jako gb (gamble)
+          denomination: "gb"
         },
         description: {
           value: caliber.note ? `<p>${caliber.note}</p>` : ""

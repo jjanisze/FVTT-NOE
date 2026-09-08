@@ -192,6 +192,25 @@ export const DISEASE_EFFECTS = Object.freeze({
     }
   },
 
+  /* ---- Schizofrenia paranoidalna (Kolor Kobaltu) ---- */
+  /**
+   * Mechanicznie identyczna z `paranoja` powyżej i to celowe — przy stole to ta sama choroba
+   * pod nazwą nadaną postaci Raynalda, a domowa jest wyłącznie tabelka „Lekarz i farmaceuta"
+   * (`kobaltTable` w `diseases-data.mjs`). Wpis musi tu być mimo powtórzenia: bez niego
+   * przepięcie karty z `paranoja` na nowy klucz cicho zabrałoby postaci Active Effect.
+   */
+  schizofreniaParanoidalna: {
+    0: { changes: [skill("int", 1), skill("prc", 1), skill("osz"), skill("per")] },
+    1: {
+      changes: [check("int"), check("wis"), save("int"), save("wis"), ...wplywanie()]
+    },
+    2: {
+      changes: [check("int"), check("wis"), save("int"), save("wis"), ...wplywanie()],
+      statuses: ["frightened"],
+      manual: "Jedyną akcją, jaką możesz wykonać w walce, jest Unikanie."
+    }
+  },
+
   /* ---- Zaburzenia błędnika ---- */
   zaburzeniaBledinka: {
     0: {
