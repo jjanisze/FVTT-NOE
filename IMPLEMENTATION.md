@@ -4089,3 +4089,58 @@ Lorentz 38, Piekarz 36, Alan 33, Victor 30…). Jednym z nich jest „laptop woj
 hackera) (Raynald of Châtillon)" — waga 3 kg, cena 0, portret zamiast ikony — czyli import-owy
 sobowtór tego samego laptopa. Nie ruszane: to osobna decyzja porządkowa o skali całego świata,
 a nie część naprawy laptopa.
+
+## Zmiany z 10 września 2026 (27) — Lekki audyt byłych PC: Piekarz i Kier
+
+Domknięcie `HANDOFF_party_build_audit.md` dla dwójki wcześniej pominiętej. Zakres świadomie
+węższy niż audyt (21)–(22) dla żywej piątki: usunięcie oczywistego śmiecia importowego i
+zgłoszenie tego, co zepsute/niedokończone — bez rozstrzygania, który z dwóch egzemplarzy jest
+„prawdziwy". Wykonane na żywo (Chrome DevTools MCP), po `foundry_get_actor_sheet` z serwera
+LevelDB odmówiło z powodu działającego FVTT.
+
+### Usunięte z Piekarza (śmieć potwierdzony, nie do dyskusji)
+
+- **`dd`** — Item typu `spell` bez opisu, z awatarem aktora jako ikoną. Neuroshima nie ma
+  zaklęć; to czysty artefakt R20Converter, dokładnie tak, jak przewidywał
+  `HANDOFF_ekwipunek.md`.
+- **`Cobbler's Tools`** i **`Bagpipes`** — dwa angielskie, nieprzetłumaczone zestawy
+  SRD, unikalne dla Piekarza (sprawdzone na całym świecie — żaden inny aktor ich nie ma, więc
+  to nie wzorzec importu, tylko jego pojedynczy, nietknięty ogon). `Bagpipes` nosił przy tym
+  ikonę bukłaka na wodę zamiast dud — dowód, że nikt nigdy na tę pozycję nie spojrzał.
+
+### Naprawione przy okazji (jednoliniowe, ikona już istniała)
+
+- **Kier → `Bejsbol`**: wskazywał na generyczną ikonę rdzenia dnd5e, mimo że katalog ma
+  dedykowany `iron_pipe_club.svg` — dokładnie ten przypadek, który `HANDOFF_party_build_audit.md`
+  nazwał „naprawą w miejscu, nie pozycją do kolejki ikon". Przepięte.
+
+### Zgłoszone, nietknięte — zepsute lub niedokończone
+
+- **Piekarz — `Młynek`**: potwierdzone (dopasowanie treści opisu w paczce `sztuczki`) jako
+  klauzula Sztuczki **`Rozróba`**, nie homebrew. Siedzi na aktorze jako goły `feat` bez
+  wrappera Sztuczki i bez ikony — nigdy nie przeszedł konsolidacji, jaką inne rozbite Sztuczki
+  (Samuraj) dostały w (21)/(22) dla żywej piątki. Nie scalane tutaj — niski priorytet dla
+  martwej postaci, ale jeśli Piekarz kiedyś wróci do gry, to pierwsza rzecz do zrobienia.
+- **Piekarz — `Urodzony morderca`**: nazwa dokładnie odpowiada realnej zdolności Pochodzenia
+  Południowa Hegemonia w paczce `zdolnosci-pochodzenia`, ale na aktorze siedzi jako goły
+  `feat` z generyczną ikoną `icons/svg/upgrade.svg`, nie jako link do kompendium. Nieoczywiste,
+  czy to działający duplikat treści, czy martwa etykieta — nie sprawdzane głębiej.
+- **Piekarz — cztery pary duplikatów**: `Nadziak` ×2 (jeden ma dodatek `naostrzenie`
+  +1/+1 do trafienia/obrażeń, drugi żadnego), `Obrzyn` ×2 (12ga_b/2k6 obuchowe + dodatek
+  `szyna` kontra 12ga_s/2k4 kłute, bez dodatku), `Latarka ręczna` ×2 (różne
+  `latarkaChargeMaxMin`) i `Baterie` ×2 (osobne stosy qty 1 i 2). Zweryfikowane na żywo, że to
+  wciąż to samo mechaniczne zróżnicowanie, które opisał `HANDOFF_party_build_audit.md` — nie
+  rozstrzygane, który egzemplarz jest „prawdziwy" (Piekarz jest martwy w fikcji, materiały
+  nieistotne przy stole).
+- **Kier — klasa `<unknown class>`**: `migrateClasses()` nadal jej nie rozpoznaje (jeden feat
+  Pochodzenia, zero sygnałów klasowych). `Postacie/BG/Kier.md` deklaruje Cwaniaka i Pochodzenie
+  Vegas; żywy aktor ma background **Miami** plus feat `Ja już swoje odchorowałem` (zdolność
+  Miami) — sprzeczność potwierdzona jako wciąż otwarta, nie do rozstrzygnięcia z samych danych
+  (MG już raz wybrał „pomiń" zamiast decyzji). `Bagnet` (typ `loot` z flagą `ulepszenie`) jest
+  poprawny i zostaje — to nie duplikat do sprzątnięcia.
+
+### Stan końcowy
+
+Piekarz: 48 → 45 pozycji. Kier: bez zmian (5 pozycji, w tym klasa). Testy modułu nie dotyczą
+danych na aktorach — nie uruchamiane. Wersja modułu bez zmian (`0.14.26`) — czysto dane, zero
+kodu.

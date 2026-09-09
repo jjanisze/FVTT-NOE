@@ -5,6 +5,12 @@ Raynalda — patrz **IMPLEMENTATION.md (21)** po pełny opis tego, co zrobiono i
 Poprzednia wersja tego pliku (opisująca całą szóstkę) jest już nieaktualna i została
 zastąpiona; historia siedzi w `git log`.
 
+**Update 2026-09-10, IMPLEMENTATION.md (27):** lekki przebieg zrobiony — celowo węższy niż
+(21)/(22), na wyraźne życzenie MG („usuń oczywisty śmieć, nie rozstrzygaj materiałów, zgłoś
+co zepsute"). Usunięte: `dd` (Piekarz), `Cobbler's Tools`/`Bagpipes` (Piekarz). Naprawione:
+ikona `Bejsbol` (Kier). **Wszystko poniżej poza tym jest wciąż otwarte** — w szczególności
+duplikaty Piekarza i klasa Kiera nie zostały rozstrzygnięte, świadomie.
+
 **Zostały dwie postaci.** Użytkownik wyłączył je ze zlecenia w trakcie sesji
 („Zignoruj Piekarza", a przy pytaniu o Kiera: „Pomiń Kiera, tak jak Piekarza") — to była
 decyzja o zakresie tamtej sesji, nie o tym, że te postaci są nieważne na zawsze. Jeśli
