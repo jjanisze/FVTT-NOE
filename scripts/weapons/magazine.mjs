@@ -33,7 +33,9 @@ import {
 } from "./sounds.mjs";
 import { seqScrollText } from "./sequencer.mjs";
 import { tracerFire } from "./tracer-vfx.mjs";
-import { AMMO_CALIBERS, AMMO_CALIBER_MAP, buildCaliberSelect } from "../config/ammo-data.mjs";
+import { AMMO_CALIBERS, AMMO_CALIBER_MAP, buildCaliberSelect, familyCalibers } from "../config/ammo-data.mjs";
+import { isMagazineItem, getMagTypeForWeapon, MAG_LABELS } from "../actors/magazine-inventory.mjs";
+import { addAmmoToActor } from "../actors/ammo-inventory.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 const MAGAZINE_TYPES = Object.freeze({
   INTERNAL: "wmag",
@@ -131,6 +133,62 @@ export async function spendRounds(item, count) {
   return true;
 }
 
+/**
+ * Wymiana magazynka / zmiana amunicji — punkt wejścia dla makr i paska szybkiego dostępu.
+ *
+ * Cała logika siedzi tutaj, a nie w treści makra, z tego samego powodu co przy makrach
+ * Sztuczek (`actors/ability-hotbar.mjs`): makro raz położone na pasku nigdy nie musi być
+ * odtwarzane, gdy zmienią się zasady. Bez argumentów sam znajduje postać i broń.
+ *
+ * @param {object} [options]
+ * @param {Actor5e} [options.actor]         Domyślnie postać gracza albo zaznaczony token.
+ * @param {Item5e|string} [options.weapon]  Broń, jej id albo nazwa. Przy jednej pasującej
+ *                                          broni pytanie się nie pojawia.
+ */
+export async function swapMagazine({ actor, weapon } = {}) {
+  const subject = actor
+    ?? game.user.character
+    ?? canvas.tokens?.controlled?.[0]?.actor
+    ?? null;
+  if (!subject) {
+    ui.notifications.warn("Nie wiem, kim grasz — zaznacz token albo przypisz postać do użytkownika.");
+    return;
+  }
+
+  const candidates = subject.items.filter(i => i.type === "weapon" && getMag(i) !== null);
+  if (!candidates.length) {
+    ui.notifications.warn(`${subject.name} nie ma broni z magazynkiem.`);
+    return;
+  }
+
+  if (weapon) {
+    const wanted = typeof weapon === "string"
+      ? (candidates.find(i => i.id === weapon) ?? candidates.find(i => i.name === weapon))
+      : weapon;
+    if (!wanted) {
+      ui.notifications.warn(`${subject.name}: nie znalazłem broni "${weapon}".`);
+      return;
+    }
+    return _onClickReload(_getLiveItem(wanted));
+  }
+
+  if (candidates.length === 1) return _onClickReload(_getLiveItem(candidates[0]));
+
+  const chosen = await foundry.applications.api.DialogV2.wait({
+    window: { title: "Którą broń przeładowujesz?" },
+    content: "<p>Wybierz broń, do której wkładasz magazynek.</p>",
+    buttons: candidates.map(i => {
+      const mag = getMag(i);
+      const caliber = AMMO_CALIBER_MAP[mag?.ammoType]?.label ?? "—";
+      return { action: i.id, label: `${i.name} — ${mag.current}/${mag.max}, ${caliber}` };
+    }),
+    rejectClose: false
+  });
+  if (!chosen) return;
+  const picked = candidates.find(i => i.id === chosen);
+  if (picked) return _onClickReload(_getLiveItem(picked));
+}
+
 /* -------------------------------------------- */
 /*  Registration                                  */
 /* -------------------------------------------- */
@@ -174,8 +232,13 @@ export function registerMagazines() {
         setChamber,
         spendRound,
         spendRounds,
-        getMagazineType
+        getMagazineType,
+        swapMagazine
       };
+      // Ten sam zestaw pod `game.neuroshima`, gdzie siedzi reszta API modułu. `??=`, bo
+      // kolejność między tym hakiem a `ready` w main.mjs nie jest gwarantowana.
+      globalThis.game.neuroshima ??= {};
+      game.neuroshima.magazynki = mod.api.magazines;
     }
 
     void syncAllMagazineUses(); // deterministic mag→uses sync — harmless even if every client runs it
@@ -273,7 +336,30 @@ function onRenderItemSheet(app, html) {
       e.preventDefault();
       await _onClickBulkReload(_getLiveItem(item));
     });
+
+    // Wymiana magazynka / zmiana amunicji — jedyna droga do zmiany typu naboju w trybie gry.
+    // Lista kalibrów wyżej jest w PLAY celowo zablokowana: to ustawienie autorskie broni, nie
+    // czynność postaci. Bez tego przycisku gracz mający dwa rodzaje naboju nie miał na karcie
+    // żadnego sposobu, żeby przełożyć jeden na drugi — a od tej sesji ma po co (dum-dum).
+    const family = familyCalibers(mag.ammoType);
+    const swapRow = document.createElement("div");
+    swapRow.classList.add("form-group", "neuro-mag-swap-row");
+    swapRow.innerHTML = `
+      <label></label>
+      <div class="form-fields">
+        <button type="button" class="neuro-mag-swap-btn" style="width:auto; white-space:nowrap;"
+                data-tooltip="${inCombat ? _getReloadPlan(item, mag).hint : "Poza walką bez kosztu akcji."}">
+          <i class="fas fa-repeat"></i> ${family.length > 1 ? "Wymień magazynek / zmień amunicję" : "Wymień magazynek"}
+        </button>
+      </div>
+    `;
+    swapRow.querySelector(".neuro-mag-swap-btn").addEventListener("click", async e => {
+      e.preventDefault();
+      await _onClickReload(_getLiveItem(item));
+    });
+
     magRow.after(bulkRow);
+    magRow.after(swapRow);
   }
 }
 
@@ -385,8 +471,25 @@ async function onUpdateItemSyncMagazineUses(item, changes) {
 /* -------------------------------------------- */
 
 /**
- * Reload weapon from actor's ammo inventory.
- * Asks for confirmation, deducts rounds from ammo stack, fills mag.
+ * Reload a weapon from the actor's own ammunition.
+ *
+ * Also the single entry point for CHANGING ammunition type: swapping in a magazine and choosing
+ * what goes in it are the same physical act, so they are the same code path here. The alternative
+ * — a separate "switch ammo" control — would let a character change bullet type between two shots
+ * of the same turn for free, which is what the GM ruling explicitly excluded.
+ *
+ * ## Fixed 2026-09-08: the spare-magazine check never matched anything
+ *
+ * This function used to gate in-combat reloads on an item with
+ * `system.type.value === "magazine"` and `subtype === <weapon type>` (e.g. `"palnaKrotka"`).
+ * No such item has ever existed: `actors/magazine-inventory.mjs`, the only thing that creates
+ * spare magazines, builds them as `value: "ammo"` with `subtype: "magazine-short"` and tracks
+ * readiness in `flags.<module>.ready`, not `system.uses`. A world-wide check found **0 matches
+ * out of 1808 items**, so the branch below always failed and every in-combat reload of a
+ * removable-magazine weapon was refused with "Zabrakło ci przygotowanych magazynków" —
+ * including for actors visibly holding spare magazines on their sheet. It read as a rule, not
+ * as a bug, which is why it survived. `_restoreQuantumMagazines` was dead for the same reason.
+ *
  * @param {Item5e} item  The weapon item being reloaded
  */
 async function _onClickReload(item) {
@@ -410,105 +513,78 @@ async function _onClickReload(item) {
 
   const magazineType = getMagazineType(item);
   const inCombat = !!actor.inCombat;
-
   const reloadPlan = _getReloadPlan(item, mag, { magazineType });
-  const needed = mag.max - mag.current;
+
+  /* 1. Czym ładujemy — pytamy zanim cokolwiek policzymy, bo od odpowiedzi zależy, czy
+        magazynek trzeba najpierw opróżnić. */
+  const pick = await _chooseFamilyAmmo(actor, mag.ammoType);
+  if (!pick) return;
+  const { ammoItem, caliberId: ammoIdToLoad } = pick;
+
+  /* 2. Zmiana typu naboju wyrzuca to, co jest w magazynku, z powrotem do zapasu. Bez tego
+        magazynek mieszałby dwa rodzaje pocisków pod jedną etykietą — a przy dum-dum decyduje
+        to o tym, czy trafienie w ogóle wywołuje Krwawienie. */
+  const switchingType = !!mag.ammoType && ammoIdToLoad !== mag.ammoType;
+  const currentBefore = Number(mag.current ?? 0);
+  const startFrom = switchingType ? 0 : currentBefore;
+
+  const needed = Number(mag.max ?? 0) - startFrom;
   if (needed <= 0) {
     ui.notifications.info(`${item.name}: ${reloadPlan.containerAccusative} jest ${reloadPlan.fullAdjective}.`);
     return;
   }
 
-  // --- 1. Quantum Magazine Check for Removable Magazines in Combat ---
+  /* 3. W walce wymiana magazynka wymaga gotowego magazynka zapasowego. */
+  let spareMag = null;
   if (inCombat && magazineType === MAGAZINE_TYPES.REMOVABLE) {
-    const weapType = item.system.type?.value; 
-    
-    // Używamy ustandaryzowanego typu
-    const qMag = actor.items.find(i => 
-      i.type === "consumable" && 
-      i.system.type?.value === "magazine" && 
-      i.system.type?.subtype === weapType &&
-      (i.system.uses?.value > 0)
-    );
-
-    if (!qMag) {
-      ui.notifications.warn(`Zabrakło ci przygotowanych magazynków zapasowych w ekwipunku dla tej broni! Przeładowanie luzem niemożliwe w walce.`);
-      return; 
+    spareMag = _findReadyMagazine(actor, item);
+    if (!spareMag) {
+      const label = MAG_LABELS[getMagTypeForWeapon(item)] ?? "zapasowy magazynek";
+      ui.notifications.warn(
+        `${actor.name}: brak gotowego magazynka (${label}) do tej broni — w walce nie da się ładować luzem.`
+      );
+      return;
     }
-    // Odbierz jedno użycie magazynkowi kwantowemu
-    await qMag.update({ "system.uses.value": Math.max(0, qMag.system.uses.value - 1) });
   }
 
-  // --- 2. Dual-Ammo Shotgun Logic (.12 Ga) ---
-  let ammoIdToLoad = mag.ammoType;
-  let ammoItem = null;
-  const is12Ga = mag.ammoType?.startsWith("12ga");
-  
-  if (is12Ga) {
-    const sItem = _findAmmo(actor, "12ga_s");
-    const bItem = _findAmmo(actor, "12ga_b");
-    if (sItem && bItem) {
-      const choice = await Dialog.wait({
-        title: "Wybór Amunicji (.12 Ga)",
-        content: "<p>Masz oba rodzaje amunicji do strzelby (Śrut i Brenekę). Jaką ładujesz?</p>",
-        buttons: {
-          s: { label: ".12 Ga (ś – śrut)", callback: () => sItem },
-          b: { label: ".12 Ga (b – breneka)", callback: () => bItem }
-        },
-        close: () => null
-      });
-      if (!choice) return;
-      ammoItem = choice;
-      ammoIdToLoad = choice.system.type?.subtype; 
-    } else {
-      ammoItem = sItem || bItem;
-      ammoIdToLoad = ammoItem?.system?.type?.subtype ?? mag.ammoType;
-    }
-  } else {
-    ammoItem = _findAmmo(actor, mag.ammoType);
-  }
-
-  if (!ammoItem) {
-    ui.notifications.warn(`Brak amunicji (${mag.ammoType || "dowolnej"}) w ekwipunku.`);
-    return;
-  }
-
-  // --- 3. Determine how much to load ---
+  /* 4. Ile naboi faktycznie wchodzi. */
   const available = ammoItem.system.quantity ?? 0;
-  
   let toLoadAmount = Math.min(needed, available);
   if (magazineType !== MAGAZINE_TYPES.REMOVABLE && reloadPlan.roundsPerAction && reloadPlan.roundsPerAction !== 99) {
     toLoadAmount = Math.min(reloadPlan.roundsPerAction, needed, available);
   }
-
   if (toLoadAmount <= 0) {
     ui.notifications.warn(`${ammoItem.name}: wyczerpana amunicja.`);
     return;
   }
 
-  // Zaktualizuj kaliber w broni, jeśli się zmienił (strzelba)
-  let newMagData = { current: mag.current + toLoadAmount };
-  if (ammoIdToLoad !== mag.ammoType) {
-    newMagData.ammoType = ammoIdToLoad;
+  /* 5. Zapis. Zwrot naboi idzie przed odjęciem, żeby stan ekwipunku nigdy nie był ujemny
+        w połowie operacji, gdyby coś padło pomiędzy. */
+  let returned = 0;
+  if (switchingType && currentBefore > 0) {
+    returned = currentBefore;
+    await addAmmoToActor(actor, mag.ammoType, returned, { notify: false });
+  }
+  if (spareMag) {
+    const ready = Number(spareMag.getFlag(MODULE_ID, "ready") ?? 0);
+    await spareMag.setFlag(MODULE_ID, "ready", Math.max(0, ready - 1));
   }
 
-  // Deduct ammo from inventory
   const newQty = available - toLoadAmount;
-  if (newQty <= 0) {
-    await ammoItem.delete();
-  } else {
-    await ammoItem.update({ "system.quantity": newQty });
-  }
+  if (newQty <= 0) await ammoItem.delete();
+  else await ammoItem.update({ "system.quantity": newQty });
 
-  // Update weapon's mag
+  const newMagData = { current: startFrom + toLoadAmount };
+  if (ammoIdToLoad !== mag.ammoType) newMagData.ammoType = ammoIdToLoad;
+
   await setMag(item, newMagData);
   await _clearReloadState(item);
 
-  // Sound
   playUtilitySound(
     "reload",
     item,
     magazineType === MAGAZINE_TYPES.REMOVABLE ? WeaponSound.RELOAD_MAG : WeaponSound.RELOAD_SINGLE,
-    { caliberId: newMagData?.ammoType, token: actor },
+    { caliberId: newMagData?.ammoType ?? mag.ammoType, token: actor },
   );
   seqScrollText("ZAŁADOWANO", actor, { color: "#f1c40f", fontSize: 26, duration: 1500 });
 
@@ -516,17 +592,79 @@ async function _onClickReload(item) {
     await _spendCombatResource(actor, reloadPlan.actionType);
   }
 
-  // Chat message formatting
   const justFull = (newMagData.current === mag.max) ? " do pełna" : "";
   const justAll = (newQty === 0) ? " wszystkie swoje" : "";
+  const switchLine = switchingType
+    ? `<br><span style="font-size:0.85em;color:#888;">Zmiana amunicji na <strong>${AMMO_CALIBER_MAP[ammoIdToLoad]?.label ?? ammoIdToLoad}</strong>`
+      + `${returned ? ` — ${returned} ${_formatRoundWord(returned)} poprzedniego typu wraca do zapasu` : ""}.</span>`
+    : "";
 
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor }),
     content: `<div style="border-left:3px solid #888;padding-left:8px;font-size:1.1em;">
-      <strong>${actor.name}</strong> załadował${justFull}${justAll} ${toLoadAmount} x ${ammoItem.name} do <em>${item.name}</em>.<br>
+      <strong>${actor.name}</strong> załadował${justFull}${justAll} ${toLoadAmount} x ${ammoItem.name} do <em>${item.name}</em>.${switchLine}<br>
       <span style="font-size:0.85em;color:#888;">[Stan: ${newMagData.current}/${mag.max}]</span>
     </div>`
   });
+}
+
+/**
+ * Pick which round of the caliber's family actually goes in.
+ *
+ * Replaces a hardcoded `.12 Ga` śrut/breneka dialog gated on
+ * `mag.ammoType?.startsWith("12ga")`. That test was both unextendable and subtly wrong as a
+ * compatibility rule — see `familyCalibers()` in `config/ammo-data.mjs`. Only calibers the actor
+ * actually carries are offered, and a single option skips the dialog entirely, so the common
+ * case is unchanged for every weapon that has just one kind of ammunition.
+ *
+ * @returns {{ammoItem: Item5e, caliberId: string}|null} null = brak amunicji albo anulowano
+ */
+async function _chooseFamilyAmmo(actor, currentCaliberId) {
+  const options = [];
+  for (const caliber of familyCalibers(currentCaliberId)) {
+    const stock = _findAmmo(actor, caliber.id);
+    if (stock) options.push({ caliber, ammoItem: stock });
+  }
+
+  if (!options.length) {
+    const label = AMMO_CALIBER_MAP[currentCaliberId]?.label ?? currentCaliberId ?? "dowolnej";
+    ui.notifications.warn(`Brak amunicji (${label}) w ekwipunku.`);
+    return null;
+  }
+  if (options.length === 1) {
+    return { ammoItem: options[0].ammoItem, caliberId: options[0].caliber.id };
+  }
+
+  const chosen = await foundry.applications.api.DialogV2.wait({
+    window: { title: "Czym ładujesz?" },
+    content: `<p>Masz kilka rodzajów naboju pasujących do tej broni. Który wchodzi do magazynka?</p>`,
+    buttons: options.map(o => ({
+      action: o.caliber.id,
+      label: `${o.caliber.label} — ${o.ammoItem.system.quantity ?? 0} szt.`
+    })),
+    rejectClose: false
+  });
+  if (!chosen) return null;
+
+  const picked = options.find(o => o.caliber.id === chosen);
+  return picked ? { ammoItem: picked.ammoItem, caliberId: picked.caliber.id } : null;
+}
+
+/**
+ * A prepared spare magazine of the right kind, or null.
+ *
+ * "Prepared" is `flags.<module>.ready`, the counter the Zapasowe Magazynki inventory section
+ * shows and edits — magazines are quantum: they carry no ammunition type of their own and get
+ * one only when they go into the weapon, from whatever the actor has loose.
+ */
+function _findReadyMagazine(actor, weapon) {
+  const wanted = getMagTypeForWeapon(weapon);
+  if (!wanted) return null;
+  return actor.items.find(i =>
+    isMagazineItem(i)
+    && i.system.type?.subtype === wanted
+    && Number(i.getFlag(MODULE_ID, "ready") ?? 0) > 0
+  ) ?? null;
 }
 
 function _getReloadPlan(item, mag, { magazineType = getMagazineType(item) } = {}) {
@@ -664,8 +802,20 @@ function uiForChat(magazineType) {
   return "Magazynek";
 }
 
+/**
+ * Polska odmiana rzeczownika "nabój" przez liczbę: 1 nabój, 2-4 naboje, 5+ naboi.
+ *
+ * Wcześniej były tylko dwie formy (1 / reszta), co dawało "8 naboje" wszędzie poza jedynką.
+ * Nie rzucało błędu, ale wychodziło na karty czatu przy każdym przeładowaniu, a te czyta
+ * cały stół. Wyjątek dla nastek jest realny: "12 naboi", nie "12 naboje".
+ */
 function _formatRoundWord(count) {
-  return count === 1 ? "nabój" : "naboje";
+  const n = Math.abs(Number(count) ?? 0);
+  if (n === 1) return "nabój";
+  const last = n % 10;
+  const lastTwo = n % 100;
+  if (last >= 2 && last <= 4 && !(lastTwo >= 12 && lastTwo <= 14)) return "naboje";
+  return "naboi";
 }
 
 function _hasProperty(item, property) {
@@ -706,12 +856,26 @@ function _restoreQuantumMagazines(combat) {
   }
 }
 
+/**
+ * Every spare magazine is prepared again once the fight is over.
+ *
+ * Refilling `ready` for free is deliberate and not a duplicate of the ammunition economy:
+ * `ready` counts magazine BODIES that are loaded and to hand, while the rounds themselves are
+ * deducted from the loose stock at the moment of the swap (`_onClickReload`). Topping the
+ * bodies back up between fights is the abstraction that keeps that bookkeeping off the table.
+ *
+ * Previously filtered on `system.type.value === "magazine"` and wrote `system.uses.value` —
+ * neither of which any magazine item in this world has ever had, so this restored nothing at
+ * all. See `_onClickReload`.
+ */
 function _restoreQuantumMagazinesForActor(actor) {
   if (!actor) return;
-  // Restore any item that is a magazine 
-  actor.items.filter(i => i.type === "consumable" && i.system.type?.value === "magazine").forEach(i => {
-    i.update({"system.uses.value": i.system.uses.max || 1 });
-  });
+  for (const item of actor.items) {
+    if (!isMagazineItem(item)) continue;
+    const quantity = Number(item.system.quantity ?? 0);
+    if (Number(item.getFlag(MODULE_ID, "ready") ?? 0) === quantity) continue;
+    void item.setFlag(MODULE_ID, "ready", quantity);
+  }
 }
 
 async function syncAllMagazineUses() {
@@ -881,7 +1045,7 @@ function registerMagSwapActivityType() {
       type: MAG_SWAP_ACTIVITY_TYPE,
       title: "Wymiana magazynka",
       img: "modules/neuroshima-2026-overrides/icons/activities/activity_mag_swap.svg",
-      hint: "Neuroshima: wymień pusty magazynek na zapasowy z ekwipunku. Wymaga posiadania przygotowanego magazynka."
+      hint: "Neuroshima: wymień magazynek na zapasowy z ekwipunku i wybierz, jakim nabojem go ładujesz. W walce wymaga gotowego magazynka zapasowego."
     }, { inplace: false }));
 
     async use(usage = {}, dialog = {}, message = {}) {
@@ -1023,7 +1187,7 @@ function _buildMagSwapActivityData(item) {
     },
     description: {
       chat: "",
-      value: "<p>Wymie\u0144 aktualny magazynek na zapasowy z ekwipunku. Wymaga posiadania przygotowanego zapasowego magazynka.</p>"
+      value: "<p>Wymie\u0144 aktualny magazynek na zapasowy z ekwipunku. Je\u015bli masz kilka rodzaj\u00f3w naboju pasuj\u0105cych do tej broni, wybierzesz, kt\u00f3ry \u0142adujesz \u2014 naboje poprzedniego typu wracaj\u0105 do zapasu. W walce wymaga gotowego zapasowego magazynka.</p>"
     },
     flags: {
       [MODULE_ID]: {
@@ -1574,5 +1738,9 @@ export const __testing = Object.freeze({
   reloadPlan: _getReloadPlan,
   manualReloadMode: _getManualReloadMode,
   ignoresManualReloadMode: _ignoresManualReloadMode,
-  requiresManualReloadBeforeUse: _requiresManualReloadBeforeUse
+  requiresManualReloadBeforeUse: _requiresManualReloadBeforeUse,
+  findReadyMagazine: _findReadyMagazine,
+  chooseFamilyAmmo: _chooseFamilyAmmo,
+  findAmmo: _findAmmo,
+  restoreQuantumMagazinesForActor: _restoreQuantumMagazinesForActor
 });

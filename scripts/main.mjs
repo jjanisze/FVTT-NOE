@@ -40,6 +40,8 @@ import { registerGearGraduationMigration } from "./migration/migrate-gear-gradua
 import { registerMedykGraduationMigration } from "./migration/migrate-medyk-graduation.mjs";
 import { registerZetonLuxorMigration } from "./migration/migrate-zeton-luxor.mjs";
 import { registerRescaleSurowceMigration } from "./migration/rescale-surowce-units.mjs";
+import { registerGadzetyMigration } from "./migration/migrate-gadzety.mjs";
+import { registerToolSubstitutesMigration } from "./migration/migrate-tool-substitutes.mjs";
 import { registerSrdCleanup } from "./config/srd-cleanup.mjs";
 import { registerClassRules } from "./actors/class-rules.mjs";
 import { registerCichyKrok } from "./actors/cichy-krok.mjs";
@@ -77,6 +79,7 @@ import { registerLightSources } from "./items/light-sources.mjs";
 import { registerVisionSources } from "./items/vision-sources.mjs";
 import { registerPowerSourceUI } from "./items/power-source.mjs";
 import { registerBaterie, baterieApi } from "./items/baterie.mjs";
+import { registerGadzety, gadzetyApi } from "./items/gadzety.mjs";
 import { registerZetonLuxor, zetonLuxorApi } from "./items/zeton-luxor.mjs";
 import { registerLatarka, latarkaApi } from "./items/latarka.mjs";
 import { registerFlara, flaraApi } from "./items/flara.mjs";
@@ -192,6 +195,8 @@ Hooks.once("init", () => {
   registerMedykGraduationMigration();
   registerZetonLuxorMigration();
   registerRescaleSurowceMigration();
+  registerGadzetyMigration();
+  registerToolSubstitutesMigration();
   registerSrdCleanup();
   registerClassRules();
   registerCichyKrok();
@@ -404,7 +409,10 @@ Hooks.once("ready", () => {
   registerPochodnia();
   game.neuroshima.pochodnia = pochodniaApi;
   registerBaterie();
+  registerGadzety();
   game.neuroshima.baterie = baterieApi;
+  // Przedmioty smaczkowe z SFX — game.neuroshima.gadzety
+  game.neuroshima.gadzety = gadzetyApi;
   registerZetonLuxor();
   game.neuroshima.zetonLuxor = zetonLuxorApi;
   registerLatarka();

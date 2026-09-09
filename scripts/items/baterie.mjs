@@ -28,10 +28,16 @@ export const FLAG_IS_BATERIA = "bateria";
 
 export const BATERIE_ITEM = {
   label: "Baterie",
-  // No RAW sale price exists (only crafting cost: ST 10, 20h, 9 CH + 1 MK) — estimated in line
-  // with the addon table's scale (Latarka+baterie rail addon prices at 35), same estimation
-  // discipline `pochodnia.mjs`'s smołowa variant already uses for its own un-costed price.
-  price: 5,
+  // No RAW sale price exists (only crafting cost: ST 10, 20h, 9 CH + 1 MK) — estimated, the same
+  // discipline `pochodnia.mjs`'s smołowa variant uses for its own un-costed price.
+  //
+  // Raised 5 → 20 (2026-09-08, GM call): 5 gb flatly contradicted the rulebook, which calls these
+  // "bardzo drogie". At 5 gb a battery cost the same as a snare and less than two .44 Mag rounds,
+  // so nobody would ever think twice about one — which is the opposite of the intended pressure.
+  // 20 gb comes out of the addon table: "Latarka + baterie" is 35 gb, so a bare flashlight plus a
+  // cell lands there only if the cell is worth roughly 15–20. That also puts one battery level
+  // with "Sprzęt do wspinaczki" and a day of Normalny Koszt Utrzymania × 2 (Tabele/Zywnosc.md).
+  price: 20,
   weight: 0.1,
   img: `modules/${MODULE_ID}/icons/items/loot/bateria.svg`,
   description: "<p>Nie te przedwojenne „paluszki” — samoróbka, wytwór inżynierii wstecznej. "

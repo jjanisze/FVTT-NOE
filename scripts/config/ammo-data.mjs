@@ -72,10 +72,31 @@ export const AMMO_CALIBERS = [
     label: ".44 Mag",
     icon: "ammo_44_mag.svg",
     category: "Pistoletowa",
+    family: "44mag",
     formula: "1d10",
     type: "piercing",
     props: ["obalajaca"],
     price: 3, avail: 50, weight: 0.025
+  },
+  {
+    // Homebrew "W Kolorze Kobaltu" - nabój dum-dum, wprowadzony dla Złotego Desert Eagle
+    // Lorentza. Pocisk z rozciętym czubkiem: rozrywa tkanki (Rozrywająca), ale rozpłaszcza się
+    // na twardej przeszkodzie zamiast ją przebić (Hollow-point). Ta sama kość co zwykły .44 Mag
+    // - dum-dum nie bije mocniej, tylko brzydziej, a cały zysk siedzi w tych dwóch cechach.
+    id: "44mag_dd",
+    label: ".44 Mag (dum-dum)",
+    // Placeholder: dzieli grafikę ze zwykłym .44 Mag. Własna ikona jest w kolejce
+    // (dev/icons/MISSING.md, batch 40) - bez niej nie widać w ekwipunku, który z dwóch
+    // stosów jest który, więc to realna luka, nie kosmetyka.
+    icon: "ammo_44_mag.svg",
+    category: "Pistoletowa",
+    family: "44mag",
+    formula: "1d10",
+    type: "piercing",
+    props: ["obalajaca", "rozrywajaca", "hollowpoint"],
+    note: "Rozrywająca: RO Kondycja ST 14 albo Krwawienie (1k8 na początku tury). "
+      + "Hollow-point: osłona z niezerową redukcją zatrzymuje pocisk całkowicie.",
+    price: 6, avail: 25, weight: 0.025
   },
 
   /* ── Karabinowa ──────────────────────────────────────────────── */
@@ -138,6 +159,7 @@ export const AMMO_CALIBERS = [
     label: ".12 Ga (ś – śrut)",
     icon: "ammo_12_ga.svg",
     category: "Śrutowa",
+    family: "12ga",
     formula: "2d4",
     type: "piercing",
     props: [],
@@ -149,6 +171,7 @@ export const AMMO_CALIBERS = [
     label: ".12 Ga (b – breneka)",
     icon: "ammo_12_ga.svg",
     category: "Śrutowa",
+    family: "12ga",
     formula: "2d6",
     type: "bludgeoning",
     props: ["burzaca", "obalajaca"],
@@ -272,6 +295,40 @@ export const AMMO_CALIBERS = [
     price: 5, avail: 40, weight: 0.05
   },
 ];
+
+/* -----------------------------------------------------------------
+   Rodziny naboi
+----------------------------------------------------------------- */
+
+/**
+ * Warianty tego samego naboju - to, co fizycznie wchodzi do tej samej komory, ale zachowuje się
+ * inaczej po trafieniu: `.12 Ga` śrut/breneka, `.44 Mag` zwykły/dum-dum.
+ *
+ * Wcześniej istniał tylko jeden taki przypadek i był zaszyty w `magazine.mjs` jako
+ * `mag.ammoType?.startsWith("12ga")` z ręcznie wypisanym dialogiem dwóch opcji. Ten hack nie
+ * dawał się rozszerzyć (dum-dum musiałby dopisać drugą gałąź `if`), a przy okazji był mylący:
+ * prefiks ciągu znaków nie jest tym samym co zgodność kalibru - `12ga_s`/`12ga_b` pasują
+ * przypadkiem, `44mag`/`44mag_dd` też by pasowały, ale `762`/`76239ak` pasowałyby BŁĘDNIE
+ * (to dwa różne, niewymienne naboje). Jawne pole `family` mówi wprost, co z czym się wymienia.
+ *
+ * Kaliber bez `family` jest rodziną sam dla siebie - czyli domyślnie nic się nie zmienia.
+ */
+export function ammoFamily(caliberId) {
+  const caliber = AMMO_CALIBER_MAP[caliberId];
+  if (!caliber) return caliberId || null;
+  return caliber.family ?? caliber.id;
+}
+
+/**
+ * Wszystkie kalibry wymienne z podanym, łącznie z nim samym.
+ * @param {string} caliberId
+ * @returns {object[]} wpisy z `AMMO_CALIBERS`, w kolejności katalogowej
+ */
+export function familyCalibers(caliberId) {
+  const family = ammoFamily(caliberId);
+  if (!family) return [];
+  return AMMO_CALIBERS.filter(c => (c.family ?? c.id) === family);
+}
 
 /** Fast lookup by id. */
 export const AMMO_CALIBER_MAP = Object.freeze(

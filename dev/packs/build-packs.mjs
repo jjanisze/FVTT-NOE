@@ -543,7 +543,7 @@ function buildAmmo(c) {
       type: { value: "ammo", subtype: c.id },
       quantity: 1,
       weight: { value: c.weight ?? 0.02, units: "kg" },
-      price: { value: c.price, denomination: "gp" },
+      price: { value: c.price, denomination: "gb" },
       properties: [],
       uses: { max: "", spent: 0, recovery: [], autoDestroy: false },
       activities: {}
@@ -574,7 +574,7 @@ function buildGrenade(g) {
       type: { value: "ammo", subtype: g.id },
       quantity: 1,
       weight: { value: g.weight, units: "kg" },
-      price: { value: g.price, denomination: "gp" },
+      price: { value: g.price, denomination: "gb" },
       properties: [],
       uses: { max: "", spent: 0, recovery: [], autoDestroy: false },
       activities: {}

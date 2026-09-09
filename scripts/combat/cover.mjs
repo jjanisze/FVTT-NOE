@@ -1,3 +1,5 @@
+import { hasWeaponProperty } from "../config/weapons.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 const LAST_ATTACK_COVER_FLAG = "lastAttackCover";
 const ATTACK_PATCH_FLAG = Symbol("neuro-cover-attack-patched");
@@ -357,7 +359,15 @@ function registerAttackCoverIntegration() {
       primaryRoll.options.neuroCoverReduction = decision.damageReduction;
       primaryRoll.options.neuroCoverSummary = decision.summary;
       if (decision.damageReduction > 0) {
-        primaryRoll.parts = [`max(0, (${primaryRoll.parts.join(" + ")}) - ${decision.damageReduction})`];
+        // Hollow-point (amunicja dum-dum): pocisk rozplaszcza sie na przeszkodzie zamiast ja
+        // przebic, wiec JAKAKOLWIEK niezerowa redukcja zatrzymuje go w calosci - nie odejmuje
+        // sie, tylko kasuje. To jedyny realny koszt tej amunicji.
+        if (hasWeaponProperty(this.item, "hollowpoint")) {
+          primaryRoll.parts = ["0"];
+          primaryRoll.options.neuroHollowPointStopped = true;
+        } else {
+          primaryRoll.parts = [`max(0, (${primaryRoll.parts.join(" + ")}) - ${decision.damageReduction})`];
+        }
       }
       return rollConfig;
     };

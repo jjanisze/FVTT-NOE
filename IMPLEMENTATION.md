@@ -3759,3 +3759,333 @@ użytkownik świadomie kazał zostawić (patrz `TODO_mechanika.md` §9). Poprawi
 
 Wersja modułu bez zmian (`0.14.23`) — ta sesja nie ruszyła kodu modułu poza żywymi danymi;
 zmiany kodu poszły do osobnego projektu `Integracje/foundry-mcp`.
+
+## Zmiany z 8 września 2026 (24) — Amunicja dum-dum Lorentza, rodziny naboi i naprawa magazynków kwantowych
+
+Zgłoszenie brzmiało wąsko: „Desert Eagle posiada tekst, który należy do amunicji". Przy
+przenoszeniu tego tekstu okazało się, że pod spodem nie ma czego rozdzielić — odrębny typ
+amunicji nigdy nie powstał, a mechanizm, który miał go obsłużyć, był martwy od początku.
+
+### Martwa kontrola magazynków zapasowych
+
+`_onClickReload` bramkował przeładowanie w walce na przedmiocie o
+`system.type.value === "magazine"` i podtypie równym typowi broni (`"palnaKrotka"`). Takiego
+przedmiotu **nie tworzy nic w tym module**: `actors/magazine-inventory.mjs`, jedyne miejsce
+budujące zapasowe magazynki, robi je jako `value: "ammo"` + `subtype: "magazine-short"`, a
+gotowość trzyma we `flags.<moduł>.ready`, nie w `system.uses`. Sprawdzone na żywo:
+**zero dopasowań na 1808 przedmiotów w świecie**.
+
+Skutki, których nikt nie zgłosił, bo wyglądały jak zasada gry:
+
+- każde przeładowanie broni z magazynkiem wymiennym **w walce** kończyło się odmową
+  („Zabrakło ci przygotowanych magazynków zapasowych"), także gdy magazynki leżały na karcie —
+  Raynald ma jeden, Zbrojownia po cztery każdego typu;
+- `_restoreQuantumMagazines` na `deleteCombat` nie odnawiał niczego;
+- licznik gotowości był rozjechany między dwoma miejscami: sekcja ekwipunku pisała do
+  `flags.ready`, ścieżka przeładowania czytała `system.uses.value`.
+
+Naprawione przez oparcie się na `isMagazineItem()` i `getMagTypeForWeapon()` — czyli na tych
+samych funkcjach, których używa sekcja ekwipunku, zamiast na drugim, wymyślonym kształcie danych.
+
+**Model magazynka jest kwantowy** (ustalenie MG, tej sesji): magazynek w plecaku nie niesie
+własnego typu naboju. Dostaje go dopiero w chwili włożenia do broni — z tego, co postać ma
+luzem. `ready` liczy więc korpusy magazynków, a naboje schodzą osobno ze stosu przy wymianie;
+darmowe odnowienie `ready` po walce jest świadomą abstrakcją, nie drugą księgowością.
+
+### Rodziny naboi zamiast prefiksu ciągu znaków
+
+Wybór „śrut czy breneka" był zaszyty jako `mag.ammoType?.startsWith("12ga")` z ręcznie
+wypisanym dialogiem dwóch opcji. Nie dawał się rozszerzyć, a jako reguła zgodności był
+podstępnie zły: `762` **jest** prefiksem `76239ak`, czyli dwóch różnych, niewymiennych naboi.
+Zastąpione jawnym polem `family` w `AMMO_CALIBERS` plus `familyCalibers()`/`ammoFamily()`.
+Dialog wyboru jest teraz generyczny, pokazuje tylko kalibry, które postać faktycznie ma, i przy
+jednej opcji w ogóle się nie pojawia — czyli dla każdej broni w świecie poza strzelbami i
+Złotym Desert Eagle nic się nie zmienia.
+
+### Dum-dum: `44mag_dd`
+
+Nowy kaliber w rodzinie `44mag`, **z tą samą kością co zwykły `.44 Mag`** (1k10 kłute).
+Dum-dum nie bije mocniej — cały zysk siedzi w dwóch nowych cechach broni, cały koszt w drugiej
+z nich:
+
+- **Rozrywająca** — dopisana do `combat/weapon-save-properties.mjs`, czwarta obok Porażającej,
+  Powalającej i Unieruchamiającej. Wymagała dwóch uogólnień, oba użyteczne poza nią:
+  `exemptDamageType` (cel z redukcją/odpornością/niewrażliwością na dany typ obrażeń nie rzuca
+  w ogóle) i `onFail` (efekt, którego nie da się sprowadzić do przełączenia statusu).
+- **Hollow-point** — osłona o niezerowej redukcji obrażeń zatrzymuje pocisk **całkowicie**,
+  zamiast odejmować. Wpięte w obie ścieżki obrażeń: automatyczną (`weapons/ammo.mjs`) i przez
+  dialog (`combat/cover.mjs` `getDamageConfig`).
+
+Zmiana typu naboju przechodzi wyłącznie przez wymianę magazynka — to ta sama czynność fizyczna,
+więc ten sam kod. Magazynek jest przy tym opróżniany, a naboje poprzedniego typu wracają do
+zapasu; bez tego magazynek mieszałby dwa rodzaje pocisków pod jedną etykietą, a przy dum-dum
+to decyduje o tym, czy trafienie w ogóle wywołuje Krwawienie.
+
+### Krwawienie ma teraz profile
+
+Tekst naboju opisuje krwawienie, którego istniejący system nie potrafił wyrazić: 1k8 na
+**początku** tury, bez rzutu obronnego na przerwanie, ustaje dopiero po opatrzeniu rany.
+Hemofilia (RAW, str. 108) to 1k4 na **końcu** tury, RO Kondycja ST 10, trzy sukcesy pod rząd.
+Zamiast naginać jedno do drugiego, `combat/bleeding.mjs` dostał `BLEED_PROFILES`:
+
+| | `hemofilia` | `dumdum` |
+|---|---|---|
+| Obrażenia | 1k4 | 1k8 |
+| Moment | koniec tury | początek tury |
+| RO na przerwanie | Kondycja ST 10, 3 sukcesy | brak |
+| „Wstrzyknij lek" | tak | nie (nie ma czego wstrzyknąć w dziurę) |
+
+Aktor krwawi jednym profilem naraz; cięższy nadpisuje lżejszy (`severity`). Wpis bez pola
+`profile` — czyli każdy zapisany przed tą zmianą — czyta się jako `hemofilia`, więc nic na
+istniejących kartach nie zmieniło znaczenia.
+
+### Typ istoty jest zapisany etykietą, nie kluczem
+
+Klauzula „każda istota żywa" miała wyłączać maszyny. Pierwsza wersja porównywała klucz
+(`"maszyna"`) z `system.details.type.value` — i nie trafiłaby **ani razu**: żywy bestiariusz
+trzyma tam etykietę (`"Potwór"`, `"Zwierzę"`), a nie klucz. Złapane przez test, nie w grze.
+Dopasowanie znosi teraz klucz i etykietę, bez względu na wielkość liter. Przy okazji: postaci
+graczy dnd5e wymusza `"humanoid"` niezależnie od tego, co się wpisze, więc ta bramka z natury
+dotyczy wyłącznie NPC-ów.
+
+### Karta i pasek
+
+- Nowy przycisk **„Wymień magazynek / zmień amunicję"** na karcie broni, aktywny w trybie gry.
+  Lista kalibrów wyżej zostaje w PLAY zablokowana celowo — to ustawienie autorskie broni, nie
+  czynność postaci. Bez tego przycisku gracz z dwoma rodzajami naboju nie miał na karcie
+  żadnego sposobu, żeby przełożyć jeden na drugi.
+- `game.neuroshima.magazynki.swapMagazine()` — publiczne wejście dla makr. Bez argumentów samo
+  znajduje postać i broń, przy kilku broniach pyta. Makro **„Wymiana magazynka / amunicji"**
+  wylądowało na slocie 1 paska Azuna (Lorentz); treść makra to jedna linia wywołania, więc
+  zmiana zasad nigdy nie wymusi jego odtworzenia — ten sam wzorzec co makra Sztuczek.
+
+### Dane Lorentza
+
+- `Złoty Desert Eagle`: opis oczyszczony z zasad amunicji, zostaje flavour, „Trafienie: +1"
+  (i tak zakodowane w aktywności jako `attack.bonus`) i Obalająca w brzmieniu katalogowym.
+  Odesłanie do karty amunicji zamiast powielonego tekstu.
+- `.44 Mag (dum-dum)` × 12 — nowa pozycja z pełną treścią zasad, ta sama, która wcześniej
+  wisiała na broni.
+- `.44 Mag` × 8 bez zmian, `Krótki magazynek` × 2 (gotowe 2/2) — wcześniej nie miał żadnego.
+
+Sprawdzone na żywo, w obie strony, na jego prawdziwej broni: przełączenie na dum-dum dokłada
+`rozrywajaca` + `hollowpoint`, zostawia 1k10, zwraca 8 zwykłych naboi do zapasu i zabiera 8
+dum-dum; powrót cofa dokładnie to samo. Stan końcowy identyczny z wyjściowym.
+
+### Drobiazg przy okazji
+
+`_formatRoundWord` znało dwie formy („1 nabój" / „reszta naboje"), więc każde przeładowanie
+wypisywało na czat „8 naboje". Poprawione na pełną polską odmianę przez liczbę, z wyjątkiem
+dla nastek („12 naboi", nie „12 naboje").
+
+### Stan końcowy
+
+- **Testy: 246/246** (`game.neuroshima.tests.run()`), było 215 po (23). Nowa paczka
+  `neuroshima-2026-overrides.amunicja` (31 testów).
+- Dwa z nich padły przy pierwszym uruchomieniu i oba wskazywały prawdziwe błędy, nie złe
+  asercje: wyłączenie maszyn spod Rozrywającej (opisane wyżej) oraz założenie, że nazwa rodziny
+  musi być kaliberem — `.44 Mag` jest, `.12 Ga` nie, bo nabój o id `12ga` nie istnieje.
+- Ikona `.44 Mag (dum-dum)` dzieli na razie plik ze zwykłym `.44 Mag` — dopisana do kolejki
+  `dev/icons/MISSING.md` (2/9). Bez własnej grafiki nie widać w ekwipunku, który stos jest który.
+
+Wersja modułu: **0.14.24**.
+
+## Zmiany z 9 września 2026 (25) — Cena baterii, gadżety z SFX, prochy i naprawa Prowiantu
+
+Cztery zgłoszenia MG, z których dwa okazały się błędami, a nie życzeniami.
+
+### Bateria: 5 → 20 gb
+
+Podręcznik nazywa baterie „bardzo drogimi" i nie podaje ceny sprzedaży, tylko koszt
+wytworzenia (ST 10, 20 h, 9 CH + 1 MK). Wycena 5 gb, nadana kiedyś szacunkowo, mówiła coś
+dokładnie odwrotnego: bateria kosztowała tyle co sidła i mniej niż dwa naboje .44 Mag, więc
+nikt nigdy nie zastanawiał się nad jej zakupem.
+
+20 gb wychodzi z tabeli dodatków: „Latarka + baterie" to 35 gb, więc gola latarka plus ogniwo
+domykają się tylko wtedy, gdy ogniwo jest warte 15–20. Poprawione w `items/baterie.mjs`, w
+paczce `sprzet` i na **5 kopiach w świecie** (Alan, Lorentz, Piekarz ×2, Zbrojownia ×20 szt.).
+
+### Gadżety: przedmioty smaczkowe, które da się kliknąć
+
+Kaczuszka Lorentza, dwie krótkofalówki, kanister Laffitte'a i długopis Alana miały dostać SFX.
+Wszystkie były `type: "loot"` z zerem aktywności — a `loot` w dnd5e **nie może nieść
+Aktywności** (`ActivitiesTemplate` jest wpięty tylko w consumable/equipment/facility/feat/
+spell/tool/weapon; sprawdzone w źródle 5.3). Bez zmiany typu nie ma czego kliknąć.
+
+Nowe `items/gadzety.mjs` + `migration/migrate-gadzety.mjs`. Konwersja idzie przez
+**skasuj-i-odtwórz**, bo `.update({type})` po cichu unieważnia całe wywołanie — pułapka
+udokumentowana w tym repozytorium już trzy razy (`migrate-pistolet-race.mjs`,
+`migrate-gear-graduation.mjs`, `kolczatka.mjs`); ten plik jest czwartym potwierdzeniem, nie
+kolejnym odkryciem. Nowy przedmiot dziedziczy nazwę, ikonę, opis, cenę, wagę i ilość, więc na
+karcie zmienia się wyłącznie to, że pojawia się przycisk.
+
+Zero mechaniki — ustalenie MG: *„baterie krótkofalówek śledzi (lub nie) MG, funkcjonują czysto
+dla smaczku"*. Aktywność nie zużywa ładunków, więc kaczuszka nie znika po pierwszym pisknięciu
+(osobny test tego pilnuje, bo to jedyna regresja, która naprawdę zabolałaby przy stole).
+
+Dźwięk leci przez Sequencer **przestrzennie**, z własnym promieniem na gadżet: długopis 5 m,
+kanister 8 m, kaczuszka 10 m, krótkofalówka 20 m. `seqPlayAudio` przyjmuje teraz jawny
+`radius` — bez tego wszystko dziedziczyłoby domyślne 50 m, czyli zasięg wystrzału z karabinu,
+i kliknięcie długopisu słyszałaby pół mapy.
+
+Cztery pliki CC0 z FreeSound, przez istniejący pipeline (`dev/audio/pipeline_gadzety.json`),
+źródła i licencje w `dev/audio/FREESOUND_GADZETY_SOURCES.md`. Punkty przycięcia nie są
+zgadywane — wyznaczone przez `ffmpeg -af silencedetect`, tak żeby każdy plik zawierał
+**dokładnie jedno zdarzenie**: jeden pisk, jedno psiknięcie, jeden pełny cykl długopisu
+(naciśnięcie + zwolnienie), a nie całą sesję nagraniową.
+
+Przekonwertowano 6 przedmiotów: pięć zamówionych plus „Krótkofalówka policyjna" Evie, którą
+rozpoznawanie po nazwie złapało przy okazji.
+
+Przy okazji dwa drobiazgi: domyślna karta użycia dnd5e jest dla gadżetów wyłączana (jeden pisk
+= jedna wiadomość, nie dwie — ten sam ruch co w `items/chemia.mjs`), a podtyp `trinket` dostał
+polską etykietę „Drobiazg" — był jedynym nieprzetłumaczonym podpisem w ekwipunku, a wpadają
+w niego zarówno gadżety, jak i Kolczatki.
+
+### Prochy
+
+Stan doprowadzony do zgłoszonego: Victor **3** Relanium (było 2), Raynald **2** Psychotropy
+(nie miał żadnych), Lorentz 7 Wapniaka (bez zmian).
+
+Ważniejsze: Psychotropy leczyły wyłącznie `paranoja`, a chorobę Raynalda przepięto w (23) na
+kobaltowy wariant `schizofreniaParanoidalna`. `chemiaForDisease("schizofreniaParanoidalna")`
+zwracało pustą listę — Raynald nosiłby lek, który nie leczy niczego, co ma. `treats` obejmuje
+teraz obie choroby; flaga `treats` odświeżona też na już wydanych kopiach (Raynald, Kluczyk),
+bo jest kopiowana na przedmiot w chwili tworzenia i nie aktualizuje się sama.
+
+### Prowiant: przedmioty były nie do znalezienia
+
+Zgłoszenie brzmiało jak prośba o wyjaśnienie: *„nie jest jasne, jak dodawać i odejmować
+prowiant"*. Nie było niejasne — **było niemożliwe.**
+
+Panel Prowiantu, jak każdy sąsiedni, usuwa natywne wiersze ekwipunku dla przedmiotów, które
+przejmuje. Różnica polegała na tym, że Leki i Zapasowe Magazynki oddają w zamian pełne wiersze
+z kontrolkami, a Prowiant rysował **wyłącznie zbiorczą linijkę** per kategoria („Konserwa ×5,
+Litr Wody ×2") — bez pola ilości, bez edycji, bez kasowania. Efekt: jedzenia i wody nie dało
+się ani zmienić, ani otworzyć, ani usunąć z żadnego widoku, a wyszukiwarka ekwipunku ich nie
+znajdowała, bo jedyny wiersz, który je pokazywał, był kasowany z DOM-u. Wyglądało to na
+świadome „panel informacyjny", a było zgubieniem przedmiotu.
+
+Panel pokazuje teraz wiersz na przedmiot (ilość ±, edycja, kasowanie), podsumowanie dni zapasu
+zostaje jako osobny wiersz zamykający kategorię, a pod spodem doszedł przycisk **„Dodaj
+prowiant"** z katalogiem. Sekcja renderuje się też przy pustym plecaku — inaczej nie dałoby
+się dodać PIERWSZEJ racji, ta sama zasada co w Zapasowych Magazynkach.
+
+**Katalog** (`PROWIANT_CATALOG`) przepisany wprost z `Tabele/Zywnosc.md` — ceny, dostępność i
+wagi są kanoniczne, nic nie jest zgadywane. To świadomie nie cała tabela k100: przyprawy, sól
+czy olej nikogo nie żywią jako racja dzienna. Panel i tak liczy **każdy** przedmiot pasujący
+nazwą, więc pozycja spoza katalogu nadal działa — katalog to skrót, nie bramka.
+
+**Odpowiedź na pytanie o typy jedzenia:** były „wspierane" tylko w tym sensie, że liczyło się
+wszystko, co pasowało do wzorca nazwy — a `Jerky` **nie pasowało do niczego**, więc byłoby dla
+licznika dni zapasu niewidzialne (czyli: postać głoduje, a karta twierdzi, że zapasów nie ma).
+Wzorzec obejmuje teraz formy suszone, wędliny, batony, herbatniki, liofilizaty i puszki, a woda
+łapie też manierkę i kanister.
+
+### Stan końcowy
+
+- **Testy: 267/267** (`game.neuroshima.tests.run()`), było 246 po (24). 21 nowych: gadżety
+  (9), prowiant (10), baterie (2).
+- Jeden test padł przy pierwszym uruchomieniu i **to test był zły, nie kod**: wymagał `{a}`
+  w każdej linijce smaczku, a linijka „Klik. Ktoś w pokoju właśnie zacisnął zęby" jest lepsza
+  właśnie dlatego, że nie wskazuje palcem — karta czatu i tak niesie mówcę. Asercja zmieniona
+  na „przynajmniej jedna linijka używa podstawienia".
+- `auditWeapons()` — 0 rozjazdów w drużynie (11 w świecie to znany tuning NPC-ów).
+- `auditItemCompleteness()` — 0 w drużynie, 4 w świecie (te same, znane).
+- `auditInventory()` — zero we wszystkich kategoriach.
+- Kolejka ikon: 6/9 (`dev/icons/MISSING.md`) — doszły cztery pozycje jedzeniowe. Pięć
+  pozostałych pozycji katalogu celowo dzieli generyczną puszkę zamiast zajmować slot w kolejce.
+
+Wersja modułu: **0.14.25**.
+
+## Zmiany z 9 września 2026 (26) — Laptop wojskowy rzuca testy; sprzęt zastępujący zestawy narzędzi
+
+Zgłoszenie: „Napraw Laptop Wojskowy Raynalda. Ma on pozwalać rzucać skojarzone testy."
+
+### Co było nie tak
+
+Podręcznikowy zapis „**Może zastąpić Narzędzia małego hakera**" żył wyłącznie w prozie opisu
+przedmiotu. Mechanicznie laptop był bezczynnym `loot`-em: zero Aktywności, więc nie dało się z
+niego rzucić niczego. Trzy akcje wymienione w jego własnym opisie — Otwarcie zamka
+elektronicznego (ST 15), Zakłócenie działania maszyny Molocha (ST 20), Złamanie hasła dostępu
+(ST 20) — trzeba było odtwarzać ręcznie z pamięci.
+
+Gorsza połowa problemu leżała gdzie indziej. `actors/tool-availability.mjs` dopisuje do karty
+każdego Testu narzędzi notatkę „masz zestaw / brak zestawu", dopasowując po `system.type.baseItem`.
+Raynald **jest biegły** w Narzędziach małego hakera (`tools.hakera.value = 1`), ale nie ma tego
+zestawu w ekwipunku — ma laptop. Każdy jego test hakerski dostawał więc czerwone
+**„✘ brak zestawu w ekwipunku"**, mimo że postać trzymała sprzęt, który podręcznik uznaje za
+równoważny. To wyglądało jak stan gry („no fakt, nie mam zestawu"), a było ślepotą sprawdzenia.
+
+### Rozwiązanie: `substitutes` jako pojęcie ogólne, nie łatka na laptop
+
+Nowe pole w `RealGear` (`config/gear-data.mjs`, typedef `ToolSubstitute`):
+
+```js
+substitutes: { toolkit: "hakera", ability: "int" }
+```
+
+Włącza dwie rzeczy naraz:
+
+1. **Przedmiot powstaje jako `tool`** z Aktywnościami Testu — jedną ogólną plus po jednej na
+   każdą akcję zastępowanego zestawu, z jego ST. Wszystkie typu `neuroToolCheck` (ten sam,
+   którego używa Mały kowal — rozwiązuje aktora po właścicielu przedmiotu, a nie po tym, kto
+   akurat ma zaznaczony token).
+2. **`tool-availability.mjs` uznaje go za posiadany zestaw** i mówi po imieniu, czym on jest:
+   „✔ zastępuje: Laptop wojskowy" zamiast ogólnego „masz zestaw" — inaczej zielona notatka przy
+   pustym slocie zestawu wyglądałaby jak błąd, a nie jak działająca zasada.
+
+Mechanika zastępstwa siedzi w `check.associated: ["hakera"]`. dnd5e wystawia wtedy przycisk
+**Testu narzędzi** tego zestawu (a nie zwykłego Testu Cechy), więc do rzutu wchodzi biegłość
+postaci w zastępowanym zestawie. Sprawdzone żywcem na Raynaldzie: `1d20 + 4 + 2` — Inteligencja
+plus Premia Biegłości. Laptop zastępuje sprzęt, nie wyszkolenie; komuś bez biegłości da samo
+`1d20 + INT`, i tak ma być.
+
+### Pułapka, która o mało nie zjadła laptopa
+
+`baseItem` zastępnika zostaje **pusty**, celowo — i jest na to osobny test. Gdyby przedmiot
+deklarował `baseItem: "hakera"`, `createToolkits()` (upsert po
+`type === "tool" && baseItem === kit.id`) nadpisałby go przy najbliższym uruchomieniu: Laptop
+wojskowy zamieniłby się w „Narzędzia małego hakera" razem z nazwą, ikoną, ceną i wagą. Nic by
+o tym nie krzyknęło. Skojarzenie żyje więc na aktywnościach i na fladze, nie na typie.
+
+Przy okazji `createRealGear()` dostał gałąź na zmianę typu (`delete + create`). Bez niej
+odświeżenie laptopa, który przeszedł z `loot` na `tool`, **milcząco nie robiłoby nic** —
+`.update({type})` unieważnia całe wywołanie, łącznie z opisem i ceną, które akurat dałyby się
+zaktualizować. To piąte potwierdzenie tej pułapki w tym repozytorium; nie jest już odkryciem,
+tylko rutyną.
+
+### Migracja
+
+`migration/migrate-tool-substitutes.mjs`, ten sam kształt co reszta folderu (sucha próba
+domyślnie, `{ commit: true }`, filtr po aktorach). Przerobiła 2 kopie: Raynald i Zbrojownia.
+Cena, waga i opis odświeżają się z katalogu — bo właśnie one się zmieniły — ale nazwa, ikona i
+ilość zostają takie, jakie aktor ma dziś: mogły zostać świadomie zmienione przy stole.
+
+### Sprostowanie w opisie przedmiotu
+
+Stara wersja kończyła się nawiasem „Ułatwienie i zastępstwo narzędzi to coś, co włącza się
+ręcznie przy rzucie, nie automatyczny efekt". Po tej zmianie to zdanie było już w połowie
+nieprawdziwe: zastępstwo narzędzi jest teraz automatyczne i widoczne na karcie. Ręczne zostaje
+wyłącznie **Ułatwienie** do Testów Inteligencji — i słusznie, bo tylko MG wie, czy dana
+czynność faktycznie „używa tego sprzętu". Opis mówi teraz dokładnie to.
+
+### Stan końcowy
+
+- **Testy: 276/276** (`game.neuroshima.tests.run()`), było 267 po (25). 9 nowych, w tym osobny
+  test na to, że zastępnik NIE przejmuje `baseItem` zastępowanego zestawu.
+- Sprawdzone na żywym Raynaldzie: karta wystawia przycisk „Inteligencja (Narzędzia małego
+  hakera)" ze ST 20, rzut wychodzi `1d20 + 4 + 2`, notatka mówi „✔ zastępuje: Laptop wojskowy".
+- `auditItemCompleteness()` — bez zmian (4 w świecie, znane, poza drużyną).
+
+Wersja modułu: **0.14.26**.
+
+### Znalezione przy okazji, nietknięte
+
+Katalog Przedmiotów świata zawiera **539 pozycji z 824** (65%) będących resztą po imporcie z
+Roll20: przedmioty nazwane „X (Imię Aktora)", duplikujące to, co i tak siedzi na aktorze, z
+czego **411 nosi portret aktora zamiast ikony**. Rozkłada się to na 53 postacie (Raynald 40,
+Lorentz 38, Piekarz 36, Alan 33, Victor 30…). Jednym z nich jest „laptop wojskowy (narzedzi
+hackera) (Raynald of Châtillon)" — waga 3 kg, cena 0, portret zamiast ikony — czyli import-owy
+sobowtór tego samego laptopa. Nie ruszane: to osobna decyzja porządkowa o skali całego świata,
+a nie część naprawy laptopa.

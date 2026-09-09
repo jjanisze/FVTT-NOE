@@ -2,6 +2,9 @@ import { AMMO_CALIBERS } from "../config/ammo-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
+/** Nazwa używana wewnątrz tego pliku, zanim funkcja stała się publiczna. */
+const _addAmmoToActor = (...args) => addAmmoToActor(...args);
+
 export function registerAmmoInventory() {
   for (const hookName of [
     "renderActorSheet",
@@ -363,7 +366,22 @@ async function _showAmmoDialog(actor) {
   });
 }
 
-async function _addAmmoToActor(actor, ammoId, quantity) {
+/**
+ * Dodaj amunicję danego kalibru do ekwipunku aktora, scalając ze stosem, jeśli taki już jest.
+ *
+ * Wyeksportowane, bo `weapons/magazine.mjs` zwraca tą drogą naboje wyjęte z magazynka przy
+ * zmianie typu amunicji — inaczej musiałby powielić budowę przedmiotu (ikona, cena, waga, opis
+ * z katalogu), a to dokładnie ten rodzaj duplikatu, który wcześniej wyprodukował rozjazd
+ * ikon opisany niżej.
+ *
+ * @param {Actor5e} actor
+ * @param {string} ammoId          Id kalibru z `AMMO_CALIBERS`.
+ * @param {number} quantity
+ * @param {object} [options]
+ * @param {boolean} [options.notify=true]  Czy pokazać powiadomienie. Ruchy wewnętrzne
+ *                                          (zwrot naboi z magazynka) są ciche.
+ */
+export async function addAmmoToActor(actor, ammoId, quantity, { notify = true } = {}) {
   const caliber = AMMO_CALIBERS.find(c => c.id === ammoId);
   if (!caliber) return;
 
@@ -379,7 +397,7 @@ async function _addAmmoToActor(actor, ammoId, quantity) {
     // Zwiększ quantity
     const newQty = (existing.system.quantity ?? 0) + quantity;
     await existing.update({ "system.quantity": newQty });
-    ui.notifications.info(`Zwiększono ilość ${caliber.label} do ${newQty}.`);
+    if (notify) ui.notifications.info(`Zwiększono ilość ${caliber.label} do ${newQty}.`);
   } else {
     // Ikona: bierzemy wprost z katalogu (ammo-data.mjs's `AMMO_CALIBERS[].icon` — dokładnie po to
     // ten pole tam jest udokumentowane: "Used when programmatically creating ammo items…").
@@ -415,7 +433,7 @@ async function _addAmmoToActor(actor, ammoId, quantity) {
     };
 
     await Item.create(itemData, { parent: actor });
-    ui.notifications.info(`Dodano ${quantity} szt. amunicji ${caliber.label}.`);
+    if (notify) ui.notifications.info(`Dodano ${quantity} szt. amunicji ${caliber.label}.`);
   }
 }
 

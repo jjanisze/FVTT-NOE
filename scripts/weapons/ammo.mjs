@@ -15,6 +15,7 @@
 
 import { AMMO_CALIBER_MAP } from "../config/ammo-data.mjs";
 import { getLastAttackCoverDecision } from "../combat/cover.mjs";
+import { hasWeaponProperty } from "../config/weapons.mjs";
 import { playExplosionSoundForItem, playImpactSound } from "./sounds.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -163,7 +164,11 @@ async function _onPostRollAttackAutoApply(rolls, { subject } = {}) {
   const coverDecision = getLastAttackCoverDecision(item, subject.id);
   const coverReduction = coverDecision?.applyDamageReduction ? (coverDecision.damageReduction ?? 0) : 0;
   const rawDamage = Math.max(0, roll.total);
-  const finalDamage = Math.max(0, rawDamage - coverReduction);
+  // Hollow-point: pocisk dum-dum rozplaszcza sie na oslonie zamiast ja przebic, wiec niezerowa
+  // redukcja zatrzymuje go calkowicie. Ta sama zasada siedzi w `getDamageConfig` w cover.mjs
+  // (sciezka reczna, przez dialog obrazen); tu jest sciezka automatyczna, po trafieniu w cel.
+  const hollowPointStopped = coverReduction > 0 && hasWeaponProperty(item, "hollowpoint");
+  const finalDamage = hollowPointStopped ? 0 : Math.max(0, rawDamage - coverReduction);
 
   const damages = [{
     value: finalDamage,
@@ -193,7 +198,9 @@ async function _onPostRollAttackAutoApply(rolls, { subject } = {}) {
   /* Build flavor: caliber name + cover reduction note + hit/miss list */
   const hitNames = hits.map(h => h.target.name ?? "?").join(", ");
   const missLine = misses.length ? ` | <em>pudło: ${misses.join(", ")}</em>` : "";
-  const reductionLine = coverReduction > 0 ? ` <em>(osłona −${coverReduction})</em>` : "";
+  const reductionLine = hollowPointStopped
+    ? ` <em>(osłona zatrzymała pocisk dum-dum — 0 obrażeń)</em>`
+    : coverReduction > 0 ? ` <em>(osłona −${coverReduction})</em>` : "";
   const flavor = `<i class="fa-solid fa-burst"></i> Obrażenia (${caliber?.label ?? item.name})${reductionLine} → ${hitNames}${missLine}`;
 
   await roll.toMessage({

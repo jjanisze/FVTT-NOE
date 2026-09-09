@@ -106,9 +106,13 @@ const SOUND_RADIUS = {
  * @param {object}  [opts]
  * @param {Actor|TokenDocument|Token|null} [opts.token]  Origin for positional audio (Phase 2).
  * @param {string}  [opts.soundKey] WeaponSound enum key, used to look up radius in SOUND_RADIUS.
+ * @param {number}  [opts.radius]   Explicit audible radius in scene units, overriding the
+ *                                  SOUND_RADIUS lookup. For sounds that are not weapon sounds
+ *                                  and so have no enum key — a pen click carries maybe 5 m, and
+ *                                  the 50 m default would broadcast it across the map.
  * @returns {boolean} true = Sequencer handled playback; false = caller must use legacy fallback.
  */
-export function seqPlayAudio(src, vol, { token, soundKey } = {}) {
+export function seqPlayAudio(src, vol, { token, soundKey, radius: radiusOverride } = {}) {
   const Seq = _getSequencer();
   if (!Seq) return false;
 
@@ -118,7 +122,7 @@ export function seqPlayAudio(src, vol, { token, soundKey } = {}) {
 
   if (resolvedToken) {
     // Phase 2: positional audio from the firing token
-    const radius = SOUND_RADIUS[soundKey] ?? 50;
+    const radius = radiusOverride ?? SOUND_RADIUS[soundKey] ?? 50;
     section = section
       .atLocation(resolvedToken)
       .radius(radius)

@@ -23,11 +23,22 @@ still not this queue — but it is two items, not a pile.
 **Next batch number: 40** (last used: `process_grid_39.py` — bump this
 whenever a new batch actually gets processed).
 
-## Queue (1/9)
+## Queue (6/9)
 
 | # | Item | Where | Current icon | Suggested prompt content |
 |---|------|-------|---------------|---------------------------|
 | 1 | Granat sygnalizacyjny (`grenade-signal`) | `ammo-data.mjs` `GRENADE_TYPES`, party-wide | shares `smoke_grenade.svg` (placeholder — see IMPLEMENTATION.md v0.14.16) | Signal flare grenade, visually distinct from a smoke grenade |
+| 2 | .44 Mag (dum-dum) (`44mag_dd`) | `ammo-data.mjs` `AMMO_CALIBERS`, Lorentz | shares `ammo_44_mag.svg` with the plain round (placeholder — v0.14.24) | Hollow-point .44 Magnum cartridge, bullet tip visibly cross-cut/hollowed, otherwise same casing as the plain .44 Mag |
+| 3 | Mięso suszone / jerky (`mieso_suszone`) | `prowiant-data.mjs` `PROWIANT_CATALOG` (v0.14.25) | shares `canned_food.svg` | Strips of dried cured meat / jerky, hanging or stacked — clearly not a tin |
+| 4 | Chleb (`chleb`) | `prowiant-data.mjs` `PROWIANT_CATALOG` (v0.14.25) | shares `canned_food.svg` | Round rustic loaf of bread, post-war home-baked look |
+| 5 | Owoce i warzywa (`owoce`) | `prowiant-data.mjs` `PROWIANT_CATALOG` (v0.14.25) | shares `canned_food.svg` | A small pile of root vegetables and fruit, wasteland-grown, slightly misshapen |
+| 6 | Racja wojskowa MRE (`mre`) | `prowiant-data.mjs` `PROWIANT_CATALOG` (v0.14.25) | shares `menazka.svg` (a mess tin — related, but not the same object) | Sealed military MRE ration pouch with stencilled markings |
+
+*(Rows 3–6: the Prowiant catalogue added in v0.14.25 has nine food entries and only
+one real food icon, `canned_food.svg`. The four queued here are the ones a player is
+most likely to actually carry AND the most visually distinct from a tin can — the
+remaining five (Prowiant, Mięso, Ser, Ryby, Liofilizat) deliberately keep sharing the
+generic tin as a "some food" glyph rather than each claiming a queue slot.)*
 
 *(Row 1 was already a known, still-open gap noted in an earlier pass;
 logged here rather than left to be rediscovered separately.)*

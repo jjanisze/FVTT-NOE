@@ -1,17 +1,28 @@
 /**
  * Neuroshima 5e — właściwości broni wymuszające Rzut Obronny i stan przy trafieniu.
  *
- * Generalizacja wzorca z `obalajaca.mjs` dla trzech właściwości:
+ * Generalizacja wzorca z `obalajaca.mjs` dla czterech właściwości:
  *  - Porażająca     → RO Kondycja ST 10 albo Powalenie (każdy rozmiar)
  *  - Powalająca     → RO Siła ST 8+SIŁ+PB albo Powalenie (cel ≤ Duży, obrażenia obuchowe)
  *  - Unieruchamiająca → RO Zręczność ST 8+SIŁ+PB albo Unieruchomienie (cel Śr/Duży, zamiast obrażeń)
+ *  - Rozrywająca    → RO Kondycja ST 14 albo Krwawienie (amunicja dum-dum, homebrew Kobalt)
  *
  * Odporności na stany (`system.traits.ci.value`) są respektowane — cel odporny na dany
  * stan nie wykonuje RO i otrzymuje informację o odporności (zgodnie z RAW i mechaniką dnd5e,
  * która i tak usuwa stan z `actor.statuses` w `prepareResistImmune`).
  *
- * Źródło zasad: Tabele/Bronie/BronBiala.md.
+ * Trzy pierwsze nakładają stan przez `toggleStatusEffect` i tak zostaje. Rozrywająca nie da się
+ * do tego sprowadzić — Krwawienie to nie sam znacznik, tylko cykliczny tick z własnym profilem
+ * (`combat/bleeding.mjs`), więc definicja może zamiast `status` podać `onFail`. Dwa dodatkowe
+ * pola bramkujące (`exemptDamageType`, `exemptCreatureTypes`) też powstały dla niej, ale są
+ * ogólne: pierwsze pomija cele z redukcją/odpornością/niewrażliwością na dany typ obrażeń,
+ * drugie — istoty, których dana cecha z definicji nie dotyczy (maszyna nie krwawi).
+ *
+ * Źródło zasad: Tabele/Bronie/BronBiala.md; dum-dum — homebrew "W Kolorze Kobaltu".
  */
+
+import { startBleeding } from "./bleeding.mjs";
+import { NEUROSHIMA_CREATURE_TYPES } from "../config/creature-types.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -55,6 +66,24 @@ const SAVE_PROPERTIES = {
     alternativeToDamage: true,
     icon: "fa-link",
     color: "#2f6f4f",
+  },
+  rozrywajaca: {
+    label: "Rozrywająca",
+    ability: "con",
+    status: "bleeding",
+    statusLabel: "Krwawienie",
+    dc: { mode: "fixed", value: 14 },
+    sizes: null,
+    alternativeToDamage: false,
+    icon: "fa-droplet",
+    color: "#c0392b",
+    // "Każda istota żywa trafiona pociskiem dum-dum, która nie posiada redukcji, odporności
+    // lub niewrażliwości na obrażenia kłute…" — obie klauzule wprost z tekstu naboju.
+    exemptDamageType: "piercing",
+    exemptCreatureTypes: ["maszyna"],
+    // Krwawienie ma własny cykl i profil; samo przełączenie statusu zostawiłoby ikonę na
+    // tokenie i nie zadałoby ani jednego punktu obrażeń.
+    onFail: actor => startBleeding(actor, { profile: "dumdum", reason: "pocisk dum-dum" }),
   },
 };
 
@@ -214,7 +243,22 @@ async function _resolveTarget(target, config, saveDC) {
     if (!proceed) return;
   }
 
-  // 2. Odporność na stan — RAW: brak efektu, bez RO.
+  // 2. Cecha z definicji nie dotyczy tej istoty (maszyna nie krwawi).
+  if (config.exemptCreatureTypes?.length && _isExemptCreatureType(actor, config.exemptCreatureTypes)) {
+    await _announceNoEffect(actor, config, `${name} nie jest istotą żywą — ${config.label} nie działa.`);
+    return;
+  }
+
+  // 3. Redukcja/odporność/niewrażliwość na dany typ obrażeń zatrzymuje cechę przed RO.
+  if (config.exemptDamageType && _resistsDamageType(actor, config.exemptDamageType)) {
+    const dmgLabel = CONFIG.DND5E.damageTypes?.[config.exemptDamageType]?.label
+      ?? config.exemptDamageType;
+    await _announceNoEffect(actor, config,
+      `${name} ma redukcję lub odporność na obrażenia ${dmgLabel.toLowerCase()} — ${config.label} nie działa.`);
+    return;
+  }
+
+  // 4. Odporność na stan — RAW: brak efektu, bez RO.
   if (_isImmuneToCondition(actor, config.status)) {
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor }),
@@ -226,7 +270,7 @@ async function _resolveTarget(target, config, saveDC) {
     return;
   }
 
-  // 3. Rzut obronny.
+  // 5. Rzut obronny.
   const rolls = await actor.rollSavingThrow(
     { ability: config.ability, target: saveDC },
     { configure: false },
@@ -237,10 +281,66 @@ async function _resolveTarget(target, config, saveDC) {
 
   const total = roll.total ?? 0;
   if (total < saveDC) {
-    await actor.toggleStatusEffect(config.status, { active: true });
+    // `onFail` zastępuje samo przełączenie statusu tam, gdzie efekt jest czymś więcej niż
+    // znacznikiem (Krwawienie ma własny cykl i profil obrażeń).
+    if (config.onFail) await config.onFail(actor);
+    else await actor.toggleStatusEffect(config.status, { active: true });
     ui.notifications.info(`${config.label}: ${name} oblał RO i otrzymuje ${config.statusLabel}!`);
   } else {
     ui.notifications.info(`${config.label}: ${name} zdał RO i uniknął efektu (${config.statusLabel}).`);
   }
 }
 
+/** Wspólna karta "cecha nie zadziałała" — dla obu bramek powyżej. */
+async function _announceNoEffect(actor, config, sentence) {
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    content: `<div class="neuro-save-prop-result">`
+      + `<i class="fas ${config.icon}" style="color:${config.color}"></i> ${sentence}</div>`,
+  });
+  ui.notifications.info(sentence);
+}
+
+/**
+ * Czy cel ma redukcję, odporność albo niewrażliwość na dany typ obrażeń.
+ *
+ * `dr` to w tym module również "Odporność kinetyczna" pancerza (patrz `actors/armor-rules.mjs`),
+ * więc jedno sprawdzenie pokrywa wszystkie trzy przypadki z tekstu naboju.
+ */
+function _resistsDamageType(actor, damageType) {
+  for (const key of ["dr", "di"]) {
+    const value = actor?.system?.traits?.[key]?.value;
+    if (value instanceof Set ? value.has(damageType) : Array.isArray(value) && value.includes(damageType)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+/**
+ * Typ istoty spoza zakresu cechy (np. maszyna dla Rozrywającej).
+ *
+ * `system.details.type.value` w tym świecie trzyma **etykietę**, nie klucz — NPC-e mają tam
+ * "Potwór"/"Zwierzę", a nie "potwor"/"zwierze" (sprawdzone na żywym bestiariuszu, 2026-09-08).
+ * Porównanie samego klucza, które tu było najpierw, nie trafiłoby ani razu i cecha po cichu
+ * działałaby też na maszyny. Postacie graczy siedzą jeszcze na dnd5e-owym "humanoid", więc
+ * dopasowanie musi znieść wszystkie trzy zapisy naraz.
+ */
+function _isExemptCreatureType(actor, exempt) {
+  const raw = String(actor?.system?.details?.type?.value ?? "").trim().toLowerCase();
+  if (!raw) return false;
+  return exempt.some(key => {
+    if (raw === String(key).toLowerCase()) return true;
+    const label = NEUROSHIMA_CREATURE_TYPES[key]?.label;
+    return !!label && raw === label.toLowerCase();
+  });
+}
+
+/** Wewnętrzne bramki cech — testowane wprost, bo `_resolveTarget` robi RO i karty czatu. */
+export const __testing = Object.freeze({
+  SAVE_PROPERTIES,
+  resistsDamageType: _resistsDamageType,
+  isExemptCreatureType: _isExemptCreatureType,
+  computeDC: _computeDC,
+  hasProperty: _hasProperty
+});

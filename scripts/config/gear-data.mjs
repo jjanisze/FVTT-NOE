@@ -50,6 +50,8 @@
  * `migration/migrate-gear-graduation.mjs`.
  */
 
+import { TOOLKIT_CHECK_ACTIVITY_TYPE as TOOL_CHECK_ACTIVITY_TYPE } from "../items/toolkit-check-activity.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 
 /** Core Foundry icon used to make "this is a stub" visually obvious at a glance. */
@@ -135,6 +137,31 @@ export async function createGearPlaceholders(actor) {
  * @property {number} avail        Suggested availability % (informational only, see ammo-data.mjs's
  *   own field doc for the same convention).
  * @property {string} description  Full HTML description (own prose + RAW citation where one exists).
+ * @property {ToolSubstitute} [substitutes]  Sprzęt, który zastępuje zestaw narzędzi — patrz niżej.
+ */
+
+/**
+ * Sprzęt zastępujący zestaw narzędzi.
+ *
+ * Podręcznik zna przedmioty, które nie są zestawem narzędzi, ale pozwalają robić to samo, co on
+ * („Może zastąpić Narzędzia małego hakera"). Do tej pory ten zapis żył wyłącznie w prozie opisu,
+ * więc nie robił nic: przedmiot był bezczynnym `loot`-em, a karta Testu narzędzi i tak twierdziła
+ * „✘ brak zestawu w ekwipunku" — nawet postaci, która ten sprzęt trzymała w rękach.
+ *
+ * Wpis tutaj włącza dwie rzeczy naraz:
+ *   1. przedmiot powstaje jako `tool` z Aktywnościami Testu, po jednej na każdą akcję zestawu,
+ *      skojarzonymi (`check.associated`) z tym zestawem — czyli rzuca dokładnie te same testy,
+ *      z biegłością postaci w zastępowanym zestawie, jeśli ją ma;
+ *   2. `actors/tool-availability.mjs` uznaje go za posiadany zestaw.
+ *
+ * `baseItem` zostaje PUSTY, celowo. Gdyby przedmiot deklarował `baseItem: "hakera"`,
+ * `createToolkits()` (upsert po `type === "tool" && baseItem === kit.id`) nadpisałby go przy
+ * najbliższym uruchomieniu — zamieniając Laptop wojskowy w „Narzędzia małego hakera" razem
+ * z nazwą, ikoną, ceną i wagą. Skojarzenie żyje więc na aktywnościach i na fladze, nie na typie.
+ *
+ * @typedef {object} ToolSubstitute
+ * @property {string} toolkit  Id zestawu z `TOOLKITS` (i z `CONFIG.DND5E.tools`).
+ * @property {string} ability  Cecha domyślna dla testów.
  */
 
 /** @type {RealGear[]} */
@@ -181,6 +208,7 @@ export const REAL_GEAR = [
   {
     id: "laptop_wojskowy", label: "Laptop wojskowy", icon: "laptop_wojskowy.svg",
     price: 140, weight: 7, avail: 5,
+    substitutes: { toolkit: "hakera", ability: "int" },
     description:
       `<p><strong>Cena:</strong> 140 gb &nbsp;|&nbsp; <strong>Waga:</strong> 7 kg &nbsp;|&nbsp; <strong>Dostępność:</strong> 5%</p>`
       + `<p>Bateria wystarcza na 24 godziny pracy, a pancerna obudowa i najlepszej jakości podzespoły `
@@ -188,8 +216,12 @@ export const REAL_GEAR = [
       + `<p><strong>Otrzymujesz Ułatwienie do wykonywanych Testów Inteligencji z użyciem tego sprzętu. `
       + `Może zastąpić Narzędzia małego hakera</strong> — czyli pozwala podejmować próby: Otwarcie zamka `
       + `elektronicznego (ST 15), Zakłócenie działania maszyny Molocha (ST 20), Złamanie hasła dostępu `
-      + `(ST 20), nawet bez posiadania tego toolkitu. (Jak zawsze w tym module: Ułatwienie i zastępstwo `
-      + `narzędzi to coś, co włącza się ręcznie przy rzucie, nie automatyczny efekt).</p>`
+      + `(ST 20), nawet bez posiadania tego toolkitu — te trzy testy masz na tej karcie jako `
+      + `Aktywności i rzucasz je stąd. Liczy się przy nich twoja biegłość w Narzędziach małego `
+      + `hakera, jeśli ją masz: laptop zastępuje sprzęt, nie wyszkolenie. `
+      + `<em>Ułatwienie do Testów Inteligencji pozostaje ręczne</em> — jak każde Ułatwienie w tym `
+      + `module, włączasz je w oknie rzutu, bo tylko MG wie, czy dana czynność faktycznie „używa `
+      + `tego sprzętu".</p>`
       + `<p><em>Produkcja (Schematy hakerskie): ST 30, 140 godzin, 50 Części elektronicznych (CE), `
       + `1 Chemia (CH), 14 Części zamiennych (CZ), 5 Materiałów konstrukcyjnych (MK) — referencyjne, `
       + `crafting jeszcze nie jest zautomatyzowany.</em></p>`
@@ -212,9 +244,9 @@ function _realGearImg(gear) {
 
 /** Build the real Item data for one graduated gear entry. */
 export function buildRealGearItemData(gear) {
-  return {
+  const data = {
     name: gear.label,
-    type: "loot",
+    type: gear.substitutes ? "tool" : "loot",
     img: _realGearImg(gear),
     system: {
       description: { value: gear.description },
@@ -224,6 +256,43 @@ export function buildRealGearItemData(gear) {
     },
     flags: { [MODULE_ID]: { gearId: gear.id } }
   };
+
+  if (gear.substitutes) {
+    // Pusty `baseItem` jest wymuszony, nie przeoczony — patrz `ToolSubstitute` wyżej.
+    data.system.type = { value: "tool", baseItem: "" };
+    data.system.ability = gear.substitutes.ability;
+    data.system.proficient = null;
+    data.flags[MODULE_ID].substitutes = gear.substitutes.toolkit;
+  }
+  return data;
+}
+
+/**
+ * Aktywności Testu dla sprzętu zastępującego zestaw narzędzi: jeden ogólny test bez ST plus po
+ * jednym na każdą akcję zastępowanego zestawu. Kształt celowo taki sam jak `_buildCheckActivity`
+ * w `toolkits-data.mjs` — to ma rzucać identycznie jak prawdziwy zestaw, bo taki jest sens zapisu
+ * „może zastąpić".
+ *
+ * @param {RealGear} gear
+ * @param {{actions: {name: string, dc: number|null}[]}} kit  Wpis z `TOOLKITS`.
+ * @returns {object[]}
+ */
+export function buildSubstituteCheckActivities(gear, kit) {
+  const sub = gear.substitutes;
+  if (!sub || !kit) return [];
+  const build = ({ name, dc }) => ({
+    name,
+    description: { chatFlavor: dc == null ? name : `${name} (ST ${dc})` },
+    check: {
+      ability: sub.ability,
+      // To jest cała mechanika zastępstwa: test jest SKOJARZONY z zestawem, więc dnd5e
+      // wystawia przycisk testu narzędzi tego zestawu i liczy biegłość postaci w nim.
+      associated: [sub.toolkit],
+      dc: { calculation: "", formula: dc == null ? "" : String(dc) }
+    },
+    flags: { [MODULE_ID]: { substitutes: sub.toolkit } }
+  });
+  return [build({ name: "Test sprzętu", dc: null }), ...kit.actions.map(build)];
 }
 
 /**
@@ -248,7 +317,18 @@ export async function createRealGear(actor) {
   for ( const gear of REAL_GEAR ) {
     const data = buildRealGearItemData(gear);
     let item = actor.items.find(i => i.getFlag(MODULE_ID, "gearId") === gear.id);
-    if ( item ) {
+
+    // Zmiana typu przedmiotu nie przechodzi przez `.update()` — Foundry po cichu unieważnia
+    // wtedy CAŁE wywołanie, nie tylko pole `type` (udokumentowane w `migrate-pistolet-race.mjs`,
+    // `migrate-gear-graduation.mjs`, `items/kolczatka.mjs`, `items/gadzety.mjs`). Bez tej gałęzi
+    // odświeżenie Laptopa wojskowego, który przeszedł z `loot` na `tool`, milcząco nie robiłoby
+    // nic — łącznie z opisem i ceną, które akurat dałyby się zaktualizować.
+    if ( item && item.type !== data.type ) {
+      const [recreated] = await actor.createEmbeddedDocuments("Item", [data]);
+      await item.delete();
+      item = recreated;
+    }
+    else if ( item ) {
       // `.update()` deep-merges `flags` by default — it does NOT drop a stale key just because
       // the new data doesn't mention it. Confirmed live (2026-09-06): updating a migrated item
       // with `buildRealGearItemData`'s output left the old `craftingPlaceholder: true` flag
@@ -257,7 +337,36 @@ export async function createRealGear(actor) {
       await item.update(data);
     }
     else [item] = await actor.createEmbeddedDocuments("Item", [data]);
+
+    if ( gear.substitutes ) await syncSubstituteActivities(item, gear);
     result.set(gear.id, item);
   }
   return result;
+}
+
+/**
+ * Odtwórz Aktywności Testu na sprzęcie zastępującym zestaw narzędzi.
+ *
+ * Import `TOOLKITS` jest **dynamiczny celowo**: `toolkits-data.mjs` importuje ten plik
+ * (`createGearPlaceholders`/`createRealGear`), więc statyczny import w drugą stronę zamknąłby
+ * cykl i `TOOLKITS` byłoby `undefined` w czasie wykonania. Odłożenie go do wnętrza funkcji
+ * rozwiązuje cykl bez rozbijania któregokolwiek z tych plików na trzeci.
+ *
+ * @param {Item} item
+ * @param {RealGear} gear
+ */
+export async function syncSubstituteActivities(item, gear) {
+  const { TOOLKITS } = await import("./toolkits-data.mjs");
+  const kit = TOOLKITS.find(k => k.id === gear.substitutes.toolkit);
+  if ( !kit ) {
+    console.warn(`${MODULE_ID} | ${gear.label}: nieznany zestaw "${gear.substitutes.toolkit}"`);
+    return;
+  }
+
+  // Skasuj wszystko (w tym domyślną Aktywność dorzuconą przez dnd5e przy tworzeniu `tool`),
+  // potem odbuduj — ta sama kolejność co w `createToolkits`.
+  for ( const a of Array.from(item.system.activities) ) await item.deleteActivity(a.id);
+  for ( const activity of buildSubstituteCheckActivities(gear, kit) ) {
+    await item.createActivity(TOOL_CHECK_ACTIVITY_TYPE, activity, { renderSheet: false });
+  }
 }

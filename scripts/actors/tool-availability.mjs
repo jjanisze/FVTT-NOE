@@ -10,6 +10,15 @@
  * rules require the physical tools for complex tasks ("bez odpowiednich narzędzi
  * nie wykonasz skomplikowanych czynności"). Rolling from the item is therefore an
  * automatic "yes"; rolling from the proficiency list is verified against inventory.
+ *
+ * ## Zastępniki (2026-09-09)
+ *
+ * Podręcznik zna sprzęt, który nie jest zestawem narzędzi, ale go zastępuje — Laptop wojskowy
+ * „może zastąpić Narzędzia małego hakera". Sprawdzenie po samym `baseItem` tego nie widziało:
+ * Raynald, biegły w Narzędziach małego hakera i noszący laptop, dostawał na każdej karcie
+ * czerwone „✘ brak zestawu w ekwipunku". Wyglądało to jak stan gry („no fakt, nie mam
+ * zestawu"), a było ślepotą sprawdzenia. Zastępniki deklarują `flags.<moduł>.substitutes`
+ * (patrz `config/gear-data.mjs`, typedef `ToolSubstitute`) i liczą się tu na równi z zestawem.
  */
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -46,17 +55,26 @@ function _onRenderToolCheck(message, html) {
   const actor = _messageActor(message);
   if ( !actor ) return;
 
-  // Match tool kits in inventory by their base-item key.
+  // Match tool kits in inventory by their base-item key, and equipment that substitutes for them.
+  const has = i => (i.system.quantity ?? 1) >= 1;
   const kits = actor.items.filter(i =>
-    i.type === "tool" && i.system.type?.baseItem === toolId && (i.system.quantity ?? 1) >= 1
+    i.type === "tool" && i.system.type?.baseItem === toolId && has(i)
   );
-  const owns = kits.length > 0;
-  const equipped = kits.some(i => i.system.equipped);
+  const substitutes = actor.items.filter(i =>
+    i.getFlag(MODULE_ID, "substitutes") === toolId && has(i)
+  );
+
+  const all = [...kits, ...substitutes];
+  const owns = all.length > 0;
+  const equipped = all.some(i => i.system.equipped);
 
   let bg, border, fg, text;
   if ( owns ) {
     bg = "rgba(60,160,60,.15)"; border = "#3ca03c"; fg = "#8ee08e";
-    text = equipped ? "masz zestaw" : "masz zestaw <span style=\"opacity:.7\">(w plecaku)</span>";
+    // Zastępnik nazywamy po imieniu — inaczej „masz zestaw" przy pustym slocie zestawu
+    // wygląda jak błąd, a nie jak działająca zasada.
+    const label = kits.length ? "masz zestaw" : `zastępuje: ${substitutes[0].name}`;
+    text = equipped ? label : `${label} <span style="opacity:.7">(w plecaku)</span>`;
   } else {
     bg = "rgba(180,40,40,.15)"; border = "#b02828"; fg = "#f0a0a0";
     text = "brak zestawu w ekwipunku";

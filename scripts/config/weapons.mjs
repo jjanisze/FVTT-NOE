@@ -36,6 +36,30 @@ const NEURO_WEAPON_TYPE_MAP = {
 };
 
 /* -------------------------------------------- */
+/*  Property lookup                               */
+/* -------------------------------------------- */
+
+/**
+ * Czy broń ma daną właściwość Neuroshimy.
+ *
+ * `system.properties` bywa Setem albo tablicą zależnie od tego, czy przedmiot przeszedł już
+ * przez model danych, czy jest surowym obiektem z `toObject()`/paczki — dokładnie ta sama
+ * pułapka co `damage.parts[].types` (ARCHITECTURE.md §10). Sprawdzanie `.has()` bez tego
+ * rozgałęzienia cicho zwraca `false` na połowie ścieżek.
+ *
+ * @param {Item5e|object} item
+ * @param {string} key
+ * @returns {boolean}
+ */
+export function hasWeaponProperty(item, key) {
+  const properties = item?.system?.properties;
+  if (!properties) return false;
+  if (typeof properties.has === "function") return properties.has(key);
+  if (Array.isArray(properties)) return properties.includes(key);
+  return false;
+}
+
+/* -------------------------------------------- */
 /*  Weapon properties — Neuroshima additions      */
 /* -------------------------------------------- */
 
@@ -67,6 +91,13 @@ const NEURO_WEAPON_PROPERTIES = {
   // --- All ranged --------------------------------------------------
   cicha:             { label: "Cicha" },             // silent; doesn't break invisibility at 18m+
   ppanc:             { label: "Ppanc." },            // ignores resistance & damage threshold
+
+  // --- Nadawane przez amunicję, nie przez samą broń ----------------
+  // Obie trafiają do `system.properties` przez `props` kalibru (weapons/ammo.mjs sync) i znikają
+  // razem ze zmianą kalibru. Są w katalogu, bo bez wpisu tutaj dnd5e nie ma etykiety i karta
+  // przedmiotu wywala się przy renderowaniu listy właściwości.
+  rozrywajaca:       { label: "Rozrywająca" },       // con save or Krwawienie (dum-dum)
+  hollowpoint:       { label: "Hollow-point" },      // osłona z redukcją zatrzymuje pocisk
 
   // --- Firearms (palna*) only ------------------------------------
   wmag:              { label: "Wmag." },             // internal magazine (non-removable)
@@ -134,6 +165,7 @@ const WEAPON_TYPE_PROPERTIES = {
     "tryb_p", "tryb_ks", "tryb_oz",
     "cicha", "co", "dublet", "jednorazowa", "ladowanie",
     "obalajaca", "poreczna", "ppanc", "przeladowanie", "sm",
+    "hollowpoint", "rozrywajaca",   // z amunicji dum-dum
   ]),
 
   // Palna Pośrednia — rifles, shotguns, standard SMGs
@@ -142,6 +174,7 @@ const WEAPON_TYPE_PROPERTIES = {
     "tryb_p", "tryb_ks", "tryb_ds", "tryb_oz",
     "cicha", "co", "dluga", "dublet", "jednorazowa", "ladowanie",
     "obalajaca", "poreczna", "ppanc", "przeladowanie", "sm",
+    "hollowpoint", "rozrywajaca",   // z amunicji dum-dum
   ]),
 
   // Palna Długa — sniper rifles, designated marksman rifles
@@ -150,6 +183,7 @@ const WEAPON_TYPE_PROPERTIES = {
     "tryb_p", "tryb_ks", "tryb_ds", "tryb_oz",
     "cicha", "ciezka", "co", "dluga", "dublet", "jednorazowa", "ladowanie",
     "obalajaca", "ppanc", "przeladowanie", "sm",
+    "hollowpoint", "rozrywajaca",   // z amunicji dum-dum
   ]),
 
   // Palna Ciężka — machine guns, rocket launchers, heavy support weapons
@@ -250,6 +284,8 @@ const WEAPON_PROPERTY_TOOLTIPS = {
   poreczna: "Z broni można strzelać jedną ręką bez Utrudnienia do ataku.",
   przeladowanie: "Trzeba przeładować po strzale. Wymaga darmowej interakcji lub Akcji Bonusowej.",
   ppanc: "Przeciwpancerna. Ignoruje Odporności na obrażenia i Progi obrażeń.",
+  rozrywajaca: "Trafiona istota żywa bez redukcji/odporności/niewrażliwości na kłute wykonuje RO na Kondycję ST 14, inaczej zaczyna Krwawić (1k8 na początku swojej tury).",
+  hollowpoint: "Pocisk rozpłaszcza się na przeszkodzie. Osłona o niezerowej redukcji obrażeń zatrzymuje go całkowicie - przez osłonę nie da się nim trafić.",
   sm: "Szyna montażowa. Do broni można zamontować ulepszenia.",
   wmag: "Magazynek wewnętrzny, niewymienny. Załadowanie pojedynczego naboju to akcja Używanie.",
   beb: "Bębenek. Przeładowanie całego bębenka lub jednego naboju to akcja Używanie.",

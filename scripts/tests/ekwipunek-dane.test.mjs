@@ -42,7 +42,8 @@ import { TOOLKITS, buildToolkitItemData, createToolkits, MEDYK_MAX_CHARGES } fro
 import { CHEMIA, CHEMIA_TYPE, CHEMIA_SUBTYPES, chemiaKeyByName, chemiaItemData } from "../config/chemia-data.mjs";
 import { ALL_DISEASES } from "../config/diseases-data.mjs";
 import {
-  GEAR_PLACEHOLDERS, REAL_GEAR, buildGearItemData, buildRealGearItemData, createRealGear
+  GEAR_PLACEHOLDERS, REAL_GEAR, buildGearItemData, buildRealGearItemData, createRealGear,
+  buildSubstituteCheckActivities
 } from "../config/gear-data.mjs";
 import {
   isKolczatka, buildKolczatkaItemData, createKolczatkaItem, ensureKolczatkaActivities,
@@ -59,6 +60,12 @@ import {
   isMedykRefill, buildMedykRefillItemData, createMedykRefillItem, ensureMedykRefillActivities,
   useMedykRefill
 } from "../items/toolkit-medyk.mjs";
+import { GADZETY, gadzetKeyFor, buildGadzetItemData } from "../items/gadzety.mjs";
+import {
+  PROWIANT_CATEGORIES, PROWIANT_CATALOG, PROWIANT_CATALOG_MAP,
+  getProwiantCategory, buildProwiantItemData
+} from "../config/prowiant-data.mjs";
+import { BATERIE_ITEM } from "../items/baterie.mjs";
 import { MODULE_ID, scratchActor, scratchCleanup } from "./helpers.mjs";
 
 /** Jedno zapytanie HEAD na plik; wyniki cache'owane, bo ikony się powtarzają. */
@@ -994,6 +1001,280 @@ export function registerEquipmentDataTests(quench) {
         // implementacyjny znacznika wybuchu, nie coś, na czym scorch mark ma polegać (patrz
         // doc comment `_spawnScorchMark`). Sprawdzamy więc tylko rząd wielkości.
         expect(SCORCH_MARK_LIFETIME_SECONDS).to.be.above(60 * 60 * 24 * 30); // > miesiąc gry
+      });
+    });
+
+    /* ================================================================ */
+
+    describe("Gadżety — przedmioty smaczkowe z SFX", function () {
+      it("każdy gadżet ma swój plik dźwiękowy na dysku", async function () {
+        for (const [key, def] of Object.entries(GADZETY)) {
+          const path = `modules/${MODULE_ID}/sounds/gadzety/${def.sound}`;
+          expect(await assetExists(path), `${key}: ${path}`).to.be.true;
+        }
+      });
+
+      // Nazwy wzięte żywcem z kart drużyny — to one mają się rozpoznawać, nie te z katalogu.
+      it("rozpoznaje realne nazwy z kart postaci", function () {
+        const cases = {
+          "Gumowa kaczuszka żółta": "kaczuszka",
+          "Krótkofalówka": "krotkofalowka",
+          "Krótkofalówka policyjna": "krotkofalowka",
+          "Przemysłowy środek do dezynfekcji": "dezynfekcja",
+          "długopis": "dlugopis"
+        };
+        for (const [name, expected] of Object.entries(cases)) {
+          expect(gadzetKeyFor({ name, type: "loot" }), name).to.equal(expected);
+        }
+      });
+
+      it("nie łapie niepowiązanych przedmiotów", function () {
+        for (const name of ["Latarka", "Kastet", "Konserwa", "Bateria", "Krawat z dziurą"]) {
+          expect(gadzetKeyFor({ name, type: "loot" }), name).to.equal(null);
+        }
+      });
+
+      it("flaga wygrywa z nazwą", function () {
+        const item = { name: "Coś zupełnie innego", flags: { [MODULE_ID]: { gadzet: "kaczuszka" } } };
+        expect(gadzetKeyFor(item)).to.equal("kaczuszka");
+      });
+
+      // `loot` nie może nieść Aktywności w dnd5e — to jedyny powód zmiany typu.
+      it("buduje consumable z dokładnie jedną oflagowaną aktywnością", function () {
+        for (const key of Object.keys(GADZETY)) {
+          const data = buildGadzetItemData(key);
+          expect(data.type, key).to.equal("consumable");
+          const acts = Object.values(data.system.activities);
+          expect(acts, key).to.have.length(1);
+          expect(acts[0].flags[MODULE_ID].gadzet, key).to.equal(key);
+          expect(acts[0].name, key).to.equal(GADZETY[key].use);
+        }
+      });
+
+      // Regresja, która by bolała najbardziej: kaczuszka znikająca po pierwszym pisknięciu.
+      it("użycie nie zjada przedmiotu — brak konsumpcji i brak ładunków", function () {
+        for (const key of Object.keys(GADZETY)) {
+          const data = buildGadzetItemData(key);
+          const act = Object.values(data.system.activities)[0];
+          expect(act.consumption.targets, key).to.deep.equal([]);
+          expect(data.system.uses, `${key} nie powinien mieć uses`).to.equal(undefined);
+        }
+      });
+
+      it("dziedziczy nazwę, ikonę i ilość z konwertowanego przedmiotu", function () {
+        const source = {
+          name: "Gumowa kaczuszka żółta",
+          img: "modules/x/kaczka.svg",
+          system: { quantity: 3, price: { value: 7, denomination: "gb" } }
+        };
+        const data = buildGadzetItemData("kaczuszka", source);
+        expect(data.name).to.equal(source.name);
+        expect(data.img).to.equal(source.img);
+        expect(data.system.quantity).to.equal(3);
+        expect(data.system.price.value).to.equal(7);
+      });
+
+      // Domyślny promień w `seqPlayAudio` to 50 m — zasięg wystrzału. Żaden z tych
+      // przedmiotów nie ma się nieść przez pół mapy.
+      it("każdy ma własny promień słyszalności, mniejszy niż zasięg wystrzału", function () {
+        for (const [key, def] of Object.entries(GADZETY)) {
+          expect(def.radius, key).to.be.a("number").and.to.be.above(0).and.to.be.below(50);
+        }
+      });
+
+      it("każdy ma czasownik jako etykietę i co najmniej dwie linijki smaczku", function () {
+        for (const [key, def] of Object.entries(GADZETY)) {
+          expect(def.use, key).to.be.a("string").and.to.have.length.above(0);
+          expect(def.use, `${key}: etykieta ma być czynnością`).to.not.equal("Użyj");
+          expect(def.flavour, key).to.have.length.of.at.least(2);
+          // Nie KAŻDA linijka musi nazywać postać — karta czatu i tak niesie mówcę, a linijka
+          // typu „Ktoś w pokoju właśnie zacisnął zęby" jest lepsza właśnie dlatego, że nie
+          // wskazuje palcem. Wystarczy, żeby podstawienie `{a}` było gdziekolwiek używane,
+          // bo to ono jest kodem, który może się zepsuć.
+          expect(def.flavour.some(l => l.includes("{a}")), `${key}: żadna linijka nie używa {a}`)
+            .to.be.true;
+        }
+      });
+    });
+
+    /* ================================================================ */
+
+    describe("Prowiant", function () {
+      it("każda pozycja katalogu ma istniejącą ikonę", async function () {
+        for (const entry of PROWIANT_CATALOG) {
+          expect(await assetExists(entry.icon), `${entry.id}: ${entry.icon}`).to.be.true;
+        }
+      });
+
+      it("identyfikatory są unikalne, a kategorie znane", function () {
+        expect(duplicates(PROWIANT_CATALOG.map(e => e.id))).to.be.empty;
+        const known = new Set(PROWIANT_CATEGORIES.map(c => c.id));
+        for (const entry of PROWIANT_CATALOG) {
+          expect(known.has(entry.category), `${entry.id} → ${entry.category}`).to.be.true;
+        }
+      });
+
+      it("ceny, wagi i dostępność są sensowne", function () {
+        for (const entry of PROWIANT_CATALOG) {
+          expect(entry.price, entry.id).to.be.a("number").and.to.be.at.least(0);
+          expect(entry.weight, entry.id).to.be.a("number").and.to.be.above(0);
+          expect(entry.avail, entry.id).to.be.within(0, 100);
+        }
+      });
+
+      it("zbudowany przedmiot ma walutę gb i dodatnią wagę", function () {
+        for (const entry of PROWIANT_CATALOG) {
+          const data = buildProwiantItemData(entry.id, 2);
+          expect(data.type, entry.id).to.equal("loot");
+          expect(data.system.price.denomination, entry.id).to.equal("gb");
+          expect(data.system.quantity, entry.id).to.equal(2);
+          expect(data.system.weight.value, entry.id).to.be.above(0);
+        }
+      });
+
+      // Powód rozszerzenia wzorca: "Jerky" nie pasowało do niczego, więc jedzenie o
+      // nietypowej nazwie było niewidoczne dla licznika dni zapasu.
+      it("rozpoznaje jedzenie o nietypowych nazwach, w tym Jerky", function () {
+        const food = ["Konserwa", "Jerky", "Mięso suszone (1 kg)", "Racja wojskowa MRE (1 dzień)",
+                      "Batonik Jupiter", "Herbatniki (opakowanie)", "Liofilizowana żywność (1 kg)",
+                      "Suszone owoce"];
+        for (const name of food) {
+          const cat = getProwiantCategory({ type: "loot", name });
+          expect(cat?.id, name).to.equal("jedzenie");
+        }
+      });
+
+      it("rozpoznaje wodę, łącznie z manierką", function () {
+        for (const name of ["Litr Wody", "Woda filtrowana (1 l)", "Woda brudna (1 l)", "Manierka"]) {
+          const cat = getProwiantCategory({ type: "loot", name });
+          expect(cat?.id, name).to.equal("woda");
+        }
+      });
+
+      it("nie zagarnia przedmiotów spoza kategorii", function () {
+        for (const name of ["Kastet", "Latarka", "Krawat z dziurą", "Baterie", "Kamizelka Płytowa"]) {
+          expect(getProwiantCategory({ type: "loot", name }), name).to.equal(null);
+        }
+      });
+
+      // Lek jest już liczony przez panel Leków — podwójne liczenie zawyżałoby dni zapasu.
+      it("nie liczy jako prowiantu czegoś, co należy do Chemii", function () {
+        const item = {
+          type: "consumable",
+          name: "Kawa (0,5 kg)",
+          getFlag: (scope, key) => (scope === MODULE_ID && key === "chemiaKey" ? "kawa" : undefined)
+        };
+        expect(getProwiantCategory(item)).to.equal(null);
+      });
+
+      it("progi dzienne są zgodne z Tabelą Żywności", function () {
+        const byId = Object.fromEntries(PROWIANT_CATEGORIES.map(c => [c.id, c]));
+        expect(byId.jedzenie.dailyThreshold).to.equal(0.5);
+        expect(byId.woda.dailyThreshold).to.equal(2);
+      });
+
+      it("katalog pokrywa obie kategorie", function () {
+        for (const cat of PROWIANT_CATEGORIES) {
+          expect(PROWIANT_CATALOG.filter(e => e.category === cat.id), cat.id)
+            .to.have.length.of.at.least(1);
+        }
+        expect(PROWIANT_CATALOG_MAP.mieso_suszone, "jerky musi być kupowalne").to.be.an("object");
+      });
+    });
+
+    /* ================================================================ */
+
+    describe("Zastępniki zestawów narzędzi", function () {
+      const substitutes = () => REAL_GEAR.filter(g => g.substitutes);
+
+      it("istnieje co najmniej jeden (Laptop wojskowy)", function () {
+        expect(substitutes().map(g => g.id)).to.include("laptop_wojskowy");
+      });
+
+      it("zastępowany zestaw istnieje i w katalogu, i w CONFIG.DND5E.tools", function () {
+        for (const gear of substitutes()) {
+          const id = gear.substitutes.toolkit;
+          expect(TOOLKITS.find(k => k.id === id), `${gear.id} → ${id}`).to.be.an("object");
+          // Bez wpisu w `tools` dnd5e wystawiłby przycisk zwykłego Testu Cechy zamiast
+          // Testu narzędzi — czyli bez biegłości postaci w zestawie.
+          expect(CONFIG.DND5E.tools?.[id], `CONFIG.DND5E.tools.${id}`).to.exist;
+        }
+      });
+
+      it("cecha zastępnika jest prawidłowym kluczem Cechy", function () {
+        for (const gear of substitutes()) {
+          expect(CONFIG.DND5E.abilities?.[gear.substitutes.ability], gear.id).to.exist;
+        }
+      });
+
+      it("powstaje jako `tool`, a zwykły sprzęt dalej jako `loot`", function () {
+        for (const gear of substitutes()) {
+          expect(buildRealGearItemData(gear).type, gear.id).to.equal("tool");
+        }
+        for (const gear of REAL_GEAR.filter(g => !g.substitutes)) {
+          expect(buildRealGearItemData(gear).type, gear.id).to.equal("loot");
+        }
+      });
+
+      // Regresja o realnej cenie: gdyby zastępnik deklarował `baseItem` zastępowanego zestawu,
+      // `createToolkits()` (upsert po `type === "tool" && baseItem === kit.id`) nadpisałby go
+      // przy najbliższym uruchomieniu — Laptop wojskowy zamieniłby się w „Narzędzia małego
+      // hakera" razem z nazwą, ikoną, ceną i wagą.
+      it("NIE przejmuje baseItem zastępowanego zestawu", function () {
+        for (const gear of substitutes()) {
+          const data = buildRealGearItemData(gear);
+          expect(data.system.type.baseItem, gear.id).to.equal("");
+          expect(data.system.type.baseItem, gear.id).to.not.equal(gear.substitutes.toolkit);
+        }
+      });
+
+      it("niesie flagę zastępstwa, po której poznaje go karta Testu narzędzi", function () {
+        for (const gear of substitutes()) {
+          const data = buildRealGearItemData(gear);
+          expect(data.flags[MODULE_ID].substitutes, gear.id).to.equal(gear.substitutes.toolkit);
+          expect(data.system.ability, gear.id).to.equal(gear.substitutes.ability);
+        }
+      });
+
+      it("dostaje test ogólny plus po jednym na każdą akcję zestawu", function () {
+        for (const gear of substitutes()) {
+          const kit = TOOLKITS.find(k => k.id === gear.substitutes.toolkit);
+          const acts = buildSubstituteCheckActivities(gear, kit);
+          expect(acts, gear.id).to.have.length(kit.actions.length + 1);
+          expect(acts[0].check.dc.formula, "test ogólny nie ma ST").to.equal("");
+        }
+      });
+
+      it("każdy test jest skojarzony z zastępowanym zestawem i ma jego ST", function () {
+        for (const gear of substitutes()) {
+          const kit = TOOLKITS.find(k => k.id === gear.substitutes.toolkit);
+          const acts = buildSubstituteCheckActivities(gear, kit);
+          for (const act of acts) {
+            expect(act.check.associated, `${gear.id}/${act.name}`).to.deep.equal([kit.id]);
+            expect(act.check.ability, `${gear.id}/${act.name}`).to.equal(gear.substitutes.ability);
+          }
+          for (const action of kit.actions) {
+            const act = acts.find(a => a.name === action.name);
+            expect(act, `${gear.id}: brak akcji ${action.name}`).to.exist;
+            expect(act.check.dc.formula, action.name).to.equal(String(action.dc));
+          }
+        }
+      });
+
+      it("bez wpisu `substitutes` nie buduje żadnych aktywności", function () {
+        const plain = REAL_GEAR.find(g => !g.substitutes);
+        expect(buildSubstituteCheckActivities(plain, TOOLKITS[0])).to.deep.equal([]);
+      });
+    });
+
+    describe("Baterie", function () {
+      // Podręcznik nazywa je "bardzo drogimi"; przy 5 gb kosztowały tyle co sidła.
+      it("kosztują tyle, ile decyzja MG z 2026-09-08", function () {
+        expect(BATERIE_ITEM.price).to.equal(20);
+      });
+
+      it("są tańsze niż dodatek Latarka + baterie, który je zawiera", function () {
+        expect(BATERIE_ITEM.price).to.be.below(35);
       });
     });
   }, { displayName: "Neuroshima: Ekwipunek — integralność tabel" });

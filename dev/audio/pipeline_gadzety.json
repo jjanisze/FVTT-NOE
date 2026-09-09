@@ -1,0 +1,30 @@
+{
+    "version": "1.0",
+    "capabilities": ["download", "normalize", "trim", "convert"],
+    "sounds": [
+        {
+            "name": "kaczuszka",
+            "sourceUrl": "https://cdn.freesound.org/previews/350/350917_1147184-hq.ogg",
+            "outputFilePath": "../../sounds/gadzety/kaczuszka.ogg",
+            "parameters": { "lufs": -18, "lra": 11, "tp": -1.5, "trimStart": 0.09, "trimDuration": 0.6 }
+        },
+        {
+            "name": "krotkofalowka",
+            "sourceUrl": "https://cdn.freesound.org/previews/321/321906_1755779-hq.ogg",
+            "outputFilePath": "../../sounds/gadzety/krotkofalowka.ogg",
+            "parameters": { "lufs": -18, "lra": 11, "tp": -1.5, "trimStart": 0, "trimDuration": 0.35 }
+        },
+        {
+            "name": "dezynfekcja",
+            "sourceUrl": "https://cdn.freesound.org/previews/516/516815_8956746-hq.ogg",
+            "outputFilePath": "../../sounds/gadzety/dezynfekcja.ogg",
+            "parameters": { "lufs": -18, "lra": 11, "tp": -1.5, "trimStart": 0.6, "trimDuration": 1.85 }
+        },
+        {
+            "name": "dlugopis",
+            "sourceUrl": "https://cdn.freesound.org/previews/499/499190_10822186-hq.ogg",
+            "outputFilePath": "../../sounds/gadzety/dlugopis.ogg",
+            "parameters": { "lufs": -18, "lra": 11, "tp": -1.5, "trimStart": 2.13, "trimDuration": 0.68 }
+        }
+    ]
+}
