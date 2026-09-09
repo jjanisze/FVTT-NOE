@@ -4144,3 +4144,58 @@ LevelDB odmówiło z powodu działającego FVTT.
 Piekarz: 48 → 45 pozycji. Kier: bez zmian (5 pozycji, w tym klasa). Testy modułu nie dotyczą
 danych na aktorach — nie uruchamiane. Wersja modułu bez zmian (`0.14.26`) — czysto dane, zero
 kodu.
+
+## Zmiany z 10 września 2026 (28) — Sprzątnięcie 550 sierocych Itemów światowych po imporcie z Roll20
+
+Domknięcie wątku „nietknięte" z (26): katalog Przedmiotów świata miał 824 pozycje, z czego
+duża część okazywała się resztkami importu, nie realną treścią. Ta sesja to zamknęła w
+całości, jednym cięciem zamiast stopniowego sprzątania.
+
+### Diagnoza — 550, nie 539, i już posprzątane w foldery
+
+Reguła: nazwa Itemu pasuje do `Coś (Nazwa Aktora)`, gdzie `Nazwa Aktora` odpowiada realnemu
+aktorowi w świecie. To dało **550** trafień (poprzednia liczba z (26), 539, była zgrubnym
+szacunkiem po samej ikonie-portrecie — 422 z 550 rzeczywiście nosiło portret, reszta nie, ale
+i tak była tym samym importowym sierotą).
+
+Kluczowe odkrycie: sześć folderów kolekcji Itemów — `Loot (PC)` (179), `Abilities & Feats
+(NPC)` (147), `Abilities & Feats (PC)` (92), `Weapons (NPC)` (81), `Weapons (PC)` (46),
+`Spells (PC)` (1) — było **stuprocentowo czyste**: każda pozycja w każdym z nich pasowała do
+wzorca, zero prawdziwej treści wymieszanej w środku. Plus 4 luźne sztuki poza folderami
+(`Kałach (GANGUS CAPO/Karambol) (Recovered)` — po dwie na aktora). 546 + 4 = 550, dokładnie.
+Katalogi broni/amunicji (`Broń palna…`, `Amunicja`, `Magazynki`, `Granaty`, `Narzędzia`) i
+rekwizyty kart (`Playing Cards` 54, `Blackjack` 52, `Safety Deck` 3) to osobne, realne foldery
+— żaden z nich nie zawierał ani jednej pozycji pasującej do wzorca.
+
+### Dlaczego to było bezpieczne — 11 sprawdzonych ścieżek odwołań, zero trafień
+
+Item światowy tego typu jest **odłączoną kopią**, nie źródłem: żaden z 550 nie miał
+`flags.core.sourceId` ani `_stats.compendiumSource`, więc kasowanie ich nie dotyka
+jakiegokolwiek Itemu faktycznie osadzonego na aktorze — to całkowicie inny dokument. Zanim
+skasowano cokolwiek, sprawdzono na żywo, czy coś w świecie odwołuje się do tych 550 ID:
+polecenia makr, wyniki tabel losowych, treść stron dziennika, notatki na scenach, kafle i
+rysunki na scenach, historia czatu (1327 wiadomości), `sourceId`/`origin` Itemów i Efektów na
+aktorach, opisy HTML Itemów (w obie strony — z aktora do sieroty i sierotu do sieroty), oraz
+zduplikowane nazwy folderów (czy dwa różne foldery o tej samej nazwie mogłyby wymieszać
+wyniki — nie, każda nazwa odpowiadała dokładnie jednemu ID folderu). **Zero trafień na
+wszystkich jedenastu ścieżkach.**
+
+### Wykonanie
+
+Pełny zrzut JSON wszystkich 550 dokumentów (`item.toObject()`) zapisany przed kasowaniem do
+`worlds/output/data/_backups/world-items-leftover-cleanup-2026-09-10.json` — offline'owy MCP
+LevelDB nie miał w ogóle narzędzia do kasowania (`foundry_update_document` robi tylko shallow
+merge), więc jedyną drogą i tak było `Item.deleteDocuments()` na żywym świecie przez Chrome
+DevTools MCP. `824 → 274` po jednym wywołaniu, dokładnie tyle, ile przewidywała diagnoza.
+
+### Znalezione przy okazji, nietknięte
+
+Dwaj odrębni aktorzy, `Mobsprzęt Karabin` i `Copy of Mobsprzęt Karabin`, generowali osobne
+komplety sierocych Itemów — wygląda na przypadkowe zduplikowanie aktora przy imporcie, nie na
+problem higieny Itemów. Nie ruszane, osobna sprawa.
+
+### Stan końcowy
+
+Katalog Przedmiotów świata: **824 → 274**, wszystkie 274 to realna treść (katalogi broni,
+tryby, kompendium sprzętu, talie kart). Wersja modułu bez zmian (`0.14.26`) — czysto dane,
+zero kodu modułu.
