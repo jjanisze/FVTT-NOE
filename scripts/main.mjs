@@ -91,6 +91,9 @@ import { registerMapProps, mapPropsApi } from "./scenes/map-props.mjs";
 import { registerMapSync, mapSyncApi } from "./scenes/map-sync.mjs";
 import { registerMapWatch, mapWatchApi } from "./scenes/map-watch.mjs";
 import { registerDifficultTerrainHint, difficultTerrainHintApi } from "./scenes/difficult-terrain-hint.mjs";
+import { poscigApi } from "./scenes/poscig.mjs";
+import { registerPoscigCanvas, poscigCanvasApi } from "./scenes/poscig-canvas.mjs";
+import { registerPoscigUI, poscigUiApi } from "./scenes/poscig-ui.mjs";
 import { openTracerDebugPanel, registerTracerDebugPanelControls } from "./weapons/tracer-debug-panel.mjs";
 import { openSoundDebugPanel, registerSoundDebugPanelControls } from "./weapons/sound-debug-panel.mjs";
 import { registerAmmoSystem } from "./weapons/ammo.mjs";
@@ -153,6 +156,7 @@ Hooks.once("init", () => {
   // toolbar's first render — getSceneControlButtons can fire as early as canvasReady.
   registerTracerDebugPanelControls();
   registerSoundDebugPanelControls();
+  registerPoscigUI();
 
   // Phase 1: CONFIG overrides
   registerSettings();
@@ -444,6 +448,12 @@ Hooks.once("ready", () => {
   registerMapSync();
   game.neuroshima.maps = { ...mapSyncApi, ...mapWatchApi };
   game.neuroshima.trudnyTeren = difficultTerrainHintApi;
+
+  // Plansza pościgu — game.neuroshima.poscig.start({ scigani: ["GMT400"], ... })
+  // Warstwa graficzna (przewijana pustynia + tory) budzi się sama na scenie z flagą pościgu.
+  // Przycisk MG w narzędziach sceny rejestruje się w `init` (wyżej) — tutaj tylko API.
+  registerPoscigCanvas();
+  game.neuroshima.poscig = { ...poscigApi, ...poscigUiApi, tlo: poscigCanvasApi };
 
   // Karta drużyny — game.neuroshima.podroz.openBiomePicker(actor), .zapasy.hunt(grupa)
   game.neuroshima.podroz = travelApi;

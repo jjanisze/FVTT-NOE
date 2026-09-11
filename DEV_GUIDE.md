@@ -42,7 +42,7 @@ neuroshima-2026-overrides/
 │   ├── actors/                # Panele/warstwy per-aktor (zdrowie, PD, PW, hotbar zdolności...)
 │   ├── combat/                 # Hooki walki (Zranienie, Krwawienie, Spadanie, cover, save properties...)
 │   ├── weapons/                 # Amunicja, magazynki, tryby ognia, VFX/audio, ulepszenia
-│   ├── scenes/                   # Warstwa map (propy, sync z Tiled, trudny teren)
+│   ├── scenes/                   # Warstwa map (propy, sync z Tiled, trudny teren) + plansza pościgu (poscig*.mjs)
 │   └── migration/                 # Migracje jednorazowe (część .mjs importowane, część .js do wklejenia w konsolę GM)
 ├── styles/
 │   └── neuroshima.css        # Stylesheet — waliduj po KAŻDEJ edycji (patrz 2.5)

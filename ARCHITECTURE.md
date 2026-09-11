@@ -187,6 +187,51 @@ immediately after a mutation without also confirming via a fresh, independent re
 (ideally after a full page reload) before concluding data was lost — the read itself
 may be the bug, not the write.
 
+### 11. Generated Scenes and Custom Canvas Layers Fail Silently in v14
+
+Four traps found on 2026-09-11 building the Pościgi chase board (`scenes/poscig*.mjs`).
+Grouped here rather than left in that feature's plan because **none of them is specific to
+chases** — every one bites the next generated scene or the next custom canvas layer.
+The common shape: correct-looking code, correct-looking inspection, **zero console output**.
+
+- **A scene built in code needs `levels[0]._id = "defaultLevel0000"`, or it has no tokens
+  at all.** Every token belongs to a Level (`TokenDocument#level`) and that field's `initial`
+  is the literal `BaseScene.metadata.defaultLevelId`. A level created without an explicit
+  `_id` gets a random one, so every token points at a level that does not exist. Symptom:
+  `scene.tokens` returns the documents perfectly, `canvas.tokens.placeables` is **empty**,
+  the canvas is blank, nothing is logged. Foundry's own scene creation uses that same
+  constant (`client/documents/scene.mjs`) — matching it is conformance, not a workaround.
+
+- **The scene background colour is a painted object, so nothing custom can hide "below"
+  `canvas.primary`.** A scene with no background *image* does not leave empty space:
+  `canvas.primary.background` is a `PrimarySpriteMesh` filling the whole scene rect with
+  `levels[0].background.color`, drawn *after* anything mounted at `canvas.stage` index 0.
+  A layer there renders **nothing** while every check passes (right size, `worldVisible`,
+  children present). Anything meant to sit behind tokens but stay visible belongs in
+  `canvas.primary`, ordered by `PrimaryCanvasGroup._compareObjects` —
+  `elevation`, then `sortLayer`, then `sort`, then `zIndex`. Use
+  `PrimaryCanvasGroup.SORT_LAYERS` (`SCENE: 0, TILES: 500, DRAWINGS: 600, TOKENS: 700,
+  WEATHER: 1000`); **`elevation` must equal the background's `0`**, because a difference
+  there settles the comparison before `sortLayer` is ever read.
+
+- **Scene-control buttons must be registered in `init`, never in `ready`.**
+  `SceneControls#_configureRenderOptions` rebuilds the tool set — and fires
+  `getSceneControlButtons` — only on `isFirstRender` or `options.reset`. A hook registered
+  in `ready` misses the first render, and **`ui.controls.render()` will not rescue it**,
+  because a plain render does not re-derive tools. The hook sits correctly in `Hooks.events`
+  and does the right thing when called by hand, which makes this read as anything but a
+  timing problem. To refresh a context-dependent label later, use
+  `ui.controls.render({ reset: true })`; the active control and selected tool live in
+  separate state (`#control` / `#tools`) and survive the reset.
+
+- **`PIXI.TilingSprite` needs an explicit `texture.baseTexture.wrapMode = REPEAT`.**
+  The default CLAMP bleeds the edge pixel column into the neighbouring tile — a thin
+  vertical line travelling across the layer, most visible where the texture is transparent.
+  Do not rely on the driver inferring it; a texture whose height is not a power of two makes
+  that inference unreliable. Second, independent source of the same artefact: a canvas path
+  ending exactly on the tile boundary is antialiased against nothing, so procedural tile art
+  must overdraw past both edges.
+
 ## Dokumentacja towarzysząca
 | Plik | Zawartość |
 |---|---|

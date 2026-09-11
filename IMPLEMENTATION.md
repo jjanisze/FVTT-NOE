@@ -846,7 +846,20 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   w `EXHAUSTION_SOURCES` i żadnej automatyki
 - [~] Rest activities — **polowanie i gotowanie zrobione** (`party-supplies.mjs`: `hunt()` — 1 h,
   Test Mądrości (Sztuka przetrwania) ST 15; `cook()`). Zostają: plotki i czyszczenie sprzętu
-- [ ] Vehicles (actor type + combat + chase system)
+- [~] Vehicles (actor type + combat + chase system) — projekt: [PLAN_poscigi.md](PLAN_poscigi.md)
+  (2026-09-11). **Zrobione:** `config/vehicles-data.mjs` (14 podwozi z tabeli s. 262, środowiska
+  pościgu, stałe zasad); `scenes/poscig.mjs` + `scenes/poscig-canvas.mjs` — generowana plansza
+  pościgu (gridless, 1 znacznik = 36 m = 200 px, proceduralna pustynia z trójwarstwową paralaksą
+  w `canvas.primary`, 12 numerowanych torów, dolna strefa swobodna na warstwę Rysunków MG);
+  GMT400 przestawiony na podwozie Hammer (PW 180 zostaje — decyzja MG); nowy aktor
+  „Hammer Posterunku" jako ścigający; `scenes/poscig-ui.mjs` — kontekstowy przycisk MG
+  w narzędziach sceny („Nowy pościg" / „Ustawienia planszy") z pełną konfiguracją: tory,
+  środowisko i ST, runda, tempo tła, dostawianie pojazdów. Scena testowa: „Pościg — test".
+  **Zostaje:** karta pojazdu (podklasa `VehicleActorSheet`), przyciąganie do torów
+  i recentrowanie pola, paleta manewrów z ruchem potwierdzanym kliknięciem, tabele k20 Awarii
+  i Komplikacji. Istniejące zależności: `actors/party-travel.mjs` (paliwo pojazdu),
+  `actors/vehicle-portrait.mjs` — oba wstrzykują się w `renderVehicleActorSheet`.
+  Cztery ciche pułapki v14 znalezione po drodze: PLAN §9a.
 - [ ] Crafting system (schematy, produkcja, szabrowanie, bebeszenie)
 - [ ] Drones
 
@@ -877,6 +890,59 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### Pościgi — plansza, dane pojazdów, interfejs MG (2026-09-11)
+
+Zgłoszone: „design the Pościgi mechanic implementation" → projekt w
+[PLAN_poscigi.md](PLAN_poscigi.md), a następnie pierwsza działająca plansza do testów.
+Osiem decyzji projektowych (D1–D8) rozstrzygniętych z MG przed pisaniem kodu i zapisanych
+w §0 planu — najważniejsza: **plansza to prawdziwa scena FVTT, nie własne okno**, bo RAW
+każe do pojazdów na niej strzelać, a pionek narysowany we własnym canvasie nie jest celem
+(nie da się go otargetować, nie przyjmie karty obrażeń, nie policzy Progu obrażeń).
+
+**1. `config/vehicles-data.mjs` — 14 podwozi z tabeli s. 262** plus środowiska pościgu
+(ST 5/10/15) i stałe zasad. Odnotowane, nie „naprawione", dwie rozbieżności w samym
+podręczniku: Motocykl ma 56 m w tabeli zbiorczej i 54 m we własnym statbloku (przyjęte 54),
+Autobus ma „cofanie 12 m" w nagłówku i „jedną czwartą" w cesze. `ttBezruchu()` zwraca
+wartość razem z jej pochodzeniem (`podrecznik` / `ekstrapolacja` wzorcem −5), zamiast
+udawać, że podręcznik podaje ją dla każdego podwozia.
+
+**2. `scenes/poscig.mjs` + `scenes/poscig-canvas.mjs` — generowana plansza.**
+Jedna stała niesie całą geometrię: 1 znacznik = 36 m = 200 px = szerokość toru.
+Scena jest **gridless** celowo — Foundry nie przyciąga wtedy niczego, więc swoboda jest
+stanem wyjściowym, a przyciąganie do torów tylko dołożymy (§2.4 planu). Pustynia jest
+proceduralna: trzy warstwy paralaksy (0,25× / 1× / 2×) pieczone w runtime do `PIXI.Texture`,
+tym samym wzorcem co `weapons/tracer-vfx.mjs`, ze ścieżkami na autorską grafikę zostawionymi
+jako stałe. Mierzone na żywo: 60 FPS, stosunek przewijania dokładnie 1:4:8.
+
+**3. `scenes/poscig-ui.mjs` — wejście dla MG.** Kontekstowy przycisk w narzędziach sceny:
+na zwykłej mapie „Nowy pościg", na planszy „Ustawienia planszy". Okno tworzenia (nazwa,
+tory, środowisko, wybór ściganych i ścigających, aktywacja dla stołu) i okno ustawień
+(stan planszy, tory, środowisko/ST, runda, tempo tła, dostawianie pojazdów). Zwężenie
+planszy poniżej zajętego toru jest **odrzucane z komunikatem**, a nie po cichu przycinane —
+przycięcie byłoby utratą informacji o pozycji pojazdu.
+
+**4. GMT400 doprowadzony do podwozia Hammer.** Wóz był w praktyce jeżdżącym bagażnikiem:
+`Szybkość 9 m` (pieszy — nie ruszyłby się o ani jeden znacznik), `details.type: "air"`,
+rozmiar `lg`, puste `crew`/`capacity`/`weight`, waga w funtach. Ustawione: 36 m, TT 17,
+Próg obrażeń 10, Próg awarii 25, załoga 5, ładownia 500 kg, `land`, `huge`, niewrażliwości.
+**PW 180 zostaje** — decyzja MG (wóz przebudowany przez Raynalda w Bunkerville), mimo że
+podwozie daje 100. Paliwo (80 l @ 20 l/100 km) nienaruszone: handout z Roll20 mówi
+112 l @ 50 l/100 km, co zmieniłoby zasięg z 400 na 224 km i przestawiło planowanie podróży
+na karcie drużyny — to decyzja przy stole, nie sprzątanie danych.
+Nowy aktor **„Hammer Posterunku"** (podwozie prosto z tabeli, PW 100) jako ścigający.
+
+**5. Testy.** Nowa paczka `neuroshima-2026-overrides.poscig` — 26 testów warstwy 1
+(integralność tabeli podwozi, ST-y środowisk, stałe zasad, odwracalność `torX`↔`xNaTor`,
+`znacznikiZDystansu` jako reguła RAW, a nie zaokrąglanie). Cały zestaw: **302/302**.
+
+**6. Cztery ciche pułapki v14** — opisane w [ARCHITECTURE.md §11](ARCHITECTURE.md), bo żadna
+nie dotyczy wyłącznie pościgów: id poziomu sceny warunkujące istnienie tokenów, kolor tła
+malowany jako obiekt, rejestracja przycisku sceny wyłącznie w `init`, `wrapMode` dla
+`TilingSprite`. Każda kosztowała czas i żadna nie zgłosiła się błędem w konsoli.
+
+**Nie zrobione (świadomie, PLAN §10):** karta pojazdu, przyciąganie do torów
+i recentrowanie pola, paleta manewrów, tabele k20 Awarii i Komplikacji.
 
 ### v0.14.20 — Kompletność ekwipunku: brakujące aliasy broni, duplikaty, nowy audyt wagi/ceny/źródła (2026-08-29)
 
