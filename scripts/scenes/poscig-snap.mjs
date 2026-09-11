@@ -3,13 +3,25 @@
  *
  * Projekt: `PLAN_poscigi.md` §2.4–2.5. Geometria i stan: `poscig.mjs`.
  *
- * ## Przyciąganie jest dokładane, nie odbierane
+ * ## Scena musi mieć siatkę kwadratową, inaczej nic się nie przyciąga
  *
- * Scena pościgu jest **gridless**, więc `BaseToken#getSnappedPosition` zwraca punkt bez zmian
- * (`common/documents/token.mjs`: `if (grid.isGridless) return unsnapped;`). Swoboda jest więc
- * stanem wyjściowym, a my dokładamy jedną regułę: wyrównaj **X** do środka toru, zostaw **Y**
- * w spokoju. Pionowo w torze mieści się kilka pojazdów jeden pod drugim i tak ma być — RAW
- * rozstrzyga starcia po „tym samym znaczniku", nie po sąsiedztwie.
+ * **To jest warunek konieczny działania całego tego pliku.** Na scenie GRIDLESS Foundry
+ * wyłącza przyciąganie na twardo — w pięciu miejscach, z których rozstrzygające jest
+ * `Token#_updateDragDestination`:
+ *
+ *     if ( canvas.grid.isGridless ) snap = false;
+ *
+ * Przy `snap === false` `getSnappedPosition` **nie jest w ogóle wołane**, więc nadpisanie go
+ * nie robi nic. Pierwsza wersja planszy była gridless dokładnie z odwrotnego (błędnego)
+ * założenia — „skoro nic nie przyciąga, to my dołożymy" — i pionki nie przyciągały się wcale.
+ * Test tego nie złapał, bo wołał metodę wprost, zamiast przeciągnąć token.
+ *
+ * Plansza ma więc siatkę **kwadratową o boku równym torowi**, schowaną przez `alpha: 0`
+ * (`poscig.mjs`). Foundry pyta wtedy „gdzie to ma trafić", a my odpowiadamy: wyrównaj **X**
+ * do środka toru, zostaw **Y** w spokoju. Pionowa swoboda w torze zostaje mimo kwadratowej
+ * siatki, bo o Y decyduje to nadpisanie, a nie siatka — a w torze ma się mieścić kilka
+ * pojazdów jeden pod drugim, bo RAW rozstrzyga starcia po „tym samym znaczniku",
+ * nie po sąsiedztwie.
  *
  * ## Dlaczego `getSnappedPosition`, a nie `preUpdateToken`
  *

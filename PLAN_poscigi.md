@@ -63,7 +63,7 @@ Jedna stała, z której wynika reszta: **1 znacznik pościgu = 36 m = 200 px = s
 
 | Parametr | Wartość | Skąd |
 |---|---|---|
-| `grid.type` | `0` (GRIDLESS) | Nic nie ma się przyciągać samo — przyciąganie jest nasze i warunkowe (§2.4). |
+| `grid.type` | `1` (SQUARE), `alpha: 0` | **Nie GRIDLESS** — na scenie bez siatki Foundry wyłącza przyciąganie na twardo i nasze nadpisanie nigdy nie jest wołane (§9a pkt 7). Kolumna = tor, siatki nie widać. |
 | `grid.size` | `200` | Szerokość toru. |
 | `grid.distance` | `36` | Żeby linijka Foundry'ego czytała poziomo prawdziwe metry. |
 | `grid.units` | `"m"` | Jak reszta świata. |
@@ -143,9 +143,18 @@ z pojazdem gracza dostaje delikatną poświatę.
 
 ### 2.4 Przyciąganie (cel 3)
 
-Scena jest gridless, więc Foundry **domyślnie nie przyciąga niczego** — swoboda jest stanem
-wyjściowym, a przyciąganie tylko dokładamy. To odwrotnie niż w typowej scenie i dlatego jest
-proste.
+> **Druga poprawka z implementacji (2026-09-12).** Ten akapit mówił: „scena jest gridless,
+> więc Foundry domyślnie nie przyciąga niczego — swoboda jest stanem wyjściowym, a
+> przyciąganie tylko dokładamy". **Jest dokładnie odwrotnie i to była przyczyna tego, że
+> przyciąganie nie działało wcale.** Na scenie GRIDLESS Foundry wyłącza przyciąganie na
+> twardo — `Token#_updateDragDestination` zaczyna się od
+> `if (canvas.grid.isGridless) snap = false;` — więc `getSnappedPosition` nie jest przy
+> przeciąganiu w ogóle wołane i nadpisanie go nie robi nic.
+>
+> Plansza ma więc siatkę **kwadratową o boku równym torowi**, ukrytą przez `alpha: 0`.
+> Foundry pyta wtedy „gdzie to ma trafić", a my odpowiadamy: X na środek toru, Y bez zmian.
+> Zweryfikowane prawdziwym przeciągnięciem: 437 px w poziomie → ląduje 400 px dalej,
+> równo na środku toru, a 96 px w pionie zostaje nietknięte.
 
 Cała logika w `preUpdateToken`:
 
@@ -513,7 +522,25 @@ dokumentu dopiero po animacji. Każda logika, która w tym haku czyta `doc.x` (a
 Hak `moveToken(document, movement, …)` dostaje `movement.destination` z pozycją rozstrzygniętą
 przez silnik i to on jest właściwym miejscem na reakcję „po ruchu".
 
-**6. `PIXI.TilingSprite` potrzebuje jawnego `baseTexture.wrapMode = REPEAT`.**
+**6. Scena GRIDLESS nie pozwala dołożyć własnego przyciągania.**
+Najdroższa z tych pułapek — przeszła przez testy, review i wydanie, i dopiero MG zauważył,
+że pionki się nie przyciągają. Rozumowanie „bez siatki Foundry nic nie przyciąga, więc
+przyciąganie po prostu dołożymy" jest odwrotne do prawdy: gridless **wyłącza** przyciąganie
+w pięciu miejscach (`Token#_updateDragDestination` → `if (canvas.grid.isGridless) snap = false;`,
+dalej `token.mjs` 3135/4863/5242, `tokens.mjs:246` dla klawiatury, i sam
+`BaseToken#getSnappedPosition`, który zwraca punkt bez zmian). Przy `snap === false` nadpisany
+`getSnappedPosition` **nie jest w ogóle wołany**.
+
+Scena, która chce własnego przyciągania, musi mieć prawdziwą siatkę: `SQUARE` o pożądanym
+boku plus `grid.alpha = 0`, żeby jej nie było widać. Wtedy nadpisanie `getSnappedPosition`
+decyduje, którą oś przyciągać, a którą zostawić wolną.
+
+**Dlaczego test tego nie złapał:** wołał `getSnappedPosition` wprost i dostawał poprawną
+odpowiedź. Metoda działała — po prostu nikt jej nie pytał. Testowanie czystej funkcji nie
+mówi nic o tym, czy silnik w ogóle po nią sięga. Regresja pilnuje teraz **konfiguracji sceny**
+(`daneSceny().grid.type !== GRIDLESS`), bo to ona była błędem, a nie arytmetyka.
+
+**7. `PIXI.TilingSprite` potrzebuje jawnego `baseTexture.wrapMode = REPEAT`.**
 Domyślny CLAMP wylewa skrajną kolumnę pikseli na sąsiedni kafel — cienka pionowa kreska
 wędrująca przez planszę, najlepiej widoczna tam, gdzie warstwa jest przezroczysta.
 Wysokości pasów nie są potęgami dwójki, więc nie ma co liczyć na domyślne zachowanie

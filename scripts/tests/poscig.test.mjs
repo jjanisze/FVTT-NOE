@@ -29,7 +29,7 @@ import {
   METRY_NA_ZNACZNIK, START_SCIGANI, START_SCIGAJACY, PRZEWAGA_KONCZACA, RUND_MAKS
 } from "../config/vehicles-data.mjs";
 import {
-  torX, xNaTor, dystansZnacznikow, wymiary,
+  daneSceny, torX, xNaTor, dystansZnacznikow, wymiary,
   LANE_W, MARGIN_X, FREEFORM_Y, FREEFORM_H, PAS_GORA, TORY_DOMYSLNIE
 } from "../scenes/poscig.mjs";
 import { snapDoToru, deltaRecentrowania, rozstawMiesciSie } from "../scenes/poscig-snap.mjs";
@@ -241,6 +241,44 @@ export function registerPoscigTests(quench) {
         // czyli poza mechaniką pościgu — i nikt by tego nie zauważył poza dziwnym obrazkiem.
         expect(PAS_GORA).to.be.below(FREEFORM_Y);
         expect(PAS_GORA).to.be.at.least(0);
+      });
+    });
+
+    /* -------------------------------------------- */
+
+    describe("Konfiguracja generowanej sceny", function () {
+
+      it("plansza NIE jest gridless — inaczej nic się nie przyciąga", function () {
+        // Regresja złapana na żywo 2026-09-12: pierwsza wersja generowała scenę GRIDLESS,
+        // „bo wtedy Foundry nic nie przyciąga i dołożymy własne przyciąganie". Jest odwrotnie —
+        // na gridless Foundry wyłącza przyciąganie na twardo (`Token#_updateDragDestination`:
+        // `if (canvas.grid.isGridless) snap = false;`), więc `getSnappedPosition` nie jest
+        // w ogóle wołane i nadpisanie go nie robi nic. Pionki nie przyciągały się wcale.
+        const dane = daneSceny({ nazwa: "T", tory: 12, srodowisko: "otwarte" });
+        expect(dane.grid.type).to.not.equal(CONST.GRID_TYPES.GRIDLESS);
+        expect(dane.grid.type).to.equal(CONST.GRID_TYPES.SQUARE);
+      });
+
+      it("kolumna siatki pokrywa się z torem, a siatka jest niewidoczna", function () {
+        const dane = daneSceny({ nazwa: "T", tory: 12, srodowisko: "otwarte" });
+        expect(dane.grid.size, "bok siatki = szerokość toru").to.equal(LANE_W);
+        expect(dane.grid.distance, "jedno pole = jeden znacznik").to.equal(36);
+        expect(dane.grid.alpha, "siatki nie widać — tory rysuje warstwa PIXI").to.equal(0);
+      });
+
+      it("wymiary i ST wynikają z parametrów", function () {
+        const dane = daneSceny({ nazwa: "T", tory: 9, srodowisko: "ciasno" });
+        expect(dane.width).to.equal(wymiary(9).width);
+        expect(dane.height).to.equal(wymiary(9).height);
+        const flaga = dane.flags[MODULE_ID].poscig;
+        expect(flaga.tory).to.equal(9);
+        expect(flaga.st).to.equal(SRODOWISKA.ciasno.st);
+        expect(flaga.offset).to.equal(0);
+      });
+
+      it("poziom ma id, którego domyślnie szukają tokeny", function () {
+        const dane = daneSceny({ nazwa: "T", tory: 12, srodowisko: "otwarte" });
+        expect(dane.levels[0]._id).to.equal(foundry.documents.BaseScene.metadata.defaultLevelId);
       });
     });
 

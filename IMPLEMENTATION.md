@@ -859,7 +859,7 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   **Zostaje:** karta pojazdu (podklasa `VehicleActorSheet`), paleta manewrów z ruchem
   potwierdzanym kliknięciem, tabele k20 Awarii i Komplikacji. Istniejące zależności: `actors/party-travel.mjs` (paliwo pojazdu),
   `actors/vehicle-portrait.mjs` — oba wstrzykują się w `renderVehicleActorSheet`.
-  Sześć cichych pułapek v14 znalezionych po drodze: PLAN §9a / ARCHITECTURE §11.
+  Siedem cichych pułapek v14 znalezionych po drodze: PLAN §9a / ARCHITECTURE §11.
 - [ ] Crafting system (schematy, produkcja, szabrowanie, bebeszenie)
 - [ ] Drones
 
@@ -890,6 +890,34 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### Pościgi — przyciąganie do torów i recentrowanie pola (2026-09-12)
+
+`scenes/poscig-snap.mjs`. Zgłoszone przez MG po wydaniu: „I see no snapping at all. Perhaps
+this feature is simply not suited for FVTT?" — i słusznie, bo przyciąganie faktycznie nie
+działało. Nie z winy Foundry'ego: **plansza była generowana jako GRIDLESS**, a to wyłącza
+przyciąganie na twardo (`Token#_updateDragDestination`:
+`if (canvas.grid.isGridless) snap = false;` plus cztery inne miejsca), więc nadpisany
+`TokenDocument#getSnappedPosition` nigdy nie był wołany. Założenie „bez siatki nic nie
+przyciąga, więc dołożymy własne przyciąganie" jest odwrotne do prawdy.
+
+Plansza ma teraz siatkę **kwadratową o boku równym torowi, z `alpha: 0`** — niewidoczną,
+ale prawdziwą. Zweryfikowane realnym przeciągnięciem tokenu (syntetyczne zdarzenia
+wskaźnika, nie wywołanie metody): 437 px w poziomie → pojazd ląduje 400 px dalej, równo na
+środku toru, a 96 px w pionie zostaje nietknięte. Pionowa swoboda w torze przeżywa
+kwadratową siatkę, bo o Y decyduje nadpisanie, nie siatka.
+
+Reszta warstwy: przyciąganie przez `getSnappedPosition` (obsługuje przeciąganie, strzałki,
+linijkę i podgląd trasy naraz; Shift omija je za darmo, bo Foundry woła je tylko przy
+`snap === true`), recentrowanie pola z haka `moveToken` (w `updateToken` `doc.x` to jeszcze
+pozycja sprzed ruchu — zmierzone: `changes.x` 1800 przy `doc.x` 1200), odmowa recentrowania
+przy rozstawie szerszym niż plansza (inaczej pionki dygoczą w nieskończoność, bo każde
+przesunięcie odpala hak od nowa), numer toru liczony z pozycji zamiast trzymany we fladze.
+
+**Czego nauczył ten błąd o testach.** Test wołał `getSnappedPosition` wprost i przechodził —
+metoda działała, tylko nikt jej nie pytał. Test czystej funkcji nie mówi nic o tym, czy silnik
+w ogóle po nią sięga. Regresja pilnuje teraz **konfiguracji sceny**
+(`daneSceny().grid.type !== GRIDLESS`), bo to tam był błąd. Zestaw: **318/318**.
 
 ### Pościgi — plansza, dane pojazdów, interfejs MG (2026-09-11)
 

@@ -189,7 +189,7 @@ may be the bug, not the write.
 
 ### 11. Generated Scenes, Custom Canvas Layers and Token Movement Fail Silently in v14
 
-Six traps found on 2026-09-11/12 building the Pościgi chase board (`scenes/poscig*.mjs`).
+Seven traps found on 2026-09-11/12 building the Pościgi chase board (`scenes/poscig*.mjs`).
 Grouped here rather than left in that feature's plan because **none of them is specific to
 chases** — every one bites the next generated scene or the next custom canvas layer.
 The common shape: correct-looking code, correct-looking inspection, **zero console output**.
@@ -237,6 +237,18 @@ The common shape: correct-looking code, correct-looking inspection, **zero conso
   Foundry *asks* where a token should land, covering dragging, arrow keys, the ruler and the
   path preview at once. It is called only when snapping is wanted
   (`{snap: !event.shiftKey}`), so Shift-to-bypass comes for free and no code reads modifiers.
+
+- **…but a GRIDLESS scene disables snapping entirely, so that override is never consulted.**
+  `Token#_updateDragDestination` opens with `if (canvas.grid.isGridless) snap = false;`, and
+  four more sites short-circuit the same way (`token.mjs` 3135/4863/5242,
+  `tokens.mjs:246` for keyboard movement, plus `BaseToken#getSnappedPosition` itself returning
+  the point unchanged). **"Gridless means nothing snaps, so I can add my own snapping" is
+  backwards** — gridless means snapping is structurally off and cannot be re-enabled from a
+  document override. A scene that wants custom snapping needs a real grid; make it
+  `SQUARE` at the spacing you want and set `grid.alpha = 0` to hide it, then override
+  `getSnappedPosition` to snap only the axis you care about. This cost a full
+  implement-and-ship cycle on the chase board: the unit test called the method directly and
+  passed, while dragging in the actual UI snapped nothing.
 
 - **In movement hooks, `TokenDocument#x` is still the pre-move value.** Measured: inside
   `updateToken`, `changes.x === 1800` while `doc.x === 1200`; the position reaches the

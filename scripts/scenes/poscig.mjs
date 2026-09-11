@@ -22,12 +22,22 @@
  * w torze jest czystą dekoracją (mieści kilka pojazdów jeden pod drugim), a linijka wliczy
  * go do dystansu. Zasięgi liczy się z numerów torów — patrz `dystansZnacznikow()`.
  *
- * ## Siatka: GRIDLESS, i to jest wybór, nie zaniedbanie
+ * ## Siatka: kwadratowa o szerokości toru, ale niewidoczna
  *
- * Na scenie bez siatki Foundry **nie przyciąga niczego**, więc swoboda jest stanem
- * wyjściowym, a przyciąganie do torów tylko dokładamy (`poscig-snap.mjs`). Gdyby scena
- * miała siatkę kwadratową, trzeba by najpierw wyłączać cudze przyciąganie, a potem
- * dokładać swoje — dwa razy więcej pracy i jeden dodatkowy tryb, w którym można się pomylić.
+ * **Poprawka z 2026-09-12 — pierwsza wersja miała tu GRIDLESS i to był błąd.**
+ * Rozumowanie brzmiało: „bez siatki Foundry nie przyciąga niczego, więc przyciąganie do
+ * torów tylko dołożymy". Jest dokładnie odwrotnie — na scenie bez siatki Foundry
+ * **wyłącza przyciąganie na twardo**, w pięciu miejscach naraz, m.in.
+ * `Token#_updateDragDestination`: `if (canvas.grid.isGridless) snap = false;`.
+ * `TokenDocument#getSnappedPosition` nie jest wtedy w ogóle wołane przy przeciąganiu,
+ * więc nadpisanie go nic nie daje. Efekt: pionki nie przyciągały się wcale.
+ *
+ * Siatka jest więc **kwadratowa, o boku równym szerokości toru**, i schowana przez
+ * `alpha: 0`. Dzięki temu Foundry z siebie pyta „gdzie to ma trafić" (`getSnappedPosition`),
+ * a `poscig-snap.mjs` odpowiada: X na środek toru, Y bez zmian. Pionowa swoboda w torze
+ * zostaje, mimo że siatka jest kwadratowa — bo o Y decyduje nasze nadpisanie, nie siatka.
+ * Kolumna siatki pokrywa się z torem co do piksela, więc to i tak jest uczciwszy opis
+ * planszy niż „brak siatki".
  */
 
 import {
@@ -148,7 +158,7 @@ export function isPoscigScene(scene = canvas?.scene) {
  * nie pada ani jeden błąd. Foundry tworzy swój domyślny poziom dokładnie tak samo
  * (`client/documents/scene.mjs`, `_id: this.constructor.metadata.defaultLevelId`).
  */
-function daneSceny({ nazwa, tory, srodowisko }) {
+export function daneSceny({ nazwa, tory, srodowisko }) {
   const { width, height } = wymiary(tory);
   return {
     name: nazwa,
@@ -156,7 +166,8 @@ function daneSceny({ nazwa, tory, srodowisko }) {
     padding: 0,
     initial: { x: Math.round(width / 2), y: Math.round(FREEFORM_Y / 2), scale: 0.4 },
     grid: {
-      type: CONST.GRID_TYPES.GRIDLESS,
+      // Kwadratowa, nie GRIDLESS — patrz nagłówek pliku. Bok = tor; `alpha: 0` ją chowa.
+      type: CONST.GRID_TYPES.SQUARE,
       size: LANE_W,
       distance: METRY_NA_ZNACZNIK,
       units: "m",
