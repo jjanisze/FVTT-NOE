@@ -187,9 +187,9 @@ immediately after a mutation without also confirming via a fresh, independent re
 (ideally after a full page reload) before concluding data was lost — the read itself
 may be the bug, not the write.
 
-### 11. Generated Scenes and Custom Canvas Layers Fail Silently in v14
+### 11. Generated Scenes, Custom Canvas Layers and Token Movement Fail Silently in v14
 
-Four traps found on 2026-09-11 building the Pościgi chase board (`scenes/poscig*.mjs`).
+Six traps found on 2026-09-11/12 building the Pościgi chase board (`scenes/poscig*.mjs`).
 Grouped here rather than left in that feature's plan because **none of them is specific to
 chases** — every one bites the next generated scene or the next custom canvas layer.
 The common shape: correct-looking code, correct-looking inspection, **zero console output**.
@@ -223,6 +223,27 @@ The common shape: correct-looking code, correct-looking inspection, **zero conso
   timing problem. To refresh a context-dependent label later, use
   `ui.controls.render({ reset: true })`; the active control and selected tool live in
   separate state (`#control` / `#tools`) and survive the reset.
+
+- **Token movement cannot be redirected from `preUpdateToken` — and failing to do so moves
+  nothing at all.** `TokenDocument._preUpdateOperation` (static, per operation) runs
+  `#preUpdateOperationMovement`, which resolves the path, writes the final destination into
+  `operation.updates[i]`, and then `delete operation.movement` — all *before* the
+  `preUpdateToken` hook fires. That is why `changes` already carries the full
+  `MOVEMENT_FIELDS` set on entry. Rewriting `changes.x` there contradicts the resolved path,
+  and `#preUpdateMovement` responds by deleting every movement field
+  (`if (!planned && (passed.length === 0))`). The token then stays exactly where it was —
+  not at the requested position, not at the corrected one — with an empty console.
+  The supported extension point is **`TokenDocument#getSnappedPosition`**: the one place
+  Foundry *asks* where a token should land, covering dragging, arrow keys, the ruler and the
+  path preview at once. It is called only when snapping is wanted
+  (`{snap: !event.shiftKey}`), so Shift-to-bypass comes for free and no code reads modifiers.
+
+- **In movement hooks, `TokenDocument#x` is still the pre-move value.** Measured: inside
+  `updateToken`, `changes.x === 1800` while `doc.x === 1200`; the position reaches the
+  document only after the animation. Any logic that reads `doc.x` there — or walks
+  `scene.tokens` to compute a layout — silently works on the previous frame. React to
+  completed movement in **`moveToken(document, movement, …)`** instead, whose
+  `movement.destination` is the engine-resolved position.
 
 - **`PIXI.TilingSprite` needs an explicit `texture.baseTexture.wrapMode = REPEAT`.**
   The default CLAMP bleeds the edge pixel column into the neighbouring tile — a thin

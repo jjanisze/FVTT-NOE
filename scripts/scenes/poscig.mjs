@@ -25,10 +25,9 @@
  * ## Siatka: GRIDLESS, i to jest wybór, nie zaniedbanie
  *
  * Na scenie bez siatki Foundry **nie przyciąga niczego**, więc swoboda jest stanem
- * wyjściowym, a przyciąganie do torów tylko dokładamy (`poscig-snap.mjs`, jeszcze nie
- * napisane). Gdyby scena miała siatkę kwadratową, trzeba by najpierw wyłączać cudze
- * przyciąganie, a potem dokładać swoje — dwa razy więcej pracy i jeden dodatkowy tryb,
- * w którym można się pomylić.
+ * wyjściowym, a przyciąganie do torów tylko dokładamy (`poscig-snap.mjs`). Gdyby scena
+ * miała siatkę kwadratową, trzeba by najpierw wyłączać cudze przyciąganie, a potem
+ * dokładać swoje — dwa razy więcej pracy i jeden dodatkowy tryb, w którym można się pomylić.
  */
 
 import {
@@ -41,9 +40,6 @@ const MODULE_ID = "neuroshima-2026-overrides";
 /** Klucz flagi na scenie. Jej obecność = „to jest plansza pościgu”. */
 export const FLAG_POSCIG = "poscig";
 
-/** Klucz flagi na tokenie — numer toru, liczony od 1 (jak w podręczniku). */
-export const FLAG_TOR = "poscigTor";
-
 /** Klucz flagi na tokenie — "scigany" | "scigajacy". */
 export const FLAG_ROLA = "poscigRola";
 
@@ -54,8 +50,17 @@ export const FLAG_ROLA = "poscigRola";
 /** Szerokość toru w pikselach. Równa jednemu znacznikowi (36 m). */
 export const LANE_W = 200;
 
-/** Margines po bokach, w pikselach. */
-export const MARGIN_X = 200;
+/**
+ * Margines po bokach, w pikselach. **Równy dokładnie jednemu torowi — i to jest istotne.**
+ *
+ * Foundry trzyma tokeny wewnątrz prostokąta sceny, więc pionek nie da się wypchnąć dowolnie
+ * daleko: dojedzie najwyżej do krawędzi. Margines szerokości toru daje więc dokładnie jedno
+ * „pole przepełnienia" po każdej stronie — tyle, ile potrzeba, żeby wyjazd poza planszę dało
+ * się w ogóle wykryć i żeby recentrowanie (`poscig-snap.mjs`) miało co złapać. Zwężenie
+ * marginesu poniżej `LANE_W` po cichu wyłączyłoby recentrowanie: pionek zatrzymywałby się
+ * na ostatnim torze i nigdy nie zająłby toru spoza planszy.
+ */
+export const MARGIN_X = LANE_W;
 
 /** Wysokość pasa pościgu (tory). Poniżej zaczyna się strefa swobodna. */
 export const FREEFORM_Y = 1300;
@@ -201,7 +206,10 @@ async function daneTokenu(actor, scene, { tor, rola, rzad = 0 }) {
     y: PAS_GORA + 60 + (rzad * (LANE_W + 40)),
     // Pionki nie mają być źródłem światła ani widzenia — plansza jest jawna dla wszystkich.
     sight: { enabled: false },
-    flags: { [MODULE_ID]: { [FLAG_TOR]: tor, [FLAG_ROLA]: rola } }
+    // Numeru toru celowo nie zapisujemy — liczy go `pionkiPoscigu()` z pozycji.
+    // Flaga byłaby stanem pochodnym, który rozjeżdża się przy każdym ruchu spoza
+    // naszej ścieżki (Shift, makro, cofnięcie operacji).
+    flags: { [MODULE_ID]: { [FLAG_ROLA]: rola } }
   });
   return proto.toObject();
 }
@@ -277,6 +285,50 @@ export async function start({
   return scene;
 }
 
+/**
+ * Pionki biorące udział w pościgu, z numerem toru.
+ *
+ * Jedno miejsce, w którym rozstrzyga się, co w ogóle jest pionkiem — czytają stąd
+ * `stan()`, przyciąganie i recentrowanie, więc nie mogą się rozjechać w ocenie.
+ *
+ * **Strefa swobodna nie liczy się do pościgu.** Token przeciągnięty pod `FREEFORM_Y`
+ * (schemat wozu, notatka MG, ktoś kto wypadł i czeka na rozstrzygnięcie) wypada z liczenia
+ * przewagi i z recentrowania. Decyduje pozycja, nie flaga: token wraca do gry po prostu
+ * przez przeciągnięcie go z powrotem na tory.
+ *
+ * ## `nadpisania` — bo w trakcie ruchu dokument kłamie
+ *
+ * W v14 `TokenDocument#x` **nie jest jeszcze zaktualizowane**, kiedy odpalają się haki ruchu:
+ * pozycja trafia do dokumentu dopiero po zakończeniu animacji. Kto policzy tor z `t.x` w haku
+ * `updateToken` albo `moveToken`, dostanie poprzednią pozycję — cicho i wiarygodnie.
+ * Dlatego wywołujący może podać mapę `{ tokenId: {x, y} }` z pozycjami, które naprawdę
+ * obowiązują (np. `movement.destination` z haka `moveToken`).
+ *
+ * @param {Scene} scene
+ * @param {Record<string, {x: number, y: number}>|null} [nadpisania]
+ * @returns {Array<{token: TokenDocument, nazwa: string, rola: string, tor: number, x: number}>}
+ */
+export function pionkiPoscigu(scene, nadpisania = null) {
+  if (!scene) return [];
+  const out = [];
+  for (const t of scene.tokens) {
+    const rola = t.getFlag(MODULE_ID, FLAG_ROLA);
+    if (!rola) continue;
+    const poz = nadpisania?.[t.id];
+    const x = poz?.x ?? t.x;
+    const y = poz?.y ?? t.y;
+    if (y >= FREEFORM_Y) continue;
+    out.push({
+      token: t,
+      nazwa: t.name,
+      rola,
+      x,
+      tor: xNaTor(x + ((t.width * scene.grid.size) / 2))
+    });
+  }
+  return out;
+}
+
 /* -------------------------------------------- */
 /*  Zmiana ustawień istniejącej planszy          */
 /* -------------------------------------------- */
@@ -311,10 +363,7 @@ export async function konfiguruj(scene, zmiany = {}) {
   const update = { [`flags.${MODULE_ID}.${FLAG_POSCIG}`]: nowa };
 
   if (zmiany.tory && zmiany.tory !== flaga.tory) {
-    const zajete = scene.tokens
-      .filter(t => t.getFlag(MODULE_ID, FLAG_ROLA))
-      .map(t => xNaTor(t.x + ((t.width * LANE_W) / 2)));
-    const najdalszy = Math.max(...zajete, 1);
+    const najdalszy = Math.max(...pionkiPoscigu(scene).map(p => p.tor), 1);
     if (zmiany.tory < najdalszy) {
       ui.notifications.error(`Nie można zejść do ${zmiany.tory} torów — na torze `
         + `${najdalszy} stoi pojazd. Najpierw cofnij go na planszę.`);
@@ -341,7 +390,7 @@ export async function dodajPojazd(scene, ref, { tor, rola }) {
 
   // Nowy pionek wchodzi pod te, które już stoją na tym torze — bez tego lądowałby
   // dokładnie na cudzym i MG musiałby je rozsuwać ręcznie.
-  const wTorze = scene.tokens.filter(t => t.getFlag(MODULE_ID, FLAG_TOR) === tor).length;
+  const wTorze = pionkiPoscigu(scene).filter(p => p.tor === tor).length;
   const dane = await daneTokenu(actor, scene, { tor, rola, rzad: wTorze });
   const [token] = await scene.createEmbeddedDocuments("Token", [dane]);
   return token;
@@ -355,14 +404,7 @@ export function stan(scene = canvas?.scene) {
   const flaga = poscigFlag(scene);
   if (!flaga) return null;
 
-  const pionki = scene.tokens
-    .filter(t => t.getFlag(MODULE_ID, FLAG_ROLA))
-    .map(t => ({
-      nazwa: t.name,
-      rola: t.getFlag(MODULE_ID, FLAG_ROLA),
-      tor: t.getFlag(MODULE_ID, FLAG_TOR) ?? xNaTor(t.x + (t.width * scene.grid.size / 2))
-    }))
-    .sort((a, b) => b.tor - a.tor);
+  const pionki = pionkiPoscigu(scene).sort((a, b) => b.tor - a.tor);
 
   const scigani = pionki.filter(p => p.rola === "scigany");
   const scigajacy = pionki.filter(p => p.rola === "scigajacy");

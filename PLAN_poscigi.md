@@ -1,8 +1,9 @@
 # PLAN — Pościgi i pojazdy
 
-> Status: **CZĘŚCIOWO ZAIMPLEMENTOWANE** (2026-09-11). Działa: dane pojazdów, generowana
-> plansza z przewijaną pustynią i torami, interfejs MG, GMT400 i ścigający. Nie ma jeszcze:
-> karty pojazdu, przyciągania do torów, manewrów, tabel k20. Stan po punktach — §10.
+> Status: **CZĘŚCIOWO ZAIMPLEMENTOWANE** (2026-09-12). Działa: dane pojazdów, generowana
+> plansza z przewijaną pustynią i torami, interfejs MG, przyciąganie do torów
+> i recentrowanie pola, GMT400 i ścigający. Nie ma jeszcze: karty pojazdu, manewrów,
+> tabel k20. Stan po punktach — §10.
 >
 > Dokument projektowy — pisz tutaj, implementuj w `scripts/scenes/poscig-*.mjs`,
 > `scripts/actors/vehicle-sheet.mjs`, `scripts/config/vehicles-data.mjs`.
@@ -151,16 +152,27 @@ Cała logika w `preUpdateToken`:
 ```
 jeśli scena nie jest planszą pościgu        → nie ruszaj
 jeśli nowy y >= FREEFORM_Y                  → nie ruszaj (strefa swobodna)
-jeśli trzymany ALT                          → nie ruszaj (świadome ustawienie międzytorowe)
+jeśli trzymany SHIFT                        → nie ruszaj (świadome ustawienie międzytorowe)
 w przeciwnym razie                          → przyciągnij x do środka najbliższego toru
                                               i zapisz flags[MODULE].poscigLane
 ```
 
-`preUpdateToken` odpala się na kliencie inicjującym, przed wysłaniem na serwer, więc stan
-klawiatury (`game.keyboard.isModifierActive(...ALT)`) jest tam czytelny. Jest też jedynym
-punktem, który łapie **każdy** sposób ruchu — przeciągnięcie myszą, strzałki, `token.update()`
-z makra, przesunięcie z karty czatu (§5.3). Przyciąganie zrobione w handlerze przeciągania
-przeciekałoby przy każdym z pozostałych.
+> **Poprawka z implementacji (2026-09-12).** Powyższy pseudokod opisywał hak
+> `preUpdateToken` i modyfikator **Alt**. Oba były błędne.
+>
+> **Alt → Shift.** To Foundry używa Shifta na „nie przyciągaj"
+> (`Token#_onDragLeftMove` → `_updateDragDestination(…, {snap: !event.shiftKey})`). Uczenie
+> MG drugiego skrótu na to samo byłoby czystym kosztem.
+>
+> **`preUpdateToken` → `TokenDocument#getSnappedPosition`.** Przepisywanie `changes.x`
+> w `preUpdateToken` **nie działa w v14**: token nie ruszał się wtedy wcale — ani na pozycję
+> przyciągniętą, ani na upuszczoną — i nie pojawiał się żaden błąd. Ruch jest rozstrzygany
+> wcześniej, w statycznym `TokenDocument._preUpdateOperation`; zmiana `changes.x` po fakcie
+> rozjeżdża się z policzoną trasą i cały komplet `MOVEMENT_FIELDS` zostaje wykasowany.
+> Właściwy punkt to `getSnappedPosition` — jedyne miejsce, w którym Foundry *pyta*, gdzie ma
+> trafić token, i pyta stamtąd o przeciąganie, strzałki, linijkę i podgląd trasy naraz.
+> Bonus: wywołanie jest owinięte w `if (snap)`, więc obsługa Shifta wychodzi za darmo
+> i nie ma w kodzie ani jednego odczytu modyfikatora.
 
 Pionowo nic nie przyciągamy: w torze mieści się kilka pojazdów jeden pod drugim i to jest
 pożądane — RAW rozstrzyga starcia po „tym samym znaczniku", nie po sąsiedztwie.
@@ -184,6 +196,18 @@ i robi resztę jednym `updateEmbeddedDocuments`.
 
 Licznik „ile znaczników przewagi" i „która runda" idzie z flag sceny, nie z pozycji pikselowej —
 przenumerowanie nie może gubić warunku końca pościgu (7 znaczników przewagi / 10 rund).
+
+Dwie rzeczy, bez których to się psuje, obie wyszły dopiero przy pisaniu:
+
+- **Przesunięcie musi być jednokrokowe.** Recentrowanie odpala się z haka ruchu, a samo
+  przesuwa pionki, więc odpala się ponownie. Gdy rozstaw jest szerszy niż plansza, „dosuń
+  lidera do krawędzi" wypycha ogon za przeciwną krawędź, następne wywołanie przesuwa pole
+  z powrotem i plansza dygocze bez końca. Dlatego przy zbyt szerokim rozstawie
+  `deltaRecentrowania()` **odmawia** (zwraca 0) i MG dostaje komunikat, żeby dodać tory.
+- **Margines planszy musi mieć szerokość toru.** Foundry trzyma tokeny w prostokącie sceny,
+  więc `MARGIN_X = LANE_W` daje dokładnie jedno pole przepełnienia z każdej strony — i to
+  ono w ogóle pozwala wykryć wyjazd poza planszę. Węższy margines po cichu wyłączyłby
+  recentrowanie.
 
 ### 2.6 Strefa swobodna (cel 4)
 
@@ -441,7 +465,7 @@ Ustawienia świata: `poscigTory` (domyślnie 12), `poscigTempoTla`.
 
 ---
 
-## 9a. Pułapki v14 znalezione podczas budowy planszy (2026-09-11)
+## 9a. Ciche pułapki v14 znalezione przy budowie planszy (2026-09-11 / 09-12)
 
 Każda kosztowała czas i każda jest **całkowicie cicha** — ani jednego błędu w konsoli.
 
@@ -471,7 +495,25 @@ warto było posłuchać za pierwszym razem. Do odświeżenia kontekstowego tytu�
 służy `ui.controls.render({ reset: true })`; aktywna grupa i wybrane narzędzie to osobny stan
 (`#control` / `#tools`) i reset ich nie gubi.
 
-**4. `PIXI.TilingSprite` potrzebuje jawnego `baseTexture.wrapMode = REPEAT`.**
+**4. Ruchu tokenu nie da się przekierować z `preUpdateToken`.**
+`TokenDocument._preUpdateOperation` (statyczne, na całą operację) woła `#preUpdateOperationMovement`,
+które liczy trasę, wpisuje gotowy cel do `operation.updates[i]` i robi `delete operation.movement` —
+wszystko **przed** hakiem `preUpdateToken`. Stąd komplet `MOVEMENT_FIELDS` w `changes` już przy
+wejściu do haka. Zmiana `changes.x` w tym miejscu rozjeżdża się z policzoną trasą i
+`#preUpdateMovement` kasuje cały komplet pól ruchu (`if (!planned && (passed.length === 0))`).
+Efekt: **token nie rusza się w ogóle** — ani na nową pozycję, ani na pierwotną — bez błędu.
+Punkt wejścia do przyciągania to `TokenDocument#getSnappedPosition`; obsługuje przeciąganie,
+strzałki, linijkę i podgląd trasy naraz, a Foundry woła go tylko wtedy, gdy przyciąganie ma się
+odbyć (`{snap: !event.shiftKey}`), więc modyfikator Shift dostaje się gratis.
+
+**5. W hakach ruchu `TokenDocument#x` to jeszcze pozycja SPRZED ruchu.**
+Zmierzone: w `updateToken` `changes.x === 1800`, a `doc.x === 1200`. Pozycja trafia do
+dokumentu dopiero po animacji. Każda logika, która w tym haku czyta `doc.x` (albo iteruje
+`scene.tokens`, żeby policzyć układ), pracuje na poprzedniej klatce — cicho i wiarygodnie.
+Hak `moveToken(document, movement, …)` dostaje `movement.destination` z pozycją rozstrzygniętą
+przez silnik i to on jest właściwym miejscem na reakcję „po ruchu".
+
+**6. `PIXI.TilingSprite` potrzebuje jawnego `baseTexture.wrapMode = REPEAT`.**
 Domyślny CLAMP wylewa skrajną kolumnę pikseli na sąsiedni kafel — cienka pionowa kreska
 wędrująca przez planszę, najlepiej widoczna tam, gdzie warstwa jest przezroczysta.
 Wysokości pasów nie są potęgami dwójki, więc nie ma co liczyć na domyślne zachowanie
@@ -497,7 +539,11 @@ sterownika. Drugie, niezależne źródło tej samej kreski: ścieżka kończąca
    (grupa Żetony, tylko MG) + dwa okna: „Nowy pościg" (nazwa, tory, środowisko, wybór
    ściganych i ścigających, aktywacja dla stołu) oraz „Ustawienia" (stan planszy, tory,
    środowisko/ST, runda, tempo tła, dostawianie pojazdów).
-5. ⬜ Przyciąganie i recentrowanie (§2.4–2.5).
+5. ✅ **Przyciąganie i recentrowanie (§2.4–2.5)** — `scenes/poscig-snap.mjs`. Przyciąganie
+   przez nadpisany `TokenDocument#getSnappedPosition` (X do środka toru, Y wolne, strefa
+   swobodna nietknięta, Shift omija). Recentrowanie z haka `moveToken`, jednokrokowe,
+   z odmową przy rozstawie szerszym niż plansza. Numer toru liczony z pozycji — bez flagi,
+   która mogłaby się rozjechać.
 6. ⬜ Paleta manewrów, testy, karty z przyciskami (§5).
 7. ⬜ Komplikacje i awarie na kartach czatu (§7).
 

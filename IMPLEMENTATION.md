@@ -855,11 +855,11 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   „Hammer Posterunku" jako ścigający; `scenes/poscig-ui.mjs` — kontekstowy przycisk MG
   w narzędziach sceny („Nowy pościg" / „Ustawienia planszy") z pełną konfiguracją: tory,
   środowisko i ST, runda, tempo tła, dostawianie pojazdów. Scena testowa: „Pościg — test".
-  **Zostaje:** karta pojazdu (podklasa `VehicleActorSheet`), przyciąganie do torów
-  i recentrowanie pola, paleta manewrów z ruchem potwierdzanym kliknięciem, tabele k20 Awarii
-  i Komplikacji. Istniejące zależności: `actors/party-travel.mjs` (paliwo pojazdu),
+  Przyciąganie do torów i recentrowanie pola (`scenes/poscig-snap.mjs`) — gotowe.
+  **Zostaje:** karta pojazdu (podklasa `VehicleActorSheet`), paleta manewrów z ruchem
+  potwierdzanym kliknięciem, tabele k20 Awarii i Komplikacji. Istniejące zależności: `actors/party-travel.mjs` (paliwo pojazdu),
   `actors/vehicle-portrait.mjs` — oba wstrzykują się w `renderVehicleActorSheet`.
-  Cztery ciche pułapki v14 znalezione po drodze: PLAN §9a.
+  Sześć cichych pułapek v14 znalezionych po drodze: PLAN §9a / ARCHITECTURE §11.
 - [ ] Crafting system (schematy, produkcja, szabrowanie, bebeszenie)
 - [ ] Drones
 

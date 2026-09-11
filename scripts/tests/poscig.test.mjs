@@ -32,6 +32,7 @@ import {
   torX, xNaTor, dystansZnacznikow, wymiary,
   LANE_W, MARGIN_X, FREEFORM_Y, FREEFORM_H, PAS_GORA, TORY_DOMYSLNIE
 } from "../scenes/poscig.mjs";
+import { snapDoToru, deltaRecentrowania, rozstawMiesciSie } from "../scenes/poscig-snap.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -240,6 +241,107 @@ export function registerPoscigTests(quench) {
         // czyli poza mechaniką pościgu — i nikt by tego nie zauważył poza dziwnym obrazkiem.
         expect(PAS_GORA).to.be.below(FREEFORM_Y);
         expect(PAS_GORA).to.be.at.least(0);
+      });
+    });
+
+    /* -------------------------------------------- */
+
+    describe("Przyciąganie do torów", function () {
+
+      it("stawia token środkiem na środku toru, niezależnie od jego szerokości", function () {
+        for (const szer of [LANE_W, LANE_W * 2, LANE_W / 2]) {
+          const { x, tor } = snapDoToru(torX(5) - (szer / 2) + 13, szer);
+          expect(tor, `szerokość ${szer}`).to.equal(5);
+          expect(x + (szer / 2), `środek przy szerokości ${szer}`).to.equal(torX(5));
+        }
+      });
+
+      it("jest idempotentne — token już przyciągnięty nie drgnie", function () {
+        const szer = LANE_W;
+        const raz = snapDoToru(torX(7) - (szer / 2), szer);
+        const dwa = snapDoToru(raz.x, szer);
+        expect(dwa).to.deep.equal(raz);
+      });
+
+      it("wybiera tor, w którym leży środek tokenu, a nie jego lewa krawędź", function () {
+        // Token szeroki na dwa tory, lewą krawędzią w torze 3 — środek jest w torze 4.
+        const szer = LANE_W * 2;
+        const lewa = MARGIN_X + (2 * LANE_W);
+        expect(snapDoToru(lewa, szer).tor).to.equal(4);
+      });
+
+      it("przyciąga też poza planszę — to sygnał do recentrowania, nie błąd", function () {
+        const szer = LANE_W;
+        expect(snapDoToru(torX(1) - (szer / 2) - (3 * LANE_W), szer).tor).to.equal(-2);
+      });
+    });
+
+    /* -------------------------------------------- */
+
+    describe("Recentrowanie pola", function () {
+
+      it("nie rusza pola, które mieści się na planszy", function () {
+        expect(deltaRecentrowania(12, [1, 4])).to.equal(0);
+        expect(deltaRecentrowania(12, [1, 12])).to.equal(0);
+      });
+
+      it("nie rusza pustej planszy", function () {
+        expect(deltaRecentrowania(12, [])).to.equal(0);
+      });
+
+      it("cofa pole, gdy lider wyjechał za ostatni tor", function () {
+        expect(deltaRecentrowania(12, [10, 13])).to.equal(-1);
+        expect(deltaRecentrowania(12, [8, 17])).to.equal(-5);
+      });
+
+      it("przesuwa pole w prawo, gdy ktoś spadł przed pierwszy tor", function () {
+        expect(deltaRecentrowania(12, [0, 5])).to.equal(1);
+        expect(deltaRecentrowania(12, [-3, 2])).to.equal(4);
+      });
+
+      it("po przesunięciu skrajny pionek ląduje dokładnie na krawędzi planszy", function () {
+        const tory = 12;
+        for (const zajete of [[10, 13], [8, 17], [0, 5], [-3, 2]]) {
+          const d = deltaRecentrowania(tory, zajete);
+          const po = zajete.map(t => t + d);
+          expect(Math.max(...po) <= tory && Math.min(...po) >= 1
+            || po.includes(tory) || po.includes(1), `zajete ${zajete}`).to.be.true;
+        }
+      });
+
+      it("odmawia, gdy rozstaw jest szerszy niż plansza", function () {
+        // Złapane na żywo, zanim ruszyło: „dosuń lidera do krawędzi" wypycha wtedy ogon za
+        // przeciwną krawędź, następne wywołanie przesuwa pole z powrotem — i pionki dygoczą
+        // w nieskończoność, bo każde przesunięcie odpala hook `updateToken`.
+        expect(rozstawMiesciSie(12, [1, 16])).to.be.false;
+        expect(deltaRecentrowania(12, [1, 16])).to.equal(0);
+        expect(deltaRecentrowania(12, [1, 13])).to.equal(0);
+      });
+
+      it("jest jednokrokowe dla KAŻDEGO rozstawu — inaczej plansza chodzi w kółko", function () {
+        // Własność, nie przykład: to ona pilnuje, żeby hook `updateToken` nie zapętlił stołu.
+        const tory = 12;
+        for (let min = -6; min <= 18; min++) {
+          for (let rozpietosc = 0; rozpietosc <= 16; rozpietosc++) {
+            const zajete = [min, min + rozpietosc];
+            const d = deltaRecentrowania(tory, zajete);
+            const po = zajete.map(t => t + d);
+            expect(deltaRecentrowania(tory, po),
+              `zajete [${zajete}] → delta ${d} → [${po}]`).to.equal(0);
+          }
+        }
+      });
+
+      it("po przesunięciu wszystko mieści się na planszy, o ile w ogóle mogło", function () {
+        const tory = 12;
+        for (let min = -6; min <= 18; min++) {
+          for (let rozpietosc = 0; rozpietosc < tory; rozpietosc++) {
+            const zajete = [min, min + rozpietosc];
+            const po = zajete.map(t => t + deltaRecentrowania(tory, zajete));
+            expect(Math.min(...po), `zajete [${zajete}]`).to.be.at.least(1);
+            expect(Math.max(...po), `zajete [${zajete}]`).to.be.at.most(tory);
+          }
+        }
       });
     });
   }, { displayName: "Neuroshima: Pościgi i pojazdy" });
