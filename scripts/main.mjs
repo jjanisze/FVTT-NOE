@@ -105,6 +105,9 @@ import { registerSurowceInventory } from "./actors/surowce-inventory.mjs";
 import { registerLekiInventory } from "./actors/leki-inventory.mjs";
 import { registerProwiantInventory } from "./actors/prowiant-inventory.mjs";
 import { registerEncumbranceBreakdown } from "./actors/encumbrance-breakdown.mjs";
+import { registerEncumbranceConfig } from "./config/encumbrance-config.mjs";
+import { registerUdzwigSlowdown } from "./actors/udzwig-slowdown.mjs";
+import { registerUdzwigAttackDisadvantage } from "./combat/udzwig-attack-disadvantage.mjs";
 import { registerSheetShell } from "./actors/sheet-shell.mjs";
 import { registerVehiclePortraitToggle } from "./actors/vehicle-portrait.mjs";
 import { registerClassResourceDice } from "./actors/class-resource-dice.mjs";
@@ -137,7 +140,6 @@ import { registerKowalActions } from "./items/toolkit-kowal.mjs";
 import { registerInventoryToggleFix } from "./actors/inventory-toggle-fix.mjs";
 import { GEAR_PLACEHOLDERS, createGearPlaceholders, REAL_GEAR, createRealGear } from "./config/gear-data.mjs";
 import { registerKolczatka, kolczatkaApi } from "./items/kolczatka.mjs";
-import { registerGmSecretItems } from "./items/gm-secret.mjs";
 import { registerChemia, chemiaApi } from "./items/chemia.mjs";
 import { sztuczkiApi } from "./config/sztuczki-data.mjs";
 import { pochodzeniaApi } from "./config/pochodzenia-data.mjs";
@@ -223,7 +225,12 @@ Hooks.once("init", () => {
   registerSurowceInventory();
   registerLekiInventory();
   registerProwiantInventory();
+  // Must precede any actor prepareDerivedData — Udźwig thresholds read these CONFIG
+  // constants. registerEncumbranceBreakdown() only reads the already-computed result.
+  registerEncumbranceConfig();
   registerEncumbranceBreakdown();
+  registerUdzwigSlowdown();
+  registerUdzwigAttackDisadvantage();
   registerSheetPositionStability();
   registerWeapons();
   registerArmor();
@@ -426,7 +433,6 @@ Hooks.once("ready", () => {
   game.neuroshima.flara = flaraApi;
   registerKolczatka();
   game.neuroshima.kolczatka = kolczatkaApi;
-  registerGmSecretItems();
   game.neuroshima.medykRefill = medykRefillApi;
   registerPistoletNaRace();
   registerGogle();

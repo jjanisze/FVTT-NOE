@@ -2980,9 +2980,89 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
  * legible regardless of which category colour happens to sit underneath it. */
 .encumbrance .meter.progress .label {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   text-shadow: 0 0 3px #000, 0 0 3px #000, 0 0 2px #000, 1px 1px 1px #000, -1px -1px 1px #000;
 }
+
+/* -------------------------------------------- */
+/*  Udźwig ruler — Normalna/Przeciążenie/Unieruchomienie (2026-09-16, pure-ruler pass) */
+/* -------------------------------------------- */
+
+/* Tight, near-zero gap to the composition bar directly below — the two are meant to
+ * read as one instrument (ruler on top, detail below), not two unrelated bars. Current
+ * position is wherever the composition bar's own fill ends, read straight down against
+ * this ruler; no fill or marker lives here, see `_buildUdzwigRuler()`'s doc comment for
+ * why a second position indicator on the ruler itself was tried and dropped. */
+.neuro-udzwig-ruler {
+  position: relative;
+  height: 7px;
+  margin-block-end: 1px;
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Always drawn in full, all three zones, regardless of current load — this is the
+ * actual ruler and must never be conditionally hidden or covered by anything. Also the
+ * container for the composition bar's own zone hatch (`neuro-encumbrance-zone-bg--*`
+ * below) — identical `position:absolute; inset:0; display:flex` positioning works in
+ * both places. */
+.neuro-udzwig-track {
+  position: absolute;
+  inset: 0;
+  display: flex;
+}
+
+.neuro-udzwig-zone--normalna { background: #4a7a52; }
+.neuro-udzwig-zone--przeciazenie { background: #d6963c; }
+.neuro-udzwig-zone--nieruchomienie { background: #b0403c; }
+
+/* -------------------------------------------- */
+/*  Udźwig trifecta — hatch + chevrons on the composition bar (2026-09-16, 2nd review) */
+/* -------------------------------------------- */
+
+/* Live design review: the ruler alone was judged too easy to miss on its own, and
+ * (separately) the *first* attempt at reinforcing it on the composition bar — tinting
+ * its background solid by zone — was already rejected once (see top doc comment) for
+ * being invisible under opaque category segments. This reintroduces that background,
+ * but hatched instead of solid, specifically so it can never be confused with a solid
+ * category segment even when the hues coincide (Prowiant/green vs Normalna/green,
+ * Broń/red vs Unieruchomienie/red — real collisions in this palette, not hypothetical).
+ * Diagonal stripes, not solid — solid = real carried weight, striped = "this space is
+ * merely IN a zone," full stop. Sits behind the composition overlay, whose segments are
+ * now fully opaque specifically so this hatch is only ever actually visible in
+ * genuinely empty space — no alpha blending to muddy the solid/hatched distinction. */
+.neuro-encumbrance-zone-bg--normalna {
+  background: repeating-linear-gradient(135deg,
+    transparent, transparent 3px, rgba(74, 122, 82, 0.4) 3px, rgba(74, 122, 82, 0.4) 6px);
+}
+.neuro-encumbrance-zone-bg--przeciazenie {
+  background: repeating-linear-gradient(135deg,
+    transparent, transparent 3px, rgba(214, 150, 60, 0.4) 3px, rgba(214, 150, 60, 0.4) 6px);
+}
+.neuro-encumbrance-zone-bg--nieruchomienie {
+  background: repeating-linear-gradient(135deg,
+    transparent, transparent 3px, rgba(176, 64, 60, 0.45) 3px, rgba(176, 64, 60, 0.45) 6px);
+}
+
+/* Native breakpoint carets: retired to `display:none` when the ruler first shipped
+ * (they'd have marked dnd5e's own `max`, not our extended `scale`), brought back now
+ * that they're repointed at the same boundaries as the ruler/hatch above and are one
+ * of three corroborating cues instead of the only one — "only slightly bigger," per
+ * request, not a redesign: still dnd5e's own border-triangle shape, just 4px instead
+ * of stock's 3px. */
+.encumbrance .meter.progress > i.breakpoint {
+  display: block;
+  border-inline-width: 4px;
+}
+.encumbrance .meter.progress > i.breakpoint.arrow-up { border-block-end-width: 4px; }
+.encumbrance .meter.progress > i.breakpoint.arrow-down { border-top-width: 4px; }
+
+/* Repurposed `.info .size`/`.multiplier` tiles (see `_applyUdzwigStatusTiles`) —
+ * colour-coded to match the zone the ruler is currently showing. "Normalna" keeps the
+ * sheet's default text colour; the other two escalate in urgency. */
+.encumbrance[data-neuro-udzwig-zone="przeciazenie"] .info .size .value { color: #d6963c; font-weight: 700; }
+.encumbrance[data-neuro-udzwig-zone="nieruchomienie"] .info .size .value { color: #d64d3c; font-weight: 700; }
 
 .neuro-ekwipunek-legend {
   display: flex;

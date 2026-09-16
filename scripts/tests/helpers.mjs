@@ -95,6 +95,24 @@ export function stub(target, key, value) {
 }
 
 /**
+ * Zastępuje cały ekwipunek aktora jednym przedmiotem o podanej wadze — najprostszy
+ * sposób na przesunięcie realnego (`scratchActor`) aktora między strefami Udźwigu bez
+ * ręcznego liczenia progów w każdym teście z osobna.
+ * @param {Actor} actor
+ * @param {number} kg  0 usuwa cały ekwipunek bez dodawania nowego.
+ */
+export async function setCarriedWeight(actor, kg) {
+  const existing = actor.items.map(i => i.id);
+  if (existing.length) await actor.deleteEmbeddedDocuments("Item", existing, { render: false });
+  if (kg > 0) {
+    await actor.createEmbeddedDocuments("Item", [{
+      name: `${SCRATCH_PREFIX} testowy ciężar`, type: "loot",
+      system: { weight: { value: kg, units: "kg" }, quantity: 1 }
+    }], { render: false });
+  }
+}
+
+/**
  * Przechwytuje `ui.notifications.warn` — moduł komunikuje przez nie odmowy reguł.
  * @returns {{messages: string[], restore: () => void}}
  */

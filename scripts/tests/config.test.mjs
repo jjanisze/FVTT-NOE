@@ -193,6 +193,28 @@ export function registerConfigTests(quench) {
 
     /* ---------------------------------------------------------------- */
 
+    describe("Udźwig — CONFIG.DND5E.encumbrance / actorSizes", function () {
+      // RAW (source_japierdole.txt:18641-18649): Średni Siła×5/×10 kg. dnd5e's own
+      // `heavilyEncumbered.metric` and lg/huge/grg `capacityMultiplier` already
+      // coincidentally match this table — regression-guard them too, since a future
+      // dnd5e update silently drifting one of them would desync the bar from RAW
+      // without `encumbrance-config.mjs` (which only touches `maximum`/tiny/sm) noticing.
+      it("Średni (bez rozmiaru): Użytkowy = Siła×5, Maksymalny = Siła×10", function () {
+        expect(CONFIG.DND5E.encumbrance.threshold.heavilyEncumbered.metric).to.equal(5);
+        expect(CONFIG.DND5E.encumbrance.threshold.maximum.metric).to.equal(10);
+      });
+
+      it("mnożniki rozmiaru odpowiadają tabeli Udźwigu (względem Średniego = ×1)", function () {
+        expect(CONFIG.DND5E.actorSizes.tiny.capacityMultiplier, "Malutki").to.equal(0.2);
+        expect(CONFIG.DND5E.actorSizes.sm.capacityMultiplier, "Mały").to.equal(0.4);
+        expect(CONFIG.DND5E.actorSizes.lg.capacityMultiplier, "Duży (dnd5e już się zgadzał)").to.equal(2);
+        expect(CONFIG.DND5E.actorSizes.huge.capacityMultiplier, "Wielki (dnd5e już się zgadzał)").to.equal(4);
+        expect(CONFIG.DND5E.actorSizes.grg.capacityMultiplier, "Ogromny (dnd5e już się zgadzał)").to.equal(8);
+      });
+    });
+
+    /* ---------------------------------------------------------------- */
+
     describe("API modułu", function () {
       it("moduł wystawia `game.neuroshima` i `api` w rejestrze pakietów", function () {
         expect(game.neuroshima, "game.neuroshima").to.be.an("object");

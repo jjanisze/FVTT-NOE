@@ -25,6 +25,8 @@ import { registerDiseaseTests } from "./choroby.test.mjs";
 import { registerAmmoTests } from "./amunicja.test.mjs";
 import { registerPartyTests } from "./party.test.mjs";
 import { registerPoscigTests } from "./poscig.test.mjs";
+import { registerUdzwigTests } from "./udzwig.test.mjs";
+import { registerUdzwigAttackDisadvantageTests } from "./udzwig-attack-disadvantage.test.mjs";
 import { runTests, listBatches } from "./runner.mjs";
 
 export function registerQuenchTests() {
@@ -35,6 +37,8 @@ export function registerQuenchTests() {
     registerAmmoTests(quench);
     registerPartyTests(quench);
     registerPoscigTests(quench);
+    registerUdzwigTests(quench);
+    registerUdzwigAttackDisadvantageTests(quench);
     registerSztuczkiDataTests(quench);
     registerSztuczkiBridgeTests(quench);
     registerSztuczkiCombatTests(quench);

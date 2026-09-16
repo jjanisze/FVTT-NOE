@@ -4292,4 +4292,192 @@ problem higieny Itemów. Nie ruszane, osobna sprawa.
 
 Katalog Przedmiotów świata: **824 → 274**, wszystkie 274 to realna treść (katalogi broni,
 tryby, kompendium sprzętu, talie kart). Wersja modułu bez zmian (`0.14.26`) — czysto dane,
-zero kodu modułu.
+identyczna zawartość, inna organizacja, zero kodu modułu.
+
+## Zmiany z 16 września 2026 (32) — Udźwig: RAW-owy dwuprogowy system, zamiast dnd5e SRD
+
+Sesja zaczęła się od jednego zgłoszenia — Alan (Siła 10) pokazywał "udźwig" 75 kg
+zamiast osobnego Użytkowego (RAW: Siła×5 = 50 kg) i Maksymalnego (RAW: Siła×10 = 100 kg)
+— i przez sześć rewizji tego samego dnia rozrosła się w pełny przegląd Udźwigu:
+poprawny wzór, wizualizację (trzy podejścia, zanim któreś się przyjęło) i, na końcu,
+dwie realne konsekwencje mechaniczne. `module.json` przeszedł `0.14.26 → 0.14.32` w
+trakcie tej sesji; poniższe podrozdziały (32.1–32.6) odpowiadają tym sześciu
+przystankom w kolejności.
+
+### 32.1 — Diagnoza i naprawa liczb: `config/encumbrance-config.mjs`
+
+Śledztwo na żywym świecie (Alan, Lorentz, Laffitte, Raynald, Victor) potwierdziło:
+`maximum.metric` w `CONFIG.DND5E.encumbrance` to wciąż dnd5e SRD (Siła×7,5 — połowa
+imperialnych 15 lb/STR), nigdy nie nadpisane. 7,5 jest dokładnie średnią arytmetyczną
+RAW-owych 5 i 10, więc liczba na karcie wyglądała wiarygodnie, ale nie była żadną z
+dwóch realnych wartości — nie licznik uśredniający coś "na oko", tylko przypadkowa
+zbieżność dwóch niepowiązanych systemów reguł.
+
+`scripts/config/encumbrance-config.mjs` (nowy plik, rejestrowany w `main.mjs` tuż przed
+`registerEncumbranceBreakdown()`): nadpisuje `CONFIG.DND5E.encumbrance.threshold.maximum.metric`
+(7,5 → 10) oraz `CONFIG.DND5E.actorSizes.{tiny,sm}.capacityMultiplier` (0,5/nieustawione →
+0,2/0,4). `heavilyEncumbered.metric` (5) i mnożniki `lg`/`huge`/`grg` (2/4/8) już się
+zgadzały z tabelą RAW przypadkiem — zostawione, ale zabezpieczone regresyjnym testem
+(`config.test.mjs`), żeby przyszła aktualizacja dnd5e nie rozjechała ich po cichu.
+
+Martwe pola `.info .size`/`.multiplier` (natywne "Rozmiar: Md" / "Multiplier: ×1" — stałe
+dla każdej postaci gracza, bo wszyscy są Średni) przerobione na aktualną strefę i liczbę
+kg do następnego progu ("Do Przeciążenia" / "Do Unieruchomienia" / "Ponad limit") — tylko
+na kartach postaci graczy; karty NPC-ów zachowują natywny Rozmiar/Multiplier, bo tam
+rozmiar realnie się różni.
+
+Świadomie nietknięte: `threshold.encumbered.metric` (dnd5e SRD ×2,5) zostawiony bez
+zmian, ale nieużywany — RAW nie ma trzeciego progu. Waga gambli/waluty
+(`currencyWeight`, 110/kg — stała dnd5e SRD, nie skalibrowana do ekonomii Neuroshimy)
+też nie ruszona — osobna sprawa, nie zgłoszona w tej sesji.
+
+Zweryfikowane na żywych postaciach: Alan 50/100 kg (był: 75), Raynald (Bez dna ×2)
+100/200 kg (był: 150).
+
+### 32.2 — Pierwsza próba wizualizacji: tło paska (odrzucona na żywo)
+
+Pasek przestał być jednym native tier-em dnd5e (encumbered/heavily encumbered/maximum,
+z których pierwszy nie ma odpowiednika w RAW) i rysował trzy strefy RAW — Normalna /
+Przeciążenie / Unieruchomienie — jako tło POD paskiem kompozycji (`udzwigStatus`/
+`udzwigScale`, obie czyste funkcje w `encumbrance-breakdown.mjs`, przetestowane osobno
+w nowym `udzwig.test.mjs`). Ponieważ RAW nigdy nie blokuje noszenia więcej po
+przekroczeniu Udźwigu maksymalnego (zeruje tylko Szybkość), skala paska dostała zapas:
+Maksymalny siada na 80% szerokości w spoczynku, a przy realnym przeciążeniu skala
+rośnie tak, żeby wartość nie dotknęła 100%.
+
+MG odrzucił to na żywo: segmenty kompozycji (Broń/Pancerz/…) są nieprzezroczyste i
+zwykle wypełniają większość paska, więc barwa strefy była widoczna tylko w skrawku,
+który akurat zostawał niewypełniony — praktycznie nigdy dokładnie tam, gdzie jest to
+najważniejsze (na granicy najbliższej aktualnemu udźwigowi).
+
+### 32.3 — Druga próba: osobna belka-"termometr" (rtęć odrzucona osobno)
+
+Rozwiązanie strukturalne, nie kosmetyczne: druga, dedykowana belka (`_buildUdzwigRuler()`,
+7px, `.neuro-udzwig-ruler`) wstawiona JAKO ODRĘBNY ELEMENT nad paskiem kompozycji — nigdy
+nie dzieli pikseli z kolorami kategorii. Pierwsza wersja tej belki miała dwie warstwy:
+statyczny, zawsze w pełni widoczny trzykolorowy tor (`.neuro-udzwig-track` — realna
+"linijka", MG: *"the ruler is the primary instrument"*) plus nieprzezroczyste złote
+wypełnienie ("rtęć", `--dnd5e-color-gold`) rosnące od 0 do aktualnej wagi na wierzchu
+toru, którego krawędź miała być wskaźnikiem pozycji.
+
+MG słusznie zauważył, że rtęć była zbędna: pasek kompozycji leżący bezpośrednio pod
+linijką już kończy się dokładnie na aktualnej wadze (ta sama `scale`), więc jego
+krawędź jest wskaźnikiem pozycji za darmo. Rtęć pokazywała tę samą pozycję x drugi raz,
+innym kolorem, który nie należał do żadnej z trzech stref — co czytało się jak
+**czwarta** strefa, nie wskaźnik. Usunięta: `_buildUdzwigRuler()` straciła parametr
+`value` i cały blok `.neuro-udzwig-fill`; odstęp do paska kompozycji ścieśniony
+(`margin-block-end: 3px → 1px`), żeby oba czytały się jako jeden przyrząd.
+
+### 32.4 — Trzecia próba: trójca (linijka + kreskowanie + karetki)
+
+Po 32.3 MG uznał samą linijkę za zbyt łatwą do przeoczenia i poprosił o przywrócenie
+dwóch elementów z 32.2 — ale nie w tej samej formie, bo tamta forma była właśnie tym,
+co odrzucono. Kluczowe zastrzeżenie: paleta kategorii i palet stref naprawdę się
+nakładają kolorystycznie (Prowiant = zielony jak Normalna; Broń = czerwony jak
+Unieruchomienie), więc tło paska kompozycji, jeśli miało wrócić, musiało być
+**odróżnialne fakturą**, nie tylko przezroczystością.
+
+Trzy zgodne cechy, żadna samodzielna:
+1. **Kreskowanie stref** (`neuro-encumbrance-zone-bg--*`, ukośne pasy w kolorze strefy,
+   `repeating-linear-gradient`) na pasku kompozycji, na tej samej geometrii co linijka
+   (nowa wspólna funkcja `_buildZoneBands()` — zastąpiła zduplikowaną logikę). Leży POD
+   nakładką kompozycji, więc widać ją tylko tam, gdzie naprawdę jest pusto.
+2. Segmenty kompozycji (`neuro-encumbrance-seg`) zmienione z `opacity: 0.85` na `1` —
+   inaczej te 15% przezroczystości przepuszczałoby kreskowanie spod spodu i rozmywało
+   dokładnie tę granicę (pełny kolor = realny ekwipunek), którą kreskowanie ma zaznaczać.
+3. **Natywne karetki dnd5e** (`i.breakpoint`, były `display: none` od 32.3) przywrócone
+   i przekierowane na te same dwie granice co linijka/kreskowanie, "tylko odrobinę
+   większe" (3px → 4px w obramowaniu trójkąta), skoro teraz to jedna z trzech zgodnych
+   wskazówek, nie jedyna.
+
+Dlaczego to nie to samo, co odrzucono w 32.2: tamta wersja barwiła tło jednolitym,
+półprzezroczystym kolorem strefy — nieodróżnialnym w praktyce od zwykłego
+przyciemnienia tego samego koloru co realny, opaque segment. Kreskowanie to inny kanał
+wizualny (faktura, nie tylko barwa/jasność): ukośne pasy na ciemnym tle nigdy nie
+wyglądają jak lity blok koloru, więc "puste, ale w danej strefie" i "zajęte przez
+konkretny ekwipunek" pozostają rozróżnialne niezależnie od zgodności barw.
+
+### 32.5 — Nagłówek = Użytkowy, i pierwsza realna konsekwencja mechaniczna: Szybkość
+
+Dwa niezależne żądania MG, pierwsza rewizja tego dnia, która dotyka realnej mechaniki,
+nie tylko wizualizacji.
+
+**Nagłówek "X / Y kg"** liczy się teraz przeciwko Użytkowemu (Siła×5), nie
+`encumbrance.max` dnd5e (Siła×10, RAW Maksymalny). MG: *"Alan's USABLE weight is 50,
+and that's the weight I intend players to stick to.. mostly"* — jedyna liczba, którą
+gracz faktycznie ma pilnować na co dzień. Czysto tekstowa/aria zmiana: `scale`, linijka
+i kreskowanie dalej liczą względem prawdziwego Maksymalnego, więc Unieruchomienie jest
+nadal w pełni śledzone — po prostu nie jest już tym, co wypisane jako "max".
+
+**Automatyczny Active Effect** (nowy plik `actors/udzwig-slowdown.mjs`): pierwszy w tym
+module automat, który naprawdę zmienia wartość mechaniczną (Szybkość), nie tylko ją
+pokazuje — świadome odejście od doktryny "MG w pętli" (wykrywaj, nigdy nie stosuj
+automatycznie), które MG wyraźnie zażądał wprost: *"a second order variable, not
+enforcement"* — Szybkość na karcie to liczba doradcza w chwili, gdy gracz bierze żeton
+do ręki; nic tu nie blokuje ruchu dalej niż karta pokazuje.
+
+Mechanizm skopiowany z `bez-dna.mjs` (stały 16-znakowy `_id`, `keepId`, kolejka +
+debounce per aktor), rozszerzony o `updateItem` (edycja ilości/wagi na istniejącym
+przedmiocie to najczęstszy sposób realnej zmiany udźwigu w grze) i wąski `updateActor`
+(zmiana Siły lub Rozmiaru). Efekt ma dwa możliwe kształty zależnie od strefy:
+`MULTIPLY ×0.5` w Przeciążeniu, `OVERRIDE = 0` w Unieruchomieniu (RAW: "szybkość spada
+do 0" to twarde dno, nie kolejna redukcja). Klucz `system.attributes.movement.walk`
+potwierdzony przez `SHIM_FIELDS` w rdzeniu dnd5e.
+
+Świadomie nietknięte w tej rewizji: RAW-owe Utrudnienie do ataków przy Przeciążeniu —
+domknięte osobno w 32.6.
+
+Testy: `udzwig.test.mjs` +5 `it` (Normalna/Przeciążenie/Unieruchomienie, przejście
+między dwoma niezerowymi strefami bez duplikowania efektu, powrót do Normalnej kasuje
+efekt). Zweryfikowane na żywo na Alanie: nagłówek "32.7 / 50" (był "32.7 / 100");
+dodanie 30 kg podniosło go do Przeciążenia, automatycznie utworzyło efekt i zmniejszyło
+Szybkość z 9 do 4,5 m; usunięcie ciężaru automatycznie skasowało efekt i przywróciło 9 m.
+
+### 32.6 — Druga konsekwencja mechaniczna: domyślne Utrudnienie do Ataku
+
+Domyka RAW-ową klauzulę Przeciążenia, której druga połowa (Utrudnienie do wszystkich
+Testów Ataku) została świadomie zostawiona jako luka w 32.5. MG zaproponował konkretny
+kształt: rzut ataku domyślnie startuje z Utrudnieniem, GM/gracz może to nadpisać w
+oknie rzutu (Ułatwienie + Utrudnienie = normalny rzut, natywna reguła dnd5e), a na
+karcie czatu zostaje mały, trwały ślad — "na wypadek, gdybym przeoczył, albo trafił na
+szczególnie cwaniackiego gracza". Oceniony przed budową i potwierdzony jako w pełni
+zgodny z dwoma wzorcami, które już żyły w tym kodzie — zbudowany jako ich bezpośrednia
+kopia, nie nowy pomysł.
+
+Nowy plik `scripts/combat/udzwig-attack-disadvantage.mjs`:
+
+**Domyślne Utrudnienie** — dokładnie kształt `actors/armor-rules.mjs`'s "Brak
+wyszkolenia": `Hooks.on("dnd5e.preRollAttack", ...)` ustawia `config.disadvantage = true`
+przed otwarciem okna rzutu (nie `postBuildAttackRollConfig` — ten hak odpala się
+wyłącznie przez okno dialogowe, więc rzut z pominiętym oknem, `configure: false`,
+ominąłby go całkowicie). Bramkowane na `["przeciazenie", "nieruchomienie"]` — Utrudnienie
+nie znika, gdy dojdzie do tego jeszcze Unieruchomienie, to ta sama klauzula.
+
+**Plakietka na karcie czatu** — dokładnie kształt `combat/cover.mjs`'s odznaki osłony:
+dane odkładane na sam Roll (`roll.options.neuroUdzwigAttack`), odczytywane z powrotem w
+`dnd5e.renderChatMessage` z `message.rolls[0].options` — całkowicie odseparowane od
+tego, czy okno rzutu w ogóle się pojawiło. Natywny `<li class="pill maroon">` dołączany
+do natywnej listy `ul.card-footer.pills`; jeśli lista jeszcze nie istnieje, tworzona od
+zera. Pokazuje się niezależnie od tego, czy finalny rzut wylądował jako Normalny (GM
+dołożył Ułatwienie) — to log audytowy, nie raport z trybu rzutu.
+
+Zweryfikowane na żywo (Alan, prawdziwy atak, `configure:false`): 30 kg ciężaru →
+Przeciążenie → `activity.rollAttack()` z pominiętym oknem dialogowym zwrócił rzut z
+formułą `1d20dis + 3 + 2` (`hasDisadvantage: true`) mimo pominięcia okna, a plakietka
+wylądowała na realnej karcie czatu w nowo utworzonej liście `ul.card-footer.pills`.
+
+Testy: nowy plik `udzwig-attack-disadvantage.test.mjs` (9 `it`) — zgodnie z własną
+zasadą tej warstwy testów ("żadnego `activity.use()`, karty czatu to nie miejsce na
+asercje") testuje obie funkcje hooków bezpośrednio, na syntetycznych obiektach
+`config`/`message` i odłączonym `<div>`, bez wywoływania prawdziwego rzutu ani
+tworzenia prawdziwej wiadomości czatu. `setCarriedWeight()` (wcześniej lokalna w
+`udzwig.test.mjs`) przeniesiona do `tests/helpers.mjs` do współdzielenia.
+
+Świadomie nietknięte: wciąż tylko atak — bez zmian w Testach Zdolności/Rzutach
+Obronnych (RAW nazywa wyłącznie ataki w tej klauzuli).
+
+### Stan końcowy (32)
+
+`module.json` `0.14.26` → `0.14.32`. Testy: 345/345 (`konfiguracja` +2 `it`, nowy
+`udzwig` batch, nowy `udzwig-atak` batch). Cały łańcuch zweryfikowany na żywo na
+prawdziwych postaciach (Alan, Raynald) na każdym etapie, nie tylko w testach.
