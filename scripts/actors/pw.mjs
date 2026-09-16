@@ -72,6 +72,14 @@ export function registerPW() {
     if (this.type !== "character") return;
     if (this.getFlag(MODULE_ID, "pwOverride") === false) return;   // per-actor opt-out
 
+    // Respect dnd5e's own manual-max-HP convention instead of always winning: a non-null
+    // `_source` value means a GM explicitly typed a number into the Hit Points Configuration
+    // dialog's Max field — the exact signal vanilla dnd5e itself uses to skip its own
+    // hit-die-advancement calc (`if (hp.max === null)` in character.mjs). Honoring it here is
+    // what makes that field a real, working override instead of one that silently gets
+    // discarded on the next derive (see chat log 2026-09-13 / IMPLEMENTATION.md).
+    if (this._source.system?.attributes?.hp?.max != null) return;
+
     try {
       const pw = computeNeuroshimaPW(this);
       if (pw === null) return;
@@ -80,8 +88,21 @@ export function registerPW() {
       if (!hp) return;
 
       hp.max = pw;
-      // Keep current within the new maximum.
-      if (Number.isNumeric(hp.value) && hp.value > hp.max) hp.value = hp.max;
+
+      // dnd5e's own AttributesFields.prepareHitPoints (attributes.mjs) already ran inside
+      // original.apply() above — it fired its hit-die-advancement branch (since `_source.max`
+      // was null) and derived effectiveMax/value/damage/pct from ITS OWN computed max, which
+      // can legitimately differ from, and be smaller than, the Neuroshima PW figure. Its own
+      // `value = Math.min(value, effectiveMax)` may already have shaved real HP off a
+      // character who was at/near their correct (larger) PW max. Re-derive everything off the
+      // new max, and pull `value` fresh from the persisted source rather than trusting that
+      // transiently-clamped in-memory figure, so every HP-driven display agrees with the
+      // Neuroshima PW value and nobody silently loses HP on a routine re-render.
+      hp.effectiveMax = Math.max(hp.max + (hp.tempmax ?? 0), 0);
+      const sourceValue = this._source.system.attributes.hp.value;
+      hp.value = Number.isNumeric(sourceValue) ? Math.min(sourceValue, hp.effectiveMax) : hp.value;
+      hp.damage = hp.effectiveMax - hp.value;
+      hp.pct = Math.clamp(hp.effectiveMax ? (hp.value / hp.effectiveMax) * 100 : 0, 0, 100);
     } catch (err) {
       console.error(`${MODULE_ID} | PW computation failed for ${this.name}`, err);
     }
