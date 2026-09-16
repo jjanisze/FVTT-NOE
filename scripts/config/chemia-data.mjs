@@ -34,6 +34,8 @@
  * which case the price covers the whole package.
  */
 
+import { SCHIZOFRENIA_PARANOIDALNA_ID } from "../wkk/config/diseases-data.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 
 /**
@@ -195,11 +197,11 @@ export const CHEMIA = Object.freeze({
     label: "Psychotropy",
     subtype: "przewlekla",
     price: 3, availability: 30, doses: 1, weight: 0.02,
-    // `schizofreniaParanoidalna` to kobaltowy wariant Paranoi o identycznych stopniach
-    // (config/diseases-data.mjs), więc lek na jedno działa na drugie. Bez tego wpisu Raynald
+    // `schizofreniaParanoidalna` (WKK, wkk/config/diseases-data.mjs) to wariant Paranoi
+    // o identycznych stopniach, więc lek na jedno działa na drugie. Bez tego wpisu Raynald
     // nosiłby Psychotropy jako lek, który nie leczy niczego, co ma — a leczył, zanim jego
     // chorobę przepięto na wariant Kobaltu.
-    treats: ["paranoja", "schizofreniaParanoidalna"],
+    treats: ["paranoja", SCHIZOFRENIA_PARANOIDALNA_ID],
     img: `${DRUGS_ICON_DIR}/psychotropy.svg`,
     description: "Tłumi natrętne myśli. Nie leczy — po prostu ścisza."
   },

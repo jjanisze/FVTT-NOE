@@ -53,9 +53,9 @@
  * only light-granting item in the module.
  */
 
-import { registerLightProvider, registerLightOffSwitch, enforceSingleLightSource, syncActorLight } from "../items/light-sources.mjs";
-import { registerPowerSource, getPowerStatus, renderPowerRow } from "../items/power-source.mjs";
-import { getSurowiecType } from "../config/surowce-data.mjs";
+import { registerLightProvider, registerLightOffSwitch, enforceSingleLightSource, syncActorLight } from "../../items/light-sources.mjs";
+import { registerPowerSource, getPowerStatus, renderPowerRow } from "../../items/power-source.mjs";
+import { getSurowiecType } from "../../config/surowce-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 

@@ -21,8 +21,8 @@
  * Źródło zasad: Tabele/Bronie/BronBiala.md; dum-dum — homebrew "W Kolorze Kobaltu".
  */
 
-import { startBleeding } from "./bleeding.mjs";
 import { NEUROSHIMA_CREATURE_TYPES } from "../config/creature-types.mjs";
+import { ROZRYWAJACA } from "../wkk/combat/weapon-save-properties.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -67,24 +67,8 @@ const SAVE_PROPERTIES = {
     icon: "fa-link",
     color: "#2f6f4f",
   },
-  rozrywajaca: {
-    label: "Rozrywająca",
-    ability: "con",
-    status: "bleeding",
-    statusLabel: "Krwawienie",
-    dc: { mode: "fixed", value: 14 },
-    sizes: null,
-    alternativeToDamage: false,
-    icon: "fa-droplet",
-    color: "#c0392b",
-    // "Każda istota żywa trafiona pociskiem dum-dum, która nie posiada redukcji, odporności
-    // lub niewrażliwości na obrażenia kłute…" — obie klauzule wprost z tekstu naboju.
-    exemptDamageType: "piercing",
-    exemptCreatureTypes: ["maszyna"],
-    // Krwawienie ma własny cykl i profil; samo przełączenie statusu zostawiłoby ikonę na
-    // tokenie i nie zadałoby ani jednego punktu obrażeń.
-    onFail: actor => startBleeding(actor, { profile: "dumdum", reason: "pocisk dum-dum" }),
-  },
+  // WKK-only, no RAW basis — see wkk/combat/weapon-save-properties.mjs.
+  rozrywajaca: ROZRYWAJACA,
 };
 
 /** Czytelne nazwy rozmiarów do komunikatów. */

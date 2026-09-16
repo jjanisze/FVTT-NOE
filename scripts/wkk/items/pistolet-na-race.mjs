@@ -89,9 +89,9 @@
  *     mirrors that exact pattern for this weapon's DC 12 Dex save.
  */
 
-import { getMag, spendRound, setChamber } from "./magazine.mjs";
-import { playShotSound } from "./sounds.mjs";
-import { requestFlareLight, FLARE_LIGHT, BURN_SECONDS } from "../items/flara.mjs";
+import { getMag, spendRound, setChamber } from "../../weapons/magazine.mjs";
+import { playShotSound } from "../../weapons/sounds.mjs";
+import { requestFlareLight, FLARE_LIGHT, BURN_SECONDS } from "./flara.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const LAUNCH_ID = "pistolet-race-wystrzel";

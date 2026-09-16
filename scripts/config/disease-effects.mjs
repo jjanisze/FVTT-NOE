@@ -43,6 +43,8 @@
  * — that is the disease getting worse.
  */
 
+import { SCHIZOFRENIA_PARANOIDALNA_ID } from "../wkk/config/diseases-data.mjs";
+
 // CONST.ACTIVE_EFFECT_MODES, spelled out: this module is imported by the pack
 // builder and by node syntax checks, where the Foundry globals do not exist.
 const MULTIPLY = 1;
@@ -73,6 +75,26 @@ const wplywanie = (v = -1) => [skill("zas", v), skill("osz", v), skill("per", v)
 /** Speed to zero / halved. */
 const speedZero = { key: "system.attributes.movement.walk", mode: OVERRIDE, value: "0" };
 const speedHalf = { key: "system.attributes.movement.walk", mode: MULTIPLY, value: "0.5" };
+
+/**
+ * Paranoja's stage effects, shared verbatim with the WKK-only `schizofreniaParanoidalna`
+ * disease (see `wkk/config/diseases-data.mjs`) — at the table it's the same disease under
+ * a different name (Raynald's personal reflavor), so the mechanics must never drift apart.
+ * Defined once here and reused by key below, instead of the two literal copies this file
+ * used to carry, so that invariant is structural rather than a comment asking you to
+ * remember to edit both.
+ */
+const PARANOJA_EFFECTS = {
+  0: { changes: [skill("int", 1), skill("prc", 1), skill("osz"), skill("per")] },
+  1: {
+    changes: [check("int"), check("wis"), save("int"), save("wis"), ...wplywanie()]
+  },
+  2: {
+    changes: [check("int"), check("wis"), save("int"), save("wis"), ...wplywanie()],
+    statuses: ["frightened"],
+    manual: "Jedyną akcją, jaką możesz wykonać w walce, jest Unikanie."
+  }
+};
 
 /**
  * Effects keyed by disease, then by stage index (0 = przewlekły).
@@ -180,36 +202,12 @@ export const DISEASE_EFFECTS = Object.freeze({
   },
 
   /* ---- Paranoja ---- */
-  paranoja: {
-    0: { changes: [skill("int", 1), skill("prc", 1), skill("osz"), skill("per")] },
-    1: {
-      changes: [check("int"), check("wis"), save("int"), save("wis"), ...wplywanie()]
-    },
-    2: {
-      changes: [check("int"), check("wis"), save("int"), save("wis"), ...wplywanie()],
-      statuses: ["frightened"],
-      manual: "Jedyną akcją, jaką możesz wykonać w walce, jest Unikanie."
-    }
-  },
+  paranoja: PARANOJA_EFFECTS,
 
-  /* ---- Schizofrenia paranoidalna (Kolor Kobaltu) ---- */
-  /**
-   * Mechanicznie identyczna z `paranoja` powyżej i to celowe — przy stole to ta sama choroba
-   * pod nazwą nadaną postaci Raynalda, a domowa jest wyłącznie tabelka „Lekarz i farmaceuta"
-   * (`kobaltTable` w `diseases-data.mjs`). Wpis musi tu być mimo powtórzenia: bez niego
-   * przepięcie karty z `paranoja` na nowy klucz cicho zabrałoby postaci Active Effect.
-   */
-  schizofreniaParanoidalna: {
-    0: { changes: [skill("int", 1), skill("prc", 1), skill("osz"), skill("per")] },
-    1: {
-      changes: [check("int"), check("wis"), save("int"), save("wis"), ...wplywanie()]
-    },
-    2: {
-      changes: [check("int"), check("wis"), save("int"), save("wis"), ...wplywanie()],
-      statuses: ["frightened"],
-      manual: "Jedyną akcją, jaką możesz wykonać w walce, jest Unikanie."
-    }
-  },
+  /* ---- Schizofrenia paranoidalna (WKK — patrz PARANOJA_EFFECTS powyżej) ---- */
+  // Wpis musi tu być mimo że to WKK-owy klucz: bez niego przepięcie karty z `paranoja`
+  // na ten klucz cicho zabrałoby postaci Active Effect.
+  [SCHIZOFRENIA_PARANOIDALNA_ID]: PARANOJA_EFFECTS,
 
   /* ---- Zaburzenia błędnika ---- */
   zaburzeniaBledinka: {

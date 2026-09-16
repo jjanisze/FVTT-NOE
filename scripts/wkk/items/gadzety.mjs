@@ -30,8 +30,8 @@
  * źródła i licencje (wszystko CC0) w `dev/audio/FREESOUND_GADZETY_SOURCES.md`.
  */
 
-import { seqPlayAudio } from "../weapons/sequencer.mjs";
-import { getDefaultVolume } from "../weapons/sounds.mjs";
+import { seqPlayAudio } from "../../weapons/sequencer.mjs";
+import { getDefaultVolume } from "../../weapons/sounds.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 

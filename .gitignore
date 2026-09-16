@@ -16,6 +16,9 @@ logs/*.log
 # them into a `.ldb`. Ignoring it committed `lekarstwa` and `sztuczki` as empty
 # directories. Keep any new log rule anchored to a directory.
 
+# Python (dev tooling venv, e.g. dev/icons, dev/bestiary scripts)
+.venv/
+
 # OS / editor
 .DS_Store
 Thumbs.db

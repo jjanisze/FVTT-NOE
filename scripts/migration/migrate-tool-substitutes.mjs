@@ -9,7 +9,7 @@
  * ⚠️ Konwersja idzie przez **skasuj-i-odtwórz**, bo `loot` → `tool` przekracza granicę typu, a
  * `.update({type})` po cichu unieważnia całe wywołanie. Piąte potwierdzenie tej pułapki w tym
  * repozytorium (`migrate-pistolet-race.mjs`, `migrate-gear-graduation.mjs`, `items/kolczatka.mjs`,
- * `items/gadzety.mjs`) — nie jest już odkryciem, tylko rutyną.
+ * `wkk/items/gadzety.mjs`) — nie jest już odkryciem, tylko rutyną.
  *
  * Nowy przedmiot bierze opis, cenę i wagę z katalogu (bo właśnie one się zmieniły), ale
  * zachowuje ilość i — jeśli aktor go sobie przemianował albo podmienił ikonę — nazwę i grafikę.

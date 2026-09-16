@@ -34,7 +34,7 @@ import { SZTUCZKI, sztuczkaItemData } from "../../scripts/config/sztuczki-data.m
 import { ORIGIN_ABILITIES, originAbilityItemData, POCHODZENIA, pochodzenieItemData, abilitiesOf, attrBonus } from "../../scripts/config/pochodzenia-data.mjs";
 import { AMMO_CALIBERS, GRENADE_TYPES } from "../../scripts/config/ammo-data.mjs";
 import { WEAPONS, buildWeaponItemData } from "../../scripts/config/weapons-data.mjs";
-import { POCHODNIA_VARIANTS, buildPochodniaItemData } from "../../scripts/weapons/pochodnia.mjs";
+import { POCHODNIA_VARIANTS, buildPochodniaItemData } from "../../scripts/wkk/items/pochodnia.mjs";
 import { LATARKA_FORMS, buildLatarkaItemData } from "../../scripts/items/latarka.mjs";
 import { buildBaterieItemData } from "../../scripts/items/baterie.mjs";
 import { GOGLE_VARIANTS, buildGogleItemData } from "../../scripts/items/gogle.mjs";

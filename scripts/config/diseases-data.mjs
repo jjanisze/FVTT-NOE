@@ -1,4 +1,10 @@
 import { isKobaltEnabled } from "./settings.mjs";
+import { KOBALT_DISEASES } from "../wkk/config/diseases-data.mjs";
+
+// Re-exported for back-compat: consumers that only care about "the disease catalog"
+// (e.g. scripts/tests/choroby.test.mjs) shouldn't need to know WKK content lives in a
+// separate file. The definition itself is WKK-owned — see scripts/wkk/config/diseases-data.mjs.
+export { KOBALT_DISEASES };
 
 /**
  * Neuroshima 5e — Choroby (diseases).
@@ -211,46 +217,6 @@ export const COMMON_DISEASES = Object.freeze({
 
 /** Sunset check constants (RAW str. 109). */
 export const SUNSET_SAVE = Object.freeze({ ability: "con", dc: 10 });
-
-/**
- * Choroby z Koloru Kobaltu — treść domowa tej kampanii, **nie** z podręcznika.
- *
- * Osobna mapa z tego samego powodu co `KOBALT_PHOBIAS` w `phobias-data.mjs`: `CHRONIC_DISEASES`
- * jest ścisłą tabelą k8 i dziewiąty wpis zepsułby kość. Brak pola `roll` jest celowy — tych
- * chorób się nie losuje.
- *
- * `Schizofrenia paranoidalna` ma drabinkę stopni **identyczną** z podręcznikową `Paranoja`
- * (str. 110) i to nie przypadek: przy stole jest to ta sama choroba pod inną nazwą. Domowa
- * jest wyłącznie tabelka `kobaltTable` — wcześniej żyła jako wolny tekst w `notes` na karcie
- * Raynalda, przez co nie dało się jej ani wyświetlić, ani rzucić.
- */
-export const KOBALT_DISEASES = Object.freeze({
-  schizofreniaParanoidalna: {
-    kobalt: true,
-    label: "Schizofrenia paranoidalna",
-    medicine: "Psychotropy",
-    flavor: "Nie śpi po nocach, czasami gada do siebie. Młody chłopaczek, chodzi w kamizelce "
-      + "z wyszytym krzyżem.",
-    stages: [
-      "Masz Ułatwienie w Testach Intuicji i Percepcji, ale i Utrudnienie w testach Oszustwa i Perswazji.",
-      "Masz Utrudnienie w Testach i Rzutach Obronnych opartych na Inteligencji i Mądrości oraz "
-      + "Utrudnienie w testach Wpływania.",
-      "Otrzymujesz stan Przerażenie i jedyną akcją, jaką możesz wykonać w walce, jest Unikanie."
-    ],
-    kobaltTable: {
-      title: "Lekarz i farmaceuta",
-      trigger: "Biorąc leki (zwykle wieczorem) rzuć 1k20.",
-      results: [
-        { range: [1, 1],   text: "Podmienili wszystkie tabletki; zniszcz 1k8 tabletek, zanim "
-                                 + "spostrzeżesz, że nie wszystkie są otrute." },
-        { range: [2, 10],  text: "Osłabili tabletki; żeby lek zadziałał, musisz zażyć podwójną dawkę." },
-        { range: [11, 19], text: "Nie podmienili tabletek." },
-        { range: [20, 20], text: "Tabletka puściła do ciebie oczko; jesteś pewien, że Schizofrenia "
-                                 + "nie pogorszy się, jeżeli dziś nie weźmiesz leków." }
-      ]
-    }
-  }
-});
 
 /** All diseases, chronic first, as a flat lookup. */
 export const ALL_DISEASES = Object.freeze({

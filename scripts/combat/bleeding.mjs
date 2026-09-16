@@ -34,6 +34,7 @@
 import { effectsFor } from "../config/disease-effects.mjs";
 import { getChoroby, takeDose } from "../actors/health-panel.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
+import { DUMDUM_BLEED_PROFILE } from "../wkk/combat/bleeding.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const FLAG = "krwawienie";
@@ -67,16 +68,8 @@ export const BLEED_PROFILES = Object.freeze({
     severity: 1,
     save: Object.freeze({ ability: BLEED.saveAbility, dc: BLEED.saveDC, streakToStop: BLEED.streakToStop })
   }),
-  dumdum: Object.freeze({
-    id: "dumdum",
-    label: "Krwawienie (pocisk dum-dum)",
-    when: "start",
-    damage: "1d8",
-    medicineDC: 15,
-    dose: false,
-    severity: 2,
-    save: null
-  })
+  // WKK-only, no RAW basis — see wkk/combat/bleeding.mjs.
+  dumdum: DUMDUM_BLEED_PROFILE
 });
 
 /** Profil krwawienia aktora — brak zapisanego profilu = Hemofilia (stan sprzed tej zmiany). */

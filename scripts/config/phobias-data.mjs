@@ -1,4 +1,10 @@
 import { isKobaltEnabled } from "./settings.mjs";
+import { KOBALT_PHOBIAS } from "../wkk/config/phobias-data.mjs";
+
+// Re-exported for back-compat: consumers that only care about "the phobia catalog"
+// (e.g. scripts/tests/choroby.test.mjs) shouldn't need to know WKK content lives in a
+// separate file. The definition itself is WKK-owned — see scripts/wkk/config/phobias-data.mjs.
+export { KOBALT_PHOBIAS };
 
 /**
  * Neuroshima 5e — Fobie (phobias).
@@ -102,29 +108,6 @@ export const PHOBIAS = Object.freeze({
       + "w zasięgu twojego wzroku.",
     breakthrough: "Przestajesz się bać szczurów na 1 godzinę. Otrzymujesz Ułatwienie do Testów Ataku "
       + "przeciwko nim na 1 minutę.",
-    breakthroughSeconds: HOUR
-  }
-});
-
-/**
- * Fobie z Koloru Kobaltu — treść domowa tej kampanii, **nie** z podręcznika.
- *
- * Nie dopisujemy ich do `PHOBIAS`, bo tamto jest ścisłą tabelą k8 (str. 111–112) i dziewiąty
- * wpis zepsułby zarówno kość, jak i zgodność z RAW. Osobna mapa + osobna grupa w pickerze
- * (widoczna tylko przy włączonym Kobalcie) załatwia jedno i drugie.
- *
- * Brak pola `roll` jest celowy: tych fobii się nie losuje, przydziela je MG.
- */
-export const KOBALT_PHOBIAS = Object.freeze({
-  mizoofobia: {
-    kobalt: true,
-    label: "Mizoofobia",
-    // ST 16 zamiast domyślnego 15 — patrz `phobiaSaveDc()`.
-    saveDc: 16,
-    effect: "Reagujesz lękiem, kiedy dowolne zwierzę — nawet przyjazne — znajdzie się bliżej "
-      + "niż 1,5 metra od ciebie. Wykonaj Rzut Obronny na Mądrość o ST 16.",
-    breakthrough: "Użycie przemysłowego środka do dezynfekcji obniża ST do 14 i pozwala "
-      + "powtórzyć Rzut Obronny w chwili aplikacji. Kosztuje 1 dawkę środka i akcję.",
     breakthroughSeconds: HOUR
   }
 });

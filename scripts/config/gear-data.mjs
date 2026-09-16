@@ -320,7 +320,7 @@ export async function createRealGear(actor) {
 
     // Zmiana typu przedmiotu nie przechodzi przez `.update()` — Foundry po cichu unieważnia
     // wtedy CAŁE wywołanie, nie tylko pole `type` (udokumentowane w `migrate-pistolet-race.mjs`,
-    // `migrate-gear-graduation.mjs`, `items/kolczatka.mjs`, `items/gadzety.mjs`). Bez tej gałęzi
+    // `migrate-gear-graduation.mjs`, `items/kolczatka.mjs`, `wkk/items/gadzety.mjs`). Bez tej gałęzi
     // odświeżenie Laptopa wojskowego, który przeszedł z `loot` na `tool`, milcząco nie robiłoby
     // nic — łącznie z opisem i ceną, które akurat dałyby się zaktualizować.
     if ( item && item.type !== data.type ) {

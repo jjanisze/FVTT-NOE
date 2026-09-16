@@ -56,6 +56,7 @@ import { registerLightProvider, registerLightOffSwitch, enforceSingleLightSource
 import { registerPowerSource, getPowerStatus, renderPowerRow } from "./power-source.mjs";
 import { isBaterie } from "./baterie.mjs";
 import { isKobaltEnabled } from "../config/settings.mjs";
+import { LIGHT_KOBALT } from "../wkk/config/latarka-overrides.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -81,17 +82,9 @@ const FLAG_BURNOUT_AT = "latarkaBurnoutAt";    // worldTime this session would g
 // not just imprecise: it put bright light in the two side wedges (22.5°–45° off centre) that
 // RAW says should read as dim immediately, not just "dim past 45m."
 //
-// Kolor Kobaltu (docs/Kobalt.md, rule 6) shrinks both radii — RAW's ranges are considered too
-// generous on a VTT. Bright cuts cleanly to 1/3 (45m -> 15m) and reads right at that scale. Dim
-// does NOT also get the flat 1/3 treatment (that would still be 60m): on the actual silo/dungeon
-// maps this campaign uses, a 60m dim spill lit most of a level at once, which felt less like "a
-// flashlight in the dark" and more like turning on the room lights — it also flattened any reason
-// to want a longer-ranged upgrade later. 22m keeps a real dim halo past the bright cone (RAW's own
-// bright:dim ratio, ~1:4, would be pointless to preserve here) without trivializing exploration.
-// Cone angles are unaffected by either of the above — locked decision, `PLAN_kobalt.md` — only
-// distance shrinks.
+// RAW value, unmodified. The WKK override (`LIGHT_KOBALT`, shrinks both radii — see
+// `wkk/config/latarka-overrides.mjs` for why) lives separately; `_light()` below picks one.
 const LIGHT_RAW = { bright: 45, dim: 180, angle: 90, narrowAngle: 45 };
-const LIGHT_KOBALT = { bright: 15, dim: 22, angle: 90, narrowAngle: 45 };
 
 function _light() {
   return isKobaltEnabled() ? LIGHT_KOBALT : LIGHT_RAW;

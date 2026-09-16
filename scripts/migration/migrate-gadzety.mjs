@@ -22,7 +22,7 @@
  *   await api.migrateGadzety({ actors: ["Lorentz"], commit: true });
  */
 
-import { GADZETY, gadzetKeyFor, isReadyGadzet, buildGadzetItemData } from "../items/gadzety.mjs";
+import { GADZETY, gadzetKeyFor, isReadyGadzet, buildGadzetItemData } from "../wkk/items/gadzety.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 

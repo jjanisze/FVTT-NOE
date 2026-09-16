@@ -102,7 +102,7 @@ export function registerTerminology() {
     // without this, both show up blank even once the underlying data holds a real
     // caliber id ("45acp", "12ga_b", …): the <select> just has no matching <option>.
     // `trinket` to techniczny slot dnd5e, w który wpadają dwie rodziny przedmiotów tego
-    // modułu: Kolczatki (`items/kolczatka.mjs`) i gadżety smaczkowe (`items/gadzety.mjs`).
+    // modułu: Kolczatki (`items/kolczatka.mjs`) i gadżety smaczkowe (`wkk/items/gadzety.mjs`).
     // Oba trafiają tam nie dlatego, że są błyskotkami, tylko dlatego, że `loot` nie może nieść
     // Aktywności. Bez tej podmiany karta wypisywała pod nazwą przedmiotu angielskie „Trinket",
     // jedyny nieprzetłumaczony podpis w całym ekwipunku.

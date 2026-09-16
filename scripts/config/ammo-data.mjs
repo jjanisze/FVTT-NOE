@@ -24,6 +24,8 @@
  *              Full path: `modules/neuroshima-2026-overrides/icons/ammo/${icon}`
  */
 
+import { KOBALT_AMMO } from "../wkk/config/ammo-data.mjs";
+
 export const AMMO_CALIBERS = [
   /* ── Pistoletowa ─────────────────────────────────────────────── */
   {
@@ -77,26 +79,6 @@ export const AMMO_CALIBERS = [
     type: "piercing",
     props: ["obalajaca"],
     price: 3, avail: 50, weight: 0.025
-  },
-  {
-    // Homebrew "W Kolorze Kobaltu" - nabój dum-dum, wprowadzony dla Złotego Desert Eagle
-    // Lorentza. Pocisk z rozciętym czubkiem: rozrywa tkanki (Rozrywająca), ale rozpłaszcza się
-    // na twardej przeszkodzie zamiast ją przebić (Hollow-point). Ta sama kość co zwykły .44 Mag
-    // - dum-dum nie bije mocniej, tylko brzydziej, a cały zysk siedzi w tych dwóch cechach.
-    id: "44mag_dd",
-    label: ".44 Mag (dum-dum)",
-    // Placeholder: dzieli grafikę ze zwykłym .44 Mag. Własna ikona jest w kolejce
-    // (dev/icons/MISSING.md, batch 40) - bez niej nie widać w ekwipunku, który z dwóch
-    // stosów jest który, więc to realna luka, nie kosmetyka.
-    icon: "ammo_44_mag.svg",
-    category: "Pistoletowa",
-    family: "44mag",
-    formula: "1d10",
-    type: "piercing",
-    props: ["obalajaca", "rozrywajaca", "hollowpoint"],
-    note: "Rozrywająca: RO Kondycja ST 14 albo Krwawienie (1k8 na początku tury). "
-      + "Hollow-point: osłona z niezerową redukcją zatrzymuje pocisk całkowicie.",
-    price: 6, avail: 25, weight: 0.025
   },
 
   /* ── Karabinowa ──────────────────────────────────────────────── */
@@ -271,29 +253,7 @@ export const AMMO_CALIBERS = [
     price: 4, avail: 20, weight: 0.010
   },
 
-  /* ── Sygnałowa (Pistolet na Race — homebrew W Kolorze Kobaltu) ──── */
-  {
-    id: "race",
-    // Krótka etykieta, jak reszta katalogu — "do X" trafia do `note` poniżej, nie do nazwy (ten
-    // sam wzorzec co "Pocisk-strzykawka", ammo równie ekskluzywne dla jednej broni, Strzelby
-    // Palmera, ale bez tego w nazwie). Dłuższa wersja "Raca sygnałowa (do Pistoletu na Race)"
-    // przelewała się poza pole nazwy w widoku Amunicji na karcie — zgłoszone żywo na Raynaldzie.
-    label: "Raca sygnałowa",
-    // Fixed (2026-09-06, batch 39): was reusing ammo_12_ga.svg (a shotgun shell — close enough in
-    // shape, but not this item) as an interim placeholder. Dedicated art now exists.
-    icon: "raca_sygnalowa.svg",
-    category: "Sygnałowa",
-    // Empty formula — the weapon (Pistolet na Race, weapons-data.mjs) carries its own base
-    // damage, same shape as bows/crossbows here. `type` below is otherwise unused (every reader
-    // in weapons/ammo.mjs gates on `caliber.formula` truthy first) but kept for the same
-    // self-documenting reason "strzala"/"kulka"/etc. keep theirs.
-    formula: "",
-    type: "fire",
-    props: [],
-    note: "Amunicja wyłącznie do Pistoletu na Race. Lżejsza i dalej lecąca niż ręczna Flara "
-      + "(patrz items/flara.mjs) — ale bez pistoletu bezużyteczna, w przeciwieństwie do Flary.",
-    price: 5, avail: 40, weight: 0.05
-  },
+  ...KOBALT_AMMO,
 ];
 
 /* -----------------------------------------------------------------

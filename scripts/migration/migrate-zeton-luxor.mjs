@@ -22,7 +22,7 @@
  *   await api.migrateZetonLuxor({ actors: ["Alan"], commit: true });
  */
 
-import { isZetonLuxor, buildZetonLuxorItemData } from "../items/zeton-luxor.mjs";
+import { isZetonLuxor, buildZetonLuxorItemData } from "../wkk/items/zeton-luxor.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 

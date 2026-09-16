@@ -37,7 +37,7 @@ import { AMMO_CALIBERS, AMMO_CALIBER_MAP, GRENADE_TYPES } from "../config/ammo-d
 import { ARMORS, ARMOR_MAP, buildArmorItemData } from "../config/armor-data.mjs";
 import { ADDON_DEFS, ADDON_LIST, SIGHT_ADDON_IDS } from "../config/addons-data.mjs";
 import { installAddonById, removeAddon } from "../weapons/addons.mjs";
-import { POCHODNIA_VARIANTS, buildPochodniaItemData, ensurePochodniaActivities, createPochodniaItem } from "../weapons/pochodnia.mjs";
+import { POCHODNIA_VARIANTS, buildPochodniaItemData, ensurePochodniaActivities, createPochodniaItem } from "../wkk/items/pochodnia.mjs";
 import { TOOLKITS, buildToolkitItemData, createToolkits, MEDYK_MAX_CHARGES } from "../config/toolkits-data.mjs";
 import { CHEMIA, CHEMIA_TYPE, CHEMIA_SUBTYPES, chemiaKeyByName, chemiaItemData } from "../config/chemia-data.mjs";
 import { ALL_DISEASES } from "../config/diseases-data.mjs";
@@ -60,7 +60,7 @@ import {
   isMedykRefill, buildMedykRefillItemData, createMedykRefillItem, ensureMedykRefillActivities,
   useMedykRefill
 } from "../items/toolkit-medyk.mjs";
-import { GADZETY, gadzetKeyFor, buildGadzetItemData } from "../items/gadzety.mjs";
+import { GADZETY, gadzetKeyFor, buildGadzetItemData } from "../wkk/items/gadzety.mjs";
 import {
   PROWIANT_CATEGORIES, PROWIANT_CATALOG, PROWIANT_CATALOG_MAP,
   getProwiantCategory, buildProwiantItemData

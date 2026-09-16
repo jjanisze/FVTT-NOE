@@ -29,6 +29,8 @@
  * generuje je z wlasciwosci przy kazdym zapisie przedmiotu.
  */
 
+import { LASKA, MIECZ, PISTOLET_NA_RACE } from "../wkk/config/weapons-data.mjs";
+
 import { AMMO_CALIBER_MAP } from "./ammo-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -82,14 +84,7 @@ const BRON_BIALA = [
     props: ["burzaca", "two", "przebijajaca"],
     weight: 3, price: 20, avail: 70
   },
-  {
-    // Homebrew (Laffitte). Statystyki nadane w IMPLEMENTATION.md (21), gdy okazało się, że
-    // broń nie ma w ogóle kości obrażeń — do zatwierdzenia przez MG, patrz TODO_mechanika.md §4.
-    id: "laska", name: "Laska", type: "biala", icon: "laska.svg",
-    damage: { number: 1, denomination: 6, types: ["bludgeoning"] },
-    props: ["fin"],
-    weight: 1, price: 15, avail: 60
-  },
+  LASKA,
   {
     id: "lancuch", name: "Łańcuch", type: "biala", icon: "chain.svg",
     damage: { number: 1, denomination: 6, types: ["bludgeoning"] },
@@ -102,15 +97,7 @@ const BRON_BIALA = [
     props: ["lgt", "karczujaca"],
     weight: 1, price: 10, avail: 80
   },
-  {
-    // Homebrew (Raynald). Statystyki spisane z jego karty w IMPLEMENTATION.md (21) — celowo
-    // 1k10 bez właściwości, żeby nie zmienić broni, którą już gra. Katana (1k10, fin+ver, ta
-    // sama cena) zostaje bronią wyraźnie lepszą, i tak ma być.
-    id: "miecz", name: "Miecz", type: "biala", icon: "miecz.svg",
-    damage: { number: 1, denomination: 10, types: ["slashing"] },
-    props: [],
-    weight: 1.5, price: 40, avail: 40
-  },
+  MIECZ,
   {
     id: "nadziak", name: "Nadziak", type: "biala", icon: "horsemans_pick.svg",
     damage: { number: 1, denomination: 8, types: ["piercing", "bludgeoning"] },
@@ -396,21 +383,7 @@ const BRON_PALNA_KROTKA = [
     note: "Tabela podaje kaliber i obrażenia jako „Różne” — 9 mm to wartość domyślna.",
     manual: ["Kaliber i kostkę obrażeń ustala MG przy tworzeniu egzemplarza."]
   },
-  {
-    // Homebrew, W Kolorze Kobaltu (nie z podręcznika) — patrz docs/Kobalt.md. Jednostrzałowa
-    // (Wmag. 1, ładowanie), tak jak Samoróbka powyżej. Główne zastosowanie to sygnalizacja i
-    // oświetlenie punktu trafienia/rzutu (patrz items/flara.mjs) — obrażenia poniżej to tylko
-    // to, co się dzieje, gdy ktoś strzeli racą prosto w kogoś.
-    id: "pistolet-na-race", name: "Pistolet na Race", type: "palnaKrotka", icon: "pistolet_na_race.svg",
-    damage: { number: 1, denomination: 4, types: ["fire"] },
-    range: { value: 12, long: 30 },
-    props: ["wmag", "tryb_p", "ladowanie"],
-    caliber: "race", mag: { kind: "wmag", max: 1 }, fixedDamage: true,
-    weight: 0.6, price: 30, avail: 30,
-    note: "Wystrzeliwuje race sygnałowe — patrz Flara i Raca sygnałowa. Trafienie bezpośrednie: "
-      + "1k4 od ognia; cel wykonuje RO Zręczność ST 12 albo zostaje Podpalony.",
-    manual: ["RO na Podpalenie przy trafieniu bezpośrednim rozstrzyga MG (jak przy Koktajlu Mołotowa) — nie jest automatyzowane."]
-  }
+  PISTOLET_NA_RACE
 ];
 
 const BRON_PALNA_POSREDNIA = [

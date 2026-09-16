@@ -10,7 +10,7 @@
  * a fixed, small amount is exactly the sort of frequent, low-stakes GM action a dialog
  * would only slow down — if a GM fat-fingers it, `game.time.advance(-600)` undoes it.
  *
- * This is the mechanism `weapons/pochodnia.mjs`'s fuel burn-down (and, eventually,
+ * This is the mechanism `wkk/items/pochodnia.mjs`'s fuel burn-down (and, eventually,
  * `latarka`/battery drain) rides on — see DEV_GUIDE.md §10e and the project's own notes
  * on `ActiveEffectRegistry` for why "world time doesn't advance on its own" is a
  * deliberate design point here, not a gap to route around: game-paused means no fuel

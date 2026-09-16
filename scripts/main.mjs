@@ -1,13 +1,13 @@
-﻿/**
- * Neuroshima: Ostatnia Era â€” main module entry point.
- * 
+/**
+ * Neuroshima: Ostatnia Era — main module entry point.
+ *
  * Overrides dnd5e configuration to implement Neuroshima 5e rules:
  * - Polish terminology for abilities, skills, damage types
  * - 18 Neuroshima skills replacing dnd5e skill list
- * - 22 tool proficiency sets (narzÄ™dzia maÅ‚ego X)
+ * - 22 tool proficiency sets (narzędzia małego X)
  * - 12 Neuroshima damage types (adds explosive, removes force/necrotic/thunder)
  * - Spellcasting removal (Neuroshima has no magic)
- * - Currency â†’ gamble (gb)
+ * - Currency → gamble (gb)
  * - Movement in meters
  */
 
@@ -56,7 +56,8 @@ import { registerFalling, fallingApi } from "./combat/falling.mjs";
 import { registerFuksPips } from "./actors/fuks-pips.mjs";
 import { registerWeapons } from "./config/weapons.mjs";
 import { registerArmor } from "./config/armor.mjs";
-import { registerArmorRules, report as armorReport } from "./actors/armor-rules.mjs";import { registerZranienie } from "./combat/zranienie.mjs";
+import { registerArmorRules, report as armorReport } from "./actors/armor-rules.mjs";
+import { registerZranienie } from "./combat/zranienie.mjs";
 import { registerCritRiders } from "./combat/crit-riders.mjs";
 import { registerPackTactics } from "./combat/pack-tactics.mjs";
 import { registerBestiaryThresholds } from "./combat/bestiary-thresholds.mjs";
@@ -74,16 +75,16 @@ import { registerThrownWeapons } from "./weapons/thrown.mjs";
 import { registerValidation } from "./config/validation.mjs";
 import { registerWeaponSounds } from "./weapons/sounds.mjs";
 import { registerEngineControls } from "./weapons/engine.mjs";
-import { registerPochodnia, pochodniaApi } from "./weapons/pochodnia.mjs";
+import { registerPochodnia, pochodniaApi } from "./wkk/items/pochodnia.mjs";
 import { registerLightSources } from "./items/light-sources.mjs";
 import { registerVisionSources } from "./items/vision-sources.mjs";
 import { registerPowerSourceUI } from "./items/power-source.mjs";
 import { registerBaterie, baterieApi } from "./items/baterie.mjs";
-import { registerGadzety, gadzetyApi } from "./items/gadzety.mjs";
-import { registerZetonLuxor, zetonLuxorApi } from "./items/zeton-luxor.mjs";
+import { registerGadzety, gadzetyApi } from "./wkk/items/gadzety.mjs";
+import { registerZetonLuxor, zetonLuxorApi } from "./wkk/items/zeton-luxor.mjs";
 import { registerLatarka, latarkaApi } from "./items/latarka.mjs";
-import { registerFlara, flaraApi } from "./items/flara.mjs";
-import { registerPistoletNaRace } from "./weapons/pistolet-na-race.mjs";
+import { registerFlara, flaraApi } from "./wkk/items/flara.mjs";
+import { registerPistoletNaRace } from "./wkk/items/pistolet-na-race.mjs";
 import { registerGogle, gogleApi, registerNoktowizjaVision } from "./items/gogle.mjs";
 import { registerWorldClock, worldClockApi } from "./world-clock.mjs";
 import { registerTracerVfx } from "./weapons/tracer-vfx.mjs";
@@ -149,7 +150,7 @@ import { registerQuenchTests, testsApi } from "./tests/index.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 
 /**
- * Init hook â€” fires during system initialization, before ready.
+ * Init hook — fires during system initialization, before ready.
  * CONFIG.DND5E is already populated by dnd5e at this point.
  */
 Hooks.once("init", () => {
@@ -304,7 +305,7 @@ Hooks.once("init", () => {
     const el = html instanceof HTMLElement ? html : html?.[0];
     if (!el) return;
 
-    // Defer via macrotask â€” same reason as ammo.mjs: dnd5e renders pills async
+    // Defer via macrotask — same reason as ammo.mjs: dnd5e renders pills async
     setTimeout(() => {
       const footer = el.querySelector("ul.card-footer.pills");
       if (!footer) return;
@@ -316,7 +317,7 @@ Hooks.once("init", () => {
           text === "Instantaneous" ||
           text === "Natychmiastowe" ||
           /NaN/.test(text) ||
-          text === "â€”"
+          text === "—"
         ) {
           pill.remove();
         }
@@ -337,7 +338,7 @@ Hooks.once("init", () => {
 });
 
 /**
- * i18nInit hook â€” fires after i18n is initialized but before ready.
+ * i18nInit hook — fires after i18n is initialized but before ready.
  * Verifies translations loaded correctly; fetches fallback if needed.
  */
 Hooks.once("i18nInit", async () => {
@@ -345,7 +346,7 @@ Hooks.once("i18nInit", async () => {
 });
 
 /**
- * Ready hook â€” fires after all documents are loaded and the game is ready.
+ * Ready hook — fires after all documents are loaded and the game is ready.
  * Used for runtime patches that require game data.
  */
 Hooks.once("ready", () => {
@@ -494,8 +495,8 @@ Hooks.once("ready", () => {
 
   // Warn if not using modern rules (needed for exhaustion -2 per level)
   if (globalThis.dnd5e?.settings?.rulesVersion !== "modern") {
-    console.warn(`${MODULE_ID} | âš  Rules version is "${globalThis.dnd5e?.settings?.rulesVersion}", not "modern". Exhaustion -2/level penalty requires modern rules.`);
-    ui.notifications?.warn("Neuroshima: Ustaw Rules Version na 'Modern (2024)' w ustawieniach dnd5e, aby Wyczerpanie dawaÅ‚o -2 do testÃ³w.");
+    console.warn(`${MODULE_ID} | ⚠ Rules version is "${globalThis.dnd5e?.settings?.rulesVersion}", not "modern". Exhaustion -2/level penalty requires modern rules.`);
+    ui.notifications?.warn("Neuroshima: Ustaw Rules Version na 'Modern (2024)' w ustawieniach dnd5e, aby Wyczerpanie dawało -2 do testów.");
   }
 });
 

@@ -18,7 +18,7 @@
  * unchanged — this is a granularity change, not a balance change. Every piece of code that
  * consumes/moves these resources by weight already works in raw kg totals, not "units", so
  * none of it needed touching:
- *   - `weapons/pochodnia.mjs`'s `_consumeKgOfSurowiec` (refuelling with CH) sums
+ *   - `wkk/items/pochodnia.mjs`'s `_consumeKgOfSurowiec` (refuelling with CH) sums
  *     `perUnitKg * qty` across stacks and can already spend a fractional slice of a stack —
  *     finer-grained stacks after this migration make that math MORE precise, not different.
  *   - `actors/surowce-inventory.mjs`'s `_transferToVehicle` reads each item's own

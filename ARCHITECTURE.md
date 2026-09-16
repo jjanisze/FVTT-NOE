@@ -265,6 +265,17 @@ The common shape: correct-looking code, correct-looking inspection, **zero conso
   ending exactly on the tile boundary is antialiased against nothing, so procedural tile art
   must overdraw past both edges.
 
+### 12. NOE vs WKK Content Lives in Physically Separate Files
+`scripts/wkk/` is the exclusive home for content that is not in the *Neuroshima Ostatnia Era*
+rulebook ("W Kolorze Kobaltu" — this table's house rules and campaign homebrew). Everything
+else is NOE: a straight translation of the book. See `scripts/wkk/README.md` for the
+classification rule, the full file census, and the RAW/WKK-override pattern (currently one
+case, Latarka's light radius in `items/latarka.mjs`). This is a 2026-09 reorganization of
+content that used to be scattered inline through otherwise-generic files with no boundary
+(comment-tagged at best) — it changes nothing about what the live module ships; it exists so a
+future RAW-only build variant is a matter of consulting `scripts/wkk/registry.mjs`, not
+re-deriving a census from scratch.
+
 ## Dokumentacja towarzysząca
 | Plik | Zawartość |
 |---|---|
