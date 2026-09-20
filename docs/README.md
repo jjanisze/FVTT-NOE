@@ -1,4 +1,4 @@
-# Podręcznik OSNNE — spis treści
+# Podręcznik FVTT-NOE — spis treści
 
 > **Status: w budowie.** To jest dopiero początek podręcznika użytkownika — pokrywa to, co
 > najważniejsze do wystartowania. Dopóki poszczególne strony nie urosną, gęstszy (ale mniej

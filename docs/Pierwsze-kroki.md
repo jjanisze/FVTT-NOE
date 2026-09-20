@@ -4,7 +4,7 @@ Krótka checklista od świeżej instalacji Foundry do gotowej do gry sesji Neuro
 
 ## 1. Świat
 
-Utwórz nowy świat (**Setup → Create World**) z systemem **`dnd5e`**. OSNNE nie jest osobnym
+Utwórz nowy świat (**Setup → Create World**) z systemem **`dnd5e`**. FVTT-NOE nie jest osobnym
 systemem — to nakładka na `dnd5e`, więc świat zakłada się dokładnie tak samo jak każdy inny świat
 5e.
 

@@ -1,4 +1,4 @@
-# OSNNE — Obsługa Systemu Neuroshima Nowa Era
+# FVTT-NOE
 
 **Nieoficjalna konwersja *Neuroshima Ostatnia Era* (świat *Za Garść Gambli*) na silnik `dnd5e`
 we FoundryVTT.**
@@ -6,6 +6,10 @@ we FoundryVTT.**
 [![Licencja: MIT](https://img.shields.io/badge/licencja-MIT-blue.svg)](LICENSE)
 ![FoundryVTT v14](https://img.shields.io/badge/FoundryVTT-v14-informational)
 ![dnd5e 5.3](https://img.shields.io/badge/dnd5e-5.3.x-informational)
+
+![Written in Promptese](https://img.shields.io/badge/Written%20in-Promptese-ff69b4?style=for-the-badge)
+![Artists exploited](https://img.shields.io/badge/Artists%20exploited-65535-critical?style=flat-square)
+![Jobs destroyed](https://img.shields.io/badge/Jobs%20destroyed-256-orange?style=flat-square)
 
 > **English speakers:** this is a Polish-language fan module for a Polish-language RPG line, so
 > player-facing docs here are Polish by design. If you're here to work on the code, start with
@@ -16,7 +20,7 @@ we FoundryVTT.**
 
 ## O projekcie
 
-**OSNNE** to zestaw nakładek na system `dnd5e`, które zamieniają go w silnik zasad
+**FVTT-NOE** to zestaw nakładek na system `dnd5e`, które zamieniają go w silnik zasad
 *Neuroshima Ostatnia Era* — polskości, terminologii, cech, umiejętności, obrażeń, ekwipunku,
 klas, stanów i mechanik przetrwania włącznie. Nie jest to osobny system FoundryVTT — to moduł,
 który *modyfikuje* `dnd5e` „w locie".
@@ -24,12 +28,6 @@ który *modyfikuje* `dnd5e` „w locie".
 To projekt fanowski i niekomercyjny, **niezwiązany z Portal Games** i nieoficjalny. Nie
 dystrybuuje treści książki poza tym, co niezbędne do rozgrywki (statystyki, zasady, terminologia)
 — zobacz [CREDITS.md](CREDITS.md#neuroshima-ostatnia-era-content-compendia-terminology-rules).
-
-**Ten projekt powstaje w dużej mierze przy pomocy AI** — kod i dokumentacja przy udziale
-Claude Code, część ikon wygenerowana przez Gemini/ChatGPT (szczegóły w [CREDITS.md](CREDITS.md)).
-Właśnie dlatego moduł **nie trafia do oficjalnego sklepu modułów FoundryVTT** — jest dostępny
-wyłącznie tutaj, na GitHubie, jawnie opisany, żeby każdy mógł ocenić, co dostaje. Zgłoszenia i
-uwagi są jak najbardziej mile widziane.
 
 ## Wymagania
 
@@ -52,13 +50,13 @@ Pełna instrukcja (metoda ręczna, aktualizacje, deinstalacja, typowe błędy) �
 
 ## Modpack — jak grać w to samo, co autor
 
-OSNNE zakłada konkretny zestaw modułów i konfigurację, a nie tylko sam override. Do pełnego
-doświadczenia (dźwięk pozycyjny, VFX strzałów, krew na scenach) dojdź te dwa:
+FVTT-NOE zakłada konkretny zestaw modułów i konfigurację, a nie tylko sam override. Do pełnego
+doświadczenia (dźwięk pozycyjny, VFX strzałów, krew na scenach) dodaj te dwa:
 
 | Moduł | Rola | Status |
 |---|---|---|
 | [**Sequencer**](https://foundryvtt.com/packages/sequencer) | Silnik VFX/SFX (muzzle flash, tracery, dźwięk pozycyjny) — moduł go wykorzystuje, jeśli jest obecny | Zalecany (opcjonalna zależność w `module.json`) |
-| **Splatter** (theripper93) | Ambientowe plamy krwi napędzane obrażeniami aktorów | Zalecany, dobiera kolory wg typu istoty |
+| **Splatter** (theripper93) | Ambientowe plamy krwi napędzane obrażeniami aktorów, dobiera kolory wg typu istoty | Zalecany |
 
 Zainstaluj je tak samo jak każdy inny moduł FoundryVTT (manifest URL / sklep modułów), włącz razem
 z tym modułem w tym samym świecie. Bez nich moduł nadal działa — po prostu bez efektów, które od
@@ -97,6 +95,12 @@ Szczegóły procesu (dla osób chcących też zaproponować poprawkę w kodzie) 
 Kod i dokumentacja modułu — licencja **MIT**, patrz [LICENSE](LICENSE). Dźwięki, ikony, grafika
 żetonów i treść wywiedziona z *Neuroshima Ostatnia Era* mają odrębne źródła i warunki — pełna
 lista w [CREDITS.md](CREDITS.md).
+
+Ten projekt powstaje w dużej mierze przy pomocy AI — kod i dokumentacja przy udziale Claude Code,
+część ikon wygenerowana przez Gemini/ChatGPT (szczegóły w [CREDITS.md](CREDITS.md)). Właśnie
+dlatego moduł **nie trafia do oficjalnego sklepu modułów FoundryVTT** — jest dostępny wyłącznie
+tutaj, na GitHubie, jawnie opisany, żeby każdy mógł ocenić, co dostaje. Zgłoszenia i uwagi są jak
+najbardziej mile widziane.
 
 ## Dla deweloperów
 
