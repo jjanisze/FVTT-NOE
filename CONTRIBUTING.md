@@ -32,19 +32,24 @@ Player-facing framing of the same process (Polish) lives in the
 3. **Never hand-edit a compendium under `packs/`** — every pack is a build artifact of
    `dev/packs/build-packs.mjs` from a `scripts/config/*-data.mjs` source file. Edit the source,
    then run `npm run build:packs`.
-4. Follow the commit style already in the log: short imperative subject with a
+4. **Ship token/icon art as WEBP, never PNG.** Measured on the 25 bestiary tokens:
+   PNG 39.5 MB vs WEBP q92 **4.9 MB** — and this repo is public, so a PNG stays in git
+   history forever. It is also a runtime cost: Foundry uploads every token on a scene to
+   GPU memory, and players download it. q92 does not move the alpha bounding box by a
+   single pixel, so token scales stay valid. `tokens/README.md` has the one-line snippet.
+5. Follow the commit style already in the log: short imperative subject with a
    `feat:`/`docs:`/`fix:` prefix, Polish or English body as fits (existing history mixes both —
    match whichever the surrounding commits use for that area).
-5. Before opening a PR, run the existing validation scripts:
+6. Before opening a PR, run the existing validation scripts:
    ```
    npm run validate:tests
    npm run validate:packs
    npm run validate:css
    ```
-6. Mechanics changes need live verification inside Foundry via Quench — see
+7. Mechanics changes need live verification inside Foundry via Quench — see
    [`TESTING.md`](TESTING.md) for why there's no Node test runner and how the browser-based tests
    are organized.
-7. If your change affects `module.json`'s `version`, use `npm run bump:version <x.y.z>` rather
+8. If your change affects `module.json`'s `version`, use `npm run bump:version <x.y.z>` rather
    than hand-editing the field (it guards against a BOM corrupting the manifest).
 
 ## Releasing
