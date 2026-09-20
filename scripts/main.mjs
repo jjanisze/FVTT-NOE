@@ -146,6 +146,8 @@ import { sztuczkiApi } from "./config/sztuczki-data.mjs";
 import { pochodzeniaApi } from "./config/pochodzenia-data.mjs";
 import { registerToolAvailability } from "./actors/tool-availability.mjs";
 import { registerQuenchTests, testsApi } from "./tests/index.mjs";
+import { monsterClosetApi } from "./dev/monster-closet.mjs";
+import { characterClosetApi } from "./dev/character-closet.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -472,6 +474,17 @@ Hooks.once("ready", () => {
 
   // Testy Quench — game.neuroshima.tests.run() / .run("choroby") / .list()
   game.neuroshima.tests = testsApi;
+
+  // Szafa z potworami — scena kalibracyjna skali żetonów Bestiariusza.
+  // Tylko konsola i agent (MG + agent to jedyni odbiorcy), bez przycisku w UI:
+  // to narzędzie deweloperskie, a nie element sesji.
+  // game.neuroshima.monsterCloset.regenerate() / .harvest() / .report()
+  game.neuroshima.monsterCloset = monsterClosetApi;
+
+  // Szafa z postaciami — ta sama kalibracja dla aktorów świata (drużyna, BN,
+  // pojazdy). Wynik idzie wprost na `prototypeToken`, bez pliku i przebudowy.
+  // game.neuroshima.characterCloset.regenerate() / .harvest() / .apply() / .report()
+  game.neuroshima.characterCloset = characterClosetApi;
 
   // Validate overrides
   const skillCount = Object.keys(CONFIG.DND5E.skills).length;

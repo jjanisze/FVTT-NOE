@@ -82,6 +82,14 @@
 | `scripts/actors/vehicle-portrait.mjs` | Karta Pojazdu (§1.15a) — przełącznik Portret/Token na żywym DOM stockowego `VehicleActorSheet` dnd5e (brak własnej podklasy Neuroshimy dla pojazdów) |
 | `scripts/actors/class-resource-dice.mjs` | Zdolności „raz na rundę, N kości" (Phase 3) — Wściekły cios wdrożony i przetestowany, mechanizm generyczny po `resource`/`oncePerTurn`, reszta rodziny czeka na osobny przebieg |
 | `templates/tab-zasoby.hbs` | Pusta skorupa zakładki Zasoby — wypełniana po renderze przez `sheet-shell.mjs` |
+| `scripts/dev/token-sizes.mjs` | Tabela rozmiarów + wzorce dnd5e + `storedScale()` — wspólna dla obu szaf i paczki testowej |
+| `scripts/dev/closet-layout.mjs` | Silnik układu szaf: pasma, rzędy po rozmiarze, kafle wzorców, podpisy |
+| `scripts/dev/character-closet.mjs` | Szafa z postaciami — 89 aktorów świata w pasmach wg jakości; `regenerate/harvest/apply/report` |
+| `scripts/dev/test-scenes.mjs` | Sceny kalibracyjne — flaga `testScene`, wyrzuć/zbuduj od nowa, jednorazowe kopie aktorów; wspólne plumbing dla Szafy i przyszłej strzelnicy |
+| `scripts/dev/monster-closet.mjs` | Szafa z potworami — 51 żetonów Bestiariusza + wzorce dnd5e per rozmiar; `regenerate/harvest/suggest/report/remove` |
+| `tokens/scale-overrides.json` | Skala żetonu per istota — **jedyne** źródło `prototypeToken.texture.scaleX/scaleY` |
+| `dev/icons/gen_scale_defaults.py` | Zasiew skali: docelowe wypełnienie kadru / zmierzone (`npm run seed:token-scales`) |
+| `scripts/tests/skala-zetonow.test.mjs` | Domknięcie `scale-overrides.json` — każda istota ma wpis, brak wpisów-widm, pack zgadza się z plikiem |
 | `styles/neuroshima.css` | CSS — post-apo visual + hide spellcasting (1365 linii, sekcje oznaczone `/* === */`, waliduj po edycji: `npm run validate:css`) |
 
 ---
@@ -699,12 +707,22 @@ Phase 5, teraz skreślony). Pełny opis pipeline'u: `DEV_GUIDE.md` §11.
   źródło koloru krwi dla Splatter (`prototypeToken.flags.splatter.bloodColor`)
 - [x] `config/detection-termowizja.mjs` — Termowizja jako prawdziwy DetectionMode na żetonie
   (schemat `senses` w dnd5e jest zamknięty). Widzi przez Niewidoczność, nie przez ściany
-- [x] Żetony top-down: 21/51 aliasy na grafikę systemową już w Data (`tokens/aliases.json`,
-  licencja Forgotten Adventures zabrania kopiowania plików), 30/51 wygenerowane placeholdery
-  (`tokens/_placeholder/`, żółto-czarny pas + kod literowy + trójkąt kierunku), reszta portret w
-  pierścieniu. Token art z Roll20 świadomie zignorowany (okrągłe kadry, nie top-down)
-- [ ] Docelowa grafika (poziom 1 pipeline'u) dla istot bez aliasu/artu — 30 z 51 wciąż na
-  placeholderze, patrz `tokens/README.md`
+- [x] Żetony top-down (stan 2026-09-20): **25/51 grafika docelowa** (`tokens/<id>.png`),
+  14/51 aliasy na grafikę systemową już w Data (`tokens/aliases.json`, licencja Forgotten
+  Adventures zabrania kopiowania plików), 12/51 wygenerowane placeholdery
+  (`tokens/_placeholder/`, żółto-czarny pas + kod literowy + trójkąt kierunku). Token art
+  z Roll20 świadomie zignorowany (okrągłe kadry, nie top-down)
+- [x] **Skala żetonu per istota** — `tokens/scale-overrides.json` jako jedyne źródło
+  `prototypeToken.texture.scaleX/scaleY`, zasiewane pomiarem obwiedni alfy
+  (`npm run seed:token-scales`), kalibrowane ręcznie w Szafie z potworami
+  (`game.neuroshima.monsterCloset`). Patrz `DEV_GUIDE.md` §11.7a i §11.7b
+- [x] **Pierwsze 25 z 51 żetonów docelowych** (`tokens/<id>.webp`) — w repo jako WEBP,
+  nie PNG: 39,5 MB → 4,9 MB, przy niezmienionej obwiedni alfy. Reguła zapisana w
+  `tokens/README.md`, `DEV_GUIDE.md` §11.7, `CONTRIBUTING.md` i `ARCHITECTURE.md`
+- [ ] Docelowa grafika (poziom 1 pipeline'u) dla pozostałych — 26 z 51 wciąż na
+  aliasie albo placeholderze, patrz `tokens/README.md`
+- [ ] Ręczna kalibracja skali (krok 2 obiegu z `PLAN_monster_closet.md` §8) — wartości
+  w `scale-overrides.json` są zasiane pomiarem, ale **żadna nie przeszła jeszcze przez oko MG**
 - [—] Zombie (nakładka Death Breath) i Mobsprzęt (losowane podwozie/broń) świadomie poza packiem —
   patrz `DEV_GUIDE.md` §11.8
 
@@ -4481,3 +4499,303 @@ Obronnych (RAW nazywa wyłącznie ataki w tej klauzuli).
 `module.json` `0.14.26` → `0.14.32`. Testy: 345/345 (`konfiguracja` +2 `it`, nowy
 `udzwig` batch, nowy `udzwig-atak` batch). Cały łańcuch zweryfikowany na żywo na
 prawdziwych postaciach (Alan, Raynald) na każdym etapie, nie tylko w testach.
+
+## Zmiany z 20 września 2026 (33) — Szafa z potworami: skala żetonów Bestiariusza
+
+Wdrożenie `PLAN_monster_closet.md`. Problem wyjściowy: 51 istot Bestiariusza, z tego
+25 z docelową grafiką top-down, i `prototypeToken.texture.scaleX` równe **1,0 dla
+wszystkich** — bo nikt nigdy nie przejrzał skali. 662 żetony dnd5e są kadrowane spójnie
+(dlatego „Mały" i „Średni" da się rozróżnić na mapie, mimo wspólnego pola 1×1); nasz art
+jest generowany i kadrowany niespójnie. Nie było przy tym gdzie tego porównać — poza
+wystawianiem istot pojedynczo na prawdziwą mapę.
+
+### Scena kalibracyjna, na żywo
+
+`scripts/dev/monster-closet.mjs` na wspólnym `scripts/dev/test-scenes.mjs`.
+`game.neuroshima.monsterCloset.regenerate()` wyrzuca i buduje od nowa scenę
+**3900 × 7500 px**: 51 żetonów w pasmach po kategorii (jak foldery kompendium),
+w pasmie rzędy po rozmiarze, a na początku **każdego** rzędu wzorzec dnd5e tego rozmiaru.
+
+Musi chodzić w żywej sesji, nie skryptem w `dev/`: rzut aktora z kompendium na scenę idzie
+przez `Actor.create({fromCompendium: true})` i pełne uzupełnianie domyślnych wartości
+schematu — maszynerię, która istnieje tylko w działającej grze.
+
+Trzy decyzje, których plan nie narzucał:
+
+- **Wzorzec powtarza się w każdym rzędzie.** Scena ma 7500 px wysokości; wzorzec stojący
+  raz na górze jest bezużyteczny, bo porównuje się przez przełączanie wzroku, nie z pamięci.
+- **Wzorce są kaflami, nie żetonami.** Kafel nie potrzebuje aktora (sześć śmieci mniej na
+  odtworzenie), a QuickScale rusza wyłącznie żetony — więc odnośnika nie da się
+  przypadkiem przeskalować w połowie kalibracji. `TileDocument` ma `texture.fit`, a
+  `contain` robi to samo co na żetonie, więc render jest identyczny.
+- **Wzorce wybrane danymi, nie z pamięci.** Z `dnd5e.monsters` przefiltrowane istoty
+  z `texture.scaleX === 1` **i** footprintem zgodnym z rozmiarem z podręcznika: Rat
+  (tiny, 45%), Goblin (sm, 74%), Bandit (med, 96%), Ogre (lg, 99%), Frost Giant
+  (huge, 92%), Tarrasque (grg, 96%). Oczywiste kandydatury odpadają właśnie na tym
+  filtrze — Hill Giant ma `scaleX: 1.66`, Ancient Red Dragon `width: 13` i `scaleX: 3`.
+  Cała szóstka dopisana do tabeli rozmiarów w `tokens/README.md`, gdzie brakowało
+  wzorców od Dużego w górę.
+
+Podpisy niosą klucz systemowy w nawiasie, bo **„Ogromny" znaczy w Neuroshimie i w polskim
+dnd5e dwa różne rozmiary** (`grg` vs `huge`). Bez tego podpis kłamie w jedną albo w drugą
+stronę i nie ma jak zgadnąć, w którą.
+
+### `tokens/scale-overrides.json` — jedno źródło, plus test, który to unosi
+
+Wariant (b) z §7 planu: builder czyta plik i **nic więcej**, żadnej wartości domyślnej pod
+spodem — bo domyślna schowana za nadpisaniem to drugie miejsce do sprawdzenia, kiedy żeton
+wychodzi w złym rozmiarze. Koszt: nowa istota jedzie na 1,0 po cichu. Za ten koszt płaci
+`scripts/tests/skala-zetonow.test.mjs` (12 `it`) — wywala, gdy jakaś istota nie ma wpisu,
+gdy plik ma wpisy-widma po literówce w id, i gdy pack rozjechał się z plikiem (czyli:
+poprawiłeś plik i nie przebudowałeś). Bez tego testu wariant (b) byłby wygodny, ale nie
+bezpieczny.
+
+### Decyzja §7 odwrócona — pomiar zamiast płaskiej tabeli
+
+§7 odrzucił pomiar per plik jako nieopłacalny i kazał zasiać skalę wprost docelowym
+wypełnieniem z tabeli rozmiarów. Zasiane tak (0,9 dla Średniego itd.), a potem zmierzone:
+**nasz art wypełnia kadr w 64–98%, nie w 100%**. Płaska wartość ląduje więc 10–20% za
+nisko dla Średnich i Dużych, a dla pożyczonej grafiki koni (kadr 64%) o 40%. Argument
+o koszcie nie utrzymał się — pomiar obwiedni alfy to trzy linijki Pillow.
+
+Po zgodzie MG: `dev/icons/gen_scale_defaults.py` (`npm run seed:token-scales`) liczy
+**docelowe wypełnienie / zmierzone wypełnienie**, na pliku wybranym tym samym łańcuchem
+priorytetów co `tokenArtFor()` w builderze. Każda istota startuje na swoim celu, więc
+ręczna kalibracja zajmuje się już tylko oceną artystyczną, nie odrabianiem arytmetyki.
+Wypełnienie mierzone **dłuższym** wymiarem obwiedni — ten decyduje o wylaniu się za pole,
+a wymiar poziomy (którym `tokens/README.md` opisuje Goblina/Bandytę/Orka) dla istot
+innych niż dwunożne nic nie mówi: Szczur dnd5e ma 27% w poziomie i 45% w pionie.
+
+`--check` nic nie zapisuje i pokazuje rozjazd; `--force` przelicza wszystko. Domyślnie
+**nie nadpisuje** istniejących wartości — wpis w pliku to wynik kalibracji MG.
+To samo w sesji: `game.neuroshima.monsterCloset.suggest()`, ta sama formuła, pomiar
+w `OffscreenCanvas`, zgodność z Pythonem sprawdzona na 7 istotach do ±1%.
+
+### Pułapka: skala żetonu jest animowana, więc `texture.scaleX` jest przejściowe
+
+`harvest()` czytał najpierw `token.texture.scaleX`. Pokazało się na próbie obiegu:
+ustawienie skali na 1,25 i natychmiastowy odczyt zwracały **1,05** (stara wartość),
+a 1,3/1,1 zwracało **1,06/1,05** — liczby w drodze, których nikt nie ustawił, a które
+wyglądają jak prawdziwy wynik kalibracji i wylądowałyby w pliku.
+
+Foundry animuje zmianę skali żetonu, więc przygotowane dane niosą w trakcie wartość
+pośrednią. `harvest()` i `report()` czytają teraz `token._source.texture.scaleX` — stan
+zapisany, niewrażliwy na animację (tą samą ścieżką czyta to dnd5e w `documents/token.mjs`).
+Drugi powód, żeby nie ruszać przygotowanej wartości: dnd5e mnoży ją przez
+`CONFIG.DND5E.actorSizes[size].dynamicTokenScale` dla żetonów z pierścieniem (u nas
+Mały = 0,8), więc zebranie jej wpisałoby ten mnożnik do pliku, a builder zastosowałby go
+po raz drugi przy następnym rzucie.
+
+### Dlaczego odczyt idzie z żetonu, a nie z aktora
+
+Rzut aktora z kompendium na **dowolną** scenę tworzy nową, światową kopię aktora — bez
+deduplikacji, dwa rzuty tej samej istoty to dwie niezależne kopie. Scena z 51 istotami to
+51 śmieci na odtworzenie, więc kopie mają flagę i własny folder, i giną razem z żetonami.
+Konsekwencja, która jest sednem: QuickScale'owe „zapisz do prototypu" trafia w kopię,
+którą zaraz wyrzucimy — nie w kompendium i nie w następny rzut. Dlatego `harvest()` czyta
+wprost z żetonów i dlatego **nie wolno** używać tego skrótu klawiszowego.
+
+Identyfikacja wszystkiego po flagach, nie po nazwie (nazwy scen nie są unikalne):
+`flags.<module>.testScene.{id,creatureId,role}` na scenie, żetonach, kaflach, rysunkach
+i kopiach aktorów. Odtworzenie kasuje **wyłącznie** to, co ma flagę — cokolwiek MG
+dorysuje, zostaje (ta sama umowa co `scenes/map-sync.mjs`). Flagę dokłada
+`test-scenes.mjs`, nie funkcja budująca, więc przyszła strzelnica nie ma jak wyprodukować
+dokumentu, którego następne odtworzenie nie posprząta.
+
+### Zweryfikowane na żywo
+
+Pełny obieg §8 przejechany end-to-end, z realnym zamknięciem i restartem Foundry'ego:
+
+- **Render zgadza się co do piksela.** `mesh.width === footprint × scaleX` dla całej
+  próby: Juggernaut 300×0,98 = 294, Gangus Kapo 100×1,05 = 105, Koń (Zdrowy)
+  200×1,41 = 282, Neokot 50×0,64 = 32, Megator 400×0,96 = 384.
+- **Pack ↔ plik ↔ scena bez rozjazdu** po przebudowie: `report()` zwraca puste
+  `noFileEntry`, `packVsFile` i `sceneVsFile` dla wszystkich 51.
+- **Zbieranie**: natychmiastowy odczyt po zmianie skali daje dokładnie 1,25 (przed
+  poprawką 1,05); nierówne osie raportowane jako `gangus-kapo (1.3/1.1)`.
+- **Scalanie, nie nadpisywanie**: skasowanie żetonu Megatora → `harvest()` widzi
+  50 żetonów, a `megator: 0.96` **zostaje** w wyniku. To jawny wymóg §8.3.
+- **Wyrzucanie i odtwarzanie**: 51 żetonów, 19 wzorców, 26 podpisów i 51 kopii aktorów
+  kasowane i wstawiane z powrotem, w kółko, bez osadu.
+
+### Stan końcowy (33)
+
+`module.json` `0.14.32` → `0.14.33`. Testy: **357/357** (nowy batch `skala-zetonow`,
++12 `it`). `validate:packs`, `validate:tests`, `validate:css` — czyste.
+Pack `bestiariusz` przebudowany: `skala żetonów: 51/51 z tokens/scale-overrides.json`.
+
+Po drodze poprawione liczniki, które były nieaktualne w trzech miejscach naraz
+(`tokens/README.md`, `DEV_GUIDE.md` §11.7, ta podsekcja Bestiariusza): grafika żetonów
+to **25 własna / 14 alias / 12 placeholder**, nie „21 alias / 30 placeholder".
+
+Świadomie nietknięte: **krok 2 obiegu, czyli ręczna kalibracja MG.** Wszystkie 51
+wartości są zasiane pomiarem, więc nic nie jest rażąco złe, ale żadna nie przeszła
+jeszcze przez oko człowieka — a właśnie po to ta scena istnieje. Nie ma też niczego, co
+pilnuje, czy zapisana wartość jest wciąż mierzona względem grafiki, którą istota *teraz*
+ma: podmiana aliasu na własny art zostawia starą liczbę, a `--check` to pokaże tylko
+wtedy, gdy ktoś je uruchomi.
+
+## Zmiany z 20 września 2026 (34) — Szafa z postaciami: ta sama kalibracja dla aktorów świata
+
+Drugi odbiorca plumbingu z (33). `PLAN_monster_closet.md` §5 zapowiadał, że będzie nim
+strzelnica; okazał się nim **drugi typ szafy** — ten sam problem skali żetonów, tylko dla
+aktorów świata: drużyny, BN-ów, pojazdów.
+
+### Dwie sceny, nie jedna z dodatkowymi pasmami
+
+Nie z powodu układu — układ jest identyczny i został w związku z tym wyjęty do
+`scripts/dev/closet-layout.mjs`, żeby dwie sceny nie były dwiema kopiami jednej pętli.
+Z powodu tego, **gdzie ląduje wynik**:
+
+| | Bestiariusz | Aktorzy świata |
+|---|---|---|
+| źródło | kompendium `bestiariusz` | `game.actors` |
+| zapis | `scale-overrides.json` → `build:bestiary` → pack | wprost na `actor.prototypeToken` |
+| kroki | 6, z zamknięciem Foundry'ego | 2, na żywo |
+| „zapisz do prototypu" w QuickScale | pułapka (kopia jednorazowa) | **działa poprawnie** |
+
+Aktor świata **jest** źródłem prawdy o swojej skali — nie ma pliku, przebudowy ani
+restartu. Jedna kanwa dla obu obiegów znaczyłaby dwa niekompatybilne sposoby
+zatwierdzania wyniku obok siebie i jeden `harvest()`, którego rezultat trzeba dzielić
+po rzędach.
+
+Nowy podział plików: `token-sizes.mjs` (tabela rozmiarów, wzorce, `storedScale()`),
+`closet-layout.mjs` (pasma, rzędy, kafle, podpisy), `test-scenes.mjs` (cykl życia),
+plus dwie cienkie szafy. `monster-closet.mjs` skurczył się z 507 do 382 linii i po
+refaktorze buduje bajt w bajt tę samą scenę.
+
+### Listujemy wszystko, a pasma niosą ocenę
+
+Pierwsza propozycja była kuratorska: do szafy trafia tych ~10 aktorów, które mają realny
+art. **MG odrzucił to z lepszym argumentem** — skoro scena jest jednorazowa i odtwarzana
+od zera, pełna lista jest prostsza *i* odporniejsza: nie ma wyjątków do pilnowania, nowy
+aktor zawsze się gdzieś pojawi, a śmieć robi się **widoczny** zamiast schowany. Pasma
+przejmują wtedy robotę audytu, w kolejności od gotowych do wyrzucenia:
+
+    Drużyna → BN z grafiką → Pojazdy i grupy → Kadry z Roll20 (do wymiany)
+    → Bez grafiki → Duplikaty Bestiariusza → dnd5e/JB2A (do usunięcia) → Testowe
+
+Paczka `skala-zetonow` pilnuje, żeby suma pasm równała się liczbie aktorów — bez tego
+scena przestaje być audytem w momencie, w którym klasyfikator pomyli jeden przypadek.
+
+Klasyfikacja po sygnałach pewnych, nie po nazwie: `_stats.compendiumSource` dla resztek
+SRD, nazwy i id z kompendium dla duplikatów Bestiariusza.
+
+### Co pokazał pierwszy audyt (89 aktorów)
+
+| pasmo | n |
+|---|---|
+| Drużyna | 14 (6 z własnym artem 2D, 2 na kadrze z Roll20, 6 bez grafiki) |
+| BN z grafiką żetonu | 2 |
+| Pojazdy i grupy | 3 |
+| Kadry z Roll20 | **33 — do wymiany, nie do skalowania** |
+| Bez grafiki | 2 |
+| Duplikaty Bestiariusza | 8 (Cyngiel, Kitchin, Spawacz, Pająk, Kurczak…) |
+| dnd5e / JB2A | 13 (resztki SRD, część na `scaleX 2`) |
+| Testowe i narzędziowe | 14 |
+
+**Kalibrowalnych jest 19.** Skalowanie okrągłego wycinka z Roll20 to strata czasu: kadr
+wypełnia kwadrat z definicji, więc „skala" nie jest tam żadną decyzją — te żetony
+potrzebują nowej grafiki, nie liczby.
+
+Dwa błędy w danych, których nic innego nie zgłaszało: **`GMT400` ma `size: huge`
+i `prototypeToken.width: 1`** (powinno być 3), a `Tarantula (Recovered)` — `med`
+przy `width: 2`. Dodatkowo **54 aktorów niesie okrągły kadr z Roll20 przy
+`lockRotation: false`**, czyli przy każdym ruchu żeton staje do góry nogami. To jest
+dokładnie ta awaria, dla której `tokens/README.md` każe przejść na rzut z góry.
+
+### Utwardzenie, które wymusiła ta szafa
+
+`clearTestScene()` kasował **każdego** aktora z flagą `testScene.id`. Było to bezpieczne,
+dopóki flagę nosiły wyłącznie kopie jednorazowe — ale ta szafa stawia żetony
+**prawdziwych postaci kampanii** na scenie, którą odtworzenie czyści. Jedno nieostrożne
+`createActors()` w funkcji budującej kasowałoby Alana i Lorentza, bez pytania i bez
+odwrotu.
+
+Kasowanie jest teraz zależne od jawnego `disposable: true`, ustawianego wyłącznie przez
+`createDisposableActors()`, a `clearTestScene()` raportuje w polu `spared`, ilu aktorów
+nie ruszył. Zweryfikowane aktorem-wabikiem (flaga sceny, brak `disposable`): przeżył,
+`spared: 1`, a postawiony obok aktor jednorazowy zniknął. Sama Szafa z postaciami **nie
+nadaje flagi żadnemu aktorowi** — flaga siedzi tylko na żetonie, i tylko ona jest
+potrzebna do zbierania.
+
+### Pasmo odnośnikowe drużyny w Szafie z potworami
+
+Wzorce dnd5e mówią, jak wygląda poprawnie skadrowany żeton w ogóle; pytanie, które pada
+przy stole, brzmi „czy ten Megator jest dobry **obok Alana**". Szafa z potworami zaczyna
+się teraz pasmem Drużyny: 6 postaci z realnym artem, **kaflami** (żeby nie było drugiego
+miejsca do ich kalibrowania i żeby nie przybywało kopii aktorów), w aktualnej skali — bo
+odnośnikiem ma być żeton, który naprawdę wchodzi na mapę. Kafle dostają podpis
+`nazwa ×skala`, którego same z siebie nie mają.
+
+Od razu coś pokazało: **wszystkie postacie poza Piekarzem czytają się wyraźnie mniej niż
+wzorzec Bandit.**
+
+### Pułapka rozwiązana po drodze
+
+`artKind()` rozpoznawał kadr z Roll20 wzorcem `token*` i wrzucał do pasma „do wymiany"
+**Alana (`token_2D.png`) i Laffitte'a (`Token_Lafitte_2D.png`)** — czyli dokładnie te
+dwie postacie, które art już mają. Eksport z Roll20 nazywa wycinek zawsze `token.png`,
+a obok, w tym samym katalogu, leży grafika dorobiona ręcznie. Dopasowanie jest teraz
+dokładne (`^token\\.(png|jpe?g|webp)$`) i ma własny test.
+
+### Stan końcowy (34)
+
+`module.json` `0.14.33` → `0.14.34`. Testy: **363/363** (`skala-zetonow` +6 `it`).
+`validate:packs`, `validate:tests`, `validate:css` — czyste.
+
+Zweryfikowane na żywo: odtworzenie Szafy z postaciami stawia 89 żetonów i **0 kopii
+aktorów**, `game.actors.size` nie drgnął; `harvest()` → `apply()` przeszło pełny
+round-trip na aktorze testowym (1,0 → 1,45 → zapis na `prototypeToken` → `harvest()`
+czysty → przywrócone); Szafa z potworami po refaktorze buduje identyczną scenę
+(51 żetonów, pełna zgodność pack ↔ plik ↔ scena).
+
+Świadomie nietknięte: **żadna z czterech kategorii śmieci nie została usunięta.**
+Scena je pokazuje i raport je wylicza, ale kasowanie aktorów kampanii to decyzja MG,
+nie skutek uboczny narzędzia diagnostycznego. Tak samo dwa błędy footprintu
+(`GMT400`, `Tarantula`) — zgłoszone, nienaprawione.
+
+## Zmiany z 20 września 2026 (35) — 25 docelowych żetonów Bestiariusza, WEBP zamiast PNG
+
+Pierwsza partia grafiki docelowej (poziom 1 pipeline'u z `tokens/README.md`): **25 z 51**
+istot ma własny żeton w rzucie z góry. Do repo weszły jako **WEBP**, i to jest tu cała treść
+wpisu, bo o mały włos weszłyby jako PNG.
+
+### Liczby
+
+| | rozmiar |
+|---|---|
+| PNG 1254×1254 RGBA, 25 plików | **39,5 MB** |
+| WEBP q92, te same 25 | **4,9 MB** (13%) |
+
+Repozytorium jest publiczne, a `.git` ma dziś 80 MB — 35 MB różnicy wchodziłoby do historii
+**na zawsze**, przy każdej kolejnej partii artu, a wycofanie tego później to `force-push` na
+publicznym repo. Drugi powód jest równie twardy i niezależny od gita: Foundry ładuje każdy
+żeton na scenie do pamięci GPU, a gracze go pobierają. Kilkanaście żetonów na mapie to
+kilkanaście plików — rozmiar przekłada się wprost na czas wczytywania sceny.
+
+### Konwersja niczego nie psuje
+
+Przy q92 **obwiednia kanału alfa nie przesuwa się ani o piksel** — sprawdzone na wszystkich
+25 plikach, delta 0,0000 co do trzeciego miejsca. To było istotne, bo `scale-overrides.json`
+liczy skalę jako „docelowe wypełnienie / zmierzone wypełnienie", więc ruch obwiedni
+unieważniłby świeżo zasiane wartości. Nie unieważnił: pack przebudowany po konwersji raportuje
+te same `skala żetonów: 51/51` i `własna 25/51`.
+
+PNG-i skasowane — inaczej oszczędność byłaby wyłącznie teoretyczna, bo `tokenArtFor()`
+sprawdza `webp` przed `png` i plik leżałby w repo, nie robiąc nic.
+
+### Reguła zapisana w czterech miejscach
+
+Bo to jest dokładnie ten rodzaj rzeczy, którego nie widać w code review („25 files added"):
+
+- `tokens/README.md` — sekcja z liczbami, powodami i snippetem konwersji,
+- `DEV_GUIDE.md` §11.7 — przy specyfikacji artu żetonów,
+- `CONTRIBUTING.md` — punkt 4 w „Proposing a change",
+- `ARCHITECTURE.md` — „AI Developer Notes", bo to pomyłka do popełnienia raz i na stałe.
+
+### Przy okazji
+
+`tokens/aliases.json` — skasowane linijki aliasów dla istot, które dostały własną grafikę
+(Bit-Boys, Pies Bojowy, Mrokoszczur, Myślący Szczur, Kanibal). Alias wygrywał z plikiem,
+więc bez tego nowy art byłby po cichu ignorowany.

@@ -804,6 +804,54 @@ const TOKEN_ALIASES = (() => {
 })();
 
 /**
+ * Creature id -> token scale, the SINGLE source of truth for
+ * `prototypeToken.texture.scaleX/scaleY`. One file, one mechanism — deliberately
+ * no size-tier lookup in here to fall back on (`PLAN_monster_closet.md` §7, option
+ * (b)), because a default hiding behind an override is a second place to look
+ * when a token comes out the wrong size. A creature missing from the file ships
+ * at 1.0 and gets named in the build report, with the tier default to paste in.
+ *
+ * Values are calibrated by eye in the Monster Closet scene and harvested from the
+ * placed tokens — never from an actor, see `scripts/dev/monster-closet.mjs`.
+ */
+const TOKEN_SCALES = (() => {
+  const p = path.join(MODULE_ROOT, "tokens", "scale-overrides.json");
+  if (!fs.existsSync(p)) return {};
+  try {
+    const raw = JSON.parse(fs.readFileSync(p, "utf8"));
+    const out = {};
+    for (const [k, v] of Object.entries(raw)) {
+      if (k.startsWith("//")) continue;
+      const n = Number(v);
+      // A zero or negative scale renders nothing at all, and silently: the token
+      // is there, selectable, with no art. Refuse it at build time instead.
+      if (!Number.isFinite(n) || n <= 0) {
+        console.error(`  tokens/scale-overrides.json: "${k}" is not a positive number (${v}) — ignoring`);
+        continue;
+      }
+      out[k] = n;
+    }
+    return out;
+  } catch (err) {
+    console.error(`  tokens/scale-overrides.json is not valid JSON — ignoring (${err.message})`);
+    return {};
+  }
+})();
+
+const scaleMisses = [];
+
+function tokenScaleFor(c) {
+  const scale = TOKEN_SCALES[c.id];
+  if (scale !== undefined) return scale;
+  // No value invented here on purpose. The seeder measures the creature's actual
+  // art (`dev/icons/gen_scale_defaults.py`); a flat size-tier guess baked in at
+  // build time would silently disagree with it, and the builder has no business
+  // being the second opinion on a number the file owns.
+  scaleMisses.push(`${c.id} (${c.size ?? "med"})`);
+  return 1;
+}
+
+/**
  * Find the migrated portrait for a creature.
  *
  * Only the portrait is harvested. The sibling `token.png` is deliberately
@@ -1143,6 +1191,7 @@ function buildNpc(c) {
   const token = tokenArtFor(c);
   const tokenArt = token?.src ?? null;
   const blood = BLOOD_TYPES[c.blood];
+  const tokenScale = tokenScaleFor(c);
   if (token) tokenSources[token.source].push(c.id);
 
   const actor = {
@@ -1218,7 +1267,7 @@ function buildNpc(c) {
       disposition: -1,
       texture: {
         src: tokenArt ?? art ?? "icons/svg/mystery-man.svg",
-        tint: "#ffffff", scaleX: 1, scaleY: 1, anchorX: 0.5, anchorY: 0.5,
+        tint: "#ffffff", scaleX: tokenScale, scaleY: tokenScale, anchorX: 0.5, anchorY: 0.5,
         fit: "contain", alphaThreshold: 0.75
       },
       ring: {
@@ -1492,6 +1541,12 @@ if (wanted(PACK.bestiariusz)) {
   }
   if (artMisses.length) {
     console.log(`  portrety nieznalezione (${artMisses.length}): ${artMisses.join(", ")}`);
+  }
+  const scaled = n - scaleMisses.length;
+  console.log(`  skala żetonów: ${scaled}/${n} z tokens/scale-overrides.json`);
+  if (scaleMisses.length) {
+    console.log(`    bez wpisu, jadą na 1.0 (${scaleMisses.length}): ${scaleMisses.join(", ")}`);
+    console.log(`    uzupełnij: npm run seed:token-scales`);
   }
 }
 

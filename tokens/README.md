@@ -25,13 +25,44 @@ game.actors.filter(a => a.getFlag("neuroshima-2026-overrides", "bestiary.tokenAr
 ## Wrzucanie docelowej grafiki
 
 Nazwa pliku = **id istoty** z `scripts/config/bestiary-data.mjs`
-(to slug nazwy pliku z `Podrecznik/Bestiariusz/`), rozszerzenie `.webp` (preferowane) lub `.png`.
+(to slug nazwy pliku z `Podrecznik/Bestiariusz/`), rozszerzenie **`.webp`**.
 
 ```
 tokens/bit-boys.webp
 tokens/juggernaut.webp
 tokens/kitchin.webp
 ```
+
+> ### WEBP, nie PNG — to nie jest preferencja stylistyczna
+>
+> Builder przyjmie `.png` (sprawdza `webp`, potem `png`), ale **nie wrzucaj go do repo**.
+> Zmierzone na tych 25 żetonach, 2026-09-20:
+>
+> | | rozmiar |
+> |---|---|
+> | PNG (1254×1254 RGBA) | **39,5 MB** |
+> | WEBP q92 | **4,9 MB** (13%) |
+>
+> Dwa powody, oba twarde:
+>
+> 1. **Repo jest publiczne, a git pamięta wiecznie.** 35 MB różnicy wchodzi do historii
+>    na zawsze; wycofanie tego później to `force-push` na publicznym repozytorium.
+>    Doszłoby do tego przy każdym kolejnym przebiegu artu.
+> 2. **Wydajność.** Foundry ładuje każdy żeton na scenie do pamięci GPU. Mniejszy plik
+>    to krótsze wczytywanie sceny i mniejszy transfer do graczy — a żetonów na mapie
+>    bywa kilkanaście naraz.
+>
+> Konwersja niczego nie psuje: przy q92 obwiednia kanału alfa **nie przesuwa się
+> ani o piksel** (sprawdzone na wszystkich 25 plikach, delta 0,0000), więc skale
+> z `scale-overrides.json` zostają ważne.
+>
+> ```python
+> from PIL import Image
+> Image.open("tokens/x.png").convert("RGBA").save("tokens/x.webp", "WEBP", quality=92, method=6)
+> ```
+>
+> Po konwersji **skasuj PNG** — inaczej oszczędność jest tylko teoretyczna — i przebuduj
+> pack (`npm run build:bestiary`, Foundry zamknięte), bo w kompendium siedzi ścieżka z rozszerzeniem.
 
 Po wrzuceniu uruchom `npm run build:bestiary` (Foundry zamknięte). Builder sam wykryje plik —
 nie trzeba nic konfigurować.
@@ -53,7 +84,7 @@ do naszego modułu już nie, gdyby moduł kiedykolwiek wyszedł poza tę maszyn�
 Alias **wygrywa** z plikiem w `tokens/`. Kiedy zrobisz własną grafikę dla danej istoty,
 usuń jej linijkę z `aliases.json`.
 
-Obecnie zaalias­owane: **21 z 51** istot.
+Obecnie zaalias­owane: **14 z 51** istot (stan 2026-09-20).
 
 ## Co się zmienia, gdy plik się pojawi
 
@@ -114,19 +145,31 @@ Najbliższe odpowiedniki dla Bestiariusza:
 Wynikają z rozmiaru istoty w podręczniku; builder ustawia je automatycznie.
 Skala 400 px na pole jest przejęta z dnd5e.
 
-| Rozmiar | Pola | Grafika | Wypełnienie | Przykłady |
-|---|---|---|---|---|
-| Malutki | 0,5 × 0,5 | 200×200 | 60% | Kitchin, Neokot, Techmorwa (malutka) |
-| **Mały** | 1 × 1 | 400×400 | **70%** | **Bit-Boys**, Mrokoszczur |
-| Średni | 1 × 1 | 400×400 | 90% | Cywil, Gangus Żołnierz, Biodroid |
-| Duży | 2 × 2 | 800×800 | 90% | Alahama, Korzec, Neogator |
-| Wielki | 3 × 3 | 1200×1200 | 92% | Juggernaut, Neoniedźwiedź, Gigamut |
-| Ogromny | 4 × 4 | 1600×1600 | 92% | Megator |
+| Rozmiar | Pola | Grafika | Wypełnienie | Wzorzec dnd5e (kadr) | Przykłady |
+|---|---|---|---|---|---|
+| Malutki | 0,5 × 0,5 | 200×200 | 60% | `beast/Rat` (45%) | Kitchin, Neokot, Techmorwa (malutka) |
+| **Mały** | 1 × 1 | 400×400 | **70%** | `humanoid/Goblin` (74%) | **Bit-Boys**, Mrokoszczur |
+| Średni | 1 × 1 | 400×400 | 90% | `humanoid/Bandit` (96%) | Cywil, Gangus Żołnierz, Biodroid |
+| Duży | 2 × 2 | 800×800 | 90% | `giant/Ogre` (99%) | Alahama, Korzec, Neogator |
+| Wielki | 3 × 3 | 1200×1200 | 92% | `giant/FrostGiant` (92%) | Juggernaut, Neoniedźwiedź, Gigamut |
+| Ogromny | 4 × 4 | 1600×1600 | 92% | `monstrosity/Tarrasque` (96%) | Megator |
+
+**Kolumna „Wzorzec"** to konkretny żeton dnd5e, którym mierzy się ten rozmiar
+w Szafie z potworami. Nie dobrane na oko: z packa `dnd5e.monsters` wybrane istoty,
+które mają `texture.scaleX === 1` **i** footprint zgodny z rozmiarem z podręcznika —
+tylko takie pokazują uczciwie, jak wygląda poprawnie skadrowany żeton bez skalowania.
+Odpadły przez to oczywiste kandydatury: Hill Giant (`scaleX: 1.66`) i Ancient Red
+Dragon (`width: 13`, `scaleX: 3`).
+
+⚠️ **Procent w tej kolumnie to *dłuższy* wymiar obwiedni alfy**, nie poziomy. Liczby
+przy Goblinie (67%), Bandycie (88%) i Orku (99%) wyżej w tym pliku to wymiar poziomy —
+dla istot innych niż dwunożne nic nie mówi (Szczur dnd5e: 27% w poziomie, 45% w pionie).
+Dłuższy wymiar decyduje, bo to on przesądza, czy grafika wyleje się za swoje pole.
 
 ⚠️ **Mały i Średni mają identyczny kadr 400×400 i identyczny żeton 1×1** — różni je wyłącznie
 wypełnienie. To jedyne, co odróżnia Bit-Boya od dorosłego człowieka na mapie.
 
-## Atrapy (`_placeholder/`) — 30 z 51
+## Atrapy (`_placeholder/`) — 12 z 51
 
 Generowane: `npm run build:token-placeholders` (źródło: `dev/bestiary/bestiary.json`,
 więc nie trzeba ich pilnować ręcznie). Mają być **jednoznacznie tymczasowe**, a mimo to
@@ -142,6 +185,63 @@ użyteczne w testach:
 - prawidłowy rozmiar kadru dla footprintu istoty (200/400/800/1200/1600).
 
 Nie kasuj ich po dostarczeniu prawdziwego artu — plik w `tokens/` i tak wygrywa.
+
+## Skala żetonu (`scale-overrides.json`)
+
+Wypełnienie kadru z tabeli wyżej to **cel**, a nie to, co grafika faktycznie robi.
+Nasz art wypełnia kadr w 64–98% (stan 2026-09-20), więc przy `scaleX: 1.0` istota
+o kadrze 77% renderuje się jako 77% pola, nie 90%. Różnicę odrabia
+`prototypeToken.texture.scaleX/scaleY`, a jego jedynym źródłem jest
+**`tokens/scale-overrides.json`**:
+
+```json
+{ "gangus-kapo": 1.05, "bit-boys": 0.81, "kon-zdrowy": 1.41 }
+```
+
+**Builder czyta ten plik i nic więcej** — nie ma pod nim żadnej domyślnej wartości
+per rozmiar. Zaleta: jedno miejsce, jeden mechanizm, dokładnie jak `aliases.json`.
+Koszt: istota bez wpisu jedzie na 1,0. Build to wypisuje, a paczka testowa
+`skala-zetonow` to wywala jako błąd — bez tego wariant „jeden plik" byłby wygodny,
+ale nie bezpieczny.
+
+### Zasiew: `npm run seed:token-scales`
+
+```bash
+npm run seed:token-scales              # dopisuje tylko brakujące wpisy
+npm run seed:token-scales -- --check   # nic nie zapisuje, pokazuje rozjazd
+npm run seed:token-scales -- --force   # przelicza wszystko od nowa
+```
+
+`dev/icons/gen_scale_defaults.py` mierzy obwiednię alfy pliku, który dana istota
+faktycznie dostanie w buildzie (ten sam łańcuch priorytetów co `tokenArtFor()`),
+i liczy `docelowe wypełnienie / zmierzone wypełnienie`. Każda istota **startuje
+na swoim celu**, więc ręczna kalibracja zajmuje się już tylko oceną artystyczną.
+
+**Domyślnie nie nadpisuje istniejących wartości** — wpis w pliku to wynik kalibracji
+MG. Gdy istota dostanie nową grafikę, jej stara wartość jest zmierzona względem
+poprzedniego pliku: `--check` pokazuje rozjazd, a skasowanie linijki i ponowne
+uruchomienie zasiewa ją na nowo.
+
+W trakcie sesji (Foundry otwarte, skrypt npm niedostępny) to samo robi
+`game.neuroshima.monsterCloset.suggest()` — ta sama formuła, pomiar po stronie
+przeglądarki, zgodność z Pythonem sprawdzona do ±1%.
+
+### Kalibracja ręczna: Szafa z potworami
+
+```js
+game.neuroshima.monsterCloset.regenerate()   // scena: 51 żetonów + wzorce dnd5e
+// …poprawiasz skalę QuickScale'em na pojedynczych żetonach…
+game.neuroshima.monsterCloset.harvest()      // odczyt → gotowy JSON do wklejenia
+```
+
+⚠️ **Nie używaj w QuickScale'u „zapisz do prototypu".** Żeton na tej scenie wisi na
+jednorazowej kopii aktora, więc zapis nie dociera ani do kompendium, ani do
+następnego rzutu tej istoty. `harvest()` czyta wprost z żetonów i właśnie dlatego
+działa. Pełny opis obiegu: `PLAN_monster_closet.md` §8.
+
+Po zebraniu: zamknij Foundry, `npm run build:bestiary`, uruchom z powrotem
+i `regenerate()` jeszcze raz — to pass weryfikacyjny na świeżych rzutach, a tylko
+świeże rzuty występują w prawdziwej grze.
 
 ## Szablony (`_template/`)
 

@@ -14,6 +14,7 @@
     "build:classes": "python dev/classes/gen_features.py && npm run build:icons && npm run build:packs && npm run validate:packs",
     "build:token-templates": "python dev/icons/gen_token_template.py",
     "build:token-placeholders": "python dev/icons/gen_token_placeholders.py",
+  "seed:token-scales": "python dev/icons/gen_scale_defaults.py",
     "extract:bestiary": "python dev/bestiary/extract_bestiary.py",
     "gen:bestiary": "python dev/bestiary/gen_bestiary.py",
     "build:bestiary": "npm run extract:bestiary && npm run gen:bestiary && node dev/packs/build-packs.mjs --only=bestiariusz"
