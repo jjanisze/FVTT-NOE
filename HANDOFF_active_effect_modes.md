@@ -86,7 +86,11 @@ Praktyczny wniosek: to jest **refaktor porządkujący przed v16**, a nie naprawa
 Możesz go zrobić spokojnie i w całości, ale nie wolno przy okazji „poprawiać" działających
 efektów — patrz §7.
 
-## 4. Lista miejsc (13 użyć, stan na 2026-09-22)
+## 4. Lista miejsc (19 miejsc, stan na 2026-09-22)
+
+13 przez stałą `CONST.ACTIVE_EFFECT_MODES` (§4a–c) i **6 wpisanych gołą liczbą** (§4e),
+których żadne szukanie po nazwie stałej nie znajdzie. Przeczytaj §4e, zanim uznasz robotę
+za skończoną.
 
 ### 4a. Zapisujące, z globalem `CONST` — zamiana wprost na `type: "…"`
 
@@ -128,6 +132,30 @@ trzyma LevelDB otwarte.
 ### 4d. Już zrobione — nie ruszaj
 
 `scripts/combat/crit-riders.mjs` (39–49) jest na nowym API. To wzorzec, nie zaległość.
+
+### 4e. UWAGA: sześć miejsc, których `grep ACTIVE_EFFECT_MODES` NIE znajdzie
+
+Dopisane po fakcie. „13 użyć" w tytule §4 to liczba odwołań do stałej — ale część kodu
+wpisuje tryb **gołą liczbą**, bez żadnej nazwy, więc nie pojawia się w żadnym oczywistym
+wyszukiwaniu. Zrobienie tylko listy z §4a–b zostawiłoby te efekty na starym kształcie i wyglądałoby
+na skończoną migrację.
+
+| plik | linie | tryb |
+|---|---|---|
+| `scripts/actors/class-state.mjs` | 82, 86, 88, 89 | `mode: 2` (Berserk: PO, obrażenia, testy SIŁ) |
+| `scripts/config/armor-data.mjs` | 261, 272 | `mode: 2` (premia do PO, odporności pancerza) |
+
+Wszystkie to `add`. Znajdziesz je (i ewentualne nowe) tak:
+
+```
+grep -rnE "mode:[[:space:]]*[0-9]+" scripts/ --include=*.mjs
+```
+
+Jeden fałszywy trop w wyniku: `scripts/config/podroz-data.mjs:34` ma `mode: 1`, ale to
+**modyfikator umiejętności w podróży**, nie zmiana Active Effectu. Nie ruszaj.
+
+`armor-data.mjs` zasila pack `pancerze`, więc dotyczy go ta sama uwaga o przebudowie packów
+co §4b.
 
 ## 5. Druga przeprowadzka, która cię ukąsi: `changes` → `system.changes`
 
