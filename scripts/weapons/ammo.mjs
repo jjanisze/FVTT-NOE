@@ -17,6 +17,7 @@ import { AMMO_CALIBER_MAP } from "../config/ammo-data.mjs";
 import { getLastAttackCoverDecision } from "../combat/cover.mjs";
 import { hasWeaponProperty } from "../config/weapons.mjs";
 import { playExplosionSoundForItem, playImpactSound } from "./sounds.mjs";
+import { getMag } from "./magazine.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const AMMO_PROPS_FLAG = "ammoProps";
@@ -57,6 +58,18 @@ export function registerAmmoSystem() {
 async function _onUpdateItemSyncCaliberDamage(item, changes) {
   if (item.type !== "weapon") return;
   if (syncingCaliberUpdate.has(item.uuid)) return;
+
+  /* Broń w systemie magazynków NIE przechodzi tędy.
+     `flags.mag` jest dla niej projekcją przeliczaną po każdym strzale, więc `ammoType` zmienia
+     się przy każdym naboju z mieszanego magazynka — a ten hook pisze do `system.damage.base`,
+     czyli do bazy, co z kolei odpala `syncWeaponFireModes` i resetuje `damage.parts` oraz flagi
+     modułu (udokumentowany wzorzec clobbera, ARCHITECTURE.md). Zamiast tego obrażenia
+     wstrzykiwane są w momencie rzutu — `effectiveDamageFor()` niżej. Zapis byłby cache'em,
+     a cache trzeba by unieważniać w każdym trybie ognia osobno (PLAN_magazynki.md §8).
+
+     Hook zostaje dla broni POZA systemem: ręcznie zrobione sztuki w świecie, na których MG
+     ustawia kaliber z ręki. Tam `flags.mag` jest nadal zwykłym stanem, nie projekcją. */
+  if (getMag(item) !== null) return;
 
   const ammoTypePath = `flags.${MODULE_ID}.mag.ammoType`;
   if (!foundry.utils.hasProperty(changes, ammoTypePath)) return;
@@ -125,7 +138,10 @@ async function _onPostRollAttackAutoApply(rolls, { subject } = {}) {
   const item = _getLiveItem(subject?.item);
   if (!item || item.type !== "weapon") return;
 
-  const caliberId = item.getFlag(MODULE_ID, "mag")?.ammoType ?? "";
+  /* Liczony stan, nie projekcja: w tym momencie nabój jeszcze NIE został zużyty (zużycie
+     następuje po rzucie, w `magazine.mjs`), więc głowa kolejki to dokładnie ten pocisk,
+     który właśnie poleciał. */
+  const caliberId = getMag(item)?.ammoType || item.getFlag(MODULE_ID, "mag")?.ammoType || "";
   if (!caliberId) return;
 
   const caliber = AMMO_CALIBER_MAP[caliberId];
@@ -239,7 +255,14 @@ function _onRenderAttackChatMessage(message, html) {
   const item = fromUuidSync(itemUuid);
   if (!item || item.type !== "weapon") return;
 
-  const caliberId = item.getFlag(MODULE_ID, "mag")?.ammoType ?? "";
+  /* Kaliber ostemplowany przy tworzeniu karty (`magazine.mjs`, `preCreateChatMessage`), czyli
+     ten, którym NAPRAWDĘ oddano ten strzał. Odczyt żywego stanu byłby tu błędny przy mieszanym
+     magazynku: render następuje po zużyciu naboju, więc pokazałby nabój NASTĘPNY — a po
+     przeładowaniu strony dowolny późniejszy. Fallback dla kart sprzed tej zmiany. */
+  const caliberId = message.getFlag?.(MODULE_ID, "shotCaliber")
+    ?? message.flags?.[MODULE_ID]?.shotCaliber
+    ?? item.getFlag(MODULE_ID, "mag")?.ammoType
+    ?? "";
   if (!caliberId) return;
 
   /* Only visible to GM and the weapon owner */
@@ -403,6 +426,23 @@ async function _applyDamageFromButton(dmg, label, sourceItem, caliberId) {
  * @param {object|null} caliber     `AMMO_CALIBER_MAP[caliberId]`, or null if unrecognised.
  * @returns {{formula: string, type: string, props: string[]}|null}
  */
+/**
+ * Profil obrażeń dla konkretnego naboju w tej broni — wspólny dla strzału pojedynczego
+ * (`ammo.mjs`) i dla serii (`fire-modes.mjs`).
+ *
+ * Kaliber niesie nie tylko `formula`, ale też **`props`** — dum-dum dokłada `rozrywajaca`
+ * i `hollowpoint`, a te napędzają `wkk/combat/weapon-save-properties.mjs` i `combat/bleeding.mjs`.
+ * Gdyby odświeżały się same kości, dum-dum zadałby swoje obrażenia, ale nie wywołał Krwawienia.
+ * **Obrażenia i właściwości idą zawsze razem** — dlatego jedna funkcja zwraca oba.
+ *
+ * @param {Item5e} item
+ * @param {string|null} caliberId
+ * @returns {{formula: string, type: string, props: string[]}|null}
+ */
+export function effectiveDamageFor(item, caliberId) {
+  return _effectiveDamage(item, caliberId ? (AMMO_CALIBER_MAP[caliberId] ?? null) : null);
+}
+
 function _effectiveDamage(item, caliber) {
   const preferWeaponDamage = (item.getFlag(MODULE_ID, "fixedDamage") === true) || !caliber;
   if (preferWeaponDamage) {

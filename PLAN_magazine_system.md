@@ -1,9 +1,25 @@
-# Plan: System Zapasowych Magazynków
+# Plan: System Zapasowych Magazynków (magazynki kwantowe)
 
-> **Status: DONE.** Sekcja „Zapasowe Magazynki" żywa w `actors/magazine-inventory.mjs` — patrz
-> `IMPLEMENTATION.md` §1.7 dla aktualnego stanu. Dopisano 2026-08-21 (dokument projektowy,
-> zostaje jako historia decyzji).
+> **Status: ZDEPRECJONOWANY — 2026-09-21.** Zastąpiony przez
+> [`PLAN_magazynki.md`](PLAN_magazynki.md) (magazynki symulacyjne).
 >
+> Opisany tu model był **w pełni zaimplementowany i działał** — stan na commit `aa2f77d`
+> (2026-09-20), pliki `actors/magazine-inventory.mjs` + `weapons/magazine.mjs`. To nie jest
+> dokument porzucony w połowie; to działająca funkcja, którą świadomie wycofujemy.
+>
+> **Dlaczego wycofana:** konsultacja z autorem mechaniki (Marcin Kubiesa) doprecyzowała RAI
+> — magazynek ma być fizycznym pojemnikiem na naboje, przypisanym do modelu broni, ładowanym
+> ręcznie poza walką. Model kwantowy (amunicja materializuje się przy wymianie, magazynki
+> odnawiają się za darmo po walce) jest z tym nie do pogodzenia.
+>
+> **Raczej tu nie wrócimy.** Kolor Chrom — jedyny kontekst, w którym „nie liczymy amunicji"
+> ma sens — ma w RAW **własną, inną zasadę** (brak liczenia w ogóle + naturalna 1 = głuche
+> kliknięcie), a nie magazynki kwantowe. Patrz `PLAN_magazynki.md` §2.
+>
+> Zostaje jako historia decyzji i jako opis tego, co migracja usuwa.
+
+---
+
 > Dokument projektowy — pisz tutaj, implementuj w `scripts/actors/magazine-inventory.mjs`  
 > Uzupełnienie do `PLAN_cover_fire_modes.md` i `ARCHITECTURE.md`
 

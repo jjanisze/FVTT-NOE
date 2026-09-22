@@ -47,6 +47,8 @@ import {
 } from "../config/exhaustion.mjs";
 import { applyZranienie, getZranienieLvl, setZranienie } from "../combat/zranienie.mjs";
 
+import { provenanceBadge } from "../actors/handy-items.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 
 /** `flags.<mod>.chemiaPending` — follow-ups waiting for their moment. */
@@ -648,6 +650,7 @@ async function _postCard(actor, def, key, item, lines, { head } = {}) {
       <div class="neuro-chemia-head">
         <img class="neuro-chemia-icon" src="${item?.img ?? def.img ?? "icons/svg/pill.svg"}" alt="">
         ${head ?? def.label}
+        ${item ? provenanceBadge(item) : ""}
       </div>
       <div class="neuro-chemia-flavor">${flavor}</div>
       ${lines.filter(Boolean).map(l => `<div class="neuro-chemia-line">${l}</div>`).join("")}

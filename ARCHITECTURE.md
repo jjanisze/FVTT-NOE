@@ -276,6 +276,30 @@ content that used to be scattered inline through otherwise-generic files with no
 future RAW-only build variant is a matter of consulting `scripts/wkk/registry.mjs`, not
 re-deriving a census from scratch.
 
+### 13. A Projection Is Written One Way, Never Read Back
+When a subsystem owns state in its own shape but must also surface it through a field the
+system (or an older part of this module) already reads, that field becomes a **projection**:
+computed from the owned state after every mutation, and never consulted to make a decision.
+
+The magazine rebuild (`PLAN_magazynki.md`) is the worked example. The truth is an ordered
+queue of rounds on a container item; `flags.<module>.mag` and `system.uses.max/spent` are
+projections of it, written only by `projectMagazineState()`.
+
+- **The direction has to be enforced, not assumed.** The previous code read the *delta* in
+  `system.uses.spent` to decide how many rounds to deduct, because dnd5e decrements it on
+  activity use. Once `uses` became a projection, that same read would have been reading our own
+  output — double deduction or a write loop, both silent. The rule is now stated at the
+  function that writes it and tested directly: a Quench case asserts no weapon activity declares
+  `itemUses`/`activityUses` consumption, because that is the single change that would make the
+  projection bidirectional again.
+- **A projection must be recomputed from the source, not incremented.** `getMag()` derives from
+  the queue every time rather than trusting the stored projection, so a stale projection is a
+  cosmetic bug for one render, never a wrong damage roll.
+- **The moment a rule reads the projection, it is a cache.** And a cache needs invalidating in
+  every path that moves the underlying state — for ammunition that is single shots, four burst
+  modes, the doublet, suppressive fire and jams, each separately. That is the cost the
+  one-directional rule buys out.
+
 ## Dokumentacja towarzysząca
 | Plik | Zawartość |
 |---|---|

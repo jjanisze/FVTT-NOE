@@ -12,7 +12,7 @@ import { hasAddon } from "../config/addons-data.mjs";
 export function registerWeaponJams() {
   Hooks.on("dnd5e.postRollAttack", onPostRollAttack);
   Hooks.on("dnd5e.preUseActivity", onPreUseActivity);
-  Hooks.on("dnd5e.postUseActivity", onPostUseActivity);
+  Hooks.on("deleteCombat", onDeleteCombat);
   Hooks.on("renderItemSheet5e", onRenderItemSheet);
 
   // Character-sheet inventory row highlight for a jammed/damaged firearm — same three
@@ -185,9 +185,36 @@ export async function rollJamCheck(item, { label = "Seria", chat = true } = {}) 
     });
   }
 
-  const jammed = roll.total === 1;
+  /* Czyszczenie broni (Podręcznik, „Czyszczenie broni palnej"): „jeśli w najbliższej walce
+     wypadnie wynik powodujący zacięcie, możesz go jednorazowo przerzucić".
+
+     Przerzut, nie odporność — stąd osobna ścieżka od `_getJamImmunityAbilityKey()` wyżej,
+     które w ogóle nie dopuszcza do rzutu. Tu rzut PADŁ, jest widoczny na czacie, i dopiero
+     wtedy godzina konserwacji daje drugą szansę. Różnica jest odczuwalna przy stole: przy
+     odporności nic się nie dzieje, przy przerzucie widać, że broń o włos się nie zacięła.
+
+     Flaga schodzi TYLKO tutaj, po realnym użyciu. Przedtem kasował ją `onPostUseActivity`,
+     czyli pierwszy strzał z brudną albo czystą lufą, bez związku z zacięciem — więc
+     konserwacja w praktyce nie dawała nic. */
+  let rerolled = null;
+  if (roll.total === 1 && isCleaned(liveItem)) {
+    rerolled = await new Roll("1d20").evaluate();
+    await _setWeaponMaintenanceState(liveItem, {
+      ...getWeaponMaintenanceState(liveItem),
+      cleaned: false
+    });
+    if (chat) {
+      await rerolled.toMessage({
+        speaker: ChatMessage.getSpeaker({ actor: liveItem.actor }),
+        flavor: `${liveItem.name} - przerzut zacięcia (broń wyczyszczona — jednorazowo)`
+      });
+    }
+  }
+
+  const finalRoll = rerolled ?? roll;
+  const jammed = finalRoll.total === 1;
   if (jammed) await setJammed(liveItem, { reason: label, chat: true });
-  return { jammed, roll };
+  return { jammed, roll: finalRoll, rerolled: !!rerolled };
 }
 
 export async function attemptClearJam(item) {
@@ -394,15 +421,34 @@ function onPreUseActivity(activity) {
   return false;
 }
 
-async function onPostUseActivity(activity) {
-  const liveItem = _getLiveItem(activity?.item);
-  if (!_isFirearmItem(liveItem) || !isCleaned(liveItem)) return;
-
-  const current = getWeaponMaintenanceState(liveItem);
-  await _setWeaponMaintenanceState(liveItem, {
-    ...current,
-    cleaned: false
-  });
+/**
+ * Koniec walki gasi konserwację na całej broni uczestników.
+ *
+ * RAW wiąże bufor z **najbliższą walką** („jeśli w najbliższej walce wypadnie wynik
+ * powodujący zacięcie"), więc niewykorzystany przepada razem z tą walką. Bez tego
+ * wyczyszczenie broni byłoby zakupem na zawsze i po kilku sesjach cała drużyna chodziłaby
+ * z przerzutem w kieszeni — decyzja „co wyczyścić przed jutrzejszym skokiem" straciłaby wagę.
+ *
+ * Liczy to **dokładnie jeden klient** — `game.users.activeGM.isSelf`, ten sam idiom co
+ * `combat/podpalenie.mjs`. Samo `game.user.isGM` nie wystarcza: przy dwóch podłączonych MG
+ * obaj wysłaliby te same zapisy, ścigając się o ten sam dokument.
+ *
+ * Postać, która w tej walce nie brała udziału, zachowuje swój bufor — i tak ma być: jej
+ * „najbliższa walka" dopiero nadejdzie.
+ */
+async function onDeleteCombat(combat) {
+  if (game.users.activeGM?.isSelf !== true) return;
+  for (const combatant of combat.combatants) {
+    const actor = combatant.actor;
+    if (!actor) continue;
+    for (const item of actor.items) {
+      if (!_isFirearmItem(item) || !isCleaned(item)) continue;
+      await _setWeaponMaintenanceState(item, {
+        ...getWeaponMaintenanceState(item),
+        cleaned: false
+      });
+    }
+  }
 }
 
 function onRenderItemSheet(app, html) {
@@ -583,6 +629,12 @@ function _onRenderActorSheetHighlightFault(app, html) {
     if (!_isFirearmItem(item)) return;
     if (isDamaged(item)) row.classList.add("neuro-weapon-damaged");
     else if (isJammed(item)) row.classList.add("neuro-weapon-jammed");
+    /* Osobna oś od dwóch powyższych: konserwacja jest stanem POZYTYWNYM i może współistnieć
+       z uszkodzeniem (wychuchana albo wyczyszczona broń wciąż może wymagać rusznikarza).
+       Obie klasy lecą niezależnie — pierwszeństwo w pasku rozstrzyga
+       `actors/item-state-pips.mjs`, bo to kwestia prezentacji, nie stanu. */
+    if (isPamperedWeapon(item)) row.classList.add("neuro-weapon-pampered");
+    if (isCleaned(item)) row.classList.add("neuro-weapon-cleaned");
   });
 }
 

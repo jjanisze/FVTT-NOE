@@ -136,7 +136,11 @@ export function registerEquipmentDataTests(quench) {
       it("broń z magazynkiem ma kaliber, a broń z kalibrem — sensowny magazynek", function () {
         for (const weapon of WEAPONS.filter(w => w.mag)) {
           expect(weapon.mag.max, `${weapon.name}: pojemność`).to.be.a("number").and.to.be.above(0);
-          expect(["mag", "wmag", "beb", "belt"], `${weapon.name}: rodzaj zasilania`).to.include(weapon.mag.kind);
+          /* `quiver` doszedł 2026-09-22 razem z magazynkami symulacyjnymi: łuki i kusza
+             bloczkowa dostały kołczan jako źródło zasilania, bo wcześniej nie miały żadnego
+             i strzały nie były liczone wcale (PLAN_magazynki.md §15.7). */
+          expect(["mag", "wmag", "beb", "belt", "quiver"], `${weapon.name}: rodzaj zasilania`)
+            .to.include(weapon.mag.kind);
         }
       });
 
@@ -187,6 +191,19 @@ export function registerEquipmentDataTests(quench) {
         await scratchCleanup();
       });
 
+      /**
+       * Zdejmuje flagi modelu magazynków, zostawiając samo `flags.mag` — czyli kształt
+       * broni SPRZED migracji (albo broni NPC, który w systemie magazynków nie jest).
+       * Dla takiej kopii `flags.mag` wciąż jest stanem, nie projekcją, więc audyt
+       * magazynka ma ją prawo sprawdzać i naprawiać.
+       */
+      function asLegacy(data) {
+        delete data.flags[MODULE_ID].loadedMag;
+        delete data.flags[MODULE_ID].rounds;
+        delete data.flags[MODULE_ID].chamber;
+        return data;
+      }
+
       /** Kopia katalogowa `cat` na aktorze testowym, z ręczną mutacją symulującą dryf. */
       async function driftedCopy(mutate) {
         const data = foundry.utils.deepClone(buildWeaponItemData(cat));
@@ -195,24 +212,54 @@ export function registerEquipmentDataTests(quench) {
         return item;
       }
 
-      it("wykrywa brak magazynka, zasięgu i właściwości", async function () {
+      it("wykrywa brak zasięgu i właściwości", async function () {
         const item = await driftedCopy(data => {
           data.system.properties = [];
           data.system.range = { value: null, long: null, units: "" };
-          delete data.flags[MODULE_ID].mag;
         });
 
         const labels = diffWeaponItem(item, cat).map(f => f.label);
         expect(labels).to.include("Zasięg — normalny");
         expect(labels).to.include("Zasięg — daleki");
         expect(labels).to.include("Właściwości (brakujące)");
+      });
+
+      it("broń sprzed migracji: brak `flags.mag` to wciąż dryf", async function () {
+        const item = await driftedCopy(data => {
+          asLegacy(data);
+          delete data.flags[MODULE_ID].mag;
+        });
+
+        const labels = diffWeaponItem(item, cat).map(f => f.label);
         expect(labels).to.include("Magazynek — pojemność");
         expect(labels).to.include("Magazynek — kaliber");
         expect(labels).to.include("Magazynek — stan naboi (current)");
       });
 
+      it("na modelu magazynków `flags.mag` NIGDY nie jest zgłaszane ani naprawiane", async function () {
+        /* Regresja: `flags.mag` przestało być stanem broni, a stało się projekcją
+           aktualnie wpiętego magazynka. Broń bez magazynka projektuje `max: 1` (sama
+           komora) przy katalogowych 2 — to poprawny stan gry, nie dryf. Bez strażnika
+           audyt zgłaszał fałszywy rozjazd na KAŻDEJ niepełnej broni w drużynie, a
+           `repairWeapons()` wpisywał wartość katalogową prosto w projekcję, skąd
+           najbliższe przeliczenie i tak ją zaraz kasowało. */
+        const item = await driftedCopy(data => {
+          data.flags[MODULE_ID].mag = { ammoType: cat.caliber, max: 1, current: 0 };
+        });
+
+        const labels = diffWeaponItem(item, cat).map(f => f.label);
+        expect(labels).to.not.include("Magazynek — pojemność");
+        expect(labels).to.not.include("Magazynek — kaliber");
+        expect(labels).to.not.include("Magazynek — stan naboi (current)");
+
+        const delta = buildWeaponRepairDelta(item, cat);
+        expect(foundry.utils.hasProperty(delta, `flags.${MODULE_ID}.mag`),
+          "naprawa nie dotyka projekcji").to.be.false;
+      });
+
       it("naprawia dryf, nigdy nie rusza ilości ani wyekwipowania", async function () {
         const item = await driftedCopy(data => {
+          asLegacy(data);
           data.system.properties = [];
           data.system.quantity = 5;
           data.system.equipped = true;
@@ -227,8 +274,9 @@ export function registerEquipmentDataTests(quench) {
         expect(foundry.utils.hasProperty(delta, "system.equipped"), "wyekwipowanie").to.be.false;
       });
 
-      it("magazynek z realnym stanem naboi: poprawia tylko pojemność, current zostaje", async function () {
+      it("broń sprzed migracji z realnym stanem naboi: poprawia tylko pojemność, current zostaje", async function () {
         const item = await driftedCopy(data => {
+          asLegacy(data);
           data.flags[MODULE_ID].mag = { ammoType: cat.caliber, max: 1, current: 1 };
         });
 
@@ -286,12 +334,20 @@ export function registerEquipmentDataTests(quench) {
 
       it("strzelba nabita alternatywnym kalibrem (Breneka) nie jest zgłaszana ani cofana do domyślnej amunicji", async function () {
         // Regresja: żywy przypadek Piekarza tuż po doładowaniu Breneki (12ga_b) do
-        // Obrzyna (domyślnie 12ga_s) — weapons/ammo.mjs poprawnie zmienia obrażenia na
-        // 2k6 obuchowe za każdym razem, gdy flags.mag.ammoType się zmienia; to żywy stan
-        // gry, nie dryf katalogowy. Bez `_hasAlternateAmmoLoaded()` `repairWeapons()`
-        // cofnąłby broń do domyślnego 2k4 kłute przy pierwszym audycie po przeładowaniu.
+        // Obrzyna (domyślnie 12ga_s). Profil obrażeń idzie za kalibrem, który naprawdę
+        // siedzi w lufie — to żywy stan gry, nie dryf katalogowy. Bez
+        // `_hasAlternateAmmoLoaded()` `repairWeapons()` cofnąłby broń do domyślnego
+        // 2k4 kłute przy pierwszym audycie po przeładowaniu. (Na modelu magazynków
+        // obrażenia wstrzykuje `effectiveDamageFor()` w momencie rzutu, ale kopie
+        // sprzed migracji wciąż mają stały profil wpisany w `system.damage.base` —
+        // i to je ten strażnik chroni.)
         const item = await driftedCopy(data => {
-          data.flags[MODULE_ID].mag.ammoType = "12ga_b";
+          /* Breneka siedzi w KOMORZE i kolejce, a projekcja celowo zostaje przy
+             katalogowym śrucie — tylko odczyt prawdziwego magazynu wykryje tu podmianę.
+             Gdyby `_hasAlternateAmmoLoaded()` wróciło do czytania `flags.mag`, ten test
+             pada, i o to chodzi: projekcji nie wolno używać jako źródła reguły. */
+          data.flags[MODULE_ID].chamber = { caliberId: "12ga_b" };
+          data.flags[MODULE_ID].rounds = ["12ga_b"];
           data.system.damage.base.denomination = 6; // 2k6 obuchowe — profil Breneki
           data.system.damage.base.types = ["bludgeoning"];
         });

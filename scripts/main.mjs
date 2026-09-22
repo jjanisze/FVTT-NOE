@@ -11,6 +11,7 @@
  * - Movement in meters
  */
 
+import { registerDocLiveness } from "./doc-liveness.mjs";
 import { registerSkills } from "./config/skills.mjs";
 import { registerTools } from "./config/tools.mjs";
 import { registerToolProficiency } from "./config/tool-proficiency.mjs";
@@ -36,6 +37,7 @@ import { registerPochodzeniaMigration } from "./migration/migrate-pochodzenia.mj
 import { registerSightRangeMigration } from "./migration/normalize-sight-range.mjs";
 import { registerFovMigration } from "./migration/normalize-fov-angle.mjs";
 import { registerPistoletRaceMigration } from "./migration/migrate-pistolet-race.mjs";
+import { registerMagazynkiMigration } from "./migration/migrate-magazynki.mjs";
 import { registerGearGraduationMigration } from "./migration/migrate-gear-graduation.mjs";
 import { registerMedykGraduationMigration } from "./migration/migrate-medyk-graduation.mjs";
 import { registerZetonLuxorMigration } from "./migration/migrate-zeton-luxor.mjs";
@@ -68,6 +70,7 @@ import { registerMeleeManeuvers, maneuversApi } from './combat/melee-maneuvers.m
 import { registerKnockoutAndLastAction, onPreUpdateActorDeathSaves } from "./combat/knockout.mjs";
 import { registerCoverSystem } from "./combat/cover.mjs";
 import { registerMagazines } from "./weapons/magazine.mjs";
+import { registerNpcAmmo } from "./weapons/npc-ammo.mjs";
 import { registerWeaponJams } from "./weapons/jams.mjs";
 import { registerMeleeDegradation } from "./weapons/melee-degradation.mjs";
 import { registerFireModes } from "./weapons/fire-modes.mjs";
@@ -101,6 +104,7 @@ import { openSoundDebugPanel, registerSoundDebugPanelControls } from "./weapons/
 import { registerAmmoSystem } from "./weapons/ammo.mjs";
 import { registerAmmoInventory } from "./actors/ammo-inventory.mjs";
 import { registerMagazineInventory } from "./actors/magazine-inventory.mjs";
+import { registerItemStatePips } from "./actors/item-state-pips.mjs";
 import { registerGrenadeInventory } from "./actors/grenade-inventory.mjs";
 import { registerSurowceInventory } from "./actors/surowce-inventory.mjs";
 import { registerLekiInventory } from "./actors/leki-inventory.mjs";
@@ -175,6 +179,10 @@ Hooks.once("init", () => {
   registerTermowizja();
   registerTermowizjaVision();
   registerNoktowizjaVision();
+  /* Pierwsze w kolejce: śledzi `preDelete*`, żeby każda późniejsza warstwa mogła zapytać
+     `isDocumentLive()` zanim zapisze do dokumentu z hooka. Samo nic nie robi poza notowaniem. */
+  registerDocLiveness();
+
   removeSpellcasting();
   // Must precede registerExhaustion: it rebuilds conditionTypes wholesale, and
   // exhaustion.mjs then tunes the entry it leaves behind.
@@ -201,6 +209,7 @@ Hooks.once("init", () => {
   registerSightRangeMigration();
   registerFovMigration();
   registerPistoletRaceMigration();
+  registerMagazynkiMigration();
   registerGearGraduationMigration();
   registerMedykGraduationMigration();
   registerZetonLuxorMigration();
@@ -254,6 +263,7 @@ Hooks.once("init", () => {
   registerKnockoutAndLastAction();
   registerCoverSystem();
   registerMagazines();
+  registerNpcAmmo();
   registerWeaponJams();
   registerMeleeDegradation();
   registerFireModes();
@@ -471,6 +481,13 @@ Hooks.once("ready", () => {
   // Karta drużyny — game.neuroshima.podroz.openBiomePicker(actor), .zapasy.hunt(grupa)
   game.neuroshima.podroz = travelApi;
   game.neuroshima.zapasy = suppliesApi;
+
+  /* Pasek plakietek stanu na wierszach ekwipunku. **Musi być zarejestrowany jako ostatni
+     z warstw dekorujących wiersze** — czyta klasy `neuro-*`, które dopinają `jams.mjs`,
+     `melee-degradation.mjs`, `power-source.mjs` i `addons-inventory.mjs`. Foundry woła hooki
+     w kolejności rejestracji, więc wcześniejsze miejsce w tej liście znaczy „zobaczy wiersz
+     bez ich klas" i cichą utratę połowy plakietek. Patrz nagłówek `item-state-pips.mjs`. */
+  registerItemStatePips();
 
   // Testy Quench — game.neuroshima.tests.run() / .run("choroby") / .list()
   game.neuroshima.tests = testsApi;

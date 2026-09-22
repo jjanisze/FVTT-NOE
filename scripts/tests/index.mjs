@@ -23,6 +23,8 @@ import { registerConfigTests } from "./config.test.mjs";
 import { registerEquipmentDataTests } from "./ekwipunek-dane.test.mjs";
 import { registerDiseaseTests } from "./choroby.test.mjs";
 import { registerAmmoTests } from "./amunicja.test.mjs";
+import { registerMagazynkiTests } from "./magazynki.test.mjs";
+import { registerWeaponStateTests } from "./stany-broni.test.mjs";
 import { registerPartyTests } from "./party.test.mjs";
 import { registerPoscigTests } from "./poscig.test.mjs";
 import { registerUdzwigTests } from "./udzwig.test.mjs";
@@ -36,6 +38,8 @@ export function registerQuenchTests() {
     registerEquipmentDataTests(quench);
     registerDiseaseTests(quench);
     registerAmmoTests(quench);
+    registerMagazynkiTests(quench);
+    registerWeaponStateTests(quench);
     registerPartyTests(quench);
     registerPoscigTests(quench);
     registerUdzwigTests(quench);

@@ -60,6 +60,7 @@
  * jednego awansu skolapsowała się do jednego realnego zapisu.
  */
 import { registerStealthExemption } from "./armor-rules.mjs";
+import { isDocumentLive } from "../doc-liveness.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const ABILITY_ID = "cichy-krok";
@@ -88,6 +89,9 @@ function _isWearingHeavyArmor(actor) {
  */
 async function _syncCichyKrokTerrain(actor) {
   if (!actor?.effects) return;
+  /* Debounce sprawia, że ten sync budzi się po haku, który go zamówił — czasem już po
+     skasowaniu aktora. Patrz `scripts/doc-liveness.mjs`. */
+  if (!isDocumentLive(actor)) return;
   const existing = actor.effects.get(TERRAIN_EFFECT_ID)
     ?? actor.effects.find(e => e.getFlag(MODULE_ID, TERRAIN_EFFECT_FLAG));
   const hasFeature = _hasCichyKrok(actor);

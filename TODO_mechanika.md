@@ -55,3 +55,37 @@ wariantu homebrew.
 `exhaustionSources` Raynalda ma **trzy identyczne wpisy** „Bezsenność" z tym samym `addedAt`
 (1777243420767) — wygląda na potrójne zapisanie tego samego zdarzenia. Zauważone przy audycie
 Kobaltu, nie ruszane, bo poza zakresem.
+
+
+---
+
+## Dopisane 2026-09-22 (magazynki symulacyjne)
+
+### Wepchnięcie pojedynczego naboju do broni z wymiennym magazynkiem — WKK
+
+**Skąd:** konsultacja z autorem mechaniki (Marcin Kubiesa). RAW tego nie przewiduje — przewiduje
+ładowanie po jednym naboju wyłącznie dla `wmag` i `beb`. Autor dopuszcza to jako **wadę** broni
+z wymiennym magazynkiem, okupioną testem **Zwinnych dłoni** (`zwi`).
+
+**Klasyfikacja:** WKK, nie RAI. Pomysł jest autora, ale liczby będą nasze — decyzja MG
+(2026-09-22). Przypis dla Marcina za pomysł należy się w komentarzu.
+
+**ST zależny od kalibru** — decyzja MG: im większy nabój, tym trudniej wepchnąć go pojedynczo
+w gniazdo magazynka. Propozycja siatki do zatwierdzenia, oparta na kategoriach, które już
+istnieją w `AMMO_CALIBERS[].category`:
+
+| Kategoria kalibru | ST | Uzasadnienie |
+|---|---|---|
+| Pistoletowa (.22 LR … .44 Mag) | 12 | krótki nabój, płytkie gniazdo — wykonalne pod presją |
+| Śrutowa (.12 Ga) | 14 | długa łuska, ale magazynki rurowe są wyrozumiałe |
+| Karabinowa (5,56 … .30-06) | 15 | długi nabój, sprężyna pod pełnym naciskiem |
+| .50 BMG i cięższe | 18 | rozmiar naboju czyni z tego głównie deklarację intencji |
+
+**Jak to wpiąć, gdy wejdzie:** ścieżka już istnieje i jest pusta z premedytacją —
+`_performLoadOneAction()` w `weapons/magazine.mjs` odrzuca dziś broń z wymiennym źródłem
+komunikatem „do wymiennego magazynka nie wkłada się naboi po jednym". To jest miejsce, w którym
+ma stanąć test; samo ładowanie obsługuje już `loadSingleRound()`, tylko jest bramkowane na
+`kind === "internal"`. Plik z regułą trafia do `scripts/wkk/`.
+
+**Otwarte pytanie:** co się dzieje przy porażce — akcja przepada (propozycja) czy nabój wypada
+i przepada? Pierwsze jest łagodniejsze i szybsze przy stole.

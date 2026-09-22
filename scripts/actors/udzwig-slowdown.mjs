@@ -64,6 +64,7 @@
  * feat, not this hook).
  */
 import { udzwigStatus } from "./encumbrance-breakdown.mjs";
+import { isDocumentLive } from "../doc-liveness.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 // Dokładnie 16 znaków [A-Za-z0-9] — wymóg Foundry dla _id dokumentu (policzone wprost:
@@ -98,6 +99,11 @@ function _currentZone(actor) {
  */
 async function _syncUdzwigSlowEffect(actor) {
   if (!actor?.effects) return;
+  /* Ten sync jest debounce'owany, więc z zasady budzi się długo po haku, który go zamówił —
+     w tym po skasowaniu aktora. `createEmbeddedDocuments` na skasowanym aktorze wraca błędem
+     „The Actor <id> does not exist in actors" jako nieobsłużone odrzucenie obietnicy i czerwonym
+     dymkiem u MG. Patrz `scripts/doc-liveness.mjs`. */
+  if (!isDocumentLive(actor)) return;
   const existing = actor.effects.get(EFFECT_ID) ?? actor.effects.find(e => e.getFlag(MODULE_ID, EFFECT_FLAG));
   const zone = _currentZone(actor);
 

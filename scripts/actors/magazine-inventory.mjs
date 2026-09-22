@@ -1,166 +1,40 @@
 /**
- * Neuroshima 5e — Zapasowe Magazynki (Spare Magazines) inventory section.
+ * Neuroshima 5e — sekcja „Magazynki" w ekwipunku.
  *
- * Wstrzykuje sekcję "Zapasowe Magazynki" ponad sekcją Amunicja.
- * Wyświetla się tylko gdy aktor ma ≥ 1 item spełniający filtr magazynka.
+ * Projekt: PLAN_magazynki.md §7. Wstrzykuje sekcję ponad sekcją Amunicja.
  *
- * Szczegóły projektu: PLAN_magazine_system.md
+ * ## Wiersz na SZTUKĘ, nie na klasę
+ *
+ * Do 2026-09-22 był to wiersz na *klasę* magazynka z kolumnami Ilość / Gotowych — bo magazynki
+ * były kwantowe i nie trzymały niczego własnego. Teraz każdy magazynek ma swoją zawartość,
+ * w ustalonej kolejności, więc **dwa magazynki 5,56 o różnej zawartości to dwa osobne dokumenty
+ * Item**, a `system.quantity` zostaje na 1. Grupowanie wizualne po broni robi to, co robiła
+ * kolumna Ilość: pozwala przeczytać osiem magazynków bez liczenia ich wzrokiem.
+ *
+ * ## Jedyna podpowiedź automatu
+ *
+ * Wiersz **pulsuje**, gdy magazynek nie jest pełny, a w ekwipunku leży pasujący kaliber. Nic
+ * więcej — nie ma automatycznego uzupełniania i nie będzie. „Które z trzech 7.62 napełnić" nie
+ * ma dobrej odpowiedzi, więc ładowanie jest jawną interakcją gracza, jak czyszczenie broni.
+ * Automat wskazuje palcem; decyduje człowiek.
  */
 
 import { AMMO_CALIBER_MAP } from "../config/ammo-data.mjs";
+import {
+  MAGAZINES, MAG_CLASSES, MAG_SUBTYPES, magazineDef, magClass, magIconPath,
+  magazineWeight, buildMagazineItemData
+} from "../config/magazines-data.mjs";
+import {
+  isMagazineItem, magazineDefOf, magazineRounds, describeRounds, acceptedCalibers
+} from "../weapons/magazine-model.mjs";
+import { openLoadWindow, unloadMagazineAction } from "../weapons/magazine.mjs";
+import { isAtHand, toggleAtHand, handyCount, HANDY_LIMIT } from "./handy-items.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
-/* ─────────────────────────────────────────────────────────────────
-   Stałe konfiguracyjne
-───────────────────────────────────────────────────────────────── */
-
-/** Prawidłowe podtypy magazynków — `system.type.subtype` na itemie consumable. */
-export const MAG_SUBTYPES = [
-  "magazine-short",
-  "magazine-medium",
-  "magazine-long",
-  "magazine-heavy",
-  "magazine-quiver",
-  "magazine-speedloader",
-];
-
-/** Nazwy wyświetlane dla każdego podtypu. */
-export const MAG_LABELS = {
-  "magazine-short":       "Krótki magazynek",
-  "magazine-medium":      "Pośredni magazynek",
-  "magazine-long":        "Długi magazynek",
-  "magazine-heavy":       "Ciężki magazynek / taśma",
-  "magazine-quiver":      "Kołczan",
-  "magazine-speedloader": "Szybkoładowarka rew.",
-};
-
-/** Ścieżki ikon (względem roota modułu) dla każdego podtypu. */
-export const MAG_ICONS = {
-  "magazine-short":       `modules/${MODULE_ID}/icons/magazines/mag_handgun.svg`,
-  "magazine-medium":      `modules/${MODULE_ID}/icons/magazines/mag_machine_pistol.svg`,
-  "magazine-long":        `modules/${MODULE_ID}/icons/magazines/mag_assault_rifle.svg`,
-  "magazine-heavy":       `modules/${MODULE_ID}/icons/magazines/mag_machine_gun_belt.svg`,
-  "magazine-quiver":      `modules/${MODULE_ID}/icons/magazines/quiver.svg`,
-  "magazine-speedloader": `modules/${MODULE_ID}/icons/magazines/speedloader.svg`,
-};
-
-/** Domyślne ceny w gb. */
-export const MAG_PRICES = {
-  "magazine-short":       10,
-  "magazine-medium":      15,
-  "magazine-long":        20,
-  "magazine-heavy":       40,
-  "magazine-quiver":      5,
-  "magazine-speedloader": 8,
-};
-
-/** Domyślne wagi w kg. */
-export const MAG_WEIGHTS = {
-  "magazine-short":       0.12,
-  "magazine-medium":      0.18,
-  "magazine-long":        0.24,
-  "magazine-heavy":       0.80,
-  "magazine-quiver":      0.10,
-  "magazine-speedloader": 0.06,
-};
-
-/* ─────────────────────────────────────────────────────────────────
-   Mapowanie: broń → typ magazynka
-───────────────────────────────────────────────────────────────── */
-
-/** Bezpośrednie mapowanie Neuroshima weapon type → subtype magazynka. */
-const WEAPON_TYPE_TO_MAG = {
-  palnaKrotka: "magazine-short",
-  palnaPosr:   "magazine-medium",
-  palnaDluga:  "magazine-long",
-  palnaCiezka: "magazine-heavy",
-  miotana:     "magazine-quiver",
-  // biala, specjalna, natural → null (brak zewnętrznego magazynka)
-};
-
-/** Mapowanie kategorii kalibru → subtype dla broni martialR (bez beb/wmag). */
-const CALIBER_CATEGORY_TO_MAG = {
-  "Pistoletowa": "magazine-short",
-  "Karabinowa":  "magazine-long",   // nadpisane dla .50 BMG poniżej
-  "Śrutowa":     "magazine-medium",
-  "Miotana":     "magazine-quiver",
-  // Granatnikowa → null
-};
-
-/** Specjalne mapowania kalibru ID → override (nadpisują kategorię). */
-const CALIBER_ID_OVERRIDE = {
-  "50bmg": "magazine-heavy",
-};
-
-/**
- * Wyznacza typ magazynka (subtype string lub null) dla danej broni.
- *
- * Kolejność priorytetów:
- *   1. Właściwość "beb" → speedloader
- *   2. Właściwość "wmag" → null (wbudowany magazynek)
- *   3. Neuroshima weapon type (palnaKrotka itp.)
- *   4. martialR → dedukcja z kalibru (ammoType) przez kategorię
- *   5. Fallback → "magazine-short"
- *
- * @param {Item5e} weapon
- * @returns {string|null}
- */
-export function getMagTypeForWeapon(weapon) {
-  const props = weapon.system.properties ?? {};
-  const hasProp = key => (props instanceof Set ? props.has(key) : !!props[key]);
-
-  // Krok 1: właściwości wewnętrzne
-  if (hasProp("beb")) return "magazine-speedloader";
-  if (hasProp("wmag")) return null;
-
-  // Krok 2: Neuroshima weapon type
-  const wType = weapon.system.type?.value ?? "";
-  if (wType in WEAPON_TYPE_TO_MAG) return WEAPON_TYPE_TO_MAG[wType];
-  if (["biala", "specjalna", "natural"].includes(wType)) return null;
-
-  // Krok 3: martialR / nieznany typ → dedukcja z kalibru
-  const ammoType = weapon.flags?.[MODULE_ID]?.mag?.ammoType;
-  if (ammoType) {
-    // Sprawdź override po ID kalibru
-    if (ammoType in CALIBER_ID_OVERRIDE) return CALIBER_ID_OVERRIDE[ammoType];
-
-    // Sprawdź kategorię
-    const caliberDef = AMMO_CALIBER_MAP[ammoType];
-    if (caliberDef?.category && caliberDef.category in CALIBER_CATEGORY_TO_MAG) {
-      return CALIBER_CATEGORY_TO_MAG[caliberDef.category];
-    }
-  }
-
-  // Krok 4: ostateczny fallback
-  return "magazine-short";
-}
-
-/* ─────────────────────────────────────────────────────────────────
-   Pomocniki
-───────────────────────────────────────────────────────────────── */
-
-/**
- * Zwraca liczbę gotowych (załadowanych) magazynków z flag modułu.
- * @param {Item5e} item
- * @returns {number}
- */
-function getReadyCount(item) {
-  return item.flags?.[MODULE_ID]?.ready ?? 0;
-}
-
-/**
- * Czy item jest magazynkiem (consumable ammo z subtype "magazine-*")?
- * @param {Item5e} item
- * @returns {boolean}
- */
-export function isMagazineItem(item) {
-  return (
-    item.type === "consumable" &&
-    item.system.type?.value === "ammo" &&
-    item.system.type?.subtype?.startsWith("magazine-")
-  );
-}
+/* Re-eksport dla zgodności — `MAG_SUBTYPES` i `isMagazineItem` mieszkają teraz przy danych
+   i przy modelu, ale importowanie ich stąd jest nadal sensowne dla kodu UI. */
+export { MAG_SUBTYPES, isMagazineItem };
 
 /* ─────────────────────────────────────────────────────────────────
    Rejestracja hooków
@@ -178,7 +52,7 @@ export function registerMagazineInventory() {
 }
 
 /* ─────────────────────────────────────────────────────────────────
-   Główna funkcja wstrzykiwania
+   Wstrzykiwanie sekcji
 ───────────────────────────────────────────────────────────────── */
 
 function _onRenderActorSheetInjectMagazines(app, html) {
@@ -191,320 +65,311 @@ function _onRenderActorSheetInjectMagazines(app, html) {
     : null;
   if (!root) return;
 
-  const inventoryTab = root.querySelector('.tab.inventory')
-    ?? root.querySelector('.inventory-element')
+  const inventoryTab = root.querySelector(".tab.inventory")
+    ?? root.querySelector(".inventory-element")
     ?? root.querySelector('section[data-tab="inventory"]')
     ?? root.querySelector('div[data-tab="inventory"]');
   if (!inventoryTab) return;
+  if (inventoryTab.querySelector(".neuro-add-magazine-btn")) return;   // nie wstrzykuj dwa razy
 
-  // Guard — nie wstrzykuj dwa razy
-  if (inventoryTab.querySelector('.neuro-add-magazine-btn')) return;
+  const magazines = (actor.items ?? []).filter(isMagazineItem);
+  const inCombat = !!actor.inCombat;
 
-  // Filtruj magazynki (sekcja zawsze widoczna żeby móc dodać pierwszy)
-  const magazines = (actor.items || []).filter(isMagazineItem);
+  /* Który magazynek siedzi w której broni — jeden przebieg, zamiast szukania per wiersz. */
+  const loadedIn = new Map();
+  for (const weapon of actor.items ?? []) {
+    if (weapon.type !== "weapon") continue;
+    const id = weapon.getFlag(MODULE_ID, "loadedMag");
+    if (id) loadedIn.set(id, weapon);
+  }
 
-  // Akumulatory stopki
+  const wrapper = document.createElement("div");
+  wrapper.className = "neuro-magazine-wrapper";
+  wrapper.appendChild(_buildHeader(actor));
+
+  const list = document.createElement("ul");
+  list.className = "item-list neuro-magazine-list";
+
   let totalPrice = 0;
   let totalWeightKg = 0;
 
-  const uiList = document.createElement("ul");
-  uiList.className = "item-list neuro-magazine-list";
-  uiList.style.cssText = "margin-top:0; padding:0; list-style:none;";
-
-  for (const mag of magazines) {
-    const qty = mag.system.quantity ?? 0;
-    const ready = getReadyCount(mag);
-    const weight = mag.system.weight?.value ?? 0;
-    const price = mag.system.price?.value ?? 0;
-    const subtype = mag.system.type?.subtype ?? "magazine-short";
-    const iconSrc = mag.img || MAG_ICONS[subtype] || MAG_ICONS["magazine-short"];
-
-    const wKg = weight * qty;
-    totalWeightKg += wKg;
-    totalPrice += price * qty;
-    const weightStr = wKg < 1 ? Math.round(wKg * 1000) + " g" : wKg.toFixed(2) + " kg";
-
-    // Czy pokazywać kolumnę "Gotowych"? Nie dla kołczanu.
-    const showReady = subtype !== "magazine-quiver";
-
-    const iconHtml = `<dnd5e-icon draggable="false" src="${iconSrc}" aria-label="${mag.name}" class="item-image gold-icon" style="--icon-fill: #9f9275"></dnd5e-icon>`;
-
-    const li = document.createElement("li");
-    li.className = "item collapsible collapsed";
-    li.setAttribute("data-item-id", mag.id);
-    li.style.cssText = "list-style:none; margin-bottom:0;";
-
-    li.innerHTML = `
-      <div class="item-row flexrow" style="display:flex; align-items:center; justify-content:space-between; background-color:#252830; height:42px; border-bottom:1px dotted #3B3D46; padding:0 5px; color:#cacdd5;">
-        <div class="item-name item-action item-tooltip rollable flexrow" role="button" aria-label="${mag.name}" style="flex:2; align-items:center; gap:8px;">
-          ${iconHtml}
-          <div class="name name-stacked flexcol">
-            <span class="title" style="color:#cacdd5; font-weight:500;">${mag.name}</span>
-          </div>
-        </div>
-        <div class="item-detail item-price" style="flex:0 0 80px; text-align:center; display:flex; align-items:center; justify-content:center;">
-          <span class="value">${price} gb</span>
-        </div>
-        <div class="item-detail item-weight" style="flex:0 0 60px; text-align:center; display:flex; align-items:center; justify-content:center;">
-          <span class="value">${weightStr}</span>
-        </div>
-        <div class="item-detail item-quantity" style="flex:0 0 70px; display:flex; align-items:center; justify-content:space-evenly;">
-          <a class="adjustment-button always-interactive" data-action="decrease" data-field="qty">
-            <i class="fa-solid fa-minus" inert=""></i>
-          </a>
-          <input type="text" class="always-interactive neuro-qty-input" value="${qty}" placeholder="0"
-            data-dtype="Number" inputmode="numeric" pattern="^(\\+|-|=)?\\d*" min="0" aria-label="Ilość">
-          <a class="adjustment-button always-interactive" data-action="increase" data-field="qty">
-            <i class="fa-solid fa-plus" inert=""></i>
-          </a>
-        </div>
-        <div class="item-detail item-ready" style="flex:0 0 70px; display:flex; align-items:center; justify-content:space-evenly;">
-          ${showReady ? `
-          <a class="adjustment-button always-interactive" data-action="decrease" data-field="ready">
-            <i class="fa-solid fa-minus" inert=""></i>
-          </a>
-          <input type="text" class="always-interactive neuro-ready-input" value="${ready}" placeholder="0"
-            data-dtype="Number" inputmode="numeric" pattern="^(\\+|-|=)?\\d*" min="0" aria-label="Gotowych">
-          <a class="adjustment-button always-interactive" data-action="increase" data-field="ready">
-            <i class="fa-solid fa-plus" inert=""></i>
-          </a>
-          ` : `<span style="color:#666; font-size:0.8em;">—</span>`}
-        </div>
-        <div class="item-detail item-controls always-visible" style="flex:0 0 70px; text-align:right; display:flex; align-items:center; justify-content:flex-end; gap:8px;">
-          <button type="button" class="unbutton config-button item-control item-edit" title="Edytuj" style="color:#ccc;">
-            <i class="fas fa-edit" inert=""></i>
-          </button>
-          <button type="button" class="unbutton config-button item-control item-delete" title="Usuń" style="color:#ccc;">
-            <i class="fas fa-trash" inert=""></i>
-          </button>
-        </div>
-      </div>
-    `;
-
-    // --- Event listenery ---
-    const qtyInput = li.querySelector('.neuro-qty-input');
-    const readyInput = li.querySelector('.neuro-ready-input');
-
-    // Quantity change
-    qtyInput?.addEventListener('change', async (e) => {
-      const val = Math.max(0, parseInt(e.target.value, 10) || 0);
-      qtyInput.value = val;
-      const currentReady = getReadyCount(mag);
-      const newReady = Math.min(currentReady, val);  // ready ≤ qty
-      await mag.update({ "system.quantity": val, [`flags.${MODULE_ID}.ready`]: newReady });
-      if (readyInput) readyInput.value = newReady;
-    });
-
-    // Ready change
-    readyInput?.addEventListener('change', async (e) => {
-      const maxReady = mag.system.quantity ?? 0;
-      const val = Math.min(maxReady, Math.max(0, parseInt(e.target.value, 10) || 0));
-      readyInput.value = val;
-      await mag.update({ [`flags.${MODULE_ID}.ready`]: val });
-    });
-
-    // Adjustment buttons
-    li.querySelectorAll('.adjustment-button[data-action]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const field = btn.dataset.field;
-        const isIncrease = btn.dataset.action === 'increase';
-        const input = field === 'qty' ? qtyInput : readyInput;
-        if (!input) return;
-        const current = parseInt(input.value, 10) || 0;
-        input.value = Math.max(0, current + (isIncrease ? 1 : -1));
-        input.dispatchEvent(new Event('change'));
-      });
-    });
-
-    // Edit / Delete
-    li.querySelector('.item-edit')?.addEventListener('click', () => mag.sheet.render(true));
-    li.querySelector('.item-delete')?.addEventListener('click', () => mag.deleteDialog());
-
-    // Ukryj natywne renderowanie (jeśli pojawia się w "Używki")
-    const nativeLi = inventoryTab.querySelector(`li[data-item-id="${mag.id}"]`);
-    nativeLi?.remove();
-
-    uiList.appendChild(li);
+  for (const group of _groupMagazines(magazines)) {
+    if (group.label) {
+      const heading = document.createElement("li");
+      heading.className = "neuro-magazine-group";
+      heading.textContent = group.label;
+      list.appendChild(heading);
+    }
+    for (const mag of group.items) {
+      const def = magazineDefOf(mag);
+      const rounds = magazineRounds(mag);
+      const weight = magazineWeight(def, rounds);
+      totalWeightKg += weight;
+      totalPrice += magClass(def).price;
+      list.appendChild(_buildRow(actor, mag, def, rounds, {
+        weight, inCombat, loadedInto: loadedIn.get(mag.id) ?? null
+      }));
+      /* Natywny wiersz w „Używki" pokazywałby ten sam przedmiot drugi raz, bez zawartości. */
+      inventoryTab.querySelector(`li[data-item-id="${mag.id}"]`)?.remove();
+    }
   }
 
-  /* ── Panel (nagłówek + lista) ─────────────────────────────── */
-  const panel = document.createElement("div");
-  panel.innerHTML = `
-    <div class="items-header header flexrow" style="display:flex; align-items:center; justify-content:space-between; background-color:#471d24; height:30px; border-bottom:2px solid #FFFFFF; color:#FFFFFF; font-size:0.9em; font-weight:bold; padding:0 5px;">
-      <h3 class="item-name" style="flex:2; margin:0; padding-left:5px; color:#FFFFFF; font-size:1.1em; text-decoration:none; border:none;">Zapasowe Magazynki</h3>
-      <div class="item-header item-price" style="flex:0 0 80px; text-align:center;">Cena</div>
-      <div class="item-header item-weight" style="flex:0 0 60px; text-align:center;">Waga</div>
-      <div class="item-header item-quantity" style="flex:0 0 70px; text-align:center;">Ilość</div>
-      <div class="item-header item-ready" style="flex:0 0 70px; text-align:center;">Gotowych</div>
-      <div class="item-header item-controls" style="flex:0 0 70px;"></div>
-    </div>
-  `;
-  panel.appendChild(uiList);
+  wrapper.appendChild(list);
+  wrapper.appendChild(_buildFooter(actor, { totalPrice, totalWeightKg }));
 
-  /* ── Stopka ───────────────────────────────────────────────── */
-  const totalWeightFooterStr = totalWeightKg < 1
-    ? Math.round(totalWeightKg * 1000) + " g"
-    : totalWeightKg.toFixed(2) + " kg";
-
-  const footer = document.createElement("div");
-  footer.style.cssText = "display:flex; align-items:center; margin-top:4px; gap:0;";
-
-  const footerBtn = document.createElement("button");
-  footerBtn.type = "button";
-  footerBtn.className = "neuro-add-magazine-btn";
-  footerBtn.innerHTML = `<i class="fas fa-layer-group"></i> DODAJ MAGAZYNEK`;
-  footerBtn.style.cssText = "flex:1; text-align:left; padding:4px 12px; background:rgba(45,55,72,0.2); border:1px solid #556270; color:var(--color-text-light-primary); white-space:nowrap;";
-  footerBtn.addEventListener("click", (ev) => {
-    ev.preventDefault();
-    _showMagazineDialog(actor);
-  });
-
-  const summary = document.createElement("div");
-  summary.className = "neuro-magazine-summary";
-  summary.style.cssText = "flex:0 0 auto; display:flex; align-items:center; font-size:0.85em; color:var(--color-text-secondary,#aaa);";
-  summary.innerHTML = `
-    <span style="padding:0 10px; text-align:right;">Cena: <strong style="color:var(--color-text-light-primary,#e0e0e0);">${Math.round(totalPrice)} gb</strong></span>
-    <span style="display:inline-block; width:1px; height:16px; background:#556270; margin:0;"></span>
-    <span style="padding:0 10px; text-align:right;">Waga: <strong style="color:var(--color-text-light-primary,#e0e0e0);">${totalWeightFooterStr}</strong></span>
-  `;
-
-  footer.appendChild(footerBtn);
-  footer.appendChild(summary);
-
-  /* ── Wrapper — jeden flex-child w dnd5e-inventory ─────────── */
-  const wrapper = document.createElement("div");
-  wrapper.className = "neuro-magazine-wrapper";
-  wrapper.appendChild(panel);
-  wrapper.appendChild(footer);
-
-  // Wstaw przed sekcją Amunicja lub po .currency
-  const ammoWrapper = inventoryTab.querySelector('.neuro-ammo-wrapper');
-  if (ammoWrapper) {
-    ammoWrapper.before(wrapper);
-  } else {
-    const currencyHeader = inventoryTab.querySelector('.currency');
+  const ammoWrapper = inventoryTab.querySelector(".neuro-ammo-wrapper");
+  if (ammoWrapper) ammoWrapper.before(wrapper);
+  else {
+    const currencyHeader = inventoryTab.querySelector(".currency");
     currencyHeader ? currencyHeader.after(wrapper) : inventoryTab.prepend(wrapper);
   }
 }
 
 /* ─────────────────────────────────────────────────────────────────
-   Dialog "Dodaj Magazynek"
+   Grupowanie
 ───────────────────────────────────────────────────────────────── */
 
-async function _showMagazineDialog(actor) {
-  const typeOptions = MAG_SUBTYPES.map(sub =>
-    `<option value="${sub}">${MAG_LABELS[sub]} (${MAG_PRICES[sub]} gb)</option>`
-  ).join("");
+/**
+ * Magazynki pogrupowane po gnieździe (czyli po modelu broni), szybkoładowarki i kołczany na
+ * końcu. Nagłówek grupy pojawia się dopiero od dwóch grup — przy jednym magazynku byłby
+ * ozdobnikiem.
+ */
+function _groupMagazines(magazines) {
+  const byKey = new Map();
+  for (const mag of magazines) {
+    const def = magazineDefOf(mag);
+    const key = def ? (def.magwell ?? `caliber:${def.caliber}`) : "__unknown";
+    if (!byKey.has(key)) byKey.set(key, { label: _groupLabel(def), items: [] });
+    byKey.get(key).items.push(mag);
+  }
+  const groups = [...byKey.values()];
+  if (groups.length <= 1) for (const g of groups) g.label = null;
+  return groups;
+}
 
-  const content = `
-    <form>
-      <div class="form-group">
-        <label>Typ</label>
-        <div class="form-fields">
-          <select name="magSubtype" style="width:100%;">${typeOptions}</select>
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Ilość</label>
-        <div class="form-fields">
-          <input type="number" name="quantity" value="2" min="1" max="99">
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Gotowych</label>
-        <div class="form-fields">
-          <input type="number" name="ready" value="2" min="0" max="99">
-        </div>
-      </div>
-      <hr>
-      <div style="text-align:center; font-size:1.1em; color:var(--color-text-light-highlight);">
-        Waga: <span id="mag-total-weight">0.0</span> kg &nbsp;|&nbsp; Cena: <span id="mag-total-price">0</span> gb
-      </div>
-    </form>
-  `;
-
-  const { DialogV2 } = foundry.applications.api;
-
-  await DialogV2.wait({
-    window: { title: "Dodaj Magazynek" },
-    content,
-    render: (_event, dialogApp) => {
-      const root = dialogApp?.element || (dialogApp?.querySelector ? dialogApp : document);
-      const typeSelect = root.querySelector('[name="magSubtype"]');
-      const qtyInput = root.querySelector('[name="quantity"]');
-      const readyInput = root.querySelector('[name="ready"]');
-      const weightSpan = root.querySelector('#mag-total-weight');
-      const priceSpan = root.querySelector('#mag-total-price');
-
-      function updateTotals() {
-        const sub = typeSelect?.value ?? "magazine-short";
-        const qty = parseInt(qtyInput?.value) || 0;
-        const w = MAG_WEIGHTS[sub] ?? 0.12;
-        const p = MAG_PRICES[sub] ?? 10;
-        if (weightSpan) weightSpan.textContent = (w * qty).toFixed(2);
-        if (priceSpan) priceSpan.textContent = Math.ceil(p * qty);
-        // Sync ready max do qty
-        if (readyInput) readyInput.max = qty;
-      }
-
-      typeSelect?.addEventListener('change', updateTotals);
-      qtyInput?.addEventListener('input', updateTotals);
-      updateTotals();
-    },
-    buttons: [
-      {
-        action: "add",
-        icon: "fa-solid fa-check",
-        label: "Dodaj",
-        callback: async (_event, _button, dialog) => {
-          const sub = dialog.element.querySelector('[name="magSubtype"]')?.value;
-          const qty = parseInt(dialog.element.querySelector('[name="quantity"]')?.value || "0", 10);
-          const ready = Math.min(qty, parseInt(dialog.element.querySelector('[name="ready"]')?.value || "0", 10));
-          if (sub && qty > 0) {
-            await _addMagazineToActor(actor, sub, qty, ready);
-          }
-        },
-      },
-      { action: "cancel", icon: "fa-solid fa-times", label: "Anuluj" },
-    ],
-  });
+function _groupLabel(def) {
+  if (!def) return "Nierozpoznane";
+  if (def.kind === "speedloader") return `Szybkoładowarki ${_caliberLabel(def.caliber)}`;
+  if (def.kind === "quiver") return def.name;
+  return def.name.replace(/^Magazynek do /, "Do ").replace(/^Taśma do /, "Taśma do ");
 }
 
 /* ─────────────────────────────────────────────────────────────────
-   Tworzenie / aktualizacja itemu magazynka
+   Wiersz
 ───────────────────────────────────────────────────────────────── */
 
-async function _addMagazineToActor(actor, subtype, quantity, ready) {
-  // Szukaj istniejącego itemu tego podtypu
-  const existing = actor.items.find(
-    (i) => isMagazineItem(i) && i.system.type?.subtype === subtype
-  );
+function _buildRow(actor, mag, def, rounds, { weight, inCombat, loadedInto }) {
+  const capacity = def?.capacity ?? 0;
+  const full = def && rounds.length >= capacity;
+  const canTopUp = def && !full && _hasMatchingAmmo(actor, def);
 
-  if (existing) {
-    const newQty = (existing.system.quantity ?? 0) + quantity;
-    const newReady = Math.min(newQty, getReadyCount(existing) + ready);
-    await existing.update({
-      "system.quantity": newQty,
-      [`flags.${MODULE_ID}.ready`]: newReady,
-    });
-    ui.notifications.info(`Zwiększono ilość ${MAG_LABELS[subtype]} do ${newQty}.`);
-  } else {
-    const itemData = {
-      name: MAG_LABELS[subtype],
-      type: "consumable",
-      img: MAG_ICONS[subtype],
-      system: {
-        type: { value: "ammo", subtype },
-        quantity,
-        weight: { value: MAG_WEIGHTS[subtype], units: "kg" },
-        price: { value: MAG_PRICES[subtype], denomination: "gb" },
-      },
-      flags: {
-        [MODULE_ID]: { ready },
-      },
-    };
-    await Item.create(itemData, { parent: actor });
-    ui.notifications.info(`Dodano ${quantity} szt.: ${MAG_LABELS[subtype]}.`);
+  const li = document.createElement("li");
+  li.className = "item neuro-magazine-item";
+  li.dataset.itemId = mag.id;
+  /* Pulsowanie = „masz czym to dopełnić". Jedyna podpowiedź, jaką ten panel daje. */
+  if (canTopUp) li.classList.add("is-toppable");
+  if (!def) li.classList.add("is-inert");
+
+  const weightStr = weight < 1 ? `${Math.round(weight * 1000)} g` : `${weight.toFixed(2)} kg`;
+  const contents = describeRounds(rounds);
+  const whereNote = loadedInto
+    ? `<span class="neuro-magazine-in" data-tooltip="Wpięty w broń — wypnij go z karty broni.">w: ${loadedInto.name}</span>`
+    : "";
+
+  li.innerHTML = `
+    <div class="item-row flexrow neuro-magazine-row">
+      <div class="item-name flexrow">
+        <dnd5e-icon draggable="false" src="${mag.img || magIconPath(def?.cls)}" aria-label="${mag.name}"
+                    class="item-image gold-icon"></dnd5e-icon>
+        <div class="name name-stacked flexcol">
+          <span class="title">${mag.name}</span>
+          <span class="subtitle">${contents}${whereNote ? ` · ${whereNote}` : ""}</span>
+        </div>
+      </div>
+      <div class="item-detail neuro-magazine-fill">
+        ${def ? `<span class="neuro-magazine-count ${full ? "is-full" : ""}">${rounds.length}/${capacity}</span>`
+              : `<span class="neuro-magazine-count is-inert" data-tooltip="Nierozpoznany magazynek — brak definicji w katalogu.">?</span>`}
+      </div>
+      <div class="item-detail item-weight"><span class="value">${weightStr}</span></div>
+      <div class="item-detail item-controls always-visible neuro-magazine-controls">
+        <button type="button" class="unbutton item-control neuro-mag-hand ${isAtHand(mag) ? "is-on" : ""}"
+                data-tooltip="Przedmiot podręczny: wyciągnięcie w ramach Darmowej Interakcji. Maksymalnie ${HANDY_LIMIT} łącznie z granatami i lekami.">
+          <i class="fas fa-hand" inert></i>
+        </button>
+        <button type="button" class="unbutton item-control neuro-mag-load" ${inCombat || !def ? "disabled" : ""}
+                data-tooltip="${inCombat ? "Naboi nie wkłada się do magazynka w walce." : "Załaduj"}">
+          <i class="fas fa-download" inert></i>
+        </button>
+        <button type="button" class="unbutton item-control neuro-mag-unload" ${inCombat || !rounds.length ? "disabled" : ""}
+                data-tooltip="${inCombat ? "Rozładowywanie nie jest czynnością bojową." : "Rozładuj wszystko"}">
+          <i class="fas fa-upload" inert></i>
+        </button>
+        <button type="button" class="unbutton config-button item-control item-edit" data-tooltip="Edytuj">
+          <i class="fas fa-edit" inert></i>
+        </button>
+        <button type="button" class="unbutton config-button item-control item-delete" data-tooltip="Usuń">
+          <i class="fas fa-trash" inert></i>
+        </button>
+      </div>
+    </div>
+    ${rounds.length ? `<div class="neuro-magazine-queue"><span class="label">Kolejność wystrzału:</span> ${_queuePreview(rounds)}</div>` : ""}
+  `;
+
+  li.querySelector(".neuro-mag-hand")?.addEventListener("click", async ev => {
+    ev.preventDefault();
+    await toggleAtHand(mag);
+  });
+  li.querySelector(".neuro-mag-load")?.addEventListener("click", ev => {
+    ev.preventDefault();
+    void openLoadWindow(mag);
+  });
+  li.querySelector(".neuro-mag-unload")?.addEventListener("click", ev => {
+    ev.preventDefault();
+    void unloadMagazineAction(mag);
+  });
+  li.querySelector(".item-edit")?.addEventListener("click", () => mag.sheet.render(true));
+  li.querySelector(".item-delete")?.addEventListener("click", () => mag.deleteDialog());
+
+  return li;
+}
+
+/** Podgląd kolejki: zwinięty do grup, w kolejności wystrzału (pierwszy chip leci pierwszy). */
+function _queuePreview(rounds) {
+  const groups = [];
+  for (const id of rounds) {
+    const last = groups[groups.length - 1];
+    if (last && last.id === id) last.n += 1;
+    else groups.push({ id, n: 1 });
   }
+  return groups.map(g => `<span class="neuro-magazine-chip">▸ ${g.n}× ${_caliberLabel(g.id)}</span>`).join("");
+}
+
+/** Czy aktor ma w ekwipunku nabój, który wolno wsadzić do tego pojemnika. */
+function _hasMatchingAmmo(actor, def) {
+  const ids = new Set(acceptedCalibers(def).map(c => c.id));
+  return (actor.items ?? []).some(i =>
+    i.type === "consumable"
+    && i.system?.type?.value === "ammo"
+    && ids.has(i.system?.type?.subtype)
+    && Number(i.system?.quantity ?? 0) > 0);
+}
+
+function _caliberLabel(id) {
+  return AMMO_CALIBER_MAP[id]?.label ?? id;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Nagłówek i stopka
+───────────────────────────────────────────────────────────────── */
+
+function _buildHeader(actor) {
+  const used = handyCount(actor);
+  const header = document.createElement("div");
+  header.className = "items-header header flexrow neuro-magazine-header";
+  header.innerHTML = `
+    <h3 class="item-name">Magazynki</h3>
+    <span class="neuro-handy-counter ${used >= HANDY_LIMIT ? "is-full" : ""}"
+          data-tooltip="Przedmioty podręczne przy pasie — magazynki, granaty i leki łącznie. RAW: maksymalnie ${HANDY_LIMIT}.">
+      <i class="fas fa-hand" inert></i> ${used}/${HANDY_LIMIT}
+    </span>
+    <div class="item-header neuro-magazine-fill">Naboje</div>
+    <div class="item-header item-weight">Waga</div>
+    <div class="item-header item-controls"></div>
+  `;
+  return header;
+}
+
+function _buildFooter(actor, { totalPrice, totalWeightKg }) {
+  const weightStr = totalWeightKg < 1
+    ? `${Math.round(totalWeightKg * 1000)} g`
+    : `${totalWeightKg.toFixed(2)} kg`;
+
+  const footer = document.createElement("div");
+  footer.className = "neuro-magazine-footer";
+
+  const addBtn = document.createElement("button");
+  addBtn.type = "button";
+  addBtn.className = "neuro-add-magazine-btn";
+  addBtn.innerHTML = `<i class="fas fa-layer-group"></i> DODAJ MAGAZYNEK`;
+  addBtn.addEventListener("click", ev => {
+    ev.preventDefault();
+    void _showMagazineDialog(actor);
+  });
+
+  const summary = document.createElement("div");
+  summary.className = "neuro-magazine-summary";
+  summary.innerHTML = `
+    <span>Cena: <strong>${Math.round(totalPrice)} gb</strong></span>
+    <span class="sep"></span>
+    <span>Waga: <strong>${weightStr}</strong></span>
+  `;
+
+  footer.appendChild(addBtn);
+  footer.appendChild(summary);
+  return footer;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Dialog „Dodaj magazynek"
+───────────────────────────────────────────────────────────────── */
+
+/**
+ * Wybór z katalogu, nie z sześciu klas rozmiaru.
+ *
+ * Magazynek generyczny przestał istnieć jako przedmiot: nie da się już stworzyć „Magazynka
+ * (broń palna krótka)". Kategoria broni jest odtąd wyłącznie pojęciem cennikowym — kupuje się
+ * „Magazynek do Desert Eagle", nie „magazynek do pistoletu". Wynika to wprost z zasady
+ * „per model broni" i gdyby generyczny magazynek dało się tu stworzyć, wracałby tylnymi
+ * drzwiami przy każdym zakupie.
+ */
+async function _showMagazineDialog(actor) {
+  const byGroup = new Map();
+  for (const def of MAGAZINES) {
+    const group = MAG_CLASSES[def.cls]?.label ?? "Inne";
+    if (!byGroup.has(group)) byGroup.set(group, []);
+    byGroup.get(group).push(def);
+  }
+
+  const options = [...byGroup.entries()].map(([group, defs]) =>
+    `<optgroup label="${group}">`
+    + defs.map(d => `<option value="${d.id}">${d.name} — ${d.capacity} szt. `
+      + `${_caliberLabel(d.caliber)}, ${magClass(d).price} gb</option>`).join("")
+    + `</optgroup>`).join("");
+
+  const content = `
+    <form class="neuro-add-magazine-form">
+      <div class="form-group">
+        <label>Magazynek</label>
+        <div class="form-fields"><select name="magId">${options}</select></div>
+      </div>
+      <div class="form-group">
+        <label>Ile sztuk</label>
+        <div class="form-fields"><input type="number" name="count" value="1" min="1" max="12"></div>
+      </div>
+      <p class="hint">Magazynki przychodzą <strong>puste</strong> — naboje wkłada się do nich
+      osobno, przyciskiem „Załaduj". Każda sztuka to osobny przedmiot, bo każda ma własną
+      zawartość.</p>
+    </form>`;
+
+  await foundry.applications.api.DialogV2.wait({
+    window: { title: "Dodaj magazynek" },
+    content,
+    buttons: [
+      {
+        action: "add", icon: "fa-solid fa-check", label: "Dodaj", default: true,
+        callback: async (_event, _button, dialog) => {
+          const root = dialog.element;
+          const id = root.querySelector('[name="magId"]')?.value;
+          const count = Math.max(1, parseInt(root.querySelector('[name="count"]')?.value || "1", 10));
+          const def = magazineDef(id);
+          if (!def) return;
+          const data = Array.from({ length: count }, () => buildMagazineItemData(def));
+          await actor.createEmbeddedDocuments("Item", data);
+          ui.notifications.info(`Dodano ${count}× ${def.name}.`);
+        }
+      },
+      { action: "cancel", icon: "fa-solid fa-times", label: "Anuluj" }
+    ],
+    rejectClose: false
+  });
 }

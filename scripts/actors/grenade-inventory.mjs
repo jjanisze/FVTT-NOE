@@ -85,6 +85,8 @@ import {
   SCORCH_MARK, SCORCH_SIZE_FRACTION, SCORCH_MARK_LIFETIME_SECONDS
 } from "../config/explosion-vfx.mjs";
 
+import { provenanceBadge, handyToggleHtml, bindHandyToggle } from "./handy-items.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 // Actor flag — GM-consumed, mirrors flara.mjs's FLAG_PENDING idiom. Payload:
 // {sceneId, kind: "explosion"|"mine", x, y, area, color, itemName, areaText,
@@ -248,13 +250,16 @@ function _onRenderActorSheetInjectGrenadeSection(app, html) {
         <div class="item-detail" style="flex:0 0 150px; text-align:center; font-size:0.85em;">${area}</div>
         <div class="item-detail" style="flex:0 0 130px; text-align:center; font-size:0.85em;">${save}</div>
         <div class="item-detail" style="flex:2; text-align:left; font-size:0.83em; line-height:1.2; padding:0 8px;">${effect}</div>
-        <div class="item-detail item-controls always-visible" style="flex:0 0 102px; text-align:right; display:flex; align-items:center; justify-content:flex-end; gap:8px;">
+        <div class="item-detail item-controls always-visible" style="flex:0 0 126px; text-align:right; display:flex; align-items:center; justify-content:flex-end; gap:8px;">
+          ${handyToggleHtml(item)}
           <button type="button" class="unbutton config-button item-control item-throw" title="Rzuć" style="color:#ccc;"><i class="fas fa-bomb" inert></i></button>
           <button type="button" class="unbutton config-button item-control item-edit" title="Edytuj" style="color:#ccc;"><i class="fas fa-edit" inert></i></button>
           <button type="button" class="unbutton config-button item-control item-delete" title="Usuń" style="color:#ccc;"><i class="fas fa-trash" inert></i></button>
         </div>
       </div>
     `;
+
+    bindHandyToggle(li, item);
 
     const qtyInput = li.querySelector('input[data-name="system.quantity"]');
     qtyInput.addEventListener('change', async (e) => {
@@ -497,6 +502,7 @@ async function _throwExplosive(actor, item, def) {
       <div style="display:flex; align-items:center; gap:8px; margin-bottom:6px;">
         <img src="${item.img}" alt="${item.name}" width="28" height="28" style="border:none;" />
         <strong style="font-size:1.05em;">Rzut: ${item.name}</strong>
+        ${provenanceBadge(item)}
       </div>
       <div><strong>Odległość rzutu:</strong> <span style="color:${throwColor}; font-weight:700;">${throwContext.distance.toFixed(1)} m</span> / ${throwContext.range.max.toFixed(1)} m (SIŁ ${throwContext.range.str}, ${throwContext.range.weight.toFixed(1)} kg)</div>
       <div><strong>Obszar:</strong> ${throwContext.area.label}</div>

@@ -24,6 +24,11 @@
 | `scripts/config/phobias-data.mjs` | 8 fobii (k8) — Efekt + Przełamanie wg RAW |
 | `scripts/config/chemia-data.mjs` | 35 pozycji chemii: leki, narkotyki, używki, materiały pirotechniczne — dane, Active Effects, activities |
 | `scripts/items/chemia.mjs` | Egzekwowanie chemii: leczenie, dawki dzienne, szał, efekty odroczone, karty czatu |
+| `scripts/config/magazines-data.mjs` | Katalog pojemników na naboje (31): magazynki per model, taśmy, kołczany, szybkoładowarki |
+| `scripts/weapons/magazine-model.mjs` | Model danych magazynków: kolejka naboi, komora, `consumeRounds()` — jedyne lejko |
+| `scripts/weapons/npc-ammo.mjs` | Budżet amunicji NPC („Szybkie palce" zeruje licznik użyć) |
+| `scripts/actors/handy-items.mjs` | Przedmioty podręczne — trzy sloty RAW, wspólne dla magazynków/granatów/leków |
+| `scripts/migration/migrate-magazynki.mjs` | Migracja broni palnej postaci na magazynki symulacyjne + sweep kontrolny |
 | `scripts/config/sztuczki-data.mjs` | 53 Sztuczki + rejestr tego, co system faktycznie automatyzuje |
 | `scripts/config/pochodzenia-data.mjs` | 12 Pochodzeń jako `background` (pack `pochodzenia`) + 36 zdolności (pack `zdolnosci-pochodzenia`) + rejestr automatyki |
 | `scripts/migration/migrate-pochodzenia.mjs` | Wstawienie Pochodzenia w slot `background` postaci z Roll20 (cofa +1/+1 wliczone ręcznie) |
@@ -4799,3 +4804,362 @@ Bo to jest dokładnie ten rodzaj rzeczy, którego nie widać w code review („2
 `tokens/aliases.json` — skasowane linijki aliasów dla istot, które dostały własną grafikę
 (Bit-Boys, Pies Bojowy, Mrokoszczur, Myślący Szczur, Kanibal). Alias wygrywał z plikiem,
 więc bez tego nowy art byłby po cichu ignorowany.
+
+
+## Zmiany z 22 września 2026 (36) — magazynki symulacyjne
+
+Pełny projekt i uzasadnienie: **`PLAN_magazynki.md`** (status: zrealizowany), rozstrzygnięcia
+MG w jego §15. Tutaj: co powstało, czego już nie ma i co zostało świadomie otwarte.
+
+### Jedno zdanie
+
+Magazynek przestał być licznikiem pozwoleń, a stał się **fizycznym pojemnikiem
+z uporządkowaną kolejką naboi**, przypisanym do modelu broni.
+
+### Co zniknęło
+
+Magazynki kwantowe w całości: flaga `ready`, kolumna „Gotowych", `_restoreQuantumMagazines*`,
+hooki `deleteCombat`/`deleteCombatant`, `_findReadyMagazine` i paczka testów, która to opisywała.
+Razem z nimi **udokumentowany bug**: `_onClickReload` sprawdzał gotowy magazynek zapasowy, ale
+naboje i tak odejmował od luźnej puli w ekwipunku — czyli `ready` nigdy nie był źródłem amunicji.
+
+Zniknął też **magazynek generyczny jako przedmiot**. Miał trzy wejścia, nie dwa, jak zakładał
+plan: `Tabele/Sklepy/Dostepnosc.md`, `Integracje/loot_generator.py` **i** dialog „Dodaj magazynek"
+w panelu ekwipunku. Wszystkie trzy zamknięte — wiersze w tabeli zostają jako cennik RAW
+(z markerem `tylko cennik`, który generator lootu pomija), dialog wybiera z katalogu per model.
+
+### Model danych
+
+Na broni `weaponId` / `loadedMag` / `rounds` / `chamber`, na pojemniku `magazine: { id, rounds }`.
+`magwell`, `caliber` i `capacity` **nie są** duplikowane na instancję — rozwiązują się z katalogu.
+
+Dwie rzeczy, które to wymusiło:
+
+- **`wmag` i `beb` trzymają kolejkę w samej broni.** Plan definiował tylko `loadedMag`, więc
+  rewolwer nie miał gdzie trzymać naboi. `getSource()` ujednolica „wpięty pojemnik" i „kolejka
+  wewnętrzna" do jednego kształtu, dzięki czemu bębenek nie jest przypadkiem specjalnym nigdzie
+  powyżej warstwy danych.
+- **`flags.mag` i `system.uses` są PROJEKCJAMI.** Pisze je wyłącznie `projectMagazineState()`,
+  po każdej mutacji źródła. Żadna decyzja o obrażeniach ani o zużyciu amunicji się o nie nie
+  opiera — inaczej byłyby cache'em, który trzeba unieważniać w każdym trybie ognia osobno.
+
+### Mieszana amunicja — obrażenia w momencie rzutu, nie w bazie
+
+`weapons/ammo.mjs` synchronizował `system.damage.base` z kalibrem na hooku `updateItem`. Przy
+kolejce naboi znaczyłoby to **zapis do bazy przy każdym strzale**, a każdy `item.update()` na
+broni odpala `syncWeaponFireModes` → reset `damage.parts` i flag modułu. Hook jest teraz
+bramkowany: broń w systemie magazynków przez niego nie przechodzi.
+
+Zamiast tego:
+
+- **strzał pojedynczy** — kaliber stemplowany na karcie ataku w `preCreateChatMessage`, czyli
+  zanim nabój zostanie zużyty. Bez tego przycisk „Obrażenia" czytałby stan broni w momencie
+  renderu i przy mieszanym magazynku pokazywał nabój **następny**, a po przeładowaniu strony —
+  dowolny późniejszy;
+- **serie** — `_burstCaliber()` bierze to, co zwróciło lejko, i stosuje regułę dominującego
+  naboju. Fallback na głowę kolejki obsługuje synchronizację aktywności na karcie i przeładowanie
+  świata między serią a rzutem na obrażenia (pamięć per proces, dokładnie jak `_burstSelectionCache`);
+- **właściwości idą razem z obrażeniami** — `effectiveDamageFor()` zwraca `{formula, type, props}`
+  jedną funkcją, a `_buildNoModifierDamageRoll` dokłada `props` naboju do `options.properties`.
+  Bez tego dum-dum zadałby swoje kości, ale nie wywołał Krwawienia: broń zmutowałaby, zapominając
+  o tym powiedzieć.
+
+### Czego plan nie przewidział
+
+**Złoty Desert Eagle nie istniał w katalogu.** Flagowy przykład dla `magwell` w planie był
+ręcznie zrobionym itemem na karcie Lorentza. Migracja kasuje i odtwarza broń z kompendium,
+więc bez wpisu straciłby magazynki do swojej własnej spluwy. Dopisany do
+`wkk/config/weapons-data.mjs`, spisany 1:1 z jego egzemplarza (2026-09-22). Jego premia do
+trafienia to osobna historia — patrz „Trzy rzeczy, które wyszły dopiero na żywo" niżej.
+
+### Przedmioty podręczne
+
+RAW-owy limit trzech slotów przy pasie, **wspólny** dla magazynków, granatów i leków, egzekwowany
+na wejściu. Sięgnięcie do plecaka jest **oznaczane, nie blokowane** — karta czatu niesie pigułkę
+„podręczny" albo „z plecaka", a MG decyduje, czy to coś kosztowało. Dobywanie z plecaka jest
+umowne i nie jest śledzone co do sztuki.
+
+### NPC — RAW, nie nasze uzupełnienie
+
+*Notatnik Łowcy*: „Przeciwnicy […] mają jeden pełny magazynek lub bębenek". Itemy ataku dostają
+`uses.max` = pojemność broni i `recovery: initiative` (natywny okres dnd5e, odnawia raz na walkę).
+Serie dostają budżet **wydrukowany w nazwie** („AR długa seria (2/walkę)") — nie wyprowadzamy go
+z pojemności magazynka, bo dla AR wyszłyby 3 serie, a statblock mówi 2. Tam, gdzie RAW podaje
+liczbę, RAW wygrywa. „Szybkie palce" zeruje licznik (`weapons/npc-ammo.mjs`).
+
+Taśmy i bębny 100+ nie dostają limitu — licznik, którego nikt nie wyczerpie w sześć rund, jest
+samym szumem na karcie.
+
+### Stan końcowy (36)
+
+`module.json` `0.14.34` → `0.15.0` — **minor, nie patch**: model danych magazynków jest niezgodny
+wstecz, a świat wymaga migracji.
+
+Nowy pack `magazynki` (31 dokumentów), nowa paczka testów `magazynki` (17 `describe`, 53 `it`).
+Testy: **410/410** na żywo, po migracji. `validate:tests` i `validate:css` — czyste. Kontrola
+statyczna grafu ESM (184 pliki): zero brakujących eksportów, zero cykli.
+
+**Migracja wykonana 2026-09-22**: 9 broni odtworzonych, 0 pominiętych, 0 blockerów, 5 magazynków
+utworzonych, 3 stare (kwantowe) skasowane; broń palna Piekarza skasowana bez odtwarzania.
+Kopia zapasowa przed zapisem: `worlds/output/backups/magazynki-pre-migration-20260922-0115.json`
+(wszystkie 8 postaci z folderu `Postacie`, komplet przedmiotów).
+
+**Packi przebudowane 2026-09-22** (Foundry zamknięte): `bron` — 80 dokumentów, w tym Złoty
+Desert Eagle, 78/80 ze stemplem `flags.<mod>.weaponId` (dwa bez to Pochodnie, budowane własnym
+builderem i bez magazynka). `magazynki` — 31 dokumentów. `validate:packs`: all checks passed.
+Bez tej przebudowy przedmioty przeciągane z kompendium nie miały `weaponId` ani Złotego
+Desert Eagle'a; sama migracja jej nie potrzebowała (buduje broń wprost z `weapons-data.mjs`).
+
+**Aktywności nie są w packu i tak ma być.** `buildWeaponItemData()` wypuszcza `activities: {}` —
+atak i serię buduje `syncBaseAttackActivity()` z katalogu, w tym premię `attackBonus`. Egzemplarz
+w kompendium ma więc pusty blok aktywności i `flags.mag = {max: 1, current: 0}` (sama komora,
+bo świeżo kupiona broń nie ma wpiętego magazynka) — jedno i drugie jest poprawne.
+
+### Audyt broni przestaje traktować projekcję jak stan (2026-09-22, po przebudowie packa)
+
+Znalezione przy weryfikacji packa, w kodzie z tej samej przebudowy. `_TEMPLATE_FIELDS`
+w `config/weapons-data.mjs` wciąż porównywało `flags.mag.max`/`.ammoType` z katalogiem —
+a `flags.mag` przestało być stanem broni i stało się **projekcją** aktualnie wpiętego magazynka.
+Skutek: `auditWeapons()` zgłaszałby fałszywy dryf na każdej broni bez pełnego magazynka
+(broń bez magazynka projektuje `max: 1` — samą komorę — przy katalogowych 8), a
+`repairWeapons()` wpisywałby wartość katalogową prosto w projekcję: zapis, którego §„projekcja,
+nie cache” zabrania, i który najbliższe przeliczenie i tak kasuje. Bez utraty danych (kolejki
+żyją w `flags.rounds`/`loadedMag`), ale narzędzie MG byłoby nie do użycia — a to pierwszy odruch
+przy każdym problemie z bronią.
+
+Naprawa: predykat **`onMagazineModel(item)`**, jedna definicja w `config/weapons-data.mjs`
+(to ten plik stempluje te flagi w `buildWeaponItemData()`; `magazine-model.mjs` już stamtąd
+importuje, więc kierunek zależności się nie zmienia i nie powstaje cykl). Pilnuje teraz trzech
+miejsc: obu pól magazynka w audycie, kontroli `current`, bloku naprawy — oraz, jako `_isMigrated`
+sprzed zmiany, sweepu projekcji. Do tego `_hasAlternateAmmoLoaded()` czyta wreszcie **magazyn**
+(`chamber.caliberId ?? rounds[0]`), nie projekcję; dla broni sprzed migracji i NPC-ów zostaje stara
+ścieżka. Testy w `ekwipunek-dane.test.mjs` rozdzielone na dwie ścieżki (`asLegacy()` robi kopię
+sprzed migracji), plus nowy test regresyjny „na modelu magazynków `flags.mag` NIGDY nie jest
+zgłaszane ani naprawiane”.
+
+Walidacja po zmianie: `npm test` OK (13 paczek), `validate:css` OK, graf ESM 184 pliki / 0 cykli /
+0 nierozwiązanych importów, `validate:packs` OK. Quench do przebiegnięcia przy najbliższym
+starcie świata.
+
+### Cisza w konsoli po Quenchu (2026-09-22)
+
+Po przebudowie packa Quench świecił 412/412, ale zostawiał po sobie **17 błędów w konsoli**
+(czerwone dymki + nieobsłużone odrzucenia obietnic). Dwie różne przyczyny, obie znalezione
+przez korelację id z błędów z przechwyconymi wywołaniami kasowania.
+
+**1. Zapis do dokumentu, który właśnie zniknął** → nowy `scripts/doc-liveness.mjs`.
+
+Hooki `createItem`/`updateItem`/`deleteItem` odpalają w tym module async robotę, której nikt
+nie czeka (`void sync…`, debounce, łańcuch per aktor). Jeżeli dokument zostanie w międzyczasie
+skasowany, zapis trafia do serwera, który już go nie ma — „The Actor <id> does not exist in
+actors" / „id [<id>] does not exist in the EmbeddedCollection collection". Nic się nie psuje,
+ale MG dostaje czerwony dymek.
+
+Są **dwa różne okna** i pierwsza wersja poprawki zamykała tylko jedno:
+* *kasowanie w locie* — serwer już usunął, lokalna kolekcja jeszcze nie (usunięcie przychodzi
+  dopiero broadcastem). Zmierzone: żądanie t=752, spóźniony zapis t=776, hook `deleteItem`
+  t=791. Sprawdzenie kolekcji tego **nie wyłapuje** → rejestr z `preDelete*`.
+* *kasowanie zakończone* — robota debounce'owana budzi się po `delete*`, gdy uuid wypadł już
+  z rejestru. Tu z kolei kolekcja jest aktualna → pytamy kolekcję.
+
+`isDocumentLive(doc)` odpowiada na oba, chodząc po łańcuchu `parent` (skasowanie aktora kasuje
+serwerowo jego przedmioty, ale `preDeleteItem` dla nich nie leci, a osierocona kolekcja dalej
+je pokazuje). Wpięte w: `fire-modes.mjs` i `magazine.mjs` (**między krokami** serii syncowej —
+kasowanie potrafi wpaść w środek), `magazine-model.mjs` (`projectMagazineState`) oraz cztery
+bliźniacze synchronizatory efektów: `udzwig-slowdown`, `bez-dna`, `cichy-krok`, `samuraj`.
+
+**2. `createEmbeddedDocuments` nie zachowuje kolejności wejścia** → poprawka w teście.
+
+Przy okazji wyszło, że paczka `magazynki` jest **niestabilna**: 407–412/412 losowo. Fikstury
+robiły `const [a, b, c] = created` po `createEmbeddedDocuments`, a wynik wraca w kolejności
+**niezdeterminowanej** — dla wejścia `[AR, Trzydziestka, Winchester]` zmierzono `[AR, …]`,
+`[Trzydziestka, AR, …]` i `[Winchester, …]` w kolejnych przebiegach. Skutek: losowo podmienione
+dokumenty i komunikat „`weaponIdOf` zwrócił null dla wystemplowanej broni", czyli objaw
+wskazujący na **moduł**, nie na test. Zastąpione wyszukiwaniem po nazwie (`pick()`,
+porównanie dokładne — „Desert Eagle" jest podciągiem „Złoty Desert Eagle").
+
+Stan po poprawkach: **5 pełnych przebiegów z rzędu 412/412, zero dymków, zero nieobsłużonych
+odrzuceń.**
+
+**Nienaprawione, do osobnej decyzji:** `CONST.ACTIVE_EFFECT_MODES` jest w v14 przestarzałe
+(usunięcie w v16, zamiennik `CONST.ACTIVE_EFFECT_CHANGE_TYPES` ze **stringowymi** typami zmian).
+13 użyć w module, m.in. `udzwig-slowdown.mjs:77,80` — to one sypią ostrzeżeniem zaraz po
+zalogowaniu. Migracja dotyka działających efektów, więc zasługuje na własne testy, a nie na
+doklejenie do tej gałęzi.
+
+### Trzy rzeczy, które wyszły dopiero na żywo
+
+- **Sweep projekcji zjadł stan sprzed migracji.** `reprojectAllMagazineState()` przy `ready`
+  przeliczał projekcję na KAŻDEJ broni, która rozwiązywała model — w tym na broni jeszcze
+  niezmigrowanej, gdzie `flags.mag.current` było jedynym zapisem „ile naboi miała postać".
+  Wpiętego magazynka jeszcze nie było, więc projekcja wpisywała zero. Objaw był mylący: bronie,
+  których model się NIE rozwiązywał, przeżyły nietknięte. Naprawione `onMagazineModel()` —
+  projekcja omija broń bez żadnej flagi nowego modelu. Zdążyło zjeść sześć sztuk; cztery
+  odtworzyła migracja („stan nieznany → do pełna"), dwie w folderze `PC` zostały puste
+  (Dante — Obrzyn 2/2 → 0/2, Kluczyk — Kusza bloczkowa).
+- **Migracja potrzebowała czwartej warstwy rozpoznania.** Po stemplu i `system.identifier`
+  zostawało pięć broni drużyny nierozpoznanych („HK G3", „M1 US Rifle" ×2, „38-ka",
+  „Pistolet B92") — identyfikatory w świecie to `handk-g3`, `m1-garand`, `38-ka`, `pistolet-b92`.
+  Dopisane dokładne dopasowanie nazwy + `WEAPON_NAME_ALIASES`, **wyłącznie w migracji**, jawnie
+  raportowane w suchej analizie. Przy okazji nowy alias „Pistolet B92" → „B 92".
+- **Premia +1 Złotego Desert Eagle ginęła po cichu.** Siedziała w `attack.bonus` aktywności
+  egzemplarza, a odtworzona broń dostaje aktywności budowane od zera. Dopiero na żywo było widać,
+  że `attackBonus` w katalogu nikt nie czyta. `syncBaseAttackActivity()` synchronizuje je teraz
+  — **tylko gdy katalog je deklaruje**, żeby nie kasować ręcznie dostrojonych premii na broni
+  NPC-ów (ta sama dyscyplina co `autoFix: false` w `auditWeapons()`). Zweryfikowane: Złoty DE
+  ma `"1"`, zwykły Desert Eagle `null`.
+
+### Co zostało otwarte
+
+| Temat | Gdzie |
+|---|---|
+| Wpychanie naboju do wymiennego magazynka za test Zwinnych dłoni (WKK, ST wg kalibru) | `TODO_mechanika.md` |
+| Dedykowane ikony `12ga_b` i `44mag_dd` | `dev/icons/MISSING.md` (batch 40) |
+| Magazynki Chromowe, loot z trupa, tryb Red Orchestra | `PLAN_magazynki.md` §11 („odłożone") |
+| LAW → „Zużyty LAW" po strzale | `PLAN_magazynki.md` §11 (faza 7) |
+| `ladowanie` dostaje Akcję bonusową bez Sztuczki (RAW), a `_getReloadPlan` wymaga Sztuczki | `PLAN_magazynki.md` §6 |
+| Naturalna 1 → trwałe zacięcie broni NPC (osobna zasada od `jams.mjs`) | `PLAN_magazynki.md` §9 |
+| Dante (Obrzyn) i Kluczyk (Kusza bloczkowa) z folderu `PC` stoją puste po sweepie projekcji | jedna decyzja MG: dopełnić ręcznie albo puścić na nich migrację |
+| Przebudowa packa `bron` przy zamkniętym Foundry | patrz „Stan końcowy (36)" |
+| Migracja `CONST.ACTIVE_EFFECT_MODES` → stringowe `type` (v14 → v16) | `HANDOFF_active_effect_modes.md` |
+
+### Widoczność broni bez magazynka + pasek plakietek stanu (2026-09-22)
+
+Zgłoszone przy testach manualnych: **broni bez magazynka nie widać**, dopóki nie zajrzy się
+w kolumnę „Ładunki" — a i tam Desert Eagle bez magazynka pokazuje `0/1` (sama komora), z
+magazynkiem `0/9`. Dwie podobne liczby w tej samej kolumnie, a różnica jest fundamentalna:
+raz brakuje **przedmiotu**, raz naboi.
+
+**Znalezione przy okazji:** slot na plakietkę był już przepełniony. `.item-name::after`
+(kółko w rogu ikony) obsługiwało **pięć** rodzin stanów — dodatki, wyszczerbienie 1/2, trwałe
+uszkodzenie, zacięcie, zasilanie — w tej samej pozycji i z tą samą specyficznością. Wygrywała
+ostatnia reguła w pliku, więc **broń z dodatkami po zacięciu traciła złoty klucz z widoku**.
+Kolizja istniała przed dołożeniem czegokolwiek i nie dało się jej naprawić kolejnością reguł:
+pseudo-elementów są dwa, a osi stanu cztery.
+
+Rozwiązanie w dwóch kanałach, celowo rozdzielonych, bo odpowiadają na inne pytania:
+
+* **Pasek plakietek** (`actors/item-state-pips.mjs`) — realny `<span>` wstrzykiwany w wiersz,
+  po jednej plakietce na oś, w stałej kolejności
+  `stan → gotowość → konserwacja → zasilanie → konfiguracja`.
+  Czyta gotowe klasy `neuro-*`, które te cztery moduły i tak już dopinały, więc **żadna
+  mechanika nie musiała się zmienić**. Musi być rejestrowany jako ostatni — patrz komentarz
+  przy wywołaniu w `main.mjs`.
+* **Przygaszenie ikony** (`.neuro-not-ready`) — odpowiada wyłącznie na „czy mogę z niej TERAZ
+  strzelić", bo to jedyne pytanie, które trzeba widzieć bez czytania, z drugiego końca listy.
+
+Gotowość liczy `magazineReadiness()` w warstwie magazynków: `"missing"` (bierze **odpinany**
+pojemnik i żadnego nie ma) / `"empty"` / `"ready"` / `null`. **`null` to nie to samo co
+`"missing"`** — rewolwer i obrzyn mają `loadedMag === null` przy pełnym bębenku, bo naboje
+siedzą w samej broni; oznaczenie oparte na `loadedMag` świeciłoby na nich na stałe.
+
+Test obnażył też nieścisłość w pierwszej wersji: pistolet z nabojem w komorze i bez magazynka
+**odda jeszcze jeden strzał**, więc gaszenie go było nieprawdą. Plakietka leci zawsze (to
+informacja do działania), przygaszenie tylko gdy naprawdę nie ma czym strzelić — stąd
+`blocksFiring` per plakietka zamiast płaskiej listy stanów.
+
+Plakietka magazynka jest **rysowana w CSS**, nie glifem: sprawdzone na żywo, że w tej
+instalacji FA `fa-magazine` to czasopismo, a `fa-cartridge` wkład do drukarki. Prostokąt
+z zaokrągloną podstawą czyta się przy 11 px lepiej niż zastępczy glif i nie zależy od fontu.
+
+**`validate-css.mjs` dostał kontrolę znaków sterujących.** Przy pisaniu tego CSS-a heredoc
+zjadł backslash z `content: "\f071"`, więc do pliku trafił prawdziwy bajt FORM FEED.
+Przeglądarka wyrzuciła tamtą regułę **i wszystkie następne** — 17 świeżo napisanych reguł nie
+robiło nic, a walidator meldował OK, bo struktura była bez zarzutu. Teraz skanuje surowe
+źródło przed maskowaniem i wskazuje linię, kolumnę i prawdopodobną przyczynę.
+
+Testy: 9 nowych w paczce `magazynki` (gotowość dla rewolweru/broni białej, współistnienie
+plakietek, kolejność slotów, idempotencja przy przerysowaniu, nabój w komorze). **423/423,
+trzy pełne przebiegi z rzędu, zero dymków błędów.**
+
+### Czyszczenie broni wreszcie coś daje (2026-09-22)
+
+Pytanie o plakietkę „wyczyszczona" odsłoniło, że **cała mechanika była zaślepką**.
+`cleanWeapon()` ustawiał flagę i rysował zielony chip na karcie broni, ale:
+
+* `rollJamCheck()` **nigdy nie pytał o `isCleaned`** — przerzutu nie było,
+* flagę kasował `onPostUseActivity`, czyli **pierwszy strzał**, bez związku z zacięciem.
+
+Godzina odpoczynku kupowała więc zielony chip, który znikał po jednym strzale i nie dawał nic.
+Jedyne działające odporności na zacięcie to były `Jak dbasz tak masz` i `Wychuchana spluwa`.
+
+RAW (*Podręcznik*, „Czyszczenie broni palnej"): *„jeśli w najbliższej walce wypadnie wynik
+powodujący zacięcie, możesz go jednorazowo przerzucić"*. Wdrożone dosłownie:
+
+* **Przerzut, nie odporność** — rzut pada i jest widoczny na czacie, dopiero potem konserwacja
+  daje drugą szansę. Przy stole to odczuwalna różnica: przy odporności nic się nie dzieje,
+  przy przerzucie widać, że broń o włos się nie zacięła. Stąd osobna ścieżka od
+  `_getJamImmunityAbilityKey()`, które w ogóle nie dopuszcza do rzutu.
+* **Flaga schodzi tylko po realnym użyciu przerzutu** albo **z końcem walki**
+  (`deleteCombat`, GM-only) — „najbliższa walka" z RAW. Niewykorzystany bufor przepada, więc
+  decyzja „co wyczyścić przed jutrzejszym skokiem" ma wagę; inaczej po kilku sesjach cała
+  drużyna chodziłaby z przerzutem w kieszeni.
+* **Plakietka w slocie `konserwacja`** (zielony check) — jedyny stan pozytywny w pasku i jedyny
+  wygasający. Ma tu inną robotę niż zacięcie czy brak magazynka: tamte widać po skutkach, bo
+  broń nie strzela. Przerzut jest niewidzialny, dopóki nie padnie naturalna 1 — bez oznaczenia
+  gracz nie ma jak nim świadomie zagrać, bo nie wie, że go jeszcze ma. Nie gasi ikony.
+
+Zweryfikowane na żywo przez wymuszenie kostki (`CONFIG.Dice.randomUniform`; uwaga — mapowanie
+jest odwrotne, `0.999` daje 1, nie `0.001`): brudna + naturalna 1 → zacięcie; czysta, oba rzuty
+1 → zacięcie mimo przerzutu, flaga zużyta; czysta, 1 → przerzut wysoki → uratowana, flaga
+zużyta; **bez naturalnej 1 flaga przeżywa strzał** (to jest dokładnie dawny błąd). Wygasanie
+sprawdzone przez `Hooks.callAll("deleteCombat", …)` z atrapą, bez tworzenia walki w żywym
+świecie. **424/424, trzy przebiegi z rzędu.**
+
+### Wychuchana spluwa w pasku + nowa paczka testów `stany-broni` (2026-09-22)
+
+Domknięcie osi konserwacji: `Wychuchana spluwa` (pełna odporność na zacięcie, jedna broń
+na postać) dostaje **zieloną tarczę** w tym samym slocie co check czyszczenia. Tarcza wygrywa
+z checkiem i to nie jest arbitralne — odporność sprawdza się PRZED rzutem, więc przerzut
+z czyszczenia na takiej broni nigdy nie ma okazji zadziałać; dwie plakietki sugerowałyby dwie
+warstwy zabezpieczenia tam, gdzie działa jedna.
+
+Kształt niesie różnicę, kolor przynależność: obie zielone (ta sama rodzina „dobrze"), ale
+tarcza kontra check czyta się przy 11 px pewniej niż odcień.
+
+**Odporności z cechy `Jak dbasz tak masz` w pasku NIE ma, celowo** — obejmuje całą broń
+postaci, więc plakietka świeciłaby na każdej sztuce, zawsze, nigdy się nie zmieniając. Stan,
+który nigdy nie ma innej wartości, nie niesie decyzji; to cecha postaci i jej miejsce jest
+na karcie postaci.
+
+Dwie rzeczy z przeglądu, znalezione przy okazji:
+
+* `onDeleteCombat` przepięte z `game.user.isGM` na **`game.users.activeGM?.isSelf`** (ten sam
+  idiom co `combat/podpalenie.mjs`). Przy dwóch podłączonych MG obaj wysyłaliby te same
+  zapisy, ścigając się o ten sam dokument.
+* `_decorateRow` **nie rusza DOM-u, gdy zestaw plakietek się nie zmienił** (`data-kinds` na
+  pasku). Arkusz przerysowuje się przy byle czym, a podmiana elementu pod kursorem gubi dymek
+  `data-tooltip` i przy serii przerysowań pasek miga.
+
+**Nowa paczka `stany-broni`** (14. w kolejności) — mechanika zacięć i konserwacji miała do tej
+pory **zero testów**, co jest dokładnie powodem, dla którego brak przerzutu przeżył tak długo.
+20 testów: przerzut w czterech wariantach (brudna, uratowana, pechowa, jednorazowość), bufor
+przeżywający strzał bez naturalnej 1, odporność bez rzutu, wygasanie z końcem walki (z atrapą
+`deleteCombat`, bez tworzenia walki w świecie), plakietki konserwacji, idempotencja paska.
+
+Pierwszy z nich jest meta: **sprawdza samo podmienianie kostki**. Bez niego cała reszta pliku
+mogłaby zzielenieć z niewłaściwego powodu („nie wypadła 1, więc nie ma zacięcia"), gdyby
+Foundry kiedyś zmieniło mapowanie `randomUniform`.
+
+Dwie pułapki złapane przy pisaniu tych testów, obie warte zapamiętania:
+
+* **`isPamperedWeapon()` sprawdza DWIE rzeczy** — flagę na broni **i** cechę na postaci
+  (`hasAbility`, po nazwie itemu). Sama flaga jest martwa, i słusznie. Pierwsza wersja testów
+  ustawiała tylko flagę i sprawdzała nie to, co trzeba.
+* **Testy plakietek muszą używać broni BIAŁEJ.** Karabin bez wpiętego magazynka dokłada własną
+  plakietkę gotowości, przez co asercje „dokładnie te plakietki, które ustawiłem" łapią ją jako
+  nadmiarową — wywróciło sześć testów naraz.
+
+Stan: **444/444**, zero dymków, zero pozostałości po testach. Zweryfikowane też na żywo pełne
+przełączanie przez `setPamperedWeapon()`: plakietka pojawia się bez ręcznego odświeżania,
+a wyłączność (jedna wychuchana spluwa na postać) propaguje się do paska sama.
+
+### Co zostało świadomie nietknięte
+
+* **Czyszczenie wychuchanej spluwy** jest dozwolone i marnuje godzinę — przerzut nigdy nie
+  wystrzeli, bo odporność zdejmuje rzut wcześniej. Ostrzeżenie byłoby tanie, ale gracz może
+  wyłączyć wychuchanie później i wtedy bufor się przyda, więc blokada byłaby błędem,
+  a notyfikacja przy każdym czyszczeniu — hałasem. Do decyzji MG.
+* **Broń niezidentyfikowana** (`system.identified: false`) pokazuje plakietki stanu tak samo
+  jak każda inna. To zachowanie sprzed przebudowy (stare plakietki `::after` robiły to samo),
+  więc nie jest regresją — ale gdyby kiedyś miało znaczenie, to jest miejsce do zakrycia.

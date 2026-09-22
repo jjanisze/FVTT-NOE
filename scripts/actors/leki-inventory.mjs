@@ -12,6 +12,8 @@
  * `system.uses`, nothing here tracks state of its own.
  */
 
+import { handyToggleHtml, bindHandyToggle } from "./handy-items.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 const WRAPPER_CLASS = "neuro-leki-wrapper";
 
@@ -84,13 +86,16 @@ function _onRenderActorSheetInjectLeki(app, html) {
         <div class="item-detail" style="flex:0 0 90px; text-align:center;">${doseLabel}</div>
         <div class="item-detail" style="flex:0 0 70px; text-align:center;">${Math.round(price)} gb</div>
         <div class="item-detail" style="flex:0 0 70px; text-align:center;">${weight < 1 ? Math.round(weight * 1000) + " g" : weight.toFixed(2) + " kg"}</div>
-        <div class="item-detail item-controls always-visible" style="flex:0 0 150px; text-align:right; display:flex; align-items:center; justify-content:flex-end; gap:8px;">
+        <div class="item-detail item-controls always-visible" style="flex:0 0 174px; text-align:right; display:flex; align-items:center; justify-content:flex-end; gap:8px;">
+          ${handyToggleHtml(item)}
           <button type="button" class="unbutton config-button item-control item-take" title="${useLabel}" style="color:#9fd39f;"><i class="fas fa-syringe" inert></i> ${useLabel}</button>
           <button type="button" class="unbutton config-button item-control item-edit" title="Edytuj" style="color:#ccc;"><i class="fas fa-edit" inert></i></button>
           <button type="button" class="unbutton config-button item-control item-delete" title="Usuń" style="color:#ccc;"><i class="fas fa-trash" inert></i></button>
         </div>
       </div>
     `;
+
+    bindHandyToggle(li, item);
 
     li.querySelector(".item-take").addEventListener("click", async ev => {
       ev.preventDefault();

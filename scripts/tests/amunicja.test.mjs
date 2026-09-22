@@ -29,27 +29,9 @@ import { hasWeaponProperty } from "../config/weapons.mjs";
 import { __testing as mag } from "../weapons/magazine.mjs";
 import { __testing as saveProps } from "../combat/weapon-save-properties.mjs";
 import { BLEED, BLEED_PROFILES, bleedProfile } from "../combat/bleeding.mjs";
-import { MAG_LABELS, MAG_ICONS, MAG_PRICES, MAG_WEIGHTS, isMagazineItem, getMagTypeForWeapon }
-  from "../actors/magazine-inventory.mjs";
 import {
   MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup, captureWarnings, waitFor
 } from "./helpers.mjs";
-
-/** Zapasowy magazynek w dokładnie tym kształcie, w jakim tworzy go sekcja ekwipunku. */
-function spareMagData(subtype, { quantity = 2, ready = 2 } = {}) {
-  return {
-    name: `${SCRATCH_PREFIX} ${MAG_LABELS[subtype]}`,
-    type: "consumable",
-    img: MAG_ICONS[subtype],
-    system: {
-      type: { value: "ammo", subtype },
-      quantity,
-      weight: { value: MAG_WEIGHTS[subtype], units: "kg" },
-      price: { value: MAG_PRICES[subtype], denomination: "gb" }
-    },
-    flags: { [MODULE_ID]: { ready } }
-  };
-}
 
 function ammoStackData(caliberId, quantity) {
   const caliber = AMMO_CALIBER_MAP[caliberId];
@@ -192,57 +174,11 @@ export function registerAmmoTests(quench) {
 
     /* ------------------------------------------------------------------ */
 
-    describe("Magazynki kwantowe", function () {
-      let gun, spare;
-
-      before(async function () {
-        const created = await actor.createEmbeddedDocuments("Item", [
-          pistolData("Pistolet magazynkowy", "44mag"),
-          spareMagData("magazine-short")
-        ], { render: false });
-        gun = created.find(i => i.type === "weapon");
-        spare = created.find(i => i.type === "consumable");
-      });
-
-      after(async function () {
-        await actor.deleteEmbeddedDocuments("Item", [gun.id, spare.id], { render: false });
-      });
-
-      // Kształt danych, na którym poprzednia wersja się wykładała.
-      it("magazynek zapasowy to consumable-ammo z podtypem magazine-*, nie type.value === magazine", function () {
-        expect(isMagazineItem(spare)).to.equal(true);
-        expect(spare.system.type.value).to.equal("ammo");
-        expect(spare.system.type.value).to.not.equal("magazine");
-      });
-
-      it("broń palna krótka szuka krótkiego magazynka", function () {
-        expect(getMagTypeForWeapon(gun)).to.equal("magazine-short");
-      });
-
-      it("znajduje gotowy magazynek pasujący do broni", function () {
-        const found = mag.findReadyMagazine(actor, actor.items.get(gun.id));
-        expect(found?.id).to.equal(spare.id);
-      });
-
-      it("nie znajduje żadnego, gdy licznik gotowych spadnie do zera", async function () {
-        await spare.setFlag(MODULE_ID, "ready", 0);
-        expect(mag.findReadyMagazine(actor, actor.items.get(gun.id))).to.equal(null);
-      });
-
-      it("po walce wszystkie magazynki wracają do stanu gotowości równego posiadanym", async function () {
-        mag.restoreQuantumMagazinesForActor(actor);
-        await waitFor(() => actor.items.get(spare.id).getFlag(MODULE_ID, "ready") === 2,
-          { label: "odnowienie magazynków" });
-        expect(actor.items.get(spare.id).getFlag(MODULE_ID, "ready")).to.equal(2);
-      });
-
-      it("magazynek nie niesie własnego kalibru — dostaje go dopiero przy wymianie", function () {
-        expect(spare.system.type.subtype).to.equal("magazine-short");
-        expect(AMMO_CALIBER_MAP[spare.system.type.subtype]).to.equal(undefined);
-      });
-    });
-
-    /* ------------------------------------------------------------------ */
+    /* Paczka „Magazynki kwantowe" zniknęła razem z mechaniką, którą opisywała (2026-09-22,
+       PLAN_magazynki.md §2). Testowała flagę `ready`, `findReadyMagazine` i odnawianie
+       magazynków po walce — czyli model, w którym magazynek nie trzymał niczego własnego,
+       a amunicja materializowała się w momencie wymiany. Magazynki symulacyjne mają własną
+       paczkę: `scripts/tests/magazynki.test.mjs`. */
 
     describe("Wybór naboju z rodziny", function () {
       let stack;

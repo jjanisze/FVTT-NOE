@@ -33,7 +33,8 @@ import { CHEMIA, chemiaItemData } from "../../scripts/config/chemia-data.mjs";
 import { SZTUCZKI, sztuczkaItemData } from "../../scripts/config/sztuczki-data.mjs";
 import { ORIGIN_ABILITIES, originAbilityItemData, POCHODZENIA, pochodzenieItemData, abilitiesOf, attrBonus } from "../../scripts/config/pochodzenia-data.mjs";
 import { AMMO_CALIBERS, GRENADE_TYPES } from "../../scripts/config/ammo-data.mjs";
-import { WEAPONS, buildWeaponItemData } from "../../scripts/config/weapons-data.mjs";
+import { WEAPONS, WEAPON_MAP, buildWeaponItemData } from "../../scripts/config/weapons-data.mjs";
+import { MAGAZINES, buildMagazineItemData } from "../../scripts/config/magazines-data.mjs";
 import { POCHODNIA_VARIANTS, buildPochodniaItemData } from "../../scripts/wkk/items/pochodnia.mjs";
 import { LATARKA_FORMS, buildLatarkaItemData } from "../../scripts/items/latarka.mjs";
 import { buildBaterieItemData } from "../../scripts/items/baterie.mjs";
@@ -66,6 +67,7 @@ const PACK = {
   narzedzia: "narzedzia",
   bestiariusz: "bestiariusz",
   bron: "bron",
+  magazynki: "magazynki",
   sprzet: "sprzet",
   pancerze: "pancerze"
 };
@@ -631,6 +633,18 @@ function buildToolkit(kit) {
  * `weapons/fire-modes.mjs` z właściwości broni, więc zapisanie ich do packa
  * zamroziłoby wynik i podwoiło aktywności po pierwszym przeliczeniu.
  */
+/**
+ * Magazynki, tasmy, kolczany i szybkoladowarki — po jednej sztuce, PUSTE.
+ *
+ * Puste, bo magazynek jest fizycznym pojemnikiem: naboje wklada sie do niego osobno
+ * (`openLoadWindow`), a „magazynek przychodzi pelny" to dokladnie model kwantowy, ktory
+ * PLAN_magazynki.md wycofuje. `system.quantity` zostaje na 1 i nie wolno tego zmieniac —
+ * dwa magazynki o roznej zawartosci to dwa osobne dokumenty Item.
+ */
+function buildMagazine(def) {
+  return { ...buildMagazineItemData(def), _id: idFor("magazine", def.id), _key: null };
+}
+
 function buildWeapon(w) {
   return { ...buildWeaponItemData(w), _id: idFor("weapon", w.id), _key: null };
 }
@@ -1076,6 +1090,54 @@ function conditionEffect(c, entry, spec, kind) {
  * also sidesteps `weaponTypes`, which this module has restricted to the seven
  * manufactured Neuroshima categories with no "natural" among them.
  */
+/**
+ * Budzet amunicji NPC — *Notatnik Lowcy*, sekcja LICZENIE AMUNICJI.
+ *
+ * > **Jeden magazynek.** Przeciwnicy, ktorzy uzywaja broni palnej, maja jeden pelny magazynek
+ * > lub bebenek. […] **Serie oprozniaja magazynek.** […] **Boss jest wart liczenia.**
+ *
+ * To jest implementacja RAW, nie nasze uzupelnienie. NPC sa poza systemem magazynkow (zadnych
+ * przedmiotow, kalibrow, komory ani luznej amunicji — patrz `inMagazineSystem()`), wiec budzet
+ * jest po prostu licznikiem uzyc na itemie: magazynek bierze sie z powietrza, a stary znika.
+ *
+ * `period: "initiative"` to natywny okres dnd5e (`config.mjs`, `limitedUsePeriods.initiative`,
+ * `type: "special"`) — odnawia sie przy rzucie na inicjatywe, czyli raz na walke. Zero kodu
+ * runtime, sama zmiana w builderze.
+ *
+ * Link `attacks[].id` → `WEAPONS` juz istnieje w danych: `id: "ar"` w bestiariuszu to ten sam
+ * slug co `id: "ar"` w tabeli broni. Atak bez odpowiednika w tabeli (pazury, kly, „karabin"
+ * jako nazwa rodzajowa) nie dostaje limitu — nie zgadujemy.
+ */
+function bestiaryAmmoBudget(entry, kind) {
+  /* Seria: budzet jest WYDRUKOWANY w nazwie („AR dluga seria (2/walke)") i to jest liczba
+     z podrecznika. Nie wyprowadzamy jej z pojemnosci magazynka — dla AR wyszloby 3 serie
+     (30 naboi / 10 na serie), a statblock mowi 2. Tam, gdzie RAW podaje liczbe, RAW wygrywa. */
+  if (kind !== "attack") {
+    const printed = /\((\d+)\s*\/\s*walk/i.exec(entry.name ?? "");
+    if (!printed) return null;
+    return { max: String(Number(printed[1])), spent: 0, recovery: [{ period: "initiative", type: "recoverAll" }] };
+  }
+
+  const weapon = WEAPON_MAP[entry.id];
+  const capacity = weapon?.mag?.max;
+  if (!Number.isFinite(capacity)) return null;
+  /* Tasmy i bebny na 100+ naboi to nie budzet, tylko ozdoba — walka rzadko trwa dluzej niz
+     6 rund, wiec licznik, ktorego nikt nie wyczerpie, jest samym szumem na karcie. */
+  if (capacity > 60) return null;
+  return { max: String(capacity), spent: 0, recovery: [{ period: "initiative", type: "recoverAll" }] };
+}
+
+/**
+ * Czy ta cecha to „Szybkie palce" — akcja bonusowa, ktora wymienia oprozniony magazynek.
+ *
+ * Oznaczamy ja flaga zamiast po nazwie, zeby `weapons/npc-ammo.mjs` mial co czytac w runtime.
+ * Bez tego budzet wyzej dawalby sie odnowic dopiero w nastepnej walce, a RAW daje tej cesze
+ * dokladnie to zadanie.
+ */
+function isAmmoResetFeature(entry) {
+  return entry.section === "bonus" && /magazynek/i.test(entry.text ?? "");
+}
+
 function buildBestiaryItem(c, entry, kind) {
   const isAttack = kind === "attack";
   const activities = {};
@@ -1120,7 +1182,7 @@ function buildBestiaryItem(c, entry, kind) {
       requirements: sectionLabel,
       properties: [],
       prerequisites: {},
-      uses: { max: "", spent: 0, recovery: [] },
+      uses: bestiaryAmmoBudget(entry, kind) ?? { max: "", spent: 0, recovery: [] },
       activities
     },
     effects,
@@ -1131,7 +1193,8 @@ function buildBestiaryItem(c, entry, kind) {
           entryId: entry.id,
           section: entry.section,
           automation: entry.automation ?? null,
-          onHit: isAttack ? (entry.onHit ?? null) : null
+          onHit: isAttack ? (entry.onHit ?? null) : null,
+          ammoReset: isAmmoResetFeature(entry) || undefined
         }
       }
     }
@@ -1466,6 +1529,7 @@ const sprzetDocs = [
   ...Object.keys(GOGLE_VARIANTS).map(buildGogle),
 ];
 const armorDocs = ARMORS.map(buildArmor);
+const magazineDocs = MAGAZINES.map(buildMagazine);
 
 // sanity: every uuid referenced from an advancement must resolve to a built doc
 const built = new Set([
@@ -1525,6 +1589,7 @@ if (wanted(PACK.amunicja)) await writePack(PACK.amunicja, ammoDocs);
 if (wanted(PACK.granaty)) await writePack(PACK.granaty, grenadeDocs);
 if (wanted(PACK.narzedzia)) await writePack(PACK.narzedzia, toolkitDocs);
 if (wanted(PACK.bron)) await writePack(PACK.bron, weaponDocs);
+if (wanted(PACK.magazynki)) await writePack(PACK.magazynki, magazineDocs);
 if (wanted(PACK.sprzet)) await writePack(PACK.sprzet, sprzetDocs);
 if (wanted(PACK.pancerze)) await writePack(PACK.pancerze, armorDocs);
 if (wanted(PACK.bestiariusz)) await writeActorPack(PACK.bestiariusz, bestiaryEntries, bestiaryFolders);

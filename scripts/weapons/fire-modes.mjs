@@ -1,4 +1,6 @@
 import { getMag, spendRounds } from "./magazine.mjs";
+import { lastConsumedRounds, dominantCaliber, weaponEntry } from "./magazine-model.mjs";
+import { effectiveDamageFor } from "./ammo.mjs";
 import { hasAddon } from "../config/addons-data.mjs";
 import { getSetup } from "./addons.mjs";
 import { isDamaged, isJammed, rollJamCheck } from "./jams.mjs";
@@ -6,6 +8,7 @@ import { playWeaponSound, playBurstSound, WeaponSound } from "./sounds.mjs";
 import { tracerFire, tracerFireArea } from "./tracer-vfx.mjs";
 import { describeCoverDecision, promptCoverDecision } from "../combat/cover.mjs";
 import { ABILITY_KEYS, buildAbilityRuleChangeNotice, hasAbility } from "../actors/abilities.mjs";
+import { isDocumentLive } from "../doc-liveness.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const KS_ACTIVITY_TYPE = "neuroKs";
@@ -200,7 +203,8 @@ function registerShortBurstActivityType() {
     }
 
     _processDamagePart(damage, rollConfig, rollData, index = 0) {
-      return _buildNoModifierDamageRoll(this.item, this.id, damage, rollConfig, rollData, index);
+      return _buildNoModifierDamageRoll(this.item, this.id, damage, rollConfig, rollData, index,
+        _burstCaliber(_getLiveItem(this.item)));
     }
   }
 
@@ -282,7 +286,8 @@ function registerDubletActivityType() {
     }
 
     _processDamagePart(damage, rollConfig, rollData, index = 0) {
-      return _buildNoModifierDamageRoll(this.item, this.id, damage, rollConfig, rollData, index);
+      return _buildNoModifierDamageRoll(this.item, this.id, damage, rollConfig, rollData, index,
+        _burstCaliber(_getLiveItem(this.item)));
     }
   }
 
@@ -496,7 +501,8 @@ function registerLongBurstActivityType() {
     }
 
     _processDamagePart(damage, rollConfig, rollData, index = 0) {
-      return _buildNoModifierDamageRoll(this.item, this.id, damage, rollConfig, rollData, index);
+      return _buildNoModifierDamageRoll(this.item, this.id, damage, rollConfig, rollData, index,
+        _burstCaliber(_getLiveItem(this.item)));
     }
   }
 
@@ -855,7 +861,8 @@ function registerCrushingBurstActivityType() {
     }
 
     _processDamagePart(damage, rollConfig, rollData, index = 0) {
-      return _buildNoModifierDamageRoll(this.item, this.id, damage, rollConfig, rollData, index);
+      return _buildNoModifierDamageRoll(this.item, this.id, damage, rollConfig, rollData, index,
+        _burstCaliber(_getLiveItem(this.item)));
     }
   }
 
@@ -899,12 +906,17 @@ async function syncWeaponFireModes(item) {
 
   syncingItems.add(item.uuid);
   try {
-    await syncBaseAttackActivity(item);
-    await syncShortBurstActivity(item);
-    await syncDubletActivity(item);
-    await syncLongBurstActivity(item);
-    await syncCrushingBurstActivity(item);
-    await syncSuppressiveFireActivity(item);
+    /* `isDocumentLive` MIĘDZY krokami, nie tylko na wejściu. Każdy krok to osobny round-trip
+       do serwera, więc kasowanie broni potrafi wpaść w środek serii — zmierzone na żywo:
+       żądanie kasowania wyszło między `syncBaseAttackActivity` a `syncShortBurstActivity`,
+       a reszta serii pisała już do nieistniejącego itemu. Patrz `scripts/doc-liveness.mjs`. */
+    for (const step of [
+      syncBaseAttackActivity, syncShortBurstActivity, syncDubletActivity,
+      syncLongBurstActivity, syncCrushingBurstActivity, syncSuppressiveFireActivity
+    ]) {
+      if (!isDocumentLive(item)) return;
+      await step(item);
+    }
   } finally {
     syncingItems.delete(item.uuid);
   }
@@ -930,11 +942,35 @@ async function syncBaseAttackActivity(item) {
 
   const needsName = existing.name !== BASE_ATTACK_LABEL;
   const needsImg = existing.img !== BASE_ATTACK_IMG;
-  if (!needsName && !needsImg) return;
+  const wantBonus = _catalogAttackBonus(item);
+  const needsBonus = (wantBonus !== null) && (String(existing.attack?.bonus ?? "") !== wantBonus);
+  if (!needsName && !needsImg && !needsBonus) return;
   const update = {};
   if (needsName) update.name = BASE_ATTACK_LABEL;
   if (needsImg) update.img = BASE_ATTACK_IMG;
+  if (needsBonus) update["attack.bonus"] = wantBonus;
   await item.updateActivity(existing.id, update);
+}
+
+/**
+ * Stała premia do Testu Ataku, którą katalog deklaruje dla tego modelu broni.
+ *
+ * `null` = katalog nic nie mówi, **więc niczego nie piszemy**. To nie jest ostrożność na wyrost:
+ * `attack.bonus` bywa ręcznie dostrajany na egzemplarzach broni NPC-ów (ta sama klasa przypadku,
+ * dla której `auditWeapons()` trzyma `autoFix: false` na `damage.base.bonus`), a wyzerowanie go
+ * przy każdym zapisie przedmiotu skasowałoby świadomą decyzję MG bez śladu.
+ *
+ * Powstało 2026-09-22 przy migracji magazynków: premia „+1 do trafienia" Złotego Desert Eagle
+ * siedziała wyłącznie w aktywności egzemplarza, a migracja kasuje i odtwarza broń z katalogu —
+ * czyli z aktywnościami budowanymi od zera. Premia znikła po cichu. Teraz jest danymi
+ * (`attackBonus` w `weapons-data.mjs`), więc przetrwa każde odtworzenie.
+ *
+ * Bonusy z ulepszeń (`weapons/addons.mjs`) idą osobną drogą — doklejane w momencie rzutu, bo
+ * przychodzą i odchodzą razem z zamontowanym dodatkiem. Tutaj chodzi o właściwość samej sztuki.
+ */
+function _catalogAttackBonus(item) {
+  const bonus = weaponEntry(item)?.attackBonus;
+  return Number.isFinite(bonus) ? String(bonus) : null;
 }
 
 function _findUnmanagedAttackActivity(item) {
@@ -1264,8 +1300,43 @@ function _buildCrushingBurstActivityData(item) {
   return source;
 }
 
-function _buildBurstDamagePart(item, multiplier) {
-  const baseDamage = item.system.damage?.base;
+/**
+ * Kaliber, ktory rzadzi obrazeniami TEJ serii.
+ *
+ * Seria zuzywa naboje w `use()`/`_triggerSubsequentActions()`, a MG klika „Obrazenia" na karcie
+ * czatu dopiero potem — wiec odczyt zywego stanu broni pokazalby nabój NASTEPNY, nie te, ktore
+ * poleçialy. Bierzemy wiec to, co zwrocilo lejko (`consumeRounds`), i stosujemy regule
+ * **dominujacego naboju**: liczymy pociski per kaliber, sortujemy malejaco, remis rozstrzyga
+ * nabój o nizszym indeksie w kolejce (czyli ten, ktory poszedl wczesniej).
+ *
+ * Przyklad: KS (3 naboje) z magazynka `[AP, smugowy, AP, …]` → 2× AP, 1× smugowy → jak AP.
+ *
+ * Fallback na glowe kolejki obsluguje dwa przypadki: synchronizacje aktywnosci na karcie
+ * (jeszcze nikt nie strzelal, wiec pokazujemy, co POLECI) oraz przeladowanie swiata miedzy
+ * seria a rzutem na obrazenia — pamiec `lastConsumedRounds` jest per proces, dokladnie jak
+ * `_burstSelectionCache` obok.
+ */
+function _burstCaliber(item) {
+  const consumed = lastConsumedRounds(item);
+  if (consumed?.length) return dominantCaliber(consumed);
+  return getMag(item)?.ammoType ?? null;
+}
+
+/**
+ * Kosci obrazen serii = kosci pojedynczego strzalu × mnoznik.
+ *
+ * Kosci biora sie z NABOJU, nie z `system.damage.base` — od 2026-09-22 nic juz nie synchronizuje
+ * bazowych obrazen broni z wpietym kalibrem (patrz `ammo.mjs`, `_onUpdateItemSyncCaliberDamage`),
+ * bo przy mieszanym magazynku oznaczaloby to zapis do bazy przy kazdym strzale. Bron z flaga
+ * `fixedDamage` (Pompka, Dwururka, …) i bron poza systemem magazynkow dalej jada na wlasnych
+ * kostkach — rozstrzyga to `effectiveDamageFor()`, jedno miejsce dla serii i strzalu pojedynczego.
+ */
+function _buildBurstDamagePart(item, multiplier, caliberId = _burstCaliber(item)) {
+  const profile = effectiveDamageFor(item, caliberId);
+  const parsed = profile?.formula ? /^(\d+)d(\d+)$/i.exec(profile.formula.trim()) : null;
+  const baseDamage = parsed
+    ? { number: Number(parsed[1]), denomination: Number(parsed[2]), types: [profile.type] }
+    : item.system.damage?.base;
   const types = Array.from(baseDamage?.types ?? []);
   const part = {
     number: null,
@@ -1297,7 +1368,16 @@ function _buildBurstDamagePart(item, multiplier) {
   return part;
 }
 
-function _buildNoModifierDamageRoll(item, activityId, damage, rollConfig, rollData, index = 0) {
+/**
+ * Konfiguracja rzutu obrazen bez modyfikatora z atrybutu (Neuroshima nie dodaje go do broni).
+ *
+ * `options.properties` niesie wlasciwosci fizyczne, na ktorych stoja redukcje i reguly obrazen.
+ * Dokladamy do nich wlasciwosci NABOJU (`rozrywajaca`, `hollowpoint` dla dum-dum), bo one nie
+ * siedza juz na `item.system.properties` — nic ich tam nie wpisuje, odkad kaliber nie jest
+ * synchronizowany do bazy. Bez tego dum-dum zadalby swoje kosci, ale nie wywolalby Krwawienia:
+ * bron zmutowalaby, zapominajac o tym powiedziec.
+ */
+function _buildNoModifierDamageRoll(item, activityId, damage, rollConfig, rollData, index = 0, caliberId = _burstCaliber(item)) {
   const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling);
   const parts = scaledFormula ? [scaledFormula] : [];
   const data = { ...rollData };
@@ -1309,8 +1389,10 @@ function _buildNoModifierDamageRoll(item, activityId, damage, rollConfig, rollDa
     options: {
       type: (damage.types.has(lastType) ? lastType : null) ?? damage.types.first(),
       types: Array.from(damage.types),
-      properties: Array.from(item.system.properties ?? [])
-        .filter(property => CONFIG.DND5E.itemProperties[property]?.isPhysical)
+      properties: Array.from(new Set([
+        ...Array.from(item.system.properties ?? []),
+        ...(effectiveDamageFor(item, caliberId)?.props ?? [])
+      ])).filter(property => CONFIG.DND5E.itemProperties[property]?.isPhysical)
     }
   };
 }

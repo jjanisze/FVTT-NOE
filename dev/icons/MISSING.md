@@ -23,7 +23,7 @@ still not this queue — but it is two items, not a pile.
 **Next batch number: 40** (last used: `process_grid_39.py` — bump this
 whenever a new batch actually gets processed).
 
-## Queue (6/9)
+## Queue (9/9 — PEŁNY, gotowy do wygenerowania)
 
 | # | Item | Where | Current icon | Suggested prompt content |
 |---|------|-------|---------------|---------------------------|
@@ -33,6 +33,23 @@ whenever a new batch actually gets processed).
 | 4 | Chleb (`chleb`) | `prowiant-data.mjs` `PROWIANT_CATALOG` (v0.14.25) | shares `canned_food.svg` | Round rustic loaf of bread, post-war home-baked look |
 | 5 | Owoce i warzywa (`owoce`) | `prowiant-data.mjs` `PROWIANT_CATALOG` (v0.14.25) | shares `canned_food.svg` | A small pile of root vegetables and fruit, wasteland-grown, slightly misshapen |
 | 6 | Racja wojskowa MRE (`mre`) | `prowiant-data.mjs` `PROWIANT_CATALOG` (v0.14.25) | shares `menazka.svg` (a mess tin — related, but not the same object) | Sealed military MRE ration pouch with stencilled markings |
+| 7 | Breneka .12 Ga (`12ga_b`) | `ammo-data.mjs` `AMMO_CALIBERS` — PLAN_magazynki.md §7 | shares `ammo_12_ga.svg` with śrut (`12ga_s`) | 12-gauge **slug** shotgun shell: one solid rifled lead projectile visible at the crimp, heavier look than birdshot. Must read as clearly different from a buckshot shell at inventory-row size |
+| 8 | Zużyty LAW (`law-spent`) | PLAN_magazynki.md §11 faza 7 — LAW after firing | none (item does not exist yet) | Spent single-use rocket launcher tube: scorched, end caps blown open, obviously dead weight. Scrap, not a weapon |
+| 9 | Magazynek bębnowy / zwiększona pojemność (`mag_drum`) | `magazines-data.mjs` — RAW capacity variants (BPP/BPD 100) | would otherwise reuse `mag_assault_rifle.svg` | Drum magazine for a rifle — wide cylindrical body, feed lips on top. Must read as "much bigger" than the standard stick magazine next to it in the same list |
+
+*(Rows 7–9 added 2026-09-21 for the magazine rework, `PLAN_magazynki.md`. Row 7 is the one
+**Status 2026-09-22: no longer blocking.** The loading window shipped with both variants of a
+family sharing one SVG; they are told apart by **label and effect text** in the row
+("2k6 kłute • przebijająca"), not by the picture. Dropping in the dedicated files replaces the
+art with no code change — `_loadRowHtml()` reads `AMMO_CALIBERS[].icon` straight from the catalog.
+The gap is still real, just no longer in the critical path.
+
+that matters most: the loading window (§7) puts compatible ammo types in a vertical list, and
+**both existing caliber families currently share one icon** — `12ga_s`/`12ga_b` on
+`ammo_12_ga.svg` and `44mag`/`44mag_dd` on `ammo_44_mag.svg` (row 2). A list of rows that all
+look the same is worse than no icons at all. Generating breneka + dum-dum makes both pairs
+distinguishable; śrut and plain .44 Mag keep the existing generic art as the "default" member
+of each pair, so only two new tiles are needed rather than four.)*
 
 *(Rows 3–6: the Prowiant catalogue added in v0.14.25 has nine food entries and only
 one real food icon, `canned_food.svg`. The four queued here are the ones a player is

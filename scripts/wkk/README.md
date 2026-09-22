@@ -10,8 +10,8 @@ any table running this module regardless of house rules.
 > content that patches a broken engine default or is player-specific ephemera. If a RAW item's
 > numbers were house-ruled for this campaign, it's an NOE item with a WKK override.
 
-This is a hard binary, decided directly by the GM (2026-09). Two cases that might look like
-exceptions and aren't:
+This was a hard binary, decided directly by the GM (2026-09). It grew a **third, narrow bucket**
+in 2026-09-22 — see below. Two cases that might look like exceptions and aren't:
 
 - **Content with no RAW equivalent is still 100% WKK**, even when it exists to work around a
   broken engine default rather than to add homebrew flavor. Pochodnia (`items/pochodnia.mjs`)
@@ -25,6 +25,35 @@ exceptions and aren't:
   of keeping the rule simple rather than inventing a fourth bucket for "campaign-specific but
   still mechanical" content.
 
+## The third bucket: RAI — mechanics from the system's author, unpublished
+
+Added 2026-09-22, when `PLAN_magazynki.md` produced the first case the binary above could not
+classify: a mechanic that is **not in the rulebook, but comes from the author of the system**
+(Marcin Kubiesa, in consultation). Calling that WKK would file the author's own intent as this
+table's homebrew; calling it NOE without a marker would present it as something a reader can
+look up in the book.
+
+**Rule:** RAI content lives in the **NOE tree** — it is the author's intent, so it is useful to
+other tables running this module — but every such fragment carries an explicit comment saying
+where it came from. It is **not** gated behind the Kobalt toggle and it does **not** go in
+`scripts/wkk/`.
+
+Currently two fragments, both from the magazine rebuild:
+
+| Mechanic | Where |
+|---|---|
+| Magazines split per weapon MODEL, not per weapon category | `config/magazines-data.mjs`, `magwellOf()` in `config/weapons-data.mjs` |
+| No loading rounds into a removable magazine during combat | `weapons/magazine.mjs`, `_performLoadOneAction()` |
+
+**Repo is public.** Attributing unpublished rulings to a named person should be cleared with
+them before it lands in a code comment — so the comments state the mechanic and its reasoning,
+and name the source only where the GM has confirmed that is fine.
+
+What stays WKK because it does **not** come from the author: the per-round ammunition queue,
+the chamber as a separate slot with its own caliber, and the dominant-round rule for bursts.
+Also deferred-but-WKK: pushing a single round into a removable-magazine weapon against a
+Zwinne dłonie check (author's idea, this table's numbers — see `TODO_mechanika.md`).
+
 ## What's actually in here
 
 | File | What it holds |
@@ -35,7 +64,7 @@ exceptions and aren't:
 | `wkk/items/zeton-luxor.mjs` | Żeton Luxor prop |
 | `wkk/items/gadzety.mjs` | The 4 flavor click-items |
 | `wkk/config/ammo-data.mjs` | `44mag_dd`, `race` ammo entries |
-| `wkk/config/weapons-data.mjs` | `pistolet-na-race`, `laska`, `miecz` weapon entries |
+| `wkk/config/weapons-data.mjs` | `pistolet-na-race`, `laska`, `miecz`, `zloty-desert-eagle` weapon entries |
 | `wkk/config/diseases-data.mjs` | Schizofrenia paranoidalna + its stable id |
 | `wkk/config/phobias-data.mjs` | Mizoofobia |
 | `wkk/config/latarka-overrides.mjs` | `LIGHT_KOBALT` — see the override pattern below |

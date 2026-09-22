@@ -16,7 +16,17 @@
  *   range      — { value, long } w metrach; null dla broni bialej bez `thr`
  *   props      — klucze wlasciwosci (CONFIG.DND5E.itemProperties)
  *   caliber    — id z ammo-data.mjs albo null
- *   mag        — { kind: "mag"|"wmag"|"beb"|"belt", max } albo null
+ *   mag        — { kind: "mag"|"wmag"|"beb"|"belt"|"quiver", max } albo null.
+ *                `max` = pojemnosc STANDARDOWEGO magazynka tego modelu, czyli dokladnie
+ *                liczba z kolumny Mag./Beb. Pojemnosc BRONI to `max` + komora (patrz `chamber`).
+ *   magwell    — gniazdo magazynka; domyslnie rowne `id` (patrz `magwellOf()`). Jawne tylko
+ *                tam, gdzie kilka modeli dzieli magazynek: warianty tej samej broni (Zloty
+ *                Desert Eagle) i rodziny uniwersalne (wszystkie luki → "luk").
+ *   chamber    — `false` = bron NIE ma komory odrebnej od zrodla zasilania, wiec zadnego `+1`.
+ *                Domyslnie true dla `mag`/`belt`/`quiver`/`wmag`, zawsze false dla `beb`
+ *                (komory bebenka SA pojemnoscia). Nie da sie tego wyprowadzic z innych pol:
+ *                M1 US Rifle (`wmag`, bez wlasciwosci) dostaje `+1`, a Obrzyn (`wmag`, bez
+ *                wlasciwosci) nie — patrz PLAN_magazynki.md §5.
  *   weight     — kg
  *   price      — gb
  *   avail      — dostepnosc w %
@@ -29,7 +39,7 @@
  * generuje je z wlasciwosci przy kazdym zapisie przedmiotu.
  */
 
-import { LASKA, MIECZ, PISTOLET_NA_RACE } from "../wkk/config/weapons-data.mjs";
+import { LASKA, MIECZ, PISTOLET_NA_RACE, ZLOTY_DESERT_EAGLE } from "../wkk/config/weapons-data.mjs";
 
 import { AMMO_CALIBER_MAP } from "./ammo-data.mjs";
 
@@ -209,7 +219,7 @@ const BRON_MIOTANA = [
     damage: { number: 1, denomination: 12, types: ["piercing"] },
     range: { value: 60, long: 120 },
     props: ["cicha", "two", "ladowanie", "sm"],
-    caliber: "belt",
+    caliber: "belt", magwell: "kusza", mag: { kind: "quiver", max: 20 },
     weight: 4, price: 70, avail: 30
   },
   {
@@ -235,7 +245,7 @@ const BRON_MIOTANA = [
     damage: { number: 1, denomination: 12, types: ["piercing"] },
     range: { value: 60, long: 180 },
     props: ["cicha", "two", "ladowanie"],
-    caliber: "strzala",
+    caliber: "strzala", magwell: "luk", mag: { kind: "quiver", max: 20 },
     weight: 2, price: 50, avail: 40
   },
   {
@@ -243,7 +253,7 @@ const BRON_MIOTANA = [
     damage: { number: 1, denomination: 8, types: ["piercing"] },
     range: { value: 30, long: 90 },
     props: ["cicha", "two"],
-    caliber: "strzala",
+    caliber: "strzala", magwell: "luk", mag: { kind: "quiver", max: 20 },
     weight: 1, price: 30, avail: 60
   },
   {
@@ -369,7 +379,7 @@ const BRON_PALNA_KROTKA = [
     damage: { number: 2, denomination: 4, types: ["piercing"] },
     range: { value: 6, long: 18 },
     props: ["wmag", "tryb_p", "dublet"],
-    caliber: "12ga_s", mag: { kind: "wmag", max: 2 },
+    caliber: "12ga_s", mag: { kind: "wmag", max: 2 }, chamber: false,
     weight: 2, price: 40, avail: 70,
     note: "Śrut: 2k4 kłute. Breneka: 2k6 obuchowe — zmień kaliber na .12 Ga (b)."
   },
@@ -378,12 +388,13 @@ const BRON_PALNA_KROTKA = [
     damage: { number: 1, denomination: 6, types: ["piercing"] },
     range: { value: 12, long: 24 },
     props: ["wmag", "tryb_p", "ladowanie"],
-    caliber: "9mm", mag: { kind: "wmag", max: 1 },
+    caliber: "9mm", mag: { kind: "wmag", max: 1 }, chamber: false,
     weight: 2, price: 20, avail: 50,
     note: "Tabela podaje kaliber i obrażenia jako „Różne” — 9 mm to wartość domyślna.",
     manual: ["Kaliber i kostkę obrażeń ustala MG przy tworzeniu egzemplarza."]
   },
-  PISTOLET_NA_RACE
+  PISTOLET_NA_RACE,
+  ZLOTY_DESERT_EAGLE
 ];
 
 const BRON_PALNA_POSREDNIA = [
@@ -524,7 +535,7 @@ const BRON_PALNA_DLUGA = [
     damage: { number: 3, denomination: 4, types: ["piercing"] },
     range: { value: 18, long: 54 },
     props: ["wmag", "tryb_p", "dluga", "dublet"],
-    caliber: "12ga_s", mag: { kind: "wmag", max: 2 }, fixedDamage: true,
+    caliber: "12ga_s", mag: { kind: "wmag", max: 2 }, chamber: false, fixedDamage: true,
     weight: 4, price: 60, avail: 50,
     note: "Śrut: 3k4 kłute. Breneka: 3k6 obuchowe — zmień kaliber na .12 Ga (b)."
   },
@@ -542,7 +553,7 @@ const BRON_PALNA_DLUGA = [
     damage: { number: null, denomination: null, types: ["piercing"] },
     range: { value: 30, long: 90 },
     props: ["wmag", "tryb_p", "dluga"],
-    caliber: "strzykawka", mag: { kind: "wmag", max: 1 }, fixedDamage: true,
+    caliber: "strzykawka", mag: { kind: "wmag", max: 1 }, chamber: false, fixedDamage: true,
     weight: 4, price: 70, avail: 30,
     note: "Strzela wyłącznie pociskami-strzykawkami — sama nie zadaje obrażeń kostkowych.",
     manual: ["Efekt pocisku (środek chemiczny, dawka, RO) rozstrzyga MG."]
@@ -572,7 +583,7 @@ const BRON_PALNA_CIEZKA = [
     damage: { number: 6, denomination: 6, types: ["explosive"] },
     range: { value: 100, long: null },
     props: ["wmag", "tryb_p", "burzaca"],
-    caliber: "40mm", mag: { kind: "wmag", max: 1 },
+    caliber: "40mm", mag: { kind: "wmag", max: 1 }, chamber: false,
     weight: 5, price: 150, avail: 30
   },
   {
@@ -580,7 +591,7 @@ const BRON_PALNA_CIEZKA = [
     damage: { number: 15, denomination: 6, types: ["explosive"] },
     range: { value: 100, long: 200 },
     props: ["wmag", "tryb_p", "ppanc"],
-    caliber: "60mm", mag: { kind: "wmag", max: 1 },
+    caliber: "60mm", mag: { kind: "wmag", max: 1 }, chamber: false,
     weight: 5, price: 200, avail: 30
   },
   {
@@ -641,7 +652,7 @@ const BRON_SPECJALNA = [
     damage: { number: 6, denomination: 6, types: ["fire"] },
     range: { value: 36, long: null },
     props: ["ciezka", "spalinowa"],
-    mag: { kind: "wmag", max: 5 },
+    mag: { kind: "wmag", max: 5 }, chamber: false,
     weight: 20, price: 200, avail: 5,
     note: "Pełny zbiornik: 5 użyć. Zasięg: linia 36 m. Istoty w obszarze wykonują RO na "
         + "Zręczność o ST 10. Porażka: 18 (6k6) obrażeń od ognia oraz Podpalenie. "
@@ -656,7 +667,7 @@ const BRON_SPECJALNA = [
     damage: { number: 10, denomination: 6, types: ["explosive"] },
     range: { value: 50, long: 2000 },
     props: ["wmag", "tryb_p", "burzaca", "ciezka", "ladowanie"],
-    caliber: "120mm", mag: { kind: "wmag", max: 1 },
+    caliber: "120mm", mag: { kind: "wmag", max: 1 }, chamber: false,
     weight: 20, price: 300, avail: 5,
     note: "Zasięg min. 50 m, maks. 2 km. Obszar: sześcian 9 m, RO na Zręczność o ST 20. "
         + "Porażka: 30 (10k6) obrażeń ciętych i 30 (10k6) wybuchowych + Powalenie "
@@ -689,6 +700,64 @@ export const WEAPON_MAP = Object.freeze(
   Object.fromEntries(WEAPONS.map(w => [w.id, w]))
 );
 
+/* -------------------------------------------- */
+/*  Magazynki: gniazdo, komora, tryb podawania   */
+/* -------------------------------------------- */
+
+/**
+ * Rodzaje zasilania, w ktorych zrodlo naboi jest ODPINALNE — czyli takie, dla ktorych
+ * istnieje osobny przedmiot-pojemnik (`config/magazines-data.mjs`) i dla ktorych dziala
+ * wpinanie / wypinanie / wymiana. `wmag` i `beb` trzymaja naboje w samej broni.
+ */
+export const REMOVABLE_SOURCES = Object.freeze(["mag", "belt", "quiver"]);
+
+/**
+ * Gniazdo magazynka. Kluczem kompatybilnosci NIE jest slug broni, tylko magwell —
+ * domyslnie rowny slugowi, ale pozwalajacy wariantom tej samej broni dzielic magazynki.
+ *
+ * Bez tego kazda nazwana wersja standardowej broni (Zloty Desert Eagle Lorentza i wszystko,
+ * co przyjdzie po nim) wymagalaby wlasnych magazynkow, co jest i nierealistyczne,
+ * i upierdliwe przy stole.
+ *
+ * @param {object|string} entry  Wpis z WEAPONS albo jego id.
+ * @returns {string|null}
+ */
+export function magwellOf(entry) {
+  const w = (typeof entry === "string") ? WEAPON_MAP[entry] : entry;
+  if (!w) return null;
+  if (!REMOVABLE_SOURCES.includes(w.mag?.kind)) return null;
+  return w.magwell ?? w.id;
+}
+
+/**
+ * Czy bron ma komore odrebna od zrodla zasilania — czyli czy jej pojemnosc to `mag.max + 1`.
+ *
+ * `beb` nigdy: komory bebenka SA pojemnoscia. Poza tym decyduje jawne `chamber: false`
+ * na wpisie. Heurystyka po `mag.max` dzialalaby dzis i pekla przy pierwszej nowej broni.
+ */
+export function hasChamber(entry) {
+  const w = (typeof entry === "string") ? WEAPON_MAP[entry] : entry;
+  if (!w?.mag) return false;
+  if (w.mag.kind === "beb") return false;
+  return w.chamber !== false;
+}
+
+/**
+ * Tryb podawania — WYPROWADZANY z wlasciwosci, nigdy zapisany. Zero nowych danych.
+ *
+ *   manual  ⟺  wlasciwosc `przeladowanie` LUB `ladowanie`  → komora zostaje pusta po strzale
+ *   auto    ⟺  wszystko pozostale                          → komora dociaga sie sama
+ *
+ * **Regula musi patrzec na wlasciwosc, nie na `mag.kind`.** MGL1S ma `przeladowanie` + `beb`
+ * (bez `wmag`), a kusza automatyczna Cobra `przeladowanie` + `wmag` — kazda wersja wiazaca
+ * komore z `wmag` mialaby dziure od pierwszego dnia.
+ */
+export function feedModeOf(entry) {
+  const w = (typeof entry === "string") ? WEAPON_MAP[entry] : entry;
+  const props = w?.props ?? [];
+  return (props.includes("przeladowanie") || props.includes("ladowanie")) ? "manual" : "auto";
+}
+
 /** Nazwa kanoniczna → plik ikony. Zrodlo dla WEAPON_ICON_MAP w `config/weapons.mjs`. */
 export const WEAPON_ICONS = Object.freeze(
   Object.fromEntries(WEAPONS.map(w => [w.name, w.icon]))
@@ -713,7 +782,11 @@ export const WEAPON_NAME_ALIASES = Object.freeze({
   // Found live on GMT400/Richard Craddock (2026-08-29): same shape — a
   // descriptive suffix (mount/belt configuration) kept the name from matching.
   "Browning M2 (z trójnogiem)": "Browning",
-  "FN Minimi (taśma XXL)": "Minimi"
+  "FN Minimi (taśma XXL)": "Minimi",
+  // Found live on Raynald (2026-09-22) during the magazine migration: the only firearm in the
+  // party the migration could not resolve at all. Same shape as the two above — a descriptive
+  // prefix ("Pistolet") in front of the catalog name kept it from matching anything.
+  "Pistolet B92": "B 92"
 });
 
 /* -------------------------------------------- */
@@ -726,7 +799,8 @@ const DAMAGE_TYPE_LABELS = {
 };
 
 const MAG_KIND_LABELS = {
-  mag: "Magazynek", wmag: "Magazynek wewnętrzny", beb: "Bębenek", belt: "Taśma"
+  mag: "Magazynek", wmag: "Magazynek wewnętrzny", beb: "Bębenek", belt: "Taśma",
+  quiver: "Kołczan"
 };
 
 function _damageLabel(d) {
@@ -766,11 +840,58 @@ function _description(w) {
  */
 export function buildWeaponItemData(w, extra = {}) {
   const flags = { [MODULE_ID]: { availability: w.avail } };
+
+  /* Tozsamosc modelu, stemplowana na kazdym egzemplarzu. To pierwsza i najpewniejsza
+     warstwa rozstrzygania „do jakiej broni pasuje ten magazynek" — przezywa drag&drop,
+     duplikacje, eksport i import, i nie wymaga zgadywania po nazwie (`weaponIdOf()`
+     w `weapons/magazine-model.mjs`). Nazwy w swiecie rozjechaly sie z tabelami
+     („Trzydziestka", „AK", „H&K G3"), wiec dopasowanie rozmyte jest niedopuszczalne. */
+  flags[MODULE_ID].weaponId = w.id;
+
   if (w.caliber || w.mag) {
+    /* `flags.mag` jest odtad PROJEKCJA, nie magazynem stanu — zrodlem prawdy jest wpiety
+       magazynek albo `flags.rounds`. Tu ustawiamy jej wartosc startowa, zeby swiezy
+       przedmiot z packa pokazywal sensowne liczby jeszcze przed pierwszym przeliczeniem.
+       Patrz `projectMagazineState()` w `weapons/magazine-model.mjs`. */
+    const removable = REMOVABLE_SOURCES.includes(w.mag?.kind);
+    const capacity = removable ? 0 : (w.mag?.max ?? 0);
+    let rounds = [];
+    let chamber = null;
+
+    if (removable) {
+      /* Bron z wymiennym zrodlem przychodzi BEZ magazynka i bez naboi. To nie przeoczenie:
+         magazynek jest osobnym dokumentem Item, wiec `buildWeaponItemData` fizycznie nie ma
+         jak go stworzyc, a „magazynek bierze sie z powietrza przy zakupie broni" to wlasnie
+         model kwantowy, ktory ten plan wycofuje. Kupujesz spluwe, kupujesz do niej magazynki
+         (`config/magazines-data.mjs`); migracja (`migration/migrate-magazynki.mjs`) wklada
+         postaciom po jednym, zeby nie startowaly walki z pusta bronia. */
+      flags[MODULE_ID].loadedMag = null;
+    } else if (w.mag) {
+      /* Magazynek wewnetrzny / bebenek: naboje siedza w samej broni, wiec nie ma osobnego
+         przedmiotu, ktory moglby je przyniesc — swiezy egzemplarz przychodzi pelny, dokladnie
+         jak przed ta przebudowa. */
+      rounds = w.caliber ? Array(capacity).fill(w.caliber) : [];
+      flags[MODULE_ID].loadedMag = null;
+      /* Komora nie jest dodatkowym nabojem „w prezencie": bron przychodzi zaladowana
+         tabelarycznym `mag.max`, a jeden z tych naboi siedzi w komorze. Zatem 6-strzalowa
+         Pompka przychodzi jako 6/7, nie 7/7 — do pelna trzeba doslac siodmy recznie,
+         dokladnie jak kaze RAW („ile naboi mozna JEDNORAZOWO zaladowac"). */
+      if (hasChamber(w) && rounds.length) chamber = rounds.pop();
+    }
+
+    flags[MODULE_ID].rounds = rounds;
+    flags[MODULE_ID].chamber = { caliberId: chamber ?? null };
+
+    /* Projekcja liczona z tego, co faktycznie wlozylismy — nigdy obok.
+       `max` to pojemnosc AKTUALNA, nie nominalna: bron bez wpietego magazynka mieści
+       dokladnie jeden nabój (ten w komorze), wiec swiezy AR z packa to `0/1`, nie `0/31`.
+       Wyglada zaskakujaco, ale jest jedyna wersja, przy ktorej „ile jeszcze wejdzie"
+       i „czy wystarczy na serie" czytaja to samo pole (PLAN_magazynki.md §13). Karta broni
+       mowi wprost „brak magazynka", zeby ta jedynka nie czytala sie jak awaria. */
     flags[MODULE_ID].mag = {
-      ammoType: w.caliber ?? "",
-      max: w.mag?.max ?? null,
-      current: w.mag?.max ?? 0
+      ammoType: chamber ?? rounds[0] ?? w.caliber ?? "",
+      max: w.mag ? capacity + (hasChamber(w) ? 1 : 0) : null,
+      current: rounds.length + (chamber ? 1 : 0)
     };
   }
   if (w.fixedDamage) flags[MODULE_ID].fixedDamage = true;
@@ -889,6 +1010,40 @@ export async function createWeapons(actor) {
 const _MAG_FLAG_PATH_PREFIX = `flags.${MODULE_ID}.mag.`;
 
 /**
+ * Czy ta broń jest już na modelu magazynków symulacyjnych (PLAN_magazynki.md).
+ *
+ * Rozstrzyga obecność KTÓREJKOLWIEK flagi magazynu: `loadedMag`, `rounds`, `chamber`.
+ * Definicja mieszka tutaj, a nie w `weapons/magazine-model.mjs`, z dwóch powodów.
+ * Po pierwsze te flagi stempluje `buildWeaponItemData()` w tym pliku, więc to ten moduł
+ * jest właścicielem ich kształtu. Po drugie `magazine-model.mjs` już importuje stąd
+ * (`WEAPON_MAP`, `magwellOf`, `hasChamber`) — import w drugą stronę zrobiłby cykl
+ * `weapons-data → magazine-model → weapons-data`. Ten kierunek jest darmowy.
+ *
+ * Dwa niezależne zastosowania, oba krytyczne:
+ *
+ * 1. **Audyt** (`diffWeaponItem`/`buildWeaponRepairDelta`) — na nowym modelu `flags.mag`
+ *    przestało być stanem broni, a stało się **projekcją**: `max` to pojemność AKTUALNIE
+ *    wpiętego magazynka (albo sama komora, albo `null`), nie pojemność katalogowa. Bez
+ *    tego strażnika audyt zgłasza fałszywy dryf na każdej broni bez pełnego magazynka,
+ *    a `repairWeapons()` wpisuje wartość katalogową prosto w projekcję — czego §„projekcja,
+ *    nie cache” zabrania, i co i tak odkręca najbliższe przeliczenie.
+ * 2. **Sweep projekcji** (`projectMagazineState()`) — broń BEZ tych flag niesie jeszcze
+ *    stan sprzed przebudowy w `flags.mag`, i ten stan jest jedynym zapisem tego, ile naboi
+ *    miała postać przed migracją. Przeliczenie projekcji wyzerowałoby go bezpowrotnie.
+ *    Złapane na żywo 2026-09-22 — patrz komentarz przy wywołaniu w `magazine-model.mjs`.
+ *
+ * NPC i Zbrojownia zostają poza systemem (`inMagazineSystem()`), więc dla nich to zwraca
+ * `false` i stare ścieżki — audyt magazynka, `ammo.mjs` czytający `mag.ammoType` — działają
+ * jak działały.
+ */
+export function onMagazineModel(item) {
+  const flags = item?.flags?.[MODULE_ID] ?? {};
+  return (flags.loadedMag !== undefined)
+    || Array.isArray(flags.rounds)
+    || (flags.chamber?.caliberId !== undefined);
+}
+
+/**
  * True while `melee-degradation.mjs` currently has this weapon's damage die knocked
  * down from a natural 1 (`flags.<module>.degradation.originalDenomination` set). Its
  * `degradeWeapon()`/`repairWeapon()` deliberately write the LIVE, degraded value
@@ -916,10 +1071,19 @@ function _hasActiveMeleeDegradation(item) {
  * a caliber swap — caught live on Piekarz's Obrzyn right after loading a Breneka round.
  * Only trusts the swap if the loaded id is a real, known caliber (`AMMO_CALIBER_MAP`) —
  * an unrecognized/garbage `ammoType` is still reported as drift, not silently excused.
+ *
+ * Źródło odczytu zależy od modelu. Na modelu magazynków pyta **magazyn**, nie `flags.mag`:
+ * naboje leżą w komorze i kolejce, a `flags.mag` jest tylko projekcją — czytanie projekcji
+ * dałoby tu (dziś) tę samą odpowiedź, ale wiązałoby audyt z polem, które wolno pisać
+ * wyłącznie `projectMagazineState()`. Broń przed migracją, NPC i Zbrojownia idą starą
+ * ścieżką. `chamber` przed `rounds[0]`, bo to komora wystrzeli jako następna.
  */
 function _hasAlternateAmmoLoaded(item, cat) {
   if (!cat.caliber) return false;
-  const loaded = item.getFlag(MODULE_ID, "mag")?.ammoType;
+  const flags = item?.flags?.[MODULE_ID] ?? {};
+  const loaded = onMagazineModel(item)
+    ? (flags.chamber?.caliberId ?? flags.rounds?.[0] ?? flags.mag?.ammoType)
+    : flags.mag?.ammoType;
   if (!loaded || loaded === cat.caliber) return false;
   return !!AMMO_CALIBER_MAP[loaded];
 }
@@ -976,12 +1140,16 @@ const _TEMPLATE_FIELDS = [
   // actually in the gun) exists as real ammo state at all — which can't be expressed
   // as an independent max/ammoType diff (both can already be correct while `current`
   // was never initialized; a live copy with exactly that shape is what caught this).
+  // skip on nowym modelu — patrz `onMagazineModel()`: `flags.mag.max` to pojemność
+  // WPIĘTEGO magazynka (projekcja), nie pojemność katalogowa. Broń bez magazynka
+  // projektuje 1 (sama komora) albo `null`, co jest poprawnym stanem, a nie dryfem.
   { label: "Magazynek — pojemność", path: `${_MAG_FLAG_PATH_PREFIX}max`, special: "mag",
+    skip: onMagazineModel,
     get: i => i.getFlag(MODULE_ID, "mag")?.max ?? null, want: w => w.mag?.max ?? null },
   // skip — see `_hasAlternateAmmoLoaded()`: a shotgun currently loaded with a
   // different real caliber than its default (e.g. Breneka in an Obrzyn) is not drift.
   { label: "Magazynek — kaliber", path: `${_MAG_FLAG_PATH_PREFIX}ammoType`, special: "mag",
-    skip: _hasAlternateAmmoLoaded,
+    skip: (item, cat) => onMagazineModel(item) || _hasAlternateAmmoLoaded(item, cat),
     get: i => i.getFlag(MODULE_ID, "mag")?.ammoType || null, want: w => w.caliber || null }
 ];
 
@@ -1061,7 +1229,10 @@ export function diffWeaponItem(item, cat) {
   // (seen live: a copy with `flags.mag = {ammoType}` only — no `max`, no `current`).
   // Independent of the max/ammoType checks above — both of those can already be
   // correct while `current` still doesn't exist.
-  if (cat.caliber || cat.mag) {
+  // Na nowym modelu nie ma czego inicjować: naboje to kolejka w magazynku, a `current`
+  // wylicza projekcja przy każdej zmianie. Kontrola dotyczy już tylko broni sprzed
+  // migracji oraz aktorów poza systemem (NPC), gdzie `flags.mag` wciąż JEST stanem.
+  if ((cat.caliber || cat.mag) && !onMagazineModel(item)) {
     const magFlag = item.getFlag(MODULE_ID, "mag");
     if (!magFlag || typeof magFlag.current !== "number") {
       fields.push({ label: "Magazynek — stan naboi (current)", current: magFlag?.current ?? null, expected: "do zainicjowania" });
@@ -1153,7 +1324,8 @@ export function buildWeaponRepairDelta(item, cat) {
   // play) means only the drifted sub-field gets patched; anything else (missing
   // entirely, or present but never given a real `current`) gets a whole fresh
   // block instead of leaving `current` permanently undefined.
-  if (cat.caliber || cat.mag) {
+  // `!onMagazineModel` — naprawa NIGDY nie pisze do projekcji. Patrz `diffWeaponItem()`.
+  if ((cat.caliber || cat.mag) && !onMagazineModel(item)) {
     const magFlag = item.getFlag(MODULE_ID, "mag");
     if (magFlag && typeof magFlag.current === "number") {
       const wantMax = cat.mag?.max ?? null;

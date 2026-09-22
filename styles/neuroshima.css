@@ -594,40 +594,391 @@
   color: var(--dnd5e-color-gold, #c9a227);
 }
 
-/* Magazine inventory — identyczne reguły co ammo, ale też dla item-ready */
-.neuro-magazine-list .item-quantity input,
-.neuro-magazine-list .item-ready input {
-  background: none;
-  border: none;
-  padding: 0;
-  font-weight: bold;
-  text-align: center;
-  width: 30px;
-  color: var(--color-text-light-primary, #e0e0e0);
-  transition: box-shadow 250ms ease;
-  outline: none;
+/* ─────────────────────────────────────────────────────────────────
+   Magazynki — PLAN_magazynki.md §7
+   Wiersz na SZTUKĘ: każdy magazynek ma własną, uporządkowaną zawartość,
+   więc nie ma tu kolumn "Ilość"/"Gotowych" z modelu kwantowego.
+───────────────────────────────────────────────────────────────── */
+
+.neuro-magazine-wrapper {
+  display: flex;
+  flex-direction: column;
 }
 
-.neuro-magazine-list .item-quantity input:hover,
-.neuro-magazine-list .item-quantity input:focus-visible,
-.neuro-magazine-list .item-ready input:hover,
-.neuro-magazine-list .item-ready input:focus-visible {
-  box-shadow: 0 0 6px var(--dnd5e-color-gold, #c9a227);
-}
-
-.neuro-magazine-list .item-quantity .adjustment-button,
-.neuro-magazine-list .item-ready .adjustment-button {
-  cursor: pointer;
-  color: var(--color-text-secondary, #aaa);
-  font-size: 11px;
+.neuro-magazine-header {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 8px;
+  background-color: #471d24;
+  height: 30px;
+  border-bottom: 2px solid #ffffff;
+  color: #ffffff;
+  font-size: 0.9em;
+  font-weight: bold;
+  padding: 0 5px;
 }
 
-.neuro-magazine-list .item-quantity .adjustment-button:hover,
-.neuro-magazine-list .item-ready .adjustment-button:hover {
+.neuro-magazine-header h3.item-name {
+  flex: 2;
+  margin: 0;
+  padding-left: 5px;
+  color: #ffffff;
+  font-size: 1.1em;
+  text-decoration: none;
+  border: none;
+}
+
+.neuro-magazine-header .neuro-magazine-fill { flex: 0 0 64px; text-align: center; }
+.neuro-magazine-header .item-weight { flex: 0 0 60px; text-align: center; }
+.neuro-magazine-header .item-controls { flex: 0 0 128px; }
+
+/* Licznik slotów podręcznych — RAW daje trzy, wspólne z granatami i lekami. */
+.neuro-handy-counter {
+  flex: 0 0 auto;
+  font-size: 0.85em;
+  font-weight: 600;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.neuro-handy-counter.is-full { color: #f3c969; opacity: 1; }
+
+.neuro-magazine-list {
+  margin-top: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.neuro-magazine-group {
+  list-style: none;
+  padding: 2px 10px;
+  background: #1b1e25;
+  color: #8f96a4;
+  font-size: 0.78em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-bottom: 1px solid #2a2d36;
+}
+
+.neuro-magazine-item { list-style: none; margin-bottom: 0; }
+
+.neuro-magazine-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  background-color: #252830;
+  min-height: 42px;
+  border-bottom: 1px dotted #3b3d46;
+  padding: 0 5px;
+  color: #cacdd5;
+}
+
+.neuro-magazine-row .item-name {
+  flex: 2;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.neuro-magazine-row .item-image { --icon-fill: #9f9275; }
+
+.neuro-magazine-row .name .title {
+  color: #cacdd5;
+  font-weight: 500;
+}
+
+.neuro-magazine-row .name .subtitle {
+  font-size: 0.78em;
+  color: #8f96a4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.neuro-magazine-in { color: #b0a173; }
+
+.neuro-magazine-fill { flex: 0 0 64px; text-align: center; }
+.neuro-magazine-row .item-weight { flex: 0 0 60px; text-align: center; }
+
+.neuro-magazine-count {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: #cacdd5;
+}
+
+.neuro-magazine-count.is-full { color: #7fae6a; }
+.neuro-magazine-count.is-inert { color: #a35b5b; }
+
+.neuro-magazine-controls {
+  flex: 0 0 128px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+}
+
+.neuro-magazine-controls .item-control { color: #ccc; cursor: pointer; }
+.neuro-magazine-controls .item-control:hover { color: var(--dnd5e-color-gold, #c9a227); }
+.neuro-magazine-controls .item-control:disabled { opacity: 0.3; cursor: default; }
+.neuro-magazine-controls .item-control:disabled:hover { color: #ccc; }
+
+.neuro-mag-hand.is-on { color: #f3c969; }
+
+/* Ten sam przełącznik w panelach granatów i leków — slot podręczny jest wspólny. */
+.neuro-handy-toggle { color: #ccc; cursor: pointer; }
+.neuro-handy-toggle:hover { color: var(--dnd5e-color-gold, #c9a227); }
+.neuro-handy-toggle.is-on { color: #f3c969; }
+
+/* Podgląd kolejki — pierwszy chip leci pierwszy. */
+.neuro-magazine-queue {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px 4px 46px;
+  background: #1f222a;
+  border-bottom: 1px dotted #3b3d46;
+  font-size: 0.76em;
+  color: #8f96a4;
+}
+
+.neuro-magazine-queue .label { text-transform: uppercase; letter-spacing: 0.04em; }
+
+.neuro-magazine-chip {
+  padding: 1px 6px;
+  border: 1px solid #3b3d46;
+  border-radius: 10px;
+  color: #b8bdc7;
+  white-space: nowrap;
+}
+
+/* Jedyna podpowiedź automatu: "masz czym to dopełnić". Decyzję podejmuje gracz. */
+@keyframes neuro-mag-pulse {
+  0%, 100% { box-shadow: inset 3px 0 0 rgba(201, 162, 39, 0.35); }
+  50%      { box-shadow: inset 3px 0 0 rgba(201, 162, 39, 0.95); }
+}
+
+.neuro-magazine-item.is-toppable .neuro-magazine-row {
+  animation: neuro-mag-pulse 2.4s ease-in-out infinite;
+}
+
+.neuro-magazine-item.is-inert .neuro-magazine-row {
+  box-shadow: inset 3px 0 0 #a35b5b;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .neuro-magazine-item.is-toppable .neuro-magazine-row {
+    animation: none;
+    box-shadow: inset 3px 0 0 rgba(201, 162, 39, 0.8);
+  }
+}
+
+.neuro-magazine-footer {
+  display: flex;
+  align-items: center;
+  margin-top: 4px;
+  gap: 0;
+}
+
+.neuro-add-magazine-btn {
+  flex: 1;
+  text-align: left;
+  padding: 4px 12px;
+  background: rgba(45, 55, 72, 0.2);
+  border: 1px solid #556270;
+  color: var(--color-text-light-primary, #e0e0e0);
+  white-space: nowrap;
+}
+
+.neuro-magazine-summary {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  font-size: 0.85em;
+  color: var(--color-text-secondary, #aaa);
+}
+
+.neuro-magazine-summary span { padding: 0 10px; text-align: right; }
+.neuro-magazine-summary strong { color: var(--color-text-light-primary, #e0e0e0); }
+.neuro-magazine-summary .sep {
+  display: inline-block;
+  width: 1px;
+  height: 16px;
+  padding: 0;
+  background: #556270;
+}
+
+.neuro-add-magazine-form .hint {
+  font-size: 0.82em;
+  color: var(--color-text-secondary, #aaa);
+  margin-top: 6px;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Okno ładowania magazynka — wiersz na TYP amunicji
+───────────────────────────────────────────────────────────────── */
+
+.neuro-load-window { display: flex; flex-direction: column; gap: 6px; }
+
+.neuro-load-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #3b3d46;
+}
+
+.neuro-load-title { flex: 1; font-weight: 700; }
+
+.neuro-load-count {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
   color: var(--dnd5e-color-gold, #c9a227);
+}
+
+.neuro-load-unload { flex: 0 0 auto; width: auto; white-space: nowrap; font-size: 0.85em; }
+
+.neuro-load-rows { display: flex; flex-direction: column; }
+
+.neuro-load-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 2px;
+  border-bottom: 1px dotted #3b3d46;
+}
+
+.neuro-load-row.is-missing { opacity: 0.45; }
+
+.neuro-load-icon { width: 28px; height: 28px; flex: 0 0 28px; object-fit: contain; }
+
+.neuro-load-info { flex: 1; min-width: 0; }
+.neuro-load-name { font-weight: 600; }
+.neuro-load-effect { font-size: 0.8em; color: #8f96a4; }
+
+.neuro-load-stock { flex: 0 0 auto; font-size: 0.85em; color: #8f96a4; }
+
+.neuro-load-actions {
+  flex: 0 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  justify-content: flex-end;
+  max-width: 230px;
+}
+
+.neuro-load-add {
+  width: auto;
+  padding: 2px 8px;
+  font-size: 0.82em;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.neuro-load-add.is-fill { border-color: var(--dnd5e-color-gold, #c9a227); }
+
+.neuro-load-why { font-size: 0.78em; font-style: italic; color: #8f96a4; }
+
+.neuro-load-queue {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  padding-top: 6px;
+  border-top: 1px solid #3b3d46;
+  font-size: 0.82em;
+}
+
+.neuro-load-queue.is-empty { color: #8f96a4; font-style: italic; }
+.neuro-load-queue-label { text-transform: uppercase; letter-spacing: 0.04em; color: #8f96a4; }
+
+.neuro-load-chip {
+  padding: 1px 7px;
+  border: 1px solid #3b3d46;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+
+/* ─────────────────────────────────────────────────────────────────
+   Sekcja magazynka na karcie broni
+───────────────────────────────────────────────────────────────── */
+
+.neuro-mag-fields { display: flex; flex-direction: column; gap: 4px; }
+
+.neuro-mag-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+.neuro-mag-count { font-variant-numeric: tabular-nums; font-weight: 700; }
+
+.neuro-mag-loaded { font-size: 0.85em; color: #8f96a4; }
+.neuro-mag-empty { color: #a35b5b; font-style: italic; }
+
+.neuro-mag-notes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  font-size: 0.78em;
+  line-height: 1.35;
+  opacity: 0.92;
+}
+
+.neuro-mag-chamber { color: #b0a173; }
+.neuro-mag-chamber.is-empty { color: #8f96a4; }
+.neuro-mag-next { color: #8f96a4; }
+.neuro-mag-warn { color: #ba3c24; }
+.neuro-mag-note { color: #6b7280; }
+.neuro-mag-queue { display: flex; flex-wrap: wrap; gap: 4px; }
+
+.neuro-mag-actions { display: flex; flex-wrap: wrap; gap: 4px; }
+
+.neuro-mag-btn {
+  width: auto;
+  padding: 2px 8px;
+  font-size: 0.82em;
+  white-space: nowrap;
+}
+
+.neuro-mag-btn.is-eject { border-color: #7a5a3a; }
+
+/* ─────────────────────────────────────────────────────────────────
+   Karty czatu magazynków + pigułka „skąd wzięty"
+───────────────────────────────────────────────────────────────── */
+
+.neuro-mag-card {
+  border-left: 3px solid #888;
+  padding-left: 8px;
+}
+
+.neuro-mag-head { font-size: 1.05em; }
+.neuro-mag-body { font-size: 0.92em; margin-top: 2px; }
+.neuro-mag-state { font-size: 0.85em; color: #888; margin-top: 2px; }
+
+/* Dwa jawnie różne komunikaty: spokojne potwierdzenie kontra widoczne ostrzeżenie.
+   Sięgnięcie do plecaka NIE jest blokowane — jest oznaczane, a MG decyduje, co kosztowało. */
+.neuro-handy-pill {
+  display: inline-block;
+  padding: 0 7px;
+  border-radius: 10px;
+  font-size: 0.72em;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.neuro-handy-pill.is-at-hand {
+  background: #1e3a1e;
+  border: 1px solid #2e6b2e;
+  color: #8fcf8f;
+}
+
+.neuro-handy-pill.is-from-pack {
+  background: #4a2a12;
+  border: 1px solid #b4761f;
+  color: #f3c969;
 }
 
 /* "Obrażenia" button injected into attack roll chat cards */
@@ -736,35 +1087,6 @@ damage-application .neuro-reduction-buttons {
   border-radius: 3px;
 }
 
-/* Mały znaczek klucza w prawym górnym rogu ikony */
-.item.neuro-has-addons .item-name {
-  position: relative;
-}
-
-.item.neuro-has-addons .item-name::after {
-  content: "\f0ad"; /* fa-wrench */
-  /* This Foundry install bundles FA7/FA5 Pro, not "6" — verified via document.fonts;
-     "6" was never a real family here and silently tofu'd. Keep the fallback chain wide
-     so a future Foundry version bump (which may add/replace FA versions) degrades
-     gracefully instead of reintroducing the same silent failure. */
-  font-family: "Font Awesome 7 Pro", "Font Awesome 6 Pro", "Font Awesome 5 Pro", "FontAwesome";
-  font-weight: 900;
-  font-size: 8px;
-  position: absolute;
-  top: 2px;
-  left: 26px;
-  color: var(--dnd5e-color-gold, #c9a227);
-  background: rgba(10, 8, 5, 0.85);
-  border-radius: 50%;
-  width: 11px;
-  height: 11px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  pointer-events: none;
-  z-index: 1;
-}
 
 /* ============================================= */
 /* Broń wyszczerbiona / zacięta / uszkodzona     */
@@ -784,34 +1106,6 @@ damage-application .neuro-reduction-buttons {
 /* niepowiązane stany).                           */
 /* ============================================= */
 
-/* Wspólny "plasterek" plakietki w rogu ikony — treść/kolor nadpisywane per stan. */
-.item.neuro-degraded .item-name,
-.item.neuro-weapon-jammed .item-name,
-.item.neuro-weapon-damaged .item-name {
-  position: relative;
-}
-
-.item.neuro-degraded .item-name::after,
-.item.neuro-weapon-jammed .item-name::after,
-.item.neuro-weapon-damaged .item-name::after {
-  /* See the matching comment on .neuro-has-addons above — "6" isn't a real family here. */
-  font-family: "Font Awesome 7 Pro", "Font Awesome 6 Pro", "Font Awesome 5 Pro", "FontAwesome";
-  font-weight: 900;
-  font-size: 8px;
-  position: absolute;
-  top: 2px;
-  left: 26px;
-  background: rgba(10, 8, 5, 0.85);
-  border-radius: 50%;
-  width: 11px;
-  height: 11px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  pointer-events: none;
-  z-index: 1;
-}
 
 /* --- "Bad" tier: broń biała lekko wyszczerbiona (1 stopień) ------------------- */
 .item.neuro-degraded-1 > .item-row {
@@ -843,18 +1137,6 @@ damage-application .neuro-reduction-buttons {
   filter: saturate(0.6) brightness(0.9);
 }
 
-/* Ikona wyszczerbienia — ten sam trójkąt na obu poziomach broni białej i na trwale */
-/* uszkodzonej broni palnej: to "strukturalne, wymaga prawdziwej naprawy", w */
-/* przeciwieństwie do zacięcia poniżej (fa-ban, tymczasowe). Kolor niesie nasilenie. */
-.item.neuro-degraded-1 .item-name::after,
-.item.neuro-degraded-2 .item-name::after,
-.item.neuro-weapon-damaged .item-name::after {
-  content: "\f071"; /* fa-triangle-exclamation */
-}
-
-.item.neuro-degraded-1 .item-name::after { color: #c8493a; }
-.item.neuro-degraded-2 .item-name::after,
-.item.neuro-weapon-damaged .item-name::after { color: #e0271a; }
 
 /* --- Broń palna zacięta ("bad") — lżejszy, tymczasowy stan (jeden test od --- */
 /* odblokowania), więc dzieli paletę z "bad" wyszczerbienia powyżej, ale pulsuje */
@@ -872,11 +1154,6 @@ damage-application .neuro-reduction-buttons {
   animation: neuro-jam-pulse 1.6s ease-in-out infinite;
 }
 
-.item.neuro-weapon-jammed .item-name::after {
-  content: "\f05e"; /* fa-ban — "zablokowana teraz", odróżnia się kształtem od trójkąta uszkodzenia */
-  color: #c8493a;
-  animation: neuro-jam-pulse 1.6s ease-in-out infinite;
-}
 
 @keyframes neuro-jam-pulse {
   0%, 100% { opacity: 1; }
@@ -900,41 +1177,6 @@ damage-application .neuro-reduction-buttons {
 /* czerwienią/złotem za każdym razem, gdy coś działa.*/
 /* ============================================= */
 
-.item.neuro-power-on .item-name,
-.item.neuro-power-low .item-name {
-  position: relative;
-}
-
-.item.neuro-power-on .item-name::after,
-.item.neuro-power-low .item-name::after {
-  content: "\f0e7"; /* fa-bolt */
-  font-family: "Font Awesome 7 Pro", "Font Awesome 6 Pro", "Font Awesome 5 Pro", "FontAwesome";
-  font-weight: 900;
-  font-size: 8px;
-  position: absolute;
-  top: 2px;
-  left: 26px;
-  background: rgba(10, 8, 5, 0.85);
-  border-radius: 50%;
-  width: 11px;
-  height: 11px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Normalny stan: świeci, bateria/paliwo w porządku. */
-.item.neuro-power-on .item-name::after { color: #5ec8f4; }
-
-/* Niski poziom (≤ progu ustawionego przez opis źródła, domyślnie 20%) — ta sama pulsująca */
-/* animacja co zacięcie broni: "coś tu wymaga uwagi TERAZ", nie tylko informacyjnie. */
-.item.neuro-power-low .item-name::after {
-  color: #e0271a;
-  animation: neuro-jam-pulse 1.6s ease-in-out infinite;
-}
 
 /* Zablokowana ilość — przedmioty z własnym stanem (bateria/paliwo) nie mogą się sztaplować.
    Zobacz items/power-source.mjs: preUpdateItem/preCreateItem już to egzekwują niezależnie od
@@ -3118,4 +3360,152 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
   background: none;
   color: #7fbf7f;
   font-size: 10px;
+}
+
+
+/* ============================================= */
+/* Pasek plakietek stanu na wierszu ekwipunku     */
+/*                                                */
+/* Zastępuje pięć rywalizujących plakietek         */
+/* `.item-name::after` (dodatki, wyszczerbienie,   */
+/* uszkodzenie, zacięcie, zasilanie), które dzieliły */
+/* jedną pozycję i wzajemnie się zasłaniały —       */
+/* wygrywała ostatnia reguła w pliku, więc broń      */
+/* z dodatkami po zacięciu gubiła złoty klucz.       */
+/* Teraz każda oś ma swój slot, a HTML paska składa   */
+/* `actors/item-state-pips.mjs`.                   */
+/* ============================================= */
+
+.neuro-pips {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: 6px;
+  flex: 0 0 auto;
+  vertical-align: middle;
+  pointer-events: auto;
+}
+
+.neuro-pip {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: rgba(10, 8, 5, 0.85);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8px;
+  line-height: 1;
+  flex: 0 0 auto;
+}
+
+/* Glify z Font Awesome. Rodzina wypisana z pełnym łańcuchem zapasowym — ta instalacja ma
+   FA7/FA5 Pro, a nie "6"; nazwa "Font Awesome 6" cicho renderowała tofu. Patrz komentarz
+   przy .neuro-addon-pill i DEV_GUIDE. */
+.neuro-pip--damaged::before,
+.neuro-pip--degraded-2::before,
+.neuro-pip--degraded-1::before,
+.neuro-pip--jammed::before,
+.neuro-pip--power-on::before,
+.neuro-pip--power-low::before,
+.neuro-pip--addons::before {
+  font-family: "Font Awesome 7 Pro", "Font Awesome 6 Pro", "Font Awesome 5 Pro", "FontAwesome";
+  font-weight: 900;
+}
+
+/* --- Slot 1: stan techniczny --------------------------------------------- */
+.neuro-pip--damaged::before,
+.neuro-pip--degraded-2::before,
+.neuro-pip--degraded-1::before { content: "\f071"; }  /* trójkąt — "wymaga naprawy" */
+.neuro-pip--jammed::before     { content: "\f05e"; }  /* ban — "zablokowana TERAZ" */
+
+.neuro-pip--damaged,
+.neuro-pip--degraded-2 { color: #e0271a; }
+.neuro-pip--degraded-1 { color: #c8493a; }
+
+/* Zacięcie pulsuje, uszkodzenie nie: pulsowanie zaprasza do działania teraz (jeden test),
+   jego brak mówi "to poczeka do rusznikarza". */
+.neuro-pip--jammed {
+  color: #c8493a;
+  animation: neuro-jam-pulse 1.6s ease-in-out infinite;
+}
+
+/* --- Slot 2: gotowość bojowa (magazynek) --------------------------------- */
+/* Rysowane w CSS, nie glifem: w tej instalacji FA nie ma znaku magazynka — sprawdzone,
+   `fa-magazine` to czasopismo, a `fa-cartridge` wkład do drukarki. Prostokąt z zaokrągloną
+   podstawą czyta się przy 11 px lepiej niż jakikolwiek zastępczy glif i nie zależy od fontu. */
+.neuro-pip--mag-missing::before,
+.neuro-pip--mag-empty::before {
+  content: "";
+  width: 5px;
+  height: 7px;
+  border: 1px solid currentColor;
+  border-radius: 1px 1px 2px 2px;
+  box-sizing: border-box;
+}
+
+/* Brak magazynka — bursztyn i przygaszony kontur: pojemnika NIE MA.
+   Pusty magazynek — pełny kontur w czerwieni: pojemnik jest, tylko nic w nim nie ma. */
+.neuro-pip--mag-missing { color: #d99b3a; }
+.neuro-pip--mag-missing::before { opacity: 0.55; }
+.neuro-pip--mag-empty { color: #a35b5b; }
+
+/* --- Slot 3: konserwacja (jedyny stan pozytywny) -------------------------- */
+/* Zieleń, bo cała reszta palety w tym pasku niesie „coś jest nie tak" — ten sam odcień,
+   którym pełny magazynek świeci w panelu magazynków, żeby „dobrze" wyglądało wszędzie
+   tak samo. Bez pulsowania: to nie wzywa do działania, tylko mówi „masz jeszcze zapas". */
+.neuro-pip--cleaned::before,
+.neuro-pip--pampered::before {
+  font-family: "Font Awesome 7 Pro", "Font Awesome 6 Pro", "Font Awesome 5 Pro", "FontAwesome";
+  font-weight: 900;
+}
+
+/* Check — bufor jednorazowy, „na razie w porządku". */
+.neuro-pip--cleaned::before { content: "\f00c"; }
+.neuro-pip--cleaned { color: #7fae6a; }
+
+/* Tarcza — stan trwały, „ta broń się nie zacina". Ten sam rodzaj zieleni, żeby oba czytały
+   się jako „dobrze", ale jaśniejszy odcień i inna sylwetka: przy 11 px kształt niesie
+   różnicę pewniej niż kolor, a kolor potwierdza przynależność do tej samej rodziny. */
+.neuro-pip--pampered::before { content: "\f132"; }
+.neuro-pip--pampered { color: #9ed189; }
+
+/* --- Slot 4: zasilanie ---------------------------------------------------- */
+.neuro-pip--power-on::before,
+.neuro-pip--power-low::before { content: "\f0e7"; }  /* błyskawica */
+.neuro-pip--power-on { color: #5ec8f4; }
+.neuro-pip--power-low {
+  color: #e0271a;
+  animation: neuro-jam-pulse 1.6s ease-in-out infinite;
+}
+
+/* --- Slot 5: konfiguracja ------------------------------------------------- */
+.neuro-pip--addons::before { content: "\f0ad"; }  /* klucz */
+.neuro-pip--addons { color: var(--dnd5e-color-gold, #c9a227); }
+
+/* ============================================= */
+/* "Tym nie wystrzelisz TERAZ" — przygaszenie ikony */
+/*                                                 */
+/* Osobny kanał od plakietek, bo odpowiada na inne  */
+/* pytanie i musi być czytelny bez czytania —       */
+/* z drugiego końca listy widać, która broń jest     */
+/* gotowa. Wyszczerbiona broń biała NIE gaśnie:     */
+/* nią dalej się bije, tylko słabiej.                */
+/*                                                 */
+/* Celowo PO regułach poziomów uszkodzeń wyżej —     */
+/* nadpisuje ich `filter`, ale `outline`/`box-shadow` */
+/* to osobne właściwości i przechodzą nietknięte,    */
+/* więc uszkodzona broń bez magazynka ma dalej        */
+/* czerwony kontur, a do tego jest przygaszona.     */
+/* ============================================= */
+
+.item.neuro-not-ready .item-name .item-image {
+  filter: grayscale(0.7) brightness(0.72);
+  opacity: 0.8;
+}
+
+/* Sama nazwa też lekko gaśnie — bez tego przygaszona ikona przy pełnokolorowym tekście
+   wygląda jak błąd ładowania grafiki, a nie jak celowy stan. */
+.item.neuro-not-ready .item-name .name .title {
+  opacity: 0.72;
 }

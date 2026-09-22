@@ -37,12 +37,42 @@ export const PISTOLET_NA_RACE = {
   damage: { number: 1, denomination: 4, types: ["fire"] },
   range: { value: 12, long: 30 },
   props: ["wmag", "tryb_p", "ladowanie"],
-  caliber: "race", mag: { kind: "wmag", max: 1 }, fixedDamage: true,
+  caliber: "race", mag: { kind: "wmag", max: 1 }, chamber: false, fixedDamage: true,
   weight: 0.6, price: 30, avail: 30,
   note: "Wystrzeliwuje race sygnałowe — patrz Flara i Raca sygnałowa. Trafienie bezpośrednie: "
     + "1k4 od ognia; cel wykonuje RO Zręczność ST 12 albo zostaje Podpalony.",
   manual: ["RO na Podpalenie przy trafieniu bezpośrednim rozstrzyga MG (jak przy Koktajlu Mołotowa) — nie jest automatyzowane."]
 };
 
+// Homebrew (Lorentz). Nagrodowa, nazwana sztuka — pozlacany Desert Eagle z Citadel Grand's.
+// Do tej pory istniala WYLACZNIE jako recznie zrobiony item na jego karcie, bez wpisu w tabeli;
+// spisana tu 1:1 z tego egzemplarza (2026-09-22), zeby migracja magazynkow miala co odtworzyc
+// z kompendium. Bez wpisu `weaponId` nie ma skad sie wziac, a bez niego bron nie obsluguje
+// wymiennych magazynkow — czyli Lorentz stracilby magazynki do swojej flagowej spluwy.
+//
+// `magwell: "desert-eagle"` to powod, dla ktorego to pole w ogole istnieje (PLAN_magazynki.md §3):
+// pozlacany egzemplarz bierze zwykle magazynki do Desert Eagle. Bez tego kazda nazwana wersja
+// standardowej broni wymagalaby wlasnych magazynkow — i nierealistycznie, i upierdliwie przy
+// stole. Generator magazynkow POMIJA wpisy z jawnym `magwell`, wiec nie powstanie osobny
+// „Magazynek do Zlotego Desert Eagle" obok normalnego.
+//
+// Rozrywajaca i Hollow-point NIE sa tu wlasciwosciami broni — przychodza z kalibru `44mag_dd`
+// (`wkk/config/ammo-data.mjs`), wiec pojawiaja sie i znikaja razem z nabojem dum-dum w komorze.
+// Wpisanie ich na bron zamrozilo by je na stale, takze przy zwyklym .44 Mag.
+export const ZLOTY_DESERT_EAGLE = {
+  id: "zloty-desert-eagle", name: "Złoty Desert Eagle", type: "palnaKrotka",
+  icon: "desert_eagle_zloty.svg",
+  damage: { number: 1, denomination: 10, types: ["piercing"] },
+  range: { value: 18, long: 54 },
+  props: ["amm", "tryb_p", "obalajaca"],
+  caliber: "44mag", magwell: "desert-eagle", mag: { kind: "mag", max: 8 },
+  attackBonus: 1,
+  weight: 1, price: 300, avail: 20,
+  note: "Pozłacany, mistrzowsko spasowany Desert Eagle z grawerunkiem „Citadel Grand's finest” "
+    + "i eleganckim, hebanowym chwytem. Trafienie: +1. "
+    + "Obalająca: istota maksymalnie Średnia zdaje ST 10, inaczej zostaje Powalona. "
+    + "Bierze zwykłe magazynki do Desert Eagle."
+};
+
 /** All WKK-only weapons, for anything that wants the full set rather than one category. */
-export const KOBALT_WEAPONS = [LASKA, MIECZ, PISTOLET_NA_RACE];
+export const KOBALT_WEAPONS = [LASKA, MIECZ, PISTOLET_NA_RACE, ZLOTY_DESERT_EAGLE];

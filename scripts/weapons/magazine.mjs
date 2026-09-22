@@ -1,41 +1,58 @@
 /**
- * Neuroshima 5e — Magazine tracking & reload system.
+ * Neuroshima 5e — magazynki: akcje, aktywności, UI karty broni i fasada dla resztu modułu.
  *
- * Magazine state stored in module flags on the WEAPON item:
- *   flags["neuroshima-2026-overrides"].mag = { current: N, max: N, ammoType: "string" }
+ * Model danych i reguły siedzą w `weapons/magazine-model.mjs` — ten plik ich używa i dokłada
+ * wszystko, co dotyka gracza: przyciski, dialogi, dźwięki, karty czatu i ekonomię akcji.
+ * Projekt całości: PLAN_magazynki.md.
  *
- * Ammo items in inventory are consumable items with:
- *   system.type.value = "ammo"
- *   system.type.subtype = <ammoType string matching weapon.mag.ammoType>
- *   system.quantity = rounds available
+ * ## Fasada — celowo niezmieniona
  *
- * Reload behaviour:
- *   - Out of combat: free (no action cost, just confirms)
- *   - In combat: costs an Action (via CombatTracker check)
- *   - Finds best matching ammo from actor inventory
- *   - Fills magazine to max, deducts rounds from ammo item
- *   - Posts a chat message describing the reload
+ * `getMag()`, `setMag()`, `spendRound()`, `spendRounds()`, `getChamber()`, `setChamber()`
+ * zachowują kontrakt z systemu kwantowego, mimo że pod spodem zmieniło się wszystko.
+ * Dzięki temu `weapons/fire-modes.mjs`, `weapons/jams.mjs`, `wkk/items/pistolet-na-race.mjs`,
+ * `game.neuroshima.magazynki` i istniejące paczki Quench **nie wymagały zmian**. Jeśli któryś
+ * z ich testów zacznie padać, to znaczy, że fasada została złamana — i to jest sygnał do
+ * naprawy fasady, nie do poprawiania tamtych testów.
  *
- * Usage:
- *   registerMagazines()  — call during init (registers hooks)
- *   getMag(item)         — returns { current, max, ammoType } or null
- *   setMag(item, data)   — updates magazine flags
- *   spendRound(item)     — deducts 1 round, returns false if empty
+ * Storage się zmienił, API nie:
+ * ```
+ * getMag(weapon) → { current, max, ammoType }
+ *   current  = (komora ? 1 : 0) + liczba naboi w źródle
+ *   max      = pojemność AKTUALNEGO źródła + (komora ? 1 : 0)
+ *   ammoType = kaliber naboju, który poleci NASTĘPNY (komora → głowa kolejki → nominalny)
+ * ```
+ *
+ * ## Czego tu już nie ma
+ *
+ * Magazynki kwantowe: flaga `ready`, kolumna „Gotowych", `_restoreQuantumMagazines*`, hooki
+ * `deleteCombat`/`deleteCombatant` i ciąganie naboi z luźnej puli przy wymianie magazynka
+ * w walce. To ostatnie było bugiem, nie regułą: kod sprawdzał gotowy magazynek, ale i tak
+ * odejmował naboje od `ammoItem.system.quantity`, więc `ready` był licznikiem pozwoleń,
+ * nie źródłem amunicji.
  */
 
 import { ABILITY_KEYS, buildAbilityRuleChangeNotice, hasAbility } from "../actors/abilities.mjs";
 import { isJamImmune } from "./jams.mjs";
 import {
-  playWeaponSound,
   WeaponSound,
   playShotSound,
   playUtilitySound,
 } from "./sounds.mjs";
 import { seqScrollText } from "./sequencer.mjs";
 import { tracerFire } from "./tracer-vfx.mjs";
-import { AMMO_CALIBERS, AMMO_CALIBER_MAP, buildCaliberSelect, familyCalibers } from "../config/ammo-data.mjs";
-import { isMagazineItem, getMagTypeForWeapon, MAG_LABELS } from "../actors/magazine-inventory.mjs";
+import { AMMO_CALIBER_MAP, familyCalibers } from "../config/ammo-data.mjs";
 import { addAmmoToActor } from "../actors/ammo-inventory.mjs";
+import { isAtHand, provenanceBadge } from "../actors/handy-items.mjs";
+import { REMOVABLE_SOURCES } from "../config/weapons-data.mjs";
+import { isDocumentLive } from "../doc-liveness.mjs";
+import {
+  readState, weaponEntry, weaponIdOf, weaponMagwell, weaponHasChamber,
+  loadedMagazine, chamberedCaliber, internalRounds, consumeRounds,
+  applyState, projectMagazineState, projectionPaths,
+  isMagazineItem, magazineDefOf, magazineRounds, describeRounds, magazineHost,
+  compatibleMagazines, acceptedCalibers, freeSpace, loadRounds, unloadAll,
+  swapMagazineItem, loadSingleRound, pourSpeedloader, inMagazineSystem
+} from "./magazine-model.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 const MAGAZINE_TYPES = Object.freeze({
   INTERNAL: "wmag",
@@ -49,7 +66,6 @@ const LOAD_ONE_ACTIVITY_TYPE = "neuroLoadOne";
 const MAG_SWAP_ACTIVITY_TYPE = "neuroMagSwap";
 const CUSTOM_ACTIVITY_TYPES = new Set(["neuroKs", "neuroDs", "neuroMs", "neuroOz", "neuroDublet", RELOAD_ACTIVITY_TYPE, LOAD_ONE_ACTIVITY_TYPE, MAG_SWAP_ACTIVITY_TYPE]);
 const processedSingleShotActivities = new WeakSet();
-const syncingMagazineUses = new Set();
 const syncingManagedActivities = new Set();
 const MANAGED_ACTIVITY_FLAGS = Object.freeze({
   MANAGED: "managedActivity",
@@ -61,39 +77,146 @@ const MANAGED_ACTIVITY_FLAGS = Object.freeze({
 /* -------------------------------------------- */
 
 /**
- * Get magazine state for a weapon item.
+ * Stan magazynka broni — **liczony z kolejki**, nigdy odczytany z projekcji.
+ *
+ * Zwraca `null`, gdy broń jest poza systemem: nierozpoznany model (§3, gałąź `null`), brak
+ * wpisu `mag` w tabeli (LAW — właściwość `jednorazowa`) albo aktor, którego symulacja nie
+ * dotyczy (`inMagazineSystem`). `null` nie jest błędem — znaczy „nie liczymy tu amunicji".
+ *
  * @param {Item5e} item
  * @returns {{ current: number, max: number, ammoType: string }|null}
  */
 export function getMag(item) {
-  const mag = item.getFlag(MODULE_ID, "mag");
-  if (!mag || mag.max == null) return null;
-  return foundry.utils.deepClone(mag);
-}
+  if (!item || item.type !== "weapon") return null;
+  if (item.actor && !inMagazineSystem(item.actor)) return null;
 
-export function getChamber(item) {
-  return foundry.utils.deepClone(_getChamberState(item));
+  const state = readState(item);
+  if (!state.entry?.mag) return null;
+
+  return {
+    current: state.rounds.length + (state.chamber ? 1 : 0),
+    max: state.capacity + (state.hasChamber ? 1 : 0),
+    ammoType: state.chamber ?? state.rounds[0] ?? state.nominalCaliber ?? ""
+  };
 }
 
 /**
- * Set magazine state on a weapon item.
- * @param {Item5e} item
- * @param {{ current?: number, max?: number, ammoType?: string }} data
+ * Komora: `{ caliberId, loaded }`.
+ *
+ * `loaded` jest polem **wyprowadzonym**, trzymanym dla zgodności — `caliberId` niesie tę samą
+ * informację (`null` = pusta) i dodatkowo typ naboju, który tam siedzi. Bez tego „dum-dum
+ * w komorze przy samoróbkach w magazynku" nie da się wyrazić.
+ */
+export function getChamber(item) {
+  const caliberId = weaponHasChamber(item) ? chamberedCaliber(item) : null;
+  return { caliberId, loaded: caliberId != null };
+}
+
+/**
+ * Ustawia liczbę naboi — **wyłącznie dla ścieżek autorskich** (karta przedmiotu w trybie
+ * edycji, makra MG, `game.neuroshima.magazynki`). Zwykły przepływ gry nigdy tu nie trafia:
+ * strzał idzie przez `consumeRounds()`, ładowanie przez okno ładowania.
+ *
+ * Kolejka jest uporządkowana, więc „ustaw na N" musi wybrać, KTÓRE naboje zniknęły albo się
+ * dołożyły. Wybieramy najmniej zaskakująco: ubytek zdejmuje z **głowy** kolejki (czyli te,
+ * które poleciałyby najbliżej), a nadmiar dokłada na **koniec** naboju typu `ammoType`.
+ * To jedyne miejsce w module, gdzie liczba naboi jest wejściem, a nie wynikiem.
  */
 export async function setMag(item, data) {
-  const current = getMag(item) ?? { current: 0, max: 0, ammoType: "" };
-  const next = { ...current, ...data };
-  await _applyMagazineState(item, next);
+  const state = readState(item);
+  if (!state.entry?.mag) return;
+
+  if (data?.ammoType && !state.source) {
+    /* Broń bez wpiętego źródła nie ma gdzie trzymać kalibru — zmiana typu naboju to czynność
+       na magazynku, nie na broni. Milczące zignorowanie byłoby gorsze niż ostrzeżenie. */
+    ui.notifications.warn(`${item.name}: brak wpiętego magazynka — kaliber ustawia się na magazynku.`);
+    return;
+  }
+
+  if (data?.current == null) return;
+
+  const max = state.capacity + (state.hasChamber ? 1 : 0);
+  const target = Math.max(0, Math.min(Number(data.current), max));
+  const caliber = data.ammoType ?? state.chamber ?? state.rounds[0] ?? state.nominalCaliber;
+
+  /* Jedna płaska lista „komora + kolejka", przycinana/dopełniana, potem rozdzielana z powrotem.
+     Ręczne żonglowanie dwoma polami naraz było tu źródłem błędów off-by-one. */
+  let flat = [...(state.chamber ? [state.chamber] : []), ...state.rounds];
+  if (target < flat.length) flat = flat.slice(flat.length - target);
+  else while (flat.length < target) flat.push(caliber);
+
+  if (state.hasChamber) {
+    state.chamber = flat.length ? flat[0] : null;
+    state.rounds = flat.slice(1);
+  } else {
+    state.chamber = null;
+    state.rounds = flat;
+  }
+
+  await applyState(item, state);
 }
 
+/**
+ * Ustawia komorę. Przyjmuje i nowy kształt (`{ caliberId }`), i stary (`{ loaded: bool }`) —
+ * `wkk/items/pistolet-na-race.mjs` woła tę drugą formę i **nie ma wymagać zmiany** (kontrakt
+ * fasady). `loaded: true` bez podanego kalibru bierze nominalny kaliber broni.
+ */
 export async function setChamber(item, data) {
-  await _setChamberState(item, data);
+  if (!weaponHasChamber(item)) return;
+  const state = readState(item);
+  if (!state.entry?.mag) return;
+
+  if (data && ("caliberId" in data)) state.chamber = data.caliberId ?? null;
+  else if (data?.loaded === true) state.chamber = state.chamber ?? state.nominalCaliber ?? null;
+  else if (data?.loaded === false) state.chamber = null;
+  else return;
+
+  await applyState(item, state);
 }
 
+/**
+ * Rodzaj zasilania: `wmag` / `beb` / `wymienny`.
+ *
+ * Czyta **właściwości instancji**, nie katalog, bo od tego zależy, co gracz może teraz zrobić,
+ * a właściwości potrafią się na egzemplarzu rozjechać z tabelą (patrz `auditWeapons()`).
+ * Kołczan i taśma są „wymienne" — wypina się je tak samo jak magazynek.
+ */
 export function getMagazineType(item) {
   if (_hasProperty(item, MAGAZINE_TYPES.INTERNAL)) return MAGAZINE_TYPES.INTERNAL;
   if (_hasProperty(item, MAGAZINE_TYPES.CYLINDER)) return MAGAZINE_TYPES.CYLINDER;
   return MAGAZINE_TYPES.REMOVABLE;
+}
+
+/** Czy broń bierze odpinany pojemnik (magazynek / taśma / kołczan). */
+function _hasRemovableSource(item) {
+  return REMOVABLE_SOURCES.includes(weaponEntry(item)?.mag?.kind);
+}
+
+/**
+ * Gotowość bojowa broni — jednym słowem, na potrzeby oznaczeń w ekwipunku.
+ *
+ * Rozróżnia trzy rzeczy, które kolumna „Ładunki" myli, bo wszystkie pokazuje jako liczby:
+ *
+ * * `"missing"` — broń bierze **odpinany** pojemnik i żadnego nie ma. Desert Eagle bez
+ *   magazynka projektuje `0/1` (sama komora), a z magazynkiem `0/9`. Dwie podobne liczby
+ *   w tej samej kolumnie, a różnica jest fundamentalna: w pierwszym wypadku brakuje
+ *   **przedmiotu**, w drugim — naboi.
+ * * `"empty"` — źródło jest (magazynek albo broń z własnym magazynkiem/bębenkiem), ale puste.
+ * * `"ready"` — jest czym strzelać.
+ *
+ * `null` znaczy „to pytanie nie dotyczy tej broni": broń biała, NPC i Zbrojownia (poza
+ * systemem magazynków), broń nierozpoznana. **`null` to nie to samo co `"missing"`** —
+ * rewolwer i obrzyn mają `loadedMag === null` w stanie całkowicie normalnym, bo naboje
+ * siedzą w samej broni. Gdyby oznaczenie szło po `loadedMag`, świeciłoby na nich na stałe.
+ *
+ * @param {Item5e} item
+ * @returns {"missing"|"empty"|"ready"|null}
+ */
+export function magazineReadiness(item) {
+  const mag = getMag(item);
+  if (mag === null) return null;                       // poza systemem albo bez magazynka w ogóle
+  if (_hasRemovableSource(item) && !loadedMagazine(item)) return "missing";
+  return mag.current > 0 ? "ready" : "empty";
 }
 
 /**
@@ -102,18 +225,7 @@ export function getMagazineType(item) {
  * @returns {boolean} false if magazine was already empty
  */
 export async function spendRound(item) {
-  const mag = getMag(item);
-  if (!mag) return true; // no magazine tracked — allow firing
-  if (mag.current <= 0) {
-    ui.notifications.warn(`${item.name}: magazynek pusty!`);
-    playUtilitySound("click", item, WeaponSound.EMPTY_CLICK, {
-      caliberId: mag.ammoType, token: item.actor,
-    });
-    seqScrollText("PUSTE!", item.actor, { color: "#e67e22", fontSize: 30, duration: 1800 });
-    return false;
-  }
-  await setMag(item, { current: mag.current - 1 });
-  return true;
+  return spendRounds(item, 1);
 }
 
 /**
@@ -124,17 +236,35 @@ export async function spendRound(item) {
  */
 export async function spendRounds(item, count) {
   const mag = getMag(item);
-  if (!mag) return true;
-  if (mag.current < count) {
+  if (!mag) return true;                          // broń poza systemem — strzelanie dozwolone
+
+  const fired = await consumeRounds(item, count);
+  if (fired) return true;
+
+  /* Niedobór. `consumeRounds` nie zapisało niczego, więc broń jest w stanie sprzed próby. */
+  if (count === 1) {
+    ui.notifications.warn(`${item.name}: ${_sourceNoun(item)} pusty!`);
+    playUtilitySound("click", item, WeaponSound.EMPTY_CLICK, {
+      caliberId: mag.ammoType, token: item.actor,
+    });
+    seqScrollText("PUSTE!", item.actor, { color: "#e67e22", fontSize: 30, duration: 1800 });
+  } else {
     ui.notifications.warn(`${item.name}: za mało naboi! (${mag.current}/${count})`);
-    return false;
   }
-  await setMag(item, { current: mag.current - count });
-  return true;
+  return false;
+}
+
+/** „magazynek" / „bębenek" / „kołczan" — do komunikatów. */
+function _sourceNoun(item) {
+  const kind = weaponEntry(item)?.mag?.kind;
+  if (kind === "beb") return "bębenek";
+  if (kind === "quiver") return "kołczan";
+  if (kind === "belt") return "taśma";
+  return "magazynek";
 }
 
 /**
- * Wymiana magazynka / zmiana amunicji — punkt wejścia dla makr i paska szybkiego dostępu.
+ * Wymiana magazynka — punkt wejścia dla makr i paska szybkiego dostępu.
  *
  * Cała logika siedzi tutaj, a nie w treści makra, z tego samego powodu co przy makrach
  * Sztuczek (`actors/ability-hotbar.mjs`): makro raz położone na pasku nigdy nie musi być
@@ -154,10 +284,15 @@ export async function swapMagazine({ actor, weapon } = {}) {
     ui.notifications.warn("Nie wiem, kim grasz — zaznacz token albo przypisz postać do użytkownika.");
     return;
   }
+  if (!inMagazineSystem(subject)) {
+    ui.notifications.warn(`${subject.name}: ten aktor jest poza systemem magazynków (tylko postacie graczy).`);
+    return;
+  }
 
-  const candidates = subject.items.filter(i => i.type === "weapon" && getMag(i) !== null);
+  const candidates = subject.items.filter(i =>
+    i.type === "weapon" && _hasRemovableSource(i) && getMag(i) !== null);
   if (!candidates.length) {
-    ui.notifications.warn(`${subject.name} nie ma broni z magazynkiem.`);
+    ui.notifications.warn(`${subject.name} nie ma broni z wymiennym magazynkiem.`);
     return;
   }
 
@@ -169,24 +304,23 @@ export async function swapMagazine({ actor, weapon } = {}) {
       ui.notifications.warn(`${subject.name}: nie znalazłem broni "${weapon}".`);
       return;
     }
-    return _onClickReload(_getLiveItem(wanted));
+    return _onClickSwapMagazine(_getLiveItem(wanted));
   }
 
-  if (candidates.length === 1) return _onClickReload(_getLiveItem(candidates[0]));
+  if (candidates.length === 1) return _onClickSwapMagazine(_getLiveItem(candidates[0]));
 
   const chosen = await foundry.applications.api.DialogV2.wait({
-    window: { title: "Którą broń przeładowujesz?" },
-    content: "<p>Wybierz broń, do której wkładasz magazynek.</p>",
+    window: { title: "W której broni wymieniasz magazynek?" },
+    content: "<p>Wybierz broń.</p>",
     buttons: candidates.map(i => {
       const mag = getMag(i);
-      const caliber = AMMO_CALIBER_MAP[mag?.ammoType]?.label ?? "—";
-      return { action: i.id, label: `${i.name} — ${mag.current}/${mag.max}, ${caliber}` };
+      return { action: i.id, label: `${i.name} — ${mag?.current ?? 0}/${mag?.max ?? 0}` };
     }),
     rejectClose: false
   });
   if (!chosen) return;
   const picked = candidates.find(i => i.id === chosen);
-  if (picked) return _onClickReload(_getLiveItem(picked));
+  if (picked) return _onClickSwapMagazine(_getLiveItem(picked));
 }
 
 /* -------------------------------------------- */
@@ -199,15 +333,24 @@ export function registerMagazines() {
   registerMagSwapActivityType();
   registerAttackReloadGuard();
 
-  // Inject magazine row into weapon item sheet.
   Hooks.on("renderItemSheet5e", onRenderItemSheet);
 
-  Hooks.on("updateItem", onUpdateItemSyncMagazineUses);
+  /* Projekcja (`flags.mag` + `system.uses`) przelicza się po każdej zmianie kolejki. Jest
+     deterministyczna i idempotentna, więc może ją liczyć każdy klient — w odróżnieniu od
+     tworzenia aktywności niżej, które musi być GM-only. */
+  Hooks.on("updateItem", onUpdateItemReproject);
+
+  /* Zapamiętanie kalibru, którym oddano ten strzał, na karcie ataku.
+     Bez tego przycisk „Obrażenia" czyta stan broni w momencie RENDERU, czyli już po zużyciu
+     naboju — i przy mieszanym magazynku pokazywałby nabój NASTĘPNY, nie ten, który poleciał.
+     Po przeładowaniu strony byłoby jeszcze gorzej: kaliber sprzed pół godziny. */
+  Hooks.on("preCreateChatMessage", onPreCreateStampShotCaliber);
+
   // GM-gated (2026-09-06 bugfix — see doc comment on `syncWeaponMagazineActivities`): this one
-  // calls `item.createActivity(...)`, which is NOT idempotent across clients like the mag/uses
-  // sync above is — every connected client independently deciding "no managed activity yet,
-  // better create one" is exactly how items ended up with two "Doładuj 1 nabój"/"Wymiana
-  // magazynka" entries.
+  // calls `item.createActivity(...)`, which is NOT idempotent across clients like the projection
+  // above is — every connected client independently deciding "no managed activity yet, better
+  // create one" is exactly how items ended up with two "Doładuj 1 nabój"/"Wymiana magazynka"
+  // entries.
   Hooks.on("createItem", item => {
     if (game.user.isGM) void syncWeaponMagazineActivities(item);
   });
@@ -216,10 +359,6 @@ export function registerMagazines() {
   });
   Hooks.on("dnd5e.preUseActivity", onPreUseActivity);
   Hooks.on("dnd5e.postUseActivity", onPostUseActivity);
-  
-  // Quantum Magazines Restore Hook
-  Hooks.on("deleteCombat", _restoreQuantumMagazines);
-  Hooks.on("deleteCombatant", (combatant) => _restoreQuantumMagazinesForActor(combatant?.actor));
 
   Hooks.once("ready", () => {
     const mod = game.modules.get(MODULE_ID);
@@ -233,19 +372,109 @@ export function registerMagazines() {
         spendRound,
         spendRounds,
         getMagazineType,
-        swapMagazine
+        swapMagazine,
+        openLoadWindow,
+        unloadMagazineAction,
+        /* Diagnostyka: co ta broń w ogóle jest i skąd bierze naboje. Pierwsze pytanie przy
+           każdym zgłoszeniu „mam magazynek, a broń mówi, że nie mam". */
+        describe: weapon => {
+          const state = readState(weapon);
+          return {
+            weaponId: weaponIdOf(weapon),
+            magwell: weaponMagwell(weapon),
+            feed: state.feed,
+            hasChamber: state.hasChamber,
+            chamber: state.chamber,
+            source: state.source
+              ? { kind: state.source.kind, def: state.source.def?.id ?? null, capacity: state.capacity }
+              : null,
+            rounds: state.rounds,
+            mag: getMag(weapon)
+          };
+        }
       };
-      // Ten sam zestaw pod `game.neuroshima`, gdzie siedzi reszta API modułu. `??=`, bo
-      // kolejność między tym hakiem a `ready` w main.mjs nie jest gwarantowana.
       globalThis.game.neuroshima ??= {};
       game.neuroshima.magazynki = mod.api.magazines;
     }
 
-    void syncAllMagazineUses(); // deterministic mag→uses sync — harmless even if every client runs it
+    void reprojectAllMagazineState();
     if (game.user.isGM) void syncAllWeaponMagazineActivities(); // creates activities — GM-only, see above
   });
 
   console.log("Neuroshima 5e | Magazine system registered");
+}
+
+/**
+ * Przelicza projekcje na wszystkich broniach w systemie — jednorazowo, przy starcie świata.
+ *
+ * Potrzebne, bo projekcja może się rozejść ze źródłem bez żadnej mutacji broni: skasowanie
+ * wpiętego magazynka jako przedmiotu, edycja jego zawartości z karty przedmiotu, migracja.
+ */
+async function reprojectAllMagazineState() {
+  for (const actor of game.actors ?? []) {
+    if (!inMagazineSystem(actor)) continue;
+    for (const item of actor.items ?? []) {
+      if (item.type !== "weapon") continue;
+      if (!weaponEntry(item)?.mag) continue;
+      await projectMagazineState(item);
+    }
+  }
+}
+
+/**
+ * Po zmianie kolejki naboi — na broni albo na wpiętym w nią magazynku — przelicz projekcję.
+ *
+ * Pętli się nie da: `projectMagazineState()` porównuje przed zapisem i wychodzi, gdy nic się nie
+ * zmienia, a zmiany samej projekcji są tu jawnie ignorowane.
+ */
+async function onUpdateItemReproject(item, changes) {
+  if (!item?.actor || !inMagazineSystem(item.actor)) return;
+
+  const touched = path => foundry.utils.hasProperty(changes, path);
+  const projectionOnly = projectionPaths.some(touched)
+    && !touched(`flags.${MODULE_ID}.${FLAG_ROUNDS}`)
+    && !touched(`flags.${MODULE_ID}.chamber`)
+    && !touched(`flags.${MODULE_ID}.loadedMag`)
+    && !touched(`flags.${MODULE_ID}.magazine`);
+  if (projectionOnly) return;
+
+  if (item.type === "weapon") {
+    if (!weaponEntry(item)?.mag) return;
+    await projectMagazineState(item);
+    return;
+  }
+
+  /* Zmiana zawartości magazynka musi odświeżyć KAŻDĄ broń, w której on siedzi — a siedzieć
+     może tylko w jednej, więc szukamy tej jednej. */
+  if (isMagazineItem(item)) {
+    for (const weapon of item.actor.items) {
+      if (weapon.type !== "weapon") continue;
+      if (weapon.getFlag(MODULE_ID, "loadedMag") !== item.id) continue;
+      await projectMagazineState(weapon);
+    }
+  }
+}
+
+/** Nazwa flagi kolejki wewnętrznej — trzymana lokalnie, żeby nie importować całego FLAG. */
+const FLAG_ROUNDS = "rounds";
+
+/**
+ * Stempluje na karcie ataku kaliber, którym oddano strzał.
+ *
+ * Wykonuje się w `preCreateChatMessage`, czyli ZANIM broń zużyje nabój (zużycie jest po rzucie,
+ * w `_processSingleShotAttack`), więc głowa kolejki to dokładnie ten nabój, który leci.
+ * `weapons/ammo.mjs` czyta tę flagę zamiast żywego stanu.
+ */
+function onPreCreateStampShotCaliber(message, data) {
+  const flags = data?.flags?.dnd5e ?? message?.flags?.dnd5e;
+  if (flags?.activity?.type !== "attack") return;
+  const uuid = flags?.item?.uuid;
+  if (!uuid) return;
+  const item = fromUuidSync(uuid);
+  if (!item || item.type !== "weapon") return;
+  const caliberId = getMag(item)?.ammoType;
+  if (!caliberId) return;
+  message.updateSource({ [`flags.${MODULE_ID}.shotCaliber`]: caliberId });
 }
 
 /* -------------------------------------------- */
@@ -255,122 +484,178 @@ export function registerMagazines() {
 /**
  * Inject magazine row into the Details tab of a weapon item sheet.
  */
+/**
+ * Sekcja „Magazynek" na karcie broni.
+ *
+ * Pokazuje trzy rzeczy, o które gracz pyta w trakcie walki: **co jest wpięte**, **co siedzi
+ * w komorze** i **co poleci następne**. Liczba naboi jest tu wynikiem, nie polem do wpisania —
+ * źródłem prawdy jest kolejka w magazynku. Pole liczbowe zostaje wyłącznie w trybie EDYCJI, dla
+ * MG, który chce ustawić stan ręcznie (patrz `setMag()`).
+ *
+ * Wyboru kalibru już tu nie ma. Kaliber przestał być ustawieniem broni — jest właściwością
+ * naboju w magazynku, a mieszany magazynek ma ich kilka naraz, więc jedno pole nie ma czego
+ * pokazać. Zmiana amunicji to odtąd czynność na magazynku (okno ładowania), nie na broni.
+ */
 function onRenderItemSheet(app, html) {
   const item = app.document ?? app.item;
   if (!item || item.type !== "weapon") return;
   const isPlayMode = app._mode === app.constructor?.MODES?.PLAY;
 
-  // Only show for firearms (palna* types), miotana weapons, or items that already have mag flag
-  const weapType = item.system.type?.value ?? "";
-  const isPalna = weapType.startsWith("palna");
-  const isMiotana = weapType === "miotana";
-  const hasMag = getMag(item) !== null;
-  if (!isPalna && !isMiotana && !hasMag) return;
+  const mag = getMag(item);
+  if (!mag) return;
 
-  // Read ammoType directly from raw flag so it's available even on weapons
-  // that have a caliber set but no magazine capacity configured yet (max is null).
-  const rawAmmoType = item.getFlag(MODULE_ID, "mag")?.ammoType ?? "";
-  const mag = getMag(item) ?? { current: 0, max: 0, ammoType: rawAmmoType };
-  const magazineType = getMagazineType(item);
-  const ui = _getMagazineUi(magazineType, item);
-  const reloadState = _getReloadState(item);
-  const chamberState = _getChamberState(item, mag);
+  const state = readState(item);
+  const removable = _hasRemovableSource(item);
+  const magItem = removable ? loadedMagazine(item) : null;
+  const inCombat = !!item.actor?.inCombat;
 
-  // Find the physical details section (price/weight row) to insert after
   const detailsSection = html.querySelector(".item-properties, .details-tab, [data-tab='details'] .form-group:last-of-type");
   if (!detailsSection) return;
-
-  const notes = [
-    _shouldShowChamberStatus(item) ? `<span style="color:#6b7280">${_getChamberStateHint(item, chamberState, mag)}</span>` : "",
-    reloadState.required ? `<span style="color:#ba3c24">${_getReloadStateHint(item, reloadState)}</span>` : "",
-    _getCaliberNote(mag.ammoType) ? `<i style="color:#6b7280">${_getCaliberNote(mag.ammoType)}</i>` : ""
-  ].filter(n => n?.trim()).join(" ");
 
   const magRow = document.createElement("div");
   magRow.classList.add("form-group", "neuro-mag-row");
   magRow.innerHTML = `
-    <label>${ui.label}</label>
-    <div class="form-fields" style="display:flex; flex-direction:column; gap:4px;">
-      <div style="display:flex; align-items:center; gap:4px;">
-        <input type="number" name="flags.${MODULE_ID}.mag.current"
-               value="${mag.current}" min="0" max="${mag.max}"
-               data-dtype="Number" style="width:40px; text-align:center;">
-        <span>/</span>
-        <input type="number" name="flags.${MODULE_ID}.mag.max"
-               value="${mag.max}" min="0"
-               data-dtype="Number" style="width:40px; text-align:center;" ${isPlayMode ? "disabled" : ""}>
+    <label>${_sourceLabel(item)}</label>
+    <div class="form-fields neuro-mag-fields">
+      <div class="neuro-mag-line">
+        ${isPlayMode
+          ? `<span class="neuro-mag-count">${mag.current}/${mag.max}</span>`
+          : `<input type="number" class="neuro-mag-current" value="${mag.current}" min="0" max="${mag.max}"
+                    data-dtype="Number" style="width:48px; text-align:center;">
+             <span>/ ${mag.max}</span>`}
+        ${removable ? `<span class="neuro-mag-loaded">${magItem
+            ? `${magItem.name}${isAtHand(magItem) ? " · podręczny" : ""}`
+            : `<em class="neuro-mag-empty">brak magazynka</em>`}</span>` : ""}
       </div>
-      <div style="display:flex; align-items:center; gap:4px;">
-        <span style="font-size:11px; color:#888; white-space:nowrap;">Kaliber:</span>
-        <div style="flex:1;">${buildCaliberSelect(rawAmmoType, isPlayMode, `flags.${MODULE_ID}.mag.ammoType`)}</div>
-      </div>
-      ${notes ? `<div style="font-size:11px; line-height:1.2; opacity:0.9;">${notes}</div>` : ""}
+      ${_sheetNotes(item, state, mag)}
     </div>
   `;
-
   detailsSection.after(magRow);
 
-  // Bulk restock button — distinct from the Activity-driven reload (neuroReload/
-  // neuroLoadOne/neuroMagSwap, _onClickReload above): that one respects action
-  // economy and is legal in combat; this one ignores capacity-per-action limits
-  // entirely and tops the mag off in one go, which only makes sense as unhurried
-  // downtime prep — hence the hard combat block instead of spending a resource.
-  if (item.actor && mag.max) {
-    const stockItem = _findAmmo(item.actor, mag.ammoType);
-    const available = stockItem?.system?.quantity ?? 0;
-    const inCombat = !!item.actor.inCombat;
+  if (!item.actor) return;
 
-    const bulkRow = document.createElement("div");
-    bulkRow.classList.add("form-group", "neuro-bulk-reload-row");
-    bulkRow.innerHTML = `
-      <label></label>
-      <div class="form-fields">
-        <button type="button" class="neuro-bulk-reload-btn" style="width:auto; white-space:nowrap;"
-                ${inCombat ? "disabled" : ""}
-                ${inCombat ? `data-tooltip="Uzupełnianie z zapasu jest niedostępne podczas walki."` : ""}>
-          <i class="fas fa-boxes-stacked"></i> Uzupełnij z zapasu (${available} szt.)
-        </button>
-      </div>
-    `;
-    bulkRow.querySelector(".neuro-bulk-reload-btn").addEventListener("click", async e => {
-      e.preventDefault();
-      await _onClickBulkReload(_getLiveItem(item));
-    });
+  const actions = document.createElement("div");
+  actions.classList.add("form-group", "neuro-mag-actions-row");
+  actions.innerHTML = `<label></label><div class="form-fields neuro-mag-actions"></div>`;
+  const bar = actions.querySelector(".neuro-mag-actions");
 
-    // Wymiana magazynka / zmiana amunicji — jedyna droga do zmiany typu naboju w trybie gry.
-    // Lista kalibrów wyżej jest w PLAY celowo zablokowana: to ustawienie autorskie broni, nie
-    // czynność postaci. Bez tego przycisku gracz mający dwa rodzaje naboju nie miał na karcie
-    // żadnego sposobu, żeby przełożyć jeden na drugi — a od tej sesji ma po co (dum-dum).
-    const family = familyCalibers(mag.ammoType);
-    const swapRow = document.createElement("div");
-    swapRow.classList.add("form-group", "neuro-mag-swap-row");
-    swapRow.innerHTML = `
-      <label></label>
-      <div class="form-fields">
-        <button type="button" class="neuro-mag-swap-btn" style="width:auto; white-space:nowrap;"
-                data-tooltip="${inCombat ? _getReloadPlan(item, mag).hint : "Poza walką bez kosztu akcji."}">
-          <i class="fas fa-repeat"></i> ${family.length > 1 ? "Wymień magazynek / zmień amunicję" : "Wymień magazynek"}
-        </button>
-      </div>
-    `;
-    swapRow.querySelector(".neuro-mag-swap-btn").addEventListener("click", async e => {
-      e.preventDefault();
-      await _onClickReload(_getLiveItem(item));
-    });
+  const addBtn = (cls, icon, label, tooltip, disabled = false) => {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = `neuro-mag-btn ${cls}`;
+    btn.innerHTML = `<i class="fas ${icon}"></i> ${label}`;
+    if (tooltip) btn.dataset.tooltip = tooltip;
+    btn.disabled = disabled;
+    bar.appendChild(btn);
+    return btn;
+  };
 
-    magRow.after(bulkRow);
-    magRow.after(swapRow);
+  const plan = _getReloadPlan(item, mag);
+
+  if (removable) {
+    addBtn("is-swap", "fa-repeat", magItem ? "Wymień" : "Wepnij", plan.hint)
+      .addEventListener("click", ev => { ev.preventDefault(); void _onClickSwapMagazine(_getLiveItem(item)); });
+
+    if (magItem) {
+      addBtn("is-eject", "fa-eject", "Wypnij",
+        "Zostawia broń z samym nabojem w komorze. W walce kosztuje tyle co wymiana.")
+        .addEventListener("click", ev => {
+          ev.preventDefault();
+          void _onClickSwapMagazine(_getLiveItem(item), { target: null });
+        });
+
+      addBtn("is-load", "fa-boxes-stacked", "Załaduj magazynek",
+        inCombat ? "Naboi nie wkłada się do magazynka w walce." : "Otwiera okno ładowania.", inCombat)
+        .addEventListener("click", ev => { ev.preventDefault(); void openLoadWindow(magItem); });
+    }
+  } else {
+    const full = mag.current >= mag.max;
+    addBtn("is-load", "fa-boxes-stacked", "Uzupełnij z zapasu",
+      inCombat ? "Uzupełnianie z zapasu jest niedostępne podczas walki." : "", inCombat || full)
+      .addEventListener("click", ev => { ev.preventDefault(); void _onClickBulkReload(_getLiveItem(item)); });
+
+    addBtn("is-one", "fa-plus", "+1 nabój", plan.hint, full)
+      .addEventListener("click", ev => { ev.preventDefault(); void _performLoadOneAction(_getLiveItem(item)); });
+
+    if (getMagazineType(item) === MAGAZINE_TYPES.CYLINDER) {
+      addBtn("is-pour", "fa-circle-notch", "Szybkoładowarka",
+        "Przelewa całą szybkoładowarkę do pustego bębenka.")
+        .addEventListener("click", ev => { ev.preventDefault(); void _onClickPourSpeedloader(_getLiveItem(item)); });
+    }
   }
+
+  if (_canCycleReloadWithoutAmmo(item)) {
+    addBtn("is-cycle", "fa-rotate", "Przeładuj", "Darmowa interakcja albo Akcja bonusowa.")
+      .addEventListener("click", ev => {
+        ev.preventDefault();
+        void _performReloadAction(_getLiveItem(item), { chat: true, spendResource: true, source: "button" });
+      });
+  }
+
+  magRow.after(actions);
+
+  magRow.querySelector(".neuro-mag-current")?.addEventListener("change", async ev => {
+    const value = Math.max(0, parseInt(ev.target.value, 10) || 0);
+    await setMag(_getLiveItem(item), { current: value });
+  });
+}
+
+/** „Magazynek" / „Bębenek" / „Wmag." / „Kołczan" / „Taśma" — etykieta pola na karcie. */
+function _sourceLabel(item) {
+  const kind = weaponEntry(item)?.mag?.kind;
+  return { mag: "Magazynek", wmag: "Wmag.", beb: "Bębenek", belt: "Taśma", quiver: "Kołczan" }[kind]
+    ?? "Magazynek";
 }
 
 /**
- * Bulk-restock a weapon's magazine from the actor's own ammo stock — as much as
- * the mag can hold and the inventory can supply, in one go, with no per-action
- * cap. Represents unhurried downtime prep (topping off before heading out), not a
- * combat action — hence the hard block below rather than spending a resource like
- * `_onClickReload` does. Loads the SAME caliber already chambered (`mag.ammoType`);
- * unlike `_onClickReload` this never prompts a Śrut/Breneka choice — "as many
- * bullets of this type" per the feature's own spec.
+ * Notatki pod licznikiem: komora, następny nabój, stan przeładowania, uwaga o kalibrze.
+ *
+ * ## Kiedy pokazujemy komorę
+ *
+ * Gdy jest **akcjonowalna** albo gdy się **różni** (PLAN_magazynki.md §5):
+ *   - `feed === "manual"` → zawsze; gracz musi wiedzieć, czy może w ogóle strzelić,
+ *   - kaliber w komorze ≠ kaliber następnego naboju w źródle → zawsze (to jest dum-dum
+ *     w komorze przy zwykłych nabojach w magazynku),
+ *   - w pozostałych przypadkach → ukryj. U broni automatycznej komora jest pełna, dopóki są
+ *     naboje, więc jej stan nigdy nie jest ciekawy i byłby tylko szumem na karcie.
+ */
+function _sheetNotes(item, state, mag) {
+  const notes = [];
+  const reloadState = _getReloadState(item);
+
+  const nextInSource = state.rounds[0] ?? null;
+  const chamberDiffers = state.chamber && nextInSource && (state.chamber !== nextInSource);
+  if (state.hasChamber && ((state.feed === "manual") || chamberDiffers)) {
+    notes.push(state.chamber
+      ? `<span class="neuro-mag-chamber">Komora: <strong>${_caliberLabel(state.chamber)}</strong></span>`
+      : `<span class="neuro-mag-chamber is-empty">Komora: pusta${state.rounds.length ? " (wymaga przeładowania)" : " (i pusty magazynek)"}</span>`);
+  }
+
+  if (mag.current > 0) {
+    notes.push(`<span class="neuro-mag-next">Następny: <strong>${_caliberLabel(mag.ammoType)}</strong></span>`);
+  }
+
+  const queue = [...(state.chamber ? [state.chamber] : []), ...state.rounds];
+  if (new Set(queue).size > 1) {
+    notes.push(`<span class="neuro-mag-queue">${_queueChips(queue)}</span>`);
+  }
+
+  if (reloadState.required) {
+    notes.push(`<span class="neuro-mag-warn">${_getReloadStateHint(item, reloadState)}</span>`);
+  }
+
+  const note = _getCaliberNote(mag.ammoType);
+  if (note) notes.push(`<i class="neuro-mag-note">${note}</i>`);
+
+  return notes.length ? `<div class="neuro-mag-notes">${notes.join("")}</div>` : "";
+}
+
+/**
+ * Uzupełnienie magazynka WEWNĘTRZNEGO / bębenka z luźnej puli — spokojne przygotowanie przed
+ * wyjściem, bez limitu naboi na akcję, więc twardo zablokowane w walce.
+ *
+ * Dla broni z **wymiennym** magazynkiem ta czynność przestała istnieć: nie uzupełnia się broni,
+ * uzupełnia się magazynek (`openLoadWindow`). Przycisk na karcie broni prowadzi tam wprost.
  */
 async function _onClickBulkReload(item) {
   const actor = item.actor;
@@ -379,59 +664,73 @@ async function _onClickBulkReload(item) {
     return;
   }
 
+  if (_hasRemovableSource(item)) {
+    const mag = loadedMagazine(item);
+    if (!mag) {
+      ui.notifications.warn(`${item.name}: brak wpiętego magazynka — najpierw wepnij jakiś.`);
+      return;
+    }
+    return openLoadWindow(mag);
+  }
+
   if (actor.inCombat) {
-    ui.notifications.warn(`${item.name}: uzupełnianie magazynka z zapasu jest niedostępne podczas walki.`);
+    ui.notifications.warn(`${item.name}: uzupełnianie z zapasu jest niedostępne podczas walki.`);
     return;
   }
 
   const mag = getMag(item);
   if (!mag) {
-    ui.notifications.warn(`${item.name}: brak danych magazynka (ustaw Maks najpierw).`);
+    ui.notifications.warn(`${item.name}: ta broń jest poza systemem magazynków.`);
     return;
   }
 
-  const needed = mag.max - mag.current;
+  const needed = Number(mag.max ?? 0) - Number(mag.current ?? 0);
   if (needed <= 0) {
-    ui.notifications.info(`${item.name}: magazynek jest już pełny.`);
+    ui.notifications.info(`${item.name}: ${_sourceNoun(item)} jest już pełny.`);
     return;
   }
 
-  const ammoItem = _findAmmo(actor, mag.ammoType);
-  if (!ammoItem) {
-    ui.notifications.warn(`Brak amunicji (${mag.ammoType || "dowolnej"}) w ekwipunku.`);
-    return;
-  }
+  const pick = await _chooseFamilyAmmo(actor, mag.ammoType);
+  if (!pick) return;
+  const { ammoItem, caliberId } = pick;
 
-  const available = ammoItem.system.quantity ?? 0;
+  const available = Number(ammoItem.system.quantity ?? 0);
   const toLoad = Math.min(needed, available);
   if (toLoad <= 0) {
     ui.notifications.warn(`${ammoItem.name}: wyczerpana amunicja.`);
     return;
   }
 
-  const newQty = available - toLoad;
-  if (newQty <= 0) {
-    await ammoItem.delete();
-  } else {
-    await ammoItem.update({ "system.quantity": newQty });
+  /* Naboje wchodzą po jednym przez to samo lejko co ładowanie w walce, więc kolejność
+     w kolejce jest taka sama jak przy ładowaniu ręcznym — nie ma drugiej ścieżki zapisu. */
+  let loaded = 0;
+  for (let i = 0; i < toLoad; i++) {
+    if (!(await loadSingleRound(item, caliberId))) break;
+    loaded += 1;
+  }
+  if (!loaded) {
+    ui.notifications.info(`${item.name}: nie ma już miejsca.`);
+    return;
   }
 
-  const newCurrent = mag.current + toLoad;
-  await setMag(item, { current: newCurrent });
+  const newQty = available - loaded;
+  if (newQty <= 0) await ammoItem.delete();
+  else await ammoItem.update({ "system.quantity": newQty });
   await _clearReloadState(item);
 
-  await _playBulkReloadClicks(item, actor, mag.ammoType, toLoad);
+  await _playBulkReloadClicks(item, actor, caliberId, loaded);
   seqScrollText("UZUPEŁNIONO", actor, { color: "#f1c40f", fontSize: 26, duration: 1500 });
 
-  const justFull = (newCurrent === mag.max) ? " do pełna" : "";
+  const after = getMag(item);
+  const justFull = (after.current === after.max) ? " do pełna" : "";
   const justAll = (newQty === 0) ? " wszystkie swoje" : "";
 
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor }),
-    content: `<div style="border-left:3px solid #888;padding-left:8px;font-size:1.1em;">
-      <strong>${actor.name}</strong> uzupełnia magazynek${justFull}, ładując po kolei${justAll} ${toLoad} x ${ammoItem.name} do <em>${item.name}</em>.<br>
-      <span style="font-size:0.85em;color:#888;">[Stan: ${newCurrent}/${mag.max}]</span>
-    </div>`
+    content: `<div class="neuro-mag-card">`
+      + `<div class="neuro-mag-head"><strong>${actor.name}</strong> uzupełnia <em>${item.name}</em>${justFull}</div>`
+      + `<div class="neuro-mag-body">Ładuje po kolei${justAll} ${loaded}× ${_caliberLabel(caliberId)}.</div>`
+      + `<div class="neuro-mag-state">Stan broni: ${after.current}/${after.max}${_nextRoundNote(item)}</div></div>`
   });
 }
 
@@ -450,172 +749,265 @@ async function _playBulkReloadClicks(item, actor, caliberId, count) {
   }
 }
 
-async function onUpdateItemSyncMagazineUses(item, changes) {
-  if (!item || item.type !== "weapon" || syncingMagazineUses.has(item.uuid)) return;
-  const magChanged = foundry.utils.hasProperty(changes, `flags.${MODULE_ID}.mag`);
-  const usesChanged = foundry.utils.hasProperty(changes, "system.uses.max") || foundry.utils.hasProperty(changes, "system.uses.spent");
-  if (!magChanged && !usesChanged) return;
-
-  const mag = item.getFlag(MODULE_ID, "mag");
-  if (!mag || mag.max == null) return;
-  if (magChanged) {
-    await _syncUsesFromMagazine(item, mag);
-    return;
-  }
-
-  await _syncMagazineFlagFromUses(item, mag);
-}
-
 /* -------------------------------------------- */
-/*  Reload logic                                  */
+/*  Akcje: wymiana, wypięcie, szybkoładowarka     */
 /* -------------------------------------------- */
 
 /**
- * Reload a weapon from the actor's own ammunition.
+ * Wymiana magazynka — wpięcie innego pojemnika z ekwipunku albo wypięcie obecnego.
  *
- * Also the single entry point for CHANGING ammunition type: swapping in a magazine and choosing
- * what goes in it are the same physical act, so they are the same code path here. The alternative
- * — a separate "switch ammo" control — would let a character change bullet type between two shots
- * of the same turn for free, which is what the GM ruling explicitly excluded.
+ * ## Co się tu zmieniło i dlaczego
  *
- * ## Fixed 2026-09-08: the spare-magazine check never matched anything
+ * Do 2026-09-22 ta funkcja robiła dwie rzeczy naraz: „wymień magazynek" i „wybierz, jakim
+ * nabojem go ładujesz", ciągnąc naboje wprost z luźnej puli w ekwipunku. To był **bug ubrany
+ * w regułę**: sprawdzała gotowy magazynek zapasowy, ale i tak odejmowała naboje od
+ * `ammoItem.system.quantity`, więc flaga `ready` była licznikiem pozwoleń, nie źródłem
+ * amunicji. Magazynki nie trzymały niczego, a amunicja materializowała się przy wymianie.
  *
- * This function used to gate in-combat reloads on an item with
- * `system.type.value === "magazine"` and `subtype === <weapon type>` (e.g. `"palnaKrotka"`).
- * No such item has ever existed: `actors/magazine-inventory.mjs`, the only thing that creates
- * spare magazines, builds them as `value: "ammo"` with `subtype: "magazine-short"` and tracks
- * readiness in `flags.<module>.ready`, not `system.uses`. A world-wide check found **0 matches
- * out of 1808 items**, so the branch below always failed and every in-combat reload of a
- * removable-magazine weapon was refused with "Zabrakło ci przygotowanych magazynków" —
- * including for actors visibly holding spare magazines on their sheet. It read as a rule, not
- * as a bug, which is why it survived. `_restoreQuantumMagazines` was dead for the same reason.
+ * Teraz magazynek jest fizycznym pojemnikiem: wymiana **tylko przekłada pojemniki**, a naboje
+ * wkłada się do nich osobno, poza walką, przez okno ładowania (`openLoadWindow`). RAW nie zna
+ * czynności „ładowanie naboi do wymiennego magazynka w walce" — przewiduje ładowanie po jednym
+ * naboju wyłącznie dla `wmag` i `beb`. Zgodne z konsultacją z autorem: przeciętna walka trwa
+ * poniżej minuty, więc nabijanie magazynka w jej środku fizycznie nie działa.
  *
- * @param {Item5e} item  The weapon item being reloaded
+ * Wypięcie jest wymianą z `null` jako celem — jedna ścieżka kodu, jeden koszt, zero przypadku
+ * specjalnego. Broń zostaje wtedy na `1/max`, czyli jest ściśle gorsza ofensywnie, i to właśnie
+ * domyka drogę do exploita: rozbicie wymiany na wypięcie + wpięcie kosztuje dwie akcje.
+ *
+ * @param {Item5e} item                   Broń.
+ * @param {object} [options]
+ * @param {Item5e|null} [options.target]  Pojemnik do wpięcia; `null` = wypięcie. Brak = zapytaj.
  */
-async function _onClickReload(item) {
+async function _onClickSwapMagazine(item, { target } = {}) {
   const actor = item.actor;
   if (!actor) {
     ui.notifications.warn("Broń nie jest przypisana do aktora.");
-    return;
+    return false;
+  }
+  if (!_hasRemovableSource(item)) {
+    ui.notifications.warn(`${item.name}: ta broń nie ma wymiennego magazynka.`);
+    return false;
   }
 
-  const mag = getMag(item);
-  if (!mag) {
-    ui.notifications.warn(`${item.name}: brak danych magazynka (ustaw Maks najpierw).`);
-    return;
-  }
-
-  const reloadState = _getReloadState(item);
-  if (_canCycleReloadWithoutAmmo(item, mag, reloadState)) {
-    await _performReloadAction(item, { chat: true, spendResource: true, source: "button" });
-    return;
-  }
-
-  const magazineType = getMagazineType(item);
   const inCombat = !!actor.inCombat;
-  const reloadPlan = _getReloadPlan(item, mag, { magazineType });
+  const reloadPlan = _getReloadPlan(item, getMag(item));
+  const current = loadedMagazine(item);
 
-  /* 1. Czym ładujemy — pytamy zanim cokolwiek policzymy, bo od odpowiedzi zależy, czy
-        magazynek trzeba najpierw opróżnić. */
-  const pick = await _chooseFamilyAmmo(actor, mag.ammoType);
-  if (!pick) return;
-  const { ammoItem, caliberId: ammoIdToLoad } = pick;
-
-  /* 2. Zmiana typu naboju wyrzuca to, co jest w magazynku, z powrotem do zapasu. Bez tego
-        magazynek mieszałby dwa rodzaje pocisków pod jedną etykietą — a przy dum-dum decyduje
-        to o tym, czy trafienie w ogóle wywołuje Krwawienie. */
-  const switchingType = !!mag.ammoType && ammoIdToLoad !== mag.ammoType;
-  const currentBefore = Number(mag.current ?? 0);
-  const startFrom = switchingType ? 0 : currentBefore;
-
-  const needed = Number(mag.max ?? 0) - startFrom;
-  if (needed <= 0) {
-    ui.notifications.info(`${item.name}: ${reloadPlan.containerAccusative} jest ${reloadPlan.fullAdjective}.`);
-    return;
+  let chosen = target;
+  if (chosen === undefined) {
+    chosen = await _chooseMagazine(actor, item, current);
+    if (chosen === undefined) return false;       // anulowano (null = świadome wypięcie)
   }
 
-  /* 3. W walce wymiana magazynka wymaga gotowego magazynka zapasowego. */
-  let spareMag = null;
-  if (inCombat && magazineType === MAGAZINE_TYPES.REMOVABLE) {
-    spareMag = _findReadyMagazine(actor, item);
-    if (!spareMag) {
-      const label = MAG_LABELS[getMagTypeForWeapon(item)] ?? "zapasowy magazynek";
-      ui.notifications.warn(
-        `${actor.name}: brak gotowego magazynka (${label}) do tej broni — w walce nie da się ładować luzem.`
-      );
-      return;
-    }
+  if (chosen && (chosen.id === current?.id)) {
+    ui.notifications.info(`${item.name}: ten magazynek już jest wpięty.`);
+    return false;
   }
 
-  /* 4. Ile naboi faktycznie wchodzi. */
-  const available = ammoItem.system.quantity ?? 0;
-  let toLoadAmount = Math.min(needed, available);
-  if (magazineType !== MAGAZINE_TYPES.REMOVABLE && reloadPlan.roundsPerAction && reloadPlan.roundsPerAction !== 99) {
-    toLoadAmount = Math.min(reloadPlan.roundsPerAction, needed, available);
-  }
-  if (toLoadAmount <= 0) {
-    ui.notifications.warn(`${ammoItem.name}: wyczerpana amunicja.`);
-    return;
+  const result = await swapMagazineItem(item, chosen ?? null);
+  if (!result) {
+    ui.notifications.warn(`${item.name}: ten magazynek nie pasuje do tej broni.`);
+    return false;
   }
 
-  /* 5. Zapis. Zwrot naboi idzie przed odjęciem, żeby stan ekwipunku nigdy nie był ujemny
-        w połowie operacji, gdyby coś padło pomiędzy. */
-  let returned = 0;
-  if (switchingType && currentBefore > 0) {
-    returned = currentBefore;
-    await addAmmoToActor(actor, mag.ammoType, returned, { notify: false });
-  }
-  if (spareMag) {
-    const ready = Number(spareMag.getFlag(MODULE_ID, "ready") ?? 0);
-    await spareMag.setFlag(MODULE_ID, "ready", Math.max(0, ready - 1));
-  }
-
-  const newQty = available - toLoadAmount;
-  if (newQty <= 0) await ammoItem.delete();
-  else await ammoItem.update({ "system.quantity": newQty });
-
-  const newMagData = { current: startFrom + toLoadAmount };
-  if (ammoIdToLoad !== mag.ammoType) newMagData.ammoType = ammoIdToLoad;
-
-  await setMag(item, newMagData);
   await _clearReloadState(item);
+  if (inCombat) await _spendCombatResource(actor, reloadPlan.actionType);
 
-  playUtilitySound(
-    "reload",
-    item,
-    magazineType === MAGAZINE_TYPES.REMOVABLE ? WeaponSound.RELOAD_MAG : WeaponSound.RELOAD_SINGLE,
-    { caliberId: newMagData?.ammoType ?? mag.ammoType, token: actor },
-  );
-  seqScrollText("ZAŁADOWANO", actor, { color: "#f1c40f", fontSize: 26, duration: 1500 });
-
-  if (inCombat) {
-    await _spendCombatResource(actor, reloadPlan.actionType);
-  }
-
-  const justFull = (newMagData.current === mag.max) ? " do pełna" : "";
-  const justAll = (newQty === 0) ? " wszystkie swoje" : "";
-  const switchLine = switchingType
-    ? `<br><span style="font-size:0.85em;color:#888;">Zmiana amunicji na <strong>${AMMO_CALIBER_MAP[ammoIdToLoad]?.label ?? ammoIdToLoad}</strong>`
-      + `${returned ? ` — ${returned} ${_formatRoundWord(returned)} poprzedniego typu wraca do zapasu` : ""}.</span>`
-    : "";
-
-  await ChatMessage.create({
-    speaker: ChatMessage.getSpeaker({ actor }),
-    content: `<div style="border-left:3px solid #888;padding-left:8px;font-size:1.1em;">
-      <strong>${actor.name}</strong> załadował${justFull}${justAll} ${toLoadAmount} x ${ammoItem.name} do <em>${item.name}</em>.${switchLine}<br>
-      <span style="font-size:0.85em;color:#888;">[Stan: ${newMagData.current}/${mag.max}]</span>
-    </div>`
+  playUtilitySound("reload", item, WeaponSound.RELOAD_MAG, {
+    caliberId: getMag(item)?.ammoType, token: actor
   });
+  seqScrollText(chosen ? "WYMIANA" : "WYPIĘTY", actor, {
+    color: chosen ? "#f1c40f" : "#e67e22", fontSize: 26, duration: 1500
+  });
+
+  await _postSwapCard(item, actor, result, { reloadPlan, inCombat });
+  return true;
 }
 
 /**
- * Pick which round of the caliber's family actually goes in.
+ * Dialog wyboru pojemnika. Zwraca item, `null` (wypięcie) albo `undefined` (anulowano) —
+ * trzy różne odpowiedzi, bo „wypnij" i „nie rób nic" to nie to samo.
+ */
+async function _chooseMagazine(actor, weapon, current) {
+  const options = compatibleMagazines(actor, weapon)
+    .filter(m => m.id !== current?.id)
+    .filter(m => magazineDefOf(m)?.kind !== "speedloader");
+
+  if (!options.length && !current) {
+    ui.notifications.warn(
+      `${actor.name}: brak pasującego magazynka do ${weapon.name}. `
+      + `Magazynki są per model broni — kup taki do tej sztuki.`
+    );
+    return undefined;
+  }
+
+  const buttons = options.map(m => {
+    const def = magazineDefOf(m);
+    const rounds = magazineRounds(m);
+    const host = magazineHost(m);
+    const tags = [
+      isAtHand(m) ? "podręczny" : null,
+      host ? `w: ${host.name}` : null
+    ].filter(Boolean);
+    return {
+      action: m.id,
+      label: `${m.name} — ${rounds.length}/${def.capacity}${tags.length ? ` [${tags.join(", ")}]` : ""}`
+    };
+  });
+  if (current) buttons.push({ action: "__eject", label: "Wypnij magazynek (bez wkładania nowego)" });
+
+  const chosen = await foundry.applications.api.DialogV2.wait({
+    window: { title: `Wymiana magazynka — ${weapon.name}` },
+    content: `<p>${_swapDialogHint(weapon, current, options)}</p>`,
+    buttons,
+    rejectClose: false
+  });
+  if (!chosen) return undefined;
+  if (chosen === "__eject") return null;
+  return options.find(m => m.id === chosen) ?? undefined;
+}
+
+function _swapDialogHint(weapon, current, options) {
+  const lines = [];
+  if (current) {
+    const def = magazineDefOf(current);
+    const rounds = magazineRounds(current);
+    lines.push(`Wpięty: <strong>${current.name}</strong> — ${describeRounds(rounds)}`
+      + ` (${rounds.length}/${def?.capacity ?? "?"}).`);
+  } else {
+    lines.push("Broń jest bez magazynka.");
+  }
+  const chambered = getChamber(weapon);
+  if (chambered.caliberId) {
+    lines.push(`W komorze zostaje <strong>${_caliberLabel(chambered.caliberId)}</strong>`
+      + " — wymiana go nie rusza.");
+  }
+  if (!options.length) lines.push("<em>Nie masz innego pasującego magazynka.</em>");
+  return lines.join("<br>");
+}
+
+/** Karta czatu wymiany/wypięcia, z pigułką „skąd wzięty" (przedmioty podręczne). */
+async function _postSwapCard(weapon, actor, { ejected, inserted, takenFrom }, { reloadPlan, inCombat }) {
+  const mag = getMag(weapon);
+  const verb = inserted
+    ? (ejected ? "wymienia magazynek w" : "wpina magazynek do")
+    : "wypina magazynek z";
+
+  const detail = [];
+  if (inserted) {
+    detail.push(`Wpięty: <strong>${inserted.name}</strong> — ${describeRounds(magazineRounds(inserted))}.`);
+  }
+  if (ejected) {
+    detail.push(`Wyjęty: ${ejected.name} — ${describeRounds(magazineRounds(ejected))} (zostaje w ekwipunku).`);
+  }
+  if (takenFrom) {
+    detail.push(`<strong>${takenFrom.name}</strong> zostaje bez magazynka — magazynek przeszedł stamtąd.`);
+  }
+  if (!inserted) detail.push("<em>Broń zostaje z samym nabojem w komorze.</em>");
+
+  const provenance = inserted ? provenanceBadge(inserted) : "";
+
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    content: `<div class="neuro-mag-card">`
+      + `<div class="neuro-mag-head"><strong>${actor.name}</strong> ${verb} <em>${weapon.name}</em>`
+      + `${provenance ? ` ${provenance}` : ""}</div>`
+      + `<div class="neuro-mag-body">${detail.join("<br>")}</div>`
+      + `<div class="neuro-mag-state">Stan broni: ${mag?.current ?? 0}/${mag?.max ?? 0}`
+      + `${_nextRoundNote(weapon)}</div>`
+      + `${_getReloadRuleChangeNotice(reloadPlan, { inCombat })}</div>`
+      + `<ul class="card-footer pills unlist"><li class="pill transparent">`
+      + `<span class="label">${reloadPlan.actionLabel}${inCombat ? "" : " (poza walką)"}</span></li></ul>`
+  });
+}
+
+/** „ — następny: .44 Mag (dum-dum)", gdy jest co powiedzieć. */
+function _nextRoundNote(weapon) {
+  const next = getMag(weapon)?.ammoType;
+  if (!next) return "";
+  return ` — następny: <strong>${_caliberLabel(next)}</strong>`;
+}
+
+function _caliberLabel(caliberId) {
+  return AMMO_CALIBER_MAP[caliberId]?.label ?? caliberId ?? "—";
+}
+
+/**
+ * Przelanie szybkoładowarki do bębenka — RAW: „albo całego bębenka szybkoładowarką",
+ * akcja Używanie (Akcja bonusowa ze Sztuczką *Szybkie przeładowanie*).
  *
- * Replaces a hardcoded `.12 Ga` śrut/breneka dialog gated on
- * `mag.ammoType?.startsWith("12ga")`. That test was both unextendable and subtly wrong as a
- * compatibility rule — see `familyCalibers()` in `config/ammo-data.mjs`. Only calibers the actor
- * actually carries are offered, and a single option skips the dialog entirely, so the common
- * case is unchanged for every weapon that has just one kind of ammunition.
+ * Wymaga pustego bębenka: pierścień naboi wchodzi w komory na raz albo wcale. Szybkoładowarka
+ * zostaje pusta — nabija się ją poza walką, jak magazynek, i to jest cała jej ekonomia:
+ * masz ją nabitą albo tracisz rundy na naboje po jednym.
+ */
+async function _onClickPourSpeedloader(item) {
+  const actor = item.actor;
+  if (!actor) return false;
+
+  const loaders = compatibleMagazines(actor, item)
+    .filter(m => magazineDefOf(m)?.kind === "speedloader")
+    .filter(m => magazineRounds(m).length > 0);
+
+  if (!loaders.length) {
+    ui.notifications.warn(`${actor.name}: brak nabitej szybkoładowarki do ${item.name}.`);
+    return false;
+  }
+  if (internalRounds(item).length) {
+    ui.notifications.warn(`${item.name}: bębenek nie jest pusty — szybkoładowarka wchodzi tylko w pusty bębenek.`);
+    return false;
+  }
+
+  let loader = loaders[0];
+  if (loaders.length > 1) {
+    const chosen = await foundry.applications.api.DialogV2.wait({
+      window: { title: "Którą szybkoładowarką?" },
+      content: "<p>Masz kilka nabitych szybkoładowarek pasujących do tej broni.</p>",
+      buttons: loaders.map(m => ({ action: m.id, label: `${m.name} — ${describeRounds(magazineRounds(m))}` })),
+      rejectClose: false
+    });
+    if (!chosen) return false;
+    loader = loaders.find(m => m.id === chosen) ?? loader;
+  }
+
+  const contents = describeRounds(magazineRounds(loader));
+  const n = await pourSpeedloader(item, loader);
+  if (!n) {
+    ui.notifications.warn(`${item.name}: szybkoładowarka nie pasuje do tego bębenka.`);
+    return false;
+  }
+
+  await _clearReloadState(item);
+  const reloadPlan = _getReloadPlan(item, getMag(item));
+  const inCombat = !!actor.inCombat;
+  if (inCombat) await _spendCombatResource(actor, reloadPlan.actionType);
+
+  playUtilitySound("reload", item, WeaponSound.RELOAD_MAG, { caliberId: getMag(item)?.ammoType, token: actor });
+  seqScrollText("BĘBENEK", actor, { color: "#f1c40f", fontSize: 26, duration: 1500 });
+
+  const mag = getMag(item);
+  const provenance = provenanceBadge(loader);
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    content: `<div class="neuro-mag-card">`
+      + `<div class="neuro-mag-head"><strong>${actor.name}</strong> przelewa szybkoładowarkę do <em>${item.name}</em>`
+      + `${provenance ? ` ${provenance}` : ""}</div>`
+      + `<div class="neuro-mag-body">${contents} → bębenek. ${loader.name} zostaje pusta.</div>`
+      + `<div class="neuro-mag-state">Stan broni: ${mag?.current ?? 0}/${mag?.max ?? 0}${_nextRoundNote(item)}</div>`
+      + `${_getReloadRuleChangeNotice(reloadPlan, { inCombat })}</div>`
+      + `<ul class="card-footer pills unlist"><li class="pill transparent">`
+      + `<span class="label">${reloadPlan.actionLabel}${inCombat ? "" : " (poza walką)"}</span></li></ul>`
+  });
+  return true;
+}
+
+/**
+ * Który nabój z rodziny wchodzi — pytamy tylko wtedy, gdy jest z czego wybierać.
+ *
+ * Zastąpiło zaszyty na sztywno dialog śrut/breneka bramkowany na `ammoType?.startsWith("12ga")`,
+ * który był i nierozszerzalny, i subtelnie błędny jako reguła kompatybilności — patrz
+ * `familyCalibers()` w `config/ammo-data.mjs`. Oferowane są tylko kalibry, które aktor
+ * faktycznie nosi, a jedna opcja pomija dialog, więc typowy przypadek (broń z jednym rodzajem
+ * amunicji) wygląda dokładnie jak wcześniej.
  *
  * @returns {{ammoItem: Item5e, caliberId: string}|null} null = brak amunicji albo anulowano
  */
@@ -627,8 +1019,7 @@ async function _chooseFamilyAmmo(actor, currentCaliberId) {
   }
 
   if (!options.length) {
-    const label = AMMO_CALIBER_MAP[currentCaliberId]?.label ?? currentCaliberId ?? "dowolnej";
-    ui.notifications.warn(`Brak amunicji (${label}) w ekwipunku.`);
+    ui.notifications.warn(`Brak amunicji (${_caliberLabel(currentCaliberId)}) w ekwipunku.`);
     return null;
   }
   if (options.length === 1) {
@@ -637,7 +1028,7 @@ async function _chooseFamilyAmmo(actor, currentCaliberId) {
 
   const chosen = await foundry.applications.api.DialogV2.wait({
     window: { title: "Czym ładujesz?" },
-    content: `<p>Masz kilka rodzajów naboju pasujących do tej broni. Który wchodzi do magazynka?</p>`,
+    content: `<p>Masz kilka rodzajów naboju pasujących do tej broni. Który wchodzi?</p>`,
     buttons: options.map(o => ({
       action: o.caliber.id,
       label: `${o.caliber.label} — ${o.ammoItem.system.quantity ?? 0} szt.`
@@ -650,21 +1041,238 @@ async function _chooseFamilyAmmo(actor, currentCaliberId) {
   return picked ? { ammoItem: picked.ammoItem, caliberId: picked.caliber.id } : null;
 }
 
+/* -------------------------------------------- */
+/*  Okno ładowania magazynka                      */
+/* -------------------------------------------- */
+
+/** Skoki, które oferujemy jako gotowe przyciski. Obcinane do tego, co realnie wchodzi. */
+const LOAD_STEPS = Object.freeze([1, 5, 10, 50]);
+
 /**
- * A prepared spare magazine of the right kind, or null.
+ * Okno ładowania pojemnika — **wyłącznie poza walką**.
  *
- * "Prepared" is `flags.<module>.ready`, the counter the Zapasowe Magazynki inventory section
- * shows and edits — magazines are quantum: they carry no ammunition type of their own and get
- * one only when they go into the weapon, from whatever the actor has loose.
+ * ## Wiersz na typ amunicji, nie kolumna
+ *
+ * Kolumny skończyłyby się przy piątym typie naboju, a rodzin będzie przybywać z każdym
+ * dodatkiem. Wiersze skalują się bez końca i mieszczą opis efektu, po którym gracz wybiera —
+ * „2k6 kłute • przebijająca" jest tu ważniejsze niż nazwa kalibru.
+ *
+ * ## Clamping z dwóch stron
+ *
+ * Każdy przycisk jest obcięty i o wolne miejsce w magazynku, i o zapas w ekwipunku, i pokazuje
+ * realną liczbę albo jest wyszarzony. Gracz nigdy nie klika czegoś, co zrobi mniej, niż mówi.
+ *
+ * ## „Do pełna" jest per wiersz
+ *
+ * Globalne „do pełna" przy mieszance nie ma sensownej odpowiedzi — nie ma dobrej heurystyki na
+ * „którym z trzech typów dopełnić". Ta sama zasada, z której wynika brak automatycznego
+ * uzupełniania w całym systemie: ładowanie jest jawną decyzją gracza.
  */
-function _findReadyMagazine(actor, weapon) {
-  const wanted = getMagTypeForWeapon(weapon);
-  if (!wanted) return null;
-  return actor.items.find(i =>
-    isMagazineItem(i)
-    && i.system.type?.subtype === wanted
-    && Number(i.getFlag(MODULE_ID, "ready") ?? 0) > 0
-  ) ?? null;
+export async function openLoadWindow(magItem) {
+  const actor = magItem?.actor;
+  const def = magazineDefOf(magItem);
+  if (!def) {
+    ui.notifications.warn(`${magItem?.name ?? "Pojemnik"}: nierozpoznany magazynek — nie wiem, co do niego wchodzi.`);
+    return;
+  }
+  if (!actor) {
+    ui.notifications.warn("Magazynek nie leży w ekwipunku postaci.");
+    return;
+  }
+  if (actor.inCombat) {
+    ui.notifications.warn(
+      `${magItem.name}: naboi nie wkłada się do magazynka w walce — `
+      + `wymień magazynek na inny albo zrób to po walce.`
+    );
+    return;
+  }
+
+  let root = null;
+
+  const refresh = () => {
+    if (!root) return;
+    const live = actor.items.get(magItem.id);
+    if (!live) return;
+    root.innerHTML = _loadWindowHtml(live, def);
+    _bindLoadWindow(root, live, def, refresh);
+  };
+
+  await foundry.applications.api.DialogV2.wait({
+    window: { title: `Ładowanie — ${magItem.name}`, resizable: true },
+    position: { width: 520 },
+    content: `<div class="neuro-load-window">${_loadWindowHtml(magItem, def)}</div>`,
+    render: (_event, dialog) => {
+      root = (dialog.element ?? dialog).querySelector(".neuro-load-window");
+      if (root) _bindLoadWindow(root, actor.items.get(magItem.id) ?? magItem, def, refresh);
+    },
+    buttons: [{ action: "close", icon: "fa-solid fa-check", label: "Gotowe", default: true }],
+    rejectClose: false
+  });
+}
+
+function _loadWindowHtml(magItem, def) {
+  const rounds = magazineRounds(magItem);
+  const free = Math.max(0, def.capacity - rounds.length);
+  const actor = magItem.actor;
+
+  /* Posiadane typy u góry, zgodne ale nieposiadane wyszarzone na dole — żeby gracz widział,
+     czego ma szukać, zamiast zgadywać, czym jeszcze wolno nabić ten magazynek. */
+  const entries = acceptedCalibers(def).map(caliber => {
+    const stock = _findAmmo(actor, caliber.id);
+    return { caliber, stock, have: Number(stock?.system?.quantity ?? 0) };
+  });
+  entries.sort((a, b) => (b.have > 0 ? 1 : 0) - (a.have > 0 ? 1 : 0));
+
+  const header = `<div class="neuro-load-head">
+      <span class="neuro-load-title">${magItem.name}</span>
+      <span class="neuro-load-count">${rounds.length}/${def.capacity}</span>
+      <button type="button" class="neuro-load-unload" ${rounds.length ? "" : "disabled"}>
+        <i class="fa-solid fa-arrow-up-from-bracket" inert></i> Rozładuj wszystko
+      </button>
+    </div>`;
+
+  const rows = entries.map(e => _loadRowHtml(e, free)).join("");
+
+  const queue = rounds.length
+    ? `<div class="neuro-load-queue"><span class="neuro-load-queue-label">Kolejność wystrzału:</span> `
+      + `${_queueChips(rounds)}</div>`
+    : `<div class="neuro-load-queue is-empty">Magazynek jest pusty.</div>`;
+
+  return header + `<div class="neuro-load-rows">${rows || "<p><em>Brak zgodnych kalibrów w katalogu.</em></p>"}</div>` + queue;
+}
+
+/**
+ * Jeden wiersz = jeden typ naboju.
+ *
+ * Ikona bierze się z `AMMO_CALIBERS[].icon`. Dwie rodziny (`12ga_s`/`12ga_b` i `44mag`/`44mag_dd`)
+ * dzielą dziś jeden plik SVG, więc rozróżnia je **etykieta i opis efektu**, nie grafika —
+ * dedykowane ikony są w produkcji i podmiana ich nie wymaga zmiany tego kodu
+ * (`dev/icons/MISSING.md`, batch 40).
+ */
+function _loadRowHtml({ caliber, have }, free) {
+  const max = Math.min(free, have);
+  const effect = [
+    caliber.formula ? `${caliber.formula} ${_damageTypeLabel(caliber.type)}` : "",
+    ...(caliber.props ?? []).map(_propLabel)
+  ].filter(Boolean).join(" • ");
+
+  const steps = LOAD_STEPS.filter(n => n < max).map(n =>
+    `<button type="button" class="neuro-load-add" data-caliber="${caliber.id}" data-n="${n}">+${n}</button>`);
+
+  if (max > 0) {
+    const label = (have <= free) ? `+${max} = wszystko` : "do pełna";
+    steps.push(`<button type="button" class="neuro-load-add is-fill" data-caliber="${caliber.id}" data-n="${max}">${label}</button>`);
+  }
+
+  const why = have <= 0 ? "brak w ekwipunku" : (free <= 0 ? "magazynek pełny" : "");
+
+  return `<div class="neuro-load-row ${have > 0 ? "" : "is-missing"}">
+      <img class="neuro-load-icon" src="modules/${MODULE_ID}/icons/ammo/${caliber.icon}" alt="">
+      <div class="neuro-load-info">
+        <div class="neuro-load-name">${caliber.label}</div>
+        <div class="neuro-load-effect">${effect || "—"}</div>
+      </div>
+      <div class="neuro-load-stock">zapas: <strong>${have}</strong></div>
+      <div class="neuro-load-actions">${steps.join("") || `<span class="neuro-load-why">${why}</span>`}</div>
+    </div>`;
+}
+
+/** Zawartość jako ciąg grup, w kolejności wystrzału — pierwszy chip leci pierwszy. */
+function _queueChips(rounds) {
+  const groups = [];
+  for (const id of rounds) {
+    const last = groups[groups.length - 1];
+    if (last && last.id === id) last.n += 1;
+    else groups.push({ id, n: 1 });
+  }
+  return groups.map(g =>
+    `<span class="neuro-load-chip">▸ ${g.n}× ${_caliberLabel(g.id)}</span>`).join(" ");
+}
+
+function _bindLoadWindow(root, magItem, def, refresh) {
+  root.querySelectorAll(".neuro-load-add").forEach(btn => {
+    btn.addEventListener("click", async ev => {
+      ev.preventDefault();
+      const caliberId = btn.dataset.caliber;
+      const want = Number(btn.dataset.n) || 0;
+      await _loadFromStock(magItem, caliberId, want);
+      refresh();
+    });
+  });
+
+  root.querySelector(".neuro-load-unload")?.addEventListener("click", async ev => {
+    ev.preventDefault();
+    await unloadMagazineAction(magItem);
+    refresh();
+  });
+}
+
+/**
+ * Przenosi `want` naboi z luźnej puli do pojemnika. Obcina do tego, co jest i co wchodzi —
+ * przycisk już to pokazał, ale stan mógł się zmienić między renderem a kliknięciem.
+ */
+async function _loadFromStock(magItem, caliberId, want) {
+  const actor = magItem.actor;
+  const stock = _findAmmo(actor, caliberId);
+  const have = Number(stock?.system?.quantity ?? 0);
+  const n = Math.min(want, have, freeSpace(magItem));
+  if (n <= 0) return 0;
+
+  const loaded = await loadRounds(magItem, caliberId, n);
+  if (!loaded) return 0;
+
+  if (have - loaded <= 0) await stock.delete();
+  else await stock.update({ "system.quantity": have - loaded });
+
+  playUtilitySound("reload", magItem, WeaponSound.RELOAD_SINGLE, { caliberId, token: actor });
+  return loaded;
+}
+
+/**
+ * Rozładowanie **wyłącznie w całości**.
+ *
+ * Częściowe natychmiast rodzi pytanie „które trzy naboje", a przy pełnym nie rodzi żadnego.
+ * Naboje wracają do luźnej puli, każdy typ do swojego stosu.
+ */
+export async function unloadMagazineAction(magItem) {
+  const actor = magItem?.actor;
+  if (!actor) return false;
+  if (actor.inCombat) {
+    ui.notifications.warn(`${magItem.name}: rozładowywanie magazynka nie jest czynnością bojową.`);
+    return false;
+  }
+
+  const tally = await unloadAll(magItem);
+  const entries = Object.entries(tally);
+  if (!entries.length) {
+    ui.notifications.info(`${magItem.name}: już jest pusty.`);
+    return false;
+  }
+
+  for (const [caliberId, n] of entries) {
+    await addAmmoToActor(actor, caliberId, n, { notify: false });
+  }
+
+  playUtilitySound("reload", magItem, WeaponSound.RELOAD_OTHER, {
+    caliberId: entries[0][0], token: actor
+  });
+
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    content: `<div class="neuro-mag-card">`
+      + `<div class="neuro-mag-head"><strong>${actor.name}</strong> rozładowuje <em>${magItem.name}</em></div>`
+      + `<div class="neuro-mag-body">Do zapasu wraca: `
+      + `${entries.map(([id, n]) => `${n}× ${_caliberLabel(id)}`).join(", ")}.</div></div>`
+  });
+  return true;
+}
+
+function _damageTypeLabel(type) {
+  return CONFIG.DND5E?.damageTypes?.[type]?.label ?? type ?? "";
+}
+
+function _propLabel(prop) {
+  return CONFIG.DND5E?.itemProperties?.[prop]?.label ?? prop;
 }
 
 function _getReloadPlan(item, mag, { magazineType = getMagazineType(item) } = {}) {
@@ -721,53 +1329,6 @@ function _getReloadPlan(item, mag, { magazineType = getMagazineType(item) } = {}
   };
 }
 
-function _getMagazineUi(magazineType, item = null) {
-  const canQuickSwap = item?.actor ? hasAbility(item.actor, ABILITY_KEYS.SZYBKA_WYMIANA) : false;
-  const canQuickReload = item?.actor ? hasAbility(item.actor, ABILITY_KEYS.SZYBKIE_PRZELADOWANIE) : false;
-  const reloadState = item ? _getReloadState(item) : {};
-  const cycleOnly = item ? _canCycleReloadWithoutAmmo(item, getMag(item), reloadState) : false;
-
-  /* Broń Miotana — quiver / ammo pouch */
-  const weapType = item?.system?.type?.value ?? "";
-  if (weapType === "miotana") {
-    const caliberId = getMag(item)?.ammoType ?? "";
-    const isArrow = caliberId === "strzala";
-    const isBolt  = caliberId === "belt";
-    const label   = isArrow ? "Kołczan (strzały)" : isBolt ? "Kołczan (bełty)" : "Ładunki";
-    return {
-      label,
-      buttonLabel: "+1 ład",
-      buttonTitle: "Uzupełnij ładunki z ekwipunku",
-      hint: "Z broni miotanej odliczasz ładunek na atak."
-    };
-  }
-
-  if (magazineType === MAGAZINE_TYPES.INTERNAL) {
-    return {
-      label: "Wmag.",
-      buttonLabel: cycleOnly ? "⟳ Przeładuj" : "+1 nabój",
-      buttonTitle: cycleOnly ? "Przeładuj broń po strzale" : "Załaduj 1 nabój do magazynka wewnętrznego",
-      hint: canQuickReload ? "Doładowanie 1 szt: Akcja bonusowa." : "Doładowanie 1 szt: 1 Akcja."
-    };
-  }
-
-  if (magazineType === MAGAZINE_TYPES.CYLINDER) {
-    return {
-      label: "Bębenek",
-      buttonLabel: cycleOnly ? "⟳ Przeładuj" : "+1 nabój",
-      buttonTitle: cycleOnly ? "Przeładuj broń po strzale" : "Załaduj 1 nabój do bębenka",
-      hint: canQuickReload ? "Doładowanie 1 szt: Akcja bonusowa." : "Doładowanie 1 szt: 1 Akcja."
-    };
-  }
-
-  return {
-    label: "Magazynek",
-    buttonLabel: cycleOnly ? "⟳ Przeładuj" : "↺ Zapasowy",
-    buttonTitle: cycleOnly ? "Przeładuj broń po strzale" : "Wymień magazynek na zapasowy z ekwipunku",
-    hint: canQuickSwap ? "Wymiana: Akcja bonusowa." : "Wymiana magazynka: 1 Akcja."
-  };
-}
-
 function onPreUseActivity(activity) {
   const liveItem = _getLiveItem(activity?.item);
   if (!_isTrackedRangedWeapon(liveItem) || _isCustomActivity(activity)) return;
@@ -794,12 +1355,6 @@ async function onPostUseActivity(activity) {
   const liveItem = _getLiveItem(activity?.item);
   if (!_isTrackedRangedWeapon(liveItem) || _isCustomActivity(activity)) return;
   if (!_isSingleShotActivity(activity)) return;
-}
-
-function uiForChat(magazineType) {
-  if (magazineType === MAGAZINE_TYPES.INTERNAL) return "Wmag.";
-  if (magazineType === MAGAZINE_TYPES.CYLINDER) return "Bębenek";
-  return "Magazynek";
 }
 
 /**
@@ -848,103 +1403,6 @@ function _findAmmo(actor, ammoType) {
     return exact || null;
   }
   return null;
-}
-
-function _restoreQuantumMagazines(combat) {
-  for(let combatant of combat.combatants) {
-    _restoreQuantumMagazinesForActor(combatant.actor);
-  }
-}
-
-/**
- * Every spare magazine is prepared again once the fight is over.
- *
- * Refilling `ready` for free is deliberate and not a duplicate of the ammunition economy:
- * `ready` counts magazine BODIES that are loaded and to hand, while the rounds themselves are
- * deducted from the loose stock at the moment of the swap (`_onClickReload`). Topping the
- * bodies back up between fights is the abstraction that keeps that bookkeeping off the table.
- *
- * Previously filtered on `system.type.value === "magazine"` and wrote `system.uses.value` —
- * neither of which any magazine item in this world has ever had, so this restored nothing at
- * all. See `_onClickReload`.
- */
-function _restoreQuantumMagazinesForActor(actor) {
-  if (!actor) return;
-  for (const item of actor.items) {
-    if (!isMagazineItem(item)) continue;
-    const quantity = Number(item.system.quantity ?? 0);
-    if (Number(item.getFlag(MODULE_ID, "ready") ?? 0) === quantity) continue;
-    void item.setFlag(MODULE_ID, "ready", quantity);
-  }
-}
-
-async function syncAllMagazineUses() {
-  const items = [
-    ...Array.from(game.items ?? []),
-    ...Array.from(game.actors ?? []).flatMap(actor => Array.from(actor.items ?? []))
-  ];
-
-  for (const item of items) {
-    const mag = item?.type === "weapon" ? item.getFlag(MODULE_ID, "mag") : null;
-    if (!mag || mag.max == null) continue;
-    await _syncUsesFromMagazine(item, mag);
-  }
-}
-
-async function _applyMagazineState(item, mag) {
-  const normalized = {
-    current: Math.max(0, Number(mag.current ?? 0)),
-    max: Math.max(0, Number(mag.max ?? 0)),
-    ammoType: mag.ammoType ?? ""
-  };
-  normalized.current = Math.min(normalized.current, normalized.max || normalized.current);
-
-  syncingMagazineUses.add(item.uuid);
-  try {
-    await item.update({
-      [`flags.${MODULE_ID}.mag`]: normalized,
-      "system.uses.max": normalized.max,
-      "system.uses.spent": Math.max(normalized.max - normalized.current, 0)
-    });
-  } finally {
-    syncingMagazineUses.delete(item.uuid);
-  }
-}
-
-async function _syncUsesFromMagazine(item, mag) {
-  const expectedMax = Math.max(0, Number(mag.max ?? 0));
-  const expectedSpent = Math.max(expectedMax - Math.max(0, Number(mag.current ?? 0)), 0);
-  const currentMax = Number(item.system.uses?.max ?? 0);
-  const currentSpent = Number(item.system.uses?.spent ?? 0);
-  if ((currentMax === expectedMax) && (currentSpent === expectedSpent)) return;
-
-  syncingMagazineUses.add(item.uuid);
-  try {
-    await item.update({
-      "system.uses.max": expectedMax,
-      "system.uses.spent": expectedSpent
-    });
-  } finally {
-    syncingMagazineUses.delete(item.uuid);
-  }
-}
-
-async function _syncMagazineFlagFromUses(item, mag) {
-  const currentMax = Math.max(0, Number(item.system.uses?.max ?? mag.max ?? 0));
-  const currentSpent = Math.max(0, Number(item.system.uses?.spent ?? 0));
-  const expectedCurrent = Math.max(currentMax - currentSpent, 0);
-  if ((Number(mag.max ?? 0) === currentMax) && (Number(mag.current ?? 0) === expectedCurrent)) return;
-
-  syncingMagazineUses.add(item.uuid);
-  try {
-    await item.setFlag(MODULE_ID, "mag", {
-      ...mag,
-      max: currentMax,
-      current: expectedCurrent
-    });
-  } finally {
-    syncingMagazineUses.delete(item.uuid);
-  }
 }
 
 /**
@@ -1050,7 +1508,7 @@ function registerMagSwapActivityType() {
 
     async use(usage = {}, dialog = {}, message = {}) {
       const liveItem = _getLiveItem(this.item);
-      return _onClickReload(liveItem);
+      return _onClickSwapMagazine(liveItem);
     }
   }
 
@@ -1097,9 +1555,12 @@ async function syncWeaponMagazineActivities(item) {
 
   syncingManagedActivities.add(item.uuid);
   try {
-    await syncReloadActivity(item);
-    await syncLoadOneActivity(item);
-    await syncMagSwapActivity(item);
+    /* Sprawdzenie między krokami — patrz bliźniacza pętla w `fire-modes.mjs` i uzasadnienie
+       w `scripts/doc-liveness.mjs`. */
+    for (const step of [syncReloadActivity, syncLoadOneActivity, syncMagSwapActivity]) {
+      if (!isDocumentLive(item)) return;
+      await step(item);
+    }
   } finally {
     syncingManagedActivities.delete(item.uuid);
   }
@@ -1313,11 +1774,7 @@ function registerAttackReloadGuard() {
       return false;
     }
 
-    const snapshot = {
-      spent: Number(liveItem.system.uses?.spent ?? 0),
-      current: Number(getMag(liveItem)?.current ?? 0),
-      chamberLoaded: _getChamberState(liveItem).loaded === true
-    };
+    const snapshot = _snapshotShotState(liveItem);
 
     const result = await originalRollAttack.call(this, config, dialog, message);
     if ((result === false) || (result == null)) return result;
@@ -1381,11 +1838,15 @@ function _getReloadState(item) {
   return item?.getFlag(MODULE_ID, RELOAD_STATE_FLAG) ?? {};
 }
 
+/**
+ * Stan komory w starym kształcie (`{ loaded }`) — używany przez reguły `przeladowanie`/`ladowanie`
+ * w tym pliku. Nowy kształt (`{ caliberId }`) wystawia `getChamber()`.
+ */
 function _getChamberState(item, mag = getMag(item)) {
-  const state = item?.getFlag(MODULE_ID, CHAMBER_STATE_FLAG);
-  if (typeof state?.loaded === "boolean") return state;
-  if (!_getManualReloadMode(item)) return { loaded: true };
-  return { loaded: Number(mag?.current ?? 0) > 0 };
+  /* Broń bez komory (`beb` i osiem wpisów z `chamber: false`) zawsze zgłasza się jako gotowa,
+     gdy ma czym strzelać — jej „komora" JEST źródłem, więc osobny stan nie istnieje. */
+  if (!weaponHasChamber(item)) return { loaded: Number(mag?.current ?? 0) > 0 };
+  return { loaded: chamberedCaliber(item) != null };
 }
 
 async function _setReloadState(item, state) {
@@ -1394,11 +1855,12 @@ async function _setReloadState(item, state) {
   return item.unsetFlag(MODULE_ID, RELOAD_STATE_FLAG);
 }
 
+/**
+ * Zapis stanu komory w starym kształcie. Przechodzi przez `setChamber()`, żeby istniała
+ * dokładnie jedna droga zapisu i żeby projekcja przeliczyła się razem z nim.
+ */
 async function _setChamberState(item, state) {
-  const normalized = {
-    loaded: state?.loaded === true
-  };
-  return item.setFlag(MODULE_ID, CHAMBER_STATE_FLAG, normalized);
+  return setChamber(item, { loaded: state?.loaded === true });
 }
 
 async function _clearReloadState(item) {
@@ -1425,11 +1887,6 @@ function _getManualReloadMode(item) {
   if (_hasProperty(item, "ladowanie")) return "ladowanie";
   if (_hasProperty(item, "przeladowanie")) return "przeladowanie";
   return null;
-}
-
-function _shouldShowChamberStatus(item) {
-  if (_getManualReloadMode(item)) return true;
-  return [MAGAZINE_TYPES.INTERNAL, MAGAZINE_TYPES.CYLINDER].includes(getMagazineType(item));
 }
 
 function _ignoresManualReloadMode(item, mode = _getManualReloadMode(item)) {
@@ -1469,17 +1926,6 @@ async function _announceEmptyMagazine(item) {
   });
 }
 
-function _getChamberStateHint(item, chamberState = _getChamberState(item), mag = getMag(item)) {
-  const current = Number(mag?.current ?? 0);
-  if (chamberState.loaded) return "Komora: załadowana.";
-
-  if (_getManualReloadMode(item) === "przeladowanie") {
-    return current > 0 ? "Komora: pusta (wymaga przeładowania)." : "Komora: pusta (i pusty magazynek).";
-  }
-
-  return current > 0 ? "Komora: pusta." : "Komora: pusta (rozładowana).";
-}
-
 function _getReloadStateHint(item, reloadState = _getReloadState(item)) {
   const mag = getMag(item);
   if (reloadState.mode === "przeladowanie") {
@@ -1510,24 +1956,33 @@ async function _announceQuickReload(item, mag = getMag(item)) {
   });
 }
 
+/**
+ * „Przeładowanie" — przepchnięcie zamka/pompki po strzale. Nie zużywa amunicji z zapasu:
+ * przenosi nabój ze źródła do komory.
+ *
+ * Jeśli w komorze siedział jeszcze ŻYWY nabój (gracz przeładowuje, nie strzelając), zostaje
+ * on wyrzucony i przepada. Tak działa broń i tak działało to przed przebudową — teraz tylko
+ * wiemy, jaki to był kaliber, więc karta czatu może to powiedzieć.
+ */
 async function _performReloadAction(item, { chat = true, spendResource = true, source = "button" } = {}) {
   const liveItem = _getLiveItem(item);
   const actor = liveItem?.actor;
   const mag = getMag(liveItem);
   if (!liveItem || !mag) return false;
 
-  let current = Number(mag.current ?? 0);
-  const chamberState = _getChamberState(liveItem, mag);
-  const ejectedLiveRound = chamberState.loaded && (current > 0);
+  const state = readState(liveItem);
+  const ejectedCaliber = state.hasChamber ? state.chamber : null;
+  const ejectedLiveRound = ejectedCaliber != null;
 
-  if (ejectedLiveRound) {
-    current = Math.max(current - 1, 0);
-    await setMag(liveItem, { current });
+  /* Wyrzucenie żywego naboju i dosłanie następnego to jedna czynność — jeden zapis. */
+  if (state.hasChamber) {
+    state.chamber = state.rounds.length ? state.rounds.shift() : null;
+    await applyState(liveItem, state);
   }
-
-  const chamberLoaded = current > 0;
-  await _setChamberState(liveItem, { loaded: chamberLoaded });
   await _clearReloadState(liveItem);
+
+  const after = getMag(liveItem);
+  const chamberLoaded = getChamber(liveItem).loaded;
 
   if (actor?.inCombat && spendResource) {
     await _spendCombatResource(actor, "bonus");
@@ -1538,9 +1993,10 @@ async function _performReloadAction(item, { chat = true, spendResource = true, s
       speaker: ChatMessage.getSpeaker({ actor }),
       content: _getReloadActionChatContent(liveItem, {
         ejectedLiveRound,
+        ejectedCaliber,
         chamberLoaded,
-        current,
-        max: Number(mag.max ?? 0),
+        current: Number(after?.current ?? 0),
+        max: Number(after?.max ?? 0),
         source,
         spentBonus: !!actor?.inCombat && spendResource
       })
@@ -1552,12 +2008,20 @@ async function _performReloadAction(item, { chat = true, spendResource = true, s
     "reload",
     liveItem,
     _isFirearm ? WeaponSound.RELOAD_SINGLE : WeaponSound.RELOAD_OTHER,
-    { caliberId: mag?.ammoType, token: liveItem.actor },
+    { caliberId: after?.ammoType ?? mag.ammoType, token: liveItem.actor },
   );
   seqScrollText("ZAŁADOWANO", liveItem.actor, { color: "#f1c40f", fontSize: 26, duration: 1500 });
-  return { ejectedLiveRound, chamberLoaded, current };
+  return { ejectedLiveRound, chamberLoaded, current: Number(after?.current ?? 0) };
 }
 
+/**
+ * Doładowanie pojedynczego naboju do magazynka wewnętrznego albo bębenka.
+ *
+ * RAW przewiduje tę czynność **wyłącznie** dla `wmag` i `beb` — dla broni z wymiennym
+ * magazynkiem nie ma takiej czynności i nie wolno jej dorabiać (PLAN_magazynki.md §6,
+ * „W walce — zabronione"). Nabój idzie z luźnej puli w ekwipunku, z wyborem typu, gdy
+ * aktor nosi kilka kalibrów z tej samej rodziny.
+ */
 async function _performLoadOneAction(item, { chat = true, spendResource = true, source = "activity" } = {}) {
   const liveItem = _getLiveItem(item);
   const actor = liveItem?.actor;
@@ -1566,7 +2030,14 @@ async function _performLoadOneAction(item, { chat = true, spendResource = true, 
   const magazineType = getMagazineType(liveItem);
   const mag = getMag(liveItem);
   if (!mag) {
-    ui.notifications.warn(`${liveItem.name}: pojemność magazynka nie jest ustawiona. Otwórz kartę broni i ustaw pojemność w sekcji „Magazynek".`);
+    ui.notifications.warn(`${liveItem.name}: ta broń jest poza systemem magazynków.`);
+    return false;
+  }
+  if (_hasRemovableSource(liveItem)) {
+    ui.notifications.warn(
+      `${liveItem.name}: do wymiennego magazynka nie wkłada się naboi po jednym — `
+      + `wymień magazynek albo załaduj go poza walką.`
+    );
     return false;
   }
   if (![MAGAZINE_TYPES.INTERNAL, MAGAZINE_TYPES.CYLINDER].includes(magazineType)) {
@@ -1574,16 +2045,15 @@ async function _performLoadOneAction(item, { chat = true, spendResource = true, 
     return false;
   }
 
+  const container = magazineType === MAGAZINE_TYPES.CYLINDER ? "bębenka" : "magazynka wewnętrznego";
   if (Number(mag.current ?? 0) >= Number(mag.max ?? 0)) {
-    ui.notifications.info(`${liveItem.name}: ${magazineType === MAGAZINE_TYPES.CYLINDER ? "bębenek" : "magazynek wewnętrzny"} jest pełny.`);
+    ui.notifications.info(`${liveItem.name}: ${container.replace("a", "")} jest pełny.`);
     return false;
   }
 
-  const ammoItem = _findAmmo(actor, mag.ammoType);
-  if (!ammoItem) {
-    ui.notifications.warn(`Brak amunicji (${mag.ammoType || "dowolnej"}) w ekwipunku.`);
-    return false;
-  }
+  const pick = await _chooseFamilyAmmo(actor, mag.ammoType);
+  if (!pick) return false;
+  const { ammoItem, caliberId } = pick;
 
   const available = Number(ammoItem.system.quantity ?? 0);
   if (available <= 0) {
@@ -1591,39 +2061,35 @@ async function _performLoadOneAction(item, { chat = true, spendResource = true, 
     return false;
   }
 
-  if (available <= 1) {
-    await ammoItem.delete();
-  } else {
-    await ammoItem.update({ "system.quantity": available - 1 });
+  if (!(await loadSingleRound(liveItem, caliberId))) {
+    ui.notifications.info(`${liveItem.name}: nie ma już miejsca.`);
+    return false;
   }
 
-  await setMag(liveItem, { current: Number(mag.current ?? 0) + 1 });
+  if (available <= 1) await ammoItem.delete();
+  else await ammoItem.update({ "system.quantity": available - 1 });
 
-  // Bugfix (2026-09-06, found via Pistolet na Race): unlike `_performReloadAction` (the
-  // cycle-reload path for "przeładowanie" weapons), this single-round path never used to touch
-  // chamber/reload-state at all. On a "ładowanie" weapon (single load-each-shot: Samoróbka,
-  // Pistolet na Race, most rifles/shotguns/MGL1S/Moździerz — see `weapons-data.mjs` props lists)
-  // that left `chamber.loaded` and `reloadState.required` stuck at whatever the LAST SHOT set
-  // them to (false / true) even after this action just put a live round back in — so
-  // `_requiresManualReloadBeforeUse` kept reporting "trzeba przeładować" and blocking every
-  // activity (ATAK included) on an already-reloaded weapon. Confirmed live: Raynald's Pistolet
-  // na Race, reloaded to 1/1 after its first shot, was still stuck exactly like this. A round is
-  // now genuinely chambered, so both flags must reflect that, same as the cycle-reload path does.
-  await _setChamberState(liveItem, { loaded: true });
+  /* Nabój faktycznie wszedł, więc stan „trzeba przeładować" przestaje obowiązywać.
+     Bugfix 2026-09-06 (Pistolet na Race): bez tego `_requiresManualReloadBeforeUse` blokowało
+     każdą aktywność na już przeładowanej broni, bo flagi zostawały z ostatniego strzału. */
   await _clearReloadState(liveItem);
 
   const reloadPlan = _getReloadPlan(liveItem, mag, { magazineType });
-  if (actor.inCombat && spendResource) {
-    await _spendCombatResource(actor, reloadPlan.actionType);
-  }
+  const inCombatSpent = !!(actor.inCombat && spendResource);
+  if (inCombatSpent) await _spendCombatResource(actor, reloadPlan.actionType);
 
   if (chat) {
     const nextMag = getMag(liveItem);
-    const inCombatSpent = !!(actor.inCombat && spendResource);
     await ChatMessage.create({
       speaker: ChatMessage.getSpeaker({ actor }),
-      content: `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actor.name}</strong> doładowuje <em>${liveItem.name}</em> o 1 nabój do ${magazineType === MAGAZINE_TYPES.CYLINDER ? "bębenka" : "magazynka wewnętrznego"}.<br>Stan broni: ${Number(nextMag?.current ?? 0)}/${Number(nextMag?.max ?? 0)}.${_getReloadRuleChangeNotice(reloadPlan, { inCombat: inCombatSpent })}</div>
-      <ul class="card-footer pills unlist"><li class="pill transparent"><span class="label">${reloadPlan.actionLabel}${inCombatSpent ? "" : " (poza walką)"}</span></li></ul>`
+      content: `<div class="neuro-mag-card">`
+        + `<div class="neuro-mag-head"><strong>${actor.name}</strong> doładowuje <em>${liveItem.name}</em>`
+        + ` o 1 nabój (${_caliberLabel(caliberId)}) do ${container}.</div>`
+        + `<div class="neuro-mag-state">Stan broni: ${Number(nextMag?.current ?? 0)}/${Number(nextMag?.max ?? 0)}`
+        + `${_nextRoundNote(liveItem)}</div>`
+        + `${_getReloadRuleChangeNotice(reloadPlan, { inCombat: inCombatSpent })}</div>`
+        + `<ul class="card-footer pills unlist"><li class="pill transparent">`
+        + `<span class="label">${reloadPlan.actionLabel}${inCombatSpent ? "" : " (poza walką)"}</span></li></ul>`
     });
   }
 
@@ -1634,23 +2100,36 @@ async function _performLoadOneAction(item, { chat = true, spendResource = true, 
   return true;
 }
 
-function _getReloadActionChatContent(item, { ejectedLiveRound, chamberLoaded, current, max, spentBonus = false } = {}) {
+function _getReloadActionChatContent(item, { ejectedLiveRound, ejectedCaliber, chamberLoaded, current, max, spentBonus = false } = {}) {
   const actorName = item.actor?.name ?? "Postać";
-  const pill = `<ul class="card-footer pills unlist"><li class="pill transparent"><span class="label">Akcja bonusowa${spentBonus ? "" : " (poza walką)"}</span></li></ul>`;
+  const pill = `<ul class="card-footer pills unlist"><li class="pill transparent">`
+    + `<span class="label">Akcja bonusowa${spentBonus ? "" : " (poza walką)"}</span></li></ul>`;
+  const wrap = body => `<div class="neuro-mag-card">${body}</div>${pill}`;
+  const ejected = ejectedCaliber ? ` (${_caliberLabel(ejectedCaliber)})` : "";
+  const source = _sourceNoun(item);
 
   if (ejectedLiveRound && chamberLoaded) {
-    return `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em>, wyrzucając niezbitą sztukę z komory. Kolejny nabój wchodzi na miejsce.<br>Stan broni: ${current}/${max}.</div>${pill}`;
+    return wrap(`<div class="neuro-mag-head"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em></div>`
+      + `<div class="neuro-mag-body">Niezbity nabój${ejected} wylatuje z komory; następny wchodzi na jego miejsce.</div>`
+      + `<div class="neuro-mag-state">Stan broni: ${current}/${max}${_nextRoundNote(item)}</div>`);
   }
-
   if (ejectedLiveRound) {
-    return `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em>, wyrzucając ostatni niezbitą sztukę z komory.<br><em>Magazynek wewnętrzny jest pusty.</em></div>${pill}`;
+    return wrap(`<div class="neuro-mag-head"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em></div>`
+      + `<div class="neuro-mag-body">Niezbity nabój${ejected} wylatuje z komory — i nie ma czym go zastąpić.</div>`
+      + `<div class="neuro-mag-state"><em>${_capitalize(source)} jest pusty.</em></div>`);
   }
-
   if (chamberLoaded) {
-    return `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em> po strzale. Broń znów jest gotowa.<br>Załadowa: ${current}/${max}.</div>${pill}`;
+    return wrap(`<div class="neuro-mag-head"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em> po strzale</div>`
+      + `<div class="neuro-mag-body">Broń znów jest gotowa.</div>`
+      + `<div class="neuro-mag-state">Stan broni: ${current}/${max}${_nextRoundNote(item)}</div>`);
   }
+  return wrap(`<div class="neuro-mag-head"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em></div>`
+    + `<div class="neuro-mag-body">Mechanizm chodzi na sucho.</div>`
+    + `<div class="neuro-mag-state"><em>${_capitalize(source)} jest pusty.</em></div>`);
+}
 
-  return `<div style="border-left:3px solid #888;padding-left:8px"><strong>${actorName}</strong> przeładowuje <em>${item.name}</em>, ale mechanizm chodzi na sucho.<br><em>Magazynek wewnętrzny jest pusty.</em></div>${pill}`;
+function _capitalize(text) {
+  return text ? text[0].toUpperCase() + text.slice(1) : text;
 }
 
 function _getReloadRuleChangeNotice(reloadPlan, { inCombat = false } = {}) {
@@ -1658,41 +2137,54 @@ function _getReloadRuleChangeNotice(reloadPlan, { inCombat = false } = {}) {
   return buildAbilityRuleChangeNotice(reloadPlan.ruleChangeAbilityKey, reloadPlan.ruleChangeText);
 }
 
+/**
+ * Zużycie naboju po strzale pojedynczym — **wyłącznie** przez `consumeRounds()`.
+ *
+ * ## Dlaczego nie czytamy już delty `system.uses.spent`
+ *
+ * Poprzednia wersja sprawdzała, czy dnd5e samo zdekrementowało `uses.spent`, i dopiero gdy nie —
+ * odejmowała nabój sama. Ta gałąź była martwa: aktywności tej broni mają `consumption.targets: []`,
+ * więc dnd5e nigdy nie konsumuje `uses`. Gorzej — teraz `uses` jest PROJEKCJĄ liczoną z kolejki,
+ * więc czytanie z niej ilości do odjęcia byłoby czytaniem własnego wyniku i przy pierwszej zmianie
+ * po stronie dnd5e dałoby podwójne odjęcie naboju albo pętlę zapisów. Kierunek jest odtąd
+ * jednostronny: kolejka → projekcja, nigdy odwrotnie.
+ *
+ * Komory nie trzeba tu zerować — `_fireOne()` przy `feed === "manual"` zostawia ją pustą sam,
+ * bo to jest definicja tego trybu podawania.
+ */
 async function _consumeSingleShotAmmo(item, snapshot) {
-  const mag = getMag(item);
-  if (!mag) return false;
+  if (!getMag(item)) return false;
+  const fired = await consumeRounds(item, 1);
+  return Array.isArray(fired) && fired.length > 0;
+}
 
-  if (_getManualReloadMode(item) && (_getChamberState(item, mag).loaded !== true)) return false;
-
-  const beforeSpent = Number(snapshot?.spent ?? item.system.uses?.spent ?? 0);
-  const afterSpent = Number(item.system.uses?.spent ?? 0);
-  let consumed = false;
-  if (afterSpent !== beforeSpent) {
-    await _syncMagazineFlagFromUses(item, mag);
-    consumed = true;
-  }
-
-  if (!consumed) {
-    if (mag.current <= 0) return false;
-    consumed = await spendRound(item);
-  }
-
-  if (_getManualReloadMode(item)) {
-    await _setChamberState(item, { loaded: false });
-  }
-
-  return consumed;
+/**
+ * Pełny stan źródła i komory przed strzałem — do odtworzenia, gdy strzał się nie odbył.
+ *
+ * Siatka bezpieczeństwa, nie główna ścieżka: zużycie następuje po rzucie
+ * (`_processSingleShotAttack`), więc przerwany rzut zwykle nie ma czego cofać. Zostaje na
+ * wypadek, gdyby kiedyś coś zaczęło ruszać stan w trakcie `rollAttack`.
+ */
+function _snapshotShotState(item) {
+  const state = readState(item);
+  return {
+    rounds: [...state.rounds],
+    chamber: state.chamber,
+    magId: state.source?.kind === "magazine" ? state.source.item.id : null
+  };
 }
 
 async function _restoreAbortedShotState(item, snapshot) {
-  const mag = getMag(item);
-  if (mag && Number.isFinite(snapshot?.current)) {
-    await setMag(item, { current: Number(snapshot.current) });
-  }
+  if (!snapshot) return;
+  const state = readState(item);
+  if (!state.source) return;
+  /* Magazynek podmieniony w trakcie? Wtedy odtwarzanie starej kolejki wpisałoby ją do nowego
+     pojemnika — nie ruszamy niczego, bo gorzej byłoby zgadnąć. */
+  if (snapshot.magId && (state.source.kind === "magazine") && (state.source.item.id !== snapshot.magId)) return;
 
-  if (typeof snapshot?.chamberLoaded === "boolean") {
-    await _setChamberState(item, { loaded: snapshot.chamberLoaded });
-  }
+  state.rounds = [...snapshot.rounds];
+  state.chamber = snapshot.chamber;
+  await applyState(item, state);
 }
 
 async function _processSingleShotAttack(activity, liveItem, snapshot) {
@@ -1725,13 +2217,12 @@ function _canCycleReloadWithoutAmmo(item, mag = getMag(item), reloadState = _get
   return _getChamberState(item, mag).loaded !== true;
 }
 
-async function _completeCycleReload(item, { chat = true } = {}) {
-  return _performReloadAction(item, { chat, spendResource: true, source: "button" });
-}
-
 /**
- * Predykaty reguł wystawione dla testów Quench (`scripts/tests/`). Wyłącznie odczyt —
- * pozwalają sprawdzić Sztuczkę „Szybkie palce" bez przechodzenia przez dialog przeładowania.
+ * Predykaty reguł wystawione dla testów Quench (`scripts/tests/magazynki.test.mjs`).
+ * Wyłącznie odczyt — pozwalają sprawdzić reguły bez przechodzenia przez dialogi.
+ *
+ * `findReadyMagazine` i `restoreQuantumMagazinesForActor` zniknęły razem z magazynkami
+ * kwantowymi; testy, które ich używały, opisywały mechanikę, której już nie ma.
  */
 export const __testing = Object.freeze({
   MAGAZINE_TYPES,
@@ -1739,8 +2230,11 @@ export const __testing = Object.freeze({
   manualReloadMode: _getManualReloadMode,
   ignoresManualReloadMode: _ignoresManualReloadMode,
   requiresManualReloadBeforeUse: _requiresManualReloadBeforeUse,
-  findReadyMagazine: _findReadyMagazine,
   chooseFamilyAmmo: _chooseFamilyAmmo,
   findAmmo: _findAmmo,
-  restoreQuantumMagazinesForActor: _restoreQuantumMagazinesForActor
+  hasRemovableSource: _hasRemovableSource,
+  sourceNoun: _sourceNoun,
+  sourceLabel: _sourceLabel,
+  chamberState: _getChamberState,
+  queueChips: _queueChips
 });

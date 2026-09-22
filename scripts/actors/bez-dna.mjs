@@ -52,6 +52,7 @@
  * live fix on Raynald specifically, not this guard's job).
  */
 import { ABILITY_KEYS, ABILITY_DEFINITIONS, hasAbility } from "./abilities.mjs";
+import { isDocumentLive } from "../doc-liveness.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 // Musi być dokładnie 16 znaków [A-Za-z0-9] — wymóg Foundry dla _id dokumentu (policzone wprost:
@@ -109,6 +110,9 @@ function _onPreCreateItem(item, _data, _options, _userId) {
  */
 async function _syncBezDnaEffect(actor) {
   if (!actor?.effects) return;
+  /* Debounce sprawia, że ten sync budzi się po haku, który go zamówił — czasem już po
+     skasowaniu aktora. Patrz `scripts/doc-liveness.mjs`. */
+  if (!isDocumentLive(actor)) return;
   const existing = actor.effects.get(EFFECT_ID) ?? actor.effects.find(e => e.getFlag(MODULE_ID, EFFECT_FLAG));
   const should = _hasBezDna(actor);
 
