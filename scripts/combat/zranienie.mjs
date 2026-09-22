@@ -40,6 +40,7 @@ import { addExhaustion } from "../config/exhaustion.mjs";
 import { critSkipsZranienie } from "./crit-riders.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
 import { registerHudLevelled } from "../actors/levelled-conditions.mjs";
+import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -356,19 +357,14 @@ async function _syncZranieniEffect(actor, level) {
   const changes = [];
   if (info.speedPenalty) {
     for (const moveType of ["walk", "fly", "swim", "climb", "burrow"]) {
-      changes.push({
-        key: `system.attributes.movement.${moveType}`,
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-        value: String(-info.speedPenalty),
-        priority: 20
-      });
+      changes.push(change(`system.attributes.movement.${moveType}`, CHANGE_TYPE.add, -info.speedPenalty));
     }
   }
 
   const effectData = {
     name: `Zranienie: ${info.label}`,
     img: _zranienieImage(level),
-    changes,
+    system: { changes },
     // Lights the token icon. The status id is what makes this effect and the HUD
     // button the same thing rather than two things that look alike.
     statuses: ["zranienie"],

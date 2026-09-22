@@ -65,6 +65,7 @@
  */
 import { udzwigStatus } from "./encumbrance-breakdown.mjs";
 import { isDocumentLive } from "../doc-liveness.mjs";
+import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 // Dokładnie 16 znaków [A-Za-z0-9] — wymóg Foundry dla _id dokumentu (policzone wprost:
@@ -73,12 +74,8 @@ const EFFECT_ID = "neuroUdzwigSlow0";
 const EFFECT_FLAG = "udzwigSlowZone";
 
 const ZONE_CHANGES = {
-  przeciazenie: [
-    { key: "system.attributes.movement.walk", mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY, value: "0.5" }
-  ],
-  nieruchomienie: [
-    { key: "system.attributes.movement.walk", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: "0" }
-  ]
+  przeciazenie: [change("system.attributes.movement.walk", CHANGE_TYPE.multiply, 0.5)],
+  nieruchomienie: [change("system.attributes.movement.walk", CHANGE_TYPE.override, 0)]
 };
 
 const ZONE_NAMES = {
@@ -121,7 +118,7 @@ async function _syncUdzwigSlowEffect(actor) {
     _id: EFFECT_ID,
     name: ZONE_NAMES[zone],
     img: "icons/svg/downgrade.svg",
-    changes: ZONE_CHANGES[zone],
+    system: { changes: ZONE_CHANGES[zone] },
     flags: { [MODULE_ID]: { [EFFECT_FLAG]: zone } }
   };
 

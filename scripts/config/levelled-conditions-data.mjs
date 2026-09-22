@@ -15,13 +15,10 @@
  *   radioaktywne [ZAGROŻENIE]".
  */
 
-// CONST.ACTIVE_EFFECT_MODES, spelled out — this module is imported by node syntax
-// checks and the pack builder, where the Foundry globals do not exist.
-const MULTIPLY = 1;
-const ADD = 2;
+import { CHANGE_TYPE, change } from "./effect-changes.mjs";
 
 /** Disadvantage (-1) / advantage (+1) on an ability's checks. */
-const check = (abl, v = -1) => ({ key: `system.abilities.${abl}.check.roll.mode`, mode: ADD, value: String(v) });
+const check = (abl, v = -1) => change(`system.abilities.${abl}.check.roll.mode`, CHANGE_TYPE.add, v);
 
 const ALL_ABILITIES = ["str", "dex", "con", "int", "wis", "cha"];
 
@@ -34,7 +31,7 @@ const ALL_ABILITIES = ["str", "dex", "con", "int", "wis", "cha"];
 const allChecks = (v = -1) => ALL_ABILITIES.map(a => check(a, v));
 
 /** Szybkość spada o połowę. */
-const speedHalf = { key: "system.attributes.movement.walk", mode: MULTIPLY, value: "0.5" };
+const speedHalf = change("system.attributes.movement.walk", CHANGE_TYPE.multiply, 0.5);
 
 /* -------------------------------------------- */
 /*  Upojenie                                     */

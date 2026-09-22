@@ -22,6 +22,7 @@ import { registerSztuczkiCombatTests } from "./sztuczki-combat.test.mjs";
 import { registerConfigTests } from "./config.test.mjs";
 import { registerEquipmentDataTests } from "./ekwipunek-dane.test.mjs";
 import { registerDiseaseTests } from "./choroby.test.mjs";
+import { registerEffectChangesTests } from "./efekty-zmiany.test.mjs";
 import { registerAmmoTests } from "./amunicja.test.mjs";
 import { registerMagazynkiTests } from "./magazynki.test.mjs";
 import { registerWeaponStateTests } from "./stany-broni.test.mjs";
@@ -37,6 +38,7 @@ export function registerQuenchTests() {
     registerConfigTests(quench);
     registerEquipmentDataTests(quench);
     registerDiseaseTests(quench);
+    registerEffectChangesTests(quench);
     registerAmmoTests(quench);
     registerMagazynkiTests(quench);
     registerWeaponStateTests(quench);

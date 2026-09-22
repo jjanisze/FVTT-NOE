@@ -4981,11 +4981,9 @@ porównanie dokładne — „Desert Eagle" jest podciągiem „Złoty Desert Eag
 Stan po poprawkach: **5 pełnych przebiegów z rzędu 412/412, zero dymków, zero nieobsłużonych
 odrzuceń.**
 
-**Nienaprawione, do osobnej decyzji:** `CONST.ACTIVE_EFFECT_MODES` jest w v14 przestarzałe
-(usunięcie w v16, zamiennik `CONST.ACTIVE_EFFECT_CHANGE_TYPES` ze **stringowymi** typami zmian).
-13 użyć w module, m.in. `udzwig-slowdown.mjs:77,80` — to one sypią ostrzeżeniem zaraz po
-zalogowaniu. Migracja dotyka działających efektów, więc zasługuje na własne testy, a nie na
-doklejenie do tej gałęzi.
+**Zrobione 2026-09-22 (patrz „Efekty Aktywne" niżej):** `CONST.ACTIVE_EFFECT_MODES` zniknieło
+z modułu — wszystkie zmiany idą teraz stringowym `type` pod `system.changes`, z jawnym
+priorytetem z `config/effect-changes.mjs`.
 
 ### Trzy rzeczy, które wyszły dopiero na żywo
 
@@ -5021,7 +5019,56 @@ doklejenie do tej gałęzi.
 | Naturalna 1 → trwałe zacięcie broni NPC (osobna zasada od `jams.mjs`) | `PLAN_magazynki.md` §9 |
 | Dante (Obrzyn) i Kluczyk (Kusza bloczkowa) z folderu `PC` stoją puste po sweepie projekcji | jedna decyzja MG: dopełnić ręcznie albo puścić na nich migrację |
 | Przebudowa packa `bron` przy zamkniętym Foundry | patrz „Stan końcowy (36)" |
-| Migracja `CONST.ACTIVE_EFFECT_MODES` → stringowe `type` (v14 → v16) | `HANDOFF_active_effect_modes.md` |
+| Migracja `CONST.ACTIVE_EFFECT_MODES` → stringowe `type` (v14 → v16) | zrobione 2026-09-22, patrz „Efekty Aktywne" |
+
+### Efekty Aktywne: stringowe `type`, `system.changes`, domowe priorytety (2026-09-22)
+
+Zamknięcie `HANDOFF_active_effect_modes.md` — obie przeprowadzki naraz, bo to jedna
+deprecjacja (v14 → usunięcie w v16) w tych samych 19 miejscach: liczbowy `mode` → stringowy
+`type`, tablica `changes` → `system.changes`. Słownik jednego miejsca:
+`scripts/config/effect-changes.mjs` (`CHANGE_TYPE`, `CHANGE_PRIORITY`, `change()`,
+`normalizeChanges()`), importowalny też z Node — pack builder i `node --check` nie mają `CONST`.
+
+**Realny błąd, którego hand-off nie przewidział.** `syncDiseaseEffects` i
+`syncLevelledConditions` porównywały `JSON.stringify(current.changes)` ze świeżo zbudowanymi
+danymi, żeby pisać tylko przy różnicy. Te dwie strony **nigdy nie były równe**: efekt z bazy
+niesie `phase: "initial"` i `value` sparsowane przez rdzeń z `"18"` na `18`, a nasz `target`
+miał `mode: 4` i `value: "18"`. Zmierzone na żywo na Syndromie Draculi Carsona — `differs`
+zwracało `true` zawsze, więc **każdy resync przepisywał każdy swój efekt**. Stąd
+`normalizeChanges()`: porównuje tylko to, co decyduje o zachowaniu, z `value` sprowadzonym
+do stringa.
+
+**Decyzja o zasadach — kolejność modyfikatorów Szybkości.** Foundry sortuje zmiany po
+`priority`, remisy zostawia w kolejności dokumentów (a tej `createEmbeddedDocuments` nie
+gwarantuje). W 14.364 dotyczy to *wszystkich* zmian bez jawnego priorytetu:
+`ActiveEffect#prepareBaseData` czyta `CHANGE_TYPES[type]?.priority`, a te wpisy trzymają
+liczbę pod `defaultPriority` — więc odczyt jest zawsze `undefined` i wygrywa `?? 0`.
+Domyślna kolejność per typ jest dziś martwa i włączy się sama, gdy rdzeń to naprawi.
+
+Zmierzone przed zmianą (Szybkość bazowa 9 m, Zranienie Lekkie −4,5 m + Przeciążenie ×½):
+**0 m** — połowienie wchodziło przed karą płaską, więc lekko ranny i przeciążony bohater
+stał w miejscu, nie dotknąwszy udźwigu maksymalnego. Ustalone: **kara płaska najpierw**,
+czyli `(9 − 4,5) × ½ = 2,25 m`. Drabinka to drabinka Foundry’ego z **zamienionymi miejscami
+`add` i `multiply`** (add/subtract 10, multiply 20, downgrade 30, upgrade 40, override 50);
+`override` zostaje na szczycie, żeby „spada do 0" zawsze wygrywało.
+
+**Stan świata się sam nie naprawi.** Synchronizatory przepisują efekt dopiero przy zmianie
+stanu, a stan przeciążonej postaci się nie zmienił — sucha próba znalazła 16 efektów ze
+starym priorytetem, w tym Przeciążenie Kluczyka (`multiply` z priorytetem 0). Skrypt:
+`game.modules.get("neuroshima-2026-overrides").api.migration.migrateEffectPriorities()`
+(raport), `{ commit: true }` (zapis). Tyka wyłącznie `priority` — `type` i `value` migruje
+rdzeń przy każdym odczycie i nie ma czego poprawiać.
+
+**Pokrycie:** nowa paczka Quench `efekty-zmiany` (kształt wpisów w danych, `normalizeChanges`,
+reguła 2,25 m na żywym aktorze, zbieżność resynców). 453/453 w dwóch przebiegach z rzędu.
+
+**Zostało do zrobienia ręcznie:**
+
+| Krok | Uwaga |
+|---|---|
+| `npm run build:packs` + `npm run validate:packs` | przy **zamkniętym** Foundry — `armor-data.mjs` i `chemia-data.mjs` zasilają packi `pancerze`/`lekarstwa` |
+| `api.migration.migrateEffectPriorities({ commit: true })` | 16 efektów w świecie |
+| Skasować aktora i makro `[TEST AE] …` | ławka testowa, patrz niżej |
 
 ### Widoczność broni bez magazynka + pasek plakietek stanu (2026-09-22)
 

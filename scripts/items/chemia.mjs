@@ -46,6 +46,7 @@ import {
   addExhaustion, removeExhaustion, getExhaustionSources
 } from "../config/exhaustion.mjs";
 import { applyZranienie, getZranienieLvl, setZranienie } from "../combat/zranienie.mjs";
+import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
 
 import { provenanceBadge } from "../actors/handy-items.mjs";
 
@@ -213,15 +214,11 @@ async function _applyPainkillerDose(actor, def, key, item, lines) {
 
   const p = m.dosePenalty;
   const penalty = doses * p.perDose;
-  const changes = [{
-    key: `system.abilities.${p.ability}.bonuses.check`,
-    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-    value: String(penalty)
-  }];
+  const changes = [change(`system.abilities.${p.ability}.bonuses.check`, CHANGE_TYPE.add, String(penalty))];
 
   const existing = _actorEffect(actor, key, "dosePenalty");
-  if (existing) await existing.update({ changes });
-  else await _applyEffect(actor, key, "dosePenalty", item, [], { changes });
+  if (existing) await existing.update({ system: { changes } });
+  else await _applyEffect(actor, key, "dosePenalty", item, [], { system: { changes } });
 
   lines.push(`Przywrócone PW: <strong>${m.hpPerDose}</strong>. `
     + `Tabletek w organizmie: <strong>${doses}</strong> → <strong>${penalty}</strong> do testów Mądrości.`);

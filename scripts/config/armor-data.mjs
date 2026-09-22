@@ -38,6 +38,8 @@
  *   note, manual
  */
 
+import { CHANGE_TYPE, change } from "./effect-changes.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 
 /** Typy obrażeń objęte progiem i odpornością kinetyczną. */
@@ -258,7 +260,7 @@ function _effects(a) {
     effects.push({
       name: `${a.name} — bonus do TT`,
       img,
-      changes: [{ key: "system.attributes.ac.bonus", mode: 2, value: String(a.acBonus), priority: 20 }],
+      system: { changes: [change("system.attributes.ac.bonus", CHANGE_TYPE.add, a.acBonus)] },
       disabled: false,
       transfer: true
     });
@@ -268,9 +270,9 @@ function _effects(a) {
     effects.push({
       name: `${a.name} — odporność kinetyczna`,
       img,
-      changes: KINETIC_DAMAGE_TYPES.map(t => ({
-        key: "system.traits.dr.value", mode: 2, value: t, priority: 20
-      })),
+      system: {
+        changes: KINETIC_DAMAGE_TYPES.map(t => change("system.traits.dr.value", CHANGE_TYPE.add, t))
+      },
       disabled: false,
       transfer: true
     });

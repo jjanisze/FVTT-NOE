@@ -44,6 +44,7 @@ import { registerZetonLuxorMigration } from "./migration/migrate-zeton-luxor.mjs
 import { registerRescaleSurowceMigration } from "./migration/rescale-surowce-units.mjs";
 import { registerGadzetyMigration } from "./migration/migrate-gadzety.mjs";
 import { registerToolSubstitutesMigration } from "./migration/migrate-tool-substitutes.mjs";
+import { registerEffectPrioritiesMigration } from "./migration/migrate-effect-priorities.mjs";
 import { registerSrdCleanup } from "./config/srd-cleanup.mjs";
 import { registerClassRules } from "./actors/class-rules.mjs";
 import { registerCichyKrok } from "./actors/cichy-krok.mjs";
@@ -216,6 +217,7 @@ Hooks.once("init", () => {
   registerRescaleSurowceMigration();
   registerGadzetyMigration();
   registerToolSubstitutesMigration();
+  registerEffectPrioritiesMigration();
   registerSrdCleanup();
   registerClassRules();
   registerCichyKrok();

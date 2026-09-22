@@ -131,12 +131,9 @@ export function registerUdzwigTests(quench) {
         const effect = actor.effects.get(slowdown.EFFECT_ID);
         expect(effect, "efekt utworzony").to.exist;
         expect(effect.getFlag(MODULE_ID, slowdown.EFFECT_FLAG)).to.equal("przeciazenie");
-        // Foundry normalises `changes[].value` to a real number on read-back even
-        // though it's assigned as a string in `ZONE_CHANGES` (matching `bez-dna.mjs`'s
-        // own `String(MULTIPLIER)` convention for the same field) — asserted as given.
-        expect(effect.changes[0]).to.include({
+        expect(effect.system.changes[0]).to.include({
           key: "system.attributes.movement.walk",
-          mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
+          type: "multiply",
           value: 0.5
         });
         expect(actor.system.attributes.movement.walk).to.equal(4.5);
@@ -147,9 +144,9 @@ export function registerUdzwigTests(quench) {
         await slowdown.syncUdzwigSlowEffect(actor);
         const effect = actor.effects.get(slowdown.EFFECT_ID);
         expect(effect.getFlag(MODULE_ID, slowdown.EFFECT_FLAG)).to.equal("nieruchomienie");
-        expect(effect.changes[0]).to.include({
+        expect(effect.system.changes[0]).to.include({
           key: "system.attributes.movement.walk",
-          mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
+          type: "override",
           value: 0
         });
         expect(actor.system.attributes.movement.walk).to.equal(0);

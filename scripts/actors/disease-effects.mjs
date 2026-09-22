@@ -30,6 +30,7 @@
  */
 
 import { effectsFor } from "../config/disease-effects.mjs";
+import { normalizeChanges } from "../config/effect-changes.mjs";
 import { getChoroby } from "./health-panel.mjs";
 import { DISEASE_STAGES, NO_REST_FLAG, getDisease, diseaseStages, isBaselineChronic } from "../config/diseases-data.mjs";
 
@@ -127,7 +128,7 @@ function _buildEffect(entry, spec, conditional) {
       ? `${entry.name} — ${source.label}`
       : `${entry.name}${staged && stageLabel ? ` — ${stageLabel}` : ""}`,
     img: "icons/svg/biohazard.svg",
-    changes: changes.map(c => ({ ...c })),
+    system: { changes: changes.map(c => ({ ...c })) },
     statuses: [...statuses],
     // FVTT v14: `isTemporary` liczy tylko czas trwania, a domyślne `CONDITIONAL`
     // znaczy „rysuj tylko, jeśli tymczasowy" — bez tego ikona nie wchodzi na żeton.
@@ -183,10 +184,12 @@ async function syncDiseaseEffects(actor) {
 
     // Only write when something actually differs: this resync runs on every
     // disease-flag change, and a pointless update re-renders every open sheet.
+    // `changes` has to go through `normalizeChanges` — a stored effect never
+    // matches freshly built data literally (see that function's own note).
     const current = effect.toObject();
     const differs = current.name !== target.name
       || current.showIcon !== target.showIcon
-      || JSON.stringify(current.changes) !== JSON.stringify(target.changes)
+      || normalizeChanges(current.system?.changes) !== normalizeChanges(target.system.changes)
       || JSON.stringify([...(current.statuses ?? [])].sort())
          !== JSON.stringify([...target.statuses].sort());
     if (differs) toUpdate.push({ _id: effect.id, ...target });

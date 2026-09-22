@@ -61,6 +61,7 @@
  */
 import { registerStealthExemption } from "./armor-rules.mjs";
 import { isDocumentLive } from "../doc-liveness.mjs";
+import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const ABILITY_ID = "cichy-krok";
@@ -108,12 +109,9 @@ async function _syncCichyKrokTerrain(actor) {
       _id: TERRAIN_EFFECT_ID,
       name: "Cichy krok",
       img: featureItem?.img || "icons/svg/upgrade.svg",
-      changes: [{
-        key: "system.attributes.movement.ignoredDifficultTerrain",
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-        value: "all",
-        priority: 20
-      }],
+      system: {
+        changes: [change("system.attributes.movement.ignoredDifficultTerrain", CHANGE_TYPE.add, "all")]
+      },
       flags: { [MODULE_ID]: { [TERRAIN_EFFECT_FLAG]: true } }
     }], { keepId: true });
   } catch (err) {

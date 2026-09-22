@@ -53,6 +53,7 @@
  */
 import { ABILITY_KEYS, ABILITY_DEFINITIONS, hasAbility } from "./abilities.mjs";
 import { isDocumentLive } from "../doc-liveness.mjs";
+import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 // Musi być dokładnie 16 znaków [A-Za-z0-9] — wymóg Foundry dla _id dokumentu (policzone wprost:
@@ -127,12 +128,9 @@ async function _syncBezDnaEffect(actor) {
       _id: EFFECT_ID,
       name: "Bez dna (Pakowanie)",
       img: "icons/svg/upgrade.svg",
-      changes: [{
-        key: "system.attributes.encumbrance.multipliers.overall",
-        mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY,
-        value: String(MULTIPLIER),
-        priority: 20
-      }],
+      system: {
+        changes: [change("system.attributes.encumbrance.multipliers.overall", CHANGE_TYPE.multiply, MULTIPLIER)]
+      },
       flags: { [MODULE_ID]: { [EFFECT_FLAG]: true } }
     }], { keepId: true });
   } catch (err) {

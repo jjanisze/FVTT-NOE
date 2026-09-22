@@ -44,20 +44,14 @@
  */
 
 import { SCHIZOFRENIA_PARANOIDALNA_ID } from "../wkk/config/diseases-data.mjs";
-
-// CONST.ACTIVE_EFFECT_MODES, spelled out: this module is imported by the pack
-// builder and by node syntax checks, where the Foundry globals do not exist.
-const MULTIPLY = 1;
-const ADD = 2;
-const UPGRADE = 4;
-const OVERRIDE = 5;
+import { CHANGE_TYPE, change } from "./effect-changes.mjs";
 
 /** Disadvantage (-1) / advantage (+1) on an ability's checks. */
-const check = (abl, v = -1) => ({ key: `system.abilities.${abl}.check.roll.mode`, mode: ADD, value: String(v) });
+const check = (abl, v = -1) => change(`system.abilities.${abl}.check.roll.mode`, CHANGE_TYPE.add, v);
 /** Disadvantage / advantage on an ability's saving throws. */
-const save = (abl, v = -1) => ({ key: `system.abilities.${abl}.save.roll.mode`, mode: ADD, value: String(v) });
+const save = (abl, v = -1) => change(`system.abilities.${abl}.save.roll.mode`, CHANGE_TYPE.add, v);
 /** Disadvantage / advantage on a named skill. */
-const skill = (id, v = -1) => ({ key: `system.skills.${id}.roll.mode`, mode: ADD, value: String(v) });
+const skill = (id, v = -1) => change(`system.skills.${id}.roll.mode`, CHANGE_TYPE.add, v);
 
 const ALL_ABILITIES = ["str", "dex", "con", "int", "wis", "cha"];
 /** "Utrudnienie we wszystkich Testach" — every ability check, and so every skill. */
@@ -73,8 +67,11 @@ const allSaves = (v = -1) => ALL_ABILITIES.map(a => save(a, v));
 const wplywanie = (v = -1) => [skill("zas", v), skill("osz", v), skill("per", v)];
 
 /** Speed to zero / halved. */
-const speedZero = { key: "system.attributes.movement.walk", mode: OVERRIDE, value: "0" };
-const speedHalf = { key: "system.attributes.movement.walk", mode: MULTIPLY, value: "0.5" };
+const speedZero = change("system.attributes.movement.walk", CHANGE_TYPE.override, 0);
+const speedHalf = change("system.attributes.movement.walk", CHANGE_TYPE.multiply, 0.5);
+
+/** Syndrom Draculi's night sight, identical at every stage. */
+const darkvision = () => change("system.attributes.senses.darkvision", CHANGE_TYPE.upgrade, 18);
 
 /**
  * Paranoja's stage effects, shared verbatim with the WKK-only `schizofreniaParanoidalna`
@@ -130,7 +127,7 @@ export const DISEASE_EFFECTS = Object.freeze({
   syndromDraculi: {
     0: {
       // Darkvision is unconditional; the daylight penalty is not.
-      changes: [{ key: "system.attributes.senses.darkvision", mode: UPGRADE, value: "18" }],
+      changes: [darkvision()],
       conditional: {
         label: "w świetle dziennym",
         changes: [skill("prc")],
@@ -138,14 +135,14 @@ export const DISEASE_EFFECTS = Object.freeze({
       }
     },
     1: {
-      changes: [{ key: "system.attributes.senses.darkvision", mode: UPGRADE, value: "18" }],
+      changes: [darkvision()],
       conditional: {
         label: "na słońcu",
         tick: { formula: "1d4", type: "light", period: "minutę" }
       }
     },
     2: {
-      changes: [{ key: "system.attributes.senses.darkvision", mode: UPGRADE, value: "18" }],
+      changes: [darkvision()],
       conditional: {
         label: "w świetle",
         tick: { formula: "1d6", type: "light", period: "minutę" }
@@ -158,15 +155,15 @@ export const DISEASE_EFFECTS = Object.freeze({
     0: { changes: [check("int")] },
     1: {
       changes: [
-        { key: "system.abilities.int.value", mode: OVERRIDE, value: "6" },
+        change("system.abilities.int.value", CHANGE_TYPE.override, 6),
         check("cha")
       ]
     },
     2: {
       changes: [
-        { key: "system.abilities.int.value", mode: OVERRIDE, value: "2" },
+        change("system.abilities.int.value", CHANGE_TYPE.override, 2),
         check("cha"),
-        { key: "system.traits.ci.value", mode: ADD, value: "frightened" }
+        change("system.traits.ci.value", CHANGE_TYPE.add, "frightened")
       ],
       manual: "W walce używasz tylko broni improwizowanej lub ataków bez broni."
     }

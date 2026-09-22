@@ -31,6 +31,7 @@
 import { LEVELLED_CONDITIONS, UPOJENIE_LEVELS, SKAZENIE_LEVELS,
   UPOJENIE_DRINK_DC, UPOJENIE_SOBER_DC, SKAZENIE_DISEASE_THRESHOLD } from "../config/levelled-conditions-data.mjs";
 import { addExhaustion } from "../config/exhaustion.mjs";
+import { normalizeChanges } from "../config/effect-changes.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
 import { addDisease, getChoroby } from "./health-panel.mjs";
 import { STATE_COLORS } from "../config/state-colors.mjs";
@@ -314,7 +315,7 @@ function _buildEffect(id, level) {
   return {
     name: `${def.label} ${level}`,
     img: `modules/${MODULE_ID}/icons/statuses/${id}.svg`,
-    changes,
+    system: { changes },
     statuses: [...new Set(statuses)],
     // FVTT v14: `isTemporary` liczy tylko czas trwania, a domyślne `CONDITIONAL`
     // znaczy „rysuj tylko, jeśli tymczasowy" — bez tego ikona nie wchodzi na żeton.
@@ -351,11 +352,13 @@ export async function syncLevelledConditions(actor) {
     wanted.delete(id);
 
     // Only write on a real difference — this runs on every level change, and a
-    // pointless update re-renders every open sheet.
+    // pointless update re-renders every open sheet. `changes` has to go through
+    // `normalizeChanges`: a stored effect never matches freshly built data
+    // literally (see that function's own note).
     const current = effect.toObject();
     const differs = current.name !== target.name
       || current.showIcon !== target.showIcon
-      || JSON.stringify(current.changes) !== JSON.stringify(target.changes)
+      || normalizeChanges(current.system?.changes) !== normalizeChanges(target.system.changes)
       || JSON.stringify([...(current.statuses ?? [])].sort()) !== JSON.stringify([...target.statuses].sort());
     if (differs) toUpdate.push({ _id: effect.id, ...target });
   }

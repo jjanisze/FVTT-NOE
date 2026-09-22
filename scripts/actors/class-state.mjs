@@ -18,6 +18,7 @@
 
 import { CLASS_FEATURES } from "../config/class-features-data.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
+import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -79,14 +80,14 @@ const STATE_CONFIG = {
       // Obłęd Berserkera — +mod SIŁ to TT while unarmoured. dnd5e evaluates this
       // against the actor's roll data; the armour condition is enforced in
       // `_berserkAcBonus` below, which zeroes it out when armour is worn.
-      { key: "system.attributes.ac.bonus", mode: 2, value: "0", priority: 30 },
+      change("system.attributes.ac.bonus", CHANGE_TYPE.add, 0),
       // Obrażenia Berserkera — extra damage die on Strength-based attacks (weapon
       // or unarmed), scaling with Brutal level. Same dnd5e bonus path (`mwak`)
       // stock Rage uses, and the same scope limitation: melee only, not thrown.
-      { key: "system.bonuses.mwak.damage", mode: 2, value: "+@scale.brutal.obrazeniaBerserkera", priority: null },
+      change("system.bonuses.mwak.damage", CHANGE_TYPE.add, "+@scale.brutal.obrazeniaBerserkera"),
       // Siła Berserkera — advantage on Strength checks and Strength saves.
-      { key: "system.abilities.str.check.roll.mode", mode: 2, value: "1", priority: null },
-      { key: "system.abilities.str.save.roll.mode", mode: 2, value: "1", priority: null }
+      change("system.abilities.str.check.roll.mode", CHANGE_TYPE.add, 1),
+      change("system.abilities.str.save.roll.mode", CHANGE_TYPE.add, 1)
     ],
     // Chat card copy for the on/off transition. `detail` may be a function of the
     // actor, for values that depend on level (the damage die).
@@ -213,7 +214,7 @@ export async function toggleClassState(actor, abilityId, { spendUse = true } = {
   if (effectId === "neuro-berserk") {
     const bonus = _berserkAcBonus(actor);
     const acChange = changes.find(c => c.key === "system.attributes.ac.bonus");
-    if (acChange) acChange.value = String(bonus);
+    if (acChange) acChange.value = bonus;
   }
 
   const duration = {};
@@ -228,7 +229,7 @@ export async function toggleClassState(actor, abilityId, { spendUse = true } = {
     tint: cfg.tint ?? null,
     origin: item?.uuid ?? actor.uuid,
     duration,
-    changes,
+    system: { changes },
     flags: {
       [MODULE_ID]: {
         classState: effectId,

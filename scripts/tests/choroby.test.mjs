@@ -25,18 +25,16 @@ import {
   PHOBIAS, KOBALT_PHOBIAS, PHOBIA_SAVE, phobiaOptions, phobiaSaveDc, getPhobia
 } from "../config/phobias-data.mjs";
 import { CHEMIA, chemiaForDisease } from "../config/chemia-data.mjs";
+import { CHANGE_TYPE } from "../config/effect-changes.mjs";
 import { MODULE_ID } from "./helpers.mjs";
 
-const ADD = 2;
-const MULTIPLY = 1;
-const OVERRIDE = 5;
 const SPEED_KEY = "system.attributes.movement.walk";
 
 /** Ranga kary do Szybkości: brak < połowa < zero. */
 function speedRank(changes = []) {
   const speed = changes.filter(change => change.key === SPEED_KEY);
-  if (speed.some(change => change.mode === OVERRIDE && Number(change.value) === 0)) return 2;
-  if (speed.some(change => change.mode === MULTIPLY && Number(change.value) < 1)) return 1;
+  if (speed.some(change => change.type === CHANGE_TYPE.override && Number(change.value) === 0)) return 2;
+  if (speed.some(change => change.type === CHANGE_TYPE.multiply && Number(change.value) < 1)) return 1;
   return 0;
 }
 
@@ -50,7 +48,7 @@ function attackRank(spec) {
 function penalties(changes = []) {
   const out = new Map();
   for (const change of changes) {
-    if (change.mode !== ADD || !change.key.endsWith(".roll.mode")) continue;
+    if (change.type !== CHANGE_TYPE.add || !change.key.endsWith(".roll.mode")) continue;
     const value = Number(change.value);
     if (value >= 0) continue;
     out.set(change.key, Math.min(out.get(change.key) ?? 0, value));
@@ -63,7 +61,7 @@ function overriddenAbilities(changes = []) {
   const out = new Set();
   for (const change of changes) {
     const match = /^system\.abilities\.(\w+)\.value$/.exec(change.key);
-    if (match && change.mode === OVERRIDE) out.add(match[1]);
+    if (match && change.type === CHANGE_TYPE.override) out.add(match[1]);
   }
   return out;
 }

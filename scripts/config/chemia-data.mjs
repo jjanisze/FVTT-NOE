@@ -35,6 +35,7 @@
  */
 
 import { SCHIZOFRENIA_PARANOIDALNA_ID } from "../wkk/config/diseases-data.mjs";
+import { CHANGE_TYPE, change } from "./effect-changes.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -66,18 +67,12 @@ export const CHEMIA_SUBTYPES = Object.freeze({
 /*  Active Effect helpers                        */
 /* -------------------------------------------- */
 
-// CONST.ACTIVE_EFFECT_MODES, spelled out: this module is imported by the pack
-// builder and by node syntax checks, where the Foundry globals do not exist.
-const MULTIPLY = 1;
-const ADD = 2;
-const OVERRIDE = 5;
-
 /** Disadvantage (-1) / advantage (+1) on a named skill. */
-const skill = (id, v = -1) => ({ key: `system.skills.${id}.roll.mode`, mode: ADD, value: String(v) });
+const skill = (id, v = -1) => change(`system.skills.${id}.roll.mode`, CHANGE_TYPE.add, v);
 /** Flat numeric bonus to an ability's checks — Neuroshima's penalties are numbers, not Utrudnienie. */
-const checkBonus = (abl, v) => ({ key: `system.abilities.${abl}.bonuses.check`, mode: ADD, value: String(v) });
+const checkBonus = (abl, v) => change(`system.abilities.${abl}.bonuses.check`, CHANGE_TYPE.add, String(v));
 /** Advantage / disadvantage on an ability's saving throws. */
-const save = (abl, v = -1) => ({ key: `system.abilities.${abl}.save.roll.mode`, mode: ADD, value: String(v) });
+const save = (abl, v = -1) => change(`system.abilities.${abl}.save.roll.mode`, CHANGE_TYPE.add, v);
 
 /**
  * Every damage type in this world (`config/damage-types.mjs`), which is what
@@ -91,7 +86,7 @@ export const ALL_DAMAGE_TYPES = Object.freeze([
 
 /** Expand `immunity: true` into one ADD change per damage type. */
 export const immunityChanges = () =>
-  ALL_DAMAGE_TYPES.map(t => ({ key: "system.traits.di.value", mode: ADD, value: t }));
+  ALL_DAMAGE_TYPES.map(t => change("system.traits.di.value", CHANGE_TYPE.add, t));
 
 /* -------------------------------------------- */
 /*  The catalogue                                */
@@ -960,7 +955,7 @@ function effectData(key, role, spec) {
     _id: chemiaEffectId(key, role),
     name: spec.name,
     img: spec.icon ?? "icons/svg/pill.svg",
-    changes,
+    system: { changes },
     statuses: spec.statuses ?? [],
     duration,
     disabled: false,

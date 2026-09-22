@@ -1068,7 +1068,7 @@ function conditionEffect(c, entry, spec, kind) {
     _id: idFor("bestiary-effect", `${c.id}.${entry.id}.${spec.condition}`),
     name: label,
     img: `systems/dnd5e/icons/svg/statuses/${spec.condition}.svg`,
-    changes: [],
+    system: { changes: [] },
     statuses: [spec.condition],
     disabled: false,
     transfer: false,          // applies to the target, not to the creature itself

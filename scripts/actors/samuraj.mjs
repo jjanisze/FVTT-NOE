@@ -33,6 +33,7 @@
 
 import { ABILITY_KEYS, hasAbility } from "./abilities.mjs";
 import { isDocumentLive } from "../doc-liveness.mjs";
+import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const EFFECT_ID = "neuroSamurajTT00";
@@ -93,12 +94,9 @@ async function _syncSamurajEffect(actor) {
       _id: EFFECT_ID,
       name: "Samuraj — TT +1",
       img: "icons/svg/sword.svg",
-      changes: [{
-        key: "system.attributes.ac.bonus",
-        mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-        value: String(BONUS),
-        priority: 20
-      }],
+      system: {
+        changes: [change("system.attributes.ac.bonus", CHANGE_TYPE.add, BONUS)]
+      },
       flags: { [MODULE_ID]: { [EFFECT_FLAG]: true } }
     }], { keepId: true });
   } catch (err) {
