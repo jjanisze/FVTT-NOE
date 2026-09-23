@@ -62,6 +62,16 @@ wpisy z 2026-09-23. Skasuj ten plik, kiedy wszystko z §2 będzie zamknięte alb
    trzeba zsynchronizować (precedens: koktajl, jednorazowy skrypt), potem `npm run build:packs`
    przy zamkniętym Foundry.
 
+6. **Paczki „brudzą się" przy każdym uruchomieniu Foundry — przyczyna znaleziona.** To nie
+   kompakcja LevelDB, tylko migracja v14: `dev/packs/build-packs.mjs` wciąż zapisuje kształty
+   sprzed v14, a Foundry przy wczytaniu świata przepisuje je do `.log` każdej paczki. Sprawdzone
+   dokument po dokumencie (HEAD vs dysk, 2026-09-24) — bezstratnie, wyłącznie: dopisane domyślne
+   `_stats`/`folder`/`sort`/`ownership` (+ domyślne pola `prototypeToken`),
+   `duration: {seconds: N}` → `{value: N, units: "seconds", expiry, expired}` (8 efektów w
+   `lekarstwa`), `prototypeToken.detectionModes` tablica `[{id, …}]` → obiekt `{[id]: {…}}`
+   (9 aktorów Bestiariusza). Jeśli builder zacznie emitować kształty v14, churn zniknie, a commity
+   „routine" przestaną być potrzebne. Niepilne, mała robota.
+
 ## 3. Pułapki znalezione w tej sesji — nie odkrywaj ponownie
 
 - **Sequencer `.shape("rectangle")` rysuje od rogu**; opcja `anchor` kształtu nic nie robi.
