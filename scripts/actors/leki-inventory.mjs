@@ -63,10 +63,13 @@ function _onRenderActorSheetInjectLeki(app, html) {
     totalWeight += weight;
     totalPrice += price;
 
+    // Units are fungible — every per-dose state (daily doses, tolerance, pending effects) lives
+    // on the actor — so quantity is a plain stack count, same as Prowiant. Only a multi-dose
+    // package has something worth showing beyond it: what's left in the open one.
     const uses = item.system.uses ?? {};
-    const doseLabel = uses.max && Number(uses.max) > 1
-      ? `${(Number(uses.max) - Number(uses.spent ?? 0))}/${uses.max} dawek`
-      : `${qty} szt.`;
+    const doseLine = Number(uses.max) > 1
+      ? `<span class="neuro-leki-doses" style="font-size:0.8em; color:#8fa892;">${Number(uses.max) - Number(uses.spent ?? 0)}/${uses.max} dawek w opak.</span>`
+      : "";
 
     const activity = item.system.activities?.contents?.[0] ?? [...(item.system.activities ?? [])][0];
     const useLabel = activity?.name || "Zażyj";
@@ -79,16 +82,24 @@ function _onRenderActorSheetInjectLeki(app, html) {
     li.style.cssText = "list-style:none; margin-bottom:0;";
     li.innerHTML = `
       <div class="item-row flexrow" style="display:flex; align-items:center; justify-content:space-between; background-color:#1f2a22; min-height:42px; border-bottom:1px dotted #3a4a3d; padding:4px 5px; color:#cacdd5;">
-        <div class="item-name item-tooltip flexrow" style="flex:1.8; align-items:center; gap:8px; min-width:180px;">
+        <div class="item-name item-tooltip flexrow" style="flex:1.8; align-items:center; gap:8px; min-width:150px;">
           ${iconHtml}
-          <span class="title" style="color:#cacdd5; font-weight:500;">${item.name}</span>
+          <div style="display:flex; flex-direction:column; line-height:1.2;">
+            <span class="title" style="color:#cacdd5; font-weight:500;">${item.name}</span>
+            ${doseLine}
+          </div>
         </div>
-        <div class="item-detail" style="flex:0 0 90px; text-align:center;">${doseLabel}</div>
         <div class="item-detail" style="flex:0 0 70px; text-align:center;">${Math.round(price)} gb</div>
         <div class="item-detail" style="flex:0 0 70px; text-align:center;">${weight < 1 ? Math.round(weight * 1000) + " g" : weight.toFixed(2) + " kg"}</div>
-        <div class="item-detail item-controls always-visible" style="flex:0 0 174px; text-align:right; display:flex; align-items:center; justify-content:flex-end; gap:8px;">
+        <div class="item-detail item-quantity" style="flex:0 0 90px; display:flex; align-items:center; justify-content:space-evenly;">
+          <a class="adjustment-button always-interactive" data-action="decrease"><i class="fa-solid fa-minus" inert></i></a>
+          <input type="text" class="always-interactive neuro-leki-qty" value="${qty}" placeholder="0"
+            data-dtype="Number" inputmode="numeric" pattern="^(\\+|-|=)?\\d*" min="0" aria-label="Ilość" style="width:36px; text-align:center;">
+          <a class="adjustment-button always-interactive" data-action="increase"><i class="fa-solid fa-plus" inert></i></a>
+        </div>
+        <div class="item-detail item-controls always-visible" style="flex:0 0 100px; text-align:right; display:flex; align-items:center; justify-content:flex-end; gap:8px;">
           ${handyToggleHtml(item)}
-          <button type="button" class="unbutton config-button item-control item-take" title="${useLabel}" style="color:#9fd39f;"><i class="fas fa-syringe" inert></i> ${useLabel}</button>
+          <button type="button" class="unbutton config-button item-control item-take" title="${useLabel}" style="color:#9fd39f;"><i class="fas fa-syringe" inert></i></button>
           <button type="button" class="unbutton config-button item-control item-edit" title="Edytuj" style="color:#ccc;"><i class="fas fa-edit" inert></i></button>
           <button type="button" class="unbutton config-button item-control item-delete" title="Usuń" style="color:#ccc;"><i class="fas fa-trash" inert></i></button>
         </div>
@@ -96,6 +107,21 @@ function _onRenderActorSheetInjectLeki(app, html) {
     `;
 
     bindHandyToggle(li, item);
+
+    const input = li.querySelector(".neuro-leki-qty");
+    input.addEventListener("change", async e => {
+      const val = Math.max(0, parseInt(e.target.value, 10) || 0);
+      e.target.value = val;
+      await item.update({ "system.quantity": val });
+    });
+    for (const btn of li.querySelectorAll(".adjustment-button[data-action]")) {
+      btn.addEventListener("click", e => {
+        e.preventDefault();
+        const delta = btn.dataset.action === "increase" ? 1 : -1;
+        input.value = Math.max(0, (parseInt(input.value, 10) || 0) + delta);
+        input.dispatchEvent(new Event("change"));
+      });
+    }
 
     li.querySelector(".item-take").addEventListener("click", async ev => {
       ev.preventDefault();
@@ -115,10 +141,10 @@ function _onRenderActorSheetInjectLeki(app, html) {
   panel.innerHTML = `
     <div class="items-header header flexrow" style="display:flex; align-items:center; justify-content:space-between; background-color:#1f3324; min-height:30px; border-bottom:2px solid #FFFFFF; color:#FFFFFF; font-size:0.9em; font-weight:bold; padding:0 5px;">
       <h3 class="item-name" style="flex:1.8; margin:0; padding-left:5px; color:#FFFFFF; font-size:1.1em; text-decoration:none; border:none;">Leki</h3>
-      <div style="flex:0 0 90px; text-align:center;">Dawki</div>
       <div style="flex:0 0 70px; text-align:center;">Cena</div>
       <div style="flex:0 0 70px; text-align:center;">Waga</div>
-      <div style="flex:0 0 150px;"></div>
+      <div style="flex:0 0 90px; text-align:center;">Ilość</div>
+      <div style="flex:0 0 100px;"></div>
     </div>
   `;
   panel.appendChild(uiList);

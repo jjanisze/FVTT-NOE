@@ -121,7 +121,6 @@ import { registerPartySheet } from "./actors/party-sheet.mjs";
 import { registerPartyTravel, travelApi } from "./actors/party-travel.mjs";
 import { registerPartyLootLock } from "./actors/party-loot-lock.mjs";
 import { suppliesApi } from "./actors/party-supplies.mjs";
-import { registerSheetPositionStability } from "./actors/sheet-position-stability.mjs";
 import { registerDamageReductionUI } from "./weapons/damage-reduction.mjs";
 import { registerWeaponAddons } from "./weapons/addons.mjs";
 import { registerAddonInventoryUI } from "./actors/addons-inventory.mjs";
@@ -245,7 +244,6 @@ Hooks.once("init", () => {
   registerEncumbranceBreakdown();
   registerUdzwigSlowdown();
   registerUdzwigAttackDisadvantage();
-  registerSheetPositionStability();
   registerWeapons();
   registerArmor();
   registerArmorRules();

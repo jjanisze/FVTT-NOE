@@ -101,7 +101,7 @@ As of this writing:
 | `actors/ammo-inventory.mjs`, `magazine-inventory.mjs`, `grenade-inventory.mjs`, `surowce-inventory.mjs` | Custom inventory sub-panels (ammo/magazines/grenades/raw materials), native rows hidden to avoid duplication | Inventory tab |
 | `actors/addons-inventory.mjs` | Weapon-addon panel on weapon item sheets, context menu on loot | Item sheet, not actor sheet |
 | `actors/zbrojownia-sync.mjs` | GM "sync armory" button | Sheet header |
-| `actors/sheet-position-stability.mjs` | Snapshots/restores scroll position around the +/- clicks above | Whole sheet — **this one exists purely to patch a side effect of the injection approach**; if you move to a real sheet class (option B), check whether its problem still exists before porting it |
+| `actors/sheet-position-stability.mjs` | Snapshots/restores scroll position around the +/- clicks above | Whole sheet — **this one exists purely to patch a side effect of the injection approach**; if you move to a real sheet class (option B), check whether its problem still exists before porting it **Removed 2026-09-23:** superseded by `_preRender`/`_postRender` scroll restore in the sheet subclass (IMPLEMENTATION.md changelog) |
 | `config/srd-cleanup.mjs` | Hides fantasy classes/spells/races from pickers | Sheet + compendium browser |
 
 Ability hotbar (`actors/ability-hotbar.mjs`) also renders on-sheet UI (charge counters, active-state

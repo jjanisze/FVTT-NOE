@@ -53,7 +53,6 @@
 | `scripts/actors/ammo-inventory.mjs` | Natywne okno dodawania amunicji na karcie oraz UI Illusion (kategoria Amunicja); filtruje `magazine-*` |
 | `scripts/actors/grenade-inventory.mjs` | Sekcja „Materiały wybuchowe" — osobna tabela granatów/min/ładunków, rzut na scenę, karta czatu z RO/obrażeniami |
 | `scripts/actors/magazine-inventory.mjs` | Sekcja „Zapasowe Magazynki" — 6 typów, ±Ilość, ±Gotowych, dialog DODAJ MAGAZYNEK |
-| `scripts/actors/sheet-position-stability.mjs` | Stabilizacja pozycji karty aktora po klikach +/- w sekcjach inventory |
 | `scripts/weapons/magazine.mjs` | Magazynki Kwantowe + Strzelba Dual-Ammo (.12 Ga) + synchronizacja `system.uses` |
 | `scripts/weapons/fire-modes.mjs` | KS/DS/MS/OZ + synchronizacja aktywności |
 | `scripts/weapons/sounds.mjs` | Dźwięki broni i materiałów wybuchowych (strzały, eksplozje, zapalniki, miny) |
@@ -913,6 +912,50 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### Leki: ±Ilość jak w Prowiancie, jeden wiersz przy minimalnej szerokości (2026-09-23)
+
+`actors/leki-inventory.mjs`. Zgłoszone: (1) przy minimalnej szerokości karty przyciski
+Leków spadały do drugiej linii, (2) nie da się dodać/odjąć sztuki, choć leki to — w
+przeciwieństwie do broni czy magazynków — przedmioty bez własnych właściwości.
+
+**Brak ±Ilość nie miał uzasadnienia.** Sztuki są wymienne: flagi na itemie (`chemiaKey`,
+`doses`, `availability`, `treats`) to dane katalogowe, a cały stan dawkowania (dawki
+dzienne, tolerancja Painkillera, efekty odroczone) żyje na **aktorze**. Natywny `autoDestroy`
+i tak traktuje `quantity` jak stos. Kolumnę Ilość zajął po prostu przycisk „Zażyj" z pełną etykietą.
+Przy okazji wyszedł drugi błąd: dla opakowań wielodawkowych wiersz pokazywał tylko dawki,
+a liczba opakowań znikała (Painkiller ×4 u Alana wyglądał jak „10/10 dawek").
+
+Wiersz ma teraz układ Prowiantu: Cena | Waga | −Ilość+ | pas/Zażyj/edytuj/usuń; „Zażyj"
+jako sama ikona z podpowiedzią (jak „Rzuć" w Materiałach wybuchowych), dawki w otwartym
+opakowaniu jako podpis pod nazwą — tylko dla wielodawkowych. Zmierzone przy 800 px
+(minimum karty, wiersz 522 px): wysokość 42 px, bez zawijania, nagłówek równo z kolumnami.
+
+### Karta postaci: koniec skakania przewijania po kliknięciu +/- (2026-09-23)
+
+`actors/sheet-shell.mjs`. Zgłoszone: każde +/- w ekwipunku (woda, amunicja, cokolwiek)
+przewijało kartę o kilkaset pikseli w górę, więc drugi i trzeci klik trafiał w inny wiersz.
+**Błąd był nasz, nie dnd5e ani Foundry** — aktualizacja nic by nie dała.
+
+Zmierzone na żywo (Piekarz, Zasoby, `scrollTop` 422): tuż po podmianie partów
+`scrollHeight` `.main-content` spada z 1108 do 686 (= wysokość okna), przeglądarka przycina
+`scrollTop` do 0, a hooki `render*` dokładają panele z powrotem — ale przewinięcia już nikt
+nie przywraca. Przyczyna: w dnd5e przewija się **kontener** partów (`.main-content`), a
+`scrollable: [""]` z rdzenia pamięta tylko korzenie partów. Stockowi to nie szkodzi, bo jego
+szablony od razu mają pełną wysokość; nasz `tab-zasoby.hbs` jest pusty, dopóki nie wypełnią
+go hooki.
+
+Naprawa w podklasie arkusza: `_preRender` zapisuje przewinięcie `.main-content`,
+`_postRender` (w v14 wołany **po** wszystkich hookach `render*`) je przywraca. Działa dla
+każdego przycisku — naszego i natywnego — bez wiedzy, co kliknięto. Zweryfikowane: po trzy
+szybkie kliki (co 150 ms) na Litr Wody, 9 mm, manierce (Zasoby) i Żetonie Luxor (Ekwipunek)
+— `scrollTop` stoi w miejscu.
+
+**Usunięte `actors/sheet-position-stability.mjs`** — stara łatka tego samego objawu.
+Łapała tylko kliki w amunicji/magazynkach/granatach i natywne `system.quantity`, więc
+Prowiant/Leki/Surowce skakały dalej; `PLAN_sheet_shell.md` przewidywał, że po przejściu na
+własną klasę arkusza trzeba ją będzie zweryfikować. Bez testu Quench — `TESTING.md` §4
+wyłącza `ApplicationV2` z zakresu.
 
 ### Pościgi — przyciąganie do torów i recentrowanie pola (2026-09-12)
 

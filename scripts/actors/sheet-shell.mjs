@@ -110,6 +110,39 @@ function _buildSheetClass(Base, { name, drop, tabs, defaultTab }) {
     static TABS = tabs;
 
     tabGroups = { primary: defaultTab };
+
+    /** `.main-content` scroll offsets captured before a re-render. */
+    #mainScroll = null;
+
+    /**
+     * The sheet scrolls on the `.main-content` part *container*, which survives re-renders —
+     * but core's `scrollable` bookkeeping only covers part roots. Stock dnd5e gets away with it
+     * because its templates render at full height; ours don't: Zasoby is an empty template that
+     * render hooks fill in afterwards, so right after the part swap the container is briefly
+     * short, the browser clamps `scrollTop` (to 0 when the tab is emptied), and nothing restores
+     * it. Every +/- click then jumped the sheet. Snapshot here, restore in `_postRender`.
+     * @override
+     */
+    async _preRender(context, options) {
+      await super._preRender(context, options);
+      const el = this.element?.querySelector(".main-content");
+      this.#mainScroll = el ? { top: el.scrollTop, left: el.scrollLeft } : null;
+    }
+
+    /**
+     * Restore `.main-content` scroll. Core runs this after every `render*` hook, so the
+     * injected panels are already back and the restored offset isn't clamped again.
+     * @override
+     */
+    async _postRender(context, options) {
+      await super._postRender(context, options);
+      const saved = this.#mainScroll;
+      this.#mainScroll = null;
+      const el = saved && this.element?.querySelector(".main-content");
+      if (!el) return;
+      if (el.scrollTop !== saved.top) el.scrollTop = saved.top;
+      if (el.scrollLeft !== saved.left) el.scrollLeft = saved.left;
+    }
   };
   Object.defineProperty(cls, "name", { value: name, configurable: true });
   return cls;
