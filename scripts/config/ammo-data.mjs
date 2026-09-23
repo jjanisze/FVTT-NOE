@@ -301,14 +301,17 @@ export const AMMO_CATEGORIES = [...new Set(AMMO_CALIBERS.map(c => c.category))];
 /** Materiały wybuchowe (granaty, miny, ładunki), trzymane osobno od kalibrów i magazynków. */
 export const GRENADE_TYPES = [
   {
+    // RAW, *Sztuczki* → „Koktajl Mołotowa" (`8 SZTUCZKI/czesc-01.md`), przepisane 2026-09-23 —
+    // wcześniej 3 m / ST 12 / 2k6 ogień / „obszar pali się 1 rundę", nic z tego z podręcznika.
+    // Podpalanie butelki i jej 3-rundowy limit: `actors/molotov.mjs`.
     id: "grenade-molotov",
     label: "Koktajl Mołotowa",
     icon: "molotov_cocktail.svg",
     category: "Granaty",
-    area: "Sześcian 3 m",
-    save: "RO Zręczność ST 12",
-    effect: "Porażka: 2k6 ogień + Podpalenie. Obszar pali się 1 rundę.",
-    price: 15, avail: 70, weight: 0.8
+    area: "Sześcian 1,5 m",
+    save: "RO Zręczność ST 15",
+    effect: "Porażka: 1k6 ogień + 1k6 obuchowe + Podpalenie (1 min). Sukces: brak obrażeń.",
+    price: 10, avail: 70, weight: 1
   },
   {
     id: "grenade-antipersonnel-mine",

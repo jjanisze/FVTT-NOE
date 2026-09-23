@@ -52,6 +52,8 @@
 | `scripts/weapons/ammo.mjs` | System amunicji — sync obrażeń, auto-apply, przycisk Obrażenia |
 | `scripts/actors/ammo-inventory.mjs` | Natywne okno dodawania amunicji na karcie oraz UI Illusion (kategoria Amunicja); filtruje `magazine-*` |
 | `scripts/actors/grenade-inventory.mjs` | Sekcja „Materiały wybuchowe" — osobna tabela granatów/min/ładunków, rzut na scenę, karta czatu z RO/obrażeniami |
+| `scripts/actors/molotov.mjs` | Koktajl Mołotowa: podpalanie butelki (Akcja Bonusowa/Używanie + źródło ognia), migoczące światło, pęknięcie po 3 rundach |
+| `scripts/scenes/area-picker.mjs` | Wspólny wybór punktu na mapie z podglądem obszaru, linią zasięgu i pasmami (granaty, miny, kolczatka, flara, raca) |
 | `scripts/actors/magazine-inventory.mjs` | Sekcja „Zapasowe Magazynki" — 6 typów, ±Ilość, ±Gotowych, dialog DODAJ MAGAZYNEK |
 | `scripts/weapons/magazine.mjs` | Magazynki Kwantowe + Strzelba Dual-Ammo (.12 Ga) + synchronizacja `system.uses` |
 | `scripts/weapons/fire-modes.mjs` | KS/DS/MS/OZ + synchronizacja aktywności |
@@ -291,7 +293,7 @@ z siebie nic nie daje — poziomy, piki i cykl kliknięć musiały powstać od z
 - [x] Oddzielenie materiałów wybuchowych od sekcji Amunicja — osobna tabela „Materiały wybuchowe" w inventory
 - [x] Obsługiwane typy `grenade-*`: granaty, miny, ładunki zdalne, pipebomb, Mołotow i granat zapalający
 - [x] Klik na nazwę / przycisk „Rzuć" inicjuje wybór punktu na scenie, pomiar odległości i redukcję ilości
-- [x] Zasięg rzutu zależny od SIŁ i wagi ładunku; karta czatu pokazuje odległość i pasmo rzutu
+- [x] Zasięg rzutu: 9 + max(9, 9 × mod. SIŁ) — min. 18 m (RAI, sprzeczność reguła/przykład w podręczniku), bez wpływu wagi; karta czatu pokazuje odległość i czy w zasięgu (poprawione 2026-09-23 — wcześniej wymyślony model SIŁ × 2 / waga)
 - [x] Obszary efektu parsowane z definicji (`Koło`, `Sześcian`, wariant otwarty/budynek)
 - [x] Sześciany wybuchu renderowane jako `Drawing`, nie `MeasuredTemplate rect`, aby uniknąć artefaktów FVTT
 - [x] Miny stawiają marker uzbrojenia zamiast standardowego template wybuchu
@@ -912,6 +914,132 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### Granaty wybuchają na końcu tury; Koktajl Mołotowa wg RAW (2026-09-23)
+
+Nowy `actors/molotov.mjs`; `actors/grenade-inventory.mjs`, `combat/podpalenie.mjs`,
+`config/ammo-data.mjs`, `vfx/grenade-thrown.webp`. Zgłoszone: granat wybucha w chwili
+upadku, a RAW mówi „Granat eksploduje natychmiast po zakończeniu twojej tury".
+
+**Wybuch na końcu tury.** W walce każdy rzucony ładunek (poza minami) ląduje jako Tile z
+grafiką granatu (~0,3 pola, ok. 4× naturalnej wielkości) i czeka. Tile jest trwałym zapisem —
+cały stan w jego fladze `pendingCharge`, przeżywa F5 (sprawdzone). Nad nim Sequencer:
+pulsujący obrys rzeczywistego obszaru wybuchu i podpis „wybuch po turze: X", przypięte do
+Tile'a, więc znikają razem z nim. Aktywny MG odpala ładunek przy pierwszym z sygnałów:
+tura/runda przeszła (także wstecz), walka skasowana lub zatrzymana, aktywny uczestnik
+zmieniony (usunięty w trakcie swojej tury), czas świata +6 s; plus przegląd przy `ready`.
+Decyzje MG: rzut poza własną turą (np. sługa na rozkaz) wybucha na końcu **bieżącej** tury,
+czyjakolwiek jest; poza walką — od razu, jak dotąd. Dźwięk i pełna karta RO/obrażeń
+przeniesione na chwilę wybuchu; w chwili rzutu tylko krótka karta z odległością.
+
+**Koktajl Mołotowa — dane wg RAW** (`8 SZTUCZKI/czesc-01.md`): 1,5 m, RO Zręczność ST 15,
+1k6 ogień + 1k6 obuchowe + Podpalenie na 1 minutę, sukces — brak obrażeń, 1 kg, 10 gb. Było:
+3 m / ST 12 / 2k6 ogień / „obszar pali się 1 rundę" / 0,8 kg / 15 — nic z podręcznika. Karta
+czyta obszar/RO/efekt z katalogu na żywo; waga, cena i opis są kopiowane do itemu, więc trzy
+istniejące kopie (Buźka, Raynald, Zbrojownia) zsynchronizowane ręcznie. **Paczka `granaty`
+wymaga przebudowania** (`npm run build:packs` przy zamkniętym Foundry).
+
+**Podpalanie butelki — dwie akcje, dwa kliknięcia** (poprawione 2026-09-24, decyzja MG).
+Jeden przycisk w wierszu koktajlu zmienia się ze stanem: niezapalona → „Podpal" (tylko
+podpala), zapalona → „Rzuć" z odliczaniem rund. Pierwsza wersja łączyła oba w jednym
+kliknięciu („Podpalić i rzucić?") — wycofane: koszt w ekonomii akcji ma być widoczny, gracz,
+który zapali i zapomni, ma za to zapłacić, a żeton świeci między podpaleniem a rzutem choćby
+przez kilka sekund prawdziwego czasu. Niezapalonej rzucić się nie da; druga zapalona butelka
+naraz — odmowa. Zgasić się nie da („to koktajl, nie lampa"). Karta podaje koszt (Akcja
+Bonusowa lub Używanie) i **oznacza** brak źródła ognia w ekwipunku — nie blokuje. Zapalona butelka świeci (provider
+`light-sources.mjs`, 1,5/4,5 m, ta sama szarpana animacja co Flara) — celowo bez
+`enforceSingleLightSource`, bo koktajl podpala się często od pochodni. **Światło to reguła WKK**
+(RAW go nie zna): wartości w `wkk/config/molotov-light.mjs`, żywe tylko przy
+`isKobaltEnabled()`; bez Kobaltu butelka nie świeci ani w ręku, ani na ziemi. Wariant wzorca
+override'ów bez wartości RAW — opisany w `wkk/README.md` (decyzja MG 2026-09-24). Rzucona zabiera
+światło ze sobą: leży z własnym AmbientLight i płomykiem do chwili wybuchu. Po 3 pełnych
+rundach od zapalenia (co do tury; poza walką 18 s) butelka pęka — **w całości automatycznie**,
+łącznie z Podpaleniem trzymającego na minutę, bez RO i bez obrażeń (RAW: „pęka i podpala
+trzymającego"). Świadomy wyjątek od doktryny „wykrycie, nie zastosowanie": RAW nie zostawia tu
+MG żadnej decyzji, więc przycisk byłby formalnością (decyzja MG 2026-09-24).
+
+**Obrażenia z typami.** `_parseDamageSpec` zwraca `parts` — każdy człon z własnym typem.
+Wcześniej cała formuła szła jednym typem: koktajl 2k6 od ognia, odłamkowy/improwizowany/
+miny/pipebomb — wszystko „wybuchowe" zamiast wybuchowe + sieczne. Rzut z karty to teraz
+kilka `DamageRoll` w jednej wiadomości; panel Apply Damage dnd5e widzi je osobno
+(sprawdzone: 4 ogień + 3 obuchowe, Camel 17 → 10).
+
+**Podpalenie z karty — doktryna „wykrycie, nie zastosowanie".** Karta ma „Podpal
+zaznaczonych"; po „Rzuć RO" osobna karta wymienia, kto nie zdał, z przyciskiem „Podpal ich".
+Czas z opisu efektu — „Podpalenie (1 min)" = 10 rund przez nowe `igniteFor()` w
+`podpalenie.mjs` (domyślne 2 rundy stanu zostają dla innych źródeł; już płonący tylko dostaje
+dołożone rundy, ogień się nie restartuje). Tyknięcie 1k4 na początku tury płonącego — bez zmian.
+
+Zweryfikowane na żywo (Piekarz vs Camel, w walce): zapalenie → światło na żetonie; rzut →
+Tile + światło na ziemi, zero wybuchu; koniec tury Piekarza → wybuch, karta, marker; RO 8 vs 15
+→ karta „nie zdali"; obrażenia dwoma typami; Podpalenie 10 rund; tyknięcie 1k4 na początku tury
+Camela; butelka zapalona w R2 pęka dokładnie w R5 na tej samej turze; rzut poza turą czeka na
+koniec tury Camela; ładunek przeżywa F5; poza walką wybuch natychmiast. Dwa błędy znalezione
+po drodze i poprawione: podpis Sequencera ~2× za duży (mnożnik `150 / grid.size`), prostokąt
+obrysu rysowany od rogu (`anchor` kształtu nie działa — środek przez `offset`). Nowe testy:
+`anchorPassed`, `burstDue`, `parseDamageSpec.parts`, `parseIgniteSpec`, katalog koktajlu.
+Cały zestaw: **459/459**.
+
+**Zostaje:** grafika leżącej butelki (koktajl leży dziś z grafiką granatu), zdalny C4/dynamit i
+pipebomb z lontem (ta sama infrastruktura, inny warunek wybuchu), audyt reszty katalogu
+materiałów wybuchowych względem RAW.
+
+
+### Zasięg rzutu granatem: 9 + max(9, 9 × mod. SIŁ) — min. 18 m (RAI), bez żółtego pasma (2026-09-23)
+
+`actors/grenade-inventory.mjs`, `wkk/items/flara.mjs`. Zgłoszone przy podglądzie celowania:
+Alan (mod. SIŁ +0) miał zasięg 40 m, a RAW (*Sztuczki* → „Granaty i im podobne",
+`8 SZTUCZKI/czesc-01.md`) mówi: „9 + (9 x modyfikator Siły) metrów (minimum 9)".
+
+**RAI.** Podręcznik sam sobie przeczy: przykład tuż pod regułą daje Specowi (−1) „odległość
+minimalną, czyli 18 metrów". Zgodne z konsultacją z autorem: minimum to 18 m — „minimum 9"
+dotyczy członu `9 × mod`, więc zasięg = `9 + max(9, 9 × mod)`. Jedyne czytanie, które godzi
+regułę z oboma przykładami (Brutal +4 → 45 m, Spec −1 → 18 m). Alan (+0) → **18 m**. Wpisane
+do tabeli RAI w `wkk/README.md`.
+
+Zasięg pochodził z wymyślonego „prostego modelu" `wartość SIŁ × 2 / waga ładunku` (od
+pierwszego commita broni, 2026-05-28, bez źródła), plus żółte pasmo od połowy zasięgu, które
+nic nie robiło — ani kary, ani reguły, sam kolor na karcie czatu. Teraz `_throwRangeMeters`
+liczy wprost RAW, pasma są dwa (w zasięgu / poza), karta czatu pokazuje wzór zamiast SIŁ i
+wagi. Przekroczenie dalej jest **oznaczane, nie blokowane** (doktryna modułu; okno/pojazd i
+tak rozstrzyga MG wg tego samego akapitu). Flara dostała ten sam wzór — rzucana flara to
+właśnie „im podobne". Raca z pistoletu zostaje przy zasięgu broni (krótki/długi — tam żółty
+coś znaczy: utrudnienie na dalekim zasięgu).
+
+Test `getThrowBandClass` przepisany na dwa stany, nowy `throwRangeMeters` (oba przykłady z
+podręcznika: +4 → 45, −1 → 18; oraz 0 → 18, +1 → 18, +2 → 27). Cały zestaw: **454/454**. Na żywo: Alan — „maks. 18.0 m".
+
+### Celowanie granatem/flarą/kolczatką: podgląd obszaru zamiast pustego kursora (2026-09-23)
+
+Nowy `scenes/area-picker.mjs`; `actors/grenade-inventory.mjs`, `items/kolczatka.mjs`,
+`wkk/items/flara.mjs`, `wkk/items/pistolet-na-race.mjs`. Zgłoszone: po wybraniu granatu
+jest tylko komunikat „kliknij na mapie" — bez szablonu, bez zmiany kursora.
+
+**Nie było powodu.** Cztery identyczne kopie `_pickCanvasPoint` to goły `pointerdown` —
+podglądu nigdy nie napisano. Uzasadnienie kopii („kilka linijek, nie warto wiązać plików")
+dotyczyło struktury kodu, nie celowego braku podglądu; z podglądem to już nie kilka linijek,
+więc jest jeden wspólny picker. Natywna ścieżka dnd5e (`AbilityTemplate.drawPreview` —
+Thumper, MGL1S, Moździerz, DS/MS/OZ) **działa** na v14, sprawdzone na żywo; LAW i Bazooka nie
+mają obszaru także w RAW (tylko `ppanc`; `burząca` ma Thumper).
+
+Podczas celowania: rzeczywisty ślad pod kursorem (sześcian/koło z `_resolveAreaSpec`, pole
+miny 1,5 m, kolczatka 3×1 pola, pierścienie światła flary jasne/słabe), środek bez
+przyciągania do siatki — tak jak kładzie go kod umieszczający; linia od rzucającego z
+dystansem w kolorze pasm, których używa karta czatu (granat/flara: w zasięgu zielony, dalej
+czerwony — patrz wpis niżej o zasięgu RAW; raca: zasięg krótki/długi broni); kursor krzyżyk. LPM kładzie, **PPM lub ESC
+anuluje** — wcześniej PPM *rzucał*, bo `once("pointerdown")` nie patrzył na przycisk. Oba
+zdarzenia zjadane w fazie capture: klik nie zaznacza przy okazji żetonu pod kursorem, ESC nie
+zamyka przy okazji karty postaci.
+
+**Przy okazji: rzut granatem bez zaznaczonego własnego żetonu nie działał wcale.**
+`_getActorThrowToken` spadał na `getActiveTokens(true, true)` → `TokenDocument` bez `.center`
+→ wyjątek po kliknięciu, zero komunikatu (granat na szczęście nie znikał). Flara znalazła i
+obeszła ten sam błąd lokalnie (`_centerOf`); granaty nie. Teraz `getActiveTokens(true)` —
+placeable.
+
+Zweryfikowane na żywo (Alan, Granat hukowy, bez zaznaczonego żetonu): podgląd 3 m, podgląd
+zmienia kolor na granicy zasięgu, ESC — ilość bez zmian, zero markerów, karta otwarta;
+LPM na żetonie zwraca punkt bez zaznaczania żetonu, PPM zwraca `null`.
 
 ### Leki: ±Ilość jak w Prowiancie, jeden wiersz przy minimalnej szerokości (2026-09-23)
 

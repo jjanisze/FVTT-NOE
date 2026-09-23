@@ -77,6 +77,8 @@
  * the same numbers, by construction, rather than two hand-copied literals drifting apart later.
  */
 
+import { pickCanvasPoint, measureMeters, metersToPx } from "../../scenes/area-picker.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 
 /* -------------------------------------------- */
@@ -145,71 +147,12 @@ function _getActivity(item, identifier) {
 }
 
 /**
- * Canvas point picker + throw-range helpers below are a deliberate small duplication of
- * `actors/grenade-inventory.mjs`'s own private equivalents (`_pickCanvasPoint`,
- * `_measureMeters`, `_getActorThrowToken`, `_computeThrowRange`) — same shape, not imported,
- * matching this project's existing pattern of small independent per-item-file UI glue (Latarka
- * and Pochodnia duplicate `_liveItem`/`_postCard` rather than sharing a base class) rather than
- * coupling two otherwise-unrelated item files over a handful of lines each.
+ * Throw-range helpers below are a deliberate small duplication of `actors/grenade-inventory.mjs`'s
+ * own private equivalents (`_getActorThrowToken`, `_computeThrowRange`) — same shape, not
+ * imported, matching this project's pattern of small independent per-item-file UI glue. The
+ * canvas picker and distance measure are NOT duplicated any more: once the picker grew a live
+ * preview it stopped being "a handful of lines" — see `scenes/area-picker.mjs`.
  */
-async function _pickCanvasPoint() {
-  if (!canvas?.app?.stage) {
-    ui.notifications.warn("Brak aktywnej sceny do wyboru punktu upadku flary.");
-    return null;
-  }
-
-  ui.notifications.info("Wybierz, gdzie wyląduje flara: kliknij na mapie (ESC, aby anulować).");
-
-  return new Promise(resolve => {
-    const stage = canvas.app.stage;
-
-    const cleanup = () => {
-      stage.off("pointerdown", onPointerDown);
-      window.removeEventListener("keydown", onKeyDown);
-    };
-
-    const onPointerDown = (event) => {
-      cleanup();
-      const p = event.data.getLocalPosition(stage);
-      resolve({ x: p.x, y: p.y });
-    };
-
-    const onKeyDown = (event) => {
-      if (event.key !== "Escape") return;
-      cleanup();
-      resolve(null);
-    };
-
-    stage.once("pointerdown", onPointerDown);
-    window.addEventListener("keydown", onKeyDown);
-  });
-}
-
-function _measureMeters(from, to) {
-  if (!canvas?.grid) return 0;
-
-  try {
-    if (typeof canvas.grid.measurePath === "function") {
-      const d = Number(canvas.grid.measurePath([{ A: from, B: to }])?.distance ?? 0);
-      if (!Number.isNaN(d) && d > 0) return d;
-    }
-  } catch (_e) { /* fallback below */ }
-
-  try {
-    if (typeof canvas.grid.measureDistance === "function") {
-      const d = Number(canvas.grid.measureDistance(from, to, { gridSpaces: true }));
-      if (!Number.isNaN(d) && d > 0) return d;
-    }
-  } catch (_e) { /* geometric fallback below */ }
-
-  const dx = (to.x ?? 0) - (from.x ?? 0);
-  const dy = (to.y ?? 0) - (from.y ?? 0);
-  const px = Math.hypot(dx, dy);
-  const unitsPerGrid = Number(canvas.scene?.grid?.distance ?? 1);
-  const pxPerGrid = Number(canvas.grid?.size ?? 100);
-  return (px / pxPerGrid) * unitsPerGrid;
-}
-
 function _getActorThrowToken(actor) {
   const own = (canvas?.tokens?.controlled ?? []).find(t => t.actor?.id === actor.id);
   if (own) return own;
@@ -231,12 +174,12 @@ function _centerOf(tokenOrDoc) {
   return { x: doc?.x ?? 0, y: doc?.y ?? 0 };
 }
 
-function _computeThrowRange(actor, item) {
-  const str = Number(actor.system?.abilities?.str?.value ?? 8);
-  const weight = Number(item.system?.weight?.value ?? item.system?.weight ?? 0.3);
-  const safeWeight = Math.max(0.2, weight);
-  const max = Math.max(2, Math.round((str * 2) / safeWeight));
-  return { str, weight: safeWeight, max };
+/** Grenade throw — „Granaty i im podobne": 9 + max(9, 9 × mod. SIŁ) metrów, i.e. an 18 m floor
+ * (RAI — see `grenade-inventory.mjs`'s `_throwRangeMeters` for the rulebook contradiction and the
+ * author's ruling). A thrown flare is exactly the "podobne". */
+function _computeThrowRange(actor) {
+  const mod = Number(actor.system?.abilities?.str?.mod ?? 0);
+  return { mod, max: 9 + Math.max(9, 9 * mod) };
 }
 
 /* -------------------------------------------- */
@@ -270,14 +213,18 @@ async function _throwFlara(item) {
   const scene = token.scene ?? canvas.scene;
   if (!scene) { ui.notifications.warn("Brak aktywnej sceny."); return; }
 
-  const target = await _pickCanvasPoint();
+  const origin = _centerOf(token);
+  const range = _computeThrowRange(actor);
+  const target = await pickCanvasPoint({
+    hint: "Wybierz, gdzie wyląduje flara: kliknij na mapie",
+    shape: { kind: "circle", radii: [metersToPx(FLARE_LIGHT.bright, scene), metersToPx(FLARE_LIGHT.dim, scene)] },
+    origin, range: { long: range.max }
+  });
   if (!target) return; // anulowane — nic nie zużyte
 
-  const origin = _centerOf(token);
-  const distance = _measureMeters(origin, target);
-  const range = _computeThrowRange(actor, item);
+  const distance = measureMeters(origin, target);
   if (distance > range.max) {
-    ui.notifications.warn(`Rzut poza optymalnym zasięgiem (${distance.toFixed(1)} m > ${range.max.toFixed(1)} m).`);
+    ui.notifications.warn(`Rzut poza zasięgiem (${distance.toFixed(1)} m > ${range.max.toFixed(1)} m).`);
   }
 
   const newQty = qty - 1;
@@ -285,7 +232,7 @@ async function _throwFlara(item) {
   else await item.update({ "system.quantity": newQty });
 
   await _postCard(item,
-    `<p>Rzucona na <strong>${distance.toFixed(1)} m</strong> (SIŁ ${range.str}, maks. ${range.max.toFixed(1)} m). `
+    `<p>Rzucona na <strong>${distance.toFixed(1)} m</strong> (maks. ${range.max.toFixed(1)} m = 9 + 9 × mod. SIŁ ${range.mod >= 0 ? "+" : ""}${range.mod}, min. 18). `
     + `Ląduje, zapala się i pali czerwonym, migoczącym światłem przez <strong>1 minutę</strong> `
     + `(jasne ${FLARE_LIGHT.bright} m / słabe ${FLARE_LIGHT.dim} m) — światło blokują ściany.</p>`
     + `<p><em>Zostało: ${newQty} szt.</em></p>`);

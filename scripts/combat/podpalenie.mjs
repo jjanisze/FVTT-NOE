@@ -77,7 +77,7 @@ export function registerPodpalenie() {
   console.log("Neuroshima 5e | Podpalenie registered");
 }
 
-export const podpalenieApi = { isBurning, ignite, douse, promptDouse };
+export const podpalenieApi = { isBurning, ignite, igniteFor, douse, promptDouse };
 
 /* -------------------------------------------- */
 /*  State                                        */
@@ -96,6 +96,30 @@ export function isBurning(actor) {
 export async function ignite(actor) {
   if (!actor || isBurning(actor)) return;
   await actor.toggleStatusEffect(STATUS, { active: true });
+}
+
+/**
+ * Zapal na konkretny czas — źródło, które podaje własny (Koktajl Mołotowa: „Podpalenie na
+ * 1 minutę", czyli 10 rund), zamiast domyślnych 2 rund stanu z `config/conditions.mjs`.
+ *
+ * Już płonący nie zaczyna od nowa (to przerwałoby i odpaliło ponownie płomień VFX) — dostaje
+ * tylko tyle rund, żeby zostało mu co najmniej `rounds`. Krótszy ogień nigdy nie skraca dłuższego.
+ * @param {Actor} actor
+ * @param {number} rounds
+ */
+export async function igniteFor(actor, rounds) {
+  if (!actor) return;
+  const existing = _burningEffect(actor);
+  if (existing) {
+    const remaining = existing.updateDuration().remaining;
+    const value = Number(existing.duration?.value ?? 0);
+    const next = Number.isFinite(remaining) ? value + Math.max(0, rounds - remaining) : Math.max(value, rounds);
+    if (next !== value) await existing.update({ "duration.value": next });
+    return;
+  }
+  const effect = await ActiveEffect.implementation.fromStatusEffect(STATUS);
+  effect.updateSource({ "duration.value": rounds });
+  await ActiveEffect.implementation.create(effect.toObject(), { parent: actor, keepId: true });
 }
 
 /**

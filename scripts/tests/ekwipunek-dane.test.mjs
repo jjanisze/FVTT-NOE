@@ -41,6 +41,8 @@ import { POCHODNIA_VARIANTS, buildPochodniaItemData, ensurePochodniaActivities, 
 import { TOOLKITS, buildToolkitItemData, createToolkits, MEDYK_MAX_CHARGES } from "../config/toolkits-data.mjs";
 import { CHEMIA, CHEMIA_TYPE, CHEMIA_SUBTYPES, chemiaKeyByName, chemiaItemData } from "../config/chemia-data.mjs";
 import { ALL_DISEASES } from "../config/diseases-data.mjs";
+import { __testing as molotovRules } from "../actors/molotov.mjs";
+import { MOLOTOV_LIGHT_KOBALT } from "../wkk/config/molotov-light.mjs";
 import {
   GEAR_PLACEHOLDERS, REAL_GEAR, buildGearItemData, buildRealGearItemData, createRealGear,
   buildSubstituteCheckActivities
@@ -450,13 +452,95 @@ export function registerEquipmentDataTests(quench) {
         }
       });
 
-      it("getThrowBandClass/-Color: 50% zasięgu to granica ok/warn, przekroczenie zasięgu to danger", function () {
-        expect(grenadeParsing.getThrowBandClass(5, 10), "dokładnie 50%").to.equal("ok");
-        expect(grenadeParsing.getThrowBandClass(5.1, 10)).to.equal("warn");
-        expect(grenadeParsing.getThrowBandClass(10, 10), "dokładnie na granicy zasięgu").to.equal("warn");
+      it("getThrowBandClass/-Color: dwa stany — w zasięgu ok, poza nim danger (RAW nie zna pół-zasięgu)", function () {
+        expect(grenadeParsing.getThrowBandClass(5.1, 10), "dawne „żółte\" pasmo").to.equal("ok");
+        expect(grenadeParsing.getThrowBandClass(10, 10), "dokładnie na granicy zasięgu").to.equal("ok");
         expect(grenadeParsing.getThrowBandClass(10.1, 10)).to.equal("danger");
         expect(grenadeParsing.getThrowBandColor("ok")).to.equal("#54c86a");
         expect(grenadeParsing.getThrowBandColor("danger")).to.equal("#e06666");
+      });
+
+      it("throwRangeMeters: 9 + max(9, 9 × mod. SIŁ) — minimum 18 m (RAI), bez wagi ładunku", function () {
+        expect(grenadeParsing.throwRangeMeters(4), "przykład z podręcznika: Brutal +4").to.equal(45);
+        expect(grenadeParsing.throwRangeMeters(-1), "przykład z podręcznika: Spec −1").to.equal(18);
+        expect(grenadeParsing.throwRangeMeters(0), "mod +0 (Alan)").to.equal(18);
+        expect(grenadeParsing.throwRangeMeters(1), "+1 też na minimum").to.equal(18);
+        expect(grenadeParsing.throwRangeMeters(2)).to.equal(27);
+      });
+
+      it("parseDamageSpec.parts: każdy człon z własnym typem (koktajl = ogień + obuchowe)", function () {
+        const molotov = grenadeParsing.parseDamageSpec("Porażka: 1k6 ogień + 1k6 obuchowe + Podpalenie (1 min).");
+        expect(molotov.parts).to.deep.equal([
+          { formula: "1d6", type: "fire", label: "Od ognia" },
+          { formula: "1d6", type: "bludgeoning", label: "Obuchowe" }
+        ]);
+        const frag = grenadeParsing.parseDamageSpec("Porażka: 4k6 wybuchowe + 4k6 cięte + Powalenie.");
+        expect(frag.parts.map(p => p.type)).to.deep.equal(["explosive", "slashing"]);
+        const bare = grenadeParsing.parseDamageSpec("Porażka: 8k6 wybuchowe; pojazdy: +4k6.");
+        expect(bare.parts.map(p => p.type), "człon bez słowa typu dziedziczy poprzedni").to.deep.equal(["explosive", "explosive"]);
+        expect(grenadeParsing.parseDamageSpec("Chmura dymu utrzymuje się 1 min.").parts).to.deep.equal([]);
+      });
+
+      it("parseIgniteSpec: „Podpalenie (1 min)” to 10 rund, bez czasu — domyślny czas stanu, bez Podpalenia — null", function () {
+        expect(grenadeParsing.parseIgniteSpec("1k6 ogień + Podpalenie (1 min).").rounds).to.equal(10);
+        expect(grenadeParsing.parseIgniteSpec("2k6 ogień + Podpalenie.").rounds).to.be.null;
+        expect(grenadeParsing.parseIgniteSpec("4k6 wybuchowe + Powalenie.")).to.be.null;
+      });
+
+      it("anchorPassed: ładunek wybucha, gdy tura z chwili rzutu się skończyła — dowolnym sposobem", function () {
+        const anchor = { combatId: "c", round: 2, turn: 1, combatantId: "a", worldTime: 100 };
+        const same = { started: true, round: 2, turn: 1, combatantId: "a" };
+        expect(grenadeParsing.anchorPassed(anchor, same, 100), "ta sama tura").to.be.false;
+        expect(grenadeParsing.anchorPassed(anchor, { ...same, turn: 2 }, 100), "następna tura").to.be.true;
+        expect(grenadeParsing.anchorPassed(anchor, { ...same, turn: 0 }, 100), "MG cofnął turę").to.be.true;
+        expect(grenadeParsing.anchorPassed(anchor, { ...same, round: 3, turn: 1 }, 106), "nowa runda").to.be.true;
+        expect(grenadeParsing.anchorPassed(anchor, { ...same, combatantId: "b" }, 100), "usunięty uczestnik, ten sam numer tury").to.be.true;
+        expect(grenadeParsing.anchorPassed(anchor, { ...same, started: false }, 100), "walka zatrzymana").to.be.true;
+        expect(grenadeParsing.anchorPassed(anchor, null, 100), "walka skasowana").to.be.true;
+        expect(grenadeParsing.anchorPassed(anchor, same, 106), "czas świata +6 s").to.be.true;
+      });
+
+      it("Koktajl Mołotowa: butelka pęka po 3 pełnych rundach, co do tury; poza walką po 18 s", function () {
+        const lit = { worldTime: 0, combatId: "c", round: 1, turn: 2 };
+        const at = (round, turn) => ({ id: "c", started: true, round, turn });
+        expect(molotovRules.burstDue(lit, at(4, 1), 0), "runda 4, przed turą zapalenia").to.be.false;
+        expect(molotovRules.burstDue(lit, at(4, 2), 0), "runda 4, tura zapalenia").to.be.true;
+        expect(molotovRules.burstDue(lit, at(5, 0), 0)).to.be.true;
+        const outside = { worldTime: 100, combatId: null, round: null, turn: null };
+        expect(molotovRules.burstDue(outside, null, 117)).to.be.false;
+        expect(molotovRules.burstDue(outside, null, 118)).to.be.true;
+        expect(molotovRules.burstDue(lit, null, 18), "walka skończona — liczy czas świata").to.be.true;
+      });
+
+      it("katalog: Koktajl Mołotowa zgodny z RAW (1,5 m, ZR ST 15, 1k6 ogień + 1k6 obuchowe, Podpalenie 1 min)", function () {
+        const def = GRENADE_TYPES.find(g => g.id === "grenade-molotov");
+        expect(grenadeParsing.parseSaveSpec(def.save)).to.include({ ability: "dex", dc: 15 });
+        expect(def.area).to.match(/1,5\s*m/);
+        expect(grenadeParsing.parseDamageSpec(def.effect).parts.map(p => `${p.formula} ${p.type}`))
+          .to.deep.equal(["1d6 fire", "1d6 bludgeoning"]);
+        expect(grenadeParsing.parseIgniteSpec(def.effect).rounds).to.equal(10);
+        expect(def.weight).to.equal(1);
+        expect(def.price).to.equal(10);
+      });
+
+      describe("Koktajl Mołotowa — światło to reguła WKK (RAW go nie zna)", function () {
+        const KOBALT_SETTING = "kobaltEnabled";
+        let original;
+        before(function () { original = game.settings.get(MODULE_ID, KOBALT_SETTING); });
+        after(async function () { await game.settings.set(MODULE_ID, KOBALT_SETTING, original); });
+
+        it("bez Kobaltu zapalona butelka nie świeci — molotovLight() zwraca null", async function () {
+          await game.settings.set(MODULE_ID, KOBALT_SETTING, false);
+          expect(molotovRules.molotovLight()).to.be.null;
+        });
+
+        it("w Kobalcie świeci wartościami z wkk/config/molotov-light.mjs, jako świeża kopia", async function () {
+          await game.settings.set(MODULE_ID, KOBALT_SETTING, true);
+          const light = molotovRules.molotovLight();
+          expect(light).to.deep.equal(foundry.utils.deepClone(MOLOTOV_LIGHT_KOBALT));
+          light.dim = 999;
+          expect(MOLOTOV_LIGHT_KOBALT.dim, "wołający nie może zepsuć stałej").to.equal(4.5);
+        });
       });
 
       it("computeTargetSquares zamienia metry obszaru na kratki SCENY docelowej, z dolnym progiem 0,5", function () {

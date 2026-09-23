@@ -107,6 +107,7 @@ import { registerAmmoInventory } from "./actors/ammo-inventory.mjs";
 import { registerMagazineInventory } from "./actors/magazine-inventory.mjs";
 import { registerItemStatePips } from "./actors/item-state-pips.mjs";
 import { registerGrenadeInventory } from "./actors/grenade-inventory.mjs";
+import { registerMolotov } from "./actors/molotov.mjs";
 import { registerSurowceInventory } from "./actors/surowce-inventory.mjs";
 import { registerLekiInventory } from "./actors/leki-inventory.mjs";
 import { registerProwiantInventory } from "./actors/prowiant-inventory.mjs";
@@ -235,6 +236,7 @@ Hooks.once("init", () => {
   registerAmmoInventory();
   registerMagazineInventory();
   registerGrenadeInventory();
+  registerMolotov();
   registerSurowceInventory();
   registerLekiInventory();
   registerProwiantInventory();

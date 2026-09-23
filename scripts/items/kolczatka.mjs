@@ -51,7 +51,7 @@
  * (an area adjacent to you). The new art is a long, purpose-built folding strip meant to span a
  * lane ahead of a vehicle, not loose tacks dropped at your own feet — and the whole point raised
  * when this was commissioned was "player selects where" on the map, same free-placement idiom
- * grenades/Flara already use (`_pickCanvasPoint`), not a melee-adjacency check. Deployed size
+ * grenades/Flara already use (`pickCanvasPoint`, `scenes/area-picker.mjs`), not a melee-adjacency check. Deployed size
  * (`TILE_SQUARES_LONG` × `TILE_SQUARES_WIDE`, below) is therefore bigger than RAW's own 1,5×1,5 m
  * effect area on purpose. Left as a known, stated mismatch — see the item description's own note
  * — rather than silently reconciled either direction: shrinking the graphic to match RAW's area
@@ -59,6 +59,8 @@
  * via PIL: exactly 2172×724 px), and stretching the RAW area to match the graphic is a balance
  * call only the GM should make.
  */
+
+import { pickCanvasPoint } from "../scenes/area-picker.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -112,44 +114,6 @@ function _getActivity(item, identifier) {
   return item.system.activities?.find(a => a.visibility?.identifier === identifier) ?? null;
 }
 
-/**
- * Deliberate small duplication of `grenade-inventory.mjs`/`flara.mjs`'s own private
- * `_pickCanvasPoint` — same shape, not imported, matching this project's established pattern of
- * small independent per-item-file UI glue rather than coupling unrelated item files.
- */
-async function _pickCanvasPoint() {
-  if (!canvas?.app?.stage) {
-    ui.notifications.warn("Brak aktywnej sceny do wyboru miejsca na kolczatki.");
-    return null;
-  }
-
-  ui.notifications.info("Wybierz, gdzie rozłożyć kolczatki: kliknij na mapie (ESC, aby anulować).");
-
-  return new Promise(resolve => {
-    const stage = canvas.app.stage;
-
-    const cleanup = () => {
-      stage.off("pointerdown", onPointerDown);
-      window.removeEventListener("keydown", onKeyDown);
-    };
-
-    const onPointerDown = (event) => {
-      cleanup();
-      const p = event.data.getLocalPosition(stage);
-      resolve({ x: p.x, y: p.y });
-    };
-
-    const onKeyDown = (event) => {
-      if (event.key !== "Escape") return;
-      cleanup();
-      resolve(null);
-    };
-
-    stage.once("pointerdown", onPointerDown);
-    window.addEventListener("keydown", onKeyDown);
-  });
-}
-
 /* -------------------------------------------- */
 /*  Chat card                                     */
 /* -------------------------------------------- */
@@ -178,7 +142,11 @@ async function _deployKolczatka(item) {
   const scene = canvas.scene;
   if (!scene) { ui.notifications.warn("Brak aktywnej sceny."); return; }
 
-  const target = await _pickCanvasPoint();
+  // Same footprint as the Tile placed below: centred, TILE_SQUARES_LONG × TILE_SQUARES_WIDE, unrotated.
+  const target = await pickCanvasPoint({
+    hint: "Wybierz, gdzie rozłożyć kolczatki: kliknij na mapie",
+    shape: { kind: "rect", width: canvas.grid.size * TILE_SQUARES_LONG, height: canvas.grid.size * TILE_SQUARES_WIDE }
+  });
   if (!target) return; // anulowane — nic nie zużyte
 
   const newQty = qty - 1;

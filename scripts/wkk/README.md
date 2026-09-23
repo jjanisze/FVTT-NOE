@@ -38,12 +38,13 @@ other tables running this module — but every such fragment carries an explicit
 where it came from. It is **not** gated behind the Kobalt toggle and it does **not** go in
 `scripts/wkk/`.
 
-Currently two fragments, both from the magazine rebuild:
+Currently three fragments — two from the magazine rebuild, one grenade-range ruling:
 
 | Mechanic | Where |
 |---|---|
 | Magazines split per weapon MODEL, not per weapon category | `config/magazines-data.mjs`, `magwellOf()` in `config/weapons-data.mjs` |
 | No loading rounds into a removable magazine during combat | `weapons/magazine.mjs`, `_performLoadOneAction()` |
+| Grenade throw range floor is 18 m — "minimum 9" applies to the modifier term, resolving the rulebook's own rule-vs-example contradiction | `actors/grenade-inventory.mjs`, `_throwRangeMeters()` (+ its copy in `wkk/items/flara.mjs`) |
 
 **Repo is public.** Attributing unpublished rulings to a named person should be cleared with
 them before it lands in a code comment — so the comments state the mechanic and its reasoning,
@@ -68,6 +69,7 @@ Zwinne dłonie check (author's idea, this table's numbers — see `TODO_mechanik
 | `wkk/config/diseases-data.mjs` | Schizofrenia paranoidalna + its stable id |
 | `wkk/config/phobias-data.mjs` | Mizoofobia |
 | `wkk/config/latarka-overrides.mjs` | `LIGHT_KOBALT` — see the override pattern below |
+| `wkk/config/molotov-light.mjs` | `MOLOTOV_LIGHT_KOBALT` — a lit Molotov's light; RAW gives it none (see below) |
 | `wkk/combat/weapon-save-properties.mjs` | `rozrywajaca` |
 | `wkk/combat/bleeding.mjs` | `dumdum` bleed profile |
 | `wkk/registry.mjs` | Every WKK export in one place — see its own header comment |
@@ -91,6 +93,14 @@ next one:
   explaining what changed and why.
 - The host file keeps the live branch (`isKobaltEnabled() ? X_KOBALT : X_RAW`) at the single
   point of use — no forked files, no strategy pattern, per `PLAN_kobalt.md`'s original decision.
+
+**Variant — no RAW value at all.** Koktajl Mołotowa's light (`actors/molotov.mjs`, 2026-09-24):
+RAW gives a lit bottle no light, so the "RAW side" of the branch is `null`, not a number. Same
+shape otherwise — the value lives in `wkk/config/molotov-light.mjs` as `..._KOBALT`, and the host
+file's single accessor (`molotovLight()`) returns `isKobaltEnabled() ? copy : null`. Every consumer
+(the in-hand light provider, the light of a bottle lying on the ground) goes through that accessor,
+never the constant. Small mechanical impact, but light changes what tokens can see, so it's a rule,
+not presentation — explosion VFX and scorch marks stay NOE; light does not.
 
 ## What this pass did *not* change
 

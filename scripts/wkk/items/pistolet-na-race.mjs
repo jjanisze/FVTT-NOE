@@ -92,6 +92,7 @@
 import { getMag, spendRound, setChamber } from "../../weapons/magazine.mjs";
 import { playShotSound } from "../../weapons/sounds.mjs";
 import { requestFlareLight, FLARE_LIGHT, BURN_SECONDS } from "./flara.mjs";
+import { pickCanvasPoint, measureMeters, metersToPx } from "../../scenes/area-picker.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const LAUNCH_ID = "pistolet-race-wystrzel";
@@ -111,71 +112,6 @@ function _isPistoletRace(item) {
 
 function _getActivity(item, identifier) {
   return item.system.activities?.find(a => a.visibility?.identifier === identifier) ?? null;
-}
-
-/**
- * Canvas point picker + range measurement — a deliberate small duplication of
- * `items/flara.mjs`'s own private equivalents (themselves already a duplication of
- * `actors/grenade-inventory.mjs`'s), matching this project's established "small
- * independent per-item-file UI glue" convention (see `flara.mjs`'s own doc comment on it)
- * rather than extracting a shared module for a handful of lines used in three places.
- */
-async function _pickCanvasPoint() {
-  if (!canvas?.app?.stage) {
-    ui.notifications.warn("Brak aktywnej sceny do wyboru punktu, w który leci raca.");
-    return null;
-  }
-
-  ui.notifications.info("Wybierz, gdzie wyląduje raca sygnałowa: kliknij na mapie (ESC, aby anulować).");
-
-  return new Promise(resolve => {
-    const stage = canvas.app.stage;
-
-    const cleanup = () => {
-      stage.off("pointerdown", onPointerDown);
-      window.removeEventListener("keydown", onKeyDown);
-    };
-
-    const onPointerDown = (event) => {
-      cleanup();
-      const p = event.data.getLocalPosition(stage);
-      resolve({ x: p.x, y: p.y });
-    };
-
-    const onKeyDown = (event) => {
-      if (event.key !== "Escape") return;
-      cleanup();
-      resolve(null);
-    };
-
-    stage.once("pointerdown", onPointerDown);
-    window.addEventListener("keydown", onKeyDown);
-  });
-}
-
-function _measureMeters(from, to) {
-  if (!canvas?.grid) return 0;
-
-  try {
-    if (typeof canvas.grid.measurePath === "function") {
-      const d = Number(canvas.grid.measurePath([{ A: from, B: to }])?.distance ?? 0);
-      if (!Number.isNaN(d) && d > 0) return d;
-    }
-  } catch (_e) { /* fallback below */ }
-
-  try {
-    if (typeof canvas.grid.measureDistance === "function") {
-      const d = Number(canvas.grid.measureDistance(from, to, { gridSpaces: true }));
-      if (!Number.isNaN(d) && d > 0) return d;
-    }
-  } catch (_e) { /* geometric fallback below */ }
-
-  const dx = (to.x ?? 0) - (from.x ?? 0);
-  const dy = (to.y ?? 0) - (from.y ?? 0);
-  const px = Math.hypot(dx, dy);
-  const unitsPerGrid = Number(canvas.scene?.grid?.distance ?? 1);
-  const pxPerGrid = Number(canvas.grid?.size ?? 100);
-  return (px / pxPerGrid) * unitsPerGrid;
 }
 
 function _getActorToken(actor) {
@@ -223,12 +159,17 @@ async function _fireFlareRound(item) {
   const scene = token.scene ?? canvas.scene;
   if (!scene) { ui.notifications.warn("Brak aktywnej sceny."); return; }
 
-  const target = await _pickCanvasPoint();
+  const origin = _centerOf(token);
+  const maxRange = _maxFireRange(item);
+  const shortRange = Number(item.system?.range?.value ?? 0);
+  const target = await pickCanvasPoint({
+    hint: "Wybierz, gdzie wyląduje raca sygnałowa: kliknij na mapie",
+    shape: { kind: "circle", radii: [metersToPx(FLARE_LIGHT.bright, scene), metersToPx(FLARE_LIGHT.dim, scene)] },
+    origin, range: { short: shortRange < maxRange ? shortRange : 0, long: maxRange }
+  });
   if (!target) return; // anulowane — nic nie zużyte
 
-  const origin = _centerOf(token);
-  const distance = _measureMeters(origin, target);
-  const maxRange = _maxFireRange(item);
+  const distance = measureMeters(origin, target);
   if (distance > maxRange) {
     ui.notifications.warn(`Strzał poza zasięgiem broni (${distance.toFixed(1)} m > ${maxRange.toFixed(1)} m).`);
   }
