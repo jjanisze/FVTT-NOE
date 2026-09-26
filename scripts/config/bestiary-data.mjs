@@ -5,7 +5,7 @@
  * Content comes from Podrecznik/NOE/13 NOTATNIK ŁOWCY/ via extract_bestiary.py;
  * automation metadata comes from the RULES/AUTOMATION layers in the generator.
  *
- * 52 creatures, 261 features (89 automated), 1 attack riders.
+ * 52 creatures, 260 features (89 automated), 1 attack riders.
  */
 
 export const BESTIARY = {
@@ -300,7 +300,7 @@ export const BESTIARY = {
       "krew": "Bio-posoka SMART — organiczna, blado-różowa. Jej zapach ściąga w okolicę inne biodroidy.",
       "taktyka": "Biodroid zakopuje się w ziemi lub ukrywa na drzewie w pobliżu naturalnych ścieżek, żeby w odpowiednim momencie wyskoczyć za plecami upatrzonej ofiary. Kilka biodroidów może zaskoczyć obozujących wędrowców, wyłaniając się z ziemi pośrodku obozowiska. Zaczynają walkę długą serią w skupisko intruzów.",
       "wyglad": "Wyobraź sobie, że wędrujesz przez Neodżunglę i spotykasz gigantyczną glistę obwieszoną karabinami maszynowymi. Poczwara staje pionowo, jak człowiek i wymierza w ciebie cały swój arsenał. Na dodatek macha kolcem jadowym na końcu ogona, z którego kapie jakiś kwas. Najgorsze jest to, że nie ma nawet głowy, w którą można by wycelować.",
-      "wystepowanie": "Neodżungla."
+      "wystepowanie": "Neodżungla"
     },
     "morale": null,
     "name": "BIODROID",
@@ -557,7 +557,7 @@ export const BESTIARY = {
         "id": "palcozerca",
         "name": "Palcożerca",
         "section": "traits",
-        "text": "Jeśli trafi krytycznie, odgryza jeden palec ofierze ataku. Rzuć 1k10, który palec został odgryziony: 1-5 palce lewej ręki, 6-10 palce prawej ręki. Atak nie powoduje otrzymania Stopnia Zranienia, ale nakłada -1 wszystkich Testów Cech opartych na Zręczności, do czasu zastąpienia lub odrośnięcia utraconego palca."
+        "text": "Jeśli trafi krytycznie, odgryza jeden palec ofierze ataku. Rzuć 1k10, który palec został odgryziony: 1 - 5 palce lewej ręki, 6 - 10 palce prawej ręki. Atak nie powoduje otrzymania Stopnia Zranienia, ale nakłada -1 wszystkich Testów Cech opartych na Zręczności, do czasu zastąpienia lub odrośnięcia utraconego palca."
       },
       {
         "automation": {
@@ -805,7 +805,7 @@ export const BESTIARY = {
     },
     "tools": null,
     "typeNote": null,
-    "usesZranienie": false,
+    "usesZranienie": true,
     "vulnerabilities": []
   },
   "cywil": {
@@ -1262,7 +1262,7 @@ export const BESTIARY = {
       "kategoria": "Ludzie",
       "krew": "Czerwona krew — ludzka.",
       "taktyka": "Żołnierze gangu preferują walkę na dystans, w czasie której wykorzystują Osłony tj. murki, okna, beczki czy rogi budynków. Wychylają się zza nich, tylko żeby oddać strzał i ponownie się kryją. Jeśli nie widzą celu, podchodzą i używają akcji Wyczekanie, żeby strzelić w Reakcji do pojawiającego się przeciwnika. Jeśli walczą wręcz, skupiają się na jednym przeciwniku, żeby skorzystać ze zdolności Współpraca. Podczas pościgów wykazują się większą odwagą, zachowując się jak stado wygłodniałych psów-mutków.",
-      "wystepowanie": "Szosy, ruiny i skupiska ludzkie."
+      "wystepowanie": "Szosy, ruiny i skupiska ludzkie"
     },
     "morale": 25,
     "name": "GANGUS ŻOŁNIERZ",
@@ -1387,7 +1387,7 @@ export const BESTIARY = {
       "wystepowanie": "Ruiny, podziemia, terytoria Molocha."
     },
     "morale": null,
-    "name": "GENERACJA I. NOCNY GHUL",
+    "name": "GENERACJA I – NOCNY GHUL",
     "overlay": false,
     "pb": 2,
     "randomized": false,
@@ -1521,7 +1521,7 @@ export const BESTIARY = {
       "wystepowanie": "Bagna, pustynie, terytoria Molocha."
     },
     "morale": null,
-    "name": "GENERACJA II. GENOTYP GADZI",
+    "name": "GENERACJA II – GENOTYP GADZI",
     "overlay": false,
     "pb": 3,
     "randomized": false,
@@ -1640,7 +1640,7 @@ export const BESTIARY = {
         "id": "wataha",
         "name": "Wataha",
         "section": "traits",
-        "text": "Każdemu wilkoludowi towarzyszy 2k4 psów mutków (ich opis znajduje się w podrozdziale Zwierzęta str. XXX), które pomagają mu w polowaniu i wykonują jego mentalne polecenia."
+        "text": "Każdemu wilkoludowi towarzyszy 2k4 psów mutków (ich opis znajduje się w podrozdziale Zwierzęta s. 238), które pomagają mu w polowaniu i wykonują jego mentalne polecenia."
       },
       {
         "automation": {
@@ -1676,7 +1676,7 @@ export const BESTIARY = {
       "wystepowanie": "Lasy, ruiny, prerie, terytoria Molocha."
     },
     "morale": null,
-    "name": "GENERACJA II. GENOTYP WILCZY",
+    "name": "GENERACJA II – GENOTYP WILCZY",
     "overlay": false,
     "pb": 3,
     "randomized": false,
@@ -1822,7 +1822,7 @@ export const BESTIARY = {
     "immunities": [],
     "initiative": -4,
     "lore": {
-      "informacje": "Moloch uwstecznił ewolucję człowieka i wtedy jego laboratorium opuściły grubasy — wierne mu mutki służące do obrony mutancich obozów, przeprowadzania „mięsnych szturmów\" i noszenia ciężkiego sprzętu. Inteligencją dorównują ludziom, lecz emocjonalnie są na poziomie dziecka. Bardzo cenni jako niewolnicy, kowale i gladiatorzy na arenach.",
+      "informacje": "Moloch uwstecznił ewolucję człowieka i wtedy jego laboratorium opuściły grubasy — wierne mu mutki służące do obrony mutancich obozów, przeprowadzania „mięsnych szturmów” i noszenia ciężkiego sprzętu. Inteligencją dorównują ludziom, lecz emocjonalnie są na poziomie dziecka. Bardzo cenni jako niewolnicy, kowale i gladiatorzy na arenach.",
       "kategoria": "Mutanci",
       "krew": "Czerwona krew — wciąż ludzka, mimo mutacji.",
       "taktyka": "Grubas stara się jak najszybciej zbliżyć do najbliższego przeciwnika i rozpocząć z nim walkę wręcz. Instynkt nakazuje mu unieruchamiać i ogłuszać przeciwników, ponieważ żywi są cenniejsi dla Molocha.",
@@ -1830,7 +1830,7 @@ export const BESTIARY = {
       "wystepowanie": "Areny gladiatorskie, ruiny, prerie, terytoria Molocha."
     },
     "morale": 25,
-    "name": "GENERACJA III. GRUBAS",
+    "name": "GENERACJA III – GRUBAS",
     "overlay": false,
     "pb": 3,
     "randomized": false,
@@ -1845,7 +1845,7 @@ export const BESTIARY = {
     "skills": {
       "atl": 9
     },
-    "sp": 14,
+    "sp": 16,
     "speed": {
       "walk": 12
     },
@@ -1949,10 +1949,10 @@ export const BESTIARY = {
         "text": "Szpieg wykonuje Odstąpienie, Unikanie lub Przyspieszenie."
       }
     ],
-    "gear": "zestaw małego ślusarza, 2k6 papierosów, środek usypiający",
+    "gear": "zestaw małego ślusarza, 2k6 papierosów, środek usypiający.",
     "hp": {
       "avg": 38,
-      "formula": "6d8 + 14"
+      "formula": "6d8 +14"
     },
     "id": "generacja-iii-szpieg",
     "immunities": [],
@@ -1966,7 +1966,7 @@ export const BESTIARY = {
       "wystepowanie": "Wszędzie."
     },
     "morale": 50,
-    "name": "GENERACJA III. SZPIEG",
+    "name": "GENERACJA III – SZPIEG",
     "overlay": false,
     "pb": 3,
     "randomized": false,
@@ -2076,7 +2076,7 @@ export const BESTIARY = {
       "wystepowanie": "Bazy i fabryki mutantów, terytoria Molocha."
     },
     "morale": 25,
-    "name": "GENERACJA III. TECHMUTAS",
+    "name": "GENERACJA III – TECHMUTAS",
     "overlay": false,
     "pb": 3,
     "randomized": false,
@@ -2222,7 +2222,7 @@ export const BESTIARY = {
     "immunities": [],
     "initiative": 8,
     "lore": {
-      "informacje": "Patrz rozdział Mutanci (str. XXX) w części poświęconej opisowi świata.",
+      "informacje": "Patrz akapit Mutant z sąsiedztwa (s. 164) w rozdziale Świat.",
       "kategoria": "Mutanci",
       "krew": "Czerwona krew — wciąż ludzka, mimo mutacji.",
       "taktyka": "Brutalną walkę podejmują zza pleców sojuszników, wspierając ich atakami mentalnymi. Kiedy zostają zranieni, starają się uciec, jeśli to możliwe. Korzystają z akcji legendarnych, szczególnie tych, dzięki którym mogą się ukryć.",
@@ -2230,7 +2230,7 @@ export const BESTIARY = {
       "wystepowanie": "Fabryki mutantów, podziemia ludzkich skupisk."
     },
     "morale": 50,
-    "name": "GENERACJA IV. MESMERYTA",
+    "name": "GENERACJA IV – MESMERYTA",
     "overlay": false,
     "pb": 5,
     "randomized": false,
@@ -2292,10 +2292,29 @@ export const BESTIARY = {
         "reach": 1.5,
         "rider": "Jeśli gigamut przemieścił się co najmniej 6 m na wprost tuż przed wykonaniem ataku, trafiony cel zostaje Powalony i odrzucony na odległość 3 m, jeśli jest rozmiaru wielkiego lub mniejszego.",
         "section": "actions"
+      },
+      {
+        "bonus": 13,
+        "damage": {
+          "avg": 31,
+          "formula": "4d12 + 7",
+          "type": "piercing"
+        },
+        "id": "rogi",
+        "kind": "mwak",
+        "name": "Rogi",
+        "onHit": null,
+        "range": null,
+        "reach": 3,
+        "rider": "Trafiona istota rozmiaru dużego lub mniejsza, musi zdać RO na Siłę o ST 21, inaczej otrzymuje stan Powalenie.",
+        "section": "actions"
       }
     ],
     "blood": "czerwona",
-    "carry": null,
+    "carry": {
+      "max": 2800,
+      "normal": 1400
+    },
     "conditionImmunities": [],
     "creatureType": "zwierze",
     "damageThreshold": null,
@@ -2312,13 +2331,6 @@ export const BESTIARY = {
         "name": "Pierwsze spotkanie",
         "section": "traits",
         "text": "RO na Mądrość o ST 16."
-      },
-      {
-        "automation": null,
-        "id": "udzwig",
-        "name": "Udźwig",
-        "section": "traits",
-        "text": "Użytkowy: 1 400 kg. Maksymalny: 2 800 kg."
       }
     ],
     "gear": null,
@@ -2391,7 +2403,7 @@ export const BESTIARY = {
         "bonus": 6,
         "damage": {
           "avg": 8,
-          "formula": "1d10 + 3",
+          "formula": "1d10 +3",
           "type": "piercing"
         },
         "id": "ugryzienie",
@@ -2591,14 +2603,14 @@ export const BESTIARY = {
         "id": "stalowe-maczugi",
         "name": "Stalowe maczugi",
         "section": "actions",
-        "text": "Gladiator wykonuje 3 ataki wręcz w jeden cel. *Atak wręcz:* +9; zasięg 3 m; *Obrażenia:* 16 (2k12 + 4) obuchowe. Trafiona istota rozmiaru dużego lub mniejsza, musi zdać RO na Siłę o ST 17, inaczej otrzymuje stan Powalenie."
+        "text": "Gladiator wykonuje 3 ataki wręcz w jeden cel. Atak wręcz: +9; zasięg 3 m; Obrażenia: 16 (2k12 + 4) obuchowe. Trafiona istota rozmiaru dużego lub mniejsza, musi zdać RO na Siłę o ST 17, inaczej otrzymuje stan Powalenie."
       },
       {
         "automation": null,
         "id": "pily",
         "name": "Piły",
         "section": "actions",
-        "text": "Gladiator wykonuje 3 ataki wręcz w jeden lub więcej celów w zasięgu. *Atak wręcz:* +9; zasięg 3 m; *Obrażenia:* 16 (2k12 + 4) cięte."
+        "text": "Gladiator wykonuje 3 ataki wręcz w jeden lub więcej celów w zasięgu. Atak wręcz: +9; zasięg 3 m; Obrażenia: 16 (2k12 + 4) cięte."
       },
       {
         "automation": null,
@@ -2757,7 +2769,7 @@ export const BESTIARY = {
           "kind": "multiattack"
         },
         "id": "atak-wielokrotny",
-        "name": "Atak wielokrotny",
+        "name": "Atak Wielokrotny",
         "section": "actions",
         "text": "Harpia wykonuje jeden atak pazurami i jedno ugryzienie."
       },
@@ -2786,7 +2798,7 @@ export const BESTIARY = {
       "wystepowanie": "Góry, klify i wysokie, zrujnowane budynki."
     },
     "morale": 25,
-    "name": "HARPIE (AKA WAMPIRY)",
+    "name": "HARPIE (aka WAMPIRY)",
     "overlay": false,
     "pb": 3,
     "randomized": false,
@@ -3271,7 +3283,7 @@ export const BESTIARY = {
         "id": "porywacz",
         "name": "Porywacz",
         "section": "traits",
-        "text": "W swojej Akcji Kidnaper może podnieść jedną sparaliżowaną lub nieprzytomną, średnią lub mniejszą istotę i wsadzić ją do klatki w swoim korpusie. Uwięziona istota rozmiaru średniego, otrzymuje stan Unieruchomienie, ze względu na ciasnotę klatki. Jeśli istota odzyska przytomność, Kidnaper faszeruje ją trucizną paraliżującą."
+        "text": "Porywacz. W swojej Akcji Kidnaper może podnieść jedną sparaliżowaną lub nieprzytomną, średnią lub mniejszą istotę i wsadzić ją do klatki w swoim korpusie. Uwięziona istota rozmiaru średniego, otrzymuje stan Unieruchomienie, ze względu na ciasnotę klatki. Jeśli istota odzyska przytomność, Kidnaper faszeruje ją trucizną paraliżującą."
       },
       {
         "automation": {
@@ -3421,7 +3433,7 @@ export const BESTIARY = {
       "kategoria": "Potwory",
       "krew": "Hemolimfa — niebiesko-zielona, owadzia.",
       "taktyka": "Kitchin wspina się na nogę istoty, atakuje żądłem i jeśli trafi, ucieka.",
-      "wyglad": "Niewielka i niepozorna bestia o czarnym chitynowym pancerzu i tuzinie odnóży. Porusza się, prześlizgując swój wijący tułów przez najwęższe szczeliny, szukając zacienionych, chłodnych i wilgotnych miejsc. Trochę przypomina przedwojenną skolopendrę. Idzie to rozgnieść obcasem. To nie jest problem. Problemem jest to, że jak już dziabnie, to pada się nieprzytomnym na kilka godzin, a wtedy ofiarę wykańcza wszystko inne - promieniowanie, drapieżniki, pustynne słońce czy przechodząca akurat banda mutasów. Kitchin zazwyczaj wciska się pod kamień i siedzi w zacienionym miejscu, ale potrafi też zakraść się do śpiwora lub butów. Najwięcej ofiar kitchina to strudzeni wędrowcy, którzy zdjęli na chwilę buty, żeby dać odpocząć stopom i nie zajrzeli do środka przed założeniem ich z powrotem.",
+      "wyglad": "Niewielka i niepozorna bestia o czarnym chitynowym pancerzu i tuzinie odnóży. Porusza się, prześlizgując swój wijący tułów przez najwęższe szczeliny, szukając zacienionych, chłodnych i wilgotnych miejsc. Trochę przypomina przedwojenną skolopendrę. Idzie to rozgnieść obcasem. To nie jest problem. Problemem jest to, że jak już dziabnie, to pada się nieprzytomnym na kilka godzin, a wtedy ofiarę wykańcza wszystko inne - promieniowanie, drapieżniki, pustynne słońce czy przechodząca akurat banda mutasów. Kitchin zazwyczaj wciska się pod kamień i siedzi w zacienionym miejscu, ale potrafi też zakraść się do śpiwora lub butów. Najwięcej ofiar kitchina to strudzeni wędrowcy, którzy zdjęli na chwilę buty, żeby dać odpocząć stopomi nie zajrzeli do środka przed założeniem ich z powrotem.",
       "wystepowanie": "Prerie, pustynie i Neodżungla."
     },
     "morale": null,
@@ -3762,7 +3774,7 @@ export const BESTIARY = {
         "id": "tommy-gun-dluga-seria-2-walke",
         "name": "Tommy gun długa seria (2/walkę)",
         "section": "actions",
-        "text": "RO na Zręczność o ST 12, każda istota w linii 36 m długości i 1,5 m szerokości. Porażka: 12 (3k8) obrażeń kłutych. Sukces: połowa obrażeń."
+        "text": "RO na Zręczność o ST 12, każda istota w linii 36 m długości i 1,5 m szerokości. Porażka: 12 (3k8) obrażeń kłutych. Sukces: połowa obrażeń"
       }
     ],
     "gear": "1k6 papierosów, 1k4 painkillerów, 15 (5k6) naboi .45 ACP",
@@ -3874,7 +3886,7 @@ export const BESTIARY = {
         "id": "kamuflaz",
         "name": "Kamuflaż",
         "section": "traits",
-        "text": "Korzec przypomina drzewo i dopóki się nie poruszy jest Niewidoczny dla istot z Pasywną Percepcją poniżej 20."
+        "text": "Korzec przypomina drzewo i dopóki się nie poruszy jest Niewidoczny dla istot z Pasywną Percepcją poniżej 20"
       },
       {
         "automation": {
@@ -3964,7 +3976,7 @@ export const BESTIARY = {
         "onHit": null,
         "range": 60,
         "reach": 15,
-        "rider": "; Utrudnienie.",
+        "rider": "; Utrudnienie",
         "section": "actions"
       }
     ],
@@ -4431,7 +4443,7 @@ export const BESTIARY = {
         "id": "atak",
         "name": "Atak",
         "section": "actions",
-        "text": "Rzuć 1k6 i wylosuj, jaką broń ma na wyposażeniu dana jednostka mobsprzętu. *Tabela: rodzaj podwozia* *Tabela: rodzaj broni*"
+        "text": "Rzuć 1k6 i wylosuj, jaką broń ma na wyposażeniu dana jednostka mobsprzętu."
       }
     ],
     "gear": null,
@@ -4471,7 +4483,7 @@ export const BESTIARY = {
     },
     "sp": 8,
     "speed": {
-      "rolled": "rzuć 1k6 i sprawdź w tabeli poniżej"
+      "rolled": "Rzuć 1k6 i sprawdź w poniższej tabeli"
     },
     "tools": null,
     "typeNote": "Molocha",
@@ -4494,7 +4506,7 @@ export const BESTIARY = {
         "bonus": 3,
         "damage": {
           "avg": 4,
-          "formula": "1d6 + 1",
+          "formula": "1d6 +1",
           "type": "piercing"
         },
         "id": "ugryzienie",
@@ -4562,7 +4574,7 @@ export const BESTIARY = {
         "id": "zakazenie",
         "name": "Zakażenie",
         "section": "traits",
-        "text": "Ugryziona przez mrokoszczura istota musi zdać RO na Kondycję o ST 10 inaczej zostaje zainfekowany szczurzą gorączką (patrz podrozdział Choroby str. XXX)."
+        "text": "Ugryziona przez mrokoszczura istota musi zdać RO na Kondycję o ST 10 inaczej zostaje zainfekowany szczurzą gorączką (patrz sekcja Popularne choroby s. 111)."
       }
     ],
     "gear": null,
@@ -4688,7 +4700,7 @@ export const BESTIARY = {
         "id": "szczurze-nozki",
         "name": "Szczurze nóżki",
         "section": "bonus",
-        "text": "Myślący szczur może wykonać Ukrywanie się, Odstąpienie lub Przyspieszenie."
+        "text": "Myślący szczur może wykonać Ukrywanie się, Odstąpienie lub Przyspieszenie"
       }
     ],
     "gear": "granat improwizowany, granat dymny, 2k6 zatrutych strzał, 1k4 słabe narkotyki",
@@ -4808,7 +4820,7 @@ export const BESTIARY = {
         "id": "pierwsze-spotkanie",
         "name": "Pierwsze spotkanie",
         "section": "traits",
-        "text": "RO na Mądrość o ST 13."
+        "text": "RO na Mądrość o ST 13"
       },
       {
         "automation": null,
@@ -5134,7 +5146,7 @@ export const BESTIARY = {
         "onHit": null,
         "range": null,
         "reach": 3,
-        "rider": "Trafiona istota zostaje Pochwycona (Wyzwolenie się to ST 16). Istota Pochwycona przez obrońcę otrzymuje stan Unieruchomienie.",
+        "rider": "Trafiona istota zostaje Pochwycona (Wyzwolenie się to ST 17). Istota Pochwycona przez obrońcę otrzymuje stan Unieruchomienie.",
         "section": "actions"
       },
       {
@@ -5240,7 +5252,7 @@ export const BESTIARY = {
     "morale": null,
     "name": "OBROŃCA",
     "overlay": false,
-    "pb": 4,
+    "pb": 5,
     "randomized": false,
     "resistances": [
       "bludgeoning",
@@ -5716,7 +5728,7 @@ export const BESTIARY = {
       "krew": "Bio-posoka SMART — organiczna, blado-różowa (biomaszyna, nie czysty metal).",
       "taktyka": "Po wykryciu intruzów pulser używa eksplodujących czyraków, by osłabić jak największą ilość przeciwników. W Akcji Bonusowej wykonuje Przyspieszenie, żeby wyjść z zasięgu broni palnej lub schować się wśród koron drzew.",
       "wyglad": "Jest metrowym, opalizującym insektem, z pulsującymi na odwłoku dwoma cielistymi czyrakami, które pękając, wysyłają w stronę przeciwnika falę ciśnienia, rozwalającego bębenki w uszach. Unoszą go dwie pary skrzydeł, które hałasują niczym mały śmigłowiec. Pulser jest biomaszyną ofensywną, ale jego broń nie należy do takich, przed którymi dałoby się obronić. Pulser nie rzuci się na ciebie z ostrzami i nie będzie próbował cię zastrzelić. On powali cię na ziemię - będziesz trzymał się za eksplodującą bólem głowę i jęczał o litość. A w tym czasie nadciągną inne roboty i zrobią swoje. Najnowsza generacja tych maszyn w niczym nie przypomina już latających kanciatych subwooferów napotkanych podczas pierwszego kontaktu ze SMART-em.",
-      "wystepowanie": "Neodżungla."
+      "wystepowanie": "Neodżungla"
     },
     "morale": null,
     "name": "PULSER",
@@ -6190,7 +6202,7 @@ export const BESTIARY = {
         "onHit": null,
         "range": 45,
         "reach": 18,
-        "rider": "Trafiona istota musi zdać RO na Siłę o ST 10, inaczej otrzymuje stan Powalenie.",
+        "rider": "Trafiona istota musi zdać RO na Siłę ST o 10, inaczej otrzymuje stan Powalenie.",
         "section": "actions"
       },
       {
@@ -6255,7 +6267,7 @@ export const BESTIARY = {
         "text": "Szeryf próbuje zmusić do poddania się wszystkich ludzi, których widzi w zasięgu 18 m. Wybrane istoty muszą zdać RO na Mądrość o ST 13, inaczej upuszczają broń i są Przerażone do końca następnej tury szeryfa."
       }
     ],
-    "gear": "1 l mocnego alkoholu, 3k6 naboi .44 Mag, 2k6 naboi .30-06, odznaka, kapelusz szeryfa",
+    "gear": "1l mocnego alkoholu, 3k6 naboi .44 Mag, 2k6 naboi .30-06, odznaka, kapelusz szeryfa",
     "hp": {
       "avg": 93,
       "formula": "12d8 + 33"
@@ -6402,7 +6414,7 @@ export const BESTIARY = {
       "informacje": "Taran potrzebuje ogromnych ilości mięsa, a że na pustyni nie jest o nie łatwo, nie przestaje ścigać ofiary, dopóki nie zostanie poważnie ranny lub ofiara nie dotrze do wielkiego miasta. Lękają się go ludzie pustyni i z jego powodu budują obozy na skałach, wysoko nad piaskami. Bestia potrafi usłyszeć kroki człowieka z odległości kilometra, a każdy konwój jadący przez pustynię może być pewnym, że spotka się z tym monstrum.",
       "kategoria": "Potwory",
       "krew": "Czerwona krew.",
-      "taktyka": "Taran zawsze szarżuje w Akcji Bonusowej i używa Natarcia, żeby kogoś powalić i uderzyć ogonem. Nigdy się nie zatrzymuje w jednym miejscu, wykorzystując maksymalnie swoją Szybkość, żeby móc zawsze wykonać Natarcie.",
+      "taktyka": "Taran zawsze szarżuje w Akcji Bonusowej i używa Natarcia, żeby kogoś powalić i uderzyć ogonem. Nigdy się nie zatrzymuje w jednym miejscu, wykorzystując maksymalnie swoją Szybkość, żeby móc zawsze wykonać Natarcie. zaczynając od uderzenia kolcem jadowym, a później atakuje szczękami i próbuje pochwycić cel w Akcji Bonusowej. Trudno odciągnąć go od upatrzonej ofiary.",
       "wyglad": "Z dala idzie go pomylić z łazikiem albo niewielkim autem prującym przez pustynię ze stałą prędkością lekko przekraczającą 50 km/h, wzbijającym przy tym tumany kurzu. W rzeczywistości to zgarbiona bestia pokryta wielkimi płytami pancerza, z także opancerzonym podłużnym łbem pochylonym niemal przy samej ziemi. Nóg zazwyczaj nie widać, bo taran jest wiecznie w ruchu i zawsze wzbija masę pyłu w powietrze. Kilka taranów może wyglądać jak przemieszczające się po pustyni wydmy lub niewielkie wędrujące wzgórza.",
       "wystepowanie": "Pustynia."
     },
@@ -6543,7 +6555,7 @@ export const BESTIARY = {
       "wystepowanie": "Wraki wielkich maszyn, opuszczone domostwa, ruiny, złomowiska."
     },
     "morale": null,
-    "name": "TECHMORWA (MALUTKA)",
+    "name": "TECHMORWA (malutka)",
     "overlay": false,
     "pb": 2,
     "randomized": false,
@@ -6642,7 +6654,7 @@ export const BESTIARY = {
         "id": "niewykrywalnosc",
         "name": "Niewykrywalność",
         "section": "traits",
-        "text": "Dopóki techmorwa się nie poruszy lub nie zaatakuje, ma stan Niewidoczność."
+        "text": "Dopóki techmorwa się nie poruszy lub nie zaatakuje, ma stan Niewidoczność"
       },
       {
         "automation": {
@@ -6678,11 +6690,11 @@ export const BESTIARY = {
       "kategoria": "Potwory",
       "krew": "Hemolimfa — niebieska posoka, jak u mniejszej formy.",
       "taktyka": "Atakuje z zaskoczenia, będąc pod postacią niewidocznego urządzenia.",
-      "wyglad": "Jeśli myślisz, że wszystkie techmorwy są malutkie, to się grubo mylisz. Niektóre żyją na tyle długo, że rosną do wielkości lodówki. Otwierasz taką podczas szaberku, a tu znienacka wyskakują macki, które cię łapią i pakują do środka. Straszna śmierć. A słyszałeś o techmorwie, która udawała sklepowego manekina? Jeden kumpel zabrał taką do samochodu i…",
+      "wyglad": "Jeśli myślisz, że wszystkie techmorwy są malutkie, to się grubo mylisz. Niektóre żyją na tyle długo, że rosną do wielkości lodówki. Otwierasz taką podczas szaberku, a tu znienacka wyskakują macki, które cię łapią i pakują do środka. Straszna śmierć. A słyszałeś o techmorwie, która udawała sklepowego manekina? Jeden kumpel zabrał taką do samochodu i …",
       "wystepowanie": "Wraki wielkich maszyn, ruiny, złomowiska."
     },
     "morale": null,
-    "name": "TECHMORWA (ŚREDNIA)",
+    "name": "TECHMORWA (średnia)",
     "overlay": false,
     "pb": 3,
     "randomized": false,
@@ -6924,7 +6936,7 @@ export const BESTIARY = {
         "id": "ugryzienie",
         "name": "Ugryzienie",
         "section": "actions",
-        "text": "*Atak wręcz:* (PB plus modyfikator Siły); zasięg 1,5 m; *Obrażenia:* 1k4 (plus modyfikator Siły) kłute. Trafiony cel musi zdać RO na Kondycję o ST 10, inaczej zostaje zarażony wirusem Death Breath."
+        "text": "Atak wręcz: (PB plus modyfikator Siły); zasięg 1,5 m; Obrażenia: 1k4 (plus modyfikator Siły) kłute. Trafiony cel musi zdać RO na Kondycję o ST 10, inaczej zostaje zarażony wirusem Death Breath."
       }
     ],
     "gear": null,
@@ -6933,11 +6945,7 @@ export const BESTIARY = {
       "formula": null
     },
     "id": "zombie-nakladka-death-breath",
-    "immunities": [
-      "bludgeoning",
-      "piercing",
-      "slashing"
-    ],
+    "immunities": [],
     "initiative": -4,
     "lore": {
       "informacje": "Death Breath jest wirusem, który zmienia ludzi i mutantów w bezmózgie, pożerające wszystko, co żywe hordy. Każdemu zarażonemu wyrasta lepka macka, której zadaniem jest łatwiejsze pochwycenie ofiary.",
@@ -6947,11 +6955,15 @@ export const BESTIARY = {
       "wystepowanie": "Północny wschód kontynentu."
     },
     "morale": null,
-    "name": "ZOMBIE (NAKŁADKA DEATH BREATH)",
+    "name": "ZOMBIE (nakładka DEATH BREATH)",
     "overlay": true,
     "pb": null,
     "randomized": false,
-    "resistances": [],
+    "resistances": [
+      "bludgeoning",
+      "piercing",
+      "slashing"
+    ],
     "saves": {},
     "senseQualifiers": null,
     "senses": {

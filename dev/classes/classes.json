@@ -17,7 +17,7 @@
         "level": 2,
         "name": "WŚCIEKŁY CIOS",
         "action": null,
-        "text": "Raz w rundzie, kiedy trafisz atakiem opartym na Sile, możesz dodać do obrażeń kości Wściekłego ciosu. Masz ich tyle, ile poziomów Brutala, a każda z nich zadaje dodatkowo 1k6 obrażeń."
+        "text": "Raz w rundzie, kiedy trafisz atakiem opartym na Sile, możesz dodać do obrażeń kości Wściekłego ciosu. Masz ich tyle, ile poziomów Brutala, a każda z nich zadaje dodatkowo 1k6 obrażeń. PRZYKŁAD: Na 5. poziomie Brutala masz 5 kości Wściekłego ciosu. Do pojedynczego ataku możesz dodać maksymalnie 3 kości Wściekłego ciosu. Kości tej zdolności odnawiają się po odbyciu Długiego odpoczynku."
       },
       {
         "level": 2,
@@ -41,13 +41,13 @@
         "level": 4,
         "name": "SZTUCZKA",
         "action": null,
-        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki str. XXX), jeśli spełniasz jej wymagania. Kolejną Sztuczkę możesz wybrać na 8. i 12. poziomie Brutala."
+        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki s. 102), jeśli spełniasz jej wymagania. Kolejną Sztuczkę możesz wybrać na 8. i 12. poziomie Brutala."
       },
       {
         "level": 5,
         "name": "BRUTALNY CIOS",
         "action": null,
-        "text": "Kiedy używasz kości Wściekłego ciosu w ataku wręcz, możesz nałożyć na cel jeden dodatkowy efekt zgodny z poniższą tabelą. Efekty o tym samym działaniu się nie kumulują. PRZYKŁAD: Na 5. poziomie Brutala masz 5 kości Wściekłego ciosu. Do pojedynczego ataku możesz dodać maksymalnie 3 kości Wściekłego ciosu. Kości tej zdolności odnawiają się po odbyciu Długiego odpoczynku."
+        "text": "Kiedy używasz kości Wściekłego ciosu w ataku wręcz, możesz nałożyć na cel jeden dodatkowy efekt zgodny z poniższą tabelą. Efekty o tym samym działaniu się nie kumulują. TYP OBRAŻEŃ EFEKT Obuchowe Powalenie. Automatyczne powalenie istoty, maksymalnie o jeden rozmiar większej od ciebie. Cięte Osłabienie. Cel otrzymuje karę -1k4 do Testów Ataku (tj. jego wynik pomniejszany jest o 1k4) do początku twojej następnej tury. Kłute Okulawienie. Szybkość istoty spada o 6 m, do początku twojej następnej tury."
       },
       {
         "level": 5,
@@ -71,7 +71,7 @@
         "level": 9,
         "name": "PARANOJA",
         "action": null,
-        "text": "Twój lęk przed zagrożeniem jest tak wielki, że wszędzie spodziewasz się zasadzki. Nikt nie jest w stanie cię zaskoczyć i otrzymujesz Ułatwienie w testach Inicjatywy. 000 68 TYP OBRAŻEŃ EFEKT Obuchowe Powalenie. Automatyczne powalenie istoty, maksymalnie o jeden rozmiar większej od ciebie. Cięte Osłabienie. Cel otrzymuje karę -1k4 do Testów Ataku (tj. jego wynik pomniejszany jest o 1k4) do początku twojej następnej tury. Kłute Okulawienie. Szybkość istoty spada o 6 m, do początku twojej następnej tury.KLASY"
+        "text": "Twój lęk przed zagrożeniem jest tak wielki, że wszędzie spodziewasz się zasadzki. Nikt nie jest w stanie cię zaskoczyć i otrzymujesz Ułatwienie w testach Inicjatywy."
       },
       {
         "level": 11,
@@ -80,7 +80,7 @@
         "text": "Wiesz już gdzie uderzać, żeby wyrządzić największe szkody. Kiedy trafiasz krytycznie atakiem wręcz, zamiast podwajać, potrajasz kostki obrażeń."
       }
     ],
-    "base": "PODSTAWOWE ATRYBUTY BRUTALA Ulubiona Cecha Bazowa Siła Wymaganie wstępne Siła 15+ Kość Wytrzymałości k8 na każdym poziomie Brutala Punkty Wytrzymałości 1 poziom: 16 plus mod. KON. Kolejne poziomy: 4 plus mod. KON Biegłości w Rzutach Obronnych Kondycja i Siła Biegłości w umiejętnościach Wybierz dwie z listy: Atletyka, Tresura, Percepcja, Przyroda, Survival, Zastraszanie Biegłość w narzędziach Brak Biegłości w broni Broń biała, Broń palna krótka Wyszkolenie w pancerzu Lekkie i średnie pancerze oraz tarcze Sprzęt początkowy Plecak turysty oraz (wybierz jedno): (A) 150 gb lub (B) kafar, nóż taktyczny, medpak, obrzyn, 10 naboi .12 Ga (breneka), oszczep x 3 TWORZENIE POSTACI BRUTALA Jako postać 1. poziomu • Otrzymujesz wszystkie podstawowe atrybuty Brutala z powyższej tabeli. • Otrzymujesz wszystkie pierwszopoziomowe zdolno- ści, spisane w tabeli Zdolności klasowych Brutala. Jako postać wieloklasowa • Otrzymujesz tylko te atrybuty Brutala: Kość Wytrzymałości, biegłości w broni i wyszkolenie w używaniu tarczy. • Otrzymujesz wszystkie pierwszopoziomowe zdolno- ści, spisane w tabeli Zdolności klasowych Brutala. Plecak turysty (22 kg) Zawartość: 3 kg prowiantu, 4 l wody pitnej, 3 m stalowej linki, butelka smaru, flaszka oliwy, kompas, lina (15 m), latarka czołówka, manierka, menażka, saperka, scyzoryk, śpiwór, WD-Tabs (10 tabletek), zestaw do rozpalania ognia, żyłka (20 m). 000 67 ZASADY PODSTAWOWE EKSPLORACJA POCHODZENIE TWORZENIE POSTACI SZTUCZKI EKWIPUNEK TECZKA MG ŚWIAT NOTATNIK ŁO"
+    "base": "Brutale wyznają jedną zasadę: Zabij, albo zostaniesz zabity. Choć różnią się pochodzeniem i przeszłością, łączy ich niepohamowana, nienasycona, szalona furia. To gniew wywodzący się z najdzikszych i najbardziej pierwotnych instynktów, który daje im zwierzęcą siłę i wytrzymałość. Jedni wpadają w Berserk tylko na polu bitwy, innym odbiera on rozum, kiedy ktoś zrani ich bliskich, a co wrażliwszym wystarczy zwykła obelga, żeby rozsmarowali jakiegoś cwaniaczka na ścianie. W każdym z nich tli się ciągłe poczucie zagrożenia, które daje im nieprawdopodobny refleks. Brutalna siła to najlepszy sposób na rozwiązanie każdego problemu. PODSTAWOWE ATRYBUTY BRUTALA Ulubiona Cecha Bazowa Siła Wymaganie wstępne Siła 15+ Kość Wytrzymałości k8 na każdym poziomie Brutala Punkty Wytrzymałości 1 poziom: 16 plus mod. KON. Kolejne poziomy: 4 plus mod. KON Biegłości w Rzutach Obronnych Kondycja i Siła Biegłości w umiejętnościach Wybierz dwie z listy: Atletyka, Tresura, Percepcja, Przyroda, Survival, Zastraszanie Biegłość w narzędziach Brak Biegłości w broni Broń biała, Broń palna krótka Wyszkolenie w pancerzu Lekkie i średnie pancerze oraz tarcze Sprzęt początkowy Plecak turysty oraz (wybierz jedno): (A) 150 gb lub (B) kafar, nóż taktyczny, medpak, obrzyn, 10 naboi .12 Ga (breneka), oszczep x 3 TWORZENIE POSTACI BRUTALA Jako postać 1. poziomu • Otrzymujesz wszystkie podstawowe atrybuty Brutala z powyższej tabeli. • Otrzymujesz wszystkie pierwszopoziomowe zdolności, spisane w tabeli Zdolności klasowych Brutala. Jako postać wieloklasowa • Otrzymujesz tylko te atrybuty Brutala: Kość Wytrzymałości, biegłości w broni i wyszkolenie w używaniu tarczy. • Otrzymujesz wszystkie pierwszopoziomowe zdolności, spisane w tabeli Zdolności klasowych Brutala. Plecak turysty (22 kg) Zawartość: 3 kg prowiantu, 4 l wody pitnej, 3 m stalowej linki, butelka smaru, flaszka oliwy, kompas, lina (15 m), latarka czołówka, manierka, menażka, saperka, scyzoryk, śpiwór, WD-Tabs (10 tabletek), zestaw do rozpalania ognia, żyłka (20 m)."
   },
   "cwaniak": {
     "abilities": [
@@ -112,13 +112,13 @@
         "level": 3,
         "name": "SZYBKA GADKA",
         "action": "B",
-        "text": "W czasie walki możesz wykonać akcję Wpływanie w swojej Akcji Bonusowej. Swoimi błyskawicznymi i celnymi słowami, możesz np. oszukać przeciwnika, zdezorientować go lub przekonać do wycofania się. PRZYKŁAD: Wykonując Test Charyzmy (Zastraszanie) o ST 15, próbujesz nastraszyć gangusa, żeby uciekł z pola walki. Albo wykonując Test Charyzmy (Oszustwo) o ST 15, próbujesz przekonać mutanta, żeby nie robił ci krzywdy, bo też jesteś mutantem. Lub wykonując test Mądrości (Tresura) o ST 15, próbujesz uspokoić rozwścieczonego neoniedźwiedzia. Po więcej szczegółów zajrzyj do podrozdziału Interakcje z istotami (str XXX)."
+        "text": "W czasie walki możesz wykonać akcję Wpływanie w swojej Akcji Bonusowej. Swoimi błyskawicznymi i celnymi słowami, możesz np. oszukać przeciwnika, zdezorientować go lub przekonać do wycofania się. PRZYKŁAD: Wykonując Test Charyzmy (Zastraszanie) o ST 15, próbujesz nastraszyć gangusa, żeby uciekł z pola walki. Albo wykonując Test Charyzmy (Oszustwo) o ST 15, próbujesz przekonać mutanta, żeby nie robił ci krzywdy, bo też jesteś mutantem. Lub wykonując test Mądrości (Tresura) o ST 15, próbujesz uspokoić rozwścieczonego neoniedźwiedzia. Po więcej szczegółów zajrzyj do podrozdziału Interakcje z istotami (s .41)."
       },
       {
         "level": 3,
         "name": "ZDOLNOŚĆ Z PROFESJI",
         "action": null,
-        "text": "Wybierasz profesję, wyznaczającą kierunek rozwoju twojej cwaniackiej kariery. Masz do wyboru profesję Gwiazdy, Kaznodziei Nowej Ery lub Mafiozo. Ten wybór określa, jakie zdolności z profesji możesz wybrać na 3., 6. i 10. poziomie Cwaniaka. Opcjonalnie, zamiast zdolności z profesji na poziomie 6 i 10, możesz wybrać nową Sztuczkę. 000 72KLASY"
+        "text": "Wybierasz profesję, wyznaczającą kierunek rozwoju twojej cwaniackiej kariery. Masz do wyboru profesję Gwiazdy, Kaznodziei Nowej Ery lub Mafiozo. Ten wybór określa, jakie zdolności z profesji możesz wybrać na 3., 6. i 10. poziomie Cwaniaka. Opcjonalnie, zamiast zdolności z profesji na poziomie 6 i 10, możesz wybrać nową Sztuczkę."
       },
       {
         "level": 4,
@@ -130,7 +130,7 @@
         "level": 4,
         "name": "SZTUCZKA",
         "action": null,
-        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki str. XXX), jeśli spełniasz jej wymagania. Kolejną sztuczkę możesz wybrać na 8. i 12. poziomie Cwaniaka."
+        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki s. 102), jeśli spełniasz jej wymagania. Kolejną sztuczkę możesz wybrać na 8. i 12. poziomie Cwaniaka."
       },
       {
         "level": 5,
@@ -160,10 +160,10 @@
         "level": 11,
         "name": "ŚMIERTELNA OBELGA",
         "action": null,
-        "text": "Kiedy rzucasz Obelgę, twoje słowa zadają dodatkowo 1k6 x twój modyfikator Charyzmy obrażeń psychicznych, osłabiających wolę walki przeciwnika. Jeśli twoja zdolność Obelga zmniejszy PW celu do 0, upada on i osuwa się w bezdenną otchłań rozpaczy. 000 73"
+        "text": "Kiedy rzucasz Obelgę, twoje słowa zadają dodatkowo 1k6 x twój modyfikator Charyzmy obrażeń psychicznych, osłabiających wolę walki przeciwnika. Jeśli twoja zdolność Obelga zmniejszy PW celu do 0, upada on i osuwa się w bezdenną otchłań rozpaczy."
       }
     ],
-    "base": null
+    "base": "Niezależnie od tego, czy cwaniak działa z egoistycznych pobudek, czy robi coś dla dobra ogółu, ma nieprawdopodobny wpływ na ludzi i swoje cwaniackie szczęście. Swój dar może wykorzystać do wyciągnięcia ostatniej kromki od bezdomnego, przejęcia władzy w okolicy czy poprowadzenia ludzi do beznadziejnej walki. Cwaniak to urodzony lider, który wykorzysta każdego, żeby dotrzeć na szczyt. PODSTAWOWE ATRYBUTY CWANIAKA Ulubiona Cecha Bazowa Charyzma Wymaganie wstępne Charyzma 15+ Kość Wytrzymałości k6 na każdym poziomie Cwaniaka Punkty Wytrzymałości 1 poziom: 12 plus mod. KON. Kolejne poziomy: 3 plus mod. KON Biegłości w Rzutach Obronnych Charyzma i Zręczność Biegłości w umiejętnościach Wybierz cztery z listy: Akrobatyka, Skradanie się, Historia, Oszustwo, Perswazja, Występy, Zastraszanie, Zwinne dłonie. Biegłość w narzędziach Wybierz 2 instrumenty muzyczne i jeden dowolny zestaw narzędzi (patrz Sprzęt s. 134) Biegłości w broni Broń biała, Broń palna krótka Wyszkolenie w pancerzu Lekkie pancerze Sprzęt początkowy Plecak oszusta, instrument muzyczny (do 50 gb) oraz (A) 150 gb lub (B), koktajl Mołotowa x 2, kurtka ćwiekowana, Medpak, narzędzia małego szulera, nóż taktyczny, papieros x 10, rewolwer Trzydziestka ósemka, 12 naboi .38 SPL, zapalniczka. TWORZENIE POSTACI CWANIAKA Jako postać 1. poziomu • Otrzymujesz wszystkie podstawowe atrybuty Cwaniaka. • Otrzymujesz wszystkie pierwszopoziomowe zdolności Cwaniaka, spisane w tabeli Zdolności klasowych Cwaniaka. Jako postać wieloklasowa • Otrzymujesz poniższe atrybuty Cwaniaka: Kość Wytrzymałości, biegłość w jednej wybranej umiejętności, biegłość w jednym instrumencie muzycznym i wyszkolenie w lekkich pancerzach. • Otrzymujesz wszystkie pierwszopoziomowe zdolności, spisane w tabeli Zdolności klasowych Cwaniaka. Plecak oszusta (10 kg) Zawartość: 2 kg prowiantu, 2 l wody pitnej, trzy przebrania, dzwoneczek, flaszka oleju, grzebień, latarka czołówka, lusterko, manierka, menażka, notatnik, ołówek, piersiówka, śpiwór, talia kart, WD-Tabs (10 tabletek)."
   },
   "spec": {
     "abilities": [
@@ -183,7 +183,7 @@
         "level": 2,
         "name": "SZYBKIE BADANIE",
         "action": "B",
-        "text": "W czasie walki możesz wykonać akcję Badanie w swojej Akcji Bonusowej. Jesteś w stanie bardzo szybko zdobyć cenne informacje dotyczące np. miejsca walki, najbliższych urządzeń lub wybranych statystyk przeciwnika, zależnie od używanej umiejętności (patrz akcja Badanie w rozdziale Eksploracja str. XXX). PRZYKŁAD: Wykonując Test Inteligencji (Technika) o ST 15, dotyczący wrogiej maszyny Molocha, możesz się dowiedzieć, ile ma PW lub jak wysoka jest jej TT."
+        "text": "W czasie walki możesz wykonać akcję Badanie w swojej Akcji Bonusowej. Jesteś w stanie bardzo szybko zdobyć cenne informacje dotyczące np. miejsca walki, najbliższych urządzeń lub wybranych statystyk przeciwnika, zależnie od używanej umiejętności (patrz akcja Badanie w rozdziale Eksploracja s. 41). PRZYKŁAD: Wykonując Test Inteligencji (Technika) o ST 15, dotyczący wrogiej maszyny Molocha, możesz się dowiedzieć, ile ma PW lub jak wysoka jest jej TT."
       },
       {
         "level": 2,
@@ -195,25 +195,25 @@
         "level": 3,
         "name": "SZYBKA PRODUKCJA",
         "action": null,
-        "text": "Raz na Krótki lub Długi odpoczynek, poza normalnymi zasadami produkcji, możesz stworzyć niewielkie przedmioty, jeśli masz odpowiednie narzędzia, surowce i schematy. Sumaryczna wartość tych przedmiotów nie może przekraczać 25 gb, a czas produkcji to 1 minuta x 1 gb wartości. PRZYKŁAD: Potrzebujesz 20 minut, żeby wyprodukować samoróbkę (20 gb), granat improwizowany (20 gb), medpak (20 gb), 2 noże do rzucania (2 x 10 gb) lub 12 naboi 9 mm (10 x 2 gb). Na poziomie 11 możesz szybko wyprodukować przedmioty warte sumarycznie 50 gb (patrz podrozdział Produkcja przedmiotów str. XXX)."
+        "text": "Raz na Krótki lub Długi odpoczynek, poza normalnymi zasadami produkcji, możesz stworzyć niewielkie przedmioty, jeśli masz odpowiednie narzędzia, surowce i schematy. Sumaryczna wartość tych przedmiotów nie może przekraczać 25 gb, a czas produkcji to 1 minuta x 1 gb wartości. PRZYKŁAD: Potrzebujesz 20 minut, żeby wyprodukować samoróbkę (20 gb), granat improwizowany (20 gb), medpak (20 gb), 2 noże do rzucania (2 x 10 gb) lub 12 naboi 9 mm (10 x 2 gb). Na poziomie 11 możesz szybko wyprodukować przedmioty warte sumarycznie 50 gb (patrz podrozdział Produkcja przedmiotów s. 144)."
       },
       {
         "level": 3,
         "name": "ZDOLNOŚĆ Z PROFESJI",
         "action": null,
-        "text": "Wybierasz profesję, wyznaczającą kierunek rozwoju twojej kariery naukowej. Masz do wyboru profesję Chemika, Medyka i Montera. Ten wybór określa, jakie zdolności z profesji możesz wybrać na 3., 6. i 10. poziomie Speca. Opcjonalnie, zamiast zdolności z profesji na poziomie 6. i 10., możesz wybrać Sztuczkę. 000 78KLASY"
+        "text": "Wybierasz profesję, wyznaczającą kierunek rozwoju twojej kariery naukowej. Masz do wyboru profesję Chemika, Medyka i Montera. Ten wybór określa, jakie zdolności z profesji możesz wybrać na 3., 6. i 10. poziomie Speca. Opcjonalnie, zamiast zdolności z profesji na poziomie 6. i 10., możesz wybrać Sztuczkę."
       },
       {
         "level": 4,
         "name": "SZTUCZKA",
         "action": null,
-        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki str. XXX), jeśli spełniasz jej wymagania. Kolejną Sztuczkę możesz wybrać na 8. i 12. poziomie Speca."
+        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki s. 102), jeśli spełniasz jej wymagania. Kolejną Sztuczkę możesz wybrać na 8. i 12. poziomie Speca."
       },
       {
         "level": 4,
         "name": "SZYBKIE RĘCE",
         "action": null,
-        "text": "Wczasie walki jesteś w stanie robić dwie rzeczy naraz. W swojej turze możesz wykonać jedną akcję więcej oprócz zwykłej akcji i możliwej Akcji Bonusowej. Akcja ta może być przeznaczona jedynie na akcję Używanie. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Zręczności. Zdolność odnawia się po odbyciu Krótkiego odpoczynku."
+        "text": "W czasie walki jesteś w stanie robić dwie rzeczy naraz. W swojej turze możesz wykonać jedną akcję więcej oprócz zwykłej akcji i możliwej Akcji Bonusowej. Akcja ta może być przeznaczona jedynie na akcję Używanie. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Zręczności. Zdolność odnawia się po odbyciu Krótkiego odpoczynku."
       },
       {
         "level": 5,
@@ -225,7 +225,7 @@
         "level": 5,
         "name": "ZDOLNOŚĆ Z POCHODZENIA",
         "action": null,
-        "text": "Wybierasz sobie drugą zdolność z listy zdolności twojego pochodzenia (szczegóły w rozdziale Pochodzenie str. XXX)."
+        "text": "Wybierasz sobie drugą zdolność z listy zdolności twojego pochodzenia (szczegóły w rozdziale Pochodzenie s. 60)."
       },
       {
         "level": 7,
@@ -249,10 +249,10 @@
         "level": 11,
         "name": "W CZUŁY PUNKT",
         "action": null,
-        "text": "Do wszystkich obrażeń, które zadajesz, możesz dodać swój modyfikator Inteligencji. 000 79"
+        "text": "Do wszystkich obrażeń, które zadajesz, możesz dodać swój modyfikator Inteligencji."
       }
     ],
-    "base": null
+    "base": "Wykształcenie w zrujnowanych Podzielonych Stanach to coś rzadszego niż butelka zimnego, przedwojennego browarka. Spece to osoby, które je mają i żyją sobie właściwie, jak chcą, do momentu aż nie wpadną w poważne tarapaty. Dla ludzkich społeczeństw są bezcenni, szczególnie na peryferiach, gdzie miejscowy baron lub obrośnięty w piórka gangus, chciałby mieć pod ręką szpital, bimbrownię albo profesjonalny warsztat. Część Speców napędza ciekawość do świata, inni pragną poszerzać wiedzę, lecz zdarzają się i tacy, którzy chcieliby po prostu naprawić świat. Ci ostatni są szczególnie niebezpieczni. Porada. Grając specem, musisz dobrze zapoznać się z zasadami produkcji przedmiotów i działaniem różnych zestawów narzędzi. Dobry spec wykorzystuje każdy moment odpoczynku i postoju na produkowanie przydatnych gadżetów. Jeśli nie lubisz czytać zasad gry, planować i kombinować, ta klasa może nie być najlepszym wyborem dla ciebie. PODSTAWOWE ATRYBUTY SPECA Ulubiona Cecha Bazowa Inteligencja Wymaganie wstępne Inteligencja 15+ Kość Wytrzymałości k6 na każdym poziomie Speca Punkty Wytrzymałości 1 poziom: 12 plus mod. KON. Kolejne poziomy: 3 plus mod. KON Biegłości w Rzutach Obronnych Inteligencja i Mądrość Biegłości w umiejętnościach Wybierz cztery z listy: Historia, Intuicja, Medycyna, Pojazdy, Przyroda, Śledztwo, Technika Biegłość w narzędziach Dwa dowolne zestawy narzędzi (patrz Sprzęt s.134) Biegłości w broni Broń biała, Broń palna krótka Wyszkolenie w pancerzu Lekkie pancerze Sprzęt początkowy Plecak naukowca, jeden dowolny zestaw narzędzi oraz (A) 170 gb lub (B) narzędzia małego medyka, medpak, pistolet B 93R, 15 naboi 9 mm, szoker TWORZENIE POSTACI SPECA Jako postać 1. poziomu • Otrzymujesz wszystkie podstawowe atrybuty Speca. • Otrzymujesz wszystkie pierwszopoziomowe zdolności, spisane w tabeli Zdolności klasowych Speca. Jako postać wieloklasowa • Otrzymujesz poniższe atrybuty Speca: Kość Wytrzymałości, biegłość w jednej umiejętności z listy Speca, biegłość w jednych dowolnym zestawie narzędzi. • Otrzymujesz wszystkie pierwszopoziomowe zdolności, spisane w tabeli Zdolności klasowych Speca. Plecak naukowca (10 kg) Zawartość: 2 kg prowiantu, 2 l wody pitnej, kilka książek, latarka czołówka, linijka, manierka, miarka, notatnik, nożyczki, piórnik, super klej, suwak logarytmiczny, taśma klejąca, termometr, waga stołowa, WD-Tabs (10 tabletek), zapałki."
   },
   "twardziel": {
     "abilities": [
@@ -278,13 +278,13 @@
         "level": 2,
         "name": "PRZYCELOWANIE",
         "action": "B",
-        "text": "Możesz użyć Akcji Bonusowej, żeby przed atakiem wycelować w konkretną kończynę żywej istoty lub element maszyny Molocha. TT celu zostaje zwiększona, ale jeśli uzyskasz trafienie, nakładasz na cel efekty zgodne z poniższą tabelą."
+        "text": "Możesz użyć Akcji Bonusowej, żeby przed atakiem wycelować w konkretną kończynę żywej istoty lub element maszyny Molocha. TT celu zostaje zwiększona, ale jeśli uzyskasz trafienie, nakładasz na cel efekty zgodne z poniższą tabelą. CZĘŚĆ CIAŁA TT CELU EFEKT CZAS TRWANIA EFEKTU Kończyna górna +3 Upuszczenie broni/tarczy/przedmiotu Jednorazowy Kończyna dolna +2 Powalenie celu Jednorazowy Głowa/jednostka centralna +5 Trafienie Krytyczne Jednorazowy Opona/gąsienica +4 Spowolnienie o ½ Szybkości Do naprawy uszkodzenia Tętnica/układ hydrauliczny +4 Utrata 1k6 PW na początku każdej tury istoty Do opatrzenia rany/naprawy uszkodzenia"
       },
       {
         "level": 2,
         "name": "ZRYW",
         "action": null,
-        "text": "000 86KLASY Wspinasz się na szczyt swoich możliwości. W swojej turze możesz wykonać jeszcze jedną Akcję lub Akcję Bonusową. Po użyciu tej zdolności musisz ukończyć Krótki lub Długi odpoczynek, zanim będziesz mógł jej ponownie użyć."
+        "text": "Wspinasz się na szczyt swoich możliwości. W swojej turze możesz wykonać jeszcze jedną Akcję lub Akcję Bonusową. Po użyciu tej zdolności musisz ukończyć Krótki lub Długi odpoczynek, zanim będziesz mógł jej ponownie użyć."
       },
       {
         "level": 3,
@@ -302,7 +302,7 @@
         "level": 4,
         "name": "SZTUCZKA",
         "action": null,
-        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki str. XXX), jeśli spełniasz jej wymagania. Kolejną Sztuczkę możesz wybrać na 6., 8., 10. i 12. poziomie Twardziela."
+        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki s. 102), jeśli spełniasz jej wymagania. Kolejną Sztuczkę możesz wybrać na 6., 8., 10. i 12. poziomie Twardziela."
       },
       {
         "level": 5,
@@ -320,10 +320,10 @@
         "level": 10,
         "name": "TRZECI ATAK",
         "action": null,
-        "text": "Kiedy wykonujesz w swojej turze akcję Atakowanie, możesz zaatakować trzykrotnie. 000 87"
+        "text": "Kiedy wykonujesz w swojej turze akcję Atakowanie, możesz zaatakować trzykrotnie."
       }
     ],
-    "base": null
+    "base": "Bycie twardzielem, to nie tylko napinanie muskułów, noszenie ciężkich pancerzy i szpanowanie po okolicy fajnym gnatem. Prawdziwy Twardziel sam podejmuje największe ryzyko, robiąc rzeczy, od których inni wymiękają. To ktoś w stylu: Ja tego nie zrobię? Potrzymaj mi piwo. Twardziele są wyspecjalizowani w używaniu wszystkich kategorii broni i pancerzy, które mogą zmaksymalizować ich siłę ognia i defensywę na polu walki. Potrafią celnie wystrzelić największą ilość kul i używać pojazdów, jako broni. Jednej rzeczy nie cierpią najbardziej. Przegrywać. PODSTAWOWE ATRYBUTY TWARDZIELA Ulubiona Cecha Bazowa Kondycja Wymaganie wstępne Kondycja 15+ Kość Wytrzymałości k8 na każdym poziomie Twardziela Punkty Wytrzymałości 1 poziom: 16 plus mod. KON. Kolejne poziomy: 4 plus mod. KON Biegłości w Rzutach Obronnych Kondycja i Zręczność Biegłości w umiejętnościach Wybierz dwie: Akrobatyka, Atletyka, Intuicja, Percepcja, Pojazdy, Survival, Tresura, Zastraszanie Biegłość w narzędziach Brak Biegłości w broni Wszystkie kategorie broni Wyszkolenie w pancerzu Wszystkie pancerze i tarcze Sprzęt początkowy Plecak żołnierza oraz (A) 200 gb lub (B) Empepiątka, 30 naboi 9 mm, Plate carrier typ I, rura stalowa TWORZENIE POSTACI TWARDZIELA Jako postać 1. poziomu • Otrzymujesz wszystkie podstawowe atrybuty Twardziela. • Otrzymujesz wszystkie pierwszopoziomowe zdolności, spisane w tabeli Zdolności klasowych Twardziela. Jako postać wieloklasowa • Otrzymujesz poniższe atrybuty Twardziela: Kość Wytrzymałości, biegłość w jednej umiejętności z listy Twardziela, biegłość w dwóch kategoriach broni, wyszkolenie w lekkich i średnich pancerzach oraz w tarczach. • Otrzymujesz wszystkie pierwszopoziomowe zdolności, spisane w tabeli Zdolności klasowych Twardziela. Plecak żołnierza (15 kg) Zawartość: 2 kg prowiantu, 4 l wody pitnej, kompas, lina (15 metrów), latarka czołówka, manierka, menażka, pałatka, saperka, scyzoryk, WD-Tabs (10 tabletek), zestaw do rozpalania ognia."
   },
   "zlodziej": {
     "abilities": [
@@ -349,7 +349,7 @@
         "level": 2,
         "name": "KOCIE KOŚCI",
         "action": null,
-        "text": "Kot zawsze spada na cztery łapy tak jak ty. Możesz użyć jednej lub więcej Kocich kości w Reakcji na niekorzystny obrót spraw w poniższych sytuacjach: Ciche łapy [R]. Podczas akcji Ukrywania się, kiedy przeciwnik odkryje twoją obecność, możesz w Reakcji dorzucić je do wyniku swojego testu. Cztery łapy [R]. Kiedy spadasz z dużej wysokości, możesz w Reakcji wykorzystać je, żeby zmniejszyć obrażenia od upadku. Otrzymane obrażenia zmniejszają się o wynik, który wypadł na użytych Kocich kościach. 000 91"
+        "text": "Kot zawsze spada na cztery łapy tak jak ty. Możesz użyć jednej lub więcej Kocich kości w Reakcji na niekorzystny obrót spraw w poniższych sytuacjach: Ciche łapy [R]. Podczas akcji Ukrywania się, kiedy przeciwnik odkryje twoją obecność, możesz w Reakcji dorzucić je do wyniku swojego testu. Cztery łapy [R]. Kiedy spadasz z dużej wysokości, możesz w Reakcji wykorzystać je, żeby zmniejszyć obrażenia od upadku. Otrzymane obrażenia zmniejszają się o wynik, który wypadł na użytych Kocich kościach. Zgrabne łapy. Kiedy wykonujesz Test Zręczności (Akrobatyka) i wynik nie jest zadowalający, możesz dorzucić Kocie kości do rzutu przed poznaniem efektu testu. Wartość Kociej kości zwiększa się wraz z twoim poziomem Złodzieja zgodnie z kolumną Kocie kości w tabeli Zdolności klasowych Złodzieja. Posiadasz tyle Kocich kości, ile wynosi twój modyfikator Zręczności. Liczba Kocich kości odnawia się po odbyciu Długiego odpoczynku."
       },
       {
         "level": 2,
@@ -379,7 +379,7 @@
         "level": 4,
         "name": "SZTUCZKA",
         "action": null,
-        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki str. XXX), jeśli spełniasz jej wymagania. Kolejną Sztuczkę możesz wybrać na 8. i 12. poziomie Złodzieja."
+        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki s.102), jeśli spełniasz jej wymagania. Kolejną Sztuczkę możesz wybrać na 8. i 12. poziomie Złodzieja."
       },
       {
         "level": 5,
@@ -406,7 +406,7 @@
         "text": "Jesteś jak saper, tyle że ty się nie mylisz, nawet raz. Przy każdym teście umiejętności, w której masz Specjalizację, możesz traktować każdy wynik 9 lub mniej na k20, jak 10. Ta zdolność odnawia się po ukończeniu Krótkiego lub Długiego odpoczynku."
       }
     ],
-    "base": null
+    "base": "Bycie cichym, niezauważonym i skutecznym, to podstawowa strategia przetrwania w tym fachu. Szukanie słabości przeciwnika i znajdywanie nieszablonowych rozwiązań problemu, to naturalny talent każdego Złodzieja. Zadania, których wykonanie wydaje się niemożliwe, dają mu potężny zastrzyk adrenaliny. Złodziej otworzy każdy zamek, rozbroi minę pułapkę i znajdzie ukryte przejście. Ma talent do unikania niebezpieczeństw i ogarnie sprawy z lokalnym półświatkiem. A kiedy przychodzi do zabijania, kieruje się zasadą: jeden strzał, jeden trup. PODSTAWOWE ATRYBUTY ZŁODZIEJA Ulubiona Cecha Bazowa Zręczność Wymaganie wstępne Zręczność 15+ Kość Wytrzymałości k6 na każdym poziomie Złodzieja Punkty Wytrzymałości 1 poziom: 12 plus mod. KON. Kolejne poziomy: 3 plus mod. KON Biegłości w Rzutach Obronnych Inteligencja i Zręczność Biegłości w umiejętnościach Wybierz cztery: Akrobatyka, Intuicja, Oszustwo, Percepcja, Perswazja, Skradanie się, Śledztwo, Technika, Występy, Zastraszanie, Zwinne dłonie. Biegłość w narzędziach Narzędzia małego ślusarza Biegłości w broni Broń biała, Broń miotana, Broń palna krótka Wyszkolenie w pancerzu Lekkie pancerze Sprzęt początkowy Plecak włamywacza, narzędzia małego ślusarza oraz (A) 150 gb lub (B) kolczatki, kulki stalowe, kurtka ćwiekowana, łuk tradycyjny, 20 strzał, medpak, nóż taktyczny, nóż do rzucania x 2 TWORZENIE POSTACI ZŁODZIEJA Jako postać 1. poziomu • Otrzymujesz wszystkie podstawowe atrybuty Złodzieja • Otrzymujesz wszystkie pierwszopoziomowe zdolności, spisane w tabeli Zdolności klasowych Złodzieja. Jako postać wieloklasowa • Otrzymujesz poniższe atrybuty Złodzieja: Kość Wytrzymałości, biegłość w jednej w umiejętności z listy Złodzieja, biegłość w narzędziach małego ślusarza oraz wyszkolenie w lekkich pancerzach. • Otrzymujesz wszystkie pierwszopoziomowe zdolności, spisane w tabeli Zdolności klasowych Złodzieja. Plecak włamywacza (15 kg) Zawartość: 2 kg prowiantu, 2 l wody pitnej, 5 świec, 1 l odrdzewiacza, 1 l denaturatu, butelka smaru, dzwoneczek, hak, latarka czołówka, lina (5 metrów), łom, manierka, menażka, WD-Tabs (10 tabletek), zapałki."
   },
   "zwiadowca": {
     "abilities": [
@@ -414,7 +414,7 @@
         "level": 1,
         "name": "MÓJ BIOM",
         "action": null,
-        "text": "Twoje doświadczenie i naturalny talent sprawiają, że umiesz przetrwać tam, gdzie innych zjadają mrokoszczury. Wybierz dwa ulubione biomy z listy: Bagna, Góry, Las, Miasto, Neodżungla, Podziemia, Preria, Pustynia, Ruiny, Tereny Maszyn. W Testach Inteligencji i Mądrości związanych z tymi biomami masz Ułatwienie. Podróżując przez te specyficzne obszary, otrzymujesz dodatkowe korzyści: • Kiedy poruszacie się pieszo, trudny teren nie spowalnia cię, ani twojej drużyny, • Nikt i nic nie jest w stanie cię zaskoczyć. • Kiedy podróżujesz samotnie, możesz się skradać w tempie normalnego ruchu. • Jeśli poświęcisz 8 godzin na szukanie wody i pożywienia, jesteś w stanie wyżywić cztery osoby przez jedną dobę. • Tropiąc istoty, poznajesz ich dokładną liczebność, rozmiar i wiesz, kiedy zostawiły ślady. Wraz z awansem na kolejne poziomy Zwiadowcy, następne rodzaje biomów stają się dla ciebie swojskie i znane. Ich liczba podana jest w kolumnie Mój biom w tabeli Zdolności klasowych Zwiadowcy. 000 96KLASY"
+        "text": "Twoje doświadczenie i naturalny talent sprawiają, że umiesz przetrwać tam, gdzie innych zjadają mrokoszczury. Wybierz dwa ulubione biomy z listy: Bagna, Góry, Las, Miasto, Neodżungla, Podziemia, Preria, Pustynia, Ruiny, Tereny Maszyn. W Testach Inteligencji i Mądrości związanych z tymi biomami masz Ułatwienie. Podróżując przez te specyficzne obszary, otrzymujesz dodatkowe korzyści: • Kiedy poruszacie się pieszo, trudny teren nie spowalnia cię, ani twojej drużyny, • Nikt i nic nie jest w stanie cię zaskoczyć. • Kiedy podróżujesz samotnie, możesz się skradać w tempie normalnego ruchu. • Jeśli poświęcisz 8 godzin na szukanie wody i pożywienia, jesteś w stanie wyżywić cztery osoby przez jedną dobę. • Tropiąc istoty, poznajesz ich dokładną liczebność, rozmiar i wiesz, kiedy zostawiły ślady. Wraz z awansem na kolejne poziomy Zwiadowcy, następne rodzaje biomów stają się dla ciebie swojskie i znane. Ich liczba podana jest w kolumnie Mój biom w tabeli Zdolności klasowych Zwiadowcy."
       },
       {
         "level": 1,
@@ -438,7 +438,7 @@
         "level": 2,
         "name": "WYJADACZ",
         "action": null,
-        "text": "Zwiadowca to prawdziwy zawodowiec. Wybierz jedną z poniższych zdolności, która podkreśli ten fakt. Na 11. poziomie możesz wybrać kolejną zdolność z tej listy, ale każdą z nich możesz wybrać tylko raz. Jeździec Kiedy dosiadasz wierzchowca, nie musisz używać rąk, żeby nim kierować. Nie otrzymujesz Utrudnienia do Testów Ataków dystansowych związanego z niestabilnym podłożem, kiedy na nim jedziesz. Wsiadanie i zsiadanie z wierzchowca kosztuje cię tylko 1,5 metra ruchu. Trudność Trafienia twojego wierzchowca zwiększa się o wartość twojej Premii Biegłości."
+        "text": "Zwiadowca to prawdziwy zawodowiec. Wybierz jedną z poniższych zdolności, która podkreśli ten fakt. Na 11. poziomie możesz wybrać kolejną zdolność z tej listy, ale każdą z nich możesz wybrać tylko raz. Jeździec Kiedy dosiadasz wierzchowca, nie musisz używać rąk, żeby nim kierować. Nie otrzymujesz Utrudnienia do Testów Ataków dystansowych związanego z niestabilnym podłożem, kiedy na nim jedziesz. Wsiadanie i zsiadanie z wierzchowca kosztuje cię tylko 1,5 metra ruchu. Trudność Trafienia twojego wierzchowca zwiększa się o wartość twojej Premii Biegłości. PRZYKŁADOWE PUŁAPKI PUŁAPKA ST DZIAŁANIE POTRZEBNE MATERIAŁY Potykacz 5 Istota otrzymuje stan Powalenie Brak Alarm 5 Wywołanie hałasu w promieniu 36 m Metalowe puszki lub naczynia Wnyki 10 Istota otrzymuje stan Pochwycenie Brak Sieć 10 Istota jest pod wpływem stanu Pochwycenie i Unieruchomienie Sieć Pułapka z granatem 15 Granat eksploduje po uruchomieniu wyzwalacza Granat Pułapka z bronią białą 15 Cel musi zdać RO na Zręczność, lub zostaje trafiony. Pułapka zadaje podstawowe obrażenia użytej broni Broń biała Pułapka z bronią samoczynną 20 Obszar zostaje ostrzelany długą serią. Obrażenia zależne od użytej broni i pojemności magazynka Karabin lub pistolet umożliwiający strzelanie serią. Obsługa pancerza Kiedy nosisz pancerz, otrzymujesz +2 do Trudności Trafienia. Rzeźnik Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią. Sokole oko Otrzymujesz modyfikator +3 do Testów Ataku bronią palną, dystansową i rzucaną. Stalowy nadgarstek Kiedy strzelasz z broni palnej krótkiej i pistoletów maszynowych jedną ręką, nie otrzymujesz związanego z tym Utrudnienia do Testów Ataku (tak jakby miały właściwość poręczna). Dodatkowo każda broń palna krótka w twoich rękach zyskuje właściwość lekka. Zasadzka Jeśli twój przeciwnik jest zaskoczony lub w pierwszej turze walki działasz przed nim, otrzymujesz Ułatwienie w Testach Ataku przeciwko niemu, do końca swojej tury."
       },
       {
         "level": 3,
@@ -456,7 +456,7 @@
         "level": 4,
         "name": "SZTUCZKA",
         "action": null,
-        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki str. XXX), jeśli spełniasz jej wymagania. Kolejną Sztuczkę możesz wybrać na 8. i 12. poziomie Zwiadowcy."
+        "text": "Otrzymujesz jedną wybraną Sztuczkę (zobacz rozdział Sztuczki s. 102), jeśli spełniasz jej wymagania. Kolejną Sztuczkę możesz wybrać na 8. i 12. poziomie Zwiadowcy."
       },
       {
         "level": 5,
@@ -483,6 +483,6 @@
         "text": "Rzuty Obronne, w których porażka oznacza otrzymanie stanu Wyczerpanie, wykonujesz z Ułatwieniem."
       }
     ],
-    "base": null
+    "base": "Z dala od miast i resztek cywilizacji, tam, gdzie dominują mutanci, maszyny Molocha i zdziczali ludzie, oczy czujnych zwiadowców szukają zwierzyny. Przemierzają niezmierzone dystanse, żywiąc się tym, co znajdą lub upolują. Każdy zwiadowca to wyspecjalizowany drapieżnik, którego napędza nienawiść, obowiązek lub jakiś pokręcony kodeks. Zwiadowcy to odludki, które lepiej dogadują się ze zwierzętami niż z ludźmi, choć często zarabiają jako przewodnicy, zabójcy potworów lub strażnicy. PODSTAWOWE ATRYBUTY ZWIADOWCY Ulubiona Cecha Bazowa Mądrość Wymaganie wstępne Mądrość 15+ Kość Wytrzymałości k8 na każdym poziomie Zwiadowcy Punkty Wytrzymałości 1 poziom: 16 plus mod. KON. Kolejne poziomy: 4 plus mod. KON Biegłości w Rzutach Obronnych Kondycja i Mądrość Biegłości w umiejętnościach Wybierz trzy: Atletyka, Intuicja, Percepcja, Przyroda, Survival, Skradanie się, Śledztwo, Tresura Biegłość w narzędziach Narzędzia małego kłusownika oraz jeden dodatkowy zestaw z listy: narzędzia małego kowala, małego mechanika lub małego rzeźnika Biegłości w broni Broń biała, Broń miotana, Broń palna krótka, Broń palna długa Wyszkolenie w pancerzu Lekkie i średnie pancerze Sprzęt początkowy Plecak turysty, narzędzia małego kłusownika oraz (A) 150 gb lub (B) kurtka ćwiekowana, lewar M95, 10 naboi .30-06, nóż taktyczny, medpak TWORZENIE POSTACI ZWIADOWCY Jako postać 1. poziomu • Otrzymujesz wszystkie podstawowe atrybuty Zwiadowcy. • Otrzymujesz wszystkie pierwszopoziomowe zdolności Zwiadowcy, spisane w tabeli Zdolności klasowych Zwiadowcy. Jako postać wieloklasowa • Otrzymujesz poniższe atrybuty Zwiadowcy: Kość Wytrzymałości, biegłość w jednej wybranej umiejętności, biegłość w dwóch kategoriach broni, wyszkolenie w lekkich i średnich pancerzach oraz w tarczach. • Otrzymujesz wszystkie pierwszopoziomowe zdolności, spisane w tabeli Zdolności klasowych Zwiadowcy. Plecak turysty (21 kg) Zawartość: 2 kg prowiantu, 4 l wody pitnej, 3 m stalowej linki, butelka smaru, flaszka oliwy, kompas, lina (15 m), latarka czołówka, manierka, menażka, saperka, scyzoryk, śpiwór, WD-Tabs (10 tabletek), zestaw do rozpalania ognia, żyłka (20 m)."
   }
 }

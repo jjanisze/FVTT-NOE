@@ -38,13 +38,14 @@ other tables running this module — but every such fragment carries an explicit
 where it came from. It is **not** gated behind the Kobalt toggle and it does **not** go in
 `scripts/wkk/`.
 
-Currently three fragments — two from the magazine rebuild, one grenade-range ruling:
+Currently four fragments — two from the magazine rebuild, one grenade-range ruling, one erratum:
 
 | Mechanic | Where |
 |---|---|
 | Magazines split per weapon MODEL, not per weapon category | `config/magazines-data.mjs`, `magwellOf()` in `config/weapons-data.mjs` |
 | No loading rounds into a removable magazine during combat | `weapons/magazine.mjs`, `_performLoadOneAction()` |
 | Grenade throw range floor is 18 m — "minimum 9" applies to the modifier term, resolving the rulebook's own rule-vs-example contradiction | `actors/grenade-inventory.mjs`, `_throwRangeMeters()` (+ its copy in `wkk/items/flara.mjs`) |
+| Cywil's Widły deal piercing damage — the October printing dropped the type (March had it) | `dev/bestiary/gen_bestiary.py`, `AUTOMATION["cywil.widly-tylko-farmer"]` |
 
 **Repo is public.** Attributing unpublished rulings to a named person should be cleared with
 them before it lands in a code comment — so the comments state the mechanic and its reasoning,

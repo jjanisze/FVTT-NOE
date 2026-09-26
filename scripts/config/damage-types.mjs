@@ -15,7 +15,7 @@
 export function registerDamageTypes() {
   CONFIG.DND5E.damageTypes = {
     slashing: {
-      label: "Sieczne",
+      label: "Cięte",
       icon: "systems/dnd5e/icons/svg/damage/slashing.svg",
       isPhysical: true,
       color: new Color(0x8B0000)

@@ -36,7 +36,7 @@ import {
 import { AMMO_CALIBERS, AMMO_CALIBER_MAP, GRENADE_TYPES } from "../config/ammo-data.mjs";
 import { ARMORS, ARMOR_MAP, buildArmorItemData } from "../config/armor-data.mjs";
 import { ADDON_DEFS, ADDON_LIST, SIGHT_ADDON_IDS } from "../config/addons-data.mjs";
-import { installAddonById, removeAddon } from "../weapons/addons.mjs";
+import { installAddonById, removeAddon, isAddonCompatible } from "../weapons/addons.mjs";
 import { POCHODNIA_VARIANTS, buildPochodniaItemData, ensurePochodniaActivities, createPochodniaItem } from "../wkk/items/pochodnia.mjs";
 import { TOOLKITS, buildToolkitItemData, createToolkits, MEDYK_MAX_CHARGES } from "../config/toolkits-data.mjs";
 import { CHEMIA, CHEMIA_TYPE, CHEMIA_SUBTYPES, chemiaKeyByName, chemiaItemData } from "../config/chemia-data.mjs";
@@ -762,8 +762,8 @@ export function registerEquipmentDataTests(quench) {
           for (const type of addon.requiresWeaponTypes ?? []) {
             expect(CONFIG.DND5E.weaponTypes, `${addon.id} → ${type}`).to.have.property(type);
           }
-          for (const prop of [...(addon.requiresProperties ?? []), ...(addon.grantProperties ?? []),
-            ...(addon.removeProperties ?? [])]) {
+          for (const prop of [...(addon.requiresProperties ?? []), ...(addon.forbidsProperties ?? []),
+            ...(addon.grantProperties ?? []), ...(addon.removeProperties ?? [])]) {
             expect(valid.has(prop), `${addon.id}: nieznana właściwość "${prop}"`).to.be.true;
           }
         }
@@ -816,6 +816,27 @@ export function registerEquipmentDataTests(quench) {
         expect(actor.items.get(item.id).system.damage.base.bonus).to.equal("3");
         await removeAddon(item, "naostrzenie", { refund: false });
         expect(actor.items.get(item.id).system.damage.base.bonus).to.equal("2");
+      });
+    });
+
+    describe("Przekucie — tylko broń jednoręczna (NOE s. 128)", function () {
+      let actor;
+      before(async function () { actor = await scratchActor(); });
+      after(async function () { await scratchCleanup(); });
+
+      async function weapon(name) {
+        const data = foundry.utils.deepClone(buildWeaponItemData(WEAPONS.find(w => w.name === name)));
+        data.system.quantity = 1;
+        const [item] = await actor.createEmbeddedDocuments("Item", [data], { render: false });
+        return item;
+      }
+
+      it("odmawia broni dwuręcznej", async function () {
+        expect(isAddonCompatible(await weapon("Crash"), ADDON_DEFS.przekucie)).to.be.a("string");
+      });
+
+      it("przyjmuje broń jednoręczną", async function () {
+        expect(isAddonCompatible(await weapon("Kastet"), ADDON_DEFS.przekucie)).to.equal(null);
       });
     });
 

@@ -50,7 +50,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | **Produkcja przedmiotów**, schematy, elaboracja amunicji, naprawianie | ❌ | panel Surowców liczy materiały, nic ich nie zużywa — M2 |
 | Teczka MG | Szabrowanie, bebeszenie | ❌ | M5 |
 | | Kolory Neuroshimy (Rdza, Rtęć, Stal, Chrom) | ❌ | po becie; WKK to osobna nakładka (`scripts/wkk/`) |
-| Notatnik łowcy | Bestiariusz, SP, próg obrażeń, awarie maszyn, amunicja BN | ✅ | 51 istot, 89/261 zdolności zautomatyzowane, 25/51 docelowych żetonów |
+| Notatnik łowcy | Bestiariusz, SP, próg obrażeń, awarie maszyn, amunicja BN | ✅ | 51 istot, 89/260 zdolności zautomatyzowane, 25/51 docelowych żetonów |
 | Zasady szczegółowe | Upojenie, Skażenie, Spadanie, Podpalenie, Krwawienie, Niedożywienie, Odwodnienie | ✅ | §1.5b, §4.1b–c, `combat/podpalenie.mjs`, `party-supplies.mjs` |
 | | Uduszenie, Przemarznięcie | ❌ | źródła Wyczerpania bez wyzwalacza — M1 |
 | | Próg obrażeń, pochwycenie, wytrącenie, udźwig, typy obrażeń | ✅ | |
@@ -860,7 +860,7 @@ Phase 5, teraz skreślony). Pełny opis pipeline'u: `DEV_GUIDE.md` §11.
   `Podrecznik/NOE/13 NOTATNIK ŁOWCY/` (konwersja PDF-a, źródło treści) + `dev/bestiary/lore-extras.json`
   (tagi krwi) → `dev/bestiary/extract_bestiary.py` →
   `gen_bestiary.py` → `scripts/config/bestiary-data.mjs` → `dev/packs/build-packs.mjs`
-- [x] **89 z 261 zdolności zautomatyzowane** — `RULES` (klucz = nazwa zdolności, powtarzalne
+- [x] **89 z 260 zdolności zautomatyzowane** — `RULES` (klucz = nazwa zdolności, powtarzalne
   między istotami: Pierwsze spotkanie, Algorytm czuwania, Współpraca, Światłowstręt) +
   `AUTOMATION` (klucz = `"<istota>.<zdolność>"`, przypadki jednostkowe). Reszta: `feat` z samym
   tekstem, czytelne na karcie, nieautomatyczne
@@ -1082,10 +1082,32 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### Dane wg NOE: regeneracja bestiariusza i zdolności, Przekucie, „cięte” (2026-09-26)
+
+Wykonany hand-off `HANDOFF_noe_pazdziernik.md` (usunięty — historia w `git log`). Packi przebudowane,
+`validate:packs` zielone.
+
+- **Bestiariusz** zregenerowany z NOE: Obrońca PB +5 i wyzwolenie z Chwytaka ST 17, Grubas SP 16,
+  Zombie (nakładka) z odpornością zamiast niewrażliwości na cięte/kłute/obuchowe, uzupełnione
+  odsyłacze. Przy okazji naprawione błędy starej ręcznej transkrypcji: Cyngiel ma Stopień Zranienia,
+  Gigamut atak *Rogi* i Udźwig jako `carry`, pełne *Taktyka*/*Informacje* Tarana i Cywila. Nazwy
+  mutantów „GENERACJA I – …” (id bez zmian).
+- **RAI:** Widły Cywila zadają kłute — październikowy druk zgubił typ; autor potwierdził pomyłkę
+  (`AUTOMATION["cywil.widly-tylko-farmer"].damageType`, wpis w tabeli RAI `scripts/wkk/README.md`).
+- **Zdolności klasowe i profesje** zregenerowane z NOE: zniknęły śmieci z numeracji stron („000 81”),
+  treści sąsiednich zdolności i opisy archetypów wklejone w cudze zdolności; „str. XXX” → numery stron.
+  Progresja bez zmian.
+- **Przekucie** (NOE s. 128): tylko broń jednoręczna — nowe pole `forbidsProperties` w
+  `AddonDef` (`["two"]`), sprawdzane w `isAddonCompatible()`; Przekucie już nie zdejmuje `two`.
+  Test Quench: odmowa dla Crash, zgoda dla Kastetu.
+- **Teksty:** Muzyk — Fuks dla 1 + mod. CHA sojuszników; typ obrażeń `slashing` to „Cięte”
+  (`damage-types.mjs`, `lang/pl.json`, parser granatów), opis Samuraja w brzmieniu NOE;
+  surowiec CZ to „Części zapasowe”.
+
 ### Jedno źródło RAW: podręcznik z października (`NOE/`) (2026-09-26)
 
-Cytowania, komentarze i narzędzia — **zero zmian w danych i w zachowaniu**. Lista tego, co jest
-teraz nieaktualne i czeka na decyzję/regenerację: [HANDOFF_noe_pazdziernik.md](HANDOFF_noe_pazdziernik.md).
+Cytowania, komentarze i narzędzia — **zero zmian w danych i w zachowaniu**. Lista tego, co było
+nieaktualne, trafiła do hand-offu wykonanego w następnym wpisie.
 
 - **Źródło.** PDF z października przekonwertowany w vaulcie do `Podrecznik/NOE/` (plik na
   rozdział/sekcję/istotę, znaczniki `<!-- s. N -->`, cytuj „NOE s. N”). Marcowy PDF i wszystkie

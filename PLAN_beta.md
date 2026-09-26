@@ -234,7 +234,7 @@ mieć odbiorcę).
 | Pozycja | Dlaczego później |
 |---|---|
 | Kolory Neuroshimy (Rdza, Rtęć, Stal, Chrom — s. 201) jako profile świata | Opcjonalne w RAW; framework powinien uogólnić przełącznik WKK, co jest osobnym projektem |
-| Pełna automatyka 133 zdolności klasowych, 53 Sztuczek, 36 zdolności Pochodzeń, 261 zdolności Bestiariusza | Długi ogon; beta wymaga tylko plakietek (B5) |
+| Pełna automatyka 133 zdolności klasowych, 53 Sztuczek, 36 zdolności Pochodzeń, 260 zdolności Bestiariusza | Długi ogon; beta wymaga tylko plakietek (B5) |
 | Wytrzymałość pancerzy (opcjonalne RAW) | Decyzja: ręcznie (`[—]` w trackerze) |
 | Docelowe żetony Bestiariusza (26/51), kalibracja skali, pozostałe ikony | Grafika, nie mechanika |
 | Screen shake DS/MS, iskry i krew trafienia | Oprawa |

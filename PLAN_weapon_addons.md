@@ -104,7 +104,7 @@ Jedno ulepszenie może mieć wiele trybów (np. SM = `"property"` + `"flag-only"
 | `naostrzenie` | Naostrzenie | `direct` | `attackBonus: 1, damageBonus: 1` | sieczna/kłuta | - |
 | `dociazone` | Dociążenie | `property` + `flag-only` | add `obalajaca` | obuchowa | - |
 | `dozownik` | Dozownik | `flag-only` | hook trucizny | kłuta | - |
-| `przekucie` | Przekucie | `property` | add `lgt`, (usuń `two` jeśli obecna) | jednoręczna | - |
+| `przekucie` | Przekucie | `property` | add `lgt`; broń z `two` odrzucona (`forbidsProperties`) | jednoręczna | - |
 | `szoker` | Szoker | `property` | add `porazajaca` | - | - |
 | `utwardzenie` | Utwardzenie | `flag-only` | melee-degradation.mjs sprawdza flagę | - | - |
 | `wywazone` | Wyważenie | `direct` | `rangeNormalBonus: *2, rangeLongBonus: *2` (double) | rzucana | - |

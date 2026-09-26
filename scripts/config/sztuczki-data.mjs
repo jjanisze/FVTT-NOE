@@ -242,7 +242,7 @@ export const SZTUCZKI = Object.freeze({
     label: "Muzyk",
     req: "CHA 13+",
     text: "+1 CHA; biegłość w 2 instrumentach; Pieśń otuchy (1×/Długi Odpoczynek) — "
-      + "Fuks dla tylu sojuszników co modyfikator CHA.",
+      + "Fuks dla 1 + mod. CHA sojuszników.",
     category: "wsparcie",
     auto: []
   },
@@ -403,28 +403,29 @@ export const SZTUCZKI = Object.freeze({
   samuraj: {
     label: "Samuraj",
     req: "ZRC 13+",
-    text: "+1 SIŁ lub ZRC; +1 do Testów Ataku i obrażeń bronią sieczną; wyciągnięcie finezyjnej "
-      + "broni siecznej bez Darmowej Interakcji; TT +1 z taką bronią w ręku.",
+    text: "+1 SIŁ lub ZRC; +1 do Testów Ataku i obrażeń bronią zadającą obrażenia cięte; dobycie "
+      + "finezyjnej broni białej zadającej obrażenia cięte bez Darmowej Interakcji; TT +1, gdy dzierżysz "
+      + "taką broń.",
     category: "wrecz",
-    // „Bronią sieczną" = bronią, której obrażenia zawierają typ `slashing` — czyli także
-    // bronią mieszaną (Nóż taktyczny: kłute+cięte), zgodnie z literalnym brzmieniem.
+    // „Zadającą obrażenia cięte" = wśród typów obrażeń jest `slashing` — czyli także
+    // broń mieszana (Nóż taktyczny: kłute+cięte), zgodnie z literalnym brzmieniem.
     legacyAbilityKeys: ["samuraj"],
     auto: [
       {
-        what: "+1 do Testów Ataku bronią sieczną — hak `dnd5e.preRollAttack`.",
+        what: "+1 do Testów Ataku bronią zadającą obrażenia cięte — hak `dnd5e.preRollAttack`.",
         where: "actors/samuraj.mjs"
       },
       {
-        what: "+1 do obrażeń bronią sieczną — hak `dnd5e.preRollDamage`.",
+        what: "+1 do obrażeń bronią zadającą obrażenia cięte — hak `dnd5e.preRollDamage`.",
         where: "actors/samuraj.mjs"
       },
       {
-        what: "TT +1, gdy trzyma broń sieczną — Active Effect na system.attributes.ac.bonus, "
+        what: "TT +1, gdy trzyma broń zadającą obrażenia cięte — Active Effect na system.attributes.ac.bonus, "
           + "dopinany/odpinany przy zmianie ekwipunku.",
         where: "actors/samuraj.mjs"
       }
     ],
-    manual: "„Wyciągnięcie finezyjnej broni siecznej bez Darmowej Interakcji” — dobywanie broni "
+    manual: "„Dobycie finezyjnej broni białej zadającej obrażenia cięte bez Darmowej Interakcji” — dobywanie broni "
       + "nie jest w tym systemie śledzone jako zasób, więc nie ma czego automatyzować."
   },
   siekierezada: {

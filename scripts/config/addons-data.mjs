@@ -26,6 +26,7 @@
  * @property {number}   price              cena w gb
  * @property {number}   weight             waga kg (szacunek)
  * @property {string[]} requiresProperties właściwości broni wymagane przy instalacji
+ * @property {string[]} [forbidsProperties] właściwości, których broń mieć NIE może
  * @property {string[]} requiresWeaponTypes lista dozwolonych system.type.value; [] = wszystkie
  * @property {string[]} requiresAddons     inne addony muszące być zainstalowane
  * @property {string[]} exclusiveWith      wzajemnie wykluczające się ID
@@ -129,13 +130,14 @@ export const ADDON_DEFS = {
     price: 40,
     weight: 0,
     requiresProperties: [],
+    forbidsProperties: ["two"], // tylko broń jednoręczna (NOE s. 128)
     requiresWeaponTypes: ["biala"],
     requiresAddons: [],
     exclusiveWith: ["dociazone"],
     usesSMSlot: false,
     applyMode: ["property"],
     grantProperties: ["lgt"],
-    removeProperties: ["two"], // usuń Dwuręczna jeśli obecna
+    removeProperties: [],
     attackBonus: 0,
     damageBonus: 0,
     rangeNormalBonus: 0,

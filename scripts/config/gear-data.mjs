@@ -223,7 +223,7 @@ export const REAL_GEAR = [
       + `module, włączasz je w oknie rzutu, bo tylko MG wie, czy dana czynność faktycznie „używa `
       + `tego sprzętu".</p>`
       + `<p><em>Produkcja (Schematy hakerskie): ST 30, 140 godzin, 50 Części elektronicznych (CE), `
-      + `1 Chemia (CH), 14 Części zamiennych (CZ), 5 Materiałów konstrukcyjnych (MK) — referencyjne, `
+      + `1 Chemia (CH), 14 Części zapasowych (CZ), 5 Materiałów konstrukcyjnych (MK) — referencyjne, `
       + `crafting jeszcze nie jest zautomatyzowany.</em></p>`
   },
   {

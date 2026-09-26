@@ -1,3 +1,5 @@
-2026/09/24-23:23:13.740 2de0 Recovering log #6
-2026/09/24-23:23:13.745 2de0 Delete type=0 #6
-2026/09/24-23:23:13.745 2de0 Delete type=3 #4
+2026/09/26-16:14:39.604 eb1c Recovering log #3
+2026/09/26-16:14:39.605 eb1c Level-0 table #5: started
+2026/09/26-16:14:39.607 eb1c Level-0 table #5: 14244 bytes OK
+2026/09/26-16:14:39.612 eb1c Delete type=0 #3
+2026/09/26-16:14:39.612 eb1c Delete type=3 #2

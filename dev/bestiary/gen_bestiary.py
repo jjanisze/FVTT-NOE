@@ -170,6 +170,9 @@ AUTOMATION = {
         "requires": "grappled",
     },
     "bit-boys.skok": {"kind": "descriptive"},
+
+    # RAI (autor systemu): wyd. październikowe zgubiło typ obrażeń, marcowe miało kłute.
+    "cywil.widly-tylko-farmer": {"damageType": "piercing"},
 }
 
 
@@ -258,7 +261,7 @@ def build_creature(cid, r):
             "damage": {
                 "avg": dmg.get("avg"),
                 "formula": dice(dmg.get("formula")),
-                "type": dmg.get("type"),
+                "type": auto.get("damageType") or dmg.get("type"),
             } if dmg else None,
             "rider": a.get("rider"),
             "onHit": auto.get("onHit"),

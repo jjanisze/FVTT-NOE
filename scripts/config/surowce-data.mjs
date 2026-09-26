@@ -4,7 +4,7 @@
  * Five tracked resource types that drive the crafting/production economy:
  *   CH  Chemia                  — explosives, medicines, ammo primers
  *   CE  Części elektroniczne    — electronics, drones, computers
- *   CZ  Części zamienne         — mechanical parts, weapons, vehicles
+ *   CZ  Części zapasowe         — mechanical parts, weapons, vehicles
  *   MK  Materiały konstrukcyjne — structural materials, armor
  *   MO  Materiały organiczne    — food, biological ingredients
  *
@@ -32,7 +32,7 @@ export const SUROWCE_ICON_DIR = `modules/${MODULE_ID}/icons/items/loot`;
 export const SUROWCE_TYPES = Object.freeze([
   { code: "CH", id: "chemia",                 label: "Chemia",                  icon: "chemia.svg",                 accent: "#b5c24a", order: 1 },
   { code: "CE", id: "czesci_elektroniczne",   label: "Części elektroniczne",    icon: "czesci_elektroniczne.svg",   accent: "#5ab0c2", order: 2 },
-  { code: "CZ", id: "czesci",                 label: "Części zamienne",         icon: "czesci.svg",                 accent: "#c2925a", order: 3 },
+  { code: "CZ", id: "czesci",                 label: "Części zapasowe",         icon: "czesci.svg",                 accent: "#c2925a", order: 3 },
   // MK/MO accents revised 2026-09-06: MK's plain grey (#9a9a9a) was nearly identical to the
   // Ekwipunek bar's "Reszta" grey (#8f8f8f), and MO's red (#c25a5a) nearly identical to that
   // same bar's "Broń" red (#b06a6a) — both real collisions once every category shares one bar

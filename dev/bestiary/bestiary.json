@@ -100,7 +100,7 @@
     "text": "Alahama wykonuje Przyspieszenie w kierunku ofiary."
    }
   ],
-  "file": "Alahama.md",
+  "file": "04 POTWORY\\01 ALAHAMA.md",
   "hp": {
    "avg": 102,
    "formula": "16k10 + 32"
@@ -253,7 +253,7 @@
     "text": "Biodroid wykonuje Odstąpienie, przy okazji zakopywania się w ziemi lub wspinania na drzewo."
    }
   ],
-  "file": "Biodroid.md",
+  "file": "02 MASZYNY\\02 BIODROID.md",
   "hp": {
    "avg": 72,
    "failureThreshold": 20,
@@ -275,7 +275,7 @@
    "krewTag": "smart",
    "taktyka": "Biodroid zakopuje się w ziemi lub ukrywa na drzewie w pobliżu naturalnych ścieżek, żeby w odpowiednim momencie wyskoczyć za plecami upatrzonej ofiary. Kilka biodroidów może zaskoczyć obozujących wędrowców, wyłaniając się z ziemi pośrodku obozowiska. Zaczynają walkę długą serią w skupisko intruzów.",
    "wyglad": "Wyobraź sobie, że wędrujesz przez Neodżunglę i spotykasz gigantyczną glistę obwieszoną karabinami maszynowymi. Poczwara staje pionowo, jak człowiek i wymierza w ciebie cały swój arsenał. Na dodatek macha kolcem jadowym na końcu ogona, z którego kapie jakiś kwas. Najgorsze jest to, że nie ma nawet głowy, w którą można by wycelować.",
-   "wystepowanie": "Neodżungla."
+   "wystepowanie": "Neodżungla"
   },
   "name": "BIODROID",
   "overlay": false,
@@ -383,7 +383,7 @@
     "text": "Przewodnik wybiera jedną istotę, którą widzi w zasięgu 18 m. Istota musi zdać RO na Charyzmę o ST 13, inaczej jest Zauroczona przewodnikiem do końca jego następnej tury."
    }
   ],
-  "file": "Bit-Boy-Przewodnik.md",
+  "file": "04 POTWORY\\03 BIT-BOY PRZEWODNIK.md",
   "hp": {
    "avg": 60,
    "formula": "12k8 + 12"
@@ -500,7 +500,7 @@
    {
     "name": "Palcożerca",
     "section": "traits",
-    "text": "Jeśli trafi krytycznie, odgryza jeden palec ofierze ataku. Rzuć 1k10, który palec został odgryziony: 1-5 palce lewej ręki, 6-10 palce prawej ręki. Atak nie powoduje otrzymania Stopnia Zranienia, ale nakłada -1 wszystkich Testów Cech opartych na Zręczności, do czasu zastąpienia lub odrośnięcia utraconego palca."
+    "text": "Jeśli trafi krytycznie, odgryza jeden palec ofierze ataku. Rzuć 1k10, który palec został odgryziony: 1 - 5 palce lewej ręki, 6 - 10 palce prawej ręki. Atak nie powoduje otrzymania Stopnia Zranienia, ale nakłada -1 wszystkich Testów Cech opartych na Zręczności, do czasu zastąpienia lub odrośnięcia utraconego palca."
    },
    {
     "name": "Współpraca",
@@ -523,7 +523,7 @@
     "text": "Próbuje unieruchomić pochwycony cel. Pochwycona istota musi zdać RO na Siłę o ST 12 inaczej zostaje Unieruchomiona (Wyzwolenie się to ST 12)."
    }
   ],
-  "file": "Bit-Boys.md",
+  "file": "04 POTWORY\\02 BIT-BOYS (aka CROATS).md",
   "hp": {
    "avg": 24,
    "formula": "8k6"
@@ -677,7 +677,7 @@
     "text": "Cyngiel redukuje otrzymane w ataku obrażenia o połowę."
    }
   ],
-  "file": "Cyngiel.md",
+  "file": "01 LUDZIE\\01 CYNGIEL.md",
   "hp": {
    "avg": 88,
    "formula": "12k8 + 24"
@@ -722,7 +722,8 @@
   "speed": {
    "walk": 9
   },
-  "statName": "CYNGIEL"
+  "statName": "CYNGIEL",
+  "usesZranienie": true
  },
  "cywil": {
   "abilities": {
@@ -776,8 +777,8 @@
     "damage": {
      "avg": 6,
      "formula": "3k4",
-     "type": "piercing",
-     "typeRaw": "kłute"
+     "type": null,
+     "typeRaw": null
     },
     "kind": "mwak",
     "name": "Widły (tylko farmer)",
@@ -810,7 +811,7 @@
     "text": "Jeśli cywil jest częścią tłumu liczącego co najmniej 30 osób, otrzymuje Ułatwienie do Testów Ataku."
    }
   ],
-  "file": "Cywil.md",
+  "file": "01 LUDZIE\\02 CYWIL.md",
   "hp": {
    "avg": 9,
    "formula": "1k4 + 1"
@@ -945,7 +946,7 @@
     "text": "Może wykonać Odepchnięcie, Odstąpienie, Wytrącenie lub Przyspieszenie."
    }
   ],
-  "file": "Gangus-Boss.md",
+  "file": "01 LUDZIE\\05 GANGUS BOSS.md",
   "hp": {
    "avg": 108,
    "formula": "12k8 + 48"
@@ -1077,7 +1078,7 @@
     "text": "Może wykonać akcję Powalenie, Odstąpienie lub Wytrącenie."
    }
   ],
-  "file": "Gangus-Kapo.md",
+  "file": "01 LUDZIE\\04 GANGUS KAPO.md",
   "hp": {
    "avg": 60,
    "formula": "8k8 + 16"
@@ -1195,7 +1196,7 @@
     "text": "Gangus żołnierz ma Ułatwienie w Testach Ataku, jeśli w zasięgu 1,5 m od celu, znajduje się choć jeden jego sojusznik, który jest przytomny."
    }
   ],
-  "file": "Gangus-Żołnierz.md",
+  "file": "01 LUDZIE\\03 GANGUS ŻOŁNIERZ.md",
   "hp": {
    "avg": 18,
    "formula": "1k8 + 2"
@@ -1212,7 +1213,7 @@
    "krew": "Czerwona krew — ludzka.",
    "krewTag": "czerwona",
    "taktyka": "Żołnierze gangu preferują walkę na dystans, w czasie której wykorzystują Osłony tj. murki, okna, beczki czy rogi budynków. Wychylają się zza nich, tylko żeby oddać strzał i ponownie się kryją. Jeśli nie widzą celu, podchodzą i używają akcji Wyczekanie, żeby strzelić w Reakcji do pojawiającego się przeciwnika. Jeśli walczą wręcz, skupiają się na jednym przeciwniku, żeby skorzystać ze zdolności Współpraca. Podczas pościgów wykazują się większą odwagą, zachowując się jak stado wygłodniałych psów-mutków.",
-   "wystepowanie": "Szosy, ruiny i skupiska ludzkie."
+   "wystepowanie": "Szosy, ruiny i skupiska ludzkie"
   },
   "morale": 25,
   "name": "GANGUS ŻOŁNIERZ",
@@ -1312,7 +1313,7 @@
     "text": "Cel w zasięgu 1,5 m od nocnego ghula musi zdać RO na Siłę lub Zręczność o ST 13, inaczej zostaje Pochwycony (Wyzwalanie się to ST 13)."
    }
   ],
-  "file": "Generacja-I-Nocny-Ghul.md",
+  "file": "03 MUTANCI\\01 GENERACJA I – NOCNY GHUL.md",
   "hp": {
    "avg": 36,
    "formula": "6k8 + 12"
@@ -1331,7 +1332,7 @@
    "wyglad": "Na pierwszy rzut oka wyglądają jak schorowani ludzie, którzy przyjęli zbyt dużą dawkę promieniowania. Charakterystyczni szczególnie w nocy, ponieważ świecą delikatnym, zielonym blaskiem, jak fluorescencyjna zabawka. To nie są żadne, zataczające się i potykające o własne nogi zombi ze starych filmów. Zwisająca skóra, widoczne mutacje, nadludzka siła i zęby jak u piranii, które służą do próby zaspokojenia nieskończonego głodu ludzkiego mięsa. Nie noszą ubrań, a w świetle dnia ich bezwłosa skóra jest niemal biała.",
    "wystepowanie": "Ruiny, podziemia, terytoria Molocha."
   },
-  "name": "GENERACJA I. NOCNY GHUL",
+  "name": "GENERACJA I – NOCNY GHUL",
   "overlay": false,
   "randomized": false,
   "senses": {
@@ -1347,7 +1348,7 @@
   "speed": {
    "walk": 9
   },
-  "statName": "GENERACJA I. NOCNY GHUL"
+  "statName": "GENERACJA I – NOCNY GHUL"
  },
  "generacja-ii-genotyp-gadzi": {
   "abilities": {
@@ -1440,7 +1441,7 @@
     "text": "Wykonuje jeden atak ogonem i jeden jadowitymi zębami."
    }
   ],
-  "file": "Generacja-II-Genotyp-Gadzi.md",
+  "file": "03 MUTANCI\\02 GENERACJA II – GENOTYP GADZI.md",
   "hp": {
    "avg": 30,
    "formula": "6k8 + 6"
@@ -1459,7 +1460,7 @@
    "wyglad": "Są równie różnorodni, jak wszystkie gady. Ci z genami grzechotnika są jadowici i mają łuski w kolorze piachu. DNA aligatora daje im wielkie paszcze i błony między palcami. A krzyżówka z kameleonem oprócz wyłupiastych oczu, potrafi być niewidzialna. Serio ci mówię. Jeden stoi właśnie za twoimi plecami!",
    "wystepowanie": "Bagna, pustynie, terytoria Molocha."
   },
-  "name": "GENERACJA II. GENOTYP GADZI",
+  "name": "GENERACJA II – GENOTYP GADZI",
   "overlay": false,
   "randomized": false,
   "resistances": [
@@ -1488,7 +1489,7 @@
    "swim": 12,
    "walk": 12
   },
-  "statName": "GENERACJA II. GENOTYP GADZI (GADOLUD)",
+  "statName": "GENERACJA II – GENOTYP GADZI (GADOLUD)",
   "usesZranienie": true
  },
  "generacja-ii-genotyp-wilczy": {
@@ -1574,7 +1575,7 @@
    {
     "name": "Wataha",
     "section": "traits",
-    "text": "Każdemu wilkoludowi towarzyszy 2k4 psów mutków (ich opis znajduje się w podrozdziale Zwierzęta str. XXX), które pomagają mu w polowaniu i wykonują jego mentalne polecenia."
+    "text": "Każdemu wilkoludowi towarzyszy 2k4 psów mutków (ich opis znajduje się w podrozdziale Zwierzęta s. 238), które pomagają mu w polowaniu i wykonują jego mentalne polecenia."
    },
    {
     "name": "Atak wielokrotny",
@@ -1587,7 +1588,7 @@
     "text": "Wydaje z siebie upiorne wycie przyprawiające o gęsią skórkę. Wszystkie istoty (oprócz jego sojuszników), które je słyszą w zasięgu 150 m, muszą zdać RO na Mądrość o ST 14, inaczej otrzymują stan Przerażenie do końca następnej tury wilkoluda. Raz zdany RO zapewnia niewrażliwość na upiorne wycie przez następne 24 godziny."
    }
   ],
-  "file": "Generacja-II-Genotyp-Wilczy.md",
+  "file": "03 MUTANCI\\03 GENERACJA II – GENOTYP WILCZY.md",
   "hp": {
    "avg": 64,
    "formula": "8k10 + 24"
@@ -1606,7 +1607,7 @@
    "wyglad": "Nie ma dwóch takich samych. Różnią się wielkością pyska, długością kończyn, stopniem przygarbienia, wzrostem czy nawet barwami sierści. Wszystkie jednak wyglądają, jak wyjęte z koszmaru hybrydy człowieka z wilkiem lub psem. Jeśli usłyszysz jego upiorne wycie, lepiej natychmiast znajdź sobie dobrą kryjówkę, bo sfora już na ciebie poluje.",
    "wystepowanie": "Lasy, ruiny, prerie, terytoria Molocha."
   },
-  "name": "GENERACJA II. GENOTYP WILCZY",
+  "name": "GENERACJA II – GENOTYP WILCZY",
   "overlay": false,
   "randomized": false,
   "senses": {
@@ -1627,7 +1628,7 @@
    "climb": 9,
    "walk": 15
   },
-  "statName": "GENERACJA II. GENOTYP WILCZY (WILKOLUD)",
+  "statName": "GENERACJA II – GENOTYP WILCZY (WILKOLUD)",
   "usesZranienie": true
  },
  "generacja-iii-grubas": {
@@ -1736,7 +1737,7 @@
     "text": "Grubas wykonuje Przyspieszenie w kierunku przeciwnika."
    }
   ],
-  "file": "Generacja-III-Grubas.md",
+  "file": "03 MUTANCI\\04 GENERACJA III – GRUBAS.md",
   "hp": {
    "avg": 72,
    "damageThreshold": 10,
@@ -1749,7 +1750,7 @@
   },
   "items": "3 x oszczep, łańcuch, narzędzia małego kowala",
   "lore": {
-   "informacje": "Moloch uwstecznił ewolucję człowieka i wtedy jego laboratorium opuściły grubasy — wierne mu mutki służące do obrony mutancich obozów, przeprowadzania „mięsnych szturmów\" i noszenia ciężkiego sprzętu. Inteligencją dorównują ludziom, lecz emocjonalnie są na poziomie dziecka. Bardzo cenni jako niewolnicy, kowale i gladiatorzy na arenach.",
+   "informacje": "Moloch uwstecznił ewolucję człowieka i wtedy jego laboratorium opuściły grubasy — wierne mu mutki służące do obrony mutancich obozów, przeprowadzania „mięsnych szturmów” i noszenia ciężkiego sprzętu. Inteligencją dorównują ludziom, lecz emocjonalnie są na poziomie dziecka. Bardzo cenni jako niewolnicy, kowale i gladiatorzy na arenach.",
    "kategoria": "Mutanci",
    "krew": "Czerwona krew — wciąż ludzka, mimo mutacji.",
    "krewTag": "czerwona",
@@ -1758,7 +1759,7 @@
    "wystepowanie": "Areny gladiatorskie, ruiny, prerie, terytoria Molocha."
   },
   "morale": 25,
-  "name": "GENERACJA III. GRUBAS",
+  "name": "GENERACJA III – GRUBAS",
   "overlay": false,
   "randomized": false,
   "senses": {
@@ -1772,12 +1773,12 @@
   },
   "sp": {
    "pb": 3,
-   "value": 14
+   "value": 16
   },
   "speed": {
    "walk": 12
   },
-  "statName": "GENERACJA III. GRUBAS",
+  "statName": "GENERACJA III – GRUBAS",
   "tools": [
    {
     "bonus": 9,
@@ -1877,17 +1878,17 @@
     "text": "Szpieg wykonuje Odstąpienie, Unikanie lub Przyspieszenie."
    }
   ],
-  "file": "Generacja-III-Szpieg.md",
+  "file": "03 MUTANCI\\06 GENERACJA III – SZPIEG.md",
   "hp": {
    "avg": 38,
-   "formula": "6k8 + 14"
+   "formula": "6k8 +14"
   },
   "id": "generacja-iii-szpieg",
   "initiative": {
    "mod": 8,
    "passive": 18
   },
-  "items": "zestaw małego ślusarza, 2k6 papierosów, środek usypiający",
+  "items": "zestaw małego ślusarza, 2k6 papierosów, środek usypiający.",
   "lore": {
    "informacje": "Szpiedzy żyją wśród ludzi całymi latami, żeby w odpowiednim momencie otworzyć bramę, wyłączyć generator zasilający oświetlenie, zatruć wodę lub zrobić cokolwiek innego, co pomoże Molochowi w osiągnięciu zaplanowanego celu. Może nim być zwykły wędrowiec, żebrak czy nawet zagubiony dzieciak. I to jest w nim najgorsze.",
    "kategoria": "Mutanci",
@@ -1898,7 +1899,7 @@
    "wystepowanie": "Wszędzie."
   },
   "morale": 50,
-  "name": "GENERACJA III. SZPIEG",
+  "name": "GENERACJA III – SZPIEG",
   "overlay": false,
   "randomized": false,
   "senses": {
@@ -1919,7 +1920,7 @@
   "speed": {
    "walk": 12
   },
-  "statName": "GENERACJA III. SZPIEG",
+  "statName": "GENERACJA III – SZPIEG",
   "tools": [
    {
     "bonus": 6,
@@ -1992,7 +1993,7 @@
     "text": "Jeśli warunki pola walki pozwalają, techmutas wykonuje Ukrywanie się."
    }
   ],
-  "file": "Generacja-III-Techmutas.md",
+  "file": "03 MUTANCI\\05 GENERACJA III – TECHMUTAS.md",
   "hp": {
    "avg": 30,
    "formula": "6k8 + 6"
@@ -2013,7 +2014,7 @@
    "wystepowanie": "Bazy i fabryki mutantów, terytoria Molocha."
   },
   "morale": 25,
-  "name": "GENERACJA III. TECHMUTAS",
+  "name": "GENERACJA III – TECHMUTAS",
   "overlay": false,
   "randomized": false,
   "senses": {
@@ -2034,7 +2035,7 @@
   "speed": {
    "walk": 12
   },
-  "statName": "GENERACJA III. TECHMUTAS",
+  "statName": "GENERACJA III – TECHMUTAS",
   "tools": [
    {
     "bonus": 8,
@@ -2137,7 +2138,7 @@
     "text": "Mesmeryta wybiera jedną istotę, którą widzi w zasięgu 9 m. Istota musi zdać RO na Charyzmę o ST 18, inaczej jej Szybkość spada do 0, do końca następnej tury mesmeryty."
    }
   ],
-  "file": "Generacja-IV-Mesmeryta.md",
+  "file": "03 MUTANCI\\07 GENERACJA IV – MESMERYTA.md",
   "hp": {
    "avg": 112,
    "formula": "16k8 + 48"
@@ -2149,7 +2150,7 @@
   },
   "items": "narzędzia małego charakteryzatora, granat odłamkowy, granat dymny, medpak",
   "lore": {
-   "informacje": "Patrz rozdział Mutanci (str. XXX) w części poświęconej opisowi świata.",
+   "informacje": "Patrz akapit Mutant z sąsiedztwa (s. 164) w rozdziale Świat.",
    "kategoria": "Mutanci",
    "krew": "Czerwona krew — wciąż ludzka, mimo mutacji.",
    "krewTag": "czerwona",
@@ -2158,7 +2159,7 @@
    "wystepowanie": "Fabryki mutantów, podziemia ludzkich skupisk."
   },
   "morale": 50,
-  "name": "GENERACJA IV. MESMERYTA",
+  "name": "GENERACJA IV – MESMERYTA",
   "overlay": false,
   "randomized": false,
   "saves": {
@@ -2168,7 +2169,7 @@
   "sectionNotes": [
    {
     "section": "legendary",
-    "text": "Mesmeryta może wykonać ten rodzaj specjalnej akcji po turze dowolnego przeciwnika. W swojej rundzie może wykonać akcję legendarną 3 razy, ale nie więcej niż jedną na raz."
+    "text": "Mesmeryta może wykonać ten rodzaj specjalnej akcji po turze dowolnego przeciwnika. W swojej rundzie może wykonać akcję legendarną 3 razy, ale nie więcej niż jedną naraz."
    }
   ],
   "senses": {
@@ -2190,7 +2191,7 @@
   "speed": {
    "walk": 9
   },
-  "statName": "GENERACJA IV. MESMERYTA",
+  "statName": "GENERACJA IV – MESMERYTA",
   "tools": [
    {
     "bonus": 10,
@@ -2245,22 +2246,36 @@
     "reach": 1.5,
     "rider": "Jeśli gigamut przemieścił się co najmniej 6 m na wprost tuż przed wykonaniem ataku, trafiony cel zostaje Powalony i odrzucony na odległość 3 m, jeśli jest rozmiaru wielkiego lub mniejszego.",
     "section": "actions"
+   },
+   {
+    "bonus": 13,
+    "damage": {
+     "avg": 31,
+     "formula": "4k12 + 7",
+     "type": "piercing",
+     "typeRaw": "kłute"
+    },
+    "kind": "mwak",
+    "name": "Rogi",
+    "range": null,
+    "reach": 3,
+    "rider": "Trafiona istota rozmiaru dużego lub mniejsza, musi zdać RO na Siłę o ST 21, inaczej otrzymuje stan Powalenie.",
+    "section": "actions"
    }
   ],
+  "carry": {
+   "max": 2800,
+   "normal": 1400
+  },
   "creatureType": "zwierze",
   "features": [
    {
     "name": "Pierwsze spotkanie",
     "section": "traits",
     "text": "RO na Mądrość o ST 16."
-   },
-   {
-    "name": "Udźwig",
-    "section": "traits",
-    "text": "Użytkowy: 1 400 kg. Maksymalny: 2 800 kg."
    }
   ],
-  "file": "Gigamut.md",
+  "file": "05 ZWIERZĘTA\\01 GIGAMUT.md",
   "hp": {
    "avg": 192,
    "formula": "16k12 + 96"
@@ -2349,7 +2364,7 @@
     "bonus": 6,
     "damage": {
      "avg": 8,
-     "formula": "1k10 + 3",
+     "formula": "1k10 +3",
      "type": "piercing",
      "typeRaw": "kłute"
     },
@@ -2394,7 +2409,7 @@
     "text": "Jeśli pająk trafi, może w swojej Akcji Bonusowej oplątać siecią ofiarę. Cel musi zdać RO na Siłę lub Zręczność o ST 14, inaczej zostaje Unieruchomiony pajęczą siecią, dopóki nie zostanie zniszczona (TT 10, PW 5, wrażliwość na obrażenia od ognia, niewrażliwość na obrażenia obuchowe, psychiczne i od trucizny)."
    }
   ],
-  "file": "Gigantyczny-Pająk.md",
+  "file": "05 ZWIERZĘTA\\02 GIGANTYCZNY PAJĄK.md",
   "hp": {
    "avg": 64,
    "formula": "8k10 + 24"
@@ -2517,12 +2532,12 @@
    {
     "name": "Stalowe maczugi",
     "section": "actions",
-    "text": "Gladiator wykonuje 3 ataki wręcz w jeden cel. *Atak wręcz:* +9; zasięg 3 m; *Obrażenia:* 16 (2k12 + 4) obuchowe. Trafiona istota rozmiaru dużego lub mniejsza, musi zdać RO na Siłę o ST 17, inaczej otrzymuje stan Powalenie."
+    "text": "Gladiator wykonuje 3 ataki wręcz w jeden cel. Atak wręcz: +9; zasięg 3 m; Obrażenia: 16 (2k12 + 4) obuchowe. Trafiona istota rozmiaru dużego lub mniejsza, musi zdać RO na Siłę o ST 17, inaczej otrzymuje stan Powalenie."
    },
    {
     "name": "Piły",
     "section": "actions",
-    "text": "Gladiator wykonuje 3 ataki wręcz w jeden lub więcej celów w zasięgu. *Atak wręcz:* +9; zasięg 3 m; *Obrażenia:* 16 (2k12 + 4) cięte."
+    "text": "Gladiator wykonuje 3 ataki wręcz w jeden lub więcej celów w zasięgu. Atak wręcz: +9; zasięg 3 m; Obrażenia: 16 (2k12 + 4) cięte."
    },
    {
     "name": "Stratowanie",
@@ -2535,7 +2550,7 @@
     "text": "Gladiator może podnieść swoją TT o +3 wobec jednego ataku wręcz."
    }
   ],
-  "file": "Gladiator.md",
+  "file": "02 MASZYNY\\08 GLADIATOR.md",
   "hp": {
    "avg": 108,
    "damageThreshold": 5,
@@ -2669,7 +2684,7 @@
     "text": "Harpia otrzymuje stan Oślepienie, jeśli znajduje się w świetle słonecznym."
    },
    {
-    "name": "Atak wielokrotny",
+    "name": "Atak Wielokrotny",
     "section": "actions",
     "text": "Harpia wykonuje jeden atak pazurami i jedno ugryzienie."
    },
@@ -2679,7 +2694,7 @@
     "text": "Harpia nie prowokuje ataków okazyjnych do końca swojej tury."
    }
   ],
-  "file": "Harpie-(Aka-Wampiry).md",
+  "file": "04 POTWORY\\05 HARPIE (aka WAMPIRY).md",
   "hp": {
    "avg": 48,
    "formula": "12k8"
@@ -2699,7 +2714,7 @@
    "wystepowanie": "Góry, klify i wysokie, zrujnowane budynki."
   },
   "morale": 25,
-  "name": "HARPIE (AKA WAMPIRY)",
+  "name": "HARPIE (aka WAMPIRY)",
   "overlay": false,
   "randomized": false,
   "senses": {
@@ -2879,7 +2894,7 @@
     "text": "Juggernaut przemieszcza się maksymalnie o 18 m. Istoty znajdujące się na jego trasie, muszą zdać RO na Zręczność o ST 24, inaczej otrzymują stan Powalenie i 30 (5k12) obrażeń obuchowych."
    }
   ],
-  "file": "Juggernaut.md",
+  "file": "02 MASZYNY\\03 JUGGERNAUT.md",
   "hp": {
    "avg": 320,
    "damageThreshold": 15,
@@ -2920,7 +2935,7 @@
   "sectionNotes": [
    {
     "section": "legendary",
-    "text": "Juggernaut może wykonać ten rodzaj specjalnych akcji po turze dowolnego przeciwnika. W swojej rundzie może wykonać Akcję Legendarną 3 razy, ale nie więcej niż jedną na raz."
+    "text": "Juggernaut może wykonać ten rodzaj specjalnych akcji po turze dowolnego przeciwnika. W swojej rundzie może wykonać Akcję Legendarną 3 razy, ale nie więcej niż jedną naraz."
    }
   ],
   "senses": {
@@ -3047,7 +3062,7 @@
     "text": "Kanibal ma Ułatwienie w Testach Ataku, jeśli w zasięgu 1,5 m od celu znajduje się choć jeden jego sojusznik, który jest przytomny."
    }
   ],
-  "file": "Kanibal.md",
+  "file": "01 LUDZIE\\07 KANIBAL.md",
   "hp": {
    "avg": 26,
    "formula": "2k8 + 6"
@@ -3176,7 +3191,7 @@
    {
     "name": "Porywacz",
     "section": "traits",
-    "text": "W swojej Akcji Kidnaper może podnieść jedną sparaliżowaną lub nieprzytomną, średnią lub mniejszą istotę i wsadzić ją do klatki w swoim korpusie. Uwięziona istota rozmiaru średniego, otrzymuje stan Unieruchomienie, ze względu na ciasnotę klatki. Jeśli istota odzyska przytomność, Kidnaper faszeruje ją trucizną paraliżującą."
+    "text": "Porywacz. W swojej Akcji Kidnaper może podnieść jedną sparaliżowaną lub nieprzytomną, średnią lub mniejszą istotę i wsadzić ją do klatki w swoim korpusie. Uwięziona istota rozmiaru średniego, otrzymuje stan Unieruchomienie, ze względu na ciasnotę klatki. Jeśli istota odzyska przytomność, Kidnaper faszeruje ją trucizną paraliżującą."
    },
    {
     "name": "Atak wielokrotny",
@@ -3194,7 +3209,7 @@
     "text": "Kidnaper może wykonać Odstąpienie lub Przyspieszenie, kiedy ucieka, niosąc ładunek."
    }
   ],
-  "file": "Kidnaper.md",
+  "file": "02 MASZYNY\\05 KIDNAPER.md",
   "hp": {
    "avg": 84,
    "failureThreshold": 20,
@@ -3311,7 +3326,7 @@
     "text": "Kitchin swobodnie porusza się po polu większej od siebie istoty i może się na nią wspinać."
    }
   ],
-  "file": "Kitchin.md",
+  "file": "04 POTWORY\\04 KITCHIN.md",
   "hp": {
    "avg": 8,
    "formula": "4k4"
@@ -3327,7 +3342,7 @@
    "krew": "Hemolimfa — niebiesko-zielona, owadzia.",
    "krewTag": "owad",
    "taktyka": "Kitchin wspina się na nogę istoty, atakuje żądłem i jeśli trafi, ucieka.",
-   "wyglad": "Niewielka i niepozorna bestia o czarnym chitynowym pancerzu i tuzinie odnóży. Porusza się, prześlizgując swój wijący tułów przez najwęższe szczeliny, szukając zacienionych, chłodnych i wilgotnych miejsc. Trochę przypomina przedwojenną skolopendrę. Idzie to rozgnieść obcasem. To nie jest problem. Problemem jest to, że jak już dziabnie, to pada się nieprzytomnym na kilka godzin, a wtedy ofiarę wykańcza wszystko inne - promieniowanie, drapieżniki, pustynne słońce czy przechodząca akurat banda mutasów. Kitchin zazwyczaj wciska się pod kamień i siedzi w zacienionym miejscu, ale potrafi też zakraść się do śpiwora lub butów. Najwięcej ofiar kitchina to strudzeni wędrowcy, którzy zdjęli na chwilę buty, żeby dać odpocząć stopom i nie zajrzeli do środka przed założeniem ich z powrotem.",
+   "wyglad": "Niewielka i niepozorna bestia o czarnym chitynowym pancerzu i tuzinie odnóży. Porusza się, prześlizgując swój wijący tułów przez najwęższe szczeliny, szukając zacienionych, chłodnych i wilgotnych miejsc. Trochę przypomina przedwojenną skolopendrę. Idzie to rozgnieść obcasem. To nie jest problem. Problemem jest to, że jak już dziabnie, to pada się nieprzytomnym na kilka godzin, a wtedy ofiarę wykańcza wszystko inne - promieniowanie, drapieżniki, pustynne słońce czy przechodząca akurat banda mutasów. Kitchin zazwyczaj wciska się pod kamień i siedzi w zacienionym miejscu, ale potrafi też zakraść się do śpiwora lub butów. Najwięcej ofiar kitchina to strudzeni wędrowcy, którzy zdjęli na chwilę buty, żeby dać odpocząć stopomi nie zajrzeli do środka przed założeniem ich z powrotem.",
    "wystepowanie": "Prerie, pustynie i Neodżungla."
   },
   "name": "KITCHIN",
@@ -3412,7 +3427,7 @@
     "text": "Może pić brudną lub skażoną wodę oraz jeść spleśniałą paszę. Nic mu już nie zaszkodzi ani nie pomoże."
    }
   ],
-  "file": "Koń-Skażony.md",
+  "file": "05 ZWIERZĘTA\\03 KOŃ (SKAŻONY).md",
   "hp": {
    "avg": 18,
    "formula": "2k10 + 8"
@@ -3510,7 +3525,7 @@
     "text": "Pojenie skażoną wodą i złe karmienie, może zmienić go w konia skażonego."
    }
   ],
-  "file": "Koń-Teksańczyk.md",
+  "file": "05 ZWIERZĘTA\\05 KOŃ (TEKSAŃCZYK).md",
   "hp": {
    "avg": 32,
    "formula": "4k10 + 12"
@@ -3608,7 +3623,7 @@
     "text": "Pojenie skażoną wodą i złe karmienie, może zmienić go w konia skażonego."
    }
   ],
-  "file": "Koń-Zdrowy.md",
+  "file": "05 ZWIERZĘTA\\04 KOŃ (ZDROWY).md",
   "hp": {
    "avg": 32,
    "formula": "4k10 + 12"
@@ -3714,10 +3729,10 @@
    {
     "name": "Tommy gun długa seria (2/walkę)",
     "section": "actions",
-    "text": "RO na Zręczność o ST 12, każda istota w linii 36 m długości i 1,5 m szerokości. Porażka: 12 (3k8) obrażeń kłutych. Sukces: połowa obrażeń."
+    "text": "RO na Zręczność o ST 12, każda istota w linii 36 m długości i 1,5 m szerokości. Porażka: 12 (3k8) obrażeń kłutych. Sukces: połowa obrażeń"
    }
   ],
-  "file": "Konwojent-Strażnik.md",
+  "file": "01 LUDZIE\\06 KONWOJENT (STRAŻNIK).md",
   "hp": {
    "avg": 24,
    "formula": "2k8 + 2"
@@ -3831,7 +3846,7 @@
    {
     "name": "Kamuflaż",
     "section": "traits",
-    "text": "Korzec przypomina drzewo i dopóki się nie poruszy jest Niewidoczny dla istot z Pasywną Percepcją poniżej 20."
+    "text": "Korzec przypomina drzewo i dopóki się nie poruszy jest Niewidoczny dla istot z Pasywną Percepcją poniżej 20"
    },
    {
     "name": "Atak wielokrotny",
@@ -3844,7 +3859,7 @@
     "text": "Korzec wykonuje rzut Pochwyconą istotą w najbliższe drzewo lub skałę w odległości do 18 m. Istota otrzymuje maksymalnie 27 (9k6) obrażeń obuchowych i jest Powalona."
    }
   ],
-  "file": "Korzec.md",
+  "file": "04 POTWORY\\06 KORZEC.md",
   "hp": {
    "avg": 144,
    "formula": "16k10 + 64"
@@ -3935,7 +3950,7 @@
     "name": "Karabin krótka seria (10/walkę)",
     "range": 60,
     "reach": 15,
-    "rider": "; Utrudnienie.",
+    "rider": "; Utrudnienie",
     "section": "actions"
    }
   ],
@@ -3961,7 +3976,7 @@
     "text": "Kurczak ma elektromagnesy w swoich kurzych nóżkach, dzięki którym chodzi po metalu, niczym pająk po ścianie. Traci tę przyczepność, jeśli otrzyma stan Powalenie lub Obezwładnienie."
    }
   ],
-  "file": "Kurczak.md",
+  "file": "02 MASZYNY\\12 KURCZAK.md",
   "hp": {
    "avg": 12,
    "formula": "4k4 + 4"
@@ -4105,7 +4120,7 @@
     "text": "Jeśli łowca trafił istotę, może w swojej Akcji Bonusowej wykonać Pochwycenie, które udaje się automatycznie, jeśli istota jest średnia lub mniejsza (Wyzwolenie się to ST 12). Łowca może trzymać tylko jedną istotę jednocześnie."
    }
   ],
-  "file": "Łowca.md",
+  "file": "02 MASZYNY\\06 ŁOWCA.md",
   "hp": {
    "avg": 40,
    "formula": "8k6 + 16"
@@ -4264,7 +4279,7 @@
     "text": "Megator wykonuje atak ogonem."
    }
   ],
-  "file": "Megator.md",
+  "file": "04 POTWORY\\07 MEGATOR.md",
   "hp": {
    "avg": 240,
    "formula": "16k20 + 80"
@@ -4377,10 +4392,10 @@
    {
     "name": "Atak",
     "section": "actions",
-    "text": "Rzuć 1k6 i wylosuj, jaką broń ma na wyposażeniu dana jednostka mobsprzętu. *Tabela: rodzaj podwozia* *Tabela: rodzaj broni*"
+    "text": "Rzuć 1k6 i wylosuj, jaką broń ma na wyposażeniu dana jednostka mobsprzętu."
    }
   ],
-  "file": "Mobsprzęt.md",
+  "file": "02 MASZYNY\\07 MOBSPRZĘT.md",
   "hp": {
    "avg": 48,
    "failureThreshold": 15,
@@ -4421,34 +4436,34 @@
    "value": 8
   },
   "speed": {
-   "rolled": "rzuć 1k6 i sprawdź w tabeli poniżej"
+   "rolled": "Rzuć 1k6 i sprawdź w poniższej tabeli"
   },
   "statName": "MOBSPRZĘT",
   "tables": [
    [
     "K6",
-    "Rodzaj podwozia",
-    "Szybkość"
+    "RODZAJ PODWOZIA",
+    "SZYBKOŚĆ"
    ],
    [
-    "1-2",
+    "1 – 2",
     "Kołowe",
     "36 m"
    ],
    [
-    "3-4",
+    "3 – 4",
     "Gąsienicowe",
     "12 m (nie spowalnia go trudny teren)"
    ],
    [
-    "5-6",
+    "5 – 6",
     "Kroczące",
     "9 m, wspinanie się 6 m"
    ],
    [
     "1K6",
-    "Rodzaj broni",
-    "Liczba i rodzaj ataku"
+    "RODZAJ BRONI",
+    "LICZBA I RODZAJ ATAKU"
    ],
    [
     "1",
@@ -4519,7 +4534,7 @@
     "bonus": 3,
     "damage": {
      "avg": 4,
-     "formula": "1k6 + 1",
+     "formula": "1k6 +1",
      "type": "piercing",
      "typeRaw": "kłute"
     },
@@ -4561,10 +4576,10 @@
    {
     "name": "Zakażenie",
     "section": "traits",
-    "text": "Ugryziona przez mrokoszczura istota musi zdać RO na Kondycję o ST 10 inaczej zostaje zainfekowany szczurzą gorączką (patrz podrozdział Choroby str. XXX)."
+    "text": "Ugryziona przez mrokoszczura istota musi zdać RO na Kondycję o ST 10 inaczej zostaje zainfekowany szczurzą gorączką (patrz sekcja Popularne choroby s. 111)."
    }
   ],
-  "file": "Mrokoszczur.md",
+  "file": "05 ZWIERZĘTA\\06 MROKOSZCZUR.md",
   "hp": {
    "avg": 15,
    "formula": "3k6 + 6"
@@ -4688,10 +4703,10 @@
    {
     "name": "Szczurze nóżki",
     "section": "bonus",
-    "text": "Myślący szczur może wykonać Ukrywanie się, Odstąpienie lub Przyspieszenie."
+    "text": "Myślący szczur może wykonać Ukrywanie się, Odstąpienie lub Przyspieszenie"
    }
   ],
-  "file": "Myślący-Szczur.md",
+  "file": "05 ZWIERZĘTA\\07 MYŚLĄCY SZCZUR.md",
   "hp": {
    "avg": 12,
    "formula": "4k6 + 4"
@@ -4818,7 +4833,7 @@
    {
     "name": "Pierwsze spotkanie",
     "section": "traits",
-    "text": "RO na Mądrość o ST 13."
+    "text": "RO na Mądrość o ST 13"
    },
    {
     "name": "Wstrzymanie oddechu",
@@ -4836,7 +4851,7 @@
     "text": "Pochwycona przez neogatora istota, otrzymuje 11 (1k12 + 5) obrażeń obuchowych."
    }
   ],
-  "file": "Neogator.md",
+  "file": "05 ZWIERZĘTA\\09 NEOGATOR.md",
   "hp": {
    "avg": 72,
    "formula": "8k10 + 32"
@@ -4947,7 +4962,7 @@
     "text": "Neokot ma Ułatwienie w Testach Ataku, jeśli w zasięgu 1,5 m od celu, znajduje się choć jeden jego sojusznik, który jest przytomny."
    }
   ],
-  "file": "Neokot.md",
+  "file": "05 ZWIERZĘTA\\08 NEOKOT.md",
   "hp": {
    "avg": 8,
    "formula": "2k4 + 4"
@@ -5076,7 +5091,7 @@
     "text": "Jeśli neoniedźwiedź trzyma Pochwycony paszczą cel, zadaje mu automatycznie 15 (2k10 + 5) obrażeń."
    }
   ],
-  "file": "Neoniedźwiedź.md",
+  "file": "05 ZWIERZĘTA\\10 NEONIEDŹWIEDŹ.md",
   "hp": {
    "avg": 120,
    "formula": "12k12 + 48"
@@ -5163,7 +5178,7 @@
     "name": "Chwytak",
     "range": null,
     "reach": 3,
-    "rider": "Trafiona istota zostaje Pochwycona (Wyzwolenie się to ST 16). Istota Pochwycona przez obrońcę otrzymuje stan Unieruchomienie.",
+    "rider": "Trafiona istota zostaje Pochwycona (Wyzwolenie się to ST 17). Istota Pochwycona przez obrońcę otrzymuje stan Unieruchomienie.",
     "section": "actions"
    },
    {
@@ -5220,7 +5235,7 @@
     "text": "Obrońca wykonuje Przyspieszenie w kierunku przeciwnika."
    }
   ],
-  "file": "Obrońca.md",
+  "file": "02 MASZYNY\\09 OBROŃCA.md",
   "hp": {
    "avg": 144,
    "damageThreshold": 10,
@@ -5269,7 +5284,7 @@
    "prc": 7
   },
   "sp": {
-   "pb": 4,
+   "pb": 5,
    "value": 38
   },
   "speed": {
@@ -5360,7 +5375,7 @@
     "text": "Pająk wykonuje Unikanie."
    }
   ],
-  "file": "Pająk.md",
+  "file": "02 MASZYNY\\04 PAJĄK.md",
   "hp": {
    "avg": 16,
    "formula": "4k4 + 8"
@@ -5480,7 +5495,7 @@
     "text": "Pies bojowy ma Ułatwienie w Testach Ataku, jeśli w zasięgu 1,5 m od celu, znajduje się choć jeden jego sojusznik, który jest przytomny."
    }
   ],
-  "file": "Pies-Bojowy.md",
+  "file": "05 ZWIERZĘTA\\11 PIES BOJOWY.md",
   "hp": {
    "avg": 20,
    "formula": "2k8 + 8"
@@ -5601,7 +5616,7 @@
     "text": "Jeśli pies mutek trafił istotę, może w swojej Akcji Bonusowej wykonać Pochwycenie. Cel musi zdać RO na Siłę lub Zręczność o ST 13, inaczej zostaje Pochwycony (Wyzwolenie się to ST 13). Pies mutek nie może wykonywać ataków na inne cele, póki trzyma ofiarę."
    }
   ],
-  "file": "Pies-Mutek.md",
+  "file": "04 POTWORY\\08 PIES MUTEK.md",
   "hp": {
    "avg": 28,
    "formula": "4k8 + 12"
@@ -5706,7 +5721,7 @@
     "text": "Pulser wykonuje Przyspieszenie lub Ukrywanie się."
    }
   ],
-  "file": "Pulser.md",
+  "file": "02 MASZYNY\\10 PULSER.md",
   "hp": {
    "avg": 56,
    "damageThreshold": 5,
@@ -5729,7 +5744,7 @@
    "krewTag": "smart",
    "taktyka": "Po wykryciu intruzów pulser używa eksplodujących czyraków, by osłabić jak największą ilość przeciwników. W Akcji Bonusowej wykonuje Przyspieszenie, żeby wyjść z zasięgu broni palnej lub schować się wśród koron drzew.",
    "wyglad": "Jest metrowym, opalizującym insektem, z pulsującymi na odwłoku dwoma cielistymi czyrakami, które pękając, wysyłają w stronę przeciwnika falę ciśnienia, rozwalającego bębenki w uszach. Unoszą go dwie pary skrzydeł, które hałasują niczym mały śmigłowiec. Pulser jest biomaszyną ofensywną, ale jego broń nie należy do takich, przed którymi dałoby się obronić. Pulser nie rzuci się na ciebie z ostrzami i nie będzie próbował cię zastrzelić. On powali cię na ziemię - będziesz trzymał się za eksplodującą bólem głowę i jęczał o litość. A w tym czasie nadciągną inne roboty i zrobią swoje. Najnowsza generacja tych maszyn w niczym nie przypomina już latających kanciatych subwooferów napotkanych podczas pierwszego kontaktu ze SMART-em.",
-   "wystepowanie": "Neodżungla."
+   "wystepowanie": "Neodżungla"
   },
   "name": "PULSER",
   "overlay": false,
@@ -5857,7 +5872,7 @@
     "text": "Rój atakuje raz w turze wszystkie istoty, które znajdują się na zajmowanym przez niego obszarze."
    }
   ],
-  "file": "Rój-Szczurów.md",
+  "file": "05 ZWIERZĘTA\\12 RÓJ SZCZURÓW.md",
   "hp": {
    "avg": 32,
    "formula": "4k10 + 12"
@@ -5955,7 +5970,7 @@
     "text": "Spawacz wykonuje Test Techniki lub narzędzi o ST 10 i przywraca 7 (1k10 + 2) Punktów Wytrzymałości maszynie, która znajduje się w zasięgu do 1,5 m."
    }
   ],
-  "file": "Spawacz.md",
+  "file": "02 MASZYNY\\11 SPAWACZ.md",
   "hp": {
    "avg": 32,
    "failureThreshold": 10,
@@ -6113,7 +6128,7 @@
     "text": "Jeśli szczękowij trafił szczękami, próbuje pochwycić i dusić dużą lub mniejszą istotę. Trafiona istota musi zdać RO na Siłę lub Zręczność o ST 16, inaczej zostaje Pochwycona i Unieruchomiona (wyzwolenie się to ST 16). Na początku każdej tury szczękowija istota jest duszona i automatycznie otrzymuje 5 (1k10) obrażeń obuchowych."
    }
   ],
-  "file": "Szczękowij.md",
+  "file": "04 POTWORY\\09 SZCZĘKOWIJ.md",
   "hp": {
    "avg": 96,
    "formula": "16k10 + 16"
@@ -6219,7 +6234,7 @@
     "name": ".44 Magnum",
     "range": 45,
     "reach": 18,
-    "rider": "Trafiona istota musi zdać RO na Siłę o ST 10, inaczej otrzymuje stan Powalenie.",
+    "rider": "Trafiona istota musi zdać RO na Siłę ST o 10, inaczej otrzymuje stan Powalenie.",
     "section": "actions"
    },
    {
@@ -6266,7 +6281,7 @@
     "text": "Szeryf próbuje zmusić do poddania się wszystkich ludzi, których widzi w zasięgu 18 m. Wybrane istoty muszą zdać RO na Mądrość o ST 13, inaczej upuszczają broń i są Przerażone do końca następnej tury szeryfa."
    }
   ],
-  "file": "Szeryf.md",
+  "file": "01 LUDZIE\\08 SZERYF.md",
   "hp": {
    "avg": 93,
    "formula": "12k8 + 33"
@@ -6276,7 +6291,7 @@
    "mod": 4,
    "passive": 14
   },
-  "items": "1 l mocnego alkoholu, 3k6 naboi .44 Mag, 2k6 naboi .30-06, odznaka, kapelusz szeryfa",
+  "items": "1l mocnego alkoholu, 3k6 naboi .44 Mag, 2k6 naboi .30-06, odznaka, kapelusz szeryfa",
   "lore": {
    "informacje": "Stróże prawa są tam, gdzie akurat nie rządzą grupy przestępcze. Szeryfa znajdziesz w każdym małym miasteczku i większym osiedlu ludzkim, które czuje się na tyle dumne, żeby mieć nazwę i zapisaną na tablicy aktualną liczbę mieszkańców. Jeśli w mieście jest szeryf, to albo ma układ z lokalnymi bandziorami, albo sami się go boją. Zawsze jednak jest to typ, który potrafi skopać tyłek niejednemu cwaniaczkowi. Szczególnie, że do pomocy ma zwykle kilku strażników i paru co bardziej krewkich mieszkańców.",
    "kategoria": "Ludzie",
@@ -6398,7 +6413,7 @@
     "text": "Taran wykonuje Przyspieszenie w kierunku przeciwnika, którego widzi."
    }
   ],
-  "file": "Taran.md",
+  "file": "04 POTWORY\\10 TARAN.md",
   "hp": {
    "avg": 104,
    "damageThreshold": 10,
@@ -6417,7 +6432,7 @@
    "kategoria": "Potwory",
    "krew": "Czerwona krew.",
    "krewTag": "czerwona",
-   "taktyka": "Taran zawsze szarżuje w Akcji Bonusowej i używa Natarcia, żeby kogoś powalić i uderzyć ogonem. Nigdy się nie zatrzymuje w jednym miejscu, wykorzystując maksymalnie swoją Szybkość, żeby móc zawsze wykonać Natarcie.",
+   "taktyka": "Taran zawsze szarżuje w Akcji Bonusowej i używa Natarcia, żeby kogoś powalić i uderzyć ogonem. Nigdy się nie zatrzymuje w jednym miejscu, wykorzystując maksymalnie swoją Szybkość, żeby móc zawsze wykonać Natarcie. zaczynając od uderzenia kolcem jadowym, a później atakuje szczękami i próbuje pochwycić cel w Akcji Bonusowej. Trudno odciągnąć go od upatrzonej ofiary.",
    "wyglad": "Z dala idzie go pomylić z łazikiem albo niewielkim autem prującym przez pustynię ze stałą prędkością lekko przekraczającą 50 km/h, wzbijającym przy tym tumany kurzu. W rzeczywistości to zgarbiona bestia pokryta wielkimi płytami pancerza, z także opancerzonym podłużnym łbem pochylonym niemal przy samej ziemi. Nóg zazwyczaj nie widać, bo taran jest wiecznie w ruchu i zawsze wzbija masę pyłu w powietrze. Kilka taranów może wyglądać jak przemieszczające się po pustyni wydmy lub niewielkie wędrujące wzgórza.",
    "wystepowanie": "Pustynia."
   },
@@ -6531,7 +6546,7 @@
     "text": "Jeśli techmorwa trafi istotę, może w swojej Akcji Bonusowej złożyć w niej jajo. Po 1k10 tygodniach wykluwa się z niego larwa, która zabija nosiciela. Jajo można usunąć jedynie chirurgicznie (Test narzędzi małego medyka o ST 20). Do momentu usunięcia jaja, istota nie jest atakowana przez techmorwy."
    }
   ],
-  "file": "Techmorwa-(Malutka).md",
+  "file": "04 POTWORY\\11 TECHMORWA (malutka).md",
   "hp": {
    "avg": 16,
    "formula": "4k4 + 8"
@@ -6555,7 +6570,7 @@
    "wyglad": "Spory owad, który przystosował się do epoki, w której przyszło mu żyć. Niczym kameleon potrafi zmieniać swój wygląd, przybierając kolor zmurszałej rdzy lub lśniącego chromu, zależnie od potrzeb. Wszystko po to, by zmylić swoją ofiarę - poszukiwacza elektronicznych gambli - i złożyć w nim swoje jaja. Techmorwy to pasożyty, których larwy żywią się ludzkim ciałem.",
    "wystepowanie": "Wraki wielkich maszyn, opuszczone domostwa, ruiny, złomowiska."
   },
-  "name": "TECHMORWA (MALUTKA)",
+  "name": "TECHMORWA (malutka)",
   "overlay": false,
   "randomized": false,
   "resistances": [
@@ -6580,7 +6595,7 @@
    "climb": 3,
    "walk": 3
   },
-  "statName": "TECHMORWA (WERSJA MALUTKA)"
+  "statName": "TECHMORWA (wersja malutka)"
  },
  "techmorwa-srednia": {
   "abilities": {
@@ -6654,7 +6669,7 @@
    {
     "name": "Niewykrywalność",
     "section": "traits",
-    "text": "Dopóki techmorwa się nie poruszy lub nie zaatakuje, ma stan Niewidoczność."
+    "text": "Dopóki techmorwa się nie poruszy lub nie zaatakuje, ma stan Niewidoczność"
    },
    {
     "name": "Atak wielokrotny",
@@ -6667,7 +6682,7 @@
     "text": "Jeśli techmorwa trafi istotę, może w swojej Akcji Bonusowej wykonać Pochwycenie. Cel musi zdać RO na Siłę lub Zręczność o ST 13, inaczej zostaje Pochwycony (Wyzwolenie się to ST 13). Istota Pochwycona przez techmorwę jest Unieruchomiona."
    }
   ],
-  "file": "Techmorwa-(Średnia).md",
+  "file": "04 POTWORY\\12 TECHMORWA (średnia).md",
   "hp": {
    "avg": 84,
    "formula": "12k8 + 36"
@@ -6688,10 +6703,10 @@
    "krew": "Hemolimfa — niebieska posoka, jak u mniejszej formy.",
    "krewTag": "owad",
    "taktyka": "Atakuje z zaskoczenia, będąc pod postacią niewidocznego urządzenia.",
-   "wyglad": "Jeśli myślisz, że wszystkie techmorwy są malutkie, to się grubo mylisz. Niektóre żyją na tyle długo, że rosną do wielkości lodówki. Otwierasz taką podczas szaberku, a tu znienacka wyskakują macki, które cię łapią i pakują do środka. Straszna śmierć. A słyszałeś o techmorwie, która udawała sklepowego manekina? Jeden kumpel zabrał taką do samochodu i…",
+   "wyglad": "Jeśli myślisz, że wszystkie techmorwy są malutkie, to się grubo mylisz. Niektóre żyją na tyle długo, że rosną do wielkości lodówki. Otwierasz taką podczas szaberku, a tu znienacka wyskakują macki, które cię łapią i pakują do środka. Straszna śmierć. A słyszałeś o techmorwie, która udawała sklepowego manekina? Jeden kumpel zabrał taką do samochodu i …",
    "wystepowanie": "Wraki wielkich maszyn, ruiny, złomowiska."
   },
-  "name": "TECHMORWA (ŚREDNIA)",
+  "name": "TECHMORWA (średnia)",
   "overlay": false,
   "randomized": false,
   "resistances": [
@@ -6716,7 +6731,7 @@
    "climb": 6,
    "walk": 6
   },
-  "statName": "TECHMORWA (WERSJA ŚREDNIA)",
+  "statName": "TECHMORWA (wersja średnia)",
   "usesZranienie": true
  },
  "zolnierz-posterunku": {
@@ -6810,7 +6825,7 @@
     "text": "Wymienia opróżniony magazynek lub usuwa zacięcie broni."
    }
   ],
-  "file": "Żołnierz-Posterunku.md",
+  "file": "01 LUDZIE\\09 ŻOŁNIERZ POSTERUNKU.md",
   "hp": {
    "avg": 52,
    "formula": "6k8 + 12"
@@ -6928,19 +6943,14 @@
    {
     "name": "Ugryzienie",
     "section": "actions",
-    "text": "*Atak wręcz:* (PB plus modyfikator Siły); zasięg 1,5 m; *Obrażenia:* 1k4 (plus modyfikator Siły) kłute. Trafiony cel musi zdać RO na Kondycję o ST 10, inaczej zostaje zarażony wirusem Death Breath."
+    "text": "Atak wręcz: (PB plus modyfikator Siły); zasięg 1,5 m; Obrażenia: 1k4 (plus modyfikator Siły) kłute. Trafiony cel musi zdać RO na Kondycję o ST 10, inaczej zostaje zarażony wirusem Death Breath."
    }
   ],
-  "file": "Zombie-(Nakładka-Death-Breath).md",
+  "file": "04 POTWORY\\13 ZOMBIE (nakładka DEATH BREATH).md",
   "hp": {
    "inherit": true
   },
   "id": "zombie-nakladka-death-breath",
-  "immunities": [
-   "bludgeoning",
-   "piercing",
-   "slashing"
-  ],
   "initiative": {
    "mod": -4,
    "passive": 6
@@ -6953,9 +6963,14 @@
    "taktyka": "Atakuje bezmyślnie i równie bezmyślnie wpada w każdą pułapkę.",
    "wystepowanie": "Północny wschód kontynentu."
   },
-  "name": "ZOMBIE (NAKŁADKA DEATH BREATH)",
+  "name": "ZOMBIE (nakładka DEATH BREATH)",
   "overlay": true,
   "randomized": false,
+  "resistances": [
+   "bludgeoning",
+   "piercing",
+   "slashing"
+  ],
   "senses": {
    "inherit": true
   },
@@ -6967,6 +6982,6 @@
   "speed": {
    "inherit": true
   },
-  "statName": "ZOMBIE [NAKŁADKA DEATH BREATH]"
+  "statName": "ZOMBIE [nakładka DEATH BREATH]"
  }
 }

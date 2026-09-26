@@ -878,7 +878,7 @@ node dev/packs/build-packs.mjs --only=bestiariusz
 | `AUTOMATION` | klucz = `"<istota>.<zdolność>"` | Przypadki jednostkowe |
 
 Czego nie obejmie żadna z nich, ląduje jako `feat` z samym tekstem — czytelne na
-karcie, nieautomatyczne. **89 z 261 zdolności jest zautomatyzowanych.**
+karcie, nieautomatyczne. **89 z 260 zdolności jest zautomatyzowanych.**
 
 ### 11.4 Doktryna: MG w pętli
 

@@ -1539,7 +1539,7 @@ function _parseSaveSpec(saveText) {
 const DAMAGE_TYPE_WORDS = [
   { re: /wybuchow/i, type: "explosive", label: "Wybuchowe" },
   { re: /ogie(?:ń|n)|ognia/i, type: "fire", label: "Od ognia" },
-  { re: /ci(?:ę|e)t/i, type: "slashing", label: "Sieczne" },
+  { re: /ci(?:ę|e)t/i, type: "slashing", label: "Cięte" },
   { re: /k(?:ł|l)ut/i, type: "piercing", label: "Kłute" },
   { re: /obuchow/i, type: "bludgeoning", label: "Obuchowe" },
   { re: /kwas/i, type: "acid", label: "Od kwasu" },

@@ -94,6 +94,13 @@ export function isAddonCompatible(weapon, def) {
     }
   }
 
+  for (const p of (def.forbidsProperties ?? [])) {
+    if (props.has(p)) {
+      const propLabel = CONFIG.DND5E?.itemProperties?.[p]?.label ?? p;
+      return `Ulepszenie ${def.label} nie pasuje do broni z właściwością „${propLabel}".`;
+    }
+  }
+
   // Required damage types (e.g. bludgeoning for Dociążenie)
   const dmgTypesRaw = weapon.system?.damage?.base?.types ?? [];
   const dmgTypes = dmgTypesRaw instanceof Set ? [...dmgTypesRaw] : Array.from(dmgTypesRaw);
