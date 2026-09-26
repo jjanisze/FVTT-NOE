@@ -7,7 +7,7 @@ const HOUR = 3600;
  * Fobie z Koloru Kobaltu — treść domowa tej kampanii, **nie** z podręcznika.
  *
  * Nie dopisujemy ich do `PHOBIAS` (w `config/phobias-data.mjs`), bo tamto jest ścisłą tabelą
- * k8 (str. 111–112) i dziewiąty wpis zepsułby zarówno kość, jak i zgodność z RAW. Osobna mapa
+ * k8 (str. 112) i dziewiąty wpis zepsułby zarówno kość, jak i zgodność z RAW. Osobna mapa
  * + osobna grupa w pickerze (widoczna tylko przy włączonym Kobalcie) załatwia jedno i drugie.
  *
  * Brak pola `roll` jest celowy: tych fobii się nie losuje, przydziela je MG.

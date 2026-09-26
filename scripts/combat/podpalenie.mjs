@@ -1,7 +1,7 @@
 /**
  * Neuroshima 5e — Podpalenie.
  *
- * RAW (str. 402, PODPALENIE [ZAGROŻENIE]): podpalona istota otrzymuje 1k4 obrażeń od
+ * RAW (str. 258, PODPALENIE [ZAGROŻENIE]): podpalona istota otrzymuje 1k4 obrażeń od
  * ognia na początku każdej swojej tury i może akcją spróbować się ugasić, przewracając
  * się i turlając po ziemi. Ogień gaśnie też od gaśnicy, zanurzenia w wodzie albo
  * zduszenia płomieni.

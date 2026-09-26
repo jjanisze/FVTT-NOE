@@ -31,7 +31,7 @@
  * finished, priced items, not link targets waiting on a crafting system.
  *
  * Where the numbers come from: Wózek (dwukółka) and Sprzęt do wspinaczki both
- * have real RAW stat-table entries (`Podręcznik/source.txt` — K100 SPRZĘT
+ * have real RAW stat-table entries (`Podrecznik/NOE/`, s. 139 — K100 SPRZĘT
  * table; Wózek also gets its own "WÓZEK TYPU DWUKÓŁKA" stat block with PW/TT/
  * Ładowność). Strzały (20 szt.) is derived, not invented separately: exactly
  * 20 × the real "Strzała" ammo entry's own price/weight (`ammo-data.mjs`),

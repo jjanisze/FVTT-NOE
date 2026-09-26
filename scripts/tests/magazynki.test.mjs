@@ -25,8 +25,13 @@ import {
 import { getMag, magazineReadiness } from "../weapons/magazine.mjs";
 import { __testing as pips } from "../actors/item-state-pips.mjs";
 import { buildWeaponItemData } from "../config/weapons-data.mjs";
-import { HANDY_LIMIT, handyFamilyOf } from "../actors/handy-items.mjs";
-import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup } from "./helpers.mjs";
+import {
+  HANDY_LIMIT, handyFamilyOf, beltCount, handyCount, setBeltCount, toggleAtHand,
+  handyLimit, beltSlots, addToBelt, moveBeltPiece, __testing as handy
+} from "../actors/handy-items.mjs";
+import { ARMOR_MAP, buildArmorItemData } from "../config/armor-data.mjs";
+import { buildKwasItemData, KWAS_ACTIVITY_ID } from "../items/kwas.mjs";
+import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup, captureWarnings } from "./helpers.mjs";
 
 /** Broń z tabel, w kształcie, w jakim tworzy ją pack — czyli z wystemplowanym `weaponId`. */
 function weaponData(id, name = null) {
@@ -493,6 +498,133 @@ export function registerMagazynkiTests(quench) {
         expect(handyFamilyOf(fake("ammo", "grenade-frag"))).to.equal("grenade");
         expect(handyFamilyOf(fake("lekarstwo", ""))).to.equal("medicine");
         expect(handyFamilyOf(fake("ammo", "556"))).to.equal(null);
+      });
+
+      it("zestawy narzędzi też (RAW: każdy ma „Używanie”); broń i pancerz nie", function () {
+        expect(handyFamilyOf({ type: "tool", system: {} })).to.equal("tool");
+        expect(handyFamilyOf({ type: "weapon", system: {} })).to.equal(null);
+        expect(handyFamilyOf({ type: "equipment", system: { type: { value: "light" } } })).to.equal(null);
+      });
+
+      it("Kwas (RAW): RO na ZR z ST 8 + mod. ZR + PB, 4k6 od kwasu, sukces = nic; przy pasie", function () {
+        const data = buildKwasItemData();
+        const act = data.system.activities[KWAS_ACTIVITY_ID];
+        expect(act.save.dc.calculation).to.equal("dex");
+        expect(act.damage.onSave).to.equal("none");
+        expect(act.damage.parts[0]).to.include({ number: 4, denomination: 6 });
+        expect(act.range.value).to.equal("6");
+        expect(handyFamilyOf({ ...data, getFlag: (s, k) => data.flags[s]?.[k] })).to.equal("gear");
+      });
+
+      it("rozkład slotów: pozycje zostają, dziury też; stara flaga zajmuje pierwsze wolne", function () {
+        const e = (id, positions, legacy = 0, quantity = 9) => ({ id, positions, legacy, quantity });
+        expect(handy.layoutSlots([e("a", [2]), e("b", [0])], 3)).to.deep.equal(["b", null, "a"]);
+        expect(handy.layoutSlots([e("a", [1]), e("b", [], 2)], 3)).to.deep.equal(["b", "a", "b"]);
+        expect(handy.layoutSlots([e("a", [0]), e("b", [0])], 3), "kolizja → pierwszy wolny").to.deep.equal(["a", "b", null]);
+        expect(handy.layoutSlots([e("a", [0, 1, 2, 3])], 3), "nadmiar po utracie slotu").to.deep.equal(["a", "a", "a", "a"]);
+        expect(handy.layoutSlots([e("a", [0, 1, 2], 0, 1)], 3), "przycięte do ilości").to.deep.equal(["a", null, null]);
+      });
+
+      it("zużycie z klikniętego kafelka zdejmuje TEN slot, inaczej najwyższy", function () {
+        expect(handy.positionsAfterSpend([0, 2], 5, 4, 0)).to.deep.equal([2]);
+        expect(handy.positionsAfterSpend([0, 2], 5, 4)).to.deep.equal([0]);
+        expect(handy.positionsAfterSpend([0, 2], 2, 0, 2)).to.deep.equal([]);
+        expect(handy.positionsAfterSpend([0, 2], 5, 7)).to.deep.equal([0, 2]);
+      });
+
+      it("pojemność: 3 z RAW + sloty z założonego ekwipunku, zdjęty nie liczy się", function () {
+        expect(handy.handyCapacity([])).to.equal(3);
+        expect(handy.handyCapacity([{ equipped: true, slots: 1 }])).to.equal(4);
+        expect(handy.handyCapacity([{ equipped: false, slots: 1 }])).to.equal(3);
+      });
+
+      it("ubytek schodzi najpierw z pasa, przybytek idzie do plecaka", function () {
+        const f = handy.beltAfterQuantityChange;
+        expect(f(2, 7, 6)).to.equal(1);   // zużyta sztuka z pasa
+        expect(f(2, 7, 4)).to.equal(0);   // pas pusty, reszta z plecaka
+        expect(f(2, 7, 9)).to.equal(2);   // dokupione — do plecaka
+        expect(f(3, 3, 0)).to.equal(0);
+      });
+
+      describe("liczone w sztukach, nie w stosach (decyzja MG)", function () {
+        let stack;
+        const live = () => actor.items.get(stack.id);
+
+        beforeEach(async function () {
+          if (stack) await actor.deleteEmbeddedDocuments("Item", [stack.id], { render: false });
+          // Jeden dokument na wywołanie — kolejność wyniku `createEmbeddedDocuments` jest niestabilna.
+          [stack] = await actor.createEmbeddedDocuments("Item", [{
+            name: `${SCRATCH_PREFIX} granaty`, type: "consumable",
+            system: { type: { value: "ammo", subtype: "grenade-frag" }, quantity: 5 }
+          }], { render: false });
+        });
+
+        after(async function () {
+          if (stack) await actor.deleteEmbeddedDocuments("Item", [stack.id], { render: false });
+          stack = null;
+        });
+
+        it("trzy granaty z jednego stosu zajmują trzy sloty; czwarty nie wchodzi", async function () {
+          expect(await setBeltCount(live(), 3)).to.equal(true);
+          expect(handyCount(actor)).to.equal(3);
+          const warn = captureWarnings();
+          try {
+            expect(await setBeltCount(live(), 4)).to.equal(false);
+            expect(await toggleAtHand(live())).to.equal(true); // pełny pas: klik odkłada wszystko
+          } finally { warn.restore(); }
+          expect(beltCount(live())).to.equal(0);
+        });
+
+        it("rzut zdejmuje sztukę z pasa, zanim ruszy plecak", async function () {
+          await setBeltCount(live(), 2);
+          await live().update({ "system.quantity": 4 });
+          expect(beltCount(live())).to.equal(1);
+          await live().update({ "system.quantity": 2 });
+          expect(beltCount(live())).to.equal(0);
+          await live().update({ "system.quantity": 6 });
+          expect(beltCount(live())).to.equal(0);
+        });
+
+        it("przeciąganie: sztuka na wskazany slot, przestawienie z zamianą miejsc", async function () {
+          const [other] = await actor.createEmbeddedDocuments("Item", [{
+            name: `${SCRATCH_PREFIX} lek`, type: "consumable",
+            system: { type: { value: "lekarstwo" }, quantity: 1 }
+          }], { render: false });
+          try {
+            expect(await addToBelt(live(), { slot: 2 })).to.equal(true);
+            expect(await addToBelt(actor.items.get(other.id), { slot: 0 })).to.equal(true);
+            const ids = () => beltSlots(actor).map(s => s.item?.id ?? null);
+            expect(ids()).to.deep.equal([other.id, null, stack.id]);
+            expect(await moveBeltPiece(actor, 2, 0)).to.equal(true);
+            expect(ids()).to.deep.equal([stack.id, null, other.id]);
+            expect(await moveBeltPiece(actor, 0, 1)).to.equal(true);
+            expect(ids()).to.deep.equal([null, stack.id, other.id]);
+          } finally {
+            await actor.deleteEmbeddedDocuments("Item", [other.id], { render: false });
+          }
+        });
+
+        it("Kamizelka taktyczna (WKK) założona: 4 sloty; zdjęta: 3, nadmiar zostaje", async function () {
+          const vestData = buildArmorItemData(ARMOR_MAP["kamizelka-taktyczna"]);
+          vestData.system.equipped = true;
+          const [vest] = await actor.createEmbeddedDocuments("Item", [vestData], { render: false });
+          try {
+            expect(handyLimit(actor)).to.equal(4);
+            expect(await setBeltCount(live(), 4)).to.equal(true);
+            await actor.items.get(vest.id).update({ "system.equipped": false });
+            expect(handyLimit(actor)).to.equal(3);
+            expect(beltCount(live()), "nic nie spada z pasa").to.equal(4);
+            expect(beltSlots(actor).filter(s => s.overflow).length).to.equal(1);
+          } finally {
+            await actor.deleteEmbeddedDocuments("Item", [vest.id], { render: false });
+          }
+        });
+
+        it("stara flaga `true` liczy się jako jedna sztuka", async function () {
+          await live().setFlag(MODULE_ID, "atHand", true);
+          expect(beltCount(live())).to.equal(1);
+          expect(handyCount(actor)).to.equal(1);
+        });
       });
     });
 

@@ -14,10 +14,9 @@ export const KOBALT_AMMO = [
     // - dum-dum nie bije mocniej, tylko brzydziej, a cały zysk siedzi w tych dwóch cechach.
     id: "44mag_dd",
     label: ".44 Mag (dum-dum)",
-    // Placeholder: dzieli grafikę ze zwykłym .44 Mag. Własna ikona jest w kolejce
-    // (dev/icons/MISSING.md, batch 40) - bez niej nie widać w ekwipunku, który z dwóch
-    // stosów jest który, więc to realna luka, nie kosmetyka.
-    icon: "ammo_44_mag.svg",
+    // Własna ikona od batcha 40 (2026-09-25) — wcześniej dzieliła grafikę ze zwykłym .44 Mag
+    // i w ekwipunku nie było widać, który z dwóch stosów jest który.
+    icon: "ammo_44_mag_dd.svg",
     category: "Pistoletowa",
     family: "44mag",
     formula: "1d10",
@@ -48,5 +47,26 @@ export const KOBALT_AMMO = [
     note: "Amunicja wyłącznie do Pistoletu na Race. Lżejsza i dalej lecąca niż ręczna Flara "
       + "(patrz wkk/items/flara.mjs) — ale bez pistoletu bezużyteczna, w przeciwieństwie do Flary.",
     price: 5, avail: 40, weight: 0.05
+  }
+];
+
+/**
+ * Materiały wybuchowe spoza podręcznika — wstawiane na koniec `GRENADE_TYPES`
+ * (`config/ammo-data.mjs`). Granat sygnałowy nie występuje w RAW-owej liście „Granaty i im
+ * podobne" ani „Miny i ładunki"; przeniesiony tu 2026-09-24 (decyzja MG), liczby bez zmian.
+ */
+export const KOBALT_EXPLOSIVES = [
+  {
+    id: "grenade-signal",
+    label: "Granat sygnałowy",
+    // Fixed (2026-09-06): was reusing smoke_grenade.svg as an interim placeholder, but a
+    // dedicated granat_sygnalowy.svg was already sitting in icons/weapons unused — same class of
+    // gap as Flara's own icon, found in the same sweep.
+    icon: "granat_sygnalowy.svg",
+    category: "Granaty",
+    area: "—",
+    save: "—",
+    effect: "Sygnał świetlny/dymny widoczny z dużej odległości. Brak obrażeń.",
+    price: 20, avail: 40, weight: 0.3
   }
 ];

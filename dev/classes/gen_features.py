@@ -168,7 +168,7 @@ AUTOMATION = {
 # ---------------------------------------------------------------------------
 # Inline choice options. These are sub-bullets inside an ability's prose rather
 # than their own "POZIOM n:" headings, so the extractor cannot see them.
-# Text quoted verbatim from source.txt.
+# Text quoted verbatim from the rulebook (Podrecznik/NOE/07 KLASY/).
 #
 # NOTE ON WYJADACZ: the Twardziel entry (poz. 1) lists 4 options inline. The
 # Zwiadowca entry (poz. 2) names Jeździec in its own body, and the Zwiadowca
@@ -322,8 +322,8 @@ lines.append("""/**
  *
  * ⚠ DO NOT EDIT BY HAND. Regenerate with `dev/classes/gen_features.py`.
  *
- * Ability text is verbatim from the rulebook PDF text dump
- * (`Podrecznik/source.txt`), including the [A]/[B]/[R] action tags.
+ * Ability text is verbatim from the rulebook conversion
+ * (`Podrecznik/NOE/07 KLASY/`), including the [A]/[B]/[R] action tags.
  * `uses` / `toggle` / `hotbar` metadata is hand-authored in the generator and
  * justified by a quote from the ability's own text.
  *

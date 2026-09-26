@@ -25,7 +25,8 @@ game.actors.filter(a => a.getFlag("neuroshima-2026-overrides", "bestiary.tokenAr
 ## Wrzucanie docelowej grafiki
 
 Nazwa pliku = **id istoty** z `scripts/config/bestiary-data.mjs`
-(to slug nazwy pliku z `Podrecznik/Bestiariusz/`), rozszerzenie **`.webp`**.
+(slug nagłówka istoty w `Podrecznik/NOE/13 NOTATNIK ŁOWCY/`, z wyjątkami w `ID_ALIASES`
+w `dev/bestiary/extract_bestiary.py`), rozszerzenie **`.webp`**.
 
 ```
 tokens/bit-boys.webp

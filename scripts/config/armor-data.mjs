@@ -34,11 +34,13 @@
  *   kinetic              — odporność kinetyczna
  *   sealed               — szczelność
  *   donTime              — akcje na założenie/ściągnięcie
+ *   handySlots           — dodatkowe sloty przedmiotów podręcznych (WKK: Kamizelka taktyczna)
  *   weight, price, avail
  *   note, manual
  */
 
 import { CHANGE_TYPE, change } from "./effect-changes.mjs";
+import { KOBALT_ARMORS } from "../wkk/config/armor-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -80,6 +82,7 @@ export const ARMORS = [
     weight: 9, price: 90, avail: 30,
     note: "Cięższe płyty balistyczne w kamizelce nośnej."
   },
+  ...KOBALT_ARMORS,
 
   /* ---- Średnie pancerze (2 akcje) ---- */
   {
@@ -227,6 +230,7 @@ function _description(a) {
     a.dt ? ["Próg obrażeń", `${a.dt} (tylko cięte, kłute i obuchowe)`] : null,
     a.kinetic ? ["Odporność kinetyczna", "cięte, kłute, obuchowe"] : null,
     a.sealed ? ["Szczelność", "akcja na uszczelnienie, zapas tlenu na 1 godzinę"] : null,
+    a.handySlots ? ["Przedmioty podręczne", `+${a.handySlots} slot (gdy założona)`] : null,
     ["Zakładanie / ściąganie", `${a.donTime} ${a.donTime === 1 ? "akcja" : "akcje"}`],
     ["Dostępność", `${a.avail}%`]
   ].filter(Boolean);
@@ -303,6 +307,7 @@ export function buildArmorItemData(a, extra = {}) {
   if (a.dt) flags[MODULE_ID].armorDT = a.dt;
   if (a.sealed) flags[MODULE_ID].sealed = true;
   if (a.stealth === "none") flags[MODULE_ID].stealthImpossible = true;
+  if (a.handySlots) flags[MODULE_ID].handySlots = a.handySlots;
 
   return {
     name: a.name,

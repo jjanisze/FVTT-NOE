@@ -571,13 +571,13 @@ function _getThrownExplosiveSoundKey(subtype) {
       return WeaponSound.EXP_FLASHBANG;
     case "grenade-molotov":
       return WeaponSound.EXP_MOLOTOV;
-    case "grenade-pipebomb-fuze":
+    case "grenade-ied":
       return WeaponSound.EXP_PIPEBOMB;
     case "grenade-antipersonnel-mine":
     case "grenade-antivehicle-mine":
       return WeaponSound.MINE_ARM;
     case "grenade-c4-remote":
-    case "grenade-dynamite-remote":
+    case "grenade-dynamite":
       return WeaponSound.EXP_BLAST_SHORT;
     case "grenade-improvised":
     case "grenade-frag":

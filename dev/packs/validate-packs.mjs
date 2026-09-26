@@ -31,8 +31,12 @@ const failures = [];
 const notes = [];
 const fail = m => failures.push(m);
 
+// `--out=<dir>` validates a build written with `build-packs.mjs --out=<dir>`.
+const OUT = process.argv.slice(2).find(a => a.startsWith("--out="))?.slice("--out=".length);
+const PACKS_ROOT = OUT ? path.resolve(OUT) : path.join(MODULE_ROOT, "packs");
+
 async function load(name) {
-  const db = new ClassicLevel(path.join(MODULE_ROOT, "packs", name),
+  const db = new ClassicLevel(path.join(PACKS_ROOT, name),
     { keyEncoding: "utf8", valueEncoding: "json" });
   await db.open();
   const docs = [];

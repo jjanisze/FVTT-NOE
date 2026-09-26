@@ -1,21 +1,29 @@
 # -*- coding: utf-8 -*-
-"""Extract the 18 Neuroshima professions (subclasses) + their abilities.
+"""Extract the 18 Neuroshima professions (subclasses) + their abilities -> professions.json.
 
-Block shape in source.txt:
-    <CLASSADJ> PROFESJE            <- run header
-    <PROFESSION>                   <- ALLCAPS, followed by flavour prose
-    BIEGŁOŚCI <PROFESSION-GEN>     <- proficiency grants
-    ZDOLNOŚCI <PROFESSION-GEN>     <- "Na 3., 6. i 10. poziomie..." then abilities
-    <ABILITY NAME>  <prose>        <- ALLCAPS heading + body, repeating
+    python dev/classes/extract_professions.py [--out DIR]
+
+Block shape in the NOE class files:
+    ### <CLASSADJ> PROFESJE         <- run header
+    #### <PROFESSION>               <- flavour prose
+    ##### BIEGŁOŚCI <GEN>           <- proficiency grants
+    ##### ZDOLNOŚCI <GEN>           <- "Na 3., 6. i 10. poziomie..." then abilities
+    ###### <ABILITY NAME> [A|B|R]   <- heading + body, repeating
+A few abilities are set as plain bold lines instead of headings, and companion statblocks
+(DRON KROCZĄCY, PSI PARTNER…) sit between abilities; the EXPECTED lists decide what is an
+ability, everything else stays in the text of the ability before it.
 """
-import re, json, io
+import argparse
+import io
+import json
+import os
+import re
+import sys
 
-SRC = r"c:\Git\Neuroshima\neuro5e\Neuro 5e\Podrecznik\source.txt"
-OUT = r"C:\Users\archo\AppData\Local\Temp\claude\c--Git-Neuroshima-neuro5e-Neuro-5e\76022c7a-0130-468d-8816-06335c0102ff\scratchpad\professions.json"
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from noe_source import CLASS_FILES, KLASY, read_sections, split_action  # noqa: E402
 
-text = io.open(SRC, encoding="utf-8", errors="replace").read()
-UP = "A-ZŁŚĄĘĆŃÓŻŹ"
-ASCII_UP = "ABCDEFGHIJKLMNOPQRSTUVWXYZŁŚĄĘĆŃÓŻŹ"
+HERE = os.path.dirname(os.path.abspath(__file__))
 
 # run header -> ordered (profession nominative, exact "BIEGŁOŚCI <genitive>" anchor).
 # The genitive is irregular (GWIAZDA->GWIAZDY, SĘDZIA->SĘDZIEGO), so it is spelled out
@@ -70,86 +78,95 @@ EXPECTED = {
     "ZABÓJCA MASZYN": ["EMITER EMP", "EMPIRYK", "SŁABY PUNKT"],
 }
 
-def dehyphen(s):
-    """PDF line-break hyphens: 'mo- żesz' -> 'możesz'."""
-    return re.sub(r"(\w)-\s+(\w)", r"\1\2", s)
+def norm_name(s):
+    return re.sub(r"\s+", " ", s.replace("\xa0", " ")).strip().rstrip(":").strip()
 
-def norm(s):
-    return dehyphen(re.sub(r"\s+", " ", s)).strip()
 
-out = {}
-problems = []
+def extract_class(cls, profs, problems):
+    secs = read_sections(os.path.join(KLASY, CLASS_FILES[cls]))
+    names = {norm_name(p) for p, _ in profs}
+    out = {}
+    prof = None
+    mode = None
+    items = []  # (is_heading, text) inside the current ZDOLNOŚCI block
 
-for cls, header, profs in RUNS:
-    hs = text.find(header)
-    if hs < 0:
-        problems.append(f"run header not found: {header}")
-        continue
-    # run ends at the next class chapter marker, or a generous window
-    run_end = len(text)
-    for _, h2, _ in RUNS:
-        if h2 == header:
+    def close():
+        if prof is None:
+            return
+        expected = EXPECTED.get(prof, [])
+        abilities, cur = [], None
+        for is_head, txt in items:
+            name, action = split_action(txt) if is_head else (txt, None)
+            key = norm_name(name)
+            hit = next((e for e in expected if key == e or (not is_head and key.startswith(e + " "))), None)
+            if hit and hit not in [a["name"] for a in abilities]:
+                body = "" if is_head or key == hit else key[len(hit):].strip()
+                cur = {"name": hit, "action": action, "text": body}
+                abilities.append(cur)
+            elif cur is not None:
+                cur["text"] = (cur["text"] + " " + txt).strip()
+        for a in abilities:
+            am = re.match(r"^\[([ABR])\]\s*", a["text"])
+            if am and not a["action"]:
+                a["action"], a["text"] = am.group(1), a["text"][am.end():]
+        missing = [e for e in expected if e not in [a["name"] for a in abilities]]
+        for m in missing:
+            problems.append(f"{cls}/{prof}: ability not found: {m}")
+        out[prof]["abilities"] = abilities
+
+    in_run = False
+    for level, title, body in secs:
+        if level == 3:
+            if in_run:
+                break
+            in_run = title.endswith("PROFESJE")
             continue
-        p = text.find(h2, hs + 1)
-        if p > hs:
-            run_end = min(run_end, p)
-    # also stop at the SZTUCZKI chapter if it starts sooner
-    m = re.search(r"SZTUCZKI\s+Sztuczki", text[hs:run_end])
-    if m:
-        run_end = hs + m.start()
-    run = text[hs:run_end]
-
-    for pi, (prof, anchor) in enumerate(profs):
-        astart = run.find(anchor)
-        if astart < 0:
-            problems.append(f"{cls}/{prof}: anchor missing: {anchor}")
+        if not in_run:
             continue
-        aend = len(run)
-        if pi + 1 < len(profs):
-            nxt = run.find(profs[pi + 1][1], astart + 1)
-            if nxt > astart:
-                aend = nxt
-        block = run[astart:aend]
-
-        # split proficiencies from abilities at "ZDOLNOŚCI <X>"
-        zm = re.search(r"ZDOLNOŚCI\s+[" + UP + r"][" + UP + r" ]{2,30}", block)
-        if not zm:
-            problems.append(f"{cls}/{prof}: ZDOLNOŚCI marker missing")
+        t = norm_name(title)
+        if level == 4 and t in names:
+            close()
+            prof, mode, items = t, None, []
+            out[prof] = {"proficiencies": "", "abilities": []}
             continue
-        profic = norm(re.sub(r"^BIEGŁOŚCI\s+[" + UP + r" ]+", "", block[:zm.start()]))
-        abil_blob = block[zm.end():]
+        if prof is None:
+            continue
+        if t.startswith("BIEGŁOŚCI "):
+            mode = "prof"
+            out[prof]["proficiencies"] = " ".join(body)
+            continue
+        if t.startswith("ZDOLNOŚCI "):
+            mode = "abil"
+            items = [(False, line) for line in body]
+            continue
+        if mode == "abil":
+            items.append((True, title))
+            items += [(False, line) for line in body]
+    close()
+    for p, _ in profs:
+        if norm_name(p) not in out:
+            problems.append(f"{cls}/{p}: profession heading not found")
+    return out
 
-        # ability headings = the expected names, located in order
-        found = []
-        for nm in EXPECTED.get(prof, []):
-            i = abil_blob.find(nm)
-            if i < 0:
-                problems.append(f"{cls}/{prof}: ability not found: {nm}")
-            else:
-                found.append((i, nm))
-        found.sort()
-        abilities = []
-        for j, (i, nm) in enumerate(found):
-            end = found[j + 1][0] if j + 1 < len(found) else len(abil_blob)
-            body = norm(abil_blob[i + len(nm):end])
-            body = re.split(r"ZASADY PODSTAWOWE EKSPLORACJA POCHODZENIE", body)[0].strip()
-            # action tag ([A]ction / [B]onus / [R]eaction) trails the heading, if any
-            am = re.match(r"\[([ABR])\]\s*", body)
-            action = am.group(1) if am else None
-            if am:
-                body = body[am.end():]
-            abilities.append({"name": nm, "action": action, "text": body})
 
-        out.setdefault(cls, {})[prof] = {"proficiencies": profic, "abilities": abilities}
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", default=HERE, help="directory for professions.json")
+    args = ap.parse_args()
+    out, problems = {}, []
+    for cls, _header, profs in RUNS:
+        out[cls] = extract_class(cls, profs, problems)
+        print(f"\n=== {cls} ===")
+        for prof, d in out[cls].items():
+            print(f"  {prof:24s} {len(d['abilities'])} abilities | prof-grants {len(d['proficiencies'])} chars")
+            for a in d["abilities"]:
+                print(f"      {a['name']:<24s} {len(a['text']):5d} chars")
+    print("\n--- problems ---")
+    print("\n".join(problems) if problems else "none")
+    path = os.path.join(args.out, "professions.json")
+    io.open(path, "w", encoding="utf-8").write(json.dumps(out, ensure_ascii=False, indent=2))
+    print(f"\nwrote {path}")
 
-for cls in out:
-    print(f"\n=== {cls} ===")
-    for prof, d in out[cls].items():
-        print(f"  {prof:24s} {len(d['abilities'])} abilities | prof-grants {len(d['proficiencies'])} chars")
-        for a in d["abilities"]:
-            print(f"      {a['name']:<24s} {len(a['text']):5d} chars")
 
-print("\n--- problems ---")
-print("\n".join(problems) if problems else "none")
-io.open(OUT, "w", encoding="utf-8").write(json.dumps(out, ensure_ascii=False, indent=2))
-print(f"\nwrote {OUT}")
+if __name__ == "__main__":
+    main()

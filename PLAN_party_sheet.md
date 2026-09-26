@@ -70,7 +70,7 @@ Dodatkowo (kosmetyka/i18n, do naprawy przy okazji): `Search inventory`, `Content
 2. **`primaryVehicle`** — realny bagażnik. Ma `attributes.capacity.cargo` (ładowność),
    liczy przeciążenie i steruje tempem podróży. **To jest właściwe miejsce na GMT400.**
 3. **Karty postaci** — to, co ktoś faktycznie niesie; wchodzi do jego `Udźwigu`
-   (Średni: Siła × 5 kg użytkowy / × 10 kg maksymalny, podręcznik ~17364).
+   (Średni: Siła × 5 kg użytkowy / × 10 kg maksymalny, NOE s. 257).
 
 Pasek boczny zakładki Ekwipunek już pokazuje obciążenie każdego członka
 (Alan 31/75, Laffitte 13/52.5, Lorentz 85/120, Raynald 57/75, Victor 41/112.5) — to jedyne
@@ -182,7 +182,7 @@ Decyzja: **zastąpić natywną kartę `.movement.card` w całości.** Natywny mo
 
 ### Reguły do zaimplementowania
 
-**Tempo podróży** (podręcznik ~2448–2525), maks. **8 h marszu na dobę** (chyba że pojazd
+**Tempo podróży** (NOE s. 42–43), maks. **8 h marszu na dobę** (chyba że pojazd
 z rotacją kierowców):
 
 | Tempo | Na minutę | Na godzinę | Na dobę | Efekt |
@@ -290,7 +290,7 @@ zapasy: { container: { classes: ["tab-body"], id: "tabs" },
 Korzeń szablonu:
 `<section class="tab {{tab.cssClass}}" data-tab="{{tab.id}}" data-group="{{tab.group}}">`
 
-### Reguły (podręcznik ~17316–17370, ~2740–2790)
+### Reguły (NOE s. 258, s. 46–47)
 
 **Niedożywienie** — dzienne zapotrzebowanie wg rozmiaru:
 Malutki 100 g · Mały 0,25 kg · **Średni 0,5 kg** · Duży 2 kg · Wielki 8 kg · Ogromny 32 kg.

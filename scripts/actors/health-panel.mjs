@@ -7,7 +7,7 @@
  * "+ Dodaj" line, each entry is one row, and all per-entry controls live in that
  * row (no repeated headers, no per-entry toolbars).
  *
- * ## Mechanics implemented (RAW, rozdział "Choroby i Fobie", str. 108–112)
+ * ## Mechanics implemented (RAW, rozdział "Choroby i Fobie", str. 109–112)
  * - Choroba: 3-stage ladder, preloaded stage text, editable name/medicine/notes.
  * - Lekarstwo: a dose is spent through the *native* consumable pipeline
  *   (`activity.use`) so uses/quantity/autoDestroy behave exactly like any Używka;
@@ -467,7 +467,7 @@ async function _rollDailySave(actor, entry, daily, tomorrow) {
  * disease by one stage; a natural 20 resets it to przewlekły; a natural 1 worsens
  * it by two. Diseases with only a "stan ogólny" never roll.
  *
- * Acquired diseases carrying a `dailySave` (str. 110–111) roll their own ST instead:
+ * Acquired diseases carrying a `dailySave` (str. 111) roll their own ST instead:
  * success cures them or turns them chronic, failure costs a poziom Wyczerpania and
  * tomorrow's rest — see the rest block in `actors/disease-effects.mjs`.
  *

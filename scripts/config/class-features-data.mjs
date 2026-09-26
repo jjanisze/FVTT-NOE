@@ -3,8 +3,10 @@
  *
  * ⚠ DO NOT EDIT BY HAND. Regenerate with `dev/classes/gen_features.py`.
  *
- * Ability text is verbatim from the rulebook PDF text dump
- * (`Podrecznik/source.txt`), including the [A]/[B]/[R] action tags.
+ * Ability text is verbatim from the rulebook conversion
+ * (`Podrecznik/NOE/07 KLASY/`), including the [A]/[B]/[R] action tags.
+ * (This build still carries text from the March 2026 dump -- see
+ * HANDOFF_noe_pazdziernik.md; regenerating replaces this note.)
  * `uses` / `toggle` / `hotbar` metadata is hand-authored in the generator and
  * justified by a quote from the ability's own text.
  *

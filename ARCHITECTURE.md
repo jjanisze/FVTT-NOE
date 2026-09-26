@@ -303,7 +303,8 @@ projections of it, written only by `projectMagazineState()`.
 ## Dokumentacja towarzysząca
 | Plik | Zawartość |
 |---|---|
-| `IMPLEMENTATION.md` | Status wszystkich mechanik + changelog (źródło prawdy o tym, co działa) |
+| `IMPLEMENTATION.md` | Status wszystkich mechanik (macierz pokrycia RAW na górze) + changelog (źródło prawdy o tym, co działa) |
+| `PLAN_beta.md` | Droga do wczesnej bety — bramki i kamienie milowe M0–M7 |
 | `DEV_GUIDE.md` | Środowisko, narzędzia, wzorce dnd5e/FVTT, pipeline'y |
 | `TESTING.md` | Architektura testów Quench — co da się testować, czego nie i dlaczego |
 | `HANDOFF_*.md` | Przekazanie dla następnego agenta — kasowane, gdy zadanie zamknięte |

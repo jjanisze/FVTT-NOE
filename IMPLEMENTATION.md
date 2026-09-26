@@ -1,5 +1,64 @@
 ﻿# Neuroshima 5e Module — Changelog & Implementation Tracker
 
+## Stan projektu
+
+**Etap: alfa** (v0.16.0, przegląd 2026-09-26). Walka, ekwipunek, stany i przetrwanie grają się
+od początku do końca przy żywym stole; produkcja, towarzysze, ekonomia i większość pojazdów nie
+istnieją. Droga do wczesnej bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
+
+RAW = `Neuro 5e/Podrecznik/NOE/` — konwersja PDF-a „październik” (jedyne źródło; numery stron to
+strony drukowane tego wydania). Zmiany względem marca: `Neuro 5e/Podrecznik/CHANGELOG.md`.
+
+**Od 2026-09-26 status mechanik zmienia się w tej macierzy.** Fazy 1–5 niżej zostają jako
+historia prac i szczegóły implementacji; ich numeracja nie odpowiada rozdziałom podręcznika.
+
+Legenda: ✅ reprezentowane i egzekwowane · 🟡 częściowo (reszta jawnie ręczna) · ❌ brak ·
+M# = kamień milowy w `PLAN_beta.md`.
+
+| Rozdział RAW | Podsystem | Stan | Gdzie / co zostaje |
+|---|---|:-:|---|
+| Zasady podstawowe | Cechy, testy, PB, ST, RO, TT, Ułatwienie/Utrudnienie, 18 umiejętności, 22 narzędzia | ✅ | `config/skills.mjs`, `tools.mjs`, `terminology.mjs` |
+| | Przerzuty, Fuksy, Forsowanie | ✅ | `combat/rerolls.mjs`, `actors/fuks-pips.mjs` |
+| Walka | Inicjatywa, Zaskoczenie, Niespodziewany atak | ✅ | natywne dnd5e + stan `ambush` (§1.12) |
+| | Osłona, przebijanie osłony | ✅ | `combat/cover.mjs` (§1.10) |
+| | Pechowa jedynka: zacięcie, degradacja broni białej | ✅ | `weapons/jams.mjs`, `melee-degradation.mjs` |
+| | Stopień Zranienia, Ostatnia akcja, Nokautowanie, stany | ✅ | `combat/zranienie.mjs`, `knockout.mjs`, `config/conditions.mjs` |
+| | **Neutralizacja Stopnia Zranienia** (Regeneracja, Pomoc medyczna) | ❌ | M1 |
+| | Rzuty przeciw śmierci przy obrażeniach na 0 PW, Olbrzymie obrażenia (2× maks. PW), stabilizacja | ❌ | M1 |
+| | Akcja Bieganie; Utrudnienie w zwarciu i na zasięgu dalekim | ❌ | M1 |
+| | Manewry wręcz: Odepchnięcie, Pochwycenie, Wytrącenie | ✅ | `combat/melee-maneuvers.mjs` |
+| Eksploracja | Światło, pole widzenia 220°, noktowizja/termowizja, latarki, flary | ✅ | `items/light-sources.mjs`, `vision-sources.mjs`, `gogle.mjs`, `config/fov.mjs` |
+| | Podróż: tempo, biomy, trudny teren, porządek marszu | ✅ | `actors/party-travel.mjs`, `config/podroz-data.mjs` |
+| | Gambling: dostępność, ceny regionalne | ❌ | tylko zewnętrzny `Integracje/loot_generator.py` — M5 |
+| Postój | Odpoczynki 4 h / 24 h, zakłócenie (notatka), czyszczenie broni, gotowanie, polowanie | ✅ | `config/rest.mjs`, `actors/party-supplies.mjs`, §1.7 |
+| | Sen (doba bez snu) | ❌ | źródło `bezsennosc` bez wyzwalacza — M1 |
+| | Rozrywka, plotkowanie, hazard, Długi postój (praca, trening, baza, koszt utrzymania) | ❌ | M5 |
+| Tworzenie postaci | Poziomy, PD, PW/KW, wieloklasowość, karta | ✅ | `actors/pd-panel.mjs`, `pw.mjs`, `class-rules.mjs`, `sheet-shell.mjs` |
+| | Udźwig (dwa progi), przedmioty podręczne (3 sloty) | ✅ | `config/encumbrance-config.mjs`, `actors/udzwig-*.mjs`, `handy-items.mjs`, `handy-belt.mjs` |
+| Pochodzenie | 12 Pochodzeń + 36 zdolności (dane) | ✅ | paczki `pochodzenia`, `zdolnosci-pochodzenia` |
+| | Automatyka zdolności | 🟡 | 1/36 (`game.neuroshima.pochodzenia.report()`) — M7 |
+| Klasy | 6 klas, 18 profesji, 133 zdolności (dane, awans, PW) | ✅ | paczki `klasy`, `profesje`, `zdolnosci-klasowe` |
+| | Automatyka zdolności | 🟡 | ~13/133 z własnym kodem, **brak rejestru pokrycia** — M0, M7 |
+| | Towarzysze (Partner, Oswajanie zwierząt, Prawa ręka) i drony | ❌ | M3 |
+| Sztuczki | 53 Sztuczki (dane) | ✅ | paczka `sztuczki` |
+| | Automatyka | 🟡 | 9/53 — 3 pełne, 6 częściowych (`game.neuroshima.sztuczki.report()`) — M7 |
+| Choroby i fobie | Choroby przewlekłe i popularne, fobie, leki, Zachód słońca | ✅ | 22/24 stanów egzekwowanych, `actors/health-panel.mjs`, `disease-effects.mjs` |
+| Ekwipunek | Broń, kalibry, magazynki symulacyjne, tryby ognia, granaty, miny i ładunki, ulepszenia | ✅ | `weapons/*`, `actors/grenade-inventory.mjs`, `placed-charges.mjs` |
+| | Właściwości broni | 🟡 | brak: `ppanc`/`przebijająca` przeciw pancerzowi BG (M1), `dluga`, `ciezka`, `jednorazowa` (M6) — `PLAN_weapon_properties.md` |
+| | Pancerze, hełmy, tarcze | 🟡 | `actors/armor-rules.mjs` (próg, odporność kinetyczna, kary); akcje tarczy, krytyczna ochrona hełmu, szczelność ręcznie; wytrzymałość pancerzy `[—]` |
+| | Leki i używki, narzędzia, elektronika, różności | 🟡 | 35 pozycji chemii, 22 zestawy, latarka/gogle/detonator/kwas/kolczatki; część Różności tylko jako przedmioty bez akcji |
+| | **Produkcja przedmiotów**, schematy, elaboracja amunicji, naprawianie | ❌ | panel Surowców liczy materiały, nic ich nie zużywa — M2 |
+| Teczka MG | Szabrowanie, bebeszenie | ❌ | M5 |
+| | Kolory Neuroshimy (Rdza, Rtęć, Stal, Chrom) | ❌ | po becie; WKK to osobna nakładka (`scripts/wkk/`) |
+| Notatnik łowcy | Bestiariusz, SP, próg obrażeń, awarie maszyn, amunicja BN | ✅ | 51 istot, 89/261 zdolności zautomatyzowane, 25/51 docelowych żetonów |
+| Zasady szczegółowe | Upojenie, Skażenie, Spadanie, Podpalenie, Krwawienie, Niedożywienie, Odwodnienie | ✅ | §1.5b, §4.1b–c, `combat/podpalenie.mjs`, `party-supplies.mjs` |
+| | Uduszenie, Przemarznięcie | ❌ | źródła Wyczerpania bez wyzwalacza — M1 |
+| | Próg obrażeń, pochwycenie, wytrącenie, udźwig, typy obrażeń | ✅ | |
+| | Niszczenie obiektów, broń improwizowana (reguła ogólna), latanie | ❌ | M6 (Pochodnia to jedyny przykład broni improwizowanej) |
+| | Walka na wierzchowcu, pływanie, skakanie | ❌ | M6 — karta referencyjna |
+| Pojazdy i pościgi | 14 podwozi, plansza pościgu, przyciąganie do torów | ✅ | `config/vehicles-data.mjs`, `scenes/poscig*.mjs` |
+| | Karta pojazdu, manewry, awarie k20, komplikacje, wsiadanie/wypadanie | ❌ | M4, `PLAN_poscigi.md` §10 |
+
 ## Files
 
 | Plik | Rola |
@@ -12,7 +71,7 @@
 | `scripts/config/terminology.mjs` | Polskie cechy, waluta, jednostki |
 | `scripts/config/spellcasting.mjs` | Usunięcie spellcastingu |
 | `scripts/config/localization.mjs` | Fallback i18n (weryfikacja + ręczny fetch) |
-| `lang/pl.json` | 553 tłumaczeń (zagnieżdżone JSON) |
+| `lang/pl.json` | 617 tłumaczeń (zagnieżdżone JSON; policzone 2026-09-26) |
 | `scripts/config/conditions.mjs` | Stany — 14 z TABELI STANÓW + 9 zagrożeń + 5 znaczników + 3 stopniowane; usunięcie stanów fantasy |
 | `scripts/config/levelled-conditions-data.mjs` | Tabele Upojenia (4 stopnie) i Skażenia (4 poziomy, ST) |
 | `scripts/actors/levelled-conditions.mjs` | Egzekwowanie Upojenia/Skażenia + rejestr HUD dla stanów stopniowanych (też Zranienie) |
@@ -39,7 +98,7 @@
 | `scripts/combat/bleeding.mjs` | Krwawienie (Hemofilia) — wyzwalacz, RO na koniec tury, trzy drogi zatrzymania |
 | `scripts/combat/falling.mjs` | Spadanie [ZAGROŻENIE] — 1k6/1,5 m, Powalenie, upadek do cieczy, mnożnik Osteoporozy |
 | `scripts/actors/fuks-pips.mjs` | Trzy piki Fuksa w nagłówku karty (zastępują gwiazdkę Inspiration) |
-| `scripts/migration/migrate-health.mjs` | Migracja Chorób/Fobii/Fuksów z pól tekstowych na flagi |
+| ~~`scripts/migration/migrate-health.mjs`~~ | Migracja Chorób/Fobii/Fuksów z pól tekstowych na flagi — **usunięta** (`62dfd4c`, dane graczy poza publicznym repo); wykonana, opis w §4.3 |
 | `scripts/combat/zranienie.mjs` | Stopień Zranienia (wound levels 0–4) |
 | `scripts/combat/rerolls.mjs` | Przerzuty: Forsowanie + Fuks (reroll mechanics) |
 | `scripts/combat/knockout.mjs` | Nokautowanie + Ostatnia Akcja |
@@ -51,16 +110,20 @@
 | `scripts/config/ammo-data.mjs` | 20 definicji kalibru (edytowalnych) — formuły, typy obrażeń, efekty |
 | `scripts/weapons/ammo.mjs` | System amunicji — sync obrażeń, auto-apply, przycisk Obrażenia |
 | `scripts/actors/ammo-inventory.mjs` | Natywne okno dodawania amunicji na karcie oraz UI Illusion (kategoria Amunicja); filtruje `magazine-*` |
-| `scripts/actors/grenade-inventory.mjs` | Sekcja „Materiały wybuchowe" — osobna tabela granatów/min/ładunków, rzut na scenę, karta czatu z RO/obrażeniami |
+| `scripts/actors/grenade-inventory.mjs` | Sekcja „Materiały wybuchowe" — osobna tabela granatów/min/ładunków, rzut na scenę, karta czatu z RO/obrażeniami; leżące ładunki (Tile `pendingCharge`) i ich wybuch (`detonateCharge`) |
+| `scripts/actors/charge-rules.mjs` | Podkładane ładunki — czyste zasady: wynik Testu ST 10, sposoby detonacji, czas zapalnika, kto odpala zdalnie (testy w `ekwipunek-dane`) |
+| `scripts/actors/placed-charges.mjs` | Podkładanie min/C4/IED (dialog, punkt w 3 m, Test), lista detonacji gracza i MG, HUD Tile'a, prośby gracza do MG |
+| `scripts/items/detonator.mjs` | Detonator radiowy (pilot + 10 zapalników łączonych `kitId`) i Zapalnik elektryczny — RAW, Elektronika |
+| `scripts/items/kwas.mjs` | Kwas (fiolka) — RAW, Różności; natywna aktywność `save` |
 | `scripts/actors/molotov.mjs` | Koktajl Mołotowa: podpalanie butelki (Akcja Bonusowa/Używanie + źródło ognia), migoczące światło, pęknięcie po 3 rundach |
 | `scripts/scenes/area-picker.mjs` | Wspólny wybór punktu na mapie z podglądem obszaru, linią zasięgu i pasmami (granaty, miny, kolczatka, flara, raca) |
-| `scripts/actors/magazine-inventory.mjs` | Sekcja „Zapasowe Magazynki" — 6 typów, ±Ilość, ±Gotowych, dialog DODAJ MAGAZYNEK |
-| `scripts/weapons/magazine.mjs` | Magazynki Kwantowe + Strzelba Dual-Ammo (.12 Ga) + synchronizacja `system.uses` |
+| `scripts/actors/magazine-inventory.mjs` | Sekcja „Magazynki" — wiersz na **sztukę** (model broni, naboje w środku, wpięty/przy pasie), dialog dodawania z katalogu per model (`PLAN_magazynki.md` §7) |
+| `scripts/weapons/magazine.mjs` | Magazynki symulacyjne: akcje, aktywności (przeładuj, doładuj 1 nabój, wymień), UI karty broni, karty czatu, ekonomia akcji; fasada nad `magazine-model.mjs` |
 | `scripts/weapons/fire-modes.mjs` | KS/DS/MS/OZ + synchronizacja aktywności |
 | `scripts/weapons/sounds.mjs` | Dźwięki broni i materiałów wybuchowych (strzały, eksplozje, zapalniki, miny) |
 | `scripts/weapons/sequencer.mjs` | Integracja Sequencera — `seqPlayAudio`/`seqStartLoop`/`seqStopLoop`/`seqScrollText` (soft dependency, legacy fallback) |
 | `scripts/weapons/engine.mjs` | Silnik (`spalinowa`) — start/stop pętli dźwięku przez `seqStartLoop`/`seqStopLoop`, auto-tworzenie aktywności uruchom/zgaś |
-| `scripts/weapons/pochodnia.mjs` | Pochodnia (broń improwizowana) — 2 warianty, paliwo %, zapal/zgaś, wypalanie przez zegar świata (`updateWorldTime`), best-effort światło tokena |
+| `scripts/wkk/items/pochodnia.mjs` | Pochodnia (broń improwizowana, **WKK**) — 2 warianty, paliwo %, zapal/zgaś, wypalanie przez zegar świata (`updateWorldTime`), światło przez `light-sources.mjs`. Przeniesiona z `weapons/` przy oddzieleniu WKK (`15e82da`) |
 | `scripts/weapons/tracer-vfx.mjs` | Własny silnik PIXI smug/błysków lufy (baked textures, nie Sequencer webm) — `tracerFire`/`tracerFireArea`, cache wizualny per kaliber/broń |
 | `scripts/weapons/tracer-debug-panel.mjs` | Panel GM do tuningu VFX na żywo (suwaki TUNE, testowe salwy, eksport configu) |
 | `scripts/weapons/sound-debug-panel.mjs` | Panel GM do audiobanków (odsłuch pojedynczych plików, audyt rozwiązania kaliber→bank) |
@@ -96,7 +159,79 @@
 | `tokens/scale-overrides.json` | Skala żetonu per istota — **jedyne** źródło `prototypeToken.texture.scaleX/scaleY` |
 | `dev/icons/gen_scale_defaults.py` | Zasiew skali: docelowe wypełnienie kadru / zmierzone (`npm run seed:token-scales`) |
 | `scripts/tests/skala-zetonow.test.mjs` | Domknięcie `scale-overrides.json` — każda istota ma wpis, brak wpisów-widm, pack zgadza się z plikiem |
-| `styles/neuroshima.css` | CSS — post-apo visual + hide spellcasting (1365 linii, sekcje oznaczone `/* === */`, waliduj po edycji: `npm run validate:css`) |
+| `styles/neuroshima.css` | CSS — post-apo visual + hide spellcasting (3603 linie, sekcje oznaczone `/* === */`, waliduj po edycji: `npm run validate:css`) |
+| `scripts/actors/ability-hotbar.mjs` | Pasek skrótów zdolności — auto-makra dla zdolności z `hotbar: true`, licznik ładunków, grafika stanu aktywnego |
+| `scripts/actors/bez-dna.mjs` | Bez dna (klauzula Sztuczki Pakowanie) — Udźwig ×2, plakietka w Ekwipunku, blokada duplikatów |
+| `scripts/actors/cichy-krok.mjs` | Cichy krok (Zwiadowca 3) — trudny teren, Skradanie w pancerzu, Ukrywanie bez ciężkiego pancerza |
+| `scripts/actors/class-rules.mjs` | Wieloklasowość — niekumulowanie TT bez pancerza (Goła klata, Tarcza wiary…) i Drugiego/Trzeciego ataku |
+| `scripts/actors/class-state.mjs` | Zdolności stanowe (Berserk, Kondycha) — AE, czas trwania, przerwania, karta czatu przy każdym zejściu |
+| `scripts/actors/encumbrance-breakdown.mjs` | Pasek udźwigu podzielony na kategorie, legenda, linijka progów RAW (Normalna / Przeciążenie / Unieruchomienie) |
+| `scripts/actors/handy-belt.mjs` | Pas przedmiotów podręcznych w nagłówku karty — widok i gesty (model w `handy-items.mjs`, `PLAN_przedmioty_podreczne_v2.md`) |
+| `scripts/actors/inventory-toggle-fix.mjs` | Poprawka zacinającej się ikony rozwijania wiersza ekwipunku (błąd stockowego dnd5e) |
+| `scripts/actors/item-state-pips.mjs` | Wspólny pasek plakietek stanu na wierszu ekwipunku (zamiast pięciu rywalizujących `::after`) |
+| `scripts/actors/leki-inventory.mjs` | Panel Leki w zakładce Zasoby — ±Ilość, Zażyj, pas, dawki w otwartym opakowaniu |
+| `scripts/actors/party-loot-lock.mjs` | Blokada łupu drużynowego — pauza gry, dopóki worek grupy nie jest pusty |
+| `scripts/actors/party-sheet.mjs` | Karta Drużyny — cienka podklasa `GroupActorSheet` (podróż, zapasy, łup) |
+| `scripts/actors/party-supplies.mjs` | Zapasy drużyny — dzienne jedzenie/woda (Niedożywienie, Odwodnienie), polowanie, gotowanie, paliwo |
+| `scripts/actors/party-travel.mjs` | Podróż drużyny — tempo RAW, biomy, trudny teren, upływ czasu, Mój biom / Mój wróg |
+| `scripts/actors/pd-panel.mjs` | Panel PD — PD grupowe i osobiste, progi poziomów 0…3400, auto-PD za Stopień Zranienia |
+| `scripts/actors/prowiant-inventory.mjs` | Panel Prowiant w zakładce Zasoby |
+| `scripts/actors/pw.mjs` | PW wg Neuroshimy — płasko na poziom (16+KON / 4+KON, 12+KON / 3+KON) |
+| `scripts/actors/samuraj.mjs` | Sztuczka Samuraj — +1 TA/obrażeń bronią sieczną, TT +1 z nią w ręku, dobycie bez Darmowej Interakcji |
+| `scripts/actors/sp.mjs` | Siła Przeciwnika ≠ PB dla BN (`details.cr` trzyma SP, PB z flagi) |
+| `scripts/actors/tool-availability.mjs` | Notka „masz zestaw / brak zestawu" na karcie testu narzędzi |
+| `scripts/actors/udzwig-slowdown.mjs` | Przeciążenie / Unieruchomienie — kara Szybkości z Udźwigu |
+| `scripts/combat/bestiary-thresholds.mjs` | Próg obrażeń (`ppanc` go ignoruje), Próg awarii + tabela awarii maszyn, Tchórzliwość |
+| `scripts/combat/crit-riders.mjs` | Skutki trafień krytycznych istot Bestiariusza (np. Palcożerca) — wykrycie, klik MG |
+| `scripts/combat/pack-tactics.mjs` | Współpraca — Ułatwienie, gdy sojusznik stoi ≤ 1,5 m od celu |
+| `scripts/combat/podpalenie.mjs` | Podpalenie [ZAGROŻENIE] — 1k4 ognia na początku tury, `igniteFor()`, akcja „Ugaś się" (v0.14.5) |
+| `scripts/combat/udzwig-attack-disadvantage.mjs` | Przeciążenie — domyślne Utrudnienie do ataków w dialogu |
+| `scripts/config/bestiary-data.mjs` | 51 istot Bestiariusza — **GENEROWANE** (`dev/bestiary/gen_bestiary.py`) |
+| `scripts/config/class-features-data.mjs` | 133 zdolności klasowe i profesji — **GENEROWANE** (`dev/classes/gen_features.py`) |
+| `scripts/config/classes-data.mjs` | 6 klas × 12 poziomów + 18 profesji (źródło: tabele z `Podrecznik/NOE/07 KLASY/`) |
+| `scripts/config/creature-types.mjs` | 5 kategorii Bestiariusza zamiast taksonomii fantasy; kolor krwi dla Splattera |
+| `scripts/config/detection-termowizja.mjs` | Termowizja jako prawdziwy DetectionMode + VisionMode |
+| `scripts/config/effect-changes.mjs` | Słownik zmian Active Effect — typ + jawny priorytet (drabinka domowa) |
+| `scripts/config/encumbrance-config.mjs` | Udźwig RAW — SIŁ×5 / SIŁ×10 kg, mnożniki rozmiaru |
+| `scripts/config/explosion-vfx.mjs` | Grafiki wybuchów granatów (z tile'i sceny „!!SZABLONY!!") |
+| `scripts/config/fov.mjs` | Pole widzenia 220° (poza Ślepowidzeniem i maszynami Molocha) |
+| `scripts/config/gear-data.mjs` | Wyjście produkcji zestawów narzędzi: zaślepki `craftingPlaceholder` + sprzęt przeniesiony do prawdziwych przedmiotów |
+| `scripts/config/inventory-audit.mjs` | Audyt i naprawa kategorii przedmiotów w całym świecie |
+| `scripts/config/pause-screen.mjs` | Własny ekran pauzy |
+| `scripts/config/podroz-data.mjs` | Dane podróży, biomów i zapasów (tabele RAW, zero logiki) |
+| `scripts/config/prowiant-data.mjs` | Prowiant — progi dzienne, kategorie jedzenia/wody |
+| `scripts/config/settings.mjs` | Ustawienia świata, w tym przełącznik Koloru Kobaltu (`docs/Kobalt.md`) |
+| `scripts/config/srd-cleanup.mjs` | Ukrycie treści SRD fantasy — katalog kompendiów i Compendium Browser |
+| `scripts/config/state-colors.mjs` | Paleta torów stanów — jedno źródło dla CSS i generatora ikon |
+| `scripts/config/surowce-data.mjs` | 5 typów surowców (CH, CE, CZ, MK, MO) |
+| `scripts/config/tool-proficiency.mjs` | Biegłość / Specjalizacja narzędzi |
+| `scripts/config/toolkits-data.mjs` | 22 zestawy narzędzi — ST akcji, produkcja, `createToolkits()` |
+| `scripts/config/validation.mjs` | Hooki walidujące dane (np. broń bez kości obrażeń) |
+| `scripts/config/vehicles-data.mjs` | 14 podwozi (tabela RAW), środowiska i ST pościgu (`PLAN_poscigi.md`) |
+| `scripts/items/baterie.mjs` | Baterie — wspólne ogniwo zasilania (2k4 h) |
+| `scripts/items/gogle.mjs` | Gogle noktowizyjne / termowizyjne (homebrew, wzrok właściciela) |
+| `scripts/items/kolczatka.mjs` | Kolczatki — rozsypanie 1,5 × 1,5 m, RO ZRC ST 15 |
+| `scripts/items/latarka.mjs` | Latarka (RAW) — dwa stożki światła, bateria |
+| `scripts/items/light-sources.mjs` | Resolver aktywnego źródła światła aktora (szeroki stożek na żetonie + wąski `AmbientLight`) |
+| `scripts/items/power-source.mjs` | Wspólny wzorzec paliwa / baterii — wiersz na karcie przedmiotu i w ekwipunku |
+| `scripts/items/toolkit-check-activity.mjs` | Natywna aktywność `check` dla zestawów — rzut za właściciela |
+| `scripts/items/toolkit-check.mjs` | Testy zestawów zawsze za właściciela, nie za cele sceny |
+| `scripts/items/toolkit-kowal.mjs` | Mały kowal — Naostrzenie i naprawa zdegradowanej broni białej |
+| `scripts/items/toolkit-medyk.mjs` | Mały medyk — Przywracanie PW, stabilizacja, Pan Plaster, Aspiryna i Miętusy |
+| `scripts/items/vision-sources.mjs` | Resolver „co widzi właściciel" — tryb wizji i detekcji z urządzeń |
+| `scripts/scenes/difficult-terrain-hint.mjs` | Trudny teren widoczny tylko przy planowaniu ruchu |
+| `scripts/scenes/map-props.mjs`, `map-sync.mjs`, `map-watch.mjs` | Mapy z Tiled — przegrody sterowane drzwiami, aktualizacja sceny z ponownego eksportu, nasłuch wypchniętych map |
+| `scripts/scenes/poscig.mjs`, `poscig-canvas.mjs`, `poscig-snap.mjs`, `poscig-ui.mjs` | Pościgi — plansza, paralaksa, przyciąganie do torów, UI MG (`PLAN_poscigi.md`) |
+| `scripts/wkk/registry.mjs` | Rejestr całej treści WKK (reguła klasyfikacji: `scripts/wkk/README.md`) |
+| `scripts/wkk/config/*.mjs` | Dodatki WKK do danych NOE — amunicja (dum-dum, raca), bronie (Laska, Miecz, Pistolet na Race), Kamizelka taktyczna, choroby, fobie, latarka, światło koktajlu |
+| `scripts/wkk/combat/bleeding.mjs`, `weapon-save-properties.mjs` | Profil krwawienia dum-dum i cecha „Rozrywająca" (WKK) |
+| `scripts/wkk/items/flara.mjs` | Flara ręczna — światło w punkcie upadku |
+| `scripts/wkk/items/gadzety.mjs` | Gadżety — przedmioty smaczkowe z dźwiękiem, bez mechaniki |
+| `scripts/wkk/items/pistolet-na-race.mjs` | Pistolet na Race — „Wystrzel flarę" |
+| `scripts/wkk/items/zeton-luxor.mjs` | Żeton Luxor (10 gb) |
+| `scripts/doc-liveness.mjs` | Czy dokument jeszcze istnieje, zanim async sync do niego zapisze |
+| `scripts/world-clock.mjs` | Przesunięcie zegara świata przez MG („wydaj N minut") |
+| `scripts/migration/*` (pozostałe) | Jednorazowe migracje: `migrate-classes`, `migrate-effect-priorities`, `migrate-gadzety`, `migrate-gear-graduation`, `migrate-medyk-graduation`, `migrate-pistolet-race`, `migrate-tool-substitutes`, `migrate-zeton-luxor`, `normalize-fov-angle`, `normalize-sight-range`, `rescale-surowce-units`, `apply-weapon-icons-macro.js` — opis przy wpisie changelogu, który je wprowadził |
 
 ---
 
@@ -112,7 +247,7 @@
 - [x] Waluta → Gamble (gb)
 - [x] Jednostki ruchu → metry (m/km)
 - [x] Level cap → 12
-- [x] `lang/pl.json` — 553 tłumaczeń (TYPES, EFFECT, DND5E nested)
+- [x] `lang/pl.json` — 617 tłumaczeń (TYPES, EFFECT, DND5E nested; 553 przy starcie, policzone ponownie 2026-09-26)
 - [x] `module.json` — rejestracja lang dla "en" i "pl"
 - [x] `localization.mjs` — async fallback z weryfikacją sentinel key
 
@@ -142,6 +277,12 @@
 - [x] Stopień Zranienia wyświetlany na karcie BN (renderNPCActorSheet) — piki w kolumnie portretu, pod paskiem HP
 - [x] Ostatnia Akcja prompt (3 death save failures)
 - [x] Nokautowanie — melee bludgeoning at 0 PW → choice: 1 PW + Nieprzytomność
+- [ ] **Neutralizacja Stopnia Zranienia** (RAW *Walka* i *Postój*): Regeneracja — po trzech kolejnych
+  Długich odpoczynkach RO KON ST 15, sukces = −1 stopień; Pomoc medyczna — po DO leczący z biegłością
+  w Medycynie i narzędziami małego medyka zdejmuje stopień. Dziś wyłącznie ręczne kliknięcie w piki —
+  `PLAN_beta.md` M1
+- [ ] Rzuty przeciw śmierci przy obrażeniach na 0 PW (+1 porażka, atak wręcz +2), Olbrzymie obrażenia
+  (jednorazowo ≥ 2× maks. PW → śmierć), stabilizacja Testem Medycyny ST 10 i 1 PW po 1k8 h — M1
 - [x] **Stan `zranienie` na pionku (2026-08-03)** — trzeci *widok* tej samej flagi, obok efektu
   i pików. Nie drugie miejsce przechowywania: `flags.<mod>.zranienie.level` pozostaje jedynym
   magazynem, wszystko inne z niego wynika i zapisuje przez `setZranienie`/`applyZranienie`.
@@ -262,16 +403,14 @@ z siebie nic nie daje — poziomy, piki i cykl kliknięć musiały powstać od z
 ### 1.7 Ammo & Magazine Tracking (Native)
 - [x] Natywny Tab Amunicji: Oddzielenie amunicji od `Używek` metodą UI Illusion (własny panel w ekwipunku) + suwak tworzenia per kaliber (baza `ammo-data.mjs`).
 - [x] Różnicowanie Strzelb: Jeżeli broń ma kaliber `.12 Ga`, a gracz posiada oba typy pudełek (Śrut i Breneka), okno Przeładowania zadaje pytanie wyboru, aktualizując modyfikatory lufy w locie.  
-- [x] Magazynki Kwantowe: Dodano śledzenie w Ekwipunku sztuk magazynków zapasowych (`Mag. do broni...`).
-- [x] Blokady bojowe: Twarda blokada akcji rzutu przeładowania broni *wymiennej* w czasie trwania Walki przy zerowym zasobie odpowiedniego `Kwantowego Magazynka` (przeciw "kieszeniowaniu luzem" cekaemów).
-- [x] Regeneracja zasobów: Auto-reset Uses na flagowanych Kwantowych Magazynkach po zakończeniu enclunteru (hook `deleteCombat` / `deleteCombatant`).
-- [x] **Zapasowe Magazynki** (`magazine-inventory.mjs`) — sekcja ponad Amunicją w inventory
-  - 6 typów: Krótki / Pośredni / Długi / Ciężki / Kołczan / Szybkoładowarka Rew.
-  - Kolumny: Ikona+Nazwa | Cena | Waga | Ilość(±) | Gotowych(±) | Edytuj/Usuń
-  - `flags["neuroshima-2026-overrides"].ready` = liczba gotowych/załadowanych
-  - Mapowanie broń→typ: właściwość `beb`→speedloader, `wmag`→null, Neuroshima types, `martialR` z kalibru (3-krokowy algorytm)
-  - Dialog DODAJ MAGAZYNEK (typ, ilość, gotowych, podgląd ceny/wagi)
-  - Sekcja zawsze widoczna (nie tylko gdy są magazynki w inventory)
+- [—] ~~Magazynki kwantowe~~ (śledzenie sztuk, blokada przeładowania w walce, reset po walce,
+  kolumna „Gotowych", 6 typów generycznych) — **usunięte 2026-09-22**, patrz changelog (36).
+  Zastąpione magazynkami symulacyjnymi: magazynek to fizyczny pojemnik z kolejką naboi przypisany
+  do modelu broni (`config/magazines-data.mjs`, 31 pojemników), mieszana amunicja rozstrzygana
+  w chwili rzutu, `wmag`/`beb` trzymają kolejkę w broni, BN mają jeden magazynek na walkę
+  (`weapons/npc-ammo.mjs`). Projekt: `PLAN_magazynki.md`
+- [x] **Sekcja „Magazynki"** (`magazine-inventory.mjs`) — wiersz na sztukę, dialog dodawania z katalogu
+  per model; magazynki przy pasie współdzielą 3 sloty podręczne (`handy-items.mjs`)
 - [x] Ikony magazynków: `icons/magazines/` — 6 SVG (5 z Weapons_Resize_11 + `speedloader.svg` z Weapons_Resize_12)
 - [x] `dev/icons/process_grid_12.py` — przetworzono 9 ikon (speedloader, tourniquet, wax_candle, super_glue, disinfectant_spray, magnifying_glass, detergent, duct_tape, lighter)
 - [x] `dev/icons/process_single.py` — nowy skrypt do przetwarzania pojedynczych tile'ów (nie siatek)
@@ -291,7 +430,10 @@ z siebie nic nie daje — poziomy, piki i cykl kliknięć musiały powstać od z
 
 ### 1.7a Materiały Wybuchowe / Granaty
 - [x] Oddzielenie materiałów wybuchowych od sekcji Amunicja — osobna tabela „Materiały wybuchowe" w inventory
-- [x] Obsługiwane typy `grenade-*`: granaty, miny, ładunki zdalne, pipebomb, Mołotow i granat zapalający
+- [x] Obsługiwane typy `grenade-*` (wg RAW od 2026-09-24): granaty, miny przeciwpiechotna i przeciwpancerna,
+  Plastik C4, Dynamit, IED (zastąpił pipebomb), Koktajl Mołotowa, granat zapalający; granat sygnałowy → WKK
+- [x] Wybuch rzuconego ładunku na końcu tury rzucającego (Tile `pendingCharge`), podkładanie min/C4/IED
+  z Testem ST 10 i czterema sposobami detonacji, Detonator radiowy — patrz changelog 2026-09-23 i 2026-09-25
 - [x] Klik na nazwę / przycisk „Rzuć" inicjuje wybór punktu na scenie, pomiar odległości i redukcję ilości
 - [x] Zasięg rzutu: 9 + max(9, 9 × mod. SIŁ) — min. 18 m (RAI, sprzeczność reguła/przykład w podręczniku), bez wpływu wagi; karta czatu pokazuje odległość i czy w zasięgu (poprawione 2026-09-23 — wcześniej wymyślony model SIŁ × 2 / waga)
 - [x] Obszary efektu parsowane z definicji (`Koło`, `Sześcian`, wariant otwarty/budynek)
@@ -304,8 +446,10 @@ z siebie nic nie daje — poziomy, piki i cykl kliknięć musiały powstać od z
 - [x] Dźwięki materiałów wybuchowych są mapowane per subtype (gaz, flashbang, Mołotow, pipebomb, mina, C4/dynamit, granat zapalający)
 
 ### 1.7b Stabilność UI Inventory
-- [x] Stabilizacja pozycji karty aktora po klikach +/- w sekcjach custom inventory (ammo / granaty / magazynki / natywne quantity)
-- [x] Snapshot pozycji arkusza przy kliku i przywrócenie po małym dryfie rerenderu (bez korekty dużych, intencjonalnych przesunięć)
+- [x] Przewinięcie karty stoi w miejscu po każdym +/- (własne i natywne przyciski) — `_preRender` zapisuje,
+  `_postRender` przywraca `scrollTop` kontenera `.main-content` w podklasie arkusza (`sheet-shell.mjs`,
+  2026-09-23). Stara łatka `sheet-position-stability.mjs` (snapshot przy kliku, tylko wybrane sekcje)
+  **usunięta**
 
 ### 1.8 Fire Modes (Tryby Ognia)
 - [x] Ogień pojedynczy (P) — bazowa aktywność `attack` broni palnej automatycznie przemianowana na „Ogień pojedynczy" przy sync
@@ -354,7 +498,7 @@ Szczegółowy plan: `PLAN_sequencer.md` (status w planie był nieaktualny — pa
 Zastępuje pierwotne podejście z `PLAN_shooting_vfx.md` (Sequencer `.effect()` + webm JB2A) — nie skaluje się do serii Minigunu. Zamiast tego własny silnik PIXI z wypiekanymi (baked) teksturami.
 
 - [x] `tracer-vfx.mjs` — `tracerFire()` (pojedynczy cel), `tracerFireArea()` (linia/szablon, per-token trafienie), `_bakeTracerTexture`/`_bakeMuzzleTexture`, pula obiektów, licznik FPS
-- [x] Warianty wizualne per kaliber (`caliber-vfx.mjs`, 14 kalibrów) i per broń sygnaturowa (`weapon-vfx.mjs`, 5 broni: Minigun, Świnia, Browning, Light Fifty 2K20, Miotacz ognia, LAW) — kaskada broń > kaliber > globalny TUNE
+- [x] Warianty wizualne per kaliber (`caliber-vfx.mjs`, 14 kalibrów) i per broń sygnaturowa (`weapon-vfx.mjs`, 6 broni: Minigun, Świnia, Browning, Light Fifty 2K20, Miotacz ognia, LAW) — kaskada broń > kaliber > globalny TUNE
 - [x] **Pojedynczy strzał**: `magazine.mjs` `_playSingleShotVfx()` woła `tracerFire()` z realnego `neuroRollAttack` — trafienie/pudło rozstrzygane przez `_isAttackHit()` (krytyk=trafienie, pech=pudło, inaczej rzut≥TT)
 - [x] **KS**: `fire-modes.mjs` `_playShortBurstVfx()` analogicznie
 - [x] **(2026-07-29) DS/MS**: `_playAreaBurstVfx()` (nowy helper, mirror `_playShortBurstVfx`) woła `tracerFireArea(liveItem, results.templates[0], selection.bullets)` z produkcyjnych handlerów `use()` — serie obszarowe mają teraz tracer na stole. Bez per-tokenowego trafienie/pudło: `tracerFireArea` zawsze kończy próbkowane impakty (`hit:true`), zgodnie z RAW, gdzie każdy nabój serii ląduje gdzieś w szablonie niezależnie od indywidualnych RO celów. OZ świadomie pominięte (poza zakresem VFX per `PLAN_shooting_vfx.md` §2), dostało tylko poprawkę dźwięku (patrz Phase 2 wyżej)
@@ -411,6 +555,9 @@ Zastępuje pierwotne podejście z `PLAN_shooting_vfx.md` (Sequencer `.effect()` 
 
 ### 1.13 Special Melee Actions
 - [x] Odepchnięcie, Pochwycenie, Wytrącenie jako opcje ataku (`combat/melee-maneuvers.mjs`)
+- [ ] Akcja **Bieganie** (+2× Szybkość, Utrudnienie do własnych ataków, dystansowe przeciw biegnącemu
+  z Utrudnieniem); domyślne Utrudnienie w dialogu dla ataku dystansowego w zwarciu i na zasięgu
+  dalekim — dnd5e 5.3 nie egzekwuje żadnego z nich — `PLAN_beta.md` M1
 
 ### 1.14 Rest Overrides
 - [x] Krótki odpoczynek = 4h / 240min (nie 1h)
@@ -522,7 +669,7 @@ DOM stockowego arkusza zamiast przez `sheet-shell.mjs`.
 
 ## Phase 2: Full Equipment Layer
 - [x] **Sequencer: Spatial Audio** — pozycjonowanie dźwięku z tokena, zanikanie z odległością, stereo pan, muffling przez ściany — żywe dla P/KS/DS/MS/OZ oraz trafienia (patrz §1.19 Phase 2)
-- [~] Weapon properties (cicha, ppanc, Wmag, etc.) — zdefiniowane + filtrowane per typ + tooltipy; egzekwowanie mechaniczne częściowe. Porażająca/Powalająca/Unieruchamiająca egzekwowane (`weapon-save-properties.mjs`, live-verified). Reszta: patrz `PLAN_weapon_properties.md`
+- [~] Weapon properties (cicha, ppanc, Wmag, etc.) — zdefiniowane + filtrowane per typ + tooltipy; egzekwowanie mechaniczne częściowe. Porażająca/Powalająca/Unieruchamiająca egzekwowane (`weapon-save-properties.mjs`, live-verified), Dublet jako tryb ognia (`fire-modes.mjs`). `ppanc` omija dziś tylko próg obrażeń istot Bestiariusza — **nie** próg ani odporność kinetyczną pancerza BG (`PLAN_beta.md` M1); `dluga`/`ciezka`/`jednorazowa` — M6. Szczegóły: `PLAN_weapon_properties.md`
 - [x] Właściwość "Obalająca" (skrypt wymuszający rzut obronny na celach, sprawdzenie rozmiaru celów)
 - [x] Weapon attachments/upgrades — patrz §1.18 Ulepszenia Broni (`addons.mjs`, live-verified)
 - [x] **Armor handling** (lekki/średni/ciężki + wspomagany) — `config/armor-data.mjs` (17 pozycji),
@@ -532,21 +679,29 @@ DOM stockowego arkusza zamiast przez `sheet-shell.mjs`.
 - [—] Armor durability — **decyzja: świadomie poza automatyką**, nie „odłożone". Wytrzymałość
   pancerzy siedzi w polu `manual`, drukuje się w opisie przedmiotu i zbiera przez
   `game.neuroshima.pancerze.report()`
-- [ ] Carry thresholds (SIŁ×5 / SIŁ×10 kg)
-- [ ] Przedmioty podręczne (3 sloty)
+- [x] **Udźwig** (SIŁ×5 / SIŁ×10 kg, mnożniki rozmiaru, kara Szybkości i Utrudnienie do ataków przy
+  Przeciążeniu) — changelog (32), `config/encumbrance-config.mjs`, `actors/udzwig-*.mjs`,
+  `combat/udzwig-attack-disadvantage.mjs`. Stało tu jako `[ ]` od sierpnia
+- [x] **Przedmioty podręczne** (3 sloty RAW, liczone na sztuki, pas w nagłówku karty, +1 slot
+  z Kamizelką taktyczną WKK) — changelog (36) i 2026-09-24/25, `actors/handy-items.mjs`,
+  `handy-belt.mjs`, `PLAN_przedmioty_podreczne_v2.md`
 - [x] **Surowce** (5 typów: CH, CE, CZ, MK, MO) — `actors/surowce-inventory.mjs`, panel w Ekwipunku.
   Był tu jako `[ ]` mimo gotowego, wpiętego kodu — znalezione przy porządkach 2026-08-21 (patrz
   wiersz w tabeli plików na górze)
 - [x] **Lekarstwa** jako Używki — zrobione, patrz §4.2 (Phase 4). ~~Medical items~~ wykreślone stąd
   z tego samego powodu co Surowce wyżej
-- [ ] Fanty, pozostałe consumables poza lekarstwami
-- [ ] Gambling/barter UI (k100, location mods, regional prices)
-- [ ] Object destruction (TT/PW by material/size)
+- [~] Fanty i pozostałe consumables — Prowiant (panel Zasoby), Kwas, Kolczatki, Flara, Detonator
+  i zapalniki, Baterie, Latarka, Gogle, Gadżety (WKK), sprzęt z `gear-data.mjs`. Tabela Fantów i reszta
+  Różności bez akcji — przedmioty z opisem
+- [ ] Gambling/barter UI (k100, location mods, regional prices) — `PLAN_beta.md` M5
+- [ ] Object destruction (TT/PW by material/size), `burząca`/`karczująca` ×2 — M6
 - [~] **Broń improwizowana** — jeden konkretny przykład zrobiony (Pochodnia, patrz §1.23),
-  ogólna zasada „1k4, bez Premii Biegłości, typ wg MG" pozostaje ręczna dla innych przedmiotów
+  ogólna zasada „1k4, bez Premii Biegłości, typ wg MG" pozostaje ręczna dla innych przedmiotów — M6
+- [ ] **Produkcja przedmiotów i naprawa** (surowce = ½ ceny, czas, ST wg wartości, schematy,
+  elaboracja amunicji, tabela naprawy) — panel Surowców nic nie zużywa — M2
 
 ### 1.23 Pochodnia (improvised torch)
-- [x] `weapons/pochodnia.mjs` — homebrew zastępujące zepsuty SRD Torch (jego auto-wygenerowana
+- [x] `wkk/items/pochodnia.mjs` (do oddzielenia WKK: `weapons/pochodnia.mjs`) — homebrew zastępujące zepsuty SRD Torch (jego auto-wygenerowana
   aktywność ataku niosła `target.template` typu promień 40 stóp — kompendium modeluje zasięg
   światła jako cel ataku, stąd gigantyczny szablon przy próbie użycia). Zamiast łatać, świeży
   `weapon` item od zera
@@ -653,9 +808,15 @@ Szczegółowy plan: `PLAN_classes.md`
   które nastąpi po tym ustawieniu (nic do naprawienia, po prostu wymaga F5, tak jak reszta
   zmian w tej sesji)
 - [x] Sztuczki (feat-like items) — pack `neuroshima.sztuczki` z **53 pozycjami** (`config/sztuczki-data.mjs`),
-  ItemChoice podpięte do puli po obu stronach (klasy i profesje). Mechanikę ma na razie **6/53**
-  (3 pełne, 3 częściowe) — reszta to opis + jawny rejestr „tego nie automatyzujemy"
-  (`game.neuroshima.sztuczki.report()`)
+  ItemChoice podpięte do puli po obu stronach (klasy i profesje). Mechanikę ma **9/53**
+  (3 pełne: Aspiryna i Miętusy, Ruchome gniazdo CKM, Szybkie palce; 6 częściowych: Aramis, Grad ołowiu,
+  Pakowanie, Pan Plaster, Samuraj, Szturmowiec; policzone 2026-09-26) — reszta to opis + jawny rejestr
+  „tego nie automatyzujemy" (`game.neuroshima.sztuczki.report()`)
+- [ ] **Rejestr automatyki zdolności klasowych** — Sztuczki i Pochodzenia mają `coverage-ledger.mjs`,
+  133 zdolności klasowe nie; ~13 ma własny kod (Berserk, Kondycha, Goła klata, Tarcza wiary, Drugi/Trzeci
+  atak, Z bara!, Cichy krok, Mój biom, Mój wróg ×2, Wściekły cios, Jak dbasz, tak masz) — `PLAN_beta.md` M0
+- [ ] **Towarzysze** (Partner Sędziego, Oswajanie zwierząt Łowcy mutantów, Prawa ręka Mafiozo) i **drony**
+  Montera — tylko tekst zdolności, brak aktorów — M3
 - [x] 12 Pochodzeń (origins) z bonusami cech — pack `pochodzenia` (12 itemów typu `background`,
   natywny slot dnd5e) i `zdolnosci-pochodzenia` (36 zdolności z `Tabele/Pochodzenie.md`),
   oba z `config/pochodzenia-data.mjs`. Premie +1/+1 nakłada `AbilityScoreImprovement` z `fixed`,
@@ -696,7 +857,8 @@ miała tu własnego miejsca (patrz stary, błędny wpis `[ ] Enemy sheets + best
 Phase 5, teraz skreślony). Pełny opis pipeline'u: `DEV_GUIDE.md` §11.
 
 - [x] 51 istot jako kompendium `neuroshima.bestiariusz` (6 folderów) — pipeline
-  `Podrecznik/Bestiariusz/*.md` (Obsidian, źródło treści) → `dev/bestiary/extract_bestiary.py` →
+  `Podrecznik/NOE/13 NOTATNIK ŁOWCY/` (konwersja PDF-a, źródło treści) + `dev/bestiary/lore-extras.json`
+  (tagi krwi) → `dev/bestiary/extract_bestiary.py` →
   `gen_bestiary.py` → `scripts/config/bestiary-data.mjs` → `dev/packs/build-packs.mjs`
 - [x] **89 z 261 zdolności zautomatyzowane** — `RULES` (klucz = nazwa zdolności, powtarzalne
   między istotami: Pierwsze spotkanie, Algorytm czuwania, Współpraca, Światłowstręt) +
@@ -816,7 +978,7 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ### 4.2 Lekarstwa i dawkowanie
 - [x] `chemia-data.mjs` — **35 pozycji** (leki przewlekłe, bojowe, popromienne, narkotyki, używki,
   materiały pirotechniczne) jako **Używki** (`consumable`, typ `lekarstwo`
-  zarejestrowany w `terminology.mjs`), z cenami/dostępnością z tabeli LEKARSTWA (str. 111)
+  zarejestrowany w `terminology.mjs`), z cenami/dostępnością z tabeli LEKARSTWA (str. 132)
   i aktywnością „Zażyj dawkę" (`itemUses` + `autoDestroy`). Zastąpił `medicine-data.mjs` (12 pozycji)
 - [x] Kompendium `neuroshima-2026-overrides.lekarstwa` budowane z tego samego pliku
       (`dev/packs/build-packs.mjs`) — jedno źródło prawdy, bez ręcznej edycji packa
@@ -866,14 +1028,16 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   tak samo jak Upojenie i Skażenie wyżej — znaleziony przy porządkach 2026-08-25.
   **Podpalenie wykreślone** — `combat/podpalenie.mjs`, v0.14.5 (1k4 ognia na początku tury,
   `duration` FVTT zamiast własnego licznika, płomień Sequencera na żetonie, akcja „Ugaś się"
-  w panelu STAN). **Zostaje: Przemarznięcie i Uduszenie** — mają gotowe klucze
-  w `EXHAUSTION_SOURCES` i żadnej automatyki
+  w panelu STAN). **Zostaje: Przemarznięcie, Uduszenie i Sen** (doba bez snu) — mają gotowe klucze
+  w `EXHAUSTION_SOURCES` i żadnej automatyki — `PLAN_beta.md` M1
 - [~] Rest activities — **polowanie i gotowanie zrobione** (`party-supplies.mjs`: `hunt()` — 1 h,
-  Test Mądrości (Sztuka przetrwania) ST 15; `cook()`). Zostają: plotki i czyszczenie sprzętu
+  Test Mądrości (Sztuka przetrwania) ST 15; `cook()`). Czyszczenie broni było gotowe od dawna (§1.7, aktywność
+  odpoczynku 1 h). Zostają: rozrywka, plotkowanie, hazard i aktywności Długiego postoju (praca, trening,
+  budowa bazy, koszt utrzymania) — `PLAN_beta.md` M5
 - [~] Vehicles (actor type + combat + chase system) — projekt: [PLAN_poscigi.md](PLAN_poscigi.md)
   (2026-09-11). **Zrobione:** `config/vehicles-data.mjs` (14 podwozi z tabeli s. 262, środowiska
   pościgu, stałe zasad); `scenes/poscig.mjs` + `scenes/poscig-canvas.mjs` — generowana plansza
-  pościgu (gridless, 1 znacznik = 36 m = 200 px, proceduralna pustynia z trójwarstwową paralaksą
+  pościgu (niewidoczna siatka kwadratowa o boku toru — pierwotnie gridless, poprawione 2026-09-12; 1 znacznik = 36 m = 200 px, proceduralna pustynia z trójwarstwową paralaksą
   w `canvas.primary`, 12 numerowanych torów, dolna strefa swobodna na warstwę Rysunków MG);
   GMT400 przestawiony na podwozie Hammer (PW 180 zostaje — decyzja MG); nowy aktor
   „Hammer Posterunku" jako ścigający; `scenes/poscig-ui.mjs` — kontekstowy przycisk MG
@@ -884,23 +1048,26 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   potwierdzanym kliknięciem, tabele k20 Awarii i Komplikacji. Istniejące zależności: `actors/party-travel.mjs` (paliwo pojazdu),
   `actors/vehicle-portrait.mjs` — oba wstrzykują się w `renderVehicleActorSheet`.
   Siedem cichych pułapek v14 znalezionych po drodze: PLAN §9a / ARCHITECTURE §11.
-- [ ] Crafting system (schematy, produkcja, szabrowanie, bebeszenie)
-- [ ] Drones
+  Domknięcie rozdziału — `PLAN_beta.md` M4
+- [ ] Crafting system (schematy, produkcja, naprawa) — `PLAN_beta.md` M2; szabrowanie i bebeszenie — M5
+- [ ] Drones — M3
 
 ## Phase 5: Content & Polish
-- [~] **Tracer/Muzzle VFX** — muzzle flash + bullet tracer żywe dla P/KS/DS/MS (własny silnik PIXI, patrz §1.21); OZ świadomie bez tracera (poza zakresem), eksplozje na templatach i iskry/krew trafienia wciąż nie zaimplementowane
+- [~] **Tracer/Muzzle VFX** — muzzle flash + bullet tracer żywe dla P/KS/DS/MS (własny silnik PIXI, patrz §1.21); OZ świadomie bez tracera (poza zakresem). Wybuch granatu ma efekt z grafik sceny „!!SZABLONY!!" i ślady po
+  wybuchu (changelog 2026-09-06 (7) i (11)); iskry/krew trafienia i screen shake — po becie
 - [x] **Compendia broń i pancerze** — zbudowane w v0.11.0 (patrz Changelog). `bron` 74 pozycje
   (złożone z tabel `Tabele/Bronie/*.md` + Zbrojowni), `pancerze` 17 pozycji wraz z czterema
   regułami, których moduł nie miał. Rozpoznanie: [HANDOFF_bron_pancerze.md](HANDOFF_bron_pancerze.md).
   **Ten punkt stał tu jako `[ ]` jeszcze po wydaniu v0.11.0** — znalezione przy porządkach 2026-08-22
-- [ ] **Ikony pancerzy** — `icons/armor/<id>.svg` to na razie ścieżki bez plików; przepuszczenie ich
-  przez `dev/icons/process_grid_N.py` odsunięte na osobne zadanie (v0.11.0)
+- [x] **Ikony pancerzy** — 36 plików w `icons/armor/` (v0.14.15 i batch 40). Stało tu jako `[ ]`
+  od v0.11.0
 - [x] **Bestiariusz** — 51 istot, kompendium `neuroshima.bestiariusz`. ~~Enemy sheets + bestiary imports~~
   było tu jako `[ ]` mimo że warstwa jest gotowa i zweryfikowana — patrz podsekcja „Bestiariusz"
   na końcu Phase 3 wyżej (dodana przy porządkach 2026-08-21, bo ta praca nigdy nie dostała
   własnego miejsca w tym trackerze)
-- [ ] Color profiles (Stal, Rdza, Rtęć, Chrom)
-- [ ] Regional price tables
+- [ ] Color profiles (Stal, Rdza, Rtęć, Chrom) — **po becie** (`PLAN_beta.md` §4); Kolor Kobaltu to
+  osobna nakładka stołowa (`scripts/wkk/`)
+- [ ] Regional price tables — M5
 - [ ] UI polish, tactical HUD
 - [—] **Ikony broni per-typ** (`weapons/icons.js`) — **plik usunięty w v0.13.0**. Był osierocony
   od 2026-08-21 (jedyny importer, `scripts/main.js`, był martwym duplikatem entry pointu).
@@ -914,6 +1081,217 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### Jedno źródło RAW: podręcznik z października (`NOE/`) (2026-09-26)
+
+Cytowania, komentarze i narzędzia — **zero zmian w danych i w zachowaniu**. Lista tego, co jest
+teraz nieaktualne i czeka na decyzję/regenerację: [HANDOFF_noe_pazdziernik.md](HANDOFF_noe_pazdziernik.md).
+
+- **Źródło.** PDF z października przekonwertowany w vaulcie do `Podrecznik/NOE/` (plik na
+  rozdział/sekcję/istotę, znaczniki `<!-- s. N -->`, cytuj „NOE s. N”). Marcowy PDF i wszystkie
+  wcześniejsze zrzuty usunięte. Różnice wydań: `Podrecznik/CHANGELOG.md` w vaulcie.
+- **Cytowania** `source.txt:L####` / `str. N` przepięte na strony NOE w `PLAN_beta.md`,
+  `PLAN_party_sheet.md`, `PLAN_classes.md`, `DEV_GUIDE.md`, tym pliku i komentarzach skryptów
+  (zdrowie, krwawienie, podpalenie, chemia, choroby, fobie, sprzęt, udźwig, testy).
+- **Ekstraktory** `dev/classes/extract_{classes,professions}.py` (nowy wspólny
+  `dev/classes/noe_source.py`) i `dev/bestiary/extract_bestiary.py` czytają NOE; wszystkie mają
+  `--out`. Bestiariusz: nowy `dev/bestiary/lore-extras.json` (tagi krwi Splattera), id = slug
+  nagłówka + `ID_ALIASES`; parser toleruje usterki interpunkcji podręcznika i zgłasza je jako
+  ostrzeżenia źródła. Wynik: 52 istoty, 0 błędów; commitowane JSON-y nietknięte.
+- **Porównanie automatyczne** broni i pancerzy z tabelami NOE: brak rozbieżności liczbowych.
+
+### Przegląd pokrycia RAW, plan bety, porządki w trackerze (2026-09-26)
+
+Tylko dokumentacja — zero zmian w kodzie. Nowe: [PLAN_beta.md](PLAN_beta.md). Dotknięte:
+ten plik, `PLAN_weapon_properties.md`, `README.md`, `docs/FAQ.md`, `docs/Zmiany-wzgledem-dnd5e.md`,
+`DEV_GUIDE.md`, `ARCHITECTURE.md`.
+
+- **Werdykt: alfa.** Walka, ekwipunek, stany i przetrwanie grają się w całości; nie istnieją
+  produkcja przedmiotów, towarzysze i drony, szabrowanie/bebeszenie, gambling i aktywności postoju,
+  większość rozdziału o pojazdach. Modele danych wciąż się zmieniały (magazynki 09-22, pas
+  podręczny 09-25). Automatyka zdolności: ~13/133 klasowych, 9/53 Sztuczek, 1/36 Pochodzeń,
+  89/261 Bestiariusza.
+- **Nowa sekcja [Stan projektu](#stan-projektu)** na górze pliku — macierz pokrycia wg rozdziałów
+  podręcznika. Od teraz status zmienia się tam; fazy 1–5 zostają jako historia.
+- **Luki potwierdzone w kodzie** (grep, nie domysł), wszystkie w `PLAN_beta.md`: neutralizacja
+  Stopnia Zranienia, porażki rzutów przeciw śmierci przy obrażeniach na 0 PW, Olbrzymie obrażenia,
+  akcja Bieganie, Utrudnienie w zwarciu i na zasięgu dalekim, `ppanc` przeciw pancerzowi BG
+  (sprawdzane tylko w `bestiary-thresholds.mjs`), wyzwalacze Snu, Uduszenia i Przemarznięcia.
+- **Nieaktualne wpisy poprawione:** magazynki kwantowe (usunięte w (36), a tracker wciąż je
+  odhaczał), `sheet-position-stability.mjs` (usunięty 09-23), Udźwig i przedmioty podręczne (stały
+  jako `[ ]`), ikony pancerzy (36 plików), efekt wybuchu granatu, Sztuczki 6/53 → 9/53, czyszczenie
+  broni jako „do zrobienia", plansza pościgu „gridless", CSS 1365 → 3603 linii, tłumaczenia 553 → 617,
+  ścieżka Pochodni (`wkk/items/`), `migrate-health.mjs` (usunięty w `62dfd4c`).
+- **Tabela plików:** dopisane ~95 brakujących skryptów (party-*, gogle, latarka, światło, pościgi,
+  mapy, WKK, migracje zbiorczo).
+- **Dwa zrzuty podręcznika.** `Neuro 5e/podrecznik.md` (luty 2026) jest starszy niż
+  `Podrecznik/source.txt` (kwiecień, z PDF-a z marca) i ma inne liczby — np. upadek do cieczy: ST 15
+  i połowa obrażeń przy sukcesie w starym, ST 10 i brak obrażeń w nowym. `falling.mjs` idzie za
+  nowym — poprawnie. Porównując z RAW, używaj `source.txt`. *(Nieaktualne od 2026-09-26: oba zrzuty
+  usunięte, jedynym źródłem jest `Podrecznik/NOE/`.)*
+
+### Podkładanie min i ładunków, Detonator radiowy, zwarty nagłówek karty (2026-09-25)
+
+Nowe: `actors/charge-rules.mjs` (czyste zasady, testowane), `actors/placed-charges.mjs` (przepływ),
+`items/detonator.mjs` (przedmioty). Dotknięte: `grenade-inventory.mjs`, `config/ammo-data.mjs`,
+`world-clock.mjs`, `main.mjs`, `dev/packs/build-packs.mjs`, `styles/neuroshima.css`.
+Decyzje MG: `HANDOFF_materialy_wybuchowe.md` §2.3.
+
+- **Podkładanie** (RAW, *Sprzęt* → „Miny i ładunki wybuchowe"): miny, C4 i IED mają w katalogu
+  `placed` + `detonation`; przycisk wiersza/kafelek pasa = „Podłóż" zamiast „Rzuć". Dialog:
+  sposób detonacji (niedostępne wyszarzone z powodem), czas zapalnika (rundy/minuty/godziny,
+  ≤ 24 h), czym Test (Zwinne dłonie / narzędzia ślusarza lub rusznikarza, jeśli są / Survival;
+  domyślnie najlepszy). Punkt w 3 m (przekroczenie oznaczane, nie blokowane). Test ST 10:
+  ≥ 10 uzbrojony, 6–9 niewypał (leży, nie wybucha), ≤ 5 wybuch przy zakładaniu. Zużywa ładunek
+  i zapalnik. Tile przez ten sam przekaźnik MG co rzut; ładunek BN — Tile ukryty, obrys i podpis
+  tylko dla MG, karta „Podłożono" szeptem.
+- **Sposoby**: czasowy (zegar świata, `_anchorPassed` zna `anchor.type`), wyzwalacz/nacisk (MG),
+  radiowy (zapalnik z zestawu; pilot tego zestawu, 200 m), elektryczny (zapalnik elektryczny;
+  podkładający, 10 m kabla). C4 wg RAW tylko elektryczny albo radiowy — bez zapalnika się nie da.
+- **Detonacja**: gracz — pilot (aktywność „Detonuj", także z pasa) albo „DETONUJ (n)" w stopce
+  Materiałów wybuchowych → lista ładunków z odległością. Ta sama scena i w zasięgu → od razu;
+  dalej → zablokowane; brak żetonu na tamtej scenie → prośba do MG z przyciskiem. MG — każdy
+  ładunek: przycisk na karcie „Podłożono", w HUD-zie Tile'a i lista „Podłożone ładunki" na pasku
+  żetonów (wszystkie sceny). Ręka MG odpala też niewypał; zegar, pilot i kabel — nie.
+- **Wybuch bez graczy** (MG): jeśli na scenie nie ma żadnego gracza, efekty zostają na mapie, ale
+  bez dźwięku, a karta idzie tylko do MG z notą „czy coś słyszą — decyduje MG". Rzucony granat
+  po staremu.
+- **Detonator radiowy = pilot + stos „Zapalnik radiowy" ×10**, łączone `kitId` (nazwa z
+  czterema znakami zestawu). Pilot z paczki (`kitNew`) na karcie aktora sam dokłada zapalniki;
+  przeniesiony między kartami — nie. Podział RAW-owych 50 gb / 1 kg: pilot 50 gb / 0,8 kg,
+  zapalniki 0 gb / 0,02 kg. **Zapalnik elektryczny** (RAW, 5 gb, 0,5 kg, 20%). Oba w paczce
+  `sprzet` (zbudowana do katalogu tymczasowego — prawdziwa czeka na zamknięte Foundry);
+  `game.neuroshima.detonator`, `game.neuroshima.charges`. Ikony: MISSING.md A #1, #3, #4.
+- **Nagłówek karty postaci**: 170 → 128 px. Imię 32 px w jednej linii (długie, jak „Raynald of
+  Châtillon", zawijały się i wypychały pas pod nagłówek), plakietka poziomu 78 → 58 px,
+  odpoczynki i Fuks obok niej. Kafelki pasa 34 → 44 px. Fuks: zamiast zielonych świecących
+  koniczyn pigułka w stylu pasa, złote koniczyny.
+- Na żywo (Piekarz, scena Start): zestaw → 10 zapalników; przeniesiony pilot bez zapalników; IED
+  radiowy przez prośbę gracza (2 m, karta tylko MG — brak graczy); IED czasowy 2 rundy (po 6 s
+  leży, po 12 s wybuch); niewypał czasowy — jedna wiadomość, potem cisza; prawdziwy niewypał C4
+  (rzut 9) na kablu nie wybucha; ręka MG odpala niewypał; ładunek BN ukryty; HUD i lista MG.
+- Testy 484/484 (+9).
+
+### Ikony batch 40, Kwas (RAW), czystka alfa Jazdy Próbnej (2026-09-25)
+
+- **Batch 40** (`dev/icons/process_grid_40.py`, `in/Weapons_Resize_40.jpg`): Kamizelka taktyczna
+  (`icons/armor/`, podpięta po id), .44 Mag dum-dum i Breneka (`icons/ammo/`, pola `icon`
+  w katalogach), Mięso suszone / Chleb / Owoce i warzywa / MRE (`icons/items/loot/`,
+  `PROWIANT_CATALOG`), Zużyty LAW (`icons/weapons/law_spent`) i Magazynek bębnowy
+  (`icons/magazines/mag_drum`) — te dwa czekają na przedmioty, których jeszcze nie ma.
+  Przepięte rozdane kopie: Lorentz (.44 dum-dum), Piekarz, Zbrojownia i katalog Items (breneka).
+  Kolejka A w MISSING.md wyczyszczona, następny batch 41 (w kolejce: Detonator radiowy, Kwas).
+- **Kwas (fiolka)** — nowy `items/kwas.mjs`, RAW z Różności: natywna aktywność dnd5e `save`
+  (cel w 6 m, RO na ZR, ST 8 + mod. ZR + PB przez `dc.calculation: "dex"`, 4k6 od kwasu,
+  sukces = brak obrażeń), `uses.max 1` + `autoDestroy`, przedmiot podręczny (`handy: true`).
+  W paczce `sprzet`; `game.neuroshima.kwas`. Raynald: 10 ręcznie zrobionych „Fiolek Kwasu"
+  (surowiec bez aktywności) → 1 Kwas, jak w oryginalnym świecie Roll20. Na żywo: ST 10 przy
+  mod. ZR +0 i PB +2.
+- **Czystka Jazdy Próbnej** (decyzja MG): Buźka, Carson, Dante, Góra, Iris, Kluczyk to pre-geny
+  z publicznej alfy NOE (`Postacie/BG/Domyślne`). Usunięte 71 przedmiotów bez tożsamości
+  modułu: lootowy ekwipunek z Roll20 z ceną w nazwie, zdublowane „(NN)" bronie, alfowe cechy
+  (w tym stare wersje Sztuczek: Jest zajebiście, Kuloodporność, Szturmowiec, Ćwiczenie czyni
+  mistrza, Ciszej niż cień) i klasa-zaślepka „Wybierz" Kluczyka. Zostały: klasy, zdolności,
+  pochodzenia, narzędzia, amunicja, leki, latarki, broń oraz rekwizyt fabularny (list do
+  Samanthy Smith). Kopia pełnych dokumentów: `Neuro 5e/Integracje/backups/
+  jazda-probna-alpha-items-2026-09-25.json` (przywracanie: `createEmbeddedDocuments` z `keepId`).
+- Testy 475/475.
+
+### Przedmioty podręczne v2: pas w nagłówku karty (2026-09-25)
+
+Nowy `actors/handy-belt.mjs` (widok), przebudowany `actors/handy-items.mjs` (model); dotknięte
+`magazine.mjs`, `magazine-inventory.mjs`, `grenade-inventory.mjs`, `leki-inventory.mjs`,
+`config/armor-data.mjs`, nowy `wkk/config/armor-data.mjs`. Projekt, pomiary i decyzje MG:
+`PLAN_przedmioty_podreczne_v2.md` (§13 — co weszło, co otwarte).
+
+- **Pas w nagłówku** pod nazwą/klasą: kafelek na **sztukę**, podpis (naboje, rundy płonącej
+  butelki, dawki), `+N` = zapas w plecaku, karta przedmiotu dnd5e w dymku, nadmiar na czerwono.
+  Nagłówek, bo pasek boczny dnd5e przewija się z treścią (Ulubione startują pod krawędzią okna).
+- **Gesty**: wiersz (Zasoby i natywny Ekwipunek) → slot; kafelek → inny slot = przestawienie
+  (zamiana); kafelek poza pas albo × = do plecaka; klik = główne działanie (granat, lek,
+  wpięcie magazynka / przelanie szybkoładowarki, aktywności narzędzi); Shift = karta; PPM = menu.
+- **Dane**: `atHand` to lista pozycji slotów na itemie (kolejność ustawia gracz). Zużycie z
+  klikniętego kafelka zdejmuje ten slot (`withConsumeHint`). Stara postać (liczba/`true`) czytana.
+- **Co wolno nosić przy pasie** (MG: to, czego RAW każe używać w akcji): magazynki, materiały
+  wybuchowe, leki, **wszystkie zestawy narzędzi**, Kolczatki, Flara, Sprzęt do wspinaczki +
+  flaga opt-in `handy: true`. Przegląd rozdziału Ekwipunek zapisany w planie §13.
+- **Kamizelka taktyczna (WKK)**: lekki pancerz, baza Plate carrier I, TT 12, 6 kg, 90 gb, 30 %,
+  +1 slot gdy założona (`handySlots`, `handyLimit()`). Ikona w kolejce MISSING.md (A1).
+- **Magazynki**: wpięty schodzi z pasa, wpiętego nie da się położyć na pas, wyjęty idzie do
+  plecaka (decyzja MG); wybór magazynka pokazuje najpierw te przy pasie; pigułka na karcie
+  wymiany liczona przed wpięciem.
+- Opis materiałów wybuchowych: „RO: RO Zręczność…" → „RO: Zręczność…" (nowe itemy i paczka;
+  rozdane kopie przy najbliższej synchronizacji).
+- Testy 474/474 (+6). Na żywo (Piekarz, Carson; 800 px; tryb gry i edycji): każdy gest,
+  dymek, Medpak użyty z kafelka (slot pusty, „podręczny" na karcie). Stan przywrócony.
+
+### Sloty podręczne liczą sztuki, nie stosy (2026-09-24)
+
+`actors/handy-items.mjs`, `items/chemia.mjs`, `actors/grenade-inventory.mjs`, `main.mjs`.
+Decyzja MG: „maksymalnie trzy przedmioty podręczne" to trzy fizyczne rzeczy. Do dziś 7× Relanium
+przy pasie zajmowało 1 slot z 3.
+
+- Flaga `atHand` to teraz **liczba sztuk ze stosu przy pasie** (reszta w plecaku) — stos nie jest
+  dzielony na dokumenty. Stara wartość `true` czytana jako 1. Magazynek ma zawsze ilość 1, więc
+  dla niego nic się nie zmienia.
+- Ręka w wierszu: klik dokłada sztukę na pas (gdy się nie da — odkłada wszystko), PPM odkłada
+  jedną; przy stosie > 1 obok ręki stoi liczba. Limit dalej egzekwowany na wejściu.
+- **Zużycie schodzi najpierw z pasa** — `preUpdateItem` zdejmuje licznik razem z ilością
+  (`beltAfterQuantityChange`). Dlatego pigułka „podręczny / z plecaka" jest liczona **przed**
+  zużyciem: granat w `_throwExplosive`, lek w `dnd5e.preUseActivity` (stan niesiony na
+  `usageConfig.neuroAtHand` do `postUseActivity` — ten sam obiekt). Bez tego ostatnia sztuka
+  z pasa pokazywała się jako wyjęta z plecaka.
+- Poprawka tekstu: RAW **mówi**, ile trwa sięgnięcie do plecaka — „zabiera zazwyczaj jedną akcję"
+  (*Tworzenie postaci*, **Plecak**). Nagłówek pliku i dymek pigułki twierdziły, że nie mówi.
+  Dalej oznaczane, nie blokowane („zazwyczaj").
+
+Zweryfikowane na żywo (Piekarz w walce): 2 klik → pas 2/2, PPM → 1, licznik 1/3; zażycie
+Relanium przy pasie 1 → ilość 2→1, pas 1→0, karta „podręczny". Stan przywrócony.
+
+### Materiały wybuchowe wg RAW; „burzące"; wiersz w jednej linii (2026-09-24)
+
+`config/ammo-data.mjs`, `wkk/config/ammo-data.mjs`, `actors/grenade-inventory.mjs`,
+`config/inventory-audit.mjs`, `weapons/sounds.mjs`, `dev/packs/build-packs.mjs`. Decyzje MG.
+
+- **Miny, C4, dynamit przepisane z RAW** (*Sprzęt* → „Granaty i im podobne", „Miny i ładunki
+  wybuchowe"). Mina przeciwpojazdowa → **przeciwpancerna**; „Ładunek C4 (det. zdalny)" →
+  **Plastik C4 (kostka 100 g)**; „Pęk dynamitu (det. zdalny)" → **Dynamit (laska)**, id
+  `grenade-dynamite-remote` → `grenade-dynamite`. Pipebomb (nie ma go w RAW) zastąpiony RAW-owym
+  **IED**, id `grenade-pipebomb-fuze` → `grenade-ied`. Nowe pole `note` (detonacja, rozbrojenie,
+  łączenie) — **poza** `effect`, bo „+5k6 za 100 g" parser dodałby do każdego wybuchu.
+- **Granat sygnałowy → WKK** (nie ma go w RAW), liczby bez zmian.
+- **„(burzące)"** = RAW „Burząca: podwójne obrażenia obiektom" — `_parseDamageSpec` zwraca
+  `demolition`, karta pisze „×2 obiektom (dolicza MG)". Bez automatu.
+- **Błąd parsera naprawiony:** „…; pojazdy: +4k6" wchodziło do sumy (mina ppanc. rzucała 12k6
+  każdemu). Teraz `conditional`, poza `formula`/`parts`, tylko w etykiecie. Po przepisaniu
+  katalogu żaden wpis tego nie używa, ale parser zostaje odporny.
+- `grenadeDescription()`/`grenadeItemFields()` — jedno źródło opisu dla paczki, „Dodaj ładunek"
+  i synchronizacji. **Zsynchronizowane w świecie:** 5 itemów Zbrojowni + 5 w katalogu Items
+  (tylko tam te pozycje były). **Paczka `granaty` czeka na `npm run build:packs` przy
+  zamkniętym Foundry.**
+- Wiersz „Materiały wybuchowe": Obszar · RO i Działanie w podpisie pod nazwą (jak dawki w Lekach).
+  Przy 800 px jedna linia (wiersz 75/87 px zamiast 93/119, bez zawijania kolumn).
+- Alias audytu „ładunek improwizowany" wskazywał na **granat** improwizowany — teraz IED.
+- **Tekstura leżącego ładunku per podtyp**: `_pendingTileTexture()` bierze `vfx/<subtype>.webp`,
+  jeśli plik istnieje (`foundry.utils.srcExists`), proporcje z samego obrazu (`loadTexture`),
+  inaczej `grenade-thrown.webp`. Grafika przychodzi kolejką `dev/icons/MISSING.md` — nowa
+  **klasa B** (kolorowe obiekty z góry, WEBP, natywne proporcje) obok dotychczasowych białych
+  ikon; obróbka `dev/icons/normalize_world_assets.py` (siatka 3×3, klucz `#00FF00`, przycięcie,
+  dłuższy bok 128 px). Wiersz 1 kolejki A (Granat sygnałowy) był nieaktualny — ikona istnieje od
+  sierpnia; zastąpiony Kamizelką taktyczną.
+
+### Paczki: builder emituje kształty v14 (2026-09-24)
+
+`dev/packs/build-packs.mjs`, `dev/packs/validate-packs.mjs`. Churn `.log` przy każdym starcie
+Foundry: serwer migruje rekord, gdy `_stats.coreVersion` brak albo jest starszy niż
+`schemaVersion` dokumentu (`dist/database/backend/server-document.mjs`, `_migrateRecord`), i zapisuje
+oczyszczony rekord. Builder stempluje teraz `coreVersion` (z `package.json` instalacji Foundry)
+**razem** z kształtami v14 — sam stempel byłby gorszy od niczego, bo migracje poniżej stempla się
+nie wykonują (`duration.seconds` zostałoby nieprzekonwertowane). Wypełnia też domyślne pola
+`clean` (`folder/sort/ownership`, pola `prototypeToken`, `depth = min(w, h)`, `showIcon` 2 przy
+statusach). Weryfikacja: `build-packs.mjs --out=<tmp>` porównany rekord po rekordzie z paczkami
+zmigrowanymi przez Foundry — **zero różnic**. Nowe `--out=` w builderze i walidatorze. Pełny
+dowód (brak churnu po starcie) przy najbliższym `build:packs`.
 
 ### Granaty wybuchają na końcu tury; Koktajl Mołotowa wg RAW (2026-09-23)
 
@@ -3883,7 +4261,7 @@ ktoś wyłączy Kolor Kobaltu. Moduł miał już do tego przełącznik (`kobaltE
 `PLAN_kobalt.md`), używany dotąd tylko przez latarki.
 
 Rozstrzygnięcie: **tabel podręcznikowych nie rozszerzamy.** `CHRONIC_DISEASES` i `PHOBIAS` to
-ścisłe k8 (str. 108–112) i dziewiąty wpis zepsułby zarówno kość, jak i zgodność z RAW. Zamiast
+ścisłe k8 (str. 109–112) i dziewiąty wpis zepsułby zarówno kość, jak i zgodność z RAW. Zamiast
 tego dwie osobne mapy — `KOBALT_DISEASES` i `KOBALT_PHOBIAS`, bez pola `roll`, bo tych się nie
 losuje — plus osobna grupa `<optgroup>` w pickerze, dokładana tylko przy włączonym przełączniku.
 `_select()` w `health-panel.mjs` obsługiwał grupy i płaskie wpisy w jednej tablicy, więc renderer
@@ -4113,7 +4491,7 @@ to decyduje o tym, czy trafienie w ogóle wywołuje Krwawienie.
 
 Tekst naboju opisuje krwawienie, którego istniejący system nie potrafił wyrazić: 1k8 na
 **początku** tury, bez rzutu obronnego na przerwanie, ustaje dopiero po opatrzeniu rany.
-Hemofilia (RAW, str. 108) to 1k4 na **końcu** tury, RO Kondycja ST 10, trzy sukcesy pod rząd.
+Hemofilia (RAW, str. 109) to 1k4 na **końcu** tury, RO Kondycja ST 10, trzy sukcesy pod rząd.
 Zamiast naginać jedno do drugiego, `combat/bleeding.mjs` dostał `BLEED_PROFILES`:
 
 | | `hemofilia` | `dumdum` |

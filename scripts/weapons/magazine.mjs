@@ -42,7 +42,7 @@ import { seqScrollText } from "./sequencer.mjs";
 import { tracerFire } from "./tracer-vfx.mjs";
 import { AMMO_CALIBER_MAP, familyCalibers } from "../config/ammo-data.mjs";
 import { addAmmoToActor } from "../actors/ammo-inventory.mjs";
-import { isAtHand, provenanceBadge } from "../actors/handy-items.mjs";
+import { isAtHand, provenanceBadge, clearBelt, registerHandyFamily } from "../actors/handy-items.mjs";
 import { REMOVABLE_SOURCES } from "../config/weapons-data.mjs";
 import { isDocumentLive } from "../doc-liveness.mjs";
 import {
@@ -323,11 +323,52 @@ export async function swapMagazine({ actor, weapon } = {}) {
   if (picked) return _onClickSwapMagazine(_getLiveItem(picked));
 }
 
+/**
+ * Wpina podany magazynek (klik w kafelek paska podręcznego). Broń wybierana spośród tych, do
+ * których pasuje; przy jednej — bez pytania. Szybkoładowarka idzie ścieżką przelewania.
+ */
+export async function insertMagazineFromBelt(mag) {
+  const actor = mag?.actor;
+  if (!actor) return false;
+  const weapons = actor.items.filter(i => i.type === "weapon" && _hasRemovableSource(i) && getMag(i) !== null
+    && compatibleMagazines(actor, i).some(m => m.id === mag.id));
+  if (!weapons.length) {
+    ui.notifications.warn(`${mag.name}: nie pasuje do żadnej broni ${actor.name}.`);
+    return false;
+  }
+  let weapon = weapons[0];
+  if (weapons.length > 1) {
+    const chosen = await foundry.applications.api.DialogV2.wait({
+      window: { title: `${mag.name} — do której broni?` },
+      content: "<p>Magazynek pasuje do kilku broni.</p>",
+      buttons: weapons.map(w => ({ action: w.id, label: `${w.name} — ${getMag(w)?.current ?? 0}/${getMag(w)?.max ?? 0}` })),
+      rejectClose: false
+    });
+    if (!chosen) return false;
+    weapon = weapons.find(w => w.id === chosen) ?? weapon;
+  }
+  if (magazineDefOf(mag)?.kind === "speedloader") return _onClickPourSpeedloader(_getLiveItem(weapon));
+  return _onClickSwapMagazine(_getLiveItem(weapon), { target: mag });
+}
+
 /* -------------------------------------------- */
 /*  Registration                                  */
 /* -------------------------------------------- */
 
 export function registerMagazines() {
+  // Pasek przedmiotów podręcznych: klik w kafelek = wepnij ten magazynek (pytanie o broń, gdy
+  // pasuje do kilku); podpis = naboje; magazynek wpięty w broń nie leży przy pasie.
+  registerHandyFamily("magazine", {
+    use: mag => insertMagazineFromBelt(mag),
+    caption: mag => {
+      const def = magazineDefOf(mag);
+      return def ? `${magazineRounds(mag).length}/${def.capacity}` : "";
+    },
+    refuse: mag => {
+      const host = magazineHost(mag);
+      return host ? `wpięty w ${host.name} — magazynek w broni nie leży przy pasie.` : null;
+    }
+  });
   registerReloadActivityType();
   registerLoadOneActivityType();
   registerMagSwapActivityType();
@@ -804,11 +845,15 @@ async function _onClickSwapMagazine(item, { target } = {}) {
     return false;
   }
 
+  // Pochodzenie przed wpięciem: wpięty magazynek schodzi z pasa (jest w broni, nie przy pasie),
+  // a wyjęty idzie prosto do plecaka (decyzja MG 2026-09-25 — bez modelowania zrzutni).
+  const fromBelt = chosen ? isAtHand(chosen) : false;
   const result = await swapMagazineItem(item, chosen ?? null);
   if (!result) {
     ui.notifications.warn(`${item.name}: ten magazynek nie pasuje do tej broni.`);
     return false;
   }
+  if (chosen) await clearBelt(actor.items.get(chosen.id) ?? chosen);
 
   await _clearReloadState(item);
   if (inCombat) await _spendCombatResource(actor, reloadPlan.actionType);
@@ -820,7 +865,7 @@ async function _onClickSwapMagazine(item, { target } = {}) {
     color: chosen ? "#f1c40f" : "#e67e22", fontSize: 26, duration: 1500
   });
 
-  await _postSwapCard(item, actor, result, { reloadPlan, inCombat });
+  await _postSwapCard(item, actor, result, { reloadPlan, inCombat, fromBelt });
   return true;
 }
 
@@ -829,9 +874,11 @@ async function _onClickSwapMagazine(item, { target } = {}) {
  * trzy różne odpowiedzi, bo „wypnij" i „nie rób nic" to nie to samo.
  */
 async function _chooseMagazine(actor, weapon, current) {
+  // Przy pasie najpierw — to szybka ścieżka (Darmowa Interakcja), reszta z plecaka.
   const options = compatibleMagazines(actor, weapon)
     .filter(m => m.id !== current?.id)
-    .filter(m => magazineDefOf(m)?.kind !== "speedloader");
+    .filter(m => magazineDefOf(m)?.kind !== "speedloader")
+    .sort((a, b) => Number(isAtHand(b)) - Number(isAtHand(a)));
 
   if (!options.length && !current) {
     ui.notifications.warn(
@@ -887,7 +934,7 @@ function _swapDialogHint(weapon, current, options) {
 }
 
 /** Karta czatu wymiany/wypięcia, z pigułką „skąd wzięty" (przedmioty podręczne). */
-async function _postSwapCard(weapon, actor, { ejected, inserted, takenFrom }, { reloadPlan, inCombat }) {
+async function _postSwapCard(weapon, actor, { ejected, inserted, takenFrom }, { reloadPlan, inCombat, fromBelt }) {
   const mag = getMag(weapon);
   const verb = inserted
     ? (ejected ? "wymienia magazynek w" : "wpina magazynek do")
@@ -905,7 +952,7 @@ async function _postSwapCard(weapon, actor, { ejected, inserted, takenFrom }, { 
   }
   if (!inserted) detail.push("<em>Broń zostaje z samym nabojem w komorze.</em>");
 
-  const provenance = inserted ? provenanceBadge(inserted) : "";
+  const provenance = inserted ? provenanceBadge(inserted, { atHand: fromBelt }) : "";
 
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor }),

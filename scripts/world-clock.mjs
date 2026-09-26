@@ -59,14 +59,26 @@ function _playTick() {
 
 /** "20 września 2070, 21:40" — same month-name source (this module's own genitive Polish
  *  overrides in lang/pl.json) the core calendar widget itself uses, so the two never disagree. */
-function _formatWorldTime() {
-  const c = game.time.components;
+function _formatWorldTime(time = game.time.worldTime) {
+  const c = game.time.calendar?.timeToComponents?.(time) ?? game.time.components;
   const monthDef = CONFIG.time?.worldCalendarConfig?.months?.values?.[c.month];
   const monthName = monthDef ? game.i18n.localize(monthDef.name) : null;
   if (!monthName) return null;
   const hh = String(c.hour).padStart(2, "0");
   const mm = String(c.minute).padStart(2, "0");
   return `${c.dayOfMonth + 1} ${monthName} ${c.year}, ${hh}:${mm}`;
+}
+
+/** The same date/time as the chat line above, for any world time (e.g. an IED timer's expiry). */
+export function formatWorldTime(time = game.time.worldTime) {
+  return _formatWorldTime(time);
+}
+
+/** Just "21:40" of a world time — map labels, where the date would only be noise. */
+export function formatWorldClock(time = game.time.worldTime) {
+  const c = game.time.calendar?.timeToComponents?.(time);
+  if (!c) return "";
+  return `${String(c.hour).padStart(2, "0")}:${String(c.minute).padStart(2, "0")}`;
 }
 
 /** Idempotent — creates the hotbar macro once per world, never duplicates it. */

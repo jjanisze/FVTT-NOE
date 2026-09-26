@@ -1,5 +1,5 @@
-2026/09/24-01:06:17.162 1e2c Recovering log #3
-2026/09/24-01:06:17.164 1e2c Level-0 table #5: started
-2026/09/24-01:06:17.166 1e2c Level-0 table #5: 34744 bytes OK
-2026/09/24-01:06:17.171 1e2c Delete type=0 #3
-2026/09/24-01:06:17.172 1e2c Delete type=3 #2
+2026/09/24-23:18:33.221 df18 Recovering log #3
+2026/09/24-23:18:33.222 df18 Level-0 table #5: started
+2026/09/24-23:18:33.224 df18 Level-0 table #5: 37537 bytes OK
+2026/09/24-23:18:33.228 df18 Delete type=0 #3
+2026/09/24-23:18:33.228 df18 Delete type=3 #2

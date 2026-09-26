@@ -108,8 +108,11 @@ import { registerMagazineInventory } from "./actors/magazine-inventory.mjs";
 import { registerItemStatePips } from "./actors/item-state-pips.mjs";
 import { registerGrenadeInventory } from "./actors/grenade-inventory.mjs";
 import { registerMolotov } from "./actors/molotov.mjs";
+import { registerPlacedCharges, chargesApi } from "./actors/placed-charges.mjs";
 import { registerSurowceInventory } from "./actors/surowce-inventory.mjs";
 import { registerLekiInventory } from "./actors/leki-inventory.mjs";
+import { registerHandyItems } from "./actors/handy-items.mjs";
+import { registerHandyBelt } from "./actors/handy-belt.mjs";
 import { registerProwiantInventory } from "./actors/prowiant-inventory.mjs";
 import { registerEncumbranceBreakdown } from "./actors/encumbrance-breakdown.mjs";
 import { registerEncumbranceConfig } from "./config/encumbrance-config.mjs";
@@ -146,6 +149,8 @@ import { registerKowalActions } from "./items/toolkit-kowal.mjs";
 import { registerInventoryToggleFix } from "./actors/inventory-toggle-fix.mjs";
 import { GEAR_PLACEHOLDERS, createGearPlaceholders, REAL_GEAR, createRealGear } from "./config/gear-data.mjs";
 import { registerKolczatka, kolczatkaApi } from "./items/kolczatka.mjs";
+import { kwasApi } from "./items/kwas.mjs";
+import { registerDetonator, detonatorApi } from "./items/detonator.mjs";
 import { registerChemia, chemiaApi } from "./items/chemia.mjs";
 import { sztuczkiApi } from "./config/sztuczki-data.mjs";
 import { pochodzeniaApi } from "./config/pochodzenia-data.mjs";
@@ -237,8 +242,13 @@ Hooks.once("init", () => {
   registerMagazineInventory();
   registerGrenadeInventory();
   registerMolotov();
+  // Po registerGrenadeInventory: podmienia akcję wiersza dla min i ładunków (podkładanie).
+  registerPlacedCharges();
+  registerDetonator();
   registerSurowceInventory();
   registerLekiInventory();
+  registerHandyItems();
+  registerHandyBelt();
   registerProwiantInventory();
   // Must precede any actor prepareDerivedData — Udźwig thresholds read these CONFIG
   // constants. registerEncumbranceBreakdown() only reads the already-computed result.
@@ -448,6 +458,9 @@ Hooks.once("ready", () => {
   game.neuroshima.flara = flaraApi;
   registerKolczatka();
   game.neuroshima.kolczatka = kolczatkaApi;
+  game.neuroshima.kwas = kwasApi;
+  game.neuroshima.detonator = detonatorApi;
+  game.neuroshima.charges = chargesApi;
   game.neuroshima.medykRefill = medykRefillApi;
   registerPistoletNaRace();
   registerGogle();

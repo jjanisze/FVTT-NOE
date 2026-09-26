@@ -77,7 +77,7 @@
  * list mirroring flara.mjs's own expiry idiom) — a scorch mark is supposed
  * to massively outlive the explosion that made it, not vanish with it.
  */
-import { GRENADE_TYPES, GRENADE_MAP } from "../config/ammo-data.mjs";
+import { GRENADE_TYPES, GRENADE_MAP, grenadeDescription } from "../config/ammo-data.mjs";
 import { playExplosiveSoundForSubtype } from "../weapons/sounds.mjs";
 import { seqEffect, seqEndEffect } from "../weapons/sequencer.mjs";
 import {
@@ -85,10 +85,12 @@ import {
   SCORCH_MARK, SCORCH_SIZE_FRACTION, SCORCH_MARK_LIFETIME_SECONDS
 } from "../config/explosion-vfx.mjs";
 
-import { provenanceBadge, handyToggleHtml, bindHandyToggle } from "./handy-items.mjs";
+import { provenanceBadge, handyToggleHtml, bindHandyToggle, isAtHand, registerHandyFamily } from "./handy-items.mjs";
 import { pickCanvasPoint, measureMeters, metersToPx } from "../scenes/area-picker.mjs";
 import { isMolotov, isLit, lightMolotov, clearLit, roundsLeft, molotovLight, MAX_LIT_ROUNDS } from "./molotov.mjs";
 import { igniteFor, ignite as igniteDefault } from "../combat/podpalenie.mjs";
+import { chargeCaption, PLANT_DC, PLANT_RANGE_M } from "./charge-rules.mjs";
+import { formatWorldClock, formatWorldTime } from "../world-clock.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 // Actor flag — GM-consumed, mirrors flara.mjs's FLAG_PENDING idiom. Payload:
@@ -98,11 +100,45 @@ const FLAG_PENDING_EXPLOSIVE = "explosivePendingPlacement";
 // Actor flag — rzucony w walce ładunek, który czeka na koniec tury. GM zamienia go w Tile
 // z flagą `pendingCharge` (trwały zapis: {anchor, marker, card, subtype, lit, actorUuid, lightId}).
 const FLAG_PENDING_CHARGE = "explosivePendingCharge";
+// Tekstura leżącego ładunku: `vfx/<subtype>.webp`, jeśli istnieje, inaczej ten granat. Grafika
+// przychodzi kolejką `dev/icons/MISSING.md` (klasa B) — plik pod właściwą nazwą nie wymaga kodu.
 const PENDING_TILE_TEXTURE = `modules/${MODULE_ID}/vfx/grenade-thrown.webp`;
 // Granat ma ~11 cm — w skali mapy byłby niewidoczny. Ok. 4× naturalnej wielkości; to, gdzie
 // naprawdę jest niebezpiecznie, mówi pulsujący obrys obszaru, nie sam granat.
 const PENDING_TILE_SQUARES = 0.3;
 const PENDING_TILE_ASPECT = 86 / 128;
+const _tileTextureCache = new Map();
+
+/**
+ * `{src, aspect}` dla leżącego ładunku danego podtypu. Proporcje z samego obrazu (szer./wys.),
+ * nie z kodu — kolczatka nauczyła, że wymuszone proporcje psują grafikę. Wynik w pamięci na sesję.
+ */
+async function _pendingTileTexture(subtype, fallback = null) {
+  const cacheKey = `${subtype}|${fallback?.src ?? ""}`;
+  if (_tileTextureCache.has(cacheKey)) return _tileTextureCache.get(cacheKey);
+  let result = fallback ?? { src: PENDING_TILE_TEXTURE, aspect: PENDING_TILE_ASPECT };
+  const own = subtype ? `modules/${MODULE_ID}/vfx/${subtype}.webp` : null;
+  try {
+    if (own && await foundry.utils.srcExists(own)) {
+      const tex = await foundry.canvas.loadTexture(own);
+      const w = tex?.width, h = tex?.height;
+      if (w > 0 && h > 0) result = { src: own, aspect: w / h };
+    }
+  } catch (_e) { /* brak pliku albo zła grafika — zostaje granat */ }
+  _tileTextureCache.set(cacheKey, result);
+  return result;
+}
+
+/**
+ * Grafika podłożonego ładunku: `vfx/<podtyp>[-radio].webp` z kolejki MISSING.md (B); do tego czasu
+ * ikona samego przedmiotu — granat z `grenade-thrown.webp` udawałby minę albo IED.
+ */
+function _placedTexture(charge) {
+  const key = `${charge.subtype}${charge.anchor?.via === "radio" ? "-radio" : ""}`;
+  return _pendingTileTexture(key, { src: charge.card?.itemImg ?? PENDING_TILE_TEXTURE, aspect: 1 });
+}
+// Podłożony ładunek leży długo i ma ikonę zamiast zdjęcia — trochę większy niż rzucony granat.
+const PLACED_TILE_SQUARES = 0.5;
 
 // How long a non-mine blast marker (+ its tied VFX) sticks around before the
 // `updateWorldTime` sweep below removes it on its own (2026-09-06 follow-up —
@@ -137,6 +173,12 @@ export function registerGrenadeInventory() {
   Hooks.on("deleteCombat", sweep);
   Hooks.on("deleteCombatant", sweep);
   Hooks.once("ready", sweep); // tura mogła minąć, gdy klienta MG nie było
+  // Pasek przedmiotów podręcznych: klik w kafelek = ten sam przycisk co w wierszu (koktajl:
+  // najpierw podpal, potem rzuć), podpis = ile rund zostało płonącej butelce.
+  registerHandyFamily("grenade", {
+    use: item => _primaryAction(item.actor, item, GRENADE_MAP[item.system.type?.subtype]),
+    caption: item => (isMolotov(item) && isLit(item)) ? `🔥${roundsLeft(item)}/${MAX_LIT_ROUNDS}` : ""
+  });
   console.log("Neuroshima 5e | Explosives inventory UI registered");
 }
 
@@ -253,7 +295,9 @@ function _onRenderActorSheetInjectGrenadeSection(app, html) {
     const litBadge = lit
       ? `<span class="neuro-molotov-lit" style="font-size:0.8em; color:#ffb35c;"><i class="fa-solid fa-fire"></i> płonie — zostało ${litLeft}/${MAX_LIT_ROUNDS} rund</span>`
       : "";
-    const primary = molotov && !lit
+    const primary = def?.placed
+      ? { icon: "fa-location-dot", title: `Podłóż (do ${PLANT_RANGE_M} m, Test ST ${PLANT_DC})`, color: "#ccc", hint: "Kliknij: podłóż ładunek" }
+      : molotov && !lit
       ? { icon: "fa-fire", title: "Podpal butelkę (Akcja Bonusowa lub Używanie + źródło ognia)", color: "#ccc", hint: "Kliknij: podpal butelkę" }
       : { icon: "fa-bomb", title: lit ? `Rzuć — płonie, zostało ${litLeft}/${MAX_LIT_ROUNDS} rund` : "Rzuć", color: lit ? "#ff9a3c" : "#ccc", hint: "Kliknij: rzuć ładunek" };
 
@@ -262,26 +306,27 @@ function _onRenderActorSheetInjectGrenadeSection(app, html) {
     li.setAttribute("data-item-id", item.id);
     li.style.listStyle = "none";
     li.style.marginBottom = "0";
+    // Obszar, RO i Działanie siedzą w podpisie pod nazwą, jak dawki w Lekach — jako osobne
+    // kolumny potrzebowały ~800 px i przy minimalnej szerokości karty (wiersz 522 px) zawijały się.
     li.innerHTML = `
-      <div class="item-row flexrow" style="display:flex; align-items:center; justify-content:space-between; background-color:#2f2222; min-height:42px; border-bottom:1px dotted #4a3a3a; padding:4px 5px; color:#cacdd5;">
-        <div class="item-name item-action item-tooltip rollable flexrow" role="button" aria-label="${item.name}" title="${primary.hint} | Shift+Klik: edytuj" style="flex:1.6; align-items:center; gap:8px; min-width:180px; cursor:pointer;">
+      <div class="item-row flexrow" style="display:flex; flex-wrap:nowrap; align-items:center; justify-content:space-between; background-color:#2f2222; min-height:42px; border-bottom:1px dotted #4a3a3a; padding:4px 5px; color:#cacdd5;">
+        <div class="item-name item-action item-tooltip rollable flexrow" role="button" aria-label="${item.name}" title="${primary.hint} | Shift+Klik: edytuj" style="flex:1; align-items:center; gap:8px; min-width:150px; cursor:pointer;">
           ${iconHtml}
-          <div class="name name-stacked flexcol">
+          <div class="name name-stacked flexcol" style="line-height:1.2; min-width:0;">
             <span class="title" style="color:#cacdd5; font-weight:500;">${item.name}</span>
             ${litBadge}
+            <span class="neuro-grenade-stats" style="font-size:0.8em; color:#c9a4a4;">${area} · ${save}</span>
+            <span class="neuro-grenade-effect" style="font-size:0.78em; color:#a9abb2;">${effect}</span>
           </div>
         </div>
-        <div class="item-detail" style="flex:0 0 74px; text-align:center;">${price} gb</div>
-        <div class="item-detail" style="flex:0 0 70px; text-align:center;">${weightStr}</div>
-        <div class="item-detail" style="flex:0 0 74px; display:flex; align-items:center; justify-content:space-evenly;">
+        <div class="item-detail" style="flex:0 0 60px; text-align:center;">${price} gb</div>
+        <div class="item-detail" style="flex:0 0 60px; text-align:center;">${weightStr}</div>
+        <div class="item-detail" style="flex:0 0 80px; display:flex; align-items:center; justify-content:space-evenly;">
           <a class="adjustment-button always-interactive" data-action="decrease"><i class="fa-solid fa-minus" inert></i></a>
           <input type="text" class="always-interactive" value="${qty}" placeholder="0" data-dtype="Number" data-name="system.quantity" inputmode="numeric" pattern="^(\\+|-|=)?\\d*" min="0" aria-label="Ilość" style="width:34px; text-align:center;">
           <a class="adjustment-button always-interactive" data-action="increase"><i class="fa-solid fa-plus" inert></i></a>
         </div>
-        <div class="item-detail" style="flex:0 0 150px; text-align:center; font-size:0.85em;">${area}</div>
-        <div class="item-detail" style="flex:0 0 130px; text-align:center; font-size:0.85em;">${save}</div>
-        <div class="item-detail" style="flex:2; text-align:left; font-size:0.83em; line-height:1.2; padding:0 8px;">${effect}</div>
-        <div class="item-detail item-controls always-visible" style="flex:0 0 126px; text-align:right; display:flex; align-items:center; justify-content:flex-end; gap:8px;">
+        <div class="item-detail item-controls always-visible" style="flex:0 0 120px; text-align:right; display:flex; align-items:center; justify-content:flex-end; gap:8px;">
           ${handyToggleHtml(item)}
           <button type="button" class="unbutton config-button item-control item-throw" title="${primary.title}" style="color:${primary.color};"><i class="fas ${primary.icon}" inert></i></button>
           <button type="button" class="unbutton config-button item-control item-edit" title="Edytuj" style="color:#ccc;"><i class="fas fa-edit" inert></i></button>
@@ -335,14 +380,11 @@ function _onRenderActorSheetInjectGrenadeSection(app, html) {
   const panel = document.createElement("div");
   panel.innerHTML = `
     <div class="items-header header flexrow" style="display:flex; align-items:center; justify-content:space-between; background-color:#4a1f1f; min-height:30px; border-bottom:2px solid #FFFFFF; color:#FFFFFF; font-size:0.9em; font-weight:bold; padding:0 5px;">
-      <h3 class="item-name" style="flex:1.6; margin:0; padding-left:5px; color:#FFFFFF; font-size:1.1em; text-decoration:none; border:none;">Materiały wybuchowe</h3>
-      <div style="flex:0 0 74px; text-align:center;">Cena</div>
-      <div style="flex:0 0 70px; text-align:center;">Waga</div>
-      <div style="flex:0 0 74px; text-align:center;">Ilość</div>
-      <div style="flex:0 0 150px; text-align:center;">Obszar</div>
-      <div style="flex:0 0 130px; text-align:center;">RO</div>
-      <div style="flex:2; text-align:left; padding-left:8px;">Działanie</div>
-      <div style="flex:0 0 102px;"></div>
+      <h3 class="item-name" style="flex:1; min-width:150px; margin:0; padding-left:5px; color:#FFFFFF; font-size:1.1em; text-decoration:none; border:none;">Materiały wybuchowe</h3>
+      <div style="flex:0 0 60px; text-align:center;">Cena</div>
+      <div style="flex:0 0 60px; text-align:center;">Waga</div>
+      <div style="flex:0 0 80px; text-align:center;">Ilość</div>
+      <div style="flex:0 0 120px;"></div>
     </div>
   `;
   panel.appendChild(uiList);
@@ -451,7 +493,7 @@ async function _addGrenadeToActor(actor, grenadeId, quantity) {
     return;
   }
 
-  const description = `<p><strong>Obszar:</strong> ${def.area ?? "—"}</p><p><strong>RO:</strong> ${def.save ?? "—"}</p><p>${def.effect ?? ""}</p>`;
+  const description = grenadeDescription(def);
 
   await Item.create({
     name: def.label,
@@ -470,10 +512,25 @@ async function _addGrenadeToActor(actor, grenadeId, quantity) {
 }
 
 /**
+ * Akcje zamiast rzutu, rejestrowane przez inne pliki (jak rodziny pasa w `handy-items.mjs`) —
+ * dzięki temu `placed-charges.mjs` może importować stąd, a ten plik nie importuje z niego.
+ * @type {{match:(def:object, item:Item)=>boolean, run:(actor:Actor, item:Item, def:object)=>Promise}[]}
+ */
+const _explosiveActions = [];
+
+/** Podmień akcję wiersza/kafelka dla ładunków spełniających `match` (np. podkładanie min). */
+export function registerExplosiveAction(match, run) {
+  _explosiveActions.push({ match, run });
+}
+
+/**
  * Główna akcja wiersza. Dla koktajlu zależy od stanu butelki: niezapalona → tylko podpal,
  * zapalona → rzuć. Dwie akcje, dwa kliknięcia — nigdy oba naraz (decyzja MG, `actors/molotov.mjs`).
+ * Miny i ładunki (`def.placed`) się podkłada, nie rzuca — `placed-charges.mjs`.
  */
 async function _primaryAction(actor, item, def) {
+  const own = _explosiveActions.find(a => a.match(def, item));
+  if (own) return own.run(actor, item, def);
   if (isMolotov(item) && !isLit(item)) return lightMolotov(item);
   return _throwExplosive(actor, item, def);
 }
@@ -515,6 +572,8 @@ async function _throwExplosive(actor, item, def) {
   const ignite = _parseIgniteSpec(resolved.effect);
 
   const molotovLit = isMolotov(item) && isLit(item);
+  // Pochodzenie przed zużyciem — ubytek schodzi najpierw z pasa (`handy-items.mjs`).
+  const fromBelt = isAtHand(item);
   await item.update({ "system.quantity": qty - 1 });
   if (molotovLit) await clearLit(item); // zapalona butelka poleciała — światło schodzi z ręki
 
@@ -534,7 +593,7 @@ async function _throwExplosive(actor, item, def) {
   const card = {
     itemName: item.name,
     itemImg: item.img,
-    badge: provenanceBadge(item),
+    badge: provenanceBadge(item, { atHand: fromBelt }),
     save: saveData,
     damage: damageData,
     ignite,
@@ -599,8 +658,8 @@ function _thrownCardHtml(card, anchor) {
     </div>`;
 }
 
-/** Pełna karta wybuchu: RO, obrażenia, Podpalenie. */
-function _explosiveCardHtml(card, { detonated = false } = {}) {
+/** Pełna karta wybuchu: RO, obrażenia, Podpalenie. `note` — linia nad RO (kto odpalił, skąd). */
+function _explosiveCardHtml(card, { detonated = false, note = "" } = {}) {
   const cardDataAttrs = [
     `data-item-name="${_escapeAttr(card.itemName)}"`,
     `data-save-ability="${_escapeAttr(card.save.ability ?? "")}"`,
@@ -623,7 +682,8 @@ function _explosiveCardHtml(card, { detonated = false } = {}) {
         <strong style="font-size:1.05em;">${detonated ? "Wybuch" : "Rzut"}: ${card.itemName}</strong>
         ${card.badge}
       </div>
-      ${detonated ? "" : _rangeLine(card)}
+      ${note ? `<div style="margin-bottom:4px;">${note}</div>` : ""}
+      ${detonated || !Number.isFinite(card.distance) ? "" : _rangeLine(card)}
       <div><strong>Obszar:</strong> ${card.areaLabel}</div>
       <div><strong>RO:</strong> ${card.saveText}</div>
       <div><strong>Efekt:</strong> ${card.effectText}</div>
@@ -641,15 +701,20 @@ function _explosiveCardHtml(card, { detonated = false } = {}) {
           <span style="font-size:0.8em; opacity:0.8;">Stopień i osłona: ustaw w panelu Apply Damage pod rzutem.</span>
         </div>${igniteRow}
       </div>
-      ${detonated ? "" : `<div><em>Pozostało:</em> ${card.remaining} szt.</div>`}
+      ${detonated || !Number.isFinite(card.remaining) ? "" : `<div><em>Pozostało:</em> ${card.remaining} szt.</div>`}
     </div>
   `;
 }
 
-async function _postExplosiveCard(actor, card, { detonated = false } = {}) {
+/**
+ * `whisperGM` — karta tylko dla MG: wybuch, przy którym nie było graczy (MG decyduje, czy coś
+ * słyszą), albo ładunek podłożony przez BN.
+ */
+async function _postExplosiveCard(actor, card, { detonated = false, whisperGM = false, note = "" } = {}) {
   await ChatMessage.create({
     speaker: actor ? ChatMessage.getSpeaker({ actor }) : undefined,
-    content: _explosiveCardHtml(card, { detonated }),
+    content: _explosiveCardHtml(card, { detonated, note }),
+    ...(whisperGM ? { whisper: ChatMessage.getWhisperRecipients("GM").map(u => u.id) } : {}),
     flags: { [MODULE_ID]: { explosiveCard: card } }
   });
 }
@@ -681,8 +746,14 @@ function _currentTurnAnchor() {
  * @param {{started:boolean, round:number, turn:number, combatantId:string|null}|null} combat
  *   stan walki `anchor.combatId`, albo null, gdy już nie istnieje
  * @param {number} worldTime
+ *
+ * Podkładane ładunki (`placed-charges.mjs`) mają `anchor.type`: `timer` wybucha, gdy zegar świata
+ * dojdzie do `anchor.at`; `remote` (pilot, kabel) i `trigger` (wyzwalacz, nacisk) — nigdy sam,
+ * tylko na żądanie gracza albo MG. Brak `type` = rzucony granat, czyli koniec tury jak dotąd.
  */
 function _anchorPassed(anchor, combat, worldTime) {
+  if (anchor?.type === "timer") return worldTime >= Number(anchor.at);
+  if (anchor?.type === "remote" || anchor?.type === "trigger") return false;
   if (worldTime - anchor.worldTime >= 6) return true;
   if (!combat?.started) return true;
   if (combat.round !== anchor.round || combat.turn !== anchor.turn) return true;
@@ -720,8 +791,13 @@ async function _spawnPendingCharge(actor, charge) {
     const scene = game.scenes.get(charge.marker.sceneId) ?? canvas.scene;
     if (!scene) return;
     const grid = Number(scene.grid?.size ?? 100);
-    const height = Math.round(grid * PENDING_TILE_SQUARES);
-    const width = Math.round(height * PENDING_TILE_ASPECT);
+    const placed = !!charge.placed;
+    const texture = placed ? await _placedTexture(charge) : await _pendingTileTexture(charge.subtype);
+    // Dłuższy bok = PENDING_TILE_SQUARES pola, niezależnie od orientacji grafiki.
+    const long = Math.round(grid * (placed ? PLACED_TILE_SQUARES : PENDING_TILE_SQUARES));
+    const [width, height] = texture.aspect >= 1
+      ? [long, Math.round(long / texture.aspect)]
+      : [Math.round(long * texture.aspect), long];
 
     let lightId = null;
     const lightConfig = charge.lit ? molotovLight() : null; // WKK: bez Kobaltu — null, bez światła
@@ -735,14 +811,17 @@ async function _spawnPendingCharge(actor, charge) {
     }
 
     // v14 Tile x/y to ŚRODEK (jak w kolczatka.mjs) — bez odejmowania połowy wymiarów.
+    // Ładunek podłożony przez BN: gracze go nie widzą (Tile ukryty, efekty tylko dla MG).
+    const { nonce: _nonce, ...stored } = charge;
     const [tile] = await scene.createEmbeddedDocuments("Tile", [{
       x: charge.marker.x, y: charge.marker.y, width, height,
-      rotation: Math.round(Math.random() * 360),
+      rotation: placed ? 0 : Math.round(Math.random() * 360),
       locked: true,
-      texture: { src: PENDING_TILE_TEXTURE },
-      flags: { [MODULE_ID]: { pendingCharge: { ...charge, actorUuid: actor?.uuid ?? null, lightId } } }
+      hidden: !!charge.placed?.hidden,
+      texture: { src: texture.src },
+      flags: { [MODULE_ID]: { pendingCharge: { ...stored, actorUuid: actor?.uuid ?? null, lightId } } }
     }]);
-    if (tile) _playPendingVfx(scene, tile, charge);
+    if (tile) _playPendingVfx(scene, tile, tile.getFlag(MODULE_ID, "pendingCharge"));
   } catch (e) {
     console.warn(`${MODULE_ID} | grenade-inventory: pending charge spawn failed`, e);
   } finally {
@@ -764,33 +843,41 @@ function _playPendingVfx(scene, tile, charge) {
     ? ["rectangle", { width: side, height: side, offset: { x: -side / 2, y: -side / 2, gridUnits: true } }]
     : ["circle", { radius: Number(area.radius ?? 1.5) / unitsPerGrid }];
   const [type, dims] = shape;
-  // Krótko — nazwa ładunku jest na karcie; na mapie liczy się tylko „kiedy".
-  const label = charge.anchor.combatantName ? `wybuch po turze: ${charge.anchor.combatantName}` : "wybuch po tej turze";
+  // Krótko — nazwa ładunku jest na karcie; na mapie liczy się tylko „kiedy" (i „jak" u podłożonych).
+  const placed = !!charge.placed;
+  const label = placed
+    ? `${_shortChargeName(charge)} · ${chargeCaption(charge, formatWorldClock)}`
+    : chargeCaption(charge);
   const grid = Number(scene.grid?.size ?? 100);
 
-  new Sequence()
+  // Podłożony ładunek leży godzinami — pulsowanie przez cały ten czas byłoby szumem; wystarczy
+  // stały, blady obrys. Rzucony granat pulsuje, bo za chwilę wybuchnie.
+  const effect = new Sequence()
     .effect()
       .atLocation({ x: charge.marker.x, y: charge.marker.y })
       .shape(type, {
         ...dims, gridUnits: true, name: "zone",
-        lineSize: 3, lineColor: color, fillColor: color, fillAlpha: 0.12
-      })
-      .loopProperty("shapes.zone", "alpha", { from: 0.35, to: 1, duration: 700, pingPong: true, ease: "easeInOutSine" })
-      // Sequencer mnoży fontSize przez 150 / grid.size (patrz `seqEffect` w weapons/sequencer.mjs),
-      // więc żeby dostać ~13 px na mapie, trzeba mu podać 13 × grid / 150.
-      .text(label, {
-        fill: "#ffd0d0", fontFamily: "Arial, sans-serif", fontWeight: "bold",
-        fontSize: 13 * (grid / 150),
-        stroke: "#000000", strokeThickness: 3, align: "center",
-        // Kotwica tekstu względem jego własnej wysokości: jedna linia, dolna krawędź nad granatem,
-        // żeby podpis nie przykrywał tego, co podpisuje.
-        anchor: { x: 0.5, y: 1.9 }
-      })
-      .persist()
-      .belowTokens()
-      .name(`neuro-pending-charge-${tile.id}`)
-      .tieToDocuments(tile)
-    .play();
+        lineSize: placed ? 2 : 3, lineColor: color, fillColor: color, fillAlpha: placed ? 0.06 : 0.12,
+        alpha: placed ? 0.55 : 1
+      });
+  if (!placed) effect.loopProperty("shapes.zone", "alpha", { from: 0.35, to: 1, duration: 700, pingPong: true, ease: "easeInOutSine" });
+  // Sequencer mnoży fontSize przez 150 / grid.size (patrz `seqEffect` w weapons/sequencer.mjs),
+  // więc żeby dostać ~13 px na mapie, trzeba mu podać 13 × grid / 150.
+  effect.text(label, {
+      fill: "#ffd0d0", fontFamily: "Arial, sans-serif", fontWeight: "bold",
+      fontSize: 13 * (grid / 150),
+      stroke: "#000000", strokeThickness: 3, align: "center",
+      // Kotwica tekstu względem jego własnej wysokości: jedna linia, dolna krawędź nad granatem,
+      // żeby podpis nie przykrywał tego, co podpisuje.
+      anchor: { x: 0.5, y: 1.9 }
+    })
+    .persist()
+    .belowTokens()
+    .name(`neuro-pending-charge-${tile.id}`)
+    .tieToDocuments(tile);
+  // Ładunek BN — obrys i podpis tylko dla MG, jak ukryty Tile.
+  if (charge.placed?.hidden) effect.forUsers(game.users.filter(u => u.isGM).map(u => u.id));
+  effect.play();
   if (charge.lit) {
     seqEffect("jb2a.flames.01.orange", { x: charge.marker.x, y: charge.marker.y }, {
       sizeSquares: 0.6, opacity: 0.9, persist: true, tieTo: tile, name: `neuro-pending-flame-${tile.id}`
@@ -816,23 +903,97 @@ async function _sweepPendingCharges() {
   }
 }
 
-async function _detonate(scene, tile, charge) {
-  if (_detonating.has(tile.uuid)) return;
+const SHORT_CHARGE_NAMES = Object.freeze({
+  "grenade-ied": "IED",
+  "grenade-c4-remote": "C4",
+  "grenade-antipersonnel-mine": "mina",
+  "grenade-antivehicle-mine": "mina ppanc."
+});
+
+function _shortChargeName(charge) {
+  return SHORT_CHARGE_NAMES[charge?.subtype] ?? _buildSceneLabel(charge?.card?.itemName);
+}
+
+/** Czy na scenie jest teraz jakikolwiek gracz (nie MG) — „gracze są na mapie". */
+function _playersOnScene(scene) {
+  return game.users.some(u => u.active && !u.isGM && u.viewedScene === scene.id);
+}
+
+/**
+ * GM: wybuch leżącego ładunku — koniec tury, zegar, pilot, kabel albo ręka MG.
+ *
+ * Podłożone ładunki (MG 2026-09-25): jeśli na scenie są gracze, wybucha jak zwykle — dźwięk,
+ * efekty, karta dla wszystkich. Jeśli nie, efekty i tak zostają na mapie (krater zobaczą, gdy
+ * wrócą), ale bez dźwięku, a karta idzie **tylko do MG**: to MG decyduje, czy gracze słyszą
+ * stłumiony, daleki huk, czy nic. Rzucony granat wybucha zawsze po staremu — rzucający stoi obok.
+ *
+ * Niewypał (porażka w Teście podłożenia o mniej niż 5): „brak eksplozji" — zegar, pilot i kabel
+ * nic nie dają, ładunek zostaje na ziemi, MG dostaje o tym wiadomość. **Ręka MG (`force`) odpala
+ * i niewypał** (MG 2026-09-25: „bez względu na typ i pierwotny stan" — np. ktoś przy nim grzebie).
+ * @param {Scene} scene
+ * @param {TileDocument} tile
+ * @param {{by?: string, force?: boolean}} [options]  kto/co odpalił — linia na karcie; `force` — MG
+ */
+export async function detonateCharge(scene, tile, { by = "", force = false } = {}) {
+  if (!game.user.isGM) return false;
+  const charge = tile?.getFlag(MODULE_ID, "pendingCharge");
+  if (!charge || _detonating.has(tile.uuid)) return false;
   _detonating.add(tile.uuid);
   try {
+    const actor = charge.actorUuid ? await fromUuid(charge.actorUuid) : null;
+    const where = `<em>${scene.name}</em>`;
+    if (charge.placed?.dud && !force) {
+      // Zegar już „odpalił" — bez tego przegląd na każdym ruchu czasu ogłaszałby niewypał od nowa.
+      if (charge.anchor?.type === "timer") {
+        await tile.setFlag(MODULE_ID, "pendingCharge", { ...charge, anchor: { type: "trigger", method: "fizzled" } });
+      }
+      await ChatMessage.create({
+        speaker: { alias: "Ładunki" },
+        whisper: ChatMessage.getWhisperRecipients("GM").map(u => u.id),
+        content: `<div class="neuro-explosive-card" style="padding:8px;">
+          <strong>Niewypał: ${charge.card?.itemName ?? "ładunek"}</strong> (${where})${by ? ` — ${by}` : ""}.
+          <div>Test podłożenia nie wyszedł — ładunek nie wybucha i dalej leży na ziemi.</div>
+        </div>`
+      });
+      return false;
+    }
     // Najpierw zdejmujemy Tile — to „rezerwacja" wybuchu (drugi przebieg już go nie znajdzie),
     // a przy okazji kończy przypięte do niego efekty Sequencera.
     await scene.deleteEmbeddedDocuments("Tile", [tile.id]);
     if (charge.lightId && scene.lights.get(charge.lightId)) {
       await scene.deleteEmbeddedDocuments("AmbientLight", [charge.lightId]).catch(() => {});
     }
-    const actor = charge.actorUuid ? await fromUuid(charge.actorUuid) : null;
-    playExplosiveSoundForSubtype(charge.subtype);
-    await _spawnExplosiveMarker(null, { ...charge.marker, sceneId: scene.id });
-    await _postExplosiveCard(actor, charge.card, { detonated: true });
+    const heard = !charge.placed || _playersOnScene(scene);
+    if (heard) playExplosiveSoundForSubtype(charge.subtype);
+    await _spawnExplosiveMarker(null, { ...charge.marker, kind: "explosion", sceneId: scene.id });
+    const notes = [];
+    if (by) notes.push(`<i class="fa-solid fa-tower-broadcast"></i> ${by}`);
+    if (charge.placed && !heard) {
+      notes.push(`<strong>Na scenie ${where} nie było graczy</strong> (${formatWorldTime() ?? ""}). `
+        + `Czy coś słyszą — stłumiony, daleki huk albo nic — decyduje MG.`);
+    }
+    // Ukryty (BN-owy) ładunek przestaje być tajemnicą, kiedy wybucha przy graczach.
+    await _postExplosiveCard(actor, charge.card, { detonated: true, whisperGM: !heard, note: notes.join("<br>") });
+    return true;
   } finally {
     _detonating.delete(tile.uuid);
   }
+}
+
+async function _detonate(scene, tile, charge) {
+  return detonateCharge(scene, tile, { by: charge?.anchor?.type === "timer" ? "zapalnik czasowy" : "" });
+}
+
+/** Wszystkie leżące ładunki (rzucone i podłożone) na wszystkich scenach. */
+export function listChargeTiles() {
+  const out = [];
+  for (const scene of game.scenes) {
+    for (const tile of scene.tiles) {
+      const charge = tile.getFlag(MODULE_ID, "pendingCharge");
+      if (charge) out.push({ scene, tile, charge });
+    }
+  }
+  return out;
 }
 
 function onUpdateActor(actor, changes) {
@@ -1394,9 +1555,22 @@ const DAMAGE_TYPE_WORDS = [
  * „1k6 ogień + 1k6 obuchowe" to dwa typy obrażeń — odporność na ogień ma zdjąć tylko połowę.
  * (Do 2026-09-23 cała formuła szła jednym typem: koktajl rzucał 2k6 od ognia, odłamkowy
  * 4k6+4k6 wybuchowych zamiast wybuchowe + sieczne.)
+ *
+ * `conditional` — premie warunkowe w postaci „…; pojazdy: +4k6". Dotyczą tylko części celów, więc
+ * **nie wchodzą** do `formula`/`parts` (do 2026-09-24 wchodziły: mina ppanc. rzucała 12k6 każdemu).
+ * Karta pokazuje je MG w etykiecie, bez automatu — kto jest „pojazdem" albo „osłoną", ocenia stół.
+ * Człon warunkowy dziedziczy typ ostatniego członu głównego.
+ *
+ * `demolition` — „(burzące)" z RAW: „Burząca: podwójne obrażenia obiektom". Też tylko etykieta
+ * dla MG: czy cel jest obiektem, rozstrzyga stół, a dnd5e i tak ma mnożnik w „Apply Damage".
  */
 function _parseDamageSpec(effectText) {
-  const raw = String(effectText ?? "");
+  const [mainText, ...rest] = String(effectText ?? "").split(";");
+  const condRe = /^\s*([^:]+?)\s*:\s*\+\s*(\d+)\s*k\s*(\d+)/i;
+  const tails = rest.map(seg => seg.match(condRe));
+  // Segment po średniku, który nie jest premią warunkową, zostaje częścią tekstu głównego.
+  const raw = [mainText, ...rest.filter((_, i) => !tails[i])].join(";");
+
   const diceMatches = [...raw.matchAll(/(\d+)\s*k\s*(\d+)/gi)];
   const formula = diceMatches.length
     ? diceMatches.map(m => `${Number(m[1])}d${Number(m[2])}`).join(" + ")
@@ -1414,8 +1588,17 @@ function _parseDamageSpec(effectText) {
     return { formula: `${Number(m[1])}d${Number(m[2])}`, type: t.type, label: t.label };
   });
 
-  const label = parts.length ? parts.map(p => `${p.formula} ${p.label}`).join(" + ") : "—";
-  return { formula, type: foundType.type, label, parts };
+  const last = parts.at(-1) ?? foundType;
+  const conditional = tails.filter(Boolean).map(m => ({
+    against: m[1].trim(), formula: `${Number(m[2])}d${Number(m[3])}`, type: last.type, label: last.label
+  }));
+
+  const main = parts.length ? parts.map(p => `${p.formula} ${p.label}`).join(" + ") : "—";
+  const demolition = /burz(?:ą|a)c/i.test(raw);
+  const label = main
+    + conditional.map(c => ` (${c.against}: +${c.formula} — dolicza MG)`).join("")
+    + (demolition ? " — burzące: ×2 obiektom (dolicza MG)" : "");
+  return { formula, type: foundType.type, label, parts, conditional, demolition };
 }
 
 function _buildSceneLabel(itemName) {
@@ -1430,6 +1613,25 @@ function _escapeAttr(value) {
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;");
 }
+
+/**
+ * Klocki dla `placed-charges.mjs` (podkładanie min i ładunków) — ta sama karta, ten sam obszar,
+ * ten sam przekaźnik do MG co przy rzucie, żeby oba wejścia nie mogły się rozjechać.
+ */
+export const explosiveInternals = Object.freeze({
+  resolveAreaSpec: _resolveAreaSpec,
+  parseSaveSpec: _parseSaveSpec,
+  parseDamageSpec: _parseDamageSpec,
+  parseIgniteSpec: _parseIgniteSpec,
+  actorToken: _getActorThrowToken,
+  requestPendingCharge: _requestPendingCharge,
+  postExplosiveCard: _postExplosiveCard,
+  /** Wybuch od razu w punkcie (porażka o 5+ przy podkładaniu) — ta sama ścieżka co rzut poza walką. */
+  async requestBlast(actor, marker, subtype) {
+    playExplosiveSoundForSubtype(subtype);
+    await actor.setFlag(MODULE_ID, FLAG_PENDING_EXPLOSIVE, { ...marker, kind: "explosion", nonce: foundry.utils.randomID(8) });
+  }
+});
 
 /**
  * Czyste predykaty/parsery wystawione dla testów Quench (`scripts/tests/`) — Warstwa 4

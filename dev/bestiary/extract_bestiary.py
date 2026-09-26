@@ -1,21 +1,21 @@
 # -*- coding: utf-8 -*-
-"""Extract the 52 Bestiariusz statblocks from the Obsidian vault into bestiary.json.
+"""Extract the 52 Bestiariusz statblocks from the NOE rulebook conversion into bestiary.json.
 
-Source layout (one file per creature, `Podrecznik/Bestiariusz/*.md`):
+Source: `Neuro 5e/Podrecznik/NOE/13 NOTATNIK ŁOWCY/<NN KATEGORIA>/<NN ISTOTA>.md`, one file
+per creature, generated from the PDF by `Podrecznik/tools/pdf2md.py`:
 
-    # NAZWA                      <- lore heading
-    **Kategoria.** ...           <- lore fields
-    ...
-    ---                          <- separator; everything below is the statblock
-    ## NAZWA
+    #### NAZWA                   <- lore heading (its slug is the creature id)
+    **Występowanie:** ...        <- lore fields
+    ##### NAZWA                  <- statblock
     *Mały potwór*                <- size + creature type
-    **TT** 12                    <- header fields, closed vocabulary of 16 labels
-    ...
-    | Siła | Zrc | ... |         <- the six-ability table
+    **TT:** 12 **INICJATYWA:** … <- several header fields per line
+    | **SIŁ** | **ZRC** | … |     <- the six-ability table
     **ZDOLNOŚCI**                <- one of exactly 5 section headers
-    **Nazwa.** treść
-    **AKCJE**
-    **Pazury.** Atak wręcz: +4; zasięg 1,5 m; Obrażenia: 5 (1k6 + 2) kłute...
+    ***Nazwa.*** treść
+
+`legacy_text()` rewrites that into the one-field-per-line layout the parser below was
+written for (the hand transcription it used to read), so the strict field parsers stay
+untouched. Blood tags (Splatter) are module data, not rulebook text: `lore-extras.json`.
 
 Design stance: **strict**. An unrecognised header label, section, size, creature
 type, damage type, condition, skill or sense is an error, not a silent skip —
@@ -28,13 +28,18 @@ Two creatures are structurally special and flagged rather than forced:
   - **Mobsprzęt** — chassis and weapon are rolled on embedded tables.
                                                         -> randomized: true
 
-    python dev/bestiary/extract_bestiary.py
+    python dev/bestiary/extract_bestiary.py [--out FILE]
 """
-import re, json, io, os, glob, sys, unicodedata
+import argparse, re, json, io, os, glob, sys, unicodedata
 
-VAULT = r"c:\Git\Neuroshima\neuro5e\Neuro 5e\Podrecznik\Bestiariusz"
+NOE = os.environ.get("NOE_DIR", r"c:\Git\Neuroshima\neuro5e\Neuro 5e\Podrecznik\NOE")
+BESTIARY_DIR = os.path.join(NOE, "13 NOTATNIK ŁOWCY")
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "bestiary.json")
+EXTRAS = os.path.join(HERE, "lore-extras.json")
+
+# Lore headings whose slug differs from the established creature id.
+ID_ALIASES = {"bit-boys-aka-croats": "bit-boys"}
 
 # ------------------------------------------------------------------ #
 #  Closed vocabularies                                                #
@@ -58,7 +63,7 @@ CREATURE_TYPES = {
 }
 
 ABILITIES = {
-    "siła": "str", "sil": "str",
+    "siła": "str", "sil": "str", "sił": "str",
     "zręczność": "dex", "zrc": "dex",
     "kondycja": "con", "kon": "con",
     "inteligencja": "int", "int": "int",
@@ -132,7 +137,7 @@ HEADER_LABELS = {
 }
 
 # "bez zmian (jak u nosiciela)" / "jak u nosiciela" — the Zombie overlay marker.
-INHERIT = re.compile(r"jak u nosiciela|bez zmian")
+INHERIT = re.compile(r"jak u nosiciela|bez zmian|^nosiciela$")
 
 errors = []
 # Things the parser recovered from, but that are defects in the *source markdown*
@@ -287,16 +292,16 @@ def parse_sp(f, v, out):
         m = re.match(r"^([+-]\d+)", v.strip())
         out["sp"] = {"inherit": True, "modifier": int(m.group(1)) if m else None}
         return
-    m = re.match(r"^(\d+)\s*\(PB\s*([+-]\d+)\)\s*$", v.strip())
+    m = re.match(r"^(\d+)\s*\(PB\s*([+-])\s*(\d+)\)\s*$", v.strip())
     if not m:
         return err(f, f"unparsed Siła przeciwnika: {v!r}")
-    out["sp"] = {"value": int(m.group(1)), "pb": int(m.group(2))}
+    out["sp"] = {"value": int(m.group(1)), "pb": int(m.group(2) + m.group(3))}
 
 
 def parse_saves(f, v, out):
     sv = {}
     for part in split_list(v):
-        m = re.match(r"^([A-Za-ząćęłńóśźżŚĄ]+)\s*([+-]\d+)$", part.strip())
+        m = re.match(r"^([^\W\d_]+)\s*([+-]\d+)$", part.strip())
         if not m:
             return err(f, f"unparsed Rzuty obronne part: {part!r}")
         key = m.group(1).strip().lower()
@@ -365,10 +370,11 @@ def parse_morale(f, v, out):
 
 
 def parse_carry(f, v, out):
-    m = re.match(r"^Użytkowy:\s*([\d.,]+)\s*kg\.\s*Maksymalny:\s*([\d.,]+)\s*kg\.?$", v.strip())
+    m = re.match(r"^Użytkowy:\s*(\d[\d.,\s]*?)\s*kg\.\s*Maksymalny:\s*(\d[\d.,\s]*?)\s*kg\.?$", v.strip())
     if not m:
         return err(f, f"unparsed Udźwig: {v!r}")
-    out["carry"] = {"normal": num(m.group(1)), "max": num(m.group(2))}
+    # thousands are space-grouped ("1 400 kg")
+    out["carry"] = {"normal": num(re.sub(r"\s", "", m.group(1))), "max": num(re.sub(r"\s", "", m.group(2)))}
 
 
 HEADER_PARSERS = {
@@ -397,11 +403,20 @@ HEADER_PARSERS = {
 # ------------------------------------------------------------------ #
 
 # Both variants occur: with italics (*Atak wręcz:*) and without (Atak wręcz:).
+ATTACK_STRICT = re.compile(
+    r"^\*?(Atak (?:wręcz|dystansowy)):?\*?:?\s*"
+    r"\*?([+-])(\d+)\*?\s*;\s*"
+    r"(?:\*?zasięg:?\*?\s*(?P<range>[^;]+?)\s*;\s*)?"
+    r"\*?Obrażenia:?\*?:?\s*(?P<dmg>.+)$",
+    re.I,
+)
+# The rulebook's punctuation drifts ("+ 9", "+5, zasięg", "zasięg; 30/90 m",
+# "90/360 m, Obrażenia") -- accepted, but reported as a source warning.
 ATTACK_RE = re.compile(
     r"^\*?(Atak (?:wręcz|dystansowy)):?\*?:?\s*"
-    r"\*?([+-]\d+)\*?\s*;\s*"
-    r"(?:\*?zasięg:?\*?\s*(?P<range>[^;]+?)\s*;\s*)?"
-    r"\*?Obrażenia:?\*?\s*(?P<dmg>.+)$",
+    r"\*?([+-])\s*(\d+)\*?\s*[;,]?\s*"
+    r"(?:\*?zasięg[:;]?\*?\s*(?P<range>.+?)\s*[;,]\s*)?"
+    r"\*?Obrażenia:?\*?:?\s*(?P<dmg>.+)$",
     re.I,
 )
 
@@ -410,6 +425,8 @@ def parse_attack(f, name, body):
     m = ATTACK_RE.match(body.strip())
     if not m:
         return None
+    if not ATTACK_STRICT.match(body.strip()):
+        warn(f, f"attack {name!r}: irregular punctuation {body.strip()[:60]!r}")
     kind = "mwak" if "wręcz" in m.group(1).lower() else "rwak"
     rng = (m.group("range") or "").strip()
     reach = long = None
@@ -459,7 +476,7 @@ def parse_attack(f, name, body):
     return {
         "name": name,
         "kind": kind,
-        "bonus": int(m.group(2)),
+        "bonus": int(m.group(2) + m.group(3)),
         "reach": reach,
         "range": long,
         "damage": damage,
@@ -468,14 +485,162 @@ def parse_attack(f, name, body):
 
 
 # ------------------------------------------------------------------ #
+#  NOE -> legacy layout                                               #
+# ------------------------------------------------------------------ #
+
+LABEL_SYNONYMS = {"tchórzostwo": "Tchórzliwość"}
+_HEADER_BY_LOWER = {l.lower(): l for l in HEADER_LABELS}
+BOLD_LABEL = re.compile(r"\*\*([A-ZŁŚŻŹĆŃÓĄĘ][A-ZŁŚŻŹĆŃÓĄĘ ]*?):?\*\*:?")
+ABILITY_ORDER = ["SIŁ", "ZRC", "KON", "INT", "MDR", "CHA"]
+
+
+def _unmd(s):
+    """Drop Markdown emphasis and escapes, keep the text."""
+    s = s.replace("\\*", "\x01").replace("*", "").replace("\x01", "*")
+    return re.sub(r"\\(.)", r"\1", s)
+
+
+def _cells(line):
+    return [_unmd(c).strip() for c in line.strip().strip("|").split("|")]
+
+
+def legacy_text(md, kategoria, extras):
+    """NOE creature file -> the one-field-per-line layout `parse_text` understands."""
+    body = md.split("\n---\n", 1)[-1]
+    lines = [l.strip() for l in body.splitlines() if l.strip() and not l.startswith("<!--")]
+    out = []
+    i = 0
+    while i < len(lines) and not lines[i].startswith("##### "):
+        l = lines[i]
+        if l.startswith("#### "):
+            out.append("# " + l[5:].strip())
+            out.append(f"**Kategoria.** {kategoria}")
+            if extras.get("krewTag"):
+                opis = extras.get("krew") or ""
+                out.append(f"**Krew.** `{extras['krewTag']}`" + (f" — {opis}" if opis else ""))
+        else:
+            m = re.match(r"^\*\*([^*]+?):\*\*\s*(.*)$", l)
+            if m:
+                out.append(f"**{m.group(1)}.** {_unmd(m.group(2)).strip()}")
+            elif out and out[-1].startswith("**"):
+                out[-1] += " " + _unmd(l)  # second paragraph of a lore field
+            else:
+                out.append(_unmd(l))
+        i += 1
+    out.append("---")
+    pw, riders = None, []
+    section = first_section = None
+    seen = set()
+    grid_head = None
+
+    def flush_pw():
+        nonlocal pw, riders
+        if pw is not None:
+            out.append("**PW** " + "; ".join([pw] + riders))
+        pw, riders = None, []
+
+    for s in lines[i:]:
+        if s.startswith("##### "):
+            out.append("## " + s[6:].strip())
+            continue
+        if s.startswith("|"):
+            cells = _cells(s)
+            if all(set(c) <= set(":- ") for c in cells):
+                continue
+            if sorted(c.upper() for c in cells) == sorted(ABILITY_ORDER):
+                grid_head = [c.upper() for c in cells]
+                continue
+            if grid_head and len(cells) == len(grid_head):
+                vals = dict(zip(grid_head, cells))
+                row = [v.lower() if v.isupper() else v for v in (vals[k] for k in ABILITY_ORDER)]
+                out += ["| Siła | Zrc | Kon | Int | Mdr | Cha |", "|:---|:---|:---|:---|:---|:---|",
+                        "| " + " | ".join(row) + " |"]
+                grid_head = None
+                continue
+            out.append("| " + " | ".join(cells) + " |")
+            continue
+        m = re.fullmatch(r"\*\*([A-ZŁŚŻŹĆŃÓĄĘ ]{4,})\*\*", s)
+        if m and m.group(1) in SECTIONS:
+            flush_pw()
+            section = m.group(1)
+            if first_section is None:
+                first_section = len(out)
+            out.append(s)
+            continue
+        segs = list(BOLD_LABEL.finditer(s))
+        if segs and segs[0].start() == 0 and not s.startswith("***"):
+            for n, seg in enumerate(segs):
+                end = segs[n + 1].start() if n + 1 < len(segs) else len(s)
+                label, value = seg.group(1).strip(), _unmd(s[seg.end():end]).strip().rstrip(";").strip()
+                key = label.lower()
+                if key.startswith("próg "):
+                    riders.append(f"{label.capitalize()} {value}")
+                elif key == "pw":
+                    pw = value
+                else:
+                    canon = LABEL_SYNONYMS.get(key) or _HEADER_BY_LOWER.get(key) or label
+                    seen.add(canon)
+                    out.append(f"**{canon}** {value}")
+            continue
+        m = re.match(r"^(\*{2,3})(.+?)\*{2,3}\s*(.*)$", s)
+        if m:
+            name = re.sub(r"^\d+\.\s*", "", _unmd(m.group(2)).strip()).rstrip(".:").strip()
+            body = _unmd(m.group(3)).lstrip(".:").strip()
+            head, _, tail = name.partition(":")
+            if tail and head in HEADER_LABELS:
+                # "***Udźwig: Użytkowy:*** 1 400 kg" -- label and first key share the bold run
+                name, body = head, f"{tail.strip()}: {body}"
+            if name in HEADER_LABELS and name not in seen:
+                # header field printed among the traits (Udźwig) -> back into the header
+                line = f"**{name}.** {body}"
+                if first_section is None:
+                    out.append(line)
+                else:
+                    out.insert(first_section, line)
+                    first_section += 1
+                continue
+            if section is None:
+                # traits printed before AKCJE without their own ZDOLNOŚCI header
+                flush_pw()
+                section = "ZDOLNOŚCI"
+                first_section = len(out)
+                out.append("**ZDOLNOŚCI**")
+            out.append(f"**{name}.** {body}")
+            continue
+        if re.fullmatch(r"\*[^*]+\*", s):
+            out.append(s)
+            continue
+        if section is None and out and re.match(r"^\*\*[^*]+\*\*", out[-1]):
+            # header field wrapped onto the next line
+            out[-1] = out[-1].rstrip() + " " + _unmd(s)
+            continue
+        out.append(_unmd(s))
+    flush_pw()
+    return "\n".join(out) + "\n"
+
+
+# ------------------------------------------------------------------ #
 #  Main                                                               #
 # ------------------------------------------------------------------ #
 
-def parse_file(path):
-    f = os.path.basename(path)
-    # The vault files are BOM-prefixed (written by Obsidian on Windows), so the
-    # heading regex never matches under plain utf-8.
-    text = io.open(path, encoding="utf-8-sig").read()
+def parse_file(path, extras_all):
+    f = os.path.relpath(path, BESTIARY_DIR)
+    md = io.open(path, encoding="utf-8-sig").read()
+    lore_title = re.search(r"^####\s+(.+)$", md, re.M)
+    if not lore_title:
+        err(f, "no lore heading")
+        return None
+    cid = slug(lore_title.group(1))
+    cid = ID_ALIASES.get(cid, cid)
+    kategoria = re.sub(r"^\d+\s+", "", os.path.basename(os.path.dirname(path))).capitalize()
+    text = legacy_text(md, kategoria, extras_all.get(cid, {}))
+    rec = parse_text(f, text)
+    if rec:
+        rec["id"] = cid
+    return rec
+
+
+def parse_text(f, text):
     if "\n---\n" not in text:
         err(f, "no --- separator")
         return None
@@ -489,10 +654,6 @@ def parse_file(path):
         err(f, "no lore heading")
         return None
     out["name"] = m.group(1).strip()
-    # Id comes from the *filename*, not the heading: headings collide
-    # ("KOŃ (ZDROWY)" and "KOŃ (SKAŻONY)" both reduce to "kon"), while the
-    # filenames are already unique and human-chosen.
-    out["id"] = slug(os.path.splitext(f)[0])
 
     lore = {}
     for lm in re.finditer(r"^\*\*([^*]+?)\.?\*\*\s*(.*)$", lore_part, re.M):
@@ -588,8 +749,10 @@ def parse_file(path):
             if len(cells) == 6 and section is None:
                 ab = {}
                 for key, cell in zip(["str", "dex", "con", "int", "wis", "cha"], cells):
-                    cm = re.match(r"^(\d+)\s*\(([+-]\d+)\)$", cell)
+                    cm = re.match(r"^(\d+)\s*\(([+-]?\d+)\)$", cell)
                     if cm:
+                        if cm.group(2)[0] not in "+-":
+                            warn(f, f"ability cell {cell!r} has an unsigned modifier")
                         ab[key] = {"value": int(cm.group(1)), "mod": int(cm.group(2))}
                     elif INHERIT.search(cell):
                         ab[key] = {"inherit": True}
@@ -644,17 +807,26 @@ def parse_file(path):
 
 
 def main():
-    files = sorted(p for p in glob.glob(os.path.join(VAULT, "*.md"))
-                   if os.path.basename(p) != "Bestiariusz.md")
-    print(f"Bestiariusz — parsing {len(files)} profiles\n")
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--out", default=OUT, help="output JSON (default: dev/bestiary/bestiary.json)")
+    args = ap.parse_args()
+    extras_all = json.load(io.open(EXTRAS, encoding="utf-8")) if os.path.exists(EXTRAS) else {}
+    files = sorted(
+        p for p in glob.glob(os.path.join(BESTIARY_DIR, "*", "*.md"))
+        if not os.path.basename(p).startswith("00 ")
+        and re.search(r"^#####\s", io.open(p, encoding="utf-8-sig").read(), re.M)
+    )
+    print(f"Bestiariusz — parsing {len(files)} profiles from {BESTIARY_DIR}\n")
 
     result = {}
     for p in files:
-        rec = parse_file(p)
+        rec = parse_file(p, extras_all)
         if rec:
             if rec["id"] in result:
                 err(rec["file"], f"duplicate id {rec['id']!r}")
             result[rec["id"]] = rec
+    for cid in sorted(set(extras_all) - set(result)):
+        err("lore-extras.json", f"no creature for id {cid!r} (renamed heading? add it to ID_ALIASES)")
 
     # required-field sweep
     for rid, r in result.items():
@@ -671,7 +843,7 @@ def main():
     print(f"  randomized    {[r['id'] for r in result.values() if r['randomized']]}")
 
     if warnings:
-        print(f"\n{len(warnings)} SOURCE-MARKDOWN WARNINGS (fix in the vault):")
+        print(f"\n{len(warnings)} SOURCE WARNINGS (defects in the rulebook text):")
         for w in warnings:
             print("  " + w)
 
@@ -682,9 +854,9 @@ def main():
     else:
         print("\n  errors        none")
 
-    with io.open(OUT, "w", encoding="utf-8") as fh:
+    with io.open(args.out, "w", encoding="utf-8") as fh:
         json.dump(result, fh, ensure_ascii=False, indent=1, sort_keys=True)
-    print(f"\nwrote {OUT}")
+    print(f"\nwrote {args.out}")
     return 1 if errors else 0
 
 

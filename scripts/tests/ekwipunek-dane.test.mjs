@@ -56,6 +56,8 @@ import {
   SCORCH_MARK_LIFETIME_SECONDS, pickRingVariant
 } from "../config/explosion-vfx.mjs";
 import { __testing as grenadeParsing } from "../actors/grenade-inventory.mjs";
+import * as chargeRules from "../actors/charge-rules.mjs";
+import * as detonator from "../items/detonator.mjs";
 import { __testing as gearMigration } from "../migration/migrate-gear-graduation.mjs";
 import { __testing as medykMigration } from "../migration/migrate-medyk-graduation.mjs";
 import {
@@ -476,9 +478,33 @@ export function registerEquipmentDataTests(quench) {
         ]);
         const frag = grenadeParsing.parseDamageSpec("Porażka: 4k6 wybuchowe + 4k6 cięte + Powalenie.");
         expect(frag.parts.map(p => p.type)).to.deep.equal(["explosive", "slashing"]);
-        const bare = grenadeParsing.parseDamageSpec("Porażka: 8k6 wybuchowe; pojazdy: +4k6.");
-        expect(bare.parts.map(p => p.type), "człon bez słowa typu dziedziczy poprzedni").to.deep.equal(["explosive", "explosive"]);
+        const pipe = grenadeParsing.parseDamageSpec("Porażka: 3k6 wybuchowe + 2k6.");
+        expect(pipe.parts.map(p => p.type), "człon bez słowa typu dziedziczy poprzedni").to.deep.equal(["explosive", "explosive"]);
         expect(grenadeParsing.parseDamageSpec("Chmura dymu utrzymuje się 1 min.").parts).to.deep.equal([]);
+      });
+
+      it("parseDamageSpec: „; pojazdy: +4k6” to premia warunkowa — poza sumą, osobno dla MG", function () {
+        const at = grenadeParsing.parseDamageSpec("Silny ładunek ppanc. Porażka: 8k6 wybuchowe; pojazdy: +4k6.");
+        expect(at.formula).to.equal("8d6");
+        expect(at.parts).to.have.length(1);
+        expect(at.conditional).to.deep.equal([{ against: "pojazdy", formula: "4d6", type: "explosive", label: "Wybuchowe" }]);
+        expect(at.label).to.contain("pojazdy: +4d6");
+        expect(grenadeParsing.parseDamageSpec("Porażka: 2k6 wybuchowe + 2k6 cięte.").conditional).to.deep.equal([]);
+      });
+
+      it("parseDamageSpec: „(burzące)” to etykieta ×2 obiektom dla MG, nie dodatkowe kości", function () {
+        const c4 = grenadeParsing.parseDamageSpec("Porażka: 10k6 wybuchowe (burzące) + Powalenie + Ogłuchnięcie (1 min).");
+        expect(c4.formula).to.equal("10d6");
+        expect(c4.demolition).to.be.true;
+        expect(c4.label).to.contain("×2 obiektom");
+        expect(grenadeParsing.parseDamageSpec("Porażka: 4k6 wybuchowe.").demolition).to.be.false;
+      });
+
+      it("zasady łączenia siedzą w `note`, nie w `effect` — „+5k6 za 100 g” nie może wejść do rzutu", function () {
+        for (const g of GRENADE_TYPES) {
+          expect(g.effect ?? "", `${g.id}: łączenie w effect`).to.not.match(/łączeni|wiązk/i);
+        }
+        expect(GRENADE_TYPES.some(g => /\d+\s*k\s*\d+/i.test(g.note ?? "")), "przynajmniej jeden note z kośćmi (C4, dynamit)").to.be.true;
       });
 
       it("parseIgniteSpec: „Podpalenie (1 min)” to 10 rund, bez czasu — domyślny czas stanu, bez Podpalenia — null", function () {
@@ -498,6 +524,111 @@ export function registerEquipmentDataTests(quench) {
         expect(grenadeParsing.anchorPassed(anchor, { ...same, started: false }, 100), "walka zatrzymana").to.be.true;
         expect(grenadeParsing.anchorPassed(anchor, null, 100), "walka skasowana").to.be.true;
         expect(grenadeParsing.anchorPassed(anchor, same, 106), "czas świata +6 s").to.be.true;
+      });
+
+      describe("Podkładane ładunki i Detonator radiowy (charge-rules.mjs, detonator.mjs)", function () {
+        after(async function () { await scratchCleanup(); });
+
+        it("Test podłożenia ST 10: ≥10 uzbrojony, 6–9 niewypał, ≤5 wybuch przy zakładaniu (RAW)", function () {
+          expect(chargeRules.plantOutcome(10)).to.equal("armed");
+          expect(chargeRules.plantOutcome(9)).to.equal("dud");
+          expect(chargeRules.plantOutcome(6)).to.equal("dud");
+          expect(chargeRules.plantOutcome(5), "porażka o 5").to.equal("blast");
+          expect(chargeRules.plantOutcome(1)).to.equal("blast");
+        });
+
+        it("czas zapalnika: od rundy do 24 h czasu gry, reszta odrzucona", function () {
+          expect(chargeRules.timerSeconds(2, "rounds")).to.equal(12);
+          expect(chargeRules.timerSeconds(10, "minutes")).to.equal(600);
+          expect(chargeRules.timerSeconds("1,5", "hours")).to.equal(5400);
+          expect(chargeRules.timerSeconds(24, "hours")).to.equal(86400);
+          expect(chargeRules.timerSeconds(25, "hours"), "ponad 24 h").to.be.null;
+          expect(chargeRules.timerSeconds(0, "minutes")).to.be.null;
+          expect(chargeRules.timerSeconds(3, "seconds"), "nieznana jednostka").to.be.null;
+          expect(chargeRules.formatDuration(6)).to.equal("1 runda");
+          expect(chargeRules.formatDuration(12)).to.equal("2 rundy");
+          expect(chargeRules.formatDuration(30)).to.equal("5 rund");
+          expect(chargeRules.formatDuration(600)).to.equal("10 min");
+          expect(chargeRules.formatDuration(5400)).to.equal("1 h 30 min");
+        });
+
+        it("katalog: miny, C4 i IED się podkłada; granaty i dynamit — rzuca", function () {
+          const placed = GRENADE_TYPES.filter(g => g.placed).map(g => g.id).sort();
+          expect(placed).to.deep.equal(["grenade-antipersonnel-mine", "grenade-antivehicle-mine", "grenade-c4-remote", "grenade-ied"]);
+          const byId = Object.fromEntries(GRENADE_TYPES.map(g => [g.id, g]));
+          expect(byId["grenade-c4-remote"].detonation, "C4 wg RAW: detonator elektryczny (+ radiowy)").to.deep.equal(["electric", "radio"]);
+          expect(byId["grenade-antipersonnel-mine"].detonation).to.deep.equal(["pressure"]);
+        });
+
+        it("sposoby detonacji: zdalne tylko z zapalnikiem, reszta zawsze; brakujące z powodem", function () {
+          const byId = Object.fromEntries(GRENADE_TYPES.map(g => [g.id, g]));
+          const ied = chargeRules.availableMethods(byId["grenade-ied"], {});
+          expect(ied.filter(m => m.available).map(m => m.id)).to.deep.equal(["timer", "trigger"]);
+          expect(ied.find(m => m.id === "radio").reason).to.match(/zapalnika radiowego/);
+          expect(chargeRules.availableMethods(byId["grenade-c4-remote"], {}).some(m => m.available), "C4 bez zapalnika").to.be.false;
+          expect(chargeRules.availableMethods(byId["grenade-c4-remote"], { radioFuze: 1 }).filter(m => m.available).map(m => m.id))
+            .to.deep.equal(["radio"]);
+        });
+
+        it("anchorPassed: czasowy — zegar świata; radiowy, kabel, wyzwalacz — nigdy sam", function () {
+          const timer = { type: "timer", at: 200 };
+          expect(grenadeParsing.anchorPassed(timer, null, 199)).to.be.false;
+          expect(grenadeParsing.anchorPassed(timer, null, 200)).to.be.true;
+          for (const type of ["remote", "trigger"]) {
+            expect(grenadeParsing.anchorPassed({ type, worldTime: 0 }, null, 1e9), type).to.be.false;
+          }
+        });
+
+        it("kto odpala zdalnie: pilot z tego samego zestawu; kabel — tylko podkładający", function () {
+          const radio = { anchor: { type: "remote", via: "radio", kitId: "K1" } };
+          expect(chargeRules.remoteAccess(radio, { pilotKitIds: ["K1"] })).to.include({ ok: true, rangeM: 200 });
+          expect(chargeRules.remoteAccess(radio, { pilotKitIds: ["K2"] }).ok, "obcy zestaw").to.be.false;
+          const wire = { anchor: { type: "remote", via: "electric", planterUuid: "Actor.a" } };
+          expect(chargeRules.remoteAccess(wire, { actorUuid: "Actor.a" })).to.include({ ok: true, rangeM: 10 });
+          expect(chargeRules.remoteAccess(wire, { actorUuid: "Actor.b", pilotKitIds: ["K1"] }).ok).to.be.false;
+          expect(chargeRules.remoteAccess({ anchor: { type: "timer", at: 1 } }, { pilotKitIds: ["K1"] }).ok).to.be.false;
+        });
+
+        it("podpis na mapie mówi „kiedy/jak”", function () {
+          const clock = () => "14:32";
+          expect(chargeRules.chargeCaption({ anchor: { type: "timer", at: 5 } }, clock)).to.equal("wybuch 14:32");
+          expect(chargeRules.chargeCaption({ anchor: { type: "remote", via: "radio" } })).to.equal("radiowy");
+          expect(chargeRules.chargeCaption({ anchor: { type: "trigger", method: "pressure" } })).to.equal("nacisk");
+          expect(chargeRules.chargeCaption({ anchor: { type: "trigger", method: "fizzled" } })).to.equal("niewypał");
+          expect(chargeRules.chargeCaption({ anchor: { combatantName: "Camel" } })).to.equal("wybuch po turze: Camel");
+        });
+
+        it("Detonator radiowy (RAW): pilot z aktywnością Detonuj, przy pasie; zapalnik elektryczny 5 gb / 0,5 kg", function () {
+          const pilot = detonator.buildDetonatorItemData();
+          expect(detonator.DETONATOR_ACTIVITY_ID, "id aktywności: 16 znaków").to.have.lengthOf(16);
+          expect(pilot.system.activities[detonator.DETONATOR_ACTIVITY_ID].visibility.identifier).to.equal(detonator.DETONATOR_ACTIVITY_IDENTIFIER);
+          expect(pilot.flags[MODULE_ID]).to.include({ detonator: true, handy: true, kitNew: true });
+          const fuzes = detonator.buildRadioFuzeItemData({ kitId: "abcd1234efgh" });
+          expect(fuzes.system.quantity).to.equal(10);
+          expect(fuzes.name).to.equal("Zapalnik radiowy (zestaw ABCD)");
+          const el = detonator.buildElectricFuzeItemData();
+          expect(el.system.price.value).to.equal(5);
+          expect(el.system.weight.value).to.equal(0.5);
+        });
+
+        it("zakup daje oba: pilot na karcie dokłada 10 zapalników swojego zestawu; przeniesiony — nie", async function () {
+          const actor = await scratchActor();
+          await actor.createEmbeddedDocuments("Item", [detonator.buildDetonatorItemData()]);
+          // Zapalniki tworzy hook `createItem` — po osobnym zapisie.
+          for (let i = 0; i < 20 && !actor.items.some(detonator.isRadioFuze); i++) await new Promise(r => setTimeout(r, 100));
+          const pilot = actor.items.find(detonator.isDetonator);
+          const fuze = actor.items.find(detonator.isRadioFuze);
+          expect(detonator.kitIdOf(pilot)).to.be.a("string");
+          expect(detonator.kitIdOf(fuze), "ten sam zestaw").to.equal(detonator.kitIdOf(pilot));
+          expect(fuze.system.quantity).to.equal(10);
+          expect(pilot.getFlag(MODULE_ID, "kitNew")).to.be.false;
+
+          const other = await scratchActor();
+          await other.createEmbeddedDocuments("Item", [pilot.toObject()]);
+          await new Promise(r => setTimeout(r, 300));
+          expect(other.items.filter(detonator.isRadioFuze), "pilot przeniesiony bez zapalników").to.have.lengthOf(0);
+          expect(detonator.kitIdOf(other.items.find(detonator.isDetonator)), "ten sam zestaw").to.equal(detonator.kitIdOf(pilot));
+        });
       });
 
       it("Koktajl Mołotowa: butelka pęka po 3 pełnych rundach, co do tury; poza walką po 18 s", function () {

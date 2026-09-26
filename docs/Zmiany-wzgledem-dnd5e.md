@@ -70,6 +70,8 @@ moduł działa normalnie, po prostu bez tych efektów.
 
 ## Czego świadomie nie ma (jeszcze)
 
-Pojazdy jako pełny typ aktora z systemem pościgów, system craftingu (schematy/produkcja/
-szabrowanie), drony. Zobacz `IMPLEMENTATION.md` po aktualny stan — to lista rzeczy poza zakresem
+Produkcja przedmiotów i naprawa (schematy, elaboracja amunicji), szabrowanie i bebeszenie, handel
+(dostępność, ceny regionalne), towarzysze i drony, większość zasad pojazdów (jest plansza pościgu
+z torami, nie ma karty pojazdu, manewrów ani tabel awarii), Kolory Neuroshimy. Kolejność prac —
+`PLAN_beta.md`, stan — macierz na górze `IMPLEMENTATION.md`. To lista rzeczy poza zakresem
 obecnej wersji, nie ukryte błędy.

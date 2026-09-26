@@ -1,5 +1,9 @@
 # Plan: Egzekwowanie Właściwości Broni (Weapon Properties)
 
+> Status (2026-09-26): tabela w §1 zaktualizowana do stanu kodu. Otwarte pozycje są zaplanowane
+> w `PLAN_beta.md`: `ppanc`/`przebijajaca` przeciw pancerzowi BG — M1; `dluga`/`ciezka`/`jednorazowa`
+> oraz `burzaca`/`karczujaca` na aktorze-obiekcie — M6.
+>
 > Plik projektowy. Źródło zasad: `Tabele/Bronie/` + podręcznik.
 > Definicje i filtrowanie właściwości: `scripts/config/weapons.mjs`.
 > Wzorzec automatyzacji "save z karty czatu": `scripts/combat/obalajaca.mjs`.
@@ -38,14 +42,14 @@ Legenda: ✅ egzekwowane · 🟡 częściowe · ⚙️ do zrobienia (sensowne) �
 | `jednorazowa` | Strzał jednorazowy | 🟡 | `magazine.mjs` traktuje jako nietrackowaną; brak twardej blokady reloadu |
 | `sm` | Szyna montażowa | ✅ | `addons.mjs` — sloty SM (max 3) |
 | `burzaca` | Podwójne obrażenia obiektom | 🟡 | tylko detekcja **dźwięku** (`sounds.mjs`); obrażenia ręcznie (×2 w Apply Damage) |
-| `ppanc` | Ignoruje Odporności i Próg obrażeń | ⚙️ | brak; warto wpiąć w pipeline obrażeń + `damage-reduction.mjs` |
-| `przebijajaca` | jw. (wersja biała) | ⚙️ | jak `ppanc` |
+| `ppanc` | Ignoruje Odporności i Próg obrażeń | 🟡 | `bestiary-thresholds.mjs` omija próg obrażeń istot Bestiariusza; próg i odporność kinetyczna pancerza BG (`armor-rules.mjs`) — **nie** (M1) |
+| `przebijajaca` | jw. (wersja biała) | ⚙️ | jak `ppanc` (M1) |
 | `porazajaca` | RO Kondycja ST10 albo Powalenie | ✅ | `weapon-save-properties.mjs` — przycisk + save `con` ST10 + prone |
 | `powalajaca` | obuchowe, cel ≤ Duży, RO Siła (ST 8+SIŁ+PB) albo Powalenie | ✅ | `weapon-save-properties.mjs` — save `str` ST 8+SIŁ+PB + prone + limit rozmiaru |
 | `unieruchamiajaca` | RO Zręczność albo Unieruchomienie | ✅ | `weapon-save-properties.mjs` — save `dex` ST 8+SIŁ+PB + restrained + limit rozmiaru |
 | `dluga` | Utrudnienie do celów w 3m | ⚙️(opc.) | brak; addony manipulują flagą, ale nie ma kary za bliski dystans |
 | `ciezka` | Wymaga dwójnogu/SIŁ15, inaczej Utrudnienie | ⚙️(opc.) | brak; możliwy check przy rzucie ataku |
-| `dublet` | 2 pociski, 1 test, podwójne kości | ⚙️(opc.) | brak; możliwa osobna aktywność |
+| `dublet` | 2 pociski, 1 test, podwójne kości | ✅ | `fire-modes.mjs` — osobny tryb, koszt 2 nabojów, bramkowany właściwością |
 | `karczujaca` | Podwójne obrażenia roślinom/drewnu | 🚫 | jak `burzaca`, ale węższe — brak natywnego typu "obiekt/roślina" |
 | `cicha` | Nie zdradza pozycji / Niewidoczność | 🚫 | brak systemu skradania/widoczności w module — ręcznie |
 | `poreczna` | Strzał jedną ręką bez Utrudnienia | 🚫 | nie egzekwujemy kary "jedna ręka", więc nie ma czego znosić |
@@ -95,6 +99,11 @@ usuwa stan odporny w `prepareResistImmune`, więc proaktywnie pomijamy RO i rapo
 Efekt: ignoruje **Odporności** (dnd5e `dr`) oraz **Próg obrażeń** (nasza redukcja materiałowa
 w `damage-reduction.mjs`).
 
+> Stan 2026-09-26: próg obrażeń BG liczy `actors/armor-rules.mjs` w hooku `dnd5e.calculateDamage`
+> (tylko obrażenia kinetyczne), odporność kinetyczna to AE pancerza na `system.traits.dr`. Tam trzeba
+> wpiąć wyjątek — sprawdzenie `ppanc` już istnieje w `combat/bestiary-thresholds.mjs`. Właściwość
+> może też przyjść z amunicji (`effectiveDamageFor().props` w `weapons/ammo.mjs`).
+
 Plan:
 1. Przy rzucie obrażeń z broni `ppanc`/`przebijajaca` oznacz wiadomość flagą
    `flags[MODULE_ID].bypassReduction = true` (analogicznie jak robią to bronie obszarowe).
@@ -114,8 +123,7 @@ Plan:
 - **`ciezka`** — przy rzucie ataku sprawdź `actor.system.abilities.str.value >= 15` **lub**
   aktywny dwójnóg/trójnóg (`flags.setup` / addon). Brak → Utrudnienie (+ cel ma Ułatwienie do
   RO przeciw seriom — to drugie trudniejsze, można pominąć w v1).
-- **`dublet`** — osobna aktywność (jak tryby ognia): 1 test ataku, podwójne kości obrażeń,
-  zużycie 2 nabojów. Reużyć wzorzec `fire-modes.mjs` (sync aktywności).
+- **`dublet`** — ✅ zrobione w `fire-modes.mjs` (`DUBLET_FIRE_MODE`).
 
 ---
 
@@ -184,5 +192,5 @@ ustawionym ręcznie albo dedykowana flaga modułu na tokenie), heurystykę możn
    zysk/koszt, reużywa sprawdzony wzorzec `obalajaca`).
 2. **§3.2** ppanc / przebijajaca — realnie wpływa na balans (przebijanie pancerzy/progów).
 3. **§5** Burząca — tania notka-podpowiedź dla `vehicle` (lub świadome zostawienie jako tooltip).
-4. **§3.3** dluga / ciezka / dublet — opcjonalne, gdy reszta zamknięta.
+4. **§3.3** dluga / ciezka — opcjonalne, gdy reszta zamknięta (dublet już zrobiony).
 5. Reszta — poza zakresem / odroczone (§4).

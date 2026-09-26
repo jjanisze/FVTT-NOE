@@ -4,7 +4,7 @@
  * Single source of truth for everything swallowed, injected, smeared or smoked.
  * Merged from two previously separate sets:
  *   - the 12 disease medicines that used to live in `medicine-data.mjs`
- *     (`Podrecznik` tabela LEKARSTWA, str. 111), and
+ *     (`Podrecznik` tabela LEKARSTWA, str. 132), and
  *   - `Tabele/ChemiaIDrugi.md` (14 środków leczniczych, 9 narkotyków/używek,
  *     3 materiały pirotechniczne).
  *
@@ -128,7 +128,7 @@ export const immunityChanges = () =>
 export const CHEMIA = Object.freeze({
 
   /* ============================================================ */
-  /*  Leki na choroby przewlekłe — tabela LEKARSTWA, str. 111     */
+  /*  Leki na choroby przewlekłe — tabela LEKARSTWA, str. 132     */
   /* ============================================================ */
 
   desmopresyna: {

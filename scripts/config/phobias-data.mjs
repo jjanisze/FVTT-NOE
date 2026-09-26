@@ -9,7 +9,7 @@ export { KOBALT_PHOBIAS };
 /**
  * Neuroshima 5e — Fobie (phobias).
  *
- * Text quoted from the rulebook chapter "Choroby i Fobie" (str. 111–112).
+ * Text quoted from the rulebook chapter "Choroby i Fobie" (str. 112).
  *
  * ## Data model on the actor
  * `flags["neuroshima-2026-overrides"].fobie` is an array of entries:

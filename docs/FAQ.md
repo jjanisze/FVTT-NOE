@@ -16,9 +16,10 @@ oficjalnego sklepu. Zamiast tego wszystko jest jawnie opisane tutaj, na GitHubie
 [README, sekcję „Zgłaszanie błędów"](../README.md#zgłaszanie-błędów).
 
 **Czego jeszcze brakuje / co jest niedokończone?**
-`IMPLEMENTATION.md` w repo prowadzi jawny dziennik zrobione/w trakcie/planowane per faza
-(pojazdy, crafting i dronu np. wciąż nie ma). To dokument deweloperski, ale najbardziej aktualny
-obraz stanu prac.
+Moduł jest w fazie **alfa**. Na górze `IMPLEMENTATION.md` jest macierz „rozdział podręcznika → co
+działa", a `PLAN_beta.md` opisuje, co trzeba domknąć przed betą. Największe braki: produkcja
+przedmiotów i naprawa, towarzysze i drony, szabrowanie i handel, większość zasad pojazdów (plansza
+pościgu już jest). To dokumenty deweloperskie, ale najbardziej aktualny obraz stanu prac.
 
 **Czy muszę instalować Sequencer i Splatter?**
 Nie — moduł działa bez nich. Bez Sequencera znikają dźwięk pozycyjny i VFX strzałów, bez Splattera

@@ -32,12 +32,14 @@ import {
 import { CHEMIA, chemiaItemData } from "../../scripts/config/chemia-data.mjs";
 import { SZTUCZKI, sztuczkaItemData } from "../../scripts/config/sztuczki-data.mjs";
 import { ORIGIN_ABILITIES, originAbilityItemData, POCHODZENIA, pochodzenieItemData, abilitiesOf, attrBonus } from "../../scripts/config/pochodzenia-data.mjs";
-import { AMMO_CALIBERS, GRENADE_TYPES } from "../../scripts/config/ammo-data.mjs";
+import { AMMO_CALIBERS, GRENADE_TYPES, grenadeDescription } from "../../scripts/config/ammo-data.mjs";
 import { WEAPONS, WEAPON_MAP, buildWeaponItemData } from "../../scripts/config/weapons-data.mjs";
 import { MAGAZINES, buildMagazineItemData } from "../../scripts/config/magazines-data.mjs";
 import { POCHODNIA_VARIANTS, buildPochodniaItemData } from "../../scripts/wkk/items/pochodnia.mjs";
 import { LATARKA_FORMS, buildLatarkaItemData } from "../../scripts/items/latarka.mjs";
 import { buildBaterieItemData } from "../../scripts/items/baterie.mjs";
+import { buildKwasItemData } from "../../scripts/items/kwas.mjs";
+import { buildDetonatorItemData, buildElectricFuzeItemData } from "../../scripts/items/detonator.mjs";
 import { GOGLE_VARIANTS, buildGogleItemData } from "../../scripts/items/gogle.mjs";
 import { ARMORS, buildArmorItemData } from "../../scripts/config/armor-data.mjs";
 import { TOOLKITS, buildToolkitItemData } from "../../scripts/config/toolkits-data.mjs";
@@ -48,7 +50,10 @@ import { computeFovAngle } from "../../scripts/config/fov.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MODULE_ROOT = path.resolve(HERE, "../..");
-const PACKS_ROOT = path.join(MODULE_ROOT, "packs");
+// `--out=<dir>` writes the packs somewhere else — diffing a build against what Foundry has on
+// disk (while it runs and holds `packs/` open) needs a second copy, not an overwrite.
+const OUT = process.argv.slice(2).find(a => a.startsWith("--out="))?.slice("--out=".length);
+const PACKS_ROOT = OUT ? path.resolve(OUT) : path.join(MODULE_ROOT, "packs");
 
 const FOUNDRY_NM = "C:/Program Files/Foundry Virtual Tabletop/resources/app/node_modules";
 const require = createRequire(import.meta.url);
@@ -561,9 +566,7 @@ function buildAmmo(c) {
  * własny typ konsumpcyjny odciąłby je od tego panelu.
  */
 function buildGrenade(g) {
-  const desc = `<p><strong>Obszar:</strong> ${g.area ?? "—"}</p>`
-    + `<p><strong>RO:</strong> ${g.save ?? "—"}</p>`
-    + `<p>${g.effect ?? ""}</p>`;
+  const desc = grenadeDescription(g);
 
   return {
     _id: idFor("grenade", g.id),
@@ -673,6 +676,18 @@ function buildPochodnia(variantKey) {
 function buildLatarka(formKey) {
   return { ...buildLatarkaItemData(formKey), _id: idFor("equipment", `latarka-${formKey}`), _key: null };
 }
+function buildKwas() {
+  return { ...buildKwasItemData({ quantity: 1 }), _id: idFor("consumable", "kwas"), _key: null };
+}
+// Pilot bez `kitId`, z `kitNew` — na karcie aktora sam dokłada 10 zapalników radiowych swojego
+// zestawu (`items/detonator.mjs`). Zapalników radiowych w paczce nie ma: RAW sprzedaje je tylko w zestawie.
+function buildDetonator() {
+  return { ...buildDetonatorItemData(), _id: idFor("equipment", "detonator-radiowy"), _key: null };
+}
+function buildElectricFuze() {
+  return { ...buildElectricFuzeItemData({ quantity: 1 }), _id: idFor("consumable", "zapalnik-elektryczny"), _key: null };
+}
+
 function buildBaterie() {
   return { ...buildBaterieItemData({ quantity: 1 }), _id: idFor("loot", "baterie"), _key: null };
 }
@@ -1394,6 +1409,80 @@ function buildNpc(c) {
 /*  Writer                                       */
 /* -------------------------------------------- */
 
+/* -------------------------------------------- */
+/*  v14 record shapes                            */
+/* -------------------------------------------- */
+
+/**
+ * Emit records exactly as Foundry v14 stores them, so loading the world does not rewrite the packs.
+ *
+ * Foundry migrates a pack record on load when `_stats.coreVersion` is missing or older than the
+ * document's `schemaVersion` (`dist/database/backend/server-document.mjs`, `_migrateRecord`), and
+ * then persists the cleaned record — which is the `.log` churn that showed up after every launch.
+ * Its migration functions only run for versions newer than the stamp, so stamping `coreVersion`
+ * alone would be worse than nothing: a legacy `duration: {seconds}` would never get converted.
+ * The stamp and the v14 shapes go together; the defaults below are what `clean` fills in, taken
+ * from a diff of this builder's output against the migrated packs (2026-09-24, core 14.364).
+ * Re-run that diff after a core update: `node dev/packs/build-packs.mjs --out=<tmp>`.
+ */
+const CORE_VERSION = (() => {
+  const { release } = JSON.parse(fs.readFileSync(path.join(FOUNDRY_NM, "../package.json"), "utf8"));
+  return `${release.generation}.${release.build}`;
+})();
+
+const v14Stats = () => ({
+  coreVersion: CORE_VERSION, systemId: null, systemVersion: null, createdTime: null,
+  modifiedTime: null, lastModifiedBy: null, compendiumSource: null, duplicateSource: null,
+  exportSource: null
+});
+
+/** Item / Actor / embedded Item: the four root fields `clean` fills in. */
+function v14Doc(doc) {
+  return { folder: null, sort: 0, ownership: { default: 0 }, ...doc, _stats: doc._stats ?? v14Stats() };
+}
+
+/**
+ * ActiveEffect. `duration: {seconds: N}` → `{value, units, expiry, expired}` (core `#migrateDuration`
+ * plus the `expiry` initial); an effect with statuses shows its icon always (`migrateTemporary`).
+ */
+function v14Effect(eff) {
+  const d = eff.duration ?? {};
+  let duration = d;
+  if (!("units" in d)) {
+    const unit = ["seconds", "turns", "rounds"].find(u => typeof d[u] === "number");
+    const value = unit ? d[unit] : (typeof d.value === "number" ? d.value : null);
+    duration = { value, units: unit ?? "seconds", expiry: typeof value === "number" ? "turnStart" : null, expired: false };
+  }
+  return {
+    type: "base", description: "", origin: null, start: null, tint: "#ffffff",
+    showIcon: eff.statuses?.length ? 2 : 1, statuses: [], flags: {}, folder: null, sort: 0,
+    ...eff, duration, _stats: eff._stats ?? v14Stats()
+  };
+}
+
+/** Prototype token defaults, and `detectionModes` as an object keyed by id (core `migrateDetectionModes`). */
+function v14PrototypeToken(pt = {}) {
+  const modes = Array.isArray(pt.detectionModes)
+    ? Object.fromEntries(pt.detectionModes.map(({ id, ...rest }) => [id, rest]))
+    : (pt.detectionModes ?? {});
+  return {
+    depth: Math.min(pt.width ?? 1, pt.height ?? 1), // core `migrateDepthAndLevel`
+    alpha: 1, displayBars: 0,
+    bar1: { attribute: "attributes.hp" }, bar2: { attribute: null },
+    light: {
+      negative: false, priority: 0, alpha: 0.5, angle: 360, bright: 0, color: null, coloration: 1,
+      dim: 0, attenuation: 0.5, luminosity: 0.5, saturation: 0, contrast: 0, shadows: 0,
+      animation: { type: null, speed: 5, intensity: 5, reverse: false }, darkness: { min: 0, max: 1 }
+    },
+    occludable: { radius: 0 },
+    turnMarker: { mode: 1, animation: null, src: null, disposition: false },
+    movementAction: null, randomImg: false, appendNumber: false, prependAdjective: false,
+    ...pt,
+    sight: { contrast: 0, ...pt.sight },
+    detectionModes: modes
+  };
+}
+
 /**
  * Write an Item pack.
  *
@@ -1433,9 +1522,9 @@ async function writePack(name, docs) {
   let effectCount = 0;
   for (const doc of docs) {
     const { _key, effects = [], ...rest } = doc;
-    batch.put(`!items!${doc._id}`, { ...rest, effects: effects.map(e => e._id) });
+    batch.put(`!items!${doc._id}`, v14Doc({ ...rest, effects: effects.map(e => e._id) }));
     for (const eff of effects) {
-      batch.put(`!items.effects!${doc._id}.${eff._id}`, eff);
+      batch.put(`!items.effects!${doc._id}.${eff._id}`, v14Effect(eff));
       effectCount++;
     }
   }
@@ -1479,12 +1568,12 @@ async function writeActorPack(name, entries, folders = []) {
 
   let itemCount = 0;
   for (const { actor, items } of entries) {
-    batch.put(`!actors!${actor._id}`, actor);
+    batch.put(`!actors!${actor._id}`, v14Doc({ ...actor, prototypeToken: v14PrototypeToken(actor.prototypeToken) }));
     for (const item of items) {
       const { effects = [], ...rest } = item;
-      batch.put(`!actors.items!${actor._id}.${item._id}`, { ...rest, effects: effects.map(e => e._id) });
+      batch.put(`!actors.items!${actor._id}.${item._id}`, v14Doc({ ...rest, effects: effects.map(e => e._id) }));
       for (const eff of effects) {
-        batch.put(`!actors.items.effects!${actor._id}.${item._id}.${eff._id}`, eff);
+        batch.put(`!actors.items.effects!${actor._id}.${item._id}.${eff._id}`, v14Effect(eff));
       }
       itemCount++;
     }
@@ -1526,6 +1615,9 @@ const weaponDocs = [
 const sprzetDocs = [
   ...Object.keys(LATARKA_FORMS).map(buildLatarka),
   buildBaterie(),
+  buildKwas(),
+  buildDetonator(),
+  buildElectricFuze(),
   ...Object.keys(GOGLE_VARIANTS).map(buildGogle),
 ];
 const armorDocs = ARMORS.map(buildArmor);

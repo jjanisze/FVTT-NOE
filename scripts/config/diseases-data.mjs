@@ -10,7 +10,7 @@ export { KOBALT_DISEASES };
  * Neuroshima 5e — Choroby (diseases).
  *
  * Single source of truth for the disease layer. Text is quoted from the
- * rulebook chapter "Choroby i Fobie" (str. 108–111); the panel in
+ * rulebook chapter "Choroby i Fobie" (str. 109–111); the panel in
  * `actors/health-panel.mjs` renders it and the pack builder does not touch it
  * (diseases are actor flags, not items — see PLAN below).
  *
@@ -157,7 +157,7 @@ export const CHRONIC_DISEASES = Object.freeze({
 });
 
 /**
- * Popular / acquired diseases (str. 110–111). These are not on the k8 table and
+ * Popular / acquired diseases (str. 111). These are not on the k8 table and
  * have no stage ladder, so the standard sunset worsening does not apply to them.
  *
  * `dailySave` is the ones the sunset routine *does* roll: `{ dc, success }`, where

@@ -24,7 +24,7 @@
  *              Full path: `modules/neuroshima-2026-overrides/icons/ammo/${icon}`
  */
 
-import { KOBALT_AMMO } from "../wkk/config/ammo-data.mjs";
+import { KOBALT_AMMO, KOBALT_EXPLOSIVES } from "../wkk/config/ammo-data.mjs";
 
 export const AMMO_CALIBERS = [
   /* ── Pistoletowa ─────────────────────────────────────────────── */
@@ -151,7 +151,7 @@ export const AMMO_CALIBERS = [
   {
     id: "12ga_b",
     label: ".12 Ga (b – breneka)",
-    icon: "ammo_12_ga.svg",
+    icon: "ammo_12_ga_breneka.svg", // batch 40 (2026-09-25); wcześniej wspólna ze śrutem
     category: "Śrutowa",
     family: "12ga",
     formula: "2d6",
@@ -313,55 +313,76 @@ export const GRENADE_TYPES = [
     effect: "Porażka: 1k6 ogień + 1k6 obuchowe + Podpalenie (1 min). Sukces: brak obrażeń.",
     price: 10, avail: 70, weight: 1
   },
+  // Miny i ładunki — RAW, *Sprzęt* → „Miny i ładunki wybuchowe" + „Granaty i im podobne"
+  // (`8 SZTUCZKI/czesc-01.md`), przepisane 2026-09-24 (decyzja MG). Wcześniej katalog miał
+  // własne liczby na prawie każdym polu (mina ppiech. 3 m / ZR 14 / 4k6+2k6, 1,5 kg; C4 6 m / 8k6
+  // „+4k6 obiekty"; dynamit jako „pęk, det. zdalny"; pipebomb, którego w podręczniku nie ma).
+  // „(burzące)" = RAW „Burząca: podwójne obrażenia obiektom" — karta pokazuje to MG, nie liczy.
+  // `note` trzyma zasady łączenia: to nie są obrażenia rzutu, więc NIE może ich czytać
+  // `_parseDamageSpec` (w `effect` „+2k6 za laskę" zostałoby dodane do każdego wybuchu).
+  // `placed` — podkładany, nie rzucany (Test ST 10 w zasięgu 3 m); `detonation` — sposoby do
+  // wyboru przy podkładaniu (`actors/charge-rules.mjs`, `DETONATION_METHODS`). Zdalne wymagają
+  // zapalnika: radiowy z zestawu Detonatora radiowego, elektryczny (C4 wg RAW) — `items/detonator.mjs`.
   {
     id: "grenade-antipersonnel-mine",
     label: "Mina przeciwpiechotna",
     icon: "anti_personnel_mine.svg",
     category: "Miny",
-    area: "Sześcian 3 m",
-    save: "RO Zręczność ST 14",
-    effect: "Wyzwalana naciskiem. Porażka: 4k6 wybuchowe + 2k6 cięte + Powalenie.",
-    price: 90, avail: 15, weight: 1.5
+    area: "Sześcian 1,5 m",
+    save: "RO Zręczność ST 15",
+    effect: "Porażka: 8k6 wybuchowe + Powalenie + Ogłuchnięcie (1 min).",
+    note: "Detonacja: nadepnięcie lub wyzwalacz/pułapka. Rozbrojenie: ST 15.",
+    placed: true, detonation: ["pressure"],
+    price: 80, avail: 20, weight: 10
   },
   {
     id: "grenade-antivehicle-mine",
-    label: "Mina przeciwpojazdowa",
+    label: "Mina przeciwpancerna",
     icon: "anti_vehicle_mine.svg",
     category: "Miny",
-    area: "Sześcian 6 m",
-    save: "RO Zręczność ST 14",
-    effect: "Silny ładunek ppanc. Porażka: 8k6 wybuchowe; pojazdy: +4k6.",
-    price: 220, avail: 10, weight: 5.0
+    area: "Sześcian 3 m",
+    save: "RO Kondycja ST 15",
+    effect: "Porażka: 15k6 wybuchowe (burzące).",
+    note: "Detonacja: nacisk o wadze 1000 kg lub wyzwalacz/pułapka. Rozbrojenie: ST 15.",
+    placed: true, detonation: ["pressure"],
+    price: 120, avail: 10, weight: 15
   },
   {
     id: "grenade-c4-remote",
-    label: "Ładunek C4 (det. zdalny)",
-    icon: "c4_remote_charge.svg",
+    label: "Plastik C4 (kostka 100 g)",
+    icon: "c4_explosive.svg",
     category: "Ładunki",
-    area: "Sześcian 6 m",
-    save: "RO Zręczność ST 15",
-    effect: "Detonacja zdalna. Porażka: 8k6 wybuchowe; obiekty i osłony: +4k6.",
-    price: 260, avail: 8, weight: 1.0
+    area: "Sześcian 3 m",
+    save: "RO Kondycja ST 15",
+    effect: "Porażka: 10k6 wybuchowe (burzące) + Powalenie + Ogłuchnięcie (1 min).",
+    note: "Detonacja: detonator elektryczny. Rozbrojenie: ST 15. "
+      + "Łączenie: każde 100 g więcej w ładunku — obrażenia +5k6, obszar +1,5 m.",
+    placed: true, detonation: ["electric", "radio"],
+    price: 100, avail: 5, weight: 0.1
   },
   {
-    id: "grenade-dynamite-remote",
-    label: "Pęk dynamitu (det. zdalny)",
-    icon: "dynamite_remote_bundle.svg",
-    category: "Ładunki",
-    area: "Sześcian 6 m",
-    save: "RO Zręczność ST 13",
-    effect: "Detonacja zdalna. Porażka: 6k6 wybuchowe; obiekty: +2k6.",
-    price: 140, avail: 20, weight: 2.0
-  },
-  {
-    id: "grenade-pipebomb-fuze",
-    label: "Pipebomb (z lontem)",
-    icon: "pipebomb_fuze.svg",
+    id: "grenade-dynamite",
+    label: "Dynamit (laska)",
+    icon: "dynamite.svg",
     category: "Ładunki",
     area: "Sześcian 3 m",
     save: "RO Zręczność ST 12",
-    effect: "Lont 1 runda. Porażka: 3k6 wybuchowe + 2k6 cięte.",
-    price: 35, avail: 45, weight: 0.9
+    effect: "Porażka: 5k6 wybuchowe + Powalenie + Ogłuchnięcie (1 min).",
+    note: "Podpalenie: akcja Używanie lub Akcja Bonusowa + źródło ognia. "
+      + "Łączenie: każda laska więcej w wiązce — obrażenia +2k6; co dwie laski obszar +1,5 m.",
+    price: 40, avail: 50, weight: 0.2
+  },
+  {
+    id: "grenade-ied",
+    label: "Ładunek improwizowany (IED)",
+    icon: "pipebomb_fuze.svg",
+    category: "Ładunki",
+    area: "Sześcian 3 m",
+    save: "RO Zręczność ST 15",
+    effect: "Porażka: 3k6 wybuchowe + 3k6 ogień + Powalenie + Ogłuchnięcie (1 min).",
+    note: "Detonacja: zdalna, czasowa lub wyzwalacz/pułapka. Rozbrojenie: ST 15.",
+    placed: true, detonation: ["timer", "trigger", "electric", "radio"],
+    price: 40, avail: 40, weight: 5
   },
   {
     id: "grenade-smoke",
@@ -423,25 +444,38 @@ export const GRENADE_TYPES = [
     effect: "Porażka: 6k6 ogień + Podpalenie.",
     price: 70, avail: 20, weight: 1.0
   },
-  {
-    id: "grenade-signal",
-    label: "Granat sygnałowy",
-    // Fixed (2026-09-06): was reusing smoke_grenade.svg as an interim placeholder, but a
-    // dedicated granat_sygnalowy.svg was already sitting in icons/weapons unused — same class of
-    // gap as Flara's own icon, found in the same sweep.
-    icon: "granat_sygnalowy.svg",
-    category: "Granaty",
-    area: "—",
-    save: "—",
-    effect: "Sygnał świetlny/dymny widoczny z dużej odległości. Brak obrażeń.",
-    price: 20, avail: 40, weight: 0.3
-  },
+  ...KOBALT_EXPLOSIVES,
 ];
 
 /** Fast lookup by grenade id. */
 export const GRENADE_MAP = Object.freeze(
   Object.fromEntries(GRENADE_TYPES.map(g => [g.id, g]))
 );
+
+/**
+ * Opis itemu materiału wybuchowego — jedno źródło dla paczki (`dev/packs/build-packs.mjs`),
+ * przycisku „Dodaj ładunek" na karcie i synchronizacji rozdanych kopii. Waga, cena i opis są
+ * wypiekane w item, więc rozjazd tych trzech ścieżek to rozjazd przy stole.
+ */
+export function grenadeDescription(def) {
+  return `<p><strong>Obszar:</strong> ${def.area ?? "—"}</p>`
+    // `save` zaczyna się od „RO …" — bez tego opis mówił „RO: RO Zręczność ST 15".
+    + `<p><strong>RO:</strong> ${String(def.save ?? "—").replace(/^RO\s+/, "")}</p>`
+    + `<p>${def.effect ?? ""}</p>`
+    + (def.note ? `<p>${def.note}</p>` : "");
+}
+
+/** Pola itemu wyprowadzone z katalogu (bez ilości i id) — patrz `grenadeDescription`. */
+export function grenadeItemFields(def, moduleId = "neuroshima-2026-overrides") {
+  return {
+    name: def.label,
+    img: `modules/${moduleId}/icons/weapons/${def.icon}`,
+    "system.type.subtype": def.id,
+    "system.weight.value": def.weight,
+    "system.price.value": def.price,
+    "system.description.value": grenadeDescription(def)
+  };
+}
 
 /**
  * Build HTML for a caliber <select> element.

@@ -3,7 +3,8 @@
 Napisane 2026-09-24 przez poprzedniego agenta, po `v0.16.0` (commit „Grenades: …" — ten plik
 wszedł w tym samym commicie). Wszystko w §1 jest **zweryfikowane na żywym świecie** (Chrome
 DevTools MCP, Piekarz vs Camel w walce), nie zgadywane. Pełny opis zmian: IMPLEMENTATION.md,
-wpisy z 2026-09-23. Skasuj ten plik, kiedy wszystko z §2 będzie zamknięte albo przeniesione.
+wpisy z 2026-09-23. Skasuj ten plik, kiedy wszystko z §2 będzie zamknięte albo przeniesione. Zaktualizowane
+2026-09-24 przez drugą sesję tego dnia — §2 przepisane.
 
 ---
 
@@ -33,44 +34,57 @@ wpisy z 2026-09-23. Skasuj ten plik, kiedy wszystko z §2 będzie zamknięte alb
 
 ## 2. Co jest OTWARTE
 
-1. **Wiersz „Materiały wybuchowe" zawija się przy minimalnej szerokości karty.** Zmierzone przy
-   800 px (wiersz 522 px): 93 px wysokości, ~800 px potrzeby — kolumny Obszar (150) i RO (130).
-   Propozycja z sesji: przenieść Obszar/RO do podpisu pod nazwą, jak dawki w Lekach
-   (`leki-inventory.mjs`). Pomiar: `app.setPosition({width: 100})` (klamruje do minimum) i
-   porównanie `top` dzieci `.item-row`. **Czeka na zgodę MG.**
-2. **Sloty podręczne liczą stosy, nie sztuki.** `handyCount()` w `handy-items.mjs` liczy dokumenty:
-   7× Relanium przy pasie = 1 slot z 3, tak samo stos granatów. RAW („maksymalnie trzy przedmioty
-   podręczne") czytany dosłownie to trzy fizyczne rzeczy. Przed ±Ilość w Lekach też tak było.
-   **Pytanie do MG, nierozstrzygnięte**: zamierzone? liczyć sztuki? ograniczać stos przy pasie?
-3. **Grafika leżącej butelki.** Rzucony koktajl leży z grafiką granatu
-   (`PENDING_TILE_TEXTURE` w `grenade-inventory.mjs` — jedna tekstura dla wszystkich). Trzeba
-   tekstury per podtyp. Grafikę dostarcza MG do `dev/icons/in/`; konwersja do WEBP (~128 px wys.)
-   jak `vfx/grenade-thrown.webp` — patrz pamięć „WEBP, not PNG".
-4. **Zdalny C4/dynamit i pipebomb z lontem.** Dziś wybuchają jak granaty (na końcu tury / od
-   razu). Infrastruktura jest gotowa: Tile `pendingCharge` + `_detonate()`. Brakuje uogólnienia
-   `anchor` do warunku: `endOfTurn` (jest) / `remote` (przycisk „Detonuj" dla rzucającego/MG) /
-   `fuse` (N rund). **Uwaga na RAW**: dynamit w podręczniku to „laska", którą się **podpala**
-   (Akcja Bonusowa/Używanie + źródło ognia — jak koktajl), a nie „det. zdalny" jak w katalogu;
-   C4 ma „Detonator elektryczny"; IED — „zdalna, czasowa lub wyzwalacz". Zacznij od RAW.
-5. **Audyt katalogu materiałów wybuchowych względem RAW** (`GRENADE_TYPES` w
-   `config/ammo-data.mjs` vs `8 SZTUCZKI/czesc-01.md`). Znane rozjazdy (niesprawdzone, które są
-   decyzjami MG): mina przeciwpiechotna — RAW 1,5 m / 8k6 / ZR ST 15, katalog 3 m / 4k6+2k6;
-   przeciwpancerna — RAW 3 m / 15k6 / KON 15, katalog 6 m / 8k6 (+4k6 pojazdy); C4 — RAW 3 m /
-   10k6 / KON 15, katalog 6 m / 8k6 (+4k6). Do tego **błąd parsera**: „pojazdy: +4k6" to obrażenia
-   warunkowe, a `_parseDamageSpec` dodaje je do sumy (test to dziś tylko dokumentuje — człon
-   dziedziczy typ). Po zmianie katalogu: waga/cena/opis są **wypiekane w itemy** — istniejące kopie
-   trzeba zsynchronizować (precedens: koktajl, jednorazowy skrypt), potem `npm run build:packs`
-   przy zamkniętym Foundry.
+**Zamknięte 2026-09-24 (druga sesja)** — szczegóły w IMPLEMENTATION.md, trzy wpisy z tą datą:
+wiersz „Materiały wybuchowe" w jednej linii (dawne §2.1), sloty liczą sztuki (§2.2), katalog
+min/ładunków wg RAW + „burzące" + błąd parsera (§2.5), builder paczek w kształtach v14 (§2.6).
+Testy: **468/468**.
 
-6. **Paczki „brudzą się" przy każdym uruchomieniu Foundry — przyczyna znaleziona.** To nie
-   kompakcja LevelDB, tylko migracja v14: `dev/packs/build-packs.mjs` wciąż zapisuje kształty
-   sprzed v14, a Foundry przy wczytaniu świata przepisuje je do `.log` każdej paczki. Sprawdzone
-   dokument po dokumencie (HEAD vs dysk, 2026-09-24) — bezstratnie, wyłącznie: dopisane domyślne
-   `_stats`/`folder`/`sort`/`ownership` (+ domyślne pola `prototypeToken`),
-   `duration: {seconds: N}` → `{value: N, units: "seconds", expiry, expired}` (8 efektów w
-   `lekarstwa`), `prototypeToken.detectionModes` tablica `[{id, …}]` → obiekt `{[id]: {…}}`
-   (9 aktorów Bestiariusza). Jeśli builder zacznie emitować kształty v14, churn zniknie, a commity
-   „routine" przestaną być potrzebne. Niepilne, mała robota.
+1. ~~`npm run build:packs`~~ — **zrobione 2026-09-24 wieczorem.** Po starcie Foundry: w logu
+   serwera zero wpisów „Migrated/Persisting migrated" dla paczek modułu (ostatnie: 01:12 tego
+   dnia, sprzed poprawki), nowe `.log` każdej paczki mają 0 B. Pliki w `packs/` i tak się
+   zmieniły — to sprzątanie samego LevelDB przy otwarciu (log → `.ldb`, rotacja MANIFEST/LOG),
+   nie treść. Czy kolejne starty są już bez zmian — sprawdź `git status packs/` po następnym.
+2. **Grafika leżącej butelki** — w kolejce `dev/icons/MISSING.md`, klasa B (nowa klasa: kolorowe
+   obiekty z góry). Kod już gotowy: Tile bierze `vfx/<subtype>.webp`, jeśli istnieje
+   (`_pendingTileTexture()`), proporcje z obrazu. Obróbka: `dev/icons/normalize_world_assets.py`.
+3. **Detonacja inna niż „koniec tury".** RAW (*Sprzęt*, `8 SZTUCZKI/czesc-01.md`):
+   - **Dynamit (laska)** — rzucany jak granat, ale najpierw **podpalany** (Używanie / Akcja
+     Bonusowa + źródło ognia). Uogólnić `molotov.mjs` do „wymaga podpalenia", bez pęknięcia.
+   - **C4, IED, miny** — **podkładane**. RAW: podłożenie = Test ZR (Zwinne dłonie / narzędzia
+     ślusarza lub rusznikarza) albo MDR (Survival) ST 10; porażka = brak eksplozji, porażka o 5+
+     = wybuch przy zakładaniu. Rozbrojenie ZR ST 15. Łączenie ładunków — w `note`, bez UI.
+   - **Decyzje MG (2026-09-24):** zasięg podkładania **3 m**; przycisk „Detonuj" widzi
+     **wyłącznie MG**; czas IED **ustawiany**, maks. **24 h czasu gry**, **globalny nasłuch**
+     (`updateWorldTime`, wszystkie sceny — MG dostaje wiadomość o upływie także spoza sceny);
+     **wyzwalacz/pułapka odpala MG ręcznie** (nie automatyzujemy).
+   - **Podział IED — zdecydowane (MG 2026-09-25): bez podziału.** Zdalna detonacja = posiadanie
+     RAW-owego **Detonatora radiowego** (Elektronika: 50 gb, 1 kg, 10%, pilot + 10 zapalników
+     radiowych, 200 m); każde użycie zużywa 1 zapalnik; działa dla IED, C4 i innych ładunków.
+     IED bez detonatora: czasowy (≤ 24 h) albo wyzwalacz/pułapka (odpala MG). Zapalnik
+     elektryczny (5 gb, 10 m kabla) — to RAW-owa detonacja C4.
+   - **Zdecydowane (MG 2026-09-25): wariant A + rozdzielony zestaw.** „Radiowy" wybiera się
+     **przy podkładaniu** (dialog: czasowy / wyzwalacz / radiowy — „radiowy" tylko, gdy
+     podkładający ma zapalnik radiowy). Detonator radiowy = **dwa przedmioty**: pilot + stos
+     „Zapalnik radiowy ×10" (zakup daje oba). „A składa, B podkłada" zostaje: A oddaje B
+     zapalnik (przez MG — gracze nie przekazują sobie przedmiotów bezpośrednio: brak praw do
+     cudzej karty, worek drużyny pauzuje grę), B podkłada, pilot zostaje u A.
+   - **Zmiana decyzji MG (2026-09-25): „Detonuj" nie jest tylko dla MG.** Gracz z **pilotem**
+     detonuje zdalnie swoje ładunki radiowe. MG może zdetonować **każdy** ładunek, bez względu
+     na typ i sposób odpalenia (np. rabuś grzebie przy ładunku, MG rzuca rozbrojenie poza
+     systemem, porażka → MG odpala ręcznie).
+   - **Czas IED (MG 2026-09-25):** długość wybiera gracz; liczy **zegar świata**. Jeśli scena
+     z ładunkiem jest oglądana — wybuch z efektami jak zwykle. Jeśli nie — tylko wiadomość do
+     MG („wybuchł"); MG sam decyduje, czy gracze słyszą (stłumiony, daleki huk) czy nic.
+   - **Wdrożone 2026-09-25** (IMPLEMENTATION.md, wpis „Podkładanie min i ładunków…"): miny, C4
+     i IED podkładane, wszystkie sposoby, pilot + zapalniki, zapalnik elektryczny, detonacja
+     gracza i MG, wybuch bez graczy → wiadomość dla MG. **Zostało z §2.3:** dynamit (podpalanie
+     przez uogólnione `molotov.mjs`); łączenie ładunków (C4 +100 g, wiązka dynamitu) — dalej
+     tylko w `note`; rozbrojenie (ST 15) — MG rzuca poza systemem i usuwa Tile (albo odpala).
+     Paczka `sprzet` do przebudowy przy zamkniętym Foundry (pilot + zapalnik elektryczny).
+4. ~~777 starych wiadomości Quench~~ — czat wyczyszczony (1835 → 0). Do wznowienia kampanii czat
+   jest jednorazowy — wolno kasować bez pytania (decyzja MG 2026-09-24).
+5. **Przedmioty podręczne v2** — **wdrożone 2026-09-25** (pas w nagłówku karty). Co weszło i co
+   otwarte: `PLAN_przedmioty_podreczne_v2.md` §13. Testy 474/474.
 
 ## 3. Pułapki znalezione w tej sesji — nie odkrywaj ponownie
 
@@ -94,3 +108,7 @@ wpisy z 2026-09-23. Skasuj ten plik, kiedy wszystko z §2 będzie zamknięte alb
   Piekarz ma 6 koktajli. Siatka 70 px = 1,5 m. Kolor Kobaltu włączony.
 - Czyszczenie po testach na żywo: zapamiętaj `game.time.worldTime`, stan walki, PW, znacznik czasu
   wiadomości — i przywróć (tak robiła ta sesja).
+- **Zapisz też listę `flags.neuroshima-2026-overrides.activeScorchMarks` sceny PRZED testem** i przy
+  sprzątaniu usuń tylko nazwy spoza tej listy. Ślad po wybuchu żyje rok czasu gry, więc filtr
+  „wygasa za ~365 dni" łapie też ślady z poprzednich sesji: 2026-09-25 tak zeszło 9 śladów ze
+  sceny Start, w tym co najmniej 3 sprzed tej sesji (efektów Sequencera nie da się przywrócić).

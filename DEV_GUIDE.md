@@ -13,7 +13,7 @@
 | FoundryVTT | 14.360 | Stable, coreVersion w world.json |
 | dnd5e | 5.3.0 (installed) / 5.3.2 (latest) | Compiled bundle `dnd5e.mjs` ~2.8 MB |
 | Node.js | 18+ wymagany | Przez foundry-mcp i skrypty w `dev/` |
-| Moduł | patrz `module.json` (`version`) | Nie placeholder — ~90 plików `.mjs`, Phase 1–4 częściowo/w pełni żywe. Bump + wpis w `IMPLEMENTATION.md` § Changelog przy każdej znaczącej dostawie funkcji. |
+| Moduł | patrz `module.json` (`version`) | Etap: **alfa** (`PLAN_beta.md`). ~180 plików `.mjs` poza testami, 15 paczek. Bump + wpis w `IMPLEMENTATION.md` § Changelog przy każdej znaczącej dostawie funkcji; status mechaniki zmieniaj w macierzy § Stan projektu. |
 
 ### Ścieżki krytyczne
 
@@ -433,7 +433,7 @@ Szukaj narzędzi MCP przez `tool_search` z query `mcp foundry`. Nazwy zaczynają
 | `neuroshima_5e_modifications.md` | Pełny plan nadpisań (aktualny plik) |
 | `A-README-AI.md` | Kontekst kampanii, frakcje, fabuła |
 | `Tabele/Dostepnosc.md` | Dostępność przedmiotów per lokacja |
-| `podrecznik.md` | Treść podręcznika Neuroshima 5e |
+| `Podrecznik/NOE/` | Treść podręcznika (jedyne źródło RAW; `README.md` + `INDEKS.md` w środku) |
 | `dnd5e.mjs` | Compiled source dnd5e (grep-friendly) |
 | `lang/en.json` | Klucze lokalizacyjne dnd5e |
 
@@ -446,7 +446,7 @@ Pełna architektura: `PLAN_classes.md`. Ta sekcja to instrukcja obsługi.
 ### 10.1 Źródło prawdy
 
 ```
-Podrecznik/source.txt                    surowy dump PDF (nie edytować)
+Podrecznik/NOE/07 KLASY/*.md             konwersja PDF-a (generowana, nie edytować)
   ↓  dev/classes/extract_classes.py      76 zdolności klasowych  → classes.json
   ↓  dev/classes/extract_professions.py  61 zdolności profesji   → professions.json
   ↓  dev/classes/gen_features.py         + metadane automatyki   → scripts/config/class-features-data.mjs
@@ -840,14 +840,16 @@ ma kosztować efekt, nie zasadę. Trwałe efekty nazywaj deterministycznie
 ### 11.1 Źródło prawdy
 
 ```
-Podrecznik/Bestiariusz/*.md              52 profile — ŹRÓDŁO TREŚCI (Obsidian)
-  ↓  dev/bestiary/extract_bestiary.py    czysta transkrypcja → bestiary.json
+Podrecznik/NOE/13 NOTATNIK ŁOWCY/*/*.md  52 profile — konwersja PDF-a (generowana)
+dev/bestiary/lore-extras.json            krew (Splatter) per istota — dane modułu, nie RAW
+  ↓  dev/bestiary/extract_bestiary.py    → bestiary.json
   ↓  dev/bestiary/gen_bestiary.py        + RULES/AUTOMATION  → scripts/config/bestiary-data.mjs
   ↓  dev/packs/build-packs.mjs           → packs/bestiariusz (51 aktorów, 6 folderów)
 ```
 
 ⚠️ **`bestiary.json` i `bestiary-data.mjs` są generowane** — nie edytuj ręcznie.
-Treść zmieniaj w plikach vaulta, automatykę w `RULES`/`AUTOMATION` w `gen_bestiary.py`.
+Treść pochodzi z podręcznika (regeneracja `Podrecznik/tools/pdf2md.py`), automatykę zmieniaj
+w `RULES`/`AUTOMATION` w `gen_bestiary.py`.
 
 **Parser jest surowy.** Nieznana etykieta nagłówka, sekcja, umiejętność, typ obrażeń,
 stan czy zmysł to **błąd builda**, nie ciche pominięcie — ta sama postawa co

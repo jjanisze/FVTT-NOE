@@ -68,7 +68,7 @@ Per class: identifier, label, HD, PW formula, save proficiencies, skill choices 
 weapon/armor/tool proficiencies, starting equipment, scale values, and a per-level grant table.
 
 ### `scripts/config/class-features-data.mjs`
-All 137 abilities, extracted verbatim from the rulebook (`Podrecznik/source.txt`) — full
+All 137 abilities, extracted verbatim from the rulebook (`Podrecznik/NOE/07 KLASY/`) — full
 Polish text, action tag, and the automation metadata the engine needs:
 
 ```js
@@ -89,11 +89,12 @@ Polish text, action tag, and the automation metadata the engine needs:
 }
 ```
 
-Extraction provenance: `POZIOM <n>: <NAZWA> [<A|B|R>]` headings out of the PDF text dump.
+Extraction provenance: `POZIOM <n>: <NAZWA> [<A|B|R>]` headings in the NOE class files
+(originally the March PDF text dump).
 The `Tabele/Klasy.md` summary had `(?)`/`—` gaps at Brutal 3/5/7/9/11 and Zwiadowca 7/11;
 the rulebook text has them (`Szósty zmysł`, `Brutalny cios`, `Szaleńcza szarża`, `Solówa`,
 `Paranoja`, `Zabójczy cios`, `Sportowiec`, `Wyczulone zmysły`, `Pogoń`). **`Klasy.md` is not
-authoritative for ability lists — `source.txt` is.**
+authoritative for ability lists — the rulebook (`Podrecznik/NOE/`) is.**
 
 ---
 

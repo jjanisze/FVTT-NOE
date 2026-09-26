@@ -12,7 +12,7 @@
  * `system.uses`, nothing here tracks state of its own.
  */
 
-import { handyToggleHtml, bindHandyToggle } from "./handy-items.mjs";
+import { handyToggleHtml, bindHandyToggle, registerHandyFamily } from "./handy-items.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const WRAPPER_CLASS = "neuro-leki-wrapper";
@@ -21,6 +21,19 @@ export function registerLekiInventory() {
   for (const hookName of ["renderActorSheet", "renderCharacterActorSheet", "renderNPCActorSheet"]) {
     Hooks.on(hookName, _onRenderActorSheetInjectLeki);
   }
+  // Pasek przedmiotów podręcznych: klik w kafelek = „Zażyj" z wiersza; podpis = dawki
+  // w otwartym opakowaniu, gdy jest ich więcej niż jedna.
+  registerHandyFamily("medicine", {
+    use: async item => {
+      const act = item.system.activities?.contents?.[0] ?? [...(item.system.activities ?? [])][0];
+      if (act) return act.use({}, { configure: false }, {});
+      return item.use?.({}, { configure: false });
+    },
+    caption: item => {
+      const uses = item.system.uses ?? {};
+      return Number(uses.max) > 1 ? `${Number(uses.max) - Number(uses.spent ?? 0)}/${uses.max}` : "";
+    }
+  });
   console.log("Neuroshima 5e | Leki (Chemia) inventory UI registered");
 }
 

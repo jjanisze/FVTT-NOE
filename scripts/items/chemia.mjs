@@ -48,7 +48,7 @@ import {
 import { applyZranienie, getZranienieLvl, setZranienie } from "../combat/zranienie.mjs";
 import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
 
-import { provenanceBadge } from "../actors/handy-items.mjs";
+import { provenanceBadge, isAtHand } from "../actors/handy-items.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -102,9 +102,13 @@ function _keyOf(activity) {
  * `messageConfig` (mixin.mjs:222). Getting that wrong silently writes `create` onto
  * the dialog config and lets the native card through.
  */
-function _onPreUseActivity(activity, _usageConfig, _dialogConfig, messageConfig) {
+function _onPreUseActivity(activity, usageConfig, _dialogConfig, messageConfig) {
   if (!_keyOf(activity)) return;
   messageConfig.create = false;
+  // Pochodzenie przed zużyciem: po `consume()` ostatnia sztuka z pasa jest już zdjęta z licznika
+  // (`handy-items.mjs`) i wyglądałaby na wyjętą z plecaka. Ten sam obiekt dociera do postUse.
+  const real = activity.actor?.items.get(activity.item?.id);
+  if (real) usageConfig.neuroAtHand = isAtHand(real);
 }
 
 /** Resolve the dose once dnd5e has spent the charge. */
@@ -122,7 +126,7 @@ async function _onPostUseActivity(activity, usageConfig, results) {
   // `use()` runs on a clone; write to the real embedded item.
   const item = actor.items.get(activity.item?.id) ?? activity.item;
 
-  await takeChemia(actor, key, { item });
+  await takeChemia(actor, key, { item, atHand: usageConfig?.neuroAtHand });
 }
 
 /* -------------------------------------------- */
@@ -140,9 +144,10 @@ async function _onPostUseActivity(activity, usageConfig, results) {
  * @param {string} key                Catalogue key.
  * @param {object} [options]
  * @param {Item}   [options.item]     Source item, for effect data and card art.
+ * @param {boolean} [options.atHand]  Whether the dose came off the belt, captured before consumption.
  * @returns {Promise<string[]>}       The report lines that were posted.
  */
-export async function takeChemia(actor, key, { item } = {}) {
+export async function takeChemia(actor, key, { item, atHand } = {}) {
   const def = getChemia(key);
   if (!def) throw new Error(`Unknown chemia entry "${key}"`);
   const m = def.mech ?? {};
@@ -154,7 +159,7 @@ export async function takeChemia(actor, key, { item } = {}) {
     if (taken >= m.dailyMax) {
       await _bumpDoses(actor, key);
       await _resolveOverdose(actor, def, key, lines);
-      await _postCard(actor, def, key, item, lines);
+      await _postCard(actor, def, key, item, lines, { atHand });
       return lines;
     }
     await _bumpDoses(actor, key);
@@ -183,7 +188,7 @@ export async function takeChemia(actor, key, { item } = {}) {
   if (m.rage) await _startRage(actor, def, key, item, lines);
   if (m.pendingRest) await _armPendingRest(actor, def, key, item, lines);
 
-  await _postCard(actor, def, key, item, lines);
+  await _postCard(actor, def, key, item, lines, { atHand });
   return lines;
 }
 
@@ -626,7 +631,7 @@ async function _offerRageEnd(actor, def, key, effect) {
 /* -------------------------------------------- */
 
 /** Post the "what this dose did" card, including what it deliberately did not. */
-async function _postCard(actor, def, key, item, lines, { head } = {}) {
+async function _postCard(actor, def, key, item, lines, { head, atHand } = {}) {
   const pool = CHEMIA_FLAVOR[key] ?? CHEMIA_FLAVOR_DEFAULT;
   const flavor = pool[Math.floor(Math.random() * pool.length)]
     .replace("{a}", actor.name)
@@ -647,7 +652,7 @@ async function _postCard(actor, def, key, item, lines, { head } = {}) {
       <div class="neuro-chemia-head">
         <img class="neuro-chemia-icon" src="${item?.img ?? def.img ?? "icons/svg/pill.svg"}" alt="">
         ${head ?? def.label}
-        ${item ? provenanceBadge(item) : ""}
+        ${item ? provenanceBadge(item, { atHand }) : ""}
       </div>
       <div class="neuro-chemia-flavor">${flavor}</div>
       ${lines.filter(Boolean).map(l => `<div class="neuro-chemia-line">${l}</div>`).join("")}

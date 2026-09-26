@@ -398,6 +398,29 @@
   content: "";
 }
 
+/* Zwarty nagłówek karty postaci (MG 2026-09-25: „mniej pustego miejsca, większe sloty").
+   170 → 128 px. Imię w jednej linii (46 → 32 px) — dłuższe imiona, jak „Raynald of
+   Châtillon", zawijały się i wypychały pas pod nagłówek. Plakietka poziomu 78 → 58 px;
+   odpoczynki i Fuks stoją obok niej w dwóch rzędach zamiast pod nią. */
+.dnd5e2.sheet.actor.character { --dnd5e-sheet-header-height: 128px; }
+.dnd5e2.sheet.actor.character .sheet-header > .left { gap: 3px; min-width: 0; }
+.dnd5e2.sheet.actor.character .sheet-header .document-name {
+  font-size: 32px; line-height: 1.1;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.dnd5e2.sheet.actor.character .sheet-header .class { font-size: 13px; line-height: 1.2; }
+.dnd5e2.sheet.actor.character .sheet-header > .right {
+  --level-size: 58px;
+  --neuro-beside-badge: calc(var(--level-size) + var(--padding-right) + 10px);
+  justify-content: center;
+  min-height: var(--level-size);
+}
+.dnd5e2.sheet.actor.character .sheet-header > .right .level-badge { font-size: 24px; }
+.dnd5e2.sheet.actor.character .sheet-header > .right > div:last-child { margin-top: 0; }
+.dnd5e2.sheet.actor.character .sheet-header > .right > div:last-child .sheet-header-buttons {
+  top: 0; left: auto; right: var(--neuro-beside-badge);
+}
+
 /* ============================================= */
 /* Weapon Item Sheet — Neuroshima overrides      */
 /* ============================================= */
@@ -731,6 +754,55 @@
 .neuro-handy-toggle { color: #ccc; cursor: pointer; }
 .neuro-handy-toggle:hover { color: var(--dnd5e-color-gold, #c9a227); }
 .neuro-handy-toggle.is-on { color: #f3c969; }
+.neuro-handy-toggle { display: inline-flex; align-items: center; gap: 1px; }
+.neuro-handy-toggle .neuro-handy-count { font-size: 0.75em; font-weight: bold; line-height: 1; }
+
+/* === Pas przedmiotów podręcznych (nagłówek karty postaci) — actors/handy-belt.mjs === */
+.neuro-belt {
+  display: flex; align-items: center; gap: 6px;
+  margin-top: 2px; padding: 3px 6px 3px 4px;
+  background: rgba(10, 8, 6, 0.62); border: 1px solid rgba(255, 255, 255, 0.14); border-radius: 6px;
+  width: fit-content; max-width: 100%; box-sizing: border-box;
+}
+.neuro-belt.is-drop-hover { border-color: #f3c969; box-shadow: 0 0 0 1px rgba(243, 201, 105, 0.35); }
+.neuro-belt.is-overflow .neuro-belt-count { color: #ff8a80; }
+.neuro-belt-label {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  min-width: 30px; line-height: 1.05; cursor: help; color: #e8dcc0;
+}
+.neuro-belt-title { font-size: 9px; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.8; }
+.neuro-belt-count { font-size: 13px; font-weight: bold; }
+.neuro-belt-slots { display: flex; flex-wrap: wrap; gap: 5px; }
+.neuro-belt-slot {
+  position: relative; width: 44px; height: 44px; box-sizing: border-box;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 5px; background: rgba(0, 0, 0, 0.45); border: 1px solid rgba(255, 255, 255, 0.28);
+  color: rgba(255, 255, 255, 0.35);
+}
+.neuro-belt-slot.is-empty { border-style: dashed; font-size: 11px; }
+.neuro-belt-slot.is-filled { cursor: pointer; border-color: rgba(243, 201, 105, 0.55); }
+.neuro-belt-slot.is-filled:hover, .neuro-belt-slot.is-filled:focus-visible {
+  border-color: #f3c969; background: rgba(243, 201, 105, 0.12); outline: none;
+}
+.neuro-belt-slot img { width: 36px; height: 36px; object-fit: contain; border: none; pointer-events: none; }
+.neuro-belt-slot.is-dragging { opacity: 0.35; }
+.neuro-belt-slot.is-drop-target { border-color: #f3c969; border-style: solid; background: rgba(243, 201, 105, 0.22); }
+.neuro-belt-slot.is-overflow { border-color: #e06666; background: rgba(224, 102, 102, 0.18); }
+.neuro-belt-caption, .neuro-belt-stack, .neuro-belt-flag {
+  position: absolute; font-size: 9px; line-height: 1; padding: 1px 2px; border-radius: 3px;
+  background: rgba(0, 0, 0, 0.78); color: #f2e6c9; pointer-events: none; white-space: nowrap;
+}
+.neuro-belt-caption { bottom: -3px; left: 50%; transform: translateX(-50%); }
+.neuro-belt-stack { top: 1px; left: 1px; color: #cfcfcf; }
+.neuro-belt-flag { top: -6px; left: 50%; transform: translateX(-50%); color: #ff8a80; }
+.neuro-belt-remove {
+  position: absolute; top: -6px; right: -6px; width: 14px; height: 14px; border-radius: 50%;
+  display: none; align-items: center; justify-content: center; font-size: 9px;
+  background: #3a2a2a; color: #f2e6c9; border: 1px solid rgba(255, 255, 255, 0.4);
+}
+.neuro-belt-slot.is-filled:hover .neuro-belt-remove { display: flex; }
+.neuro-belt-remove:hover { background: #a33; }
+.neuro-belt.is-readonly .neuro-belt-slot.is-filled { cursor: default; }
 
 /* Podgląd kolejki — pierwszy chip leci pierwszy. */
 .neuro-magazine-queue {
@@ -1515,32 +1587,52 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
    w flags.neuroshima-2026-overrides.fuksy (rerolls.mjs).
    ============================================================ */
 
+/* Ta sama pigułka co pas (ciemne tło, złoto), pod przyciskami odpoczynku, obok plakietki
+   poziomu — nie pod nią. Zielone świecące koniczyny wypadły (MG 2026-09-25). */
 .neuro-fuks-pips {
   display: flex;
-  gap: 2px;
+  gap: 1px;
   align-items: center;
   margin: 0 4px;
+  padding: 2px 4px 2px 6px;
+  border-radius: 6px;
+  background: rgba(10, 8, 6, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.dnd5e2.sheet.actor.character .sheet-header > .right .neuro-fuks-pips {
+  position: absolute;
+  bottom: 0;
+  right: var(--neuro-beside-badge);
+  margin: 0;
+}
+
+.neuro-fuks-pips::before {
+  content: "Fuks";
+  font-size: 9px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #e8dcc0;
+  opacity: 0.8;
+  margin-right: 3px;
 }
 
 .neuro-fuks-pip {
   all: unset;
   display: grid;
   place-items: center;
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
   cursor: pointer;
-  color: rgba(120, 120, 120, 0.45);
+  color: rgba(255, 255, 255, 0.2);
   font-size: 13px;
   line-height: 1;
-  transition: color 0.15s ease, transform 0.15s ease, filter 0.15s ease;
+  transition: color 0.15s ease, transform 0.15s ease;
 }
 
 .neuro-fuks-pip:disabled { cursor: default; }
 
-.neuro-fuks-pip.is-filled {
-  color: #27ae60;
-  filter: drop-shadow(0 0 3px rgba(39, 174, 96, 0.6));
-}
+.neuro-fuks-pip.is-filled { color: #f3c969; }
 
 .neuro-fuks-pip:not(:disabled):hover { transform: scale(1.2); }
 

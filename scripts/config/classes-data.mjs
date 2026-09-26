@@ -1,8 +1,8 @@
 /**
  * Neuroshima 5e — Class definitions (6 klas × 12 poziomów) + 18 profesji.
  *
- * SOURCE OF TRUTH: the progression tables embedded in the rulebook PDF text dump
- * (`Podrecznik/source.txt`), section "TABELA ZDOLNOŚCI KLASOWYCH <KLASA>".
+ * SOURCE OF TRUTH: the progression tables in the rulebook
+ * (`Podrecznik/NOE/07 KLASY/`), table "TABELA ZDOLNOŚCI KLASOWYCH <KLASA>".
  *
  * ⚠ `Tabele/Klasy.md` is a hand-made summary and contains several errors — it must NOT
  * be used to derive mechanics. Divergences found and resolved in favour of the PDF table:

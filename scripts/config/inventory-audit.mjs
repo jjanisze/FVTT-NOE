@@ -92,14 +92,15 @@ export async function repairSurowce(diffs) {
 const GRENADE_NAME_ALIASES = [
   { re: /koktajl\s*mo[lł]otowa/i, id: "grenade-molotov" },
   { re: /mina\s*przeciwpiech/i, id: "grenade-antipersonnel-mine" },
-  { re: /mina\s*przeciwpojazd/i, id: "grenade-antivehicle-mine" },
+  { re: /mina\s*przeciw(?:pojazd|pancern)/i, id: "grenade-antivehicle-mine" },
   { re: /\bc-?4\b/i, id: "grenade-c4-remote" },
-  { re: /dynamit/i, id: "grenade-dynamite-remote" },
-  { re: /pipebomb/i, id: "grenade-pipebomb-fuze" },
+  { re: /dynamit/i, id: "grenade-dynamite" },
+  // RAW „Ładunek improwizowany (IED)" to nie „Granat improwizowany"; pipebomb to jego dawna nazwa.
+  { re: /\bied\b|pipebomb|[łl]adunek\s*improwizowany/i, id: "grenade-ied" },
   { re: /granat(?:y)?\s*dymn/i, id: "grenade-smoke" },
   { re: /granat(?:y)?\s*gazow/i, id: "grenade-gas" },
   { re: /granat(?:y)?\s*huk/i, id: "grenade-flashbang" },
-  { re: /ładunek\s*improwizowany|ladunek\s*improwizowany|granat(?:y)?\s*improwizowany/i, id: "grenade-improvised" },
+  { re: /granat(?:y)?\s*improwizowany/i, id: "grenade-improvised" },
   { re: /granat(?:y)?\s*od[lł]amkow/i, id: "grenade-frag" },
   { re: /granat(?:y)?\s*zapalaj/i, id: "grenade-incendiary" },
   { re: /granat(?:y)?\s*sygna[lł]ow/i, id: "grenade-signal" }

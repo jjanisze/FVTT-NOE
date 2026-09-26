@@ -194,7 +194,7 @@ export function registerConfigTests(quench) {
     /* ---------------------------------------------------------------- */
 
     describe("Udźwig — CONFIG.DND5E.encumbrance / actorSizes", function () {
-      // RAW (source_japierdole.txt:18641-18649): Średni Siła×5/×10 kg. dnd5e's own
+      // RAW (NOE s. 257, UDŹWIG): Średni Siła×5/×10 kg. dnd5e's own
       // `heavilyEncumbered.metric` and lg/huge/grg `capacityMultiplier` already
       // coincidentally match this table — regression-guard them too, since a future
       // dnd5e update silently drifting one of them would desync the bar from RAW

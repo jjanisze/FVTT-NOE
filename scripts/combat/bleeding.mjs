@@ -4,7 +4,7 @@
  * Two sources produce the same visible condition but do NOT behave the same way, so the
  * mechanics live in `BLEED_PROFILES` and the state carries which one is running:
  *
- *   - `hemofilia` — RAW (str. 108), the original and still the default.
+ *   - `hemofilia` — RAW (str. 109), the original and still the default.
  *   - `dumdum`    — homebrew "W Kolorze Kobaltu", from the dum-dum round (.44 Mag, caliber
  *                   `44mag_dd`). Hits harder (1k8), lands at the START of the victim's turn,
  *                   and crucially cannot be waited out: there is no save that stops it, only
@@ -16,7 +16,7 @@
  * downgrade it. Nothing in the fiction supports two independent bleeds, and two concurrent
  * end-of-turn saves would be unreadable at the table.
  *
- * RAW (str. 108): a haemophiliac who takes cięte or kłute damage starts bleeding.
+ * RAW (str. 109): a haemophiliac who takes cięte or kłute damage starts bleeding.
  * At the end of each of their turns they roll RO na Kondycję ST 10; a failure
  * deals 1k4. The bleeding stops on any of three things:
  *

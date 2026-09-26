@@ -1,0 +1,5 @@
+2026/09/24-23:23:13.841 ec68 Recovering log #3
+2026/09/24-23:23:13.843 ec68 Level-0 table #5: started
+2026/09/24-23:23:13.851 ec68 Level-0 table #5: 326704 bytes OK
+2026/09/24-23:23:13.856 ec68 Delete type=0 #3
+2026/09/24-23:23:13.856 ec68 Delete type=3 #2

@@ -64,10 +64,11 @@ Zwinne dłonie check (author's idea, this table's numbers — see `TODO_mechanik
 | `wkk/items/pistolet-na-race.mjs` | Flare pistol + its "Wystrzel flarę" activity |
 | `wkk/items/zeton-luxor.mjs` | Żeton Luxor prop |
 | `wkk/items/gadzety.mjs` | The 4 flavor click-items |
-| `wkk/config/ammo-data.mjs` | `44mag_dd`, `race` ammo entries |
+| `wkk/config/ammo-data.mjs` | `44mag_dd`, `race` ammo entries; `grenade-signal` (Granat sygnałowy) |
 | `wkk/config/weapons-data.mjs` | `pistolet-na-race`, `laska`, `miecz`, `zloty-desert-eagle` weapon entries |
 | `wkk/config/diseases-data.mjs` | Schizofrenia paranoidalna + its stable id |
 | `wkk/config/phobias-data.mjs` | Mizoofobia |
+| `wkk/config/armor-data.mjs` | Kamizelka taktyczna (light armour, +1 handy slot) |
 | `wkk/config/latarka-overrides.mjs` | `LIGHT_KOBALT` — see the override pattern below |
 | `wkk/config/molotov-light.mjs` | `MOLOTOV_LIGHT_KOBALT` — a lit Molotov's light; RAW gives it none (see below) |
 | `wkk/combat/weapon-save-properties.mjs` | `rozrywajaca` |

@@ -28,7 +28,7 @@ import {
   isMagazineItem, magazineDefOf, magazineRounds, describeRounds, acceptedCalibers
 } from "../weapons/magazine-model.mjs";
 import { openLoadWindow, unloadMagazineAction } from "../weapons/magazine.mjs";
-import { isAtHand, toggleAtHand, handyCount, HANDY_LIMIT } from "./handy-items.mjs";
+import { isAtHand, toggleAtHand, handyCount, handyLimit, makeBeltDraggable } from "./handy-items.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -193,7 +193,7 @@ function _buildRow(actor, mag, def, rounds, { weight, inCombat, loadedInto }) {
       <div class="item-detail item-weight"><span class="value">${weightStr}</span></div>
       <div class="item-detail item-controls always-visible neuro-magazine-controls">
         <button type="button" class="unbutton item-control neuro-mag-hand ${isAtHand(mag) ? "is-on" : ""}"
-                data-tooltip="Przedmiot podręczny: wyciągnięcie w ramach Darmowej Interakcji. Maksymalnie ${HANDY_LIMIT} łącznie z granatami i lekami.">
+                data-tooltip="Przedmiot podręczny: wyciągnięcie w ramach Darmowej Interakcji. Maksymalnie ${handyLimit(mag.actor)} przedmiotów łącznie — pasek w nagłówku karty.">
           <i class="fas fa-hand" inert></i>
         </button>
         <button type="button" class="unbutton item-control neuro-mag-load" ${inCombat || !def ? "disabled" : ""}
@@ -215,6 +215,7 @@ function _buildRow(actor, mag, def, rounds, { weight, inCombat, loadedInto }) {
     ${rounds.length ? `<div class="neuro-magazine-queue"><span class="label">Kolejność wystrzału:</span> ${_queuePreview(rounds)}</div>` : ""}
   `;
 
+  makeBeltDraggable(li, mag);
   li.querySelector(".neuro-mag-hand")?.addEventListener("click", async ev => {
     ev.preventDefault();
     await toggleAtHand(mag);
@@ -264,13 +265,14 @@ function _caliberLabel(id) {
 
 function _buildHeader(actor) {
   const used = handyCount(actor);
+  const limit = handyLimit(actor);
   const header = document.createElement("div");
   header.className = "items-header header flexrow neuro-magazine-header";
   header.innerHTML = `
     <h3 class="item-name">Magazynki</h3>
-    <span class="neuro-handy-counter ${used >= HANDY_LIMIT ? "is-full" : ""}"
-          data-tooltip="Przedmioty podręczne przy pasie — magazynki, granaty i leki łącznie. RAW: maksymalnie ${HANDY_LIMIT}.">
-      <i class="fas fa-hand" inert></i> ${used}/${HANDY_LIMIT}
+    <span class="neuro-handy-counter ${used >= limit ? "is-full" : ""}"
+          data-tooltip="Przedmioty podręczne przy pasie, wszystkie rodziny łącznie — pasek w nagłówku karty.">
+      <i class="fas fa-hand" inert></i> ${used}/${limit}
     </span>
     <div class="item-header neuro-magazine-fill">Naboje</div>
     <div class="item-header item-weight">Waga</div>

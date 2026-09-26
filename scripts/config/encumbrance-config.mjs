@@ -1,9 +1,8 @@
 /**
  * Neuroshima 5e — Udźwig: CONFIG.DND5E overrides matching RAW.
  *
- * Podręcznik ("Zasady szczegółowe → Udźwig", verified against the correctly-OCR'd
- * `Podrecznik/source_japierdole.txt:18641-18649` — the cleaned `agent-md` copy garbles
- * this exact table, don't trust it) gives a flat per-size multiplier table:
+ * Podręcznik ("Zasady szczegółowe → Udźwig", `Podrecznik/NOE/`, s. 257)
+ * gives a flat per-size multiplier table:
  *
  *   ROZMIAR   UŻYTKOWY      MAKSYMALNY     (relative to Średni/Medium = ×1)
  *   Malutki   Siła × 1 kg   Siła × 2 kg    → ×0.2

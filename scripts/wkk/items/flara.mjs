@@ -21,7 +21,7 @@
  * ## Design locked live (2026-09-06, GM sign-off on all four forks)
  *
  * 1. **Real light at the landing spot**, not a flavor-only signal like the existing
- *    `grenade-signal` entry (`config/ammo-data.mjs`) — a genuine standalone `AmbientLight`,
+ *    `grenade-signal` entry (`wkk/config/ammo-data.mjs`) — a genuine standalone `AmbientLight`,
  *    independent of any actor/token, that outlives the throw.
  * 2. **Range = double Pochodnia Smołowa's** (6 m bright / 12 m dim → 12 m bright / 24 m dim),
  *    not the Improwizowana variant.

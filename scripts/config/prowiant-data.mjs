@@ -81,14 +81,14 @@ export const PROWIANT_CATALOG = Object.freeze([
   // --- Jedzenie ---
   { id: "konserwa",     label: "Konserwa (1 kg)",              category: "jedzenie", price: 15,  avail: 20,  weight: 1,    icon: `${ICON_DIR}/weapons/canned_food.svg` },
   { id: "prowiant",     label: "Prowiant (1 kg)",              category: "jedzenie", price: 10,  avail: 50,  weight: 1,    icon: `${ICON_DIR}/weapons/canned_food.svg` },
-  { id: "chleb",        label: "Chleb (1 kg)",                 category: "jedzenie", price: 10,  avail: 60,  weight: 1,    icon: `${ICON_DIR}/weapons/canned_food.svg` },
+  { id: "chleb",        label: "Chleb (1 kg)",                 category: "jedzenie", price: 10,  avail: 60,  weight: 1,    icon: `${ICON_DIR}/items/loot/chleb.svg` },
   { id: "mieso",        label: "Mięso (1 kg)",                 category: "jedzenie", price: 10,  avail: 80,  weight: 1,    icon: `${ICON_DIR}/weapons/canned_food.svg` },
-  { id: "mieso_suszone", label: "Mięso suszone / jerky (1 kg)", category: "jedzenie", price: 20, avail: 40,  weight: 1,    icon: `${ICON_DIR}/weapons/canned_food.svg` },
+  { id: "mieso_suszone", label: "Mięso suszone / jerky (1 kg)", category: "jedzenie", price: 20, avail: 40,  weight: 1,    icon: `${ICON_DIR}/items/loot/mieso_suszone.svg` },
   { id: "ser",          label: "Ser (1 kg)",                   category: "jedzenie", price: 10,  avail: 40,  weight: 1,    icon: `${ICON_DIR}/weapons/canned_food.svg` },
   { id: "ryby",         label: "Ryby (1 kg)",                  category: "jedzenie", price: 20,  avail: 40,  weight: 1,    icon: `${ICON_DIR}/weapons/canned_food.svg` },
-  { id: "owoce",        label: "Owoce i warzywa (1 kg)",       category: "jedzenie", price: 15,  avail: 30,  weight: 1,    icon: `${ICON_DIR}/weapons/canned_food.svg` },
+  { id: "owoce",        label: "Owoce i warzywa (1 kg)",       category: "jedzenie", price: 15,  avail: 30,  weight: 1,    icon: `${ICON_DIR}/items/loot/owoce.svg` },
   { id: "liofilizat",   label: "Liofilizowana żywność (1 kg)", category: "jedzenie", price: 45,  avail: 10,  weight: 1,    icon: `${ICON_DIR}/weapons/canned_food.svg` },
-  { id: "mre",          label: "Racja wojskowa MRE (1 dzień)", category: "jedzenie", price: 50,  avail: 5,   weight: 0.75, icon: `${ICON_DIR}/items/loot/menazka.svg` },
+  { id: "mre",          label: "Racja wojskowa MRE (1 dzień)", category: "jedzenie", price: 50,  avail: 5,   weight: 0.75, icon: `${ICON_DIR}/items/loot/mre.svg` },
   // --- Woda ---
   { id: "woda_brudna",     label: "Woda brudna (1 l)",     category: "woda", price: 0.5, avail: 100, weight: 1, icon: `${ICON_DIR}/items/loot/manierka.svg` },
   { id: "woda_pitna",      label: "Woda pitna (1 l)",      category: "woda", price: 1,   avail: 80,  weight: 1, icon: `${ICON_DIR}/items/loot/woda_filtrowana.svg` },

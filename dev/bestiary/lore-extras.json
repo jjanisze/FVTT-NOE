@@ -1,0 +1,210 @@
+{
+ "alahama": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew (i chętnie wysysa cudzą)."
+ },
+ "biodroid": {
+  "krewTag": "smart",
+  "krew": "Bio-posoka SMART — organiczna, blado-różowa. Jej zapach ściąga w okolicę inne biodroidy."
+ },
+ "bit-boy-przewodnik": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — organiczny, mimo mutacji."
+ },
+ "bit-boys": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — organiczni, mimo mutacji."
+ },
+ "cyngiel": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — ludzka."
+ },
+ "cywil": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — ludzka."
+ },
+ "gangus-boss": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — ludzka."
+ },
+ "gangus-kapo": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — ludzka."
+ },
+ "gangus-zolnierz": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — ludzka."
+ },
+ "generacja-i-nocny-ghul": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — wciąż ludzka, mimo mutacji."
+ },
+ "generacja-ii-genotyp-gadzi": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — wciąż ludzka, mimo mutacji."
+ },
+ "generacja-ii-genotyp-wilczy": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — wciąż ludzka, mimo mutacji."
+ },
+ "generacja-iii-grubas": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — wciąż ludzka, mimo mutacji."
+ },
+ "generacja-iii-szpieg": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — wciąż ludzka, mimo mutacji."
+ },
+ "generacja-iii-techmutas": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — wciąż ludzka, mimo mutacji."
+ },
+ "generacja-iv-mesmeryta": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — wciąż ludzka, mimo mutacji."
+ },
+ "gigamut": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew."
+ },
+ "gigantyczny-pajak": {
+  "krewTag": "owad",
+  "krew": "Hemolimfa — niebiesko-zielona, owadzia."
+ },
+ "gladiator": {
+  "krewTag": "moloch",
+  "krew": "Smar/olej hydrauliczny — czarno-brązowy, gęsty. Czysto mechaniczna konstrukcja Molocha."
+ },
+ "harpie-aka-wampiry": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew (i chętnie wysysa cudzą)."
+ },
+ "juggernaut": {
+  "krewTag": "moloch",
+  "krew": "Smar/olej hydrauliczny — czarno-brązowy, gęsty. Czysto mechaniczna konstrukcja Molocha."
+ },
+ "kanibal": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — ludzka."
+ },
+ "kidnaper": {
+  "krewTag": "moloch",
+  "krew": "Smar/olej hydrauliczny — czarno-brązowy, gęsty. Czysto mechaniczna konstrukcja Molocha."
+ },
+ "kitchin": {
+  "krewTag": "owad",
+  "krew": "Hemolimfa — niebiesko-zielona, owadzia."
+ },
+ "kon-skazony": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew."
+ },
+ "kon-teksanczyk": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew."
+ },
+ "kon-zdrowy": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew."
+ },
+ "konwojent-straznik": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — ludzka."
+ },
+ "korzec": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew."
+ },
+ "kurczak": {
+  "krewTag": "moloch",
+  "krew": "Smar/olej hydrauliczny — czarno-brązowy, gęsty. Czysto mechaniczna konstrukcja Molocha."
+ },
+ "lowca": {
+  "krewTag": "moloch",
+  "krew": "Smar/olej hydrauliczny — czarno-brązowy, gęsty. Czysto mechaniczna konstrukcja Molocha."
+ },
+ "megator": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew."
+ },
+ "mobsprzet": {
+  "krewTag": "moloch",
+  "krew": "Smar/olej hydrauliczny — czarno-brązowy, gęsty. Czysto mechaniczna konstrukcja Molocha."
+ },
+ "mrokoszczur": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew."
+ },
+ "myslacy-szczur": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew."
+ },
+ "neogator": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew."
+ },
+ "neokot": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew."
+ },
+ "neoniedzwiedz": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew."
+ },
+ "obronca": {
+  "krewTag": "moloch",
+  "krew": "Smar/olej hydrauliczny — czarno-brązowy, gęsty. Czysto mechaniczna konstrukcja Molocha."
+ },
+ "pajak": {
+  "krewTag": "moloch",
+  "krew": "Smar/olej hydrauliczny — czarno-brązowy, gęsty. Czysto mechaniczna konstrukcja Molocha."
+ },
+ "pies-bojowy": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew."
+ },
+ "pies-mutek": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew."
+ },
+ "pulser": {
+  "krewTag": "smart",
+  "krew": "Bio-posoka SMART — organiczna, blado-różowa (biomaszyna, nie czysty metal)."
+ },
+ "roj-szczurow": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew."
+ },
+ "spawacz": {
+  "krewTag": "moloch",
+  "krew": "Smar/olej hydrauliczny — czarno-brązowy, gęsty. Stalowa konstrukcja, bez elementów biologicznych."
+ },
+ "szczekowij": {
+  "krewTag": "owad",
+  "krew": "Hemolimfa — niebiesko-zielona, owadzia."
+ },
+ "szeryf": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — ludzka."
+ },
+ "taran": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew."
+ },
+ "techmorwa-malutka": {
+  "krewTag": "owad",
+  "krew": "Hemolimfa — niebieska posoka (potwierdzone w opisie: ocieka niebieską posoką)."
+ },
+ "techmorwa-srednia": {
+  "krewTag": "owad",
+  "krew": "Hemolimfa — niebieska posoka, jak u mniejszej formy."
+ },
+ "zolnierz-posterunku": {
+  "krewTag": "czerwona",
+  "krew": "Czerwona krew — ludzka."
+ },
+ "zombie-nakladka-death-breath": {
+  "krewTag": "nieumarly",
+  "krew": "Nekrotyczna czerń — krew nosiciela, skrzepła i sczerniała od wirusa Death Breath."
+ }
+}
