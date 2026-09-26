@@ -25,7 +25,7 @@ zdolności.
 |---|---|---|
 | B1 | **Pokrycie RAW** — w macierzy w IMPLEMENTATION.md każdy wiersz ma ✅ albo 🟡 z opisaną częścią ręczną; ❌ tylko na liście z §4 („po becie") | Przegląd macierzy |
 | B2 | **Stabilne modele** — magazynki, przedmioty podręczne, Zranienie, paczki: bez przepisania przez dwie kolejne sesje, żadnej niszczącej migracji w kolejce | Changelog |
-| B3 | **Paczki** — wszystkie 15 zbudowane z bieżących danych, `npm run validate:packs` zielone, brak churnu `.log` po starcie Foundry | `build:packs` przy zamkniętym Foundry, start, `git status packs/` |
+| B3 | **Paczki** — wszystkie 15 zbudowane z bieżących danych, `npm run validate:packs` zielone, po starcie Foundry rekordy identyczne z świeżym buildem (zmiany plików `.log`/`MANIFEST`/`LOG` to kompaktowanie LevelDB przy otwarciu, nie migracja) | `build:packs` przy zamkniętym Foundry, start, `build-packs.mjs --out=<tmp>` + `node dev/packs/diff-packs.mjs <tmp>` |
 | B4 | **Testy** — `npm test` i pełny Quench zielone; każda mechanika z §3 ma testy warstwy 1 (czyste funkcje, `TESTING.md`) | `game.neuroshima.tests.run()` |
 | B5 | **Rejestr automatyki dla zdolności klasowych** — jak dla Sztuczek i Pochodzeń; każda zdolność, Sztuczka i zdolność Pochodzenia ma plakietkę pokrycia (auto / częściowo / brak + „Nie automatyzujemy: …") | `game.neuroshima.<rejestr>.report()` |
 | B6 | **Czysta instalacja** — świeży świat dnd5e 5.3, sam moduł (+ opcjonalnie Sequencer): zero błędów w konsoli przy starcie, paczki się otwierają, postać powstaje od zera przez awans (klasa → Pochodzenie → Sztuczka), walka P/KS z amunicją i Zranieniem działa | Ręczny przebieg z listą kontrolną |
@@ -71,8 +71,9 @@ flowchart LR
 
 Cel: tracker mówi prawdę, paczki są aktualne, otwarte decyzje zamknięte.
 
-- [ ] Przebudować paczki (`granaty`, `sprzet` czekają od 2026-09-24/25) przy zamkniętym Foundry;
-  potwierdzić brak churnu (changelog „Paczki: builder emituje kształty v14")
+- [x] Przebudować paczki przy zamkniętym Foundry; potwierdzić brak churnu — 2026-09-26: 15/15 z danych
+  NOE, po starcie świata **0 różnic w rekordach** (`dev/packs/diff-packs.mjs`); kształty v14 z buildera
+  działają, zmiany plików w `git status` to tylko kompaktowanie LevelDB
 - [ ] **Rejestr automatyki zdolności klasowych** — `createCoverageLedger` (`config/coverage-ledger.mjs`)
   nad `class-features-data.mjs`; pola `auto`/`manual` dopisywane w generatorze
   `dev/classes/gen_features.py`; plakietki wypiekane w paczce `zdolnosci-klasowe`. Stan dziś:
@@ -103,8 +104,9 @@ kliknięciem w piki.
 - [ ] **Olbrzymie obrażenia** (s. 34): jednorazowo ≥ 2× maks. PW → śmierć; maks. PW = 0 → śmierć.
   Wykrycie + karta dla MG (natychmiastowa śmierć przeciwników przy 0 PW — ustawienie świata, RAW
   pozwala MG ją pominąć)
-- [ ] **Stabilizacja** — Test INT (Medycyna) ST 10 jako akcja Pomagania; stabilny bez leczenia
-  odzyskuje 1 PW po 1k8 h (zegar świata, `world-clock.mjs`)
+- [ ] **Stabilizacja** (s. 34) — Test INT (Medycyna) ST 10 jako akcja Pomagania; stabilny bez leczenia
+  odzyskuje 1 PW po 1k8 h (zegar świata, `world-clock.mjs`). Ten sam wzorzec „Pomaganie + Medycyna
+  ST 10” tamuje krwawienie w Kolorach Neuroshimy (s. 201–202, zmiana z października)
 - [ ] **Akcja Bieganie** (s. 21): +2× Szybkość do początku następnej tury, Utrudnienie do własnych
   Testów Ataku, ataki dystansowe przeciw biegnącemu z Utrudnieniem do końca tury; nie dla istot
   nie chodzących. AE z `duration` + `dnd5e.postBuildAttackRollConfig`
@@ -180,7 +182,9 @@ Cel: pościg od startu do mety bez notatek MG. Projekt: `PLAN_poscigi.md` §10.
 - [ ] Komplikacje pościgu k20 (s. 267) i ST pościgu na planszy
 - [ ] Paleta manewrów kierowcy (s. 268) z ruchem potwierdzanym kliknięciem (decyzja D4)
 - [ ] Karta pojazdu: TT, Próg obrażeń, Próg awarii, paliwo, załoga; próg obrażeń pojazdu
-  w potoku obrażeń
+  w potoku obrażeń. Spalanie ze statblocków (s. 262–264: autobus 40, motocykl 5, osobówka
+  10 l/100 km — dopisane w październikowym wydaniu) jako pole w `vehicles-data.mjs` (dziś tylko
+  w `uwagi`) i domyślny bak w `party-travel.mjs` zamiast `PALIWO_DOMYSLNE`
 - [ ] Wsiadanie, kierowanie, wypadanie, trudny teren a Szybkość — testy RAW jako akcje na karcie
 - [ ] Atakowanie z pojazdu — podpowiedzi w dialogu ataku (osłona pasażera, Utrudnienie)
 
@@ -233,10 +237,10 @@ mieć odbiorcę).
 
 | Pozycja | Dlaczego później |
 |---|---|
-| Kolory Neuroshimy (Rdza, Rtęć, Stal, Chrom — s. 201) jako profile świata | Opcjonalne w RAW; framework powinien uogólnić przełącznik WKK, co jest osobnym projektem |
+| Kolory Neuroshimy (Rdza, Rtęć, Stal, Chrom — s. 201) jako profile świata | Opcjonalne w RAW; framework powinien uogólnić przełącznik WKK, co jest osobnym projektem. Brać wersję z października: krwawienie tamuje Pomaganie + INT (Medycyna) ST 10 |
 | Pełna automatyka 133 zdolności klasowych, 53 Sztuczek, 36 zdolności Pochodzeń, 260 zdolności Bestiariusza | Długi ogon; beta wymaga tylko plakietek (B5) |
 | Wytrzymałość pancerzy (opcjonalne RAW) | Decyzja: ręcznie (`[—]` w trackerze) |
-| Docelowe żetony Bestiariusza (26/51), kalibracja skali, pozostałe ikony | Grafika, nie mechanika |
+| Docelowe żetony Bestiariusza (25/51), kalibracja skali, pozostałe ikony | Grafika, nie mechanika |
 | Screen shake DS/MS, iskry i krew trafienia | Oprawa |
 | Zorganizowane grupy, Front | Treść świata, brak mechaniki |
 | Tłumaczenie EN | Brak oficjalnego wydania EN |
@@ -250,6 +254,7 @@ mieć odbiorcę).
   a przy nowym PDF-ie: `Podrecznik/tools/pdf2md.py` + `diff_editions.py` dają listę zmian.
 - **Aktualizacje dnd5e / FVTT** — na betę przypiąć wersje (`verified` w `module.json`),
   a pułapki v14 dopisywać do `ARCHITECTURE.md` §11.
-- **Paczki LevelDB** — `build:packs` tylko przy zamkniętym Foundry; po budowie sprawdzić, że
+- **Paczki LevelDB** — `build:packs` tylko przy zamkniętym Foundry (serwer trzyma blokady, gdy świat
+  jest uruchomiony — także na ekranie `/join`); po budowie sprawdzić, że
   `packs/<nazwa>/` ma niepusty `.log` albo `.ldb` (patrz `.gitignore`).
 - **Rozrost zakresu przez WKK** — nowe pomysły stołu idą do `scripts/wkk/` i nie blokują bram.

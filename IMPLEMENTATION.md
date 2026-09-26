@@ -1103,6 +1103,13 @@ Wykonany hand-off `HANDOFF_noe_pazdziernik.md` (usunięty — historia w `git lo
 - **Teksty:** Muzyk — Fuks dla 1 + mod. CHA sojuszników; typ obrażeń `slashing` to „Cięte”
   (`damage-types.mjs`, `lang/pl.json`, parser granatów), opis Samuraja w brzmieniu NOE;
   surowiec CZ to „Części zapasowe”.
+- **Samuraj — Zasłona** (NOE s. 107): TT +1 tylko z **finezyjną bronią białą** zadającą obrażenia
+  cięte (`isZaslonaWeapon()` w `actors/samuraj.mjs`); wcześniej każda założona broń cięta.
+  Osełka (+1 atak/obrażenia) bez zmian. Opis Samuraja u Victora odświeżony w świecie.
+  Quench 488/488.
+- **Brak churnu paczek potwierdzony** (dowód zapowiedziany w „Paczki: builder emituje kształty v14”):
+  po starcie świata 0 różnic w rekordach wszystkich 15 paczek. Nowe `dev/packs/diff-packs.mjs`
+  porównuje dwa drzewa paczek rekord po rekordzie (działa przy uruchomionym Foundry).
 
 ### Jedno źródło RAW: podręcznik z października (`NOE/`) (2026-09-26)
 

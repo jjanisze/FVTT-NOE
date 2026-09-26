@@ -405,7 +405,7 @@ export const SZTUCZKI = Object.freeze({
     req: "ZRC 13+",
     text: "+1 SIŁ lub ZRC; +1 do Testów Ataku i obrażeń bronią zadającą obrażenia cięte; dobycie "
       + "finezyjnej broni białej zadającej obrażenia cięte bez Darmowej Interakcji; TT +1, gdy dzierżysz "
-      + "taką broń.",
+      + "finezyjną broń białą zadającą obrażenia cięte.",
     category: "wrecz",
     // „Zadającą obrażenia cięte" = wśród typów obrażeń jest `slashing` — czyli także
     // broń mieszana (Nóż taktyczny: kłute+cięte), zgodnie z literalnym brzmieniem.
@@ -420,8 +420,8 @@ export const SZTUCZKI = Object.freeze({
         where: "actors/samuraj.mjs"
       },
       {
-        what: "TT +1, gdy trzyma broń zadającą obrażenia cięte — Active Effect na system.attributes.ac.bonus, "
-          + "dopinany/odpinany przy zmianie ekwipunku.",
+        what: "TT +1, gdy trzyma finezyjną broń białą zadającą obrażenia cięte — Active Effect na "
+          + "system.attributes.ac.bonus, dopinany/odpinany przy zmianie ekwipunku.",
         where: "actors/samuraj.mjs"
       }
     ],

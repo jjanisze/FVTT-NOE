@@ -1,22 +1,23 @@
 /**
  * Neuroshima 5e — Samuraj (Sztuczka, `sztuczki-data.mjs`).
  *
- * RAW (podręcznik, "SAMURAJ"): "+1 SIŁ lub ZRC; +1 do Testów Ataku i obrażeń bronią sieczną;
- * wyciągnięcie finezyjnej broni siecznej bez Darmowej Interakcji; TT +1 z taką bronią w ręku."
+ * RAW (NOE s. 107, "SAMURAJ"): +1 SIŁ lub ZRC; Osełka — +1 do Testów Ataku i obrażeń bronią
+ * zadającą obrażenia cięte; Dobycie — finezyjna broń biała (cięte) bez darmowej interakcji;
+ * Zasłona — TT +1, gdy dzierżysz finezyjną broń białą zadającą obrażenia cięte.
  *
  * Trzy z czterech klauzul mają tu kod:
  *   • +1 do Testu Ataku      — `dnd5e.preRollAttack`
  *   • +1 do obrażeń          — `dnd5e.preRollDamage`
  *   • TT +1 (czyli KP +1)    — Active Effect, dopinany zależnie od trzymanej broni
  *
- * Czwarta ("wyciągnięcie ... bez Darmowej Interakcji") nie ma czego zaczepić: ten system nie
+ * Czwarta (Dobycie) nie ma czego zaczepić: ten system nie
  * śledzi darmowych interakcji jako zasobu. Zadeklarowana w `manual`, nie udawana.
  *
- * ## Co znaczy "broń sieczna"
+ * ## Co znaczy "broń zadająca obrażenia cięte"
  *
  * Broń, której obrażenia zawierają typ `slashing`. Świadomie **nie** wymagamy, żeby był to
  * jedyny typ — Nóż taktyczny Victora zadaje "kłute+cięte" i wg literalnego brzmienia zasady
- * nadal jest bronią sieczną. Czytamy zarówno `system.damage.base.types`, jak i typy z części
+ * nadal się liczy. Czytamy zarówno `system.damage.base.types`, jak i typy z części
  * obrażeń aktywności, bo broń z katalogu wypełnia jedno albo drugie zależnie od tego, którą
  * fabryką powstała.
  *
@@ -26,7 +27,7 @@
  *
  * ## Dlaczego AE, a nie stały bonus
  *
- * TT +1 przysługuje tylko "z taką bronią w ręku", więc efekt musi się pojawiać i znikać razem
+ * TT +1 przysługuje tylko z finezyjną bronią białą w ręku, więc efekt musi się pojawiać i znikać razem
  * z założeniem/zdjęciem broni. Kształt (debounce + serializacja per aktor + backfill na
  * `ready`) skopiowany z `bez-dna.mjs`, który rozwiązuje dokładnie ten sam problem dla Udźwigu.
  */
@@ -62,9 +63,16 @@ export function isSlashingWeapon(item) {
   return false;
 }
 
-/** Broń sieczna aktualnie trzymana w ręku (założona). */
-function equippedSlashing(actor) {
-  return actor?.items?.find(i => i.system?.equipped && isSlashingWeapon(i)) ?? null;
+/** Zasłona: finezyjna broń biała zadająca obrażenia cięte. */
+export function isZaslonaWeapon(item) {
+  return isSlashingWeapon(item)
+    && item.system?.type?.value === "biala"
+    && (item.system?.properties?.has?.("fin") ?? false);
+}
+
+/** Broń do Zasłony aktualnie trzymana w ręku (założona). */
+function equippedZaslona(actor) {
+  return actor?.items?.find(i => i.system?.equipped && isZaslonaWeapon(i)) ?? null;
 }
 
 function _hasSamuraj(actor) {
@@ -81,7 +89,7 @@ async function _syncSamurajEffect(actor) {
      skasowaniu aktora. Patrz `scripts/doc-liveness.mjs`. */
   if (!isDocumentLive(actor)) return;
   const existing = actor.effects.get(EFFECT_ID) ?? actor.effects.find(e => e.getFlag(MODULE_ID, EFFECT_FLAG));
-  const weapon = _hasSamuraj(actor) ? equippedSlashing(actor) : null;
+  const weapon = _hasSamuraj(actor) ? equippedZaslona(actor) : null;
 
   if (!weapon) {
     if (existing) await existing.delete();
@@ -191,6 +199,6 @@ export function registerSamuraj() {
 
 /** Powierzchnia dla testów Quench — Warstwa 4/5 (TESTING.md). */
 export const __testing = Object.freeze({
-  isSlashingWeapon, equippedSlashing, onPreRollAttack, onPreRollDamage,
+  isSlashingWeapon, isZaslonaWeapon, equippedZaslona, onPreRollAttack, onPreRollDamage,
   syncSamurajEffect: _syncSamurajEffect, EFFECT_ID, BONUS
 });

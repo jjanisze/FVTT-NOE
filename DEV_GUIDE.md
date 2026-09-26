@@ -235,6 +235,7 @@ LevelDB. Patrz §10.2 (klasy) i §11.2 (bestiariusz) po pełny pipeline per wars
 ```bash
 npm run build:packs           # dev/packs/build-packs.mjs — wszystkie kompendia z aktualnych *-data.mjs
 npm run validate:packs        # regresja: UUID-y, liczba wyborów per poziom, recovery
+node dev/packs/diff-packs.mjs <tmp>  # rekordy z `build-packs.mjs --out=<tmp>` vs packs/ (także przy uruchomionym FVTT)
 npm run build:classes         # gen_features.py → ikony → packi → walidacja (klasy/profesje/zdolności)
 npm run build:bestiary        # extract → gen → pack (bestiariusz)
 npm run build:status-icons    # dev/icons/gen_status_numerals.mjs — ikony poziomów Zranienia i Wyczerpania

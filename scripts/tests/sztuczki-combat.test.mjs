@@ -249,15 +249,16 @@ export function registerSztuczkiCombatTests(quench) {
 
     describe("Samuraj", function () {
       let sam;            // aktor z Sztuczką
-      let katana;         // sieczna
-      let palna;          // niesieczna — kontrola
-      let mieszana;       // kłute+cięte, ma się liczyć jako sieczna
+      let katana;         // cięta, finezyjna
+      let palna;          // obuchowa — kontrola
+      let mieszana;       // kłute+cięte, ma się liczyć
+      let topor;          // cięty, ale niefinezyjny — Osełka tak, Zasłona nie
 
-      const meleeData = (name, types) => ({
+      const meleeData = (name, types, properties = []) => ({
         name: `${SCRATCH_PREFIX} ${name}`,
         type: "weapon",
         system: {
-          type: { value: "biala" }, equipped: true,
+          type: { value: "biala" }, equipped: true, properties,
           damage: { base: { number: 1, denomination: 8, types } }
         }
       });
@@ -269,20 +270,29 @@ export function registerSztuczkiCombatTests(quench) {
       before(async function () {
         sam = await scratchActor({ name: `${SCRATCH_PREFIX} samuraj` });
         const made = await sam.createEmbeddedDocuments("Item", [
-          meleeData("Katana testowa", ["slashing"]),
+          meleeData("Katana testowa", ["slashing"], ["fin"]),
           meleeData("Pałka testowa", ["bludgeoning"]),
-          meleeData("Nóż testowy", ["piercing", "slashing"]),
+          meleeData("Nóż testowy", ["piercing", "slashing"], ["fin", "lgt"]),
+          meleeData("Topór testowy", ["slashing"], ["two"]),
           sztuczkaItem("samuraj", `${SCRATCH_PREFIX} Samuraj`)
         ], { render: false });
         katana   = made.find(i => i.name.includes("Katana"));
         palna    = made.find(i => i.name.includes("Pałka"));
         mieszana = made.find(i => i.name.includes("Nóż"));
+        topor    = made.find(i => i.name.includes("Topór"));
       });
 
-      it("rozpoznaje broń sieczną, także o mieszanym typie obrażeń", function () {
+      it("rozpoznaje broń zadającą obrażenia cięte, także o mieszanym typie obrażeń", function () {
         expect(samuraj.isSlashingWeapon(katana), "katana").to.be.true;
         expect(samuraj.isSlashingWeapon(mieszana), "kłute+cięte").to.be.true;
+        expect(samuraj.isSlashingWeapon(topor), "topór").to.be.true;
         expect(samuraj.isSlashingWeapon(palna), "obuchowa").to.be.false;
+      });
+
+      it("Zasłona wymaga finezyjnej broni białej (NOE s. 107)", function () {
+        expect(samuraj.isZaslonaWeapon(katana), "katana").to.be.true;
+        expect(samuraj.isZaslonaWeapon(mieszana), "nóż").to.be.true;
+        expect(samuraj.isZaslonaWeapon(topor), "topór bez fin").to.be.false;
       });
 
       it("dokłada +1 do Testu Ataku bronią sieczną", function () {
@@ -331,6 +341,20 @@ export function registerSztuczkiCombatTests(quench) {
         await waitFor(() => sam.effects.some(e => e.getFlag(MODULE_ID, "samurajEffect")),
           { label: "powrót efektu" });
         expect(sam.system.attributes.ac.bonus).to.equal(withWeapon);
+      });
+
+      it("sam niefinezyjny topór w ręku nie daje TT +1", async function () {
+        const finezyjne = sam.items.filter(i => samuraj.isZaslonaWeapon(i));
+        await sam.updateEmbeddedDocuments("Item",
+          finezyjne.map(i => ({ _id: i.id, "system.equipped": false })), { render: false });
+        await waitFor(() => !sam.effects.some(e => e.getFlag(MODULE_ID, "samurajEffect")),
+          { label: "zdjęcie efektu przy samym toporze" });
+        expect(sam.items.get(topor.id).system.equipped, "topór nadal w ręku").to.be.true;
+
+        await sam.updateEmbeddedDocuments("Item",
+          finezyjne.map(i => ({ _id: i.id, "system.equipped": true })), { render: false });
+        await waitFor(() => sam.effects.some(e => e.getFlag(MODULE_ID, "samurajEffect")),
+          { label: "powrót efektu" });
       });
 
       it("rejestr automatyki mówi `partial`, bo klauzula o dobywaniu zostaje MG", function () {
