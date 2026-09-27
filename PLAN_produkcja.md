@@ -124,6 +124,10 @@ i łagodzi ST (D26, §5.1c).
 | D30 | Mołotow „1 minuta” | błąd tabeli, nie wyjątek — jedyny wiersz, którego czasu nie daje wzór przy żadnej cenie, a tekst nie ogłasza go wyjątkiem (por. „Wyjątki są ważniejsze od zasad ogólnych”, s. 23). Bez WKK wiersz zostaje dosłownie (D22); z WKK obowiązuje D26 | WKK |
 | D31 | Literówki w tabelach | Wózek: 9 MK zamiast 19 MK; Celownik optyczny: 40 h zamiast 20 h. Przyjęte w obu trybach (errata) | NOE (errata MG) |
 | D32 | Co daje ×0,5 | **pełny zestaw narzędzi profesji pod ręką** (postać albo kontener Roboty), obok zwykłego wymogu przedmiotu. Gdy zwykły wymóg już obejmuje cały zestaw — ×0,5 zawsze; gdy nie — brakujące narzędzie profesji jest opcjonalnym przyspieszeniem. Zestaw nigdy nie jest wymagany. Przykłady: §5.1c | WKK |
+| D33 | Szybka produkcja a profesja z WKK | cecha profesji jej nie skraca — Szybka produkcja jest „poza zasadami produkcji” i ma własną stawkę; działa tylko Fabrykator | WKK |
+| D34 | Naprawa a mnożniki | Fabrykator i cecha profesji nie skracają napraw (oba mówią o produkowaniu); czasy z tabeli naprawy. TODO: sposób na szybsze naprawy (§15) | NOE (odczyt) |
+| D35 | Pogromca | Robota 100 h / 100 gb surowców (podział jak broń palna), **bez Testu** — zdolność opisuje wynik; narzędzia rusznikarza jako zwykły wymóg broni palnej. Naboje: aktywność DO, do PB sztuk po 10 gb surowców, bez Testu | NOE |
+| D36 | Trucizna Truciciela | jeden przedmiot „Olejek trujący” z ST twórcy (8 + INT + PB) zapisanym jako parametr w chwili wytworzenia; nazwa z ST („Olejek trujący (ST 14)”), stos tylko przy tym samym ST. Nałożenie w Akcji Bonusowej na ostrze albo do 3 grotów, aktywny 1 min — wzorzec karty z `weapons/dozownik.mjs` | NOE |
 
 ---
 
@@ -178,7 +182,7 @@ Trzy źródła przepisów:
    `(zestaw profesji) & (zwykły wymóg przedmiotu)`. Z WKK tabela daje już tylko listę przedmiotów,
    podział surowców i zestaw profesji (D26). Tabela elaboracji (s. 136) należy do narzędzia, nie
    profesji — jej przepisy ma każdy biegły w narzędziach rusznikarza. Pogromca i Truciciel to
-   zdolności z własnymi regułami, nie tabele (**P14**).
+   zdolności z własnymi regułami, nie tabele (D35, D36).
 2. **Generator z katalogów** — `weapons-data`, `armor-data`, `gear-data`, `chemia-data`, `ammo-data`,
    `addons-data`, `prowiant-data`, `toolkits-data`, `magazines-data`, `vehicles-data` → wzór +
    **jawna lista narzędzi per wpis** (domyślna z kategorii, z list „Produkcja” narzędzi,
@@ -487,8 +491,8 @@ dostaje jeden nowy hook `neuroshima.rerolled`, żeby Forsowanie / Fuks rozstrzyg
 - **Zastosowanie w `dnd5e.restCompleted`**, nie w `pre…` — anulowany odpoczynek nie zjada godzin.
   Jedna zbiorcza wiadomość, jeden dźwięk, Test po odpoczynku, jeśli któraś Robota przekroczyła 100%.
   Bez osobnego przesuwania czasu — odpoczynek sam przesuwa zegar o 4 h / 24 h.
-- **Aktywności DO:** Truciciel (1 porcja trucizny, narzędzia chemika, bez surowców), naboje do
-  Pogromcy (do PB sztuk, 10 gb surowców każdy).
+- **Aktywności DO:** Truciciel (1 porcja „Olejku trującego” z ST twórcy, narzędzia chemika, bez
+  surowców — D36), naboje do Pogromcy (do PB sztuk, 10 gb surowców każdy, bez Testu — D35).
 - **Drugi klient rejestru:** czyszczenie broni (`weapons/jams.mjs`) — dzieli budżet KO.
   Przyszli klienci: pomoc medyczna (M1), gotowanie i polowanie (`party-supplies.mjs`), rozrywka /
   plotki / hazard (M5).
@@ -507,8 +511,8 @@ Speca: nieużywana obniża moc klasy bardziej niż którakolwiek inna zdolność
 - **Kiedy:** zawsze, gdy jest ładunek — także w eksploracji. 20 gb = 20 minut = dwie tury po 10 min.
 - **Koszyk:** przepisy z ZP (`[⚡]` przy tych, które mieszczą się w pozostałym budżecie) × ilość.
   Budżet liczy **wartość przedmiotów** — 25 gb, 50 gb przy `szybka-produkcja-2`.
-- **Koszt:** zwykłe surowce (Przydasie −50%); czas Σ gb × 1 min (Fabrykator × 0,5; cecha profesji z
-  WKK — **P12**), pokazany na czacie z przyciskiem MG do przesunięcia zegara.
+- **Koszt:** zwykłe surowce (Przydasie −50%); czas Σ gb × 1 min (Fabrykator × 0,5; cecha profesji
+  z WKK nie działa — D33), pokazany na czacie z przyciskiem MG do przesunięcia zegara.
 - **Wymaga:** ZP, narzędzi i surowców **przy sobie** (praca w polu; z puli najpierw przenieść).
   Braki narzędzi jak w D23 — da się przeklikać, karta czatu nosi ⚠.
 - **Bez Testu.** Zużywa ładunek, tworzy przedmioty od razu.
@@ -523,7 +527,8 @@ Speca: nieużywana obniża moc klasy bardziej niż którakolwiek inna zdolność
 - **Drobnostka** (1k4 min) nie tworzy Roboty — wykonuje się od razu, czas idzie na czat.
 - **Dostęp i narzędzia.** Naprawa nie wymaga Schematu ani Wprawy — wystarczą narzędzia (s. 146).
   Domyślnie zwykły wymóg produkcji celu (broń palna — rusznikarza, biała — kowala, pancerz —
-  krawca albo kowala wg materiału, pojazd — mechanika); MG może zmienić. Mnożniki czasu — **P13**.
+  krawca albo kowala wg materiału, pojazd — mechanika); MG może zmienić. Mnożniki czasu produkcji
+  nie skracają naprawy (D34) — szybsze naprawy to TODO w §15.
 - **Przepięcie istniejących napraw** (dziś sam Test, bez kosztu i czasu — L16):
   - broń palna uszkodzona, `jams.mjs` `attemptRepair` → „Trochę roboty” (ST 15 już zgodne,
     30% ceny w CZ/MK, 1k4 h) → sukces woła istniejące `clearDamage`;
@@ -644,6 +649,7 @@ odpoczynku) i kończy przedmiot, surowce schodzą z panelu, naprawa broni i panc
 
 | Pozycja | Uwagi |
 |---|---|
+| **TODO: szybsze naprawy** | Naprawy będą częste, a nic ich dziś nie skraca (D34). Do zaprojektowania jako WKK. Kandydaci: warsztat (Miejsce z pełnym zestawem narzędzi celu), pełny zestaw profesji jak w D32, drugi biegły wykonawca, domowa Sztuczka |
 | Kolejka partii („×N”, nadwyżka godzin do następnej) | po E2, jeśli amunicja okaże się uciążliwa |
 | Rozbudowa pomocników | D9 — dziś ręcznie |
 | Preset Kolorów (Rdza / Rtęć → Wytrzymałość pancerzy wł.) | razem z profilami Kolorów, PLAN_beta §4 |
@@ -659,11 +665,7 @@ odpoczynku) i kończy przedmiot, surowce schodzą z panelu, naprawa broni i panc
 
 ## 16. Otwarte pytania
 
-| # | Pytanie | Propozycja |
-|---|---|---|
-| P12 | Szybka produkcja a cecha profesji z WKK — czy ×0,75 / ×0,5 skraca też jej minuty? | **nie** — Szybka produkcja jest „poza zasadami produkcji” i ma własną, już krótką stawkę; działa tylko Fabrykator |
-| P13 | Naprawa a mnożniki — czy Fabrykator i cecha profesji skracają naprawy? | **nie** — oba mówią o produkowaniu; czasy naprawy (1k4 min / 1k4 h / 2k4 h) zostają. Alternatywa, jeśli w kampanii w biegu naprawy mają być szybsze: te same mnożniki co produkcja |
-| P14 | Pogromca (s. 99) i Truciciel (s. 94): RAW podaje przy Pogromcy tylko 100 gb surowców i 100 h (bez ST, Testu i narzędzi), a trucizna Truciciela ma ST twórcy (8 + INT + PB), więc to inny przedmiot niż „Trucizna (prosta)” | Pogromca: Robota 100 h / 100 gb (podział jak broń palna), **bez Testu** (zdolność opisuje wynik), narzędzia rusznikarza jako zwykły wymóg broni palnej; naboje — aktywność DO. Truciciel: aktywność DO tworząca własny przedmiot z zapisanym ST twórcy |
+Brak otwartych pytań.
 
 Rozstrzygnięte 2026-09-27/28: P1 → D16, P2 → D17, P3 → D18, P4 → D15, P5 → D14 / D15 / D25, P6 → D19,
-P7 → D20 + §8.1, P8 → D22, P9 → D25, P10 → D24, P11 → D32.
+P7 → D20 + §8.1, P8 → D22, P9 → D25, P10 → D24, P11 → D32, P12 → D33, P13 → D34, P14 → D35 / D36.
