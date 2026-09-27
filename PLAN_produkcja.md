@@ -1,6 +1,7 @@
 # PLAN — Produkcja: Roboty, Schematy, Wprawa, Naprawa
 
-> Status: **PROJEKT** (2026-09-27, moduł v0.16.x). Rozwinięcie kamienia **M2** z
+> Status: **PROJEKT ZAMKNIĘTY** (2026-09-28, moduł v0.16.x) — decyzje D1–D36, brak otwartych
+> pytań, kodu jeszcze nie ma. Następny krok: **E0** (§13). Rozwinięcie kamienia **M2** z
 > [PLAN_beta.md](PLAN_beta.md), brane **poza kolejnością** (decyzja MG). Wiersz macierzy:
 > „Produkcja przedmiotów” w [IMPLEMENTATION.md § Stan projektu](IMPLEMENTATION.md#stan-projektu) — dziś ❌.
 >
