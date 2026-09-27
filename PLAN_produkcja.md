@@ -18,7 +18,7 @@
 
 | Termin | Znaczenie | Gdzie żyje |
 |---|---|---|
-| **Przepis** | Jedna rzecz do zrobienia: wynik, ST, godziny, surowce, narzędzia. **Nie zależy od źródła dostępu.** | `config/recipes-data.mjs` |
+| **Przepis** | Jedna rzecz do zrobienia: wynik, ST, czas, surowce, narzędzia. **Nie zależy od źródła dostępu.** | `config/recipes-data.mjs` |
 | **Schemat** | Fizyczny przedmiot otwierający dostęp do jednego przepisu. Kupowany, sprzedawany, łupiony. | Ekwipunek (typ `loot`) |
 | **Wprawa** | Ten sam dostęp co Schemat, ale wrodzony — nie do sprzedania ani oddania. | zdolności + flaga aktora |
 | **Proste** | Przedmioty, które nie wymagają schematu (≤ 10 gb, s. 146) — wystarczy biegłość w narzędziach. | pochodne |
@@ -32,7 +32,8 @@
 i Proste tylko otwierają drzwi. Każdy przedmiot ma **przepis standardowy** (wzór z s. 144–146);
 tabele profesji Speca to **przepisy profesji** — dodatkowe i tylko dla tej profesji (D22). Kupiony
 schemat długiego karabinu daje więc przepis standardowy (ST 30 z wartości), a Rusznikarstwo dokłada
-swój (ST 25, s. 81).
+swój (ST 25, s. 81). Z WKK profesja nie dokłada osobnego przepisu — przyspiesza wykonawcę
+i łagodzi ST (D26, §5.1c).
 
 ---
 
@@ -69,7 +70,7 @@ swój (ST 25, s. 81).
 - **Schematy:** potrzebne powyżej 10 gb; cena = cena przedmiotu, dostępność o połowę mniejsza.
   Spec 3. poziomu dostaje schematy z profesji za darmo.
 - **Tabele profesji (s. 80–84) i elaboracji (s. 136):** własne ST / czas / surowce, także
-  alternatywy (`CH/MO`, `MK/MO`). Nadpisują wzory. Rusznikarstwo zawiera wiersze-kategorie
+  alternatywy (`CH/MO`, `MK/MO`). Stoją obok wzoru, nie zamiast (D22). Rusznikarstwo zawiera wiersze-kategorie
   („broń palna krótka: ST 15, cena × 1 h, CZ + MK = 50%”).
 - **Postój:** KO — produkcja, naprawa, czyszczenie broni i gambling łącznie ≤ 1 h; dłużej przerywa
   KO. DO — produkcja dozwolona.
@@ -87,7 +88,7 @@ swój (ST 25, s. 81).
 
 ---
 
-## 3. Decyzje (MG, 2026-09-27)
+## 3. Decyzje (MG, 2026-09-27/28)
 
 | # | Temat | Decyzja | Kosz |
 |---|---|---|---|
@@ -106,7 +107,7 @@ swój (ST 25, s. 81).
 | D13 | Wprawa od MG | dowolna, jako luźna nagroda fabularna, z notatką („noc przy wódce z akwizytorem kotłów → termostat”). RAW to przewiduje: inne przedmioty „po konsultacji z MG” (s. 134) | NOE |
 | D14 | Porzucenie | postęp ≤ 10% → zwrot 100% surowców; powyżej → 50%. **Porzucanie w całości jest WKK** — RAW go nie przewiduje, więc bez WKK przycisku nie ma | WKK |
 | D15 | Waga i rozmiar Schematu | 1 g na godzinę produkcji przepisu (traktor 1000 h → 1 kg); bez WKK 0 kg (niezdefiniowane). Trzy rozmiary z ikonami wg godzin: Notatka ≤ 40 h, Instrukcja ≤ 250 h, Dokumentacja > 250 h | WKK (waga) / NOE (ikony) |
-| D16 | Narzędzia a schematy | Każdy przepis ma **listę wymaganych narzędzi** (może być pusta; zwykle 0–1, czasem więcej) — wszystkie obowiązkowe; RAW nie zna obejścia, chyba że tekst wprost na nie pozwala (s. 134: bez odpowiednich narzędzi nie wykonasz skomplikowanych czynności). Moduł braki oznacza i pozwala je przeklikać (D23). **Narzędzia nie dają schematów**: lista „Produkcja” narzędzia mówi, *czym* się robi, nie że *umiesz*. Próg 10 gb obowiązuje zawsze. Wymóg to **wyrażenie I / LUB z nawiasami** (§5.1a) — bełty: kowal LUB stolarz | NOE |
+| D16 | Narzędzia a schematy | Każdy przepis ma **wymóg narzędzi** (może być pusty; zwykle 0–1 narzędzie, czasem więcej, także z „lub”) — obowiązkowy; RAW nie zna obejścia, chyba że tekst wprost na nie pozwala (s. 134: bez odpowiednich narzędzi nie wykonasz skomplikowanych czynności). Moduł braki oznacza i pozwala je przeklikać (D23). **Narzędzia nie dają schematów**: lista „Produkcja” narzędzia mówi, *czym* się robi, nie że *umiesz*. Próg 10 gb obowiązuje zawsze. Wymóg to **wyrażenie I / LUB z nawiasami** (§5.1a) — bełty: kowal LUB stolarz | NOE |
 | D17 | Naprawa wyszczerbionej broni białej | stopień wg liczby uszkodzeń (kroków kości od oryginału): 1 → Drobnostka (ST 10), 2 → Trochę roboty (ST 15), 3+ → Skomplikowana harówa (ST 20, maks.). Cały wiersz tabeli — koszt i czas razem z ST | NOE |
 | D18 | Wytrzymałość pancerzy | ustawienie świata, domyślnie **wył.**; w świecie kampanii **wł.** RAW nie wiąże jej z Kolorami (Rdza i Rtęć podnoszą tylko Awaryjność broni, s. 201–202) — domyślne wł. dla Rdzy / Rtęci to ewentualny preset WKK, gdy powstaną profile Kolorów (PLAN_beta §4) | NOE (+ WKK preset) |
 | D19 | Przejęcie Roboty | jak każde przeniesienie przedmiotu. Robota na innej postaci → nowy kierownik; na pojeździe / w Miejscu → kierownik bez zmian. Gracz → gracz niewymagane (nie zabronione), ale zawsze możliwe przez MG | NOE (infrastruktura) |
@@ -116,12 +117,13 @@ swój (ST 25, s. 81).
 | D23 | Braki narzędzi | **oznaczane, nie blokowane**: brak zestawu albo biegłości → przepis w grupie ⛔, ale z przyciskiem „Zacznij mimo braków”. Robota nosi plakietkę ⚠ z listą braków, karta startu jest głośna i ma przyciski MG *Zatwierdź* (zdejmuje plakietkę) i *Zmień ST*; Test końcowy powtarza ostrzeżenie. Nie da się przeklikać: braku dostępu (Schemat / Wprawa — to nadaje MG) i braku surowców | NOE |
 | D24 | Wprawa z profesji | RAW łączy fizyczny schemat z wiedzą („otrzymujesz schematy”); tu to **Wprawa**: profesja daje przepisy standardowe wszystkich przedmiotów ze swojej tabeli **i** ich przepisy profesji. Żaden fizyczny Schemat nie powstaje — zdolność nie może tworzyć łupu | NOE (odczyt) |
 | D25 | Waga Roboty bez WKK | waga surowców, które weszły do Roboty, przez cały czas; po ukończeniu przedmiot waży swoje. Nic nie znika ani nie powstaje — bez worka bez dna | NOE (brak wartości RAW, decyzja MG) |
-| D26 | Przepisy profesji z WKK | przepis standardowy z tymi samymi surowcami (**bez rabatu**), krótszym czasem (D27) i ST bez stopnia 30: powyżej 75 gb zawsze 25 (wariant C — czysty „tylko czas” dawałby pojazdom Mechaniki ST 30). Z WKK profesja nie jest osobnym przepisem, tylko cechą wykonawcy, jak Fabrykator: liczona przy każdej pracy i przy Teście. Tabela daje już tylko listę przedmiotów, podział surowców i zestaw narzędzi profesji. Bez WKK — D22 bez zmian | WKK |
-| D27 | Czas profesji z WKK | ×0,75 domyślnie; ×0,5 z dodatkowym narzędziem — co nim jest: **P11** | WKK |
+| D26 | Przepisy profesji z WKK | przepis standardowy z tymi samymi surowcami (**bez rabatu** — Przydasie działa jak zawsze), krótszym czasem (D27) i ST bez stopnia 30: powyżej 75 gb zawsze 25 (wariant C — czysty „tylko czas” dawałby pojazdom Mechaniki ST 30). Z WKK profesja nie jest osobnym przepisem, tylko cechą wykonawcy, jak Fabrykator: liczona przy każdej pracy i przy Teście. Tabela daje już tylko listę przedmiotów, podział surowców i zestaw narzędzi profesji. Bez WKK — D22 bez zmian | WKK |
+| D27 | Czas profesji z WKK | ×0,75 domyślnie; ×0,5 z pełnym zestawem narzędzi profesji pod ręką (D32) | WKK |
 | D28 | Podłoga mnożników | iloczyn wszystkich mnożników czasu nie schodzi poniżej ×0,25 (profesja ×0,5 · Fabrykator ×0,5 = dokładnie 0,25) | WKK |
-| D29 | Czas w minutach | czas standardowy ze wzoru RAW (z zaokrągleniem nieparzystej ceny), mnożniki na minutach, w dół do pełnej minuty, wyświetlanie GG:MM. Postęp Roboty i budżety odpoczynku (KO 60 min, DO 600 min) też w minutach | NOE (infrastruktura) |
-| D30 | Mołotow „1 minuta” | błąd tabeli, nie wyjątek. Autor miał okazję powołać się na „Wyjątki są ważniejsze od zasad ogólnych” (s. 23) i tego nie zrobił. Bez WKK wiersz zostaje dosłownie (D22); z WKK obowiązuje D26 | WKK |
+| D29 | Czas w minutach | czas standardowy ze wzoru RAW (z zaokrągleniem nieparzystej ceny), mnożniki na minutach, w dół do pełnej minuty, **minimum 1 minuta**, wyświetlanie GG:MM. Postęp Roboty i budżety odpoczynku (KO 60 min, DO 600 min) też w minutach | NOE (infrastruktura) |
+| D30 | Mołotow „1 minuta” | błąd tabeli, nie wyjątek — jedyny wiersz, którego czasu nie daje wzór przy żadnej cenie, a tekst nie ogłasza go wyjątkiem (por. „Wyjątki są ważniejsze od zasad ogólnych”, s. 23). Bez WKK wiersz zostaje dosłownie (D22); z WKK obowiązuje D26 | WKK |
 | D31 | Literówki w tabelach | Wózek: 9 MK zamiast 19 MK; Celownik optyczny: 40 h zamiast 20 h. Przyjęte w obu trybach (errata) | NOE (errata MG) |
+| D32 | Co daje ×0,5 | **pełny zestaw narzędzi profesji pod ręką** (postać albo kontener Roboty), obok zwykłego wymogu przedmiotu. Gdy zwykły wymóg już obejmuje cały zestaw — ×0,5 zawsze; gdy nie — brakujące narzędzie profesji jest opcjonalnym przyspieszeniem. Zestaw nigdy nie jest wymagany. Przykłady: §5.1c | WKK |
 
 ---
 
@@ -136,7 +138,7 @@ swój (ST 25, s. 81).
 | L5 | Kilka narzędzi w przepisie, jeden „Test używanych narzędzi” | gracz wybiera jedno z narzędzi, którymi spełnił wyrażenie (§5.1a); domyślnie to z najwyższą premią | NOE (odczyt) |
 | L6 | Brak zasad porzucenia | porzucanie w całości WKK (D14); bez WKK nie istnieje | WKK |
 | L7 | Brak wagi Robót i Schematów | WKK: D4, D15. Bez WKK: Schemat 0 kg (D15); Robota — waga surowców wejściowych (D25) | WKK |
-| L8 | Doba = ? (limit 10 h) | `dayCounter` z `actors/health-panel.mjs`; licznik godzin pracy na aktorze; przekroczenie = ostrzeżenie | NOE |
+| L8 | Doba = ? (limit 10 h) | `dayCounter` z `actors/health-panel.mjs`; licznik minut realnej pracy na aktorze (nie postępu); przekroczenie = ostrzeżenie | NOE |
 | L9 | KO: 1 h zajęć łącznie, dłużej przerywa KO | wspólny budżet 1 h w oknie KO (produkcja + naprawa + czyszczenie broni); przekroczenie = czerwone „KO przerwany — bez korzyści”, bez blokady | NOE |
 | L10 | Szybka produkcja: Test? Przydasie/Fabrykator? | bez Testu (D10); Przydasie tnie surowce, Fabrykator minuty | NOE (odczyt) |
 | L11 | Podział surowców „decyduje MG” | domyślne profile podziału per kategoria, edytowalne przy starcie; czat oznacza „zmieniony podział”, MG może zawetować | NOE |
@@ -146,6 +148,7 @@ swój (ST 25, s. 81).
 | L15 | Porażka naprawy — RAW milczy | jak przy produkcji: czas przepada, surowce zostają | NOE (odczyt) |
 | L16 | Dzisiejsze naprawy broni (`weapons/jams.mjs`, `weapons/melee-degradation.mjs`) to sam Test — bez kosztu i czasu; naprawa broni białej jako „Akcja” sprzeczna z RAW (min. 1k4 min) | przepięte na tabelę naprawy w E7 | NOE |
 | L17 | Wytrzymałość pancerzy jest opcjonalna; PLAN_beta §4 mówi „ręcznie” | ustawienie świata — D18 | NOE |
+| L18 | Kolory zmieniają ceny (Rdza: wszystko ×2) — czy produkcja też drożnieje? | nie: wzór, próg schematu i ST liczą z ceny **podręcznikowej** (s. 144–146). Kolor zmienia tylko ceny rynkowe, także schematów | NOE (odczyt) |
 
 ---
 
@@ -159,7 +162,7 @@ swój (ST 25, s. 81).
   wynik: { typ: "item", ref: "amunicja:grenade-frag", ilosc: 1 },  // item | aktor | ulepszenie | usluga
   jednorazowy: true,
   cena: 70,                                     // gb za sztukę: próg schematu, ST (gdy brak tabeli)
-  st: 20, godziny: 35,                          // z tabeli albo ze wzoru
+  st: 20, minuty: 2100,                         // 35 h; z tabeli albo ze wzoru (D29)
   surowce: [{ typy: ["CH"], gb: 30 }, { typy: ["CZ"], gb: 4 }, { typy: ["MK"], gb: 1 }],
   narzedzia: "chemika & rusznikarza",          // wyrażenie §5.1a; "" = bez narzędzi
   tagi: ["pirotechnika"],                       // "elektronika", "pojazd-mechaniczny" → Ułatwienia z Pochodzeń
@@ -169,11 +172,13 @@ swój (ST 25, s. 81).
 
 Trzy źródła przepisów:
 
-1. **Tabele profesji = przepisy profesji** (D22) — Pirotechnika, Rusznikarstwo, Farmacja, Mechanika,
-   Hakerstwo, Serwisowanie, Pogromca. Liczby przepisane ręcznie; wiersze-kategorie Rusznikarstwa
-   rozwijane na konkretne bronie z `weapons-data.mjs`. Wymóg narzędzi składany jako
-   `(narzędzia profesji) & (zwykły wymóg przedmiotu)`. Tabela elaboracji (s. 136) należy do narzędzia,
-   nie profesji — jej przepisy ma każdy biegły w narzędziach rusznikarza.
+1. **Tabele profesji** — Pirotechnika, Rusznikarstwo, Farmacja, Mechanika, Hakerstwo, Serwisowanie.
+   Bez WKK to przepisy profesji (D22): liczby przepisane ręcznie z poprawkami D31, wiersze-kategorie
+   Rusznikarstwa rozwijane na bronie z `weapons-data.mjs`, wymóg narzędzi
+   `(zestaw profesji) & (zwykły wymóg przedmiotu)`. Z WKK tabela daje już tylko listę przedmiotów,
+   podział surowców i zestaw profesji (D26). Tabela elaboracji (s. 136) należy do narzędzia, nie
+   profesji — jej przepisy ma każdy biegły w narzędziach rusznikarza. Pogromca i Truciciel to
+   zdolności z własnymi regułami, nie tabele (**P14**).
 2. **Generator z katalogów** — `weapons-data`, `armor-data`, `gear-data`, `chemia-data`, `ammo-data`,
    `addons-data`, `prowiant-data`, `toolkits-data`, `magazines-data`, `vehicles-data` → wzór +
    **jawna lista narzędzi per wpis** (domyślna z kategorii, z list „Produkcja” narzędzi,
@@ -187,7 +192,8 @@ Trzy źródła przepisów:
 **Jeden wynik, kilka przepisów.** Każdy przedmiot ma przepis standardowy; profesja może dołożyć
 swój. Koktajl Mołotowa: standardowy (chemika, 5 h) i Pirotechniki (chemika & rusznikarza,
 1 minuta, s. 80). Lista pokazuje przepisy, do których postać ma dostęp; przy kilku wykonalnych —
-najpierw najszybszy, gracz może wybrać inny. Schemat zawsze daje przepis standardowy.
+najpierw najszybszy, gracz może wybrać inny. Schemat zawsze daje przepis standardowy. Z WKK zostaje
+jeden przepis — standardowy — a profesja zmienia tylko czas i ST wykonawcy (§5.1c).
 
 Audyt celów (`npm run validate:recipes`): każdy wiersz tabel RAW musi wskazywać istniejący wpis
 katalogu albo mieć jawny `wynik.typ` = `aktor` / `usluga`; każdy wpis katalogu musi mieć ustaloną
@@ -230,20 +236,50 @@ cenach z cenników podręcznika. „Gorszy” = dłużej, więcej surowców albo
 | Wynik | Wiersze |
 |---|---|
 | Gorsze we wszystkim | Medpak, Painkiller, Pocisk-strzykawka, Uzupełnienie m. medyka (Farmacja); Wytrychy elektroniczne (Serwisowanie) |
-| Gorsze w części | Deadline, Alkohol tani, AR-35 BETA, AR-23, Nitrogliceryna, Środki dezynfekujące, proch × 2 (Farmacja / Pirotechnika); Śrutówka podlufowa; Agregat, Miernik skażenia chemicznego, Zapalnik elektryczny; Wózek; .30-06 w elaboracji |
+| Gorsze w części | Deadline, Alkohol tani, AR-35 BETA, AR-23, Nitrogliceryna, Środki dezynfekujące, proch × 2 (Farmacja / Pirotechnika); Śrutówka podlufowa; Agregat, Miernik skażenia chemicznego, Zapalnik elektryczny; .30-06 w elaboracji |
+| Literówki (D31) | Wózek (19 → 9 MK), Celownik optyczny (20 → 40 h) — poprawione w danych w obu trybach |
 | Systemowe | Rusznikarstwo: jedno ST na kategorię broni — tańsza połowa każdej kategorii gorsza od standardu; broń ciężka i specjalna ma lepsze ST, ale dwa razy dłuższy czas (LAW cztery razy, bo jednorazowy) |
 | Do wyjaśnienia | Tornado (cennik 30–100 gb, tabela pasuje do 100; katalog modułu ma 65 — środek przedziału), Monitorek (cennik zna tylko Monitor za 40 gb) |
 | Bez ceny w RAW | Paralotnia, Adapter wifi, Router, Zegarek, oba drony, Zmiana pojemności magazynka, Zamiennik leku, Przeprogramowanie × 3, Pogromca |
 
 W module to nie szkodzi: profesja zawsze daje też przepis standardowy (D24), a lista domyślnie
-wybiera lepszy. `validate:recipes` wypisuje gorsze wiersze jako ostrzeżenia, nie błędy.
+wybiera lepszy. `validate:recipes` wypisuje gorsze wiersze jako ostrzeżenia, nie błędy. Z WKK tabele
+nie niosą już liczb, więc audyt dotyczy tylko trybu RAW.
+
+### 5.1c Profesja z WKK — przykłady (D26–D29, D32)
+
+Zestawy profesji: Pirotechnika — chemika + rusznikarza; Rusznikarstwo — kowala + rusznikarza;
+Farmacja — chemika + aptekarza; Mechanika — mechanika + kowala; Hakerstwo — hakera + elektronika;
+Serwisowanie — chemika + elektronika. Mnożnik = profesja × Fabrykator, nie mniej niż ×0,25; czas
+w minutach, w dół. ST standardowe, ale powyżej 75 gb 25 zamiast 30. Zwykłe wymogi przedmiotów w tabeli
+to przykłady — prawdziwe ustala E0.
+
+| Przypadek | Przedmiot i zwykły wymóg | Wykonawca, narzędzia pod ręką | Czas | ST |
+|---|---|---|---|---|
+| Zwykły wymóg to część zestawu | Koktajl Mołotowa, `chemika` | bez profesji, chemika | 5:00 | 5 |
+| | | Pirotechnik, chemika | 3:45 (×0,75) | 5 |
+| | | Pirotechnik, chemika + rusznikarza | 2:30 (×0,5) | 5 |
+| | | j.w. + Fabrykator | 1:15 (×0,25) | 5 |
+| Zwykły wymóg obejmuje cały zestaw | Laptop wojskowy, `hakera & elektronika` | bez profesji, ze Schematem | 140:00 | 30 |
+| | | Haker — pełny zestaw z definicji | 70:00 (×0,5) | 25 |
+| Zwykły wymóg wychodzi poza zestaw | Paralotnia, `krawca` (cena MG: 100 gb) | Mechanik, krawca | 75:00 (×0,75) | 25 |
+| | | Mechanik, krawca + mechanika + kowala | 50:00 (×0,5) | 25 |
+| Duży projekt | Traktor, `mechanika` | Mechanik, mechanika + kowala + Fabrykator | 250:00 (×0,25) | 25 zamiast 30 |
+
+- **Cecha wykonawcy, nie źródło dostępu.** Pirotechnik pracuje nad granatem z mnożnikiem niezależnie
+  od tego, czy dostęp ma z Wprawy, czy ze Schematu; nad laptopem ze Schematu — standardowo.
+- **Przejęcie.** Robota zaczęta przez kogoś bez profesji i przejęta przez Pirotechnika: od tej chwili
+  każda praca idzie z jego mnożnikiem, postęp w minutach bazowych się nie zmienia.
+- **Zestaw w puli.** Robota przy sobie, zestaw rusznikarza w Ciężarówce → ×0,75 i podpowiedź 🚚
+  „×0,5 po przeniesieniu zestawu”.
+- **Budżety liczą pracę, nie postęp.** 10 h DO Pirotechnika z pełnym zestawem to 20 h postępu.
 
 ### 5.2 Źródła dostępu (ZP)
 
 | Źródło | Skąd moduł wie | Przepisy |
 |---|---|---|
 | Schemat | przedmiot z `flags.<mod>.schemat = { przepisId, snapshot? }` w ekwipunku postaci | jeden |
-| Wprawa z profesji | zdolność z `flags.<mod>.abilityId` ∈ `pirotechnika`, `rusznikarstwo`, `farmacja`, `mechanika`, `hakerstwo`, `serwisowanie`, `pogromca` | przepisy profesji z tabeli + przepisy standardowe tych przedmiotów (D24) |
+| Wprawa z profesji | zdolność z `flags.<mod>.abilityId` ∈ `pirotechnika`, `rusznikarstwo`, `farmacja`, `mechanika`, `hakerstwo`, `serwisowanie`, `pogromca` | przepisy profesji z tabeli + przepisy standardowe tych przedmiotów (D24); z WKK — standardowe + cecha profesji (D26) |
 | Wprawa od MG | `flags.<mod>.wprawa.<przepisId> = { nota, od, kiedy }` | jeden |
 | Proste | cena sztuki ≤ 10 gb | wiele |
 
@@ -266,6 +302,7 @@ flags.<mod>.robota = {
   wagaWejscia: 3.5, wagaWyniku: 0.4, // kg
   stan: "praca",                     // | "test"
   braki: [], zatwierdzone: false,    // D23: przeklikane braki narzędzi i decyzja MG
+  stMG: null,                        // D23: ST nadpisane przez MG — wygrywa z wyliczonym
   testMessageId: null, podejscia: 0
 }
 ```
@@ -277,6 +314,10 @@ flags.<mod>.robota = {
 - **Waga** (`system.weight.value`) aktualizowana przez lejek przy każdej zmianie postępu:
   WKK — `wejście + (wynik − wejście) × postęp`; bez WKK — stała waga wejścia (D25).
 - **Wynik trafia do aktora, który trzyma Robotę.** Traktor zbudowany w Miejscu zostaje w Miejscu.
+- **Pracuje kierownik.** Mnożnik z kierownika przy każdej pracy, ST z kierownika przy Teście (chyba
+  że jest `stMG`). Pomoc innych — D9.
+- **Przełączenie WKK w trakcie Roboty:** przepis zostaje ze snapshotu, mnożniki, ST i waga liczą się
+  według bieżącego ustawienia.
 - Nowa kategoria „Roboty” w pasku udźwigu (`actors/encumbrance-breakdown.mjs`).
 
 ```mermaid
@@ -305,9 +346,9 @@ dostaje jeden nowy hook `neuroshima.rerolled`, żeby Forsowanie / Fuks rozstrzyg
 ```
 ┌ PRODUKCJA ──────────────────────────────────────────────────────────────┐
 │ NA WARSZTACIE                                                           │
-│ [ikona] Granat odłamkowy    ████████░░░░  22/35 h   ST 20    [Pracuj…]  │
+│ [ikona] Granat odłamkowy    ████████░░░░  22:00 / 35:00  ST 20  [Pracuj…]  │
 │         przy sobie · 1,2 kg · CH 30 · CZ 4 · MK 1          [±] [⋯]      │
-│ [ikona] Traktor (mały)      ██░░░░░░░░░░  140/1000 h ST 20   [Pracuj…]  │
+│ [ikona] Traktor (mały)      ██░░░░░░░░░░  140:00 / 1000:00  ST 20  [Pracuj…] │
 │         Warsztat w osadzie · 612 kg                        [±] [⋯]      │
 ├ ⚡ SZYBKA PRODUKCJA ─────────  budżet ▰▰▰▱▱ 15/25 gb · 1/1 · koszyk (2) ─┤
 ├ SUROWCE (w gamblach) ───────────────────────────────────────────────────┤
@@ -316,11 +357,11 @@ dostaje jeden nowy hook `neuroshima.rerolled`, żeby Forsowanie / Fuks rozstrzyg
 │ CZ ███████▓▓▓▓█        9 gb   ← najechany przepis: ▓ potrzebne, czerwień = brak │
 ├ CO UMIESZ ZROBIĆ ───────────────────────── [szukaj] [narzędzie ▾] [źródło ▾] ┤
 │ ✅ Gotowe                                                               │
-│   Granat dymny      Wprawa: Pirotechnika  ST 15  20 h  15 CH 4 CZ 1 MK  [Zacznij] [⚡] │
+│   Granat dymny      Wprawa: Pirotechnika  ST 15  20:00  15 CH 4 CZ 1 MK  [Zacznij] [⚡] │
 │ 🚚 Z puli                                                               │
-│   Mina ppanc.       Schemat               ST 25  60 h  …   [Przenieś i zacznij] │
+│   Mina ppanc.       Schemat               ST 25  60:00  …   [Przenieś i zacznij] │
 │ ⚠ Brakuje surowców                                                      │
-│   Laptop            Schemat               ST 25  80 h  brak 12 gb CE     │
+│   Laptop            Schemat               ST 25  80:00  brak 12 gb CE     │
 │ ⛔ Brak narzędzi lub biegłości                                          │
 │   Pancerz wspomagany  Schemat (sprzedaż: 1000 gb)                       │
 ├ WPRAWA I SCHEMATY ──────────────────────────────────────────────────────┤
@@ -330,8 +371,8 @@ dostaje jeden nowy hook `neuroshima.rerolled`, żeby Forsowanie / Fuks rozstrzyg
 ```
 
 - **Na warsztacie** (na górze): Roboty, których aktor jest kierownikiem albo które trzyma.
-  Pasek postępu, plakietka miejsca, waga, zamrożone surowce. `[Pracuj…]` — godziny (1 / 2 / 4 / 10
-  albo wpisane). `[±]` — korekta w obie strony, przyjmuje `+5`, `-3`, `+10%`, `=50%`; każda korekta
+  Pasek postępu, plakietka miejsca, waga, zamrożone surowce. `[Pracuj…]` — czas pracy (1:00 / 2:00 /
+  4:00 / 10:00 albo wpisany GG:MM). `[±]` — korekta w obie strony, przyjmuje `+5`, `-3`, `+10%`, `=50%`; każda korekta
   idzie na czat (tu MG wpisuje wynik pomocnika — D9). `[⋯]` — Przenieś do…, Porzuć, Test (gdy stan
   „test”).
 - **Surowce — widok produkcyjny.** Wariant panelu z Zasobów, ale w **gamblach**, nie w kilogramach
@@ -341,7 +382,8 @@ dostaje jeden nowy hook `neuroshima.rerolled`, żeby Forsowanie / Fuks rozstrzyg
 - **Co umiesz zrobić** — posortowane wg wykonalności: ✅ gotowe → 🚚 z puli → ⚠ brak surowców
   (pokazany niedobór) → ⛔ brak narzędzi/biegłości (typowy Brutal ze schematem — widzi cenę
   sprzedaży). W grupie alfabetycznie. Filtry: szukaj, narzędzie, źródło. `[⚡]` przy przepisach
-  mieszczących się w budżecie Szybkiej produkcji.
+  mieszczących się w budżecie Szybkiej produkcji. Czas w wierszu to czas **tego** wykonawcy
+  (mnożniki, D32); podpowiedź rozpisuje standard / profesja / pełny zestaw.
 - **Okno startu:** podsumowanie przepisu, alokacja alternatyw, podział (dla przepisów ze wzoru —
   edytowalny, L11), miejsce (domyślnie „tutaj”). Zatwierdzenie → surowce schodzą → Robota → czat.
 - **Schematy w Ekwipunku** — zwykły wiersz `loot`, podpowiedź „Schemat: X — ST, h, narzędzia;
@@ -354,7 +396,7 @@ dostaje jeden nowy hook `neuroshima.rerolled`, żeby Forsowanie / Fuks rozstrzyg
 ## 7. Schematy
 
 - Przedmiot `loot`: cena = cena wyniku (RAW), dostępność ½ (flaga dla handlu w M5 i
-  `Integracje/loot_generator.py`), waga WKK = godziny przepisu w gramach, NOE = 0.
+  `Integracje/loot_generator.py`), waga WKK = godziny przepisu standardowego w gramach, bez WKK 0.
 - **Trzy rozmiary** (ikony — prezentacja, NOE) wg godzin przepisu standardowego (D15):
 
   | Rozmiar | Godziny | Przykład |
@@ -439,7 +481,8 @@ dostaje jeden nowy hook `neuroshima.rerolled`, żeby Forsowanie / Fuks rozstrzyg
   Obie klasy okien (`restTypes.short/long.dialogClass`, wzorzec `config/rest.mjs`) dostają
   sekcję „Zajęcia”.
 - **Budżety:** KO — 1 h łącznie na produkcję, naprawę i czyszczenie broni (L9); DO — 10 h pracy
-  (produkcja + naprawa) na dobę (L8). Przekroczenie = ostrzeżenie, nie blokada.
+  (produkcja + naprawa) na dobę (L8). Liczą minuty realnej pracy, nie postępu (D29). Przekroczenie =
+  ostrzeżenie, nie blokada.
 - **Sekcja Produkcja:** każda Robota w zasięgu z polem godzin; suma na tle budżetu.
 - **Zastosowanie w `dnd5e.restCompleted`**, nie w `pre…` — anulowany odpoczynek nie zjada godzin.
   Jedna zbiorcza wiadomość, jeden dźwięk, Test po odpoczynku, jeśli któraś Robota przekroczyła 100%.
@@ -464,9 +507,10 @@ Speca: nieużywana obniża moc klasy bardziej niż którakolwiek inna zdolność
 - **Kiedy:** zawsze, gdy jest ładunek — także w eksploracji. 20 gb = 20 minut = dwie tury po 10 min.
 - **Koszyk:** przepisy z ZP (`[⚡]` przy tych, które mieszczą się w pozostałym budżecie) × ilość.
   Budżet liczy **wartość przedmiotów** — 25 gb, 50 gb przy `szybka-produkcja-2`.
-- **Koszt:** zwykłe surowce (Przydasie −50%); czas Σ gb × 1 min (Fabrykator × 0,5), pokazany na
-  czacie z przyciskiem MG do przesunięcia zegara.
+- **Koszt:** zwykłe surowce (Przydasie −50%); czas Σ gb × 1 min (Fabrykator × 0,5; cecha profesji z
+  WKK — **P12**), pokazany na czacie z przyciskiem MG do przesunięcia zegara.
 - **Wymaga:** ZP, narzędzi i surowców **przy sobie** (praca w polu; z puli najpierw przenieść).
+  Braki narzędzi jak w D23 — da się przeklikać, karta czatu nosi ⚠.
 - **Bez Testu.** Zużywa ładunek, tworzy przedmioty od razu.
 
 ---
@@ -477,6 +521,9 @@ Speca: nieużywana obniża moc klasy bardziej niż którakolwiek inna zdolność
   przypadek, MG nadpisuje): ST, koszt w surowcach (% ceny celu, podział jak przy produkcji celu),
   czas rzucany przy starcie i widoczny od razu. Test na końcu tym samym przepływem; porażka — L15.
 - **Drobnostka** (1k4 min) nie tworzy Roboty — wykonuje się od razu, czas idzie na czat.
+- **Dostęp i narzędzia.** Naprawa nie wymaga Schematu ani Wprawy — wystarczą narzędzia (s. 146).
+  Domyślnie zwykły wymóg produkcji celu (broń palna — rusznikarza, biała — kowala, pancerz —
+  krawca albo kowala wg materiału, pojazd — mechanika); MG może zmienić. Mnożniki czasu — **P13**.
 - **Przepięcie istniejących napraw** (dziś sam Test, bez kosztu i czasu — L16):
   - broń palna uszkodzona, `jams.mjs` `attemptRepair` → „Trochę roboty” (ST 15 już zgodne,
     30% ceny w CZ/MK, 1k4 h) → sukces woła istniejące `clearDamage`;
@@ -512,15 +559,19 @@ Rozmiar: **S** / **M** / **L** (względnie). Każdy etap kończy się czymś gry
 ### E0 — Czyste reguły i dane (M)
 - [ ] `config/production-rules.mjs`: budżet surowców, godziny, ST z wartości, limit doby, budżety
   KO/DO, Fabrykator, Przydasie, próg schematu, alokacja alternatyw, zwrot (WKK przez
-  `isKobaltEnabled()`, wartości w `wkk/config/production-kobalt.mjs`), waga Roboty, budżet Szybkiej produkcji
+  `isKobaltEnabled()`, wartości w `wkk/config/production-kobalt.mjs`), waga Roboty, budżet Szybkiej produkcji;
+  czas w minutach (D29); cecha profesji z WKK — mnożniki, podłoga, drabina ST (D26–D28, D32)
 - [ ] `SUROWCE_TYPES.gbPerKg` + `actors/surowce-store.mjs` (lejek surowców, przepięcie
   `surowce-inventory.mjs` i `pochodnia.mjs`)
-- [ ] `config/recipes-data.mjs`: 8 tabel RAW, generator z katalogów, mapa narzędzi, profile podziału
+- [ ] `config/recipes-data.mjs`: 6 tabel profesji + elaboracja (z poprawkami D31), zestawy profesji,
+  generator z katalogów, zwykłe wymogi narzędzi, profile podziału
 - [ ] `validate:recipes` + audyt przepisów profesji względem standardowych (ostrzeżenia, §5.1b);
-  lista braków w katalogach; D22 dopisane do tabeli RAI w `scripts/wkk/README.md`
+  lista braków w katalogach; D22 dopisane do tabeli RAI w `scripts/wkk/README.md`, a reguły WKK
+  (D4, D14, D15, D26–D28, D30, D32) do jego spisu
 
 ### E1 — Robota (M)
-- [ ] `production/robota.mjs`: `start / work / adjust / test / abort / finish`, strażnik duplikatów
+- [ ] `production/robota.mjs`: `start / work / adjust / test / abort / finish`, strażnik duplikatów;
+  mnożnik z kierownika przy każdej pracy
 - [ ] Test końcowy + hook `neuroshima.rerolled` w `rerolls.mjs`; Ułatwienia z Pochodzeń po tagach
 - [ ] Karty czatu (wzorzec: nasłuch `click` w fazie capture na `document`), kategoria udźwigu „Roboty”
 - [ ] API `game.neuroshima.produkcja.*`
@@ -579,7 +630,8 @@ odpoczynku) i kończy przedmiot, surowce schodzą z panelu, naprawa broni i panc
   (interpolacja) i bez (stała waga wejścia); budżet Szybkiej produkcji na 25 / 50; grupy wykonalności; budżety KO / DO;
   zgodność tabel RAW ze wzorem; parser i ocena wyrażeń narzędzi (I / LUB / nawiasy, błędy składni,
   nieznany klucz, wybór gałęzi z najwyższą premią, opis braków);
-  stopień naprawy broni białej 1 / 2 / 3+ kroków → ST 10 / 15 / 20.
+  stopień naprawy broni białej 1 / 2 / 3+ kroków → ST 10 / 15 / 20; minuty w dół i GG:MM; cecha
+  profesji z WKK — każdy wiersz tabeli z §5.1c jako przypadek testowy, drabina ST bez 30, podłoga ×0,25.
 - **Warstwa 2** (prawdziwe dokumenty, prefiks `[Quench]`): start → surowce schodzą; praca → waga
   rośnie; porzucenie → zwrot; przeniesienie do pojazdu zostawia jeden egzemplarz; każda droga
   klonowania (utworzenie z tym samym `robota.id`, Duplikuj, ilość 2, duplikacja aktora) odrzucona; przejęcie zmienia kierownika; odpoczynek nalicza godziny.
@@ -595,6 +647,7 @@ odpoczynku) i kończy przedmiot, surowce schodzą z panelu, naprawa broni i panc
 | Kolejka partii („×N”, nadwyżka godzin do następnej) | po E2, jeśli amunicja okaże się uciążliwa |
 | Rozbudowa pomocników | D9 — dziś ręcznie |
 | Preset Kolorów (Rdza / Rtęć → Wytrzymałość pancerzy wł.) | razem z profilami Kolorów, PLAN_beta §4 |
+| Kolory a budżety pracy (Rdza: KO 24 h, DO 72 h — ile pracy mieści taki odpoczynek?) | razem z profilami Kolorów |
 | Przepisywanie schematów | ryzyko „drukarki gambli” (schemat = cena przedmiotu); tylko z własną regułą |
 | Wyniki-aktorzy: pojazdy (Mechanika), drony (Hakerstwo) | M4 / M3; do tego czasu wynik = karta dla MG |
 | Ulepszenia jako przeróbka broni (konwersja komory, zmiana magazynka) | cel-przedmiot jak w naprawie; po E7 |
@@ -608,7 +661,9 @@ odpoczynku) i kończy przedmiot, surowce schodzą z panelu, naprawa broni i panc
 
 | # | Pytanie | Propozycja |
 |---|---|---|
-| P11 | Co z WKK daje ×0,5 — „narzędzie dodatkowe” wyliczane z danych przedmiotu martwieje, gdy zwykły wymóg już je zawiera; stały akcelerator profesji bywa bez sensu dla przedmiotu, a przy Hakerstwie nie wiadomo, który | **pełny zestaw profesji pod ręką**: gdy zwykły wymóg już go zawiera — ×0,5 zawsze; gdy nie — brakujące narzędzie profesji jest opcjonalnym przyspieszeniem ×0,75 → ×0,5. Nigdy nie jest wymagane |
+| P12 | Szybka produkcja a cecha profesji z WKK — czy ×0,75 / ×0,5 skraca też jej minuty? | **nie** — Szybka produkcja jest „poza zasadami produkcji” i ma własną, już krótką stawkę; działa tylko Fabrykator |
+| P13 | Naprawa a mnożniki — czy Fabrykator i cecha profesji skracają naprawy? | **nie** — oba mówią o produkowaniu; czasy naprawy (1k4 min / 1k4 h / 2k4 h) zostają. Alternatywa, jeśli w kampanii w biegu naprawy mają być szybsze: te same mnożniki co produkcja |
+| P14 | Pogromca (s. 99) i Truciciel (s. 94): RAW podaje przy Pogromcy tylko 100 gb surowców i 100 h (bez ST, Testu i narzędzi), a trucizna Truciciela ma ST twórcy (8 + INT + PB), więc to inny przedmiot niż „Trucizna (prosta)” | Pogromca: Robota 100 h / 100 gb (podział jak broń palna), **bez Testu** (zdolność opisuje wynik), narzędzia rusznikarza jako zwykły wymóg broni palnej; naboje — aktywność DO. Truciciel: aktywność DO tworząca własny przedmiot z zapisanym ST twórcy |
 
-Rozstrzygnięte 2026-09-27: P1 → D16, P2 → D17, P3 → D18, P4 → D15, P5 → D14 / D15 / D25, P6 → D19,
-P7 → D20 + §8.1, P8 → D22, P9 → D25, P10 → D24.
+Rozstrzygnięte 2026-09-27/28: P1 → D16, P2 → D17, P3 → D18, P4 → D15, P5 → D14 / D15 / D25, P6 → D19,
+P7 → D20 + §8.1, P8 → D22, P9 → D25, P10 → D24, P11 → D32.
