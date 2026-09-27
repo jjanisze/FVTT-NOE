@@ -35,7 +35,6 @@ są z definicji, nie liczą się.
 | Śrutówka podlufowa | Rusznikarstwo | ST | 20 vs 15 | 50 (129) |
 | Agregat | Serwisowanie | ST | 20 vs 15 | 50 (130) |
 | Miernik skażenia chemicznego | Serwisowanie | ST | 20 vs 15 | 50 (130) |
-| Wózek (dwukółka) | Mechanika | surowce | 20 vs 10 gb (czas 20 h pasuje do ceny, surowce do 40) | 20 (139) |
 | Zapalnik elektryczny | Serwisowanie | surowce | 5 vs 2 gb (czas 5 h pasuje do ceny) | 5 (130) |
 | .30-06 (5 szt.) | elaboracja | czas, surowce | 10 h / 10 gb vs 8 h / 7 gb — liczone jak 4 gb za nabój, cennik ma 3 | 3 za szt. (125) |
 
@@ -56,6 +55,17 @@ Tabela daje jedno ST na kategorię, więc tańsza połowa każdej kategorii wych
 Browning, Minimi, The Pig, Minigun, Miotacz ognia, Moździerz). LAW jest jednorazowy, więc wychodzi
 **cztery razy** dłużej: 600 h zamiast 150 h.
 
+## Prawdopodobne literówki
+
+Prawie każdy wiersz tabel daje się odtworzyć wzorem przy *jakiejś* cenie: przy przedmiotach
+jednorazowych godziny ≈ surowce, przy wielorazowych godziny ≈ 2 × surowce. Dwa wiersze nie pasują
+do żadnej ceny, a różnica to jedna cyfra:
+
+| Przedmiot | Tabela | W tabeli | Powinno być | Dlaczego |
+|---|---|---|---|---|
+| Wózek (dwukółka) | Mechanika, s. 82 | 1 CZ, **19** MK | 1 CZ, **9** MK | 20 h i cena 20 gb dają 10 gb surowców |
+| Celownik optyczny | Serwisowanie, s. 84 | **20** godzin | **40** godzin | 20 gb surowców i cena 40 gb dają 40 h |
+
 ## Do wyjaśnienia, nie errata
 
 - **Tornado** (Farmacja: 50 h / 50 gb / ST 25) — cennik podaje 30–100 gb. Tabela pasuje do górnej
@@ -69,7 +79,7 @@ Browning, Minimi, The Pig, Minigun, Miotacz ognia, Moździerz). LAW jest jednora
 ## Dla porządku — gdzie tabela jest lepsza
 
 Koktajl Mołotowa (1 minuta vs 5 h), Mina przeciwpancerna (ST 25 vs 30), Antybiotyk i Detoks (ST 10 vs 15),
-wszystkie pojazdy Mechaniki (ST 20–25 vs 30, Rower i Deskorolka też), Celownik optyczny (20 h vs 40 h),
+wszystkie pojazdy Mechaniki (ST 20–25 vs 30, Rower i Deskorolka też),
 Kompas (4 h / 2 gb vs 10 h / 5 gb), Krótkofalówka (24 h vs 25 h), Nośnik danych i Monitorek (względem
 ceny 40), broń ciężka i droższa połowa każdej kategorii Rusznikarstwa (ST). Reszta wierszy — w tym
 wszystkie granaty, miny, dodatki do broni i większość elektroniki — jest równa standardowi co do liczby.

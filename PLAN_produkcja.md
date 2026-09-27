@@ -116,6 +116,12 @@ swój (ST 25, s. 81).
 | D23 | Braki narzędzi | **oznaczane, nie blokowane**: brak zestawu albo biegłości → przepis w grupie ⛔, ale z przyciskiem „Zacznij mimo braków”. Robota nosi plakietkę ⚠ z listą braków, karta startu jest głośna i ma przyciski MG *Zatwierdź* (zdejmuje plakietkę) i *Zmień ST*; Test końcowy powtarza ostrzeżenie. Nie da się przeklikać: braku dostępu (Schemat / Wprawa — to nadaje MG) i braku surowców | NOE |
 | D24 | Wprawa z profesji | RAW łączy fizyczny schemat z wiedzą („otrzymujesz schematy”); tu to **Wprawa**: profesja daje przepisy standardowe wszystkich przedmiotów ze swojej tabeli **i** ich przepisy profesji. Żaden fizyczny Schemat nie powstaje — zdolność nie może tworzyć łupu | NOE (odczyt) |
 | D25 | Waga Roboty bez WKK | waga surowców, które weszły do Roboty, przez cały czas; po ukończeniu przedmiot waży swoje. Nic nie znika ani nie powstaje — bez worka bez dna | NOE (brak wartości RAW, decyzja MG) |
+| D26 | Przepisy profesji z WKK | przepis standardowy z tymi samymi surowcami (**bez rabatu**), krótszym czasem (D27) i ST bez stopnia 30: powyżej 75 gb zawsze 25 (wariant C — czysty „tylko czas” dawałby pojazdom Mechaniki ST 30). Z WKK profesja nie jest osobnym przepisem, tylko cechą wykonawcy, jak Fabrykator: liczona przy każdej pracy i przy Teście. Tabela daje już tylko listę przedmiotów, podział surowców i zestaw narzędzi profesji. Bez WKK — D22 bez zmian | WKK |
+| D27 | Czas profesji z WKK | ×0,75 domyślnie; ×0,5 z dodatkowym narzędziem — co nim jest: **P11** | WKK |
+| D28 | Podłoga mnożników | iloczyn wszystkich mnożników czasu nie schodzi poniżej ×0,25 (profesja ×0,5 · Fabrykator ×0,5 = dokładnie 0,25) | WKK |
+| D29 | Czas w minutach | czas standardowy ze wzoru RAW (z zaokrągleniem nieparzystej ceny), mnożniki na minutach, w dół do pełnej minuty, wyświetlanie GG:MM. Postęp Roboty i budżety odpoczynku (KO 60 min, DO 600 min) też w minutach | NOE (infrastruktura) |
+| D30 | Mołotow „1 minuta” | błąd tabeli, nie wyjątek. Autor miał okazję powołać się na „Wyjątki są ważniejsze od zasad ogólnych” (s. 23) i tego nie zrobił. Bez WKK wiersz zostaje dosłownie (D22); z WKK obowiązuje D26 | WKK |
+| D31 | Literówki w tabelach | Wózek: 9 MK zamiast 19 MK; Celownik optyczny: 40 h zamiast 20 h. Przyjęte w obu trybach (errata) | NOE (errata MG) |
 
 ---
 
@@ -255,7 +261,7 @@ flags.<mod>.robota = {
   przepisId, przepis: { … },         // snapshot — zmiana danych nie przepisuje trwającej Roboty
   cel: null,                         // naprawa / ulepszenie: { itemUuid }
   kierownikId: "<actorId>",          // czyja Robota — lista w zakładce niezależnie od miejsca
-  postep: 12.5, wymagane: 35,        // w godzinach BAZOWYCH
+  postep: 750, wymagane: 2100,       // w minutach BAZOWYCH (D29)
   surowce: { CH: 30, CZ: 4, MK: 1 }, // zamrożone gb (już po Przydasie)
   wagaWejscia: 3.5, wagaWyniku: 0.4, // kg
   stan: "praca",                     // | "test"
@@ -264,9 +270,10 @@ flags.<mod>.robota = {
 }
 ```
 
-- **Postęp w godzinach bazowych.** Godzina pracy postaci z Fabrykatorem = 2 h postępu. Działa
-  przy zdobyciu Fabrykatora w trakcie i przy przejęciu Roboty przez kogoś innego. Czat pokazuje
-  obie liczby: „4 h pracy (Fabrykator) → +8 h”.
+- **Postęp w minutach bazowych.** Minuta pracy daje `1 / mnożnik` minut postępu, a mnożnik liczy się
+  z wykonawcy w chwili pracy: Fabrykator, profesja z WKK, zestawy pod ręką; podłoga ×0,25 (D28).
+  Działa przy zdobyciu Fabrykatora w trakcie, przy przejęciu Roboty i przy zmianie narzędzi. Czat
+  pokazuje obie liczby: „4:00 pracy (Fabrykator) → +8:00”.
 - **Waga** (`system.weight.value`) aktualizowana przez lejek przy każdej zmianie postępu:
   WKK — `wejście + (wynik − wejście) × postęp`; bez WKK — stała waga wejścia (D25).
 - **Wynik trafia do aktora, który trzyma Robotę.** Traktor zbudowany w Miejscu zostaje w Miejscu.
@@ -599,7 +606,9 @@ odpoczynku) i kończy przedmiot, surowce schodzą z panelu, naprawa broni i panc
 
 ## 16. Otwarte pytania
 
-Brak otwartych pytań.
+| # | Pytanie | Propozycja |
+|---|---|---|
+| P11 | Co z WKK daje ×0,5 — „narzędzie dodatkowe” wyliczane z danych przedmiotu martwieje, gdy zwykły wymóg już je zawiera; stały akcelerator profesji bywa bez sensu dla przedmiotu, a przy Hakerstwie nie wiadomo, który | **pełny zestaw profesji pod ręką**: gdy zwykły wymóg już go zawiera — ×0,5 zawsze; gdy nie — brakujące narzędzie profesji jest opcjonalnym przyspieszeniem ×0,75 → ×0,5. Nigdy nie jest wymagane |
 
 Rozstrzygnięte 2026-09-27: P1 → D16, P2 → D17, P3 → D18, P4 → D15, P5 → D14 / D15 / D25, P6 → D19,
 P7 → D20 + §8.1, P8 → D22, P9 → D25, P10 → D24.
