@@ -97,7 +97,7 @@ export function registerObalajaca() {
             if (proceed) {
                 const rollConfig = {
                     ability: "str",
-                    targetValue: saveDC,
+                    target: saveDC,
                 };
                 // Dociążenie: Utrudnienie na rzucie obronnym przeciwko Powaleniu
                 if (hasDociazenie) {

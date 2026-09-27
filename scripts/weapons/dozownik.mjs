@@ -199,7 +199,7 @@ function _registerChatLogListener(app, html) {
     if (!actor) return;
 
     const rolls = await actor.rollSavingThrow(
-      { ability: "con", targetValue: dc },
+      { ability: "con", target: dc },
       {},
       { data: { flavor: `Rzut Obronny na Kondycję — Trucizna (ST ${dc})` } },
     );
