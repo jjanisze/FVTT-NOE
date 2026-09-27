@@ -1,1 +1,5 @@
-2026/09/26-16:37:56.462 dcac Delete type=3 #1
+2026/09/27-03:40:46.246 c784 Recovering log #3
+2026/09/27-03:40:46.246 c784 Level-0 table #5: started
+2026/09/27-03:40:46.249 c784 Level-0 table #5: 6108 bytes OK
+2026/09/27-03:40:46.254 c784 Delete type=0 #3
+2026/09/27-03:40:46.254 c784 Delete type=3 #2

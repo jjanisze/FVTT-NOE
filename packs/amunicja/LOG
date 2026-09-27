@@ -1,1 +1,5 @@
-2026/09/26-16:37:56.398 bfe0 Delete type=3 #1
+2026/09/27-03:40:46.144 dccc Recovering log #3
+2026/09/27-03:40:46.144 dccc Level-0 table #5: started
+2026/09/27-03:40:46.146 dccc Level-0 table #5: 7074 bytes OK
+2026/09/27-03:40:46.150 dccc Delete type=0 #3
+2026/09/27-03:40:46.151 dccc Delete type=3 #2
