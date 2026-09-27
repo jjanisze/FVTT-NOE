@@ -130,6 +130,9 @@ w macierzy bez ❌.
 Cel: panel Surowców przestaje być samą księgowością. Tożsamość klasy Spec (Chemik, Medyk, Monter)
 i Sztuczek Fabrykator / Złomiarz / Przydasie stoi na tym rozdziale. RAW: s. 144–146.
 
+> Projekt szczegółowy i decyzje MG (2026-09-27, brane poza kolejnością):
+> [PLAN_produkcja.md](PLAN_produkcja.md). Tam, gdzie lista niżej się z nim rozjeżdża, wygrywa tamten plik.
+
 - [ ] **Czyste zasady** (`config/production-rules.mjs` + testy): surowce = ⌊cena/2⌋ w gb, podział
   na typy proponowany, edytowalny przez MG; czas = cena (w górę) × 0,5 h dla jednorazowych, × 1 h
   dla wielorazowych; maks. 10 h pracy na dobę; ST wg wartości (≤10: 5, ≤25: 10, ≤50: 15, ≤75: 20,

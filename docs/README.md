@@ -11,6 +11,8 @@
 4. [Kolor Kobaltu](Kobalt.md) — domowe poprawki zasad, domyślnie włączone, do połączenia z
    każdym innym Kolorem.
 5. [FAQ](FAQ.md) — najczęstsze pytania.
+6. [Errata: przepisy profesji](Errata-produkcja.md) — wiersze tabel schematów Speca gorsze od
+   przepisu standardowego.
 
 Coś jest niejasne albo brakuje strony, której szukasz? Zgłoś to jako
 [issue na GitHubie](https://github.com/jjanisze/FVTT-NOE/issues) — braki w
