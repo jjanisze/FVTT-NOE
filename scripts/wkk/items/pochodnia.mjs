@@ -55,7 +55,8 @@
 
 import { registerLightProvider, registerLightOffSwitch, enforceSingleLightSource, syncActorLight } from "../../items/light-sources.mjs";
 import { registerPowerSource, getPowerStatus, renderPowerRow } from "../../items/power-source.mjs";
-import { getSurowiecType } from "../../config/surowce-data.mjs";
+import { SUROWCE_BY_CODE } from "../../config/surowce-data.mjs";
+import { takeSurowce } from "../../actors/surowce-store.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -156,54 +157,16 @@ function _getActivity(item, identifier) {
   return item.system.activities?.find(a => a.visibility?.identifier === identifier) ?? null;
 }
 
-/** Weight-unit → kilograms, same table `actors/surowce-inventory.mjs` uses for its own totals. */
-const _TO_KG = Object.freeze({ kg: 1, g: 0.001, Mg: 1000, lb: 0.45359237, tn: 907.18474 });
-
-function _itemWeightKg(item) {
-  const w = item.system.weight;
-  const value = w?.value ?? (typeof w === "number" ? w : 0);
-  const units = w?.units ?? "kg";
-  return (isNaN(value) ? 0 : Number(value)) * (_TO_KG[units] ?? 1);
-}
-
 /**
  * Consumes `kgNeeded` kilograms of a surowiec (raw material) type — e.g. "CH" for Chemia — off
- * `actor`'s inventory, spread across as many stacks as it takes (smallest total-kg stack first,
- * so a single big stack isn't fragmented before smaller ones are used up). Not quantity-based
- * (unlike `latarka.mjs`'s `insertBattery`, which just drops one whole Baterie unit): surowce
- * stacks carry their own per-unit weight, so "1 kg" doesn't necessarily mean "1 unit" — this
- * computes real kilograms via the same weight math `actors/surowce-inventory.mjs` uses for its
- * panel totals, and can spend a fractional slice of a stack when a stack's per-unit weight isn't
- * an even 1 kg. Returns `false` (no changes made at all) if the actor doesn't have enough total
- * kg across every matching stack; `true` once the full amount has been deducted.
+ * `actor`'s inventory. Goes through the one surowce funnel (`actors/surowce-store.mjs`), which
+ * values stacks by weight (NOE s. 144: CH 1 gb / 100 g), spends whole units only and hands back
+ * change. The previous in-file version wrote a fractional `system.quantity`, which dnd5e's
+ * integer field silently rounds. Returns `false` (nothing touched) if the actor is short.
  */
 async function _consumeKgOfSurowiec(actor, code, kgNeeded) {
-  const stacks = actor.items
-    .filter(i => getSurowiecType(i)?.code === code)
-    .map(item => ({ item, perUnitKg: _itemWeightKg(item), qty: Number(item.system.quantity ?? 0) }))
-    .filter(s => s.perUnitKg > 0 && s.qty > 0)
-    .sort((a, b) => (a.perUnitKg * a.qty) - (b.perUnitKg * b.qty));
-
-  const totalKg = stacks.reduce((sum, s) => sum + s.perUnitKg * s.qty, 0);
-  if (totalKg < kgNeeded) return false;
-
-  let remaining = kgNeeded;
-  const deletes = [];
-  const updates = [];
-  for (const s of stacks) {
-    if (remaining <= 0) break;
-    const stackKg = s.perUnitKg * s.qty;
-    if (stackKg <= remaining + Number.EPSILON) {
-      remaining -= stackKg;
-      deletes.push(s.item.id);
-    } else {
-      updates.push({ _id: s.item.id, "system.quantity": s.qty - remaining / s.perUnitKg });
-      remaining = 0;
-    }
-  }
-  if (deletes.length) await actor.deleteEmbeddedDocuments("Item", deletes);
-  if (updates.length) await actor.updateEmbeddedDocuments("Item", updates);
-  return true;
+  const { ok } = await takeSurowce(actor, code, kgNeeded * SUROWCE_BY_CODE[code].gbPerKg);
+  return ok;
 }
 
 function _attackActivity(item) {

@@ -50,7 +50,13 @@ export const ABILITY_KEYS = {
   RUCHOME_GNIAZDO_CKM: "ruchomeGniazdoCkm",
   SZTURMOWIEC: "szturmowiec",
   BEZ_DNA: "bezDna",
-  SAMURAJ: "samuraj"
+  SAMURAJ: "samuraj",
+  // Produkcja (PLAN_produkcja) — Sztuczki i zdolności z Pochodzenia, które zmieniają czas,
+  // surowce albo Test końcowy. Czyta je `production/wykonawca.mjs`.
+  FABRYKATOR: "fabrykator",
+  PRZYDASIE: "przydasie",
+  NANO_TECH: "nanoTech",
+  JESLI_MA_SILNIK: "jesliMaSilnik"
 };
 
 /**
@@ -109,6 +115,26 @@ export const ABILITY_DEFINITIONS = {
     // The clause names stay as aliases so a re-import of that shape still resolves.
     aliases: ["samuraj", "osełka", "oselka", "zasłona", "zaslona"],
     noticeColor: "#6b4a4a"
+  },
+  [ABILITY_KEYS.FABRYKATOR]: {
+    label: "Fabrykator",
+    aliases: ["fabrykator"],
+    noticeColor: "#8a6d1f"
+  },
+  [ABILITY_KEYS.PRZYDASIE]: {
+    label: "Przydasie",
+    aliases: ["przydasie"],
+    noticeColor: "#5b6d2f"
+  },
+  [ABILITY_KEYS.NANO_TECH]: {
+    label: "Nano-Tech",
+    aliases: ["nano-tech", "nanotech"],
+    noticeColor: "#2f5d6d"
+  },
+  [ABILITY_KEYS.JESLI_MA_SILNIK]: {
+    label: "Jeśli ma silnik, to ruszy",
+    aliases: ["jeśli ma silnik", "jesli ma silnik"],
+    noticeColor: "#6d4a2f"
   }
 };
 

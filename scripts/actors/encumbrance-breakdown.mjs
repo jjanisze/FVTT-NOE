@@ -162,6 +162,9 @@ const FIXED_CATEGORIES = {
   leki:         { label: "Leki",         color: "#bf69a2" },
   prowiant:     { label: "Prowiant",     color: "#5db691" },
   sprzet:       { label: "Sprzęt",       color: "#4a5f73" },
+  // Roboty w toku (PLAN_produkcja §5.3) — zamrożone surowce ważą, nawet gdy nie są już surowcem.
+  // Nasycone złoto, żeby nie zlać się z bladą Amunicją (#cec17e).
+  roboty:       { label: "Roboty",       color: "#d9a300" },
   reszta:       { label: "Reszta",       color: "#8f8f8f" },
 };
 
@@ -179,7 +182,7 @@ const NARZEDZIA_NAME_HINT = /^ma[łl]y\s|narz[eę]dzi/i;
 const CATEGORY_ORDER = [
   "bron", "pancerz", "narzedzia",
   ...SUROWCE_TYPES.slice().sort((a, b) => a.order - b.order).map(t => `surowiec:${t.code}`),
-  "amunicja", "magazynki", "pirotechnika", "leki", "prowiant", "sprzet",
+  "amunicja", "magazynki", "pirotechnika", "leki", "prowiant", "sprzet", "roboty",
   "reszta",
 ];
 
@@ -241,6 +244,7 @@ export function registerEncumbranceBreakdown() {
 
 /** Which bucket an item's weight counts toward — see `CATEGORY_ORDER`/`FIXED_CATEGORIES`. */
 function _categoryOf(item) {
+  if (item.flags?.[MODULE_ID]?.robota) return "roboty";
   const surowiec = getSurowiecType(item);
   if (surowiec) return `surowiec:${surowiec.code}`;
   if (getProwiantCategory(item)) return "prowiant";

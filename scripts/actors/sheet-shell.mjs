@@ -22,6 +22,8 @@ import { SKAZENIE_DISEASE_THRESHOLD } from "../config/levelled-conditions-data.m
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const ZASOBY_TEMPLATE = `modules/${MODULE_ID}/templates/tab-zasoby.hbs`;
+/** Zakładka Produkcja (PLAN_produkcja §6) — pusta skorupa, wypełnia ją `production/zakladka.mjs`. */
+const PRODUKCJA_TEMPLATE = `modules/${MODULE_ID}/templates/tab-produkcja.hbs`;
 
 /** Wrappers relocated into the Zasoby tab, in display order. */
 const ZASOBY_PANELS = [
@@ -36,6 +38,7 @@ const ZASOBY_PANELS = [
 const CHARACTER_TABS = [
   { tab: "inventory", label: "Ekwipunek", svg: "systems/dnd5e/icons/svg/backpack.svg" },
   { tab: "zasoby", label: "Zasoby", icon: "fas fa-boxes-stacked" },
+  { tab: "produkcja", label: "Produkcja", icon: "fas fa-hammer" },
   { tab: "details", label: "Postać", icon: "fas fa-cog" },
   { tab: "features", label: "Zdolności", icon: "fas fa-list" },
   { tab: "effects", label: "Stany", icon: "fas fa-bolt" },
@@ -77,19 +80,20 @@ function _stockSheetClass(type) {
  * @param {string[]} drop
  * @returns {object}
  */
-function _rebuildParts(baseParts, drop) {
-  const zasoby = {
-    container: { classes: ["tab-body"], id: "tabs" },
-    template: ZASOBY_TEMPLATE,
-    scrollable: [""]
-  };
+function _rebuildParts(baseParts, drop, { produkcja = false } = {}) {
+  const part = template => ({ container: { classes: ["tab-body"], id: "tabs" }, template, scrollable: [""] });
+  const zasoby = part(ZASOBY_TEMPLATE);
   const out = {};
   for (const [key, value] of Object.entries(baseParts)) {
     if (drop.includes(key)) continue;
     out[key] = value;
-    if (key === "inventory") out.zasoby = zasoby;
+    if (key === "inventory") {
+      out.zasoby = zasoby;
+      if (produkcja) out.produkcja = part(PRODUKCJA_TEMPLATE);
+    }
   }
   if (!out.zasoby) out.zasoby = zasoby;
+  if (produkcja && !out.produkcja) out.produkcja = part(PRODUKCJA_TEMPLATE);
   return out;
 }
 
@@ -101,11 +105,12 @@ function _rebuildParts(baseParts, drop) {
  * @param {string[]} config.drop      Part/tab ids to remove entirely.
  * @param {object[]} config.tabs      Replacement TABS array.
  * @param {string} config.defaultTab
+ * @param {boolean} [config.produkcja]  zakładka Produkcja — tylko postacie graczy (§6: NPC jej nie dostają)
  * @returns {Function}
  */
-function _buildSheetClass(Base, { name, drop, tabs, defaultTab }) {
+function _buildSheetClass(Base, { name, drop, tabs, defaultTab, produkcja = false }) {
   const cls = class NeuroshimaActorSheet extends Base {
-    static PARTS = _rebuildParts(Base.PARTS, drop);
+    static PARTS = _rebuildParts(Base.PARTS, drop, { produkcja });
 
     static TABS = tabs;
 
@@ -509,7 +514,8 @@ export function registerSheetShell() {
         label: "Neuroshima — Karta Postaci",
         drop: ["spells", "bastion"],
         tabs: CHARACTER_TABS,
-        defaultTab: "inventory"
+        defaultTab: "inventory",
+        produkcja: true
       },
       {
         type: "npc",
@@ -521,13 +527,13 @@ export function registerSheetShell() {
       }
     ];
 
-    for (const { type, name, label, drop, tabs, defaultTab } of targets) {
+    for (const { type, name, label, drop, tabs, defaultTab, produkcja } of targets) {
       const Base = _stockSheetClass(type);
       if (!Base) {
         console.warn(`Neuroshima 5e | No stock dnd5e sheet found for "${type}" — shell not registered`);
         continue;
       }
-      DocumentSheetConfig.registerSheet(Actor, MODULE_ID, _buildSheetClass(Base, { name, drop, tabs, defaultTab }), {
+      DocumentSheetConfig.registerSheet(Actor, MODULE_ID, _buildSheetClass(Base, { name, drop, tabs, defaultTab, produkcja }), {
         types: [type],
         // `#registerSheet` liczy "domyślność" osobno na KAŻDYM kliencie, nie zapisuje ustawienia
         // świata (zweryfikowane w źródle v14) — gating po `game.user.isGM` dawał graczom
@@ -537,7 +543,7 @@ export function registerSheetShell() {
       });
     }
 
-    foundry.applications.handlebars.loadTemplates([ZASOBY_TEMPLATE]);
+    foundry.applications.handlebars.loadTemplates([ZASOBY_TEMPLATE, PRODUKCJA_TEMPLATE]);
     console.log("Neuroshima 5e | Sheet shell registered (character + npc)");
   });
 }

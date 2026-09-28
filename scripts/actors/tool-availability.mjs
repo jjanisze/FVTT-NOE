@@ -30,6 +30,27 @@ export function registerToolAvailability() {
 
 /* -------------------------------------------- */
 
+/**
+ * Zestawy danego narzędzia w ekwipunku aktora: prawdziwe (po `baseItem`) i zastępniki
+ * (`flags.<moduł>.substitutes`). Jedno źródło dla notki na karcie testu i dla produkcji
+ * (`production/wykonawca.mjs`) — „mam zestaw” nie może znaczyć dwóch różnych rzeczy.
+ * @returns {{kits: Item[], substitutes: Item[]}}
+ */
+export function toolKitsOf(actor, toolId) {
+  const has = i => (i.system.quantity ?? 1) >= 1;
+  const items = actor?.items?.contents ?? [];
+  return {
+    kits: items.filter(i => i.type === "tool" && i.system.type?.baseItem === toolId && has(i)),
+    substitutes: items.filter(i => i.getFlag(MODULE_ID, "substitutes") === toolId && has(i))
+  };
+}
+
+/** Czy aktor ma jakikolwiek zestaw (albo zastępnik) danego narzędzia. */
+export function hasToolKit(actor, toolId) {
+  const { kits, substitutes } = toolKitsOf(actor, toolId);
+  return kits.length > 0 || substitutes.length > 0;
+}
+
 /** Resolve the actor a chat message speaks for (token actor preferred). */
 function _messageActor(message) {
   const sp = message.speaker ?? {};
@@ -55,15 +76,7 @@ function _onRenderToolCheck(message, html) {
   const actor = _messageActor(message);
   if ( !actor ) return;
 
-  // Match tool kits in inventory by their base-item key, and equipment that substitutes for them.
-  const has = i => (i.system.quantity ?? 1) >= 1;
-  const kits = actor.items.filter(i =>
-    i.type === "tool" && i.system.type?.baseItem === toolId && has(i)
-  );
-  const substitutes = actor.items.filter(i =>
-    i.getFlag(MODULE_ID, "substitutes") === toolId && has(i)
-  );
-
+  const { kits, substitutes } = toolKitsOf(actor, toolId);
   const all = [...kits, ...substitutes];
   const owns = all.length > 0;
   const equipped = all.some(i => i.system.equipped);

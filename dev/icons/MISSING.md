@@ -44,7 +44,7 @@ whenever a new batch actually gets processed).
 i warzywa, MRE, Breneka, Zużyty LAW, Magazynek bębnowy — processed and wired; LAW and the drum
 are stored for items that do not exist yet. IMPLEMENTATION.md, 2026-09-25.*
 
-## Queue (A) — 4/9
+## Queue (A) — 9/9 — batch ready
 
 | # | Item | Where | Current icon | Suggested prompt content |
 |---|------|-------|---------------|---------------------------|
@@ -52,6 +52,19 @@ are stored for items that do not exist yet. IMPLEMENTATION.md, 2026-09-25.*
 | 2 | Kwas (fiolka) (`items/kwas.mjs`, RAW Różności) → `icons/items/loot/kwas.svg` | party: Raynald; pack `sprzet` | borrows `icons/items/loot/chemia.svg` (generic chemistry) | Small corked glass vial with a hazard/corrosive drip symbol, a droplet eating into the surface below it. Must read as "acid", distinct from the generic chemistry flask |
 | 3 | Zapalnik radiowy (`items/detonator.mjs`, the 10 fuzes of the kit) → `icons/items/loot/zapalnik_radiowy.svg` | created with every Detonator radiowy | borrows `icons/items/loot/czesci_elektroniczne.svg` | Small radio receiver fuze: a thumb-sized box with a stub antenna and two short wire leads ending in a blasting-cap tube. Must pair visually with the remote (#1) |
 | 4 | Zapalnik elektryczny (`items/detonator.mjs`, RAW *Elektronika*: electrode + 10 m cable) → `icons/items/loot/zapalnik_elektryczny.svg` | pack `sprzet`; C4 needs it (RAW) | borrows `icons/items/loot/czesci_elektroniczne.svg` | Coil of two-strand wire with a blasting-cap electrode on one end and bare contacts on the other. No box, no antenna — must not look like #3 |
+| 5 | Schemat — **Notatka** (≤ 40 h, PLAN_produkcja §7) → `icons/items/loot/schemat_notatka.svg` | every small Schemat (granaty, amunicja, leki) | core `icons/sundries/documents/document-torn-diagram-tan.webp` (colour, off-style) | A single folded sheet of scrap paper with a hand-drawn technical sketch and a few arrows; torn corner. Smallest of the three — must read as "a note", not a book |
+| 6 | Schemat — **Instrukcja** (≤ 250 h) → `icons/items/loot/schemat_instrukcja.svg` | laptopy, broń, pancerze | core `icons/sundries/documents/notepad-clipboard-spiral.webp` | A thin spiral-bound manual with a schematic diagram on the cover (exploded view of a part). Between #5 and #7 in bulk |
+| 7 | Schemat — **Dokumentacja** (> 250 h) → `icons/items/loot/schemat_dokumentacja.svg` | pojazdy, pancerz wspomagany | core `icons/sundries/documents/blueprints-teal.webp` | A thick bundle of rolled blueprints and a binder tied with string — the biggest of the three, obviously heavy |
+| 8 | Robota — overlay badge (`production/zakladka.mjs`, inventory row of an item in progress) → `icons/items/loot/robota_nakladka.svg` | every Robota; drawn in the corner over the result's own icon | none — the Robota shows the bare result icon | Small square badge: a hammer crossed with a wrench over a half-filled progress bar. Must stay legible at 12 px, drawn over another icon |
+| 9 | Radio (NOE s. 138, production target `raw:radio`) → `icons/items/loot/radio.svg` | Serwisowanie, loot | core `icons/svg/lightning.svg` | Boxy portable radio with a telescopic antenna and a round speaker grille; must not look like the walkie-talkie `krotkofalowka.svg` |
+
+*Production targets without art, for the batch after (all fall back to `icons/svg/lightning.svg`,
+`pill.svg` or `item-bag.svg`, see `production/wynik.mjs` `IKONA_KATEGORII`): Agregat, Akumulator,
+Alternator, Defibrylator, Detektor ruchu, Komputer osobisty/gamingowy, Laptop, Kontroler zdalnego
+sterowania, Miernik skażenia chemicznego, Odtwarzacz CD, Turbina wiatrowa/wodna, Wykrywacz metalu,
+Wytrychy elektroniczne, Kompas, Palnik acetylenowo-tlenowy, Środek usypiający, Środki dezynfekujące,
+Trucizna, Paralotnia, Adapter wifi, Monitorek, Router, Zegarek. Once an icon exists, add it to
+`RAW_IKONY` in `production/wynik.mjs`.*
 
 *(The conditional "IED radiowy" sheet icon is dropped: the GM chose "decide at placement"
 (2026-09-25), so a radio IED only exists on the map — class B row 5 covers it.)*
@@ -133,3 +146,25 @@ turn; placed charges can lie there for hours of game time.
 cylinder at 25 px would not be told apart; the frag grenade is `grenade-thrown.webp` already;
 mines are drawn as a coloured square today, and whether armed mines should be visible to
 players as objects at all is a GM call, not an art gap. Ask before adding them.)*
+
+---
+
+# C. Dźwięki produkcji (audio)
+
+Nie grafika, ale ta sama zasada „każda prośba o asset ląduje tutaj” (MG, 2026-09-24). Źródło:
+Freesound CC0 (przeglądarka → podpisany URL → ffmpeg → ogg), wpis w `CREDITS.md`. Wszystkie
+sloty są w `scripts/production/oprawa.mjs` (`PRACA`, `ZDARZENIA`) — pusty slot (`null`) gra ciszę.
+Część ma dziś tymczasowy zamiennik z plików, które już są w repo.
+
+| # | Slot | Plik docelowy | Dziś | Czego szukać |
+|---|------|---------------|------|--------------|
+| 1 | praca: kucie (kowal) | `sounds/produkcja/kucie.ogg` | `melee/degrade_chip.ogg` | kilka uderzeń młotka o kowadło, 2–3 s |
+| 2 | praca: warsztat (mechanik) | `sounds/produkcja/warsztat.ogg` | cisza | klucz grzechoczący, dokręcanie śruby |
+| 3 | praca: lutowanie (elektronik, haker) | `sounds/produkcja/lutowanie.ogg` | cisza | syk lutownicy, klikanie klawiatury |
+| 4 | praca: chemia (chemik, aptekarz, gorzelnik) | `sounds/produkcja/chemia.ogg` | `gadzety/dezynfekcja.ogg` | bulgotanie, brzęk szkła laboratoryjnego |
+| 5 | praca: szycie (krawiec) | `sounds/produkcja/szycie.ogg` | cisza | nożyce, przeciąganie nici przez skórę |
+| 6 | praca: drewno (stolarz) | `sounds/produkcja/drewno.ogg` | cisza | piłowanie, strugarka |
+| 7 | ukończenie | `sounds/produkcja/gotowe.ogg` | cisza | krótki, satysfakcjonujący „klik-zatrzask” + metaliczny dźwięk |
+| 8 | porażka / porzucenie | `sounds/produkcja/porazka.ogg` | cisza | coś pęka, sypie się na podłogę |
+| 9 | Szybka produkcja („iskra”) | `sounds/produkcja/iskra.ogg` | `explosives/detonator_switch.ogg` | elektryczny trzask iskry, bardzo krótki |
+

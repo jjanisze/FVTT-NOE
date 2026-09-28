@@ -566,6 +566,22 @@ const BRON_PALNA_DLUGA = [
     caliber: "12ga_s", mag: { kind: "mag", max: 8 }, fixedDamage: true,
     weight: 4, price: 90, avail: 20,
     note: "Śrut: 3k4 kłute. Breneka: 3k6 obuchowe — zmień kaliber na .12 Ga (b)."
+  },
+  {
+    // NOE s. 99 (Zwiadowca → Łowca mutantów, zdolność „Pogromca”): strzelba na mutanty i potwory,
+    // budowana 100 h ze 100 gb surowców (PLAN_produkcja D35) — nie ma jej w cenniku. Waga i cena to
+    // szacunek MG (cena = 2 × surowce, jak każdy przedmiot ze wzoru); dostępność 0 — nie do kupienia.
+    id: "pogromca", name: "Pogromca", type: "palnaDluga", icon: "pump_shotgun.svg",
+    damage: { number: 4, denomination: 6, types: ["poison"] },
+    range: { value: 9, long: 18 },
+    props: ["wmag", "tryb_p", "ladowanie"],
+    caliber: "pogromca-trucizna", mag: { kind: "wmag", max: 1 }, chamber: false,
+    weight: 4, price: 200, avail: 0,
+    note: "Strzela nabojami-strzykawkami z trucizną, kwasem albo ładunkiem wybuchowym (4k6 — typ z naboju).",
+    manual: [
+      "Trafiony mutant lub potwór otrzymuje obrażenia krytyczne — moduł nie podwaja kości sam.",
+      "Biegły w Pogromcy jest tylko Łowca mutantów — biegłość w broni ustaw na karcie."
+    ]
   }
 ];
 

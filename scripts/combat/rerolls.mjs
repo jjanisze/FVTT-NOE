@@ -19,6 +19,11 @@
  *
  * Both require a confirmation dialog before use.
  * Chat messages for results have distinct colored styling.
+ *
+ * HOOK `neuroshima.rerolled({ message, roll, kind: "forsowanie"|"fuks", actor })` — after either
+ * reroll, so whatever was waiting on the source roll can re-resolve against the new total. The
+ * crafting final Test (`production/robota.mjs`) is the first listener: its source message carries
+ * `flags.<mod>.robotaTest`, and a reroll that meets the ST finishes the Robota (PLAN_produkcja D2).
  */
 
 import { addExhaustion } from "../config/exhaustion.mjs";
@@ -335,6 +340,9 @@ async function _onClickForsowanie(event) {
     await originalMessage.update({ [`flags.${MODULE_ID}.rerolled`]: true });
   }
 
+  // Ktoś może czekać na wynik tego rzutu — np. Test końcowy Roboty (`production/robota.mjs`).
+  Hooks.callAll("neuroshima.rerolled", { message: originalMessage, roll, kind: "forsowanie", actor });
+
   bar?.remove();
 }
 
@@ -425,6 +433,8 @@ async function _onClickFuks(event) {
   if (originalMessage) {
     await originalMessage.update({ [`flags.${MODULE_ID}.rerolled`]: true });
   }
+
+  Hooks.callAll("neuroshima.rerolled", { message: originalMessage, roll: reroll, kind: "fuks", actor });
 
   bar?.remove();
 }

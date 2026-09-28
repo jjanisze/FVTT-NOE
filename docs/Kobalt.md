@@ -112,6 +112,40 @@ ale nie ma jak zrzucić flary").*
 Kobaltu: to całkowicie nowa treść, nie ma czystej wersji RAW, do której dałoby się wrócić po
 wyłączeniu (ta sama logika co przy Pochodni).*
 
+### 9. Produkcja: profesja przyspiesza, zamiast dawać osobne przepisy
+
+Bez Kobaltu tabele schematów Speca (Pirotechnika, Rusznikarstwo, Farmacja, Mechanika,
+Hakerstwo, Serwisowanie) to osobne przepisy z własnym ST, czasem i surowcami — część z nich jest
+gorsza od zwykłego wzoru z rozdziału *Produkcja przedmiotów* (`docs/Errata-produkcja.md`).
+Z Kobaltem każdy przedmiot ma jeden przepis — ze wzoru — a profesja jest **cechą wykonawcy**:
+
+- przedmiot z listy twojej profesji robisz w **75% czasu**, a z **pełnym zestawem narzędzi
+  profesji pod ręką** (np. Pirotechnika: chemik + rusznikarz) w **50%**; zestaw nigdy nie jest
+  wymagany, tylko przyspiesza;
+- czas liczy się z Fabrykatorem (kolejne ×0,5), ale nigdy nie spada poniżej **25%**;
+- ST ze wzoru, tylko bez stopnia 30: przedmioty warte ponad 75 gb mają **ST 25**;
+- surowce bez rabatu — Przydasie działa jak zawsze;
+- Szybkiej produkcji profesja nie skraca (ma własną stawkę 1 min × 1 gb), Fabrykator tak.
+
+Przykład: Koktajl Mołotowa to 5 h. Pirotechnik: 3:45, z oboma zestawami 2:30, z Fabrykatorem 1:15.
+
+✅ *Zakładka Produkcja liczy czas i ST każdego przepisu z cechą profesji; Szybka produkcja jej nie
+używa. Jak to wygląda przy stole — [Produkcja.md](Produkcja.md).*
+
+### 10. Produkcja: porzucenie, waga Roboty, waga schematu
+
+Podręcznik nie mówi, co się dzieje z porzuconą produkcją ani ile waży. Z Kobaltem:
+
+- **Porzucenie** Roboty oddaje wszystkie surowce, dopóki postęp nie przekroczy **10%**; później
+  połowę. Bez Kobaltu Roboty nie da się porzucić — tylko skończyć.
+- **Waga Roboty** płynie od wagi surowców do wagi gotowego przedmiotu, proporcjonalnie do
+  postępu. Bez Kobaltu Robota waży tyle, ile surowce, które do niej weszły, aż do ukończenia.
+- **Schemat** waży **1 g na godzinę** produkcji (schemat traktora — 1000 h — to 1 kg dokumentacji).
+  Bez Kobaltu schemat nic nie waży.
+
+✅ *Porzucenie w menu Roboty (⋯), waga Roboty i Schematu w udźwigu; bez Kobaltu przycisku porzucenia
+nie ma.*
+
 ## Dopisywanie nowej zasady
 
 Każda nowa zasada Kobaltu jako osobny nagłówek `###`, w miarę możności:

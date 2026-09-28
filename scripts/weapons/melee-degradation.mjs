@@ -3,8 +3,6 @@ import { hasAddon } from "../config/addons-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const DEGRADATION_FLAG = "degradation";
-const REPAIR_WEAPON_DC = 15; // Matches "Naprawa zdegradowanej broni białej" in toolkits-data.mjs (kowala action).
-const REPAIR_TOOL_KEY = "kowala";
 
 export function registerMeleeDegradation() {
   Hooks.on("dnd5e.postRollAttack", onPostRollAttack);
@@ -153,74 +151,18 @@ export async function repairWeapon(item, { chat = true } = {}) {
   return true;
 }
 
-function _hasKowalTools(actor) {
-  return !!actor?.system?.tools?.[REPAIR_TOOL_KEY];
-}
-
-function _getRepairCheckConfig(actor) {
-  return {
-    label: CONFIG.DND5E.tools?.[REPAIR_TOOL_KEY]?.label ?? "Narzędzia małego kowala",
-    roll: config => actor.rollToolCheck({ ...config, tool: REPAIR_TOOL_KEY })
-  };
-}
-
 /**
- * Repair a degraded melee weapon via the item sheet's own convenience button — the
- * counterpart to `jams.mjs`'s `attemptRepair()` for firearms, same shape: roll the
- * actual tool check (ST 15, "kowala") if the actor is proficient, otherwise fall back
- * to a GM-narrated confirm dialog (e.g. paid a smith). This used to just call
- * `repairWeapon()` unconditionally for free — a bypass that cost nothing and required
- * no tools at all, undermining `toolkit-kowal.mjs`'s properly-gated "Naprawa
- * zdegradowanej broni białej" toolkit action. Both paths now cost the same ST 15
- * check; this one is just the shortcut reachable straight from the broken weapon
- * instead of via the kowal toolkit item's own activity.
+ * Naprawa wyszczerbionej broni białej — przez tabelę naprawy (PLAN_produkcja §11, D17): stopień
+ * wg liczby kroków kości od oryginału (1 — Drobnostka, 2 — Trochę roboty, 3+ — Skomplikowana
+ * harówa), z kosztem i czasem z tego samego wiersza. Dawniej stałe ST 15 i „Akcja” — RAW daje co
+ * najmniej 1k4 minut. Udana naprawa kończy się `repairWeapon()` (przywraca oryginał w całości).
+ * Import dynamiczny: `production/naprawa.mjs` sam importuje ten plik.
  */
 export async function attemptRepairMelee(item) {
   if (!isMeleeWeapon(item) || !item.actor) return false;
-  const state = getDegradationState(item);
-  if (!state.originalDenomination) return false;
-
-  const actor = item.actor;
-
-  if (_hasKowalTools(actor)) {
-    const repairCheck = _getRepairCheckConfig(actor);
-    const rolls = await repairCheck.roll({
-      target: REPAIR_WEAPON_DC
-    }, {}, {
-      data: {
-        flavor: `${item.name} - Naprawa broni (${repairCheck.label}, ST ${REPAIR_WEAPON_DC})`
-      }
-    });
-
-    const roll = rolls?.[0];
-    if (!roll) return false;
-
-    if ((roll.total ?? 0) >= REPAIR_WEAPON_DC) {
-      await repairWeapon(item, { chat: true });
-      return true;
-    }
-
-    await ChatMessage.create({
-      speaker: ChatMessage.getSpeaker({ actor }),
-      content: `<div><strong>${item.name}</strong> pozostaje wyszczerbiona. Naprawa się nie udała.</div>`
-    });
-    return false;
-  }
-
-  // No tools on the sheet — GM narrates repair (e.g. paid smith), same fallback shape
-  // as firearms' attemptRepair().
-  const confirmed = await foundry.applications.api.DialogV2.confirm({
-    window: { title: `Naprawa broni: ${item.name}` },
-    content: `<p>Czy udał się test<br><strong>Mały Kowal — Siła lub Mądrość ST ${REPAIR_WEAPON_DC}</strong>?</p>`,
-    yes: { label: "Tak — broń naprawiona", icon: "fas fa-check" },
-    no: { label: "Nie — naprawa nieudana", icon: "fas fa-times" },
-    rejectClose: false
-  });
-
-  if (!confirmed) return false;
-
-  await repairWeapon(item, { chat: true });
-  return true;
+  if (!getDegradationState(item).originalDenomination) return false;
+  const { oknoNaprawy } = await import("../production/naprawa.mjs");
+  return oknoNaprawy(item.actor, item);
 }
 
 async function onPostRollAttack(rolls, { subject } = {}) {
@@ -249,11 +191,8 @@ function onRenderItemSheet(app, html) {
   const isDegraded = state.currentDenomination < state.originalDenomination;
 
   if (isDegraded) {
-    const hasTools = _hasKowalTools(item.actor);
-    const repairCheck = _getRepairCheckConfig(item.actor);
-    const requirement = hasTools
-      ? `Test: ${repairCheck.label} ST ${REPAIR_WEAPON_DC}.`
-      : `Brak narzędzi — potwierdź przez dialog czy zewnętrzny kowal naprawił broń (ST ${REPAIR_WEAPON_DC}).`;
+    const requirement = `Naprawa wg tabeli (s. 146): im więcej kroków kości w dół, tym wyższy stopień — `
+      + `ST, koszt i czas w oknie naprawy.`;
 
     const div = document.createElement("div");
     div.classList.add("form-group", "stacked", "neuro-weapon-maintenance-panel");
@@ -265,14 +204,13 @@ function onRenderItemSheet(app, html) {
       <h3 style="color:#aa0000; display:flex; justify-content:space-between; align-items:center;">
         <span>Stępiona / Wyszczerbiona Broń!</span>
         <button type="button" class="neuro-repair-melee-btn" style="width:auto; font-size:12px; padding:0 8px;">
-          <i class="fas fa-hammer"></i> Napraw broń (Akcja)
+          <i class="fas fa-hammer"></i> Napraw broń…
         </button>
       </h3>
       <p style="font-size: 12px; color: #666; margin-top:2px;">Bieżąca kość obrażeń spadła do <strong>k${state.currentDenomination ?? 1}</strong>. ${requirement}</p>
     `;
 
-    // Podepnij obsługę — patrz attemptRepairMelee(): to samo ST 15 co narzędzia małego
-    // kowala, tu tylko skrót bezpośrednio z karty broni zamiast z aktywności zestawu.
+    // Podepnij obsługę — patrz attemptRepairMelee(): okno naprawy z tabeli (D17).
     div.querySelector(".neuro-repair-melee-btn").addEventListener("click", async (e) => {
       e.preventDefault();
       await attemptRepairMelee(item);

@@ -2,7 +2,7 @@
   "id": "neuroshima-2026-overrides",
   "title": "Neuroshima: Ostatnia Era",
   "description": "Neuroshima 5e overrides for dnd5e — skills, combat, equipment, and post-apo survival mechanics.",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "authors": [{ "name": "Jacek Janiszewski" }],
   "url": "https://github.com/jjanisze/FVTT-NOE",
   "manifest": "https://github.com/jjanisze/FVTT-NOE/releases/latest/download/module.json",
@@ -146,6 +146,14 @@
       "ownership": { "PLAYER": "OBSERVER", "ASSISTANT": "OWNER" }
     },
     {
+      "name": "schematy",
+      "label": "Neuroshima — Schematy",
+      "path": "packs/schematy",
+      "type": "Item",
+      "system": "dnd5e",
+      "ownership": { "PLAYER": "NONE", "ASSISTANT": "OWNER" }
+    },
+    {
       "name": "bestiariusz",
       "label": "Neuroshima — Bestiariusz",
       "path": "packs/bestiariusz",
@@ -159,7 +167,7 @@
       "name": "Neuroshima",
       "sorting": "m",
       "color": "#6b3f1f",
-      "packs": ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "pochodzenia", "zdolnosci-pochodzenia", "bron", "magazynki", "sprzet", "pancerze", "lekarstwa", "amunicja", "granaty", "narzedzia", "bestiariusz"]
+      "packs": ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "pochodzenia", "zdolnosci-pochodzenia", "bron", "magazynki", "sprzet", "pancerze", "lekarstwa", "amunicja", "granaty", "narzedzia", "schematy", "bestiariusz"]
     }
   ],
   "esmodules": ["scripts/main.mjs"],

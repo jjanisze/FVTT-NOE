@@ -253,8 +253,60 @@ export const AMMO_CALIBERS = [
     price: 4, avail: 20, weight: 0.010
   },
 
+  /* ── Specjalna: naboje do Pogromcy (NOE s. 99) ─────────────────── */
+  // Produkuje je tylko Łowca mutantów z Pogromcą — do PB sztuk na Długi odpoczynek, 10 gb surowców
+  // każdy (1 MK, 1 CZ, 8 CH), bez Testu (PLAN_produkcja D35). Cena = 2 × surowce, dostępność 0.
+  {
+    id: "pogromca-trucizna", label: "Nabój do Pogromcy (trucizna)", icon: "ammo_dart.svg",
+    category: "Specjalna", family: "pogromca", formula: "4d6", type: "poison", props: [],
+    note: "Strzykawka z trucizną — trafiony mutant lub potwór dostaje obrażenia krytyczne.",
+    price: 20, avail: 0, weight: 0.05
+  },
+  {
+    id: "pogromca-kwas", label: "Nabój do Pogromcy (kwas)", icon: "ammo_dart.svg",
+    category: "Specjalna", family: "pogromca", formula: "4d6", type: "acid", props: [],
+    note: "Strzykawka z kwasem — trafiony mutant lub potwór dostaje obrażenia krytyczne.",
+    price: 20, avail: 0, weight: 0.05
+  },
+  {
+    id: "pogromca-ogien", label: "Nabój do Pogromcy (wybuchowy)", icon: "ammo_dart.svg",
+    category: "Specjalna", family: "pogromca", formula: "4d6", type: "fire", props: [],
+    note: "Strzykawka, która eksploduje — trafiony mutant lub potwór dostaje obrażenia krytyczne.",
+    price: 20, avail: 0, weight: 0.05
+  },
+
   ...KOBALT_AMMO,
 ];
+
+/**
+ * Dane przedmiotu-naboju (`consumable`/`ammo`) — wspólne dla paczki `amunicja`
+ * (`dev/packs/build-packs.mjs`) i dla produkcji (`production/wynik.mjs`).
+ */
+export function buildAmmoItemData(c, moduleId = "neuroshima-2026-overrides") {
+  const desc = [
+    `<p><strong>Kategoria:</strong> ${c.category}</p>`,
+    c.formula ? `<p><strong>Obrażenia:</strong> ${c.formula} (${c.type})</p>` : "",
+    c.aoe ? `<p><strong>Obszar:</strong> ${c.aoe}</p>` : "",
+    c.note ? `<p>${c.note}</p>` : ""
+  ].join("");
+  return {
+    name: c.label,
+    type: "consumable",
+    img: `modules/${moduleId}/icons/ammo/${c.icon}`,
+    system: {
+      description: { value: desc, chat: "" },
+      source: { custom: "Neuroshima RPG", rules: "2024" },
+      type: { value: "ammo", subtype: c.id },
+      quantity: 1,
+      weight: { value: c.weight ?? 0.02, units: "kg" },
+      price: { value: c.price, denomination: "gb" },
+      properties: [],
+      uses: { max: "", spent: 0, recovery: [], autoDestroy: false },
+      activities: {}
+    },
+    flags: { [moduleId]: { caliber: c.id, availability: c.avail } }
+  };
+}
 
 /* -----------------------------------------------------------------
    Rodziny naboi

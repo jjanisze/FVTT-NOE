@@ -38,7 +38,8 @@ other tables running this module — but every such fragment carries an explicit
 where it came from. It is **not** gated behind the Kobalt toggle and it does **not** go in
 `scripts/wkk/`.
 
-Currently four fragments — two from the magazine rebuild, one grenade-range ruling, one erratum:
+Currently five fragments — two from the magazine rebuild, one grenade-range ruling, one erratum,
+one crafting ruling:
 
 | Mechanic | Where |
 |---|---|
@@ -46,6 +47,7 @@ Currently four fragments — two from the magazine rebuild, one grenade-range ru
 | No loading rounds into a removable magazine during combat | `weapons/magazine.mjs`, `_performLoadOneAction()` |
 | Grenade throw range floor is 18 m — "minimum 9" applies to the modifier term, resolving the rulebook's own rule-vs-example contradiction | `actors/grenade-inventory.mjs`, `_throwRangeMeters()` (+ its copy in `wkk/items/flara.mjs`) |
 | Cywil's Widły deal piercing damage — the October printing dropped the type (March had it) | `dev/bestiary/gen_bestiary.py`, `AUTOMATION["cywil.widly-tylko-farmer"]` |
+| Spec profession recipe tables (NOE s. 80–84) apply **only to that profession** and stand **beside** the standard formula recipe, not instead of it; their tool requirement is the profession kit **and** the item's usual requirement (PLAN_produkcja D22, confirmed 2026-09-27) | `config/recipes-data.mjs`, `_zbudujPrzepisy()` |
 
 **Repo is public.** Attributing unpublished rulings to a named person should be cleared with
 them before it lands in a code comment — so the comments state the mechanic and its reasoning,
@@ -72,6 +74,7 @@ Zwinne dłonie check (author's idea, this table's numbers — see `TODO_mechanik
 | `wkk/config/armor-data.mjs` | Kamizelka taktyczna (light armour, +1 handy slot) |
 | `wkk/config/latarka-overrides.mjs` | `LIGHT_KOBALT` — see the override pattern below |
 | `wkk/config/molotov-light.mjs` | `MOLOTOV_LIGHT_KOBALT` — a lit Molotov's light; RAW gives it none (see below) |
+| `wkk/config/production-kobalt.mjs` | Crafting (PLAN_produkcja): abandoning a Robota and its refund (D14), Robota weight interpolation (D4), schematic weight (D15), the Spec profession as an executor trait — ×0,75 / ×0,5 with the full kit, ×0,25 floor, no ST 30 (D26–D28, D32; D30 falls out of D26). Host: `config/production-rules.mjs`, each with its `..._RAW` twin |
 | `wkk/combat/weapon-save-properties.mjs` | `rozrywajaca` |
 | `wkk/combat/bleeding.mjs` | `dumdum` bleed profile |
 | `wkk/registry.mjs` | Every WKK export in one place — see its own header comment |
@@ -87,8 +90,10 @@ shares one local constant between both keys — see its own comment.
 
 ## The override pattern (NOE item + WKK numbers)
 
-Currently one case: Latarka's light radius (`items/latarka.mjs`). The shape to copy for the
-next one:
+Latarka's light radius (`items/latarka.mjs`) was the first case; crafting
+(`config/production-rules.mjs` ↔ `wkk/config/production-kobalt.mjs`) is the largest — pure rule
+functions take `kobalt` as a parameter (default `isKobaltEnabled()`), so tests pass both modes
+explicitly instead of flipping the world setting. The shape to copy for the next one:
 
 - The RAW value stays in the host file, named `..._RAW`.
 - The WKK value moves to its `wkk/` counterpart, named `..._KOBALT`, with a doc comment

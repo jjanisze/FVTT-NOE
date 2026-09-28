@@ -56,6 +56,14 @@ Effects, warunki przerwania, karty czatu).
 - **Odpoczynek i podróż** — polowanie i gotowanie jako aktywności odpoczynku; system podróży
   drużyny z licznikiem czasu.
 
+## Produkcja i naprawa
+
+Karta postaci ma zakładkę **Produkcja**: trwające **Roboty** (produkcja albo naprawa jako
+przedmiot w Ekwipunku, z zamrożonymi surowcami i paskiem postępu), **Schematy** i **Wprawa** jako
+źródła dostępu do przepisów, praca na odpoczynku z budżetem godzin, Szybka produkcja Speca
+i naprawa broni oraz pancerzy w trzech stopniach. dnd5e nie ma nic podobnego — narzędzia służą
+tam tylko do Testów. Szczegóły: [Produkcja.md](Produkcja.md).
+
 ## Bestiariusz
 
 Kompendium przeciwników (`bestiariusz`) zbudowane z tych samych narzędzi co reszta kompendiów —
@@ -70,8 +78,7 @@ moduł działa normalnie, po prostu bez tych efektów.
 
 ## Czego świadomie nie ma (jeszcze)
 
-Produkcja przedmiotów i naprawa (schematy, elaboracja amunicji), szabrowanie i bebeszenie, handel
-(dostępność, ceny regionalne), towarzysze i drony, większość zasad pojazdów (jest plansza pościgu
+Szabrowanie i bebeszenie, handel (dostępność, ceny regionalne, rzemieślnicy-NPC), towarzysze i drony, większość zasad pojazdów (jest plansza pościgu
 z torami, nie ma karty pojazdu, manewrów ani tabel awarii), Kolory Neuroshimy. Kolejność prac —
 `PLAN_beta.md`, stan — macierz na górze `IMPLEMENTATION.md`. To lista rzeczy poza zakresem
 obecnej wersji, nie ukryte błędy.

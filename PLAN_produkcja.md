@@ -1,9 +1,11 @@
 # PLAN — Produkcja: Roboty, Schematy, Wprawa, Naprawa
 
-> Status: **PROJEKT ZAMKNIĘTY** (2026-09-28, moduł v0.16.x) — decyzje D1–D36, brak otwartych
-> pytań, kodu jeszcze nie ma. Następny krok: **E0** (§13). Rozwinięcie kamienia **M2** z
+> Status: **WDROŻONY** (2026-09-28, moduł v0.17.0) — E0–E7 zrobione, E8 bez dwóch pozycji
+> (§13), odstępstwa od projektu w §13a. Dla graczy: [docs/Produkcja.md](docs/Produkcja.md).
+> Zostaje: przebudowa paczek przy zamkniętym Foundry (Pogromca, plakietki pokrycia), nagrania
+> (`dev/icons/MISSING.md` C) i pierwsza sesja przy stole. Projekt: decyzje D1–D36, brak otwartych pytań. Rozwinięcie kamienia **M2** z
 > [PLAN_beta.md](PLAN_beta.md), brane **poza kolejnością** (decyzja MG). Wiersz macierzy:
-> „Produkcja przedmiotów” w [IMPLEMENTATION.md § Stan projektu](IMPLEMENTATION.md#stan-projektu) — dziś ❌.
+> „Produkcja przedmiotów” w [IMPLEMENTATION.md § Stan projektu](IMPLEMENTATION.md#stan-projektu) — ✅ od v0.17.0.
 >
 > RAW (NOE, wydanie październikowe): Produkcja przedmiotów **s. 144–146**; Postój **s. 45–47**;
 > Spec — Szybka produkcja **s. 79**, profesje i ich tabele schematów **s. 80–84**; narzędzia
@@ -563,67 +565,90 @@ Speca: nieużywana obniża moc klasy bardziej niż którakolwiek inna zdolność
 Rozmiar: **S** / **M** / **L** (względnie). Każdy etap kończy się czymś grywalnym.
 
 ### E0 — Czyste reguły i dane (M)
-- [ ] `config/production-rules.mjs`: budżet surowców, godziny, ST z wartości, limit doby, budżety
+- [x] `config/production-rules.mjs`: budżet surowców, godziny, ST z wartości, limit doby, budżety
   KO/DO, Fabrykator, Przydasie, próg schematu, alokacja alternatyw, zwrot (WKK przez
   `isKobaltEnabled()`, wartości w `wkk/config/production-kobalt.mjs`), waga Roboty, budżet Szybkiej produkcji;
   czas w minutach (D29); cecha profesji z WKK — mnożniki, podłoga, drabina ST (D26–D28, D32)
-- [ ] `SUROWCE_TYPES.gbPerKg` + `actors/surowce-store.mjs` (lejek surowców, przepięcie
+- [x] `SUROWCE_TYPES.gbPerKg` + `actors/surowce-store.mjs` (lejek surowców, przepięcie
   `surowce-inventory.mjs` i `pochodnia.mjs`)
-- [ ] `config/recipes-data.mjs`: 6 tabel profesji + elaboracja (z poprawkami D31), zestawy profesji,
+- [x] `config/recipes-data.mjs`: 6 tabel profesji + elaboracja (z poprawkami D31), zestawy profesji,
   generator z katalogów, zwykłe wymogi narzędzi, profile podziału
-- [ ] `validate:recipes` + audyt przepisów profesji względem standardowych (ostrzeżenia, §5.1b);
+- [x] `validate:recipes` + audyt przepisów profesji względem standardowych (ostrzeżenia, §5.1b);
   lista braków w katalogach; D22 dopisane do tabeli RAI w `scripts/wkk/README.md`, a reguły WKK
   (D4, D14, D15, D26–D28, D30, D32) do jego spisu
 
 ### E1 — Robota (M)
-- [ ] `production/robota.mjs`: `start / work / adjust / test / abort / finish`, strażnik duplikatów;
+- [x] `production/robota.mjs`: `start / work / adjust / test / abort / finish`, strażnik duplikatów;
   mnożnik z kierownika przy każdej pracy
-- [ ] Test końcowy + hook `neuroshima.rerolled` w `rerolls.mjs`; Ułatwienia z Pochodzeń po tagach
-- [ ] Karty czatu (wzorzec: nasłuch `click` w fazie capture na `document`), kategoria udźwigu „Roboty”
-- [ ] API `game.neuroshima.produkcja.*`
+- [x] Test końcowy + hook `neuroshima.rerolled` w `rerolls.mjs`; Ułatwienia z Pochodzeń po tagach
+- [x] Karty czatu (wzorzec: nasłuch `click` w fazie capture na `document`), kategoria udźwigu „Roboty”
+- [x] API `game.neuroshima.produkcja.*`
 
 **Gotowe gdy:** z konsoli da się zacząć, przepracować, zdać/oblać Test i porzucić Robotę; surowce
 schodzą i wracają zgodnie z D14.
 
 ### E2 — Zakładka Produkcja (M–L)
-- [ ] Zakładka w `actors/sheet-shell.mjs` (`PARTS` + `TABS` + `templates/tab-produkcja.hbs`), plakietka
-- [ ] Na warsztacie, Surowce z nakładką przy najechaniu, Co umiesz zrobić z grupami wykonalności,
+- [x] Zakładka w `actors/sheet-shell.mjs` (`PARTS` + `TABS` + `templates/tab-produkcja.hbs`), plakietka
+- [x] Na warsztacie, Surowce z nakładką przy najechaniu, Co umiesz zrobić z grupami wykonalności,
   Wprawa i Schematy; okno startu
-- [ ] Narzędzia MG: Nadaj Wprawę (upuszczenie przedmiotu + notatka), Robota ad hoc, korekta
-- [ ] „Zacznij mimo braków”, plakietka ⚠, przyciski MG *Zatwierdź* / *Zmień ST* (D23)
+- [x] Narzędzia MG: Nadaj Wprawę (upuszczenie przedmiotu + notatka), Robota ad hoc, korekta
+- [x] „Zacznij mimo braków”, plakietka ⚠, przyciski MG *Zatwierdź* / *Zmień ST* (D23)
 
 **Gotowe gdy:** Spec z Pirotechniką robi granat od kliknięcia do przedmiotu w plecaku.
 
 ### E3 — Schematy (S–M)
-- [ ] Kształt przedmiotu, rozmiary, ikony, podpowiedź w Ekwipunku
-- [ ] Paczka `schematy` w `dev/packs/build-packs.mjs` (budowa przy zamkniętym Foundry)
-- [ ] „Utwórz schemat” (MG)
+- [x] Kształt przedmiotu, rozmiary, ikony, podpowiedź w Ekwipunku
+- [x] Paczka `schematy` w `dev/packs/build-packs.mjs` (budowa przy zamkniętym Foundry)
+- [x] „Utwórz schemat” (MG)
 
 ### E4 — Pula i miejsca (M)
-- [ ] Skan puli, grupa „🚚 Z puli”, „Przenieś brakujące”, ostrzeżenie o odległości
-- [ ] „Przenieś do…” dla Robót, Miejsca (z uprawnieniami drużyny), lista Robót na karcie pojazdu / Miejsca
-- [ ] Zakaz klonowania (§8.1): lejek `move`, owijka upuszczania, `preCreateItem`, menu, ilość,
+- [x] Skan puli, grupa „🚚 Z puli”, „Przenieś brakujące”, ostrzeżenie o odległości
+- [x] „Przenieś do…” dla Robót, Miejsca (z uprawnieniami drużyny), lista Robót na karcie pojazdu / Miejsca
+- [x] Zakaz klonowania (§8.1): lejek `move`, owijka upuszczania, `preCreateItem`, menu, ilość,
   pojemniki, duplikacja aktora, audyt; prośba do MG; zmiana kierownika przy przejęciu
 
 ### E5 — Odpoczynki (M)
-- [ ] Rejestr aktywności + sekcja „Zajęcia” w oknach KO / DO, budżety, zastosowanie w `restCompleted`
-- [ ] Truciciel, naboje Pogromcy, czyszczenie broni jako klienci
+- [x] Rejestr aktywności + sekcja „Zajęcia” w oknach KO / DO, budżety, zastosowanie w `restCompleted`
+- [x] Truciciel, naboje Pogromcy, czyszczenie broni jako klienci
 
 ### E6 — Szybka produkcja (S–M)
-- [ ] Pasek, koszyk, budżet 25 / 50 gb, ładunek, karta czatu i dźwięk „iskry”
+- [x] Pasek, koszyk, budżet 25 / 50 gb, ładunek, karta czatu i dźwięk „iskry”
 
 ### E7 — Naprawa (M)
-- [ ] Robota naprawy, trzy stopnie, Drobnostka bez Roboty
-- [ ] Przepięcie `jams.mjs` i `melee-degradation.mjs` (stopnie broni białej wg D17)
-- [ ] Wytrzymałość pancerzy za ustawieniem świata (D18), włączona w świecie kampanii
+- [x] Robota naprawy, trzy stopnie, Drobnostka bez Roboty
+- [x] Przepięcie `jams.mjs` i `melee-degradation.mjs` (stopnie broni białej wg D17)
+- [x] Wytrzymałość pancerzy za ustawieniem świata (D18), włączona w świecie kampanii
 
 ### E8 — Oprawa i dokumentacja (S)
-- [ ] Dźwięki, Sequencer, `docs/Produkcja.md` (perspektywa gracza, B7), wiersz macierzy,
-  plakietki Fabrykatora / Przydasie / Szybkiej produkcji / profesji w rejestrach automatyki
+- [~] Dźwięki — sloty i głośność gotowe, grają tylko pliki już obecne w repo; brakujące nagrania
+  w `dev/icons/MISSING.md`, sekcja C
+- [x] Sequencer (`scrollingText` nad żetonem), `docs/Produkcja.md` (B7), wiersz macierzy
+- [x] Plakietki Fabrykatora / Przydasie (Sztuczki) i Nano-Tech / „Jeśli ma silnik” (Pochodzenia)
+  w rejestrach automatyki
+- [—] Plakietki Szybkiej produkcji i profesji — zdolności klasowe nie mają jeszcze rejestru pokrycia
+  (`PLAN_beta.md` M0); wrócą razem z nim
 
 **Gotowe (M2 w PLAN_beta):** postać ze schematem albo Wprawą planuje, przepracowuje (także na
 odpoczynku) i kończy przedmiot, surowce schodzą z panelu, naprawa broni i pancerza idzie jedną
 ścieżką.
+
+### 13a. Odstępstwa i dopiski z wdrożenia (2026-09-28)
+
+- **Limit 10 h na dobę (L8)** liczy dobę z `game.time.worldTime` (flaga `produkcjaDoba` na
+  aktorze), nie z licznika dni kalendarza — prostsze i niezależne od modułu kalendarza. Nadal
+  tylko ostrzeżenie.
+- **Pogromca (D35)** — podział surowców wprost z NOE s. 99 (10 MK / 10 CE / 80 CZ), nie profil
+  broni palnej.
+- **Bez przepisu standardowego:** Woda pitna i .22 LR (obok Pogromcy i jego naboi, złotego Desert
+  Eagle i surowego jedzenia) — `NADPISANIA` w `recipes-data.mjs`.
+- **Z puli: także zestaw narzędzi.** Okno startu przenosi brakujące surowce *i* brakujący zestaw
+  (`przeniesBrakujace`, `przeniesZestaw`), nie tylko surowce.
+- **Wejście do naprawy pancerza** — pancerz nie ma własnego panelu jak broń, więc doszły
+  „Napraw…” w nagłówku arkusza każdego posiadanego przedmiotu (MG decyduje, co da się naprawić)
+  i lista „Do naprawy” na zakładce. Jedna Robota naprawy na przedmiot.
+- **Wynik spoza paczki** — gdy paczka nie ma jeszcze przedmiotu (Pogromca do przebudowy paczek),
+  `production/wynik.mjs` składa go builderem z danych katalogu, a w ostateczności tworzy `loot`
+  z flagą `produktZastepczy` zamiast przerywać Robotę.
 
 ---
 

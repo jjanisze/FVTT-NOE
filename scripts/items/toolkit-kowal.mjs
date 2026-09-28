@@ -45,15 +45,27 @@ export function registerKowalActions() {
     })
   });
 
+  // Naprawa idzie przez tabelę naprawy (PLAN_produkcja §11, D17) — stopień, koszt i czas zależą
+  // od tego, jak bardzo broń jest wyszczerbiona. Bramka wybiera broń i blokuje natywny rzut
+  // (stałe ST 15 bez kosztu i czasu), a okno naprawy prowadzi dalej.
   registerCheckGate("kowalaNaprawa", {
     canUse: activity => _canActOn(activity, getRepairableWeapons),
-    run: activity => _pickAndTag(activity, {
-      kind: "naprawa",
-      getWeapons: getRepairableWeapons,
-      emptyWarning: "Brak zdegradowanej broni białej do naprawy.",
-      dialogTitle: "Naprawa broni",
-      dialogHint: "Którą broń naprawić?"
-    })
+    run: async activity => {
+      const tag = await _pickAndTag(activity, {
+        kind: "naprawa",
+        getWeapons: getRepairableWeapons,
+        emptyWarning: "Brak zdegradowanej broni białej do naprawy.",
+        dialogTitle: "Naprawa broni",
+        dialogHint: "Którą broń naprawić?"
+      });
+      const uuid = tag?.data?.flags?.[MODULE_ID]?.kowalaWeapon;
+      const weapon = uuid ? fromUuidSync(uuid) : null;
+      if (weapon) {
+        const { oknoNaprawy } = await import("../production/naprawa.mjs");
+        oknoNaprawy(activity.actor, weapon);
+      }
+      return false;
+    }
   });
 
   Hooks.on("neuroshima.toolCheckRolled", _onToolCheckRolled);

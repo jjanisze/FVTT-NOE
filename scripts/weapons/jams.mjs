@@ -3,7 +3,6 @@ const JAM_FLAG = "jam";
 const MAINTENANCE_FLAG = "maintenance";
 const CLEAR_JAM_DC = 10;
 const REPAIR_WEAPON_DC = 15;
-const GUNSMITH_TOOL_KEY = "rusznikarza";
 import { ABILITY_KEYS, buildAbilityRuleChangeNotice, getAbilityLabel, hasAbility } from "../actors/abilities.mjs";
 import { playWeaponSound, WeaponSound } from "./sounds.mjs";
 import { seqScrollText } from "./sequencer.mjs";
@@ -251,50 +250,17 @@ export async function attemptClearJam(item) {
   return false;
 }
 
+/**
+ * Naprawa uszkodzonej broni palnej — przez tabelę naprawy (PLAN_produkcja §11, L16): domyślnie
+ * „Trochę roboty” (ST 15, 30% ceny w surowcach, 1k4 h). Dawniej sam Test bez kosztu i czasu.
+ * Udana naprawa kończy się `clearDamage()` z tego pliku — to wciąż jest skutek.
+ * Import dynamiczny: `production/naprawa.mjs` sam importuje ten plik.
+ */
 export async function attemptRepair(item) {
   const liveItem = _getLiveItem(item);
   if (!liveItem?.actor || !isDamaged(liveItem)) return false;
-
-  if (_hasGunsmithTools(liveItem.actor)) {
-    // Actor has tools — roll the actual check
-    const repairCheck = _getRepairCheckConfig(liveItem.actor);
-    const rolls = await repairCheck.roll({
-      target: REPAIR_WEAPON_DC
-    }, {}, {
-      data: {
-        flavor: `${liveItem.name} - Naprawa broni (${repairCheck.label}, ST ${REPAIR_WEAPON_DC})`
-      }
-    });
-
-    const roll = rolls?.[0];
-    if (!roll) return false;
-
-    if ((roll.total ?? 0) >= REPAIR_WEAPON_DC) {
-      await clearDamage(liveItem, { chat: true });
-      return true;
-    }
-
-    await ChatMessage.create({
-      speaker: ChatMessage.getSpeaker({ actor: liveItem.actor }),
-      content: `<div><strong>${liveItem.name}</strong> pozostaje uszkodzona. Naprawa się nie udała.</div>`
-    });
-    return false;
-  }
-
-  // No tools on the sheet — GM narrates repair (e.g. paid gunsmith).
-  // Ask the player/GM whether the repair check succeeded.
-  const confirmed = await foundry.applications.api.DialogV2.confirm({
-    window: { title: `Naprawa broni: ${liveItem.name}` },
-    content: `<p>Czy udał się test<br><strong>Mały Rusznikarz — Zręczność lub Inteligencja ST ${REPAIR_WEAPON_DC}</strong>?</p>`,
-    yes: { label: "Tak — broń naprawiona", icon: "fas fa-check" },
-    no: { label: "Nie — naprawa nieudana", icon: "fas fa-times" },
-    rejectClose: false
-  });
-
-  if (!confirmed) return false;
-
-  await clearDamage(liveItem, { chat: true });
-  return true;
+  const { oknoNaprawy } = await import("../production/naprawa.mjs");
+  return oknoNaprawy(liveItem.actor, liveItem);
 }
 
 export async function cleanWeapon(item, { chat = true } = {}) {
@@ -523,13 +489,6 @@ function _buildMaintenancePanelHtml(item) {
   `;
 }
 
-function _getRepairCheckConfig(actor) {
-  return {
-    label: CONFIG.DND5E.tools?.[GUNSMITH_TOOL_KEY]?.label ?? "Narzędzia małego rusznikarza",
-    roll: config => actor.rollToolCheck({ ...config, tool: GUNSMITH_TOOL_KEY })
-  };
-}
-
 async function _setWeaponFaultState(item, state) {
   const hasState = Object.keys(state ?? {}).length > 0;
   if (hasState) return item.setFlag(MODULE_ID, JAM_FLAG, state);
@@ -564,15 +523,12 @@ function _buildJamBlock(item) {
 }
 
 function _buildDamageBlock(item) {
-  const repairCheck = _getRepairCheckConfig(item.actor);
-  const hasTools = _hasGunsmithTools(item.actor);
-  const requirement = hasTools
-    ? `Test: ${repairCheck.label} ST ${REPAIR_WEAPON_DC}.`
-    : `Brak narzędzi — potwierdź przez dialog czy zewnętrzny rusznikarz naprawił broń (ST ${REPAIR_WEAPON_DC}).`;
+  const requirement = `Naprawa „Trochę roboty”: ST ${REPAIR_WEAPON_DC}, 30% ceny w surowcach, 1k4 h — `
+    + `narzędzia małego rusznikarza (s. 146).`;
   return `
     <div style="margin-top:10px;padding:8px 10px;border:1px solid #7a2c1d;background:rgba(90,18,10,0.18);border-radius:6px;">
       <strong>Uszkodzenie</strong> — ta broń nie może teraz strzelać i wymaga naprawy.
-      <button type="button" class="neuro-repair-weapon-btn" style="margin-left:8px;">Napraw broń (Akcja)</button>
+      <button type="button" class="neuro-repair-weapon-btn" style="margin-left:8px;">Napraw broń…</button>
       <div style="margin-top:6px;font-size:12px;opacity:0.85;">${requirement}</div>
     </div>
   `;
@@ -598,10 +554,6 @@ function _getJamImmunityAbilityKey(item) {
 
 function _hasJakDbaszTakMasz(actor) {
   return hasAbility(actor, ABILITY_KEYS.JAK_DBASZ_TAK_MASZ);
-}
-
-function _hasGunsmithTools(actor) {
-  return !!actor?.system?.tools?.[GUNSMITH_TOOL_KEY];
 }
 
 function _isFirearmItem(item) {

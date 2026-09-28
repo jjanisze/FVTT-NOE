@@ -1,4 +1,5 @@
 import { SUROWCE_TYPES, getSurowiecType } from "../config/surowce-data.mjs";
+import { transferAllSurowce } from "./surowce-store.mjs";
 
 /**
  * Neuroshima 5e — Surowce inventory panel.
@@ -426,60 +427,24 @@ async function _transferToVehicle(sourceActor) {
     return ui.notifications.warn(`Pojazd jest za daleko: ${gap.toFixed(1)} m (maks. ${TRANSFER_RANGE_M} m).`);
   }
 
-  // Surowce stacks with stock, in canonical type order.
-  const stacks = (sourceActor.items.contents)
-    .filter(i => getSurowiecType(i) && (i.system.quantity ?? 0) > 0)
-    .sort((a, b) => getSurowiecType(a).order - getSurowiecType(b).order);
-  if (!stacks.length) {
+  const hasStock = sourceActor.items.some(i => getSurowiecType(i) && (i.system.quantity ?? 0) > 0);
+  if (!hasStock) {
     return ui.notifications.info("Brak surowców do przekazania.");
   }
-  const totalAvailUnits = stacks.reduce((s, i) => s + (i.system.quantity ?? 0), 0);
 
   const capacityKg = _vehicleCapacityKg(vehicle);
-  let remainingKg = capacityKg - _vehicleCargoKg(vehicle);
+  const remainingKg = capacityKg - _vehicleCargoKg(vehicle);
   if (remainingKg <= 0) {
     return ui.notifications.warn(`${vehicle.name}: ładownia jest pełna.`);
   }
 
-  const toCreate = [];
-  const toUpdateVehicle = [];
-  const toUpdateSource = [];
-  let movedKg = 0;
-  let movedUnits = 0;
-
-  for (const item of stacks) {
-    const unitKg = _itemWeightKg(item);
-    const have = item.system.quantity ?? 0;
-    const fit = unitKg > 0 ? Math.floor(remainingKg / unitKg) : have;
-    const move = Math.max(0, Math.min(have, fit));
-    if (move <= 0) continue;
-
-    const existing = vehicle.items.find(v => v.type === item.type && v.name === item.name);
-    if (existing) {
-      toUpdateVehicle.push({ _id: existing.id, "system.quantity": (existing.system.quantity ?? 0) + move });
-    } else {
-      const data = item.toObject();
-      delete data._id;
-      delete data.folder;
-      data.system.quantity = move;
-      if ("equipped" in data.system) data.system.equipped = false;
-      toCreate.push(data);
-    }
-    toUpdateSource.push({ _id: item.id, "system.quantity": have - move });
-
-    movedKg += unitKg * move;
-    movedUnits += move;
-    remainingKg -= unitKg * move;
-    if (remainingKg <= 0) break;
-  }
+  // Whole stacks move with their names and descriptions — see `surowce-store.mjs`.
+  const { movedKg, movedUnits, totalUnits: totalAvailUnits } =
+    await transferAllSurowce(sourceActor, vehicle, { maxKg: remainingKg });
 
   if (movedUnits <= 0) {
     return ui.notifications.warn(`${vehicle.name}: ładownia pełna — nic się nie zmieściło.`);
   }
-
-  if (toCreate.length) await vehicle.createEmbeddedDocuments("Item", toCreate);
-  if (toUpdateVehicle.length) await vehicle.updateEmbeddedDocuments("Item", toUpdateVehicle);
-  if (toUpdateSource.length) await sourceActor.updateEmbeddedDocuments("Item", toUpdateSource);
 
   const partial = movedUnits < totalAvailUnits;
   const content = `

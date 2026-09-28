@@ -32,7 +32,7 @@ import {
 import { CHEMIA, chemiaItemData } from "../../scripts/config/chemia-data.mjs";
 import { SZTUCZKI, sztuczkaItemData } from "../../scripts/config/sztuczki-data.mjs";
 import { ORIGIN_ABILITIES, originAbilityItemData, POCHODZENIA, pochodzenieItemData, abilitiesOf, attrBonus } from "../../scripts/config/pochodzenia-data.mjs";
-import { AMMO_CALIBERS, GRENADE_TYPES, grenadeDescription } from "../../scripts/config/ammo-data.mjs";
+import { AMMO_CALIBERS, GRENADE_TYPES, grenadeDescription, buildAmmoItemData } from "../../scripts/config/ammo-data.mjs";
 import { WEAPONS, WEAPON_MAP, buildWeaponItemData } from "../../scripts/config/weapons-data.mjs";
 import { MAGAZINES, buildMagazineItemData } from "../../scripts/config/magazines-data.mjs";
 import { POCHODNIA_VARIANTS, buildPochodniaItemData } from "../../scripts/wkk/items/pochodnia.mjs";
@@ -43,6 +43,7 @@ import { buildDetonatorItemData, buildElectricFuzeItemData } from "../../scripts
 import { GOGLE_VARIANTS, buildGogleItemData } from "../../scripts/items/gogle.mjs";
 import { ARMORS, buildArmorItemData } from "../../scripts/config/armor-data.mjs";
 import { TOOLKITS, buildToolkitItemData } from "../../scripts/config/toolkits-data.mjs";
+import { przepisySchematow, schematItemData, kategoriaSchematu } from "../../scripts/config/schematy-data.mjs";
 import { BESTIARY } from "../../scripts/config/bestiary-data.mjs";
 import { BLOOD_TYPES, NEUROSHIMA_CREATURE_TYPES } from "../../scripts/config/creature-types.mjs";
 import { computeFovAngle } from "../../scripts/config/fov.mjs";
@@ -74,7 +75,8 @@ const PACK = {
   bron: "bron",
   magazynki: "magazynki",
   sprzet: "sprzet",
-  pancerze: "pancerze"
+  pancerze: "pancerze",
+  schematy: "schematy"
 };
 
 /** Portrait art migrated from Roll20 lives here, one folder per character. */
@@ -532,32 +534,8 @@ function buildPochodzenie(key) {
  * jest natychmiast rozpoznawany przez `actors/ammo-inventory.mjs`.
  */
 function buildAmmo(c) {
-  const desc = [
-    `<p><strong>Kategoria:</strong> ${c.category}</p>`,
-    c.formula ? `<p><strong>Obrażenia:</strong> ${c.formula} (${c.type})</p>` : "",
-    c.aoe ? `<p><strong>Obszar:</strong> ${c.aoe}</p>` : "",
-    c.note ? `<p>${c.note}</p>` : ""
-  ].join("");
-
-  return {
-    _id: idFor("ammo", c.id),
-    name: c.label,
-    type: "consumable",
-    img: `modules/${MODULE_ID}/icons/ammo/${c.icon}`,
-    system: {
-      description: { value: desc, chat: "" },
-      source: { custom: "Neuroshima RPG", rules: "2024" },
-      type: { value: "ammo", subtype: c.id },
-      quantity: 1,
-      weight: { value: c.weight ?? 0.02, units: "kg" },
-      price: { value: c.price, denomination: "gb" },
-      properties: [],
-      uses: { max: "", spent: 0, recovery: [], autoDestroy: false },
-      activities: {}
-    },
-    flags: { [MODULE_ID]: { caliber: c.id, availability: c.avail } },
-    _key: null
-  };
+  // Kształt przedmiotu żyje w `ammo-data.mjs` — ten sam dla paczki i dla produkcji.
+  return { _id: idFor("ammo", c.id), ...buildAmmoItemData(c, MODULE_ID), _key: null };
 }
 
 /**
@@ -1498,7 +1476,7 @@ function v14PrototypeToken(pt = {}) {
  *
  * and the item's own `effects` field holds ids, not documents.
  */
-async function writePack(name, docs) {
+async function writePack(name, docs, folders = []) {
   const dir = path.join(PACKS_ROOT, name);
   try {
     fs.rmSync(dir, { recursive: true, force: true });
@@ -1528,10 +1506,12 @@ async function writePack(name, docs) {
       effectCount++;
     }
   }
+  for (const folder of folders) batch.put(`!folders!${folder._id}`, { ...folder, _stats: folder._stats ?? v14Stats() });
   await batch.write();
   await db.close();
   console.log(`  ${name.padEnd(20)} ${String(docs.length).padStart(3)} documents`
-    + (effectCount ? `, ${effectCount} effects` : ""));
+    + (effectCount ? `, ${effectCount} effects` : "")
+    + (folders.length ? `, ${folders.length} folders` : ""));
 }
 
 /**
@@ -1621,6 +1601,26 @@ const sprzetDocs = [
   ...Object.keys(GOGLE_VARIANTS).map(buildGogle),
 ];
 const armorDocs = ARMORS.map(buildArmor);
+
+// Schematy (PLAN_produkcja §7) — jeden na przepis standardowy wymagający schematu, foldery wg kategorii.
+// Waga 0 w paczce: prawdziwą (D15, zależną od WKK) liczy `production/schematy.mjs` w danych pochodnych.
+const schematFolderMap = new Map();
+const schematDocs = przepisySchematow().map(p => {
+  const kat = kategoriaSchematu(p);
+  if (!schematFolderMap.has(kat.id)) schematFolderMap.set(kat.id, kat.label);
+  return {
+    ...schematItemData(p),
+    _id: idFor("schemat", p.wynik.ref),
+    folder: idFor("schemat-folder", kat.id),
+    _key: null
+  };
+});
+const schematFolders = [...schematFolderMap.entries()]
+  .sort((a, b) => a[1].localeCompare(b[1], "pl"))
+  .map(([id, label], i) => ({
+    _id: idFor("schemat-folder", id), name: label, type: "Item", folder: null,
+    sorting: "a", sort: i * 100000, color: null, flags: {}, description: ""
+  }));
 const magazineDocs = MAGAZINES.map(buildMagazine);
 
 // sanity: every uuid referenced from an advancement must resolve to a built doc
@@ -1684,6 +1684,7 @@ if (wanted(PACK.bron)) await writePack(PACK.bron, weaponDocs);
 if (wanted(PACK.magazynki)) await writePack(PACK.magazynki, magazineDocs);
 if (wanted(PACK.sprzet)) await writePack(PACK.sprzet, sprzetDocs);
 if (wanted(PACK.pancerze)) await writePack(PACK.pancerze, armorDocs);
+if (wanted(PACK.schematy)) await writePack(PACK.schematy, schematDocs, schematFolders);
 if (wanted(PACK.bestiariusz)) await writeActorPack(PACK.bestiariusz, bestiaryEntries, bestiaryFolders);
 
 if (wanted(PACK.bestiariusz)) {

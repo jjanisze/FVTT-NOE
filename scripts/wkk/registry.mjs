@@ -32,5 +32,9 @@ export { KOBALT_ARMORS } from "./config/armor-data.mjs";                  // →
 export { ROZRYWAJACA } from "./combat/weapon-save-properties.mjs";        // → combat/weapon-save-properties.mjs
 export { DUMDUM_BLEED_PROFILE } from "./combat/bleeding.mjs";             // → combat/bleeding.mjs
 
-// The one "NOE item, WKK numbers" override case — see items/latarka.mjs's `_light()`.
+// "NOE item/rule, WKK numbers" override cases — each host keeps its `..._RAW` twin.
 export { LIGHT_KOBALT } from "./config/latarka-overrides.mjs";            // → items/latarka.mjs
+export { MOLOTOV_LIGHT_KOBALT } from "./config/molotov-light.mjs";        // → actors/molotov.mjs
+export {
+  PORZUCENIE_KOBALT, WAGA_ROBOTY_KOBALT, SCHEMAT_GRAMY_NA_GODZINE_KOBALT, PROFESJA_KOBALT
+} from "./config/production-kobalt.mjs";                                  // → config/production-rules.mjs

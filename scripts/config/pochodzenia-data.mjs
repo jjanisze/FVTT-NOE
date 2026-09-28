@@ -165,7 +165,13 @@ export const ORIGIN_ABILITIES = Object.freeze({
     label: "Nano-Tech",
     text: "Ułatwienie przy konstruowaniu/naprawianiu urządzeń elektronicznych + biegłość "
       + "w narzędziach małego elektronika.",
-    auto: []
+    legacyAbilityKey: "nanoTech",
+    auto: [{
+      what: "Test końcowy produkcji i naprawy elektroniki (tag „elektronika” przepisu): "
+        + "Ułatwienie domyślnie zaznaczone w oknie rzutu.",
+      where: "production/robota.mjs"
+    }],
+    manual: "Biegłość w narzędziach elektronika — MG dopisuje na karcie (zdolność nie ma awansu z biegłością)."
   },
 
   /* --- Człowiek Pustyni --- */
@@ -211,7 +217,13 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "3–4",
     label: "Jeśli ma silnik, to ruszy",
     text: "Ułatwienie przy konstruowaniu/naprawianiu pojazdów + biegłość m. mechanik.",
-    auto: []
+    legacyAbilityKey: "jesliMaSilnik",
+    auto: [{
+      what: "Test końcowy produkcji i naprawy pojazdów mechanicznych (tag „pojazd-mechaniczny”): "
+        + "Ułatwienie domyślnie zaznaczone w oknie rzutu.",
+      where: "production/robota.mjs"
+    }],
+    manual: "Biegłość w narzędziach mechanika — MG dopisuje na karcie (zdolność nie ma awansu z biegłością)."
   },
   "ale-jazda": {
     id: "ale-jazda",

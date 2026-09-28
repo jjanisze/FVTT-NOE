@@ -140,7 +140,13 @@ export const SZTUCZKI = Object.freeze({
     req: "INT 18+, biegłość w 3 zestawach narzędzi",
     text: "+1 INT lub ZRC; produkcja przedmiotów 50% szybciej (mnóstwo narzędzi).",
     category: "produkcja",
-    auto: []
+    legacyAbilityKeys: ["fabrykator"],
+    auto: [{
+      what: "Produkcja: czas pracy ×0,5 przy każdej pracy nad Robotą i w Szybkiej produkcji "
+        + "(nie przy naprawie — D34).",
+      where: "production/wykonawca.mjs"
+    }],
+    manual: "Rozwój Cechy (+1 INT lub ZRC) wybiera się przy awansie."
   },
   fachowiec: {
     label: "Fachowiec",
@@ -354,7 +360,12 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 INT lub MDR; surowce potrzebne do produkcji własnoręcznie wykonywanych "
       + "przedmiotów tańsze o 50%.",
     category: "produkcja",
-    auto: []
+    legacyAbilityKeys: ["przydasie"],
+    auto: [{
+      what: "Produkcja: surowce ×0,5 (w górę) przy starcie Roboty i w Szybkiej produkcji; czas bez zmian.",
+      where: "production/wykonawca.mjs"
+    }],
+    manual: "Rozwój Cechy (+1 INT lub MDR) wybiera się przy awansie."
   },
   pulpFiction: {
     label: "Pulp Fiction",

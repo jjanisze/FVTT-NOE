@@ -32,8 +32,8 @@ dystrybuuje treści książki poza tym, co niezbędne do rozgrywki (statystyki, 
 ## Status projektu
 
 **Alfa.** Walka, broń i amunicja, stany, choroby, odpoczynki, podróż i przetrwanie działają i są
-używane przy żywym stole. Nie ma jeszcze produkcji przedmiotów, towarzyszy i dronów, szabrowania,
-handlu ani większości zasad pojazdów; większość zdolności klas to na razie sam tekst. Można się
+używane przy żywym stole. Produkcja przedmiotów i naprawa są świeże — jeszcze nie ograne przy
+stole. Nie ma jeszcze towarzyszy i dronów, szabrowania, handlu ani większości zasad pojazdów; większość zdolności klas to na razie sam tekst. Można się
 spodziewać zmian w danych między wersjami. Co jest zrobione — macierz w
 [`IMPLEMENTATION.md`](IMPLEMENTATION.md#stan-projektu); co trzeba zrobić, żeby wydać betę —
 [`PLAN_beta.md`](PLAN_beta.md).

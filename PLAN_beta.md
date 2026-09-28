@@ -132,27 +132,30 @@ i Sztuczek Fabrykator / Złomiarz / Przydasie stoi na tym rozdziale. RAW: s. 144
 
 > Projekt szczegółowy i decyzje MG (2026-09-27, brane poza kolejnością):
 > [PLAN_produkcja.md](PLAN_produkcja.md). Tam, gdzie lista niżej się z nim rozjeżdża, wygrywa tamten plik.
+>
+> **Zrobione w v0.17.0 (2026-09-28)** — wszystkie pozycje niżej; szczegóły i odstępstwa w
+> PLAN_produkcja §13 / §13a, dla graczy [docs/Produkcja.md](docs/Produkcja.md).
 
-- [ ] **Czyste zasady** (`config/production-rules.mjs` + testy): surowce = ⌊cena/2⌋ w gb, podział
+- [x] **Czyste zasady** (`config/production-rules.mjs` + testy): surowce = ⌊cena/2⌋ w gb, podział
   na typy proponowany, edytowalny przez MG; czas = cena (w górę) × 0,5 h dla jednorazowych, × 1 h
   dla wielorazowych; maks. 10 h pracy na dobę; ST wg wartości (≤10: 5, ≤25: 10, ≤50: 15, ≤75: 20,
   ≤100: 25, więcej: 30); pomocnik — Test narzędzi ST 10, sukces = Ułatwienie; porażka = od nowa
   z tymi samymi surowcami
-- [ ] **Projekt produkcji na aktorze** (flaga, jeden magazyn): przedmiot, zarezerwowane surowce
+- [x] **Projekt produkcji na aktorze** (flaga, jeden magazyn): przedmiot, zarezerwowane surowce
   (schodzą z `surowce-inventory.mjs`), przepracowane godziny; „przepracuj N h" przez zegar świata;
   Test ostatniego dnia; wynik = przedmiot z paczki / katalogu
-- [ ] **Wymagania**: biegłość w narzędziach + zestaw w ekwipunku (logika `tool-availability.mjs`),
+- [x] **Wymagania**: biegłość w narzędziach + zestaw w ekwipunku (logika `tool-availability.mjs`),
   schemat dla przedmiotów > 10 gb
-- [ ] **Schematy jako dane** (`config/schematy-data.mjs`): pirotechniczne (s. 80), rusznikarskie
+- [x] **Schematy jako dane** (`config/schematy-data.mjs`): pirotechniczne (s. 80), rusznikarskie
   (s. 81), farmaceutyczne (s. 82), hakerskie (s. 83), elaboracja amunicji (s. 136). Znane schematy
   na aktorze; Spec 3. poziomu dostaje je z wyboru profesji
-- [ ] **Szybka produkcja** (zdolność Speca): raz na odpoczynek ≤ 25 gb (50 gb od 11. poz.),
+- [x] **Szybka produkcja** (zdolność Speca): raz na odpoczynek ≤ 25 gb (50 gb od 11. poz.),
   1 min × 1 gb
-- [ ] **Naprawa** — generyczna akcja na przedmiocie: Drobnostka / Trochę roboty / Skomplikowana
+- [x] **Naprawa** — generyczna akcja na przedmiocie: Drobnostka / Trochę roboty / Skomplikowana
   harówa → ST 10/15/20, koszt 10/30/50 % ceny w surowcach, czas 1k4 min / 1k4 h / 2k4 h.
   Podpiąć istniejące: uszkodzenie broni palnej (`jams.mjs`), degradacja białej (`toolkit-kowal.mjs`),
   łatanie pancerza
-- [ ] `gear-data.mjs`: zaślepki `craftingPlaceholder` stają się prawdziwym wyjściem produkcji
+- [x] `gear-data.mjs`: zaślepki `craftingPlaceholder` stają się prawdziwym wyjściem produkcji
 
 **Gotowe gdy:** postać ze schematem planuje, przepracowuje i kończy przedmiot, surowce schodzą
 z panelu, naprawa broni i pancerza idzie jedną ścieżką.

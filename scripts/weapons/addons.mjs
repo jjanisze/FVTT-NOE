@@ -949,6 +949,11 @@ function _describeEffects(def) {
  * Loot item template for returning on uninstall
  * ============================================================ */
 
+/** Dane przedmiotu-ulepszenia (loot z flagą `ulepszenie`) — także wynik produkcji (`production/wynik.mjs`). */
+export function buildAddonLootItemData(def) {
+  return _buildLootItemData(def);
+}
+
 function _buildLootItemData(def) {
   // Some addon IDs differ from their icon file names
   const ICON_NAME_MAP = { "dociazone": "dociazenie" };

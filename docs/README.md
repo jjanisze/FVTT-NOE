@@ -10,8 +10,10 @@
 3. [Czym różni się od dnd5e](Zmiany-wzgledem-dnd5e.md) — przegląd mechaniczny dla graczy i MG.
 4. [Kolor Kobaltu](Kobalt.md) — domowe poprawki zasad, domyślnie włączone, do połączenia z
    każdym innym Kolorem.
-5. [FAQ](FAQ.md) — najczęstsze pytania.
-6. [Errata: przepisy profesji](Errata-produkcja.md) — wiersze tabel schematów Speca gorsze od
+5. [Produkcja i naprawa](Produkcja.md) — zakładka Produkcja, Roboty, Schematy i Wprawa,
+   odpoczynki, Szybka produkcja, naprawa broni i pancerzy.
+6. [FAQ](FAQ.md) — najczęstsze pytania.
+7. [Errata: przepisy profesji](Errata-produkcja.md) — wiersze tabel schematów Speca gorsze od
    przepisu standardowego.
 
 Coś jest niejasne albo brakuje strony, której szukasz? Zgłoś to jako

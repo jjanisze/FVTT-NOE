@@ -31,6 +31,7 @@ import { registerPoscigTests } from "./poscig.test.mjs";
 import { registerUdzwigTests } from "./udzwig.test.mjs";
 import { registerUdzwigAttackDisadvantageTests } from "./udzwig-attack-disadvantage.test.mjs";
 import { registerTokenScaleTests } from "./skala-zetonow.test.mjs";
+import { registerProdukcjaTests } from "./produkcja.test.mjs";
 import { runTests, listBatches } from "./runner.mjs";
 
 export function registerQuenchTests() {
@@ -47,6 +48,7 @@ export function registerQuenchTests() {
     registerUdzwigTests(quench);
     registerUdzwigAttackDisadvantageTests(quench);
     registerTokenScaleTests(quench);
+    registerProdukcjaTests(quench);
     registerSztuczkiDataTests(quench);
     registerSztuczkiBridgeTests(quench);
     registerSztuczkiCombatTests(quench);

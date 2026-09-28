@@ -26,6 +26,7 @@ import { registerStateColors } from "./config/state-colors.mjs";
 import { registerExhaustion } from "./config/exhaustion.mjs";
 import { registerLevelledConditions, levelledConditionsApi } from "./actors/levelled-conditions.mjs";
 import { registerRestOverrides } from "./config/rest.mjs";
+import { registerRestActivities, restActivitiesApi } from "./actors/rest-activities.mjs";
 import { registerPauseScreen } from "./config/pause-screen.mjs";
 import { injectLocalization } from "./config/localization.mjs";
 import { registerActorAbilities } from "./actors/abilities.mjs";
@@ -155,6 +156,7 @@ import { registerChemia, chemiaApi } from "./items/chemia.mjs";
 import { sztuczkiApi } from "./config/sztuczki-data.mjs";
 import { pochodzeniaApi } from "./config/pochodzenia-data.mjs";
 import { registerToolAvailability } from "./actors/tool-availability.mjs";
+import { registerProdukcja, produkcjaApi } from "./production/index.mjs";
 import { registerQuenchTests, testsApi } from "./tests/index.mjs";
 import { monsterClosetApi } from "./dev/monster-closet.mjs";
 import { characterClosetApi } from "./dev/character-closet.mjs";
@@ -198,6 +200,8 @@ Hooks.once("init", () => {
   registerExhaustion();
   registerLevelledConditions();
   registerRestOverrides();
+  // Zajęcia na odpoczynku (produkcja, czyszczenie broni…) — po nadpisaniu okien odpoczynku.
+  registerRestActivities();
   registerPauseScreen();
   registerActorAbilities();
 
@@ -294,6 +298,8 @@ Hooks.once("init", () => {
   registerToolkitChecks();
   registerChemia();
   registerToolAvailability();
+  // Produkcja — Roboty, przepisy, karty czatu (PLAN_produkcja). game.neuroshima.produkcja
+  registerProdukcja();
 
   // Nasłuch map wypchniętych z Tiled. W init, bo rejestruje ustawienia świata.
   registerMapWatch();
@@ -496,6 +502,8 @@ Hooks.once("ready", () => {
   // Karta drużyny — game.neuroshima.podroz.openBiomePicker(actor), .zapasy.hunt(grupa)
   game.neuroshima.podroz = travelApi;
   game.neuroshima.zapasy = suppliesApi;
+  game.neuroshima.produkcja = produkcjaApi;
+  game.neuroshima.zajecia = restActivitiesApi;
 
   /* Pasek plakietek stanu na wierszach ekwipunku. **Musi być zarejestrowany jako ostatni
      z warstw dekorujących wiersze** — czyta klasy `neuro-*`, które dopinają `jams.mjs`,

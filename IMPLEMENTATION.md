@@ -3,8 +3,8 @@
 ## Stan projektu
 
 **Etap: alfa** (v0.16.0, przegląd 2026-09-26). Walka, ekwipunek, stany i przetrwanie grają się
-od początku do końca przy żywym stole; produkcja, towarzysze, ekonomia i większość pojazdów nie
-istnieją. Droga do wczesnej bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
+od początku do końca przy żywym stole; produkcja przedmiotów i naprawa (v0.17.0) czekają na pierwszą
+sesję; towarzysze, ekonomia i większość pojazdów nie istnieją. Droga do wczesnej bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
 
 RAW = `Neuro 5e/Podrecznik/NOE/` — konwersja PDF-a „październik” (jedyne źródło; numery stron to
 strony drukowane tego wydania). Zmiany względem marca: `Neuro 5e/Podrecznik/CHANGELOG.md`.
@@ -30,24 +30,24 @@ M# = kamień milowy w `PLAN_beta.md`.
 | Eksploracja | Światło, pole widzenia 220°, noktowizja/termowizja, latarki, flary | ✅ | `items/light-sources.mjs`, `vision-sources.mjs`, `gogle.mjs`, `config/fov.mjs` |
 | | Podróż: tempo, biomy, trudny teren, porządek marszu | ✅ | `actors/party-travel.mjs`, `config/podroz-data.mjs` |
 | | Gambling: dostępność, ceny regionalne | ❌ | tylko zewnętrzny `Integracje/loot_generator.py` — M5 |
-| Postój | Odpoczynki 4 h / 24 h, zakłócenie (notatka), czyszczenie broni, gotowanie, polowanie | ✅ | `config/rest.mjs`, `actors/party-supplies.mjs`, §1.7 |
+| Postój | Odpoczynki 4 h / 24 h, zakłócenie (notatka), czyszczenie broni, gotowanie, polowanie; produkcja i naprawa (KO 1 h, DO 10 h) | ✅ | `config/rest.mjs`, `actors/party-supplies.mjs`, `actors/rest-activities.mjs` (sekcja „Zajęcia”), §1.7 |
 | | Sen (doba bez snu) | ❌ | źródło `bezsennosc` bez wyzwalacza — M1 |
 | | Rozrywka, plotkowanie, hazard, Długi postój (praca, trening, baza, koszt utrzymania) | ❌ | M5 |
 | Tworzenie postaci | Poziomy, PD, PW/KW, wieloklasowość, karta | ✅ | `actors/pd-panel.mjs`, `pw.mjs`, `class-rules.mjs`, `sheet-shell.mjs` |
 | | Udźwig (dwa progi), przedmioty podręczne (3 sloty) | ✅ | `config/encumbrance-config.mjs`, `actors/udzwig-*.mjs`, `handy-items.mjs`, `handy-belt.mjs` |
 | Pochodzenie | 12 Pochodzeń + 36 zdolności (dane) | ✅ | paczki `pochodzenia`, `zdolnosci-pochodzenia` |
-| | Automatyka zdolności | 🟡 | 1/36 (`game.neuroshima.pochodzenia.report()`) — M7 |
+| | Automatyka zdolności | 🟡 | 3/36 (`game.neuroshima.pochodzenia.report()`) — M7 |
 | Klasy | 6 klas, 18 profesji, 133 zdolności (dane, awans, PW) | ✅ | paczki `klasy`, `profesje`, `zdolnosci-klasowe` |
-| | Automatyka zdolności | 🟡 | ~13/133 z własnym kodem, **brak rejestru pokrycia** — M0, M7 |
+| | Automatyka zdolności | 🟡 | ~13/133 z własnym kodem + produkcja Speca (Szybka produkcja, 6 profesji, Truciciel, Pogromca); **brak rejestru pokrycia** — M0, M7 |
 | | Towarzysze (Partner, Oswajanie zwierząt, Prawa ręka) i drony | ❌ | M3 |
 | Sztuczki | 53 Sztuczki (dane) | ✅ | paczka `sztuczki` |
-| | Automatyka | 🟡 | 9/53 — 3 pełne, 6 częściowych (`game.neuroshima.sztuczki.report()`) — M7 |
+| | Automatyka | 🟡 | 11/53 — 3 pełne, 8 częściowych (`game.neuroshima.sztuczki.report()`) — M7 |
 | Choroby i fobie | Choroby przewlekłe i popularne, fobie, leki, Zachód słońca | ✅ | 22/24 stanów egzekwowanych, `actors/health-panel.mjs`, `disease-effects.mjs` |
 | Ekwipunek | Broń, kalibry, magazynki symulacyjne, tryby ognia, granaty, miny i ładunki, ulepszenia | ✅ | `weapons/*`, `actors/grenade-inventory.mjs`, `placed-charges.mjs` |
 | | Właściwości broni | 🟡 | brak: `ppanc`/`przebijająca` przeciw pancerzowi BG (M1), `dluga`, `ciezka`, `jednorazowa` (M6) — `PLAN_weapon_properties.md` |
-| | Pancerze, hełmy, tarcze | 🟡 | `actors/armor-rules.mjs` (próg, odporność kinetyczna, kary); akcje tarczy, krytyczna ochrona hełmu, szczelność ręcznie; wytrzymałość pancerzy `[—]` |
+| | Pancerze, hełmy, tarcze | 🟡 | `actors/armor-rules.mjs` (próg, odporność kinetyczna, kary); akcje tarczy, krytyczna ochrona hełmu, szczelność ręcznie; wytrzymałość pancerzy — ustawienie świata (`production/naprawa.mjs`) |
 | | Leki i używki, narzędzia, elektronika, różności | 🟡 | 35 pozycji chemii, 22 zestawy, latarka/gogle/detonator/kwas/kolczatki; część Różności tylko jako przedmioty bez akcji |
-| | **Produkcja przedmiotów**, schematy, elaboracja amunicji, naprawianie | ❌ | panel Surowców liczy materiały, nic ich nie zużywa — M2 |
+| | **Produkcja przedmiotów**, schematy, elaboracja amunicji, naprawianie | ✅ | `production/*`, zakładka Produkcja, paczka `schematy`; `PLAN_produkcja.md`, `docs/Produkcja.md`. Nieograne przy stole; wyniki-aktorzy (pojazdy, drony) to karta dla MG — M3/M4 |
 | Teczka MG | Szabrowanie, bebeszenie | ❌ | M5 |
 | | Kolory Neuroshimy (Rdza, Rtęć, Stal, Chrom) | ❌ | po becie; WKK to osobna nakładka (`scripts/wkk/`) |
 | Notatnik łowcy | Bestiariusz, SP, próg obrażeń, awarie maszyn, amunicja BN | ✅ | 51 istot, 89/260 zdolności zautomatyzowane, 25/51 docelowych żetonów |
@@ -229,6 +229,19 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/wkk/items/gadzety.mjs` | Gadżety — przedmioty smaczkowe z dźwiękiem, bez mechaniki |
 | `scripts/wkk/items/pistolet-na-race.mjs` | Pistolet na Race — „Wystrzel flarę" |
 | `scripts/wkk/items/zeton-luxor.mjs` | Żeton Luxor (10 gb) |
+| `scripts/config/production-rules.mjs` | Produkcja — czyste wzory: surowce, czas w minutach, ST, mnożniki i podłoga, podział i alokacja surowców, zwrot, waga Roboty i Schematu, naprawa, parsery czasu i korekty |
+| `scripts/config/recipes-data.mjs` | Katalog produkcji i przepisy: standardowe (wzór), profesji (tabele s. 80–84 z erratą D31), elaboracji, zdolności (Pogromca) |
+| `scripts/config/schematy-data.mjs` | Schemat jako przedmiot — kształt, rozmiary, ikony; źródło paczki `schematy` |
+| `scripts/config/tool-expr.mjs` | Wymóg narzędzi jako wyrażenie `&` / `\|` / nawiasy — parser, normalizacja, ocena, opis po polsku |
+| `scripts/wkk/config/production-kobalt.mjs` | Liczby WKK produkcji — porzucenie, waga Roboty, waga Schematu, cecha profesji |
+| `scripts/actors/surowce-store.mjs` | Lejek surowców — pobieranie i oddawanie w gamblach (reszta w pełnych jednostkach), transfer |
+| `scripts/actors/rest-activities.mjs` | Rejestr zajęć odpoczynku — sekcja „Zajęcia” w oknach KO / DO, budżet pracy, zbiorcza karta |
+| `scripts/production/robota.mjs` | Robota — jedyny lejek zapisu: start, praca, korekta, Test, porzucenie, zakończenie, narzędzia MG |
+| `scripts/production/zakladka.mjs`, `okna.mjs`, `karty.mjs`, `templates/tab-produkcja.hbs` | Zakładka Produkcja, okna (start, praca, korekta, menu Roboty, Wprawa, ad hoc), karty czatu |
+| `scripts/production/zp.mjs`, `wykonawca.mjs`, `pula.mjs`, `wynik.mjs` | Dostęp (Proste / Schemat / Wprawa), cechy i mnożniki wykonawcy, pula drużyny, wynik z kompendium albo z buildera |
+| `scripts/production/schematy.mjs`, `przenoszenie.mjs` | Waga Schematu i Roboty, „Utwórz schemat”, plakietki w Ekwipunku; przenoszenie Robót, zakaz klonowania, Miejsca |
+| `scripts/production/odpoczynek.mjs`, `szybka.mjs`, `olejek.mjs`, `naprawa.mjs`, `oprawa.mjs` | Zajęcia odpoczynku (produkcja, czyszczenie broni, Truciciel, Pogromca), Szybka produkcja, Olejek trujący, naprawa i wytrzymałość pancerzy, dźwięk i Sequencer |
+| `dev/validate-recipes.mjs` | `npm run validate:recipes` — spójność przepisów, audyt przepisów profesji, braki katalogu |
 | `scripts/doc-liveness.mjs` | Czy dokument jeszcze istnieje, zanim async sync do niego zapisze |
 | `scripts/world-clock.mjs` | Przesunięcie zegara świata przez MG („wydaj N minut") |
 | `scripts/migration/*` (pozostałe) | Jednorazowe migracje: `migrate-classes`, `migrate-effect-priorities`, `migrate-gadzety`, `migrate-gear-graduation`, `migrate-medyk-graduation`, `migrate-pistolet-race`, `migrate-tool-substitutes`, `migrate-zeton-luxor`, `normalize-fov-angle`, `normalize-sight-range`, `rescale-surowce-units`, `apply-weapon-icons-macro.js` — opis przy wpisie changelogu, który je wprowadził |
@@ -697,8 +710,8 @@ DOM stockowego arkusza zamiast przez `sheet-shell.mjs`.
 - [ ] Object destruction (TT/PW by material/size), `burząca`/`karczująca` ×2 — M6
 - [~] **Broń improwizowana** — jeden konkretny przykład zrobiony (Pochodnia, patrz §1.23),
   ogólna zasada „1k4, bez Premii Biegłości, typ wg MG" pozostaje ręczna dla innych przedmiotów — M6
-- [ ] **Produkcja przedmiotów i naprawa** (surowce = ½ ceny, czas, ST wg wartości, schematy,
-  elaboracja amunicji, tabela naprawy) — panel Surowców nic nie zużywa — M2
+- [x] **Produkcja przedmiotów i naprawa** (surowce = ½ ceny, czas, ST wg wartości, schematy,
+  elaboracja amunicji, tabela naprawy) — v0.17.0, `PLAN_produkcja.md`
 
 ### 1.23 Pochodnia (improvised torch)
 - [x] `wkk/items/pochodnia.mjs` (do oddzielenia WKK: `weapons/pochodnia.mjs`) — homebrew zastępujące zepsuty SRD Torch (jego auto-wygenerowana
@@ -1049,7 +1062,7 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   `actors/vehicle-portrait.mjs` — oba wstrzykują się w `renderVehicleActorSheet`.
   Siedem cichych pułapek v14 znalezionych po drodze: PLAN §9a / ARCHITECTURE §11.
   Domknięcie rozdziału — `PLAN_beta.md` M4
-- [ ] Crafting system (schematy, produkcja, naprawa) — `PLAN_beta.md` M2; szabrowanie i bebeszenie — M5
+- [x] Crafting system (schematy, produkcja, naprawa) — v0.17.0 (`PLAN_beta.md` M2); szabrowanie i bebeszenie — M5
 - [ ] Drones — M3
 
 ## Phase 5: Content & Polish
@@ -1081,6 +1094,56 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### v0.17.0 — Produkcja: Roboty, Schematy, Wprawa, Naprawa (2026-09-28)
+
+Cały [PLAN_produkcja.md](PLAN_produkcja.md), etapy E0–E8 (decyzje D1–D36). Dla graczy:
+[docs/Produkcja.md](docs/Produkcja.md). Rozdział *Produkcja przedmiotów* (NOE s. 144–146) z macierzy
+przechodzi z ❌ na ✅.
+
+- **Dane i reguły (E0)** — czyste, importowalne w Node: `config/production-rules.mjs`,
+  `config/tool-expr.mjs`, `config/recipes-data.mjs` (katalog ~344 pozycji, przepisy standardowe,
+  profesji, elaboracji i Pogromcy). `npm run validate:recipes` odtwarza audyt
+  `docs/Errata-produkcja.md`. Surowce mają przelicznik `gbPerKg`, a każde pobranie idzie przez
+  `actors/surowce-store.mjs` (panel Surowców i paliwo pochodni też).
+- **Robota (E1)** — przedmiot `loot` z zamrożonymi surowcami i migawką przepisu; postęp w minutach,
+  mnożnik czasu i ST liczone w chwili pracy / Testu. Test końcowy to `rollToolCheck` z ST; porażka —
+  od nowa, surowce zostają (D2). Nowy hak `neuroshima.rerolled` w `combat/rerolls.mjs` domyka
+  Fuks i Forsowanie na tym Teście. Kategoria udźwigu „Roboty”.
+- **Zakładka Produkcja (E2)** — Na warsztacie (+ lista „Do naprawy”), Surowce z nakładką potrzeb,
+  Co umiesz zrobić w czterech grupach wykonalności, Wprawa i Schematy; „Mimo braków” z plakietką ⚠
+  i przyciskami MG (D23); plakietka z liczbą Robót na zakładce.
+- **Schematy (E3)** — nowa paczka `schematy` (247 dokumentów, tylko MG), waga wg WKK w danych
+  pochodnych, „Utwórz schemat” w nagłówku przedmiotu, plakietka „umiesz / brak narzędzi” w Ekwipunku.
+- **Pula i Miejsca (E4)** — pojazd drużyny, pojazdy-członkowie i Miejsca jako źródło przenoszenia;
+  Robota zawsze w jednym egzemplarzu (strażnicy `preCreateItem`, ilość, duplikacja aktora, owijki
+  upuszczania, audyt); przejęcie przez inną postać zmienia kierownika.
+- **Odpoczynki (E5)** — `actors/rest-activities.mjs`: sekcja „Zajęcia”, budżet KO 1 h / DO 10 h,
+  zastosowanie w `dnd5e.restCompleted`. Klienci: produkcja i naprawa, czyszczenie broni (KO),
+  Truciciel (Olejek trujący z ST twórcy, D36), naboje Pogromcy (D35).
+- **Szybka produkcja (E6)** — „iskra” bez Roboty i bez Testu: koszyk do 25 / 50 gb, ładunek 1/KO.
+- **Naprawa (E7)** — trzy stopnie z tabeli; Drobnostka od ręki, reszta jako Robota `naprawa`.
+  Naprawy z `weapons/jams.mjs`, `melee-degradation.mjs` i `items/toolkit-kowal.mjs` otwierają
+  teraz okno naprawy (wcześniej sam Test bez kosztu i czasu). **Wytrzymałość pancerzy** (s. 115) —
+  ustawienie świata, domyślnie wył.; w świecie kampanii włączone (D18). „Napraw…” w nagłówku
+  przedmiotu i lista „Do naprawy” — ścieżka dla pancerza, który nie ma własnego panelu.
+- **Oprawa (E8)** — sloty dźwięków (`production/oprawa.mjs`, na razie tylko pliki już obecne
+  w repo — brakujące w `dev/icons/MISSING.md`, sekcja C), `scrollingText` Sequencera nad żetonem,
+  ustawienie klienta „Głośność produkcji”. Rejestry automatyki: Fabrykator, Przydasie (Sztuczki
+  11/53), Nano-Tech, „Jeśli ma silnik” (Pochodzenia 3/36).
+- **WKK** — reguły 9 (profesja przyspiesza, D26–D28, D32) i 10 (porzucenie, waga Roboty i Schematu)
+  w `docs/Kobalt.md`; liczby w `wkk/config/production-kobalt.mjs`; D22 w tabeli RAI.
+- **Odstępstwa od planu:** limit 10 h na dobę liczy dobę z `worldTime`, nie z licznika dni
+  (ostrzeżenie, nie blokada); Pogromca ma jawny podział z NOE (10 MK / 10 CE / 80 CZ); Woda pitna
+  i .22 LR nie mają przepisów standardowych.
+- **Znalezione po drodze:** Kwas (fiolka) był liczony jako surowiec CH (ikona `chemia.svg`) —
+  wykluczony flagą; doładowanie pochodni zapisywało ułamkowe ilości — teraz przez lejek surowców.
+  **Niezmienione, do decyzji MG:** Latarka w module 15 gb (dynamo 60), w NOE 20 (dynamo 50).
+- **Paczki:** `schematy` pojawia się po restarcie świata. Pogromca (broń i trzy naboje) oraz
+  plakietki pokrycia Fabrykatora / Przydasie wymagają `npm run build:packs` przy zamkniętym
+  Foundry — do tego czasu wynik Pogromcy robi builder, a test pokrycia `sztuczki-dane` jest czerwony.
+- **Testy:** nowa paczka `produkcja` (83), w tym każdy przypadek z §5.1c planu. Całość 570/571 —
+  jedyna czerwona to `sztuczki-dane` (przebudowa paczek, wyżej).
 
 ### Dane wg NOE: regeneracja bestiariusza i zdolności, Przekucie, „cięte” (2026-09-26)
 

@@ -3601,3 +3601,403 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
 .item.neuro-not-ready .item-name .name .title {
   opacity: 0.72;
 }
+
+/* ============================================= */
+/* Produkcja — karty czatu Robót                   */
+/* production/karty.mjs; kolor paska = rodzaj karty */
+/* ============================================= */
+
+.neuro-robota-card {
+  --robota-accent: #b8860b;
+  padding: 6px 8px;
+  border-left: 4px solid var(--robota-accent);
+  border-radius: 0 4px 4px 0;
+  background: color-mix(in srgb, var(--robota-accent) 9%, transparent);
+  font-size: 12px;
+  line-height: 1.4;
+}
+.neuro-robota-card.is-test       { --robota-accent: #2e86c1; }
+.neuro-robota-card.is-sukces     { --robota-accent: #27ae60; }
+.neuro-robota-card.is-porazka    { --robota-accent: #c0392b; }
+.neuro-robota-card.is-porzucenie { --robota-accent: #7f8c8d; }
+.neuro-robota-card.is-braki      { --robota-accent: #e67e22; }
+.neuro-robota-card.is-info       { --robota-accent: #5d6d7e; }
+.neuro-robota-card.is-szybka     { --robota-accent: #f4d03f; }
+
+.neuro-robota-head {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+/* Ikony modułu to białe sylwetki SVG — na jasnym tle czatu znikają, stąd ciemny kafel. */
+.neuro-robota-head img {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  padding: 2px;
+  border: 1px solid color-mix(in srgb, var(--robota-accent) 55%, transparent);
+  border-radius: 4px;
+  background: #23271f;
+  object-fit: contain;
+}
+.neuro-robota-tytul {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.neuro-robota-tytul strong { font-size: 13px; }
+.neuro-robota-tytul span {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--robota-accent);
+  font-weight: bold;
+}
+
+.neuro-robota-pasek {
+  height: 7px;
+  margin: 3px 0 1px;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(128, 128, 128, 0.35);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.neuro-robota-pasek > div {
+  height: 100%;
+  background: var(--robota-accent);
+}
+.neuro-robota-postep {
+  font-size: 11px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.8;
+}
+
+.neuro-robota-card p.neuro-robota-linia { margin: 2px 0; }
+
+.neuro-robota-ostrzezenie {
+  margin-top: 3px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: rgba(230, 126, 34, 0.14);
+  border: 1px solid rgba(230, 126, 34, 0.45);
+  color: #e59866;
+}
+
+.neuro-robota-przyciski {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 5px;
+}
+.neuro-robota-btn {
+  flex: 1 1 auto;
+  font-size: 11px;
+  line-height: 1.6;
+  padding: 1px 8px;
+  border: 1px solid color-mix(in srgb, var(--robota-accent) 60%, transparent);
+  background: color-mix(in srgb, var(--robota-accent) 14%, transparent);
+  border-radius: 3px;
+}
+.neuro-robota-btn.neuro-gm-only { border-style: dashed; }
+
+.neuro-robota-warn { color: #e59866; }
+
+/* ============================================= */
+/* Produkcja — zakładka na karcie BG              */
+/* production/zakladka.mjs, PLAN_produkcja §6      */
+/* ============================================= */
+
+.neuro-prod {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 4px 2px 12px;
+  font-size: var(--font-size-13, 13px);
+}
+.neuro-prod-sekcja h3 {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin: 0 0 4px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid var(--dnd5e-color-gold, #9f9275);
+  font-size: 14px;
+}
+.neuro-prod .hint { opacity: 0.7; font-size: 0.92em; }
+.neuro-prod .bad { color: #c0392b; }
+.neuro-prod .licznik { opacity: 0.7; font-weight: normal; }
+.neuro-prod-pusto { margin: 4px 0; font-style: italic; opacity: 0.8; }
+.neuro-prod ul { list-style: none; margin: 0; padding: 0; }
+
+/* Ikony modułu to białe sylwetki — ciemny kafel, jak w Ekwipunku. */
+.neuro-prod-robota > img,
+.neuro-prod-naprawa > img,
+.neuro-prod-przepis > img {
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  padding: 2px;
+  border: 1px solid #3a4232;
+  border-radius: 4px;
+  background: #23271f;
+  object-fit: contain;
+}
+
+/* ---- Na warsztacie ---- */
+.neuro-prod-robota,
+.neuro-prod-naprawa {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 4px;
+  border-bottom: 1px dotted rgba(128, 128, 128, 0.4);
+}
+.neuro-prod-robota.is-test { background: rgba(46, 134, 193, 0.08); }
+.neuro-prod-naprawy-h { margin: 8px 0 2px; font-size: 12.5px; opacity: 0.85; }
+.neuro-prod-naprawa .nazwa { font-weight: bold; }
+.neuro-prod-robota-main, .neuro-prod-przepis-main { flex: 1; min-width: 0; }
+.neuro-prod-robota-top { display: flex; align-items: center; gap: 6px; }
+.neuro-prod-robota-top .nazwa, .neuro-prod-przepis .nazwa { font-weight: bold; }
+.neuro-prod-postep { margin-left: auto; font-variant-numeric: tabular-nums; opacity: 0.85; }
+.neuro-prod-pasek {
+  height: 8px;
+  margin: 3px 0;
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(128, 128, 128, 0.35);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.neuro-prod-pasek > div { height: 100%; background: #b8860b; }
+.neuro-prod-robota.is-test .neuro-prod-pasek > div { background: #2e86c1; }
+.neuro-prod-sub { font-size: 11.5px; opacity: 0.85; line-height: 1.35; }
+.neuro-prod-plakietka {
+  padding: 0 5px;
+  border-radius: 8px;
+  font-size: 10.5px;
+  font-weight: bold;
+  background: rgba(128, 128, 128, 0.25);
+}
+.neuro-prod-plakietka.is-test { background: #2e86c1; color: #fff; }
+.neuro-prod-plakietka.is-braki { background: #e67e22; color: #fff; }
+.neuro-prod-akcje { display: flex; gap: 3px; flex: 0 0 auto; }
+.neuro-prod-akcje button {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 28px;
+  padding: 0 6px;
+  line-height: 22px;
+  font-size: 11.5px;
+  white-space: nowrap;
+}
+
+/* ---- Surowce w gamblach ---- */
+.neuro-sur-bar {
+  display: grid;
+  grid-template-columns: 28px 1fr minmax(110px, auto);
+  align-items: center;
+  gap: 6px;
+  margin: 2px 0;
+}
+.neuro-sur-bar .kod { font-weight: bold; }
+.neuro-sur-bar .ile { font-variant-numeric: tabular-nums; font-size: 12px; }
+.neuro-sur-bar .ile em { opacity: 0.7; }
+.neuro-sur-bar .tor {
+  position: relative;
+  height: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(128, 128, 128, 0.4);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.neuro-sur-bar .tor > div { position: absolute; top: 0; bottom: 0; }
+.neuro-sur-bar .own { left: 0; width: var(--own); background: var(--sur-kolor); }
+/* Pula: ten sam kolor, blady — „duch” obok własnych zapasów. */
+.neuro-sur-bar .pula {
+  left: var(--own);
+  width: var(--pula);
+  background: color-mix(in srgb, var(--sur-kolor) 35%, transparent);
+}
+/* Najechany przepis: kreskowanie na potrzebnej ilości; ponad zapas — czerwień. */
+.neuro-sur-bar .need {
+  left: 0;
+  width: var(--need);
+  background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.55) 0 3px, transparent 3px 6px);
+  border-right: 2px solid #fff;
+  opacity: 0;
+}
+.neuro-sur-bar.is-need .need { opacity: 1; }
+.neuro-sur-bar.is-pula .need { border-right-color: #f4d03f; }
+.neuro-sur-bar.is-short .need {
+  background: repeating-linear-gradient(135deg, rgba(231, 76, 60, 0.85) 0 3px, rgba(231, 76, 60, 0.35) 3px 6px);
+  border-right-color: #e74c3c;
+}
+
+/* ---- Co umiesz zrobić ---- */
+.neuro-prod-filtry {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+.neuro-prod-filtry h3 { flex: 1 0 100%; }
+.neuro-prod-filtry input[type="search"] { flex: 1 1 140px; }
+.neuro-prod-filtry select { flex: 0 1 auto; width: auto; }
+.neuro-prod-grupa h4 {
+  margin: 6px 0 2px;
+  cursor: pointer;
+  font-size: 13px;
+  user-select: none;
+}
+.neuro-prod-grupa.is-zwinieta ul { display: none; }
+.neuro-prod-grupa[data-grupa="narzedzia"] .neuro-prod-przepis { opacity: 0.8; }
+.neuro-prod-przepis {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 4px;
+  border-bottom: 1px dotted rgba(128, 128, 128, 0.3);
+}
+.neuro-prod-przepis:hover { background: rgba(159, 146, 117, 0.12); }
+.neuro-prod-przepis .zrodlo {
+  margin-left: 6px;
+  font-size: 11px;
+  opacity: 0.75;
+}
+.neuro-prod-alt {
+  font-size: 10.5px;
+  padding: 0 4px;
+  border-radius: 6px;
+  background: rgba(128, 128, 128, 0.25);
+}
+
+/* ---- Wprawa i Schematy ---- */
+.neuro-prod-wprawa p { margin: 3px 0; }
+.neuro-prod-tag {
+  display: inline-block;
+  margin: 1px 2px;
+  padding: 0 6px;
+  border-radius: 8px;
+  background: rgba(159, 146, 117, 0.2);
+  font-size: 12px;
+}
+.neuro-prod-tag a { cursor: pointer; }
+.neuro-prod-mg { display: flex; gap: 6px; margin-top: 4px; }
+.neuro-prod-mg button { border-style: dashed; }
+
+/* ---- Plakietka z liczbą Robót na zakładce ---- */
+nav.tabs [data-tab="produkcja"] { position: relative; }
+.neuro-tab-plakietka {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  min-width: 15px;
+  height: 15px;
+  padding: 0 3px;
+  border-radius: 8px;
+  background: #b8860b;
+  color: #fff;
+  font-size: 10px;
+  line-height: 15px;
+  text-align: center;
+  pointer-events: none;
+}
+.neuro-tab-plakietka.is-test { background: #2e86c1; }
+
+/* ---- Okna produkcji ---- */
+.neuro-start fieldset { margin: 4px 0; }
+.neuro-start-radio { display: block; margin: 2px 0; }
+.neuro-start-podzial { display: flex; gap: 6px; flex-wrap: wrap; }
+.neuro-start-sur { display: flex; align-items: center; gap: 3px; }
+.neuro-start-sur input { width: 52px; }
+.neuro-start-podsumowanie { margin-top: 6px; padding: 6px 8px; border-left: 3px solid #b8860b; background: rgba(184, 134, 11, 0.08); }
+.neuro-start-podsumowanie p { margin: 2px 0; }
+.neuro-start-podsumowanie .ok { color: #27ae60; }
+.neuro-start-podsumowanie .bad { color: #c0392b; }
+.neuro-drop-zone {
+  margin: 6px 0;
+  padding: 10px;
+  border: 2px dashed rgba(159, 146, 117, 0.6);
+  border-radius: 4px;
+  text-align: center;
+  opacity: 0.85;
+}
+.neuro-drop-zone.is-over { background: rgba(159, 146, 117, 0.2); }
+.neuro-mg-okno label { display: block; margin: 4px 0; }
+
+/* Schemat w Ekwipunku — „umiesz” / „brak narzędzi” (production/schematy.mjs) */
+.neuro-schemat-badge {
+  margin-left: 6px;
+  padding: 0 5px;
+  border-radius: 8px;
+  font-size: 10px;
+  font-weight: bold;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.neuro-schemat-badge.is-ok { background: rgba(39, 174, 96, 0.25); color: #2ecc71; }
+.neuro-schemat-badge.is-brak { background: rgba(192, 57, 43, 0.22); color: #e57368; }
+
+/* Produkcja — Roboty na karcie pojazdu / Miejsca (production/przenoszenie.mjs), tylko odczyt */
+.neuro-roboty-pojazdu {
+  margin: 4px 0 8px;
+  padding: 6px 8px;
+  border-left: 3px solid #b8860b;
+  background: rgba(184, 134, 11, 0.08);
+}
+.neuro-roboty-pojazdu h3 { margin: 0 0 4px; font-size: 13px; }
+.neuro-roboty-pojazdu ul { list-style: none; margin: 0; padding: 0; }
+.neuro-roboty-pojazdu li { display: flex; align-items: center; gap: 6px; font-size: 12px; margin: 2px 0; }
+.neuro-roboty-pojazdu li img { width: 22px; height: 22px; background: #23271f; border-radius: 3px; border: none; }
+.neuro-roboty-pojazdu li em { margin-left: auto; opacity: 0.75; }
+
+/* Start Roboty — braki do pokrycia z puli 🚚 */
+.neuro-start-pula { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 4px; }
+.neuro-start-pula:empty { display: none; }
+.neuro-start-pula button { flex: 1 1 auto; font-size: 12px; }
+
+/* Zajęcia na odpoczynku (actors/rest-activities.mjs) */
+.neuro-zajecia { margin: 6px 0; padding: 6px 8px; border-left: 3px solid #b8860b; background: rgba(184, 134, 11, 0.07); }
+.neuro-zajecia-tytul { margin: 0 0 2px; font-size: 13px; }
+.neuro-zajecia .hint { margin: 0 0 4px; font-size: 11px; opacity: 0.8; }
+.neuro-zajecie { margin: 4px 0; }
+.neuro-zajecie .form-group { margin: 2px 0; }
+.neuro-zajecie-robota input { width: 70px; text-align: center; }
+.neuro-zajecie-check { display: block; margin: 2px 0; }
+.neuro-zajecie-check.is-done, .neuro-zajecie-check.is-disabled { opacity: 0.6; }
+.neuro-zajecia-budzet { margin-top: 4px; font-size: 12px; font-variant-numeric: tabular-nums; }
+.neuro-zajecia-budzet.is-ponad { color: #e67e22; }
+
+/* Szybka produkcja — „iskra” (production/szybka.mjs, PLAN_produkcja §10): własny kolor, bez Roboty */
+.neuro-iskra {
+  --iskra: #f4d03f;
+  padding: 6px 8px;
+  border: 1px solid color-mix(in srgb, var(--iskra) 55%, transparent);
+  border-radius: 4px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--iskra) 12%, transparent), transparent 70%);
+}
+.neuro-iskra h3 { border-bottom-color: var(--iskra); }
+.neuro-iskra-ikona { color: var(--iskra); text-shadow: 0 0 6px var(--iskra); }
+.neuro-iskra-pips { display: inline-flex; gap: 3px; margin-left: 6px; }
+.neuro-iskra-pip { width: 10px; height: 10px; border-radius: 2px; transform: rotate(45deg); border: 1px solid var(--iskra); }
+.neuro-iskra-pip.is-on { background: var(--iskra); box-shadow: 0 0 5px var(--iskra); }
+.neuro-iskra-pasek { height: 6px; margin: 3px 0 5px; background: rgba(0, 0, 0, 0.3); border-radius: 3px; overflow: hidden; }
+.neuro-iskra-pasek > div { height: 100%; background: var(--iskra); }
+.neuro-iskra-koszyk li { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+.neuro-iskra-koszyk li em { margin-left: auto; opacity: 0.8; }
+.neuro-iskra-koszyk li a { cursor: pointer; opacity: 0.7; }
+.neuro-iskra-stan { margin: 3px 0; font-size: 11.5px; opacity: 0.9; }
+.neuro-iskra-wykonaj {
+  width: 100%;
+  margin-top: 3px;
+  border: 1px solid var(--iskra);
+  background: color-mix(in srgb, var(--iskra) 22%, transparent);
+  font-weight: bold;
+}
+.neuro-iskra-btn {
+  color: #f4d03f;
+  border-color: rgba(244, 208, 63, 0.55) !important;
+  text-shadow: 0 0 4px rgba(244, 208, 63, 0.7);
+}
