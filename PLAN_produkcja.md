@@ -365,7 +365,7 @@ dostaje jeden nowy hook `neuroshima.rerolled`, żeby Forsowanie / Fuks rozstrzyg
 │ CE ███                 3 gb                                             │
 │ CZ ███████▓▓▓▓█        9 gb   ← najechany przepis: ▓ potrzebne, czerwień = brak │
 ├ CO UMIESZ ZROBIĆ ───────────────────────── [szukaj] [narzędzie ▾] [źródło ▾] ┤
-│ ✅ Gotowe                                                               │
+│ ✅ Od ręki                                                              │
 │   Granat dymny      Wprawa: Pirotechnika  ST 15  20:00  15 CH 4 CZ 1 MK  [Zacznij] [⚡] │
 │ 🚚 Z puli                                                               │
 │   Mina ppanc.       Schemat               ST 25  60:00  …   [Przenieś i zacznij] │
@@ -388,7 +388,7 @@ dostaje jeden nowy hook `neuroshima.rerolled`, żeby Forsowanie / Fuks rozstrzyg
   (to w gamblach liczą przepisy). Własne zapasy pełnym kolorem, pula jako jaśniejszy „duch” z
   podpisem. **Najechanie na przepis** nakłada na każdy pasek potrzebną ilość (kreskowanie), niedobór
   wystaje na czerwono; alternatywa `CH/MO` spina klamrą dwa paski.
-- **Co umiesz zrobić** — posortowane wg wykonalności: ✅ gotowe → 🚚 z puli → ⚠ brak surowców
+- **Co umiesz zrobić** — posortowane wg wykonalności: ✅ od ręki → 🚚 z puli → ⚠ brak surowców
   (pokazany niedobór) → ⛔ brak narzędzi/biegłości (typowy Brutal ze schematem — widzi cenę
   sprzedaży). W grupie alfabetycznie. Filtry: szukaj, narzędzie, źródło. `[⚡]` przy przepisach
   mieszczących się w budżecie Szybkiej produkcji. Czas w wierszu to czas **tego** wykonawcy

@@ -16,8 +16,9 @@ produkuje, po prostu jej nie otwiera. Od góry:
 - **Surowce** — twoje zapasy w gamblach, bo w gamblach liczą przepisy. Bladszy pasek to surowce
   w puli drużyny (rozdz. 5). Najedź na przepis niżej, a paski pokażą, ile z tego zje.
 - **Co umiesz zrobić** — wszystko, do czego masz dostęp, w czterech grupach:
-  ✅ gotowe · 🚚 z puli (trzeba coś przenieść) · ⚠ brakuje surowców · ⛔ brak narzędzi albo
-  biegłości. Nad listą są filtry: nazwa, narzędzie, źródło dostępu (Proste / Schemat / Wprawa).
+  ✅ od ręki (wszystko masz przy sobie) · 🚚 z puli (trzeba coś przenieść) · ⚠ brakuje surowców ·
+  ⛔ brak narzędzi albo biegłości. Nad listą są filtry: nazwa, narzędzie, źródło dostępu
+  (Proste / Schemat / Wprawa).
 - **Wprawa i Schematy** — skąd bierze się twój dostęp.
 
 Czas przy każdym przepisie to czas **dla ciebie** — z twoimi zdolnościami i narzędziami.

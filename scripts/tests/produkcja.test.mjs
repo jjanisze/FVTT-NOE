@@ -30,6 +30,7 @@ import { stanSzybkiej, dodajDoKoszyka, wyczyscKoszyk, ocenaKoszyka } from "../pr
 import { przenies, audytRobot } from "../production/przenoszenie.mjs";
 import { stOlejku, dodajOlejek } from "../production/olejek.mjs";
 import { restActivitiesApi } from "../actors/rest-activities.mjs";
+import { przygotujIkony, ikonaPrzepisu } from "../production/zakladka.mjs";
 
 export function registerProdukcjaTests(quench) {
   quench.registerBatch(`${MODULE_ID}.produkcja`, context => {
@@ -741,6 +742,16 @@ export function registerProdukcjaTests(quench) {
         expect(stanSzybkiej(actor).wartosc, "trzeci Mołotow nie wszedł").to.equal(20);
         expect(ocenaKoszyka(actor).minuty).to.equal(20);
         wyczyscKoszyk(actor);
+      });
+    });
+
+    /* ------------------------------------------------------------ */
+    describe("Zakładka Produkcja (E2)", function () {
+      it("ikony wierszy biorą się z paczek, nie z worka zastępczego", async function () {
+        this.timeout(10000);
+        await przygotujIkony();
+        expect(ikonaPrzepisu(przepis("std/chemia:papieros"))).to.include("papieros.svg");
+        expect(ikonaPrzepisu(przepis("std/grenade:grenade-molotov"))).to.not.equal("icons/svg/item-bag.svg");
       });
     });
 

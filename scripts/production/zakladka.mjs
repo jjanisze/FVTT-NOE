@@ -9,7 +9,7 @@
  *                     „Do naprawy” — jej przedmioty, które same zgłaszają uszkodzenie,
  *   SUROWCE         — zapasy w gamblach (tak liczą przepisy), pula jako „duch”, najechany
  *                     przepis nakłada swoje potrzeby na paski,
- *   CO UMIESZ ZROBIĆ — ZP pogrupowane wg wykonalności: ✅ gotowe → 🚚 z puli → ⚠ brak surowców
+ *   CO UMIESZ ZROBIĆ — ZP pogrupowane wg wykonalności: ✅ od ręki → 🚚 z puli → ⚠ brak surowców
  *                     → ⛔ brak narzędzi/biegłości (tu Brutal widzi cenę sprzedaży swojego Schematu),
  *   WPRAWA I SCHEMATY — skąd ten dostęp; narzędzia MG.
  *
@@ -39,7 +39,8 @@ const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
 
 /** Grupy wykonalności, w kolejności wyświetlania. */
 export const GRUPY = Object.freeze([
-  { id: "gotowe", label: "Gotowe", ikona: "✅" },
+  // „Od ręki”, nie „Gotowe” — „gotowe” czytało się jak „już zrobione”.
+  { id: "gotowe", label: "Od ręki", ikona: "✅" },
   { id: "pula", label: "Z puli", ikona: "🚚" },
   { id: "surowce", label: "Brakuje surowców", ikona: "⚠" },
   { id: "narzedzia", label: "Brak narzędzi lub biegłości", ikona: "⛔" }
@@ -65,10 +66,11 @@ export async function przygotujIkony() {
   for (const ref of KATALOG.keys()) {
     const uuid = await uuidWKompendium(ref);
     if (uuid) {
-      const [, , mod, pack, , id] = uuid.split(".");
-      const key = `${mod}.${pack}`;
-      if (!packs.has(key)) packs.set(key, await game.packs.get(key)?.getIndex().catch(() => null));
-      const img = packs.get(key)?.get(id)?.img;
+      // `parseUuid`, nie ręczny split — ręczny był o pole przesunięty i każdy wiersz dostawał worek.
+      const { collection: pack, id } = foundry.utils.parseUuid(uuid) ?? {};
+      if (!pack) continue;
+      if (!packs.has(pack.collection)) packs.set(pack.collection, await pack.getIndex().catch(() => null));
+      const img = packs.get(pack.collection)?.get(id)?.img;
       if (img) _ikony.set(ref, img);
     } else {
       const w = await daneWyniku(ref).catch(() => null);
@@ -77,7 +79,8 @@ export async function przygotujIkony() {
   }
 }
 
-function _ikona(przepis) {
+/** Ikona wyniku przepisu: dane przepisu → cache z paczek → worek. Eksportowane dla testów. */
+export function ikonaPrzepisu(przepis) {
   return przepis.wynik?.dane?.img ?? _ikony.get(przepis.wynik?.ref) ?? "icons/svg/item-bag.svg";
 }
 
@@ -237,7 +240,7 @@ function _htmlPozycja(poz, d) {
     ? `<button type="button" class="neuro-iskra-btn" data-akcja="szybka-dodaj" data-tooltip="Do koszyka Szybkiej produkcji (${p.wartosc} gb)">⚡</button>` : "";
   return `<li class="neuro-prod-przepis" data-klucz="${esc(p.wynik.dane ? p.id : p.wynik.ref)}" data-need="${esc(need)}"
       data-nazwa="${esc(p.nazwa.toLowerCase())}" data-narzedzia="${esc(klucze)}" data-zrodla="${esc(typyZrodel)}">
-    <img src="${esc(_ikona(p))}" alt="">
+    <img src="${esc(ikonaPrzepisu(p))}" alt="">
     <div class="neuro-prod-przepis-main">
       <div><span class="nazwa">${esc(p.nazwa)}</span>${p.wynik.ilosc > 1 ? ` <span class="hint">×${p.wynik.ilosc}</span>` : ""}${alt}
         <span class="zrodlo">${esc(_zrodloLabel(poz.zrodla))}</span>${sprzedaz}</div>
