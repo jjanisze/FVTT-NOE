@@ -76,6 +76,17 @@ export function budzetSurowcow(wartosc) {
 }
 
 /**
+ * Najmniejsza partia, z której wzór daje choć 1 gb surowców (D37). Przedmiot za 1 gb robi się
+ * po 2 sztuki: ⌊1 / 2⌋ = 0 i pojedynczy papieros powstawałby z niczego (§1.5). Czas i ST liczą
+ * się od wartości partii, jak w tabeli elaboracji (L3) — 2 papierosy: 1 gb, 1 h, ST 5.
+ */
+export function partiaMinimalna(cena) {
+  const c = Number(cena) || 0;
+  if (c <= 0) return 1;
+  return Math.max(1, Math.ceil(2 / c - EPS));
+}
+
+/**
  * Czas standardowy w minutach (s. 145, D29): wielorazowe cena × 1 h, jednorazowe cena × 0,5 h,
  * „nieparzysta” cena w górę — czyli ⌈cena / 2⌉ h. Minimum 1 minuta.
  */

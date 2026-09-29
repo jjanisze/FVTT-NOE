@@ -47,7 +47,7 @@ import { DETONATOR, ELECTRIC_FUZE } from "../items/detonator.mjs";
 import { KWAS } from "../items/kwas.mjs";
 import { parseToolExpr, toolExprString } from "./tool-expr.mjs";
 import {
-  parseSurowce, budzetSurowcow, standardoweMinuty, stZWartosci, podzielBudzet, profilZLinii, sumaGb
+  parseSurowce, budzetSurowcow, partiaMinimalna, standardoweMinuty, stZWartosci, podzielBudzet, profilZLinii, sumaGb
 } from "./production-rules.mjs";
 
 /* ============================================ */
@@ -674,9 +674,9 @@ function _minutyWiersza(czas) {
   return Number(czas) * 60;
 }
 
-/** Przepis standardowy z katalogu (wzór s. 144–146). */
+/** Przepis standardowy z katalogu (wzór s. 144–146); przedmioty za 1 gb — partią (D37). */
 function _przepisStandardowy(k, profilZTabeli) {
-  const ilosc = 1;
+  const ilosc = partiaMinimalna(k.cena);
   const wartosc = k.cena * ilosc;
   const profil = profilZTabeli ?? k.profil;
   return Object.freeze({
@@ -861,6 +861,7 @@ export function przepis(id) {
  */
 export function przepisAdHoc({ id, nazwa, cena, jednorazowy = false, ilosc = 1, narzedzia = "", profil = null, ref = null, dane = null, tagi = [] }) {
   const k = ref ? KATALOG.get(ref) : null;
+  ilosc = Math.max(Number(ilosc) || 1, partiaMinimalna(cena)); // D37 — nie z niczego
   const wartosc = (Number(cena) || 0) * ilosc;
   const prof = profil ? profilZLinii(parseSurowce(profil)) : (k?.profil ?? profilZLinii(parseSurowce(KATEGORIE.sprzet.profil)));
   return {

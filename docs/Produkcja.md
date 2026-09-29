@@ -50,6 +50,9 @@ Przepis standardowy każdego przedmiotu wynika ze wzoru:
 
 Przykład: Koktajl Mołotowa (10 gb) — 5 gb surowców, 5 h pracy, ST 5.
 
+Przedmioty za 1 gb (papieros, strzała, nabój .38) robi się **po dwie sztuki**: połowa z 1 gb to
+zero, a z niczego nic nie powstaje. Dwa papierosy — 1 gb surowców, 1 h, ST 5.
+
 Czas moduł liczy w minutach i pokazuje jako GG:MM. Na czas i koszt wpływają:
 
 - **Fabrykator** — praca o połowę krótsza,

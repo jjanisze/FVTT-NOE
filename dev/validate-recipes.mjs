@@ -60,7 +60,8 @@ for (const k of KATALOG.values()) {
 
 const all = [...PRZEPISY_STANDARDOWE.values(), ...PRZEPISY_PROFESJI.values(), ...PRZEPISY_ELABORACJI.values()];
 for (const p of all) {
-  if (p.wartosc >= 2 && sumaGb(p.surowce) <= 0) err(`${p.id}: wartość ${p.wartosc} gb, a surowców zero`);
+  // D37: nic z niczego — przedmiot za 1 gb robi się partią (`partiaMinimalna`), nie za darmo.
+  if (sumaGb(p.surowce) <= 0) err(`${p.id}: wartość ${p.wartosc} gb, a surowców zero`);
 }
 
 /* ---- audyt: profesja vs standard (§5.1b) ---- */

@@ -15,7 +15,7 @@ import {
 } from "../config/tool-expr.mjs";
 import {
   KATALOG, KATEGORIE, PROFESJE, PRZEPISY_STANDARDOWE, PRZEPISY_PROFESJI, PRZEPISY_ELABORACJI,
-  LISTA_PROFESJI, przepis, __testing as DANE
+  LISTA_PROFESJI, przepis, wszystkiePrzepisy, __testing as DANE
 } from "../config/recipes-data.mjs";
 import { SUROWCE_TYPES, getSurowiecType } from "../config/surowce-data.mjs";
 import { __testing as STORE, gbOf, takeSurowce, giveSurowce, takeManySurowce, buildSurowiecItemData } from "../actors/surowce-store.mjs";
@@ -46,6 +46,18 @@ export function registerProdukcjaTests(quench) {
         expect(R.budzetSurowcow(15)).to.equal(7);
         expect(R.budzetSurowcow(1)).to.equal(0);
         expect(R.budzetSurowcow(140)).to.equal(70);
+      });
+
+      it("partia minimalna: przedmiot za 1 gb robi się po 2 sztuki, nie z niczego (D37)", function () {
+        expect(R.partiaMinimalna(1)).to.equal(2);
+        expect(R.partiaMinimalna(0.5)).to.equal(4);
+        expect(R.partiaMinimalna(2)).to.equal(1);
+        expect(R.partiaMinimalna(0), "bez ceny — bez partii").to.equal(1);
+        const p = przepis("std/chemia:papieros");
+        expect(p.wynik.ilosc).to.equal(2);
+        expect(R.sumaGb(p.surowce)).to.equal(1);
+        expect(p.minuty).to.equal(60);
+        expect(p.st).to.equal(5);
       });
 
       it("czas: wielorazowe cena × 1 h, jednorazowe ⌈cena / 2⌉ h, w minutach", function () {
@@ -362,6 +374,14 @@ export function registerProdukcjaTests(quench) {
           for (const r of rows) expect(KATALOG.has(r.ref), `${t}: ${r.nazwa} → ${r.ref}`).to.be.true;
         }
         for (const r of DANE.ELABORACJA) expect(KATALOG.has(r.ref), r.ref).to.be.true;
+      });
+
+      it("żaden przepis nie robi przedmiotu z niczego (D37)", function () {
+        for (const kobalt of [true, false]) {
+          for (const p of wszystkiePrzepisy({ kobalt })) {
+            expect(R.sumaGb(p.surowce), `${p.id} (kobalt: ${kobalt})`).to.be.above(0);
+          }
+        }
       });
 
       it("każdy wpis katalogu ma nazwę i cenę (pole z pliku danych mogło się nazywać inaczej)", function () {

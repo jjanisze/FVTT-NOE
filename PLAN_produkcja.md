@@ -131,6 +131,7 @@ i łagodzi ST (D26, §5.1c).
 | D34 | Naprawa a mnożniki | Fabrykator i cecha profesji nie skracają napraw (oba mówią o produkowaniu); czasy z tabeli naprawy. TODO: sposób na szybsze naprawy (§15) | NOE (odczyt) |
 | D35 | Pogromca | Robota 100 h / 100 gb surowców (podział jak broń palna), **bez Testu** — zdolność opisuje wynik; narzędzia rusznikarza jako zwykły wymóg broni palnej. Naboje: aktywność DO, do PB sztuk po 10 gb surowców, bez Testu | NOE |
 | D36 | Trucizna Truciciela | jeden przedmiot „Olejek trujący” z ST twórcy (8 + INT + PB) zapisanym jako parametr w chwili wytworzenia; nazwa z ST („Olejek trujący (ST 14)”), stos tylko przy tym samym ST. Nałożenie w Akcji Bonusowej na ostrze albo do 3 grotów, aktywny 1 min — wzorzec karty z `weapons/dozownik.mjs` | NOE |
+| D37 | Przedmioty za 1 gb (2026-09-30) | przepis standardowy robi **najmniejszą partię, z której wzór daje ≥ 1 gb surowców** — przy cenie 1 gb dwie sztuki (1 gb surowców, 1 h, ST 5). Wcześniej ⌊1/2⌋ = 0: papieros bez narzędzi powstawał z niczego, bez końca (zgłoszenie z Piekarza). To samo dla Robót ad hoc; `validate:recipes` odrzuca każdy przepis bez surowców | NOE (dziura RAW, L19) |
 
 ---
 
@@ -156,6 +157,7 @@ i łagodzi ST (D26, §5.1c).
 | L16 | Dzisiejsze naprawy broni (`weapons/jams.mjs`, `weapons/melee-degradation.mjs`) to sam Test — bez kosztu i czasu; naprawa broni białej jako „Akcja” sprzeczna z RAW (min. 1k4 min) | przepięte na tabelę naprawy w E7 | NOE |
 | L17 | Wytrzymałość pancerzy jest opcjonalna; PLAN_beta §4 mówi „ręcznie” | ustawienie świata — D18 | NOE |
 | L18 | Kolory zmieniają ceny (Rdza: wszystko ×2) — czy produkcja też drożnieje? | nie: wzór, próg schematu i ST liczą z ceny **podręcznikowej** (s. 144–146). Kolor zmienia tylko ceny rynkowe, także schematów | NOE (odczyt) |
+| L19 | Wzór ⌊cena / 2⌋ daje 0 gb surowców dla przedmiotów za 1 gb (papieros, strzała, nabój .38) | partia minimalna — D37 | NOE |
 
 ---
 
