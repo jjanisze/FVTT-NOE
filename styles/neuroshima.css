@@ -11,6 +11,33 @@
 }
 
 /* ============================================= */
+/* Kroje bez polskich liter                      */
+/* ============================================= */
+
+/* Modesto Condensed (nagłówki rdzenia i dnd5e) i Amiri (szeryfowy krój rdzenia) nie mają
+   ą ć ę ł ń ś ź ż — sprawdzone w tablicach cmap czcionek. Polski tekst w nich mieszał kroje:
+   „BRAK NARZęDZI”, nazwa pojazdu, tytuły stron dziennika. Podmieniamy zmienne, nie selektory —
+   rdzeń i dnd5e sięgają po te kroje wyłącznie przez nie, więc łapie to też miejsca, których
+   jeszcze nie widzieliśmy. Oba źródła definiują je w warstwach CSS (`@layer`), a ten plik jest
+   poza warstwą — wygrywa bez walki na specyficzność.
+   Zamiast Modesto: Roboto Condensed (nim moduł pisze już imiona na kartach postaci i BN).
+   Zamiast Amiri: Roboto Slab (szeryf za szeryf). Motyw sci-fi rdzenia zostaje przy Bruno Ace,
+   która polskie litery ma. */
+:root {
+  --dnd5e-font-modesto: var(--dnd5e-font-roboto-condensed, "Roboto Condensed", sans-serif);
+}
+body:not(.theme-scifi) {
+  --font-serif: var(--dnd5e-font-roboto-slab, "Roboto Slab", serif);
+  --font-h1: var(--dnd5e-font-roboto-condensed, "Roboto Condensed", sans-serif);
+  --font-h2: var(--font-serif);
+}
+/* Wyjątek: napis pauzy to stała „CZAS STOP” (`config/pause-screen.mjs`) bez polskich liter —
+   zostaje w Modesto. Przy zmianie napisu na coś z ogonkami — usuń tę regułę. */
+#pause figcaption {
+  font-family: "Modesto Condensed", serif;
+}
+
+/* ============================================= */
 /* Hide Spellcasting UI                          */
 /* ============================================= */
 
@@ -3716,7 +3743,18 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
   padding: 4px 2px 12px;
   font-size: var(--font-size-13, 13px);
 }
+/* Nagłówki produkcji wprost w Roboto Condensed, niezależnie od motywu rdzenia (h3/h4 biorą
+   `--font-h4`). Brak polskich liter w Modesto łata globalnie sekcja „Kroje bez polskich liter”
+   na górze pliku — tu chodzi o spójny, zwarty wygląd zakładki. */
+.neuro-prod :is(h3, h4),
+.neuro-roboty-pojazdu h3,
+.neuro-zajecia-tytul {
+  font-family: var(--dnd5e-font-roboto-condensed, "Roboto Condensed", sans-serif);
+  font-weight: bold;
+}
 .neuro-prod-sekcja h3 {
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
   display: flex;
   align-items: baseline;
   gap: 6px;
