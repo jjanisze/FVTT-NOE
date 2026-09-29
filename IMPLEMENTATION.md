@@ -1095,6 +1095,33 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### v0.17.1 — Produkcja: papieros z niczego, „Od ręki”; polskie litery w krojach nagłówków (2026-09-30)
+
+Pierwsze obejrzenie zakładki Produkcja w świecie kampanii.
+
+- **Nic z niczego (D37, L19).** Wzór ⌊cena / 2⌋ dawał 0 gb surowców dla ośmiu przedmiotów za 1 gb
+  (papieros, strzała, kulka stalowa, igła do dmuchawki, nabój .38 SPL, desmopresyna, preparaty
+  krwiopochodne, wapniak) — papieros nie wymaga narzędzi, więc każdy robił je za darmo, bez końca.
+  Przepis standardowy (i Robota ad hoc) robi teraz najmniejszą partię z ≥ 1 gb surowców:
+  `partiaMinimalna()` w `config/production-rules.mjs` — przy 1 gb dwie sztuki za 1 gb, 1 h, ST 5.
+  `validate:recipes` i test Quench odrzucają każdy przepis bez surowców.
+- **„Od ręki” zamiast „Gotowe”** — nazwa pierwszej grupy w „Co umiesz zrobić” czytała się jak
+  „już zrobione”.
+- **Polskie litery w krojach nagłówków — w całym module.** Modesto Condensed (nagłówki rdzenia
+  i dnd5e) i Amiri (szeryf rdzenia) nie mają ą ć ę ł ń ś ź ż — sprawdzone w tablicach cmap
+  wszystkich czcionek rdzenia i dnd5e. Wychodziło „BRAK NARZęDZI” w zakładce, a to samo czekało
+  w nazwach pojazdów, tytułach okien i nagłówkach stron dziennika. `neuroshima.css` podmienia
+  zmienne, nie selektory: `--dnd5e-font-modesto` i `--font-h1` → Roboto Condensed (nim moduł
+  pisze już imiona na kartach postaci i BN), `--font-serif` / `--font-h2` → Roboto Slab. Motyw
+  sci-fi rdzenia zostaje przy Bruno Ace (ma polskie litery); napis pauzy „CZAS STOP” celowo
+  zostaje w Modesto. Skan wszystkich elementów z tekstem na otwartych kartach postaci, BN,
+  pojazdu, drużyny, przedmiotu i dziennika: poza pauzą i podglądem kroju w menu edytora — zero
+  trafień w Modesto/Amiri.
+- **Ikony w „Co umiesz zrobić”.** Cache ikon rozbierał UUID kompendium ręcznie, o jedno pole
+  za daleko — żadna paczka nie trafiała i każdy wiersz dostawał worek zastępczy. Teraz
+  `foundry.utils.parseUuid`; test pilnuje ikony papierosa.
+- Quench 574/574.
+
 ### v0.17.0 — Produkcja: Roboty, Schematy, Wprawa, Naprawa (2026-09-28)
 
 Cały [PLAN_produkcja.md](PLAN_produkcja.md), etapy E0–E8 (decyzje D1–D36). Dla graczy:
