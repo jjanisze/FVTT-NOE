@@ -5,9 +5,15 @@
  * Uzupełnienie: test Medycyny ST 12 (bez zasobu).
  * Na trafienie: -1 doza, +1k4 truciznowych obrażeń, RO na Kondycję ST 10
  *   (porażka = stan Zatrucie na 1 minutę).
+ *
+ * „Na trafienie” = przy rzucie obrażeń, dla celu z werdyktem trafienia na karcie ataku
+ * (`combat/trafienie.mjs`) — dopiero wtedy wiadomo, że cios trafił, także po reakcjach celu
+ * (PLAN_tt Z6). Trucizna to zwykły rzut obrażeń z typem `poison`: MG nakłada ją natywną tacką
+ * dnd5e na karcie, jak każde inne obrażenia (D8) — nic nie leci z klienta gracza wprost do PW.
  */
 
 import { hasAddon } from "../config/addons-data.mjs";
+import { hitTargetsForDamage } from "../combat/trafienie.mjs";
 
 const MODULE_ID  = "neuroshima-2026-overrides";
 const DOSE_FLAG  = "dozownik-dose";   // 0 = pusta, 1 = załadowana
@@ -21,8 +27,8 @@ const POISON_DMG = "1d4";
  * ============================================================ */
 
 export function registerDozownik() {
-  // Doza na trafienie — hook postRollAttack (hit detection) + rollDamage fallback
-  Hooks.on("dnd5e.postRollAttack", _onPostRollAttack);
+  // Doza na trafienie — przy rzucie obrażeń, dla trafionego celu z karty ataku.
+  Hooks.on("dnd5e.rollDamage", _onRollDamage);
 
   // Button "Uzupełnij dozę" w karcie czatu broni z dozownikiem
   Hooks.on("renderChatMessageHTML", _onRenderDozownikCard);
@@ -107,34 +113,21 @@ export async function refillDose(weapon) {
  * Hit → consume dose + poison
  * ============================================================ */
 
-async function _onPostRollAttack(rolls, { subject } = {}) {
-  const item = subject?.item;
-  if (!item || item.type !== "weapon") return;
+async function _onRollDamage(rolls, { subject } = {}) {
+  const item = subject?.item ? (subject.item.actor?.items.get(subject.item.id) ?? subject.item) : null;
+  if (!item || item.type !== "weapon" || !item.isOwner) return;
   if (!hasDose(item)) return;
-
-  // Sprawdź czy był hit — musimy mieć cel
-  if (!game.user.targets?.size) return;
-
-  const roll = rolls?.[0];
-  if (!roll) return;
-
-  const target = game.user.targets.first();
-  const targetAc = target?.actor?.system?.attributes?.ac?.value;
-
-  // Jedynka = automatyczne chybienie
-  if (roll.isFumble) return;
-
-  // Jeśli mamy AC celu, sprawdź trafienie
-  if (targetAc !== undefined && roll.total < targetAc) return;
-
+  // Jedna doza = jedno trafienie: pierwszy trafiony cel.
+  const [target] = hitTargetsForDamage(rolls).tokens;
+  if (!target) return;
   await applyDose(item, target);
 }
 
 /**
- * Consume the dose on a weapon and send the poison chat card.
- * Called automatically on hit, or manually from the item sheet.
+ * Consume the dose on a weapon and send the poison card — a damage roll, so the GM applies it
+ * from the native dnd5e tray. Called on a hit's damage roll, or manually from the item sheet.
  * @param {Item5e} weapon
- * @param {Token5e|null} target  — targeted token, or null for no specific target
+ * @param {Token5e|TokenDocument|null} target  — hit token, or null for no specific target
  */
 export async function applyDose(weapon, target = null) {
   // Consume dose
@@ -142,11 +135,19 @@ export async function applyDose(weapon, target = null) {
   weapon.sheet?.render?.(false);
 
   // Roll poison damage
-  const dmgRoll = await new Roll(POISON_DMG).evaluate();
+  const dmgRoll = new CONFIG.Dice.DamageRoll(POISON_DMG, {}, { type: "poison" });
+  await dmgRoll.evaluate();
   const dmgTotal = dmgRoll.total;
 
-  const targetName = target?.name ?? "cel";
-  const targetActorId = target?.actor?.id;
+  const tokenDoc = target?.document ?? target;
+  const targetActor = tokenDoc?.actor ?? null;
+  const targetName = tokenDoc?.name ?? targetActor?.name ?? "cel";
+  const targetActorUuid = targetActor?.uuid;
+  // Tacka dnd5e w trybie „Wycelowane” czyta `flags.dnd5e.targets` (UUID aktora).
+  const trayTargets = targetActor ? [{
+    name: targetName, img: tokenDoc?.texture?.src ?? targetActor.img, uuid: targetActor.uuid,
+    ac: targetActor.system?.attributes?.ac?.value ?? null
+  }] : [];
 
   const content = `
     <div class="dnd5e2 chat-card">
@@ -155,14 +156,14 @@ export async function applyDose(weapon, target = null) {
         <h3 style="flex:1">${weapon.name} — Trucizna (Dozownik)</h3>
       </header>
       <div class="card-content" style="padding:6px 8px">
-        <p><strong>${targetName}</strong> otrzymuje <strong>${dmgTotal} obrażeń od trucizny</strong>.</p>
+        <p><strong>${targetName}</strong>: <strong>${dmgTotal} obrażeń od trucizny</strong> — MG nakłada tacką poniżej.</p>
         <p>Cel musi zdać <strong>RO na Kondycję ST ${POISON_DC}</strong> lub zostać Zatruty na 1 minutę.</p>
       </div>
       <ul class="card-footer pills unlist" style="padding:4px 8px">
         <li class="pill transparent"><span class="label">Trucizna ${dmgTotal} obl.</span></li>
         <li class="pill transparent"><span class="label">RO Kondycja ST ${POISON_DC}</span></li>
-        ${targetActorId ? `<li class="pill neuro-poison-save" style="cursor:pointer;background:rgba(180,0,180,0.15);border:1px solid #b000b0"
-            data-actor-id="${targetActorId}" data-dc="${POISON_DC}">
+        ${targetActorUuid ? `<li class="pill neuro-poison-save" style="cursor:pointer;background:rgba(180,0,180,0.15);border:1px solid #b000b0"
+            data-actor-uuid="${targetActorUuid}" data-dc="${POISON_DC}">
             <span class="label">↯ Rzuć RO</span>
           </li>` : ""}
       </ul>
@@ -173,12 +174,8 @@ export async function applyDose(weapon, target = null) {
     speaker: ChatMessage.getSpeaker({ actor: weapon.actor }),
     content,
     rolls: [dmgRoll],
+    flags: { dnd5e: { roll: { type: "damage" }, targets: trayTargets } },
   });
-
-  // Apply damage (GM only)
-  if (game.user.isGM && target?.actor) {
-    await target.actor.applyDamage([{ value: dmgTotal, type: "poison" }]);
-  }
 }
 
 /* ============================================================
@@ -193,9 +190,10 @@ function _registerChatLogListener(app, html) {
     const pill = event.target.closest(".neuro-poison-save");
     if (!pill) return;
 
-    const actorId = pill.dataset.actorId;
+    // UUID aktora, nie id — niepowiązany żeton ma aktora syntetycznego (DEV_GUIDE §10e.3).
+    // `data-actor-id` zostaje dla kart sprzed 2026-10.
     const dc = parseInt(pill.dataset.dc ?? "10", 10);
-    const actor = game.actors.get(actorId);
+    const actor = pill.dataset.actorUuid ? fromUuidSync(pill.dataset.actorUuid) : game.actors.get(pill.dataset.actorId);
     if (!actor) return;
 
     const rolls = await actor.rollSavingThrow(

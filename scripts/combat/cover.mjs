@@ -62,6 +62,19 @@ const COVER_SELECTIONS = Object.freeze({
   through: { key: "through", label: "Przebijanie osłony", exposure: "none", shotMode: "through" }
 });
 
+/**
+ * Premia osłony do TT z wyboru w oknie ataku (`roll.options.neuroCover`). Strzał przez osłonę
+ * nie podnosi TT — zmniejsza obrażenia. Czyta to rozstrzygacz trafienia (`combat/trafienie.mjs`).
+ * @param {{selection: string}|null|undefined} neuroCover
+ * @returns {number}
+ */
+export function coverAcBonus(neuroCover) {
+  if (!neuroCover?.selection) return 0;
+  const selection = COVER_SELECTIONS[neuroCover.selection] ?? COVER_SELECTIONS.none;
+  if (selection.shotMode === COVER_SHOT_MODES.through.key) return 0;
+  return (COVER_EXPOSURES[selection.exposure] ?? COVER_EXPOSURES.none).acBonus;
+}
+
 export function registerCoverSystem() {
   registerAttackCoverIntegration();
   _registerTargetsTrayEnrichment();
@@ -108,10 +121,12 @@ function _registerTargetsTrayEnrichment() {
       if (pen) coverSubLabel = `Redukcja ${pen.reduction}`;
     }
 
-    // Adjusted AC stored in roll options — set by our _buildConfig patch
+    // Adjusted AC stored in roll options — set by our _buildConfig patch. Karty z werdyktem
+    // rozstrzygacza (`combat/trafienie.mjs`) poprawia on sam — tu zostaje tylko plakietka.
     const adjustedAc = attackRoll.options.target;
     const visibility = game.settings.get("dnd5e", "attackRollVisibility");
-    const canSeeAc = game.user.isGM || visibility === "all";
+    const stamped = !!message.flags?.[MODULE_ID]?.obrona;
+    const canSeeAc = !stamped && (game.user.isGM || visibility === "all");
 
     for (const row of targetRows) {
       // Fix AC value and hit/miss indicator when an AC bonus was applied
@@ -362,7 +377,10 @@ function registerAttackCoverIntegration() {
         // Hollow-point (amunicja dum-dum): pocisk rozplaszcza sie na przeszkodzie zamiast ja
         // przebic, wiec JAKAKOLWIEK niezerowa redukcja zatrzymuje go w calosci - nie odejmuje
         // sie, tylko kasuje. To jedyny realny koszt tej amunicji.
-        if (hasWeaponProperty(this.item, "hollowpoint")) {
+        // Nabój z magazynka niesie właściwości w opcjach rzutu (`weapons/ammo.mjs`), nie na broni.
+        const hollowPoint = hasWeaponProperty(this.item, "hollowpoint")
+          || (primaryRoll.options.properties ?? []).includes?.("hollowpoint");
+        if (hollowPoint) {
           primaryRoll.parts = ["0"];
           primaryRoll.options.neuroHollowPointStopped = true;
         } else {
@@ -552,7 +570,10 @@ function _patchDamageConfigDialog() {
     if (!originalParts) return config;
 
     const reduction = Number(formData?.get("neuroCoverReduction") ?? config.options?.neuroCoverReduction ?? 0);
-    if (reduction > 0) {
+    if ((reduction > 0) && config.options?.neuroHollowPointStopped) {
+      // Dum-dum na osłonie z redukcją — zatrzymany w całości, jak w `getDamageConfig` wyżej.
+      config.parts = ["0"];
+    } else if (reduction > 0) {
       config.parts = [`max(0, (${originalParts.join(" + ")}) - ${reduction})`];
     } else {
       config.parts = [...originalParts];

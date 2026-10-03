@@ -15,6 +15,7 @@
  */
 
 import { seqPlayAudio } from "./sequencer.mjs";
+import { isHitForRolls, hitTargetsForDamage } from "../combat/trafienie.mjs";
 import { getCaliberSoundOverride } from "../config/caliber-vfx.mjs";
 import { getWeaponSoundOverride } from "../config/weapon-vfx.mjs";
 import {
@@ -179,6 +180,9 @@ export const WeaponSound = Object.freeze({
 /*  Public API                                    */
 /* -------------------------------------------- */
 
+/** Tryb ognia aktywności serii → klucz banku dźwięków uderzeń (`config/sound-banks.mjs`). */
+const FIRE_MODE_BY_ACTIVITY = Object.freeze({ neuroKs: "ks", neuroDs: "ds", neuroMs: "ms", neuroOz: "oz" });
+
 /**
  * Register the socket listener and non-firearm ranged shot hook.
  * Must be called once from the `ready` hook (after game.socket is live).
@@ -206,17 +210,12 @@ export function registerWeaponSounds() {
         playWeaponSound(WeaponSound.SHOT_RANGED);
       }
       
-      // Melee Miss check
+      // Melee Miss check — werdykt rozstrzygacza (`combat/trafienie.mjs`): TT z silnika, osłona,
+      // naturalna 1/20. Sprzed reakcji celu: świst pudła gra w chwili ciosu.
       if (attackType === "melee") {
-        // If there is exactly one target, we can definitively check AC
         if (game.user.targets.size === 1) {
           const target = game.user.targets.first();
-          const targetAc = target?.actor?.system?.attributes?.ac?.value;
-          const rollTotal = rolls[0].total; // Total after modifiers
-          
-          if (targetAc && rollTotal < targetAc) {
-             playWeaponSound(WeaponSound.MELEE_MISS);
-          }
+          if (!isHitForRolls(rolls, target, subject)) playWeaponSound(WeaponSound.MELEE_MISS);
         }
       }
     });
@@ -234,7 +233,17 @@ export function registerWeaponSounds() {
         return;
       }
 
-      if (_isFirearmItem(item)) return;  // other firearms handled in rollAttack
+      // Broń palna: strzał gra przy Teście Ataku (`magazine.mjs`), uderzenie — tutaj, przy rzucie
+      // obrażeń, przy każdym trafionym celu (do 2026-10 grało z auto-obrażeń `ammo.mjs`, PLAN_tt E2).
+      if (_isFirearmItem(item)) {
+        const caliberId = rolls[0]?.options?.neuroCaliber ?? undefined;
+        const fireMode = FIRE_MODE_BY_ACTIVITY[subject?.type] ?? "p";
+        for (const token of hitTargetsForDamage(rolls).tokens) {
+          const actor = token?.actor;
+          if (actor) playImpactSound(item, actor, { caliberId, fireMode, token });
+        }
+        return;
+      }
 
       // subject?.attack?.type?.value may be empty if DataModel getter hasn't run — fallback to item
       const attackType = subject?.attack?.type?.value || item.system?.attackType || "";

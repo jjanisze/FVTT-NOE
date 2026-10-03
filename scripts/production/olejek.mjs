@@ -10,10 +10,14 @@
  * groty (łuk, kusza) — trzy trafienia; aktywny 1 minutę albo do zużycia. Trafienie zatrutą bronią
  * wystawia kartę: cel robi RO na Kondycję przeciw ST olejku, porażka — Zatrucie na 1 minutę,
  * cel powtarza RO na końcu swojej tury. **MG w pętli**: karta niczego nie nakłada sama, MG klika
- * przy zaznaczonym celu (wzorzec karty z `weapons/dozownik.mjs`).
+ * RO trafionego celu (wzorzec karty z `weapons/dozownik.mjs`).
+ *
+ * Trafienie = rzut obrażeń dla celu z werdyktem trafienia na karcie ataku (`combat/trafienie.mjs`,
+ * PLAN_tt E2) — dawniej porównanie gołej TT z wynikiem przy Teście Ataku, bez osłony i reakcji.
  */
 
 import { kartaProdukcji } from "./karty.mjs";
+import { hitTargetsForDamage } from "../combat/trafienie.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const FLAG = "olejek";          // na przedmiocie-olejku: { st }
@@ -128,16 +132,12 @@ export async function nalozOlejek(olejek, weapon = null) {
 /*  Trafienie                                   */
 /* -------------------------------------------- */
 
-async function _onPostRollAttack(rolls, { subject } = {}) {
-  const weapon = subject?.item;
+async function _onRollDamage(rolls, { subject } = {}) {
+  const weapon = subject?.item ? (subject.item.actor?.items.get(subject.item.id) ?? subject.item) : null;
   const f = olejekNaBroni(weapon);
-  if (!f) return;
-  const roll = rolls?.[0];
-  if (!roll || roll.isFumble) return;
-  const target = game.user.targets?.first?.() ?? null;
-  const ac = target?.actor?.system?.attributes?.ac?.value;
-  if (ac !== undefined && roll.total < ac) return;
-  if (!weapon.isOwner) return;
+  if (!f || !weapon.isOwner) return;
+  const [target] = hitTargetsForDamage(rolls).tokens;
+  if (!target) return;
   await weapon.setFlag(MODULE_ID, FLAG_BRON, { ...f, ile: f.ile - 1 });
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor: weapon.actor }),
@@ -146,7 +146,8 @@ async function _onPostRollAttack(rolls, { subject } = {}) {
       linie: [`${esc(target?.name ?? "Cel")} robi <strong>RO na Kondycję ST ${f.st}</strong> — porażka: Zatrucie na 1 minutę, `
         + `RO powtarzany na końcu każdej jego tury.`,
         `Olejku zostało: ${Math.max(0, f.ile - 1)} ${f.ile - 1 === 1 ? "trafienie" : "trafień"}.`],
-      przyciski: [{ akcja: "olejek-ro", label: `RO zaznaczonego celu (ST ${f.st})`, gm: true, dane: { st: f.st }, ikona: "fa-solid fa-shield-virus" }]
+      przyciski: [{ akcja: "olejek-ro", label: `RO: ${target.name} (ST ${f.st})`, gm: true,
+        dane: { st: f.st, cel: target.actor?.uuid ?? "" }, ikona: "fa-solid fa-shield-virus" }]
     })
   });
 }
@@ -157,7 +158,9 @@ async function _onClick(event) {
   event.preventDefault();
   event.stopPropagation();
   const st = Number(btn.dataset.st) || 10;
-  const target = canvas?.tokens?.controlled?.[0]?.actor ?? game.user.targets?.first?.()?.actor;
+  // Trafiony cel z karty; karty sprzed 2026-10 — zaznaczony żeton.
+  const target = (btn.dataset.cel ? fromUuidSync(btn.dataset.cel) : null)
+    ?? canvas?.tokens?.controlled?.[0]?.actor ?? game.user.targets?.first?.()?.actor;
   if (!target) return ui.notifications.warn("Zaznacz żeton celu.");
   const rolls = await target.rollSavingThrow({ ability: "con", target: st }, {}, { data: { flavor: `RO na Kondycję — olejek trujący (ST ${st})` } });
   const r = Array.isArray(rolls) ? rolls[0] : rolls;
@@ -176,7 +179,7 @@ function _onPreUseActivity(activity, usageConfig, dialogConfig, messageConfig) {
 }
 
 export function registerOlejek() {
-  Hooks.on("dnd5e.postRollAttack", _onPostRollAttack);
+  Hooks.on("dnd5e.rollDamage", _onRollDamage);
   Hooks.on("dnd5e.preUseActivity", _onPreUseActivity);
   document.addEventListener("click", _onClick, { capture: true });
 }

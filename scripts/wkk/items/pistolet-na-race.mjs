@@ -313,9 +313,8 @@ async function _rollPodpalenieSave() {
   }
 }
 
-/** Injects the "RO Podpalenie" button into this weapon's ATAK chat cards — same deferred-render
- * trick as `weapons/ammo.mjs`'s own "Obrażenia" button injection (dnd5e builds its cards via
- * async microtasks; `setTimeout(0)` runs after they've settled). */
+/** Injects the "RO Podpalenie" button into this weapon's ATAK chat cards — deferred render
+ * (dnd5e builds its cards via async microtasks; `setTimeout(0)` runs after they've settled). */
 function onRenderPodpalenieButton(message, html) {
   const activityType = message.flags?.dnd5e?.activity?.type;
   if (activityType !== "attack") return;
@@ -336,16 +335,14 @@ function _injectPodpalenieButton(html) {
 
   const btn = document.createElement("button");
   btn.type = "button";
-  btn.classList.add("neuro-damage-btn", "neuro-podpalenie-ro-btn"); // same look as the Obrażenia button
+  btn.classList.add("neuro-damage-btn", "neuro-podpalenie-ro-btn"); // wygląd dawnego przycisku „Obrażenia” z ammo.mjs
   btn.innerHTML = `<i class="fa-solid fa-fire"></i> RO Podpalenie (ST ${PODPALENIE_DC})`;
   btn.addEventListener("click", async ev => {
     ev.preventDefault();
     await _rollPodpalenieSave();
   });
 
-  // Prefer landing right after ammo.mjs's own "Obrażenia"/"Nałóż ponownie" button when present.
-  const anchor = el.querySelector(".neuro-damage-btn")
-    ?? el.querySelector(".dice-total")
+  const anchor = el.querySelector(".dice-total")
     ?? el.querySelector(".dice-roll")
     ?? el.querySelector(".message-content")
     ?? el;

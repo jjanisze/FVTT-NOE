@@ -42,6 +42,7 @@ import {
 } from "./sounds.mjs";
 import { seqScrollText } from "./sequencer.mjs";
 import { tracerFire } from "./tracer-vfx.mjs";
+import { isHitForRolls } from "../combat/trafienie.mjs";
 import { AMMO_CALIBER_MAP, familyCalibers } from "../config/ammo-data.mjs";
 import { addAmmoToActor } from "../actors/ammo-inventory.mjs";
 import { isAtHand, provenanceBadge, clearBelt, registerHandyFamily } from "../actors/handy-items.mjs";
@@ -1867,29 +1868,13 @@ function _playSingleShotVfx(item, result) {
   const shooter = item?.actor;
   if (!shooter) return;
   const targetToken = game.user?.targets?.first() ?? null;
-  const roll = Array.isArray(result) ? result[0] : null;
-  const hit = _isAttackHit(roll, targetToken);
+  // Werdykt rozstrzygacza (`combat/trafienie.mjs`): osłona, naturalna 1/20 — ten sam, który widzi
+  // tacka celów. Sprzed reakcji celu — smugacz to kosmetyka chwili strzału (PLAN_tt §4.7).
+  const hit = Array.isArray(result) && targetToken ? isHitForRolls(result, targetToken) : false;
   tracerFire({
     shooter, target: targetToken, hit, rounds: 1,
     caliber: getMag(item)?.ammoType, weaponId: item.system?.identifier
   });
-}
-
-/**
- * Determine whether an attack roll hit a target token, by comparing the roll
- * total to the target's AC. Critical hits always hit; fumbles always miss.
- *
- * @param {object|null} roll         A dnd5e D20Roll (or null).
- * @param {Token|null} targetToken   The targeted canvas token (or null).
- * @returns {boolean}
- */
-function _isAttackHit(roll, targetToken) {
-  if (!roll || !targetToken) return false;
-  if (roll.isCritical) return true;
-  if (roll.isFumble) return false;
-  const ac = targetToken.actor?.system?.attributes?.ac?.value;
-  if (typeof ac !== "number") return false;
-  return (roll.total ?? 0) >= ac;
 }
 
 function _getReloadState(item) {

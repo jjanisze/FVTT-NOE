@@ -1,7 +1,8 @@
 import { firedOneHanded } from "../combat/grip.mjs";
 import { getMag, spendRounds } from "./magazine.mjs";
 import { lastConsumedRounds, dominantCaliber, weaponEntry } from "./magazine-model.mjs";
-import { effectiveDamageFor } from "./ammo.mjs";
+import { effectiveDamageFor, caliberDamageProperties } from "./ammo.mjs";
+import { isHitForRolls } from "../combat/trafienie.mjs";
 import { hasAddon } from "../config/addons-data.mjs";
 import { getSetup } from "./addons.mjs";
 import { isDamaged, isJammed, rollJamCheck } from "./jams.mjs";
@@ -1395,10 +1396,8 @@ function _buildNoModifierDamageRoll(item, activityId, damage, rollConfig, rollDa
     options: {
       type: (damage.types.has(lastType) ? lastType : null) ?? damage.types.first(),
       types: Array.from(damage.types),
-      properties: Array.from(new Set([
-        ...Array.from(item.system.properties ?? []),
-        ...(effectiveDamageFor(item, caliberId)?.props ?? [])
-      ])).filter(property => CONFIG.DND5E.itemProperties[property]?.isPhysical)
+      properties: caliberDamageProperties(item, caliberId),
+      neuroCaliber: caliberId ?? null
     }
   };
 }
@@ -1548,8 +1547,9 @@ function _playShortBurstVfx(item, rolls) {
   const shooter = item?.actor;
   if (!shooter) return;
   const targetToken = game.user?.targets?.first() ?? null;
-  const roll = Array.isArray(rolls) ? rolls[0] : null;
-  const hit = _isKsAttackHit(roll, targetToken);
+  // Werdykt z rozstrzygacza (`combat/trafienie.mjs`) — z osłoną i naturalną 1/20 (PLAN_tt Z4).
+  // Przed reakcjami celu: smugacz to kosmetyka chwili strzału, świadomie (§4.7).
+  const hit = Array.isArray(rolls) && targetToken ? isHitForRolls(rolls, targetToken) : false;
   tracerFire({
     shooter, target: targetToken, hit, rounds: KS_BULLET_COST,
     caliber: getMag(item)?.ammoType, weaponId: item.system?.identifier
@@ -1571,15 +1571,6 @@ function _playAreaBurstVfx(item, template, rounds) {
     shooter, template, rounds,
     caliber: getMag(item)?.ammoType, weaponId: item.system?.identifier
   });
-}
-
-function _isKsAttackHit(roll, targetToken) {
-  if (!roll || !targetToken) return false;
-  if (roll.isCritical) return true;
-  if (roll.isFumble) return false;
-  const ac = targetToken.actor?.system?.attributes?.ac?.value;
-  if (typeof ac !== "number") return false;
-  return (roll.total ?? 0) >= ac;
 }
 
 function _hasLeadHail(item) {

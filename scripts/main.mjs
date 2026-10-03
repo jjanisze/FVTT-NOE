@@ -74,6 +74,7 @@ import { registerWeaponSaveProperties } from './combat/weapon-save-properties.mj
 import { registerMeleeManeuvers, maneuversApi } from './combat/melee-maneuvers.mjs';
 import { registerKnockoutAndLastAction, onPreUpdateActorDeathSaves } from "./combat/knockout.mjs";
 import { registerCoverSystem } from "./combat/cover.mjs";
+import { registerTrafienie } from "./combat/trafienie.mjs";
 import { registerMagazines } from "./weapons/magazine.mjs";
 import { registerNpcAmmo } from "./weapons/npc-ammo.mjs";
 import { registerWeaponJams } from "./weapons/jams.mjs";
@@ -301,6 +302,8 @@ Hooks.once("init", () => {
   registerMeleeManeuvers();
   registerKnockoutAndLastAction();
   registerCoverSystem();
+  // Jeden rozstrzygacz trafienia: werdykt na karcie ataku i tacka celów (PLAN_tt E2).
+  registerTrafienie();
   registerMagazines();
   registerNpcAmmo();
   registerWeaponJams();

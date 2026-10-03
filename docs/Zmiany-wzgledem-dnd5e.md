@@ -24,6 +24,13 @@ przy trafieniu krytycznym, kary do prędkości/reakcji/akcji dodatkowych rosnąc
 możliwość śmierci przy skumulowaniu Krytycznego Stopnia. Widoczne jako stan na pionku, efekt na
 karcie i pasek na karcie BN.
 
+**Test Ataku i obrażenia to dwa osobne rzuty.** Atakujący rzuca Test Ataku; karta ataku pokazuje
+werdykt dla każdego celu (TT celu, osłona z okna ataku, naturalna 20 trafia zawsze, naturalna 1
+nigdy). Obrażenia rzuca atakujący przyciskiem **Obrażenia** na karcie użycia — także z broni
+palnej: kości naboju, który poleciał, bez modyfikatora cechy; trafienie krytyczne podwaja kości.
+Nakłada je **MG** tacką na karcie obrażeń (dnd5e pokazuje ją tylko MG). Nic nie zdejmuje PW samo
+z siebie po Teście Ataku — między trafieniem a obrażeniami jest miejsce na reakcje celu.
+
 ## Klasy i profesje
 
 6 klas z własnymi tabelami progresji, 18 profesji (subklas), 133 zdolności klasowe/profesji z
