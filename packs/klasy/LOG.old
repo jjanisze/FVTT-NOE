@@ -1,1 +1,5 @@
-2026/10/03-13:27:58.315 76ec Delete type=3 #1
+2026/10/03-18:23:50.854 aa00 Recovering log #3
+2026/10/03-18:23:50.855 aa00 Level-0 table #5: started
+2026/10/03-18:23:50.857 aa00 Level-0 table #5: 26046 bytes OK
+2026/10/03-18:23:50.861 aa00 Delete type=0 #3
+2026/10/03-18:23:50.861 aa00 Delete type=3 #2
