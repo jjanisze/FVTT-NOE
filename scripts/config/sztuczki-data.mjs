@@ -211,6 +211,7 @@ export const SZTUCZKI = Object.freeze({
     req: "ZRC 15+, CHA/MDR/INT 15+, brak pancerza",
     text: "Bez pancerza: TT + Premia Biegłości.",
     category: "mobilnosc",
+    legacyAbilityKeys: ["kuloodpornosc"],
     auto: []
   },
   lawnik: {
@@ -242,6 +243,7 @@ export const SZTUCZKI = Object.freeze({
     text: "Manewry [B] — Odepchnięcie / Odstąpienie / Wytrącenie w Akcji Bonusowej; "
       + "Parowanie [R] — TT +1k4 przeciw jednemu atakowi wręcz.",
     category: "wrecz",
+    legacyAbilityKeys: ["mistrzWalkiWrecz"],
     auto: []
   },
   muzyk: {
@@ -258,6 +260,7 @@ export const SZTUCZKI = Object.freeze({
     text: "Bullet time [R] — gdy zostaniesz trafiony, możesz w Reakcji podnieść swoją TT "
       + "o 5 wobec tego ataku.",
     category: "mobilnosc",
+    legacyAbilityKeys: ["neo"],
     auto: []
   },
   nozownik: {
@@ -478,6 +481,7 @@ export const SZTUCZKI = Object.freeze({
     req: "INT 15+",
     text: "Roszada — podczas Unikania: TT +3 i brak ataków okazyjnych do początku następnej tury.",
     category: "mobilnosc",
+    legacyAbilityKeys: ["szachista"],
     auto: []
   },
   szkolenieWBroni: {

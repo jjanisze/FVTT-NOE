@@ -41,6 +41,7 @@ export const CLASS_FEATURES = {
     action: "B",
     uses: { max: "@scale.brutal.berserki", period: "lr" },
     hotbar: true,
+    legacyAbilityKey: "berserk",
     toggle: { effect: "neuro-berserk", duration: { rounds: 10 }, breaksOn: ["unconscious", "incapacitated", "charmed"], afterEnd: "noActionNextTurn" },
     auto: [{ what: "włączenie w Akcji Bonusowej zużywa Berserk, efekt trwa 10 rund", where: "actors/class-state.mjs" }, { what: "Siła Berserkera — Ułatwienie w testach i RO na Siłę", where: "actors/class-state.mjs" }, { what: "Obrażenia Berserkera — kość z tabeli Brutala do obrażeń ataków wręcz", where: "actors/class-state.mjs" }, { what: "Obłęd Berserkera — TT + mod. SIŁ bez pancerza, hełmu i tarczy", where: "actors/class-state.mjs" }, { what: "koniec przy Nieprzytomności, Obezwładnieniu i Zauroczeniu; karta zmęczenia po Berserku", where: "actors/class-state.mjs" }],
     manual: "Szarżę Berserkera wykonuje gracz; zmęczenie po Berserku (brak akcji) moduł ogłasza, pilnuje stół. Obrażenia Berserkera idą jak Rage w dnd5e — tylko do ataków wręcz, rzut bronią opartą na Sile dolicza gracz.",
@@ -54,8 +55,8 @@ export const CLASS_FEATURES = {
     label: "Goła klata",
     action: null,
     passive: true,
-    acFormula: "10 + @abilities.dex.mod + @abilities.con.mod",
     exclusiveGroup: "unarmoredAc",
+    legacyAbilityKey: "golaKlata",
     auto: [{ what: "nie łączy się z Tarczą wiary ani Obłędem Berserkera — słabsza zdolność wyszarzona na karcie", where: "actors/class-rules.mjs" }],
     manual: "TT 10 + mod. ZRC + mod. KON ustawia się w konfiguracji Trudności Trafienia na karcie — moduł jej nie nakłada.",
     text: "Kiedy nie nosisz żadnego pancerza, hełmu ani tarczy twoja Trudność Trafienia wynosi 10 + twoje modyfikatory Zręczności i Kondycji. Ta zdolność nie łączy się z podobnie działającymi zdolnościami innych klas."
@@ -311,6 +312,7 @@ export const CLASS_FEATURES = {
     action: "R",
     uses: { max: "@abilities.int.mod", period: "sr" },
     hotbar: true,
+    legacyAbilityKey: "inteligentnaObrona",
     auto: [],
     text: "Kiedy zostajesz trafiony atakiem, przed poznaniem ilości obrażeń, możesz w Reakcji zwiększyć swoją Trudność Trafienia o wartość modyfikatora Inteligencji, do początku swojej następnej tury, by w ten sposób uniknąć trafienia. Możesz użyć tej zdolności tyle razy, ile wynosi twój modyfikator Inteligencji. Zdolność odnawia się po odbyciu Krótkiego odpoczynku."
   },
@@ -615,6 +617,7 @@ export const CLASS_FEATURES = {
     level: 9,
     label: "Dziewięć żyć",
     action: null,
+    legacyAbilityKey: "dziewiecZyc",
     auto: [],
     text: "Łatwiej ustrzelić nocą czarnego kota niż cię trafić. Zyskujesz nowe sposoby na wykorzystanie Kocich kości."
   },
@@ -944,6 +947,7 @@ export const CLASS_FEATURES = {
     action: null,
     passive: true,
     exclusiveGroup: "unarmoredAc",
+    legacyAbilityKey: "tarczaWiary",
     auto: [{ what: "nie łączy się z Gołą klatą ani Obłędem Berserkera — słabsza zdolność wyszarzona na karcie", where: "actors/class-rules.mjs" }],
     manual: "Premię mod. CHA do TT bez pancerza ustawia się w konfiguracji Trudności Trafienia — moduł jej nie nakłada.",
     text: "Jeśli nie nosisz pancerza, możesz dodać modyfikator Charyzmy do swojej Trudności Trafienia. Tej zdolności nie można łączyć z innymi podobnymi (np. Goła Klata)."
@@ -1199,6 +1203,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Trening w zbroi",
     action: null,
+    legacyAbilityKey: "treningWZbroi",
     auto: [],
     text: "Robienie pompek w pancerzu i z kowadłem na plecach, to twoje codzienne zajęcie. Nie otrzymujesz kar do Testów Zręczności (Skradanie się) wynikających z noszenia pancerza. Twoja maksymalna premia ze Zręczności do Trudności Trafienia wynikająca z ograniczeń noszonego pancerza, zwiększa się o 1."
   },
@@ -1335,6 +1340,7 @@ export const CLASS_FEATURES = {
     label: "Mutant na śniadanie",
     action: null,
     oncePerTurn: true,
+    legacyAbilityKey: "mutantNaSniadanie",
     auto: [],
     text: "Trochę tego tałatajstwa już zdechło dzięki tobie. Wiesz najlepiej, jak z nimi walczyć i jak się przed nimi bronić. Refleks łowcy. Kiedy rozpoczynasz walkę z mutantem lub potworem, zyskujesz premię do Inicjatywy, równą twojej Premii Biegłości. Zabójca mutantów. Kiedy walczysz z mutantem lub potworem, możesz raz w rundzie zaatakować go z Ułatwieniem. Unik łowcy [R]. Jeśli zostajesz trafiony atakiem przez mutanta lub potwora, możesz użyć Reakcji, żeby wobec tego ataku podnieść swoją TT o wartość twojej Premii Biegłości."
   },
@@ -1417,6 +1423,7 @@ export const CLASS_FEATURES = {
     label: "Empiryk",
     action: "R",
     hotbar: true,
+    legacyAbilityKey: "empiryk",
     auto: [],
     text: "Nikt nie wie, jak to robisz, ale potrafisz przewidzieć zachowanie każdej maszyny. Jeśli zostajesz trafiony przez maszynę, możesz użyć Reakcji, żeby wobec tego ataku podnieść swoją TT o wartość twojej Premii Biegłości. Zyskujesz również Ułatwienie w Rzutach Obronnych na efekty wywoływane przez maszyny."
   },
@@ -1440,6 +1447,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Obsługa pancerza",
     action: null,
+    legacyAbilityKey: "obslugaPancerza",
     auto: [],
     text: "Kiedy nosisz pancerz, otrzymujesz +2 do Trudności Trafienia."
   },

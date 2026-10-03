@@ -1,6 +1,6 @@
 # PLAN — Trudność Trafienia wg NOE: silnik TT, jeden rozstrzygacz trafienia, okno „Reakcje celu”
 
-> Status: **ZAPROJEKTOWANY** (2026-10-03) — wszystkie decyzje MG zamknięte (§2), następny krok: **E0**.
+> Status: **W TOKU** (2026-10-03) — decyzje MG zamknięte (§2); E0 ✅, następny krok: **E1**.
 > Rozmiar: **L** (był M — reakcje obronne wymagają rozdzielenia rzutu ataku i obrażeń, §4.7).
 > Wywołanie: rejestr pokrycia (PLAN_beta B5) — Goła klata i Tarcza wiary nie nakładają TT, moduł
 > tylko wyszarza słabszą (`actors/class-rules.mjs`). Przegląd RAW pod ten plan znalazł ~20 źródeł TT,

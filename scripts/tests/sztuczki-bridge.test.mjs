@@ -89,8 +89,10 @@ export function registerSztuczkiBridgeTests(quench) {
           for (const legacy of def.legacyAbilityKeys ?? []) bySztuczka.set(legacy, def.label);
         }
         for (const [legacy, label] of bySztuczka) {
-          const aliases = ABILITY_DEFINITIONS[legacy]?.aliases ?? [];
-          const matches = aliases.some(alias => norm(label).includes(norm(alias)));
+          // `exactAliases` — cała nazwa, nie podciąg („Neo” nie może łapać „Neodrugs”).
+          const { aliases = [], exactAliases = [] } = ABILITY_DEFINITIONS[legacy] ?? {};
+          const matches = aliases.some(alias => norm(label).includes(norm(alias)))
+            || exactAliases.some(alias => norm(label) === norm(alias));
           expect(matches, `„${label}" nie pasuje do żadnego aliasu klucza ${legacy}`).to.be.true;
         }
       });

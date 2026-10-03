@@ -48,6 +48,7 @@ AUTOMATION = {
     "berserk": {
         "uses": {"max": "@scale.brutal.berserki", "period": "lr"},   # "odnawia się po odbyciu Długiego odpoczynku"
         "hotbar": True,
+        "legacyAbilityKey": "berserk",                                # Obłęd Berserkera — config/tt-rules.mjs
         "toggle": {
             "effect": "neuro-berserk",
             "duration": {"rounds": 10},
@@ -70,8 +71,7 @@ AUTOMATION = {
     },
     "z-bara": {"hotbar": True, "requiresState": "neuro-berserk"},
     "solowa": {"hotbar": True},
-    "gola-klata": {"passive": True, "acFormula": "10 + @abilities.dex.mod + @abilities.con.mod",
-                   "exclusiveGroup": "unarmoredAc"},
+    "gola-klata": {"passive": True, "exclusiveGroup": "unarmoredAc", "legacyAbilityKey": "golaKlata"},
 
     # ---- Cwaniak ----
     "motywacja": {
@@ -98,7 +98,8 @@ AUTOMATION = {
 
     # ---- Spec ----
     "dobra-rada": {"uses": {"max": "@prof", "period": "sr"}, "hotbar": True},
-    "inteligentna-obrona": {"uses": {"max": "@abilities.int.mod", "period": "sr"}, "hotbar": True},
+    "inteligentna-obrona": {"uses": {"max": "@abilities.int.mod", "period": "sr"}, "hotbar": True,
+                            "legacyAbilityKey": "inteligentnaObrona"},
     "leb-jak-sklep": {
         "uses": {"max": "@prof", "period": "lr"},                     # "odnawia się po Długim odpoczynku"
         "resource": {"die": "@scale.spec.lebJakSklep"},
@@ -155,16 +156,20 @@ AUTOMATION = {
     "truciciel": {"hotbar": True},
     "bez-tajemnic": {"hotbar": True},
     "slaby-punkt": {"hotbar": True, "oncePerTurn": True},
-    "mutant-na-sniadanie": {"oncePerTurn": True},
+    "mutant-na-sniadanie": {"oncePerTurn": True, "legacyAbilityKey": "mutantNaSniadanie"},
     "maszyna-do-zabijania": {"oncePerTurn": True, "requiresState": "neuro-berserk"},
     "moj-bog-kule-nosi": {"oncePerTurn": True},
     "ja-i-moj-gang": {"requiresState": "neuro-berserk"},
     "zew-areny": {"requiresState": "neuro-berserk"},
-    "tarcza-wiary": {"passive": True, "exclusiveGroup": "unarmoredAc"},
+    "tarcza-wiary": {"passive": True, "exclusiveGroup": "unarmoredAc", "legacyAbilityKey": "tarczaWiary"},
     "skuteczny-cios": {"hotbar": True},
     "jak-dbasz-tak-masz": {"legacyAbilityKey": "jakDbaszTakMasz"},
     "rewolwerowiec": {"legacyAbilityKey": "rewolwerowiec", "handgunKind": "rewolwer"},
-    "empiryk": {"hotbar": True},
+    "empiryk": {"hotbar": True, "legacyAbilityKey": "empiryk"},
+    # Trudność Trafienia (PLAN_tt §4.11) — klucze mostu `actors/abilities.mjs`.
+    "trening-w-zbroi": {"legacyAbilityKey": "treningWZbroi"},
+    "obsluga-pancerza": {"legacyAbilityKey": "obslugaPancerza"},
+    "dziewiec-zyc": {"legacyAbilityKey": "dziewiecZyc"},     # Koci odskok [R]
     "moja-prawa-reka": {"companion": True},
     "partner": {"companion": True},
     "oswajanie-zwierzat": {"companion": True},

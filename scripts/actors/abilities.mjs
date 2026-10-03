@@ -65,7 +65,22 @@ export const ABILITY_KEYS = {
   FABRYKATOR: "fabrykator",
   PRZYDASIE: "przydasie",
   NANO_TECH: "nanoTech",
-  JESLI_MA_SILNIK: "jesliMaSilnik"
+  JESLI_MA_SILNIK: "jesliMaSilnik",
+  // Trudność Trafienia (PLAN_tt §4.11) — metody, limit i premie czyta `config/tt-rules.mjs`,
+  // reakcje po trafieniu `config/defense-rules.mjs`.
+  GOLA_KLATA: "golaKlata",
+  TARCZA_WIARY: "tarczaWiary",
+  BERSERK: "berserk",
+  OBSLUGA_PANCERZA: "obslugaPancerza",
+  TRENING_W_ZBROI: "treningWZbroi",
+  KULOODPORNOSC: "kuloodpornosc",
+  SZACHISTA: "szachista",
+  NEO: "neo",
+  MISTRZ_WALKI_WRECZ: "mistrzWalkiWrecz",
+  INTELIGENTNA_OBRONA: "inteligentnaObrona",
+  MUTANT_NA_SNIADANIE: "mutantNaSniadanie",
+  EMPIRYK: "empiryk",
+  DZIEWIEC_ZYC: "dziewiecZyc"
 };
 
 /**
@@ -172,6 +187,75 @@ export const ABILITY_DEFINITIONS = {
     label: "Jeśli ma silnik, to ruszy",
     aliases: ["jeśli ma silnik", "jesli ma silnik"],
     noticeColor: "#6d4a2f"
+  },
+  /* ── Trudność Trafienia (PLAN_tt) ── */
+  [ABILITY_KEYS.GOLA_KLATA]: {
+    label: "Goła klata",
+    aliases: ["goła klata", "gola klata"],
+    noticeColor: "#8b1a1a"
+  },
+  [ABILITY_KEYS.TARCZA_WIARY]: {
+    label: "Tarcza wiary",
+    aliases: ["tarcza wiary"],
+    noticeColor: "#7a6a2f"
+  },
+  [ABILITY_KEYS.BERSERK]: {
+    label: "Berserk",
+    aliases: ["berserk"],
+    noticeColor: "#8b1a1a"
+  },
+  [ABILITY_KEYS.OBSLUGA_PANCERZA]: {
+    label: "Obsługa pancerza",
+    aliases: ["obsługa pancerza", "obsluga pancerza"],
+    noticeColor: "#4a5a6b"
+  },
+  [ABILITY_KEYS.TRENING_W_ZBROI]: {
+    label: "Trening w zbroi",
+    aliases: ["trening w zbroi"],
+    noticeColor: "#4a5a6b"
+  },
+  [ABILITY_KEYS.KULOODPORNOSC]: {
+    // Nie „kuloodporn” — to złapałoby „Kamizelkę kuloodporną” (Raynald).
+    label: "Kuloodporność",
+    aliases: ["kuloodporność", "kuloodpornosc"],
+    noticeColor: "#556b2f"
+  },
+  [ABILITY_KEYS.SZACHISTA]: {
+    label: "Szachista",
+    aliases: ["szachista", "roszada"],
+    noticeColor: "#35566b"
+  },
+  [ABILITY_KEYS.NEO]: {
+    label: "Neo",
+    // „neo” jako podciąg łapie „Neodrugs” — sama nazwa Sztuczki porównywana w całości.
+    aliases: ["bullet time"],
+    exactAliases: ["neo"],
+    noticeColor: "#2f5d6d"
+  },
+  [ABILITY_KEYS.MISTRZ_WALKI_WRECZ]: {
+    label: "Mistrz walki wręcz",
+    aliases: ["mistrz walki wręcz", "mistrz walki wrecz"],
+    noticeColor: "#6b3f1f"
+  },
+  [ABILITY_KEYS.INTELIGENTNA_OBRONA]: {
+    label: "Inteligentna obrona",
+    aliases: ["inteligentna obrona"],
+    noticeColor: "#35566b"
+  },
+  [ABILITY_KEYS.MUTANT_NA_SNIADANIE]: {
+    label: "Mutant na śniadanie",
+    aliases: ["mutant na śniadanie", "mutant na sniadanie", "unik łowcy", "unik lowcy"],
+    noticeColor: "#5b6d2f"
+  },
+  [ABILITY_KEYS.EMPIRYK]: {
+    label: "Empiryk",
+    aliases: ["empiryk"],
+    noticeColor: "#2f5d6d"
+  },
+  [ABILITY_KEYS.DZIEWIEC_ZYC]: {
+    label: "Dziewięć żyć",
+    aliases: ["dziewięć żyć", "dziewiec zyc", "koci odskok"],
+    noticeColor: "#4a4a6b"
   }
 };
 
@@ -269,8 +353,11 @@ export function getResolvedAbility(actor, abilityKey) {
     }
   }
 
-  const aliases = ABILITY_DEFINITIONS[abilityKey].aliases ?? [];
-  const named = items.find(i => aliases.some(alias => _normalizeName(i.name).includes(alias)));
+  const { aliases = [], exactAliases = [] } = ABILITY_DEFINITIONS[abilityKey];
+  const named = items.find(i => {
+    const name = _normalizeName(i.name);
+    return aliases.some(alias => name.includes(alias)) || exactAliases.includes(name);
+  });
   if (named) return { enabled: true, source: "item", item: named };
 
   return { enabled: false, source: "none", item: null };
