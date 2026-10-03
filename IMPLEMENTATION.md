@@ -1128,8 +1128,8 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ### PLAN_tt — TT wg NOE, jeden rozstrzygacz trafienia, okno „Reakcje celu” (2026-10-03)
 
-Cały plan [PLAN_tt.md](PLAN_tt.md), etapy E0–E6. Paczki (`bestiariusz`, `zdolnosci-klasowe`, `sztuczki`,
-`pancerze`) czekają na przebudowę przy zamkniętym Foundry; potem `game.neuroshima.zdolnosci.resync()`.
+Cały plan [PLAN_tt.md](PLAN_tt.md), etapy E0–E6. Paczki `bestiariusz`, `zdolnosci-klasowe`, `sztuczki`, `pancerze`
+przebudowane 2026-10-04; kopie zdolności na kartach dosyła `game.neuroshima.zdolnosci.resync()`.
 
 - **TT na karcie liczy moduł.** Metoda „NOE (automatycznie)” (dawniej „Domyślna”; metody 5e Maga,
   Mnicha itd. usunięte — nikt ich nie używał): metody konkurują — TT podstawowa, pancerz, Goła klata,

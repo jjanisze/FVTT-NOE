@@ -1,6 +1,8 @@
 # PLAN — Trudność Trafienia wg NOE: silnik TT, jeden rozstrzygacz trafienia, okno „Reakcje celu”
 
-> Status: **W TOKU** (2026-10-03) — decyzje MG zamknięte (§2); E0–E6 ✅ w kodzie; zostaje przebudowa paczek przy zamkniętym Foundry (E6).
+> Status: **WDROŻONY** (2026-10-04) — E0–E6 ✅, paczki przebudowane. Po starcie świata: `game.neuroshima.zdolnosci.resync()`
+> (najpierw na sucho), `oznaczReakcjeBN({ actors: ["Pustak"], commit: true })` (D16), pełny przebieg Quench. Czeka: potwierdzenie
+> autora systemu dla D15.
 > Rozmiar: **L** (był M — reakcje obronne wymagają rozdzielenia rzutu ataku i obrażeń, §4.7).
 > Wywołanie: rejestr pokrycia (PLAN_beta B5) — Goła klata i Tarcza wiary nie nakładają TT, moduł
 > tylko wyszarza słabszą (`actors/class-rules.mjs`). Przegląd RAW pod ten plan znalazł ~20 źródeł TT,
