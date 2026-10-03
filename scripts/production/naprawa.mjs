@@ -34,6 +34,7 @@ import { kartaProdukcji, fmtSurowce } from "./karty.mjs";
 import { allGb, takeManySurowce } from "../actors/surowce-store.mjs";
 import { isDamaged, clearDamage } from "../weapons/jams.mjs";
 import { isMeleeWeapon, getDegradationState, repairWeapon } from "../weapons/melee-degradation.mjs";
+import { isCriticalHitOn } from "../combat/trafienie.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const USTAWIENIE = "wytrzymaloscPancerzy";
@@ -307,10 +308,8 @@ function _zalozonyPancerz(actor) {
 async function _onApplyDamage(actor, amount, options) {
   if (!wytrzymaloscWlaczona() || !game.users.activeGM?.isSelf) return;
   if (!(amount > 0)) return;
-  const krytyk = options?.isCritical === true
-    || options?.origin?.rolls?.some?.(r => r?.isCritical || r?.options?.isCritical)
-    || options?.originatingMessage?.flags?.dnd5e?.roll?.critical === true;
-  if (!krytyk) return;
+  // Krytyk z werdyktu karty ataku (Krytyczna ochrona po rzucie obrażeń go gasi, P9), inaczej z rzutu.
+  if (!isCriticalHitOn(actor, options)) return;
   const pancerz = _zalozonyPancerz(actor);
   if (!pancerz) return;
   const baza = Number(pancerz._source.system?.armor?.value) || 0;

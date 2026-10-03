@@ -41,8 +41,20 @@ import { critSkipsZranienie } from "./crit-riders.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
 import { registerHudLevelled } from "../actors/levelled-conditions.mjs";
 import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
+import { isCriticalHitOn } from "./trafienie.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
+
+/** Flaga na karcie obrażeń: UUID aktorów, którym ten krytyk już nadał Stopień (ponowne „Zastosuj”). */
+const CRIT_WOUNDED_FLAG = "zranienieKrytyk";
+
+/**
+ * Aktorzy, których PW właśnie spadły do 0 (`preUpdateActor`) — UUID → znacznik czasu. Krytyk,
+ * który przy tym samym trafieniu zbił PW do 0, nie dokłada drugiego Stopnia (s. 32: „Trafienie
+ * Krytyczne **albo** PW spadną do 0”).
+ */
+const _zeroHpAt = new Map();
+const ZERO_HP_WINDOW_MS = 3000;
 
 /**
  * Zranienie level definitions.
@@ -65,8 +77,10 @@ export function registerZranienie() {
   // After update, apply wound if flagged by preUpdate
   Hooks.on("updateActor", onUpdateActorZranienie);
 
-  // Hook into damage rolls to detect critical hits
-  Hooks.on("dnd5e.rollDamage", onRollDamage);
+  // Trafienie Krytyczne → Stopień Zranienia, gdy MG nakłada obrażenia z karty (tacka dnd5e).
+  // Do 2026-10 był tu hak `dnd5e.rollDamage` w sygnaturze `(item, roll, data)`, której żadna
+  // wersja dnd5e nie miała — `data.isCritical` zawsze puste, krytyk nigdy nie ranił (PLAN_tt W6).
+  Hooks.on("dnd5e.applyDamage", onApplyDamage);
 
   // Wound pips on the sheet are owned by actors/sheet-shell.mjs (Stan panel), which reads
   // this module's level through the levelled-condition registry.
@@ -133,6 +147,8 @@ function onPreUpdateActor(actor, changes, options, userId) {
 
   // Flag the options so we can apply the wound in updateActor (after the update)
   foundry.utils.setProperty(options, `${MODULE_ID}.applyZranienie`, true);
+  // …i zapamiętaj dla ścieżki krytyka, która przychodzi zaraz po tej aktualizacji (`onApplyDamage`).
+  _zeroHpAt.set(actor.uuid, Date.now());
 }
 
 /**
@@ -150,30 +166,52 @@ async function onUpdateActorZranienie(actor, changes, options, userId) {
 }
 
 /**
- * React to damage rolls — detect critical hits.
- * dnd5e.rollDamage fires after a damage roll is completed.
+ * Trafienie Krytyczne dotarło do celu — MG nakłada obrażenia z karty (RAW s. 32).
+ *
+ * Kiedy: przy **nakładaniu** wyniku rzutu obrażeń, nie przy samym rzucie. Krytyk należy do Testu
+ * Ataku i jest czytany z żywego werdyktu celu na karcie ataku (`isCriticalHitOn`), więc reakcja
+ * użyta już po rzucie obrażeń — Krytyczna ochrona, Inteligentna obrona — wygrywa. Rzut obrażeń
+ * robi atakujący, często gracz, którego klient i tak nie może pisać do celu; nakłada MG.
+ *
+ * Raz na trafienie: ponowne „Zastosuj” tej samej karty temu samemu celowi nie dokłada Stopnia,
+ * a krytyk, który przy okazji zbił PW do 0, daje jeden Stopień, nie dwa („albo”, s. 32).
+ * Obrażenia zredukowane do 0 (próg, niewrażliwość) nadal ranią: RAW wiąże Stopień z krytykiem.
+ *
+ * Hook: `dnd5e.applyDamage(actor, amount, options)` — po aktualizacji PW, na kliencie nakładającym.
  */
-async function onRollDamage(item, roll, data) {
-  // Only GM processes
+async function onApplyDamage(actor, amount, options = {}) {
   if (!game.user.isGM) return;
+  // Znacznik „PW właśnie 0” zdejmujemy przy każdym nałożeniu — dotyczy tylko tego ciosu.
+  const droppedToZero = _droppedToZeroJustNow(actor);
+  if (!(amount >= 0) || _isHealing(options)) return;
+  if (!isCriticalHitOn(actor, options)) return;
 
-  // Check if the originating attack was a critical hit
-  if (!data?.isCritical) return;
-
-  // Some Bestiariusz crit riders replace the wound rather than adding to it —
-  // Palcożerca says outright "Atak nie powoduje otrzymania Stopnia Zranienia".
-  // `combat/crit-riders.mjs` owns that rider and applies its own effect.
-  const attacker = item?.actor ?? item?.parent;
+  const message = options.origin ?? options.originatingMessage ?? null;
+  // Palcożerca: „Atak nie powoduje otrzymania Stopnia Zranienia” — rider w `crit-riders.mjs`.
+  const attacker = message?.getAssociatedActor?.() ?? null;
   if (attacker && critSkipsZranienie(attacker)) return;
 
-  // Get the target(s) from the roll
-  const targets = data?.targets ?? [];
-  for (const target of targets) {
-    const actor = target?.actor;
-    if (actor) {
-      await applyZranienie(actor, "Trafienie krytyczne");
-    }
+  const already = message?.getFlag?.(MODULE_ID, CRIT_WOUNDED_FLAG) ?? [];
+  if (already.includes(actor.uuid)) return;
+  if (message?.id && game.messages.get(message.id) === message) {
+    await message.setFlag(MODULE_ID, CRIT_WOUNDED_FLAG, [...already, actor.uuid]);
   }
+
+  if (droppedToZero) return; // Stopień za PW 0 już nałożony — ten sam cios
+  await applyZranienie(actor, "Trafienie krytyczne");
+}
+
+/** Leczenie przez tackę (rzut leczenia) nie jest trafieniem. */
+function _isHealing(options) {
+  const rolls = (options?.origin ?? options?.originatingMessage)?.rolls ?? [];
+  if (!rolls.length) return false;
+  return rolls.every(r => (r?.options?.type ?? "") in (CONFIG.DND5E.healingTypes ?? {}));
+}
+
+function _droppedToZeroJustNow(actor) {
+  const at = _zeroHpAt.get(actor.uuid);
+  _zeroHpAt.delete(actor.uuid);
+  return Number.isFinite(at) && (Date.now() - at) < ZERO_HP_WINDOW_MS;
 }
 
 /**

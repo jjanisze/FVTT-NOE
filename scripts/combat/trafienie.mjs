@@ -207,6 +207,30 @@ export function hitTargetsForDamage(rolls) {
   return { tokens: [...(game.user.targets ?? [])].map(t => t.document), fromAttack: false };
 }
 
+/**
+ * Czy obrażenia, które MG właśnie nakłada temu celowi, to **Trafienie Krytyczne** (s. 32) — dla
+ * skutków krytyka liczonych przy nakładaniu: Stopień Zranienia, wytrzymałość pancerza, Próg awarii.
+ *
+ * Krytyk należy do **Testu Ataku**, nie do rzutu obrażeń: rozstrzyga żywy werdykt celu na karcie
+ * ataku, z której wyszły te obrażenia — więc Krytyczna ochrona albo reakcja użyta już po rzucie
+ * obrażeń (D10 niczego nie blokuje) wygrywa z krytycznymi kośćmi na karcie obrażeń. Bez karty
+ * ataku (obrażenia z arkusza, cel spoza karty) — krytyk rzutu obrażeń.
+ *
+ * @param {Actor5e} target
+ * @param {object} [options]  Opcje `applyDamage` / `calculateDamage`: tacka dnd5e daje `origin`,
+ *   menu kontekstowe karty — `originatingMessage`; własne wywołania mogą podać `isCritical`.
+ * @returns {boolean}
+ */
+export function isCriticalHitOn(target, options = {}) {
+  if (options?.isCritical === true) return true;
+  const message = options?.origin ?? options?.originatingMessage ?? null;
+  if (!message) return false;
+  const obrona = obronaOf(attackMessageFor(message));
+  const entry = obrona ? entryFor(obrona, target) : null;
+  if (entry) return verdictOfEntry(obrona, entry).verdict === "krytyk";
+  return (message.rolls ?? []).some(r => r?.isCritical || r?.options?.isCritical);
+}
+
 /* -------------------------------------------- */
 /*  Stempel na karcie ataku                      */
 /* -------------------------------------------- */

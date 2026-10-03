@@ -43,7 +43,9 @@ furtka MG — wtedy moduł niczego nie liczy, a dymek mówi „TT ustawiona ręc
    poleciał, bez modyfikatora cechy; trafienie krytyczne podwaja kości. Póki cel może jeszcze
    zareagować, przy przycisku wisi **⏳** — to tylko informacja, nic nie jest zablokowane.
 4. **MG nakłada obrażenia** tacką pod kartą obrażeń (redukcja osłony, mnożnik ½ za Odskok czy
-   „Tylko draśnięcie”). Nic nie zdejmuje PW samo z siebie.
+   „Tylko draśnięcie”). Nic nie zdejmuje PW samo z siebie. Przy nakładaniu obrażeń z **Trafienia
+   Krytycznego** cel dostaje Stopień Zranienia (s. 32) — raz na trafienie, także gdy ten sam cios zbił
+   PW do 0; krytyk zamieniony Krytyczną ochroną nie rani.
 
 ## Reakcje celu
 
@@ -67,7 +69,8 @@ kiedy nic by nie dał — powód zobaczysz po najechaniu.
   np. „pudło po reakcji (13 vs TT 14)”. Bez MG w grze przyciski są wyszarzone.
 - Moduł nie liczy, czy w tej rundzie użyłeś już Reakcji — karta tylko o tym przypomina.
 - Po Krytycznej ochronie hełm znika; z Kolorem Kobaltu w plecaku zostaje „Dziurawy hełm”.
-  Obrażenia z tej karty wychodzą bez krytyka.
+  Obrażenia z tej karty wychodzą bez krytyka. Jeśli rzucono je już wcześniej (krytycznie), rzuć je
+  jeszcze raz z karty użycia — wyjdą zwykłe — i nałóż te.
 - **Unikanie** (stan z HUD-u żetonu) też trwa do początku twojej następnej tury i znika samo.
 
 ## Dla MG

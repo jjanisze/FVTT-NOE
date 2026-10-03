@@ -128,10 +128,10 @@ kliknięciem w piki.
   (metody konkurują, premie się sumują, dymek z rozkładem), jeden rozstrzygacz trafienia, Test Ataku
   i obrażenia zawsze osobno (koniec auto-obrażeń), okno „Reakcje celu” na karcie ataku, Krytyczna
   ochrona hełmu, reakcje BN z Bestiariusza
-- [ ] **Stopień Zranienia z Trafienia Krytycznego nie działa** (s. 32) — `combat/zranienie.mjs` słucha
-  `dnd5e.rollDamage` w sygnaturze sprzed dnd5e 5 (`data.isCritical` zawsze puste), więc krytyk nigdy
-  nie nadaje stopnia. Znalezione przy PLAN_tt (W6); miejsce na naprawę: nakładanie obrażeń z karty
-  krytycznej w tacce MG (`dnd5e.applyDamage`, jak wytrzymałość pancerzy w `production/naprawa.mjs`)
+- [x] **Stopień Zranienia z Trafienia Krytycznego** (s. 32) — 2026-10-03: nie działał nigdy
+  (`combat/zranienie.mjs` słuchał `dnd5e.rollDamage` w sygnaturze, której żadna wersja dnd5e nie miała).
+  Teraz nadawany przy nakładaniu obrażeń tacką MG (`dnd5e.applyDamage`), krytyk z żywego werdyktu
+  karty ataku; raz na kartę i cel; krytyk zbijający PW do 0 — jeden Stopień. PLAN_tt W6
 - [ ] **Zagrożenia bez wyzwalacza** (źródła Wyczerpania istnieją, nic ich nie nakłada):
   Sen (s. 45 — doba bez snu → RO KON ST 20), Uduszenie (s. 259 — 1 + mod. KON minut, potem
   Wyczerpanie co turę, zdejmowane po złapaniu oddechu), Przemarznięcie (s. 258 — RO KON ST 5 + 1/°C

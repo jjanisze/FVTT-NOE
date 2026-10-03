@@ -14,7 +14,9 @@
 import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup, sztuczkaItem, stub, waitFor } from "./helpers.mjs";
 import { buildCaliberDamageRoll, caliberDamageProperties, isCaliberWeapon } from "../weapons/ammo.mjs";
 import { coverAcBonus } from "../combat/cover.mjs";
-import { ttAgainst, verdictOfEntry, buildObrona, entryFor, TT_VS_ATTACKER_FLAG } from "../combat/trafienie.mjs";
+import { ttAgainst, verdictOfEntry, buildObrona, entryFor, isCriticalHitOn, TT_VS_ATTACKER_FLAG }
+  from "../combat/trafienie.mjs";
+import { getZranienieLvl } from "../combat/zranienie.mjs";
 import { executeReaction, breakHelmet, useIntelligentDefence, npcReactionReminders, __testing as obrona }
   from "../combat/obrona.mjs";
 import { isUnmarkedReaction } from "../migration/oznacz-reakcje-bn.mjs";
@@ -331,6 +333,64 @@ export function registerObronaTests(quench) {
         expect(isUnmarkedReaction(feat({ name: "Szarża", system: { description: { value: "<p>atak</p>" } } }))).to.equal(false);
         expect(isUnmarkedReaction(feat({ name: "Ofiara", flags: { [MODULE_ID]: { bestiary: { section: "traits" } } },
           system: { description: { value: "Reakcja" } } })), "z paczki").to.equal(false);
+      });
+    });
+
+    describe("Skutki krytyka przy nakładaniu obrażeń (Stopień Zranienia, W6)", function () {
+      this.timeout(20000);
+      const speakers = new Set();
+      after(async () => {
+        const ids = game.messages.filter(m => speakers.has(m.speaker?.actor)).map(m => m.id);
+        if (ids.length) await ChatMessage.deleteDocuments(ids);
+      });
+
+      async function wounded(name, hp = 10) {
+        const actor = await scratchActor({ name: `${SCRATCH_PREFIX} ${name}`,
+          system: { attributes: { hp: { value: hp, max: 20 } } } });
+        speakers.add(actor.id);
+        return actor;
+      }
+      const attackCard = (actor, o = {}) => memoryCard({
+        v: 1, total: 22, natural: 20, krytyk: true, fumble: false, melee: true, attackerUuid: null,
+        targets: [{ tokenUuid: "Scene.a.Token.b", actorUuid: actor.uuid, name: "cel", tt: 12, cover: 0,
+          used: [], critDowngraded: false, verdict: "krytyk", decided: false, ...o }]
+      });
+      async function damageCard(isCritical) {
+        const roll = await new CONFIG.Dice.DamageRoll("1d6", {}, { type: "slashing", isCritical }).evaluate();
+        return new ChatMessage.implementation({ content: "", rolls: [roll.toJSON()] });
+      }
+
+      it("krytyk z karty ataku; Krytyczna ochrona go gasi; bez karty ataku — z rzutu obrażeń", async function () {
+        const actor = await wounded("cel krytyka");
+        expect(isCriticalHitOn(actor, { isCritical: true })).to.equal(true);
+        expect(isCriticalHitOn(actor, { origin: attackCard(actor) })).to.equal(true);
+        expect(isCriticalHitOn(actor, { origin: attackCard(actor, { critDowngraded: true }) }), "Krytyczna ochrona")
+          .to.equal(false);
+        expect(isCriticalHitOn(actor, { origin: await damageCard(true) })).to.equal(true);
+        expect(isCriticalHitOn(actor, { origin: await damageCard(false) })).to.equal(false);
+        expect(isCriticalHitOn(actor, {}), "podgląd tacki — bez karty").to.equal(false);
+      });
+
+      it("nałożone obrażenia z krytyka nadają Stopień Zranienia", async function () {
+        const actor = await wounded("krytyk");
+        await actor.applyDamage([{ value: 3, type: "slashing" }], { isCritical: true });
+        await waitFor(() => getZranienieLvl(actor) === 1, { label: "Stopień z krytyka" });
+      });
+
+      it("zwykłe trafienie nie rani; zamieniony krytyk nie rani", async function () {
+        const actor = await wounded("bez krytyka");
+        await actor.applyDamage([{ value: 3, type: "slashing" }], {});
+        await actor.applyDamage([{ value: 3, type: "slashing" }], { origin: attackCard(actor, { critDowngraded: true }) });
+        await new Promise(r => setTimeout(r, 400));
+        expect(getZranienieLvl(actor)).to.equal(0);
+      });
+
+      it("krytyk, który zbija PW do 0, daje jeden Stopień, nie dwa (s. 32: „albo”)", async function () {
+        const actor = await wounded("krytyk do zera", 4);
+        await actor.applyDamage([{ value: 10, type: "slashing" }], { isCritical: true });
+        await waitFor(() => getZranienieLvl(actor) >= 1, { label: "Stopień za PW 0" });
+        await new Promise(r => setTimeout(r, 600));
+        expect(getZranienieLvl(actor)).to.equal(1);
       });
     });
   }, { displayName: "Neuroshima: Trafienie, obrażenia i reakcje celu" });

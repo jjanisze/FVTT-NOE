@@ -37,6 +37,7 @@
  */
 
 import { isArmourPiercing } from "./armour-piercing.mjs";
+import { isCriticalHitOn } from "./trafienie.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -109,8 +110,9 @@ function onCalculateDamage(actor, damages, options) {
     .filter(d => d.type !== "healing" && d.type !== "temphp")
     .reduce((sum, d) => sum + (d.value ?? 0), 0);
 
-  const wasCritical = options?.originatingMessage?.flags?.dnd5e?.roll?.critical === true
-    || options?.isCritical === true;
+  // `flags.dnd5e.roll.critical` nie istnieje w dnd5e 5.3 — krytyk z werdyktu karty ataku albo z rzutu
+  // obrażeń, ten sam co dla Stopnia Zranienia i wytrzymałości pancerza (`combat/trafienie.mjs`).
+  const wasCritical = isCriticalHitOn(actor, options);
 
   if (!wasCritical && total < threshold) return;
 
