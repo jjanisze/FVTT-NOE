@@ -16,6 +16,12 @@
  * Ability text lives in `class-features-data.mjs`; this file only describes structure.
  */
 
+import { KOBALT_CLASS_FEATURES } from "../wkk/config/class-features-data.mjs";
+
+/** Ids of Kolor Kobaltu abilities a profession offers on top of the rulebook pool. */
+const kobaltAbilitiesOf = pid =>
+  Object.values(KOBALT_CLASS_FEATURES).filter(f => f.owner === pid).map(f => f.id);
+
 /** Ability-score keys as used by dnd5e (`system.abilities`). */
 export const ABILITY = {
   SIL: "str", ZRC: "dex", KON: "con", INT: "int", MDR: "wis", CHA: "cha"
@@ -395,7 +401,8 @@ export const PROFESSIONS = {
 
   /* Twardziel */
   kowboj:                { klasa: "twardziel", label: "Kowboj",
-                           abilities: ["clint", "rewolwerowiec", "zawsze-w-siodle"] },
+                           abilities: ["clint", "rewolwerowiec", "zawsze-w-siodle",
+                                       ...kobaltAbilitiesOf("kowboj")] },
   "wojownik-autostrady": { klasa: "twardziel", label: "Wojownik Autostrady",
                            abilities: ["drzwi-w-drzwi", "kaskader", "pancerna-fura"] },
   zolnierz:              { klasa: "twardziel", label: "Żołnierz",

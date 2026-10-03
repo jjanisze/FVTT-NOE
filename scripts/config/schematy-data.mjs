@@ -21,13 +21,12 @@ import { formatToolExpr, parseToolExpr } from "./tool-expr.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 
 /**
- * Ikony rozmiarów. Tymczasowo z rdzenia Foundry (kolorowe, nie w stylu modułu) — docelowe
- * białe glify są w kolejce `dev/icons/MISSING.md` (A, wiersze 5–7).
+ * Dedykowane białe glify trzech rozmiarów (batch 41).
  */
 export const IKONY_SCHEMATU = Object.freeze({
-  notatka: "icons/sundries/documents/document-torn-diagram-tan.webp",
-  instrukcja: "icons/sundries/documents/notepad-clipboard-spiral.webp",
-  dokumentacja: "icons/sundries/documents/blueprints-teal.webp"
+  notatka: `modules/${MODULE_ID}/icons/items/loot/schemat_notatka.svg`,
+  instrukcja: `modules/${MODULE_ID}/icons/items/loot/schemat_instrukcja.svg`,
+  dokumentacja: `modules/${MODULE_ID}/icons/items/loot/schemat_dokumentacja.svg`
 });
 
 /** Flaga przedmiotu-Schematu (ta sama stała co w `production/zp.mjs`). */

@@ -16,6 +16,10 @@ import {
   REMOVED_CONDITIONS, REMOVED_STATUSES
 } from "../config/conditions.mjs";
 import { NEUROSHIMA_CREATURE_TYPES, BLOOD_TYPES } from "../config/creature-types.mjs";
+import { CLASS_FEATURES } from "../config/class-features-data.mjs";
+import { PROFESSIONS } from "../config/classes-data.mjs";
+import { KOBALT_CLASS_FEATURES } from "../wkk/config/class-features-data.mjs";
+import { filterKobaltPool } from "../actors/kobalt-advancement.mjs";
 import { MODULE_ID } from "./helpers.mjs";
 
 /** Sprawdza, że plik istnieje na serwerze — literówka w ścieżce ikony jest niewidoczna w UI. */
@@ -210,6 +214,36 @@ export function registerConfigTests(quench) {
         expect(CONFIG.DND5E.actorSizes.lg.capacityMultiplier, "Duży (dnd5e już się zgadzał)").to.equal(2);
         expect(CONFIG.DND5E.actorSizes.huge.capacityMultiplier, "Wielki (dnd5e już się zgadzał)").to.equal(4);
         expect(CONFIG.DND5E.actorSizes.grg.capacityMultiplier, "Ogromny (dnd5e już się zgadzał)").to.equal(8);
+      });
+    });
+
+    /* ---------------------------------------------------------------- */
+
+    describe("Zdolności klasowe Koloru Kobaltu", function () {
+      it("wpisy WKK są w `CLASS_FEATURES`, oznaczone `kobalt`, i w puli swojej profesji", function () {
+        for (const [id, f] of Object.entries(KOBALT_CLASS_FEATURES)) {
+          expect(CLASS_FEATURES[id], id).to.equal(f);
+          expect(f.kobalt, `${id}.kobalt`).to.be.true;
+          expect(PROFESSIONS[f.owner]?.abilities, `${id} w puli ${f.owner}`).to.include(id);
+        }
+        expect(PROFESSIONS.kowboj.abilities).to.include("pistolero");
+      });
+
+      it("tylko wpisy z `scripts/wkk/` mają `kobalt` — generator podręcznika go nie emituje", function () {
+        const flagged = Object.values(CLASS_FEATURES).filter(f => f.kobalt).map(f => f.id).sort();
+        expect(flagged).to.deep.equal(Object.keys(KOBALT_CLASS_FEATURES).sort());
+      });
+
+      it("pula awansu bez Kobaltu gubi przedmioty z flagą `kobalt`, z Kobaltem zostawia wszystkie", function () {
+        const item = kobalt => ({ getFlag: (scope, key) => (scope === MODULE_ID && key === "kobalt") ? kobalt : undefined });
+        const pool = [item(undefined), item(true), item(undefined)];
+        expect(filterKobaltPool(pool, { kobalt: true })).to.have.lengthOf(3);
+        expect(filterKobaltPool(pool, { kobalt: false })).to.have.lengthOf(2);
+      });
+
+      it("`ItemChoiceFlow` dnd5e jest obudowany filtrem puli", function () {
+        const Flow = dnd5e.applications.advancement.ItemChoiceFlow;
+        expect(Flow.prototype._prepareContentContext.toString()).to.include("filterKobaltPool");
       });
     });
 

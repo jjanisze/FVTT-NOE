@@ -194,7 +194,7 @@ function buildFeature(f) {
     img: iconFor("abilities", f.id),
     system: {
       description: { value: html(f.text), chat: "" },
-      source: { custom: "Neuroshima RPG", rules: "2024" },
+      source: { custom: f.kobalt ? "Neuroshima RPG — Kolor Kobaltu" : "Neuroshima RPG", rules: "2024" },
       type: { value: "class", subtype: "" },
       requirements,
       properties: [],
@@ -222,7 +222,9 @@ function buildFeature(f) {
         resource: f.resource ?? null,
         requiresState: f.requiresState ?? null,
         oncePerTurn: f.oncePerTurn === true,
-        legacyAbilityKey: f.legacyAbilityKey ?? null
+        legacyAbilityKey: f.legacyAbilityKey ?? null,
+        // Only on WKK entries, so rulebook features keep byte-identical records.
+        ...(f.kobalt ? { kobalt: true } : {})
       }
     },
     _key: null   // filled by the writer

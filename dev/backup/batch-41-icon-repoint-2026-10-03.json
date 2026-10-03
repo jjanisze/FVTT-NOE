@@ -1,0 +1,1533 @@
+{
+  "batch": 41,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.NjBkNTk3OWY1ODRj",
+      "name": "Raynald of Châtillon",
+      "items": [
+        {
+          "_id": "zfKxN7CMKu9c2FPA",
+          "name": "Kwas (fiolka)",
+          "before": "modules/neuroshima-2026-overrides/icons/items/loot/chemia.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/kwas.svg"
+        }
+      ]
+    }
+  ],
+  "packs": [
+    {
+      "collection": "neuroshima-2026-overrides.sprzet",
+      "locked": true,
+      "items": [
+        {
+          "_id": "6pkXQ8MSVt4qnrQe",
+          "name": "Detonator radiowy",
+          "before": "modules/neuroshima-2026-overrides/icons/items/loot/krotkofalowka_alt.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/detonator_radiowy.svg"
+        },
+        {
+          "_id": "Bs58S78wV1x0scIO",
+          "name": "Zapalnik elektryczny",
+          "before": "modules/neuroshima-2026-overrides/icons/items/loot/czesci_elektroniczne.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/zapalnik_elektryczny.svg"
+        },
+        {
+          "_id": "gPMYQbNCLLJL6u6e",
+          "name": "Kwas (fiolka)",
+          "before": "modules/neuroshima-2026-overrides/icons/items/loot/chemia.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/kwas.svg"
+        }
+      ]
+    },
+    {
+      "collection": "neuroshima-2026-overrides.schematy",
+      "locked": true,
+      "items": [
+        {
+          "_id": "04ZhRCgVmCtTXzGs",
+          "name": "Schemat: Mięso suszone / jerky (1 kg)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "06TcO7x2n3ITvbuo",
+          "name": "Schemat: Pancerz wspomagany Stalowej Policji",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "0En4V8F1UUgw7lgr",
+          "name": "Schemat: Wytrychy elektroniczne",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "0JUUnUjAddSXp4er",
+          "name": "Schemat: Szybkoładowarka .44 Mag",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "0UXKXc1lspBHTqtG",
+          "name": "Schemat: Trybiotyl",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "0UopBuTa44Cb9jtt",
+          "name": "Schemat: Narzędzia małego charakteryzatora",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "0ijuQLcQLjmKs2Qg",
+          "name": "Schemat: Strzały (20 szt.)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "0wC0KdWyvgEMDJws",
+          "name": "Schemat: Gogle termowizyjne",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "11rMgPtySk0oMz1p",
+          "name": "Schemat: B 93R",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "1Wkyg0DlxJ76vFlt",
+          "name": "Schemat: Miernik promieniowania",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "25VWA2gihVLb3P28",
+          "name": "Schemat: Celownik trytowy",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "2G5zkAB6Sh0fwONy",
+          "name": "Schemat: Narzędzia małego krawca",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "2RXtRcP8M30TpZkJ",
+          "name": "Schemat: Szoker",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "2YMHtC3GbN3ND4uS",
+          "name": "Schemat: Magazynek do Scar",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "2lPnihjQcIAY8qGw",
+          "name": "Schemat: Kontroler zdalnego sterowania",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "3dWBFIPnw6JpW155",
+          "name": "Schemat: Plastik C4 (kostka 100 g)",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "3iuifL1SV8bjmfQ4",
+          "name": "Schemat: Granat odłamkowy",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "3uI6zzNKjuaCzsYm",
+          "name": "Schemat: Ochraniacze rąk (para)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "4TP0aJx1TXocNeOS",
+          "name": "Schemat: Magazynek do Mk IV",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "4YZOrngZLd9hZpc4",
+          "name": "Schemat: Tommy gun",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "4f7xeVwcspCJJFjZ",
+          "name": "Schemat: .44 Magnum",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "4isTf7cdK55zuUfI",
+          "name": "Schemat: Nitrogliceryna (20 g)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "4rEPgD2YWxtmcPXi",
+          "name": "Schemat: Hammer",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "57oJTgCpvG97QDRH",
+          "name": "Schemat: Taśma do Browning",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "5Gcgcj8DJJbgumdd",
+          "name": "Schemat: Latarka ręczna",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "5eFSreqpPeh9Wqkq",
+          "name": "Schemat: HK G3",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "6QLimfQ4P7UiZEqC",
+          "name": "Schemat: Tłumik",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "6U57uSwwqsfWoQwD",
+          "name": "Schemat: MGL1S",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "6bybIKJiBtkIBb9y",
+          "name": "Schemat: Emulator kart magnetycznych",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "6fpJl6gK6OsZSbGb",
+          "name": "Schemat: Narzędzia małego elektronika",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "7Ch29hQgMKPWvlMd",
+          "name": "Schemat: Noktowizor",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "7lzrYUCkXMJG4rAr",
+          "name": "Schemat: R700",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "8gz6S4ADXmgCUafy",
+          "name": "Schemat: Magazynek do B 92",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "8yCYcV1AaWe3FTMs",
+          "name": "Schemat: Liofilizowana żywność (1 kg)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "93I6tl8jguSNgYkf",
+          "name": "Schemat: Neodrugs",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "A9qhw9aoKALZAO4G",
+          "name": "Schemat: Latarka z dynamem",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "AS5WHYhPe2zdqGgj",
+          "name": "Schemat: Dwójnóg",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "Ag2SzHQdrDGamoQO",
+          "name": "Schemat: Mina przeciwpiechotna",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "AsT2fgIQmljsbxNc",
+          "name": "Schemat: RadMov",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "AsW9C9AU2xXnOOsl",
+          "name": "Schemat: Kamizelka taktyczna",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "B4DgjK9aN83Bt2My",
+          "name": "Schemat: Miotacz ognia",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "BDScl5JE3KYtICoF",
+          "name": "Schemat: Trucizna (prosta, fiolka)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "BEfJ0ee5dzPdBX2n",
+          "name": "Schemat: Termowizor",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "BEsiEMf1cPClpFN2",
+          "name": "Schemat: Laska",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "BEvtxs2KmqKhXQE6",
+          "name": "Schemat: Magazynek do Mark 23",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "BetdnmzmO8hLZ0Md",
+          "name": "Schemat: Magazynek do SP12 Tactical",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "Bo3bWkIUGkTjm9tT",
+          "name": "Schemat: Deskorolka",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "CIcjVc3Mb6UeGE7y",
+          "name": "Schemat: Granatnik podwieszany",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "CKEgklsp9z5ejPs5",
+          "name": "Schemat: Dozownik",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "D0N2pDV6g1Crdnta",
+          "name": "Schemat: Granat gazowy",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "D7KyNbYg6BuVyy25",
+          "name": "Schemat: Gogle noktowizyjne",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "DG5EDLUJNSzR4XPz",
+          "name": "Schemat: Odtwarzacz CD",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "DLspfdc3rde4geZP",
+          "name": "Schemat: Nitrogliceryna (100 g)",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "DPwivmBtstsIPrsc",
+          "name": "Schemat: Wózek (dwukółka)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "DbwOPTVxoSXN4jI7",
+          "name": "Schemat: SR 25",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "DqziKdTPFXHQHbCl",
+          "name": "Schemat: Tornado",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "DylWGRdMvkrK7hVN",
+          "name": "Schemat: Taśma do The Piga",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "E11bGekLF9yyOFxC",
+          "name": "Schemat: Kiepska zbroja śmieciowa",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "EESQLdQUGfbuXgOC",
+          "name": "Schemat: Turbina wiatrowa/wodna",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "EjjRZnTubbPJEGn5",
+          "name": "Schemat: Krótkofalówka",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "EjzNJuzJXqH1MJzd",
+          "name": "Schemat: Laserowy wskaźnik celu",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "F1nGcAT9AyuGmocU",
+          "name": "Schemat: Narzędzia małego szklarza",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "FG3x9aogDzKxdY8C",
+          "name": "Schemat: Dynamit (laska)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "FHF75gyF35tFSrcF",
+          "name": "Schemat: Bojowy wóz piechoty",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "FKVBKdcq1grRmBEd",
+          "name": "Schemat: Wyważenie",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "FcdNI9ajHgVN95dz",
+          "name": "Schemat: Moździerz",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "FjqwkHQcSMd4bkn2",
+          "name": "Schemat: Ciężarówka",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "FsqitU81Uzb7yFQw",
+          "name": "Schemat: Laptop wojskowy",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "G249hw3yvWDBmQp9",
+          "name": "Schemat: M14",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "GECUiNFzCGCInyRE",
+          "name": "Schemat: Narzędzia małego kucharza",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "IDAxvBMnblSBMf5V",
+          "name": "Schemat: Mark 23",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "IJs6W0ZCsDRrdA1P",
+          "name": "Schemat: AR",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "IqeaEtWoB9C284Lu",
+          "name": "Schemat: Mina przeciwpancerna",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "Itgj97rRTkAppZcf",
+          "name": "Schemat: Taurus",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "JDcuYaMNywpzxp9r",
+          "name": "Schemat: HK Universal",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "JKfIaVVSlbm8ipWl",
+          "name": "Schemat: Buldożer",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "JNSZa8eciUdiUJsJ",
+          "name": "Schemat: Minigun",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "JP9Nwrl9cnqcEEQV",
+          "name": "Schemat: Narkotyki przedwojenne",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "K5Qrtwb4B6FHue88",
+          "name": "Schemat: Granat zapalający",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "KD0H7rnY9ugL1pQp",
+          "name": "Schemat: Narzędzia małego hakera",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "KHbScxvUCgvfDMOd",
+          "name": "Schemat: Kolba dostawna",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "KICNQv59nyXVVr7B",
+          "name": "Schemat: Wóz strażacki",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "LwZBfWPze6VMvshS",
+          "name": "Schemat: Katana",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "M1W8nlXK3dUMYJb2",
+          "name": "Schemat: Narzędzia małego medyka",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "M98kniFXhKfjwzgu",
+          "name": "Schemat: Komputer osobisty",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "M9xdPjq7fWd8I3Iv",
+          "name": "Schemat: Magazynek do HK G3",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "MOrYeFcEDaRhBVMS",
+          "name": "Schemat: Kusza bloczkowa",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "MSykCCSblrpSbkZH",
+          "name": "Schemat: AR-35 BETA",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "MgRKY2gFcpFQN2cw",
+          "name": "Schemat: Light Fifty",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "N1DZCg2iq0u5Dtcl",
+          "name": "Schemat: Szybkoładowarka .38 SPL",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "N88XHtQNOgwCraXv",
+          "name": "Schemat: Rower",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "NGx3IZQOBUz2NaAD",
+          "name": "Schemat: Trójnóg",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "NOtId91n0Z856zKA",
+          "name": "Schemat: Proch strzelniczy (100 g)",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "Nbs6vJbpjeke8E3w",
+          "name": "Schemat: Desert Eagle",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "NpmawHVgzI6oAH0w",
+          "name": "Schemat: Pocisk 60 mm",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "Nukmimpwis4phGrE",
+          "name": "Schemat: Narzędzia małego jubilera",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "O4XOG95K3GQtoSOi",
+          "name": "Schemat: Neuro-Cola",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "O6hBeclN8qPTqc4E",
+          "name": "Schemat: Thumper",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "OAeRUjpDOBgTDwMF",
+          "name": "Schemat: Magazynek do XM-8",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "OKiCncebkz8snpfc",
+          "name": "Schemat: Bat",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "OZGeizTXObyoc8fs",
+          "name": "Schemat: Kilof",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "OeEejc83tvk8UwR9",
+          "name": "Schemat: Minimi",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "OxaCtSz15GPe9jCE",
+          "name": "Schemat: Narzędzia małego kartografa",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "PXdjr0c54ZT8Tzag",
+          "name": "Schemat: Śrutówka podlufowa",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "QD5TkAmwuPWIh2hl",
+          "name": "Schemat: Szybkoładowarka .22 LR",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "QM6azhwTPNrZHBzR",
+          "name": "Schemat: Defibrylator",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "QZGbZz5DPcpUq6TA",
+          "name": "Schemat: Wykrywacz metalu",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "QezAzJufekTcSEVr",
+          "name": "Schemat: Magazynek do G17",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "Qss3nnQcaQdqrNFq",
+          "name": "Schemat: Granat hukowy",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "REd7yEApBrIreVIQ",
+          "name": "Schemat: Crash",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "RaYK09N3woBzBdA8",
+          "name": "Schemat: RadOff",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "RqKemM0OUxikxGGF",
+          "name": "Schemat: Ładunek improwizowany (IED)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "SkpxHi7g8XSUx3wJ",
+          "name": "Schemat: Kolimator",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "TJrjahqjDXJymXPC",
+          "name": "Schemat: Latarka + baterie",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "TKCg36ZrRDkCnMtT",
+          "name": "Schemat: Miernik skażenia chemicznego",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "TKbll9j8WZOMhNvH",
+          "name": "Schemat: Sprzęt do wspinaczki",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "TbfKkiekwXyhvgkP",
+          "name": "Schemat: Magazynek do AK",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "UZN9Lp4G74FmpKRW",
+          "name": "Schemat: Narzędzia małego szulera",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "UogDB4VYuHo9Ulod",
+          "name": "Schemat: Przekucie",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "Uwi204zLf2x8ng8Z",
+          "name": "Schemat: Taśma do Minimi",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "V4k0zmHNkBpuCx7c",
+          "name": "Schemat: AK (Kałach)",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "VLdwDkREU6wWw7t7",
+          "name": "Schemat: Kusza automatyczna pistoletowa",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "VMl44nemr0ixznXO",
+          "name": "Schemat: Agregat",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "VlS7oPvxAzA0Le46",
+          "name": "Schemat: Okładziny uchwytu",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "VqBm9Br3HagMGJr1",
+          "name": "Schemat: Plate carrier typ III",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "VwT51FIdwNDTewaF",
+          "name": "Schemat: Pompka",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "W0tns4WHz2zUpUq9",
+          "name": "Schemat: Czołg",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "W5VmZdHl3hEMkhj0",
+          "name": "Schemat: Magazynek do Jedenastki",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "WvcmK9q6A9uRU94H",
+          "name": "Schemat: Detonator radiowy",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "X0QI8dSwvWMn2OZC",
+          "name": "Schemat: Motocykl",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "Xeh4tTd1PPzdaOec",
+          "name": "Schemat: Piła spalinowa",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "YAqjNcTr6FBxyaPF",
+          "name": "Schemat: WD-Tabs (10 tabletek)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "YJe8BI0qFTX7mQwY",
+          "name": "Schemat: Topór strażacki",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "YSExpQ9Ckc8hrZdX",
+          "name": "Schemat: Kolba składana",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "ZC2DxdkuqTK8BfOx",
+          "name": "Schemat: Kościany pancerz",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "ZOAVybQ25HA0RhtA",
+          "name": "Schemat: Utwardzenie",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "ZUEAxYEZNrosjvuQ",
+          "name": "Schemat: Magazynek do UZI",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "ZcG2tH49pJMTXkZh",
+          "name": "Schemat: Samoróbka",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "ZggmogMTgsFUYUIW",
+          "name": "Schemat: Granat improwizowany",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "Zzwm63cf0IiCitYX",
+          "name": "Schemat: Scar",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "a4pyau54XUOQQa1N",
+          "name": "Schemat: Dociążenie",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "aJIZuWbOtI7d1Olo",
+          "name": "Schemat: Narzędzia małego kowala",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "aPgcbCOtLybT4f49",
+          "name": "Schemat: Magazynek do Desert Eagle",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "aTcsTahoSrncIqQg",
+          "name": "Schemat: Narzędzia małego chemika",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "ad8axNEwMheIAkU9",
+          "name": "Schemat: B 92",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "agGPSjSJTebCbgAC",
+          "name": "Schemat: Buggy",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "ahWa4tL0czqxMmll",
+          "name": "Schemat: Empepiątka",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "aiJNcm3Lsb2OQcxh",
+          "name": "Schemat: Piłomiecz",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "aj7mH6eDnWm1MsMZ",
+          "name": "Schemat: Jedenastka",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "alVoQrjopdQj9g3H",
+          "name": "Schemat: Proch strzelniczy (20 g)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "aq4RoBn18YemvwLB",
+          "name": "Schemat: Narzędzia małego tatuażysty",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "bOPpfHtEbc5uBzKU",
+          "name": "Schemat: Pełna zbroja śmieciowa",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "bRNlte1BgvfCmAAi",
+          "name": "Schemat: Magazynek do Light Fifty",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "bcbCnHgUEu7rz6cu",
+          "name": "Schemat: Trzydziestka ósemka",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "bgMtDd1m6xkjbQfe",
+          "name": "Schemat: Miecz",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "cIducGQ7dPvXEsJ7",
+          "name": "Schemat: Palnik acetylenowo-tlenowy",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "cbfMheT5cNH1HCRb",
+          "name": "Schemat: Magazynek do HK G3 (50)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "cwIDH2E7C8qwoPGG",
+          "name": "Schemat: Taśma do Minigun",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "db9z16WnZO54An94",
+          "name": "Schemat: SP12 Tactical",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "dcgYjH7YJbuqGQPw",
+          "name": "Schemat: Deadline",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "dodcvsxJF0YzCpXT",
+          "name": "Schemat: Autobus",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "dzbAlBiQ2VutTYHZ",
+          "name": "Schemat: Szybkoładowarka .45 ACP",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "eHgGvcbyLpi6uVPC",
+          "name": "Schemat: Radio",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "en96heAGdvmAnEVl",
+          "name": "Schemat: Magazynek do B 93R",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "etn5JPnslqDHsYlX",
+          "name": "Schemat: Nadziak",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "exwawtN3CNQ1ZjUN",
+          "name": "Schemat: Obrzyn",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "f8V38ZEs8kY7dXrJ",
+          "name": "Schemat: Plate carrier typ I",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "fDV4hdU0Su1Fsyby",
+          "name": "Schemat: The Pig",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "fpPbfM17qGvui2zZ",
+          "name": "Schemat: Magazynek do SR 25",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "fyOXtgsLU9Gnzyk7",
+          "name": "Schemat: Celownik optyczny",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "g4mqTc7wEJGthPNg",
+          "name": "Schemat: Tarcza",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "gaS2jcsvAMif1CMF",
+          "name": "Schemat: Pancerz skórzany",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "hH0KBeJP9Pqt3NeB",
+          "name": "Schemat: Chwyt przedni",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "hWhzfF1zvRhcDqpV",
+          "name": "Schemat: Deer Hunter",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "hgBKKTDxpf1fcgiq",
+          "name": "Schemat: Magazynek do AR",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "hugOjiBH6hxwvTKI",
+          "name": "Schemat: Proch czarny (100 g)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "i2ZLhvrkcOvdQ05I",
+          "name": "Schemat: Medpak",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "iB0YDPtV2UCd4fSE",
+          "name": "Schemat: Magazynek do Empepiątki",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "iamW4OMtkQdQyBtf",
+          "name": "Schemat: Kurtka ćwiekowana",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "j5Qo4XdliuJzUWGN",
+          "name": "Schemat: Pistolet na Race",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "j5eCbkoqPjrvliYq",
+          "name": "Schemat: Hełm",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "jMJcCc22sOhVd3mj",
+          "name": "Schemat: Alternator",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "jZpiEHlIrchJkdKD",
+          "name": "Schemat: Dwururka",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "jkkxtjn3JPuwAoFP",
+          "name": "Schemat: Motorower",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "jqZ1Je6xcqOng3sC",
+          "name": "Schemat: Szabla",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "jsw2OvCzBhHO2e4o",
+          "name": "Schemat: Traktor",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "juPMH6n3cVm5KK5N",
+          "name": "Schemat: Granat 40 mm",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "khXe3ZahfENr8VjH",
+          "name": "Schemat: Narzędzia małego gorzelnika",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "kjOIFOPi64lfXCXE",
+          "name": "Schemat: Osobówka",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "lhc7SnpblRrA0Eef",
+          "name": "Schemat: UZI",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "ll0cHtOH0h1Hgwpu",
+          "name": "Schemat: Racja wojskowa MRE (1 dzień)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "lut8d1O9Z61Ks4Ei",
+          "name": "Schemat: Solidna zbroja śmieciowa",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "m5flFePTOUfH7Uc3",
+          "name": "Schemat: AR-23",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "mPJ2n7s8SvkeidGI",
+          "name": "Schemat: G17",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "mbN6n2i3CKVQLeSD",
+          "name": "Schemat: Zestaw sprężyn",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "mkZvcs3GDCHXzV8B",
+          "name": "Schemat: Narzędzia małego aptekarza",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "n5USbvHqjtGLrF0d",
+          "name": "Schemat: Mk IV",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "nTzGDzRGUb7EzdPw",
+          "name": "Schemat: Narzędzia małego ślusarza",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "nZxIPGiM1yToPecE",
+          "name": "Schemat: Wojskowy pancerz hydrauliczny",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "nbn3zrli8IqXmEEz",
+          "name": "Schemat: Szyna montażowa",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "nmCKvrolJw0AXmYu",
+          "name": "Schemat: XM-8",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "nnQ0wMuPsDIbZYnn",
+          "name": "Schemat: Bazooka",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "nzfhV9RmaXSDbuGu",
+          "name": "Schemat: Laptop",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "oKOly34hju7puoha",
+          "name": "Schemat: M1 US Rifle",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "oLptl6xoV2ABOK5l",
+          "name": "Schemat: Łuk bloczkowy",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "onXDwiBnVoVgG7Tk",
+          "name": "Schemat: Narzędzia małego fałszerza",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "pGtPLQ6BTu70iJ29",
+          "name": "Schemat: Narzędzia małego stolarza",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "pNRaGh1H1GnPEEE8",
+          "name": "Schemat: Konwersja komory i lufy",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "pZGIxTdqzWJJzcVw",
+          "name": "Schemat: Nośnik danych",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "q6awbLcFLGM6ph6u",
+          "name": "Schemat: Ciężka zbroja śmieciowa",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "q6dMgHcjHO00Irn6",
+          "name": "Schemat: Magazynek do Tommy gun",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "qLisxqjOLPhwzLMa",
+          "name": "Schemat: Browning",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "qd4enu6bSx7m0iKF",
+          "name": "Schemat: Kusza automatyczna Cobra",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "qlewhyv74MYDNP4t",
+          "name": "Schemat: Lewar M95",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "qpwRiQhjynZ0Gc86",
+          "name": "Schemat: Ochraniacze nóg (para)",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "r39YdQZTs45e3uct",
+          "name": "Schemat: Akumulator",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "ra3PhCaWdYmqQYFC",
+          "name": "Schemat: Detoks (5 fiolek)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "s2CcZyK49jt9TKQ7",
+          "name": "Schemat: Środek usypiający (fiolka)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "s5AvFCMsBx8YGOMB",
+          "name": "Schemat: LAW",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "s8zBEs53XXU00xKP",
+          "name": "Schemat: Granat dymny",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "sdR0YcRyGW0ufT5A",
+          "name": "Schemat: Kafar",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "tWT95AGsLv8ststw",
+          "name": "Schemat: Osełka",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "tWdBkeoOgo4C00Bi",
+          "name": "Schemat: Latarka czołówka",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "teflrSqoocQQkMev",
+          "name": "Schemat: Plate carrier typ II",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "trpkd5Mi5hCQXSEs",
+          "name": "Schemat: Anestix",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "tvsKZLZ5FyZkkEeF",
+          "name": "Schemat: Field 03",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "uErcfmfJn6P4yY1P",
+          "name": "Schemat: Narzędzia małego rusznikarza",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "uWppOkLFD6ZgR9UE",
+          "name": "Schemat: Baterie",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "udiWGNaOR7B88jG9",
+          "name": "Schemat: Kołczan na strzały",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "uiVS5zroetLgOacg",
+          "name": "Schemat: Łuk tradycyjny",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "unAaSzhVfV5TM2sG",
+          "name": "Schemat: Strzelba Palmera",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "utB3h69dh41zhWr1",
+          "name": "Schemat: Peacemaker",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "uxgurnaoVNmg8UD7",
+          "name": "Schemat: Pancerz kompozytowy",
+          "before": "icons/sundries/documents/blueprints-teal.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_dokumentacja.svg"
+        },
+        {
+          "_id": "vGLPUwqXIjccyWrN",
+          "name": "Schemat: Komputer gamingowy",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "vUeBx7kfHfmedx6A",
+          "name": "Schemat: Powiększalnik",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "vehQEO27sTpntlSV",
+          "name": "Schemat: Magazynek do M14",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "wjwQAMdwcDGNnHAT",
+          "name": "Schemat: Konserwa (1 kg)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "xDv3f2kKA0L2VCLL",
+          "name": "Schemat: Antybiotyk (10 dawek)",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "xMLRMfnYl2B8BTUM",
+          "name": "Schemat: Detektor ruchu",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "xm7Qio7kQpRiH87a",
+          "name": "Schemat: Kołczan na bełty",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "xqFBXO81wsNwOzsw",
+          "name": "Schemat: K-22",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "xtaVZZ3Aqa8GcMiG",
+          "name": "Schemat: Pocisk 120 mm",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "y5eWvhxXDanNhwbs",
+          "name": "Schemat: Szoker",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "yh1DFTsLb4fjK5Hl",
+          "name": "Schemat: Granat sygnałowy",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "yhNDg1cc63xUHItV",
+          "name": "Schemat: Narzędzia małego mechanika",
+          "before": "icons/sundries/documents/notepad-clipboard-spiral.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_instrukcja.svg"
+        },
+        {
+          "_id": "z01Ea2KotsEVeoAW",
+          "name": "Schemat: Magazynek do HK Universal",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        },
+        {
+          "_id": "zvFFPablimakR3xe",
+          "name": "Schemat: Narzędzia małego rzeźnika",
+          "before": "icons/sundries/documents/document-torn-diagram-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/schemat_notatka.svg"
+        }
+      ]
+    }
+  ]
+}

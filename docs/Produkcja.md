@@ -15,6 +15,8 @@ produkuje, po prostu jej nie otwiera. Od góry:
 - **⚡ Szybka produkcja** — tylko jeśli masz tę zdolność Speca (rozdz. 7).
 - **Surowce** — twoje zapasy w gamblach, bo w gamblach liczą przepisy. Bladszy pasek to surowce
   w puli drużyny (rozdz. 5). Najedź na przepis niżej, a paski pokażą, ile z tego zje.
+  Przycisk **Dodaj** otwiera okno na mieszankę wszystkich pięciu typów naraz (w gamblach, z wagą
+  na żywo) — to samo, co **DODAJ SUROWCE** w zakładce Zasoby.
 - **Co umiesz zrobić** — wszystko, do czego masz dostęp, w czterech grupach:
   ✅ od ręki (wszystko masz przy sobie) · 🚚 z puli (trzeba coś przenieść) · ⚠ brakuje surowców ·
   ⛔ brak narzędzi albo biegłości. Nad listą są filtry: nazwa, narzędzie, źródło dostępu

@@ -30,6 +30,7 @@ import {
 } from "./helpers.mjs";
 import { WEAPON_MAP, buildWeaponItemData } from "../config/weapons-data.mjs";
 import { __testing as pips } from "../actors/item-state-pips.mjs";
+import { isRevolver, isPistol } from "../actors/rewolwerowiec.mjs";
 
 /** `1d20` zawsze na tę wartość. Patrz uwaga o mapowaniu w nagłówku. */
 const ROLL = Object.freeze({ ONE: 0.999, HIGH: 0.1 });
@@ -214,6 +215,68 @@ export function registerWeaponStateTests(quench) {
 
         await jams.rollJamCheck(live(gun), { label: "Test", chat: false });
         expect(jams.isCleaned(live(gun)), "nie było rzutu, więc nie było czego przerzucać").to.be.true;
+      });
+    });
+
+    /* ================================================================== */
+    /*  Niezawodny — Rewolwerowiec (NOE s. 88) i Pistolero (WKK)          */
+    /* ================================================================== */
+
+    describe("Niezawodny (Rewolwerowiec / Pistolero)", function () {
+      async function freshWeapon(id) {
+        const [gun] = await actor.createEmbeddedDocuments("Item", [weaponData(id)], { render: false });
+        undo.push(() => void actor.deleteEmbeddedDocuments("Item", [gun.id], { render: false }));
+        return gun;
+      }
+
+      /** Zdolność z flagą z paczki `zdolnosci-klasowe` — kanoniczna droga, nie po nazwie. */
+      async function grantFeature(abilityId, name) {
+        const [feat] = await actor.createEmbeddedDocuments("Item",
+          [{ name, type: "feat", flags: { [MODULE_ID]: { abilityId } } }], { render: false });
+        undo.push(() => void actor.deleteEmbeddedDocuments("Item", [feat.id], { render: false }));
+      }
+
+      it("rewolwer = `beb`, pistolet = wymienny magazynek — dla całej broni palnej krótkiej z katalogu", function () {
+        const short = Object.values(WEAPON_MAP).filter(w => w.type === "palnaKrotka");
+        expect(short.length, "katalog ma broń krótką").to.be.above(5);
+        for (const w of short) {
+          const item = new Item.implementation(buildWeaponItemData(w));
+          expect(isRevolver(item), `${w.id}: rewolwer`).to.equal(w.mag?.kind === "beb");
+          expect(isPistol(item), `${w.id}: pistolet`).to.equal(w.mag?.kind === "mag");
+        }
+      });
+
+      it("Rewolwerowiec: rewolwer nie rzuca na zacięcie", async function () {
+        await grantFeature("rewolwerowiec", "Rewolwerowiec");
+        const gun = await freshWeapon("peacemaker");
+        fixDice(ROLL.ONE);
+
+        const r = await jams.rollJamCheck(live(gun), { label: "Test", chat: false });
+        expect(r.jammed).to.be.false;
+        expect(r.roll, "odporność, nie przerzut").to.equal(null);
+      });
+
+      it("Rewolwerowiec nie chroni pistoletu", async function () {
+        await grantFeature("rewolwerowiec", "Rewolwerowiec");
+        const gun = await freshWeapon("desert-eagle");
+        fixDice(ROLL.ONE);
+
+        const r = await jams.rollJamCheck(live(gun), { label: "Test", chat: false });
+        expect(r.jammed).to.be.true;
+      });
+
+      it("Pistolero: pistolet nie rzuca na zacięcie, rewolwer i obrzyn tak", async function () {
+        await grantFeature("pistolero", "Pistolero");
+        fixDice(ROLL.ONE);
+
+        const eagle = await jams.rollJamCheck(live(await freshWeapon("desert-eagle")), { label: "Test", chat: false });
+        expect(eagle.roll, "pistolet").to.equal(null);
+
+        const revolver = await jams.rollJamCheck(live(await freshWeapon("peacemaker")), { label: "Test", chat: false });
+        expect(revolver.jammed, "rewolwer").to.be.true;
+
+        const sawnOff = await jams.rollJamCheck(live(await freshWeapon("obrzyn")), { label: "Test", chat: false });
+        expect(sawnOff.jammed, "obrzyn (wmag)").to.be.true;
       });
     });
 

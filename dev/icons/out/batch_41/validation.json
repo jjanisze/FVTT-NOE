@@ -1,0 +1,22 @@
+{
+  "batch": 41,
+  "icons": 9,
+  "remainingRepoints": 0,
+  "worldActors": 140,
+  "scratchActors": 0,
+  "lockedPacks": [
+    true,
+    true
+  ],
+  "affectedTests": {
+    "passed": 262,
+    "failed": 0
+  },
+  "fullSuite": {
+    "passed": 633,
+    "total": 636
+  },
+  "stagedPackValidation": "passed",
+  "cssValidation": "passed",
+  "pngAndSvgValidation": "passed"
+}

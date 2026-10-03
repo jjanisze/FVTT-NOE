@@ -31,6 +31,7 @@ import { przenies, audytRobot } from "../production/przenoszenie.mjs";
 import { stOlejku, dodajOlejek } from "../production/olejek.mjs";
 import { restActivitiesApi } from "../actors/rest-activities.mjs";
 import { przygotujIkony, ikonaPrzepisu } from "../production/zakladka.mjs";
+import { addLekToActor } from "../actors/leki-inventory.mjs";
 
 export function registerProdukcjaTests(quench) {
   quench.registerBatch(`${MODULE_ID}.produkcja`, context => {
@@ -752,6 +753,39 @@ export function registerProdukcjaTests(quench) {
         await przygotujIkony();
         expect(ikonaPrzepisu(przepis("std/chemia:papieros"))).to.include("papieros.svg");
         expect(ikonaPrzepisu(przepis("std/grenade:grenade-molotov"))).to.not.equal("icons/svg/item-bag.svg");
+      });
+    });
+
+    /* ------------------------------------------------------------ */
+    describe("Zasoby: gracz dodaje sam (spójność paneli)", function () {
+      it("pusta postać widzi wszystkie panele Zasobów, każdy z przyciskiem DODAJ", async function () {
+        this.timeout(10000);
+        const actor = await scratchActor();
+        await actor.sheet.render({ force: true });
+        try {
+          const root = actor.sheet.element.querySelector(".neuro-zasoby-root");
+          for (const panel of ["ammo", "magazine", "grenade", "leki", "prowiant", "surowce"]) {
+            const el = root?.querySelector(`.neuro-${panel}-wrapper`);
+            expect(el, `panel ${panel} przy pustym ekwipunku`).to.exist;
+            const dodaj = [...el.querySelectorAll("button")].some(b => /DODAJ/.test(b.textContent));
+            expect(dodaj, `panel ${panel}: przycisk DODAJ`).to.be.true;
+          }
+        } finally {
+          await actor.sheet.close();
+        }
+      });
+
+      it("lek dodany dwa razy trafia do jednego stosu", async function () {
+        const actor = await scratchActor();
+        const info = ui.notifications.info;
+        ui.notifications.info = () => {};
+        try {
+          await addLekToActor(actor, "papieros", 3);
+          await addLekToActor(actor, "papieros", 2);
+        } finally { ui.notifications.info = info; }
+        const stosy = actor.items.filter(i => i.getFlag(MODULE_ID, "chemiaKey") === "papieros");
+        expect(stosy.length).to.equal(1);
+        expect(stosy[0].system.quantity).to.equal(5);
       });
     });
 

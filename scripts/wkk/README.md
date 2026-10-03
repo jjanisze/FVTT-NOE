@@ -72,6 +72,7 @@ Zwinne dłonie check (author's idea, this table's numbers — see `TODO_mechanik
 | `wkk/config/diseases-data.mjs` | Schizofrenia paranoidalna + its stable id |
 | `wkk/config/phobias-data.mjs` | Mizoofobia |
 | `wkk/config/armor-data.mjs` | Kamizelka taktyczna (light armour, +1 handy slot) |
+| `wkk/config/class-features-data.mjs` | Pistolero (Kowboj ability, pistol twin of Rewolwerowiec) + its `hasAbility()` entry. Host: `config/class-features-data.mjs` (the generator emits the splice) and the Kowboj pool in `config/classes-data.mjs`. Flagged `kobalt` in the pack and hidden from level-up pools when Kobalt is off (`actors/kobalt-advancement.mjs`) |
 | `wkk/config/latarka-overrides.mjs` | `LIGHT_KOBALT` — see the override pattern below |
 | `wkk/config/molotov-light.mjs` | `MOLOTOV_LIGHT_KOBALT` — a lit Molotov's light; RAW gives it none (see below) |
 | `wkk/config/production-kobalt.mjs` | Crafting (PLAN_produkcja): abandoning a Robota and its refund (D14), Robota weight interpolation (D4), schematic weight (D15), the Spec profession as an executor trait — ×0,75 / ×0,5 with the full kit, ×0,25 floor, no ST 30 (D26–D28, D32; D30 falls out of D26). Host: `config/production-rules.mjs`, each with its `..._RAW` twin |

@@ -1,5 +1,5 @@
-import { SUROWCE_TYPES, getSurowiecType } from "../config/surowce-data.mjs";
-import { transferAllSurowce } from "./surowce-store.mjs";
+import { SUROWCE_TYPES, SUROWCE_ICON_DIR, getSurowiecType } from "../config/surowce-data.mjs";
+import { transferAllSurowce, giveManySurowce, gbOf } from "./surowce-store.mjs";
 
 /**
  * Neuroshima 5e — Surowce inventory panel.
@@ -10,6 +10,11 @@ import { transferAllSurowce } from "./surowce-store.mjs";
  * total count. Each pool keeps full item functionality reachable: quantity
  * editing, Wyświetl w czacie, Wyposaż, Ulubione, edycja, usunięcie and a
  * rozwiń/zwiń opis. The native rows are hidden so nothing is duplicated.
+ *
+ * Like every Zasoby panel it renders even when empty and ends with a „DODAJ …” button
+ * (`oknoDodajSurowce`) — a player who has nothing yet needs somewhere to start. One dialog
+ * takes a mix of all five types, in gamble (the unit recipes count in), through the
+ * surowce funnel (`giveManySurowce`), so stacks merge exactly as production refunds do.
  */
 
 const WRAPPER_CLASS = "neuro-surowce-wrapper";
@@ -71,7 +76,7 @@ function _onRenderActorSheetInjectSurowce(app, html) {
   // Guard against the multiple render hooks firing for one render pass.
   if (inventoryTab.querySelector(`.${WRAPPER_CLASS}`)) return;
 
-  // Collect surowce, grouped by type code; only inject when the actor has any.
+  // Collect surowce, grouped by type code. The panel renders even when empty (DODAJ SUROWCE).
   const itemsByCode = new Map();
   for (const item of actor.items || []) {
     const type = getSurowiecType(item);
@@ -79,7 +84,6 @@ function _onRenderActorSheetInjectSurowce(app, html) {
     if (!itemsByCode.has(type.code)) itemsByCode.set(type.code, []);
     itemsByCode.get(type.code).push(item);
   }
-  if (itemsByCode.size === 0) return;
 
   // Per-type totals, in canonical order.
   //
@@ -97,8 +101,6 @@ function _onRenderActorSheetInjectSurowce(app, html) {
     }
     return { type, items, totalQty, totalKg };
   }).filter(p => p.totalQty > 0);
-
-  if (pools.length === 0) return;
 
   // Only now hide the native rows, and only for stacks the panel actually shows —
   // an emptied stack stays reachable in the normal inventory instead of vanishing.
@@ -148,6 +150,13 @@ function _onRenderActorSheetInjectSurowce(app, html) {
   const footer = document.createElement("div");
   footer.style.cssText = "display:flex; align-items:center; justify-content:space-between; margin-top:4px; gap:0;";
 
+  const addBtn = document.createElement("button");
+  addBtn.type = "button";
+  addBtn.className = "neuro-add-surowce-btn";
+  addBtn.innerHTML = `<i class="fas fa-cubes"></i> DODAJ SUROWCE`;
+  addBtn.style.cssText = "flex:1; text-align:left; padding:4px 12px; background:rgba(42,51,38,0.35); border:1px solid #5f7d52; color:var(--color-text-light-primary, #e0e0e0); white-space:nowrap; cursor:pointer;";
+  addBtn.addEventListener("click", ev => { ev.preventDefault(); oknoDodajSurowce(actor); });
+
   const transferBtn = document.createElement("button");
   transferBtn.type = "button";
   transferBtn.className = "neuro-surowce-transfer-btn";
@@ -164,7 +173,8 @@ function _onRenderActorSheetInjectSurowce(app, html) {
     <span style="padding:0 10px;">Waga: <strong style="color:var(--color-text-light-primary, #e0e0e0);">${_fmtWeight(grandKg)}</strong></span>
   `;
 
-  footer.appendChild(transferBtn);
+  footer.appendChild(addBtn);
+  if (grandQty > 0) footer.appendChild(transferBtn);
   footer.appendChild(summary);
 
   const wrapper = document.createElement("div");
@@ -182,6 +192,71 @@ function _onRenderActorSheetInjectSurowce(app, html) {
     if (currencyHeader) currencyHeader.after(wrapper);
     else inventoryTab.prepend(wrapper);
   }
+}
+
+/* -------------------------------------------- */
+/*  Dodawanie                                   */
+/* -------------------------------------------- */
+
+/**
+ * „Dodaj surowce” — mieszanka pięciu typów w jednym oknie, w gamblach. Wspólne dla panelu
+ * Zasobów i sekcji Surowce na zakładce Produkcja.
+ * @param {Actor} actor
+ * @returns {Promise<Record<string, number>|null>}  dodane gamble per typ, null = anulowane
+ */
+export async function oknoDodajSurowce(actor) {
+  if (!actor) return null;
+  const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
+  const rows = SUROWCE_TYPES.map(t => `
+    <div class="form-group">
+      <label style="flex:0 0 230px; display:flex; align-items:center; gap:6px; white-space:nowrap;">
+        <img src="${SUROWCE_ICON_DIR}/${t.icon}" alt="" width="20" height="20" style="border:none;">
+        ${esc(t.label)} (${t.code})
+      </label>
+      <div class="form-fields">
+        <input type="number" name="${t.code}" value="0" min="0" step="1" style="flex:0 0 70px; text-align:center;">
+        <span style="flex:1; font-size:0.85em; color:var(--color-text-secondary, #aaa);">gb · masz ${Math.floor(gbOf(actor, t.code))}</span>
+      </div>
+    </div>`).join("");
+  const content = `
+    <p style="margin-top:0; font-size:0.9em;">Ilość w gamblach, tak jak liczą przepisy.
+      CH, CE, CZ: 10 gb na kilogram; MK, MO: 1 gb na kilogram (NOE s. 144).</p>
+    ${rows}
+    <hr>
+    <div style="text-align:center;">Razem: <strong class="neuro-sur-suma-gb">0</strong> gb ·
+      <strong class="neuro-sur-suma-kg">0 g</strong></div>`;
+
+  const odczyt = form => Object.fromEntries(SUROWCE_TYPES.map(t =>
+    [t.code, Math.max(0, Math.floor(Number(form.elements[t.code]?.value) || 0))]));
+
+  const wynik = await foundry.applications.api.DialogV2.wait({
+    window: { title: `Dodaj surowce: ${actor.name}`, icon: "fa-solid fa-cubes" },
+    position: { width: 500 },
+    content,
+    render: (_ev, dialog) => {
+      const form = dialog.element.querySelector("form");
+      const przelicz = () => {
+        const v = odczyt(form);
+        const gb = Object.values(v).reduce((a, b) => a + b, 0);
+        const kg = SUROWCE_TYPES.reduce((a, t) => a + v[t.code] / t.gbPerKg, 0);
+        form.querySelector(".neuro-sur-suma-gb").textContent = gb;
+        form.querySelector(".neuro-sur-suma-kg").textContent = _fmtWeight(kg);
+      };
+      form.addEventListener("input", przelicz);
+      przelicz();
+    },
+    buttons: [
+      { action: "add", icon: "fa-solid fa-check", label: "Dodaj", default: true, callback: (_ev, button) => odczyt(button.form) },
+      { action: "cancel", icon: "fa-solid fa-times", label: "Anuluj" }
+    ],
+    rejectClose: false
+  });
+  if (!wynik || typeof wynik !== "object") return null;
+  const dodane = Object.fromEntries(Object.entries(wynik).filter(([, gb]) => gb > 0));
+  if (!Object.keys(dodane).length) return null;
+  await giveManySurowce(actor, dodane);
+  ui.notifications.info(`${actor.name}: + ${Object.entries(dodane).map(([c, gb]) => `${gb} ${c}`).join(", ")}.`);
+  return dodane;
 }
 
 /* -------------------------------------------- */

@@ -158,6 +158,7 @@ AUTOMATION = {
     "tarcza-wiary": {"passive": True, "exclusiveGroup": "unarmoredAc"},
     "skuteczny-cios": {"hotbar": True},
     "jak-dbasz-tak-masz": {"legacyAbilityKey": "jakDbaszTakMasz"},
+    "rewolwerowiec": {"legacyAbilityKey": "rewolwerowiec", "handgunKind": "rewolwer"},
     "empiryk": {"hotbar": True},
     "moja-prawa-reka": {"companion": True},
     "partner": {"companion": True},
@@ -338,7 +339,11 @@ lines.append("""/**
  *   toggle        stateful abilities — see actors/class-state.mjs
  *   hotbar        gets an auto-managed macro — see actors/ability-hotbar.mjs
  *   exclusiveGroup non-stacking family (multiclass rule) — see actors/class-rules.mjs
+ *   handgunKind   "rewolwer" | "pistolet" — weapon the ability's clauses apply to, see actors/rewolwerowiec.mjs
+ *   kobalt        W Kolorze Kobaltu content, defined in scripts/wkk/ and appended at the end
  */
+
+import { KOBALT_CLASS_FEATURES } from "../wkk/config/class-features-data.mjs";
 
 export const CLASS_FEATURES = {""")
 
@@ -360,6 +365,7 @@ for r in merged:
     fields.append(f'    text: "{esc(r["text"])}"')
     lines.append(f'  "{r["id"]}": {{\n' + ",\n".join(fields) + "\n  },")
 
+lines.append("  ...KOBALT_CLASS_FEATURES")
 lines.append("};\n")
 
 lines.append("""/**

@@ -31,8 +31,8 @@ export const KWAS = Object.freeze({
 /** Stałe id aktywności — ta sama w paczce i na kopiach tworzonych w świecie. */
 export const KWAS_ACTIVITY_ID = "kwasRzutFiolka00";
 
-// Ikona tymczasowa: ogólna chemia. Własna — kolejka dev/icons/MISSING.md (A).
-const KWAS_IMG = `modules/${MODULE_ID}/icons/items/loot/chemia.svg`;
+// Dedykowany glif fiolki z kwasem: batch 41.
+const KWAS_IMG = `modules/${MODULE_ID}/icons/items/loot/kwas.svg`;
 
 const KWAS_DESCRIPTION = `<p>Fiolka (100 ml) silnie żrącej substancji.</p>`
   + `<p><strong>Rzut fiolką</strong> — zamiast jednego ataku w akcji Atakowanie: cel, którego widzisz, `

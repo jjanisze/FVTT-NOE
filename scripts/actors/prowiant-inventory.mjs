@@ -117,12 +117,19 @@ function _onRenderActorSheetInjectProwiant(app, html) {
   `;
   panel.appendChild(uiList);
 
+  // Stopka jak w pozostałych panelach Zasobów: szeroki „DODAJ …” + cena i waga łącznie.
+  const allItems = pools.flatMap(p => p.items);
+  const totalPrice = allItems.reduce((s, i) => s + (Number(i.system.price?.value) || 0) * (Number(i.system.quantity) || 0), 0);
+  const totalKg = pools.reduce((s, p) => s + p.totalKg, 0);
   const addRow = document.createElement("div");
-  addRow.style.cssText = "padding:6px 10px;";
+  addRow.style.cssText = "display:flex; align-items:center; margin-top:4px; gap:0; font-size:0.85em; color:var(--color-text-secondary, #aaa);";
   addRow.innerHTML = `
-    <button type="button" class="neuro-add-prowiant-btn" style="width:auto; white-space:nowrap;">
+    <button type="button" class="neuro-add-prowiant-btn" style="flex:1; text-align:left; padding:4px 12px; background:rgba(36,42,51,0.35); border:1px solid #556270; color:var(--color-text-light-primary, #e0e0e0); white-space:nowrap; font-size:var(--font-size-13, 13px);">
       <i class="fas fa-utensils"></i> DODAJ PROWIANT
     </button>
+    <span style="padding:0 10px;">Cena: <strong style="color:var(--color-text-light-primary, #e0e0e0);">${Math.round(totalPrice)} gb</strong></span>
+    <span style="display:inline-block; width:1px; height:16px; background:#556270; margin:0;"></span>
+    <span style="padding:0 10px;">Waga: <strong style="color:var(--color-text-light-primary, #e0e0e0);">${totalKg < 1 ? Math.round(totalKg * 1000) + " g" : totalKg.toFixed(2) + " kg"}</strong></span>
   `;
   addRow.querySelector(".neuro-add-prowiant-btn").addEventListener("click", async ev => {
     ev.preventDefault();

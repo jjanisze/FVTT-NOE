@@ -19,7 +19,11 @@
  *   toggle        stateful abilities — see actors/class-state.mjs
  *   hotbar        gets an auto-managed macro — see actors/ability-hotbar.mjs
  *   exclusiveGroup non-stacking family (multiclass rule) — see actors/class-rules.mjs
+ *   handgunKind   "rewolwer" | "pistolet" — weapon the ability's clauses apply to, see actors/rewolwerowiec.mjs
+ *   kobalt        W Kolorze Kobaltu content, defined in scripts/wkk/ and appended at the end
  */
+
+import { KOBALT_CLASS_FEATURES } from "../wkk/config/class-features-data.mjs";
 
 export const CLASS_FEATURES = {
   "berserk": {
@@ -996,6 +1000,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Rewolwerowiec",
     action: null,
+    legacyAbilityKey: "rewolwerowiec",
+    handgunKind: "rewolwer",
     text: "Wyciągasz rewolwer i strzelasz, zanim ktokolwiek zdąży mrugnąć okiem. Dobywanie. Jeśli nosisz jeden lub dwa rewolwery w kaburach, możesz je dobyć lub schować, bez zużywania darmowej interakcji z przedmiotem. Niezawodny. Rewolwer w twoich rękach nigdy się nie zacina. Jednoręki. Możesz strzelać z rewolweru jedną ręką, bez otrzymywania Utrudnienia do ataku z tego tytułu. Rewolwery traktujesz jako broń o właściwości lekka i poręczna. Strzał z biodra. Otrzymujesz +5 do testów Inicjatywy, jeśli trzymasz w ręce lub będziesz dobywać rewolwer. Szybkoładowacz [B]. Jeśli masz wolną rękę, to w Akcji Bonusowej, możesz z pomocą pełnego szybkoładowcza (aka speedloadera) uzupełnić pusty bębenek rewolweru."
   },
   "zawsze-w-siodle": {
@@ -1377,6 +1383,7 @@ export const CLASS_FEATURES = {
     action: null,
     text: "Twoim wrogiem są Zwierzęta. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg."
   },
+  ...KOBALT_CLASS_FEATURES
 };
 
 /**

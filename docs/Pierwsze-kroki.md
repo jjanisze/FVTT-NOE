@@ -35,6 +35,9 @@ domyślnych kompendiów SRD dnd5e (te reprezentują fantasy, nie post-apo).
 3. Przeciągnij klasę z kompendium **Neuroshima — Klasy**, potem profesję z **Neuroshima —
    Profesje**.
 4. Dobierz ekwipunek z kompendiów broni/pancerzy/narzędzi.
+5. Amunicję, magazynki, materiały wybuchowe, leki, prowiant i surowce dodajesz w zakładce
+   **Zasoby** — każdy panel ma na dole przycisk **DODAJ …** (cennik z podręcznika, ilość, cena
+   i waga na żywo; ta sama pozycja trafia do istniejącego stosu).
 
 Pełny przegląd tego, co konkretnie różni się od standardowego dnd5e (i dlaczego), jest w
 [Zmiany-wzgledem-dnd5e.md](Zmiany-wzgledem-dnd5e.md).

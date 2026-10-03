@@ -42,9 +42,10 @@ export const ELECTRIC_FUZE = Object.freeze({
 export const DETONATOR_ACTIVITY_ID = "detonatorDetonuj";
 export const DETONATOR_ACTIVITY_IDENTIFIER = "detonator-detonuj";
 
-// Ikony tymczasowe — własne w kolejce dev/icons/MISSING.md (A).
-const PILOT_IMG = `modules/${MODULE_ID}/icons/items/loot/krotkofalowka_alt.svg`;
-const FUZE_IMG = `modules/${MODULE_ID}/icons/items/loot/czesci_elektroniczne.svg`;
+// Dedykowane glify: batch 41.
+const PILOT_IMG = `modules/${MODULE_ID}/icons/items/loot/detonator_radiowy.svg`;
+const FUZE_IMG = `modules/${MODULE_ID}/icons/items/loot/zapalnik_radiowy.svg`;
+const ELECTRIC_FUZE_IMG = `modules/${MODULE_ID}/icons/items/loot/zapalnik_elektryczny.svg`;
 
 const f = (item, key) => item?.getFlag?.(MODULE_ID, key) ?? item?.flags?.[MODULE_ID]?.[key];
 
@@ -143,7 +144,7 @@ export function buildRadioFuzeItemData({ kitId, quantity = DETONATOR.fuzes } = {
 
 export function buildElectricFuzeItemData({ quantity = 1 } = {}) {
   const data = _trinket({
-    name: ELECTRIC_FUZE.name, type: "consumable", img: FUZE_IMG, description: ELECTRIC_DESCRIPTION,
+    name: ELECTRIC_FUZE.name, type: "consumable", img: ELECTRIC_FUZE_IMG, description: ELECTRIC_DESCRIPTION,
     identifier: "zapalnik-elektryczny", quantity, weight: ELECTRIC_FUZE.weight, price: ELECTRIC_FUZE.price
   });
   data.flags = { [MODULE_ID]: { electricFuze: true, availability: ELECTRIC_FUZE.avail } };

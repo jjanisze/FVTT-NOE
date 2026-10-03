@@ -38,6 +38,7 @@
 import { CLASS_FEATURES } from "../config/class-features-data.mjs";
 import { SZTUCZKI } from "../config/sztuczki-data.mjs";
 import { ORIGIN_ABILITIES } from "../config/pochodzenia-data.mjs";
+import { KOBALT_ABILITY_DEFINITIONS } from "../wkk/config/class-features-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -51,6 +52,9 @@ export const ABILITY_KEYS = {
   SZTURMOWIEC: "szturmowiec",
   BEZ_DNA: "bezDna",
   SAMURAJ: "samuraj",
+  // Kowboj — klauzule czyta `actors/rewolwerowiec.mjs`. Pistolero to wariant WKK.
+  REWOLWEROWIEC: "rewolwerowiec",
+  PISTOLERO: "pistolero",
   // Produkcja (PLAN_produkcja) — Sztuczki i zdolności z Pochodzenia, które zmieniają czas,
   // surowce albo Test końcowy. Czyta je `production/wykonawca.mjs`.
   FABRYKATOR: "fabrykator",
@@ -116,6 +120,12 @@ export const ABILITY_DEFINITIONS = {
     aliases: ["samuraj", "osełka", "oselka", "zasłona", "zaslona"],
     noticeColor: "#6b4a4a"
   },
+  [ABILITY_KEYS.REWOLWEROWIEC]: {
+    label: "Rewolwerowiec",
+    aliases: ["rewolwerowiec"],
+    noticeColor: "#6b5a2f"
+  },
+  ...KOBALT_ABILITY_DEFINITIONS,
   [ABILITY_KEYS.FABRYKATOR]: {
     label: "Fabrykator",
     aliases: ["fabrykator"],

@@ -42,11 +42,12 @@ je skasować.
 1k6 obuchowe, finezyjna, 1 kg, 15 gb — wartości nadane przeze mnie, gdy okazało się, że broń
 nie ma w ogóle kości obrażeń. Nikt ich nie zatwierdził.
 
-### 2. Rewolwerowiec u Lorentza działa na całą Broń Palną Krótką
+### ~~2. Rewolwerowiec u Lorentza działa na całą Broń Palną Krótką~~ — ✅ zamknięte 2026-10-01
 
-Ustalenie MG, nigdzie nie zakodowane — kanoniczny tekst mówi tylko o rewolwerach. Żyje wyłącznie
-jako umowa przy stole. Jeśli ma przetrwać kolejną migrację, potrzebuje flagi na przedmiocie albo
-wariantu homebrew.
+Umowa przy stole zastąpiona wariantem WKK: **Pistolero** — osobna zdolność Kowboja dla
+pistoletów (`scripts/wkk/config/class-features-data.mjs`). Rewolwerowiec zostaje RAW (tylko
+rewolwery). Lorentz: omyłkowy Clint usunięty (Twardziel 3 daje jedną zdolność z profesji);
+zamiana Rewolwerowiec → Pistolero czeka na przebudowę paczek.
 
 ---
 

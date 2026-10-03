@@ -48,6 +48,7 @@ import { registerToolSubstitutesMigration } from "./migration/migrate-tool-subst
 import { registerEffectPrioritiesMigration } from "./migration/migrate-effect-priorities.mjs";
 import { registerSrdCleanup } from "./config/srd-cleanup.mjs";
 import { registerClassRules } from "./actors/class-rules.mjs";
+import { registerKobaltAdvancement } from "./actors/kobalt-advancement.mjs";
 import { registerCichyKrok } from "./actors/cichy-krok.mjs";
 import { registerBezDna } from "./actors/bez-dna.mjs";
 import { registerSamuraj } from "./actors/samuraj.mjs";
@@ -229,6 +230,7 @@ Hooks.once("init", () => {
   registerEffectPrioritiesMigration();
   registerSrdCleanup();
   registerClassRules();
+  registerKobaltAdvancement();
   registerCichyKrok();
   registerBezDna();
   registerSamuraj();

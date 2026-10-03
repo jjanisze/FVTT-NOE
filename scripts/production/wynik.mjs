@@ -56,6 +56,7 @@ const SPRZET = Object.freeze({
 
 /** Ikony przedmiotów z cennika, które już mają grafikę; reszta — `dev/icons/MISSING.md`. */
 const RAW_IKONY = Object.freeze({
+  "radio": "radio.svg",
   "krotkofalowka": "krotkofalowka.svg",
   "miernik-promieniowania": "miernik_promieniowania.svg",
   "nosnik-danych": "pendrive.svg",

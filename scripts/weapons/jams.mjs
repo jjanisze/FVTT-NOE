@@ -4,6 +4,7 @@ const MAINTENANCE_FLAG = "maintenance";
 const CLEAR_JAM_DC = 10;
 const REPAIR_WEAPON_DC = 15;
 import { ABILITY_KEYS, buildAbilityRuleChangeNotice, getAbilityLabel, hasAbility } from "../actors/abilities.mjs";
+import { handgunPerkFor } from "../actors/rewolwerowiec.mjs";
 import { playWeaponSound, WeaponSound } from "./sounds.mjs";
 import { seqScrollText } from "./sequencer.mjs";
 import { hasAddon } from "../config/addons-data.mjs";
@@ -548,6 +549,9 @@ function _getJamImmunitySource(item) {
 
 function _getJamImmunityAbilityKey(item) {
   if (_hasJakDbaszTakMasz(item?.actor)) return ABILITY_KEYS.JAK_DBASZ_TAK_MASZ;
+  // Niezawodny (Rewolwerowiec / Pistolero) — tylko dla „swojego” rodzaju broni.
+  const handgunPerk = handgunPerkFor(item);
+  if (handgunPerk) return handgunPerk;
   if (isPamperedWeapon(item)) return ABILITY_KEYS.WYCHUCHANA_SPLUWA;
   return null;
 }

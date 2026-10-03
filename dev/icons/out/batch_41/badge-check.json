@@ -1,0 +1,16 @@
+{
+  "badge": {
+    "width": 12,
+    "height": 12,
+    "count": 1
+  },
+  "resultIcon": "modules/neuroshima-2026-overrides/icons/items/loot/radio.svg",
+  "svgAssets": 9,
+  "clip": {
+    "x": 880,
+    "y": 285.5,
+    "width": 800,
+    "height": 700,
+    "scale": 1
+  }
+}

@@ -79,8 +79,8 @@ Cel: tracker mówi prawdę, paczki są aktualne, otwarte decyzje zamknięte.
   `dev/classes/gen_features.py`; plakietki wypiekane w paczce `zdolnosci-klasowe`. Stan dziś:
   ~13/133 z własnym kodem (Berserk, Kondycha, Goła klata, Tarcza wiary, Drugi/Trzeci atak,
   Z bara!, Cichy krok, Mój biom, Mój wróg ×2, Wściekły cios, Jak dbasz, tak masz)
-- [ ] Zamknąć decyzje z `TODO_mechanika.md`: statystyki Laski, Rewolwerowiec na całą BPK (flaga
-  albo wariant WKK), pojedynczy nabój do magazynka wymiennego (siatka ST — WKK)
+- [ ] Zamknąć decyzje z `TODO_mechanika.md`: statystyki Laski, ~~Rewolwerowiec na całą BPK~~
+  (2026-10-01: wariant WKK Pistolero), pojedynczy nabój do magazynka wymiennego (siatka ST — WKK)
 - [ ] Pierwszy przebieg **czystej instalacji** (B6) — lista błędów staje się zadaniami tego kamienia
 - [ ] Zdecydować o formie macierzy pokrycia: od teraz status zmienia się **w macierzy**, fazy 1–5
   zostają jako historia

@@ -169,6 +169,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/actors/handy-belt.mjs` | Pas przedmiotów podręcznych w nagłówku karty — widok i gesty (model w `handy-items.mjs`, `PLAN_przedmioty_podreczne_v2.md`) |
 | `scripts/actors/inventory-toggle-fix.mjs` | Poprawka zacinającej się ikony rozwijania wiersza ekwipunku (błąd stockowego dnd5e) |
 | `scripts/actors/item-state-pips.mjs` | Wspólny pasek plakietek stanu na wierszu ekwipunku (zamiast pięciu rywalizujących `::after`) |
+| `scripts/actors/kobalt-advancement.mjs` | Pula awansu (ItemChoice) bez przedmiotów z flagą `kobalt`, gdy Kolor Kobaltu jest wyłączony |
 | `scripts/actors/leki-inventory.mjs` | Panel Leki w zakładce Zasoby — ±Ilość, Zażyj, pas, dawki w otwartym opakowaniu |
 | `scripts/actors/party-loot-lock.mjs` | Blokada łupu drużynowego — pauza gry, dopóki worek grupy nie jest pusty |
 | `scripts/actors/party-sheet.mjs` | Karta Drużyny — cienka podklasa `GroupActorSheet` (podróż, zapasy, łup) |
@@ -177,6 +178,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/actors/pd-panel.mjs` | Panel PD — PD grupowe i osobiste, progi poziomów 0…3400, auto-PD za Stopień Zranienia |
 | `scripts/actors/prowiant-inventory.mjs` | Panel Prowiant w zakładce Zasoby |
 | `scripts/actors/pw.mjs` | PW wg Neuroshimy — płasko na poziom (16+KON / 4+KON, 12+KON / 3+KON) |
+| `scripts/actors/rewolwerowiec.mjs` | Rewolwerowiec (Kowboj) i Pistolero (WKK) — rewolwer vs pistolet, Niezawodny |
 | `scripts/actors/samuraj.mjs` | Sztuczka Samuraj — +1 TA/obrażeń bronią sieczną, TT +1 z nią w ręku, dobycie bez Darmowej Interakcji |
 | `scripts/actors/sp.mjs` | Siła Przeciwnika ≠ PB dla BN (`details.cr` trzyma SP, PB z flagi) |
 | `scripts/actors/tool-availability.mjs` | Notka „masz zestaw / brak zestawu" na karcie testu narzędzi |
@@ -1094,6 +1096,73 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### Ikony batch 41 — detonatory, Kwas, Schematy, Robota, Radio (2026-10-03)
+
+- **9 nowych glifów** w `icons/items/loot/` (PNG 256×256 z alfą + SVG z
+  `var(--icon-fill, #fff)`): Detonator radiowy, Kwas, Zapalnik radiowy,
+  Zapalnik elektryczny, Schemat Notatka / Instrukcja / Dokumentacja,
+  nakładka Robota i Radio. Wygenerowane wbudowanym narzędziem Codex;
+  atlas `dev/icons/in/Batch_41.png`, dokładny prompt `batch_41_prompt.md`.
+- **Pipeline**: `process_grid_41.py` dzieli atlas, wywołuje
+  `normalize_icons.normalize_icon`, zapisuje PNG + maski SVG i instaluje wynik.
+  Wspólny obszar glifu 216×216 zachowuje proporcje i co najmniej 20 px marginesu.
+  Podgląd: `dev/icons/out/batch_41/preview.png`.
+- Przepięte buildere Detonatora, obu zapalników i Kwasu; trzy rozmiary
+  `IKONY_SCHEMATU`; `RAW_IKONY.radio`. Robota zachowuje ikonę wyniku —
+  `production/zakladka.mjs` dodaje nakładkę 12×12 w Ekwipunku wspólnym hakiem
+  `renderActorSheetV2` (również pojazdy i Miejsca).
+- **Na żywo przez API Foundry**: 247 Schematów i 3 przedmioty paczki `sprzet`,
+  1 Kwas na aktorze. Zmieniono wyłącznie `img`; blokady paczek przywrócone.
+  Kopia poprzednich ścieżek: `dev/backup/batch-41-icon-repoint-2026-10-03.json`.
+  Ponowny audyt nie znalazł pozostałych przepięć.
+- Walidacja CSS, `npm test` (17 paczek), build paczek w osobnym katalogu
+  i walidator paczek: OK. Quench dla zmiany: **262/262**
+  (konfiguracja 28, dane ekwipunku 146, produkcja 88). Pełny Quench:
+  **633/636**, 3 błędy poza tą dostawą: nieaktualny coverage Pulp Fiction /
+  Siekierezada w paczce Sztuczek oraz dwa testy Samuraja (timeout i stan topora).
+- W działającym UI sprawdzono pojedynczą nakładkę 12×12, zachowaną ikonę wyniku
+  i ładowanie wszystkich 9 SVG z obsługą koloru motywu.
+  Kolejka A: batch 41 zakończony, następny **42 (5/9)**; B/C bez zmian.
+  Uwagi o konfiguracji harnessu: `dev/icons/CODEX_TODO.md`.
+
+### Pistolero (WKK) i Niezawodny Rewolwerowca (2026-10-01)
+
+Lorentz strzela z Desert Eagle, a Rewolwerowiec (Kowboj, NOE s. 88) mówi tylko o rewolwerach —
+dotąd łatane umową przy stole (`TODO_mechanika.md` §2).
+
+- **Pistolero** — nowa zdolność Kowboja, treść WKK (`scripts/wkk/config/class-features-data.mjs`):
+  Dobywanie, Niezawodny, Jednoręki, Strzał z biodra jak u Rewolwerowca, ale dla pistoletów;
+  Szybkoładowacz zastąpiony przez „Powąchaj to” (Zastraszanie z Ułatwieniem, SIŁ lub CHA).
+  Osobna zdolność, nie zamiennik — można wziąć obie. Generator (`dev/classes/gen_features.py`)
+  dokleja wpisy WKK na koniec `CLASS_FEATURES`; pula Kowboja w `classes-data.mjs` dobiera je
+  po `owner`. W paczce `source.custom` „Neuroshima RPG — Kolor Kobaltu” i flaga `kobalt`.
+- **Pula awansu bez Kobaltu** — `actors/kobalt-advancement.mjs` obudowuje
+  `ItemChoiceFlow#_prepareContentContext` i chowa przedmioty z flagą `kobalt`, gdy przełącznik
+  jest wyłączony. Wybranych już nie zabiera.
+- **Niezawodny** (Rewolwerowiec i Pistolero) — `actors/rewolwerowiec.mjs`: rewolwer = broń palna
+  krótka z `beb`, pistolet = bez `beb` i `wmag`. `weapons/jams.mjs` pomija test zacięcia dla
+  „swojej” broni (jak przy Jak dbasz, tak masz). Rodzaj broni deklaruje pole `handgunKind`.
+  Pozostałe klauzule jeszcze ręcznie.
+- Lorentz: usunięty omyłkowy Clint (Twardziel 3 = jedna zdolność z profesji).
+
+### Zasoby: każdy panel ma „DODAJ …”, także pusty (2026-09-30)
+
+Test gracza na Piekarzu: nie dało się dodać surowców z karty, a panel Leków nie miał przycisku.
+
+- **Jedna reguła dla wszystkich sześciu paneli Zasobów:** panel widać także przy pustym
+  ekwipunku (inaczej nie ma skąd dodać pierwszej sztuki — zasada, którą Prowiant i Magazynki
+  stosowały już wcześniej), a stopka to szeroki „DODAJ …” + cena i waga łącznie. Okno: pozycja
+  z cennika, ilość, cena i waga na żywo; ta sama pozycja trafia do istniejącego stosu.
+- **Leki:** nowe „DODAJ LEK” (`oknoDodajLek` / `addLekToActor` w `actors/leki-inventory.mjs`) —
+  katalog chemii pogrupowany jak w arkuszu przedmiotu, bez materiałów z grupy „inne”; stos po
+  `chemiaKey`.
+- **Surowce:** nowe „DODAJ SUROWCE” (`oknoDodajSurowce` w `actors/surowce-inventory.mjs`) —
+  mieszanka pięciu typów w jednym oknie, w gamblach, przez lejek `giveManySurowce`. To samo
+  okno pod przyciskiem „Dodaj” w sekcji Surowce zakładki Produkcja. „Przekaż do pojazdu” znika,
+  gdy nie ma czego przekazać.
+- **Prowiant:** mały przycisk z lewej zamieniony na stopkę jak w pozostałych panelach.
+- Quench 576/576 (nowe: wszystkie panele z DODAJ przy pustej postaci, scalanie stosu leków).
 
 ### v0.17.1 — Produkcja: papieros z niczego, „Od ręki”; polskie litery w krojach nagłówków (2026-09-30)
 

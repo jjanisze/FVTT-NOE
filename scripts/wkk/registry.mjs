@@ -29,6 +29,7 @@ export { KOBALT_WEAPONS, LASKA, MIECZ, PISTOLET_NA_RACE, ZLOTY_DESERT_EAGLE } fr
 export { KOBALT_DISEASES, SCHIZOFRENIA_PARANOIDALNA_ID } from "./config/diseases-data.mjs"; // → config/diseases-data.mjs, config/disease-effects.mjs, config/chemia-data.mjs
 export { KOBALT_PHOBIAS } from "./config/phobias-data.mjs";               // → config/phobias-data.mjs
 export { KOBALT_ARMORS } from "./config/armor-data.mjs";                  // → config/armor-data.mjs
+export { KOBALT_CLASS_FEATURES, KOBALT_ABILITY_DEFINITIONS } from "./config/class-features-data.mjs"; // → config/class-features-data.mjs, config/classes-data.mjs, actors/abilities.mjs
 export { ROZRYWAJACA } from "./combat/weapon-save-properties.mjs";        // → combat/weapon-save-properties.mjs
 export { DUMDUM_BLEED_PROFILE } from "./combat/bleeding.mjs";             // → combat/bleeding.mjs
 

@@ -17,7 +17,7 @@ the same session the need is found.
 
 # A. Sheet icons (white glyphs)
 
-Icons get generated in batches of 9 (one Gemini grid image = 9 tiles, see
+Icons get generated in batches of 9 (one generated grid image = 9 tiles, see
 `Pipeline.md`) via `process_grid_N.py`. Generating one icon at a time wastes a
 whole grid image on 8 unused tiles; *not* tracking gaps between sessions is
 the opposite failure ("this keeps happening" — flagged 2026-09-07). This file
@@ -37,26 +37,14 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. Still that future pass,
 still not this queue — but it is two items, not a pile.
 
-**Next batch number: 41** (last used: `process_grid_40.py`, 2026-09-25 — bump this
+**Next batch number: 42** (last used: `process_grid_41.py`, 2026-10-03 — bump this
 whenever a new batch actually gets processed).
 
 *Batch 40 (2026-09-25): Kamizelka taktyczna, .44 Mag dum-dum, Mięso suszone, Chleb, Owoce
 i warzywa, MRE, Breneka, Zużyty LAW, Magazynek bębnowy — processed and wired; LAW and the drum
 are stored for items that do not exist yet. IMPLEMENTATION.md, 2026-09-25.*
 
-## Queue (A) — 9/9 — batch ready
-
-| # | Item | Where | Current icon | Suggested prompt content |
-|---|------|-------|---------------|---------------------------|
-| 1 | Detonator radiowy — the remote (`items/detonator.mjs`, RAW *Elektronika*) → `icons/items/loot/detonator_radiowy.svg` | pack `sprzet`; belt item | borrows `icons/items/loot/krotkofalowka_alt.svg` (walkie-talkie — exactly what it must not look like) | Handheld radio remote detonator: small box with a toggle switch under a flip-up safety cover and a short whip antenna. Must not read as a walkie-talkie |
-| 2 | Kwas (fiolka) (`items/kwas.mjs`, RAW Różności) → `icons/items/loot/kwas.svg` | party: Raynald; pack `sprzet` | borrows `icons/items/loot/chemia.svg` (generic chemistry) | Small corked glass vial with a hazard/corrosive drip symbol, a droplet eating into the surface below it. Must read as "acid", distinct from the generic chemistry flask |
-| 3 | Zapalnik radiowy (`items/detonator.mjs`, the 10 fuzes of the kit) → `icons/items/loot/zapalnik_radiowy.svg` | created with every Detonator radiowy | borrows `icons/items/loot/czesci_elektroniczne.svg` | Small radio receiver fuze: a thumb-sized box with a stub antenna and two short wire leads ending in a blasting-cap tube. Must pair visually with the remote (#1) |
-| 4 | Zapalnik elektryczny (`items/detonator.mjs`, RAW *Elektronika*: electrode + 10 m cable) → `icons/items/loot/zapalnik_elektryczny.svg` | pack `sprzet`; C4 needs it (RAW) | borrows `icons/items/loot/czesci_elektroniczne.svg` | Coil of two-strand wire with a blasting-cap electrode on one end and bare contacts on the other. No box, no antenna — must not look like #3 |
-| 5 | Schemat — **Notatka** (≤ 40 h, PLAN_produkcja §7) → `icons/items/loot/schemat_notatka.svg` | every small Schemat (granaty, amunicja, leki) | core `icons/sundries/documents/document-torn-diagram-tan.webp` (colour, off-style) | A single folded sheet of scrap paper with a hand-drawn technical sketch and a few arrows; torn corner. Smallest of the three — must read as "a note", not a book |
-| 6 | Schemat — **Instrukcja** (≤ 250 h) → `icons/items/loot/schemat_instrukcja.svg` | laptopy, broń, pancerze | core `icons/sundries/documents/notepad-clipboard-spiral.webp` | A thin spiral-bound manual with a schematic diagram on the cover (exploded view of a part). Between #5 and #7 in bulk |
-| 7 | Schemat — **Dokumentacja** (> 250 h) → `icons/items/loot/schemat_dokumentacja.svg` | pojazdy, pancerz wspomagany | core `icons/sundries/documents/blueprints-teal.webp` | A thick bundle of rolled blueprints and a binder tied with string — the biggest of the three, obviously heavy |
-| 8 | Robota — overlay badge (`production/zakladka.mjs`, inventory row of an item in progress) → `icons/items/loot/robota_nakladka.svg` | every Robota; drawn in the corner over the result's own icon | none — the Robota shows the bare result icon | Small square badge: a hammer crossed with a wrench over a half-filled progress bar. Must stay legible at 12 px, drawn over another icon |
-| 9 | Radio (NOE s. 138, production target `raw:radio`) → `icons/items/loot/radio.svg` | Serwisowanie, loot | core `icons/svg/lightning.svg` | Boxy portable radio with a telescopic antenna and a round speaker grille; must not look like the walkie-talkie `krotkofalowka.svg` |
+*Batch 41 (2026-10-03): all 9 queued sheet icons generated, normalized and wired. PNG + theme-aware SVG in `icons/items/loot/`; exact prompt in `batch_41_prompt.md`, pipeline `process_grid_41.py`, live updates and validation in IMPLEMENTATION.md. The active queue below is batch 42.*
 
 *Production targets without art, for the batch after (all fall back to `icons/svg/lightning.svg`,
 `pill.svg` or `item-bag.svg`, see `production/wynik.mjs` `IKONA_KATEGORII`): Agregat, Akumulator,

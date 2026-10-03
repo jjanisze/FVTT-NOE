@@ -32,9 +32,11 @@ import { fmtGGMM, czasWykonawcy, surowceWykonawcy, alokujSurowce } from "../conf
 import { formatToolExpr, parseToolExpr, toolExprKeys, TOOL_KEYS } from "../config/tool-expr.mjs";
 import { SUROWCE_BY_CODE, getSurowiecType } from "../config/surowce-data.mjs";
 import { allGb, SUROWCE_CODES } from "../actors/surowce-store.mjs";
+import { oknoDodajSurowce } from "../actors/surowce-inventory.mjs";
 import { isKobaltEnabled } from "../config/settings.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
+const ROBOTA_BADGE = `modules/${MODULE_ID}/icons/items/loot/robota_nakladka.svg`;
 const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
 
 /** Grupy wykonalności, w kolejności wyświetlania. */
@@ -209,7 +211,8 @@ function _htmlSurowce(d) {
     </div>`;
   }).join("");
   return `<section class="neuro-prod-sekcja neuro-prod-surowce" data-skala="${skala}">
-    <h3>Surowce <span class="hint">w gamblach</span></h3>${bars}</section>`;
+    <h3>Surowce <span class="hint">w gamblach</span>
+      <button type="button" class="neuro-prod-h3-btn" data-akcja="dodaj-surowce" data-tooltip="Dodaj surowce — to samo okno co w Zasobach"><i class="fa-solid fa-plus" inert></i> Dodaj</button></h3>${bars}</section>`;
 }
 
 function _zrodloLabel(zrodla) {
@@ -411,6 +414,7 @@ async function _onKlik(ev, actor, d) {
   if (akcja === "wprawa") return oknoWprawy(actor);
   if (akcja === "adhoc") return oknoAdHoc(actor);
   if (akcja === "miejsce") return noweMiejsce({ druzyna: druzynyAktora(actor)[0] ?? null });
+  if (akcja === "dodaj-surowce") return oknoDodajSurowce(actor);
   if (akcja === "szybka-usun") { usunZKoszyka(actor, el.dataset.przepis); return actor.sheet.render(); }
   if (akcja === "szybka-wykonaj") {
     const o = ocenaKoszyka(actor);
@@ -476,6 +480,32 @@ function _podepnij(root, actor, d) {
   root.querySelector(".neuro-prod-przepisy")?.addEventListener("mouseleave", () => _pokazPotrzeby(root, ""));
 }
 
+/** Nakładka tylko w Ekwipunku: Robota zachowuje ikonę swojego wyniku. */
+function _renderRobotaBadges(actor, root) {
+  for (const item of actor.items) {
+    if (!isRobota(item)) continue;
+    const row = root.querySelector(`[data-item-id="${item.id}"]`);
+    const icon = row?.querySelector(".item-name .item-image");
+    if (!icon || icon.closest(".neuro-robota-ikona")) continue;
+    const wrap = document.createElement("span");
+    wrap.className = "neuro-robota-ikona";
+    icon.before(wrap);
+    wrap.appendChild(icon);
+    const badge = document.createElement("img");
+    badge.className = "neuro-robota-nakladka";
+    badge.src = ROBOTA_BADGE;
+    badge.alt = "";
+    badge.setAttribute("aria-hidden", "true");
+    wrap.appendChild(badge);
+  }
+}
+
+function _onRenderRobotaBadges(app, html) {
+  const actor = app.document ?? app.actor;
+  const root = _root(html);
+  if (actor?.items && root) _renderRobotaBadges(actor, root);
+}
+
 function _onRender(app, html) {
   const actor = app.document ?? app.actor;
   if (actor?.type !== "character") return;
@@ -539,6 +569,8 @@ function _dotknieteKarty(item) {
 }
 
 export function registerZakladka() {
+  // Wspólny hak: Robota może być również w pojeździe albo Miejscu.
+  Hooks.on("renderActorSheetV2", _onRenderRobotaBadges);
   Hooks.on("renderCharacterActorSheet", _onRender);
   for (const h of ["createItem", "updateItem", "deleteItem"]) Hooks.on(h, _dotknieteKarty);
   Hooks.once("ready", () => { przygotujIkony().catch(err => console.warn(`${MODULE_ID} | ikony produkcji`, err)); });

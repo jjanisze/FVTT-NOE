@@ -10,9 +10,14 @@
  * autoDestroy and the chat-card flavour line all behave exactly as they do from the
  * native inventory row. Uses left / doses per package still come straight off
  * `system.uses`, nothing here tracks state of its own.
+ *
+ * Like every Zasoby panel it renders even when empty and ends with a „DODAJ …” button:
+ * `oknoDodajLek` picks from the chemia catalogue (grouped by subtype) and `addLekToActor`
+ * merges into the existing stack by `chemiaKey`, the same way ammo and Prowiant do.
  */
 
 import { handyToggleHtml, bindHandyToggle, registerHandyFamily } from "./handy-items.mjs";
+import { CHEMIA, CHEMIA_SUBTYPES, chemiaItemData } from "../config/chemia-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const WRAPPER_CLASS = "neuro-leki-wrapper";
@@ -60,7 +65,6 @@ function _onRenderActorSheetInjectLeki(app, html) {
   if (inventoryTab.querySelector(`.${WRAPPER_CLASS}`)) return; // one render pass, one panel
 
   const items = (actor.items || []).filter(_isChemiaItem);
-  if (!items.length) return;
 
   let totalWeight = 0;
   let totalPrice = 0;
@@ -163,12 +167,20 @@ function _onRenderActorSheetInjectLeki(app, html) {
   panel.appendChild(uiList);
 
   const footer = document.createElement("div");
-  footer.style.cssText = "display:flex; align-items:center; justify-content:flex-end; margin-top:4px; padding:4px 10px; font-size:0.85em; color:var(--color-text-secondary, #aaa);";
+  footer.style.cssText = "display:flex; align-items:center; margin-top:4px; gap:0; font-size:0.85em; color:var(--color-text-secondary, #aaa);";
   footer.innerHTML = `
+    <button type="button" class="neuro-add-leki-btn" style="flex:1; text-align:left; padding:4px 12px; background:rgba(31,51,36,0.35); border:1px solid #3a4a3d; color:var(--color-text-light-primary, #e0e0e0); white-space:nowrap; font-size:var(--font-size-13, 13px);">
+      <i class="fas fa-pills"></i> DODAJ LEK
+    </button>
     <span style="padding:0 10px;">Cena: <strong style="color:var(--color-text-light-primary, #e0e0e0);">${Math.round(totalPrice)} gb</strong></span>
     <span style="display:inline-block; width:1px; height:16px; background:#3a4a3d; margin:0;"></span>
     <span style="padding:0 10px;">Waga: <strong style="color:var(--color-text-light-primary, #e0e0e0);">${totalWeight < 1 ? Math.round(totalWeight * 1000) + " g" : totalWeight.toFixed(2) + " kg"}</strong></span>
   `;
+
+  footer.querySelector(".neuro-add-leki-btn").addEventListener("click", ev => {
+    ev.preventDefault();
+    oknoDodajLek(actor);
+  });
 
   const wrapper = document.createElement("div");
   wrapper.className = WRAPPER_CLASS;
@@ -182,4 +194,89 @@ function _onRenderActorSheetInjectLeki(app, html) {
     if (ammoWrapper) ammoWrapper.before(wrapper);
     else inventoryTab.prepend(wrapper);
   }
+}
+
+/* -------------------------------------------- */
+/*  Dodawanie                                   */
+/* -------------------------------------------- */
+
+/** Pozycje katalogu, które trafiają do panelu Leki (bez „inne” — proch i nitrogliceryna to materiały). */
+function _katalogLekow() {
+  return Object.entries(CHEMIA).filter(([, def]) => (def.itemType ?? "consumable") === "consumable");
+}
+
+/**
+ * Dodaj lek do ekwipunku aktora, scalając ze stosem o tym samym `chemiaKey`.
+ * @param {Actor} actor
+ * @param {string} key       klucz z `CHEMIA`
+ * @param {number} quantity
+ */
+export async function addLekToActor(actor, key, quantity) {
+  const def = CHEMIA[key];
+  if (!def || !(quantity > 0)) return null;
+  const existing = actor.items.find(i => _isChemiaItem(i) && i.getFlag(MODULE_ID, "chemiaKey") === key);
+  if (existing) {
+    const next = (existing.system.quantity ?? 0) + quantity;
+    await existing.update({ "system.quantity": next });
+    ui.notifications.info(`${existing.name}: ${next} szt.`);
+    return existing;
+  }
+  const [created] = await actor.createEmbeddedDocuments("Item", [chemiaItemData(key, { quantity })]);
+  ui.notifications.info(`Dodano ${quantity} × ${def.label}.`);
+  return created;
+}
+
+/** „Dodaj lek” — katalog chemii pogrupowany jak w arkuszu przedmiotu, z ceną i wagą na żywo. */
+export async function oknoDodajLek(actor) {
+  if (!actor) return null;
+  const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
+  const katalog = _katalogLekow();
+  const grupy = Object.entries(CHEMIA_SUBTYPES).map(([sub, label]) => {
+    const opcje = katalog.filter(([, d]) => d.subtype === sub)
+      .map(([k, d]) => `<option value="${k}">${esc(d.label)} — ${d.price} gb, dost. ${d.availability}%</option>`).join("");
+    return opcje ? `<optgroup label="${esc(label)}">${opcje}</optgroup>` : "";
+  }).join("");
+  const content = `
+    <div class="form-group">
+      <label>Pozycja</label>
+      <div class="form-fields"><select name="key" style="flex:1;">${grupy}</select></div>
+    </div>
+    <div class="form-group">
+      <label>Sztuk</label>
+      <div class="form-fields"><input type="number" name="qty" value="1" min="1" step="1" style="flex:1;"></div>
+    </div>
+    <hr>
+    <div style="text-align:center;">Waga: <strong class="neuro-lek-waga">0 g</strong> · Cena: <strong class="neuro-lek-cena">0</strong> gb</div>`;
+
+  const wynik = await foundry.applications.api.DialogV2.wait({
+    window: { title: "Dodaj lek", icon: "fa-solid fa-pills" },
+    position: { width: 440 },
+    content,
+    render: (_ev, dialog) => {
+      const form = dialog.element.querySelector("form");
+      const przelicz = () => {
+        const d = CHEMIA[form.elements.key.value];
+        const qty = Math.max(0, parseInt(form.elements.qty.value, 10) || 0);
+        const kg = (d?.weight ?? 0) * qty;
+        form.querySelector(".neuro-lek-waga").textContent = kg < 1 ? `${Math.round(kg * 1000)} g` : `${kg.toFixed(2)} kg`;
+        form.querySelector(".neuro-lek-cena").textContent = Math.round((d?.price ?? 0) * qty);
+      };
+      form.addEventListener("input", przelicz);
+      form.addEventListener("change", przelicz);
+      przelicz();
+    },
+    buttons: [
+      {
+        action: "add", icon: "fa-solid fa-check", label: "Dodaj", default: true,
+        callback: (_ev, button) => ({
+          key: button.form.elements.key.value,
+          qty: Math.max(1, parseInt(button.form.elements.qty.value, 10) || 1)
+        })
+      },
+      { action: "cancel", icon: "fa-solid fa-times", label: "Anuluj" }
+    ],
+    rejectClose: false
+  });
+  if (!wynik?.key) return null;
+  return addLekToActor(actor, wynik.key, wynik.qty);
 }
