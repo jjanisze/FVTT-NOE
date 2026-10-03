@@ -43,6 +43,7 @@
  * needed here at all, this only ever touches items on the SAME actor.
  */
 
+import { freeHandPill } from "../combat/grip.mjs";
 import { MEDYK_HEAL_FLAG, MEDYK_MAX_CHARGES } from "../config/toolkits-data.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
 
@@ -458,6 +459,7 @@ export async function healWithMedyk(medic, item) {
     <p>Test ${total} → próg ${tier.min}+ &nbsp;•&nbsp; <strong>+${heal} PW</strong> (${formula})</p>
     ${mods.length ? `<p style="opacity:.85;font-size:12px">${mods.join(" · ")}</p>` : ""}
     <p style="opacity:.8">Medykamenty: <strong>${newRemaining}/${max}</strong></p>
+    ${medic.inCombat ? freeHandPill(medic, { need: 2, what: "Opatrywanie" }) : ""}
   `;
   const buttons = applied
     ? ""

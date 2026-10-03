@@ -100,12 +100,14 @@ function _slotHtml({ slot, item, overflow }, editable) {
       <i class="fas fa-plus" inert></i></div>`;
   }
   const caption = handyCaption(item);
-  // Zapas w plecaku, nie ilość stosu: „×2" na kafelku czytało się jak „dwa przy pasie".
+  // Zapas w plecaku, z ikoną plecaka: „×2" czytało się jak „dwa przy pasie", a „+4" jak
+  // „są 4" (MG, 2026-10-03). Ikona mówi wprost: tyle jeszcze leży w plecaku.
   const reserve = Number(item.system.quantity ?? 1) - beltCount(item);
-  const stack = reserve > 0 ? `<span class="neuro-belt-stack" inert>+${reserve}</span>` : "";
+  const stack = reserve > 0
+    ? `<span class="neuro-belt-stack" inert><i class="fas fa-backpack" inert></i>${reserve}</span>` : "";
   return `<div class="neuro-belt-slot is-filled${overflow ? " is-overflow" : ""}" data-slot="${slot}"
       data-item-id="${item.id}" role="button" tabindex="0" ${editable ? `draggable="true"` : ""}
-      aria-label="${_esc(item.name)}"
+      aria-label="${_esc(reserve > 0 ? `${item.name} (w plecaku jeszcze ${reserve} szt.)` : item.name)}"
       data-tooltip='<section class="loading" data-uuid="${item.uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>'
       data-tooltip-class="dnd5e2 dnd5e-tooltip item-tooltip themed theme-light" data-tooltip-direction="DOWN">
       <img src="${_esc(item.img)}" alt="" inert>

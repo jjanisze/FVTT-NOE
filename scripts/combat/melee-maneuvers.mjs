@@ -12,6 +12,10 @@
  * Pochwycenie) oraz tabela akcji w `3 WALKA/czesc-01.md`.
  */
 
+import { isDollActor, heldItems, takeOff, drop as dollDrop, HAND_OCCUPANTS_FLAG } from "../actors/doll.mjs";
+import { slotLabel } from "../actors/doll-model.mjs";
+import { freeHandCheck } from "./grip.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 
 /** Rozmiary od najmniejszego; różnica indeksów = różnica kategorii rozmiaru. */
@@ -139,18 +143,25 @@ async function _pushToken(attackerToken, targetToken) {
 /*  Wytrącenie — wypuszczenie przedmiotu         */
 /* -------------------------------------------- */
 
-/** Wybór trzymanego przedmiotu i zdjęcie mu „założony"; brak modelu rąk w dnd5e. */
-async function _dropHeldItem(actor) {
-  const held = actor.items.filter(i => (i.type === "weapon") && (i.system?.equipped === true));
-  if (!held.length) return { dropped: null, reason: "cel nie ma założonej broni — MG rozstrzyga, co wypadło" };
+/**
+ * Wybór trzymanego przedmiotu i wypuszczenie go na ziemię u stóp celu (lalka, PLAN_paper_doll §5).
+ * Postać — wybór spośród rąk; BN (bez lalki, D10) — spośród założonej broni, jak dotąd.
+ * Bez MG na sesji (ziemia to Kafelki, które zakłada MG) przedmiot ląduje w plecaku celu.
+ */
+async function _dropHeldItem(actor, targetToken) {
+  const doll = isDollActor(actor);
+  const held = doll
+    ? heldItems(actor).filter(h => h.item).map(h => ({ item: h.item, from: h.slot, label: `${h.item.name} (${slotLabel(h.slot).toLowerCase()})` }))
+    : actor.items.filter(i => (i.type === "weapon") && (i.system?.equipped === true)).map(i => ({ item: i, from: null, label: i.name }));
+  if (!held.length) return { dropped: null, reason: doll ? "cel ma puste ręce" : "cel nie ma założonej broni — MG rozstrzyga, co wypadło" };
   if (!actor.canUserModify(game.user, "update")) {
     return { dropped: null, reason: "brak uprawnień do karty celu — MG zdejmuje przedmiot ręcznie" };
   }
 
-  let item = held[0];
+  let pick = held[0];
   if (held.length > 1) {
-    const options = held.map(i => `<option value="${i.id}">${i.name}</option>`).join("");
-    const id = await foundry.applications.api.DialogV2.prompt({
+    const options = held.map((h, n) => `<option value="${n}">${h.label}</option>`).join("");
+    const n = await foundry.applications.api.DialogV2.prompt({
       window: { title: `Wytrącenie — ${actor.name}` },
       content: `<p>Który przedmiot wypada z ręki?</p><select name="item">${options}</select>`,
       ok: {
@@ -159,12 +170,55 @@ async function _dropHeldItem(actor) {
       },
       rejectClose: false
     });
-    if (!id) return { dropped: null, reason: "anulowano wybór przedmiotu" };
-    item = held.find(i => i.id === id) ?? item;
+    if (n == null) return { dropped: null, reason: "anulowano wybór przedmiotu" };
+    pick = held[Number(n)] ?? pick;
   }
 
-  await item.update({ "system.equipped": false });
-  return { dropped: item, reason: null };
+  const onGround = await dollDrop(actor, pick.item, {
+    from: pick.from ?? undefined, involuntary: true, at: targetToken, reason: "Wytrącenie", quiet: false
+  });
+  if (onGround) return { dropped: pick.item, reason: null, where: "ground" };
+  // Ziemia niedostępna (brak MG) — przedmiot i tak opuszcza rękę.
+  if (doll) await takeOff(actor, pick.item, { from: pick.from, involuntary: true, quiet: true });
+  else await pick.item.update({ "system.equipped": false });
+  return { dropped: pick.item, reason: null, where: "pack" };
+}
+
+/**
+ * Czy cel mógłby chwycić trzymany przedmiot oburącz (D2: jeden przedmiot w ręce, druga pusta) —
+ * wtedy RAW daje mu Ułatwienie w RO przeciw Wytrąceniu. Tylko postacie z lalką; BN — MG.
+ */
+function _couldGripTwoHanded(actor) {
+  if (!isDollActor(actor)) return false;
+  const hands = heldItems(actor);
+  return hands.filter(h => h.item).length === 1 && hands.every(h => h.item || !h.occupant);
+}
+
+/**
+ * Pochwycenie zajmuje rękę (RAW: jedno pochwycenie na rękę) — lalka zapisuje lokatora wolnej
+ * ręki, więc pistolet w drugiej strzela jednorącz (§5, D28). Puszcza, gdy cel traci stan.
+ */
+async function _occupyHand(attacker, target) {
+  if (!isDollActor(attacker) || !attacker.isOwner) return null;
+  const free = heldItems(attacker).find(h => !h.item && !h.occupant);
+  if (!free) return null;
+  const list = (attacker.getFlag(MODULE_ID, HAND_OCCUPANTS_FLAG) ?? []).filter(o => o?.slot !== free.slot);
+  list.push({ slot: free.slot, label: `trzyma: ${target.name}`, actorUuid: target.actor?.uuid ?? null, kind: "grapple" });
+  await attacker.setFlag(MODULE_ID, HAND_OCCUPANTS_FLAG, list);
+  return free.slot;
+}
+
+/** Cel przestał być Pochwycony — zwalniamy rękę każdego, kto go trzymał. Robi to aktywny MG. */
+async function _releaseGrapple(effect) {
+  if (!game.user.isActiveGM || !effect?.statuses?.has?.("grappled")) return;
+  const uuid = effect.parent?.uuid;
+  if (!uuid) return;
+  for (const actor of game.actors) {
+    const list = actor.getFlag(MODULE_ID, HAND_OCCUPANTS_FLAG);
+    if (!Array.isArray(list) || !list.length) continue;
+    const kept = list.filter(o => !(o?.kind === "grapple" && o.actorUuid === uuid));
+    if (kept.length !== list.length) await actor.setFlag(MODULE_ID, HAND_OCCUPANTS_FLAG, kept);
+  }
 }
 
 /* -------------------------------------------- */
@@ -275,7 +329,9 @@ async function _applyEffect(attacker, attackerToken, target, maneuverId, dc, opt
 
   if (maneuverId === "pochwycenie") {
     await actor.toggleStatusEffect("grappled", { active: true });
-    await say(`${prefix} i zostaje <b>Pochwycony</b>. ST Wyzwalania się: <b>${dc}</b>.`);
+    const hand = await _occupyHand(attacker, target);
+    await say(`${prefix} i zostaje <b>Pochwycony</b>. ST Wyzwalania się: <b>${dc}</b>.`
+      + (hand ? ` ${attacker.name} trzyma go: ${slotLabel(hand).toLowerCase()}.` : ""));
     return;
   }
 
@@ -292,9 +348,9 @@ async function _applyEffect(attacker, attackerToken, target, maneuverId, dc, opt
     return;
   }
 
-  const { dropped, reason } = await _dropHeldItem(actor);
+  const { dropped, reason, where } = await _dropHeldItem(actor, target);
   await say(dropped
-    ? `${prefix} — z ręki wypada mu <b>${dropped.name}</b> (przedmiot odłożony jako niezałożony).`
+    ? `${prefix} — z ręki wypada mu <b>${dropped.name}</b>${where === "ground" ? " i ląduje u jego stóp" : " (bez MG na sesji — do plecaka)"}.`
     : `${prefix} — przedmiot wypada z ręki (${reason}).`);
 }
 
@@ -322,6 +378,11 @@ export async function openManeuverDialog({ maneuver = "pochwycenie", actor } = {
   }
 
   const aramis = hasAramis(attacker);
+  // D2: cel z jednym przedmiotem w ręce i wolną drugą może go chwycić oburącz → Ułatwienie.
+  const targets = [...game.user.targets];
+  const twoHanded = targets.length === 1 && _couldGripTwoHanded(targets[0].actor);
+  const grip = freeHandCheck(attacker, 1);
+  const noHand = grip && !grip.ok;
   const opts = Object.entries(MANEUVERS)
     .map(([id, d]) => `<option value="${id}"${id === maneuver ? " selected" : ""}>${d.label}</option>`).join("");
 
@@ -338,8 +399,9 @@ export async function openManeuverDialog({ maneuver = "pochwycenie", actor } = {
           <option value="push">Odepchnięcie o 1,5 m</option>
         </select></div></div>
       <div class="form-group" data-only="wytracenie"><label>Cel trzyma oburącz</label>
-        <div class="form-fields"><input type="checkbox" name="advantage"></div>
-        <p class="hint">Ułatwienie w RO celu.</p></div>
+        <div class="form-fields"><input type="checkbox" name="advantage"${twoHanded ? " checked" : ""}></div>
+        <p class="hint">Ułatwienie w RO celu.${twoHanded ? " Cel ma wolną drugą rękę, więc może chwycić oburącz." : ""}</p></div>
+      ${noHand ? `<p class="notes" data-only="pochwycenie"><i class="fas fa-hand"></i> ${attacker.name} nie ma wolnej ręki (${grip.held.join(", ")}). RAW wymaga jednej — decyduje MG.</p>` : ""}
       <div class="form-group"><label>Utrudnienie w RO celu</label>
         <div class="form-fields"><input type="checkbox" name="disadvantage"${aramis ? " checked" : ""}></div>
         ${aramis ? '<p class="hint">Aramis: Rozbrajanie daje celowi Utrudnienie.</p>' : ""}</div>
@@ -388,6 +450,8 @@ export async function openManeuverDialog({ maneuver = "pochwycenie", actor } = {
 const FEATURE_SHORTCUTS = { "z-bara": "odepchniecie" };
 
 export function registerMeleeManeuvers() {
+  Hooks.on("deleteActiveEffect", effect => { _releaseGrapple(effect); });
+
   Hooks.on("getSceneControlButtons", controls => {
     const tokenTools = controls.tokens?.tools;
     if (!tokenTools) return;

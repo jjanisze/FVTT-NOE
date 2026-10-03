@@ -168,14 +168,16 @@ export const ARMORS = [
     ac: null, acBonus: 1, dex: null, strength: 11, stealth: null, donTime: 1,
     weight: 8, price: 60, avail: 40,
     note: "Kevlar, blacha albo powłoki potworów. +1 do TT.",
-    manual: ["Nie działają razem z ciężkim pancerzem. Moduł tego nie blokuje — pilnuje MG."]
+    manual: ["Nie działają razem z ciężkim pancerzem — Oporządzenie zdejmuje jedno, gdy zakładasz drugie "
+      + "(o zdjęcie pancerza pyta)."]
   },
   {
     id: "ochraniacze-rak", name: "Ochraniacze rąk (para)", cat: "Akcesorium", armorType: "trinket",
     ac: null, acBonus: 1, dex: null, strength: 11, stealth: null, donTime: 1,
     weight: 4, price: 40, avail: 50,
     note: "Kevlar, blacha albo powłoki potworów. +1 do TT.",
-    manual: ["Nie działają razem z ciężkim pancerzem. Moduł tego nie blokuje — pilnuje MG."]
+    manual: ["Nie działają razem z ciężkim pancerzem — Oporządzenie zdejmuje jedno, gdy zakładasz drugie "
+      + "(o zdjęcie pancerza pyta)."]
   },
   {
     id: "tarcza", name: "Tarcza", cat: "Akcesorium", armorType: "shield",
@@ -189,7 +191,7 @@ export const ARMORS = [
       "Osłona [R]: w zasięgu ataku obszarowego — Ułatwienie w RO na Zręczność.",
       "Parowanie [R]: po trafieniu atakiem wręcz — +5 TT wobec ataków tego "
       + "przeciwnika do początku Twojej następnej tury.",
-      "Wymóg wolnej ręki nie jest sprawdzany."
+      "Zajmuje rękę — działa tylko trzymana."
     ]
   }
 ];
@@ -213,7 +215,8 @@ export const ARMOR_GLOBAL_MANUAL = Object.freeze([
   + "Moduł nie modyfikuje odpoczynku.",
   "Utrudnienie w kolumnie „Skradanie się / Pływanie” obejmuje też Testy Siły "
   + "(Atletyka) przy pływaniu. Automatyzujemy wyłącznie Skradanie się.",
-  "Czas zakładania i ściągania (1 / 2 / 4 akcje) nie jest egzekwowany."
+  "Czas zakładania i ściągania (1 / 2 / 4 akcje) jest pokazywany w walce na linii ruchu Oporządzenia, "
+  + "nie liczony ani nie blokowany."
 ]);
 
 /* -------------------------------------------- */
@@ -301,7 +304,9 @@ export function buildArmorItemData(a, extra = {}) {
     [MODULE_ID]: {
       availability: a.avail,
       armorCategory: a.cat,
-      donTime: a.donTime
+      donTime: a.donTime,
+      // Tożsamość dla lalki (hełm, ochraniacze, pancerz wspomagany) — `actors/doll-model.mjs`.
+      armorId: a.id
     }
   };
   if (a.dt) flags[MODULE_ID].armorDT = a.dt;

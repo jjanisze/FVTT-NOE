@@ -25,7 +25,11 @@ export { registerGadzety, gadzetyApi } from "./items/gadzety.mjs";
 
 // Catalog entries spliced into an otherwise-RAW array/object by the host file named.
 export { KOBALT_AMMO, KOBALT_EXPLOSIVES } from "./config/ammo-data.mjs";  // → config/ammo-data.mjs
-export { KOBALT_WEAPONS, LASKA, MIECZ, PISTOLET_NA_RACE, ZLOTY_DESERT_EAGLE } from "./config/weapons-data.mjs"; // → config/weapons-data.mjs
+export {
+  KOBALT_WEAPONS, LASKA, MIECZ, PISTOLET_NA_RACE, ZLOTY_DESERT_EAGLE,
+  KOBALT_VENDOR_TRASH, KOBALT_WEAPON_IDS
+} from "./config/weapons-data.mjs"; // → config/weapons-data.mjs, actors/ground-items.mjs
+export { POWER_ARMOR_BLOCKS_KOBALT } from "./config/doll-kobalt.mjs"; // → actors/doll.mjs
 export { KOBALT_DISEASES, SCHIZOFRENIA_PARANOIDALNA_ID } from "./config/diseases-data.mjs"; // → config/diseases-data.mjs, config/disease-effects.mjs, config/chemia-data.mjs
 export { KOBALT_PHOBIAS } from "./config/phobias-data.mjs";               // → config/phobias-data.mjs
 export { KOBALT_ARMORS } from "./config/armor-data.mjs";                  // → config/armor-data.mjs

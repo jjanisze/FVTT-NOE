@@ -1,3 +1,4 @@
+import { firedOneHanded } from "../combat/grip.mjs";
 import { getMag, spendRounds } from "./magazine.mjs";
 import { lastConsumedRounds, dominantCaliber, weaponEntry } from "./magazine-model.mjs";
 import { effectiveDamageFor } from "./ammo.mjs";
@@ -353,14 +354,19 @@ function registerLongBurstActivityType() {
           ? Math.max(0, dc - coverDecision.adjustedDexSaveBonus)
           : _resolveActivitySaveDc(this);
         const coverSummary = describeCoverDecision(coverDecision);
+        // RAW (Broń, Długa seria): strzał jedną ręką daje celom Ułatwienie w RO. Domyślne
+        // w oknie, do zmiany (PLAN_paper_doll §5) — ręce czyta lalka.
+        const oneHanded = firedOneHanded(this.item);
+        const flavorParts = [coverSummary, oneHanded ? "strzał jedną ręką: Ułatwienie" : null].filter(Boolean);
 
         await actor.rollSavingThrow({
           event,
           ability,
-          target: adjustedDc
+          target: adjustedDc,
+          ...(oneHanded ? { advantage: true } : {})
         }, {}, {
           data: {
-            flavor: coverSummary ? `Długa seria (${coverSummary})` : "Długa seria",
+            flavor: flavorParts.length ? `Długa seria (${flavorParts.join("; ")})` : "Długa seria",
             speaker
           }
         });

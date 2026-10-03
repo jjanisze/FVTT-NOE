@@ -3,7 +3,7 @@
  *
  * Spliced back into their original category arrays in `config/weapons-data.mjs` (not appended
  * to the end of `WEAPONS`), so category-contiguous ordering in that file's exports is unchanged.
- * Same entry shape — see that file's header comment for field meanings. None of these three has
+ * Same entry shape — see that file's header comment for field meanings. None of these has
  * a RAW rulebook basis: Laska and Miecz are one-off stat writeups for a specific PC's existing
  * gear, Pistolet na Race is a wholly homebrew weapon built to fire Raca ammo
  * (`wkk/config/ammo-data.mjs`) / feed `wkk/items/pistolet-na-race.mjs`.
@@ -74,5 +74,55 @@ export const ZLOTY_DESERT_EAGLE = {
     + "Bierze zwykłe magazynki do Desert Eagle."
 };
 
+/*
+ * „Śmieci sprzedawcy" (PLAN_paper_doll D36). Bestiariusz atakuje przedmiotami, których nie ma
+ * w tabeli broni NOE — maczugą, pałką, kamiennym nożem, sztyletem, młotkiem. Żeby BN padający
+ * przy 0 PW (D34) miał co upuścić, dostają tu wpisy: słabsze od najbliższych kuzynów z RAW
+ * (Bejsbol/Rurka, Nóż taktyczny, Kastet), tanie i pospolite — łup, który się sprzedaje, nie
+ * podnosi. Statystyki ustalił agent wdrażający lalkę (2026-10-03) — do przejrzenia przez MG.
+ * Ikony pożyczone do czasu partii 42 (`dev/icons/MISSING.md` §A).
+ */
+export const MACZUGA = {
+  id: "maczuga", name: "Maczuga", type: "biala", icon: "iron_pipe_club.svg",
+  damage: { number: 1, denomination: 6, types: ["bludgeoning"] },
+  props: [],
+  weight: 2, price: 5, avail: 90,
+  note: "Ciężki, nierówny kij — czasem nabity gwoździami. Gorsza od bejsbola: ani oburęczna, ani powalająca."
+};
+export const PALKA_POLICYJNA = {
+  id: "palka-policyjna", name: "Pałka policyjna", type: "biala", icon: "iron_pipe_club.svg",
+  damage: { number: 1, denomination: 4, types: ["bludgeoning"] },
+  props: ["lgt"],
+  weight: 0.6, price: 8, avail: 60,
+  note: "Gumowa albo drewniana pałka służbowa. Lekka — dobra do drugiej ręki, słaba w pierwszej."
+};
+export const KAMIENNY_NOZ = {
+  id: "kamienny-noz", name: "Kamienny nóż", type: "biala", icon: "combat_knife.svg",
+  damage: { number: 1, denomination: 4, types: ["piercing"] },
+  props: ["lgt"],
+  weight: 0.3, price: 1, avail: 90,
+  note: "Ociosany krzemień albo szkło na rzemieniu. Tępieje po pierwszej walce."
+};
+export const SZTYLET = {
+  id: "sztylet", name: "Sztylet", type: "biala", icon: "combat_knife.svg",
+  damage: { number: 1, denomination: 4, types: ["piercing"] },
+  props: ["fin", "lgt"],
+  weight: 0.4, price: 6, avail: 70,
+  note: "Wąskie, obosieczne ostrze domowej roboty. Finezyjny, ale krótszy i słabszy od noża taktycznego."
+};
+export const MLOTEK = {
+  id: "mlotek", name: "Młotek", type: "biala", icon: "iron_pipe_club.svg",
+  damage: { number: 1, denomination: 4, types: ["bludgeoning"] },
+  props: ["lgt"],
+  weight: 0.7, price: 3, avail: 90,
+  note: "Zwykły młotek ciesielski. Narzędzie, które czasem robi za broń."
+};
+
+/** Śmieci sprzedawcy razem — do splotu z bronią białą w `config/weapons-data.mjs`. */
+export const KOBALT_VENDOR_TRASH = [MACZUGA, PALKA_POLICYJNA, KAMIENNY_NOZ, SZTYLET, MLOTEK];
+
 /** All WKK-only weapons, for anything that wants the full set rather than one category. */
-export const KOBALT_WEAPONS = [LASKA, MIECZ, PISTOLET_NA_RACE, ZLOTY_DESERT_EAGLE];
+export const KOBALT_WEAPONS = [LASKA, MIECZ, PISTOLET_NA_RACE, ZLOTY_DESERT_EAGLE, ...KOBALT_VENDOR_TRASH];
+
+/** Id wszystkich broni WKK — bramka Kobaltu dla upuszczeń z Bestiariusza (D36). */
+export const KOBALT_WEAPON_IDS = Object.freeze(KOBALT_WEAPONS.map(w => w.id));

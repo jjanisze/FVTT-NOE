@@ -113,13 +113,18 @@ import { registerMolotov } from "./actors/molotov.mjs";
 import { registerPlacedCharges, chargesApi } from "./actors/placed-charges.mjs";
 import { registerSurowceInventory } from "./actors/surowce-inventory.mjs";
 import { registerLekiInventory } from "./actors/leki-inventory.mjs";
-import { registerHandyItems } from "./actors/handy-items.mjs";
+import { registerDoll, dollApi } from "./actors/doll.mjs";
+import { registerDollPanel } from "./actors/doll-panel.mjs";
+import { registerDollRows } from "./actors/doll-rows.mjs";
+import { registerGroundItems, groundApi } from "./actors/ground-items.mjs";
 import { registerHandyBelt } from "./actors/handy-belt.mjs";
 import { registerProwiantInventory } from "./actors/prowiant-inventory.mjs";
 import { registerEncumbranceBreakdown } from "./actors/encumbrance-breakdown.mjs";
 import { registerEncumbranceConfig } from "./config/encumbrance-config.mjs";
 import { registerUdzwigSlowdown } from "./actors/udzwig-slowdown.mjs";
 import { registerUdzwigAttackDisadvantage } from "./combat/udzwig-attack-disadvantage.mjs";
+import { registerGrip } from "./combat/grip.mjs";
+import { registerDropOnFail } from "./combat/drop-on-fail.mjs";
 import { registerSheetShell } from "./actors/sheet-shell.mjs";
 import { registerVehiclePortraitToggle } from "./actors/vehicle-portrait.mjs";
 import { registerClassResourceDice } from "./actors/class-resource-dice.mjs";
@@ -253,7 +258,12 @@ Hooks.once("init", () => {
   registerDetonator();
   registerSurowceInventory();
   registerLekiInventory();
-  registerHandyItems();
+  // Lalka (PLAN_paper_doll): sloty rąk, kabur, pasa i noszonego; `equipped` = aktywny.
+  registerDoll();
+  registerDollPanel();
+  registerDollRows();
+  // Ziemia (PLAN_paper_doll §9): upuszczone przedmioty jako Kafelki, przekaźnik MG. Ustawienia świata → init.
+  registerGroundItems();
   registerHandyBelt();
   registerProwiantInventory();
   // Must precede any actor prepareDerivedData — Udźwig thresholds read these CONFIG
@@ -262,6 +272,10 @@ Hooks.once("init", () => {
   registerEncumbranceBreakdown();
   registerUdzwigSlowdown();
   registerUdzwigAttackDisadvantage();
+  // Chwyt (lalka, PLAN_paper_doll §5): strzał jedną ręką, oburęczna, dwuręczna, atak drugą ręką.
+  registerGrip();
+  // „Poddaj się!" (Szeryf) — oblany RO: broń z rąk postaci leci na ziemię.
+  registerDropOnFail();
   registerWeapons();
   registerArmor();
   registerArmorRules();
@@ -445,6 +459,11 @@ Hooks.once("ready", () => {
 
   // Manewry wręcz — game.neuroshima.manewry.pochwycenie(), .odepchniecie(), .wytracenie()
   game.neuroshima.manewry = maneuversApi;
+
+  // Lalka — game.neuroshima.lalka.place(actor, item, "hand.0"), .locationOf(item), .migrate()
+  game.neuroshima.lalka = dollApi;
+  // Ziemia — game.neuroshima.ziemia.sweep() (MG: sprząta przedmioty ze sceny), .nearby(actor)
+  game.neuroshima.ziemia = groundApi;
 
   registerWeaponSounds();
   registerEngineControls();

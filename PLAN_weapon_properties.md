@@ -1,6 +1,7 @@
 # Plan: Egzekwowanie Właściwości Broni (Weapon Properties)
 
-> Status (2026-09-26): tabela w §1 zaktualizowana do stanu kodu. Otwarte pozycje są zaplanowane
+> Status (2026-10-03): `poreczna`, `powracajaca`, dwuręczna/oburęczna i lekka — ✅ przez lalkę
+> (`PLAN_paper_doll.md`). Wcześniej (2026-09-26): tabela w §1 zaktualizowana do stanu kodu. Otwarte pozycje są zaplanowane
 > w `PLAN_beta.md`: `ppanc`/`przebijajaca` przeciw pancerzowi BG — M1; `dluga`/`ciezka`/`jednorazowa`
 > oraz `burzaca`/`karczujaca` na aktorze-obiekcie — M6.
 >
@@ -52,8 +53,10 @@ Legenda: ✅ egzekwowane · 🟡 częściowe · ⚙️ do zrobienia (sensowne) �
 | `dublet` | 2 pociski, 1 test, podwójne kości | ✅ | `fire-modes.mjs` — osobny tryb, koszt 2 nabojów, bramkowany właściwością |
 | `karczujaca` | Podwójne obrażenia roślinom/drewnu | 🚫 | jak `burzaca`, ale węższe — brak natywnego typu "obiekt/roślina" |
 | `cicha` | Nie zdradza pozycji / Niewidoczność | 🚫 | brak systemu skradania/widoczności w module — ręcznie |
-| `poreczna` | Strzał jedną ręką bez Utrudnienia | 🚫 | nie egzekwujemy kary "jedna ręka", więc nie ma czego znosić |
-| `powracajaca` | Broń wraca na końcu tury | 🚫 | flavor/ekwipunek — niski zysk, ręcznie |
+| `poreczna` | Strzał jedną ręką bez Utrudnienia | ✅ | `combat/grip.mjs` — lalka zna ręce; strzał jedną ręką ma domyślne Utrudnienie, `poreczna` je znosi (2026-10-03) |
+| `powracajaca` | Broń wraca na końcu tury | ✅ | `weapons/thrown.mjs` — po rzucie nic nie znika, karta przypomina o wolnej ręce do złapania (2026-10-03) |
+| `two` / `ver` (dnd5e) | Dwuręczna / oburęczna | ✅ | `combat/grip.mjs` — oburęczna: chwyt oburącz domyślnie, gdy druga ręka wolna; dwuręczna jedną ręką — ostrzeżenie (D3) |
+| `lgt` (dnd5e) | Lekka — atak drugą ręką | ✅ | `combat/grip.mjs` — tryb „drugą ręką" tylko z dwiema lekkimi w rękach; zdolności czynią broń palną krótką lekką |
 | `spalinowa` | Wymaga paliwa (0.5l / 30min) | 🟡 | `engine.mjs` — start/stop + pętla dźwięku (Sequencer); **zasób paliwa nietrackowany**, zarządzany ręcznie przez gracza+MG |
 | `zasilana` | Wymaga prądu (~5 ataków/bateria) | 🚫(odroczone) | jak `spalinowa` |
 | `co` | Fabryczny celownik optyczny | 🚫 | flavor + interakcja z addonami (już działa kontekstowo) |
@@ -135,10 +138,9 @@ Plan:
 - **`cicha`.** Moduł nie ma systemu skradania/widoczności (Niewidoczność, detekcja pozycji).
   Bez tego nie ma czego automatyzować — MG stosuje opisowo. Do rozważenia dopiero gdyby powstał
   podsystem stealth.
-- **`poreczna`.** Znosi karę za strzał jedną ręką — ale tej kary **nie egzekwujemy** (nie ma
-  trackingu "ile rąk"). Bez kary bazowej właściwość nie ma efektu do automatyzacji.
-- **`powracajaca`.** Czysto ekwipunkowe/narracyjne; niski zysk względem kosztu (śledzenie rzutu
-  i zwrotu broni miotanej). Ręcznie.
+- ~~**`poreczna`**, **`powracajaca`**~~ — przeniesione do ✅ (2026-10-03): lalka
+  (`PLAN_paper_doll.md`) dała model rąk, więc kara za strzał jedną ręką i powrót rzuconej broni
+  mają się do czego odnieść.
 - **`spalinowa` (zasób) / `zasilana` (całość).** Zasób paliwa/baterii — pasuje do warstwy
   survival (Phase 4), modelowalne jak Dozownik (zasób dawek). Odroczone, nie blokuje walki.
   Start/stop silnika i pętla dźwięku dla `spalinowa` **są** zaimplementowane (`engine.mjs`) —

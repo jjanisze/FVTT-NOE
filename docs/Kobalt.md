@@ -146,6 +146,35 @@ Podręcznik nie mówi, co się dzieje z porzuconą produkcją ani ile waży. Z K
 ✅ *Porzucenie w menu Roboty (⋯), waga Roboty i Schematu w udźwigu; bez Kobaltu przycisku porzucenia
 nie ma.*
 
+### 11. Oporządzenie: pancerz wspomagany zabiera hełm, Głowę, Twarz i Strój
+
+W Oporządzeniu (zob. `PLAN_paper_doll.md`) pancerz wspomagany Stalowej Policji i wojskowy pancerz
+hydrauliczny to w podręczniku zwykłe ciężkie pancerze: wykluczają ochraniacze, hełm wolno. Z
+Kobaltem zajmują też **Hełm, Głowę, Twarz i Strój** — szczelność pancerza robi za maskę
+przeciwgazową, a najlepszy pancerz w grze ma kosztować stare zabawki. Latarka na Ramieniu zostaje.
+
+✅ *Założenie takiego pancerza zdejmuje rzeczy z tych slotów do plecaka; założenie czegoś na nie
+pyta, czy zdjąć pancerz.*
+
+### 12. Darmowe upuszczanie (opcja, domyślnie wyłączona)
+
+Bez Kobaltu upuszczenie broni to Darmowa Interakcja (albo Używanie, gdy [I] już zużyta) — jak
+dobycie. Z opcją *Darmowe upuszczanie* upuszczenie broni **z własnej woli** nic nie kosztuje, ale
+rzucasz **k6**: na 1–2 broń cierpi — ostrze dostaje wyszczerbienie, broń palna uszkodzenie (to
+bardziej złożone urządzenie niż topór). Upuszczenie wymuszone (Wytrącenie, „Poddaj się!") nigdy
+nie rzuca. Zasada z testów autora systemu.
+
+✅ *Ustawienie świata „Darmowe upuszczanie (WKK)" — widoczne tylko z Kobaltem.*
+
+### 13. Śmieci sprzedawcy z Bestiariusza
+
+Część ludzi z Bestiariusza walczy przedmiotami, których nie ma w tabeli broni: maczugą, pałką
+policyjną, kamiennym nożem, sztyletem, młotkiem. Z Kobaltem to prawdziwe bronie (słabsze od
+najbliższych z podręcznika: Bejsbola, Noża taktycznego) i BN padający przy 0 PW je upuszcza. Bez
+Kobaltu te ataki niczego nie zostawiają.
+
+✅ *Statystyki: `scripts/wkk/config/weapons-data.mjs` — do przejrzenia przez MG.*
+
 ## Dopisywanie nowej zasady
 
 Każda nowa zasada Kobaltu jako osobny nagłówek `###`, w miarę możności:

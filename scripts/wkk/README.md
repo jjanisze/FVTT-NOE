@@ -38,8 +38,8 @@ other tables running this module — but every such fragment carries an explicit
 where it came from. It is **not** gated behind the Kobalt toggle and it does **not** go in
 `scripts/wkk/`.
 
-Currently five fragments — two from the magazine rebuild, one grenade-range ruling, one erratum,
-one crafting ruling:
+Currently six entries — two from the magazine rebuild, one grenade-range ruling, one erratum,
+one crafting ruling, and the paper doll (a whole inferred system, listed as one row with its parts):
 
 | Mechanic | Where |
 |---|---|
@@ -48,6 +48,7 @@ one crafting ruling:
 | Grenade throw range floor is 18 m — "minimum 9" applies to the modifier term, resolving the rulebook's own rule-vs-example contradiction | `actors/grenade-inventory.mjs`, `_throwRangeMeters()` (+ its copy in `wkk/items/flara.mjs`) |
 | Cywil's Widły deal piercing damage — the October printing dropped the type (March had it) | `dev/bestiary/gen_bestiary.py`, `AUTOMATION["cywil.widly-tylko-farmer"]` |
 | Spec profession recipe tables (NOE s. 80–84) apply **only to that profession** and stand **beside** the standard formula recipe, not instead of it; their tool requirement is the profession kit **and** the item's usual requirement (PLAN_produkcja D22, confirmed 2026-09-27) | `config/recipes-data.mjs`, `_zbudujPrzepisy()` |
+| **Lalka** (`PLAN_paper_doll.md`, author's fill-the-blanks principle, 2026-10-02): slot geometry; hand ⟂ holster; Głowa / Twarz / Ramię / Strój and their 1-Akcja cost; devices needing a slot; auto placement and displacement; grip superposition (two-handed iff the other hand is empty); an Akcja to put something into the pack; free-hand notes for belt items; the ground as the destination of drops; power armour allowing a helmet; visibility modifiers not stacking; NPCs dropping weapons at 0 PW; the NOE rows of the `dropsAs` table; rounds in a dropped catalog gun (D37). Conscious deviation, cost-neutral: Noktowizor/Termowizor strapped on the head (RAW lists helmet mounting) | `actors/doll-model.mjs`, `actors/doll.mjs`, `combat/grip.mjs`, `actors/ground-items.mjs`, `dev/bestiary/gen_bestiary.py` (`AUTOMATION`, `dropsAs`) |
 
 **Repo is public.** Attributing unpublished rulings to a named person should be cleared with
 them before it lands in a code comment — so the comments state the mechanic and its reasoning,
@@ -68,7 +69,8 @@ Zwinne dłonie check (author's idea, this table's numbers — see `TODO_mechanik
 | `wkk/items/zeton-luxor.mjs` | Żeton Luxor prop |
 | `wkk/items/gadzety.mjs` | The 4 flavor click-items |
 | `wkk/config/ammo-data.mjs` | `44mag_dd`, `race` ammo entries; `grenade-signal` (Granat sygnałowy) |
-| `wkk/config/weapons-data.mjs` | `pistolet-na-race`, `laska`, `miecz`, `zloty-desert-eagle` weapon entries |
+| `wkk/config/weapons-data.mjs` | `pistolet-na-race`, `laska`, `miecz`, `zloty-desert-eagle` weapon entries; the five bestiary "vendor trash" weapons (`maczuga`, `palka-policyjna`, `kamienny-noz`, `sztylet`, `mlotek` — PLAN_paper_doll D36) and `KOBALT_WEAPON_IDS` (the Kobalt gate for bestiary drops) |
+| `wkk/config/doll-kobalt.mjs` | Paper doll: power armour also excludes Hełm, Głowa, Twarz, Strój (D23). Host: `actors/doll.mjs` / `doll-model.mjs` (`HEAVY_ARMOR_BLOCKS_RAW`). The other WKK doll rule, „Darmowe upuszczanie" (D19), is a world setting registered in `actors/ground-items.mjs`, read only with Kobalt on |
 | `wkk/config/diseases-data.mjs` | Schizofrenia paranoidalna + its stable id |
 | `wkk/config/phobias-data.mjs` | Mizoofobia |
 | `wkk/config/armor-data.mjs` | Kamizelka taktyczna (light armour, +1 handy slot) |

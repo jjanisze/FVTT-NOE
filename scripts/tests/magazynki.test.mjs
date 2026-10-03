@@ -30,6 +30,7 @@ import {
   handyLimit, beltSlots, addToBelt, moveBeltPiece, __testing as handy
 } from "../actors/handy-items.mjs";
 import { ARMOR_MAP, buildArmorItemData } from "../config/armor-data.mjs";
+import { place, takeOff } from "../actors/doll.mjs";
 import { buildKwasItemData, KWAS_ACTIVITY_ID } from "../items/kwas.mjs";
 import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup, captureWarnings } from "./helpers.mjs";
 
@@ -516,35 +517,14 @@ export function registerMagazynkiTests(quench) {
         expect(handyFamilyOf({ ...data, getFlag: (s, k) => data.flags[s]?.[k] })).to.equal("gear");
       });
 
-      it("rozkład slotów: pozycje zostają, dziury też; stara flaga zajmuje pierwsze wolne", function () {
-        const e = (id, positions, legacy = 0, quantity = 9) => ({ id, positions, legacy, quantity });
-        expect(handy.layoutSlots([e("a", [2]), e("b", [0])], 3)).to.deep.equal(["b", null, "a"]);
-        expect(handy.layoutSlots([e("a", [1]), e("b", [], 2)], 3)).to.deep.equal(["b", "a", "b"]);
-        expect(handy.layoutSlots([e("a", [0]), e("b", [0])], 3), "kolizja → pierwszy wolny").to.deep.equal(["a", "b", null]);
-        expect(handy.layoutSlots([e("a", [0, 1, 2, 3])], 3), "nadmiar po utracie slotu").to.deep.equal(["a", "a", "a", "a"]);
-        expect(handy.layoutSlots([e("a", [0, 1, 2], 0, 1)], 3), "przycięte do ilości").to.deep.equal(["a", null, null]);
-      });
-
-      it("zużycie z klikniętego kafelka zdejmuje TEN slot, inaczej najwyższy", function () {
-        expect(handy.positionsAfterSpend([0, 2], 5, 4, 0)).to.deep.equal([2]);
-        expect(handy.positionsAfterSpend([0, 2], 5, 4)).to.deep.equal([0]);
-        expect(handy.positionsAfterSpend([0, 2], 2, 0, 2)).to.deep.equal([]);
-        expect(handy.positionsAfterSpend([0, 2], 5, 7)).to.deep.equal([0, 2]);
-      });
-
       it("pojemność: 3 z RAW + sloty z założonego ekwipunku, zdjęty nie liczy się", function () {
         expect(handy.handyCapacity([])).to.equal(3);
         expect(handy.handyCapacity([{ equipped: true, slots: 1 }])).to.equal(4);
         expect(handy.handyCapacity([{ equipped: false, slots: 1 }])).to.equal(3);
       });
 
-      it("ubytek schodzi najpierw z pasa, przybytek idzie do plecaka", function () {
-        const f = handy.beltAfterQuantityChange;
-        expect(f(2, 7, 6)).to.equal(1);   // zużyta sztuka z pasa
-        expect(f(2, 7, 4)).to.equal(0);   // pas pusty, reszta z plecaka
-        expect(f(2, 7, 9)).to.equal(2);   // dokupione — do plecaka
-        expect(f(3, 3, 0)).to.equal(0);
-      });
+      // Rozkład slotów i kolejność zużycia mieszkają od lalki w `actors/doll-model.mjs` —
+      // testuje je paczka `lalka` (`slotsAfterSpend`, `layoutOf`).
 
       describe("liczone w sztukach, nie w stosach (decyzja MG)", function () {
         let stack;
@@ -604,17 +584,18 @@ export function registerMagazynkiTests(quench) {
           }
         });
 
-        it("Kamizelka taktyczna (WKK) założona: 4 sloty; zdjęta: 3, nadmiar zostaje", async function () {
-          const vestData = buildArmorItemData(ARMOR_MAP["kamizelka-taktyczna"]);
-          vestData.system.equipped = true;
-          const [vest] = await actor.createEmbeddedDocuments("Item", [vestData], { render: false });
+        it("Kamizelka taktyczna (WKK) założona: 4 sloty; zdjęta: 3, nadmiar wraca do plecaka", async function () {
+          const [vest] = await actor.createEmbeddedDocuments("Item",
+            [buildArmorItemData(ARMOR_MAP["kamizelka-taktyczna"])], { render: false });
           try {
+            expect(await place(actor, actor.items.get(vest.id), "body.0", { quiet: true })).to.equal(true);
             expect(handyLimit(actor)).to.equal(4);
             expect(await setBeltCount(live(), 4)).to.equal(true);
-            await actor.items.get(vest.id).update({ "system.equipped": false });
+            // D5: nadmiar nie może trwać — ładownice odchodzą z kamizelką (PLAN_paper_doll §4).
+            expect(await takeOff(actor, actor.items.get(vest.id), { quiet: true })).to.equal(true);
             expect(handyLimit(actor)).to.equal(3);
-            expect(beltCount(live()), "nic nie spada z pasa").to.equal(4);
-            expect(beltSlots(actor).filter(s => s.overflow).length).to.equal(1);
+            expect(beltCount(live()), "czwarta sztuka w plecaku").to.equal(3);
+            expect(beltSlots(actor).filter(s => s.overflow).length).to.equal(0);
           } finally {
             await actor.deleteEmbeddedDocuments("Item", [vest.id], { render: false });
           }

@@ -5,7 +5,7 @@
  * Content comes from Podrecznik/NOE/13 NOTATNIK ŁOWCY/ via extract_bestiary.py;
  * automation metadata comes from the RULES/AUTOMATION layers in the generator.
  *
- * 52 creatures, 260 features (89 automated), 1 attack riders.
+ * 52 creatures, 260 features (90 automated), 1 attack riders.
  */
 
 export const BESTIARY = {
@@ -28,6 +28,7 @@ export const BESTIARY = {
           "formula": "2d10 + 4",
           "type": "bludgeoning"
         },
+        "dropsAs": null,
         "id": "piesc",
         "kind": "mwak",
         "name": "Pięść",
@@ -44,6 +45,7 @@ export const BESTIARY = {
           "formula": "6d6",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "ryjossawka",
         "kind": "mwak",
         "name": "Ryjossawka",
@@ -179,6 +181,7 @@ export const BESTIARY = {
           "formula": "2d10 + 2",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "zadlo",
         "kind": "mwak",
         "name": "Żądło",
@@ -195,6 +198,7 @@ export const BESTIARY = {
           "formula": "3d8 + 3",
           "type": "radiant"
         },
+        "dropsAs": null,
         "id": "karabin-laserowy",
         "kind": "rwak",
         "name": "Karabin laserowy",
@@ -349,6 +353,7 @@ export const BESTIARY = {
           "formula": "1d8 + 3",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "pazury",
         "kind": "mwak",
         "name": "Pazury",
@@ -482,6 +487,7 @@ export const BESTIARY = {
           "formula": "1d6 + 2",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "pazury",
         "kind": "mwak",
         "name": "Pazury",
@@ -502,6 +508,7 @@ export const BESTIARY = {
           "formula": "1d4 + 2",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "ugryzienie",
         "kind": "mwak",
         "name": "Ugryzienie",
@@ -669,6 +676,7 @@ export const BESTIARY = {
           "formula": "1d8 + 5",
           "type": "slashing"
         },
+        "dropsAs": "szabla",
         "id": "szabla",
         "kind": "mwak",
         "name": "Szabla",
@@ -685,6 +693,7 @@ export const BESTIARY = {
           "formula": "1d6 + 5",
           "type": "piercing"
         },
+        "dropsAs": "noz-taktyczny",
         "id": "noz-taktyczny",
         "kind": "mwak",
         "name": "Nóż taktyczny",
@@ -701,6 +710,7 @@ export const BESTIARY = {
           "formula": "1d10 + 5",
           "type": "piercing"
         },
+        "dropsAs": "desert-eagle",
         "id": "desert-eagle",
         "kind": "rwak",
         "name": "Desert Eagle",
@@ -827,6 +837,7 @@ export const BESTIARY = {
           "formula": "1d8",
           "type": "bludgeoning"
         },
+        "dropsAs": "bejsbol-rurka",
         "id": "rura-stalowa",
         "kind": "mwak",
         "name": "Rura stalowa",
@@ -843,6 +854,7 @@ export const BESTIARY = {
           "formula": "3d4",
           "type": "piercing"
         },
+        "dropsAs": "widly",
         "id": "widly-tylko-farmer",
         "kind": "mwak",
         "name": "Widły (tylko farmer)",
@@ -859,6 +871,7 @@ export const BESTIARY = {
           "formula": "1d4",
           "type": "piercing"
         },
+        "dropsAs": "trzydziestka-osemka",
         "id": "trzydziestka-osemka",
         "kind": "rwak",
         "name": "Trzydziestka ósemka",
@@ -945,6 +958,7 @@ export const BESTIARY = {
           "formula": "2d6 + 5",
           "type": "bludgeoning"
         },
+        "dropsAs": null,
         "id": "atak-bez-broni",
         "kind": "mwak",
         "name": "Atak bez broni",
@@ -960,6 +974,12 @@ export const BESTIARY = {
           "avg": 18,
           "formula": "2d8 + 2d6 + 4",
           "type": null
+        },
+        "dropsAs": {
+          "addons": [
+            "utwardzenie"
+          ],
+          "id": "crash"
         },
         "id": "utwardzony-crash",
         "kind": "mwak",
@@ -1078,6 +1098,7 @@ export const BESTIARY = {
           "formula": "1d8 + 2",
           "type": "bludgeoning"
         },
+        "dropsAs": "bejsbol-rurka",
         "id": "bejsbol",
         "kind": "mwak",
         "name": "Bejsbol",
@@ -1094,6 +1115,7 @@ export const BESTIARY = {
           "formula": "1d6 + 3",
           "type": "piercing"
         },
+        "dropsAs": "uzi",
         "id": "uzi",
         "kind": "rwak",
         "name": "UZI",
@@ -1205,6 +1227,7 @@ export const BESTIARY = {
           "formula": "1d8 + 1",
           "type": "bludgeoning"
         },
+        "dropsAs": "bejsbol-rurka",
         "id": "bejsbol",
         "kind": "mwak",
         "name": "Bejsbol",
@@ -1221,6 +1244,7 @@ export const BESTIARY = {
           "formula": "1d8 + 2",
           "type": "piercing"
         },
+        "dropsAs": "peacemaker",
         "id": "peacemaker",
         "kind": "rwak",
         "name": "Peacemaker",
@@ -1308,6 +1332,7 @@ export const BESTIARY = {
           "formula": "1d6 + 3",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "ugryzienie",
         "kind": "mwak",
         "name": "Ugryzienie",
@@ -1428,6 +1453,7 @@ export const BESTIARY = {
           "formula": "1d10 + 3",
           "type": "bludgeoning"
         },
+        "dropsAs": null,
         "id": "ogon",
         "kind": "mwak",
         "name": "Ogon",
@@ -1444,6 +1470,7 @@ export const BESTIARY = {
           "formula": "1d8 + 3",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "jadowite-zeby",
         "kind": "mwak",
         "name": "Jadowite zęby",
@@ -1573,6 +1600,7 @@ export const BESTIARY = {
           "formula": "1d10 + 4",
           "type": "slashing"
         },
+        "dropsAs": null,
         "id": "pazury",
         "kind": "mwak",
         "name": "Pazury",
@@ -1589,6 +1617,7 @@ export const BESTIARY = {
           "formula": "2d6 + 4",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "zeby",
         "kind": "mwak",
         "name": "Zęby",
@@ -1721,6 +1750,7 @@ export const BESTIARY = {
           "formula": "2d10 + 6",
           "type": "bludgeoning"
         },
+        "dropsAs": "maczuga",
         "id": "maczuga",
         "kind": "mwak",
         "name": "Maczuga",
@@ -1737,6 +1767,7 @@ export const BESTIARY = {
           "formula": "2d8 + 6",
           "type": "piercing"
         },
+        "dropsAs": "oszczep",
         "id": "oszczep-wrecz",
         "kind": "mwak",
         "name": "Oszczep (wręcz)",
@@ -1753,6 +1784,7 @@ export const BESTIARY = {
           "formula": "2d8 + 6",
           "type": "piercing"
         },
+        "dropsAs": "oszczep",
         "id": "oszczep-dystans",
         "kind": "rwak",
         "name": "Oszczep (dystans)",
@@ -1878,6 +1910,7 @@ export const BESTIARY = {
           "formula": null,
           "type": "piercing"
         },
+        "dropsAs": "dmuchawka",
         "id": "dmuchawka",
         "kind": "rwak",
         "name": "Dmuchawka",
@@ -1894,6 +1927,7 @@ export const BESTIARY = {
           "formula": "1d6 + 1",
           "type": "bludgeoning"
         },
+        "dropsAs": null,
         "id": "stalowe-piesci",
         "kind": "mwak",
         "name": "Stalowe pięści",
@@ -2284,6 +2318,7 @@ export const BESTIARY = {
           "formula": "4d10 + 7",
           "type": "bludgeoning"
         },
+        "dropsAs": null,
         "id": "taranowanie",
         "kind": "mwak",
         "name": "Taranowanie",
@@ -2300,6 +2335,7 @@ export const BESTIARY = {
           "formula": "4d12 + 7",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "rogi",
         "kind": "mwak",
         "name": "Rogi",
@@ -2390,6 +2426,7 @@ export const BESTIARY = {
           "formula": "1d10 + 3",
           "type": "bludgeoning"
         },
+        "dropsAs": null,
         "id": "odnoze",
         "kind": "mwak",
         "name": "Odnóże",
@@ -2406,6 +2443,7 @@ export const BESTIARY = {
           "formula": "1d10 +3",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "ugryzienie",
         "kind": "mwak",
         "name": "Ugryzienie",
@@ -2691,6 +2729,7 @@ export const BESTIARY = {
           "formula": "1d8 + 3",
           "type": "slashing"
         },
+        "dropsAs": null,
         "id": "pazury",
         "kind": "mwak",
         "name": "Pazury",
@@ -2707,6 +2746,7 @@ export const BESTIARY = {
           "formula": "3d6 + 3",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "ugryzienie-jesli-cel-jest-pochwycony",
         "kind": "mwak",
         "name": "Ugryzienie (jeśli cel jest Pochwycony)",
@@ -2843,6 +2883,7 @@ export const BESTIARY = {
           "formula": "4d12 + 10",
           "type": "slashing"
         },
+        "dropsAs": null,
         "id": "pila-tarczowa",
         "kind": "mwak",
         "name": "Piła tarczowa",
@@ -2859,6 +2900,7 @@ export const BESTIARY = {
           "formula": "4d20",
           "type": "explosive"
         },
+        "dropsAs": null,
         "id": "dzialo-ppanc",
         "kind": "rwak",
         "name": "Działo ppanc",
@@ -2875,6 +2917,7 @@ export const BESTIARY = {
           "formula": "3d20",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "karabin-krotka-seria-6-walke",
         "kind": "rwak",
         "name": "Karabin krótka seria (6/walkę)",
@@ -3076,6 +3119,7 @@ export const BESTIARY = {
           "formula": "1d8 + 2",
           "type": "bludgeoning"
         },
+        "dropsAs": "maczuga",
         "id": "maczuga",
         "kind": "mwak",
         "name": "Maczuga",
@@ -3092,6 +3136,7 @@ export const BESTIARY = {
           "formula": "1d4 + 2",
           "type": "piercing"
         },
+        "dropsAs": "kamienny-noz",
         "id": "kamienny-noz",
         "kind": "mwak",
         "name": "Kamienny nóż",
@@ -3108,6 +3153,7 @@ export const BESTIARY = {
           "formula": "1d8 + 1",
           "type": "piercing"
         },
+        "dropsAs": "luk-tradycyjny",
         "id": "luk-tradycyjny",
         "kind": "rwak",
         "name": "Łuk tradycyjny",
@@ -3124,6 +3170,7 @@ export const BESTIARY = {
           "formula": "1d8 + 2",
           "type": "piercing"
         },
+        "dropsAs": "oszczep",
         "id": "oszczep",
         "kind": "rwak",
         "name": "Oszczep",
@@ -3213,6 +3260,7 @@ export const BESTIARY = {
           "formula": "1d8 + 3",
           "type": "lightning"
         },
+        "dropsAs": null,
         "id": "paralizator",
         "kind": "mwak",
         "name": "Paralizator",
@@ -3229,6 +3277,7 @@ export const BESTIARY = {
           "formula": null,
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "miotacz-strzalek",
         "kind": "rwak",
         "name": "Miotacz strzałek",
@@ -3376,6 +3425,7 @@ export const BESTIARY = {
           "formula": null,
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "zadlo",
         "kind": "mwak",
         "name": "Żądło",
@@ -3481,6 +3531,7 @@ export const BESTIARY = {
           "formula": "1d4 + 2",
           "type": "bludgeoning"
         },
+        "dropsAs": null,
         "id": "kopyta",
         "kind": "mwak",
         "name": "Kopyta",
@@ -3566,6 +3617,7 @@ export const BESTIARY = {
           "formula": "1d10 + 4",
           "type": "bludgeoning"
         },
+        "dropsAs": null,
         "id": "kopyta",
         "kind": "mwak",
         "name": "Kopyta",
@@ -3651,6 +3703,7 @@ export const BESTIARY = {
           "formula": "1d8 + 3",
           "type": "bludgeoning"
         },
+        "dropsAs": null,
         "id": "kopyta",
         "kind": "mwak",
         "name": "Kopyta",
@@ -3736,6 +3789,7 @@ export const BESTIARY = {
           "formula": "1d6 + 1",
           "type": "bludgeoning"
         },
+        "dropsAs": "palka-policyjna",
         "id": "palka-policyjna",
         "kind": "mwak",
         "name": "Pałka policyjna",
@@ -3752,6 +3806,7 @@ export const BESTIARY = {
           "formula": "1d8 + 2",
           "type": "piercing"
         },
+        "dropsAs": "tommy-gun",
         "id": "tommy-gun",
         "kind": "rwak",
         "name": "Tommy gun",
@@ -3836,6 +3891,7 @@ export const BESTIARY = {
           "formula": "2d10 + 5",
           "type": "bludgeoning"
         },
+        "dropsAs": null,
         "id": "konar",
         "kind": "mwak",
         "name": "Konar",
@@ -3852,6 +3908,7 @@ export const BESTIARY = {
           "formula": "1d10 + 5",
           "type": "bludgeoning"
         },
+        "dropsAs": null,
         "id": "korzen",
         "kind": "mwak",
         "name": "Korzeń",
@@ -3970,6 +4027,7 @@ export const BESTIARY = {
           "formula": "3d6",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "karabin-krotka-seria-10-walke",
         "kind": "rwak",
         "name": "Karabin krótka seria (10/walkę)",
@@ -4083,6 +4141,7 @@ export const BESTIARY = {
           "formula": "1d6 + 2",
           "type": "slashing"
         },
+        "dropsAs": null,
         "id": "ostre-odnoze",
         "kind": "mwak",
         "name": "Ostre odnóże",
@@ -4099,6 +4158,7 @@ export const BESTIARY = {
           "formula": "3d6",
           "type": "acid"
         },
+        "dropsAs": null,
         "id": "spluniecie-kwasem",
         "kind": "rwak",
         "name": "Splunięcie kwasem",
@@ -4241,6 +4301,7 @@ export const BESTIARY = {
           "formula": "3d12 + 7",
           "type": "bludgeoning"
         },
+        "dropsAs": null,
         "id": "ogon",
         "kind": "mwak",
         "name": "Ogon",
@@ -4257,6 +4318,7 @@ export const BESTIARY = {
           "formula": "4d12 + 7",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "paszcza",
         "kind": "mwak",
         "name": "Paszcza",
@@ -4509,6 +4571,7 @@ export const BESTIARY = {
           "formula": "1d6 +1",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "ugryzienie",
         "kind": "mwak",
         "name": "Ugryzienie",
@@ -4638,6 +4701,7 @@ export const BESTIARY = {
           "formula": "1d6 + 4",
           "type": "piercing"
         },
+        "dropsAs": "luk-tradycyjny",
         "id": "luk",
         "kind": "rwak",
         "name": "Łuk",
@@ -4654,6 +4718,7 @@ export const BESTIARY = {
           "formula": "1d4 + 4",
           "type": "piercing"
         },
+        "dropsAs": "sztylet",
         "id": "sztylet",
         "kind": "mwak",
         "name": "Sztylet",
@@ -4777,6 +4842,7 @@ export const BESTIARY = {
           "formula": "1d12 + 5",
           "type": "bludgeoning"
         },
+        "dropsAs": null,
         "id": "ogon",
         "kind": "mwak",
         "name": "Ogon",
@@ -4793,6 +4859,7 @@ export const BESTIARY = {
           "formula": "2d12 + 5",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "paszcza",
         "kind": "mwak",
         "name": "Paszcza",
@@ -4912,6 +4979,7 @@ export const BESTIARY = {
           "formula": "1d4 + 5",
           "type": "slashing"
         },
+        "dropsAs": null,
         "id": "pazury",
         "kind": "mwak",
         "name": "Pazury",
@@ -5009,6 +5077,7 @@ export const BESTIARY = {
           "formula": "2d10 + 5",
           "type": "bludgeoning"
         },
+        "dropsAs": null,
         "id": "lapa",
         "kind": "mwak",
         "name": "Łapa",
@@ -5025,6 +5094,7 @@ export const BESTIARY = {
           "formula": "3d10 + 5",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "ugryzienie",
         "kind": "mwak",
         "name": "Ugryzienie",
@@ -5140,6 +5210,7 @@ export const BESTIARY = {
           "formula": "3d10 + 4",
           "type": "bludgeoning"
         },
+        "dropsAs": null,
         "id": "chwytak",
         "kind": "mwak",
         "name": "Chwytak",
@@ -5156,6 +5227,7 @@ export const BESTIARY = {
           "formula": "2d20",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "karabin-ppanc",
         "kind": "rwak",
         "name": "Karabin ppanc",
@@ -5304,6 +5376,7 @@ export const BESTIARY = {
           "formula": "1d4 - 1",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "uklucie",
         "kind": "mwak",
         "name": "Ukłucie",
@@ -5432,6 +5505,7 @@ export const BESTIARY = {
           "formula": "1d8 + 3",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "ugryzienie",
         "kind": "mwak",
         "name": "Ugryzienie",
@@ -5540,6 +5614,7 @@ export const BESTIARY = {
           "formula": "1d10 + 3",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "ugryzienie",
         "kind": "mwak",
         "name": "Ugryzienie",
@@ -5776,6 +5851,7 @@ export const BESTIARY = {
           "formula": "4d4 + 2",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "ugryzienie-pw-50",
         "kind": "mwak",
         "name": "Ugryzienie (PW > 50%)",
@@ -5792,6 +5868,7 @@ export const BESTIARY = {
           "formula": "2d4 + 2",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "ugryzienie-pw-50",
         "kind": "mwak",
         "name": "Ugryzienie (PW < 50%)",
@@ -6031,6 +6108,7 @@ export const BESTIARY = {
           "formula": "1d12 + 4",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "szczeki",
         "kind": "mwak",
         "name": "Szczęki",
@@ -6047,6 +6125,7 @@ export const BESTIARY = {
           "formula": "1d6 + 4",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "kolec-jadowy",
         "kind": "mwak",
         "name": "Kolec jadowy",
@@ -6180,6 +6259,7 @@ export const BESTIARY = {
           "formula": "1d4 + 1",
           "type": "bludgeoning"
         },
+        "dropsAs": "kastet",
         "id": "kastet",
         "kind": "mwak",
         "name": "Kastet",
@@ -6196,6 +6276,7 @@ export const BESTIARY = {
           "formula": "1d10 + 4",
           "type": "piercing"
         },
+        "dropsAs": "magnum-44",
         "id": "44-magnum",
         "kind": "rwak",
         "name": ".44 Magnum",
@@ -6212,6 +6293,7 @@ export const BESTIARY = {
           "formula": "2d6 + 4",
           "type": "piercing"
         },
+        "dropsAs": "lewar-m95",
         "id": "lewar-m95",
         "kind": "rwak",
         "name": "Lewar M95",
@@ -6260,7 +6342,17 @@ export const BESTIARY = {
         "text": "Szeryf wykonuje dwa ataki kastetem lub wybraną bronią palną."
       },
       {
-        "automation": null,
+        "automation": {
+          "ability": "wis",
+          "activation": "bonus",
+          "dc": 13,
+          "dropOnFail": true,
+          "kind": "save",
+          "onFail": {
+            "condition": "frightened"
+          },
+          "range": 18
+        },
         "id": "poddaj-sie",
         "name": "Poddaj się!",
         "section": "bonus",
@@ -6331,6 +6423,7 @@ export const BESTIARY = {
           "formula": "2d8 + 4",
           "type": "bludgeoning"
         },
+        "dropsAs": null,
         "id": "ogon",
         "kind": "mwak",
         "name": "Ogon",
@@ -6464,6 +6557,7 @@ export const BESTIARY = {
           "formula": "1d4 + 3",
           "type": "piercing"
         },
+        "dropsAs": null,
         "id": "macka",
         "kind": "mwak",
         "name": "Macka",
@@ -6603,6 +6697,7 @@ export const BESTIARY = {
           "formula": "1d8 + 2",
           "type": "bludgeoning"
         },
+        "dropsAs": null,
         "id": "macka",
         "kind": "mwak",
         "name": "Macka",
@@ -6742,6 +6837,7 @@ export const BESTIARY = {
           "formula": "1d6 + 2",
           "type": "bludgeoning"
         },
+        "dropsAs": "mlotek",
         "id": "mlotek",
         "kind": "mwak",
         "name": "Młotek",
@@ -6758,6 +6854,7 @@ export const BESTIARY = {
           "formula": "2d6 + 3",
           "type": "piercing"
         },
+        "dropsAs": "ar",
         "id": "ar",
         "kind": "rwak",
         "name": "AR",

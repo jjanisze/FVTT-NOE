@@ -55,6 +55,11 @@ export const ABILITY_KEYS = {
   // Kowboj — klauzule czyta `actors/rewolwerowiec.mjs`. Pistolero to wariant WKK.
   REWOLWEROWIEC: "rewolwerowiec",
   PISTOLERO: "pistolero",
+  // Lalka (PLAN_paper_doll §5–6) — strzał jedną ręką bez Utrudnienia i koszty dobywania.
+  STALOWY_NADGARSTEK: "stalowyNadgarstek",
+  PULP_FICTION: "pulpFiction",
+  SIEKIEREZADA: "siekierezada",
+  MAM_POD_REKA: "mamPodReka",
   // Produkcja (PLAN_produkcja) — Sztuczki i zdolności z Pochodzenia, które zmieniają czas,
   // surowce albo Test końcowy. Czyta je `production/wykonawca.mjs`.
   FABRYKATOR: "fabrykator",
@@ -124,6 +129,28 @@ export const ABILITY_DEFINITIONS = {
     label: "Rewolwerowiec",
     aliases: ["rewolwerowiec"],
     noticeColor: "#6b5a2f"
+  },
+  [ABILITY_KEYS.STALOWY_NADGARSTEK]: {
+    label: "Stalowy nadgarstek",
+    // Opcja Wyjadacza (Twardziel, Zwiadowca) — przedmiot z kompendium nosi samą nazwę opcji.
+    aliases: ["stalowy nadgarstek"],
+    noticeColor: "#4a5a6b"
+  },
+  [ABILITY_KEYS.PULP_FICTION]: {
+    label: "Pulp Fiction",
+    aliases: ["pulp fiction"],
+    noticeColor: "#6b4a5a"
+  },
+  [ABILITY_KEYS.SIEKIEREZADA]: {
+    label: "Siekierezada",
+    aliases: ["siekierezada", "podwójne dobycie", "podwojne dobycie"],
+    noticeColor: "#6b3f1f"
+  },
+  [ABILITY_KEYS.MAM_POD_REKA]: {
+    label: "Mam pod ręką",
+    // Klauzula Sztuczki Pakowanie — ten sam kształt co „Bez dna": bywa osobnym featem z Roll20.
+    aliases: ["mam pod ręką", "mam pod reka", "pakowanie"],
+    noticeColor: "#4a6b4a"
   },
   ...KOBALT_ABILITY_DEFINITIONS,
   [ABILITY_KEYS.FABRYKATOR]: {

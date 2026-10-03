@@ -43,6 +43,7 @@ import { tracerFire } from "./tracer-vfx.mjs";
 import { AMMO_CALIBER_MAP, familyCalibers } from "../config/ammo-data.mjs";
 import { addAmmoToActor } from "../actors/ammo-inventory.mjs";
 import { isAtHand, provenanceBadge, clearBelt, registerHandyFamily } from "../actors/handy-items.mjs";
+import { freeHandPill } from "../combat/grip.mjs";
 import { REMOVABLE_SOURCES } from "../config/weapons-data.mjs";
 import { isDocumentLive } from "../doc-liveness.mjs";
 import {
@@ -1032,7 +1033,8 @@ async function _onClickPourSpeedloader(item) {
   seqScrollText("BĘBENEK", actor, { color: "#f1c40f", fontSize: 26, duration: 1500 });
 
   const mag = getMag(item);
-  const provenance = provenanceBadge(loader);
+  // RAW (Rewolwerowiec, Szybkoładowacz): wymaga wolnej ręki — lalka tylko zaznacza (§5).
+  const provenance = provenanceBadge(loader) + (actor.inCombat ? freeHandPill(actor, { need: 1, what: "Szybkoładowarka" }) : "");
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor }),
     content: `<div class="neuro-mag-card">`

@@ -821,6 +821,9 @@ body:not(.theme-scifi) {
 }
 .neuro-belt-caption { bottom: -3px; left: 50%; transform: translateX(-50%); }
 .neuro-belt-stack { top: 1px; left: 1px; color: #cfcfcf; }
+/* „w plecaku jeszcze N" — ikona plecaka przed liczbą (pas w nagłówku i Oporządzenie). */
+.neuro-belt-stack, .neuro-doll-stack { display: inline-flex; align-items: center; gap: 2px; }
+.neuro-belt-stack i, .neuro-doll-stack i { font-size: 0.85em; opacity: 0.75; }
 .neuro-belt-flag { top: -6px; left: 50%; transform: translateX(-50%); color: #ff8a80; }
 .neuro-belt-remove {
   position: absolute; top: -6px; right: -6px; width: 14px; height: 14px; border-radius: 50%;
@@ -4070,3 +4073,306 @@ nav.tabs [data-tab="produkcja"] { position: relative; }
   border-color: rgba(244, 208, 63, 0.55) !important;
   text-shadow: 0 0 4px rgba(244, 208, 63, 0.7);
 }
+
+/* ============================================= */
+/* Lalka — panel przy karcie postaci             */
+/* actors/doll-panel.mjs, PLAN_paper_doll §7     */
+/* ============================================= */
+
+/* Przedłużenie karty, nie nowy motyw: powierzchnie, ramki i kolory ze zmiennych dnd5e, które
+   rozwiązują się pod `.dnd5e2` i motywem `body.theme-*` — panel idzie za jasnym/ciemnym. Nagłówki
+   jak legenda panelu Stan, sloty jak kafelki pasa. */
+.neuro-doll-panel {
+  --neuro-doll-surface: var(--dnd5e-background-alt-1, #0d0b0b);
+  --neuro-doll-line: color-mix(in srgb, var(--dnd5e-color-gold, #9f9275) 45%, transparent);
+  --neuro-doll-edge: color-mix(in srgb, var(--dnd5e-color-gold, #9f9275) 35%, transparent);
+  --neuro-doll-tile: var(--dnd5e-background-5, rgb(0 0 0 / 5%));
+  --neuro-doll-tile-border: var(--dnd5e-color-blue-gray-3, #999);
+  --neuro-doll-figure: color-mix(in srgb, var(--color-text-primary, #cfd2da) 16%, transparent);
+  position: fixed;
+  z-index: var(--z-index-window, 100);
+  box-sizing: border-box;
+  padding: 0;
+  border: 1px solid var(--color-border, #302831);
+  border-radius: 5px 0 0 5px;
+  background: var(--neuro-doll-surface);
+  box-shadow: 0 0 10px var(--color-shadow-dark, #000);
+  color: var(--color-text-primary, #cfd2da);
+  font-family: var(--dnd5e-font-roboto, Roboto, sans-serif);
+  font-size: var(--font-size-12, 12px);
+  overflow: hidden;
+}
+.neuro-doll-panel.is-right { border-radius: 0 5px 5px 0; }
+body.theme-dark .neuro-doll-panel,
+.neuro-doll-panel.theme-dark { background-image: url("../../../ui/denim075.png"); }
+.neuro-doll-panel[hidden] { display: none; }
+
+.neuro-doll {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 1rem 0.6rem 0.6rem;
+  overflow-y: auto;
+}
+
+/* Grupy — legenda na górnej ramce, jak w panelu Stan. */
+.neuro-doll-body, .neuro-doll-racks, .neuro-doll-ground {
+  position: relative;
+  border: 1px solid var(--neuro-doll-edge);
+  border-radius: 4px;
+  background: var(--neuro-doll-surface);
+}
+.neuro-doll-legend {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0 0.35rem;
+  border: none;
+  background: var(--neuro-doll-surface);
+  color: var(--dnd5e-color-gold, #9f9275);
+  font-family: var(--dnd5e-font-roboto-condensed, var(--dnd5e-font-roboto, sans-serif));
+  font-size: var(--font-size-11, 11px);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transform: translate(-50%, -50%);
+}
+
+/* Manekin z kolumnami po bokach. */
+.neuro-doll-body {
+  display: grid;
+  grid-template-columns: 60px 1fr 60px;
+  gap: 4px;
+  padding: 0.9rem 0.4rem 0.6rem;
+}
+.neuro-doll-col {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 4px;
+}
+.neuro-doll-cell { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+/* JS (`_layoutColumns`) stawia komórki na wysokości ich części ciała; bez JS — równy rozkład. */
+.neuro-doll-col.is-placed { display: block; }
+.neuro-doll-col.is-placed > .neuro-doll-cell { position: absolute; left: 0; right: 0; }
+.neuro-doll-label {
+  max-width: 64px;
+  overflow: hidden;
+  color: var(--color-text-secondary, #999);
+  font-size: 9px;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  text-align: center;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.neuro-doll-figure { position: relative; min-height: 360px; }
+.neuro-doll-mannequin {
+  position: absolute;
+  inset: 0;
+  background: var(--neuro-doll-figure);
+  -webkit-mask: var(--neuro-doll-mask) center / contain no-repeat;
+  mask: var(--neuro-doll-mask) center / contain no-repeat;
+}
+.neuro-doll-lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.neuro-doll-lines polyline { fill: none; stroke: var(--neuro-doll-line); stroke-width: 1; }
+.neuro-doll-lines polyline.is-hand { stroke: color-mix(in srgb, var(--dnd5e-color-gold, #9f9275) 75%, transparent); stroke-width: 1.4; }
+.neuro-doll-lines circle.is-hand { r: 2.6px; fill: var(--dnd5e-color-gold, #9f9275); }
+.neuro-doll-lines polyline.is-rack { stroke-dasharray: 2 3; }
+.neuro-doll-lines circle { fill: var(--neuro-doll-line); }
+
+/* Sloty — kafelki pasa, w kolorach karty. */
+.neuro-doll-slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  box-sizing: border-box;
+  border: 1px solid var(--neuro-doll-tile-border);
+  border-radius: 5px;
+  background: var(--neuro-doll-tile);
+  color: color-mix(in srgb, var(--color-text-primary, #cfd2da) 30%, transparent);
+  font-size: 13px;
+}
+.neuro-doll-slot.is-empty { border-style: dashed; }
+/* Ręce — tu toczy się walka: kafelek większy, złota ramka, podpis złoty. Subtelnie. */
+.neuro-doll-slot.is-hand {
+  width: 50px;
+  height: 50px;
+  border-width: 1.5px;
+  border-color: color-mix(in srgb, var(--dnd5e-color-gold, #9f9275) 65%, transparent);
+  box-shadow: inset 0 0 7px color-mix(in srgb, var(--dnd5e-color-gold, #9f9275) 22%, transparent);
+}
+.neuro-doll-slot.is-hand img { width: 42px; height: 42px; }
+.neuro-doll-cell.is-hand .neuro-doll-label { color: var(--dnd5e-color-gold, #9f9275); font-weight: bold; }
+.neuro-doll-slot.is-filled { cursor: pointer; border-color: var(--neuro-doll-line); }
+.neuro-doll-slot.is-filled:hover, .neuro-doll-slot.is-filled:focus-visible {
+  border-color: var(--dnd5e-color-gold, #9f9275);
+  background: color-mix(in srgb, var(--dnd5e-color-gold, #9f9275) 14%, transparent);
+  outline: none;
+}
+.neuro-doll-slot img { width: 36px; height: 36px; object-fit: contain; border: none; pointer-events: none; }
+.neuro-doll-slot.is-dragging { opacity: 0.35; }
+.neuro-doll-slot.is-drop-target, .neuro-doll-rack.is-drop-target .neuro-doll-rack-slots {
+  border-color: var(--dnd5e-color-gold, #9f9275);
+  border-style: solid;
+  background: color-mix(in srgb, var(--dnd5e-color-gold, #9f9275) 22%, transparent);
+}
+.neuro-doll-slot.is-blocked {
+  border-style: solid;
+  background: repeating-linear-gradient(45deg, transparent 0 4px, var(--neuro-doll-tile) 4px 8px);
+  font-size: 11px;
+}
+.neuro-doll-slot.is-occupied { border-color: var(--dnd5e-color-maroon, #8b2525); color: var(--color-text-primary, #cfd2da); }
+.neuro-doll-ghost { opacity: 0.22; filter: grayscale(1); }
+.neuro-doll-caption, .neuro-doll-stack, .neuro-doll-hand {
+  position: absolute;
+  padding: 1px 2px;
+  border-radius: 3px;
+  background: var(--neuro-doll-surface);
+  color: var(--color-text-primary, #cfd2da);
+  font-size: 9px;
+  line-height: 1;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.neuro-doll-caption { bottom: -4px; left: 50%; max-width: 58px; overflow: hidden; text-overflow: ellipsis; transform: translateX(-50%); }
+.neuro-doll-stack { top: 1px; left: 1px; font-weight: bold; }
+.neuro-doll-hand { top: 1px; right: 1px; color: var(--dnd5e-color-gold, #9f9275); font-weight: bold; }
+.neuro-doll-remove {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--neuro-doll-tile-border);
+  border-radius: 50%;
+  background: var(--neuro-doll-surface);
+  color: var(--color-text-primary, #cfd2da);
+  font-size: 9px;
+}
+.neuro-doll-slot:hover .neuro-doll-remove { display: flex; }
+.neuro-doll-remove:hover { background: var(--dnd5e-color-maroon, #8b2525); }
+.neuro-doll.is-readonly .neuro-doll-slot.is-filled { cursor: default; }
+.neuro-doll-ghost-out { border-radius: 5px; }
+
+/* Pas, pochwy, kabury. */
+.neuro-doll-racks { display: flex; flex-direction: column; gap: 6px; padding: 0.5rem 0.4rem; }
+.neuro-doll-rack { display: grid; grid-template-columns: 52px 1fr; align-items: center; gap: 6px; }
+.neuro-doll-rack-label { display: flex; flex-direction: column; align-items: center; line-height: 1.1; cursor: help; }
+.neuro-doll-rack-title { color: var(--color-text-secondary, #999); font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; }
+.neuro-doll-rack-count { font-size: 12px; font-weight: bold; }
+.neuro-doll-rack-slots { display: flex; flex-wrap: wrap; gap: 5px; padding: 2px; border: 1px solid transparent; border-radius: 5px; }
+
+/* Na ziemi obok (§9). */
+.neuro-doll-ground { padding: 0.8rem 0.5rem 0.4rem; }
+.neuro-doll-ground ul { display: flex; flex-direction: column; gap: 4px; margin: 0; padding: 0; }
+.neuro-doll-ground-item { display: grid; grid-template-columns: 28px 1fr auto auto; align-items: center; gap: 6px; }
+.neuro-doll-ground-item img { width: 28px; height: 28px; object-fit: contain; border: none; }
+.neuro-doll-ground-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.neuro-doll-ground-dist { color: var(--color-text-secondary, #999); font-size: 10px; }
+.neuro-doll-pick { width: auto; height: 22px; padding: 0 6px; font-size: 11px; line-height: 20px; }
+.neuro-doll-ground-none { color: var(--color-text-secondary, #999); font-size: 11px; text-align: center; }
+
+/* Podpowiedź upuszczenia: przeciągany przedmiot pokazuje, gdzie może wylądować. */
+.neuro-doll-panel.is-drag-hint .neuro-doll-slot:not(.is-drop-ok) { opacity: 0.4; }
+.neuro-doll-panel.is-drag-hint .neuro-doll-slot.is-drop-ok {
+  border-style: dashed;
+  border-color: var(--dnd5e-color-gold, #9f9275);
+  animation: neuro-doll-hint 0.9s ease-in-out infinite alternate;
+}
+.neuro-doll-panel.is-drag-hint .neuro-doll-rack.is-drop-ok .neuro-doll-rack-title { color: var(--dnd5e-color-gold, #9f9275); }
+.neuro-doll-panel.is-drag-hint .neuro-doll-slot.is-drop-target { border-style: solid; animation: none; }
+@keyframes neuro-doll-hint {
+  from { box-shadow: 0 0 0 0 color-mix(in srgb, var(--dnd5e-color-gold, #9f9275) 0%, transparent); }
+  to { box-shadow: 0 0 7px 1px color-mix(in srgb, var(--dnd5e-color-gold, #9f9275) 55%, transparent); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .neuro-doll-panel.is-drag-hint .neuro-doll-slot.is-drop-ok {
+    animation: none;
+    box-shadow: 0 0 6px 1px color-mix(in srgb, var(--dnd5e-color-gold, #9f9275) 45%, transparent);
+  }
+}
+
+/* Przełącznik „Oporządzenie" pod pionowym paskiem zakładek karty. Nie zakładka (nie zmienia
+   strony karty), więc osobny blok poza obrysem paska, z podpisem w pionie. Pozycję (top/left)
+   liczy `_injectTab` od paska dnd5e. */
+.application .neuro-doll-tab {
+  position: absolute;
+  z-index: -1;
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+  width: 41px;
+  height: auto;
+  min-height: 0;
+  margin: 0;
+  padding: 9px 0 11px;
+  border: 1px solid var(--dnd5e-color-gold, #9f9275);
+  border-left: none;
+  border-radius: 0 6px 6px 0;
+  background: #000;
+  box-shadow: none;
+  color: var(--dnd5e-color-gold, #9f9275);
+  font-family: var(--dnd5e-font-roboto-condensed, var(--dnd5e-font-roboto, sans-serif));
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  line-height: 1;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+.application .neuro-doll-tab i { margin: 0; font-size: 15px; }
+.neuro-doll-tab-label { writing-mode: vertical-rl; white-space: nowrap; }
+.application .neuro-doll-tab:hover,
+.application .neuro-doll-tab:focus-visible {
+  background: color-mix(in srgb, var(--dnd5e-color-gold, #9f9275) 22%, #000);
+  outline: none;
+  box-shadow: none;
+}
+.application .neuro-doll-tab.is-active { background: var(--dnd5e-color-gold, #9f9275); color: #000; }
+.neuro-doll-tab.is-compact .neuro-doll-tab-label { display: none; }
+
+/* Wskaźnik miejsca w wierszu Ekwipunku (D16) — zastępuje przełącznik „założony". */
+.neuro-doll-loc { position: relative; display: inline-flex; align-items: center; gap: 1px; }
+.neuro-doll-loc.is-pack { opacity: 0.15; }
+[data-item-id]:hover .neuro-doll-loc.is-pack { opacity: 0.55; }
+.neuro-doll-loc:not(.is-pack) { color: var(--dnd5e-color-gold, #9f9275); }
+.neuro-doll-loc-mark, .neuro-doll-loc-count { font-size: 0.7em; font-weight: bold; line-height: 1; }
+.neuro-doll-loc-count { opacity: 0.8; }
+
+/* Linie ruchów lalki na czacie (§7, tylko w walce). */
+.neuro-doll-moves ul { display: flex; flex-direction: column; gap: 3px; margin: 0; padding: 0; list-style: none; }
+.neuro-doll-move { display: grid; grid-template-columns: 20px 1fr auto; align-items: center; gap: 5px; font-size: 12px; }
+.neuro-doll-move img { width: 20px; height: 20px; object-fit: contain; border: none; }
+.neuro-doll-move.is-displaced { opacity: 0.8; }
+.neuro-doll-move-cost { padding: 0 4px; border: 1px solid currentColor; border-radius: 8px; font-size: 10px; white-space: nowrap; }
+.neuro-doll-move-note { grid-column: 2 / -1; font-size: 10px; opacity: 0.75; }
+.neuro-doll-reason { margin: 0 0 3px; font-weight: bold; }

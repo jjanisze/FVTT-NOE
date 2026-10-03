@@ -39,7 +39,7 @@
  * generuje je z wlasciwosci przy kazdym zapisie przedmiotu.
  */
 
-import { LASKA, MIECZ, PISTOLET_NA_RACE, ZLOTY_DESERT_EAGLE } from "../wkk/config/weapons-data.mjs";
+import { LASKA, MIECZ, PISTOLET_NA_RACE, ZLOTY_DESERT_EAGLE, KOBALT_VENDOR_TRASH } from "../wkk/config/weapons-data.mjs";
 
 import { AMMO_CALIBER_MAP } from "./ammo-data.mjs";
 
@@ -183,7 +183,9 @@ const BRON_BIALA = [
     range: { value: 6, long: 18 },
     props: ["ver", "thr"],
     weight: 3, price: 10, avail: 60
-  }
+  },
+  // WKK: „śmieci sprzedawcy" z Bestiariusza (PLAN_paper_doll D36) — `wkk/config/weapons-data.mjs`.
+  ...KOBALT_VENDOR_TRASH
 ];
 
 /* -------------------------------------------- */

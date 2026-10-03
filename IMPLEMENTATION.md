@@ -26,7 +26,8 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | **Neutralizacja Stopnia Zranienia** (Regeneracja, Pomoc medyczna) | ❌ | M1 |
 | | Rzuty przeciw śmierci przy obrażeniach na 0 PW, Olbrzymie obrażenia (2× maks. PW), stabilizacja | ❌ | M1 |
 | | Akcja Bieganie; Utrudnienie w zwarciu i na zasięgu dalekim | ❌ | M1 |
-| | Manewry wręcz: Odepchnięcie, Pochwycenie, Wytrącenie | ✅ | `combat/melee-maneuvers.mjs` |
+| | Manewry wręcz: Odepchnięcie, Pochwycenie, Wytrącenie | ✅ | `combat/melee-maneuvers.mjs` (Wytrącenie: przedmiot z ręki ląduje u stóp celu; Pochwycenie zajmuje rękę) |
+| | Broń palna jedną ręką, oburęczna/dwuręczna, atak drugą ręką; upuszczanie i podnoszenie [I] | ✅ | `combat/grip.mjs`, `actors/ground-items.mjs` — domyślne w oknie, pigułki na karcie |
 | Eksploracja | Światło, pole widzenia 220°, noktowizja/termowizja, latarki, flary | ✅ | `items/light-sources.mjs`, `vision-sources.mjs`, `gogle.mjs`, `config/fov.mjs` |
 | | Podróż: tempo, biomy, trudny teren, porządek marszu | ✅ | `actors/party-travel.mjs`, `config/podroz-data.mjs` |
 | | Gambling: dostępność, ceny regionalne | ❌ | tylko zewnętrzny `Integracje/loot_generator.py` — M5 |
@@ -35,6 +36,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | Rozrywka, plotkowanie, hazard, Długi postój (praca, trening, baza, koszt utrzymania) | ❌ | M5 |
 | Tworzenie postaci | Poziomy, PD, PW/KW, wieloklasowość, karta | ✅ | `actors/pd-panel.mjs`, `pw.mjs`, `class-rules.mjs`, `sheet-shell.mjs` |
 | | Udźwig (dwa progi), przedmioty podręczne (3 sloty) | ✅ | `config/encumbrance-config.mjs`, `actors/udzwig-*.mjs`, `handy-items.mjs`, `handy-belt.mjs` |
+| | **Lalka** (dla graczy: Oporządzenie): dwie ręce, 4 + 3 egzemplarze broni pod ręką, pas, noszone (pancerz, hełm, ochraniacze, Głowa/Twarz/Ramię/Strój); dobywanie, chwyt, koszty ruchów | ✅ | `actors/doll*.mjs`, `combat/grip.mjs`, `PLAN_paper_doll.md`. Migracja D9 zastosowana, przekaźnik sprawdzony z klientem gracza, paczki przebudowane, grafika zaakceptowana. Zostały ikony „śmieci sprzedawcy" (partia 42) |
 | Pochodzenie | 12 Pochodzeń + 36 zdolności (dane) | ✅ | paczki `pochodzenia`, `zdolnosci-pochodzenia` |
 | | Automatyka zdolności | 🟡 | 3/36 (`game.neuroshima.pochodzenia.report()`) — M7 |
 | Klasy | 6 klas, 18 profesji, 133 zdolności (dane, awans, PW) | ✅ | paczki `klasy`, `profesje`, `zdolnosci-klasowe` |
@@ -86,7 +88,12 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/config/magazines-data.mjs` | Katalog pojemników na naboje (31): magazynki per model, taśmy, kołczany, szybkoładowarki |
 | `scripts/weapons/magazine-model.mjs` | Model danych magazynków: kolejka naboi, komora, `consumeRounds()` — jedyne lejko |
 | `scripts/weapons/npc-ammo.mjs` | Budżet amunicji NPC („Szybkie palce" zeruje licznik użyć) |
-| `scripts/actors/handy-items.mjs` | Przedmioty podręczne — trzy sloty RAW, wspólne dla magazynków/granatów/leków |
+| `scripts/actors/handy-items.mjs` | Przedmioty podręczne — trzy sloty RAW, wspólne dla magazynków/granatów/leków; zapis przez lejek lalki (`belt.N`) |
+| `scripts/actors/doll-model.mjs` | Lalka — czysty model: sloty, rodziny, `resolve()` (zamiany, wypieranie, pytania), koszty ruchów, chwyt, zużycie |
+| `scripts/actors/doll.mjs` | Lalka — warstwa Foundry: lejek `place`/`takeOff`/`drop`, `equipped` = aktywny, przechwyty, bramka użycia, migracja |
+| `scripts/actors/doll-panel.mjs` | Lalka — panel przy karcie (bezramkowa ApplicationV2), manekin, gesty, FLIP, „Na ziemi obok" |
+| `scripts/actors/doll-rows.mjs` | Lalka — wskaźnik miejsca w wierszu Ekwipunku zamiast przełącznika „założony" |
+| `scripts/actors/ground-items.mjs` | Przedmioty na ziemi — Kafelki z danymi przedmiotu, przekaźnik MG, podnoszenie, BN upuszczają broń przy 0 PW |
 | `scripts/migration/migrate-magazynki.mjs` | Migracja broni palnej postaci na magazynki symulacyjne + sweep kontrolny |
 | `scripts/config/sztuczki-data.mjs` | 53 Sztuczki + rejestr tego, co system faktycznie automatyzuje |
 | `scripts/config/pochodzenia-data.mjs` | 12 Pochodzeń jako `background` (pack `pochodzenia`) + 36 zdolności (pack `zdolnosci-pochodzenia`) + rejestr automatyki |
@@ -135,7 +142,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/weapons/addons.mjs` | System Ulepszeń Broni — install/remove, delta, bonusy warunkowe, aktywności (bagnet/granatnik/śrutówka), toggle setup |
 | `scripts/weapons/melee-degradation.mjs` | Degradacja kości obrażeń broni białej (k12→…→1) + naprawa; Naostrzenie niszczone przy uszkodzeniu (RAW) |
 | `scripts/weapons/dozownik.mjs` | Ulepszenie Dozownik — zasób dawek (np. trucizna na ostrzu) |
-| `scripts/weapons/thrown.mjs` | Obsługa broni miotanej (rzut, zasięg) |
+| `scripts/weapons/thrown.mjs` | Broń rzucana — sztuka ląduje u celu jako przedmiot na ziemi; Powracająca wraca |
 | `scripts/actors/addons-inventory.mjs` | UI Ulepszeń — context menu na loot, panel na arkuszu broni, chat tagi, przyciski toggle setup |
 | `scripts/config/addons-data.mjs` | Statyczny słownik ADDON_DEFS (definicje wszystkich ulepszeń) |
 | `scripts/config/weapons.mjs` | Override kategorii broni D&D 5e na kategorie Neuroshimy |
@@ -188,6 +195,8 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/combat/pack-tactics.mjs` | Współpraca — Ułatwienie, gdy sojusznik stoi ≤ 1,5 m od celu |
 | `scripts/combat/podpalenie.mjs` | Podpalenie [ZAGROŻENIE] — 1k4 ognia na początku tury, `igniteFor()`, akcja „Ugaś się" (v0.14.5) |
 | `scripts/combat/udzwig-attack-disadvantage.mjs` | Przeciążenie — domyślne Utrudnienie do ataków w dialogu |
+| `scripts/combat/grip.mjs` | Chwyt — strzał jedną ręką, oburęczna, dwuręczna, atak drugą ręką, pigułki „brak wolnej ręki" |
+| `scripts/combat/drop-on-fail.mjs` | „Poddaj się!" (Szeryf) — oblany RO: broń z rąk postaci na ziemię |
 | `scripts/config/bestiary-data.mjs` | 51 istot Bestiariusza — **GENEROWANE** (`dev/bestiary/gen_bestiary.py`) |
 | `scripts/config/class-features-data.mjs` | 133 zdolności klasowe i profesji — **GENEROWANE** (`dev/classes/gen_features.py`) |
 | `scripts/config/classes-data.mjs` | 6 klas × 12 poziomów + 18 profesji (źródło: tabele z `Podrecznik/NOE/07 KLASY/`) |
@@ -208,7 +217,8 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/config/surowce-data.mjs` | 5 typów surowców (CH, CE, CZ, MK, MO) |
 | `scripts/config/tool-proficiency.mjs` | Biegłość / Specjalizacja narzędzi |
 | `scripts/config/toolkits-data.mjs` | 22 zestawy narzędzi — ST akcji, produkcja, `createToolkits()` |
-| `scripts/config/validation.mjs` | Hooki walidujące dane (np. broń bez kości obrażeń) |
+| `scripts/config/validation.mjs` | Hooki walidujące dane (np. broń bez kości obrażeń); opakowanie `Item#use` z bramką lalki |
+| `scripts/config/doll-anchors.mjs` | Lalka — punkty zaczepienia linii na manekinie (do przemierzenia po nowej grafice) |
 | `scripts/config/vehicles-data.mjs` | 14 podwozi (tabela RAW), środowiska i ST pościgu (`PLAN_poscigi.md`) |
 | `scripts/items/baterie.mjs` | Baterie — wspólne ogniwo zasilania (2k4 h) |
 | `scripts/items/gogle.mjs` | Gogle noktowizyjne / termowizyjne (homebrew, wzrok właściciela) |
@@ -1084,6 +1094,12 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   osobna nakładka stołowa (`scripts/wkk/`)
 - [ ] Regional price tables — M5
 - [ ] UI polish, tactical HUD
+- [ ] **Czat: separatory tur + podsumowanie akcji w turze** (MG 2026-10-02) — pionowa kreska przy
+  zmianie tury; z kart widać, co kto zrobił (dwa ataki, atak bonusowy, interakcja). Bez liczenia
+  i bez blokad — sama widoczność. Jedno ze źródeł zdarzeń [I]: linie lalki (`PLAN_paper_doll.md` §7)
+- [x] **Przedmioty upuszczone na scenie** — kafle (Tile) z danymi przedmiotu, zapis przez aktywnego
+  MG (wzorzec kolczatki), także broń NPC przy 0 PW — `actors/ground-items.mjs`, changelog 2026-10-03.
+  Zostaje: test przekaźnika z drugą przeglądarką gracza
 - [—] **Ikony broni per-typ** (`weapons/icons.js`) — **plik usunięty w v0.13.0**. Był osierocony
   od 2026-08-21 (jedyny importer, `scripts/main.js`, był martwym duplikatem entry pointu).
   Zadanie okazało się zrobione gdzie indziej: broń obsługuje hook `preCreateItem`
@@ -1125,6 +1141,56 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   i ładowanie wszystkich 9 SVG z obsługą koloru motywu.
   Kolejka A: batch 41 zakończony, następny **42 (5/9)**; B/C bez zmian.
   Uwagi o konfiguracji harnessu: `dev/icons/CODEX_TODO.md`.
+
+### Lalka — ręce, kabury, pas, noszone; przedmioty na ziemi (2026-10-03)
+
+Wdrożenie `PLAN_paper_doll.md` P1–P5 (grafika manekina od MG, zaakceptowana).
+Szczegóły i odstępstwa: plan, §17.
+
+- **Model** (`actors/doll-model.mjs`, czysty): 20 slotów (2 ręce, pas 3+, pochwy 4+, kabury 3+,
+  pancerz, strój, hełm, Głowa, Twarz, Ramię, ochraniacze rąk/nóg), rodziny przedmiotów (nieznane
+  → furtka, nigdy zgadywanie), wielosłotowość (ciężki pancerz blokuje ochraniacze; WKK: pancerz
+  wspomagany także Hełm/Głowę/Twarz/Strój — `wkk/config/doll-kobalt.mjs`), `resolve()` z zamianą
+  zamiast odmowy (D5), łańcuchem wypierania (D11), zasadami „Dobądź z pełnymi rękami", jednym
+  potwierdzeniem (D27), wysypem nadmiaru przy utracie pojemności. Koszty ruchów pokazywane,
+  nigdy liczone (D7).
+- **Lejek** (`actors/doll.mjs`): jedna flaga `slots` na przedmiocie; `system.equipped` = aktywny
+  (ręka albo noszone) — gogle, latarki, Nomex, Samuraj, tarcza i pancerze działają tylko aktywne bez
+  zmian w ich plikach. Natywne zapisy `equipped` przekierowane (`preUpdateItem`), kopie bez slotów
+  (`preCreateItem`), kolejka per aktor i nakładka niezapisanych slotów (partia zapisów nie obsadza
+  dwa razy tej samej ręki). Pas przeszedł z `atHand` na `slots` (`belt.N`).
+- **Użycie** (D8): z plecaka — załóż, z kabury — dobądź, z ręki — atak (`Item#use` w
+  `config/validation.mjs` + `dnd5e.preUseActivity` tylko dla ataków i trybów ognia).
+- **Chwyt** (`combat/grip.mjs`): broń palna jedną ręką → domyślne Utrudnienie (wyjątki: poręczna,
+  Jednoręki, Stalowy nadgarstek, Pulp Fiction); oburęczna — chwyt z wolnej ręki; dwuręczna jedną
+  ręką — ostrzeżenie; atak drugą ręką tylko z dwiema lekkimi; długa seria jedną ręką → Ułatwienie
+  w RO celów (`fire-modes.mjs`). Pigułki „brak wolnej ręki": pas, szybkoładowarka, opatrywanie.
+- **Manewry**: Wytrącenie wybiera z rąk celu, Ułatwienie wstępnie z chwytu (D2), przedmiot ląduje
+  u stóp celu; Pochwycenie zajmuje rękę atakującego, zwalnia ją zdjęcie stanu.
+- **Panel** (`actors/doll-panel.mjs`): bezramkowa ApplicationV2 przy karcie, przycisk
+  w nagłówku (po przeglądzie: zakładka „Oporządzenie" pod paskiem zakładek), manekin-maska (grafika MG, `icons/doll/mannequin.webp`; punkty zmierzone z maski),
+  linie do części ciała, duch chwytu, gesty
+  (przeciąganie, zamiana, zdejmowanie, klik = główne działanie, PPM = jawne cele), FLIP.
+  Wskaźnik miejsca w wierszu Ekwipunku (`actors/doll-rows.mjs`). Ikona pasa w wierszach: ✋ → sakwa.
+- **Ziemia** (`actors/ground-items.mjs`): upuszczenie = Kafelek z paczką (broń + wpięty magazynek),
+  przekaźnik MG; „Na ziemi obok" i Podnieś [I]; BN przy 0 PW upuszczają broń (ustawienie świata,
+  domyślnie wł.), z Bestiariusza przez tabelę `dropsAs` w generatorze, nabite wg D37. Broń rzucana
+  ląduje u celu — przy okazji koniec podwójnego zdejmowania sztuki (dnd5e + stary `thrown.mjs`).
+- **WKK**: „śmieci sprzedawcy" (Maczuga, Pałka policyjna, Kamienny nóż, Sztylet, Młotek —
+  `wkk/config/weapons-data.mjs`, ikony w MISSING.md §A, partia 42), Darmowe upuszczanie (ustawienie,
+  widoczne tylko z Kobaltem).
+- Dane: Oszczep w świecie `miotana` → `biala` (D30; kopia świata i Zbrojownia). Pancerze dostały
+  flagę `armorId`.
+- Testy: nowa paczka `lalka` (55), porty paczek `magazynki` (pas) i `sztuczki-walka` (Samuraj).
+- **Przegląd MG, ten sam dzień** (plan §17, „GM review round"): dla graczy **Oporządzenie**, nie
+  „Lalka" (kod bez zmian); plakietka stosu = ikona plecaka + ile zostało w plecaku (pas w
+  nagłówku i panel); kolumny wg wysokości części ciała, bez krzyżowania linii (`spreadCells`),
+  ręce wyróżnione; podpowiedź upuszczenia z pełnym sprzątaniem; klik `sounds/misc/equip.ogg`
+  (CC0) dla przekładającego i graczy-właścicieli; wysuwanie/chowanie i zwijanie z kartą;
+  przełącznik — pionowa zakładka pod paskiem zakładek karty (przycisk w nagłówku usunięty);
+  karta odłączona do osobnego okna zabiera panel ze sobą (`renderChild`, okno się poszerza).
+  Migracja D9 zastosowana (40 zmian, 14 postaci) — pomija przedmioty, które mają już sloty.
+  Testy `lalka`: 60.
 
 ### Pistolero (WKK) i Niezawodny Rewolwerowca (2026-10-01)
 

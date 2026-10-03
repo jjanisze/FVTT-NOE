@@ -57,6 +57,18 @@ Trucizna, Paralotnia, Adapter wifi, Monitorek, Router, Zegarek. Once an icon exi
 *(The conditional "IED radiowy" sheet icon is dropped: the GM chose "decide at placement"
 (2026-09-25), so a radio IED only exists on the map — class B row 5 covers it.)*
 
+## Queue (A) — batch 42 — 5/9
+
+Batch 41 is complete. These five entries are the next grid; four slots remain.
+
+| # | Item | Where | Current icon | Suggested prompt content |
+|---|------|-------|---------------|---------------------------|
+| 1 | Maczuga (WKK vendor trash, `wkk/config/weapons-data.mjs`, PLAN_paper_doll D36) → `icons/weapons/maczuga.svg` | dropped by Grubas, Kanibal at 0 PW (Kobalt on); pack `bron` | borrows `iron_pipe_club.svg` | Crude wooden club, thick knotted head, a few nails driven through it. Must not look like the baseball bat or the pipe |
+| 2 | Pałka policyjna (WKK, D36) → `icons/weapons/palka_policyjna.svg` | Konwojent | borrows `iron_pipe_club.svg` | Police side-handle baton (tonfa-style short grip near one end). Must read as "police", not as a pipe |
+| 3 | Kamienny nóż (WKK, D36) → `icons/weapons/kamienny_noz.svg` | Kanibal | borrows `combat_knife.svg` | Knapped flint blade lashed with cord to a short bone or wood handle — primitive, chipped edge |
+| 4 | Sztylet (WKK, D36) → `icons/weapons/sztylet.svg` | Myślący szczur | borrows `combat_knife.svg` | Narrow double-edged homemade dagger, simple crossguard, rag-wrapped grip. Thinner than the combat knife |
+| 5 | Młotek (WKK, D36) → `icons/weapons/mlotek.svg` | Żołnierz Posterunku | borrows `iron_pipe_club.svg` | Ordinary claw hammer, wooden handle |
+
 ## How an item gets added here
 
 Add a row any time a review finds an item on the actor's own portrait,
@@ -130,6 +142,11 @@ turn; placed charges can lie there for hours of game time.
 | 8 | `grenade-incendiary.webp` | Granat zapalający, thrown | Incendiary grenade canister, red band markings, lying on its side |
 | 9 | `grenade-improvised.webp` | Granat improwizowany, thrown | Improvised grenade: tin can packed with nails and bolts, taped shut, short fuse |
 
+*Weapons on the ground (PLAN_paper_doll §9, added 2026-10-03): a dropped weapon's Tile uses
+`vfx/<weapon id>.webp` (`weaponId` from `config/weapons-data.mjs`, e.g. `vfx/ar.webp`) when the file
+exists, else the white sheet icon with a dark outline. Optional, per weapon, any time — not queued
+as rows until the GM picks which weapons are worth it (long guns read worst as small white icons).*
+
 *(Not queued, deliberately: Granat gazowy reuses the smoke canister in practice — a second
 cylinder at 25 px would not be told apart; the frag grenade is `grenade-thrown.webp` already;
 mines are drawn as a coloured square today, and whether armed mines should be visible to
@@ -155,4 +172,23 @@ Część ma dziś tymczasowy zamiennik z plików, które już są w repo.
 | 7 | ukończenie | `sounds/produkcja/gotowe.ogg` | cisza | krótki, satysfakcjonujący „klik-zatrzask” + metaliczny dźwięk |
 | 8 | porażka / porzucenie | `sounds/produkcja/porazka.ogg` | cisza | coś pęka, sypie się na podłogę |
 | 9 | Szybka produkcja („iskra”) | `sounds/produkcja/iskra.ogg` | `explosives/detonator_switch.ogg` | elektryczny trzask iskry, bardzo krótki |
+
+---
+
+# D. Doll UI art (`PLAN_paper_doll.md` §7a)
+
+One-off panel art for the paper doll, not a batch: generate with an image model from the full
+spec and prompt in `PLAN_paper_doll.md` §7a. No text, no lines in the image — the callout lines
+and tiles are drawn by code, and the figure is used as a CSS mask coloured by the sheet's theme,
+so only its shape matters. Drop the PNG source in `icons/doll/`; the implementing agent converts
+it to WebP and measures the anchor points.
+
+| # | File | What | Size |
+|---|------|------|------|
+| 1 | `icons/doll/mannequin.png` | Genderless full-body silhouette with range-target proportions, front view, A-pose, hands clear of the hips, feet visible. Solid flat black, crisp edges, no texture or wear, transparent background | 800 × 1600 |
+
+**Done 2026-10-03:** the GM's `dev/icons/dolls/mannequin.fw.png` ships as `icons/doll/mannequin.webp`,
+anchors re-measured in `scripts/config/doll-anchors.mjs`. The hand-drawn stand-in
+`icons/doll/mannequin-placeholder.svg` stays as a fallback. New art later = convert to WebP, point
+`MANNEQUIN_SRC` at it, re-measure the anchors.
 

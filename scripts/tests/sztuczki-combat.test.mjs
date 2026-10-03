@@ -10,6 +10,7 @@
  * żadnej zmiany aktywnej sceny, żadnego ruszania zaznaczenia MG.
  */
 
+import { place } from "../actors/doll.mjs";
 import { SZTUCZKI } from "../config/sztuczki-data.mjs";
 import { ABILITY_KEYS } from "../actors/abilities.mjs";
 import { __testing as fire } from "../weapons/fire-modes.mjs";
@@ -280,6 +281,9 @@ export function registerSztuczkiCombatTests(quench) {
         palna    = made.find(i => i.name.includes("Pałka"));
         mieszana = made.find(i => i.name.includes("Nóż"));
         topor    = made.find(i => i.name.includes("Topór"));
+        // Lalka (PLAN_paper_doll): nowa sztuka ląduje w plecaku, „w ręku" znaczy slot ręki.
+        await place(sam, katana, "hand.0", { quiet: true });
+        await place(sam, sam.items.get(topor.id), "hand.1", { quiet: true });
       });
 
       it("rozpoznaje broń zadającą obrażenia cięte, także o mieszanym typie obrażeń", function () {
@@ -357,8 +361,8 @@ export function registerSztuczkiCombatTests(quench) {
           { label: "powrót efektu" });
       });
 
-      it("rejestr automatyki mówi `partial`, bo klauzula o dobywaniu zostaje MG", function () {
-        expect(SZTUCZKI.samuraj.auto).to.have.lengthOf(3);
+      it("rejestr automatyki mówi `partial`: Dobycie jest tylko nazwane, Darmowych Interakcji nikt nie liczy", function () {
+        expect(SZTUCZKI.samuraj.auto).to.have.lengthOf(4);
         expect(SZTUCZKI.samuraj.manual).to.be.a("string").and.not.be.empty;
       });
     });

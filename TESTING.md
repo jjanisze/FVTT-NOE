@@ -227,6 +227,7 @@ Uruchamiaj przed każdym przeładowaniem świata. Jest natychmiastowy.
 | `sztuczki-dane` | tabela Sztuczek, rejestr automatyki, pack |
 | `sztuczki-most` | kontrakty nazw między Sztuczkami a kodem, który ich szuka |
 | `sztuczki-walka` | predykaty trybów ognia i magazynków |
+| `lalka` | lalka (`PLAN_paper_doll.md`): taksonomia slotów, klasyfikacja, `resolve()` (zamiany, wypieranie, pytania, D27, utrata pojemności), zużycie, koszty ruchów, chwyt na ataku, paczki ziemi i `dropsAs`; lejek na prawdziwym aktorze (`equipped` = aktywny, przekierowanie, kopie, partia zapisów) |
 
 Największe niepokryte obszary (kolejni kandydaci): pochodzenia, manewry, zasady
 podróży i zapasów, generator bestiariusza. `config/inventory-audit.mjs`

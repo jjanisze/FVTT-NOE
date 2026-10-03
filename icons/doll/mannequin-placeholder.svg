@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 800" width="400" height="800">
+  <!-- Zastępcza sylwetka lalki (PLAN_paper_doll §7a): bezpłciowa, A-poza, widok od przodu.
+       Używana wyłącznie jako maska CSS — liczy się kształt, kolor daje motyw karty.
+       Docelowa grafika: icons/doll/mannequin.webp (MISSING.md §D). Punkty linii: config/doll-anchors.mjs. -->
+  <g fill="#000">
+    <ellipse cx="200" cy="72" rx="40" ry="50"/>
+    <path d="M180 110 L220 110 L227 150 L173 150 Z"/>
+    <path d="M174 146 L226 146 C252 150 278 152 286 170 L274 300 C268 340 256 370 252 395 L266 445 L134 445 L148 395 C144 370 132 340 126 300 L114 170 C122 152 148 150 174 146 Z"/>
+    <path d="M114 165 C100 210 90 250 80 292 C72 330 64 370 58 412 L90 418 C96 378 104 338 113 300 C122 262 132 226 142 196 Z"/>
+    <path d="M286 165 C300 210 310 250 320 292 C328 330 336 370 342 412 L310 418 C304 378 296 338 287 300 C278 262 268 226 258 196 Z"/>
+    <ellipse cx="72" cy="444" rx="19" ry="30" transform="rotate(12 72 444)"/>
+    <ellipse cx="328" cy="444" rx="19" ry="30" transform="rotate(-12 328 444)"/>
+    <path d="M136 440 L197 440 L196 520 C195 560 194 600 190 640 L186 742 L156 742 C152 700 148 660 146 620 C142 560 138 500 136 440 Z"/>
+    <path d="M264 440 L203 440 L204 520 C205 560 206 600 210 640 L214 742 L244 742 C248 700 252 660 254 620 C258 560 262 500 264 440 Z"/>
+    <ellipse cx="166" cy="758" rx="30" ry="14"/>
+    <ellipse cx="234" cy="758" rx="30" ry="14"/>
+  </g>
+</svg>

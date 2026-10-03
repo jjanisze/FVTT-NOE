@@ -1,3 +1,5 @@
+import { useGate, redirectUse } from "../actors/doll.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 
 /**
@@ -5,13 +7,20 @@ const MODULE_ID = "neuroshima-2026-overrides";
  */
 export function registerValidation() {
   const originalItemUse = CONFIG.Item.documentClass.prototype.use;
-  
+
   // Zabezpieczenie przed pokazaniem okna wyboru akcji dla broni, z których system i tak nie pozwoli strzelać
   CONFIG.Item.documentClass.prototype.use = async function(config = {}, dialog = {}, message = {}) {
+    // Lalka (D8): z plecaka — załóż, z kabury — dobądź; dopiero z ręki atak. Przed oknem wyboru
+    // aktywności dnd5e, więc klik w wiersz, kafelek i makro z paska skrótów robią to samo.
+    const gate = this.pack ? null : useGate(this);
+    if (gate && gate !== "proceed") {
+      await redirectUse(this, gate, { event: config?.event });
+      return null;
+    }
     if (this.type === "weapon" && !this.pack) { // nie sprawdzamy z kompendiów
       const qty = this.system?.quantity ?? 0;
-      const equipped = this.system?.equipped ?? false;
-      
+      const equipped = gate === "proceed" || (this.system?.equipped ?? false);
+
       if (qty <= 0 || !equipped) {
         ui.notifications?.warn(`Sięgasz po ${this.name}, a tam nic!`);
         return null; // Zablokuj całkowicie dalszy proces
@@ -24,9 +33,11 @@ export function registerValidation() {
     const item = activity.item;
     
     // Zapobiegaj użyciu broni, gdy jej fizyczna ilość wynosi 0 lub nie jest wyposażona (dodatkowo broni przed użyciem aktywności z np. makr czy chat card)
+    // Broń na lalce (postacie) — bramkę ataku trzyma `actors/doll.mjs`; przeładowanie i inne
+    // nie-ataki działają też z kabury i plecaka.
     if (item && item.type === "weapon") {
       const qty = item.system?.quantity ?? 0;
-      const equipped = item.system?.equipped ?? false;
+      const equipped = useGate(item) ? true : (item.system?.equipped ?? false);
       
       if (qty <= 0 || !equipped) {
         ui.notifications?.warn(`Sięgasz po ${item.name}, a tam nic!`);

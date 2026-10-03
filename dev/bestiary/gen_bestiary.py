@@ -172,7 +172,54 @@ AUTOMATION = {
     "bit-boys.skok": {"kind": "descriptive"},
 
     # RAI (autor systemu): wyd. październikowe zgubiło typ obrażeń, marcowe miało kłute.
-    "cywil.widly-tylko-farmer": {"damageType": "piercing"},
+    # dropsAs — patrz niżej (lalka, PLAN_paper_doll §9).
+    "cywil.widly-tylko-farmer": {"damageType": "piercing", "dropsAs": "widly"},
+
+    # ---- Szeryf: „Poddaj się!" (PLAN_paper_doll §5) ----
+    # RO na Mądrość ST 13 albo cel upuszcza broń i jest Przerażony do końca następnej tury
+    # szeryfa. Przerażenie — natywny efekt aktywności (przycisk na karcie, MG w pętli);
+    # upuszczenie broni z rąk postaci — `dropOnFail`, czyta to scripts/combat/drop-on-fail.mjs.
+    "szeryf.poddaj-sie": {
+        "kind": "save", "ability": "wis", "dc": 13, "activation": "bonus", "range": 18,
+        "onFail": {"condition": "frightened"},
+        "dropOnFail": True,
+    },
+
+    # ---- Co BN upuszcza przy 0 PW (lalka, PLAN_paper_doll §9, D34–D37) ----
+    # Ataki Bestiariusza to zamalgamowane featy, nie przedmioty — `dropsAs` wskazuje broń
+    # z katalogu (`scripts/config/weapons-data.mjs`); spada świeży egzemplarz z katalogu, nie
+    # statystyki BN-a. Dopasowanie nazw w runtime odpada: częściowe zrobiło z „Konara" AR (§15).
+    # NOE — dokładne nazwy z tabeli broni:
+    "gangus-zolnierz.peacemaker": {"dropsAs": "peacemaker"},
+    "gangus-kapo.uzi": {"dropsAs": "uzi"},
+    "konwojent-straznik.tommy-gun": {"dropsAs": "tommy-gun"},
+    "cyngiel.desert-eagle": {"dropsAs": "desert-eagle"},
+    "cyngiel.szabla": {"dropsAs": "szabla"},
+    "cyngiel.noz-taktyczny": {"dropsAs": "noz-taktyczny"},
+    "szeryf.44-magnum": {"dropsAs": "magnum-44"},
+    "szeryf.lewar-m95": {"dropsAs": "lewar-m95"},
+    "szeryf.kastet": {"dropsAs": "kastet"},
+    "cywil.trzydziestka-osemka": {"dropsAs": "trzydziestka-osemka"},
+    "zolnierz-posterunku.ar": {"dropsAs": "ar"},
+    "generacja-iii-szpieg.dmuchawka": {"dropsAs": "dmuchawka"},
+    "kanibal.luk-tradycyjny": {"dropsAs": "luk-tradycyjny"},
+    "kanibal.oszczep": {"dropsAs": "oszczep"},
+    # Grubas ma jeden oszczep w dwóch wpisach (wręcz / dystans) — spada raz (deduplikacja w runtime).
+    "generacja-iii-grubas.oszczep-wrecz": {"dropsAs": "oszczep"},
+    "generacja-iii-grubas.oszczep-dystans": {"dropsAs": "oszczep"},
+    # NOE — najbliższy wpis z tabeli (propozycje bez sprzeciwu MG, 2026-10-02):
+    "gangus-zolnierz.bejsbol": {"dropsAs": "bejsbol-rurka"},
+    "gangus-kapo.bejsbol": {"dropsAs": "bejsbol-rurka"},
+    "cywil.rura-stalowa": {"dropsAs": "bejsbol-rurka"},
+    "gangus-boss.utwardzony-crash": {"dropsAs": {"id": "crash", "addons": ["utwardzenie"]}},
+    "myslacy-szczur.luk": {"dropsAs": "luk-tradycyjny"},
+    # WKK — „śmieci sprzedawcy" (D36); bez Kobaltu nic nie spada:
+    "generacja-iii-grubas.maczuga": {"dropsAs": "maczuga"},
+    "kanibal.maczuga": {"dropsAs": "maczuga"},
+    "kanibal.kamienny-noz": {"dropsAs": "kamienny-noz"},
+    "konwojent-straznik.palka-policyjna": {"dropsAs": "palka-policyjna"},
+    "myslacy-szczur.sztylet": {"dropsAs": "sztylet"},
+    "zolnierz-posterunku.mlotek": {"dropsAs": "mlotek"},
 }
 
 
@@ -265,6 +312,7 @@ def build_creature(cid, r):
             } if dmg else None,
             "rider": a.get("rider"),
             "onHit": auto.get("onHit"),
+            "dropsAs": auto.get("dropsAs"),
         })
 
     return out

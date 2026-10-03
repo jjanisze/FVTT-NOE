@@ -285,15 +285,18 @@ export const SZTUCZKI = Object.freeze({
     // Tylko klauzula „Bez dna" ma legacy-klucz — to jedyna część automatyzowana (zob. `auto`
     // poniżej). „Mam pod ręką [I]" to osobno nazwana klauzula tej samej Sztuczki (znaleziona
     // żywcem jako WŁASNY bare-name feat, dokładnie jak Bez Dna) — bez mechaniki, patrz `manual`.
-    legacyAbilityKeys: ["bezDna"],
+    legacyAbilityKeys: ["bezDna", "mamPodReka"],
     auto: [{
       what: "Bez dna: Udźwig użytkowy i maksymalny ×2 — Active Effect na "
         + "system.attributes.encumbrance.multipliers.overall, dopinany/odpinany automatycznie "
         + "zależnie od posiadania Sztuczki. Plakietka w widoku Ekwipunku.",
       where: "actors/bez-dna.mjs"
+    }, {
+      what: "Mam pod ręką: Oporządzenie pokazuje wyciągnięcie z plecaka jako [I] na linii ruchu w walce.",
+      where: "actors/doll.mjs"
     }],
-    manual: "„Mam pod ręką [I]” (wyciągnięcie przedmiotu z plecaka jako Darmowa Interakcja) nie jest "
-      + "automatyzowane."
+    manual: "„Mam pod ręką [I]” jest tylko nazwane na linii ruchu Oporządzenia — ekonomii akcji moduł nie liczy "
+      + "(PLAN_paper_doll D7)."
   },
   pancerny: {
     label: "Pancerny",
@@ -373,7 +376,13 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 ZRC; brak Utrudnienia przy strzelaniu pistoletem / PM jedną ręką; "
       + "każda broń palna krótka zyskuje właściwość lekka.",
     category: "dystans",
-    auto: []
+    legacyAbilityKeys: ["pulpFiction"],
+    auto: [{
+      what: "Strzał z pistoletu / PM jedną ręką bez domyślnego Utrudnienia; broń palna krótka liczy się "
+        + "jako lekka przy ataku drugą ręką (Oporządzenie).",
+      where: "combat/grip.mjs"
+    }],
+    manual: "Rozwój Cechy (+1 ZRC) wybiera się przy awansie."
   },
   robinHood: {
     label: "Robin Hood",
@@ -431,13 +440,17 @@ export const SZTUCZKI = Object.freeze({
         where: "actors/samuraj.mjs"
       },
       {
-        what: "TT +1, gdy trzyma finezyjną broń białą zadającą obrażenia cięte — Active Effect na "
-          + "system.attributes.ac.bonus, dopinany/odpinany przy zmianie ekwipunku.",
+        what: "TT +1, gdy trzyma finezyjną broń białą zadającą obrażenia cięte w ręce (Oporządzenie: `equipped` = "
+          + "ręka albo noszone) — Active Effect na system.attributes.ac.bonus.",
         where: "actors/samuraj.mjs"
+      },
+      {
+        what: "Dobycie: Oporządzenie pokazuje dobycie i schowanie takiej broni jako darmowe na linii ruchu w walce.",
+        where: "actors/doll.mjs"
       }
     ],
-    manual: "„Dobycie finezyjnej broni białej zadającej obrażenia cięte bez Darmowej Interakcji” — dobywanie broni "
-      + "nie jest w tym systemie śledzone jako zasób, więc nie ma czego automatyzować."
+    manual: "Darmowe Interakcje nie są liczone (PLAN_paper_doll D7) — Dobycie jest tylko nazwane na linii "
+      + "ruchu Oporządzenia."
   },
   siekierezada: {
     label: "Siekierezada",
@@ -445,7 +458,12 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 SIŁ lub ZRC; wyciągnięcie 2 siekierek jednocześnie w 1 Darmowej Interakcji; "
       + "zasięg rzutu siekierkami ×2; TT +1 przy walce dwiema siekierkami.",
     category: "wrecz",
-    auto: []
+    legacyAbilityKeys: ["siekierezada"],
+    auto: [{
+      what: "Podwójne dobycie: nazwane na linii ruchu Oporządzenia przy dobyciu siekierki.",
+      where: "actors/doll.mjs"
+    }],
+    manual: "Zasięg rzutu siekierkami ×2 i TT +1 przy walce dwiema siekierkami — MG. Rozwój Cechy przy awansie."
   },
   snajper: {
     label: "Snajper",

@@ -1316,3 +1316,27 @@ bo tu wystarczy zserializować, nie ma serii zdarzeń do skolapsowania: `flara.m
 (`ensureFlaraActivities`), `kolczatka.mjs`, `toolkit-medyk.mjs`'s uzupełnienie. Który
 wariant pasuje: seria zdarzeń z jednego awansu/importu → pełny kształt z 15.4; jedno
 tworzenie Itemu na raz, ale potencjalnie z dwóch klientów → sam strażnik wystarczy.
+
+## 16. Lalka — `equipped` pisze tylko lejek (2026-10-03)
+
+Projekt: `PLAN_paper_doll.md` (§17 — co wdrożono). Pliki: `actors/doll-model.mjs` (czysty model),
+`actors/doll.mjs` (lejek, przechwyty), `actors/doll-panel.mjs`, `actors/doll-rows.mjs`,
+`combat/grip.mjs`, `actors/ground-items.mjs`.
+
+- **Na postaciach `system.equipped` znaczy „aktywny"** (ręka albo noszone) i jest wyprowadzany
+  z flagi `slots`. Nie zapisuj go wprost — `game.neuroshima.lalka.place(actor, item, "hand.0")`,
+  `.takeOff()`, `.drop()`, `.equip()`. Zapis wprost i tak przejdzie przez `preUpdateItem` lalki,
+  ale gdy rusza inne przedmioty albo wymaga pytania, wykona się **asynchronicznie, po** Twoim
+  `await item.update()` — test albo kod, który od razu czyta wynik, zobaczy stary stan.
+- **Nowy przedmiot na postaci ląduje w plecaku** (`preCreateItem` zdejmuje `equipped` i `slots`).
+  Testy: utwórz, potem `place()`. Wyjątek dla własnych zapisów: opcja `{neuroDoll: true}`.
+- **Reguły czytają predykaty**, nie flagę: `inHand`, `heldItems`, `freeHands`, `locationOf`,
+  `gripFor` (`actors/doll.mjs`), `handContext`/`freeHandCheck` (`combat/grip.mjs`).
+- **Nowa rodzina przedmiotów** → `classifyItem()` w `doll-model.mjs`, po typie albo fladze
+  katalogu, nigdy po nazwie; przedmiot spoza katalogu MG dopisuje flagą `dollSlot` (klucz rodziny
+  albo `"none"`). Nieznane = furtka (natywny przełącznik dnd5e).
+- **Ziemia potrzebuje aktywnego MG** (Kafelki tworzy tylko on — przekaźnik flagą na aktorze, jak
+  `items/kolczatka.mjs`). Bez MG upuszczenie i podnoszenie odmawiają z komunikatem.
+- Lokatorzy rąk (pochwycenie) to **lista** we fladze aktora `handOccupants` — id slotu ma kropkę,
+  więc nie może być kluczem obiektu we fladze (Foundry rozwinąłby go w zagnieżdżenie).
+

@@ -25,18 +25,23 @@
  * **Liczymy sztuki, nie stosy** (decyzja MG, 2026-09-24): siedem Relanium przy pasie to siedem
  * przedmiotów. Stos nie jest dzielony na dokumenty.
  *
- * ## Dane: pozycje slotów na itemie
+ * ## Dane: sloty lalki
  *
- * Flaga `atHand` to **lista numerów slotów** zajętych przez sztuki tego stosu (`[0, 2]` = dwie
- * sztuki, w slocie 1 i 3). Długość listy to liczba sztuk przy pasie; kolejność na pasie jest
- * wolna — gracz ją ustawia przeciąganiem (decyzja MG 2026-09-25: gracze będą przestawiać pas
- * przed każdą walką). Jedno źródło prawdy, bez tablicy slotów na aktorze, którą trzeba by
- * synchronizować przy każdej zmianie ilości. Stare postacie flagi (liczba albo `true`, v1) są
- * czytane jako tyle sztuk bez pozycji — dostają pierwsze wolne sloty.
+ * Pas to pierwsza część postaci ze slotami — lalka (`actors/doll.mjs`, `PLAN_paper_doll.md`)
+ * uogólniła go na ręce, pochwy, kabury i noszone. Od lalki pas nie ma własnej flagi: sztuki leżą
+ * w tej samej flagi `slots` co wszystko inne, jako `belt.N` (`["belt.0", "belt.2"]` = dwie
+ * sztuki, w slocie 1 i 3). Kolejność na pasie jest wolna — gracz ją ustawia przeciąganiem
+ * (decyzja MG 2026-09-25). Stara flaga `atHand` (lista pozycji z v2.0, liczba albo `true` z v1)
+ * jest czytana przez lalkę i przepisywana przy pierwszym zapisie (`migrateDoll`).
  *
- * **Zużycie schodzi najpierw z pasa.** Gdy ilość spada, `preUpdateItem` zdejmuje pozycje w tej
- * samej aktualizacji — tę z klikniętego kafelka (`withConsumeHint`), inaczej najwyższą. Dlatego
- * pigułka „skąd to przyszło" jest liczona **przed** zużyciem.
+ * Zapis idzie **przez lejek lalki** (`place`): położenie na zajęty slot zamienia (D5 — nowy
+ * wjeżdża, poprzedni idzie na wolny slot pasa albo do plecaka); utrata slotu po zdjęciu kamizelki
+ * odsyła nadmiar do plecaka (nadmiar nie może trwać). Jedyna odmowa, która została: dokładanie
+ * „gdziekolwiek" (✋) na pełny pas — tam nie ma kogo zamienić.
+ *
+ * **Zużycie schodzi najpierw z pasa.** Gdy ilość spada, `preUpdateItem` lalki zdejmuje sztukę
+ * w tej samej aktualizacji — tę z klikniętego kafelka (`withConsumeHint`), inaczej najwyższą.
+ * Dlatego pigułka „skąd to przyszło" jest liczona **przed** zużyciem.
  *
  * **Nie zabraniamy sięgnięcia do plecaka.** RAW (*Tworzenie postaci*, **Plecak**): „Wyciągnięcie
  * przedmiotu z plecaka zabiera **zazwyczaj** jedną akcję." Zazwyczaj — więc sięgnięcie jest
@@ -46,11 +51,11 @@
 
 import { GRENADE_MAP } from "../config/ammo-data.mjs";
 import { MAG_SUBTYPES } from "../config/magazines-data.mjs";
+import { dollState, place, commitMoves, withConsumeHint as dollConsumeHint } from "./doll.mjs";
+import { slotId, groupOf, parseSlot } from "./doll-model.mjs";
+import { freeHandPill } from "../combat/grip.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
-
-/** Flaga na itemie: lista slotów zajętych przez sztuki tego stosu. */
-export const AT_HAND_FLAG = "atHand";
 
 /** Flaga na ekwipunku: ile slotów dokłada, gdy założony (WKK: Kamizelka taktyczna). */
 export const HANDY_SLOTS_FLAG = "handySlots";
@@ -138,26 +143,16 @@ function _quantity(item) {
   return Math.max(0, Math.floor(Number(item?.system?.quantity ?? 0)) || 0);
 }
 
-/**
- * Surowa flaga → `{positions, legacy}`. `positions` — posortowane, unikalne, nieujemne; `legacy` —
- * liczba sztuk bez pozycji (flaga z v1). Bez przycinania do ilości — to robi `beltCount`.
- */
-function _readBelt(raw) {
-  if (Array.isArray(raw)) {
-    const positions = [...new Set(raw.map(n => Math.floor(Number(n))).filter(n => Number.isFinite(n) && n >= 0))]
-      .sort((a, b) => a - b);
-    return { positions, legacy: 0 };
-  }
-  if (raw === true) return { positions: [], legacy: 1 };
-  const n = Math.floor(Number(raw)) || 0;
-  return { positions: [], legacy: Math.max(0, n) };
+/** Pozycje pasa (`[0, 2]`) zajęte przez sztuki tego stosu — ze slotów lalki. */
+function _beltPositions(state, item) {
+  const d = state.items.find(x => x.id === item?.id);
+  return (d?.slots ?? []).filter(s => groupOf(s) === "belt").map(s => parseSlot(s).index).sort((a, b) => a - b);
 }
 
 /** Ile sztuk tego stosu leży przy pasie — zawsze w zakresie 0…ilość. */
 export function beltCount(item) {
-  if (!isHandyCandidate(item)) return 0;
-  const { positions, legacy } = _readBelt(_flag(item, AT_HAND_FLAG));
-  return Math.min(positions.length + legacy, _quantity(item));
+  if (!isHandyCandidate(item) || !item.actor) return 0;
+  return Math.min(_beltPositions(dollState(item.actor), item).length, _quantity(item));
 }
 
 /** Czy przynajmniej jedna sztuka leży przy pasie (Darmowa Interakcja), a nie w plecaku. */
@@ -165,14 +160,19 @@ export function isAtHand(item) {
   return beltCount(item) > 0;
 }
 
+function _beltItems(actor) {
+  const state = dollState(actor);
+  return state.items.filter(d => d.family === "belt" && d.slots.some(s => groupOf(s) === "belt"));
+}
+
 /** Wszystkie stosy aktora, z których coś leży przy pasie. */
 export function handyItems(actor) {
-  return (actor?.items ?? []).filter(i => beltCount(i) > 0);
+  return _beltItems(actor).map(d => actor.items.get(d.id)).filter(Boolean);
 }
 
 /** Ile slotów zajętych — suma sztuk przy pasie, nie liczba stosów. */
 export function handyCount(actor) {
-  return handyItems(actor).reduce((n, i) => n + beltCount(i), 0);
+  return _beltItems(actor).reduce((n, d) => n + d.slots.filter(s => groupOf(s) === "belt").length, 0);
 }
 
 /**
@@ -190,9 +190,10 @@ export function handySlotSources(actor) {
     .map(i => ({ name: i.name, slots: Number(_flag(i, HANDY_SLOTS_FLAG)) }));
 }
 
-/** Limit pasa: 3 z RAW + sloty z założonego ekwipunku. */
+/** Limit pasa: 3 z RAW + sloty z aktywnego ekwipunku (pojemność grupy `belt` lalki). */
 export function handyLimit(actor) {
-  return handyCapacity(handySlotSources(actor).map(s => ({ equipped: true, slots: s.slots })));
+  if (!actor) return HANDY_LIMIT;
+  return dollState(actor).layout.capacity.belt ?? HANDY_LIMIT;
 }
 
 /** Ile slotów wolnych. */
@@ -201,75 +202,37 @@ export function handyFree(actor) {
 }
 
 /**
- * Rozkład slotów. Czyste — testowane przez `__testing`.
- *
- * Sztuki z pozycją lądują na swoich slotach (kolizja → jak bez pozycji); sztuki bez pozycji
- * (stara flaga) i nadwyżki wypełniają pierwsze wolne sloty. Wynik ma długość co najmniej
- * `limit`; slot ≥ `limit` to nadmiar (np. po zdjęciu kamizelki).
- *
- * @param {Array<{id: string, positions: number[], legacy: number, quantity: number}>} entries
- * @param {number} limit
- * @returns {Array<string|null>}  id itemu na slot albo null
+ * Pas aktora slot po slocie: `[{slot, item|null, overflow}]`. To czyta pasek w nagłówku.
+ * `overflow` — sztuka ponad pojemność; lalka sprząta ją do plecaka przy następnym zapisie,
+ * więc to stan przejściowy (np. kamizelka skasowana z ekwipunku ręką MG).
  */
-export function layoutSlots(entries, limit) {
-  const slots = [];
-  const loose = [];
-  for (const e of entries) {
-    const keep = Math.min(e.positions.length + e.legacy, e.quantity);
-    const placed = e.positions.slice(0, keep);
-    for (const p of placed) {
-      if (slots[p] == null) slots[p] = e.id;
-      else loose.push(e.id);
-    }
-    for (let n = placed.length; n < keep; n++) loose.push(e.id);
-  }
-  for (const id of loose) {
-    let i = 0;
-    while (slots[i] != null) i++;
-    slots[i] = id;
-  }
-  const length = Math.max(limit, slots.length);
-  return Array.from({ length }, (_, i) => slots[i] ?? null);
-}
-
-function _entries(actor) {
-  return (actor?.items ?? []).filter(isHandyCandidate).map(i => {
-    const { positions, legacy } = _readBelt(_flag(i, AT_HAND_FLAG));
-    return { id: i.id, positions, legacy, quantity: _quantity(i) };
-  }).filter(e => e.positions.length + e.legacy > 0 && e.quantity > 0)
-    .sort((a, b) => (a.positions[0] ?? Infinity) - (b.positions[0] ?? Infinity));
-}
-
-/** Pas aktora slot po slocie: `[{slot, item|null, overflow}]`. To czyta pasek w nagłówku. */
 export function beltSlots(actor) {
-  const limit = handyLimit(actor);
-  return layoutSlots(_entries(actor), limit).map((id, slot) => ({
-    slot, item: id ? actor.items.get(id) : null, overflow: slot >= limit
-  }));
+  const { layout } = dollState(actor);
+  const limit = layout.capacity.belt ?? HANDY_LIMIT;
+  const out = [];
+  for (let i = 0; i < limit; i++) {
+    out.push({ slot: i, item: actor.items.get(layout.slots.get(slotId("belt", i))) ?? null, overflow: false });
+  }
+  for (const c of layout.conflicts) {
+    const p = parseSlot(c.slot);
+    if (p.group === "belt" && p.index >= limit) out.push({ slot: p.index, item: actor.items.get(c.itemId) ?? null, overflow: true });
+  }
+  return out;
 }
 
 /* -------------------------------------------- */
-/*  Zapis                                        */
+/*  Zapis — przez lejek lalki                    */
 /* -------------------------------------------- */
-
-/** Pozycje itemu według bieżącego rozkładu (stara flaga dostaje tu swoje miejsca). */
-function _positionsOf(actor, item) {
-  return beltSlots(actor).filter(s => s.item?.id === item.id).map(s => s.slot);
-}
-
-function _beltUpdate(itemId, positions) {
-  return { _id: itemId, [`flags.${MODULE_ID}.${AT_HAND_FLAG}`]: [...positions].sort((a, b) => a - b) };
-}
 
 function _warnFull(actor, limit) {
   const names = handyItems(actor).map(i => `${i.name}${beltCount(i) > 1 ? ` ×${beltCount(i)}` : ""}`).join(", ");
   ui.notifications.warn(`${actor.name}: wszystkie ${limit} sloty podręczne zajęte (${names}). `
-    + `Odłóż coś do plecaka, żeby zrobić miejsce.`);
+    + `Odłóż coś do plecaka albo przeciągnij przedmiot na zajęty slot, żeby zamienić.`);
 }
 
 /**
- * Kładzie jedną sztukę na pas — w podany slot, jeśli jest wolny i w limicie, inaczej w pierwszy
- * wolny.
+ * Kładzie jedną sztukę na pas. Ze wskazanym slotem — zawsze (zajęty: zamiana, D5); bez slotu —
+ * w pierwszy wolny, a gdy pas pełny, odmowa z listą tego, co na nim leży.
  * @returns {Promise<boolean>} false = odmowa (z komunikatem)
  */
 export async function addToBelt(item, { slot } = {}) {
@@ -290,58 +253,41 @@ export async function addToBelt(item, { slot } = {}) {
     return false;
   }
   const limit = handyLimit(actor);
+  if (Number.isInteger(slot) && slot >= 0 && slot < limit) {
+    return place(actor, item, slotId("belt", slot), { from: "pack" });
+  }
   if (handyCount(actor) >= limit) { _warnFull(actor, limit); return false; }
-
-  const slots = beltSlots(actor);
-  let target = Number.isInteger(slot) && slot >= 0 && slot < limit && !slots[slot]?.item ? slot : -1;
-  if (target < 0) target = slots.findIndex((s, i) => i < limit && !s.item);
-  if (target < 0) { _warnFull(actor, limit); return false; }
-
-  await actor.updateEmbeddedDocuments("Item", [_beltUpdate(item.id, [..._positionsOf(actor, item), target])]);
-  return true;
+  return place(actor, item, "belt", { from: "pack" });
 }
 
 /** Zdejmuje jedną sztukę z pasa (z podanego slotu, inaczej z najwyższego) do plecaka. */
 export async function removeFromBelt(item, { slot } = {}) {
   const actor = item?.actor;
   if (!actor) return false;
-  const positions = _positionsOf(actor, item);
+  const positions = _beltPositions(dollState(actor), item);
   if (!positions.length) return false;
   const drop = positions.includes(slot) ? slot : positions[positions.length - 1];
-  await actor.updateEmbeddedDocuments("Item", [_beltUpdate(item.id, positions.filter(p => p !== drop))]);
-  return true;
+  return place(actor, item, "pack", { from: slotId("belt", drop) });
 }
 
 /** Cały stos do plecaka. */
 export async function clearBelt(item) {
-  if (!item?.actor || !isAtHand(item)) return false;
-  await item.actor.updateEmbeddedDocuments("Item", [_beltUpdate(item.id, [])]);
-  return true;
+  const actor = item?.actor;
+  if (!actor || !isAtHand(item)) return false;
+  const positions = _beltPositions(dollState(actor), item);
+  return commitMoves(actor, positions.map(p => ({ itemId: item.id, from: slotId("belt", p), to: "pack" })));
 }
 
 /**
- * Przestawia sztukę ze slotu `from` na `to` (w limicie). Zajęty `to` — zamiana miejscami.
- * Jedna aktualizacja dla obu itemów.
+ * Przestawia sztukę ze slotu `from` na `to` (w limicie). Zajęty `to` — zamiana miejscami
+ * (lalka oddaje wypchniętej sztuce zwolniony slot).
  */
 export async function moveBeltPiece(actor, from, to) {
   const limit = handyLimit(actor);
   if (from === to || !Number.isInteger(to) || to < 0 || to >= limit) return false;
-  const slots = beltSlots(actor);
-  const moving = slots[from]?.item;
+  const moving = beltSlots(actor)[from]?.item;
   if (!moving) return false;
-  const other = slots[to]?.item ?? null;
-  if (other?.id === moving.id) return false; // dwie sztuki tego samego stosu — nic się nie zmienia
-
-  const a = _positionsOf(actor, moving);
-  a[a.indexOf(from)] = to;
-  const updates = [_beltUpdate(moving.id, a)];
-  if (other) {
-    const b = _positionsOf(actor, other);
-    b[b.indexOf(to)] = from;
-    updates.push(_beltUpdate(other.id, b));
-  }
-  await actor.updateEmbeddedDocuments("Item", updates);
-  return true;
+  return place(actor, moving, slotId("belt", to), { from: slotId("belt", from), quiet: true });
 }
 
 /**
@@ -356,13 +302,13 @@ export async function setBeltCount(item, count) {
   }
   const live = () => item.actor?.items.get(item.id) ?? item;
   while (beltCount(live()) < target) if (!await addToBelt(live())) return false;
-  while (beltCount(live()) > target) await removeFromBelt(live());
+  while (beltCount(live()) > target) if (!await removeFromBelt(live())) return false;
   return true;
 }
 
 /**
- * Klik w ✋: dołóż jedną sztukę na pas; gdy już się nie da (cały stos przy pasie albo brak
- * slotu), odłóż wszystko. Dla ilości 1 to dokładnie włącz/wyłącz.
+ * Klik w przełącznik pasa w wierszu: dołóż jedną sztukę na pas; gdy już się nie da (cały stos
+ * przy pasie albo brak slotu), odłóż wszystko. Dla ilości 1 to dokładnie włącz/wyłącz.
  */
 export async function toggleAtHand(item) {
   if (!isHandyCandidate(item)) return false;
@@ -378,53 +324,11 @@ export async function toggleAtHand(item) {
 /* -------------------------------------------- */
 
 /**
- * Nowe pozycje po zmianie ilości. Czyste — testowane przez `__testing`.
- * Ubytek zdejmuje najpierw slot-podpowiedź (kliknięty kafelek), potem najwyższe; przybytek idzie
- * do plecaka. Wynik nigdy nie jest dłuższy niż nowa ilość.
+ * Uruchamia `fn` z informacją, z którego slotu pasa zeszła sztuka (klik w kafelek paska).
+ * Samo przeliczenie slotów przy spadku ilości robi `preUpdateItem` lalki (`slotsAfterSpend`).
  */
-export function positionsAfterSpend(positions, oldQty, newQty, hint = null) {
-  let left = [...positions].sort((a, b) => a - b);
-  let spent = Math.max(0, oldQty - newQty);
-  if (spent && hint != null && left.includes(hint)) {
-    left = left.filter(p => p !== hint);
-    spent--;
-  }
-  left = left.slice(0, Math.max(0, left.length - spent));
-  return left.slice(0, Math.max(0, newQty));
-}
-
-/** Liczbowy odpowiednik `positionsAfterSpend` — dla starej flagi (v1) i testów. */
-export function beltAfterQuantityChange(belt, oldQty, newQty) {
-  return positionsAfterSpend(Array.from({ length: belt }, (_, i) => i), oldQty, newQty).length;
-}
-
-const _consumeHints = new Map();
-
-/** Uruchamia `fn` z informacją, z którego slotu zeszła sztuka (klik w kafelek paska). */
 export async function withConsumeHint(item, slot, fn) {
-  _consumeHints.set(item.id, slot);
-  try { return await fn(); } finally { _consumeHints.delete(item.id); }
-}
-
-function _onPreUpdateItem(item, changes) {
-  const newQty = foundry.utils.getProperty(changes, "system.quantity");
-  if (newQty === undefined || !isHandyCandidate(item)) return;
-  const raw = _flag(item, AT_HAND_FLAG);
-  if (raw == null) return;
-  const oldQty = _quantity(item);
-  const nextQty = Math.max(0, Math.floor(Number(newQty)) || 0);
-  if (nextQty >= oldQty) return;
-
-  const { positions, legacy } = _readBelt(raw);
-  let next;
-  if (legacy) {
-    next = beltAfterQuantityChange(Math.min(legacy, oldQty), oldQty, nextQty);
-    if (next === legacy) return;
-  } else {
-    next = positionsAfterSpend(positions.slice(0, oldQty), oldQty, nextQty, _consumeHints.get(item.id) ?? null);
-    if (next.length === positions.length) return;
-  }
-  foundry.utils.setProperty(changes, `flags.${MODULE_ID}.${AT_HAND_FLAG}`, next);
+  return dollConsumeHint(item, slotId("belt", slot), fn);
 }
 
 /* -------------------------------------------- */
@@ -447,10 +351,6 @@ export async function handyUse(item, { slot = null, event = null } = {}) {
 export function handyCaption(item) {
   const family = FAMILIES.find(f => f.match(item));
   try { return family?.caption?.(item) ?? ""; } catch (_e) { return ""; }
-}
-
-export function registerHandyItems() {
-  Hooks.on("preUpdateItem", _onPreUpdateItem);
 }
 
 /* -------------------------------------------- */
@@ -483,11 +383,14 @@ export function provenanceBadge(item, { force = false, atHand } = {}) {
   const actor = item.actor;
   if (!force && !actor?.inCombat) return "";
 
-  return (atHand ?? isAtHand(item))
+  const where = (atHand ?? isAtHand(item))
     ? `<span class="neuro-handy-pill is-at-hand" data-tooltip="Przedmiot podręczny — wyciągnięcie w ramach Darmowej Interakcji [I].">`
-      + `<i class="fa-solid fa-hand" inert></i> podręczny</span>`
+      + `<i class="fa-solid fa-sack" inert></i> podręczny</span>`
     : `<span class="neuro-handy-pill is-from-pack" data-tooltip="Z plecaka. RAW: wyciągnięcie przedmiotu z plecaka zabiera zazwyczaj jedną akcję — ile kosztowało tym razem, decyduje MG.">`
       + `<i class="fa-solid fa-boxes-packing" inert></i> z plecaka</span>`;
+  // Lalka (§5): przedmiot trzeba czymś wyciągnąć — uwaga dopiero przy dwóch ZAJĘTYCH rękach
+  // (karabin trzymany „oburącz" nie blokuje granatu: robi to ręka z kolby).
+  return where + freeHandPill(actor, { need: 1, what: item.name });
 }
 
 /* -------------------------------------------- */
@@ -513,7 +416,7 @@ export function handyToggleHtml(item) {
       + `(maks. ${limit} przedmiotów podręcznych łącznie, liczone w sztukach).`;
   return `<button type="button" class="unbutton item-control neuro-handy-toggle${belt ? " is-on" : ""}"
     data-tooltip="${tip}"
-    ><i class="fas fa-hand" inert></i>${stack && belt ? `<span class="neuro-handy-count">${belt}</span>` : ""}</button>`;
+    ><i class="fas fa-sack" inert></i>${stack && belt ? `<span class="neuro-handy-count">${belt}</span>` : ""}</button>`;
 }
 
 /** Podpina `handyToggleHtml()` w podanym wierszu i robi wiersz przeciągalnym na pasek. */
@@ -549,10 +452,6 @@ export function makeBeltDraggable(row, item) {
 
 export const __testing = Object.freeze({
   handyFamilyOf,
-  beltAfterQuantityChange,
-  positionsAfterSpend,
-  layoutSlots,
   handyCapacity,
-  readBelt: _readBelt,
   HANDY_LIMIT
 });

@@ -19,6 +19,7 @@ import { buildHealthStrip } from "./health-panel.mjs";
 import { isBurning, promptDouse, PODPALENIE } from "../combat/podpalenie.mjs";
 import { EXHAUSTION_SOURCES, getExhaustionSources } from "../config/exhaustion.mjs";
 import { SKAZENIE_DISEASE_THRESHOLD } from "../config/levelled-conditions-data.mjs";
+import { dollSheetMixin } from "./doll-panel.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const ZASOBY_TEMPLATE = `modules/${MODULE_ID}/templates/tab-zasoby.hbs`;
@@ -106,10 +107,11 @@ function _rebuildParts(baseParts, drop, { produkcja = false } = {}) {
  * @param {object[]} config.tabs      Replacement TABS array.
  * @param {string} config.defaultTab
  * @param {boolean} [config.produkcja]  zakładka Produkcja — tylko postacie graczy (§6: NPC jej nie dostają)
+ * @param {boolean} [config.doll]       panel lalki przy karcie (PLAN_paper_doll §7) — tylko postacie (D10)
  * @returns {Function}
  */
-function _buildSheetClass(Base, { name, drop, tabs, defaultTab, produkcja = false }) {
-  const cls = class NeuroshimaActorSheet extends Base {
+function _buildSheetClass(Base, { name, drop, tabs, defaultTab, produkcja = false, doll = false }) {
+  let cls = class NeuroshimaActorSheet extends Base {
     static PARTS = _rebuildParts(Base.PARTS, drop, { produkcja });
 
     static TABS = tabs;
@@ -149,6 +151,8 @@ function _buildSheetClass(Base, { name, drop, tabs, defaultTab, produkcja = fals
       if (el.scrollLeft !== saved.left) el.scrollLeft = saved.left;
     }
   };
+  // Lalka: dokowanie, warstwy i minimalizacja panelu żyją w podklasie karty (§7, §15).
+  if (doll) cls = dollSheetMixin(cls);
   Object.defineProperty(cls, "name", { value: name, configurable: true });
   return cls;
 }
@@ -515,7 +519,8 @@ export function registerSheetShell() {
         drop: ["spells", "bastion"],
         tabs: CHARACTER_TABS,
         defaultTab: "inventory",
-        produkcja: true
+        produkcja: true,
+        doll: true
       },
       {
         type: "npc",
@@ -527,13 +532,13 @@ export function registerSheetShell() {
       }
     ];
 
-    for (const { type, name, label, drop, tabs, defaultTab, produkcja } of targets) {
+    for (const { type, name, label, drop, tabs, defaultTab, produkcja, doll } of targets) {
       const Base = _stockSheetClass(type);
       if (!Base) {
         console.warn(`Neuroshima 5e | No stock dnd5e sheet found for "${type}" — shell not registered`);
         continue;
       }
-      DocumentSheetConfig.registerSheet(Actor, MODULE_ID, _buildSheetClass(Base, { name, drop, tabs, defaultTab, produkcja }), {
+      DocumentSheetConfig.registerSheet(Actor, MODULE_ID, _buildSheetClass(Base, { name, drop, tabs, defaultTab, produkcja, doll }), {
         types: [type],
         // `#registerSheet` liczy "domyślność" osobno na KAŻDYM kliencie, nie zapisuje ustawienia
         // świata (zweryfikowane w źródle v14) — gating po `game.user.isGM` dawał graczom

@@ -32,6 +32,7 @@ at the time of import. The full per-file source list, author, and license is tra
 
 - [`dev/audio/FREESOUND_TRAVEL_SOURCES.md`](dev/audio/FREESOUND_TRAVEL_SOURCES.md)
 - [`dev/audio/FREESOUND_EXPLOSIVES_SOURCES.md`](dev/audio/FREESOUND_EXPLOSIVES_SOURCES.md)
+- [`dev/audio/FREESOUND_MISC_SOURCES.md`](dev/audio/FREESOUND_MISC_SOURCES.md)
 
 ### Fallout 2 decoded sound library
 
