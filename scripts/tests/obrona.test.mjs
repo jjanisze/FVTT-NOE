@@ -11,10 +11,11 @@
  * Bez kart czatu i bez `activity.use()` (TESTING §4) — aktorzy testowi, sprzątani w `after`.
  */
 
-import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup, waitFor } from "./helpers.mjs";
+import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup, sztuczkaItem, stub, waitFor } from "./helpers.mjs";
 import { buildCaliberDamageRoll, caliberDamageProperties, isCaliberWeapon } from "../weapons/ammo.mjs";
 import { coverAcBonus } from "../combat/cover.mjs";
 import { ttAgainst, verdictOfEntry, buildObrona, entryFor, TT_VS_ATTACKER_FLAG } from "../combat/trafienie.mjs";
+import { executeReaction, breakHelmet, useIntelligentDefence, __testing as obrona } from "../combat/obrona.mjs";
 
 const ATTACK_ID = "neuroTestAtak000";
 
@@ -42,9 +43,25 @@ function weapon(name, { type = "palnaKrotka", base = { number: 1, denomination: 
 
 const attackOf = item => item.actor.items.get(item.id)?.system.activities.get(ATTACK_ID);
 
+/** Karta ataku w pamięci (niezapisana) — do ścieżek, które odrzucają, zanim cokolwiek zapiszą. */
+function memoryCard(obronaData) {
+  return new ChatMessage.implementation({ content: "", flags: { [MODULE_ID]: { obrona: obronaData } } });
+}
+
+/** Podmiana jednego ustawienia modułu na czas testu. */
+function stubSetting(key, value) {
+  const original = game.settings.get.bind(game.settings);
+  return stub(game.settings, "get", (ns, k) => (ns === MODULE_ID && k === key) ? value : original(ns, k));
+}
+
+const INT_DEFENCE = { name: "Inteligentna obrona", type: "feat", flags: { [MODULE_ID]: { abilityId: "inteligentna-obrona" } },
+  system: { uses: { max: "4", spent: 0, recovery: [{ period: "sr", type: "recoverAll" }] } } };
+const HELMET = { name: `${SCRATCH_PREFIX} Hełm`, type: "equipment", system: { type: { value: "trinket" } },
+  flags: { [MODULE_ID]: { armorId: "helm" } } };
+
 export function registerObronaTests(quench) {
   quench.registerBatch(`${MODULE_ID}.obrona`, context => {
-    const { describe, it, expect, before, after } = context;
+    const { describe, it, expect, before, after, afterEach } = context;
     after(() => scratchCleanup());
 
     describe("Obrażenia strzału pojedynczego (D8)", function () {
@@ -153,6 +170,123 @@ export function registerObronaTests(quench) {
         expect(ttAgainst(target, { attacker: "Actor.wrogWrogWrog01", melee: false }), "dystans").to.equal(base);
         expect(ttAgainst(target, { attacker: "Actor.innyInnyInny01", melee: true }), "inny wróg").to.equal(base);
         expect(target.system.attributes.ac.value, "TT na karcie bez zmian").to.equal(base);
+      });
+    });
+
+    describe("Reakcje celu — prośba gracza i wykonanie u MG (E3)", function () {
+      this.timeout(15000);
+      let actor;
+      before(async function () {
+        actor = await scratchActor({ name: `${SCRATCH_PREFIX} obrońca`, system: { abilities: { int: { value: 18 } } } });
+        await actor.createEmbeddedDocuments("Item", [INT_DEFENCE, sztuczkaItem("neo", "Neo")], { render: false });
+      });
+
+      const card = (o = {}) => memoryCard({
+        v: 1, attackerUuid: "Actor.atakujacyTest01", attackerKind: null, melee: false, natural: 12, total: 13,
+        krytyk: false, fumble: false,
+        targets: [{ tokenUuid: "Scene.a.Token.b", actorUuid: actor.uuid, name: "cel", tt: 10, cover: 0, used: [],
+          critDowngraded: false, verdict: "trafienie", decided: false }],
+        ...o
+      });
+
+      it("migawka celu: posiadane reakcje i ładunki z przedmiotu", function () {
+        const s = obrona.defenseSnapshot(actor);
+        expect([...s.owned]).to.include.members(["inteligentnaObrona", "neo"]);
+        expect(s.charges.inteligentnaObrona).to.equal(4);
+        expect(s.mods.int).to.equal(4);
+      });
+
+      it("prośba: brak karty albo celu, cudzy aktor, w porządku", async function () {
+        const other = await scratchActor({ name: `${SCRATCH_PREFIX} ktoś inny` });
+        const req = { tokenUuid: "Scene.a.Token.b" };
+        expect(obrona.requestProblem(undefined, actor, req)).to.equal("karta albo cel już nie istnieje");
+        expect(obrona.requestProblem(card(), actor, { tokenUuid: "Scene.x.Token.y" })).to.equal("karta albo cel już nie istnieje");
+        expect(obrona.requestProblem(card(), other, req)).to.equal("to nie twój cel");
+        expect(obrona.requestProblem(card(), actor, req)).to.equal(null);
+      });
+
+      it("reakcja, która już nie pasuje, jest odrzucana przed jakimkolwiek zapisem", async function () {
+        const crit = card({ natural: 20, total: 25, krytyk: true });
+        const res = await executeReaction(crit, "Scene.a.Token.b", "bulletTime");
+        expect(res).to.deep.equal({ ok: false, reason: "naturalna 20 — trafia zawsze" });
+        expect(actor.items.find(i => i.name === "Inteligentna obrona").system.uses.value, "ładunki nietknięte").to.equal(4);
+        expect((await executeReaction(card(), "Scene.x.Token.y", "bulletTime")).ok).to.equal(false);
+      });
+
+      it("rzut obrażeń bez krytyka tylko, gdy każdy trafiony cel zamienił krytyk", function () {
+        const t = (critDowngraded, verdict = "trafienie") => ({ verdict, critDowngraded });
+        expect(obrona.shouldDowngradeCrit({ krytyk: true, targets: [t(true)] })).to.equal(true);
+        expect(obrona.shouldDowngradeCrit({ krytyk: true, targets: [t(true), t(false, "krytyk")] })).to.equal(false);
+        expect(obrona.shouldDowngradeCrit({ krytyk: true, targets: [t(true), t(false, "pudło")] })).to.equal(true);
+        expect(obrona.shouldDowngradeCrit({ krytyk: false, targets: [t(true)] })).to.equal(false);
+      });
+    });
+
+    describe("Efekty do początku następnej tury (§4.5)", function () {
+      this.timeout(15000);
+      let actor;
+      const ttEffect = () => actor.effects.find(e => e.getFlag(MODULE_ID, "tt")?.source === "inteligentnaObrona");
+
+      before(async function () {
+        actor = await scratchActor({ name: `${SCRATCH_PREFIX} spec`, system: { abilities: { int: { value: 16 } } } });
+        await actor.createEmbeddedDocuments("Item", [INT_DEFENCE], { render: false });
+      });
+
+      it("Inteligentna obrona z paska: zużywa użycie, TT + INT do początku tury (Z9)", async function () {
+        const tt = actor.system.attributes.ac.value;
+        await useIntelligentDefence(actor, { card: false });
+        expect(actor.items.find(i => i.name === "Inteligentna obrona").system.uses.value).to.equal(3);
+        expect(ttEffect()?._source.duration).to.include({ value: 1, units: "turns", expiry: "turnStart" });
+        expect(actor.system.attributes.ac.value).to.equal(tt + 3);
+      });
+
+      it("rdzeń oznaczył wygaśnięcie → efekt znika", async function () {
+        await ttEffect().update({ "duration.expired": true });
+        await waitFor(() => !ttEffect(), { label: "skasowanie wygasłego efektu" });
+      });
+
+      it("odpoczynek sprząta resztki", async function () {
+        await useIntelligentDefence(actor, { card: false });
+        expect(ttEffect()).to.exist;
+        Hooks.callAll("dnd5e.restCompleted", actor, {}, {});
+        await waitFor(() => !ttEffect(), { label: "sprzątanie po odpoczynku" });
+      });
+    });
+
+    describe("Krytyczna ochrona hełmu (E4, D12)", function () {
+      this.timeout(15000);
+      let restore = null;
+      afterEach(() => { restore?.(); restore = null; });
+
+      async function helmeted(name) {
+        const actor = await scratchActor({ name: `${SCRATCH_PREFIX} ${name}` });
+        const [helmet] = await actor.createEmbeddedDocuments("Item", [HELMET], { render: false });
+        await game.neuroshima.lalka.equip(actor.items.get(helmet.id), { quiet: true });
+        await waitFor(() => actor.items.get(helmet.id)?.system.equipped, { label: "hełm na głowie" });
+        return actor;
+      }
+
+      it("z Kobaltem: hełm zdjęty, w plecaku „Dziurawy hełm” (D12a)", async function () {
+        restore = stubSetting("kobaltEnabled", true);
+        const actor = await helmeted("w hełmie, Kobalt");
+        expect(await breakHelmet(actor)).to.equal(`${SCRATCH_PREFIX} Hełm`);
+        expect(actor.items.some(i => i.name === `${SCRATCH_PREFIX} Hełm`)).to.equal(false);
+        const junk = actor.items.find(i => i.getFlag(MODULE_ID, "dziurawyHelm"));
+        expect(junk?.type).to.equal("loot");
+        expect(junk?.system.type.value).to.equal("junk");
+        expect(junk?.system.equipped ?? false, "w plecaku").to.equal(false);
+      });
+
+      it("bez Kobaltu: hełm po prostu znika (RAW)", async function () {
+        restore = stubSetting("kobaltEnabled", false);
+        const actor = await helmeted("w hełmie, RAW");
+        await breakHelmet(actor);
+        expect(actor.items.size).to.equal(0);
+      });
+
+      it("bez hełmu na głowie nie ma czego niszczyć", async function () {
+        const actor = await scratchActor({ name: `${SCRATCH_PREFIX} bez hełmu` });
+        expect(await breakHelmet(actor)).to.equal(null);
       });
     });
   }, { displayName: "Neuroshima: Trafienie, obrażenia i reakcje celu" });

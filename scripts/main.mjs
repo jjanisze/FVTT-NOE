@@ -75,6 +75,7 @@ import { registerMeleeManeuvers, maneuversApi } from './combat/melee-maneuvers.m
 import { registerKnockoutAndLastAction, onPreUpdateActorDeathSaves } from "./combat/knockout.mjs";
 import { registerCoverSystem } from "./combat/cover.mjs";
 import { registerTrafienie } from "./combat/trafienie.mjs";
+import { registerObrona, obronaApi } from "./combat/obrona.mjs";
 import { registerMagazines } from "./weapons/magazine.mjs";
 import { registerNpcAmmo } from "./weapons/npc-ammo.mjs";
 import { registerWeaponJams } from "./weapons/jams.mjs";
@@ -304,6 +305,8 @@ Hooks.once("init", () => {
   registerCoverSystem();
   // Jeden rozstrzygacz trafienia: werdykt na karcie ataku i tacka celów (PLAN_tt E2).
   registerTrafienie();
+  // Okno „Reakcje celu” na karcie ataku (PLAN_tt E3–E5).
+  registerObrona();
   registerMagazines();
   registerNpcAmmo();
   registerWeaponJams();
@@ -450,6 +453,8 @@ Hooks.once("ready", () => {
 
   // Trudność Trafienia wg NOE (PLAN_tt) — game.neuroshima.tt.compute(actor), .source(actor, "obled")
   game.neuroshima.tt = ttApi;
+  // Reakcje celu — game.neuroshima.obrona.setTargets(message), .execute(message, tokenUuid, id)
+  game.neuroshima.obrona = obronaApi;
 
   // Choroby / Fobie / lekarstwa — game.neuroshima.health.sunset() etc.
   game.neuroshima.health = { ...healthApi, syncEffects: syncDiseaseEffects, bleeding: bleedingApi };

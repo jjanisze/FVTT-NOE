@@ -211,9 +211,37 @@ export function hitTargetsForDamage(rolls) {
 /*  Stempel na karcie ataku                      */
 /* -------------------------------------------- */
 
+/**
+ * Przerzut Fuksem (`combat/rerolls.mjs`): karta przerzutu przejmuje cele, osłonę i użyte reakcje
+ * karty źródłowej z nowym wynikiem. Rzut przerzutu jest zwykłym `Roll` (nie `D20Roll`), więc krytyk
+ * i jedynkę czytamy z naturalnej kości wobec progów rzutu źródłowego.
+ */
+function _stampReroll(message, sourceId) {
+  const source = game.messages.get(sourceId);
+  const old = obronaOf(source);
+  const roll = message.rolls?.[0];
+  if (!old || !roll) return;
+  const natural = naturalOf(roll);
+  const opts = source.rolls?.[0]?.options ?? {};
+  const obrona = {
+    ...foundry.utils.deepClone(old),
+    natural, total: _num(roll.total),
+    krytyk: Number.isFinite(natural) && natural >= (opts.criticalSuccess ?? 20),
+    fumble: Number.isFinite(natural) && natural <= (opts.criticalFailure ?? 1)
+  };
+  for (const t of obrona.targets) {
+    t.critDowngraded = false;
+    t.decided = false;
+    t.verdict = verdictOfEntry(obrona, t).verdict;
+  }
+  message.updateSource({ [`flags.${MODULE_ID}.${OBRONA_FLAG}`]: obrona });
+}
+
 function _onPreCreateMessage(message, data, _options, userId) {
   if (userId !== game.user.id) return;
   if (foundry.utils.getProperty(data, "flags.dnd5e.roll.type") !== "attack") return;
+  const rerollOf = foundry.utils.getProperty(data, `flags.${MODULE_ID}.rerollOf`);
+  if (rerollOf) return _stampReroll(message, rerollOf);
   const roll = message.rolls?.[0];
   if (!roll) return;
   const activityUuid = foundry.utils.getProperty(data, "flags.dnd5e.activity.uuid");

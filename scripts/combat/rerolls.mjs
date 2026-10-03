@@ -346,6 +346,27 @@ async function _onClickForsowanie(event) {
   bar?.remove();
 }
 
+/**
+ * Flagi karty przerzutu Fuksem. Przerzucony **Test Ataku** zostaje Testem Ataku: dostaje powiązania
+ * dnd5e karty źródłowej (karta użycia, aktywność, przedmiot, cele), więc „Obrażenia” z karty użycia
+ * czytają już przerzut, oraz `rerollOf` — rozstrzygacz trafienia (`combat/trafienie.mjs`) przenosi
+ * na nią werdykt i reakcje celu (PLAN_tt §4.8.7), a stara karta pokazuje „zastąpione przerzutem”.
+ */
+function _fuksRerollFlags(originalMessage) {
+  const flags = { [MODULE_ID]: { fuks: true } };
+  const src = originalMessage?.flags?.dnd5e;
+  if (src?.roll?.type !== "attack") return flags;
+  flags[MODULE_ID].rerollOf = originalMessage.id;
+  flags.dnd5e = {
+    roll: { type: "attack" },
+    ...(src.originatingMessage ? { originatingMessage: src.originatingMessage } : {}),
+    ...(src.activity ? { activity: src.activity } : {}),
+    ...(src.item ? { item: src.item } : {}),
+    ...(src.targets ? { targets: src.targets } : {})
+  };
+  return flags;
+}
+
 /* -------------------------------------------- */
 /*  Fuks — Confirmation & Execution              */
 /* -------------------------------------------- */
@@ -422,7 +443,7 @@ async function _onClickFuks(event) {
         <div style="font-size: 11px; color: var(--color-text-secondary, #aaa);">${rollDesc} — przerzut</div>
       </div>
     `,
-    flags: { [MODULE_ID]: { fuks: true } }
+    flags: _fuksRerollFlags(originalMessage)
   });
 
   // Decrement Fuksy

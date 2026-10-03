@@ -4401,3 +4401,46 @@ tr.neuro-tt-off td {
 tr.neuro-tt-off td.attribution-value {
   font-weight: 400;
 }
+
+/* ── Reakcje celu na karcie ataku (PLAN_tt E3, combat/obrona.mjs). Kolory werdyktu jak w natywnej
+   tacce celów dnd5e: trafienie = sukces atakującego. ── */
+.neuro-obrona {
+  margin-top: 6px;
+  padding-top: 4px;
+  border-top: 1px solid var(--dnd5e-color-tan, rgba(128, 128, 128, 0.4));
+  font-size: var(--font-size-12, 12px);
+}
+.neuro-obrona-title {
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.8;
+  margin-bottom: 2px;
+}
+.neuro-obrona-target + .neuro-obrona-target { margin-top: 5px; }
+.neuro-obrona-verdict.is-hit { color: var(--dnd5e-color-success, #006c00); font-weight: bold; }
+.neuro-obrona-verdict.is-miss { color: var(--dnd5e-color-failure, #6e0000); font-weight: bold; }
+.neuro-obrona-used { font-size: 11px; }
+.neuro-obrona-used i { opacity: 0.7; margin-right: 2px; }
+.neuro-obrona-buttons { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 3px; }
+.neuro-obrona .neuro-obrona-btn {
+  flex: 0 1 auto;
+  width: auto;
+  min-height: 0;
+  line-height: 20px;
+  padding: 0 6px;
+  font-size: 11px;
+}
+.neuro-obrona .neuro-obrona-btn:disabled { opacity: 0.5; cursor: help; }
+.neuro-obrona .neuro-obrona-btn.is-gm { margin-top: 4px; }
+.neuro-obrona-note { font-size: 11px; font-style: italic; opacity: 0.75; margin-top: 2px; }
+.neuro-obrona-reminder { text-decoration: underline dotted; cursor: help; }
+.neuro-obrona-wait {
+  display: block;
+  margin-top: 2px;
+  font-size: 11px;
+  text-align: center;
+  opacity: 0.85;
+}
+
