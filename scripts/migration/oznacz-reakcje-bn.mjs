@@ -13,18 +13,28 @@
  * w opisie akcji to nie Reakcja.
  *
  *   const api = game.modules.get("neuroshima-2026-overrides").api.migration;
- *   await api.oznaczReakcjeBN();                    // sucha próba — lista
- *   await api.oznaczReakcjeBN({ commit: true });     // na życzenie MG
+ *   await api.oznaczReakcjeBN();                                   // sucha próba — lista
+ *   await api.oznaczReakcjeBN({ actors: ["Pustak"], commit: true }); // tylko wskazani BN-i
+ *   await api.oznaczReakcjeBN({ commit: true });                    // wszyscy z listy
+ *
+ * Niepowiązane żetony często trzymają **własne** kopie cech w delcie — wtedy zapis idzie też do
+ * nich (osobny wiersz raportu na żeton), bo zmiana aktora bazowego by ich nie objęła.
+ *
+ * Przypomnienie w oknie „Reakcje celu” pokazuje się, gdy BN jest **celem** ataku — pasuje do
+ * Reakcji typu „atak na mnie” (Ofiara), nie do Reakcji „sojusznik obok został trafiony”.
  */
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const REACTION = /reakcj/i;
 
-/** Aktorzy BN-ów świata i niepowiązanych żetonów. */
-function _npcActors() {
-  const out = game.actors.filter(a => a.type === "npc");
+/** Aktorzy BN-ów świata i niepowiązanych żetonów; `names` — opcjonalny filtr po nazwie aktora bazowego. */
+function _npcActors(names = null) {
+  const want = names ? new Set(names.map(n => String(n).toLowerCase())) : null;
+  const ok = a => !want || want.has(String(a?.name ?? "").toLowerCase())
+    || want.has(String(game.actors.get(a?.token?.actorId ?? a?.id)?.name ?? "").toLowerCase());
+  const out = game.actors.filter(a => a.type === "npc" && ok(a));
   for (const scene of game.scenes) {
-    for (const t of scene.tokens) if (!t.actorLink && t.actor?.type === "npc") out.push(t.actor);
+    for (const t of scene.tokens) if (!t.actorLink && t.actor?.type === "npc" && ok(t.actor)) out.push(t.actor);
   }
   return out;
 }
@@ -41,11 +51,12 @@ export function isUnmarkedReaction(item) {
 /**
  * @param {object} [o]
  * @param {boolean} [o.commit=false]
+ * @param {string[]} [o.actors]  Nazwy BN-ów (aktora bazowego) — bez tego: wszyscy.
  * @returns {Promise<Array<{actor: string, uuid: string, item: string}>>}
  */
-export async function oznaczReakcjeBN({ commit = false } = {}) {
+export async function oznaczReakcjeBN({ commit = false, actors = null } = {}) {
   const report = [];
-  for (const actor of _npcActors()) {
+  for (const actor of _npcActors(actors)) {
     for (const item of actor.items) {
       if (!isUnmarkedReaction(item)) continue;
       report.push({ actor: actor.name, uuid: actor.uuid, item: item.name });
