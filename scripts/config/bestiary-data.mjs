@@ -5,7 +5,7 @@
  * Content comes from Podrecznik/NOE/13 NOTATNIK ŁOWCY/ via extract_bestiary.py;
  * automation metadata comes from the RULES/AUTOMATION layers in the generator.
  *
- * 52 creatures, 260 features (90 automated), 1 attack riders.
+ * 52 creatures, 260 features (92 automated), 1 attack riders.
  */
 
 export const BESTIARY = {
@@ -1134,7 +1134,10 @@ export const BESTIARY = {
     "failureThreshold": null,
     "features": [
       {
-        "automation": null,
+        "automation": {
+          "kind": "descriptive",
+          "reaction": true
+        },
         "id": "ofiara",
         "name": "Ofiara",
         "section": "traits",
@@ -2658,7 +2661,12 @@ export const BESTIARY = {
         "text": "Gladiator tratuje średnią lub mniejszą istotę, która jest w zasięgu jego ruchu. Istota musi zdać RO na Zręczność o ST 17, inaczej zostaje Powalona i otrzymuje 16 (2k12 + 4) obrażeń obuchowych."
       },
       {
-        "automation": null,
+        "automation": {
+          "bonus": 3,
+          "kind": "ttReaction",
+          "melee": true,
+          "scope": "attack"
+        },
         "id": "parowanie",
         "name": "Parowanie",
         "section": "reaction",

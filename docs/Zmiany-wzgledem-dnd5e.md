@@ -29,7 +29,8 @@ werdykt dla każdego celu (TT celu, osłona z okna ataku, naturalna 20 trafia za
 nigdy). Obrażenia rzuca atakujący przyciskiem **Obrażenia** na karcie użycia — także z broni
 palnej: kości naboju, który poleciał, bez modyfikatora cechy; trafienie krytyczne podwaja kości.
 Nakłada je **MG** tacką na karcie obrażeń (dnd5e pokazuje ją tylko MG). Nic nie zdejmuje PW samo
-z siebie po Teście Ataku — między trafieniem a obrażeniami jest miejsce na reakcje celu.
+z siebie po Teście Ataku — między trafieniem a obrażeniami jest miejsce na reakcje celu
+([Trudność Trafienia, trafienie i reakcje](TT-i-reakcje.md)).
 
 ## Klasy i profesje
 

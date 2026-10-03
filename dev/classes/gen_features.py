@@ -195,15 +195,19 @@ COVERAGE = {
             ("włączenie w Akcji Bonusowej zużywa Berserk, efekt trwa 10 rund", "actors/class-state.mjs"),
             ("Siła Berserkera — Ułatwienie w testach i RO na Siłę", "actors/class-state.mjs"),
             ("Obrażenia Berserkera — kość z tabeli Brutala do obrażeń ataków wręcz", "actors/class-state.mjs"),
-            ("Obłęd Berserkera — TT + mod. SIŁ bez pancerza, hełmu i tarczy", "actors/class-state.mjs"),
+            ("Obłęd Berserkera — TT + mod. SIŁ bez pancerza (także ochraniaczy), hełmu i tarczy, z silnika TT: "
+             "założone w trakcie gaszą premię", "config/tt-rules.mjs"),
             ("koniec przy Nieprzytomności, Obezwładnieniu i Zauroczeniu; karta zmęczenia po Berserku", "actors/class-state.mjs"),
         ],
         "manual": "Szarżę Berserkera wykonuje gracz; zmęczenie po Berserku (brak akcji) moduł ogłasza, pilnuje stół. "
                   "Obrażenia Berserkera idą jak Rage w dnd5e — tylko do ataków wręcz, rzut bronią opartą na Sile dolicza gracz.",
     },
     "gola-klata": {
-        "auto": [("nie łączy się z Tarczą wiary ani Obłędem Berserkera — słabsza zdolność wyszarzona na karcie", "actors/class-rules.mjs")],
-        "manual": "TT 10 + mod. ZRC + mod. KON ustawia się w konfiguracji Trudności Trafienia na karcie — moduł jej nie nakłada.",
+        "auto": [
+            ("TT 10 + mod. ZRC + mod. KON bez pancerza (także ochraniaczy), hełmu i tarczy — metoda TT „NOE (automatycznie)”, "
+             "wygrywa najwyższa (s. 59); powód nieaktywności w dymku TT", "config/tt-rules.mjs"),
+            ("słabsza od Tarczy wiary niezależnie od ekwipunku — wyszarzona na karcie", "actors/class-rules.mjs"),
+        ],
     },
     "wsciekly-cios": {
         "auto": [("karta po trafieniu: 1–3 kości, raz na rundę, rzut obrażeń z wybranym typem", "actors/class-resource-dice.mjs")],
@@ -260,8 +264,39 @@ COVERAGE = {
 
     # ---- Profesje ----
     "tarcza-wiary": {
-        "auto": [("nie łączy się z Gołą klatą ani Obłędem Berserkera — słabsza zdolność wyszarzona na karcie", "actors/class-rules.mjs")],
-        "manual": "Premię mod. CHA do TT bez pancerza ustawia się w konfiguracji Trudności Trafienia — moduł jej nie nakłada.",
+        "auto": [
+            ("TT 10 + mod. ZRC + mod. CHA bez pancerza i ochraniaczy (hełm i tarcza wolno) — metoda TT „NOE (automatycznie)”, "
+             "wygrywa najwyższa (s. 59); Obłęd i Kuloodporność sumują się z nią (RAI)", "config/tt-rules.mjs"),
+        ],
+    },
+    # ---- Trudność Trafienia i reakcje (PLAN_tt) ----
+    "obsluga-pancerza": {
+        "auto": [("+2 do TT w pancerzu (lekkim, średnim, ciężkim) albo w samych ochraniaczach; z dwóch klas liczy się raz",
+                  "config/tt-rules.mjs")],
+    },
+    "trening-w-zbroi": {
+        "auto": [("limit ZRC z pancerza +1 (średni 2 → 3, ciężki 0 → 1) w silniku TT", "config/tt-rules.mjs")],
+        "manual": "Brak kary do Skradania się w pancerzu — Utrudnienie z pancerza zdejmuje MG.",
+    },
+    "inteligentna-obrona": {
+        "auto": [
+            ("Reakcja w oknie „Reakcje celu” na karcie ataku: zużywa użycie, TT + mod. INT do początku następnej "
+             "tury, werdykt karty przeliczony", "combat/obrona.mjs"),
+            ("użyta z paska albo karty postaci — to samo: użycie i efekt TT zamiast samej karty", "combat/obrona.mjs"),
+        ],
+    },
+    "mutant-na-sniadanie": {
+        "auto": [("Unik łowcy [R] — TT + PB wobec ataku mutanta albo potwora, w oknie „Reakcje celu”", "combat/obrona.mjs")],
+        "manual": "Refleks łowcy (Inicjatywa) i Zabójca mutantów (Ułatwienie raz w rundzie) — gracz.",
+    },
+    "empiryk": {
+        "auto": [("TT + PB wobec ataku maszyny, w oknie „Reakcje celu”", "combat/obrona.mjs")],
+        "manual": "Ułatwienie w RO na efekty maszyn — gracz.",
+    },
+    "dziewiec-zyc": {
+        "auto": [("Koci odskok [R] — Kocia kość do TT do początku następnej tury, w oknie „Reakcje celu” "
+                  "(zużywa Kocią kość, rzut u gracza)", "combat/obrona.mjs")],
+        "manual": "Kocia nieśmiertelność (Kocia kość do RO) — gracz, przy rzucie.",
     },
     "pirotechnika": {
         "auto": [("schematy pirotechniczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES)],

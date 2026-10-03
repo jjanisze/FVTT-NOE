@@ -11,8 +11,11 @@
  *     możesz korzystać tylko z jednego z nich” (s. 59, Wieloklasowość). Bez przypinania (D3); furtką
  *     jest metoda „Stała” / „Własna formuła” w oknie TT dnd5e (D6).
  *   - **Premie stałe sumują się z wygraną metodą** (D1, RAI — wiersz w `scripts/wkk/README.md`).
- *   - „Pancerz” w warunkach zdolności = lekki, średni, ciężki. Hełm i tarcza gaszą zdolność tylko
- *     tam, gdzie są wymienione z nazwy; ochraniacze nie gaszą niczego (D4).
+ *   - „Pancerz” w warunkach zdolności = lekki, średni, ciężki **i ochraniacze** — autor systemu,
+ *     2026-10-03: „Nałokietniki i nagolenniki są pancerzem, ponieważ dają premie do TT i są w tabeli
+ *     Pancerze” (D4, RAI). Hełm i tarcza gaszą zdolność tylko tam, gdzie są wymienione z nazwy
+ *     („Goła klata zaś bezpośrednio zakazuje Hełmu, bo ma go w opisie”). Metody podstawowe
+ *     (TT podstawowa / pancerz) zależą wyłącznie od pancerza korpusu — ochraniacze dokładają swoje +1.
  *   - Ochraniacze, Inteligentna obrona i Koci odskok to Efekty Aktywne na `ac.bonus` — nie liczy
  *     ich silnik, tylko dnd5e (§4.2), więc tutaj ich nie ma.
  *
@@ -40,7 +43,8 @@
  * @typedef {object} TTSnapshot
  * @property {{str:number,dex:number,con:number,int:number,wis:number,cha:number}} mods
  * @property {number} prof
- * @property {TTArmor|null} armor
+ * @property {TTArmor|null} armor    Pancerz korpusu (lekki, średni, ciężki).
+ * @property {boolean} [guards]       Założone ochraniacze rąk albo nóg — też pancerz (D4).
  * @property {boolean} helmet         Hełm na głowie (lalka).
  * @property {boolean} shieldInHand   Tarcza w ręce (lalka).
  * @property {Set<string>} owned      Klucze zdolności, które postać ma.
@@ -54,9 +58,13 @@ export const MULTICLASS_PAGE = "s. 59";
 const _num = v => (Number.isFinite(Number(v)) ? Number(v) : 0);
 const _sum = parts => parts.reduce((n, p) => n + _num(p.value), 0);
 
-/** Co z noszonego sprzętu gasi zdolność; `null` = nic. Pancerz gasi zawsze, reszta — gdy wymieniona. */
+/**
+ * Co z noszonego sprzętu gasi zdolność; `null` = nic. Pancerz — także same ochraniacze (D4) — gasi
+ * zawsze, hełm i tarcza — tylko gdy zdolność je wymienia.
+ */
 function _wearing(s, { helmet = false, shield = false } = {}) {
   if (s.armor) return "nosisz pancerz";
+  if (s.guards) return "nosisz ochraniacze (to też pancerz)";
   if (helmet && s.helmet) return "nosisz hełm";
   if (shield && s.shieldInHand) return "masz tarczę w ręce";
   return null;
@@ -99,7 +107,8 @@ export const TT_METHODS = Object.freeze([
     }
   },
   {
-    id: "bezPancerza", label: "Bez pancerza", gen: "TT bez pancerza", page: "s. 15", kind: "method", ability: null,
+    // Bez pancerza korpusu; ochraniacze (pancerz w sensie zdolności, D4) dokładają do niej swoje +1.
+    id: "bezPancerza", label: "TT podstawowa", gen: "podstawowej TT", page: "s. 15", kind: "method", ability: null,
     when: s => (s.armor ? "nosisz pancerz" : true),
     parts: s => [{ label: "10", value: 10 }, { label: "ZRC", value: s.mods.dex }]
   },
@@ -123,7 +132,7 @@ export const TT_METHODS = Object.freeze([
 export const TT_CAPS = Object.freeze([
   {
     id: "treningWZbroi", label: "Trening w zbroi", page: "s. 89", kind: "cap", ability: "treningWZbroi",
-    when: s => (s.armor ? true : "nie nosisz pancerza"),
+    when: s => (s.armor ? true : s.guards ? "ochraniacze nie ograniczają ZRC" : "nie nosisz pancerza"),
     value: () => 1
   }
 ]);
@@ -140,8 +149,9 @@ export const TT_BONUSES = Object.freeze([
   },
   {
     // Wyjadacz Twardziela i Zwiadowcy — ta sama opcja z dwóch klas liczy się raz (P5, jak Drugi atak).
+    // „Kiedy nosisz pancerz” — same ochraniacze też (D4, autor systemu).
     id: "obslugaPancerza", label: "Obsługa pancerza", page: "s. 86, 98", kind: "bonus", ability: "obslugaPancerza",
-    when: s => (s.armor ? true : "nie nosisz pancerza"),
+    when: s => ((s.armor || s.guards) ? true : "nie nosisz pancerza"),
     value: () => 2
   },
   {

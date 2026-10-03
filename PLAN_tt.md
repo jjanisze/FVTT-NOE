@@ -1,6 +1,6 @@
 # PLAN — Trudność Trafienia wg NOE: silnik TT, jeden rozstrzygacz trafienia, okno „Reakcje celu”
 
-> Status: **W TOKU** (2026-10-03) — decyzje MG zamknięte (§2); E0–E4 ✅, następny krok: **E5**.
+> Status: **W TOKU** (2026-10-03) — decyzje MG zamknięte (§2); E0–E6 ✅ w kodzie; zostaje przebudowa paczek przy zamkniętym Foundry (E6).
 > Rozmiar: **L** (był M — reakcje obronne wymagają rozdzielenia rzutu ataku i obrażeń, §4.7).
 > Wywołanie: rejestr pokrycia (PLAN_beta B5) — Goła klata i Tarcza wiary nie nakładają TT, moduł
 > tylko wyszarza słabszą (`actors/class-rules.mjs`). Przegląd RAW pod ten plan znalazł ~20 źródeł TT,
@@ -19,7 +19,7 @@ sposobów obliczania TT, możesz korzystać tylko z jednego z nich” — przyk�
 
 | Metoda | Strona | Warunek | Wartość | Dziś w kodzie |
 |---|---|---|---|---|
-| Bez pancerza | s. 15, 53 | brak pancerza | 10 + ZRC | natywne dnd5e |
+| TT podstawowa („bez pancerza”) | s. 15, 53 | brak pancerza korpusu (ochraniacze dokładają swoje +1) | 10 + ZRC | natywne dnd5e |
 | Pancerz | s. 113–114 | pancerz lekki / średni / ciężki | z tabeli; ZRC: lekki w całości, średni do limitu, ciężki wcale | natywne dnd5e |
 | **Goła klata** (Brutal 1) | s. 67 | bez pancerza, hełmu i tarczy | 10 + ZRC + KON | ❌ tylko wyszarzenie |
 | **Tarcza wiary** (Kaznodzieja Nowej Ery) | s. 75 | bez pancerza | 10 + ZRC + CHA | ❌ tylko wyszarzenie |
@@ -37,7 +37,7 @@ sposobów obliczania TT, możesz korzystać tylko z jednego z nich” — przyk�
 | **Obłęd Berserkera** (Berserk) | s. 67 | w Berserku; bez pancerza, hełmu i tarczy | + SIŁ | 🟡 AE liczony **raz, przy włączeniu** (Z2) |
 | **Obsługa pancerza** (Wyjadacz: Twardziel, Zwiadowca) | s. 86, 98 | noszony pancerz | +2 (raz, nawet z dwóch klas — P5) | ❌ |
 | **Kuloodporność** (Sztuczka) | s. 104 | bez pancerza, hełmu i tarczy | + PB | ❌ |
-| Ochraniacze rąk / nóg | s. 113, 115 | założone; nie z ciężkim pancerzem | +1 każde | ✅ AE przedmiotu (`config/armor-data.mjs`); konflikt z ciężkim pilnuje lalka |
+| Ochraniacze rąk / nóg | s. 113, 115 | założone; nie z ciężkim pancerzem | +1 każde; **w warunkach zdolności to pancerz** (D4) | ✅ AE przedmiotu (`config/armor-data.mjs`); konflikt z ciężkim pilnuje lalka |
 | Zasłona (Samuraj) | s. 107 | finezyjna broń biała tnąca w ręce | +1 | ✅ AE synchronizowany (`actors/samuraj.mjs`) — do silnika (P2) |
 | **Tańczący z siekierkami** (Siekierezada) | s. 107 | dwie siekierki w rękach (P1) | +1 | ❌ `manual` |
 | **Roszada** (Szachista) | s. 107 | akcja Unikanie, do początku następnej tury | +3 | ❌ |
@@ -81,8 +81,8 @@ Kategoria wg `scripts/wkk/README.md`: **NOE** = dosłowna lektura, **RAI** = zam
 | D1 | Jak łączą się zdolności TT bez pancerza? | **Metody konkurują, premie się sumują.** Metody: 10 + ZRC, pancerz, Goła klata, Tarcza wiary (10 + ZRC + CHA). „Podobne” z klauzul Gołej klaty i Tarczy wiary = inne **metody**. Obłęd, Kuloodporność i reszta §1.3 stoją obok każdej wygranej metody. | RAI |
 | D2 | Obłęd Berserkera a Goła klata | Kumulują się (wynika z D1). | RAI |
 | D3 | Kto wybiera metodę? | Zawsze najwyższa, **bez przypinania**. Furtka = „Stała” / „Własna formuła” w oknie TT (D6). | NOE |
-| D4 | Co to „pancerz” w warunkach zdolności? | Dosłownie: **pancerz lekki, średni, ciężki**. Hełm i tarcza wyłączają tylko tam, gdzie są wymienione z nazwy (Goła klata, Obłęd, Kuloodporność). Ochraniacze niczego nie wyłączają i nie włączają Obsługi pancerza. Tarcza wiary działa w hełmie i z tarczą. | NOE |
-| D5 | Trening w zbroi w ciężkim pancerzu | Tak: limit 0 → 1. | NOE |
+| D4 | Co to „pancerz” w warunkach zdolności? | **Pancerz lekki, średni, ciężki i ochraniacze rąk / nóg.** Autor systemu (Nicram, 2026-10-03): „Nałokietniki i nagolenniki są pancerzem, ponieważ dają premie do TT i są w tabeli Pancerze. Goła klata zaś bezpośrednio zakazuje Hełmu, bo ma go w opisie.” Ochraniacze gaszą więc Gołą klatę, Tarczę wiary, Obłęd i Kuloodporność i włączają Obsługę pancerza; metoda podstawowa (10 + ZRC) zostaje, ochraniacze dokładają do niej swoje +1. Hełm i tarcza wyłączają tylko tam, gdzie są wymienione z nazwy (Goła klata, Obłęd, Kuloodporność) — Tarcza wiary działa w hełmie i z tarczą. *(Pierwotnie: ochraniacze niczego nie wyłączają — zmienione po rozstrzygnięciu autora.)* | RAI |
+| D5 | Trening w zbroi w ciężkim pancerzu | Tak: limit 0 → 1 (potwierdzone przez MG 2026-10-03). Same ochraniacze nie mają limitu ZRC — Trening nic nie zmienia. | NOE |
 | D6 | Natywne okno TT dnd5e | „Domyślna” → **„NOE (automatycznie)”**; metody 5e (Mag, Smocza, Mnich, Barbarzyńca, Bard) ukryte; zostają Stała, Naturalna, Własna formuła jako furtka MG. | — |
 | D7 | Kogo liczy silnik TT? | Aktorzy `character`. BN: TT ze statblocku / natywnego dnd5e. Okno „Reakcje celu” działa dla każdego celu (D13). | — |
 | D8 | Auto-obrażenia (Z3) | **Usunąć.** Rzut ataku i rzut obrażeń rozdzielone globalnie — obrażenia zawsze rzuca atakujący przyciskiem, jak w natywnej karcie dnd5e. Nakładanie **ręczne**: natywna tacka dnd5e na karcie obrażeń. | — |
@@ -100,7 +100,7 @@ Kategoria wg `scripts/wkk/README.md`: **NOE** = dosłowna lektura, **RAI** = zam
   „Walczysz” czytamy jak Zasłonę: dzierżysz, nie „zaatakowałeś w tej turze” (moduł nie liczy akcji).
 - **P2** Zasłona Samuraja przechodzi z AE do silnika (pochodna, zero zapisów do bazy przy każdej
   zmianie broni w ręku). Haki +1 do Testu Ataku i obrażeń zostają w `samuraj.mjs`.
-- **P3** Ochraniacze zostają Efektami Aktywnymi przedmiotu — to dane przedmiotu, dnd5e sam je wygasza
+- **P3** Ochraniacze zostają Efektami Aktywnymi przedmiotu (ich +1 do TT) — to dane przedmiotu, dnd5e sam je wygasza
   po zdjęciu, a dymek pokazuje je natywną ścieżką.
 - **P4** Roszada czyta stan **Unikanie** (`dodging`). Stan dostaje czas trwania RAW (s. 30: do początku
   następnej tury) i znika sam; Roszada gaśnie przy Obezwładnieniu i Szybkości 0 (warunki Unikania).
@@ -147,6 +147,7 @@ karty z Roll20 mają „Stała” i zostaną nietknięte (furtka). Na kartach ak
 {
   mods: { str, dex, con, int, wis, cha }, prof,
   armor: null | { name, type: "light"|"medium"|"heavy", value, lost, dexCap: number|null },
+  guards: bool,                                 // ochraniacze — pancerz w warunkach zdolności (D4)
   helmet: bool, shieldInHand: bool,
   owned: Set<abilityKey>,                       // §4.11
   states: { berserk, dodging, incapacitated, speed0 },
@@ -391,7 +392,7 @@ Kolejność = zależności. Warstwy testów wg `TESTING.md` §3; aktorzy testowi
   (`DEFENSE_REACTIONS`, `resolveHit`, `reactionState`); `ABILITY_KEYS` + aliasy (§4.11).
 - Testy — warstwa 1: unikalne `id`, każda pozycja ma `page`, każdy klucz zdolności rozwiązuje się
   w `ABILITY_DEFINITIONS`. Warstwa 4: każda pozycja §1.1–1.3; D1 (Tarcza wiary + Obłęd +
-  Kuloodporność); hełm gasi Gołą klatę, nie Tarczę wiary; ochraniacze nic nie gaszą; Trening: średni
+  Kuloodporność); hełm gasi Gołą klatę, nie Tarczę wiary; ochraniacze gaszą jak pancerz i włączają Obsługę; Trening: średni
   2 → 3, ciężki 0 → 1, ciężki z ZRC −1 = 0; Obsługa z dwóch klas = +2; remisy; `resolveHit`
   (naturalna 1/20, osłona, premie); `reactionState` — każdy powód wyszarzenia.
 - **Gotowe gdy:** `npm test` i paczka `tt-zasady` zielone.
@@ -495,6 +496,21 @@ Kolejność = zależności. Warstwy testów wg `TESTING.md` §3; aktorzy testowi
 | Emiter EMP ignoruje TT z pancerza maszyny | M3 |
 | Stałe warunkowe TT BN (Taktyka Posterunku) | Bestiariusz |
 | Reakcje po poznaniu obrażeń (Odskok, Matrix, Tylko draśnięcie) | tacka dnd5e ½ — bez kodu |
+
+## 8a. Zmiany w trakcie wdrożenia (2026-10-03)
+
+Co okazało się inne niż w projekcie — decyzje MG bez zmian, poza D4.
+
+| # | Co | Projekt mówił | Jest |
+|---|---|---|---|
+| W1 | Wygasanie efektów „do początku Twojej następnej tury” (§4.5) | `rounds: 1`, rdzeń wygasza na początku tury właściciela | Rdzeń v14 wygasza `turnStart` na początku tury kombatanta z `start.combatant`, a to ten, czyja tura trwała **przy tworzeniu** (atakujący). `actors/tt.mjs` przestawia `start.combatant` na właściciela; czas w turach (`turns: 1`) — w rundach efekt właściciela działającego później w tej samej rundzie trwałby o obieg za długo |
+| W2 | Kształt `obrona.targets` (§4.8.4) | obiekt kluczowany UUID-em żetonu | lista z `tokenUuid` w środku — kropka w kluczu flagi rozwija się w zagnieżdżenie (DEV_GUIDE §16) |
+| W3 | Wykonawca reakcji (§4.8.5) | klient gracza zużywa ładunek i zakłada efekt, MG przelicza | wszystko wykonuje aktywny MG po sprawdzeniu prośby; gracz rzuca tylko swoje kości. Odrzucona prośba nie zostawia zużytego ładunku |
+| W4 | Przerzut Fuksem (§4.8.7) | MG przenosi `obrona` na kartę przerzutu | karta przerzutu Testu Ataku niesie powiązania dnd5e i `rerollOf`, a werdykt stempluje autor przy tworzeniu (pierwszy zapis autora — reguła jednego pisarza zachowana) |
+| W5 | Właściwości naboju w obrażeniach | — | filtr `isPhysical` budowniczego serii wycinał `rozrywajaca` / `hollowpoint` / `ppanc`; teraz przechodzą do tacki MG. Hollow-point pod osłoną widzi właściwości naboju i przeżywa okno obrażeń |
+| W6 | Stopień Zranienia z krytyka (P9) | czyta krytyk z rzutu obrażeń | **nie działa w ogóle**: `combat/zranienie.mjs` słucha `dnd5e.rollDamage` w sygnaturze sprzed dnd5e 5 (`data.isCritical` zawsze puste). Wytrzymałość pancerza czyta krytyk z karty obrażeń tacki i działa. Poza tym planem — do decyzji MG |
+| W7 | Reakcja BN „Ofiara” (D13) | Pustak | w Bestiariuszu to Gangus Kapo (cecha z sekcji Zdolności → `reaction: true` w generatorze); Pustak i Wilhelm Yarborough to ręczni BN-i świata — `oznaczReakcjeBN()` |
+| W8 | Etykieta metody 10 + ZRC | „Bez pancerza” | „TT podstawowa” — po D4 postać w samych ochraniaczach ma ją jako metodę, a „bez pancerza” by kłamało |
 
 ## 9. Pliki
 

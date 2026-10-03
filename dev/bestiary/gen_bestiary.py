@@ -171,6 +171,14 @@ AUTOMATION = {
     },
     "bit-boys.skok": {"kind": "descriptive"},
 
+    # ---- Reakcje TT (PLAN_tt D13, scripts/combat/obrona.mjs) ----
+    # „Gladiator może podnieść swoją TT o +3 wobec jednego ataku wręcz" — przycisk MG w oknie
+    # „Reakcje celu" na karcie ataku; `scope: attack` = tylko ten atak.
+    "gladiator.parowanie": {"kind": "ttReaction", "bonus": 3, "melee": True, "scope": "attack"},
+    # Reakcja bez automatyki, ale opisana w sekcji Zdolności, nie Reakcji — przypomnienie dla MG
+    # w oknie „Reakcje celu" (te z sekcji `reaction` mają je same).
+    "gangus-kapo.ofiara": {"kind": "descriptive", "reaction": True},
+
     # RAI (autor systemu): wyd. październikowe zgubiło typ obrażeń, marcowe miało kłute.
     # dropsAs — patrz niżej (lalka, PLAN_paper_doll §9).
     "cywil.widly-tylko-farmer": {"damageType": "piercing", "dropsAs": "widly"},

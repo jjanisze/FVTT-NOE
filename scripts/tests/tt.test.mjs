@@ -26,6 +26,7 @@ function snap(o = {}) {
     armor: o.armor ?? null,
     helmet: !!o.helmet,
     shieldInHand: !!o.shieldInHand,
+    guards: !!o.guards,
     owned: new Set(o.owned ?? []),
     states: { berserk: false, dodging: false, incapacitated: false, speed0: false, ...(o.states ?? {}) },
     held: { zaslona: false, twoHatchets: false, ...(o.held ?? {}) }
@@ -156,7 +157,7 @@ export function registerTTTests(quench) {
       it("remis zostaje przy wcześniejszym wierszu tabeli", function () {
         const tt = computeTT(snap({ owned: ["golaKlata"], mods: { con: 0 } }));
         expect(tt.method.id).to.equal("bezPancerza");
-        expect(tt.rejected.find(r => r.id === "golaKlata")?.reason).to.equal("nie mocniejsza od TT bez pancerza (s. 59)");
+        expect(tt.rejected.find(r => r.id === "golaKlata")?.reason).to.equal("nie mocniejsza od podstawowej TT (s. 59)");
       });
 
       it("nieposiadanych źródeł nie listujemy", function () {
@@ -194,6 +195,8 @@ export function registerTTTests(quench) {
         expect(tr(LIGHT, 4).rejected[0]?.reason).to.equal("ten pancerz nie ogranicza ZRC");
         expect(tr(MEDIUM, 1).rejected[0]?.reason).to.match(/mieści się w limicie 2/);
         expect(tr(null, 4).rejected[0]?.reason).to.equal("nie nosisz pancerza");
+        const guards = computeTT(snap({ owned: ["treningWZbroi"], guards: true, mods: { dex: 4 } }));
+        expect(guards.rejected[0]?.reason).to.equal("ochraniacze nie ograniczają ZRC");
       });
     });
 
@@ -247,6 +250,24 @@ export function registerTTTests(quench) {
         expect(sz({}).rejected[0]?.reason).to.equal("nie Unikasz");
         expect(sz({ dodging: true, incapacitated: true }).rejected[0]?.reason).to.equal("jesteś Obezwładniony");
         expect(sz({ dodging: true, speed0: true }).rejected[0]?.reason).to.match(/Szybkość/);
+      });
+
+      it("ochraniacze to pancerz w warunkach zdolności (D4, autor systemu)", function () {
+        const all = ["golaKlata", "tarczaWiary", "berserk", "kuloodpornosc", "obslugaPancerza"];
+        const tt = computeTT(snap({ owned: all, guards: true, mods: { str: 2 }, states: { berserk: true } }));
+        const reason = id => tt.rejected.find(r => r.id === id)?.reason;
+        for (const id of ["golaKlata", "tarczaWiary", "obled", "kuloodpornosc"]) {
+          expect(reason(id), id).to.equal("nosisz ochraniacze (to też pancerz)");
+        }
+        // Metoda podstawowa zostaje — ochraniacze dokłada dnd5e z Efektu Aktywnego (P3).
+        expect(tt.method.id).to.equal("bezPancerza");
+        expect(tt.bonuses.map(b => [b.id, b.value])).to.deep.equal([["obslugaPancerza", 2]]);
+      });
+
+      it("hełm gasi tylko to, co go wymienia — Tarcza wiary w hełmie działa", function () {
+        const tt = computeTT(snap({ owned: ["tarczaWiary", "obslugaPancerza"], helmet: true }));
+        expect(tt.method.id).to.equal("tarczaWiary");
+        expect(tt.rejected.find(r => r.id === "obslugaPancerza")?.reason, "hełm to nie pancerz").to.equal("nie nosisz pancerza");
       });
 
       it("ochraniacze nie należą do silnika — liczy je dnd5e z Efektu Aktywnego (P3)", function () {

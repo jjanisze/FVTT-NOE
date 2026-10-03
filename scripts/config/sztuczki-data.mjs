@@ -212,7 +212,10 @@ export const SZTUCZKI = Object.freeze({
     text: "Bez pancerza: TT + Premia Biegłości.",
     category: "mobilnosc",
     legacyAbilityKeys: ["kuloodpornosc"],
-    auto: []
+    auto: [{
+      what: "TT + Premia Biegłości bez pancerza (także ochraniaczy), hełmu i tarczy (silnik TT, powód nieaktywności w dymku TT).",
+      where: "config/tt-rules.mjs"
+    }]
   },
   lawnik: {
     label: "Ławnik",
@@ -244,7 +247,11 @@ export const SZTUCZKI = Object.freeze({
       + "Parowanie [R] — TT +1k4 przeciw jednemu atakowi wręcz.",
     category: "wrecz",
     legacyAbilityKeys: ["mistrzWalkiWrecz"],
-    auto: []
+    auto: [{
+      what: "Parowanie [R] — TT +1k4 wobec jednego ataku wręcz, w oknie „Reakcje celu” na karcie ataku (rzut u gracza).",
+      where: "combat/obrona.mjs"
+    }],
+    manual: "Manewry w Akcji Bonusowej — przyciski manewrów jak zwykle, koszt Akcji Bonusowej pilnuje gracz."
   },
   muzyk: {
     label: "Muzyk",
@@ -261,7 +268,10 @@ export const SZTUCZKI = Object.freeze({
       + "o 5 wobec tego ataku.",
     category: "mobilnosc",
     legacyAbilityKeys: ["neo"],
-    auto: []
+    auto: [{
+      what: "Bullet time [R] — TT +5 wobec trafiającego ataku, w oknie „Reakcje celu” (wyszarzone, gdy nic nie zmieni).",
+      where: "combat/obrona.mjs"
+    }]
   },
   nozownik: {
     label: "Nożownik",
@@ -443,9 +453,9 @@ export const SZTUCZKI = Object.freeze({
         where: "actors/samuraj.mjs"
       },
       {
-        what: "TT +1, gdy trzyma finezyjną broń białą zadającą obrażenia cięte w ręce (Oporządzenie: `equipped` = "
-          + "ręka albo noszone) — Active Effect na system.attributes.ac.bonus.",
-        where: "actors/samuraj.mjs"
+        what: "Zasłona — TT +1, gdy finezyjna broń biała zadająca obrażenia cięte jest w ręce (Oporządzenie); "
+          + "silnik TT, bez Efektu Aktywnego.",
+        where: "config/tt-rules.mjs"
       },
       {
         what: "Dobycie: Oporządzenie pokazuje dobycie i schowanie takiej broni jako darmowe na linii ruchu w walce.",
@@ -465,8 +475,11 @@ export const SZTUCZKI = Object.freeze({
     auto: [{
       what: "Podwójne dobycie: nazwane na linii ruchu Oporządzenia przy dobyciu siekierki.",
       where: "actors/doll.mjs"
+    }, {
+      what: "Tańczący z siekierkami — TT +1 z siekierką z katalogu w każdej ręce (silnik TT).",
+      where: "config/tt-rules.mjs"
     }],
-    manual: "Zasięg rzutu siekierkami ×2 i TT +1 przy walce dwiema siekierkami — MG. Rozwój Cechy przy awansie."
+    manual: "Zasięg rzutu siekierkami ×2 — MG. Rozwój Cechy przy awansie."
   },
   snajper: {
     label: "Snajper",
@@ -482,7 +495,11 @@ export const SZTUCZKI = Object.freeze({
     text: "Roszada — podczas Unikania: TT +3 i brak ataków okazyjnych do początku następnej tury.",
     category: "mobilnosc",
     legacyAbilityKeys: ["szachista"],
-    auto: []
+    auto: [{
+      what: "Roszada — TT +3 przy stanie Unikanie (do początku następnej tury), gaśnie z Unikaniem.",
+      where: "config/tt-rules.mjs"
+    }],
+    manual: "Brak ataków okazyjnych przy Roszadzie — MG."
   },
   szkolenieWBroni: {
     label: "Szkolenie w broni",

@@ -15,7 +15,11 @@ import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup, sztuczkaItem, 
 import { buildCaliberDamageRoll, caliberDamageProperties, isCaliberWeapon } from "../weapons/ammo.mjs";
 import { coverAcBonus } from "../combat/cover.mjs";
 import { ttAgainst, verdictOfEntry, buildObrona, entryFor, TT_VS_ATTACKER_FLAG } from "../combat/trafienie.mjs";
-import { executeReaction, breakHelmet, useIntelligentDefence, __testing as obrona } from "../combat/obrona.mjs";
+import { executeReaction, breakHelmet, useIntelligentDefence, npcReactionReminders, __testing as obrona }
+  from "../combat/obrona.mjs";
+import { isUnmarkedReaction } from "../migration/oznacz-reakcje-bn.mjs";
+import { reactionState } from "../config/defense-rules.mjs";
+import { BESTIARY } from "../config/bestiary-data.mjs";
 
 const ATTACK_ID = "neuroTestAtak000";
 
@@ -287,6 +291,46 @@ export function registerObronaTests(quench) {
       it("bez hełmu na głowie nie ma czego niszczyć", async function () {
         const actor = await scratchActor({ name: `${SCRATCH_PREFIX} bez hełmu` });
         expect(await breakHelmet(actor)).to.equal(null);
+      });
+    });
+
+    describe("BN-cele (E5, D13)", function () {
+      /** BN w pamięci — BN nie ma lalki, nic tu nie pisze do świata. */
+      const npc = items => new Actor.implementation({ name: `${SCRATCH_PREFIX} BN`, type: "npc", items });
+      const bestiaryFeat = (name, section, automation = null) => ({
+        name, type: "feat", flags: { [MODULE_ID]: { bestiary: { creature: "x", entryId: "y", section, automation } } }
+      });
+
+      it("Bestiariusz: Gladiator — Parowanie jako reakcja TT +3 wręcz", function () {
+        const feat = BESTIARY.gladiator?.features?.find(f => f.id === "parowanie");
+        expect(feat?.automation).to.deep.equal({ kind: "ttReaction", bonus: 3, melee: true, scope: "attack" });
+      });
+
+      it("reakcja TT z Bestiariusza staje się przyciskiem MG", function () {
+        const actor = npc([bestiaryFeat("Parowanie", "reaction", { kind: "ttReaction", bonus: 3, melee: true, scope: "attack" })]);
+        const rows = obrona.reactionRowsFor(actor).filter(r => r.npc);
+        expect(rows.map(r => [r.label, r.bonus()])).to.deep.equal([["Parowanie", 3]]);
+        const ctx = { total: 17, natural: 12, verdict: "trafienie", need: 3, target: 15, autoHit: false,
+          melee: true, used: [], gmActive: true };
+        expect(reactionState(rows[0], obrona.defenseSnapshot(actor), ctx).state).to.equal("active");
+      });
+
+      it("inne Reakcje BN — przypomnienie bez automatyki; reakcja TT nie dubluje się", function () {
+        const actor = npc([
+          bestiaryFeat("Tylko draśnięcie", "reaction"),
+          bestiaryFeat("Ofiara", "traits", { kind: "descriptive", reaction: true }),
+          bestiaryFeat("Parowanie", "reaction", { kind: "ttReaction", bonus: 3, melee: true, scope: "attack" }),
+          bestiaryFeat("Pierwsze spotkanie", "traits")
+        ]);
+        expect(npcReactionReminders(actor).map(i => i.name)).to.have.members(["Tylko draśnięcie", "Ofiara"]);
+      });
+
+      it("skrypt oznaczania: cecha ręcznego BN-a o Reakcji, bez aktywności", function () {
+        const feat = data => new Item.implementation({ type: "feat", ...data });
+        expect(isUnmarkedReaction(feat({ name: "Ofiara", system: { description: { value: "<p>może użyć Reakcji</p>" } } }))).to.equal(true);
+        expect(isUnmarkedReaction(feat({ name: "Szarża", system: { description: { value: "<p>atak</p>" } } }))).to.equal(false);
+        expect(isUnmarkedReaction(feat({ name: "Ofiara", flags: { [MODULE_ID]: { bestiary: { section: "traits" } } },
+          system: { description: { value: "Reakcja" } } })), "z paczki").to.equal(false);
       });
     });
   }, { displayName: "Neuroshima: Trafienie, obrażenia i reakcje celu" });

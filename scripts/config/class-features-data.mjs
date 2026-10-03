@@ -43,7 +43,7 @@ export const CLASS_FEATURES = {
     hotbar: true,
     legacyAbilityKey: "berserk",
     toggle: { effect: "neuro-berserk", duration: { rounds: 10 }, breaksOn: ["unconscious", "incapacitated", "charmed"], afterEnd: "noActionNextTurn" },
-    auto: [{ what: "włączenie w Akcji Bonusowej zużywa Berserk, efekt trwa 10 rund", where: "actors/class-state.mjs" }, { what: "Siła Berserkera — Ułatwienie w testach i RO na Siłę", where: "actors/class-state.mjs" }, { what: "Obrażenia Berserkera — kość z tabeli Brutala do obrażeń ataków wręcz", where: "actors/class-state.mjs" }, { what: "Obłęd Berserkera — TT + mod. SIŁ bez pancerza, hełmu i tarczy", where: "actors/class-state.mjs" }, { what: "koniec przy Nieprzytomności, Obezwładnieniu i Zauroczeniu; karta zmęczenia po Berserku", where: "actors/class-state.mjs" }],
+    auto: [{ what: "włączenie w Akcji Bonusowej zużywa Berserk, efekt trwa 10 rund", where: "actors/class-state.mjs" }, { what: "Siła Berserkera — Ułatwienie w testach i RO na Siłę", where: "actors/class-state.mjs" }, { what: "Obrażenia Berserkera — kość z tabeli Brutala do obrażeń ataków wręcz", where: "actors/class-state.mjs" }, { what: "Obłęd Berserkera — TT + mod. SIŁ bez pancerza (także ochraniaczy), hełmu i tarczy, z silnika TT: założone w trakcie gaszą premię", where: "config/tt-rules.mjs" }, { what: "koniec przy Nieprzytomności, Obezwładnieniu i Zauroczeniu; karta zmęczenia po Berserku", where: "actors/class-state.mjs" }],
     manual: "Szarżę Berserkera wykonuje gracz; zmęczenie po Berserku (brak akcji) moduł ogłasza, pilnuje stół. Obrażenia Berserkera idą jak Rage w dnd5e — tylko do ataków wręcz, rzut bronią opartą na Sile dolicza gracz.",
     text: "W Akcji Bonusowej możesz wpaść w Berserk. W tym swoistym szale otrzymujesz następujące korzyści: Siła Berserkera. Masz Ułatwienie w testach Siły i RO na Siłę. Obrażenia Berserkera. Kiedy wykonujesz atak oparty na Sile — bronią lub bez broni i zadajesz obrażenia, dorzucasz dodatkową kość obrażeń rosnącą wraz z poziomem Brutala, zgodnie z kolumną Obrażenia Berserkera w tabeli Zdolności Klasowych Brutala. Szarża Berserkera [B]. Jeśli przeznaczysz całą swoją Szybkość na zbliżenie się do przeciwnika, którego widzisz lub słyszysz, możesz w Akcji Bonusowej wykonać Przyspieszenie w jego kierunku. Obłęd Berserkera. Jeśli nie nosisz żadnego pancerza, hełmu ani tarczy, twoja TT rośnie o wartość modyfikatora Siły. Czas trwania. Berserk trwa 10 rund (do końca twojej ostatniej tury), chyba że otrzymasz stan Nieprzytomność, Obezwładnienie czy Zauroczenie, które go przerywają. Kiedy Berserk się zakończy, zmęczenie sprawia, że nie wykonujesz żadnej akcji do końca twojej następnej tury. Liczbę dostępnych na danym poziomie Berserków, znajdziesz w tabeli Zdolności klasowe Brutala. Liczba ta odnawia się po odbyciu Długiego odpoczynku."
   },
@@ -57,8 +57,7 @@ export const CLASS_FEATURES = {
     passive: true,
     exclusiveGroup: "unarmoredAc",
     legacyAbilityKey: "golaKlata",
-    auto: [{ what: "nie łączy się z Tarczą wiary ani Obłędem Berserkera — słabsza zdolność wyszarzona na karcie", where: "actors/class-rules.mjs" }],
-    manual: "TT 10 + mod. ZRC + mod. KON ustawia się w konfiguracji Trudności Trafienia na karcie — moduł jej nie nakłada.",
+    auto: [{ what: "TT 10 + mod. ZRC + mod. KON bez pancerza (także ochraniaczy), hełmu i tarczy — metoda TT „NOE (automatycznie)”, wygrywa najwyższa (s. 59); powód nieaktywności w dymku TT", where: "config/tt-rules.mjs" }, { what: "słabsza od Tarczy wiary niezależnie od ekwipunku — wyszarzona na karcie", where: "actors/class-rules.mjs" }],
     text: "Kiedy nie nosisz żadnego pancerza, hełmu ani tarczy twoja Trudność Trafienia wynosi 10 + twoje modyfikatory Zręczności i Kondycji. Ta zdolność nie łączy się z podobnie działającymi zdolnościami innych klas."
   },
   "wsciekly-cios": {
@@ -313,7 +312,7 @@ export const CLASS_FEATURES = {
     uses: { max: "@abilities.int.mod", period: "sr" },
     hotbar: true,
     legacyAbilityKey: "inteligentnaObrona",
-    auto: [],
+    auto: [{ what: "Reakcja w oknie „Reakcje celu” na karcie ataku: zużywa użycie, TT + mod. INT do początku następnej tury, werdykt karty przeliczony", where: "combat/obrona.mjs" }, { what: "użyta z paska albo karty postaci — to samo: użycie i efekt TT zamiast samej karty", where: "combat/obrona.mjs" }],
     text: "Kiedy zostajesz trafiony atakiem, przed poznaniem ilości obrażeń, możesz w Reakcji zwiększyć swoją Trudność Trafienia o wartość modyfikatora Inteligencji, do początku swojej następnej tury, by w ten sposób uniknąć trafienia. Możesz użyć tej zdolności tyle razy, ile wynosi twój modyfikator Inteligencji. Zdolność odnawia się po odbyciu Krótkiego odpoczynku."
   },
   "szybkie-badanie": {
@@ -618,7 +617,8 @@ export const CLASS_FEATURES = {
     label: "Dziewięć żyć",
     action: null,
     legacyAbilityKey: "dziewiecZyc",
-    auto: [],
+    auto: [{ what: "Koci odskok [R] — Kocia kość do TT do początku następnej tury, w oknie „Reakcje celu” (zużywa Kocią kość, rzut u gracza)", where: "combat/obrona.mjs" }],
+    manual: "Kocia nieśmiertelność (Kocia kość do RO) — gracz, przy rzucie.",
     text: "Łatwiej ustrzelić nocą czarnego kota niż cię trafić. Zyskujesz nowe sposoby na wykorzystanie Kocich kości."
   },
   "saper": {
@@ -948,8 +948,7 @@ export const CLASS_FEATURES = {
     passive: true,
     exclusiveGroup: "unarmoredAc",
     legacyAbilityKey: "tarczaWiary",
-    auto: [{ what: "nie łączy się z Gołą klatą ani Obłędem Berserkera — słabsza zdolność wyszarzona na karcie", where: "actors/class-rules.mjs" }],
-    manual: "Premię mod. CHA do TT bez pancerza ustawia się w konfiguracji Trudności Trafienia — moduł jej nie nakłada.",
+    auto: [{ what: "TT 10 + mod. ZRC + mod. CHA bez pancerza i ochraniaczy (hełm i tarcza wolno) — metoda TT „NOE (automatycznie)”, wygrywa najwyższa (s. 59); Obłęd i Kuloodporność sumują się z nią (RAI)", where: "config/tt-rules.mjs" }],
     text: "Jeśli nie nosisz pancerza, możesz dodać modyfikator Charyzmy do swojej Trudności Trafienia. Tej zdolności nie można łączyć z innymi podobnymi (np. Goła Klata)."
   },
   "bezlitosny-przywodca": {
@@ -1204,7 +1203,8 @@ export const CLASS_FEATURES = {
     label: "Trening w zbroi",
     action: null,
     legacyAbilityKey: "treningWZbroi",
-    auto: [],
+    auto: [{ what: "limit ZRC z pancerza +1 (średni 2 → 3, ciężki 0 → 1) w silniku TT", where: "config/tt-rules.mjs" }],
+    manual: "Brak kary do Skradania się w pancerzu — Utrudnienie z pancerza zdejmuje MG.",
     text: "Robienie pompek w pancerzu i z kowadłem na plecach, to twoje codzienne zajęcie. Nie otrzymujesz kar do Testów Zręczności (Skradanie się) wynikających z noszenia pancerza. Twoja maksymalna premia ze Zręczności do Trudności Trafienia wynikająca z ograniczeń noszonego pancerza, zwiększa się o 1."
   },
   "skrytka": {
@@ -1341,7 +1341,8 @@ export const CLASS_FEATURES = {
     action: null,
     oncePerTurn: true,
     legacyAbilityKey: "mutantNaSniadanie",
-    auto: [],
+    auto: [{ what: "Unik łowcy [R] — TT + PB wobec ataku mutanta albo potwora, w oknie „Reakcje celu”", where: "combat/obrona.mjs" }],
+    manual: "Refleks łowcy (Inicjatywa) i Zabójca mutantów (Ułatwienie raz w rundzie) — gracz.",
     text: "Trochę tego tałatajstwa już zdechło dzięki tobie. Wiesz najlepiej, jak z nimi walczyć i jak się przed nimi bronić. Refleks łowcy. Kiedy rozpoczynasz walkę z mutantem lub potworem, zyskujesz premię do Inicjatywy, równą twojej Premii Biegłości. Zabójca mutantów. Kiedy walczysz z mutantem lub potworem, możesz raz w rundzie zaatakować go z Ułatwieniem. Unik łowcy [R]. Jeśli zostajesz trafiony atakiem przez mutanta lub potwora, możesz użyć Reakcji, żeby wobec tego ataku podnieść swoją TT o wartość twojej Premii Biegłości."
   },
   "pogromca": {
@@ -1424,7 +1425,8 @@ export const CLASS_FEATURES = {
     action: "R",
     hotbar: true,
     legacyAbilityKey: "empiryk",
-    auto: [],
+    auto: [{ what: "TT + PB wobec ataku maszyny, w oknie „Reakcje celu”", where: "combat/obrona.mjs" }],
+    manual: "Ułatwienie w RO na efekty maszyn — gracz.",
     text: "Nikt nie wie, jak to robisz, ale potrafisz przewidzieć zachowanie każdej maszyny. Jeśli zostajesz trafiony przez maszynę, możesz użyć Reakcji, żeby wobec tego ataku podnieść swoją TT o wartość twojej Premii Biegłości. Zyskujesz również Ułatwienie w Rzutach Obronnych na efekty wywoływane przez maszyny."
   },
   "slaby-punkt": {
@@ -1448,7 +1450,7 @@ export const CLASS_FEATURES = {
     label: "Obsługa pancerza",
     action: null,
     legacyAbilityKey: "obslugaPancerza",
-    auto: [],
+    auto: [{ what: "+2 do TT w pancerzu (lekkim, średnim, ciężkim) albo w samych ochraniaczach; z dwóch klas liczy się raz", where: "config/tt-rules.mjs" }],
     text: "Kiedy nosisz pancerz, otrzymujesz +2 do Trudności Trafienia."
   },
   "rzeznik": {

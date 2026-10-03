@@ -40,6 +40,9 @@ export const TT_EFFECT_FLAG = "tt";
 /** Statusy, które znaczą Obezwładnienie (dnd5e dokłada `incapacitated` do cięższych stanów). */
 const INCAPACITATED = ["incapacitated", "paralyzed", "stunned", "unconscious"];
 
+/** Rodziny lalki ochraniaczy (`actors/doll-model.mjs`). */
+const GUARD_FAMILIES = new Set(["armGuards", "legGuards"]);
+
 /** Metody 5e bez odpowiednika w NOE (D6). */
 const REMOVED_AC_METHODS = ["mage", "draconic", "unarmoredMonk", "unarmoredBarb", "unarmoredBard"];
 
@@ -87,6 +90,8 @@ export function ttSnapshot(actor) {
     mods,
     prof: _num(actor.system?.attributes?.prof),
     armor: _armorOf(actor),
+    // Ochraniacze rąk i nóg to pancerz w warunkach zdolności (D4, autor systemu 2026-10-03).
+    guards: actor.items.some(i => i.system?.equipped && GUARD_FAMILIES.has(familyOf(i))),
     helmet: actor.items.some(i => i.system?.equipped && familyOf(i) === "helmet"),
     shieldInHand: hands.some(i => i.system?.type?.value === "shield"),
     owned: new Set(TT_ABILITY_KEYS.filter(key => hasAbility(actor, key))),

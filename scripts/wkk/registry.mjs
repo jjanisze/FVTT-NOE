@@ -37,6 +37,7 @@ export { KOBALT_CLASS_FEATURES, KOBALT_ABILITY_DEFINITIONS } from "./config/clas
 export { ROZRYWAJACA } from "./combat/weapon-save-properties.mjs";        // → combat/weapon-save-properties.mjs
 export { DUMDUM_BLEED_PROFILE } from "./combat/bleeding.mjs";             // → combat/bleeding.mjs
 export { stWepchniecia, wynikWepchniecia } from "./config/pojedynczy-naboj.mjs"; // → weapons/magazine.mjs
+export { dziurawyHelmData } from "./config/dziurawy-helm.mjs";            // → combat/obrona.mjs
 
 // "NOE item/rule, WKK numbers" override cases — each host keeps its `..._RAW` twin.
 export { LIGHT_KOBALT } from "./config/latarka-overrides.mjs";            // → items/latarka.mjs

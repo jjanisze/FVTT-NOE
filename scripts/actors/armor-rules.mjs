@@ -27,9 +27,13 @@
  * │                     więc natywna reguła pisała do nieistniejącego pola.     │
  * └────────────────────────────────────────────────────────────────────────────┘
  *
+ * TT z pancerza (metoda, limit ZRC, Trening w zbroi, Obsługa pancerza) liczy silnik TT
+ * (`config/tt-rules.mjs`, `actors/tt.mjs`); Parowanie tarczą i Krytyczną ochronę hełmu — okno
+ * „Reakcje celu” (`combat/obrona.mjs`); wytrzymałość — `production/naprawa.mjs` (opcjonalna).
+ *
  * ┌ Nie automatyzujemy ────────────────────────────────────────────────────────┐
- * │ Szczelność, akcje tarczy, Krytyczna ochrona hełmu, wytrzymałość pancerzy,  │
- * │ odpoczynek w pancerzu, Utrudnienie do pływania, czas zakładania.           │
+ * │ Szczelność, Cios tarczą i Osłona tarczą, odpoczynek w pancerzu,            │
+ * │ Utrudnienie do pływania, czas zakładania (tylko pokazany w Oporządzeniu).  │
  * └────────────────────────────────────────────────────────────────────────────┘
  */
 
@@ -289,6 +293,10 @@ const AUTOMATED_RULES = [
   ["Brak wyszkolenia — Testy Ataku", "Hak `dnd5e.preRollAttack` dla ataków opartych na SIŁ i ZRC."],
   ["Kara Szybkości", `SIŁA poniżej wymaganej → −${LOW_STRENGTH_SPEED_PENALTY} m do wszystkich prędkości.`],
   ["Skradanie się", "Właściwość `stealthDisadvantage` przepięta z natywnego `skills.ste` na neuroshimowe `skills.skr`."],
+  ["TT z pancerza", "Silnik TT (`config/tt-rules.mjs`): wartość z tabeli, ZRC wg kategorii, Trening w zbroi i Obsługa pancerza; rozkład w dymku TT."],
+  ["Parowanie tarczą", "Okno „Reakcje celu” na karcie ataku: +5 TT wobec ataków wręcz tego przeciwnika do początku następnej tury."],
+  ["Krytyczna ochrona hełmu", "Okno „Reakcje celu”: krytyk → zwykłe trafienie, hełm niszczeje (Kobalt: Dziurawy hełm)."],
+  ["Wytrzymałość pancerzy", "Opcjonalna (ustawienie świata): Trafienie Krytyczne obniża TT pancerza o 1; naprawa w zakładce Produkcja (`production/naprawa.mjs`)."],
 ];
 
 /** Wypisuje na czacie, co moduł liczy sam, a czego nie tyka. */

@@ -124,6 +124,14 @@ kliknięciem w piki.
   natywne `options.ignore.resistance/threshold` dla broni i amunicji z tą właściwością; ustępują próg
   pancerza BG, odporności i Próg obrażeń Bestiariusza. Paczka testów `przebicie`. Zamyka
   `PLAN_weapon_properties.md` §3.2
+- [x] **Trudność Trafienia wg NOE i reakcje po trafieniu** — 2026-10-03, `PLAN_tt.md`: silnik TT
+  (metody konkurują, premie się sumują, dymek z rozkładem), jeden rozstrzygacz trafienia, Test Ataku
+  i obrażenia zawsze osobno (koniec auto-obrażeń), okno „Reakcje celu” na karcie ataku, Krytyczna
+  ochrona hełmu, reakcje BN z Bestiariusza
+- [ ] **Stopień Zranienia z Trafienia Krytycznego nie działa** (s. 32) — `combat/zranienie.mjs` słucha
+  `dnd5e.rollDamage` w sygnaturze sprzed dnd5e 5 (`data.isCritical` zawsze puste), więc krytyk nigdy
+  nie nadaje stopnia. Znalezione przy PLAN_tt (W6); miejsce na naprawę: nakładanie obrażeń z karty
+  krytycznej w tacce MG (`dnd5e.applyDamage`, jak wytrzymałość pancerzy w `production/naprawa.mjs`)
 - [ ] **Zagrożenia bez wyzwalacza** (źródła Wyczerpania istnieją, nic ich nie nakłada):
   Sen (s. 45 — doba bez snu → RO KON ST 20), Uduszenie (s. 259 — 1 + mod. KON minut, potem
   Wyczerpanie co turę, zdejmowane po złapaniu oddechu), Przemarznięcie (s. 258 — RO KON ST 5 + 1/°C
@@ -252,7 +260,6 @@ mieć odbiorcę).
 |---|---|
 | Kolory Neuroshimy (Rdza, Rtęć, Stal, Chrom — s. 201) jako profile świata | Opcjonalne w RAW; framework powinien uogólnić przełącznik WKK, co jest osobnym projektem. Brać wersję z października: krwawienie tamuje Pomaganie + INT (Medycyna) ST 10 |
 | Pełna automatyka 133 zdolności klasowych, 53 Sztuczek, 36 zdolności Pochodzeń, 260 zdolności Bestiariusza | Długi ogon; beta wymaga tylko plakietek (B5) |
-| Wytrzymałość pancerzy (opcjonalne RAW) | Decyzja: ręcznie (`[—]` w trackerze) |
 | Docelowe żetony Bestiariusza (25/51), kalibracja skali, pozostałe ikony | Grafika, nie mechanika |
 | Screen shake DS/MS, iskry i krew trafienia | Oprawa |
 | Zorganizowane grupy, Front | Treść świata, brak mechaniki |

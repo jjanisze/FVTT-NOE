@@ -156,18 +156,17 @@ export const ARMORS = [
     ac: null, acBonus: 0, dex: null, strength: null, stealth: null, donTime: 1,
     weight: 3, price: 20, avail: 70,
     note: "Kask sportowy, motocyklowy, górniczy albo wojskowy. Nie wymaga wyszkolenia "
-        + "i nie daje bonusu do TT.",
-    manual: [
-      "Krytyczna ochrona [R]: po Trafieniu Krytycznym możesz Reakcją zamienić je "
-      + "na zwykłe obrażenia — hełm ulega wtedy zniszczeniu. Moduł nie przechwytuje "
-      + "krytyków ani nie kasuje hełmu."
-    ]
+        + "i nie daje bonusu do TT. Krytyczna ochrona [R]: po Trafieniu Krytycznym możesz "
+        + "Reakcją zamienić je na zwykłe obrażenia — przycisk w oknie „Reakcje celu” na karcie "
+        + "ataku; hełm ulega wtedy zniszczeniu (z Kolorem Kobaltu zostaje Dziurawy hełm)."
   },
   {
     id: "ochraniacze-nog", name: "Ochraniacze nóg (para)", cat: "Akcesorium", armorType: "trinket",
     ac: null, acBonus: 1, dex: null, strength: 11, stealth: null, donTime: 1,
     weight: 8, price: 60, avail: 40,
-    note: "Kevlar, blacha albo powłoki potworów. +1 do TT.",
+    note: "Kevlar, blacha albo powłoki potworów. +1 do TT. W warunkach zdolności to pancerz "
+        + "(autor systemu): gaszą Gołą klatę, Tarczę wiary, Obłęd Berserkera i Kuloodporność, "
+        + "włączają Obsługę pancerza.",
     manual: ["Nie działają razem z ciężkim pancerzem — Oporządzenie zdejmuje jedno, gdy zakładasz drugie "
       + "(o zdjęcie pancerza pyta)."]
   },
@@ -175,7 +174,9 @@ export const ARMORS = [
     id: "ochraniacze-rak", name: "Ochraniacze rąk (para)", cat: "Akcesorium", armorType: "trinket",
     ac: null, acBonus: 1, dex: null, strength: 11, stealth: null, donTime: 1,
     weight: 4, price: 40, avail: 50,
-    note: "Kevlar, blacha albo powłoki potworów. +1 do TT.",
+    note: "Kevlar, blacha albo powłoki potworów. +1 do TT. W warunkach zdolności to pancerz "
+        + "(autor systemu): gaszą Gołą klatę, Tarczę wiary, Obłęd Berserkera i Kuloodporność, "
+        + "włączają Obsługę pancerza.",
     manual: ["Nie działają razem z ciężkim pancerzem — Oporządzenie zdejmuje jedno, gdy zakładasz drugie "
       + "(o zdjęcie pancerza pyta)."]
   },
@@ -185,13 +186,13 @@ export const ARMORS = [
     weight: 5, price: 20, avail: 70,
     note: "Dekiel od śmietnika, pokrywa studzienki albo skorupa potwora. Wymaga "
         + "biegłości i co najmniej jednej wolnej ręki. Sama z siebie nie podnosi TT "
-        + "— cała jej wartość siedzi w trzech akcjach poniżej.",
+        + "— cała jej wartość siedzi w trzech akcjach. Parowanie [R]: po trafieniu atakiem "
+        + "wręcz +5 TT wobec ataków tego przeciwnika do początku Twojej następnej tury — przycisk "
+        + "w oknie „Reakcje celu” na karcie ataku (tarcza w ręce, biegłość, SIŁA 13+). "
+        + "Zajmuje rękę — działa tylko trzymana.",
     manual: [
       "Cios tarczą [B]: atak bez broni, 1k4 obuchowe albo Odepchnięcie.",
-      "Osłona [R]: w zasięgu ataku obszarowego — Ułatwienie w RO na Zręczność.",
-      "Parowanie [R]: po trafieniu atakiem wręcz — +5 TT wobec ataków tego "
-      + "przeciwnika do początku Twojej następnej tury.",
-      "Zajmuje rękę — działa tylko trzymana."
+      "Osłona [R]: w zasięgu ataku obszarowego — Ułatwienie w RO na Zręczność."
     ]
   }
 ];
@@ -207,9 +208,6 @@ export const ARMOR_MAP = Object.freeze(Object.fromEntries(ARMORS.map(a => [a.id,
 export const ARMOR_GLOBAL_MANUAL = Object.freeze([
   "Pancerz dla zwierzaka: mały rozmiar bez dopłaty, średni ×2 ceny, duży ×4. "
   + "Moduł nie przelicza cen.",
-  "Wytrzymałość pancerzy (reguła opcjonalna): Trafienie Krytyczne obniża TT o 1. "
-  + "Naprawa wymaga fachowca i surowców za 10% ceny × utracona TT; 1 h (lekki), "
-  + "5 h (średni), 10 h (ciężki). Moduł nie zbija TT ani nie liczy napraw.",
   "Odpoczynek w pancerzu: Długi odpoczynek w dowolnym pancerzu zwraca tylko połowę "
   + "Kości Wytrzymałości, nie usuwa Wyczerpania i nie zmniejsza Stopnia Zranienia. "
   + "Moduł nie modyfikuje odpoczynku.",

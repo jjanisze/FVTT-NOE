@@ -21,6 +21,8 @@ const armour = (name, type, value, dex = null) => ({
 });
 const HELMET = { name: `${SCRATCH_PREFIX} Hełm`, type: "equipment", system: { type: { value: "trinket" } },
   flags: { [MODULE_ID]: { armorId: "helm" } } };
+const ARM_GUARDS = { name: `${SCRATCH_PREFIX} Ochraniacze rąk`, type: "equipment", system: { type: { value: "trinket" } },
+  flags: { [MODULE_ID]: { armorId: "ochraniacze-rak" } } };
 const hatchet = () => ({ name: `${SCRATCH_PREFIX} Siekierka`, type: "weapon",
   system: { identifier: "siekierka", type: { value: "biala" }, damage: { base: { number: 1, denomination: 6, types: ["slashing"] } } } });
 
@@ -102,6 +104,16 @@ export function registerTTKartaTests(quench) {
         expect(reason(actor, "golaKlata")).to.equal("nosisz pancerz");
       });
 
+      it("w ochraniaczach: Goła klata i Obłęd gasną — ochraniacze to pancerz (D4, autor systemu)", async function () {
+        const { actor, made } = await pc("Brutal w ochraniaczach", BRUTAL,
+          [feature("gola-klata", "Goła klata"), feature("berserk", "Berserk"), ARM_GUARDS]);
+        await berserk(actor);
+        await wear(gear(made)[0]);
+        expect(tt(actor).method.id).to.equal("bezPancerza");
+        expect(reason(actor, "golaKlata")).to.equal("nosisz ochraniacze (to też pancerz)");
+        expect(reason(actor, "obled")).to.equal("nosisz ochraniacze (to też pancerz)");
+      });
+
       it("Brutal-Kaznodzieja: wygrywa wyższa metoda; zawsze słabsza wyszarzona (P10)", async function () {
         const { actor } = await pc("Brutal-Kaznodzieja", { ...BRUTAL, cha: 18 },
           [feature("gola-klata", "Goła klata"), feature("tarcza-wiary", "Tarcza wiary")]);
@@ -128,6 +140,13 @@ export function registerTTKartaTests(quench) {
         expect(reason(actor, "obslugaPancerza")).to.equal("nie nosisz pancerza");
         await wear(gear(made)[0]);
         expect(actor.system.attributes.ac.value).to.equal(11 + 2 + 2);
+      });
+
+      it("Obsługa pancerza działa w samych ochraniaczach (D4)", async function () {
+        const { actor, made } = await pc("Twardziel w ochraniaczach", BRUTAL,
+          [feature("obsluga-pancerza", "Obsługa pancerza"), ARM_GUARDS]);
+        await wear(gear(made)[0]);
+        expect(tt(actor).bonuses.find(b => b.id === "obslugaPancerza")?.value).to.equal(2);
       });
 
       it("Trening w zbroi: średni 2 → 3, ciężki 0 → 1", async function () {

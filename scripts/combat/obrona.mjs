@@ -43,7 +43,11 @@ import { dziurawyHelmData } from "../wkk/config/dziurawy-helm.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const PROSBA_FLAG = "obronaProsba";
-/** Flaga cechy BN z Bestiariusza: `{ bonus, melee, scope }` (`dev/bestiary/gen_bestiary.py`, E5). */
+/**
+ * Reakcja TT na cesze BN-a: `{ bonus, melee, scope }`. Bestiariusz niesie ją w automatyce cechy
+ * (`flags.<mod>.bestiary.automation`, `kind: "ttReaction"`, `dev/bestiary/gen_bestiary.py`, E5);
+ * BN zrobiony ręcznie może dostać tę samą flagę wprost (`flags.<mod>.ttReaction`).
+ */
 export const NPC_TT_REACTION_FLAG = "ttReaction";
 
 const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
@@ -114,11 +118,21 @@ export function defenseSnapshot(actor) {
   };
 }
 
+/** Reakcja TT cechy BN-a albo `null`. */
+function _npcReactionOf(item) {
+  const f = item?.flags?.[MODULE_ID] ?? {};
+  const auto = f.bestiary?.automation;
+  if (auto?.kind === "ttReaction") return auto;
+  return f[NPC_TT_REACTION_FLAG] ?? null;
+}
+
 /** Reakcje BN z Bestiariusza — przyciski MG (D13). */
 function _npcRows(actor) {
-  return actor.items
-    .filter(i => i.flags?.[MODULE_ID]?.[NPC_TT_REACTION_FLAG])
-    .map(i => npcReactionRow({ id: `npc-${i.id}`, label: i.name, ...i.flags[MODULE_ID][NPC_TT_REACTION_FLAG] }));
+  if (!actor || actor.type === "character") return [];
+  return actor.items.filter(_npcReactionOf).map(i => {
+    const { bonus, melee, scope } = _npcReactionOf(i);
+    return npcReactionRow({ id: `npc-${i.id}`, label: i.name, bonus, melee, scope });
+  });
 }
 
 /** Wszystkie wiersze reakcji, które mogą dotyczyć tego celu. */
@@ -133,8 +147,9 @@ export function reactionRowsFor(actor) {
 export function npcReactionReminders(actor) {
   if (!actor || actor.type === "character") return [];
   return actor.items.filter(i => {
-    if (i.flags?.[MODULE_ID]?.[NPC_TT_REACTION_FLAG]) return false;
-    if (i.flags?.[MODULE_ID]?.bestiaryReaction) return true;
+    if (_npcReactionOf(i)) return false;
+    const b = i.flags?.[MODULE_ID]?.bestiary;
+    if (b?.section === "reaction" || b?.automation?.reaction) return true;
     return [...(i.system?.activities ?? [])].some(a => a.activation?.type === "reaction");
   });
 }

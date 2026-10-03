@@ -12,8 +12,10 @@
    każdym innym Kolorem.
 5. [Produkcja i naprawa](Produkcja.md) — zakładka Produkcja, Roboty, Schematy i Wprawa,
    odpoczynki, Szybka produkcja, naprawa broni i pancerzy.
-6. [FAQ](FAQ.md) — najczęstsze pytania.
-7. [Errata: przepisy profesji](Errata-produkcja.md) — wiersze tabel schematów Speca gorsze od
+6. [Trudność Trafienia, trafienie i reakcje](TT-i-reakcje.md) — skąd moja TT, atak i obrażenia,
+   reakcje celu na karcie ataku.
+7. [FAQ](FAQ.md) — najczęstsze pytania.
+8. [Errata: przepisy profesji](Errata-produkcja.md) — wiersze tabel schematów Speca gorsze od
    przepisu standardowego.
 
 Coś jest niejasne albo brakuje strony, której szukasz? Zgłoś to jako

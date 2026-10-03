@@ -20,9 +20,9 @@ M# = kamień milowy w `PLAN_beta.md`.
 | Zasady podstawowe | Cechy, testy, PB, ST, RO, TT, Ułatwienie/Utrudnienie, 18 umiejętności, 22 narzędzia | ✅ | `config/skills.mjs`, `tools.mjs`, `terminology.mjs` |
 | | Przerzuty, Fuksy, Forsowanie | ✅ | `combat/rerolls.mjs`, `actors/fuks-pips.mjs` |
 | Walka | Inicjatywa, Zaskoczenie, Niespodziewany atak | ✅ | natywne dnd5e + stan `ambush` (§1.12) |
-| | Osłona, przebijanie osłony | 🟡 | `combat/cover.mjs` (§1.10). Pytana tylko przy atakach dystansowych (RAW: każdy atak — M1); auto-obrażenia, dozownik, olejek, dźwięki i smugacz liczą trafienie z gołej TT, bez osłony — `PLAN_tt.md` E2 |
-| | TT postaci: jedna metoda (pancerz, Goła klata, Tarcza wiary) + premie (Obłęd, Obsługa pancerza, Kuloodporność, Trening w zbroi, Roszada, Tańczący z siekierkami) | 🟡 | liczone: pancerz, ochraniacze, Zasłona, wytrzymałość; Obłęd raz przy włączeniu Berserka; reszta ręcznie — `PLAN_tt.md` Część A |
-| | Rzut ataku oddzielony od rzutu obrażeń; reakcje po trafieniu (Inteligentna obrona, Unik łowcy, Empiryk, Bullet time, Parowanie, Koci odskok, Krytyczna ochrona hełmu) | ❌ | `weapons/ammo.mjs` sam rzuca i nakłada obrażenia po trafieniu z broni z kalibrem; reakcji brak — `PLAN_tt.md` Część B |
+| | Osłona, przebijanie osłony | 🟡 | `combat/cover.mjs` (§1.10); premia osłony wchodzi do rozstrzygacza trafienia (`combat/trafienie.mjs`). Pytana tylko przy atakach dystansowych (RAW: każdy atak — M1) |
+| | TT postaci: jedna metoda (TT podstawowa, pancerz, Goła klata, Tarcza wiary) + premie (Obłęd, Obsługa pancerza, Kuloodporność, Trening w zbroi, Roszada, Tańczący z siekierkami, Zasłona, ochraniacze) | ✅ | `config/tt-rules.mjs`, `actors/tt.mjs` — metoda „NOE (automatycznie)”, dymek z rozkładem i „nie liczy się”; ochraniacze to pancerz w warunkach zdolności (autor systemu) — `PLAN_tt.md` |
+| | Rzut ataku oddzielony od rzutu obrażeń; reakcje po trafieniu (Inteligentna obrona, Unik łowcy, Empiryk, Bullet time, Parowanie, Parowanie tarczą, Koci odskok, Krytyczna ochrona hełmu; reakcje BN z Bestiariusza) | ✅ | `combat/trafienie.mjs` (jeden rozstrzygacz, werdykt na karcie ataku), `combat/obrona.mjs` (okno „Reakcje celu”); obrażenia rzuca atakujący, nakłada MG tacką — `PLAN_tt.md` |
 | | Pechowa jedynka: zacięcie, degradacja broni białej | ✅ | `weapons/jams.mjs`, `melee-degradation.mjs` |
 | | Stopień Zranienia, Ostatnia akcja, Nokautowanie, stany | ✅ | `combat/zranienie.mjs`, `knockout.mjs`, `config/conditions.mjs` |
 | | **Neutralizacja Stopnia Zranienia** (Regeneracja, Pomoc medyczna) | ❌ | M1 |
@@ -42,14 +42,14 @@ M# = kamień milowy w `PLAN_beta.md`.
 | Pochodzenie | 12 Pochodzeń + 36 zdolności (dane) | ✅ | paczki `pochodzenia`, `zdolnosci-pochodzenia` |
 | | Automatyka zdolności | 🟡 | 3/36 (`game.neuroshima.pochodzenia.report()`) — M7 |
 | Klasy | 6 klas, 18 profesji, 133 zdolności (dane, awans, PW) | ✅ | paczki `klasy`, `profesje`, `zdolnosci-klasowe` |
-| | Automatyka zdolności | 🟡 | 22/133 — 6 pełnych, 16 częściowych (`game.neuroshima.zdolnosci.report()`, `config/class-features-coverage.mjs`) — M7 |
+| | Automatyka zdolności | 🟡 | 28/133 — 10 pełnych, 18 częściowych (`game.neuroshima.zdolnosci.report()`, `config/class-features-coverage.mjs`) — M7 |
 | | Towarzysze (Partner, Oswajanie zwierząt, Prawa ręka) i drony | ❌ | M3 |
 | Sztuczki | 53 Sztuczki (dane) | ✅ | paczka `sztuczki` |
-| | Automatyka | 🟡 | 11/53 — 3 pełne, 8 częściowych (`game.neuroshima.sztuczki.report()`) — M7 |
+| | Automatyka | 🟡 | 17/53 — 5 pełnych, 12 częściowych (`game.neuroshima.sztuczki.report()`) — M7 |
 | Choroby i fobie | Choroby przewlekłe i popularne, fobie, leki, Zachód słońca | ✅ | 22/24 stanów egzekwowanych, `actors/health-panel.mjs`, `disease-effects.mjs` |
 | Ekwipunek | Broń, kalibry, magazynki symulacyjne, tryby ognia, granaty, miny i ładunki, ulepszenia | ✅ | `weapons/*`, `actors/grenade-inventory.mjs`, `placed-charges.mjs` |
 | | Właściwości broni | 🟡 | brak: `dluga`, `ciezka`, `jednorazowa` (M6) — `PLAN_weapon_properties.md`; `ppanc`/`przebijająca` — `combat/armour-piercing.mjs` |
-| | Pancerze, hełmy, tarcze | 🟡 | `actors/armor-rules.mjs` (próg, odporność kinetyczna, kary); akcje tarczy, krytyczna ochrona hełmu, szczelność ręcznie; wytrzymałość pancerzy — ustawienie świata (`production/naprawa.mjs`) |
+| | Pancerze, hełmy, tarcze | 🟡 | `actors/armor-rules.mjs` (próg, odporność kinetyczna, kary); TT z pancerza — silnik TT; Parowanie tarczą i Krytyczna ochrona hełmu — okno „Reakcje celu” (`combat/obrona.mjs`); Cios i Osłona tarczą, szczelność ręcznie; wytrzymałość pancerzy — ustawienie świata (`production/naprawa.mjs`) |
 | | Leki i używki, narzędzia, elektronika, różności | 🟡 | 35 pozycji chemii, 22 zestawy, latarka/gogle/detonator/kwas/kolczatki; część Różności tylko jako przedmioty bez akcji |
 | | **Produkcja przedmiotów**, schematy, elaboracja amunicji, naprawianie | ✅ | `production/*`, zakładka Produkcja, paczka `schematy`; `PLAN_produkcja.md`, `docs/Produkcja.md`. Nieograne przy stole; wyniki-aktorzy (pojazdy, drony) to karta dla MG — M3/M4 |
 | Teczka MG | Szabrowanie, bebeszenie | ❌ | M5 |
@@ -103,6 +103,13 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/migration/resync-class-features.mjs` | Dosyłanie mechaniki zdolności klasowych z paczki do kopii na kartach (aktywności, użycia, flagi, plakietka) — `game.neuroshima.zdolnosci.resync()` |
 | `scripts/config/coverage-ledger.mjs` | Wspólna fabryka rejestru automatyki (`status`/`html`/`coverage`/`report`) dla Sztuczek i Pochodzeń |
 | `scripts/config/class-features-coverage.mjs` | Rejestr automatyki 133 zdolności klasowych i profesji (B5) — czyta `auto`/`manual` z danych, `game.neuroshima.zdolnosci` |
+| `scripts/config/tt-rules.mjs` | Silnik TT (czysty): metody, limit Treningu w zbroi, premie, `computeTT` z odrzuconymi źródłami i powodami (PLAN_tt) |
+| `scripts/actors/tt.mjs` | TT na karcie: migawka z lalki, dane pochodne (`ac.neuroshima`), dymek, okno TT, efekty do początku tury właściciela, porządki po starych efektach — `game.neuroshima.tt` |
+| `scripts/config/defense-rules.mjs` | Rozstrzygacz trafienia `resolveHit`, katalog reakcji `DEFENSE_REACTIONS`, stany przycisków `reactionState` (czyste) |
+| `scripts/combat/trafienie.mjs` | `ttAgainst`, werdykt stemplowany na karcie ataku, tacka celów; odczyt werdyktu dla dźwięków, smugacza, Dozownika, olejku |
+| `scripts/combat/obrona.mjs` | Okno „Reakcje celu”: przyciski per widz, prośba gracza → MG, efekty reakcji, ⏳, „Ustaw cel”, Krytyczna ochrona hełmu, reakcje BN — `game.neuroshima.obrona` |
+| `scripts/migration/oznacz-reakcje-bn.mjs` | Sucha próba / oznaczenie Reakcji ręcznych BN aktywnością „Reakcja” — `api.migration.oznaczReakcjeBN()` |
+| `scripts/wkk/config/dziurawy-helm.mjs` | WKK: „Dziurawy hełm” po Krytycznej ochronie (gospodarz `combat/obrona.mjs`) |
 | `scripts/actors/health-panel.mjs` | Panel Choroby/Fobie (Biografia), pasek w sidebarze, dawki, Przełamanie, Zachód słońca |
 | `scripts/config/disease-effects.mjs` | Mechanika stanów chorób — zmiany AE, ataki, sytuacyjne, szał, krwawienie, mnożnik upadku |
 | `scripts/actors/disease-effects.mjs` | Egzekwowanie: sync Active Effects, Utrudnienie do ataków, przycisk Szału |
@@ -1118,6 +1125,38 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### PLAN_tt — TT wg NOE, jeden rozstrzygacz trafienia, okno „Reakcje celu” (2026-10-03)
+
+Cały plan [PLAN_tt.md](PLAN_tt.md), etapy E0–E6. Paczki (`bestiariusz`, `zdolnosci-klasowe`, `sztuczki`,
+`pancerze`) czekają na przebudowę przy zamkniętym Foundry; potem `game.neuroshima.zdolnosci.resync()`.
+
+- **TT na karcie liczy moduł.** Metoda „NOE (automatycznie)” (dawniej „Domyślna”; metody 5e Maga,
+  Mnicha itd. usunięte — nikt ich nie używał): metody konkurują — TT podstawowa, pancerz, Goła klata,
+  Tarcza wiary — a premie się sumują: Obłęd, Kuloodporność, Obsługa pancerza, Zasłona, Tańczący
+  z siekierkami, Roszada, Trening w zbroi (limit ZRC +1, także ciężki 0 → 1). Dymek TT pokazuje rozkład
+  i to, co nie liczy się, z powodem. „Stała” / „Własna formuła” zostają jako furtka MG.
+- **Ochraniacze to pancerz** w warunkach zdolności — rozstrzygnięcie autora systemu: gaszą Gołą klatę,
+  Tarczę wiary, Obłęd i Kuloodporność, włączają Obsługę pancerza. Hełm gasi tylko to, co go wymienia.
+- Obłęd i Zasłona nie są już Efektami Aktywnymi (Obłęd był liczony raz, przy włączeniu Berserka);
+  stare efekty sprząta MG przy starcie świata. Unikanie trwa do początku następnej tury.
+- **Test Ataku i obrażenia osobno.** Auto-obrażenia strzału pojedynczego usunięte razem z własnym
+  przyciskiem „Obrażenia”: wraca natywny rzut — kości naboju bez modyfikatora cechy, krytyk podwaja,
+  okno z „Redukcją osłony” — a obrażenia nakłada MG tacką. Werdykt (TT, osłona, naturalna 1/20) jest
+  na karcie ataku; dźwięki, smugacz, Dozownik i olejek czytają go zamiast gołej TT. Dozownik i olejek
+  działają przy rzucie obrażeń trafionego celu, trucizna idzie przez tackę.
+- **Okno „Reakcje celu”** pod Testem Ataku: Inteligentna obrona, Koci odskok, Bullet time, Parowanie,
+  Parowanie tarczą, Unik łowcy, Empiryk, Krytyczna ochrona hełmu (Kobalt: Dziurawy hełm), reakcje BN
+  z Bestiariusza (Gladiator), przypomnienia o Reakcjach BN bez automatyki. Prośba gracza → MG wykonuje;
+  ⏳ przy „Obrażeniach”; „Ustaw cel” dla celu zapowiedzianego słownie; Fuks przenosi werdykt.
+  Inteligentna obrona z paska działa (dawniej zużywała użycie bez skutku).
+- **Znalezione po drodze:** właściwości naboju (`rozrywajaca`, `hollowpoint`, `ppanc`) wycinane z każdej
+  serii przez filtr `isPhysical` — naprawione; hollow-point pod osłoną nie widział naboju z magazynka
+  i przegrywał z oknem obrażeń — naprawione. **Stopień Zranienia z krytyka nie działa wcale**
+  (`combat/zranienie.mjs`, sygnatura haka sprzed dnd5e 5) — nienaprawione, zapisane w PLAN_beta M1.
+- Rejestry: zdolności klasowe 28/133 (10 pełnych), Sztuczki 17/53 (5 pełnych). Dokumentacja graczy:
+  [docs/TT-i-reakcje.md](docs/TT-i-reakcje.md); ARCHITECTURE §14.
+- Testy: nowe paczki `tt-zasady`, `tt-karta`, `obrona`; całość zielona.
 
 ### PLAN_tt — TT, rozstrzyganie trafienia i reakcje: projekt zamknięty (2026-10-03)
 

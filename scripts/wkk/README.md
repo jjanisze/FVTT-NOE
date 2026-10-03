@@ -38,8 +38,9 @@ other tables running this module — but every such fragment carries an explicit
 where it came from. It is **not** gated behind the Kobalt toggle and it does **not** go in
 `scripts/wkk/`.
 
-Currently six entries — two from the magazine rebuild, one grenade-range ruling, one erratum,
-one crafting ruling, and the paper doll (a whole inferred system, listed as one row with its parts):
+Currently eight entries — two from the magazine rebuild, one grenade-range ruling, one erratum,
+one crafting ruling, the paper doll (a whole inferred system, listed as one row with its parts) and
+two Trudność Trafienia rulings (`PLAN_tt.md`):
 
 | Mechanic | Where |
 |---|---|
@@ -49,6 +50,8 @@ one crafting ruling, and the paper doll (a whole inferred system, listed as one 
 | Cywil's Widły deal piercing damage — the October printing dropped the type (March had it) | `dev/bestiary/gen_bestiary.py`, `AUTOMATION["cywil.widly-tylko-farmer"]` |
 | Spec profession recipe tables (NOE s. 80–84) apply **only to that profession** and stand **beside** the standard formula recipe, not instead of it; their tool requirement is the profession kit **and** the item's usual requirement (PLAN_produkcja D22, confirmed 2026-09-27) | `config/recipes-data.mjs`, `_zbudujPrzepisy()` |
 | **Lalka** (`PLAN_paper_doll.md`, author's fill-the-blanks principle, 2026-10-02): slot geometry; hand ⟂ holster; Głowa / Twarz / Ramię / Strój and their 1-Akcja cost; devices needing a slot; auto placement and displacement; grip superposition (two-handed iff the other hand is empty); an Akcja to put something into the pack; free-hand notes for belt items; the ground as the destination of drops; power armour allowing a helmet; visibility modifiers not stacking; NPCs dropping weapons at 0 PW; the NOE rows of the `dropsAs` table; rounds in a dropped catalog gun (D37). Conscious deviation, cost-neutral: Noktowizor/Termowizor strapped on the head (RAW lists helmet mounting) | `actors/doll-model.mjs`, `actors/doll.mjs`, `combat/grip.mjs`, `actors/ground-items.mjs`, `dev/bestiary/gen_bestiary.py` (`AUTOMATION`, `dropsAs`) |
+| **TT: one method, bonuses on top** (PLAN_tt D1/D2, 2026-10-03). "Only one way of computing TT" (s. 59) is read as: TT *methods* compete and the highest wins — 10 + ZRC, armour, Goła klata, Tarcza wiary (both "similar" clauses name other methods); fixed bonuses — Obłęd Berserkera, Kuloodporność, Obsługa pancerza, Zasłona, Tańczący z siekierkami, Roszada — stack with whichever method wins. So Obłęd stands beside Goła klata, and Tarcza wiary + Obłęd + Kuloodporność is legal | `config/tt-rules.mjs` (`TT_METHODS`, `TT_BONUSES`, `computeTT`) |
+| **Ochraniacze are armour** in ability conditions (author, 2026-10-03, PLAN_tt D4): "they give a TT bonus and sit in the Pancerze table" — so they switch off Goła klata, Tarcza wiary, Obłęd and Kuloodporność and switch on Obsługa pancerza. A helmet or shield blocks an ability only where the ability names it ("Goła klata forbids the helmet because its text says so") | `config/tt-rules.mjs` (`_wearing`), `actors/tt.mjs` (`guards` in the snapshot) |
 
 **Credit lives on the front page.** The author is thanked once, for all past and future rulings,
 in the module README (*Podziękowania*, decided by the GM 2026-10-03). Code comments say "author of
@@ -78,6 +81,7 @@ check (author's idea, this table's numbers — `wkk/config/pojedynczy-naboj.mjs`
 | `wkk/config/latarka-overrides.mjs` | `LIGHT_KOBALT` — see the override pattern below |
 | `wkk/config/molotov-light.mjs` | `MOLOTOV_LIGHT_KOBALT` — a lit Molotov's light; RAW gives it none (see below) |
 | `wkk/config/production-kobalt.mjs` | Crafting (PLAN_produkcja): abandoning a Robota and its refund (D14), Robota weight interpolation (D4), schematic weight (D15), the Spec profession as an executor trait — ×0,75 / ×0,5 with the full kit, ×0,25 floor, no ST 30 (D26–D28, D32; D30 falls out of D26). Host: `config/production-rules.mjs`, each with its `..._RAW` twin |
+| `wkk/config/dziurawy-helm.mjs` | „Dziurawy hełm" — what a helmet leaves after Krytyczna ochrona (junk, 2 gb, its weight; PLAN_tt D12a). Host: `combat/obrona.mjs` (`breakHelmet`); without Kobalt the helmet simply disappears (RAW) |
 | `wkk/config/pojedynczy-naboj.mjs` | A round pushed into the inserted removable magazine in combat: Zwinne dłonie, ST by caliber category (12 / 14 / 15, .50 BMG 18); failure drops the round on the ground, a natural 1 jams the weapon (jam-immune weapons: plain failure). Host: `weapons/magazine.mjs` (`_performPushRoundAction`), only with Kobalt on; RAW refusal stays for Kobalt off |
 | `wkk/combat/weapon-save-properties.mjs` | `rozrywajaca` |
 | `wkk/combat/bleeding.mjs` | `dumdum` bleed profile |

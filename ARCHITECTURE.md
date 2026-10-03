@@ -300,6 +300,27 @@ projections of it, written only by `projectMagazineState()`.
   modes, the doublet, suppressive fire and jams, each separately. That is the cost the
   one-directional rule buys out.
 
+### 14. One Hit Resolver; an Attack Never Rolls or Applies Damage
+"Did it hit" has exactly one answer, computed in one place (`PLAN_tt.md`, Part B):
+
+- **`resolveHit`** (`config/defense-rules.mjs`, pure) — natural 20 always hits, natural 1 never,
+  otherwise the attack total against the target's TT + cover + reaction bonuses. The target's TT
+  against *this* attacker is `ttAgainst()` (`combat/trafienie.mjs`): `ac.value` (for characters the
+  TT engine, `config/tt-rules.mjs`) plus per-attacker markers (shield parry).
+- **The verdict is stamped on the attack card** in `preCreateChatMessage`, by the attacker's own
+  client — the same place `shotCaliber` is stamped. Everything that wants to know (sounds, the
+  tracer, Dozownik, olejek, the damage step) reads the stamp; nothing compares `total` with bare
+  `ac.value` any more. A new consumer must do the same, or it silently ignores cover, the NOE
+  natural 1/20 and every reaction.
+- **One writer per card after creation: the active GM.** Reactions arrive as requests on the
+  player's own actor; the GM validates and writes. The only other write is the author's first
+  one (the stamp, including a Fuks reroll stamping itself from its source).
+- **An attack roll never rolls or applies damage.** The attacker presses the native damage
+  button; the GM applies from the native tray. This is what makes reactions *between* hit and
+  damage possible at all, and it is why the old auto-damage (`weapons/ammo.mjs`, May 2026) was
+  removed rather than fixed. Single-shot firearm dice are injected into the native roll at roll
+  time (`_processDamagePart`), never written to the weapon.
+
 ## Dokumentacja towarzysząca
 | Plik | Zawartość |
 |---|---|

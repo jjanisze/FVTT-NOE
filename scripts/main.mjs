@@ -46,6 +46,7 @@ import { registerRescaleSurowceMigration } from "./migration/rescale-surowce-uni
 import { registerGadzetyMigration } from "./migration/migrate-gadzety.mjs";
 import { registerToolSubstitutesMigration } from "./migration/migrate-tool-substitutes.mjs";
 import { registerEffectPrioritiesMigration } from "./migration/migrate-effect-priorities.mjs";
+import { registerOznaczReakcjeBN } from "./migration/oznacz-reakcje-bn.mjs";
 import { registerSrdCleanup } from "./config/srd-cleanup.mjs";
 import { registerClassRules } from "./actors/class-rules.mjs";
 import { registerKobaltAdvancement } from "./actors/kobalt-advancement.mjs";
@@ -239,6 +240,7 @@ Hooks.once("init", () => {
   registerGadzetyMigration();
   registerToolSubstitutesMigration();
   registerEffectPrioritiesMigration();
+  registerOznaczReakcjeBN();
   registerSrdCleanup();
   registerClassRules();
   registerKobaltAdvancement();

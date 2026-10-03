@@ -92,6 +92,14 @@ compendium prototypes will be changed until the review decision is recorded.
 | 43 | Detektor ruchu; Komputer osobisty; Komputer gamingowy; Laptop; Kontroler zdalnego sterowania; Miernik skażenia chemicznego; Odtwarzacz CD; Wykrywacz metalu; Wytrychy elektroniczne |
 | 44 | Kompas; Palnik acetylenowo-tlenowy; Środek usypiający; Środki dezynfekujące; Trucizna; Paralotnia; Adapter wifi; Monitorek; Router |
 
+## Waiting for the next batch (A)
+
+Found outside an icon session; move into the next batch's queue table when it is planned.
+
+| # | Item | Where | Current icon | Suggested prompt content |
+|---|------|-------|---------------|---------------------------|
+| 1 | Dziurawy hełm (WKK, `wkk/config/dziurawy-helm.mjs`, PLAN_tt D12a) | lands in the pack after Krytyczna ochrona (Kobalt on) | borrows `icons/armor/helm.svg` | The catalog helmet glyph, ruined: a clean bullet hole through the dome and a crack running from it. Must read as "the same helmet, now junk" |
+
 ## How an item gets added here
 
 Add a row any time a review finds an item on the actor's own portrait,
