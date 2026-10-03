@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.QXagB2aEBr9FilQx.Actor.ZpNjrKMNRmVwAZTs",
+      "name": "KOŃ (SKAŻONY)",
+      "items": [
+        {
+          "_id": "N1ycx0XcMLt1GHS2",
+          "name": "Odnóże",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/odnoze_gigantyczny_pajak.svg",
+          "img": "icons/svg/upgrade.svg"
+        }
+      ]
+    }
+  ]
+}

@@ -1262,12 +1262,42 @@ przy zamkniętym Foundry), potem `game.neuroshima.zdolnosci.resync()` dosyła zm
 - Maczuga, Kamienny nóż, Akumulator i Defibrylator po uwagach o drobnych
   konturach powstały ponownie jako jeden atlas 2×2. Zatwierdzone wersje mają
   masywniejsze sylwetki i wyraźniejsze cechy rozpoznawcze.
-- Batch 43 (9 ikon elektroniki) oraz batch 44 (9 ikon sprzętu polowego,
-  warsztatowego i chemii) powstały jako dwa pojedyncze atlasy 3×3. Źródła,
-  prompty oraz rozdzielone PNG/SVG znajdują się w `dev/icons/review/candidates/`;
-  18 pozycji czeka na decyzję MG w `npm run review:icons`. Nie utworzono jeszcze
-  ich prototypów ani nie zmieniono dokumentów na żywo.
-- Pełny build do osobnego katalogu: OK (`bron` 86, `sprzet` 13). Walidacja
+- Z batches 43–44 MG zatwierdził 13 ikon. Wszystkie trafiły do
+  `icons/items/loot/`, `RAW_IKONY` i wspólnego buildera; obsługuje on teraz
+  zarówno wyniki `raw:`, jak i `tabela:`. Paczka `sprzet` ma 26 wpisów.
+  Prototypy odświeżono przez API Foundry według planu
+  `dev/backup/production-gear-approved-2026-10-03.json`.
+- Z batch 45 zatwierdzono Wytrychy elektroniczne, Kompas, Truciznę, Turbinę,
+  Zegarek, Berdysz, Scyzoryk i Skalpel. Pięć wyników produkcji dostało prototypy;
+  `sprzet` ma 31 wpisów. Trzy bronie przepięto w świecie i aktorach syntetycznych.
+- Przy tej samej migracji poprawiono oczywiste zapożyczenia istniejącej grafiki:
+  Bejsbol, Rura stalowa i Raca drogowa. Plan i stan sprzed zapisu zachowuje
+  `dev/backup/world-icon-repoints-batch45-2026-10-03.json`.
+- Z batch 46 zatwierdzono Laptop, otwarty Odtwarzacz CD, Walther PPK, Ruger LCP
+  II, Pięść wspomaganą hydraulicznie i Łopatkę kuchenną. Dwa wyniki produkcji
+  dostały prototypy; `sprzet` ma 33 wpisy. Cztery ikony świata przepięto na 17
+  dokumentach aktorów bazowych i syntetycznych.
+- Z batch 47 zatwierdzono Klucz francuski, wspólną ikonę ataku bez broni,
+  Pazury oraz Żądło / Ukłucie. Zapis świata i aktorów syntetycznych wykonano
+  przez API Foundry; kopia planu jest w
+  `dev/backup/world-icon-repoints-batch47-2026-10-03.json`.
+- Z batch 48 zatwierdzono Buzdygan śmieciowy, Tulipan, Ugryzienie, Zęby, Mackę
+  oraz List od Gordona do Samanthy Smith. Przy okazji przepięto istniejące ikony
+  Bejzbola, Konserwy, Piąchopiryny, trybów ognia, Gazrurki, paszczy Aligatora,
+  Browninga M2 i Paralizatora. Kopie planów są w plikach
+  `dev/backup/world-icon-repoints-batch48-*-2026-10-03.json` i
+  `dev/backup/world-icon-repoints-batch49-data-fixes-2026-10-03.json`.
+- Z batch 49 zatwierdzono Pałkę, ogon Aligatora, atak głową, dwa ataki
+  robotów, dwa rodzaje odnóży i Pokwitowanie Luxor. Wszystkie przepięto przez
+  API Foundry; Atak tacką wrócił do korekty. Dodatkowy przebieg wykorzystał
+  istniejące białe ikony dla wody, odznaki, butów, teczek, plecaka i małych
+  zestawów narzędzi. Kolizję wspólnej nazwy „Odnóże” naprawiono regułą zależną
+  od aktora, przywracając koniowi skażonemu poprzednią ikonę do czasu recenzji.
+- Batch 50 łączy korektę tacy z Kłem jadowym, Paliwem, uzupełnieniem narzędzi
+  medyka, metalową walizką, komponentami amunicji, częściami ciężkiego karabinu,
+  Pogromcą i atakiem kopytem skażonego konia. Pełny atlas 3×3 czeka w
+  `npm run review:icons`.
+- Pełny build do osobnego katalogu: OK (`bron` 86, `sprzet` 33). Walidacja
   przepisów, CSS i warstwy testowej: OK. Walidator produkcyjnych paczek poprawnie
   odmówił bezpośredniego odczytu LevelDB przy uruchomionym Foundry; zapisy na
   żywo wykonano wyłącznie przez API dokumentów Foundry.

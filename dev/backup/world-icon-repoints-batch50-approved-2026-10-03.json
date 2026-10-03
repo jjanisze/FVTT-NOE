@@ -1,0 +1,247 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.Wke8ursIGVbKLMUF",
+      "name": "GMT400",
+      "items": [
+        {
+          "_id": "yH15cllFoVVdbZ2q",
+          "name": "Metalowa walizka",
+          "before": "icons/containers/bags/pack-simple-leather-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/metalowa_walizka.svg"
+        },
+        {
+          "_id": "IiYoEtGqhhvGTBeN",
+          "name": "Paliwo",
+          "before": "icons/consumables/potions/potion-flask-yellow-orange.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/paliwo.svg"
+        },
+        {
+          "_id": "ImwBDbuMPLZvyEWq",
+          "name": "Kieł jadowy",
+          "before": "icons/consumables/potions/potion-vial-green.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/kiel_jadowy.svg"
+        },
+        {
+          "_id": "FAcsSdtMEZBUx9z3",
+          "name": "Części ciężkiego karabinu",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/browning_m2.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/czesci_ciezkiego_karabinu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MDAwMmZlNTdkOGJi",
+      "name": "Kelner",
+      "items": [
+        {
+          "_id": "MmEwYTlhYjYxNGZh",
+          "name": "Atak tacką",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_taca.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.4IYaZ7YQ1uy90FOz",
+      "name": "Zbrojownia",
+      "items": [
+        {
+          "_id": "Mjps8dkcWzncEqjY",
+          "name": "Uzupełnienie Narzędzi Małego Medyka",
+          "before": "icons/svg/heal.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/uzupelnienie_medyka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.N2EyNjc1YmRhMGZl.Token.YmZhMjMwYTY1ZTU5.Actor.Wke8ursIGVbKLMUF",
+      "name": "GMT400",
+      "items": [
+        {
+          "_id": "yH15cllFoVVdbZ2q",
+          "name": "Metalowa walizka",
+          "before": "icons/containers/bags/pack-simple-leather-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/metalowa_walizka.svg"
+        },
+        {
+          "_id": "IiYoEtGqhhvGTBeN",
+          "name": "Paliwo",
+          "before": "icons/consumables/potions/potion-flask-yellow-orange.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/paliwo.svg"
+        },
+        {
+          "_id": "ImwBDbuMPLZvyEWq",
+          "name": "Kieł jadowy",
+          "before": "icons/consumables/potions/potion-vial-green.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/kiel_jadowy.svg"
+        },
+        {
+          "_id": "FAcsSdtMEZBUx9z3",
+          "name": "Części ciężkiego karabinu",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/browning_m2.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/czesci_ciezkiego_karabinu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.ZTgyZWRmOGE4N2I4.Actor.MDAwMmZlNTdkOGJi",
+      "name": "Kelner",
+      "items": [
+        {
+          "_id": "MmEwYTlhYjYxNGZh",
+          "name": "Atak tacką",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_taca.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.ODU4YWYzY2E0ZTM4.Actor.MDAwMmZlNTdkOGJi",
+      "name": "Kelner",
+      "items": [
+        {
+          "_id": "MmEwYTlhYjYxNGZh",
+          "name": "Atak tacką",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_taca.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NzBhNzdmOGQ3NWEz.Token.NTkxNjlhNGUxNTli.Actor.Wke8ursIGVbKLMUF",
+      "name": "GMT400",
+      "items": [
+        {
+          "_id": "yH15cllFoVVdbZ2q",
+          "name": "Metalowa walizka",
+          "before": "icons/containers/bags/pack-simple-leather-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/metalowa_walizka.svg"
+        },
+        {
+          "_id": "IiYoEtGqhhvGTBeN",
+          "name": "Paliwo",
+          "before": "icons/consumables/potions/potion-flask-yellow-orange.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/paliwo.svg"
+        },
+        {
+          "_id": "ImwBDbuMPLZvyEWq",
+          "name": "Kieł jadowy",
+          "before": "icons/consumables/potions/potion-vial-green.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/kiel_jadowy.svg"
+        },
+        {
+          "_id": "FAcsSdtMEZBUx9z3",
+          "name": "Części ciężkiego karabinu",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/browning_m2.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/czesci_ciezkiego_karabinu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MGQwYTIyY2IxMTBj.Token.NWE1OWMwYTA0M2Y2.Actor.Wke8ursIGVbKLMUF",
+      "name": "GMT400",
+      "items": [
+        {
+          "_id": "yH15cllFoVVdbZ2q",
+          "name": "Metalowa walizka",
+          "before": "icons/containers/bags/pack-simple-leather-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/metalowa_walizka.svg"
+        },
+        {
+          "_id": "IiYoEtGqhhvGTBeN",
+          "name": "Paliwo",
+          "before": "icons/consumables/potions/potion-flask-yellow-orange.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/paliwo.svg"
+        },
+        {
+          "_id": "ImwBDbuMPLZvyEWq",
+          "name": "Kieł jadowy",
+          "before": "icons/consumables/potions/potion-vial-green.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/kiel_jadowy.svg"
+        },
+        {
+          "_id": "FAcsSdtMEZBUx9z3",
+          "name": "Części ciężkiego karabinu",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/browning_m2.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/czesci_ciezkiego_karabinu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YzRlZjVkZTlkMDll.Token.MWFhNmNiZjNhZmI5.Actor.Wke8ursIGVbKLMUF",
+      "name": "GMT400",
+      "items": [
+        {
+          "_id": "yH15cllFoVVdbZ2q",
+          "name": "Metalowa walizka",
+          "before": "icons/containers/bags/pack-simple-leather-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/metalowa_walizka.svg"
+        },
+        {
+          "_id": "IiYoEtGqhhvGTBeN",
+          "name": "Paliwo",
+          "before": "icons/consumables/potions/potion-flask-yellow-orange.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/paliwo.svg"
+        },
+        {
+          "_id": "ImwBDbuMPLZvyEWq",
+          "name": "Kieł jadowy",
+          "before": "icons/consumables/potions/potion-vial-green.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/kiel_jadowy.svg"
+        },
+        {
+          "_id": "FAcsSdtMEZBUx9z3",
+          "name": "Części ciężkiego karabinu",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/browning_m2.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/czesci_ciezkiego_karabinu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ZDI1YTcyY2JmNjMx.Token.Jn8yewHhp0lCyzGP.Actor.Wke8ursIGVbKLMUF",
+      "name": "GMT400",
+      "items": [
+        {
+          "_id": "yH15cllFoVVdbZ2q",
+          "name": "Metalowa walizka",
+          "before": "icons/containers/bags/pack-simple-leather-tan.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/metalowa_walizka.svg"
+        },
+        {
+          "_id": "IiYoEtGqhhvGTBeN",
+          "name": "Paliwo",
+          "before": "icons/consumables/potions/potion-flask-yellow-orange.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/paliwo.svg"
+        },
+        {
+          "_id": "ImwBDbuMPLZvyEWq",
+          "name": "Kieł jadowy",
+          "before": "icons/consumables/potions/potion-vial-green.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/kiel_jadowy.svg"
+        },
+        {
+          "_id": "FAcsSdtMEZBUx9z3",
+          "name": "Części ciężkiego karabinu",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/browning_m2.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/czesci_ciezkiego_karabinu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.EjUEionS5UfpjGom.Actor.MDAwMmZlNTdkOGJi",
+      "name": "Kelner",
+      "items": [
+        {
+          "_id": "MmEwYTlhYjYxNGZh",
+          "name": "Atak tacką",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_taca.svg"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "NDRmMmY4NDFhM2Jl",
+          "name": "Colt \"Peacemaker\"",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/revolver.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/peacemaker_revolver.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NTY3YWVkODMzZGIz",
+      "name": "Harold Grimes",
+      "items": [
+        {
+          "_id": "Yzk0NDgwNTRlOWMz",
+          "name": "Glock 17",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/semi_auto_pistol.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/glock_17.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NmEwODIwMmQ4YzY1",
+      "name": "Iris",
+      "items": [
+        {
+          "_id": "OGI3ODZhZWNjMTI4",
+          "name": "Colt \"Peacemaker\"",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/revolver.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/peacemaker_revolver.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MDAwMmZlNTdkOGJi",
+      "name": "Kelner",
+      "items": [
+        {
+          "_id": "YjE1NzM4MWRkZjNk",
+          "name": "Colt \"Peacemaker\"",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/revolver.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/peacemaker_revolver.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NjBkNTk3OWY1ODRj",
+      "name": "Raynald of Châtillon",
+      "items": [
+        {
+          "_id": "Xce80UcC3yhPhTrO",
+          "name": "Raca sygnałowa",
+          "before": "modules/neuroshima-2026-overrides/icons/ammo/ammo_12_ga.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/raca_oswietleniowa.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.QvlrcHwuQPPfXhKe",
+      "name": "Tarantula (Recovered)",
+      "items": [
+        {
+          "_id": "MTYyYTI2NjFhOTUw",
+          "name": "Atak Wielokrotny Desert Eaglem",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/semi_auto_pistol.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/desert_eagle.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.MzkxOGM0ZmE2ZmMy.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "NDRmMmY4NDFhM2Jl",
+          "name": "Colt \"Peacemaker\"",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/revolver.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/peacemaker_revolver.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.YWYxN2RlOGExYWUw.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "NDRmMmY4NDFhM2Jl",
+          "name": "Colt \"Peacemaker\"",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/revolver.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/peacemaker_revolver.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.MTVlOWJiNzM0ZGUy.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "NDRmMmY4NDFhM2Jl",
+          "name": "Colt \"Peacemaker\"",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/revolver.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/peacemaker_revolver.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.ZTgyZWRmOGE4N2I4.Actor.MDAwMmZlNTdkOGJi",
+      "name": "Kelner",
+      "items": [
+        {
+          "_id": "YjE1NzM4MWRkZjNk",
+          "name": "Colt \"Peacemaker\"",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/revolver.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/peacemaker_revolver.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.NWY0OGMwNzZkZDlh.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "NDRmMmY4NDFhM2Jl",
+          "name": "Colt \"Peacemaker\"",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/revolver.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/peacemaker_revolver.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.ODU4YWYzY2E0ZTM4.Actor.MDAwMmZlNTdkOGJi",
+      "name": "Kelner",
+      "items": [
+        {
+          "_id": "YjE1NzM4MWRkZjNk",
+          "name": "Colt \"Peacemaker\"",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/revolver.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/peacemaker_revolver.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.Njg4NjkzYTBjMzUy.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "NDRmMmY4NDFhM2Jl",
+          "name": "Colt \"Peacemaker\"",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/revolver.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/peacemaker_revolver.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.YzQxMzQzYzczNmM3.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "NDRmMmY4NDFhM2Jl",
+          "name": "Colt \"Peacemaker\"",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/revolver.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/peacemaker_revolver.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.MDI4ZGFkNmI5Njgx.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "NDRmMmY4NDFhM2Jl",
+          "name": "Colt \"Peacemaker\"",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/revolver.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/peacemaker_revolver.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.IEVEz9odnKtcMwrK.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil",
+      "items": [
+        {
+          "_id": "NDRmMmY4NDFhM2Jl",
+          "name": "Colt \"Peacemaker\"",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/revolver.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/peacemaker_revolver.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.HzEPuwYdzdMTxgIi.Actor.NTY3YWVkODMzZGIz",
+      "name": "Harold Grimes",
+      "items": [
+        {
+          "_id": "Yzk0NDgwNTRlOWMz",
+          "name": "Glock 17",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/semi_auto_pistol.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/glock_17.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.EjUEionS5UfpjGom.Actor.MDAwMmZlNTdkOGJi",
+      "name": "Kelner",
+      "items": [
+        {
+          "_id": "YjE1NzM4MWRkZjNk",
+          "name": "Colt \"Peacemaker\"",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/revolver.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/peacemaker_revolver.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.mVXNTcuWJY89jgFf.Actor.QvlrcHwuQPPfXhKe",
+      "name": "Tarantula",
+      "items": [
+        {
+          "_id": "MTYyYTI2NjFhOTUw",
+          "name": "Atak Wielokrotny Desert Eaglem",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/semi_auto_pistol.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/desert_eagle.svg"
+        }
+      ]
+    }
+  ]
+}

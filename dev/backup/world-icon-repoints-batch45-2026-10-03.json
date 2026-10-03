@@ -1,0 +1,379 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.MDJjOGI1NzE3NTc5",
+      "name": "Dante",
+      "items": [
+        {
+          "_id": "MzU3ZDU0OGRjZjVi",
+          "name": "Berdysz",
+          "before": "icons/svg/item-bag.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/berdysz.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.ZTMwZWY4ZDMyZWE4",
+      "name": "Fatima",
+      "items": [
+        {
+          "_id": "Njk2OTM3ODc3MDg0",
+          "name": "Rura stalowa",
+          "before": "worlds/OUTPUT/characters/054_-_Fatima/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.ODgwYjNhMTQxODkw",
+      "name": "GANGUS ŻOŁNIERZ",
+      "items": [
+        {
+          "_id": "YmRkM2Y0OWZkMjBj",
+          "name": "Bejsbol",
+          "before": "worlds/OUTPUT/characters/025_-_GANGUS__C5_BBO_C5_81NIERZ/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.YzQzNWUyMzU3YzEz",
+      "name": "GANGUS ŻOŁNIERZ KARABIN",
+      "items": [
+        {
+          "_id": "NjRlMjM4ZGExY2Iy",
+          "name": "Bejsbol",
+          "before": "worlds/OUTPUT/characters/032_-_GANGUS__C5_BBO_C5_81NIERZ_KARABIN/avatar.jpg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.M2U4NGQ5YzgwZDYz",
+      "name": "Karambol",
+      "items": [
+        {
+          "_id": "NzBlOGM0NWE2NzFi",
+          "name": "Bejsbol",
+          "before": "worlds/OUTPUT/characters/063_-_Karambol/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "NTNkYjZmYzAzOTVl",
+          "name": "Scyzoryk",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/scyzoryk.svg"
+        },
+        {
+          "_id": "NTkzZGU0MGE1YTU2",
+          "name": "Raca drogowa",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/raca_oswietleniowa.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NTYxNTM5YjRiZGM3",
+      "name": "Samantha Smith",
+      "items": [
+        {
+          "_id": "MWE1NzExZGQyNzc0",
+          "name": "Skalpel",
+          "before": "worlds/OUTPUT/characters/047_-_Samantha_Smith/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/skalpel.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MzViZDIyN2U4YmY4",
+      "name": "Skowyt",
+      "items": [
+        {
+          "_id": "ZDBmNjk1ZjdmODhl",
+          "name": "Bejsbol",
+          "before": "worlds/OUTPUT/characters/052_-_Skowyt/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ZTNhODA0Y2YyYTZj.Token.Zjc4NTlmYzQwZThi.Actor.MzViZDIyN2U4YmY4",
+      "name": "Skowyt",
+      "items": [
+        {
+          "_id": "ZDBmNjk1ZjdmODhl",
+          "name": "Bejsbol",
+          "before": "worlds/OUTPUT/characters/052_-_Skowyt/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ZTNhODA0Y2YyYTZj.Token.ODE2MjViNTlkZWZj.Actor.ODgwYjNhMTQxODkw",
+      "name": "GANGUS ŻOŁNIERZ",
+      "items": [
+        {
+          "_id": "YmRkM2Y0OWZkMjBj",
+          "name": "Bejsbol",
+          "before": "worlds/OUTPUT/characters/025_-_GANGUS__C5_BBO_C5_81NIERZ/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ODAxZTdmOGIwZjc0.Token.YTA1ZDdiNmZiY2Yw.Actor.ODgwYjNhMTQxODkw",
+      "name": "GANGUS ŻOŁNIERZ",
+      "items": [
+        {
+          "_id": "YmRkM2Y0OWZkMjBj",
+          "name": "Bejsbol",
+          "before": "worlds/OUTPUT/characters/025_-_GANGUS__C5_BBO_C5_81NIERZ/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ODAxZTdmOGIwZjc0.Token.YjNkNjY1YTg3ZTBk.Actor.MzViZDIyN2U4YmY4",
+      "name": "Skowyt",
+      "items": [
+        {
+          "_id": "ZDBmNjk1ZjdmODhl",
+          "name": "Bejsbol",
+          "before": "worlds/OUTPUT/characters/052_-_Skowyt/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.YTA1ZTMwMzhkODVl.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "NTNkYjZmYzAzOTVl",
+          "name": "Scyzoryk",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/scyzoryk.svg"
+        },
+        {
+          "_id": "NTkzZGU0MGE1YTU2",
+          "name": "Raca drogowa",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/raca_oswietleniowa.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.YTExY2QwMmNhYzlm.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "NTNkYjZmYzAzOTVl",
+          "name": "Scyzoryk",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/scyzoryk.svg"
+        },
+        {
+          "_id": "NTkzZGU0MGE1YTU2",
+          "name": "Raca drogowa",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/raca_oswietleniowa.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.MjMwN2FhODdjYjdl.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "NTNkYjZmYzAzOTVl",
+          "name": "Scyzoryk",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/scyzoryk.svg"
+        },
+        {
+          "_id": "NTkzZGU0MGE1YTU2",
+          "name": "Raca drogowa",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/raca_oswietleniowa.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NmRjNjIzOTFhZjY0.Token.ZDIzOTQ2NjFmZmIz.Actor.NTYxNTM5YjRiZGM3",
+      "name": "Samantha Smith",
+      "items": [
+        {
+          "_id": "MWE1NzExZGQyNzc0",
+          "name": "Skalpel",
+          "before": "worlds/OUTPUT/characters/047_-_Samantha_Smith/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/skalpel.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NmY1NWM5ODk4NDg2.Token.NTQxNDJlM2U5N2M4.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "NTNkYjZmYzAzOTVl",
+          "name": "Scyzoryk",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/scyzoryk.svg"
+        },
+        {
+          "_id": "NTkzZGU0MGE1YTU2",
+          "name": "Raca drogowa",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/raca_oswietleniowa.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NmY1NWM5ODk4NDg2.Token.NTRhMWQwMWVjZDU1.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "NTNkYjZmYzAzOTVl",
+          "name": "Scyzoryk",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/scyzoryk.svg"
+        },
+        {
+          "_id": "NTkzZGU0MGE1YTU2",
+          "name": "Raca drogowa",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/raca_oswietleniowa.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NmY1NWM5ODk4NDg2.Token.ZGQxMDkwZWZmNGI3.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "NTNkYjZmYzAzOTVl",
+          "name": "Scyzoryk",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/scyzoryk.svg"
+        },
+        {
+          "_id": "NTkzZGU0MGE1YTU2",
+          "name": "Raca drogowa",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/raca_oswietleniowa.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.OThhOTIwNjk2MTJm.Actor.M2U4NGQ5YzgwZDYz",
+      "name": "Karambol",
+      "items": [
+        {
+          "_id": "NzBlOGM0NWE2NzFi",
+          "name": "Bejsbol",
+          "before": "worlds/OUTPUT/characters/063_-_Karambol/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.armqkHXsloMxeKCW.Actor.ZTMwZWY4ZDMyZWE4",
+      "name": "Fatima",
+      "items": [
+        {
+          "_id": "Njk2OTM3ODc3MDg0",
+          "name": "Rura stalowa",
+          "before": "worlds/OUTPUT/characters/054_-_Fatima/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.OjNMvtMvkQ9Irvs9.Actor.YzQzNWUyMzU3YzEz",
+      "name": "GANGUS ŻOŁNIERZ",
+      "items": [
+        {
+          "_id": "NjRlMjM4ZGExY2Iy",
+          "name": "Bejsbol",
+          "before": "worlds/OUTPUT/characters/032_-_GANGUS__C5_BBO_C5_81NIERZ_KARABIN/avatar.jpg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.d9859Qwqs1Vs3Uaj.Actor.M2U4NGQ5YzgwZDYz",
+      "name": "Karambol",
+      "items": [
+        {
+          "_id": "NzBlOGM0NWE2NzFi",
+          "name": "Bejsbol",
+          "before": "worlds/OUTPUT/characters/063_-_Karambol/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.Gl88jK3qkPvRwaKb.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "NTNkYjZmYzAzOTVl",
+          "name": "Scyzoryk",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/scyzoryk.svg"
+        },
+        {
+          "_id": "NTkzZGU0MGE1YTU2",
+          "name": "Raca drogowa",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/raca_oswietleniowa.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.iptZwtQTIIYQjOYl.Actor.NTYxNTM5YjRiZGM3",
+      "name": "Sammy",
+      "items": [
+        {
+          "_id": "MWE1NzExZGQyNzc0",
+          "name": "Skalpel",
+          "before": "worlds/OUTPUT/characters/047_-_Samantha_Smith/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/skalpel.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.zEEZjkVfZSZ5c9kA.Actor.MzViZDIyN2U4YmY4",
+      "name": "Skowyt",
+      "items": [
+        {
+          "_id": "ZDBmNjk1ZjdmODhl",
+          "name": "Bejsbol",
+          "before": "worlds/OUTPUT/characters/052_-_Skowyt/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.HOuXliAuck3t6ud7.Actor.ODgwYjNhMTQxODkw",
+      "name": "GANGUS ŻOŁNIERZ",
+      "items": [
+        {
+          "_id": "YmRkM2Y0OWZkMjBj",
+          "name": "Bejsbol",
+          "before": "worlds/OUTPUT/characters/025_-_GANGUS__C5_BBO_C5_81NIERZ/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,475 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.MzJhMDgyZmRiMzU1",
+      "name": "Aligator",
+      "items": [
+        {
+          "_id": "MGRlNTQ4YjUxNmJi",
+          "name": "Atak - Paszcza",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.YzI4Njk2N2IwNjI5",
+      "name": "BIT-BOY",
+      "items": [
+        {
+          "_id": "ODIyYTJlZTUxOGFl",
+          "name": "Ugryzienie",
+          "before": "worlds/OUTPUT/characters/021_-_BIT-BOY/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MjBjYzJjYTI1YjNj",
+      "name": "Browning M2",
+      "items": [
+        {
+          "_id": "YWU3NWExNzEzMzEw",
+          "name": "Atak +0",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/browning_m2.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MDJjOGI1NzE3NTc5",
+      "name": "Dante",
+      "items": [
+        {
+          "_id": "NTMwMjkxMGZjNmNl",
+          "name": "List od Gordona do Samanthy Smith (0)",
+          "before": "icons/svg/item-bag.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/list_gordon_samantha.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.OGJjNmU1YWQ2NDBl",
+      "name": "Fizol",
+      "items": [
+        {
+          "_id": "ODkwNzcyNTZlODA3",
+          "name": "Atak Gazrurką",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.YjBiMmE4ODhjYmM3",
+      "name": "GIGANTYCZNY PAJĄK",
+      "items": [
+        {
+          "_id": "MTQ3ZGFhMWE5NDA2",
+          "name": "Ugryzienie",
+          "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.N2RlMmNiZjNmZTky",
+      "name": "Lily",
+      "items": [
+        {
+          "_id": "NzJlNjY1MGVlZDIz",
+          "name": "Buzdygan śmieciowy",
+          "before": "worlds/OUTPUT/characters/059_-_Lily/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/buzdygan_smieciowy.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "OTY2MTY2YzBiOTVh",
+          "name": "Tulipan",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/tulipan.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NjllMTMyMjc2NzY1",
+      "name": "Techmorwa",
+      "items": [
+        {
+          "_id": "ZDAzMWI4M2Q0NjFm",
+          "name": "Macka",
+          "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/macka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MTg5ZjY0Y2Q2MTdj",
+      "name": "WILKOLUD",
+      "items": [
+        {
+          "_id": "ZWQzMDQ2MWFjMzg0",
+          "name": "Zęby",
+          "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zeby.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.NTQ0NTc4NmE0NzJk.Actor.MzJhMDgyZmRiMzU1",
+      "name": "Aligator",
+      "items": [
+        {
+          "_id": "MGRlNTQ4YjUxNmJi",
+          "name": "Atak - Paszcza",
+          "before": "worlds/OUTPUT/characters/022_-_Aligator/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.MTFiNDFhZjBjZmUx.Actor.MTg5ZjY0Y2Q2MTdj",
+      "name": "WILKOLUD",
+      "items": [
+        {
+          "_id": "ZWQzMDQ2MWFjMzg0",
+          "name": "Zęby",
+          "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zeby.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.YTA1ZTMwMzhkODVl.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "OTY2MTY2YzBiOTVh",
+          "name": "Tulipan",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/tulipan.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.YTExY2QwMmNhYzlm.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "OTY2MTY2YzBiOTVh",
+          "name": "Tulipan",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/tulipan.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.MjMwN2FhODdjYjdl.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "OTY2MTY2YzBiOTVh",
+          "name": "Tulipan",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/tulipan.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NmY1NWM5ODk4NDg2.Token.NTQxNDJlM2U5N2M4.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "OTY2MTY2YzBiOTVh",
+          "name": "Tulipan",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/tulipan.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NmY1NWM5ODk4NDg2.Token.NTRhMWQwMWVjZDU1.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "OTY2MTY2YzBiOTVh",
+          "name": "Tulipan",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/tulipan.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NmY1NWM5ODk4NDg2.Token.ZGQxMDkwZWZmNGI3.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "OTY2MTY2YzBiOTVh",
+          "name": "Tulipan",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/tulipan.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.MWI1MTk2MTBlNDVj.Actor.YjBiMmE4ODhjYmM3",
+      "name": "GIGANTYCZNY PAJĄK",
+      "items": [
+        {
+          "_id": "MTQ3ZGFhMWE5NDA2",
+          "name": "Ugryzienie",
+          "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.OWM1MTk5NWYyNThl.Actor.YjBiMmE4ODhjYmM3",
+      "name": "GIGANTYCZNY PAJĄK",
+      "items": [
+        {
+          "_id": "MTQ3ZGFhMWE5NDA2",
+          "name": "Ugryzienie",
+          "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.YTMwYTg1OGZkM2Iy.Actor.NjllMTMyMjc2NzY1",
+      "name": "Techmorwa",
+      "items": [
+        {
+          "_id": "ZDAzMWI4M2Q0NjFm",
+          "name": "Macka",
+          "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/macka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.YzZlZTE1NjFlNjdk.Actor.OGJjNmU1YWQ2NDBl",
+      "name": "Fizol",
+      "items": [
+        {
+          "_id": "ODkwNzcyNTZlODA3",
+          "name": "Atak Gazrurką",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.ZDU1NWRiYmFhYTEy.Actor.OGJjNmU1YWQ2NDBl",
+      "name": "Fizol",
+      "items": [
+        {
+          "_id": "ODkwNzcyNTZlODA3",
+          "name": "Atak Gazrurką",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.OWYwNjVjZWJiMDFl.Actor.OGJjNmU1YWQ2NDBl",
+      "name": "Fizol",
+      "items": [
+        {
+          "_id": "ODkwNzcyNTZlODA3",
+          "name": "Atak Gazrurką",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.ZjlmNmYzM2I2Mjcy.Actor.OGJjNmU1YWQ2NDBl",
+      "name": "Fizol",
+      "items": [
+        {
+          "_id": "ODkwNzcyNTZlODA3",
+          "name": "Atak Gazrurką",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.ZGE3ZWI2ZjM0MTNh.Actor.OGJjNmU1YWQ2NDBl",
+      "name": "Fizol",
+      "items": [
+        {
+          "_id": "ODkwNzcyNTZlODA3",
+          "name": "Atak Gazrurką",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.NGE2NGVkZDY4NzYx.Actor.N2RlMmNiZjNmZTky",
+      "name": "Lily",
+      "items": [
+        {
+          "_id": "NzJlNjY1MGVlZDIz",
+          "name": "Buzdygan śmieciowy",
+          "before": "worlds/OUTPUT/characters/059_-_Lily/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/buzdygan_smieciowy.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.NDdmOWQ3NTVlYmEw.Actor.OGJjNmU1YWQ2NDBl",
+      "name": "Fizol",
+      "items": [
+        {
+          "_id": "ODkwNzcyNTZlODA3",
+          "name": "Atak Gazrurką",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.MDVhMTZjNGM2Yzk5.Actor.OGJjNmU1YWQ2NDBl",
+      "name": "Fizol",
+      "items": [
+        {
+          "_id": "ODkwNzcyNTZlODA3",
+          "name": "Atak Gazrurką",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.Njc4Y2ZmY2MwNWIx.Actor.OGJjNmU1YWQ2NDBl",
+      "name": "Fizol",
+      "items": [
+        {
+          "_id": "ODkwNzcyNTZlODA3",
+          "name": "Atak Gazrurką",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.9vEF9o7uRVHVCgRc.Actor.MzJhMDgyZmRiMzU1",
+      "name": "Aligator",
+      "items": [
+        {
+          "_id": "MGRlNTQ4YjUxNmJi",
+          "name": "Atak - Paszcza",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.3fTl0UdEmnzBAkpg.Actor.YzI4Njk2N2IwNjI5",
+      "name": "BIT-BOY",
+      "items": [
+        {
+          "_id": "ODIyYTJlZTUxOGFl",
+          "name": "Ugryzienie",
+          "before": "worlds/OUTPUT/characters/021_-_BIT-BOY/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.E5KNnwT666pBKEKP.Actor.OGJjNmU1YWQ2NDBl",
+      "name": "Fizol",
+      "items": [
+        {
+          "_id": "ODkwNzcyNTZlODA3",
+          "name": "Atak Gazrurką",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.olhvSZZ8XTyCxBya.Actor.N2RlMmNiZjNmZTky",
+      "name": "Lily",
+      "items": [
+        {
+          "_id": "NzJlNjY1MGVlZDIz",
+          "name": "Buzdygan śmieciowy",
+          "before": "worlds/OUTPUT/characters/059_-_Lily/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/buzdygan_smieciowy.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.Gl88jK3qkPvRwaKb.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "OTY2MTY2YzBiOTVh",
+          "name": "Tulipan",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/tulipan.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.k3sMfvotlhDkS31c.Actor.NjllMTMyMjc2NzY1",
+      "name": "Techmorwa",
+      "items": [
+        {
+          "_id": "ZDAzMWI4M2Q0NjFm",
+          "name": "Macka",
+          "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/macka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.p6jX0F8jQmMiNwkn.Actor.MTg5ZjY0Y2Q2MTdj",
+      "name": "WILKOLUD",
+      "items": [
+        {
+          "_id": "ZWQzMDQ2MWFjMzg0",
+          "name": "Zęby",
+          "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zeby.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.PKjeH0D0spoHQSeT.Actor.MjBjYzJjYTI1YjNj",
+      "name": "Browning M2",
+      "items": [
+        {
+          "_id": "YWU3NWExNzEzMzEw",
+          "name": "Atak +0",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/browning_m2.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.MlMAvhJkP3PVAV3V.Actor.YjBiMmE4ODhjYmM3",
+      "name": "GIGANTYCZNY PAJĄK",
+      "items": [
+        {
+          "_id": "MTQ3ZGFhMWE5NDA2",
+          "name": "Ugryzienie",
+          "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    }
+  ]
+}

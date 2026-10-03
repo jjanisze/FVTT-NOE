@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.NTJiOTczNjQxNTgx",
+      "name": "Kucharka Irena",
+      "items": [
+        {
+          "_id": "MjU1OTQ0MTJhMjNk",
+          "name": "Łopatka kuchenna",
+          "before": "worlds/OUTPUT/characters/070_-_Kucharka_Irena/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/lopatka_kuchenna.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.N2RlMmNiZjNmZTky",
+      "name": "Lily",
+      "items": [
+        {
+          "_id": "ODdhNzczNTg2MzFk",
+          "name": "Walther PPK",
+          "before": "worlds/OUTPUT/characters/059_-_Lily/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/walther_ppk.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MWQzZmFkMDUzZmVj",
+      "name": "Richard Craddock",
+      "items": [
+        {
+          "_id": "ODljZTI5NzI3ZDRm",
+          "name": "Pięść wspomagana hydraulicznie",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/piesc_hydrauliczna.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.OBrjMBbhUSK6kpq3",
+      "name": "Richard Craddock Uparmored",
+      "items": [
+        {
+          "_id": "ODljZTI5NzI3ZDRm",
+          "name": "Pięść wspomagana hydraulicznie",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/piesc_hydrauliczna.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NTYxNTM5YjRiZGM3",
+      "name": "Samantha Smith",
+      "items": [
+        {
+          "_id": "OGY4OGUxZDBhNTBi",
+          "name": "Ruger LCP II",
+          "before": "worlds/OUTPUT/characters/047_-_Samantha_Smith/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ruger_lcp_ii.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MTEyM2VhZTEwMzJi.Token.ODNhNGRkMTFmMmFi.Actor.MWQzZmFkMDUzZmVj",
+      "name": "Richard Craddock",
+      "items": [
+        {
+          "_id": "ODljZTI5NzI3ZDRm",
+          "name": "Pięść wspomagana hydraulicznie",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/piesc_hydrauliczna.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.MWRiZTM3NzIwZDVi.Actor.NTJiOTczNjQxNTgx",
+      "name": "Kucharka Irena",
+      "items": [
+        {
+          "_id": "MjU1OTQ0MTJhMjNk",
+          "name": "Łopatka kuchenna",
+          "before": "worlds/OUTPUT/characters/070_-_Kucharka_Irena/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/lopatka_kuchenna.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NmRjNjIzOTFhZjY0.Token.ZDIzOTQ2NjFmZmIz.Actor.NTYxNTM5YjRiZGM3",
+      "name": "Samantha Smith",
+      "items": [
+        {
+          "_id": "OGY4OGUxZDBhNTBi",
+          "name": "Ruger LCP II",
+          "before": "worlds/OUTPUT/characters/047_-_Samantha_Smith/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ruger_lcp_ii.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MjY5NWM0NjkzMjZj.Token.YzMyOTkxNjhkZTgw.Actor.MWQzZmFkMDUzZmVj",
+      "name": "Richard Craddock",
+      "items": [
+        {
+          "_id": "ODljZTI5NzI3ZDRm",
+          "name": "Pięść wspomagana hydraulicznie",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/piesc_hydrauliczna.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.NGE2NGVkZDY4NzYx.Actor.N2RlMmNiZjNmZTky",
+      "name": "Lily",
+      "items": [
+        {
+          "_id": "ODdhNzczNTg2MzFk",
+          "name": "Walther PPK",
+          "before": "worlds/OUTPUT/characters/059_-_Lily/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/walther_ppk.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ZDI1YTcyY2JmNjMx.Token.IAzB7h1vtGuBOXgH.Actor.MWQzZmFkMDUzZmVj",
+      "name": "Generał",
+      "items": [
+        {
+          "_id": "ODljZTI5NzI3ZDRm",
+          "name": "Pięść wspomagana hydraulicznie",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/piesc_hydrauliczna.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ZDI1YTcyY2JmNjMx.Token.UegLhOMhY2Ih1ces.Actor.OBrjMBbhUSK6kpq3",
+      "name": "Generał",
+      "items": [
+        {
+          "_id": "ODljZTI5NzI3ZDRm",
+          "name": "Pięść wspomagana hydraulicznie",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/piesc_hydrauliczna.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.xLbeckdRxAeLy7Kr.Actor.OBrjMBbhUSK6kpq3",
+      "name": "Generał",
+      "items": [
+        {
+          "_id": "ODljZTI5NzI3ZDRm",
+          "name": "Pięść wspomagana hydraulicznie",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/piesc_hydrauliczna.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.gWUHFa4sl2IspNzJ.Actor.NTJiOTczNjQxNTgx",
+      "name": "Kucharka Irena",
+      "items": [
+        {
+          "_id": "MjU1OTQ0MTJhMjNk",
+          "name": "Łopatka kuchenna",
+          "before": "worlds/OUTPUT/characters/070_-_Kucharka_Irena/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/lopatka_kuchenna.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.olhvSZZ8XTyCxBya.Actor.N2RlMmNiZjNmZTky",
+      "name": "Lily",
+      "items": [
+        {
+          "_id": "ODdhNzczNTg2MzFk",
+          "name": "Walther PPK",
+          "before": "worlds/OUTPUT/characters/059_-_Lily/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/walther_ppk.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.a9JLuSDOW7D3rYUk.Actor.MWQzZmFkMDUzZmVj",
+      "name": "Generał",
+      "items": [
+        {
+          "_id": "ODljZTI5NzI3ZDRm",
+          "name": "Pięść wspomagana hydraulicznie",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/piesc_hydrauliczna.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.iptZwtQTIIYQjOYl.Actor.NTYxNTM5YjRiZGM3",
+      "name": "Sammy",
+      "items": [
+        {
+          "_id": "OGY4OGUxZDBhNTBi",
+          "name": "Ruger LCP II",
+          "before": "worlds/OUTPUT/characters/047_-_Samantha_Smith/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ruger_lcp_ii.svg"
+        }
+      ]
+    }
+  ]
+}

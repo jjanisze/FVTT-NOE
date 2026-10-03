@@ -1,0 +1,103 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.MzJhMDgyZmRiMzU1",
+      "name": "Aligator",
+      "items": [
+        {
+          "_id": "NmIxM2VhMWQzZTZj",
+          "name": "Atak - Ogon",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_ogonem.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MDJjOGI1NzE3NTc5",
+      "name": "Dante",
+      "items": [
+        {
+          "_id": "MjQ2MmI2ODVlMDdj",
+          "name": "Atak głową",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_glowa.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.YmMyOWE3ODcxZjU1",
+      "name": "Pitagoras",
+      "items": [
+        {
+          "_id": "ZDM5OTUyMGYwMWJk",
+          "name": "Pałka",
+          "before": "worlds/OUTPUT/characters/068_-_Pitagoras/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/palka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.NTQ0NTc4NmE0NzJk.Actor.MzJhMDgyZmRiMzU1",
+      "name": "Aligator",
+      "items": [
+        {
+          "_id": "NmIxM2VhMWQzZTZj",
+          "name": "Atak - Ogon",
+          "before": "worlds/OUTPUT/characters/022_-_Aligator/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_ogonem.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.Y2ViZWNiNzFiMjJj.Actor.YmMyOWE3ODcxZjU1",
+      "name": "Pitagoras",
+      "items": [
+        {
+          "_id": "ZDM5OTUyMGYwMWJk",
+          "name": "Pałka",
+          "before": "worlds/OUTPUT/characters/068_-_Pitagoras/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/palka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ODAxZTdmOGIwZjc0.Token.ZWQzNGJlYzJlYjZk.Actor.YmMyOWE3ODcxZjU1",
+      "name": "Pitagoras",
+      "items": [
+        {
+          "_id": "ZDM5OTUyMGYwMWJk",
+          "name": "Pałka",
+          "before": "worlds/OUTPUT/characters/068_-_Pitagoras/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/palka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.9vEF9o7uRVHVCgRc.Actor.MzJhMDgyZmRiMzU1",
+      "name": "Aligator",
+      "items": [
+        {
+          "_id": "NmIxM2VhMWQzZTZj",
+          "name": "Atak - Ogon",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_ogonem.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.NZWptVqo4zGEp6Di.Actor.YmMyOWE3ODcxZjU1",
+      "name": "Pitagoras",
+      "items": [
+        {
+          "_id": "ZDM5OTUyMGYwMWJk",
+          "name": "Pałka",
+          "before": "worlds/OUTPUT/characters/068_-_Pitagoras/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/palka.svg"
+        }
+      ]
+    }
+  ]
+}

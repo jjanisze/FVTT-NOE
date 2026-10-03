@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.YmMyOWE3ODcxZjU1",
+      "name": "Pitagoras",
+      "items": [
+        {
+          "_id": "OTRhOGE0NThiNzY0",
+          "name": "Paralizator",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/armalite_carbine.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/paralyzer.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.Y2ViZWNiNzFiMjJj.Actor.YmMyOWE3ODcxZjU1",
+      "name": "Pitagoras",
+      "items": [
+        {
+          "_id": "OTRhOGE0NThiNzY0",
+          "name": "Paralizator",
+          "before": "worlds/OUTPUT/characters/068_-_Pitagoras/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/paralyzer.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ODAxZTdmOGIwZjc0.Token.ZWQzNGJlYzJlYjZk.Actor.YmMyOWE3ODcxZjU1",
+      "name": "Pitagoras",
+      "items": [
+        {
+          "_id": "OTRhOGE0NThiNzY0",
+          "name": "Paralizator",
+          "before": "worlds/OUTPUT/characters/068_-_Pitagoras/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/paralyzer.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.NZWptVqo4zGEp6Di.Actor.YmMyOWE3ODcxZjU1",
+      "name": "Pitagoras",
+      "items": [
+        {
+          "_id": "OTRhOGE0NThiNzY0",
+          "name": "Paralizator",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/armalite_carbine.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/paralyzer.svg"
+        }
+      ]
+    }
+  ]
+}

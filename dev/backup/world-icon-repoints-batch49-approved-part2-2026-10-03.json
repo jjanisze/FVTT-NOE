@@ -1,0 +1,163 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.YjBiMmE4ODhjYmM3",
+      "name": "GIGANTYCZNY PAJĄK",
+      "items": [
+        {
+          "_id": "YTA3Y2NlZDA4ODdl",
+          "name": "Odnóże",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/combat_knife.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/odnoze_gigantyczny_pajak.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.ZmQyNjlhMTY1NjU0",
+      "name": "Pajączek Strażniczy",
+      "items": [
+        {
+          "_id": "ZjYwMTc5YzgyYTJl",
+          "name": "Atak wręcz",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_wrecz_pajaczek.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MGFiZGQ2NzE5OWNh",
+      "name": "Spawacz",
+      "items": [
+        {
+          "_id": "OGM5N2ViZmM1YTcw",
+          "name": "Atak Odnóżem",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/combat_knife.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_odnogiem_spawacz.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.QvlrcHwuQPPfXhKe",
+      "name": "Tarantula (Recovered)",
+      "items": [
+        {
+          "_id": "ZGE5ZDI3Y2E1Njg1",
+          "name": "Atak Wielokrotny Ostrzem",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_wielokrotny_ostrzem.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.ZmNkNTY1YzhlY2Fk",
+      "name": "Victor von Blitz",
+      "items": [
+        {
+          "_id": "ENIE8zDsrPWHeJOZ",
+          "name": "Pokwitowanie Luxor (200 gb w amunicji)",
+          "before": "modules/neuroshima-2026-overrides/icons/items/loot/pendrive.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/pokwitowanie_luxor.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.MWI1MTk2MTBlNDVj.Actor.YjBiMmE4ODhjYmM3",
+      "name": "GIGANTYCZNY PAJĄK",
+      "items": [
+        {
+          "_id": "YTA3Y2NlZDA4ODdl",
+          "name": "Odnóże",
+          "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/odnoze_gigantyczny_pajak.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.OTg2ZmRlMThjOTU0.Actor.MGFiZGQ2NzE5OWNh",
+      "name": "Spawacz",
+      "items": [
+        {
+          "_id": "OGM5N2ViZmM1YTcw",
+          "name": "Atak Odnóżem",
+          "before": "worlds/OUTPUT/characters/013_-_Spawacz/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_odnogiem_spawacz.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.OWM1MTk5NWYyNThl.Actor.YjBiMmE4ODhjYmM3",
+      "name": "GIGANTYCZNY PAJĄK",
+      "items": [
+        {
+          "_id": "YTA3Y2NlZDA4ODdl",
+          "name": "Odnóże",
+          "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/odnoze_gigantyczny_pajak.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.YjMwZWQ3YzcxOWI5.Actor.MGFiZGQ2NzE5OWNh",
+      "name": "Spawacz",
+      "items": [
+        {
+          "_id": "OGM5N2ViZmM1YTcw",
+          "name": "Atak Odnóżem",
+          "before": "worlds/OUTPUT/characters/013_-_Spawacz/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_odnogiem_spawacz.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.Iu8vR5vC66jLzxln.Actor.ZmQyNjlhMTY1NjU0",
+      "name": "Pajączek Strażniczy",
+      "items": [
+        {
+          "_id": "ZjYwMTc5YzgyYTJl",
+          "name": "Atak wręcz",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_wrecz_pajaczek.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.mVXNTcuWJY89jgFf.Actor.QvlrcHwuQPPfXhKe",
+      "name": "Tarantula",
+      "items": [
+        {
+          "_id": "ZGE5ZDI3Y2E1Njg1",
+          "name": "Atak Wielokrotny Ostrzem",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/ak_47.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_wielokrotny_ostrzem.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.MlMAvhJkP3PVAV3V.Actor.YjBiMmE4ODhjYmM3",
+      "name": "GIGANTYCZNY PAJĄK",
+      "items": [
+        {
+          "_id": "YTA3Y2NlZDA4ODdl",
+          "name": "Odnóże",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/combat_knife.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/odnoze_gigantyczny_pajak.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.ZBGr9qBCvDeCCIC2.Actor.MGFiZGQ2NzE5OWNh",
+      "name": "Spawacz",
+      "items": [
+        {
+          "_id": "OGM5N2ViZmM1YTcw",
+          "name": "Atak Odnóżem",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/combat_knife.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_odnogiem_spawacz.svg"
+        }
+      ]
+    }
+  ]
+}

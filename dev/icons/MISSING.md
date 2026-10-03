@@ -37,9 +37,8 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. Still that future pass,
 still not this queue — but it is two items, not a pile.
 
-**Next batch number: 45** (batches 43–44 were generated as 3×3 atlases on
-2026-10-03 and are awaiting GM review; bump this whenever another batch is
-actually generated).
+**Next batch number: 51** (batch 50 was generated as a 3×3 atlas on 2026-10-03
+and is awaiting GM review; bump this whenever another batch is generated).
 
 *Batch 40 (2026-09-25): Kamizelka taktyczna, .44 Mag dum-dum, Mięso suszone, Chleb, Owoce
 i warzywa, MRE, Breneka, Zużyty LAW, Magazynek bębnowy — processed and wired; LAW and the drum
@@ -54,10 +53,8 @@ oversized-cog designs at their existing PNG/SVG paths. Decisions remain in
 `dev/icons/review/feedback.json`; candidates and prompts remain archived under
 `dev/icons/review/candidates/batch-41/`.*
 
-*Production targets still without generated art after batches 43–44: Turbina
-wiatrowa/wodna and Zegarek. The eighteen Batch 43–44 targets below remain in
-this queue until GM approval and integration. Once an icon is approved, add it
-to `RAW_IKONY` in `production/wynik.mjs` and create its reusable prototype.*
+*All generated production targets through batch 46 are approved, installed and
+represented by reusable `sprzet` prototypes.*
 
 *(The conditional "IED radiowy" sheet icon is dropped: the GM chose "decide at placement"
 (2026-09-25), so a radio IED only exists on the map — class B row 5 covers it.)*
@@ -80,25 +77,72 @@ fallback. Maczuga and Kamienny nóż use the approved simplified atlas revisions
 | 8 | Alternator → `icons/items/loot/alternator.svg` | Serwisowanie recipe; `sprzet` prototype | approved and installed | Automotive alternator with grooved belt pulley and vented housing; no detached cog symbol |
 | 9 | Defibrylator → `icons/items/loot/defibrylator.svg` | Serwisowanie recipe; `sprzet` prototype | approved and installed | Rugged portable defibrillator case with two clipped paddles and coiled leads; no cartoon heart/lightning shorthand |
 
-## Queue (A) — batches 43–44 — generated, awaiting GM review
+## Batches 43–44 — 13 integrated, 4 revisions and 1 pending
 
 Both batches were generated as one 3×3 atlas each, then split and normalized.
-Their source atlases, prompts and PNG/SVG candidates are archived under
-`dev/icons/review/candidates/batch-43/` and `batch-44/`. No live items or
-compendium prototypes will be changed until the review decision is recorded.
+Thirteen approved icons and prototypes are installed. Laptop, Wytrychy
+elektroniczne, Kompas and Trucizna received revision requests; Odtwarzacz CD has
+no recorded decision and remains unchanged.
 
 | Batch | Items |
 |---|---|
 | 43 | Detektor ruchu; Komputer osobisty; Komputer gamingowy; Laptop; Kontroler zdalnego sterowania; Miernik skażenia chemicznego; Odtwarzacz CD; Wykrywacz metalu; Wytrychy elektroniczne |
 | 44 | Kompas; Palnik acetylenowo-tlenowy; Środek usypiający; Środki dezynfekujące; Trucizna; Paralotnia; Adapter wifi; Monitorek; Router |
 
-## Waiting for the next batch (A)
+## Batch 45 — 8 approved and installed, Laptop returned for revision
 
-Found outside an icon session; move into the next batch's queue table when it is planned.
+One 3×3 atlas contained four requested revisions, the final two known production
+targets, and three verified live-world gaps. Eight approved results are
+installed; Laptop received another revision request.
 
-| # | Item | Where | Current icon | Suggested prompt content |
-|---|------|-------|---------------|---------------------------|
-| 1 | Dziurawy hełm (WKK, `wkk/config/dziurawy-helm.mjs`, PLAN_tt D12a) | lands in the pack after Krytyczna ochrona (Kobalt on) | borrows `icons/armor/helm.svg` | The catalog helmet glyph, ruined: a clean bullet hole through the dome and a crack running from it. Must read as "the same helmet, now junk" |
+| # | Item | Source |
+|---|---|---|
+| 1 | Laptop revision | Batch 43 feedback: replace touchpad-like deck with a bold keyboard grid |
+| 2 | Wytrychy elektroniczne revision | Batch 43 feedback: add clear screen, knob and controls |
+| 3 | Kompas revision | Batch 44 feedback: use a real lensatic compass form |
+| 4 | Trucizna revision | Batch 44 feedback: contemporary toxic-warning skull and crossbones |
+| 5 | Turbina wiatrowa/wodna | Rulebook production output, missing art and prototype |
+| 6 | Zegarek | Profession production output, missing art and prototype |
+| 7 | Berdysz | Dante actor item uses `item-bag.svg`; no dedicated asset found |
+| 8 | Scyzoryk | Motocyklista actor item uses its actor portrait; no dedicated asset found |
+| 9 | Skalpel | Samantha Smith actor item uses her portrait; no dedicated asset found |
+
+## Batch 46 — 6 approved and installed, 3 returned for revision
+
+One 3×3 atlas contained the Laptop and CD-player revisions plus seven verified
+world-item gaps. Laptop, CD player, Walther PPK, Ruger LCP II, hydraulic fist
+and kitchen spatula are installed. Junk mace, broken bottle and wrench received
+revision requests.
+
+| # | Item | Source |
+|---|---|---|
+| 1 | Laptop revision C | Four staggered rows of dash-shaped keys; no grid or touchpad |
+| 2 | Odtwarzacz CD revision | Open player with raised lid and visible disc |
+| 3 | Buzdygan śmieciowy | Lily actor item uses her portrait |
+| 4 | Walther PPK | Lily actor item uses her portrait |
+| 5 | Ruger LCP II | Samantha Smith actor item uses her portrait; Ruger Mark IV is a different weapon |
+| 6 | Tulipan | Motocyklista actor item uses his portrait |
+| 7 | Pięść wspomagana hydraulicznie | Two Richard Craddock variants use their portrait |
+| 8 | Klucz francuski | Pokrak actor item uses his portrait |
+| 9 | Łopatka kuchenna | Kucharka Irena actor item uses her portrait |
+
+## Queue (A) — batch 50 — generated, awaiting GM review
+
+One complete 3×3 atlas contains the requested tray revision and eight verified
+world/module item gaps. Sources and normalized candidates are under
+`dev/icons/review/candidates/batch-50/`.
+
+| # | Item | Source |
+|---|---|---|
+| 1 | Atak tacką revision B | Bowl, cup, liquid and food actively spill from the tray |
+| 2 | Kieł jadowy | GMT400 item uses a colored potion vial |
+| 3 | Paliwo | GMT400 fuel tank uses a colored potion flask |
+| 4 | Uzupełnienie Narzędzi Małego Medyka | Physical refill uses the generic heal symbol |
+| 5 | Metalowa walizka | Reinforced metal case uses a soft leather-bag icon |
+| 6 | Komponenty Amunicji | Reloading parts use the generic chemistry icon |
+| 7 | Części ciężkiego karabinu | Loose parts use the complete Browning M2 icon |
+| 8 | Pogromca | Chemical-dart shotgun shares the ordinary pump-shotgun icon |
+| 9 | Odnóże — KOŃ (SKAŻONY) | Synthetic horse attack needs actor-specific hoof art |
 
 ## How an item gets added here
 

@@ -18,6 +18,15 @@ snapshot contained 2,204 Item documents: 274 world, 1,185 actor-owned and 745
 module-compendium entries, using 673 distinct icon paths. After Batch 42
 integration the snapshot contains 2,208 documents: 274 world, 1,185
 actor-owned and 749 compendium entries, using 682 distinct icon paths.
+After the 13 approved Batch 43–44 prototypes, it contains 2,221 documents:
+274 world, 1,185 actor-owned and 762 compendium entries, using 695 distinct
+icon paths.
+After Batch 45 integration it contains 2,226 documents: 274 world, 1,185
+actor-owned and 767 compendium entries, using 703 distinct icon paths.
+After Batch 46 integration it contains 2,228 documents: 274 world, 1,185
+actor-owned and 769 compendium entries, using 708 distinct icon paths. After
+Batch 49 integration and the broader existing-asset cleanup it remains at 2,228
+documents with zero recognized placeholders and 713 distinct icon paths.
 
 Treat the report as evidence, not an automatic edit list. Actor portraits are
 often wrong for physical items, but are expected on some creature attacks and
@@ -29,11 +38,18 @@ Sztuczka art pass.
 - Batch 41: both blueprint corrections are approved and installed.
 - Batch 42: all nine icons are approved and installed. The two borrowed weapon
   icons were replaced, and all four production outputs now have prototypes.
-- Agregat, Akumulator, Alternator and Defibrylator now have deterministic `sprzet` prototypes. Their
-  `raw:` recipe references resolve to those compendium documents, with the
-  shared builder as a fallback until packs are rebuilt.
-- Batches 43–44: eighteen 3×3-atlas candidates are ready for GM review. Source
-  documents and live data remain unchanged until approval.
+- Seventeen approved production outputs now have deterministic `sprzet`
+  prototypes. Their `raw:` and `tabela:` references resolve to those compendium
+  documents, with the shared builder as a fallback until packs are rebuilt.
+- Batches 43–46: all approved icons are installed. Twenty-four production
+  outputs have deterministic `sprzet` prototypes.
+- Batches 47–48: approved icons are installed and live actor items were
+  repointed through Foundry's document API. The cleanup also reused existing
+  baseball-bat, canned-food, brass-knuckles, firing-mode and paralyzer assets.
+- Batch 49: eight approved icons are installed and repointed through Foundry's
+  document API. The tray attack remains a requested revision.
+- Batch 50: the tray revision and eight verified world/module item gaps are ready
+  for GM review as one complete 3×3 atlas.
 
 ## Prototype and mechanics decisions exposed by batch 42
 

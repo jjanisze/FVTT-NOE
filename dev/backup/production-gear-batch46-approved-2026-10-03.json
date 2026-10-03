@@ -1,0 +1,129 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [],
+  "packs": [],
+  "prototypes": [
+    {
+      "id": "akumulator",
+      "_id": "dZ0H6mINhvn1nXU9",
+      "exists": true
+    },
+    {
+      "id": "agregat",
+      "_id": "pxYghNgR0gYzOrBy",
+      "exists": true
+    },
+    {
+      "id": "alternator",
+      "_id": "mtK0seLBeazRPElL",
+      "exists": true
+    },
+    {
+      "id": "defibrylator",
+      "_id": "g5Ta5HeWTcVnlJnn",
+      "exists": true
+    },
+    {
+      "id": "detektor-ruchu",
+      "_id": "fz2k8ktSdyvf0Th2",
+      "exists": true
+    },
+    {
+      "id": "komputer-osobisty",
+      "_id": "Z6aUtVZbglBpZq7w",
+      "exists": true
+    },
+    {
+      "id": "komputer-gamingowy",
+      "_id": "7BVb7c4g4XSyhhzC",
+      "exists": true
+    },
+    {
+      "id": "kontroler",
+      "_id": "Li8tT0ZcWhawApAu",
+      "exists": true
+    },
+    {
+      "id": "miernik-skazenia",
+      "_id": "yvIc9fQGcwfBmESd",
+      "exists": true
+    },
+    {
+      "id": "wykrywacz-metalu",
+      "_id": "hpuU3EyStaZBDU0Q",
+      "exists": true
+    },
+    {
+      "id": "palnik",
+      "_id": "BrRvf6OC4odAyzqS",
+      "exists": true
+    },
+    {
+      "id": "srodek-usypiajacy",
+      "_id": "bZEIlgrwyVrgeajZ",
+      "exists": true
+    },
+    {
+      "id": "srodki-dezynfekujace",
+      "_id": "uDYfubR7fa58qAcz",
+      "exists": true
+    },
+    {
+      "id": "paralotnia",
+      "_id": "1LpMLa3CuDl9raPB",
+      "exists": true
+    },
+    {
+      "id": "adapter-wifi",
+      "_id": "k3aOkjyxPetm3Sr6",
+      "exists": true
+    },
+    {
+      "id": "monitorek",
+      "_id": "DFogqdv7AhUZB1bL",
+      "exists": true
+    },
+    {
+      "id": "router",
+      "_id": "jgKgWlb5Zf5tSXjG",
+      "exists": true
+    },
+    {
+      "id": "wytrychy-elektroniczne",
+      "_id": "IgzmpJewCPSWhhy0",
+      "exists": true
+    },
+    {
+      "id": "kompas",
+      "_id": "BfZnwbqu3EXgOCOE",
+      "exists": true
+    },
+    {
+      "id": "trucizna",
+      "_id": "tmckbVp9vyu8me3z",
+      "exists": true
+    },
+    {
+      "id": "turbina",
+      "_id": "zLBkdYoXO6OPEQ4o",
+      "exists": true
+    },
+    {
+      "id": "zegarek",
+      "_id": "RofeDdBS22vwXs4a",
+      "exists": true
+    },
+    {
+      "id": "laptop",
+      "_id": "ylmsUxlc0sdrCnez",
+      "exists": false
+    },
+    {
+      "id": "odtwarzacz-cd",
+      "_id": "5eP5ovMgLv9xBmI4",
+      "exists": false
+    }
+  ]
+}

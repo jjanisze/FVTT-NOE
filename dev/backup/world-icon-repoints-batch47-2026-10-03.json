@@ -1,0 +1,391 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.YzI4Njk2N2IwNjI5",
+      "name": "BIT-BOY",
+      "items": [
+        {
+          "_id": "NjRkMDAzOGU5Y2Fi",
+          "name": "Pazury",
+          "before": "worlds/OUTPUT/characters/021_-_BIT-BOY/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.ZDBiNWNjM2E5MTVh",
+      "name": "Bitboy Przewodnik",
+      "items": [
+        {
+          "_id": "ODc4YWJlZDRkMmVj",
+          "name": "Pazury",
+          "before": "worlds/OUTPUT/characters/036_-_Bitboy_Przewodnik/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MDE2NTZjOTlmYzU4",
+      "name": "Buźka",
+      "items": [
+        {
+          "_id": "MzMwMjBiNjU3ZGUz",
+          "name": "Bez Broni",
+          "before": "icons/svg/item-bag.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.OThhYWU5NWM5ODAz",
+      "name": "Carson",
+      "items": [
+        {
+          "_id": "MDRjYjNhMTI3MDdi",
+          "name": "Bez broni",
+          "before": "icons/svg/item-bag.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "Y2M4YWRjZWUxYzky",
+          "name": "Pięść",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MDJjOGI1NzE3NTc5",
+      "name": "Dante",
+      "items": [
+        {
+          "_id": "YzQ5NzRmMDRkZTc2",
+          "name": "Bez Broni",
+          "before": "icons/svg/item-bag.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NzhmNDJhNTU1MDQ1",
+      "name": "Góra",
+      "items": [
+        {
+          "_id": "ZDdlOTM2ODAzYTM5",
+          "name": "Bez broni",
+          "before": "icons/svg/item-bag.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NmEwODIwMmQ4YzY1",
+      "name": "Iris",
+      "items": [
+        {
+          "_id": "ZjZmZmM3YTU0NTVk",
+          "name": "Bez Broni",
+          "before": "icons/svg/item-bag.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NTdjZGU3ZjA3MjJk",
+      "name": "Kitchin",
+      "items": [
+        {
+          "_id": "MDAxYWE1NjE2NGFj",
+          "name": "Żądło",
+          "before": "worlds/OUTPUT/characters/037_-_Kitchin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zadlo.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.N2E4NTliODA5YjU3",
+      "name": "Pająk",
+      "items": [
+        {
+          "_id": "ZDA4MDg0M2Q3ZmUw",
+          "name": "Ukłucie",
+          "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zadlo.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.hbmNLoW8KojdQVCJ",
+      "name": "Pokrak (Recovered)",
+      "items": [
+        {
+          "_id": "MDIwZjg4NDdlMGNl",
+          "name": "Klucz francuski",
+          "before": "worlds/OUTPUT/characters/008_-_Pokrak/avatar.jpg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/klucz_francuski.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MTg5ZjY0Y2Q2MTdj",
+      "name": "WILKOLUD",
+      "items": [
+        {
+          "_id": "N2M2MzBhZjVlYTQ0",
+          "name": "Pazury",
+          "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.MTFiNDFhZjBjZmUx.Actor.MTg5ZjY0Y2Q2MTdj",
+      "name": "WILKOLUD",
+      "items": [
+        {
+          "_id": "N2M2MzBhZjVlYTQ0",
+          "name": "Pazury",
+          "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.MzkxOGM0ZmE2ZmMy.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "Y2M4YWRjZWUxYzky",
+          "name": "Pięść",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.YWYxN2RlOGExYWUw.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "Y2M4YWRjZWUxYzky",
+          "name": "Pięść",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.MTVlOWJiNzM0ZGUy.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "Y2M4YWRjZWUxYzky",
+          "name": "Pięść",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.NWY0OGMwNzZkZDlh.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "Y2M4YWRjZWUxYzky",
+          "name": "Pięść",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.Njg4NjkzYTBjMzUy.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "Y2M4YWRjZWUxYzky",
+          "name": "Pięść",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.YzQxMzQzYzczNmM3.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "Y2M4YWRjZWUxYzky",
+          "name": "Pięść",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.MDI4ZGFkNmI5Njgx.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "Y2M4YWRjZWUxYzky",
+          "name": "Pięść",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.N2RiNTlmMTgyODY5.Actor.N2E4NTliODA5YjU3",
+      "name": "Pająk",
+      "items": [
+        {
+          "_id": "ZDA4MDg0M2Q3ZmUw",
+          "name": "Ukłucie",
+          "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zadlo.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.NzhmMjI2NDU3OWVl.Actor.N2E4NTliODA5YjU3",
+      "name": "Pająk",
+      "items": [
+        {
+          "_id": "ZDA4MDg0M2Q3ZmUw",
+          "name": "Ukłucie",
+          "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zadlo.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.NmQxYzI4Yzg0YmIx.Actor.N2E4NTliODA5YjU3",
+      "name": "Pająk",
+      "items": [
+        {
+          "_id": "ZDA4MDg0M2Q3ZmUw",
+          "name": "Ukłucie",
+          "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zadlo.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.ODZmZGRjOTAzNTQ4.Actor.N2E4NTliODA5YjU3",
+      "name": "Pająk",
+      "items": [
+        {
+          "_id": "ZDA4MDg0M2Q3ZmUw",
+          "name": "Ukłucie",
+          "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zadlo.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ZDI1YTcyY2JmNjMx.Token.PVE66ThJ5jA6yrdW.Actor.ZDBiNWNjM2E5MTVh",
+      "name": "Bitboy Przewodnik",
+      "items": [
+        {
+          "_id": "ODc4YWJlZDRkMmVj",
+          "name": "Pazury",
+          "before": "worlds/OUTPUT/characters/036_-_Bitboy_Przewodnik/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.3fTl0UdEmnzBAkpg.Actor.YzI4Njk2N2IwNjI5",
+      "name": "BIT-BOY",
+      "items": [
+        {
+          "_id": "NjRkMDAzOGU5Y2Fi",
+          "name": "Pazury",
+          "before": "worlds/OUTPUT/characters/021_-_BIT-BOY/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.IEVEz9odnKtcMwrK.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil",
+      "items": [
+        {
+          "_id": "Y2M4YWRjZWUxYzky",
+          "name": "Pięść",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.BMUtNTgKCBLaOlq2.Actor.hbmNLoW8KojdQVCJ",
+      "name": "Pokrak",
+      "items": [
+        {
+          "_id": "MDIwZjg4NDdlMGNl",
+          "name": "Klucz francuski",
+          "before": "worlds/OUTPUT/characters/008_-_Pokrak/avatar.jpg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/klucz_francuski.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.p6jX0F8jQmMiNwkn.Actor.MTg5ZjY0Y2Q2MTdj",
+      "name": "WILKOLUD",
+      "items": [
+        {
+          "_id": "N2M2MzBhZjVlYTQ0",
+          "name": "Pazury",
+          "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.oSQcyQveFJeB5tCv.Actor.ZDBiNWNjM2E5MTVh",
+      "name": "Bitboy Przewodnik",
+      "items": [
+        {
+          "_id": "ODc4YWJlZDRkMmVj",
+          "name": "Pazury",
+          "before": "worlds/OUTPUT/characters/036_-_Bitboy_Przewodnik/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.qGrVyFmNeEKTwpHA.Actor.NTdjZGU3ZjA3MjJk",
+      "name": "Kitchin",
+      "items": [
+        {
+          "_id": "MDAxYWE1NjE2NGFj",
+          "name": "Żądło",
+          "before": "worlds/OUTPUT/characters/037_-_Kitchin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zadlo.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.XWqgKGANt0e8sGu9.Actor.N2E4NTliODA5YjU3",
+      "name": "Pająk",
+      "items": [
+        {
+          "_id": "ZDA4MDg0M2Q3ZmUw",
+          "name": "Ukłucie",
+          "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zadlo.svg"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,421 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "ODYyMjM3OTBhYjRm",
+          "name": "Bejzbol",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NzhmNDJhNTU1MDQ1",
+      "name": "Góra",
+      "items": [
+        {
+          "_id": "ODJjNTVhYzk3MzBl",
+          "name": "Bejzbol",
+          "before": "icons/svg/item-bag.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NTY3YWVkODMzZGIz",
+      "name": "Harold Grimes",
+      "items": [
+        {
+          "_id": "YmI1MGVmMzQwNThj",
+          "name": "Bejzbol",
+          "before": "worlds/OUTPUT/characters/055_-_Harold_Grimes/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "ZGQ1ZjUzYzI3NzM0",
+          "name": "Krótka seria",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_short_burst.svg"
+        },
+        {
+          "_id": "YjExNjAwNmEzZjgx",
+          "name": "Strzał",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_single_fire.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "ODkyOTA3ODY1MWE3",
+          "name": "Piąchopiryna",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/brass_knuckles.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NjBkNTk3OWY1ODRj",
+      "name": "Raynald of Châtillon",
+      "items": [
+        {
+          "_id": "FXvwwA3NwtOG2Srg",
+          "name": "Konserwa x",
+          "before": "systems/dnd5e/icons/svg/items/loot.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/canned_food.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.YTA1ZTMwMzhkODVl.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "ODkyOTA3ODY1MWE3",
+          "name": "Piąchopiryna",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/brass_knuckles.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.YTExY2QwMmNhYzlm.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "ODkyOTA3ODY1MWE3",
+          "name": "Piąchopiryna",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/brass_knuckles.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.MjMwN2FhODdjYjdl.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "ODkyOTA3ODY1MWE3",
+          "name": "Piąchopiryna",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/brass_knuckles.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.MzkxOGM0ZmE2ZmMy.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "ODYyMjM3OTBhYjRm",
+          "name": "Bejzbol",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.YWYxN2RlOGExYWUw.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "ODYyMjM3OTBhYjRm",
+          "name": "Bejzbol",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.MTVlOWJiNzM0ZGUy.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "ODYyMjM3OTBhYjRm",
+          "name": "Bejzbol",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.NWY0OGMwNzZkZDlh.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "ODYyMjM3OTBhYjRm",
+          "name": "Bejzbol",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.Njg4NjkzYTBjMzUy.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "ODYyMjM3OTBhYjRm",
+          "name": "Bejzbol",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.YzQxMzQzYzczNmM3.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "ODYyMjM3OTBhYjRm",
+          "name": "Bejzbol",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.MDI4ZGFkNmI5Njgx.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil 2",
+      "items": [
+        {
+          "_id": "ODYyMjM3OTBhYjRm",
+          "name": "Bejzbol",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NmY1NWM5ODk4NDg2.Token.NTQxNDJlM2U5N2M4.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "ODkyOTA3ODY1MWE3",
+          "name": "Piąchopiryna",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/brass_knuckles.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NmY1NWM5ODk4NDg2.Token.NTRhMWQwMWVjZDU1.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "ODkyOTA3ODY1MWE3",
+          "name": "Piąchopiryna",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/brass_knuckles.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NmY1NWM5ODk4NDg2.Token.ZGQxMDkwZWZmNGI3.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "ODkyOTA3ODY1MWE3",
+          "name": "Piąchopiryna",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/brass_knuckles.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.NTcyMTA3NWZkNDU4.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "ZGQ1ZjUzYzI3NzM0",
+          "name": "Krótka seria",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_short_burst.svg"
+        },
+        {
+          "_id": "YjExNjAwNmEzZjgx",
+          "name": "Strzał",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_single_fire.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.MmIwYjA2MTE0NzIw.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "ZGQ1ZjUzYzI3NzM0",
+          "name": "Krótka seria",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_short_burst.svg"
+        },
+        {
+          "_id": "YjExNjAwNmEzZjgx",
+          "name": "Strzał",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_single_fire.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.ODcyMDE5YjhmNWQw.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "ZGQ1ZjUzYzI3NzM0",
+          "name": "Krótka seria",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_short_burst.svg"
+        },
+        {
+          "_id": "YjExNjAwNmEzZjgx",
+          "name": "Strzał",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_single_fire.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.ZjU4YTg2YjRlZWQ4.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "ZGQ1ZjUzYzI3NzM0",
+          "name": "Krótka seria",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_short_burst.svg"
+        },
+        {
+          "_id": "YjExNjAwNmEzZjgx",
+          "name": "Strzał",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_single_fire.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.NmNjY2NlMzZlYjE5.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "ZGQ1ZjUzYzI3NzM0",
+          "name": "Krótka seria",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_short_burst.svg"
+        },
+        {
+          "_id": "YjExNjAwNmEzZjgx",
+          "name": "Strzał",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_single_fire.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.MDJiYTRkYzA2MDVm.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "ZGQ1ZjUzYzI3NzM0",
+          "name": "Krótka seria",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_short_burst.svg"
+        },
+        {
+          "_id": "YjExNjAwNmEzZjgx",
+          "name": "Strzał",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_single_fire.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.YWI4NDViNDEyZjM4.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "ZGQ1ZjUzYzI3NzM0",
+          "name": "Krótka seria",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_short_burst.svg"
+        },
+        {
+          "_id": "YjExNjAwNmEzZjgx",
+          "name": "Strzał",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_single_fire.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.IEVEz9odnKtcMwrK.Actor.YTkzN2YxNTQ4N2Q4",
+      "name": "Cywil",
+      "items": [
+        {
+          "_id": "ODYyMjM3OTBhYjRm",
+          "name": "Bejzbol",
+          "before": "worlds/OUTPUT/characters/010_-_Cywil_2/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.HzEPuwYdzdMTxgIi.Actor.NTY3YWVkODMzZGIz",
+      "name": "Harold Grimes",
+      "items": [
+        {
+          "_id": "YmI1MGVmMzQwNThj",
+          "name": "Bejzbol",
+          "before": "worlds/OUTPUT/characters/055_-_Harold_Grimes/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.Gl88jK3qkPvRwaKb.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "ODkyOTA3ODY1MWE3",
+          "name": "Piąchopiryna",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/brass_knuckles.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.nFnJRikijodX7wza.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "ZGQ1ZjUzYzI3NzM0",
+          "name": "Krótka seria",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_short_burst.svg"
+        },
+        {
+          "_id": "YjExNjAwNmEzZjgx",
+          "name": "Strzał",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/activities/activity_single_fire.svg"
+        }
+      ]
+    }
+  ]
+}

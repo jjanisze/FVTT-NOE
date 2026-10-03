@@ -76,6 +76,34 @@ export const PRODUCTION_GEAR = Object.freeze({
   router: Object.freeze({
     id: "router", ref: "tabela:router", icon: "router.svg",
     description: "Router sieci bezprzewodowej z dwiema antenami."
+  }),
+  "wytrychy-elektroniczne": Object.freeze({
+    id: "wytrychy-elektroniczne", icon: "wytrychy_elektroniczne.svg",
+    description: "Elektroniczny dekoder zamków z sondami i zestawem podstawowych elementów sterujących."
+  }),
+  kompas: Object.freeze({
+    id: "kompas", icon: "kompas.svg",
+    description: "Wytrzymały kompas polowy w zamykanej obudowie."
+  }),
+  trucizna: Object.freeze({
+    id: "trucizna", icon: "trucizna.svg",
+    description: "Fiolka prostej trucizny. Szczegółowe działanie i sposób podania rozstrzyga MG."
+  }),
+  turbina: Object.freeze({
+    id: "turbina", icon: "turbina.svg",
+    description: "Kompaktowa turbina przystosowana do napędu wiatrem albo przepływem wody."
+  }),
+  zegarek: Object.freeze({
+    id: "zegarek", ref: "tabela:zegarek", icon: "zegarek.svg",
+    description: "Wytrzymały zegarek naręczny."
+  }),
+  laptop: Object.freeze({
+    id: "laptop", icon: "laptop.svg",
+    description: "Przenośny komputer w odpornej obudowie."
+  }),
+  "odtwarzacz-cd": Object.freeze({
+    id: "odtwarzacz-cd", icon: "odtwarzacz_cd.svg",
+    description: "Przenośny odtwarzacz płyt kompaktowych ze słuchawkami."
   })
 });
 

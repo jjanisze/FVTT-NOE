@@ -1,0 +1,943 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.0gWeShZIv4KOO88F",
+      "name": "ALAHAMA",
+      "items": [
+        {
+          "_id": "i3J1lyrgFOe6ST0N",
+          "name": "Pięść",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.Wf53EIDOGbqhl6h0",
+      "name": "BIODROID",
+      "items": [
+        {
+          "_id": "rXZT9cG0w4LFO9HA",
+          "name": "Żądło",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zadlo.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.TotmQd6oDLLeM6B2",
+      "name": "BIT-BOY PRZEWODNIK",
+      "items": [
+        {
+          "_id": "rmC43m2TI6dxij37",
+          "name": "Pazury",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.c6NxSwv3O3TcepJE",
+      "name": "BIT-BOYS (aka CROATS)",
+      "items": [
+        {
+          "_id": "MNuWLvafFgwvSJPB",
+          "name": "Pazury",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        },
+        {
+          "_id": "RQBMRzbIvWJ5jH5I",
+          "name": "Ugryzienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.Fgi29FeQOHnGFyPI",
+      "name": "CYWIL",
+      "items": [
+        {
+          "_id": "0eilDalNIFdAQ94B",
+          "name": "Rura stalowa",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.5JqCEw9I5Ewb2fgQ",
+      "name": "GANGUS KAPO",
+      "items": [
+        {
+          "_id": "2gwgt8x5dQyCh0u6",
+          "name": "Bejsbol",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NhyH2YQKvDdyEpF5",
+      "name": "GANGUS ŻOŁNIERZ",
+      "items": [
+        {
+          "_id": "cIPbwalLlZJgZu6a",
+          "name": "Bejsbol",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.CmseQba9Q7gjPWom",
+      "name": "GENERACJA I. NOCNY GHUL",
+      "items": [
+        {
+          "_id": "tptGGrPcwzF2BVS1",
+          "name": "Ugryzienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.bnbnPGBq7QPt9KRh",
+      "name": "GENERACJA II. GENOTYP WILCZY",
+      "items": [
+        {
+          "_id": "7xr267nteTKqqmqR",
+          "name": "Pazury",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        },
+        {
+          "_id": "Wjz7aRAw5b2UjnZL",
+          "name": "Zęby",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zeby.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.ZpNjrKMNRmVwAZTs",
+      "name": "GIGANTYCZNY PAJĄK",
+      "items": [
+        {
+          "_id": "N1ycx0XcMLt1GHS2",
+          "name": "Odnóże",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/odnoze_gigantyczny_pajak.svg"
+        },
+        {
+          "_id": "UPRMaGw0119bLE8v",
+          "name": "Ugryzienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.Wke8ursIGVbKLMUF",
+      "name": "GMT400",
+      "items": [
+        {
+          "_id": "wbR0VbcWP4XabF10",
+          "name": "Mały Rzeźnik",
+          "before": "icons/tools/cooking/knife-cleaver-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/rzeznika.svg"
+        },
+        {
+          "_id": "1NqKwfvFX3MvpwVb",
+          "name": "Woda pitna",
+          "before": "icons/consumables/potions/potion-flask-blue-white.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/woda_filtrowana.svg"
+        },
+        {
+          "_id": "Ipicm4pvr2U7AcfR",
+          "name": "Mały Stolarz",
+          "before": "icons/tools/hand/hammer-claw-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/stolarza.svg"
+        },
+        {
+          "_id": "mHbEGHaECkwzEsvx",
+          "name": "Mały Rusznikarz",
+          "before": "icons/tools/hand/wrench-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/rusznikarza.svg"
+        },
+        {
+          "_id": "0Her3UcJIVZB5Tm2",
+          "name": "Skórzana aktówka",
+          "before": "icons/containers/bags/pack-simple-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/teczka_skorzana.svg"
+        },
+        {
+          "_id": "AXXskNIKTYSi5LBB",
+          "name": "Buty Lorentza (znoszone mocno)",
+          "before": "icons/equipment/feet/boots-worn-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/buty_wojskowe.svg"
+        },
+        {
+          "_id": "F9jEHpq65ETkymV0",
+          "name": "Plecak wojskowy — posterunkowy",
+          "before": "icons/containers/bags/pack-worn-leather-green.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/plecak_wojskowy.svg"
+        },
+        {
+          "_id": "cLnM80lMRKv0fsfI",
+          "name": "Teczka USS See — skórzana (dobra jakość)",
+          "before": "icons/containers/bags/pack-simple-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/teczka_skorzana.svg"
+        },
+        {
+          "_id": "et5YxAaK3V0Wbv5A",
+          "name": "Mały Kłusownik",
+          "before": "icons/tools/misc/trap-jaw-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/klusownika.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.BrVnUbF9JjDHb3Hw",
+      "name": "HARPIE (AKA WAMPIRY)",
+      "items": [
+        {
+          "_id": "UsMUEKocLfNZkoa3",
+          "name": "Pazury",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.Z6sIdSr28syaURmI",
+      "name": "KIDNAPER",
+      "items": [
+        {
+          "_id": "EhFJtWJEMaqC1YZZ",
+          "name": "Paralizator",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/paralyzer.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.YGIOkeUGVe4EImDp",
+      "name": "KITCHIN",
+      "items": [
+        {
+          "_id": "pIpdV8ZFTvNPMnHB",
+          "name": "Żądło",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zadlo.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.wGi0oe2AP4xIOmFH",
+      "name": "Kenny Forrester",
+      "items": [
+        {
+          "_id": "CaG5H0EJPyehDWGB",
+          "name": "Blacha Nowego Jorku",
+          "before": "icons/commodities/metal/badge-gold.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/odznaka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.C2RWal7yuSyM8zR3",
+      "name": "MROKOSZCZUR",
+      "items": [
+        {
+          "_id": "TJUNQg7iFqPiSnut",
+          "name": "Ugryzienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.50qspF0fBTnthKjN",
+      "name": "NEOKOT",
+      "items": [
+        {
+          "_id": "NW8E1DesjCCoswXI",
+          "name": "Pazury",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.td44oP8eYRTO8SeW",
+      "name": "NEONIEDŹWIEDŹ",
+      "items": [
+        {
+          "_id": "AZZaRatdaKTou3W9",
+          "name": "Ugryzienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.1vpt0f4JRB6nov9d",
+      "name": "PAJĄK",
+      "items": [
+        {
+          "_id": "B4yynmnwiY0qx4xK",
+          "name": "Ukłucie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zadlo.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.BJxZozEHq05Xqphv",
+      "name": "PIES BOJOWY",
+      "items": [
+        {
+          "_id": "CCjjQClpwFjavrLR",
+          "name": "Ugryzienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.LP16Iu6aaNkn0Azd",
+      "name": "PIES MUTEK",
+      "items": [
+        {
+          "_id": "a1MWh436RGKYLFdA",
+          "name": "Ugryzienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.hkab5SivPPEoyPHv",
+      "name": "TECHMORWA (MALUTKA)",
+      "items": [
+        {
+          "_id": "dgMVc5ttT6ReR7Mm",
+          "name": "Macka",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/macka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.PSusLvUnP6AH5UUO",
+      "name": "TECHMORWA (ŚREDNIA)",
+      "items": [
+        {
+          "_id": "BM0oQtsHgG2wgv5x",
+          "name": "Macka",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/macka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.N2EyNjc1YmRhMGZl.Token.YmZhMjMwYTY1ZTU5.Actor.Wke8ursIGVbKLMUF",
+      "name": "GMT400",
+      "items": [
+        {
+          "_id": "wbR0VbcWP4XabF10",
+          "name": "Mały Rzeźnik",
+          "before": "icons/tools/cooking/knife-cleaver-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/rzeznika.svg"
+        },
+        {
+          "_id": "1NqKwfvFX3MvpwVb",
+          "name": "Woda pitna",
+          "before": "icons/consumables/potions/potion-flask-blue-white.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/woda_filtrowana.svg"
+        },
+        {
+          "_id": "Ipicm4pvr2U7AcfR",
+          "name": "Mały Stolarz",
+          "before": "icons/tools/hand/hammer-claw-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/stolarza.svg"
+        },
+        {
+          "_id": "mHbEGHaECkwzEsvx",
+          "name": "Mały Rusznikarz",
+          "before": "icons/tools/hand/wrench-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/rusznikarza.svg"
+        },
+        {
+          "_id": "0Her3UcJIVZB5Tm2",
+          "name": "Skórzana aktówka",
+          "before": "icons/containers/bags/pack-simple-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/teczka_skorzana.svg"
+        },
+        {
+          "_id": "AXXskNIKTYSi5LBB",
+          "name": "Buty Lorentza (znoszone mocno)",
+          "before": "icons/equipment/feet/boots-worn-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/buty_wojskowe.svg"
+        },
+        {
+          "_id": "F9jEHpq65ETkymV0",
+          "name": "Plecak wojskowy — posterunkowy",
+          "before": "icons/containers/bags/pack-worn-leather-green.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/plecak_wojskowy.svg"
+        },
+        {
+          "_id": "cLnM80lMRKv0fsfI",
+          "name": "Teczka USS See — skórzana (dobra jakość)",
+          "before": "icons/containers/bags/pack-simple-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/teczka_skorzana.svg"
+        },
+        {
+          "_id": "et5YxAaK3V0Wbv5A",
+          "name": "Mały Kłusownik",
+          "before": "icons/tools/misc/trap-jaw-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/klusownika.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NzBhNzdmOGQ3NWEz.Token.NTkxNjlhNGUxNTli.Actor.Wke8ursIGVbKLMUF",
+      "name": "GMT400",
+      "items": [
+        {
+          "_id": "wbR0VbcWP4XabF10",
+          "name": "Mały Rzeźnik",
+          "before": "icons/tools/cooking/knife-cleaver-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/rzeznika.svg"
+        },
+        {
+          "_id": "1NqKwfvFX3MvpwVb",
+          "name": "Woda pitna",
+          "before": "icons/consumables/potions/potion-flask-blue-white.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/woda_filtrowana.svg"
+        },
+        {
+          "_id": "Ipicm4pvr2U7AcfR",
+          "name": "Mały Stolarz",
+          "before": "icons/tools/hand/hammer-claw-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/stolarza.svg"
+        },
+        {
+          "_id": "mHbEGHaECkwzEsvx",
+          "name": "Mały Rusznikarz",
+          "before": "icons/tools/hand/wrench-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/rusznikarza.svg"
+        },
+        {
+          "_id": "0Her3UcJIVZB5Tm2",
+          "name": "Skórzana aktówka",
+          "before": "icons/containers/bags/pack-simple-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/teczka_skorzana.svg"
+        },
+        {
+          "_id": "AXXskNIKTYSi5LBB",
+          "name": "Buty Lorentza (znoszone mocno)",
+          "before": "icons/equipment/feet/boots-worn-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/buty_wojskowe.svg"
+        },
+        {
+          "_id": "F9jEHpq65ETkymV0",
+          "name": "Plecak wojskowy — posterunkowy",
+          "before": "icons/containers/bags/pack-worn-leather-green.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/plecak_wojskowy.svg"
+        },
+        {
+          "_id": "cLnM80lMRKv0fsfI",
+          "name": "Teczka USS See — skórzana (dobra jakość)",
+          "before": "icons/containers/bags/pack-simple-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/teczka_skorzana.svg"
+        },
+        {
+          "_id": "et5YxAaK3V0Wbv5A",
+          "name": "Mały Kłusownik",
+          "before": "icons/tools/misc/trap-jaw-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/klusownika.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MGQwYTIyY2IxMTBj.Token.NWE1OWMwYTA0M2Y2.Actor.Wke8ursIGVbKLMUF",
+      "name": "GMT400",
+      "items": [
+        {
+          "_id": "wbR0VbcWP4XabF10",
+          "name": "Mały Rzeźnik",
+          "before": "icons/tools/cooking/knife-cleaver-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/rzeznika.svg"
+        },
+        {
+          "_id": "1NqKwfvFX3MvpwVb",
+          "name": "Woda pitna",
+          "before": "icons/consumables/potions/potion-flask-blue-white.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/woda_filtrowana.svg"
+        },
+        {
+          "_id": "Ipicm4pvr2U7AcfR",
+          "name": "Mały Stolarz",
+          "before": "icons/tools/hand/hammer-claw-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/stolarza.svg"
+        },
+        {
+          "_id": "mHbEGHaECkwzEsvx",
+          "name": "Mały Rusznikarz",
+          "before": "icons/tools/hand/wrench-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/rusznikarza.svg"
+        },
+        {
+          "_id": "0Her3UcJIVZB5Tm2",
+          "name": "Skórzana aktówka",
+          "before": "icons/containers/bags/pack-simple-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/teczka_skorzana.svg"
+        },
+        {
+          "_id": "AXXskNIKTYSi5LBB",
+          "name": "Buty Lorentza (znoszone mocno)",
+          "before": "icons/equipment/feet/boots-worn-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/buty_wojskowe.svg"
+        },
+        {
+          "_id": "F9jEHpq65ETkymV0",
+          "name": "Plecak wojskowy — posterunkowy",
+          "before": "icons/containers/bags/pack-worn-leather-green.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/plecak_wojskowy.svg"
+        },
+        {
+          "_id": "cLnM80lMRKv0fsfI",
+          "name": "Teczka USS See — skórzana (dobra jakość)",
+          "before": "icons/containers/bags/pack-simple-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/teczka_skorzana.svg"
+        },
+        {
+          "_id": "et5YxAaK3V0Wbv5A",
+          "name": "Mały Kłusownik",
+          "before": "icons/tools/misc/trap-jaw-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/klusownika.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YzRlZjVkZTlkMDll.Token.MWFhNmNiZjNhZmI5.Actor.Wke8ursIGVbKLMUF",
+      "name": "GMT400",
+      "items": [
+        {
+          "_id": "wbR0VbcWP4XabF10",
+          "name": "Mały Rzeźnik",
+          "before": "icons/tools/cooking/knife-cleaver-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/rzeznika.svg"
+        },
+        {
+          "_id": "1NqKwfvFX3MvpwVb",
+          "name": "Woda pitna",
+          "before": "icons/consumables/potions/potion-flask-blue-white.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/woda_filtrowana.svg"
+        },
+        {
+          "_id": "Ipicm4pvr2U7AcfR",
+          "name": "Mały Stolarz",
+          "before": "icons/tools/hand/hammer-claw-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/stolarza.svg"
+        },
+        {
+          "_id": "mHbEGHaECkwzEsvx",
+          "name": "Mały Rusznikarz",
+          "before": "icons/tools/hand/wrench-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/rusznikarza.svg"
+        },
+        {
+          "_id": "0Her3UcJIVZB5Tm2",
+          "name": "Skórzana aktówka",
+          "before": "icons/containers/bags/pack-simple-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/teczka_skorzana.svg"
+        },
+        {
+          "_id": "AXXskNIKTYSi5LBB",
+          "name": "Buty Lorentza (znoszone mocno)",
+          "before": "icons/equipment/feet/boots-worn-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/buty_wojskowe.svg"
+        },
+        {
+          "_id": "F9jEHpq65ETkymV0",
+          "name": "Plecak wojskowy — posterunkowy",
+          "before": "icons/containers/bags/pack-worn-leather-green.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/plecak_wojskowy.svg"
+        },
+        {
+          "_id": "cLnM80lMRKv0fsfI",
+          "name": "Teczka USS See — skórzana (dobra jakość)",
+          "before": "icons/containers/bags/pack-simple-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/teczka_skorzana.svg"
+        },
+        {
+          "_id": "et5YxAaK3V0Wbv5A",
+          "name": "Mały Kłusownik",
+          "before": "icons/tools/misc/trap-jaw-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/klusownika.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ZDI1YTcyY2JmNjMx.Token.Jn8yewHhp0lCyzGP.Actor.Wke8ursIGVbKLMUF",
+      "name": "GMT400",
+      "items": [
+        {
+          "_id": "wbR0VbcWP4XabF10",
+          "name": "Mały Rzeźnik",
+          "before": "icons/tools/cooking/knife-cleaver-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/rzeznika.svg"
+        },
+        {
+          "_id": "1NqKwfvFX3MvpwVb",
+          "name": "Woda pitna",
+          "before": "icons/consumables/potions/potion-flask-blue-white.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/woda_filtrowana.svg"
+        },
+        {
+          "_id": "Ipicm4pvr2U7AcfR",
+          "name": "Mały Stolarz",
+          "before": "icons/tools/hand/hammer-claw-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/stolarza.svg"
+        },
+        {
+          "_id": "mHbEGHaECkwzEsvx",
+          "name": "Mały Rusznikarz",
+          "before": "icons/tools/hand/wrench-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/rusznikarza.svg"
+        },
+        {
+          "_id": "0Her3UcJIVZB5Tm2",
+          "name": "Skórzana aktówka",
+          "before": "icons/containers/bags/pack-simple-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/teczka_skorzana.svg"
+        },
+        {
+          "_id": "AXXskNIKTYSi5LBB",
+          "name": "Buty Lorentza (znoszone mocno)",
+          "before": "icons/equipment/feet/boots-worn-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/buty_wojskowe.svg"
+        },
+        {
+          "_id": "F9jEHpq65ETkymV0",
+          "name": "Plecak wojskowy — posterunkowy",
+          "before": "icons/containers/bags/pack-worn-leather-green.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/plecak_wojskowy.svg"
+        },
+        {
+          "_id": "cLnM80lMRKv0fsfI",
+          "name": "Teczka USS See — skórzana (dobra jakość)",
+          "before": "icons/containers/bags/pack-simple-leather-brown.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/teczka_skorzana.svg"
+        },
+        {
+          "_id": "et5YxAaK3V0Wbv5A",
+          "name": "Mały Kłusownik",
+          "before": "icons/tools/misc/trap-jaw-steel-grey.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/tools/klusownika.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ZDI1YTcyY2JmNjMx.Token.y1aGp610ZbRtv8lX.Actor.wGi0oe2AP4xIOmFH",
+      "name": "Kenny Forrester",
+      "items": [
+        {
+          "_id": "CaG5H0EJPyehDWGB",
+          "name": "Blacha Nowego Jorku",
+          "before": "icons/commodities/metal/badge-gold.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/odznaka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.8OyXD7R94BF6RUuh.Actor.wGi0oe2AP4xIOmFH",
+      "name": "Kenny Forrester",
+      "items": [
+        {
+          "_id": "CaG5H0EJPyehDWGB",
+          "name": "Blacha Nowego Jorku",
+          "before": "icons/commodities/metal/badge-gold.webp",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/odznaka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.yx6sbn1Pv3b8wHFE.Actor.5JqCEw9I5Ewb2fgQ",
+      "name": "GANGUS BOSS",
+      "items": [
+        {
+          "_id": "2gwgt8x5dQyCh0u6",
+          "name": "Bejsbol",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.lIgUzpiK9s7Z0Wm5.Actor.Fgi29FeQOHnGFyPI",
+      "name": "GANGUS KAPO",
+      "items": [
+        {
+          "_id": "0eilDalNIFdAQ94B",
+          "name": "Rura stalowa",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.v6PnfDiaBfEGQjmU.Actor.NhyH2YQKvDdyEpF5",
+      "name": "KANIBAL",
+      "items": [
+        {
+          "_id": "cIPbwalLlZJgZu6a",
+          "name": "Bejsbol",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.RUbXcAdccXL9yZFS.Actor.Z6sIdSr28syaURmI",
+      "name": "KIDNAPER",
+      "items": [
+        {
+          "_id": "EhFJtWJEMaqC1YZZ",
+          "name": "Paralizator",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/paralyzer.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.k1wDCDX3ytDGeVHL.Actor.Wf53EIDOGbqhl6h0",
+      "name": "BIODROID",
+      "items": [
+        {
+          "_id": "rXZT9cG0w4LFO9HA",
+          "name": "Żądło",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zadlo.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.yGmIFaAZ0qnTB1gR.Actor.bnbnPGBq7QPt9KRh",
+      "name": "PAJĄK",
+      "items": [
+        {
+          "_id": "7xr267nteTKqqmqR",
+          "name": "Pazury",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        },
+        {
+          "_id": "Wjz7aRAw5b2UjnZL",
+          "name": "Zęby",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zeby.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.8ZMWV3UEMwxTNT03.Actor.1vpt0f4JRB6nov9d",
+      "name": "GENERACJA III. GRUBAS",
+      "items": [
+        {
+          "_id": "B4yynmnwiY0qx4xK",
+          "name": "Ukłucie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zadlo.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.D6luA0XyzWcLHhmC.Actor.CmseQba9Q7gjPWom",
+      "name": "GENERACJA I. NOCNY GHUL",
+      "items": [
+        {
+          "_id": "tptGGrPcwzF2BVS1",
+          "name": "Ugryzienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.muQDkZaICk0W8GTL.Actor.0gWeShZIv4KOO88F",
+      "name": "KORZEC",
+      "items": [
+        {
+          "_id": "i3J1lyrgFOe6ST0N",
+          "name": "Pięść",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.CflSFAUo5JbqEl56.Actor.TotmQd6oDLLeM6B2",
+      "name": "BIT-BOY PRZEWODNIK",
+      "items": [
+        {
+          "_id": "rmC43m2TI6dxij37",
+          "name": "Pazury",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.9FGaowPZraqC21xm.Actor.BrVnUbF9JjDHb3Hw",
+      "name": "HARPIE (AKA WAMPIRY)",
+      "items": [
+        {
+          "_id": "UsMUEKocLfNZkoa3",
+          "name": "Pazury",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.KI6o941mmkpaYEjt.Actor.LP16Iu6aaNkn0Azd",
+      "name": "PIES MUTEK",
+      "items": [
+        {
+          "_id": "a1MWh436RGKYLFdA",
+          "name": "Ugryzienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.fX3SGV7V4bapy7Ro.Actor.c6NxSwv3O3TcepJE",
+      "name": "BIT-BOYS (aka CROATS)",
+      "items": [
+        {
+          "_id": "MNuWLvafFgwvSJPB",
+          "name": "Pazury",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        },
+        {
+          "_id": "RQBMRzbIvWJ5jH5I",
+          "name": "Ugryzienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.NrIZkY7SEkclyOJI.Actor.PSusLvUnP6AH5UUO",
+      "name": "TECHMORWA (ŚREDNIA)",
+      "items": [
+        {
+          "_id": "BM0oQtsHgG2wgv5x",
+          "name": "Macka",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/macka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.IDj8DCpX4zvtqqtP.Actor.hkab5SivPPEoyPHv",
+      "name": "TECHMORWA (MALUTKA)",
+      "items": [
+        {
+          "_id": "dgMVc5ttT6ReR7Mm",
+          "name": "Macka",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/macka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.3gbaIvSg6AdDNxi4.Actor.td44oP8eYRTO8SeW",
+      "name": "NEONIEDŹWIEDŹ",
+      "items": [
+        {
+          "_id": "AZZaRatdaKTou3W9",
+          "name": "Ugryzienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.Oj00EJN9G1Xc6gLA.Actor.YGIOkeUGVe4EImDp",
+      "name": "KITCHIN",
+      "items": [
+        {
+          "_id": "pIpdV8ZFTvNPMnHB",
+          "name": "Żądło",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zadlo.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.QXagB2aEBr9FilQx.Actor.ZpNjrKMNRmVwAZTs",
+      "name": "KOŃ (SKAŻONY)",
+      "items": [
+        {
+          "_id": "N1ycx0XcMLt1GHS2",
+          "name": "Odnóże",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/odnoze_gigantyczny_pajak.svg"
+        },
+        {
+          "_id": "UPRMaGw0119bLE8v",
+          "name": "Ugryzienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.9BwVgMEueHIDuCxe.Actor.BJxZozEHq05Xqphv",
+      "name": "PIES BOJOWY",
+      "items": [
+        {
+          "_id": "CCjjQClpwFjavrLR",
+          "name": "Ugryzienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.s9lHqhJp4uShN0H0.Actor.C2RWal7yuSyM8zR3",
+      "name": "MROKOSZCZUR",
+      "items": [
+        {
+          "_id": "TJUNQg7iFqPiSnut",
+          "name": "Ugryzienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.XjJyIsFkKmsNXiIr.Actor.50qspF0fBTnthKjN",
+      "name": "NEOKOT",
+      "items": [
+        {
+          "_id": "NW8E1DesjCCoswXI",
+          "name": "Pazury",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg"
+        }
+      ]
+    }
+  ]
+}
