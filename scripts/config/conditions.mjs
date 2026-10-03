@@ -266,7 +266,12 @@ export const NEUROSHIMA_MARKERS = Object.freeze({
   dodging: {
     name: "Unikanie",
     img: `${SVG}/dodging.svg`,
-    description: "<p>Akcja Unikanie — widziani przeciwnicy mają Utrudnienie do Testów Ataku przeciwko tobie.</p>"
+    description: "<p>Akcja Unikanie — widziani przeciwnicy mają Utrudnienie do Testów Ataku przeciwko tobie.</p>",
+    // RAW (s. 30): do początku twojej następnej tury. Tury, nie rundy, a `start.combatant`
+    // przestawia `actors/tt.mjs` na właściciela — rdzeń wygasza `turnStart` na początku tury
+    // tego, kto był na ruchu przy tworzeniu. Kasowanie wygasłego też tam (DEV_GUIDE §10e.2).
+    // Szachista: Roszada czyta ten stan (`config/tt-rules.mjs`).
+    duration: { value: 1, units: "turns", expiry: "turnStart" }
   },
   hiding: {
     name: "Ukrywanie się",

@@ -328,37 +328,31 @@ export function registerSztuczkiCombatTests(quench) {
         expect(cfg.rolls[0].parts).to.be.empty;
       });
 
-      it("TT +1 pojawia się i znika razem z bronią w ręku", async function () {
-        await waitFor(() => sam.effects.some(e => e.getFlag(MODULE_ID, "samurajEffect")),
-          { label: "efekt TT +1" });
-        const withWeapon = sam.system.attributes.ac.bonus;
+      // Zasłona liczy silnik TT (PLAN_tt E1, P2) — bez Efektu Aktywnego i bez zapisu do bazy.
+      const zaslona = () => sam.system.attributes.ac.neuroshima?.bonuses.some(b => b.id === "zaslona");
 
-        const slashing = sam.items.filter(i => samuraj.isSlashingWeapon(i) && i.system.equipped);
-        await sam.updateEmbeddedDocuments("Item",
-          slashing.map(i => ({ _id: i.id, "system.equipped": false })), { render: false });
-        await waitFor(() => !sam.effects.some(e => e.getFlag(MODULE_ID, "samurajEffect")),
-          { label: "zdjęcie efektu" });
-        expect(sam.system.attributes.ac.bonus).to.equal(withWeapon - 1);
+      it("Zasłona: TT +1 z silnika, gdy finezyjna broń tnąca w ręku — bez Efektu Aktywnego", async function () {
+        await waitFor(zaslona, { label: "Zasłona w TT" });
+        expect(sam.effects.some(e => e.getFlag(MODULE_ID, "samurajEffect")), "stary efekt").to.be.false;
+        const withWeapon = sam.system.attributes.ac.value;
 
-        await sam.updateEmbeddedDocuments("Item",
-          slashing.map(i => ({ _id: i.id, "system.equipped": true })), { render: false });
-        await waitFor(() => sam.effects.some(e => e.getFlag(MODULE_ID, "samurajEffect")),
-          { label: "powrót efektu" });
-        expect(sam.system.attributes.ac.bonus).to.equal(withWeapon);
+        await place(sam, sam.items.get(katana.id), "pack", { quiet: true });
+        await waitFor(() => !zaslona(), { label: "Zasłona gaśnie" });
+        expect(sam.system.attributes.ac.value).to.equal(withWeapon - 1);
+        expect(sam.system.attributes.ac.neuroshima.rejected.find(r => r.id === "zaslona")?.reason)
+          .to.equal("nie dzierżysz finezyjnej broni białej tnącej");
+
+        await place(sam, sam.items.get(katana.id), "hand.0", { quiet: true });
+        await waitFor(zaslona, { label: "Zasłona wraca" });
+        expect(sam.system.attributes.ac.value).to.equal(withWeapon);
       });
 
-      it("sam niefinezyjny topór w ręku nie daje TT +1", async function () {
-        const finezyjne = sam.items.filter(i => samuraj.isZaslonaWeapon(i));
-        await sam.updateEmbeddedDocuments("Item",
-          finezyjne.map(i => ({ _id: i.id, "system.equipped": false })), { render: false });
-        await waitFor(() => !sam.effects.some(e => e.getFlag(MODULE_ID, "samurajEffect")),
-          { label: "zdjęcie efektu przy samym toporze" });
+      it("sam niefinezyjny topór w ręku nie daje Zasłony", async function () {
+        await place(sam, sam.items.get(katana.id), "pack", { quiet: true });
+        await waitFor(() => !zaslona(), { label: "Zasłona gaśnie przy samym toporze" });
         expect(sam.items.get(topor.id).system.equipped, "topór nadal w ręku").to.be.true;
-
-        await sam.updateEmbeddedDocuments("Item",
-          finezyjne.map(i => ({ _id: i.id, "system.equipped": true })), { render: false });
-        await waitFor(() => sam.effects.some(e => e.getFlag(MODULE_ID, "samurajEffect")),
-          { label: "powrót efektu" });
+        await place(sam, sam.items.get(katana.id), "hand.0", { quiet: true });
+        await waitFor(zaslona, { label: "Zasłona wraca" });
       });
 
       it("rejestr automatyki mówi `partial`: Dobycie jest tylko nazwane, Darmowych Interakcji nikt nie liczy", function () {

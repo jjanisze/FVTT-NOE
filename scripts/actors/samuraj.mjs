@@ -5,10 +5,14 @@
  * zadającą obrażenia cięte; Dobycie — finezyjna broń biała (cięte) bez darmowej interakcji;
  * Zasłona — TT +1, gdy dzierżysz finezyjną broń białą zadającą obrażenia cięte.
  *
- * Trzy z czterech klauzul mają tu kod:
- *   • +1 do Testu Ataku      — `dnd5e.preRollAttack`
- *   • +1 do obrażeń          — `dnd5e.preRollDamage`
- *   • TT +1 (czyli KP +1)    — Active Effect, dopinany zależnie od trzymanej broni
+ * Trzy z czterech klauzul mają kod:
+ *   • +1 do Testu Ataku      — `dnd5e.preRollAttack` (tutaj)
+ *   • +1 do obrażeń          — `dnd5e.preRollDamage` (tutaj)
+ *   • Zasłona, TT +1         — silnik TT (`config/tt-rules.mjs`, wiersz `zaslona`) czyta
+ *                              `isZaslonaWeapon()` z broni w rękach lalki. Do 2026-10 był to
+ *                              Efekt Aktywny `neuroSamurajTT00` synchronizowany przy każdej
+ *                              zmianie broni — zapis do bazy za każdym razem; sprząta go
+ *                              `cleanupLegacyTTEffects()` (`actors/tt.mjs`, PLAN_tt P2).
  *
  * Czwarta (Dobycie) nie ma czego zaczepić: ten system nie
  * śledzi darmowych interakcji jako zasobu. Zadeklarowana w `manual`, nie udawana.
@@ -24,21 +28,11 @@
  * ⚠️ `damage.parts[].types` to **Set**, nie tablica (`Object.values`/`JSON` na tym milcząco
  * zwracają `{}` — ta sama klasa pułapki co `system.activities` opisana w ARCHITECTURE.md §10).
  * Stąd `_types()` poniżej zamiast czytania wprost.
- *
- * ## Dlaczego AE, a nie stały bonus
- *
- * TT +1 przysługuje tylko z finezyjną bronią białą w ręku, więc efekt musi się pojawiać i znikać razem
- * z założeniem/zdjęciem broni. Kształt (debounce + serializacja per aktor + backfill na
- * `ready`) skopiowany z `bez-dna.mjs`, który rozwiązuje dokładnie ten sam problem dla Udźwigu.
  */
 
 import { ABILITY_KEYS, hasAbility } from "./abilities.mjs";
-import { isDocumentLive } from "../doc-liveness.mjs";
-import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
-const EFFECT_ID = "neuroSamurajTT00";
-const EFFECT_FLAG = "samurajEffect";
 const BONUS = 1;
 
 /* -------------------------------------------- */
@@ -70,70 +64,8 @@ export function isZaslonaWeapon(item) {
     && (item.system?.properties?.has?.("fin") ?? false);
 }
 
-/** Broń do Zasłony aktualnie trzymana w ręku (założona). */
-function equippedZaslona(actor) {
-  return actor?.items?.find(i => i.system?.equipped && isZaslonaWeapon(i)) ?? null;
-}
-
 function _hasSamuraj(actor) {
   return hasAbility(actor, ABILITY_KEYS.SAMURAJ);
-}
-
-/* -------------------------------------------- */
-/*  Klauzula: TT +1 (Active Effect)               */
-/* -------------------------------------------- */
-
-async function _syncSamurajEffect(actor) {
-  if (!actor?.effects) return;
-  /* Debounce sprawia, że ten sync budzi się po haku, który go zamówił — czasem już po
-     skasowaniu aktora. Patrz `scripts/doc-liveness.mjs`. */
-  if (!isDocumentLive(actor)) return;
-  const existing = actor.effects.get(EFFECT_ID) ?? actor.effects.find(e => e.getFlag(MODULE_ID, EFFECT_FLAG));
-  const weapon = _hasSamuraj(actor) ? equippedZaslona(actor) : null;
-
-  if (!weapon) {
-    if (existing) await existing.delete();
-    return;
-  }
-  if (existing) return; // stan binarny — nie ma czego aktualizować
-
-  try {
-    await actor.createEmbeddedDocuments("ActiveEffect", [{
-      _id: EFFECT_ID,
-      name: "Samuraj — TT +1",
-      img: "icons/svg/sword.svg",
-      system: {
-        changes: [change("system.attributes.ac.bonus", CHANGE_TYPE.add, BONUS)]
-      },
-      flags: { [MODULE_ID]: { [EFFECT_FLAG]: true } }
-    }], { keepId: true });
-  } catch (err) {
-    // Równoległy resync zdążył pierwszy — z tego miejsca to nie jest błąd.
-    if (actor.effects.get(EFFECT_ID)) return;
-    throw err;
-  }
-}
-
-/* Debounce + serializacja per aktor — patrz `bez-dna.mjs`, ten sam kształt. */
-const _syncChain = new Map();
-const _syncTimer = new Map();
-
-function queueSamurajSync(actor) {
-  if (!actor?.id) return;
-  const prev = _syncChain.get(actor.id) ?? Promise.resolve();
-  const next = prev.catch(() => {}).then(() => _syncSamurajEffect(actor));
-  _syncChain.set(actor.id, next);
-  next.finally(() => { if (_syncChain.get(actor.id) === next) _syncChain.delete(actor.id); });
-  return next;
-}
-
-function syncSamurajEffect(actor) {
-  if (!actor?.id) return;
-  clearTimeout(_syncTimer.get(actor.id));
-  _syncTimer.set(actor.id, setTimeout(() => {
-    _syncTimer.delete(actor.id);
-    queueSamurajSync(actor);
-  }, 150));
 }
 
 /* -------------------------------------------- */
@@ -177,28 +109,10 @@ function onPreRollDamage(config, _dialog, _message) {
 export function registerSamuraj() {
   Hooks.on("dnd5e.preRollAttack", onPreRollAttack);
   Hooks.on("dnd5e.preRollDamage", onPreRollDamage);
-
-  const resync = doc => {
-    const actor = doc instanceof Actor ? doc : doc?.parent;
-    if (actor instanceof Actor) syncSamurajEffect(actor);
-  };
-  Hooks.on("createItem", resync);
-  Hooks.on("deleteItem", resync);
-  // W przeciwieństwie do „Bez dna" liczy się też samo założenie/zdjęcie broni.
-  Hooks.on("updateItem", (doc, changed) => {
-    if (foundry.utils.hasProperty(changed, "system.equipped")) resync(doc);
-  });
-
-  Hooks.once("ready", () => {
-    if (!game.user.isGM) return;
-    for (const actor of game.actors) syncSamurajEffect(actor);
-  });
-
   console.log(`${MODULE_ID} | Samuraj registered`);
 }
 
 /** Powierzchnia dla testów Quench — Warstwa 4/5 (TESTING.md). */
 export const __testing = Object.freeze({
-  isSlashingWeapon, isZaslonaWeapon, equippedZaslona, onPreRollAttack, onPreRollDamage,
-  syncSamurajEffect: _syncSamurajEffect, EFFECT_ID, BONUS
+  isSlashingWeapon, isZaslonaWeapon, onPreRollAttack, onPreRollDamage, BONUS
 });

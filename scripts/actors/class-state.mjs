@@ -19,6 +19,7 @@
 import { CLASS_FEATURES } from "../config/class-features-data.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
 import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
+import { ttSource } from "./tt.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -77,10 +78,10 @@ const STATE_CONFIG = {
     scrollText: { text: "BERSERK!", color: "#c0392b" },
     endText: { text: "Koniec Berserku", color: "#7f8c8d" },
     changes: [
-      // Obłęd Berserkera — +mod SIŁ to TT while unarmoured. dnd5e evaluates this
-      // against the actor's roll data; the armour condition is enforced in
-      // `_berserkAcBonus` below, which zeroes it out when armour is worn.
-      change("system.attributes.ac.bonus", CHANGE_TYPE.add, 0),
+      // Obłęd Berserkera (TT + mod. SIŁ bez pancerza, hełmu i tarczy) NIE jest tu zmianą:
+      // liczy go silnik TT z samego stanu Berserka (`config/tt-rules.mjs`, PLAN_tt E1), więc
+      // pancerz założony w trakcie gasi premię, a zdjęty ją włącza. Stare efekty z `ac.bonus`
+      // sprząta `cleanupLegacyTTEffects()` w `actors/tt.mjs`.
       // Obrażenia Berserkera — extra damage die on Strength-based attacks (weapon
       // or unarmed), scaling with Brutal level. Same dnd5e bonus path (`mwak`)
       // stock Rage uses, and the same scope limitation: melee only, not thrown.
@@ -96,10 +97,7 @@ const STATE_CONFIG = {
       title: "🩸 BERSERK",
       detail: actor => {
         const die = actor?.getRollData?.()?.scale?.brutal?.obrazeniaBerserkera ?? "?";
-        const acBonus = _berserkAcBonus(actor);
-        const acNote = acBonus > 0
-          ? `TT +${acBonus} (bez pancerza, hełmu i tarczy).`
-          : `TT +0 — nosisz pancerz, hełm lub tarczę, nieaktywne.`;
+        const acNote = _obledNote(actor);
         return {
           lead: `${actor?.name ?? "Postać"} wpada w szał.`,
           items: [
@@ -206,12 +204,6 @@ export async function toggleClassState(actor, abilityId, { spendUse = true } = {
   const cfg = STATE_CONFIG[effectId] ?? { label: feature.label, changes: [] };
   const changes = foundry.utils.deepClone(cfg.changes ?? []);
 
-  if (effectId === "neuro-berserk") {
-    const bonus = _berserkAcBonus(actor);
-    const acChange = changes.find(c => c.key === "system.attributes.ac.bonus");
-    if (acChange) acChange.value = bonus;
-  }
-
   const duration = {};
   if (toggle.duration?.rounds) {
     duration.rounds = toggle.duration.rounds;
@@ -252,16 +244,17 @@ function _findAbilityItem(actor, abilityId) {
 }
 
 /**
- * Obłęd Berserkera: TT += mod SIŁ, but only with no armour, helmet or shield.
- * Returns 0 when armoured so the effect is inert rather than absent — keeping the
- * change present means re-equipping does not require re-applying the effect.
+ * Obłęd Berserkera na karcie „on”: stan z silnika TT, policzony już z nowym efektem Berserka
+ * (karta powstaje po jego utworzeniu). Postać z TT ustawioną ręcznie — premię dolicza MG.
  */
-function _berserkAcBonus(actor) {
-  const wearing = actor.items.some(i =>
-    (i.type === "equipment")
-    && i.system.equipped
-    && ["light", "medium", "heavy", "shield"].includes(i.system.type?.value));
-  return wearing ? 0 : (actor.system.abilities?.str?.mod ?? 0);
+function _obledNote(actor) {
+  const src = ttSource(actor, "obled");
+  if (!src) return "TT + mod. SIŁ bez pancerza, hełmu i tarczy.";
+  const value = `TT +${src.value}`;
+  if (src.manual) return `${value} bez pancerza, hełmu i tarczy — TT tej postaci jest ustawiona ręcznie, dolicz sam.`;
+  return src.active
+    ? `${value} (bez pancerza, hełmu i tarczy; liczy się, dopóki nic z tego nie założysz).`
+    : `${value} — teraz nie działa: ${src.reason}.`;
 }
 
 /* -------------------------------------------- */

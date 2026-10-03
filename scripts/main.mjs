@@ -62,6 +62,7 @@ import { registerFuksPips } from "./actors/fuks-pips.mjs";
 import { registerWeapons } from "./config/weapons.mjs";
 import { registerArmor } from "./config/armor.mjs";
 import { registerArmorRules, report as armorReport } from "./actors/armor-rules.mjs";
+import { registerTT, ttApi } from "./actors/tt.mjs";
 import { registerZranienie } from "./combat/zranienie.mjs";
 import { registerCritRiders } from "./combat/crit-riders.mjs";
 import { registerPackTactics } from "./combat/pack-tactics.mjs";
@@ -282,6 +283,8 @@ Hooks.once("init", () => {
   registerWeapons();
   registerArmor();
   registerArmorRules();
+  // Po pancerzach: owinięcie danych pochodnych TT widzi już ich karę Szybkości (Roszada, P4).
+  registerTT();
   registerValidation();
 
   // Phase 1: Combat systems
@@ -441,6 +444,9 @@ Hooks.once("ready", () => {
   // Pancerze — game.neuroshima.pancerze.report() wypisuje, co moduł liczy sam,
   // a co zostaje po stronie MG.
   game.neuroshima.pancerze = { report: armorReport };
+
+  // Trudność Trafienia wg NOE (PLAN_tt) — game.neuroshima.tt.compute(actor), .source(actor, "obled")
+  game.neuroshima.tt = ttApi;
 
   // Choroby / Fobie / lekarstwa — game.neuroshima.health.sunset() etc.
   game.neuroshima.health = { ...healthApi, syncEffects: syncDiseaseEffects, bleeding: bleedingApi };
