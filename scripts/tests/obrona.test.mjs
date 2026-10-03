@@ -385,6 +385,14 @@ export function registerObronaTests(quench) {
         expect(getZranienieLvl(actor)).to.equal(0);
       });
 
+      it("krytyk, który nie zadał obrażeń (próg, niewrażliwość), nie rani — interpretacja MG", async function () {
+        const actor = await wounded("krytyk bez obrażeń");
+        await actor.applyDamage([{ value: 3, type: "slashing" }], { isCritical: true, multiplier: 0 });
+        await new Promise(r => setTimeout(r, 400));
+        expect(actor.system.attributes.hp.value, "bez obrażeń").to.equal(10);
+        expect(getZranienieLvl(actor)).to.equal(0);
+      });
+
       it("krytyk, który zbija PW do 0, daje jeden Stopień, nie dwa (s. 32: „albo”)", async function () {
         const actor = await wounded("krytyk do zera", 4);
         await actor.applyDamage([{ value: 10, type: "slashing" }], { isCritical: true });

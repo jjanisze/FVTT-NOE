@@ -175,7 +175,9 @@ async function onUpdateActorZranienie(actor, changes, options, userId) {
  *
  * Raz na trafienie: ponowne „Zastosuj” tej samej karty temu samemu celowi nie dokłada Stopnia,
  * a krytyk, który przy okazji zbił PW do 0, daje jeden Stopień, nie dwa („albo”, s. 32).
- * Obrażenia zredukowane do 0 (próg, niewrażliwość) nadal ranią: RAW wiąże Stopień z krytykiem.
+ * Krytyk, który nie zadał obrażeń (próg obrażeń, niewrażliwość, mnożnik 0), **nie rani** — „nie ma
+ * czego zranić”. Interpretacja MG (2026-10-04), czeka na potwierdzenie autora systemu; RAW wiąże
+ * Stopień z samym krytykiem (PLAN_tt W6).
  *
  * Hook: `dnd5e.applyDamage(actor, amount, options)` — po aktualizacji PW, na kliencie nakładającym.
  */
@@ -183,7 +185,7 @@ async function onApplyDamage(actor, amount, options = {}) {
   if (!game.user.isGM) return;
   // Znacznik „PW właśnie 0” zdejmujemy przy każdym nałożeniu — dotyczy tylko tego ciosu.
   const droppedToZero = _droppedToZeroJustNow(actor);
-  if (!(amount >= 0) || _isHealing(options)) return;
+  if (!(amount > 0) || _isHealing(options)) return;
   if (!isCriticalHitOn(actor, options)) return;
 
   const message = options.origin ?? options.originatingMessage ?? null;

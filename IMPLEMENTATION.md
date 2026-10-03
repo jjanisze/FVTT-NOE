@@ -1157,7 +1157,8 @@ Cały plan [PLAN_tt.md](PLAN_tt.md), etapy E0–E6. Paczki (`bestiariusz`, `zdol
   `dnd5e.rollDamage` w sygnaturze, której żadna wersja dnd5e nie miała). Nadawany przy **nakładaniu**
   obrażeń tacką MG, z krytykiem z żywego werdyktu karty ataku (`isCriticalHitOn`, `combat/trafienie.mjs`):
   Krytyczna ochrona użyta po rzucie obrażeń go gasi; ponowne „Zastosuj” nie dokłada drugiego Stopnia;
-  krytyk, który zbija PW do 0, daje jeden Stopień (s. 32: „albo”). Ten sam odczyt krytyka mają teraz
+  krytyk, który zbija PW do 0, daje jeden Stopień (s. 32: „albo”); krytyk, który nie zadał obrażeń, nie
+  rani (interpretacja MG 2026-10-04, czeka na potwierdzenie autora — PLAN_tt D15). Ten sam odczyt krytyka mają teraz
   wytrzymałość pancerza i Próg awarii Bestiariusza — ten drugi czytał nieistniejące `roll.critical`.
 - Rejestry: zdolności klasowe 28/133 (10 pełnych), Sztuczki 17/53 (5 pełnych). Dokumentacja graczy:
   [docs/TT-i-reakcje.md](docs/TT-i-reakcje.md); ARCHITECTURE §14.

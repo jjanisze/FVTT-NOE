@@ -93,6 +93,8 @@ Kategoria wg `scripts/wkk/README.md`: **NOE** = dosłowna lektura, **RAI** = zam
 | D12a | Co zostaje po hełmie? | Z Kobaltem: **„Dziurawy hełm”** — śmieć za 2 gb w plecaku. Bez Kobaltu: hełm usunięty (RAW). | WKK |
 | D13 | Reakcje BN-celów | Reakcje TT z Bestiariusza automatycznie (Gladiator: Parowanie +3); każda inna cecha BN z Reakcją — przypomnienie dla MG bez automatyki; skrypt dry-run proponuje oznaczenie cech ręcznych BN (Pustak: Ofiara). | NOE |
 | D14 | Klasyfikacja D1/D2 | RAI — jeden wiersz w tabeli RAI `scripts/wkk/README.md`. | — |
+| D15 | Krytyk, który nie zadał obrażeń (próg obrażeń, niewrażliwość, mnożnik 0) — Stopień Zranienia? (2026-10-04) | **Nie** — „jeśli nie zadano obrażeń, nie ma czego zranić”. Interpretacja MG, **czeka na potwierdzenie autora systemu**; RAW wiąże Stopień z samym krytykiem (s. 32). | do potwierdzenia |
+| D16 | `oznaczReakcjeBN` — kogo oznaczyć? (2026-10-04) | Tylko Pustaka („Ofiara” — Reakcja na atak na niego). Wilhelm Yarborough („Zasłona Własnym Ciałem”) — nie: jego Reakcja dotyczy sojusznika obok, a przypomnienie w oknie pojawia się, gdy celem jest on sam. | — |
 
 ### 2.2 Ustalone w projekcie (jedno sensowne wyjście, bez osobnego pytania)
 
@@ -508,7 +510,7 @@ Co okazało się inne niż w projekcie — decyzje MG bez zmian, poza D4.
 | W3 | Wykonawca reakcji (§4.8.5) | klient gracza zużywa ładunek i zakłada efekt, MG przelicza | wszystko wykonuje aktywny MG po sprawdzeniu prośby; gracz rzuca tylko swoje kości. Odrzucona prośba nie zostawia zużytego ładunku |
 | W4 | Przerzut Fuksem (§4.8.7) | MG przenosi `obrona` na kartę przerzutu | karta przerzutu Testu Ataku niesie powiązania dnd5e i `rerollOf`, a werdykt stempluje autor przy tworzeniu (pierwszy zapis autora — reguła jednego pisarza zachowana) |
 | W5 | Właściwości naboju w obrażeniach | — | filtr `isPhysical` budowniczego serii wycinał `rozrywajaca` / `hollowpoint` / `ppanc`; teraz przechodzą do tacki MG. Hollow-point pod osłoną widzi właściwości naboju i przeżywa okno obrażeń |
-| W6 | Stopień Zranienia z krytyka (P9) | czyta krytyk z rzutu obrażeń | nie działał nigdy (`combat/zranienie.mjs` słuchał `dnd5e.rollDamage` w sygnaturze, której żadna wersja dnd5e nie miała). **Naprawione** na prośbę MG: Stopień przy **nakładaniu** obrażeń tacką (`dnd5e.applyDamage`), krytyk z żywego werdyktu karty ataku (`isCriticalHitOn`) — Krytyczna ochrona po rzucie obrażeń wygrywa; raz na kartę i cel; krytyk zbijający PW do 0 daje jeden Stopień („albo”, s. 32). Ten sam odczyt: wytrzymałość pancerza, Próg awarii Bestiariusza (ten czytał nieistniejące `roll.critical`) |
+| W6 | Stopień Zranienia z krytyka (P9) | czyta krytyk z rzutu obrażeń | nie działał nigdy (`combat/zranienie.mjs` słuchał `dnd5e.rollDamage` w sygnaturze, której żadna wersja dnd5e nie miała). **Naprawione** na prośbę MG: Stopień przy **nakładaniu** obrażeń tacką (`dnd5e.applyDamage`), krytyk z żywego werdyktu karty ataku (`isCriticalHitOn`) — Krytyczna ochrona po rzucie obrażeń wygrywa; raz na kartę i cel; krytyk zbijający PW do 0 daje jeden Stopień („albo”, s. 32); krytyk bez obrażeń nie rani (D15). Ten sam odczyt: wytrzymałość pancerza, Próg awarii Bestiariusza (ten czytał nieistniejące `roll.critical`) |
 | W7 | Reakcja BN „Ofiara” (D13) | Pustak | w Bestiariuszu to Gangus Kapo (cecha z sekcji Zdolności → `reaction: true` w generatorze); Pustak i Wilhelm Yarborough to ręczni BN-i świata — `oznaczReakcjeBN()` |
 | W8 | Etykieta metody 10 + ZRC | „Bez pancerza” | „TT podstawowa” — po D4 postać w samych ochraniaczach ma ją jako metodę, a „bez pancerza” by kłamało |
 

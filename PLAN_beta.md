@@ -131,7 +131,8 @@ kliknięciem w piki.
 - [x] **Stopień Zranienia z Trafienia Krytycznego** (s. 32) — 2026-10-03: nie działał nigdy
   (`combat/zranienie.mjs` słuchał `dnd5e.rollDamage` w sygnaturze, której żadna wersja dnd5e nie miała).
   Teraz nadawany przy nakładaniu obrażeń tacką MG (`dnd5e.applyDamage`), krytyk z żywego werdyktu
-  karty ataku; raz na kartę i cel; krytyk zbijający PW do 0 — jeden Stopień. PLAN_tt W6
+  karty ataku; raz na kartę i cel; krytyk zbijający PW do 0 — jeden Stopień; krytyk bez obrażeń —
+  bez Stopnia (interpretacja MG, czeka na autora). PLAN_tt W6, D15
 - [ ] **Zagrożenia bez wyzwalacza** (źródła Wyczerpania istnieją, nic ich nie nakłada):
   Sen (s. 45 — doba bez snu → RO KON ST 20), Uduszenie (s. 259 — 1 + mod. KON minut, potem
   Wyczerpanie co turę, zdejmowane po złapaniu oddechu), Przemarznięcie (s. 258 — RO KON ST 5 + 1/°C

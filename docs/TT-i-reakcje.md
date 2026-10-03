@@ -45,7 +45,8 @@ furtka MG — wtedy moduł niczego nie liczy, a dymek mówi „TT ustawiona ręc
 4. **MG nakłada obrażenia** tacką pod kartą obrażeń (redukcja osłony, mnożnik ½ za Odskok czy
    „Tylko draśnięcie”). Nic nie zdejmuje PW samo z siebie. Przy nakładaniu obrażeń z **Trafienia
    Krytycznego** cel dostaje Stopień Zranienia (s. 32) — raz na trafienie, także gdy ten sam cios zbił
-   PW do 0; krytyk zamieniony Krytyczną ochroną nie rani.
+   PW do 0; krytyk zamieniony Krytyczną ochroną nie rani, a krytyk, który nie zadał obrażeń (próg,
+   niewrażliwość), też nie — tak rozstrzyga MG, do potwierdzenia przez autora systemu.
 
 ## Reakcje celu
 
