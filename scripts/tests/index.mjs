@@ -19,6 +19,8 @@
 import { registerSztuczkiDataTests } from "./sztuczki-data.test.mjs";
 import { registerSztuczkiBridgeTests } from "./sztuczki-bridge.test.mjs";
 import { registerSztuczkiCombatTests } from "./sztuczki-combat.test.mjs";
+import { registerZdolnosciDataTests } from "./zdolnosci-dane.test.mjs";
+import { registerPrzebicieTests } from "./przebicie.test.mjs";
 import { registerConfigTests } from "./config.test.mjs";
 import { registerEquipmentDataTests } from "./ekwipunek-dane.test.mjs";
 import { registerDiseaseTests } from "./choroby.test.mjs";
@@ -54,6 +56,8 @@ export function registerQuenchTests() {
     registerSztuczkiDataTests(quench);
     registerSztuczkiBridgeTests(quench);
     registerSztuczkiCombatTests(quench);
+    registerZdolnosciDataTests(quench);
+    registerPrzebicieTests(quench);
     console.log("Neuroshima 5e | Quench batches registered");
   });
 }

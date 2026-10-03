@@ -37,8 +37,9 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. Still that future pass,
 still not this queue — but it is two items, not a pile.
 
-**Next batch number: 42** (last used: `process_grid_41.py`, 2026-10-03 — bump this
-whenever a new batch actually gets processed).
+**Next batch number: 45** (batches 43–44 were generated as 3×3 atlases on
+2026-10-03 and are awaiting GM review; bump this whenever another batch is
+actually generated).
 
 *Batch 40 (2026-09-25): Kamizelka taktyczna, .44 Mag dum-dum, Mięso suszone, Chleb, Owoce
 i warzywa, MRE, Breneka, Zużyty LAW, Magazynek bębnowy — processed and wired; LAW and the drum
@@ -46,28 +47,50 @@ are stored for items that do not exist yet. IMPLEMENTATION.md, 2026-09-25.*
 
 *Batch 41 (2026-10-03): all 9 queued sheet icons generated, normalized and wired. PNG + theme-aware SVG in `icons/items/loot/`; exact prompt in `batch_41_prompt.md`, pipeline `process_grid_41.py`, live updates and validation in IMPLEMENTATION.md. The active queue below is batch 42.*
 
-*Production targets without art, for the batch after (all fall back to `icons/svg/lightning.svg`,
-`pill.svg` or `item-bag.svg`, see `production/wynik.mjs` `IKONA_KATEGORII`): Agregat, Akumulator,
-Alternator, Defibrylator, Detektor ruchu, Komputer osobisty/gamingowy, Laptop, Kontroler zdalnego
-sterowania, Miernik skażenia chemicznego, Odtwarzacz CD, Turbina wiatrowa/wodna, Wykrywacz metalu,
-Wytrychy elektroniczne, Kompas, Palnik acetylenowo-tlenowy, Środek usypiający, Środki dezynfekujące,
-Trucizna, Paralotnia, Adapter wifi, Monitorek, Router, Zegarek. Once an icon exists, add it to
-`RAW_IKONY` in `production/wynik.mjs`.*
+*Batch 41 review correction (2026-10-03, approved and installed): the small
+`schemat_notatka` now uses the single circuit note and medium
+`schemat_instrukcja` uses the flat service manual. Both replace the rejected
+oversized-cog designs at their existing PNG/SVG paths. Decisions remain in
+`dev/icons/review/feedback.json`; candidates and prompts remain archived under
+`dev/icons/review/candidates/batch-41/`.*
+
+*Production targets still without generated art after batches 43–44: Turbina
+wiatrowa/wodna and Zegarek. The eighteen Batch 43–44 targets below remain in
+this queue until GM approval and integration. Once an icon is approved, add it
+to `RAW_IKONY` in `production/wynik.mjs` and create its reusable prototype.*
 
 *(The conditional "IED radiowy" sheet icon is dropped: the GM chose "decide at placement"
 (2026-09-25), so a radio IED only exists on the map — class B row 5 covers it.)*
 
-## Queue (A) — batch 42 — 5/9
+## Completed (A) — batch 42 — approved and installed
 
-Batch 41 is complete. These five entries are the next grid; four slots remain.
+All nine icons are installed. Agregat, Akumulator, Alternator and Defibrylator
+also have reusable `sprzet` prototypes and no longer use the production
+fallback. Maczuga and Kamienny nóż use the approved simplified atlas revisions.
 
 | # | Item | Where | Current icon | Suggested prompt content |
 |---|------|-------|---------------|---------------------------|
-| 1 | Maczuga (WKK vendor trash, `wkk/config/weapons-data.mjs`, PLAN_paper_doll D36) → `icons/weapons/maczuga.svg` | dropped by Grubas, Kanibal at 0 PW (Kobalt on); pack `bron` | borrows `iron_pipe_club.svg` | Crude wooden club, thick knotted head, a few nails driven through it. Must not look like the baseball bat or the pipe |
-| 2 | Pałka policyjna (WKK, D36) → `icons/weapons/palka_policyjna.svg` | Konwojent | borrows `iron_pipe_club.svg` | Police side-handle baton (tonfa-style short grip near one end). Must read as "police", not as a pipe |
-| 3 | Kamienny nóż (WKK, D36) → `icons/weapons/kamienny_noz.svg` | Kanibal | borrows `combat_knife.svg` | Knapped flint blade lashed with cord to a short bone or wood handle — primitive, chipped edge |
-| 4 | Sztylet (WKK, D36) → `icons/weapons/sztylet.svg` | Myślący szczur | borrows `combat_knife.svg` | Narrow double-edged homemade dagger, simple crossguard, rag-wrapped grip. Thinner than the combat knife |
-| 5 | Młotek (WKK, D36) → `icons/weapons/mlotek.svg` | Żołnierz Posterunku | borrows `iron_pipe_club.svg` | Ordinary claw hammer, wooden handle |
+| 1 | Maczuga (WKK vendor trash, `wkk/config/weapons-data.mjs`, PLAN_paper_doll D36) → `icons/weapons/maczuga.svg` | dropped by Grubas, Kanibal at 0 PW (Kobalt on); pack `bron` | approved and installed | Crude wooden club, thick knotted head, a few nails driven through it. Must not look like the baseball bat or the pipe |
+| 2 | Pałka policyjna (WKK, D36) → `icons/weapons/palka_policyjna.svg` | Konwojent | approved and installed | Police side-handle baton (tonfa-style short grip near one end). Must read as "police", not as a pipe |
+| 3 | Kamienny nóż (WKK, D36) → `icons/weapons/kamienny_noz.svg` | Kanibal | approved and installed | Knapped flint blade lashed with cord to a short bone or wood handle — primitive, chipped edge |
+| 4 | Sztylet (WKK, D36) → `icons/weapons/sztylet.svg` | Myślący szczur | approved and installed | Narrow double-edged homemade dagger, simple crossguard, rag-wrapped grip. Thinner than the combat knife |
+| 5 | Młotek (WKK, D36) → `icons/weapons/mlotek.svg` | Żołnierz Posterunku | approved and installed | Ordinary claw hammer, wooden handle |
+| 6 | Agregat → `icons/items/loot/agregat.svg` | Serwisowanie recipe; `sprzet` prototype | approved and installed | Rugged portable gasoline generator: engine, fuel tank and tubular carry frame; no lightning symbol |
+| 7 | Akumulator → `icons/items/loot/akumulator.svg` | Serwisowanie recipe; drone power; `sprzet` prototype | approved and installed | Battered 24 V lead-acid vehicle battery with two terminals and carry handle |
+| 8 | Alternator → `icons/items/loot/alternator.svg` | Serwisowanie recipe; `sprzet` prototype | approved and installed | Automotive alternator with grooved belt pulley and vented housing; no detached cog symbol |
+| 9 | Defibrylator → `icons/items/loot/defibrylator.svg` | Serwisowanie recipe; `sprzet` prototype | approved and installed | Rugged portable defibrillator case with two clipped paddles and coiled leads; no cartoon heart/lightning shorthand |
+
+## Queue (A) — batches 43–44 — generated, awaiting GM review
+
+Both batches were generated as one 3×3 atlas each, then split and normalized.
+Their source atlases, prompts and PNG/SVG candidates are archived under
+`dev/icons/review/candidates/batch-43/` and `batch-44/`. No live items or
+compendium prototypes will be changed until the review decision is recorded.
+
+| Batch | Items |
+|---|---|
+| 43 | Detektor ruchu; Komputer osobisty; Komputer gamingowy; Laptop; Kontroler zdalnego sterowania; Miernik skażenia chemicznego; Odtwarzacz CD; Wykrywacz metalu; Wytrychy elektroniczne |
+| 44 | Kompas; Palnik acetylenowo-tlenowy; Środek usypiający; Środki dezynfekujące; Trucizna; Paralotnia; Adapter wifi; Monitorek; Router |
 
 ## How an item gets added here
 

@@ -19,9 +19,10 @@ import {
 import { AMMO_CALIBER_MAP } from "../config/ammo-data.mjs";
 import {
   consumeRounds, dominantCaliber, weaponIdOf, weaponMagwell, compatibleMagazines,
-  loadRounds, unloadAll, swapMagazineItem, inMagazineSystem, magazineRounds,
+  loadRounds, unloadAll, swapMagazineItem, inMagazineSystem, magazineRounds, loadSingleRound,
   __testing as model
 } from "../weapons/magazine-model.mjs";
+import { stWepchniecia, wynikWepchniecia } from "../wkk/config/pojedynczy-naboj.mjs";
 import { getMag, magazineReadiness } from "../weapons/magazine.mjs";
 import { __testing as pips } from "../actors/item-state-pips.mjs";
 import { buildWeaponItemData } from "../config/weapons-data.mjs";
@@ -823,6 +824,53 @@ export function registerMagazynkiTests(quench) {
           const manual = props.includes("przeladowanie") || props.includes("ladowanie");
           const burst = ["tryb_ks", "tryb_ds", "tryb_ms"].some(p => props.includes(p));
           expect(manual && burst, `${w.id}: ${props.join("+")}`).to.equal(false);
+        }
+      });
+    });
+
+    /* ================================================================== */
+    /*  WKK — nabój wepchnięty do wpiętego magazynka w walce               */
+    /* ================================================================== */
+
+    describe("WKK: nabój do wpiętego magazynka", function () {
+      it("ST wg kategorii kalibru, .50 BMG osobno; granatów i strzał nie wpycha się pojedynczo", function () {
+        expect(stWepchniecia(AMMO_CALIBER_MAP["9mm"])).to.equal(12);
+        expect(stWepchniecia(AMMO_CALIBER_MAP["12ga_s"])).to.equal(14);
+        expect(stWepchniecia(AMMO_CALIBER_MAP["556"])).to.equal(15);
+        expect(stWepchniecia(AMMO_CALIBER_MAP["50bmg"])).to.equal(18);
+        expect(stWepchniecia(AMMO_CALIBER_MAP["40mm"])).to.equal(null);
+        expect(stWepchniecia(AMMO_CALIBER_MAP.strzala), "strzał z kołczanu nie wpycha się do magazynka").to.equal(null);
+        expect(stWepchniecia(null)).to.equal(null);
+      });
+
+      it("każdy kaliber broni palnej z wymiennym magazynkiem ma ST", function () {
+        for (const w of WEAPONS.filter(x => x.mag?.kind === "mag" && x.type.startsWith("palna"))) {
+          const caliber = AMMO_CALIBER_MAP[w.caliber];
+          expect(stWepchniecia(caliber), `${w.id} (${w.caliber})`).to.be.a("number");
+        }
+      });
+
+      it("skutek: sukces, porażka na ziemię, pechowa jedynka zacina — chyba że broń się nie zacina", function () {
+        expect(wynikWepchniecia({ total: 15, fumble: false, st: 15, jamImmune: false })).to.equal("zaladowany");
+        expect(wynikWepchniecia({ total: 14, fumble: false, st: 15, jamImmune: false })).to.equal("upadl");
+        expect(wynikWepchniecia({ total: 25, fumble: true, st: 15, jamImmune: false })).to.equal("zaciecie");
+        expect(wynikWepchniecia({ total: 25, fumble: true, st: 15, jamImmune: true })).to.equal("upadl");
+      });
+
+      it("model: bez `intoMagazine` wpięty magazynek odmawia, z nim nabój trafia na koniec kolejki", async function () {
+        const created = await actor.createEmbeddedDocuments("Item", [
+          weaponData("ar"), magData("mag-ar", Array(10).fill("556"))
+        ], { render: false });
+        const ar = created.find(i => i.type === "weapon");
+        const magazine = created.find(i => i.type === "consumable");
+        try {
+          await swapMagazineItem(actor.items.get(ar.id), actor.items.get(magazine.id));
+          expect(await loadSingleRound(actor.items.get(ar.id), "556"), "RAW").to.equal(false);
+          expect(await loadSingleRound(actor.items.get(ar.id), "556", { intoMagazine: true })).to.equal(true);
+          const rounds = magazineRounds(actor.items.get(magazine.id));
+          expect(rounds.length + 1, "magazynek + komora").to.equal(11);
+        } finally {
+          await actor.deleteEmbeddedDocuments("Item", [ar.id, magazine.id], { render: false });
         }
       });
     });

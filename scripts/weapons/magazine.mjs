@@ -32,7 +32,9 @@
  */
 
 import { ABILITY_KEYS, buildAbilityRuleChangeNotice, hasAbility } from "../actors/abilities.mjs";
-import { isJamImmune } from "./jams.mjs";
+import { isJamImmune, setJammed } from "./jams.mjs";
+import { isKobaltEnabled } from "../config/settings.mjs";
+import { stWepchniecia, wynikWepchniecia } from "../wkk/config/pojedynczy-naboj.mjs";
 import {
   WeaponSound,
   playShotSound,
@@ -609,6 +611,13 @@ function onRenderItemSheet(app, html) {
       addBtn("is-load", "fa-boxes-stacked", "Załaduj magazynek",
         inCombat ? "Naboi nie wkłada się do magazynka w walce." : "Otwiera okno ładowania.", inCombat)
         .addEventListener("click", ev => { ev.preventDefault(); void openLoadWindow(magItem); });
+
+      if (inCombat && isKobaltEnabled()) {
+        addBtn("is-one", "fa-plus", "+1 nabój",
+          "WKK: wepchnięcie naboju do wpiętego magazynka (Akcja) — Test Zwinnych dłoni, ST wg kalibru. "
+          + "Porażka: nabój na ziemi. Pechowa jedynka: zacięcie.", mag.current >= mag.max)
+          .addEventListener("click", ev => { ev.preventDefault(); void _performPushRoundAction(_getLiveItem(item)); });
+      }
     }
   } else {
     const full = mag.current >= mag.max;
@@ -2083,6 +2092,8 @@ async function _performLoadOneAction(item, { chat = true, spendResource = true, 
     return false;
   }
   if (_hasRemovableSource(liveItem)) {
+    // WKK: w walce nabój da się wepchnąć do wpiętego magazynka — za Test (`wkk/config/pojedynczy-naboj.mjs`).
+    if (actor.inCombat && isKobaltEnabled() && loadedMagazine(liveItem)) return _performPushRoundAction(liveItem);
     ui.notifications.warn(
       `${liveItem.name}: do wymiennego magazynka nie wkłada się naboi po jednym — `
       + `wymień magazynek albo załaduj go poza walką.`
@@ -2147,6 +2158,92 @@ async function _performLoadOneAction(item, { chat = true, spendResource = true, 
   });
   seqScrollText("ZAŁADOWANO", actor, { color: "#f1c40f", fontSize: 26, duration: 1500 });
   return true;
+}
+
+/** Zdejmuje jedną sztukę ze stosu amunicji (ostatnia sztuka — cały przedmiot). */
+async function _takeOneRound(ammoItem) {
+  const available = Number(ammoItem.system.quantity ?? 0);
+  if (available <= 1) await ammoItem.delete();
+  else await ammoItem.update({ "system.quantity": available - 1 });
+}
+
+/**
+ * WKK: nabój wepchnięty do wpiętego magazynka w walce (`wkk/config/pojedynczy-naboj.mjs`).
+ *
+ * Test Zwinnych dłoni z ST wg kalibru; Akcja przepada w każdym wypadku. Sukces — nabój w magazynku
+ * (przy pustej komorze od razu w komorze, jak przy `wmag`). Porażka — nabój na ziemi obok żetonu
+ * (`dropLoosePiece`, upuszczenie mimowolne); bez ziemi (brak MG, brak żetonu) nabój przepada.
+ * Pechowa jedynka — nabój siedzi krzywo, broń się zacina.
+ */
+async function _performPushRoundAction(item) {
+  const liveItem = _getLiveItem(item);
+  const actor = liveItem?.actor;
+  if (!liveItem || !actor) return false;
+
+  const mag = getMag(liveItem);
+  if (!mag || !loadedMagazine(liveItem)) {
+    ui.notifications.warn(`${liveItem.name}: najpierw wepnij magazynek.`);
+    return false;
+  }
+  if (Number(mag.current ?? 0) >= Number(mag.max ?? 0)) {
+    ui.notifications.info(`${liveItem.name}: magazynek i komora są pełne.`);
+    return false;
+  }
+
+  const pick = await _chooseFamilyAmmo(actor, mag.ammoType);
+  if (!pick) return false;
+  const { ammoItem, caliberId } = pick;
+  const st = stWepchniecia(AMMO_CALIBER_MAP[caliberId]);
+  if (!st) {
+    ui.notifications.warn(`${_caliberLabel(caliberId)}: takiego naboju nie wpycha się pojedynczo.`);
+    return false;
+  }
+
+  const rolls = await actor.rollSkill({ skill: "zwi", target: st }, {}, {
+    data: { flavor: `${liveItem.name} — nabój do wpiętego magazynka (WKK, ST ${st})` }
+  });
+  const roll = rolls?.[0];
+  if (!roll) return false;                       // okno rzutu zamknięte — nic się nie stało
+
+  const wynik = wynikWepchniecia({
+    total: roll.total, fumble: roll.isFumble === true, st, jamImmune: isJamImmune(liveItem)
+  });
+  if (actor.inCombat) await _spendCombatResource(actor, "action");
+
+  const label = _caliberLabel(caliberId);
+  let body;
+  if (wynik === "zaladowany") {
+    await loadSingleRound(liveItem, caliberId, { intoMagazine: true });
+    await _takeOneRound(ammoItem);
+    await _clearReloadState(liveItem);
+    const next = getMag(liveItem);
+    body = `Nabój (${label}) wchodzi do magazynka.`
+      + `<div class="neuro-mag-state">Stan broni: ${Number(next?.current ?? 0)}/${Number(next?.max ?? 0)}${_nextRoundNote(liveItem)}</div>`;
+    playUtilitySound("reload", liveItem, WeaponSound.RELOAD_SINGLE, { caliberId, token: actor });
+    seqScrollText("ZAŁADOWANO", actor, { color: "#f1c40f", fontSize: 26, duration: 1500 });
+  } else if (wynik === "zaciecie") {
+    await _takeOneRound(ammoItem);
+    await setJammed(liveItem, { reason: "nabój wepchnięty krzywo", chat: false });
+    body = `Pechowa jedynka: nabój (${label}) wchodzi krzywo — <strong>broń się zacina</strong>.`;
+  } else {
+    // Import dynamiczny: ground-items → doll → … wraca tu przez grip/magazynki.
+    const { dropLoosePiece } = await import("../actors/ground-items.mjs");
+    const dropped = await dropLoosePiece(actor, ammoItem, { reason: "wypadł przy ładowaniu" });
+    if (!dropped) await _takeOneRound(ammoItem);
+    body = dropped
+      ? `Nabój (${label}) wyślizguje się z palców i <strong>ląduje na ziemi</strong>.`
+      : `Nabój (${label}) wyślizguje się z palców i przepada.`;
+  }
+
+  await ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    content: `<div class="neuro-mag-card">`
+      + `<div class="neuro-mag-head"><strong>${actor.name}</strong> wpycha nabój do magazynka <em>${liveItem.name}</em></div>`
+      + `<div class="neuro-mag-body">${body}</div></div>`
+      + `<ul class="card-footer pills unlist"><li class="pill transparent"><span class="label">Akcja</span></li>`
+      + `<li class="pill transparent"><span class="label">Kolor Kobaltu</span></li></ul>`
+  });
+  return wynik === "zaladowany";
 }
 
 function _getReloadActionChatContent(item, { ejectedLiveRound, ejectedCaliber, chamberLoaded, current, max, spentBonus = false } = {}) {

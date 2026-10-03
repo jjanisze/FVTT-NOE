@@ -1,0 +1,52 @@
+{
+  "batch": 42,
+  "world": "output",
+  "items": [],
+  "actors": [],
+  "packs": [
+    {
+      "collection": "neuroshima-2026-overrides.bron",
+      "locked": true,
+      "items": [
+        {
+          "_id": "ciPJMAm35LDFNg7R",
+          "name": "Maczuga",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/maczuga.svg"
+        },
+        {
+          "_id": "diDs5xHPixphbmbh",
+          "name": "Kamienny nóż",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/combat_knife.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/kamienny_noz.svg"
+        }
+      ]
+    }
+  ],
+  "prototypes": [
+    {
+      "id": "akumulator",
+      "_id": "dZ0H6mINhvn1nXU9",
+      "name": "akumulator",
+      "exists": false
+    },
+    {
+      "id": "agregat",
+      "_id": "pxYghNgR0gYzOrBy",
+      "name": "agregat",
+      "exists": true
+    },
+    {
+      "id": "alternator",
+      "_id": "mtK0seLBeazRPElL",
+      "name": "alternator",
+      "exists": true
+    },
+    {
+      "id": "defibrylator",
+      "_id": "g5Ta5HeWTcVnlJnn",
+      "name": "defibrylator",
+      "exists": false
+    }
+  ]
+}

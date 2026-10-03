@@ -66,6 +66,7 @@ import { registerZranienie } from "./combat/zranienie.mjs";
 import { registerCritRiders } from "./combat/crit-riders.mjs";
 import { registerPackTactics } from "./combat/pack-tactics.mjs";
 import { registerBestiaryThresholds } from "./combat/bestiary-thresholds.mjs";
+import { registerArmourPiercing } from "./combat/armour-piercing.mjs";
 import { registerRerolls } from "./combat/rerolls.mjs";
 import { registerObalajaca } from './combat/obalajaca.mjs';
 import { registerWeaponSaveProperties } from './combat/weapon-save-properties.mjs';
@@ -161,6 +162,8 @@ import { registerDetonator, detonatorApi } from "./items/detonator.mjs";
 import { registerChemia, chemiaApi } from "./items/chemia.mjs";
 import { sztuczkiApi } from "./config/sztuczki-data.mjs";
 import { pochodzeniaApi } from "./config/pochodzenia-data.mjs";
+import { zdolnosciApi } from "./config/class-features-coverage.mjs";
+import { resyncClassFeatures } from "./migration/resync-class-features.mjs";
 import { registerToolAvailability } from "./actors/tool-availability.mjs";
 import { registerProdukcja, produkcjaApi } from "./production/index.mjs";
 import { registerQuenchTests, testsApi } from "./tests/index.mjs";
@@ -288,6 +291,7 @@ Hooks.once("init", () => {
   registerCritRiders();
   registerPackTactics();
   registerBestiaryThresholds();
+  registerArmourPiercing();
   registerRerolls();
   registerObalajaca();
   registerWeaponSaveProperties();
@@ -456,6 +460,10 @@ Hooks.once("ready", () => {
 
   // Pochodzenia — ten sam rejestr dla 36 zdolności z 12 regionów.
   game.neuroshima.pochodzenia = pochodzeniaApi;
+
+  // Zdolności klasowe i profesji — ten sam rejestr dla 133 zdolności (PLAN_beta B5);
+  // .resync() dosyła zmiany paczki do kopii na kartach (najpierw na sucho).
+  game.neuroshima.zdolnosci = { ...zdolnosciApi, resync: resyncClassFeatures };
 
   // Manewry wręcz — game.neuroshima.manewry.pochwycenie(), .odepchniecie(), .wytracenie()
   game.neuroshima.manewry = maneuversApi;

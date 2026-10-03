@@ -1,7 +1,8 @@
 # PLAN — Droga do wczesnej bety
 
-> Status: **AKTYWNY** (2026-09-26, moduł v0.16.0). Etap bieżący: **alfa** — późna dla walki,
-> ekwipunku i przetrwania, wczesna dla produkcji, pojazdów, towarzyszy i ekonomii.
+> Status: **AKTYWNY** (2026-09-26, moduł v0.16.0; przegląd 2026-10-03, v0.17.1). Etap bieżący:
+> **alfa** — późna dla walki, ekwipunku, przetrwania i produkcji (M2 zrobione), wczesna dla pojazdów,
+> towarzyszy i ekonomii.
 >
 > Skąd ten plan: przegląd IMPLEMENTATION.md ↔ RAW z 2026-09-26. Macierz pokrycia RAW mieszka
 > w [IMPLEMENTATION.md § Stan projektu](IMPLEMENTATION.md#stan-projektu) i to ona jest źródłem
@@ -74,16 +75,22 @@ Cel: tracker mówi prawdę, paczki są aktualne, otwarte decyzje zamknięte.
 - [x] Przebudować paczki przy zamkniętym Foundry; potwierdzić brak churnu — 2026-09-26: 15/15 z danych
   NOE, po starcie świata **0 różnic w rekordach** (`dev/packs/diff-packs.mjs`); kształty v14 z buildera
   działają, zmiany plików w `git status` to tylko kompaktowanie LevelDB
-- [ ] **Rejestr automatyki zdolności klasowych** — `createCoverageLedger` (`config/coverage-ledger.mjs`)
-  nad `class-features-data.mjs`; pola `auto`/`manual` dopisywane w generatorze
-  `dev/classes/gen_features.py`; plakietki wypiekane w paczce `zdolnosci-klasowe`. Stan dziś:
-  ~13/133 z własnym kodem (Berserk, Kondycha, Goła klata, Tarcza wiary, Drugi/Trzeci atak,
-  Z bara!, Cichy krok, Mój biom, Mój wróg ×2, Wściekły cios, Jak dbasz, tak masz)
-- [ ] Zamknąć decyzje z `TODO_mechanika.md`: statystyki Laski, ~~Rewolwerowiec na całą BPK~~
-  (2026-10-01: wariant WKK Pistolero), pojedynczy nabój do magazynka wymiennego (siatka ST — WKK)
-- [ ] Pierwszy przebieg **czystej instalacji** (B6) — lista błędów staje się zadaniami tego kamienia
-- [ ] Zdecydować o formie macierzy pokrycia: od teraz status zmienia się **w macierzy**, fazy 1–5
-  zostają jako historia
+- [x] **Rejestr automatyki zdolności klasowych** — 2026-10-03: `config/class-features-coverage.mjs`,
+  tabela `COVERAGE` w `dev/classes/gen_features.py`, plakietki w `buildFeature`. **22/133** (6 pełnych,
+  16 częściowych). Przy okazji: Kondycha nie leczyła (teraz aktywność `heal`), karta Wściekłego ciosu
+  przechwytywała Motywację, Łeb jak sklep, Twardość i Kocie kości. **Zostaje:** przebudowa paczek
+  (zamknięty Foundry) i `game.neuroshima.zdolnosci.resync({ commit: true })` dla kopii na kartach
+- [x] Zamknąć decyzje z `TODO_mechanika.md` — 2026-10-03: Laska zatwierdzona; Rewolwerowiec na całą
+  BPK → wariant WKK Pistolero (2026-10-01); pojedynczy nabój do magazynka wymiennego wdrożony (WKK:
+  siatka ST, porażka — nabój na ziemi, pechowa jedynka — zacięcie)
+- [ ] Pierwszy przebieg **czystej instalacji** (B6) — lista błędów staje się zadaniami tego kamienia.
+  Znalezione już przy przygotowaniu (2026-10-03), poprawione w `.github/workflows/release.yml`:
+  `module.zip` pomijał `*.log` — 10/16 świeżo zbudowanych paczek trzyma **wszystkie** rekordy w `.log`,
+  więc następne wydanie miałoby puste kompendia (v0.14.34 ocalało przypadkiem, paczki były wtedy
+  skompaktowane do `.ldb`); `vfx/` w ogóle nie trafiał do zipa. Wniosek: test B6 instaluje z
+  `module.zip`, nie z katalogu deweloperskiego.
+- [x] Zdecydować o formie macierzy pokrycia: od teraz status zmienia się **w macierzy**, fazy 1–5
+  zostają jako historia (obowiązuje od 2026-09-26)
 
 **Gotowe gdy:** B3 i B5 spełnione, macierz zgodna z kodem.
 
@@ -113,10 +120,10 @@ kliknięciem w piki.
 - [ ] **Domyślne Utrudnienie w dialogu ataku** (wzorzec `udzwig-attack-disadvantage.mjs`, nadpisywalne):
   atak dystansowy w zwarciu (s. 28 — wróg ≤ 1,5 m, widzi, przytomny, Szybkość > 0; wyjątki stanów),
   cel w zasięgu dalekim. dnd5e 5.3 nie egzekwuje żadnego z nich
-- [ ] **`ppanc` / `przebijająca` a pancerz BG** — `armor-rules.mjs` (próg obrażeń w
-  `dnd5e.calculateDamage`) i odporność kinetyczna ignorują dziś tę właściwość; sprawdzenie jest
-  już w `combat/bestiary-thresholds.mjs`. Także z amunicji (`effectiveDamageFor().props`).
-  Zamyka `PLAN_weapon_properties.md` §3.2
+- [x] **`ppanc` / `przebijająca` a pancerz BG** — 2026-10-03: `combat/armour-piercing.mjs` ustawia
+  natywne `options.ignore.resistance/threshold` dla broni i amunicji z tą właściwością; ustępują próg
+  pancerza BG, odporności i Próg obrażeń Bestiariusza. Paczka testów `przebicie`. Zamyka
+  `PLAN_weapon_properties.md` §3.2
 - [ ] **Zagrożenia bez wyzwalacza** (źródła Wyczerpania istnieją, nic ich nie nakłada):
   Sen (s. 45 — doba bez snu → RO KON ST 20), Uduszenie (s. 259 — 1 + mod. KON minut, potem
   Wyczerpanie co turę, zdejmowane po złapaniu oddechu), Przemarznięcie (s. 258 — RO KON ST 5 + 1/°C

@@ -54,8 +54,12 @@ to whichever release is currently marked **latest** — not a specific tag. That
 
 ## What's excluded from `module.zip`
 
+> **Packs ship with their `.log` files.** A built LevelDB pack holds its records in `000NNN.log` until
+> compaction; until 2026-10-03 the zip excluded `*.log` and ten of sixteen compendiums arrived empty.
+> Only `LOCK` is excluded.
+
 The release zip only contains what a running Foundry instance needs — `module.json`, `scripts/`,
-`styles/`, `templates/`, `lang/`, `icons/`, `sounds/`, `tokens/`, `ui/`, `packs/`, plus
+`styles/`, `templates/`, `lang/`, `icons/`, `sounds/`, `tokens/`, `ui/`, `vfx/`, `packs/`, plus
 `README.md`, `LICENSE`, `CREDITS.md`, and `docs/` for context. It deliberately drops the
 developer-only material that would otherwise roughly double the download for no runtime benefit:
 `dev/`, `.venv/`, `node_modules/`, `logs/`, `package.json`, dotfiles, `.github/`, and the dense

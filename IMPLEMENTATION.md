@@ -20,7 +20,9 @@ M# = kamień milowy w `PLAN_beta.md`.
 | Zasady podstawowe | Cechy, testy, PB, ST, RO, TT, Ułatwienie/Utrudnienie, 18 umiejętności, 22 narzędzia | ✅ | `config/skills.mjs`, `tools.mjs`, `terminology.mjs` |
 | | Przerzuty, Fuksy, Forsowanie | ✅ | `combat/rerolls.mjs`, `actors/fuks-pips.mjs` |
 | Walka | Inicjatywa, Zaskoczenie, Niespodziewany atak | ✅ | natywne dnd5e + stan `ambush` (§1.12) |
-| | Osłona, przebijanie osłony | ✅ | `combat/cover.mjs` (§1.10) |
+| | Osłona, przebijanie osłony | 🟡 | `combat/cover.mjs` (§1.10). Pytana tylko przy atakach dystansowych (RAW: każdy atak — M1); auto-obrażenia, dozownik, olejek, dźwięki i smugacz liczą trafienie z gołej TT, bez osłony — `PLAN_tt.md` E2 |
+| | TT postaci: jedna metoda (pancerz, Goła klata, Tarcza wiary) + premie (Obłęd, Obsługa pancerza, Kuloodporność, Trening w zbroi, Roszada, Tańczący z siekierkami) | 🟡 | liczone: pancerz, ochraniacze, Zasłona, wytrzymałość; Obłęd raz przy włączeniu Berserka; reszta ręcznie — `PLAN_tt.md` Część A |
+| | Rzut ataku oddzielony od rzutu obrażeń; reakcje po trafieniu (Inteligentna obrona, Unik łowcy, Empiryk, Bullet time, Parowanie, Koci odskok, Krytyczna ochrona hełmu) | ❌ | `weapons/ammo.mjs` sam rzuca i nakłada obrażenia po trafieniu z broni z kalibrem; reakcji brak — `PLAN_tt.md` Część B |
 | | Pechowa jedynka: zacięcie, degradacja broni białej | ✅ | `weapons/jams.mjs`, `melee-degradation.mjs` |
 | | Stopień Zranienia, Ostatnia akcja, Nokautowanie, stany | ✅ | `combat/zranienie.mjs`, `knockout.mjs`, `config/conditions.mjs` |
 | | **Neutralizacja Stopnia Zranienia** (Regeneracja, Pomoc medyczna) | ❌ | M1 |
@@ -40,13 +42,13 @@ M# = kamień milowy w `PLAN_beta.md`.
 | Pochodzenie | 12 Pochodzeń + 36 zdolności (dane) | ✅ | paczki `pochodzenia`, `zdolnosci-pochodzenia` |
 | | Automatyka zdolności | 🟡 | 3/36 (`game.neuroshima.pochodzenia.report()`) — M7 |
 | Klasy | 6 klas, 18 profesji, 133 zdolności (dane, awans, PW) | ✅ | paczki `klasy`, `profesje`, `zdolnosci-klasowe` |
-| | Automatyka zdolności | 🟡 | ~13/133 z własnym kodem + produkcja Speca (Szybka produkcja, 6 profesji, Truciciel, Pogromca); **brak rejestru pokrycia** — M0, M7 |
+| | Automatyka zdolności | 🟡 | 22/133 — 6 pełnych, 16 częściowych (`game.neuroshima.zdolnosci.report()`, `config/class-features-coverage.mjs`) — M7 |
 | | Towarzysze (Partner, Oswajanie zwierząt, Prawa ręka) i drony | ❌ | M3 |
 | Sztuczki | 53 Sztuczki (dane) | ✅ | paczka `sztuczki` |
 | | Automatyka | 🟡 | 11/53 — 3 pełne, 8 częściowych (`game.neuroshima.sztuczki.report()`) — M7 |
 | Choroby i fobie | Choroby przewlekłe i popularne, fobie, leki, Zachód słońca | ✅ | 22/24 stanów egzekwowanych, `actors/health-panel.mjs`, `disease-effects.mjs` |
 | Ekwipunek | Broń, kalibry, magazynki symulacyjne, tryby ognia, granaty, miny i ładunki, ulepszenia | ✅ | `weapons/*`, `actors/grenade-inventory.mjs`, `placed-charges.mjs` |
-| | Właściwości broni | 🟡 | brak: `ppanc`/`przebijająca` przeciw pancerzowi BG (M1), `dluga`, `ciezka`, `jednorazowa` (M6) — `PLAN_weapon_properties.md` |
+| | Właściwości broni | 🟡 | brak: `dluga`, `ciezka`, `jednorazowa` (M6) — `PLAN_weapon_properties.md`; `ppanc`/`przebijająca` — `combat/armour-piercing.mjs` |
 | | Pancerze, hełmy, tarcze | 🟡 | `actors/armor-rules.mjs` (próg, odporność kinetyczna, kary); akcje tarczy, krytyczna ochrona hełmu, szczelność ręcznie; wytrzymałość pancerzy — ustawienie świata (`production/naprawa.mjs`) |
 | | Leki i używki, narzędzia, elektronika, różności | 🟡 | 35 pozycji chemii, 22 zestawy, latarka/gogle/detonator/kwas/kolczatki; część Różności tylko jako przedmioty bez akcji |
 | | **Produkcja przedmiotów**, schematy, elaboracja amunicji, naprawianie | ✅ | `production/*`, zakładka Produkcja, paczka `schematy`; `PLAN_produkcja.md`, `docs/Produkcja.md`. Nieograne przy stole; wyniki-aktorzy (pojazdy, drony) to karta dla MG — M3/M4 |
@@ -98,7 +100,9 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/config/sztuczki-data.mjs` | 53 Sztuczki + rejestr tego, co system faktycznie automatyzuje |
 | `scripts/config/pochodzenia-data.mjs` | 12 Pochodzeń jako `background` (pack `pochodzenia`) + 36 zdolności (pack `zdolnosci-pochodzenia`) + rejestr automatyki |
 | `scripts/migration/migrate-pochodzenia.mjs` | Wstawienie Pochodzenia w slot `background` postaci z Roll20 (cofa +1/+1 wliczone ręcznie) |
+| `scripts/migration/resync-class-features.mjs` | Dosyłanie mechaniki zdolności klasowych z paczki do kopii na kartach (aktywności, użycia, flagi, plakietka) — `game.neuroshima.zdolnosci.resync()` |
 | `scripts/config/coverage-ledger.mjs` | Wspólna fabryka rejestru automatyki (`status`/`html`/`coverage`/`report`) dla Sztuczek i Pochodzeń |
+| `scripts/config/class-features-coverage.mjs` | Rejestr automatyki 133 zdolności klasowych i profesji (B5) — czyta `auto`/`manual` z danych, `game.neuroshima.zdolnosci` |
 | `scripts/actors/health-panel.mjs` | Panel Choroby/Fobie (Biografia), pasek w sidebarze, dawki, Przełamanie, Zachód słońca |
 | `scripts/config/disease-effects.mjs` | Mechanika stanów chorób — zmiany AE, ataki, sytuacyjne, szał, krwawienie, mnożnik upadku |
 | `scripts/actors/disease-effects.mjs` | Egzekwowanie: sync Active Effects, Utrudnienie do ataków, przycisk Szału |
@@ -246,6 +250,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/config/schematy-data.mjs` | Schemat jako przedmiot — kształt, rozmiary, ikony; źródło paczki `schematy` |
 | `scripts/config/tool-expr.mjs` | Wymóg narzędzi jako wyrażenie `&` / `\|` / nawiasy — parser, normalizacja, ocena, opis po polsku |
 | `scripts/wkk/config/production-kobalt.mjs` | Liczby WKK produkcji — porzucenie, waga Roboty, waga Schematu, cecha profesji |
+| `scripts/wkk/config/pojedynczy-naboj.mjs` | WKK: nabój do wpiętego magazynka w walce — ST wg kalibru, skutek Testu (gospodarz `weapons/magazine.mjs`) |
 | `scripts/actors/surowce-store.mjs` | Lejek surowców — pobieranie i oddawanie w gamblach (reszta w pełnych jednostkach), transfer |
 | `scripts/actors/rest-activities.mjs` | Rejestr zajęć odpoczynku — sekcja „Zajęcia” w oknach KO / DO, budżet pracy, zbiorcza karta |
 | `scripts/production/robota.mjs` | Robota — jedyny lejek zapisu: start, praca, korekta, Test, porzucenie, zakończenie, narzędzia MG |
@@ -837,9 +842,10 @@ Szczegółowy plan: `PLAN_classes.md`
   (3 pełne: Aspiryna i Miętusy, Ruchome gniazdo CKM, Szybkie palce; 6 częściowych: Aramis, Grad ołowiu,
   Pakowanie, Pan Plaster, Samuraj, Szturmowiec; policzone 2026-09-26) — reszta to opis + jawny rejestr
   „tego nie automatyzujemy" (`game.neuroshima.sztuczki.report()`)
-- [ ] **Rejestr automatyki zdolności klasowych** — Sztuczki i Pochodzenia mają `coverage-ledger.mjs`,
-  133 zdolności klasowe nie; ~13 ma własny kod (Berserk, Kondycha, Goła klata, Tarcza wiary, Drugi/Trzeci
-  atak, Z bara!, Cichy krok, Mój biom, Mój wróg ×2, Wściekły cios, Jak dbasz, tak masz) — `PLAN_beta.md` M0
+- [x] **Rejestr automatyki zdolności klasowych** (2026-10-03) — `config/class-features-coverage.mjs`
+  nad danymi z generatora: 22/133 (6 pełnych, 16 częściowych), plakietka na każdej zdolności.
+  Mój wróg okazał się niezautomatyzowany (tylko skala w awansie) — „×2" z wcześniejszego liczenia to
+  dwa warianty na kartach, nie kod
 - [ ] **Towarzysze** (Partner Sędziego, Oswajanie zwierząt Łowcy mutantów, Prawa ręka Mafiozo) i **drony**
   Montera — tylko tekst zdolności, brak aktorów — M3
 - [x] 12 Pochodzeń (origins) z bonusami cech — pack `pochodzenia` (12 itemów typu `background`,
@@ -1113,6 +1119,115 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### PLAN_tt — TT, rozstrzyganie trafienia i reakcje: projekt zamknięty (2026-10-03)
+
+Sam projekt, bez kodu. [PLAN_tt.md](PLAN_tt.md) przepisany: wszystkie decyzje MG zamknięte (D1–D14,
+plus P1–P10 ustalone w projekcie), następny krok E0. Rozmiar urósł z M do L.
+
+- **Pełny inwentarz NOE:** 4 metody TT, limit Treningu w zbroi, 10 premii i kar, 9 reakcji po trafieniu
+  (wcześniej plan nie znał Inteligentnej obrony, Bullet time, obu Parowań, Empiryka, Krytycznej ochrony
+  hełmu i Tańczącego z siekierkami). Tarcza w NOE nie podnosi TT — zgodne z katalogiem (`ac: 0`).
+- **Rozstrzygnięcia:** metody konkurują, premie się sumują (RAI — Tarcza wiary jest metodą, Obłęd stoi
+  obok Gołej klaty); „pancerz” = lekki / średni / ciężki (hełm i tarcza tylko tam, gdzie wymienione,
+  ochraniacze nigdzie); Trening w zbroi także w ciężkim (0 → 1); zawsze najwyższa metoda, furtka MG
+  w oknie TT; Dziurawy hełm po Krytycznej ochronie — WKK.
+- **Rzut ataku i obrażeń zawsze osobno** (D8): auto-obrażenia z `weapons/ammo.mjs` to nasza implementacja
+  z maja, nie dnd5e — gracz tracił rzut, a reakcje RAW były niemożliwe. Do usunięcia w E2; obrażenia
+  rzuca atakujący natywnym przyciskiem, nakłada MG tacką dnd5e. Okno „Reakcje celu” na karcie ataku
+  niczego nie blokuje.
+- **Znalezione przy okazji** (naprawa w etapach planu): trafienie liczone z gołej TT bez osłony
+  i naturalnej 1/20 (`ammo.mjs`, `dozownik.mjs`, `olejek.mjs`, `sounds.mjs`, `magazine.mjs`); własny
+  przycisk „Obrażenia” nie podwaja kości przy krytyku; `isUnarmoured()` nie widzi hełmu; Obłęd
+  liczony raz przy włączeniu Berserka; stan Unikanie bez czasu trwania; Osłona tylko przy atakach
+  dystansowych (→ M1). Macierz u góry poprawiona.
+
+### M1: `ppanc` i przebijająca przebijają pancerz BG i odporności (2026-10-03)
+
+NOE s. 117–118: obie właściwości „ignorują odporność na obrażenia i Próg obrażeń”. Dotąd sprawdzał je
+tylko Próg obrażeń Bestiariusza — i to wyłącznie `ppanc`, z broni.
+
+- Nowe `combat/armour-piercing.mjs`: w `dnd5e.preCalculateDamage` trafienie z właściwością (z broni
+  aktywności **albo** z naboju — `weapons/ammo.mjs` kładzie właściwości naboju na `damages[].properties`)
+  dostaje natywne `options.ignore.resistance` i `.threshold`. Ustępują: próg pancerza BG
+  (`actors/armor-rules.mjs`), odporność kinetyczna pancerza i każda inna odporność, Próg obrażeń
+  Bestiariusza (który przy okazji poznał `przebijajaca` i amunicję). Niewrażliwość zostaje.
+- Zamyka `PLAN_weapon_properties.md` §3.2. Testy: nowa paczka `przebicie` (6, aktorzy w pamięci).
+  Całość 662/664 (czerwone tylko dwa testy kompendium czekające na przebudowę paczek).
+
+### M0: rejestr pokrycia zdolności klasowych, Kondycha leczy, nabój do magazynka (WKK) (2026-10-03)
+
+PLAN_beta M0, bramka B5. Paczka `zdolnosci-klasowe` **czeka na przebudowę** (`npm run build:packs`
+przy zamkniętym Foundry), potem `game.neuroshima.zdolnosci.resync()` dosyła zmiany do kart.
+
+- **Rejestr pokrycia dla 133 zdolności klasowych i profesji** — ten sam kontrakt co Sztuczki
+  i Pochodzenia: `auto: [{what, where}]` + `manual`, pisane w tabeli `COVERAGE` generatora
+  (`dev/classes/gen_features.py`; generator przerywa build przy literówce w kluczu albo w `where`),
+  dla WKK — w `wkk/config/class-features-data.mjs` (Pistolero). Odczyt: nowy
+  `config/class-features-coverage.mjs`, `game.neuroshima.zdolnosci.report()`. Plakietka wypiekana
+  w opis przez `buildFeature`, flaga `coverage` na przedmiocie, CSS `neuro-zdolnosc-*`.
+  Stan: **22/133** (6 pełnych, 16 częściowych) + Pistolero częściowo. Licznik użyć i makro na
+  pasku nie liczą się jako automatyka. Rejestr ujawnił, że Goła klata i Tarcza wiary **nie
+  nakładają TT** (moduł tylko wyszarza słabszą z grupy) — wpisane w `manual`, nie poprawiane
+  (naprawa: `PLAN_tt.md`).
+- **Kondycha leczy.** Była przełącznikiem stanu bez żadnych zmian: zużywała użycie, wieszała pusty
+  efekt „Kondycha" bez czasu trwania i nie leczyła. Teraz aktywność dnd5e `heal` (jak Second Wind):
+  1k8 + poziom Twardziela, Akcja Bonusowa, mod. KON razy na DO (`heal` w danych, `buildFeature`).
+  Wpis `neuro-kondycha` zniknął z `class-state.mjs`. Kopie na kartach (Lorentz, Góra) — przez
+  `resync()`.
+- **Karta kości obrażeń przechwytywała cudze zdolności.** `class-resource-dice.mjs` łapał każdą
+  zdolność z `resource`, więc Motywacja (Laffitte), Łeb jak sklep (Raynald), Twardość i Kocie kości
+  zamiast swojej aktywności wystawiały kartę Wściekłego ciosu z rzutem `@scale…` jako obrażeń.
+  Teraz tylko `resource.damage: true` (`isDamageDiceFeature`); Wściekły cios ma też limit
+  **3 kości na atak** (`perAttack`, RAW), a przyciski pokazują właściwą kość.
+- **`resyncClassFeatures()`** (`migration/resync-class-features.mjs`, `game.neuroshima.zdolnosci.resync`)
+  — porównuje kopie zdolności na aktorach z paczką i dosyła mechanikę: aktywność innego typu
+  (kasowana i zakładana od nowa), `uses.max/recovery` (bez `spent`), flagi zachowania, plakietkę
+  (stara wycinana po klasie, dopiski MG zostają), osierocone stany klasowe. Na sucho domyślnie.
+- **WKK: nabój do wpiętego magazynka w walce** (`TODO_mechanika.md`, decyzje MG 2026-10-03) —
+  przycisk „+1 nabój" na broni z wpiętym magazynkiem, tylko w walce i z Kobaltem. Test Zwinnych
+  dłoni, ST wg kategorii kalibru (12 / 14 / 15, .50 BMG 18); Akcja przepada zawsze; porażka —
+  nabój na ziemi (nowe `dropLoosePiece()` w `actors/ground-items.mjs`, bo lalka odmawia przedmiotów,
+  których nie nosi), pechowa jedynka — zacięcie (broń odporna na zacięcia: zwykła porażka).
+  Reguła: `wkk/config/pojedynczy-naboj.mjs`; `loadSingleRound(…, { intoMagazine })` w modelu.
+- **Laska** zatwierdzona bez zmian; `TODO_mechanika.md` zamknięte poza jednym drobiazgiem.
+- **Wydanie (B6, przed instalacją):** `release.yml` pakował paczki bez `*.log` — a świeży build trzyma
+  w nich wszystkie rekordy (10/16 paczek), więc następne wydanie miałoby puste kompendia; `vfx/`
+  nie trafiał do zipa wcale. Poprawione w workflow i `RELEASING.md` (bez wypychania).
+- **Podziękowania** dla autora mechaniki (Marcin „Nicram” Kubiesa) raz, na stronie głównej README —
+  za wszystkie rozstrzygnięcia; komentarze w kodzie mówią „autor mechaniki”, bez nazwiska.
+- Nowy `PLAN_tt.md` — TT wg NOE (jedna metoda, premie obok, dymek z rozkładem); decyzje zamknięte
+  tego samego dnia — wpis „PLAN_tt” wyżej.
+- Testy: nowa paczka `zdolnosci-dane` (13), 4 nowe w `magazynki`. Całość 652/654 przed
+  przebudową paczek — czerwone tylko dwa testy kompendium `zdolnosci-klasowe` (plakietki
+  i aktywność Kondychy), które czekają na build.
+
+### Ikony batches 42–44 — broń WKK i wyposażenie produkcji (2026-10-03)
+
+- MG zatwierdził wszystkie dziewięć ikon batch 42. PNG oraz
+  maski SVG z kolorem motywu trafiły odpowiednio do `icons/weapons/` i
+  `icons/items/loot/`; builder broni wskazuje nowe ścieżki.
+- Agregat, Akumulator, Alternator i Defibrylator przestały być wyłącznie wynikami zastępczymi `raw:`.
+  Wspólny builder `items/production-gear.mjs` tworzy ich właściwe prototypy z
+  ceną i wagą katalogu RAW; paczka `sprzet` ma teraz 13 wpisów. Produkcja
+  rozwiązuje dotychczasowe referencje `raw:` do deterministycznych UUID paczki,
+  a przed przebudową paczki używa tego samego buildera jako fallbacku.
+- Na żywo przez API Foundry przepięto łącznie 5 wpisów paczki `bron`, utworzono
+  4 prototypy `sprzet` i odświeżono je wspólnym builderem; blokady paczek
+  przywrócono. Plany sprzed zapisów: `dev/backup/batch-42-icon-repoint-2026-10-03.json`
+  i `dev/backup/batch-42-final-icon-repoint-2026-10-03.json`.
+- Maczuga, Kamienny nóż, Akumulator i Defibrylator po uwagach o drobnych
+  konturach powstały ponownie jako jeden atlas 2×2. Zatwierdzone wersje mają
+  masywniejsze sylwetki i wyraźniejsze cechy rozpoznawcze.
+- Batch 43 (9 ikon elektroniki) oraz batch 44 (9 ikon sprzętu polowego,
+  warsztatowego i chemii) powstały jako dwa pojedyncze atlasy 3×3. Źródła,
+  prompty oraz rozdzielone PNG/SVG znajdują się w `dev/icons/review/candidates/`;
+  18 pozycji czeka na decyzję MG w `npm run review:icons`. Nie utworzono jeszcze
+  ich prototypów ani nie zmieniono dokumentów na żywo.
+- Pełny build do osobnego katalogu: OK (`bron` 86, `sprzet` 13). Walidacja
+  przepisów, CSS i warstwy testowej: OK. Walidator produkcyjnych paczek poprawnie
+  odmówił bezpośredniego odczytu LevelDB przy uruchomionym Foundry; zapisy na
+  żywo wykonano wyłącznie przez API dokumentów Foundry.
+
 ### Ikony batch 41 — detonatory, Kwas, Schematy, Robota, Radio (2026-10-03)
 
 - **9 nowych glifów** w `icons/items/loot/` (PNG 256×256 z alfą + SVG z
@@ -1139,6 +1254,11 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   Siekierezada w paczce Sztuczek oraz dwa testy Samuraja (timeout i stan topora).
 - W działającym UI sprawdzono pojedynczą nakładkę 12×12, zachowaną ikonę wyniku
   i ładowanie wszystkich 9 SVG z obsługą koloru motywu.
+- **Korekta po przeglądzie MG:** odrzucone glify małego i średniego Schematów
+  z wielkimi kołami zębatymi zastąpione zatwierdzonymi wariantami: pojedynczą
+  notatką z obwodem (`schemat_notatka`) i płaską instrukcją serwisową
+  (`schemat_instrukcja`). Ścieżki PNG/SVG zostały zachowane, więc wszystkie
+  istniejące dokumenty korzystają z nowych plików bez migracji danych.
   Kolejka A: batch 41 zakończony, następny **42 (5/9)**; B/C bez zmian.
   Uwagi o konfiguracji harnessu: `dev/icons/CODEX_TODO.md`.
 

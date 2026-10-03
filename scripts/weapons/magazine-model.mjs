@@ -684,11 +684,19 @@ export async function chamberNextRound(weapon) {
  * Wchodzi **na koniec kolejki**, jak przy ładowaniu magazynka; przy pustej komorze i `auto`
  * broń od razu go dosyła, żeby jedna akcja dawała jeden gotowy strzał.
  *
+ * `intoMagazine` otwiera tę samą drogę dla wpiętego wymiennego magazynka — tylko dla reguły WKK
+ * (`wkk/config/pojedynczy-naboj.mjs`), po udanym Teście; RAW tego nie dopuszcza.
+ *
+ * @param {Item5e} weapon
+ * @param {string} caliberId
+ * @param {object} [options]
+ * @param {boolean} [options.intoMagazine=false]
  * @returns {Promise<boolean>} false = nie ma miejsca albo broń ma wymienne źródło
  */
-export async function loadSingleRound(weapon, caliberId) {
+export async function loadSingleRound(weapon, caliberId, { intoMagazine = false } = {}) {
   const state = readState(weapon);
-  if (!state.source || (state.source.kind !== "internal")) return false;
+  const kind = state.source?.kind;
+  if (kind !== "internal" && !(intoMagazine && kind === "magazine")) return false;
   if (state.rounds.length + (state.chamber ? 1 : 0) >= state.capacity + (state.hasChamber ? 1 : 0)) return false;
 
   if (state.hasChamber && !state.chamber) state.chamber = caliberId;

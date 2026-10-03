@@ -56,9 +56,12 @@ AUTOMATION = {
         },
     },
     "wsciekly-cios": {
-        # "Masz ich tyle, ile poziomów Brutala" — each die is 1k6
+        # "Masz ich tyle, ile poziomów Brutala" — each die is 1k6;
+        # "Do pojedynczego ataku możesz dodać maksymalnie 3 kości"
+        # `damage` opts in to the damage-dice card (actors/class-resource-dice.mjs); the other
+        # `resource` dice (Motywacja, Twardość, …) are not damage and keep the native activity.
         "uses": {"max": "@classes.brutal.levels", "period": "lr"},
-        "resource": {"die": "1d6", "label": "Kości Wściekłego ciosu"},
+        "resource": {"die": "1d6", "label": "Kości Wściekłego ciosu", "damage": True, "perAttack": 3},
         "hotbar": True,
     },
     "brutalny-cios": {
@@ -110,7 +113,9 @@ AUTOMATION = {
     "kondycha": {
         "uses": {"max": "@abilities.con.mod", "period": "lr"},        # "po ukończeniu Długiego odpoczynku"
         "hotbar": True,
-        "toggle": {"effect": "neuro-kondycha", "duration": {"rounds": None}},
+        # "odzyskać Punkty Wytrzymałości w liczbie 1k8 + twój poziom Twardziela" — a dnd5e heal
+        # activity, like Second Wind. Was a `toggle` with no changes: spent a use, healed nothing.
+        "heal": {"number": 1, "denomination": 8, "bonus": "@classes.twardziel.levels"},
     },
     "twardosc": {
         "uses": {"max": "@abilities.con.mod", "period": "lr"},        # "Masz tych kości tyle, ile mod. Kondycji"
@@ -163,6 +168,159 @@ AUTOMATION = {
     "moja-prawa-reka": {"companion": True},
     "partner": {"companion": True},
     "oswajanie-zwierzat": {"companion": True},
+}
+
+
+# ---------------------------------------------------------------------------
+# Coverage ledger (PLAN_beta B5) — what the code really enforces, per ability.
+# Same contract as Sztuczki/Pochodzenia (`config/coverage-ledger.mjs`):
+#   auto   — [(what, where)]: a rule the code enforces; `where` relative to scripts/.
+#   manual — what the code does NOT do, in one sentence the GM can act on.
+# Not counted as automation: the uses counter, its recovery and the hotbar macro —
+# that is bookkeeping every limited-use ability gets, not the ability's effect.
+# Add an `auto` entry the moment the code lands; the badge updates on the next pack build.
+# ---------------------------------------------------------------------------
+_PICK_ON_SHEET = "Wybrane biegłości i Specjalizacje zaznacza gracz na karcie — dnd5e nie ma awansu „wybierz spośród tego, co już umiesz”."
+_PROFESSION_RECIPES = "production/zp.mjs"
+
+COVERAGE = {
+    # ---- Brutal ----
+    "berserk": {
+        "auto": [
+            ("włączenie w Akcji Bonusowej zużywa Berserk, efekt trwa 10 rund", "actors/class-state.mjs"),
+            ("Siła Berserkera — Ułatwienie w testach i RO na Siłę", "actors/class-state.mjs"),
+            ("Obrażenia Berserkera — kość z tabeli Brutala do obrażeń ataków wręcz", "actors/class-state.mjs"),
+            ("Obłęd Berserkera — TT + mod. SIŁ bez pancerza, hełmu i tarczy", "actors/class-state.mjs"),
+            ("koniec przy Nieprzytomności, Obezwładnieniu i Zauroczeniu; karta zmęczenia po Berserku", "actors/class-state.mjs"),
+        ],
+        "manual": "Szarżę Berserkera wykonuje gracz; zmęczenie po Berserku (brak akcji) moduł ogłasza, pilnuje stół. "
+                  "Obrażenia Berserkera idą jak Rage w dnd5e — tylko do ataków wręcz, rzut bronią opartą na Sile dolicza gracz.",
+    },
+    "gola-klata": {
+        "auto": [("nie łączy się z Tarczą wiary ani Obłędem Berserkera — słabsza zdolność wyszarzona na karcie", "actors/class-rules.mjs")],
+        "manual": "TT 10 + mod. ZRC + mod. KON ustawia się w konfiguracji Trudności Trafienia na karcie — moduł jej nie nakłada.",
+    },
+    "wsciekly-cios": {
+        "auto": [("karta po trafieniu: 1–3 kości, raz na rundę, rzut obrażeń z wybranym typem", "actors/class-resource-dice.mjs")],
+        "manual": "Czy atak trafił i był oparty na Sile, decyduje gracz — przycisk naciska się po trafieniu, cel zaznaczony.",
+    },
+    "z-bara": {
+        "auto": [("przycisk Odepchnięcia z ST 8 + mod. SIŁ + PB na karcie zdolności", "combat/melee-maneuvers.mjs")],
+        "manual": "Warunek Berserka i koszt Akcji Bonusowej pilnuje gracz.",
+    },
+    "drugi-atak": {
+        "auto": [("nie łączy się między klasami — działa najwyższy, reszta wyszarzona na karcie", "actors/class-rules.mjs")],
+        "manual": "Liczbę ataków w akcji Atakowanie liczy gracz — dnd5e jej nie śledzi.",
+    },
+
+    # ---- Cwaniak ----
+    "ekspert": {"manual": _PICK_ON_SHEET},
+    "samouk": {"manual": _PICK_ON_SHEET},
+
+    # ---- Spec ----
+    "szybka-produkcja": {
+        "auto": [("koszyk do 25 gb (50 gb od 11. poz.), 1 min × 1 gb, bez Testu, ładunek na odpoczynek", "production/szybka.mjs")],
+    },
+    "wyksztalciuch": {"manual": _PICK_ON_SHEET},
+    "specjalizacja-spec": {"manual": _PICK_ON_SHEET},
+
+    # ---- Twardziel ----
+    "kondycha": {
+        "auto": [("Akcja Bonusowa: leczenie 1k8 + poziom Twardziela, mod. KON razy na Długi odpoczynek", "config/class-features-data.mjs")],
+    },
+    "trzeci-atak": {
+        "auto": [("nie łączy się z Drugim atakiem z innej klasy — wyszarzony słabszy", "actors/class-rules.mjs")],
+        "manual": "Liczbę ataków w akcji Atakowanie liczy gracz — dnd5e jej nie śledzi.",
+    },
+
+    # ---- Złodziej ----
+    "specjalizacja-zlodziej": {"manual": _PICK_ON_SHEET},
+
+    # ---- Zwiadowca ----
+    "moj-biom": {
+        "auto": [
+            ("wybór ulubionych biomów na karcie drużyny, liczba miejsc z tabeli Zwiadowcy", "actors/party-travel.mjs"),
+            ("w znanym biomie: drużyna pieszo bez spowolnienia w trudnym terenie, zbieractwo na 4 osoby", "actors/party-travel.mjs"),
+        ],
+        "manual": "Ułatwienie w Testach INT i MDR w biomie, brak zaskoczenia (moduł tylko przypomina), "
+                  "skradanie w tempie ruchu i wiedza z tropienia — przy stole.",
+    },
+    "cichy-krok": {
+        "auto": [
+            ("bez Utrudnienia do Skradania się za noszenie pancerza", "actors/cichy-krok.mjs"),
+            ("Ułatwienie do Ukrywania się, jeśli nie nosisz ciężkiego pancerza", "actors/cichy-krok.mjs"),
+            ("trudny teren nie spowalnia — na scenie i w podróży", "actors/cichy-krok.mjs"),
+        ],
+    },
+
+    # ---- Profesje ----
+    "tarcza-wiary": {
+        "auto": [("nie łączy się z Gołą klatą ani Obłędem Berserkera — słabsza zdolność wyszarzona na karcie", "actors/class-rules.mjs")],
+        "manual": "Premię mod. CHA do TT bez pancerza ustawia się w konfiguracji Trudności Trafienia — moduł jej nie nakłada.",
+    },
+    "pirotechnika": {
+        "auto": [("schematy pirotechniczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES)],
+    },
+    "rusznikarstwo": {
+        "auto": [("schematy rusznikarskie w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES)],
+    },
+    "farmacja": {
+        "auto": [("schematy farmaceutyczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES)],
+        "manual": "Biegłość w narzędziach małego aptekarza zaznacza gracz na karcie.",
+    },
+    "mechanika": {
+        "auto": [("schematy mechaniczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES)],
+        "manual": "Pojazd i pancerz wspomagany wychodzą z produkcji jako karta dla MG, nie aktor. "
+                  "Biegłość w narzędziach małego mechanika zaznacza gracz.",
+    },
+    "hakerstwo": {
+        "auto": [("schematy hakerskie w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES)],
+        "manual": "Dron wychodzi z produkcji jako karta dla MG, nie aktor; kierowanie, naprawa i zasilanie drona — przy stole. "
+                  "Biegłość w narzędziach małego hakera zaznacza gracz.",
+    },
+    "serwisowanie": {
+        "auto": [("schematy elektroniczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES)],
+        "manual": "Biegłość w narzędziach małego elektronika zaznacza gracz na karcie.",
+    },
+    "rewolwerowiec": {
+        "auto": [
+            ("Niezawodny — rewolwer w twoich rękach się nie zacina", "weapons/jams.mjs"),
+            ("Jednoręki — strzał jedną ręką bez Utrudnienia, rewolwer lekki i poręczny", "combat/grip.mjs"),
+            ("Dobywanie — Oporządzenie pokazuje dobycie i schowanie rewolweru jako darmowe", "actors/doll.mjs"),
+            ("Szybkoładowacz — karta szybkoładowarki sprawdza wolną rękę", "weapons/magazine.mjs"),
+        ],
+        "manual": "Strzał z biodra (+5 do Inicjatywy) dolicza gracz; darmowych interakcji z przedmiotem moduł nie liczy.",
+    },
+    "jak-dbasz-tak-masz": {
+        "auto": [
+            ("broń palna w twoich rękach się nie zacina", "weapons/jams.mjs"),
+            ("odblokowanie zacięcia w Akcji Bonusowej, bez Testu", "weapons/jams.mjs"),
+        ],
+        "manual": "Naprawę uszkodzonej broni białej w Krótkim odpoczynku rozlicza MG.",
+    },
+    "truciciel": {
+        "auto": [
+            ("porcja olejku w Długim odpoczynku, z narzędziami małego chemika i ST twórcy", "production/odpoczynek.mjs"),
+            ("nałożenie w Akcji Bonusowej na ostrze albo do trzech grotów, aktywne 1 minutę", "production/olejek.mjs"),
+            ("karta RO na Kondycję po trafieniu zatrutą bronią", "production/olejek.mjs"),
+        ],
+        "manual": "Zatrucie nakłada MG przyciskiem na karcie — moduł wykrywa, nie rozstrzyga.",
+    },
+    "pogromca": {
+        "auto": [
+            ("Pogromca jako przepis profesji: 100 gb surowców, 100 h pracy", _PROFESSION_RECIPES),
+            ("naboje w Długim odpoczynku: do PB sztuk, 10 gb surowców każdy", "production/odpoczynek.mjs"),
+        ],
+        "manual": "Obrażenia krytyczne przeciw mutantom i potworom dolicza MG; biegłość z Pogromcą tylko dla Łowcy pilnuje stół.",
+    },
+
+    # ---- Opcje ----
+    "stalowy-nadgarstek": {
+        "auto": [
+            ("strzał jedną ręką z broni palnej krótkiej i pistoletu maszynowego bez Utrudnienia", "combat/grip.mjs"),
+            ("broń palna krótka lekka w twoich rękach", "combat/grip.mjs"),
+        ],
+    },
 }
 
 
@@ -340,6 +498,12 @@ lines.append("""/**
  *   hotbar        gets an auto-managed macro — see actors/ability-hotbar.mjs
  *   exclusiveGroup non-stacking family (multiclass rule) — see actors/class-rules.mjs
  *   handgunKind   "rewolwer" | "pistolet" — weapon the ability's clauses apply to, see actors/rewolwerowiec.mjs
+ *   heal          { number, denomination, bonus } — the activity is a dnd5e heal (Kondycha)
+ *   resource      { die, label, damage?, perAttack? } — dice pool; `damage` = the damage-dice card
+ *                 in actors/class-resource-dice.mjs, others keep the native activity
+ *   auto          [{ what, where }] — rules the code enforces (coverage ledger, PLAN_beta B5);
+ *                 empty = none. See config/class-features-coverage.mjs
+ *   manual        what the code does not do, shown on the badge as „Nie automatyzujemy”
  *   kobalt        W Kolorze Kobaltu content, defined in scripts/wkk/ and appended at the end
  */
 
@@ -348,7 +512,8 @@ import { KOBALT_CLASS_FEATURES } from "../wkk/config/class-features-data.mjs";
 export const CLASS_FEATURES = {""")
 
 for r in merged:
-    auto = AUTOMATION.get(r["id"], {})
+    meta = AUTOMATION.get(r["id"], {})
+    cover = COVERAGE.get(r["id"], {})
     fields = []
     fields.append(f'    id: "{r["id"]}"')
     fields.append(f'    source: "{r["source"]}"')
@@ -360,8 +525,11 @@ for r in merged:
     fields.append(f'    level: {jsval(r["level"])}')
     fields.append(f'    label: "{esc(r["label"])}"')
     fields.append(f'    action: {jsval(r["action"])}')
-    for k, v in auto.items():
+    for k, v in meta.items():
         fields.append(f"    {k}: {jsval(v)}")
+    fields.append(f'    auto: {jsval([{"what": w, "where": p} for w, p in cover.get("auto", [])])}')
+    if cover.get("manual"):
+        fields.append(f'    manual: {jsval(cover["manual"])}')
     fields.append(f'    text: "{esc(r["text"])}"')
     lines.append(f'  "{r["id"]}": {{\n' + ",\n".join(fields) + "\n  },")
 
@@ -444,3 +612,14 @@ print(f"hotbar:      {sum(1 for r in merged if AUTOMATION.get(r['id'], {}).get('
 print(f"toggle:      {sum(1 for r in merged if 'toggle' in AUTOMATION.get(r['id'], {}))}")
 unknown = sorted(set(AUTOMATION) - {r['id'] for r in merged})
 print("AUTOMATION keys with no matching feature:", unknown or "none")
+
+# The ledger is only worth anything if it points at real code: fail the build on a typo.
+unknown_cover = sorted(set(COVERAGE) - {r['id'] for r in merged})
+missing_where = sorted({p for c in COVERAGE.values() for _, p in c.get("auto", [])
+                        if not os.path.exists(os.path.join(MODULE_ROOT, "scripts", p))})
+covered = sum(1 for c in COVERAGE.values() if c.get("auto"))
+print(f"coverage:    {covered}/{len(merged)} with automation "
+      f"({sum(1 for c in COVERAGE.values() if c.get('auto') and not c.get('manual'))} full)")
+if unknown_cover or missing_where:
+    raise SystemExit(f"COVERAGE keys with no feature: {unknown_cover or 'none'}; "
+                     f"`where` not on disk: {missing_where or 'none'}")

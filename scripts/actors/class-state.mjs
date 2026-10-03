@@ -1,5 +1,5 @@
 /**
- * Neuroshima 5e — stateful class abilities (Berserk, Kondycha, …).
+ * Neuroshima 5e — stateful class abilities (Berserk, …).
  *
  * A "stateful" ability is one that turns ON and persists, as opposed to a one-shot
  * roll. It is declared in `class-features-data.mjs` via the `toggle` field:
@@ -117,15 +117,10 @@ const STATE_CONFIG = {
       title: "Koniec Berserku",
       detail: actor => `${actor?.name ?? "Postać"} wychodzi z Berserku.`
     }
-  },
-  "neuro-kondycha": {
-    label: "Kondycha",
-    icon: "icons/svg/shield.svg",
-    tint: "#1f6f8b",
-    scrollText: { text: "KONDYCHA", color: "#2980b9" },
-    endText: null,
-    changes: []
   }
+  // Kondycha was here until 2026-10 — a toggle with no changes that spent a use and healed
+  // nothing. RAW it is an instant heal (1k8 + poziom Twardziela), now a dnd5e heal activity
+  // (`heal` in class-features-data.mjs). Old copies on actors: `resyncClassFeatures()`.
 };
 
 /**
@@ -274,7 +269,7 @@ function _berserkAcBonus(actor) {
 /* -------------------------------------------- */
 
 export function registerClassState() {
-  // Toggle abilities (Berserk, Kondycha) get a "utility" activity generated for
+  // Toggle abilities (Berserk) get a "utility" activity generated for
   // every feature with an action tag or limited uses (`build-packs.mjs`,
   // `buildFeature()`) — that generator has no concept of `toggle` abilities, so
   // it builds the same clickable-with-its-own-itemUses-consumption activity for

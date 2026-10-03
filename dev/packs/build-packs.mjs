@@ -29,6 +29,7 @@ import {
 import {
   CLASS_FEATURES, CHOICE_POOLS, FEATURE_REPEATS, resolveGrant
 } from "../../scripts/config/class-features-data.mjs";
+import { featureStatus, featureCoverageHtml } from "../../scripts/config/class-features-coverage.mjs";
 import { CHEMIA, chemiaItemData } from "../../scripts/config/chemia-data.mjs";
 import { SZTUCZKI, sztuczkaItemData } from "../../scripts/config/sztuczki-data.mjs";
 import { ORIGIN_ABILITIES, originAbilityItemData, POCHODZENIA, pochodzenieItemData, abilitiesOf, attrBonus } from "../../scripts/config/pochodzenia-data.mjs";
@@ -41,6 +42,7 @@ import { buildBaterieItemData } from "../../scripts/items/baterie.mjs";
 import { buildKwasItemData } from "../../scripts/items/kwas.mjs";
 import { buildDetonatorItemData, buildElectricFuzeItemData } from "../../scripts/items/detonator.mjs";
 import { GOGLE_VARIANTS, buildGogleItemData } from "../../scripts/items/gogle.mjs";
+import { PRODUCTION_GEAR, buildProductionGearItemData } from "../../scripts/items/production-gear.mjs";
 import { ARMORS, buildArmorItemData } from "../../scripts/config/armor-data.mjs";
 import { TOOLKITS, buildToolkitItemData } from "../../scripts/config/toolkits-data.mjs";
 import { przepisySchematow, schematItemData, kategoriaSchematu } from "../../scripts/config/schematy-data.mjs";
@@ -168,17 +170,26 @@ function buildFeature(f) {
   const activities = {};
   // Anything with an action tag or limited uses gets a clickable utility activity,
   // so it can be rolled from the sheet and from the auto-managed hotbar macro.
+  // `heal` makes it a dnd5e heal instead (Kondycha) — same shape as stock Second Wind.
   if (f.action || f.uses) {
     const aid = idFor("activity", f.id);
     activities[aid] = {
       _id: aid,
-      type: "utility",
+      type: f.heal ? "heal" : "utility",
       name: f.label,
       activation: f.action ? { type: ACTIVATION[f.action], value: 1 } : { type: "special", value: null },
       consumption: f.uses
         ? { targets: [{ type: "itemUses", value: "1", target: "" }] }
         : { targets: [] },
-      description: {}
+      description: {},
+      ...(f.heal ? {
+        range: { units: "self" },
+        target: { affects: { type: "self" } },
+        healing: {
+          number: f.heal.number, denomination: f.heal.denomination, bonus: f.heal.bonus,
+          types: ["healing"], custom: { enabled: false }, scaling: { number: 1 }
+        }
+      } : {})
     };
   }
 
@@ -193,7 +204,8 @@ function buildFeature(f) {
     type: "feat",
     img: iconFor("abilities", f.id),
     system: {
-      description: { value: html(f.text), chat: "" },
+      // Coverage badge (PLAN_beta B5) — `config/class-features-coverage.mjs`.
+      description: { value: html(f.text) + featureCoverageHtml(f.id), chat: "" },
       source: { custom: f.kobalt ? "Neuroshima RPG — Kolor Kobaltu" : "Neuroshima RPG", rules: "2024" },
       type: { value: "class", subtype: "" },
       requirements,
@@ -223,6 +235,7 @@ function buildFeature(f) {
         requiresState: f.requiresState ?? null,
         oncePerTurn: f.oncePerTurn === true,
         legacyAbilityKey: f.legacyAbilityKey ?? null,
+        coverage: featureStatus(f.id),
         // Only on WKK entries, so rulebook features keep byte-identical records.
         ...(f.kobalt ? { kobalt: true } : {})
       }
@@ -670,6 +683,9 @@ function buildElectricFuze() {
 
 function buildBaterie() {
   return { ...buildBaterieItemData({ quantity: 1 }), _id: idFor("loot", "baterie"), _key: null };
+}
+function buildProductionGear(id) {
+  return { ...buildProductionGearItemData(id), _id: idFor("loot", id), _key: null };
 }
 
 /**
@@ -1600,6 +1616,7 @@ const sprzetDocs = [
   buildKwas(),
   buildDetonator(),
   buildElectricFuze(),
+  ...Object.keys(PRODUCTION_GEAR).map(buildProductionGear),
   ...Object.keys(GOGLE_VARIANTS).map(buildGogle),
 ];
 const armorDocs = ARMORS.map(buildArmor);

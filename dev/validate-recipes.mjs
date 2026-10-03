@@ -25,6 +25,7 @@ import {
   KATALOG, PRZEPISY_STANDARDOWE, PRZEPISY_PROFESJI, PRZEPISY_ELABORACJI, LISTA_PROFESJI, __testing as R
 } from "../scripts/config/recipes-data.mjs";
 import { budzetSurowcow, standardoweMinuty, stZWartosci, sumaGb, fmtGGMM } from "../scripts/config/production-rules.mjs";
+import { productionGearIdForRef } from "../scripts/items/production-gear.mjs";
 
 const verbose = process.argv.includes("--szczegoly");
 const errors = [];
@@ -90,8 +91,10 @@ for (const o of gorszeWCzesci) warn(`gorszy w części: ${o}`);
 
 /* ---- braki w katalogach ---- */
 
-const raw = [...KATALOG.values()].filter(k => k.pochodzenie === "raw");
-const tabela = [...KATALOG.values()].filter(k => k.pochodzenie === "tabela");
+const raw = [...KATALOG.values()].filter(k => {
+  return k.pochodzenie === "raw" && !productionGearIdForRef(k.ref);
+});
+const tabela = [...KATALOG.values()].filter(k => k.pochodzenie === "tabela" && !productionGearIdForRef(k.ref));
 const zaslepki = [...KATALOG.values()].filter(k => k.zaslepka && !k.zamiast);
 const nieprodukowalne = [...KATALOG.values()].filter(k => !k.produkcja && !k.zaslepka);
 

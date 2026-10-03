@@ -80,38 +80,39 @@ export const ZLOTY_DESERT_EAGLE = {
  * przy 0 PW (D34) miał co upuścić, dostają tu wpisy: słabsze od najbliższych kuzynów z RAW
  * (Bejsbol/Rurka, Nóż taktyczny, Kastet), tanie i pospolite — łup, który się sprzedaje, nie
  * podnosi. Statystyki ustalił agent wdrażający lalkę (2026-10-03) — do przejrzenia przez MG.
- * Ikony pożyczone do czasu partii 42 (`dev/icons/MISSING.md` §A).
+ * Dedykowane ikony trafiają partią 42 (`dev/icons/MISSING.md` §A); wpisy
+ * zatwierdzone przez MG są przepinane po kolei, a reszta zachowuje pożyczone.
  */
 export const MACZUGA = {
-  id: "maczuga", name: "Maczuga", type: "biala", icon: "iron_pipe_club.svg",
+  id: "maczuga", name: "Maczuga", type: "biala", icon: "maczuga.svg",
   damage: { number: 1, denomination: 6, types: ["bludgeoning"] },
   props: [],
   weight: 2, price: 5, avail: 90,
   note: "Ciężki, nierówny kij — czasem nabity gwoździami. Gorsza od bejsbola: ani oburęczna, ani powalająca."
 };
 export const PALKA_POLICYJNA = {
-  id: "palka-policyjna", name: "Pałka policyjna", type: "biala", icon: "iron_pipe_club.svg",
+  id: "palka-policyjna", name: "Pałka policyjna", type: "biala", icon: "palka_policyjna.svg",
   damage: { number: 1, denomination: 4, types: ["bludgeoning"] },
   props: ["lgt"],
   weight: 0.6, price: 8, avail: 60,
   note: "Gumowa albo drewniana pałka służbowa. Lekka — dobra do drugiej ręki, słaba w pierwszej."
 };
 export const KAMIENNY_NOZ = {
-  id: "kamienny-noz", name: "Kamienny nóż", type: "biala", icon: "combat_knife.svg",
+  id: "kamienny-noz", name: "Kamienny nóż", type: "biala", icon: "kamienny_noz.svg",
   damage: { number: 1, denomination: 4, types: ["piercing"] },
   props: ["lgt"],
   weight: 0.3, price: 1, avail: 90,
   note: "Ociosany krzemień albo szkło na rzemieniu. Tępieje po pierwszej walce."
 };
 export const SZTYLET = {
-  id: "sztylet", name: "Sztylet", type: "biala", icon: "combat_knife.svg",
+  id: "sztylet", name: "Sztylet", type: "biala", icon: "sztylet.svg",
   damage: { number: 1, denomination: 4, types: ["piercing"] },
   props: ["fin", "lgt"],
   weight: 0.4, price: 6, avail: 70,
   note: "Wąskie, obosieczne ostrze domowej roboty. Finezyjny, ale krótszy i słabszy od noża taktycznego."
 };
 export const MLOTEK = {
-  id: "mlotek", name: "Młotek", type: "biala", icon: "iron_pipe_club.svg",
+  id: "mlotek", name: "Młotek", type: "biala", icon: "mlotek.svg",
   damage: { number: 1, denomination: 4, types: ["bludgeoning"] },
   props: ["lgt"],
   weight: 0.7, price: 3, avail: 90,

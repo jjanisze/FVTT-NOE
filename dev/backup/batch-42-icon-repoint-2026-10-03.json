@@ -1,0 +1,46 @@
+{
+  "batch": 42,
+  "world": "output",
+  "items": [],
+  "actors": [],
+  "packs": [
+    {
+      "collection": "neuroshima-2026-overrides.bron",
+      "locked": true,
+      "items": [
+        {
+          "_id": "5shbQZLmPMxSLXIy",
+          "name": "Młotek",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/mlotek.svg"
+        },
+        {
+          "_id": "D3lP603Ln9sYi0Ia",
+          "name": "Sztylet",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/combat_knife.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/sztylet.svg"
+        },
+        {
+          "_id": "R331pJBEdkIf2dz9",
+          "name": "Pałka policyjna",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/palka_policyjna.svg"
+        }
+      ]
+    }
+  ],
+  "prototypes": [
+    {
+      "id": "agregat",
+      "_id": "pxYghNgR0gYzOrBy",
+      "name": "agregat",
+      "exists": false
+    },
+    {
+      "id": "alternator",
+      "_id": "mtK0seLBeazRPElL",
+      "name": "alternator",
+      "exists": false
+    }
+  ]
+}

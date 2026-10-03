@@ -29,7 +29,7 @@ in 2026-09-22 — see below. Two cases that might look like exceptions and aren'
 
 Added 2026-09-22, when `PLAN_magazynki.md` produced the first case the binary above could not
 classify: a mechanic that is **not in the rulebook, but comes from the author of the system**
-(Marcin Kubiesa, in consultation). Calling that WKK would file the author's own intent as this
+(credited in the module README, in consultation). Calling that WKK would file the author's own intent as this
 table's homebrew; calling it NOE without a marker would present it as something a reader can
 look up in the book.
 
@@ -50,14 +50,14 @@ one crafting ruling, and the paper doll (a whole inferred system, listed as one 
 | Spec profession recipe tables (NOE s. 80–84) apply **only to that profession** and stand **beside** the standard formula recipe, not instead of it; their tool requirement is the profession kit **and** the item's usual requirement (PLAN_produkcja D22, confirmed 2026-09-27) | `config/recipes-data.mjs`, `_zbudujPrzepisy()` |
 | **Lalka** (`PLAN_paper_doll.md`, author's fill-the-blanks principle, 2026-10-02): slot geometry; hand ⟂ holster; Głowa / Twarz / Ramię / Strój and their 1-Akcja cost; devices needing a slot; auto placement and displacement; grip superposition (two-handed iff the other hand is empty); an Akcja to put something into the pack; free-hand notes for belt items; the ground as the destination of drops; power armour allowing a helmet; visibility modifiers not stacking; NPCs dropping weapons at 0 PW; the NOE rows of the `dropsAs` table; rounds in a dropped catalog gun (D37). Conscious deviation, cost-neutral: Noktowizor/Termowizor strapped on the head (RAW lists helmet mounting) | `actors/doll-model.mjs`, `actors/doll.mjs`, `combat/grip.mjs`, `actors/ground-items.mjs`, `dev/bestiary/gen_bestiary.py` (`AUTOMATION`, `dropsAs`) |
 
-**Repo is public.** Attributing unpublished rulings to a named person should be cleared with
-them before it lands in a code comment — so the comments state the mechanic and its reasoning,
-and name the source only where the GM has confirmed that is fine.
+**Credit lives on the front page.** The author is thanked once, for all past and future rulings,
+in the module README (*Podziękowania*, decided by the GM 2026-10-03). Code comments say "author of
+the system" / RAI and state the mechanic and its reasoning — they do not repeat the name.
 
 What stays WKK because it does **not** come from the author: the per-round ammunition queue,
 the chamber as a separate slot with its own caliber, and the dominant-round rule for bursts.
-Also deferred-but-WKK: pushing a single round into a removable-magazine weapon against a
-Zwinne dłonie check (author's idea, this table's numbers — see `TODO_mechanika.md`).
+Also WKK: pushing a single round into a removable-magazine weapon against a Zwinne dłonie
+check (author's idea, this table's numbers — `wkk/config/pojedynczy-naboj.mjs`).
 
 ## What's actually in here
 
@@ -78,6 +78,7 @@ Zwinne dłonie check (author's idea, this table's numbers — see `TODO_mechanik
 | `wkk/config/latarka-overrides.mjs` | `LIGHT_KOBALT` — see the override pattern below |
 | `wkk/config/molotov-light.mjs` | `MOLOTOV_LIGHT_KOBALT` — a lit Molotov's light; RAW gives it none (see below) |
 | `wkk/config/production-kobalt.mjs` | Crafting (PLAN_produkcja): abandoning a Robota and its refund (D14), Robota weight interpolation (D4), schematic weight (D15), the Spec profession as an executor trait — ×0,75 / ×0,5 with the full kit, ×0,25 floor, no ST 30 (D26–D28, D32; D30 falls out of D26). Host: `config/production-rules.mjs`, each with its `..._RAW` twin |
+| `wkk/config/pojedynczy-naboj.mjs` | A round pushed into the inserted removable magazine in combat: Zwinne dłonie, ST by caliber category (12 / 14 / 15, .50 BMG 18); failure drops the round on the ground, a natural 1 jams the weapon (jam-immune weapons: plain failure). Host: `weapons/magazine.mjs` (`_performPushRoundAction`), only with Kobalt on; RAW refusal stays for Kobalt off |
 | `wkk/combat/weapon-save-properties.mjs` | `rozrywajaca` |
 | `wkk/combat/bleeding.mjs` | `dumdum` bleed profile |
 | `wkk/registry.mjs` | Every WKK export in one place — see its own header comment |

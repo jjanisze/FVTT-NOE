@@ -15,6 +15,12 @@
  * pass doesn't check). Extending coverage is picking the right damage-type default and trigger
  * copy per ability, not new plumbing.
  *
+ * **Opt-in: `resource.damage`.** A `resource` die alone is not enough — Motywacja, Łeb jak
+ * sklep, Twardość and Kocie kości carry one too, and they are not damage. Until 2026-10 this
+ * handler caught all of them: clicking Motywacja cancelled its native activity and posted this
+ * damage card instead, rolling an unresolved `@scale…` formula. Only features whose data says
+ * `damage: true` come here; `perAttack` caps the dice offered for one hit (Wściekły cios: 3).
+ *
  * Design, matched to the table's actual flow instead of a modal:
  *   1. Player already rolled the attack, already hit, targets are still selected (same
  *      assumption dnd5e's own "Apply Damage" button makes, and `dozownik.mjs`'s hit-detection
@@ -96,8 +102,10 @@ async function postResourceDiceCard(actor, item, feature, abilityId) {
     return;
   }
 
-  const buttons = Array.from({ length: remaining }, (_, i) => i + 1)
-    .map(n => `<button type="button" data-count="${n}">${n}k6</button>`)
+  const offered = Math.min(remaining, feature.resource.perAttack ?? remaining);
+  const faces = /d(\d+)$/.exec(feature.resource.die)?.[1] ?? "?";
+  const buttons = Array.from({ length: offered }, (_, i) => i + 1)
+    .map(n => `<button type="button" data-count="${n}">${n}k${faces}</button>`)
     .join("");
 
   const content = `
@@ -138,6 +146,10 @@ async function _onCommit(message, root, count) {
   const { remaining } = _uses(item);
   if (count > remaining) {
     ui.notifications.warn(`${feature.label}: tylko ${remaining} kości dostępnych.`);
+    return;
+  }
+  if (count > (feature.resource.perAttack ?? Infinity)) {
+    ui.notifications.warn(`${feature.label}: najwyżej ${feature.resource.perAttack} kości do jednego ataku.`);
     return;
   }
 
@@ -189,11 +201,20 @@ function _onRenderResourceDiceCard(message, html) {
 /*  Registration                                  */
 /* -------------------------------------------- */
 
+/**
+ * Does this feature spend its dice through the damage card? Only an explicit `damage: true` —
+ * a `resource` die alone also describes Motywacja or Twardość, which are not damage.
+ * @param {object|null|undefined} feature  A `CLASS_FEATURES` entry.
+ */
+export function isDamageDiceFeature(feature) {
+  return feature?.resource?.damage === true && typeof feature.resource.die === "string";
+}
+
 function onPreUseActivity(activity) {
   const item = activity?.item;
   const abilityId = item?.getFlag(MODULE_ID, FLAG_ABILITY);
   const feature = abilityId ? CLASS_FEATURES[abilityId] : null;
-  if (!feature?.resource) return; // not this family — let the native activity run
+  if (!isDamageDiceFeature(feature)) return; // not this family — let the native activity run
 
   const actor = item.actor;
   if (actor) postResourceDiceCard(actor, item, feature, abilityId);

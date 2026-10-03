@@ -29,6 +29,15 @@ To projekt fanowski i niekomercyjny, **niezwiązany z Portal Games** i nieoficja
 dystrybuuje treści książki poza tym, co niezbędne do rozgrywki (statystyki, zasady, terminologia)
 — zobacz [CREDITS.md](CREDITS.md#neuroshima-ostatnia-era-content-compendia-terminology-rules).
 
+## Podziękowania
+
+**Marcin „Nicram” Kubiesa** — autor mechaniki *Neuroshima Ostatnia Era*. Ten moduł stoi na jego
+zasadach, a tam, gdzie podręcznik milczy albo jest jeszcze w alfie, także na jego wyjaśnieniach,
+rozstrzygnięciach i pomysłach z rozmów — od podziału magazynków po zasady, które dopiero powstaną.
+Dziękujemy raz, tutaj, za wszystkie: w kodzie takie fragmenty są oznaczone jako intencja autora
+(RAI), bez powtarzania nazwiska przy każdym z osobna. Lista tych rozstrzygnięć:
+[`scripts/wkk/README.md`](scripts/wkk/README.md#the-third-bucket-rai--mechanics-from-the-systems-author-unpublished).
+
 ## Status projektu
 
 **Alfa.** Walka, broń i amunicja, stany, choroby, odpoczynki, podróż i przetrwanie działają i są

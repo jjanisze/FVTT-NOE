@@ -1,7 +1,8 @@
 # TODO — mechaniki z audytu drużyny
 
 Lista spisana przy audycie (IMPLEMENTATION.md (21), 2026-09-07), zrealizowana w (22)
-(2026-09-08). **Prawie wszystko zamknięte** — zostały trzy rzeczy, opisane na dole.
+(2026-09-08). **Wszystko zamknięte** (2026-10-03) — zostaje tylko drobiazg z „Do sprawdzenia
+przy okazji". Plik do skasowania, gdy i ten zniknie.
 
 Zakres: Victor, Alan, Lorentz, Laffitte, Raynald. Piekarz i Kier wyłączeni przez użytkownika
 (patrz `HANDOFF_party_build_audit.md`).
@@ -37,10 +38,9 @@ W `worlds/output/data/_backups/` zostały **dwie niepełne kopie z 2026-09-08** 
 `LOG`, `MANIFEST`), pozostałość po nieudanych zapisach. Nie są wiarygodnymi backupami — można
 je skasować.
 
-### 1. Statystyki `Laski` do zatwierdzenia
+### ~~1. Statystyki `Laski` do zatwierdzenia~~ — ✅ zatwierdzone (MG, 2026-10-03)
 
-1k6 obuchowe, finezyjna, 1 kg, 15 gb — wartości nadane przeze mnie, gdy okazało się, że broń
-nie ma w ogóle kości obrażeń. Nikt ich nie zatwierdził.
+1k6 obuchowe, finezyjna, 1 kg, 15 gb — bez zmian (`wkk/config/weapons-data.mjs`).
 
 ### ~~2. Rewolwerowiec u Lorentza działa na całą Broń Palną Krótką~~ — ✅ zamknięte 2026-10-01
 
@@ -62,7 +62,17 @@ Kobaltu, nie ruszane, bo poza zakresem.
 
 ## Dopisane 2026-09-22 (magazynki symulacyjne)
 
-### Wepchnięcie pojedynczego naboju do broni z wymiennym magazynkiem — WKK
+### ~~Wepchnięcie pojedynczego naboju do broni z wymiennym magazynkiem — WKK~~ — ✅ wdrożone (2026-10-03)
+
+**Rozstrzygnięcie MG (2026-10-03):** siatka ST niżej zatwierdzona bez zmian. Porażka — nabój
+wypada **na ziemię** (przedmioty na ziemi z Oporządzenia). Pechowa jedynka — nabój wchodzi, ale
+krzywo: **broń się zacina**. Akcja przepada w każdym wypadku. Tylko w walce i tylko z Kobaltem;
+poza walką ładuje się magazynek zwyczajnie. Kod: `wkk/config/pojedynczy-naboj.mjs` (reguła),
+`_performPushRoundAction()` w `weapons/magazine.mjs` (gospodarz), `dropLoosePiece()` w
+`actors/ground-items.mjs`. Broń, która się nie zacina (Niezawodny, Jak dbasz, tak masz,
+Wychuchana spluwa), traktuje pechową jedynkę jak zwykłą porażkę.
+
+Zapis sprzed decyzji, dla historii:
 
 **Skąd:** konsultacja z autorem mechaniki (Marcin Kubiesa). RAW tego nie przewiduje — przewiduje
 ładowanie po jednym naboju wyłącznie dla `wmag` i `beb`. Autor dopuszcza to jako **wadę** broni

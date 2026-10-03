@@ -1,0 +1,64 @@
+# World and module item audit
+
+Started 2026-10-03. This is the durable inventory for work that sits between
+icon generation, compendium creation, live-world cleanup and mechanics.
+`MISSING.md` remains the art batch queue.
+
+## Reproducible live snapshot
+
+With Foundry open in the Chrome debug session:
+
+```powershell
+node dev/icons/audit-live-items.mjs
+```
+
+The script reads Foundry documents through the browser API and writes
+`review/audits/live-items.json`. It does not open live LevelDB files. The first
+snapshot contained 2,204 Item documents: 274 world, 1,185 actor-owned and 745
+module-compendium entries, using 673 distinct icon paths. After Batch 42
+integration the snapshot contains 2,208 documents: 274 world, 1,185
+actor-owned and 749 compendium entries, using 682 distinct icon paths.
+
+Treat the report as evidence, not an automatic edit list. Actor portraits are
+often wrong for physical items, but are expected on some creature attacks and
+legacy NPC actions. `icons/svg/upgrade.svg` is primarily the separate feat and
+Sztuczka art pass.
+
+## Current work
+
+- Batch 41: both blueprint corrections are approved and installed.
+- Batch 42: all nine icons are approved and installed. The two borrowed weapon
+  icons were replaced, and all four production outputs now have prototypes.
+- Agregat, Akumulator, Alternator and Defibrylator now have deterministic `sprzet` prototypes. Their
+  `raw:` recipe references resolve to those compendium documents, with the
+  shared builder as a fallback until packs are rebuilt.
+- Batches 43–44: eighteen 3×3-atlas candidates are ready for GM review. Source
+  documents and live data remain unchanged until approval.
+
+## Prototype and mechanics decisions exposed by batch 42
+
+- **Agregat:** create a reusable loot/equipment prototype. The rulebook text also
+  says a generator can extend drone operation for 0.5 l fuel per hour. Audit the
+  drone implementation and add a mechanics TODO if that interaction is absent.
+- **Akumulator:** create a reusable prototype. The rulebook specifies one hour
+  for a medium drone and four hours for a small drone. Audit whether charge and
+  consumption belong in the current drone system before adding automation.
+- **Alternator:** create a reusable prototype. No standalone active mechanic was
+  found in the current module sources; keep it ordinary equipment unless the
+  rulebook supplies an interaction elsewhere.
+- **Defibrylator:** create a reusable prototype. The current sources provide its
+  catalog and production data but no use action. Re-read the surrounding
+  rulebook entry before inventing healing, stabilization or charge mechanics.
+
+## Immediate data-fix candidates from the first snapshot
+
+These need verification against existing dedicated assets before they become art
+tasks: actor-owned Bejzbol entries using portraits or `item-bag.svg`, Berdysz
+using `item-bag.svg`, and several copies of `Bez Broni` using `item-bag.svg`.
+When the correct asset already exists, repoint the document rather than queueing
+new art.
+
+The snapshot also exposes campaign-specific weapons using actor portraits, such
+as Ruger LCP II, Skalpel, Walther PPK, Raca drogowa and Scyzoryk. Review their
+source status before adding them: some may be intentional one-off items, aliases
+of existing prototypes, or future WKK compendium entries.

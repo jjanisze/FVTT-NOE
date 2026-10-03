@@ -97,7 +97,12 @@ Parametryzacja per wpis: `ability`, `dc` (`{mode:"fixed"}` vs `{mode:"attacker",
 Odporności: `_isImmuneToCondition` czyta `system.traits.ci.value` (Set/array). dnd5e i tak
 usuwa stan odporny w `prepareResistImmune`, więc proaktywnie pomijamy RO i raportujemy odporność.
 
-### 3.2 `ppanc` / `przebijajaca` — pipeline obrażeń (wysoki zysk, średni koszt)
+### 3.2 `ppanc` / `przebijajaca` — pipeline obrażeń (wysoki zysk, średni koszt) — ✅ 2026-10-03
+
+> **Zrobione inaczej niż w planie niżej:** bez flagi na wiadomości. `combat/armour-piercing.mjs` w
+> `dnd5e.preCalculateDamage` czyta właściwość z broni aktywności albo z `damages[].properties` (amunicja)
+> i ustawia natywne `options.ignore.resistance` + `.threshold`; próg BG i Bestiariusza je honorują.
+> Panel Apply Damage pokazuje już wynik po przebiciu, bo liczy przez to samo `calculateDamage`.
 
 Efekt: ignoruje **Odporności** (dnd5e `dr`) oraz **Próg obrażeń** (nasza redukcja materiałowa
 w `damage-reduction.mjs`).

@@ -26,6 +26,7 @@ import { buildMedykRefillItemData, ensureMedykRefillActivities } from "../items/
 import { WEAPON_MAP, buildWeaponItemData } from "../config/weapons-data.mjs";
 import { ARMOR_MAP, buildArmorItemData } from "../config/armor-data.mjs";
 import { AMMO_CALIBER_MAP, buildAmmoItemData } from "../config/ammo-data.mjs";
+import { PRODUCTION_GEAR, buildProductionGearItemData, productionGearIdForRef, productionGearRef } from "../items/production-gear.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const ICON = `modules/${MODULE_ID}/icons/items/loot`;
@@ -54,9 +55,31 @@ const SPRZET = Object.freeze({
   "zapalnik-elektryczny": ["consumable", "zapalnik-elektryczny"]
 });
 
+/** Production outputs promoted to reusable prototypes in the `sprzet` pack. */
+const PRODUCTION_SPRZET = Object.freeze(Object.fromEntries(
+  Object.keys(PRODUCTION_GEAR).map(id => [productionGearRef(id), ["loot", id]])
+));
+
 /** Ikony przedmiotów z cennika, które już mają grafikę; reszta — `dev/icons/MISSING.md`. */
 const RAW_IKONY = Object.freeze({
   "radio": "radio.svg",
+  "akumulator": "akumulator.svg",
+  "agregat": "agregat.svg",
+  "alternator": "alternator.svg",
+  "defibrylator": "defibrylator.svg",
+  "detektor-ruchu": "detektor_ruchu.svg",
+  "komputer-osobisty": "komputer_osobisty.svg",
+  "komputer-gamingowy": "komputer_gamingowy.svg",
+  "kontroler": "kontroler_zdalnego_sterowania.svg",
+  "miernik-skazenia": "miernik_skazenia_chemicznego.svg",
+  "wykrywacz-metalu": "wykrywacz_metalu.svg",
+  "palnik": "palnik_acetylenowo_tlenowy.svg",
+  "srodek-usypiajacy": "srodek_usypiajacy.svg",
+  "srodki-dezynfekujace": "srodki_dezynfekujace.svg",
+  "paralotnia": "paralotnia.svg",
+  "adapter-wifi": "adapter_wifi.svg",
+  "monitorek": "monitorek.svg",
+  "router": "router.svg",
   "krotkofalowka": "krotkofalowka.svg",
   "miernik-promieniowania": "miernik_promieniowania.svg",
   "nosnik-danych": "pendrive.svg",
@@ -94,6 +117,7 @@ export async function uuidWKompendium(ref) {
   const [src, id] = String(ref).split(/:(.*)/s);
   if (PACZKI[src]) return `Compendium.${MODULE_ID}.${PACZKI[src].pack}.Item.${await _idFor(PACZKI[src].kind, id)}`;
   if (src === "item" && SPRZET[id]) return `Compendium.${MODULE_ID}.sprzet.Item.${await _idFor(...SPRZET[id])}`;
+  if (PRODUCTION_SPRZET[ref]) return `Compendium.${MODULE_ID}.sprzet.Item.${await _idFor(...PRODUCTION_SPRZET[ref])}`;
   return null;
 }
 
@@ -141,6 +165,10 @@ export async function daneWyniku(ref) {
     if (src === "weapon" && WEAPON_MAP[id]) return { data: buildWeaponItemData(WEAPON_MAP[id]), uuid: null, stos: false };
     if (src === "armor" && ARMOR_MAP[id]) return { data: buildArmorItemData(ARMOR_MAP[id]), uuid: null, stos: false };
     if (src === "ammo" && AMMO_CALIBER_MAP[id]) return { data: buildAmmoItemData(AMMO_CALIBER_MAP[id]), uuid: null, stos: true };
+    const productionGearId = productionGearIdForRef(ref);
+    if (productionGearId) {
+      return { data: buildProductionGearItemData(productionGearId), uuid: null, stos: true };
+    }
     console.warn(`${MODULE_ID} | produkcja: brak ${uuid} w kompendium (${ref}) — tworzę zwykły przedmiot`);
   }
 

@@ -288,6 +288,16 @@ async function _drop(actor, item, { at = null, involuntary = false, reason = "" 
   return _send(actor, request);
 }
 
+/**
+ * Jedna sztuka **luźnego** przedmiotu wypada na ziemię — z ekwipunku, nie z lalki (nabój, który
+ * wyślizgnął się przy ładowaniu: `weapons/magazine.mjs`). Lalka odmawia przedmiotów, których
+ * nie nosi, więc ta droga omija ją wprost; zawsze mimowolnie, więc bez „Darmowego upuszczania".
+ * @returns {Promise<boolean>} false — brak MG albo żetonu; przedmiot zostaje u postaci
+ */
+export function dropLoosePiece(actor, item, { reason = "" } = {}) {
+  return _drop(actor, item, { involuntary: true, reason });
+}
+
 /* -------------------------------------------- */
 /*  Podniesienie                                 */
 /* -------------------------------------------- */

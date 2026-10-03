@@ -20,6 +20,12 @@
  *   hotbar        gets an auto-managed macro — see actors/ability-hotbar.mjs
  *   exclusiveGroup non-stacking family (multiclass rule) — see actors/class-rules.mjs
  *   handgunKind   "rewolwer" | "pistolet" — weapon the ability's clauses apply to, see actors/rewolwerowiec.mjs
+ *   heal          { number, denomination, bonus } — the activity is a dnd5e heal (Kondycha)
+ *   resource      { die, label, damage?, perAttack? } — dice pool; `damage` = the damage-dice card
+ *                 in actors/class-resource-dice.mjs, others keep the native activity
+ *   auto          [{ what, where }] — rules the code enforces (coverage ledger, PLAN_beta B5);
+ *                 empty = none. See config/class-features-coverage.mjs
+ *   manual        what the code does not do, shown on the badge as „Nie automatyzujemy”
  *   kobalt        W Kolorze Kobaltu content, defined in scripts/wkk/ and appended at the end
  */
 
@@ -36,6 +42,8 @@ export const CLASS_FEATURES = {
     uses: { max: "@scale.brutal.berserki", period: "lr" },
     hotbar: true,
     toggle: { effect: "neuro-berserk", duration: { rounds: 10 }, breaksOn: ["unconscious", "incapacitated", "charmed"], afterEnd: "noActionNextTurn" },
+    auto: [{ what: "włączenie w Akcji Bonusowej zużywa Berserk, efekt trwa 10 rund", where: "actors/class-state.mjs" }, { what: "Siła Berserkera — Ułatwienie w testach i RO na Siłę", where: "actors/class-state.mjs" }, { what: "Obrażenia Berserkera — kość z tabeli Brutala do obrażeń ataków wręcz", where: "actors/class-state.mjs" }, { what: "Obłęd Berserkera — TT + mod. SIŁ bez pancerza, hełmu i tarczy", where: "actors/class-state.mjs" }, { what: "koniec przy Nieprzytomności, Obezwładnieniu i Zauroczeniu; karta zmęczenia po Berserku", where: "actors/class-state.mjs" }],
+    manual: "Szarżę Berserkera wykonuje gracz; zmęczenie po Berserku (brak akcji) moduł ogłasza, pilnuje stół. Obrażenia Berserkera idą jak Rage w dnd5e — tylko do ataków wręcz, rzut bronią opartą na Sile dolicza gracz.",
     text: "W Akcji Bonusowej możesz wpaść w Berserk. W tym swoistym szale otrzymujesz następujące korzyści: Siła Berserkera. Masz Ułatwienie w testach Siły i RO na Siłę. Obrażenia Berserkera. Kiedy wykonujesz atak oparty na Sile — bronią lub bez broni i zadajesz obrażenia, dorzucasz dodatkową kość obrażeń rosnącą wraz z poziomem Brutala, zgodnie z kolumną Obrażenia Berserkera w tabeli Zdolności Klasowych Brutala. Szarża Berserkera [B]. Jeśli przeznaczysz całą swoją Szybkość na zbliżenie się do przeciwnika, którego widzisz lub słyszysz, możesz w Akcji Bonusowej wykonać Przyspieszenie w jego kierunku. Obłęd Berserkera. Jeśli nie nosisz żadnego pancerza, hełmu ani tarczy, twoja TT rośnie o wartość modyfikatora Siły. Czas trwania. Berserk trwa 10 rund (do końca twojej ostatniej tury), chyba że otrzymasz stan Nieprzytomność, Obezwładnienie czy Zauroczenie, które go przerywają. Kiedy Berserk się zakończy, zmęczenie sprawia, że nie wykonujesz żadnej akcji do końca twojej następnej tury. Liczbę dostępnych na danym poziomie Berserków, znajdziesz w tabeli Zdolności klasowe Brutala. Liczba ta odnawia się po odbyciu Długiego odpoczynku."
   },
   "gola-klata": {
@@ -48,6 +56,8 @@ export const CLASS_FEATURES = {
     passive: true,
     acFormula: "10 + @abilities.dex.mod + @abilities.con.mod",
     exclusiveGroup: "unarmoredAc",
+    auto: [{ what: "nie łączy się z Tarczą wiary ani Obłędem Berserkera — słabsza zdolność wyszarzona na karcie", where: "actors/class-rules.mjs" }],
+    manual: "TT 10 + mod. ZRC + mod. KON ustawia się w konfiguracji Trudności Trafienia na karcie — moduł jej nie nakłada.",
     text: "Kiedy nie nosisz żadnego pancerza, hełmu ani tarczy twoja Trudność Trafienia wynosi 10 + twoje modyfikatory Zręczności i Kondycji. Ta zdolność nie łączy się z podobnie działającymi zdolnościami innych klas."
   },
   "wsciekly-cios": {
@@ -58,8 +68,10 @@ export const CLASS_FEATURES = {
     label: "Wściekły cios",
     action: null,
     uses: { max: "@classes.brutal.levels", period: "lr" },
-    resource: { die: "1d6", label: "Kości Wściekłego ciosu" },
+    resource: { die: "1d6", label: "Kości Wściekłego ciosu", damage: true, perAttack: 3 },
     hotbar: true,
+    auto: [{ what: "karta po trafieniu: 1–3 kości, raz na rundę, rzut obrażeń z wybranym typem", where: "actors/class-resource-dice.mjs" }],
+    manual: "Czy atak trafił i był oparty na Sile, decyduje gracz — przycisk naciska się po trafieniu, cel zaznaczony.",
     text: "Raz w rundzie, kiedy trafisz atakiem opartym na Sile, możesz dodać do obrażeń kości Wściekłego ciosu. Masz ich tyle, ile poziomów Brutala, a każda z nich zadaje dodatkowo 1k6 obrażeń. PRZYKŁAD: Na 5. poziomie Brutala masz 5 kości Wściekłego ciosu. Do pojedynczego ataku możesz dodać maksymalnie 3 kości Wściekłego ciosu. Kości tej zdolności odnawiają się po odbyciu Długiego odpoczynku."
   },
   "z-bara": {
@@ -71,6 +83,8 @@ export const CLASS_FEATURES = {
     action: "B",
     hotbar: true,
     requiresState: "neuro-berserk",
+    auto: [{ what: "przycisk Odepchnięcia z ST 8 + mod. SIŁ + PB na karcie zdolności", where: "combat/melee-maneuvers.mjs" }],
+    manual: "Warunek Berserka i koszt Akcji Bonusowej pilnuje gracz.",
     text: "Kiedy jesteś pod wpływem zdolności Berserk, to w Akcji Bonusowej możesz wykonać Odepchnięcie istoty dużej lub mniejszej od ciebie. Cel musi zdać RO na Siłę lub Zręczność, inaczej go odpychasz o 1,5 metra od siebie lub przewracasz, nakładając na niego stan Powalenie. Stopień Trudności RO wynosi 8 plus twój modyfikator Siły i Premia Biegłości."
   },
   "szosty-zmysl": {
@@ -80,6 +94,7 @@ export const CLASS_FEATURES = {
     level: 3,
     label: "Szósty zmysł",
     action: null,
+    auto: [],
     text: "Masz pierwsze objawy paranoi. Wszędzie widzisz niebezpieczeństwo, ale dzięki temu łatwiej ci uniknąć zagrożenia. Otrzymujesz Ułatwienie w RO na Zręczność przeciw zagrożeniom, które jesteś w stanie zarejestrować zmysłami, np. pułapki, śliska nawierzchnia, spadający sufit, granat czy długa seria z karabinu maszynowego. Szósty zmysł nie działa, jeśli jesteś pod wpływem stanu Oślepienie, Ogłuszenie lub Nieprzytomność."
   },
   "brutalny-cios": {
@@ -91,6 +106,7 @@ export const CLASS_FEATURES = {
     action: null,
     uses: { max: "@classes.brutal.levels", period: "lr" },
     hotbar: true,
+    auto: [],
     text: "Kiedy używasz kości Wściekłego ciosu w ataku wręcz, możesz nałożyć na cel jeden dodatkowy efekt zgodny z poniższą tabelą. Efekty o tym samym działaniu się nie kumulują. TYP OBRAŻEŃ EFEKT Obuchowe Powalenie. Automatyczne powalenie istoty, maksymalnie o jeden rozmiar większej od ciebie. Cięte Osłabienie. Cel otrzymuje karę -1k4 do Testów Ataku (tj. jego wynik pomniejszany jest o 1k4) do początku twojej następnej tury. Kłute Okulawienie. Szybkość istoty spada o 6 m, do początku twojej następnej tury."
   },
   "drugi-atak": {
@@ -103,6 +119,8 @@ export const CLASS_FEATURES = {
     action: null,
     passive: true,
     exclusiveGroup: "extraAttack",
+    auto: [{ what: "nie łączy się między klasami — działa najwyższy, reszta wyszarzona na karcie", where: "actors/class-rules.mjs" }],
+    manual: "Liczbę ataków w akcji Atakowanie liczy gracz — dnd5e jej nie śledzi.",
     text: "Kiedy wykonujesz w swojej turze akcję Atakowanie, możesz zaatakować dwukrotnie."
   },
   "solowa": {
@@ -113,6 +131,7 @@ export const CLASS_FEATURES = {
     label: "Solówa",
     action: "B",
     hotbar: true,
+    auto: [],
     text: "W Akcji Bonusowej możesz wybrać istotę, którą widzisz w zasięgu 18 metrów. Prowokujesz ją do atakowania tylko ciebie, jeśli nie zda ona RO na Inteligencję o ST 8 plus twoja Premia Biegłości i modyfikator Siły. Efekt trwa, dopóki istota cię widzi lub zda Rzut Obronny na końcu swojej następnej tury."
   },
   "szalencza-szarza": {
@@ -122,6 +141,7 @@ export const CLASS_FEATURES = {
     level: 7,
     label: "Szaleńcza szarża",
     action: null,
+    auto: [],
     text: "Twoja szybkość rośnie o 3 m, a jeśli wykonasz akcję Przyspieszenie, przeciwnicy mają Utrudnienie do Testów Ataków dystansowych przeciw tobie, do początku twojej następnej tury."
   },
   "paranoja": {
@@ -131,6 +151,7 @@ export const CLASS_FEATURES = {
     level: 9,
     label: "Paranoja",
     action: null,
+    auto: [],
     text: "Twój lęk przed zagrożeniem jest tak wielki, że wszędzie spodziewasz się zasadzki. Nikt nie jest w stanie cię zaskoczyć i otrzymujesz Ułatwienie w testach Inicjatywy."
   },
   "zabojczy-cios": {
@@ -140,6 +161,7 @@ export const CLASS_FEATURES = {
     level: 11,
     label: "Zabójczy cios",
     action: null,
+    auto: [],
     text: "Wiesz już gdzie uderzać, żeby wyrządzić największe szkody. Kiedy trafiasz krytycznie atakiem wręcz, zamiast podwajać, potrajasz kostki obrażeń."
   },
   "motywacja": {
@@ -152,6 +174,7 @@ export const CLASS_FEATURES = {
     uses: { max: "@abilities.cha.mod", period: "sr" },
     resource: { die: "@scale.cwaniak.motywacja" },
     hotbar: true,
+    auto: [],
     text: "Motywujesz towarzysza za pomocą słów lub muzyki. Kiedy twój sojusznik wykonuje dowolny test, możesz w swojej Reakcji zwiększyć jego szanse na sukces. Sojusznik musi się znajdować w zasięgu 18 metrów od ciebie, a twoja Reakcja musi nastąpić przed poznaniem efektu testu. Sojusznik dodaje kość Motywacji, do swojego Testu k20. Wartość kości Motywacji określa tabela Zdolności klasowych Cwaniaka. Możesz użyć tej zdolność tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po Krótkim odpoczynku."
   },
   "szczescie": {
@@ -163,6 +186,7 @@ export const CLASS_FEATURES = {
     action: null,
     uses: { max: "@scale.cwaniak.szczescie", period: "lr" },
     hotbar: true,
+    auto: [],
     text: "Raz w rundzie możesz powtórzyć dowolny test, którego wynik ci nie odpowiada. Powtórzony test zawiera takie samo Ułatwienie lub Utrudnienie, jak test pierwotny. Wynik, który otrzymasz w przerzucie, musisz zaakceptować. Możesz użyć tej zdolności tyle razy, ile wskazuje kolumna Szczęście w tabeli Zdolności klasowych Cwaniaka. Zdolność Szczęście odnawia się po Długim odpoczynku."
   },
   "kolejka": {
@@ -174,6 +198,7 @@ export const CLASS_FEATURES = {
     action: null,
     restActivity: "sr",
     resource: { die: "@scale.cwaniak.kolejka" },
+    auto: [],
     text: "Podczas Krótkiego odpoczynku, puszczasz wśród towarzyszy kolejkę z napitkiem własnej roboty. Każdy, kto pije, odzyskuje dodatkowo +1k4 PW za każdą wydaną Kość Wytrzymałości, podczas tego odpoczynku. Pokrzepiająca siła płynąca ze zdolności Kolejka rośnie zgodnie z ostatnią kolumną w tabeli Zdolności klasowych Cwaniaka."
   },
   "spieprzysz-to": {
@@ -185,6 +210,7 @@ export const CLASS_FEATURES = {
     action: "R",
     uses: { max: "@abilities.cha.mod", period: "sr" },
     hotbar: true,
+    auto: [],
     text: "Potrafisz każdego wytrącić z równowagi. Kiedy istota, którą widzisz w promieniu 18 m, wykonała udany Test Ataku lub Rzut Obronny, możesz w swojej Reakcji sprawić, by powtórzyła rzut i wybrała gorszy wynik. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po ukończeniu Krótkiego odpoczynku."
   },
   "szybka-gadka": {
@@ -195,6 +221,7 @@ export const CLASS_FEATURES = {
     label: "Szybka gadka",
     action: "B",
     hotbar: true,
+    auto: [],
     text: "W czasie walki możesz wykonać akcję Wpływanie w swojej Akcji Bonusowej. Swoimi błyskawicznymi i celnymi słowami, możesz np. oszukać przeciwnika, zdezorientować go lub przekonać do wycofania się. PRZYKŁAD: Wykonując Test Charyzmy (Zastraszanie) o ST 15, próbujesz nastraszyć gangusa, żeby uciekł z pola walki. Albo wykonując Test Charyzmy (Oszustwo) o ST 15, próbujesz przekonać mutanta, żeby nie robił ci krzywdy, bo też jesteś mutantem. Lub wykonując test Mądrości (Tresura) o ST 15, próbujesz uspokoić rozwścieczonego neoniedźwiedzia. Po więcej szczegółów zajrzyj do podrozdziału Interakcje z istotami (s .41)."
   },
   "ekspert": {
@@ -204,6 +231,8 @@ export const CLASS_FEATURES = {
     level: 4,
     label: "Ekspert",
     action: null,
+    auto: [],
+    manual: "Wybrane biegłości i Specjalizacje zaznacza gracz na karcie — dnd5e nie ma awansu „wybierz spośród tego, co już umiesz”.",
     text: "Wybierasz dwie umiejętności lub jedną umiejętność i jedno narzędzie, w których masz biegłość. Od tej pory specjalizujesz się w nich, więc Premia Biegłości ulega podwojeniu."
   },
   "cwaniacki-zwod": {
@@ -214,6 +243,7 @@ export const CLASS_FEATURES = {
     label: "Cwaniacki zwód",
     action: "B",
     hotbar: true,
+    auto: [],
     text: "Jeśli nie nosisz ciężkiego pancerza, to w Akcji Bonusowej możesz wykonać akcję Odstąpienie i przemieścić się przez obszar zajmowany przez przeciwników, nie prowokując ataków okazyjnych."
   },
   "obelga": {
@@ -225,6 +255,7 @@ export const CLASS_FEATURES = {
     action: "A",
     uses: { max: "@prof", period: "sr" },
     hotbar: true,
+    auto: [],
     text: "Zamiast wykonywać akcję Atakowanie, możesz obrazić istotę w zasięgu 18 metrów, która cię widzi i słyszy. Istota nie musi cię rozumieć, ponieważ sam ton twojego głosu ocieka pogardą. Jeżeli do końca twojej następnej tury cel zaatakuje kogoś innego niż ty, wykonuje Testy Ataku z Utrudnieniem. Tej zdolności możesz użyć tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po ukończeniu Krótkiego odpoczynku."
   },
   "glowa-do-gory": {
@@ -235,6 +266,7 @@ export const CLASS_FEATURES = {
     label: "Głowa do góry!",
     action: "A",
     hotbar: true,
+    auto: [],
     text: "Kiedy ty lub twoi towarzysze jesteście pod wpływem stanu Przerażenie, możesz wlać odwagę w wasze serca. W swojej akcji rozpoczynasz występ (deklamację, przemowę, modlitwę, grę na instrumencie) trwający do końca twojej następnej tury. Ty i wszyscy słyszący cię sojusznicy w zasięgu 18 metrów automatycznie zdajecie RO przeciw Przerażeniu."
   },
   "samouk": {
@@ -244,6 +276,8 @@ export const CLASS_FEATURES = {
     level: 7,
     label: "Samouk",
     action: null,
+    auto: [],
+    manual: "Wybrane biegłości i Specjalizacje zaznacza gracz na karcie — dnd5e nie ma awansu „wybierz spośród tego, co już umiesz”.",
     text: "Otrzymujesz biegłość w dwóch wybranych umiejętnościach lub jednej wybranej umiejętności i jednym dowolnym zestawie narzędzi."
   },
   "smiertelna-obelga": {
@@ -253,6 +287,7 @@ export const CLASS_FEATURES = {
     level: 11,
     label: "Śmiertelna obelga",
     action: null,
+    auto: [],
     text: "Kiedy rzucasz Obelgę, twoje słowa zadają dodatkowo 1k6 x twój modyfikator Charyzmy obrażeń psychicznych, osłabiających wolę walki przeciwnika. Jeśli twoja zdolność Obelga zmniejszy PW celu do 0, upada on i osuwa się w bezdenną otchłań rozpaczy."
   },
   "dobra-rada": {
@@ -264,6 +299,7 @@ export const CLASS_FEATURES = {
     action: "B",
     uses: { max: "@prof", period: "sr" },
     hotbar: true,
+    auto: [],
     text: "W Akcji Bonusowej możesz wybrać jednego sojusznika, który cię słyszy i dać mu dobrą radę. Do początku twojej następnej tury otrzymuje premię do Testu Cechy, Ataku lub Rzutu Obronnego, równą twojemu modyfikatorowi Inteligencji. Możesz użyć tej zdolności tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po odbyciu Krótkiego odpoczynku."
   },
   "inteligentna-obrona": {
@@ -275,6 +311,7 @@ export const CLASS_FEATURES = {
     action: "R",
     uses: { max: "@abilities.int.mod", period: "sr" },
     hotbar: true,
+    auto: [],
     text: "Kiedy zostajesz trafiony atakiem, przed poznaniem ilości obrażeń, możesz w Reakcji zwiększyć swoją Trudność Trafienia o wartość modyfikatora Inteligencji, do początku swojej następnej tury, by w ten sposób uniknąć trafienia. Możesz użyć tej zdolności tyle razy, ile wynosi twój modyfikator Inteligencji. Zdolność odnawia się po odbyciu Krótkiego odpoczynku."
   },
   "szybkie-badanie": {
@@ -285,6 +322,7 @@ export const CLASS_FEATURES = {
     label: "Szybkie badanie",
     action: "B",
     hotbar: true,
+    auto: [],
     text: "W czasie walki możesz wykonać akcję Badanie w swojej Akcji Bonusowej. Jesteś w stanie bardzo szybko zdobyć cenne informacje dotyczące np. miejsca walki, najbliższych urządzeń lub wybranych statystyk przeciwnika, zależnie od używanej umiejętności (patrz akcja Badanie w rozdziale Eksploracja s. 41). PRZYKŁAD: Wykonując Test Inteligencji (Technika) o ST 15, dotyczący wrogiej maszyny Molocha, możesz się dowiedzieć, ile ma PW lub jak wysoka jest jej TT."
   },
   "leb-jak-sklep": {
@@ -297,6 +335,7 @@ export const CLASS_FEATURES = {
     uses: { max: "@prof", period: "lr" },
     resource: { die: "@scale.spec.lebJakSklep" },
     hotbar: true,
+    auto: [],
     text: "Miewasz przebłyski prawdziwego geniuszu. Kiedy wykonujesz Test Inteligencji lub dowolnego zestawu narzędzi, możesz dorzucić 1k4 do wyniku. Masz tyle tych kostek, ile wynosi twoja Premia Biegłości. Im masz wyższy poziom, tym wartość kostek rośnie, zgodnie z kolumną Łeb jak sklep w poniższej tabeli Zdolności klasowych Speca. Zdolność odnawia się po Długim odpoczynku."
   },
   "szybka-produkcja": {
@@ -307,6 +346,7 @@ export const CLASS_FEATURES = {
     label: "Szybka produkcja",
     action: null,
     uses: { max: 1, period: "sr" },
+    auto: [{ what: "koszyk do 25 gb (50 gb od 11. poz.), 1 min × 1 gb, bez Testu, ładunek na odpoczynek", where: "production/szybka.mjs" }],
     text: "Raz na Krótki lub Długi odpoczynek, poza normalnymi zasadami produkcji, możesz stworzyć niewielkie przedmioty, jeśli masz odpowiednie narzędzia, surowce i schematy. Sumaryczna wartość tych przedmiotów nie może przekraczać 25 gb, a czas produkcji to 1 minuta x 1 gb wartości. PRZYKŁAD: Potrzebujesz 20 minut, żeby wyprodukować samoróbkę (20 gb), granat improwizowany (20 gb), medpak (20 gb), 2 noże do rzucania (2 x 10 gb) lub 12 naboi 9 mm (10 x 2 gb). Na poziomie 11 możesz szybko wyprodukować przedmioty warte sumarycznie 50 gb (patrz podrozdział Produkcja przedmiotów s. 144)."
   },
   "szybkie-rece": {
@@ -318,6 +358,7 @@ export const CLASS_FEATURES = {
     action: null,
     uses: { max: "@abilities.dex.mod", period: "sr" },
     hotbar: true,
+    auto: [],
     text: "W czasie walki jesteś w stanie robić dwie rzeczy naraz. W swojej turze możesz wykonać jedną akcję więcej oprócz zwykłej akcji i możliwej Akcji Bonusowej. Akcja ta może być przeznaczona jedynie na akcję Używanie. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Zręczności. Zdolność odnawia się po odbyciu Krótkiego odpoczynku."
   },
   "wyksztalciuch": {
@@ -327,6 +368,8 @@ export const CLASS_FEATURES = {
     level: 5,
     label: "Wykształciuch",
     action: null,
+    auto: [],
+    manual: "Wybrane biegłości i Specjalizacje zaznacza gracz na karcie — dnd5e nie ma awansu „wybierz spośród tego, co już umiesz”.",
     text: "Jeśli jeszcze nie wiesz wszystkiego, to dobierz sobie dwie umiejętności lub dwie biegłości w narzędziach. Jesteś Specem, ty zawsze wiesz wszystko!"
   },
   "specjalizacja-spec": {
@@ -336,6 +379,8 @@ export const CLASS_FEATURES = {
     level: 7,
     label: "Specjalizacja",
     action: null,
+    auto: [],
+    manual: "Wybrane biegłości i Specjalizacje zaznacza gracz na karcie — dnd5e nie ma awansu „wybierz spośród tego, co już umiesz”.",
     text: "Wybierasz dwie ze swoich biegłości w umiejętnościach albo dwie biegłości w narzędziach, lub jedną biegłość w umiejętności i jedną biegłość w narzędziach. W każdym teście wykonywanym z ich użyciem Premia Biegłości liczy się podwójnie."
   },
   "trajektoria": {
@@ -347,6 +392,7 @@ export const CLASS_FEATURES = {
     action: null,
     uses: { max: "@prof", period: "lr" },
     hotbar: true,
+    auto: [],
     text: "Kiedy wykonujesz Test Ataku dystansowego, możesz dodać do niego swój modyfikator Inteligencji. Tej zdolności możesz użyć tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po odbyciu Długiego odpoczynku."
   },
   "bystrzacha": {
@@ -356,6 +402,7 @@ export const CLASS_FEATURES = {
     level: 9,
     label: "Bystrzacha",
     action: null,
+    auto: [],
     text: "Dodajesz połowę swojej Premii Biegłości (zaokrągloną w dół) do wszystkich umiejętności, w których nie masz biegłości."
   },
   "w-czuly-punkt": {
@@ -365,6 +412,7 @@ export const CLASS_FEATURES = {
     level: 11,
     label: "W czuły punkt",
     action: null,
+    auto: [],
     text: "Do wszystkich obrażeń, które zadajesz, możesz dodać swój modyfikator Inteligencji."
   },
   "kondycha": {
@@ -376,7 +424,8 @@ export const CLASS_FEATURES = {
     action: "B",
     uses: { max: "@abilities.con.mod", period: "lr" },
     hotbar: true,
-    toggle: { effect: "neuro-kondycha", duration: { rounds: null } },
+    heal: { number: 1, denomination: 8, bonus: "@classes.twardziel.levels" },
+    auto: [{ what: "Akcja Bonusowa: leczenie 1k8 + poziom Twardziela, mod. KON razy na Długi odpoczynek", where: "config/class-features-data.mjs" }],
     text: "Kiedy brakuje ci sił, bierzesz głęboki oddech i walczysz dalej. W Akcji Bonusowej możesz odzyskać Punkty Wytrzymałości w liczbie 1k8 + twój poziom Twardziela. Możesz skorzystać z tej zdolności tyle razy, ile wynosi twój modyfikator Kondycji. Zdolność odnawia się po ukończeniu Długiego odpoczynku."
   },
   "ulubiona-bron-twardziel": {
@@ -388,6 +437,7 @@ export const CLASS_FEATURES = {
     action: "B",
     hotbar: true,
     picks: { scale: "@scale.twardziel.ulubionaBron" },
+    auto: [],
     text: "Wybierz jeden model broni (np. Peacemaker), której lubisz używać. Od tej pory, jeśli wykonujesz ulubioną bronią akcję Atakowanie, możesz w Akcji Bonusowej wykonać nią jeszcze jeden atak (broń dystansowa musi mieć załadowaną amunicję). Na wyższych poziomach Twardziela, liczba twoich ulubionych broni rośnie zgodnie z kolumną Ulubiona broń w tabeli Zdolności klasowych Twardziela. Możesz zmienić jedną Ulubioną broń na inną w czasie Długiego odpoczynku, poświęcając godzinę na trening."
   },
   "wyjadacz": {
@@ -397,6 +447,7 @@ export const CLASS_FEATURES = {
     level: 1,
     label: "Wyjadacz",
     action: null,
+    auto: [],
     text: "Twardziel to zawodowiec, jeśli chodzi o obsługę broni i pancerzy. Wybierz jedną zdolność z poniższej listy, która podkreśli ten fakt. Na 7. poziomie Twardziela możesz wybrać kolejną zdolność z listy, ale każdą z nich wybierasz tylko raz. Obsługa pancerza Kiedy nosisz pancerz, otrzymujesz +2 do TT. Rzeźnik Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią. Sokole oko Otrzymujesz modyfikator +3 do Testów Ataku bronią palną, dystansową i rzucaną. Stalowy nadgarstek Kiedy strzelasz z broni palnej krótkiej i pistoletów maszynowych jedną ręką, nie otrzymujesz związanego z tym Utrudnienia do Testów Ataku (tak jakby miały właściwość poręczna). Dodatkowo każda broń palna krótka w twoich rękach zyskuje właściwość lekka."
   },
   "przycelowanie": {
@@ -407,6 +458,7 @@ export const CLASS_FEATURES = {
     label: "Przycelowanie",
     action: "B",
     hotbar: true,
+    auto: [],
     text: "Możesz użyć Akcji Bonusowej, żeby przed atakiem wycelować w konkretną kończynę żywej istoty lub element maszyny Molocha. TT celu zostaje zwiększona, ale jeśli uzyskasz trafienie, nakładasz na cel efekty zgodne z poniższą tabelą. CZĘŚĆ CIAŁA TT CELU EFEKT CZAS TRWANIA EFEKTU Kończyna górna +3 Upuszczenie broni/tarczy/przedmiotu Jednorazowy Kończyna dolna +2 Powalenie celu Jednorazowy Głowa/jednostka centralna +5 Trafienie Krytyczne Jednorazowy Opona/gąsienica +4 Spowolnienie o ½ Szybkości Do naprawy uszkodzenia Tętnica/układ hydrauliczny +4 Utrata 1k6 PW na początku każdej tury istoty Do opatrzenia rany/naprawy uszkodzenia"
   },
   "zryw": {
@@ -416,6 +468,7 @@ export const CLASS_FEATURES = {
     level: 2,
     label: "Zryw",
     action: null,
+    auto: [],
     text: "Wspinasz się na szczyt swoich możliwości. W swojej turze możesz wykonać jeszcze jedną Akcję lub Akcję Bonusową. Po użyciu tej zdolności musisz ukończyć Krótki lub Długi odpoczynek, zanim będziesz mógł jej ponownie użyć."
   },
   "twardosc": {
@@ -428,6 +481,7 @@ export const CLASS_FEATURES = {
     uses: { max: "@abilities.con.mod", period: "lr" },
     resource: { die: "@scale.twardziel.twardosc" },
     hotbar: true,
+    auto: [],
     text: "Posiadasz wrodzoną „odporność na śmierć” i ogromną ilość szczęścia. Do każdego Rzutu Obronnego (oraz do Rzutu Przeciw Śmierci), którego nie zdasz, możesz dodać wynik z jednej kości Twardości, zgodnie z kolumną Twardość w tabeli Zdolności klasowych Twardziela. Masz tych kości tyle, ile wynosi twój modyfikator Kondycji. Pula kości Twardości odnawia się po ukończeniu Długiego odpoczynku."
   },
   "nie-klekam": {
@@ -437,6 +491,7 @@ export const CLASS_FEATURES = {
     level: 9,
     label: "Nie klękam",
     action: null,
+    auto: [],
     text: "Twoje doświadczenie bojowe pozwala ci przetrwać w najtrudniejszych sytuacjach. Masz biegłość we wszystkich Rzutach Obronnych."
   },
   "trzeci-atak": {
@@ -448,6 +503,8 @@ export const CLASS_FEATURES = {
     action: null,
     passive: true,
     exclusiveGroup: "extraAttack",
+    auto: [{ what: "nie łączy się z Drugim atakiem z innej klasy — wyszarzony słabszy", where: "actors/class-rules.mjs" }],
+    manual: "Liczbę ataków w akcji Atakowanie liczy gracz — dnd5e jej nie śledzi.",
     text: "Kiedy wykonujesz w swojej turze akcję Atakowanie, możesz zaatakować trzykrotnie."
   },
   "bolesny-atak": {
@@ -460,6 +517,7 @@ export const CLASS_FEATURES = {
     passive: true,
     resource: { die: "@scale.zlodziej.bolesnyAtak" },
     oncePerTurn: true,
+    auto: [],
     text: "Potrafisz wykorzystać każdą słabość przeciwnika, żeby wykonać Bolesny atak. Raz na turę, kiedy atakujesz bronią z Ułatwieniem, używając Zręczności, możesz zadać jednemu celowi dodatkowo 1k6 obrażeń. Nie musisz mieć Ułatwienia w tym ataku, jeśli cel stoi w zasięgu 1,5 metra od twojego sojusznika, który nie jest pod wpływem stanu Obezwładnienie, a ty nie masz Utrudnienia w Teście Ataku. Dodatkowe obrażenia zwiększają się w miarę twojego rozwoju w klasie Złodzieja, zgodnie z kolumną Bolesny atak w tabeli Zdolności klasowych Złodzieja."
   },
   "specjalizacja-zlodziej": {
@@ -469,6 +527,8 @@ export const CLASS_FEATURES = {
     level: 1,
     label: "Specjalizacja",
     action: null,
+    auto: [],
+    manual: "Wybrane biegłości i Specjalizacje zaznacza gracz na karcie — dnd5e nie ma awansu „wybierz spośród tego, co już umiesz”.",
     text: "Wybierasz jedną ze swoich biegłości w umiejętnościach i jedną z biegłości w używaniu narzędzi. W każdym teście wykonywanym z ich użyciem Premia Biegłości liczy się podwójnie. Na 5. poziomie wybierasz kolejną biegłość w umiejętnościach lub w narzędziach i zyskujesz dla niej ten sam efekt."
   },
   "szybkie-nogi": {
@@ -479,6 +539,7 @@ export const CLASS_FEATURES = {
     label: "Szybkie nogi",
     action: "B",
     hotbar: true,
+    auto: [],
     text: "Łączysz swoją zwinność i szybkość, w celu zwiększenia szansy przetrwania na polu walki. Możesz w Akcji Bonusowej wykonać Odstąpienie, Przyspieszenie lub Ukrywanie się."
   },
   "kocie-kosci": {
@@ -491,6 +552,7 @@ export const CLASS_FEATURES = {
     uses: { max: "@abilities.dex.mod", period: "lr" },
     resource: { die: "@scale.zlodziej.kocieKosci" },
     hotbar: true,
+    auto: [],
     text: "Kot zawsze spada na cztery łapy tak jak ty. Możesz użyć jednej lub więcej Kocich kości w Reakcji na niekorzystny obrót spraw w poniższych sytuacjach: Ciche łapy [R]. Podczas akcji Ukrywania się, kiedy przeciwnik odkryje twoją obecność, możesz w Reakcji dorzucić je do wyniku swojego testu. Cztery łapy [R]. Kiedy spadasz z dużej wysokości, możesz w Reakcji wykorzystać je, żeby zmniejszyć obrażenia od upadku. Otrzymane obrażenia zmniejszają się o wynik, który wypadł na użytych Kocich kościach. Zgrabne łapy. Kiedy wykonujesz Test Zręczności (Akrobatyka) i wynik nie jest zadowalający, możesz dorzucić Kocie kości do rzutu przed poznaniem efektu testu. Wartość Kociej kości zwiększa się wraz z twoim poziomem Złodzieja zgodnie z kolumną Kocie kości w tabeli Zdolności klasowych Złodzieja. Posiadasz tyle Kocich kości, ile wynosi twój modyfikator Zręczności. Liczba Kocich kości odnawia się po odbyciu Długiego odpoczynku."
   },
   "ulubiona-bron-zlodziej": {
@@ -501,6 +563,7 @@ export const CLASS_FEATURES = {
     label: "Ulubiona broń",
     action: "B",
     hotbar: true,
+    auto: [],
     text: "Wybierz jeden model broni (np. szoker), w którym masz biegłość. Od tej pory, jeśli wykonujesz tą bronią akcję Atakowanie, możesz w Akcji Bonusowej wykonać nią jeszcze jeden atak (broń dystansowa musi mieć załadowaną amunicję). Możesz zmienić Ulubioną broń na inną w czasie Długiego odpoczynku, poświęcając godzinę na trening."
   },
   "podstepny-atak": {
@@ -510,6 +573,7 @@ export const CLASS_FEATURES = {
     level: 3,
     label: "Podstępny atak",
     action: null,
+    auto: [],
     text: "Twoje ataki są nie tylko bolesne, ale i upierdliwe. Kiedy zadajesz obrażenia, używając Bolesnego ataku, możesz zamiast dodatkowych obrażeń nałożyć specjalny efekt (wymieniony poniżej) na cel. Kilka takich samych efektów się nie kumuluje. Krwawienie. Żywa istota otrzymuje 1k8 obrażeń na początku swojej tury. Krwawienie ustaje po opatrzeniu rany. Spowolnienie. Szybkość celu spada o 1k6 x 1,5 m do końca twojej następnej tury. Oślepienie. Cel zostaje Oślepiony do końca twojej następnej tury."
   },
   "elektronik": {
@@ -519,6 +583,7 @@ export const CLASS_FEATURES = {
     level: 4,
     label: "Elektronik",
     action: null,
+    auto: [],
     text: "Elektroniczne zabezpieczenia rozgryzasz równie łatwo, co te tradycyjne. A nawet łatwiej. Zawsze, kiedy mierzysz się z elektronicznym systemem zabezpieczeń, otrzymujesz Ułatwienie do testu narzędzi małego ślusarza lub małego elektronika."
   },
   "szybkosc-kota": {
@@ -528,6 +593,7 @@ export const CLASS_FEATURES = {
     level: 5,
     label: "Szybkość kota",
     action: null,
+    auto: [],
     text: "Uczysz się unikać kul i ataków wręcz, jak na przedwojennych filmach akcji. Odskok [R]. Kiedy otrzymujesz obrażenia w wyniku bezpośredniego ataku, możesz w Reakcji zmniejszyć je o połowę (zaokrąglając w dół). Odskok nie działa, kiedy otrzymujesz obrażenia psychiczne. Szybkie łapy. Twoja Szybkość rośnie o 3 metry. Refleks. Możesz dorzucić jedną Kocią kość do testu Inicjatywy."
   },
   "matrix": {
@@ -539,6 +605,7 @@ export const CLASS_FEATURES = {
     action: null,
     uses: { max: "@prof", period: "lr" },
     hotbar: true,
+    auto: [],
     text: "Zyskujesz niezwykłą zdolność unikania seryjnego ostrzału, wybuchów granatów czy miotaczy ognia. Kiedy jesteś w polu rażenia ataku obszarowego, który umożliwia ci wykonanie Rzutu Obronnego na Zręczność, żeby zmniejszyć obrażenia o połowę, to po udanym RO, nie otrzymujesz żadnych obrażeń, a w przypadku niepowodzenia — tylko połowę (zaokrągloną w dół). Tej zdolności możesz użyć tyle razy, ile wynosi twoja Premia Biegłości. Matrix odnawia się po odbyciu Długiego odpoczynku."
   },
   "dziewiec-zyc": {
@@ -548,6 +615,7 @@ export const CLASS_FEATURES = {
     level: 9,
     label: "Dziewięć żyć",
     action: null,
+    auto: [],
     text: "Łatwiej ustrzelić nocą czarnego kota niż cię trafić. Zyskujesz nowe sposoby na wykorzystanie Kocich kości."
   },
   "saper": {
@@ -558,6 +626,7 @@ export const CLASS_FEATURES = {
     label: "Saper",
     action: null,
     uses: { max: 1, period: "sr" },
+    auto: [],
     text: "Jesteś jak saper, tyle że ty się nie mylisz, nawet raz. Przy każdym teście umiejętności, w której masz Specjalizację, możesz traktować każdy wynik 9 lub mniej na k20, jak 10. Ta zdolność odnawia się po ukończeniu Krótkiego lub Długiego odpoczynku."
   },
   "moj-biom": {
@@ -569,6 +638,8 @@ export const CLASS_FEATURES = {
     action: null,
     passive: true,
     resource: { value: "@scale.zwiadowca.mojBiom" },
+    auto: [{ what: "wybór ulubionych biomów na karcie drużyny, liczba miejsc z tabeli Zwiadowcy", where: "actors/party-travel.mjs" }, { what: "w znanym biomie: drużyna pieszo bez spowolnienia w trudnym terenie, zbieractwo na 4 osoby", where: "actors/party-travel.mjs" }],
+    manual: "Ułatwienie w Testach INT i MDR w biomie, brak zaskoczenia (moduł tylko przypomina), skradanie w tempie ruchu i wiedza z tropienia — przy stole.",
     text: "Twoje doświadczenie i naturalny talent sprawiają, że umiesz przetrwać tam, gdzie innych zjadają mrokoszczury. Wybierz dwa ulubione biomy z listy: Bagna, Góry, Las, Miasto, Neodżungla, Podziemia, Preria, Pustynia, Ruiny, Tereny Maszyn. W Testach Inteligencji i Mądrości związanych z tymi biomami masz Ułatwienie. Podróżując przez te specyficzne obszary, otrzymujesz dodatkowe korzyści: • Kiedy poruszacie się pieszo, trudny teren nie spowalnia cię, ani twojej drużyny, • Nikt i nic nie jest w stanie cię zaskoczyć. • Kiedy podróżujesz samotnie, możesz się skradać w tempie normalnego ruchu. • Jeśli poświęcisz 8 godzin na szukanie wody i pożywienia, jesteś w stanie wyżywić cztery osoby przez jedną dobę. • Tropiąc istoty, poznajesz ich dokładną liczebność, rozmiar i wiesz, kiedy zostawiły ślady. Wraz z awansem na kolejne poziomy Zwiadowcy, następne rodzaje biomów stają się dla ciebie swojskie i znane. Ich liczba podana jest w kolumnie Mój biom w tabeli Zdolności klasowych Zwiadowcy."
   },
   "moj-wrog": {
@@ -580,6 +651,7 @@ export const CLASS_FEATURES = {
     action: null,
     passive: true,
     resource: { value: "@scale.zwiadowca.mojWrog" },
+    auto: [],
     text: "Masz doświadczenie w zabijaniu określonego typu przeciwników. Wybierasz, czy specjalizujesz się w tropieniu i zabijaniu Ludzi, Maszyn, Mutantów, Potworów czy Zwierząt. Masz Ułatwienie w Testach Mądrości (Survival), kiedy tropisz swoich wrogów i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg w tabeli Zdolności klasowych Zwiadowcy. PRZYKŁAD: Pierwszopoziomowy Zwiadowca, którego wrogiem są Potwory, dodaje +1 do Testów Ataków wykonywanych przeciwko wszelkim potworom oraz każdy jego atak zadaje im dodatkowo 1k6 obrażeń. Na 5. i 9. poziomie, możesz wybrać kolejny typ wroga."
   },
   "ulubiona-bron-zwiadowca": {
@@ -590,6 +662,7 @@ export const CLASS_FEATURES = {
     label: "Ulubiona broń",
     action: "B",
     hotbar: true,
+    auto: [],
     text: "Wybierz jeden konkretny model broni, której lubisz używać (np. nóż taktyczny lub pistolet G17). Od tej pory, jeśli wykonujesz Ulubioną bronią akcję Atakowanie, możesz w Akcji Bonusowej wykonać nią jeszcze jeden atak (broń dystansowa musi mieć załadowaną amunicję). Możesz zmienić ulubioną broń na inną w czasie Długiego odpoczynku, poświęcając godzinę na trening. Na 9. poziomie możesz mieć jednocześnie dwie ulubione bronie."
   },
   "klusownik": {
@@ -599,6 +672,7 @@ export const CLASS_FEATURES = {
     level: 2,
     label: "Kłusownik",
     action: null,
+    auto: [],
     text: "Masz doświadczenie w zakładaniu pułapek. Wystarczy chwila, żeby z tego, co masz pod ręką, zmontować coś przydatnego. Jeśli masz zestaw narzędzi małego kłusownika, poświęcisz minutę i wykonasz Test Survivalu lub narzędzi małego kłusownika, możesz zbudować pułapkę. Skonsultuj jej szczegóły i działanie z MG. ST zauważenia pułapki, wyzwolenia się z niej lub uniknięcia części obrażeń, to 8 plus twój modyfikator Mądrości i Premia Biegłości. ST zakładania i działanie przykładowych pułapek podajemy w tabeli poniżej."
   },
   "wyjadacz-zwiadowca": {
@@ -608,6 +682,7 @@ export const CLASS_FEATURES = {
     level: 2,
     label: "Wyjadacz",
     action: null,
+    auto: [],
     text: "Zwiadowca to prawdziwy zawodowiec. Wybierz jedną z poniższych zdolności, która podkreśli ten fakt. Na 11. poziomie możesz wybrać kolejną zdolność z tej listy, ale każdą z nich możesz wybrać tylko raz. Jeździec Kiedy dosiadasz wierzchowca, nie musisz używać rąk, żeby nim kierować. Nie otrzymujesz Utrudnienia do Testów Ataków dystansowych związanego z niestabilnym podłożem, kiedy na nim jedziesz. Wsiadanie i zsiadanie z wierzchowca kosztuje cię tylko 1,5 metra ruchu. Trudność Trafienia twojego wierzchowca zwiększa się o wartość twojej Premii Biegłości. PRZYKŁADOWE PUŁAPKI PUŁAPKA ST DZIAŁANIE POTRZEBNE MATERIAŁY Potykacz 5 Istota otrzymuje stan Powalenie Brak Alarm 5 Wywołanie hałasu w promieniu 36 m Metalowe puszki lub naczynia Wnyki 10 Istota otrzymuje stan Pochwycenie Brak Sieć 10 Istota jest pod wpływem stanu Pochwycenie i Unieruchomienie Sieć Pułapka z granatem 15 Granat eksploduje po uruchomieniu wyzwalacza Granat Pułapka z bronią białą 15 Cel musi zdać RO na Zręczność, lub zostaje trafiony. Pułapka zadaje podstawowe obrażenia użytej broni Broń biała Pułapka z bronią samoczynną 20 Obszar zostaje ostrzelany długą serią. Obrażenia zależne od użytej broni i pojemności magazynka Karabin lub pistolet umożliwiający strzelanie serią. Obsługa pancerza Kiedy nosisz pancerz, otrzymujesz +2 do Trudności Trafienia. Rzeźnik Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią. Sokole oko Otrzymujesz modyfikator +3 do Testów Ataku bronią palną, dystansową i rzucaną. Stalowy nadgarstek Kiedy strzelasz z broni palnej krótkiej i pistoletów maszynowych jedną ręką, nie otrzymujesz związanego z tym Utrudnienia do Testów Ataku (tak jakby miały właściwość poręczna). Dodatkowo każda broń palna krótka w twoich rękach zyskuje właściwość lekka. Zasadzka Jeśli twój przeciwnik jest zaskoczony lub w pierwszej turze walki działasz przed nim, otrzymujesz Ułatwienie w Testach Ataku przeciwko niemu, do końca swojej tury."
   },
   "cichy-krok": {
@@ -617,6 +692,7 @@ export const CLASS_FEATURES = {
     level: 3,
     label: "Cichy krok",
     action: null,
+    auto: [{ what: "bez Utrudnienia do Skradania się za noszenie pancerza", where: "actors/cichy-krok.mjs" }, { what: "Ułatwienie do Ukrywania się, jeśli nie nosisz ciężkiego pancerza", where: "actors/cichy-krok.mjs" }, { what: "trudny teren nie spowalnia — na scenie i w podróży", where: "actors/cichy-krok.mjs" }],
     text: "Nie otrzymujesz Utrudnienia do testów Skradania się za noszenie pancerza. Otrzymujesz Ułatwienie w Testach Ukrywania się, jeśli nie nosisz ciężkiego pancerza. Trudny teren nie spowalnia twojego ruchu."
   },
   "sportowiec": {
@@ -626,6 +702,7 @@ export const CLASS_FEATURES = {
     level: 7,
     label: "Sportowiec",
     action: null,
+    auto: [],
     text: "Twoja Szybkość rośnie o 3 metry. Zyskujesz również Ułatwienie w testach Atletyki, kiedy się wspinasz, pływasz lub skaczesz."
   },
   "wyczulone-zmysly": {
@@ -635,6 +712,7 @@ export const CLASS_FEATURES = {
     level: 7,
     label: "Wyczulone zmysły",
     action: null,
+    auto: [],
     text: "Masz stałe Ułatwienie do testów Percepcji, więc twoja Pasywna Percepcja rośnie o 5."
   },
   "pogon": {
@@ -644,6 +722,7 @@ export const CLASS_FEATURES = {
     level: 11,
     label: "Pogoń",
     action: null,
+    auto: [],
     text: "Rzuty Obronne, w których porażka oznacza otrzymanie stanu Wyczerpanie, wykonujesz z Ułatwieniem."
   },
   "dwoch-na-jednego": {
@@ -654,6 +733,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Dwóch na jednego",
     action: null,
+    auto: [],
     text: "Uwielbiasz kopać leżącego frajera wspólnie z kumplami. Jeśli zaatakujesz wręcz istotę, która została zaatakowana w ten sam sposób przez twojego sojusznika, otrzymujesz +2 do Testów Ataku wręcz przeciwko niej, do końca twojej tury."
   },
   "ja-i-moj-gang": {
@@ -665,6 +745,7 @@ export const CLASS_FEATURES = {
     label: "Ja i mój gang!",
     action: null,
     requiresState: "neuro-berserk",
+    auto: [],
     text: "Kiedy jesteś w Berserku, twoi towarzysze stają się twoim gangiem, walczącym niczym wataha zmutowanych wilków. Jeśli sojusznicy stoją w promieniu 3 metrów od ciebie, otrzymują Ułatwienie w Testach Ataku przeciw wrogim istotom, które widzisz. Zawsze prowadzisz swój gang do krwawego zwycięstwa!"
   },
   "jeden-z-nich": {
@@ -675,6 +756,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Jeden z nich",
     action: null,
+    auto: [],
     text: "Tatuujesz sobie symbol przynależności do siejącego grozę gangu. Byle kto ci nie podskoczy, a reszta nie ma odwagi się z tobą sprzeczać. Postrach okolicy. Otrzymujesz biegłość w umiejętności Zastraszanie. Jeśli już ją masz, otrzymujesz zamiast tego Specjalizację. Sami swoi. Bandziory traktują cię jak swojego. Masz Ułatwienie w testach opartych na Charyzmie, kiedy gadasz z typami twojego pokroju."
   },
   "odwazny-czy-glupi": {
@@ -685,6 +767,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Odważny czy głupi",
     action: null,
+    auto: [],
     text: "Nie ma na tym świecie istot, które byłyby w stanie ci zagrozić. Głupi. Zyskujesz niewrażliwość na stan Przerażenie. Odważny. Wszyscy sojusznicy w odległości 9 metrów od ciebie, otrzymują premię +1k4 do RO przeciwko Przerażeniu."
   },
   "nie-do-zdarcia": {
@@ -695,6 +778,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Nie do zdarcia",
     action: null,
+    auto: [],
     text: "Każde trafienie, które zadałoby ci obrażenia krytyczne, zadaje zamiast tego normalne obrażenia. To nic, że obrywasz siekierą w głowę lub kulką prosto w serce. To wcale nie było w głowę tylko w ucho, a serce masz po drugiej stronie!"
   },
   "lyzeczka": {
@@ -705,6 +789,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Łyżeczka",
     action: null,
+    auto: [],
     text: "Długopis, felga, wąż ogrodowy, hydrant, kula bilardowa czy mała zardzewiała łyżeczka, stanowi broń, w której masz biegłość. Możesz tym przedmiotem walczyć wręcz lub nim rzucać na dystans do 6 metrów. Maksymalna waga tej tzw. „łyżeczki” to wartość twojej Siły. Kość i typ obrażeń zależne są od wagi i rodzaju przedmiotu (ustal to z MG). Jeśli w Teście ataku „łyżeczką” wypadnie naturalna 1, rozpada się ona na dwie równe części. WAGA PRZEDMIOTU OBRAŻENIA WŁADANIE do 5 kg 1k6 Jednoręczne 6 - 11 kg 2k6 Oburęczne 12 -17 kg 3k6 Oburęczne 18 - 20 kg 4k6 Oburęczne"
   },
   "zew-areny": {
@@ -716,6 +801,7 @@ export const CLASS_FEATURES = {
     label: "Zew areny",
     action: null,
     requiresState: "neuro-berserk",
+    auto: [],
     text: "Podczas walki słyszysz doping widzów, nawet jeśli ich wokół ciebie nie ma. Kiedy jesteś w Berserku, zyskujesz: Doping. Otrzymujesz niewrażliwość na stan Przerażenie. Praca nóg. Przeciwnicy mają Utrudnienie w testach ataków okazyjnych przeciw tobie. Skok Gladiatora. Maksymalna wysokość i odległość twojego skoku ulega podwojeniu. Jeśli twój skok zakończy się na polu istoty nie większej od ciebie o więcej niż jeden rozmiar, musi ona zdać RO na Siłę, inaczej otrzyma stan Powalenie oraz 1k6 obrażeń obuchowych za każde 3 metry długości lub wysokości twojego skoku. ST Rzutu Obronnego to 8 plus twój modyfikator Siły plus Premia Biegłości."
   },
   "zawolajcie-kolegow": {
@@ -726,6 +812,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Zawołajcie kolegów",
     action: null,
+    auto: [],
     text: "Jeśli w zasięgu 1,5 metra od ciebie znajduje się co najmniej dwóch przeciwników, otrzymujesz Ułatwienie do Testów Ataków wręcz."
   },
   "maszyna-do-zabijania": {
@@ -738,6 +825,7 @@ export const CLASS_FEATURES = {
     action: null,
     oncePerTurn: true,
     requiresState: "neuro-berserk",
+    auto: [],
     text: "Kiedy jesteś w Berserku, zyskujesz: Promocja [B]. Możesz wykonać dodatkowo jeden Atak wręcz w Akcji Bonusowej. Zwód. Raz w rundzie możesz wykonać jeden Atak wręcz oparty na Sile z Ułatwieniem."
   },
   "reputacja": {
@@ -748,6 +836,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Reputacja",
     action: null,
+    auto: [],
     text: "Ty nie nawalasz. Zawsze kończysz podjęte zlecenie. Twoja reputacja podąża za tobą krok w krok. Kiedy negocjujesz stawkę, masz Ułatwienie w testach Wpływania. A kiedy zadanie zostanie wykonane, otrzymujesz premię 1k4 x 10% wynegocjowanej stawki."
   },
   "skuteczny-cios": {
@@ -759,6 +848,7 @@ export const CLASS_FEATURES = {
     label: "Skuteczny cios",
     action: null,
     hotbar: true,
+    auto: [],
     text: "Twoje Wściekłe ciosy stają się skuteczniejsze, ale kosztem siły uderzenia. Możesz zużyć jedną kostkę Wściekłego ciosu, żeby zyskać jedną z poniższych przewag w walce. Potężny cios! Kiedy trafisz istotę atakiem wręcz, możesz w jego ramach wykonać Odepchnięcie. Sprytny cios! Kiedy trafisz istotę atakiem wręcz, możesz w jego ramach wykonać Wytrącenie. Zamaszysty cios! Jeśli w zasięgu 1,5 m od trafionej przez ciebie istoty, znajduje się druga istota, znajdująca się w zasięgu twojego ataku wręcz, możesz wykonać przeciw niej dodatkowo jeden atak wręcz."
   },
   "kakofonia": {
@@ -770,6 +860,7 @@ export const CLASS_FEATURES = {
     label: "Kakofonia",
     action: "A",
     hotbar: true,
+    auto: [],
     text: "W swojej Akcji możesz wydobyć ze swojego instrumentu lub z gardła zestaw głośnych nieharmonicznych dźwięków, który może zdezorientować twoich wrogów. Każda słysząca istota w promieniu 9 metrów wokół ciebie, wykonuje RO na Kondycję o ST równym 8 plus twój modyfikator Charyzmy i twoja Premia Biegłości. Porażka w Rzucie Obronnym oznacza Obezwładnienie istoty do początku twojej następnej tury. Twoi sojusznicy mają Ułatwienie w tym RO."
   },
   "lets-rock": {
@@ -781,6 +872,7 @@ export const CLASS_FEATURES = {
     label: "Let’s rock!",
     action: "A",
     hotbar: true,
+    auto: [],
     text: "Potrafisz swoją muzyką lub śpiewem zagrzewać towarzyszy do boju. W swojej akcji wykonujesz „bojowy kawałek”, który pomaga się skupić i dodaje sił. Wszyscy sojusznicy, którzy cię słyszą i są w zasięgu 27 metrów od ciebie, otrzymują premię do Testów Ataku lub Rzutów Obronnych, zależną od wyniku testu umiejętności Występy lub instrumentu muzycznego. Premia działa do początku twojej następnej tury. Zdolność Let’s rock możesz powtarzać w nieskończoność, za każdym razem ponownie testując umiejętność Występy. Jeśli w czasie występu otrzymasz stan Nieprzytomność, Obezwładnienie lub Ogłuchnięcie, efekt natychmiast się kończy. WYNIK TESTU PREMIA DO TESTÓW SOJUSZNIKÓW 5 – 9 +1 10 – 14 +2 15 – 19 +3 20 – 24 +4 25 + +5"
   },
   "stylowa": {
@@ -791,6 +883,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Stylówa",
     action: null,
+    auto: [],
     text: "Wygląd jest twoją wizytówką, ma robić wrażenie i podkreślać wyjątkowość twojego charakteru. Ubierasz się w drogie ciuchy, nosisz na widoku cenne gadżety i drogą biżuterię. Te błyskotki mogą przyciągać złodziei, ale kij im w oko, bo to robi ci imidż na dzielni. Każde 50 gambli towarów luksusowych, które nosisz na sobie, zapewnia ci premię +1 do testów Wpływania."
   },
   "za-garsc-gambli": {
@@ -801,6 +894,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Za garść gambli",
     action: null,
+    auto: [],
     text: "Każda dziura i miasteczko w Podzielonych Stanach potrzebuje muzyki. Każdy klub i śmierdzący bar bez okien, przyjmie twoje usługi zapewniające rozrywkę stałej klienteli. Zawsze dostaniesz dach nad głową i żarcie, a może i będzie za co się napić. Raz dziennie dajesz czterogodzinny koncert w lokalnej knajpie lub klubie, a od twoich umiejętności zależy, ile zarobisz (patrz tabela poniżej). Po skończeniu koncertu otrzymujesz jeden poziom Wyczerpania. MIEJSCE KONCERTU MNOŻNIK WYNIKU TESTU CHARYZMY (WYSTĘPY) LUB TESTU INSTRUMENTU Ulica x 0,5 gb Tania knajpa x 1 gb Dobra knajpa x 2 gb Drogi klub x 3 gb PRZYKŁAD: Siadasz przy ruchliwej ulicy, wyciągasz saksofon i po czterech godzinach koncertu wykonujesz test Zręczności (Saksofon). Twój wynik to 15, więc do czapki wpadła ci równowartość ok. 7 gambli. Gdybyś dał koncert w drogim klubie, zgarnąłbyś sześć razy tyle."
   },
   "amen": {
@@ -813,6 +907,7 @@ export const CLASS_FEATURES = {
     action: null,
     uses: { max: "@abilities.cha.mod", period: "lr" },
     hotbar: true,
+    auto: [],
     text: "Kiedy odniesiesz porażkę w Teście Cechy, Ataku lub Rzucie Obronnym, wypowiadasz słowo AMEN i dorzucasz do wyniku testu 1k6. Musisz zaakceptować nowy wynik. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po Długim odpoczynku."
   },
   "laska-boza": {
@@ -824,6 +919,7 @@ export const CLASS_FEATURES = {
     label: "Łaska boża",
     action: "B",
     hotbar: true,
+    auto: [],
     text: "W Akcji Bonusowej możesz natchnąć swoich sojuszników w promieniu 18 metrów łaską bożą. Sojusznicy muszą słyszeć twój głos. Obdarzony Łaską bożą otrzymuje +1k4 do Testów Ataków i Rzutów Obronnych, do początku twojej następnej tury. Możesz obdarzyć tą premią tylu sojuszników, ile masz poziomów Cwaniaka."
   },
   "moj-bog-kule-nosi": {
@@ -835,6 +931,7 @@ export const CLASS_FEATURES = {
     label: "Mój bóg kule nosi",
     action: null,
     oncePerTurn: true,
+    auto: [],
     text: "Twoja broń prowadzona jest ręką bóstwa, by skuteczniej wykańczać grzeszników. Raz na turę, kiedy zadasz obrażenia w Teście Ataku bronią palną, możesz dodać 1k10 obrażeń."
   },
   "tarcza-wiary": {
@@ -847,6 +944,8 @@ export const CLASS_FEATURES = {
     action: null,
     passive: true,
     exclusiveGroup: "unarmoredAc",
+    auto: [{ what: "nie łączy się z Gołą klatą ani Obłędem Berserkera — słabsza zdolność wyszarzona na karcie", where: "actors/class-rules.mjs" }],
+    manual: "Premię mod. CHA do TT bez pancerza ustawia się w konfiguracji Trudności Trafienia — moduł jej nie nakłada.",
     text: "Jeśli nie nosisz pancerza, możesz dodać modyfikator Charyzmy do swojej Trudności Trafienia. Tej zdolności nie można łączyć z innymi podobnymi (np. Goła Klata)."
   },
   "bezlitosny-przywodca": {
@@ -857,6 +956,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Bezlitosny przywódca",
     action: null,
+    auto: [],
     text: "Twoja mafia to twoja rodzina. Zabijesz każdego, kto choćby krzywo spojrzy na twojego brata, siostrę, matkę czy psa. Wszyscy, którzy noszą wytatuowany symbol twojej mafijnej rodziny, są pod twoją ochroną i twoim skutecznym przywództwem. Vendetta: Otrzymujesz Ułatwienie w Teście Ataku przeciw istocie, która zadała obrażenia członkowi twojej mafii w przeciągu ostatniej rundy. Szef każe [B]: W Akcji Bonusowej możesz wydać rozkaz ataku członkowi swojej grupy. Ten w Reakcji, może zaatakować wskazaną przez ciebie istotę, znajdującą się w zasięgu jego ataku."
   },
   "renoma": {
@@ -867,6 +967,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Renoma",
     action: null,
+    auto: [],
     text: "Nie można strzelić człowiekowi w głowę, mając ubłocone buty. Chciałbyś, żeby ktoś cię potrącił nieumytym pontiakiem? Trzeba szanować klientów i wrogów. Trudno nie uwierzyć człowiekowi takiemu jak ty. Człowiekowi, który ma swoją renomę i wie, że ubiór świadczy o szacunku. Każde 50 gambli towarów luksusowych, które nosisz na sobie, daje ci premię +1 do testów Wpływania."
   },
   "moja-prawa-reka": {
@@ -878,6 +979,7 @@ export const CLASS_FEATURES = {
     label: "Moja prawa ręka",
     action: null,
     companion: true,
+    auto: [],
     text: "Zaczynasz budować własną mafię. Werbujesz obiecującego człowieka, który wykonuje twoje polecenia aż po grób. Skąd go wziąć? Wyrzutka, który potrzebuje szefa, znajdziesz w każdej dziurze i ruinie. Wystarczy obiecać mu lepsze życie, dać spluwę do ręki, wydziarać tatuaż i wcielić do twojej mafijnej rodziny. Będzie robić, co każesz. Nosić plecak, pociągać za spust i nadstawiać tyłka. Ty zapewniasz mu wikt i dziesiątą część swojej doli. Jeśli nie masz odpowiedniego kandydata lub ostatni zginął, możesz poświęcić 24 godziny na szukanie nowego w miejscowości, w której przebywasz. Prawa ręka działa natychmiast po twojej turze, ale masz pełną kontrolę nad akcjami tej postaci. ZASADY TWORZENIA PRAWEJ RĘKI Tworzysz Prawą rękę na czystej karcie postaci. Cechy: Wartości Cech Bazowych do przydzielenia: 14,14,12,12,10, 8 lub 24 punkty do dowolnego rozdzielenia. Pochodzenie: Otrzymuje Pochodzenie zgodne z miejscem jego werbunku. Punkty Wytrzymałości: 5 x twój poziom Cwaniaka. Kości Wytrzymałości Prawej ręki to k6 i ma ich tyle, ile ty masz obecnie poziomów Cwaniaka. Wyszkolenie w pancerzu: Może korzystać z tych pancerzy, w których ty masz wyszkolenie. Premia Biegłości: +2 (nie rośnie). Rzuty Obronne: Ma biegłość w dwóch RO wybranych przez ciebie. Atak: Może korzystać z każdej broni, w której masz biegłość. Obrażenia: Zależne od broni i jego modyfikatorów Cech Bazowych. Sztuczki: Zna jedną, wybraną przez ciebie Sztuczkę, której wymagania spełnia. Umiejętności: Ma biegłość w dwóch wybranych przez ciebie umiejętnościach lub zestawach narzędzi. Śmierć: Prawa ręka umiera na takich samych zasadach, jak BG, czyli stosuje Stopnie Zranienia i korzysta z Rzutów Przeciw Śmierci."
   },
   "smakuje-jak-arszenik": {
@@ -888,6 +990,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Smakuje jak arszenik",
     action: null,
+    auto: [],
     text: "Lata babrania się w toksycznych świństwach zrobiły swoje. Zyskujesz odporność na obrażenia od kwasu i trucizny. Masz też Ułatwienie w Rzutach Obronnych na Kondycję, przeciw działaniu kwasów, trucizn i skażenia radioaktywnego."
   },
   "pirotechnika": {
@@ -898,6 +1001,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Pirotechnika",
     action: null,
+    auto: [{ what: "schematy pirotechniczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", where: "production/zp.mjs" }],
     text: "Zupełnie ci już odwaliło i bierzesz się za robienie BUM. Dynamit i granaty, czego chcieć więcej? Potrzebne ci tylko narzędzia małego chemika, małego rusznikarza, surowce i czas. Otrzymujesz wylistowane obok schematy pirotechniczne. SCHEMATY PIROTECHNICZNE NAZWA ST PRODUKCJA SUROWCE Dynamit (laska) 15 20 godzin 19 CH, 1 MK Granat dymny 15 20 godzin 15 CH, 4 CZ, 1 MK Granat gazowy 20 30 godzin 25 CH, 4 CZ, 1 MK Granat hukowy 20 30 godzin 25 CH, 4 CZ, 1 MK Granat improwizowany 10 10 godzin 9 CH, 1 MK/MO Granat odłamkowy 20 35 godzin 30 CH, 4 CZ, 1 MK Granat zapalający 20 35 godzin 30 CH, 4 CZ, 1 MK Granat 40 mm 15 15 godzin 10 CH, 3 CZ, 2 MK IED 15 20 godzin 5 CE, 10 CH, 4 CZ, 1 MK Koktajl Mołotowa 5 1 minuta 4 CH, 1 MK Mina przeciwpiechotna 25 40 godzin 30 CH, 5 CZ, 5 MK Mina przeciwpancerna 25 60 godzin 5 CE, 40 CH, 5 CZ, 10 MK Plastik C4 (100 g) 25 50 godzin 50 CH Pocisk 60 mm 20 30 godzin 25 CH, 1 CZ, 4 MK Proch czarny (20 g) 10 5 godzin 2 CH, 3 MK/MO Proch strzelniczy (20 g) 15 10 godzin 5 CH, 5 MK/MO SUROWCE CH - Chemia CE - Części elektroniczne CZ - Części zamienne MK - Materiały konstrukcyjne MO - Materiały organiczne"
   },
   "rusznikarstwo": {
@@ -908,6 +1012,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Rusznikarstwo",
     action: null,
+    auto: [{ what: "schematy rusznikarskie w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", where: "production/zp.mjs" }],
     text: "Nie ma nic lepszego niż zapach prochu o poranku. Broń palna to twoja największa miłość. Potrafisz ją wytwarzać i ulepszać. Potrzebne ci tylko narzędzia małego kowala i małego rusznikarza, surowce i czas. Otrzymujesz wylistowane poniżej schematy rusznikarskie. SCHEMATY RUSZNIKARSKIE NAZWA ST PRODUKCJA SUROWCE Broń palna krótka 15 Cena x 1 godz. (CZ + MK) = 50% CENY Broń palna pośrednia 20 Cena x 1 godz. (CZ + MK) = 50% CENY Broń palna długa 25 Cena x 1 godz. (CZ + MK) = 50% CENY Broń miotana: kusze 20 Cena x 1 godz. (CZ + MK) = 50% CENY Broń palna ciężka i specjalna 25 Koszt x 2 godz. (CZ + MK) = 50% CENY Celownik trytowy 10 20 godzin 9 CZ, 1 MK Chwyt przedni 10 20 godzin 5 CZ, 5 MK Dwójnóg 15 30 godzin 5 CZ, 10 MK/MO Granatnik podwieszany 20 70 godzin 15 CZ, 20 MK Kolba dostawna 10 20 godzin 10 MK/MO Kolba składana 15 30 godzin 1 CZ, 14 MK/MO Konwersja komory i lufy 20 60 godzin 5 CZ, 25 MK Nowy zestaw sprężyn 15 40 godzin 20 CZ Okładziny uchwytu 10 20 godzin 10 MK/MO Pocisk 60 mm 20 30 godzin 20 CH, 1 CZ, 9 MK Pocisk 120 mm 25 45 godzin 40 CH, 1 CZ, 4 MK Szyna montażowa 15 30 godzin 1 CZ, 14 MK Śrutówka podlufowa 20 50 godzin 15 CZ, 10 MK Tłumik 20 60 godzin 10 CZ, 20 MK Trójnóg 15 40 godzin 5 CZ, 15 MK/MO Uchwyt bagnetu 5 10 godzin 5 MK Zmiana poj. magazynka 10 20 godzin 5 CZ, 5 MK"
   },
   "doktor-brain": {
@@ -918,6 +1023,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Doktor Brain",
     action: null,
+    auto: [],
     text: "Chcesz być jajogłowym mutantem geniuszem? Proszę bardzo. Znajdujesz martwego mutanta i tworzysz serum z jego rdzenia mózgowego, które sobie aplikujesz. Wartość twojej Cechy Inteligencja rośnie na stałe o 4 (do maksymalnie 20). Twój organizm płaci jednak za to wielką cenę. Zmniejsz na stałe swoją Kondycję lub Zręczność o 2."
   },
   "krwawy-aniol": {
@@ -928,6 +1034,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Krwawy anioł",
     action: null,
+    auto: [],
     text: "Potrafisz używać leków skuteczniej niż ktokolwiek inny. Wiesz, gdzie wbić strzykawkę, żeby pacjent szybko stanął na nogi i zyskał więcej energii do walki. Od tej pory, kiedy używasz zestawu małego medyka, przywracasz więcej Punktów Wytrzymałości. Zamiast kostki k4 używasz na 3. poz. - k6, na 6. poz. - k8, na 9. poz. - k10, a na 12. poz. - k12."
   },
   "lapiduch": {
@@ -938,6 +1045,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Łapiduch",
     action: null,
+    auto: [],
     text: "Kiedy inni tracą nadzieję, ty wciąż walczysz o życie pacjenta. Podejmujesz reanimację i liczysz na cud, uciskając serce i robiąc usta-usta. Reanimacja trwa 1 minutę, a jej sukces zależy od twoich umiejętności i czasu, który upłynął od zatrzymania akcji serca. Udana akcja reanimacji przywraca pacjentowi funkcje życiowe, lecz jego stan wciąż nie jest stabilny. Ta zdolność nie działa na pacjenta, który otrzymał Olbrzymie obrażenia (patrz rozdział Walka s. 34). CZAS OD USTANIA TĘTNA ST TESTU MEDYCYNY do 1 minuty ST 15 do 2 minut ST 20 do 4 minut ST 25 do 8 minut ST 30"
   },
   "farmacja": {
@@ -948,6 +1056,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Farmacja",
     action: null,
+    auto: [{ what: "schematy farmaceutyczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", where: "production/zp.mjs" }],
+    manual: "Biegłość w narzędziach małego aptekarza zaznacza gracz na karcie.",
     text: "Podobno medyk nie jest maszynką do skręcania leków z piasku. Ale ty znasz się na chemii i farmakologii, więc wiesz, że lekarstwa można ukręcić ze wszystkiego innego. Zyskujesz biegłość w narzędziach małego aptekarza. Potrafisz produkować leki i substancje leczące, używając składników chemicznych, jak i organicznych. Potrzebne ci narzędzia małego chemika, małego aptekarza, surowce i czas. Otrzymujesz wylistowane poniżej schematy farmaceutyczne. SCHEMATY FARMACEUTYCZNE NAZWA ST PRODUKCJA SUROWCE Antybiotyk (10 dawek) 10 20 godzin 20 CH/MO Alkohol tani (1 l) 10 3 godziny 3 CH/MO AR 23 (1 szt) 25 35 godzin 33 CH, 1 CZ, 1 MK AR-35 BETA (1 szt) 25 50 godzin 49 CH, 1 CZ,1 MK Deadline (1 szt) 20 25 godzin 25 CH/MO, 1 MK Detoks (5 fiolek) 10 20 godzin 20 CH/MO Medpak (1 szt) 15 13 godzin 11 CH/MO, 1 CZ, 1 MK Nitrogliceryna (20 g) 15 10 godzin 10 CH/MO Painkiller (10 tabletek) 10 10 godzin 10 CH/ MO Pocisk - strzykawka (1 szt) 10 3 godziny 2 CZ, 1 MK Proch czarny (20 g) 10 5 godzin 2 CH, 3 MK/MO Proch strzelniczy (20 g) 15 10 godzin 5 CH, 5 MK/MO RadOff (1 szt) 15 15 godzin 14 CH/MO, 1 MK Środki dezynfekujące (1 l) 10 5 godzin 5 CH/MO Środek usypiający (1 fiol.) 10 10 godzin 10 CH/MO Tornado (1 działka) 25 50 godzin 50 CH/MO Trybiotyl (1 porcja) 15 15 godzin 15 CH/MO Trucizna (1 fiolka) 10 10 godzin 10 CH/MO Uzupełnienie zestawu małego medyka (1 użycie) 10 5 godzin 5 CH/MO, 1 MK WD-TABS (10 tabletek) 10 10 godzin 10 CH/MO Zamiennik dowolnego leku (5 dawek) 20 10 godzin 10 CH/MO"
   },
   "mechanika": {
@@ -958,6 +1068,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Mechanika",
     action: null,
+    auto: [{ what: "schematy mechaniczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", where: "production/zp.mjs" }],
+    manual: "Pojazd i pancerz wspomagany wychodzą z produkcji jako karta dla MG, nie aktor. Biegłość w narzędziach małego mechanika zaznacza gracz.",
     text: "Smar zastępuje ci krem do rąk, benzyna pachnie jak najlepsze perfumy, a dźwięk dobrze pracującego silnika jest milszy niż miłosne szepty. Jesteś w stanie zbudować swój własny pojazd i zabrać go na rajd! Otrzymujesz biegłość w narzędziach małego mechanika. Potrafisz naprawiać, ulepszać i budować pojazdy, a nawet konstruować mechaniczne pancerze. Potrzebne ci narzędzia małego mechanika i małego kowala, surowce i czas. Otrzymujesz wylistowane poniżej schematy mechaniczne. SCHEMATY MECHANICZNE NAZWA ST PRODUKCJA SUROWCE Buggy 20 500 godzin 50 CZ, 200 MK Deskorolka 5 20 godzin 5 CZ, 5 MK Motorower 20 200 godzin 50 CZ, 50 MK Motocykl 25 300 godzin 50 CZ, 100 MK Osobówka (składak) 20 1000 godzin 100 CZ, 400 MK Paralotnia 25 100 godzin 20 CZ, 30 MK Pancerz wspomagany 30 1000 godzin 100 CE, 100 CZ, 300 MK Rower 10 40 godzin 10 CZ, 10 MK Traktor (mały) 20 1000 godzin 100 CZ, 400 MK Wózek typu dwukółka 10 20 godzin 1 CZ, 19 MK"
   },
   "hakerstwo": {
@@ -968,6 +1080,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Hakerstwo",
     action: null,
+    auto: [{ what: "schematy hakerskie w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", where: "production/zp.mjs" }],
+    manual: "Dron wychodzi z produkcji jako karta dla MG, nie aktor; kierowanie, naprawa i zasilanie drona — przy stole. Biegłość w narzędziach małego hakera zaznacza gracz.",
     text: "Czerwone oczy, blada cera, skrzywione plecy i słownictwo, którego nikt nie rozumie. Już raz pomylili cię z mutantem i drogo za to zapłacili. W Posterunku byłbyś szychą, ale nie przyjmujesz rozkazów od głupszych od siebie. Otrzymujesz biegłość w narzędziach małego hakera. Potrafisz produkować sprzęt komputerowy i drony, ale potrzebujesz do tego narzędzi małego hakera, małego elektronika, surowców i czasu. Otrzymujesz wylistowane poniżej schematy hakerskie. SCHEMATY HAKERSKIE NAZWA ST PRODUKCJA SUROWCE Adapter wifi 10 30 godzin 10 CE, 4 CZ, 1 MK Dron kroczący 20 70 godzin 15 CE, 1 CH, 10 CZ, 9 MK Dron latający 25 90 godzin 10 CE, 1 CH, 29 CZ, 5 MK Komputer osobisty 15 40 godzin 15 CE, 1 CH, 3 CZ, 1 MK Komputer gamingowy 25 80 godzin 30 CE, 1 CH, 8 CZ, 1 MK Kontroler zdalnego sterowania (zasięg 100 m) 15 40 godzin 10 CE, 9 CZ, 1 MK Laptop 25 80 godzin 30 CE, 1 CH, 8 CZ, 1 MK Laptop wojskowy 30 140 godzin 50 CE, 1 CH, 14 CZ, 5 MK Monitorek 10 20 godzin 7 CE, 2 CZ, 1 MK Nośnik danych 10 20 godzin 8 CE, 1 CZ, 1 MK Przeprogramowanie malutkiej i małej maszyny Molocha 10 25 godzin 10 CE, 2 CZ Przeprogramowanie średniej maszyny Molocha 15 50 godzin 20 CE, 5 CZ Przeprogramowanie dużej maszyny Molocha 20 100 godzin 40 CE, 10 CZ Router 10 20 godzin 8 CE, 1 CZ, 1 MK Drony. Jako Haker możesz zbudować własnego drona, który działa według poniższych zasad. Kierowanie. Aby móc kierować dronem, potrzebny jest kontroler zdalnego sterowania. W Akcji Bonusowej możesz wydawać proste polecenia, tj., broń się, idź tam, podążaj za mną, podnieś to, upuść to, zostań. Dron nie atakuje samodzielnie. W Akcji możesz przejąć pełne sterowanie i używając zamontowanych kamer, wykorzystać wszystkie jego zdolności. Naprawianie. Poświęcając godzinę pracy, możesz przy pomocy odpowiednich narzędzi przywrócić swojej maszynie PW, w ilości 2k6 + twój modyfikator Inteligencji. Zasilanie. Akumulator 24V wystarcza na 1 godzinę pracy średniego drona i 4 godziny pracy małego. Instalacja agregatu prądotwórczego pozwala na dodatkowe zasilanie spalinowe (0,5 l paliwa/1 h). DRON KROCZĄCY Średnia maszyna TT: 10 plus mod. Inteligencji i Premia Biegłości twórcy PW: 10 x modyfikator Inteligencji twórcy; PRÓG OBRAŻEŃ 5 PRÓG AWARII 15. SIŁ ZRC KON INT MDR CHA 14 (+2) 14 (+2) 10 (+0) – – – SZYBKOŚĆ: 9 m NIEWRAŻLIWOŚĆ NA OBRAŻENIA psychiczne, od trucizny NIEWRAŻLIWOŚĆ NA STANY Przerażenie, Zatrucie, Zauroczenie ZMYSŁY Noktowizja 18 m ZDOLNOŚCI Modyfikacje. Dron może mieć zainstalowane liczne urządzenia tj. broń, kamery, oświetlenie czy skomplikowane urządzenia elektroniczne. Dokładne modyfikacje oraz ich koszt, należy ustalić z MG. Udźwig. Użytkowy: 70 kg. Maksymalny: 140 kg. AKCJE Atak. Dron może wykonać w swojej akcji jeden atak, którego zasięg i obrażenia zależą od zamontowanej broni. Wzór premii ataku drona. 2 plus Premia Biegłości twórcy i modyfikator Zręczności operatora. Wzór na obrażenia drona. Kość zamontowanej broni plus modyfikator Inteligencji twórcy. Wzór na RO w przypadku ataku obszarowego. 8 plus Premia Biegłości twórcy i modyfikator Zręczności operatora. DRON LATAJĄCY Mała maszyna TT: 10 plus mod. Inteligencji i Premia Biegłości twórcy PW: 5 x modyfikator Inteligencji twórcy, PRÓG AWARII: 10 SIŁ ZRC KON INT MDR CHA 10 (+0) 16 (+3) 10 (+0) – – – SZYBKOŚĆ: lot 18 m NIEWRAŻLIWOŚĆ NA OBRAŻENIA psychiczne, od trucizny NIEWRAŻLIWOŚĆ NA STANY Przerażenie, Zatrucie, Zauroczenie ZMYSŁY Noktowizja 18 m ZDOLNOŚCI Modyfikacje. Dron może mieć zainstalowane liczne urządzenia tj. broń, kamery, oświetlenie czy skomplikowane urządzenia elektroniczne. Dokładne modyfikacje oraz ich koszt, należy ustalić z MG. Udźwig. Użytkowy: 15 kg. Maksymalny: 30 kg. AKCJE Atak. Dron może wykonać w swojej akcji jeden atak, którego zasięg i obrażenia zależą od zamontowanej broni. Wzór premii ataku drona. 3 plus Premia Biegłości twórcy i modyfikator Zręczności operatora. Wzór na obrażenia drona. Kość zamontowanej broni plus modyfikator Inteligencji twórcy. Wzór na RO w przypadku ataku obszarowego. 8 plus Premia Biegłości twórcy i modyfikator Zręczności operatora."
   },
   "serwisowanie": {
@@ -978,6 +1092,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Serwisowanie",
     action: null,
+    auto: [{ what: "schematy elektroniczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", where: "production/zp.mjs" }],
+    manual: "Biegłość w narzędziach małego elektronika zaznacza gracz na karcie.",
     text: "Kiedyś był taki serial o kolesiu, który ze sreberka, spinacza i butelki po denaturacie robił telefon. Otrzymujesz biegłość w narzędziach małego elektronika. Potrafisz naprawiać i produkować urządzenia elektroniczne i drobne mechanizmy. Potrzebne ci tylko narzędzia małego chemika, małego elektronika, surowce i czas. Otrzymujesz wylistowane poniżej schematy elektroniczne. SCHEMATY ELEKTRONICZNE NAZWA ST PRODUKCJA SUROWCE Agregat 20 50 godzin 1 CE, 15 CZ, 9 MK Akumulator 15 40 godzin 5 CH, 10 CZ, 5 MK Alternator 15 40 godzin 15 CZ, 1 CE, 4 MK Baterie 10 20 godzin 9 CH, 1 MK Celownik optyczny 15 20 godzin 5 CE, 5 CZ, 10 MK Defibrylator 20 60 godzin 5 CE, 20 CZ, 5 MK Detektor ruchu 25 80 godzin 30 CE, 5 CZ, 5 MK Krótkofalówka 10 24 godziny 1 CE, 10 CZ, 1 MK Kompas 5 4 godziny 1 CZ, 1 MK Laserowy wskaźnik celu 20 60 godzin 9 CE, 20 CZ, 1 MK Latarka 10 20 godzin 9 CZ, 1 MK Miernik skażenia chemicznego 20 50 godzin 5 CE, 5 CH, 10 CZ, 5 MK Miernik promieniowania 15 30 godzin 3 CE, 2 CH, 8 CZ, 2 MK Noktowizor 20 70 godzin 25 CE, 7 CZ, 3 MK Palnik acetylenowo-tlenowy 10 20 godzin 2 CH, 5 CZ, 3 MK Odtwarzacz CD 15 40 godzin 15 CE, 4 CZ, 1 MK Powiększalnik 20 60 godzin 9 CE, 20 CZ, 1 MK Radio 10 15 godzin 3 CE, 3 CZ, 1 MK Termowizor 30 200 godzin 90 CE, 5 CZ, 5 MK Turbina wiatrowa/wodna 20 60 godzin 5 CE, 10 CZ, 15 MK Wykrywacz metalu 15 30 godzin 5 CE, 5 CZ, 5 MK Wytrychy elektroniczne 20 50 godzin 20 CE, 4 CZ, 1 MK Zapalnik elektryczny 5 5 godzin 5 CZ Zegarek 10 20 godzin 9 CZ, 1MK"
   },
   "clint": {
@@ -990,6 +1106,7 @@ export const CLASS_FEATURES = {
     action: null,
     uses: { max: 1, period: "combat" },
     hotbar: true,
+    auto: [],
     text: "Poprawka. Raz na walkę możesz powtórzyć jeden Test Ataku bronią palną. Zabójcza spluwa. Rewolwery w twoich rękach zadają jedną dodatkową kość obrażeń. PRZYKŁAD: Peacemaker w twoich dłoniach zadaje 2k8, zamiast 1k8 obrażeń."
   },
   "rewolwerowiec": {
@@ -1002,6 +1119,8 @@ export const CLASS_FEATURES = {
     action: null,
     legacyAbilityKey: "rewolwerowiec",
     handgunKind: "rewolwer",
+    auto: [{ what: "Niezawodny — rewolwer w twoich rękach się nie zacina", where: "weapons/jams.mjs" }, { what: "Jednoręki — strzał jedną ręką bez Utrudnienia, rewolwer lekki i poręczny", where: "combat/grip.mjs" }, { what: "Dobywanie — Oporządzenie pokazuje dobycie i schowanie rewolweru jako darmowe", where: "actors/doll.mjs" }, { what: "Szybkoładowacz — karta szybkoładowarki sprawdza wolną rękę", where: "weapons/magazine.mjs" }],
+    manual: "Strzał z biodra (+5 do Inicjatywy) dolicza gracz; darmowych interakcji z przedmiotem moduł nie liczy.",
     text: "Wyciągasz rewolwer i strzelasz, zanim ktokolwiek zdąży mrugnąć okiem. Dobywanie. Jeśli nosisz jeden lub dwa rewolwery w kaburach, możesz je dobyć lub schować, bez zużywania darmowej interakcji z przedmiotem. Niezawodny. Rewolwer w twoich rękach nigdy się nie zacina. Jednoręki. Możesz strzelać z rewolweru jedną ręką, bez otrzymywania Utrudnienia do ataku z tego tytułu. Rewolwery traktujesz jako broń o właściwości lekka i poręczna. Strzał z biodra. Otrzymujesz +5 do testów Inicjatywy, jeśli trzymasz w ręce lub będziesz dobywać rewolwer. Szybkoładowacz [B]. Jeśli masz wolną rękę, to w Akcji Bonusowej, możesz z pomocą pełnego szybkoładowcza (aka speedloadera) uzupełnić pusty bębenek rewolweru."
   },
   "zawsze-w-siodle": {
@@ -1012,6 +1131,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Zawsze w siodle",
     action: null,
+    auto: [],
     text: "Prawdziwy kowboj piechotą chodzi tylko do kibla, baru i burdelu. Jeśli nie masz konia lub motocykla, los zsyła ci okazję do jego zdobycia na najbliższym Długim odpoczynku. Porzucony harley lub koń bez jeźdźca, to coś, co po prostu ci się przydarza. Pamiętaj, żeby nadać mu imię i módl się do zapomnianych bogów, żeby nie spotkać jego prawowitego właściciela. I pamiętaj - nie możesz go nikomu sprzedać."
   },
   "drzwi-w-drzwi": {
@@ -1022,6 +1142,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Drzwi w drzwi",
     action: null,
+    auto: [],
     text: "Twój pojazd to twoja broń. Samochód, motor czy autobus to równie zabójcze zabawki, co twój gnat. Rajdowiec. Podczas walki, wyścigu i pościgu wykonujesz wszystkie Testy Mądrości (Pojazdy) z Ułatwieniem. Szybkość twojego pojazdu rośnie o 50%. Konwojent. Nie otrzymujesz Utrudnienia do Testów Ataków, wynikających z niestabilnego podłoża, kiedy jedziesz pojazdem, zarówno jako pasażer, jak i kierowca. Taranowanie. Istoty, które taranujesz swoim pojazdem, otrzymują Utrudnienie do RO na Zręczność."
   },
   "kaskader": {
@@ -1032,6 +1153,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Kaskader",
     action: null,
+    auto: [],
     text: "Twoje wyczyny za kierownicą przerażają twoich pasażerów. Kierując dowolnym pojazdem silnikowym, potrafisz wykonywać triki jak filmowy kaskader. Schody to też jezdnia. Potrafisz jeździć pojazdem po schodach (jeśli się zmieścisz wszerz i na zakrętach) z pełną Szybkością pojazdu. Skoczek. Przeskakujesz pojazdem przez dziury i przepaści o czterokrotnej długości twojego pojazdu, jeśli się rozpędzisz na odległości 60 metrów. Na dwóch kółkach. Umiesz jechać na dwóch bocznych kołach, żeby zmieścić się w wąskiej uliczce lub pomiędzy dwiema ciężarówkami. Każda z tych czynności wymaga Testu Mądrości (Pojazdy) o ST 15, który wykonujesz z Ułatwieniem. Porażka w teście oznacza, że pojazd uległ małym uszkodzeniom. Porażka o 5 i więcej, oznacza awarię pojazdu i obrażenia u pasażerów."
   },
   "pancerna-fura": {
@@ -1042,6 +1164,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Pancerna fura",
     action: null,
+    auto: [],
     text: "Twoja maszyna jest twoją twierdzą. OC. Jeśli prowadzisz pojazd mechaniczny, który daje jakąś Osłonę pasażerom, to ty i twoi pasażerowie otrzymujecie dodatkową premię do Trudności Trafienia, równą twojemu modyfikatorowi Mądrości. Premia działa, tylko kiedy pojazd jest w ruchu. AC [B]. W Akcji Bonusowej możesz uruchomić lub zatrzymać pojazd, wykonać nim Przyspieszenie, Odstąpienie lub Unikanie."
   },
   "jak-dbasz-tak-masz": {
@@ -1053,6 +1176,8 @@ export const CLASS_FEATURES = {
     label: "Jak dbasz, tak masz",
     action: "B",
     legacyAbilityKey: "jakDbaszTakMasz",
+    auto: [{ what: "broń palna w twoich rękach się nie zacina", where: "weapons/jams.mjs" }, { what: "odblokowanie zacięcia w Akcji Bonusowej, bez Testu", where: "weapons/jams.mjs" }],
+    manual: "Naprawę uszkodzonej broni białej w Krótkim odpoczynku rozlicza MG.",
     text: "Nikt nie potrafi składać, rozkładać i czyścić broni szybciej od ciebie. Robisz to z zamkniętymi oczami, paląc papierosa i śpiewając Oh my darling. Broń palna w twoich rękach nigdy się nie zacina, a jeśli już masz taką w dłoniach, wystarczy ci Akcja Bonusowa, żeby ją naprawić. Z kolei uszkodzoną broń białą, naprawiasz w czasie Krótkiego odpoczynku."
   },
   "rutyna": {
@@ -1063,6 +1188,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Rutyna",
     action: null,
+    auto: [],
     text: "Kiedy inni panikują, ty wykonujesz rutynowe działania na polu walki. Ostrzał artylerii, eksplodujące granaty, czy seria z karabinu, to tylko elementy taktyczne, utrudniające wykonanie misji. Kalkulujesz i oceniasz ryzyko, będąc tam, gdzie są największe szanse na przeżycie. W czasie walki masz Ułatwienie w Rzutach Obronnych na Zręczność i Mądrość."
   },
   "trening-w-zbroi": {
@@ -1073,6 +1199,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Trening w zbroi",
     action: null,
+    auto: [],
     text: "Robienie pompek w pancerzu i z kowadłem na plecach, to twoje codzienne zajęcie. Nie otrzymujesz kar do Testów Zręczności (Skradanie się) wynikających z noszenia pancerza. Twoja maksymalna premia ze Zręczności do Trudności Trafienia wynikająca z ograniczeń noszonego pancerza, zwiększa się o 1."
   },
   "skrytka": {
@@ -1083,6 +1210,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Skrytka",
     action: null,
+    auto: [],
     text: "Potrafisz schować kontrabandę w wozie tak, żeby żaden pies jej nie wyniuchał, i ukryć niewielką broń tak, żeby obmacujący cię zbok niczego nie wymacał. Kiedy ukrywasz przedmiot lub istotę o rozmiarze nie większym niż mały, testujesz swoją umiejętność Skradanie się i wykonujesz test z Ułatwieniem. Przedmiot lub istota otrzymuje stan Niewidoczność."
   },
   "slang": {
@@ -1093,6 +1221,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Slang",
     action: null,
+    auto: [],
     text: "Wiesz, jak gadać z tubylcami w każdym zakątku Podzielonych Stanów. Szybko rozpoznajesz lokalnych złodziejaszków, prawidłowo oceniasz zakapiorów i wiesz, co powiedzieć, żeby zrobić jakiś biznes. W kilka chwil zdobywasz informacje o tym, kto tu rządzi, jakie ma problemy i z kim lepiej nie zadzierać. Na to wszystko wystarczy ci godzina i kilka fajek. A kiedy MG prosi cię o testy Perswazji lub Śledztwa związane z tym półświatkiem, masz w nich Ułatwienie. Dlaczego? Bo jesteś: spoko ziom, swój na każdej dzielni, co złego to nie ja."
   },
   "znajomosci": {
@@ -1103,6 +1232,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Znajomości",
     action: null,
+    auto: [],
     text: "Podzielone Stany to twój dom i prawie wszędzie masz jakiegoś znajomka. Kiedy jesteś w cywilizowanym miejscu, wykonaj Test Charyzmy. Im lepszy wynik, tym bardziej znaczący w lokalnej społeczności jest twój znajomy. WYNIK TESTU CHARYZMY ZNAJOMOŚĆ 1-9 Nikogo tu nie znasz z imienia. 10-14 Masz znajomka, który tu mieszka. 15-19 Masz tu znajomka, który prowadzi biznes lub jest stróżem porządku. 20+ Twój znajomek to gruba szycha, która tu rządzi."
   },
   "a-co-mi-tam": {
@@ -1113,6 +1243,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "A co mi tam!",
     action: null,
+    auto: [],
     text: "Masz Ułatwienie w Rzutach Obronnych przeciw chorobom, truciznom i radiacji. Masz również odporność na obrażenia od trucizn, chorób i promieniowania. Tak, na alkohol niestety też, bo to przecież trucizna. Jeśli masz chorobę przewlekłą, nie doznasz jednak cudownego ozdrowienia."
   },
   "szary": {
@@ -1123,6 +1254,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Szary",
     action: null,
+    auto: [],
     text: "Szczurów jest pełno. Żebracy, włóczędzy, ludzkie wraki. Nikt z nimi nie gada. Nikt nie zwraca na nich uwagi. Jeśli zachowujesz się inteligentnie, wykorzystując ludzką pogardę, potrafisz stać się niezauważalny (otrzymujesz stan Niewidoczność). Mądra kryjówka. Dodajesz modyfikator Inteligencji lub Mądrości do testów Skradania się. Nie widzisz mnie. Możesz próbować ukrywać się na otwartym terenie, nawet w jasnym świetle dnia, czy na środku pustego hangaru, np. jako zwykły żul szukający złomu. Jeśli nic nie mówisz i nie robisz hałasu, masz Ułatwienie w Testach Ukrywania się, dopóki kogoś nie zaatakujesz lub nie zrobisz czegoś głośnego."
   },
   "truciciel": {
@@ -1134,6 +1266,8 @@ export const CLASS_FEATURES = {
     label: "Truciciel",
     action: "B",
     hotbar: true,
+    auto: [{ what: "porcja olejku w Długim odpoczynku, z narzędziami małego chemika i ST twórcy", where: "production/odpoczynek.mjs" }, { what: "nałożenie w Akcji Bonusowej na ostrze albo do trzech grotów, aktywne 1 minutę", where: "production/olejek.mjs" }, { what: "karta RO na Kondycję po trafieniu zatrutą bronią", where: "production/olejek.mjs" }],
+    manual: "Zatrucie nakłada MG przyciskiem na karcie — moduł wykrywa, nie rozstrzyga.",
     text: "Jeśli posiadasz narzędzia małego chemika, możesz w czasie Długiego odpoczynku wyprodukować jedną porcję trucizny. Ta porcja zawiera 10 ml trującego olejku. W Akcji Bonusowej możesz nałożyć ją na ostrze broni lub na maksymalnie trzy groty. Trucizna pozostaje aktywna przez 1 minutę lub do momentu aplikacji, zależnie od tego, co wydarzy się pierwsze. Cel trafiony zatrutą bronią lub pociskiem musi zdać RO na Kondycję (ST 8 plus twój modyfikator Inteligencji i Premia Biegłości), lub otrzymuje stan Zatrucie na 1 minutę. Cel powtarza Rzut Obronny na końcu swojej tury."
   },
   "zwinnosc-szczura": {
@@ -1144,6 +1278,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Zwinność szczura",
     action: null,
+    auto: [],
     text: "Wspinacz. Potrafisz szybko i efektywnie się wspinać. Otrzymujesz Szybkość wspinania równą twojej Szybkości ruchu. Skoczek. Kiedy skaczesz, możesz testować Akrobatykę zamiast Atletyki. Maksymalną odległość skoku wyliczasz, uwzględniając wartość Zręczności, a nie Siły."
   },
   "jeden-strzal": {
@@ -1154,6 +1289,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Jeden strzał",
     action: null,
+    auto: [],
     text: "Potrafisz się przygotować do zabijania lepiej niż ktokolwiek inny. Jeśli atakujesz bronią finezyjną lub strzelasz ogniem pojedynczym, otrzymujesz nowe możliwości. Pierwszy atak. W pierwszej rundzie walki, jeśli wykonujesz atak przed turą swojego celu, otrzymujesz Ułatwienie do pierwszego Testu Ataku przeciwko temu celowi. Celowanie [B]. W czasie walki i poza nią możesz zastygnąć w bezruchu i lepiej wycelować. Jeśli w swojej turze nie wykonasz ruchu, możesz poświęcić Akcję Bonusową na lepsze wycelowanie i wykonać jeden atak z Ułatwieniem."
   },
   "kamuflaz": {
@@ -1164,6 +1300,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Kamuflaż",
     action: null,
+    auto: [],
     text: "Jesteś w stanie przygotować sobie kamuflaż tak dobrze pasujący do otoczenia, że nawet po oddaniu strzału, trudno cię dostrzec. Ghillie. Jeśli przygotujesz sobie strój maskujący i pomalujesz twarz zgodnie z barwami otoczenia, otrzymujesz Ułatwienie do Testów Skradania się. Niewidoczny. Jeśli przed strzałem z broni dystansowej lub rzucanej, masz stan Niewidoczność, to nie stajesz się widoczny po wykonaniu ataku, dopóki się nie przemieścisz. Warunkiem jest noszenie stroju maskującego i malowanie twarzy, które pasują do otoczenia. Cel pozna jedynie kierunek, z którego wykonano atak, chyba że używasz broni o właściwości cicha."
   },
   "strzelec": {
@@ -1174,6 +1311,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Strzelec",
     action: null,
+    auto: [],
     text: "Jedni lubią zabijać nożem, inni cenią truciznę, a ty wolisz zabijać z daleka. Jeżeli przygotujesz stanowisko snajperskie z bronią z celownikiem optycznym i poświęcisz 5 rund na precyzyjne mierzenie do celu, to dopóki się nie poruszysz, zyskujesz dwie poniższe, dodatkowe korzyści. Powiększenie. Trzykrotne zwiększenie maksymalnego zasięgu dla tej broni. Przewaga balistyczna. Brak Utrudnienia za strzelanie na dalekim dystansie tą bronią."
   },
   "bez-tajemnic": {
@@ -1185,6 +1323,7 @@ export const CLASS_FEATURES = {
     label: "Bez tajemnic",
     action: "A",
     hotbar: true,
+    auto: [],
     text: "Znasz się na mutantach i potworach jak nikt inny. Jeśli spotkasz mutanta lub potwora i zdasz Test Inteligencji (Przyroda), zyskujesz wiedzę na jego temat. MG zdradza ci jego zwyczajową nazwę (ST 10), słabe punkty (ST 15) i trzy wybrane współczynniki (ST 20)."
   },
   "mutant-na-sniadanie": {
@@ -1196,6 +1335,7 @@ export const CLASS_FEATURES = {
     label: "Mutant na śniadanie",
     action: null,
     oncePerTurn: true,
+    auto: [],
     text: "Trochę tego tałatajstwa już zdechło dzięki tobie. Wiesz najlepiej, jak z nimi walczyć i jak się przed nimi bronić. Refleks łowcy. Kiedy rozpoczynasz walkę z mutantem lub potworem, zyskujesz premię do Inicjatywy, równą twojej Premii Biegłości. Zabójca mutantów. Kiedy walczysz z mutantem lub potworem, możesz raz w rundzie zaatakować go z Ułatwieniem. Unik łowcy [R]. Jeśli zostajesz trafiony atakiem przez mutanta lub potwora, możesz użyć Reakcji, żeby wobec tego ataku podnieść swoją TT o wartość twojej Premii Biegłości."
   },
   "pogromca": {
@@ -1206,6 +1346,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Pogromca",
     action: null,
+    auto: [{ what: "Pogromca jako przepis profesji: 100 gb surowców, 100 h pracy", where: "production/zp.mjs" }, { what: "naboje w Długim odpoczynku: do PB sztuk, 10 gb surowców każdy", where: "production/odpoczynek.mjs" }],
+    manual: "Obrażenia krytyczne przeciw mutantom i potworom dolicza MG; biegłość z Pogromcą tylko dla Łowcy pilnuje stół.",
     text: "Jeśli wydasz 100 gambli na surowce i poświęcisz 100 godzin pracy, to zbudujesz strzelbę na mutanty i potwory o wdzięcznej nazwie Pogromca. Strzela ona nabojami przypominającymi małe strzykawki napełnione chemikaliami. W czasie Długiego odpoczynku możesz stworzyć tyle naboi, ile wynosi twoja Premia Biegłości. Koszt stworzenia jednego takiego naboju to 10 gb, a trafiony nim mutant lub potwór otrzymuje obrażenia krytyczne. Naboje mogą zawierać truciznę, kwas lub po prostu eksplodować. Tylko Łowca mutantów jest biegły w używaniu Pogromcy. Nazwa: Pogromca Tryb ognia: Pojedynczy Magazynek: 1 Obrażenia: 4k6 od trucizny/kwasu/ognia Zasięg: 9/18 metrów Właściwości: Ładowanie Koszt produkcji: 10 MK, 10 CE, 80 CZ Koszt produkcji pocisku: 1 MK, 1 CZ, 8 CH"
   },
   "oswajanie-zwierzat": {
@@ -1217,6 +1359,7 @@ export const CLASS_FEATURES = {
     label: "Oswajanie zwierząt",
     action: null,
     companion: true,
+    auto: [],
     text: "Znajdujesz zmutowanego zwierzaka i sprawiasz, żeby łaził za tobą i wykonywał twoje polecenia. W czasie walki działa natychmiast po twojej turze, jeśli przeznaczysz swoją Akcję Bonusową na wydanie mu polecenia. Oswojone zwierzę wykonuje pełny zakres swoich akcji i walczy do utraty przytomności. Jeśli nie otrzyma żadnego polecenia, nie przemieszcza się i używa akcji Unikanie. Oswajanie zwierzęcia. Jeśli nie posiadasz żadnego oswojonego zwierzęcia, możesz poświęcić 24 godziny na szukanie odpowiedniego kandydata. Rzuć 1k6, żeby dowiedzieć się, jakie stworzenie znajdujesz (1-2: zmutowany owad, 3-4: zmutowany ssak, 5-6: zmutowany gad). Jest to zwykle osobnik słaby, ranny lub odtrącony przez swoje stado. Czas leczenia i oswajania trwa 3 dni. Oswojonemu zwierzęciu musisz nadać imię i nie możesz go nikomu sprzedać ani oddać. Musisz mu zapewniać wodę i pożywienie. ZMUTOWANY OWAD Małe zwierzę TT: 14 plus twoja Premia Biegłości INICJATYWA +6 (16) PW: 3 plus 10 x twój modyfikator Mądrości SZYBKOŚĆ: 9 m, wspinanie 9 m, kopanie 4,5 m STOPIEŃ ZRANIENIA O O O O KW k6 x ½ twojego poziomu Zwiadowcy SIŁ ZRC KON INT MDR CHA 8 (-1) 18 (+4) 14 (+2) 4 (-3) 16 (+3) 4 (-3) UMIEJĘTNOŚCI Skradanie się +6 NIEWRAŻLIWOŚĆ NA OBRAŻENIA radioaktywne, od trucizny ZMYSŁY Ślepowidzenie 9 m, Pasywna Percepcja 13 ZDOLNOŚCI Kopacz. Kiedy zakopuje się w piachu lub w ziemi, nie prowokuje ataków okazyjnych. Pajęcza wspinaczka. Może chodzić po każdej chropowatej powierzchni, nawet do góry nogami. Udźwig. Użytkowy: 16 kg. Maksymalny: 32 kg. AKCJE Ukąszenie. Atak wręcz: +4 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 6 (1k4 + 4) kłute. ZMUTOWANY SSAK Duże zwierzę TT: 11 plus twoja Premia Biegłości INICJATYWA -1 (9) PW: 9 plus 10 x twój modyfikator Mądrości SZYBKOŚĆ: 12 m, wspinanie 6 m STOPIEŃ ZRANIENIA O O O O KW k10 x ½ twojego poziomu Zwiadowcy SIŁ ZRC KON INT MDR CHA 18 (+4) 12 (+1) 12 (+1) 6 (-2) 14 (+2) 4 (-3) UMIEJĘTNOŚCI Atletyka +6 ZMYSŁY Noktowizja 18 m, Pasywna Percepcja 12 ZDOLNOŚCI Doskonałe zmysły. Ma Ułatwienie w Testach Mądrości (Percepcja) opartych na węchu i słuchu. Współpraca. Jeśli w zasięgu do 1,5 metra od przeciwnika znajduje się przytomny sojusznik, otrzymuje Ułatwienie do Testów Ataku wręcz. Udźwig. Użytkowy: 180 kg. Maksymalny: 360 kg. AKCJE Atak kończyną. Atak wręcz: +4 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 10 (2k6 + 4) obuchowe i trafiony cel otrzymuje stan Powalenie, jeśli jest rozmiaru średniego lub mniejszego. ZMUTOWANY GAD Średnie zwierzę TT: 12 plus twoja Premia Biegłości INICJATYWA +2 (12) PW: 6 plus 10 x twój modyfikator Mądrości SZYBKOŚĆ: 9 m, pływanie 18 m STOPIEŃ ZRANIENIA O O O O KW k8 x ½ twojego poziomu Zwiadowcy. SIŁ ZRC KON INT MDR CHA 14 (+2) 14 (+2) 18 (+4) 4 (-3) 12 (+1) 4 (-3) UMIEJĘTNOŚCI Percepcja +3 ZMYSŁY Termowizja 18 m, Pasywna Percepcja 13 ZDOLNOŚCI Ziemnowodny. Potrafi oddychać zarówno na lądzie, jak i pod wodą. Udźwig. Użytkowy: 70 kg. Maksymalny: 140 kg. AKCJE Ugryzienie. Atak wręcz: +2 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 5 (1k6 + 2) kłute. Trafiona istota musi zdać RO na Kondycję o ST 10, inaczej zostanie Zatruta na 1 minutę. Cel wykonuje ponowny RO na końcu swojej tury."
   },
   "jeden-z-nas": {
@@ -1227,6 +1370,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Jeden z nas",
     action: null,
+    auto: [],
     text: "Nie musisz się za każdym razem tłumaczyć miejscowym stróżom prawa, kiedy ubijesz jakiegoś gangusa lub złodzieja. Nie tracisz czasu na dyskusje, mówisz, że jesteś z „policji” i że to było konieczne, a oni tylko kiwają głowami. Jesteś jednym z nich. Dodatkowo, kiedy próbujesz przekonać do czegoś lokalnych stróżów prawa, otrzymujesz Ułatwienie w testach Wpływania."
   },
   "rzuc-bron-i-gleba": {
@@ -1238,6 +1382,7 @@ export const CLASS_FEATURES = {
     label: "Rzuć broń i gleba!",
     action: "B",
     hotbar: true,
+    auto: [],
     text: "Siła twojego głosu potrafi zmusić największego cwaniaka do upuszczenia broni. W Akcji Bonusowej możesz krzyknąć polecenie do wybranego człowieka w zasięgu 9 metrów i zmusić go do poddania się. Przeciwnik wykonuje Rzut Obronny na Mądrość o ST równym 8 plus twój modyfikator Charyzmy i Premia Biegłości. Porażka w teście oznacza, że natychmiast upuszcza broń, kładzie się na ziemię i jest pod wpływem stanu Przerażenie do końca twojej następnej tury."
   },
   "partner": {
@@ -1249,6 +1394,7 @@ export const CLASS_FEATURES = {
     label: "Partner",
     action: null,
     companion: true,
+    auto: [],
     text: "Wierny uczeń lub ulubione zwierzę to idealni partnerzy Sędziego. W tym świecie nikt nie przetrwa samotnie. Twój partner ma imię, wykonuje twoje polecenia, nawet walczy u twego boku, jeśli tylko potrafi. Może jednak zginąć, a wtedy będziesz szukać nowego. Sędzia zwykle ciągnie ze sobą młodego człowieka, który chce nauczyć się fachu… albo psa. Partner ma swoją turę zawsze po twojej turze. Nie może działać samodzielnie, więc w swojej Akcji Bonusowej wydajesz mu komendę. Jeśli nie wydasz mu żadnego polecenia, unika walki, broni się akcją Unikanie i szuka osłony. PSI PARTNER Małe zwierzę TT: 12 plus twoja Premia Biegłości INICJATYWA +4 (14) PW: 10 plus 10 x twój modyfikator z Mądrości SZYBKOŚĆ: 18 m STOPIEŃ ZRANIENIA O O O O KW k6 x twój poziom Zwiadowcy SIŁ ZRC KON INT MDR CHA 14 (+2) 14 (+2) 12 (+1) 8 (-1) 14 (+2) 6 (-2) RZUTY OBRONNE ZRC +4, MDR +4 UMIEJĘTNOŚCI Percepcja +4, Skradanie się +4 ZMYSŁY Noktowizja 18 metrów, Pasywna Percepcja 14 ZDOLNOŚCI Doskonałe zmysły. Pies ma Ułatwienie w Testach Mądrości (Percepcja) opartych na węchu i słuchu. Współpraca. Jeśli w zasięgu do 1,5 metra od przeciwnika znajduje się przytomny sojusznik, pies otrzymuje Ułatwienie do Testów Ataku wręcz. Psi bohater. Umiera na takich samych zasadach jak BG, czyli stosuje Stopnie Zranienia i wykonuje Rzuty Przeciw Śmierci. Wymagania. Pojenie skażoną wodą i nieodpowiednie karmienie może pogorszyć jego zdrowie. Udźwig. Użytkowy: 28 kg. Maksymalny: 48 kg. AKCJE Ugryzienie. Atak wręcz: +2 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 5 (1k6 + 2) kłute i trafiony cel zostaje Pochwycony, jeśli jest rozmiaru średniego lub mniejszego. Szukanie partnera. Jeśli nie masz partnera, możesz poświęcić 24 godziny na szukanie odpowiedniego kandydata. Na zbłąkanego kundla lub pełnego ideałów człowieka natkniesz się zarówno w mieście, jak i w dowolnej, zabitej dechami dziurze. Partnera nie możesz nikomu odstąpić (lub sprzedać w przypadku psa) oraz musisz mu zapewnić wodę i pożywienie. LUDZKI PARTNER Tworzysz partnera na czystej karcie postaci. Cechy: Wartości Cech Bazowych do przydzielenia: 14,14,12,12,10, 8 lub 24 punkty do dowolnego rozdzielenia. Pochodzenie: Otrzymuje Pochodzenie zgodne z miejscem jego werbunku. Punkty Wytrzymałości. 5 x twój poziom Zwiadowcy. Kości Wytrzymałości partnera to k6 i ma ich tyle, ile ty masz poziomów Zwiadowcy. Wyszkolenie w pancerzu: Może korzystać z tych pancerzy, w których ty masz wyszkolenie. Premia Biegłości: +2 (nie rośnie). Rzuty Obronne: Ma biegłość w dwóch RO wybranych przez ciebie. Atak: Może korzystać z każdej broni, w której masz biegłość. Obrażenia. Zależne od broni i jego modyfikatorów Cech Bazowych. Sztuczki. Zna jedną, wybraną przez ciebie Sztuczkę, której wymagania spełnia. Umiejętności. Ma biegłość w dwóch wybranych przez ciebie umiejętnościach lub zestawach narzędzi. Śmierć: Umiera na takich samych zasadach, jak BG, czyli stosuje Stopnie Zranienia i korzysta z Rzutów Przeciw Śmierci."
   },
   "emiter-emp": {
@@ -1259,6 +1405,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Emiter EMP",
     action: null,
+    auto: [],
     text: "Jeśli wydasz 100 gambli na surowce i poświęcisz 100 godzin pracy, to zbudujesz ciężką, nieporęczną broń wyspecjalizowaną w niszczeniu maszyn. Emiter strzela impulsem elektromagnetycznym, który zakłóca działanie lub niszczy niemal każdą maszynę. Nie działa na istoty żywe i urządzenia, które nie używają mikroprocesorów. Emiter EMP ładuje się prądem elektrycznym 230 V, a akumulator starcza na 6 wystrzałów. Ta broń ignoruje TT pochodzącą z opancerzenia maszyny. Tylko Zabójca Maszyn jest biegły w używaniu tej specyficznej broni. Nazwa: Emiter EMP Tryb ognia: Pojedynczy Magazynek: 6 Obrażenia: 8k6 od elektryczności Zasięg: 9/15 metrów Właściwości: Ładowanie Porażenie: Trafiony cel wykonuje Rzut Obronny na Kondycję o ST 15 inaczej otrzymuje stan Obezwładnienie do końca twojej następnej tury Koszt produkcji: 20 MK, 40 CE, 40 CZ"
   },
   "empiryk": {
@@ -1270,6 +1417,7 @@ export const CLASS_FEATURES = {
     label: "Empiryk",
     action: "R",
     hotbar: true,
+    auto: [],
     text: "Nikt nie wie, jak to robisz, ale potrafisz przewidzieć zachowanie każdej maszyny. Jeśli zostajesz trafiony przez maszynę, możesz użyć Reakcji, żeby wobec tego ataku podnieść swoją TT o wartość twojej Premii Biegłości. Zyskujesz również Ułatwienie w Rzutach Obronnych na efekty wywoływane przez maszyny."
   },
   "slaby-punkt": {
@@ -1282,6 +1430,7 @@ export const CLASS_FEATURES = {
     action: "A",
     hotbar: true,
     oncePerTurn: true,
+    auto: [],
     text: "Każda maszyna ma swój słaby punkt. Wystarczy w niego trafić, żeby idealnie spasowane trybiki, przekładnie, pasy transmisyjne i kable zasilające szlag trafił. Jeśli w czasie walki z maszyną lub tuż przed nią, poświęcisz akcję na Test Inteligencji (Technika) o ST zależnym od jej rozmiaru, MG może ci zdradzić 3 wybrane współczynniki wskazanej maszyny. Mała i malutka (ST 5), średnia (ST 10), duża (ST 15), wielka (20), ogromna (25). Sukces oznacza również, że możesz raz w rundzie zaatakować ją z Ułatwieniem."
   },
   "obsluga-pancerza": {
@@ -1291,6 +1440,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Obsługa pancerza",
     action: null,
+    auto: [],
     text: "Kiedy nosisz pancerz, otrzymujesz +2 do Trudności Trafienia."
   },
   "rzeznik": {
@@ -1300,6 +1450,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Rzeźnik",
     action: null,
+    auto: [],
     text: "Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią."
   },
   "sokole-oko": {
@@ -1309,6 +1460,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Sokole oko",
     action: null,
+    auto: [],
     text: "Otrzymujesz modyfikator +3 do Testów Ataku bronią palną, dystansową i rzucaną."
   },
   "stalowy-nadgarstek": {
@@ -1318,6 +1470,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Stalowy nadgarstek",
     action: null,
+    auto: [{ what: "strzał jedną ręką z broni palnej krótkiej i pistoletu maszynowego bez Utrudnienia", where: "combat/grip.mjs" }, { what: "broń palna krótka lekka w twoich rękach", where: "combat/grip.mjs" }],
     text: "Kiedy strzelasz z broni palnej krótkiej i pistoletów maszynowych jedną ręką, nie otrzymujesz związanego z tym Utrudnienia do Testów Ataku (tak jakby miały właściwość poręczna). Dodatkowo każda broń palna krótka w twoich rękach zyskuje właściwość lekka."
   },
   "jezdziec": {
@@ -1327,6 +1480,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Jeździec",
     action: null,
+    auto: [],
     text: "Kiedy dosiadasz wierzchowca, nie musisz używać rąk, żeby nim kierować. Nie otrzymujesz Utrudnienia do Testów Ataków dystansowych związanego z niestabilnym podłożem, kiedy na nim jedziesz. Wsiadanie i zsiadanie z wierzchowca kosztuje cię tylko 1,5 metra ruchu. Trudność Trafienia twojego wierzchowca zwiększa się o wartość twojej Premii Biegłości."
   },
   "zasadzka": {
@@ -1336,6 +1490,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Zasadzka",
     action: null,
+    auto: [],
     text: "Jeśli twój przeciwnik jest zaskoczony lub w pierwszej turze walki działasz przed nim, otrzymujesz Ułatwienie w Testach Ataku przeciwko niemu, do końca swojej tury."
   },
   "moj-wrog-ludzie": {
@@ -1345,6 +1500,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Mój wróg: Ludzie",
     action: null,
+    auto: [],
     text: "Twoim wrogiem są Ludzie. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg."
   },
   "moj-wrog-maszyny": {
@@ -1354,6 +1510,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Mój wróg: Maszyny",
     action: null,
+    auto: [],
     text: "Twoim wrogiem są Maszyny. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg."
   },
   "moj-wrog-mutanty": {
@@ -1363,6 +1520,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Mój wróg: Mutanty",
     action: null,
+    auto: [],
     text: "Twoim wrogiem są Mutanty. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg."
   },
   "moj-wrog-potwory": {
@@ -1372,6 +1530,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Mój wróg: Potwory",
     action: null,
+    auto: [],
     text: "Twoim wrogiem są Potwory. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg."
   },
   "moj-wrog-zwierzeta": {
@@ -1381,6 +1540,7 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Mój wróg: Zwierzęta",
     action: null,
+    auto: [],
     text: "Twoim wrogiem są Zwierzęta. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg."
   },
   ...KOBALT_CLASS_FEATURES

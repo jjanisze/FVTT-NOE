@@ -30,8 +30,10 @@ jobs:
         run: |
           zip -r module.zip \
             module.json README.md LICENSE CREDITS.md \
-            scripts styles templates lang icons sounds tokens ui packs docs \
-            -x "*.log" -x "**/LOCK"
+            scripts styles templates lang icons sounds tokens ui vfx packs docs \
+            -x "**/LOCK"
+          # No `-x "*.log"`: a freshly built LevelDB pack keeps ALL its records in 000NNN.log
+          # until compaction — excluding it shipped empty compendiums (found 2026-10-03, B6).
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

@@ -24,6 +24,14 @@ export const KOBALT_CLASS_FEATURES = Object.freeze({
     kobalt: true,
     legacyAbilityKey: "pistolero",
     handgunKind: "pistolet",
+    // Rejestr pokrycia — kontrakt jak w `dev/classes/gen_features.py` (COVERAGE).
+    auto: [
+      { what: "Niezawodny — pistolet w twoich rękach się nie zacina", where: "weapons/jams.mjs" },
+      { what: "Jednoręki — strzał jedną ręką bez Utrudnienia, pistolet lekki i poręczny", where: "combat/grip.mjs" },
+      { what: "Dobywanie — Oporządzenie pokazuje dobycie i schowanie pistoletu jako darmowe", where: "actors/doll.mjs" }
+    ],
+    manual: "Strzał z biodra (+5 do Inicjatywy) i Powąchaj to (Zastraszanie z Ułatwieniem) rozlicza gracz; "
+      + "darmowych interakcji z przedmiotem moduł nie liczy.",
     text: "Pistolet w dłoni jest dla ciebie równie naturalny jak but na stopie. "
       + "Dobywanie. Jeśli nosisz jeden lub dwa pistolety w kaburach, możesz je dobyć lub schować "
       + "bez zużywania darmowej interakcji z przedmiotem. "

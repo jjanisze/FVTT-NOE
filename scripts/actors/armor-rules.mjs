@@ -11,7 +11,9 @@
  * │                     zerujemy tylko je, reszta typów przechodzi. Natywne    │
  * │                     `attributes.hp.dt` odpada: istnieje wyłącznie na NPC/  │
  * │                     obiektach (nie na postaciach) i dotyczy wszystkich     │
- * │                     typów obrażeń naraz.                                   │
+ * │                     typów obrażeń naraz. Broń/nabój `ppanc` albo           │
+ * │                     `przebijajaca` przebija próg i odporność kinetyczną    │
+ * │                     (`combat/armour-piercing.mjs`).                        │
  * │ Odporność kinet.    Efekt Aktywny przedmiotu → `system.traits.dr.value`.   │
  * │                     Reguła natywna, nic tu nie robimy.                     │
  * │ Brak wyszkolenia    Utrudnienie do Testów SIŁ/ZRC, RO i Testów Ataku.      │
@@ -33,6 +35,7 @@
 
 import { ARMORS, ARMOR_GLOBAL_MANUAL, KINETIC_DAMAGE_TYPES, LOW_STRENGTH_SPEED_PENALTY }
   from "../config/armor-data.mjs";
+import { isArmourPiercing } from "../combat/armour-piercing.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -220,7 +223,9 @@ function onPreRollAttack(config, _dialog, _message) {
  * końcową — odejmujemy od niej dokładnie te wpisy, które próg pochłonął.
  */
 function onCalculateDamage(actor, damages, options = {}) {
-  if ((options.ignore === true) || options.ignore?.threshold) return;
+  // `ignore.threshold` ustawia też `combat/armour-piercing.mjs` dla ppanc / przebijającej;
+  // jawne sprawdzenie zostaje na wypadek wywołania z własnym `options.ignore`.
+  if ((options.ignore === true) || options.ignore?.threshold || isArmourPiercing(damages, options)) return;
 
   const dt = armorDamageThreshold(actor);
   if (!dt) return;

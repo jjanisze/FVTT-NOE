@@ -16,8 +16,8 @@
  * here at `dnd5e.preCalculateDamage` by zeroing every component, so downstream
  * consumers see a clean 0 rather than a partially-applied hit.
  *
- * Weapons with the `ppanc` property bypass it: "Przeciwpancerna. Ignoruje
- * Odporności na obrażenia i Progi obrażeń."
+ * Weapons and rounds with `ppanc` or `przebijajaca` bypass it: "Przeciwpancerna. Ignoruje
+ * Odporności na obrażenia i Progi obrażeń." — one shared check, `combat/armour-piercing.mjs`.
  *
  * ## Próg awarii — 8 machines
  *
@@ -35,6 +35,8 @@
  * advisory: it whispers the GM and changes nothing. Whether the Gangus Boss
  * actually runs is a roleplaying decision, not a rules trigger.
  */
+
+import { isArmourPiercing } from "./armour-piercing.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -68,18 +70,6 @@ const bestiaryFlags = actor => actor?.flags?.[MODULE_ID]?.bestiary ?? null;
 /*  Próg obrażeń                                 */
 /* -------------------------------------------- */
 
-/** Did the attack that produced this damage use an armour-piercing weapon? */
-function isArmourPiercing(options) {
-  const uuid = options?.originatingMessage?.flags?.dnd5e?.activity?.uuid;
-  if (!uuid) return false;
-  try {
-    const activity = fromUuidSync(uuid);
-    return activity?.item?.system?.properties?.has?.("ppanc") ?? false;
-  } catch {
-    return false;
-  }
-}
-
 function onPreCalculateDamage(actor, damages, options) {
   const flags = bestiaryFlags(actor);
   const threshold = flags?.damageThreshold;
@@ -90,7 +80,8 @@ function onPreCalculateDamage(actor, damages, options) {
     .reduce((sum, d) => sum + (d.value ?? 0), 0);
   if (total <= 0 || total >= threshold) return;
 
-  if (isArmourPiercing(options)) return;   // ppanc ignores Progi obrażeń
+  // ppanc / przebijająca ignore Progi obrażeń — also when the flag was set earlier this hook.
+  if (options?.ignore === true || options?.ignore?.threshold || isArmourPiercing(damages, options)) return;
 
   for (const d of damages) {
     if (d.type === "healing" || d.type === "temphp") continue;

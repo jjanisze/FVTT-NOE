@@ -2366,10 +2366,11 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
 .neuro-resource-dice-buttons button:hover:not(:disabled) { background: rgba(192, 57, 43, 0.28); }
 .neuro-resource-dice-buttons button:disabled { opacity: 0.5; cursor: default; }
 
-/* ---- Zdolności: co system egzekwuje, a czego nie (Sztuczki, Pochodzenia) ---- */
+/* ---- Zdolności: co system egzekwuje, a czego nie (Sztuczki, Pochodzenia, klasy) ---- */
 
 .neuro-sztuczka-cover,
-.neuro-pochodzenie-cover {
+.neuro-pochodzenie-cover,
+.neuro-zdolnosc-cover {
   margin: 6px 0 2px 0;
   font-size: 11px;
   text-transform: uppercase;
@@ -2377,19 +2378,25 @@ img[src*="/neuroshima-2026-overrides/icons/tools/"]:not(.neuro-kit-icon) {
 }
 
 .neuro-sztuczka-cover.is-auto,
-.neuro-pochodzenie-cover.is-auto { color: #1e8449; }
+.neuro-pochodzenie-cover.is-auto,
+.neuro-zdolnosc-cover.is-auto { color: #1e8449; }
 .neuro-sztuczka-cover.is-partial,
-.neuro-pochodzenie-cover.is-partial { color: #e67e22; }
+.neuro-pochodzenie-cover.is-partial,
+.neuro-zdolnosc-cover.is-partial { color: #e67e22; }
 .neuro-sztuczka-cover.is-none,
-.neuro-pochodzenie-cover.is-none { color: #8a7a63; font-style: italic; text-transform: none; letter-spacing: 0; }
+.neuro-pochodzenie-cover.is-none,
+.neuro-zdolnosc-cover.is-none { color: #8a7a63; font-style: italic; text-transform: none; letter-spacing: 0; }
 
 .neuro-sztuczka-auto,
-.neuro-pochodzenie-auto { margin: 0 0 0 0; padding-left: 16px; font-size: 11px; line-height: 1.4; }
+.neuro-pochodzenie-auto,
+.neuro-zdolnosc-auto { margin: 0 0 0 0; padding-left: 16px; font-size: 11px; line-height: 1.4; }
 .neuro-sztuczka-auto em,
-.neuro-pochodzenie-auto em { opacity: 0.65; }
+.neuro-pochodzenie-auto em,
+.neuro-zdolnosc-auto em { opacity: 0.65; }
 
 .neuro-sztuczka-manual,
-.neuro-pochodzenie-manual {
+.neuro-pochodzenie-manual,
+.neuro-zdolnosc-manual {
   margin-top: 4px;
   padding: 3px 6px;
   border-left: 2px dashed rgba(140, 110, 70, 0.5);
