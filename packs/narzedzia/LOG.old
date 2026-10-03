@@ -1,1 +1,5 @@
-2026/10/03-18:23:50.139 c398 Delete type=3 #1
+2026/10/03-19:22:43.208 cc40 Recovering log #3
+2026/10/03-19:22:43.208 cc40 Level-0 table #5: started
+2026/10/03-19:22:43.211 cc40 Level-0 table #5: 15021 bytes OK
+2026/10/03-19:22:43.215 cc40 Delete type=0 #3
+2026/10/03-19:22:43.215 cc40 Delete type=3 #2

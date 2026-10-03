@@ -1,5 +1,3 @@
-2026/10/04-00:14:47.557 cf54 Recovering log #3
-2026/10/04-00:14:47.558 cf54 Level-0 table #5: started
-2026/10/04-00:14:47.561 cf54 Level-0 table #5: 25303 bytes OK
-2026/10/04-00:14:47.564 cf54 Delete type=0 #3
-2026/10/04-00:14:47.564 cf54 Delete type=3 #2
+2026/10/04-00:25:16.364 a4cc Recovering log #6
+2026/10/04-00:25:16.368 a4cc Delete type=0 #6
+2026/10/04-00:25:16.368 a4cc Delete type=3 #4

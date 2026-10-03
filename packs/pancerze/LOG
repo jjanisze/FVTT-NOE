@@ -1,1 +1,5 @@
-2026/10/04-00:14:46.975 db34 Delete type=3 #1
+2026/10/04-00:25:16.478 a4cc Recovering log #3
+2026/10/04-00:25:16.479 a4cc Level-0 table #5: started
+2026/10/04-00:25:16.480 a4cc Level-0 table #5: 11916 bytes OK
+2026/10/04-00:25:16.484 a4cc Delete type=0 #3
+2026/10/04-00:25:16.484 a4cc Delete type=3 #2

@@ -1,5 +1,5 @@
-2026/10/03-19:22:43.255 cc40 Recovering log #3
-2026/10/03-19:22:43.256 cc40 Level-0 table #5: started
-2026/10/03-19:22:43.259 cc40 Level-0 table #5: 10962 bytes OK
-2026/10/03-19:22:43.262 cc40 Delete type=0 #3
-2026/10/03-19:22:43.264 cc40 Delete type=3 #2
+2026/10/04-00:25:16.455 126c Recovering log #6
+2026/10/04-00:25:16.455 126c Level-0 table #8: started
+2026/10/04-00:25:16.461 126c Level-0 table #8: 2735 bytes OK
+2026/10/04-00:25:16.465 126c Delete type=0 #6
+2026/10/04-00:25:16.465 126c Delete type=3 #4
