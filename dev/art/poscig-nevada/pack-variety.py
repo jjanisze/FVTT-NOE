@@ -9,13 +9,16 @@ DEST = ROOT / "ui/poscig/themes/pustynia"
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument("--catalog", type=Path, default=Path(__file__).with_name("catalog.json"))
 parser.add_argument("--source-dir", type=Path, help="Optional folder of approved <asset-id>.png/.webp files")
+parser.add_argument("--dest", type=Path, default=DEST, help="Destination theme folder")
 preliminary, _ = parser.parse_known_args()
 catalog = json.loads(preliminary.catalog.read_text(encoding="utf8"))
 for key in catalog["assets"]:
     parser.add_argument(f"--{key}", type=Path, help="Optional original generated output to convert")
 args = parser.parse_args()
+DEST = args.dest
 DEST.mkdir(parents=True, exist_ok=True)
-manifest = {"version":2, "cameraDegrees":catalog["cameraDegrees"], "generator":catalog["generator"],
+manifest = {"version":3, "cameraDegrees":catalog["cameraDegrees"], "generator":catalog["generator"],
+            "regions":catalog.get("regions", ["open", "foothills", "mesas", "broken"]),
             "images":{}, "groups":catalog["groups"], "props":{}}
 for key, asset in catalog["assets"].items():
     target = DEST / asset["file"]

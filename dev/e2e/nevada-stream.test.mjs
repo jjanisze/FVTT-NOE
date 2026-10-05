@@ -1,7 +1,7 @@
 import {test} from "node:test";
 import assert from "node:assert/strict";
 import {setImmediate as turn} from "node:timers/promises";
-import {choose,regionAt,REGION_DISTANCE} from "../../scripts/scenes/poscig-route.mjs";
+import {choose,regionAt,routeAsset,REGION_DISTANCE} from "../../scripts/scenes/poscig-route.mjs";
 import {SceneryTextureCache} from "../../scripts/scenes/poscig-textures.mjs";
 
 test("route shuffle bags remain stable across seeks and avoid adjacent repeats",()=>{
@@ -17,6 +17,17 @@ test("long route regions change without consecutive duplicates",()=>{
   assert.equal(new Set(regions.slice(0,4)).size,4);
   assert.ok(regions.every((r,i)=>i===0||r!==regions[i-1]));
   assert.equal(regionAt("scene",10),regionAt("scene",REGION_DISTANCE-1));
+});
+test("urban districts select their own landscape groups at stable route distances",()=>{
+  const regions=["suburb","mall","commercial","city"];
+  const manifest={regions,groups:{landscapes:Object.fromEntries(regions.map(r=>[r,[`plate-${r}`]]))}};
+  const seen=new Set();
+  for(let i=0;i<300;i++) {
+    const region=regionAt("scene",i*1120/.28,regions);
+    const asset=routeAsset(manifest,"scene","hill",i,1120,.28);
+    assert.equal(asset,`plate-${region}`);seen.add(region);
+  }
+  assert.equal(seen.size,4);
 });
 const texture=id=>({id,baseTexture:{realWidth:2048,realHeight:1024}});
 test("a thousand-asset catalog keeps only the requested working set resident",async()=>{

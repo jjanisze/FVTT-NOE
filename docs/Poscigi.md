@@ -1,8 +1,8 @@
 # Plansza pościgu
 
 Przycisk z flagą w narzędziach Żetonów otwiera okno „Nowy pościg”. Na istniejącej planszy
-zmienia się w przycisk ustawień. Oba okna pozwalają wybrać **Pustynię Nevady**, **Przedmieścia
-w ruinach** albo **Nuklearną zimę**. Motyw jest wyglądem planszy; środowisko ustala ST Testu
+zmienia się w przycisk ustawień. Oba okna pozwalają wybrać **Pustynię Nevady**, **Ruiny
+Ameryki** albo **Nuklearną zimę**. Motyw jest wyglądem planszy; środowisko ustala ST Testu
 Pościgu. Można je dowolnie łączyć. Starsze plansze pokazują pustynię Nevady.
 
 Nevada ma realistyczne bitmapowe tło widziane pod kątem około 45°: zniszczony asfalt,
@@ -11,6 +11,12 @@ Mogą na chwilę zasłonić pojazd, ale przepuszczają kliknięcia, celowanie i 
 Tło dobiera kolejne odcinki drogi, doliny, wzgórza i płaskowyże oraz różne elementy pierwszego
 planu. Grafiki wczytuje z wyprzedzeniem, a nieużywane zwalnia. Nowy pościg zaczyna z tempem 2;
 tempo można zmienić w ustawieniach planszy. Zapisane tempo istniejącego pościgu zostaje zachowane.
+
+Motyw **Ruiny Ameryki** prowadzi przez zniszczone osiedla, centra handlowe, wymarłe pasaże
+z motelami i barami oraz ruiny śródmieścia. Dominuje popielata szarość, z wyblakłymi pastelami
+farby i bielą betonu. Podobnie jak Nevada dobiera zmienne odcinki drogi i elementy pierwszego
+planu, wczytując tylko widoczne grafiki z wyprzedzeniem. Pobocza mają nieregularny obrys:
+skały, gruz i rośliny zachowują pełne sylwetki zamiast znikać w szerokim gradiencie.
 
 Pojazdy w pasie pościgu patrzą w prawo. Środek żetonu rozstrzyga, czy jest w pasie, czy
 w strefie swobodnej pod linią. W strefie swobodnej MG może obracać żetony dowolnie.

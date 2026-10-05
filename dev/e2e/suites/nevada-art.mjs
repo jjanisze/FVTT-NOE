@@ -1,6 +1,3 @@
-import fs from "node:fs";
-import path from "node:path";
-
 const MOD = "neuroshima-2026-overrides";
 const pause = ms => new Promise(r => setTimeout(r, ms));
 
@@ -54,7 +51,7 @@ async function drag(client, dx, dy, shift = false) {
 /** Hold an actual streamed foreground bitmap over the token, using measured alpha pixels. */
 function overlap({opaque = true} = {}) {
   const token = canvas.tokens.placeables.find(t => t.name === "Pojazd 1");
-  const front = canvas.primary.children.find(c => c.name === "poscig-nevada-foreground");
+  const front = canvas.primary.children.find(c => c.name === window.__bitmapArtPrefix+"-foreground");
   front.children[0].visible = false;
   const group = front.children[1];
   const sign = window.__nevadaOverlapSprite ??= group.children.find(s => s.visible);
@@ -77,40 +74,40 @@ function overlap({opaque = true} = {}) {
     aboveToken:canvas.primary.children.indexOf(front)>canvas.primary.children.indexOf(token.mesh)};
 }
 
-async function recordMotion(client) {
-  const length = await client.eval(async () => {
-    const stream = canvas.app.view.captureStream(20), chunks = [];
-    const recorder = new MediaRecorder(stream,{mimeType:"video/webm;codecs=vp9",videoBitsPerSecond:4_000_000});
-    try {
-      await new Promise(resolve => {
-        recorder.ondataavailable = e => { if(e.data.size) chunks.push(e.data); };
-        recorder.onstop = resolve; recorder.start(); setTimeout(()=>recorder.stop(),8000);
-      });
-      const blob = new Blob(chunks,{type:"video/webm"});
-      window.__nevadaMotionBase64 = await new Promise(resolve => { const reader=new FileReader(); reader.onload=()=>resolve(reader.result.split(",")[1]); reader.readAsDataURL(blob); });
-      return window.__nevadaMotionBase64.length;
-    } finally { for(const track of stream.getTracks()) track.stop(); }
-  });
-  // Keep individual CDP replies small; a whole recording can close the browser transport.
-  const chunks = [];
-  try {
-    for(let offset=0;offset<length;offset+=65536) {
-      chunks.push(await client.eval(n=>window.__nevadaMotionBase64.slice(n,n+65536),offset));
-    }
-    return Buffer.from(chunks.join(""),"base64");
-  } finally { await client.eval(()=>{delete window.__nevadaMotionBase64;}); }
-}
-
-export default {
-  name:"nevada-art", clients:["gm","Gracz 1"], fixture:"poscig",
+export function bitmapArtSuite(name, theme, prefix) { return {
+  name, clients:["gm","Gracz 1"], fixture:"poscig",
   async run(t) {
     const player = t.client("Gracz 1");
+    for(const client of [t.gm,player]) await client.eval(({theme,prefix})=>{window.__bitmapArtTheme=theme;window.__bitmapArtPrefix=prefix;},{theme,prefix});
     for(const client of [t.gm,player]) await t.waitFor(client,id=>canvas.ready&&canvas.scene?.id===id&&canvas.tokens.placeables.length===8,
       {args:[t.fixture.scene.id],message:"new chase canvas fully drawn after the previous suite"});
     await t.gm.eval(async () => {
       await game.togglePause(false,true);
-      await game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:"pustynia",tempoTla:0});
+      await game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:window.__bitmapArtTheme,tempoTla:0});
       await canvas.scene.tokens.getName("Pojazd 1").update({x:600,y:970},{animate:false});
+    });
+    await t.waitFor(t.gm,()=>game.neuroshima.poscig.tlo.stats().theme===window.__bitmapArtTheme&&game.neuroshima.poscig.tlo.stats().ready,
+      {message:"requested bitmap theme and authored road edge ready"});
+    await t.step("roadside silhouettes retain solid interiors and real exterior transparency",async()=>{
+      const edges=await t.gm.eval(()=>{
+        const root=canvas.primary.children.find(c=>c.name===window.__bitmapArtPrefix+"-ground");
+        return root.children[1].children.map(sprite=>{
+          const source=sprite.texture.baseTexture.resource.source;
+          const data=source.getContext("2d").getImageData(256,0,1536,240).data;
+          let solid=0,occupied=0,transparent=0;
+          for(let i=3;i<data.length;i+=4) {
+            if(data[i]>8)occupied++;
+            if(data[i]>=240)solid++;
+            if(data[i]===0)transparent++;
+          }
+          return {name:sprite.name,opaqueFraction:solid/occupied,transparent};
+        });
+      });
+      t.assert(edges.length>0,"no actual road textures inspected");
+      for(const edge of edges) {
+        t.assert(edge.opaqueFraction>.85,"roadside objects have a broad opacity fade",edge);
+        t.assert(edge.transparent>1000,"road edge has no real exterior transparency",edge);
+      }
     });
     for(const [label,client] of [["gm",t.gm],["Gracz 1",player]]) {
       await t.waitFor(client,()=>game.neuroshima.poscig.tlo.stats().ready && canvas.scene.tokens.getName("Pojazd 1")?._source.y===970,
@@ -151,7 +148,7 @@ export default {
           {args:[before],message:"normal drag through foreground snapped into next column"});
         // Start in the clear and finish under the opaque sign, the inverse input path.
         await client.eval(overlap,{});
-        await client.eval(()=>{const f=canvas.primary.children.find(c=>c.name==="poscig-nevada-foreground");f.children[1].x+=600;});
+        await client.eval(()=>{const f=canvas.primary.children.find(c=>c.name===window.__bitmapArtPrefix+"-foreground");f.children[1].x+=600;});
         await pause(350);const into=await drag(client,600,0);
         await t.waitFor(client,b=>canvas.scene.tokens.getName("Pojazd 1")._source.x===b.x+600,
           {args:[into],message:"drag from clear road into foreground"});
@@ -159,14 +156,14 @@ export default {
         const shifted=await drag(client,93,55,true);
         await t.waitFor(client,b=>{const d=canvas.scene.tokens.getName("Pojazd 1");return Math.abs(d._source.x-(b.x+93))<3&&Math.abs(d._source.y-(b.y+55))<3;},
           {args:[shifted],message:"Shift drag through foreground retained free position"});
-        await client.eval(()=>{const f=canvas.primary.children.find(c=>c.name==="poscig-nevada-foreground");f.children[0].visible=true;f.children[1].position.set(0,0);delete window.__nevadaOverlapSprite;});
+        await client.eval(()=>{const f=canvas.primary.children.find(c=>c.name===window.__bitmapArtPrefix+"-foreground");f.children[0].visible=true;f.children[1].position.set(0,0);delete window.__nevadaOverlapSprite;});
         await t.gm.eval(()=>canvas.scene.tokens.getName("Pojazd 1").update({x:600,y:970},{animate:false}));
         await t.waitFor(client,()=>canvas.scene.tokens.getName("Pojazd 1")._source.x===600&&canvas.scene.tokens.getName("Pojazd 1")._source.y===970,{message:"restore input fixture"});
       });
     }
     await t.step("production cropping, pan/zoom, tempo and bitmap teardown",async()=>{
       const crop=await t.gm.eval(()=>{
-        const f=canvas.primary.children.find(c=>c.name==="poscig-nevada-foreground");
+        const f=canvas.primary.children.find(c=>c.name===window.__bitmapArtPrefix+"-foreground");
         return f.children.flatMap(c=>c.children.filter(s=>s.visible)).every(s=>s.y+s.height<=1300.01&&s.x>=0&&s.x+s.width<=canvas.scene.width+.01);
       });
       t.assert(crop,"foreground leaks outside chase frame");
@@ -174,21 +171,22 @@ export default {
         await t.gm.eval(s=>canvas.pan({x:1400,y:900,scale:s}),scale);await t.screenshot("gm",`zoom-${scale}`);
       }
       await t.gm.eval(()=>{canvas.pan({x:1400,y:800,scale:.65});return game.neuroshima.poscig.konfiguruj(canvas.scene,{tempoTla:2});});
-      await t.screenshot("gm","nevada-final");await t.gm.send("Page.bringToFront");
-      fs.writeFileSync(path.join(t.run.dir,"nevada-motion.webm"),await recordMotion(t.gm));
+      await t.screenshot("gm","bitmap-final");await t.gm.send("Page.bringToFront");
       await t.gm.eval(()=>{
-        const roots=canvas.primary.children.filter(c=>c.name?.startsWith("poscig-nevada"));const bases=new Set();
+        const roots=canvas.primary.children.filter(c=>c.name?.startsWith(window.__bitmapArtPrefix));const bases=new Set();
         const collect=c=>{for(const base of c.neuroshimaTextureBases?.()??[])bases.add(base);if(c.texture)bases.add(c.texture.baseTexture);for(const child of c.children??[])collect(child);};roots.forEach(collect);
         window.__nevadaArtBases=[...bases];return game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:"zima"});
       });
-      const freed=await t.gm.eval(()=>{const r=window.__nevadaArtBases.every(b=>b.destroyed)&&!canvas.primary.children.some(c=>c.name?.startsWith("poscig-nevada"));delete window.__nevadaArtBases;return r;});
-      t.assert(freed,"Nevada bitmap resources survived a theme switch");
+      const freed=await t.gm.eval(()=>{const r=window.__nevadaArtBases.every(b=>b.destroyed)&&!canvas.primary.children.some(c=>c.name?.startsWith(window.__bitmapArtPrefix));delete window.__nevadaArtBases;return r;});
+      t.assert(freed,"Bitmap resources survived a theme switch");
       // Race an asynchronous build against a second theme change: stale art must never attach.
-      await t.gm.eval(async()=>{await game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:"pustynia"});await game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:"przedmiescia"});});
+      await t.gm.eval(async()=>{await game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:window.__bitmapArtTheme});await game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:"zima"});});
       await pause(1200);
-      t.assert(await t.gm.eval(()=>!canvas.primary.children.some(c=>c.name?.startsWith("poscig-nevada"))),"stale asynchronous Nevada build attached over suburbs");
-      await t.gm.eval(()=>game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:"pustynia"}));
-      await t.waitFor(t.gm,()=>game.neuroshima.poscig.tlo.stats().ready,{message:"Nevada restored"});
+      t.assert(await t.gm.eval(()=>!canvas.primary.children.some(c=>c.name?.startsWith(window.__bitmapArtPrefix))),"stale asynchronous bitmap build attached over winter");
+      await t.gm.eval(()=>game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:window.__bitmapArtTheme}));
+      await t.waitFor(t.gm,()=>game.neuroshima.poscig.tlo.stats().ready,{message:"Bitmap theme restored"});
     });
   }
-};
+}; }
+
+export default bitmapArtSuite("nevada-art","pustynia","poscig-nevada");

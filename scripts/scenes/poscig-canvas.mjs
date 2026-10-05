@@ -2,7 +2,7 @@
 import { isPoscigScene, poscigFlag, torX, FLAG_POSCIG, LANE_W, MARGIN_X, FREEFORM_Y, PAS_GORA } from "./poscig.mjs";
 import { motywPoscigu } from "./poscig-themes.mjs";
 import { bakeSky, bakeFar, bakeMid, bakeNear, rng } from "./poscig-art.mjs";
-import { createNevada } from "./poscig-nevada.mjs";
+import { createBitmapScenery } from "./poscig-bitmap.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const BASE_SPEED = 260;
@@ -10,7 +10,7 @@ const PASY = { far: { y: 200, h: 280 }, mid: { y: 400, h: 900 }, near: { y: FREE
 let _layer = null, _sprites = null, _theme = null, _ticker = null;
 let _textures = [], _particles = [], _scroll = 0;
 let _cost = 0, _frames = 0, _maxCost = 0;
-let _nevada = null, _labels = null, _generation = 0, _error = null;
+let _bitmap = null, _labels = null, _generation = 0, _error = null;
 let _distance = 0;
 let _loadController = null;
 
@@ -20,11 +20,11 @@ function lanes(scene, flag, theme) {
   const g = new PIXI.Graphics();
   for (let i = 1; i <= flag.tory; i++) {
     const x = MARGIN_X + (i - 1) * LANE_W;
-    if (theme.id !== "pustynia") {
+    if (!theme.bitmap) {
       g.beginFill(i % 2 ? theme.lanes.fillB : theme.lanes.fillA, i % 2 ? .025 : .04);
       g.drawRect(x, PAS_GORA, LANE_W, FREEFORM_Y - PAS_GORA); g.endFill();
     }
-    g.lineStyle(theme.id === "pustynia" ? 1.25 : 2, theme.lanes.line, theme.id === "pustynia" ? .18 : theme.lanes.alpha);
+    g.lineStyle(theme.bitmap ? 1.25 : 2, theme.lanes.line, theme.bitmap ? .18 : theme.lanes.alpha);
     g.moveTo(x, PAS_GORA); g.lineTo(x, FREEFORM_Y);
   }
   g.moveTo(MARGIN_X + flag.tory * LANE_W, PAS_GORA); g.lineTo(MARGIN_X + flag.tory * LANE_W, FREEFORM_Y);
@@ -37,20 +37,20 @@ function labels(scene, flag, theme) {
   const box = new PIXI.Container();
   const badges = new PIXI.Graphics();
   for (let i = 1; i <= flag.tory; i++) {
-    if (theme.id !== "pustynia") {
+    if (!theme.bitmap) {
       badges.beginFill(theme.labels.stroke, .65); badges.drawRoundedRect(torX(i) - 43, PAS_GORA - 87, 86, 67, 8); badges.endFill();
     }
   }
   box.addChild(badges);
   for (let i = 1; i <= flag.tory; i++) {
     const t = new PIXI.Text(String(i + (flag.offset ?? 0)), {
-      fontFamily: theme.labels.font, fontSize: theme.id === "pustynia" ? 42 : 48, fontWeight: "700", fill: theme.labels.fill,
+      fontFamily: theme.labels.font, fontSize: theme.bitmap ? 42 : 48, fontWeight: "700", fill: theme.labels.fill,
       stroke: theme.labels.stroke, strokeThickness: 3
     });
-    t.anchor.set(.5, 1); t.position.set(torX(i), PAS_GORA - (theme.id === "pustynia" ? 60 : 27)); box.addChild(t);
+    t.anchor.set(.5, 1); t.position.set(torX(i), PAS_GORA - (theme.bitmap ? 60 : 27)); box.addChild(t);
   }
   const heading = new PIXI.Text(`${theme.nazwa.toLocaleUpperCase("pl")}    →`, {
-    fontFamily: theme.labels.font, fontSize: theme.id === "pustynia" ? 24 : 32, fontWeight: "600", fill: theme.labels.fill,
+    fontFamily: theme.labels.font, fontSize: theme.bitmap ? 24 : 32, fontWeight: "600", fill: theme.labels.fill,
     stroke: theme.labels.stroke, strokeThickness: 3, letterSpacing: 3
   });
   heading.position.set(MARGIN_X, 78); heading.alpha = .85; box.addChild(heading);
@@ -88,21 +88,21 @@ function build() {
   _layer = new PIXI.Container(); _layer.eventMode = "none"; _layer.interactiveChildren = false;
   _layer.neuroshimaPoscig = true;
   // PrimaryCanvasGroup compares elevation before sortLayer; the scene background is at zero.
-  _layer.elevation = 0; _layer.sortLayer = _theme.id === "pustynia" ? 110 : 100; _layer.sort = 0;
-  if (_theme.id === "pustynia") {
+  _layer.elevation = 0; _layer.sortLayer = _theme.bitmap ? 110 : 100; _layer.sort = 0;
+  if (_theme.bitmap) {
     _labels = labels(scene, flag, _theme);
     _labels.eventMode = "none"; _labels.interactiveChildren = false; _labels.neuroshimaPoscig = true;
     _labels.elevation = 0; _labels.sortLayer = 900; _labels.sort = 0;
     canvas.primary.addChild(_labels);
     _loadController = new AbortController();
-    createNevada(scene, _distance, _loadController.signal).then(art => {
+    createBitmapScenery(scene, _theme.id, _distance, _loadController.signal).then(art => {
       if (generation !== _generation) { art.destroy(); return; }
-      _nevada = art;
+      _bitmap = art;
       canvas.primary.addChild(art.ground, art.front); canvas.primary.sortChildren();
     }).catch(error => {
       if (generation !== _generation) return;
-      _error = error.message; console.error("[Neuroshima] Nevada artwork failed to load", error);
-      ui.notifications.error("Nie udało się załadować grafiki pustyni.");
+      _error = error.message; console.error("[Neuroshima] Chase artwork failed to load", error);
+      ui.notifications.error("Nie udało się załadować grafiki pościgu.");
     });
   } else {
     const sky = new PIXI.Sprite(remember(bakeSky(_theme)));
@@ -117,7 +117,7 @@ function build() {
   }
   _layer.addChild(lanes(scene, flag, _theme));
   particles(scene, _theme);
-  if (_theme.id !== "pustynia") _layer.addChild(labels(scene, flag, _theme));
+  if (!_theme.bitmap) _layer.addChild(labels(scene, flag, _theme));
   canvas.primary.addChild(_layer); canvas.primary.sortChildren();
   _ticker = canvas.app.ticker;
   _ticker.add(tick, null, PIXI.UPDATE_PRIORITY.NORMAL);
@@ -126,7 +126,7 @@ function build() {
 function destroy() {
   _generation++; _error = null;
   _ticker?.remove(tick, null); _ticker = null;
-  _nevada?.destroy(); _nevada = null;
+  _bitmap?.destroy(); _bitmap = null;
   _loadController?.abort(); _loadController = null;
   _labels?.destroy({children:true}); _labels = null;
   if (_layer && !_layer.destroyed) _layer.destroy({ children: true });
@@ -136,12 +136,12 @@ function destroy() {
 }
 
 function tick() {
-  if (!_sprites && !_nevada) return;
+  if (!_sprites && !_bitmap) return;
   const begin = performance.now(), flag = poscigFlag();
   const speed = Math.max(0, Number(flag?.tempoTla ?? 2) || 0);
   const dt = Math.min(canvas.app.ticker.deltaMS, 50) / 1000;
   const requested = BASE_SPEED * speed * dt;
-  const delta = _nevada ? _nevada.tick(requested) : requested;
+  const delta = _bitmap ? _bitmap.tick(requested) : requested;
   _distance += delta;
   _scroll = (_scroll + delta) % 8192;
   if (_sprites) {
@@ -183,8 +183,8 @@ export const poscigCanvasApi = {
   /** Test-only teardown, e.g. when measuring an archived renderer without stacking layers. */
   __destroy: destroy,
   stats(reset = false) {
-    const stats = { theme: _theme?.id ?? null, ready:!!(_nevada || _sprites), error:_error,
-      frames: _frames, averageMs: _frames ? _cost / _frames : 0, maxMs: _maxCost, ..._nevada?.stats() };
+    const stats = { theme: _theme?.id ?? null, ready:!!(_bitmap || _sprites), error:_error,
+      frames: _frames, averageMs: _frames ? _cost / _frames : 0, maxMs: _maxCost, ..._bitmap?.stats() };
     if (reset) _cost = _frames = _maxCost = 0;
     return stats;
   }

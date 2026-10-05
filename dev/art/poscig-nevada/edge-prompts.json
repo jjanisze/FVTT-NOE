@@ -1,0 +1,6 @@
+{
+  "generator": "OpenAI built-in image generation",
+  "asset": "ground.webp",
+  "prompt": "Edit target: the supplied Nevada chase ground bitmap. Use case: game-asset, exact raster preservation and alpha silhouette edge. Preserve its wide 2:1 dimensions, highway position, all road pixels, lanes, lower shoulder, colours, 45-degree downward camera and upper-left sunlight. Change ONLY the topmost approximately 12 percent: remove the distant dirt backdrop above the immediate roadside rocks and shrubs, revealing ACTUAL TRANSPARENCY. Trace the natural contours of the existing tan rocks, dry bushes and branches; retain their interiors completely opaque, tiny anti-aliased feather only on individual contour edges, holes between fine branches truly transparent. Below this irregular boundary keep soil and everything else completely opaque. The result is a solid road-and-shoulder plate with a jagged organic upper cutout edge that can sit over another landscape. No global gradient fade, no ghost vegetation, no transparent rock faces, no extra objects, no opaque sky, no checkerboard painted into the bitmap. Most of the image remains unchanged and opaque. Preserve left and right road continuity.",
+  "transparent_background": true
+}

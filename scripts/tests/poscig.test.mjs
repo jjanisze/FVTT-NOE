@@ -34,7 +34,7 @@ import {
 } from "../scenes/poscig.mjs";
 import { snapDoToru, deltaRecentrowania, rozstawMiesciSie } from "../scenes/poscig-snap.mjs";
 import { MOTYWY, MOTYW_DOMYSLNY, motywPoscigu } from "../scenes/poscig-themes.mjs";
-import { przyciagnietyDoToru, wPasiePoscigu, rotationNaPrawo, ziarnoPionka, kolysanie } from "../scenes/poscig-motion-model.mjs";
+import { przyciagnietyDoToru, wPasiePoscigu, rotationNaPrawo, ziarnoPionka, kolysanie, rytmKolysania, kolysanieZegara } from "../scenes/poscig-motion-model.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -56,7 +56,8 @@ export function registerPoscigTests(quench) {
         for (const [id, theme] of Object.entries(MOTYWY)) {
           expect(theme.id).to.equal(id);
           expect(theme.nazwa).to.be.a("string").with.length.above(8);
-          expect(theme).to.have.all.keys("id", "nazwa", "seed", "sky", "far", "mid", "near", "lanes", "labels", "free", "ambient");
+          expect(theme).to.have.all.keys("id", "nazwa", "seed", "bitmap", "sky", "far", "mid", "near", "lanes", "labels", "free", "ambient");
+          expect(theme.bitmap).to.be.a("boolean");
           for (const part of ["far", "mid", "near"]) {
             expect(theme[part].colors.length).to.be.at.least(2);
             expect(theme[part].parallax).to.be.above(0);
@@ -131,6 +132,42 @@ export function registerPoscigTests(quench) {
         expect(kolysanie(5, 2, 1, true, out)).to.equal(out);
         expect(kolysanie(5, 3, 0, true, out)).to.equal(out);
         expect(out).to.deep.equal({x: 0, y: 0, rotation: 0});
+      });
+
+      it("pojazd długości jednego toru zachowuje dostrojone kołysanie", function () {
+        const seed = ziarnoPionka("pojazd-a");
+        for (const t of [0, 1.3, 17, 600]) expect(kolysanie(seed, t, 2, true, {}, 1)).to.deep.equal(kolysanie(seed, t, 2));
+        expect(kolysanieZegara(seed, 5 * rytmKolysania(2), 2)).to.deep.equal(kolysanie(seed, 5, 2));
+      });
+
+      it("większy pojazd kołysze się szerzej i wolniej, mniejszy ciaśniej i szybciej", function () {
+        const peaks = size => {
+          const p = {x: 0, y: 0, rotation: 0};
+          for (let t = 0; t < 120; t += .01) {
+            const s = kolysanie(ziarnoPionka("pojazd-a"), t, 2, true, {}, size);
+            for (const k in p) p[k] = Math.max(p[k], Math.abs(s[k]));
+          }
+          return p;
+        };
+        const motocykl = peaks(.5), auto = peaks(1), autobus = peaks(3);
+        expect(rytmKolysania(2, .5)).to.be.above(rytmKolysania(2, 1));
+        expect(rytmKolysania(2, 4)).to.be.closeTo(rytmKolysania(2, 1) / 2, 1e-12);
+        expect(autobus.y).to.be.above(auto.y * 2.5);
+        expect(auto.y).to.be.above(motocykl.y * 1.6);
+        expect(autobus.x).to.be.above(auto.x).and.below(auto.x * 2);
+        // Large hulls yaw through a smaller angle — their ends still sweep further.
+        expect(autobus.rotation).to.be.below(auto.rotation);
+        expect(autobus.rotation * 3).to.be.above(auto.rotation);
+      });
+
+      it("skrajności QuickScale są ograniczone, a środek nadal nie opuszcza toru", function () {
+        const seed = ziarnoPionka("pojazd-a");
+        expect(kolysanie(seed, 7, 2, true, {}, 10)).to.deep.equal(kolysanie(seed, 7, 2, true, {}, 6));
+        expect(kolysanie(seed, 7, 2, true, {}, .1)).to.deep.equal(kolysanie(seed, 7, 2, true, {}, .25));
+        for (let t = 0; t < 60; t += .17) {
+          const s = kolysanie(seed, t, 4, true, {}, 10);
+          expect(xNaTor(torX(4) + s.x)).to.equal(4);
+        }
       });
     });
 

@@ -9,18 +9,18 @@ The original revision supplied five WEBPs in `ui/poscig/themes/pustynia/`. Their
 records native dimensions and alpha sprite bounds. Ground/hills are 1774×887; plants/structures
 1254×1254; dust 1774×887. Preserve generated alpha, including semitransparent edges.
 
-To package new generated outputs:
+Original five-image bootstrap (historical; use the variety packer below for the current catalog):
 
 ```sh
 python dev/art/poscig-nevada/pack.py --ground <image> --hills <image> --plants <image> --structures <image> --dust <image>
 ```
 
 This performs format conversion and locates sprite bounds; it does not draw or repair scenery.
-Use the image model for content changes. The runtime in `scripts/scenes/poscig-nevada.mjs`
+Use the image model for content changes. The shared runtime in `scripts/scenes/poscig-bitmap.mjs`
 composites bitmap pixels when loading a strip for loop seams and the terrain overlap, then moves sprites.
 Foreground texture regions omit lower stems, and their quads end at the chase-panel frame.
 Every decoration is excluded from pointer hit testing. Real opaque/transparent overlap checks
-and a canvas motion recording live in the `nevada-art` end-to-end suite.
+live in the `nevada-art` end-to-end suite.
 
 ## Streamed variety catalog
 
@@ -59,5 +59,18 @@ panel and all artwork remains excluded from input. Slow loading holds scenery at
 distance until the incoming visible set is ready, retaining the old textures in the meantime.
 
 `node --test dev/e2e/nevada-stream.test.mjs` covers a thousand-asset working set and canceled loads.
-The `nevada-stream` layer-6 suite records three minutes at tempo 2, checks all terrain recipes,
-texture eviction and unchanged documents, and writes motion plus cache telemetry under `logs/e2e/`.
+The `nevada-stream` layer-6 suite samples three minutes at tempo 2, checks all terrain recipes,
+texture eviction and unchanged documents, and writes cache telemetry under `logs/e2e/`.
+
+## Opaque roadside edge
+
+`edge-prompts.json` records the image-model edit that cuts actual transparency around the upper
+rocks, shrubs and branches in `ground.webp`. Their interiors remain solid or nearly opaque.
+Every road variant uses this shared upper edge. The compositor removes the former broad vertical
+opacity ramp and switches tile ownership along a narrow antialiased irregular contour, preserving
+object bodies. A one-time coverage adjustment makes the connector's interiors opaque, removes
+faint exterior noise and retains antialiasing at lower-coverage contour pixels. The live art suite
+samples actual loaded pixels to catch a returning broad fade.
+
+Preview videos were removed at the GM's request; live preview and screenshots are used instead.
+Urban artwork and its sibling catalog are documented in `../poscig-urban/README.md`.

@@ -1,0 +1,548 @@
+{
+  "version": 3,
+  "cameraDegrees": 45,
+  "generator": "OpenAI built-in image generation",
+  "regions": [
+    "suburb",
+    "mall",
+    "commercial",
+    "city"
+  ],
+  "images": {
+    "ground": {
+      "file": "ground.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "road"
+    },
+    "road-patched": {
+      "file": "road-patched.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "road"
+    },
+    "road-sand": {
+      "file": "road-sand.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "road"
+    },
+    "road-eroded": {
+      "file": "road-eroded.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "road"
+    },
+    "district-suburb": {
+      "file": "district-suburb.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "hill"
+    },
+    "district-mall": {
+      "file": "district-mall.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "hill"
+    },
+    "district-commercial": {
+      "file": "district-commercial.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "hill"
+    },
+    "district-city": {
+      "file": "district-city.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "hill"
+    },
+    "plants-a": {
+      "file": "plants-a.webp",
+      "width": 1254,
+      "height": 1254,
+      "role": "atlas",
+      "frames": {
+        "oak-crown": [
+          5,
+          9,
+          660,
+          668
+        ],
+        "dead-palm": [
+          665,
+          12,
+          580,
+          665
+        ],
+        "charred-pine": [
+          15,
+          677,
+          650,
+          577
+        ],
+        "dead-hedge": [
+          665,
+          691,
+          574,
+          563
+        ]
+      }
+    },
+    "plants-b": {
+      "file": "plants-b.webp",
+      "width": 1254,
+      "height": 1254,
+      "role": "atlas",
+      "frames": {
+        "forked-tree": [
+          7,
+          6,
+          620,
+          640
+        ],
+        "ivy-branches": [
+          627,
+          22,
+          619,
+          624
+        ],
+        "dry-yucca": [
+          19,
+          646,
+          608,
+          605
+        ],
+        "birch-crown": [
+          627,
+          646,
+          621,
+          605
+        ]
+      }
+    },
+    "structures-a": {
+      "file": "structures-a.webp",
+      "width": 1254,
+      "height": 1254,
+      "role": "atlas",
+      "frames": {
+        "street-sign": [
+          54,
+          24,
+          527,
+          603
+        ],
+        "streetlamp": [
+          656,
+          91,
+          567,
+          536
+        ],
+        "billboard": [
+          30,
+          642,
+          582,
+          612
+        ],
+        "water-tank": [
+          675,
+          630,
+          540,
+          624
+        ]
+      }
+    },
+    "structures-b": {
+      "file": "structures-b.webp",
+      "width": 1254,
+      "height": 1254,
+      "role": "atlas",
+      "frames": {
+        "diner-awning": [
+          13,
+          21,
+          607,
+          604
+        ],
+        "brick-cornice": [
+          700,
+          8,
+          541,
+          620
+        ],
+        "power-crossarm": [
+          17,
+          660,
+          610,
+          594
+        ],
+        "mall-marquee": [
+          627,
+          633,
+          613,
+          621
+        ]
+      }
+    },
+    "structures-c": {
+      "file": "structures-c.webp",
+      "width": 1254,
+      "height": 1254,
+      "role": "atlas",
+      "frames": {
+        "concrete-beam": [
+          31,
+          26,
+          589,
+          597
+        ],
+        "gas-canopy": [
+          636,
+          29,
+          595,
+          581
+        ],
+        "rooftop-hvac": [
+          13,
+          638,
+          610,
+          601
+        ],
+        "fire-escape": [
+          638,
+          627,
+          603,
+          613
+        ]
+      }
+    },
+    "decals": {
+      "file": "decals.webp",
+      "width": 1254,
+      "height": 1254,
+      "role": "atlas",
+      "frames": {
+        "ash-drift": [
+          80,
+          67,
+          512,
+          517
+        ],
+        "tar-patch": [
+          691,
+          61,
+          513,
+          543
+        ],
+        "oil-stain": [
+          64,
+          714,
+          532,
+          477
+        ],
+        "skid-marks": [
+          683,
+          690,
+          555,
+          545
+        ]
+      }
+    },
+    "dust": {
+      "file": "dust.webp",
+      "width": 1254,
+      "height": 1254,
+      "role": "atlas",
+      "frames": {
+        "dust-1": [
+          16,
+          223,
+          597,
+          248
+        ],
+        "dust-2": [
+          650,
+          255,
+          594,
+          206
+        ],
+        "dust-3": [
+          46,
+          842,
+          578,
+          204
+        ],
+        "dust-4": [
+          647,
+          836,
+          564,
+          208
+        ]
+      }
+    }
+  },
+  "groups": {
+    "roads": [
+      "ground",
+      "road-patched",
+      "road-sand",
+      "road-eroded"
+    ],
+    "landscapes": {
+      "suburb": [
+        "district-suburb",
+        "district-commercial"
+      ],
+      "mall": [
+        "district-mall",
+        "district-suburb",
+        "district-commercial"
+      ],
+      "commercial": [
+        "district-commercial",
+        "district-mall",
+        "district-suburb"
+      ],
+      "city": [
+        "district-city",
+        "district-commercial",
+        "district-mall"
+      ]
+    },
+    "plants": [
+      "oak-crown",
+      "dead-palm",
+      "charred-pine",
+      "dead-hedge",
+      "forked-tree",
+      "ivy-branches",
+      "dry-yucca",
+      "birch-crown"
+    ],
+    "structures": [
+      "street-sign",
+      "streetlamp",
+      "billboard",
+      "water-tank",
+      "diner-awning",
+      "brick-cornice",
+      "power-crossarm",
+      "mall-marquee",
+      "concrete-beam",
+      "gas-canopy",
+      "rooftop-hvac",
+      "fire-escape"
+    ],
+    "decals": [
+      "ash-drift",
+      "tar-patch",
+      "oil-stain",
+      "skid-marks"
+    ],
+    "dust": [
+      "dust-1",
+      "dust-2",
+      "dust-3",
+      "dust-4"
+    ]
+  },
+  "props": {
+    "oak-crown": {
+      "atlas": "plants-a",
+      "frame": "oak-crown",
+      "height": 340,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "dead-palm": {
+      "atlas": "plants-a",
+      "frame": "dead-palm",
+      "height": 330,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "charred-pine": {
+      "atlas": "plants-a",
+      "frame": "charred-pine",
+      "height": 345,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "dead-hedge": {
+      "atlas": "plants-a",
+      "frame": "dead-hedge",
+      "height": 270,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "forked-tree": {
+      "atlas": "plants-b",
+      "frame": "forked-tree",
+      "height": 335,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "ivy-branches": {
+      "atlas": "plants-b",
+      "frame": "ivy-branches",
+      "height": 300,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "dry-yucca": {
+      "atlas": "plants-b",
+      "frame": "dry-yucca",
+      "height": 270,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "birch-crown": {
+      "atlas": "plants-b",
+      "frame": "birch-crown",
+      "height": 335,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "street-sign": {
+      "atlas": "structures-a",
+      "frame": "street-sign",
+      "height": 290,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "streetlamp": {
+      "atlas": "structures-a",
+      "frame": "streetlamp",
+      "height": 340,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "billboard": {
+      "atlas": "structures-a",
+      "frame": "billboard",
+      "height": 300,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "water-tank": {
+      "atlas": "structures-a",
+      "frame": "water-tank",
+      "height": 380,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "diner-awning": {
+      "atlas": "structures-b",
+      "frame": "diner-awning",
+      "height": 300,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "brick-cornice": {
+      "atlas": "structures-b",
+      "frame": "brick-cornice",
+      "height": 330,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "power-crossarm": {
+      "atlas": "structures-b",
+      "frame": "power-crossarm",
+      "height": 300,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "mall-marquee": {
+      "atlas": "structures-b",
+      "frame": "mall-marquee",
+      "height": 340,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "concrete-beam": {
+      "atlas": "structures-c",
+      "frame": "concrete-beam",
+      "height": 360,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "gas-canopy": {
+      "atlas": "structures-c",
+      "frame": "gas-canopy",
+      "height": 320,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "rooftop-hvac": {
+      "atlas": "structures-c",
+      "frame": "rooftop-hvac",
+      "height": 300,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "fire-escape": {
+      "atlas": "structures-c",
+      "frame": "fire-escape",
+      "height": 330,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "ash-drift": {
+      "atlas": "decals",
+      "frame": "ash-drift",
+      "height": 180,
+      "crop": 1,
+      "alpha": 0.5
+    },
+    "tar-patch": {
+      "atlas": "decals",
+      "frame": "tar-patch",
+      "height": 100,
+      "crop": 1,
+      "alpha": 0.5
+    },
+    "oil-stain": {
+      "atlas": "decals",
+      "frame": "oil-stain",
+      "height": 110,
+      "crop": 1,
+      "alpha": 0.5
+    },
+    "skid-marks": {
+      "atlas": "decals",
+      "frame": "skid-marks",
+      "height": 170,
+      "crop": 1,
+      "alpha": 0.5
+    },
+    "dust-1": {
+      "atlas": "dust",
+      "frame": "dust-1",
+      "height": 180,
+      "crop": 1,
+      "alpha": 0.1
+    },
+    "dust-2": {
+      "atlas": "dust",
+      "frame": "dust-2",
+      "height": 220,
+      "crop": 1,
+      "alpha": 0.1
+    },
+    "dust-3": {
+      "atlas": "dust",
+      "frame": "dust-3",
+      "height": 180,
+      "crop": 1,
+      "alpha": 0.1
+    },
+    "dust-4": {
+      "atlas": "dust",
+      "frame": "dust-4",
+      "height": 210,
+      "crop": 1,
+      "alpha": 0.1
+    }
+  }
+}

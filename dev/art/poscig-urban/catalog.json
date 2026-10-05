@@ -1,0 +1,487 @@
+{
+  "cameraDegrees": 45,
+  "generator": "OpenAI built-in image generation",
+  "regions": [
+    "suburb",
+    "mall",
+    "commercial",
+    "city"
+  ],
+  "groups": {
+    "roads": [
+      "ground",
+      "road-patched",
+      "road-sand",
+      "road-eroded"
+    ],
+    "landscapes": {
+      "suburb": [
+        "district-suburb",
+        "district-commercial"
+      ],
+      "mall": [
+        "district-mall",
+        "district-suburb",
+        "district-commercial"
+      ],
+      "commercial": [
+        "district-commercial",
+        "district-mall",
+        "district-suburb"
+      ],
+      "city": [
+        "district-city",
+        "district-commercial",
+        "district-mall"
+      ]
+    },
+    "plants": [
+      "oak-crown",
+      "dead-palm",
+      "charred-pine",
+      "dead-hedge",
+      "forked-tree",
+      "ivy-branches",
+      "dry-yucca",
+      "birch-crown"
+    ],
+    "structures": [
+      "street-sign",
+      "streetlamp",
+      "billboard",
+      "water-tank",
+      "diner-awning",
+      "brick-cornice",
+      "power-crossarm",
+      "mall-marquee",
+      "concrete-beam",
+      "gas-canopy",
+      "rooftop-hvac",
+      "fire-escape"
+    ],
+    "decals": [
+      "ash-drift",
+      "tar-patch",
+      "oil-stain",
+      "skid-marks"
+    ],
+    "dust": [
+      "dust-1",
+      "dust-2",
+      "dust-3",
+      "dust-4"
+    ]
+  },
+  "assets": {
+    "ground": {
+      "file": "ground.webp",
+      "role": "road"
+    },
+    "road-patched": {
+      "file": "road-patched.webp",
+      "role": "road"
+    },
+    "road-sand": {
+      "file": "road-sand.webp",
+      "role": "road"
+    },
+    "road-eroded": {
+      "file": "road-eroded.webp",
+      "role": "road"
+    },
+    "district-suburb": {
+      "file": "district-suburb.webp",
+      "role": "hill"
+    },
+    "district-mall": {
+      "file": "district-mall.webp",
+      "role": "hill"
+    },
+    "district-commercial": {
+      "file": "district-commercial.webp",
+      "role": "hill"
+    },
+    "district-city": {
+      "file": "district-city.webp",
+      "role": "hill"
+    },
+    "plants-a": {
+      "file": "plants-a.webp",
+      "role": "atlas",
+      "sprites": [
+        {
+          "name": "oak-crown",
+          "height": 340,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0,
+            0,
+            0.53,
+            0.54
+          ]
+        },
+        {
+          "name": "dead-palm",
+          "height": 330,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0.53,
+            0,
+            1,
+            0.54
+          ]
+        },
+        {
+          "name": "charred-pine",
+          "height": 345,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0,
+            0.54,
+            0.53,
+            1
+          ]
+        },
+        {
+          "name": "dead-hedge",
+          "height": 270,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0.53,
+            0.54,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "plants-b": {
+      "file": "plants-b.webp",
+      "role": "atlas",
+      "sprites": [
+        {
+          "name": "forked-tree",
+          "height": 335,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0,
+            0,
+            0.5,
+            0.515
+          ]
+        },
+        {
+          "name": "ivy-branches",
+          "height": 300,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0.5,
+            0,
+            1,
+            0.515
+          ]
+        },
+        {
+          "name": "dry-yucca",
+          "height": 270,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0,
+            0.515,
+            0.5,
+            1
+          ]
+        },
+        {
+          "name": "birch-crown",
+          "height": 335,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0.5,
+            0.515,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "structures-a": {
+      "file": "structures-a.webp",
+      "role": "atlas",
+      "sprites": [
+        {
+          "name": "street-sign",
+          "height": 290,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0,
+            0,
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "name": "streetlamp",
+          "height": 340,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0.5,
+            0,
+            1,
+            0.5
+          ]
+        },
+        {
+          "name": "billboard",
+          "height": 300,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0,
+            0.5,
+            0.5,
+            1
+          ]
+        },
+        {
+          "name": "water-tank",
+          "height": 380,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0.5,
+            0.5,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "structures-b": {
+      "file": "structures-b.webp",
+      "role": "atlas",
+      "sprites": [
+        {
+          "name": "diner-awning",
+          "height": 300,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0,
+            0,
+            0.5,
+            0.505
+          ]
+        },
+        {
+          "name": "brick-cornice",
+          "height": 330,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0.5,
+            0,
+            1,
+            0.505
+          ]
+        },
+        {
+          "name": "power-crossarm",
+          "height": 300,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0,
+            0.505,
+            0.5,
+            1
+          ]
+        },
+        {
+          "name": "mall-marquee",
+          "height": 340,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0.5,
+            0.505,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "structures-c": {
+      "file": "structures-c.webp",
+      "role": "atlas",
+      "sprites": [
+        {
+          "name": "concrete-beam",
+          "height": 360,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0,
+            0,
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "name": "gas-canopy",
+          "height": 320,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0.5,
+            0,
+            1,
+            0.5
+          ]
+        },
+        {
+          "name": "rooftop-hvac",
+          "height": 300,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0,
+            0.5,
+            0.5,
+            1
+          ]
+        },
+        {
+          "name": "fire-escape",
+          "height": 330,
+          "crop": 0.78,
+          "alpha": 1,
+          "region": [
+            0.5,
+            0.5,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "decals": {
+      "file": "decals.webp",
+      "role": "atlas",
+      "sprites": [
+        {
+          "name": "ash-drift",
+          "height": 180,
+          "crop": 1,
+          "alpha": 0.5,
+          "region": [
+            0,
+            0,
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "name": "tar-patch",
+          "height": 100,
+          "crop": 1,
+          "alpha": 0.5,
+          "region": [
+            0.5,
+            0,
+            1,
+            0.5
+          ]
+        },
+        {
+          "name": "oil-stain",
+          "height": 110,
+          "crop": 1,
+          "alpha": 0.5,
+          "region": [
+            0,
+            0.5,
+            0.5,
+            1
+          ]
+        },
+        {
+          "name": "skid-marks",
+          "height": 170,
+          "crop": 1,
+          "alpha": 0.5,
+          "region": [
+            0.5,
+            0.5,
+            1,
+            1
+          ]
+        }
+      ]
+    },
+    "dust": {
+      "file": "dust.webp",
+      "role": "atlas",
+      "sprites": [
+        {
+          "name": "dust-1",
+          "height": 180,
+          "crop": 1,
+          "alpha": 0.1,
+          "region": [
+            0,
+            0,
+            0.5,
+            0.5
+          ]
+        },
+        {
+          "name": "dust-2",
+          "height": 220,
+          "crop": 1,
+          "alpha": 0.1,
+          "region": [
+            0.5,
+            0,
+            1,
+            0.5
+          ]
+        },
+        {
+          "name": "dust-3",
+          "height": 180,
+          "crop": 1,
+          "alpha": 0.1,
+          "region": [
+            0,
+            0.5,
+            0.5,
+            1
+          ]
+        },
+        {
+          "name": "dust-4",
+          "height": 210,
+          "crop": 1,
+          "alpha": 0.1,
+          "region": [
+            0.5,
+            0.5,
+            1,
+            1
+          ]
+        }
+      ]
+    }
+  }
+}

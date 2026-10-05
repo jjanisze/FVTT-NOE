@@ -3,7 +3,7 @@ export const MOTYW_DOMYSLNY = "pustynia";
 
 export const MOTYWY = Object.freeze({
   pustynia: {
-    id: "pustynia", nazwa: "Pustynia Nevady", seed: 0x5eed1,
+    id: "pustynia", nazwa: "Pustynia Nevady", seed: 0x5eed1, bitmap: true,
     sky: ["#607c8c", "#c3c4b5", "#ead2a4"],
     far: { colors: ["#a8a391", "#a89376", "#8c785e"], parallax: .25 },
     mid: { colors: ["#a98454", "#ccb082", "#705f48"], parallax: 1 },
@@ -14,18 +14,18 @@ export const MOTYWY = Object.freeze({
     ambient: null
   },
   przedmiescia: {
-    id: "przedmiescia", nazwa: "Przedmieścia w ruinach", seed: 0xbad512,
+    id: "przedmiescia", nazwa: "Ruiny Ameryki", seed: 0xbad512, bitmap: true,
     sky: ["#52656a", "#91988f", "#c3b299"],
     far: { colors: ["#777c73", "#676b63", "#55594f"], parallax: .25 },
     mid: { colors: ["#4d5150", "#73756e", "#303737"], parallax: 1 },
     near: { colors: ["#323936", "#6f6451"], parallax: 2 },
-    lanes: { line: 0xded2a9, fillA: 0x000000, fillB: 0xffffff, alpha: .25 },
-    labels: { fill: 0xe8dbc0, stroke: 0x252e2e, font: "Signika, sans-serif" },
-    free: { background: 0x191f1e, line: 0x70766a, text: 0xa3ad9f },
+    lanes: { line: 0xd9d7ce, fillA: 0x000000, fillB: 0xffffff, alpha: .25 },
+    labels: { fill: 0xe6e2d7, stroke: 0x252527, font: "Signika, sans-serif" },
+    free: { background: 0x191b1c, line: 0x737577, text: 0xa7a8a4 },
     ambient: null
   },
   zima: {
-    id: "zima", nazwa: "Nuklearna zima", seed: 0x1ce55,
+    id: "zima", nazwa: "Nuklearna zima", seed: 0x1ce55, bitmap: false,
     sky: ["#444f60", "#929caa", "#c8cbce"],
     far: { colors: ["#a8afb7", "#87919a", "#626e7b"], parallax: .25 },
     mid: { colors: ["#b3bac0", "#d4d7d6", "#7c8890"], parallax: 1 },

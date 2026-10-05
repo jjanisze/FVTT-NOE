@@ -19,9 +19,9 @@ o dokumencie świata. Żadnej z tych rzeczy nie da się uczciwie zasymulować:
 Test uruchomiony w prawdziwym świecie odpowiada na pytanie, które faktycznie zadajemy:
 *czy po `init` ten moduł i ten system zgadzają się co do faktów.*
 
-`npm test` robi statyczną kontrolę warstwy testowej (§7) i uruchamia cztery testy czystego
-planowania oraz pamięci podręcznej grafik Nevady (`npm run test:scenery`). Te ostatnie sprawdzają
-katalog tysiąca zasobów, zwalnianie tekstur i anulowanie wczytywania; nie zastępują testów PIXI,
+`npm test` robi statyczną kontrolę warstwy testowej (§7) i uruchamia pięć testów czystego
+planowania oraz pamięci podręcznej grafik pościgu (`npm run test:scenery`). Te ostatnie sprawdzają
+katalog tysiąca zasobów, receptury dzielnic, zwalnianie tekstur i anulowanie wczytywania; nie zastępują testów PIXI,
 wejścia ani reguł w Foundry. Uruchamia je również statyczny etap bramki wydania.
 
 ---

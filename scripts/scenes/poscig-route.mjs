@@ -38,12 +38,12 @@ export function choose(items, seed, stream, index) {
 
 const REGIONS = ["open", "foothills", "mesas", "broken"];
 export const REGION_DISTANCE = 24000;
-export function regionAt(seed, distance) {
-  return choose(REGIONS, seed, "regions", Math.floor(distance / REGION_DISTANCE));
+export function regionAt(seed, distance, regions = REGIONS) {
+  return choose(regions, seed, "regions", Math.floor(distance / REGION_DISTANCE));
 }
 
 export function routeAsset(manifest, seed, role, index, stride, rate = 1) {
-  const region = regionAt(seed, index * stride / rate);
+  const region = regionAt(seed, index * stride / rate, manifest.regions);
   if (role === "road") return choose(manifest.groups.roads, seed, "roads", index);
   if (role === "hill") {
     const groups = manifest.groups.landscapes;

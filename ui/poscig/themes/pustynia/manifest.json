@@ -1,7 +1,13 @@
 {
-  "version": 2,
+  "version": 3,
   "cameraDegrees": 45,
   "generator": "OpenAI built-in image generation",
+  "regions": [
+    "open",
+    "foothills",
+    "mesas",
+    "broken"
+  ],
   "images": {
     "ground": {
       "file": "ground.webp",
