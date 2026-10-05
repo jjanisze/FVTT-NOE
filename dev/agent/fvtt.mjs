@@ -29,7 +29,6 @@ import { initSandbox } from "./lib/sandbox.mjs";
 import { createWorld, deleteWorld, launchWorld, listWorlds, DEFAULT_MODULES, DEFAULT_PLAYERS } from "./lib/worlds.mjs";
 import { seedFixture } from "./lib/fixtures.mjs";
 import { runE2E, suiteNames } from "./lib/e2e.mjs";
-import { agentWorldId } from "./lib/guards.mjs";
 import { browserSession, browserVersion, evaluate, hardReload, waitGameReady } from "./lib/cdp.mjs";
 import {
   disposeContexts, foundryPages, loginInContext, namedContext, rememberSessions, resolveUser, restoreSessions

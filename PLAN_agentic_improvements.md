@@ -1,7 +1,7 @@
 # PLAN — Agentic improvements: Foundry lifecycle, sandbox worlds, release gate, instruction hygiene
 
-> Status: **IN PROGRESS** (2026-10-05) — S0 mostly done (spike results in §6), S1 `fvtt` CLI
-> implemented in `dev/agent/` (§9 log). Decisions D1–D9 (§8). Written by an agent, for agents.
+> Status: **S0–S5 DONE, S6 SET UP** (2026-10-05) — progress log and open items in §9; tools in
+> `dev/agent/`, `dev/e2e/`, `dev/release/`. Decisions D1–D9 (§8). Written by an agent, for agents.
 > Scope spans three places: this repo (`dev/agent/`, `dev/e2e/`, release scripts — public, so no
 > hosts, ports, secrets or personal paths in it), the campaign vault (agent instructions, skills, MCP
 > config) and the user profile (secret store, sandbox data path). Each stage says where it lands.
@@ -365,5 +365,12 @@ catching what the GM catches today. S4 must be green before the next release is 
   mode, foundry-mcp lock as history, CDP memories → `fvtt doctor`. Not done: a `python3` shim in
   the user's shell profile (documented instead), the optional MCP wrapper over `fvtt`, Codex MCP
   exposure (needs the GM's go-ahead: it writes the Chrome endpoint into Codex's own config).
+- **S6 set up** (2026-10-05): the vault's `Integracje/agent-retro/mine_sessions.py` takes
+  `--since/--until/--label`, reports per-session rates and diffs against the previous retro file;
+  README describes the monthly loop. **Baseline** (28 sessions up to 2026-10-04): 647 tool calls
+  per session, `evaluate_script` 20.9 % of them, PowerShell errors 26.6 % (Bash 1.9 %), per session
+  1.07 "close Foundry" hand-offs, 0.79 CDP connect timeouts, 2.39 pack-lock errors, 1.71 missing
+  paths, 6.1 GM corrections. The build session itself: `evaluate_script` 3.9 %. **Done-when pending
+  by nature**: the first monthly retro after real use of `fvtt` decides whether §1 got shorter.
 - Still open in S0: the Claude Code allow rule (human — README "One-time setup").
 - Next: S3 (Layer 6 suites — playwright-core is a new dev dependency), S4, S5, S6.

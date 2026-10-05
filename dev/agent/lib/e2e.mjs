@@ -19,7 +19,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { MODULE_ID } from "./config.mjs";
-import { browserSession, CdpSession, waitGameReady } from "./cdp.mjs";
+import { browserSession, waitGameReady } from "./cdp.mjs";
 import { loginInContext, namedContext, resolveUser, foundryPages } from "./browser.mjs";
 import { CliError, note, poll, sleep } from "./output.mjs";
 import { FoundryClient } from "./foundry-http.mjs";
