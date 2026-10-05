@@ -171,6 +171,138 @@ Progi 55 FPS / 20 ms / 48 MiB / 15% są **zaleceniami** (decyzja MG przy przekaz
 Baseline sam przekroczył 20 ms, więc test wymaga poprawnego pomiaru i rejestruje zgodność
 z zaleceniami bez narzucania tego limitu. Wyniki są w lokalnych `logs/e2e/`.
 
+### 2.2b Nevada bitmap art revision — plan (2026-10-05)
+
+**Status: implemented, technical checks green; visual review remains with the GM.** The GM rejected the visual result of §2.2a: inconsistent
+perspective, a straight join between overhead terrain and a side-on skyline, geometric cartoon
+art, and fast foreground rocks visibly sliding over slower ground. Technical validation in the
+hand-back below remains useful, but does not establish visual acceptance. This section supersedes
+the scenery direction of §2.2/§2.2a for `pustynia` only.
+
+Scope: desert scenery, its render composition and the presentation of chase guides. Vehicles,
+their artwork, chase rules, scene geometry, token movement, snapping, recentering, orientation
+and sway retain their current behaviour. Suburbs and winter are outside this revision.
+Render-time and texture budgets remain recommendations, as already agreed with the GM.
+
+**1. Establish the camera and art direction.** The GM approved this plan with one amendment:
+camera approximately **45 degrees**, a mixture of top-down and sideways. Ground, road, hills,
+back/front parallax, vegetation, structures and sand effects must all share this angle.
+Existing top-down vehicle tokens are the sole accepted perspective exception. Use an oblique
+view which shows both top surfaces and sides. The tactical ground strip stays parallel and
+readable; its abstract distance markers are an interface overlay, not literal road markings.
+Do not warp the mechanical board to fit the illustration.
+
+Remove the incompatible side-on mountain skyline from Nevada. Continue oblique desert terrain
+above the road: bleached gravel, dry washes, scrub, fractured rock and occasional ruined rooflines.
+Road, both shoulders and adjoining terrain must belong to the same shot. A blurred boundary cannot
+repair incompatible camera angles. Maintain one light direction and material scale across assets.
+Use weathered asphalt, granular dust, chipped concrete, rust and irregular vegetation in a muted
+sun-bleached palette. Avoid flat polygon silhouettes, cartoon outlines and clean decorative gradients.
+The existing vehicle image is an inspection-only style reference; do not change or ship campaign art.
+
+**2. Produce a small visual proof before the full asset set.** The built-in OpenAI image-generation
+tool is available and is the default workflow. Generate a full desert composition establishing
+camera, lighting and material treatment, then a matching ground strip and two or three alpha props.
+The first reviewable deliverable is a static composite at the actual board scale with the unchanged
+vehicle fixtures and chase guides, plus a short scrolling preview including one foreground object.
+Compare it with the original placeholder and the rejected implementation. Check the camera and
+object contact points before producing more assets. The implementation uses the built-in tool.
+
+Production prompt constraints:
+
+- Gritty, realistic raster game scenery; approximately 45-degree camera; consistent sun direction;
+  coherent top/side surfaces; no incompatible side-on skyline, cartoon outlines, vehicles or baked UI.
+- Ground strip: horizontal travel direction, continuous weathered asphalt and irregular desert
+  shoulders, readable low-contrast central driving area, horizontal looping required.
+- Grounded props: isolated broken structures/roof fragments, dry scrub, gravel and rubble, at the
+  same camera angle, with matching contact shadows. Actual transparent output, no backdrop halo.
+- Foreground props: upper portions of dead branches, taller desert plants, poles/signs or ruined
+  beams. Their lower structure continues outside the illustrated frame. No visible roots, feet,
+  ground patch or contact shadow. Sign orientation must fit the camera; do not force a frontal face.
+
+Use the approved composition as the reference for subsequent generation. Request alpha explicitly
+for cutouts and inspect it against both light and dark backgrounds. Use image-model edits for
+visual seam/content repairs; deterministic preparation only packs, crops and converts approved
+bitmap art. Do not substitute coordinate-drawn scenery for failed generated assets. Keep sources
+and prompt/provenance records; ship WEBP with alpha preserved.
+
+**3. Build depth from grounded scenery and two foreground layers.**
+
+| Render group | Movement relative to ground | Content and contact rule |
+|---|---:|---|
+| Distant hills and valley | Around 0.28 | Matching oblique camera, atmospheric distance, natural overlap with nearer terrain. |
+| Continuous ground, road and shoulders | 1.0 | One coherent ground surface. No independently sliding shoulder bands. |
+| Grounded objects | 1.0 | Ruins, scrub, stones and their contact shadows move with their supporting ground. |
+| Foreground A, above vehicle artwork | Start around 1.2–1.4 | Sparse upper branches, plant crowns or partial sign/pole structures. Bases hidden beyond the scenery frame. |
+| Foreground B, above A | Start around 1.6–2.0 | Rarer, larger fragments closer to the camera; bases likewise hidden. |
+| Chase guides and token controls | Stationary interface | Readable numbers, selection, targeting and drag feedback. |
+
+These speed ranges are starting values to tune with the camera and projected object size, not a
+rule that every near object moves twice as fast. Faster layers contain raised, close objects whose
+feet cannot be seen. Ground-level rocks and debris never go in those layers. Distant hills move
+more slowly with coherent perspective and an overlapping terrain join, rather than a separate
+side-on skyline attached to overhead ground. Grounded roadside details move at road speed.
+
+Foreground objects extend behind the **lower frame of the illustrated chase panel**, not behind
+the road shoulder. Only their upper sections enter the picture. Use pre-cropped texture regions
+or clipped sprite geometry so panning/zooming cannot expose the bases or spill scenery into the
+freeform workspace. This frame remains identifiable when the whole board is zoomed out.
+Do not assume `sprite.mask` works: the existing project records a silent failure in this render
+path. Verify the chosen clipping technique in the sandbox before relying on it.
+Keep foreground coverage sparse, with short interruptions and substantial clear gaps; show its
+effect in motion and with cars at the bottom of the chase band, not only in an attractive still.
+
+**4. Separate guides from scenery visually.** Remove the aligned row of heavy label backplates
+and reduce broad alternating column tints for Nevada. Place readable outlined numbers or small
+floating badges with clear padding, away from any landscape seam. Preserve the existing values,
+positions of mechanical column centres and recentering semantics. Thin low-contrast guide lines
+can remain; generated art contains no numbers or tactical lines. Freeform space stays a separate
+workspace and is not covered by scenery. Selection, targeting and drag previews must remain legible
+when foreground artwork passes over a vehicle.
+
+**5. Integrate as an isolated Nevada render path.** Add a bitmap asset manifest under
+`ui/poscig/themes/pustynia/` and a dedicated Nevada composition module if it keeps the shared
+renderer small. Reuse the current tempo, ticker lifecycle, theme selection and teardown. Keep
+the existing procedural paths for other themes. Load/precompose bitmap assets once; each frame
+only updates sprite positions. Use one ground phase for all grounded objects, and wrap each
+foreground phase against its own repeat length to avoid discontinuities at fractional speeds.
+Check horizontal seams over several cycles; asking a model for "seamless" is not sufficient.
+Vary sparse prop spacing without obvious repeated landmarks or mirrored lighting.
+
+Start with packing targets of a 4096×2048 ground strip and a 2048×2048 shared prop atlas, adjusting
+to actual source detail and required screen scale rather than blindly upscaling generated output.
+Those two RGBA textures represent about 48 MiB before mipmaps, or 64 MiB with a complete mip chain,
+plus UI and any retained source textures. Account for loaded and precomposed copies; release
+unneeded sources. Add another strip only if visible repetition warrants it. Use the texture
+budget for material detail and variation, with measured memory and frame-time reporting rather
+than an artificial cap. Inspect both normal zoom and close views before choosing final dimensions.
+
+**6. Preserve all pointer input through foreground art.** Foreground is a render-only PIXI
+container, with `eventMode: "none"` and child interaction disabled as appropriate for the installed
+PIXI version. It owns no hit area, listeners, DOM overlay, Foundry Tile/roof, wall or occlusion
+document. Visual coverage must not prevent the real token beneath it from receiving input.
+Keep token controls and movement feedback above scenery. Verify actual mouse events: direct calls
+to token APIs do not prove click-through behaviour.
+
+Sandbox checks, with a foreground prop deliberately held over the test vehicle:
+
+- GM and owning player can click/select, open the sheet/context menu, target and start a drag
+  through both opaque and transparent parts of the prop.
+- A drag starting under foreground can finish elsewhere; a drag starting in the clear can cross
+  foreground. Shift drag, snapping and crossing into/out of freeform space behave as before.
+- Empty scenery permits background selection/panning as before; art grants no new permissions.
+- Pan/zoom and tempo 0/slow/fast preserve cropping, input, readable guides and correct motion.
+
+**7. Acceptance and evidence.** The static composite and scrolling preview must establish visual
+improvement: one camera, realistic materials, no straight perspective join, no visible sliding
+feet, and no cartoon scenery. Supply normal-zoom and close-view screenshots plus motion evidence
+of both foreground layers. Exercise foreground overlap during input tests on GM/player clients,
+then run the chase end-to-end suite to protect existing behaviour. Perform one final foreground
+60-second performance sample with twelve columns and six swaying vehicles, comparing the existing
+baseline and reporting FPS, p95 and resident texture memory. Check a theme switch and scene teardown
+for leaked layers/textures; verify suburbs and winter still use their existing art. Record visual
+review separately from technical test results. Completion requires both.
+
 ### 2.3 Tory (cel 2)
 
 Tory rysuje **ta sama warstwa PIXI**, nie dokumenty `Drawing`.
@@ -683,3 +815,69 @@ Local evidence:
 
 The report is preserved here; the consumed HANDOFF_poscig_codex.md was removed according to its
 own opening instruction.
+
+## Nevada bitmap revision — hand-back (2026-10-05)
+
+Implemented §2.2b with the GM's approximately 45-degree camera amendment. Nevada now uses
+original OpenAI image-model raster scenery: continuous weathered highway and desert shoulders,
+oblique rocky hills, transparent dry plants, ruined upper structures and airborne dust. These
+share upper-left sunlight, materials and camera direction. Vehicle images and chase mechanics
+were not edited. Suburbs and winter retain their previous procedural scenery.
+
+`scripts/scenes/poscig-nevada.mjs` owns the bitmap composition and texture lifecycle. Grounded
+rocks and vegetation are part of the road bitmap and move at road speed. Hills move at 0.28×;
+two foreground groups move at 1.28× and 1.72×. Foreground contains six sparse plant crowns,
+sign/pole sections and a broken roof. Texture regions omit their lower portions; sprite quads
+are clipped horizontally and end at the illustrated panel's lower frame. No visible ground
+contact belongs to a faster layer. Faint generated dust drifts beneath the vehicle artwork.
+Outlined column numbers and thinner guides replace Nevada's heavy backplates and column tints.
+
+Five shipped WEBPs total 4,587,602 bytes (4.38 MiB). Ground/hills/dust are natively 1774×887;
+the two prop sheets are 1254×1254. The runtime composites two 2048×1024 looping textures once,
+with seam overlap and a feathered terrain join. It updates sprite positions each frame. Native
+dimensions, alpha regions, all prompts and the targeted dust edit are recorded in
+`ui/poscig/themes/pustynia/manifest.json` and `dev/art/poscig-nevada/`. The built-in image tool
+made the artwork; the packing script only converts format and records sprite bounds.
+
+Every decoration excludes pointer hit testing. The new `nevada-art` layer-6 suite deliberately
+holds an opaque generated sign above a vehicle and uses real CDP mouse events on GM and owning
+player clients. Selection, right-click HUD, double-click sheet, targeting, transparent-region
+selection, normal drag away from foreground, drag into foreground and Shift drag all pass.
+Selection feedback stays above the art. Pan/zoom checks cover 0.35, 0.65 and 0.85; cropping keeps
+foreground out of the freeform workspace. Theme switching destroys owned bitmap textures, and
+a rapid theme change prevents stale asynchronous artwork from attaching. Existing chase tests
+also pass for stopped tempo, recentering, freeform controls and per-user vehicle sway.
+
+Final foreground measurements: 2203×1256 viewport, twelve columns, six swaying vehicles and two
+negative controls, sixty seconds per theme. Texture estimates include chase UI/text textures
+and any mip levels; the five Nevada bitmap bases have mipmaps disabled.
+
+| Renderer | Rendered FPS | p95 frame ms | Chase textures MiB | Scroll + sway ms/frame |
+|---|---:|---:|---:|---:|
+| Original baseline, stationary vehicles | 59.17 | 27.6 | 7.41 | — |
+| Nevada bitmap revision | 59.20 | 25.1 | 34.30 | 0.027 |
+| Suburbs, unchanged art | 59.23 | 26.9 | 14.41 | 0.022 |
+| Winter, unchanged art | 59.2 | 26.2 | 14.38 | 0.052 |
+
+Stored token coordinates and rotation remain unchanged throughout each performance sample.
+FPS matches the original baseline. p95 exceeds the advisory 20 ms recommendation, as the
+baseline does; render-time and texture budgets remain recommendations by the GM's instruction.
+
+Validation and local evidence:
+- `npm test`: 22 test batches registered, green.
+- `fvtt e2e --suites=boot,combat,nevada-art,poscig --quench --reuse`: all suites green,
+  Quench 771/771, no client console errors; temporary test world cleaned up.
+- Complete report and metrics: `logs/e2e/2026-10-05T20-16-11/report.json` and
+  `poscig-performance.json` in the same directory.
+- Visual evidence there: `nevada-art-07-gm-nevada_final.jpg`, close view
+  `nevada-art-06-gm-zoom_0_85.jpg`, GM/player overlap screenshots, and
+  `nevada-motion.webm` (7.75 seconds, both foreground layers). Four extracted motion frames
+  are in `nevada-motion-contact.webp`.
+- `npm run release:check -- --skip-sandbox`: static, generators, ZIP, pack integrity and
+  versions green on implementation/test commit `9850a6c`; sandbox validation is covered by
+  the full run above. Release report: `logs/release/0.17.1-2026-10-05T20-20-58.json`.
+- Implementation commit: `7c03420`; verification commit: `9850a6c`. No tag or publication.
+- Review preview: sandbox world `agent-poscig-20261005`, one GM tab, Nevada at normal tempo.
+
+The technical result is complete. Screenshots and scrolling evidence are supplied for the GM's
+visual assessment; the automated checks do not establish aesthetic acceptance.
