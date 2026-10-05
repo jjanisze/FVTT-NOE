@@ -34,6 +34,10 @@ game.neuroshima.tests.list()         // klucze zarejestrowanych paczek
 Zwracany obiekt: `{ total, passed, failed, durationMs, batches, failures[] }`.
 Każda porażka niesie `title` i `error`, więc wynik da się czytać bez patrzenia w UI.
 
+Agent (albo terminal) robi to jednym poleceniem, bez wklejania skryptów przez CDP:
+`npm run fvtt -- quench [--filter=choroby] [--reload]` — czeka na `game.ready`, `--reload`
+przeładowuje kartę z pominięciem cache'u modułów ES (patrz ramka niżej).
+
 Alternatywnie: przycisk **Quench** w bocznym pasku (zakładka ustawień) — to samo,
 tylko z drzewkiem wyników.
 
@@ -46,7 +50,7 @@ tylko z drzewkiem wyników.
 
 ---
 
-## 3. Co testujemy — pięć warstw
+## 3. Co testujemy — sześć warstw
 
 Kolejność od najtańszej i najpewniejszej do najbardziej kruchej.
 
@@ -93,6 +97,33 @@ Nie wystawiaj tam niczego, co pisze do dokumentu — to znak, że test powinien 
 Tworzymy prawdziwego aktora, wieszamy przedmiot, sprawdzamy wynik `prepareDerivedData`.
 Najdroższa i najwolniejsza warstwa — używaj, gdy pytanie brzmi „ile wyszło”, a nie „co jest w tabeli”.
 
+### Warstwa 6 — e2e w świecie-piaskownicy (nie Quench)
+Wszystko z §4 „czego nie testujemy” — `activity.use()`, kanwa i cele, prawdziwa walka, ścieżki
+dostępne tylko graczowi, kliknięcia — ma swoje miejsce tutaj, nie w świecie kampanii:
+
+```sh
+npm run fvtt -- e2e                      # wszystkie paczki z dev/e2e/suites/
+npm run fvtt -- e2e --suites=combat      # jedna; --keep zostawia świat, --reuse go nie odtwarza
+```
+
+Świeży świat `agent-e2e-<data>` na drugiej ścieżce danych (piaskownica, osobny port, obok
+kampanii), MG i gracze zalogowani jednocześnie w osobnych kontekstach przeglądarki, fixture
+(`dev/e2e/fixtures/`) odtwarzana przed każdą paczką, błędy konsoli każdego klienta i błędy logu
+serwera liczą się jak porażka, zrzuty ekranu w `logs/e2e/<przebieg>/` (dowód do obejrzenia, nie
+do porównywania pikseli). Zielony przebieg kasuje świat; czerwony zostawia świat i karty do
+obejrzenia. Narzędzie i zasady: `dev/agent/README.md`, plan: `PLAN_agentic_improvements.md` §5 D.
+
+Paczka steruje klientami jak człowiek: gracz strzela przez `activity.use()` z dialogami
+wyłączonymi (`configure: false`) i kośćmi ustawionymi `CONFIG.Dice.randomUniform` (v14 liczy
+`ceil((1 − u) · ścianki)`, więc `u = 0.00001` daje 20), MG nakłada obrażenia tą samą drogą co tacka
+dnd5e, granat leci przez prawdziwy przycisk karty i prawdziwe kliknięcie w kanwę (`clickCanvas`).
+Każdy krok paczki `combat` to błąd, który wcześniej znalazł MG — i to jest sprawdzone: po
+przywróceniu starego haka Zranienia albo natychmiastowego wybuchu granatu paczka robi się czerwona.
+
+**Reguła:** zmiana dotykająca UI, kanwy, walki, dialogów albo uprawnień graczy nie jest skończona,
+dopóki przebieg warstwy 6 (albo skryptowe sprawdzenie w piaskownicy) tego nie pokaże — ze zrzutem
+ekranu w przekazaniu.
+
 ---
 
 ## 4. Czego **nie** testujemy
@@ -109,7 +140,7 @@ Nie z lenistwa — te rzeczy dają testy, które psują się częściej niż kod
 | Zawartość kompendiów | Budowane skryptem przy zamkniętym Foundry; testuj **generator**, nie wynik. |
 
 **Reguła:** jeśli test potrzebuje kliknięcia, sceny albo `await` dłuższego niż sekunda —
-prawdopodobnie testujesz Foundry, a nie nas.
+to nie jest test Quencha. Należy do warstwy 6 (piaskownica), nie do świata kampanii.
 
 ---
 
@@ -133,9 +164,9 @@ W dnd5e 5.3 dokument tymczasowy (`new Actor(data)`) **rzuca wyjątkiem** w `prep
 `new HitDice(this)` czyta `actor.classes`, a `_lazy` inicjalizuje się dopiero po
 `_initialize()`. Dokumenty tymczasowe są w tym systemie nieużywalne — stąd `scratchActor`.
 
-### Walki nie da się zrobić naprawdę
+### Walki nie da się zrobić naprawdę — w Quenchu
 
-`Combat` z żetonami wymaga sceny. Stan walki podmieniamy:
+`Combat` z żetonami wymaga sceny (prawdziwa walka: warstwa 6). W Quenchu stan walki podmieniamy:
 
 ```js
 const restore = stub(game, "combat", { round: 3, turns: [] });

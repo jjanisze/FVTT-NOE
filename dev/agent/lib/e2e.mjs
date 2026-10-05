@@ -44,7 +44,7 @@ export class AssertionError extends Error {
 }
 
 /** One logged-in browser tab with a persistent flat CDP session: eval, console capture, screenshots. */
-class Client {
+export class Client {
   constructor(browser, { name, user, targetId }) {
     Object.assign(this, { browser, name, user, targetId, errors: [] });
   }
@@ -72,7 +72,12 @@ class Client {
 
   /** Run `fn` (a function; serialised, so no closures) with JSON arguments in this browser. */
   async eval(fn, ...args) {
-    const expression = `(${typeof fn === "function" ? fn.toString() : fn})(...${JSON.stringify(args)})`;
+    // A Document (e.g. what combat.nextTurn() resolves to) cannot cross by value — "Object reference
+    // chain is too long" — so documents come back as their identity.
+    const expression = `(async () => {
+      const v = await (${typeof fn === "function" ? fn.toString() : fn})(...${JSON.stringify(args)});
+      return v && typeof v === "object" && v.documentName ? { documentName: v.documentName, id: v.id, uuid: v.uuid } : v;
+    })()`;
     const r = await this.send("Runtime.evaluate", { expression, awaitPromise: true, returnByValue: true, userGesture: true, timeout: 120_000 }, { timeoutMs: 130_000 });
     if (r.exceptionDetails) {
       const d = r.exceptionDetails;
@@ -87,6 +92,25 @@ class Client {
     const { data } = await this.send("Page.captureScreenshot", { format: "jpeg", quality: 70 }, { timeoutMs: 20_000 });
     fs.writeFileSync(file, Buffer.from(data, "base64"));
     return file;
+  }
+
+  /**
+   * A real left click on the canvas at a scene point: pan there, convert to client pixels, and
+   * dispatch genuine mouse input through CDP — what pickers listening for `pointerdown` on the
+   * canvas view need (a synthetic DOM event would not carry the right target/coordinates).
+   */
+  async clickCanvas(point) {
+    await this.send("Page.bringToFront").catch(() => {});
+    const at = await this.eval(p => {
+      canvas.pan({ x: p.x, y: p.y });
+      const c = canvas.clientCoordinatesFromCanvas(p);
+      return { x: Math.round(c.x), y: Math.round(c.y), topIsCanvas: document.elementFromPoint(c.x, c.y) === canvas.app.view };
+    }, point);
+    if (!at.topIsCanvas) throw new AssertionError(`Something covers the canvas at ${JSON.stringify(point)} in ${this.name}'s view.`, at);
+    for (const type of ["mouseMoved", "mousePressed", "mouseReleased"]) {
+      await this.send("Input.dispatchMouseEvent", { type, x: at.x, y: at.y, button: "left", buttons: type === "mousePressed" ? 1 : 0, clickCount: 1 });
+    }
+    return at;
   }
 
   async reload() {
@@ -181,6 +205,22 @@ async function openClients(ctx, browser, names) {
   return clients;
 }
 
+/**
+ * Close what a fresh login leaves floating: the User Configuration window Foundry opens for a
+ * player who has no character yet (the fixture assigns one after login), the GM's welcome tour,
+ * any other framed popup. Frameless UI (sidebar, hotbar, controls) stays. Without this a popup
+ * sits over the canvas and real clicks land on it.
+ */
+async function settle(client) {
+  await client.eval(async () => {
+    foundry.nue?.Tour?.tourInProgress?.exit?.();
+    for (const app of [...foundry.applications.instances.values()]) {
+      if (app.hasFrame && app.rendered) await app.close({ animate: false });
+    }
+    for (const w of Object.values(ui.windows ?? {})) await w.close?.({ force: true });
+  });
+}
+
 async function seed(gm, fixture) {
   const url = `/modules/${MODULE_ID}/e2e/fixtures/${fixture}.mjs?v=${Date.now()}`;
   return gm.eval(`(url, moduleId) => import(url).then(m => m.default({ moduleId }))`, url, MODULE_ID);
@@ -213,6 +253,8 @@ export async function runSuites(ctx, { suites, world }) {
       const t0 = Date.now();
       for (const c of clients.values()) c.drainErrors();
       const fixture = suite.fixture === null ? null : await seed(clients.get("gm"), suite.fixture ?? "skirmish");
+      await sleep(500); // let the seed's broadcasts (character assignment, scene) reach every client
+      for (const c of clients.values()) await settle(c);
       const t = new SuiteContext({ run, suite, clients, ctx, fixture });
       let error = null;
       try {

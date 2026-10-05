@@ -23,12 +23,17 @@ export default async function skirmish({ moduleId }) {
     if (ids.length) await collection.documentClass.deleteDocuments(ids);
   }
 
+  // The module's own magazine model, so the gun is loaded exactly as the load window does it.
+  const mags = await import(`/modules/${moduleId}/scripts/weapons/magazine-model.mjs`);
+
   const packDocs = async name => (await game.packs.get(`${moduleId}.${name}`)?.getDocuments()) ?? [];
-  const [weapons, ammo, grenades, bestiary] = await Promise.all(
-    ["bron", "amunicja", "granaty", "bestiariusz"].map(packDocs));
+  const [weapons, ammo, grenades, bestiary, magazines] = await Promise.all(
+    ["bron", "amunicja", "granaty", "bestiariusz", "magazynki"].map(packDocs));
   const weapon = weapons.find(i => i.getFlag(moduleId, "weaponId") === "b92") ?? weapons.find(i => i.type === "weapon");
   const rounds = ammo.find(i => i.getFlag(moduleId, "caliber") === "9mm");
   const grenade = grenades[0];
+  const magwell = weapon ? mags.weaponMagwell(weapon) : null;
+  const magazine = magazines.find(m => magwell && mags.magazineDefOf(m)?.magwell === magwell);
   const npcSources = [/ŻOŁNIERZ/i, /CYWIL/i].map(re => bestiary.find(a => re.test(a.name))).filter(Boolean);
 
   const levelId = foundry.documents.BaseScene.metadata.defaultLevelId; // tokens point here (v14)
@@ -53,8 +58,9 @@ export default async function skirmish({ moduleId }) {
   ]);
 
   const players = game.users.filter(u => !u.isGM);
-  const kit = [weapon, rounds, grenade].filter(Boolean).map(d => game.items.fromCompendium(d));
+  const kit = [weapon, rounds, grenade, magazine].filter(Boolean).map(d => game.items.fromCompendium(d));
   const pcs = [];
+  const loaded = [];
   for (const user of players) {
     const actor = await Actor.implementation.create({
       name: `PC ${user.name}`, type: "character",
@@ -64,6 +70,13 @@ export default async function skirmish({ moduleId }) {
       flags: flag
     });
     if (kit.length) await actor.createEmbeddedDocuments("Item", kit);
+    const gun = actor.items.find(i => i.type === "weapon");
+    const mag = actor.items.find(i => mags.isMagazineItem(i));
+    if (gun && mag) {
+      const n = await mags.loadRounds(mag, "9mm", mags.freeSpace(mag));
+      await mags.swapMagazineItem(gun, mag);
+      loaded.push(`${actor.name}: ${n} + chamber=${mags.readState(gun).chamber ?? "empty"}`);
+    }
     await user.update({ character: actor.id });
     pcs.push(actor);
   }
@@ -87,7 +100,8 @@ export default async function skirmish({ moduleId }) {
     scene: { id: scene.id, name: scene.name, walls: scene.walls.size, tokens: created.length },
     pcs: pcs.map(a => ({ id: a.id, name: a.name, owner: players.find(u => u.character?.id === a.id)?.name ?? null, items: a.items.size })),
     npcs: npcs.map(a => ({ id: a.id, name: a.name })),
-    picks: { weapon: weapon?.name ?? null, ammo: rounds?.name ?? null, grenade: grenade?.name ?? null },
-    missing: [!weapon && "weapon", !rounds && "9mm ammo", !grenade && "grenade", npcs.length < 2 && "npcs"].filter(Boolean)
+    picks: { weapon: weapon?.name ?? null, ammo: rounds?.name ?? null, grenade: grenade?.name ?? null, magazine: magazine?.name ?? null },
+    loaded,
+    missing: [!weapon && "weapon", !rounds && "9mm ammo", !grenade && "grenade", !magazine && "magazine", npcs.length < 2 && "npcs"].filter(Boolean)
   };
 }

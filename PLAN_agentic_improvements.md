@@ -327,5 +327,19 @@ catching what the GM catches today. S4 must be green before the next release is 
   re-projected magazines on clients that cannot write the weapon (now owners only). Quench 759/759.
   Harness lesson: right after a reload the old document still answers `game.ready` — fvtt marks
   pages stale before every reload/navigation.
+- **S3 done-when met** (2026-10-05): suite 3 *combat* — the player shoots with forced dice
+  (`CONFIG.Dice.randomUniform`; v14 rolls `ceil((1 − u) · faces)`), linked crit damage, the GM applies
+  it the dnd5e-tray way → Stopień Zranienia on a target that stays standing, a normal hit as negative
+  control; the player throws a grenade through the sheet button and a real CDP canvas click → charge
+  pending, detonates on the GM's next turn. **Mutation-checked**: unregistering the Zranienie
+  `dnd5e.applyDamage` handler → red at the crit step; `_currentTurnAnchor()` returning null
+  (immediate detonation, the 09-23 behaviour) → red at the throw step; real code green.
+  Boot + combat from scratch: ~21 s, world deleted afterwards. TESTING.md: warstwa 6 + the rule.
+  Harness lessons: close framed popups after seeding (a player with no character at login gets the
+  User Configuration window over the canvas); documents cannot be returned by value.
+- S3 remaining (coverage, not the done-when): suite 2 character-from-zero through advancement,
+  4 player-only paths (ground drop/pick-up via the GM relay, placing charges, drawing permission),
+  5 dialog flows (Kondycha heal, Zwinne dłonie, repair), 6 display evidence; burst fire in suite 3
+  (needs a B 93R in the fixture).
 - Still open in S0: the Claude Code allow rule (human — README "One-time setup").
 - Next: S3 (Layer 6 suites — playwright-core is a new dev dependency), S4, S5, S6.
