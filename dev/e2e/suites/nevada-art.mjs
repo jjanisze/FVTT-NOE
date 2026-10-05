@@ -51,19 +51,28 @@ async function drag(client, dx, dy, shift = false) {
   return points.before;
 }
 
-/** Move an actual bitmap sign over the token for input checks, keeping production code unchanged. */
+/** Hold an actual streamed foreground bitmap over the token, using measured alpha pixels. */
 function overlap({opaque = true} = {}) {
   const token = canvas.tokens.placeables.find(t => t.name === "Pojazd 1");
   const front = canvas.primary.children.find(c => c.name === "poscig-nevada-foreground");
   front.children[0].visible = false;
-  const group = front.children[1], sign = group.children.find(s => s.name === "sign");
-  const u = opaque ? .5 : .06, v = opaque ? .3 : .08;
+  const group = front.children[1];
+  const sign = window.__nevadaOverlapSprite ??= group.children.find(s => s.visible);
+  const frame = sign.texture.frame, cv = document.createElement("canvas");
+  cv.width = Math.ceil(frame.width); cv.height = Math.ceil(frame.height);
+  const ctx = cv.getContext("2d");
+  ctx.drawImage(sign.texture.baseTexture.resource.source,frame.x,frame.y,frame.width,frame.height,0,0,cv.width,cv.height);
+  const data=ctx.getImageData(0,0,cv.width,cv.height).data;
+  let point=-1;
+  for(let y=1;y<cv.height-1&&point<0;y++)for(let x=1;x<cv.width-1;x++) {
+    const i=y*cv.width+x,a=data[i*4+3];
+    if(opaque?a>250:a===0) {point=i;break;}
+  }
+  if(point<0)throw Error("Foreground has no requested alpha control point");
+  const u=(point%cv.width+.5)/cv.width,v=(Math.floor(point/cv.width)+.5)/cv.height;
   group.x = token.center.x - (sign.x + sign.width*u);
   group.y = token.center.y - (sign.y + sign.height*v);
-  const frame = sign.texture.frame, cv = document.createElement("canvas"); cv.width = cv.height = 1;
-  const ctx = cv.getContext("2d");
-  ctx.drawImage(sign.texture.baseTexture.resource.source, frame.x+frame.width*u,frame.y+frame.height*v,1,1,0,0,1,1);
-  return {alpha:ctx.getImageData(0,0,1,1).data[3],visible:sign.visible,
+  return {alpha:data[point*4+3],visible:sign.visible,
     eventMode:front.eventMode,interactiveChildren:front.interactiveChildren,
     aboveToken:canvas.primary.children.indexOf(front)>canvas.primary.children.indexOf(token.mesh)};
 }
@@ -141,15 +150,16 @@ export default {
         await t.waitFor(client,b=>{const d=canvas.scene.tokens.getName("Pojazd 1");return d._source.x===b.x+200&&Math.abs(d._source.y-(b.y-150))<3;},
           {args:[before],message:"normal drag through foreground snapped into next column"});
         // Start in the clear and finish under the opaque sign, the inverse input path.
-        await client.eval(()=>{const f=canvas.primary.children.find(c=>c.name==="poscig-nevada-foreground");f.children[1].x+=200;});
-        await pause(350);const into=await drag(client,200,0);
-        await t.waitFor(client,b=>canvas.scene.tokens.getName("Pojazd 1")._source.x===b.x+200,
+        await client.eval(overlap,{});
+        await client.eval(()=>{const f=canvas.primary.children.find(c=>c.name==="poscig-nevada-foreground");f.children[1].x+=600;});
+        await pause(350);const into=await drag(client,600,0);
+        await t.waitFor(client,b=>canvas.scene.tokens.getName("Pojazd 1")._source.x===b.x+600,
           {args:[into],message:"drag from clear road into foreground"});
         await client.eval(overlap,{});await pause(350);
         const shifted=await drag(client,93,55,true);
         await t.waitFor(client,b=>{const d=canvas.scene.tokens.getName("Pojazd 1");return Math.abs(d._source.x-(b.x+93))<3&&Math.abs(d._source.y-(b.y+55))<3;},
           {args:[shifted],message:"Shift drag through foreground retained free position"});
-        await client.eval(()=>{const f=canvas.primary.children.find(c=>c.name==="poscig-nevada-foreground");f.children[0].visible=true;f.children[1].position.set(0,0);});
+        await client.eval(()=>{const f=canvas.primary.children.find(c=>c.name==="poscig-nevada-foreground");f.children[0].visible=true;f.children[1].position.set(0,0);delete window.__nevadaOverlapSprite;});
         await t.gm.eval(()=>canvas.scene.tokens.getName("Pojazd 1").update({x:600,y:970},{animate:false}));
         await t.waitFor(client,()=>canvas.scene.tokens.getName("Pojazd 1")._source.x===600&&canvas.scene.tokens.getName("Pojazd 1")._source.y===970,{message:"restore input fixture"});
       });
@@ -163,12 +173,12 @@ export default {
       for(const scale of [.35,.85]) {
         await t.gm.eval(s=>canvas.pan({x:1400,y:900,scale:s}),scale);await t.screenshot("gm",`zoom-${scale}`);
       }
-      await t.gm.eval(()=>{canvas.pan({x:1400,y:800,scale:.65});return game.neuroshima.poscig.konfiguruj(canvas.scene,{tempoTla:1});});
+      await t.gm.eval(()=>{canvas.pan({x:1400,y:800,scale:.65});return game.neuroshima.poscig.konfiguruj(canvas.scene,{tempoTla:2});});
       await t.screenshot("gm","nevada-final");await t.gm.send("Page.bringToFront");
       fs.writeFileSync(path.join(t.run.dir,"nevada-motion.webm"),await recordMotion(t.gm));
       await t.gm.eval(()=>{
         const roots=canvas.primary.children.filter(c=>c.name?.startsWith("poscig-nevada"));const bases=new Set();
-        const collect=c=>{if(c.texture)bases.add(c.texture.baseTexture);for(const child of c.children??[])collect(child);};roots.forEach(collect);
+        const collect=c=>{for(const base of c.neuroshimaTextureBases?.()??[])bases.add(base);if(c.texture)bases.add(c.texture.baseTexture);for(const child of c.children??[])collect(child);};roots.forEach(collect);
         window.__nevadaArtBases=[...bases];return game.neuroshima.poscig.konfiguruj(canvas.scene,{motyw:"zima"});
       });
       const freed=await t.gm.eval(()=>{const r=window.__nevadaArtBases.every(b=>b.destroyed)&&!canvas.primary.children.some(c=>c.name?.startsWith("poscig-nevada"));delete window.__nevadaArtBases;return r;});

@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Dev tooling (compendium/icon/token builders) for the Neuroshima 5e FoundryVTT module. Not the module's own version — that's module.json. No build step for the module itself: scripts/main.mjs is loaded by Foundry as-is (see DEV_GUIDE.md §4).",
   "scripts": {
-    "test": "node dev/validate-tests.mjs",
+    "test": "node dev/validate-tests.mjs && npm run test:scenery",
+    "test:scenery": "node --test dev/e2e/nevada-stream.test.mjs",
     "fvtt": "node dev/agent/fvtt.mjs",
     "test:agent": "node --test \"dev/agent/test/*.test.mjs\"",
     "build:zip": "node dev/release/build-zip.mjs",

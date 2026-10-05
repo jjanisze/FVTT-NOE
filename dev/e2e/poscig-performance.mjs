@@ -38,6 +38,7 @@ export async function measure({ duration = 60000 } = {}) {
   const layers = canvas.primary.children.filter(c => c.neuroshimaPoscig || c.sortLayer === 100);
   const bases = new Set();
   function textures(c) {
+    for (const base of c.neuroshimaTextureBases?.() ?? []) bases.add(base);
     if (c.texture?.baseTexture) bases.add(c.texture.baseTexture);
     for (const child of c.children ?? []) textures(child);
   }

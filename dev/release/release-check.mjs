@@ -70,6 +70,7 @@ await step("static", async () => {
   const testFiles = fs.readdirSync(path.join(MODULE_ROOT, "dev", "agent", "test")).filter(f => f.endsWith(".test.mjs")).map(f => path.join("dev", "agent", "test", f));
   const runs = [
     node("dev/validate-tests.mjs"),
+    node("--test", "dev/e2e/nevada-stream.test.mjs"),
     node("--test", ...testFiles),
     node("dev/validate-css.mjs"),
     node("dev/validate-recipes.mjs")

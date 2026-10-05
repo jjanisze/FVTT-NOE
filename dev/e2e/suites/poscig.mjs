@@ -213,6 +213,7 @@ export default {
         },theme);
         await t.waitFor(t.gm,theme=>{const s=game.neuroshima.poscig.tlo.stats();return s.theme===theme&&s.ready;},{args:[theme],message:"GM theme artwork loaded"});
         await t.waitFor(player,theme=>{const s=game.neuroshima.poscig.tlo.stats();return s.theme===theme&&s.ready;},{args:[theme],message:"player theme artwork loaded"});
+        await t.gm.eval(()=>game.neuroshima.poscig.konfiguruj(canvas.scene,{tempoTla:2}));
         await t.screenshot("gm",theme);await t.screenshot("Gracz 1",theme);
         await t.gm.send("Page.bringToFront");
         await t.gm.send("HeapProfiler.collectGarbage");

@@ -1,7 +1,7 @@
 # Testy — architektura i metodyka
 
-Moduł testuje się **wewnątrz Foundry**, przez [Quench](https://github.com/Ethaks/FVTT-Quench).
-Nie ma runnera node'owego dla logiki i nie będzie — powód poniżej.
+Reguły modułu testuje się **wewnątrz Foundry**, przez [Quench](https://github.com/Ethaks/FVTT-Quench).
+Ich kontrakty wymagają prawdziwego systemu i dokumentów — powód poniżej.
 
 ---
 
@@ -19,7 +19,10 @@ o dokumencie świata. Żadnej z tych rzeczy nie da się uczciwie zasymulować:
 Test uruchomiony w prawdziwym świecie odpowiada na pytanie, które faktycznie zadajemy:
 *czy po `init` ten moduł i ten system zgadzają się co do faktów.*
 
-`npm test` **nie uruchamia** testów — robi statyczną kontrolę warstwy testowej (§7).
+`npm test` robi statyczną kontrolę warstwy testowej (§7) i uruchamia cztery testy czystego
+planowania oraz pamięci podręcznej grafik Nevady (`npm run test:scenery`). Te ostatnie sprawdzają
+katalog tysiąca zasobów, zwalnianie tekstur i anulowanie wczytywania; nie zastępują testów PIXI,
+wejścia ani reguł w Foundry. Uruchamia je również statyczny etap bramki wydania.
 
 ---
 
