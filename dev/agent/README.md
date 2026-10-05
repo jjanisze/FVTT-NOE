@@ -27,6 +27,8 @@ to stderr. Exit code `0` ok · `1` failed · `2` refused by a guard · `3` usage
 | `users` | the world's users (socket, no browser) |
 | `wait-ready`, `reload` | wait for `game.ready` · hard reload (bypasses the ES module cache) |
 | `quench [--filter=<key>] [--reload]` | run the module's Quench batches in a GM tab; `{total, passed, failed, failures[]}` |
+| `world:create <slug> [--fixture=skirmish]`, `world:seed`, `world:launch`, `world:list`, `world:delete <id> [--stop]` | sandbox worlds `agent-<slug>-<date>` with a marker; delete only behind the §4 guards, Foundry's own uninstall, fvtt's browser contexts disposed |
+| `e2e [--suites=boot,…] [--keep] [--reuse]` | Layer 6: fresh sandbox world, GM + players each in an isolated context (hard-reloaded: current code), fixture reseeded per suite, console errors per client, server-log errors, screenshots → `logs/e2e/<run>/report.json`. Green deletes the world; red keeps world and tabs for inspection. Suites: `dev/e2e/suites/` |
 | `logs [--since=<min>] [--level=warn] [--grep=<re>]` | the server's own JSON log (ports redacted) |
 | `mode [development\|runtime]` | D2/D9 — set `runtime` only when the GM says so |
 | `sandbox:init` | create/refresh the sandbox data path (idempotent) |

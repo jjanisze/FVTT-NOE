@@ -28,6 +28,8 @@ import { killTree } from "./lib/proc.mjs";
 import { initSandbox } from "./lib/sandbox.mjs";
 import { createWorld, deleteWorld, launchWorld, listWorlds, DEFAULT_MODULES, DEFAULT_PLAYERS } from "./lib/worlds.mjs";
 import { seedFixture } from "./lib/fixtures.mjs";
+import { runSuites, suiteNames } from "./lib/e2e.mjs";
+import { agentWorldId } from "./lib/guards.mjs";
 import { browserSession, browserVersion, evaluate, hardReload, waitGameReady } from "./lib/cdp.mjs";
 import {
   disposeContexts, foundryPages, loginInContext, namedContext, rememberSessions, resolveUser, restoreSessions
@@ -542,6 +544,46 @@ command("world:delete", "Delete an fvtt-created sandbox world (§4 guards: agent
   // Sessions die with the world; the isolated contexts fvtt opened for it are now dead tabs.
   const contextsClosed = ctx.profile.isCampaign ? [] : await disposeContexts(ctx);
   return { ok: true, profile: ctx.profile.name, stoppedFirst: stopped, ...res, contextsClosed };
+});
+
+command("e2e", "Layer 6: fresh sandbox world, GM + player clients, suites from dev/e2e/suites → logs/e2e/<run>/report.json. [--suites=a,b] [--keep] [--reuse]", async opts => {
+  const ctx = context({ profile: "sandbox", ...opts });
+  guard(ctx, "e2e");
+  if (ctx.profile.isCampaign) throw refuse("e2e runs in the sandbox only.", "campaign");
+  const suites = list(opts.suites) ?? suiteNames();
+  if (!suites.length) throw new CliError("No suites in dev/e2e/suites.", { code: "usage" });
+  await lockExclusive(ctx.profile.name, "e2e", seconds(opts.wait, 300_000));
+  const id = agentWorldId("e2e");
+  const client = new FoundryClient(ctx.profile);
+  const st = await client.status();
+  const exists = listWorlds(ctx).find(w => w.id === id);
+  if (!(opts.reuse && exists && st.active && st.world === id)) {
+    if (exists?.agent) {
+      if (st.active && st.world === id) {
+        await client.shutdownWorld();
+        await poll(async () => !(await client.status()).active, { timeoutMs: 30_000 });
+      }
+      await deleteWorld(ctx, id);
+      await disposeContexts(ctx);
+    }
+    await createWorld(ctx, { slug: "e2e", startServer });
+  }
+  const report = await runSuites(ctx, { suites, world: id });
+  let cleanup = null;
+  if (report.ok && !opts.keep) {
+    await client.shutdownWorld();
+    await poll(async () => !(await client.status()).active, { timeoutMs: 30_000 });
+    cleanup = { world: (await deleteWorld(ctx, id)).deleted, contexts: await disposeContexts(ctx) };
+  }
+  return {
+    ok: report.ok, world: id, kept: !cleanup, report: report.reportFile,
+    suites: report.suites.map(s => ({
+      name: s.name, ok: s.ok, ms: s.ms, failedStep: s.steps.find(x => !x.ok)?.label ?? null,
+      error: s.error?.message ?? null, consoleErrors: Object.fromEntries(Object.entries(s.consoleErrors).map(([k, v]) => [k, v.length])),
+      screenshots: s.screenshots.length
+    })),
+    ...(report.ok ? {} : { hint: "World and tabs kept for inspection; read the report, look at the screenshots. `fvtt e2e --reuse` reruns without recreating." })
+  };
 });
 
 command("help", "This list.", async () => ({ ok: true, usage: "npm run fvtt -- <command> [--profile=campaign|sandbox] [--key=value]", commands: HELP }));

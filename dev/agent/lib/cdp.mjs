@@ -183,13 +183,30 @@ export async function openPage(browser, url, browserContextId) {
   return targetId;
 }
 
+/**
+ * Right after a reload or navigation the OLD document can still answer `game.ready === true`;
+ * a caller that trusted it went on while the page was booting, and the next socket broadcasts
+ * blew up in core's handlers (found by e2e, 2026-10-05). So every reload/navigation first marks
+ * the current document stale, and waitGameReady only accepts a document without the mark.
+ */
+const STALE = "__fvttStale";
+async function markStale(page) {
+  await page.send("Runtime.evaluate", { expression: `window.${STALE} = true` }).catch(() => {});
+}
+
 export async function navigate(browser, targetId, url) {
-  return withPage(browser, targetId, page => page.send("Page.navigate", { url }));
+  return withPage(browser, targetId, async page => {
+    await markStale(page);
+    return page.send("Page.navigate", { url });
+  });
 }
 
 /** Reload bypassing the cache — ES modules included, which is what a code change needs. */
 export async function hardReload(browser, targetId) {
-  return withPage(browser, targetId, page => page.send("Page.reload", { ignoreCache: true }));
+  return withPage(browser, targetId, async page => {
+    await markStale(page);
+    return page.send("Page.reload", { ignoreCache: true });
+  });
 }
 
 /**
@@ -199,7 +216,7 @@ export async function hardReload(browser, targetId) {
 export async function waitGameReady(browser, targetId, { timeoutMs = 120_000, extra = "true" } = {}) {
   const probe = `(() => {
     const g = globalThis.game;
-    const ready = !!(g && g.ready && (${extra}));
+    const ready = !window.${STALE} && !!(g && g.ready && (${extra}));
     return { route: location.pathname, ready,
       user: ready ? { id: g.user.id, name: g.user.name, isGM: g.user.isGM } : null,
       world: ready ? g.world.id : null,

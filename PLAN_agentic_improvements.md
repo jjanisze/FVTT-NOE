@@ -319,5 +319,13 @@ catching what the GM catches today. S4 must be green before the next release is 
   or not (the redirect only means something on the setup screen); a fresh world's firstLaunch
   already holds an empty `core.moduleConfiguration` document — a second one is ignored, so the
   bootstrap updates it; fresh worlds start paused (the fixture unpauses).
+- **S3 started** — harness `fvtt e2e` on fvtt's own CDP layer (GM decision 2026-10-05: no
+  Playwright), suite 1 *boot* green. **Its first run caught two real player-only bugs**, both fixed:
+  `weapons/fire-modes.mjs` synced weapon activities on every client (players tried to write other
+  players' guns — "lacks permission to update Item" / "Nie możesz tak po prostu wcisnąć tego
+  komuś!"; now the active GM, or the owner when no GM is online) and `weapons/magazine.mjs`
+  re-projected magazines on clients that cannot write the weapon (now owners only). Quench 759/759.
+  Harness lesson: right after a reload the old document still answers `game.ready` — fvtt marks
+  pages stale before every reload/navigation.
 - Still open in S0: the Claude Code allow rule (human — README "One-time setup").
 - Next: S3 (Layer 6 suites — playwright-core is a new dev dependency), S4, S5, S6.
