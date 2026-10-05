@@ -341,5 +341,15 @@ catching what the GM catches today. S4 must be green before the next release is 
   4 player-only paths (ground drop/pick-up via the GM relay, placing charges, drawing permission),
   5 dialog flows (Kondycha heal, Zwinne dłonie, repair), 6 display evidence; burst fire in suite 3
   (needs a B 93R in the fixture).
+- **S4 done** (2026-10-05): `npm run release:check [-- --ci | --skip-sandbox | --tag]` and
+  `dev/release/build-zip.mjs` (THE include list, own deterministic zip writer, zip built from a git
+  ref — the tree's compacted packs zipped 12/16 broken). Full gate green on 4ca7d10 in 76 s; the
+  workflow runs `release-check.mjs --ci` and ships the zip it built. **Done-when met**: today's
+  tree passes; the old `-x "*.log"` list fails on a fresh-pack commit (e76d559: two empty
+  compendiums, one partial). **The gate's first runs found two real problems**: (1) HEAD's
+  `sprzet` held 7 Foundry-edited records (campaign user ownership) — packs recommitted;
+  (2) a fresh world is imperial, so on a new install Udźwig came out in pounds (8 Quench tests red
+  in the release sandbox) — GM decision: the module switches dnd5e to metric on the GM's first
+  ready. dnd5e `minimum` → 5.3.0 (= verified). RELEASING.md rewritten around the gate.
 - Still open in S0: the Claude Code allow rule (human — README "One-time setup").
 - Next: S3 (Layer 6 suites — playwright-core is a new dev dependency), S4, S5, S6.

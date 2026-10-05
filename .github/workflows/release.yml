@@ -25,15 +25,22 @@ jobs:
           fi
           echo "Releasing v$MODULE_VERSION"
 
-      # Runtime files only — see RELEASING.md "What's excluded from module.zip" for why.
-      - name: Build module.zip
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      # The release gate's CI subset (RELEASING.md): static checks, generator dry-runs from the
+      # committed JSON, validate-packs, and dev/release/build-zip.mjs — THE include list, the same
+      # script the local gate uses (the list used to live here, which is how `*.log` and `vfx/`
+      # went wrong). It builds dist/module.zip from the tag and verifies it: exact file set,
+      # module.json references, every pack opening from the zip with packs/' record count.
+      # classic-level is Foundry's LevelDB binding; locally it comes from the Foundry install.
+      - name: Release gate (CI subset) and module.zip
         run: |
-          zip -r module.zip \
-            module.json README.md LICENSE CREDITS.md \
-            scripts styles templates lang icons sounds tokens ui vfx packs docs \
-            -x "**/LOCK"
-          # No `-x "*.log"`: a freshly built LevelDB pack keeps ALL its records in 000NNN.log
-          # until compaction — excluding it shipped empty compendiums (found 2026-10-03, B6).
+          npm install --no-save --no-package-lock classic-level@3
+          node dev/release/release-check.mjs --ci
+          cp dist/module.zip module.zip
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

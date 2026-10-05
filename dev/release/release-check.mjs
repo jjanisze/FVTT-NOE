@@ -5,6 +5,7 @@
  *   npm run release:check                 # everything, locally (needs Foundry + Chrome + the vault)
  *   npm run release:check -- --ci         # the subset the GitHub release job runs: Node + Python only
  *   npm run release:check -- --skip-sandbox
+ *   npm run release:check -- --tag        # and, only if all green on this exact commit: git tag v<version>
  *
  *  1. static      npm test, agent guard tests, validate:css, validate:recipes
  *  2. generators  regenerate everything that is generated and compare with what is committed
@@ -186,12 +187,27 @@ const report = {
   commit: zipStep.commit ?? null, zipSha256: zipStep.sha256 ?? null,
   steps
 };
+// --tag: the tag exists only if the whole gate ran green on exactly this commit (never with --ci or
+// a skipped sandbox, never pushed here — pushing the tag is what publishes the release).
+if (process.argv.includes("--tag")) {
+  const head = spawnSync("git", ["rev-parse", "HEAD"], { cwd: MODULE_ROOT, encoding: "utf8" }).stdout.trim();
+  const tag = `v${manifest.version}`;
+  const exists = spawnSync("git", ["rev-parse", "-q", "--verify", `refs/tags/${tag}`], { cwd: MODULE_ROOT }).status === 0;
+  if (!report.ok || SKIP_SANDBOX) report.tag = { created: false, reason: !report.ok ? "gate not green" : "the sandbox step was skipped" };
+  else if (head !== report.commit) report.tag = { created: false, reason: `HEAD ${head.slice(0, 8)} is not the tested commit` };
+  else if (exists) report.tag = { created: false, reason: `${tag} already exists` };
+  else {
+    const t = spawnSync("git", ["tag", "-a", tag, "-m", `Release ${tag} — release:check green (zip ${report.zipSha256?.slice(0, 12)})`], { cwd: MODULE_ROOT, encoding: "utf8" });
+    report.tag = t.status === 0 ? { created: true, tag, push: `git push origin ${tag}` } : { created: false, reason: t.stderr.trim() };
+  }
+}
+
 const dir = path.join(MODULE_ROOT, "logs", "release");
 fs.mkdirSync(dir, { recursive: true });
 const file = path.join(dir, `${manifest.version}-${report.at.replace(/[:.]/g, "-").slice(0, 19)}${CI ? "-ci" : ""}.json`);
 fs.writeFileSync(file, JSON.stringify(report, null, 2));
 process.stdout.write(`${JSON.stringify({
-  ok: report.ok, version: report.version, commit: report.commit, report: rel(file),
+  ok: report.ok, version: report.version, commit: report.commit, report: rel(file), tag: report.tag,
   steps: steps.map(s => ({ name: s.name, ok: s.ok, skipped: s.skipped ?? undefined, ms: s.ms, error: s.error ?? undefined, problems: s.problems?.length ? s.problems : undefined, stale: s.stale?.length ? s.stale : undefined, hint: s.hint }))
 }, null, 2)}\n`);
 process.exitCode = report.ok ? 0 : 1;
