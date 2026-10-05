@@ -151,13 +151,19 @@ export default {
     });
 
     await t.step("GM ends the turn → the charge detonates", async () => {
+      // Turn order follows scene.tokens, whose order createEmbeddedDocuments does not guarantee —
+      // so the expected next combatant is read, never assumed (a hard-coded "PC Gracz 2" flaked).
+      const expectedNext = await t.gm.eval(() => {
+        const c = game.combat;
+        return c.turns[(c.turn + 1) % c.turns.length]?.name ?? null;
+      });
       await t.gm.eval(() => game.combat.nextTurn());
       const r = await t.waitFor(t.gm, (id, since) => {
         const pending = canvas.scene.tiles.filter(tl => tl.flags[id]?.pendingCharge).length;
         const exploded = game.messages.contents.slice(since).some(m => /Wybuch:/.test(`${m.flavor ?? ""} ${m.content ?? ""}`));
         return !pending && exploded ? { pending, exploded, current: game.combat.combatant?.name } : null;
       }, { args: [MODULE_ID, thrown.before], timeoutMs: 15_000, message: "the charge to detonate after the turn" });
-      t.equal(r.current, "PC Gracz 2", "next combatant");
+      t.equal(r.current, expectedNext, "next combatant");
       await t.screenshot("gm", "after-detonation");
     });
   }

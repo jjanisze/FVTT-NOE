@@ -17,7 +17,7 @@ import {
   FILES, MODULE_ID, PROFILES, STATE_DIR, cdpUrl, defaultFoundryDataPath, installPaths, loadConfig,
   readJson, readMode, resolveProfile, writeJson
 } from "./lib/config.mjs";
-import { CliError, EXIT, errorResult, note, poll, print, refuse } from "./lib/output.mjs";
+import { CliError, EXIT, errorResult, note, print, refuse } from "./lib/output.mjs";
 import { checkMode, COMMAND_CLASS } from "./lib/guards.mjs";
 import { hasSecret, verifyAgainstDataPath } from "./lib/secret.mjs";
 import { serverState, startServer, stopServer } from "./lib/server.mjs";
@@ -26,7 +26,7 @@ import { readLog } from "./lib/logs.mjs";
 import { FoundryClient } from "./lib/foundry-http.mjs";
 import { killTree } from "./lib/proc.mjs";
 import { initSandbox } from "./lib/sandbox.mjs";
-import { createWorld, deleteWorld, launchWorld, listWorlds, DEFAULT_MODULES, DEFAULT_PLAYERS } from "./lib/worlds.mjs";
+import { createWorld, deleteWorld, launchWorld, listWorlds, shutdownWorldAndWait, DEFAULT_MODULES, DEFAULT_PLAYERS } from "./lib/worlds.mjs";
 import { seedFixture } from "./lib/fixtures.mjs";
 import { runE2E, suiteNames } from "./lib/e2e.mjs";
 import { browserSession, browserVersion, evaluate, hardReload, waitGameReady } from "./lib/cdp.mjs";
@@ -535,8 +535,7 @@ command("world:delete", "Delete an fvtt-created sandbox world (§4 guards: agent
   // Only ever shuts down the very world being deleted, only on a non-campaign profile, and only
   // when asked — the guards in deleteWorld still decide whether it may go.
   if (opts.stop && !ctx.profile.isCampaign && st.active && st.world === id && listWorlds(ctx).find(w => w.id === id)?.agent) {
-    await client.shutdownWorld();
-    await poll(async () => !(await client.status()).active, { timeoutMs: 30_000 });
+    await shutdownWorldAndWait(ctx, client);
     stopped = true;
   }
   const res = await deleteWorld(ctx, id);

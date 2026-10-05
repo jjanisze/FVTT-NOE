@@ -10,7 +10,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { FoundryClient, socketCall } from "./foundry-http.mjs";
 import { agentWorldId, checkWorldDeletable } from "./guards.mjs";
-import { heldDatabases } from "./leveldb.mjs";
+import { heldDatabases, isHeld } from "./leveldb.mjs";
 import { MODULE_ID, protectedWorlds } from "./config.mjs";
 import { CliError, note, poll, refuse } from "./output.mjs";
 
@@ -54,8 +54,7 @@ async function toSetupScreen(ctx, startServer, client) {
   if (s.active) {
     if (ctx.profile.isCampaign) throw refuse("World management on the campaign server would stop the campaign world.", "campaign", "Use --profile=sandbox.");
     note(`shutting down sandbox world ${s.world}`);
-    await client.shutdownWorld();
-    await poll(async () => !(await client.status()).active, { timeoutMs: 30_000 });
+    await shutdownWorldAndWait(ctx, client);
   }
 }
 
@@ -99,13 +98,58 @@ export async function createWorld(ctx, { slug, modules = DEFAULT_MODULES, player
     : { type: "Setting", action: "create", operation: { data: [{ key: "core.moduleConfiguration", value: moduleConfiguration }], modifiedTime: Date.now() } });
   await modify(client, { type: "User", action: "create", operation: { data: players.map(name => ({ name, role: 1 })), modifiedTime: Date.now() } });
 
+  // The new module configuration makes the server connect and migrate the modules' packs
+  // asynchronously. Relaunching in the middle of that broke it every time (2026-10-05: an
+  // ActiveEffect.identifySanitizedFields TypeError, "effects: Database is not open", an automatic
+  // repair) — so wait until every pack is held and the log has gone quiet.
+  await waitForModulePacks(ctx, modules);
+
   note("relaunching with modules enabled");
-  await client.shutdownWorld();
-  await poll(async () => !(await client.status()).active, { timeoutMs: 30_000 });
+  await shutdownWorldAndWait(ctx, client);
   await client.launchWorld(id);
   const again = await poll(async () => { const s = await client.status(); return s.active && s.world === id ? s : null; }, { timeoutMs: 180_000, intervalMs: 1000 });
   if (!again) throw new CliError(`World ${id} did not relaunch.`, { code: "not-ready" });
   return { id, modules, users: await new FoundryClient(ctx.profile).users() };
+}
+
+/**
+ * Shut down the running world and wait until it is really down. `/api/status` reports "inactive"
+ * before the server has closed the world's databases; a launch in that gap found `effects` still
+ * locked ("Database is not open" + an automatic repair, every e2e run on 2026-10-05).
+ */
+export async function shutdownWorldAndWait(ctx, client) {
+  const st = await client.status();
+  if (!st.active) return;
+  await client.shutdownWorld();
+  await poll(async () => !(await client.status()).active, { timeoutMs: 30_000 });
+  const prefix = `worlds/${st.world}/`;
+  await poll(() => !heldDatabases(ctx.profile.data).held.some(h => h.startsWith(prefix)), { timeoutMs: 30_000, intervalMs: 250 });
+}
+
+/** Every pack of the given modules is held open by the server (connected), then 1.5 s of log quiet. */
+async function waitForModulePacks(ctx, modules, timeoutMs = 60_000) {
+  const dirs = [];
+  for (const m of modules) {
+    let manifest;
+    try { manifest = JSON.parse(fs.readFileSync(path.join(ctx.profile.data, "modules", m, "module.json"), "utf8")); } catch { continue; }
+    for (const p of manifest.packs ?? []) dirs.push(path.join(ctx.profile.data, "modules", m, p.path));
+  }
+  const lock = d => path.join(d, "LOCK");
+  const connected = await poll(() => dirs.every(d => fs.existsSync(lock(d)) && isHeld(lock(d))), { timeoutMs, intervalMs: 250 });
+  if (!connected) note(`not every module pack connected within ${timeoutMs / 1000} s — relaunching anyway`);
+  let last = -1;
+  await poll(() => {
+    const size = logSize(ctx.profile.logs);
+    const quiet = size === last;
+    last = size;
+    return quiet;
+  }, { timeoutMs: 30_000, intervalMs: 1500 });
+}
+
+function logSize(logsDir) {
+  const d = new Date();
+  const day = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  try { return fs.statSync(path.join(logsDir, `debug.${day}.log`)).size; } catch { return 0; }
 }
 
 export async function launchWorld(ctx, id, { startServer }) {

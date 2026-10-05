@@ -21,9 +21,9 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { MODULE_ID } from "./config.mjs";
 import { browserSession, waitGameReady } from "./cdp.mjs";
 import { loginInContext, namedContext, resolveUser, foundryPages } from "./browser.mjs";
-import { CliError, note, poll, sleep } from "./output.mjs";
+import { CliError, note, sleep } from "./output.mjs";
 import { FoundryClient } from "./foundry-http.mjs";
-import { createWorld, deleteWorld, listWorlds, DEFAULT_MODULES } from "./worlds.mjs";
+import { createWorld, deleteWorld, listWorlds, shutdownWorldAndWait, DEFAULT_MODULES } from "./worlds.mjs";
 import { disposeContexts } from "./browser.mjs";
 import { startServer } from "./server.mjs";
 import { agentWorldId } from "./guards.mjs";
@@ -235,7 +235,7 @@ async function seed(gm, fixture) {
  * Run suites against the running sandbox world.
  * @returns {Promise<object>} the report (also written to logs/e2e/<run>/report.json)
  */
-export async function runSuites(ctx, { suites, world, quench = false }) {
+export async function runSuites(ctx, { suites, world, quench = false, logSince = null }) {
   const runId = `${new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19)}`;
   const run = { id: runId, dir: path.join(LOGS, runId) };
   fs.mkdirSync(run.dir, { recursive: true });
@@ -250,7 +250,7 @@ export async function runSuites(ctx, { suites, world, quench = false }) {
 
   const browser = await browserSession(ctx.cdp);
   const report = { run: runId, world, startedAt: new Date().toISOString(), suites: [] };
-  run.startedAt = new Date();
+  run.startedAt = logSince ?? new Date(); // server-log window: from world creation when there was one
   try {
     const clients = await openClients(ctx, browser, needed);
     report.clients = [...clients.values()].map(c => ({ name: c.name, user: c.user }));
@@ -306,25 +306,22 @@ export async function runSuites(ctx, { suites, world, quench = false }) {
  */
 export async function runE2E(ctx, { suites = suiteNames(), slug = "e2e", modules = DEFAULT_MODULES, keep = false, reuse = false, quench = false } = {}) {
   const id = agentWorldId(slug);
+  const t0 = new Date();
   const client = new FoundryClient(ctx.profile);
   const st = await client.status();
   const exists = listWorlds(ctx).find(w => w.id === id);
   if (!(reuse && exists && st.active && st.world === id)) {
     if (exists?.agent) {
-      if (st.active && st.world === id) {
-        await client.shutdownWorld();
-        await poll(async () => !(await client.status()).active, { timeoutMs: 30_000 });
-      }
+      if (st.active && st.world === id) await shutdownWorldAndWait(ctx, client);
       await deleteWorld(ctx, id);
       await disposeContexts(ctx);
     }
     await createWorld(ctx, { slug, modules, startServer });
   }
-  const report = await runSuites(ctx, { suites, world: id, quench });
+  const report = await runSuites(ctx, { suites, world: id, quench, logSince: t0 });
   let cleanup = null;
   if (report.ok && !keep) {
-    await client.shutdownWorld();
-    await poll(async () => !(await client.status()).active, { timeoutMs: 30_000 });
+    await shutdownWorldAndWait(ctx, client);
     cleanup = { world: (await deleteWorld(ctx, id)).deleted, contexts: await disposeContexts(ctx) };
   }
   return {
