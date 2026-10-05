@@ -9,15 +9,14 @@
  * Each pack is copied (minus LOCK) to a temp dir first, so this runs while Foundry holds them.
  */
 
-import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
+import { classicLevel } from "../agent/lib/packs.mjs";
 import path from "node:path";
 import fs from "node:fs";
 import os from "node:os";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const require = createRequire(import.meta.url);
-const { ClassicLevel } = require("C:/Program Files/Foundry Virtual Tabletop/resources/app/node_modules/classic-level");
+const ClassicLevel = classicLevel("C:/Program Files/Foundry Virtual Tabletop/resources/app");
 
 const [dirA, dirB = path.resolve(HERE, "../../packs")] = process.argv.slice(2);
 if (!dirA) {

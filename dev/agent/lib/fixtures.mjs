@@ -3,9 +3,9 @@
  * inside a GM page of a sandbox world. Code, not data, so every run starts identical and uses the
  * real APIs (compendium imports, token creation) the module itself relies on.
  *
- * The sandbox copy of this module carries an `e2e` junction to `dev/e2e` (sandbox:init), so a
- * fixture is served at `/modules/<id>/e2e/fixtures/<name>.mjs` and can import its helpers with
- * ordinary relative paths. The campaign never sees fixtures.
+ * Non-campaign data paths carry a `Data/agent-e2e` junction to `dev/e2e` (sandbox.mjs linkE2E), so a
+ * fixture is served at `/agent-e2e/fixtures/<name>.mjs` and can import its helpers with ordinary
+ * relative paths. The campaign never sees fixtures.
  */
 
 import fs from "node:fs";
@@ -48,7 +48,7 @@ export async function seedFixture(ctx, { fixture }) {
   try {
     const page = await gmPage(ctx, browser);
     await waitGameReady(browser, page, { extra: "!!g.neuroshima" });
-    const url = `${ctx.profile.routePrefix}/modules/${MODULE_ID}/e2e/fixtures/${fixture}.mjs?v=${Date.now()}`;
+    const url = `${ctx.profile.routePrefix}/agent-e2e/fixtures/${fixture}.mjs?v=${Date.now()}`;
     const summary = await evaluate(browser, page,
       `import(${JSON.stringify(url)}).then(m => m.default({ moduleId: ${JSON.stringify(MODULE_ID)} }))`, { timeoutMs: 300_000 });
     return { fixture, page, summary };

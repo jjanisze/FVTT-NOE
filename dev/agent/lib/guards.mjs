@@ -19,7 +19,8 @@ export const COMMAND_CLASS = {
   quench: "testing", reload: "testing", e2e: "testing",
   start: "lifecycle", stop: "lifecycle", restart: "lifecycle", kill: "lifecycle", packs: "lifecycle",
   backup: "lifecycle", "sandbox:init": "lifecycle", "sandbox:sync": "lifecycle",
-  "world:create": "lifecycle", "world:launch": "lifecycle", "world:delete": "lifecycle", "world:seed": "testing"
+  "world:create": "lifecycle", "world:launch": "lifecycle", "world:delete": "lifecycle", "world:seed": "testing",
+  "release:check": "lifecycle"
 };
 
 /**

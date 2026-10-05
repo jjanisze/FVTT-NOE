@@ -17,9 +17,21 @@ const COLLECTION = {
   Scene: "scenes", Adventure: "adventures", Cards: "cards", Playlist: "playlists"
 };
 
-function classicLevel(installApp) {
+/**
+ * classic-level: Foundry's own copy when an install is known (local runs), else a package
+ * installed for the run (the Linux release job: `npm install --no-save classic-level@3`).
+ */
+export function classicLevel(installApp) {
   const require = createRequire(import.meta.url);
-  return require(path.join(installApp, "node_modules", "classic-level")).ClassicLevel;
+  const candidates = [
+    installApp && path.join(installApp, "node_modules", "classic-level"),
+    process.env.FOUNDRY_APP && path.join(process.env.FOUNDRY_APP, "node_modules", "classic-level"),
+    "classic-level"
+  ].filter(Boolean);
+  for (const c of candidates) {
+    try { return require(c).ClassicLevel; } catch { /* next */ }
+  }
+  throw new Error("classic-level not found: pass a Foundry install, set FOUNDRY_APP, or `npm install --no-save classic-level@3`.");
 }
 
 /**

@@ -6,6 +6,8 @@
     "test": "node dev/validate-tests.mjs",
     "fvtt": "node dev/agent/fvtt.mjs",
     "test:agent": "node --test \"dev/agent/test/*.test.mjs\"",
+    "build:zip": "node dev/release/build-zip.mjs",
+    "release:check": "node dev/release/release-check.mjs",
     "validate:tests": "node dev/validate-tests.mjs",
     "bump:version": "node dev/bump-version.mjs",
     "validate:css": "node dev/validate-css.mjs",

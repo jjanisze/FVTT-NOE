@@ -9,9 +9,9 @@
  * Requires FoundryVTT to be closed (it holds the LevelDB open).
  */
 
-import { createRequire } from "node:module";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { classicLevel } from "../agent/lib/packs.mjs";
 
 import {
   CLASSES, PROFESSIONS, SZTUCZKA, PROFESJA, PROFESJA_LUB_SZTUCZKA, POCHODZENIE
@@ -23,9 +23,8 @@ import { ORIGIN_ABILITIES, POCHODZENIA, attrBonus } from "../../scripts/config/p
 const MODULE_ID = "neuroshima-2026-overrides";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MODULE_ROOT = path.resolve(HERE, "../..");
-const require = createRequire(import.meta.url);
-const { ClassicLevel } = require(
-  "C:/Program Files/Foundry Virtual Tabletop/resources/app/node_modules/classic-level");
+// Foundry's copy locally; an npm-installed one on the Linux release runner (dev/agent/lib/packs.mjs).
+const ClassicLevel = classicLevel("C:/Program Files/Foundry Virtual Tabletop/resources/app");
 
 const failures = [];
 const notes = [];

@@ -18,9 +18,10 @@ import net from "node:net";
 import path from "node:path";
 import { MODULE_ID } from "./config.mjs";
 import { CliError, note } from "./output.mjs";
+import { readZip } from "../../release/zip.mjs";
 
 /** Never junctioned into the sandbox copy of this module. */
-const MODULE_SKIP = new Set([".git", ".github", ".vscode", "node_modules", "dev", "logs", "packs"]);
+const MODULE_SKIP = new Set([".git", ".github", ".vscode", "node_modules", "dev", "dist", "logs", "packs"]);
 const DEFAULT_MODULES = ["quench", "sequencer", "splatter", "dice-so-nice", "quickscale", "JB2A_DnD5e"];
 
 export function freePort() {
@@ -101,7 +102,7 @@ function copyPackage(src, dst, id) {
  * kept; links and module.json are refreshed.
  * @param {{campaignData: string, sandboxData: string, moduleRoot: string, modules?: string[]}} p
  */
-export async function initSandbox({ campaignData, sandboxData, moduleRoot, modules = DEFAULT_MODULES }) {
+export async function initSandbox({ campaignData, sandboxData, moduleRoot, modules = DEFAULT_MODULES, moduleZip = null }) {
   if (path.resolve(campaignData).toLowerCase() === path.resolve(sandboxData).toLowerCase()) {
     throw new CliError("The sandbox data path is the campaign data path.", { code: "sandbox-layout" });
   }
@@ -137,13 +138,12 @@ export async function initSandbox({ campaignData, sandboxData, moduleRoot, modul
   copyPackage(path.join(campaignData, "Data", "systems", "dnd5e"), dnd5e, "dnd5e");
   report.system = { dnd5e: JSON.parse(fs.readFileSync(path.join(dnd5e, "system.json"), "utf8")).version };
 
-  report.modules[MODULE_ID] = linkPackage(moduleRoot, path.join(data, "modules", MODULE_ID), {
-    id: MODULE_ID, skip: MODULE_SKIP, ownPacks: true, onlyFiles: ["module.json", "README.md", "LICENSE", "CREDITS.md"]
-  });
-  // Fixtures and e2e helpers, served only by the sandbox (lib/fixtures.mjs).
-  const e2eSrc = path.join(moduleRoot, "dev", "e2e");
-  const e2eDst = path.join(data, "modules", MODULE_ID, "e2e");
-  if (fs.existsSync(e2eSrc) && !fs.existsSync(e2eDst)) fs.symlinkSync(e2eSrc, e2eDst, "junction");
+  report.modules[MODULE_ID] = moduleZip
+    ? installFromZip(moduleZip, path.join(data, "modules", MODULE_ID), sandboxData)
+    : linkPackage(moduleRoot, path.join(data, "modules", MODULE_ID), {
+      id: MODULE_ID, skip: MODULE_SKIP, ownPacks: true, onlyFiles: ["module.json", "README.md", "LICENSE", "CREDITS.md"]
+    });
+  linkE2E(data, moduleRoot);
 
   for (const id of modules) {
     const src = path.join(campaignData, "Data", "modules", id);
@@ -151,6 +151,54 @@ export async function initSandbox({ campaignData, sandboxData, moduleRoot, modul
     report.modules[id] = linkPackage(src, path.join(data, "modules", id), { id });
   }
   return report;
+}
+
+/**
+ * Release sandbox (§5 E): this module exactly as a user installs it — the release zip extracted
+ * into a clean folder (the previous copy removed first), then package-locked. Nothing links back
+ * to the working tree, so what is tested is what ships.
+ */
+export function installFromZip(zipPath, dst, dataRoot) {
+  const resolved = path.resolve(dst);
+  if (!resolved.toLowerCase().startsWith(`${path.resolve(dataRoot).toLowerCase()}${path.sep}`)) {
+    throw new CliError(`${dst} is outside the release data path.`, { code: "sandbox-layout" });
+  }
+  if (isLink(resolved)) throw new CliError(`${dst} is a link; refusing to replace it.`, { code: "sandbox-layout" });
+  if (fs.existsSync(resolved)) {
+    // A folder that once was a dev-sandbox copy holds junctions: unlink them, never recurse through them.
+    for (const entry of fs.readdirSync(resolved)) {
+      const p = path.join(resolved, entry);
+      if (isLink(p)) fs.rmdirSync(p);
+    }
+    fs.rmSync(resolved, { recursive: true, force: true });
+  }
+  let files = 0;
+  for (const [name, data] of readZip(fs.readFileSync(zipPath))) {
+    const target = path.join(resolved, ...name.split("/"));
+    if (!target.startsWith(`${resolved}${path.sep}`)) throw new CliError(`zip entry escapes the folder: ${name}`, { code: "sandbox-layout" });
+    if (name.endsWith("/")) {
+      fs.mkdirSync(target, { recursive: true });
+      continue;
+    }
+    fs.mkdirSync(path.dirname(target), { recursive: true });
+    fs.writeFileSync(target, data);
+    files++;
+  }
+  lockPackage(resolved, MODULE_ID);
+  return { fromZip: path.basename(zipPath), files };
+}
+
+/**
+ * Fixtures and e2e helpers, served by Foundry's static Data route at `/agent-e2e/…` — outside any
+ * package, so a release sandbox whose module comes from the zip serves them too, and the campaign
+ * never does. (Until 2026-10-05 this was a junction inside the sandbox module; removed here.)
+ */
+export function linkE2E(dataRoot, moduleRoot) {
+  const old = path.join(dataRoot, "modules", MODULE_ID, "e2e");
+  if (isLink(old)) fs.rmdirSync(old); // removes the junction itself, never what it points to
+  const src = path.join(moduleRoot, "dev", "e2e");
+  const dst = path.join(dataRoot, "agent-e2e");
+  if (fs.existsSync(src) && !fs.existsSync(dst)) fs.symlinkSync(src, dst, "junction");
 }
 
 export function sandboxModuleDir(sandboxData) {

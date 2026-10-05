@@ -26,7 +26,9 @@ export const FILES = {
 };
 
 export const MODULE_ID = "neuroshima-2026-overrides";
-export const PROFILES = ["campaign", "sandbox"];
+/** campaign: the GM's world · sandbox: dev, module linked to the working tree · release: module from the zip. */
+export const PROFILES = ["campaign", "sandbox", "release"];
+const DEFAULT_DATA = { sandbox: "FoundryVTT-Agent", release: "FoundryVTT-Release" };
 
 /** Foundry's own default data path resolution (paths.mjs `userDataPaths`, minus CLI args). */
 export function defaultFoundryDataPath() {
@@ -71,6 +73,14 @@ export function readServerOptions(dataPath) {
   return readJson(path.join(dataPath, "Config", "options.json"));
 }
 
+/** A profile's data path, whether or not it has been initialised yet. */
+export function profileDataPath(cfg, name) {
+  const section = cfg[name] ?? {};
+  return name === "campaign"
+    ? path.resolve(section.dataPath ?? defaultFoundryDataPath())
+    : path.resolve(section.dataPath ?? path.join(LOCALAPPDATA, DEFAULT_DATA[name]));
+}
+
 /**
  * Everything a command needs to address one Foundry server.
  * @param {object} cfg       loadConfig()
@@ -81,9 +91,7 @@ export function resolveProfile(cfg, name = "campaign") {
     throw new CliError(`Unknown profile "${name}".`, { code: "usage", hint: `One of: ${PROFILES.join(", ")}.` });
   }
   const section = cfg[name] ?? {};
-  const dataPath = name === "campaign"
-    ? path.resolve(section.dataPath ?? defaultFoundryDataPath())
-    : section.dataPath ? path.resolve(section.dataPath) : null;
+  const dataPath = profileDataPath(cfg, name);
   if (!dataPath) {
     throw new CliError(`Profile "${name}" has no data path.`, {
       code: "no-profile", hint: "Run `npm run fvtt -- sandbox:init` to create the sandbox data path."
@@ -93,7 +101,9 @@ export function resolveProfile(cfg, name = "campaign") {
   if (!options?.port) {
     throw new CliError(`No port in ${path.join(dataPath, "Config", "options.json")}.`, {
       code: "no-profile",
-      hint: name === "sandbox" ? "Run `npm run fvtt -- sandbox:init`." : "Start Foundry once and set a port in Configuration."
+      hint: name === "campaign" ? "Start Foundry once and set a port in Configuration."
+        : name === "release" ? "Run `npm run release:check` (it builds the zip and installs the release sandbox)."
+          : "Run `npm run fvtt -- sandbox:init`."
     });
   }
   const tls = Boolean(options.sslCert && options.sslKey);

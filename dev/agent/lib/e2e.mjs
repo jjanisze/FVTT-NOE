@@ -21,7 +21,12 @@ import { fileURLToPath, pathToFileURL } from "node:url";
 import { MODULE_ID } from "./config.mjs";
 import { browserSession, CdpSession, waitGameReady } from "./cdp.mjs";
 import { loginInContext, namedContext, resolveUser, foundryPages } from "./browser.mjs";
-import { CliError, note, sleep } from "./output.mjs";
+import { CliError, note, poll, sleep } from "./output.mjs";
+import { FoundryClient } from "./foundry-http.mjs";
+import { createWorld, deleteWorld, listWorlds, DEFAULT_MODULES } from "./worlds.mjs";
+import { disposeContexts } from "./browser.mjs";
+import { startServer } from "./server.mjs";
+import { agentWorldId } from "./guards.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MODULE_ROOT = path.resolve(HERE, "../../..");
@@ -222,7 +227,7 @@ async function settle(client) {
 }
 
 async function seed(gm, fixture) {
-  const url = `/modules/${MODULE_ID}/e2e/fixtures/${fixture}.mjs?v=${Date.now()}`;
+  const url = `/agent-e2e/fixtures/${fixture}.mjs?v=${Date.now()}`;
   return gm.eval(`(url, moduleId) => import(url).then(m => m.default({ moduleId }))`, url, MODULE_ID);
 }
 
@@ -230,7 +235,7 @@ async function seed(gm, fixture) {
  * Run suites against the running sandbox world.
  * @returns {Promise<object>} the report (also written to logs/e2e/<run>/report.json)
  */
-export async function runSuites(ctx, { suites, world }) {
+export async function runSuites(ctx, { suites, world, quench = false }) {
   const runId = `${new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19)}`;
   const run = { id: runId, dir: path.join(LOGS, runId) };
   fs.mkdirSync(run.dir, { recursive: true });
@@ -273,12 +278,61 @@ export async function runSuites(ctx, { suites, world }) {
       });
       note(`${ok ? "PASS" : "FAIL"} ${suite.name} (${Date.now() - t0} ms)`);
     }
+    if (quench) {
+      // The module's Quench batches inside this world (release gate: the "recommended" world).
+      const t0 = Date.now();
+      try {
+        const r = await clients.get("gm").eval(() => game.neuroshima.tests.run());
+        report.quench = { ok: r.failed === 0, total: r.total, passed: r.passed, failed: r.failed, failures: r.failures.slice(0, 20), ms: Date.now() - t0 };
+      } catch (err) {
+        report.quench = { ok: false, error: err.message, ms: Date.now() - t0 };
+      }
+      note(`${report.quench.ok ? "PASS" : "FAIL"} quench ${report.quench.passed ?? "?"}/${report.quench.total ?? "?"}`);
+    }
   } finally {
     browser.close();
   }
-  report.ok = report.suites.every(s => s.ok);
+  report.ok = report.suites.every(s => s.ok) && (report.quench?.ok ?? true);
   report.finishedAt = new Date().toISOString();
   report.reportFile = path.relative(MODULE_ROOT, path.join(run.dir, "report.json")).replaceAll("\\", "/");
   fs.writeFileSync(path.join(run.dir, "report.json"), JSON.stringify(report, null, 2));
   return report;
+}
+
+/**
+ * The whole `fvtt e2e` flow, reusable by the release gate: a fresh `agent-<slug>-<date>` world with
+ * `modules` enabled (unless `reuse` and it is already running), the suites (+ Quench if asked),
+ * then — when green and not `keep` — world and browser contexts deleted.
+ */
+export async function runE2E(ctx, { suites = suiteNames(), slug = "e2e", modules = DEFAULT_MODULES, keep = false, reuse = false, quench = false } = {}) {
+  const id = agentWorldId(slug);
+  const client = new FoundryClient(ctx.profile);
+  const st = await client.status();
+  const exists = listWorlds(ctx).find(w => w.id === id);
+  if (!(reuse && exists && st.active && st.world === id)) {
+    if (exists?.agent) {
+      if (st.active && st.world === id) {
+        await client.shutdownWorld();
+        await poll(async () => !(await client.status()).active, { timeoutMs: 30_000 });
+      }
+      await deleteWorld(ctx, id);
+      await disposeContexts(ctx);
+    }
+    await createWorld(ctx, { slug, modules, startServer });
+  }
+  const report = await runSuites(ctx, { suites, world: id, quench });
+  let cleanup = null;
+  if (report.ok && !keep) {
+    await client.shutdownWorld();
+    await poll(async () => !(await client.status()).active, { timeoutMs: 30_000 });
+    cleanup = { world: (await deleteWorld(ctx, id)).deleted, contexts: await disposeContexts(ctx) };
+  }
+  return {
+    ok: report.ok, world: id, kept: !cleanup, report: report.reportFile, quench: report.quench ?? null,
+    suites: report.suites.map(x => ({
+      name: x.name, ok: x.ok, ms: x.ms, failedStep: x.steps.find(y => !y.ok)?.label ?? null,
+      error: x.error?.message ?? null, consoleErrors: Object.fromEntries(Object.entries(x.consoleErrors).map(([k, v]) => [k, v.length])),
+      screenshots: x.screenshots.length
+    }))
+  };
 }
