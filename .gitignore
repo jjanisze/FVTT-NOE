@@ -13,6 +13,8 @@ logs/*.txt
 logs/*.log
 # fvtt e2e runs (reports, screenshots): local evidence, not repo content
 logs/e2e/
+# release:check reports (local data paths inside) and the zip it builds
+logs/release/
 # NOT a bare `*.log` — LevelDB names its write-ahead log `NNNNNN.log`, and that
 # is where a freshly built pack's documents live until a later open compacts
 # them into a `.ldb`. Ignoring it committed `lekarstwa` and `sztuczki` as empty
