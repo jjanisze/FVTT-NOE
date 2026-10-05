@@ -373,4 +373,39 @@ catching what the GM catches today. S4 must be green before the next release is 
   paths, 6.1 GM corrections. The build session itself: `evaluate_script` 3.9 %. **Done-when pending
   by nature**: the first monthly retro after real use of `fvtt` decides whether §1 got shorter.
 - Still open in S0: the Claude Code allow rule (human — README "One-time setup").
-- Next: S3 (Layer 6 suites — playwright-core is a new dev dependency), S4, S5, S6.
+- Next: remaining S3 coverage and the first S6 monthly retro. Layer 6 uses fvtt's CDP runner.
+
+### Codex field test (2026-10-05)
+
+- Ran `doctor`, `sandbox:init`, `world:create poscig --fixture=poscig`, `world:seed`, explicit
+  GM/player `login` contexts, `reload`, campaign and sandbox `quench`, chase/all-suite `e2e`,
+  `release:check -- --skip-sandbox`, and a final preview `world:launch`. Development mode and
+  sandbox isolation behaved as documented. The campaign stayed on its original scene.
+- Chrome MCP supplied before/after screenshots, foreground selection, a GPU-backed trace and
+  `performance_analyze_insight`; direct live API reads identified native artwork directions.
+  Foundry MCP `foundry_status` and a sandbox actor search read the running world successfully.
+  The e2e runner supplied persistent screenshot/report files and deleted the green test world.
+- Approvals: **64 shell escalation requests through validation and preview setup**, including
+  read-only diagnostics; **zero human approval replies or clarification round trips** observed.
+  The shell sandbox failed during setup before four initial commands could run, so subsequent
+  shell calls required escalation and were handled by automatic review. This inflated the
+  escalation count well beyond the lifecycle commands anticipated in the handoff.
+- Friction: Chrome MCP refused screenshot/trace output paths as outside configured roots, even
+  for declared workspace roots; inline screenshots and fvtt's on-disk screenshots worked. The
+  trace itself completed, but the available insight concerned the FPS widget, so ticker cost
+  was measured directly in-page. `quench` automatically selected a player tab when several
+  contexts were open and refused; explicit `--page=<GM target>` worked. Context labels were
+  absent in `list_pages`, as predicted; `game.user.name` and `game.world.id` disambiguated them.
+- Opening manual `gm` alongside `e2e-gm` logged the same active GM in twice. Sandbox Quench then
+  duplicated several provisioned item activities (761/771); closing only the extra agent tabs
+  and rerunning gave 771/771. Keep one GM tab for this kind of check; this is also useful evidence
+  for future multi-GM hardening. No unrelated item code was changed.
+- A clean chase run was invalidated when the between-lanes and free-zone controls were moved
+  during the winter sample. Reseeding fixed it; the suite now records document invariance over
+  each full sample. Another failure was a test checking the setting before a preceding replicated
+  movement settled; it now waits for that movement. A stronger cross-client check caught and
+  fixed a real v14 bug: user-setting `onChange` is broadcast to other clients, so read the current
+  user's setting instead of adopting the callback argument.
+- No GM intervention was needed. The user's render-time/VRAM recommendation adjustment was
+  sufficient when the baseline exceeded 20 ms p95; no quality reduction or new approval was
+  needed. Final evidence and the performance table: `PLAN_poscigi.md`, Codex hand-back entry.

@@ -129,6 +129,48 @@ mrugającą planszę przy każdym manewrze. Jeden moment wyjątkowy: przy auto-r
   musi zniknąć przed renderem tej samej klatki, nie po.
 - Ticker odpinamy w `canvasTearDown`. Warstwa żyje tylko na scenie pościgu.
 
+### 2.2a Motywy, kierunek i kołysanie (2026-10-05)
+
+**Poprawka z implementacji.** Dawne `DESERT_TEXTURES` i wzmianka o PNG w §2.2 są
+zastąpione rejestrem `poscig-themes.mjs` i pieczeniem oryginalnej grafiki w
+`poscig-art.mjs`. Shippowane pliki graficzne są WEBP. Flaga sceny `poscig.motyw` wybiera
+`pustynia` (domyślny także dla starych plansz), `przedmiescia` albo `zima`. Każdy motyw
+definiuje niebo, wszystkie trzy pasy paralaksy, tory, etykiety, strefę swobodną i ambient.
+Nie zmienia środowiska RAW ani ST. Wybór jest w obu oknach MG; zmiana przebudowuje warstwę
+na wszystkich klientach. Same runda i `tempoTla` nie wymagają ponownego pieczenia.
+
+Tekstury mają szerokość 2048 i wysokości 512/1024/256; niebo 8×512. Mipmapy pasów są
+wyłączone. Zima dodaje 96 współdzielących jedną teksturę cząstek popiołu/śniegu.
+Cały rysunek powstaje raz; ticker przesuwa tylko gotowe sprite'y. Warstwa i jej ticker
+są odpinane przy teardown, własne tekstury zwalniane jawnie. Bez masek.
+
+**Poprawka granicy strefy:** pas oznacza **środek tokenu** nad `FREEFORM_Y`, a nie samą
+górną krawędź. Tę samą regułę stosują przyciąganie, recentrowanie, obrót i kołysanie.
+W pasie wszystkie tokeny dostają obrót dokumentu wskazujący w prawo, także przy tworzeniu,
+wejściu z dołu i próbie ręcznej zmiany kąta. `preUpdateToken` może zmienić **rotation**:
+pole to nie należy do v14 `MOVEMENT_FIELDS`, więc rozstrzygnięta wcześniej trasa pozostaje
+poprawna. Nie przepisujemy X/Y w tym haku. Stare plansze są normalizowane raz przez
+aktywnego MG. Domyślna grafika wskazuje w dół (270°); flaga aktora `poscigFacingOffset`
+pozwala poprawić inne natywne kierunki. Strefa swobodna i zwykłe sceny zachowują obrót.
+
+Czysty `przyciagnietyDoToru()` sprawdza planszę, pas, tor w zakresie 1…N i odległość
+środka od `torX()` do 1 px. Przesunięcie z Shiftem nie jest zapamiętywane flagą.
+`poscig-motion.mjs` przywraca poprzedni offset przed odświeżeniami Foundry, a dodaje nowy
+po animacjach (LOW + 1), tuż przed renderem (LOW): priorytet LOW + 0.5. Każdy pionek ma
+fazę z własnego id. Drżenie, dryf pionowy i delikatne odchylenie nie zapisują dokumentów.
+Podgląd przeciągania jest statyczny. Ustawienie `poscigVehicleSway` jest `scope: "user"`,
+domyślnie true; wyłączenie natychmiast przywraca grafikę. `tempoTla: 0` zatrzymuje
+kołysanie. Zgodnie z decyzją MG `prefers-reduced-motion` nie wpływa na grę.
+
+Warstwa 6: fixture `dev/e2e/fixtures/poscig.mjs` ma sześć pojazdów na torach, jeden między
+torami i jeden w strefie swobodnej. Suite `poscig` sprawdza obu klientów, dialogi,
+obrót w tej samej operacji co ruch, wyłączenie animacji, recentrowanie i podgląd drag.
+Każdy motyw ma screenshoty MG/gracza i 60 s pomiaru pierwszoplanowej kanwy: faktyczne
+klatki renderera (nie sam rAF), p95, ticker, szacowaną pamięć tekstur i próbki sterty.
+Progi 55 FPS / 20 ms / 48 MiB / 15% są **zaleceniami** (decyzja MG przy przekazaniu).
+Baseline sam przekroczył 20 ms, więc test wymaga poprawnego pomiaru i rejestruje zgodność
+z zaleceniami bez narzucania tego limitu. Wyniki są w lokalnych `logs/e2e/`.
+
 ### 2.3 Tory (cel 2)
 
 Tory rysuje **ta sama warstwa PIXI**, nie dokumenty `Drawing`.
@@ -547,6 +589,13 @@ Wysokości pasów nie są potęgami dwójki, więc nie ma co liczyć na domyśln
 sterownika. Drugie, niezależne źródło tej samej kreski: ścieżka kończąca się dokładnie na
 `x = 0` / `x = TILE_W` dostaje antyaliasing na krawędzi — stąd `OVERDRAW` w `poscig-canvas.mjs`.
 
+**8. `scope: "user"` nie filtruje callbacka `onChange` po użytkowniku.**
+v14 rozsyła dokumenty Setting do wszystkich klientów i każdy woła callback z wartością
+zmienioną przez inną osobę. Samo przypisanie argumentu callbacka do lokalnego `enabled`
+wyłączało kołysanie MG, gdy wyłączał je gracz, mimo że zapisane ustawienie MG nadal było
+true. Callback musi odczytać `game.settings.get()` dla **bieżącego użytkownika**.
+Warstwa 6 sprawdza zarówno zapisane ustawienie, jak i faktyczne kołysanie na drugim kliencie.
+
 ---
 
 ## 10. Kolejność robót
@@ -581,3 +630,56 @@ Hammer Posterunku na znaczniku 1 — dokładnie pozycje startowe z RAW.
 
     game.neuroshima.poscig.start({ scigani: ["GMT400"], scigajacy: ["Hammer Posterunku"] })
     game.neuroshima.poscig.pokazStan()
+
+## Codex hand-back (2026-10-05)
+
+Implemented three independent visual themes, improved original procedural scenery, document-level
+right-facing enforcement inside the chase band, actor artwork offsets and subtle mesh-only lane
+sway. New and settings dialogs store the theme; older boards default to Nevada. The per-user
+setting restores meshes immediately and ignores the OS reduced-motion preference. Original WEBP
+fixture art and its generator are documented in CREDITS.md. User instructions: docs/Poscigi.md.
+
+Foreground measurements, 2203×1256 viewport, twelve lanes, six swaying vehicles plus two negative
+controls, sixty seconds per theme. Texture figures conservatively include possible mip levels
+and text textures; heap figures cover the whole client.
+
+| Renderer | Rendered FPS | p95 frame ms | Layer textures MiB | Scroll ticker ms/frame | Sway ms/frame | Heap MiB, start → end | Retained heap after GC MiB |
+|---|---:|---:|---:|---:|---:|---|---:|
+| Original, before changes (stationary vehicles) | 59.17 | 27.6 | 7.41 | — | — | 59.82 → 58.75 | — |
+| Original replay with six swaying vehicles | 59.22 | 21.2 | 7.41 | 0.0048 | 0.0113 | 79.74 → 79.83 | — |
+| Pustynia Nevady | 59.22 | 26.2 | 14.38 | 0.0065 | 0.0184 | 75.18 → 76.01 | 75.45 |
+| Przedmieścia w ruinach | 59.21 | 27.5 | 14.41 | 0.0057 | 0.0199 | 75.76 → 76.17 | 75.68 |
+| Nuklearna zima | 59.23 | 22.5 | 14.38 | 0.0185 | 0.0174 | 76.22 → 76.54 | 76.03 |
+
+No measured FPS regression. All themes meet the FPS and texture recommendations. The 20 ms p95
+recommendation is exceeded by both the original board and the new themes; the GM explicitly made
+render-time and VRAM budgets advisory. An earlier clean chase run measured 21.2–21.4 ms p95,
+showing timing variability at the same 59.2 rendered FPS. The whole-client heap shows small GC
+sawtooth fluctuations; net retained growth within each sample is at most 0.28 MiB. Runtime motion
+reuses token result objects. Stored token coordinates and rotation stayed identical during all
+three final performance samples.
+
+Validation:
+- `npm test`: green; twelve new Quench checks.
+- Campaign Quench: 771/771; sandbox Quench: 771/771, also after the complete regression suites.
+- `fvtt e2e --quench`: boot, combat and poscig green, no console errors; test world cleaned up.
+- Mutation: forcing the snapped predicate to true failed at “Między torami sways on GM”.
+  Restored before all final checks.
+- `npm run release:check -- --skip-sandbox`: static, generators, zip, packs and versions green
+  on implementation/test commit `46cb89a`. No tag or publication.
+
+Local evidence:
+- Complete regression: `logs/e2e/2026-10-05T18-48-19/report.json`.
+- Metrics: `logs/e2e/2026-10-05T18-48-19/poscig-performance.json`.
+- Baseline: `logs/e2e/2026-10-05T18-14-58/baseline.json`;
+  replay: `logs/e2e/reference-original-with-sway.json`.
+- Mutation failure: `logs/e2e/2026-10-05T18-40-03/report.json`.
+- Release gate: `logs/release/0.17.1-2026-10-05T18-50-13.json`.
+- GM screenshots under `logs/e2e/2026-10-05T18-48-19/`:
+  `poscig-01-gm-pustynia.jpg`, `poscig-03-gm-przedmiescia.jpg`, `poscig-05-gm-zima.jpg`.
+  Matching player screenshots are `poscig-02-Gracz_1-pustynia.jpg`,
+  `poscig-04-Gracz_1-przedmiescia.jpg`, `poscig-06-Gracz_1-zima.jpg`.
+- Review preview: sandbox world `agent-poscig-20261005`, one GM tab.
+
+The report is preserved here; the consumed HANDOFF_poscig_codex.md was removed according to its
+own opening instruction.
