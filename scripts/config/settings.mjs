@@ -1,3 +1,4 @@
+import { SETTING_SWAY, resetPoscigSway } from "../scenes/poscig-motion.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 
 /**
@@ -21,6 +22,12 @@ export function isKobaltEnabled() {
 }
 
 export function registerSettings() {
+  game.settings.register(MODULE_ID, SETTING_SWAY, {
+    name: "Animacja pojazdów na planszy pościgu",
+    hint: "Delikatne kołysanie pojazdów przyciągniętych do toru. Ustawienie osobne dla każdego użytkownika.",
+    scope: "user", config: true, type: Boolean, default: true,
+    onChange: resetPoscigSway
+  });
   game.settings.register(MODULE_ID, "kobaltEnabled", {
     name: "Kolor Kobaltu",
     hint: "Włącza zestaw domowych poprawek zasad (zob. docs/Kobalt.md) — zasięgi latarek, "

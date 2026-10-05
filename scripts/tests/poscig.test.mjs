@@ -33,12 +33,106 @@ import {
   LANE_W, MARGIN_X, FREEFORM_Y, FREEFORM_H, PAS_GORA, TORY_DOMYSLNIE
 } from "../scenes/poscig.mjs";
 import { snapDoToru, deltaRecentrowania, rozstawMiesciSie } from "../scenes/poscig-snap.mjs";
+import { MOTYWY, MOTYW_DOMYSLNY, motywPoscigu } from "../scenes/poscig-themes.mjs";
+import { przyciagnietyDoToru, wPasiePoscigu, rotationNaPrawo, ziarnoPionka, kolysanie } from "../scenes/poscig-motion-model.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
 export function registerPoscigTests(quench) {
   quench.registerBatch(`${MODULE_ID}.poscig`, context => {
     const { describe, it, expect } = context;
+
+    describe("Motywy planszy i animacja pojazdów", function () {
+      const centered = { poscig: true, x: torX(4) - 100, y: 700, width: 1, height: 1, gridSize: 200, tory: 12 };
+
+      it("stare plansze i nieznany motyw używają pustyni Nevady", function () {
+        expect(MOTYWY).to.have.property(MOTYW_DOMYSLNY);
+        expect(motywPoscigu({})).to.equal(MOTYWY.pustynia);
+        expect(motywPoscigu({ motyw: "nieznany" })).to.equal(MOTYWY.pustynia);
+      });
+
+      it("każdy motyw definiuje wszystkie elementy i polską nazwę", function () {
+        expect(Object.keys(MOTYWY)).to.have.length(3);
+        for (const [id, theme] of Object.entries(MOTYWY)) {
+          expect(theme.id).to.equal(id);
+          expect(theme.nazwa).to.be.a("string").with.length.above(8);
+          expect(theme).to.have.all.keys("id", "nazwa", "seed", "sky", "far", "mid", "near", "lanes", "labels", "free", "ambient");
+          for (const part of ["far", "mid", "near"]) {
+            expect(theme[part].colors.length).to.be.at.least(2);
+            expect(theme[part].parallax).to.be.above(0);
+          }
+          expect(theme.sky).to.have.length(3);
+          expect(theme.labels.fill).to.be.a("number");
+          expect(theme.lanes.line).to.be.a("number");
+        }
+      });
+
+      it("wybór motywu nie zmienia środowiska ani ST", function () {
+        for (const motyw of Object.keys(MOTYWY)) {
+          const flag = daneSceny({nazwa: "T", tory: 12, srodowisko: "ciasno", motyw}).flags[MODULE_ID].poscig;
+          expect(flag.motyw).to.equal(motyw); expect(flag.st).to.equal(15);
+        }
+      });
+
+      it("środek na torze i tolerancja jednego piksela włączają kołysanie", function () {
+        expect(przyciagnietyDoToru(centered)).to.be.true;
+        expect(przyciagnietyDoToru({...centered, x: centered.x + .9})).to.be.true;
+      });
+
+      it("Shift między torami, swobodna strefa i inna scena wyłączają kołysanie", function () {
+        expect(przyciagnietyDoToru({...centered, x: centered.x + 55})).to.be.false;
+        expect(przyciagnietyDoToru({...centered, y: FREEFORM_Y - 100})).to.be.false;
+        expect(przyciagnietyDoToru({...centered, poscig: false})).to.be.false;
+      });
+
+      it("tory poza planszą nie są miejscem kołysania", function () {
+        for (const lane of [0, 13]) expect(przyciagnietyDoToru({...centered, x: torX(lane) - 100})).to.be.false;
+      });
+
+      it("granica strefy bierze środek tokenu, także większego", function () {
+        expect(wPasiePoscigu({...centered, y: 1199})).to.be.true;
+        expect(wPasiePoscigu({...centered, y: 1200})).to.be.false;
+        expect(wPasiePoscigu({...centered, y: 1100, height: 2})).to.be.false;
+      });
+
+      it("różne natywne kierunki grafiki dostają właściwy obrót dokumentu", function () {
+        expect(rotationNaPrawo()).to.equal(270);
+        expect(rotationNaPrawo(90)).to.equal(0);
+        expect(rotationNaPrawo(180)).to.equal(90);
+        expect(rotationNaPrawo(-90)).to.equal(180);
+        expect(rotationNaPrawo(450)).to.equal(0);
+      });
+
+      it("kołysanie jest deterministyczne i każdy pionek ma własną fazę", function () {
+        const seed = ziarnoPionka("pojazd-a");
+        expect(ziarnoPionka("pojazd-a")).to.equal(seed);
+        expect(kolysanie(seed, 3)).to.deep.equal(kolysanie(seed, 3));
+        expect(kolysanie(seed, 3)).to.not.deep.equal(kolysanie(ziarnoPionka("pojazd-b"), 3));
+      });
+
+      it("amplituda pozostaje delikatna i środek nigdy nie opuszcza toru", function () {
+        for (let seed = 0; seed < 8; seed++) for (let t = 0; t < 60; t += .17) {
+          const s = kolysanie(ziarnoPionka(String(seed)), t, 4);
+          expect(Math.abs(s.x)).to.be.below(1.2);
+          expect(Math.abs(s.y)).to.be.below(6);
+          expect(Math.abs(s.rotation)).to.be.below(.04);
+          expect(xNaTor(torX(4) + s.x)).to.equal(4);
+        }
+      });
+
+      it("zatrzymana droga i wyłączone ustawienie zerują wszystkie składowe", function () {
+        for (const [tempo, enabled] of [[0,true],[1,false],[-1,true]]) {
+          expect(kolysanie(5, 1, tempo, enabled)).to.deep.equal({x: 0, y: 0, rotation: 0});
+        }
+      });
+
+      it("wynik może być używany ponownie bez alokacji na klatkę", function () {
+        const out = {};
+        expect(kolysanie(5, 2, 1, true, out)).to.equal(out);
+        expect(kolysanie(5, 3, 0, true, out)).to.equal(out);
+        expect(out).to.deep.equal({x: 0, y: 0, rotation: 0});
+      });
+    });
 
     /* -------------------------------------------- */
 

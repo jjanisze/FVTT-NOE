@@ -25,7 +25,13 @@ import {
   SRODOWISKA, PRZEWAGA_KONCZACA, RUND_MAKS, START_SCIGANI, START_SCIGAJACY
 } from "../config/vehicles-data.mjs";
 
-const MODULE_ID = "neuroshima-2026-overrides";
+import { MOTYWY, motywPoscigu } from "./poscig-themes.mjs";
+
+function _motywSelect(flaga) {
+  const selected = motywPoscigu(flaga).id;
+  return `<select name="motyw">${Object.values(MOTYWY).map(m =>
+    `<option value="${m.id}"${m.id === selected ? " selected" : ""}>${m.nazwa}</option>`).join("")}</select>`;
+}
 
 /* -------------------------------------------- */
 /*  Budowanie pól                                */
@@ -90,6 +96,7 @@ export async function oknoNowyPoscig() {
       + `pościg kończy się przy ${PRZEWAGA_KONCZACA} znacznikach przewagi lub po ${RUND_MAKS} rundach.`)
     + _grupa("Środowisko", _srodowiskoSelect("otwarte"),
       "Wyznacza ST Testu Pościgu (tabela s. 266).")
+    + _grupa("Motyw planszy", _motywSelect(), "Wygląd planszy — niezależny od środowiska i ST.")
     + _grupa("Ścigani", _pojazdySelect("scigani"),
       brakPojazdow ? "" : `Start na znaczniku ${START_SCIGANI}. Ctrl/Shift — zaznaczanie wielu.`)
     + _grupa("Ścigający", _pojazdySelect("scigajacy"),
@@ -111,6 +118,7 @@ export async function oknoNowyPoscig() {
           nazwa: f.elements.nazwa.value?.trim() || "Pościg",
           tory: Number(f.elements.tory.value) || TORY_DOMYSLNIE,
           srodowisko: f.elements.srodowisko.value,
+          motyw: f.elements.motyw.value,
           scigani: _wybrane(f, "scigani"),
           scigajacy: _wybrane(f, "scigajacy"),
           aktywuj: f.elements.aktywuj.checked
@@ -155,11 +163,12 @@ export async function oknoUstawienia(scene = canvas?.scene) {
     + _grupa("Liczba torów", _liczba("tory", flaga.tory, { min: 4, max: 40 }),
       "Zmiana przebudowuje planszę i zmienia szerokość sceny.")
     + _grupa("Środowisko", _srodowiskoSelect(flaga.srodowisko))
+    + _grupa("Motyw planszy", _motywSelect(flaga), "Wygląd planszy — niezależny od środowiska i ST.")
     + _grupa("ST Testu Pościgu", _liczba("st", flaga.st, { min: 0, max: 30 }),
       "Domyślnie ze środowiska — nadpisz, jeśli scena tego wymaga.")
     + _grupa("Runda", _liczba("runda", flaga.runda, { min: 1 }))
     + _grupa("Tempo tła", _liczba("tempoTla", flaga.tempoTla ?? 1, { min: 0, max: 4, step: 0.1 }),
-      "Sama prędkość przewijania pustyni. 0 zatrzymuje obraz; nie wpływa na mechanikę.")
+      "Prędkość przewijania tła i kołysania pojazdów. 0 zatrzymuje obraz; nie wpływa na mechanikę.")
     + `<hr><fieldset><legend>Dostaw pojazd</legend>`
     + _grupa("Pojazd", _pojazdySelect("dodaj", { rozmiar: 4 }))
     + _grupa("Na tor", _liczba("dodajTor", 1, { min: 1, max: flaga.tory }))
@@ -180,6 +189,7 @@ export async function oknoUstawienia(scene = canvas?.scene) {
         await konfiguruj(scene, {
           tory: Number(f.elements.tory.value),
           srodowisko: f.elements.srodowisko.value,
+          motyw: f.elements.motyw.value,
           st: Number(f.elements.st.value),
           runda: Number(f.elements.runda.value),
           tempoTla: Number(f.elements.tempoTla.value)

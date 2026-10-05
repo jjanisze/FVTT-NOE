@@ -107,6 +107,7 @@ import { poscigApi } from "./scenes/poscig.mjs";
 import { registerPoscigCanvas, poscigCanvasApi } from "./scenes/poscig-canvas.mjs";
 import { registerPoscigUI, poscigUiApi } from "./scenes/poscig-ui.mjs";
 import { registerPoscigSnap, poscigSnapApi } from "./scenes/poscig-snap.mjs";
+import { registerPoscigMotion, poscigMotionApi } from "./scenes/poscig-motion.mjs";
 import { openTracerDebugPanel, registerTracerDebugPanelControls } from "./weapons/tracer-debug-panel.mjs";
 import { openSoundDebugPanel, registerSoundDebugPanelControls } from "./weapons/sound-debug-panel.mjs";
 import { registerAmmoSystem } from "./weapons/ammo.mjs";
@@ -540,8 +541,10 @@ Hooks.once("ready", () => {
   // Przycisk MG w narzędziach sceny rejestruje się w `init` (wyżej) — tutaj tylko API.
   registerPoscigCanvas();
   registerPoscigSnap();
+  registerPoscigMotion();
   game.neuroshima.poscig = {
-    ...poscigApi, ...poscigUiApi, ...poscigSnapApi, tlo: poscigCanvasApi
+    ...poscigApi, ...poscigUiApi, ...poscigSnapApi, ...poscigMotionApi,
+    tlo: poscigCanvasApi, ruch: poscigMotionApi
   };
 
   // Karta drużyny — game.neuroshima.podroz.openBiomePicker(actor), .zapasy.hunt(grupa)

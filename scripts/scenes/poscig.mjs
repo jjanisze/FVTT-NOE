@@ -45,6 +45,7 @@ import {
   START_SCIGANI, START_SCIGAJACY, PRZEWAGA_KONCZACA, RUND_MAKS
 } from "../config/vehicles-data.mjs";
 
+import { MOTYWY, MOTYW_DOMYSLNY, motywPoscigu } from "./poscig-themes.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 
 /** Klucz flagi na scenie. Jej obecność = „to jest plansza pościgu”. */
@@ -158,7 +159,7 @@ export function isPoscigScene(scene = canvas?.scene) {
  * nie pada ani jeden błąd. Foundry tworzy swój domyślny poziom dokładnie tak samo
  * (`client/documents/scene.mjs`, `_id: this.constructor.metadata.defaultLevelId`).
  */
-export function daneSceny({ nazwa, tory, srodowisko }) {
+export function daneSceny({ nazwa, tory, srodowisko, motyw = MOTYW_DOMYSLNY }) {
   const { width, height } = wymiary(tory);
   return {
     name: nazwa,
@@ -181,12 +182,13 @@ export function daneSceny({ nazwa, tory, srodowisko }) {
     levels: [{
       _id: foundry.documents.BaseScene.metadata.defaultLevelId,
       name: "Pościg",
-      background: { color: "#b98f5a" }
+      background: { color: motywPoscigu({ motyw }).mid.colors[0] }
     }],
     flags: {
       [MODULE_ID]: {
         [FLAG_POSCIG]: {
           tory,
+          motyw: motywPoscigu({ motyw }).id,
           srodowisko,
           st: SRODOWISKA[srodowisko]?.st ?? SRODOWISKA[SRODOWISKO_DOMYSLNE].st,
           runda: 1,
@@ -247,6 +249,7 @@ export async function start({
   nazwa = "Pościg",
   tory = TORY_DOMYSLNIE,
   srodowisko = SRODOWISKO_DOMYSLNE,
+  motyw = MOTYW_DOMYSLNY,
   scigani = [],
   scigajacy = [],
   aktywuj = true
@@ -266,7 +269,7 @@ export async function start({
   let finalna = nazwa;
   for (let i = 2; game.scenes.getName(finalna); i++) finalna = `${nazwa} ${i}`;
 
-  const scene = await Scene.create(daneSceny({ nazwa: finalna, tory, srodowisko }));
+  const scene = await Scene.create(daneSceny({ nazwa: finalna, tory, srodowisko, motyw }));
 
   const tokeny = [];
   const braki = [];
@@ -303,7 +306,7 @@ export async function start({
  * `stan()`, przyciąganie i recentrowanie, więc nie mogą się rozjechać w ocenie.
  *
  * **Strefa swobodna nie liczy się do pościgu.** Token przeciągnięty pod `FREEFORM_Y`
- * (schemat wozu, notatka MG, ktoś kto wypadł i czeka na rozstrzygnięcie) wypada z liczenia
+ * (według środka; schemat wozu, notatka MG, ktoś kto wypadł i czeka na rozstrzygnięcie) wypada z liczenia
  * przewagi i z recentrowania. Decyduje pozycja, nie flaga: token wraca do gry po prostu
  * przez przeciągnięcie go z powrotem na tory.
  *
@@ -328,7 +331,7 @@ export function pionkiPoscigu(scene, nadpisania = null) {
     const poz = nadpisania?.[t.id];
     const x = poz?.x ?? t.x;
     const y = poz?.y ?? t.y;
-    if (y >= FREEFORM_Y) continue;
+    if (y + t.height * scene.grid.size / 2 >= FREEFORM_Y) continue;
     out.push({
       token: t,
       nazwa: t.name,
@@ -367,11 +370,18 @@ export async function konfiguruj(scene, zmiany = {}) {
   }
 
   const nowa = { ...flaga, ...zmiany };
+  if (zmiany.motyw !== undefined && !MOTYWY[zmiany.motyw]) {
+    ui.notifications.warn("Nieznany motyw planszy pościgu.");
+    return null;
+  }
   if (zmiany.srodowisko && zmiany.st === undefined) {
     nowa.st = SRODOWISKA[zmiany.srodowisko]?.st ?? nowa.st;
   }
 
   const update = { [`flags.${MODULE_ID}.${FLAG_POSCIG}`]: nowa };
+  if (zmiany.motyw !== undefined) {
+    update.levels = [{ _id: scene.levels.contents[0].id, background: { color: motywPoscigu(nowa).mid.colors[0] } }];
+  }
 
   if (zmiany.tory && zmiany.tory !== flaga.tory) {
     const najdalszy = Math.max(...pionkiPoscigu(scene).map(p => p.tor), 1);
@@ -459,5 +469,5 @@ export const poscigApi = {
   start, konfiguruj, dodajPojazd, stan, pokazStan,
   isPoscigScene, poscigFlag,
   torX, xNaTor, dystansZnacznikow,
-  TORY_DOMYSLNIE, SRODOWISKA
+  TORY_DOMYSLNIE, SRODOWISKA, MOTYWY, MOTYW_DOMYSLNY
 };

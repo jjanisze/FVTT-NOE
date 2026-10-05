@@ -58,10 +58,11 @@
 
 import {
   poscigFlag, pionkiPoscigu, torX, xNaTor,
-  FLAG_POSCIG, LANE_W, FREEFORM_Y
+  FLAG_POSCIG, LANE_W
 } from "./poscig.mjs";
 import { PRZEWAGA_KONCZACA } from "../config/vehicles-data.mjs";
 
+import { wPasiePoscigu } from "./poscig-motion-model.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 
 /** Najkrótszy odstęp między dwoma ostrzeżeniami o za wąskiej planszy (ms). */
@@ -140,7 +141,7 @@ function _patchGetSnappedPosition() {
     const elevation = data.elevation ?? this.elevation;
 
     // Strefa swobodna: MG układa tam schematy i notatki, nic się nie przyciąga.
-    if (y >= FREEFORM_Y) return { x, y, elevation };
+    if (!wPasiePoscigu({ poscig: true, y, height: data.height ?? this.height, gridSize: this.parent?.grid?.size ?? LANE_W })) return { x, y, elevation };
 
     const szerokoscPx = (data.width ?? this.width) * (this.parent?.grid?.size ?? LANE_W);
     return { x: snapDoToru(x, szerokoscPx).x, y, elevation };
@@ -160,7 +161,7 @@ function _unpatchGetSnappedPosition() {
 function onPreCreateToken(doc) {
   const scene = doc.parent;
   if (!poscigFlag(scene)) return;
-  if (doc.y >= FREEFORM_Y) return;
+  if (!wPasiePoscigu({ poscig: true, y: doc.y, height: doc.height, gridSize: scene.grid.size })) return;
   const szerokoscPx = doc.width * scene.grid.size;
   doc.updateSource({ x: snapDoToru(doc.x, szerokoscPx).x });
 }
