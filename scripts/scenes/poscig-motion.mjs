@@ -1,13 +1,15 @@
 /** Reversible mesh-only motion, after Foundry animations and before the same frame renders. */
 import { poscigFlag, LANE_W } from "./poscig.mjs";
-import { przyciagnietyDoToru, wPasiePoscigu, rotationNaPrawo, ziarnoPionka, kolysanie } from "./poscig-motion-model.mjs";
+import { przyciagnietyDoToru, wPasiePoscigu, rotationNaPrawo, ziarnoPionka, kolysanie, rytmKolysania, kolysanieZegara } from "./poscig-motion-model.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 export const SETTING_SWAY = "poscigVehicleSway";
 const entries = new Map();
 const NO_CHANGES = Object.freeze({});
+/** Seconds for the sway to settle into a new size after a QuickScale step. */
+const SIZE_EASE_S = .6;
 let active = [];
-let ticker = null, time = 0, cost = 0, frames = 0, enabled = true;
+let ticker = null, cost = 0, frames = 0, enabled = true;
 
 function geometry(doc, changes = NO_CHANGES, out = {}) {
   out.poscig = Boolean(poscigFlag(doc.parent));
@@ -51,7 +53,7 @@ function beforeFrame() { for (let i = 0; i < active.length; i++) restore(active[
 function afterFrame() {
   const begin = performance.now();
   const tempo = poscigFlag()?.tempoTla ?? 2;
-  time += Math.min(ticker.deltaMS, 50) / 1000;
+  const dt = Math.min(ticker.deltaMS, 50) / 1000, ease = 1 - Math.exp(-dt / SIZE_EASE_S);
   for (let i = 0; i < active.length; i++) {
     const entry = active[i];
     const token = entry.token, mesh = token.mesh;
@@ -59,7 +61,11 @@ function afterFrame() {
     if (!enabled || !mesh || mesh.destroyed || token.isPreview || token._original
       || !przyciagnietyDoToru(geometry(token.document, NO_CHANGES, entry.geometry))) continue;
     entry.mesh = mesh;
-    const sway = kolysanie(entry.seed, time, tempo, true, entry.sway);
+    // Rendered length, not footprint: QuickScale scales the artwork and leaves width/height alone.
+    const size = Math.max(mesh.width, mesh.height) / entry.geometry.gridSize;
+    entry.size = entry.size ? entry.size + (size - entry.size) * ease : size;
+    entry.clock += dt * rytmKolysania(tempo, entry.size);
+    const sway = kolysanieZegara(entry.seed, entry.clock, tempo, entry.size, entry.sway);
     if (!(sway.x || sway.y || sway.rotation)) continue;
     entry.baseX = mesh.x; entry.baseY = mesh.y; entry.baseRotation = mesh.rotation;
     entry.appliedX = mesh.x + sway.x; entry.appliedY = mesh.y + sway.y;
@@ -73,7 +79,7 @@ function afterFrame() {
 function remember(token) {
   if (!token || token.isPreview || token._original || !poscigFlag(token.document.parent)) return;
   if (!entries.has(token.id)) {
-    const entry = { token, mesh: token.mesh, seed: ziarnoPionka(token.id), geometry: {}, sway: {}, applied: false };
+    const entry = { token, mesh: token.mesh, seed: ziarnoPionka(token.id), geometry: {}, sway: {}, size: 0, clock: 0, applied: false };
     entries.set(token.id, entry); active.push(entry);
   }
 }
@@ -126,7 +132,7 @@ export function registerPoscigMotion() {
 }
 
 export const poscigMotionApi = {
-  przyciagnietyDoToru, wPasiePoscigu, rotationNaPrawo, kolysanie,
+  przyciagnietyDoToru, wPasiePoscigu, rotationNaPrawo, kolysanie, rytmKolysania, kolysanieZegara,
   stats(reset = false) {
     const result = { frames, averageMs: frames ? cost / frames : 0, tokens: entries.size };
     if (reset) cost = frames = 0;
