@@ -90,12 +90,18 @@ export function registerFireModes() {
   registerSuppressiveFireActivityType();
   registerSuppressiveFireHooks();
 
+  // Jeden klient synchronizuje aktywności broni — ten sam błąd, który `magazine.mjs` naprawił
+  // 2026-09-06: bez bramki KAŻDY podłączony klient, który zobaczył nową broń, próbował ją
+  // zapisać. Gracz nie ma prawa pisać cudzej postaci, więc serwer odrzucał zapis ("User Gracz 1
+  // lacks permission to update Item", w UI: „Nie możesz tak po prostu wcisnąć tego komuś!"),
+  // a przy dwóch uprawnionych klientach groziły zdublowane aktywności. Złapane 2026-10-05
+  // pierwszym przebiegiem e2e (`fvtt e2e --suites=boot`): świeży PC z bronią, trzech graczy.
   Hooks.on("createItem", item => {
-    void syncWeaponFireModes(item);
+    if (_isFireModeManager(item)) void syncWeaponFireModes(item);
   });
 
   Hooks.on("updateItem", item => {
-    void syncWeaponFireModes(item);
+    if (_isFireModeManager(item)) void syncWeaponFireModes(item);
   });
 
   Hooks.once("ready", () => {
@@ -903,8 +909,18 @@ async function syncAllWeaponFireModes() {
   ];
 
   for (const item of items) {
-    await syncWeaponFireModes(item);
+    if (_isFireModeManager(item)) await syncWeaponFireModes(item);
   }
+}
+
+/**
+ * Kto synchronizuje aktywności danej broni: aktywny MG (idiom `activeGM.isSelf`, jak w
+ * `jams.mjs`), a gdy żadnego MG nie ma — właściciel, żeby broń dodana graczowi pod
+ * nieobecność MG też dostała swoje tryby ognia.
+ */
+function _isFireModeManager(item) {
+  const gm = game.users.activeGM;
+  return gm ? gm.isSelf : Boolean(item?.isOwner);
 }
 
 async function syncWeaponFireModes(item) {

@@ -474,6 +474,10 @@ async function reprojectAllMagazineState() {
  */
 async function onUpdateItemReproject(item, changes) {
   if (!item?.actor || !inMagazineSystem(item.actor)) return;
+  // „Każdy klient" znaczy: każdy, kto może ten item zapisać. Gracz widzący cudzą broń liczył
+  // projekcję i próbował ją zapisać przed MG — serwer odrzucał („lacks permission to update
+  // Item"), w UI „Nie możesz tak po prostu wcisnąć tego komuś!". Złapane przez e2e 2026-10-05.
+  if (!item.isOwner) return;
 
   const touched = path => foundry.utils.hasProperty(changes, path);
   const projectionOnly = projectionPaths.some(touched)
