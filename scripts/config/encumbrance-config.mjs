@@ -38,4 +38,37 @@ export function registerEncumbranceConfig() {
   // in dnd5e's prepareEncumbrance) — RAW gives it half of Medium's, not the same.
   CONFIG.DND5E.actorSizes.tiny.capacityMultiplier = 0.2; // was 0.5
   CONFIG.DND5E.actorSizes.sm.capacityMultiplier = 0.4; // was unset (→ 1, i.e. same as Medium)
+  registerMetricUnits();
+}
+
+/** dnd5e's unit switches; every one defaults to imperial (`false`) in a fresh world. */
+const METRIC_SETTINGS = ["metricWeightUnits", "metricLengthUnits", "metricVolumeUnits"];
+
+/**
+ * Neuroshima is metric: RAW gives kilograms and metres, and the overrides above change only
+ * dnd5e's `.metric` constants. A fresh dnd5e world starts imperial, so on a new install Udźwig came
+ * out in pounds — Użytkowy equal to the imperial "heavily encumbered" line, labelled as kg. Caught
+ * 2026-10-05 by the release gate (module installed from the zip into a fresh world: 8 Udźwig tests
+ * red; the campaign world had metric set by hand). GM decision: the module switches it on itself.
+ *
+ * Once, on the active GM's `ready`, with a notice. dnd5e registers these settings without
+ * `onChange`, so encumbrance stays computed in the old units until the actor is prepared again —
+ * every client re-prepares its actors when one of them is created or changed.
+ */
+function registerMetricUnits() {
+  Hooks.once("ready", async () => {
+    if (!game.users.activeGM?.isSelf) return;
+    const off = METRIC_SETTINGS.filter(key => !game.settings.get("dnd5e", key));
+    if (!off.length) return;
+    for (const key of off) await game.settings.set("dnd5e", key, true);
+    ui.notifications.info("Neuroshima: włączono jednostki metryczne (kg, m, l) — Udźwig i odległości "
+      + "w podręczniku są metryczne. Ustawienia systemu dnd5e → Jednostki.", { permanent: true });
+  });
+  const onUnitsChanged = setting => {
+    if (!METRIC_SETTINGS.some(key => setting.key === `dnd5e.${key}`)) return;
+    for (const actor of game.actors ?? []) actor.reset();
+    for (const token of canvas?.tokens?.placeables ?? []) if (!token.document.actorLink) token.actor?.reset();
+  };
+  Hooks.on("createSetting", onUnitsChanged);
+  Hooks.on("updateSetting", onUnitsChanged);
 }
