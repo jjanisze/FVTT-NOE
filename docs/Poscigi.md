@@ -5,6 +5,10 @@ zmienia się w przycisk ustawień. Oba okna pozwalają wybrać **Pustynię Nevad
 w ruinach** albo **Nuklearną zimę**. Motyw jest wyglądem planszy; środowisko ustala ST Testu
 Pościgu. Można je dowolnie łączyć. Starsze plansze pokazują pustynię Nevady.
 
+Nevada ma realistyczne bitmapowe tło widziane pod kątem około 45°: zniszczony asfalt,
+suche pobocza i wzgórza. Dwie bliższe warstwy pokazują górne części roślin, znaków i ruin.
+Mogą na chwilę zasłonić pojazd, ale przepuszczają kliknięcia, celowanie i przeciąganie.
+
 Pojazdy w pasie pościgu patrzą w prawo. Środek żetonu rozstrzyga, czy jest w pasie, czy
 w strefie swobodnej pod linią. W strefie swobodnej MG może obracać żetony dowolnie.
 

@@ -1,0 +1,109 @@
+{
+  "cameraDegrees": 45,
+  "generator": "OpenAI built-in image generation",
+  "images": {
+    "ground": {
+      "file": "ground.webp",
+      "width": 1774,
+      "height": 887
+    },
+    "hills": {
+      "file": "hills.webp",
+      "width": 1774,
+      "height": 887
+    },
+    "plants": {
+      "file": "plants.webp",
+      "width": 1254,
+      "height": 1254,
+      "frames": {
+        "joshua": [
+          22,
+          2,
+          605,
+          625
+        ],
+        "dead-tree": [
+          627,
+          4,
+          600,
+          623
+        ],
+        "cholla": [
+          23,
+          627,
+          594,
+          627
+        ],
+        "sagebrush": [
+          627,
+          627,
+          614,
+          627
+        ]
+      }
+    },
+    "structures": {
+      "file": "structures.webp",
+      "width": 1254,
+      "height": 1254,
+      "frames": {
+        "sign": [
+          128,
+          36,
+          406,
+          584
+        ],
+        "pole": [
+          643,
+          47,
+          601,
+          574
+        ],
+        "roof": [
+          10,
+          640,
+          617,
+          614
+        ],
+        "frame": [
+          627,
+          627,
+          613,
+          627
+        ]
+      }
+    },
+    "dust": {
+      "file": "dust.webp",
+      "width": 1774,
+      "height": 887,
+      "frames": {
+        "dust-1": [
+          22,
+          102,
+          865,
+          341
+        ],
+        "dust-2": [
+          887,
+          104,
+          864,
+          339
+        ],
+        "dust-3": [
+          0,
+          443,
+          887,
+          375
+        ],
+        "dust-4": [
+          887,
+          448,
+          887,
+          388
+        ]
+      }
+    }
+  }
+}
