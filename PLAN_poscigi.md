@@ -162,6 +162,16 @@ Podgląd przeciągania jest statyczny. Ustawienie `poscigVehicleSway` jest `scop
 domyślnie true; wyłączenie natychmiast przywraca grafikę. `tempoTla: 0` zatrzymuje
 kołysanie. Zgodnie z decyzją MG `prefers-reduced-motion` nie wpływa na grę.
 
+Kołysanie zależy od wyrenderowanej długości pojazdu (dłuższy bok siatki ÷ rozmiar pola), nie
+od jego śladu na siatce: QuickScale zmienia tylko `texture.scaleX/Y`. Długość 1 to dostrojony
+wzorzec (bez zmian względem wersji z 2026-10-05). Rytm ∝ 1/√długości (wahadło: motocykl
+koryguje szybko, ciężarówka bojowa ciężko się przewala), dryf boczny ∝ długości, wstrząsy z dziur
+∝ √długości (zawieszenie ciężkiego pojazdu je tłumi), kąt odchylenia lekko maleje (końce
+długiego kadłuba i tak zataczają szerszy łuk). Zakres 0,25…6. Każdy pionek całkuje własny
+zegar (`rytmKolysania()`), a rozmiar dochodzi do nowej wartości w ~0,6 s, więc zmiana skali
+w trakcie jazdy zmienia rytm bez skoku fazy. Grafika pojazdów jest przycinana do treści —
+przezroczysty margines zawyżyłby długość.
+
 Warstwa 6: fixture `dev/e2e/fixtures/poscig.mjs` ma sześć pojazdów na torach, jeden między
 torami i jeden w strefie swobodnej. Suite `poscig` sprawdza obu klientów, dialogi,
 obrót w tej samej operacji co ruch, wyłączenie animacji, recentrowanie i podgląd drag.
@@ -333,6 +343,40 @@ memory requirement; the recommendation is not an artificial hard VRAM cap.
 
 The completed run and measured memory envelope are recorded in the variety hand-back below.
 Visual evidence accompanies technical checks for the GM's assessment of this iteration.
+
+### 2.2d Opaque road contours and Ruins of America (2026-10-06)
+
+The GM requested solid roadside silhouettes instead of vegetation and rocks disappearing inside
+a broad gradient, followed by a comparable urban pool: ruined suburbia, malls, commercial Americana
+and jagged city ruins. Palette: post-apocalyptic light/dark greys, with bleached pastel accents.
+Preview is live. Previously generated preview videos have been deleted at the GM's request.
+
+The road's alpha edge is authored by the image model around individual rocks, rubble, shrubs and
+branches. Their bodies remain solid or nearly opaque; transparency belongs outside the contour,
+with narrow edge feathering. Every road variant shares this upper shoulder. The compositor clears
+the old upper pixels before copying the edge, so the variant cannot fill branch holes with dirt.
+It removes the vertical opacity ramp and uses a narrow antialiased irregular tile boundary.
+
+Both bitmap themes use `scripts/scenes/poscig-bitmap.mjs`, preserving viewport culling,
+deterministic selection, lookahead, texture ownership, abortable loading and pointer exclusion.
+Nevada's compatibility entry point remains in `poscig-nevada.mjs`. Nuclear winter retains its
+procedural renderer. The existing `przedmiescia` identifier now displays **Ruiny Ameryki**.
+
+The urban pool supplies four roads, four district plates, twenty foreground cutouts, four pavement
+overlays and four ash wisps across fifteen WEBPs. District recipes alternate between subdivisions,
+malls, commercial strips and dense urban ruins. Native strips are 1774×887; sheets 1254×1254.
+All new artwork uses the accepted approximately 45-degree downward camera and upper-left daylight.
+Foreground bases remain beyond the lower panel frame, with both near layers excluded from input.
+
+Source catalog, exact prompts and extension instructions: `dev/art/poscig-urban/`. The shared
+packer accepts that catalog and a destination folder; rebuilding canonical metadata re-encodes no
+images. The production urban pool is 13,141,614 bytes (12.53 MiB). Nevada's revised pool is
+13,342,834 bytes (12.72 MiB). Adding assets expands the disk catalog without preloading everything.
+
+The `nevada-art` and `urban-art` suites share actual GM/player mouse, crop and disposal checks.
+They also sample the real loaded road textures to reject broad opacity fades while requiring
+exterior alpha holes. Three-minute route sampling uses telemetry and screenshots, without videos.
+Final verification and preview details are recorded in the hand-back below.
 
 ### 2.3 Tory (cel 2)
 
@@ -901,9 +945,9 @@ Validation and local evidence:
 - Complete report and metrics: `logs/e2e/2026-10-05T20-16-11/report.json` and
   `poscig-performance.json` in the same directory.
 - Visual evidence there: `nevada-art-07-gm-nevada_final.jpg`, close view
-  `nevada-art-06-gm-zoom_0_85.jpg`, GM/player overlap screenshots, and
-  `nevada-motion.webm` (7.75 seconds, both foreground layers). Four extracted motion frames
-  are in `nevada-motion-contact.webp`.
+  `nevada-art-06-gm-zoom_0_85.jpg`, GM/player overlap screenshots and
+  `nevada-motion-contact.webp`. The former 7.75-second preview video was removed on 2026-10-06
+  at the GM's request; preview is now live.
 - `npm run release:check -- --skip-sandbox`: static, generators, ZIP, pack integrity and
   versions green on implementation/test commit `9850a6c`; sandbox validation is covered by
   the full run above. Release report: `logs/release/0.17.1-2026-10-05T20-20-58.json`.
@@ -980,9 +1024,8 @@ Validation and local evidence:
   at 0.35, 0.65 and 0.85. Existing snapping, recentering, stop/resume and sway checks pass.
 - Performance and cache telemetry: `poscig-performance.json` and `nevada-stream.json` under
   `logs/e2e/2026-10-05T21-38-08/`. That directory contains four region screenshots,
-  `nevada-variety-contact.webp` and `nevada-variety-3min-review.webm` (180.15 seconds).
-  The review video is a lossless container remux of the raw recording, adding duration/seek
-  metadata; artwork and frames are unchanged.
+  `nevada-variety-contact.webp`. The former 180.15-second recording and its review remux were
+  removed on 2026-10-06 at the GM's request; the measurements and screenshots remain.
 - Catalog rebuild preserves all asset dimensions, alpha frames and selection groups.
   Documentation path check: 1,553 references, zero dead.
 - `npm run release:check -- --skip-sandbox`: static checks including the four scenery tests,
@@ -991,5 +1034,78 @@ Validation and local evidence:
 - Implementation commit: `2bfd551`; verification commit: `cb3604a`. No tag or publication.
 - Review preview: sandbox world `agent-poscig-20261005`, one GM tab, Nevada at tempo 2.
 
-The implementation and technical checks are complete. The live preview, region screenshots and
-three-minute recording are available for the GM's visual assessment of this variety iteration.
+The implementation and technical checks are complete. The live preview and region screenshots
+are available for the GM's visual assessment. Preview recordings were subsequently removed.
+
+## Opaque roadside contours and Ruins of America — hand-back (2026-10-06)
+
+Implemented §2.2d. The road no longer fades entire rocks and bushes through a broad vertical
+gradient. An image-model edit gives Nevada's upper shoulder real exterior transparency; the
+urban road uses an equivalent rubble and dead-vegetation silhouette. All variants share their
+theme's upper shoulder and lateral connector pixels. A one-time coverage adjustment suppresses
+faint exterior noise and makes interior coverage opaque while retaining contour antialiasing.
+Tile ownership changes along a narrow irregular contour instead of fading whole objects.
+
+`scripts/scenes/poscig-bitmap.mjs` now serves both bitmap themes. The urban theme retains the
+stable `przedmiescia` identifier and appears as **Ruiny Ameryki**. It supplies four road surfaces,
+four district plates, eight plant crowns, twelve raised structure fragments, four ground overlays
+and four dust wisps: **36 artwork choices across fifteen WEBPs**, 13,141,614 bytes (12.53 MiB).
+Nevada's updated fifteen-file pool is 13,342,834 bytes (12.72 MiB). Both retain native 1774×887
+strips and 1254×1254 sprite sheets, approximately 45-degree downward perspective and upper-left
+daylight. Winter keeps its existing procedural art.
+
+Urban districts cover abandoned subdivisions, collapsed malls, dead commercial strips and dense
+city ruins. Ash and charcoal greys, bone-white concrete and restrained bleached mint, pink and
+turquoise paint replace the old procedural suburb artwork. Exact built-in image-model prompts
+and reference roles are recorded in `dev/art/poscig-urban/prompts.json`; editable pool metadata
+is in its `catalog.json`. The shared packer accepts `--catalog` and `--dest`; rebuilding urban
+metadata from canonical WEBPs preserves dimensions, alpha frames and selection groups exactly.
+Adding approved artwork requires catalog edits, rather than renderer changes.
+
+The existing bounded cache still loads only visible resources and spatial lookahead. In the
+180.63-second urban foreground cycle at tempo 2, all four districts and all 36 artwork choices
+appeared. There were 75 loads, 64 evictions and **zero loading-stall frames**. Resident scenery
+samples ranged from 63.99 to 105.99 MiB, matching the cache's continuous high-water estimate.
+Stored token positions and rotations stayed identical. These figures describe owned scenery
+textures; WEBP download sizes do not represent VRAM usage.
+
+Sixty-second foreground performance, twelve columns and six swaying test vehicles:
+
+| Theme | Rendered FPS | p95 frame ms | Chase textures MiB at endpoint | Scroll + sway ms/frame |
+|---|---:|---:|---:|---:|
+| Nevada | 58.70 | 21.3 | 76.30 | 0.100 |
+| Ruins of America | 58.53 | 21.3 | 86.29 | 0.100 |
+| Winter | 59.25 | 21.2 | 14.38 | 0.053 |
+
+Rendering time and VRAM remain advisory budgets under the GM's instruction. The final coverage
+adjustment happens at theme creation only; the timed traversal and cache implementation are
+unchanged. No per-frame pixel processing was added.
+
+Validation and local evidence:
+- `npm test`: 22 Quench batches registered and five scenery planning/cache tests green,
+  including urban district recipes and a thousand-entry catalog with a bounded working set.
+- Full live run: boot, combat, Nevada input, urban streaming and chase mechanics/performance
+  green; Quench 774/774 and no client console errors. Telemetry and district screenshots:
+  `logs/e2e/2026-10-05T23-44-27/`. Its initial urban opacity assertion exposed faint contour
+  coverage; the connector matte was tightened before final validation.
+- Final `fvtt e2e --suites=boot,nevada-art,urban-art --quench --reuse`: all suites green,
+  Quench 774/774, no client console errors; temporary world cleaned up. Report:
+  `logs/e2e/2026-10-05T23-52-14/report.json`. Real GM/player selection, HUD, sheet, targeting,
+  normal/Shift drags and drags into foreground pass through opaque and transparent cutouts.
+  Pan/zoom cropping, all owned texture disposal and rapid theme-switch cancellation also pass.
+- Final urban screenshots: `urban-art-07-gm-bitmap_final.jpg` and close view
+  `urban-art-06-gm-zoom_0_85.jpg` in the final run directory. District examples and three-minute
+  cache samples remain in the earlier run directory, with `urban-stream.json` and
+  `poscig-performance.json`.
+- `npm run release:check -- --skip-sandbox`: static checks, generators, committed ZIP, pack
+  integrity and versions green on `bd5287e`. Report:
+  `logs/release/0.17.1-2026-10-05T23-54-51.json`. Live sandbox coverage is recorded above.
+- Seven agent-created preview videos were removed: five Nevada motion clips and the variety
+  recording plus its review remux. The art and stream suites no longer create videos; screenshots
+  and telemetry remain. No recording supplied by the GM was deleted.
+- The completed size-responsive sway from the recording task is preserved in `8a90ba3`;
+  scenery, provenance, documentation and verification are in `bd5287e`. No tag or release.
+- Live review: sandbox world `agent-poscig-20261005`, one foreground GM tab, **Ruiny Ameryki**
+  at tempo 2. Existing token artwork, user-set positions/scales and QuickScale are preserved.
+
+Technical validation is complete. The live urban preview is open for the GM's visual assessment.
