@@ -47,7 +47,10 @@ export async function countPackRecords(dir, type, installApp, { inPlace = false 
   let tmp = null;
   if (!inPlace) {
     tmp = fs.mkdtempSync(path.join(os.tmpdir(), "fvtt-pack-"));
-    for (const f of fs.readdirSync(dir)) if (f !== "LOCK") fs.copyFileSync(path.join(dir, f), path.join(tmp, f));
+    // Files only — a repaired LevelDB keeps a `lost/` folder.
+    for (const f of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (f.isFile() && f.name !== "LOCK") fs.copyFileSync(path.join(dir, f.name), path.join(tmp, f.name));
+    }
     target = tmp;
   }
   const ClassicLevel = classicLevel(installApp);

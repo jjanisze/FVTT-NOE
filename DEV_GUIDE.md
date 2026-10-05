@@ -433,7 +433,7 @@ Szukaj narzędzi MCP przez `tool_search` z query `mcp foundry`. Nazwy zaczynają
 |------|---------|
 | `neuroshima_5e_modifications.md` | Pełny plan nadpisań (aktualny plik) |
 | `A-README-AI.md` | Kontekst kampanii, frakcje, fabuła |
-| `Tabele/Dostepnosc.md` | Dostępność przedmiotów per lokacja |
+| `Tabele/Sklepy/Dostepnosc.md` | Dostępność przedmiotów per lokacja |
 | `Podrecznik/NOE/` | Treść podręcznika (jedyne źródło RAW; `README.md` + `INDEKS.md` w środku) |
 | `dnd5e.mjs` | Compiled source dnd5e (grep-friendly) |
 | `lang/en.json` | Klucze lokalizacyjne dnd5e |
@@ -740,8 +740,9 @@ w spisane Cechy Bazowe. Na karcie nic się nie zmienia; zmienia się to, gdzie t
 Jeśli kiedyś odpalasz to na postaci zbudowanej **bez** wliczonej premii, cechy spadną o 1 —
 wtedy podnieś je ręcznie po migracji.
 
-Manifest cofania: `dev/backup/pochodzenia-migracja-2026-08-23.json` (cechy przed + pełne
-`toObject()` skasowanych feat'ów).
+Manifest cofania — usunięty z repo 2026-08-30 (`dev/backup/pochodzenia-migracja-2026-08-23.json`):
+cechy przed + pełne `toObject()` skasowanych feat'ów; wyjęty razem z innymi danymi graczy przed
+upublicznieniem, jest tylko w historii git (commit `1eb9a7a`).
 
 ### 10d.3 Dlaczego migracja klika w UI
 

@@ -51,9 +51,9 @@ function lockPackage(dir, id) {
 /** Copy a LevelDB folder without its LOCK (held while the source server runs). */
 function copyDb(src, dst) {
   fs.mkdirSync(dst, { recursive: true });
-  for (const f of fs.readdirSync(src)) {
-    if (f === "LOCK") continue;
-    fs.copyFileSync(path.join(src, f), path.join(dst, f));
+  for (const f of fs.readdirSync(src, { withFileTypes: true })) {
+    if (!f.isFile() || f.name === "LOCK") continue; // files only — a repaired LevelDB keeps a `lost/` folder
+    fs.copyFileSync(path.join(src, f.name), path.join(dst, f.name));
   }
 }
 

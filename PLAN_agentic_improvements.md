@@ -351,5 +351,19 @@ catching what the GM catches today. S4 must be green before the next release is 
   (2) a fresh world is imperial, so on a new install Udźwig came out in pounds (8 Quench tests red
   in the release sandbox) — GM decision: the module switches dnd5e to metric on the GM's first
   ready. dnd5e `minimum` → 5.3.0 (= verified). RELEASING.md rewritten around the gate.
+- **S5 done** (2026-10-05) — **done-when met: 0 dead references** in 21 instruction files (1 551
+  references) by the vault's `Integracje/agent-retro/check_doc_paths.mjs`. `AGENTS.md` here and in
+  the agent root of the vault (`neuro5e/AGENTS.md`, imported by `CLAUDE.md` via `@AGENTS.md`, linked
+  from copilot-instructions, a pointer at the vault root for Codex/Copilot sessions started there);
+  pipelines index in both. `CLAUDE.md` 122 → 62 lines, Chrome troubleshooting → `fvtt doctor`.
+  Generated source map: `dev/agent/index-sources.mjs` → vault `.github/skills/fvtt-source-map.md`
+  (652 core + 342 dnd5e classes); `fvtt-api` skill fixed to v14 names. Stale references fixed: loot
+  generator paths (and the script's own default, which made a bare run fail), DEV_GUIDE, roll20,
+  the "not yet done" release bootstrap. foundry-mcp (§5 H): `foundry_status`, optional `world` on
+  read tools (sandbox/release worlds, read-only), reads from a snapshot while Foundry holds the
+  world, writes refused then (and no backup left behind). Memory: login/restart rules, runtime
+  mode, foundry-mcp lock as history, CDP memories → `fvtt doctor`. Not done: a `python3` shim in
+  the user's shell profile (documented instead), the optional MCP wrapper over `fvtt`, Codex MCP
+  exposure (needs the GM's go-ahead: it writes the Chrome endpoint into Codex's own config).
 - Still open in S0: the Claude Code allow rule (human — README "One-time setup").
 - Next: S3 (Layer 6 suites — playwright-core is a new dev dependency), S4, S5, S6.
