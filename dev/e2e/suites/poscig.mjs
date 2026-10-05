@@ -211,8 +211,8 @@ export default {
           const select=document.querySelector('select[name="motyw"]'),form=select.form;
           select.value=theme;[...form.querySelectorAll('button')].find(b=>b.textContent.includes('Zastosuj')).click();
         },theme);
-        await t.waitFor(t.gm,theme=>game.neuroshima.poscig.tlo.stats().theme===theme,{args:[theme],message:"GM theme rebuild"});
-        await t.waitFor(player,theme=>game.neuroshima.poscig.tlo.stats().theme===theme,{args:[theme],message:"player theme rebuild"});
+        await t.waitFor(t.gm,theme=>{const s=game.neuroshima.poscig.tlo.stats();return s.theme===theme&&s.ready;},{args:[theme],message:"GM theme artwork loaded"});
+        await t.waitFor(player,theme=>{const s=game.neuroshima.poscig.tlo.stats();return s.theme===theme&&s.ready;},{args:[theme],message:"player theme artwork loaded"});
         await t.screenshot("gm",theme);await t.screenshot("Gracz 1",theme);
         await t.gm.send("Page.bringToFront");
         await t.gm.send("HeapProfiler.collectGarbage");

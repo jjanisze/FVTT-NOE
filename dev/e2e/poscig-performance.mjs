@@ -35,13 +35,13 @@ export async function measure({ duration = 60000 } = {}) {
   if (hidden) throw new Error("Tab left the foreground during performance sampling");
   const elapsed = prior - start;
   const sorted = Array.from(frames.subarray(0, count)).sort((a, b) => a - b);
-  const layer = canvas.primary.children.find(c => c.sortLayer === 100);
+  const layers = canvas.primary.children.filter(c => c.neuroshimaPoscig || c.sortLayer === 100);
   const bases = new Set();
   function textures(c) {
     if (c.texture?.baseTexture) bases.add(c.texture.baseTexture);
     for (const child of c.children ?? []) textures(child);
   }
-  if (layer) textures(layer);
+  for (const layer of layers) textures(layer);
   const textureBytes = [...bases].reduce((n, b) => n + b.realWidth * b.realHeight * 4 * (b.mipmap ? 4 / 3 : 1), 0);
   return {
     elapsedMs: elapsed, frames: count, fps: count * 1000 / elapsed, raf,
