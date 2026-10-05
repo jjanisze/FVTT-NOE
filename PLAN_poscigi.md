@@ -910,5 +910,86 @@ Validation and local evidence:
 - Implementation commit: `7c03420`; verification commit: `9850a6c`. No tag or publication.
 - Review preview: sandbox world `agent-poscig-20261005`, one GM tab, Nevada at normal tempo.
 
-The technical result is complete. Screenshots and scrolling evidence are supplied for the GM's
-visual assessment; the automated checks do not establish aesthetic acceptance.
+The GM subsequently accepted this bitmap revision and requested the streamed variety iteration
+recorded below. Automated checks establish technical behaviour; visual acceptance came from the GM.
+
+## Nevada streamed variety — hand-back (2026-10-06)
+
+Implemented §2.2c. Four road surfaces, four landscape plates, twenty foreground props, four
+ground overlays and four dust wisps provide **36 artwork choices** across fifteen WEBPs.
+Ten new images were generated with OpenAI's built-in image-generation tool, using the accepted
+camera, palette and light direction as references. The exact prompts and targeted overlay edit
+are in `dev/art/poscig-nevada/variety-prompts.json`. Shipped bitmaps live in
+`ui/poscig/themes/pustynia/`; the complete on-disk pool is 13,496,956 bytes (12.87 MiB).
+Strips remain natively 1774×887 and prop/overlay sheets 1254×1254. Vehicle artwork is unchanged.
+
+`dev/art/poscig-nevada/catalog.json` is the editable source of truth. Its packer converts
+approved images, records alpha bounds and validates references; rebuilding from the canonical
+WEBPs leaves their pixels untouched. An extension adds artwork and catalog metadata, without
+editing the renderer. The tested production pool has fifteen files, rather than thousands;
+a separate controlled Node test exercises the cache across a thousand entries.
+
+`poscig-route.mjs` chooses stable shuffled bags by scene ID and travel distance. Four broad
+terrain recipes alternate every 24,000 ground-travel units. Road, overlays, dust, plants and
+structures have independent spacing. Plants and structures retain the two accepted near-layer
+rates, 1.28× and 1.72×; cropped bases stay outside the panel. New chases use tempo 2, while saved
+explicit tempos remain intact. Pointer exclusion, vehicle artwork and chase rules are preserved.
+
+`poscig-textures.mjs` and `poscig-nevada.mjs` load only visible resources plus spatial lookahead,
+with two concurrent loads, GPU upload before use and disposal of unused owned bases. The prior
+visible set remains intact until replacements are ready. Viewport culling avoids loading absent
+props; asynchronous teardown cancels image requests and prevents obsolete results attaching.
+Permutation metadata uses bounded caches. Texture memory depends on native sizes and the visible
+working set, rather than the total on-disk catalog; there is no fixed runtime MiB cap.
+
+The 180-second foreground recording at tempo 2 visited all four terrain recipes and showed all
+36 choices. It completed 85 texture loads and 71 evictions, ended with fourteen resident bases
+and recorded **zero loading-stall frames**. One-second resident samples ranged from 62.0 to
+100.0 MiB; the cache's continuous high-water counter recorded 106.0 MiB during transitions.
+These are owned scenery texture estimates. The separate performance sampler also counts chase
+UI/textures and every prefetched base. Stored vehicle coordinates and rotation stayed identical.
+
+Final foreground performance: 2203×1256 viewport, twelve columns, six swaying vehicles and two
+negative controls, sixty seconds per theme at tempo 2:
+
+| Renderer | Rendered FPS | p95 frame ms | Chase textures MiB at endpoint | Scroll + sway ms/frame |
+|---|---:|---:|---:|---:|
+| Original baseline, stationary vehicles | 59.17 | 27.6 | 7.41 | — |
+| Nevada streamed variety | 58.79 | 27.6 | 78.30 | 0.080 |
+| Suburbs, unchanged art | 59.22 | 25.9 | 14.41 | 0.029 |
+| Winter, unchanged art | 59.22 | 21.4 | 14.38 | 0.050 |
+
+Nevada rendered FPS is within one percent of the recorded original baseline. Texture residency
+exceeds the old 48 MiB recommendation and p95 exceeds 20 ms, as the baseline does. Both budgets
+remain advisory under the GM's instruction. The measured 106 MiB scenery peak is the useful
+current-catalog envelope; compressed WEBP download sizes do not represent VRAM usage.
+
+Validation and local evidence:
+- `npm test`: 22 Quench batches registered and four scenery tests green. The latter cover
+  deterministic thousand-entry shuffle bags, terrain recipes, a thousand-entry cache with only
+  four resident textures, eviction and canceled queued/in-flight loads.
+- `fvtt e2e --suites=boot,combat,nevada-art,nevada-stream,poscig --quench --reuse`: all suites
+  green, Quench 771/771, no client console errors. Temporary world cleaned up.
+  Report: `logs/e2e/2026-10-05T21-38-08/report.json`.
+- After final cold-load cancellation hardening, `boot,nevada-art` and Quench 771/771 passed again,
+  with no console errors: `logs/e2e/2026-10-05T21-52-45/report.json`. This verifies all owned
+  prefetched bases are destroyed, including rapid theme changes. The steady-state renderer is
+  unchanged from the full recording.
+- Real GM/player mouse checks pass through opaque and transparent foreground: selection, HUD,
+  sheet, targeting, normal drag, drag into foreground and Shift drag. Pan/zoom cropping is checked
+  at 0.35, 0.65 and 0.85. Existing snapping, recentering, stop/resume and sway checks pass.
+- Performance and cache telemetry: `poscig-performance.json` and `nevada-stream.json` under
+  `logs/e2e/2026-10-05T21-38-08/`. That directory contains four region screenshots,
+  `nevada-variety-contact.webp` and `nevada-variety-3min-review.webm` (180.15 seconds).
+  The review video is a lossless container remux of the raw recording, adding duration/seek
+  metadata; artwork and frames are unchanged.
+- Catalog rebuild preserves all asset dimensions, alpha frames and selection groups.
+  Documentation path check: 1,553 references, zero dead.
+- `npm run release:check -- --skip-sandbox`: static checks including the four scenery tests,
+  generators, ZIP, packs and versions green on `cb3604a`. Live sandbox coverage is recorded above.
+  Release report: `logs/release/0.17.1-2026-10-05T22-01-10.json`.
+- Implementation commit: `2bfd551`; verification commit: `cb3604a`. No tag or publication.
+- Review preview: sandbox world `agent-poscig-20261005`, one GM tab, Nevada at tempo 2.
+
+The implementation and technical checks are complete. The live preview, region screenshots and
+three-minute recording are available for the GM's visual assessment of this variety iteration.
