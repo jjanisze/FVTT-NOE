@@ -12,6 +12,7 @@ let _textures = [], _particles = [], _scroll = 0;
 let _cost = 0, _frames = 0, _maxCost = 0;
 let _nevada = null, _labels = null, _generation = 0, _error = null;
 let _distance = 0;
+let _loadController = null;
 
 function remember(texture) { _textures.push(texture); return texture; }
 
@@ -93,7 +94,8 @@ function build() {
     _labels.eventMode = "none"; _labels.interactiveChildren = false; _labels.neuroshimaPoscig = true;
     _labels.elevation = 0; _labels.sortLayer = 900; _labels.sort = 0;
     canvas.primary.addChild(_labels);
-    createNevada(scene, _distance).then(art => {
+    _loadController = new AbortController();
+    createNevada(scene, _distance, _loadController.signal).then(art => {
       if (generation !== _generation) { art.destroy(); return; }
       _nevada = art;
       canvas.primary.addChild(art.ground, art.front); canvas.primary.sortChildren();
@@ -125,6 +127,7 @@ function destroy() {
   _generation++; _error = null;
   _ticker?.remove(tick, null); _ticker = null;
   _nevada?.destroy(); _nevada = null;
+  _loadController?.abort(); _loadController = null;
   _labels?.destroy({children:true}); _labels = null;
   if (_layer && !_layer.destroyed) _layer.destroy({ children: true });
   _layer = null;
@@ -135,12 +138,12 @@ function destroy() {
 function tick() {
   if (!_sprites && !_nevada) return;
   const begin = performance.now(), flag = poscigFlag();
-  const speed = Math.max(0, Number(flag?.tempoTla ?? 1) || 0);
+  const speed = Math.max(0, Number(flag?.tempoTla ?? 2) || 0);
   const dt = Math.min(canvas.app.ticker.deltaMS, 50) / 1000;
-  const delta = BASE_SPEED * speed * dt;
+  const requested = BASE_SPEED * speed * dt;
+  const delta = _nevada ? _nevada.tick(requested) : requested;
   _distance += delta;
   _scroll = (_scroll + delta) % 8192;
-  _nevada?.tick(delta);
   if (_sprites) {
     _sprites.far.tilePosition.x = -_scroll * _theme.far.parallax;
     _sprites.mid.tilePosition.x = -_scroll * _theme.mid.parallax;

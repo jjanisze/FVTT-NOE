@@ -167,7 +167,7 @@ export async function oknoUstawienia(scene = canvas?.scene) {
     + _grupa("ST Testu Pościgu", _liczba("st", flaga.st, { min: 0, max: 30 }),
       "Domyślnie ze środowiska — nadpisz, jeśli scena tego wymaga.")
     + _grupa("Runda", _liczba("runda", flaga.runda, { min: 1 }))
-    + _grupa("Tempo tła", _liczba("tempoTla", flaga.tempoTla ?? 1, { min: 0, max: 4, step: 0.1 }),
+    + _grupa("Tempo tła", _liczba("tempoTla", flaga.tempoTla ?? 2, { min: 0, max: 4, step: 0.1 }),
       "Prędkość przewijania tła i kołysania pojazdów. 0 zatrzymuje obraz; nie wpływa na mechanikę.")
     + `<hr><fieldset><legend>Dostaw pojazd</legend>`
     + _grupa("Pojazd", _pojazdySelect("dodaj", { rozmiar: 4 }))

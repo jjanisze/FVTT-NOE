@@ -1,21 +1,25 @@
 {
+  "version": 2,
   "cameraDegrees": 45,
   "generator": "OpenAI built-in image generation",
   "images": {
     "ground": {
       "file": "ground.webp",
       "width": 1774,
-      "height": 887
+      "height": 887,
+      "role": "road"
     },
     "hills": {
       "file": "hills.webp",
       "width": 1774,
-      "height": 887
+      "height": 887,
+      "role": "hill"
     },
     "plants": {
       "file": "plants.webp",
       "width": 1254,
       "height": 1254,
+      "role": "atlas",
       "frames": {
         "joshua": [
           22,
@@ -47,6 +51,7 @@
       "file": "structures.webp",
       "width": 1254,
       "height": 1254,
+      "role": "atlas",
       "frames": {
         "sign": [
           128,
@@ -78,6 +83,7 @@
       "file": "dust.webp",
       "width": 1774,
       "height": 887,
+      "role": "atlas",
       "frames": {
         "dust-1": [
           22,
@@ -104,6 +110,433 @@
           388
         ]
       }
+    },
+    "road-patched": {
+      "file": "road-patched.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "road"
+    },
+    "road-sand": {
+      "file": "road-sand.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "road"
+    },
+    "road-eroded": {
+      "file": "road-eroded.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "road"
+    },
+    "land-valley": {
+      "file": "land-valley.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "hill"
+    },
+    "land-foothills": {
+      "file": "land-foothills.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "hill"
+    },
+    "land-mesas": {
+      "file": "land-mesas.webp",
+      "width": 1774,
+      "height": 887,
+      "role": "hill"
+    },
+    "plants-b": {
+      "file": "plants-b.webp",
+      "width": 1254,
+      "height": 1254,
+      "role": "atlas",
+      "frames": {
+        "yucca-crown": [
+          23,
+          4,
+          648,
+          723
+        ],
+        "dry-thicket": [
+          671,
+          9,
+          575,
+          718
+        ],
+        "broken-cactus": [
+          47,
+          727,
+          624,
+          527
+        ],
+        "forked-tree": [
+          671,
+          727,
+          577,
+          527
+        ]
+      }
+    },
+    "structures-b": {
+      "file": "structures-b.webp",
+      "width": 1254,
+      "height": 1254,
+      "role": "atlas",
+      "frames": {
+        "arrow-sign": [
+          39,
+          33,
+          588,
+          580
+        ],
+        "guardrail": [
+          627,
+          30,
+          613,
+          584
+        ],
+        "billboard": [
+          36,
+          628,
+          586,
+          626
+        ],
+        "beam-roof": [
+          631,
+          640,
+          609,
+          614
+        ]
+      }
+    },
+    "structures-c": {
+      "file": "structures-c.webp",
+      "width": 1254,
+      "height": 1254,
+      "role": "atlas",
+      "frames": {
+        "windpump": [
+          97,
+          8,
+          530,
+          638
+        ],
+        "triangle-sign": [
+          627,
+          17,
+          603,
+          617
+        ],
+        "roof-b": [
+          21,
+          646,
+          606,
+          608
+        ],
+        "crossarm-b": [
+          627,
+          646,
+          612,
+          608
+        ]
+      }
+    },
+    "decals": {
+      "file": "decals.webp",
+      "width": 1254,
+      "height": 1254,
+      "role": "atlas",
+      "frames": {
+        "sand-drift": [
+          40,
+          159,
+          587,
+          449
+        ],
+        "tar-patch": [
+          627,
+          241,
+          603,
+          375
+        ],
+        "oil-stain": [
+          28,
+          748,
+          599,
+          439
+        ],
+        "skid-marks": [
+          627,
+          734,
+          596,
+          451
+        ]
+      }
+    }
+  },
+  "groups": {
+    "roads": [
+      "ground",
+      "road-patched",
+      "road-sand",
+      "road-eroded"
+    ],
+    "landscapes": {
+      "open": [
+        "land-valley",
+        "land-foothills"
+      ],
+      "foothills": [
+        "land-foothills",
+        "land-valley",
+        "hills"
+      ],
+      "mesas": [
+        "land-mesas",
+        "land-valley",
+        "land-foothills"
+      ],
+      "broken": [
+        "hills",
+        "land-mesas",
+        "land-foothills"
+      ]
+    },
+    "plants": [
+      "joshua",
+      "dead-tree",
+      "cholla",
+      "sagebrush",
+      "yucca-crown",
+      "dry-thicket",
+      "broken-cactus",
+      "forked-tree"
+    ],
+    "structures": [
+      "sign",
+      "pole",
+      "roof",
+      "frame",
+      "arrow-sign",
+      "guardrail",
+      "billboard",
+      "beam-roof",
+      "windpump",
+      "triangle-sign",
+      "roof-b",
+      "crossarm-b"
+    ],
+    "decals": [
+      "sand-drift",
+      "tar-patch",
+      "oil-stain",
+      "skid-marks"
+    ],
+    "dust": [
+      "dust-1",
+      "dust-2",
+      "dust-3",
+      "dust-4"
+    ]
+  },
+  "props": {
+    "joshua": {
+      "atlas": "plants",
+      "frame": "joshua",
+      "height": 285,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "dead-tree": {
+      "atlas": "plants",
+      "frame": "dead-tree",
+      "height": 290,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "cholla": {
+      "atlas": "plants",
+      "frame": "cholla",
+      "height": 195,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "sagebrush": {
+      "atlas": "plants",
+      "frame": "sagebrush",
+      "height": 150,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "sign": {
+      "atlas": "structures",
+      "frame": "sign",
+      "height": 330,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "pole": {
+      "atlas": "structures",
+      "frame": "pole",
+      "height": 310,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "roof": {
+      "atlas": "structures",
+      "frame": "roof",
+      "height": 255,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "frame": {
+      "atlas": "structures",
+      "frame": "frame",
+      "height": 270,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "dust-1": {
+      "atlas": "dust",
+      "frame": "dust-1",
+      "height": 65,
+      "crop": 1,
+      "alpha": 0.1
+    },
+    "dust-2": {
+      "atlas": "dust",
+      "frame": "dust-2",
+      "height": 65,
+      "crop": 1,
+      "alpha": 0.1
+    },
+    "dust-3": {
+      "atlas": "dust",
+      "frame": "dust-3",
+      "height": 65,
+      "crop": 1,
+      "alpha": 0.1
+    },
+    "dust-4": {
+      "atlas": "dust",
+      "frame": "dust-4",
+      "height": 65,
+      "crop": 1,
+      "alpha": 0.1
+    },
+    "yucca-crown": {
+      "atlas": "plants-b",
+      "frame": "yucca-crown",
+      "height": 260,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "dry-thicket": {
+      "atlas": "plants-b",
+      "frame": "dry-thicket",
+      "height": 230,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "broken-cactus": {
+      "atlas": "plants-b",
+      "frame": "broken-cactus",
+      "height": 280,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "forked-tree": {
+      "atlas": "plants-b",
+      "frame": "forked-tree",
+      "height": 270,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "arrow-sign": {
+      "atlas": "structures-b",
+      "frame": "arrow-sign",
+      "height": 300,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "guardrail": {
+      "atlas": "structures-b",
+      "frame": "guardrail",
+      "height": 210,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "billboard": {
+      "atlas": "structures-b",
+      "frame": "billboard",
+      "height": 285,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "beam-roof": {
+      "atlas": "structures-b",
+      "frame": "beam-roof",
+      "height": 250,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "windpump": {
+      "atlas": "structures-c",
+      "frame": "windpump",
+      "height": 310,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "triangle-sign": {
+      "atlas": "structures-c",
+      "frame": "triangle-sign",
+      "height": 290,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "roof-b": {
+      "atlas": "structures-c",
+      "frame": "roof-b",
+      "height": 270,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "crossarm-b": {
+      "atlas": "structures-c",
+      "frame": "crossarm-b",
+      "height": 290,
+      "crop": 0.78,
+      "alpha": 1
+    },
+    "sand-drift": {
+      "atlas": "decals",
+      "frame": "sand-drift",
+      "height": 180,
+      "crop": 1,
+      "alpha": 0.45
+    },
+    "tar-patch": {
+      "atlas": "decals",
+      "frame": "tar-patch",
+      "height": 180,
+      "crop": 1,
+      "alpha": 0.45
+    },
+    "oil-stain": {
+      "atlas": "decals",
+      "frame": "oil-stain",
+      "height": 180,
+      "crop": 1,
+      "alpha": 0.45
+    },
+    "skid-marks": {
+      "atlas": "decals",
+      "frame": "skid-marks",
+      "height": 180,
+      "crop": 1,
+      "alpha": 0.45
     }
   }
 }

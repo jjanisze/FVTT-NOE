@@ -60,7 +60,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | Próg obrażeń, pochwycenie, wytrącenie, udźwig, typy obrażeń | ✅ | |
 | | Niszczenie obiektów, broń improwizowana (reguła ogólna), latanie | ❌ | M6 (Pochodnia to jedyny przykład broni improwizowanej) |
 | | Walka na wierzchowcu, pływanie, skakanie | ❌ | M6 — karta referencyjna |
-| Pojazdy i pościgi | 14 podwozi, plansza pościgu, przyciąganie i recentrowanie, trzy motywy, kierunek pojazdów, kołysanie | ✅ | `config/vehicles-data.mjs`, `scenes/poscig*.mjs`; niezależne motywy; Nevada: bitmapy, kamera 45°, dwie warstwy pierwszego planu przepuszczające wejście; obrót dokumentu w pasie, animacja siatki graficznej per użytkownik; `docs/Poscigi.md` |
+| Pojazdy i pościgi | 14 podwozi, plansza pościgu, przyciąganie i recentrowanie, trzy motywy, kierunek pojazdów, kołysanie | ✅ | `config/vehicles-data.mjs`, `scenes/poscig*.mjs`; niezależne motywy; Nevada: strumieniowany katalog bitmap, cztery drogi i krajobrazy, 20 elementów pierwszego planu, kamera 45°, wejście przepuszczane; domyślne tempo 2; obrót dokumentu w pasie, animacja siatki graficznej per użytkownik; `docs/Poscigi.md` |
 | | Karta pojazdu, manewry, awarie k20, komplikacje, wsiadanie/wypadanie | ❌ | M4, `PLAN_poscigi.md` §10 |
 
 ## Files

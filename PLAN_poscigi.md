@@ -173,7 +173,7 @@ z zaleceniami bez narzucania tego limitu. Wyniki są w lokalnych `logs/e2e/`.
 
 ### 2.2b Nevada bitmap art revision — plan (2026-10-05)
 
-**Status: implemented, technical checks green; visual review remains with the GM.** The GM rejected the visual result of §2.2a: inconsistent
+**Status: implemented, technical checks green; the GM accepted the artwork.** The GM rejected the visual result of §2.2a: inconsistent
 perspective, a straight join between overhead terrain and a side-on skyline, geometric cartoon
 art, and fast foreground rocks visibly sliding over slower ground. Technical validation in the
 hand-back below remains useful, but does not establish visual acceptance. This section supersedes
@@ -302,6 +302,37 @@ then run the chase end-to-end suite to protect existing behaviour. Perform one f
 baseline and reporting FPS, p95 and resident texture memory. Check a theme switch and scene teardown
 for leaked layers/textures; verify suburbs and winter still use their existing art. Record visual
 review separately from technical test results. Completion requires both.
+
+### 2.2c Nevada streamed variety — approved and implemented (2026-10-05)
+
+The GM accepted §2.2b and requested slower, broader visual changes: varied hills and valleys,
+multiple road sections, more foreground assets and default tempo **2**. The approved approach
+keeps a potentially large pool on disk and streams a small visible working set plus lookahead.
+Vehicle artwork and chase mechanics remain outside this revision.
+
+- Four landscape plates form long stretches of open desert, foothills, mesas and broken terrain.
+  A terrain recipe changes every 24,000 ground-travel units, about 46 seconds at tempo 2.
+- Four road surfaces share bitmap connector pixels, preserving roadway geometry across sections.
+  Ground overlays and dust have separate spacing; grounded detail moves with the road.
+- Twenty foreground choices use deterministic shuffled bags, irregular spacing and modest uniform
+  scale variation. Both near layers keep their bases outside the panel and exclude pointer input.
+- A scene-ID/distance seed makes the route stable across renderer rebuilds and recentering.
+  Shuffle bags avoid immediate repetition and eventually use every asset in a selection group.
+- An editable catalog defines assets, alpha regions and selection groups. The packer validates
+  references and builds the runtime manifest. Adding approved art needs no renderer changes.
+- Viewport culling and spatial lookahead limit decoded/uploaded textures. At most two loads run
+  concurrently; obsolete results are discarded and unused owned bases are destroyed. On slow
+  loading, the current scenery holds until the incoming visible set is ready.
+- Theme changes and teardown abort pending image requests and dispose the whole working set.
+  New chases default to tempo 2; saved explicit tempos remain intact.
+
+All new bitmap art comes from the built-in image model, following the accepted approximately
+45-degree camera and upper-left sun. Runtime seam blending uses those pixels; no new scenery is
+drawn procedurally. Native asset dimensions and the visible viewport determine the working-set
+memory requirement; the recommendation is not an artificial hard VRAM cap.
+
+The completed run and measured memory envelope are recorded in the variety hand-back below.
+Visual evidence accompanies technical checks for the GM's assessment of this iteration.
 
 ### 2.3 Tory (cel 2)
 

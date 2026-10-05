@@ -195,7 +195,7 @@ export function daneSceny({ nazwa, tory, srodowisko, motyw = MOTYW_DOMYSLNY }) {
           // Przesunięcie logiczne pola przy recentrowaniu: numer podręcznikowy toru 1.
           // Trzymane osobno, żeby przenumerowanie planszy nigdy nie gubiło warunku końca.
           offset: 0,
-          tempoTla: 1
+          tempoTla: 2
         }
       }
     }

@@ -50,7 +50,7 @@ function beforeFrame() { for (let i = 0; i < active.length; i++) restore(active[
 
 function afterFrame() {
   const begin = performance.now();
-  const tempo = poscigFlag()?.tempoTla ?? 1;
+  const tempo = poscigFlag()?.tempoTla ?? 2;
   time += Math.min(ticker.deltaMS, 50) / 1000;
   for (let i = 0; i < active.length; i++) {
     const entry = active[i];
