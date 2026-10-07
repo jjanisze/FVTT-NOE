@@ -122,6 +122,16 @@ wyłączonymi (`configure: false`) i kośćmi ustawionymi `CONFIG.Dice.randomUni
 dnd5e, granat leci przez prawdziwy przycisk karty i prawdziwe kliknięcie w kanwę (`clickCanvas`).
 Każdy krok paczki `combat` to błąd, który wcześniej znalazł MG — i to jest sprawdzone: po
 przywróceniu starego haka Zranienia albo natychmiastowego wybuchu granatu paczka robi się czerwona.
+Paczka `umieranie` (MG + dwóch graczy) prowadzi zejście do 0 PW, cios wręcz BN w leżącego, rzuty
+przeciw śmierci graczy, stabilizację przyciskiem karty w czacie drugiego gracza (przekaźnik MG),
+stazę z kompendium, zegar świata i karty „Śmierć” / „BN pada”. Klient gracza klika przycisk karty
+i — jak gracz — „Normal” w oknie rzutu dnd5e (`clickCard({ dialog })`). Też sprawdzona mutacjami.
+Paczka `rekonwalescencja` (MG + dwóch graczy) przechodzi całą pętlę dwa razy, bez Kobaltu i z nim:
+pipki Wyczerpania na karcie, okno Długiego odpoczynku gracza z sekcją Rekonwalescencja (Pomoc medyczna
+od drugiego gracza, blokada zajęć u obojga w WKK, ładunek przez przekaźnik MG), karta RO w czacie
+właściciela, kalendarzyk z panelu Stan i samoleczenie. Paczka `zagrozenia` to przebieg MG: zaznaczone
+żetony i prawdziwy przycisk w kontrolkach, Fuks gracza na rzucie MG (sprawdzony mutacją), „w cieple”
+w oknie DO gracza, Uduszenie w prawdziwej walce i „Złap oddech” w panelu Stan.
 
 **Reguła:** zmiana dotykająca UI, kanwy, walki, dialogów albo uprawnień graczy nie jest skończona,
 dopóki przebieg warstwy 6 (albo skryptowe sprawdzenie w piaskownicy) tego nie pokaże — ze zrzutem
@@ -262,6 +272,12 @@ Uruchamiaj przed każdym przeładowaniem świata. Jest natychmiastowy.
 | `sztuczki-most` | kontrakty nazw między Sztuczkami a kodem, który ich szuka |
 | `sztuczki-walka` | predykaty trybów ognia i magazynków |
 | `lalka` | lalka (`PLAN_paper_doll.md`): taksonomia slotów, klasyfikacja, `resolve()` (zamiany, wypieranie, pytania, D27, utrata pojemności), zużycie, koszty ruchów, chwyt na ataku, paczki ziemi i `dropsAs`; lejek na prawdziwym aktorze (`equipped` = aktywny, przekierowanie, kopie, partia zapisów) |
+| `umieranie` | czyste zasady umierania (`PLAN_m1_walka.md` E0): porażki przy 0 PW, Olbrzymie obrażenia, maks. PW 0, Rzut Przeciw Śmierci, stan maszyny, zagrożenia. Haki i karty — e2e `umieranie` (warstwa 6) |
+| `okolicznosci` | silnik okoliczności Testu Ataku (`PLAN_m1_walka.md` E3–E4): zasięg, zwarcie z filtrem „widzi cię”, stany atakującego i celu, Unikanie, Bieganie, kilka celów, źródła z rejestru, automatyczne TK i jego wejście do `resolveHit`. Migawka z żywej sceny i plakietki — e2e `combat` |
+| `wyczerpanie` | Wyczerpanie na żywym aktorze (`PLAN_m1_walka.md` E5): lejek zapisu (F15), Długi odpoczynek wg kolejności U14, uporczywe Odwodnienie i jego znacznik, WKK, „w cieple”, zejście z Krytycznego (RAI), złapanie oddechu |
+| `rekonwalescencja-dzien` | jeden DO rannego (E6): Gojenie i karta RO, porażka i przerzut, Pomoc medyczna (BN, medyk drużyny w NOE i WKK, pusta torba, brak biegłości), blokada zajęć (D7), samoleczenie, kalendarzyk z żywego aktora (także z chorobą); choroba z dziennym RO — DO bez korzyści, KO odwołany, Zachód słońca z karą za Wyczerpanie i blokadą na dobę gry, migracja dni na sucho. Okno DO i karta w czacie — e2e `rekonwalescencja` |
+| `zagrozenia` | zagrożenia (E7): mróz (ST z temperatury, ciepło ubrany, śpiwór, koc), doba bez snu i Fuks, Uduszenie (faza, koniec tury, obrażenia, złapanie oddechu). Narzędzie MG i prawdziwa walka — e2e `zagrozenia` |
+| `rekonwalescencja` | czyste zasady powrotu do zdrowia: reguły zdejmowania Wyczerpania (NOE/RAI/WKK), kolejność DO, licznik Regeneracji, szansa RO, kalendarzyk — z tabelą §7.8 planu jako wynikiem oczekiwanym |
 
 Największe niepokryte obszary (kolejni kandydaci): pochodzenia, manewry, zasady
 podróży i zapasów, generator bestiariusza. `config/inventory-audit.mjs`

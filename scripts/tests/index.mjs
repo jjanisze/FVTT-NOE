@@ -24,6 +24,12 @@ import { registerPrzebicieTests } from "./przebicie.test.mjs";
 import { registerTTTests } from "./tt.test.mjs";
 import { registerTTKartaTests } from "./tt-karta.test.mjs";
 import { registerObronaTests } from "./obrona.test.mjs";
+import { registerUmieranieTests } from "./umieranie.test.mjs";
+import { registerRekonwalescencjaTests } from "./rekonwalescencja.test.mjs";
+import { registerOkolicznosciTests } from "./okolicznosci.test.mjs";
+import { registerWyczerpanieTests } from "./wyczerpanie.test.mjs";
+import { registerRekonwalescencjaDzienTests } from "./rekonwalescencja-dzien.test.mjs";
+import { registerZagrozeniaTests } from "./zagrozenia.test.mjs";
 import { registerConfigTests } from "./config.test.mjs";
 import { registerEquipmentDataTests } from "./ekwipunek-dane.test.mjs";
 import { registerDiseaseTests } from "./choroby.test.mjs";
@@ -64,6 +70,12 @@ export function registerQuenchTests() {
     registerTTTests(quench);
     registerTTKartaTests(quench);
     registerObronaTests(quench);
+    registerUmieranieTests(quench);
+    registerRekonwalescencjaTests(quench);
+    registerOkolicznosciTests(quench);
+    registerWyczerpanieTests(quench);
+    registerRekonwalescencjaDzienTests(quench);
+    registerZagrozeniaTests(quench);
     console.log("Neuroshima 5e | Quench batches registered");
   });
 }

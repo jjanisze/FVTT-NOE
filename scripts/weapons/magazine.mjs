@@ -2341,7 +2341,7 @@ async function _markManualReloadAfterShot(item) {
   await _setReloadState(item, {
     required: true,
     mode,
-    requiredAt: Date.now()
+    requiredAt: game.time.worldTime // czas świata (s) — w module zawsze czas gry; wpisy sprzed 2026-10-07 mają tu czas rzeczywisty (ms)
   });
 }
 

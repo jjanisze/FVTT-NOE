@@ -18,6 +18,10 @@ export default async function skirmish({ moduleId }) {
   const flag = { [moduleId]: { fixture: NAME } };
   const mine = doc => doc.getFlag(moduleId, "fixture") === NAME;
 
+  // Combats first, while their scene still exists: ending a combat clears the movement history of
+  // tokens that moved during it (`Combat#_clearMovementHistoryOnExit`) — deleting the scene first left
+  // core updating a token on a scene that was already gone ("The Scene … does not exist").
+  for (const combat of [...game.combats]) await combat.delete();
   for (const collection of [game.scenes, game.actors]) {
     const ids = collection.filter(mine).map(d => d.id);
     if (ids.length) await collection.documentClass.deleteDocuments(ids);

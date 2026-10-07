@@ -425,15 +425,32 @@ export function shouldDowngradeCrit(obrona) {
   return hits.length > 0 && hits.every(t => t.critDowngraded);
 }
 
-/** `dnd5e.preRollDamage`: rzut z karty, której trafiony cel zamienił krytyk (P9). */
-function _onPreRollDamage(config, dialog) {
-  const messageId = config?.event?.target?.closest?.("[data-message-id]")?.dataset?.messageId;
+/**
+ * Automatyczne TK (PLAN_m1_walka §7.5, s. 35): kość ataku nie była krytyczna, ale każdy trafiony cel
+ * dostał krytyk z werdyktu — Nieprzytomny / Sparaliżowany ≤ 1,5 m. Lustro `shouldDowngradeCrit`.
+ */
+export function shouldUpgradeCrit(obrona) {
+  if (!obrona || obrona.krytyk) return false;
+  const hits = (obrona.targets ?? []).map(t => verdictOfEntry(obrona, t).verdict).filter(v => v !== "pudło");
+  return hits.length > 0 && hits.every(v => v === "krytyk");
+}
+
+/**
+ * `dnd5e.preRollDamage`: rzut z karty, której trafiony cel zamienił krytyk (P9) — bez krytyka;
+ * albo karty, na której każdy trafiony cel dostał automatyczne TK — z krytykiem.
+ */
+function _onPreRollDamage(config, dialog, message) {
+  // Przycisk na karcie niesie zdarzenie; rzut z API (makro, e2e) — tylko link do karty w wiadomości.
+  const messageId = config?.event?.target?.closest?.("[data-message-id]")?.dataset?.messageId
+    ?? foundry.utils.getProperty(message ?? {}, "data.flags.dnd5e.originatingMessage")
+    ?? null;
   const obrona = obronaOf(attackMessageFor(messageId ? game.messages.get(messageId) : null));
-  if (!shouldDowngradeCrit(obrona)) return;
-  config.isCritical = false;
-  for (const r of config.rolls ?? []) { r.options ??= {}; r.options.isCritical = false; }
+  const critical = shouldDowngradeCrit(obrona) ? false : shouldUpgradeCrit(obrona) ? true : null;
+  if (critical === null) return;
+  config.isCritical = critical;
+  for (const r of config.rolls ?? []) { r.options ??= {}; r.options.isCritical = critical; }
   dialog.options ??= {};
-  dialog.options.defaultButton = "normal";
+  dialog.options.defaultButton = critical ? "critical" : "normal";
 }
 
 /* -------------------------------------------- */
@@ -682,7 +699,7 @@ export function registerObrona() {
 }
 
 /** Powierzchnia dla testów Quench (TESTING.md, warstwy 4–5). */
-export const __testing = Object.freeze({ requestProblem, shouldDowngradeCrit, attackCtx, defenseSnapshot, reactionRowsFor });
+export const __testing = Object.freeze({ requestProblem, shouldDowngradeCrit, shouldUpgradeCrit, attackCtx, defenseSnapshot, reactionRowsFor });
 
 export const obronaApi = Object.freeze({
   snapshot: defenseSnapshot, execute: executeReaction, pass: passReaction, setTargets, breakHelmet,

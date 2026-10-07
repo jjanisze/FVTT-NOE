@@ -38,6 +38,7 @@ export { ROZRYWAJACA } from "./combat/weapon-save-properties.mjs";        // →
 export { DUMDUM_BLEED_PROFILE } from "./combat/bleeding.mjs";             // → combat/bleeding.mjs
 export { stWepchniecia, wynikWepchniecia } from "./config/pojedynczy-naboj.mjs"; // → weapons/magazine.mjs
 export { dziurawyHelmData } from "./config/dziurawy-helm.mjs";            // → combat/obrona.mjs
+export { ZRANIENIE_UPORCZYWE_KOBALT, POMOC_MEDYCZNA_KOBALT } from "./config/rekonwalescencja-kobalt.mjs"; // → config/rekonwalescencja-rules.mjs (PLAN_m1_walka D5, D7, D8)
 
 // "NOE item/rule, WKK numbers" override cases — each host keeps its `..._RAW` twin.
 export { LIGHT_KOBALT } from "./config/latarka-overrides.mjs";            // → items/latarka.mjs

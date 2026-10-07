@@ -19,7 +19,7 @@
  * │ Brak wyszkolenia    Utrudnienie do Testów SIŁ/ZRC, RO i Testów Ataku.      │
  * │                     Testy i RO przez `AdvantageModeField` w derived data   │
  * │                     (dnd5e łączy je też do Umiejętności i Narzędzi),       │
- * │                     ataki przez `dnd5e.preRollAttack`.                     │
+ * │                     ataki przez silnik okoliczności ataku.               │
  * │ Kara Szybkości      SIŁA < wymaganej → Szybkość −4,5 m.                    │
  * │ Skradanie się       Właściwość `stealthDisadvantage` — przepięta na klucz   │
  * │                     `skr`. dnd5e ma na sztywno `skills.ste.roll.mode`,     │
@@ -40,6 +40,7 @@
 import { ARMORS, ARMOR_GLOBAL_MANUAL, KINETIC_DAMAGE_TYPES, LOW_STRENGTH_SPEED_PENALTY }
   from "../config/armor-data.mjs";
 import { isArmourPiercing } from "../combat/armour-piercing.mjs";
+import { zarejestrujZrodloOkolicznosci } from "../combat/okolicznosci.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -150,7 +151,7 @@ export function applyArmorPenalties(actor) {
      „Utrudnienie do każdego Testu k20 opartego na Sile lub Zręczności (w tym
      Testy Ataku i Rzuty Obronne)." Testy Umiejętności i Narzędzi łapią się same:
      `AdvantageModeField.combineFields` dokłada `abilities.<id>.check.roll.mode`
-     do każdego z nich. Ataki obsługuje `onPreRollAttack` niżej. */
+     do każdego z nich. Ataki — źródło `zrodloBrakWyszkolenia` niżej. */
   if (worn.some(i => !isProficientIn(actor, i))) {
     // `setMode(model, keyPath)` bierze model, na którym leży pole — dla ścieżek
     // bez prefiksu "system." jest to `actor.system`, dokładnie jak w
@@ -194,27 +195,22 @@ export function registerStealthExemption(predicate) {
 /* -------------------------------------------- */
 
 /**
- * Hook: `dnd5e.preRollAttack`.
- * Ustawiamy `config.disadvantage`, a nie `postBuildAttackRollConfig`, bo ten
- * drugi odpala się wyłącznie przez okno konfiguracji rzutu — atak rzucony
- * z `configure: false` by go ominął.
+ * Źródło silnika okoliczności ataku (`combat/okolicznosci.mjs`, PLAN_m1_walka D6): brak wyszkolenia
+ * w noszonym pancerzu albo tarczy → Utrudnienie do Testów Ataku opartych na SIŁ i ZRC. Dawniej własny
+ * hak `preRollAttack` z powiadomieniem — teraz domyślny tryb ustawia silnik (również przy
+ * `configure: false`), a powód stoi w grupie plakietek na karcie ataku.
+ * @param {{activity: object, actor: Actor}} ctx
  */
-function onPreRollAttack(config, _dialog, _message) {
-  const activity = config.subject;
-  const actor = activity?.actor;
-  if (!actor) return;
-
-  const ability = activity.ability ?? activity.item?.system?.ability;
-  if ((ability !== "str") && (ability !== "dex")) return;
-
+function zrodloBrakWyszkolenia(ctx) {
+  const activity = ctx?.activity;
+  const actor = ctx?.actor;
+  if (!actor) return [];
+  const ability = activity?.ability ?? activity?.item?.system?.ability;
+  if ((ability !== "str") && (ability !== "dex")) return [];
   const worn = [equippedArmor(actor), equippedShield(actor)].filter(Boolean);
   const untrained = worn.filter(i => !isProficientIn(actor, i));
-  if (!untrained.length) return;
-
-  config.disadvantage = true;
-  ui.notifications.info(
-    `Utrudnienie do Testu Ataku — brak wyszkolenia: ${untrained.map(i => i.name).join(", ")}.`
-  );
+  if (!untrained.length) return [];
+  return [{ rodzaj: "utrudnienie", label: `Brak wyszkolenia: ${untrained.map(i => i.name).join(", ")}`, strona: "s. 114" }];
 }
 
 /* -------------------------------------------- */
@@ -290,7 +286,7 @@ const AUTOMATED_RULES = [
   ["Próg obrażeń", "Hak `dnd5e.calculateDamage`; sumuje obrażenia cięte, kłute i obuchowe po odpornościach."],
   ["Odporność kinetyczna", "Efekt Aktywny przedmiotu → `system.traits.dr.value`."],
   ["Brak wyszkolenia — Testy i RO", "Tryb Utrudnienia na `abilities.str|dex.check|save.roll.mode`; obejmuje też Umiejętności i Narzędzia."],
-  ["Brak wyszkolenia — Testy Ataku", "Hak `dnd5e.preRollAttack` dla ataków opartych na SIŁ i ZRC."],
+  ["Brak wyszkolenia — Testy Ataku", "Źródło silnika okoliczności ataku (`combat/okolicznosci.mjs`) dla ataków opartych na SIŁ i ZRC."],
   ["Kara Szybkości", `SIŁA poniżej wymaganej → −${LOW_STRENGTH_SPEED_PENALTY} m do wszystkich prędkości.`],
   ["Skradanie się", "Właściwość `stealthDisadvantage` przepięta z natywnego `skills.ste` na neuroshimowe `skills.skr`."],
   ["TT z pancerza", "Silnik TT (`config/tt-rules.mjs`): wartość z tabeli, ZRC wg kategorii, Trening w zbroi i Obsługa pancerza; rozkład w dymku TT."],
@@ -328,7 +324,7 @@ export function report() {
 
 export function registerArmorRules() {
   patchPrepareDerivedData();
-  Hooks.on("dnd5e.preRollAttack", onPreRollAttack);
+  zarejestrujZrodloOkolicznosci("pancerzBezWyszkolenia", zrodloBrakWyszkolenia);
   Hooks.on("dnd5e.calculateDamage", onCalculateDamage);
   Hooks.on("updateItem", onUpdateItemArmorWarning);
 

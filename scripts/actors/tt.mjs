@@ -245,9 +245,12 @@ function _configureArmorClasses() {
 /*  Efekty do początku następnej tury (§4.5)     */
 /* -------------------------------------------- */
 
-/** Efekt TT trwający do początku tury właściciela: Unikanie albo nasza flaga. */
+/**
+ * Efekt trwający do początku tury właściciela: Unikanie, Bieganie (PLAN_m1_walka U8) albo nasza flaga TT.
+ */
 export function isTurnLongTTEffect(effect) {
-  return !!effect?.statuses?.has?.("dodging") || effect?.getFlag?.(MODULE_ID, TT_EFFECT_FLAG) != null;
+  return !!effect?.statuses?.has?.("dodging") || !!effect?.statuses?.has?.("bieganie")
+    || effect?.getFlag?.(MODULE_ID, TT_EFFECT_FLAG) != null;
 }
 
 /** Kombatant właściciela w bieżącej, rozpoczętej walce. */

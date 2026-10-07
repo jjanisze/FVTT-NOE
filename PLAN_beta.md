@@ -94,32 +94,44 @@ Cel: tracker mówi prawdę, paczki są aktualne, otwarte decyzje zamknięte.
 
 **Gotowe gdy:** B3 i B5 spełnione, macierz zgodna z kodem.
 
-### M1 — Walka i powrót do zdrowia wg RAW (S–M) — najwyższy priorytet
+### M1 — Walka i powrót do zdrowia wg RAW (M–L) — najwyższy priorytet
 
 Cel: różnice RAW względem 5e, które dziś trzeba pamiętać przy każdej walce, a każdą ranę leczyć
-kliknięciem w piki.
+kliknięciem w piki. **Plan: [PLAN_m1_walka.md](PLAN_m1_walka.md)** (zatwierdzony 2026-10-06,
+decyzje MG D1–D10; etapy E0–E8 — wszystkie zrobione 2026-10-07). Szczegóły i rozstrzygnięcia są
+tam — poniżej tylko lista.
 
-- [ ] **Neutralizacja Stopnia Zranienia** (s. 32–33, powtórzone w Postoju s. 46)
-  - Regeneracja: licznik kolejnych Długich odpoczynków na aktorze (`dnd5e.restCompleted`,
-    `result.longRest`); po trzecim — RO na Kondycję ST 15, sukces = −1 stopień przez `setZranienie`;
-    porażka — powtórka po każdym kolejnym DO. Przerwany DO / obrażenia zerują licznik
-  - Pomoc medyczna: po DO leczący z biegłością w Medycynie i narzędziami małego medyka → −1 stopień.
-    Przycisk na karcie odpoczynku / w panelu Stan; rozwiązywanie leczącego jak w `toolkit-medyk.mjs`
-  - Testy: licznik, reset, kolejność z auto-Wyczerpaniem Krytycznego
-- [ ] **Rzuty przeciw śmierci przy obrażeniach na 0 PW** (s. 34): +1 porażka, atak wręcz +2.
-  dnd5e 5.3 tego nie robi (`actor.mjs` dopisuje porażki tylko przy rzucie)
-- [ ] **Olbrzymie obrażenia** (s. 34): jednorazowo ≥ 2× maks. PW → śmierć; maks. PW = 0 → śmierć.
-  Wykrycie + karta dla MG (natychmiastowa śmierć przeciwników przy 0 PW — ustawienie świata, RAW
-  pozwala MG ją pominąć)
-- [ ] **Stabilizacja** (s. 34) — Test INT (Medycyna) ST 10 jako akcja Pomagania; stabilny bez leczenia
+- [x] **Neutralizacja Stopnia Zranienia** (s. 32–33, powtórzone w Postoju s. 46) — 2026-10-07, E5–E6
+  - Regeneracja: licznik ukończonych DO od pierwszego Stopnia — podróż, obrażenia ani nowe Stopnie
+    go nie zerują (D3); ≥ 3 → RO na Kondycję ST 15, sukces = −1 stopień i licznik od zera, porażka —
+    powtórka po każdym następnym DO
+  - Pomoc medyczna: po DO leczący z biegłością w Medycynie i narzędziami małego medyka → −1 stopień,
+    bez testu. Bez łączenia z Regeneracją — jedna droga na DO, wybrana przed rzutem (D4).
+    WKK: kosztuje ładunek narzędzi i zajmuje leczącego i pacjenta
+  - Wyczerpanie z Krytycznego: NOE — zwykłe (DO je zdejmuje); RAI — zejście z Krytycznego je
+    zdejmuje; WKK — uporczywe do zejścia z Krytycznego (D5)
+  - Kalendarzyk zdrowia: prognoza „najszybciej / zwykle / 9 na 10” z licznika, szansy RO i medyka
+  - Wyczerpanie na karcie: uporczywe jako koło w kwadratowej ramce, przejściowe jako samo koło; tor opróżnia się od
+    prawej w kolejności zdejmowania; kolejność zdejmowania przez DO przestaje być przypadkowa
+- [x] **Rzuty przeciw śmierci przy obrażeniach na 0 PW** (s. 34) — 2026-10-07, E1: +1 porażka, atak wręcz +2.
+  dnd5e 5.3 tego nie robi (`actor.mjs` dopisuje porażki tylko przy rzucie). Rzut przeciw śmierci to
+  czysta k20 — bez premii do RO, bez Przerzutów i Fuksów (D1, F12)
+- [x] **Olbrzymie obrażenia** (s. 34) — 2026-10-07, E1: jednorazowo ≥ 2× maks. PW → śmierć; maks. PW = 0 → śmierć.
+  Śmierć BG potwierdza MG kartą (D1). BN przy 0 PW domyślnie martwi, z kartą MG „Rzuty przeciw
+  śmierci”, gdy gracze mają mieć szansę go ratować (D2)
+- [x] **Stabilizacja** (s. 34) — 2026-10-07, E2 (+ Staza) — Test INT (Medycyna) ST 10 jako akcja Pomagania; stabilny bez leczenia
   odzyskuje 1 PW po 1k8 h (zegar świata, `world-clock.mjs`). Ten sam wzorzec „Pomaganie + Medycyna
   ST 10” tamuje krwawienie w Kolorach Neuroshimy (s. 201–202, zmiana z października)
-- [ ] **Akcja Bieganie** (s. 21): +2× Szybkość do początku następnej tury, Utrudnienie do własnych
+- [x] **Akcja Bieganie** (s. 21) — 2026-10-07, E4: +2× Szybkość do początku następnej tury, Utrudnienie do własnych
   Testów Ataku, ataki dystansowe przeciw biegnącemu z Utrudnieniem do końca tury; nie dla istot
   nie chodzących. AE z `duration` + `dnd5e.postBuildAttackRollConfig`
-- [ ] **Domyślne Utrudnienie w dialogu ataku** (wzorzec `udzwig-attack-disadvantage.mjs`, nadpisywalne):
+- [x] **Domyślne Utrudnienie w dialogu ataku** — 2026-10-07, E3 — jeden silnik okoliczności ataku (D6), nadpisywalne:
   atak dystansowy w zwarciu (s. 28 — wróg ≤ 1,5 m, widzi, przytomny, Szybkość > 0; wyjątki stanów),
   cel w zasięgu dalekim. dnd5e 5.3 nie egzekwuje żadnego z nich
+- [x] **Stany w rzucie ataku** (s. 35) — 2026-10-07, E3 — znalezione przy planie M1 (F1/F2): Przerażenie i Zatrucie
+  nie dają Utrudnienia (dnd5e nie czyta `conditionEffects.attackDisadvantage`), stany celu nie
+  działają wcale, brak auto-krytyku ≤ 1,5 m w Nieprzytomnego / Sparaliżowanego. Ten sam silnik
+- [x] **Osłona przy ataku wręcz** (s. 27) — 2026-10-07, E3 — dziś pytana tylko przy dystansowych (U9)
 - [x] **`ppanc` / `przebijająca` a pancerz BG** — 2026-10-03: `combat/armour-piercing.mjs` ustawia
   natywne `options.ignore.resistance/threshold` dla broni i amunicji z tą właściwością; ustępują próg
   pancerza BG, odporności i Próg obrażeń Bestiariusza. Paczka testów `przebicie`. Zamyka
@@ -133,13 +145,15 @@ kliknięciem w piki.
   Teraz nadawany przy nakładaniu obrażeń tacką MG (`dnd5e.applyDamage`), krytyk z żywego werdyktu
   karty ataku; raz na kartę i cel; krytyk zbijający PW do 0 — jeden Stopień; krytyk bez obrażeń —
   bez Stopnia (interpretacja MG, czeka na autora). PLAN_tt W6, D15
-- [ ] **Zagrożenia bez wyzwalacza** (źródła Wyczerpania istnieją, nic ich nie nakłada):
+- [x] **Zagrożenia bez wyzwalacza** — 2026-10-07, E7 (narzędzie MG „Zagrożenia”):
   Sen (s. 45 — doba bez snu → RO KON ST 20), Uduszenie (s. 259 — 1 + mod. KON minut, potem
   Wyczerpanie co turę, zdejmowane po złapaniu oddechu), Przemarznięcie (s. 258 — RO KON ST 5 + 1/°C
   poniżej zera co godzinę, zdejmowane DO w cieple). Przyciski MG, jak Skażenie
 
 **Gotowe gdy:** każda pozycja ma test warstwy 1 i weryfikację na żywo; wiersze Walka i Postój
-w macierzy bez ❌.
+w macierzy bez ❌. *Stan 2026-10-07:* wszystkie pozycje odhaczone, każda z testem warstwy 1 i e2e w
+piaskownicy; w Postoju zostaje ❌ tylko Rozrywka i Długi postój (M5, poza M1). Do zrobienia przez
+człowieka: ręczny przebieg MG zagrożeń w kampanii (E7).
 
 ### M2 — Produkcja i naprawa (L)
 

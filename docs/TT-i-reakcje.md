@@ -48,6 +48,30 @@ furtka MG — wtedy moduł niczego nie liczy, a dymek mówi „TT ustawiona ręc
    PW do 0; krytyk zamieniony Krytyczną ochroną nie rani, a krytyk, który nie zadał obrażeń (próg,
    niewrażliwość), też nie — tak rozstrzyga MG, do potwierdzenia przez autora systemu.
 
+## Ułatwienie i Utrudnienie w Teście Ataku
+
+Okno Testu Ataku samo podświetla **Ułatwienie** albo **Utrudnienie**, kiedy wynikają z zasad — możesz
+wybrać inny przycisk, decyzja zostaje przy graczu i MG. Dowolne Ułatwienie i dowolne Utrudnienie
+znoszą się (jak w 5e). Na karcie ataku jedna plakietka mówi, co wyszło; dymek wymienia każdy powód
+ze stroną podręcznika.
+
+| Utrudnienie | Ułatwienie |
+|---|---|
+| cel w zasięgu dalekim (s. 28); poza nim — tylko ostrzeżenie „atak chybia” | cel Nieprzytomny, Ogłuszony, Oślepiony, Unieruchomiony albo Powalony w zasięgu 1,5 m (s. 35) |
+| atak dystansowy, gdy w 1,5 m jest wróg, który cię widzi i może działać (s. 28) | jesteś Niewidoczny (chyba że cel cię widzi) |
+| jesteś Oślepiony, Przerażony, Zatruty, Unieruchomiony, Powalony (wręcz) albo Pochwycony przez kogoś innego niż cel | |
+| cel Powalony dalej niż 1,5 m, Niewidoczny albo **Unika** (s. 30) | |
+| **Biegniesz**; atak dystansowy w biegnącego w jego turze (s. 30) | |
+| pancerz bez wyszkolenia, Udźwig, strzał z broni palnej jedną ręką, choroby, Upojenie 3 | Współpraca |
+
+**Automatyczne Trafienie Krytyczne:** trafienie Nieprzytomnego albo Sparaliżowanego z 1,5 m to zawsze
+krytyk (s. 35) — werdykt na karcie ataku, krytyczne kości obrażeń i Stopień Zranienia idą same.
+
+**Unikanie i Bieganie** to akcje: przełącza się je w panelu Stan na karcie (w trwającej walce) albo w
+HUD żetonu; schodzą na początku twojej następnej tury. Biegać nie można, leżąc.
+
+**Osłona** pytana jest też przy ataku wręcz — wiersz w oknie ataku, domyślnie „Brak”.
+
 ## Reakcje celu
 
 Przyciski widzi każdy, klika właściciel trafionej postaci albo MG. Przycisk jest wyszarzony,

@@ -46,6 +46,7 @@ import { registerRescaleSurowceMigration } from "./migration/rescale-surowce-uni
 import { registerGadzetyMigration } from "./migration/migrate-gadzety.mjs";
 import { registerToolSubstitutesMigration } from "./migration/migrate-tool-substitutes.mjs";
 import { registerEffectPrioritiesMigration } from "./migration/migrate-effect-priorities.mjs";
+import { registerDniSwiataMigration } from "./migration/migrate-dni-swiata.mjs";
 import { registerOznaczReakcjeBN } from "./migration/oznacz-reakcje-bn.mjs";
 import { registerSrdCleanup } from "./config/srd-cleanup.mjs";
 import { registerClassRules } from "./actors/class-rules.mjs";
@@ -73,7 +74,11 @@ import { registerRerolls } from "./combat/rerolls.mjs";
 import { registerObalajaca } from './combat/obalajaca.mjs';
 import { registerWeaponSaveProperties } from './combat/weapon-save-properties.mjs';
 import { registerMeleeManeuvers, maneuversApi } from './combat/melee-maneuvers.mjs';
-import { registerKnockoutAndLastAction, onPreUpdateActorDeathSaves } from "./combat/knockout.mjs";
+import { registerKnockoutAndLastAction } from "./combat/knockout.mjs";
+import { registerUmieranie, umieranieApi } from "./combat/umieranie.mjs";
+import { registerOkolicznosci, okolicznosciApi } from "./combat/okolicznosci.mjs";
+import { registerRekonwalescencja, rekonwalescencjaApi } from "./actors/rekonwalescencja.mjs";
+import { registerZagrozenia, zagrozeniaApi } from "./actors/zagrozenia.mjs";
 import { registerCoverSystem } from "./combat/cover.mjs";
 import { registerTrafienie } from "./combat/trafienie.mjs";
 import { registerObrona, obronaApi } from "./combat/obrona.mjs";
@@ -163,6 +168,7 @@ import { registerInventoryToggleFix } from "./actors/inventory-toggle-fix.mjs";
 import { GEAR_PLACEHOLDERS, createGearPlaceholders, REAL_GEAR, createRealGear } from "./config/gear-data.mjs";
 import { registerKolczatka, kolczatkaApi } from "./items/kolczatka.mjs";
 import { kwasApi } from "./items/kwas.mjs";
+import { registerStaza, stazaApi } from "./items/staza.mjs";
 import { registerDetonator, detonatorApi } from "./items/detonator.mjs";
 import { registerChemia, chemiaApi } from "./items/chemia.mjs";
 import { sztuczkiApi } from "./config/sztuczki-data.mjs";
@@ -241,6 +247,8 @@ Hooks.once("init", () => {
   registerGadzetyMigration();
   registerToolSubstitutesMigration();
   registerEffectPrioritiesMigration();
+  // Dni chorób i dawek na zegar świata (2026-10-07) — raz, sama, u aktywnego MG.
+  registerDniSwiataMigration();
   registerOznaczReakcjeBN();
   registerSrdCleanup();
   registerClassRules();
@@ -305,6 +313,14 @@ Hooks.once("init", () => {
   registerWeaponSaveProperties();
   registerMeleeManeuvers();
   registerKnockoutAndLastAction();
+  // Umieranie i stabilizacja wg NOE (PLAN_m1_walka E1–E2): 0 PW, rzuty przeciw śmierci, karty MG.
+  registerUmieranie();
+  // Neutralizacja Stopnia Zranienia po DO i kalendarzyk zdrowia (PLAN_m1_walka E6).
+  registerRekonwalescencja();
+  // Zagrożenia środowiska: Przemarznięcie, doba bez snu, Uduszenie (PLAN_m1_walka E7).
+  registerZagrozenia();
+  // Jeden silnik okoliczności Testu Ataku (PLAN_m1_walka E3–E4): zasięg, zwarcie, stany, auto-TK.
+  registerOkolicznosci();
   registerCoverSystem();
   // Jeden rozstrzygacz trafienia: werdykt na karcie ataku i tacka celów (PLAN_tt E2).
   registerTrafienie();
@@ -327,6 +343,8 @@ Hooks.once("init", () => {
   registerDozownik();
   registerZbrojowniaSync();
   registerMedyk();
+  // Staza: Używanie → stabilizacja przez lejek umierania (PLAN_m1_walka U11).
+  registerStaza();
   registerToolkitChecks();
   registerChemia();
   registerToolAvailability();
@@ -389,9 +407,6 @@ Hooks.once("init", () => {
       if (!footer.querySelector("li.pill")) footer.remove();
     });
   });
-
-  // Ostatnia Akcja needs preUpdateActor to track previous death failures
-  Hooks.on("preUpdateActor", onPreUpdateActorDeathSaves);
 
   // Nasłuch na `quenchReady` — bez modułu Quench hak nigdy nie odpali.
   registerQuenchTests();
@@ -462,6 +477,14 @@ Hooks.once("ready", () => {
   // Choroby / Fobie / lekarstwa — game.neuroshima.health.sunset() etc.
   game.neuroshima.health = { ...healthApi, syncEffects: syncDiseaseEffects, bleeding: bleedingApi };
   game.neuroshima.podpalenie = podpalenieApi;
+  // Umieranie (PLAN_m1_walka) — game.neuroshima.umieranie.stan(actor), .stabilizuj(actor), .bnDoUmierania(actor)
+  game.neuroshima.umieranie = umieranieApi;
+  // Okoliczności ataku — game.neuroshima.okolicznosci.rozstrzygnij(activity) (podgląd z bieżącymi celami)
+  game.neuroshima.okolicznosci = okolicznosciApi;
+  // Rekonwalescencja (PLAN_m1_walka E6) — .stan(actor), .kalendarzyk(actor), .dane(actor) (prognoza bez okna)
+  game.neuroshima.rekonwalescencja = rekonwalescencjaApi;
+  // Zagrożenia (PLAN_m1_walka E7) — .okno() (narzędzie MG), .wstrzymajOddech(actor), .stanOddechu(actor)
+  game.neuroshima.zagrozenia = zagrozeniaApi;
   game.neuroshima.falling = fallingApi;
 
   // Upojenie / Skażenie / Zranienie — game.neuroshima.conditions.drink(actor) etc.
@@ -511,6 +534,7 @@ Hooks.once("ready", () => {
   registerKolczatka();
   game.neuroshima.kolczatka = kolczatkaApi;
   game.neuroshima.kwas = kwasApi;
+  game.neuroshima.staza = stazaApi;
   game.neuroshima.detonator = detonatorApi;
   game.neuroshima.charges = chargesApi;
   game.neuroshima.medykRefill = medykRefillApi;

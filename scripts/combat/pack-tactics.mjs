@@ -11,16 +11,16 @@
  * dnd5e core has no flag-based advantage system — there is no
  * `flags.dnd5e.advantage.attack.*` for an effect to write to (that is
  * MIDI-QOL/DAE, neither of which is installed). Conditional advantage therefore
- * has to be decided at roll time, which is what
- * `dnd5e.postBuildAttackRollConfig` is for. `disease-effects.mjs`,
- * `levelled-conditions.mjs` and `weapons/addons.mjs` all inject into the same
- * hook.
+ * has to be decided at roll time — since 2026-10-07 by the attack-circumstance engine
+ * (`combat/okolicznosci.mjs`, PLAN_m1_walka D6), to which this file is one source.
  *
  * Unlike the crit riders this one *is* applied automatically. It is a pure
  * geometric fact with no narrative weight — there is no judgement call for the
  * GM to make about whether another Bit-Boy is standing next to the target — so
  * stopping to ask would be friction, not control.
  */
+
+import { zarejestrujZrodloOkolicznosci } from "./okolicznosci.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -62,35 +62,22 @@ function packTacticsFor(actor) {
   return null;
 }
 
-function onPostBuildAttackRollConfig(config) {
-  try {
-    const actor = config?.subject?.item?.actor ?? config?.subject?.actor;
-    if (!actor) return;
-
-    const pack = packTacticsFor(actor);
-    if (!pack) return;
-
-    const attackerToken = actor.getActiveTokens?.()[0];
-    if (!attackerToken) return;
-
-    // dnd5e stores the current target set on the user.
-    const targetToken = Array.from(game.user.targets ?? [])[0];
-    if (!targetToken) return;
-
-    const ally = findSupportingAlly(attackerToken, targetToken, pack.range);
-    if (!ally) return;
-
-    for (const roll of config.rolls ?? []) {
-      roll.options ??= {};
-      roll.options.advantage = true;
-    }
-    console.log(`${MODULE_ID} | Współpraca: ${actor.name} ma Ułatwienie (wsparcie: ${ally.name})`);
-  } catch (err) {
-    console.error(`${MODULE_ID} | pack tactics failed`, err);
-  }
+/**
+ * Źródło silnika okoliczności ataku (`combat/okolicznosci.mjs`, PLAN_m1_walka D6): Współpraca —
+ * przytomny sojusznik ≤ zasięgu od celu → Ułatwienie. Dawniej własny `postBuildAttackRollConfig`,
+ * który ustawiał tryb po `applyKeybindings` i nie znosił się z Utrudnieniami innych źródeł.
+ * @param {{actor: Actor, attackerToken: Token, targets: Token[]}} ctx
+ */
+function zrodloWspolpraca(ctx) {
+  const pack = packTacticsFor(ctx?.actor);
+  if (!pack || !ctx.attackerToken) return [];
+  const targetToken = ctx.targets?.[0];
+  if (!targetToken) return [];
+  const ally = findSupportingAlly(ctx.attackerToken, targetToken, pack.range);
+  return ally ? [{ rodzaj: "ulatwienie", label: `Współpraca (wsparcie: ${ally.name})` }] : [];
 }
 
 export function registerPackTactics() {
-  Hooks.on("dnd5e.postBuildAttackRollConfig", onPostBuildAttackRollConfig);
+  zarejestrujZrodloOkolicznosci("wspolpraca", zrodloWspolpraca);
   console.log(`${MODULE_ID} | Pack tactics registered (Współpraca)`);
 }

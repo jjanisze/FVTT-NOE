@@ -46,6 +46,7 @@
 import { freeHandPill } from "../combat/grip.mjs";
 import { MEDYK_HEAL_FLAG, MEDYK_MAX_CHARGES } from "../config/toolkits-data.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
+import { poprosOStabilizacje } from "../combat/umieranie.mjs";
 
 const MODULE_ID  = "neuroshima-2026-overrides";
 const TOOL_KEY   = "medyka";
@@ -250,6 +251,45 @@ const _norm = s => (s || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u0
 function _hasFeat(actor, keywords) {
   return actor.items.some(i => i.type === "feat"
     && keywords.some(k => _norm(i.name).includes(k) || _norm(i.system?.identifier).includes(k)));
+}
+
+/**
+ * „Dno torby” — Sztuczka Aspiryna i Miętusy: „Możesz przywracać PW i opiekować się rannymi, nawet
+ * jeśli torba małego medyka jest pusta” — obejmuje Pomoc medyczną (PLAN_m1_walka D4).
+ * @param {Actor} actor
+ */
+export function maDnoTorby(actor) {
+  return Boolean(actor) && _hasFeat(actor, ["aspiryna", "mietus"]);
+}
+
+/**
+ * Zestawy narzędzi małego medyka aktora z zapasem medykamentów (natywne `system.uses`), najpełniejszy
+ * pierwszy — ten schodzi jako pierwszy, gdy coś zużywa ładunek bez wskazania zestawu.
+ * @param {Actor} actor
+ * @returns {{item: Item5e, remaining: number, max: number}[]}
+ */
+export function zapasyMedyka(actor) {
+  return (actor?.items?.contents ?? [])
+    .filter(_isMedykKit)
+    .filter(i => (i.system.quantity ?? 1) >= 1)
+    .map(item => {
+      const max = Number(item.system.uses?.max) || MEDYK_MAX_CHARGES;
+      const remaining = Number(item.system.uses?.value ?? (max - (item.system.uses?.spent ?? 0)));
+      return { item, remaining, max };
+    })
+    .sort((a, b) => b.remaining - a.remaining);
+}
+
+/**
+ * Zużywa jeden ładunek zestawu — zapis na przedmiocie właściciela zestawu (wołający musi go móc pisać).
+ * @param {Item5e} item
+ * @returns {Promise<number>} zostało
+ */
+export async function zuzyjLadunekMedyka(item) {
+  const max = Number(item.system.uses?.max) || MEDYK_MAX_CHARGES;
+  const spent = Math.min(max, Number(item.system.uses?.spent ?? 0) + 1);
+  await item.update({ "system.uses.spent": spent });
+  return max - spent;
 }
 
 /* ============================================================
@@ -475,20 +515,17 @@ export async function healWithMedyk(medic, item) {
  * Stabilise (no proficiency)
  * ============================================================ */
 
+/**
+ * Bez biegłości: „w akcji możesz automatycznie ustabilizować jednego sojusznika” (s. 135). Przez
+ * lejek umierania (PLAN_m1_walka F4): status `stable`, tor od zera, termin 1k8 h — zapis robi MG.
+ * Dawniej sukcesy = 3, których dnd5e nie odróżnia od umierania.
+ */
 async function _stabilise(medic, patient) {
-  const hp = patient.system.attributes?.hp;
-  if ( (hp?.value ?? 1) <= 0 && (game.user.isGM || patient.isOwner) ) {
-    try {
-      await patient.update({ "system.attributes.death.success": 3, "system.attributes.death.failure": 0 });
-    } catch (e) { console.warn("Neuroshima 5e | medyk stabilise failed:", e); }
+  if ( (patient.system.attributes?.hp?.value ?? 1) > 0 ) {
+    ui.notifications.info(`${patient.name} nie umiera — bez biegłości narzędzia małego medyka pozwalają tylko stabilizować.`);
+    return;
   }
-  const token = patient.getActiveTokens?.()[0] ?? null;
-  if ( token ) seqScrollText("Stabilizacja", token, { color: "#7fd1ff", fontSize: 28 });
-  await ChatMessage.create({
-    speaker: ChatMessage.getSpeaker({ actor: medic }),
-    content: _card(null,
-      `<p><strong>${medic.name}</strong> stabilizuje <strong>${patient.name}</strong> (bez biegłości — tylko stabilizacja).</p>`)
-  });
+  await poprosOStabilizacje(patient, { zrodlo: "maly-medyk", pomocnik: medic });
 }
 
 /* ============================================================

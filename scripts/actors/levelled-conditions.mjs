@@ -35,6 +35,7 @@ import { normalizeChanges } from "../config/effect-changes.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
 import { addDisease, getChoroby } from "./health-panel.mjs";
 import { STATE_COLORS } from "../config/state-colors.mjs";
+import { zarejestrujZrodloOkolicznosci } from "../combat/okolicznosci.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const EFFECT_FLAG = "levelledCondition";
@@ -83,9 +84,9 @@ export function registerLevelledConditions() {
     }
   });
 
-  // Attack-roll disadvantage — dnd5e has no `attack.roll.mode` field, so it has to
-  // ride the roll config, same as diseases and weapon addons.
-  Hooks.on("dnd5e.postBuildAttackRollConfig", _onPostBuildAttackRollConfig);
+  // Attack-roll disadvantage — one source of the attack-circumstance engine
+  // (`combat/okolicznosci.mjs`, PLAN_m1_walka D6), same as diseases and Udźwig.
+  zarejestrujZrodloOkolicznosci("stopniowane", zrodloStopniowane);
 
   // Level cycling in the token HUD. dnd5e does this with capture-phase document
   // listeners rather than a render hook, because the HUD re-renders on every
@@ -373,33 +374,22 @@ export async function syncLevelledConditions(actor) {
 /* -------------------------------------------- */
 
 /**
- * Hook: `dnd5e.postBuildAttackRollConfig`.
- *
- * Only Upojenie stopień 3 reaches attacks ("Utrudnienie do wszystkich testów").
- * Writes `advantageMode` directly rather than `options.disadvantage`, because
- * `applyKeybindings` has already resolved that boolean by the time this hook runs —
- * see the header of `actors/disease-effects.mjs`.
+ * Źródło silnika okoliczności ataku (`combat/okolicznosci.mjs`, PLAN_m1_walka D6). Tylko Upojenie
+ * stopień 3 sięga ataków („Utrudnienie do wszystkich testów”). Dawniej własny
+ * `postBuildAttackRollConfig` z `advantageMode`.
+ * @param {{actor: Actor}} ctx
  */
-function _onPostBuildAttackRollConfig(process, config) {
-  const activity = process?.subject;
-  const actor = activity?.actor ?? activity?.item?.actor;
-  if (!actor) return;
-
-  const reasons = [];
+function zrodloStopniowane(ctx) {
+  const actor = ctx?.actor;
+  if (!actor) return [];
+  const out = [];
   for (const [id, def] of Object.entries(LEVELLED_CONDITIONS)) {
     const level = getLevel(actor, id);
     if (!level) continue;
     const rows = def.cumulative ? def.levels.filter(r => r.level <= level) : def.levels.filter(r => r.level === level);
-    if (rows.some(r => r.attack === "all")) reasons.push(`${def.label} ${level}`);
+    if (rows.some(r => r.attack === "all")) out.push({ rodzaj: "utrudnienie", label: `${def.label} ${level}` });
   }
-  if (!reasons.length) return;
-
-  const ADV = CONFIG.Dice.D20Roll.ADV_MODE;
-  config.options ??= {};
-  config.options.advantageMode = config.options.advantageMode === ADV.ADVANTAGE
-    ? ADV.NORMAL        // advantage and disadvantage cancel, as 5e stacks them
-    : ADV.DISADVANTAGE;
-  config.options.neuroLevelledPenalty = reasons;
+  return out;
 }
 
 /* -------------------------------------------- */

@@ -82,7 +82,7 @@ export async function awardPD(actor, sourceKey, { note = "", value = null } = {}
     label: source.label,
     value: amount,
     note: String(note ?? "").trim(),
-    at: Date.now(),
+    at: game.time.worldTime, // czas świata (s) — w module zawsze czas gry; wpisy sprzed 2026-10-07 mają tu czas rzeczywisty (ms)
     by: game.user.name
   };
 

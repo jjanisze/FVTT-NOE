@@ -175,6 +175,38 @@ Kobaltu te ataki niczego nie zostawiają.
 
 ✅ *Statystyki: `scripts/wkk/config/weapons-data.mjs` — do przejrzenia przez MG.*
 
+### 14. Wyczerpanie z Krytycznego Stopnia jest uporczywe
+
+Podręcznik: Krytyczny Stopień Zranienia nadaje poziom Wyczerpania, a Długi odpoczynek zdejmuje
+jeden poziom dowolnego Wyczerpania — ten też. Autor systemu dodał, że zejście z Krytycznego na
+Poważny zdejmuje ten poziom od razu (to działa zawsze, także bez Kobaltu). Z Kobaltem ten poziom
+jest **uporczywy**: odpoczynek go nie zdejmuje, schodzi dopiero z zejściem z Krytycznego. Ponowne
+wejście w Krytyczny nadaje go znowu. Koszt w liczbach: przy RO na Kondycję +0 zwykły czas gojenia
+z Krytycznego bez medyka rośnie z 20 do 22 Długich odpoczynków.
+
+✅ *Pipka tego poziomu ma kwadratową ramkę; kalendarzyk zdrowia liczy z tą zasadą.*
+
+### 15. Pomoc medyczna kosztuje ładunek i cały Długi odpoczynek
+
+Podręcznik: medyk biegły w Medycynie, z narzędziami małego medyka, zdejmuje po Długim odpoczynku
+jeden Stopień Zranienia — bez testu. Z Kobaltem kosztuje to **jeden ładunek** narzędzi (medyk ze
+Sztuczką Aspiryna i Miętusy opatruje z pustą torbą — ładunku nie zużywa) i zajmuje **cały Długi
+odpoczynek obojga**: medyk opatruje dokładnie jednego pacjenta, żadne z nich nie bierze innych zajęć
+(produkcja, naprawa, czyszczenie broni, gotowanie, polowanie).
+
+✅ *Okno Długiego odpoczynku wyszarza inne zajęcia pacjenta i medyka; ładunek schodzi po odpoczynku
+(anulowany odpoczynek nic nie zjada).*
+
+### 16. Samoleczenie
+
+Podręcznik nie pozwala opatrzyć samego siebie („fachowa pomoc medyczna” to dwie osoby). Z Kobaltem
+ranny medyk może: **Test Inteligencji (Medycyna) ST 20** zamiast Pomocy medycznej — sukces −1
+Stopień, **porażka +1 Stopień**; ładunek schodzi w obu przypadkach, Długi odpoczynek jest zajęty
+jak przy Pomocy medycznej. Przy Krytycznym porażka to piąty Stopień, czyli śmierć — okno ostrzega.
+To Test k20, więc Fuks wolno.
+
+✅ *Trzecia droga w sekcji Rekonwalescencja okna Długiego odpoczynku; karta z testem w czacie.*
+
 ## Dopisywanie nowej zasady
 
 Każda nowa zasada Kobaltu jako osobny nagłówek `###`, w miarę możności:

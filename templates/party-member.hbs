@@ -61,7 +61,7 @@
                     <label>{{ short }}</label>
                     <div class="neuro-seg-pips">
                         {{#each pips}}
-                        <button type="button" class="neuro-seg-pip {{#if filled}}is-filled{{/if}}{{#if terminal}} is-terminal{{/if}}"
+                        <button type="button" class="neuro-seg-pip {{#if filled}}is-filled{{/if}}{{#if terminal}} is-terminal{{/if}}{{#if uporczywe}} is-uporczywe{{/if}}"
                                 data-action="neuroTrackPip" data-track-id="{{ ../id }}" data-n="{{ n }}"
                                 {{#if color}}style="--neuro-pip-color: {{ color }}"{{/if}}
                                 data-tooltip="{{ tooltip }}"></button>

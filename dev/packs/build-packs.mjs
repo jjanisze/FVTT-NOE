@@ -40,6 +40,7 @@ import { POCHODNIA_VARIANTS, buildPochodniaItemData } from "../../scripts/wkk/it
 import { LATARKA_FORMS, buildLatarkaItemData } from "../../scripts/items/latarka.mjs";
 import { buildBaterieItemData } from "../../scripts/items/baterie.mjs";
 import { buildKwasItemData } from "../../scripts/items/kwas.mjs";
+import { buildStazaItemData } from "../../scripts/items/staza.mjs";
 import { buildDetonatorItemData, buildElectricFuzeItemData } from "../../scripts/items/detonator.mjs";
 import { GOGLE_VARIANTS, buildGogleItemData } from "../../scripts/items/gogle.mjs";
 import { PRODUCTION_GEAR, buildProductionGearItemData } from "../../scripts/items/production-gear.mjs";
@@ -671,6 +672,9 @@ function buildLatarka(formKey) {
 }
 function buildKwas() {
   return { ...buildKwasItemData({ quantity: 1 }), _id: idFor("consumable", "kwas"), _key: null };
+}
+function buildStaza() {
+  return { ...buildStazaItemData({ quantity: 1 }), _id: idFor("consumable", "staza"), _key: null };
 }
 // Pilot bez `kitId`, z `kitNew` — na karcie aktora sam dokłada 10 zapalników radiowych swojego
 // zestawu (`items/detonator.mjs`). Zapalników radiowych w paczce nie ma: RAW sprzedaje je tylko w zestawie.
@@ -1683,6 +1687,7 @@ const sprzetDocs = [
   ...Object.keys(LATARKA_FORMS).map(buildLatarka),
   buildBaterie(),
   buildKwas(),
+  buildStaza(),
   buildDetonator(),
   buildElectricFuze(),
   ...Object.keys(PRODUCTION_GEAR).map(buildProductionGear),

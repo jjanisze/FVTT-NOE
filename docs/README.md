@@ -14,8 +14,11 @@
    odpoczynki, Szybka produkcja, naprawa broni i pancerzy.
 6. [Trudność Trafienia, trafienie i reakcje](TT-i-reakcje.md) — skąd moja TT, atak i obrażenia,
    reakcje celu na karcie ataku.
-7. [FAQ](FAQ.md) — najczęstsze pytania.
-8. [Errata: przepisy profesji](Errata-produkcja.md) — wiersze tabel schematów Speca gorsze od
+7. [Umieranie i powrót do zdrowia](Umieranie-i-zdrowie.md) — 0 PW, karta „Umiera”, stabilizacja,
+   Stopień Zranienia i jego leczenie, kalendarzyk zdrowia, pipki Wyczerpania, zagrożenia (mróz, sen,
+   duszenie się).
+8. [FAQ](FAQ.md) — najczęstsze pytania.
+9. [Errata: przepisy profesji](Errata-produkcja.md) — wiersze tabel schematów Speca gorsze od
    przepisu standardowego.
 
 Coś jest niejasne albo brakuje strony, której szukasz? Zgłoś to jako

@@ -11,13 +11,10 @@
  *   Trigger: bludgeoning-only melee damage → target HP to 0
  *   Dialog: shown to the attacker (actor owner)
  *
- * OSTATNIA AKCJA:
- *   When a character accumulates 3 death save failures, they get one
- *   final narrative action before dying. This is announced in chat
- *   with a prominent styled message.
- *
- *   Trigger: 3rd death save failure recorded on actor
+ * OSTATNIA AKCJA: przeniesiona na kartę „Śmierć” (`combat/umieranie.mjs`, PLAN_m1_walka D1).
  */
+
+import { zglosObrazenia } from "./umieranie.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -32,10 +29,7 @@ export function registerKnockoutAndLastAction() {
   // Phase 2: preApplyDamage — check if HP would drop to 0, show dialog
   Hooks.on("dnd5e.preApplyDamage", onPreApplyDamage);
 
-  // Ostatnia Akcja: detect 3rd death save failure
-  Hooks.on("updateActor", onUpdateActorDeathSaves);
-
-  console.log("Neuroshima 5e | Nokautowanie & Ostatnia Akcja registered");
+  console.log("Neuroshima 5e | Nokautowanie registered");
 }
 
 /* -------------------------------------------- */
@@ -264,77 +258,10 @@ async function _applyOriginalDamage(actor, amount) {
   const currentHP = actor.system.attributes.hp.value;
   const newHP = Math.max(0, currentHP - amount);
   await actor.update({ "system.attributes.hp.value": newHP });
+  // Ta ścieżka omija `dnd5e.applyDamage` — umieranie dostaje cios wprost (Olbrzymie obrażenia, U3).
+  await zglosObrazenia(actor, { obrazenia: amount, pwPrzed: currentHP, wrecz: true });
 }
 
-/* -------------------------------------------- */
-/*  Ostatnia Akcja (Last Action)                 */
-/* -------------------------------------------- */
-
-/**
- * Hook: updateActor
- * Detect when the 3rd death save failure is recorded.
- * In dnd5e, death saves are tracked at system.attributes.death.failure (0-3).
- */
-function onUpdateActorDeathSaves(actor, changes, options, userId) {
-  // Only process if this user initiated the change
-  if (game.userId !== userId) return;
-
-  // Check if death save failures changed
-  const newFailures = foundry.utils.getProperty(changes, "system.attributes.death.failure");
-  if (newFailures !== 3) return;
-
-  // Check that it actually changed (not just a re-render)
-  // The actor's data is already updated at this point, so we check
-  // if the previous value was less than 3
-  const wasAlreadyDead = (options?._previousDeathFailures ?? 0) >= 3;
-  if (wasAlreadyDead) return;
-
-  // Announce Ostatnia Akcja in chat
-  _announceOstatniaAkcja(actor);
-}
-
-/**
- * Also hook preUpdateActor to capture the previous death failure count.
- * This is needed because updateActor receives the already-updated actor.
- */
-export function onPreUpdateActorDeathSaves(actor, changes, options) {
-  const newFailures = foundry.utils.getProperty(changes, "system.attributes.death.failure");
-  if (newFailures !== undefined) {
-    options._previousDeathFailures = actor.system.attributes?.death?.failure ?? 0;
-  }
-}
-
-/**
- * Post a prominent chat message announcing the Last Action right.
- */
-async function _announceOstatniaAkcja(actor) {
-  await ChatMessage.create({
-    content: `
-      <div style="
-        border: 2px solid #c0392b;
-        background: linear-gradient(135deg, rgba(192, 57, 43, 0.15), rgba(0, 0, 0, 0.3));
-        padding: 10px 12px;
-        border-radius: 4px;
-        text-align: center;
-      ">
-        <div style="font-weight: bold; color: #e74c3c; font-size: 20px; margin-bottom: 4px;">
-          ${actor.name} umiera.
-        </div>
-        <div style="font-size: 12px; color: #c0392b; text-transform: uppercase; letter-spacing: 2px; font-weight: bold; margin-bottom: 6px;">
-          💀 OSTATNIA AKCJA 💀
-        </div>
-        <div style="font-size: 11px; color: #222; font-style: italic; line-height: 1.4;">
-          Na chwilę otwierasz oczy, mówisz kilka słów<br>
-          i wykonujesz coś godnego zapamiętania.<br>
-          Tą akcją żegnasz się z życiem swojej postaci.
-        </div>
-      </div>
-    `,
-    speaker: ChatMessage.getSpeaker({ actor })
-  });
-
-  // Optional notification to the player
-  if (actor.isOwner) {
-    ui.notifications.info(`${actor.name} — masz prawo do Ostatniej Akcji!`, { permanent: true });
-  }
-}
+/* Ostatnia Akcja: przypomina o niej karta „Śmierć” dla MG przy trzeciej porażce
+   (`combat/umieranie.mjs`, PLAN_m1_walka D1) — śmierć BG potwierdza MG, więc ogłoszenie dla stołu
+   pada dopiero przy [Potwierdź]. */

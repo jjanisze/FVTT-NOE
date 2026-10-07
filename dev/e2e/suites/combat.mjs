@@ -11,6 +11,9 @@
  *    through the real sheet button and a real canvas click; the charge must lie pending until the
  *    GM ends the turn, then detonate.
  *  - Ammunition: one semi-auto shot spends exactly one round.
+ *  - Attack circumstances (PLAN_m1_walka E3–E4): far range and a ranged attack with an enemy next to
+ *    the shooter default to Utrudnienie with ONE badge group on the card; Unikanie on the target and
+ *    Bieganie on the shooter join the same group.
  */
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -33,7 +36,7 @@ async function shoot({ targetName, uniform }) {
     // A weapon handed out a moment ago may still be settling (slots, activities): retry briefly.
     let usage = null;
     for (let i = 0; i < 20 && !usage; i++) {
-      usage = await attack.use({}, { configure: false }, {});
+      usage = await attack.use({ subsequentActions: false }, { configure: false }, {});
       if (!usage) await new Promise(r => setTimeout(r, 250));
     }
     if (!usage) throw new Error("attack.use() was cancelled every time");
@@ -53,6 +56,36 @@ async function shoot({ targetName, uniform }) {
     };
   } finally {
     CONFIG.Dice.randomUniform = orig;
+  }
+}
+
+/** Player: one shot like `shoot`, then what the circumstance engine put on the roll and the card. */
+async function shootCircumstances({ targetName, uniform }) {
+  const actor = game.user.character;
+  const gun = actor.items.find(i => i.type === "weapon");
+  const attack = gun.system.activities.find(a => a.type === "attack");
+  const target = canvas.tokens.placeables.find(t => t.name === targetName);
+  canvas.tokens.placeables.find(t => t.actor?.id === actor.id)?.control({ releaseOthers: true });
+  canvas.tokens.setTargets([target.id]);
+  const orig = CONFIG.Dice.randomUniform;
+  CONFIG.Dice.randomUniform = () => uniform;
+  try {
+    const usage = await attack.use({ subsequentActions: false }, { configure: false }, {});
+    const link = { data: { flags: { dnd5e: { originatingMessage: usage.message.id } } } };
+    const rolls = await attack.rollAttack({}, { configure: false }, link);
+    await new Promise(r => setTimeout(r, 600));
+    const msg = game.messages.contents.findLast(m => m.getFlag("dnd5e", "originatingMessage") === usage.message.id && m.getFlag("dnd5e", "roll.type") === "attack");
+    const z = rolls?.[0]?.options?.neuroOkolicznosci ?? null;
+    const el = ui.chat.element?.querySelector(`[data-message-id="${msg?.id}"]`);
+    const groups = el ? [...el.querySelectorAll(".neuro-okolicznosci:not(.neuro-okolicznosci-uwaga):not(.neuro-okolicznosci-autokrytyk)")] : [];
+    return {
+      advantageMode: rolls?.[0]?.options?.advantageMode ?? null,
+      utrudnienia: (z?.utrudnienia ?? []).map(w => w.id), ulatwienia: (z?.ulatwienia ?? []).map(w => w.id),
+      groups: groups.length, tryb: groups[0]?.dataset.tryb ?? null, messageId: msg?.id ?? null
+    };
+  } finally {
+    CONFIG.Dice.randomUniform = orig;
+    canvas.tokens.setTargets([]);
   }
 }
 
@@ -165,6 +198,63 @@ export default {
       }, { args: [MODULE_ID, thrown.before], timeoutMs: 15_000, message: "the charge to detonate after the turn" });
       t.equal(r.current, expectedNext, "next combatant");
       await t.screenshot("gm", "after-detonation");
+    });
+
+    await t.step("circumstances: far range → default Utrudnienie, one badge group", async () => {
+      const r = await p1.eval(shootCircumstances, { targetName: "CYWIL", uniform: 0.4 });
+      t.assert(r.utrudnienia.includes("zasiegDaleki"), "no far-range Utrudnienie (CYWIL is ~27 m, B 92 18/39 m)", r);
+      t.equal(r.advantageMode, -1, "roll mode (ADV_MODE.DISADVANTAGE)");
+      t.equal(r.groups, 1, "badge groups on the attack card");
+      t.equal(r.tryb, "-1", "badge group mode");
+    });
+
+    await t.step("circumstances: enemy next to the shooter (ranged in melee), target dodging, shooter running and overloaded", async () => {
+      await t.gm.eval(async () => {
+        const pc = canvas.scene.tokens.find(tk => tk.name === "PC Gracz 1");
+        const npc = canvas.scene.tokens.find(tk => tk.name === "GANGUS ŻOŁNIERZ");
+        await npc.update({ x: pc.x + canvas.grid.size, y: pc.y }, { animate: false });
+        const cywil = canvas.scene.tokens.find(tk => tk.name === "CYWIL").actor;
+        await cywil.toggleStatusEffect("dodging", { active: true });
+        // A migrated source (D6): Przeciążenie from Udźwig reaches the roll through the engine's registry.
+        await game.actors.getName("PC Gracz 1").createEmbeddedDocuments("Item", [{
+          name: "e2e: worek kamieni", type: "loot", system: { weight: { value: 70, units: "kg" }, quantity: 1 }
+        }]);
+        await new Promise(r => setTimeout(r, 500));
+      });
+      // Bieganie the way a player does it: the action toggle in the sheet's Stan panel (U8).
+      const sheet = await p1.eval(async () => {
+        const actor = game.user.character;
+        await actor.sheet.render(true);
+        let btn = null;
+        for (let i = 0; i < 40 && !btn; i++) {
+          await new Promise(r => setTimeout(r, 100));
+          btn = actor.sheet.element?.querySelector('.neuro-akcja-btn[data-akcja="bieganie"]');
+        }
+        if (!btn) return { button: false };
+        btn.click();
+        await new Promise(r => setTimeout(r, 800));
+        const pressed = actor.sheet.element?.querySelector('.neuro-akcja-btn[data-akcja="bieganie"]')?.getAttribute("aria-pressed");
+        await actor.sheet.close();
+        return { button: true, running: actor.statuses.has("bieganie"), pressed };
+      });
+      t.equal(sheet.button, true, "Bieganie toggle in the Stan panel during combat");
+      t.equal(sheet.running, true, "Bieganie after the sheet toggle");
+      t.equal(sheet.pressed, "true", "toggle shown as pressed after re-render");
+      const r = await p1.eval(shootCircumstances, { targetName: "CYWIL", uniform: 0.4 });
+      for (const id of ["dystansowyWZwarciu", "zasiegDaleki", "celUnika", "bieganie", "udzwig"]) {
+        t.assert(r.utrudnienia.includes(id), `missing Utrudnienie ${id}`, r);
+      }
+      t.equal(r.groups, 1, "still one badge group");
+      await t.screenshot("Gracz 1", "okolicznosci");
+      await t.gm.eval(async () => {
+        await canvas.scene.tokens.find(tk => tk.name === "CYWIL").actor.toggleStatusEffect("dodging", { active: false });
+        const pc = game.actors.getName("PC Gracz 1");
+        await pc.toggleStatusEffect("bieganie", { active: false });
+        await pc.deleteEmbeddedDocuments("Item", pc.items.filter(i => i.name === "e2e: worek kamieni").map(i => i.id));
+        // Let the status scrolling text and hook follow-ups finish: the next suite's fixture deletes
+        // this scene, and a write or animation still in flight then errors on the dead canvas.
+        await new Promise(r => setTimeout(r, 2500));
+      });
     });
   }
 };

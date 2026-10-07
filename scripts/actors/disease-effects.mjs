@@ -7,8 +7,9 @@
  *     active situational toggle. They are real, visible effects in the Efekty tab,
  *     not hidden roll-time maths: a player who has Utrudnienie deserves to be able
  *     to point at the reason.
- *  2. **Attack-roll disadvantage** — dnd5e has no `attack.roll.mode` field, so this
- *     rides `dnd5e.postBuildAttackRollConfig`, the same hook the weapon addons use.
+ *  2. **Attack-roll disadvantage** — one source of the attack-circumstance engine
+ *     (`combat/okolicznosci.mjs`, PLAN_m1_walka D6): the engine sets the roll mode once for
+ *     every source, so a disease's Utrudnienie and, say, Współpraca's Ułatwienie cancel.
  *  3. **Roll attribution** — a tag under any d20 the disease bent, naming it and the
  *     direction. Utrudnienie applied by an Active Effect is otherwise invisible at the
  *     table: the dialog just comes up pre-set and nobody remembers why. The Ułatwienie
@@ -20,19 +21,19 @@
  * `flags.<module>.diseaseEffect`, and a resync only ever touches its own. Effects
  * added by hand are never modified or deleted.
  *
- * ## Why advantageMode and not `options.disadvantage`
- * `BasicRoll.buildConfigure` calls `applyKeybindings` (which resolves
- * `options.disadvantage` into `options.advantageMode`) *before* it calls
- * `buildConfig` / the `postBuild…RollConfig` hooks. Setting the boolean at that
- * point is a silent no-op — the mode has already been decided. So this writes
- * `advantageMode` directly, and a pre-existing advantage cancels to normal rather
- * than being overwritten, matching how 5e stacks the two.
+ * ## History: advantageMode in `postBuild…RollConfig`
+ * Until 2026-10-07 the attack half wrote `advantageMode` in `dnd5e.postBuildAttackRollConfig`,
+ * because `applyKeybindings` resolves the booleans before that hook. Every source doing that on
+ * its own could not cancel against sources set earlier (`preRollAttack`) — 5e's "any advantage
+ * plus any disadvantage = normal" only holds if one place sees all of them. That place is now
+ * the engine's `preRollAttack`.
  */
 
 import { effectsFor } from "../config/disease-effects.mjs";
 import { normalizeChanges } from "../config/effect-changes.mjs";
 import { getChoroby } from "./health-panel.mjs";
 import { DISEASE_STAGES, NO_REST_FLAG, getDisease, diseaseStages, isBaselineChronic } from "../config/diseases-data.mjs";
+import { zarejestrujZrodloOkolicznosci } from "../combat/okolicznosci.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const EFFECT_FLAG = "diseaseEffect";
@@ -63,7 +64,7 @@ export function registerDiseaseEffects() {
     }
   });
 
-  Hooks.on("dnd5e.postBuildAttackRollConfig", _onPostBuildAttackRollConfig);
+  zarejestrujZrodloOkolicznosci("choroby", zrodloChoroby);
   // Attribution before the szał button: both append to `.message-content`, and the
   // reason for the roll going badly should read above the consequence.
   Hooks.on("dnd5e.renderChatMessage", _onAnnotateRoll);
@@ -72,26 +73,77 @@ export function registerDiseaseEffects() {
   // separate binding hook would always run against a DOM without the button yet.
   Hooks.on("dnd5e.renderChatMessage", _onRenderRollMessage);
 
-  // "Brak korzyści z Długiego i Krótkiego odpoczynku" — cancelling the rest outright
-  // is the honest reading: dnd5e has no way to grant a rest that heals nothing, and a
-  // rest that silently did nothing would be worse than one that says why.
-  Hooks.on("dnd5e.preShortRest", _onPreRest);
-  Hooks.on("dnd5e.preLongRest", _onPreRest);
+  // „Brak korzyści z odbycia Długiego i Krótkiego odpoczynku” (s. 111) — decyzja MG 2026-10-07,
+  // PLAN_m1_walka §11: Długi odpoczynek się ODBYWA, ale bez korzyści z listy s. 45 (PW, KW, Cechy,
+  // zdolności, −1 Wyczerpanie). Neutralizowanie Stopnia Zranienia to osobny podrozdział, nie
+  // „korzyść” — Regeneracja i Pomoc medyczna liczą ten dzień (`actors/rekonwalescencja.mjs`).
+  // Krótki odpoczynek dalej odwołujemy: jego jedyna korzyść to Kości Wytrzymałości wydawane w oknie,
+  // które leczą od razu, zanim jakikolwiek hak końca odpoczynku mógłby to cofnąć.
+  Hooks.on("dnd5e.preShortRest", _onPreShortRest);
+  Hooks.on("dnd5e.preLongRest", _onPreLongRest);
+  Hooks.on("dnd5e.preRestCompleted", _onPreRestCompleted);
+  Hooks.on("dnd5e.restCompleted", _onRestCompleted);
 
   console.log("Neuroshima 5e | Disease effects registered");
 }
 
+/** Klucz w konfiguracji odpoczynku: ten Długi odpoczynek jest bez korzyści (choroba). */
+export const BEZ_KORZYSCI = "neuroBezKorzysci";
+
 /**
- * Block a rest the character's disease has taken away for the day.
+ * Czy choroba odbiera teraz korzyści odpoczynków: oblany RO „na koniec dnia” (s. 111) — przez
+ * następną dobę gry (`NO_REST_FLAG`, czas świata).
  * @param {Actor} actor
- * @returns {boolean}  False cancels the rest.
+ * @returns {boolean}
  */
-function _onPreRest(actor) {
-  const denied = actor.getFlag(MODULE_ID, NO_REST_FLAG);
-  if (denied !== game.settings.get(MODULE_ID, "dayCounter")) return true;
-  ui.notifications.warn(`${actor.name}: choroba nie daje odpocząć — żadnych korzyści `
-    + `z odpoczynku aż do następnego zachodu słońca.`);
+export function bezKorzysciOdpoczynku(actor) {
+  const koniec = actor?.getFlag(MODULE_ID, NO_REST_FLAG);
+  return Number.isFinite(koniec) && game.time.worldTime < koniec;
+}
+
+/** Krótki odpoczynek bez korzyści = żaden (patrz rejestracja). */
+function _onPreShortRest(actor) {
+  if (!bezKorzysciOdpoczynku(actor)) return true;
+  ui.notifications.warn(`${actor.name}: choroba — Krótki odpoczynek nie da korzyści (s. 111).`);
   return false;
+}
+
+/** Długi odpoczynek się odbywa; korzyści odbiera `_onPreRestCompleted`. */
+function _onPreLongRest(actor, config) {
+  if (!bezKorzysciOdpoczynku(actor)) return true;
+  config[BEZ_KORZYSCI] = true;
+  ui.notifications.warn(`${actor.name}: choroba — Długi odpoczynek bez korzyści (PW, KW, zdolności, −1 Wyczerpanie). `
+    + "Regeneracja i Pomoc medyczna działają.");
+  return true;
+}
+
+/**
+ * Odbiera korzyści z listy s. 45: wszystko, co dnd5e policzył jako odzysk (PW, Kości Wytrzymałości,
+ * użycia przedmiotów i zdolności). Zostają tylko zapisy Wyczerpania — `config/exhaustion.mjs` przy tej
+ * fladze nie zdejmuje −1, ale dodatkowe wyjście („w cieple”) nie jest korzyścią odpoczynku, tylko
+ * regułą zagrożenia. Kolejność haków bez znaczenia: oba patrzą na tę samą flagę.
+ */
+function _onPreRestCompleted(actor, result, config) {
+  if (!config?.[BEZ_KORZYSCI]) return;
+  const zostaw = k => k.startsWith("system.attributes.exhaustion")
+    || k.startsWith(`flags.${MODULE_ID}.exhaustionSources`) || k.startsWith(`flags.${MODULE_ID}.-=exhaustionSources`);
+  const flat = foundry.utils.flattenObject(result.updateData ?? {});
+  result.updateData = Object.fromEntries(Object.entries(flat).filter(([k]) => zostaw(k)));
+  result.updateItems = [];
+  result.deleteItems = [];
+  result.rolls = [];
+  result.deltas = { hitPoints: 0, hitDice: 0 };
+  result.dhp = 0;
+  result.dhd = 0;
+}
+
+function _onRestCompleted(actor, result, config) {
+  if (!config?.[BEZ_KORZYSCI]) return;
+  ChatMessage.create({
+    speaker: ChatMessage.getSpeaker({ actor }),
+    content: `<strong>${foundry.utils.escapeHTML(actor.name)}</strong> — choroba: Długi odpoczynek bez korzyści `
+      + "(bez PW, Kości Wytrzymałości, zdolności i −1 Wyczerpania, s. 111). Dzień liczy się do Regeneracji."
+  });
 }
 
 /** Exposed on `game.neuroshima.health.syncEffects` for macros / one-off repairs. */
@@ -227,25 +279,17 @@ function _attackPenalties(actor, ability) {
 }
 
 /**
- * Hook: `dnd5e.postBuildAttackRollConfig(process, config, index)`.
- * @param {object} process  Roll process config; `subject` is the activity.
- * @param {object} config   Per-roll config (`parts`, `options`).
+ * Źródło silnika okoliczności ataku (`combat/okolicznosci.mjs`, PLAN_m1_walka D6): Utrudnienie do Testów
+ * Ataku z chorób postaci, jeden powód na chorobę. Dawniej własny `postBuildAttackRollConfig` z
+ * `advantageMode` — teraz tryb ustawia silnik raz dla wszystkich źródeł.
+ * @param {{activity: object, actor: Actor}} ctx
  */
-function _onPostBuildAttackRollConfig(process, config) {
-  const activity = process?.subject;
-  const actor = activity?.actor ?? activity?.item?.actor;
-  if (actor?.type !== "character") return;
-
-  const ability = activity.ability || activity.item?.abilityMod || "str";
-  const reasons = _attackPenalties(actor, ability);
-  if (!reasons.length) return;
-
-  const ADV = CONFIG.Dice.D20Roll.ADV_MODE;
-  config.options ??= {};
-  config.options.advantageMode = config.options.advantageMode === ADV.ADVANTAGE
-    ? ADV.NORMAL        // a source of advantage and a source of disadvantage cancel
-    : ADV.DISADVANTAGE;
-  config.options.neuroDiseasePenalty = reasons;
+function zrodloChoroby(ctx) {
+  const activity = ctx?.activity;
+  const actor = ctx?.actor;
+  if (actor?.type !== "character") return [];
+  const ability = activity?.ability || activity?.item?.abilityMod || "str";
+  return _attackPenalties(actor, ability).map(label => ({ rodzaj: "utrudnienie", label }));
 }
 
 /* -------------------------------------------- */
@@ -283,10 +327,11 @@ function _rollModeKeys(rollData) {
  * @returns {{name: string, mode: number}[]}
  */
 function _rollInfluences(actor, rollData, roll) {
-  // Attack rolls never touch a roll-mode field; `_onPostBuildAttackRollConfig`
-  // already recorded its reasons on the roll, which the message persists.
+  // Attack rolls never touch a roll-mode field; the circumstance engine recorded this
+  // source's reasons (id "choroby") on the roll, which the message persists.
   if (rollData.type === "attack") {
-    return (roll?.options?.neuroDiseasePenalty ?? []).map(name => ({ name, mode: -1 }));
+    return (roll?.options?.neuroOkolicznosci?.utrudnienia ?? [])
+      .filter(w => w.id === "choroby").map(w => ({ name: w.label, mode: -1 }));
   }
 
   const keys = _rollModeKeys(rollData);

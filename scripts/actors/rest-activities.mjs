@@ -15,6 +15,10 @@
  *   render(actor, restType) → HTML albo null (null = sekcji nie ma),
  *   minuty(form, restType) → ile minut wpisano teraz (do paska budżetu),
  *   apply(actor, wartosc, { restType, result, config }) → { linie: string[], minuty?, poOdpoczynku? }
+ *   blokuje(actor, restType, { form, wartosci }) → powód albo null — zajęcie, które zajmuje **cały**
+ *               odpoczynek (Pomoc medyczna w WKK, PLAN_m1_walka D7): pozostałe sekcje gasną w oknie
+ *               na żywo (`form` — formularz okna) i nie stosują się po odpoczynku (`wartosci` —
+ *               `config.neuroZajecia`). Bez okna (`form` i `wartosci` puste) decyduje stan zapisany.
  *
  * **Zastosowanie w `dnd5e.restCompleted`, nie w `pre…`** — anulowany odpoczynek nie zjada godzin.
  * Jedna zbiorcza wiadomość na czacie; przekroczenie budżetu to ostrzeżenie, nie blokada (L9).
@@ -68,6 +72,33 @@ function _odswiezBudzet(app, root) {
       : ` — <strong>ponad 10 h pracy tej doby</strong> (s. 145)`) : "");
 }
 
+/** Pierwsze zajęcie, które zajmuje cały odpoczynek: `{ def, powod }` albo null. */
+function _blokada(actor, typ, ctx) {
+  for (const def of REJESTR) {
+    if (!def.restTypes.includes(typ) || typeof def.blokuje !== "function") continue;
+    let powod = null;
+    try { powod = def.blokuje(actor, typ, ctx); } catch (err) { console.warn(`${MODULE_ID} | blokada ${def.id}`, err); }
+    if (powod) return { def, powod };
+  }
+  return null;
+}
+
+function _odswiezBlokade(app, root) {
+  const actor = app.actor ?? app.document;
+  const form = app.element.querySelector("form") ?? app.element;
+  const b = _blokada(actor, _restType(app), { form });
+  for (const fs of root.querySelectorAll(".neuro-zajecie")) {
+    const zablokowana = Boolean(b) && fs.dataset.zajecie !== b.def.id;
+    fs.disabled = zablokowana;
+    fs.classList.toggle("is-zablokowane", zablokowana);
+  }
+  const el = root.querySelector(".neuro-zajecia-blokada");
+  if (el) {
+    el.hidden = !b;
+    el.innerHTML = b ? `<i class="fa-solid fa-lock" inert></i> ${b.powod}` : "";
+  }
+}
+
 function _wstrzyknij(app) {
   const actor = app.actor ?? app.document;
   if (!actor || actor.type !== "character") return;
@@ -91,14 +122,16 @@ function _wstrzyknij(app) {
     <p class="hint">${typ === "short"
       ? "Produkcja, naprawa i czyszczenie broni — razem najwyżej godzina, dłużej przerywa odpoczynek."
       : "Produkcja i naprawa — do 10 h pracy tej doby."}</p>
+    <p class="neuro-zajecia-blokada" hidden></p>
     ${sekcje.join("")}
     <div class="neuro-zajecia-budzet"></div>`;
   const footer = form.querySelector(".form-footer");
   if (footer) footer.before(root);
   else form.append(root);
-  root.addEventListener("input", () => _odswiezBudzet(app, root));
-  root.addEventListener("change", () => _odswiezBudzet(app, root));
-  _odswiezBudzet(app, root);
+  const odswiez = () => { _odswiezBlokade(app, root); _odswiezBudzet(app, root); };
+  root.addEventListener("input", odswiez);
+  root.addEventListener("change", odswiez);
+  odswiez();
   app.setPosition?.({ height: "auto" });
 }
 
@@ -124,9 +157,12 @@ async function _onRestCompleted(actor, result, config) {
   const linie = [];
   const poOdpoczynku = [];
   let praca = 0;
+  const blokada = _blokada(actor, typ, { wartosci });
+  if (blokada) linie.push(`<i class="fa-solid fa-lock" inert></i> ${blokada.powod}`);
   for (const def of REJESTR) {
     const v = wartosci[def.id];
     if (v == null || !def.restTypes.includes(typ)) continue;
+    if (blokada && def !== blokada.def) continue;
     try {
       const r = await def.apply(actor, v, { restType: typ, result, config });
       if (!r) continue;
@@ -168,4 +204,6 @@ export function registerRestActivities() {
   Hooks.on("dnd5e.restCompleted", _onRestCompleted);
 }
 
-export const restActivitiesApi = Object.freeze({ register: registerRestActivity, budzet: budzetPracy, lista: () => [...REJESTR] });
+export const restActivitiesApi = Object.freeze({
+  register: registerRestActivity, budzet: budzetPracy, lista: () => [...REJESTR], blokada: _blokada
+});

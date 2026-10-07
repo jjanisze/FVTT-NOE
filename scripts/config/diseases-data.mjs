@@ -242,12 +242,15 @@ export function diseaseStages(entry) {
 }
 
 /**
- * Actor flag holding the day counter value on which a disease denies rest.
- * Written by the sunset routine when an acquired disease's RO fails, read by the
- * rest hooks in `actors/disease-effects.mjs`. A stale value is harmless: the day
- * counter only ever moves forward.
+ * Flaga aktora: czas świata (s), do którego odpoczynki nie dają korzyści — oblany RO choroby „na koniec
+ * dnia” odbiera korzyści odpoczynków przez następną dobę gry. Pisze ją rutyna „Zachód słońca”, czyta
+ * `actors/disease-effects.mjs`. Przeterminowana jest nieszkodliwa — czas gry tylko płynie naprzód
+ * (a cofnięty zegar najwyżej ją przedłuża).
  */
-export const NO_REST_FLAG = "noRestDay";
+export const NO_REST_FLAG = "bezKorzysciDo";
+
+/** Dawny zapis tej samej blokady — numer dnia ze starego licznika `dayCounter` (do 2026-10-07). */
+export const LEGACY_NO_REST_FLAG = "noRestDay";
 
 /** True when the disease has a stage ladder and so participates in the sunset RO. */
 export function hasStageLadder(entry) {

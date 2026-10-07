@@ -36,12 +36,14 @@
  * effect beside it.
  */
 
-import { addExhaustion } from "../config/exhaustion.mjs";
+import { addExhaustion, zdejmijWyjsciem } from "../config/exhaustion.mjs";
 import { critSkipsZranienie } from "./crit-riders.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
 import { registerHudLevelled } from "../actors/levelled-conditions.mjs";
 import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
 import { isCriticalHitOn } from "./trafienie.mjs";
+// Cykl importów z `umieranie.mjs` jest bezpieczny: obie strony wołają się tylko z ciał funkcji.
+import { zaproponujSmierc } from "./umieranie.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -71,11 +73,10 @@ export const ZRANIENIE_LEVELS = {
  * Register Zranienie hooks — call during init.
  */
 export function registerZranienie() {
-  // Hook into HP changes to detect PW→0 (preUpdate so we can read old HP)
+  // PW → 0: znacznik czasu dla ścieżki krytyka niżej (jeden Stopień za ten sam cios). Stopień za
+  // samo zejście do 0 PW nakłada `combat/umieranie.mjs` — tylko BG i BN w maszynie umierania; zwykły
+  // BN przy 0 PW umiera bez Stopnia (PLAN_m1_walka D2).
   Hooks.on("preUpdateActor", onPreUpdateActor);
-
-  // After update, apply wound if flagged by preUpdate
-  Hooks.on("updateActor", onUpdateActorZranienie);
 
   // Trafienie Krytyczne → Stopień Zranienia, gdy MG nakłada obrażenia z karty (tacka dnd5e).
   // Do 2026-10 był tu hak `dnd5e.rollDamage` w sygnaturze `(item, roll, data)`, której żadna
@@ -88,8 +89,7 @@ export function registerZranienie() {
   // Sync flag when the AE is deleted manually from Effects tab
   Hooks.on("deleteActiveEffect", onDeleteActiveEffect);
 
-  // Fix death saves: remove exhaustion penalty (not a d20 test per Neuroshima rules)
-  Hooks.on("dnd5e.preRollDeathSave", onPreRollDeathSave);
+  // Rzut przeciw śmierci jako czysta k20 (bez Wyczerpania i reszty) — `combat/umieranie.mjs` (U12).
 
   // Token-HUD cycling for the wound pips' third view. Deliberately wired to
   // `setZranienie`, the same writer the sheet pips use, so a HUD click and a pip
@@ -130,39 +130,16 @@ export function registerZranienie() {
 }
 
 /**
- * Detect when HP is about to drop to 0 and queue wound application.
- * Using preUpdateActor because actor.system still holds OLD values here.
+ * PW właśnie spadają do 0 — zapamiętaj dla ścieżki krytyka, która przychodzi zaraz po tej
+ * aktualizacji (`onApplyDamage`). `preUpdateActor`, bo tu `actor.system` ma jeszcze stare PW.
  */
 function onPreUpdateActor(actor, changes, options, userId) {
-  // Only process for the GM (avoid double processing)
   if (!game.user.isGM) return;
-
-  // Check if HP is being set to 0
   const newHP = foundry.utils.getProperty(changes, "system.attributes.hp.value");
   if (newHP !== 0) return;
-
-  // Check that current HP is > 0 (actor has old values in preUpdate)
   const oldHP = actor.system.attributes.hp.value;
   if (oldHP === undefined || oldHP <= 0) return;
-
-  // Flag the options so we can apply the wound in updateActor (after the update)
-  foundry.utils.setProperty(options, `${MODULE_ID}.applyZranienie`, true);
-  // …i zapamiętaj dla ścieżki krytyka, która przychodzi zaraz po tej aktualizacji (`onApplyDamage`).
   _zeroHpAt.set(actor.uuid, Date.now());
-}
-
-/**
- * After actor update, apply queued wound and 0-HP conditions if flagged in preUpdate.
- */
-async function onUpdateActorZranienie(actor, changes, options, userId) {
-  if (!game.user.isGM) return;
-  if (!options?.[MODULE_ID]?.applyZranienie) return;
-
-  // Apply wound level
-  await applyZranienie(actor, "PW spadły do 0");
-
-  // Apply Unconscious + Prone (dnd5e does NOT do this automatically)
-  await _applyZeroHPConditions(actor);
 }
 
 /**
@@ -231,35 +208,20 @@ async function onDeleteActiveEffect(effect, options, userId) {
   // Already 0 — nothing to sync, and writing anyway would re-enter _syncZranieniEffect.
   if ((actor.getFlag(MODULE_ID, "zranienie")?.level ?? 0) === 0) return;
   // Reset wound flag to 0 without trying to delete the (already gone) effect
+  const przed = actor.getFlag(MODULE_ID, "zranienie")?.level ?? 0;
   await actor.setFlag(MODULE_ID, "zranienie", { level: 0 });
+  await _poZejsciu(actor, przed, 0);
 }
 
 /**
- * Hook: dnd5e.preRollDeathSave
- *
- * Death saves in Neuroshima are NOT d20 tests — they are pure luck rolls:
- * "nie jest powiązany z żadną Cechą Bazową i nie jest też Testem k20"
- *
- * dnd5e applies exhaustion penalty (-2 × level) to all d20 rolls including
- * death saves. We strip the @exhaustion part to make it a flat d20 vs 10.
- *
- * @param {object} config - Roll configuration (has .rolls array)
- * @param {object} dialog - Dialog configuration
- * @param {object} message - Message configuration
+ * Zejście z Krytycznego (RAI, orzeczenie autora systemu 2026-10-06 — PLAN_m1_walka D5): zdejmuje
+ * wszystkie poziomy Wyczerpania ze Zranienia, jeśli jeszcze są. Każdą drogą — Regeneracja, Pomoc
+ * medyczna, pipki, HUD, skasowany efekt. W NOE te poziomy schodzą też zwykłym DO; w WKK tylko tak.
+ * Ponowne wejście w Krytyczny nadaje je znowu (`applyZranienie`).
  */
-function onPreRollDeathSave(config, dialog, message) {
-  // Strip exhaustion penalty from each roll's parts
-  if (config.rolls) {
-    for (const roll of config.rolls) {
-      if (roll.parts) {
-        const idx = roll.parts.indexOf("@exhaustion");
-        if (idx !== -1) {
-          roll.parts.splice(idx, 1);
-          delete roll.data?.exhaustion;
-        }
-      }
-    }
-  }
+async function _poZejsciu(actor, przed, po) {
+  if (!(przed >= 4 && po < 4)) return;
+  await zdejmijWyjsciem(actor, "zejscie-z-krytycznego", { powod: "zejście z Krytycznego Stopnia Zranienia" });
 }
 
 /**
@@ -272,11 +234,9 @@ export async function applyZranienie(actor, reason = "") {
   const newLevel = current + 1;
 
   if (newLevel > 4) {
-    // Death — next wound after Krytyczny
-    await ChatMessage.create({
-      content: `<strong>${actor.name}</strong> otrzymuje kolejny Stopień Zranienia ponad Krytyczny — <strong>ŚMIERĆ</strong>. ${reason ? `(${reason})` : ""}`,
-      speaker: ChatMessage.getSpeaker({ actor })
-    });
+    // Kolejny Stopień przy Krytycznym — „natychmiast umiera” (s. 32), ale śmierć potwierdza MG
+    // (PLAN_m1_walka D1): karta „Śmierć” zamiast samej linii na czacie.
+    await zaproponujSmierc(actor, "stopien", { powod: reason });
     return;
   }
 
@@ -321,8 +281,10 @@ export function getZranienieLvl(actor) {
  */
 export async function setZranienie(actor, level) {
   const clamped = Math.max(0, Math.min(4, level));
+  const przed = getZranienieLvl(actor);
   await actor.setFlag(MODULE_ID, "zranienie", { level: clamped });
   await _syncZranieniEffect(actor, clamped);
+  await _poZejsciu(actor, przed, clamped);
 }
 
 /* -------------------------------------------- */
@@ -446,38 +408,7 @@ function _zranienieStaticId() {
   return CONFIG.statusEffects?.find(s => s.id === "zranienie")?._id ?? null;
 }
 
-/* -------------------------------------------- */
-/*  0 HP Conditions — Unconscious + Prone        */
-/* -------------------------------------------- */
-
-/**
- * Apply Unconscious and Prone conditions when HP drops to 0.
- *
- * Per Neuroshima rules: "padasz na ziemię i otrzymujesz stan Nieprzytomność.
- * Stan ten trwa do momentu odzyskania przynajmniej jednego Punktu Wytrzymałości."
- *
- * Uses Actor5e.toggleStatusEffect which is the clean API for status conditions.
- * try/catch guards against duplicate-ID errors if the hook fires more than once.
- */
-const _applyingConditions = new Set();
-async function _applyZeroHPConditions(actor) {
-  if (!actor?.id) return;
-  if (typeof actor.toggleStatusEffect !== "function") return;
-  // Guard against double-invocation (e.g. if updateActor fires twice)
-  if (_applyingConditions.has(actor.id)) return;
-  _applyingConditions.add(actor.id);
-  try {
-    for (const status of ["unconscious"]) {
-      const already = actor.effects.some(e => e.statuses?.has(status));
-      if (!already) {
-        await actor.toggleStatusEffect(status, { active: true });
-        // Note: dnd5e auto-applies "prone" as a rider of "unconscious"
-      }
-    }
-  } finally {
-    _applyingConditions.delete(actor.id);
-  }
-}
+/* Nieprzytomność przy 0 PW (i jej koniec przy leczeniu) — `combat/umieranie.mjs` (PLAN_m1_walka U4). */
 
 /* -------------------------------------------- */
 /*  Sheet Display                                */

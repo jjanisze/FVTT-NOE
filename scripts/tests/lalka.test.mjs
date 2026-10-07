@@ -30,7 +30,7 @@ import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup, stub } from ".
 
 const I = (id, family, slots = [], extra = {}) => ({ id, family, quantity: 1, slots, blocks: [], ...extra });
 const moves = r => r.moves.map(m => `${m.itemId}:${m.from}>${m.to}`);
-const grip = { onPreRollAttack: gripTesting.onPreRollAttack, firedOneHanded };
+const grip = { onPreRollAttack: gripTesting.onPreRollAttack, zrodloJednaReka: gripTesting.zrodloJednaReka, firedOneHanded };
 
 function weaponData(id) {
   const data = buildWeaponItemData(WEAPON_MAP[id]);
@@ -562,19 +562,20 @@ export function registerLalkaTests(quench) {
           await actor.deleteEmbeddedDocuments("Item", [ar.id, katana.id, kafar.id, pistol.id], { render: false });
         });
 
-        it("karabin z wolną drugą ręką — bez Utrudnienia; z zajętą — Utrudnienie i pigułka", async function () {
+        it("karabin z wolną drugą ręką — bez Utrudnienia; z zajętą — Utrudnienie (źródło silnika okoliczności)", async function () {
           await place(actor, live(ar), "hand.0", { quiet: true });
-          expect(attack(live(ar)).cfg.disadvantage).to.not.equal(true);
+          expect(grip.zrodloJednaReka({ item: live(ar) })).to.deep.equal([]);
           await place(actor, live(katana), "hand.1", { quiet: true });
-          const r = attack(live(ar));
-          expect(r.cfg.disadvantage).to.equal(true);
-          expect(r.notes.map(n => n.level)).to.include("warn");
+          const [w] = grip.zrodloJednaReka({ item: live(ar) });
+          expect(w?.rodzaj).to.equal("utrudnienie");
+          expect(w?.label).to.match(/jedną ręką/);
+          expect(attack(live(ar)).cfg.disadvantage, "tryb rzutu ustawia silnik, nie chwyt").to.not.equal(true);
         });
 
         it("poręczna zwalnia z Utrudnienia jedną ręką", async function () {
           await place(actor, live(pistol), "hand.0", { quiet: true });
           const r = attack(live(pistol));
-          expect(r.cfg.disadvantage).to.not.equal(true);
+          expect(grip.zrodloJednaReka({ item: live(pistol) })).to.deep.equal([]);
           expect(r.notes[0].text).to.match(/poręczna/);
         });
 

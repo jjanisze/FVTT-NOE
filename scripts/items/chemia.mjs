@@ -43,8 +43,9 @@ import {
   CHEMIA, CHEMIA_FLAVOR, CHEMIA_FLAVOR_DEFAULT, getChemia, chemiaEffectId, chemiaEffects
 } from "../config/chemia-data.mjs";
 import {
-  addExhaustion, removeExhaustion, getExhaustionSources
+  addExhaustion, removeExhaustion, getExhaustionSources, zdejmijZrodlo, pipkiWyczerpania
 } from "../config/exhaustion.mjs";
+import { dzienSwiata } from "../world-clock.mjs";
 import { applyZranienie, getZranienieLvl, setZranienie } from "../combat/zranienie.mjs";
 import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
 
@@ -243,21 +244,21 @@ async function _applyClears(actor, clears, lines) {
   }
 
   if (clears.exhaustionSource) {
-    let removed = 0;
-    while (getExhaustionSources(actor).some(s => s.source === clears.exhaustionSource)) {
-      await removeExhaustion(actor, clears.exhaustionSource, { chat: false });
-      if (++removed > 6) break;
-    }
+    // Jednym zapisem — pętla `removeExhaustion` czytała spóźniony poziom pochodny (F15).
+    const removed = await zdejmijZrodlo(actor, clears.exhaustionSource, { chat: false });
     if (removed) lines.push(`Wyczerpanie ze Skażenia zdjęte (${removed}).`);
   }
 
   if (clears.exhaustion) {
-    // RAW says "1 poziom", without naming a cause — take the most recent one.
-    const sources = getExhaustionSources(actor);
-    const last = sources[sources.length - 1];
+    // RAW says "1 poziom", without naming a cause — take the most recent one. Uporczywego nie:
+    // „nie może zostać usunięte, dopóki…” (s. 258) dotyczy każdego sposobu, nie tylko odpoczynku.
+    const doZdjecia = pipkiWyczerpania(actor).filter(p => !p.uporczywe);
+    const last = doZdjecia.sort((a, b) => (a.wpis.addedAt ?? 0) - (b.wpis.addedAt ?? 0)).at(-1);
     if (last) {
-      await removeExhaustion(actor, last.source, { chat: false });
+      await removeExhaustion(actor, last.zrodlo, { chat: false });
       lines.push(`Zdjęty 1 poziom Wyczerpania: <em>${last.label}</em>.`);
+    } else if (getExhaustionSources(actor).length) {
+      lines.push("Całe Wyczerpanie jest uporczywe — dawka się marnuje.");
     } else {
       lines.push("Brak Wyczerpania do zdjęcia — dawka się marnuje.");
     }
@@ -367,9 +368,9 @@ async function _scheduleAfter(actor, def, key, item, lines) {
 /*  Daily limits                                 */
 /* -------------------------------------------- */
 
-/** Current world day index — the same counter „Zachód słońca” advances. */
+/** Dzisiejszy dzień kalendarza świata — limity „dziennie” liczy czas gry (`world-clock.mjs`). */
 function _today() {
-  return game.settings.get(MODULE_ID, "dayCounter");
+  return dzienSwiata();
 }
 
 function _dosesToday(actor, key) {

@@ -22,7 +22,17 @@ zestawy narzędzi zastępują standardową listę dnd5e.
 (0–4) zastępuje/dopełnia standardowe zasady śmierci: automatyczne nadanie przy spadku PW do 0 lub
 przy trafieniu krytycznym, kary do prędkości/reakcji/akcji dodatkowych rosnące ze stopniem,
 możliwość śmierci przy skumulowaniu Krytycznego Stopnia. Widoczne jako stan na pionku, efekt na
-karcie i pasek na karcie BN.
+karcie i pasek na karcie BN. Stopień schodzi po Długich odpoczynkach (Regeneracja albo Pomoc
+medyczna), a **kalendarzyk zdrowia** podpowiada kiedy.
+
+**Umieranie wg NOE:** obrażenia przy 0 PW to porażka (atak wręcz — dwie), rzut przeciw śmierci to
+czysta k20 bez premii i Fuksów, Olbrzymie obrażenia to jeden cios za dwukrotność maksymalnych PW,
+stabilny odzyskuje 1 PW po 1k8 godzinach, śmierć potwierdza MG. Szczegóły:
+[Umieranie i powrót do zdrowia](Umieranie-i-zdrowie.md).
+
+**Ułatwienie i Utrudnienie w Teście Ataku ustawia się samo** — zasięg daleki, strzał w zwarciu, stany
+atakującego i celu, Unikanie, Bieganie; widać je w oknie rzutu i na karcie ataku, a zmienić może
+gracz i MG ([Trudność Trafienia, trafienie i reakcje](TT-i-reakcje.md)).
 
 **Test Ataku i obrażenia to dwa osobne rzuty.** Atakujący rzuca Test Ataku; karta ataku pokazuje
 werdykt dla każdego celu (TT celu, osłona z okna ataku, naturalna 20 trafia zawsze, naturalna 1
@@ -59,8 +69,11 @@ Effects, warunki przerwania, karty czatu).
   sposoby zatrzymania zgodne z RAW.
 - **Spadanie** — obrażenia, powalenie, test przy wejściu do cieczy — czego bazowy dnd5e w ogóle
   nie liczy.
-- **Głód, odwodnienie, podpalenie, przemarznięcie** — dzienne zapotrzebowanie z ekwipunku,
-  konsekwencje przy braku zaopatrzenia.
+- **Głód, odwodnienie, podpalenie** — dzienne zapotrzebowanie z ekwipunku, konsekwencje przy braku
+  zaopatrzenia.
+- **Przemarznięcie, brak snu, duszenie się** — narzędzie MG „Zagrożenia” w kontrolkach żetonów.
+- **Wyczerpanie ze źródłem** — każdy poziom wie, skąd przyszedł i co go zdejmie; pipki w ramce to
+  poziomy, których odpoczynek nie zdejmie ([szczegóły](Umieranie-i-zdrowie.md#wyczerpanie-na-karcie)).
 - **Odpoczynek i podróż** — polowanie i gotowanie jako aktywności odpoczynku; system podróży
   drużyny z licznikiem czasu.
 

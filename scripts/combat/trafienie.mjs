@@ -28,6 +28,8 @@
 
 import { resolveHit, creatureKindOf, isHitVerdict } from "../config/defense-rules.mjs";
 import { coverAcBonus } from "./cover.mjs";
+// Cykl z `okolicznosci.mjs` bezpieczny — obie strony wołają się tylko z ciał funkcji.
+import { autoKrytykZRzutu } from "./okolicznosci.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 export const OBRONA_FLAG = "obrona";
@@ -99,7 +101,7 @@ export const reactionBonus = entry => (entry?.used ?? []).reduce((n, u) => n + _
 export function verdictOfEntry(obrona, entry) {
   return resolveHit({
     total: obrona.total, critical: obrona.krytyk, fumble: obrona.fumble, tt: entry.tt, cover: entry.cover,
-    bonuses: reactionBonus(entry), critDowngraded: entry.critDowngraded
+    bonuses: reactionBonus(entry), critDowngraded: entry.critDowngraded, autoCrit: !!entry.autoKrytyk
   });
 }
 
@@ -107,13 +109,15 @@ export function verdictOfEntry(obrona, entry) {
  * Wpis celu na karcie ataku: TT wobec atakującego w chwili rzutu, osłona, werdykt.
  * @param {Token|TokenDocument} token
  */
-export function buildTargetEntry(token, { obrona, attacker, cover = 0 }) {
+export function buildTargetEntry(token, { obrona, attacker, cover = 0, autoKrytyk = null }) {
   const doc = token?.document ?? token;
   const actor = doc?.actor;
   const tt = actor ? ttAgainst(actor, { attacker, melee: obrona.melee }) : null;
   const entry = {
     tokenUuid: doc?.uuid ?? null, actorUuid: actor?.uuid ?? null, name: doc?.name ?? actor?.name ?? "?",
-    tt, cover: _num(cover), used: [], critDowngraded: false, verdict: null, decided: false
+    tt, cover: _num(cover), used: [], critDowngraded: false, verdict: null, decided: false,
+    // Automatyczne TK z chwili rzutu (`combat/okolicznosci.mjs`, s. 35) — powód albo null.
+    autoKrytyk: autoKrytyk ?? null
   };
   entry.verdict = verdictOfEntry(obrona, entry).verdict;
   return entry;
@@ -274,7 +278,9 @@ function _onPreCreateMessage(message, data, _options, userId) {
   const tokens = [...(game.user.targets ?? [])];
   // Okno osłony pyta tylko przy jednym celu (`combat/cover.mjs`) — osłona należy do niego.
   const cover = tokens.length === 1 ? coverAcBonus(roll.options?.neuroCover) : 0;
-  obrona.targets = tokens.map(t => buildTargetEntry(t, { obrona, attacker: activity?.actor, cover }));
+  obrona.targets = tokens.map(t => buildTargetEntry(t, {
+    obrona, attacker: activity?.actor, cover, autoKrytyk: autoKrytykZRzutu(roll, t.document?.uuid)
+  }));
   message.updateSource({ [`flags.${MODULE_ID}.${OBRONA_FLAG}`]: obrona });
 }
 

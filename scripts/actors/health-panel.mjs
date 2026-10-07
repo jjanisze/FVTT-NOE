@@ -23,8 +23,11 @@
  * penalties are prose ("50% szans, że wpadasz w szał") and stay with the GM.
  *
  * ## Day tracking
- * Deliberately NOT `game.time.worldTime`: this table does not advance world time,
- * so a "day" is a world setting counter bumped by the Zachód słońca routine.
+ * „Dziś” to dzień kalendarza świata (`dzienSwiata`, `world-clock.mjs`) — czas gry, ten sam zegar co
+ * kalendarzyk zdrowia, stabilizacja i znaczniki Wyczerpania (decyzja MG 2026-10-07: zawsze czas gry).
+ * Do tej daty dni liczył osobny licznik `dayCounter`, podbijany przez „Zachód słońca”; przeniesienie —
+ * `migration/migrate-dni-swiata.mjs`. „Zachód słońca” nie przesuwa zegara: kończy dzień, który pokazuje
+ * zegar, i pilnuje, żeby nie skończyć go dwa razy.
  */
 
 import {
@@ -40,7 +43,9 @@ import {
   getChemia, chemiaKeyByName, chemiaForDisease, chemiaItemData
 } from "../config/chemia-data.mjs";
 import { effectsFor } from "../config/disease-effects.mjs";
-import { addExhaustion } from "../config/exhaustion.mjs";
+import { addExhaustion, poziomWyczerpania } from "../config/exhaustion.mjs";
+import { KARA_ZA_WYCZERPANIE } from "../config/rekonwalescencja-rules.mjs";
+import { dzienSwiata, sekundyDoby, formatWorldDate, formatWorldTime } from "../world-clock.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const PANEL_CLASS = "neuro-health-panel";
@@ -52,13 +57,22 @@ const MEDICINE_PACK = `${MODULE_ID}.lekarstwa`;
 /* -------------------------------------------- */
 
 export function registerHealthPanel() {
+  // Przestarzały (2026-10-07): „dziś” liczy zegar świata (`dzienSwiata`). Zostaje zarejestrowany dla
+  // migracji `migration/migrate-dni-swiata.mjs`, która przenosi z niego dzisiejsze dawki i blokady.
   game.settings.register(MODULE_ID, "dayCounter", {
-    name: "Licznik dni (Choroby)",
-    hint: "Zwiększany przez rutynę „Zachód słońca”. Służy do sprawdzania, kto wziął dziś lek.",
+    name: "Licznik dni (Choroby) — przestarzały",
+    hint: "Do 2026-10-07 zwiększany przez „Zachód słońca”; teraz dni liczy zegar świata.",
     scope: "world",
     config: false,
     type: Number,
     default: 0
+  });
+  // Czas świata ostatniego „Zachodu słońca” — strażnik przed drugim przebiegiem tego samego dnia.
+  game.settings.register(MODULE_ID, "ostatniZachod", {
+    scope: "world",
+    config: false,
+    type: Number,
+    default: -1
   });
 
   Hooks.on("renderCharacterActorSheet", _onRenderCharacterSheet);
@@ -80,11 +94,14 @@ function _registerSunsetControl() {
       button: true,
       visible: game.user?.isGM ?? false,
       onChange: async () => {
+        const ostatni = game.settings.get(MODULE_ID, "ostatniZachod");
+        const juzBylo = ostatni >= 0 && dzienSwiata(ostatni) === dzienSwiata();
         const ok = await foundry.applications.api.DialogV2.confirm({
           window: { title: "Zachód słońca" },
-          content: `<p>Wykonać RO na Kondycję ST ${SUNSET_SAVE.dc} dla każdej postaci gracza, `
-            + `która nie wzięła dziś lekarstwa, i przejść do dnia `
-            + `<strong>${game.settings.get(MODULE_ID, "dayCounter") + 1}</strong>?</p>`
+          content: `<p>Koniec dnia <strong>${formatWorldDate() ?? "—"}</strong>: RO na Kondycję ST ${SUNSET_SAVE.dc} `
+            + `dla każdej postaci gracza, która nie wzięła dziś lekarstwa, i dzienne RO chorób?</p>`
+            + (juzBylo ? `<p class="neuro-zle"><strong>Ten dzień już miał Zachód słońca</strong> `
+              + `(${formatWorldTime(ostatni)}). Przesuń zegar świata albo potwierdź drugi przebieg.</p>` : "")
         });
         if (ok) await sunsetCheck();
       }
@@ -123,9 +140,19 @@ function _newId() {
   return foundry.utils.randomID(12);
 }
 
-/** Current world day index. */
+/**
+ * Premia RO na Kondycję o zachodzie słońca: z karty, minus 2 za każdy poziom Wyczerpania — RO to Test
+ * k20 (s. 35), a ręczny `1d20` omija `addRollExhaustion` dnd5e. Do 2026-10-07 tej kary tu nie było;
+ * kalendarzyk zdrowia liczy dzienne RO choroby tą samą regułą (`szansaRO`).
+ */
+function _premiaRO(actor) {
+  const save = actor.system.abilities?.[SUNSET_SAVE.ability]?.save?.value ?? 0;
+  return save - KARA_ZA_WYCZERPANIE * poziomWyczerpania(actor);
+}
+
+/** Dzisiejszy dzień kalendarza świata — czas gry, ten sam zegar co kalendarzyk i stabilizacja. */
 function _today() {
-  return game.settings.get(MODULE_ID, "dayCounter");
+  return dzienSwiata();
 }
 
 /** True when this disease already got its dose for the current day. */
@@ -428,18 +455,18 @@ function _dosesWord(n) {
  * @param {Actor} actor
  * @param {object} entry     The disease entry, mutated.
  * @param {{dc: number, success: string}} daily
- * @param {number} tomorrow  Day counter value the rest block should cover.
+ * @param {number} bezKorzysciDo  Czas świata, do którego odpoczynki nie dadzą korzyści.
  * @returns {Promise<string>}  HTML verdict for the sunset card.
  */
-async function _rollDailySave(actor, entry, daily, tomorrow) {
+async function _rollDailySave(actor, entry, daily, bezKorzysciDo) {
   const roll = await new Roll("1d20").evaluate();
-  const total = roll.total + (actor.system.abilities?.[SUNSET_SAVE.ability]?.save?.value ?? 0);
+  const total = roll.total + _premiaRO(actor);
 
   if (total < daily.dc) {
     await addExhaustion(actor, "choroba", { chat: false });
-    await actor.setFlag(MODULE_ID, NO_REST_FLAG, tomorrow);
+    await actor.setFlag(MODULE_ID, NO_REST_FLAG, bezKorzysciDo);
     return `<span class="bad">oblany (${total} vs ST ${daily.dc}) — poziom Wyczerpania, `
-      + `jutro bez korzyści z odpoczynku</span>`;
+      + `odpoczynki przez dobę bez korzyści</span>`;
   }
 
   if (daily.success === "cured") {
@@ -479,7 +506,8 @@ export async function sunsetCheck({ actors } = {}) {
 
   const pool = actors ?? game.actors.filter(a => a.type === "character" && a.hasPlayerOwner);
   const lines = [];
-  const tomorrow = _today() + 1;
+  // Oblany RO „na koniec dnia” odbiera korzyści odpoczynków przez następną dobę gry.
+  const bezKorzysciDo = game.time.worldTime + sekundyDoby();
 
   for (const actor of pool) {
     let entries = getChoroby(actor);
@@ -492,7 +520,7 @@ export async function sunsetCheck({ actors } = {}) {
           lines.push(`<li><strong>${actor.name}</strong> — ${entry.name}: dawka wzięta.</li>`);
           continue;
         }
-        const verdict = await _rollDailySave(actor, entry, daily, tomorrow);
+        const verdict = await _rollDailySave(actor, entry, daily, bezKorzysciDo);
         lines.push(`<li><strong>${actor.name}</strong> — ${entry.name}: ${verdict}</li>`);
         changed = true;
         continue;
@@ -505,7 +533,7 @@ export async function sunsetCheck({ actors } = {}) {
 
       const roll = await new Roll("1d20").evaluate();
       const die = roll.dice[0]?.results?.[0]?.result ?? roll.total;
-      const total = roll.total + (actor.system.abilities?.[SUNSET_SAVE.ability]?.save?.value ?? 0);
+      const total = roll.total + _premiaRO(actor);
       const stages = diseaseStages(entry);
       const before = entry.stage;
 
@@ -539,11 +567,11 @@ export async function sunsetCheck({ actors } = {}) {
     if (changed || entries.length) await _setChoroby(actor, entries);
   }
 
-  await game.settings.set(MODULE_ID, "dayCounter", _today() + 1);
+  await game.settings.set(MODULE_ID, "ostatniZachod", game.time.worldTime);
 
   await ChatMessage.create({
     content: `<div class="neuro-sunset-card">
-      <div class="neuro-sunset-head"><i class="fa-solid fa-sun"></i> ZACHÓD SŁOŃCA — dzień ${_today()}</div>
+      <div class="neuro-sunset-head"><i class="fa-solid fa-sun"></i> ZACHÓD SŁOŃCA — ${formatWorldDate() ?? "—"}</div>
       ${lines.length ? `<ul class="neuro-sunset-list">${lines.join("")}</ul>`
         : `<div class="neuro-sunset-empty">Nikt nie choruje przewlekle.</div>`}
     </div>`,

@@ -107,6 +107,35 @@ function _isPlayerCharacter(actor) {
   return actor?.type === "character";
 }
 
+/** Rzuty przerzucone przez gracza, który nie mógł oznaczyć cudzej wiadomości — ostatnie N na aktorze. */
+const PRZERZUCONE = "przerzucone";
+
+/**
+ * Oznacz rzut jako przerzucony (jeden przerzut na rzut). Autor wiadomości albo MG pisze flagę na niej.
+ * Gracz, który przerzuca rzut wykonany przez MG na jego postaci (zagrożenia z `actors/zagrozenia.mjs`,
+ * Niedożywienie z `actors/party-supplies.mjs`), cudzej wiadomości edytować nie może — wtedy znacznik
+ * idzie na jego aktora. Do 2026-10 `update` rzucał tu wyjątkiem uprawnień: Fuks był już zjedzony, hak
+ * `neuroshima.rerolled` nie odpalał, a pasek wracał przy każdym przerysowaniu (PLAN_m1_walka E7).
+ * @param {ChatMessage} message
+ * @param {Actor} actor
+ */
+async function _oznaczPrzerzucony(message, actor) {
+  if (!message) return;
+  if (message.canUserModify(game.user, "update")) {
+    await message.update({ [`flags.${MODULE_ID}.rerolled`]: true });
+    return;
+  }
+  const lista = actor?.getFlag(MODULE_ID, PRZERZUCONE) ?? [];
+  await actor?.setFlag(MODULE_ID, PRZERZUCONE, [...lista.filter(id => id !== message.id), message.id].slice(-20));
+  ui.chat?.updateMessage?.(message);
+}
+
+/** Czy ten rzut już przerzucono (flaga wiadomości albo znacznik na aktorze). */
+function _przerzucony(message, actor) {
+  return Boolean(message.flags?.[MODULE_ID]?.rerolled)
+    || (actor?.getFlag(MODULE_ID, PRZERZUCONE) ?? []).includes(message.id);
+}
+
 /* -------------------------------------------- */
 /*  Chat Message — Button Injection              */
 /* -------------------------------------------- */
@@ -140,6 +169,7 @@ function onRenderChatMessage(message, html) {
   if (!actorId) return;
   const actor = game.actors.get(actorId);
   if (!actor?.isOwner || !_isPlayerCharacter(actor)) return;
+  if (_przerzucony(message, actor)) return;
 
   // Build the subtle reroll bar
   const bar = document.createElement("div");
@@ -336,9 +366,7 @@ async function _onClickForsowanie(event) {
 
   // Mark source message as rerolled (prevents re-adding buttons)
   const originalMessage = game.messages.get(messageId);
-  if (originalMessage) {
-    await originalMessage.update({ [`flags.${MODULE_ID}.rerolled`]: true });
-  }
+  await _oznaczPrzerzucony(originalMessage, actor);
 
   // Ktoś może czekać na wynik tego rzutu — np. Test końcowy Roboty (`production/robota.mjs`).
   Hooks.callAll("neuroshima.rerolled", { message: originalMessage, roll, kind: "forsowanie", actor });
@@ -451,9 +479,7 @@ async function _onClickFuks(event) {
   seqScrollText("FUKS!", actor, { color: "#2ecc71", fontSize: 36, duration: 2000 });
 
   // Mark source message as rerolled
-  if (originalMessage) {
-    await originalMessage.update({ [`flags.${MODULE_ID}.rerolled`]: true });
-  }
+  await _oznaczPrzerzucony(originalMessage, actor);
 
   Hooks.callAll("neuroshima.rerolled", { message: originalMessage, roll: reroll, kind: "fuks", actor });
 

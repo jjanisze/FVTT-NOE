@@ -259,9 +259,11 @@ export const NEUROSHIMA_MARKERS = Object.freeze({
     neverBlockMovement: true
   },
   stable: {
-    name: "Ustabilizowany",
+    // PLAN_m1_walka §7.3: jeden magazyn stabilizacji — nakłada go `combat/umieranie.mjs`.
+    name: "Stabilny",
     img: `${SVG}/stable.svg`,
-    description: "<p>Istota na 0 PW, która przestała rzucać Rzuty Przeciw Śmierci.</p>"
+    description: "<p>Istota na 0 PW, która przestała rzucać Rzuty Przeciw Śmierci (s. 34). Wciąż Nieprzytomna; "
+      + "bez leczenia odzyskuje 1 PW po 1k8 godzinach. Jakiekolwiek obrażenia wznawiają rzuty.</p>"
   },
   dodging: {
     name: "Unikanie",
@@ -271,6 +273,16 @@ export const NEUROSHIMA_MARKERS = Object.freeze({
     // przestawia `actors/tt.mjs` na właściciela — rdzeń wygasza `turnStart` na początku tury
     // tego, kto był na ruchu przy tworzeniu. Kasowanie wygasłego też tam (DEV_GUIDE §10e.2).
     // Szachista: Roszada czyta ten stan (`config/tt-rules.mjs`).
+    duration: { value: 1, units: "turns", expiry: "turnStart" }
+  },
+  // Bieganie [A] (s. 30, PLAN_m1_walka U8) — znacznik jak Unikanie: czyta go silnik okoliczności ataku
+  // (`config/okolicznosci-ataku.mjs`), zdejmuje początek następnej tury właściciela (`actors/tt.mjs`).
+  bieganie: {
+    name: "Bieganie",
+    img: "icons/svg/wingfoot.svg",
+    description: "<p>Akcja Bieganie — do początku twojej następnej tury dodatkowy ruch równy Szybkości × 2 "
+      + "i Utrudnienie do twoich Testów Ataku; ataki dystansowe przeciw tobie mają Utrudnienie do końca "
+      + "twojej bieżącej tury. Nie przy Powaleniu; nie dla istot, które nie poruszają się na nogach (s. 30).</p>",
     duration: { value: 1, units: "turns", expiry: "turnStart" }
   },
   hiding: {
@@ -355,7 +367,10 @@ function buildConditionEffects() {
     malnourished: new Set(["malnutrition"]),
     abilityCheckDisadvantage: new Set(["poisoned", "frightened"]),
     abilitySaveDisadvantage: new Set(),
-    attackDisadvantage: new Set(["poisoned", "frightened"]),
+    // Pusty celowo (PLAN_m1_walka F1): dnd5e 5.3 tego zbioru nie czyta (#5176), więc Przerażenie i
+    // Zatrucie nie dawały tu Utrudnienia wcale. Stany w Teście Ataku liczy silnik okoliczności
+    // (`config/okolicznosci-ataku.mjs`); gdyby dnd5e zaczął czytać ten zbiór, dublowałby silnik.
+    attackDisadvantage: new Set(),
     dexteritySaveDisadvantage: new Set(["restrained"]),
     initiativeAdvantage: new Set(["ambush"]),
     initiativeDisadvantage: new Set(["incapacitated", "surprised"])

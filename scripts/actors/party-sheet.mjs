@@ -22,7 +22,7 @@
  */
 
 import { getLevelledRegistry } from "./levelled-conditions.mjs";
-import { EXHAUSTION_SOURCES, getExhaustionSources } from "../config/exhaustion.mjs";
+import { pipkiWyczerpania } from "../config/exhaustion.mjs";
 import { getPodroz, setPodroz, buildTravelContext, postTravelSummary, tankuj, ustawBak, paliwoWidok } from "./party-travel.mjs";
 import { buildSuppliesContext, consumeDailyNeeds, hunt, cook } from "./party-supplies.mjs";
 import { confirmLootClose, forceEndLootSession, lootLockContext } from "./party-loot-lock.mjs";
@@ -59,14 +59,14 @@ const PARTY_TABS = [
 function memberTracks(actor) {
   const tracks = [];
   const exhMax = CONFIG.DND5E.conditionTypes?.exhaustion?.levels ?? 6;
-  const sources = getExhaustionSources(actor);
   tracks.push({
     id: "exhaustion",
     short: "WYCZ",
     name: "Wyczerpanie",
     value: actor.system?.attributes?.exhaustion ?? 0,
     max: exhMax,
-    sources
+    // Ten sam znak co w panelu Stan (§7.9): uporczywe z lewej, w ramce; skrajna prawa schodzi pierwsza.
+    pipki: pipkiWyczerpania(actor)
   });
 
   const wound = getLevelledRegistry().get("zranienie");
@@ -76,19 +76,21 @@ function memberTracks(actor) {
     name: wound.label ?? "Zranienie",
     value: wound.get(actor) ?? 0,
     max: wound.max,
-    sources: []
+    pipki: []
   });
 
   for (const track of tracks) {
     track.pips = Array.fromRange(track.max, 1).map(n => {
-      const origin = n <= track.value ? track.sources[n - 1] : null;
-      const color = origin ? EXHAUSTION_SOURCES[origin.source]?.color : null;
+      const pipka = n <= track.value ? track.pipki[n - 1] : null;
       return {
         n,
         filled: n <= track.value,
         terminal: n === track.max,
-        color,
-        tooltip: [`${track.name} ${n}/${track.max}`, origin?.label].filter(Boolean).join(" — ")
+        uporczywe: Boolean(pipka?.uporczywe),
+        color: pipka?.color ?? null,
+        tooltip: [`${track.name} ${n}/${track.max}`, pipka?.label].filter(Boolean).join(" — ")
+          + (pipka?.linie?.length ? `<br>${pipka.linie.join("<br>")}` : "")
+          + (pipka?.od ? `<br>Od: ${pipka.od}` : "")
       };
     });
     track.tooltip = `${track.name}: ${track.value}/${track.max}`;

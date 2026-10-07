@@ -38,6 +38,7 @@ import { hasWeaponProperty } from "../config/weapons.mjs";
 import { handgunPerkFor } from "../actors/rewolwerowiec.mjs";
 import { ABILITY_KEYS, hasAbility } from "../actors/abilities.mjs";
 import { WEAPONS } from "../config/weapons-data.mjs";
+import { zarejestrujZrodloOkolicznosci } from "./okolicznosci.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -197,14 +198,11 @@ function onPreRollAttack(config, dialog) {
     notes.push({ level: "warn", text: `Dwuręczna, druga ręka zajęta (${other}) — RAW: nie można nią atakować, decyduje MG` });
   }
 
-  // Broń palna jedną ręką (s. 118–119): Utrudnienie, chyba że zwolnienie.
+  // Broń palna jedną ręką (s. 118–119): Utrudnienie ustawia silnik okoliczności ataku
+  // (`zrodloJednaReka` niżej, PLAN_m1_walka D6); tu zostaje tylko informacja o zwolnieniu.
   if (isFirearm(item) && busy) {
     const exempt = oneHandedExemption(actor, item);
     if (exempt) notes.push({ level: "info", text: `Jedną ręką bez Utrudnienia — ${exempt}` });
-    else {
-      config.disadvantage = true;
-      notes.push({ level: "warn", text: `Strzał jedną ręką (druga ręka: ${other}) — Utrudnienie` });
-    }
   }
 
   // Atak drugą ręką (lekka, s. 117): dozwolony, gdy obie ręce trzymają broń lekką.
@@ -229,6 +227,20 @@ function onPreRollAttack(config, dialog) {
   }
 }
 
+/**
+ * Źródło silnika okoliczności ataku (`combat/okolicznosci.mjs`, PLAN_m1_walka D6): strzał z broni palnej
+ * jedną ręką, gdy druga jest zajęta i nic nie zwalnia (s. 118–119) → Utrudnienie.
+ * @param {{item: Item5e, actor: Actor}} ctx
+ */
+function zrodloJednaReka(ctx) {
+  const item = ctx?.item;
+  const actor = item?.actor;
+  if (item?.type !== "weapon" || !actor || !isFirearm(item)) return [];
+  const h = handContext(item);
+  if (!h?.held || !h.otherBusy || oneHandedExemption(actor, item)) return [];
+  return [{ rodzaj: "utrudnienie", label: `Strzał jedną ręką (druga ręka: ${h.otherLabel})`, strona: "s. 118" }];
+}
+
 /** Hook: `dnd5e.renderChatMessage` — pigułki chwytu na karcie ataku. */
 function onRenderChatMessage(message, html) {
   if (message.getFlag("dnd5e", "roll")?.type !== "attack") return;
@@ -250,8 +262,9 @@ function onRenderChatMessage(message, html) {
 
 export function registerGrip() {
   Hooks.on("dnd5e.preRollAttack", onPreRollAttack);
+  zarejestrujZrodloOkolicznosci("jednaReka", zrodloJednaReka);
   Hooks.on("dnd5e.renderChatMessage", onRenderChatMessage);
   console.log("Neuroshima 5e | Grip consequences registered");
 }
 
-export const __testing = Object.freeze({ onPreRollAttack, SMG_IDS });
+export const __testing = Object.freeze({ onPreRollAttack, zrodloJednaReka, SMG_IDS });

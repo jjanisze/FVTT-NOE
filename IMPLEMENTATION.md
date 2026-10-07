@@ -20,21 +20,21 @@ M# = kamień milowy w `PLAN_beta.md`.
 | Zasady podstawowe | Cechy, testy, PB, ST, RO, TT, Ułatwienie/Utrudnienie, 18 umiejętności, 22 narzędzia | ✅ | `config/skills.mjs`, `tools.mjs`, `terminology.mjs` |
 | | Przerzuty, Fuksy, Forsowanie | ✅ | `combat/rerolls.mjs`, `actors/fuks-pips.mjs` |
 | Walka | Inicjatywa, Zaskoczenie, Niespodziewany atak | ✅ | natywne dnd5e + stan `ambush` (§1.12) |
-| | Osłona, przebijanie osłony | 🟡 | `combat/cover.mjs` (§1.10); premia osłony wchodzi do rozstrzygacza trafienia (`combat/trafienie.mjs`). Pytana tylko przy atakach dystansowych (RAW: każdy atak — M1) |
+| | Osłona, przebijanie osłony | ✅ | `combat/cover.mjs` (§1.10); premia osłony wchodzi do rozstrzygacza trafienia (`combat/trafienie.mjs`). Ataki dystansowe i wręcz (wręcz: wiersz w oknie, domyślnie „Brak”, bez przebijania — `PLAN_m1_walka.md` U9) |
 | | TT postaci: jedna metoda (TT podstawowa, pancerz, Goła klata, Tarcza wiary) + premie (Obłęd, Obsługa pancerza, Kuloodporność, Trening w zbroi, Roszada, Tańczący z siekierkami, Zasłona, ochraniacze) | ✅ | `config/tt-rules.mjs`, `actors/tt.mjs` — metoda „NOE (automatycznie)”, dymek z rozkładem i „nie liczy się”; ochraniacze to pancerz w warunkach zdolności (autor systemu) — `PLAN_tt.md` |
 | | Rzut ataku oddzielony od rzutu obrażeń; reakcje po trafieniu (Inteligentna obrona, Unik łowcy, Empiryk, Bullet time, Parowanie, Parowanie tarczą, Koci odskok, Krytyczna ochrona hełmu; reakcje BN z Bestiariusza) | ✅ | `combat/trafienie.mjs` (jeden rozstrzygacz, werdykt na karcie ataku), `combat/obrona.mjs` (okno „Reakcje celu”); obrażenia rzuca atakujący, nakłada MG tacką — `PLAN_tt.md` |
 | | Pechowa jedynka: zacięcie, degradacja broni białej | ✅ | `weapons/jams.mjs`, `melee-degradation.mjs` |
-| | Stopień Zranienia, Ostatnia akcja, Nokautowanie, stany | ✅ | `combat/zranienie.mjs`, `knockout.mjs`, `config/conditions.mjs` |
-| | **Neutralizacja Stopnia Zranienia** (Regeneracja, Pomoc medyczna) | ❌ | M1 |
-| | Rzuty przeciw śmierci przy obrażeniach na 0 PW, Olbrzymie obrażenia (2× maks. PW), stabilizacja | ❌ | M1 |
-| | Akcja Bieganie; Utrudnienie w zwarciu i na zasięgu dalekim | ❌ | M1 |
+| | Stopień Zranienia, Ostatnia akcja, Nokautowanie, stany | ✅ | `combat/zranienie.mjs`, `knockout.mjs`, `config/conditions.mjs`. Stany atakującego i celu w Teście Ataku i automatyczne TK ≤ 1,5 m — silnik okoliczności ataku (`config/okolicznosci-ataku.mjs`, `combat/okolicznosci.mjs`, M1 E3); Nieprzytomność z 0 PW kończy się przy leczeniu (E1) |
+| | Neutralizacja Stopnia Zranienia (Regeneracja, Pomoc medyczna), kalendarzyk zdrowia | ✅ | `actors/rekonwalescencja.mjs`, `config/rekonwalescencja-rules.mjs` — jedna droga na każdy DO (Gojenie / Pomoc medyczna / samoleczenie WKK) w oknie Długiego odpoczynku, karta RO dla właściciela, przerzut przelicza werdykt; kalendarzyk z panelu Stan. Wyczerpanie: reguły zdejmowania, kolejność DO, uporczywe w ramce — `PLAN_m1_walka.md` E5–E6, e2e `rekonwalescencja` (NOE i WKK), `docs/Umieranie-i-zdrowie.md` |
+| | Rzuty przeciw śmierci przy obrażeniach na 0 PW, Olbrzymie obrażenia (2× maks. PW), stabilizacja | ✅ | `combat/umieranie.mjs`, `config/umieranie-rules.mjs`, `items/staza.mjs` — porażki przy 0 PW (wręcz: 2), czysta k20, karty „Umiera” / „Śmierć” (potwierdza MG) / „BN pada”, stabilizacja (Medycyna, mały medyk, staza, trzy sukcesy), 1 PW po 1k8 h na zegarze świata, DO przy 0 PW odmówiony — `PLAN_m1_walka.md` E1–E2, e2e `umieranie` |
+| | Akcja Bieganie; Utrudnienie w zwarciu i na zasięgu dalekim | ✅ | silnik okoliczności ataku (M1 E3–E4): domyślne Ułatwienie/Utrudnienie w oknie rzutu, jedna grupa plakietek z dymkiem; Bieganie i Unikanie — statusy z HUD żetonu i z panelu Stan w walce, zdejmowane na początku następnej tury. Przyspieszenie ruchu — informacyjnie (moduł nie pilnuje ruchu) |
 | | Manewry wręcz: Odepchnięcie, Pochwycenie, Wytrącenie | ✅ | `combat/melee-maneuvers.mjs` (Wytrącenie: przedmiot z ręki ląduje u stóp celu; Pochwycenie zajmuje rękę) |
 | | Broń palna jedną ręką, oburęczna/dwuręczna, atak drugą ręką; upuszczanie i podnoszenie [I] | ✅ | `combat/grip.mjs`, `actors/ground-items.mjs` — domyślne w oknie, pigułki na karcie |
 | Eksploracja | Światło, pole widzenia 220°, noktowizja/termowizja, latarki, flary | ✅ | `items/light-sources.mjs`, `vision-sources.mjs`, `gogle.mjs`, `config/fov.mjs` |
 | | Podróż: tempo, biomy, trudny teren, porządek marszu | ✅ | `actors/party-travel.mjs`, `config/podroz-data.mjs` |
 | | Gambling: dostępność, ceny regionalne | ❌ | tylko zewnętrzny `Integracje/loot_generator.py` — M5 |
 | Postój | Odpoczynki 4 h / 24 h, zakłócenie (notatka), czyszczenie broni, gotowanie, polowanie; produkcja i naprawa (KO 1 h, DO 10 h) | ✅ | `config/rest.mjs`, `actors/party-supplies.mjs`, `actors/rest-activities.mjs` (sekcja „Zajęcia”), §1.7 |
-| | Sen (doba bez snu) | ❌ | źródło `bezsennosc` bez wyzwalacza — M1 |
+| | Sen (doba bez snu) | ✅ | `actors/zagrozenia.mjs` — narzędzie MG „Zagrożenia” w kontrolkach żetonów: RO na Kondycję ST 20 dla zaznaczonych, porażka — Bezsenność (M1 E7, e2e `zagrozenia`) |
 | | Rozrywka, plotkowanie, hazard, Długi postój (praca, trening, baza, koszt utrzymania) | ❌ | M5 |
 | Tworzenie postaci | Poziomy, PD, PW/KW, wieloklasowość, karta | ✅ | `actors/pd-panel.mjs`, `pw.mjs`, `class-rules.mjs`, `sheet-shell.mjs` |
 | | Udźwig (dwa progi), przedmioty podręczne (3 sloty) | ✅ | `config/encumbrance-config.mjs`, `actors/udzwig-*.mjs`, `handy-items.mjs`, `handy-belt.mjs` |
@@ -56,7 +56,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | Kolory Neuroshimy (Rdza, Rtęć, Stal, Chrom) | ❌ | po becie; WKK to osobna nakładka (`scripts/wkk/`) |
 | Notatnik łowcy | Bestiariusz, SP, próg obrażeń, awarie maszyn, amunicja BN | ✅ | 51 istot, 89/260 zdolności zautomatyzowane, 25/51 docelowych żetonów |
 | Zasady szczegółowe | Upojenie, Skażenie, Spadanie, Podpalenie, Krwawienie, Niedożywienie, Odwodnienie | ✅ | §1.5b, §4.1b–c, `combat/podpalenie.mjs`, `party-supplies.mjs` |
-| | Uduszenie, Przemarznięcie | ❌ | źródła Wyczerpania bez wyzwalacza — M1 |
+| | Uduszenie, Przemarznięcie | ✅ | `actors/zagrozenia.mjs` — to samo narzędzie MG: mróz (ST z temperatury co godzinę; ciepło ubrany, śpiwór, koc), Uduszenie (faza na statusie, koniec tury w walce, karta RO przy obrażeniach, „Złap oddech” w panelu Stan); „W cieple” w oknie DO — `PLAN_m1_walka.md` E7 |
 | | Próg obrażeń, pochwycenie, wytrącenie, udźwig, typy obrażeń | ✅ | |
 | | Niszczenie obiektów, broń improwizowana (reguła ogólna), latanie | ❌ | M6 (Pochodnia to jedyny przykład broni improwizowanej) |
 | | Walka na wierzchowcu, pływanie, skakanie | ❌ | M6 — karta referencyjna |
@@ -80,7 +80,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/config/levelled-conditions-data.mjs` | Tabele Upojenia (4 stopnie) i Skażenia (4 poziomy, ST) |
 | `scripts/actors/levelled-conditions.mjs` | Egzekwowanie Upojenia/Skażenia + rejestr HUD dla stanów stopniowanych (też Zranienie) |
 | `icons/statuses/ASSETS.md` | Specyfikacja ikon dla 2 stanów bez odpowiednika w dnd5e |
-| `scripts/config/exhaustion.mjs` | Wyczerpanie (speed penalty override) |
+| `scripts/config/exhaustion.mjs` | Wyczerpanie — źródła, jedyny lejek zapisu (poziom z `_source`), zdejmowanie DO wg reguł (U10/U14), dodatkowe wyjścia, pipki toru (`pipkiWyczerpania`) |
 | `scripts/config/rest.mjs` | Odpoczynki (4h KO / 24h DO) |
 | `scripts/actors/abilities.mjs` | Most: stare klucze zdolności -> realne przedmioty z packów |
 | `scripts/config/diseases-data.mjs` | 8 chorób przewlekłych (k8) + 4 popularne — tekst stanów wg RAW |
@@ -117,7 +117,17 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/combat/falling.mjs` | Spadanie [ZAGROŻENIE] — 1k6/1,5 m, Powalenie, upadek do cieczy, mnożnik Osteoporozy |
 | `scripts/actors/fuks-pips.mjs` | Trzy piki Fuksa w nagłówku karty (zastępują gwiazdkę Inspiration) |
 | ~~`scripts/migration/migrate-health.mjs`~~ | Migracja Chorób/Fobii/Fuksów z pól tekstowych na flagi — **usunięta** (`62dfd4c`, dane graczy poza publicznym repo); wykonana, opis w §4.3 |
-| `scripts/combat/zranienie.mjs` | Stopień Zranienia (wound levels 0–4) |
+| `scripts/combat/zranienie.mjs` | Stopień Zranienia (wound levels 0–4); zejście z Krytycznego zdejmuje Wyczerpanie ze Zranienia (RAI) |
+| `scripts/config/umieranie-rules.mjs` | Umieranie i zagrożenia — czyste zasady: porażki przy 0 PW, Olbrzymie obrażenia, Rzut Przeciw Śmierci, stan maszyny, oddech po turze, plan mrozu, sen (M1) |
+| `scripts/combat/umieranie.mjs` | Umieranie i stabilizacja — maszyna stanów, lejek zapisu, karty „Umiera” / „Śmierć” / „BN pada”, 1 PW po 1k8 h na zegarze świata |
+| `scripts/items/staza.mjs` | Staza — przedmiot z kompendium `sprzet`, stabilizacja przez lejek umierania |
+| `scripts/config/okolicznosci-ataku.mjs` | Okoliczności Testu Ataku — czysty silnik: tabela źródeł RAW, tryb rzutu, automatyczne TK ≤ 1,5 m |
+| `scripts/combat/okolicznosci.mjs` | Okoliczności Testu Ataku — migawka sceny, jeden hak `dnd5e.preRollAttack`, plakietki na karcie, rejestr źródeł spoza RAW |
+| `scripts/config/rekonwalescencja-rules.mjs` | Powrót do zdrowia — czyste zasady: reguły zdejmowania Wyczerpania (NOE/RAI/WKK), kolejność DO, widok pipek, licznik Regeneracji, szansa RO, prognoza kalendarzyka |
+| `scripts/actors/rekonwalescencja.mjs` | Neutralizacja Stopnia Zranienia po DO (Gojenie, Pomoc medyczna, samoleczenie WKK), sekcja w oknie DO, karty RO, przekaźnik ładunku, kalendarzyk zdrowia |
+| `scripts/migration/migrate-dni-swiata.mjs` | Jednorazowo: dni chorób, dawek i limitów chemii ze starego licznika `dayCounter` na dzień kalendarza świata; blokada odpoczynku → doba gry |
+| `scripts/actors/zagrozenia.mjs` | Zagrożenia: Przemarznięcie, doba bez snu, Uduszenie — narzędzie MG, faza oddechu, karty RO, wiersz w panelu Stan |
+| `scripts/wkk/config/rekonwalescencja-kobalt.mjs` | WKK: Wyczerpanie z Krytycznego uporczywe; Pomoc medyczna — ładunek, cały DO, jeden pacjent; samoleczenie (gospodarz `config/rekonwalescencja-rules.mjs`, `actors/rekonwalescencja.mjs`) |
 | `scripts/combat/rerolls.mjs` | Przerzuty: Forsowanie + Fuks (reroll mechanics) |
 | `scripts/combat/knockout.mjs` | Nokautowanie + Ostatnia Akcja |
 | `scripts/combat/cover.mjs` | Dynamiczna osłona per atak + redukcja dla strzału przez |
@@ -307,19 +317,19 @@ M# = kamień milowy w `PLAN_beta.md`.
 - [x] Automatyczne nadanie Zranienia przy PW→0 (hook updateActor)
 - [x] Automatyczne nadanie Zranienia przy trafieniu krytycznym (hook dnd5e.rollDamage)
 - [x] Penalty: speed -1.5/3/4.5/6 m, no reactions (lvl 2+), no bonus actions (lvl 3+)
-- [x] Krytyczny Stopień + kolejny = śmierć (komunikat czatu)
+- [x] Krytyczny Stopień + kolejny = śmierć (karta „Śmierć” dla MG, `combat/umieranie.mjs`, 2026-10-07)
 - [x] Auto-Wyczerpanie przy Krytycznym (lvl 4)
 - [x] Komunikaty czatu z informacją o karach
 - [x] Active Effects for speed penalties (walk/fly/swim/climb/burrow reduction)
 - [x] Stopień Zranienia wyświetlany na karcie BN (renderNPCActorSheet) — piki w kolumnie portretu, pod paskiem HP
-- [x] Ostatnia Akcja prompt (3 death save failures)
+- [x] Ostatnia Akcja — przypomnienie na karcie „Śmierć” przy trzeciej porażce (2026-10-07; wcześniej osobna karta z `knockout.mjs`)
 - [x] Nokautowanie — melee bludgeoning at 0 PW → choice: 1 PW + Nieprzytomność
-- [ ] **Neutralizacja Stopnia Zranienia** (RAW *Walka* i *Postój*): Regeneracja — po trzech kolejnych
+- [x] **Neutralizacja Stopnia Zranienia** (RAW *Walka* i *Postój*): Regeneracja — po trzech kolejnych
   Długich odpoczynkach RO KON ST 15, sukces = −1 stopień; Pomoc medyczna — po DO leczący z biegłością
-  w Medycynie i narzędziami małego medyka zdejmuje stopień. Dziś wyłącznie ręczne kliknięcie w piki —
-  `PLAN_beta.md` M1
-- [ ] Rzuty przeciw śmierci przy obrażeniach na 0 PW (+1 porażka, atak wręcz +2), Olbrzymie obrażenia
-  (jednorazowo ≥ 2× maks. PW → śmierć), stabilizacja Testem Medycyny ST 10 i 1 PW po 1k8 h — M1
+  w Medycynie i narzędziami małego medyka zdejmuje stopień — M1 E6 (2026-10-07), changelog niżej
+- [x] Rzuty przeciw śmierci przy obrażeniach na 0 PW (+1 porażka, atak wręcz +2), Olbrzymie obrażenia
+  (jednorazowo ≥ 2× maks. PW → śmierć), stabilizacja Testem Medycyny ST 10 i 1 PW po 1k8 h — M1 E1–E2
+  (2026-10-07), changelog niżej
 - [x] **Stan `zranienie` na pionku (2026-08-03)** — trzeci *widok* tej samej flagi, obok efektu
   i pików. Nie drugie miejsce przechowywania: `flags.<mod>.zranienie.level` pozostaje jedynym
   magazynem, wszystko inne z niego wynika i zapisuje przez `setZranienie`/`applyZranienie`.
@@ -433,7 +443,13 @@ z siebie nic nie daje — poziomy, piki i cykl kliknięć musiały powstać od z
 - [x] Tracking source type per actor (flags + pip tooltips + add/remove dialogs)
 - [x] preUpdateActor blocks raw pip clicks → source selection dialog
 - [x] renderCharacterActorSheet hook injects source labels into pip tooltips
-- [x] Rest recovery: only clears sources with `restClears: true`
+- [x] Rest recovery wg reguł zdejmowania (`config/rekonwalescencja-rules.mjs`, M1 E5): jeden poziom na DO,
+  najpierw bez innego wyjścia, w grupie najstarszy; uporczywe nigdy (Odwodnienie, Niedożywienie do
+  pełnej racji; Choroba, Deadline; WKK — Zranienie z Krytycznego); dodatkowe wyjścia zdejmują wszystkie
+  poziomy źródła (DO w cieple, oddech, RadOff, zejście z Krytycznego)
+- [x] Pipki Wyczerpania: kolejność toru = kolejność zdejmowania, uporczywe w kwadratowej ramce, dymek
+  z drogą wyjścia — panel Stan i karta drużyny (M1 E5, `PLAN_m1_walka.md` §7.9)
+- [x] Lejek zapisu czyta poziom z `_source` i pisze poziom = długość listy źródeł (F15)
 - [x] Własny komplet ikon poziomów (`wyczerpanie-1..6.svg`, niebieska cyfra) przez podmianę
   `conditionTypes.exhaustion.img` — bez nadpisywania `_getExhaustionImage`
 
@@ -592,9 +608,9 @@ Zastępuje pierwotne podejście z `PLAN_shooting_vfx.md` (Sequencer `.effect()` 
 
 ### 1.13 Special Melee Actions
 - [x] Odepchnięcie, Pochwycenie, Wytrącenie jako opcje ataku (`combat/melee-maneuvers.mjs`)
-- [ ] Akcja **Bieganie** (+2× Szybkość, Utrudnienie do własnych ataków, dystansowe przeciw biegnącemu
+- [x] Akcja **Bieganie** (+2× Szybkość, Utrudnienie do własnych ataków, dystansowe przeciw biegnącemu
   z Utrudnieniem); domyślne Utrudnienie w dialogu dla ataku dystansowego w zwarciu i na zasięgu
-  dalekim — dnd5e 5.3 nie egzekwuje żadnego z nich — `PLAN_beta.md` M1
+  dalekim — silnik okoliczności ataku, M1 E3–E4 (2026-10-07), changelog niżej
 
 ### 1.14 Rest Overrides
 - [x] Krótki odpoczynek = 4h / 240min (nie 1h)
@@ -1034,8 +1050,12 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 - [x] **Zachód słońca** (przycisk MG na pasku narzędzi + `game.neuroshima.health.sunset()`):
   każdy, kto nie wziął dziś dawki, rzuca RO na Kondycję ST 10 — naturalna 20 wraca do stanu
   przewlekłego, naturalna 1 pogarsza o dwa stany, porażka o jeden. Raport zbiorczy szeptem do MG
-- [x] „Dzień" to licznik świata (`dayCounter`), **nie** `game.time.worldTime` — przy tym stole
-  czas świata nie jest przesuwany, więc oparcie o niego dawałoby ciche fałszywe trafienia
+- [x] „Dzień" to dzień kalendarza świata (`dzienSwiata`, `world-clock.mjs`) — od 2026-10-07, decyzja MG
+  „zawsze czas gry”. Wcześniej osobny licznik `dayCounter`, bo przy stole nie przesuwano zegara świata;
+  M1 i tak oparł na zegarze stabilizację, kalendarzyk i znaczniki Wyczerpania, więc zegar trzeba
+  przesuwać (Długi odpoczynek MG robi to sam, +24 h). Zachód słońca kończy dzień, który pokazuje zegar,
+  i ostrzega przed drugim przebiegiem tego samego dnia — zapomniane przesunięcie zegara widać, zamiast
+  cicho liczyć wczorajszą dawkę jako dzisiejszą. Przeniesienie stanu: `migration/migrate-dni-swiata.mjs`
 
 ### 4.3 Migracja z pól tekstowych (`migrate-health.mjs`)
 - [x] Stan chorób/fobii/Fuksów żył wcześniej w trzech miejscach i trzech formatach:
@@ -1066,8 +1086,8 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   tak samo jak Upojenie i Skażenie wyżej — znaleziony przy porządkach 2026-08-25.
   **Podpalenie wykreślone** — `combat/podpalenie.mjs`, v0.14.5 (1k4 ognia na początku tury,
   `duration` FVTT zamiast własnego licznika, płomień Sequencera na żetonie, akcja „Ugaś się"
-  w panelu STAN). **Zostaje: Przemarznięcie, Uduszenie i Sen** (doba bez snu) — mają gotowe klucze
-  w `EXHAUSTION_SOURCES` i żadnej automatyki — `PLAN_beta.md` M1
+  w panelu STAN). **Przemarznięcie, Uduszenie i Sen** (doba bez snu) — zrobione w M1 E7 (2026-10-07):
+  `actors/zagrozenia.mjs`, narzędzie MG „Zagrożenia”
 - [~] Rest activities — **polowanie i gotowanie zrobione** (`party-supplies.mjs`: `hunt()` — 1 h,
   Test Mądrości (Sztuka przetrwania) ST 15; `cook()`). Czyszczenie broni było gotowe od dawna (§1.7, aktywność
   odpoczynku 1 h). Zostają: rozrywka, plotkowanie, hazard i aktywności Długiego postoju (praca, trening,
@@ -1125,6 +1145,145 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### M1 — poprawki po przeglądzie MG: czas gry, Gojenie, Skażenie (2026-10-07)
+
+- **Zawsze czas gry.** Poziom Wyczerpania zapisuje `czas` = czas świata (`game.time.worldTime`); okno
+  usuwania Wyczerpania i dymek pipki pokazują datę i godzinę świata („Od: …”), nie datę z zegara
+  komputera. Wiek poziomu (kolejność U14) liczy się z czasu świata; wpisy sprzed zmiany (`addedAt` w
+  czasie rzeczywistym) są najstarsze, w kolejności listy. Pozostałe znaczniki stanu gry pisane z
+  zegara komputera, choć nikt ich nie czytał — dziennik PD, zacięcie / uszkodzenie / czyszczenie
+  broni, wymagane przeładowanie — też piszą czas świata. Zegar komputera zostaje tylko tam, gdzie
+  mierzy technikę, nie fikcję (okno „ten sam cios” w Zranieniu, przeciąganie, cache, migracje).
+- **„Samo ciało” → „Gojenie”** — w oknie DO, na kartach i w kalendarzyku (w kodzie droga dalej `cialo`).
+- **Skażenie w panelu Stan** wyciszone jak inne tory: bez pasów i zielonego napisu, póki postać nie
+  jest w skażonym obszarze i nie ma oblanych RO. Każda kreska ma dymek jak pipki Zranienia i Upojenia
+  (co znaczy, stan teraz, RadOff) — wcześniej kontener miał `pointer-events: none`, więc dymek nigdy
+  się nie pokazywał.
+- **Choroba z dziennym RO** (Choroba popromienna, Szczurza gorączka — s. 111), decyzje MG:
+  - *Dzień bez korzyści:* Długi odpoczynek się **odbywa**, ale bez korzyści z listy s. 45 (PW, KW,
+    Cechy, zdolności, −1 Wyczerpanie) — `actors/disease-effects.mjs` odbiera je w `preRestCompleted`.
+    Neutralizowanie Stopnia to osobny podrozdział, nie „korzyść”: licznik Regeneracji i Pomoc medyczna
+    liczą ten dzień. Wcześniej DO był odwoływany w całości (od E6 stawał też licznik i medyk). Krótki
+    odpoczynek dalej odwołany (jego jedyna korzyść to KW wydawane w oknie). Okno DO ostrzega z góry.
+  - *Dni chorób na zegarze świata:* „dziś” = dzień kalendarza świata; blokada odpoczynków po oblanym RO
+    „na koniec dnia” to doba gry (`bezKorzysciDo`, czas świata) — odpoczynek tuż po Zachodzie słońca też
+    jest bez korzyści, jak w starym liczniku. Dzienne limity chemii liczą ten sam dzień. Jednorazowa
+    migracja (`migration/migrate-dni-swiata.mjs`, sama u aktywnego MG) przenosi dzisiejsze dawki i blokady.
+  - *Kalendarzyk liczy chorobę:* dzienny RO choroby (ta sama reguła co Zachód słońca), dzień bez
+    korzyści bez −1, poziom `choroba` za porażkę, szósty poziom to śmierć — wiersz „Ryzyko śmierci”
+    i śmierć w dymkach dni. Popromienna (ST 20) przy RO +0 bez RadOff to ~95% śmierci — tak liczy RAW.
+  - *Naprawione przy okazji:* RO Zachodu słońca (choroby przewlekłe i dzienny RO) liczono ręcznym `1d20`
+    bez kary −2 za poziom Wyczerpania — teraz z karą (`_premiaRO`).
+- **Testy:** Quench 890/890 (stempel czasu świata, wiek po czasie świata, choroba w prognozie, dzień bez
+  korzyści na żywym aktorze, Zachód słońca z karą i blokadą na dobę gry, migracja na sucho); e2e
+  `rekonwalescencja` sprawdza „Od:” w dymkach, wyciszony wiersz Skażenia, dymki kresek, notę choroby w
+  oknie DO i chorobę z ryzykiem śmierci w kalendarzyku.
+
+### M1 E5–E8 — Wyczerpanie wg reguł, neutralizacja Stopnia, kalendarzyk zdrowia, zagrożenia (2026-10-07)
+
+`PLAN_m1_walka.md` etapy E5–E8, decyzje D3–D5, D7–D10. RAW s. 17, 32–35, 45–46, 140–142, 194, 258–259.
+
+- **Wyczerpanie (E5):** odpoczynek czyta reguły zdejmowania (`regulaZdejmowania`, U10) zamiast
+  `restClears` — pole usunięte z `EXHAUSTION_SOURCES`. Jeden poziom na DO w kolejności U14 (najpierw
+  bez innego wyjścia, w grupie najstarszy); Odwodnienie i Niedożywienie uporczywe, dopóki aktor nosi
+  znacznik `dehydration` / `malnutrition` (pełna racja go zdejmuje — potem schodzą zwykłymi DO; poziom
+  dodany ręcznie zapala znacznik); WKK — Wyczerpanie z Krytycznego uporczywe (D5). Dodatkowe wyjścia
+  jednym zapisem (`zdejmijWyjsciem`): zejście z Krytycznego każdą drogą (RAI, `setZranienie` i skasowany
+  efekt), RadOff (`zdejmijZrodlo`), oddech, „W cieple” w oknie DO. Taurus nie zdejmuje uporczywego.
+  **F15:** jeden lejek zapisu — poziom z `_source`, poziom = długość listy; rozjazd z danych (nadmiar
+  źródeł) naprawia pierwszy zapis. **Widok (D10):** pipki w kolejności zdejmowania, uporczywe w
+  kwadratowej ramce (`::before`), dymek „zejdzie przy następnym / drugim … Długim odpoczynku” albo
+  warunek — panel Stan i karta drużyny.
+- **Neutralizacja Stopnia (E6):** `actors/rekonwalescencja.mjs` — sekcja „Rekonwalescencja” w oknie DO
+  (klient rejestru zajęć), droga zapamiętana na pacjencie jako plan na następny DO (także odpoczynek
+  drużyny bez okna); Gojenie — licznik i karta [RO na Kondycję ST 15] dla właściciela; Pomoc medyczna —
+  medyk drużyny albo BN, −1 Stopień bez testu, licznik stoi w dzień należnego RO; WKK — ładunek (poza
+  Dnem torby; cudzy zestaw przez przekaźnik MG), cały DO obojga i jeden pacjent (rejestr zajęć umie teraz
+  `blokuje` — reszta zajęć gaśnie na żywo i nie stosuje się po DO), samoleczenie Testem INT (Medycyna)
+  ST 20. Fuks / Forsowanie, które zamieniają porażkę w sukces, przeliczają werdykt.
+- **Kalendarzyk zdrowia (§7.8, D9):** okno tylko do odczytu z panelu Stan — dwa wiersze (Gojenie, medyk
+  co DO), najszybciej / zwykle / 9 na 10 w DO i w datach kalendarza świata, dwa paski dni barwione
+  szansą „zdrowy”, podział na tygodnie, znaczniki progów i zejść Stopni.
+- **Zagrożenia (E7):** `actors/zagrozenia.mjs` — narzędzie MG „Zagrożenia” w kontrolkach żetonów:
+  Przemarznięcie (temperatura, godziny; ciepło ubrany, śpiwór, koc), doba bez snu, Uduszenie (status
+  `suffocation` z fazą, koniec tury w walce, karta RO ST 10 przy obrażeniach, „Złap oddech” w panelu
+  Stan). Fuks gracza na RO zagrożenia rzuconym przez MG cofa skutek.
+- **Naprawione przy okazji:** Fuks i Forsowanie na rzucie, którego autorem jest MG (zagrożenia, RO
+  Niedożywienia z zapasów drużyny), rzucały wyjątek uprawnień przy oznaczaniu wiadomości — Fuks był
+  zjedzony, `neuroshima.rerolled` nie odpalał, pasek wracał. Znacznik idzie teraz na aktora gracza
+  (`combat/rerolls.mjs`, `_oznaczPrzerzucony`).
+- **Testy:** Quench `wyczerpanie` (10), `rekonwalescencja-dzien` (14), `zagrozenia` (8), `rekonwalescencja`
+  (+9), `umieranie` (+2) — 879/879 w piaskownicy; e2e `rekonwalescencja` (cała pętla w NOE i w WKK) i
+  `zagrozenia` (przebieg MG narzędziem, Fuks gracza na rzucie MG — sprawdzony mutacją), razem z `boot`,
+  `combat`, `umieranie` zielone, bez błędów konsoli.
+- **Dokumentacja:** `docs/Umieranie-i-zdrowie.md` (nowa), `docs/TT-i-reakcje.md` (okoliczności Testu
+  Ataku), `docs/Kobalt.md` (zasady 14–16), `scripts/wkk/README.md` (RAI i WKK).
+
+### M1 E3–E4 — jeden silnik okoliczności Testu Ataku; Bieganie, Unikanie (2026-10-07)
+
+`PLAN_m1_walka.md` etapy E3–E4, decyzja D6. RAW s. 27–28, 30, 35.
+
+- **Silnik:** `config/okolicznosci-ataku.mjs` (czysty, tabela źródeł jak silnik TT) + `combat/okolicznosci.mjs`
+  (migawka z żywej sceny, jeden hak `dnd5e.preRollAttack`, jedna grupa plakietek na karcie ataku z
+  dymkiem rozkładu, rejestr źródeł spoza RAW). Domyślny tryb w oknie rzutu — gracz i MG zmieniają go
+  przyciskiem (T3); dowolne Ułatwienie i dowolne Utrudnienie znoszą się (reguła 5e).
+- **Źródła RAW:** zasięg daleki (Utrudnienie; poza dalekim — uwaga „chybia”), atak dystansowy w zwarciu
+  (przeciwnik ≤ 1,5 m, który widzi i działa — U7), stany atakującego (Oślepienie, Przerażenie, Zatrucie,
+  Unieruchomienie, Pochwycenie wobec nie-pochwytującego, Powalenie wręcz; Niewidoczność — Ułatwienie),
+  stany celu (Nieprzytomność, Ogłuszenie, Oślepienie, Unieruchomienie, Powalenie ≤ 1,5 m — Ułatwienie;
+  Powalenie dalej, Niewidoczność, Unikanie — Utrudnienie), Bieganie (własne ataki; dystansowe przeciw
+  biegnącemu w jego turze). Sparaliżowanie w NOE nie daje Ułatwienia — tylko automatyczne TK.
+- **Automatyczne Trafienie Krytyczne** (Nieprzytomny / Sparaliżowany cel ≤ 1,5 m) — stemplowane per cel na
+  karcie ataku, wchodzi do werdyktu (`resolveHit`), rzut obrażeń dostaje krytyk z werdyktu (lustro
+  Krytycznej ochrony), Stopień Zranienia płynie sam. Cios wręcz w leżącego BG: 2 porażki i Stopień.
+- **Osłona przy ataku wręcz** (U9): wiersz osłony w oknie ataku wręcz, domyślnie „Brak”, bez przebijania.
+- **Bieganie, Unikanie** (U8): status `bieganie` (nowy) i `dodging`, z HUD żetonu i z panelu Stan karty
+  (w trwającej walce); zdejmuje je początek następnej tury właściciela (`actors/tt.mjs`).
+- **D6 — migracja:** sześć wstrzyknięć trybu ataku to teraz źródła silnika: pancerz bez wyszkolenia,
+  Udźwig, strzał jedną ręką, Współpraca, choroby, Upojenie 3. Obalająca (RO), ulepszenia broni i Samuraj
+  (premie liczbowe) nie ustawiały trybu — zostały. **F1:** `conditionEffects.attackDisadvantage` pusty
+  (dnd5e go nie czyta; Przerażenie i Zatrucie liczy silnik).
+- **Naprawione przy okazji:** `actors/udzwig-slowdown.mjs` i `actors/bez-dna.mjs` — efekt zapisywały naraz
+  MG i właściciel („_id already exists” / „does not exist”); teraz jeden zapisujący (aktywny MG, bez MG —
+  właściciel). Fixture e2e `skirmish` kończy walki przed skasowaniem sceny (rdzeń czyścił historię ruchu
+  żetonu na skasowanej scenie).
+- **Testy:** Quench `okolicznosci` (23), `udzwig-atak` i `lalka` na źródłach; e2e `combat` (zasięg daleki,
+  zwarcie, Unikanie celu, Bieganie z karty, Udźwig przez rejestr — jedna grupa plakietek) i `umieranie`
+  (auto-TK → Stopień), sprawdzone mutacją. Quench 836/836 w piaskownicy.
+
+### M1 E0–E2 — umieranie i stabilizacja wg NOE; czyste zasady rekonwalescencji (2026-10-07)
+
+`PLAN_m1_walka.md` etapy E0–E2. RAW s. 32–35, 45, 135, 142.
+
+- **Czyste zasady (E0):** `config/umieranie-rules.mjs` (porażki przy 0 PW, Olbrzymie obrażenia, maks.
+  PW 0, Rzut Przeciw Śmierci, stan maszyny, zagrożenia) i `config/rekonwalescencja-rules.mjs`
+  (reguły zdejmowania Wyczerpania U10/U14, licznik Regeneracji D3/D4, szansa RO, kalendarzyk
+  `prognozaZdrowia` — dokładny rozkład DO po DO). Tabela §7.8 planu odtworzona co do dnia
+  (8 wierszy NOE/WKK, medyk 4 DO, 99 na 100 w 23–53 DO). WKK: `wkk/config/rekonwalescencja-kobalt.mjs`.
+  Paczki Quench `umieranie` (16) i `rekonwalescencja` (28). Konsumenci reguł Wyczerpania i
+  kalendarzyka — E5, E6; odpoczynek nadal czyta `restClears` do E5.
+- **Umieranie (E1), `combat/umieranie.mjs`:** jeden magazyn (natywne pola dnd5e + statusy), lejek u
+  aktywnego MG, prośby graczy przez flagę na własnym aktorze. Zejście do 0 PW: BG — Stopień,
+  Nieprzytomność ze znacznikiem pochodzenia (kończy się przy PW > 0 — F3), karta „Umiera” z torem
+  i przyciskami per widz; BN — `dead` od razu i karta MG „BN pada” z [Rzuty przeciw śmierci] (to samo
+  w panelu Stan BN). Obrażenia przy 0 PW → porażki (atak wręcz: 2, ze stempla karty ataku).
+  Olbrzymie obrażenia, maks. PW 0, piąty Stopień, Wyczerpanie 6, trzy porażki → karta „Śmierć” tylko
+  dla MG: [Potwierdź] / [Cofnij] (D1); dnd5e nie oznacza już śmierci sam przy 6. poziomie Wyczerpania.
+  Rzut przeciw śmierci to czysta k20 — bez premii do RO, `death.bonuses`, Wyczerpania i trybu (U12);
+  Fuks go nie obejmuje (typ `death`). Ostatnia akcja przeszła z `knockout.mjs` na kartę „Śmierć”.
+- **Stabilizacja (E2):** status `stable` („Stabilny”) — trzy sukcesy (prośba jedzie w `details.updates`
+  dnd5e), Pomaganie + Medycyna ST 10, mały medyk (automatycznie; `_stabilise` przez lejek — F4),
+  **Staza** (nowy przedmiot w `sprzet`, `items/staza.mjs`). Stabilny nie rzuca; obrażenia wznawiają
+  umieranie; ślepy rzut MG 1k8 h, 1 PW przy przesunięciu zegara świata. Długi odpoczynek przy 0 PW
+  odmówiony z podpowiedzią (s. 45).
+- **Testy:** e2e `umieranie` (14 kroków: MG + dwóch graczy, prawdziwy atak wręcz BN, kliknięcia kart
+  w czacie graczy, przekaźnik MG, staza z kompendium) — sprawdzone mutacjami (bez wręcz → czerwone na
+  kroku porażek; bez przekaźnika trzeciego sukcesu → czerwone na tym kroku). Quench 818/818 w świecie
+  kampanii i w piaskownicy; e2e `boot`, `combat` zielone.
+- **Znalezione przy okazji:** `addExhaustion` czyta pochodny poziom, który tuż po zapisie jest o 1 w
+  tyle za źródłem — kilka szybkich wywołań gubi poziomy, a lista źródeł rośnie ponad poziom
+  (`PLAN_m1_walka.md` F15, do E5).
 
 ### PLAN_tt — TT wg NOE, jeden rozstrzygacz trafienia, okno „Reakcje celu” (2026-10-03)
 
@@ -1294,10 +1453,22 @@ przy zamkniętym Foundry), potem `game.neuroshima.zdolnosci.resync()` dosyła zm
   istniejące białe ikony dla wody, odznaki, butów, teczek, plecaka i małych
   zestawów narzędzi. Kolizję wspólnej nazwy „Odnóże” naprawiono regułą zależną
   od aktora, przywracając koniowi skażonemu poprzednią ikonę do czasu recenzji.
-- Batch 50 łączy korektę tacy z Kłem jadowym, Paliwem, uzupełnieniem narzędzi
-  medyka, metalową walizką, komponentami amunicji, częściami ciężkiego karabinu,
-  Pogromcą i atakiem kopytem skażonego konia. Pełny atlas 3×3 czeka w
-  `npm run review:icons`.
+- Z batch 50 zatwierdzono i podpięto korektę tacy, Kieł jadowy, Paliwo,
+  uzupełnienie narzędzi medyka, metalową walizkę oraz części ciężkiego karabinu.
+  Komponenty amunicji, Pogromca i atak kopytem otrzymały poprawki w batch 51.
+- Batch 51 zawiera 27 kandydatów w trzech atlasach 3×3: trzy poprawki, sześć
+  brakujących ikon wyposażenia i broni oraz osiemnaście współdzielonych ikon
+  zdolności stworzeń i maszyn. Wszystkie warianty konia użyją jednej neutralnej
+  ikony ataku kopytem. FN Scar L przepięto od razu na istniejącą ikonę SCAR.
+  Pierwszy przebieg odrzucono za grunge i nadmiar detalu; wszystkie 27 ikon
+  wygenerowano ponownie jako czyste, płaskie sylwetki przeznaczone do 16 px.
+- Z czystej korekty batch 51 zatwierdzono 14 ikon. Przepięto 2 przedmioty świata
+  i 31 osadzonych przedmiotów przez API Foundry, z kopią planu w
+  `dev/backup/world-icon-repoints-batch51-approved-2026-10-07.json`. Dwanaście
+  ikon wymaga dalszych poprawek, a kusza pistoletowa pozostaje bez decyzji.
+- Batch 52 przygotowuje 27 kart do recenzji: 12 kierunkowych poprawek, oczekującą
+  kuszę pistoletową, Stazę i 13 nowych zdolności stworzeń lub maszyn. Wszystkie
+  kandydaty zachowują płaską, bezteksturalną formę czytelną w 16 px.
 - Pełny build do osobnego katalogu: OK (`bron` 86, `sprzet` 33). Walidacja
   przepisów, CSS i warstwy testowej: OK. Walidator produkcyjnych paczek poprawnie
   odmówił bezpośredniego odczytu LevelDB przy uruchomionym Foundry; zapisy na

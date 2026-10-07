@@ -10,6 +10,10 @@
  *   „Zakłócenie Długiego odpoczynku" (rozdział Eksploracja).
  */
 
+import { W_CIEPLE, zrodlaWyczerpania } from "./exhaustion.mjs";
+import { NO_REST_FLAG } from "./diseases-data.mjs";
+import { formatWorldTime } from "../world-clock.mjs";
+
 /**
  * Reference notes shown in the Long Rest dialog — RAW text, not a mechanic.
  * An earlier version of this file tried to automate "how many hours before
@@ -51,8 +55,47 @@ function buildLongRestDialog(Base) {
       if (body && !body.querySelector(".neuro-rest-note")) {
         body.insertAdjacentHTML("afterbegin", LONG_REST_NOTE);
       }
+      _poleWCieple(this, body);
+      _notaChoroby(this, body);
     }
   };
+}
+
+/**
+ * Choroba z oblanym RO „na koniec dnia” (s. 111): ten odpoczynek się odbędzie, ale bez korzyści —
+ * mówimy to w oknie, zanim gracz kliknie (skutki: `actors/disease-effects.mjs`).
+ */
+function _notaChoroby(app, body) {
+  const actor = app.actor ?? app.document;
+  if (!body || app.isPartyGroup || !actor || body.querySelector(".neuro-rest-choroba")) return;
+  const koniec = actor.getFlag?.("neuroshima-2026-overrides", NO_REST_FLAG);
+  if (!(Number.isFinite(koniec) && game.time.worldTime < koniec)) return;
+  const note = document.createElement("div");
+  note.className = "neuro-rest-note warn neuro-rest-choroba";
+  note.innerHTML = `Choroba (s. 111): ten Długi odpoczynek nie da korzyści — bez PW, Kości Wytrzymałości, `
+    + `zdolności i −1 Wyczerpania (do ${formatWorldTime(koniec) ?? "końca doby"}). Regeneracja i Pomoc medyczna `
+    + `liczą ten dzień.`;
+  const pierwsza = body.querySelector(".neuro-rest-note");
+  if (pierwsza) pierwsza.before(note);
+  else body.prepend(note);
+}
+
+/**
+ * „W cieple” (s. 258, PLAN_m1_walka §7.7): DO w temperaturze pokojowej zdejmuje wszystkie poziomy
+ * Wyczerpania z Przemarznięcia. Pole tylko wtedy, gdy postać takie poziomy ma; `name` trafia do
+ * konfiguracji odpoczynku (`config.neuroWCieple`), a czyta je `config/exhaustion.mjs`.
+ */
+function _poleWCieple(app, body) {
+  const actor = app.actor ?? app.document;
+  if (!body || app.isPartyGroup || !actor || body.querySelector(".neuro-rest-cieplo")) return;
+  if (!zrodlaWyczerpania(actor).some(s => s.source === "przemarznie")) return;
+  const div = document.createElement("div");
+  div.className = "form-group neuro-rest-cieplo";
+  div.innerHTML = `<label class="checkbox"><input type="checkbox" name="${W_CIEPLE}">
+    W cieple (temperatura pokojowa) — schodzi całe Przemarznięcie (s. 258)</label>`;
+  const footer = body.querySelector(".form-footer");
+  if (footer) footer.before(div);
+  else body.append(div);
 }
 
 export function registerRestOverrides() {

@@ -74,6 +74,30 @@ export function formatWorldTime(time = game.time.worldTime) {
   return _formatWorldTime(time);
 }
 
+/**
+ * Sekundy doby wg kalendarza świata (24 h, gdyby kalendarza nie było). Doba gry to zawsze ta —
+ * moduł liczy czas gry, nigdy zegar komputera.
+ * @returns {number}
+ */
+export function sekundyDoby() {
+  const d = game.time?.calendar?.days;
+  return d ? d.secondsPerMinute * d.minutesPerHour * d.hoursPerDay : 86400;
+}
+
+/**
+ * Numer dnia kalendarza świata (doba od północy) — „dziś” chorób, dawek i limitów dziennych.
+ * @param {number} [time]
+ * @returns {number}
+ */
+export function dzienSwiata(time = game.time.worldTime) {
+  return Math.floor(time / sekundyDoby());
+}
+
+/** Just "20 września 2070" of a world time — the date without the clock (kalendarzyk zdrowia). */
+export function formatWorldDate(time = game.time.worldTime) {
+  return _formatWorldTime(time)?.replace(/, \d{2}:\d{2}$/, "") ?? null;
+}
+
 /** Just "21:40" of a world time — map labels, where the date would only be noise. */
 export function formatWorldClock(time = game.time.worldTime) {
   const c = game.time.calendar?.timeToComponents?.(time);

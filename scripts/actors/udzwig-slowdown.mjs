@@ -154,8 +154,19 @@ function queueUdzwigSlowSync(actor) {
   return next;
 }
 
+/**
+ * Kto zapisuje efekt: aktywny MG, a bez MG — właściciel (idiom `weapons/fire-modes.mjs`,
+ * `_isFireModeManager`). Haki przedmiotów i aktora odpalają u każdego klienta, więc bez tej bramki
+ * MG i gracz tworzyli i kasowali ten sam efekt naraz: „The _id … already exists” u jednego,
+ * „ActiveEffect … does not exist” u drugiego (e2e `combat`, 2026-10-07).
+ */
+function _jedynyZapisujacy(actor) {
+  const gm = game.users.activeGM;
+  return gm ? gm.isSelf : Boolean(actor?.isOwner);
+}
+
 function syncUdzwigSlowEffect(actor) {
-  if (!actor?.id) return;
+  if (!actor?.id || !_jedynyZapisujacy(actor)) return;
   clearTimeout(_syncTimer.get(actor.id));
   _syncTimer.set(actor.id, setTimeout(() => {
     _syncTimer.delete(actor.id);

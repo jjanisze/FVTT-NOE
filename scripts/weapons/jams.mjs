@@ -87,7 +87,7 @@ export async function setJammed(item, { reason = "", chat = true } = {}) {
     jammed: true,
     damaged: false,
     reason,
-    jammedAt: Date.now()
+    jammedAt: game.time.worldTime // czas świata (s) — w module zawsze czas gry; wpisy sprzed 2026-10-07 mają tu czas rzeczywisty (ms)
   });
 
   if (chat) {
@@ -131,7 +131,7 @@ export async function setDamaged(item, { reason = "", chat = true } = {}) {
     jammed: false,
     damaged: true,
     reason,
-    damagedAt: Date.now()
+    damagedAt: game.time.worldTime // czas świata (s) — w module zawsze czas gry; wpisy sprzed 2026-10-07 mają tu czas rzeczywisty (ms)
   });
 
   if (chat) {
@@ -276,7 +276,7 @@ export async function cleanWeapon(item, { chat = true } = {}) {
   await _setWeaponMaintenanceState(liveItem, {
     ...current,
     cleaned: true,
-    cleanedAt: Date.now()
+    cleanedAt: game.time.worldTime // czas świata (s) — w module zawsze czas gry; wpisy sprzed 2026-10-07 mają tu czas rzeczywisty (ms)
   });
 
   playWeaponSound(WeaponSound.CLEAN_WEAPON);

@@ -1,4 +1,6 @@
 import { hasWeaponProperty } from "../config/weapons.mjs";
+// Cykl z `trafienie.mjs` bezpieczny — wołane tylko z ciał funkcji.
+import { isMeleeAttack } from "./trafienie.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const LAST_ATTACK_COVER_FLAG = "lastAttackCover";
@@ -607,7 +609,9 @@ async function _clearLastAttackCoverDecision(item, activityId) {
 }
 
 function _getSingleAttackTargetContext(activity) {
-  if (!_isRangedAttackActivity(activity)) return null;
+  // Wręcz też (PLAN_m1_walka U9, s. 27: „każdy atak z drugiej strony osłony”): wiersz osłony w oknie,
+  // domyślnie „Brak”, bez „przez osłonę” — tę daje tylko broń palna (`allowThrough`).
+  if (!_isRangedAttackActivity(activity) && !_isMeleeWeaponAttack(activity)) return null;
   const targets = Array.from(game.user.targets ?? []);
   if (targets.length !== 1) return null;
 
@@ -629,12 +633,17 @@ function _isRangedAttackActivity(activity) {
   return Number.isFinite(Number(range?.value)) || Number.isFinite(Number(range?.long));
 }
 
+function _isMeleeWeaponAttack(activity) {
+  return activity?.type === "attack" && activity.item?.type === "weapon" && isMeleeAttack(activity);
+}
+
 function _isFirearmItem(item) {
   return item?.system?.type?.value?.startsWith?.("palna") ?? false;
 }
 
 function _getAttackLabel(activity) {
   if (activity?.type === "neuroKs") return "strzałem z krótkiej serii";
+  if (_isMeleeWeaponAttack(activity)) return "atakiem wręcz";
   const activityName = activity?.name?.trim();
   if (activityName) {
     const normalizedName = activityName.charAt(0).toLowerCase() + activityName.slice(1);

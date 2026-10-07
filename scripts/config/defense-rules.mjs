@@ -33,11 +33,13 @@ const _num = v => (Number.isFinite(Number(v)) ? Number(v) : 0);
  * @param {number} [a.cover]         Premia osłony z okna ataku.
  * @param {number} [a.bonuses]       Suma premii z użytych reakcji.
  * @param {boolean} [a.critDowngraded]  Krytyczna ochrona zamieniła krytyk na zwykłe trafienie.
- * @returns {{verdict: "pudło"|"trafienie"|"krytyk", need: number, target: number|null, autoHit: boolean, blocked?: boolean}}
+ * @param {boolean} [a.autoCrit]  Automatyczne TK (Nieprzytomny / Sparaliżowany cel ≤ 1,5 m, s. 35):
+ *   każde **trafienie** jest krytyczne — pudło zostaje pudłem (PLAN_m1_walka §7.5).
+ * @returns {{verdict: "pudło"|"trafienie"|"krytyk", need: number, target: number|null, autoHit: boolean, blocked?: boolean, autoKrytyk?: boolean}}
  *   `need` — o ile musiałaby wzrosnąć TT, żeby trafienie stało się pudłem (0 przy pudle,
  *   `Infinity` przy trafieniu, którego nic nie odwróci).
  */
-export function resolveHit({ total, critical = false, fumble = false, tt, cover = 0, bonuses = 0, critDowngraded = false } = {}) {
+export function resolveHit({ total, critical = false, fumble = false, tt, cover = 0, bonuses = 0, critDowngraded = false, autoCrit = false } = {}) {
   const coverValue = _num(cover);
   const target = Number.isFinite(tt) ? tt + coverValue + _num(bonuses) : null;
   if (coverValue >= FULL_COVER) return { verdict: "pudło", need: 0, target, autoHit: false, blocked: true };
@@ -46,9 +48,12 @@ export function resolveHit({ total, critical = false, fumble = false, tt, cover 
   }
   if (fumble) return { verdict: "pudło", need: 0, target, autoHit: false };
   // TT nieznana (dane spoza schematu) — nie blokujemy, jak dawniej każde „czy trafił” w module.
-  if (target === null) return { verdict: "trafienie", need: NaN, target, autoHit: false };
+  const trafienie = autoCrit && !critDowngraded
+    ? { verdict: "krytyk", autoKrytyk: true }
+    : { verdict: "trafienie" };
+  if (target === null) return { ...trafienie, need: NaN, target, autoHit: false };
   const t = _num(total);
-  if (t >= target) return { verdict: "trafienie", need: t - target + 1, target, autoHit: false };
+  if (t >= target) return { ...trafienie, need: t - target + 1, target, autoHit: false };
   return { verdict: "pudło", need: 0, target, autoHit: false };
 }
 

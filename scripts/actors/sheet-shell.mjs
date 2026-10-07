@@ -17,8 +17,11 @@
 import { getLevelledRegistry, getRadiationFailures, promptRadiationSave } from "./levelled-conditions.mjs";
 import { buildHealthStrip } from "./health-panel.mjs";
 import { isBurning, promptDouse, PODPALENIE } from "../combat/podpalenie.mjs";
-import { EXHAUSTION_SOURCES, getExhaustionSources } from "../config/exhaustion.mjs";
-import { SKAZENIE_DISEASE_THRESHOLD } from "../config/levelled-conditions-data.mjs";
+import { bnDoUmierania, wMaszynie } from "../combat/umieranie.mjs";
+import { pipkiWyczerpania } from "../config/exhaustion.mjs";
+import { otworzKalendarzyk } from "./rekonwalescencja.mjs";
+import { wierszUduszenia } from "./zagrozenia.mjs";
+import { SKAZENIE_DISEASE_THRESHOLD, SKAZENIE_LEVELS } from "../config/levelled-conditions-data.mjs";
 import { dollSheetMixin } from "./doll-panel.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -202,24 +205,31 @@ function _statusTracks(actor) {
   const registry = getLevelledRegistry();
   const tracks = [{
     id: "exhaustion",
-    label: CONFIG.DND5E.conditionTypes?.exhaustion?.name ?? "Wyczerpanie",
+    label: "Wyczerpanie — barwa pipki to źródło poziomu. Pipka w ramce jest uporczywa: Długi "
+      + "odpoczynek jej nie zdejmie. Skrajna prawa schodzi przy następnym Długim odpoczynku.",
     name: "Wyczerpanie",
     max: CONFIG.DND5E.conditionTypes?.exhaustion?.levels ?? 6,
     value: actor.system?.attributes?.exhaustion ?? 0,
-    sources: getExhaustionSources(actor),
+    // Kolejność toru = kolejność zdejmowania (PLAN_m1_walka §7.9, D10): uporczywe z lewej.
+    pipki: pipkiWyczerpania(actor),
     summary: _exhaustionSummary,
     set: level => actor.update({ "system.attributes.exhaustion": level })
   }];
 
   const wound = registry.get("zranienie");
+  const woundLevel = wound?.get(actor) ?? 0;
   if (wound) tracks.push({
     id: "zranienie",
     label: wound.label,
     name: "Zranienie",
     max: wound.max,
-    value: wound.get(actor),
+    value: woundLevel,
     summary: wound.summary,
-    set: level => wound.set(actor, level)
+    set: level => wound.set(actor, level),
+    // Kalendarzyk zdrowia (PLAN_m1_walka §7.8, D9) — tylko do odczytu, dla właściciela i MG.
+    przycisk: woundLevel > 0 && actor.isOwner
+      ? { ikona: "fa-calendar-days", tip: "Kalendarzyk zdrowia — kiedy Stopień zejdzie", klasa: "neuro-kalendarzyk-btn", onClick: () => otworzKalendarzyk(actor) }
+      : null
   });
 
   const drink = registry.get("upojenie");
@@ -259,16 +269,21 @@ function _exhaustionSummary(level) {
 
 /**
  * Tooltip for a pip: what the character would suffer standing at that level, cumulative,
- * because filling a track left-to-right is the only way to reach it.
+ * because filling a track left-to-right is the only way to reach it. Pipka Wyczerpania mówi
+ * też, skąd ten poziom i kiedy zejdzie (`pipkiWyczerpania` — §7.9).
  * @param {object} track
  * @param {number} n
- * @param {object|null} origin  Exhaustion source for this level, when known.
+ * @param {object|null} pipka  Wyczerpanie: źródło i droga wyjścia tego poziomu.
  * @returns {string}
  */
-function _pipTooltip(track, n, origin) {
+function _pipTooltip(track, n, pipka) {
   const { title, lines = [] } = track.summary?.(n) ?? {};
-  const head = [`${track.name} ${n}/${track.max}`, title, origin?.label].filter(Boolean).join(" — ");
-  return `<strong>${head}</strong>`
+  const head = [`${track.name} ${n}/${track.max}`, title, pipka?.label].filter(Boolean).join(" — ");
+  const wyjscie = pipka?.linie?.length
+    ? `<p class="neuro-stan-tip-wyjscie${pipka.uporczywe ? " is-uporczywe" : ""}">${pipka.linie.join("<br>")}</p>`
+    : "";
+  const od = pipka?.od ? `<p class="neuro-stan-tip-od">Od: ${pipka.od}</p>` : "";
+  return `<strong>${head}</strong>` + wyjscie + od
     + (lines.length ? `<ul>${lines.map(l => `<li>${l}</li>`).join("")}</ul>` : "");
 }
 
@@ -293,17 +308,17 @@ function _buildTrackRow(track, editable) {
   pips.className = "neuro-stan-pips";
   for (let n = 1; n <= track.max; n++) {
     const filled = n <= track.value;
-    const origin = filled ? track.sources?.[n - 1] : null;
-    const def = origin ? EXHAUSTION_SOURCES[origin.source] : null;
+    const pipka = filled ? track.pipki?.[n - 1] : null;
 
     const pip = document.createElement("button");
     pip.type = "button";
     pip.className = "neuro-stan-pip";
     pip.classList.toggle("filled", filled);
     if (n === track.max) pip.classList.add("terminal");
-    if (def?.color) pip.style.setProperty("--neuro-pip-color", def.color);
+    if (pipka?.color) pip.style.setProperty("--neuro-pip-color", pipka.color);
+    pip.classList.toggle("uporczywe", Boolean(pipka?.uporczywe));
     pip.dataset.n = String(n);
-    pip.dataset.tooltipHtml = _pipTooltip(track, n, origin);
+    pip.dataset.tooltipHtml = _pipTooltip(track, n, pipka);
     pip.dataset.tooltipClass = "neuro-stan-tip";
     pip.disabled = !editable;
     if (editable) pip.addEventListener("click", async ev => {
@@ -313,6 +328,20 @@ function _buildTrackRow(track, editable) {
       await track.set(clicked <= track.value ? clicked - 1 : clicked);
     });
     pips.appendChild(pip);
+  }
+  if (track.przycisk) {
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = `neuro-stan-akcja ${track.przycisk.klasa ?? ""}`;
+    btn.innerHTML = `<i class="fa-solid ${track.przycisk.ikona}" inert></i>`;
+    btn.setAttribute("data-tooltip", track.przycisk.tip);
+    btn.setAttribute("aria-label", track.przycisk.tip);
+    btn.addEventListener("click", ev => {
+      ev.preventDefault();
+      ev.stopPropagation();
+      track.przycisk.onClick();
+    });
+    pips.appendChild(btn);
   }
   row.appendChild(pips);
 
@@ -329,10 +358,13 @@ function _buildTrackRow(track, editable) {
  */
 function _buildRadRow(actor, editable) {
   const failures = getRadiationFailures(actor);
+  const band = getLevelledRegistry().get("skazenie")?.get(actor) ?? 0;
 
   const row = document.createElement("div");
   row.className = "neuro-stan-row neuro-stan-rad";
-  row.classList.toggle("is-hot", failures > 0);
+  // Wyciszony jak każdy inny tor, dopóki nic się nie dzieje: akcent tylko w skażonym obszarze
+  // (poziom na żetonie) albo z oblanymi RO na koncie.
+  row.classList.toggle("is-hot", failures > 0 || band > 0);
 
   const btn = document.createElement("button");
   btn.type = "button";
@@ -352,18 +384,41 @@ function _buildRadRow(actor, editable) {
 
   const marks = document.createElement("div");
   marks.className = "neuro-rad-marks";
-  marks.setAttribute("data-tooltip",
-    `Oblane RO: ${failures}/${SKAZENIE_DISEASE_THRESHOLD} — trzecie to choroba popromienna`);
   for (let n = 1; n <= SKAZENIE_DISEASE_THRESHOLD; n++) {
     const mark = document.createElement("div");
     mark.className = "neuro-rad-mark";
     mark.classList.toggle("filled", n <= failures);
     if (n === SKAZENIE_DISEASE_THRESHOLD) mark.classList.add("terminal");
+    mark.dataset.tooltipHtml = _radMarkTooltip(n, failures, band);
+    mark.dataset.tooltipClass = "neuro-stan-tip";
     marks.appendChild(mark);
   }
   row.appendChild(marks);
 
   return row;
+}
+
+/**
+ * Dymek kreski Skażenia — jak pipki Zranienia i Upojenia: co znaczy stanie na tej kresce, plus stan
+ * teraz. Kreski liczą oblane RO na Kondycję w skażonym obszarze (s. 258), nie poziom skażenia.
+ * @param {number} n         Numer kreski (1–3)
+ * @param {number} failures  Oblane RO teraz
+ * @param {number} band      Poziom skażenia na żetonie (0 — poza skażonym obszarem)
+ * @returns {string}
+ */
+function _radMarkTooltip(n, failures, band) {
+  const max = SKAZENIE_DISEASE_THRESHOLD;
+  const lines = n < max
+    ? [`${n}. oblany RO na Kondycję w skażonym obszarze`, "Każdy oblany RO: +1 poziom Wyczerpania (Skażenie radioaktywne)",
+      `${max}. oblany RO: choroba popromienna (s. 111)`]
+    : [`${max}. oblany RO: choroba popromienna (s. 111), licznik wraca do zera`];
+  lines.push("RadOff: koniec skażenia — licznik od zera, schodzi całe Wyczerpanie ze Skażenia");
+  const poziom = SKAZENIE_LEVELS.find(l => l.level === band);
+  const teraz = `Teraz: ${failures}/${max} oblanych RO`
+    + (poziom ? ` · skażenie ${poziom.name.toLowerCase()} (RO co godzinę, ST ${poziom.dc})` : " · poza skażonym obszarem");
+  return `<strong>Skażenie ${n}/${max}${n === max ? " — choroba popromienna" : ""}</strong>`
+    + `<p class="neuro-stan-tip-wyjscie">${teraz}</p>`
+    + `<ul>${lines.map(l => `<li>${l}</li>`).join("")}</ul>`;
 }
 
 /**
@@ -397,6 +452,80 @@ function _buildFireRow(actor, editable) {
   return row;
 }
 
+/** Akcje ze stanem na żetonie (s. 30, PLAN_m1_walka U8): przełącznik na karcie obok HUD żetonu. */
+const AKCJE_STANU = Object.freeze([
+  { id: "dodging", label: "Unikanie", icon: "fa-person-falling-burst",
+    tip: "Akcja Unikanie: do początku twojej następnej tury ataki przeciw tobie mają Utrudnienie, jeśli widzisz napastnika; Ułatwienie do RO na Zręczność (s. 30)." },
+  { id: "bieganie", label: "Bieganie", icon: "fa-person-running",
+    tip: "Akcja Bieganie: do początku twojej następnej tury +2× Szybkość ruchu i Utrudnienie do twoich Testów Ataku; ataki dystansowe przeciw tobie z Utrudnieniem do końca tej tury (s. 30).",
+    blokada: actor => (actor.statuses?.has("prone") ? "Nie przy Powaleniu (s. 30)." : null) }
+]);
+
+/**
+ * Unikanie i Bieganie — tylko w trwającej walce, w której aktor uczestniczy (poza nią nic nie znaczą).
+ * Zdejmuje je początek następnej tury właściciela (`actors/tt.mjs`).
+ * @param {Actor} actor
+ * @param {boolean} editable
+ * @returns {HTMLElement|null}
+ */
+function _buildAkcjeRow(actor, editable) {
+  const combat = game.combat;
+  if (!combat?.started || !combat.getCombatantsByActor?.(actor)?.length) return null;
+  const row = document.createElement("div");
+  row.className = "neuro-stan-row neuro-stan-akcje";
+  for (const a of AKCJE_STANU) {
+    const on = actor.statuses?.has(a.id);
+    const blokada = !on ? a.blokada?.(actor) ?? null : null;
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = `neuro-akcja-btn${on ? " active" : ""}`;
+    btn.dataset.akcja = a.id;
+    btn.innerHTML = `<i class="fa-solid ${a.icon}" inert></i>`;
+    const label = document.createElement("span");
+    label.textContent = a.label;
+    btn.appendChild(label);
+    btn.setAttribute("data-tooltip", blokada ? `${a.tip}<br><strong>${blokada}</strong>` : a.tip);
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+    btn.disabled = !editable || !!blokada;
+    if (editable && !blokada) btn.addEventListener("click", async ev => {
+      ev.preventDefault();
+      ev.stopPropagation();
+      btn.disabled = true;
+      await actor.toggleStatusEffect(a.id);
+    });
+    row.appendChild(btn);
+  }
+  return row;
+}
+
+/**
+ * BN przy 0 PW poza maszyną umierania (PLAN_m1_walka D2) — ten sam ruch co [Rzuty przeciw śmierci]
+ * na karcie „BN pada”, na później („chcemy go przesłuchać”). Tylko MG.
+ * @param {Actor} actor
+ * @returns {HTMLElement}
+ */
+function _buildUmieranieRow(actor) {
+  const row = document.createElement("div");
+  row.className = "neuro-stan-row neuro-stan-umieranie";
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "neuro-fire-btn neuro-umieranie-stan-btn";
+  btn.innerHTML = '<i class="fas fa-heart-pulse" inert></i>';
+  const label = document.createElement("span");
+  label.textContent = "Rzuty przeciw śmierci";
+  btn.appendChild(label);
+  btn.setAttribute("data-tooltip",
+    "Zamiast śmierci: Nieprzytomność i Stopień Zranienia za 0 PW, potem Rzuty Przeciw Śmierci jak bohater (s. 34).");
+  btn.addEventListener("click", async ev => {
+    ev.preventDefault();
+    ev.stopPropagation();
+    btn.disabled = true;
+    await bnDoUmierania(actor);
+  });
+  row.appendChild(btn);
+  return row;
+}
+
 /**
  * The full Stan card. The heading's dead space carries the Wyczerpanie total, which frees
  * every row of its own readout.
@@ -424,6 +553,17 @@ function _buildStanPanel(actor, tracks) {
 
   // Tylko gdy się pali — poza tym wiersz nie ma o czym mówić, a panel ma być krótki.
   if (isBurning(actor)) body.appendChild(_buildFireRow(actor, actor.isOwner));
+
+  // Uduszenie (PLAN_m1_walka §7.7) — tylko przy statusie: faza i „Złap oddech”.
+  const oddech = wierszUduszenia(actor, actor.isOwner);
+  if (oddech) body.appendChild(oddech);
+
+  const akcje = _buildAkcjeRow(actor, actor.isOwner);
+  if (akcje) body.appendChild(akcje);
+
+  if (game.user.isGM && actor.type === "npc" && !wMaszynie(actor) && (actor.system.attributes?.hp?.value ?? 1) <= 0) {
+    body.appendChild(_buildUmieranieRow(actor));
+  }
 
   // Read-only — every control for these lives on the Biografia tab.
   const ailments = buildHealthStrip(actor);

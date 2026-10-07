@@ -10,6 +10,10 @@
  * riders) instead of being injected silently. This file IS that surfacing.
  * Requested/evaluated live 2026-09-16.
  *
+ * **2026-10-07 (PLAN_m1_walka D6):** the hook and the badge below are gone — this file is now one source
+ * of the attack-circumstance engine (`combat/okolicznosci.mjs`), which sets the same default once for
+ * every source and draws one badge group. The history below explains why it is a default at all.
+ *
  * ## Mechanism: a default, not an enforcement — copied from `actors/armor-rules.mjs`
  *
  * Same shape as that file's own "Brak wyszkolenia" attack penalty:
@@ -44,6 +48,7 @@
  * can never disagree about which zone the actor is actually in.
  */
 import { udzwigStatus } from "../actors/encumbrance-breakdown.mjs";
+import { zarejestrujZrodloOkolicznosci } from "./okolicznosci.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -59,66 +64,24 @@ function _udzwigZone(actor) {
 }
 
 /**
- * Hook: `dnd5e.preRollAttack`. Same shape as `actors/armor-rules.mjs`'s own
- * `onPreRollAttack` — defaults `config.disadvantage`, doesn't force it past whatever
- * choice the GM/player makes when the dialog is actually shown.
+ * Źródło silnika okoliczności ataku (`combat/okolicznosci.mjs`, PLAN_m1_walka D6): Przeciążenie albo
+ * Unieruchomienie z Udźwigu → Utrudnienie. Dawniej własny hak `preRollAttack` i własna plakietka —
+ * teraz tryb rzutu ustawia jeden silnik, a powód trafia do jednej grupy plakietek na karcie ataku.
+ * @param {{actor: Actor}} ctx
+ * @returns {{rodzaj: string, label: string}[]}
  */
-function onPreRollAttack(config, _dialog, _message) {
-  const activity = config.subject;
-  const actor = activity?.actor;
-  if (!actor) return;
-
-  const zone = _udzwigZone(actor);
-  if (!ZONE_BADGE[zone]) return;
-
-  config.disadvantage = true;
-  for (const roll of config.rolls ?? []) {
-    roll.options ??= {};
-    roll.options.neuroUdzwigAttack = { zone };
-  }
-}
-
-/**
- * Hook: `dnd5e.renderChatMessage`. Paints a small badge on the attack roll's own chat
- * card so the Przeciążenie/Unieruchomienie default isn't only visible in the moment —
- * exact anchor point TBD against the live DOM, see inline notes.
- */
-function onRenderChatMessage(message, html) {
-  if (message.getFlag("dnd5e", "roll")?.type !== "attack") return;
-  const zone = message.rolls?.[0]?.options?.neuroUdzwigAttack?.zone;
-  const label = ZONE_BADGE[zone];
-  if (!label) return;
-  // `html` is already a raw HTMLElement in this Foundry version — same assumption
-  // `combat/cover.mjs`'s own `renderChatMessage` hook makes, not re-derived here.
-  if (html.querySelector(".neuro-udzwig-attack-badge")) return; // one render pass
-
-  // Prefer dnd5e's own native `.pills` footer (already used for weapon properties on
-  // this exact card type) so the badge looks like it belongs, not bolted on.
-  let pillList = html.querySelector("ul.card-footer.pills");
-  if (!pillList) {
-    pillList = document.createElement("ul");
-    pillList.className = "card-footer pills unlist";
-    const card = html.querySelector(".chat-card") ?? html;
-    card.appendChild(pillList);
-  }
-
-  // `maroon` is dnd5e's own native warning-pill modifier (already used elsewhere in
-  // core for e.g. concentration) — reused as-is instead of introducing bespoke colour
-  // CSS, so this reads as "the system's own warning pill", not a bolted-on badge.
-  const pill = document.createElement("li");
-  pill.className = "pill maroon neuro-udzwig-attack-badge";
-  pill.innerHTML = `<span class="label">${label}</span>`;
-  pillList.appendChild(pill);
+function zrodloUdzwig(ctx) {
+  if (!ctx?.actor) return [];
+  const zone = _udzwigZone(ctx?.actor);
+  return ZONE_BADGE[zone] ? [{ rodzaj: "utrudnienie", label: ZONE_BADGE[zone] }] : [];
 }
 
 export function registerUdzwigAttackDisadvantage() {
-  Hooks.on("dnd5e.preRollAttack", onPreRollAttack);
-  Hooks.on("dnd5e.renderChatMessage", onRenderChatMessage);
-  console.log(`${MODULE_ID} | Udźwig attack disadvantage registered`);
+  zarejestrujZrodloOkolicznosci("udzwig", zrodloUdzwig);
+  console.log(`${MODULE_ID} | Udźwig attack disadvantage registered (źródło okoliczności ataku)`);
 }
 
 export const __testing = Object.freeze({
   udzwigZone: _udzwigZone,
-  onPreRollAttack,
-  onRenderChatMessage
+  zrodloUdzwig
 });
