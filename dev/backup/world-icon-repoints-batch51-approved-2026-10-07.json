@@ -1,0 +1,386 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [
+    {
+      "_id": "xAXr8EKlyT5HedKH",
+      "name": "Nóż do rzucania",
+      "before": "modules/neuroshima-2026-overrides/icons/weapons/combat_knife.svg",
+      "img": "modules/neuroshima-2026-overrides/icons/weapons/noz_do_rzucania.svg"
+    },
+    {
+      "_id": "rV2CVUcVLxFmYMWO",
+      "name": "Łuk bloczkowy",
+      "before": "modules/neuroshima-2026-overrides/icons/weapons/bow.svg",
+      "img": "modules/neuroshima-2026-overrides/icons/weapons/luk_bloczkowy.svg"
+    }
+  ],
+  "actors": [
+    {
+      "uuid": "Actor.YWJmZDNlNzMyOGVh",
+      "name": "Alan",
+      "items": [
+        {
+          "_id": "SQqjnniP1Q8a9DyK",
+          "name": "Komponenty Amunicji",
+          "before": "modules/neuroshima-2026-overrides/icons/items/loot/chemia.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/komponenty_amunicji.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.Taasqgmv3ugzhYfv",
+      "name": "GENERACJA II. GENOTYP GADZI",
+      "items": [
+        {
+          "_id": "ZZeea64hNsmKFO3R",
+          "name": "Jadowite zęby",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/jadowite_zeby.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.BfwMMnZyyOp4ErKQ",
+      "name": "GLADIATOR",
+      "items": [
+        {
+          "_id": "01proGgfRoMl9jie",
+          "name": "Piły",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pily.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.F7GtxAsyDXG6kPla",
+      "name": "KORZEC",
+      "items": [
+        {
+          "_id": "LkJQd7hMchlcoYiz",
+          "name": "Korzeń",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/korzen.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.rF8TCCELmUMdIDJ9",
+      "name": "KOŃ (SKAŻONY)",
+      "items": [
+        {
+          "_id": "OVVqPbZ5P1RlzMF6",
+          "name": "Kopyta",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_kopytem.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.S2wFON8ZvilYCrs7",
+      "name": "KOŃ (TEKSAŃCZYK)",
+      "items": [
+        {
+          "_id": "G2PxKJBBclhytxrq",
+          "name": "Kopyta",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_kopytem.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.veaIku12UbGylxVg",
+      "name": "KOŃ (ZDROWY)",
+      "items": [
+        {
+          "_id": "QUu2DMQ9ZIrCxwmJ",
+          "name": "Kopyta",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_kopytem.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.4pOUKx6U3HHKAw2b",
+      "name": "MEGATOR",
+      "items": [
+        {
+          "_id": "N6H36tNLHR83lCl7",
+          "name": "Zionięcie (2/walkę)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zioniecie_radioaktywne.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.7k7CP9n0eqXb1kXr",
+      "name": "MYŚLĄCY SZCZUR",
+      "items": [
+        {
+          "_id": "45ExtGsxiBUPvhJ2",
+          "name": "Szczurze nóżki",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/szczurze-nozki.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MGQ1OWM2Yzc3YzQx",
+      "name": "Major Lansdale",
+      "items": [
+        {
+          "_id": "ZWJiMGUyZjdjMWU4",
+          "name": "Wyciszony Pistolet 10mm",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/semi_auto_pistol.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/wyciszony_pistolet_10mm.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.td44oP8eYRTO8SeW",
+      "name": "NEONIEDŹWIEDŹ",
+      "items": [
+        {
+          "_id": "GyGa1WVD8IZSu0yY",
+          "name": "Łapa",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/lapa_neoniedzwiedzia.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.V17hzI9yQN34tA06",
+      "name": "PULSER",
+      "items": [
+        {
+          "_id": "loqxshEvdJ7745d9",
+          "name": "Eksplodujące czyraki (10/dzień)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/eksplodujace-czyraki.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NjBkNTk3OWY1ODRj",
+      "name": "Raynald of Châtillon",
+      "items": [
+        {
+          "_id": "NmUwNGM0MzlkM2E2",
+          "name": "Butelka Coli Light",
+          "before": "modules/neuroshima-2026-overrides/icons/items/drugs/neuro_cola.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/items/loot/cola_light.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.7odbYt1meXScvBWR",
+      "name": "SZCZĘKOWIJ",
+      "items": [
+        {
+          "_id": "WDMmO9bSfkBBzcTW",
+          "name": "Szczęki",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/szczeki.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.4IYaZ7YQ1uy90FOz",
+      "name": "Zbrojownia",
+      "items": [
+        {
+          "_id": "6PMCDVlvu75vWgfg",
+          "name": "Łuk bloczkowy",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/bow.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/luk_bloczkowy.svg"
+        },
+        {
+          "_id": "3CNXkJzBQWqVfhbU",
+          "name": "Nóż do rzucania",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/combat_knife.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/noz_do_rzucania.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MTEyM2VhZTEwMzJi.Token.M2QxZjVmZjZlZGJj.Actor.MGQ1OWM2Yzc3YzQx",
+      "name": "Major Lansdale",
+      "items": [
+        {
+          "_id": "ZWJiMGUyZjdjMWU4",
+          "name": "Wyciszony Pistolet 10mm",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/wyciszony_pistolet_10mm.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MjY5NWM0NjkzMjZj.Token.ZTJiYzg0NGQ5YzVj.Actor.MGQ1OWM2Yzc3YzQx",
+      "name": "Major Lansdale",
+      "items": [
+        {
+          "_id": "ZWJiMGUyZjdjMWU4",
+          "name": "Wyciszony Pistolet 10mm",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/wyciszony_pistolet_10mm.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.b7nonxZtwZplP7RG.Actor.MGQ1OWM2Yzc3YzQx",
+      "name": "Major Lansdale",
+      "items": [
+        {
+          "_id": "ZWJiMGUyZjdjMWU4",
+          "name": "Wyciszony Pistolet 10mm",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/semi_auto_pistol.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/wyciszony_pistolet_10mm.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.U6073cTZtfAsNjMf.Actor.BfwMMnZyyOp4ErKQ",
+      "name": "GLADIATOR",
+      "items": [
+        {
+          "_id": "01proGgfRoMl9jie",
+          "name": "Piły",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/pily.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.JBjLreQNJawo6v6b.Actor.V17hzI9yQN34tA06",
+      "name": "PULSER",
+      "items": [
+        {
+          "_id": "loqxshEvdJ7745d9",
+          "name": "Eksplodujące czyraki (10/dzień)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/eksplodujace-czyraki.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.MU0qcsrqg3xwiW6f.Actor.Taasqgmv3ugzhYfv",
+      "name": "GENERACJA II. GENOTYP GADZI",
+      "items": [
+        {
+          "_id": "ZZeea64hNsmKFO3R",
+          "name": "Jadowite zęby",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/jadowite_zeby.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.jKq0OukOkDe45h5i.Actor.4pOUKx6U3HHKAw2b",
+      "name": "MEGATOR",
+      "items": [
+        {
+          "_id": "N6H36tNLHR83lCl7",
+          "name": "Zionięcie (2/walkę)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/zioniecie_radioaktywne.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.nUct6kMaNGOXebX7.Actor.F7GtxAsyDXG6kPla",
+      "name": "ALAHAMA",
+      "items": [
+        {
+          "_id": "LkJQd7hMchlcoYiz",
+          "name": "Korzeń",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/korzen.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.FspP2MjXP3Wqbh5p.Actor.7odbYt1meXScvBWR",
+      "name": "SZCZĘKOWIJ",
+      "items": [
+        {
+          "_id": "WDMmO9bSfkBBzcTW",
+          "name": "Szczęki",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/szczeki.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.3gbaIvSg6AdDNxi4.Actor.td44oP8eYRTO8SeW",
+      "name": "NEONIEDŹWIEDŹ",
+      "items": [
+        {
+          "_id": "GyGa1WVD8IZSu0yY",
+          "name": "Łapa",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/lapa_neoniedzwiedzia.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.OtOnfFMGzXDt1CP8.Actor.rF8TCCELmUMdIDJ9",
+      "name": "GIGANTYCZNY PAJĄK",
+      "items": [
+        {
+          "_id": "OVVqPbZ5P1RlzMF6",
+          "name": "Kopyta",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_kopytem.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.QXagB2aEBr9FilQx.Actor.ZpNjrKMNRmVwAZTs",
+      "name": "KOŃ (SKAŻONY)",
+      "items": [
+        {
+          "_id": "N1ycx0XcMLt1GHS2",
+          "name": "Odnóże",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_kopytem.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.obHF7PffUPKTBPxX.Actor.S2wFON8ZvilYCrs7",
+      "name": "KOŃ (TEKSAŃCZYK)",
+      "items": [
+        {
+          "_id": "G2PxKJBBclhytxrq",
+          "name": "Kopyta",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_kopytem.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.SRaatK4oSiZYABG6.Actor.veaIku12UbGylxVg",
+      "name": "KOŃ (ZDROWY)",
+      "items": [
+        {
+          "_id": "QUu2DMQ9ZIrCxwmJ",
+          "name": "Kopyta",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_kopytem.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.vZ7jrjKJrimsxFdK.Actor.7k7CP9n0eqXb1kXr",
+      "name": "MYŚLĄCY SZCZUR",
+      "items": [
+        {
+          "_id": "45ExtGsxiBUPvhJ2",
+          "name": "Szczurze nóżki",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/szczurze-nozki.svg"
+        }
+      ]
+    }
+  ]
+}

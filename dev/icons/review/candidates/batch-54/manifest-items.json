@@ -1,0 +1,303 @@
+{
+  "title": "Batch 54 · 28 remaining (27 generated + Kamuflaż carry-over)",
+  "updated": "2026-10-08",
+  "items": [
+    {
+      "id": "batch51-kolec-jadowy",
+      "candidates": [
+        {
+          "id": "batch54-revision",
+          "label": "Revision D · poison drop at tip",
+          "src": "candidates/batch-54/kolec_jadowy_revision_d.png",
+          "note": "Preserves the selected spike and adds one large hanging venom drop at its sharp tip."
+        }
+      ]
+    },
+    {
+      "id": "batch53-regeneracja",
+      "candidates": [
+        {
+          "id": "batch54-revision",
+          "label": "Revision B · filaments closing wound",
+          "src": "candidates/batch-54/regeneracja_revision_b.png",
+          "note": "Two open wound edges are pulled together by three broad organic filaments, without a circle or stitches."
+        }
+      ]
+    },
+    {
+      "id": "batch53-nadludzki-refleks",
+      "candidates": [
+        {
+          "id": "batch54-revision",
+          "label": "Revision B · ducking under projectile",
+          "src": "candidates/batch-54/nadludzki_refleks_revision_b.png",
+          "note": "The figure clearly ducks beneath a projectile that continues straight overhead."
+        }
+      ]
+    },
+    {
+      "id": "batch53-szarza",
+      "candidates": [
+        {
+          "id": "batch54-revision",
+          "label": "Revision B · readable full-body charge",
+          "src": "candidates/batch-54/szarza_revision_b.png",
+          "note": "The horned charger now has a clear torso, arms and two bent running legs."
+        }
+      ]
+    },
+    {
+      "id": "batch54-manewry",
+      "name": "Manewry",
+      "tier": "Batch 54 · Gangus Boss and Kapo bonus action",
+      "context": "These gang leaders can push, disengage, disarm or dash as tactical maneuvers. Their actor items use the generic upgrade placeholder.",
+      "request": "One fighter pivoting between three thick directional arrows for push, disengage and rush.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not communicate tactical movement." },
+      "candidates": [
+        { "id": "atlas-a", "label": "Atlas A · tactical directions", "src": "candidates/batch-54/manewry.png", "note": "A central fighter and three large arrows show multiple maneuver choices." }
+      ]
+    },
+    {
+      "id": "batch54-ucieczka",
+      "name": "Ucieczka",
+      "tier": "Batch 54 · Spy and Kidnaper bonus action",
+      "context": "The Spy disengages, dodges or dashes, while Kidnaper escapes carrying a captive. Both use the generic upgrade placeholder.",
+      "request": "One crouched figure breaking through an incomplete enclosing ring toward one bold exit arrow.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not communicate escape." },
+      "candidates": [
+        { "id": "atlas-a", "label": "Atlas A · breaking out", "src": "candidates/batch-54/ucieczka.png", "note": "The broken ring and exit arrow create a compact escape silhouette." }
+      ]
+    },
+    {
+      "id": "batch54-agresja",
+      "name": "Agresja",
+      "tier": "Batch 54 · Generation III Fatso bonus action",
+      "context": "The Fatso dashes directly toward an opponent. The actor item uses the generic upgrade placeholder.",
+      "request": "One massive hunched humanoid rushing a small opponent with exactly two broad speed bars.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show aggressive pursuit." },
+      "candidates": [
+        { "id": "atlas-a", "label": "Atlas A · mutant rush", "src": "candidates/batch-54/agresja.png", "note": "Strong scale contrast and two speed bars show a direct aggressive rush." }
+      ]
+    },
+    {
+      "id": "batch54-burzyciel",
+      "name": "Burzyciel",
+      "tier": "Batch 54 · Juggernaut trait",
+      "context": "Juggernaut destroys walls, vehicles and smaller obstacles by driving through them. The actor item uses the generic upgrade placeholder.",
+      "request": "One heavy tracked machine smashing through a concrete wall with exactly three large wall fragments.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not convey demolition by mass." },
+      "candidates": [
+        { "id": "atlas-a", "label": "Atlas A · tracked wall breaker", "src": "candidates/batch-54/burzyciel.png", "note": "A compact tracked machine visibly breaks through one solid obstacle." }
+      ]
+    },
+    {
+      "id": "batch54-chwytak",
+      "name": "Chwytak",
+      "tier": "Batch 54 · Defender machine attack",
+      "context": "The Defender's mechanical grabber grapples and restrains a victim. The actor item uses the generic upgrade placeholder.",
+      "request": "One industrial two-jaw clamp gripping a plain torso silhouette; machinery rather than a human hand.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not identify the machine grabber." },
+      "candidates": [
+        { "id": "atlas-a", "label": "Atlas A · industrial clamp", "src": "candidates/batch-54/chwytak.png", "note": "A heavy articulated clamp closes around a simple victim silhouette." }
+      ]
+    },
+    {
+      "id": "batch54-czaszkohelm",
+      "name": "Czaszkohełm",
+      "tier": "Batch 54 · Alahama trait",
+      "context": "Alahama's skull helmet protects it from critical hits. The actor item uses the generic upgrade placeholder.",
+      "request": "One heavy animal-skull helmet enclosing the top of a humanoid head, with broad horn stubs and a thick brow.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show the protective skull helmet." },
+      "candidates": [
+        { "id": "atlas-b", "label": "Atlas B · protective skull helm", "src": "candidates/batch-54/czaszkohelm.png", "note": "The skull clearly encloses a living head and reads as armor." }
+      ]
+    },
+    {
+      "id": "batch54-druga-linia",
+      "name": "Druga linia",
+      "tier": "Batch 54 · Generation III Techmutant bonus action",
+      "context": "The Techmutant hides behind the front line when battlefield conditions allow. The actor item uses the generic upgrade placeholder.",
+      "request": "One psychic humanoid crouched behind a large foreground fighter silhouette with one broad concealment shape.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show shelter behind allies." },
+      "candidates": [
+        { "id": "atlas-b", "label": "Atlas B · hiding behind front line", "src": "candidates/batch-54/druga_linia.png", "note": "The small crouched figure is visibly screened by a larger combatant." }
+      ]
+    },
+    {
+      "id": "batch54-iluzoryczna-niewidzialnosc",
+      "name": "Iluzoryczna niewidzialność",
+      "tier": "Batch 54 · Generation IV Mesmerist legendary action",
+      "context": "The Mesmerist becomes unseen by creatures without thermal vision until harmed or acting offensively. The item uses the generic upgrade placeholder.",
+      "request": "One standing humanoid whose middle disappears into exactly three broad horizontal gaps.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show psychic disappearance." },
+      "candidates": [
+        { "id": "atlas-b", "label": "Atlas B · segmented disappearance", "src": "candidates/batch-54/iluzoryczna_niewidzialnosc.png", "note": "Three clean gaps erase the figure's center while its outline remains readable." }
+      ]
+    },
+    {
+      "id": "batch54-iluzoryczny-cel",
+      "name": "Iluzoryczny cel",
+      "tier": "Batch 54 · Generation IV Mesmerist reaction",
+      "context": "The Mesmerist redirects an incoming melee attack toward another creature or the attacker. The item uses the generic upgrade placeholder.",
+      "request": "One attacker aiming at a figure while one broad psychic arrow redirects the strike toward a second figure.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not convey redirected targeting." },
+      "candidates": [
+        { "id": "atlas-b", "label": "Atlas B · redirected attack", "src": "candidates/batch-54/iluzoryczny_cel.png", "note": "One large curved arrow redirects the attack from the first target to the second." }
+      ]
+    },
+    {
+      "id": "batch54-kontakt-molocha",
+      "name": "Kontakt Molocha",
+      "tier": "Batch 54 · Generation III Spy trait",
+      "context": "A microrobot or cyberimplant records everything the Spy experiences for Moloch. The item uses the generic upgrade placeholder.",
+      "request": "One small angular surveillance implant behind a human ear with exactly two short radio arcs.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show hidden machine surveillance." },
+      "candidates": [
+        { "id": "atlas-b", "label": "Atlas B · surveillance implant", "src": "candidates/batch-54/kontakt_molocha.png", "note": "The ear-mounted device and two radio arcs suggest continuous recording and transmission." }
+      ]
+    },
+    {
+      "id": "batch54-kuloodporny",
+      "name": "Kuloodporny",
+      "tier": "Batch 54 · Trigger Man trait",
+      "context": "The Trigger Man adds proficiency to his hit difficulty because he is exceptionally resistant to gunfire. The item uses the generic upgrade placeholder or portrait.",
+      "request": "One upper torso behind a thick battered ballistic plate while exactly three large bullets flatten against it.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg or portrait", "note": "Current imagery is generic and actor-specific." },
+      "candidates": [
+        { "id": "atlas-b", "label": "Atlas B · bullets stopped by plate", "src": "candidates/batch-54/kuloodporny.png", "note": "Three oversized bullets visibly stop against one heavy plate." }
+      ]
+    },
+    {
+      "id": "batch54-legendarna-odpornosc",
+      "name": "Legendarna odporność (3/dzień)",
+      "tier": "Batch 54 · Megator trait",
+      "context": "Megator can turn a failed saving throw into a success three times per day. The actor item uses the generic upgrade placeholder.",
+      "request": "One enormous reptilian eye behind a thick shield split by one impact crack but still holding.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show extraordinary resistance." },
+      "candidates": [
+        { "id": "atlas-b", "label": "Atlas B · cracked shield holding", "src": "candidates/batch-54/legendarna_odpornosc.png", "note": "The cracked shield remains intact around a large reptilian eye." }
+      ]
+    },
+    {
+      "id": "batch54-malutki",
+      "name": "Malutki",
+      "tier": "Batch 54 · Kitchin trait",
+      "context": "Kitchin moves through larger creatures' spaces and can climb onto them. The actor item uses the generic upgrade placeholder or portrait.",
+      "request": "One very small hunched creature standing between two enormous boot silhouettes.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg or portrait", "note": "Current imagery does not communicate the creature's tiny scale." },
+      "candidates": [
+        { "id": "atlas-b", "label": "Atlas B · tiny creature between boots", "src": "candidates/batch-54/malutki.png", "note": "The extreme scale contrast remains legible at icon size." }
+      ]
+    },
+    {
+      "id": "batch54-malo-zwrotny",
+      "name": "Mało zwrotny",
+      "tier": "Batch 54 · Juggernaut trait",
+      "context": "Juggernaut moves normally only forward and backward; a ninety-degree turn costs half its speed. The item uses the generic upgrade placeholder.",
+      "request": "One heavy tracked vehicle following a straight arrow while a sharply curving arrow is visibly blocked.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show restricted turning." },
+      "candidates": [
+        { "id": "atlas-b", "label": "Atlas B · straight movement only", "src": "candidates/batch-54/malo_zwrotny.png", "note": "The vehicle can advance straight but the crossed curved arrow denies a tight turn." }
+      ]
+    },
+    {
+      "id": "batch54-najechanie",
+      "name": "Najechanie",
+      "tier": "Batch 54 · Juggernaut action",
+      "context": "Juggernaut drives onto a large or smaller target, knocking it down and crushing it. The item uses the generic upgrade placeholder.",
+      "request": "One massive tank tread descending onto one prone human silhouette; no full vehicle body.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show a tread crushing a victim." },
+      "candidates": [
+        { "id": "atlas-c", "label": "Atlas C · tread crushing victim", "src": "candidates/batch-54/najechanie.png", "note": "One oversized tread and prone figure make the crushing action immediate." }
+      ]
+    },
+    {
+      "id": "batch54-niezniszczalnosc",
+      "name": "Niezniszczalność",
+      "tier": "Batch 54 · Night Ghoul trait",
+      "context": "A Night Ghoul ignores critical hits and rises again unless its brain is destroyed. The actor item uses the generic upgrade placeholder.",
+      "request": "One hunched mutant rising while a large broken blade bends against its skull.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not convey the ghoul's specific durability." },
+      "candidates": [
+        { "id": "atlas-c", "label": "Atlas C · ghoul resisting head strike", "src": "candidates/batch-54/niezniszczalnosc.png", "note": "The blade fails against the skull while the ghoul remains upright." }
+      ]
+    },
+    {
+      "id": "batch54-oblazenie",
+      "name": "Obłażenie",
+      "tier": "Batch 54 · Rat Swarm trait",
+      "context": "The swarm moves through enemies, ends its turn in their spaces and ignores opportunity attacks. The actor item uses the generic upgrade placeholder.",
+      "request": "A pair of human boots surrounded and climbed over by exactly six large rat silhouettes.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show rats overrunning a creature's space." },
+      "candidates": [
+        { "id": "atlas-c", "label": "Atlas C · rats over boots", "src": "candidates/batch-54/oblazenie.png", "note": "Six large rats visibly crowd and climb over the wearer's boots." }
+      ]
+    },
+    {
+      "id": "batch54-ofiara",
+      "name": "Ofiara",
+      "tier": "Batch 54 · Gangus Kapo trait",
+      "context": "The Kapo swaps places with a nearby ally so that ally takes an incoming attack. The item uses the generic upgrade placeholder or portrait.",
+      "request": "One frightened fighter pulling a second human silhouette directly into the path of one incoming projectile.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg or portrait", "note": "Current imagery does not communicate using an ally as a shield." },
+      "candidates": [
+        { "id": "atlas-c", "label": "Atlas C · ally used as shield", "src": "candidates/batch-54/ofiara.png", "note": "One figure physically pulls another into the projectile's path." }
+      ]
+    },
+    {
+      "id": "batch54-przejechanie",
+      "name": "Przejechanie",
+      "tier": "Batch 54 · Juggernaut legendary action",
+      "context": "Juggernaut moves up to eighteen metres and runs down every creature along its route. The item uses the generic upgrade placeholder.",
+      "request": "One heavy tracked machine driving through exactly two human silhouettes with two thick speed bars.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show a sustained drive-through attack." },
+      "candidates": [
+        { "id": "atlas-c", "label": "Atlas C · driving through a line", "src": "candidates/batch-54/przejechanie.png", "note": "The tracked machine knocks two figures aside along one route." }
+      ]
+    },
+    {
+      "id": "batch54-przewidywanie",
+      "name": "Przewidywanie",
+      "tier": "Batch 54 · Generation III Techmutant trait",
+      "context": "The Techmutant adds Intelligence to hit difficulty by anticipating attacks. The actor item uses the generic upgrade placeholder.",
+      "request": "One psychic head profile with a large eye reading exactly two broad future trajectory arcs.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not convey anticipation of trajectories." },
+      "candidates": [
+        { "id": "atlas-c", "label": "Atlas C · foreseen trajectories", "src": "candidates/batch-54/przewidywanie.png", "note": "The enlarged eye watches two incoming paths before they arrive." }
+      ]
+    },
+    {
+      "id": "batch54-psychiczny-krzyk",
+      "name": "Psychiczny krzyk",
+      "tier": "Batch 54 · Bit-Boy Guide action",
+      "context": "The Guide screams inside a victim's mind, dealing psychic damage and briefly incapacitating it. The item uses the generic upgrade placeholder or portrait.",
+      "request": "One open-mouthed mutant head emitting exactly three thick angular psychic waves toward one recoiling head.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg or portrait", "note": "Current imagery does not identify the psychic scream." },
+      "candidates": [
+        { "id": "atlas-c", "label": "Atlas C · psychic scream waves", "src": "candidates/batch-54/psychiczny_krzyk.png", "note": "Three angular waves connect the screaming mutant to the recoiling victim." }
+      ]
+    },
+    {
+      "id": "batch54-szum-mentalny",
+      "name": "Szum mentalny",
+      "tier": "Batch 54 · Generation IV Mesmerist action",
+      "context": "The Mesmerist fills nearby enemies' minds with interference, hindering perception and ranged attacks. The item uses the generic upgrade placeholder.",
+      "request": "One human head enclosed by exactly four heavy broken zigzag interference bands.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show mental interference." },
+      "candidates": [
+        { "id": "atlas-c", "label": "Atlas C · mental interference", "src": "candidates/batch-54/szum_mentalny.png", "note": "Four bold zigzag bands overwhelm the centered head." }
+      ]
+    },
+    {
+      "id": "batch54-sciana-zaru",
+      "name": "Ściana żaru",
+      "tier": "Batch 54 · Generation IV Mesmerist action",
+      "context": "The Mesmerist creates an invisible wall of extreme heat, visible only through wavering air. The item uses the generic upgrade placeholder.",
+      "request": "One standing human recoiling from a tall barrier shown only by exactly three broad wavering heat columns.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show the invisible heat barrier." },
+      "candidates": [
+        { "id": "atlas-c", "label": "Atlas C · invisible heat wall", "src": "candidates/batch-54/sciana_zaru.png", "note": "The recoiling figure and three vertical heat columns show a dangerous invisible barrier." }
+      ]
+    }
+  ]
+}

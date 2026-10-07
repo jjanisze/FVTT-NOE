@@ -1,0 +1,3503 @@
+{
+  "version": 1,
+  "title": "Batch 54 · 28 remaining (27 generated + Kamuflaż carry-over)",
+  "updated": "2026-10-08",
+  "items": [
+    {
+      "id": "batch41-schemat-notatka",
+      "status": "resolved",
+      "name": "Schemat â€” Notatka",
+      "tier": "Small blueprint tier Â· recipes up to 40 hours",
+      "context": "Used for small Schemat items such as grenades, ammunition and medicine. It must read as one loose workshop note, smaller and less formal than the spiral manual.",
+      "request": "Replace the oversized cog and cartoon-like arrows. Keep the icon large and readable, but make the technical content sober, practical and post-apocalyptic.",
+      "current": {
+        "src": "/icons/items/loot/schemat_notatka.png",
+        "note": "Current shipped icon. Rejected: oversized cog and playful arrows."
+      },
+      "candidates": [
+        {
+          "id": "flat-circuit-note",
+          "label": "Candidate C Â· single circuit note",
+          "src": "candidates/batch-41/schemat_notatka-circuit.png",
+          "note": "Agent recommendation. One loose sheet, restrained circuit stencil, strongest silhouette at 16â€“32 px."
+        },
+        {
+          "id": "flat-radio-field-note",
+          "label": "Candidate B Â· flat field note",
+          "src": "candidates/batch-41/schemat_notatka-flat.png",
+          "note": "Broad radio-and-wiring stencil survives 16â€“32 px, but the folds divide the sheet into several panels."
+        },
+        {
+          "id": "detailed-radio-field-note",
+          "label": "Candidate A Â· detailed field note",
+          "src": "candidates/batch-41/schemat_notatka-detailed.png",
+          "note": "More grounded subject, but fine etched details may disappear at inventory size."
+        }
+      ]
+    },
+    {
+      "id": "batch41-schemat-instrukcja",
+      "status": "resolved",
+      "name": "Schemat â€” Instrukcja",
+      "tier": "Medium blueprint tier Â· recipes up to 250 hours",
+      "context": "Used for laptops, weapons and armor. It must read as a thin spiral-bound service manual: more substantial than a note, less bulky than the binder and rolled documentation tier.",
+      "request": "Replace the oversized cog and toy-like component stack with an austere technical cover diagram. Preserve the clear spiral-manual silhouette.",
+      "current": {
+        "src": "/icons/items/loot/schemat_instrukcja.png",
+        "note": "Current shipped icon. Rejected: central cog and cartoonish stacked shapes."
+      },
+      "candidates": [
+        {
+          "id": "flat-exploded-manual",
+          "label": "Candidate B Â· flat service manual",
+          "src": "candidates/batch-41/schemat_instrukcja-flat.png",
+          "note": "Agent recommendation. Three broad rectangular modules and antenna; clear at 16â€“32 px."
+        },
+        {
+          "id": "detailed-exploded-manual",
+          "label": "Candidate A Â· detailed service manual",
+          "src": "candidates/batch-41/schemat_instrukcja-detailed.png",
+          "note": "Serious technical subject, but too much fine structure for a small inventory glyph."
+        }
+      ]
+    },
+    {
+      "id": "batch42-maczuga",
+      "status": "resolved",
+      "name": "Maczuga",
+      "tier": "Batch 42 Â· WKK weapon Â· compendium: bron",
+      "context": "Vendor-trash weapon and NPC drop used by Grubas and Kanibal. The prototype already exists, but currently borrows the steel-pipe club icon.",
+      "request": "A crude heavy wooden club with a knotted head and a few nails. It must differ clearly from a baseball bat and a metal pipe.",
+      "current": {
+        "src": "/icons/weapons/iron_pipe_club.svg",
+        "note": "Borrowed icon: metal pipe club."
+      },
+      "candidates": [
+        {
+          "id": "generated-a",
+          "label": "Candidate A Â· nailed wooden club",
+          "src": "candidates/batch-42/maczuga.png",
+          "note": "Irregular timber silhouette with short nails concentrated at the striking end."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Candidate B Â· simplified nailed club",
+          "src": "candidates/batch-42/maczuga-simple.png",
+          "note": "Revision from a 2Ã—2 atlas: bold outer silhouette, three large nails, almost no internal contour work."
+        }
+      ]
+    },
+    {
+      "id": "batch42-palka-policyjna",
+      "status": "resolved",
+      "name": "PaÅ‚ka policyjna",
+      "tier": "Batch 42 Â· WKK weapon Â· compendium: bron",
+      "context": "Light police weapon used by Konwojent. Its prototype exists but currently borrows the steel-pipe club icon.",
+      "request": "A compact side-handle police baton that reads as duty equipment rather than a pipe or sword.",
+      "current": {
+        "src": "/icons/weapons/iron_pipe_club.svg",
+        "note": "Borrowed icon: metal pipe club."
+      },
+      "candidates": [
+        {
+          "id": "generated-a",
+          "label": "Candidate A Â· side-handle baton",
+          "src": "candidates/batch-42/palka_policyjna.png",
+          "note": "Broad tonfa silhouette with one perpendicular grip; simple enough for inventory size."
+        }
+      ]
+    },
+    {
+      "id": "batch42-kamienny-noz",
+      "status": "resolved",
+      "name": "Kamienny nÃ³Å¼",
+      "tier": "Batch 42 Â· WKK weapon Â· compendium: bron",
+      "context": "Primitive Kanibal weapon. Its prototype exists but currently borrows the modern combat-knife icon.",
+      "request": "Knapped flint lashed to a short rough handle. The chipped stone blade must remain distinct at small size.",
+      "current": {
+        "src": "/icons/weapons/combat_knife.svg",
+        "note": "Borrowed icon: modern combat knife."
+      },
+      "candidates": [
+        {
+          "id": "generated-a",
+          "label": "Candidate A Â· lashed flint knife",
+          "src": "candidates/batch-42/kamienny_noz.png",
+          "note": "Wide chipped blade and broad cord lashing distinguish it from modern knives."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Candidate B Â· simplified flint knife",
+          "src": "candidates/batch-42/kamienny_noz-simple.png",
+          "note": "Revision from a 2Ã—2 atlas: broad jagged blade and one heavy lashing band without fine flake marks."
+        }
+      ]
+    },
+    {
+      "id": "batch42-sztylet",
+      "status": "resolved",
+      "name": "Sztylet",
+      "tier": "Batch 42 Â· WKK weapon Â· compendium: bron",
+      "context": "Narrow homemade dagger used by MyÅ›lÄ…cy szczur. Its prototype exists but currently borrows the combat-knife icon.",
+      "request": "A slim double-edged dagger with a simple crossguard and rag-wrapped grip, visibly thinner than the combat knife.",
+      "current": {
+        "src": "/icons/weapons/combat_knife.svg",
+        "note": "Borrowed icon: modern combat knife."
+      },
+      "candidates": [
+        {
+          "id": "generated-a",
+          "label": "Candidate A Â· narrow homemade dagger",
+          "src": "candidates/batch-42/sztylet.png",
+          "note": "Long symmetrical point, restrained guard and wrapped short grip."
+        }
+      ]
+    },
+    {
+      "id": "batch42-mlotek",
+      "status": "resolved",
+      "name": "MÅ‚otek",
+      "tier": "Batch 42 Â· WKK weapon/tool Â· compendium: bron",
+      "context": "Ordinary carpenter's hammer used as an improvised weapon by Å»oÅ‚nierz Posterunku. Its prototype exists but borrows the pipe-club icon.",
+      "request": "A normal claw hammer with realistic tool proportions, clearly not a warhammer.",
+      "current": {
+        "src": "/icons/weapons/iron_pipe_club.svg",
+        "note": "Borrowed icon: metal pipe club."
+      },
+      "candidates": [
+        {
+          "id": "generated-a",
+          "label": "Candidate A Â· carpenter's claw hammer",
+          "src": "candidates/batch-42/mlotek.png",
+          "note": "Plain wooden handle, striking face and clearly forked claw."
+        }
+      ]
+    },
+    {
+      "id": "batch42-agregat",
+      "status": "resolved",
+      "name": "Agregat",
+      "tier": "Batch 42 Â· rulebook production output Â· prototype missing",
+      "context": "Serwisowanie recipe: ST 20, 50 hours, Mechanika or Elektronika. Production currently creates a generic loot item with the category lightning fallback; no reusable compendium prototype exists.",
+      "request": "Show the actual portable fuel generator: engine, tank and carry frame. Avoid an abstract lightning symbol.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "generated-a",
+          "label": "Candidate A Â· portable generator",
+          "src": "candidates/batch-42/agregat.png",
+          "note": "Exposed engine within a strong tubular frame; detailed, so inspect the 16 px view carefully."
+        }
+      ]
+    },
+    {
+      "id": "batch42-akumulator",
+      "status": "resolved",
+      "name": "Akumulator",
+      "tier": "Batch 42 Â· rulebook production output Â· prototype missing",
+      "context": "Serwisowanie recipe: ST 15, 40 hours, Elektronika. It also powers rulebook drones. Production currently uses a category fallback and no reusable compendium prototype exists.",
+      "request": "A battered 24-volt lead-acid battery with two terminals and a carry handle; show the object rather than a lightning symbol.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "generated-a",
+          "label": "Candidate A Â· vehicle battery",
+          "src": "candidates/batch-42/akumulator.png",
+          "note": "Large rectangular case, two terminals and one carry handle."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Candidate B Â· terminal-first battery",
+          "src": "candidates/batch-42/akumulator-simple.png",
+          "note": "Revision from a 2Ã—2 atlas: solid box and deliberately oversized separated terminals with minimal casing detail."
+        }
+      ]
+    },
+    {
+      "id": "batch42-alternator",
+      "status": "resolved",
+      "name": "Alternator",
+      "tier": "Batch 42 Â· rulebook production output Â· prototype missing",
+      "context": "Serwisowanie recipe: ST 15, 40 hours, Mechanika or Elektronika. Production currently uses a category fallback and no reusable compendium prototype exists.",
+      "request": "An automotive alternator with a grooved belt pulley and vented housing. Avoid a detached or oversized cog motif.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "generated-a",
+          "label": "Candidate A Â· automotive alternator",
+          "src": "candidates/batch-42/alternator.png",
+          "note": "Pulley, vented cylindrical housing and mounting lugs identify the real component."
+        }
+      ]
+    },
+    {
+      "id": "batch42-defibrylator",
+      "status": "resolved",
+      "name": "Defibrylator",
+      "tier": "Batch 42 Â· rulebook production output Â· prototype missing",
+      "context": "Serwisowanie recipe: ST 20, 60 hours, Elektronika. Production currently uses a category fallback and no reusable compendium prototype exists; its actual gameplay effect still needs a mechanics decision.",
+      "request": "A rugged portable defibrillator case with two clipped paddles and cables. Avoid a cartoon heart or oversized lightning bolt.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype; mechanics TODO required."
+      },
+      "candidates": [
+        {
+          "id": "generated-a",
+          "label": "Candidate A Â· field defibrillator",
+          "src": "candidates/batch-42/defibrylator.png",
+          "note": "Battered carry case with two front-mounted paddles and coiled leads."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Candidate B Â· box, paddles and wires",
+          "src": "candidates/batch-42/defibrylator-simple.png",
+          "note": "Revision from a 2Ã—2 atlas: simplified case with two dominant paddles and two thick cables."
+        }
+      ]
+    },
+    {
+      "id": "batch43-detektor-ruchu",
+      "status": "resolved",
+      "name": "Detektor ruchu",
+      "tier": "Batch 43 Â· electronics Â· prototype missing",
+      "context": "Rulebook production output (Serwisowanie). It currently becomes generic loot with the electronics fallback and has no reusable compendium prototype.",
+      "request": "Compact handheld motion sensor with a dominant radar screen and short antenna; readable without tiny controls.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· handheld motion sensor",
+          "src": "candidates/batch-43/detektor_ruchu.png",
+          "note": "3Ã—3 atlas cell; bold handset, large screen opening and antenna."
+        }
+      ]
+    },
+    {
+      "id": "batch43-komputer-osobisty",
+      "status": "resolved",
+      "name": "Komputer osobisty",
+      "tier": "Batch 43 Â· electronics Â· prototype missing",
+      "context": "Rulebook production output (Hakerstwo). It currently uses a category fallback and has no reusable compendium prototype.",
+      "request": "A battered ordinary desktop tower and monitor, clearly simpler than the gaming computer.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· desktop PC",
+          "src": "candidates/batch-43/komputer_osobisty.png",
+          "note": "3Ã—3 atlas cell; plain tower, monitor and one heavy cable."
+        }
+      ]
+    },
+    {
+      "id": "batch43-komputer-gamingowy",
+      "status": "resolved",
+      "name": "Komputer gamingowy",
+      "tier": "Batch 43 Â· electronics Â· prototype missing",
+      "context": "Rulebook production output (Hakerstwo). It needs a distinct prototype and must remain distinguishable from the ordinary PC at inventory size.",
+      "request": "A visibly heavier desktop tower with three broad fan vents beside a monitor.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· heavy gaming PC",
+          "src": "candidates/batch-43/komputer_gamingowy.png",
+          "note": "3Ã—3 atlas cell; three large vents provide the key distinction."
+        }
+      ]
+    },
+    {
+      "id": "batch43-laptop",
+      "status": "resolved",
+      "name": "Laptop",
+      "tier": "Batch 43 Â· electronics Â· prototype missing",
+      "context": "Rulebook production output (Hakerstwo). Production currently creates generic loot and no reusable compendium prototype exists.",
+      "request": "An open rugged laptop with a broad empty screen and solid keyboard deck.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· rugged laptop",
+          "src": "candidates/batch-43/laptop.png",
+          "note": "Rejected lower deck: too flat and touchpad-like."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· keyboard grid laptop",
+          "src": "candidates/batch-45/laptop-revision.png",
+          "note": "Rejected: the 3Ã—3 grid did not read as a keyboard."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· staggered-row keyboard",
+          "src": "candidates/batch-46/laptop-revision-c.png",
+          "note": "Revision: four staggered rows of broad dash-shaped keys, with no touchpad."
+        }
+      ]
+    },
+    {
+      "id": "batch43-kontroler",
+      "status": "resolved",
+      "name": "Kontroler zdalnego sterowania",
+      "tier": "Batch 43 Â· electronics Â· prototype missing",
+      "context": "Rulebook production output (Hakerstwo/Serwisowanie context). It currently uses the electronics fallback and lacks a reusable prototype.",
+      "request": "A rugged two-stick radio controller with a short antenna.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· radio controller",
+          "src": "candidates/batch-43/kontroler_zdalnego_sterowania.png",
+          "note": "3Ã—3 atlas cell; two oversized sticks remain legible at small size."
+        }
+      ]
+    },
+    {
+      "id": "batch43-miernik-skazenia",
+      "status": "resolved",
+      "name": "Miernik skaÅ¼enia chemicznego",
+      "tier": "Batch 43 Â· electronics Â· prototype missing",
+      "context": "Rulebook production output (Serwisowanie). It has no dedicated icon or reusable compendium prototype.",
+      "request": "A handheld chemical analyzer with a large gauge and thick cabled probe; avoid radiation markings.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· analyzer and probe",
+          "src": "candidates/batch-43/miernik_skazenia_chemicznego.png",
+          "note": "3Ã—3 atlas cell; meter and separate probe form a clear field-instrument silhouette."
+        }
+      ]
+    },
+    {
+      "id": "batch43-odtwarzacz-cd",
+      "status": "resolved",
+      "name": "Odtwarzacz CD",
+      "tier": "Batch 43 Â· electronics Â· prototype missing",
+      "context": "Rulebook production output. It currently uses the electronics category fallback and lacks a reusable prototype.",
+      "request": "A portable round-lid CD player with simple headphones.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· closed CD player",
+          "src": "candidates/batch-43/odtwarzacz_cd.png",
+          "note": "Rejected: lid seam did not communicate that the player opens."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· open CD player",
+          "src": "candidates/batch-46/odtwarzacz_cd-revision.png",
+          "note": "Revision: raised hinged lid and a large visible disc inside."
+        }
+      ]
+    },
+    {
+      "id": "batch43-wykrywacz-metalu",
+      "status": "resolved",
+      "name": "Wykrywacz metalu",
+      "tier": "Batch 43 Â· electronics Â· prototype missing",
+      "context": "Rulebook production output (Serwisowanie). It currently uses the electronics fallback and has no reusable prototype.",
+      "request": "Long metal detector with a circular search coil, shaft and compact control box.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· metal detector",
+          "src": "candidates/batch-43/wykrywacz_metalu.png",
+          "note": "3Ã—3 atlas cell; diagonal shaft preserves useful scale for the coil."
+        }
+      ]
+    },
+    {
+      "id": "batch43-wytrychy-elektroniczne",
+      "status": "resolved",
+      "name": "Wytrychy elektroniczne",
+      "tier": "Batch 43 Â· electronics Â· prototype missing",
+      "context": "Rulebook production output (Serwisowanie). The recipe exists, but the output is generic loot without dedicated art or a reusable prototype.",
+      "request": "A compact electronic lock decoder with two thick probe leads and sturdy prongs.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· lock decoder",
+          "src": "candidates/batch-43/wytrychy_elektroniczne.png",
+          "note": "Rejected: box and leads did not communicate an electronic device strongly enough."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· instrument lock decoder",
+          "src": "candidates/batch-45/wytrychy_elektroniczne-revision.png",
+          "note": "Revision: dominant screen, rotary knob, two buttons and probe leads."
+        }
+      ]
+    },
+    {
+      "id": "batch44-kompas",
+      "status": "resolved",
+      "name": "Kompas",
+      "tier": "Batch 44 Â· field gear Â· prototype missing",
+      "context": "Rulebook production output. It currently falls back to a generic item icon and has no reusable compendium prototype.",
+      "request": "A rugged round compass with one large four-point needle.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: item-bag.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· rugged compass",
+          "src": "candidates/batch-44/kompas.png",
+          "note": "Rejected: read as a fantasy medallion rather than a real compass."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· lensatic compass",
+          "src": "candidates/batch-45/kompas-revision.png",
+          "note": "Revision: open military compass with hinged sighting lid and two-ended needle."
+        }
+      ]
+    },
+    {
+      "id": "batch44-palnik",
+      "status": "resolved",
+      "name": "Palnik acetylenowo-tlenowy",
+      "tier": "Batch 44 Â· workshop gear Â· prototype missing",
+      "context": "Rulebook production output. It currently uses generic fallback art and lacks a reusable prototype.",
+      "request": "A welding torch with twin hoses and two simplified gas cylinders.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: item-bag.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· oxy-fuel torch",
+          "src": "candidates/batch-44/palnik_acetylenowo_tlenowy.png",
+          "note": "3Ã—3 atlas cell; torch, twin hoses and bottles form one readable kit."
+        }
+      ]
+    },
+    {
+      "id": "batch44-srodek-usypiajacy",
+      "status": "resolved",
+      "name": "Åšrodek usypiajÄ…cy",
+      "tier": "Batch 44 Â· chemical Â· prototype missing",
+      "context": "Rulebook production output (Farmacja). The output is generic loot and still needs its final gameplay handling decided.",
+      "request": "A squat medicine vial with a simple dropper, with no cartoon sleep symbols.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: pill.svg",
+        "note": "Missing art and standalone item prototype; mechanics TODO remains."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· vial and dropper",
+          "src": "candidates/batch-44/srodek_usypiajacy.png",
+          "note": "3Ã—3 atlas cell; clinical vial and dropper avoid symbolic shorthand."
+        }
+      ]
+    },
+    {
+      "id": "batch44-srodki-dezynfekujace",
+      "status": "resolved",
+      "name": "Åšrodki dezynfekujÄ…ce",
+      "tier": "Batch 44 Â· chemical Â· prototype missing",
+      "context": "Rulebook production output (Farmacja). It currently uses generic chemical fallback art and has no reusable prototype.",
+      "request": "A sturdy one-liter pump bottle with a single broad medical cross cutout.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: pill.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· disinfectant pump bottle",
+          "src": "candidates/batch-44/srodki_dezynfekujace.png",
+          "note": "3Ã—3 atlas cell; simple bottle and cross remain clear at 16 px."
+        }
+      ]
+    },
+    {
+      "id": "batch44-trucizna",
+      "status": "resolved",
+      "name": "Trucizna",
+      "tier": "Batch 44 Â· chemical Â· prototype missing",
+      "context": "Rulebook production output (Farmacja). It has no dedicated icon or reusable prototype, and its detailed use remains under the game rules.",
+      "request": "A small angular poison vial with a severe skull cutout.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: pill.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· poison vial",
+          "src": "candidates/batch-44/trucizna.png",
+          "note": "Rejected: skull treatment was too cartoon-like."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· toxic-warning vial",
+          "src": "candidates/batch-45/trucizna-revision.png",
+          "note": "Revision: industrial skull-and-crossbones warning mark with longer crossed bones."
+        }
+      ]
+    },
+    {
+      "id": "batch44-paralotnia",
+      "status": "resolved",
+      "name": "Paralotnia",
+      "tier": "Batch 44 Â· crafted field gear Â· prototype missing",
+      "context": "Profession production table output with price derived from materials. No standalone reusable item currently exists.",
+      "request": "A broad ram-air canopy over an empty suspended harness, with only a few thick lines.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: item-bag.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· paraglider",
+          "src": "candidates/batch-44/paralotnia.png",
+          "note": "3Ã—3 atlas cell; canopy and harness remain identifiable without a rider."
+        }
+      ]
+    },
+    {
+      "id": "batch44-adapter-wifi",
+      "status": "resolved",
+      "name": "Adapter wifi",
+      "tier": "Batch 44 Â· crafted electronics Â· prototype missing",
+      "context": "Profession production table output with price derived from materials. It lacks dedicated art and a reusable compendium item.",
+      "request": "A rugged USB wireless adapter with a short antenna and two broad signal arcs.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· USB Wi-Fi adapter",
+          "src": "candidates/batch-44/adapter_wifi.png",
+          "note": "3Ã—3 atlas cell; USB plug, antenna and two large arcs."
+        }
+      ]
+    },
+    {
+      "id": "batch44-monitorek",
+      "status": "resolved",
+      "name": "Monitorek",
+      "tier": "Batch 44 Â· crafted electronics Â· prototype missing",
+      "context": "Profession production table output with price derived from materials. No reusable standalone item currently exists.",
+      "request": "A compact rugged field display on a thick folding bracket.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· field monitor",
+          "src": "candidates/batch-44/monitorek.png",
+          "note": "3Ã—3 atlas cell; armored frame, broad screen and folding support."
+        }
+      ]
+    },
+    {
+      "id": "batch44-router",
+      "status": "resolved",
+      "name": "Router",
+      "tier": "Batch 44 Â· crafted electronics Â· prototype missing",
+      "context": "Profession production table output with price derived from materials. It currently lacks a dedicated icon and reusable prototype.",
+      "request": "A low rugged router with two thick antennas and three large indicators.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· rugged router",
+          "src": "candidates/batch-44/router.png",
+          "note": "3Ã—3 atlas cell; two antennas and three broad indicators."
+        }
+      ]
+    },
+    {
+      "id": "batch45-turbina",
+      "status": "resolved",
+      "name": "Turbina wiatrowa/wodna",
+      "tier": "Batch 45 Â· production output Â· prototype missing",
+      "context": "Rulebook Serwisowanie output. It currently uses generic electronics fallback art and has no reusable compendium prototype.",
+      "request": "A compact salvage turbine rotor and generator housing usable for wind or water; avoid a scenic windmill or loose cog.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· compact turbine",
+          "src": "candidates/batch-45/turbina.png",
+          "note": "Five broad blades, generator housing and mounting shaft."
+        }
+      ]
+    },
+    {
+      "id": "batch45-zegarek",
+      "status": "resolved",
+      "name": "Zegarek",
+      "tier": "Batch 45 Â· crafted electronics Â· prototype missing",
+      "context": "Profession production-table output with price derived from materials. It lacks dedicated art and a reusable compendium prototype.",
+      "request": "A rugged analog wristwatch with a thick strap and a very simple readable face.",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated asset\nRuntime fallback: lightning.svg",
+        "note": "Missing art and standalone item prototype."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· rugged wristwatch",
+          "src": "candidates/batch-45/zegarek.png",
+          "note": "Broad strap, two hands and four hour marks."
+        }
+      ]
+    },
+    {
+      "id": "batch45-berdysz",
+      "status": "resolved",
+      "name": "Berdysz",
+      "tier": "Batch 45 Â· live world weapon Â· prototype missing",
+      "context": "Actor Dante carries this reach weapon with the generic item-bag icon. No dedicated asset or canonical module prototype was found.",
+      "request": "A long heavy berdiche with a broad crescent blade attached along the upper shaft and a small spear point.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nitem-bag.svg",
+        "note": "Verified world-item art gap; mechanics and prototype need later reconciliation."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· heavy berdiche",
+          "src": "candidates/batch-45/berdysz.png",
+          "note": "Diagonal polearm with dominant crescent blade and spear point."
+        }
+      ]
+    },
+    {
+      "id": "batch45-scyzoryk",
+      "status": "resolved",
+      "name": "Scyzoryk",
+      "tier": "Batch 45 Â· live world weapon Â· prototype missing",
+      "context": "Motocyklista carries this pocket knife on the actor portrait icon. No dedicated asset or canonical module prototype was found.",
+      "request": "An open folding pocket knife with one broad blade and one visible folded secondary tool.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nactor portrait",
+        "note": "Verified world-item art gap; mechanics and prototype need later reconciliation."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· folding pocket knife",
+          "src": "candidates/batch-45/scyzoryk.png",
+          "note": "Main blade, folding handle and one secondary implement."
+        }
+      ]
+    },
+    {
+      "id": "batch45-skalpel",
+      "status": "resolved",
+      "name": "Skalpel",
+      "tier": "Batch 45 Â· live world weapon Â· prototype missing",
+      "context": "Samantha Smith carries this scalpel on the actor portrait icon. No dedicated asset or canonical module prototype was found.",
+      "request": "A narrow medical scalpel with a replaceable blade and slim surgical handle, distinct from a combat knife.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nactor portrait",
+        "note": "Verified world-item art gap; mechanics and prototype need later reconciliation."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· medical scalpel",
+          "src": "candidates/batch-45/skalpel.png",
+          "note": "Long clinical handle and narrow replaceable blade."
+        }
+      ]
+    },
+    {
+      "id": "batch46-buzdygan-smieciowy",
+      "name": "Buzdygan Å›mieciowy",
+      "tier": "Batch 46 Â· live world weapon Â· prototype missing",
+      "context": "Lily carries this improvised weapon on her actor portrait icon. Its description specifies broken concrete held by exposed reinforcing bar.",
+      "request": "An irregular chunk of broken concrete on a long ribbed rebar handle; no medieval mace geometry.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nactor portrait",
+        "note": "Verified world-item gap."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· detailed concrete mace",
+          "src": "candidates/batch-46/buzdygan_smieciowy.png",
+          "note": "Rejected: fine cracks, texture and grayscale departed from the icon style."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· flat concrete and rebar mace",
+          "src": "candidates/batch-47/buzdygan_smieciowy-revision.png",
+          "note": "Revision: solid rubble head, two large cracks and four broad rebar bands."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· concrete head with exposed rebar",
+          "src": "candidates/batch-48/buzdygan_smieciowy-revision-c.png",
+          "note": "Full rebar handle, chipped concrete head and several short bent steel rods protruding from the rubble."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch46-walther-ppk",
+      "status": "resolved",
+      "name": "Walther PPK",
+      "tier": "Batch 46 Â· live world weapon Â· prototype missing",
+      "context": "Lily carries this compact pistol on her actor portrait icon. No dedicated Walther asset or canonical prototype was found.",
+      "request": "A compact classic PPK-style pistol with a rounded steel slide and straight grip.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nactor portrait",
+        "note": "Verified world-item gap."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· classic compact pistol",
+          "src": "candidates/batch-46/walther_ppk.png",
+          "note": "Rounded slide and traditional grip distinguish it from the modern pocket pistol."
+        }
+      ]
+    },
+    {
+      "id": "batch46-ruger-lcp-ii",
+      "status": "resolved",
+      "name": "Ruger LCP II",
+      "tier": "Batch 46 Â· live world weapon Â· prototype missing",
+      "context": "Samantha Smith carries this tiny pistol on her portrait icon. The existing Ruger Mark IV art depicts a different firearm.",
+      "request": "An extremely small modern polymer pocket pistol with a short squared slide and tiny grip.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nactor portrait",
+        "note": "Verified world-item gap."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· polymer pocket pistol",
+          "src": "candidates/batch-46/ruger_lcp_ii.png",
+          "note": "Boxy short slide and abbreviated textured grip."
+        }
+      ]
+    },
+    {
+      "id": "batch46-tulipan",
+      "name": "Tulipan",
+      "tier": "Batch 46 Â· live world weapon Â· prototype missing",
+      "context": "Motocyklista carries this broken-bottle weapon on his actor portrait icon. No dedicated asset was found.",
+      "request": "A bottle shattered into a large jagged glass crown with a rag-wrapped neck grip.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nactor portrait",
+        "note": "Verified world-item gap."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· long-neck broken bottle",
+          "src": "candidates/batch-46/tulipan.png",
+          "note": "Rejected: neck was unnaturally long and grip tape was unnecessary."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· half wine bottle",
+          "src": "candidates/batch-47/tulipan-revision.png",
+          "note": "Revision: short half-bottle body, five large broken points, no wrapping."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· longer-neck broken bottle",
+          "src": "candidates/batch-48/tulipan-revision-c.png",
+          "note": "Natural bottle body, longer slender neck and jagged broken crown, without grip wrapping."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch46-piesc-hydrauliczna",
+      "status": "resolved",
+      "name": "PiÄ™Å›Ä‡ wspomagana hydraulicznie",
+      "tier": "Batch 46 Â· live world attack Â· dedicated art missing",
+      "context": "Richard Craddock and his up-armored version use this powered strike on their actor portrait icon.",
+      "request": "A clenched armored mechanical gauntlet with an external piston, thick hoses and reinforced knuckles.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nactor portrait",
+        "note": "Verified world-item gap shared by two actor variants."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· hydraulic gauntlet",
+          "src": "candidates/batch-46/piesc_hydrauliczna.png",
+          "note": "Clenched powered gauntlet with visible piston and hoses."
+        }
+      ]
+    },
+    {
+      "id": "batch46-klucz-francuski",
+      "name": "Klucz francuski",
+      "tier": "Batch 46 Â· live world weapon Â· prototype missing",
+      "context": "Pokrak carries this improvised weapon on the actor portrait icon. No adjustable-wrench asset was found.",
+      "request": "A heavy adjustable wrench with a large crescent jaw, worm adjustment and thick handle.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nactor portrait",
+        "note": "Verified world-item gap."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· cropped adjustable wrench",
+          "src": "candidates/batch-46/klucz_francuski.png",
+          "note": "Rejected: upper jaw was clipped by the cell edge."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· complete adjustable wrench",
+          "src": "candidates/batch-47/klucz_francuski-revision.png",
+          "note": "Revision: complete centered tool with generous padding around the jaw."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch46-lopatka-kuchenna",
+      "status": "resolved",
+      "name": "Åopatka kuchenna",
+      "tier": "Batch 46 Â· live world weapon Â· prototype missing",
+      "context": "Kucharka Irena uses this ordinary kitchen tool as an improvised weapon; it currently shows her portrait.",
+      "request": "A normal slotted metal turner spatula with a broad blade and sturdy kitchen handle.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nactor portrait",
+        "note": "Verified world-item gap."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· slotted kitchen turner",
+          "src": "candidates/batch-46/lopatka_kuchenna.png",
+          "note": "Broad flipping blade, three large slots and short handle."
+        }
+      ]
+    },
+    {
+      "id": "batch47-atak-bez-broni",
+      "name": "Atak bez broni / PiÄ™Å›Ä‡",
+      "tier": "Batch 47 Â· shared actor attack icon",
+      "context": "Several human actors use item-bag or portrait art for Bez broni and PiÄ™Å›Ä‡ attacks. One shared icon can replace those placeholders without inventing separate item prototypes.",
+      "request": "A compact clenched bare fist viewed from the knuckles, without impact rays or equipment.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current icons\nitem-bag / actor portrait",
+        "note": "Reusable art for unarmed human attacks."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· clenched fist",
+          "src": "candidates/batch-47/atak_bez_broni.png",
+          "note": "Broad knuckles, thumb and short wrist remain legible at inventory size."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch47-pazury",
+      "name": "Pazury",
+      "tier": "Batch 47 Â· shared creature attack icon",
+      "context": "Bit-Boy, Bitboy Przewodnik and WilkoÅ‚ud currently use actor portraits for claw attacks.",
+      "request": "A single bestial forepaw with four long curved claws; no creature portrait.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current icons\nactor portraits",
+        "note": "Reusable art for claw attacks across actors."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· bestial claws",
+          "src": "candidates/batch-47/pazury.png",
+          "note": "Four separated talons on one broad paw."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch47-ugryzienie",
+      "name": "Ugryzienie",
+      "tier": "Batch 47 Â· shared creature attack icon",
+      "context": "Bit-Boy and the giant spider currently use their portraits for bite attacks. This icon represents the complete biting action rather than a species portrait.",
+      "request": "A side-profile open animal jaw with a broad mouth gap and a few large teeth.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current icons\nactor portraits",
+        "note": "Reusable art for general bite attacks."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· open biting jaw",
+          "src": "candidates/batch-47/ugryzienie.png",
+          "note": "Complete side-profile jaw with six broad teeth."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· frontal beast jaw",
+          "src": "candidates/batch-48/ugryzienie-revision-b.png",
+          "note": "Head-on symmetrical predatory jaw with a wide mouth and large readable teeth."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch47-zeby",
+      "name": "ZÄ™by",
+      "tier": "Batch 47 Â· creature attack icon",
+      "context": "WilkoÅ‚ud's ZÄ™by attack currently uses its actor portrait. A front-facing mouth distinguishes the weapon anatomy from the general bite action.",
+      "request": "A front-facing snarling mouth with two oversized canine fangs and smaller teeth.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current icon\nactor portrait",
+        "note": "Dedicated anatomy icon for the ZÄ™by attack."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· exposed fangs",
+          "src": "candidates/batch-47/zeby.png",
+          "note": "Front mouth with two dominant canine teeth."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· snarling werewolf muzzle",
+          "src": "candidates/batch-48/zeby-revision-b.png",
+          "note": "Feral open muzzle with a broad nose, irregular teeth and two thick drool strands."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch47-zadlo",
+      "name": "Å»Ä…dÅ‚o / UkÅ‚ucie",
+      "tier": "Batch 47 Â· shared creature attack icon",
+      "context": "Kitchin's Å»Ä…dÅ‚o and PajÄ…k's UkÅ‚ucie currently use actor portraits. Both can use a neutral venomous stinger icon.",
+      "request": "A compact curved segmented stinger with one hooked venom tip; no whole creature.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current icons\nactor portraits",
+        "note": "Reusable art for sting and puncture attacks."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· hooked stinger",
+          "src": "candidates/batch-47/zadlo.png",
+          "note": "Thick segmented base and a single large venom tip."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch47-macka",
+      "name": "Macka",
+      "tier": "Batch 47 Â· creature attack icon",
+      "context": "Techmorwa's Macka attack currently uses its actor portrait.",
+      "request": "One thick mutant tentacle curling in an S shape, with only three large sucker openings.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current icon\nactor portrait",
+        "note": "Dedicated reusable tentacle-attack art."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· mutant tentacle",
+          "src": "candidates/batch-47/macka.png",
+          "note": "Single bold S-curve and three broad sucker cutouts."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· many-suckered tentacle",
+          "src": "candidates/batch-48/macka-revision-b.png",
+          "note": "Thick curling limb with numerous large, separated suction cups along the underside."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch48-list-gordon-samantha",
+      "name": "List od Gordona do Samanthy Smith",
+      "tier": "Batch 48 Â· live world loot Â· prototype missing",
+      "context": "Dante carries this named campaign letter with the generic item-bag icon. No dedicated letter asset or reusable prototype was found.",
+      "request": "A battered folded personal letter, partly opened and secured with cord and a wax seal; no readable writing.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nitem-bag.svg",
+        "note": "Verified world-item art gap; letter contents and prototype remain campaign data."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· sealed wasteland letter",
+          "src": "candidates/batch-48/list_gordon_samantha.png",
+          "note": "Torn folded paper, heavy cord and a central wax seal."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch48-palka",
+      "name": "PaÅ‚ka",
+      "tier": "Batch 48 Â· live world weapon Â· prototype missing",
+      "context": "Pitagoras carries this plain club on his actor portrait icon. The existing police baton is a side-handled tonfa, while the iron pipe is a different improvised weapon.",
+      "request": "A rugged straight one-piece baton with a thicker striking end and ridged grip; no side handle.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nactor portrait",
+        "note": "Verified world-item gap distinct from PaÅ‚ka policyjna and Rura stalowa."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· straight survivor baton",
+          "src": "candidates/batch-48/palka.png",
+          "note": "Heavy plain cudgel with a broad striking end and simple ribbed grip."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· simplified survivor baton",
+          "src": "candidates/batch-49/palka-revision-b.png",
+          "note": "Clean flat cudgel silhouette with one thick blunt end and three broad grip ridges."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch48-atak-ogonem",
+      "name": "Atak â€” Ogon",
+      "tier": "Batch 48 Â· creature attack icon",
+      "context": "The Aligator actor's tail attack currently uses the AK-47 icon. Its rules describe a long-reach bludgeoning sweep that can knock the target prone.",
+      "request": "An isolated powerful crocodilian tail sweeping in a curve, with a thick armored base and broad dorsal scutes.",
+      "current": {
+        "src": "../../icons/weapons/ak_47.svg",
+        "emptyLabel": "",
+        "note": "Clearly wrong borrowed firearm icon."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· armored alligator tail",
+          "src": "candidates/batch-48/atak_ogonem.png",
+          "note": "Strong curved strike silhouette with large scales and a sharply tapered end."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· blunt-root alligator tail",
+          "src": "candidates/batch-49/atak_ogonem-revision-b.png",
+          "note": "Simplified curved tail with a clearly blunt root, one tapered tip and three large scutes."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch48-atak-glowa",
+      "name": "Atak gÅ‚owÄ…",
+      "tier": "Batch 48 Â· live world attack icon",
+      "context": "Dante's headbutt attack currently uses the AK-47 icon. The action can knock an opponent prone on a failed Strength save.",
+      "request": "A rugged human forehead and upper face lunging forward in a forceful headbutt, without an impact star or second victim.",
+      "current": {
+        "src": "../../icons/weapons/ak_47.svg",
+        "emptyLabel": "",
+        "note": "Clearly wrong borrowed firearm icon."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· lunging headbutt",
+          "src": "candidates/batch-48/atak_glowa.png",
+          "note": "Shaved head and heavy brow emphasize the forehead as the striking surface."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· lowered clenched headbutt",
+          "src": "candidates/batch-49/atak_glowa-revision-b.png",
+          "note": "Lowered forward head with closed eyes, clenched teeth and minimal facial cuts."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch49-atak-taca",
+      "name": "Atak tackÄ…",
+      "tier": "Batch 49 Â· live world attack icon",
+      "context": "Kelner's improvised tray attack currently uses the AK-47 icon. Its table can splash cold leftovers, hot food or boiling coffee onto the target.",
+      "request": "A broad cafeteria serving tray tilted as a striking weapon, carrying one large bowl and one cup.",
+      "current": {
+        "src": "../../icons/weapons/ak_47.svg",
+        "emptyLabel": "",
+        "note": "Clearly wrong borrowed firearm icon."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· loaded serving tray",
+          "src": "candidates/batch-49/atak_taca.png",
+          "note": "Large tray, bowl and cup form a simple readable improvised-weapon silhouette."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· actively spilling tray",
+          "src": "candidates/batch-50/atak_taca-revision-b.png",
+          "note": "Cup, bowl, liquid and food leave the tilted tray in one clear action; the stray lower fragment is gone."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch49-atak-wielokrotny-ostrzem",
+      "name": "Atak Wielokrotny Ostrzem",
+      "tier": "Batch 49 Â· robot attack icon",
+      "context": "Tarantula (Recovered) performs two melee blade attacks, but the embedded item currently uses the AK-47 icon.",
+      "request": "Two broad industrial mechanical combat blades crossing in an X; no hands or full robot.",
+      "current": {
+        "src": "../../icons/weapons/ak_47.svg",
+        "emptyLabel": "",
+        "note": "Clearly wrong borrowed firearm icon."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· crossed mechanical blades",
+          "src": "candidates/batch-49/atak_wielokrotny_ostrzem.png",
+          "note": "Two broad bolted blades communicate a double robotic slash."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch49-atak-wrecz-pajaczek",
+      "name": "Atak wrÄ™cz â€” PajÄ…czek StraÅ¼niczy",
+      "tier": "Batch 49 Â· robot attack icon",
+      "context": "The guard spider's piercing melee attack can stun its target, but the item currently uses the AK-47 icon.",
+      "request": "Two pointed mechanical probe legs or pincers thrusting forward with one bold electric arc between them.",
+      "current": {
+        "src": "../../icons/weapons/ak_47.svg",
+        "emptyLabel": "",
+        "note": "Clearly wrong borrowed firearm icon."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· electrified guard-spider probes",
+          "src": "candidates/batch-49/atak_wrecz_pajaczek.png",
+          "note": "Paired pointed mechanisms and one large arc show a piercing electrical strike."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch49-atak-odnogiem-spawacz",
+      "name": "Atak OdnÃ³Å¼em â€” Spawacz",
+      "tier": "Batch 49 Â· robot attack icon",
+      "context": "Spawacz's slashing limb attack currently borrows the combat-knife icon, despite being part of an industrial robot.",
+      "request": "One heavy articulated industrial robot limb with two large joints and a hooked blade-like metal foot.",
+      "current": {
+        "src": "../../icons/weapons/combat_knife.svg",
+        "emptyLabel": "",
+        "note": "Wrong borrowed knife icon."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· hooked industrial limb",
+          "src": "candidates/batch-49/atak_odnogiem_spawacz.png",
+          "note": "Large joints and hooked cutting foot read as one mechanical appendage."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch49-odnoze-gigantyczny-pajak",
+      "name": "OdnÃ³Å¼e â€” GIGANTYCZNY PAJÄ„K",
+      "tier": "Batch 49 Â· creature attack icon",
+      "context": "The giant spider's organic limb attack currently borrows the combat-knife icon.",
+      "request": "One thick hairy spider foreleg bent at two joints, striking downward and ending in a hard pointed claw.",
+      "current": {
+        "src": "../../icons/weapons/combat_knife.svg",
+        "emptyLabel": "",
+        "note": "Wrong borrowed knife icon."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· giant spider foreleg",
+          "src": "candidates/batch-49/odnoze_gigantyczny_pajak.png",
+          "note": "Sparse jagged hairs, two strong joints and a large terminal claw."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch49-pokwitowanie-luxor",
+      "name": "Pokwitowanie Luxor (200 gb w amunicji)",
+      "tier": "Batch 49 Â· live world loot icon",
+      "context": "Victor von Blitz carries a signed, hotel-stamped paper voucher redeemable for ammunition. It currently displays the family USB-drive icon.",
+      "request": "A narrow battered paper receipt with a large circular hotel stamp and a bold signature mark; no readable text.",
+      "current": {
+        "src": "../../icons/items/loot/pendrive.svg",
+        "emptyLabel": "",
+        "note": "Clearly wrong borrowed USB-drive icon."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· stamped Luxor voucher",
+          "src": "candidates/batch-49/pokwitowanie_luxor.png",
+          "note": "Torn paper, pyramid-like hotel stamp and bold signature remain distinct from a data carrier."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch50-kiel-jadowy",
+      "name": "KieÅ‚ jadowy",
+      "tier": "Batch 50 Â· live vehicle inventory consumable",
+      "context": "GMT400 carries an extracted venomous snake fang that can poison on a hit. It currently uses a colored fantasy potion-vial icon.",
+      "request": "One large extracted hollow snake fang with a heavy venom drop hanging from the tip.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\ncolored potion vial",
+        "note": "Borrowed external art depicts the wrong object."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· venomous extracted fang",
+          "src": "candidates/batch-50/kiel_jadowy.png",
+          "note": "Large curved hollow fang and one dominant venom drop."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch50-paliwo",
+      "name": "Paliwo",
+      "tier": "Batch 50 Â· live vehicle inventory consumable",
+      "context": "GMT400 tracks its 150-liter gasoline tank as an item. It currently uses a colored fantasy potion flask.",
+      "request": "A rugged rectangular metal jerrycan with a handle, cap and broad stamped X.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\ncolored potion flask",
+        "note": "Borrowed external art depicts the wrong object."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· battered fuel jerrycan",
+          "src": "candidates/batch-50/paliwo.png",
+          "note": "Strong can silhouette, top handle, cap and stamped X."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch50-uzupelnienie-medyka",
+      "name": "UzupeÅ‚nienie NarzÄ™dzi MaÅ‚ego Medyka",
+      "tier": "Batch 50 Â· live world consumable",
+      "context": "The armory has a five-use field-medicine refill containing bandages, needles, syringes and ampoules. It currently uses the generic system heal symbol.",
+      "request": "A compact refill pouch bundling one bandage roll, one syringe and two sealed ampoules.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\ngeneric heal symbol",
+        "note": "The current icon communicates healing but not a physical supply refill."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· field-medic refill bundle",
+          "src": "candidates/batch-50/uzupelnienie_medyka.png",
+          "note": "Bandage, syringe and ampoules are grouped as replaceable supplies."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch50-metalowa-walizka",
+      "name": "Metalowa walizka",
+      "tier": "Batch 50 Â· live vehicle inventory loot",
+      "context": "GMT400 carries a reinforced, impact-resistant metal case with a combination lock. It currently uses a colored soft leather-bag icon.",
+      "request": "A reinforced hard metal equipment case with handle, corner guards and combination lock.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\ncolored leather bag",
+        "note": "Borrowed external art depicts the wrong material and construction."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· reinforced combination case",
+          "src": "candidates/batch-50/metalowa_walizka.png",
+          "note": "Hard rectangular shell, protected corners and prominent lock."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch50-komponenty-amunicji",
+      "name": "Komponenty Amunicji",
+      "tier": "Batch 50 Â· live character consumable",
+      "context": "Alan collects cases, primers, powder and bullets for handloading ammunition. The item currently reuses the generic chemistry-material icon.",
+      "request": "Keep the readable empty cases, but show the lead projectiles as clearly separate bare bullets with no brass cases attached. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": "../../icons/items/loot/chemia.svg",
+        "emptyLabel": "",
+        "note": "Generic chemistry art does not identify ammunition components."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· ammunition reloading components",
+          "src": "candidates/batch-50/komponenty_amunicji.png",
+          "note": "Separate cases and projectiles visibly remain unassembled beside a powder tin."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· separated cases and bare projectiles",
+          "src": "candidates/batch-51/komponenty_amunicji_revision_b.png",
+          "note": "Revision: open empty cases are visually separate from two pointed lead projectiles."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· separate cases and bullets",
+          "src": "candidates/batch-51/komponenty_amunicji_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch50-czesci-ciezkiego-karabinu",
+      "name": "CzÄ™Å›ci ciÄ™Å¼kiego karabinu",
+      "tier": "Batch 50 Â· live vehicle inventory loot",
+      "context": "GMT400 carries incomplete heavy-machine-gun components for repair or spare parts. The item currently shows a complete Browning M2.",
+      "request": "A salvage bundle of one spare heavy barrel, one recoil spring and one mounting block tied together.",
+      "current": {
+        "src": "../../icons/weapons/browning_m2.svg",
+        "emptyLabel": "",
+        "note": "Current art depicts the complete weapon instead of loose parts."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· heavy-gun salvage bundle",
+          "src": "candidates/batch-50/czesci_ciezkiego_karabinu.png",
+          "note": "Three large machine parts are visibly incomplete and bound for transport."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch50-pogromca",
+      "status": "resolved",
+      "name": "Pogromca",
+      "tier": "Batch 50 Â· module compendium weapon",
+      "context": "This custom mutant-hunting shotgun fires poison, acid or explosive syringe-dart rounds. Its compendium prototype currently shares the ordinary pump-shotgun icon.",
+      "request": "Keep the rugged custom shotgun design, but show the complete weapon centered with safe padding and no cropped stock or muzzle. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": "../../icons/weapons/pump_shotgun.svg",
+        "emptyLabel": "",
+        "note": "Shared pump-shotgun art hides the weapon's defining chemical dart ammunition."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· chemical-dart mutant shotgun",
+          "src": "candidates/batch-50/pogromca.png",
+          "note": "Heavy custom shotgun with a large external syringe-dart round."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· complete padded mutant shotgun",
+          "src": "candidates/batch-51/pogromca_revision_b.png",
+          "note": "Revision: the full stock, action, pump and muzzle fit inside the cell."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· complete minimal shotgun",
+          "src": "candidates/batch-51/pogromca_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        },
+        {
+          "id": "batch52-revision",
+          "label": "Revision C Â· larger bore and chamber pump",
+          "src": "candidates/batch-52/pogromca_revision_c.png",
+          "note": "Conventional pump-shotgun silhouette with a substantially wider barrel and a chemical pump fixed to the chamber."
+        },
+        {
+          "id": "current-reference-revision",
+          "label": "Current-based revision Â· top-mounted chemical pump",
+          "src": "candidates/batch-52/pogromca_current_reference_revision.png",
+          "note": "Direct edit of Current: diagonal pump shotgun with a wider muzzle, top-mounted chemical dispenser and improvised clamps."
+        }
+      ]
+    },
+    {
+      "id": "batch50-odnoze-kon-skazony",
+      "name": "Atak kopytem / Kopyta",
+      "tier": "Batch 51 Â· shared horse attack icon",
+      "context": "The horse actors use OdnÃ³Å¼e or Kopyta for the same basic hoof attack. One neutral equine icon is sufficient for healthy, Texan and contaminated horses while actor-specific routing prevents collision with the giant spider item named OdnÃ³Å¼e.",
+      "request": "One natural horse lower leg and broad hoof striking downward. Keep it generic and reusable, with no mutation, weapon or stray gun fragment. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current synthetic icon\nupgrade.svg placeholder",
+        "note": "Actor-specific art is required because the shared item name collides with the giant spider."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· contaminated horse hoof",
+          "src": "candidates/batch-50/odnoze_kon_skazony.png",
+          "note": "Isolated equine lower limb with cracked hoof and one mutation growth."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· generic horse hoof attack",
+          "src": "candidates/batch-51/atak_kopytem_revision_b.png",
+          "note": "Revision: neutral horse anatomy, broad striking hoof, and no weapon fragment."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· generic minimal hoof",
+          "src": "candidates/batch-51/atak_kopytem_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch51-cola-light",
+      "name": "Butelka Coli Light",
+      "tier": "Batch 51 Â· live character loot",
+      "context": "Raynald carries a still-pressurized prewar diet cola can. It currently reuses the generic Neuro Cola bottle icon.",
+      "request": "A battered aluminum soda can with a pull tab, dents and one plain diagonal label stripe; no readable brand text. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": "../../icons/items/drugs/neuro_cola.svg",
+        "note": "Borrowed cola bottle art depicts the wrong container."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· battered diet cola can",
+          "src": "candidates/batch-51/cola_light.png",
+          "note": "Large pull-tab can silhouette with a simple stripe and dents."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· plain striped can",
+          "src": "candidates/batch-51/cola_light_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch51-noz-do-rzucania",
+      "name": "NÃ³Å¼ do rzucania",
+      "tier": "Batch 51 Â· world, actor and compendium weapon",
+      "context": "The balanced throwing knife currently shares the tactical combat-knife icon.",
+      "request": "A narrow balanced double-edged throwing knife with a ring pommel, distinct from a survival knife. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": "../../icons/weapons/combat_knife.svg",
+        "note": "Borrowed combat knife art."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· ring-pommel throwing knife",
+          "src": "candidates/batch-51/noz_do_rzucania.png",
+          "note": "Symmetrical point and ring pommel make the throwing purpose clear."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· ring-pommel knife",
+          "src": "candidates/batch-51/noz_do_rzucania_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch51-luk-bloczkowy",
+      "name": "Åuk bloczkowy",
+      "tier": "Batch 51 Â· world, actor and compendium weapon",
+      "context": "The compound bow currently shares the plain traditional-bow icon.",
+      "request": "A complete modern compound bow with two prominent cams, taut cable and angular limbs. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": "../../icons/weapons/bow.svg",
+        "note": "Borrowed traditional bow art."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· twin-cam compound bow",
+          "src": "candidates/batch-51/luk_bloczkowy.png",
+          "note": "Two large cams and angular riser distinguish it at small size."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· twin-cam bow",
+          "src": "candidates/batch-51/luk_bloczkowy_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch51-kusza-pistoletowa",
+      "status": "resolved",
+      "name": "Kusza pistoletowa / automatyczna",
+      "tier": "Batch 51 Â· world and compendium weapon family",
+      "context": "The compact pistol crossbow and its six-shot automatic variant currently share the full-size generic crossbow icon.",
+      "request": "A one-handed pistol crossbow with short limbs, pistol grip and a compact bolt-magazine housing. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": "../../icons/weapons/crossbow.svg",
+        "note": "Borrowed full-size crossbow art."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· magazine-fed pistol crossbow",
+          "src": "candidates/batch-51/kusza_pistoletowa.png",
+          "note": "Short limbs, pistol grip and visible bolt rack form a compact silhouette."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· compact pistol crossbow",
+          "src": "candidates/batch-51/kusza_pistoletowa_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        }
+      ]
+    },
+    {
+      "id": "batch51-kusza-bloczkowa",
+      "status": "resolved",
+      "name": "Kusza bloczkowa",
+      "tier": "Batch 51 Â· world, actor and compendium weapon",
+      "context": "The compound crossbow currently shares the ordinary crossbow icon.",
+      "request": "A full-size compound crossbow with long stock, stirrup, cables and two prominent cams. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": "../../icons/weapons/crossbow.svg",
+        "note": "Borrowed ordinary crossbow art."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· full-size compound crossbow",
+          "src": "candidates/batch-51/kusza_bloczkowa.png",
+          "note": "Long stock and paired cams provide the needed distinction."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· full compound crossbow",
+          "src": "candidates/batch-51/kusza_bloczkowa_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        },
+        {
+          "id": "batch52-revision",
+          "label": "Revision B Â· upgraded ordinary crossbow",
+          "src": "candidates/batch-52/kusza_bloczkowa_revision_b.png",
+          "note": "Keeps the ordinary crossbow silhouette and adds only two cams and one compound cable."
+        },
+        {
+          "id": "current-reference-revision",
+          "label": "Current-based revision Â· compound upgrade",
+          "src": "candidates/batch-52/kusza_bloczkowa_current_reference_revision.png",
+          "note": "Direct edit of Current: the same stock, rail and stirrup with paired cams, bold cables and reinforced limbs."
+        }
+      ]
+    },
+    {
+      "id": "batch51-wyciszony-pistolet-10mm",
+      "name": "Wyciszony Pistolet 10mm",
+      "tier": "Batch 51 Â· live actor weapon",
+      "context": "Major Lansdale's hidden-position pistol currently uses the ordinary semiautomatic-pistol icon.",
+      "request": "A heavy semiautomatic pistol with a long cylindrical suppressor and worn grip, shown complete. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": "../../icons/weapons/semi_auto_pistol.svg",
+        "note": "Borrowed unsuppressed pistol art."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· suppressed heavy pistol",
+          "src": "candidates/batch-51/wyciszony_pistolet_10mm.png",
+          "note": "The long suppressor dominates while the full pistol remains visible."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· suppressed pistol",
+          "src": "candidates/batch-51/wyciszony_pistolet_10mm_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch51-atak-ogonem",
+      "status": "resolved",
+      "name": "Atak ogonem â€” Megator",
+      "tier": "Batch 51 Â· creature attack",
+      "context": "Megator's tail attack still uses the generic upgrade placeholder. The existing alligator-tail art is species-specific, so this candidate can serve armored mutant tail attacks.",
+      "request": "An isolated massive armored reptilian tail whipping sideways; no whole creature. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· armored mutant tail",
+          "src": "candidates/batch-51/atak_ogonem.png",
+          "note": "Large plated tail in a clear sweeping curve."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· three-plate tail",
+          "src": "candidates/batch-51/atak_ogonem_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        },
+        {
+          "id": "batch52-revision",
+          "label": "Revision B Â· continuous natural taper",
+          "src": "candidates/batch-52/atak_ogonem_revision_b.png",
+          "note": "The tail continuously widens from tip to base along the curve, without a late bulb or narrowing."
+        }
+      ]
+    },
+    {
+      "id": "batch51-atak-psychiczny",
+      "status": "resolved",
+      "name": "Atak psychiczny",
+      "tier": "Batch 51 Â· Techmutas ability",
+      "context": "Techmutas targets a mind at range, dealing psychic damage and potentially incapacitating it. The ability uses the generic upgrade placeholder.",
+      "request": "A stern profile head with a fractured mind and sharp outgoing psychic rays. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· fractured psychic assault",
+          "src": "candidates/batch-51/atak_psychiczny.png",
+          "note": "Broken cranial field and three rays read clearly as a mental attack."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· split-mind profile",
+          "src": "candidates/batch-51/atak_psychiczny_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        },
+        {
+          "id": "batch52-revision",
+          "label": "Revision B Â· externally fractured head",
+          "src": "candidates/batch-52/atak_psychiczny_revision_b.png",
+          "note": "Centered head fractured inward by one broad external force wedge."
+        },
+        {
+          "id": "batch53-revision",
+          "label": "Revision C Â· incoming psychic rays",
+          "src": "candidates/batch-53/atak_psychiczny_revision_c.png",
+          "note": "Three broad non-physical rays visibly strike the mind from outside."
+        }
+      ]
+    },
+    {
+      "id": "batch51-autodestrukcja",
+      "status": "resolved",
+      "name": "Autodestrukcja",
+      "tier": "Batch 51 Â· shared machine ability",
+      "context": "Several machines have percentage variants of the same self-destruct action. One shared icon is sufficient for all variants.",
+      "request": "A rugged machine core rupturing in a compact radial blast, with fragments contained inside the frame. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder across multiple actors.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· rupturing machine core",
+          "src": "candidates/batch-51/autodestrukcja.png",
+          "note": "One mechanical core and contained debris communicate self-destruction."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· four-part machine core",
+          "src": "candidates/batch-51/autodestrukcja_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        },
+        {
+          "id": "batch52-revision",
+          "label": "Revision B Â· protected detonation button",
+          "src": "candidates/batch-52/autodestrukcja_revision_b.png",
+          "note": "Retro industrial end-level button merged with the four-part machine core; no text."
+        },
+        {
+          "id": "batch53-revision",
+          "label": "Revision C Â· simplified Gadget explosion",
+          "src": "candidates/batch-53/autodestrukcja_revision_c.png",
+          "note": "A compact spherical machine core with four broad blast wedges and no debris texture."
+        }
+      ]
+    },
+    {
+      "id": "batch51-eksplodujace-czyraki",
+      "name": "EksplodujÄ…ce czyraki",
+      "tier": "Batch 51 Â· Pulser ability",
+      "context": "Pulser detonates swollen growths, damaging and knocking down creatures around it. The ability uses the generic upgrade placeholder.",
+      "request": "Three grotesque organic pustules bursting outward with large droplets and torn tissue. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· bursting mutant boils",
+          "src": "candidates/batch-51/eksplodujace_czyraki.png",
+          "note": "Three large pustules and restrained spray remain readable at icon size."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· three bursting boils",
+          "src": "candidates/batch-51/eksplodujace_czyraki_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch51-jadowite-zeby",
+      "name": "Jadowite zÄ™by",
+      "tier": "Batch 51 Â· reptilian mutant attack",
+      "context": "The attack adds poison damage and can inflict the Poisoned condition. It currently uses the generic upgrade placeholder.",
+      "request": "An organic reptilian mouth with two dominant curved fangs and one venom drop. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· venomous reptile fangs",
+          "src": "candidates/batch-51/jadowite_zeby.png",
+          "note": "Oversized fangs and one droplet communicate venom without fine detail."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· two-fang mouth",
+          "src": "candidates/batch-51/jadowite_zeby_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch51-kolec-jadowy",
+      "name": "Kolec jadowy",
+      "tier": "Batch 51 Â· SzczÄ™kowij attack",
+      "context": "The organic spike delivers poison and can paralyze the target. It currently uses the generic upgrade placeholder.",
+      "request": "A long barbed organic stinger with one venom droplet, clearly distinct from a knife. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· barbed venom spike",
+          "src": "candidates/batch-51/kolec_jadowy.png",
+          "note": "Irregular porous barb and venom drop make it anatomical."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· three-barb venom spike",
+          "src": "candidates/batch-51/kolec_jadowy_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        },
+        {
+          "id": "batch52-revision",
+          "label": "Revision B Â· one sharp tip, blunt base",
+          "src": "candidates/batch-52/kolec_jadowy_revision_b.png",
+          "note": "One venomous hooked point, two broad barbs and a clearly blunt anatomical base."
+        },
+        {
+          "id": "batch53-revision",
+          "label": "Revision C Â· sharpened right tip",
+          "src": "candidates/batch-53/kolec_jadowy_revision_c.png",
+          "note": "Keeps the blunt tubular left base and changes only the right end into a needle point."
+        },
+        {
+          "id": "batch54-revision",
+          "label": "Revision D · poison drop at tip",
+          "src": "candidates/batch-54/kolec_jadowy_revision_d.png",
+          "note": "Preserves the selected spike and adds one large hanging venom drop at its sharp tip."
+        }
+      ]
+    },
+    {
+      "id": "batch51-konar",
+      "status": "resolved",
+      "name": "Konar",
+      "tier": "Batch 51 Â· Korzec attack",
+      "context": "Korzec strikes with a heavy branch that can knock a target back and prone. The attack uses the generic upgrade placeholder.",
+      "request": "One thick gnarled tree limb used as a club, with bark scars and broken twigs. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· gnarled branch club",
+          "src": "candidates/batch-51/konar.png",
+          "note": "Thick battered timber silhouette without a full tree."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· plain forked branch",
+          "src": "candidates/batch-51/konar_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        },
+        {
+          "id": "batch52-revision",
+          "label": "Revision B Â· branch-club limb",
+          "src": "candidates/batch-52/konar_revision_b.png",
+          "note": "Hybrid of a heavy wooden club, forked branch and non-human arm."
+        }
+      ]
+    },
+    {
+      "id": "batch51-korzen",
+      "name": "KorzeÅ„",
+      "tier": "Batch 51 Â· Korzec grapple",
+      "context": "A living root grabs the target and can be attacked separately. The ability uses the generic upgrade placeholder.",
+      "request": "A thick root curling tightly around a trapped boot and ankle. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· grasping root",
+          "src": "candidates/batch-51/korzen.png",
+          "note": "The root visibly coils around one boot to show restraint."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· single root and boot",
+          "src": "candidates/batch-51/korzen_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch51-lapa",
+      "name": "Åapa â€” NeoniedÅºwiedÅº",
+      "tier": "Batch 51 Â· creature attack",
+      "context": "NeoniedÅºwiedÅº's paw strike can knock down large or smaller targets. It uses the generic upgrade placeholder.",
+      "request": "One huge scarred bear forepaw striking down with four dominant claws. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· mutant bear paw",
+          "src": "candidates/batch-51/lapa_neoniedzwiedzia.png",
+          "note": "Broad paw and four claws form a forceful downward strike."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· four-claw paw",
+          "src": "candidates/batch-51/lapa_neoniedzwiedzia_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch51-macki",
+      "status": "resolved",
+      "name": "Macki",
+      "tier": "Batch 51 Â· shared Techmorwa anatomy",
+      "context": "Techmorwa variants have four or six separately damageable tentacles. One neutral tentacle-cluster icon is sufficient across sizes.",
+      "request": "A compact knot of four thick organic tentacles curling outward; no whole creature. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder on actor variants.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· mutant tentacle cluster",
+          "src": "candidates/batch-51/macki.png",
+          "note": "Four broad curling limbs remain distinct at small size."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· four smooth tentacles",
+          "src": "candidates/batch-51/macki_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        },
+        {
+          "id": "batch52-revision",
+          "label": "Revision B Â· tentacles with broad suckers",
+          "src": "candidates/batch-52/macki_revision_b.png",
+          "note": "Four clean tentacles with only three large sucker openings on each visible underside."
+        }
+      ]
+    },
+    {
+      "id": "batch51-pily",
+      "name": "PiÅ‚y",
+      "tier": "Batch 51 Â· Gladiator attack",
+      "context": "Gladiator makes repeated slashing attacks with powered saws. The ability uses the generic upgrade placeholder.",
+      "request": "Two rugged powered circular saw blades on short mechanical arms, crossed dynamically. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· crossed industrial saws",
+          "src": "candidates/batch-51/pily.png",
+          "note": "Two large toothed discs and mechanical mounts communicate the attack."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· two simplified saws",
+          "src": "candidates/batch-51/pily_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch51-ryjossawka",
+      "status": "resolved",
+      "name": "Ryjossawka",
+      "tier": "Batch 51 Â· Alahama attack",
+      "context": "Alahama drains blood through a sucking mouth and reduces the target's maximum hit points. The ability uses the generic upgrade placeholder.",
+      "request": "A lamprey-like circular sucking mouth at the end of a short fleshy trunk, with one blood drop. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· blood-sucking proboscis",
+          "src": "candidates/batch-51/ryjossawka.png",
+          "note": "Circular tooth ring and single drop show the draining anatomy."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· six-tooth proboscis",
+          "src": "candidates/batch-51/ryjossawka_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        },
+        {
+          "id": "batch52-revision",
+          "label": "Revision B Â· organic sucking snout",
+          "src": "candidates/batch-52/ryjossawka_revision_b.png",
+          "note": "Fleshy animal-like proboscis with a six-tooth circular mouth."
+        }
+      ]
+    },
+    {
+      "id": "batch51-spluniecie-kwasem",
+      "status": "resolved",
+      "name": "SpluniÄ™cie kwasem",
+      "tier": "Batch 51 Â· Åowca attack",
+      "context": "Åowca spits acid that deals extra damage to objects. The attack uses the generic upgrade placeholder.",
+      "request": "A mutant jaw spitting one coherent corrosive stream toward a pitted metal plate. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· corrosive spit",
+          "src": "candidates/batch-51/spluniecie_kwasem.png",
+          "note": "Broad acid stream visibly strikes and pits a metal target."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· single acid stream",
+          "src": "candidates/batch-51/spluniecie_kwasem_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        },
+        {
+          "id": "batch52-revision",
+          "label": "Revision B Â· acid stream without target",
+          "src": "candidates/batch-52/spluniecie_kwasem_revision_b.png",
+          "note": "Broad irregular corrosive stream with large bubble holes and no plate."
+        }
+      ]
+    },
+    {
+      "id": "batch51-stalowe-maczugi",
+      "name": "Stalowe maczugi",
+      "tier": "Batch 51 Â· Gladiator attack",
+      "context": "Gladiator makes three heavy bludgeoning attacks that can knock a target prone. The ability uses the generic upgrade placeholder.",
+      "request": "Two massive crossed improvised steel cudgels with welded plates and blunt industrial heads. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· crossed steel cudgels",
+          "src": "candidates/batch-51/stalowe_maczugi.png",
+          "note": "Riveted blunt heads and wrapped shafts read as heavy machine clubs."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· two blocky steel clubs",
+          "src": "candidates/batch-51/stalowe_maczugi_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        },
+        {
+          "id": "batch52-revision",
+          "label": "Revision B Â· readable inner steel panels",
+          "src": "candidates/batch-52/stalowe_maczugi_revision_b.png",
+          "note": "Crossed clubs retain the flat silhouette but gain one large panel and two rivet holes per head."
+        },
+        {
+          "id": "batch53-revision",
+          "label": "Revision C Â· cleaned crossed clubs",
+          "src": "candidates/batch-53/stalowe_maczugi_revision_c.png",
+          "note": "Preserves the selected clubs while removing the stray overpaint fragment."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch51-stalowe-piesci",
+      "status": "resolved",
+      "name": "Stalowe piÄ™Å›ci",
+      "tier": "Batch 51 Â· Generation III attack",
+      "context": "The spy's armored fists can knock a target prone. The attack uses the generic upgrade placeholder.",
+      "request": "Two heavy armored robotic fists colliding knuckle-first, with angular steel plates. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· colliding steel fists",
+          "src": "candidates/batch-51/stalowe_piesci.png",
+          "note": "Large plated knuckles and compact impact marks survive reduction."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· two blocky fists",
+          "src": "candidates/batch-51/stalowe_piesci_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        },
+        {
+          "id": "batch52-revision",
+          "label": "Revision B Â· industrial hydraulic crushers",
+          "src": "candidates/batch-52/stalowe_piesci_revision_b.png",
+          "note": "Opposing slaughterhouse-style pistons and serrated clamp plates instead of human fists."
+        }
+      ]
+    },
+    {
+      "id": "batch51-szczeki",
+      "name": "SzczÄ™ki",
+      "tier": "Batch 51 Â· SzczÄ™kowij attack",
+      "context": "SzczÄ™kowij's defining jaws currently use the generic upgrade placeholder. This should remain distinct from the organic venom-fang icon.",
+      "request": "A brutal biomechanical hinged jaw trap clamping shut, with thick teeth and industrial pivots. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· biomechanical crushing jaws",
+          "src": "candidates/batch-51/szczeki.png",
+          "note": "Metal hinge plates and thick teeth distinguish it from an animal mouth."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· eight-tooth mechanical jaw",
+          "src": "candidates/batch-51/szczeki_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch51-szczurze-nozki",
+      "name": "Szczurze nÃ³Å¼ki",
+      "tier": "Batch 51 Â· MyÅ›lÄ…cy Szczur ability",
+      "context": "The ability allows Hide, Disengage or Dash as a quick action. It uses the generic upgrade placeholder.",
+      "request": "Two small wiry rat hind legs sprinting with one short dust streak; legs only. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· scurrying rat legs",
+          "src": "candidates/batch-51/szczurze_nozki.png",
+          "note": "Separated running legs and dust marks communicate speed."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· two plain running legs",
+          "src": "candidates/batch-51/szczurze_nozki_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch51-zioniecie",
+      "name": "ZioniÄ™cie radioaktywnym gazem",
+      "tier": "Batch 51 Â· Megator ability",
+      "context": "Megator breathes a long line of radioactive gas that reduces maximum hit points. The ability uses the generic upgrade placeholder.",
+      "request": "A reptilian mutant head exhaling a broad toxic plume with a simple radiation motif in negative space. Use only flat solid shapes: no grunge, texture, surface marks or fine detail.",
+      "current": {
+        "src": null,
+        "note": "Generic placeholder.",
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder"
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· radioactive gas breath",
+          "src": "candidates/batch-51/zioniecie_radioaktywne.png",
+          "note": "Broad plume and radiation mark make the hazard explicit."
+        },
+        {
+          "id": "clean-silhouette",
+          "label": "Clean revision Â· simple radioactive breath",
+          "src": "candidates/batch-51/zioniecie_radioaktywne_clean.png",
+          "note": "Regenerated as a flat, texture-free silhouette with only the minimum identifying shapes."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch52-staza",
+      "status": "resolved",
+      "name": "Staza",
+      "tier": "Batch 52 Â· compendium medical consumable",
+      "context": "The Staza item stabilises a dying creature but currently uses the core blood symbol.",
+      "request": "A coiled medical tourniquet with a prominent windlass rod and square buckle, clearly distinct from a belt or bandage roll.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current compendium icon\nblood.svg",
+        "note": "Core blood symbol does not depict the physical tourniquet."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· rolled windlass tourniquet",
+          "src": "candidates/batch-52/staza.png",
+          "note": "Coiled strap, large windlass and square clip remain readable at small size."
+        }
+      ]
+    },
+    {
+      "id": "batch52-miazdzenie",
+      "name": "MiaÅ¼dÅ¼enie",
+      "tier": "Batch 52 Â· shared creature attack",
+      "context": "Alahama and Neogator crush a grappled victim; current actor items use a placeholder or portrait.",
+      "request": "Two massive organic limbs compressing one plain barrel-shaped object with a broad inward buckle.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· constricting crush",
+          "src": "candidates/batch-52/miazdzenie.png",
+          "note": "Opposing limbs and a visibly compressed center communicate crushing."
+        },
+        {
+          "id": "batch53-revision",
+          "label": "Revision B Â· mutant tail crush",
+          "src": "candidates/batch-53/miazdzenie_revision_b.png",
+          "note": "One enormous mutant tail coils around and crushes a small human figure."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch52-polkniecie",
+      "status": "resolved",
+      "name": "PoÅ‚kniÄ™cie",
+      "tier": "Batch 52 Â· Megator ability",
+      "context": "Megator swallows a grappled creature, trapping it in its stomach. The item uses the generic upgrade placeholder.",
+      "request": "One enormous monster mouth closing around the upper half of a very small human silhouette; no gore.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· swallowing maw",
+          "src": "candidates/batch-52/polkniecie.png",
+          "note": "Large teeth and the partly engulfed figure show the action directly."
+        }
+      ]
+    },
+    {
+      "id": "batch52-rozszarpanie",
+      "status": "resolved",
+      "name": "Rozszarpanie",
+      "tier": "Batch 52 Â· NeoniedÅºwiedÅº ability",
+      "context": "NeoniedÅºwiedÅº automatically rends a victim held in its jaws. The item uses the generic upgrade placeholder.",
+      "request": "Two non-human claws pulling a thick strip in opposite directions with one bold central split; no blood.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· opposing rending claws",
+          "src": "candidates/batch-52/rozszarpanie.png",
+          "note": "Two clawed grips and one central tear remain legible at icon size."
+        }
+      ]
+    },
+    {
+      "id": "batch52-taranowanie",
+      "name": "Taranowanie",
+      "tier": "Batch 52 Â· shared heavy charge ability",
+      "context": "Gigamut and Kidnaper ram targets after moving into them. Both items use the generic upgrade placeholder.",
+      "request": "A heavy armored wedge-shaped ram driving into a plain obstacle, with one horn and one wheel-like joint.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· armored ram impact",
+          "src": "candidates/batch-52/taranowanie.png",
+          "note": "The wedge, joint and notched obstacle form one compact collision silhouette."
+        },
+        {
+          "id": "batch53-revision",
+          "label": "Revision B Â· fast armored impact",
+          "src": "candidates/batch-53/taranowanie_revision_b.png",
+          "note": "Preserves the selected ram and adds three broad speed lines behind it."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch52-pochwycenie",
+      "name": "Pochwycenie",
+      "tier": "Batch 52 Â· shared creature grapple",
+      "context": "Several mutants use a bonus action or follow-up attack to grapple a victim. The items use generic placeholders.",
+      "request": "One large three-fingered non-human claw wrapped firmly around a plain torso silhouette.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· clawed grapple",
+          "src": "candidates/batch-52/pochwycenie.png",
+          "note": "The surrounding claw clearly encloses the victim rather than striking it."
+        },
+        {
+          "id": "batch53-revision",
+          "label": "Revision B Â· generic hand grapple",
+          "src": "candidates/batch-53/pochwycenie_revision_b.png",
+          "note": "A broad five-fingered human hand grips the torso without claws."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch52-zakazenie",
+      "status": "resolved",
+      "name": "ZakaÅ¼enie",
+      "tier": "Batch 52 Â· Mrokoszczur ability",
+      "context": "A Mrokoszczur bite can infect the victim with rat fever. The item uses the generic upgrade placeholder.",
+      "request": "One large bite mark containing exactly three broad pathogen circles; no whole mouth.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· infected bite",
+          "src": "candidates/batch-52/zakazenie.png",
+          "note": "Tooth notches and three large pathogen cells combine bite and disease."
+        }
+      ]
+    },
+    {
+      "id": "batch52-poswiata",
+      "status": "resolved",
+      "name": "PoÅ›wiata",
+      "tier": "Batch 52 Â· Nocny Ghul trait",
+      "context": "The radioactive Night Ghoul emits a greenish glow that hinders stealth. The trait uses the generic upgrade placeholder.",
+      "request": "A hunched mutant silhouette inside one broad halo ring, with a radiation cutout in the torso.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· radioactive mutant glow",
+          "src": "candidates/batch-52/poswiata.png",
+          "note": "Continuous halo and torso trefoil convey visible radioactive glow."
+        }
+      ]
+    },
+    {
+      "id": "batch52-czuly-wech",
+      "name": "CzuÅ‚y wÄ™ch",
+      "tier": "Batch 52 Â· shared creature sense",
+      "context": "Mrokoszczur, Pies Mutek and RÃ³j SzczurÃ³w gain Perception advantage when smelling. Their items use generic placeholders.",
+      "request": "One large animal snout in profile with exactly two broad scent curves.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· keen animal nose",
+          "src": "candidates/batch-52/czuly_wech.png",
+          "note": "The nose dominates, with only two large scent waves."
+        },
+        {
+          "id": "batch53-revision",
+          "label": "Revision B Â· clear canine snout",
+          "src": "candidates/batch-53/czuly_wech_revision_b.png",
+          "note": "One unmistakable canine muzzle, a large nostril and two broad scent curves."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch52-wiele-twarzy",
+      "status": "resolved",
+      "name": "Wiele twarzy",
+      "tier": "Batch 52 Â· Generation III Spy trait",
+      "context": "The spy can reshape its face to impersonate another person. The trait uses the generic upgrade placeholder.",
+      "request": "Two overlapping plain human face profiles looking in opposite directions, separated by one mask seam.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· overlapping identities",
+          "src": "candidates/batch-52/wiele_twarzy.png",
+          "note": "Two profiles and one seam show a changed identity without detail."
+        }
+      ]
+    },
+    {
+      "id": "batch52-wspinaczka-po-metalu",
+      "status": "resolved",
+      "name": "Wspinaczka po metalu",
+      "tier": "Batch 52 Â· Kurczak trait",
+      "context": "Kurczak uses electromagnets in its mechanical bird legs to walk on metal surfaces. The trait uses a placeholder or portrait.",
+      "request": "Two angular mechanical bird legs ending in horseshoe electromagnet feet attached to a vertical metal plate.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· magnetic climbing legs",
+          "src": "candidates/batch-52/wspinaczka_po_metalu.png",
+          "note": "Jointed legs and two large magnet feet visibly adhere to the plate."
+        }
+      ]
+    },
+    {
+      "id": "batch52-natarcie",
+      "status": "resolved",
+      "name": "Natarcie",
+      "tier": "Batch 52 Â· Taran ability",
+      "context": "Taran runs through a straight line of creatures and objects, knocking them down. The item uses the generic upgrade placeholder.",
+      "request": "A heavy armored figure with a broad wedge shoulder driving straight through two vertical obstacles.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· armored straight-line assault",
+          "src": "candidates/batch-52/natarcie.png",
+          "note": "Forward lean and split obstacles show sustained advance rather than one impact."
+        }
+      ]
+    },
+    {
+      "id": "batch52-miotacz-ognia",
+      "status": "resolved",
+      "name": "Miotacz ognia (4/walkÄ™)",
+      "tier": "Batch 52 Â· Juggernaut attack",
+      "context": "Juggernaut projects a long line of fire that can ignite targets. The item uses the generic upgrade placeholder.",
+      "request": "One thick industrial nozzle and short fuel hose emitting a single broad flame.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· industrial flamethrower nozzle",
+          "src": "candidates/batch-52/miotacz_ognia.png",
+          "note": "Nozzle, hose and one large flame remain clear at 16 px."
+        }
+      ]
+    },
+    {
+      "id": "batch52-miotacz-strzalek",
+      "status": "resolved",
+      "name": "Miotacz strzaÅ‚ek",
+      "tier": "Batch 52 Â· Kidnaper attack",
+      "context": "Kidnaper fires poisoned paralysing darts. The item uses the generic upgrade placeholder.",
+      "request": "A compact mechanical launcher with a short barrel and exactly three large darts in a top rack.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· rack-fed dart launcher",
+          "src": "candidates/batch-52/miotacz_strzalek.png",
+          "note": "Three oversized darts distinguish the device from a firearm."
+        }
+      ]
+    },
+    {
+      "id": "batch53-regeneracja",
+      "name": "Regeneracja",
+      "tier": "Batch 53 Â· shared creature regeneration trait",
+      "context": "Alahama heals after draining blood, while Biodroid starts an autonomous repair cycle at 0 HP. Both actor items use the generic upgrade placeholder.",
+      "request": "A broken circular form closing around one central wound with exactly three broad repair staples.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder shared by both regeneration variants."
+      },
+      "candidates": [
+        {
+          "id": "batch52-held",
+          "label": "Batch 52 held Â· closing wound",
+          "src": "candidates/batch-52/regeneracja.png",
+          "note": "The original clean regeneration candidate, held when Batch 52 was capped at 27 cards."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Atlas A Â· repaired circular wound",
+          "src": "candidates/batch-53/regeneracja.png",
+          "note": "Three broad staples close a wound inside a nearly complete regeneration ring."
+        },
+        {
+          "id": "batch54-revision",
+          "label": "Revision B · filaments closing wound",
+          "src": "candidates/batch-54/regeneracja_revision_b.png",
+          "note": "Two open wound edges are pulled together by three broad organic filaments, without a circle or stitches."
+        }
+      ]
+    },
+    {
+      "id": "batch53-pierwsze-spotkanie",
+      "name": "Pierwsze spotkanie",
+      "tier": "Batch 53 Â· shared creature fear trait",
+      "context": "Thirty-one bestiary creatures force a Wisdom save when first encountered. Their actor items use the generic upgrade placeholder.",
+      "request": "One human eye confronting one looming jagged mutant shadow, reduced to two bold shapes.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder across 31 actor items."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· first sight of a mutant",
+          "src": "candidates/batch-53/pierwsze_spotkanie.png",
+          "note": "A large eye and looming mutant profile communicate the shock of first contact."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch53-atak-wielokrotny",
+      "name": "Atak wielokrotny",
+      "tier": "Batch 53 Â· shared multiattack action",
+      "context": "Many human, mutant and machine statblocks combine several attacks in one action. Twenty-eight actor items use the generic upgrade placeholder.",
+      "request": "Exactly three heavy attack strokes converging on one central impact point.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder across 28 actor items."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· triple impact",
+          "src": "candidates/batch-53/atak_wielokrotny.png",
+          "note": "Three large strikes converge on one clear impact burst."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch53-algorytm-czuwania",
+      "name": "Algorytm czuwania",
+      "tier": "Batch 53 Â· shared machine vigilance trait",
+      "context": "Eleven Moloch machines cannot be surprised because their sensors remain vigilant. Their actor items use the generic upgrade placeholder.",
+      "request": "One unblinking mechanical camera eye inside an angular sensor housing, with exactly two scan rays.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder across 11 actor items."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· vigilant machine eye",
+          "src": "candidates/batch-53/algorytm_czuwania.png",
+          "note": "A broad camera eye and two scan rays remain clear at small size."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch53-wspolpraca",
+      "name": "WspÃ³Å‚praca",
+      "tier": "Batch 53 Â· shared pack-tactics trait",
+      "context": "Ten packs and coordinated groups gain attack advantage while an ally threatens the same target. Their actor items use the generic upgrade placeholder.",
+      "request": "Two simplified predator heads from opposite sides converging on one central target circle.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder across ten actor items."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· coordinated pack attack",
+          "src": "candidates/batch-53/wspolpraca.png",
+          "note": "Two predators visibly converge on the same marked target."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch53-kamuflaz",
+      "name": "KamuflaÅ¼",
+      "tier": "Batch 53 Â· shared concealment trait",
+      "context": "Reptilian mutants, Korzec, SzczÄ™kowij and Techmorwa variants blend into terrain or imitate nearby objects. Their items use the generic upgrade placeholder.",
+      "request": "One crouched creature silhouette half merged into a jagged tree or terrain silhouette.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder across five actor items."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· creature merging with terrain",
+          "src": "candidates/batch-53/kamuflaz.png",
+          "note": "The creature is visibly concealed behind and within the tree silhouette."
+        }
+      ]
+    },
+    {
+      "id": "batch53-swiatlowstret",
+      "name": "ÅšwiatÅ‚owstrÄ™t",
+      "tier": "Batch 53 Â· shared sunlight weakness",
+      "context": "Bit-Boys, Night Ghouls and Harpies become blinded in sunlight. Their actor items use the generic upgrade placeholder.",
+      "request": "One tightly closed eye beneath a harsh sun disk with exactly four thick rays.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder across four actor items."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· eye shut against sunlight",
+          "src": "candidates/batch-53/swiatlowstret.png",
+          "note": "The closed eye and hard sun communicate light-induced blindness."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch53-wstrzymanie-oddechu",
+      "name": "Wstrzymanie oddechu",
+      "tier": "Batch 53 Â· shared reptilian trait",
+      "context": "Genotype Gadzi, Megator and Neogator can hold their breath for unusually long periods. Their actor items use the generic upgrade placeholder.",
+      "request": "A simple side-profile nose and sealed mouth beside one large lung silhouette.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder across three actor items."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· sealed breath and lungs",
+          "src": "candidates/batch-53/wstrzymanie_oddechu.png",
+          "note": "The closed mouth and paired lungs make the breath-holding trait explicit."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch53-nadludzki-refleks",
+      "name": "Nadludzki refleks",
+      "tier": "Batch 53 Â· shared high-initiative trait",
+      "context": "Generation III and IV mutants gain a large initiative bonus from superhuman reactions. Their actor items use the generic upgrade placeholder.",
+      "request": "A human head and shoulder snapping aside as one projectile passes, with exactly two broad motion arcs.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder across three actor items."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· projectile dodge",
+          "src": "candidates/batch-53/nadludzki_refleks.png",
+          "note": "A close projectile and two motion arcs show an unnaturally fast reaction."
+        },
+        {
+          "id": "batch54-revision",
+          "label": "Revision B · ducking under projectile",
+          "src": "candidates/batch-54/nadludzki_refleks_revision_b.png",
+          "note": "The figure clearly ducks beneath a projectile that continues straight overhead."
+        }
+      ]
+    },
+    {
+      "id": "batch53-szarza",
+      "name": "SzarÅ¼a",
+      "tier": "Batch 53 Â· shared charge action",
+      "context": "Alahama, ObroÅ„ca and Taran accelerate directly toward a visible opponent. Their actor items use the generic upgrade placeholder.",
+      "request": "One horned armored shoulder and head driving forward with exactly three thick speed lines.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder across three actor items."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B Â· horned charge",
+          "src": "candidates/batch-53/szarza.png",
+          "note": "Forward lean and three heavy speed lines make the charge immediate."
+        },
+        {
+          "id": "batch54-revision",
+          "label": "Revision B · readable full-body charge",
+          "src": "candidates/batch-54/szarza_revision_b.png",
+          "note": "The horned charger now has a clear torso, arms and two bent running legs."
+        }
+      ]
+    },
+    {
+      "id": "batch53-nie-do-zabicia",
+      "name": "Nie do zabicia",
+      "tier": "Batch 53 Â· shared mutant survival trait",
+      "context": "Generation III Grubas and Techmutas fall unconscious and stable instead of dying at 0 HP, then rise again. Their items use the generic upgrade placeholder.",
+      "request": "One battered humanoid pushing upright despite one broad broken gap through the torso, with one raised fist.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder across two actor items."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· battered figure rising",
+          "src": "candidates/batch-53/nie_do_zabicia.png",
+          "note": "A visibly broken figure remains upright and defiant."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch53-brak-glowy",
+      "name": "Brak gÅ‚owy",
+      "tier": "Batch 53 Â· shared critical immunity trait",
+      "context": "Biodroid and SzczÄ™kowij have no vulnerable head and are immune to critical hits. Their actor items use the generic upgrade placeholder.",
+      "request": "One unmistakably headless humanoid upper torso with a blunt empty neck opening and broad shoulders.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder across two actor items."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· headless torso",
+          "src": "candidates/batch-53/brak_glowy.png",
+          "note": "The broad empty neck opening reads clearly without a detached head."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch53-niewykrywalnosc",
+      "name": "NiewykrywalnoÅ›Ä‡",
+      "tier": "Batch 53 Â· shared Techmorwa concealment trait",
+      "context": "Both Techmorwa sizes remain invisible until they move or attack. Their actor items use the generic upgrade placeholder.",
+      "request": "One low tentacled creature disappearing behind a simple vertical surface, with only half its body visible.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder across two actor items."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· concealed tentacled creature",
+          "src": "candidates/batch-53/niewykrywalnosc.png",
+          "note": "Only the face edge and two tentacles remain visible beyond cover."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch53-telepatia",
+      "name": "Telepatia",
+      "tier": "Batch 53 Â· shared psychic communication trait",
+      "context": "Bit-Boy Przewodnik and MyÅ›lÄ…cy Szczur communicate silently over distance. Their actor items use the generic upgrade placeholder.",
+      "request": "Two plain head profiles facing each other, joined by exactly one broad thought-wave arch.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder across two actor items."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· shared thought wave",
+          "src": "candidates/batch-53/telepatia.png",
+          "note": "A single continuous wave links the two facing minds."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch53-neozmysly",
+      "name": "NeozmysÅ‚y",
+      "tier": "Batch 53 Â· shared radiation sense",
+      "context": "Mrokoszczur and MyÅ›lÄ…cy Szczur can sense radioactive contamination. Their actor items use the generic upgrade placeholder.",
+      "request": "One large mutant rat snout sensing a radiation trefoil through exactly two broad detection waves.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder across two actor items."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· rat sensing radiation",
+          "src": "candidates/batch-53/neozmysly.png",
+          "note": "The rat profile, two waves and trefoil directly show the unusual sense."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch53-pajecza-wspinaczka",
+      "name": "PajÄ™cza wspinaczka",
+      "tier": "Batch 53 Â· Giant Spider trait",
+      "context": "The Giant Spider walks across rough walls and ceilings, including upside down. Its actor item uses the generic upgrade placeholder or portrait.",
+      "request": "One large spider attached upside down beneath a thick horizontal slab, with four visible hooked legs gripping it.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder or actor portrait."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· spider under ceiling",
+          "src": "candidates/batch-53/pajecza_wspinaczka.png",
+          "note": "Four hooked legs visibly grip the underside of the slab."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch53-tkacz-sieci",
+      "name": "Tkacz sieci",
+      "tier": "Batch 53 Â· Giant Spider trait",
+      "context": "The Giant Spider creates and senses a large restraining web. Its actor item uses the generic upgrade placeholder or portrait.",
+      "request": "One large spider abdomen and spinneret actively laying a simple web with exactly five broad spokes.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder or actor portrait."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· active web spinner",
+          "src": "candidates/batch-53/tkacz_sieci.png",
+          "note": "A large spinneret lays five thick web spokes without delicate detail."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch53-oplatanie",
+      "name": "OplÄ…tanie",
+      "tier": "Batch 53 Â· Giant Spider bonus action",
+      "context": "After a hit, the Giant Spider can restrain its victim in webbing. Its actor item uses the generic upgrade placeholder.",
+      "request": "One plain human torso and arms wrapped tightly in exactly three broad web bands.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe the restraint."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· web-bound victim",
+          "src": "candidates/batch-53/oplatanie.png",
+          "note": "Three heavy bands visibly immobilize the torso and arms."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch53-groza",
+      "name": "Groza",
+      "tier": "Batch 53 Â· Juggernaut fear trait",
+      "context": "Living creatures near Juggernaut must resist intense fear for up to an hour. The actor item uses the generic upgrade placeholder.",
+      "request": "One enormous angular machine face looming behind one tiny recoiling human silhouette, with exactly three fear spikes.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not convey the machine's terror aura."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C Â· human recoiling from machine",
+          "src": "candidates/batch-53/groza.png",
+          "note": "The scale contrast and three fear spikes communicate overwhelming dread."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch54-manewry",
+      "name": "Manewry",
+      "tier": "Batch 54 · Gangus Boss and Kapo bonus action",
+      "context": "These gang leaders can push, disengage, disarm or dash as tactical maneuvers. Their actor items use the generic upgrade placeholder.",
+      "request": "One fighter pivoting between three thick directional arrows for push, disengage and rush.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not communicate tactical movement."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · tactical directions",
+          "src": "candidates/batch-54/manewry.png",
+          "note": "A central fighter and three large arrows show multiple maneuver choices."
+        }
+      ]
+    },
+    {
+      "id": "batch54-ucieczka",
+      "name": "Ucieczka",
+      "tier": "Batch 54 · Spy and Kidnaper bonus action",
+      "context": "The Spy disengages, dodges or dashes, while Kidnaper escapes carrying a captive. Both use the generic upgrade placeholder.",
+      "request": "One crouched figure breaking through an incomplete enclosing ring toward one bold exit arrow.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not communicate escape."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · breaking out",
+          "src": "candidates/batch-54/ucieczka.png",
+          "note": "The broken ring and exit arrow create a compact escape silhouette."
+        }
+      ]
+    },
+    {
+      "id": "batch54-agresja",
+      "name": "Agresja",
+      "tier": "Batch 54 · Generation III Fatso bonus action",
+      "context": "The Fatso dashes directly toward an opponent. The actor item uses the generic upgrade placeholder.",
+      "request": "One massive hunched humanoid rushing a small opponent with exactly two broad speed bars.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not show aggressive pursuit."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · mutant rush",
+          "src": "candidates/batch-54/agresja.png",
+          "note": "Strong scale contrast and two speed bars show a direct aggressive rush."
+        }
+      ]
+    },
+    {
+      "id": "batch54-burzyciel",
+      "name": "Burzyciel",
+      "tier": "Batch 54 · Juggernaut trait",
+      "context": "Juggernaut destroys walls, vehicles and smaller obstacles by driving through them. The actor item uses the generic upgrade placeholder.",
+      "request": "One heavy tracked machine smashing through a concrete wall with exactly three large wall fragments.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not convey demolition by mass."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · tracked wall breaker",
+          "src": "candidates/batch-54/burzyciel.png",
+          "note": "A compact tracked machine visibly breaks through one solid obstacle."
+        }
+      ]
+    },
+    {
+      "id": "batch54-chwytak",
+      "name": "Chwytak",
+      "tier": "Batch 54 · Defender machine attack",
+      "context": "The Defender's mechanical grabber grapples and restrains a victim. The actor item uses the generic upgrade placeholder.",
+      "request": "One industrial two-jaw clamp gripping a plain torso silhouette; machinery rather than a human hand.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not identify the machine grabber."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · industrial clamp",
+          "src": "candidates/batch-54/chwytak.png",
+          "note": "A heavy articulated clamp closes around a simple victim silhouette."
+        }
+      ]
+    },
+    {
+      "id": "batch54-czaszkohelm",
+      "name": "Czaszkohełm",
+      "tier": "Batch 54 · Alahama trait",
+      "context": "Alahama's skull helmet protects it from critical hits. The actor item uses the generic upgrade placeholder.",
+      "request": "One heavy animal-skull helmet enclosing the top of a humanoid head, with broad horn stubs and a thick brow.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not show the protective skull helmet."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · protective skull helm",
+          "src": "candidates/batch-54/czaszkohelm.png",
+          "note": "The skull clearly encloses a living head and reads as armor."
+        }
+      ]
+    },
+    {
+      "id": "batch54-druga-linia",
+      "name": "Druga linia",
+      "tier": "Batch 54 · Generation III Techmutant bonus action",
+      "context": "The Techmutant hides behind the front line when battlefield conditions allow. The actor item uses the generic upgrade placeholder.",
+      "request": "One psychic humanoid crouched behind a large foreground fighter silhouette with one broad concealment shape.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not show shelter behind allies."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · hiding behind front line",
+          "src": "candidates/batch-54/druga_linia.png",
+          "note": "The small crouched figure is visibly screened by a larger combatant."
+        }
+      ]
+    },
+    {
+      "id": "batch54-iluzoryczna-niewidzialnosc",
+      "name": "Iluzoryczna niewidzialność",
+      "tier": "Batch 54 · Generation IV Mesmerist legendary action",
+      "context": "The Mesmerist becomes unseen by creatures without thermal vision until harmed or acting offensively. The item uses the generic upgrade placeholder.",
+      "request": "One standing humanoid whose middle disappears into exactly three broad horizontal gaps.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not show psychic disappearance."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · segmented disappearance",
+          "src": "candidates/batch-54/iluzoryczna_niewidzialnosc.png",
+          "note": "Three clean gaps erase the figure's center while its outline remains readable."
+        }
+      ]
+    },
+    {
+      "id": "batch54-iluzoryczny-cel",
+      "name": "Iluzoryczny cel",
+      "tier": "Batch 54 · Generation IV Mesmerist reaction",
+      "context": "The Mesmerist redirects an incoming melee attack toward another creature or the attacker. The item uses the generic upgrade placeholder.",
+      "request": "One attacker aiming at a figure while one broad psychic arrow redirects the strike toward a second figure.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not convey redirected targeting."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · redirected attack",
+          "src": "candidates/batch-54/iluzoryczny_cel.png",
+          "note": "One large curved arrow redirects the attack from the first target to the second."
+        }
+      ]
+    },
+    {
+      "id": "batch54-kontakt-molocha",
+      "name": "Kontakt Molocha",
+      "tier": "Batch 54 · Generation III Spy trait",
+      "context": "A microrobot or cyberimplant records everything the Spy experiences for Moloch. The item uses the generic upgrade placeholder.",
+      "request": "One small angular surveillance implant behind a human ear with exactly two short radio arcs.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not show hidden machine surveillance."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · surveillance implant",
+          "src": "candidates/batch-54/kontakt_molocha.png",
+          "note": "The ear-mounted device and two radio arcs suggest continuous recording and transmission."
+        }
+      ]
+    },
+    {
+      "id": "batch54-kuloodporny",
+      "name": "Kuloodporny",
+      "tier": "Batch 54 · Trigger Man trait",
+      "context": "The Trigger Man adds proficiency to his hit difficulty because he is exceptionally resistant to gunfire. The item uses the generic upgrade placeholder or portrait.",
+      "request": "One upper torso behind a thick battered ballistic plate while exactly three large bullets flatten against it.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic and actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · bullets stopped by plate",
+          "src": "candidates/batch-54/kuloodporny.png",
+          "note": "Three oversized bullets visibly stop against one heavy plate."
+        }
+      ]
+    },
+    {
+      "id": "batch54-legendarna-odpornosc",
+      "name": "Legendarna odporność (3/dzień)",
+      "tier": "Batch 54 · Megator trait",
+      "context": "Megator can turn a failed saving throw into a success three times per day. The actor item uses the generic upgrade placeholder.",
+      "request": "One enormous reptilian eye behind a thick shield split by one impact crack but still holding.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not show extraordinary resistance."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · cracked shield holding",
+          "src": "candidates/batch-54/legendarna_odpornosc.png",
+          "note": "The cracked shield remains intact around a large reptilian eye."
+        }
+      ]
+    },
+    {
+      "id": "batch54-malutki",
+      "name": "Malutki",
+      "tier": "Batch 54 · Kitchin trait",
+      "context": "Kitchin moves through larger creatures' spaces and can climb onto them. The actor item uses the generic upgrade placeholder or portrait.",
+      "request": "One very small hunched creature standing between two enormous boot silhouettes.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery does not communicate the creature's tiny scale."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · tiny creature between boots",
+          "src": "candidates/batch-54/malutki.png",
+          "note": "The extreme scale contrast remains legible at icon size."
+        }
+      ]
+    },
+    {
+      "id": "batch54-malo-zwrotny",
+      "name": "Mało zwrotny",
+      "tier": "Batch 54 · Juggernaut trait",
+      "context": "Juggernaut moves normally only forward and backward; a ninety-degree turn costs half its speed. The item uses the generic upgrade placeholder.",
+      "request": "One heavy tracked vehicle following a straight arrow while a sharply curving arrow is visibly blocked.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not show restricted turning."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · straight movement only",
+          "src": "candidates/batch-54/malo_zwrotny.png",
+          "note": "The vehicle can advance straight but the crossed curved arrow denies a tight turn."
+        }
+      ]
+    },
+    {
+      "id": "batch54-najechanie",
+      "name": "Najechanie",
+      "tier": "Batch 54 · Juggernaut action",
+      "context": "Juggernaut drives onto a large or smaller target, knocking it down and crushing it. The item uses the generic upgrade placeholder.",
+      "request": "One massive tank tread descending onto one prone human silhouette; no full vehicle body.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not show a tread crushing a victim."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · tread crushing victim",
+          "src": "candidates/batch-54/najechanie.png",
+          "note": "One oversized tread and prone figure make the crushing action immediate."
+        }
+      ]
+    },
+    {
+      "id": "batch54-niezniszczalnosc",
+      "name": "Niezniszczalność",
+      "tier": "Batch 54 · Night Ghoul trait",
+      "context": "A Night Ghoul ignores critical hits and rises again unless its brain is destroyed. The actor item uses the generic upgrade placeholder.",
+      "request": "One hunched mutant rising while a large broken blade bends against its skull.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not convey the ghoul's specific durability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · ghoul resisting head strike",
+          "src": "candidates/batch-54/niezniszczalnosc.png",
+          "note": "The blade fails against the skull while the ghoul remains upright."
+        }
+      ]
+    },
+    {
+      "id": "batch54-oblazenie",
+      "name": "Obłażenie",
+      "tier": "Batch 54 · Rat Swarm trait",
+      "context": "The swarm moves through enemies, ends its turn in their spaces and ignores opportunity attacks. The actor item uses the generic upgrade placeholder.",
+      "request": "A pair of human boots surrounded and climbed over by exactly six large rat silhouettes.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not show rats overrunning a creature's space."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · rats over boots",
+          "src": "candidates/batch-54/oblazenie.png",
+          "note": "Six large rats visibly crowd and climb over the wearer's boots."
+        }
+      ]
+    },
+    {
+      "id": "batch54-ofiara",
+      "name": "Ofiara",
+      "tier": "Batch 54 · Gangus Kapo trait",
+      "context": "The Kapo swaps places with a nearby ally so that ally takes an incoming attack. The item uses the generic upgrade placeholder or portrait.",
+      "request": "One frightened fighter pulling a second human silhouette directly into the path of one incoming projectile.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery does not communicate using an ally as a shield."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · ally used as shield",
+          "src": "candidates/batch-54/ofiara.png",
+          "note": "One figure physically pulls another into the projectile's path."
+        }
+      ]
+    },
+    {
+      "id": "batch54-przejechanie",
+      "name": "Przejechanie",
+      "tier": "Batch 54 · Juggernaut legendary action",
+      "context": "Juggernaut moves up to eighteen metres and runs down every creature along its route. The item uses the generic upgrade placeholder.",
+      "request": "One heavy tracked machine driving through exactly two human silhouettes with two thick speed bars.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not show a sustained drive-through attack."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · driving through a line",
+          "src": "candidates/batch-54/przejechanie.png",
+          "note": "The tracked machine knocks two figures aside along one route."
+        }
+      ]
+    },
+    {
+      "id": "batch54-przewidywanie",
+      "name": "Przewidywanie",
+      "tier": "Batch 54 · Generation III Techmutant trait",
+      "context": "The Techmutant adds Intelligence to hit difficulty by anticipating attacks. The actor item uses the generic upgrade placeholder.",
+      "request": "One psychic head profile with a large eye reading exactly two broad future trajectory arcs.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not convey anticipation of trajectories."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · foreseen trajectories",
+          "src": "candidates/batch-54/przewidywanie.png",
+          "note": "The enlarged eye watches two incoming paths before they arrive."
+        }
+      ]
+    },
+    {
+      "id": "batch54-psychiczny-krzyk",
+      "name": "Psychiczny krzyk",
+      "tier": "Batch 54 · Bit-Boy Guide action",
+      "context": "The Guide screams inside a victim's mind, dealing psychic damage and briefly incapacitating it. The item uses the generic upgrade placeholder or portrait.",
+      "request": "One open-mouthed mutant head emitting exactly three thick angular psychic waves toward one recoiling head.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery does not identify the psychic scream."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · psychic scream waves",
+          "src": "candidates/batch-54/psychiczny_krzyk.png",
+          "note": "Three angular waves connect the screaming mutant to the recoiling victim."
+        }
+      ]
+    },
+    {
+      "id": "batch54-szum-mentalny",
+      "name": "Szum mentalny",
+      "tier": "Batch 54 · Generation IV Mesmerist action",
+      "context": "The Mesmerist fills nearby enemies' minds with interference, hindering perception and ranged attacks. The item uses the generic upgrade placeholder.",
+      "request": "One human head enclosed by exactly four heavy broken zigzag interference bands.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not show mental interference."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · mental interference",
+          "src": "candidates/batch-54/szum_mentalny.png",
+          "note": "Four bold zigzag bands overwhelm the centered head."
+        }
+      ]
+    },
+    {
+      "id": "batch54-sciana-zaru",
+      "name": "Ściana żaru",
+      "tier": "Batch 54 · Generation IV Mesmerist action",
+      "context": "The Mesmerist creates an invisible wall of extreme heat, visible only through wavering air. The item uses the generic upgrade placeholder.",
+      "request": "One standing human recoiling from a tall barrier shown only by exactly three broad wavering heat columns.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not show the invisible heat barrier."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · invisible heat wall",
+          "src": "candidates/batch-54/sciana_zaru.png",
+          "note": "The recoiling figure and three vertical heat columns show a dangerous invisible barrier."
+        }
+      ]
+    }
+  ]
+}

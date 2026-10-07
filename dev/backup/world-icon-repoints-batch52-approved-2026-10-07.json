@@ -1,0 +1,554 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [
+    {
+      "_id": "rtxsPBc2H7zjQ7wV",
+      "name": "Kusza bloczkowa",
+      "before": "modules/neuroshima-2026-overrides/icons/weapons/crossbow.svg",
+      "img": "modules/neuroshima-2026-overrides/icons/weapons/kusza_bloczkowa.svg"
+    },
+    {
+      "_id": "NgMYPkOw6Sclqi6J",
+      "name": "Kusza pistoletowa",
+      "before": "modules/neuroshima-2026-overrides/icons/weapons/crossbow.svg",
+      "img": "modules/neuroshima-2026-overrides/icons/weapons/kusza_pistoletowa.svg"
+    }
+  ],
+  "actors": [
+    {
+      "uuid": "Actor.0gWeShZIv4KOO88F",
+      "name": "ALAHAMA",
+      "items": [
+        {
+          "_id": "W6vq8rDbN8UbKFkl",
+          "name": "Ryjossawka",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ryjossawka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.CmseQba9Q7gjPWom",
+      "name": "GENERACJA I. NOCNY GHUL",
+      "items": [
+        {
+          "_id": "osDV3CZMyft4BLlD",
+          "name": "Poświata",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/poswiata.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.2m5x938twoTPqNcl",
+      "name": "GENERACJA III. SZPIEG",
+      "items": [
+        {
+          "_id": "cDbbAxTmeONdQzlZ",
+          "name": "Stalowe pięści",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/stalowe_piesci.svg"
+        },
+        {
+          "_id": "dvMolPRJbChdPxu4",
+          "name": "Wiele twarzy",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wiele_twarzy.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.tjWfjg1JgeHRa9WC",
+      "name": "JUGGERNAUT",
+      "items": [
+        {
+          "_id": "hrXcZQxev4GChGxv",
+          "name": "Miotacz ognia (4/walkę)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/miotacz_ognia.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.Z6sIdSr28syaURmI",
+      "name": "KIDNAPER",
+      "items": [
+        {
+          "_id": "xKsVdWMwtxFxpYLQ",
+          "name": "Miotacz strzałek",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/miotacz_strzalek.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.F7GtxAsyDXG6kPla",
+      "name": "KORZEC",
+      "items": [
+        {
+          "_id": "QzJh8eiDFAJILCOw",
+          "name": "Konar",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/konar.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.lIsHLDilMw0uXjho",
+      "name": "KURCZAK",
+      "items": [
+        {
+          "_id": "OIbL6iokaAeAB2as",
+          "name": "Wspinaczka po metalu",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wspinaczka-po-metalu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NzI5NGUxMzFhNzg1",
+      "name": "Kluczyk",
+      "items": [
+        {
+          "_id": "NDU0YWE5Njc1OTky",
+          "name": "Kusza bloczkowa",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/crossbow.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/kusza_bloczkowa.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "M2NlOWI2MTk1OWM3",
+          "name": "Wspinaczka po metalu",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wspinaczka-po-metalu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.4pOUKx6U3HHKAw2b",
+      "name": "MEGATOR",
+      "items": [
+        {
+          "_id": "cX4vI0e0i8C3RyHX",
+          "name": "Połknięcie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/polkniecie.svg"
+        },
+        {
+          "_id": "igGapWLblZhE1Qx7",
+          "name": "Atak ogonem",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_ogonem.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.C2RWal7yuSyM8zR3",
+      "name": "MROKOSZCZUR",
+      "items": [
+        {
+          "_id": "ySAGrAwefVycgZk9",
+          "name": "Zakażenie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zakazenie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.td44oP8eYRTO8SeW",
+      "name": "NEONIEDŹWIEDŹ",
+      "items": [
+        {
+          "_id": "SaU4Yb4WBAkYdO3u",
+          "name": "Rozszarpanie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/rozszarpanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.u9LJRDYAQV6jIApL",
+      "name": "TARAN",
+      "items": [
+        {
+          "_id": "UDIm03SH7gPkwDaE",
+          "name": "Natarcie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/natarcie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.hkab5SivPPEoyPHv",
+      "name": "TECHMORWA (MALUTKA)",
+      "items": [
+        {
+          "_id": "BniphDkpJhdr5KHp",
+          "name": "Macki",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/macki.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.PSusLvUnP6AH5UUO",
+      "name": "TECHMORWA (ŚREDNIA)",
+      "items": [
+        {
+          "_id": "9AFjnnSYYgFavhm0",
+          "name": "Macki",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/macki.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NjllMTMyMjc2NzY1",
+      "name": "Techmorwa",
+      "items": [
+        {
+          "_id": "YjJhMjRhYzJkZTFl",
+          "name": "Macki",
+          "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/macki.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.4IYaZ7YQ1uy90FOz",
+      "name": "Zbrojownia",
+      "items": [
+        {
+          "_id": "KEIB3f8LmaVS9tpZ",
+          "name": "Kusza bloczkowa",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/crossbow.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/kusza_bloczkowa.svg"
+        },
+        {
+          "_id": "nKS0XCaCBGrl72cE",
+          "name": "Kusza pistoletowa",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/crossbow.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/kusza_pistoletowa.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.IEH5knp5uVwhBr9i",
+      "name": "ŁOWCA",
+      "items": [
+        {
+          "_id": "nCn62VCQxl3ncVVW",
+          "name": "Splunięcie kwasem",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/spluniecie_kwasem.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.NTcyMTA3NWZkNDU4.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "M2NlOWI2MTk1OWM3",
+          "name": "Wspinaczka po metalu",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wspinaczka-po-metalu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.MmIwYjA2MTE0NzIw.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "M2NlOWI2MTk1OWM3",
+          "name": "Wspinaczka po metalu",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wspinaczka-po-metalu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.ODcyMDE5YjhmNWQw.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "M2NlOWI2MTk1OWM3",
+          "name": "Wspinaczka po metalu",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wspinaczka-po-metalu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.ZjU4YTg2YjRlZWQ4.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "M2NlOWI2MTk1OWM3",
+          "name": "Wspinaczka po metalu",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wspinaczka-po-metalu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.YTMwYTg1OGZkM2Iy.Actor.NjllMTMyMjc2NzY1",
+      "name": "Techmorwa",
+      "items": [
+        {
+          "_id": "YjJhMjRhYzJkZTFl",
+          "name": "Macki",
+          "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/macki.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.NmNjY2NlMzZlYjE5.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "M2NlOWI2MTk1OWM3",
+          "name": "Wspinaczka po metalu",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wspinaczka-po-metalu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.MDJiYTRkYzA2MDVm.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "M2NlOWI2MTk1OWM3",
+          "name": "Wspinaczka po metalu",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wspinaczka-po-metalu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.YWI4NDViNDEyZjM4.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "M2NlOWI2MTk1OWM3",
+          "name": "Wspinaczka po metalu",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wspinaczka-po-metalu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.k3sMfvotlhDkS31c.Actor.NjllMTMyMjc2NzY1",
+      "name": "Techmorwa",
+      "items": [
+        {
+          "_id": "YjJhMjRhYzJkZTFl",
+          "name": "Macki",
+          "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/macki.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.nFnJRikijodX7wza.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "M2NlOWI2MTk1OWM3",
+          "name": "Wspinaczka po metalu",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wspinaczka-po-metalu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.A86fzMPR9RL1MqZf.Actor.tjWfjg1JgeHRa9WC",
+      "name": "JUGGERNAUT",
+      "items": [
+        {
+          "_id": "hrXcZQxev4GChGxv",
+          "name": "Miotacz ognia (4/walkę)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/miotacz_ognia.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.RUbXcAdccXL9yZFS.Actor.Z6sIdSr28syaURmI",
+      "name": "KIDNAPER",
+      "items": [
+        {
+          "_id": "xKsVdWMwtxFxpYLQ",
+          "name": "Miotacz strzałek",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/miotacz_strzalek.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.bOomiyYTAB0jWv8x.Actor.IEH5knp5uVwhBr9i",
+      "name": "ŁOWCA",
+      "items": [
+        {
+          "_id": "nCn62VCQxl3ncVVW",
+          "name": "Splunięcie kwasem",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/spluniecie_kwasem.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.25LL63Y8KGGEzqFa.Actor.lIsHLDilMw0uXjho",
+      "name": "KURCZAK",
+      "items": [
+        {
+          "_id": "OIbL6iokaAeAB2as",
+          "name": "Wspinaczka po metalu",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wspinaczka-po-metalu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.D6luA0XyzWcLHhmC.Actor.CmseQba9Q7gjPWom",
+      "name": "GENERACJA I. NOCNY GHUL",
+      "items": [
+        {
+          "_id": "osDV3CZMyft4BLlD",
+          "name": "Poświata",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/poswiata.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.Lhv4pnxEr83HLtKA.Actor.2m5x938twoTPqNcl",
+      "name": "GENERACJA III. SZPIEG",
+      "items": [
+        {
+          "_id": "cDbbAxTmeONdQzlZ",
+          "name": "Stalowe pięści",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/stalowe_piesci.svg"
+        },
+        {
+          "_id": "dvMolPRJbChdPxu4",
+          "name": "Wiele twarzy",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wiele_twarzy.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.jKq0OukOkDe45h5i.Actor.4pOUKx6U3HHKAw2b",
+      "name": "MEGATOR",
+      "items": [
+        {
+          "_id": "cX4vI0e0i8C3RyHX",
+          "name": "Połknięcie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/polkniecie.svg"
+        },
+        {
+          "_id": "igGapWLblZhE1Qx7",
+          "name": "Atak ogonem",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/atak_ogonem.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.nUct6kMaNGOXebX7.Actor.F7GtxAsyDXG6kPla",
+      "name": "ALAHAMA",
+      "items": [
+        {
+          "_id": "QzJh8eiDFAJILCOw",
+          "name": "Konar",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/konar.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.muQDkZaICk0W8GTL.Actor.0gWeShZIv4KOO88F",
+      "name": "KORZEC",
+      "items": [
+        {
+          "_id": "W6vq8rDbN8UbKFkl",
+          "name": "Ryjossawka",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/ryjossawka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.umLQ2x0fOHrvS5ol.Actor.u9LJRDYAQV6jIApL",
+      "name": "TARAN",
+      "items": [
+        {
+          "_id": "UDIm03SH7gPkwDaE",
+          "name": "Natarcie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/natarcie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.NrIZkY7SEkclyOJI.Actor.PSusLvUnP6AH5UUO",
+      "name": "TECHMORWA (ŚREDNIA)",
+      "items": [
+        {
+          "_id": "9AFjnnSYYgFavhm0",
+          "name": "Macki",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/macki.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.IDj8DCpX4zvtqqtP.Actor.hkab5SivPPEoyPHv",
+      "name": "TECHMORWA (MALUTKA)",
+      "items": [
+        {
+          "_id": "BniphDkpJhdr5KHp",
+          "name": "Macki",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/macki.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.3gbaIvSg6AdDNxi4.Actor.td44oP8eYRTO8SeW",
+      "name": "NEONIEDŹWIEDŹ",
+      "items": [
+        {
+          "_id": "SaU4Yb4WBAkYdO3u",
+          "name": "Rozszarpanie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/rozszarpanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.s9lHqhJp4uShN0H0.Actor.C2RWal7yuSyM8zR3",
+      "name": "MROKOSZCZUR",
+      "items": [
+        {
+          "_id": "ySAGrAwefVycgZk9",
+          "name": "Zakażenie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zakazenie.svg"
+        }
+      ]
+    }
+  ]
+}

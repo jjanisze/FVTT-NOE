@@ -1,0 +1,859 @@
+{
+  "version": 1,
+  "items": {
+    "batch41-schemat-notatka": {
+      "itemId": "batch41-schemat-notatka",
+      "decision": "approve",
+      "candidateId": "flat-circuit-note",
+      "notes": "",
+      "updatedAt": "2026-10-03T12:32:31.436Z"
+    },
+    "batch41-schemat-instrukcja": {
+      "itemId": "batch41-schemat-instrukcja",
+      "decision": "approve",
+      "candidateId": "flat-exploded-manual",
+      "notes": "",
+      "updatedAt": "2026-10-03T12:32:36.354Z"
+    },
+    "batch42-maczuga": {
+      "itemId": "batch42-maczuga",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "Contours are way too fine and detailed, they disappear when the icon is small.",
+      "updatedAt": "2026-10-03T13:51:11.367Z"
+    },
+    "batch42-palka-policyjna": {
+      "itemId": "batch42-palka-policyjna",
+      "decision": "approve",
+      "candidateId": "generated-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T13:32:26.630Z"
+    },
+    "batch42-kamienny-noz": {
+      "itemId": "batch42-kamienny-noz",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "Contours are way too fine and detailed, they disappear when the icon is small.",
+      "updatedAt": "2026-10-03T13:51:16.786Z"
+    },
+    "batch42-sztylet": {
+      "itemId": "batch42-sztylet",
+      "decision": "approve",
+      "candidateId": "generated-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T13:33:17.867Z"
+    },
+    "batch42-mlotek": {
+      "itemId": "batch42-mlotek",
+      "decision": "approve",
+      "candidateId": "generated-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T13:33:31.621Z"
+    },
+    "batch42-agregat": {
+      "itemId": "batch42-agregat",
+      "decision": "approve",
+      "candidateId": "generated-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T13:33:44.586Z"
+    },
+    "batch42-akumulator": {
+      "itemId": "batch42-akumulator",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "Less detail and contours, more contrast for the terminals which are what differentiate a box from an accumulator.",
+      "updatedAt": "2026-10-03T13:51:21.956Z"
+    },
+    "batch42-alternator": {
+      "itemId": "batch42-alternator",
+      "decision": "approve",
+      "candidateId": "generated-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T13:34:33.547Z"
+    },
+    "batch42-defibrylator": {
+      "itemId": "batch42-defibrylator",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "Less overall detail, more emphasis on \"Box with paddles and wires\"",
+      "updatedAt": "2026-10-03T13:51:26.906Z"
+    },
+    "batch43-detektor-ruchu": {
+      "itemId": "batch43-detektor-ruchu",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T14:09:47.430Z"
+    },
+    "batch43-komputer-osobisty": {
+      "itemId": "batch43-komputer-osobisty",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T14:10:06.839Z"
+    },
+    "batch43-komputer-gamingowy": {
+      "itemId": "batch43-komputer-gamingowy",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T14:10:10.760Z"
+    },
+    "batch43-laptop": {
+      "itemId": "batch43-laptop",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-03T20:10:26.046Z"
+    },
+    "batch43-kontroler": {
+      "itemId": "batch43-kontroler",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T14:16:44.000Z"
+    },
+    "batch43-miernik-skazenia": {
+      "itemId": "batch43-miernik-skazenia",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T14:16:49.261Z"
+    },
+    "batch43-wykrywacz-metalu": {
+      "itemId": "batch43-wykrywacz-metalu",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T14:21:32.810Z"
+    },
+    "batch43-wytrychy-elektroniczne": {
+      "itemId": "batch43-wytrychy-elektroniczne",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "Regenerate to show it's more of an electronic device. Maybe a knob, button, screen with digits.",
+      "updatedAt": "2026-10-03T19:48:28.853Z"
+    },
+    "batch44-kompas": {
+      "itemId": "batch44-kompas",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "That is clearly not how a compass looks like.",
+      "updatedAt": "2026-10-03T19:48:37.491Z"
+    },
+    "batch44-palnik": {
+      "itemId": "batch44-palnik",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T14:22:42.705Z"
+    },
+    "batch44-srodek-usypiajacy": {
+      "itemId": "batch44-srodek-usypiajacy",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T14:22:51.956Z"
+    },
+    "batch44-srodki-dezynfekujace": {
+      "itemId": "batch44-srodki-dezynfekujace",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T14:22:57.731Z"
+    },
+    "batch44-trucizna": {
+      "itemId": "batch44-trucizna",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "Change the skull into a more contemporary skull and bones one would find on a warning label rather than the cartoony skull",
+      "updatedAt": "2026-10-03T19:48:40.630Z"
+    },
+    "batch44-paralotnia": {
+      "itemId": "batch44-paralotnia",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T14:23:50.489Z"
+    },
+    "batch44-adapter-wifi": {
+      "itemId": "batch44-adapter-wifi",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T14:23:59.673Z"
+    },
+    "batch44-monitorek": {
+      "itemId": "batch44-monitorek",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T14:24:04.620Z"
+    },
+    "batch44-router": {
+      "itemId": "batch44-router",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T14:24:08.782Z"
+    },
+    "batch43-odtwarzacz-cd": {
+      "itemId": "batch43-odtwarzacz-cd",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "Make the line separating the CD flap from the body thicker - to signal this is openable. Or make it open, showing a CD inside.",
+      "updatedAt": "2026-10-03T20:02:53.584Z"
+    },
+    "batch45-turbina": {
+      "itemId": "batch45-turbina",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T19:48:47.080Z"
+    },
+    "batch45-zegarek": {
+      "itemId": "batch45-zegarek",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T19:48:51.348Z"
+    },
+    "batch45-berdysz": {
+      "itemId": "batch45-berdysz",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T19:48:56.759Z"
+    },
+    "batch45-scyzoryk": {
+      "itemId": "batch45-scyzoryk",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T19:49:03.786Z"
+    },
+    "batch45-skalpel": {
+      "itemId": "batch45-skalpel",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T19:49:08.401Z"
+    },
+    "batch46-buzdygan-smieciowy": {
+      "itemId": "batch46-buzdygan-smieciowy",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:07:01.716Z"
+    },
+    "batch46-walther-ppk": {
+      "itemId": "batch46-walther-ppk",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T20:03:39.186Z"
+    },
+    "batch46-ruger-lcp-ii": {
+      "itemId": "batch46-ruger-lcp-ii",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T20:03:43.807Z"
+    },
+    "batch46-tulipan": {
+      "itemId": "batch46-tulipan",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:07:17.946Z"
+    },
+    "batch46-piesc-hydrauliczna": {
+      "itemId": "batch46-piesc-hydrauliczna",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T20:04:44.447Z"
+    },
+    "batch46-klucz-francuski": {
+      "itemId": "batch46-klucz-francuski",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "It would be good, if it weren't cut off at the top. ",
+      "updatedAt": "2026-10-03T20:30:45.760Z"
+    },
+    "batch46-lopatka-kuchenna": {
+      "itemId": "batch46-lopatka-kuchenna",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T20:05:10.654Z"
+    },
+    "batch47-atak-bez-broni": {
+      "itemId": "batch47-atak-bez-broni",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T20:31:11.817Z"
+    },
+    "batch47-pazury": {
+      "itemId": "batch47-pazury",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T20:31:19.573Z"
+    },
+    "batch47-ugryzienie": {
+      "itemId": "batch47-ugryzienie",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:07:28.683Z"
+    },
+    "batch47-zeby": {
+      "itemId": "batch47-zeby",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:07:35.900Z"
+    },
+    "batch47-zadlo": {
+      "itemId": "batch47-zadlo",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T20:49:43.477Z"
+    },
+    "batch47-macka": {
+      "itemId": "batch47-macka",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:07:45.372Z"
+    },
+    "batch48-list-gordon-samantha": {
+      "itemId": "batch48-list-gordon-samantha",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:07:54.433Z"
+    },
+    "batch48-palka": {
+      "itemId": "batch48-palka",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:22:16.476Z"
+    },
+    "batch48-atak-ogonem": {
+      "itemId": "batch48-atak-ogonem",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:22:29.740Z"
+    },
+    "batch48-atak-glowa": {
+      "itemId": "batch48-atak-glowa",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:22:36.997Z"
+    },
+    "batch49-atak-taca": {
+      "itemId": "batch49-atak-taca",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "Make the contents actively in the proccess of being thrown, spilled. Also there's a fragment of something on the bottom.",
+      "updatedAt": "2026-10-03T21:34:18.725Z"
+    },
+    "batch49-atak-wielokrotny-ostrzem": {
+      "itemId": "batch49-atak-wielokrotny-ostrzem",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:23:38.348Z"
+    },
+    "batch49-atak-wrecz-pajaczek": {
+      "itemId": "batch49-atak-wrecz-pajaczek",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:23:49.604Z"
+    },
+    "batch49-atak-odnogiem-spawacz": {
+      "itemId": "batch49-atak-odnogiem-spawacz",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:23:54.405Z"
+    },
+    "batch49-odnoze-gigantyczny-pajak": {
+      "itemId": "batch49-odnoze-gigantyczny-pajak",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:23:59.977Z"
+    },
+    "batch49-pokwitowanie-luxor": {
+      "itemId": "batch49-pokwitowanie-luxor",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:24:08.853Z"
+    },
+    "batch50-kiel-jadowy": {
+      "itemId": "batch50-kiel-jadowy",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:34:23.259Z"
+    },
+    "batch50-paliwo": {
+      "itemId": "batch50-paliwo",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:34:32.968Z"
+    },
+    "batch50-uzupelnienie-medyka": {
+      "itemId": "batch50-uzupelnienie-medyka",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:34:43.690Z"
+    },
+    "batch50-metalowa-walizka": {
+      "itemId": "batch50-metalowa-walizka",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:34:52.340Z"
+    },
+    "batch50-komponenty-amunicji": {
+      "itemId": "batch50-komponenty-amunicji",
+      "decision": "approve",
+      "candidateId": "clean-silhouette",
+      "notes": "The empty casings look good, but the bullets themselves were mis-generated as short cartridges, where the lead projectiles themselves were intended. ",
+      "updatedAt": "2026-10-07T18:23:42.144Z"
+    },
+    "batch50-czesci-ciezkiego-karabinu": {
+      "itemId": "batch50-czesci-ciezkiego-karabinu",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-03T21:36:10.281Z"
+    },
+    "batch50-pogromca": {
+      "itemId": "batch50-pogromca",
+      "decision": "approve",
+      "candidateId": "current-reference-revision",
+      "notes": "Move the chemical dispenser to the top, modify the perspective so it's diagonal, add signs of custom modification",
+      "updatedAt": "2026-10-07T20:19:00.369Z"
+    },
+    "batch50-odnoze-kon-skazony": {
+      "itemId": "batch50-odnoze-kon-skazony",
+      "decision": "approve",
+      "candidateId": "clean-silhouette",
+      "notes": "There's a fragment of a gun barrel sticking out",
+      "updatedAt": "2026-10-07T18:25:27.470Z"
+    },
+    "batch51-cola-light": {
+      "itemId": "batch51-cola-light",
+      "decision": "approve",
+      "candidateId": "clean-silhouette",
+      "notes": "",
+      "updatedAt": "2026-10-07T18:25:45.818Z"
+    },
+    "batch51-noz-do-rzucania": {
+      "itemId": "batch51-noz-do-rzucania",
+      "decision": "approve",
+      "candidateId": "clean-silhouette",
+      "notes": "",
+      "updatedAt": "2026-10-07T18:25:50.935Z"
+    },
+    "batch51-luk-bloczkowy": {
+      "itemId": "batch51-luk-bloczkowy",
+      "decision": "approve",
+      "candidateId": "clean-silhouette",
+      "notes": "",
+      "updatedAt": "2026-10-07T18:25:56.909Z"
+    },
+    "batch51-kusza-pistoletowa": {
+      "itemId": "batch51-kusza-pistoletowa",
+      "decision": "approve",
+      "candidateId": "clean-silhouette",
+      "notes": "",
+      "updatedAt": "2026-10-07T20:19:14.668Z"
+    },
+    "batch51-kusza-bloczkowa": {
+      "itemId": "batch51-kusza-bloczkowa",
+      "decision": "approve",
+      "candidateId": "current-reference-revision",
+      "notes": "Modify the Current icon - I want both to look similar. The bloczkowa should look similar to the ordinary, but with extra elements (indicating it is an upgrade)",
+      "updatedAt": "2026-10-07T20:19:18.041Z"
+    },
+    "batch51-wyciszony-pistolet-10mm": {
+      "itemId": "batch51-wyciszony-pistolet-10mm",
+      "decision": "approve",
+      "candidateId": "clean-silhouette",
+      "notes": "",
+      "updatedAt": "2026-10-07T18:27:01.800Z"
+    },
+    "batch51-atak-ogonem": {
+      "itemId": "batch51-atak-ogonem",
+      "decision": "approve",
+      "candidateId": "batch52-revision",
+      "notes": "Almost ideal - make the taper more natural. For some reason, it starts narrowing at the very end - it shouldn't. It's width should follow the curve and be progressively thicker until the end.",
+      "updatedAt": "2026-10-07T20:19:24.596Z"
+    },
+    "batch51-atak-psychiczny": {
+      "itemId": "batch51-atak-psychiczny",
+      "decision": "approve",
+      "candidateId": "batch53-revision",
+      "notes": "Revise this image to indicate that rays (non-physical) are attacking the mind.",
+      "updatedAt": "2026-10-07T21:19:56.014Z"
+    },
+    "batch51-autodestrukcja": {
+      "itemId": "batch51-autodestrukcja",
+      "decision": "approve",
+      "candidateId": "batch53-revision",
+      "notes": "We need a different concept. Create a simplified Gadget (Trinity) mid-explosion. Similar to Atlas B - ruptuting machine but simplified and icon-friendly and without the fine detail and grunge.",
+      "updatedAt": "2026-10-07T21:20:05.081Z"
+    },
+    "batch51-eksplodujace-czyraki": {
+      "itemId": "batch51-eksplodujace-czyraki",
+      "decision": "approve",
+      "candidateId": "clean-silhouette",
+      "notes": "",
+      "updatedAt": "2026-10-07T18:30:01.835Z"
+    },
+    "batch51-jadowite-zeby": {
+      "itemId": "batch51-jadowite-zeby",
+      "decision": "approve",
+      "candidateId": "clean-silhouette",
+      "notes": "",
+      "updatedAt": "2026-10-07T18:30:06.624Z"
+    },
+    "batch51-kolec-jadowy": {
+      "itemId": "batch51-kolec-jadowy",
+      "decision": "revise",
+      "candidateId": "batch53-revision",
+      "notes": "Almost perfect. Add drop of poison from the tip",
+      "updatedAt": "2026-10-07T21:20:27.823Z"
+    },
+    "batch51-konar": {
+      "itemId": "batch51-konar",
+      "decision": "approve",
+      "candidateId": "batch52-revision",
+      "notes": "Make this into something between a wooden club and a branch and a non-human arm. ",
+      "updatedAt": "2026-10-07T20:28:28.589Z"
+    },
+    "batch51-korzen": {
+      "itemId": "batch51-korzen",
+      "decision": "approve",
+      "candidateId": "clean-silhouette",
+      "notes": "",
+      "updatedAt": "2026-10-07T18:31:49.241Z"
+    },
+    "batch51-lapa": {
+      "itemId": "batch51-lapa",
+      "decision": "approve",
+      "candidateId": "clean-silhouette",
+      "notes": "",
+      "updatedAt": "2026-10-07T18:31:52.496Z"
+    },
+    "batch51-macki": {
+      "itemId": "batch51-macki",
+      "decision": "approve",
+      "candidateId": "batch52-revision",
+      "notes": "Add suckers",
+      "updatedAt": "2026-10-07T20:28:32.441Z"
+    },
+    "batch51-pily": {
+      "itemId": "batch51-pily",
+      "decision": "approve",
+      "candidateId": "clean-silhouette",
+      "notes": "",
+      "updatedAt": "2026-10-07T18:32:08.944Z"
+    },
+    "batch51-ryjossawka": {
+      "itemId": "batch51-ryjossawka",
+      "decision": "approve",
+      "candidateId": "batch52-revision",
+      "notes": "Make the tube more organic and snout-like",
+      "updatedAt": "2026-10-07T20:28:36.147Z"
+    },
+    "batch51-spluniecie-kwasem": {
+      "itemId": "batch51-spluniecie-kwasem",
+      "decision": "approve",
+      "candidateId": "batch52-revision",
+      "notes": "Remove the plate. Modify the cloud so it somehow is more acid-like",
+      "updatedAt": "2026-10-07T20:28:40.863Z"
+    },
+    "batch51-stalowe-maczugi": {
+      "itemId": "batch51-stalowe-maczugi",
+      "decision": "approve",
+      "candidateId": "batch53-revision",
+      "notes": "Almost perfect - remove that little bit of overpaint on the right side (fragment of another icon)",
+      "updatedAt": "2026-10-07T21:21:12.223Z"
+    },
+    "batch51-stalowe-piesci": {
+      "itemId": "batch51-stalowe-piesci",
+      "decision": "approve",
+      "candidateId": "batch52-revision",
+      "notes": "Make the fists look more like industrial machinery, NOT human hands. Crushing instruments. Slaughterhouse implements.",
+      "updatedAt": "2026-10-07T20:29:11.627Z"
+    },
+    "batch51-szczeki": {
+      "itemId": "batch51-szczeki",
+      "decision": "approve",
+      "candidateId": "clean-silhouette",
+      "notes": "",
+      "updatedAt": "2026-10-07T18:38:27.759Z"
+    },
+    "batch51-szczurze-nozki": {
+      "itemId": "batch51-szczurze-nozki",
+      "decision": "approve",
+      "candidateId": "clean-silhouette",
+      "notes": "",
+      "updatedAt": "2026-10-07T18:38:35.789Z"
+    },
+    "batch51-zioniecie": {
+      "itemId": "batch51-zioniecie",
+      "decision": "approve",
+      "candidateId": "clean-silhouette",
+      "notes": "",
+      "updatedAt": "2026-10-07T18:38:40.840Z"
+    },
+    "batch52-staza": {
+      "itemId": "batch52-staza",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-07T20:29:23.161Z"
+    },
+    "batch52-miazdzenie": {
+      "itemId": "batch52-miazdzenie",
+      "decision": "approve",
+      "candidateId": "batch53-revision",
+      "notes": "A large mutant tail crushing a human figure, icon",
+      "updatedAt": "2026-10-07T21:22:00.015Z"
+    },
+    "batch52-polkniecie": {
+      "itemId": "batch52-polkniecie",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-07T20:30:10.575Z"
+    },
+    "batch52-rozszarpanie": {
+      "itemId": "batch52-rozszarpanie",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-07T20:30:18.570Z"
+    },
+    "batch52-taranowanie": {
+      "itemId": "batch52-taranowanie",
+      "decision": "approve",
+      "candidateId": "batch53-revision",
+      "notes": "Add lines to indicate speed",
+      "updatedAt": "2026-10-07T21:22:05.138Z"
+    },
+    "batch52-pochwycenie": {
+      "itemId": "batch52-pochwycenie",
+      "decision": "approve",
+      "candidateId": "batch53-revision",
+      "notes": "Modify the claw into a generic hand",
+      "updatedAt": "2026-10-07T21:22:08.872Z"
+    },
+    "batch52-zakazenie": {
+      "itemId": "batch52-zakazenie",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-07T20:31:32.536Z"
+    },
+    "batch52-poswiata": {
+      "itemId": "batch52-poswiata",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-07T20:31:38.300Z"
+    },
+    "batch52-czuly-wech": {
+      "itemId": "batch52-czuly-wech",
+      "decision": "approve",
+      "candidateId": "batch53-revision",
+      "notes": "Regenerate the image - it does not currently look like an animal snout",
+      "updatedAt": "2026-10-07T21:22:14.665Z"
+    },
+    "batch52-wiele-twarzy": {
+      "itemId": "batch52-wiele-twarzy",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-07T20:32:19.333Z"
+    },
+    "batch52-wspinaczka-po-metalu": {
+      "itemId": "batch52-wspinaczka-po-metalu",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-07T20:32:24.249Z"
+    },
+    "batch52-natarcie": {
+      "itemId": "batch52-natarcie",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-07T20:32:28.068Z"
+    },
+    "batch52-miotacz-ognia": {
+      "itemId": "batch52-miotacz-ognia",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-07T20:32:31.463Z"
+    },
+    "batch52-miotacz-strzalek": {
+      "itemId": "batch52-miotacz-strzalek",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-07T20:32:36.027Z"
+    },
+    "batch53-regeneracja": {
+      "itemId": "batch53-regeneracja",
+      "decision": "revise",
+      "candidateId": "batch52-held",
+      "notes": "No circle, no stiches. Instead keep the open wound, with filaments accross it, pulling it closer. ",
+      "updatedAt": "2026-10-07T21:29:22.816Z"
+    },
+    "batch53-pierwsze-spotkanie": {
+      "itemId": "batch53-pierwsze-spotkanie",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-07T21:29:28.750Z"
+    },
+    "batch53-atak-wielokrotny": {
+      "itemId": "batch53-atak-wielokrotny",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-07T21:29:34.907Z"
+    },
+    "batch53-algorytm-czuwania": {
+      "itemId": "batch53-algorytm-czuwania",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-07T21:29:44.272Z"
+    },
+    "batch53-wspolpraca": {
+      "itemId": "batch53-wspolpraca",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-07T21:45:45.689Z"
+    },
+    "batch53-kamuflaz": {
+      "itemId": "batch53-kamuflaz",
+      "decision": "pending",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-07T21:45:58.464Z"
+    },
+    "batch53-swiatlowstret": {
+      "itemId": "batch53-swiatlowstret",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-07T21:54:02.729Z"
+    },
+    "batch53-wstrzymanie-oddechu": {
+      "itemId": "batch53-wstrzymanie-oddechu",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-07T21:55:55.721Z"
+    },
+    "batch53-nadludzki-refleks": {
+      "itemId": "batch53-nadludzki-refleks",
+      "decision": "revise",
+      "candidateId": "atlas-b",
+      "notes": "Show the character ducking, not the bullet reflecting",
+      "updatedAt": "2026-10-07T21:56:21.599Z"
+    },
+    "batch53-szarza": {
+      "itemId": "batch53-szarza",
+      "decision": "revise",
+      "candidateId": "atlas-b",
+      "notes": "Modify the figure to have a more readable body",
+      "updatedAt": "2026-10-07T23:21:52.178Z"
+    },
+    "batch53-nie-do-zabicia": {
+      "itemId": "batch53-nie-do-zabicia",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-07T23:21:48.160Z"
+    },
+    "batch53-brak-glowy": {
+      "itemId": "batch53-brak-glowy",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-07T23:22:41.856Z"
+    },
+    "batch53-niewykrywalnosc": {
+      "itemId": "batch53-niewykrywalnosc",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-07T23:22:48.471Z"
+    },
+    "batch53-telepatia": {
+      "itemId": "batch53-telepatia",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-07T23:22:52.177Z"
+    },
+    "batch53-neozmysly": {
+      "itemId": "batch53-neozmysly",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-07T23:22:56.526Z"
+    },
+    "batch53-pajecza-wspinaczka": {
+      "itemId": "batch53-pajecza-wspinaczka",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-07T23:23:06.380Z"
+    },
+    "batch53-tkacz-sieci": {
+      "itemId": "batch53-tkacz-sieci",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-07T23:23:11.048Z"
+    },
+    "batch53-oplatanie": {
+      "itemId": "batch53-oplatanie",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-07T23:23:17.022Z"
+    },
+    "batch53-groza": {
+      "itemId": "batch53-groza",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-07T23:23:29.945Z"
+    }
+  }
+}

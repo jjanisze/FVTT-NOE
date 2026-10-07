@@ -1,0 +1,295 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.Wf53EIDOGbqhl6h0",
+      "name": "BIODROID",
+      "items": [
+        {
+          "_id": "hcuVi1icedwD8rlf",
+          "name": "Autodestrukcja (30%)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.YjYzNjhiMGNiM2Ix",
+      "name": "Copy of Mobsprzęt Karabin",
+      "items": [
+        {
+          "_id": "ODIyZjUwNmZmOTg2",
+          "name": "Autodestrukcja",
+          "before": "worlds/OUTPUT/characters/060_-_Copy_of_Mobsprz_C4_99t_Karabin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.AhsmX4UQfDrAr9dw",
+      "name": "GENERACJA III. TECHMUTAS",
+      "items": [
+        {
+          "_id": "D0gRAbvO2JfQeeT5",
+          "name": "Atak psychiczny",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-psychiczny.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.BfwMMnZyyOp4ErKQ",
+      "name": "GLADIATOR",
+      "items": [
+        {
+          "_id": "VgLN9MZ3YbodvhLY",
+          "name": "Autodestrukcja (80%)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.tjWfjg1JgeHRa9WC",
+      "name": "JUGGERNAUT",
+      "items": [
+        {
+          "_id": "Uj9vclgfzT3pgH5e",
+          "name": "Autodestrukcja (100%)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.Z6sIdSr28syaURmI",
+      "name": "KIDNAPER",
+      "items": [
+        {
+          "_id": "9j2GuW2DApcBk1ao",
+          "name": "Autodestrukcja (70%)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.whSxVclV1Np6ZRHi",
+      "name": "MOBSPRZĘT",
+      "items": [
+        {
+          "_id": "89h57Hg7EhKAiDez",
+          "name": "Autodestrukcja (100%)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MjVjZjU1NWRmZTRm",
+      "name": "Mobsprzęt Karabin",
+      "items": [
+        {
+          "_id": "OTg4ZmRmMjAyODE4",
+          "name": "Autodestrukcja",
+          "before": "worlds/OUTPUT/characters/057_-_Mobsprz_C4_99t_Karabin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.oWLGNP7paGjRsoYJ",
+      "name": "OBROŃCA",
+      "items": [
+        {
+          "_id": "VlXeENBfgTAbQbvG",
+          "name": "Autodestrukcja (80%)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.V17hzI9yQN34tA06",
+      "name": "PULSER",
+      "items": [
+        {
+          "_id": "zlHcbQKslvj7hDgf",
+          "name": "Autodestrukcja (20%)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.IEH5knp5uVwhBr9i",
+      "name": "ŁOWCA",
+      "items": [
+        {
+          "_id": "UNtm7xBl8zgr0oUJ",
+          "name": "Autodestrukcja (50%)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.YzY2NGVjMzg2Y2Jl.Actor.MjVjZjU1NWRmZTRm",
+      "name": "Mobsprzęt Karabin",
+      "items": [
+        {
+          "_id": "OTg4ZmRmMjAyODE4",
+          "name": "Autodestrukcja",
+          "before": "worlds/OUTPUT/characters/057_-_Mobsprz_C4_99t_Karabin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.MmUzYzRkYTEwODJk.Actor.MjVjZjU1NWRmZTRm",
+      "name": "Mobsprzęt Karabin",
+      "items": [
+        {
+          "_id": "OTg4ZmRmMjAyODE4",
+          "name": "Autodestrukcja",
+          "before": "worlds/OUTPUT/characters/057_-_Mobsprz_C4_99t_Karabin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.nfLKq3msTf4BAw1H.Actor.MjVjZjU1NWRmZTRm",
+      "name": "Mobsprzęt Karabin",
+      "items": [
+        {
+          "_id": "OTg4ZmRmMjAyODE4",
+          "name": "Autodestrukcja",
+          "before": "worlds/OUTPUT/characters/057_-_Mobsprz_C4_99t_Karabin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.Ni6oWhaqILFRzHtC.Actor.YjYzNjhiMGNiM2Ix",
+      "name": "Copy of Mobsprzęt Karabin",
+      "items": [
+        {
+          "_id": "ODIyZjUwNmZmOTg2",
+          "name": "Autodestrukcja",
+          "before": "worlds/OUTPUT/characters/060_-_Copy_of_Mobsprz_C4_99t_Karabin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.A86fzMPR9RL1MqZf.Actor.tjWfjg1JgeHRa9WC",
+      "name": "JUGGERNAUT",
+      "items": [
+        {
+          "_id": "Uj9vclgfzT3pgH5e",
+          "name": "Autodestrukcja (100%)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.RUbXcAdccXL9yZFS.Actor.Z6sIdSr28syaURmI",
+      "name": "KIDNAPER",
+      "items": [
+        {
+          "_id": "9j2GuW2DApcBk1ao",
+          "name": "Autodestrukcja (70%)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.FeaPuVgf8Iu9eNwb.Actor.oWLGNP7paGjRsoYJ",
+      "name": "OBROŃCA",
+      "items": [
+        {
+          "_id": "VlXeENBfgTAbQbvG",
+          "name": "Autodestrukcja (80%)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.k1wDCDX3ytDGeVHL.Actor.Wf53EIDOGbqhl6h0",
+      "name": "BIODROID",
+      "items": [
+        {
+          "_id": "hcuVi1icedwD8rlf",
+          "name": "Autodestrukcja (30%)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.U6073cTZtfAsNjMf.Actor.BfwMMnZyyOp4ErKQ",
+      "name": "GLADIATOR",
+      "items": [
+        {
+          "_id": "VgLN9MZ3YbodvhLY",
+          "name": "Autodestrukcja (80%)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.x2vyQqCyWkOPejZq.Actor.whSxVclV1Np6ZRHi",
+      "name": "MOBSPRZĘT",
+      "items": [
+        {
+          "_id": "89h57Hg7EhKAiDez",
+          "name": "Autodestrukcja (100%)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.bOomiyYTAB0jWv8x.Actor.IEH5knp5uVwhBr9i",
+      "name": "ŁOWCA",
+      "items": [
+        {
+          "_id": "UNtm7xBl8zgr0oUJ",
+          "name": "Autodestrukcja (50%)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.JBjLreQNJawo6v6b.Actor.V17hzI9yQN34tA06",
+      "name": "PULSER",
+      "items": [
+        {
+          "_id": "zlHcbQKslvj7hDgf",
+          "name": "Autodestrukcja (20%)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/autodestrukcja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.pOAeS5tN1eg2aNAm.Actor.AhsmX4UQfDrAr9dw",
+      "name": "GENERACJA III. TECHMUTAS",
+      "items": [
+        {
+          "_id": "D0gRAbvO2JfQeeT5",
+          "name": "Atak psychiczny",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-psychiczny.svg"
+        }
+      ]
+    }
+  ]
+}

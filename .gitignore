@@ -15,6 +15,19 @@ logs/*.log
 logs/e2e/
 # release:check reports (local data paths inside) and the zip it builds
 logs/release/
+# scratch evidence from preview/recording sessions
+logs/recording-prep/
+
+# Icon review queue (dev/icons/review): the tool, its manifest, the GM's feedback and each
+# batch's prompts are tracked; generated candidate images (~60 MB — approved ones are copied
+# into icons/) and snapshots of the live world's items stay local.
+dev/icons/review/candidates/**/raw/
+dev/icons/review/candidates/**/*.png
+dev/icons/review/candidates/**/*.svg
+dev/icons/review/candidates/**/*.webp
+dev/icons/review/candidates/**/*.jpg
+dev/icons/review/audits/
+dev/icons/review/review-preview.png
 # NOT a bare `*.log` — LevelDB names its write-ahead log `NNNNNN.log`, and that
 # is where a freshly built pack's documents live until a later open compacts
 # them into a `.ldb`. Ignoring it committed `lekarstwa` and `sztuczki` as empty

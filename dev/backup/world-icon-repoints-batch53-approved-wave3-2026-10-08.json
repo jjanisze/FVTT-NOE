@@ -1,0 +1,2542 @@
+{
+  "createdAt": "2026-10-07T23:27:32.273Z",
+  "plan": {
+    "version": 1,
+    "world": "output",
+    "items": [],
+    "actors": [
+      {
+        "uuid": "Actor.0gWeShZIv4KOO88F",
+        "name": "ALAHAMA",
+        "items": [
+          {
+            "_id": "S3NaALcmL6Bgcw4h",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "BOgJoLnJMLHVyObA",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.MzJhMDgyZmRiMzU1",
+        "name": "Aligator",
+        "items": [
+          {
+            "_id": "ODliODA4MDdjNWU5",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/022_-_Aligator/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "ZDM4YTQ5ZjQ5NjY4",
+            "name": "Wstrzymanie oddechu",
+            "before": "worlds/OUTPUT/characters/022_-_Aligator/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wstrzymanie-oddechu.svg"
+          },
+          {
+            "_id": "NGM1OGZkNDE2OWM3",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/022_-_Aligator/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.Wf53EIDOGbqhl6h0",
+        "name": "BIODROID",
+        "items": [
+          {
+            "_id": "Hc2ieA7wPdka8pnX",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "3SA6WOBHGvAI27Qf",
+            "name": "Brak głowy",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/brak-glowy.svg"
+          },
+          {
+            "_id": "KbciOQ9SjmQWB50a",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "Llpzj8dly4AgxLLU",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.YzI4Njk2N2IwNjI5",
+        "name": "BIT-BOY",
+        "items": [
+          {
+            "_id": "YjU5MGExZjg0Y2Y3",
+            "name": "Współpraca",
+            "before": "worlds/OUTPUT/characters/021_-_BIT-BOY/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          },
+          {
+            "_id": "NTAzM2Q2OGFjYzZm",
+            "name": "Światłowstręt",
+            "before": "worlds/OUTPUT/characters/021_-_BIT-BOY/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/swiatlowstret.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.TotmQd6oDLLeM6B2",
+        "name": "BIT-BOY PRZEWODNIK",
+        "items": [
+          {
+            "_id": "BNNjkXtuYqFzjTZY",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "EDz61AHaPgfLOQce",
+            "name": "Telepatia",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/telepatia.svg"
+          },
+          {
+            "_id": "5zCeF8R8kqMl4eba",
+            "name": "Światłowstręt",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/swiatlowstret.svg"
+          },
+          {
+            "_id": "oiwPADx6S19pWWbe",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.c6NxSwv3O3TcepJE",
+        "name": "BIT-BOYS (aka CROATS)",
+        "items": [
+          {
+            "_id": "jZOeIEgDeWtxLyCY",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "QgLhGeguF9XdNimW",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          },
+          {
+            "_id": "AKa7WdxLab18ub1j",
+            "name": "Światłowstręt",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/swiatlowstret.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.D1MqhEEM3qJY5lpR",
+        "name": "CYNGIEL",
+        "items": [
+          {
+            "_id": "ZAC2ps1ldsI9LuZg",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.YjYzNjhiMGNiM2Ix",
+        "name": "Copy of Mobsprzęt Karabin",
+        "items": [
+          {
+            "_id": "OWU2MmZlMzNmMTUw",
+            "name": "Algorytm czuwania",
+            "before": "worlds/OUTPUT/characters/060_-_Copy_of_Mobsprz_C4_99t_Karabin/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "ZTk3M2ExYjcxNzFm",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/060_-_Copy_of_Mobsprz_C4_99t_Karabin/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.LmZSlovQGxy1eM6k",
+        "name": "GANGUS BOSS",
+        "items": [
+          {
+            "_id": "KhDqDOL1kZ3DpC32",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.5JqCEw9I5Ewb2fgQ",
+        "name": "GANGUS KAPO",
+        "items": [
+          {
+            "_id": "gjJtbiDWO1yuGeog",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.NhyH2YQKvDdyEpF5",
+        "name": "GANGUS ŻOŁNIERZ",
+        "items": [
+          {
+            "_id": "89ugnNJKi5KryQLG",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.ODgwYjNhMTQxODkw",
+        "name": "GANGUS ŻOŁNIERZ",
+        "items": [
+          {
+            "_id": "YjA1N2VjNDVlMWQw",
+            "name": "Współpraca",
+            "before": "worlds/OUTPUT/characters/025_-_GANGUS__C5_BBO_C5_81NIERZ/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.YzQzNWUyMzU3YzEz",
+        "name": "GANGUS ŻOŁNIERZ KARABIN",
+        "items": [
+          {
+            "_id": "NDdkNjllMDU1NGEz",
+            "name": "Współpraca",
+            "before": "worlds/OUTPUT/characters/032_-_GANGUS__C5_BBO_C5_81NIERZ_KARABIN/avatar.jpg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.CmseQba9Q7gjPWom",
+        "name": "GENERACJA I. NOCNY GHUL",
+        "items": [
+          {
+            "_id": "yVhiGwYWqhtsQEUf",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "lcMeNmWuP5HBkKwa",
+            "name": "Światłowstręt",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/swiatlowstret.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.Taasqgmv3ugzhYfv",
+        "name": "GENERACJA II. GENOTYP GADZI",
+        "items": [
+          {
+            "_id": "OmfMibHhjlzeuUr5",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "SYWwRH0JY0k5psJR",
+            "name": "Wstrzymanie oddechu",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wstrzymanie-oddechu.svg"
+          },
+          {
+            "_id": "3QdPG3phl5aPduO3",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.bnbnPGBq7QPt9KRh",
+        "name": "GENERACJA II. GENOTYP WILCZY",
+        "items": [
+          {
+            "_id": "8WcWO5XGaCPakWqt",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "WyNtpovSSzrcjAFP",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          },
+          {
+            "_id": "5MX4ryajUEgFLBIa",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.KaZm3ozqDBxOWinC",
+        "name": "GENERACJA III. GRUBAS",
+        "items": [
+          {
+            "_id": "I0LuTzKvk0LLcr1v",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "03aUIrXTvFR80wsD",
+            "name": "Nie do zabicia",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/nie-do-zabicia.svg"
+          },
+          {
+            "_id": "FcIVn3X2wNfWahsj",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.2m5x938twoTPqNcl",
+        "name": "GENERACJA III. SZPIEG",
+        "items": [
+          {
+            "_id": "V0hxCeCQ51BtSTQW",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.AhsmX4UQfDrAr9dw",
+        "name": "GENERACJA III. TECHMUTAS",
+        "items": [
+          {
+            "_id": "9oWaxu430baEe6hM",
+            "name": "Nie do zabicia",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/nie-do-zabicia.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.rTJw3ocQiztVCBY7",
+        "name": "GENERACJA IV. MESMERYTA",
+        "items": [
+          {
+            "_id": "oOmwQjKNMALJ5bq3",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.r7HDvI7hurbwC4YI",
+        "name": "GIGAMUT",
+        "items": [
+          {
+            "_id": "88MK7VE4AN8gEqDQ",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.YjBiMmE4ODhjYmM3",
+        "name": "GIGANTYCZNY PAJĄK",
+        "items": [
+          {
+            "_id": "YTNmNjU4YzY4NTUy",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "NDJlZTcwYjY5MDRi",
+            "name": "Pajęcza wspinaczka",
+            "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pajecza-wspinaczka.svg"
+          },
+          {
+            "_id": "MTZkZDU5ZDYwMzlm",
+            "name": "Tkacz sieci",
+            "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/tkacz-sieci.svg"
+          },
+          {
+            "_id": "MjE0MzZmYzgxM2U2",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.ZpNjrKMNRmVwAZTs",
+        "name": "GIGANTYCZNY PAJĄK",
+        "items": [
+          {
+            "_id": "sYYAw6D8xv1bYgA3",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "Z2SBV3i5XIIUsrQa",
+            "name": "Pajęcza wspinaczka",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pajecza-wspinaczka.svg"
+          },
+          {
+            "_id": "BASwmvNuzE5NUf9B",
+            "name": "Tkacz sieci",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/tkacz-sieci.svg"
+          },
+          {
+            "_id": "IBJtGds525vhSZmu",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          },
+          {
+            "_id": "bDdRlI8cjqWikFjQ",
+            "name": "Oplątanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/oplatanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.BfwMMnZyyOp4ErKQ",
+        "name": "GLADIATOR",
+        "items": [
+          {
+            "_id": "M0PlQm3mueHl38nk",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "JtL4psGNeV2CnuHY",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.BrVnUbF9JjDHb3Hw",
+        "name": "HARPIE (AKA WAMPIRY)",
+        "items": [
+          {
+            "_id": "UJqbADVIYanhrDv0",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "0bJNXU6LJ4WlmTVv",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          },
+          {
+            "_id": "uGZcoeYFzgjtEf5d",
+            "name": "Światłowstręt",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/swiatlowstret.svg"
+          },
+          {
+            "_id": "7FSPM3zQsB5Bfv8s",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.tjWfjg1JgeHRa9WC",
+        "name": "JUGGERNAUT",
+        "items": [
+          {
+            "_id": "M89eo4A6XnyiRISA",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "9cFiYLNcC1tpsETk",
+            "name": "Groza",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/groza.svg"
+          },
+          {
+            "_id": "u5J8gk0to7jQ322k",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.6L93z96KVbggoHa3",
+        "name": "KANIBAL",
+        "items": [
+          {
+            "_id": "jwgcZ8B7qLFwxvxg",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.Z6sIdSr28syaURmI",
+        "name": "KIDNAPER",
+        "items": [
+          {
+            "_id": "F6fpcsk6CO2Ic6rD",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "ktf9fIASt7RPOLDQ",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "EdTUAN8EgbcTK1Hc",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.YGIOkeUGVe4EImDp",
+        "name": "KITCHIN",
+        "items": [
+          {
+            "_id": "uic6eHspHP5CEv6B",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.F7GtxAsyDXG6kPla",
+        "name": "KORZEC",
+        "items": [
+          {
+            "_id": "jW0yED7Jk7VLXOkR",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "HGrn1pECP3eHqzFM",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.lIsHLDilMw0uXjho",
+        "name": "KURCZAK",
+        "items": [
+          {
+            "_id": "hntRqzbtLjlN9Mv3",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "7JFtDKTF3QkW73rV",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.NTdjZGU3ZjA3MjJk",
+        "name": "Kitchin",
+        "items": [
+          {
+            "_id": "NzcwYzE5ZDNlYzFm",
+            "name": "Światłowstręt",
+            "before": "worlds/OUTPUT/characters/037_-_Kitchin/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/swiatlowstret.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.4pOUKx6U3HHKAw2b",
+        "name": "MEGATOR",
+        "items": [
+          {
+            "_id": "UBzgwaP8q2aOze8y",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "zviMNnJ05gsCa5yW",
+            "name": "Wstrzymanie oddechu",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wstrzymanie-oddechu.svg"
+          },
+          {
+            "_id": "304yWZiDctRtiIHa",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.whSxVclV1Np6ZRHi",
+        "name": "MOBSPRZĘT",
+        "items": [
+          {
+            "_id": "7WSFsRDi7jVaj60Q",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "bWHcF0PHqB1l3ya3",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.C2RWal7yuSyM8zR3",
+        "name": "MROKOSZCZUR",
+        "items": [
+          {
+            "_id": "1TeRfqLZ22B93TL4",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "BYRwDjSIE1k0UHY6",
+            "name": "Neozmysły",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/neozmysly.svg"
+          },
+          {
+            "_id": "dJoBAh5OWa8Ou1mR",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.7k7CP9n0eqXb1kXr",
+        "name": "MYŚLĄCY SZCZUR",
+        "items": [
+          {
+            "_id": "CnNr6zjBtzLxR6y1",
+            "name": "Neozmysły",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/neozmysly.svg"
+          },
+          {
+            "_id": "KnpmcS0ewBX9RYsA",
+            "name": "Telepatia",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/telepatia.svg"
+          },
+          {
+            "_id": "d7AoiIkPi6OnX95P",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.MjVjZjU1NWRmZTRm",
+        "name": "Mobsprzęt Karabin",
+        "items": [
+          {
+            "_id": "YmNjYTgxYzFmMjEx",
+            "name": "Algorytm czuwania",
+            "before": "worlds/OUTPUT/characters/057_-_Mobsprz_C4_99t_Karabin/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "NDRiNDAyODVmZWJh",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/057_-_Mobsprz_C4_99t_Karabin/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.YREmDrGIs23AVoNh",
+        "name": "NEOGATOR",
+        "items": [
+          {
+            "_id": "7yAbCg57HcCLWUHn",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "v11Nu3CjpgkygKDl",
+            "name": "Wstrzymanie oddechu",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wstrzymanie-oddechu.svg"
+          },
+          {
+            "_id": "XI4aHLBm0srvQiTD",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.50qspF0fBTnthKjN",
+        "name": "NEOKOT",
+        "items": [
+          {
+            "_id": "2v48pb56IfkiY6rl",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.td44oP8eYRTO8SeW",
+        "name": "NEONIEDŹWIEDŹ",
+        "items": [
+          {
+            "_id": "CJvf0xNB04sRcI9j",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "Sh6TgaSIz7ttQDXx",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.oWLGNP7paGjRsoYJ",
+        "name": "OBROŃCA",
+        "items": [
+          {
+            "_id": "m7JgkGT1CbAAA502",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "ODRruB4xR7vXsGYr",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "tfuGhBLnqiGDNuvB",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.1vpt0f4JRB6nov9d",
+        "name": "PAJĄK",
+        "items": [
+          {
+            "_id": "eGMbrdhDS5uiRM8O",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "pBwWwHrT3L4cvgeG",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.BJxZozEHq05Xqphv",
+        "name": "PIES BOJOWY",
+        "items": [
+          {
+            "_id": "idVPSUbtfpZl3J9c",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.LP16Iu6aaNkn0Azd",
+        "name": "PIES MUTEK",
+        "items": [
+          {
+            "_id": "1MSJA8qfKfwnKYmh",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "SvhmCirGFVbUsYOi",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.V17hzI9yQN34tA06",
+        "name": "PULSER",
+        "items": [
+          {
+            "_id": "xTqV1ffwIALaEnF7",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "3sb65rFUJQ2zHAwv",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.ZmQyNjlhMTY1NjU0",
+        "name": "Pajączek Strażniczy",
+        "items": [
+          {
+            "_id": "MTliNDAxZmMwZWQ3",
+            "name": "Współpraca",
+            "before": "worlds/OUTPUT/characters/011_-_Paj_C4_85czek_Stra_C5_BCniczy/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.N2E4NTliODA5YjU3",
+        "name": "Pająk",
+        "items": [
+          {
+            "_id": "NDYyYmMxZWVjYWUx",
+            "name": "Algorytm czuwania",
+            "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.MWQzZmFkMDUzZmVj",
+        "name": "Richard Craddock",
+        "items": [
+          {
+            "_id": "ZjQxY2ZjZTZhN2Q1",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.OBrjMBbhUSK6kpq3",
+        "name": "Richard Craddock Uparmored",
+        "items": [
+          {
+            "_id": "ZjQxY2ZjZTZhN2Q1",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.UfmT9pKXIpZvX2OT",
+        "name": "RÓJ SZCZURÓW",
+        "items": [
+          {
+            "_id": "FXxoICFp7OrMBdGg",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "aACkNAMP2u3uCrfy",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.iEtm6diLHCu1QJkw",
+        "name": "SPAWACZ",
+        "items": [
+          {
+            "_id": "0geNodV6padPmOKJ",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.7odbYt1meXScvBWR",
+        "name": "SZCZĘKOWIJ",
+        "items": [
+          {
+            "_id": "ckJ6Xdl1iwZXgKUU",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "NnT0t7cn8B8FEXyK",
+            "name": "Brak głowy",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/brak-glowy.svg"
+          },
+          {
+            "_id": "DUvwGGStpVAlfUNQ",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.oQH4iYWjKEWB7x7v",
+        "name": "SZERYF",
+        "items": [
+          {
+            "_id": "VaifQ0yzuDghN8av",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.u9LJRDYAQV6jIApL",
+        "name": "TARAN",
+        "items": [
+          {
+            "_id": "yQNyvadRIlLZJpdA",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "h7lQOQFdENmcZbZJ",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.hkab5SivPPEoyPHv",
+        "name": "TECHMORWA (MALUTKA)",
+        "items": [
+          {
+            "_id": "32WXX2p2pUIiegkb",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "zQD7eOik0MluiFbh",
+            "name": "Niewykrywalność",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/niewykrywalnosc.svg"
+          },
+          {
+            "_id": "p44MoobmsXVSVB49",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.PSusLvUnP6AH5UUO",
+        "name": "TECHMORWA (ŚREDNIA)",
+        "items": [
+          {
+            "_id": "AOFg572ifQR0W34H",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "NFTRW9OgUCRmsk8I",
+            "name": "Niewykrywalność",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/niewykrywalnosc.svg"
+          },
+          {
+            "_id": "FL17p4GXI7gVpllD",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.NjllMTMyMjc2NzY1",
+        "name": "Techmorwa",
+        "items": [
+          {
+            "_id": "OWYzYTUyNzAxOWRl",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "NzIzMGVmNGEwNjEz",
+            "name": "Niewykrywalność",
+            "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/niewykrywalnosc.svg"
+          },
+          {
+            "_id": "ZWVkMmZhOTZmN2Vi",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.MTg5ZjY0Y2Q2MTdj",
+        "name": "WILKOLUD",
+        "items": [
+          {
+            "_id": "OGVlMjU4ZDZjZTgx",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "ZmQ1ODJhMTdjOTRi",
+            "name": "Współpraca",
+            "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          },
+          {
+            "_id": "ZjJmYjQxNzA2Mjcy",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.IEH5knp5uVwhBr9i",
+        "name": "ŁOWCA",
+        "items": [
+          {
+            "_id": "xrPy0FI7iSC1vrhb",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "La90zaop7eRczJCI",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "ryc4HKbuCEKgFgue",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.bYos8iRtgi5PHjX4",
+        "name": "ŻOŁNIERZ POSTERUNKU",
+        "items": [
+          {
+            "_id": "2JcniEw0dNc0tZqw",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.NTQ0NTc4NmE0NzJk.Actor.MzJhMDgyZmRiMzU1",
+        "name": "Aligator",
+        "items": [
+          {
+            "_id": "ODliODA4MDdjNWU5",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/022_-_Aligator/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "ZDM4YTQ5ZjQ5NjY4",
+            "name": "Wstrzymanie oddechu",
+            "before": "worlds/OUTPUT/characters/022_-_Aligator/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wstrzymanie-oddechu.svg"
+          },
+          {
+            "_id": "NGM1OGZkNDE2OWM3",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/022_-_Aligator/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.MTFiNDFhZjBjZmUx.Actor.MTg5ZjY0Y2Q2MTdj",
+        "name": "WILKOLUD",
+        "items": [
+          {
+            "_id": "OGVlMjU4ZDZjZTgx",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "ZmQ1ODJhMTdjOTRi",
+            "name": "Współpraca",
+            "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          },
+          {
+            "_id": "ZjJmYjQxNzA2Mjcy",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.MTEyM2VhZTEwMzJi.Token.ODNhNGRkMTFmMmFi.Actor.MWQzZmFkMDUzZmVj",
+        "name": "Richard Craddock",
+        "items": [
+          {
+            "_id": "ZjQxY2ZjZTZhN2Q1",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.ZTNhODA0Y2YyYTZj.Token.ODE2MjViNTlkZWZj.Actor.ODgwYjNhMTQxODkw",
+        "name": "GANGUS ŻOŁNIERZ",
+        "items": [
+          {
+            "_id": "YjA1N2VjNDVlMWQw",
+            "name": "Współpraca",
+            "before": "worlds/OUTPUT/characters/025_-_GANGUS__C5_BBO_C5_81NIERZ/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.ODAxZTdmOGIwZjc0.Token.YTA1ZDdiNmZiY2Yw.Actor.ODgwYjNhMTQxODkw",
+        "name": "GANGUS ŻOŁNIERZ",
+        "items": [
+          {
+            "_id": "YjA1N2VjNDVlMWQw",
+            "name": "Współpraca",
+            "before": "worlds/OUTPUT/characters/025_-_GANGUS__C5_BBO_C5_81NIERZ/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.MjY5NWM0NjkzMjZj.Token.YzMyOTkxNjhkZTgw.Actor.MWQzZmFkMDUzZmVj",
+        "name": "Richard Craddock",
+        "items": [
+          {
+            "_id": "ZjQxY2ZjZTZhN2Q1",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.MWI1MTk2MTBlNDVj.Actor.YjBiMmE4ODhjYmM3",
+        "name": "GIGANTYCZNY PAJĄK",
+        "items": [
+          {
+            "_id": "YTNmNjU4YzY4NTUy",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "NDJlZTcwYjY5MDRi",
+            "name": "Pajęcza wspinaczka",
+            "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pajecza-wspinaczka.svg"
+          },
+          {
+            "_id": "MTZkZDU5ZDYwMzlm",
+            "name": "Tkacz sieci",
+            "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/tkacz-sieci.svg"
+          },
+          {
+            "_id": "MjE0MzZmYzgxM2U2",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.YzY2NGVjMzg2Y2Jl.Actor.MjVjZjU1NWRmZTRm",
+        "name": "Mobsprzęt Karabin",
+        "items": [
+          {
+            "_id": "YmNjYTgxYzFmMjEx",
+            "name": "Algorytm czuwania",
+            "before": "worlds/OUTPUT/characters/057_-_Mobsprz_C4_99t_Karabin/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "NDRiNDAyODVmZWJh",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/057_-_Mobsprz_C4_99t_Karabin/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.OWM1MTk5NWYyNThl.Actor.YjBiMmE4ODhjYmM3",
+        "name": "GIGANTYCZNY PAJĄK",
+        "items": [
+          {
+            "_id": "YTNmNjU4YzY4NTUy",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "NDJlZTcwYjY5MDRi",
+            "name": "Pajęcza wspinaczka",
+            "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pajecza-wspinaczka.svg"
+          },
+          {
+            "_id": "MTZkZDU5ZDYwMzlm",
+            "name": "Tkacz sieci",
+            "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/tkacz-sieci.svg"
+          },
+          {
+            "_id": "MjE0MzZmYzgxM2U2",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.N2RiNTlmMTgyODY5.Actor.N2E4NTliODA5YjU3",
+        "name": "Pająk",
+        "items": [
+          {
+            "_id": "NDYyYmMxZWVjYWUx",
+            "name": "Algorytm czuwania",
+            "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.YTMwYTg1OGZkM2Iy.Actor.NjllMTMyMjc2NzY1",
+        "name": "Techmorwa",
+        "items": [
+          {
+            "_id": "OWYzYTUyNzAxOWRl",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "NzIzMGVmNGEwNjEz",
+            "name": "Niewykrywalność",
+            "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/niewykrywalnosc.svg"
+          },
+          {
+            "_id": "ZWVkMmZhOTZmN2Vi",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.MmUzYzRkYTEwODJk.Actor.MjVjZjU1NWRmZTRm",
+        "name": "Mobsprzęt Karabin",
+        "items": [
+          {
+            "_id": "YmNjYTgxYzFmMjEx",
+            "name": "Algorytm czuwania",
+            "before": "worlds/OUTPUT/characters/057_-_Mobsprz_C4_99t_Karabin/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "NDRiNDAyODVmZWJh",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/057_-_Mobsprz_C4_99t_Karabin/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.YjhjOWVhNmViNWRk.Token.NzhmMjI2NDU3OWVl.Actor.N2E4NTliODA5YjU3",
+        "name": "Pająk",
+        "items": [
+          {
+            "_id": "NDYyYmMxZWVjYWUx",
+            "name": "Algorytm czuwania",
+            "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.YjhjOWVhNmViNWRk.Token.NmQxYzI4Yzg0YmIx.Actor.N2E4NTliODA5YjU3",
+        "name": "Pająk",
+        "items": [
+          {
+            "_id": "NDYyYmMxZWVjYWUx",
+            "name": "Algorytm czuwania",
+            "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.YjhjOWVhNmViNWRk.Token.ODZmZGRjOTAzNTQ4.Actor.N2E4NTliODA5YjU3",
+        "name": "Pająk",
+        "items": [
+          {
+            "_id": "NDYyYmMxZWVjYWUx",
+            "name": "Algorytm czuwania",
+            "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.ZDI1YTcyY2JmNjMx.Token.IAzB7h1vtGuBOXgH.Actor.MWQzZmFkMDUzZmVj",
+        "name": "Generał",
+        "items": [
+          {
+            "_id": "ZjQxY2ZjZTZhN2Q1",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.ZDI1YTcyY2JmNjMx.Token.UegLhOMhY2Ih1ces.Actor.OBrjMBbhUSK6kpq3",
+        "name": "Generał",
+        "items": [
+          {
+            "_id": "ZjQxY2ZjZTZhN2Q1",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.xLbeckdRxAeLy7Kr.Actor.OBrjMBbhUSK6kpq3",
+        "name": "Generał",
+        "items": [
+          {
+            "_id": "ZjQxY2ZjZTZhN2Q1",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.9vEF9o7uRVHVCgRc.Actor.MzJhMDgyZmRiMzU1",
+        "name": "Aligator",
+        "items": [
+          {
+            "_id": "ODliODA4MDdjNWU5",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/022_-_Aligator/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "ZDM4YTQ5ZjQ5NjY4",
+            "name": "Wstrzymanie oddechu",
+            "before": "worlds/OUTPUT/characters/022_-_Aligator/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wstrzymanie-oddechu.svg"
+          },
+          {
+            "_id": "NGM1OGZkNDE2OWM3",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/022_-_Aligator/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.3fTl0UdEmnzBAkpg.Actor.YzI4Njk2N2IwNjI5",
+        "name": "BIT-BOY",
+        "items": [
+          {
+            "_id": "YjU5MGExZjg0Y2Y3",
+            "name": "Współpraca",
+            "before": "worlds/OUTPUT/characters/021_-_BIT-BOY/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          },
+          {
+            "_id": "NTAzM2Q2OGFjYzZm",
+            "name": "Światłowstręt",
+            "before": "worlds/OUTPUT/characters/021_-_BIT-BOY/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/swiatlowstret.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.OjNMvtMvkQ9Irvs9.Actor.YzQzNWUyMzU3YzEz",
+        "name": "GANGUS ŻOŁNIERZ",
+        "items": [
+          {
+            "_id": "NDdkNjllMDU1NGEz",
+            "name": "Współpraca",
+            "before": "worlds/OUTPUT/characters/032_-_GANGUS__C5_BBO_C5_81NIERZ_KARABIN/avatar.jpg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.Iu8vR5vC66jLzxln.Actor.ZmQyNjlhMTY1NjU0",
+        "name": "Pajączek Strażniczy",
+        "items": [
+          {
+            "_id": "MTliNDAxZmMwZWQ3",
+            "name": "Współpraca",
+            "before": "worlds/OUTPUT/characters/011_-_Paj_C4_85czek_Stra_C5_BCniczy/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.nfLKq3msTf4BAw1H.Actor.MjVjZjU1NWRmZTRm",
+        "name": "Mobsprzęt Karabin",
+        "items": [
+          {
+            "_id": "YmNjYTgxYzFmMjEx",
+            "name": "Algorytm czuwania",
+            "before": "worlds/OUTPUT/characters/057_-_Mobsprz_C4_99t_Karabin/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "NDRiNDAyODVmZWJh",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/057_-_Mobsprz_C4_99t_Karabin/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.a9JLuSDOW7D3rYUk.Actor.MWQzZmFkMDUzZmVj",
+        "name": "Generał",
+        "items": [
+          {
+            "_id": "ZjQxY2ZjZTZhN2Q1",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.k3sMfvotlhDkS31c.Actor.NjllMTMyMjc2NzY1",
+        "name": "Techmorwa",
+        "items": [
+          {
+            "_id": "OWYzYTUyNzAxOWRl",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "NzIzMGVmNGEwNjEz",
+            "name": "Niewykrywalność",
+            "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/niewykrywalnosc.svg"
+          },
+          {
+            "_id": "ZWVkMmZhOTZmN2Vi",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.p6jX0F8jQmMiNwkn.Actor.MTg5ZjY0Y2Q2MTdj",
+        "name": "WILKOLUD",
+        "items": [
+          {
+            "_id": "OGVlMjU4ZDZjZTgx",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "ZmQ1ODJhMTdjOTRi",
+            "name": "Współpraca",
+            "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          },
+          {
+            "_id": "ZjJmYjQxNzA2Mjcy",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.HOuXliAuck3t6ud7.Actor.ODgwYjNhMTQxODkw",
+        "name": "GANGUS ŻOŁNIERZ",
+        "items": [
+          {
+            "_id": "YjA1N2VjNDVlMWQw",
+            "name": "Współpraca",
+            "before": "worlds/OUTPUT/characters/025_-_GANGUS__C5_BBO_C5_81NIERZ/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.MlMAvhJkP3PVAV3V.Actor.YjBiMmE4ODhjYmM3",
+        "name": "GIGANTYCZNY PAJĄK",
+        "items": [
+          {
+            "_id": "YTNmNjU4YzY4NTUy",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "NDJlZTcwYjY5MDRi",
+            "name": "Pajęcza wspinaczka",
+            "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pajecza-wspinaczka.svg"
+          },
+          {
+            "_id": "MTZkZDU5ZDYwMzlm",
+            "name": "Tkacz sieci",
+            "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/tkacz-sieci.svg"
+          },
+          {
+            "_id": "MjE0MzZmYzgxM2U2",
+            "name": "Atak wielokrotny",
+            "before": "worlds/OUTPUT/characters/018_-_GIGANTYCZNY_PAJ_C4_84K/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.qGrVyFmNeEKTwpHA.Actor.NTdjZGU3ZjA3MjJk",
+        "name": "Kitchin",
+        "items": [
+          {
+            "_id": "NzcwYzE5ZDNlYzFm",
+            "name": "Światłowstręt",
+            "before": "worlds/OUTPUT/characters/037_-_Kitchin/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/swiatlowstret.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.XWqgKGANt0e8sGu9.Actor.N2E4NTliODA5YjU3",
+        "name": "Pająk",
+        "items": [
+          {
+            "_id": "NDYyYmMxZWVjYWUx",
+            "name": "Algorytm czuwania",
+            "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.Ni6oWhaqILFRzHtC.Actor.YjYzNjhiMGNiM2Ix",
+        "name": "Copy of Mobsprzęt Karabin",
+        "items": [
+          {
+            "_id": "OWU2MmZlMzNmMTUw",
+            "name": "Algorytm czuwania",
+            "before": "worlds/OUTPUT/characters/060_-_Copy_of_Mobsprz_C4_99t_Karabin/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "ZTk3M2ExYjcxNzFm",
+            "name": "Pierwsze spotkanie",
+            "before": "worlds/OUTPUT/characters/060_-_Copy_of_Mobsprz_C4_99t_Karabin/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.y7opvixN926XdaoK.Actor.D1MqhEEM3qJY5lpR",
+        "name": "CYNGIEL",
+        "items": [
+          {
+            "_id": "ZAC2ps1ldsI9LuZg",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.ZUtGI40byucUuesP.Actor.LmZSlovQGxy1eM6k",
+        "name": "CYWIL",
+        "items": [
+          {
+            "_id": "KhDqDOL1kZ3DpC32",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.yx6sbn1Pv3b8wHFE.Actor.5JqCEw9I5Ewb2fgQ",
+        "name": "GANGUS BOSS",
+        "items": [
+          {
+            "_id": "gjJtbiDWO1yuGeog",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.UvGsXIIahGVM0UnD.Actor.6L93z96KVbggoHa3",
+        "name": "GANGUS ŻOŁNIERZ",
+        "items": [
+          {
+            "_id": "jwgcZ8B7qLFwxvxg",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.v6PnfDiaBfEGQjmU.Actor.NhyH2YQKvDdyEpF5",
+        "name": "KANIBAL",
+        "items": [
+          {
+            "_id": "89ugnNJKi5KryQLG",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.iWn66IU9S1su6AEX.Actor.oQH4iYWjKEWB7x7v",
+        "name": "SZERYF",
+        "items": [
+          {
+            "_id": "VaifQ0yzuDghN8av",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.cMpfbZGUBawSzBWK.Actor.bYos8iRtgi5PHjX4",
+        "name": "ŻOŁNIERZ POSTERUNKU",
+        "items": [
+          {
+            "_id": "2JcniEw0dNc0tZqw",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.A86fzMPR9RL1MqZf.Actor.tjWfjg1JgeHRa9WC",
+        "name": "JUGGERNAUT",
+        "items": [
+          {
+            "_id": "M89eo4A6XnyiRISA",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "9cFiYLNcC1tpsETk",
+            "name": "Groza",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/groza.svg"
+          },
+          {
+            "_id": "u5J8gk0to7jQ322k",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.RUbXcAdccXL9yZFS.Actor.Z6sIdSr28syaURmI",
+        "name": "KIDNAPER",
+        "items": [
+          {
+            "_id": "F6fpcsk6CO2Ic6rD",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "ktf9fIASt7RPOLDQ",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "EdTUAN8EgbcTK1Hc",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.FeaPuVgf8Iu9eNwb.Actor.oWLGNP7paGjRsoYJ",
+        "name": "OBROŃCA",
+        "items": [
+          {
+            "_id": "m7JgkGT1CbAAA502",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "ODRruB4xR7vXsGYr",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "tfuGhBLnqiGDNuvB",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.k1wDCDX3ytDGeVHL.Actor.Wf53EIDOGbqhl6h0",
+        "name": "BIODROID",
+        "items": [
+          {
+            "_id": "Hc2ieA7wPdka8pnX",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "3SA6WOBHGvAI27Qf",
+            "name": "Brak głowy",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/brak-glowy.svg"
+          },
+          {
+            "_id": "KbciOQ9SjmQWB50a",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "Llpzj8dly4AgxLLU",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.U6073cTZtfAsNjMf.Actor.BfwMMnZyyOp4ErKQ",
+        "name": "GLADIATOR",
+        "items": [
+          {
+            "_id": "M0PlQm3mueHl38nk",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "JtL4psGNeV2CnuHY",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.x2vyQqCyWkOPejZq.Actor.whSxVclV1Np6ZRHi",
+        "name": "MOBSPRZĘT",
+        "items": [
+          {
+            "_id": "7WSFsRDi7jVaj60Q",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "bWHcF0PHqB1l3ya3",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.bOomiyYTAB0jWv8x.Actor.IEH5knp5uVwhBr9i",
+        "name": "ŁOWCA",
+        "items": [
+          {
+            "_id": "xrPy0FI7iSC1vrhb",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "La90zaop7eRczJCI",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "ryc4HKbuCEKgFgue",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.JBjLreQNJawo6v6b.Actor.V17hzI9yQN34tA06",
+        "name": "PULSER",
+        "items": [
+          {
+            "_id": "xTqV1ffwIALaEnF7",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "3sb65rFUJQ2zHAwv",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.2BMdno96YjuA1itb.Actor.iEtm6diLHCu1QJkw",
+        "name": "SPAWACZ",
+        "items": [
+          {
+            "_id": "0geNodV6padPmOKJ",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.25LL63Y8KGGEzqFa.Actor.lIsHLDilMw0uXjho",
+        "name": "KURCZAK",
+        "items": [
+          {
+            "_id": "hntRqzbtLjlN9Mv3",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "7JFtDKTF3QkW73rV",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.yGmIFaAZ0qnTB1gR.Actor.bnbnPGBq7QPt9KRh",
+        "name": "PAJĄK",
+        "items": [
+          {
+            "_id": "8WcWO5XGaCPakWqt",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "WyNtpovSSzrcjAFP",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          },
+          {
+            "_id": "5MX4ryajUEgFLBIa",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.GDDfOKMRuJZRnFmb.Actor.KaZm3ozqDBxOWinC",
+        "name": "GENERACJA II. GENOTYP WILCZY",
+        "items": [
+          {
+            "_id": "I0LuTzKvk0LLcr1v",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "03aUIrXTvFR80wsD",
+            "name": "Nie do zabicia",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/nie-do-zabicia.svg"
+          },
+          {
+            "_id": "FcIVn3X2wNfWahsj",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.8ZMWV3UEMwxTNT03.Actor.1vpt0f4JRB6nov9d",
+        "name": "GENERACJA III. GRUBAS",
+        "items": [
+          {
+            "_id": "eGMbrdhDS5uiRM8O",
+            "name": "Algorytm czuwania",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+          },
+          {
+            "_id": "pBwWwHrT3L4cvgeG",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.D6luA0XyzWcLHhmC.Actor.CmseQba9Q7gjPWom",
+        "name": "GENERACJA I. NOCNY GHUL",
+        "items": [
+          {
+            "_id": "yVhiGwYWqhtsQEUf",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "lcMeNmWuP5HBkKwa",
+            "name": "Światłowstręt",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/swiatlowstret.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.MU0qcsrqg3xwiW6f.Actor.Taasqgmv3ugzhYfv",
+        "name": "GENERACJA II. GENOTYP GADZI",
+        "items": [
+          {
+            "_id": "OmfMibHhjlzeuUr5",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "SYWwRH0JY0k5psJR",
+            "name": "Wstrzymanie oddechu",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wstrzymanie-oddechu.svg"
+          },
+          {
+            "_id": "3QdPG3phl5aPduO3",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.Lhv4pnxEr83HLtKA.Actor.2m5x938twoTPqNcl",
+        "name": "GENERACJA III. SZPIEG",
+        "items": [
+          {
+            "_id": "V0hxCeCQ51BtSTQW",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.pOAeS5tN1eg2aNAm.Actor.AhsmX4UQfDrAr9dw",
+        "name": "GENERACJA III. TECHMUTAS",
+        "items": [
+          {
+            "_id": "9oWaxu430baEe6hM",
+            "name": "Nie do zabicia",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/nie-do-zabicia.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.gxuXT8I72CWmqm1G.Actor.rTJw3ocQiztVCBY7",
+        "name": "GENERACJA IV. MESMERYTA",
+        "items": [
+          {
+            "_id": "oOmwQjKNMALJ5bq3",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.jKq0OukOkDe45h5i.Actor.4pOUKx6U3HHKAw2b",
+        "name": "MEGATOR",
+        "items": [
+          {
+            "_id": "UBzgwaP8q2aOze8y",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "zviMNnJ05gsCa5yW",
+            "name": "Wstrzymanie oddechu",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wstrzymanie-oddechu.svg"
+          },
+          {
+            "_id": "304yWZiDctRtiIHa",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.nUct6kMaNGOXebX7.Actor.F7GtxAsyDXG6kPla",
+        "name": "ALAHAMA",
+        "items": [
+          {
+            "_id": "jW0yED7Jk7VLXOkR",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "HGrn1pECP3eHqzFM",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.muQDkZaICk0W8GTL.Actor.0gWeShZIv4KOO88F",
+        "name": "KORZEC",
+        "items": [
+          {
+            "_id": "S3NaALcmL6Bgcw4h",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "BOgJoLnJMLHVyObA",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.FspP2MjXP3Wqbh5p.Actor.7odbYt1meXScvBWR",
+        "name": "SZCZĘKOWIJ",
+        "items": [
+          {
+            "_id": "ckJ6Xdl1iwZXgKUU",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "NnT0t7cn8B8FEXyK",
+            "name": "Brak głowy",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/brak-glowy.svg"
+          },
+          {
+            "_id": "DUvwGGStpVAlfUNQ",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.umLQ2x0fOHrvS5ol.Actor.u9LJRDYAQV6jIApL",
+        "name": "TARAN",
+        "items": [
+          {
+            "_id": "yQNyvadRIlLZJpdA",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "h7lQOQFdENmcZbZJ",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.CflSFAUo5JbqEl56.Actor.TotmQd6oDLLeM6B2",
+        "name": "BIT-BOY PRZEWODNIK",
+        "items": [
+          {
+            "_id": "BNNjkXtuYqFzjTZY",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "EDz61AHaPgfLOQce",
+            "name": "Telepatia",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/telepatia.svg"
+          },
+          {
+            "_id": "5zCeF8R8kqMl4eba",
+            "name": "Światłowstręt",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/swiatlowstret.svg"
+          },
+          {
+            "_id": "oiwPADx6S19pWWbe",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.9FGaowPZraqC21xm.Actor.BrVnUbF9JjDHb3Hw",
+        "name": "HARPIE (AKA WAMPIRY)",
+        "items": [
+          {
+            "_id": "UJqbADVIYanhrDv0",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "0bJNXU6LJ4WlmTVv",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          },
+          {
+            "_id": "uGZcoeYFzgjtEf5d",
+            "name": "Światłowstręt",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/swiatlowstret.svg"
+          },
+          {
+            "_id": "7FSPM3zQsB5Bfv8s",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.KI6o941mmkpaYEjt.Actor.LP16Iu6aaNkn0Azd",
+        "name": "PIES MUTEK",
+        "items": [
+          {
+            "_id": "1MSJA8qfKfwnKYmh",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "SvhmCirGFVbUsYOi",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.fX3SGV7V4bapy7Ro.Actor.c6NxSwv3O3TcepJE",
+        "name": "BIT-BOYS (aka CROATS)",
+        "items": [
+          {
+            "_id": "jZOeIEgDeWtxLyCY",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "QgLhGeguF9XdNimW",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          },
+          {
+            "_id": "AKa7WdxLab18ub1j",
+            "name": "Światłowstręt",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/swiatlowstret.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.NrIZkY7SEkclyOJI.Actor.PSusLvUnP6AH5UUO",
+        "name": "TECHMORWA (ŚREDNIA)",
+        "items": [
+          {
+            "_id": "AOFg572ifQR0W34H",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "NFTRW9OgUCRmsk8I",
+            "name": "Niewykrywalność",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/niewykrywalnosc.svg"
+          },
+          {
+            "_id": "FL17p4GXI7gVpllD",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.IDj8DCpX4zvtqqtP.Actor.hkab5SivPPEoyPHv",
+        "name": "TECHMORWA (MALUTKA)",
+        "items": [
+          {
+            "_id": "32WXX2p2pUIiegkb",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "zQD7eOik0MluiFbh",
+            "name": "Niewykrywalność",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/niewykrywalnosc.svg"
+          },
+          {
+            "_id": "p44MoobmsXVSVB49",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.vmBbL8kfohs5WKER.Actor.r7HDvI7hurbwC4YI",
+        "name": "GIGAMUT",
+        "items": [
+          {
+            "_id": "88MK7VE4AN8gEqDQ",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.3gbaIvSg6AdDNxi4.Actor.td44oP8eYRTO8SeW",
+        "name": "NEONIEDŹWIEDŹ",
+        "items": [
+          {
+            "_id": "CJvf0xNB04sRcI9j",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "Sh6TgaSIz7ttQDXx",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.Oj00EJN9G1Xc6gLA.Actor.YGIOkeUGVe4EImDp",
+        "name": "KITCHIN",
+        "items": [
+          {
+            "_id": "uic6eHspHP5CEv6B",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.QXagB2aEBr9FilQx.Actor.ZpNjrKMNRmVwAZTs",
+        "name": "KOŃ (SKAŻONY)",
+        "items": [
+          {
+            "_id": "sYYAw6D8xv1bYgA3",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "Z2SBV3i5XIIUsrQa",
+            "name": "Pajęcza wspinaczka",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pajecza-wspinaczka.svg"
+          },
+          {
+            "_id": "BASwmvNuzE5NUf9B",
+            "name": "Tkacz sieci",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/tkacz-sieci.svg"
+          },
+          {
+            "_id": "IBJtGds525vhSZmu",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          },
+          {
+            "_id": "bDdRlI8cjqWikFjQ",
+            "name": "Oplątanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/oplatanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.6AHXWjWUvlNr34uQ.Actor.YREmDrGIs23AVoNh",
+        "name": "NEOGATOR",
+        "items": [
+          {
+            "_id": "7yAbCg57HcCLWUHn",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "v11Nu3CjpgkygKDl",
+            "name": "Wstrzymanie oddechu",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wstrzymanie-oddechu.svg"
+          },
+          {
+            "_id": "XI4aHLBm0srvQiTD",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.9BwVgMEueHIDuCxe.Actor.BJxZozEHq05Xqphv",
+        "name": "PIES BOJOWY",
+        "items": [
+          {
+            "_id": "idVPSUbtfpZl3J9c",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.s9lHqhJp4uShN0H0.Actor.C2RWal7yuSyM8zR3",
+        "name": "MROKOSZCZUR",
+        "items": [
+          {
+            "_id": "1TeRfqLZ22B93TL4",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "BYRwDjSIE1k0UHY6",
+            "name": "Neozmysły",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/neozmysly.svg"
+          },
+          {
+            "_id": "dJoBAh5OWa8Ou1mR",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.vZ7jrjKJrimsxFdK.Actor.7k7CP9n0eqXb1kXr",
+        "name": "MYŚLĄCY SZCZUR",
+        "items": [
+          {
+            "_id": "CnNr6zjBtzLxR6y1",
+            "name": "Neozmysły",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/neozmysly.svg"
+          },
+          {
+            "_id": "KnpmcS0ewBX9RYsA",
+            "name": "Telepatia",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/telepatia.svg"
+          },
+          {
+            "_id": "d7AoiIkPi6OnX95P",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.XjJyIsFkKmsNXiIr.Actor.50qspF0fBTnthKjN",
+        "name": "NEOKOT",
+        "items": [
+          {
+            "_id": "2v48pb56IfkiY6rl",
+            "name": "Współpraca",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/wspolpraca.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.tDFhR4TusTuWgWli.Actor.UfmT9pKXIpZvX2OT",
+        "name": "RÓJ SZCZURÓW",
+        "items": [
+          {
+            "_id": "FXxoICFp7OrMBdGg",
+            "name": "Pierwsze spotkanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+          },
+          {
+            "_id": "aACkNAMP2u3uCrfy",
+            "name": "Atak wielokrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+          }
+        ]
+      }
+    ]
+  }
+}

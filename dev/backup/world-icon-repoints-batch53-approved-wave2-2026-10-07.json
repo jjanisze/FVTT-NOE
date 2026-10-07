@@ -1,0 +1,346 @@
+{
+  "createdAt": "2026-10-07T21:27:54.750Z",
+  "plan": {
+    "version": 1,
+    "world": "output",
+    "items": [],
+    "actors": [
+      {
+        "uuid": "Actor.0gWeShZIv4KOO88F",
+        "name": "ALAHAMA",
+        "items": [
+          {
+            "_id": "CIl2F8c4PHjtq6xW",
+            "name": "Miażdżenie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/weapons/miazdzenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.MzJhMDgyZmRiMzU1",
+        "name": "Aligator",
+        "items": [
+          {
+            "_id": "ZGQzYzAwYmM1NGI3",
+            "name": "Miażdżenie",
+            "before": "worlds/OUTPUT/characters/022_-_Aligator/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/weapons/miazdzenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.CmseQba9Q7gjPWom",
+        "name": "GENERACJA I. NOCNY GHUL",
+        "items": [
+          {
+            "_id": "KpiLMXe8x6QqiZ2H",
+            "name": "Pochwycenie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pochwycenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.r7HDvI7hurbwC4YI",
+        "name": "GIGAMUT",
+        "items": [
+          {
+            "_id": "B8wVZ61PJYpIvgLV",
+            "name": "Taranowanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/taranowanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.BfwMMnZyyOp4ErKQ",
+        "name": "GLADIATOR",
+        "items": [
+          {
+            "_id": "iEzbclUFUAxmDDND",
+            "name": "Stalowe maczugi",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/weapons/stalowe_maczugi.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.Z6sIdSr28syaURmI",
+        "name": "KIDNAPER",
+        "items": [
+          {
+            "_id": "xYyem8AGiuEORhhL",
+            "name": "Taranowanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/taranowanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.C2RWal7yuSyM8zR3",
+        "name": "MROKOSZCZUR",
+        "items": [
+          {
+            "_id": "VdOJqOpPg6I8iReK",
+            "name": "Czuły węch",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/czuly-wech.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.YREmDrGIs23AVoNh",
+        "name": "NEOGATOR",
+        "items": [
+          {
+            "_id": "8WwKpeUrUReEQJ6S",
+            "name": "Miażdżenie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/weapons/miazdzenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.LP16Iu6aaNkn0Azd",
+        "name": "PIES MUTEK",
+        "items": [
+          {
+            "_id": "3GkOxzDeRBCq5uol",
+            "name": "Czuły węch",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/czuly-wech.svg"
+          },
+          {
+            "_id": "4tiArvma7LqbyEw6",
+            "name": "Pochwycenie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pochwycenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.UfmT9pKXIpZvX2OT",
+        "name": "RÓJ SZCZURÓW",
+        "items": [
+          {
+            "_id": "cT1XPDcMl7ddaaZ1",
+            "name": "Czuły węch",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/czuly-wech.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.7odbYt1meXScvBWR",
+        "name": "SZCZĘKOWIJ",
+        "items": [
+          {
+            "_id": "TCRYXxfcSbLjYgGJ",
+            "name": "Pochwycenie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pochwycenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.PSusLvUnP6AH5UUO",
+        "name": "TECHMORWA (ŚREDNIA)",
+        "items": [
+          {
+            "_id": "W43NHl0kYW2wAKV1",
+            "name": "Pochwycenie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pochwycenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.IEH5knp5uVwhBr9i",
+        "name": "ŁOWCA",
+        "items": [
+          {
+            "_id": "5WjLHyLO4nZfRdr5",
+            "name": "Pochwycenie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pochwycenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.NTQ0NTc4NmE0NzJk.Actor.MzJhMDgyZmRiMzU1",
+        "name": "Aligator",
+        "items": [
+          {
+            "_id": "ZGQzYzAwYmM1NGI3",
+            "name": "Miażdżenie",
+            "before": "worlds/OUTPUT/characters/022_-_Aligator/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/weapons/miazdzenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.9vEF9o7uRVHVCgRc.Actor.MzJhMDgyZmRiMzU1",
+        "name": "Aligator",
+        "items": [
+          {
+            "_id": "ZGQzYzAwYmM1NGI3",
+            "name": "Miażdżenie",
+            "before": "worlds/OUTPUT/characters/022_-_Aligator/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/weapons/miazdzenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.RUbXcAdccXL9yZFS.Actor.Z6sIdSr28syaURmI",
+        "name": "KIDNAPER",
+        "items": [
+          {
+            "_id": "xYyem8AGiuEORhhL",
+            "name": "Taranowanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/taranowanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.U6073cTZtfAsNjMf.Actor.BfwMMnZyyOp4ErKQ",
+        "name": "GLADIATOR",
+        "items": [
+          {
+            "_id": "iEzbclUFUAxmDDND",
+            "name": "Stalowe maczugi",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/weapons/stalowe_maczugi.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.bOomiyYTAB0jWv8x.Actor.IEH5knp5uVwhBr9i",
+        "name": "ŁOWCA",
+        "items": [
+          {
+            "_id": "5WjLHyLO4nZfRdr5",
+            "name": "Pochwycenie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pochwycenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.D6luA0XyzWcLHhmC.Actor.CmseQba9Q7gjPWom",
+        "name": "GENERACJA I. NOCNY GHUL",
+        "items": [
+          {
+            "_id": "KpiLMXe8x6QqiZ2H",
+            "name": "Pochwycenie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pochwycenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.muQDkZaICk0W8GTL.Actor.0gWeShZIv4KOO88F",
+        "name": "KORZEC",
+        "items": [
+          {
+            "_id": "CIl2F8c4PHjtq6xW",
+            "name": "Miażdżenie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/weapons/miazdzenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.FspP2MjXP3Wqbh5p.Actor.7odbYt1meXScvBWR",
+        "name": "SZCZĘKOWIJ",
+        "items": [
+          {
+            "_id": "TCRYXxfcSbLjYgGJ",
+            "name": "Pochwycenie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pochwycenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.KI6o941mmkpaYEjt.Actor.LP16Iu6aaNkn0Azd",
+        "name": "PIES MUTEK",
+        "items": [
+          {
+            "_id": "3GkOxzDeRBCq5uol",
+            "name": "Czuły węch",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/czuly-wech.svg"
+          },
+          {
+            "_id": "4tiArvma7LqbyEw6",
+            "name": "Pochwycenie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pochwycenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.NrIZkY7SEkclyOJI.Actor.PSusLvUnP6AH5UUO",
+        "name": "TECHMORWA (ŚREDNIA)",
+        "items": [
+          {
+            "_id": "W43NHl0kYW2wAKV1",
+            "name": "Pochwycenie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/pochwycenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.vmBbL8kfohs5WKER.Actor.r7HDvI7hurbwC4YI",
+        "name": "GIGAMUT",
+        "items": [
+          {
+            "_id": "B8wVZ61PJYpIvgLV",
+            "name": "Taranowanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/taranowanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.6AHXWjWUvlNr34uQ.Actor.YREmDrGIs23AVoNh",
+        "name": "NEOGATOR",
+        "items": [
+          {
+            "_id": "8WwKpeUrUReEQJ6S",
+            "name": "Miażdżenie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/weapons/miazdzenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.s9lHqhJp4uShN0H0.Actor.C2RWal7yuSyM8zR3",
+        "name": "MROKOSZCZUR",
+        "items": [
+          {
+            "_id": "VdOJqOpPg6I8iReK",
+            "name": "Czuły węch",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/czuly-wech.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.tDFhR4TusTuWgWli.Actor.UfmT9pKXIpZvX2OT",
+        "name": "RÓJ SZCZURÓW",
+        "items": [
+          {
+            "_id": "cT1XPDcMl7ddaaZ1",
+            "name": "Czuły węch",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/czuly-wech.svg"
+          }
+        ]
+      }
+    ]
+  }
+}

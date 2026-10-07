@@ -217,7 +217,7 @@ const BRON_MIOTANA = [
     weight: 0.5, price: 10, avail: 40
   },
   {
-    id: "kusza-bloczkowa", name: "Kusza bloczkowa", type: "miotana", icon: "crossbow.svg",
+    id: "kusza-bloczkowa", name: "Kusza bloczkowa", type: "miotana", icon: "kusza_bloczkowa.svg",
     damage: { number: 1, denomination: 12, types: ["piercing"] },
     range: { value: 60, long: 120 },
     props: ["cicha", "two", "ladowanie", "sm"],
@@ -226,7 +226,7 @@ const BRON_MIOTANA = [
   },
   {
     id: "kusza-automatyczna-pistoletowa", name: "Kusza automatyczna pistoletowa",
-    type: "miotana", icon: "crossbow.svg",
+    type: "miotana", icon: "kusza_pistoletowa.svg",
     damage: { number: 1, denomination: 8, types: ["piercing"] },
     range: { value: 9, long: 36 },
     props: ["cicha", "two", "wmag", "sm"],
@@ -243,7 +243,7 @@ const BRON_MIOTANA = [
     weight: 5, price: 130, avail: 10
   },
   {
-    id: "luk-bloczkowy", name: "Łuk bloczkowy", type: "miotana", icon: "bow.svg",
+    id: "luk-bloczkowy", name: "Łuk bloczkowy", type: "miotana", icon: "luk_bloczkowy.svg",
     damage: { number: 1, denomination: 12, types: ["piercing"] },
     range: { value: 60, long: 180 },
     props: ["cicha", "two", "ladowanie"],
@@ -259,7 +259,7 @@ const BRON_MIOTANA = [
     weight: 1, price: 30, avail: 60
   },
   {
-    id: "noz-do-rzucania", name: "Nóż do rzucania", type: "miotana", icon: "combat_knife.svg",
+    id: "noz-do-rzucania", name: "Nóż do rzucania", type: "miotana", icon: "noz_do_rzucania.svg",
     damage: { number: 1, denomination: 4, types: ["piercing"] },
     range: { value: 6, long: 12 },
     props: ["cicha", "fin", "lgt", "thr"],
@@ -573,7 +573,7 @@ const BRON_PALNA_DLUGA = [
     // NOE s. 99 (Zwiadowca → Łowca mutantów, zdolność „Pogromca”): strzelba na mutanty i potwory,
     // budowana 100 h ze 100 gb surowców (PLAN_produkcja D35) — nie ma jej w cenniku. Waga i cena to
     // szacunek MG (cena = 2 × surowce, jak każdy przedmiot ze wzoru); dostępność 0 — nie do kupienia.
-    id: "pogromca", name: "Pogromca", type: "palnaDluga", icon: "pump_shotgun.svg",
+    id: "pogromca", name: "Pogromca", type: "palnaDluga", icon: "pogromca.svg",
     damage: { number: 4, denomination: 6, types: ["poison"] },
     range: { value: 9, long: 18 },
     props: ["wmag", "tryb_p", "ladowanie"],

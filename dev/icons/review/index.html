@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neuroshima icon review</title>
+  <link rel="stylesheet" href="review.css">
+</head>
+<body>
+  <header>
+    <div><p class="eyebrow">Neuroshima asset pipeline</p><h1>Icon review</h1></div>
+    <div class="summary" id="summary">Loading…</div>
+  </header>
+  <main id="items" aria-live="polite"></main>
+  <template id="item-template">
+    <article class="card">
+      <section class="context">
+        <div class="number"></div><h2></h2><p class="tier"></p>
+        <dl><dt>Used for</dt><dd class="where"></dd><dt>Requested change</dt><dd class="request"></dd></dl>
+      </section>
+      <section class="images"></section>
+      <p class="selection-help">The selected image is approved, or used as the source for the next generation when the decision is <strong>Needs revision</strong>.</p>
+      <section class="feedback">
+        <label>Decision<select class="decision"><option value="pending">Pending</option><option value="approve">Approve selected</option><option value="revise">Needs revision</option><option value="reject">Reject all</option></select></label>
+        <label>Feedback<textarea rows="4" placeholder="What reads well? What should change? Mention silhouette, scale, subject, or tone."></textarea></label>
+        <div class="actions"><span class="saved"></span><button type="button">Save feedback</button></div>
+      </section>
+    </article>
+  </template>
+  <script type="module" src="review.mjs"></script>
+</body>
+</html>

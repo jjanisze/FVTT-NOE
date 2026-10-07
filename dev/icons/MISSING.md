@@ -37,8 +37,8 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. Still that future pass,
 still not this queue — but it is two items, not a pile.
 
-**Next batch number: 51** (batch 50 was generated as a 3×3 atlas on 2026-10-03
-and is awaiting GM review; bump this whenever another batch is generated).
+**Next batch number: 55** (batch 54 was generated as three 3×3 atlases on
+2026-10-08 and is awaiting GM review; bump this whenever another batch is generated).
 
 *Batch 40 (2026-09-25): Kamizelka taktyczna, .44 Mag dum-dum, Mięso suszone, Chleb, Owoce
 i warzywa, MRE, Breneka, Zużyty LAW, Magazynek bębnowy — processed and wired; LAW and the drum
@@ -126,11 +126,12 @@ revision requests.
 | 8 | Klucz francuski | Pokrak actor item uses his portrait |
 | 9 | Łopatka kuchenna | Kucharka Irena actor item uses her portrait |
 
-## Queue (A) — batch 50 — generated, awaiting GM review
+## Batch 50 — 6 approved and installed, 3 revisions moved to batch 51
 
-One complete 3×3 atlas contains the requested tray revision and eight verified
-world/module item gaps. Sources and normalized candidates are under
-`dev/icons/review/candidates/batch-50/`.
+One complete 3×3 atlas contained the requested tray revision and eight verified
+world/module item gaps. The tray, fang, fuel, medic refill, metal case and
+heavy-rifle parts are approved and installed. Ammunition components, Pogromca
+and the hoof attack received revisions in batch 51.
 
 | # | Item | Source |
 |---|---|---|
@@ -143,6 +144,74 @@ world/module item gaps. Sources and normalized candidates are under
 | 7 | Części ciężkiego karabinu | Loose parts use the complete Browning M2 icon |
 | 8 | Pogromca | Chemical-dart shotgun shares the ordinary pump-shotgun icon |
 | 9 | Odnóże — KOŃ (SKAŻONY) | Synthetic horse attack needs actor-specific hoof art |
+
+## Batch 51 — 14 approved and installed, 12 revisions, 1 pending
+
+Three 3×3 atlases provide one 27-icon review pass: three batch-50 revisions,
+six physical equipment/weapon gaps, and eighteen reusable creature or machine
+ability icons. Sources, exact prompts and normalized candidates are under
+`dev/icons/review/candidates/batch-51/`.
+
+The complete first pass was rejected for unnecessary grunge and excessive
+detail. All 27 icons now have clean replacements made from flat solid shapes,
+with the `_clean` candidates selected by default in the review page.
+
+The GM approved fourteen clean replacements. Pogromca, Kusza bloczkowa, Atak
+ogonem, Atak psychiczny, Autodestrukcja, Kolec jadowy, Konar, Macki,
+Ryjossawka, Splunięcie kwasem, Stalowe maczugi and Stalowe pięści require
+targeted revisions. Kusza pistoletowa / automatyczna remains pending.
+
+| Atlas | Items |
+|---|---|
+| A | Komponenty Amunicji revision B; Pogromca revision B; Atak kopytem; Butelka Coli Light; Nóż do rzucania; Łuk bloczkowy; Kusza pistoletowa; Kusza bloczkowa; Wyciszony Pistolet 10mm |
+| B | Atak ogonem; Atak psychiczny; Autodestrukcja; Eksplodujące czyraki; Jadowite zęby; Kolec jadowy; Konar; Korzeń; Łapa Neoniedźwiedzia |
+| C | Macki; Piły; Ryjossawka; Splunięcie kwasem; Stalowe maczugi; Stalowe pięści; Szczęki; Szczurze nóżki; Zionięcie radioaktywnym gazem |
+
+## Batch 52 — 19 approved and installed, 8 revisions
+
+The 27-card pass contained twelve targeted Batch 51 revisions, the pistol-crossbow
+family, Staza, and thirteen verified live creature or machine abilities. Nineteen
+icons were approved and installed. The eight requested changes continue in Batch 53.
+Exact prompts and normalized candidates remain archived under
+`dev/icons/review/candidates/batch-52/`.
+
+| Atlas | Items |
+|---|---|
+| A | Pogromca revision C; Kusza bloczkowa revision B; Atak ogonem revision B; Atak psychiczny revision B; Autodestrukcja revision B; Kolec jadowy revision B; Konar revision B; Macki revision B; Ryjossawka revision B |
+| B | Splunięcie kwasem revision B; Stalowe maczugi revision B; Stalowe pięści revision B; Staza; Miażdżenie; Połknięcie; Rozszarpanie; Taranowanie; Pochwycenie |
+| C | Regeneracja (held for batch 53); Zakażenie; Poświata; Czuły węch; Wiele twarzy; Wspinaczka po metalu; Natarcie; Miotacz ognia; Miotacz strzałek |
+
+## Batch 53 — 22 approved and installed, 4 revisions, 1 pending
+
+The 27-card pass contains the eight selected-reference Batch 52 revisions,
+Regeneracja, and eighteen newly verified live bestiary gaps. Twenty-two icons
+were approved and installed. Kolec jadowy, Regeneracja, Nadludzki refleks and
+Szarża continue as selected-reference revisions in Batch 54. Kamuflaż remains
+pending. Atlas A was generated
+from a 3×3 reference sheet composed from each card's saved `candidateId`; Atlases B
+and C cover shared traits and creature-specific abilities. Exact prompts, reference
+sheet, raw atlases and normalized candidates are under
+`dev/icons/review/candidates/batch-53/`.
+
+| Atlas | Items |
+|---|---|
+| A | Atak psychiczny revision C; Autodestrukcja revision C; Kolec jadowy revision C; Stalowe maczugi revision C; Miażdżenie revision B; Taranowanie revision B; Pochwycenie revision B; Czuły węch revision B; Regeneracja |
+| B | Pierwsze spotkanie; Atak wielokrotny; Algorytm czuwania; Współpraca; Kamuflaż; Światłowstręt; Wstrzymanie oddechu; Nadludzki refleks; Szarża |
+| C | Nie do zabicia; Brak głowy; Niewykrywalność; Telepatia; Neozmysły; Pajęcza wspinaczka; Tkacz sieci; Oplątanie; Groza |
+
+## Queue (A) — batch 54 — 27 generated, plus 1 Batch 53 carry-over
+
+The 27-card pass contains four selected-reference revisions and twenty-three
+canonical bestiary abilities with no fitting existing asset. Kamuflaż carries over
+from Batch 53 because its candidate was selected but its decision remains Pending.
+Exact prompts, selected-reference sheet, raw atlases and normalized candidates are
+under `dev/icons/review/candidates/batch-54/`.
+
+| Atlas | Items |
+|---|---|
+| A | Kolec jadowy revision D; Regeneracja revision B; Nadludzki refleks revision B; Szarża revision B; Manewry; Ucieczka; Agresja; Burzyciel; Chwytak |
+| B | Czaszkohełm; Druga linia; Iluzoryczna niewidzialność; Iluzoryczny cel; Kontakt Molocha; Kuloodporny; Legendarna odporność; Malutki; Mało zwrotny |
+| C | Najechanie; Niezniszczalność; Obłażenie; Ofiara; Przejechanie; Przewidywanie; Psychiczny krzyk; Szum mentalny; Ściana żaru |
 
 ## How an item gets added here
 

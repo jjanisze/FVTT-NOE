@@ -48,8 +48,20 @@ Sztuczka art pass.
   baseball-bat, canned-food, brass-knuckles, firing-mode and paralyzer assets.
 - Batch 49: eight approved icons are installed and repointed through Foundry's
   document API. The tray attack remains a requested revision.
-- Batch 50: the tray revision and eight verified world/module item gaps are ready
-  for GM review as one complete 3×3 atlas.
+- Batch 50: six approved icons are installed. Ammunition components, Pogromca
+  and the horse attack received revisions in batch 51.
+- Batch 51: 27 candidates are ready for one GM review pass across three 3×3
+  atlases. The horse variants deliberately share one generic hoof-attack icon.
+  The initial textured pass was rejected and all 27 were regenerated as clean,
+  low-detail silhouettes. FN Scar L was also repointed to the existing dedicated
+  SCAR asset.
+- Batch 51 review: 14 clean icons are installed and repointed live. Twelve
+  targeted revisions remain, while Kusza pistoletowa / automatyczna is pending.
+  Weapon and bestiary generator mappings preserve approved icons on future pack
+  builds; the shared LevelDB packs were not rebuilt during concurrent work.
+- Batch 52: 27 review cards are ready: twelve targeted revisions, the pending
+  pistol crossbow, Staza, and thirteen additional live ability gaps. A generated
+  Regeneracja candidate is held for Batch 53 to preserve the 27-card review size.
 
 ## Prototype and mechanics decisions exposed by batch 42
 

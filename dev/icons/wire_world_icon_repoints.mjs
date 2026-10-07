@@ -2,6 +2,7 @@
 const MODULE_ID = "neuroshima-2026-overrides";
 const ROOT = `modules/${MODULE_ID}/icons/weapons/`;
 const ACTIVITY_ROOT = `modules/${MODULE_ID}/icons/activities/`;
+const ABILITY_ROOT = `modules/${MODULE_ID}/icons/abilities/`;
 const LOOT_ROOT = `modules/${MODULE_ID}/icons/items/loot/`;
 const TOOLS_ROOT = `modules/${MODULE_ID}/icons/tools/`;
 const ICONS = Object.freeze({
@@ -25,6 +26,7 @@ const ICONS = Object.freeze({
   "Atak +0": `${ROOT}browning_m2.svg`,
   "Paralizator": `${ROOT}paralyzer.svg`,
   "Glock 17": `${ROOT}glock_17.svg`,
+  "FN Scar L": `${ROOT}scar_assault_rifle.svg`,
   "Colt \"Peacemaker\"": `${ROOT}peacemaker_revolver.svg`,
   "Atak Wielokrotny Desert Eaglem": `${ROOT}desert_eagle.svg`,
   "Raca sygna\u0142owa": `${ROOT}raca_oswietleniowa.svg`,
@@ -51,6 +53,68 @@ const ICONS = Object.freeze({
   "Uzupe\u0142nienie Narz\u0119dzi Ma\u0142ego Medyka": `${LOOT_ROOT}uzupelnienie_medyka.svg`,
   "Metalowa walizka": `${LOOT_ROOT}metalowa_walizka.svg`,
   "Cz\u0119\u015bci ci\u0119\u017ckiego karabinu": `${LOOT_ROOT}czesci_ciezkiego_karabinu.svg`,
+  "Komponenty Amunicji": `${LOOT_ROOT}komponenty_amunicji.svg`,
+  "Kopyta": `${ROOT}atak_kopytem.svg`,
+  "Butelka Coli Light": `${LOOT_ROOT}cola_light.svg`,
+  "N\u00f3\u017c do rzucania": `${ROOT}noz_do_rzucania.svg`,
+  "\u0141uk bloczkowy": `${ROOT}luk_bloczkowy.svg`,
+  "Wyciszony Pistolet 10mm": `${ROOT}wyciszony_pistolet_10mm.svg`,
+  "Eksploduj\u0105ce czyraki (10/dzie\u0144)": `${ABILITY_ROOT}eksplodujace-czyraki.svg`,
+  "Jadowite z\u0119by": `${ROOT}jadowite_zeby.svg`,
+  "Korze\u0144": `${ROOT}korzen.svg`,
+  "\u0141apa": `${ROOT}lapa_neoniedzwiedzia.svg`,
+  "Pi\u0142y": `${ROOT}pily.svg`,
+  "Szcz\u0119ki": `${ROOT}szczeki.svg`,
+  "Szczurze n\u00f3\u017cki": `${ABILITY_ROOT}szczurze-nozki.svg`,
+  "Zioni\u0119cie (2/walk\u0119)": `${ROOT}zioniecie_radioaktywne.svg`,
+  "Pogromca": `${ROOT}pogromca.svg`,
+  "Kusza pistoletowa": `${ROOT}kusza_pistoletowa.svg`,
+  "Kusza automatyczna pistoletowa": `${ROOT}kusza_pistoletowa.svg`,
+  "Kusza bloczkowa": `${ROOT}kusza_bloczkowa.svg`,
+  "Atak ogonem": `${ROOT}atak_ogonem.svg`,
+  "Konar": `${ROOT}konar.svg`,
+  "Macki": `${ROOT}macki.svg`,
+  "Ryjossawka": `${ROOT}ryjossawka.svg`,
+  "Spluni\u0119cie kwasem": `${ROOT}spluniecie_kwasem.svg`,
+  "Stalowe pi\u0119\u015bci": `${ROOT}stalowe_piesci.svg`,
+  "Staza": `${LOOT_ROOT}staza.svg`,
+  "Po\u0142kni\u0119cie": `${ABILITY_ROOT}polkniecie.svg`,
+  "Rozszarpanie": `${ROOT}rozszarpanie.svg`,
+  "Zaka\u017cenie": `${ABILITY_ROOT}zakazenie.svg`,
+  "Po\u015bwiata": `${ABILITY_ROOT}poswiata.svg`,
+  "Wiele twarzy": `${ABILITY_ROOT}wiele_twarzy.svg`,
+  "Wspinaczka po metalu": `${ABILITY_ROOT}wspinaczka-po-metalu.svg`,
+  "Natarcie": `${ABILITY_ROOT}natarcie.svg`,
+  "Miotacz ognia (4/walk\u0119)": `${ROOT}miotacz_ognia.svg`,
+  "Miotacz strza\u0142ek": `${ROOT}miotacz_strzalek.svg`,
+  "Atak psychiczny": `${ABILITY_ROOT}atak-psychiczny.svg`,
+  "Stalowe maczugi": `${ROOT}stalowe_maczugi.svg`,
+  "Mia\u017cd\u017cenie": `${ROOT}miazdzenie.svg`,
+  "Taranowanie": `${ABILITY_ROOT}taranowanie.svg`,
+  "Pochwycenie": `${ABILITY_ROOT}pochwycenie.svg`,
+  "Czu\u0142y w\u0119ch": `${ABILITY_ROOT}czuly-wech.svg`,
+  "Pierwsze spotkanie": `${ABILITY_ROOT}pierwsze-spotkanie.svg`,
+  "Atak wielokrotny": `${ABILITY_ROOT}atak-wielokrotny.svg`,
+  "Algorytm czuwania": `${ABILITY_ROOT}algorytm-czuwania.svg`,
+  "Wsp\u00f3\u0142praca": `${ABILITY_ROOT}wspolpraca.svg`,
+  "\u015awiat\u0142owstr\u0119t": `${ABILITY_ROOT}swiatlowstret.svg`,
+  "Wstrzymanie oddechu": `${ABILITY_ROOT}wstrzymanie-oddechu.svg`,
+  "Nie do zabicia": `${ABILITY_ROOT}nie-do-zabicia.svg`,
+  "Brak g\u0142owy": `${ABILITY_ROOT}brak-glowy.svg`,
+  "Niewykrywalno\u015b\u0107": `${ABILITY_ROOT}niewykrywalnosc.svg`,
+  "Telepatia": `${ABILITY_ROOT}telepatia.svg`,
+  "Neozmys\u0142y": `${ABILITY_ROOT}neozmysly.svg`,
+  "Paj\u0119cza wspinaczka": `${ABILITY_ROOT}pajecza-wspinaczka.svg`,
+  "Tkacz sieci": `${ABILITY_ROOT}tkacz-sieci.svg`,
+  "Opl\u0105tanie": `${ABILITY_ROOT}oplatanie.svg`,
+  "Groza": `${ABILITY_ROOT}groza.svg`,
+  "Autodestrukcja": `${ABILITY_ROOT}autodestrukcja.svg`,
+  "Autodestrukcja (20%)": `${ABILITY_ROOT}autodestrukcja.svg`,
+  "Autodestrukcja (30%)": `${ABILITY_ROOT}autodestrukcja.svg`,
+  "Autodestrukcja (50%)": `${ABILITY_ROOT}autodestrukcja.svg`,
+  "Autodestrukcja (70%)": `${ABILITY_ROOT}autodestrukcja.svg`,
+  "Autodestrukcja (80%)": `${ABILITY_ROOT}autodestrukcja.svg`,
+  "Autodestrukcja (100%)": `${ABILITY_ROOT}autodestrukcja.svg`,
   "Rura stalowa": `${ROOT}iron_pipe_club.svg`,
   "Raca drogowa": `${ROOT}raca_oswietleniowa.svg`,
   "Walther PPK": `${ROOT}walther_ppk.svg`,
@@ -71,7 +135,7 @@ const ACTOR_ICONS = Object.freeze({
     "Odn\u00f3\u017ce": `${ROOT}odnoze_gigantyczny_pajak.svg`
   }),
   "KO\u0143 (SKA\u017bONY)": Object.freeze({
-    "Odn\u00f3\u017ce": "icons/svg/upgrade.svg"
+    "Odn\u00f3\u017ce": `${ROOT}atak_kopytem.svg`
   })
 });
 
@@ -80,13 +144,18 @@ function isBorrowed(img) {
     || img === "systems/dnd5e/icons/svg/items/loot.svg"
     || img === `${ROOT}ak_47.svg`
     || img === `${ROOT}armalite_carbine.svg`
+    || img === `${ROOT}bow.svg`
     || img === `${ROOT}semi_auto_pistol.svg`
     || img === `${ROOT}revolver.svg`
     || img === `${ROOT}combat_knife.svg`
+    || img === `${ROOT}crossbow.svg`
+    || img === `${ROOT}pump_shotgun.svg`
     || img === `${ROOT}odnoze_gigantyczny_pajak.svg`
     || img === `${ROOT}browning_m2.svg`
     || img === `modules/${MODULE_ID}/icons/ammo/ammo_12_ga.svg`
     || img === `${LOOT_ROOT}pendrive.svg`
+    || img === `${LOOT_ROOT}chemia.svg`
+    || img === `modules/${MODULE_ID}/icons/items/drugs/neuro_cola.svg`
     || /^icons\//i.test(img ?? "")
     || /^worlds\/output\/characters\//i.test(img ?? "");
 }

@@ -1149,6 +1149,73 @@ function isAmmoResetFeature(entry) {
   return entry.section === "bonus" && /magazynek/i.test(entry.text ?? "");
 }
 
+const BESTIARY_ITEM_ICONS = Object.freeze({
+  "alahama.miazdzenie": `modules/${MODULE_ID}/icons/weapons/miazdzenie.svg`,
+  "alahama.ryjossawka": `modules/${MODULE_ID}/icons/weapons/ryjossawka.svg`,
+  "biodroid.autodestrukcja-30": `modules/${MODULE_ID}/icons/abilities/autodestrukcja.svg`,
+  "generacja-i-nocny-ghul.poswiata": `modules/${MODULE_ID}/icons/abilities/poswiata.svg`,
+  "generacja-ii-genotyp-gadzi.jadowite-zeby": `modules/${MODULE_ID}/icons/weapons/jadowite_zeby.svg`,
+  "generacja-iii-szpieg.stalowe-piesci": `modules/${MODULE_ID}/icons/weapons/stalowe_piesci.svg`,
+  "generacja-iii-szpieg.wiele-twarzy": `modules/${MODULE_ID}/icons/abilities/wiele_twarzy.svg`,
+  "generacja-iii-techmutas.atak-psychiczny": `modules/${MODULE_ID}/icons/abilities/atak-psychiczny.svg`,
+  "gladiator.autodestrukcja-80": `modules/${MODULE_ID}/icons/abilities/autodestrukcja.svg`,
+  "gladiator.pily": `modules/${MODULE_ID}/icons/weapons/pily.svg`,
+  "gladiator.stalowe-maczugi": `modules/${MODULE_ID}/icons/weapons/stalowe_maczugi.svg`,
+  "generacja-i-nocny-ghul.pochwycenie": `modules/${MODULE_ID}/icons/abilities/pochwycenie.svg`,
+  "gigamut.taranowanie": `modules/${MODULE_ID}/icons/abilities/taranowanie.svg`,
+  "juggernaut.miotacz-ognia-4-walke": `modules/${MODULE_ID}/icons/weapons/miotacz_ognia.svg`,
+  "juggernaut.autodestrukcja-100": `modules/${MODULE_ID}/icons/abilities/autodestrukcja.svg`,
+  "kidnaper.miotacz-strzalek": `modules/${MODULE_ID}/icons/weapons/miotacz_strzalek.svg`,
+  "kidnaper.autodestrukcja-70": `modules/${MODULE_ID}/icons/abilities/autodestrukcja.svg`,
+  "kidnaper.taranowanie": `modules/${MODULE_ID}/icons/abilities/taranowanie.svg`,
+  "korzec.konar": `modules/${MODULE_ID}/icons/weapons/konar.svg`,
+  "korzec.korzen": `modules/${MODULE_ID}/icons/weapons/korzen.svg`,
+  "kurczak.wspinaczka-po-metalu": `modules/${MODULE_ID}/icons/abilities/wspinaczka-po-metalu.svg`,
+  "lowca.spluniecie-kwasem": `modules/${MODULE_ID}/icons/weapons/spluniecie_kwasem.svg`,
+  "lowca.autodestrukcja-50": `modules/${MODULE_ID}/icons/abilities/autodestrukcja.svg`,
+  "lowca.pochwycenie": `modules/${MODULE_ID}/icons/abilities/pochwycenie.svg`,
+  "megator.atak-ogonem": `modules/${MODULE_ID}/icons/weapons/atak_ogonem.svg`,
+  "megator.polkniecie": `modules/${MODULE_ID}/icons/abilities/polkniecie.svg`,
+  "megator.zioniecie-2-walke": `modules/${MODULE_ID}/icons/weapons/zioniecie_radioaktywne.svg`,
+  "mrokoszczur.zakazenie": `modules/${MODULE_ID}/icons/abilities/zakazenie.svg`,
+  "mrokoszczur.czuly-wech": `modules/${MODULE_ID}/icons/abilities/czuly-wech.svg`,
+  "mobsprzet.autodestrukcja-100": `modules/${MODULE_ID}/icons/abilities/autodestrukcja.svg`,
+  "myslacy-szczur.szczurze-nozki": `modules/${MODULE_ID}/icons/abilities/szczurze-nozki.svg`,
+  "neogator.miazdzenie": `modules/${MODULE_ID}/icons/weapons/miazdzenie.svg`,
+  "neoniedzwiedz.lapa": `modules/${MODULE_ID}/icons/weapons/lapa_neoniedzwiedzia.svg`,
+  "neoniedzwiedz.rozszarpanie": `modules/${MODULE_ID}/icons/weapons/rozszarpanie.svg`,
+  "obronca.autodestrukcja-80": `modules/${MODULE_ID}/icons/abilities/autodestrukcja.svg`,
+  "pulser.eksplodujace-czyraki-10-dzien": `modules/${MODULE_ID}/icons/abilities/eksplodujace-czyraki.svg`,
+  "pulser.autodestrukcja-20": `modules/${MODULE_ID}/icons/abilities/autodestrukcja.svg`,
+  "pies-mutek.czuly-wech": `modules/${MODULE_ID}/icons/abilities/czuly-wech.svg`,
+  "pies-mutek.pochwycenie": `modules/${MODULE_ID}/icons/abilities/pochwycenie.svg`,
+  "roj-szczurow.czuly-wech": `modules/${MODULE_ID}/icons/abilities/czuly-wech.svg`,
+  "szczekowij.pochwycenie": `modules/${MODULE_ID}/icons/abilities/pochwycenie.svg`,
+  "szczekowij.szczeki": `modules/${MODULE_ID}/icons/weapons/szczeki.svg`,
+  "taran.natarcie": `modules/${MODULE_ID}/icons/abilities/natarcie.svg`,
+  "techmorwa-malutka.macki": `modules/${MODULE_ID}/icons/weapons/macki.svg`,
+  "techmorwa-srednia.macki": `modules/${MODULE_ID}/icons/weapons/macki.svg`,
+  "techmorwa-srednia.pochwycenie": `modules/${MODULE_ID}/icons/abilities/pochwycenie.svg`
+});
+
+const BESTIARY_SHARED_ITEM_ICONS = Object.freeze({
+  "pierwsze-spotkanie": `modules/${MODULE_ID}/icons/abilities/pierwsze-spotkanie.svg`,
+  "atak-wielokrotny": `modules/${MODULE_ID}/icons/abilities/atak-wielokrotny.svg`,
+  "algorytm-czuwania": `modules/${MODULE_ID}/icons/abilities/algorytm-czuwania.svg`,
+  "wspolpraca": `modules/${MODULE_ID}/icons/abilities/wspolpraca.svg`,
+  "swiatlowstret": `modules/${MODULE_ID}/icons/abilities/swiatlowstret.svg`,
+  "wstrzymanie-oddechu": `modules/${MODULE_ID}/icons/abilities/wstrzymanie-oddechu.svg`,
+  "nie-do-zabicia": `modules/${MODULE_ID}/icons/abilities/nie-do-zabicia.svg`,
+  "brak-glowy": `modules/${MODULE_ID}/icons/abilities/brak-glowy.svg`,
+  "niewykrywalnosc": `modules/${MODULE_ID}/icons/abilities/niewykrywalnosc.svg`,
+  "telepatia": `modules/${MODULE_ID}/icons/abilities/telepatia.svg`,
+  "neozmysly": `modules/${MODULE_ID}/icons/abilities/neozmysly.svg`,
+  "pajecza-wspinaczka": `modules/${MODULE_ID}/icons/abilities/pajecza-wspinaczka.svg`,
+  "tkacz-sieci": `modules/${MODULE_ID}/icons/abilities/tkacz-sieci.svg`,
+  "oplatanie": `modules/${MODULE_ID}/icons/abilities/oplatanie.svg`,
+  "groza": `modules/${MODULE_ID}/icons/abilities/groza.svg`
+});
+
 function buildBestiaryItem(c, entry, kind) {
   const isAttack = kind === "attack";
   const activities = {};
@@ -1185,7 +1252,9 @@ function buildBestiaryItem(c, entry, kind) {
     _id: idFor("bestiary-item", `${c.id}.${entry.id}`),
     name: entry.name,
     type: "feat",
-    img: "icons/svg/upgrade.svg",
+    img: BESTIARY_ITEM_ICONS[`${c.id}.${entry.id}`]
+      ?? BESTIARY_SHARED_ITEM_ICONS[entry.id]
+      ?? "icons/svg/upgrade.svg",
     system: {
       description: { value: text, chat: "" },
       source: { custom: "Neuroshima RPG — Bestiariusz", rules: "2024" },

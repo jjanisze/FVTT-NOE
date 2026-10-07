@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.YzQzNWUyMzU3YzEz",
+      "name": "GANGUS ŻOŁNIERZ KARABIN",
+      "items": [
+        {
+          "_id": "OWY4NDhiZWJkMWY5",
+          "name": "FN Scar L",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/armalite_carbine.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/scar_assault_rifle.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.OjNMvtMvkQ9Irvs9.Actor.YzQzNWUyMzU3YzEz",
+      "name": "GANGUS ŻOŁNIERZ",
+      "items": [
+        {
+          "_id": "OWY4NDhiZWJkMWY5",
+          "name": "FN Scar L",
+          "before": "modules/neuroshima-2026-overrides/icons/weapons/armalite_carbine.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/scar_assault_rifle.svg"
+        }
+      ]
+    }
+  ]
+}
