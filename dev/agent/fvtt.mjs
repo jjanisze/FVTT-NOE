@@ -31,7 +31,7 @@ import { seedFixture } from "./lib/fixtures.mjs";
 import { runE2E, suiteNames } from "./lib/e2e.mjs";
 import { browserSession, browserVersion, evaluate, hardReload, waitGameReady } from "./lib/cdp.mjs";
 import {
-  disposeContexts, foundryPages, loginInContext, namedContext, rememberSessions, resolveUser, restoreSessions
+  disposeContexts, duplicateSessions, foundryPages, loginInContext, namedContext, rememberSessions, resolveUser, restoreSessions
 } from "./lib/browser.mjs";
 
 const MODULE_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
@@ -63,27 +63,60 @@ function guard(ctx, command, extra) {
   checkMode(ctx.mode, command, { profile: ctx.profile?.name, ...extra });
 }
 
-/** The page a browser-side command acts on: --page=<targetId prefix>, else the ready GM page. */
-async function pickPage(ctx, browser, { requireGM = false } = {}) {
+/**
+ * The page a browser-side command acts on: --page=<targetId prefix>, else a ready page — logged in
+ * as `user` when given, a GM page when `requireGM` (with player contexts open, the first ready page
+ * used to be a player's and quench refused; Codex field test 2026-10-05) — default context first.
+ */
+async function pickPage(ctx, browser, { requireGM = false, user = null } = {}) {
   const list = await foundryPages(ctx, browser);
   if (ctx.opts.page) {
     const p = list.find(x => x.targetId.startsWith(String(ctx.opts.page)));
     if (!p) throw new CliError(`No ${ctx.profile.name} Foundry page ${ctx.opts.page}.`, { code: "no-page", details: { pages: list.map(strip) } });
     return p;
   }
-  const ready = list.filter(p => p.ready && p.userId);
-  const pick = ready.find(p => p.isDefaultContext) ?? ready[0] ?? list.find(p => p.route?.endsWith("/game"));
+  let candidates = list.filter(p => p.ready && p.userId);
+  if (user) {
+    const w = String(user).toLowerCase();
+    candidates = candidates.filter(p => p.userId === user || p.userName?.toLowerCase() === w);
+    if (!candidates.length) {
+      throw new CliError(`No ready ${ctx.profile.name} page logged in as ${user}.`, {
+        code: "no-page", hint: `\`npm run fvtt -- login --user="${user}" --context=<name>\` opens one.`, details: { pages: list.map(strip) }
+      });
+    }
+  }
+  if (requireGM && candidates.length) {
+    const gm = [];
+    for (const p of candidates) {
+      if (await evaluate(browser, p.targetId, "!!globalThis.game?.user?.isGM", { timeoutMs: 5000 }).catch(() => false)) gm.push(p);
+    }
+    if (!gm.length) {
+      throw new CliError(`Every logged-in ${ctx.profile.name} page is a player (${candidates.map(p => p.userName).join(", ")}).`, {
+        code: "not-gm", hint: "Use --page=<a GM page> or `fvtt login`."
+      });
+    }
+    candidates = gm;
+  }
+  const pick = candidates.find(p => p.isDefaultContext) ?? candidates[0] ?? (user ? null : list.find(p => p.route?.endsWith("/game")));
   if (!pick) {
     throw new CliError(`No logged-in ${ctx.profile.name} Foundry page in Chrome.`, {
       code: "no-page", hint: "`npm run fvtt -- login` opens one (as the GM unless --user is given).",
       details: { pages: list.map(strip) }
     });
   }
-  if (requireGM) {
-    const isGM = await evaluate(browser, pick.targetId, "!!globalThis.game?.user?.isGM", { timeoutMs: 5000 }).catch(() => null);
-    if (isGM === false) throw new CliError(`Page ${pick.targetId} is logged in as a player (${pick.userName}).`, { code: "not-gm", hint: "Use --page=<a GM page> or `fvtt login`." });
-  }
   return pick;
+}
+
+/** Warnings for a Quench/eval run in `page`: the same user in other tabs, another GM active. */
+async function clientWarnings(ctx, browser, page) {
+  const warnings = [];
+  const dup = duplicateSessions(await foundryPages(ctx, browser)).find(d => d.userId === page.userId);
+  if (dup) warnings.push(`${dup.userName} is logged in from ${dup.pages.length} tabs — every active-GM automation runs once per tab, so documents can be created twice.`);
+  const gm = await evaluate(browser, page.targetId, "({ isGM: game.user.isGM, active: game.users.activeGM?.name ?? null, self: game.users.activeGM?.isSelf ?? false })", { timeoutMs: 5000 }).catch(() => null);
+  if (gm?.isGM && !gm.self && gm.active) {
+    warnings.push(`${gm.active} is the active GM, not this tab: hooks that run only on the active GM run in their browser, and batches that depend on them can go red for that reason alone. The sandbox (\`fvtt e2e --quench\`) is single-GM.`);
+  }
+  return warnings;
 }
 
 const strip = p => ({ targetId: p.targetId, route: p.route, user: p.userName ?? null, ready: !!p.ready, defaultContext: p.isDefaultContext });
@@ -203,8 +236,13 @@ command("doctor", "Everything at once: config, mode, secret, servers, Chrome, mu
     }
     if (name === "campaign" && (!locks[MODULE_ID] || !locks.dnd5e)) problems.push("Campaign package locks missing (D7): Update-all could overwrite the working tree or move dnd5e.");
     if (s.status.reachable && !s.servers.length) problems.push(`${name}: something answers on the port but no Foundry process was found for this data path.`);
-    if (!s.status.reachable && s.held.length) problems.push(`${name}: server down but ${s.held.length} LevelDB(s) held — ${s.suspects.map(x => `${x.what} pid ${x.pid}`).join(", ") || "unknown holder"}.`);
-    if (s.held.length && s.suspects.length) p.levelDbSuspects = s.suspects;
+    // Suspects matter only when nobody serves the data path and something still holds a DB; while
+    // the server runs, the held DBs are its own and every idle foundry-mcp is noise (field test).
+    if (!s.status.reachable && s.held.length) {
+      problems.push(`${name}: server down but ${s.held.length} LevelDB(s) held — ${s.suspects.map(x => `${x.what} pid ${x.pid}`).join(", ") || "unknown holder"}.`);
+      p.levelDbSuspects = s.suspects;
+    }
+    out.dbProcesses ??= summariseDbProcesses(s.suspects);
   }
 
   const v = await browserVersion(ctx.cdp);
@@ -223,6 +261,10 @@ command("doctor", "Everything at once: config, mode, secret, servers, Chrome, mu
         out.chrome.foundryPages[name] = list.map(strip);
         if (out.profiles[name].active && list.length && !list.some(p => p.ready)) {
           hints.push(`${name}: Foundry tab not logged in — \`npm run fvtt -- login${name === "campaign" ? "" : " --profile=" + name}\`.`);
+        }
+        for (const d of duplicateSessions(list)) {
+          problems.push(`${name}: ${d.userName} is logged in from ${d.pages.length} tabs (${d.pages.map(x => x.targetId.slice(0, 8)).join(", ")}) — every active-GM automation runs once per tab.`);
+          hints.push(`${name}: close all but one of ${d.userName}'s tabs (chrome-devtools close_page); world:create/e2e dispose fvtt's own contexts.`);
         }
       }
     } finally {
@@ -248,6 +290,15 @@ function pythonCheck() {
   return { python: py[0] ?? null, version: version || null, python3: py3[0] ?? null, python3IsStoreStub: /WindowsApps/i.test(py3[0] ?? "") };
 }
 
+/** foundry-mcp / build-packs processes, counted: one per ended agent session piles up, harmlessly. */
+function summariseDbProcesses(suspects) {
+  if (!suspects.length) return null;
+  const count = {};
+  for (const s of suspects) count[s.what] = (count[s.what] ?? 0) + 1;
+  const oldest = suspects.map(s => s.created).filter(Boolean).sort()[0] ?? null;
+  return { count, oldest, note: "Idle unless a server is down with DBs held (then they are listed as suspects there)." };
+}
+
 /** Working-tree changes with mtimes — lets an agent see what it did not write itself (§5 G). */
 function dirtyFiles(since) {
   const res = spawnSync("git", ["status", "--porcelain", "--untracked-files=all"], { cwd: MODULE_ROOT, encoding: "utf8", windowsHide: true });
@@ -262,11 +313,18 @@ function dirtyFiles(since) {
   }).filter(r => !from || (r.mtime ?? Infinity) >= from);
   const packs = rows.filter(r => r.file.startsWith("packs/"));
   const other = rows.filter(r => !r.file.startsWith("packs/")).sort((a, b) => (b.mtime ?? 0) - (a.mtime ?? 0));
+  // By folder first: 306 dirty files of one icon batch buried everything else (field test).
+  const byDir = {};
+  for (const r of other) {
+    const dir = r.file.includes("/") ? r.file.split("/").slice(0, 2).join("/").replace(/\/[^/]*\.[^/]*$/, "") : ".";
+    byDir[dir] = (byDir[dir] ?? 0) + 1;
+  }
   return {
     since: from ? new Date(from).toISOString() : null,
     packFiles: packs.length,
-    files: other.slice(0, 15).map(r => ({ ...r, mtime: r.mtime ? new Date(r.mtime).toISOString() : null })),
-    more: Math.max(0, other.length - 15)
+    total: other.length,
+    byDir: Object.fromEntries(Object.entries(byDir).sort((a, b) => b[1] - a[1])),
+    newest: other.slice(0, 10).map(r => ({ ...r, mtime: r.mtime ? new Date(r.mtime).toISOString() : null }))
   };
 }
 
@@ -315,15 +373,32 @@ command("login", "Log Chrome into the running world as a user (D8). --user=<name
       targetIds = inCtx.map(p => p.targetId);
       urls = inCtx.map(p => p.url);
     } else {
-      const inDefault = (await foundryPages(ctx, browser)).filter(p => p.isDefaultContext);
-      targetIds = inDefault.map(p => p.targetId);
-      urls = inDefault.map(p => p.url);
+      const all = await foundryPages(ctx, browser);
+      const inDefault = all.filter(p => p.isDefaultContext);
+      // No default-context tab: re-use a tab that already shows this user, or a dead one in a context
+      // fvtt made, before opening a new one — a fresh tab next to a stale isolated one became two
+      // clients of the same GM once the stale one woke up (field test 2026-10-07).
+      const reuse = inDefault.length ? null
+        : all.find(p => p.userId === user.id) ?? all.find(p => !p.ready && !p.isDefaultContext);
+      if (reuse) {
+        browserContextId = reuse.isDefaultContext ? null : reuse.context;
+        contextName = reuse.isDefaultContext ? "default" : `existing ${reuse.context.slice(0, 8)}`;
+        targetIds = [reuse.targetId];
+        urls = [reuse.url];
+      } else {
+        targetIds = inDefault.map(p => p.targetId);
+        urls = inDefault.map(p => p.url);
+      }
     }
     const res = await loginInContext(ctx, browser, { userId: user.id, browserContextId, targetIds, urls });
+    const dup = duplicateSessions(await foundryPages(ctx, browser)).find(d => d.userId === user.id);
     return {
       ok: true, profile: ctx.profile.name, user: { id: user.id, name: user.name, gm: user.gm }, context: contextName,
       pages: res.pages, world: res.ready.world,
-      hint: "chrome-devtools MCP: list_pages, then select_page on the page titled with this world."
+      ...(dup ? {
+        warning: `${user.name} is now logged in from ${dup.pages.length} tabs: ${dup.pages.map(p => p.targetId.slice(0, 8)).join(", ")} — active-GM automation runs once per tab.`,
+        hint: "Close the extra tab (chrome-devtools close_page), or log it in as another user."
+      } : { hint: "chrome-devtools MCP: list_pages, then select_page on the page titled with this world." })
     };
   } finally {
     browser.close();
@@ -356,6 +431,37 @@ command("reload", "Hard-reload a Foundry page (bypasses the ES module cache) and
   }
 });
 
+command("eval", "Run JavaScript in a Foundry page, print its JSON result. --expr=<expression> | --file=<path> (async function body: `return` the value, `args` = --args JSON) [--user=<name>] [--page=<targetId>] [--timeout=<s>]", async opts => {
+  const ctx = context(opts);
+  guard(ctx, "eval");
+  let body;
+  if (typeof opts.expr === "string") body = `return (${opts.expr});`;
+  else if (typeof opts.file === "string") body = fs.readFileSync(path.resolve(opts.file), "utf8");
+  else throw new CliError("eval needs --expr=<expression> or --file=<path>.", { code: "usage", hint: "e.g. `fvtt eval --profile=sandbox --user=\"Gracz 1\" --expr=\"game.user.character?.name\"`" });
+  let args = null;
+  if (typeof opts.args === "string") {
+    try { args = JSON.parse(opts.args); } catch (err) { throw new CliError(`--args is not JSON: ${err.message}`, { code: "usage" }); }
+  }
+  const browser = await browserSession(ctx.cdp);
+  try {
+    const p = await pickPage(ctx, browser, { user: typeof opts.user === "string" ? opts.user : null });
+    await waitGameReady(browser, p.targetId, { timeoutMs: 60_000 });
+    const t0 = Date.now();
+    // Documents and applications cannot cross by value ("Object reference chain is too long"):
+    // their identity does.
+    const expression = `(async () => {
+      const v = await (async (args) => {\n${body}\n})(${JSON.stringify(args)});
+      if (v && typeof v === "object" && v.documentName) return { documentName: v.documentName, id: v.id, uuid: v.uuid };
+      if (v instanceof foundry.applications.api.ApplicationV2) return { application: v.constructor.name, id: v.id };
+      return v;
+    })()`;
+    const value = await evaluate(browser, p.targetId, expression, { timeoutMs: seconds(opts.timeout, 60_000) });
+    return { ok: true, profile: ctx.profile.name, targetId: p.targetId, user: p.userName ?? null, ms: Date.now() - t0, value: value ?? null };
+  } finally {
+    browser.close();
+  }
+});
+
 command("quench", "Run the module's Quench batches in a GM page. [--filter=<key part>] [--page=<targetId>] [--reload] [--timeout=<s>]", async opts => {
   const ctx = context(opts);
   guard(ctx, "quench");
@@ -364,8 +470,11 @@ command("quench", "Run the module's Quench batches in a GM page. [--filter=<key 
   try {
     const p = await pickPage(ctx, browser, { requireGM: true });
     const extra = "!!(g.neuroshima?.tests && globalThis.quench)";
+    let warnings = [];
     const run = async () => {
       await waitGameReady(browser, p.targetId, { extra });
+      warnings = await clientWarnings(ctx, browser, p);
+      for (const w of warnings) note(`warning: ${w}`);
       return evaluate(browser, p.targetId, `game.neuroshima.tests.run(${JSON.stringify(String(opts.filter ?? ""))})`,
         { timeoutMs: seconds(opts.timeout, 15 * 60_000) });
     };
@@ -382,7 +491,7 @@ command("quench", "Run the module's Quench batches in a GM page. [--filter=<key 
       reloaded = true;
       summary = await run();
     }
-    return { ok: summary.failed === 0, profile: ctx.profile.name, targetId: p.targetId, reloaded, ...summary };
+    return { ok: summary.failed === 0, profile: ctx.profile.name, targetId: p.targetId, reloaded, ...(warnings.length ? { warnings } : {}), ...summary };
   } finally {
     browser.close();
   }
@@ -499,12 +608,19 @@ command("world:create", "Create + bootstrap a sandbox world agent-<slug>-<date>:
   const slug = opts._[0];
   if (!slug) throw new CliError("world:create needs a slug.", { code: "usage", hint: "e.g. `fvtt world:create granat`" });
   await lockExclusive(ctx.profile.name, "world:create", seconds(opts.wait, 120_000));
+  // The current sandbox world goes down; tabs fvtt logged into it would wake up in the new one.
+  const contextsClosed = await disposeContexts(ctx);
   const res = await createWorld(ctx, {
     slug, modules: list(opts.modules) ?? DEFAULT_MODULES, players: list(opts.players) ?? DEFAULT_PLAYERS,
     fixture: opts.fixture ?? null, startServer
   });
   const seeded = opts.fixture ? await seedFixture(ctx, { fixture: String(opts.fixture) }) : null;
-  return { ok: true, profile: ctx.profile.name, ...res, seeded, hint: "`fvtt login --profile=sandbox --user=Gamemaster --context=gm`, then --user=\"Gracz 1\" --context=gracz1." };
+  return {
+    ok: true, profile: ctx.profile.name, ...res, seeded, contextsClosed,
+    hint: seeded
+      ? `The fixture ran in a GM tab that stays logged in (${seeded.page.slice(0, 8)}, context "gm") — use it via --page, do not log the GM in again. Players: \`fvtt login --profile=sandbox --user="Gracz 1" --context=gracz1\`.`
+      : "`fvtt login --profile=sandbox --user=Gamemaster --context=gm`, then --user=\"Gracz 1\" --context=gracz1."
+  };
 });
 
 command("world:seed", "Run a fixture (dev/e2e/fixtures/<name>.mjs) in a GM page of the running sandbox world. --fixture=<name>", async opts => {
@@ -520,7 +636,10 @@ command("world:launch", "Launch a world on a profile's server (shuts down the cu
   if (!opts._[0]) throw new CliError("world:launch needs a world id.", { code: "usage" });
   if (ctx.profile.isCampaign) throw refuse("Switching worlds on the campaign server is not a sandbox action.", "campaign", "Use `fvtt restart --world=<id>` deliberately.");
   await lockExclusive(ctx.profile.name, "world:launch", seconds(opts.wait, 120_000));
-  return { ok: true, profile: ctx.profile.name, ...(await launchWorld(ctx, String(opts._[0]), { startServer })) };
+  const st = await new FoundryClient(ctx.profile).status();
+  const switching = st.active && st.world !== String(opts._[0]);
+  const contextsClosed = switching ? await disposeContexts(ctx) : [];
+  return { ok: true, profile: ctx.profile.name, ...(await launchWorld(ctx, String(opts._[0]), { startServer })), contextsClosed };
 });
 
 command("world:delete", "Delete an fvtt-created sandbox world (§4 guards: agent- id, marker, not active, not protected, nothing held). <id> [--stop] (shut it down first if it is the running sandbox world)", async opts => {
@@ -544,7 +663,7 @@ command("world:delete", "Delete an fvtt-created sandbox world (§4 guards: agent
   return { ok: true, profile: ctx.profile.name, stoppedFirst: stopped, ...res, contextsClosed };
 });
 
-command("e2e", "Layer 6: fresh sandbox world, GM + player clients, suites from dev/e2e/suites → logs/e2e/<run>/report.json. [--suites=a,b] [--modules=a,b] [--quench] [--keep] [--reuse]", async opts => {
+command("e2e", "Layer 6: fresh sandbox world, GM + player clients, suites from dev/e2e/suites → logs/e2e/<run>/report.json. [--suites=a,b] [--modules=a,b] [--quench] [--keep] [--reuse] [--trace-writes] (every document write with a stack, per suite)", async opts => {
   const ctx = context({ profile: "sandbox", ...opts });
   guard(ctx, "e2e");
   if (ctx.profile.isCampaign) throw refuse("e2e runs in the sandbox only.", "campaign");
@@ -552,7 +671,8 @@ command("e2e", "Layer 6: fresh sandbox world, GM + player clients, suites from d
   if (!suites.length) throw new CliError("No suites in dev/e2e/suites.", { code: "usage" });
   await lockExclusive(ctx.profile.name, "e2e", seconds(opts.wait, 300_000));
   const res = await runE2E(ctx, {
-    suites, modules: list(opts.modules) ?? undefined, keep: Boolean(opts.keep), reuse: Boolean(opts.reuse), quench: Boolean(opts.quench)
+    suites, modules: list(opts.modules) ?? undefined, keep: Boolean(opts.keep), reuse: Boolean(opts.reuse), quench: Boolean(opts.quench),
+    traceWrites: Boolean(opts["trace-writes"])
   });
   return { ...res, ...(res.ok ? {} : { hint: "World and tabs kept for inspection; read the report, look at the screenshots. `fvtt e2e --reuse` reruns without recreating." }) };
 });

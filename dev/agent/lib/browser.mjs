@@ -12,7 +12,7 @@ import { FILES, readJson, writeJson } from "./config.mjs";
 import { FoundryClient } from "./foundry-http.mjs";
 import {
   browserSession, pages, isFoundryPage, describePage, evaluate, setSessionCookie,
-  createContext, contextExists, openPage, navigate, waitGameReady
+  createContext, contextExists, openPage, navigate, hardReload, waitGameReady
 } from "./cdp.mjs";
 import { CliError, note } from "./output.mjs";
 
@@ -37,6 +37,21 @@ export async function foundryPages(ctx, browser) {
     out.push({ ...describePage(t), url: t.url, isDefaultContext: !nonDefault.has(t.browserContextId), ...who });
   }
   return out;
+}
+
+/**
+ * Users logged in from more than one ready page of a profile. Foundry treats each page as a client
+ * of that user, so "active GM only" automation runs once per page — the silent double-run of the
+ * 2026-10-05 and 2026-10-07 field tests.
+ */
+export function duplicateSessions(list) {
+  const byUser = new Map();
+  for (const p of list.filter(x => x.ready && x.userId)) {
+    const e = byUser.get(p.userId) ?? { userId: p.userId, userName: p.userName, pages: [] };
+    e.pages.push({ targetId: p.targetId, context: p.context, isDefaultContext: p.isDefaultContext });
+    byUser.set(p.userId, e);
+  }
+  return [...byUser.values()].filter(e => e.pages.length > 1);
 }
 
 /** Snapshot before a restart: one entry per browser context that had a logged-in Foundry page. */
@@ -130,7 +145,18 @@ export async function loginInContext(ctx, browser, { userId, browserContextId = 
       await navigate(browser, id, `${origin}/game`);
     }
   }
-  const ready = await waitGameReady(browser, targets[0]);
+  let ready;
+  try {
+    ready = await waitGameReady(browser, targets[0], { timeoutMs: 90_000 });
+  } catch (err) {
+    // A tab restored right after a server restart sometimes sits black on /game and never boots
+    // (sandbox `packs`, 2026-10-07). Reload THIS tab once — opening another one instead left two
+    // clients of the same GM. A real logout (/join) is not retried: the cookie was just set.
+    if (err.code !== "not-ready") throw err;
+    note("tab did not become ready — hard reload, once");
+    await hardReload(browser, targets[0]);
+    ready = await waitGameReady(browser, targets[0], { timeoutMs: 90_000 });
+  }
   return { pages: targets, ready };
 }
 

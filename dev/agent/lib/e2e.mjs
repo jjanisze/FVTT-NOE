@@ -12,21 +12,27 @@
  * `t.client(name).eval(fn, ...args)` runs `fn` in that browser (serialised — no closures),
  * `t.step(label, fn)`, `t.assert(cond, msg, details)`, `t.waitFor(client, fn, opts)`,
  * `t.screenshot(client, label)` — screenshots are evidence for the agent to look at, never
- * pixel-diffed.
+ * pixel-diffed. Inside the browser every client carries `window.__e2e` (lib/e2e-page.mjs): forced
+ * d20 faces, roll-dialog and dialog clicks, chat-card clicks, bounded waits, `quiet()`.
+ *
+ * Between suites the harness waits for every client to go quiet and ends all combats before the
+ * next fixture reseeds (a reseed racing the previous suite's last writes errored on the dead scene).
+ * `traceWrites` records every document write with a short stack, per suite, next to the report.
  */
 
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-import { MODULE_ID } from "./config.mjs";
+import { FILES, MODULE_ID, readJson } from "./config.mjs";
 import { browserSession, waitGameReady } from "./cdp.mjs";
-import { loginInContext, namedContext, resolveUser, foundryPages } from "./browser.mjs";
+import { duplicateSessions, loginInContext, namedContext, resolveUser, foundryPages } from "./browser.mjs";
 import { CliError, note, sleep } from "./output.mjs";
 import { FoundryClient } from "./foundry-http.mjs";
 import { createWorld, deleteWorld, listWorlds, shutdownWorldAndWait, DEFAULT_MODULES } from "./worlds.mjs";
 import { disposeContexts } from "./browser.mjs";
 import { startServer } from "./server.mjs";
 import { agentWorldId } from "./guards.mjs";
+import { installE2E } from "./e2e-page.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MODULE_ROOT = path.resolve(HERE, "../../..");
@@ -50,21 +56,32 @@ export class AssertionError extends Error {
 
 /** One logged-in browser tab with a persistent flat CDP session: eval, console capture, screenshots. */
 export class Client {
-  constructor(browser, { name, user, targetId }) {
-    Object.assign(this, { browser, name, user, targetId, errors: [] });
+  constructor(browser, { name, user, targetId, trace = false }) {
+    Object.assign(this, { browser, name, user, targetId, trace, errors: [] });
+  }
+
+  /** `window.__e2e` in this page (after every load — a reload drops it). */
+  async install() {
+    return this.eval(installE2E, { trace: this.trace });
+  }
+
+  /** Call one `window.__e2e` helper in this page: `client.helper("forceD20", [20])`. */
+  helper(name, ...args) {
+    return this.eval((n, a) => window.__e2e[n](...a), name, args);
   }
 
   async attach() {
     const { sessionId } = await this.browser.send("Target.attachToTarget", { targetId: this.targetId, flatten: true });
     this.sessionId = sessionId;
+    // Origins (host:port) stripped from everything that lands in a report — paths are enough.
+    const clean = s => String(s).replace(/https?:\/\/[^/\s)]+/g, "").slice(0, 1500);
     this.browser.listeners.add(msg => {
       if (msg.sessionId !== this.sessionId) return;
       if (msg.method === "Runtime.exceptionThrown") {
         const d = msg.params.exceptionDetails;
-        this.errors.push({ kind: "exception", text: (d.exception?.description ?? d.text ?? "").slice(0, 1500) });
+        this.errors.push({ kind: "exception", text: clean(d.exception?.description ?? d.text ?? "") });
       } else if (msg.method === "Runtime.consoleAPICalled" && msg.params.type === "error") {
-        const text = msg.params.args.map(a => a.value ?? a.description ?? "").join(" ").slice(0, 1500);
-        this.errors.push({ kind: "console.error", text });
+        this.errors.push({ kind: "console.error", text: clean(msg.params.args.map(a => a.value ?? a.description ?? "").join(" ")) });
       }
     });
     await this.send("Runtime.enable");
@@ -77,11 +94,14 @@ export class Client {
 
   /** Run `fn` (a function; serialised, so no closures) with JSON arguments in this browser. */
   async eval(fn, ...args) {
-    // A Document (e.g. what combat.nextTurn() resolves to) cannot cross by value — "Object reference
-    // chain is too long" — so documents come back as their identity.
+    // A Document (e.g. what combat.nextTurn() resolves to) or an Application (what sheet.close()
+    // resolves to) cannot cross by value — "Object reference chain is too long" — so they come back
+    // as their identity.
     const expression = `(async () => {
       const v = await (${typeof fn === "function" ? fn.toString() : fn})(...${JSON.stringify(args)});
-      return v && typeof v === "object" && v.documentName ? { documentName: v.documentName, id: v.id, uuid: v.uuid } : v;
+      if (v && typeof v === "object" && v.documentName) return { documentName: v.documentName, id: v.id, uuid: v.uuid };
+      if (v instanceof foundry.applications.api.ApplicationV2) return { application: v.constructor.name, id: v.id };
+      return v;
     })()`;
     const r = await this.send("Runtime.evaluate", { expression, awaitPromise: true, returnByValue: true, userGesture: true, timeout: 120_000 }, { timeoutMs: 130_000 });
     if (r.exceptionDetails) {
@@ -122,6 +142,7 @@ export class Client {
     await this.send("Runtime.evaluate", { expression: "window.__fvttStale = true" });
     await this.send("Page.reload", { ignoreCache: true });
     await waitGameReady(this.browser, this.targetId, { extra: "!!g.neuroshima" });
+    await this.install();
   }
 
   drainErrors() {
@@ -169,6 +190,16 @@ class SuiteContext {
     throw new AssertionError(`Timed out after ${timeoutMs} ms waiting for ${message}.`, { last });
   }
 
+  /** Queue d20 faces in a client (`window.__e2e.forceD20`); undo with `client.helper("restoreDice")`. */
+  d20(client, faces, opts = {}) {
+    return client.helper("forceD20", faces, opts);
+  }
+
+  /** Every client (or the named ones) quiet: no socket request in flight, no canvas animation. */
+  async quiet(names = [...this.clients.keys()], opts = {}) {
+    return quietAll(names.map(n => this.client(n)), opts);
+  }
+
   async screenshot(clientName, label) {
     const n = String(this.screenshots.length + 1).padStart(2, "0");
     const file = path.join(this.run.dir, `${this.suite.name}-${n}-${clientName.replace(/\W+/g, "_")}-${label.replace(/\W+/g, "_")}.jpg`);
@@ -193,21 +224,71 @@ class SuiteContext {
 
 const contextName = name => `e2e-${name.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
 
+async function quietAll(clients, opts = {}) {
+  const out = {};
+  for (const c of clients) out[c.name] = await c.helper("quiet", opts).catch(err => ({ error: err.message }));
+  return out;
+}
+
 /** Log every needed user in, each in its own isolated context, and attach a Client. */
-async function openClients(ctx, browser, names) {
+async function openClients(ctx, browser, names, { trace = false } = {}) {
   const clients = new Map();
   for (const name of names) {
     const user = name === "gm" ? await resolveUser(ctx, null) : await resolveUser(ctx, name);
     const { id } = await namedContext(browser, ctx.profile.name, contextName(name));
     const inCtx = (await foundryPages(ctx, browser)).filter(p => p.context === id);
     const res = await loginInContext(ctx, browser, { userId: user.id, browserContextId: id, targetIds: inCtx.map(p => p.targetId), urls: inCtx.map(p => p.url) });
-    const client = new Client(browser, { name, user: user.name, targetId: res.pages[0] });
+    const client = new Client(browser, { name, user: user.name, targetId: res.pages[0], trace });
     await client.attach();
     // The working tree's current code, not whatever ES modules the tab cached earlier.
     await client.reload();
     clients.set(name, client);
   }
   return clients;
+}
+
+/**
+ * A user connected twice runs every "active GM only" automation twice (field test 2026-10-07: NPC
+ * items dropped twice, ~10 min spent suspecting new code). Any other tab logged in as one of our
+ * clients' users: fvtt's own stale contexts are disposed, anything else fails the run up front.
+ */
+async function evictDuplicates(ctx, browser, clients) {
+  const ours = new Set([...clients.values()].map(c => c.targetId));
+  const pagesNow = await foundryPages(ctx, browser);
+  const users = new Set(pagesNow.filter(p => ours.has(p.targetId)).map(p => p.userId));
+  const ourContexts = new Set(pagesNow.filter(p => ours.has(p.targetId)).map(p => p.context));
+  const dups = duplicateSessions(pagesNow).filter(d => users.has(d.userId));
+  const foreign = [];
+  const registry = readJson(FILES.contexts) ?? {};
+  const fvttContexts = new Map(Object.entries(registry).filter(([k]) => k.startsWith(`${ctx.profile.name}:`)).map(([k, v]) => [v.browserContextId, k]));
+  for (const d of dups) {
+    for (const p of d.pages.filter(x => !ours.has(x.targetId))) {
+      if (ourContexts.has(p.context)) {
+        note(`closing a second tab in one of the run's own contexts (${d.userName})`);
+        await browser.send("Target.closeTarget", { targetId: p.targetId }).catch(() => {});
+      } else if (fvttContexts.has(p.context)) {
+        note(`closing stale context ${fvttContexts.get(p.context)} (also logged in as ${d.userName})`);
+        await browser.send("Target.disposeBrowserContext", { browserContextId: p.context }).catch(() => {});
+      } else {
+        foreign.push({ user: d.userName, targetId: p.targetId, defaultContext: p.isDefaultContext });
+      }
+    }
+  }
+  if (foreign.length) {
+    throw new CliError(`Another tab is logged in as ${[...new Set(foreign.map(f => f.user))].join(", ")} in this world — every active-GM automation would run twice.`, {
+      code: "duplicate-session", hint: "Close those tabs (chrome-devtools close_page) and rerun.", details: { foreign }
+    });
+  }
+}
+
+/** Before a reseed: everything from the previous suite settled, no combat left running. */
+async function settleBetweenSuites(clients) {
+  const before = await quietAll(clients.values());
+  await clients.get("gm").eval(async () => {
+    for (const c of [...game.combats]) await c.delete();
+  });
+  const after = await quietAll(clients.values());
+  return { before, after };
 }
 
 /**
@@ -235,7 +316,7 @@ async function seed(gm, fixture) {
  * Run suites against the running sandbox world.
  * @returns {Promise<object>} the report (also written to logs/e2e/<run>/report.json)
  */
-export async function runSuites(ctx, { suites, world, quench = false, logSince = null }) {
+export async function runSuites(ctx, { suites, world, quench = false, logSince = null, traceWrites = false }) {
   const runId = `${new Date().toISOString().replace(/[:.]/g, "-").slice(0, 19)}`;
   const run = { id: runId, dir: path.join(LOGS, runId) };
   fs.mkdirSync(run.dir, { recursive: true });
@@ -252,11 +333,14 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
   const report = { run: runId, world, startedAt: new Date().toISOString(), suites: [] };
   run.startedAt = logSince ?? new Date(); // server-log window: from world creation when there was one
   try {
-    const clients = await openClients(ctx, browser, needed);
+    const clients = await openClients(ctx, browser, needed, { trace: traceWrites });
+    await evictDuplicates(ctx, browser, clients);
     report.clients = [...clients.values()].map(c => ({ name: c.name, user: c.user }));
-    for (const suite of loaded) {
+    for (const [i, suite] of loaded.entries()) {
       const t0 = Date.now();
+      if (i > 0) await settleBetweenSuites(clients);
       for (const c of clients.values()) c.drainErrors();
+      if (traceWrites) for (const c of clients.values()) await c.eval(() => { window.__e2e.writes.length = 0; });
       const fixture = suite.fixture === null ? null : await seed(clients.get("gm"), suite.fixture ?? "skirmish");
       await sleep(500); // let the seed's broadcasts (character assignment, scene) reach every client
       for (const c of clients.values()) await settle(c);
@@ -272,9 +356,17 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
       const allowed = suite.allowConsoleErrors ?? [];
       const unexpected = Object.values(consoleErrors).flat().filter(e => !allowed.some(re => re.test(e.text)));
       const ok = !error && (suite.failOnConsoleErrors === false || unexpected.length === 0);
+      let writes = null;
+      if (traceWrites) {
+        const all = {};
+        for (const c of clients.values()) all[c.name] = await c.eval(() => window.__e2e?.writes ?? []).catch(() => []);
+        const file = path.join(run.dir, `${suite.name}-writes.json`);
+        fs.writeFileSync(file, JSON.stringify(all, null, 2));
+        writes = path.relative(MODULE_ROOT, file).replaceAll("\\", "/");
+      }
       report.suites.push({
         name: suite.name, ok, ms: Date.now() - t0, error, steps: t.steps,
-        consoleErrors, screenshots: t.screenshots, notes: t.notes
+        consoleErrors, screenshots: t.screenshots, notes: t.notes, ...(writes ? { writes } : {})
       });
       note(`${ok ? "PASS" : "FAIL"} ${suite.name} (${Date.now() - t0} ms)`);
     }
@@ -304,7 +396,7 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
  * `modules` enabled (unless `reuse` and it is already running), the suites (+ Quench if asked),
  * then — when green and not `keep` — world and browser contexts deleted.
  */
-export async function runE2E(ctx, { suites = suiteNames(), slug = "e2e", modules = DEFAULT_MODULES, keep = false, reuse = false, quench = false } = {}) {
+export async function runE2E(ctx, { suites = suiteNames(), slug = "e2e", modules = DEFAULT_MODULES, keep = false, reuse = false, quench = false, traceWrites = false } = {}) {
   const id = agentWorldId(slug);
   const t0 = new Date();
   const client = new FoundryClient(ctx.profile);
@@ -314,11 +406,13 @@ export async function runE2E(ctx, { suites = suiteNames(), slug = "e2e", modules
     if (exists?.agent) {
       if (st.active && st.world === id) await shutdownWorldAndWait(ctx, client);
       await deleteWorld(ctx, id);
-      await disposeContexts(ctx);
     }
+    // Every fvtt context on this profile is logged into a world that is about to go away; left
+    // alive, one woke up in the next world as the same GM (field test 2026-10-07).
+    await disposeContexts(ctx);
     await createWorld(ctx, { slug, modules, startServer });
   }
-  const report = await runSuites(ctx, { suites, world: id, quench, logSince: t0 });
+  const report = await runSuites(ctx, { suites, world: id, quench, logSince: t0, traceWrites });
   let cleanup = null;
   if (report.ok && !keep) {
     await shutdownWorldAndWait(ctx, client);

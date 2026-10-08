@@ -56,6 +56,8 @@ test("agent world ids: agent-<slug>-<yyyymmdd>, Polish letters folded", () => {
   assert.equal(agentWorldId("Granat Gracza", d), "agent-granat-gracza-20261005");
   assert.equal(agentWorldId("Zranienie ŁĄCZKA", d), "agent-zranienie-laczka-20261005");
   assert.throws(() => agentWorldId("!!!", d), refusedWith("world-id"));
+  // Local date, not UTC: just after local midnight is already the new day (field test 2026-10-07).
+  assert.equal(agentWorldId("m1", new Date(2026, 9, 7, 0, 30)), "agent-m1-20261007");
 });
 
 const okWorld = {
@@ -147,7 +149,9 @@ test("mutex: a live shared lock (Quench run) blocks an exclusive one", async () 
   unlockAll();
 });
 
-test("process filter: Foundry main processes only — never helpers, never Chrome", () => {
+// Windows process tables and drive-letter paths (fvtt itself is Windows-only: PowerShell, taskkill,
+// DPAPI). On the Linux release runner `path.resolve("C:\\…")` is relative, so the test cannot hold.
+test("process filter: Foundry main processes only — never helpers, never Chrome", { skip: process.platform !== "win32" && "Windows paths" }, () => {
   const install = { exe: "C:\\Foundry\\Foundry Virtual Tabletop.exe", mainJs: "C:\\Foundry\\resources\\app\\main.js" };
   const procs = [
     { pid: 1, name: "Foundry Virtual Tabletop.exe", exe: install.exe, cmd: `"${install.exe}"` },

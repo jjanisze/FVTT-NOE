@@ -16,7 +16,8 @@ export const COMMAND_CLASS = {
   help: "read", init: "read", status: "read", doctor: "read", logs: "read", mode: "read", users: "read", "wait-ready": "read",
   "world:list": "read",
   login: "login",
-  quench: "testing", reload: "testing", e2e: "testing",
+  // eval runs arbitrary code in a live client — it can write, so it is testing, not read.
+  quench: "testing", reload: "testing", e2e: "testing", eval: "testing",
   start: "lifecycle", stop: "lifecycle", restart: "lifecycle", kill: "lifecycle", packs: "lifecycle",
   backup: "lifecycle", "sandbox:init": "lifecycle", "sandbox:sync": "lifecycle",
   "world:create": "lifecycle", "world:launch": "lifecycle", "world:delete": "lifecycle", "world:seed": "testing",
@@ -44,12 +45,12 @@ export function checkMode(mode, command, ctx = {}) {
 
 export const AGENT_WORLD = /^agent-[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
-/** `agent-<slug>-<yyyymmdd>` from a free-form slug. */
+/** `agent-<slug>-<yyyymmdd>` from a free-form slug; the LOCAL date (a world made at 00:30 is today's). */
 export function agentWorldId(slug, date = new Date()) {
   const clean = String(slug).toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "")
     .replace(/ł/g, "l").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
   if (!clean) throw refuse(`Slug "${slug}" has no usable characters.`, "world-id", "Use letters and digits.");
-  const ymd = date.toISOString().slice(0, 10).replaceAll("-", "");
+  const ymd = `${date.getFullYear()}${String(date.getMonth() + 1).padStart(2, "0")}${String(date.getDate()).padStart(2, "0")}`;
   const id = `agent-${clean}-${ymd}`;
   if (!AGENT_WORLD.test(id)) throw refuse(`"${id}" is not a valid agent world id.`, "world-id");
   return id;

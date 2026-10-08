@@ -1,6 +1,6 @@
 # PLAN — Agentic improvements: Foundry lifecycle, sandbox worlds, release gate, instruction hygiene
 
-> Status: **S0–S5 DONE, S6 SET UP** (2026-10-05) — progress log and open items in §9; tools in
+> Status: **S0–S5 DONE, S6 SET UP** (2026-10-05); Claude Code field-test findings processed 2026-10-08 (§9) — tools in
 > `dev/agent/`, `dev/e2e/`, `dev/release/`. Decisions D1–D9 (§8). Written by an agent, for agents.
 > Scope spans three places: this repo (`dev/agent/`, `dev/e2e/`, release scripts — public, so no
 > hosts, ports, secrets or personal paths in it), the campaign vault (agent instructions, skills, MCP
@@ -409,3 +409,102 @@ catching what the GM catches today. S4 must be green before the next release is 
 - No GM intervention was needed. The user's render-time/VRAM recommendation adjustment was
   sufficient when the baseline exceeded 20 ms p95; no quality reduction or new approval was
   needed. Final evidence and the performance table: `PLAN_poscigi.md`, Codex hand-back entry.
+
+### Claude Code field test (2026-10-07) — PLAN_m1_walka E0–E2
+
+First implementation session on the tooling by Claude Code: two pure-rule files, a Foundry state
+machine with chat cards and a GM relay, a new compendium item, a 14-step layer-6 suite. Measured
+against §1: **zero** "close Foundry" hand-offs, pack-lock errors or CDP timeouts; one human-free
+campaign restart; ~15 `evaluate_script` calls (smoke checks and one red-run autopsy) out of roughly
+150 tool calls, against the 20.9 % baseline.
+
+**Hits**
+
+- `doctor` (3 s) was the right first call: one JSON, every hint an exact command.
+- `quench --profile=sandbox --filter=… --reload`: edit → result in 6 s, failures as data. The pure
+  rules (44 tests) were iterated this way without writing a single CDP snippet.
+- `world:create --fixture=skirmish` (11 s) and `e2e` (≈ 45 s per fresh world with GM + two players):
+  the star of the session. `report.json` names the failed step and the message; a red run keeps
+  world and tabs, so the one real failure (a dnd5e roll dialog waiting on the player client) was
+  found with a single eval in the kept Gracz 2 tab. Two mutation checks at ≈ 45 s each made
+  "the suite has teeth" cheap to prove. `--suites=boot,combat,umieranie --quench`: 78 s, all green.
+- `packs` against the campaign: stop → build → validate → start → re-login in seconds, no human —
+  the hand-off §1 was written about is gone. `login` (4 s, any user, no password) likewise.
+- Instruction hygiene (S5) held: AGENTS.md → module AGENTS.md → TESTING.md → `dev/agent/README.md`
+  answered every "where/how" question; no dead reference met.
+
+**Misses** (in order of cost)
+
+1. **Two clients as the same GM user, silently.** `packs --profile=sandbox` (2 min 22 s) could not log
+   the sandbox's isolated-context GM tab back in ("Timed out waiting for game.ready", tab black on
+   `/game`). `login` fixed it in 4 s but in a *new* default-context tab; the stale tab later woke up
+   in the next world as Gamemaster too. Both answered `game.users.activeGM.isSelf === true`, so every
+   active-GM automation ran twice (NPC items dropped twice) and cost ~10 min of suspecting new code.
+   Same root as Codex's 10-05 duplicate activities. Suggest: `doctor` flags "user X connected in
+   N tabs" as a problem (it already lists pages with users); `packs`/`login` close or reuse the stale
+   tab instead of opening another; `world:create` reports the fixture tab it leaves behind.
+2. **No `fvtt eval`.** One-off checks in a sandbox page need the chrome-devtools MCP (`list_pages` →
+   page id → `evaluate_script`). It worked, but the e2e `Client.eval` already exists; `fvtt eval
+   --user=… --file=…` would make smoke checks harness-neutral.
+3. **Roll dialogs on player clients** need a helper in each suite (here `clickCard({ dialog })`).
+   Any future suite with player-initiated checks will need the same — a candidate for the harness
+   (`t.client(…).pressRollDialog("normal")`).
+4. **Noise in `doctor`:** six idle `foundry-mcp` processes from sessions since 10-05 listed as LevelDB
+   suspects (none held anything — nobody reaps them), and 306 dirty files dominated by
+   `dev/icons/review/` candidates.
+5. Cosmetic: one JSON on stdout + progress on stderr is right, but `2>&1` into a parser breaks it
+   (my error, twice); sandbox world ids use the UTC date (`agent-m1-20261006` created on 10-07 local).
+
+**Same session, E3–E4 (later on 10-07).** More `e2e` runs (≈ 15 in all) and three more findings:
+
+6. **Fixture reseed races the previous suite.** A suite's fixture deletes the scene while the previous
+   suite's combat is still running and its last writes and animations are still in flight. That gave a
+   PIXI error on the dead canvas (scrolling text) and a server error from core's
+   `Combat#_clearMovementHistoryOnExit` updating a token on the deleted scene. Fixed in `skirmish.mjs`
+   (end combats first) and with a settle wait at the end of `combat`. Suggest: the harness waits for
+   "quiet" (no pending socket requests) and ends combats before every reseed, so each suite need not.
+7. **Kept red worlds are the best debugger here.** Two of the three console-error hunts were solved by
+   an in-page probe across suites (a `SocketInterface.dispatch` wrapper recording stacks of writes to
+   dead scenes). A `--probe`/`--trace-writes` switch on `e2e` would make that a flag, not an edit.
+8. **Quench in the campaign is not single-GM.** With the GM's own client logged in (their GM user is the
+   active GM), hooks that act only on the active GM run in the GM's browser, not in the agent's tab, and
+   three unrelated batches go red. `quench` could warn when another GM is active (it already knows the
+   users); the sandbox (`e2e --quench`) is the reliable venue.
+
+**Same session, E5–E8 (2026-10-07, evening).** Three more suites (`rekonwalescencja`, `zagrozenia`, plus
+the full five-suite regression) and three findings:
+
+9. **A fresh e2e client can hang in `ui.controls.activate`.** Switching the scene-controls set in a
+   just-booted GM context never resolved; the same call returned at once on a warm page. Bounded with a
+   2 s race in the suite. Found because the red world was kept: the agent opened the kept GM page through
+   chrome-devtools and replayed the step line by line in a minute — the "kept red world" design is the
+   biggest hit of this tooling so far.
+10. **Dice faces are a footgun.** v14 maps `face = ceil((1 − u) · 20)`; two suites in a row got the
+    direction wrong first (a "fail" that rolled 15). Suggest `t.d20(client, [faces])` in the harness —
+    the queue-of-faces helper the `zagrozenia` suite now carries inline.
+11. **Two dialogs sharing a button action.** The hazard tool's first window and the suffocation window
+    both have an `oddech` action; the first was still `rendered` while closing, so a lookup by selector
+    re-clicked it. Suggest a harness helper that waits for a dialog by title (or for the previous one to
+    close) — every chained `DialogV2` flow will meet this.
+
+### Field-test findings processed (2026-10-08)
+
+Every miss above got a change in `dev/agent/`; the new `postac` suite and the KS step in `combat` were
+written against the new helpers and were the first users of each.
+
+| # | Change |
+|---|---|
+| 1 | `doctor` reports any user logged in from more than one tab as a **problem**. `login` re-uses a tab already showing that user (or a dead fvtt tab) before opening a new one, and warns if the user still ends up twice. `world:create`, `world:launch` (switching worlds) and every `e2e` world dispose fvtt's isolated contexts first — their sessions belong to the world going down. `e2e` refuses up front when a foreign tab is logged in as one of its users and closes fvtt's own stale ones. Session restore after a restart hard-reloads the same tab once instead of failing (the black `/game` tab). `world:create` names the GM tab a fixture leaves logged in |
+| 2 | `fvtt eval --expr=… \| --file=… [--user=…] [--args=<json>]` — the page picked by user, documents and applications returned as their identity; class *testing* (refused in runtime mode) |
+| 3, 10, 11 | `window.__e2e` in every e2e client (`lib/e2e-page.mjs`): `forceD20([faces])`/`restoreDice()`, `pressRollDialog(button)`, `clickDialog({title}, action)` (never an already-clicked, still-closing window), `clickChat`, `until`, `timeout`, `quiet`. Existing suites keep their inline helpers (green, mutation-checked); new suites use these |
+| 4 | `doctor`: LevelDB holders listed only when a server is down and something still holds a DB; idle foundry-mcp processes counted once (`dbProcesses`). Dirty files grouped by folder plus the newest ten. The icon review candidates (~60 MB) are git-ignored |
+| 5 | Sandbox world ids use the local date (guard test added) |
+| 6 | Between suites the harness waits until every client is quiet (no socket request in flight, no canvas animation) and ends all combats before the next fixture reseeds |
+| 7 | `e2e --trace-writes`: every document write with a short stack, per suite, `<suite>-writes.json` next to the report. Origins (host:port) are stripped from traced stacks and captured console errors — two older reports carried them and were redacted |
+| 8 | `quench` picks a GM tab even with player contexts open (Codex, 10-05) and returns `warnings` when the same user is in several tabs or another GM is the active GM |
+| 9 | `__e2e.timeout(promise, ms)` for calls that can hang on a fresh client |
+
+Found on the way: `dnd5e.advancementManagerComplete` passes only the manager in 5.3 — two handlers
+(`ability-hotbar.mjs`, `cichy-krok.mjs`) read an `actor` second argument that never came, so they never
+ran; now `mgr.actor`. A synthetic `drop` needs the preceding `dragover` (dnd5e reads the drop behaviour
+from it) and an AdvancementManager step must have rendered its form before Next — both now in `postac`.
