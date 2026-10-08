@@ -2,9 +2,10 @@
 
 ## Stan projektu
 
-**Etap: alfa** (v0.16.0, przegląd 2026-09-26). Walka, ekwipunek, stany i przetrwanie grają się
-od początku do końca przy żywym stole; produkcja przedmiotów i naprawa (v0.17.0) czekają na pierwszą
-sesję; towarzysze, ekonomia i większość pojazdów nie istnieją. Droga do wczesnej bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
+**Etap: alfa** (v0.16.0, przegląd 2026-09-26; v0.18.0 2026-10-08 — M0 i M1 zamknięte, czysta instalacja
+B6 sprawdzana przy każdym wydaniu). Walka, ekwipunek, stany i przetrwanie grają się od początku do końca
+przy żywym stole, walka i powrót do zdrowia wg RAW (M1); produkcja przedmiotów i naprawa (v0.17.0) czekają
+na pierwszą sesję; towarzysze, ekonomia i większość pojazdów nie istnieją. Droga do wczesnej bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
 
 RAW = `Neuro 5e/Podrecznik/NOE/` — konwersja PDF-a „październik” (jedyne źródło; numery stron to
 strony drukowane tego wydania). Zmiany względem marca: `Neuro 5e/Podrecznik/CHANGELOG.md`.
@@ -1147,6 +1148,44 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### v0.18.0 — Walka i zdrowie wg RAW, czysta instalacja (B6), ikony Bestiariusza (2026-10-08)
+
+Pierwsze wydanie na GitHubie od v0.14.34 — wersje 0.15–0.17.1 nie dostały wydań, ich zmiany są tutaj
+(wpisy niżej). Pierwsze wydanie przez bramkę `release:check` (`RELEASING.md`): moduł zainstalowany z
+`module.zip` w osobnej ścieżce danych, wszystkie paczki e2e w świecie gołym (sam moduł) i zalecanym
+(+ Quench, Sequencer, Splatter) i baterie Quench w tym drugim.
+
+- **M1 — walka i powrót do zdrowia wg RAW** (`PLAN_m1_walka.md`, wpisy M1 niżej): umieranie przy 0 PW,
+  Olbrzymie obrażenia, stabilizacja i Staza, jeden silnik okoliczności ataku (zwarcie, zasięg, stany,
+  Unikanie, Bieganie, Udźwig), Wyczerpanie wg reguł zdejmowania, neutralizacja Stopnia Zranienia z
+  kalendarzykiem zdrowia, zagrożenia (sen, uduszenie, mróz). Dla graczy: `docs/Umieranie-i-zdrowie.md`.
+- **B6 — czysta instalacja** (`PLAN_beta.md` M0). Nowa paczka e2e `postac`: MG zakłada pustą kartę,
+  gracz przeciąga klasę, Pochodzenie i Sztuczkę z kompendiów i przechodzi AdvancementManager; paczka
+  `combat` strzela też krótką serią (B 93R). Pierwszy przebieg znalazł:
+  - **PW przy awansie.** Postać od zera startowała z 8/16 PW: advancement `HitPoints` dnd5e dodaje do
+    obecnych PW kość (k8 → 8), a moduł liczy maksimum płasko (16 + mod. KON). Teraz obecne PW rosną o
+    przyrost maksimum PW — przy tworzeniu pełne, przy kolejnym poziomie +4/+3 + mod. KON, także u
+    rannej postaci (`actors/pw.mjs`, `dnd5e.preAdvancementManagerComplete`; testy w `konfiguracja`).
+  - **Szybkość 0.** dnd5e 5.3 bierze Szybkość postaci z gatunku; NOE gatunków nie ma („Każdy bohater
+    rozpoczyna grę z Szybkością wynoszącą 9 metrów”, *Tworzenie postaci*). Postacie z importu Roll20
+    mają 9 m z importowanego gatunku, nowe miały 0 — silnik okoliczności traktował je jak istoty, które
+    nie chodzą. `actors/character-defaults.mjs` wpisuje 9 m przy tworzeniu postaci; jawna wartość
+    (import, duplikat) zostaje. **Istniejących postaci bez gatunku i bez Szybkości moduł nie zmienia** —
+    MG wpisuje 9 w Konfiguracji ruchu.
+  - `dnd5e.advancementManagerComplete` w 5.3 podaje tylko menedżera, nie aktora: odświeżenie paska
+    skrótów zdolności i Cichego kroku po awansie nie działało nigdy (gdy awans nie dodawał przedmiotów).
+  - `docs/Pierwsze-kroki.md` kazał przeciągać profesję i pomijał Pochodzenie i startową Sztuczkę.
+- **Ikony** — partie 51–53: 25 zdolności i 26 ataków Bestiariusza, pięć broni z ikoną zastępczą
+  (kusze, łuk bloczkowy, nóż do rzucania, Pogromca).
+- **Narzędzia agentów** (repozytorium, nie paczka): `fvtt eval`, wykrywanie tego samego użytkownika w
+  kilku kartach, `window.__e2e` w klientach e2e, cisza między paczkami, `--trace-writes` —
+  `PLAN_agentic_improvements.md` §9. Zadanie wydania na GitHubie (Linux) pomija test tabeli procesów Windows.
+- **Testy:** Quench 897/897 (nowe: PW przy awansie, Szybkość startowa); e2e w piaskownicy — 11 paczek
+  zielonych (`boot`, `combat` z KS, `postac`, `umieranie`, `rekonwalescencja`, `zagrozenia`, Pościg i
+  sceneria). `umieranie` i `combat` stawiały BN obok BG aktualizacją x/y — w v14 to ruch zatrzymywany
+  przez ściany, a slot BN zależy od kolejności `createEmbeddedDocuments`; z jednego slotu linia przecinała
+  szopę i BN stawał przy ścianie, > 1,5 m od celu. Teraz `move({…, action: "displace"})`.
 
 ### M1 — poprawki po przeglądzie MG: czas gry, Gojenie, Skażenie (2026-10-07)
 
