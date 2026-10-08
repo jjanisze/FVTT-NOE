@@ -270,7 +270,8 @@ export function registerAbilityHotbar() {
   };
   Hooks.on("createItem", resync);
   Hooks.on("deleteItem", resync);
-  Hooks.on("dnd5e.advancementManagerComplete", (_mgr, actor) => scheduleHotbarSync(actor));
+  // dnd5e 5.3 passes only the manager (advancement-manager.mjs) — the actor is `mgr.actor`.
+  Hooks.on("dnd5e.advancementManagerComplete", mgr => scheduleHotbarSync(mgr?.actor));
 
   // Redraw badges when uses are spent/restored or a state flips.
   Hooks.on("updateItem", (item, changed) => {

@@ -14,6 +14,11 @@
  * Multiclass: the character's *first* class contributes its level-1 value; every
  * other level (including further levels of the first class) contributes that
  * class's per-level value. KON modifier applies once per character level, as in 5e.
+ *
+ * Current PW follow the same numbers: the HitPoints advancement adds the hit-die gain
+ * (8 at level 1 for a k8 class) to `hp.value`, so a character built from zero came out
+ * at 8/16 PW (found by the clean-install check, B6, 2026-10-08). On completion the
+ * advancement's gain is replaced by the PW max delta — `pwGainOnAdvancement`.
  */
 
 import { CLASSES } from "../config/classes-data.mjs";
@@ -55,6 +60,28 @@ export function computeNeuroshimaPW(actor) {
   const perLevelBonus = (Number(bonuses.level) || 0) * totalLevel;
 
   return Math.max(1, base + (conMod * totalLevel) + overall + perLevelBonus);
+}
+
+/**
+ * Whether the PW override governs this actor (the same gates as the prepareDerivedData wrap).
+ * @param {Actor5e} actor
+ */
+function pwGoverns(actor) {
+  return actor.type === "character"
+    && actor.getFlag(MODULE_ID, "pwOverride") !== false
+    && actor._source.system?.attributes?.hp?.max == null;
+}
+
+/**
+ * Current PW after an advancement: the value before it plus the change of the PW max. Pure.
+ * dnd5e's HitPoints advancement moved `hp.value` by its hit-die gain instead; that figure is
+ * ignored. A level-down (negative delta) takes PW away the same way; never below 0.
+ * @param {{valueBefore: number, maxBefore: number|null, maxAfter: number|null}} p
+ * @returns {number|null}  The new value, or null when the max did not change (leave dnd5e's).
+ */
+export function pwGainOnAdvancement({ valueBefore, maxBefore, maxAfter }) {
+  if (maxAfter === null || maxAfter === (maxBefore ?? 0)) return null;
+  return Math.max(0, (Number(valueBefore) || 0) + maxAfter - (maxBefore ?? 0));
 }
 
 /**
@@ -107,6 +134,24 @@ export function registerPW() {
       console.error(`${MODULE_ID} | PW computation failed for ${this.name}`, err);
     }
   };
+
+  // Before the manager writes its clone back: current PW move by the PW max delta, not by the
+  // hit die. `manager.actor` is the untouched original, `manager.clone` carries every step.
+  Hooks.on("dnd5e.preAdvancementManagerComplete", (manager, actorUpdates) => {
+    const { actor, clone } = manager ?? {};
+    if (!actor || !clone || !pwGoverns(actor)) return;
+    try {
+      clone.reset();
+      const value = pwGainOnAdvancement({
+        valueBefore: actor._source.system.attributes.hp.value,
+        maxBefore: computeNeuroshimaPW(actor),
+        maxAfter: computeNeuroshimaPW(clone)
+      });
+      if (value !== null) foundry.utils.setProperty(actorUpdates, "system.attributes.hp.value", value);
+    } catch (err) {
+      console.error(`${MODULE_ID} | PW on advancement failed for ${actor.name}`, err);
+    }
+  });
 
   console.log(`${MODULE_ID} | PW override registered (flat per-level Neuroshima values)`);
 }

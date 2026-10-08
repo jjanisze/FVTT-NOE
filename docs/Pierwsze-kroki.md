@@ -29,13 +29,21 @@ domyślnych kompendiów SRD dnd5e (te reprezentują fantasy, nie post-apo).
 
 ## 4. Postać gracza
 
-1. Utwórz aktora typu **Bohater Gracza**.
+1. MG tworzy aktora typu **Bohater Gracza** i daje graczowi do niego prawa właściciela (gracze
+   domyślnie nie mogą sami tworzyć aktorów). Szybkość startowa — 9 m, jak w podręczniku — jest
+   ustawiona od razu.
 2. Nadaj cechy wg zasad z podręcznika (SIŁ/ZRC/KON/INT/MDR/CHA — moduł już przemianował cechy
    dnd5e na te nazwy).
-3. Przeciągnij klasę z kompendium **Neuroshima — Klasy**, potem profesję z **Neuroshima —
-   Profesje**.
-4. Dobierz ekwipunek z kompendiów broni/pancerzy/narzędzi.
-5. Amunicję, magazynki, materiały wybuchowe, leki, prowiant i surowce dodajesz w zakładce
+3. Przeciągnij klasę z kompendium **Neuroshima — Klasy** na kartę. Okno awansu przeprowadzi cię
+   przez Kość Wytrzymałości, wybór umiejętności i zdolności klasy (np. Wyjadacz Twardziela).
+   Postać startuje z pełnymi PW wg Neuroshimy (np. Twardziel 16 + mod. KON). Profesję wybierasz w tym
+   samym oknie, gdy klasa ją daje (3. poziom) — nie przeciągasz jej osobno.
+4. Przeciągnij **Pochodzenie** z **Neuroshima — Pochodzenia**: +1/+1 do cech i jedna z trzech
+   zdolności regionu.
+5. Startowa **Sztuczka** (albo 50 gambli — podręcznik, *Sztuczki*): przeciągnij ją z **Neuroshima —
+   Sztuczki**. Wymagania sprawdzasz sam; są wypisane na Sztuczce.
+6. Dobierz ekwipunek z kompendiów broni/pancerzy/narzędzi.
+7. Amunicję, magazynki, materiały wybuchowe, leki, prowiant i surowce dodajesz w zakładce
    **Zasoby** — każdy panel ma na dole przycisk **DODAJ …** (cennik z podręcznika, ilość, cena
    i waga na żywo; ta sama pozycja trafia do istniejącego stosu).
 

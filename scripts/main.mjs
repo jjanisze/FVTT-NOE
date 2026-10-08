@@ -31,6 +31,7 @@ import { registerPauseScreen } from "./config/pause-screen.mjs";
 import { injectLocalization } from "./config/localization.mjs";
 import { registerActorAbilities } from "./actors/abilities.mjs";
 import { registerPW } from "./actors/pw.mjs";
+import { registerCharacterDefaults } from "./actors/character-defaults.mjs";
 import { registerClassState } from "./actors/class-state.mjs";
 import { registerAbilityHotbar } from "./actors/ability-hotbar.mjs";
 import { registerClassMigration } from "./migration/migrate-classes.mjs";
@@ -227,6 +228,7 @@ Hooks.once("init", () => {
 
   // Phase 3: Class / progression layer
   registerPW();
+  registerCharacterDefaults();
   // Bestiariusz: NPC proficiency bonus comes from the rulebook, not from CR.
   // Wraps prepareDerivedData like registerPW; the two chain safely.
   registerSP();

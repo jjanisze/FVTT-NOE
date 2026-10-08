@@ -10,7 +10,8 @@
  *  - Grenade at end of turn: on 2026-09-23 a thrown grenade detonated immediately. A PLAYER throws
  *    through the real sheet button and a real canvas click; the charge must lie pending until the
  *    GM ends the turn, then detonate.
- *  - Ammunition: one semi-auto shot spends exactly one round.
+ *  - Ammunition: one semi-auto shot spends exactly one round; one KS (B 93R) spends three, rolls with
+ *    Utrudnienie by default and cannot be repeated in the same round (PLAN_beta B6: "walka P/KS").
  *  - Attack circumstances (PLAN_m1_walka E3–E4): far range and a ranged attack with an enemy next to
  *    the shooter default to Utrudnienie with ONE badge group on the card; Unikanie on the target and
  *    Bieganie on the shooter join the same group.
@@ -85,6 +86,76 @@ async function shootCircumstances({ targetName, uniform }) {
     };
   } finally {
     CONFIG.Dice.randomUniform = orig;
+    canvas.tokens.setTargets([]);
+  }
+}
+
+/** GM: a B 93R with a loaded 20-round magazine for `actorName`, the way the fixture loads the B 92. */
+async function armBurst({ actorName }) {
+  const MOD = "neuroshima-2026-overrides";
+  const mags = await import(`/modules/${MOD}/scripts/weapons/magazine-model.mjs`);
+  const actor = game.actors.getName(actorName);
+  const weapon = (await game.packs.get(`${MOD}.bron`).getDocuments()).find(i => i.getFlag(MOD, "weaponId") === "b93r");
+  const magwell = mags.weaponMagwell(weapon);
+  const magazine = (await game.packs.get(`${MOD}.magazynki`).getDocuments()).find(m => mags.magazineDefOf(m)?.magwell === magwell);
+  const known = new Set(actor.items.map(i => i.id));
+  await actor.createEmbeddedDocuments("Item", [game.items.fromCompendium(weapon), game.items.fromCompendium(magazine)]);
+  // Found by what is new, never by position (createEmbeddedDocuments does not keep the order) and
+  // never by magwell alone (the fixture's B 92 magazine may fit too).
+  const fresh = actor.items.filter(i => !known.has(i.id));
+  const gun = fresh.find(i => i.getFlag(MOD, "weaponId") === "b93r");
+  const mag = fresh.find(i => mags.isMagazineItem(i));
+  const n = await mags.loadRounds(mag, "9mm", mags.freeSpace(mag));
+  await mags.swapMagazineItem(gun, mag);
+  await __e2e.until(() => gun.system.activities.some(a => a.type === "neuroKs"), { message: "the KS activity on the B 93R" });
+  return { loaded: n, current: game.neuroshima.magazynki.getMag(gun).current };
+}
+
+/**
+ * Player: one KS (krótka seria) with the B 93R at `targetName`, as the sheet fires it: the attack
+ * dialog opens with Utrudnienie preselected and the player confirms it. Then a second KS in the same
+ * round, which must be refused without a dialog.
+ */
+async function burst({ targetName }) {
+  const MOD = "neuroshima-2026-overrides";
+  const actor = game.user.character;
+  const gun = actor.items.find(i => i.getFlag(MOD, "weaponId") === "b93r");
+  const ks = gun.system.activities.find(a => a.type === "neuroKs");
+  const target = canvas.tokens.placeables.find(t => t.name === targetName);
+  canvas.tokens.placeables.find(t => t.actor?.id === actor.id)?.control({ releaseOthers: true });
+  canvas.tokens.setTargets([target.id]);
+  // Oporządzenie (D8): attacks only from the hand. A gun handed over a moment ago sits in the pack,
+  // and its first use would only equip it — so the player takes it in hand first, as at the table.
+  const lalka = game.neuroshima.lalka;
+  const gate = lalka.useGate(gun);
+  if (gate === "equip") await lalka.equip(gun);
+  else if (gate === "draw") await lalka.draw(gun);
+  await __e2e.until(() => [null, "proceed"].includes(lalka.useGate(gun)), { message: "the B 93R in hand" });
+  const mag = () => game.neuroshima.magazynki.getMag(gun).current;
+  const before = mag();
+  const since = game.messages.size;
+  __e2e.forceD20([14, 9], { fallback: 3 });
+  try {
+    // dnd5e does not await the subsequent actions (activity mixin), so use() returns before the
+    // attack dialog is even answered; the rounds are spent after the roll.
+    await ks.use({}, { configure: false }, {});
+    const pressed = await __e2e.pressRollDialog("disadvantage");
+    await __e2e.until(() => mag() < before, { timeoutMs: 8000, message: "the burst's rounds to be spent" }).catch(() => {});
+    await __e2e.quiet();
+    const attack = game.messages.contents.slice(since).findLast(m => m.getFlag("dnd5e", "roll.type") === "attack");
+    const afterFirst = mag();
+    // Same round again: refused before any dialog (use() returns nothing). Were it accepted, its
+    // dialog is answered so nothing hangs, and the spent rounds show it.
+    const again = await ks.use({}, { configure: false }, {});
+    if (again) await __e2e.pressRollDialog("normal", { timeoutMs: 3000 });
+    await __e2e.quiet();
+    return {
+      gate, pressed, spent: before - afterFirst, spentAgain: afterFirst - mag(), secondRefused: !again,
+      advantageMode: attack?.rolls?.[0]?.options?.advantageMode ?? null, flavor: attack?.flavor ?? null,
+      used: gun.getFlag(MOD, "lastBurstUse")?.mode ?? null
+    };
+  } finally {
+    __e2e.restoreDice();
     canvas.tokens.setTargets([]);
   }
 }
@@ -212,7 +283,9 @@ export default {
       await t.gm.eval(async () => {
         const pc = canvas.scene.tokens.find(tk => tk.name === "PC Gracz 1");
         const npc = canvas.scene.tokens.find(tk => tk.name === "GANGUS ŻOŁNIERZ");
-        await npc.update({ x: pc.x + canvas.grid.size, y: pc.y }, { animate: false });
+        // Placed (displace), not walked: an x/y update is a wall-constrained move in v14 and, from one of
+        // the fixture's two NPC slots, the line crosses the shed (see umieranie).
+        await npc.move({ x: pc.x + canvas.grid.size, y: pc.y, action: "displace" }, { animate: false });
         const cywil = canvas.scene.tokens.find(tk => tk.name === "CYWIL").actor;
         await cywil.toggleStatusEffect("dodging", { active: true });
         // A migrated source (D6): Przeciążenie from Udźwig reaches the roll through the engine's registry.
@@ -255,6 +328,21 @@ export default {
         // this scene, and a write or animation still in flight then errors on the dead canvas.
         await new Promise(r => setTimeout(r, 2500));
       });
+    });
+
+    await t.step("player: KS with the B 93R — Utrudnienie by default, 3 rounds, once per round", async () => {
+      const armed = await t.gm.eval(armBurst, { actorName: "PC Gracz 1" });
+      t.equal(armed.current, 20, "rounds in the B 93R's magazine");
+      await t.waitFor(p1, () => game.user.character.items.some(i => i.system.activities?.some?.(a => a.type === "neuroKs")),
+        { message: "the player to see the KS activity" });
+      const r = await p1.eval(burst, { targetName: "CYWIL" });
+      t.equal(r.pressed, true, "attack dialog for the burst");
+      t.equal(r.advantageMode, -1, "KS attack roll mode (ADV_MODE.DISADVANTAGE)");
+      t.equal(r.spent, 3, "rounds spent by one KS");
+      t.equal(r.used, "ks", "burst marked as used this round");
+      t.equal(r.secondRefused, true, "a second KS in the same round was allowed");
+      t.equal(r.spentAgain, 0, "rounds spent by the refused second KS");
+      await t.quiet();
     });
   }
 };

@@ -1,8 +1,8 @@
 # PLAN — Droga do wczesnej bety
 
-> Status: **AKTYWNY** (2026-09-26, moduł v0.16.0; przegląd 2026-10-03, v0.17.1). Etap bieżący:
-> **alfa** — późna dla walki, ekwipunku, przetrwania i produkcji (M2 zrobione), wczesna dla pojazdów,
-> towarzyszy i ekonomii.
+> Status: **AKTYWNY** (2026-09-26, moduł v0.16.0; przegląd 2026-10-03, v0.17.1; v0.18.0 2026-10-08 —
+> M0, M1 i M2 zrobione). Etap bieżący: **alfa** — późna dla walki, ekwipunku, przetrwania i produkcji,
+> wczesna dla pojazdów, towarzyszy i ekonomii. Bramki spełnione: B3, B5, B6.
 >
 > Skąd ten plan: przegląd IMPLEMENTATION.md ↔ RAW z 2026-09-26. Macierz pokrycia RAW mieszka
 > w [IMPLEMENTATION.md § Stan projektu](IMPLEMENTATION.md#stan-projektu) i to ona jest źródłem
@@ -29,7 +29,7 @@ zdolności.
 | B3 | **Paczki** — wszystkie 15 zbudowane z bieżących danych, `npm run validate:packs` zielone, po starcie Foundry rekordy identyczne z świeżym buildem (zmiany plików `.log`/`MANIFEST`/`LOG` to kompaktowanie LevelDB przy otwarciu, nie migracja) | `build:packs` przy zamkniętym Foundry, start, `build-packs.mjs --out=<tmp>` + `node dev/packs/diff-packs.mjs <tmp>` |
 | B4 | **Testy** — `npm test` i pełny Quench zielone; każda mechanika z §3 ma testy warstwy 1 (czyste funkcje, `TESTING.md`) | `game.neuroshima.tests.run()` |
 | B5 | **Rejestr automatyki dla zdolności klasowych** — jak dla Sztuczek i Pochodzeń; każda zdolność, Sztuczka i zdolność Pochodzenia ma plakietkę pokrycia (auto / częściowo / brak + „Nie automatyzujemy: …") | `game.neuroshima.<rejestr>.report()` |
-| B6 | **Czysta instalacja** — świeży świat dnd5e 5.3, sam moduł (+ opcjonalnie Sequencer): zero błędów w konsoli przy starcie, paczki się otwierają, postać powstaje od zera przez awans (klasa → Pochodzenie → Sztuczka), walka P/KS z amunicją i Zranieniem działa | Ręczny przebieg z listą kontrolną |
+| B6 | **Czysta instalacja** — świeży świat dnd5e 5.3, sam moduł (+ opcjonalnie Sequencer): zero błędów w konsoli przy starcie, paczki się otwierają, postać powstaje od zera przez awans (klasa → Pochodzenie → Sztuczka), walka P/KS z amunicją i Zranieniem działa | `npm run release:check` — moduł z `module.zip` w piaskownicy wydania, świat goły i zalecany, paczki e2e (lista kontrolna w M0) |
 | B7 | **Dokumentacja** — IMPLEMENTATION.md zgodny z kodem (tabela plików, macierz), `docs/` opisuje z perspektywy gracza każdą mechanikę widoczną na karcie | Przegląd |
 | B8 | **Granica treści** — treść WKK tylko w `scripts/wkk/`, zero spoilerów fabularnych w repo | `scripts/wkk/README.md`, przegląd |
 
@@ -83,16 +83,34 @@ Cel: tracker mówi prawdę, paczki są aktualne, otwarte decyzje zamknięte.
 - [x] Zamknąć decyzje z `TODO_mechanika.md` — 2026-10-03: Laska zatwierdzona; Rewolwerowiec na całą
   BPK → wariant WKK Pistolero (2026-10-01); pojedynczy nabój do magazynka wymiennego wdrożony (WKK:
   siatka ST, porażka — nabój na ziemi, pechowa jedynka — zacięcie)
-- [ ] Pierwszy przebieg **czystej instalacji** (B6) — lista błędów staje się zadaniami tego kamienia.
-  Znalezione już przy przygotowaniu (2026-10-03), poprawione w `.github/workflows/release.yml`:
-  `module.zip` pomijał `*.log` — 10/16 świeżo zbudowanych paczek trzyma **wszystkie** rekordy w `.log`,
-  więc następne wydanie miałoby puste kompendia (v0.14.34 ocalało przypadkiem, paczki były wtedy
-  skompaktowane do `.ldb`); `vfx/` w ogóle nie trafiał do zipa. Wniosek: test B6 instaluje z
-  `module.zip`, nie z katalogu deweloperskiego.
+- [x] Pierwszy przebieg **czystej instalacji** (B6) — 2026-10-08, v0.18.0. Lista kontrolna jest kodem:
+  bramka wydania (`npm run release:check`, `RELEASING.md`) instaluje moduł **z `module.zip`** w osobnej
+  ścieżce danych z dnd5e 5.3.0 i przechodzi wszystkie paczki e2e w świecie gołym (sam moduł) i
+  zalecanym (+ Quench, Sequencer, Splatter, plus baterie Quench). Kryteria B6 → dowód:
+
+  | Kryterium | Dowód |
+  |---|---|
+  | zero błędów w konsoli przy starcie | e2e `boot` — błędy konsoli każdego klienta i log serwera liczą się jak porażka, w każdej paczce |
+  | paczki się otwierają | `boot`: każde kompendium z liczbą rekordów z dysku; krok `packs` bramki: zip = świeży build |
+  | postać od zera przez awans | e2e `postac` (nowa): MG zakłada pustą kartę gracza, gracz przeciąga Twardziela (AdvancementManager: KW, umiejętności, zdolności, Wyjadacz), Posterunek (+1/+1, zdolność regionu) i Sztuczkę; rzut umiejętności z nowej postaci |
+  | walka P/KS z amunicją i Zranieniem | e2e `combat`: strzał pojedynczy (1 nabój), krytyk → Stopień Zranienia, granat gracza; **KS z B 93R** (nowy krok: Utrudnienie domyślnie, 3 naboje, druga KS w tej rundzie odmówiona) |
+
+  Lista błędów, które przebieg znalazł (wszystkie naprawione, każdy z testem):
+  - postać od zera startowała z **8/16 PW** — advancement dnd5e dodawał kość, moduł liczy PW płasko
+    (`actors/pw.mjs`, `dnd5e.preAdvancementManagerComplete`);
+  - postać od zera miała **Szybkość 0** — dnd5e bierze ją z gatunku, NOE gatunków nie ma, RAW daje
+    każdemu 9 m (`actors/character-defaults.mjs`). Istniejące postacie bez gatunku poprawia MG ręcznie;
+  - po awansie nie odświeżały się pasek skrótów zdolności ani Cichy krok (`advancementManagerComplete`
+    w 5.3 podaje tylko menedżera);
+  - przewodnik `docs/Pierwsze-kroki.md` kazał przeciągać profesję i pomijał Pochodzenie i Sztuczkę.
+
+  Wcześniej, przy przygotowaniu (2026-10-03): `module.zip` pomijał `*.log` (puste kompendia) i `vfx/` —
+  stąd zip budowany przez `dev/release/build-zip.mjs` i instalacja z niego, nie z katalogu deweloperskiego.
 - [x] Zdecydować o formie macierzy pokrycia: od teraz status zmienia się **w macierzy**, fazy 1–5
   zostają jako historia (obowiązuje od 2026-09-26)
 
-**Gotowe gdy:** B3 i B5 spełnione, macierz zgodna z kodem.
+**Gotowe gdy:** B3 i B5 spełnione, macierz zgodna z kodem. *Stan 2026-10-08:* **zrobione** — B3 i B5 od
+2026-10-03, B6 przy v0.18.0 (wyżej); bramka wydania pilnuje B3 przy każdym wydaniu (krok `packs`).
 
 ### M1 — Walka i powrót do zdrowia wg RAW (M–L) — najwyższy priorytet
 

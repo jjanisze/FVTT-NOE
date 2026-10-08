@@ -205,7 +205,8 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/actors/party-travel.mjs` | Podróż drużyny — tempo RAW, biomy, trudny teren, upływ czasu, Mój biom / Mój wróg |
 | `scripts/actors/pd-panel.mjs` | Panel PD — PD grupowe i osobiste, progi poziomów 0…3400, auto-PD za Stopień Zranienia |
 | `scripts/actors/prowiant-inventory.mjs` | Panel Prowiant w zakładce Zasoby |
-| `scripts/actors/pw.mjs` | PW wg Neuroshimy — płasko na poziom (16+KON / 4+KON, 12+KON / 3+KON) |
+| `scripts/actors/pw.mjs` | PW wg Neuroshimy — płasko na poziom (16+KON / 4+KON, 12+KON / 3+KON); przy awansie obecne PW rosną o przyrost maksimum, nie o kość dnd5e |
+| `scripts/actors/character-defaults.mjs` | Wartości startowe, które dnd5e bierze z gatunku (NOE gatunków nie ma): Szybkość 9 m przy tworzeniu postaci |
 | `scripts/actors/rewolwerowiec.mjs` | Rewolwerowiec (Kowboj) i Pistolero (WKK) — rewolwer vs pistolet, Niezawodny |
 | `scripts/actors/samuraj.mjs` | Sztuczka Samuraj — +1 TA/obrażeń bronią sieczną, TT +1 z nią w ręku, dobycie bez Darmowej Interakcji |
 | `scripts/actors/sp.mjs` | Siła Przeciwnika ≠ PB dla BN (`details.cr` trzyma SP, PB z flagi) |
@@ -804,6 +805,7 @@ Szczegółowy plan: `PLAN_classes.md`
 - [x] Professions (subklasy) — 18 profesji, pack `neuroshima.profesje`
 - [x] 133 zdolności klasowych/profesji — pack `neuroshima.zdolnosci-klasowe`, tekst dosłownie z podręcznika
 - [x] PW wg Neuroshimy (16+KON / 4+KON, 12+KON / 3+KON) — `actors/pw.mjs`; natywny `HitPoints` advancement tego nie wyraża
+- [x] Obecne PW przy awansie = przyrost maksimum PW (postać od zera startuje z pełnymi PW, nie 8/16) i Szybkość startowa 9 m bez gatunku — 2026-10-08, znalezione przez e2e `postac` (B6)
 - [x] Zdolności stanowe (Berserk, Kondycha) — `actors/class-state.mjs`, AE + czas trwania + warunki przerwania.
   **Berserk vs. stock Rage** (2026-08-28, `PLAN_berserk.md`): AE dobite o Obrażenia Berserkera
   (`bonuses.mwak.damage += @scale.brutal.obrazeniaBerserkera`) i Siłę Berserkera (Ułatwienie

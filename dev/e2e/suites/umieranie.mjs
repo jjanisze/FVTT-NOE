@@ -141,7 +141,10 @@ export default {
         const MOD = "neuroshima-2026-overrides";
         const npcTok = canvas.scene.tokens.find(tk => tk.name === "GANGUS ŻOŁNIERZ");
         const pcTok = canvas.scene.tokens.find(tk => tk.name === "PC Gracz 1");
-        await npcTok.update({ x: pcTok.x + canvas.grid.size, y: pcTok.y }, { animate: false });
+        // A placement, not a walk: in v14 an update of x/y is a wall-constrained move, and which NPC slot
+        // GANGUS gets follows createEmbeddedDocuments order — from one slot the line crosses the shed and
+        // the token stopped at its wall, > 1,5 m away (red on 2026-10-08 for that reason alone).
+        await npcTok.move({ x: pcTok.x + canvas.grid.size, y: pcTok.y, action: "displace" }, { animate: false });
         await new Promise(res => setTimeout(res, 300));
         const npc = npcTok.actor;
         const target = canvas.tokens.placeables.find(tk => tk.name === "PC Gracz 1");

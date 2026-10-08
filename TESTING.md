@@ -132,6 +132,22 @@ od drugiego gracza, blokada zajęć u obojga w WKK, ładunek przez przekaźnik M
 właściciela, kalendarzyk z panelu Stan i samoleczenie. Paczka `zagrozenia` to przebieg MG: zaznaczone
 żetony i prawdziwy przycisk w kontrolkach, Fuks gracza na rzucie MG (sprawdzony mutacją), „w cieple”
 w oknie DO gracza, Uduszenie w prawdziwej walce i „Złap oddech” w panelu Stan.
+Paczka `postac` (bramka B6 z `PLAN_beta.md`) buduje postać od zera jak przy stole: MG zakłada pustą
+kartę gracza, gracz przeciąga klasę, Pochodzenie i Sztuczkę z kompendiów na kartę (dragenter → dragover
+→ drop, jak mysz — dnd5e bierze tryb upuszczenia z dragover) i przechodzi AdvancementManager krok po
+kroku. Przy pierwszym przebiegu znalazła dwa błędy: postać startowała z 8/16 PW i z Szybkością 0.
+Paczka `combat` strzela też krótką serią z B 93R (Utrudnienie domyślnie, 3 naboje, raz na rundę).
+
+Każdy klient ma w przeglądarce `window.__e2e` (`dev/agent/lib/e2e-page.mjs`), żeby funkcje paczek
+(serializowane, bez domknięć) nie przepisywały tych samych pętli: `forceD20([20, 3])` (kolejka ścianek
+k20 — koniec z liczeniem `u` na palcach) i `restoreDice()`, `pressRollDialog("normal")`,
+`clickDialog({ title }, akcja)` (nigdy okna, które już kliknięto — zamykane okno jeszcze chwilę jest
+`rendered`), `clickChat(id, selektor)`, `until(fn)`, `timeout(obietnica, ms)` i `quiet()` (żadnego
+zapisu w locie ani animacji kanwy). Między paczkami harness czeka na ciszę u wszystkich klientów i
+kończy walki, zanim fixture skasuje scenę. `--trace-writes` zapisuje każdy zapis dokumentu z krótkim
+stosem do `logs/e2e/<przebieg>/<paczka>-writes.json` — sonda „kto pisze do martwej sceny” jako flaga.
+Jednorazowe sprawdzenie w żywej karcie bez chrome-devtools: `npm run fvtt -- eval --profile=sandbox
+--user="Gracz 1" --expr="…"` albo `--file=<skrypt>`.
 
 **Reguła:** zmiana dotykająca UI, kanwy, walki, dialogów albo uprawnień graczy nie jest skończona,
 dopóki przebieg warstwy 6 (albo skryptowe sprawdzenie w piaskownicy) tego nie pokaże — ze zrzutem

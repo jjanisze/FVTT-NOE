@@ -181,7 +181,8 @@ export function registerCichyKrok() {
   };
   Hooks.on("createItem", resync);
   Hooks.on("deleteItem", resync);
-  Hooks.on("dnd5e.advancementManagerComplete", (_mgr, actor) => syncCichyKrokTerrain(actor));
+  // dnd5e 5.3 passes only the manager (advancement-manager.mjs) — the actor is `mgr.actor`.
+  Hooks.on("dnd5e.advancementManagerComplete", mgr => syncCichyKrokTerrain(mgr?.actor));
 
   // Backfill, jak przy Zranieniu/Chorobach/Upojeniu: postacie, które już mają
   // zdolność (np. Alan, level 3 Zwiadowca sprzed tego pliku), dostają efekt

@@ -17,7 +17,9 @@ import {
 } from "../config/conditions.mjs";
 import { NEUROSHIMA_CREATURE_TYPES, BLOOD_TYPES } from "../config/creature-types.mjs";
 import { CLASS_FEATURES } from "../config/class-features-data.mjs";
-import { PROFESSIONS } from "../config/classes-data.mjs";
+import { CLASSES, PROFESSIONS } from "../config/classes-data.mjs";
+import { pwGainOnAdvancement } from "../actors/pw.mjs";
+import { SZYBKOSC_STARTOWA_M, potrzebujeSzybkosci } from "../actors/character-defaults.mjs";
 import { KOBALT_CLASS_FEATURES } from "../wkk/config/class-features-data.mjs";
 import { filterKobaltPool } from "../actors/kobalt-advancement.mjs";
 import { MODULE_ID } from "./helpers.mjs";
@@ -244,6 +246,48 @@ export function registerConfigTests(quench) {
       it("`ItemChoiceFlow` dnd5e jest obudowany filtrem puli", function () {
         const Flow = dnd5e.applications.advancement.ItemChoiceFlow;
         expect(Flow.prototype._prepareContentContext.toString()).to.include("filterKobaltPool");
+      });
+    });
+
+    /* ---------------------------------------------------------------- */
+
+    describe("PW przy awansie (B6 — postać od zera)", function () {
+      it("tabela PW: Brutal / Twardziel / Zwiadowca 16 + 4 na poziom (k8), reszta 12 + 3 (k6)", function () {
+        for (const [id, c] of Object.entries(CLASSES)) {
+          const want = ["brutal", "twardziel", "zwiadowca"].includes(id) ? [16, 4, "d8"] : [12, 3, "d6"];
+          expect([c.pw.first, c.pw.perLevel, c.pw.hd], id).to.deep.equal(want);
+        }
+      });
+
+      it("pierwszy poziom: PW obecne = maks., nie kość dnd5e (8/16 przed poprawką)", function () {
+        expect(pwGainOnAdvancement({ valueBefore: 0, maxBefore: null, maxAfter: 16 })).to.equal(16);
+      });
+
+      it("kolejny poziom dokłada przyrost maksimum do obecnych, także rannej postaci", function () {
+        expect(pwGainOnAdvancement({ valueBefore: 9, maxBefore: 20, maxAfter: 24 })).to.equal(13);
+      });
+
+      it("utrata poziomu zabiera tyle samo, nie schodzi poniżej 0", function () {
+        expect(pwGainOnAdvancement({ valueBefore: 3, maxBefore: 24, maxAfter: 20 })).to.equal(0);
+      });
+
+      it("bez zmiany maksimum (np. samo Pochodzenie bez KON) — zostaje wartość dnd5e", function () {
+        expect(pwGainOnAdvancement({ valueBefore: 16, maxBefore: 16, maxAfter: 16 })).to.equal(null);
+        expect(pwGainOnAdvancement({ valueBefore: 0, maxBefore: null, maxAfter: null })).to.equal(null);
+      });
+    });
+
+    describe("Szybkość startowa (B6 — postać od zera)", function () {
+      it("NOE: 9 m dla każdego bohatera — dnd5e bez gatunku dawał 0", function () {
+        expect(SZYBKOSC_STARTOWA_M).to.equal(9);
+        expect(potrzebujeSzybkosci("character", {})).to.be.true;
+        expect(potrzebujeSzybkosci("character", { system: { attributes: { movement: { walk: null } } } })).to.be.true;
+      });
+
+      it("jawna wartość (import, duplikat) i nie-postacie zostają nietknięte", function () {
+        expect(potrzebujeSzybkosci("character", { system: { attributes: { movement: { walk: "6" } } } })).to.be.false;
+        expect(potrzebujeSzybkosci("character", { system: { attributes: { movement: { walk: "0" } } } })).to.be.false;
+        expect(potrzebujeSzybkosci("npc", {})).to.be.false;
       });
     });
 
