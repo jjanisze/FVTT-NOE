@@ -338,7 +338,20 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
     report.clients = [...clients.values()].map(c => ({ name: c.name, user: c.user }));
     for (const [i, suite] of loaded.entries()) {
       const t0 = Date.now();
-      if (i > 0) await settleBetweenSuites(clients);
+      if (i > 0) {
+        try {
+          await settleBetweenSuites(clients);
+        } catch (err) {
+          // A client without `game` between suites: its page or the server went away. Record it and
+          // stop — the clients are gone — but keep the report (release gate 2026-10-08: the sandbox
+          // server was quit from outside mid-run and the run ended with no report at all).
+          const st = await new FoundryClient(ctx.profile).status().catch(() => ({ reachable: false }));
+          const why = st.reachable ? `a client lost its page: ${err.message}` : "the sandbox server stopped during the run (not by fvtt — was its window closed?)";
+          report.suites.push({ name: suite.name, ok: false, ms: 0, error: { message: `harness: ${why}`, assertion: false }, steps: [], consoleErrors: {}, screenshots: [], notes: [] });
+          note(`ABORT before ${suite.name}: ${why}`);
+          break;
+        }
+      }
       for (const c of clients.values()) c.drainErrors();
       if (traceWrites) for (const c of clients.values()) await c.eval(() => { window.__e2e.writes.length = 0; });
       const fixture = suite.fixture === null ? null : await seed(clients.get("gm"), suite.fixture ?? "skirmish");
