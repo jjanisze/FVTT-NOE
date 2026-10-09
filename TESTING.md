@@ -294,6 +294,7 @@ Uruchamiaj przed każdym przeładowaniem świata. Jest natychmiastowy.
 | `rekonwalescencja-dzien` | jeden DO rannego (E6): Gojenie i karta RO, porażka i przerzut, Pomoc medyczna (BN, medyk drużyny w NOE i WKK, pusta torba, brak biegłości), blokada zajęć (D7), samoleczenie, kalendarzyk z żywego aktora (także z chorobą); choroba z dziennym RO — DO bez korzyści, KO odwołany, Zachód słońca z karą za Wyczerpanie i blokadą na dobę gry, migracja dni na sucho. Okno DO i karta w czacie — e2e `rekonwalescencja` |
 | `zagrozenia` | zagrożenia (E7): mróz (ST z temperatury, ciepło ubrany, śpiwór, koc), doba bez snu i Fuks, Uduszenie (faza, koniec tury, obrażenia, złapanie oddechu). Narzędzie MG i prawdziwa walka — e2e `zagrozenia` |
 | `rekonwalescencja` | czyste zasady powrotu do zdrowia: reguły zdejmowania Wyczerpania (NOE/RAI/WKK), kolejność DO, licznik Regeneracji, szansa RO, kalendarzyk — z tabelą §7.8 planu jako wynikiem oczekiwanym |
+| `towarzysze-zasady` | czyste zasady towarzyszy i dronów (`PLAN_m3_towarzysze.md` E0): statblocki §3.2 przy PB 2/3/4 i MDR +1…+4, wzory dronów przy INT +2…+5, ścisła gramatyka wzorów, kupowanie 24 pkt, kolejność w walce z remisami, decyzja tury, zakres aktywacji drona [A]/[B]/[R], Stopnie Zranienia (s. 205, 214), Tabela awarii z pomijaniem, naprawy WKK (tabela §7.11 co do sztuki), sygnał, RSSI, upadek, zasilanie, TT celu EMP |
 
 Największe niepokryte obszary (kolejni kandydaci): pochodzenia, manewry, zasady
 podróży i zapasów, generator bestiariusza. `config/inventory-audit.mjs`
