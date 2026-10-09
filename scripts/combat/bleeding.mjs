@@ -35,6 +35,7 @@ import { effectsFor } from "../config/disease-effects.mjs";
 import { getChoroby, takeDose } from "../actors/health-panel.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
 import { DUMDUM_BLEED_PROFILE } from "../wkk/combat/bleeding.mjs";
+import { krokNaprzod, tikRaz } from "./tiki.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const FLAG = "krwawienie";
@@ -233,13 +234,21 @@ function _onCalculateDamage(actor, damages, options) {
 async function _onUpdateCombat(combat, changed, options) {
   if (!game.user.isGM) return;
   if (!("turn" in changed) && !("round" in changed)) return;
+  // Wstecz nie ma końca ani początku tury — i każda tura tyka raz (PLAN_m3 F17).
+  if (!krokNaprzod(combat.previous, combat.current)) return;
 
   const previousId = combat.previous?.combatantId;
   const ended = previousId ? combat.combatants.get(previousId)?.actor ?? null : null;
   const started = combat.combatant?.actor ?? null;
 
-  if (ended && isBleeding(ended) && bleedProfile(ended).when === "end") await tickBleed(ended);
-  if (started && isBleeding(started) && bleedProfile(started).when === "start") await tickBleed(started);
+  if (ended && isBleeding(ended) && bleedProfile(ended).when === "end"
+    && await tikRaz(ended, "krwawienie", combat, { round: combat.previous.round, combatantId: previousId, krawedz: "end" })) {
+    await tickBleed(ended);
+  }
+  if (started && isBleeding(started) && bleedProfile(started).when === "start"
+    && await tikRaz(started, "krwawienie", combat, { round: combat.current.round, combatantId: combat.current.combatantId, krawedz: "start" })) {
+    await tickBleed(started);
+  }
 }
 
 /* -------------------------------------------- */

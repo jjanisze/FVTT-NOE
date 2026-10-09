@@ -48,6 +48,7 @@ import {
 import { dzienSwiata } from "../world-clock.mjs";
 import { applyZranienie, getZranienieLvl, setZranienie } from "../combat/zranienie.mjs";
 import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
+import { krokNaprzod, tikRaz } from "../combat/tiki.mjs";
 
 import { provenanceBadge, isAtHand } from "../actors/handy-items.mjs";
 
@@ -567,12 +568,17 @@ async function _onRestCompleted(actor, result) {
  */
 async function _onTurnChange(combat, previous, current) {
   if (!game.user.isActiveGM) return;
+  // Only a forward step ends and starts turns, and each turn ticks once (PLAN_m3 F17).
+  if (!krokNaprzod(previous, current)) return;
 
   const ended = combat.combatants.get(previous?.combatantId)?.actor ?? null;
   const started = combat.combatants.get(current?.combatantId)?.actor ?? null;
+  const ma = (actor, role, pred) => actor?.effects.some(e => e.flags?.[MODULE_ID]?.chemiaRole === role
+    && pred(getChemia(e.flags[MODULE_ID].chemiaKey)?.mech));
 
   // End of turn: roll to come out of the szał.
-  if (ended) {
+  if (ended && ma(ended, "rage", m => m?.rage)
+    && await tikRaz(ended, "szal", combat, { round: previous.round, combatantId: previous.combatantId, krawedz: "end" })) {
     // Snapshot — `_offerRageEnd` deletes effects, and deleting mid-iteration
     // over a live EmbeddedCollection skips entries.
     for (const effect of [...ended.effects]) {
@@ -584,7 +590,8 @@ async function _onTurnChange(combat, previous, current) {
   }
 
   // Start of turn: regeneration ticks.
-  if (started) {
+  if (started && ma(started, "effect", m => m?.regen)
+    && await tikRaz(started, "regeneracja", combat, { round: current.round, combatantId: current.combatantId, krawedz: "start" })) {
     for (const effect of [...started.effects]) {
       const f = effect.flags?.[MODULE_ID];
       if (f?.chemiaRole !== "effect") continue;

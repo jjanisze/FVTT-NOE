@@ -137,6 +137,11 @@ kartę gracza, gracz przeciąga klasę, Pochodzenie i Sztuczkę z kompendiów na
 → drop, jak mysz — dnd5e bierze tryb upuszczenia z dragover) i przechodzi AdvancementManager krok po
 kroku. Przy pierwszym przebiegu znalazła dwa błędy: postać startowała z 8/16 PW i z Szybkością 0.
 Paczka `combat` strzela też krótką serią z B 93R (Utrudnienie domyślnie, 3 naboje, raz na rundę). Krytyk rani tylko istotę ze Stopniem Zranienia (s. 205): cel krytyka gra istotę ze Stopniem, a krytyk na CYWILU bez Stopnia sprawdza, że Stopnia nie ma.
+Paczka `towarzysz` (MG + gracz, `PLAN_m3_towarzysze.md` E2): ludzki partner gracza dołącza do walki sam, w
+jednej grupie inicjatywy z właścicielem, której właścicielem jest gracz; rzut gracza przechodzi na grupę;
+przy remisie partner idzie tuż po właścicielu; Komenda z prawdziwej aktywności zdolności Partner daje mu
+turę, bez Komendy tura mija z Unikaniem, a [Cofnij — była komenda] MG ją przywraca; płonący BN dostaje 1k4
+raz, także gdy MG cofnie turę i ruszy dalej. Sprawdzona mutacjami (kolejność, własność grupy, tik ognia).
 
 Każdy klient ma w przeglądarce `window.__e2e` (`dev/agent/lib/e2e-page.mjs`), żeby funkcje paczek
 (serializowane, bez domknięć) nie przepisywały tych samych pętli: `forceD20([20, 3])` (kolejka ścianek

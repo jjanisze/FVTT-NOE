@@ -32,6 +32,7 @@ import { injectLocalization } from "./config/localization.mjs";
 import { registerActorAbilities } from "./actors/abilities.mjs";
 import { registerPW } from "./actors/pw.mjs";
 import { registerTowarzysze, towarzyszeApi } from "./actors/towarzysze.mjs";
+import { registerTowarzyszeWalka, towarzyszeWalkaApi } from "./combat/towarzysze-walka.mjs";
 import { registerCharacterDefaults } from "./actors/character-defaults.mjs";
 import { registerClassState } from "./actors/class-state.mjs";
 import { registerAbilityHotbar } from "./actors/ability-hotbar.mjs";
@@ -320,6 +321,8 @@ Hooks.once("init", () => {
   registerKnockoutAndLastAction();
   // Umieranie i stabilizacja wg NOE (PLAN_m1_walka E1–E2): 0 PW, rzuty przeciw śmierci, karty MG.
   registerUmieranie();
+  // Towarzysze w walce (PLAN_m3 §7.5): grupa z właścicielem, kolejność, Komenda i początek tury.
+  registerTowarzyszeWalka();
   // Neutralizacja Stopnia Zranienia po DO i kalendarzyk zdrowia (PLAN_m1_walka E6).
   registerRekonwalescencja();
   // Zagrożenia środowiska: Przemarznięcie, doba bez snu, Uduszenie (PLAN_m1_walka E7).
@@ -485,7 +488,7 @@ Hooks.once("ready", () => {
   // Umieranie (PLAN_m1_walka) — game.neuroshima.umieranie.stan(actor), .stabilizuj(actor), .bnDoUmierania(actor)
   game.neuroshima.umieranie = umieranieApi;
   // Towarzysze i drony (PLAN_m3) — game.neuroshima.towarzysze.wlasciciel(actor), .wartosci(actor), .maStopnieZranienia(actor)
-  game.neuroshima.towarzysze = towarzyszeApi;
+  game.neuroshima.towarzysze = { ...towarzyszeApi, ...towarzyszeWalkaApi };
   // Okoliczności ataku — game.neuroshima.okolicznosci.rozstrzygnij(activity) (podgląd z bieżącymi celami)
   game.neuroshima.okolicznosci = okolicznosciApi;
   // Rekonwalescencja (PLAN_m1_walka E6) — .stan(actor), .kalendarzyk(actor), .dane(actor) (prognoza bez okna)

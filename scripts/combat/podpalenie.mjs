@@ -31,6 +31,7 @@
 
 import { seqEffect, seqEndEffect, seqEffectRunning, seqScrollText } from "../weapons/sequencer.mjs";
 import { STATE_COLORS } from "../config/state-colors.mjs";
+import { krokNaprzod, tikRaz } from "./tiki.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const STATUS = "burning";
@@ -213,10 +214,13 @@ function _onDeleteEffect(effect, options) {
 async function _onUpdateCombat(combat, changed) {
   if (!isActingClient()) return;
   if (!("turn" in changed) && !("round" in changed)) return;
+  // Cofnięcie tury płonącego nie zadaje drugiego 1k4, ponowne „naprzód” — trzeciego (PLAN_m3 F17).
+  if (!krokNaprzod(combat.previous, combat.current)) return;
 
   const actor = combat.combatant?.actor;
   const effect = _burningEffect(actor);
   if (!effect) return;
+  if (!await tikRaz(actor, "podpalenie", combat, { round: combat.current.round, combatantId: combat.current.combatantId, krawedz: "start" })) return;
 
   if (effect.updateDuration().remaining <= 0) {
     await _burnOut(actor, effect);

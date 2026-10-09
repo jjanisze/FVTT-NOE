@@ -41,6 +41,7 @@ SKIP = {"SZTUCZKA", "ZDOLNOŚĆ Z PROFESJI", "ZDOLNOŚĆ Z POCHODZENIA", "ZŁODZ
 
 # ---------------------------------------------------------------------------
 # Hand-authored automation. Every `uses` is quoted from the ability text.
+# komenda: the companion ability gets a "Komenda" [B] activity — combat/towarzysze-walka.mjs.
 # max: a dnd5e roll-data formula string. period: "sr" (Krótki) | "lr" (Długi).
 # ---------------------------------------------------------------------------
 AUTOMATION = {
@@ -171,8 +172,11 @@ AUTOMATION = {
     "obsluga-pancerza": {"legacyAbilityKey": "obslugaPancerza"},
     "dziewiec-zyc": {"legacyAbilityKey": "dziewiecZyc"},     # Koci odskok [R]
     "moja-prawa-reka": {"companion": True},
-    "partner": {"companion": True},
-    "oswajanie-zwierzat": {"companion": True},
+    # Komenda [B] (PLAN_m3 D2): „w swojej Akcji Bonusowej wydajesz mu komendę” (Partner, s. 100);
+    # „jeśli przeznaczysz swoją Akcję Bonusową na wydanie mu polecenia” (Oswajanie, s. 99).
+    # Prawa ręka — pełna kontrola, bez Komendy (s. 75).
+    "partner": {"companion": True, "komenda": True, "hotbar": True},
+    "oswajanie-zwierzat": {"companion": True, "komenda": True, "hotbar": True},
 }
 
 
@@ -536,6 +540,8 @@ lines.append("""/**
  *   uses          { max: <roll-data formula>, period: "sr" | "lr" | "combat" }
  *   toggle        stateful abilities — see actors/class-state.mjs
  *   hotbar        gets an auto-managed macro — see actors/ability-hotbar.mjs
+ *   companion     the ability brings a companion (PLAN_m3) — config/towarzysze-data.mjs
+ *   komenda       gets a "Komenda" [B] activity that latches the companion's turn — combat/towarzysze-walka.mjs
  *   exclusiveGroup non-stacking family (multiclass rule) — see actors/class-rules.mjs
  *   handgunKind   "rewolwer" | "pistolet" — weapon the ability's clauses apply to, see actors/rewolwerowiec.mjs
  *   heal          { number, denomination, bonus } — the activity is a dnd5e heal (Kondycha)

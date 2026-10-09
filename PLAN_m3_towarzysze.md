@@ -1108,4 +1108,27 @@ F1 i F2 sprawdzone mutacjami; cały Quench 966/966 w piaskownicy; e2e `umieranie
     ma czego zapisać. KW ludzkiego towarzysza — też E4 (z klasy).
   - *Okno nagrody* nie pokazuje towarzyszy wcale (gamble i PD); 1/10 doli Prawej ręki to M5.
 
+**2026-10-10 — E2 zrobione.** `combat/towarzysze-walka.mjs` (grupa z właścicielem i jej własność, kolejność,
+`activeCombatant`, rzut towarzysza na właściciela, grupa rozwinięta, Komenda i jej zatrzask, początek tury
+z Unikaniem i kartą, [Cofnij — była komenda]), `combat/tiki.mjs` (F17: krwawienie, podpalenie, regeneracja
+i szał z chemii, Uduszenie — tylko krok naprzód, pamięć ostatniego tiku na aktorze). Komenda [B] to
+aktywność zdolności Partner i Oswajanie zwierząt z potoku klas (`komenda: true` w generatorze; karta użycia
+ma jedną linię zamiast całej zdolności ze statblockami). e2e `towarzysz` (8 kroków) — kolejność, własność
+grupy i F17 sprawdzone mutacjami.
+
+- **Znalezione przy wdrożeniu:** dwa przebiegi porządkowania grupy szły równolegle — uczestnik towarzysza
+  dodany przez pierwszy planował drugi, zanim pierwszy utworzył grupę; wychodziły dwie grupy, jedna pusta.
+  Przebiegi idą teraz w kolejce (złapała to paczka e2e).
+- **Rozstrzygnięcia z wdrożenia (do weta MG):**
+  - *Dołączanie:* właściciel dodany do walki ciągnie towarzysza, który ma żeton na tej scenie; towarzysz
+    dodany sam dołącza do grupy, jeśli właściciel już walczy.
+  - *Rzut za towarzysza* w grupie rzuca za właściciela, jeśli ten jeszcze nie rzucał; inaczej nic („działa
+    po X”) — towarzysz nigdy nie ma własnej inicjatywy.
+  - *Komenda poza turą właściciela* albo poza walką — tylko karta, bez zatrzasku. Komenda zdolności
+    zatrzaskuje tylko jej rodzaje (Partner — pies i człowiek, Oswajanie — zwierzęta).
+  - *Towarzysz przy 0 PW* ma turę zawsze — na Rzut Przeciw Śmierci; bez Unikania i bez pominięcia.
+  - *Karta „bez komendy”* jest jawna (stół widzi, czemu partner stoi), [Cofnij] tylko dla MG; wraca do tury
+    towarzysza także z następnej rundy.
+  - *Kampania:* aktywność Komenda trafi na kartę Victora dopiero przez `zdolnosci.resync` — w migracji E5.
+
 *(dalej etapy dopisują tu rozstrzygnięcia z wdrożenia, jak w `PLAN_m1_walka.md` §11)*

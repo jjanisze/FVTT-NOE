@@ -21,6 +21,7 @@
  */
 
 import { addExhaustion, removeExhaustion, zdejmijWyjsciem } from "../config/exhaustion.mjs";
+import { krokNaprzod, tikRaz } from "../combat/tiki.mjs";
 import {
   oddechTur, stMrozu, stSnu, planMrozu, poTurzeOddechu, ST_ODDECHU_PRZY_OBRAZENIACH
 } from "../config/umieranie-rules.mjs";
@@ -215,9 +216,14 @@ export async function zlapOddech(actor) {
 }
 
 /** Koniec tury istoty w walce (aktywny MG). */
-async function _onTurnChange(combat, previous) {
+async function _onTurnChange(combat, previous, current) {
   if (!game.users.activeGM?.isSelf) return;
-  await koniecTuryOddechu(combat.combatants.get(previous?.combatantId)?.actor);
+  // Wstecz tura się nie kończy; koniec każdej tury liczy się raz (PLAN_m3 F17).
+  if (!krokNaprzod(previous, current)) return;
+  const actor = combat.combatants.get(previous?.combatantId)?.actor;
+  if (!stanOddechu(actor)) return;
+  if (!await tikRaz(actor, "oddech", combat, { round: previous.round, combatantId: previous.combatantId, krawedz: "end" })) return;
+  await koniecTuryOddechu(actor);
 }
 
 /**

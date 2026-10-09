@@ -1149,6 +1149,32 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### M3 E0–E2 — towarzysze: czyste zasady, wartości z właściciela, walka; Stopnie Zranienia wg s. 205 (2026-10-10)
+
+Plan: `PLAN_m3_towarzysze.md` (decyzje MG D1–D39, postęp §11).
+
+- **Czyste zasady** (`config/towarzysze-rules.mjs`, `config/towarzysze-data.mjs`, `wkk/config/naprawa-awarii-kobalt.mjs`):
+  statystyki pochodne zwierząt, ludzkich towarzyszy i dronów ze ścisłą gramatyką wzorów roll data, kupowanie
+  24 pkt, kolejność w walce, decyzja tury, zakres aktywacji drona [A]/[B]/[R], Stopnie Zranienia, Tabela awarii
+  maszyn z pomijaniem niepasujących pozycji, naprawy (WKK: konkretne części), sygnał, RSSI, upadek drona,
+  zasilanie, TT celu Emitera EMP. Dane rodzajów pisane ręcznie do czasu generatora (E6).
+- **Towarzysz powiązany z właścicielem** (`actors/towarzysze.mjs`): jedna flaga, PW / KW / TT / premia ataku
+  / biegłości liczone z właściciela na żywo — `reset()` po każdej jego zmianie, bez zapisu na towarzyszu;
+  roll data `@wlasciciel`, `@tworca`, `@operator`; PB +2 ludzkiego towarzysza jako widoczny efekt. Towarzysz
+  nie dostaje Fuksów ani PD i nie bierze udziału w nagrodzie drużyny (okno dnd5e).
+- **Stopnie Zranienia wg s. 205:** jeden predykat dla maszyny umierania i dla krytyka. 20 istot
+  Bestiariusza ze STOPNIEM ZRANIENIA przy 0 PW wchodzi teraz w umieranie zamiast ginąć; krytyk na istocie
+  bez Stopnia (zwykły BN, maszyna) Stopnia już nie daje.
+- **Walka** (`combat/towarzysze-walka.mjs`): towarzysz w jednej grupie inicjatywy z właścicielem (grupa
+  należy do gracza — inaczej jego rzut nie dochodził do grupy), zawsze tuż po nim mimo remisu; Komenda [B]
+  na zdolności Partner i Oswajanie zwierząt; bez Komendy tura towarzysza mija z Unikaniem i kartą
+  [Cofnij — była komenda].
+- **Tiki tury raz na turę** (`combat/tiki.mjs`): krwawienie, podpalenie, regeneracja i szał z chemii,
+  Uduszenie tykały przy każdej zmianie tury, także przy cofnięciu — cofnięcie tury płonącego zadawało drugie
+  1k4, ponowne „naprzód” trzecie. Teraz tylko krok naprzód i każda tura najwyżej raz.
+- **Testy:** Quench `towarzysze-zasady` i `towarzysze`; e2e `towarzysz` (nowa), `combat` (krytyk w istotę ze
+  Stopniem i bez); mutacje dla F1, F2, kolejności, własności grupy i F17.
+
 ### v0.18.0 — Walka i zdrowie wg RAW, czysta instalacja (B6), ikony Bestiariusza (2026-10-08)
 
 Pierwsze wydanie na GitHubie od v0.14.34 — wersje 0.15–0.17.1 nie dostały wydań, ich zmiany są tutaj

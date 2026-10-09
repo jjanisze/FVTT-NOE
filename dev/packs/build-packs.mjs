@@ -119,6 +119,9 @@ const ORIGIN_ABILITIES_POOL = Object.keys(ORIGIN_ABILITIES).map(id => ({ uuid: o
 
 const ACTIVATION = { A: "action", B: "bonus", R: "reaction" };
 
+/** Usage-card line of a `komenda` ability (PLAN_m3 D2) — the latch itself is combat/towarzysze-walka.mjs. */
+const KOMENDA_CHAT = "Komenda [B] — towarzysz działa w swojej turze, zaraz po tobie. Bez komendy unika walki (s. 99–100).";
+
 function html(text) {
   return `<p>${String(text ?? "").trim()}</p>`;
 }
@@ -172,13 +175,15 @@ function buildFeature(f) {
   // Anything with an action tag or limited uses gets a clickable utility activity,
   // so it can be rolled from the sheet and from the auto-managed hotbar macro.
   // `heal` makes it a dnd5e heal instead (Kondycha) — same shape as stock Second Wind.
-  if (f.action || f.uses) {
+  // `komenda` (Partner, Oswajanie zwierząt): a "Komenda" [B] that latches the companion's turn (PLAN_m3 D2).
+  if (f.action || f.uses || f.komenda) {
     const aid = idFor("activity", f.id);
     activities[aid] = {
       _id: aid,
       type: f.heal ? "heal" : "utility",
-      name: f.label,
-      activation: f.action ? { type: ACTIVATION[f.action], value: 1 } : { type: "special", value: null },
+      name: f.komenda ? "Komenda" : f.label,
+      activation: f.komenda ? { type: "bonus", value: 1 }
+        : f.action ? { type: ACTIVATION[f.action], value: 1 } : { type: "special", value: null },
       consumption: f.uses
         ? { targets: [{ type: "itemUses", value: "1", target: "" }] }
         : { targets: [] },
@@ -206,7 +211,8 @@ function buildFeature(f) {
     img: iconFor("abilities", f.id),
     system: {
       // Coverage badge (PLAN_beta B5) — `config/class-features-coverage.mjs`.
-      description: { value: html(f.text) + featureCoverageHtml(f.id), chat: "" },
+      // Komenda is used every round — the usage card gets one line, not the whole ability with its statblocks.
+      description: { value: html(f.text) + featureCoverageHtml(f.id), chat: f.komenda ? html(KOMENDA_CHAT) : "" },
       source: { custom: f.kobalt ? "Neuroshima RPG — Kolor Kobaltu" : "Neuroshima RPG", rules: "2024" },
       type: { value: "class", subtype: "" },
       requirements,

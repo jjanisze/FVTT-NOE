@@ -6,7 +6,8 @@
  * Warstwa 4 (predykaty): statblocki §3.2 przy PB 2/3/4 i MDR +1…+4, wzory dronów przy INT +2…+5,
  * „½ poziomu” w dół z min. 1, kupowanie 24 pkt (Evie), kolejność z remisami trzech stron, decyzja tury
  * (U8), zakres aktywacji drona (D36), s. 205 i 214, Tabela awarii z pomijaniem, naprawy WKK (tabela §7.11
- * co do sztuki), krzywa sygnału, RSSI, upadek drona (D29), zasilanie, TT celu EMP (D27).
+ * co do sztuki), krzywa sygnału, RSSI, upadek drona (D29), zasilanie, TT celu EMP (D27), kierunek kroku tury
+ * dla tików (F17).
  *
  * Bez dokumentów — paczka nie dotyka świata.
  */
@@ -20,6 +21,7 @@ import { RODZAJE, ZRODLA, KONTROLERY, TURY } from "../config/towarzysze-data.mjs
 import { CLASSES } from "../config/classes-data.mjs";
 import { CLASS_FEATURES } from "../config/class-features-data.mjs";
 import { MACHINE_FAILURES } from "../combat/bestiary-thresholds.mjs";
+import { krokNaprzod, kluczTiku } from "../combat/tiki.mjs";
 import { MODULE_ID } from "./helpers.mjs";
 
 const PRZEPIS_KROCZACY = "15 CE, 1 CH, 10 CZ, 9 MK";
@@ -478,6 +480,24 @@ export function registerTowarzyszeZasadyTests(quench) {
           .to.deep.equal({ paliwoL: 0.25, minutyAkumulatora: 60, procentAkumulatora: 25 });
         expect(zuzycieZasilania({ rozmiar: "med", minuty: 60, agregat: true, paliwoL: 5 }).procentAkumulatora).to.equal(0);
         expect(zuzycieZasilania({ rozmiar: "med", minuty: 60, agregat: false, paliwoL: 5 }).paliwoL, "bez agregatu paliwo nie schodzi").to.equal(0);
+      });
+    });
+
+    describe("Tiki tury — tylko naprzód, raz na turę (F17)", function () {
+      it("krok naprzód: dalsza tura albo dalsza runda; wstecz i w miejscu — nie", function () {
+        expect(krokNaprzod({ round: 2, turn: 1 }, { round: 2, turn: 2 })).to.equal(true);
+        expect(krokNaprzod({ round: 2, turn: 4 }, { round: 3, turn: 0 }), "nowa runda").to.equal(true);
+        expect(krokNaprzod({ round: 0, turn: null }, { round: 1, turn: 0 }), "start walki").to.equal(true);
+        expect(krokNaprzod({ round: 3, turn: 0 }, { round: 2, turn: 4 }), "cofnięcie przez rundę").to.equal(false);
+        expect(krokNaprzod({ round: 2, turn: 2 }, { round: 2, turn: 1 }), "cofnięcie tury").to.equal(false);
+        expect(krokNaprzod({ round: 2, turn: 2 }, { round: 2, turn: 2 })).to.equal(false);
+        expect(krokNaprzod({ round: 2, turn: 2 }, null)).to.equal(false);
+      });
+
+      it("klucz pamięci rozróżnia walkę, rundę, uczestnika i krawędź", function () {
+        const k = kluczTiku("c1", 3, "u1", "start");
+        for (const inny of [kluczTiku("c2", 3, "u1", "start"), kluczTiku("c1", 4, "u1", "start"),
+          kluczTiku("c1", 3, "u2", "start"), kluczTiku("c1", 3, "u1", "end")]) expect(inny).to.not.equal(k);
       });
     });
 
