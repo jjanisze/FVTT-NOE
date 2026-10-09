@@ -28,6 +28,7 @@
 
 import { addExhaustion } from "../config/exhaustion.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
+import { jestTowarzyszem } from "../actors/towarzysze.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -103,8 +104,9 @@ export async function addFuks(actor, { chat = true } = {}) {
   return newCount;
 }
 
+/** BG — nie towarzysz: „Fant daje Fuksa bohaterowi” (D5 M3). */
 function _isPlayerCharacter(actor) {
-  return actor?.type === "character";
+  return actor?.type === "character" && !jestTowarzyszem(actor);
 }
 
 /** Rzuty przerzucone przez gracza, który nie mógł oznaczyć cudzej wiadomości — ostatnie N na aktorze. */

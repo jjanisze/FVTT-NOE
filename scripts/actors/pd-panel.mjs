@@ -18,6 +18,8 @@
  * Storage: `flags.neuroshima-2026-overrides.pd = { total, log: [...] }`
  */
 
+import { jestTowarzyszem } from "./towarzysze.mjs";
+
 const MODULE_ID = "neuroshima-2026-overrides";
 const FLAG = "pd";
 
@@ -184,7 +186,7 @@ async function _promptAmount() {
 
 function _onRenderSheet(app, html) {
   const actor = app.document ?? app.actor;
-  if (actor?.type !== "character") return;
+  if (actor?.type !== "character" || jestTowarzyszem(actor)) return; // poziom idzie za właścicielem (D5 M3)
 
   const root = html instanceof HTMLElement ? html : html?.[0];
   if (!root || root.querySelector(".neuro-pd-panel")) return;
@@ -241,7 +243,7 @@ export function registerPDPanel() {
   // observe directly. `zranienie.mjs` raises the level; award once per increase.
   Hooks.on("updateActor", async (actor, changed, _opts, userId) => {
     if (game.user.id !== userId) return;
-    if (actor.type !== "character") return;
+    if (actor.type !== "character" || jestTowarzyszem(actor)) return; // PD tylko dla BG (U22 M3)
     const level = foundry.utils.getProperty(changed, `flags.${MODULE_ID}.zranienie.level`);
     if (!Number.isInteger(level) || level <= 0) return;
     if (!game.combat) return;      // rules: only injuries taken in combat count

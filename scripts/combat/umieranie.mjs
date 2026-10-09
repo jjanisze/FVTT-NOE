@@ -47,6 +47,7 @@ import {
 import { applyZranienie, getZranienieLvl, ZRANIENIE_LEVELS } from "./zranienie.mjs";
 import { obronaOf, attackMessageFor, isMeleeAttack } from "./trafienie.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
+import { maStopnieZranienia } from "../actors/towarzysze.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 /** Flaga aktora: `{ karta, przyczyna, bn, stabilnyDo }`. */
@@ -125,10 +126,12 @@ const _tor = actor => {
   return { sukcesy: _num(d.success), porazki: _num(d.failure) };
 };
 
-/** BG albo BN wprowadzony do maszyny kartą (D2). */
+/**
+ * Kto umiera jak BG: każdy, kto ma Stopnie Zranienia (s. 205, `maStopnieZranienia` — U10 M3) — BG,
+ * towarzysz-istota, Bestiariusz ze STOPNIEM ZRANIENIA, BN wprowadzony kartą (D2). Maszyny nigdy.
+ */
 export function wMaszynie(actor) {
-  if (!actor || !["character", "npc"].includes(actor.type)) return false;
-  return actor.type === "character" || _flaga(actor).bn === true;
+  return maStopnieZranienia(actor);
 }
 
 /** Stan maszyny umierania aktora. */

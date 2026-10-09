@@ -136,7 +136,7 @@ Paczka `postac` (bramka B6 z `PLAN_beta.md`) buduje postać od zera jak przy sto
 kartę gracza, gracz przeciąga klasę, Pochodzenie i Sztuczkę z kompendiów na kartę (dragenter → dragover
 → drop, jak mysz — dnd5e bierze tryb upuszczenia z dragover) i przechodzi AdvancementManager krok po
 kroku. Przy pierwszym przebiegu znalazła dwa błędy: postać startowała z 8/16 PW i z Szybkością 0.
-Paczka `combat` strzela też krótką serią z B 93R (Utrudnienie domyślnie, 3 naboje, raz na rundę).
+Paczka `combat` strzela też krótką serią z B 93R (Utrudnienie domyślnie, 3 naboje, raz na rundę). Krytyk rani tylko istotę ze Stopniem Zranienia (s. 205): cel krytyka gra istotę ze Stopniem, a krytyk na CYWILU bez Stopnia sprawdza, że Stopnia nie ma.
 
 Każdy klient ma w przeglądarce `window.__e2e` (`dev/agent/lib/e2e-page.mjs`), żeby funkcje paczek
 (serializowane, bez domknięć) nie przepisywały tych samych pętli: `forceD20([20, 3])` (kolejka ścianek
@@ -294,6 +294,7 @@ Uruchamiaj przed każdym przeładowaniem świata. Jest natychmiastowy.
 | `rekonwalescencja-dzien` | jeden DO rannego (E6): Gojenie i karta RO, porażka i przerzut, Pomoc medyczna (BN, medyk drużyny w NOE i WKK, pusta torba, brak biegłości), blokada zajęć (D7), samoleczenie, kalendarzyk z żywego aktora (także z chorobą); choroba z dziennym RO — DO bez korzyści, KO odwołany, Zachód słońca z karą za Wyczerpanie i blokadą na dobę gry, migracja dni na sucho. Okno DO i karta w czacie — e2e `rekonwalescencja` |
 | `zagrozenia` | zagrożenia (E7): mróz (ST z temperatury, ciepło ubrany, śpiwór, koc), doba bez snu i Fuks, Uduszenie (faza, koniec tury, obrażenia, złapanie oddechu). Narzędzie MG i prawdziwa walka — e2e `zagrozenia` |
 | `rekonwalescencja` | czyste zasady powrotu do zdrowia: reguły zdejmowania Wyczerpania (NOE/RAI/WKK), kolejność DO, licznik Regeneracji, szansa RO, kalendarzyk — z tabelą §7.8 planu jako wynikiem oczekiwanym |
+| `towarzysze` | rdzeń towarzyszy na prawdziwych aktorach (`PLAN_m3_towarzysze.md` E1): PW, KW i TT psa z Mądrości i PB właściciela bez zapisu na psie, awans właściciela, brak właściciela → szablon, roll data `@wlasciciel`, ludzki towarzysz (PW 5 × poziom, efekt PB +2, biegłości właściciela na żywo), Stopnie Zranienia przez prawdziwy hak umierania i krytyk (s. 205, 214), PD i okno nagrody bez towarzyszy |
 | `towarzysze-zasady` | czyste zasady towarzyszy i dronów (`PLAN_m3_towarzysze.md` E0): statblocki §3.2 przy PB 2/3/4 i MDR +1…+4, wzory dronów przy INT +2…+5, ścisła gramatyka wzorów, kupowanie 24 pkt, kolejność w walce z remisami, decyzja tury, zakres aktywacji drona [A]/[B]/[R], Stopnie Zranienia (s. 205, 214), Tabela awarii z pomijaniem, naprawy WKK (tabela §7.11 co do sztuki), sygnał, RSSI, upadek, zasilanie, TT celu EMP |
 
 Największe niepokryte obszary (kolejni kandydaci): pochodzenia, manewry, zasady

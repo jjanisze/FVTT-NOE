@@ -1088,4 +1088,24 @@ a paczka pilnuje liczb z RAW bez względu na autora.
   - *Krzywa sygnału:* zapas 12 dB przy tłumieniu 20 dB na dekadę — czysto do ¼ zasięgu, 0,5 w połowie, sam
     szum na krawędzi, utrata za zasięgiem.
 
+**2026-10-10 — E1 zrobione.** `actors/towarzysze.mjs` (flaga U1, odwrotny indeks w pamięci, roll data
+`@wlasciciel`/`@tworca`/`@operator`, KW zwierzęcia i biegłości ludzkiego w danych bazowych, maks. PW w
+pochodnych, `reset()` zależnych po każdej zmianie właściciela i przegląd przy `ready`, efekt U3,
+`maStopnieZranienia`). `wMaszynie` = `maStopnieZranienia` (F1), krytyk → Stopień tylko dla mających Stopnie
+(F2), Fuksy i PD bez towarzyszy, okno nagrody dnd5e bez towarzyszy (U22). Paczka Quench `towarzysze` (16) —
+F1 i F2 sprawdzone mutacjami; cały Quench 966/966 w piaskownicy; e2e `umieranie` i `combat` zielone.
+
+- **Zmiana widoczna przy stole:** 20 istot Bestiariusza ze STOPNIEM ZRANIENIA (m.in. Gangus Boss i Kapo, Szeryf,
+  Cyngiel, Żołnierz Posterunku, Gigamut, Neoniedźwiedź) przy 0 PW wchodzi w umieranie zamiast ginąć, a krytyk
+  na istocie bez Stopnia (zwykły BN, maszyna) Stopnia już nie daje. Żadna maszyna nie ma Stopnia w statblocku.
+- **e2e `combat`:** krok „krytyk → Stopień” strzelał w GANGUSA ŻOŁNIERZA, który Stopnia nie ma — zapisywał F2
+  jako wymaganie. Teraz cel gra istotę ze Stopniem, a nowy krok sprawdza krytyk na CYWILU bez Stopnia.
+- **Rozstrzygnięcia z wdrożenia (do weta MG):**
+  - *Ręcznie wpisane maks. PW* ludzkiego towarzysza wygrywa, jak w `pw.mjs`; BN (zwierzę) trzyma maks. w źródle
+    zawsze, więc przy żywym właścicielu liczy moduł; wyłącznik `pwOverride: false` jak u BG.
+  - *Bieżące PW* nie rosną same, gdy wzór podniesie maks. (zmiana MDR, awans) — zostaje źródło; przyrost o deltę
+    przy awansie właściciela (U5) idzie z synchronizacją poziomów klasy „Towarzysz” w E4, bo bez tej klasy nie
+    ma czego zapisać. KW ludzkiego towarzysza — też E4 (z klasy).
+  - *Okno nagrody* nie pokazuje towarzyszy wcale (gamble i PD); 1/10 doli Prawej ręki to M5.
+
 *(dalej etapy dopisują tu rozstrzygnięcia z wdrożenia, jak w `PLAN_m1_walka.md` §11)*

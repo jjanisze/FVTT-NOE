@@ -38,6 +38,7 @@
 
 import { addExhaustion, zdejmijWyjsciem } from "../config/exhaustion.mjs";
 import { critSkipsZranienie } from "./crit-riders.mjs";
+import { maStopnieZranienia } from "../actors/towarzysze.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
 import { registerHudLevelled } from "../actors/levelled-conditions.mjs";
 import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
@@ -164,6 +165,8 @@ async function onApplyDamage(actor, amount, options = {}) {
   const droppedToZero = _droppedToZeroJustNow(actor);
   if (!(amount > 0) || _isHealing(options)) return;
   if (!isCriticalHitOn(actor, options)) return;
+  // Kary za krytyk tylko dla mających Stopnie Zranienia (s. 205); maszyny — Próg awarii (s. 214).
+  if (!maStopnieZranienia(actor)) return;
 
   const message = options.origin ?? options.originatingMessage ?? null;
   // Palcożerca: „Atak nie powoduje otrzymania Stopnia Zranienia” — rider w `crit-riders.mjs`.

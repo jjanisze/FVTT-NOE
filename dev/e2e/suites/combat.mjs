@@ -183,13 +183,17 @@ export default {
     await t.waitFor(p1, () => Boolean(game.user.character && canvas.tokens?.placeables.some(tk => tk.isOwner)),
       { message: "the player's client to see the fixture" });
 
-    await t.step("GM: combat with every token, Gracz 1 on turn; NPCs at 60 HP", async () => {
+    // Kary za krytyk dostaje tylko istota ze Stopniem Zranienia (s. 205, PLAN_m3 F2). GANGUS ŻOŁNIERZ ma
+    // go w statblocku nie ma — tu gra istotę, która ma (jak Gangus Boss); CYWIL zostaje bez.
+    await t.step("GM: combat with every token, Gracz 1 on turn; NPCs at 60 HP; GANGUS has Stopnie (s. 205)", async () => {
       const r = await t.gm.eval(async () => {
         for (const c of game.combats.contents) await c.delete();
         const scene = canvas.scene;
         for (const tok of scene.tokens.filter(tk => !tk.actor?.hasPlayerOwner)) {
           await tok.actor.update({ "system.attributes.hp.max": 60, "system.attributes.hp.value": 60 });
         }
+        const gangus = scene.tokens.find(tk => tk.name === "GANGUS ŻOŁNIERZ").actor;
+        await gangus.update({ "flags.neuroshima-2026-overrides.bestiary.usesZranienie": true });
         const combat = await Combat.implementation.create({ scene: scene.id, active: true });
         await combat.createEmbeddedDocuments("Combatant", scene.tokens.map((tk, i) => ({ tokenId: tk.id, sceneId: scene.id, actorId: tk.actorId, initiative: 20 - i })));
         await combat.startCombat();
@@ -214,6 +218,15 @@ export default {
       t.assert(r.after.hp > 0, "target dropped to 0 — the wound would not prove the crit path", r);
       t.assert(r.after.hp < r.before.hp, "no damage applied", r);
       t.equal(r.after.wound, r.before.wound + 1, "Stopień Zranienia after a critical hit");
+    });
+
+    await t.step("a crit on a creature without Stopnie (CYWIL, s. 205) does not wound", async () => {
+      const s = await p1.eval(shoot, { targetName: "CYWIL", uniform: 0.00001 });
+      t.equal(s.verdict, "krytyk", "verdict on the attack card");
+      t.assert(s.damageMessage && s.damageCrit, "no critical damage card linked to the attack", s);
+      const r = await t.gm.eval(applyLikeTray, { messageId: s.damageMessage, targetUuid: s.targetUuid });
+      t.assert(r.after.hp < r.before.hp, "no damage applied", r);
+      t.equal(r.after.wound, r.before.wound, "Stopień Zranienia after a crit on a creature without Stopnie");
     });
 
     await t.step("negative control: a normal hit applied the same way does not wound", async () => {

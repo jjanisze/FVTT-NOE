@@ -31,6 +31,7 @@ import { registerWyczerpanieTests } from "./wyczerpanie.test.mjs";
 import { registerRekonwalescencjaDzienTests } from "./rekonwalescencja-dzien.test.mjs";
 import { registerZagrozeniaTests } from "./zagrozenia.test.mjs";
 import { registerTowarzyszeZasadyTests } from "./towarzysze-zasady.test.mjs";
+import { registerTowarzyszeTests } from "./towarzysze.test.mjs";
 import { registerConfigTests } from "./config.test.mjs";
 import { registerEquipmentDataTests } from "./ekwipunek-dane.test.mjs";
 import { registerDiseaseTests } from "./choroby.test.mjs";
@@ -78,6 +79,7 @@ export function registerQuenchTests() {
     registerRekonwalescencjaDzienTests(quench);
     registerZagrozeniaTests(quench);
     registerTowarzyszeZasadyTests(quench);
+    registerTowarzyszeTests(quench);
     console.log("Neuroshima 5e | Quench batches registered");
   });
 }

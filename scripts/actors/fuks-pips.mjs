@@ -13,6 +13,7 @@
  */
 
 import { getFuksy, setFuksy, MAX_FUKSY } from "../combat/rerolls.mjs";
+import { jestTowarzyszem } from "./towarzysze.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const PIPS_CLASS = "neuro-fuks-pips";
@@ -24,7 +25,7 @@ export function registerFuksPips() {
 
 function _onRenderCharacterSheet(app, html) {
   const actor = app.document ?? app.actor;
-  if (actor?.type !== "character") return;
+  if (actor?.type !== "character" || jestTowarzyszem(actor)) return; // towarzysz bez Fuksów (D5 M3)
 
   const root = html instanceof HTMLElement ? html
     : html?.[0] instanceof HTMLElement ? html[0]
