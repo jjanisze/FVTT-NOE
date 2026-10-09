@@ -50,6 +50,7 @@ import { przepisySchematow, schematItemData, kategoriaSchematu } from "../../scr
 import { BESTIARY } from "../../scripts/config/bestiary-data.mjs";
 import { BLOOD_TYPES, NEUROSHIMA_CREATURE_TYPES } from "../../scripts/config/creature-types.mjs";
 import { computeFovAngle } from "../../scripts/config/fov.mjs";
+import { szablonyTowarzyszy, klasaTowarzysza } from "./build-towarzysze.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -79,7 +80,8 @@ const PACK = {
   magazynki: "magazynki",
   sprzet: "sprzet",
   pancerze: "pancerze",
-  schematy: "schematy"
+  schematy: "schematy",
+  towarzysze: "towarzysze"
 };
 
 /** Portrait art migrated from Roll20 lives here, one folder per character. */
@@ -1678,6 +1680,9 @@ console.log("Neuroshima 5e — building compendium packs\n");
 const featureDocs = Object.values(CLASS_FEATURES).map(buildFeature);
 const professionDocs = Object.entries(PROFESSIONS).map(([pid, p]) => buildProfession(pid, p));
 const classDocs = Object.entries(CLASSES).map(([cid, c]) => buildClass(cid, c));
+// Klasa „Towarzysz” (PLAN_m3 §7.8) — w folderze „Towarzysze”, poza wyborem klasy BG.
+const towarzyszKlasa = klasaTowarzysza({ advancement, idFor, html, SZTUCZKI_POOL, MODULE_ID });
+classDocs.push(towarzyszKlasa.doc);
 const medicineDocs = Object.keys(CHEMIA).map(buildChemia);
 const sztuczkaDocs = Object.keys(SZTUCZKI).map(buildSztuczka);
 const originAbilityDocs = Object.keys(ORIGIN_ABILITIES).map(buildOriginAbility);
@@ -1771,7 +1776,7 @@ const bestiaryFolders = Object.entries(NEUROSHIMA_CREATURE_TYPES)
 fs.mkdirSync(PACKS_ROOT, { recursive: true });
 if (wanted(PACK.features)) await writePack(PACK.features, featureDocs);
 if (wanted(PACK.profesje)) await writePack(PACK.profesje, professionDocs);
-if (wanted(PACK.klasy)) await writePack(PACK.klasy, classDocs);
+if (wanted(PACK.klasy)) await writePack(PACK.klasy, classDocs, [towarzyszKlasa.folder]);
 if (wanted(PACK.sztuczki)) await writePack(PACK.sztuczki, sztuczkaDocs);
 if (wanted(PACK.pochodzenia)) await writePack(PACK.pochodzenia, originAbilityDocs);
 if (wanted(PACK.origins)) await writePack(PACK.origins, originDocs);
@@ -1805,6 +1810,12 @@ if (wanted(PACK.bestiariusz)) {
     console.log(`    bez wpisu, jadą na 1.0 (${scaleMisses.length}): ${scaleMisses.join(", ")}`);
     console.log(`    uzupełnij: npm run seed:token-scales`);
   }
+}
+
+// Szablony zwierząt-towarzyszy (PLAN_m3 §7.8) — ten sam builder co Bestiariusz, po jego statystykach żetonów.
+if (wanted(PACK.towarzysze)) {
+  const towarzysze = szablonyTowarzyszy({ buildNpc, idFor, MODULE_ID });
+  await writeActorPack(PACK.towarzysze, towarzysze.entries, towarzysze.folders);
 }
 
 const advCount = classDocs.reduce((n, d) => n + d.system.advancement.length, 0)

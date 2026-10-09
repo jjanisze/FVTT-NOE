@@ -1150,4 +1150,27 @@ racjami. e2e `towarzysz` dostała trzy kroki (karta, drużyna, DO).
   piaskownicy sprzed wydania v0.18.0; `fvtt sandbox:init` ją odświeża. Do zrobienia w narzędziach: wykrywać
   rozjazd wersji w `doctor` albo przed e2e.
 
+**2026-10-10 — E4 zrobione.** `actors/towarzysze-tworzenie.mjs` (narzędzie MG „Nowy towarzysz”, [Odłącz],
+kreator ludzkiego towarzysza w nagłówku karty: Cechy → Pochodzenie → klasa „Towarzysz”, poziomy za
+właścicielem z przyrostem PW, ochrona klasy U23), `dev/packs/build-towarzysze.mjs` (klasa „Towarzysz” w paczce
+`klasy`, folder „Towarzysze”; nowa paczka `towarzysze` z szablonami czterech zwierząt przez builder
+Bestiariusza), statblocki zwierząt w `config/towarzysze-data.mjs` (`STATBLOKI`, ręcznie do E6),
+`validate-packs` zna klasę i szablony. e2e `towarzysz-tworzenie` (7 kroków; MG tworzy, gracz przeklikuje
+kreator w swoim logowaniu) — poziomy za właścicielem i U23 sprawdzone mutacjami.
+
+- **Paczka `towarzysze` weszła w E4, nie w E6:** narzędzie MG tworzy zwierzę z szablonu, więc szablon musiał
+  być teraz. Źródłem są ręczne `STATBLOKI`; E6 dokłada ekstrakcję z NOE i generator, który je zastąpi —
+  walidator paczek i Quench pilnują liczb niezależnie.
+- **Rozstrzygnięcia z wdrożenia (do weta MG):**
+  - *Kolejność kreatora:* Cechy → Pochodzenie → klasa. Pochodzenie dokłada +1/+1 do już ustalonych cech (w
+    odwrotnej kolejności okno cech by je nadpisało), a Sztuczka wybierana na końcu widzi ostateczne cechy
+    („której wymagania spełnia”).
+  - *Jedna klasa „Towarzysz”* dla Ludzkiego partnera i Prawej ręki — te same zasady tworzenia (s. 76, 101).
+  - *Narzędzie przy Oswajaniu* domyślnie rzuca k6 (rzut tylko dla MG); MG może wybrać zwierzę wprost.
+  - *Szept po utworzeniu* idzie do graczy właściciela i MG; karta otwiera się MG (Foundry nie otwiera okien
+    na cudzym kliencie).
+  - *Szablon bez właściciela* pokazuje TT bez PB (formuła z pustym `@wlasciciel`) i PW z szablonu — to widok
+    w kompendium, nie towarzysz.
+  - *Migracja klas* (`migrate-classes`, ręczna) pomija towarzyszy — klasa „Towarzysz” nie jest zaślepką.
+
 *(dalej etapy dopisują tu rozstrzygnięcia z wdrożenia, jak w `PLAN_m1_walka.md` §11)*

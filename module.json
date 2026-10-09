@@ -160,6 +160,14 @@
       "type": "Actor",
       "system": "dnd5e",
       "ownership": { "PLAYER": "NONE", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "towarzysze",
+      "label": "Neuroshima — Towarzysze",
+      "path": "packs/towarzysze",
+      "type": "Actor",
+      "system": "dnd5e",
+      "ownership": { "PLAYER": "NONE", "ASSISTANT": "OWNER" }
     }
   ],
   "packFolders": [
@@ -167,7 +175,7 @@
       "name": "Neuroshima",
       "sorting": "m",
       "color": "#6b3f1f",
-      "packs": ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "pochodzenia", "zdolnosci-pochodzenia", "bron", "magazynki", "sprzet", "pancerze", "lekarstwa", "amunicja", "granaty", "narzedzia", "schematy", "bestiariusz"]
+      "packs": ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "pochodzenia", "zdolnosci-pochodzenia", "bron", "magazynki", "sprzet", "pancerze", "lekarstwa", "amunicja", "granaty", "narzedzia", "schematy", "bestiariusz", "towarzysze"]
     }
   ],
   "esmodules": ["scripts/main.mjs"],

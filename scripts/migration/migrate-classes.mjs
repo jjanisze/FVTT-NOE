@@ -252,8 +252,9 @@ export async function migrateClasses({ commit = false, actors = null, minConfide
   }
 
   const packs = await _loadPacks();
+  // Towarzysze (PLAN_m3) mają klasę „Towarzysz”, której nie ma w CLASSES — nie jest zaślepką do wymiany.
   const targets = game.actors.filter(a =>
-    a.type === "character" && (!actors || actors.includes(a.name)));
+    a.type === "character" && !a.flags?.[MODULE_ID]?.towarzysz && (!actors || actors.includes(a.name)));
 
   const report = [];
 

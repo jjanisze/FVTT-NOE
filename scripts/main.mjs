@@ -34,6 +34,7 @@ import { registerPW } from "./actors/pw.mjs";
 import { registerTowarzysze, towarzyszeApi } from "./actors/towarzysze.mjs";
 import { registerTowarzyszeWalka, towarzyszeWalkaApi } from "./combat/towarzysze-walka.mjs";
 import { registerTowarzyszeKarta } from "./actors/towarzysze-karta.mjs";
+import { registerTowarzyszeTworzenie, towarzyszeTworzenieApi } from "./actors/towarzysze-tworzenie.mjs";
 import { registerCharacterDefaults } from "./actors/character-defaults.mjs";
 import { registerClassState } from "./actors/class-state.mjs";
 import { registerAbilityHotbar } from "./actors/ability-hotbar.mjs";
@@ -373,6 +374,8 @@ Hooks.once("init", () => {
   // so it must be the final renderActorSheet listener registered.
   // Plakietka towarzysza w nagłówku (PLAN_m3 §7.6); pasek na karcie właściciela buduje sheet-shell.
   registerTowarzyszeKarta();
+  // Narzędzie MG, kreator ludzkiego towarzysza, poziomy za właścicielem, ochrona klasy (PLAN_m3 §7.8).
+  registerTowarzyszeTworzenie();
   registerSheetShell();
 
   // Vehicle sheet is still stock dnd5e (no Neuroshima subclass) — it's just missing the
@@ -491,7 +494,7 @@ Hooks.once("ready", () => {
   // Umieranie (PLAN_m1_walka) — game.neuroshima.umieranie.stan(actor), .stabilizuj(actor), .bnDoUmierania(actor)
   game.neuroshima.umieranie = umieranieApi;
   // Towarzysze i drony (PLAN_m3) — game.neuroshima.towarzysze.wlasciciel(actor), .wartosci(actor), .maStopnieZranienia(actor)
-  game.neuroshima.towarzysze = { ...towarzyszeApi, ...towarzyszeWalkaApi };
+  game.neuroshima.towarzysze = { ...towarzyszeApi, ...towarzyszeWalkaApi, ...towarzyszeTworzenieApi };
   // Okoliczności ataku — game.neuroshima.okolicznosci.rozstrzygnij(activity) (podgląd z bieżącymi celami)
   game.neuroshima.okolicznosci = okolicznosciApi;
   // Rekonwalescencja (PLAN_m1_walka E6) — .stan(actor), .kalendarzyk(actor), .dane(actor) (prognoza bez okna)

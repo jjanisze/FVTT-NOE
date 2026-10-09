@@ -1149,7 +1149,7 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
-### M3 E0–E3 — towarzysze: czyste zasady, wartości z właściciela, walka, karty; Stopnie Zranienia wg s. 205 (2026-10-10)
+### M3 E0–E4 — towarzysze: czyste zasady, wartości z właściciela, walka, karty, tworzenie; Stopnie Zranienia wg s. 205 (2026-10-10)
 
 Plan: `PLAN_m3_towarzysze.md` (decyzje MG D1–D39, postęp §11).
 
@@ -1174,11 +1174,17 @@ Plan: `PLAN_m3_towarzysze.md` (decyzje MG D1–D39, postęp §11).
   karty towarzysza z rozkładem wartości w dymku; towarzysze pod właścicielem na karcie drużyny; ludzki
   towarzysz w puli medyków przy Długim odpoczynku; zwierzęta w dziennym zapotrzebowaniu z przypomnieniem o
   brudnej wodzie (s. 47).
+- **Tworzenie** (`actors/towarzysze-tworzenie.mjs`, `dev/packs/build-towarzysze.mjs`): narzędzie MG „Nowy
+  towarzysz” z paska właściciela (zwierzę z nowej paczki `towarzysze`, człowiek — czysta karta; własność gracza,
+  folder, drużyna), kreator ludzkiego towarzysza w nagłówku karty (Cechy: zestaw albo 24 pkt; Pochodzenie;
+  klasa „Towarzysz” — 2 RO, 2 umiejętności lub zestawy narzędzi, Sztuczka), poziomy klasy za właścicielem z
+  przyrostem PW, potwierdzenie przed upuszczeniem klasy towarzysza na postać gracza, [Odłącz] dla MG.
 - **Tiki tury raz na turę** (`combat/tiki.mjs`): krwawienie, podpalenie, regeneracja i szał z chemii,
   Uduszenie tykały przy każdej zmianie tury, także przy cofnięciu — cofnięcie tury płonącego zadawało drugie
   1k4, ponowne „naprzód” trzecie. Teraz tylko krok naprzód i każda tura najwyżej raz.
-- **Testy:** Quench `towarzysze-zasady` i `towarzysze`; e2e `towarzysz` (nowa), `combat` (krytyk w istotę ze
-  Stopniem i bez); mutacje dla F1, F2, kolejności, własności grupy i F17.
+- **Testy:** Quench `towarzysze-zasady` i `towarzysze`; e2e `towarzysz` i `towarzysz-tworzenie` (nowe), `combat`
+  (krytyk w istotę ze Stopniem i bez); mutacje dla F1, F2, kolejności, własności grupy, F17, poziomów za
+  właścicielem i U23.
 
 ### v0.18.0 — Walka i zdrowie wg RAW, czysta instalacja (B6), ikony Bestiariusza (2026-10-08)
 

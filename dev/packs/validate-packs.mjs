@@ -19,6 +19,7 @@ import {
 import { CLASS_FEATURES, resolveGrant } from "../../scripts/config/class-features-data.mjs";
 import { SZTUCZKI } from "../../scripts/config/sztuczki-data.mjs";
 import { ORIGIN_ABILITIES, POCHODZENIA, attrBonus } from "../../scripts/config/pochodzenia-data.mjs";
+import { STATBLOKI, RODZAJE } from "../../scripts/config/towarzysze-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -44,10 +45,10 @@ async function load(name) {
   return docs;
 }
 
-let klasy, profesje, features, sztuczki, pochodzenia, origins;
+let klasyWszystkie, profesje, features, sztuczki, pochodzenia, origins, towarzysze;
 try {
-  [klasy, profesje, features, sztuczki, pochodzenia, origins] = await Promise.all(
-    ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "zdolnosci-pochodzenia", "pochodzenia"].map(load));
+  [klasyWszystkie, profesje, features, sztuczki, pochodzenia, origins, towarzysze] = await Promise.all(
+    ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "zdolnosci-pochodzenia", "pochodzenia", "towarzysze"].map(load));
 } catch (err) {
   // classic-level wraps the lock error, so the code lives on `cause`, not on `err`.
   const code = err.cause?.code ?? err.code;
@@ -57,6 +58,12 @@ try {
   }
   throw err;
 }
+
+// Klasa „Towarzysz” (PLAN_m3 §7.8) leży w paczce klas, ale nie jest klasą BG — osobne sprawdzenia niżej.
+// Paczka klas ma też rekord folderu (bez `system`) — liczą się tylko dokumenty klas.
+klasyWszystkie = klasyWszystkie.filter(d => d.type === "class");
+const klasy = klasyWszystkie.filter(d => d.system?.identifier !== "towarzysz");
+const klasaTowarzysza = klasyWszystkie.find(d => d.system?.identifier === "towarzysz");
 
 /* ---- counts ---- */
 if (klasy.length !== Object.keys(CLASSES).length) fail(`klasy: ${klasy.length} docs, expected ${Object.keys(CLASSES).length}`);
@@ -101,7 +108,7 @@ const orphanAbilities = Object.values(ORIGIN_ABILITIES).filter(a => !POCHODZENIA
 if (orphanAbilities.length) fail(`zdolności bez Pochodzenia: ${orphanAbilities.map(a => a.id).join(", ")}`);
 
 /* ---- every advancement uuid resolves to a built document ---- */
-for (const doc of [...klasy, ...profesje]) {
+for (const doc of [...klasy, ...profesje, ...(klasaTowarzysza ? [klasaTowarzysza] : [])]) {
   for (const a of doc.system.advancement ?? []) {
     const uuids = [
       ...(a.configuration.items ?? []).map(i => i.uuid),
@@ -229,6 +236,31 @@ for (const doc of features) {
     if (rec?.period !== def.uses.period) fail(`${id}: recovery ${rec?.period} != ${def.uses.period}`);
   }
 }
+
+/* ---- towarzysze (PLAN_m3 §7.8) ---- */
+if (!klasaTowarzysza) fail("klasy: brak klasy „Towarzysz”");
+else {
+  const adv = klasaTowarzysza.system.advancement;
+  const ile = t => adv.filter(a => a.type === t && a.level === 1).length;
+  if (klasaTowarzysza.system.hd?.denomination !== "d6") fail(`towarzysz: hd ${klasaTowarzysza.system.hd?.denomination} != d6`);
+  if (adv.some(a => a.type === "HitPoints")) fail("towarzysz: HitPoints advancement — PW liczy moduł (U5)");
+  if (ile("Trait") !== 2 || ile("ItemChoice") !== 1 || adv.length !== 3) fail("towarzysz: oczekiwane 2 × Trait i 1 × ItemChoice na poziomie 1");
+  if (!klasaTowarzysza.folder) fail("towarzysz: poza folderem „Towarzysze” — wpadnie w wybór klasy BG");
+}
+const szablony = towarzysze.filter(d => d.prototypeToken);
+if (szablony.length !== Object.keys(STATBLOKI).length) fail(`towarzysze: ${szablony.length} szablonów, oczekiwane ${Object.keys(STATBLOKI).length}`);
+for (const a of szablony) {
+  const rodzaj = a.flags?.[MODULE_ID]?.towarzyszSzablon;
+  const wpis = RODZAJE[rodzaj];
+  if (!wpis) { fail(`towarzysze: ${a.name} bez znanej flagi szablonu`); continue; }
+  if (a.system.attributes.ac.calc !== "custom" || a.system.attributes.ac.formula !== wpis.wzory.tt) fail(`towarzysze: ${a.name} — TT nie z formuły właściciela`);
+  if (!a.prototypeToken.actorLink) fail(`towarzysze: ${a.name} — żeton niepowiązany`);
+  if (a.flags[MODULE_ID].bestiary?.usesZranienie !== true) fail(`towarzysze: ${a.name} — bez Stopni Zranienia (s. 205)`);
+  const ataki = towarzysze.filter(d => !d.prototypeToken && a.items?.includes(d._id))
+    .flatMap(d => Object.values(d.system?.activities ?? {})).filter(x => x.type === "attack");
+  if (!ataki.length || ataki.some(x => x.attack?.bonus !== wpis.wzory.atak)) fail(`towarzysze: ${a.name} — premia ataku nie z formuły właściciela`);
+}
+notes.push(`towarzysze: klasa ${klasaTowarzysza ? "jest" : "BRAK"}, ${szablony.length} szablonów zwierząt`);
 
 notes.push(`features: ${features.length} (uses ${withUses}, activities ${withActivity}, art ${withArt})`);
 notes.push(`sztuczki: ${sztuczki.length} docs; Pochodzenia: ${origins.length}, ich zdolności: ${pochodzenia.length}`);

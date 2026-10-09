@@ -5004,3 +5004,54 @@ tr.neuro-tt-off td.attribution-value {
   font-weight: normal;
   text-transform: uppercase;
 }
+
+/* Kreator ludzkiego towarzysza — pigułki kroków pod plakietką (PLAN_m3 §7.8). */
+.neuro-kreator {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin: 2px 0;
+  font-size: var(--font-size-11, 11px);
+}
+
+.neuro-kreator-tytul {
+  color: var(--dnd5e-color-gold, #c9b37e);
+  font-weight: bold;
+}
+
+.neuro-kreator-krok {
+  width: auto;
+  height: auto;
+  min-height: 0;
+  padding: 1px 8px;
+  border: 1px solid color-mix(in srgb, var(--dnd5e-color-gold, #9f9275) 60%, transparent);
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.45);
+  color: #f0e6cc;
+  font-size: var(--font-size-11, 11px);
+  line-height: 1.5;
+}
+
+.neuro-kreator-krok:not(:disabled):hover { background: rgba(201, 179, 126, 0.25); }
+.neuro-kreator-krok:disabled:not(.is-zrobione) { opacity: 0.45; }
+.neuro-kreator-krok.is-zrobione { border-color: #4a9a50; color: #9fd8a4; }
+
+.neuro-kreator-koszt { margin: 0.3rem 0 0; font-weight: bold; }
+.neuro-kreator-koszt.is-zle { color: var(--neuro-color-zranienie); }
+
+.neuro-towarzysz-odlacz {
+  width: 16px;
+  height: 16px;
+  min-height: 0;
+  margin-left: 2px;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font-size: 10px;
+  line-height: 16px;
+  opacity: 0.7;
+}
+
+.neuro-towarzysz-odlacz:hover { opacity: 1; }

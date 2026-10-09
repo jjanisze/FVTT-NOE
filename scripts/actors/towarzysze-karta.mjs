@@ -18,6 +18,7 @@ import {
 } from "./towarzysze.mjs";
 import { getZranienieLvl } from "../combat/zranienie.mjs";
 import { wydajKomende } from "../combat/towarzysze-walka.mjs";
+import { pigulkiKreatora, przyciskOdlacz } from "./towarzysze-tworzenie.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
@@ -191,7 +192,7 @@ export function rozkladTowarzysza(actor) {
 }
 
 function _plakietka(root, actor) {
-  root.querySelectorAll(".neuro-towarzysz-badge").forEach(n => n.remove());
+  root.querySelectorAll(".neuro-towarzysz-badge, .neuro-kreator").forEach(n => n.remove());
   const t = towarzysz(actor);
   if (!t) return;
   const wl = wlascicielTowarzysza(actor);
@@ -212,9 +213,13 @@ function _plakietka(root, actor) {
       wl.sheet?.render(true);
     });
   }
+  const odlacz = przyciskOdlacz(actor);
+  if (odlacz) badge.append(odlacz);
   const anchor = root.querySelector(".sheet-header .document-name");
   if (anchor) anchor.after(badge);
   else root.querySelector(".sheet-header")?.prepend(badge);
+  const kreator = pigulkiKreatora(actor);
+  if (kreator) badge.after(kreator);
 }
 
 function _onRenderSheet(app, html) {

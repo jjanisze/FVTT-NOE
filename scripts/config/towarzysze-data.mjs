@@ -141,6 +141,105 @@ export const RODZAJE = Object.freeze({
   })
 });
 
+/* -------------------------------------------- */
+/*  Statblocki zwierząt — szablony paczki        */
+/* -------------------------------------------- */
+
+const _cecha = (id, name, text, automation = null) => Object.freeze({ id, name, section: "traits", text, automation });
+const _udzwig = (uzytkowy, maksymalny) => _cecha("udzwig", "Udźwig", `Użytkowy: ${uzytkowy} kg. Maksymalny: ${maksymalny} kg.`);
+const DOSKONALE_ZMYSLY = _cecha("doskonale-zmysly", "Doskonałe zmysły",
+  "Ma Ułatwienie w Testach Mądrości (Percepcja) opartych na węchu i słuchu.");
+const WSPOLPRACA = _cecha("wspolpraca", "Współpraca",
+  "Jeśli w zasięgu do 1,5 metra od przeciwnika znajduje się przytomny sojusznik, otrzymuje Ułatwienie do Testów Ataku wręcz.",
+  Object.freeze({ kind: "packTactics", range: 1.5 }));
+
+/**
+ * Statblocki zwierząt w kształcie wpisu Bestiariusza (`dev/bestiary/bestiary.json`) — szablony paczki
+ * `towarzysze` buduje ten sam builder (Współpraca dostaje automatykę `packTactics` za darmo, F12). Liczby
+ * zależne od właściciela (TT, PW, atak) policzone dla właściciela z PB +2 i MDR +2 — to tylko wartości
+ * szablonu; na karcie towarzysza liczy je moduł (`wzory`). Umiejętności i RO jak w druku (D4).
+ */
+export const STATBLOKI = Object.freeze({
+  "zmutowany-owad": Object.freeze({
+    name: "Zmutowany owad", size: "sm", creatureType: "zwierze", ac: 16, initiative: 6,
+    hp: Object.freeze({ avg: 23, formula: "1d6" }),
+    abilities: Object.freeze({ str: 8, dex: 18, con: 14, int: 4, wis: 16, cha: 4 }),
+    skills: Object.freeze({ skr: 6 }), saves: Object.freeze({}),
+    immunities: Object.freeze(["radiant", "poison"]),
+    senses: Object.freeze({ blindsight: 9, passivePerception: 13 }),
+    speed: Object.freeze({ walk: 9, climb: 9, burrow: 4.5 }),
+    carry: Object.freeze({ normal: 16, max: 32 }),
+    features: Object.freeze([
+      _cecha("kopacz", "Kopacz", "Kiedy zakopuje się w piachu lub w ziemi, nie prowokuje ataków okazyjnych."),
+      _cecha("pajecza-wspinaczka", "Pajęcza wspinaczka", "Może chodzić po każdej chropowatej powierzchni, nawet do góry nogami."),
+      _udzwig(16, 32)
+    ]),
+    attacks: Object.freeze([Object.freeze({
+      id: "ukaszenie", name: "Ukąszenie", kind: "mwak", reach: 1.5, range: null, section: "actions", bonus: 6,
+      damage: Object.freeze({ avg: 6, formula: "1d4 + 4", type: "piercing" }), rider: null, onHit: null, dropsAs: null
+    })])
+  }),
+  "zmutowany-ssak": Object.freeze({
+    name: "Zmutowany ssak", size: "lg", creatureType: "zwierze", ac: 13, initiative: -1,
+    hp: Object.freeze({ avg: 29, formula: "1d10" }),
+    abilities: Object.freeze({ str: 18, dex: 12, con: 12, int: 6, wis: 14, cha: 4 }),
+    skills: Object.freeze({ atl: 6 }), saves: Object.freeze({}),
+    immunities: Object.freeze([]),
+    senses: Object.freeze({ darkvision: 18, passivePerception: 12 }),
+    speed: Object.freeze({ walk: 12, climb: 6 }),
+    carry: Object.freeze({ normal: 180, max: 360 }),
+    features: Object.freeze([DOSKONALE_ZMYSLY, WSPOLPRACA, _udzwig(180, 360)]),
+    attacks: Object.freeze([Object.freeze({
+      id: "atak-konczyna", name: "Atak kończyną", kind: "mwak", reach: 1.5, range: null, section: "actions", bonus: 6,
+      damage: Object.freeze({ avg: 10, formula: "2d6 + 4", type: "bludgeoning" }),
+      rider: "Trafiony cel otrzymuje stan Powalenie, jeśli jest rozmiaru średniego lub mniejszego.",
+      onHit: Object.freeze({ condition: "prone", maxSize: "med" }), dropsAs: null
+    })])
+  }),
+  "zmutowany-gad": Object.freeze({
+    name: "Zmutowany gad", size: "med", creatureType: "zwierze", ac: 14, initiative: 2,
+    hp: Object.freeze({ avg: 26, formula: "1d8" }),
+    abilities: Object.freeze({ str: 14, dex: 14, con: 18, int: 4, wis: 12, cha: 4 }),
+    skills: Object.freeze({ prc: 3 }), saves: Object.freeze({}),
+    immunities: Object.freeze([]),
+    senses: Object.freeze({ termowizja: 18, passivePerception: 13 }),
+    speed: Object.freeze({ walk: 9, swim: 18 }),
+    carry: Object.freeze({ normal: 70, max: 140 }),
+    features: Object.freeze([
+      _cecha("ziemnowodny", "Ziemnowodny", "Potrafi oddychać zarówno na lądzie, jak i pod wodą."),
+      _udzwig(70, 140)
+    ]),
+    attacks: Object.freeze([Object.freeze({
+      id: "ugryzienie", name: "Ugryzienie", kind: "mwak", reach: 1.5, range: null, section: "actions", bonus: 4,
+      damage: Object.freeze({ avg: 5, formula: "1d6 + 2", type: "piercing" }),
+      rider: "Trafiona istota musi zdać RO na Kondycję o ST 10, inaczej zostanie Zatruta na 1 minutę. Cel wykonuje ponowny RO na końcu swojej tury.",
+      onHit: null, dropsAs: null
+    })])
+  }),
+  "psi-partner": Object.freeze({
+    name: "Psi partner", size: "sm", creatureType: "zwierze", ac: 14, initiative: 4,
+    hp: Object.freeze({ avg: 30, formula: "3d6" }),
+    abilities: Object.freeze({ str: 14, dex: 14, con: 12, int: 8, wis: 14, cha: 6 }),
+    skills: Object.freeze({ prc: 4, skr: 4 }), saves: Object.freeze({ dex: 4, wis: 4 }),
+    immunities: Object.freeze([]),
+    senses: Object.freeze({ darkvision: 18, passivePerception: 14 }),
+    speed: Object.freeze({ walk: 18 }),
+    carry: Object.freeze({ normal: 28, max: 48 }),
+    features: Object.freeze([
+      DOSKONALE_ZMYSLY, WSPOLPRACA,
+      _cecha("psi-bohater", "Psi bohater", "Umiera na takich samych zasadach jak BG, czyli stosuje Stopnie Zranienia i wykonuje Rzuty Przeciw Śmierci."),
+      _cecha("wymagania", "Wymagania", "Pojenie skażoną wodą i nieodpowiednie karmienie może pogorszyć jego zdrowie."),
+      _udzwig(28, 48)
+    ]),
+    attacks: Object.freeze([Object.freeze({
+      id: "ugryzienie", name: "Ugryzienie", kind: "mwak", reach: 1.5, range: null, section: "actions", bonus: 4,
+      damage: Object.freeze({ avg: 5, formula: "1d6 + 2", type: "piercing" }),
+      rider: "Trafiony cel zostaje Pochwycony, jeśli jest rozmiaru średniego lub mniejszego.",
+      onHit: Object.freeze({ condition: "grappled", maxSize: "med" }), dropsAs: null
+    })])
+  })
+});
+
 /**
  * Zdolności źródłowe (§3.1) → rodzaje i szukanie (§3.5). Szukanie w M3 to tylko podpowiedź (D30).
  * `k6` — losowanie zwierzęcia przy Oswajaniu.

@@ -145,6 +145,12 @@ raz, także gdy MG cofnie turę i ruszy dalej. Sprawdzona mutacjami (kolejność
 Kroki E3: pasek towarzyszy pod panelem Stan na karcie gracza i plakietka z rozkładem na karcie partnera (bez
 Fuksów i PD), partner pod właścicielem na karcie drużyny i w dziennym zapotrzebowaniu, partner jako medyk w
 oknie Długiego odpoczynku właściciela i licznik Regeneracji po jego własnym DO.
+Paczka `towarzysz-tworzenie` (MG + Gracz 2, E4): MG klika [Nowy towarzysz] na pasku właściciela — Prawa ręka
+(człowiek: własność gracza, folder, drużyna, PB +2, pełne PW) i zmutowany ssak z szablonu (TT i PW z
+właściciela, Współpraca z automatyką); gracz w swoim logowaniu przechodzi kreator: Cechy za 24 pkt,
+Pochodzenie i klasa „Towarzysz” przez AdvancementManager, poziom za właścicielem; klasa towarzysza upuszczona
+na postać gracza pyta i „Nie” nic nie dodaje; awans właściciela podnosi poziom i PW towarzysza; [Odłącz] MG.
+Sprawdzona mutacjami (poziomy za właścicielem, U23).
 
 Każdy klient ma w przeglądarce `window.__e2e` (`dev/agent/lib/e2e-page.mjs`), żeby funkcje paczek
 (serializowane, bez domknięć) nie przepisywały tych samych pętli: `forceD20([20, 3])` (kolejka ścianek
