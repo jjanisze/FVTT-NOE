@@ -13,7 +13,7 @@
  */
 
 import {
-  ocenWzor, sciezkiWzoru, migawka, iloscKW, wartosciPochodne, ZESTAW_CECH, jestZestawemCech, kupowanieCech,
+  ocenWzor, sciezkiWzoru, rozpiszWzor, etykietaOdwolania, migawka, iloscKW, wartosciPochodne, ZESTAW_CECH, jestZestawemCech, kupowanieCech,
   porownajUczestnikow, decyzjaTury, zakresAktywacji, AKCJE_DRONA, stopnieZranienia, AWARIE, awaria,
   naprawaPW, naprawaAwarii, sygnal, rssiOsd, upadekDrona, zuzycieZasilania, ttCeluEmp, KONTEKSTY_WZOROW
 } from "../config/towarzysze-rules.mjs";
@@ -108,6 +108,17 @@ export function registerTowarzyszeZasadyTests(quench) {
         expect(ocenWzor("12 + @wlasciciel.prof", { wlasciciel: { prof: 3 } })).to.equal(15);
         expect(ocenWzor("12 + @wlasciciel.prof", { wlasciciel: null })).to.equal(null);
         expect(ocenWzor("max(1, 5 * @tworca.abilities.int.mod)", { tworca: { abilities: { int: { mod: -1 } } } })).to.equal(1);
+      });
+
+      it("rozkład do dymka: etykiety po polsku, wartości, „×” zamiast „*”", function () {
+        const dane = { wlasciciel: migawka({ prof: 2, mody: { wis: 3 }, poziomy: { zwiadowca: 3 }, klasa: "zwiadowca" }) };
+        expect(rozpiszWzor("12 + @wlasciciel.prof", dane)).to.equal("12 + PB właściciela 2");
+        expect(rozpiszWzor("10 + 10 * @wlasciciel.abilities.wis.mod", dane)).to.equal("10 + 10 × mod. MDR właściciela 3");
+        expect(rozpiszWzor("5 * @wlasciciel.poziomKlasy", dane)).to.equal("5 × poziom klasy właściciela 3");
+        expect(rozpiszWzor("2 + @tworca.prof + @operator.abilities.dex.mod", {}), "bez kontekstu — same etykiety")
+          .to.equal("2 + PB twórcy + mod. ZRC operatora");
+        expect(etykietaOdwolania("tworca.abilities.int.mod")).to.equal("mod. INT twórcy");
+        expect(() => rozpiszWzor("2 + @wrog.prof", dane)).to.throw(/kontekst/);
       });
 
       it("nieznana fraza to błąd, nie zero", function () {

@@ -1131,4 +1131,23 @@ grupy i F17 sprawdzone mutacjami.
     towarzysza także z następnej rundy.
   - *Kampania:* aktywność Komenda trafi na kartę Victora dopiero przez `zdolnosci.resync` — w migracji E5.
 
+**2026-10-10 — E3 zrobione.** `actors/towarzysze-karta.mjs`: pasek towarzyszy pod panelem Stan na karcie
+właściciela (portret, PW, Stopień, stany, [Karta], [Komenda], [Pokaż żeton]; bez towarzysza — [Nowy
+towarzysz] dla MG albo podpowiedź szukania dla gracza), plakietka „<rodzaj> · <właściciel>” w nagłówku karty
+towarzysza z dymkiem rozkładu (`rozpiszWzor`), towarzysze pod właścicielem na karcie drużyny, pula medyków
+z towarzyszami (F6), przypomnienie o brudnej wodzie dla zwierząt w dziennym zapotrzebowaniu, maszyny poza
+racjami. e2e `towarzysz` dostała trzy kroki (karta, drużyna, DO).
+
+- **Rozstrzygnięcia z wdrożenia (do weta MG):**
+  - *Pasek* buduje `sheet-shell.mjs` zaraz po panelu Stan — jego słuchacz renderu musi zostać ostatni.
+  - *Rozkład w dymku* mówi „PB właściciela”, nie „PB Victora” — polskich imion nie odmieniamy automatem;
+    imię właściciela jest w samej plakietce.
+  - *Pula medyków* — postacie drużyny i towarzysze-postacie (ludzki partner z Medycyną opatrzy); zwierzę nie.
+  - *Zachód słońca* (choroby) dalej liczy postacie graczy: ludzki towarzysz już w nim jest, zwierzę nie —
+    chorób zwierząt RAW nie rozpisuje.
+  - *Kolor PW na pasku* — zielony / bursztynowy / czerwony od połowy i ćwierci, nie czerwony zawsze.
+- **Narzędzia:** `fvtt e2e --suites=boot` padał na „module version 0.17.1” — kopia `module.json` w
+  piaskownicy sprzed wydania v0.18.0; `fvtt sandbox:init` ją odświeża. Do zrobienia w narzędziach: wykrywać
+  rozjazd wersji w `doctor` albo przed e2e.
+
 *(dalej etapy dopisują tu rozstrzygnięcia z wdrożenia, jak w `PLAN_m1_walka.md` §11)*

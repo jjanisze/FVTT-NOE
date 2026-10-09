@@ -142,6 +142,9 @@ jednej grupie inicjatywy z właścicielem, której właścicielem jest gracz; rz
 przy remisie partner idzie tuż po właścicielu; Komenda z prawdziwej aktywności zdolności Partner daje mu
 turę, bez Komendy tura mija z Unikaniem, a [Cofnij — była komenda] MG ją przywraca; płonący BN dostaje 1k4
 raz, także gdy MG cofnie turę i ruszy dalej. Sprawdzona mutacjami (kolejność, własność grupy, tik ognia).
+Kroki E3: pasek towarzyszy pod panelem Stan na karcie gracza i plakietka z rozkładem na karcie partnera (bez
+Fuksów i PD), partner pod właścicielem na karcie drużyny i w dziennym zapotrzebowaniu, partner jako medyk w
+oknie Długiego odpoczynku właściciela i licznik Regeneracji po jego własnym DO.
 
 Każdy klient ma w przeglądarce `window.__e2e` (`dev/agent/lib/e2e-page.mjs`), żeby funkcje paczek
 (serializowane, bez domknięć) nie przepisywały tych samych pętli: `forceD20([20, 3])` (kolejka ścianek

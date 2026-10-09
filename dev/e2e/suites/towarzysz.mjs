@@ -11,6 +11,10 @@
  *    skipped with Unikanie and a card; the GM's [Cofnij — była komenda] takes it back.
  *  - Burning GANGUS: the start of his turn deals 1k4 once; the GM stepping back and forward again does not
  *    deal it a second time (F17).
+ *  - E3, sheets: Gracz 1's sheet has the companion bar under Stan (PW, [Karta], [Komenda], [Pokaż żeton]);
+ *    [Karta] opens Evie's sheet with the "Ludzki partner · PC Gracz 1" badge and its breakdown, no Fuksy, no PD.
+ *  - E3, party: Evie listed right under her owner; the day's needs count her; she is a medic option in the
+ *    owner's Long Rest window (F6), and her own Long Rest with a Stopień moves her Regeneracja counter.
  */
 
 /* Functions below run in the browser (serialised): no closures over this file. */
@@ -30,6 +34,7 @@ async function przygotuj() {
   if (!pc.classes.zwiadowca) { const d = game.items.fromCompendium(zw); d.system.levels = 3; items.push(d); }
   if (!pc.items.some(i => i.getFlag(MOD, "abilityId") === "partner")) items.push(game.items.fromCompendium(partner));
   if (items.length) await pc.createEmbeddedDocuments("Item", items);
+  await pc.update({ "system.attributes.hp.value": pc.system.attributes.hp.max }); // the class came without its advancement
 
   const evie = await Actor.implementation.create({
     name: "Evie", type: "character",
@@ -137,6 +142,96 @@ async function podpal() {
   return { burning: game.neuroshima.podpalenie.isBurning(g), hp: g.system.attributes.hp.value };
 }
 
+/** Player: the companion bar on the PC's sheet; [Karta] → Evie's sheet and its badge. */
+async function pasek() {
+  const pc = game.user.character;
+  const evie = game.actors.getName("Evie");
+  await pc.sheet.render(true);
+  const panel = await window.__e2e.until(() => pc.sheet.element?.querySelector(".neuro-towarzysze-panel"), { message: "companion bar" });
+  pc.sheet.setPosition({ left: 80, top: 40 });
+  const row = panel.querySelector(".neuro-towarzysz-row");
+  const info = {
+    evie: row?.dataset.uuid === evie.uuid,
+    pw: row?.querySelector(".neuro-towarzysz-pw span")?.textContent.trim(),
+    rodzaj: row?.querySelector(".neuro-towarzysz-rodzaj")?.textContent.trim(),
+    akcje: [...(row?.querySelectorAll("button[data-akcja]") ?? [])].map(b => b.dataset.akcja + (b.disabled ? "!" : "")),
+    podStanem: panel.previousElementSibling?.classList.contains("neuro-stan-panel") ?? false
+  };
+  row.querySelector('button[data-akcja="karta"]').click();
+  const badge = await window.__e2e.until(() => evie.sheet?.rendered && evie.sheet.element?.querySelector(".neuro-towarzysz-badge"),
+    { message: "Evie's sheet with the badge" });
+  // Side by side, so the screenshot shows the owner's bar and the companion's badge at once.
+  evie.sheet.setPosition({ left: pc.sheet.position.left + pc.sheet.position.width + 12, top: pc.sheet.position.top });
+  await new Promise(r => setTimeout(r, 300));
+  info.badge = badge.textContent.trim();
+  info.tip = badge.dataset.tooltip ?? "";
+  info.fuksy = Boolean(evie.sheet.element.querySelector(".neuro-fuks-pips"));
+  info.pd = Boolean(evie.sheet.element.querySelector(".neuro-pd-panel"));
+  return info;
+}
+
+/** GM: a primary party of PC Gracz 1, Evie, PC Gracz 2; the members tab order; supplies; one day's needs. */
+async function druzyna() {
+  const MOD = "neuroshima-2026-overrides";
+  for (const c of [...game.combats]) await c.delete();
+  const party = await Actor.implementation.create({ name: "Agent · Drużyna", type: "group", flags: { [MOD]: { fixture: "skirmish" } } });
+  await party.update({ "system.members": ["PC Gracz 2", "Evie", "PC Gracz 1"].map(n => ({ actor: game.actors.getName(n).id })) });
+  // Full rations for everyone: a short day would roll a CON save, which waits for a dialog click.
+  await party.createEmbeddedDocuments("Item", [
+    { name: "Racje", type: "loot", system: { quantity: 10 }, flags: { [MOD]: { zasob: { kind: "jedzenie", amount: 1 } } } },
+    { name: "Woda pitna", type: "loot", system: { quantity: 10 }, flags: { [MOD]: { zasob: { kind: "woda", amount: 2 } } } }
+  ]);
+  await game.settings.set("dnd5e", "primaryParty", { actor: party.id });
+  await party.sheet.render(true);
+  await window.__e2e.until(() => party.sheet.element?.querySelector(".member"), { message: "party members" });
+  const lista = [...party.sheet.element.querySelectorAll(".member .name a")].map(a => a.textContent.trim());
+  const dopisek = party.sheet.element.querySelector(".neuro-towarzysz-dopisek")?.textContent.trim() ?? null;
+  const supplies = await import(`/modules/${MOD}/scripts/actors/party-supplies.mjs`);
+  const osoby = supplies.buildSuppliesContext(party).osoby.map(o => o.name);
+  const przed = game.messages.size;
+  await supplies.consumeDailyNeeds(party);
+  await window.__e2e.until(() => game.messages.size > przed, { message: "daily needs card" });
+  const karta = game.messages.contents.at(-1).content;
+  await party.sheet.close();
+  return { lista, dopisek, osoby, eviewKarcie: karta.includes("Evie"), primary: game.actors.party?.id === party.id };
+}
+
+/** GM: Stopień 1 for PC Gracz 1 and Evie (the Long Rest windows show the recovery section). */
+async function rany() {
+  const z = await import("/modules/neuroshima-2026-overrides/scripts/combat/zranienie.mjs");
+  for (const n of ["PC Gracz 1", "Evie"]) {
+    const a = game.actors.getName(n);
+    await a.update({ "system.attributes.hp.value": a.system.attributes.hp.max, "system.attributes.exhaustion": 0 });
+    await z.setZranienie(a, 1);
+  }
+  return ["PC Gracz 1", "Evie"].map(n => z.getZranienieLvl(game.actors.getName(n)));
+}
+
+/** Player: the medic options in PC Gracz 1's Long Rest window (looked at, then closed). */
+async function medycy() {
+  const a = game.user.character;
+  const odpoczynek = a.longRest();
+  let app = null;
+  for (let i = 0; i < 80 && !app; i++) {
+    await new Promise(r => setTimeout(r, 100));
+    app = [...foundry.applications.instances.values()]
+      .find(x => x.rendered && (x.actor ?? x.document) === a && x.element?.querySelector('button[name="rest"]'));
+  }
+  if (!app) return null;
+  const opcje = [...app.element.querySelectorAll('[name="neuroZajecia.rekonwalescencja.medyk"] option')].map(o => o.textContent.trim());
+  await app.close();
+  await odpoczynek;
+  return opcje;
+}
+
+/** Player: Evie's own Long Rest — Gojenie moves her Regeneracja counter. */
+async function odpoczynekEvie() {
+  const evie = game.actors.getName("Evie");
+  await evie.longRest({ dialog: false });
+  await window.__e2e.until(() => game.neuroshima.rekonwalescencja.stan(evie).licznik > 0, { message: "Evie's counter" });
+  return game.neuroshima.rekonwalescencja.stan(evie);
+}
+
 /** GM: step (+1 next, −1 previous), then GANGUS's HP. */
 async function krok({ kierunek }) {
   const combat = game.combat;
@@ -182,7 +277,13 @@ export default {
       const r = await t.gm.eval(remisIStart);
       t.equal(r.order.join(", "), "GANGUS ŻOŁNIERZ, PC Gracz 1, Evie", "turn order");
       t.equal(r.current, "PC Gracz 1", "combatant on turn");
-      await t.gm.eval(async () => { ui.sidebar.changeTab("combat", "primary"); await ui.combat.render({ force: true }); });
+      await t.gm.eval(async () => {
+        game.tours?.activeTour?.exit?.();
+        ui.sidebar.expand();
+        ui.sidebar.changeTab("combat", "primary");
+        await ui.combat.render({ force: true });
+        await new Promise(r => setTimeout(r, 400));
+      });
       await t.screenshot("gm", "tracker — grupa właściciela");
       await t.gm.eval(() => ui.sidebar.changeTab("chat", "primary"));
     });
@@ -236,6 +337,40 @@ export default {
         return game.neuroshima.podpalenie.isBurning(g);
       });
       t.equal(zgaszony, false, "GANGUS still burning after douse");
+    });
+
+    await t.step("E3: companion bar under Stan on Gracz 1's sheet; [Karta] → Evie's sheet with her badge, no Fuksy or PD", async () => {
+      const r = await p1.eval(pasek);
+      t.equal(r.evie, true, "the bar's row is Evie");
+      t.equal(r.podStanem, true, "the bar sits right under the Stan panel");
+      t.equal(r.rodzaj, "Ludzki partner", "kind label");
+      t.equal(r.pw, "15 / 15", "Evie's PW in the bar");
+      t.equal(r.akcje.join(","), "karta,komenda,zeton", "bar buttons");
+      t.equal(r.badge, "Ludzki partner · PC Gracz 1", "badge on Evie's sheet");
+      t.assert(r.tip.includes("PW 15 = 5 × poziom klasy właściciela 3"), "breakdown tooltip", r.tip);
+      t.equal(r.fuksy, false, "Fuks pips on a companion");
+      t.equal(r.pd, false, "PD panel on a companion");
+      await t.screenshot("Gracz 1", "karta właściciela i towarzysza");
+      await p1.eval(async () => { for (const a of [game.user.character, game.actors.getName("Evie")]) await a.sheet.close(); });
+    });
+
+    await t.step("E3: party — Evie under her owner, her daily needs counted", async () => {
+      const r = await t.gm.eval(druzyna);
+      t.equal(r.primary, true, "primary party");
+      t.equal(r.lista.join(", "), "PC Gracz 1, Evie, PC Gracz 2", "members order");
+      t.equal(r.dopisek, "Ludzki partner · PC Gracz 1", "kind note under Evie's name");
+      t.assert(r.osoby.includes("Evie"), "Evie missing from the daily needs", r.osoby);
+      t.equal(r.eviewKarcie, true, "Evie on the daily needs card");
+    });
+
+    await t.step("E3: Long Rest — Evie is a medic option for her owner (F6); her own rest moves her Regeneracja counter", async () => {
+      t.equal((await t.gm.eval(rany)).join(","), "1,1", "Stopień 1 for both");
+      await t.waitFor(p1, () => (game.actors.getName("Evie").getFlag("neuroshima-2026-overrides", "zranienie")?.level ?? 0) === 1,
+        { message: "the player to see the Stopień" });
+      const opcje = await p1.eval(medycy);
+      t.assert(opcje && opcje.some(o => o.startsWith("Evie")), "Evie missing from the medic options", opcje);
+      const s = await p1.eval(odpoczynekEvie);
+      t.equal(s.licznik, 1, "Evie's Regeneracja counter after one Long Rest");
     });
   }
 };

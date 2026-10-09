@@ -1149,7 +1149,7 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
-### M3 E0–E2 — towarzysze: czyste zasady, wartości z właściciela, walka; Stopnie Zranienia wg s. 205 (2026-10-10)
+### M3 E0–E3 — towarzysze: czyste zasady, wartości z właściciela, walka, karty; Stopnie Zranienia wg s. 205 (2026-10-10)
 
 Plan: `PLAN_m3_towarzysze.md` (decyzje MG D1–D39, postęp §11).
 
@@ -1169,6 +1169,11 @@ Plan: `PLAN_m3_towarzysze.md` (decyzje MG D1–D39, postęp §11).
   należy do gracza — inaczej jego rzut nie dochodził do grupy), zawsze tuż po nim mimo remisu; Komenda [B]
   na zdolności Partner i Oswajanie zwierząt; bez Komendy tura towarzysza mija z Unikaniem i kartą
   [Cofnij — była komenda].
+- **Karty i drużyna** (`actors/towarzysze-karta.mjs`): pasek towarzyszy pod panelem Stan na karcie właściciela
+  (PW, Stopień, stany, [Karta], [Komenda], [Pokaż żeton]); plakietka „<rodzaj> · <właściciel>” w nagłówku
+  karty towarzysza z rozkładem wartości w dymku; towarzysze pod właścicielem na karcie drużyny; ludzki
+  towarzysz w puli medyków przy Długim odpoczynku; zwierzęta w dziennym zapotrzebowaniu z przypomnieniem o
+  brudnej wodzie (s. 47).
 - **Tiki tury raz na turę** (`combat/tiki.mjs`): krwawienie, podpalenie, regeneracja i szał z chemii,
   Uduszenie tykały przy każdej zmianie tury, także przy cofnięciu — cofnięcie tury płonącego zadawało drugie
   1k4, ponowne „naprzód” trzecie. Teraz tylko krok naprzód i każda tura najwyżej raz.

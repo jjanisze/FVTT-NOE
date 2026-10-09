@@ -33,6 +33,7 @@ import { registerActorAbilities } from "./actors/abilities.mjs";
 import { registerPW } from "./actors/pw.mjs";
 import { registerTowarzysze, towarzyszeApi } from "./actors/towarzysze.mjs";
 import { registerTowarzyszeWalka, towarzyszeWalkaApi } from "./combat/towarzysze-walka.mjs";
+import { registerTowarzyszeKarta } from "./actors/towarzysze-karta.mjs";
 import { registerCharacterDefaults } from "./actors/character-defaults.mjs";
 import { registerClassState } from "./actors/class-state.mjs";
 import { registerAbilityHotbar } from "./actors/ability-hotbar.mjs";
@@ -370,6 +371,8 @@ Hooks.once("init", () => {
 
   // Last: its render hook relocates panels the injectors above have already built,
   // so it must be the final renderActorSheet listener registered.
+  // Plakietka towarzysza w nagłówku (PLAN_m3 §7.6); pasek na karcie właściciela buduje sheet-shell.
+  registerTowarzyszeKarta();
   registerSheetShell();
 
   // Vehicle sheet is still stock dnd5e (no Neuroshima subclass) — it's just missing the

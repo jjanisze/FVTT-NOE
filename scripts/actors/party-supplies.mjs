@@ -25,6 +25,7 @@ import {
   NIEDOZYWIENIE_ST, POLOWANIE_ST, GOTOWANIE_ST, GOTOWANIE_FUKS
 } from "../config/podroz-data.mjs";
 import { addExhaustion } from "../config/exhaustion.mjs";
+import { jestMaszyna, rodzajTowarzysza } from "./towarzysze.mjs";
 import { getFuksy, setFuksy, MAX_FUKSY } from "../combat/rerolls.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -62,10 +63,16 @@ function supplyActors(groupActor) {
     .filter((a, i, arr) => arr.indexOf(a) === i);
 }
 
-/** Żywi członkowie — ci jedzą, piją i zbierają Wyczerpanie. */
+/** Żywi członkowie — ci jedzą, piją i zbierają Wyczerpanie. Maszyny (drony) — zasilanie, nie racje. */
 function creatures(groupActor) {
-  return groupActor.system.members.map(m => m.actor).filter(a => a && a.type !== "vehicle");
+  return groupActor.system.members.map(m => m.actor).filter(a => a && a.type !== "vehicle" && !jestMaszyna(a));
 }
+
+/** Towarzysz-zwierzę: „mogą pić brudną wodę” (s. 47) — jakości wody moduł nie liczy, więc tylko przypomnienie. */
+const _zwierze = actor => {
+  const r = rodzajTowarzysza(actor);
+  return !!r && r.typAktora === "npc" && !r.maszyna;
+};
 
 /**
  * Wszystkie pozycje zapasów danej kategorii u jednego aktora.
@@ -256,6 +263,7 @@ export async function consumeDailyNeeds(groupActor) {
         ? `${label}: ${round(got)} / ${wanted} ${unit} — RO zdane (${roll?.total ?? "?"}).`
         : `<span class="neuro-zle">${label}: ${round(got)} / ${wanted} ${unit} — RO oblane (${roll?.total ?? "brak rzutu"}), +1 Wyczerpanie.</span>`);
     }
+    if (_zwierze(actor)) wynik.notatki.push("<em>Zwierzę — może pić brudną wodę (s. 47).</em>");
     wiersze.push(wynik);
   }
 

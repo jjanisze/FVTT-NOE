@@ -39,6 +39,7 @@ import { formatWorldDate, sekundyDoby } from "../world-clock.mjs";
 import { getChoroby } from "./health-panel.mjs";
 import { bezKorzysciOdpoczynku } from "./disease-effects.mjs";
 import { dailySaveFor, getDisease } from "../config/diseases-data.mjs";
+import { towarzyszeWlasciciela, jestMaszyna } from "./towarzysze.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 /** Flaga pacjenta: `{ licznik, droga, medyk, karta, ostatniRzut, wynik, stopienPrzed }`. */
@@ -91,10 +92,17 @@ async function _zapiszStan(actor, zmiany) {
   await actor.setFlag(MODULE_ID, FLAGA, { ...(actor.getFlag(MODULE_ID, FLAGA) ?? {}), ...zmiany });
 }
 
-/** Postacie drużyny — członkowie głównej drużyny dnd5e, a bez niej postacie graczy. */
+/**
+ * Drużyna — członkowie głównej drużyny dnd5e (bez filtra typu, F6 M3), a bez niej postacie graczy; do
+ * tego towarzysze każdego z nich, także spoza listy członków. Maszyny i pojazdy — nie.
+ */
 function _druzyna() {
-  const czlonkowie = (game.actors.party?.system?.members ?? []).map(m => m.actor).filter(a => a?.type === "character");
-  return czlonkowie.length ? czlonkowie : game.actors.filter(a => a.type === "character" && a.hasPlayerOwner);
+  const zywi = a => a && ["character", "npc"].includes(a.type) && !jestMaszyna(a);
+  const czlonkowie = (game.actors.party?.system?.members ?? []).map(m => m.actor).filter(zywi);
+  const baza = czlonkowie.length ? czlonkowie : game.actors.filter(a => a.type === "character" && a.hasPlayerOwner);
+  const out = [...baza];
+  for (const a of baza) for (const t of towarzyszeWlasciciela(a)) if (zywi(t) && !out.includes(t)) out.push(t);
+  return out;
 }
 
 /**
@@ -143,7 +151,8 @@ function _sekcjaPacjenta(actor, s) {
   const kobalt = isKobaltEnabled();
   const stan = stanRekonwalescencji(actor);
   const { rzutNalezny } = regeneracjaPoDO({ licznik: stan.licznik, droga: "cialo" });
-  const opcje = _druzyna().filter(m => m.uuid !== actor.uuid).map(m => {
+  // Medykiem bywa postać — także ludzki towarzysz; zwierzę nie opatrzy rany.
+  const opcje = _druzyna().filter(m => m.uuid !== actor.uuid && m.type === "character").map(m => {
     const o = ocenaMedyka(m, actor, { kobalt });
     const zajety = kobalt && o.ok && _pacjenciMedyka(m, { poza: actor }).length >= POMOC_MEDYCZNA_KOBALT.pacjentowNaDO;
     const powod = !o.ok ? o.powod : (zajety ? "opatruje już innego pacjenta (WKK)" : null);

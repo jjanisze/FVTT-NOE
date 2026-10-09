@@ -148,6 +148,40 @@ export function sciezkiWzoru(wzor) {
   return _ocen(wzor, null).sciezki;
 }
 
+const _SKROTY_CECH = Object.freeze({ str: "SIŁ", dex: "ZRC", con: "KON", int: "INT", wis: "MDR", cha: "CHA" });
+const _KTO = Object.freeze({ wlasciciel: "właściciela", tworca: "twórcy", operator: "operatora" });
+
+/** Etykieta odwołania wzoru po polsku: `@wlasciciel.abilities.wis.mod` → „mod. MDR właściciela”. */
+export function etykietaOdwolania(sciezka) {
+  const [ctx, ...reszta] = String(sciezka).split(".");
+  const kto = _KTO[ctx] ?? ctx;
+  if (reszta[0] === "prof") return `PB ${kto}`;
+  if (reszta[0] === "abilities" && reszta[2] === "mod") return `mod. ${_SKROTY_CECH[reszta[1]] ?? reszta[1]} ${kto}`;
+  if (reszta[0] === "poziomKlasy") return `poziom klasy ${kto}`;
+  if (reszta[0] === "poziom") return `poziom ${kto}`;
+  return `${reszta.join(".")} ${kto}`;
+}
+
+/**
+ * Rozkład wzoru do dymka (§7.6): „12 + PB właściciela 2”. Odwołania z wartością, `*` jako „×”; brakujący
+ * kontekst — sama etykieta. Składnia jak w `ocenWzor` (rzuca przy błędzie).
+ * @param {string} wzor
+ * @param {object} dane  `{ wlasciciel, tworca, operator }`
+ */
+export function rozpiszWzor(wzor, dane = {}) {
+  _ocen(wzor, null); // ścisła gramatyka — ten sam błąd co przy liczeniu
+  return String(wzor)
+    .replace(/@([A-Za-z_][\w]*(?:\.[A-Za-z_][\w]*)*)/g, (_, sciezka) => {
+      let v = dane;
+      for (const k of sciezka.split(".")) v = v?.[k];
+      const etykieta = etykietaOdwolania(sciezka);
+      return Number.isFinite(Number(v)) && v !== null ? `${etykieta} ${Number(v)}` : etykieta;
+    })
+    .replace(/\s*\*\s*/g, " × ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 /* -------------------------------------------- */
 /*  Migawki i statystyki pochodne                */
 /* -------------------------------------------- */
@@ -600,7 +634,7 @@ export function ttCeluEmp({ tt, opancerzenie = false, modZrc = 0 } = {}) {
 }
 
 export const __testing = Object.freeze({
-  ocenWzor, sciezkiWzoru, migawka, iloscKW, wartosciPochodne, jestZestawemCech, kupowanieCech,
+  ocenWzor, sciezkiWzoru, etykietaOdwolania, rozpiszWzor, migawka, iloscKW, wartosciPochodne, jestZestawemCech, kupowanieCech,
   porownajBazowo, porownajUczestnikow, zatrzaskWazny, decyzjaTury, zakresAktywacji, stopnieZranienia,
   awaria, naprawaPW, naprawaAwarii, sygnal, szum, rssiOsd, upadekDrona, zuzycieZasilania, ttCeluEmp
 });

@@ -26,6 +26,8 @@ import { pipkiWyczerpania } from "../config/exhaustion.mjs";
 import { getPodroz, setPodroz, buildTravelContext, postTravelSummary, tankuj, ustawBak, paliwoWidok } from "./party-travel.mjs";
 import { buildSuppliesContext, consumeDailyNeeds, hunt, cook } from "./party-supplies.mjs";
 import { confirmLootClose, forceEndLootSession, lootLockContext } from "./party-loot-lock.mjs";
+import { towarzysz } from "./towarzysze.mjs";
+import { RODZAJE } from "../config/towarzysze-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const TPL = `modules/${MODULE_ID}/templates`;
@@ -41,6 +43,39 @@ const PARTY_TABS = [
   { tab: "zapasy", label: "Zapasy", icon: "fas fa-boxes-stacked" },
   { tab: "biography", label: "Kronika", icon: "fas fa-feather" }
 ];
+
+/* -------------------------------------------- */
+/*  Towarzysze pod właścicielem (PLAN_m3 §7.6)   */
+/* -------------------------------------------- */
+
+/**
+ * Towarzysz idzie w liście zaraz pod właścicielem, z dopiskiem rodzaju — także zwierzę, które dnd5e
+ * wrzuciłby do sekcji BN. Właściciel spoza drużyny: towarzysz zostaje tam, gdzie był, z dopiskiem.
+ * @param {Record<string, {members: object[]}>} sections
+ */
+function towarzyszePodWlascicielem(sections) {
+  const postacie = sections.character?.members;
+  if (!postacie) return;
+  const wlasciciele = new Set(postacie.map(m => m.uuid));
+  const przeniesieni = [];
+  for (const section of Object.values(sections)) {
+    section.members = section.members.filter(m => {
+      const t = towarzysz(fromUuidSync(m.uuid));
+      if (!t) return true;
+      const wl = fromUuidSync(t.wlasciciel);
+      m.towarzysz = `${RODZAJE[t.rodzaj].nazwa}${wl ? ` · ${wl.name}` : ""}`;
+      m.towarzyszWlasciciel = t.wlasciciel;
+      if (!wlasciciele.has(t.wlasciciel)) return true;
+      przeniesieni.push(m);
+      return false;
+    });
+  }
+  for (const m of przeniesieni) {
+    const list = sections.character.members;
+    const i = list.findLastIndex(x => x.uuid === m.towarzyszWlasciciel || x.towarzyszWlasciciel === m.towarzyszWlasciciel);
+    list.splice(i + 1, 0, m);
+  }
+}
 
 /* -------------------------------------------- */
 /*  Tory stanu w wierszu członka                 */
@@ -243,6 +278,7 @@ function buildPartySheetClass(Base) {
           member.paliwo = (pojazd && !member.hiddenStats) ? paliwoWidok(actor) : null;
         }
       }
+      towarzyszePodWlascicielem(context.sections);
       return context;
     }
 

@@ -12,6 +12,9 @@
  *  2. The `Stan` panel — Wyczerpanie, Zranienie, Upojenie, the Skażenie save and the active
  *     ailment strip in one place on both sheet types.
  *  3. Relocating the ammo/magazine/explosive/raw-material panels into the `zasoby` tab.
+ *
+ * Under the Stan panel on a character sheet: the companion bar (`towarzysze-karta.mjs`, PLAN_m3 D16) —
+ * built here, not in its own hook, because this hook must stay the last render listener.
  */
 
 import { getLevelledRegistry, getRadiationFailures, promptRadiationSave } from "./levelled-conditions.mjs";
@@ -23,6 +26,7 @@ import { otworzKalendarzyk } from "./rekonwalescencja.mjs";
 import { wierszUduszenia } from "./zagrozenia.mjs";
 import { SKAZENIE_DISEASE_THRESHOLD, SKAZENIE_LEVELS } from "../config/levelled-conditions-data.mjs";
 import { dollSheetMixin } from "./doll-panel.mjs";
+import { pasekTowarzyszy } from "./towarzysze-karta.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const ZASOBY_TEMPLATE = `modules/${MODULE_ID}/templates/tab-zasoby.hbs`;
@@ -591,6 +595,8 @@ function _injectCharacter(root, actor, tracks) {
   const favorites = sidebar.querySelector(".favorites");
   if (favorites) favorites.before(panel);
   else sidebar.appendChild(panel);
+  const pasek = pasekTowarzyszy(actor);
+  if (pasek) panel.after(pasek);
 }
 
 /**
@@ -625,7 +631,7 @@ function _onRenderSheet(app, html) {
   _relocateZasoby(root);
 
   // Re-render safe: drop anything a previous pass left behind.
-  root.querySelectorAll(".neuro-stan-panel").forEach(n => n.remove());
+  root.querySelectorAll(".neuro-stan-panel, .neuro-towarzysze-panel").forEach(n => n.remove());
 
   const tracks = _statusTracks(actor);
   if (actor.type === "character") _injectCharacter(root, actor, tracks);
