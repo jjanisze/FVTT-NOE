@@ -904,6 +904,10 @@ function tokenScaleFor(c) {
  * leaves them upside down and unreadable.
  */
 function portraitFor(c) {
+  // Portrait shipped with the module (`tokens/portraits/<id>.webp`) — art made for this module, e.g. the
+  // drone templates (PLAN_m3_towarzysze.md), which have no Roll20 folder in the world.
+  const own = `tokens/portraits/${c.id}.webp`;
+  if (fs.existsSync(path.join(MODULE_ROOT, own))) return `modules/${MODULE_ID}/${own}`;
   const candidates = [
     PORTRAIT_ALIASES[c.id],
     c.name,

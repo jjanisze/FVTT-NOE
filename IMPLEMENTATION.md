@@ -1149,7 +1149,7 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
-### M3 E0–E7 — towarzysze i drony I: czyste zasady, wartości z właściciela, walka, karty, tworzenie, migracja, dane z podręcznika, drony z produkcji, kontrolery i sterowanie, zasilanie, awarie; Stopnie Zranienia wg s. 205 (2026-10-10)
+### M3 E0–E8a — towarzysze i drony: czyste zasady, wartości z właściciela, walka, karty, tworzenie, migracja, dane z podręcznika, drony z produkcji, kontrolery i sterowanie, zasilanie, awarie, tryb zdalny i sygnał; Stopnie Zranienia wg s. 205 (2026-10-10)
 
 Plan: `PLAN_m3_towarzysze.md` (decyzje MG D1–D39, postęp §11).
 
@@ -1203,6 +1203,13 @@ Plan: `PLAN_m3_towarzysze.md` (decyzje MG D1–D39, postęp §11).
   niepasujących pozycji i przyciskiem MG [Zastosuj] — także dla maszyn Bestiariusza; Olbrzymie obrażenia drona i
   autodestrukcja → karta „Śmierć” do potwierdzenia; akumulator drona schodzi na zegarze świata, „Włóż akumulator”,
   agregat z paliwem; latający dron, który stanął w powietrzu, spada (karta MG z obrażeniami od upadku).
+- **Tryb zdalny drona** (`actors/drony-zdalne.mjs`): Komenda, Steruj i nowe „Przejmij sterowanie” (poza walką) oddają
+  graczowi kontrolę tylko nad dronem — widzi przez niego, kamera idzie za nim, rusza nim klawiszami WASD, Esc wraca.
+  Sygnał z odległości do operatora (z wysokością), przez ścianę albo na scenie oznaczonej „Pod ziemią” (pole w
+  konfiguracji sceny) — zasięg jak przez przeszkody; poza zasięgiem dron nie daje się wybrać, a utrata w trakcie to
+  FAILSAFE i powrót widoku. Sterowanie kończy też wytrącony kontroler, nieprzytomny operator, Wyłączony dron, koniec
+  tury operatora i przejęcie przez innego gracza z kontrolerem. Własność drona dostaje operator tylko na czas
+  sterowania; poza trybem zdalnym nikt z graczy nie patrzy przez drona. Drony mają własne żetony z góry i portrety.
 - **Testy:** Quench `towarzysze-zasady`, `towarzysze` i `drony`; e2e `towarzysz`, `towarzysz-tworzenie` i `dron`
   (nowe; `dron` z produkcją, rozłożeniem, sterowaniem, awarią, zasilaniem i 0 PW), `combat` (krytyk w istotę ze Stopniem i bez); mutacje dla F1, F2, kolejności, własności grupy, F17,
   poziomów za właścicielem i U23. Harness: `clickCanvas` trafia po `canvas.pan` w karcie w tle i nie zamienia

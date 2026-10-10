@@ -148,6 +148,26 @@ export class Client {
     return at;
   }
 
+  /**
+   * A real key press through CDP — what core's keybindings hear. `code` as in `KeyboardEvent.code`: `Escape`,
+   * `KeyW`/`KeyA`/`KeyS`/`KeyD` (v14 moves controlled tokens with WASD; the arrows only pan the canvas).
+   * The page comes to the front first: a background tab's keydown would land, but its canvas would not render.
+   */
+  async pressKey(code) {
+    const KEYS = {
+      Escape: ["Escape", 27], ArrowLeft: ["ArrowLeft", 37], ArrowUp: ["ArrowUp", 38], ArrowRight: ["ArrowRight", 39],
+      ArrowDown: ["ArrowDown", 40], KeyW: ["w", 87], KeyA: ["a", 65], KeyS: ["s", 83], KeyD: ["d", 68]
+    };
+    const [key, kc] = KEYS[code] ?? [code, 0];
+    await this.send("Page.bringToFront").catch(() => {});
+    await sleep(150);
+    // No `text`: a character would also be typed into whatever input has focus.
+    const base = { key, code, windowsVirtualKeyCode: kc, nativeVirtualKeyCode: kc };
+    await this.send("Input.dispatchKeyEvent", { type: "rawKeyDown", ...base });
+    await sleep(60);
+    await this.send("Input.dispatchKeyEvent", { type: "keyUp", ...base });
+  }
+
   async reload() {
     await this.send("Runtime.evaluate", { expression: "window.__fvttStale = true" });
     await this.send("Page.reload", { ignoreCache: true });

@@ -781,7 +781,8 @@ Prawej ręki — M5 (T0 w opisie).
   (D12, D22, D36, U21; zasięg U17;
   przekaźnik MG ustawia `operator` i OWNER). Klient operatora: zapamiętuje kontrolowane żetony, kontroluje
   **tylko** drona (rdzeń: gracz widzi wtedy wyłącznie przez kontrolowany żeton), kamera podąża
-  (`canvas.animatePan` przy ruchu drona), ruch — strzałki/WASD rdzenia v14 (bez własnego schematu).
+  (`canvas.animatePan` przy ruchu drona), ruch — WASD rdzenia v14 (strzałki przesuwają tylko widok; bez własnego
+  schematu).
 - **Obraz (D11, D34, U16):** tryb wizji „Kamera drona” udaje analogowy kanał FPV. Stałe „gorsze
   oko” to ograniczone pasmo (poziome rozmycie, miękkie krawędzie), śnieg i przeplot. Uniform
   `sygnal` per źródło wizji prowadzi degradację w kolejności prawdziwego analogu: więcej śniegu →
@@ -1287,5 +1288,43 @@ Wyłączony / Sparaliżowanie / Nieprzytomność w powietrzu → karta MG „Spa
 - **„Do końca następnej tury”** (awarie 5, 10, 12) liczy się w turach maszyny, a drona — operatora albo posiadacza
   (U20), z `start.combatant` przestawionym jak Unikanie (`actors/tt.mjs`); poza walką bez czasu — zdejmuje MG.
 - **Ikona Wyłączony** — dziś pożyczona z rdzenia; wiersz w `dev/icons/MISSING.md` (sekcja F).
+
+**2026-10-10 — E8a zrobione (sygnał i tryb zdalny, bez obrazu i OSD).** `actors/drony-zdalne.mjs`: sygnał z
+żetonów (U17 — linia prosta z wysokością od żetonu operatora, ściana przez test kolizji wzroku, pole sceny „Pod
+ziemią” w konfiguracji sceny, na pościgu tory × 36 m); sesja na kliencie operatora — kontrola tylko drona, kamera za
+dronem, podpowiedź „Esc — wyjdź” poza obrazem; wyjścia: Esc, utrata sygnału (FAILSAFE 1,5 s, potem cięcie — D24),
+kontroler poza ręką (D22), operator nieprzytomny, dron Wyłączony, żeton zniknął, przejęcie (D12), koniec tury
+operatora; bramka wizji (gracz patrzy przez drona tylko w swojej sesji). Kontroler dostał czwartą aktywność
+**Przejmij sterowanie** (poza walką). Własność operatora nadawana i odbierana przez przekaźnik MG. Quench `drony` 56,
+e2e `dron` z pięcioma krokami trybu zdalnego (prawdziwe klawisze D i Esc, trzy odległości, ściana, utrata, przejęcie
+przez Gracza 2, wytrącony kontroler); cały Quench 1025/1025. Obraz kamery (E8b) i OSD z czcionką Betaflight (E8c) —
+dalej.
+
+- **Rozstrzygnięcia z wdrożenia (do weta MG):**
+  - *Koniec tury operatora kończy tryb zdalny* — wniosek z D35 (aktywacja to jeden ciągły kawałek w jego turze); plan
+    wymieniał wyjścia bez tego. Poza walką i dla operatora spoza walki — bez zmian.
+  - *Poza zasięgiem nie ma aktywacji:* wybór drona pokazuje tylko drony z sygnałem; żaden w zasięgu — komunikat z
+    odległością i zasięgiem, bez karty i bez zatrzasku (D24 mówi o utracie w trakcie, nie o wejściu).
+  - *Operator musi mieć żeton na scenie drona* — inaczej nie ma skąd mierzyć; komunikat „kontroler nie ma skąd nadawać”.
+    Pościg nie zna pasażerów pojazdu, więc liczy się żeton samego operatora.
+  - *Esc najpierw zamyka okna i menu* (jak rdzeń), dopiero potem wychodzi z trybu zdalnego — karta postaci, z której
+    użyto kontrolera, zamyka się pierwszym Esc.
+  - *Przejmij sterowanie w walce odmawia* — w walce wejściem są Komenda [B] i Steruj [A].
+- **Własność operatora jako zapamiętane nadanie** (`dronNadane`: „zdalny” albo „reakcja”), nie flaga tak/nie: moduł
+  odbiera tylko to, co sam dał — właściciel uchwytu nigdy nie traci swojej. Odbiera aktywny MG: przy wyjściu z trybu
+  zdalnego (prośba klienta), przejęciu, złożeniu drona, rozłączeniu gracza; nadanie do Reakcji [R] — przy zmianie tury
+  i końcu walki. Zmiana posiadacza uchwytu nie zabiera własności operatorowi w trakcie sterowania.
+- **Klient wchodzi po swojej prośbie, nie przed nią:** MG potwierdza sterowanie znacznikiem prośby
+  (`dronSterowanie`); bez tego ponowne Steruj tym samym dronem łapało stare nadanie, a spóźnione „zwolnij” zaraz je
+  odbierało.
+- **Ruch v14:** WASD przesuwa kontrolowane żetony, strzałki — tylko widok (§7.10 poprawione). Przestawienie żetonu
+  przez MG w teście: `TokenDocument#move` z punktem „displace”; `update({action})` liczy się jako marsz, który
+  zatrzymuje się na ścianach i na cudzych żetonach.
+- **Grafika dronów:** żetony z góry i portrety od MG (`Podrecznik/Bestiariusz`) jako WEBP w `tokens/` i nowym
+  `tokens/portraits/<id>.webp` — builder bierze portret z modułu przed folderem świata (dron nie ma folderu z Roll20).
+  Skale 0,96 i 0,72 z pomiaru kadru.
+- **Quench 4× szybszy:** okno wyników Quencha przerysowywało się przy każdym teście, a z tysiącem wyników karta
+  zwalniała z każdą paczką — późne testy (drony, rekonwalescencja) dostawały timeout, kolejne przebiegi bez F5 trwały
+  coraz dłużej. `tests/runner.mjs` ukrywa okno na czas przebiegu: cały Quench 136 s → 33 s, bez narastania.
 
 *(dalej etapy dopisują tu rozstrzygnięcia z wdrożenia, jak w `PLAN_m1_walka.md` §11)*

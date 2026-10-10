@@ -1,5 +1,5 @@
 /**
- * Suite — Dron (PLAN_m3_towarzysze.md E7, §7.9). GM and Gracz 1.
+ * Suite — Dron (PLAN_m3_towarzysze.md E7–E8, §7.9–§7.10). GM, Gracz 1 and Gracz 2.
  *
  *  - PC Gracz 1 is a Spec 3 with Hakerstwo (INT 12 → +1, PB 2) and the parts for a walking drone.
  *  - Gracz 1, in his own login, starts and finishes the Hakerstwo Robota: the drone is born on the active
@@ -15,6 +15,12 @@
  *  - An attack with the drone's dagger under [B] carries "atak wymaga Steruj [A]" (D36); its to-hit is
  *    2 + creator's PB 2 + operator's DEX 1 (U13). Steruj [A] in the same round is "druga aktywacja" (D35); the
  *    next attack has no badge. Reaguj [R] — a card with the drone's attack button.
+ *  - E8a, remote mode (§7.10): Gracz 1 controls only the drone and sees through it; a real D key (core WASD) moves it; a real
+ *    Esc gives control and view back to his PC. Przejmij sterowanie (out of combat) → signal at three distances with
+ *    the scene "pod ziemią" (factory 50 m): 1 / ≈0.5 / ≈0.2; inside the shed (a wall between) → the 50 m range
+ *    (U17). Raised past 300 m → FAILSAFE, then the cut: control and view return (D24). The holder's player does
+ *    not see through the drone outside remote mode. Gracz 2 with his own controller takes over (D12): Gracz 1's
+ *    session ends, Gracz 2 owns the drone only until his Esc. The controller knocked out of hand ends it (D22).
  *  - E7c: a critical hit on the drone → the GM's failure card → k20 (forced 13) → [Zastosuj] → TT −2 until repair
  *    (D10). The world clock moves 30 min → the walking drone's battery is at 50% (U15). 0 PW → Wyłączony, not
  *    dead (§7.4) — the player sees the status.
@@ -231,12 +237,63 @@ function zasilanie() {
   return { procent: Math.round(s.procent), pracuje: s.pracuje, wylaczony: dron.statuses.has("wylaczony"), martwy: dron.statuses.has("dead") };
 }
 
+/** A client's view of remote mode: session, signal, control, vision sources, the hint bar. */
+function zdalny({ dronId }) {
+  const s = game.neuroshima.drony.sesjaZdalna();
+  const pcId = game.user.character?.id;
+  const td = canvas.scene.tokens.find(t => t.actorId === dronId)?.object ?? null;
+  const tp = canvas.scene.tokens.find(t => t.actorId === pcId)?.object ?? null;
+  const g = s?.sygnal;
+  return {
+    sesja: !!s, tryb: s?.tryb ?? null, failsafe: !!s?.failsafeOd,
+    sygnal: g ? { jakosc: +g.jakosc.toFixed(3), utracony: g.utracony, zasieg: g.zasieg, sciana: g.sciana, podZiemia: g.podZiemia,
+      odleglosc: g.odleglosc === null ? null : +g.odleglosc.toFixed(1) } : null,
+    kontrolowane: canvas.tokens.controlled.map(t => t.document.actorId === dronId ? "dron" : t.document.actorId === pcId ? "pc" : t.name),
+    wizjaDrona: !!td?.vision?.active, wizjaPC: !!tp?.vision?.active,
+    pasek: !!document.getElementById("neuro-dron-zdalny"),
+    dron: td ? [td.document.x, td.document.y, td.document.elevation] : null,
+    owner: !!game.actors.get(dronId)?.isOwner
+  };
+}
+
+/** GM: teleport the drone's token (no wall-stopped walk) and set the scene's "pod ziemią". */
+async function przestaw({ x, y, elevation = 0, podZiemia = null }) {
+  const MOD = "neuroshima-2026-overrides";
+  const pc = game.actors.getName("PC Gracz 1");
+  const u = pc.items.find(i => i.flags?.[MOD]?.dron?.aktor);
+  const dron = fromUuidSync(u.flags[MOD].dron.aktor);
+  if (podZiemia === true) await canvas.scene.setFlag(MOD, "podZiemia", true);
+  if (podZiemia === false) await canvas.scene.unsetFlag(MOD, "podZiemia");
+  const td = canvas.scene.tokens.find(t => t.actorId === dron.id);
+  // `move` with a "displace" waypoint: `update({ action: "displace" })` is taken as a walk (wall- and token-stopped).
+  await td.move({ x, y, elevation, action: "displace" }, { constrainOptions: { ignoreWalls: true, ignoreCost: true } });
+  return { dronId: dron.id, x: td.x, y: td.y, elevation: td.elevation };
+}
+
+/** GM: a factory controller for PC Gracz 2 (backpack). */
+async function kontrolerGracza2() {
+  const MOD = "neuroshima-2026-overrides";
+  const pc = game.actors.getName("PC Gracz 2");
+  const sprzet = await game.packs.get(`${MOD}.sprzet`).getDocuments();
+  const [k] = await pc.createEmbeddedDocuments("Item", [game.items.fromCompendium(sprzet.find(i => i.flags?.[MOD]?.kontroler === "fabryczny"))]);
+  return { kontroler: k.name };
+}
+
+/** Any client: the active GM's view of a user's ownership of the drone and the module's grant. */
+function wlasnosc({ dronId, user }) {
+  const MOD = "neuroshima-2026-overrides";
+  const d = game.actors.get(dronId);
+  const u = game.users.getName(user);
+  return { owner: d.testUserPermission(u, "OWNER"), nadane: d.flags[MOD]?.dronNadane?.[u.id] ?? null };
+}
+
 export default {
   name: "dron",
-  clients: ["gm", "Gracz 1"],
+  clients: ["gm", "Gracz 1", "Gracz 2"],
 
   async run(t) {
     const p1 = t.client("Gracz 1");
+    const p2 = t.client("Gracz 2");
     await t.waitFor(p1, () => Boolean(game.user.character && ui.chat?.element), { message: "the player's client to see the fixture" });
 
     await t.step("GM: Spec 3 with Hakerstwo and the parts for a walking drone", async () => {
@@ -339,6 +396,141 @@ export default {
       t.equal(r.przyciski, 1, "one attack button (the dagger)");
       await t.screenshot("Gracz 1", "reakcja drona — karta z atakiem");
       await t.gm.eval(async () => { for (const c of [...game.combats]) await c.delete(); return true; });
+    });
+
+    // PC Gracz 1 stands at (400, 600) — centre (450, 650); the drone was deployed at (500, 600).
+    const dronId = (await t.gm.eval(przestaw, { x: 500, y: 600 })).dronId;
+
+    await t.step("Remote mode (D11): only the drone controlled, seen through; D key moves it (core WASD); Esc → control and view return", async () => {
+      await p1.eval(zamknijKarty);
+      const a = await t.waitFor(p1, (o) => {
+        const s = game.neuroshima.drony.sesjaZdalna();
+        return s ? true : null;
+      }, { args: [{}], message: "remote session still on after Steruj [A]" });
+      t.equal(a, true, "session");
+      const z = await p1.eval(zdalny, { dronId });
+      t.equal(JSON.stringify(z.kontrolowane), JSON.stringify(["dron"]), "only the drone is controlled");
+      t.equal(z.wizjaDrona, true, "the player sees through the drone");
+      t.equal(z.wizjaPC, false, "not through his PC");
+      t.equal(z.pasek, true, "Foundry hint outside the image: Esc — wyjdź");
+      await p1.pressKey("KeyD");
+      const ruch = await t.waitFor(t.gm, (id) => {
+        const td = canvas.scene.tokens.find(x => x.actorId === id);
+        return td.x === 600 ? [td.x, td.y] : null;
+      }, { args: [dronId], message: "the drone to move one square right" });
+      t.equal(JSON.stringify(ruch), JSON.stringify([600, 600]), "a real D key moves the drone (core v14 WASD)");
+      await t.screenshot("Gracz 1", "tryb zdalny — tylko dron, widok z drona");
+      await p1.pressKey("Escape");
+      const po = await t.waitFor(p1, (id) => {
+        const s = game.neuroshima.drony.sesjaZdalna();
+        return s ? null : canvas.tokens.controlled.map(x => x.document.actorId === id ? "dron" : x.document.actorId === game.user.character.id ? "pc" : x.name);
+      }, { args: [dronId], message: "Esc to end the session" });
+      t.equal(JSON.stringify(po), JSON.stringify(["pc"]), "control back on the PC");
+      const zz = await p1.eval(zdalny, { dronId });
+      t.equal(zz.wizjaPC, true, "view back on the PC");
+      t.equal(zz.wizjaDrona, false, "no view through the drone");
+      t.equal(zz.pasek, false, "hint gone");
+    });
+
+    await t.step("Holder's player outside remote mode: no view through the drone even with nothing controlled", async () => {
+      const r = await p1.eval((id) => {
+        canvas.tokens.releaseAll();
+        const td = canvas.scene.tokens.find(x => x.actorId === id).object;
+        const tp = canvas.scene.tokens.find(x => x.actorId === game.user.character.id).object;
+        const out = { dron: td._isVisionSource(), pc: tp._isVisionSource(), owner: td.document.isOwner };
+        tp.control({ releaseOthers: true });
+        return out;
+      }, dronId);
+      t.equal(r.owner, true, "Gracz 1 owns the drone (holder)");
+      t.equal(r.pc, true, "core: the PC is a vision source");
+      t.equal(r.dron, false, "the drone is not (gate, §7.10)");
+    });
+
+    await t.step("Przejmij sterowanie → signal at three distances under \"pod ziemią\" (50 m): 1 / ≈0.5 / ≈0.2; a wall → 50 m (U17)", async () => {
+      const r = await p1.eval(aktywnosc, { id: "neuroDronPrzejm0" });
+      t.equal(r.tryb, "Z", "Przejmij sterowanie, out of combat");
+      const sygnalNa = async (poz, oczek) => {
+        await t.gm.eval(przestaw, poz);
+        return t.waitFor(p1, (o) => {
+          const s = game.neuroshima.drony.sesjaZdalna();
+          const g = s?.sygnal;
+          return g && g.odleglosc !== null && Math.abs(g.odleglosc - o.d) < 0.5
+            ? { jakosc: +g.jakosc.toFixed(3), zasieg: g.zasieg, sciana: g.sciana, podZiemia: g.podZiemia, utracony: g.utracony } : null;
+        }, { args: [{ d: oczek }], message: `signal at ${oczek} m` });
+      };
+      // Centre-to-centre along y = 650 from the PC (450): 1.5 m, 25 m (1667 px), 37.5 m (2500 px).
+      const blisko = await sygnalNa({ x: 500, y: 600, podZiemia: true }, 1.5);
+      t.equal(blisko.jakosc, 1, "close: clean");
+      t.equal(blisko.zasieg, 50, "pod ziemią: the obstacle range");
+      t.equal(blisko.podZiemia, true, "scene field");
+      const pol = await sygnalNa({ x: 2067, y: 600 }, 25);
+      t.assert(Math.abs(pol.jakosc - 0.5) < 0.02, "half range: ≈0.5", pol);
+      await t.screenshot("Gracz 1", "sygnał w połowie zasięgu");
+      const daleko = await sygnalNa({ x: 2900, y: 600 }, 37.5);
+      t.assert(daleko.jakosc > 0.15 && daleko.jakosc < 0.25, "¾ of the range: ≈0.2", daleko);
+      t.equal(daleko.utracony, false, "still connected");
+      // Inside the shed (walls 12–16 × 8–11): the line from the PC crosses its west wall.
+      const sciana = await sygnalNa({ x: 1300, y: 900, podZiemia: false }, 14.2);
+      t.equal(sciana.sciana, true, "a wall between operator and drone");
+      t.equal(sciana.zasieg, 50, "through walls: 50 m");
+      t.equal(sciana.podZiemia, false, "scene field off");
+    });
+
+    await t.step("Raised past 300 m → FAILSAFE, then the cut: control and view return to the PC (D24)", async () => {
+      await t.gm.eval(przestaw, { x: 500, y: 600, elevation: 400 });
+      const fs = await t.waitFor(p1, () => {
+        const s = game.neuroshima.drony.sesjaZdalna();
+        return s?.failsafeOd ? { utracony: s.sygnal?.utracony } : null;
+      }, { message: "FAILSAFE (signal lost, session still on)" });
+      t.equal(fs.utracony, true, "signal lost");
+      const po = await t.waitFor(p1, (id) => {
+        if (game.neuroshima.drony.sesjaZdalna()) return null;
+        return canvas.tokens.controlled.map(x => x.document.actorId === id ? "dron" : x.document.actorId === game.user.character.id ? "pc" : x.name);
+      }, { args: [dronId], message: "the cut after FAILSAFE" });
+      t.equal(JSON.stringify(po), JSON.stringify(["pc"]), "control back on the PC");
+      await t.gm.eval(przestaw, { x: 500, y: 600, elevation: 0 });
+    });
+
+    await t.step("Gracz 2 takes over with his own controller (D12): Gracz 1's session ends; Gracz 2 owns the drone until his Esc", async () => {
+      await p1.eval(aktywnosc, { id: "neuroDronPrzejm0" });
+      await t.waitFor(p1, () => game.neuroshima.drony.sesjaZdalna() ? true : null, { message: "Gracz 1 in remote mode" });
+      await t.gm.eval(kontrolerGracza2);
+      const r = await p2.eval(aktywnosc, { id: "neuroDronPrzejm0", wRece: "yes" });
+      t.equal(r.tryb, "Z", "Gracz 2's Przejmij");
+      const z2 = await t.waitFor(p2, (id) => {
+        const s = game.neuroshima.drony.sesjaZdalna();
+        return s ? canvas.tokens.controlled.map(x => x.document.actorId === id ? "dron" : x.name) : null;
+      }, { args: [dronId], message: "Gracz 2 in remote mode" });
+      t.equal(JSON.stringify(z2), JSON.stringify(["dron"]), "Gracz 2 controls only the drone");
+      const z1 = await t.waitFor(p1, () => game.neuroshima.drony.sesjaZdalna() ? null : canvas.tokens.controlled.length,
+        { message: "Gracz 1's session to end (takeover)" });
+      t.equal(z1, 1, "Gracz 1 back on his PC");
+      const w = await t.gm.eval(wlasnosc, { dronId, user: "Gracz 2" });
+      t.equal(JSON.stringify(w), JSON.stringify({ owner: true, nadane: "zdalny" }), "Gracz 2 owns the drone while operating");
+      await t.screenshot("Gracz 2", "przejęcie drona przez drugiego gracza");
+      await p2.eval(zamknijKarty);
+      await p2.pressKey("Escape");
+      await t.waitFor(p2, () => game.neuroshima.drony.sesjaZdalna() ? null : true, { message: "Gracz 2's Esc" });
+      const po = await t.waitFor(t.gm, (o) => {
+        const d = game.actors.get(o.dronId);
+        const u = game.users.getName("Gracz 2");
+        return d.testUserPermission(u, "OWNER") ? null : true;
+      }, { args: [{ dronId }], message: "Gracz 2's grant revoked" });
+      t.equal(po, true, "ownership released on exit");
+    });
+
+    await t.step("Controller knocked out of hand → the session ends (D22)", async () => {
+      await p1.eval(aktywnosc, { id: "neuroDronPrzejm0" });
+      await t.waitFor(p1, () => game.neuroshima.drony.sesjaZdalna() ? true : null, { message: "Gracz 1 in remote mode" });
+      await t.gm.eval(async () => {
+        const MOD = "neuroshima-2026-overrides";
+        const pc = game.actors.getName("PC Gracz 1");
+        await game.neuroshima.lalka.place(pc, pc.items.find(i => i.flags?.[MOD]?.kontroler), "pack");
+        return true;
+      });
+      const po = await t.waitFor(p1, () => game.neuroshima.drony.sesjaZdalna() ? null : canvas.tokens.controlled.length,
+        { message: "the session to end" });
+      t.equal(po, 1, "control back on the PC");
     });
 
     await t.step("Critical hit → failure card → k20 13 → [Zastosuj]: TT −2 until repair (D10)", async () => {

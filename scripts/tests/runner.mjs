@@ -52,6 +52,11 @@ export async function runTests(filter = "") {
   if (!batches.length) throw new Error(`Żadna paczka nie pasuje do "${filter}". Dostępne: ${listBatches().join(", ")}`);
 
   await quench.app.render(true);
+  // Okno musi istnieć (pułapka 1), ale nie musi być widać: Quench przerysowuje je przy każdym teście, a z
+  // tysiącem wyników układ i malowanie tej listy spowalniały kartę z każdą paczką (późne testy dostawały
+  // timeout). Ukryte na czas przebiegu — DOM się aktualizuje, przeglądarka go nie układa.
+  const okno = quench.app.element;
+  if (okno) okno.style.display = "none";
   const runner = await quench.runBatches(batches);
 
   const failures = [];
@@ -60,6 +65,7 @@ export async function runTests(filter = "") {
     error: String(err?.message ?? err)
   }));
   if (runner.state !== "stopped") await new Promise(resolve => runner.on("end", resolve));
+  if (okno) okno.style.display = "";
 
   const summary = {
     total: runner.stats.tests,

@@ -5081,3 +5081,25 @@ tr.neuro-tt-off td.attribution-value {
 }
 
 .neuro-dron-przyciski button { flex: 1 1 auto; }
+
+/* Tryb zdalny drona (PLAN_m3 §7.10): podpowiedź Foundry poza obrazem kamery — który dron, jak wyjść. */
+#neuro-dron-zdalny {
+  position: fixed;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 2px 12px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.7);
+  color: var(--color-text-light-highlight, #f0f0e0);
+  font-size: var(--font-size-13, 13px);
+  pointer-events: none;
+}
+
+#neuro-dron-zdalny kbd {
+  padding: 0 4px;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  font-family: inherit;
+}

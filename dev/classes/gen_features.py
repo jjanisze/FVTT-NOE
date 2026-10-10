@@ -369,8 +369,10 @@ COVERAGE = {
              "niepasujących pozycji i [Zastosuj] dla MG", "combat/maszyny.mjs"),
             ("latający bez napędu w powietrzu — karta „Spada” z obrażeniami od upadku; Powalenie — opada bez obrażeń",
              "actors/drony-stan.mjs"),
+            ("tryb zdalny: sterujesz tylko dronem i widzisz przez niego (WASD, Esc — wyjdź); sygnał z odległości, ścian "
+             "i sceny „pod ziemią”; utrata sygnału — widok wraca; Przejmij sterowanie poza walką", "actors/drony-zdalne.mjs"),
         ],
-        "manual": "Naprawa drona (PW i awarie) i obraz z kamery — przy stole (następne etapy). "
+        "manual": "Naprawa drona (PW i awarie), obraz kamery z zakłóceniami i OSD — przy stole (następne etapy). "
                   "Biegłość w narzędziach małego hakera zaznacza gracz.",
     },
     "serwisowanie": {

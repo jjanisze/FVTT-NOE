@@ -87,6 +87,13 @@ usuń jej linijkę z `aliases.json`.
 
 Obecnie zaalias­owane: **14 z 51** istot (stan 2026-09-20).
 
+## Portret z modułu (`portraits/`)
+
+Portret aktora (`img`) builder bierze najpierw z **`tokens/portraits/<id>.webp`**, dopiero potem z folderu
+świata (`worlds/output/characters/`, migracja z Roll20). Dla istot i szablonów, które folderu z Roll20 nie mają
+i dostają grafikę zrobioną dla modułu — dziś szablony dronów (`towarzysz-dron-kroczacy`, `towarzysz-dron-latajacy`,
+paczka `towarzysze`). Te same reguły co dla żetonów: WEBP, nazwa = id istoty.
+
 ## Co się zmienia, gdy plik się pojawi
 
 | | bez pliku (stan obecny) | z plikiem |

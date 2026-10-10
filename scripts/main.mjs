@@ -40,6 +40,7 @@ import { registerDrony, dronyApi } from "./actors/drony.mjs";
 import { registerDronySterowanie, dronySterowanieApi } from "./actors/drony-sterowanie.mjs";
 import { registerDronyBron, premiaAtakuDrona } from "./actors/drony-bron.mjs";
 import { registerDronyStan, dronyStanApi } from "./actors/drony-stan.mjs";
+import { registerDronyZdalne, dronyZdalneApi } from "./actors/drony-zdalne.mjs";
 import { registerMaszyny, maszynyApi } from "./combat/maszyny.mjs";
 import { registerCharacterDefaults } from "./actors/character-defaults.mjs";
 import { registerClassState } from "./actors/class-state.mjs";
@@ -391,6 +392,8 @@ Hooks.once("init", () => {
   // Maszyny: Wyłączony i [Zastosuj] Tabeli awarii; dron: zasilanie na zegarze, upadek latającego (PLAN_m3 §7.4, U15).
   registerMaszyny();
   registerDronyStan();
+  // Tryb zdalny drona: sygnał, sesja operatora, wyjścia, bramka wizji, Esc (PLAN_m3 §7.10).
+  registerDronyZdalne();
   registerSheetShell();
 
   // Vehicle sheet is still stock dnd5e (no Neuroshima subclass) — it's just missing the
@@ -510,7 +513,7 @@ Hooks.once("ready", () => {
   game.neuroshima.umieranie = umieranieApi;
   // Towarzysze i drony (PLAN_m3) — game.neuroshima.towarzysze.wlasciciel(actor), .wartosci(actor), .maStopnieZranienia(actor)
   game.neuroshima.towarzysze = { ...towarzyszeApi, ...towarzyszeWalkaApi, ...towarzyszeTworzenieApi, migruj: migrujTowarzysza };
-  game.neuroshima.drony = { ...dronyApi, ...dronySterowanieApi, ...dronyStanApi, premiaAtakuDrona };
+  game.neuroshima.drony = { ...dronyApi, ...dronySterowanieApi, ...dronyStanApi, ...dronyZdalneApi, premiaAtakuDrona };
   game.neuroshima.maszyny = maszynyApi;
   // Okoliczności ataku — game.neuroshima.okolicznosci.rozstrzygnij(activity) (podgląd z bieżącymi celami)
   game.neuroshima.okolicznosci = okolicznosciApi;

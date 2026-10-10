@@ -4,22 +4,27 @@
  *   - **Komenda [B] / Steruj [A] / Reaguj [R]** to aktywności Kontrolera (U21), nie Hakerstwa: operatorem bywa
  *     każdy z kontrolerem w ręce (D12). Kontroler w plecaku nie blokuje — pytamy i bierzemy go do ręki
  *     lejkiem lalki (D22: [Weź do ręki], z wypieraniem). BN-operatorzy bez lalki są zwolnieni.
- *   - **Wybór drona:** rozłożone drony na oglądanej scenie; kilka — okno z ostatnio sterowanym na wierzchu.
- *     Zasięg sygnału (U17) dochodzi w trybie zdalnym (E8).
+ *   - **Wybór drona:** rozłożone drony na oglądanej scenie w zasięgu sygnału (U17, `drony-zdalne.mjs`); kilka —
+ *     okno z ostatnio sterowanym na wierzchu. Poza zasięgiem — komunikat, bez karty i bez aktywacji (D24).
  *   - **Zatrzask (U20):** aktywny MG zapisuje na dronie operatora (`@operator` na żywo), zatrzask
- *     `{ combatId, runda, tryb }` i własność gracza-operatora (D12; zwolnienie przy wyjściu — E8). Reakcja [R]
- *     ma osobny znacznik rundy: to Reakcja operatora, nie druga aktywacja (D35).
+ *     `{ combatId, runda, tryb }` i własność gracza-operatora (D12) — zapamiętaną jako nadaną, żeby ją odebrać
+ *     przy wyjściu z trybu zdalnego; nowy operator odbiera ją poprzedniemu (przejęcie). Reakcja [R] ma osobny
+ *     znacznik rundy: to Reakcja operatora, nie druga aktywacja (D35); jej własność trwa do zmiany tury.
+ *   - **Przejmij sterowanie** — tryb zdalny poza walką, bez zatrzasku (§7.10); w walce — Komenda albo Steruj.
  *   - **Karta aktywacji:** dozwolone akcje z `zakresAktywacji` (D36), przy [R] — przyciski ataku drona;
  *     plakietka „druga aktywacja drona w tej rundzie” (D35).
  *   - **Plakietka ataku:** w walce atak drona bez Steruj [A] i bez Reaguj [R] w tej rundzie dostaje na karcie
  *     „atak wymaga Steruj [A] (s. 83)” — oznaczamy, nie blokujemy (D2, D36).
- *   - Do czasu trybu zdalnego (E8) [A] i [B] oddają operatorowi kontrolę nad żetonem drona i przesuwają widok.
+ *   - [A], [B] i Przejmij wchodzą w tryb zdalny (`drony-zdalne.mjs`, E8); [R] — sama karta z atakiem drona (U21).
  */
 
 import { RODZAJE } from "../config/towarzysze-data.mjs";
 import { zakresAktywacji } from "../config/towarzysze-rules.mjs";
 import { FLAG, towarzysz } from "./towarzysze.mjs";
-import { jestDronem, zetonyDrona, prosbaDoMG, zarejestrujAkcje, FLAG_AKTYWACJA, FLAG_REAKCJA } from "./drony.mjs";
+import {
+  jestDronem, prosbaDoMG, zarejestrujAkcje, zmianyOdebrania, FLAG_AKTYWACJA, FLAG_REAKCJA, FLAG_NADANE, FLAG_STEROWANIE
+} from "./drony.mjs";
+import { wejdz, sygnalDrona } from "./drony-zdalne.mjs";
 import { TRYB_AKTYWNOSCI, jestKontrolerem, rodzajKontrolera } from "../items/kontroler.mjs";
 import { isDollActor, inHand, equip } from "./doll.mjs";
 
@@ -39,7 +44,7 @@ const NAZWY_AKCJI = Object.freeze({
   okazyjny: "Atak okazyjny", wyczekana: "Wyczekana akcja"
 });
 
-const TYTUL = Object.freeze({ B: "Komenda [B]", A: "Steruj [A]", R: "Reaguj [R]" });
+const TYTUL = Object.freeze({ B: "Komenda [B]", A: "Steruj [A]", R: "Reaguj [R]", Z: "Przejmij sterowanie" });
 
 /** Typy aktywności, które są atakiem — natywny i tryby ognia (`weapons/fire-modes.mjs`). */
 const ATAKI = new Set(["attack", "neuroKs", "neuroDs", "neuroMs", "neuroOz", "neuroDublet"]);
@@ -126,54 +131,90 @@ async function _wybierzDrona(drony, ostatni) {
   return drony.find(d => d.uuid === uuid) ?? null;
 }
 
+/** Sygnał do drona, gdy stoi na oglądanej scenie; `null` — dron gdzie indziej (makra, testy: bez sprawdzania). */
+function _sygnal(dron, operator, kontroler) {
+  if (!dron.getActiveTokens?.(true, true)?.some(t => t.parent === canvas?.scene)) return null;
+  return sygnalDrona(dron, { operator, kontroler, scene: canvas.scene });
+}
+
+/** Komunikat, gdy żaden dron nie łapie sygnału (U17). */
+function _bezSygnalu(s) {
+  if (s.powod === "operator") return "Twojej postaci nie ma na tej scenie — kontroler nie ma skąd nadawać.";
+  if (s.powod === "kontroler") return "Kontroler nie jest w ręce.";
+  const gdzie = s.podZiemia ? " (pod ziemią)" : s.sciana ? " (przez ściany)" : "";
+  return `Dron poza zasięgiem kontrolera: ${Math.round(s.odleglosc ?? 0)} m, zasięg ${s.zasieg} m${gdzie}.`;
+}
+
 /**
- * Aktywacja drona z Kontrolera: [B], [A] albo [R] (D35, D36).
+ * Aktywacja drona z Kontrolera: [B], [A], [R] (D35, D36) albo Przejmij sterowanie poza walką (§7.10).
  * @param {Item} kontroler
- * @param {"A"|"B"|"R"} tryb
+ * @param {"A"|"B"|"R"|"Z"} tryb
  * @param {{dron?: Actor}} [o]  dron wskazany z góry (makra, testy)
  * @returns {Promise<Actor|null>} dron albo `null`, gdy przerwano
  */
 export async function aktywuj(kontroler, tryb, { dron = null } = {}) {
   const operator = kontroler?.parent;
   if (!operator || !jestKontrolerem(kontroler) || !TYTUL[tryb]) return null;
+  const combat = _walka();
+  if (tryb === "Z" && combat) return ui.notifications.warn("W walce sterujesz Komendą [B] albo Steruj [A]."), null;
   if (!(await _wRece(kontroler))) return null;
-  if (!dron) {
+  if (dron) {
+    const s = _sygnal(dron, operator, kontroler);
+    if (s?.utracony) return ui.notifications.warn(_bezSygnalu(s)), null;
+  } else {
     const drony = _dronyNaScenie();
     if (!drony.length) return ui.notifications.warn("Na tej scenie nie stoi żaden rozłożony dron."), null;
-    dron = await _wybierzDrona(drony, kontroler.getFlag(MODULE_ID, FLAG_OSTATNI));
+    const sygnaly = drony.map(d => ({ d, s: _sygnal(d, operator, kontroler) }));
+    const wZasiegu = sygnaly.filter(x => !x.s?.utracony).map(x => x.d);
+    if (!wZasiegu.length) {
+      const najblizszy = sygnaly.map(x => x.s).sort((a, b) => (a.odleglosc ?? Infinity) - (b.odleglosc ?? Infinity))[0];
+      return ui.notifications.warn(_bezSygnalu(najblizszy)), null;
+    }
+    dron = await _wybierzDrona(wZasiegu, kontroler.getFlag(MODULE_ID, FLAG_OSTATNI));
     if (!dron) return null;
   }
-  const combat = _walka();
-  const druga = tryb !== "R" && !!aktywacjaWRundzie(dron, combat);
+  const druga = (tryb === "A" || tryb === "B") && !!aktywacjaWRundzie(dron, combat);
   await _karta(operator, dron, tryb, { druga, kontroler });
+  const znacznik = foundry.utils.randomID(12);
   await prosbaDoMG(operator, {
-    akcja: "steruj", dron: dron.uuid, tryb, operator: operator.uuid,
+    akcja: "steruj", dron: dron.uuid, tryb, operator: operator.uuid, znacznik,
     combatId: combat?.id ?? null, runda: combat?.round ?? null
   });
   if (kontroler.getFlag(MODULE_ID, FLAG_OSTATNI) !== dron.uuid) await kontroler.setFlag(MODULE_ID, FLAG_OSTATNI, dron.uuid);
-  if (tryb !== "R") _przejmijZeton(dron);
+  if (tryb !== "R") await wejdz(dron, { operator, kontroler, tryb, znacznik });
   return dron;
 }
 
-/** Do trybu zdalnego (E8): kontrola żetonu drona, gdy własność dojdzie, i widok na nim. */
-async function _przejmijZeton(dron) {
-  for (let i = 0; i < 30 && !dron.isOwner; i++) await new Promise(r => setTimeout(r, 100));
-  const token = dron.getActiveTokens?.(true)?.[0];
-  if (!token || !dron.isOwner) return;
-  token.control({ releaseOthers: true });
-  canvas.animatePan({ x: token.center.x, y: token.center.y, duration: 250 });
-}
-
-/** Aktywny MG: operator, zatrzask albo znacznik reakcji, własność gracza-operatora (D12, U20). */
-async function _steruj(_actor, { dron: uuid, tryb, operator, combatId, runda, user }) {
+/**
+ * Aktywny MG: operator, zatrzask albo znacznik reakcji, własność gracza-operatora (D12, U20).
+ * Nowy użytkownik w trybie zdalnym odbiera nadaną własność poprzedniemu (przejęcie); potwierdzenie
+ * `FLAG_STEROWANIE` ze znacznikiem prośby — na nie czeka klient, żeby wejść po swojej prośbie, nie przed nią.
+ */
+async function _steruj(_actor, { dron: uuid, tryb, operator, combatId, runda, user, znacznik = null }) {
   const dron = fromUuidSync(uuid);
   if (!dron || !jestDronem(dron)) return;
+  const nadane = dron.flags?.[MODULE_ID]?.[FLAG_NADANE] ?? {};
+  if (tryb !== "R") {
+    const poprzedni = Object.keys(nadane).filter(id => id !== user && nadane[id] === "zdalny");
+    const odbior = poprzedni.length ? zmianyOdebrania(dron, poprzedni) : null;
+    if (odbior) await dron.update(odbior);
+  }
   const zmiany = { [`flags.${MODULE_ID}.${FLAG}.operator`]: operator };
   const znak = { combatId, runda, operator };
   if (tryb === "R") zmiany[`flags.${MODULE_ID}.${FLAG_REAKCJA}`] = znak;
-  else zmiany[`flags.${MODULE_ID}.${FLAG_AKTYWACJA}`] = { ...znak, tryb };
+  else if (tryb !== "Z") zmiany[`flags.${MODULE_ID}.${FLAG_AKTYWACJA}`] = { ...znak, tryb };
+  if (tryb !== "R") zmiany[`flags.${MODULE_ID}.${FLAG_STEROWANIE}`] = { znacznik, user, operator };
   const u = game.users.get(user);
-  if (u && !u.isGM && !dron.testUserPermission(u, "OWNER")) zmiany[`ownership.${u.id}`] = CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER;
+  const rodzaj = tryb === "R" ? "reakcja" : "zdalny";
+  if (u && !u.isGM) {
+    if (!dron.testUserPermission(u, "OWNER")) {
+      zmiany[`ownership.${u.id}`] = CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER;
+      zmiany[`flags.${MODULE_ID}.${FLAG_NADANE}.${u.id}`] = rodzaj;
+    } else if (nadane[u.id] === "reakcja" && rodzaj === "zdalny") {
+      // Własność z Reakcji przechodzi w sterowanie — trwa do wyjścia, nie do zmiany tury.
+      zmiany[`flags.${MODULE_ID}.${FLAG_NADANE}.${u.id}`] = rodzaj;
+    }
+  }
   await dron.update(zmiany);
 }
 
@@ -186,6 +227,8 @@ async function _karta(operator, dron, tryb, { druga, kontroler }) {
   const linie = [];
   if (tryb === "R") {
     linie.push("Dron reaguje za twoją Reakcję: atak okazyjny (tylko wręcz) albo akcja wyczekana w Steruj [A].");
+  } else if (tryb === "Z") {
+    linie.push("Poza walką — sterowanie przez kamerę drona, bez liczenia akcji.");
   } else {
     linie.push(`<strong>Wolno:</strong> ${esc(akcje.join(", "))}.`);
     if (tryb === "B") linie.push("Atak wymaga Steruj [A] (s. 83).");

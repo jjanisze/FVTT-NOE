@@ -164,10 +164,18 @@ broń drona (atak, obrażenia, ST obszarowe, montaż, magazynki). E7c w `dron`: 
 [Zastosuj] (TT −2); zegar +30 min → akumulator 50%; 0 PW → Wyłączony, nie martwy. Quench `drony` dokłada: Wyłączony z
 kilku przyczyn, 0 PW i Olbrzymie obrażenia (karta „zniszczony”), pominięcia Tabeli awarii i [Zastosuj] (Szybkość, TT,
 Sparaliżowanie, Podpalenie, Wyłączony, kara ataku), zasilanie (procent na zegarze, wyczerpanie, Włóż akumulator,
-agregat), upadek latającego (Powalenie — opada; Wyłączony — karta „Spada”).
+agregat), upadek latającego (Powalenie — opada; Wyłączony — karta „Spada”). E8a w `dron` (MG, Gracz 1, Gracz 2): tryb
+zdalny — kontrolowany tylko dron, widok z drona, prawdziwy klawisz D przesuwa drona, prawdziwy Esc oddaje kontrolę i
+widok; właściciel uchwytu poza trybem nie patrzy przez drona; Przejmij sterowanie → sygnał na trzech odległościach
+„pod ziemią” (1 / ≈0,5 / ≈0,2) i przez ścianę szopy (zasięg 50 m); dron ponad 300 m → FAILSAFE, potem cięcie; Gracz 2
+przejmuje własnym kontrolerem, jego Esc oddaje własność; wytrącony kontroler kończy sesję. Quench `drony` dokłada sygnał
+z żetonów (wysokość, „pod ziemią”, tory pościgu, brak żetonu operatora, kontroler w plecaku) i nadania własności przez
+prawdziwy przekaźnik (przejęcie, zwolnienie, Reakcja, właściciel uchwytu, złożenie).
 `clickCanvas` renderuje klatkę po `canvas.pan` (karta w tle nie renderuje sama, a pikery czytają zbuforowane
 przekształcenie warstwy) i wysyła `mouseMoved` bez wciśniętego przycisku — inaczej Chrome potrafi zamienić
-kliknięcie w przeciągnięcie bez `pointerdown`.
+kliknięcie w przeciągnięcie bez `pointerdown`. `pressKey(code)` to prawdziwy klawisz przez CDP (`Escape`, `KeyW`…`KeyD`
+— v14 rusza żetony WASD, strzałki tylko przesuwają widok). Żeton przestawiony przez MG w paczce: `doc.move({x, y,
+action: "displace"})` — `update({x, y})` to marsz, który zatrzymują ściany i cudze żetony.
 
 Każdy klient ma w przeglądarce `window.__e2e` (`dev/agent/lib/e2e-page.mjs`), żeby funkcje paczek
 (serializowane, bez domknięć) nie przepisywały tych samych pętli: `forceD20([20, 3])` (kolejka ścianek

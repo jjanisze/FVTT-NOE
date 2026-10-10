@@ -7,8 +7,9 @@
  * (`KONTROLERY`, generowane). WKK: dostępność fabrycznego 10% (D33), bez przepisu standardowego (D37).
  *
  * Kontroler trzyma się w ręce (lalka: rodzina „tylko w ręce”) i niesie aktywności drona (U21): Komenda [B],
- * Steruj [A], Reaguj [R] — operatorem bywa każdy z kontrolerem w ręce, nie tylko twórca. Co robią, jest w
- * `actors/drony-sterowanie.mjs`; tu tylko dane przedmiotu — bez globali Foundry, bo paczki buduje Node.
+ * Steruj [A], Reaguj [R], a poza walką Przejmij sterowanie (§7.10) — operatorem bywa każdy z kontrolerem w ręce,
+ * nie tylko twórca. Co robią, jest w `actors/drony-sterowanie.mjs` i `actors/drony-zdalne.mjs`; tu tylko dane
+ * przedmiotu — bez globali Foundry, bo paczki buduje Node.
  */
 
 import { KONTROLERY } from "../config/towarzysze-data.mjs";
@@ -24,9 +25,10 @@ export const KONTROLER_FLAG = "kontroler";
 export const AKT_KOMENDA = "neuroDronKomenda";
 export const AKT_STERUJ = "neuroDronSteruj0";
 export const AKT_REAGUJ = "neuroDronReaguj0";
+export const AKT_PRZEJMIJ = "neuroDronPrzejm0";
 
-/** Aktywność → tryb aktywacji drona (D36): [B], [A], [R]. */
-export const TRYB_AKTYWNOSCI = Object.freeze({ [AKT_KOMENDA]: "B", [AKT_STERUJ]: "A", [AKT_REAGUJ]: "R" });
+/** Aktywność → tryb aktywacji drona (D36): [B], [A], [R]; `Z` — tryb zdalny poza walką, bez aktywacji. */
+export const TRYB_AKTYWNOSCI = Object.freeze({ [AKT_KOMENDA]: "B", [AKT_STERUJ]: "A", [AKT_REAGUJ]: "R", [AKT_PRZEJMIJ]: "Z" });
 
 /** Odwołania katalogu produkcji (cennik i schemat Hakera). */
 export const KONTROLER_REF = Object.freeze({ fabryczny: "raw:kontroler", domowy: "tabela:kontroler-domowy" });
@@ -69,7 +71,10 @@ function _opis(rodzaj) {
   return `<p>${rodzaj === "fabryczny" ? "Radiowy kontroler zdalnego sterowania z ekranem" : "Kontroler zdalnego sterowania domowej roboty, z ekranem"}: `
     + `zasięg <strong>${k.zasieg} m</strong> na otwartej przestrzeni, <strong>${k.zasiegPrzeszkody} m</strong> pod ziemią albo przez ściany.</p>`
     + "<p>Z kontrolerem w ręce: <strong>Komenda [B]</strong> — ruch, unik, odwrót, przedmiot; <strong>Steruj [A]</strong> — "
-    + "wszystko, także atak; <strong>Reaguj [R]</strong> — reakcja drona za twoją Reakcję. Jedna aktywacja drona na rundę.</p>"
+    + "wszystko, także atak; <strong>Reaguj [R]</strong> — reakcja drona za twoją Reakcję. Jedna aktywacja drona na rundę. "
+    + "Poza walką: <strong>Przejmij sterowanie</strong>.</p>"
+    + "<p>Sterujesz przez kamerę drona; obraz słabnie z odległością. Poza zasięgiem — utrata sygnału: dron staje, "
+    + "widok wraca do ciebie.</p>"
     + `<p><em>${zrodlo}${dost ? ` Dostępność: ${dost}.` : ""}</em></p>`;
 }
 
@@ -97,7 +102,9 @@ export function buildKontrolerItemData(rodzaj) {
         [AKT_STERUJ]: _aktywnosc(AKT_STERUJ, "Steruj dronem", "action", 200000,
           "Pełne sterowanie dronem przez kamerę — wszystkie jego zdolności."),
         [AKT_REAGUJ]: _aktywnosc(AKT_REAGUJ, "Reakcja drona", "reaction", 300000,
-          "Dron reaguje za Reakcję operatora: atak okazyjny albo przygotowana akcja.")
+          "Dron reaguje za Reakcję operatora: atak okazyjny albo przygotowana akcja."),
+        [AKT_PRZEJMIJ]: _aktywnosc(AKT_PRZEJMIJ, "Przejmij sterowanie", "special", 400000,
+          "Poza walką: sterowanie dronem przez kamerę, bez liczenia akcji.")
       }
     },
     flags: { [MODULE_ID]: { [KONTROLER_FLAG]: rodzaj, dollSlot: "handOnly", produktZastepczy: KONTROLER_REF[rodzaj] } }

@@ -14,6 +14,11 @@
  * E7c: Wyłączony z kilku przyczyn naraz, dron na 0 PW i z Olbrzymimi obrażeniami (§7.4), Tabela awarii z
  * pominięciami i [Zastosuj] (D10), zasilanie na zegarze z akumulatorem i agregatem (U15), upadek latającego (D29).
  *
+ * E8a: sygnał z żetonów (U17: odległość z wysokością, „pod ziemią”, tory pościgu, brak żetonu operatora, kontroler
+ * poza ręką), własność operatora przez prawdziwy przekaźnik (D12: nadanie, przejęcie, zwolnienie, Reakcja do zmiany
+ * tury, właściciel uchwytu nietknięty, złożenie), Przejmij sterowanie poza walką, Esc. Sesję na kliencie gracza
+ * (kontrola, bramka wizji, utrata sygnału, wyjścia) sprawdza e2e `dron`.
+ *
  * Synchronizację uchwytu robi aktywny MG — paczka zakłada, że to ta karta (piaskownica albo kampania z
  * jednym MG). Scena, folder „Drony” (gdy go nie było) i wiadomości czatu znikają w `after()`.
  */
@@ -27,8 +32,11 @@ import { towarzysz, jestMaszyna, maStopnieZranienia, jestTowarzyszem } from "../
 import { robotaApi as ROBOTA } from "../production/robota.mjs";
 import { buildSurowiecItemData } from "../actors/surowce-store.mjs";
 import {
-  buildKontrolerItemData, rodzajKontrolera, zasiegKontrolera, AKT_KOMENDA, AKT_STERUJ, AKT_REAGUJ, KONTROLER_REF
+  buildKontrolerItemData, rodzajKontrolera, zasiegKontrolera, AKT_KOMENDA, AKT_STERUJ, AKT_REAGUJ, AKT_PRZEJMIJ,
+  KONTROLER_REF, TRYB_AKTYWNOSCI
 } from "../items/kontroler.mjs";
+import { sygnalDrona, FLAG_POD_ZIEMIA } from "../actors/drony-zdalne.mjs";
+import { zmianyOdebrania, FLAG_NADANE, FLAG_STEROWANIE } from "../actors/drony.mjs";
 import { aktywuj, aktywacjaWRundzie, cechyDrona } from "../actors/drony-sterowanie.mjs";
 import { premiaAtakuDrona } from "../actors/drony-bron.mjs";
 import { familyOf, inHand } from "../actors/doll.mjs";
@@ -554,6 +562,8 @@ export function registerDronyTests(quench) {
 
     describe("Upadek drona latającego (D29)", function () {
       let wynik, scenaU;
+      // Prawdziwy rzut obrażeń od upadku i karta — na granicy domyślnych 2 s mocha.
+      this.timeout(8000);
 
       before(async () => {
         scenaU = await scenaTestowa();
@@ -586,6 +596,196 @@ export function registerDronyTests(quench) {
         await spada(karta, t.uuid);
         expect(zetonyDrona(wynik.dron)[0].elevation).to.equal(0);
         expect(wynik.dron.system.attributes.hp.value).to.be.below(pw);
+      });
+    });
+
+    describe("Sygnał drona z żetonów (U17)", function () {
+      let scenaS, operator, wynik, kontroler;
+      const zd = () => zetonyDrona(wynik.dron)[0];
+      const sg = () => sygnalDrona(wynik.dron, { operator, kontroler: operator.items.get(kontroler.id), scene: scenaS });
+
+      before(async () => {
+        scenaS = await scenaTestowa();
+        operator = await scratchActor({ name: `${SCRATCH_PREFIX} Operator sygnału`, type: "npc" });
+        [kontroler] = await operator.createEmbeddedDocuments("Item", [buildKontrolerItemData("domowy")]);
+        wynik = await nowyDron(operator, "dron-latajacy");
+        const doc = await operator.getTokenDocument({ x: 100, y: 100, actorLink: true });
+        await scenaS.createEmbeddedDocuments("Token", [doc.toObject()]);
+        await rozloz(uchwytDrona(wynik.dron), { pozycja: { x: 100, y: 100 }, scena: scenaS });
+        await waitFor(() => zd(), { label: "żeton drona" });
+      });
+      after(async () => { if (game.scenes.get(scenaS.id)) await scenaS.delete(); });
+
+      it("odległość w linii prostej z wysokością: ¼ zasięgu czysto, ½ — 0,5, krawędź — 0, dalej utrata", async function () {
+        const na = async m => { await zd().update({ elevation: m }); return sg(); };
+        expect((await na(0)).jakosc, "tuż obok").to.equal(1);
+        expect((await na(20)).jakosc, "20 m z 100 m").to.equal(1);
+        const pol = await na(50);
+        expect(pol.jakosc).to.be.closeTo(0.5, 0.01);
+        expect(pol).to.include({ zasieg: 100, utracony: false, sciana: false, podZiemia: false });
+        expect(pol.odleglosc).to.be.closeTo(50, 0.01);
+        expect(await na(100)).to.include({ jakosc: 0, utracony: false });
+        expect(await na(101)).to.include({ utracony: true, powod: "zasieg" });
+      });
+
+      it("scena „pod ziemią” — zasięg przez przeszkody (100 → 20 m)", async function () {
+        await scenaS.setFlag(MODULE_ID, FLAG_POD_ZIEMIA, true);
+        try {
+          await zd().update({ elevation: 10 });
+          const s = sg();
+          expect(s).to.include({ zasieg: 20, podZiemia: true, utracony: false });
+          expect(s.jakosc).to.be.closeTo(0.5, 0.01);
+        } finally {
+          await scenaS.unsetFlag(MODULE_ID, FLAG_POD_ZIEMIA);
+        }
+      });
+
+      it("scena pościgu: odległość z torów (3 tory = 108 m), nie linijką", async function () {
+        const [fab] = await operator.createEmbeddedDocuments("Item", [buildKontrolerItemData("fabryczny")]);
+        const zo = scenaS.tokens.find(t => t.actorId === operator.id);
+        await scenaS.setFlag(MODULE_ID, "poscig", { test: true });
+        try {
+          await zo.update({ x: 250, y: 100 });           // środek 300 → tor 1
+          await zd().update({ x: 850, y: 700, elevation: 30 }); // środek 900 → tor 4; pion i wysokość nie liczą się
+          const dom = sg();
+          expect(dom).to.include({ odleglosc: 108, utracony: true, powod: "zasieg" });
+          const s = sygnalDrona(wynik.dron, { operator, kontroler: fab, scene: scenaS });
+          expect(s).to.include({ odleglosc: 108, zasieg: 300, utracony: false });
+          expect(s.jakosc).to.be.closeTo(20 * Math.log10(300 / 108) / 12, 0.001);
+        } finally {
+          await scenaS.unsetFlag(MODULE_ID, "poscig");
+          await fab.delete();
+          await zo.update({ x: 100, y: 100 });
+          await zd().update({ x: 100, y: 100, elevation: 0 });
+        }
+      });
+
+      it("bez żetonu operatora na scenie — utrata (operator)", async function () {
+        const inny = await scratchActor({ name: `${SCRATCH_PREFIX} Operator bez żetonu`, type: "npc" });
+        const [k] = await inny.createEmbeddedDocuments("Item", [buildKontrolerItemData("fabryczny")]);
+        expect(sygnalDrona(wynik.dron, { operator: inny, kontroler: k, scene: scenaS })).to.include({ utracony: true, powod: "operator" });
+      });
+
+      it("postać z lalką: kontroler w plecaku nie nadaje (D22)", async function () {
+        const pc = await scratchActor({ name: `${SCRATCH_PREFIX} Operator z plecakiem` });
+        const [k] = await pc.createEmbeddedDocuments("Item", [buildKontrolerItemData("fabryczny")]);
+        expect(inHand(pc.items.get(k.id))).to.equal(false);
+        expect(sygnalDrona(wynik.dron, { operator: pc, kontroler: k, scene: scenaS })).to.include({ utracony: true, powod: "kontroler" });
+      });
+    });
+
+    describe("Własność operatora przez przekaźnik (D12): nadanie, przejęcie, zwolnienie", function () {
+      let operator, wynik, g1, g2, scenaW;
+      const OWNER = CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER;
+      const nadane = () => wynik.dron.flags[MODULE_ID]?.[FLAG_NADANE] ?? {};
+      const poziom = u => wynik.dron.ownership[u.id] ?? 0;
+      /** Prośba gracza dokładnie tą drogą, którą idzie z jego klienta: flaga na aktorze, wykonuje aktywny MG. */
+      const prosba = async (dane, user) => {
+        const nonce = foundry.utils.randomID(12);
+        await operator.update({ [`flags.${MODULE_ID}.dronProsby.${nonce}`]: { ...dane, user: user.id } });
+        await waitFor(() => !operator.flags?.[MODULE_ID]?.dronProsby?.[nonce], { label: `prośba ${dane.akcja}` });
+      };
+      const steruj = (user, tryb = "A") => prosba({ akcja: "steruj", dron: wynik.dron.uuid, tryb, operator: operator.uuid,
+        znacznik: foundry.utils.randomID(12), combatId: null, runda: null }, user);
+      const zwolnij = user => prosba({ akcja: "zwolnij", dron: wynik.dron.uuid }, user);
+
+      before(async function () {
+        [g1, g2] = game.users.filter(u => !u.isGM);
+        if (!g2) this.skip();
+        operator = await scratchActor({ name: `${SCRATCH_PREFIX} Posiadacz (nikt z graczy)` });
+        wynik = await nowyDron(operator, "dron-kroczacy");
+      });
+
+      it("Steruj gracza: OWNER nadany i zapamiętany, potwierdzenie ze znacznikiem", async function () {
+        expect(poziom(g1)).to.equal(0);
+        await steruj(g1);
+        expect(poziom(g1)).to.equal(OWNER);
+        expect(nadane()[g1.id]).to.equal("zdalny");
+        expect(wynik.dron.flags[MODULE_ID][FLAG_STEROWANIE]).to.include({ user: g1.id, operator: operator.uuid });
+      });
+
+      it("drugi gracz przejmuje: pierwszy traci nadaną własność", async function () {
+        await steruj(g2);
+        expect(poziom(g2)).to.equal(OWNER);
+        expect(poziom(g1), "poprzedni operator").to.equal(0);
+        expect(Object.keys(nadane())).to.deep.equal([g2.id]);
+        expect(wynik.dron.flags[MODULE_ID][FLAG_STEROWANIE].user).to.equal(g2.id);
+      });
+
+      it("zwolnienie przy wyjściu z trybu zdalnego odbiera nadaną własność", async function () {
+        await zwolnij(g2);
+        expect(poziom(g2)).to.equal(0);
+        expect(nadane()).to.deep.equal({});
+      });
+
+      it("Reakcja [R]: własność do zmiany tury — wyjście z sesji jej nie odbiera", async function () {
+        await steruj(g1, "R");
+        expect(nadane()[g1.id]).to.equal("reakcja");
+        await zwolnij(g1);
+        expect(poziom(g1), "zostaje po zwolnieniu").to.equal(OWNER);
+        await wynik.dron.update(zmianyOdebrania(wynik.dron, null, { rodzaj: "reakcja" }));
+        expect(poziom(g1), "zmiana tury").to.equal(0);
+      });
+
+      it("właściciel uchwytu nie dostaje nadania i nie traci własności przy zwolnieniu", async function () {
+        // Tak, jak zostawia ją przeniesienie uchwytu (`_wlasnoscZa`): gracz-właściciel posiadacza — właścicielem drona.
+        await operator.update({ [`ownership.${g1.id}`]: OWNER });
+        await wynik.dron.update({ [`ownership.${g1.id}`]: OWNER });
+        try {
+          await steruj(g1);
+          expect(nadane()[g1.id], "bez nadania").to.equal(undefined);
+          await zwolnij(g1);
+          expect(poziom(g1)).to.equal(OWNER);
+        } finally {
+          await operator.update({ [`ownership.${g1.id}`]: CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE });
+          await wynik.dron.update({ [`ownership.${g1.id}`]: CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE });
+        }
+      });
+
+      it("złożenie drona odbiera nadania i potwierdzenie sterowania", async function () {
+        scenaW = await scenaTestowa();
+        try {
+          await rozloz(uchwytDrona(wynik.dron), { pozycja: { x: 200, y: 200 }, scena: scenaW });
+          await steruj(g2);
+          expect(poziom(g2)).to.equal(OWNER);
+          await zloz(uchwytDrona(wynik.dron));
+          expect(poziom(g2)).to.equal(0);
+          expect(wynik.dron.flags[MODULE_ID][FLAG_STEROWANIE]).to.equal(undefined);
+        } finally {
+          if (game.scenes.get(scenaW.id)) await scenaW.delete();
+        }
+      });
+    });
+
+    describe("Przejmij sterowanie i Esc (§7.10)", function () {
+      it("czwarta aktywność kontrolera: tryb zdalny poza walką", function () {
+        const k = buildKontrolerItemData("fabryczny");
+        expect(Object.keys(k.system.activities)).to.include(AKT_PRZEJMIJ);
+        expect(AKT_PRZEJMIJ).to.have.length(16);
+        expect(TRYB_AKTYWNOSCI[AKT_PRZEJMIJ]).to.equal("Z");
+      });
+
+      it("w walce Przejmij odmawia — bez karty i bez prośby", async function () {
+        const op = await scratchActor({ name: `${SCRATCH_PREFIX} Operator w walce`, type: "npc" });
+        const [k] = await op.createEmbeddedDocuments("Item", [buildKontrolerItemData("fabryczny")]);
+        const r = stub(game, "combat", { id: "quench-z", round: 1, started: true, turns: [], combatant: null, getCombatantsByActor: () => [] });
+        const w = captureWarnings();
+        const przed = game.messages.size;
+        try {
+          expect(await aktywuj(k, "Z")).to.equal(null);
+        } finally {
+          r();
+          w.restore();
+        }
+        expect(w.messages.some(m => /Komend|Steruj/.test(m))).to.equal(true);
+        expect(game.messages.size).to.equal(przed);
+      });
+
+      it("Esc wyjścia zarejestrowany przed „Zamknij” rdzenia", function () {
+        const a = game.keybindings.actions.get(`${MODULE_ID}.dronWyjdz`);
+        expect(a, "akcja klawisza").to.be.ok;
+        expect(a.precedence).to.be.below(CONST.KEYBINDING_PRECEDENCE.DEFERRED);
+        expect(a.editable.map(b => b.key)).to.include("Escape");
       });
     });
 

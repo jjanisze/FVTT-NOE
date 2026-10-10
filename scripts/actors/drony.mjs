@@ -45,6 +45,13 @@ export const AKT_AKUMULATOR = "neuroDronAkumul0";
 export const FLAG_AKTYWACJA = "dronAktywacja";
 /** Reakcja drona [R] w rundzie: `{ combatId, runda, operator }`. */
 export const FLAG_REAKCJA = "dronReakcja";
+/**
+ * OWNER nadany operatorowi przez moduł (D12): `{ <userId>: "zdalny" | "reakcja" }`. Tylko te wpisy moduł
+ * odbiera — przy wyjściu z trybu zdalnego, przejęciu, złożeniu, rozłączeniu; „reakcja” — przy zmianie tury.
+ */
+export const FLAG_NADANE = "dronNadane";
+/** Sterowanie potwierdzone przez MG (E8): `{ znacznik, user, operator }` — klient czeka na swój znacznik. */
+export const FLAG_STEROWANIE = "dronSterowanie";
 /** Rozłożenie i złożenie „obok siebie” (U12) — dalej ostrzeżenie. */
 const ZASIEG_M = 1.5;
 
@@ -194,15 +201,43 @@ async function _folder() {
 }
 
 /** Poziomy własności drona za posiadaczem: gracze-właściciele posiadacza — OWNER, reszta graczy — brak. */
-function _wlasnoscZa(holder, obecna = {}) {
+function _wlasnoscZa(holder, obecna = {}, nadane = {}) {
   const lv = CONST.DOCUMENT_OWNERSHIP_LEVELS;
   const out = {};
   for (const u of game.users) {
-    if (u.isGM) continue;
+    // Operator z nadaną własnością (D12) trzyma ją do wyjścia z trybu zdalnego, nie do zmiany posiadacza.
+    if (u.isGM || nadane[u.id]) continue;
     const chce = holder?.testUserPermission(u, "OWNER") ? lv.OWNER : lv.NONE;
     if ((obecna[u.id] ?? lv.NONE) !== chce) out[u.id] = chce;
   }
   return out;
+}
+
+/**
+ * Zmiany odbierające OWNER nadany operatorom (D12) — użytkownikom `userIds` albo wszystkim z `FLAG_NADANE`
+ * (tylko MG). Użytkownik wraca do tego, co daje mu posiadacz uchwytu. `null` — nie ma czego odbierać.
+ * @param {Actor} dron
+ * @param {string[]|null} [userIds]
+ * @param {{rodzaj?: string}} [o]  tylko nadania tego rodzaju (`"reakcja"`)
+ */
+export function zmianyOdebrania(dron, userIds = null, { rodzaj = null } = {}) {
+  const nadane = dron?.flags?.[MODULE_ID]?.[FLAG_NADANE] ?? {};
+  const ids = Object.keys(nadane).filter(id => nadane[id] && (!userIds || userIds.includes(id))
+    && (!rodzaj || nadane[id] === rodzaj));
+  if (!ids.length) return null;
+  const lv = CONST.DOCUMENT_OWNERSHIP_LEVELS;
+  const holder = posiadaczDrona(dron);
+  const own = foundry.utils.deepClone(dron._source.ownership ?? {});
+  const zmiany = {};
+  for (const id of ids) {
+    const u = game.users.get(id);
+    if (u && holder?.testUserPermission(u, "OWNER")) own[id] = lv.OWNER;
+    else delete own[id];
+    zmiany[`flags.${MODULE_ID}.${FLAG_NADANE}.-=${id}`] = null;
+  }
+  // Jak arkusz własności rdzenia: całe pole naraz (`_replace`), bo usunięty klucz ma zniknąć, nie zostać.
+  zmiany.ownership = _replace(own);
+  return zmiany;
 }
 
 /**
@@ -354,7 +389,9 @@ async function _zabierz({ uchwyt: uuid }) {
   await dron.update({
     [`flags.${MODULE_ID}.${FLAG}.operator`]: null,
     [`flags.${MODULE_ID}.-=${FLAG_AKTYWACJA}`]: null,
-    [`flags.${MODULE_ID}.-=${FLAG_REAKCJA}`]: null
+    [`flags.${MODULE_ID}.-=${FLAG_REAKCJA}`]: null,
+    [`flags.${MODULE_ID}.-=${FLAG_STEROWANIE}`]: null,
+    ...(zmianyOdebrania(dron) ?? {})
   });
   for (const [scene, ids] of naScenach) await scene.deleteEmbeddedDocuments("Token", ids);
   await _karta(item.parent, dron, "składa");
@@ -473,7 +510,7 @@ async function _synchronizuj(dron) {
 async function _wlasnoscZaUchwytem(item) {
   const dron = dronUchwytu(item);
   if (!dron || !(item.parent instanceof Actor)) return;
-  const zmiany = _wlasnoscZa(item.parent, dron.ownership);
+  const zmiany = _wlasnoscZa(item.parent, dron.ownership, dron.flags?.[MODULE_ID]?.[FLAG_NADANE]);
   if (Object.keys(zmiany).length) await dron.update({ ownership: zmiany });
 }
 

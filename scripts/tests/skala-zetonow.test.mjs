@@ -16,7 +16,9 @@
  *    który sprawia, że wariant (b) jest bezpieczny, a nie tylko wygodny.
  *  - **Plik nie może mieć wpisów-widm.** Literówka w id albo istota usunięta
  *    z Bestiariusza zostawia linijkę, która nigdy się nie zastosuje — i wygląda
- *    przy tym dokładnie jak wpis działający.
+ *    przy tym dokładnie jak wpis działający. Szablony towarzyszy (paczka
+ *    `towarzysze`, ten sam builder) też biorą skalę z pliku — wpis ma tylko ten
+ *    z własną grafiką (drony), więc „każdy ma wpis” ich nie dotyczy.
  *  - **Pack musi zgadzać się z plikiem.** Najczęstsza pomyłka w tym obiegu:
  *    poprawiłeś plik i nie uruchomiłeś `npm run build:bestiary`. Kompendium
  *    wozi wtedy stare skale, Szafa pokazuje stare skale i wszystko wygląda
@@ -41,20 +43,23 @@ export function registerTokenScaleTests(quench) {
 
     let overrides = null;
     let creatures = [];
+    let szablony = [];
 
     before(async function () {
       const res = await fetch(`${OVERRIDES}?v=${Date.now()}`);
       const raw = res.ok ? await res.json() : {};
       overrides = Object.fromEntries(Object.entries(raw).filter(([k]) => !k.startsWith("//")));
 
-      const pack = game.packs.get(`${MODULE_ID}.bestiariusz`);
-      const docs = pack ? await pack.getDocuments() : [];
-      creatures = docs.map(actor => ({
+      const opis = actor => ({
         actor,
         id: actor.getFlag(MODULE_ID, "bestiary.id"),
         size: actor.system.traits.size,
         scale: actor.prototypeToken.texture.scaleX
-      }));
+      });
+      const pack = game.packs.get(`${MODULE_ID}.bestiariusz`);
+      creatures = (pack ? await pack.getDocuments() : []).map(opis);
+      const tw = game.packs.get(`${MODULE_ID}.towarzysze`);
+      szablony = (tw ? await tw.getDocuments() : []).map(opis);
     });
 
     /* -------------------------------------------- */
@@ -71,7 +76,7 @@ export function registerTokenScaleTests(quench) {
       });
 
       it("nie ma wpisów dla istot, których nie ma w packu", function () {
-        const known = new Set(creatures.map(c => c.id));
+        const known = new Set([...creatures, ...szablony].map(c => c.id));
         const ghosts = Object.keys(overrides).filter(id => !known.has(id));
         expect(ghosts, "wpisy-widma w scale-overrides.json").to.deep.equal([]);
       });
@@ -98,7 +103,7 @@ export function registerTokenScaleTests(quench) {
     describe("kompendium zgadza się z plikiem", function () {
 
       it("prototypeToken.texture.scaleX == wartość z pliku", function () {
-        const drift = creatures
+        const drift = [...creatures, ...szablony]
           .filter(c => c.id && c.id in overrides)
           .filter(c => Math.abs(c.scale - Number(overrides[c.id])) > 1e-6)
           .map(c => `${c.id}: pack ${c.scale} ≠ plik ${overrides[c.id]}`);
