@@ -155,7 +155,9 @@ async function onClickFailure(event) {
       + `<div class="neuro-machine-failure"><button type="button" class="neuro-failure-apply" data-actor-uuid="${actor.uuid}" `
       + `data-awaria="${a.pozycja}"><i class="fa-solid fa-wrench" inert></i> Zastosuj</button></div>`,
     flags: { [MODULE_ID]: { awariaRzut: { actorUuid: actor.uuid, pozycja: a.pozycja, k20: roll.total } } }
-  });
+    // Tryb jawnie: `toMessage` nakłada tryb z ustawień i nadpisuje `whisper` — przy „publicznym” gracz widział
+    // kartę MG z [Zastosuj].
+  }, { messageMode: "gm" }); // v14: tryby wiadomości (`CONFIG.ChatMessage.modes`)
 
   btn.disabled = true;
   btn.textContent = `⚙ Awaria ${a.pozycja}`;

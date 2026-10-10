@@ -26,6 +26,11 @@
  * trybu miga ostrzeżeniami, lista akcji tylko w walce, ARMED i licznik, ekran powitalny, granice siatki), stan OSD
  * z prawdziwego drona, zasób czcionki GPL-3 (D39) serwowany z modułu.
  *
+ * E9: awarie trwałe i ich zdejmowanie (19 — przyczyna Wyłączenia), plan naprawy NOE/WKK z częściami wg tabeli §7.11
+ * (stopień wyżej przy PW ≤ ½), Napraw PW (2k6 + INT, narzędzia — ⚠ i przeklikanie, karta z czasem dla MG), Robota
+ * naprawy awarii pod Kobaltem do końca (części schodzą, awaria znika), karta MG pod NOE, wrak (U11), aktywności
+ * naprawy dokładane do starych uchwytów.
+ *
  * Synchronizację uchwytu robi aktywny MG — paczka zakłada, że to ta karta (piaskownica albo kampania z
  * jednym MG). Scena, folder „Drony” (gdy go nie było) i wiadomości czatu znikają w `after()`.
  */
@@ -47,6 +52,9 @@ import { zmianyOdebrania, FLAG_NADANE, FLAG_STEROWANIE } from "../actors/drony.m
 import { KAMERA_ID, celObrazu } from "../actors/drony-obraz.mjs";
 import { tekstOsd, liniaRssi, liniaZasilania, ostrzezeniaOsd, ukladOsd, ZNAK } from "../config/osd.mjs";
 import { stanOsd, ATLAS_OSD } from "../actors/drony-osd.mjs";
+import { naprawPWDrona, naprawAwarieDrona, planNaprawyAwarii } from "../actors/drony-naprawa.mjs";
+import { AKT_NAPRAW_PW, AKT_NAPRAW_AWARIE, jestWrakiem } from "../actors/drony.mjs";
+import { aktywneAwarie, naprawAwarie } from "../combat/maszyny.mjs";
 import { syncActorVision } from "../items/vision-sources.mjs";
 import { aktywuj, aktywacjaWRundzie, cechyDrona } from "../actors/drony-sterowanie.mjs";
 import { premiaAtakuDrona } from "../actors/drony-bron.mjs";
@@ -141,7 +149,7 @@ export function registerDronyTests(quench) {
         expect(uchwytDrona(wynik.dron)).to.equal(u);
         expect(posiadaczDrona(wynik.dron)).to.equal(haker);
         expect(dronyPosiadacza(haker).map(d => d.dron)).to.deep.equal([wynik.dron]);
-        expect(u.system.activities.size, "Rozłóż, Złóż, Włóż akumulator").to.equal(3);
+        expect(u.system.activities.size, "Rozłóż, Złóż, Włóż akumulator, Napraw PW, Napraw awarię").to.equal(5);
         expect(flagaUchwytu(u).zasilanie, "pełny akumulator").to.deep.equal({ procent: 100, od: null });
       });
 
@@ -938,6 +946,126 @@ export function registerDronyTests(quench) {
         expect(lic).to.match(/GNU GENERAL PUBLIC LICENSE\s+Version 3/);
         const nota = await (await fetch(`modules/${MODULE_ID}/fonts/osd/README.md`)).text();
         expect(nota).to.include("resources/osd/2/default.mcm").and.include("2026.6.2");
+      });
+    });
+
+    describe("Naprawa drona i wrak (E9: D9, D25, D28, U11)", function () {
+      this.timeout(10000);
+      const kobalt = wlaczony => {
+        const get = game.settings.get.bind(game.settings);
+        return stub(game.settings, "get", (ns, k) => (ns === MODULE_ID && k === "kobaltEnabled") ? wlaczony : get(ns, k));
+      };
+      let haker;
+      before(async () => {
+        haker = await scratchActor({ name: `${SCRATCH_PREFIX} Mechanik`, system: { abilities: { int: { value: 16 } } } });
+      });
+
+      it("awarie trwałe: efekty bez przemijających i 19 jako przyczyna Wyłączenia; naprawa je zdejmuje", async function () {
+        const { dron } = await nowyDron(haker, "dron-kroczacy");
+        const tt = dron.system.attributes.ac.value;
+        for (const n of [13, 8, 19, 5]) await zastosujAwarie(dron, n);
+        expect(aktywneAwarie(dron).map(a => a.pozycja)).to.deep.equal([8, 13, 19]);
+        await naprawAwarie(dron, 13);
+        expect(dron.system.attributes.ac.value, "TT wraca").to.equal(tt);
+        await naprawAwarie(dron, 19);
+        expect(przyczynyWylaczenia(dron)).to.not.include("awaria");
+        expect(aktywneAwarie(dron).map(a => a.pozycja)).to.deep.equal([8]);
+      });
+
+      it("plan naprawy: NOE — decyduje MG; WKK — części z tabeli §7.11, stopień wyżej przy PW ≤ ½", async function () {
+        const { dron } = await nowyDron(haker, "dron-kroczacy");
+        await zastosujAwarie(dron, 13);
+        expect(planNaprawyAwarii(dron, { kobalt: false })[0].naprawa).to.deep.equal({ warstwa: "noe", decyduje: "mg" });
+        const wkk = planNaprawyAwarii(dron, { kobalt: true })[0].naprawa;
+        expect(wkk).to.include({ stopien: "troche", st: 15 });
+        expect(wkk.surowce, "kroczący, pancerz: 5 MK, 5 CZ").to.deep.equal({ MK: 5, CZ: 5 });
+        await dron.update({ "system.attributes.hp.value": Math.floor(dron.system.attributes.hp.max / 2) });
+        expect(planNaprawyAwarii(dron, { kobalt: true })[0].naprawa).to.include({ stopien: "harowa", st: 20 });
+      });
+
+      it("Napraw PW (1 h): 2k6 + INT, brak narzędzi — pytanie; karta z przyciskiem czasu dla MG", async function () {
+        const { dron, uchwyt: u } = await nowyDron(haker, "dron-kroczacy");
+        expect(u.system.activities.get(AKT_NAPRAW_PW), "aktywność uchwytu").to.be.ok;
+        await dron.update({ "system.attributes.hp.value": 1 });
+        let pytano = 0;
+        const r = stub(foundry.applications.api.DialogV2, "confirm", async () => (pytano++, true));
+        let przyrost;
+        try {
+          przyrost = await naprawPWDrona(haker.items.get(u.id));
+        } finally {
+          r();
+        }
+        expect(pytano, "bez narzędzi hakera i elektronika").to.equal(1);
+        expect(przyrost).to.be.within(5, dron.system.attributes.hp.max - 1); // 2k6 + 3, najwyżej do maks.
+        expect(dron.system.attributes.hp.value).to.equal(1 + przyrost);
+        const karta = game.messages.contents.findLast(m => m.getFlag(MODULE_ID, "dronNaprawaPW")?.dron === dron.uuid);
+        expect(karta?.content).to.include('data-neuro-robota="czas"');
+      });
+
+      it("WKK: Robota naprawy awarii z częściami — do końca, części schodzą, awaria znika", async function () {
+        const r = kobalt(true);
+        try {
+          const mech = await scratchActor({ name: `${SCRATCH_PREFIX} Mechanik WKK`, system: { abilities: { int: { value: 14 } } } });
+          const { dron, uchwyt: u } = await nowyDron(mech, "dron-kroczacy");
+          await mech.createEmbeddedDocuments("Item", [buildSurowiecItemData("MK", 6), buildSurowiecItemData("CZ", 6)]);
+          await zastosujAwarie(dron, 13);
+          const w = stub(foundry.applications.api.DialogV2, "wait", async () => ({ pozycja: 13, mimoBrakow: true }));
+          let robota;
+          try {
+            robota = await naprawAwarieDrona(mech.items.get(u.id));
+          } finally {
+            w();
+          }
+          expect(robota, "Robota naprawy").to.be.ok;
+          const dane = robota.flags[MODULE_ID].robota;
+          expect(dane.rodzaj).to.equal("naprawa");
+          expect(dane.przepis.zrodlo).to.include({ awaria: 13, naprawa: "troche" });
+          expect(dane.przepis.surowce.map(l => `${l.gb} ${l.typy[0]}`).sort()).to.deep.equal(["5 CZ", "5 MK"]);
+          await ROBOTA.zakoncz(robota, { zrodlo: "bez-testu" });
+          await waitFor(() => !aktywneAwarie(dron).length, { label: "awaria zdjęta" });
+        } finally {
+          r();
+        }
+      });
+
+      it("NOE: karta MG z [Naprawione] i stopniami naprawy", async function () {
+        const r = kobalt(false);
+        try {
+          const { dron, uchwyt: u } = await nowyDron(haker, "dron-latajacy");
+          await zastosujAwarie(dron, 8);
+          await naprawAwarieDrona(haker.items.get(u.id));
+          const karta = game.messages.contents.findLast(m => m.getFlag(MODULE_ID, "dronNaprawaKarta")?.uchwyt === haker.items.get(u.id).uuid);
+          expect(karta, "karta MG").to.be.ok;
+          expect(karta.content).to.include('data-action="neuroDronNaprawione"').and.include('data-stopien="harowa"');
+        } finally {
+          r();
+        }
+      });
+
+      it("wrak (U11): dron „martwy” — uchwyt „Wrak drona”, bez napraw i rozłożenia", async function () {
+        const { dron, uchwyt: u } = await nowyDron(haker, "dron-kroczacy");
+        await dron.toggleStatusEffect("dead", { active: true });
+        const uu = () => haker.items.get(u.id);
+        await waitFor(() => uu().flags[MODULE_ID].dron.wrak === true, { label: "uchwyt wrakiem" });
+        expect(jestWrakiem(dron)).to.equal(true);
+        expect(uu().name).to.equal(`Wrak drona (${dron.name})`);
+        const w = captureWarnings();
+        try {
+          expect(await naprawPWDrona(uu())).to.equal(null);
+        } finally {
+          w.restore();
+        }
+        expect(w.messages.some(m => /wrak/i.test(m))).to.equal(true);
+        await dron.toggleStatusEffect("dead", { active: false });
+        await waitFor(() => uu().flags[MODULE_ID].dron.wrak === false, { label: "już nie wrak" });
+      });
+
+      it("uchwyt sprzed E9 dostaje aktywności naprawy przy synchronizacji", async function () {
+        const { dron, uchwyt: u } = await nowyDron(haker, "dron-latajacy");
+        await haker.items.get(u.id).update({ [`system.activities.-=${AKT_NAPRAW_AWARIE}`]: null });
+        expect(haker.items.get(u.id).system.activities.get(AKT_NAPRAW_AWARIE)).to.not.be.ok;
+        await dron.update({ name: `${dron.name} II` });
+        await waitFor(() => haker.items.get(u.id).system.activities.get(AKT_NAPRAW_AWARIE), { label: "aktywność wróciła" });
       });
     });
 

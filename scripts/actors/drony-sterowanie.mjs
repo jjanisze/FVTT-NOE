@@ -22,7 +22,8 @@ import { RODZAJE } from "../config/towarzysze-data.mjs";
 import { zakresAktywacji } from "../config/towarzysze-rules.mjs";
 import { FLAG, towarzysz } from "./towarzysze.mjs";
 import {
-  jestDronem, prosbaDoMG, zarejestrujAkcje, zmianyOdebrania, FLAG_AKTYWACJA, FLAG_REAKCJA, FLAG_NADANE, FLAG_STEROWANIE
+  jestDronem, jestWrakiem, prosbaDoMG, zarejestrujAkcje, zmianyOdebrania, FLAG_AKTYWACJA, FLAG_REAKCJA, FLAG_NADANE,
+  FLAG_STEROWANIE
 } from "./drony.mjs";
 import { wejdz, sygnalDrona } from "./drony-zdalne.mjs";
 import { TRYB_AKTYWNOSCI, jestKontrolerem, rodzajKontrolera } from "../items/kontroler.mjs";
@@ -87,12 +88,19 @@ function _reakcjaWRundzie(dron, combat = _walka()) {
   return combat && z?.combatId === combat.id && z?.runda === combat.round ? z : null;
 }
 
-/** Rozłożone drony na oglądanej scenie. */
+/** Dron, który nie odpowiada na kontroler: wrak (U11) albo Wyłączony (§7.4) — powód albo `null`. */
+function _nieOdpowiada(dron) {
+  if (jestWrakiem(dron)) return `${dron.name} to wrak.`;
+  if (dron.statuses?.has("wylaczony")) return `${dron.name} jest wyłączony — nie odpowiada na kontroler.`;
+  return null;
+}
+
+/** Rozłożone drony na oglądanej scenie, które odpowiadają na kontroler. */
 function _dronyNaScenie() {
   const out = [];
   for (const t of canvas?.scene?.tokens ?? []) {
     const a = t.actorLink ? game.actors.get(t.actorId) : null;
-    if (a && jestDronem(a) && !out.includes(a)) out.push(a);
+    if (a && jestDronem(a) && !_nieOdpowiada(a) && !out.includes(a)) out.push(a);
   }
   return out;
 }
@@ -159,11 +167,13 @@ export async function aktywuj(kontroler, tryb, { dron = null } = {}) {
   if (tryb === "Z" && combat) return ui.notifications.warn("W walce sterujesz Komendą [B] albo Steruj [A]."), null;
   if (!(await _wRece(kontroler))) return null;
   if (dron) {
+    const nie = _nieOdpowiada(dron);
+    if (nie) return ui.notifications.warn(nie), null;
     const s = _sygnal(dron, operator, kontroler);
     if (s?.utracony) return ui.notifications.warn(_bezSygnalu(s)), null;
   } else {
     const drony = _dronyNaScenie();
-    if (!drony.length) return ui.notifications.warn("Na tej scenie nie stoi żaden rozłożony dron."), null;
+    if (!drony.length) return ui.notifications.warn("Na tej scenie nie stoi żaden rozłożony, działający dron."), null;
     const sygnaly = drony.map(d => ({ d, s: _sygnal(d, operator, kontroler) }));
     const wZasiegu = sygnaly.filter(x => !x.s?.utracony).map(x => x.d);
     if (!wZasiegu.length) {

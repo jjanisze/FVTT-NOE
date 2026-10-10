@@ -16,6 +16,10 @@
  *   Test bez kosztu i czasu. Teraz wszystkie wołają `oknoNaprawy`, a stare funkcje zostają
  *   **skutkiem** udanej naprawy (`clearDamage`, `repairWeapon`).
  *
+ * **Rozszerzenia** (bez importu w drugą stronę): `zarejestrujNaprawe({ test, okno, skutek })` — przedmiot z własnym
+ * oknem i skutkiem naprawy, np. uchwyt drona (`actors/drony-naprawa.mjs`: awarie z częściami wg tabeli WKK,
+ * PLAN_m3_towarzysze.md §7.11). Przepis może nieść gotowe części (`surowce`) i dane dla skutku (`zrodlo`).
+ *
  * **Wytrzymałość pancerzy** (opcjonalne, s. 115, D18): ustawienie świata, domyślnie wyłączone.
  * Trafienie krytyczne w postać w pancerzu — TT pancerza −1 (licznik na przedmiocie, zdejmowany
  * w danych pochodnych). Naprawa: MK = 10% ceny × utracona TT, 1 / 5 / 10 h na punkt.
@@ -41,6 +45,23 @@ const USTAWIENIE = "wytrzymaloscPancerzy";
 const FLAG_PANCERZ = "wytrzymalosc"; // na pancerzu: { utracone: n }
 const DIE_CHAIN = [12, 10, 8, 6, 4, 1];
 const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
+
+/* -------------------------------------------- */
+/*  Rozszerzenia                                 */
+/* -------------------------------------------- */
+
+/** @type {{test: (item: Item) => boolean, okno?: Function, skutek?: Function}[]} */
+const _rozszerzenia = [];
+
+/**
+ * Przedmiot z własną naprawą: `okno(actor, item)` zamiast okna naprawy, `skutek(item, przepis)` zamiast skutku
+ * (zwraca opis do czatu). Pierwsze pasujące wygrywa.
+ */
+export function zarejestrujNaprawe(r) {
+  _rozszerzenia.push(r);
+}
+
+const _rozszerzenie = item => _rozszerzenia.find(r => { try { return r.test(item); } catch { return false; } }) ?? null;
 
 /* -------------------------------------------- */
 /*  Co i jak naprawiać                          */
@@ -132,13 +153,17 @@ export async function rzucCzas(stopien) {
  * Przepis naprawy (snapshot Roboty): ST, koszt i czas z tabeli (albo z reguły pancerza).
  * @param {Item} item
  * @param {string} stopien  klucz `NAPRAWA` albo „pancerz”
- * @param {{minuty: number, narzedzia: string}} o
+ * @param {{minuty: number, narzedzia: string, surowce?: Record<string, number>|null, zrodlo?: object}} o
+ *   `surowce` — gotowe części zamiast % ceny; `zrodlo` — dane dla skutku z rozszerzenia (dokłada się do `zrodlo`)
  */
-export async function przepisNaprawy(item, stopien, { minuty, narzedzia }) {
+export async function przepisNaprawy(item, stopien, { minuty, narzedzia, surowce: czesci = null, zrodlo = {}, nazwa = null }) {
   const cena = Number(item.system?.price?.value) || 0;
   let surowce;
   let st;
-  if (stopien === "pancerz") {
+  if (czesci) {
+    surowce = Object.entries(czesci).filter(([, gb]) => gb > 0).map(([k, gb]) => ({ typy: [k], gb }));
+    st = NAPRAWA[stopien].st;
+  } else if (stopien === "pancerz") {
     const n = naprawaPancerza(cena, utraconaTT(item), item.system?.type?.value);
     surowce = [{ typy: ["MK"], gb: n.surowce.MK }];
     st = NAPRAWA.troche.st; // „łatanie pancerza” to przykład Trochę roboty (s. 146)
@@ -147,8 +172,8 @@ export async function przepisNaprawy(item, stopien, { minuty, narzedzia }) {
     st = NAPRAWA[stopien].st;
   }
   return {
-    id: `naprawa/${item.id}/${stopien}`,
-    nazwa: `Naprawa: ${item.name}`,
+    id: `naprawa/${item.id}/${stopien}${zrodlo.awaria ? `/awaria-${zrodlo.awaria}` : ""}`,
+    nazwa: nazwa ?? `Naprawa: ${item.name}`,
     wynik: { typ: "naprawa", ref: null, ilosc: 1 },
     jednorazowy: false,
     cena,
@@ -159,7 +184,7 @@ export async function przepisNaprawy(item, stopien, { minuty, narzedzia }) {
     narzedzia: toolExprString(parseToolExpr(narzedzia)),
     tagi: await _tagi(item),
     profesja: null,
-    zrodlo: { naprawa: stopien }
+    zrodlo: { ...zrodlo, naprawa: stopien }
   };
 }
 
@@ -167,9 +192,15 @@ export async function przepisNaprawy(item, stopien, { minuty, narzedzia }) {
 /*  Skutek naprawy                              */
 /* -------------------------------------------- */
 
-/** Co naprawa faktycznie zmienia na przedmiocie. Zwraca opis do czatu. */
-export async function napraw(item) {
+/**
+ * Co naprawa faktycznie zmienia na przedmiocie. Zwraca opis do czatu.
+ * @param {Item} item
+ * @param {object} [przepis]  przepis Roboty (rozszerzenia czytają `zrodlo`)
+ */
+export async function napraw(item, przepis = null) {
   if (!item) return "przedmiotu już nie ma";
+  const r = _rozszerzenie(item);
+  if (r?.skutek) return r.skutek(item, przepis);
   if (_jestPalna(item) && isDamaged(item)) { await clearDamage(item, { chat: false }); return "broń palna sprawna"; }
   if (isMeleeWeapon(item) && getDegradationState(item).originalDenomination) {
     const orig = getDegradationState(item).originalDenomination;
@@ -192,9 +223,11 @@ export async function napraw(item) {
  * Naprawa: Drobnostka od razu (Test teraz), reszta jako Robota `rodzaj: "naprawa"`.
  * @param {Actor} actor   kto naprawia
  * @param {Item} item     co
- * @param {{stopien?: string, narzedzia?: string, mimoBrakow?: boolean, holder?: Actor}} [o]
+ * @param {{stopien?: string, narzedzia?: string, mimoBrakow?: boolean, holder?: Actor, surowce?: object, zrodlo?: object,
+ *   nazwa?: string}} [o]  `surowce`, `zrodlo`, `nazwa` — z rozszerzenia (np. awaria drona z częściami WKK)
  */
-export async function rozpocznijNaprawe(actor, item, { stopien = null, narzedzia = null, mimoBrakow = false, holder = actor } = {}) {
+export async function rozpocznijNaprawe(actor, item, { stopien = null, narzedzia = null, mimoBrakow = false, holder = actor,
+  surowce = null, zrodlo = {}, nazwa = null } = {}) {
   const trwa = robotaNaprawyDla(item);
   if (trwa) {
     ui.notifications.warn(`${item.name} jest już w naprawie (${trwa.parent?.name ?? "?"}) — dokończ tamtą Robotę.`);
@@ -205,7 +238,7 @@ export async function rozpocznijNaprawe(actor, item, { stopien = null, narzedzia
   if (stopien !== "drobnostka") {
     const { minuty, roll } = await rzucCzas(stopien === "pancerz" ? "troche" : stopien);
     const pancerzMin = stopien === "pancerz" ? naprawaPancerza(0, utraconaTT(item), item.system?.type?.value).minuty : null;
-    const p = await przepisNaprawy(item, stopien, { minuty: pancerzMin ?? minuty, narzedzia });
+    const p = await przepisNaprawy(item, stopien, { minuty: pancerzMin ?? minuty, narzedzia, surowce, zrodlo, nazwa });
     const robota = await start(actor, p, { holder, mimoBrakow, rodzaj: "naprawa", cel: item.uuid, img: item.img });
     if (robota && pancerzMin == null) {
       await ChatMessage.create({
@@ -220,7 +253,7 @@ export async function rozpocznijNaprawe(actor, item, { stopien = null, narzedzia
   }
 
   // Drobnostka: od ręki — Test teraz, surowce tylko przy sukcesie (porażka: czas przepada, L15).
-  const p = await przepisNaprawy(item, "drobnostka", { minuty: 0, narzedzia });
+  const p = await przepisNaprawy(item, "drobnostka", { minuty: 0, narzedzia, surowce, zrodlo, nazwa });
   const ctx = kontekstWykonawcy(actor);
   const ocena = ocenNarzedzia(actor, p, { ctx });
   if (!ocena.ok && !mimoBrakow) {
@@ -241,7 +274,7 @@ export async function rozpocznijNaprawe(actor, item, { stopien = null, narzedzia
   let skutek = "";
   if (ok) {
     await takeManySurowce(actor, alok.przydzial);
-    skutek = await napraw(item);
+    skutek = await napraw(item, p);
   }
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor }), rolls: [czasRoll],
@@ -262,6 +295,8 @@ export async function rozpocznijNaprawe(actor, item, { stopien = null, narzedzia
 export async function oknoNaprawy(actor, item) {
   actor ??= item?.actor;
   if (!actor || !item) return null;
+  const r = _rozszerzenie(item);
+  if (r?.okno) return r.okno(actor, item);
   const stan = stanNaprawy(item);
   const narz0 = await narzedziaNaprawy(item);
   const cena = Number(item.system?.price?.value) || 0;
@@ -371,6 +406,7 @@ function _onHeaderControls(app, controls) {
 }
 
 export const naprawaApi = Object.freeze({
+  zarejestrujNaprawe,
   okno: oknoNaprawy, rozpocznij: rozpocznijNaprawe, stan: stanNaprawy, napraw, narzedzia: narzedziaNaprawy,
   utraconaTT, wytrzymalosc: wytrzymaloscWlaczona, doNaprawy, robotaDla: robotaNaprawyDla
 });

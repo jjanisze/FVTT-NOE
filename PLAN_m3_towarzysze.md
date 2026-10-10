@@ -1372,4 +1372,28 @@ cały Quench 1038/1038.
 - **Harness:** kopia modułu w piaskownicy to dowiązania folderów najwyższego poziomu z chwili `fvtt sandbox:init` —
   nowy folder (`fonts/`) wymaga ponownego `sandbox:init` (dokłada brakujące; AGENTS.md).
 
+**2026-10-10 — E9 zrobione (naprawy i wrak).** `actors/drony-naprawa.mjs`: **Napraw PW (1 h)** z uchwytu — 2k6 + mod.
+INT naprawiającego (RAW), narzędzia z przepisu Hakerstwa (brak — ⚠ i przeklikanie), PW od razu, godzinę przesuwa MG
+przyciskiem; w Postoju zajęcie „Naprawa dronów” w budżecie pracy. **Napraw awarię** — NOE: karta MG z [Naprawione] i
+stopniami naprawy M2; WKK: okno z planem z tabeli §7.11 i Robota naprawy z konkretnymi częściami (stopień wyżej przy PW
+≤ ½), po ukończeniu awaria znika przez przekaźnik MG. `combat/maszyny.mjs`: `aktywneAwarie`, `naprawAwarie` (19 — przyczyna
+Wyłączenia). **Wrak** (U11): dron „martwy” — uchwyt „Wrak drona (…)”, bez rozłożenia, napraw i sterowania; złożyć i nieść
+można. `production/naprawa.mjs` dostał rozszerzenia (`zarejestrujNaprawe`: własne okno i skutek, przepis z częściami) —
+nagłówkowe „Napraw…” na uchwycie prowadzi do naprawy awarii. Quench `drony` 76, e2e `dron` z naprawą PW, Robotą naprawy
+pod Kobaltem i kartą MG pod NOE; cały Quench 1045/1045.
+
+- **Rozstrzygnięcia z wdrożenia (do weta MG):**
+  - *Naprawia posiadacz uchwytu* — aktywność jest na uchwycie, więc inna postać naprawia po przekazaniu uchwytu (RAI
+    „każdy z narzędziami” zostaje).
+  - *Pod NOE stopnie M2 liczą koszt z ceny uchwytu* (70 / 90 gb — D21), jak każda naprawa M2; MG może zamiast tego
+    kliknąć [Naprawione].
+  - *Jedna Robota naprawy na drona naraz* (blokada M2 „już w naprawie”) — awarie naprawia się po kolei.
+  - *Dron Wyłączony albo wrak nie odpowiada na kontroler:* wybór drona ich nie pokazuje, wskazany — komunikat (wcześniej
+    sesja zaczynała się i po chwili kończyła).
+- **Błąd z E7c naprawiony:** rzut awarii z [Zastosuj] miał być szeptem do MG, ale `Roll#toMessage` nakłada tryb
+  wiadomości z ustawień i nadpisywał `whisper` — gracz widział kartę MG. Teraz `messageMode: "gm"`; e2e sprawdza, że
+  treść nie jest dla gracza (szeptane rzuty są w v14 `visible`, z zakrytą treścią).
+- **Aktywności dokładane do starych uchwytów** muszą mieć pełne dane jak `Item5e#createActivity` — częściowe przy
+  aktualizacji nie przechodzą walidacji schematu (przy tworzeniu przedmiotu domyślne dokłada schemat).
+
 *(dalej etapy dopisują tu rozstrzygnięcia z wdrożenia, jak w `PLAN_m1_walka.md` §11)*

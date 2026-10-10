@@ -20,6 +20,8 @@
  *     przeciągnięcie przenosi (utworzenie u celu z opcją ruchu, potem usunięcie źródła), „Duplikuj” jest
  *     wyłączone, drugi egzemplarz odrzuca `preCreateItem`, ilość zawsze 1, kopia aktora — bez uchwytów.
  *     Własność drona idzie za posiadaczem: gracze-właściciele posiadacza są właścicielami drona.
+ *   - **Wrak (U11, E9):** dron zniszczony (status „martwy” po karcie „Śmierć”) — uchwyt to „Wrak drona”: da się go
+ *     złożyć i nieść, nie da się rozłożyć ani naprawić; złom i surowce rozstrzyga MG (M5). Stan wynika z drona.
  */
 
 import { RODZAJE } from "../config/towarzysze-data.mjs";
@@ -41,6 +43,8 @@ const FOLDER = "Drony";
 export const AKT_ROZLOZ = "neuroDronRozloz0";
 export const AKT_ZLOZ = "neuroDronZloz000";
 export const AKT_AKUMULATOR = "neuroDronAkumul0";
+export const AKT_NAPRAW_PW = "neuroDronNaprawa";
+export const AKT_NAPRAW_AWARIE = "neuroDronAwaria0";
 /** Zatrzask aktywacji [A]/[B] na dronie (U20): `{ combatId, runda, tryb, operator }`. */
 export const FLAG_AKTYWACJA = "dronAktywacja";
 /** Reakcja drona [R] w rundzie: `{ combatId, runda, operator }`. */
@@ -132,6 +136,7 @@ export function liniaUruchomienia(dron) {
 /* -------------------------------------------- */
 
 function _nazwaUchwytu(dron, rozlozony) {
+  if (jestWrakiem(dron)) return `Wrak drona (${dron.name})`;
   return `${dron.name}${rozlozony ? " (rozłożony)" : ""}`;
 }
 
@@ -141,7 +146,9 @@ function _opisUchwytu(dron, wpis) {
     + "<p><strong>Rozłóż [A]</strong> — postaw żeton drona obok siebie. <strong>Złóż [A]</strong> — dron musi stać obok "
     + "(1,5 m). Uchwyt jest jeden — przeciągnięcie na inną kartę przenosi drona razem z nim.</p>"
     + `<p><strong>Zasilanie:</strong> akumulator 24 V — ${wpis.akumulatorGodzin} h pracy rozłożonego drona (s. 83). `
-    + "<strong>Włóż akumulator [A]</strong> — świeży z ekwipunku do gniazda, stary wraca z resztą ładunku.</p>";
+    + "<strong>Włóż akumulator [A]</strong> — świeży z ekwipunku do gniazda, stary wraca z resztą ładunku.</p>"
+    + "<p><strong>Napraw PW (1 h)</strong> — 2k6 + mod. INT naprawiającego, narzędzia hakera i elektronika (s. 83). "
+    + "<strong>Napraw awarię</strong> — skutki z Tabeli awarii, które trwają do naprawy.</p>";
 }
 
 function _aktywnosc(id, name, img, sort, chatFlavor) {
@@ -149,6 +156,16 @@ function _aktywnosc(id, name, img, sort, chatFlavor) {
     _id: id, type: "utility", name, img, sort,
     activation: { type: "action", value: 1, condition: "", override: false },
     description: { chatFlavor }
+  };
+}
+
+/** Aktywności naprawy uchwytu (E9) — także dokładane do uchwytów sprzed E9 (`_synchronizuj`). */
+export function aktywnosciNaprawy() {
+  const a = _aktywnosc(AKT_NAPRAW_PW, "Napraw PW (1 h)", `modules/${MODULE_ID}/icons/abilities/naprawianie.svg`, 400000, "Godzina pracy przy dronie: 2k6 + mod. INT PW.");
+  a.activation = { type: "hour", value: 1, condition: "", override: false };
+  return {
+    [AKT_NAPRAW_PW]: a,
+    [AKT_NAPRAW_AWARIE]: _aktywnosc(AKT_NAPRAW_AWARIE, "Napraw awarię", "icons/svg/hazard.svg", 500000, "Naprawa skutku z Tabeli awarii maszyn.")
   };
 }
 
@@ -170,7 +187,8 @@ export function daneUchwytu(dron, { rozlozony = false } = {}) {
       activities: {
         [AKT_ROZLOZ]: _aktywnosc(AKT_ROZLOZ, "Rozłóż", "icons/svg/upgrade.svg", 100000, "Dron staje na ziemi."),
         [AKT_ZLOZ]: _aktywnosc(AKT_ZLOZ, "Złóż", "icons/svg/downgrade.svg", 200000, "Dron wraca do ekwipunku."),
-        [AKT_AKUMULATOR]: _aktywnosc(AKT_AKUMULATOR, "Włóż akumulator", "icons/svg/lightning.svg", 300000, "Świeży akumulator w gnieździe drona.")
+        [AKT_AKUMULATOR]: _aktywnosc(AKT_AKUMULATOR, "Włóż akumulator", "icons/svg/lightning.svg", 300000, "Świeży akumulator w gnieździe drona."),
+        ...aktywnosciNaprawy()
       }
     },
     flags: { [MODULE_ID]: {
@@ -479,6 +497,10 @@ function _onPreUseActivity(activity) {
   if (![AKT_ROZLOZ, AKT_ZLOZ].includes(activity?.id)) return;
   const item = activity.actor?.items.get(activity.item?.id) ?? activity.item;
   if (!jestUchwytem(item)) return;
+  if (activity.id === AKT_ROZLOZ && jestWrakiem(dronUchwytu(item))) {
+    ui.notifications.warn(`${item.name}: wrak nie działa — złom i surowce rozstrzyga MG.`);
+    return false;
+  }
   // Aktywność jest tylko przyciskiem: natywna karta i zużycie nie mają tu nic do zrobienia.
   (activity.id === AKT_ROZLOZ ? rozloz(item) : zloz(item))
     .catch(err => console.error(`${MODULE_ID} | ${activity.name} drona`, err));
@@ -488,6 +510,11 @@ function _onPreUseActivity(activity) {
 /* -------------------------------------------- */
 /*  Uchwyt za żetonami i posiadaczem (aktywny MG) */
 /* -------------------------------------------- */
+
+/** Czy dron jest wrakiem (U11): zniszczony — status „martwy” po karcie „Śmierć”. */
+export function jestWrakiem(dron) {
+  return !!dron?.statuses?.has("dead");
+}
 
 /** Uchwyt zgodny z dronem: stan z żetonów (U12), nazwa i obrazek drona. Pisze tylko różnice. */
 async function _synchronizuj(dron) {
@@ -502,6 +529,14 @@ async function _synchronizuj(dron) {
   if (Number(u.system.weight?.value) !== waga) zmiany["system.weight.value"] = waga;
   const nazwa = _nazwaUchwytu(dron, rozlozony);
   if (u.name !== nazwa) zmiany.name = nazwa;
+  if (!!uchwyt(u).wrak !== jestWrakiem(dron)) zmiany[`flags.${MODULE_ID}.${FLAG_UCHWYT}.wrak`] = jestWrakiem(dron);
+  for (const [id, dane] of Object.entries(aktywnosciNaprawy())) {
+    if (u.system.activities?.get?.(id)) continue;
+    // Pełne dane jak `Item5e#createActivity` — częściowe przy aktualizacji nie przechodzą walidacji (przy tworzeniu
+    // przedmiotu wartości domyślne dokłada schemat).
+    const cls = CONFIG.DND5E.activityTypes[dane.type]?.documentClass;
+    if (cls) zmiany[`system.activities.${id}`] = new cls(foundry.utils.deepClone(dane), { parent: u }).toObject();
+  }
   if (u.img !== dron.img) zmiany.img = dron.img;
   if (Object.keys(zmiany).length) await u.update(zmiany);
 }
@@ -646,6 +681,12 @@ export function registerDrony() {
   });
   Hooks.on("createToken", poZetonie);
   Hooks.on("deleteToken", poZetonie);
+  // Wrak (U11): status „martwy” na dronie przychodzi i odchodzi jako efekt.
+  const poEfekcie = _jakoMG(effect => {
+    if (effect.parent instanceof Actor && jestDronem(effect.parent) && effect.statuses?.has("dead")) return _synchronizuj(effect.parent);
+  });
+  Hooks.on("createActiveEffect", poEfekcie);
+  Hooks.on("deleteActiveEffect", poEfekcie);
   Hooks.on("deleteScene", _jakoMG(async () => {
     for (const a of game.actors) if (jestDronem(a)) await _synchronizuj(a);
   }));
@@ -665,6 +706,6 @@ export function registerDrony() {
 }
 
 export const dronyApi = Object.freeze({
-  utworzDrona, zbudujDrona, rozloz, zloz, przeniesUchwyt, prosbaDoMG,
+  utworzDrona, zbudujDrona, rozloz, zloz, przeniesUchwyt, prosbaDoMG, jestWrakiem,
   uchwyt, uchwytDrona, dronUchwytu, posiadaczDrona, dronyPosiadacza, zetonyDrona, jestDronem, liniaUruchomienia
 });

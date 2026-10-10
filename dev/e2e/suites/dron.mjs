@@ -29,6 +29,10 @@
  *  - E7c: a critical hit on the drone → the GM's failure card → k20 (forced 13) → [Zastosuj] → TT −2 until repair
  *    (D10). The world clock moves 30 min → the walking drone's battery is at 50% (U15). 0 PW → Wyłączony, not
  *    dead (§7.4) — the player sees the status.
+ *  - E9, repairs (§7.11): Napraw PW (1 h) on the handle — no hacker's tools, so "Brakuje narzędzi" first — 2k6 + INT
+ *    PW, and above 0 the drone works again (§7.4). Napraw awarię under Kolor Kobaltu (the test worlds' default): the
+ *    parts window → a repair Robota for TT −2 with 5 MK, 5 CZ (the table) → finished → TT back. Under NOE: the
+ *    GM's card → [Naprawione] → the blinding is gone.
  *  - [Złóż] → the token is gone, the handle is folded again, 25 kg, no operator.
  */
 
@@ -226,7 +230,7 @@ async function awaria({ k20 }) {
     await window.__e2e.clickChat(rzut.id, ".neuro-failure-apply");
     const efekt = await window.__e2e.until(() => dron.effects.find(e => e.flags?.[MOD]?.awaria === rzut.flags[MOD].awariaRzut.pozycja),
       { message: "the failure effect" });
-    return { pozycja: rzut.flags[MOD].awariaRzut.pozycja, efekt: efekt.name, ttPrzed: tt, ttPo: dron.system.attributes.ac.value };
+    return { pozycja: rzut.flags[MOD].awariaRzut.pozycja, efekt: efekt.name, ttPrzed: tt, ttPo: dron.system.attributes.ac.value, rzut: rzut.id };
   } finally {
     window.__e2e.restoreDice();
   }
@@ -292,6 +296,27 @@ function wlasnosc({ dronId, user }) {
   const d = game.actors.get(dronId);
   const u = game.users.getName(user);
   return { owner: d.testUserPermission(u, "OWNER"), nadane: d.flags[MOD]?.dronNadane?.[u.id] ?? null };
+}
+
+/** Player: a handle activity the way the sheet runs it; optional "Brakuje narzędzi" answer. */
+async function aktywnoscUchwytu({ id, narzedzia = null }) {
+  const MOD = "neuroshima-2026-overrides";
+  const u = game.user.character.items.find(i => i.flags?.[MOD]?.dron?.aktor);
+  u.system.activities.get(id).use();
+  if (narzedzia) await window.__e2e.clickDialog({ title: "Brakuje narzędzi" }, narzedzia);
+  return true;
+}
+
+/** Player: in the WKK parts window tick "mimo braków" (no hacker's tools) and pick failure `pozycja`. */
+async function oknoNaprawyWKK({ pozycja }) {
+  const app = await window.__e2e.until(() => [...foundry.applications.instances.values()]
+    .find(a => a.rendered && String(a.options?.window?.title ?? "").startsWith("Naprawa awarii")), { message: "the parts window" });
+  const tekst = app.element.textContent.replace(/\s+/g, " ").trim();
+  app.element.querySelector(`input[name="pozycja"][value="${pozycja}"]`).checked = true;
+  const mimo = app.element.querySelector('input[name="mimoBrakow"]');
+  if (mimo) mimo.checked = true;
+  app.element.querySelector('[data-action="ok"]').click();
+  return { tekst };
 }
 
 export default {
@@ -603,6 +628,9 @@ export default {
       t.equal(r.pozycja, 13, "failure entry");
       t.equal(r.ttPo, r.ttPrzed - 2, "TT −2");
       t.assert(/Awaria: pancerz/.test(r.efekt), "effect named after the failure", r);
+      // Whispered rolls stay `visible` in v14 (a "rolled privately" placeholder); the card itself is the content.
+      const widzi = await p1.eval((id) => game.messages.get(id)?.isContentVisible ?? false, r.rzut);
+      t.equal(widzi, false, "the failure roll with [Zastosuj] is the GM's (whisper), not the player's");
     });
 
     await t.step("World clock +30 min → the walking drone's battery is at 50% (U15)", async () => {
@@ -635,6 +663,74 @@ export default {
       const z = await p1.eval(zasilanie);
       t.equal(z.pracuje, false, "a switched-off drone draws no power");
       await t.screenshot("Gracz 1", "dron wyłączony");
+    });
+
+    await t.step("Napraw PW (1 h): no tools → \"Brakuje narzędzi\" → 2k6 + INT; above 0 PW the drone works again (§7.4)", async () => {
+      await p1.eval(aktywnoscUchwytu, { id: "neuroDronNaprawa", narzedzia: "yes" });
+      const r = await t.waitFor(p1, (id) => {
+        const MOD = "neuroshima-2026-overrides";
+        const m = game.messages.contents.findLast(x => x.flags?.[MOD]?.dronNaprawaPW?.dron?.endsWith(id));
+        const d = game.actors.get(id);
+        return m && !d.statuses.has("wylaczony") ? { przyrost: m.flags[MOD].dronNaprawaPW.przyrost, pw: d.system.attributes.hp.value,
+          czas: m.content.includes('data-neuro-robota="czas"') } : null;
+      }, { args: [dronId], message: "the repair card and the drone back on" });
+      t.assert(r.przyrost >= 3, "2k6 + INT (+1) PW", r);
+      t.equal(r.pw, r.przyrost, "from 0 PW");
+      t.equal(r.czas, true, "the GM's button for the hour");
+      await t.screenshot("Gracz 1", "naprawa PW drona — karta");
+    });
+
+    await t.step("Kolor Kobaltu: Napraw awarię → parts window → repair Robota (TT −2: 5 MK, 5 CZ) → finished → TT back (D25, D28)", async () => {
+      await t.gm.eval(async () => {
+        const pc = game.actors.getName("PC Gracz 1");
+        const { buildSurowiecItemData } = await import("/modules/neuroshima-2026-overrides/scripts/actors/surowce-store.mjs");
+        await pc.createEmbeddedDocuments("Item", [buildSurowiecItemData("MK", 6), buildSurowiecItemData("CZ", 6)]);
+        // Full PW: at half or below the WKK degree goes one step up (§7.11) — keep the table's own row.
+        const MOD = "neuroshima-2026-overrides";
+        const d = fromUuidSync(pc.items.find(i => i.flags?.[MOD]?.dron?.aktor).flags[MOD].dron.aktor);
+        await d.update({ "system.attributes.hp.value": d.system.attributes.hp.max });
+        return game.settings.get(MOD, "kobaltEnabled");
+      });
+      const tt0 = await t.gm.eval((id) => game.actors.get(id).system.attributes.ac.value, dronId);
+      await p1.eval(aktywnoscUchwytu, { id: "neuroDronAwaria0" });
+      const okno = await p1.eval(oknoNaprawyWKK, { pozycja: 13 });
+      t.assert(/13 — pancerz: Trochę roboty: ST 15/.test(okno.tekst), "the table's degree for armour", okno);
+      const robota = await t.waitFor(p1, () => {
+        const MOD = "neuroshima-2026-overrides";
+        const r = game.user.character.items.find(i => i.flags?.[MOD]?.robota?.rodzaj === "naprawa");
+        return r ? { uuid: r.uuid, surowce: r.flags[MOD].robota.przepis.surowce.map(l => `${l.gb} ${l.typy[0]}`).sort(), awaria: r.flags[MOD].robota.przepis.zrodlo.awaria } : null;
+      }, { message: "the repair Robota" });
+      t.equal(JSON.stringify(robota.surowce), JSON.stringify(["5 CZ", "5 MK"]), "parts from the table (walking drone, armour)");
+      t.equal(robota.awaria, 13, "the failure it repairs");
+      await p1.eval(async (uuid) => { await game.neuroshima.produkcja.zakoncz(await fromUuid(uuid), { zrodlo: "bez-testu" }); return true; }, robota.uuid);
+      const tt = await t.waitFor(t.gm, (o) => {
+        const d = game.actors.get(o.id);
+        return d.effects.some(e => e.flags?.["neuroshima-2026-overrides"]?.awaria === 13) ? null : d.system.attributes.ac.value;
+      }, { args: [{ id: dronId }], message: "the failure removed" });
+      t.equal(tt, tt0 + 2, "TT back");
+    });
+
+    await t.step("NOE: Napraw awarię → the GM's card → [Naprawione] → the blinding is gone (D9)", async () => {
+      await t.gm.eval(async (id) => {
+        await game.settings.set("neuroshima-2026-overrides", "kobaltEnabled", false);
+        await game.neuroshima.maszyny.zastosujAwarie(game.actors.get(id), 8);
+        return true;
+      }, dronId);
+      await t.waitFor(p1, (id) => game.actors.get(id).statuses.has("blinded") ? true : null, { args: [dronId], message: "failure 8 on the drone" });
+      try {
+        await p1.eval(aktywnoscUchwytu, { id: "neuroDronAwaria0" });
+        const karta = await t.waitFor(t.gm, () => {
+          const m = game.messages.contents.findLast(x => x.flags?.["neuroshima-2026-overrides"]?.dronNaprawaKarta);
+          return m ? m.id : null;
+        }, { message: "the GM's repair card" });
+        const gracz = await p1.eval((id) => !!document.querySelector(`[data-message-id="${id}"] [data-action="neuroDronNaprawione"]`), karta);
+        t.equal(gracz, false, "the player does not see the GM's buttons");
+        await t.gm.eval(async (id) => { await window.__e2e.clickChat(id, '[data-action="neuroDronNaprawione"]'); return true; }, karta);
+        const ok = await t.waitFor(t.gm, (id) => game.actors.get(id).statuses.has("blinded") ? null : true, { args: [dronId], message: "blinding removed" });
+        t.equal(ok, true, "repaired");
+      } finally {
+        await t.gm.eval(async () => { await game.settings.set("neuroshima-2026-overrides", "kobaltEnabled", true); return true; });
+      }
     });
 
     await t.step("[Złóż] → the token is gone, the handle is folded again (25 kg)", async () => {

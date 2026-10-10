@@ -250,6 +250,38 @@ export async function zastosujAwarie(actor, pozycja) {
   return zrobione;
 }
 
+/**
+ * Awarie trwałe („do czasu naprawy”) na maszynie: efekty z flagą `awaria` (bez przemijających) i 19 jako przyczyna
+ * Wyłączenia. Posortowane po pozycji.
+ * @returns {{pozycja: number, nazwa: string}[]}
+ */
+export function aktywneAwarie(actor) {
+  const poz = new Set();
+  for (const e of actor?.effects ?? []) {
+    const n = Number(e.getFlag(MODULE_ID, FLAG_AWARIA));
+    if (n && !e.getFlag(MODULE_ID, FLAG_CZASOWA)) poz.add(n);
+  }
+  if (przyczynyWylaczenia(actor).includes("awaria")) poz.add(19);
+  return [...poz].sort((a, b) => a - b).map(pozycja => ({ pozycja, nazwa: NAZWY[pozycja] ?? String(pozycja) }));
+}
+
+/**
+ * Naprawia awarię: zdejmuje jej efekty, a 19 — przyczynę Wyłączenia (PLAN_m3_towarzysze.md §7.11). Tylko MG.
+ * @returns {Promise<boolean>} czy coś zdjął
+ */
+export async function naprawAwarie(actor, pozycja) {
+  if (!game.user.isGM || !actor) return false;
+  const ids = actor.effects.filter(e => Number(e.getFlag(MODULE_ID, FLAG_AWARIA)) === Number(pozycja)).map(e => e.id);
+  if (ids.length) await actor.deleteEmbeddedDocuments("ActiveEffect", ids);
+  const wl = Number(pozycja) === 19 && przyczynyWylaczenia(actor).includes("awaria") ? await wlacz(actor, "awaria") || true : false;
+  return ids.length > 0 || wl;
+}
+
+/** Nazwa pozycji Tabeli awarii (krótka, jak na efekcie). */
+export function nazwaAwarii(pozycja) {
+  return NAZWY[pozycja] ?? String(pozycja);
+}
+
 /** Pozycja po pominięciach dla rzutu k20 na tej maszynie. */
 export function awariaMaszyny(actor, k20) {
   return pozycjaAwarii(k20, cechyMaszyny(actor));
@@ -267,4 +299,6 @@ export function registerMaszyny() {
   Hooks.on("updateActiveEffect", _onUpdateEffect);
 }
 
-export const maszynyApi = Object.freeze({ wylacz, wlacz, jestWylaczona, przyczynyWylaczenia, cechyMaszyny, zastosujAwarie, awariaMaszyny });
+export const maszynyApi = Object.freeze({
+  wylacz, wlacz, jestWylaczona, przyczynyWylaczenia, cechyMaszyny, zastosujAwarie, awariaMaszyny, aktywneAwarie, naprawAwarie
+});

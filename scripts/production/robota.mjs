@@ -500,7 +500,7 @@ export async function zakoncz(item, { total = null, st = null, zrodlo = "test" }
     // Dynamiczny import: naprawa.mjs sama importuje ten plik (start Robót naprawy).
     const { napraw } = await import("./naprawa.mjs");
     const cel = r.cel?.itemUuid ? await fromUuid(r.cel.itemUuid).catch(() => null) : null;
-    skutekNaprawy = cel ? `${cel.name}: ${await napraw(cel)}` : "przedmiotu już nie ma — surowce poszły na marne";
+    skutekNaprawy = cel ? `${cel.name}: ${await napraw(cel, r.przepis)}` : "przedmiotu już nie ma — surowce poszły na marne";
   } else if (w.typ === "item") {
     utworzone = await utworzWynik(holder, w, {
       znacznik: { kierownikId: r.kierownikId, przepisId: r.przepisId, kiedy: game.time.worldTime }

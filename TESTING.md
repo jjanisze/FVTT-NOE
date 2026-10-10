@@ -177,6 +177,10 @@ stanów, tryb wizji w szablonach, na nowym żetonie i po synchronizacji wizji. E
 liter, RSSI z ikoną, WALK + aktywacja; ekran powitalny „SYSTEM RUSZYL …” znika po 2,5 s; ARMED dla sztyletu gaśnie po
 ataku drona; FAILSAFE w polu trybu. Quench: tekst OSD, RSSI i bateria w znakach czcionki, ostrzeżenia, układ (miganie,
 lista akcji tylko w walce, ARMED i licznik, powitanie, granice siatki), stan z prawdziwego drona, zasób GPL-3 w module.
+E9 w `dron`: Napraw PW (bez narzędzi — okno „Brakuje narzędzi”) z 0 PW → dron znowu działa; pod Kobaltem okno części →
+Robota naprawy TT −2 (5 MK, 5 CZ) → ukończona → TT wraca; pod NOE karta MG → [Naprawione] (gracz nie widzi przycisków MG);
+rzut awarii z [Zastosuj] — treść tylko dla MG. Quench: awarie trwałe i zdejmowanie (19), plan NOE/WKK z tabeli i
+podniesieniem stopnia, Napraw PW, Robota naprawy do końca, karta NOE, wrak, aktywności dokładane do starych uchwytów.
 `clickCanvas` renderuje klatkę po `canvas.pan` (karta w tle nie renderuje sama, a pikery czytają zbuforowane
 przekształcenie warstwy) i wysyła `mouseMoved` bez wciśniętego przycisku — inaczej Chrome potrafi zamienić
 kliknięcie w przeciągnięcie bez `pointerdown`. `pressKey(code)` to prawdziwy klawisz przez CDP (`Escape`, `KeyW`…`KeyD`

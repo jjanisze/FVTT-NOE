@@ -375,9 +375,10 @@ COVERAGE = {
              "18 m w czerni i bieli", "actors/drony-obraz.mjs"),
             ("OSD kamery (czcionka Betaflight): RSSI, nazwa, zasilanie, tryb i aktywacja z ostrzeżeniami, lista akcji, "
              "ARMED z licznikiem naboi, PW", "actors/drony-osd.mjs"),
+            ("naprawa drona z uchwytu: PW 2k6 + mod. INT (1 h, także w Postoju); awarie — karta MG albo części wg tabeli "
+             "WKK; zniszczony dron to wrak", "actors/drony-naprawa.mjs"),
         ],
-        "manual": "Naprawa drona (PW i awarie) — przy stole (następny etap). "
-                  "Biegłość w narzędziach małego hakera zaznacza gracz.",
+        "manual": "Biegłość w narzędziach małego hakera zaznacza gracz.",
     },
     "serwisowanie": {
         "auto": [("schematy elektroniczne w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES)],
