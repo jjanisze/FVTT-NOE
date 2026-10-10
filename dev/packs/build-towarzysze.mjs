@@ -50,6 +50,8 @@ export function szablonyTowarzyszy({ buildNpc, idFor, MODULE_ID }) {
     a.system.attributes.ac = { flat: s.ac, calc: "custom", formula: wpis.wzory.tt };
     a.prototypeToken.name = wpis.nazwa;
     a.prototypeToken.actorLink = true;
+    // Dron patrzy przez „Kamerę drona” (U16) — id z `scripts/actors/drony-obraz.mjs` (`KAMERA_ID`).
+    if (wpis.maszyna) a.prototypeToken.sight = { ...a.prototypeToken.sight, enabled: true, visionMode: "neuroshimaKameraDrona" };
     a.prototypeToken.disposition = 1;
     a.flags[MODULE_ID].towarzyszSzablon = rodzaj;
     for (const item of built.items) {

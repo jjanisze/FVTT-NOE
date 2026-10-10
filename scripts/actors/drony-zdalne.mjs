@@ -13,7 +13,8 @@
  *     patrzyłby przez drona, ilekroć nie kontroluje innego żetonu (rdzeń: „nic nie kontroluje → widzi przez
  *     wszystkie swoje”). MG — bez zmian.
  *   - **Wyjście** — kontrola i widok wracają, dron staje (D35): Esc; utrata sygnału (D24: FAILSAFE, po chwili
- *     cięcie); kontroler poza ręką albo u kogoś innego (D22); operator nieprzytomny; dron Wyłączony; żeton drona
+ *     cięcie); kontroler poza ręką albo u kogoś innego (D22); operator nieprzytomny; dron Wyłączony (obraz gaśnie
+ *     w szum, po chwili wyjście); żeton drona
  *     zniknął albo klient zmienił scenę; przejęcie przez innego operatora (D12); w walce koniec tury operatora
  *     (D35 — aktywacja to jeden ciągły kawałek w jego turze). Klient prosi MG o odebranie nadanej własności.
  *   - **Własność operatora (D12):** nadaną przez moduł (`FLAG_NADANE`) odbiera aktywny MG — na prośbę przy
@@ -149,6 +150,7 @@ export function sygnalDrona(dron, { operator, kontroler = null, scene = canvas?.
  * @property {number} start          `Date.now()` wejścia
  * @property {object|null} sygnal    ostatni `sygnalDrona`
  * @property {number|null} failsafeOd
+ * @property {number|null} wylaczonyOd  dron Wyłączony — sam szum, po chwili wyjście
  */
 
 /** @type {SesjaZdalna|null} */
@@ -210,7 +212,7 @@ export async function wejdz(dron, { operator, kontroler, tryb, znacznik }) {
     dronUuid: dron.uuid, tokenId: tokenDoc.id, sceneId: tokenDoc.parent.id,
     operatorUuid: operator.uuid, kontrolerUuid: kontroler.uuid, tryb, znacznik,
     poprzednie: canvas.tokens.controlled.filter(t => t !== token).map(t => t.id),
-    start: Date.now(), sygnal: null, failsafeOd: null
+    start: Date.now(), sygnal: null, failsafeOd: null, wylaczonyOd: null
   };
   token.control({ releaseOthers: true });
   _odswiezWizje(token);
@@ -292,7 +294,13 @@ function _sprawdz() {
   if (!dron.isOwner || towarzysz(dron)?.operator !== s.operatorUuid || (ster && ster.user !== game.user.id)) {
     return void wyjdz("przejecie");
   }
-  if (dron.statuses?.has("wylaczony")) return void wyjdz("wylaczony");
+  // Wyłączony: obraz gaśnie w szum, po chwili wyjście — jak FAILSAFE (D24).
+  if (dron.statuses?.has("wylaczony")) {
+    s.wylaczonyOd ??= Date.now();
+    if (Date.now() - s.wylaczonyOd >= FAILSAFE_MS) return void wyjdz("wylaczony");
+    return void Hooks.callAll(HOOK_ZDALNY, { stan: "tik", sesja: sesjaZdalna() });
+  }
+  s.wylaczonyOd = null;
   const operator = fromUuidSync(s.operatorUuid);
   if (!operator || operator.statuses?.has("unconscious") || operator.statuses?.has("dead")) return void wyjdz("operator");
   const kontroler = fromUuidSync(s.kontrolerUuid);

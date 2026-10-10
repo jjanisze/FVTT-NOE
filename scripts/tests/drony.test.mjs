@@ -19,6 +19,9 @@
  * tury, właściciel uchwytu nietknięty, złożenie), Przejmij sterowanie poza walką, Esc. Sesję na kliencie gracza
  * (kontrola, bramka wizji, utrata sygnału, wyjścia) sprawdza e2e `dron`.
  *
+ * E8b: cel obrazu kanału FPV (jakość z sygnału; FAILSAFE, Wyłączony, Oślepiony — sam szum), tryb wizji „Kamera drona”
+ * w szablonach, na nowym żetonie i po synchronizacji wizji (tryb bazowy). Obraz na ekranie — zrzuty e2e `dron`.
+ *
  * Synchronizację uchwytu robi aktywny MG — paczka zakłada, że to ta karta (piaskownica albo kampania z
  * jednym MG). Scena, folder „Drony” (gdy go nie było) i wiadomości czatu znikają w `after()`.
  */
@@ -37,6 +40,8 @@ import {
 } from "../items/kontroler.mjs";
 import { sygnalDrona, FLAG_POD_ZIEMIA } from "../actors/drony-zdalne.mjs";
 import { zmianyOdebrania, FLAG_NADANE, FLAG_STEROWANIE } from "../actors/drony.mjs";
+import { KAMERA_ID, celObrazu } from "../actors/drony-obraz.mjs";
+import { syncActorVision } from "../items/vision-sources.mjs";
 import { aktywuj, aktywacjaWRundzie, cechyDrona } from "../actors/drony-sterowanie.mjs";
 import { premiaAtakuDrona } from "../actors/drony-bron.mjs";
 import { familyOf, inHand } from "../actors/doll.mjs";
@@ -786,6 +791,50 @@ export function registerDronyTests(quench) {
         expect(a, "akcja klawisza").to.be.ok;
         expect(a.precedence).to.be.below(CONST.KEYBINDING_PRECEDENCE.DEFERRED);
         expect(a.editable.map(b => b.key)).to.include("Escape");
+      });
+    });
+
+    describe("Obraz kamery drona (E8b: D34, D38, U16)", function () {
+      it("cel obrazu: jakość z sygnału; FAILSAFE, Wyłączony, Oślepiony — sam szum", function () {
+        const st = (...x) => ({ statuses: new Set(x) });
+        expect(celObrazu(null, null)).to.deep.equal({ jakosc: 1, szum: 0 });
+        expect(celObrazu({ sygnal: { jakosc: 0.42, utracony: false } }, st())).to.deep.equal({ jakosc: 0.42, szum: 0 });
+        expect(celObrazu({ sygnal: { jakosc: 0, utracony: true }, failsafeOd: 1 }, st()).szum).to.equal(1);
+        expect(celObrazu({ sygnal: { jakosc: 1 }, wylaczonyOd: 1 }, st("wylaczony")).szum).to.equal(1);
+        expect(celObrazu({ sygnal: { jakosc: 1 } }, st("blinded")), "awaria 8 — optyka").to.deep.equal({ jakosc: 1, szum: 1 });
+      });
+
+      it("tryb „Kamera drona” zarejestrowany jak Widzenie w ciemności (kolor w świetle, czerń i biel w ciemności)", function () {
+        const m = CONFIG.Canvas.visionModes[KAMERA_ID];
+        expect(m, "tryb wizji").to.be.ok;
+        expect(m.label).to.equal("Kamera drona");
+        expect(m.vision.defaults.saturation).to.equal(CONFIG.Canvas.visionModes.darkvision.vision.defaults.saturation);
+      });
+
+      it("szablony dronów w paczce patrzą przez kamerę; zwierzęta — nie", async function () {
+        const docs = await game.packs.get(`${MODULE_ID}.towarzysze`).getDocuments();
+        const tryb = n => docs.find(d => d.getFlag(MODULE_ID, "towarzyszSzablon") === n)?.prototypeToken.sight.visionMode;
+        expect(tryb("dron-kroczacy")).to.equal(KAMERA_ID);
+        expect(tryb("dron-latajacy")).to.equal(KAMERA_ID);
+        expect(tryb("psi-partner")).to.not.equal(KAMERA_ID);
+      });
+
+      it("nowy żeton drona dostaje kamerę, a synchronizacja wizji jej nie zdejmuje (tryb bazowy)", async function () {
+        const scenaK = await scenaTestowa();
+        try {
+          const holder = await scratchActor({ name: `${SCRATCH_PREFIX} Posiadacz kamery` });
+          const wynik = await nowyDron(holder, "dron-kroczacy");
+          // Dron sprzed E8b: prototyp z „basic” — żeton i tak dostaje kamerę.
+          await wynik.dron.update({ "prototypeToken.sight.visionMode": "basic" });
+          await rozloz(uchwytDrona(wynik.dron), { pozycja: { x: 200, y: 200 }, scena: scenaK });
+          const t = () => zetonyDrona(wynik.dron)[0];
+          await waitFor(() => t(), { label: "żeton" });
+          expect(t().sight.visionMode).to.equal(KAMERA_ID);
+          await syncActorVision(wynik.dron);
+          expect(t().sight.visionMode, "po synchronizacji").to.equal(KAMERA_ID);
+        } finally {
+          await scenaK.delete();
+        }
       });
     });
 

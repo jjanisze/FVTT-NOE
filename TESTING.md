@@ -170,7 +170,10 @@ widok; właściciel uchwytu poza trybem nie patrzy przez drona; Przejmij sterowa
 „pod ziemią” (1 / ≈0,5 / ≈0,2) i przez ścianę szopy (zasięg 50 m); dron ponad 300 m → FAILSAFE, potem cięcie; Gracz 2
 przejmuje własnym kontrolerem, jego Esc oddaje własność; wytrącony kontroler kończy sesję. Quench `drony` dokłada sygnał
 z żetonów (wysokość, „pod ziemią”, tory pościgu, brak żetonu operatora, kontroler w plecaku) i nadania własności przez
-prawdziwy przekaźnik (przejęcie, zwolnienie, Reakcja, właściciel uchwytu, złożenie).
+prawdziwy przekaźnik (przejęcie, zwolnienie, Reakcja, właściciel uchwytu, złożenie). E8b w `dron`: żeton drona patrzy przez
+„Kamerę drona”, u operatora w trybie zdalnym jest filtr kanału FPV (zrzuty przy pełnym sygnale, w połowie i na ¾ zasięgu),
+dron oślepiony — sam szum bez końca sesji, FAILSAFE — szum, po wyjściu filtra nie ma. Quench: cel obrazu z sygnału i
+stanów, tryb wizji w szablonach, na nowym żetonie i po synchronizacji wizji.
 `clickCanvas` renderuje klatkę po `canvas.pan` (karta w tle nie renderuje sama, a pikery czytają zbuforowane
 przekształcenie warstwy) i wysyła `mouseMoved` bez wciśniętego przycisku — inaczej Chrome potrafi zamienić
 kliknięcie w przeciągnięcie bez `pointerdown`. `pressKey(code)` to prawdziwy klawisz przez CDP (`Escape`, `KeyW`…`KeyD`

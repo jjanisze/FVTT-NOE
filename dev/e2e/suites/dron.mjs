@@ -21,6 +21,9 @@
  *    (U17). Raised past 300 m → FAILSAFE, then the cut: control and view return (D24). The holder's player does
  *    not see through the drone outside remote mode. Gracz 2 with his own controller takes over (D12): Gracz 1's
  *    session ends, Gracz 2 owns the drone only until his Esc. The controller knocked out of hand ends it (D22).
+ *  - E8b, the image (D34, U16): the drone's token looks through "Kamera drona"; the operator's screen carries the
+ *    analog FPV filter while in remote mode (screenshots at full, half and ¾ range); a blinded drone (failure 8) is
+ *    pure noise without ending the session; the filter is gone after the exit.
  *  - E7c: a critical hit on the drone → the GM's failure card → k20 (forced 13) → [Zastosuj] → TT −2 until repair
  *    (D10). The world clock moves 30 min → the walking drone's battery is at 50% (U15). 0 PW → Wyłączony, not
  *    dead (§7.4) — the player sees the status.
@@ -249,7 +252,8 @@ function zdalny({ dronId }) {
     sygnal: g ? { jakosc: +g.jakosc.toFixed(3), utracony: g.utracony, zasieg: g.zasieg, sciana: g.sciana, podZiemia: g.podZiemia,
       odleglosc: g.odleglosc === null ? null : +g.odleglosc.toFixed(1) } : null,
     kontrolowane: canvas.tokens.controlled.map(t => t.document.actorId === dronId ? "dron" : t.document.actorId === pcId ? "pc" : t.name),
-    wizjaDrona: !!td?.vision?.active, wizjaPC: !!tp?.vision?.active,
+    wizjaDrona: !!td?.vision?.active, wizjaPC: !!tp?.vision?.active, trybWizji: td?.vision?.visionMode?.id ?? null,
+    kanal: game.neuroshima.drony.kanalFpv(),
     pasek: !!document.getElementById("neuro-dron-zdalny"),
     dron: td ? [td.document.x, td.document.y, td.document.elevation] : null,
     owner: !!game.actors.get(dronId)?.isOwner
@@ -413,6 +417,8 @@ export default {
       t.equal(z.wizjaDrona, true, "the player sees through the drone");
       t.equal(z.wizjaPC, false, "not through his PC");
       t.equal(z.pasek, true, "Foundry hint outside the image: Esc — wyjdź");
+      t.equal(z.trybWizji, "neuroshimaKameraDrona", "the drone looks through \"Kamera drona\" (U16)");
+      t.equal(z.kanal?.naScenie, true, "the analog FPV filter is on the operator's screen (D34)");
       await p1.pressKey("KeyD");
       const ruch = await t.waitFor(t.gm, (id) => {
         const td = canvas.scene.tokens.find(x => x.actorId === id);
@@ -430,6 +436,7 @@ export default {
       t.equal(zz.wizjaPC, true, "view back on the PC");
       t.equal(zz.wizjaDrona, false, "no view through the drone");
       t.equal(zz.pasek, false, "hint gone");
+      t.equal(zz.kanal, null, "FPV filter gone");
     });
 
     await t.step("Holder's player outside remote mode: no view through the drone even with nothing controlled", async () => {
@@ -469,11 +476,31 @@ export default {
       const daleko = await sygnalNa({ x: 2900, y: 600 }, 37.5);
       t.assert(daleko.jakosc > 0.15 && daleko.jakosc < 0.25, "¾ of the range: ≈0.2", daleko);
       t.equal(daleko.utracony, false, "still connected");
+      await t.waitFor(p1, () => {
+        const k = game.neuroshima.drony.kanalFpv();
+        return k && Math.abs(k.jakosc - k.cel.jakosc) < 0.02 ? true : null;
+      }, { message: "the image to settle at ¾ range" });
+      await t.screenshot("Gracz 1", "sygnał na trzech czwartych zasięgu");
       // Inside the shed (walls 12–16 × 8–11): the line from the PC crosses its west wall.
       const sciana = await sygnalNa({ x: 1300, y: 900, podZiemia: false }, 14.2);
       t.equal(sciana.sciana, true, "a wall between operator and drone");
       t.equal(sciana.zasieg, 50, "through walls: 50 m");
       t.equal(sciana.podZiemia, false, "scene field off");
+    });
+
+    await t.step("Blinded drone (failure 8, OPTYKA) → pure noise, the session goes on (§7.10)", async () => {
+      await t.gm.eval(przestaw, { x: 500, y: 600 });
+      await t.gm.eval(async (id) => { await game.actors.get(id).toggleStatusEffect("blinded", { active: true }); return true; }, dronId);
+      const k = await t.waitFor(p1, () => {
+        const k = game.neuroshima.drony.kanalFpv();
+        return k && k.szum > 0.98 ? k : null;
+      }, { message: "pure noise on the operator's screen" });
+      t.equal(k.cel.szum, 1, "noise target");
+      await t.screenshot("Gracz 1", "dron oślepiony — sam szum");
+      const z = await p1.eval(zdalny, { dronId });
+      t.equal(z.sesja, true, "blinded is not an exit");
+      await t.gm.eval(async (id) => { await game.actors.get(id).toggleStatusEffect("blinded", { active: false }); return true; }, dronId);
+      await t.waitFor(p1, () => (game.neuroshima.drony.kanalFpv()?.szum ?? 1) < 0.05 ? true : null, { message: "the picture back" });
     });
 
     await t.step("Raised past 300 m → FAILSAFE, then the cut: control and view return to the PC (D24)", async () => {
@@ -483,6 +510,7 @@ export default {
         return s?.failsafeOd ? { utracony: s.sygnal?.utracony } : null;
       }, { message: "FAILSAFE (signal lost, session still on)" });
       t.equal(fs.utracony, true, "signal lost");
+      t.equal((await p1.eval(() => game.neuroshima.drony.kanalFpv()?.cel.szum ?? null)), 1, "FAILSAFE: the image goes to noise");
       const po = await t.waitFor(p1, (id) => {
         if (game.neuroshima.drony.sesjaZdalna()) return null;
         return canvas.tokens.controlled.map(x => x.document.actorId === id ? "dron" : x.document.actorId === game.user.character.id ? "pc" : x.name);

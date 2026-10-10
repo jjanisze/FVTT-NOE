@@ -1327,4 +1327,26 @@ dalej.
   zwalniała z każdą paczką — późne testy (drony, rekonwalescencja) dostawały timeout, kolejne przebiegi bez F5 trwały
   coraz dłużej. `tests/runner.mjs` ukrywa okno na czas przebiegu: cały Quench 136 s → 33 s, bez narastania.
 
+**2026-10-10 — E8b zrobione (obraz kamery).** `actors/drony-obraz.mjs`: tryb wizji **„Kamera drona”** na stałe na
+żetonie drona (U16 — szablony, każdy nowy żeton, tryb bazowy w `items/vision-sources.mjs`) i **analogowy kanał FPV**
+jako filtr ekranu u operatora w trybie zdalnym (D34): ograniczone pasmo (luminancja wąsko, kolor szeroko), przeplot,
+lekki śnieg, winieta; z jakością sygnału więcej śniegu → zanik koloru → rwanie → toczenie z paskiem synchronizacji →
+sam szum. Sam szum przy FAILSAFE, dronie Oślepionym (awaria 8 — sesja trwa) i Wyłączonym (po 1,5 s wyjście). Quench
+`drony` 60, e2e `dron` ze zrzutami przy pełnym sygnale, w połowie i na ¾ zasięgu oraz z dronem oślepionym; cały Quench
+1029/1029. Dalej E8c — OSD z czcionką Betaflight.
+
+- **Rozstrzygnięcia z wdrożenia (do weta MG):**
+  - *Cały wygląd kamery w filtrze ekranu, nie w shaderze tła trybu wizji* — wniosek ze spike'u E0 doprowadzony do
+    końca: shader tła maluje tylko wnętrze wielokąta wizji (18 m), więc w oświetlonej scenie „gorsze oko” urywałoby
+    się na granicy zasięgu. „Kamera drona” to więc kopia rdzennego Widzenia w ciemności (zasięg, kolor w świetle,
+    czerń i biel w ciemności — D38); MG, który sam kontroluje żeton drona, widzi tylko to, bez kanału FPV.
+  - *Wyłączony dron gaśnie w szum, wyjście po 1,5 s* (jak FAILSAFE) zamiast natychmiastowego cięcia.
+  - *Bez przełącznika ruchu* dla toczenia i rwania: to odczyt sygnału, nie ozdoba. Gdyby przy stole przeszkadzało —
+    ustawienie użytkownika, domyślnie włączone.
+- **Tryb bazowy wizji** (`registerBaseVisionMode`): synchronizacja wizji przy każdym postawieniu żetonu wracała do
+  „basic”, gdy żadne urządzenie nie było włączone — zdjęłaby kamerę z każdego drona. Urządzenie (np. termowizor
+  zamontowany na dronie) nadal wygrywa z trybem bazowym.
+- **Szum bez wzoru:** prosty hash GLSL dawał na pełnym szumie powtarzalną jodełkę (widać na zrzucie); hash bez sinusa
+  (Hoskins) i ziarno rozciągnięte w poziomie jak pasmo analogu.
+
 *(dalej etapy dopisują tu rozstrzygnięcia z wdrożenia, jak w `PLAN_m1_walka.md` §11)*

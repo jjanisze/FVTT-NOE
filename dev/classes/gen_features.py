@@ -371,8 +371,10 @@ COVERAGE = {
              "actors/drony-stan.mjs"),
             ("tryb zdalny: sterujesz tylko dronem i widzisz przez niego (WASD, Esc — wyjdź); sygnał z odległości, ścian "
              "i sceny „pod ziemią”; utrata sygnału — widok wraca; Przejmij sterowanie poza walką", "actors/drony-zdalne.mjs"),
+            ("obraz z kamery jak analogowe FPV: śnieg, zanik koloru, rwanie i toczenie ze słabnącym sygnałem; w ciemności "
+             "18 m w czerni i bieli", "actors/drony-obraz.mjs"),
         ],
-        "manual": "Naprawa drona (PW i awarie), obraz kamery z zakłóceniami i OSD — przy stole (następne etapy). "
+        "manual": "Naprawa drona (PW i awarie) i OSD kamery — przy stole (następne etapy). "
                   "Biegłość w narzędziach małego hakera zaznacza gracz.",
     },
     "serwisowanie": {

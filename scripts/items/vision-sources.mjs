@@ -107,6 +107,32 @@ export function registerVisionProvider(fn) {
   _providers.push(fn);
 }
 
+/** @type {((actor: Actor) => string|null)[]} */
+const _baseModes = [];
+
+/**
+ * Register a *base* vision mode: `fn(actor)` returns the `CONFIG.Canvas.visionModes` id this actor's
+ * tokens fall back to when no provider is active, or `null` for "not mine". Without one the fallback
+ * is `"basic"` — which for a drone (PLAN_m3_towarzysze.md U16: its token always looks through
+ * "Kamera drona") would wipe the mode on every token placement, since `createToken` resyncs.
+ * A provider (a device switched on) still wins over the base mode.
+ */
+export function registerBaseVisionMode(fn) {
+  _baseModes.push(fn);
+}
+
+function _baseMode(actor) {
+  for (const fn of _baseModes) {
+    try {
+      const id = fn(actor);
+      if (id) return id;
+    } catch (e) {
+      console.warn(`${MODULE_ID} | vision-sources: base mode threw`, e);
+    }
+  }
+  return "basic";
+}
+
 /** @type {((actor: Actor, keepItem: Item) => Promise<void>)[]} */
 const _offSwitches = [];
 
@@ -175,7 +201,7 @@ async function _doSyncActorVision(actor) {
   for (const doc of actor.getDependentTokens?.({ linked: true }) ?? []) {
     if (!(game.user.isGM || doc.isOwner)) continue;
 
-    const wantMode = desired?.visionMode ?? "basic";
+    const wantMode = desired?.visionMode ?? _baseMode(actor);
     const wantColor = desired?.color ?? null;
     const update = {};
     if (doc.sight?.visionMode !== wantMode) update["sight.visionMode"] = wantMode;
