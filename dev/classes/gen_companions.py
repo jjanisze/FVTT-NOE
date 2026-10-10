@@ -256,6 +256,21 @@ def build(src):
             r["wzory"] = {k: v for k, v in wz.items() if v}
             r["udzwig"] = udzwig(s["features"], where)
             rodzaje[cid] = r
+            if maszyna:
+                # A drone has no INT/MDR/CHA ("–" in the book); dnd5e needs a number — 10, a neutral modifier.
+                abil_vals = {k: (v if v is not None else 10) for k, v in s["abilities"].items()}
+                statbloki[cid] = {
+                    "name": r["nazwa"], "size": s["size"], "creatureType": s["creatureType"],
+                    "ac": ocen(r["wzory"]["tt"]), "initiative": s["initiative"] or 0,
+                    "hp": {"avg": max(1, ocen(r["wzory"]["pwMaks"])), "formula": ""},
+                    "abilities": abil_vals, "skills": s["skills"], "saves": s["saves"],
+                    "immunities": s["immunities"], "conditionImmunities": s["conditionImmunities"],
+                    "senses": s["senses"], "speed": s["speed"],
+                    "carry": {"normal": r["udzwig"]["uzytkowy"], "max": r["udzwig"]["maksymalny"]},
+                    "damageThreshold": r["progi"]["obrazen"], "failureThreshold": r["progi"]["awarii"],
+                    "features": [{**f, "automation": CECHY_AUTOMATYKA.get(f["id"])} for f in s["features"]],
+                    "attacks": [],
+                }
             if not maszyna:
                 ile = max(1, math.floor(REF["wlasciciel"]["poziomKlasy"] * r["kw"]["mnoznik"] + 1e-9))
                 statbloki[cid] = {

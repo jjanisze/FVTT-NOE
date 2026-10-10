@@ -446,6 +446,104 @@ export const STATBLOKI = Object.freeze({
         dropsAs: null
       })
     ])
+  }),
+  "dron-kroczacy": Object.freeze({
+    name: "Dron kroczący",
+    size: "med",
+    creatureType: "maszyna",
+    ac: 15,
+    initiative: 0,
+    hp: Object.freeze({ avg: 30, formula: "" }),
+    abilities: Object.freeze({
+      str: 14,
+      dex: 14,
+      con: 10,
+      int: 10,
+      wis: 10,
+      cha: 10
+    }),
+    skills: Object.freeze({}),
+    saves: Object.freeze({}),
+    immunities: Object.freeze(["psychic", "poison"]),
+    conditionImmunities: Object.freeze(["frightened", "poisoned", "charmed"]),
+    senses: Object.freeze({ darkvision: 18 }),
+    speed: Object.freeze({ walk: 9 }),
+    carry: Object.freeze({ normal: 70, max: 140 }),
+    damageThreshold: 5,
+    failureThreshold: 15,
+    features: Object.freeze([
+      Object.freeze({
+        id: "modyfikacje",
+        name: "Modyfikacje",
+        section: "traits",
+        text: "Dron może mieć zainstalowane liczne urządzenia tj. broń, kamery, oświetlenie czy skomplikowane urządzenia elektroniczne. Dokładne modyfikacje oraz ich koszt, należy ustalić z MG.",
+        automation: null
+      }),
+      Object.freeze({
+        id: "udzwig",
+        name: "Udźwig",
+        section: "traits",
+        text: "Użytkowy: 70 kg. Maksymalny: 140 kg.",
+        automation: null
+      }),
+      Object.freeze({
+        id: "atak",
+        name: "Atak",
+        section: "actions",
+        text: "Dron może wykonać w swojej akcji jeden atak, którego zasięg i obrażenia zależą od zamontowanej broni.",
+        automation: null
+      })
+    ]),
+    attacks: Object.freeze([])
+  }),
+  "dron-latajacy": Object.freeze({
+    name: "Dron latający",
+    size: "sm",
+    creatureType: "maszyna",
+    ac: 15,
+    initiative: 0,
+    hp: Object.freeze({ avg: 15, formula: "" }),
+    abilities: Object.freeze({
+      str: 10,
+      dex: 16,
+      con: 10,
+      int: 10,
+      wis: 10,
+      cha: 10
+    }),
+    skills: Object.freeze({}),
+    saves: Object.freeze({}),
+    immunities: Object.freeze(["psychic", "poison"]),
+    conditionImmunities: Object.freeze(["frightened", "poisoned", "charmed"]),
+    senses: Object.freeze({ darkvision: 18 }),
+    speed: Object.freeze({ fly: 18 }),
+    carry: Object.freeze({ normal: 15, max: 30 }),
+    damageThreshold: null,
+    failureThreshold: 10,
+    features: Object.freeze([
+      Object.freeze({
+        id: "modyfikacje",
+        name: "Modyfikacje",
+        section: "traits",
+        text: "Dron może mieć zainstalowane liczne urządzenia tj. broń, kamery, oświetlenie czy skomplikowane urządzenia elektroniczne. Dokładne modyfikacje oraz ich koszt, należy ustalić z MG.",
+        automation: null
+      }),
+      Object.freeze({
+        id: "udzwig",
+        name: "Udźwig",
+        section: "traits",
+        text: "Użytkowy: 15 kg. Maksymalny: 30 kg.",
+        automation: null
+      }),
+      Object.freeze({
+        id: "atak",
+        name: "Atak",
+        section: "actions",
+        text: "Dron może wykonać w swojej akcji jeden atak, którego zasięg i obrażenia zależą od zamontowanej broni.",
+        automation: null
+      })
+    ]),
+    attacks: Object.freeze([])
   })
 });
 

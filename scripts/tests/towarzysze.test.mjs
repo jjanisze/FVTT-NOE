@@ -196,6 +196,8 @@ export function registerTowarzyszeTests(quench) {
       });
 
       it("krytyk: Stopień dla psa, nie dla drona (F2)", async function () {
+        // `waitFor` czeka do 4 s, a pod obciążeniem pełnego przebiegu hak MG potrafi się spóźnić.
+        this.timeout(6000);
         // Brak zapisu sprawdza się tylko po czasie: hak MG jest asynchroniczny. Dron pierwszy, pies jako
         // świadek, że hak w ogóle działa, potem jeszcze chwila na ewentualny zapis drona.
         await dron.applyDamage(2, { isCritical: true });

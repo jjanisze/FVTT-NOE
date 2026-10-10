@@ -353,8 +353,13 @@ COVERAGE = {
                   "Biegłość w narzędziach małego mechanika zaznacza gracz.",
     },
     "hakerstwo": {
-        "auto": [("schematy hakerskie w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES)],
-        "manual": "Dron wychodzi z produkcji jako karta dla MG, nie aktor; kierowanie, naprawa i zasilanie drona — przy stole. "
+        "auto": [
+            ("schematy hakerskie w zakładce Produkcja: ST, czas, surowce, wymóg narzędzi", _PROFESSION_RECIPES),
+            ("dron z produkcji: aktor-maszyna ze stemplem twórcy (TT i PW z twojej PB i mod. INT w chwili budowy) "
+             "i złożony uchwyt w ekwipunku (25 / 4 kg)", "actors/drony.mjs"),
+            ("Rozłóż [A] / Złóż [A] — żeton drona obok ciebie; uchwyt przenosi się, nie kopiuje", "actors/drony.mjs"),
+        ],
+        "manual": "Kierowanie, naprawa i zasilanie drona — przy stole (następne etapy). "
                   "Biegłość w narzędziach małego hakera zaznacza gracz.",
     },
     "serwisowanie": {

@@ -126,15 +126,25 @@ export class Client {
    */
   async clickCanvas(point) {
     await this.send("Page.bringToFront").catch(() => {});
+    await sleep(150); // a tab just made visible starts its ticker and resizes — let that land first
     const at = await this.eval(p => {
       canvas.pan({ x: p.x, y: p.y });
+      // `pan` only moves the pivot; world transforms follow on the next render, which a hidden tab (every
+      // isolated context but the front one) has not had — and the click arrives before one. Pickers read
+      // `event.getLocalPosition(layer)`, i.e. the layer's cached transform: without this frame the click
+      // landed where the view was before the pan (dnd5e's token placement put a drone one square off).
+      canvas.app.render();
       const c = canvas.clientCoordinatesFromCanvas(p);
       return { x: Math.round(c.x), y: Math.round(c.y), topIsCanvas: document.elementFromPoint(c.x, c.y) === canvas.app.view };
     }, point);
     if (!at.topIsCanvas) throw new AssertionError(`Something covers the canvas at ${JSON.stringify(point)} in ${this.name}'s view.`, at);
-    for (const type of ["mouseMoved", "mousePressed", "mouseReleased"]) {
-      await this.send("Input.dispatchMouseEvent", { type, x: at.x, y: at.y, button: "left", buttons: type === "mousePressed" ? 1 : 0, clickCount: 1 });
-    }
+    // `button` on a `mouseMoved` means "held during the move": "left" there made Chrome treat the press as
+    // part of a drag (a `pointermove` with `buttons: 1`, no `pointerdown`) whenever the two were processed
+    // together — the grenade picker then never heard the click.
+    await this.send("Input.dispatchMouseEvent", { type: "mouseMoved", x: at.x, y: at.y, button: "none", buttons: 0 });
+    await sleep(30);
+    await this.send("Input.dispatchMouseEvent", { type: "mousePressed", x: at.x, y: at.y, button: "left", buttons: 1, clickCount: 1 });
+    await this.send("Input.dispatchMouseEvent", { type: "mouseReleased", x: at.x, y: at.y, button: "left", buttons: 0, clickCount: 1 });
     return at;
   }
 

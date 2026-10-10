@@ -250,7 +250,7 @@ export default {
     await t.step("GM: Cwaniak 3 with Moja prawa ręka, Zwiadowca 3 with Oswajanie zwierząt, primary party", async () => {
       const r = await t.gm.eval(przygotuj);
       t.equal(r.klasaTowarzysz, true, "Towarzysz class in the klasy pack");
-      t.equal(r.szablony, 4, "animal templates in the towarzysze pack");
+      t.equal(r.szablony, 6, "templates in the towarzysze pack (four animals, two drones)");
     });
 
     await t.step("GM [Nowy towarzysz] → Lucky, Prawa ręka: Gracz 2's, Towarzysze folder, party, PB +2, full PW", async () => {

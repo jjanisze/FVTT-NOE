@@ -6,8 +6,10 @@
  *     Zranienia, stany; [Karta], [Komenda] (Partner i zwierzę — U8), [Pokaż żeton]. Właściciel ze
  *     zdolnością, a bez towarzysza: MG widzi [Nowy towarzysz] (narzędzie E4), gracz — podpowiedź szukania
  *     (D30: zajęcie Postoju to M5).
+ *     Drony w ekwipunku (E7a) — ten sam wiersz z [Rozłóż]/[Złóż] zamiast Komendy.
  *   - **Plakietka „Towarzysz: <właściciel>”** w nagłówku karty towarzysza, z dymkiem rozkładu wartości
  *     pochodnych („TT 14 = 12 + PB właściciela 2”); bez właściciela — ostrzeżenie „wartości z szablonu”.
+ *     Dron: „<rodzaj> · twórca X”, w dymku stempel (D23), posiadacz i „System ruszył <data>”.
  *   - Karta właściciela odświeża się, gdy zmienia się towarzysz (PW, stany) — pasek pokazuje jego stan.
  */
 
@@ -19,6 +21,7 @@ import {
 import { getZranienieLvl } from "../combat/zranienie.mjs";
 import { wydajKomende } from "../combat/towarzysze-walka.mjs";
 import { pigulkiKreatora, przyciskOdlacz } from "./towarzysze-tworzenie.mjs";
+import { dronyPosiadacza, posiadaczDrona, uchwytDrona, dronRozlozony, liniaUruchomienia, rozloz, zloz } from "./drony.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
@@ -64,8 +67,9 @@ function _ikonyStanow(actor) {
   return out.join("");
 }
 
-function _wierszTowarzysza(owner, comp) {
+function _wierszTowarzysza(owner, comp, uchwyt = null) {
   const wpis = rodzajTowarzysza(comp);
+  const rozlozony = wpis.maszyna && dronRozlozony(comp);
   const widzi = comp.testUserPermission(game.user, "OBSERVER");
   const hp = comp.system.attributes?.hp ?? {};
   const stopien = getZranienieLvl(comp);
@@ -78,7 +82,7 @@ function _wierszTowarzysza(owner, comp) {
     <img class="neuro-towarzysz-portret" src="${esc(comp.img)}" alt="">
     <div class="neuro-towarzysz-info">
       <div class="neuro-towarzysz-nazwa">${esc(comp.name)}</div>
-      <div class="neuro-towarzysz-rodzaj">${esc(wpis.nazwa)}</div>
+      <div class="neuro-towarzysz-rodzaj">${esc(wpis.nazwa)}${wpis.maszyna ? ` · ${rozlozony ? "rozłożony" : "złożony"}` : ""}</div>
       ${widzi ? `<div class="neuro-towarzysz-pw" data-tooltip="Punkty Wytrzymałości">
         <div class="neuro-towarzysz-pw-pasek is-${poziomPW}" style="--pct: ${pct}%"></div>
         <span>${Number(hp.value) || 0} / ${Number(hp.effectiveMax ?? hp.max) || 0}</span></div>` : ""}
@@ -90,20 +94,26 @@ function _wierszTowarzysza(owner, comp) {
     </div>`;
   const przyciski = document.createElement("div");
   przyciski.className = "neuro-towarzysz-przyciski";
-  przyciski.append(_przycisk("karta", "fa-id-card", "Karta towarzysza", { disabled: !comp.testUserPermission(game.user, "LIMITED") }));
+  przyciski.append(_przycisk("karta", "fa-id-card", wpis.maszyna ? "Karta drona" : "Karta towarzysza",
+    { disabled: !comp.testUserPermission(game.user, "LIMITED") }));
+  if (uchwyt) {
+    przyciski.append(rozlozony
+      ? _przycisk("zloz", "fa-box", "Złóż [A] — dron wraca do ekwipunku (musi stać obok, 1,5 m)", { disabled: !owner.isOwner })
+      : _przycisk("rozloz", "fa-box-open", "Rozłóż [A] — postaw drona obok siebie", { disabled: !owner.isOwner }));
+  }
   if (wpis.tura === TURY.komenda) {
     przyciski.append(_przycisk("komenda", "fa-bullhorn",
       "Komenda [B] — w twojej turze daje towarzyszowi jego turę; bez komendy unika walki (s. 99–100)",
       { disabled: !owner.isOwner }));
   }
-  przyciski.append(_przycisk("zeton", "fa-location-crosshairs", "Pokaż żeton"));
+  if (!wpis.maszyna || rozlozony) przyciski.append(_przycisk("zeton", "fa-location-crosshairs", "Pokaż żeton"));
   // Wąska kolumna paska: przyciski na końcu linii stanów, żeby imię miało całą szerokość.
   row.querySelector(".neuro-towarzysz-stan").append(przyciski);
-  przyciski.addEventListener("click", ev => _onPrzycisk(ev, owner, comp));
+  przyciski.addEventListener("click", ev => _onPrzycisk(ev, owner, comp, uchwyt));
   return row;
 }
 
-async function _onPrzycisk(ev, owner, comp) {
+async function _onPrzycisk(ev, owner, comp, uchwyt) {
   const btn = ev.target.closest("button[data-akcja]");
   if (!btn || btn.disabled) return;
   ev.preventDefault();
@@ -115,6 +125,15 @@ async function _onPrzycisk(ev, owner, comp) {
       btn.disabled = true;
       try {
         await wydajKomende(owner, { zrodlo: rodzajTowarzysza(comp).zrodlo });
+      } finally {
+        btn.disabled = false;
+      }
+      return;
+    case "rozloz":
+    case "zloz":
+      btn.disabled = true;
+      try {
+        await (btn.dataset.akcja === "rozloz" ? rozloz(uchwyt) : zloz(uchwyt));
       } finally {
         btn.disabled = false;
       }
@@ -137,7 +156,8 @@ export function pasekTowarzyszy(owner) {
   if (owner?.type !== "character" || towarzysz(owner)) return null;
   const comps = towarzyszeWlasciciela(owner);
   const braki = _zrodlaBezTowarzysza(owner, comps);
-  if (!comps.length && !braki.length) return null;
+  const drony = dronyPosiadacza(owner);
+  if (!comps.length && !braki.length && !drony.length) return null;
 
   const panel = document.createElement("div");
   panel.className = "neuro-towarzysze-panel";
@@ -145,6 +165,7 @@ export function pasekTowarzyszy(owner) {
   const body = document.createElement("div");
   body.className = "neuro-towarzysze-body";
   for (const c of comps) body.append(_wierszTowarzysza(owner, c));
+  for (const d of drony) body.append(_wierszTowarzysza(owner, d.dron, d.uchwyt));
 
   const nowy = game.neuroshima?.towarzysze?.nowy;
   for (const z of braki) {
@@ -191,10 +212,43 @@ export function rozkladTowarzysza(actor) {
   return linie;
 }
 
+/** Plakietka drona: twórca ze stempla (D23), posiadacz uchwytu, data uruchomienia. */
+function _plakietkaDrona(actor, t, wpis) {
+  const holder = posiadaczDrona(actor);
+  const badge = document.createElement("div");
+  badge.className = "neuro-towarzysz-badge";
+  badge.innerHTML = `<i class="fa-solid fa-microchip" inert></i> <span>${esc(`${wpis.nazwa} · twórca ${t.tworca?.nazwa || "nieznany"}`)}</span>`;
+  const linie = rozkladTowarzysza(actor);
+  if ((daneTowarzysza(actor)?.brak ?? []).includes("operator")) {
+    linie.push("Atak i ST obszarowe liczą się ze Zręczności operatora — teraz drona nikt nie steruje.");
+  }
+  linie.push(holder
+    ? `Uchwyt: ${holder.name} (${uchwytDrona(actor)?.flags?.[MODULE_ID]?.dron?.rozlozony ? "rozłożony" : "złożony"})`
+    : "Bez uchwytu — dron nie jest w niczyim ekwipunku.");
+  const start = liniaUruchomienia(actor);
+  if (start) linie.push(start);
+  badge.setAttribute("data-tooltip", linie.map(esc).join("<br>"));
+  if (holder?.testUserPermission(game.user, "LIMITED")) {
+    badge.classList.add("is-link");
+    badge.addEventListener("click", ev => {
+      ev.preventDefault();
+      holder.sheet?.render(true);
+    });
+  }
+  return badge;
+}
+
 function _plakietka(root, actor) {
   root.querySelectorAll(".neuro-towarzysz-badge, .neuro-kreator").forEach(n => n.remove());
   const t = towarzysz(actor);
   if (!t) return;
+  if (RODZAJE[t.rodzaj].maszyna) {
+    const badge = _plakietkaDrona(actor, t, RODZAJE[t.rodzaj]);
+    const anchor = root.querySelector(".sheet-header .document-name");
+    if (anchor) anchor.after(badge);
+    else root.querySelector(".sheet-header")?.prepend(badge);
+    return;
+  }
   const wl = wlascicielTowarzysza(actor);
   const brak = daneTowarzysza(actor)?.brak ?? [];
   const badge = document.createElement("div");
@@ -242,7 +296,7 @@ const _doOdswiezenia = new Set();
 let _zaplanowane = false;
 
 function _odswiezWlasciciela(actor) {
-  const wl = wlascicielTowarzysza(actor);
+  const wl = wlascicielTowarzysza(actor) ?? posiadaczDrona(actor);
   if (!wl?.sheet?.rendered) return;
   _doOdswiezenia.add(wl);
   if (_zaplanowane) return;

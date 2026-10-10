@@ -52,7 +52,8 @@ function _wlasnosc(owner) {
   return own;
 }
 
-async function _szablon(rodzaj) {
+/** Szablon rodzaju z paczki `towarzysze` (zwierzęta i drony) albo `null`. */
+export async function szablonTowarzysza(rodzaj) {
   const pack = game.packs.get(`${MODULE_ID}.towarzysze`);
   if (!pack) return null;
   const index = await pack.getIndex({ fields: [`flags.${MODULE_ID}.towarzyszSzablon`] });
@@ -81,7 +82,7 @@ export async function utworzTowarzysza(owner, { rodzaj, nazwa = null, zrodlo = n
 
   let data;
   if (wpis.typAktora === "npc") {
-    const szablon = await _szablon(rodzaj);
+    const szablon = await szablonTowarzysza(rodzaj);
     if (!szablon) {
       ui.notifications.error(`Brak szablonu „${wpis.nazwa}” w paczce Towarzysze.`);
       return null;

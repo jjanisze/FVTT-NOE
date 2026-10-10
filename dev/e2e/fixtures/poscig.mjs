@@ -35,7 +35,8 @@ export default async function poscig({ moduleId }) {
   const between = scene.tokens.getName("Między torami");
   await between.update({ x: between.x + 55 }, { animate: false });
   for (const user of players) await user.update({ character: actors.find(a => a.name === "Pojazd 1").id });
-  if (game.paused) game.togglePause(false, { broadcast: true });
+  // Unconditional — see skirmish.mjs: the Welcome tour unpauses the GM's client alone.
+  game.togglePause(false, { broadcast: true });
   await scene.activate();
   return { scene: { id: scene.id, name: scene.name, tokens: scene.tokens.size } };
 }

@@ -1213,4 +1213,30 @@ automatyką); `zdolnosci.resync` w kampanii — tylko Partner Victora. Grafika: 
   są zatwierdzone. Do decyzji MG: zatwierdzić albo odłożyć partię ikon, potem `fvtt packs` + `release:check`.
 - Hakerstwo i Emiter EMP dostaną plakietki w E7 i E10, razem z automatyką.
 
+**2026-10-10 — E7a zrobione (model, produkcja, rozłożenie).** E7 idzie w trzech kawałkach: E7a (ten),
+E7b (Kontrolery i aktywacje), E7c (zasilanie, Wyłączony, Olbrzymie, upadek, awarie). `actors/drony.mjs`: dron =
+aktor-maszyna z szablonu paczki `towarzysze` (dwa nowe szablony — builder bez Stopni, „krew” smar, Próg awarii
+ze statblocku) ze stemplem twórcy (D23) i uchwytem w ekwipunku (25 / 4 kg, 70 / 90 gb — D21). Produkcja:
+ukończona Robota z wynikiem `tabela:dron-*` tworzy oba — u gracza przez przekaźnik MG. Rozłóż [A] / Złóż [A]:
+podgląd żetonu dnd5e (`TokenPlacement`), prośba flagą, aktywny MG tworzy albo usuwa żeton. Pasek u posiadacza
+(wiersz drona z [Rozłóż]/[Złóż]), plakietka drona (twórca, posiadacz, „System ruszył …”), plakietka Hakerstwa.
+Quench `drony` (18), e2e `dron` (produkcja u gracza → pasek → Rozłóż prawdziwym kliknięciem → Złóż).
+
+- **Stan uchwytu wynika z żetonów** (doprecyzowanie U12): rozłożony ⟺ dron ma żeton na którejś scenie. Aktywny
+  MG poprawia uchwyt po każdym utworzeniu i usunięciu żetonu drona — także gdy MG przeciągnie drona z katalogu,
+  skasuje żeton albo całą scenę. Bez tego ręczny ruch MG rozjeżdżał wagę i stan uchwytu z kanwą.
+- **Prośby jako kolejka** (`dronProsby.<nonce>` na aktorze gracza), nie jedna flaga jak we Flarze — `setFlag`
+  scala obiekty, więc druga prośba przed obsłużeniem pierwszej mieszała ich pola.
+- **Własność drona idzie za posiadaczem uchwytu** (przeniesienie zmienia właścicieli). Gracz-właściciel widzi
+  przez żeton drona także poza trybem zdalnym, gdy nie kontroluje innego żetonu — bramka wizji należy do E8
+  (tryb „Kamera drona”).
+- **Pod Kobaltem** Haker buduje drona z przepisu standardowego, który odblokowuje lista profesji — tabela profesji
+  jest wyłączona (`zrodlaDostepu`). Wynik ten sam.
+- **Harness e2e — trzy błędy znalezione przy tej paczce** (`dev/agent/lib/e2e.mjs`, `dev/e2e/fixtures/`):
+  `clickCanvas` klikał tam, gdzie widok był przed `canvas.pan` (karta w tle nie renderuje, a pikery czytają
+  zbuforowane przekształcenie warstwy — dron lądował pole obok); `mouseMoved` z `button: "left"` znaczy „ruch z
+  wciśniętym przyciskiem”, więc Chrome czasem zamieniał kliknięcie w przeciągnięcie bez `pointerdown` (granat w
+  `combat` nie dostawał kliknięcia); powitalny samouczek rdzenia odpauzowuje tylko klienta MG, więc warunek
+  `if (game.paused)` w fixture pomijał prawdziwe odpauzowanie i gracze stali w „Czas stop”.
+
 *(dalej etapy dopisują tu rozstrzygnięcia z wdrożenia, jak w `PLAN_m1_walka.md` §11)*

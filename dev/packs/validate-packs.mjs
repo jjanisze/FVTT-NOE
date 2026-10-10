@@ -255,12 +255,16 @@ for (const a of szablony) {
   if (!wpis) { fail(`towarzysze: ${a.name} bez znanej flagi szablonu`); continue; }
   if (a.system.attributes.ac.calc !== "custom" || a.system.attributes.ac.formula !== wpis.wzory.tt) fail(`towarzysze: ${a.name} — TT nie z formuły właściciela`);
   if (!a.prototypeToken.actorLink) fail(`towarzysze: ${a.name} — żeton niepowiązany`);
-  if (a.flags[MODULE_ID].bestiary?.usesZranienie !== true) fail(`towarzysze: ${a.name} — bez Stopni Zranienia (s. 205)`);
+  if (a.flags[MODULE_ID].bestiary?.usesZranienie !== !wpis.maszyna) fail(`towarzysze: ${a.name} — Stopnie Zranienia: istota tak (s. 205), maszyna nie (s. 214)`);
+  if (wpis.maszyna) {
+    if (a.flags[MODULE_ID].bestiary?.failureThreshold !== wpis.progi.awarii) fail(`towarzysze: ${a.name} — Próg awarii ${a.flags[MODULE_ID].bestiary?.failureThreshold} ≠ ${wpis.progi.awarii}`);
+    continue; // broń drona to modyfikacja — szablon ataku nie ma
+  }
   const ataki = towarzysze.filter(d => !d.prototypeToken && a.items?.includes(d._id))
     .flatMap(d => Object.values(d.system?.activities ?? {})).filter(x => x.type === "attack");
   if (!ataki.length || ataki.some(x => x.attack?.bonus !== wpis.wzory.atak)) fail(`towarzysze: ${a.name} — premia ataku nie z formuły właściciela`);
 }
-notes.push(`towarzysze: klasa ${klasaTowarzysza ? "jest" : "BRAK"}, ${szablony.length} szablonów zwierząt`);
+notes.push(`towarzysze: klasa ${klasaTowarzysza ? "jest" : "BRAK"}, ${szablony.length} szablonów (zwierzęta i drony)`);
 
 notes.push(`features: ${features.length} (uses ${withUses}, activities ${withActivity}, art ${withArt})`);
 notes.push(`sztuczki: ${sztuczki.length} docs; Pochodzenia: ${origins.length}, ich zdolności: ${pochodzenia.length}`);

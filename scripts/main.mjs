@@ -36,6 +36,7 @@ import { registerTowarzyszeWalka, towarzyszeWalkaApi } from "./combat/towarzysze
 import { registerTowarzyszeKarta } from "./actors/towarzysze-karta.mjs";
 import { registerTowarzyszeTworzenie, towarzyszeTworzenieApi } from "./actors/towarzysze-tworzenie.mjs";
 import { migrujTowarzysza } from "./migration/migrate-towarzysze.mjs";
+import { registerDrony, dronyApi } from "./actors/drony.mjs";
 import { registerCharacterDefaults } from "./actors/character-defaults.mjs";
 import { registerClassState } from "./actors/class-state.mjs";
 import { registerAbilityHotbar } from "./actors/ability-hotbar.mjs";
@@ -377,6 +378,8 @@ Hooks.once("init", () => {
   registerTowarzyszeKarta();
   // Narzędzie MG, kreator ludzkiego towarzysza, poziomy za właścicielem, ochrona klasy (PLAN_m3 §7.8).
   registerTowarzyszeTworzenie();
+  // Drony: uchwyt bez klonów, produkcja, Rozłóż/Złóż przez przekaźnik MG (PLAN_m3 §7.9).
+  registerDrony();
   registerSheetShell();
 
   // Vehicle sheet is still stock dnd5e (no Neuroshima subclass) — it's just missing the
@@ -496,6 +499,7 @@ Hooks.once("ready", () => {
   game.neuroshima.umieranie = umieranieApi;
   // Towarzysze i drony (PLAN_m3) — game.neuroshima.towarzysze.wlasciciel(actor), .wartosci(actor), .maStopnieZranienia(actor)
   game.neuroshima.towarzysze = { ...towarzyszeApi, ...towarzyszeWalkaApi, ...towarzyszeTworzenieApi, migruj: migrujTowarzysza };
+  game.neuroshima.drony = dronyApi;
   // Okoliczności ataku — game.neuroshima.okolicznosci.rozstrzygnij(activity) (podgląd z bieżącymi celami)
   game.neuroshima.okolicznosci = okolicznosciApi;
   // Rekonwalescencja (PLAN_m1_walka E6) — .stan(actor), .kalendarzyk(actor), .dane(actor) (prognoza bez okna)

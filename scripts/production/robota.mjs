@@ -495,6 +495,7 @@ export async function zakoncz(item, { total = null, st = null, zrodlo = "test" }
   const w = r.przepis.wynik;
   let utworzone = [];
   let skutekNaprawy = null;
+  let dron = null;
   if (r.rodzaj === "naprawa") {
     // Dynamiczny import: naprawa.mjs sama importuje ten plik (start Robót naprawy).
     const { napraw } = await import("./naprawa.mjs");
@@ -504,6 +505,12 @@ export async function zakoncz(item, { total = null, st = null, zrodlo = "test" }
     utworzone = await utworzWynik(holder, w, {
       znacznik: { kierownikId: r.kierownikId, przepisId: r.przepisId, kiedy: game.time.worldTime }
     });
+  } else if (w.typ === "aktor") {
+    // Dron (PLAN_m3 §7.9): aktor ze stemplem kierownika i złożony uchwyt u posiadacza Roboty. Dynamiczny
+    // import: drony.mjs przez przenoszenie.mjs sięga z powrotem do tego pliku.
+    const { rodzajZPrzepisu, zbudujDrona } = await import("../actors/drony.mjs");
+    const rodzaj = rodzajZPrzepisu(w.ref);
+    if (rodzaj) dron = await zbudujDrona(holder, rodzaj, { tworca: kier ?? holder });
   }
   const img = item.img;
   const uuid = item.uuid;
@@ -515,8 +522,11 @@ export async function zakoncz(item, { total = null, st = null, zrodlo = "test" }
     ? `<strong>Naprawione</strong> — ${foundry.utils.escapeHTML(skutekNaprawy)}`
     : w.typ === "item"
     ? `${w.ilosc > 1 ? `${w.ilosc} × ` : ""}<strong>${foundry.utils.escapeHTML(r.przepis.nazwa)}</strong> → ${foundry.utils.escapeHTML(holder.name)}`
+    : dron
+      ? `<strong>${foundry.utils.escapeHTML(r.przepis.nazwa)}</strong> (złożony) → ${foundry.utils.escapeHTML(holder.name)}`
+        + (dron.prosba && !game.users.activeGM ? " — uruchomi go MG, gdy wejdzie do gry" : "")
     : w.typ === "aktor"
-      ? `<strong>${foundry.utils.escapeHTML(r.przepis.nazwa)}</strong> gotowe — MG tworzy aktora (pojazdy: M4, drony: M3).`
+      ? `<strong>${foundry.utils.escapeHTML(r.przepis.nazwa)}</strong> gotowe — MG tworzy aktora (pojazdy: M4).`
       : `<strong>${foundry.utils.escapeHTML(r.przepis.nazwa)}</strong> wykonane — skutek rozstrzyga MG.`;
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor: kier ?? holder }),

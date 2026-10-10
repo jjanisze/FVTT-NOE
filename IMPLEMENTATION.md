@@ -1149,7 +1149,7 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
-### M3 E0–E4 — towarzysze: czyste zasady, wartości z właściciela, walka, karty, tworzenie; Stopnie Zranienia wg s. 205 (2026-10-10)
+### M3 E0–E7a — towarzysze: czyste zasady, wartości z właściciela, walka, karty, tworzenie, migracja, dane z podręcznika, drony z produkcji; Stopnie Zranienia wg s. 205 (2026-10-10)
 
 Plan: `PLAN_m3_towarzysze.md` (decyzje MG D1–D39, postęp §11).
 
@@ -1182,9 +1182,21 @@ Plan: `PLAN_m3_towarzysze.md` (decyzje MG D1–D39, postęp §11).
 - **Tiki tury raz na turę** (`combat/tiki.mjs`): krwawienie, podpalenie, regeneracja i szał z chemii,
   Uduszenie tykały przy każdej zmianie tury, także przy cofnięciu — cofnięcie tury płonącego zadawało drugie
   1k4, ponowne „naprzód” trzecie. Teraz tylko krok naprzód i każda tura najwyżej raz.
-- **Testy:** Quench `towarzysze-zasady` i `towarzysze`; e2e `towarzysz` i `towarzysz-tworzenie` (nowe), `combat`
-  (krytyk w istotę ze Stopniem i bez); mutacje dla F1, F2, kolejności, własności grupy, F17, poziomów za
-  właścicielem i U23.
+- **Migracja ręcznie zrobionego ludzkiego towarzysza** (`migration/migrate-towarzysze.mjs`): próba na sucho
+  domyślnie, kopia aktora w folderze świata (nie w publicznym repozytorium), klasa „Towarzysz” z poziomem za
+  właścicielem; Evie przeniesiona w kampanii.
+- **Dane towarzyszy z podręcznika** (`dev/classes/extract_companions.py` → `companions.json` →
+  `gen_companions.py`): `config/towarzysze-data.mjs` jest generowany, wzory ze ścisłą gramatyką (nieznana fraza
+  = błąd budowy); plakietki pokrycia Partnera, Oswajania zwierząt i Mojej prawej ręki.
+- **Drony z produkcji** (`actors/drony.mjs`): ukończona Robota drona Hakera tworzy aktora-maszynę ze stemplem
+  twórcy (TT i PW z jego INT i PB w chwili budowy) i złożony uchwyt w ekwipunku (25 / 4 kg); Rozłóż [A] / Złóż
+  [A] z podglądem żetonu, przez przekaźnik MG; uchwyt nie do sklonowania (jak Robota), własność drona za
+  posiadaczem; wiersz drona na pasku i plakietka „twórca · System ruszył …”. Dwa szablony dronów w paczce
+  `towarzysze`.
+- **Testy:** Quench `towarzysze-zasady`, `towarzysze` i `drony`; e2e `towarzysz`, `towarzysz-tworzenie` i `dron`
+  (nowe), `combat` (krytyk w istotę ze Stopniem i bez); mutacje dla F1, F2, kolejności, własności grupy, F17,
+  poziomów za właścicielem i U23. Harness: `clickCanvas` trafia po `canvas.pan` w karcie w tle i nie zamienia
+  kliknięcia w przeciągnięcie; fixture odpauzowuje grę zawsze (samouczek rdzenia odpauzowywał tylko MG).
 
 ### v0.18.0 — Walka i zdrowie wg RAW, czysta instalacja (B6), ikony Bestiariusza (2026-10-08)
 

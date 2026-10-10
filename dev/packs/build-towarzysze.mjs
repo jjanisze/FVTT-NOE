@@ -1,7 +1,7 @@
 /**
  * Neuroshima 5e — towarzysze w paczkach (PLAN_m3_towarzysze.md §7.8, §7.13; E4).
  *
- *   - **Szablony zwierząt** — paczka `towarzysze` (Actor): statblocki z `config/towarzysze-data.mjs`
+ *   - **Szablony zwierząt i dronów** — paczka `towarzysze` (Actor): statblocki z `config/towarzysze-data.mjs`
  *     przez builder Bestiariusza (`buildNpc` — Współpraca dostaje `packTactics` za darmo, F12), potem to, co
  *     u towarzysza liczy się z właściciela: TT jako formuła `custom`, premia ataku jako formuła `flat`
  *     (roll data `@wlasciciel`), żeton powiązany i przyjazny, flaga szablonu.
@@ -28,11 +28,14 @@ export function szablonyTowarzyszy({ buildNpc, idFor, MODULE_ID }) {
     const wpis = RODZAJE[rodzaj];
     zrodla.add(wpis.zrodlo);
     const c = {
+      acNote: null, conditionImmunities: [], damageThreshold: null, failureThreshold: null,
+      gear: null, morale: null, overlay: false, pb: 2, randomized: false, resistances: [], senseQualifiers: null,
+      sp: 0, tools: null, typeNote: null, vulnerabilities: [],
       ...s,
       id: `towarzysz-${rodzaj}`,
-      acNote: null, blood: "czerwona", conditionImmunities: [], damageThreshold: null, failureThreshold: null,
-      gear: null, morale: null, overlay: false, pb: 2, randomized: false, resistances: [], senseQualifiers: null,
-      sp: 0, tools: null, typeNote: null, usesZranienie: true, vulnerabilities: [],
+      // Maszyna: bez Stopni Zranienia (s. 214), „krew” to smar (Splatter); progi awarii i obrażeń ze statblocku.
+      blood: wpis.maszyna ? "moloch" : "czerwona",
+      usesZranienie: !wpis.maszyna,
       lore: {
         informacje: `Towarzysz ze zdolności ${ZRODLA[wpis.zrodlo].nazwa} (NOE ${wpis.strona}). TT, PW, KW i premię ataku `
           + "liczy moduł z bieżących wartości właściciela; liczby w szablonie to właściciel z PB +2 i MDR +2."

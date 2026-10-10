@@ -97,8 +97,10 @@ export default async function skirmish({ moduleId }) {
     ...await Promise.all(npcs.map((a, i) => place(a, 22, 7 + i * 3)))
   ];
   const created = await scene.createEmbeddedDocuments("Token", tokens);
-  // A fresh world starts paused; players could not move or act.
-  if (game.paused) game.togglePause(false, { broadcast: true });
+  // A fresh world starts paused; players could not move or act. Unconditional and broadcast: core's
+  // first-launch Welcome tour unpauses only the GM's own client (`togglePause(false)` without broadcast),
+  // so `game.paused` here can read false while the server and every player are still paused.
+  game.togglePause(false, { broadcast: true });
 
   return {
     scene: { id: scene.id, name: scene.name, walls: scene.walls.size, tokens: created.length },
