@@ -22,6 +22,10 @@
  * E8b: cel obrazu kanału FPV (jakość z sygnału; FAILSAFE, Wyłączony, Oślepiony — sam szum), tryb wizji „Kamera drona”
  * w szablonach, na nowym żetonie i po synchronizacji wizji (tryb bazowy). Obraz na ekranie — zrzuty e2e `dron`.
  *
+ * E8c: OSD — tekst bez polskich liter (D38), RSSI z ikoną i kreskami, bateria z czasem, ostrzeżenia, układ (pole
+ * trybu miga ostrzeżeniami, lista akcji tylko w walce, ARMED i licznik, ekran powitalny, granice siatki), stan OSD
+ * z prawdziwego drona, zasób czcionki GPL-3 (D39) serwowany z modułu.
+ *
  * Synchronizację uchwytu robi aktywny MG — paczka zakłada, że to ta karta (piaskownica albo kampania z
  * jednym MG). Scena, folder „Drony” (gdy go nie było) i wiadomości czatu znikają w `after()`.
  */
@@ -41,6 +45,8 @@ import {
 import { sygnalDrona, FLAG_POD_ZIEMIA } from "../actors/drony-zdalne.mjs";
 import { zmianyOdebrania, FLAG_NADANE, FLAG_STEROWANIE } from "../actors/drony.mjs";
 import { KAMERA_ID, celObrazu } from "../actors/drony-obraz.mjs";
+import { tekstOsd, liniaRssi, liniaZasilania, ostrzezeniaOsd, ukladOsd, ZNAK } from "../config/osd.mjs";
+import { stanOsd, ATLAS_OSD } from "../actors/drony-osd.mjs";
 import { syncActorVision } from "../items/vision-sources.mjs";
 import { aktywuj, aktywacjaWRundzie, cechyDrona } from "../actors/drony-sterowanie.mjs";
 import { premiaAtakuDrona } from "../actors/drony-bron.mjs";
@@ -835,6 +841,103 @@ export function registerDronyTests(quench) {
         } finally {
           await scenaK.delete();
         }
+      });
+    });
+
+    describe("OSD kamery drona (E8c: D34, D38, D39)", function () {
+      const kody = t => [...t].map(c => c.charCodeAt(0));
+      const STAN = {
+        nazwa: "Dron kroczący", rssi: { wartosc: 87, kreski: 4 }, tryb: "WALK", aktywacja: "A", ostrzezenia: [],
+        akcje: ["RUCH", "UNIK", "ATAK"], bron: true, uzbrojony: true, amunicja: 12, pw: [8, 10],
+        zasilanie: { procent: 50, minuty: 65 }, powitanie: null, czas: 0
+      };
+      const el = (u, id) => u.find(e => e.id === id);
+
+      it("tekst OSD: wielkie litery ASCII, bez polskich znaków (D38)", function () {
+        expect(tekstOsd("Dron kroczący")).to.equal("DRON KROCZACY");
+        expect(tekstOsd("Łódź, żółć")).to.equal("LODZ, ZOLC");
+        expect(tekstOsd("a€b")).to.equal("A B");
+      });
+
+      it("RSSI: ikona anteny, dwie cyfry, cztery kreski; zasilanie: bateria i G:MM", function () {
+        expect(kody(liniaRssi({ wartosc: 7, kreski: 3 }))).to.deep.equal([ZNAK.RSSI, 0x30, 0x37,
+          ZNAK.PASEK_START, ZNAK.PASEK_PELNY, ZNAK.PASEK_PELNY, ZNAK.PASEK_PELNY, ZNAK.PASEK_PUSTY, ZNAK.PASEK_KONIEC]);
+        expect(kody(liniaZasilania({ procent: 100, minuty: 65 }))).to.deep.equal([0x90, ...kody("1:05")]);
+        expect(liniaZasilania({ procent: 0, minuty: 0 }).charCodeAt(0)).to.equal(0x96);
+        expect(liniaZasilania({ procent: 50, minuty: null }).slice(1)).to.equal("-:--");
+      });
+
+      it("ostrzeżenia: FAILSAFE zamiast RSSI LOW, BAT LOW, skróty awarii", function () {
+        expect(ostrzezeniaOsd({ jakosc: 1, procent: 100 })).to.deep.equal([]);
+        expect(ostrzezeniaOsd({ jakosc: 0.2, procent: 100 })).to.deep.equal(["RSSI LOW"]);
+        expect(ostrzezeniaOsd({ failsafe: true, jakosc: 0, procent: 10, awarie: ["OPTYKA"] }))
+          .to.deep.equal(["FAILSAFE", "BAT LOW", "OPTYKA"]);
+      });
+
+      it("układ: tryb i aktywacja; ostrzeżenia migają w tym samym polu i krążą co sekundę", function () {
+        expect(el(ukladOsd(STAN), "tryb")).to.include({ tekst: "WALK AKCJA", miga: false });
+        const u0 = ukladOsd({ ...STAN, ostrzezenia: ["RSSI LOW", "BAT LOW"], czas: 0 });
+        const u1 = ukladOsd({ ...STAN, ostrzezenia: ["RSSI LOW", "BAT LOW"], czas: 1.2 });
+        expect(el(u0, "tryb")).to.include({ tekst: "RSSI LOW", miga: true });
+        expect(el(u1, "tryb").tekst).to.equal("BAT LOW");
+        expect(el(ukladOsd({ ...STAN, tryb: "ACRO", aktywacja: null }), "tryb").tekst).to.equal("ACRO");
+      });
+
+      it("lista akcji: dwie linie przewijane co sekundę; poza walką jej nie ma", function () {
+        const u = ukladOsd({ ...STAN, czas: 1 });
+        expect([el(u, "akcja1").tekst, el(u, "akcja2").tekst]).to.deep.equal(["UNIK", "ATAK"]);
+        const poza = ukladOsd({ ...STAN, akcje: null });
+        expect(el(poza, "akcja1")).to.equal(undefined);
+      });
+
+      it("ARMED miga do ataku, potem gaśnie; licznik 0 miga; bez broni nie ma elementu", function () {
+        expect(el(ukladOsd(STAN), "armed")).to.include({ tekst: "ARMED", miga: true });
+        expect(el(ukladOsd(STAN), "amunicja")).to.include({ tekst: "12", miga: false });
+        expect(el(ukladOsd({ ...STAN, uzbrojony: false }), "armed")).to.equal(undefined);
+        expect(el(ukladOsd({ ...STAN, amunicja: 0 }), "amunicja")).to.include({ tekst: "0", miga: true });
+        const bez = ukladOsd({ ...STAN, bron: false });
+        expect(el(bez, "armed") ?? el(bez, "amunicja")).to.equal(undefined);
+        expect(el(ukladOsd({ ...STAN, amunicja: null }), "amunicja"), "broń bez magazynka").to.equal(undefined);
+      });
+
+      it("ekran powitalny „System ruszył …” i wszystko w granicach siatki", function () {
+        const siatka = { kolumny: 24, wiersze: 12 };
+        const u = ukladOsd({ ...STAN, powitanie: "System ruszył 4 sierpnia 2051 roku.", ostrzezenia: ["FAILSAFE"] }, siatka);
+        const pow = u.filter(e => e.id.startsWith("powitanie")).map(e => e.tekst).join(" ");
+        expect(pow).to.equal("SYSTEM RUSZYL 4 SIERPNIA 2051 ROKU.");
+        for (const e of u) {
+          expect(e.x, e.id).to.be.at.least(0);
+          expect(e.x + e.tekst.length, e.id).to.be.at.most(siatka.kolumny);
+          expect(e.y, e.id).to.be.within(0, siatka.wiersze - 1);
+        }
+      });
+
+      it("stan OSD z prawdziwego drona: ACRO, RSSI LOW, awaria, broń bez magazynka, ARMED tylko poza [B]", async function () {
+        const holder = await scratchActor({ name: `${SCRATCH_PREFIX} Pilot OSD` });
+        const wynik = await nowyDron(holder, "dron-latajacy");
+        const k = { czas: 0, start: 0, zaatakowal: false, rssi: { wartosc: 20, kreski: 1 } };
+        const sesja = { dronUuid: wynik.dron.uuid, tryb: "A", sygnal: { jakosc: 0.2 }, failsafeOd: null };
+        let st = stanOsd(sesja, wynik.dron, k);
+        expect(st).to.include({ tryb: "ACRO", aktywacja: "A", bron: false, akcje: null });
+        expect(st.ostrzezenia).to.include("RSSI LOW");
+        await zastosujAwarie(wynik.dron, 8);
+        const docs = await game.packs.get(`${MODULE_ID}.bron`).getDocuments();
+        await wynik.dron.createEmbeddedDocuments("Item", [game.items.fromCompendium(docs.find(i => i.name === "Sztylet"))]);
+        await waitFor(() => wynik.dron.items.find(i => i.system.activities?.some(a => a.type === "attack")), { label: "atak sztyletu" });
+        st = stanOsd(sesja, wynik.dron, k);
+        expect(st.ostrzezenia).to.include("OPTYKA");
+        expect(st).to.include({ bron: true, uzbrojony: true, amunicja: null });
+        expect(stanOsd({ ...sesja, tryb: "B" }, wynik.dron, k).uzbrojony, "[B] nie atakuje").to.equal(false);
+        expect(stanOsd(sesja, wynik.dron, { ...k, zaatakowal: true }).uzbrojony, "po ataku").to.equal(false);
+      });
+
+      it("czcionka Betaflight jako osobny zasób GPL-3 w module (D39)", async function () {
+        const tex = await foundry.canvas.loadTexture(ATLAS_OSD);
+        expect([tex.width, tex.height]).to.deep.equal([192, 288]);
+        const lic = await (await fetch(`modules/${MODULE_ID}/fonts/osd/LICENSE`)).text();
+        expect(lic).to.match(/GNU GENERAL PUBLIC LICENSE\s+Version 3/);
+        const nota = await (await fetch(`modules/${MODULE_ID}/fonts/osd/README.md`)).text();
+        expect(nota).to.include("resources/osd/2/default.mcm").and.include("2026.6.2");
       });
     });
 

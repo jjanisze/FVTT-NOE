@@ -24,6 +24,8 @@
  *  - E8b, the image (D34, U16): the drone's token looks through "Kamera drona"; the operator's screen carries the
  *    analog FPV filter while in remote mode (screenshots at full, half and ¾ range); a blinded drone (failure 8) is
  *    pure noise without ending the session; the filter is gone after the exit.
+ *  - E8c, the OSD (D34, D38): the drone's name, RSSI, WALK + the activation; the controller's welcome screen
+ *    "SYSTEM RUSZYL …"; ARMED for the dagger until the drone attacks; FAILSAFE in the mode field.
  *  - E7c: a critical hit on the drone → the GM's failure card → k20 (forced 13) → [Zastosuj] → TT −2 until repair
  *    (D10). The world clock moves 30 min → the walking drone's battery is at 50% (U15). 0 PW → Wyłączony, not
  *    dead (§7.4) — the player sees the status.
@@ -254,6 +256,7 @@ function zdalny({ dronId }) {
     kontrolowane: canvas.tokens.controlled.map(t => t.document.actorId === dronId ? "dron" : t.document.actorId === pcId ? "pc" : t.name),
     wizjaDrona: !!td?.vision?.active, wizjaPC: !!tp?.vision?.active, trybWizji: td?.vision?.visionMode?.id ?? null,
     kanal: game.neuroshima.drony.kanalFpv(),
+    osd: game.neuroshima.drony.osdDrona(),
     pasek: !!document.getElementById("neuro-dron-zdalny"),
     dron: td ? [td.document.x, td.document.y, td.document.elevation] : null,
     owner: !!game.actors.get(dronId)?.isOwner
@@ -419,6 +422,11 @@ export default {
       t.equal(z.pasek, true, "Foundry hint outside the image: Esc — wyjdź");
       t.equal(z.trybWizji, "neuroshimaKameraDrona", "the drone looks through \"Kamera drona\" (U16)");
       t.equal(z.kanal?.naScenie, true, "the analog FPV filter is on the operator's screen (D34)");
+      const osd = id => z.osd?.elementy.find(e => e.id === id)?.tekst ?? null;
+      t.equal(z.osd?.naScenie, true, "OSD in the canvas, under the filter");
+      t.equal(osd("nazwa"), "DRON KROCZACY", "OSD: drone name without Polish letters (D38)");
+      t.equal(osd("tryb"), "WALK AKCJA", "OSD: WALK + the activation of Steruj [A]");
+      t.equal(osd("rssi")?.charCodeAt(0), 1, "OSD: RSSI with the antenna glyph");
       await p1.pressKey("KeyD");
       const ruch = await t.waitFor(t.gm, (id) => {
         const td = canvas.scene.tokens.find(x => x.actorId === id);
@@ -456,6 +464,22 @@ export default {
     await t.step("Przejmij sterowanie → signal at three distances under \"pod ziemią\" (50 m): 1 / ≈0.5 / ≈0.2; a wall → 50 m (U17)", async () => {
       const r = await p1.eval(aktywnosc, { id: "neuroDronPrzejm0" });
       t.equal(r.tryb, "Z", "Przejmij sterowanie, out of combat");
+      const powitanie = await t.waitFor(p1, () => {
+        const o = game.neuroshima.drony.osdDrona();
+        const linie = o?.elementy.filter(e => e.id.startsWith("powitanie")).map(e => e.tekst) ?? [];
+        return linie.length ? { linie, armed: o.elementy.some(e => e.id === "armed"), tryb: o.elementy.find(e => e.id === "tryb")?.tekst } : null;
+      }, { message: "the controller's welcome screen" });
+      t.assert(/^SYSTEM RUSZYL .* ROKU\.$/.test(powitanie.linie.join(" ")), "welcome screen: \"System ruszył …\" (D23)", powitanie);
+      t.equal(powitanie.tryb, "WALK", "out of combat: no activation");
+      t.equal(powitanie.armed, true, "ARMED: the dagger has an attack to make");
+      await t.screenshot("Gracz 1", "OSD — ekran powitalny kontrolera");
+      await p1.eval(atakDrona);
+      await t.waitFor(p1, () => game.neuroshima.drony.osdDrona()?.zaatakowal ? true : null, { message: "the attack to register" });
+      const poAtaku = await t.waitFor(p1, () => {
+        const o = game.neuroshima.drony.osdDrona();
+        return o && !o.elementy.some(e => e.id === "armed") ? true : null;
+      }, { message: "ARMED to go out after the attack" });
+      t.equal(poAtaku, true, "ARMED goes out after the attack (D34)");
       const sygnalNa = async (poz, oczek) => {
         await t.gm.eval(przestaw, poz);
         return t.waitFor(p1, (o) => {
@@ -486,6 +510,12 @@ export default {
       t.equal(sciana.sciana, true, "a wall between operator and drone");
       t.equal(sciana.zasieg, 50, "through walls: 50 m");
       t.equal(sciana.podZiemia, false, "scene field off");
+      const powitanieZnika = await t.waitFor(p1, (s) => {
+        const o = game.neuroshima.drony.osdDrona();
+        const sesja = game.neuroshima.drony.sesjaZdalna();
+        return o && !o.elementy.some(e => e.id.startsWith("powitanie")) ? { po: Date.now() - sesja.start } : null;
+      }, { args: [0], timeoutMs: 4000, message: "the welcome screen to go away" });
+      t.assert(powitanieZnika.po >= 2400, "the welcome screen lasts its 2.5 s, then goes", powitanieZnika);
     });
 
     await t.step("Blinded drone (failure 8, OPTYKA) → pure noise, the session goes on (§7.10)", async () => {
@@ -511,6 +541,13 @@ export default {
       }, { message: "FAILSAFE (signal lost, session still on)" });
       t.equal(fs.utracony, true, "signal lost");
       t.equal((await p1.eval(() => game.neuroshima.drony.kanalFpv()?.cel.szum ?? null)), 1, "FAILSAFE: the image goes to noise");
+      // The OSD lays out every 100 ms — wait for it inside the 1.5 s of FAILSAFE.
+      const tryb = await t.waitFor(p1, () => {
+        const e = game.neuroshima.drony.osdDrona()?.elementy.find(x => x.id === "tryb");
+        return e?.tekst === "FAILSAFE" ? e : null;
+      }, { timeoutMs: 1200, intervalMs: 50, message: "FAILSAFE on the OSD" });
+      t.equal(tryb?.tekst, "FAILSAFE", "OSD: FAILSAFE in the mode field (D24)");
+      t.equal(tryb?.miga, true, "blinking");
       const po = await t.waitFor(p1, (id) => {
         if (game.neuroshima.drony.sesjaZdalna()) return null;
         return canvas.tokens.controlled.map(x => x.document.actorId === id ? "dron" : x.document.actorId === game.user.character.id ? "pc" : x.name);

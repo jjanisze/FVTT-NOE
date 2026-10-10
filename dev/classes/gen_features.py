@@ -373,8 +373,10 @@ COVERAGE = {
              "i sceny „pod ziemią”; utrata sygnału — widok wraca; Przejmij sterowanie poza walką", "actors/drony-zdalne.mjs"),
             ("obraz z kamery jak analogowe FPV: śnieg, zanik koloru, rwanie i toczenie ze słabnącym sygnałem; w ciemności "
              "18 m w czerni i bieli", "actors/drony-obraz.mjs"),
+            ("OSD kamery (czcionka Betaflight): RSSI, nazwa, zasilanie, tryb i aktywacja z ostrzeżeniami, lista akcji, "
+             "ARMED z licznikiem naboi, PW", "actors/drony-osd.mjs"),
         ],
-        "manual": "Naprawa drona (PW i awarie) i OSD kamery — przy stole (następne etapy). "
+        "manual": "Naprawa drona (PW i awarie) — przy stole (następny etap). "
                   "Biegłość w narzędziach małego hakera zaznacza gracz.",
     },
     "serwisowanie": {

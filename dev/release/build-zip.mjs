@@ -30,7 +30,7 @@ const MODULE_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "
 
 /** What a running Foundry needs, plus README/LICENSE/CREDITS/docs for context (RELEASING.md). */
 export const INCLUDE_FILES = ["module.json", "README.md", "LICENSE", "CREDITS.md"];
-export const INCLUDE_DIRS = ["scripts", "styles", "templates", "lang", "icons", "sounds", "tokens", "ui", "vfx", "packs", "docs"];
+export const INCLUDE_DIRS = ["scripts", "styles", "templates", "lang", "icons", "sounds", "tokens", "fonts", "ui", "vfx", "packs", "docs"];
 /** LevelDB's LOCK only — never `*.log`: a fresh pack keeps all its records in 000NNN.log. */
 export const EXCLUDE = [/(^|\/)LOCK$/];
 

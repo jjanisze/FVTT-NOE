@@ -42,6 +42,7 @@ import { registerDronyBron, premiaAtakuDrona } from "./actors/drony-bron.mjs";
 import { registerDronyStan, dronyStanApi } from "./actors/drony-stan.mjs";
 import { registerDronyZdalne, dronyZdalneApi } from "./actors/drony-zdalne.mjs";
 import { registerDronyObraz, dronyObrazApi, registerKameraDronaVision } from "./actors/drony-obraz.mjs";
+import { registerDronyOsd, dronyOsdApi } from "./actors/drony-osd.mjs";
 import { registerMaszyny, maszynyApi } from "./combat/maszyny.mjs";
 import { registerCharacterDefaults } from "./actors/character-defaults.mjs";
 import { registerClassState } from "./actors/class-state.mjs";
@@ -398,6 +399,8 @@ Hooks.once("init", () => {
   registerDronyZdalne();
   // Obraz z kamery drona: tryb wizji i analogowy kanał FPV u operatora (PLAN_m3 §7.10, D34).
   registerDronyObraz();
+  // OSD kamery drona z czcionką Betaflight (fonts/osd/, GPL-3 — D39).
+  registerDronyOsd();
   registerSheetShell();
 
   // Vehicle sheet is still stock dnd5e (no Neuroshima subclass) — it's just missing the
@@ -517,7 +520,7 @@ Hooks.once("ready", () => {
   game.neuroshima.umieranie = umieranieApi;
   // Towarzysze i drony (PLAN_m3) — game.neuroshima.towarzysze.wlasciciel(actor), .wartosci(actor), .maStopnieZranienia(actor)
   game.neuroshima.towarzysze = { ...towarzyszeApi, ...towarzyszeWalkaApi, ...towarzyszeTworzenieApi, migruj: migrujTowarzysza };
-  game.neuroshima.drony = { ...dronyApi, ...dronySterowanieApi, ...dronyStanApi, ...dronyZdalneApi, ...dronyObrazApi, premiaAtakuDrona };
+  game.neuroshima.drony = { ...dronyApi, ...dronySterowanieApi, ...dronyStanApi, ...dronyZdalneApi, ...dronyObrazApi, ...dronyOsdApi, premiaAtakuDrona };
   game.neuroshima.maszyny = maszynyApi;
   // Okoliczności ataku — game.neuroshima.okolicznosci.rozstrzygnij(activity) (podgląd z bieżącymi celami)
   game.neuroshima.okolicznosci = okolicznosciApi;

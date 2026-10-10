@@ -39,6 +39,7 @@ night: lifecycle and test commands refuse; the GM switches modes by saying so.
 | `scripts/config/class-features-data.mjs`, `scripts/config/towarzysze-data.mjs` | `dev/classes/classes.json`, `professions.json`, `companions.json` (← `extract_classes.py`/`extract_professions.py`/`extract_companions.py` from NOE) | `npm run build:classes` |
 | Class/status placeholder icons, token templates | `dev/icons/gen_*` | `npm run build:icons`, `build:status-icons`, `build:token-templates`; real art requests go in `dev/icons/MISSING.md`; icon pipeline: `dev/icons/Pipeline.md` |
 | Scenes named `… (2026)` in the world | the Maps repo (Tiled) → `tools/push.py` → `game.neuroshima.maps.update()` | fix maps in Tiled; generated walls edited in Foundry are overwritten |
+| `fonts/osd/betaflight-default.webp` (drone camera OSD) | `fonts/osd/default.mcm` — the original Betaflight font, a separate GPL-3 asset (`fonts/osd/README.md`) | `python dev/osd/gen_osd_font.py` (`--check` compares) |
 | `module.zip` | `dev/release/build-zip.mjs` (the one include list) | `npm run release:check` |
 | Source map "class → file" for Foundry/dnd5e (campaign vault skills) | the installed sources | `node dev/agent/index-sources.mjs …` after a Foundry/dnd5e update |
 
@@ -57,6 +58,8 @@ night: lifecycle and test commands refuse; the GM switches modes by saying so.
   UI, canvas, combat, dialogs or player permissions is not done without a layer-6 run or sandbox
   check — screenshot in the hand-off ([TESTING.md](TESTING.md) §3).
 - **Assets:** WEBP, not PNG, for anything shipped.
+- **Sandbox mirror:** the sandbox copy of this module junctions each top-level folder at `fvtt sandbox:init`; a new
+  top-level folder (like `fonts/`) is served there only after another `fvtt sandbox:init` (it adds what is missing).
 
 ## Practicalities
 

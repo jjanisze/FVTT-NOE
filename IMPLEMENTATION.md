@@ -1149,7 +1149,7 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
-### M3 E0–E8b — towarzysze i drony: czyste zasady, wartości z właściciela, walka, karty, tworzenie, migracja, dane z podręcznika, drony z produkcji, kontrolery i sterowanie, zasilanie, awarie, tryb zdalny, sygnał i obraz kamery; Stopnie Zranienia wg s. 205 (2026-10-10)
+### M3 E0–E8 — towarzysze i drony: czyste zasady, wartości z właściciela, walka, karty, tworzenie, migracja, dane z podręcznika, drony z produkcji, kontrolery i sterowanie, zasilanie, awarie, tryb zdalny, sygnał, obraz kamery i OSD; Stopnie Zranienia wg s. 205 (2026-10-10)
 
 Plan: `PLAN_m3_towarzysze.md` (decyzje MG D1–D39, postęp §11).
 
@@ -1214,6 +1214,10 @@ Plan: `PLAN_m3_towarzysze.md` (decyzje MG D1–D39, postęp §11).
   rozmyty, z przeplotem i lekkim śniegiem; im dalej od zasięgu, tym więcej śniegu, potem znika kolor, obraz się rwie
   i toczy, a przy utracie sygnału, oślepionym albo wyłączonym dronie zostaje sam szum. W ciemności kamera widzi 18 m w
   czerni i bieli.
+- **OSD kamery** (`actors/drony-osd.mjs`, `config/osd.mjs`): napisy w czcionce kontrolerów lotu Betaflight — siła
+  sygnału (liczba celowo pływa), nazwa drona, pozostały czas akumulatora, tryb (ACRO, WALK) z Akcją albo Bonusem,
+  ostrzeżenia FAILSAFE / RSSI LOW / BAT LOW / skróty awarii, dozwolone akcje w walce, ARMED z licznikiem naboi i PW;
+  przy wejściu ekran „System ruszył …”. Czcionka to osobny zasób na licencji GPL-3 w `fonts/osd/` (reszta modułu MIT).
 - **Testy:** Quench `towarzysze-zasady`, `towarzysze` i `drony`; e2e `towarzysz`, `towarzysz-tworzenie` i `dron`
   (nowe; `dron` z produkcją, rozłożeniem, sterowaniem, awarią, zasilaniem i 0 PW), `combat` (krytyk w istotę ze Stopniem i bez); mutacje dla F1, F2, kolejności, własności grupy, F17,
   poziomów za właścicielem i U23. Harness: `clickCanvas` trafia po `canvas.pan` w karcie w tle i nie zamienia

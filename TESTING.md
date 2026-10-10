@@ -173,7 +173,10 @@ z żetonów (wysokość, „pod ziemią”, tory pościgu, brak żetonu operator
 prawdziwy przekaźnik (przejęcie, zwolnienie, Reakcja, właściciel uchwytu, złożenie). E8b w `dron`: żeton drona patrzy przez
 „Kamerę drona”, u operatora w trybie zdalnym jest filtr kanału FPV (zrzuty przy pełnym sygnale, w połowie i na ¾ zasięgu),
 dron oślepiony — sam szum bez końca sesji, FAILSAFE — szum, po wyjściu filtra nie ma. Quench: cel obrazu z sygnału i
-stanów, tryb wizji w szablonach, na nowym żetonie i po synchronizacji wizji.
+stanów, tryb wizji w szablonach, na nowym żetonie i po synchronizacji wizji. E8c w `dron`: OSD — nazwa bez polskich
+liter, RSSI z ikoną, WALK + aktywacja; ekran powitalny „SYSTEM RUSZYL …” znika po 2,5 s; ARMED dla sztyletu gaśnie po
+ataku drona; FAILSAFE w polu trybu. Quench: tekst OSD, RSSI i bateria w znakach czcionki, ostrzeżenia, układ (miganie,
+lista akcji tylko w walce, ARMED i licznik, powitanie, granice siatki), stan z prawdziwego drona, zasób GPL-3 w module.
 `clickCanvas` renderuje klatkę po `canvas.pan` (karta w tle nie renderuje sama, a pikery czytają zbuforowane
 przekształcenie warstwy) i wysyła `mouseMoved` bez wciśniętego przycisku — inaczej Chrome potrafi zamienić
 kliknięcie w przeciągnięcie bez `pointerdown`. `pressKey(code)` to prawdziwy klawisz przez CDP (`Escape`, `KeyW`…`KeyD`

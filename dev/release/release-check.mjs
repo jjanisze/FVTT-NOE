@@ -117,6 +117,9 @@ await step("generators", async () => {
       const eq = after.toString("utf8").replaceAll("\r\n", "\n") === before.toString("utf8").replaceAll("\r\n", "\n");
       checks.push({ name, ok: r.ok && eq, stale: r.ok && !eq, run: r });
     }
+    // OSD font atlas from the original Betaflight .mcm (fonts/osd/, D39 of PLAN_m3_towarzysze.md): --check writes nothing.
+    const osd = run(PYTHON, ["dev/osd/gen_osd_font.py", "--check"]);
+    checks.push({ name: "betaflight-default.webp", ok: osd.ok, stale: !osd.ok && /NIEZGODNY|brak/.test(osd.stdout.join(" ")), run: osd });
   } finally {
     fs.rmSync(tmp, { recursive: true, force: true });
   }

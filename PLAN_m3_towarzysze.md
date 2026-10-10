@@ -1349,4 +1349,27 @@ sam szum. Sam szum przy FAILSAFE, dronie Oślepionym (awaria 8 — sesja trwa) i
 - **Szum bez wzoru:** prosty hash GLSL dawał na pełnym szumie powtarzalną jodełkę (widać na zrzucie); hash bez sinusa
   (Hoskins) i ziarno rozciągnięte w poziomie jak pasmo analogu.
 
+**2026-10-10 — E8c zrobione — E8 zamknięte.** OSD kamery drona: `config/osd.mjs` (czysty układ) i
+`actors/drony-osd.mjs` (znaki z atlasu w `canvas.stage`, pod filtrem kanału FPV — rwie się i toczy z obrazem).
+Elementy wg §7.10: RSSI z ikoną anteny, liczbą i kreskami (pływa wokół prawdziwej jakości, odświeżane 5 × na
+sekundę), nazwa drona, zasilanie (bateria i pozostały czas), tryb ACRO/WALK z aktywacją AKCJA/BONUS — to samo pole
+miga ostrzeżeniami FAILSAFE, RSSI LOW, BAT LOW i skrótami awarii, lista akcji z `zakresAktywacji` (dwie linie co
+sekundę, tylko w walce), ARMED z licznikiem naboi (ARMED gaśnie po ataku drona, 0 miga, bez broni brak), PW; ekran
+powitalny „System ruszył …” przez 2,5 s. Czcionka (D39): `fonts/osd/` — oryginalny `default.mcm` z konfiguratora
+Betaflight (tag 2026.6.2), pełny tekst GPL-3, nota pochodzenia, atlas WEBP z `dev/osd/gen_osd_font.py`; bramka
+wydania sprawdza atlas (`--check`), paczka wydania zawiera `fonts/`. Quench `drony` 69, e2e `dron` z krokami OSD;
+cały Quench 1038/1038.
+
+- **Rozstrzygnięcia z wdrożenia (do weta MG):**
+  - *OSD omija interfejs Foundry:* siatka znaków leży w wolnej części kanwy — między narzędziami sceny a prawą kolumną
+    (pasek boczny i karty czatu), nad paskiem makr. Prawdziwe OSD jest w obrazie, ale tu obraz zasłania interfejs;
+    pierwsza wersja na całą kanwę chowała baterię i PW pod kartami czatu, a pole trybu pod paskiem makr.
+  - *Wielkość znaku:* 24 wiersze na wysokość ekranu (analogowe OSD ma ich kilkanaście — nasze jest mniejsze, żeby
+    nie zasłaniać mapy).
+  - *ARMED także poza walką* (Przejmij sterowanie) — „atak do wykonania w tym sterowaniu”; w Komendzie [B] nie ma.
+  - *RSSI LOW* od prawdziwej jakości poniżej 0,25, nie od pływającej liczby (inaczej migałoby losowo); *BAT LOW* poniżej
+    20% akumulatora.
+- **Harness:** kopia modułu w piaskownicy to dowiązania folderów najwyższego poziomu z chwili `fvtt sandbox:init` —
+  nowy folder (`fonts/`) wymaga ponownego `sandbox:init` (dokłada brakujące; AGENTS.md).
+
 *(dalej etapy dopisują tu rozstrzygnięcia z wdrożenia, jak w `PLAN_m1_walka.md` §11)*
