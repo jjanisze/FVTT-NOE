@@ -1421,7 +1421,8 @@ export const CLASS_FEATURES = {
     level: null,
     label: "Emiter EMP",
     action: null,
-    auto: [],
+    auto: [{ what: "Emiter EMP jako przepis zdolności: 100 gb surowców (20 MK, 40 CE, 40 CZ), 100 h pracy", where: "production/zp.mjs" }, { what: "biegłość w emiterze tylko z tej zdolności", where: "weapons/emiter-emp.mjs" }, { what: "maszyna z pancerzem przy TT broni się TT 10 + mod. ZRC (ignoruje opancerzenie)", where: "weapons/emiter-emp.mjs" }, { what: "istota żywa w tacce obrażeń domyślnie ×0 z plakietką", where: "weapons/emiter-emp.mjs" }, { what: "Porażenie: RO KON ST 15 albo Obezwładnienie do końca twojej następnej tury (tylko maszyny)", where: "combat/weapon-save-properties.mjs" }, { what: "Naładuj (230 V): karta, MG ładuje akumulator do 6 strzałów", where: "weapons/emiter-emp.mjs" }],
+    manual: "Urządzenia bez mikroprocesorów i pancerz zamontowany na dronie — rozstrzyga MG.",
     text: "Jeśli wydasz 100 gambli na surowce i poświęcisz 100 godzin pracy, to zbudujesz ciężką, nieporęczną broń wyspecjalizowaną w niszczeniu maszyn. Emiter strzela impulsem elektromagnetycznym, który zakłóca działanie lub niszczy niemal każdą maszynę. Nie działa na istoty żywe i urządzenia, które nie używają mikroprocesorów. Emiter EMP ładuje się prądem elektrycznym 230 V, a akumulator starcza na 6 wystrzałów. Ta broń ignoruje TT pochodzącą z opancerzenia maszyny. Tylko Zabójca Maszyn jest biegły w używaniu tej specyficznej broni. Nazwa: Emiter EMP Tryb ognia: Pojedynczy Magazynek: 6 Obrażenia: 8k6 od elektryczności Zasięg: 9/15 metrów Właściwości: Ładowanie Porażenie: Trafiony cel wykonuje Rzut Obronny na Kondycję o ST 15 inaczej otrzymuje stan Obezwładnienie do końca twojej następnej tury Koszt produkcji: 20 MK, 40 CE, 40 CZ"
   },
   "empiryk": {

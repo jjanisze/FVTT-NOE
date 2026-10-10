@@ -1396,4 +1396,32 @@ pod Kobaltem i kartą MG pod NOE; cały Quench 1045/1045.
 - **Aktywności dokładane do starych uchwytów** muszą mieć pełne dane jak `Item5e#createActivity` — częściowe przy
   aktualizacji nie przechodzą walidacji schematu (przy tworzeniu przedmiotu domyślne dokłada schemat).
 
+**2026-10-10 — E10 zrobione (Emiter EMP).** Broń w paczce Broń (`config/weapons-data.mjs`: specjalna, 8k6
+elektryczne, 9/15 m, pojedynczy, Ładowanie, akumulator 6, właściwość „Impuls EMP”), przepis zdolności jak Pogromca
+(100 h, 20 MK / 40 CE / 40 CZ, bez testu). `weapons/emiter-emp.mjs`: biegłość tylko ze zdolności Zabójcy Maszyn; TT
+celu-maszyny wg D27 (nota pancerza z builderem Bestiariusza w `flags.bestiary.acNote` → 10 + ZRC) jako TT wobec broni w
+rozstrzygaczu trafienia (`zarejestrujTTWobecBroni`); w tacce obrażeń istota żywa domyślnie ×0 z plakietką (T3);
+„Naładuj (230 V)” — karta, MG ładuje do 6 (T1). Porażenie w `combat/weapon-save-properties.mjs`: tylko maszyny, RO KON
+ST 15, Obezwładnienie do końca następnej tury atakującego. Quench `emiter-emp` 9, krok e2e `combat` (Obrońca: trafienie
+12 vs TT 10; tacka ×1 / ×0; Porażenie — istota żywa pominięta, maszyna Obezwładniona); cały Quench zielony.
+
+- **Rozstrzygnięcia z wdrożenia (do weta MG):**
+  - *Narzędzia przepisu: elektronika* — RAW ich nie podaje (Pogromca ma rusznikarza).
+  - *Waga 8 kg, cena 200 gb* — szacunek jak przy Pogromcy (cena = 2 × surowce; „ciężka, nieporęczna”).
+  - *Ładowanie z 230 V to karta z przyciskiem MG*, nie samoobsługa — czy jest gniazdko i ile to trwa, wie MG.
+  - *Pancerz zamontowany na dronie* (D27: „odpada jego premia”) — moduł nie wie, co jest pancerzem drona; MG.
+- **Błąd sprzed M3 naprawiony (`actors/sp.mjs`):** podmiana PB Bestiariusza na podręcznikowe robiła `ability.save +=
+  n`, a w dnd5e 5.x `save` to obiekt — wychodził napis „[object Object]-6” i **każdy rzut obronny potwora z biegłym RO,
+  którego PB różni się od wynikającego z SP, kończył się błędem** (także Porażająca, Powalająca, Unieruchamiająca).
+  Przy okazji rzuty brały stare PB (wyświetlane sumy były nowe): przebudowane obiekty biegłości. Złapał to krok e2e
+  Emitera; Quench sprawdza to mutacją.
+- **Błąd z E7c naprawiony:** skutki awarii „do końca następnej tury” (5, 10, 12) w walce **w ogóle nie powstawały** —
+  częściowe `start` w danych efektu (bez `time`) nie przechodzi walidacji v14, a `createEmbeddedDocuments` zwraca wtedy
+  po cichu pustą listę. Wspólny pomocnik `combat/czas-efektu.mjs` (pełne `getEffectStart` + kombatant); Quench z
+  prawdziwą walką dla obu miejsc, sprawdzony mutacją. Testy E7c szły poza walką, więc tego nie widziały.
+- **Kaliber bez naboju:** ładunek Emitera nie jest przedmiotem amunicji (dodanie go do paczki Amunicja byłoby błędem) —
+  pole `zasilanieZSieci` w danych broni; test spójności kalibrów je pomija.
+- **Grafika:** Emiter pożycza ikonę Szokera — wiersz w `dev/icons/MISSING.md` (kolejka A, następny batch); wiersze
+  żetonów dronów w sekcji E odhaczone.
+
 *(dalej etapy dopisują tu rozstrzygnięcia z wdrożenia, jak w `PLAN_m1_walka.md` §11)*

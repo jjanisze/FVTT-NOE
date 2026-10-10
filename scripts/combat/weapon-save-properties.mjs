@@ -18,11 +18,16 @@
  * ogólne: pierwsze pomija cele z redukcją/odpornością/niewrażliwością na dany typ obrażeń,
  * drugie — istoty, których dana cecha z definicji nie dotyczy (maszyna nie krwawi).
  *
+ * Impuls EMP (Emiter EMP, NOE s. 101; PLAN_m3_towarzysze.md §7.12) — odwrotna bramka `tylkoMaszyny` (istoty żywe
+ * EMP nie rusza) i `onFail` ze stanem trwającym do końca następnej tury **atakującego** (`attacker` z karty).
+ *
  * Źródło zasad: Tabele/Bronie/BronBiala.md; dum-dum — homebrew "W Kolorze Kobaltu".
  */
 
 import { NEUROSHIMA_CREATURE_TYPES } from "../config/creature-types.mjs";
 import { ROZRYWAJACA } from "../wkk/combat/weapon-save-properties.mjs";
+import { jestMaszyna } from "../actors/towarzysze.mjs";
+import { startNaKombatanta } from "./czas-efektu.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -69,7 +74,44 @@ const SAVE_PROPERTIES = {
   },
   // WKK-only, no RAW basis — see wkk/combat/weapon-save-properties.mjs.
   rozrywajaca: ROZRYWAJACA,
+  // Emiter EMP (s. 101): „Porażenie: trafiony cel wykonuje RO na Kondycję o ST 15, inaczej Obezwładnienie do końca
+  // twojej następnej tury”. Tylko maszyny — EMP nie działa na istoty żywe.
+  emp: {
+    label: "Porażenie (EMP)",
+    ability: "con",
+    status: "incapacitated",
+    statusLabel: "Obezwładnienie",
+    dc: { mode: "fixed", value: 15 },
+    sizes: null,
+    alternativeToDamage: false,
+    icon: "fa-bolt-lightning",
+    color: "#3a7bd5",
+    tylkoMaszyny: true,
+    onFail: (actor, { attacker } = {}) => obezwladnienieDoKoncaTury(actor, attacker),
+  },
 };
+
+/** Flaga efektu Obezwładnienia z Porażenia — kasujemy go po wygaśnięciu (rdzeń tylko oznacza). */
+export const FLAG_DO_KONCA_TURY = "doKoncaTuryAtakujacego";
+
+/**
+ * Stan do końca **następnej** tury atakującego. W v14 tury efektu liczą się po wszystkich uczestnikach walki, a
+ * wygaśnięcie sprawdza się na końcu tury kombatanta z `start.combatant` — efekt z tury atakującego, z wartością =
+ * liczba tur w rundzie, dożywa końca jego kolejnej tury. Bez walki — bez czasu (zdejmuje MG).
+ */
+export async function obezwladnienieDoKoncaTury(actor, attacker, status = "incapacitated") {
+  const effect = await ActiveEffect.implementation.fromStatusEffect(status);
+  const data = effect.toObject();
+  delete data._id;
+  data.flags = foundry.utils.mergeObject(data.flags ?? {}, { [MODULE_ID]: { [FLAG_DO_KONCA_TURY]: true } });
+  const combat = game.combat?.started ? game.combat : null;
+  const c = combat && attacker ? combat.getCombatantsByActor(attacker)[0] : null;
+  if (c) {
+    data.duration = { value: Math.max(1, combat.turns.length), units: "turns", expiry: "turnEnd" };
+    data.start = startNaKombatanta(c, combat);
+  }
+  await actor.createEmbeddedDocuments("ActiveEffect", [data]);
+}
 
 /** Czytelne nazwy rozmiarów do komunikatów. */
 const SIZE_LABELS = {
@@ -98,6 +140,7 @@ export function registerWeaponSaveProperties() {
     const el = html instanceof HTMLElement ? html : html[0];
     el.addEventListener("click", _onClickSaveButton);
   });
+  Hooks.on("updateActiveEffect", _onUpdateEffect);
 }
 
 /* -------------------------------------------- */
@@ -200,12 +243,15 @@ async function _onClickSaveButton(event) {
     return;
   }
 
+  // Atakujący z karty (stany „do końca twojej następnej tury”).
+  const msgId = btn.closest("[data-message-id]")?.dataset.messageId;
+  const attacker = (msgId ? _getItemFromMessage(game.messages.get(msgId)) : null)?.actor ?? null;
   for (const target of targets) {
-    await _resolveTarget(target, config, saveDC);
+    await _resolveTarget(target, config, saveDC, { attacker });
   }
 }
 
-async function _resolveTarget(target, config, saveDC) {
+async function _resolveTarget(target, config, saveDC, { attacker = null } = {}) {
   const actor = target.actor;
   if (!actor) return;
 
@@ -225,6 +271,12 @@ async function _resolveTarget(target, config, saveDC) {
       rejectClose: false,
     });
     if (!proceed) return;
+  }
+
+  // 2a. Cecha działa tylko na maszyny (EMP nie rusza istot żywych).
+  if (config.tylkoMaszyny && !jestMaszyna(actor)) {
+    await _announceNoEffect(actor, config, `${name} nie jest maszyną — ${config.label} nie działa na istoty żywe.`);
+    return;
   }
 
   // 2. Cecha z definicji nie dotyczy tej istoty (maszyna nie krwawi).
@@ -267,7 +319,7 @@ async function _resolveTarget(target, config, saveDC) {
   if (total < saveDC) {
     // `onFail` zastępuje samo przełączenie statusu tam, gdzie efekt jest czymś więcej niż
     // znacznikiem (Krwawienie ma własny cykl i profil obrażeń).
-    if (config.onFail) await config.onFail(actor);
+    if (config.onFail) await config.onFail(actor, { attacker });
     else await actor.toggleStatusEffect(config.status, { active: true });
     ui.notifications.info(`${config.label}: ${name} oblał RO i otrzymuje ${config.statusLabel}!`);
   } else {
@@ -320,11 +372,19 @@ function _isExemptCreatureType(actor, exempt) {
   });
 }
 
+/** Wygasłe Obezwładnienie z Porażenia znika (aktywny MG) — rdzeń v14 tylko oznacza `duration.expired`. */
+async function _onUpdateEffect(effect, changes) {
+  if (!game.users.activeGM?.isSelf) return;
+  if (foundry.utils.getProperty(changes, "duration.expired") !== true) return;
+  if (effect.getFlag(MODULE_ID, FLAG_DO_KONCA_TURY)) await effect.delete();
+}
+
 /** Wewnętrzne bramki cech — testowane wprost, bo `_resolveTarget` robi RO i karty czatu. */
 export const __testing = Object.freeze({
   SAVE_PROPERTIES,
   resistsDamageType: _resistsDamageType,
   isExemptCreatureType: _isExemptCreatureType,
   computeDC: _computeDC,
-  hasProperty: _hasProperty
+  hasProperty: _hasProperty,
+  resolveTarget: _resolveTarget
 });

@@ -1583,6 +1583,8 @@ function buildNpc(c) {
           blood: c.blood,
           morale: c.morale ?? null,
           usesZranienie: c.usesZranienie,
+          // Nota przy TT („tytanowy pancerz”): Emiter EMP ignoruje TT z opancerzenia maszyny (PLAN_m3 D27).
+          acNote: c.acNote ?? null,
           damageThreshold: c.damageThreshold ?? null,
           failureThreshold: c.failureThreshold ?? null,
           gear: c.gear ?? null,

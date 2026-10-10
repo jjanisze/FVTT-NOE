@@ -1149,7 +1149,7 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
-### M3 E0–E9 — towarzysze i drony: czyste zasady, wartości z właściciela, walka, karty, tworzenie, migracja, dane z podręcznika, drony z produkcji, kontrolery i sterowanie, zasilanie, awarie, tryb zdalny, sygnał, obraz kamery, OSD i naprawy; Stopnie Zranienia wg s. 205 (2026-10-10)
+### M3 E0–E10 — towarzysze i drony: czyste zasady, wartości z właściciela, walka, karty, tworzenie, migracja, dane z podręcznika, drony z produkcji, kontrolery i sterowanie, zasilanie, awarie, tryb zdalny, sygnał, obraz kamery, OSD, naprawy i Emiter EMP; Stopnie Zranienia wg s. 205 (2026-10-10)
 
 Plan: `PLAN_m3_towarzysze.md` (decyzje MG D1–D39, postęp §11).
 
@@ -1223,6 +1223,12 @@ Plan: `PLAN_m3_towarzysze.md` (decyzje MG D1–D39, postęp §11).
   „Napraw awarię” — bez Kobaltu karta MG ([Naprawione] albo stopień naprawy), z Kobaltem naprawa z konkretnymi
   częściami według tego, co się zepsuło. Zniszczony dron to „Wrak drona” — da się go nieść, nie da się go naprawić.
 - **Poprawka:** rzut na Tabelę awarii maszyn z przyciskiem [Zastosuj] jest znowu tylko dla MG.
+- **Emiter EMP** (`weapons/emiter-emp.mjs`): broń Zabójcy Maszyn w paczce Broń i jako przepis zdolności (100 h). Biegły
+  jest tylko Zabójca Maszyn; maszyna z pancerzem przy TT broni się przed emiterem TT 10 + ZRC; w tacce obrażeń istota żywa
+  ma domyślnie ×0 z plakietką „EMP nie działa na istoty żywe”; Porażenie — RO na Kondycję ST 15 albo Obezwładnienie do
+  końca następnej tury strzelca (tylko maszyny); „Naładuj (230 V)” — MG ładuje akumulator do 6 strzałów.
+- **Poprawki:** rzuty obronne potworów z Bestiariusza z biegłym RO znowu działają (wcześniej kończyły się błędem) i
+  liczą się z PB z podręcznika; awarie maszyn „do końca następnej tury” w walce naprawdę powstają.
 - **Testy:** Quench `towarzysze-zasady`, `towarzysze` i `drony`; e2e `towarzysz`, `towarzysz-tworzenie` i `dron`
   (nowe; `dron` z produkcją, rozłożeniem, sterowaniem, awarią, zasilaniem i 0 PW), `combat` (krytyk w istotę ze Stopniem i bez); mutacje dla F1, F2, kolejności, własności grupy, F17,
   poziomów za właścicielem i U23. Harness: `clickCanvas` trafia po `canvas.pan` w karcie w tle i nie zamienia

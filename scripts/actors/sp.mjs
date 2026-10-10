@@ -89,15 +89,27 @@ export function registerSP() {
       // Everything dnd5e already derived from the old prof — skill and save
       // totals, passive scores — was computed before this point, so shift the
       // proficient ones by the difference rather than recomputing from scratch.
+      // The rolls themselves read the Proficiency objects (`skill.prof.term`,
+      // `ability.saveProf.term`), not the totals: those are rebuilt on the new PB,
+      // or the card would show one number and the dice add another.
+      const Prof = globalThis.dnd5e?.documents?.Proficiency;
+      const reprof = p => (Prof && p instanceof Prof ? new Prof(pb, p.multiplier, p.rounding !== "up") : p);
       for (const skill of Object.values(this.system.skills ?? {})) {
         if (!skill.value) continue;
         const mult = skill.value;                 // 0.5 / 1 / 2 (half / prof / expertise)
         const shift = Math.floor(delta * mult);
         skill.total += shift;
         if (Number.isFinite(skill.passive)) skill.passive += shift;
+        skill.prof = reprof(skill.prof);
       }
       for (const ability of Object.values(this.system.abilities ?? {})) {
-        if (ability.proficient) ability.save += Math.floor(delta * ability.proficient);
+        // dnd5e 5.x: `save` is an object (`save.value` is the total, `save.roll` the roll mode). The old
+        // `ability.save += n` turned it into the string "[object Object]-6" and every saving throw of such
+        // a monster threw in `rollSavingThrow` (found by the Emiter EMP e2e, PLAN_m3_towarzysze.md E10).
+        if (ability.proficient && Number.isFinite(ability.save?.value)) ability.save.value += Math.floor(delta * ability.proficient);
+        ability.saveProf = reprof(ability.saveProf);
+        if (Number.isFinite(ability.attack)) ability.attack += delta;
+        if (Number.isFinite(ability.dc)) ability.dc += delta;
       }
     } catch (err) {
       console.error(`${MODULE_ID} | SP/PB computation failed for ${this.name}`, err);

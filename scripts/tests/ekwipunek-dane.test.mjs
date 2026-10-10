@@ -132,7 +132,8 @@ export function registerEquipmentDataTests(quench) {
       });
 
       it("kaliber wskazuje na istniejący nabój", function () {
-        for (const weapon of WEAPONS.filter(w => w.caliber)) {
+        // Emiter EMP ładuje akumulator z 230 V: jego „kaliber” to ładunek bez przedmiotu amunicji (`zasilanieZSieci`).
+        for (const weapon of WEAPONS.filter(w => w.caliber && !w.zasilanieZSieci)) {
           expect(AMMO_CALIBER_MAP, `${weapon.name} → ${weapon.caliber}`).to.have.property(weapon.caliber);
         }
       });

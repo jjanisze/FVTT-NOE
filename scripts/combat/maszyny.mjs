@@ -19,6 +19,7 @@ import { towarzysz, operatorDrona } from "../actors/towarzysze.mjs";
 import { posiadaczDrona } from "../actors/drony.mjs";
 import { ignite } from "./podpalenie.mjs";
 import { getMag, setMag } from "../weapons/magazine.mjs";
+import { startNaKombatanta } from "./czas-efektu.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -158,7 +159,7 @@ function _efektAwarii(pozycja, { nazwa, img = "icons/svg/hazard.svg", changes = 
     const c = _kombatantTury(actor);
     if (c) {
       data.duration = { value: 1, units: "turns", expiry: "turnEnd" };
-      data.start = { combatant: c.id, round: game.combat.round, turn: game.combat.turn };
+      data.start = startNaKombatanta(c);
     }
   }
   return data;

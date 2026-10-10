@@ -35,7 +35,7 @@
  * jednym MG). Scena, folder „Drony” (gdy go nie było) i wiadomości czatu znikają w `after()`.
  */
 
-import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup, captureWarnings, waitFor, stub } from "./helpers.mjs";
+import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup, captureWarnings, waitFor, stub, walkaTestowa } from "./helpers.mjs";
 import {
   utworzDrona, rozloz, zloz, przeniesUchwyt, uchwyt, uchwytDrona, dronUchwytu, posiadaczDrona, dronyPosiadacza,
   zetonyDrona, jestDronem, rodzajZPrzepisu, daneUchwytu, liniaUruchomienia, FLAG_UCHWYT
@@ -925,6 +925,9 @@ export function registerDronyTests(quench) {
         const wynik = await nowyDron(holder, "dron-latajacy");
         const k = { czas: 0, start: 0, zaatakowal: false, rssi: { wartosc: 20, kreski: 1 } };
         const sesja = { dronUuid: wynik.dron.uuid, tryb: "A", sygnal: { jakosc: 0.2 }, failsafeOd: null };
+        // Poza walką (lista akcji tylko w walce) — niezależnie od walki, która akurat trwa w świecie.
+        const bezWalki = stub(game, "combat", null);
+        try {
         let st = stanOsd(sesja, wynik.dron, k);
         expect(st).to.include({ tryb: "ACRO", aktywacja: "A", bron: false, akcje: null });
         expect(st.ostrzezenia).to.include("RSSI LOW");
@@ -937,6 +940,9 @@ export function registerDronyTests(quench) {
         expect(st).to.include({ bron: true, uzbrojony: true, amunicja: null });
         expect(stanOsd({ ...sesja, tryb: "B" }, wynik.dron, k).uzbrojony, "[B] nie atakuje").to.equal(false);
         expect(stanOsd(sesja, wynik.dron, { ...k, zaatakowal: true }).uzbrojony, "po ataku").to.equal(false);
+        } finally {
+          bezWalki();
+        }
       });
 
       it("czcionka Betaflight jako osobny zasób GPL-3 w module (D39)", async function () {
@@ -970,6 +976,22 @@ export function registerDronyTests(quench) {
         await naprawAwarie(dron, 19);
         expect(przyczynyWylaczenia(dron)).to.not.include("awaria");
         expect(aktywneAwarie(dron).map(a => a.pozycja)).to.deep.equal([8]);
+      });
+
+      it("w walce awaria 5 (do końca następnej tury) powstaje z czasem na turze posiadacza (pełne `start`, v14)", async function () {
+        const { dron } = await nowyDron(haker, "dron-kroczacy");
+        const w = await walkaTestowa([haker], { nazwa: "awaria" });
+        const r = stub(game, "combat", w.combat);
+        try {
+          await zastosujAwarie(dron, 5);
+          const e = dron.effects.find(x => x.getFlag(MODULE_ID, "awaria") === 5);
+          expect(e, "efekt powstał (wcześniej częściowe `start` — po cichu nic)").to.be.ok;
+          expect(e._source.duration).to.include({ units: "turns", expiry: "turnEnd" });
+          expect(e._source.start.combatant, "tura posiadacza").to.equal(w.combat.turns[0].id);
+        } finally {
+          r();
+          await w.sprzatnij();
+        }
       });
 
       it("plan naprawy: NOE — decyduje MG; WKK — części z tabeli §7.11, stopień wyżej przy PW ≤ ½", async function () {

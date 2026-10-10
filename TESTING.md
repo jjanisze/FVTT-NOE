@@ -181,6 +181,12 @@ E9 w `dron`: Napraw PW (bez narzędzi — okno „Brakuje narzędzi”) z 0 PW �
 Robota naprawy TT −2 (5 MK, 5 CZ) → ukończona → TT wraca; pod NOE karta MG → [Naprawione] (gracz nie widzi przycisków MG);
 rzut awarii z [Zastosuj] — treść tylko dla MG. Quench: awarie trwałe i zdejmowanie (19), plan NOE/WKK z tabeli i
 podniesieniem stopnia, Napraw PW, Robota naprawy do końca, karta NOE, wrak, aktywności dokładane do starych uchwytów.
+Krok `combat` „Emiter EMP” (E10): biegłość ze zdolności, Naładuj (230 V) przyciskiem MG, strzał w Obrońcę oceniany
+przeciw 10 + ZRC (D27), tacka obrażeń MG: maszyna ×1, istota żywa ×0 z plakietką, Porażenie — istota żywa pominięta,
+maszyna oblewa RO KON 15 i ma Obezwładnienie zakotwiczone w turze strzelca. Quench `emiter-emp`: dane i przepis, TT
+wobec broni, biegłość, Porażenie (także w prawdziwej walce), ładowanie, rzut obronny potwora z PB podręcznika (mutacja
+`sp.mjs`). Pomocnik `walkaTestowa` (`tests/helpers.mjs`) — prawdziwa walka na scenie testowej; `game.combat` to walka
+oglądanej sceny, więc test podstawia ją na czas wywołania.
 `clickCanvas` renderuje klatkę po `canvas.pan` (karta w tle nie renderuje sama, a pikery czytają zbuforowane
 przekształcenie warstwy) i wysyła `mouseMoved` bez wciśniętego przycisku — inaczej Chrome potrafi zamienić
 kliknięcie w przeciągnięcie bez `pointerdown`. `pressKey(code)` to prawdziwy klawisz przez CDP (`Escape`, `KeyW`…`KeyD`

@@ -88,6 +88,7 @@ import { registerArmourPiercing } from "./combat/armour-piercing.mjs";
 import { registerRerolls } from "./combat/rerolls.mjs";
 import { registerObalajaca } from './combat/obalajaca.mjs';
 import { registerWeaponSaveProperties } from './combat/weapon-save-properties.mjs';
+import { registerEmiterEmp, emiterEmpApi } from "./weapons/emiter-emp.mjs";
 import { registerMeleeManeuvers, maneuversApi } from './combat/melee-maneuvers.mjs';
 import { registerKnockoutAndLastAction } from "./combat/knockout.mjs";
 import { registerUmieranie, umieranieApi } from "./combat/umieranie.mjs";
@@ -330,6 +331,8 @@ Hooks.once("init", () => {
   registerRerolls();
   registerObalajaca();
   registerWeaponSaveProperties();
+  // Emiter EMP: biegłość ze zdolności, TT celu-maszyny (D27), ×0 na istoty żywe, Naładuj (230 V) (PLAN_m3 §7.12).
+  registerEmiterEmp();
   registerMeleeManeuvers();
   registerKnockoutAndLastAction();
   // Umieranie i stabilizacja wg NOE (PLAN_m1_walka E1–E2): 0 PW, rzuty przeciw śmierci, karty MG.
@@ -525,6 +528,7 @@ Hooks.once("ready", () => {
   game.neuroshima.towarzysze = { ...towarzyszeApi, ...towarzyszeWalkaApi, ...towarzyszeTworzenieApi, migruj: migrujTowarzysza };
   game.neuroshima.drony = { ...dronyApi, ...dronySterowanieApi, ...dronyStanApi, ...dronyZdalneApi, ...dronyObrazApi, ...dronyOsdApi, ...dronyNaprawaApi, premiaAtakuDrona };
   game.neuroshima.maszyny = maszynyApi;
+  game.neuroshima.emiterEmp = emiterEmpApi;
   // Okoliczności ataku — game.neuroshima.okolicznosci.rozstrzygnij(activity) (podgląd z bieżącymi celami)
   game.neuroshima.okolicznosci = okolicznosciApi;
   // Rekonwalescencja (PLAN_m1_walka E6) — .stan(actor), .kalendarzyk(actor), .dane(actor) (prognoza bez okna)

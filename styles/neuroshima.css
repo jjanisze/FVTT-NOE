@@ -5097,6 +5097,13 @@ tr.neuro-tt-off td.attribution-value {
   pointer-events: none;
 }
 
+/* Emiter EMP w tacce obrażeń: cel nie-maszyna domyślnie ×0 (PLAN_m3 §7.12). */
+.neuro-emp-plakietka {
+  display: block;
+  font-size: var(--font-size-11, 11px);
+  color: #3a7bd5;
+}
+
 #neuro-dron-zdalny kbd {
   padding: 0 4px;
   border: 1px solid currentColor;

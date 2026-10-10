@@ -695,6 +695,26 @@ const BRON_SPECJALNA = [
       "Obszar, RO ST 20, Powalenie i Ogłuchnięcie rozstrzyga MG.",
       "Zasięg minimalny 50 m nie jest egzekwowany."
     ]
+  },
+  {
+    // NOE s. 101 (Zwiadowca → Zabójca Maszyn, zdolność „Emiter EMP”; PLAN_m3_towarzysze.md §7.12): impuls
+    // elektromagnetyczny na maszyny. Budowany 100 h ze 100 gb surowców (D35 produkcji, jak Pogromca) — nie ma go
+    // w cenniku. Waga i cena to szacunek (cena = 2 × surowce; „ciężka, nieporęczna” — 8 kg); dostępność 0.
+    // Akumulator na 6 strzałów, ładowany z 230 V — aktywność „Naładuj (230 V)” (`weapons/emiter-emp.mjs`), stąd
+    // ładunek „emp” bez przedmiotu amunicji. Biegłość daje sama zdolność; Porażenie — właściwość `emp`.
+    id: "emiter-emp", name: "Emiter EMP", type: "specjalna", icon: "paralyzer.svg",
+    damage: { number: 8, denomination: 6, types: ["lightning"] },
+    range: { value: 9, long: 15 },
+    props: ["wmag", "tryb_p", "ladowanie", "emp"],
+    // `zasilanieZSieci`: „kaliber” to ładunek akumulatora, nie nabój — nie ma przedmiotu amunicji.
+    caliber: "emp", zasilanieZSieci: true, mag: { kind: "wmag", max: 6 }, chamber: false, fixedDamage: true,
+    weight: 8, price: 200, avail: 0,
+    note: "Impuls elektromagnetyczny: nie działa na istoty żywe ani urządzenia bez mikroprocesorów. Ignoruje TT z "
+        + "opancerzenia maszyny. Akumulator na 6 strzałów, ładowany prądem 230 V.",
+    manual: [
+      "Urządzenia bez mikroprocesorów — rozstrzyga MG (moduł zna tylko podział maszyna / istota żywa).",
+      "Pancerz zamontowany na dronie jako modyfikacja — jego premię odejmuje MG (D27)."
+    ]
   }
 ];
 

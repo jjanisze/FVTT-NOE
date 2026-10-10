@@ -406,7 +406,7 @@ export async function setTargets(message) {
   const obrona = foundry.utils.deepClone(obronaOf(message)) ?? buildObrona(roll, activity);
   const attacker = fromUuidSync(obrona.attackerUuid ?? "") ?? activity?.actor ?? null;
   const cover = tokens.length === 1 ? coverAcBonus(roll?.options?.neuroCover) : 0;
-  obrona.targets = tokens.map(t => buildTargetEntry(t, { obrona, attacker, cover }));
+  obrona.targets = tokens.map(t => buildTargetEntry(t, { obrona, attacker, cover, item: activity?.item ?? null }));
   await message.update({ [`flags.${MODULE_ID}.${OBRONA_FLAG}`]: obrona });
 }
 

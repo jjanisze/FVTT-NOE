@@ -305,6 +305,12 @@ reproducible processor and normalized PNG/SVG candidates are under
 | B | Siódme poty; Fart; Ja już swoje odchorowałem; Grad ołowiu; Coś mi tu śmierdzi; Czas patriotów; Ćwiczenie czyni mistrza; Doktor Quinn; Jeśli ma silnik, to ruszy |
 | C | Pakowanie; Patriota; Wierzę; Wychuchana spluwa; Zawzięty sukinkot; Urodzony morderca; Młynek; Kuchenny Terror; Logika Różnoboczna |
 
+## Queue (A) — do następnego batcha
+
+| # | File | Item / where it shows up | Suggested prompt content |
+|---|------|--------------------------|---------------------------|
+| 1 | `icons/weapons/emiter_emp.svg` | Emiter EMP (NOE s. 101, Zabójca Maszyn; PLAN_m3_towarzysze.md §7.12) — dziś pożycza `paralyzer.svg` Szokera | Heavy, bulky handheld EMP emitter: a stubby barrel ending in a dish or coil, a battery pack slung under it, cables, a crude grip — homemade, wasteland-built |
+
 ## How an item gets added here
 
 Add a row any time a review finds an item on the actor's own portrait,
@@ -442,11 +448,11 @@ tych dróg nie istnieje dla `towarzysz-*`, więc żeton to portret. Styl i propo
 | 2 | `tokens/towarzysz-zmutowany-owad.webp` | Zmutowany owad (s. 99), mały | Owad wielkości psa z góry: chitynowy pancerz, odnóża do kopania, żuwaczki |
 | 3 | `tokens/towarzysz-zmutowany-ssak.webp` | Zmutowany ssak (s. 99), duży | Potężny zmutowany drapieżnik z góry (niedźwiedź / pies-gigant), łyse placki skóry |
 | 4 | `tokens/towarzysz-zmutowany-gad.webp` | Zmutowany gad (s. 100), średni | Jaszczur ziemnowodny z góry, płetwiasty ogon, łuski w kolorze błota |
-| 5 | `tokens/towarzysz-dron-kroczacy.webp` | Dron kroczący (s. 83), średnia maszyna | Czworonożny robot z blach i złomu z góry, kamera na wysięgniku, miejsce na broń na grzbiecie |
-| 6 | `tokens/towarzysz-dron-latajacy.webp` | Dron latający (s. 84), mała maszyna | Kwadrokopter z góry, cztery śmigła w osłonach, kamera i pakiet akumulatora pośrodku |
+| ~~5~~ | ~~`tokens/towarzysz-dron-kroczacy.webp`~~ | **Dostarczone 2026-10-10** (MG, z portretem w `tokens/portraits/`) | — |
+| ~~6~~ | ~~`tokens/towarzysz-dron-latajacy.webp`~~ | **Dostarczone 2026-10-10** (MG, z portretem w `tokens/portraits/`) | — |
 
-Drony staną się szablonami w E7 — pliki 5 i 6 mogą przyjść już teraz; builder weźmie je przy następnym
-`fvtt packs`. Ludzcy towarzysze żetonu z paczki nie mają (czysta karta postaci).
+Drony mają już żetony i portrety (PLAN_m3_towarzysze.md §11, E8a). Zostają zwierzęta 1–4. Ludzcy towarzysze
+żetonu z paczki nie mają (czysta karta postaci).
 
 ---
 

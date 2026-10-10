@@ -304,6 +304,8 @@ const NADPISANIA = {
   "ammo:pogromca-trucizna": { produkcja: false },
   "ammo:pogromca-kwas": { produkcja: false },
   "ammo:pogromca-ogien": { produkcja: false },
+  // Emiter EMP — tylko przez zdolność Zabójcy Maszyn (PRZEPISY_ZDOLNOSCI, jak Pogromca; PLAN_m3_towarzysze.md §7.12).
+  "weapon:emiter-emp": { produkcja: false },
 
   /* Pancerze — krawiec: lekkie pancerze; kowal: płyty, zbroje śmieciowe, hełm, tarcze (s. 135) */
   "armor:kurtka-cwiekowana": { narzedzia: "krawca", profil: "3 MO, 2 MK" },
@@ -796,6 +798,27 @@ function _przepisyZdolnosci() {
       tagi: [],
       profesja: null,
       zrodlo: Object.freeze({ zdolnosc: "pogromca", s: 99 })
+    }));
+  }
+  const emp = KATALOG.get("weapon:emiter-emp");
+  if (emp) {
+    // NOE s. 101: 100 gb surowców, 100 h; koszt produkcji 20 MK, 40 CE, 40 CZ. Narzędzi RAW nie podaje —
+    // elektronika (impuls z akumulatora i elektroniki), do weta MG.
+    out.set("zdolnosc/weapon:emiter-emp", Object.freeze({
+      id: "zdolnosc/weapon:emiter-emp",
+      nazwa: emp.nazwa,
+      wynik: Object.freeze({ typ: "item", ref: emp.ref, ilosc: 1 }),
+      jednorazowy: false,
+      cena: emp.cena,
+      wartosc: emp.cena,
+      st: 0,
+      bezTestu: true,
+      minuty: 100 * 60,
+      surowce: Object.freeze(parseSurowce("20 MK, 40 CE, 40 CZ")),
+      narzedzia: toolExprString(parseToolExpr("elektronika")),
+      tagi: [],
+      profesja: null,
+      zrodlo: Object.freeze({ zdolnosc: "emiter-emp", s: 101 })
     }));
   }
   return out;

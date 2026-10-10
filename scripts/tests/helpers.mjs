@@ -44,6 +44,31 @@ export async function scratchActor(data = {}) {
   return actor;
 }
 
+/** Prawdziwa walka na scenie testowej: żetony aktorów, walka rozpoczęta, `kto` w turze. Zwraca `sprzatnij()`. */
+export async function walkaTestowa(aktorzy, { kto = aktorzy[0], nazwa = "walka" } = {}) {
+  const levelId = foundry.documents.BaseScene.metadata.defaultLevelId;
+  const scena = await Scene.implementation.create({
+    name: `${SCRATCH_PREFIX} ${nazwa}`, width: 1500, height: 1500, padding: 0, navigation: false,
+    grid: { type: CONST.GRID_TYPES.SQUARE, size: 100, distance: 1.5, units: "m" },
+    initialLevel: levelId, levels: [{ _id: levelId, name: "Podłoga", elevation: { bottom: 0, top: null } }]
+  });
+  const tokeny = [];
+  for (const [i, a] of aktorzy.entries()) tokeny.push((await a.getTokenDocument({ x: 100 + i * 200, y: 100, actorLink: !a.isToken })).toObject());
+  const docs = await scena.createEmbeddedDocuments("Token", tokeny);
+  const combat = await Combat.implementation.create({ scene: scena.id, active: true });
+  await combat.createEmbeddedDocuments("Combatant", docs.map((t, i) => ({ tokenId: t.id, sceneId: scena.id, actorId: t.actorId, initiative: 20 - i })));
+  await combat.startCombat();
+  const idx = combat.turns.findIndex(c => c.actor === kto || c.actorId === kto.id);
+  if (idx > 0) await combat.update({ turn: idx });
+  return {
+    combat, scena, zetony: docs,
+    sprzatnij: async () => {
+      if (game.combats.get(combat.id)) await combat.delete();
+      if (game.scenes.get(scena.id)) await scena.delete();
+    }
+  };
+}
+
 /** Kasuje wszystko, co utworzyły helpery. Wołane w `after()` każdej paczki. */
 export async function scratchCleanup() {
   for (const doc of Array.from(trash).reverse()) {

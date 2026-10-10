@@ -415,6 +415,18 @@ COVERAGE = {
         ],
         "manual": "Obrażenia krytyczne przeciw mutantom i potworom dolicza MG; biegłość z Pogromcą tylko dla Łowcy pilnuje stół.",
     },
+    "emiter-emp": {
+        "auto": [
+            ("Emiter EMP jako przepis zdolności: 100 gb surowców (20 MK, 40 CE, 40 CZ), 100 h pracy", _PROFESSION_RECIPES),
+            ("biegłość w emiterze tylko z tej zdolności", "weapons/emiter-emp.mjs"),
+            ("maszyna z pancerzem przy TT broni się TT 10 + mod. ZRC (ignoruje opancerzenie)", "weapons/emiter-emp.mjs"),
+            ("istota żywa w tacce obrażeń domyślnie ×0 z plakietką", "weapons/emiter-emp.mjs"),
+            ("Porażenie: RO KON ST 15 albo Obezwładnienie do końca twojej następnej tury (tylko maszyny)",
+             "combat/weapon-save-properties.mjs"),
+            ("Naładuj (230 V): karta, MG ładuje akumulator do 6 strzałów", "weapons/emiter-emp.mjs"),
+        ],
+        "manual": "Urządzenia bez mikroprocesorów i pancerz zamontowany na dronie — rozstrzyga MG.",
+    },
 
     # ---- Opcje ----
     "stalowy-nadgarstek": {

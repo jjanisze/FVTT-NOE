@@ -33,6 +33,7 @@ import { registerZagrozeniaTests } from "./zagrozenia.test.mjs";
 import { registerTowarzyszeZasadyTests } from "./towarzysze-zasady.test.mjs";
 import { registerTowarzyszeTests } from "./towarzysze.test.mjs";
 import { registerDronyTests } from "./drony.test.mjs";
+import { registerEmiterEmpTests } from "./emiter-emp.test.mjs";
 import { registerConfigTests } from "./config.test.mjs";
 import { registerEquipmentDataTests } from "./ekwipunek-dane.test.mjs";
 import { registerDiseaseTests } from "./choroby.test.mjs";
@@ -82,6 +83,7 @@ export function registerQuenchTests() {
     registerTowarzyszeZasadyTests(quench);
     registerTowarzyszeTests(quench);
     registerDronyTests(quench);
+    registerEmiterEmpTests(quench);
     console.log("Neuroshima 5e | Quench batches registered");
   });
 }

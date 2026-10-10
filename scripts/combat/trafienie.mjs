@@ -3,9 +3,10 @@
  *
  * Zasady są w `config/defense-rules.mjs` (`resolveHit`); tutaj Foundry:
  *
- *   - **`ttAgainst(cel, { attacker, melee })`** — TT celu wobec tego atakującego: `ac.value`
+ *   - **`ttAgainst(cel, { attacker, melee, item })`** — TT celu wobec tego atakującego: `ac.value`
  *     (silnik TT dla postaci, statblock dla BN, z Efektami Aktywnymi reakcji trwałych) plus znaczniki
- *     `ttVsAttacker` (Parowanie tarczą — ataki tego przeciwnika, E3).
+ *     `ttVsAttacker` (Parowanie tarczą — ataki tego przeciwnika, E3); TT wobec konkretnej broni z rejestru
+ *     `zarejestrujTTWobecBroni` (Emiter EMP ignoruje opancerzenie maszyny — PLAN_m3_towarzysze.md D27).
  *   - **Stempel werdyktu.** W `preCreateChatMessage` karty Testu Ataku (klient atakującego — ten sam
  *     wzorzec, którym `weapons/magazine.mjs` stempluje `shotCaliber`) liczymy werdykt dla każdego
  *     celu i zapisujemy go w `flags.<mod>.obrona`. Po utworzeniu kartę pisze już tylko MG (E3).
@@ -43,16 +44,34 @@ const _num = v => (Number.isFinite(Number(v)) ? Number(v) : 0);
 /*  TT wobec atakującego                         */
 /* -------------------------------------------- */
 
+/** @type {((target: Actor, o: {item: Item, base: number}) => number|null)[]} */
+const _ttWobecBroni = [];
+
+/**
+ * TT celu wobec konkretnej broni: `fn(cel, { item, base })` zwraca nową TT (statblock/silnik) albo `null` — nie ta
+ * broń. Pierwsza niepusta wygrywa; znaczniki wobec atakującego doliczają się potem.
+ */
+export function zarejestrujTTWobecBroni(fn) {
+  _ttWobecBroni.push(fn);
+}
+
 /**
  * @param {Actor5e} target
  * @param {object} [o]
  * @param {Actor5e|string|null} [o.attacker]  Aktor albo jego UUID.
  * @param {boolean} [o.melee]
+ * @param {Item5e|null} [o.item]  broń ataku — TT wobec broni (`zarejestrujTTWobecBroni`)
  * @returns {number|null}
  */
-export function ttAgainst(target, { attacker = null, melee = false } = {}) {
-  const base = target?.system?.attributes?.ac?.value;
+export function ttAgainst(target, { attacker = null, melee = false, item = null } = {}) {
+  let base = target?.system?.attributes?.ac?.value;
   if (!Number.isFinite(base)) return null;
+  if (item) {
+    for (const fn of _ttWobecBroni) {
+      const v = fn(target, { item, base });
+      if (Number.isFinite(v)) { base = v; break; }
+    }
+  }
   const attackerUuid = typeof attacker === "string" ? attacker : attacker?.uuid;
   let bonus = 0;
   if (attackerUuid) {
@@ -109,10 +128,10 @@ export function verdictOfEntry(obrona, entry) {
  * Wpis celu na karcie ataku: TT wobec atakującego w chwili rzutu, osłona, werdykt.
  * @param {Token|TokenDocument} token
  */
-export function buildTargetEntry(token, { obrona, attacker, cover = 0, autoKrytyk = null }) {
+export function buildTargetEntry(token, { obrona, attacker, cover = 0, autoKrytyk = null, item = null }) {
   const doc = token?.document ?? token;
   const actor = doc?.actor;
-  const tt = actor ? ttAgainst(actor, { attacker, melee: obrona.melee }) : null;
+  const tt = actor ? ttAgainst(actor, { attacker, melee: obrona.melee, item }) : null;
   const entry = {
     tokenUuid: doc?.uuid ?? null, actorUuid: actor?.uuid ?? null, name: doc?.name ?? actor?.name ?? "?",
     tt, cover: _num(cover), used: [], critDowngraded: false, verdict: null, decided: false,
@@ -188,7 +207,7 @@ export function isHitForRolls(rolls, token, activity = null) {
   const melee = isMeleeAttack(activity, roll.options?.attackMode);
   return isHitVerdict(resolveHit({
     total: roll.total, critical: roll.isCritical, fumble: roll.isFumble,
-    tt: actor ? ttAgainst(actor, { attacker: activity?.actor, melee }) : null,
+    tt: actor ? ttAgainst(actor, { attacker: activity?.actor, melee, item: activity?.item ?? null }) : null,
     cover: coverAcBonus(roll.options?.neuroCover)
   }).verdict);
 }
@@ -279,7 +298,7 @@ function _onPreCreateMessage(message, data, _options, userId) {
   // Okno osłony pyta tylko przy jednym celu (`combat/cover.mjs`) — osłona należy do niego.
   const cover = tokens.length === 1 ? coverAcBonus(roll.options?.neuroCover) : 0;
   obrona.targets = tokens.map(t => buildTargetEntry(t, {
-    obrona, attacker: activity?.actor, cover, autoKrytyk: autoKrytykZRzutu(roll, t.document?.uuid)
+    obrona, attacker: activity?.actor, cover, autoKrytyk: autoKrytykZRzutu(roll, t.document?.uuid), item: activity?.item ?? null
   }));
   message.updateSource({ [`flags.${MODULE_ID}.${OBRONA_FLAG}`]: obrona });
 }

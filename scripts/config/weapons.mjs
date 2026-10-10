@@ -97,6 +97,9 @@ const NEURO_WEAPON_PROPERTIES = {
   // razem ze zmianą kalibru. Są w katalogu, bo bez wpisu tutaj dnd5e nie ma etykiety i karta
   // przedmiotu wywala się przy renderowaniu listy właściwości.
   rozrywajaca:       { label: "Rozrywająca" },       // con save or Krwawienie (dum-dum)
+
+  // --- Broń specjalna ----------------------------------------------
+  emp:               { label: "Impuls EMP" },        // Emiter EMP: tylko maszyny, RO KON ST 15 albo Obezwładnienie
   hollowpoint:       { label: "Hollow-point" },      // osłona z redukcją zatrzymuje pocisk
 
   // --- Firearms (palna*) only ------------------------------------
@@ -198,6 +201,7 @@ const WEAPON_TYPE_PROPERTIES = {
   specjalna: new Set([
     "amm", "wmag", "beb", "tryb_p",
     "burzaca", "ciezka", "dluga", "ladowanie", "obalajaca", "ppanc", "przeladowanie", "sm", "zasilana", "spalinowa",
+    "emp",
   ]),
 };
 
@@ -311,6 +315,9 @@ const WEAPON_PROPERTY_TOOLTIPS = {
   unieruchamiajaca: "Zamiast obrażeń narzuca (na Śr/Duży cel) RO na Zręczność. Porażka = Unieruchomienie (Escape DC ten sam).",
   rch: "Zasięgowa. Pozwala zaatakować w walce wręcz istoty odległe o 3 metry.",
   zasilana: "Wymaga prądu. Zwykła bateria pozwala na ~5 ataków.",
+  emp: "Impuls EMP: działa tylko na maszyny — istotom żywym nie zadaje obrażeń. Ignoruje TT z opancerzenia maszyny. "
+    + "Porażenie: trafiona maszyna wykonuje RO na Kondycję o ST 15, inaczej Obezwładnienie do końca następnej tury "
+    + "atakującego.",
 };
 
 function onRenderItemSheetWeaponTooltips(app, html, data) {
