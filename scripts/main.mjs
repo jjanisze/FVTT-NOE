@@ -35,6 +35,7 @@ import { registerTowarzysze, towarzyszeApi } from "./actors/towarzysze.mjs";
 import { registerTowarzyszeWalka, towarzyszeWalkaApi } from "./combat/towarzysze-walka.mjs";
 import { registerTowarzyszeKarta } from "./actors/towarzysze-karta.mjs";
 import { registerTowarzyszeTworzenie, towarzyszeTworzenieApi } from "./actors/towarzysze-tworzenie.mjs";
+import { migrujTowarzysza } from "./migration/migrate-towarzysze.mjs";
 import { registerCharacterDefaults } from "./actors/character-defaults.mjs";
 import { registerClassState } from "./actors/class-state.mjs";
 import { registerAbilityHotbar } from "./actors/ability-hotbar.mjs";
@@ -494,7 +495,7 @@ Hooks.once("ready", () => {
   // Umieranie (PLAN_m1_walka) — game.neuroshima.umieranie.stan(actor), .stabilizuj(actor), .bnDoUmierania(actor)
   game.neuroshima.umieranie = umieranieApi;
   // Towarzysze i drony (PLAN_m3) — game.neuroshima.towarzysze.wlasciciel(actor), .wartosci(actor), .maStopnieZranienia(actor)
-  game.neuroshima.towarzysze = { ...towarzyszeApi, ...towarzyszeWalkaApi, ...towarzyszeTworzenieApi };
+  game.neuroshima.towarzysze = { ...towarzyszeApi, ...towarzyszeWalkaApi, ...towarzyszeTworzenieApi, migruj: migrujTowarzysza };
   // Okoliczności ataku — game.neuroshima.okolicznosci.rozstrzygnij(activity) (podgląd z bieżącymi celami)
   game.neuroshima.okolicznosci = okolicznosciApi;
   // Rekonwalescencja (PLAN_m1_walka E6) — .stan(actor), .kalendarzyk(actor), .dane(actor) (prognoza bez okna)
