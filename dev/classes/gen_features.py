@@ -358,8 +358,13 @@ COVERAGE = {
             ("dron z produkcji: aktor-maszyna ze stemplem twórcy (TT i PW z twojej PB i mod. INT w chwili budowy) "
              "i złożony uchwyt w ekwipunku (25 / 4 kg)", "actors/drony.mjs"),
             ("Rozłóż [A] / Złóż [A] — żeton drona obok ciebie; uchwyt przenosi się, nie kopiuje", "actors/drony.mjs"),
+            ("kontroler zdalnego sterowania: domowy ze schematu (100 m) albo fabryczny (300 m); Komenda [B], Steruj [A], "
+             "Reaguj [R] z kontrolerem w ręce — karta z dozwolonymi akcjami, plakietki „atak wymaga Steruj [A]” i "
+             "„druga aktywacja w rundzie”", "actors/drony-sterowanie.mjs"),
+            ("broń zamontowana na dronie: atak 2|3 + twoja PB + ZRC operatora, obrażenia kość broni + twój mod. INT, "
+             "ST obszarowe 8 + PB + ZRC operatora; magazynek schodzi", "actors/drony-bron.mjs"),
         ],
-        "manual": "Kierowanie, naprawa i zasilanie drona — przy stole (następne etapy). "
+        "manual": "Naprawa, zasilanie, awarie i obraz z kamery drona — przy stole (następne etapy). "
                   "Biegłość w narzędziach małego hakera zaznacza gracz.",
     },
     "serwisowanie": {

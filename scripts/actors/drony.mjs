@@ -40,6 +40,10 @@ const FOLDER = "Drony";
 /** Stałe id aktywności uchwytu (16 znaków, jak id dokumentu). */
 export const AKT_ROZLOZ = "neuroDronRozloz0";
 export const AKT_ZLOZ = "neuroDronZloz000";
+/** Zatrzask aktywacji [A]/[B] na dronie (U20): `{ combatId, runda, tryb, operator }`. */
+export const FLAG_AKTYWACJA = "dronAktywacja";
+/** Reakcja drona [R] w rundzie: `{ combatId, runda, operator }`. */
+export const FLAG_REAKCJA = "dronReakcja";
 /** Rozłożenie i złożenie „obok siebie” (U12) — dalej ostrzeżenie. */
 const ZASIEG_M = 1.5;
 
@@ -256,6 +260,29 @@ export async function zbudujDrona(holder, rodzaj, { tworca = null } = {}) {
 /*  Przekaźnik MG (U12)                          */
 /* -------------------------------------------- */
 
+/** Akcje przekaźnika dokładane przez inne pliki (`zarejestrujAkcje`) — bez importu w drugą stronę. */
+const _akcje = new Map();
+
+/**
+ * Rejestruje akcję przekaźnika MG: `fn(actor, dane)` wykonuje aktywny MG dla prośby `{ akcja: nazwa, … }`.
+ * @param {string} nazwa
+ * @param {(actor: Actor, dane: object) => Promise<any>} fn
+ */
+export function zarejestrujAkcje(nazwa, fn) {
+  _akcje.set(nazwa, fn);
+}
+
+/**
+ * Prośba do MG o zapis, którego gracz nie może zrobić sam (U12). MG wykonuje od razu; gracz kładzie ją
+ * flagą na aktorze, którego jest właścicielem, a wykonuje aktywny MG.
+ * @param {Actor} actor  aktor gracza (właściciel)
+ * @param {{akcja: string}} dane
+ */
+export async function prosbaDoMG(actor, dane) {
+  if (game.user.isGM) return _wykonaj(actor, { ...dane, user: game.user.id });
+  return _prosba(actor, dane);
+}
+
 async function _prosba(actor, dane) {
   const nonce = foundry.utils.randomID(12);
   if (!game.users.activeGM) ui.notifications.warn("Brak MG online — prośba o drona czeka, aż MG wejdzie do gry.");
@@ -283,6 +310,7 @@ async function _obsluzProsby(actor) {
 }
 
 async function _wykonaj(actor, dane) {
+  if (_akcje.has(dane.akcja)) return _akcje.get(dane.akcja)(actor, dane);
   switch (dane.akcja) {
     case "utworz":
       return utworzDrona(actor, dane.rodzaj, { stempel: dane.stempel });
@@ -315,6 +343,12 @@ async function _zabierz({ uchwyt: uuid }) {
     naScenach.get(t.parent).push(t.id);
   }
   if (!naScenach.size) return;
+  // Złożony dron nie ma operatora ani aktywacji (E7b) — kolejne wejście zaczyna od zera.
+  await dron.update({
+    [`flags.${MODULE_ID}.${FLAG}.operator`]: null,
+    [`flags.${MODULE_ID}.-=${FLAG_AKTYWACJA}`]: null,
+    [`flags.${MODULE_ID}.-=${FLAG_REAKCJA}`]: null
+  });
   for (const [scene, ids] of naScenach) await scene.deleteEmbeddedDocuments("Token", ids);
   await _karta(item.parent, dron, "składa");
 }
@@ -587,6 +621,6 @@ export function registerDrony() {
 }
 
 export const dronyApi = Object.freeze({
-  utworzDrona, zbudujDrona, rozloz, zloz, przeniesUchwyt,
+  utworzDrona, zbudujDrona, rozloz, zloz, przeniesUchwyt, prosbaDoMG,
   uchwyt, uchwytDrona, dronUchwytu, posiadaczDrona, dronyPosiadacza, zetonyDrona, jestDronem, liniaUruchomienia
 });

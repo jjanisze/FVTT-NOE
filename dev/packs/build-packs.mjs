@@ -43,6 +43,8 @@ import { buildKwasItemData } from "../../scripts/items/kwas.mjs";
 import { buildStazaItemData } from "../../scripts/items/staza.mjs";
 import { buildDetonatorItemData, buildElectricFuzeItemData } from "../../scripts/items/detonator.mjs";
 import { GOGLE_VARIANTS, buildGogleItemData } from "../../scripts/items/gogle.mjs";
+import { buildKontrolerItemData } from "../../scripts/items/kontroler.mjs";
+import { KONTROLERY } from "../../scripts/config/towarzysze-data.mjs";
 import { PRODUCTION_GEAR, buildProductionGearItemData } from "../../scripts/items/production-gear.mjs";
 import { ARMORS, buildArmorItemData } from "../../scripts/config/armor-data.mjs";
 import { TOOLKITS, buildToolkitItemData } from "../../scripts/config/toolkits-data.mjs";
@@ -707,6 +709,11 @@ function buildProductionGear(id) {
  */
 function buildGogle(variantKey) {
   return { ...buildGogleItemData(variantKey), _id: idFor("equipment", `gogle-${variantKey}`), _key: null };
+}
+
+/** Kontrolery zdalnego sterowania (PLAN_m3_towarzysze.md D32) — `buildKontrolerItemData` jak w produkcji. */
+function buildKontroler(rodzaj) {
+  return { ...buildKontrolerItemData(rodzaj), _id: idFor("equipment", `kontroler-${rodzaj}`), _key: null };
 }
 
 /**
@@ -1703,6 +1710,7 @@ const sprzetDocs = [
   buildElectricFuze(),
   ...Object.keys(PRODUCTION_GEAR).map(buildProductionGear),
   ...Object.keys(GOGLE_VARIANTS).map(buildGogle),
+  ...Object.keys(KONTROLERY).map(buildKontroler),
 ];
 const armorDocs = ARMORS.map(buildArmor);
 

@@ -1239,4 +1239,28 @@ Quench `drony` (18), e2e `dron` (produkcja u gracza → pasek → Rozłóż praw
   `combat` nie dostawał kliknięcia); powitalny samouczek rdzenia odpauzowuje tylko klienta MG, więc warunek
   `if (game.paused)` w fixture pomijał prawdziwe odpauzowanie i gracze stali w „Czas stop”.
 
+**2026-10-10 — E7b zrobione (Kontrolery, aktywacje, broń drona).** `items/kontroler.mjs`: dwa przedmioty (D32)
+— fabryczny z cennika (300 / 50 m, dost. 30%, WKK 10% — `config/dostepnosc.mjs` + `wkk/config/dostepnosc-kobalt.mjs`,
+D33) i domowy z wiersza Hakerstwa (`tabela:kontroler-domowy`, 100 / 20 m); pod Kobaltem bez przepisu standardowego
+fabrycznego (`BEZ_PRZEPISU_STANDARDOWEGO_KOBALT`, D37). Oba w paczce Sprzęt jako ekwipunek „tylko w ręce” z
+aktywnościami Komenda [B], Steruj [A], Reaguj [R] (U21). `actors/drony-sterowanie.mjs`: kontroler w plecaku → okno
+[Weź do ręki] i lejek lalki (D22; BN bez lalki zwolnieni), wybór drona na scenie (ostatni na wierzchu), karta z
+dozwolonymi akcjami (D36), przekaźnik MG ustawia operatora, zatrzask i własność (U20, D12); plakietki „druga
+aktywacja” (D35) i „atak wymaga Steruj [A]” (D36). `actors/drony-bron.mjs`: atak, obrażenia i ST obszarowe z twórcy i
+operatora (U13), drony w symulacji magazynków (U14). Quench `drony` 31, e2e `dron` z krokami sterowania.
+
+- **Formuły broni drona w chwili rzutu, nie w danych aktywności** (doprecyzowanie U13): owinięcie `getAttackData`
+  (natywny atak i tryby ognia dziedziczą) i roll data aktywności drona (`@mod` = INT twórcy, `@prof` = PB twórcy,
+  `@abilities.dex.mod` = ZRC operatora — na nowych obiektach). Zapis w aktywnościach przegrywałby z trybami
+  ognia, które odbudowują aktywności broni przy każdej zmianie przedmiotu. Sheet drona pokazuje tę samą premię.
+- **Broń na dronie jest zamontowana i założona** (`zamontowane`, `equipped`) — BN bez lalki używa tylko
+  założonej broni (`config/validation.mjs`); bez tego atak drona kończył się „Sięgasz po Sztylet, a tam nic!”.
+  Znalazła to dopiero paczka e2e — w Quench formuły liczyły się bez `use()`.
+- **Reakcja [R] to nie druga aktywacja** — osobny znacznik rundy (`dronReakcja`), bo to Reakcja operatora (D35).
+- **Własność operatora zostaje do E8:** zwolnienie przy wyjściu z trybu zdalnego (Esc, utrata sygnału, kontroler
+  poza ręką) należy do trybu zdalnego. Do tego czasu [A]/[B] oddają kontrolę nad żetonem i przesuwają widok.
+  Złożenie drona zeruje operatora i zatrzaski.
+- **Pancerz celu, zasięg sygnału, upadek** — bez zmian w planie: E7c (zasilanie, Wyłączony, Olbrzymie, awarie,
+  upadek) i E8 (obraz, sygnał, wyjście).
+
 *(dalej etapy dopisują tu rozstrzygnięcia z wdrożenia, jak w `PLAN_m1_walka.md` §11)*

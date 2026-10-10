@@ -46,6 +46,7 @@ import { BATERIE_ITEM } from "../items/baterie.mjs";
 import { DETONATOR, ELECTRIC_FUZE } from "../items/detonator.mjs";
 import { KWAS } from "../items/kwas.mjs";
 import { parseToolExpr, toolExprString } from "./tool-expr.mjs";
+import { BEZ_PRZEPISU_STANDARDOWEGO_KOBALT } from "../wkk/config/production-kobalt.mjs";
 import {
   parseSurowce, budzetSurowcow, partiaMinimalna, standardoweMinuty, stZWartosci, podzielBudzet, profilZLinii, sumaGb
 } from "./production-rules.mjs";
@@ -166,7 +167,8 @@ const TABELE = {
     T("Dron latający", "tabela:dron-latajacy", 1, 25, 90, "10 CE, 1 CH, 29 CZ, 5 MK"),
     T("Komputer osobisty", "raw:komputer-osobisty", 1, 15, 40, "15 CE, 1 CH, 3 CZ, 1 MK"),
     T("Komputer gamingowy", "raw:komputer-gamingowy", 1, 25, 80, "30 CE, 1 CH, 8 CZ, 1 MK"),
-    T("Kontroler zdalnego sterowania (100 m)", "raw:kontroler", 1, 15, 40, "10 CE, 9 CZ, 1 MK"),
+    // Domowy kontroler to osobny przedmiot od fabrycznego z cennika (PLAN_m3_towarzysze.md D32).
+    T("Kontroler zdalnego sterowania (100 m)", "tabela:kontroler-domowy", 1, 15, 40, "10 CE, 9 CZ, 1 MK"),
     T("Laptop", "raw:laptop", 1, 25, 80, "30 CE, 1 CH, 8 CZ, 1 MK"),
     T("Laptop wojskowy", "gear:laptop_wojskowy", 1, 30, 140, "50 CE, 1 CH, 14 CZ, 5 MK"),
     T("Monitorek", "tabela:monitorek", 1, 10, 20, "7 CE, 2 CZ, 1 MK"),
@@ -413,7 +415,7 @@ const RAW_PRZEDMIOTY = [
   ["detektor-ruchu", "Detektor ruchu", 80, 1, 138, "elektronika"],
   ["komputer-osobisty", "Komputer osobisty", 40, 15, 138, "komputery"],
   ["komputer-gamingowy", "Komputer gamingowy", 80, 15, 138, "komputery"],
-  ["kontroler", "Kontroler zdalnego sterowania", 40, 2, 138, "elektronika"],
+  ["kontroler", "Kontroler zdalnego sterowania", 40, 2, 138, "elektronika", { dostepnosc: 30 }],
   ["krotkofalowka", "Krótkofalówka", 25, 2, 138, "elektronika"],
   ["laptop", "Laptop", 80, 5, 138, "komputery"],
   ["miernik-skazenia", "Miernik skażenia chemicznego", 50, 5, 138, "elektronika"],
@@ -449,6 +451,7 @@ const TABELA_BEZ_CENY = {
   "zamiennik-leku": { nazwa: "Zamiennik leku (5 dawek)", wynik: "usluga", kategoria: "leki", jednorazowy: true },
   "paralotnia": { nazwa: "Paralotnia", wynik: "item", kategoria: "sprzet", waga: 15, narzedzia: "krawca" },
   "adapter-wifi": { nazwa: "Adapter wifi", wynik: "item", kategoria: "elektronika", waga: 0.1 },
+  "kontroler-domowy": { nazwa: "Kontroler zdalnego sterowania (domowej roboty)", wynik: "item", kategoria: "elektronika", waga: 2 },
   "dron-kroczacy": { nazwa: "Dron kroczący", wynik: "aktor", kategoria: "komputery" },
   "dron-latajacy": { nazwa: "Dron latający", wynik: "aktor", kategoria: "komputery" },
   "monitorek": { nazwa: "Monitorek", wynik: "item", kategoria: "elektronika", waga: 1 },
@@ -828,10 +831,14 @@ export function profesjeDlaRef(ref) {
   return Object.keys(PROFESJE).filter(prof => LISTA_PROFESJI[prof].has(ref));
 }
 
+/** Cele bez przepisu standardowego w NOE (żadne) — bliźniak `BEZ_PRZEPISU_STANDARDOWEGO_KOBALT`. */
+const BEZ_PRZEPISU_STANDARDOWEGO_RAW = Object.freeze([]);
+
 /** Wszystkie przepisy obowiązujące przy danym ustawieniu WKK. */
 export function wszystkiePrzepisy({ kobalt }) {
+  const bez = new Set(kobalt ? BEZ_PRZEPISU_STANDARDOWEGO_KOBALT : BEZ_PRZEPISU_STANDARDOWEGO_RAW);
   return [
-    ...PRZEPISY_STANDARDOWE.values(),
+    ...[...PRZEPISY_STANDARDOWE.values()].filter(p => !bez.has(p.wynik.ref)),
     ...PRZEPISY_ELABORACJI.values(),
     ...PRZEPISY_ZDOLNOSCI.values(),
     ...(kobalt ? [] : PRZEPISY_PROFESJI.values())

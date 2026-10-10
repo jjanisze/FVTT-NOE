@@ -27,6 +27,7 @@ import { WEAPON_MAP, buildWeaponItemData } from "../config/weapons-data.mjs";
 import { ARMOR_MAP, buildArmorItemData } from "../config/armor-data.mjs";
 import { AMMO_CALIBER_MAP, buildAmmoItemData } from "../config/ammo-data.mjs";
 import { PRODUCTION_GEAR, buildProductionGearItemData, productionGearIdForRef, productionGearRef } from "../items/production-gear.mjs";
+import { KONTROLER_REF, buildKontrolerItemData } from "../items/kontroler.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const ICON = `modules/${MODULE_ID}/icons/items/loot`;
@@ -54,6 +55,11 @@ const SPRZET = Object.freeze({
   "detonator": ["equipment", "detonator-radiowy"],
   "zapalnik-elektryczny": ["consumable", "zapalnik-elektryczny"]
 });
+
+/** Kontrolery zdalnego sterowania (`items/kontroler.mjs`, D32) — `sprzet`, rodzaj `equipment`. */
+const KONTROLERY_SPRZET = Object.freeze(Object.fromEntries(
+  Object.entries(KONTROLER_REF).map(([rodzaj, ref]) => [ref, ["equipment", `kontroler-${rodzaj}`]])
+));
 
 /** Production outputs promoted to reusable prototypes in the `sprzet` pack. */
 const PRODUCTION_SPRZET = Object.freeze(Object.fromEntries(
@@ -125,6 +131,7 @@ export async function uuidWKompendium(ref) {
   if (PACZKI[src]) return `Compendium.${MODULE_ID}.${PACZKI[src].pack}.Item.${await _idFor(PACZKI[src].kind, id)}`;
   if (src === "item" && SPRZET[id]) return `Compendium.${MODULE_ID}.sprzet.Item.${await _idFor(...SPRZET[id])}`;
   if (PRODUCTION_SPRZET[ref]) return `Compendium.${MODULE_ID}.sprzet.Item.${await _idFor(...PRODUCTION_SPRZET[ref])}`;
+  if (KONTROLERY_SPRZET[ref]) return `Compendium.${MODULE_ID}.sprzet.Item.${await _idFor(...KONTROLERY_SPRZET[ref])}`;
   return null;
 }
 
@@ -172,6 +179,8 @@ export async function daneWyniku(ref) {
     if (src === "weapon" && WEAPON_MAP[id]) return { data: buildWeaponItemData(WEAPON_MAP[id]), uuid: null, stos: false };
     if (src === "armor" && ARMOR_MAP[id]) return { data: buildArmorItemData(ARMOR_MAP[id]), uuid: null, stos: false };
     if (src === "ammo" && AMMO_CALIBER_MAP[id]) return { data: buildAmmoItemData(AMMO_CALIBER_MAP[id]), uuid: null, stos: true };
+    const kontroler = Object.keys(KONTROLER_REF).find(r => KONTROLER_REF[r] === ref);
+    if (kontroler) return { data: buildKontrolerItemData(kontroler), uuid: null, stos: false };
     const productionGearId = productionGearIdForRef(ref);
     if (productionGearId) {
       return { data: buildProductionGearItemData(productionGearId), uuid: null, stos: true };

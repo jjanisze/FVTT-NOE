@@ -154,8 +154,13 @@ Sprawdzona mutacjami (poziomy za właścicielem, U23).
 Paczka `dron` (MG + Gracz 1, E7): Spec z Hakerstwem kończy Robotę drona w swoim logowaniu — dron powstaje u
 aktywnego MG (przekaźnik): stempel twórcy, TT i PW z niego, własność gracza, złożony uchwyt 25 kg; pasek i
 plakietka drona; [Rozłóż] z paska → podgląd żetonu dnd5e → prawdziwe kliknięcie obok postaci → żeton na tym
-polu, uchwyt 0 kg; [Złóż] → żetonu nie ma, 25 kg. Quench `drony`: stempel, uchwyt bez klonów, własność za
-posiadaczem, stan uchwytu z żetonów (także żeton i scena skasowane ręcznie), produkcja.
+polu, uchwyt 0 kg; Komenda [B] z kontrolerem w plecaku → okno „Weź do ręki” → karta, gracz operatorem i właścicielem
+drona, kontroluje jego żeton; atak sztyletem drona w [B] z plakietką i premią 2 + PB twórcy + ZRC operatora; Steruj [A]
+w tej samej rundzie z plakietką „druga aktywacja”, następny atak bez plakietki; Reaguj [R] z przyciskiem ataku;
+[Złóż] → żetonu nie ma, 25 kg, bez operatora. Quench `drony`: stempel, uchwyt bez klonów, własność za posiadaczem,
+stan uchwytu z żetonów (także żeton i scena skasowane ręcznie), produkcja, kontrolery (zasięgi, rodzina lalki,
+paczka, dostępność, przepisy pod Kobaltem), aktywacja (ręka, Anuluj, druga aktywacja, reakcja, plakietka ataku, BN),
+broń drona (atak, obrażenia, ST obszarowe, montaż, magazynki).
 `clickCanvas` renderuje klatkę po `canvas.pan` (karta w tle nie renderuje sama, a pikery czytają zbuforowane
 przekształcenie warstwy) i wysyła `mouseMoved` bez wciśniętego przycisku — inaczej Chrome potrafi zamienić
 kliknięcie w przeciągnięcie bez `pointerdown`.

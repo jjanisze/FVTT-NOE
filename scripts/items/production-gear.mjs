@@ -37,10 +37,6 @@ export const PRODUCTION_GEAR = Object.freeze({
     id: "komputer-gamingowy", icon: "komputer_gamingowy.svg",
     description: "Wydajny komputer stacjonarny z monitorem."
   }),
-  kontroler: Object.freeze({
-    id: "kontroler", icon: "kontroler_zdalnego_sterowania.svg",
-    description: "Radiowy kontroler zdalnego sterowania o zasięgu 100 metrów."
-  }),
   "miernik-skazenia": Object.freeze({
     id: "miernik-skazenia", icon: "miernik_skazenia_chemicznego.svg",
     description: "Przenośny miernik skażenia chemicznego z sondą."

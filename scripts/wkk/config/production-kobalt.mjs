@@ -31,6 +31,13 @@ export const WAGA_ROBOTY_KOBALT = Object.freeze({ interpolacja: true });
 export const SCHEMAT_GRAMY_NA_GODZINE_KOBALT = 1;
 
 /**
+ * PLAN_m3_towarzysze.md D37 — cele bez przepisu standardowego. Fabryczny kontroler zdalnego sterowania jest
+ * w świecie WKK znaleziskiem (dostępność 10%, D33); jedyną drogą zostaje domowy kontroler ze schematu Hakera.
+ * W NOE przepis standardowy jest (tabele profesji stoją obok wzoru, `PLAN_produkcja.md` D22).
+ */
+export const BEZ_PRZEPISU_STANDARDOWEGO_KOBALT = Object.freeze(["raw:kontroler"]);
+
+/**
  * D26–D28, D32 — profesja Speca jako cecha wykonawcy zamiast osobnego przepisu.
  *
  * - `czesc` (×0,75) — samo wykonanie przez profesjonalistę,

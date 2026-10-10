@@ -5055,3 +5055,29 @@ tr.neuro-tt-off td.attribution-value {
 }
 
 .neuro-towarzysz-odlacz:hover { opacity: 1; }
+
+/* Drony — karta aktywacji z Kontrolera i plakietki ataku (PLAN_m3_towarzysze.md §7.5, E7b). */
+.neuro-dron-karta header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.neuro-dron-karta header img { border: none; }
+
+.neuro-dron-plakietka {
+  margin: 0 0 0.35rem;
+  padding: 2px 6px;
+  border-left: 3px solid var(--neuro-color-zranienie, #b5432f);
+  background: color-mix(in srgb, var(--neuro-color-zranienie, #b5432f) 12%, transparent);
+  font-size: var(--font-size-12, 12px);
+}
+
+.neuro-dron-przyciski {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.neuro-dron-przyciski button { flex: 1 1 auto; }

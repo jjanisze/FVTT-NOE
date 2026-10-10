@@ -1149,7 +1149,7 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
-### M3 E0–E7a — towarzysze: czyste zasady, wartości z właściciela, walka, karty, tworzenie, migracja, dane z podręcznika, drony z produkcji; Stopnie Zranienia wg s. 205 (2026-10-10)
+### M3 E0–E7b — towarzysze: czyste zasady, wartości z właściciela, walka, karty, tworzenie, migracja, dane z podręcznika, drony z produkcji, kontrolery i sterowanie; Stopnie Zranienia wg s. 205 (2026-10-10)
 
 Plan: `PLAN_m3_towarzysze.md` (decyzje MG D1–D39, postęp §11).
 
@@ -1193,8 +1193,13 @@ Plan: `PLAN_m3_towarzysze.md` (decyzje MG D1–D39, postęp §11).
   [A] z podglądem żetonu, przez przekaźnik MG; uchwyt nie do sklonowania (jak Robota), własność drona za
   posiadaczem; wiersz drona na pasku i plakietka „twórca · System ruszył …”. Dwa szablony dronów w paczce
   `towarzysze`.
+- **Kontrolery i sterowanie dronem** (`items/kontroler.mjs`, `actors/drony-sterowanie.mjs`, `actors/drony-bron.mjs`):
+  dwa kontrolery w paczce Sprzęt — fabryczny (300 m, dostępność 30%, w WKK 10% i bez przepisu standardowego) i
+  domowy ze schematu Hakera (100 m); Komenda [B], Steruj [A] i Reaguj [R] z kontrolerem w ręce (z plecaka — „Weź do
+  ręki”), karta z dozwolonymi akcjami, operator na żywo, plakietki „druga aktywacja w rundzie” i „atak wymaga
+  Steruj [A]”. Broń zamontowana na dronie: atak, obrażenia i ST obszarowe z twórcy i operatora; magazynek schodzi.
 - **Testy:** Quench `towarzysze-zasady`, `towarzysze` i `drony`; e2e `towarzysz`, `towarzysz-tworzenie` i `dron`
-  (nowe), `combat` (krytyk w istotę ze Stopniem i bez); mutacje dla F1, F2, kolejności, własności grupy, F17,
+  (nowe; `dron` z produkcją, rozłożeniem i sterowaniem), `combat` (krytyk w istotę ze Stopniem i bez); mutacje dla F1, F2, kolejności, własności grupy, F17,
   poziomów za właścicielem i U23. Harness: `clickCanvas` trafia po `canvas.pan` w karcie w tle i nie zamienia
   kliknięcia w przeciągnięcie; fixture odpauzowuje grę zawsze (samouczek rdzenia odpauzowywał tylko MG).
 

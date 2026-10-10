@@ -49,6 +49,7 @@ import {
 } from "../config/magazines-data.mjs";
 import { AMMO_CALIBER_MAP, familyCalibers } from "../config/ammo-data.mjs";
 import { isDocumentLive } from "../doc-liveness.mjs";
+import { RODZAJE } from "../config/towarzysze-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -76,7 +77,8 @@ export const FLAG = Object.freeze({
  * do środka bez pytania.
  *
  * Towarzysz gracza (np. Evie) jest w systemie automatycznie, bo jest aktorem typu `character` —
- * żadnego wyjątku to nie wymaga.
+ * żadnego wyjątku to nie wymaga. **Dron** gracza jest BN-em, ale jego broń ma prawdziwy magazynek
+ * (PLAN_m3_towarzysze.md U14): magazynek schodzi, przeładowuje ktoś obok. Lalki dron nie ma.
  *
  * Zbrojownia jest wyłączona: to katalog-wystawka, nie postać. 74 magazynki na jednym aktorze to
  * śmieci, a `createWeapons()` i tak nadpisuje jej broń przy każdym buildzie.
@@ -86,6 +88,7 @@ export const FLAG = Object.freeze({
  */
 export function inMagazineSystem(actor) {
   if (!actor) return false;
+  if (RODZAJE[actor.flags?.[MODULE_ID]?.towarzysz?.rodzaj]?.maszyna) return true;
   if (actor.type !== "character") return false;
   if (actor.getFlag?.(MODULE_ID, "isZbrojownia")) return false;
   return true;
