@@ -4,6 +4,9 @@
 # o nazwie z doklejonym \r i pack nie otworzyłby się wcale.
 packs/** -text
 
+# Czcionka OSD (fonts/osd/README.md): oryginał Betaflight bajt w bajt — nota podaje jego SHA-256.
+fonts/osd/default.mcm -text
+
 # Zasoby binarne
 *.ogg  binary
 *.webp binary
