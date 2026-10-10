@@ -92,7 +92,8 @@ await step("generators", async () => {
       for (const [name, script, outArg, committed] of [
         ["bestiary.json", "dev/bestiary/extract_bestiary.py", f => `--out=${path.join(f, "bestiary.json")}`, "dev/bestiary/bestiary.json"],
         ["classes.json", "dev/classes/extract_classes.py", f => `--out=${f}`, "dev/classes/classes.json"],
-        ["professions.json", "dev/classes/extract_professions.py", f => `--out=${f}`, "dev/classes/professions.json"]
+        ["professions.json", "dev/classes/extract_professions.py", f => `--out=${f}`, "dev/classes/professions.json"],
+        ["companions.json", "dev/classes/extract_companions.py", f => `--out=${f}`, "dev/classes/companions.json"]
       ]) {
         const r = run(PYTHON, [script, outArg(tmp)]);
         if (/parsing 0 profiles/.test(r.stdout.join(" ")) || (!r.ok && /No such file|not found|nie znaleziono|FileNotFoundError/i.test([...r.stderr, ...r.stdout].join(" ")))) {
@@ -105,7 +106,8 @@ await step("generators", async () => {
     // JSON → data modules (fixed output paths): snapshot, regenerate, compare, restore.
     for (const [name, script, out] of [
       ["bestiary-data.mjs", "dev/bestiary/gen_bestiary.py", "scripts/config/bestiary-data.mjs"],
-      ["class-features-data.mjs", "dev/classes/gen_features.py", "scripts/config/class-features-data.mjs"]
+      ["class-features-data.mjs", "dev/classes/gen_features.py", "scripts/config/class-features-data.mjs"],
+      ["towarzysze-data.mjs", "dev/classes/gen_companions.py", "scripts/config/towarzysze-data.mjs"]
     ]) {
       const file = path.join(MODULE_ROOT, out);
       const before = fs.readFileSync(file);

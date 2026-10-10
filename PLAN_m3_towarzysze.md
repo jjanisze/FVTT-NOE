@@ -1197,4 +1197,20 @@ Drugi przebieg nic nie planuje. Próba na sucho w kampanii daje ten sam plan.
   i każdej postaci, nie tylko Victora (brak mu Śledztwa i Zastraszania z biegłości Sędziego). Poza zakresem M3 —
   decyzja MG: pozycja „Biegłości profesji” w M6 `PLAN_beta.md`, z uwagą przy bramce B6.
 
+**2026-10-10 — E6 zrobione (bez zielonej bramki wydania — niżej).** `dev/classes/extract_companions.py`
+(NOE → `dev/classes/companions.json`: sześć statblocków, dwie ramki tworzenia, szukanie, zasilanie drona; słowniki
+parsera Bestiariusza, nieznane słowo = błąd), `dev/classes/gen_companions.py` (frazy podręcznika → wzory roll data
+ścisłą gramatyką; decyzje bez własnego zdania w RAW w tabeli generatora) → `config/towarzysze-data.mjs` jest teraz
+generowany (`npm run build:classes`, bramka `release:check` porównuje oba kroki). Wynik zgadza się z ręczną wersją
+co do liczby; różnice tylko dwie i obie na plus — dosłowny tekst cech psa („Pies ma Ułatwienie…”) i strona drona
+kroczącego (s. 83). Plakietki pokrycia: Partner, Oswajanie zwierząt, Moja prawa ręka (31/133 zdolności z
+automatyką); `zdolnosci.resync` w kampanii — tylko Partner Victora. Grafika: sekcja E w `dev/icons/MISSING.md`
+(żetony z góry dla czterech zwierząt i dwóch dronów).
+
+- **Bramka wydania nie jest zielona — z powodu cudzej pracy w drzewie:** krok `zip` odmawia przy niezatwierdzonych
+  zmianach w plikach wydania (`icons/abilities/*` z partii ikon 54–57 i zmieniony `slaby-punkt.svg`), krok `packs`
+  widzi różnicę Bestiariusza z niezatwierdzonego fragmentu `build-packs.mjs` tej samej partii. Moje pliki i paczki
+  są zatwierdzone. Do decyzji MG: zatwierdzić albo odłożyć partię ikon, potem `fvtt packs` + `release:check`.
+- Hakerstwo i Emiter EMP dostaną plakietki w E7 i E10, razem z automatyką.
+
 *(dalej etapy dopisują tu rozstrzygnięcia z wdrożenia, jak w `PLAN_m1_walka.md` §11)*

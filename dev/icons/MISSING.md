@@ -336,3 +336,23 @@ anchors re-measured in `scripts/config/doll-anchors.mjs`. The hand-drawn stand-i
 `icons/doll/mannequin-placeholder.svg` stays as a fallback. New art later = convert to WebP, point
 `MANNEQUIN_SRC` at it, re-measure the anchors.
 
+---
+
+# E. Żetony towarzyszy (top-down)
+
+Szablony paczki `towarzysze` (PLAN_m3_towarzysze.md §7.13, dodane 2026-10-10) biorą żeton jak Bestiariusz:
+`tokens/<id>.webp` (własna grafika, najwyższy priorytet) → `tokens/aliases.json` → zaślepka. Dziś żadna z
+tych dróg nie istnieje dla `towarzysz-*`, więc żeton to portret. Styl i proporcje: `tokens/PROMPT.md`
+(widok z góry — pamięć projektu: okrągłe portrety z Roll20 są bezużyteczne jako żetony). WEBP.
+
+| # | Plik | Kto | Opis do promptu |
+|---|------|-----|-----------------|
+| 1 | `tokens/towarzysz-psi-partner.webp` | Psi partner (s. 100), mały | Kundel z pustkowi widziany z góry, krótka sierść, obroża z kawałkiem łańcucha |
+| 2 | `tokens/towarzysz-zmutowany-owad.webp` | Zmutowany owad (s. 99), mały | Owad wielkości psa z góry: chitynowy pancerz, odnóża do kopania, żuwaczki |
+| 3 | `tokens/towarzysz-zmutowany-ssak.webp` | Zmutowany ssak (s. 99), duży | Potężny zmutowany drapieżnik z góry (niedźwiedź / pies-gigant), łyse placki skóry |
+| 4 | `tokens/towarzysz-zmutowany-gad.webp` | Zmutowany gad (s. 100), średni | Jaszczur ziemnowodny z góry, płetwiasty ogon, łuski w kolorze błota |
+| 5 | `tokens/towarzysz-dron-kroczacy.webp` | Dron kroczący (s. 83), średnia maszyna | Czworonożny robot z blach i złomu z góry, kamera na wysięgniku, miejsce na broń na grzbiecie |
+| 6 | `tokens/towarzysz-dron-latajacy.webp` | Dron latający (s. 84), mała maszyna | Kwadrokopter z góry, cztery śmigła w osłonach, kamera i pakiet akumulatora pośrodku |
+
+Drony staną się szablonami w E7 — pliki 5 i 6 mogą przyjść już teraz; builder weźmie je przy następnym
+`fvtt packs`. Ludzcy towarzysze żetonu z paczki nie mają (czysta karta postaci).

@@ -1,0 +1,516 @@
+{
+  "statblocks": {
+    "zmutowany-owad": {
+      "id": "zmutowany-owad",
+      "heading": "ZMUTOWANY OWAD",
+      "klasa": "zwiadowca",
+      "page": 99,
+      "size": "sm",
+      "creatureType": "zwierze",
+      "tt": "14 plus twoja Premia Biegłości",
+      "pw": "3 plus 10 x twój modyfikator Mądrości",
+      "kw": "k6 x ½ twojego poziomu Zwiadowcy",
+      "initiative": 6,
+      "speed": {
+        "walk": 9,
+        "climb": 9,
+        "burrow": 4.5
+      },
+      "stopienZranienia": true,
+      "abilities": {
+        "str": 8,
+        "dex": 18,
+        "con": 14,
+        "int": 4,
+        "wis": 16,
+        "cha": 4
+      },
+      "skills": {
+        "skr": 6
+      },
+      "saves": {},
+      "immunities": [
+        "radiant",
+        "poison"
+      ],
+      "conditionImmunities": [],
+      "senses": {
+        "blindsight": 9,
+        "passivePerception": 13
+      },
+      "progi": {},
+      "features": [
+        {
+          "id": "kopacz",
+          "name": "Kopacz",
+          "section": "traits",
+          "text": "Kiedy zakopuje się w piachu lub w ziemi, nie prowokuje ataków okazyjnych."
+        },
+        {
+          "id": "pajecza-wspinaczka",
+          "name": "Pajęcza wspinaczka",
+          "section": "traits",
+          "text": "Może chodzić po każdej chropowatej powierzchni, nawet do góry nogami."
+        },
+        {
+          "id": "udzwig",
+          "name": "Udźwig",
+          "section": "traits",
+          "text": "Użytkowy: 16 kg. Maksymalny: 32 kg."
+        }
+      ],
+      "attacks": [
+        {
+          "id": "ukaszenie",
+          "name": "Ukąszenie",
+          "kind": "mwak",
+          "bonus": "+4 plus twoja Premia Biegłości",
+          "reach": 1.5,
+          "damage": {
+            "avg": 6,
+            "formula": "1d4 + 4",
+            "type": "piercing"
+          },
+          "rider": null
+        }
+      ],
+      "formulas": {}
+    },
+    "zmutowany-ssak": {
+      "id": "zmutowany-ssak",
+      "heading": "ZMUTOWANY SSAK",
+      "klasa": "zwiadowca",
+      "page": 99,
+      "size": "lg",
+      "creatureType": "zwierze",
+      "tt": "11 plus twoja Premia Biegłości",
+      "pw": "9 plus 10 x twój modyfikator Mądrości",
+      "kw": "k10 x ½ twojego poziomu Zwiadowcy",
+      "initiative": -1,
+      "speed": {
+        "walk": 12,
+        "climb": 6
+      },
+      "stopienZranienia": true,
+      "abilities": {
+        "str": 18,
+        "dex": 12,
+        "con": 12,
+        "int": 6,
+        "wis": 14,
+        "cha": 4
+      },
+      "skills": {
+        "atl": 6
+      },
+      "saves": {},
+      "immunities": [],
+      "conditionImmunities": [],
+      "senses": {
+        "darkvision": 18,
+        "passivePerception": 12
+      },
+      "progi": {},
+      "features": [
+        {
+          "id": "doskonale-zmysly",
+          "name": "Doskonałe zmysły",
+          "section": "traits",
+          "text": "Ma Ułatwienie w Testach Mądrości (Percepcja) opartych na węchu i słuchu."
+        },
+        {
+          "id": "wspolpraca",
+          "name": "Współpraca",
+          "section": "traits",
+          "text": "Jeśli w zasięgu do 1,5 metra od przeciwnika znajduje się przytomny sojusznik, otrzymuje Ułatwienie do Testów Ataku wręcz."
+        },
+        {
+          "id": "udzwig",
+          "name": "Udźwig",
+          "section": "traits",
+          "text": "Użytkowy: 180 kg. Maksymalny: 360 kg."
+        }
+      ],
+      "attacks": [
+        {
+          "id": "atak-konczyna",
+          "name": "Atak kończyną",
+          "kind": "mwak",
+          "bonus": "+4 plus twoja Premia Biegłości",
+          "reach": 1.5,
+          "damage": {
+            "avg": 10,
+            "formula": "2d6 + 4",
+            "type": "bludgeoning"
+          },
+          "rider": "Trafiony cel otrzymuje stan Powalenie, jeśli jest rozmiaru średniego lub mniejszego."
+        }
+      ],
+      "formulas": {}
+    },
+    "zmutowany-gad": {
+      "id": "zmutowany-gad",
+      "heading": "ZMUTOWANY GAD",
+      "klasa": "zwiadowca",
+      "page": 100,
+      "size": "med",
+      "creatureType": "zwierze",
+      "tt": "12 plus twoja Premia Biegłości",
+      "pw": "6 plus 10 x twój modyfikator Mądrości",
+      "kw": "k8 x ½ twojego poziomu Zwiadowcy",
+      "initiative": 2,
+      "speed": {
+        "walk": 9,
+        "swim": 18
+      },
+      "stopienZranienia": true,
+      "abilities": {
+        "str": 14,
+        "dex": 14,
+        "con": 18,
+        "int": 4,
+        "wis": 12,
+        "cha": 4
+      },
+      "skills": {
+        "prc": 3
+      },
+      "saves": {},
+      "immunities": [],
+      "conditionImmunities": [],
+      "senses": {
+        "termowizja": 18,
+        "passivePerception": 13
+      },
+      "progi": {},
+      "features": [
+        {
+          "id": "ziemnowodny",
+          "name": "Ziemnowodny",
+          "section": "traits",
+          "text": "Potrafi oddychać zarówno na lądzie, jak i pod wodą."
+        },
+        {
+          "id": "udzwig",
+          "name": "Udźwig",
+          "section": "traits",
+          "text": "Użytkowy: 70 kg. Maksymalny: 140 kg."
+        }
+      ],
+      "attacks": [
+        {
+          "id": "ugryzienie",
+          "name": "Ugryzienie",
+          "kind": "mwak",
+          "bonus": "+2 plus twoja Premia Biegłości",
+          "reach": 1.5,
+          "damage": {
+            "avg": 5,
+            "formula": "1d6 + 2",
+            "type": "piercing"
+          },
+          "rider": "Trafiona istota musi zdać RO na Kondycję o ST 10, inaczej zostanie Zatruta na 1 minutę. Cel wykonuje ponowny RO na końcu swojej tury."
+        }
+      ],
+      "formulas": {}
+    },
+    "psi-partner": {
+      "id": "psi-partner",
+      "heading": "PSI PARTNER",
+      "klasa": "zwiadowca",
+      "page": 100,
+      "size": "sm",
+      "creatureType": "zwierze",
+      "tt": "12 plus twoja Premia Biegłości",
+      "pw": "10 plus 10 x twój modyfikator z Mądrości",
+      "kw": "k6 x twój poziom Zwiadowcy",
+      "initiative": 4,
+      "speed": {
+        "walk": 18
+      },
+      "stopienZranienia": true,
+      "abilities": {
+        "str": 14,
+        "dex": 14,
+        "con": 12,
+        "int": 8,
+        "wis": 14,
+        "cha": 6
+      },
+      "skills": {
+        "prc": 4,
+        "skr": 4
+      },
+      "saves": {
+        "dex": 4,
+        "wis": 4
+      },
+      "immunities": [],
+      "conditionImmunities": [],
+      "senses": {
+        "darkvision": 18,
+        "passivePerception": 14
+      },
+      "progi": {},
+      "features": [
+        {
+          "id": "doskonale-zmysly",
+          "name": "Doskonałe zmysły",
+          "section": "traits",
+          "text": "Pies ma Ułatwienie w Testach Mądrości (Percepcja) opartych na węchu i słuchu."
+        },
+        {
+          "id": "wspolpraca",
+          "name": "Współpraca",
+          "section": "traits",
+          "text": "Jeśli w zasięgu do 1,5 metra od przeciwnika znajduje się przytomny sojusznik, pies otrzymuje Ułatwienie do Testów Ataku wręcz."
+        },
+        {
+          "id": "psi-bohater",
+          "name": "Psi bohater",
+          "section": "traits",
+          "text": "Umiera na takich samych zasadach jak BG, czyli stosuje Stopnie Zranienia i wykonuje Rzuty Przeciw Śmierci."
+        },
+        {
+          "id": "wymagania",
+          "name": "Wymagania",
+          "section": "traits",
+          "text": "Pojenie skażoną wodą i nieodpowiednie karmienie może pogorszyć jego zdrowie."
+        },
+        {
+          "id": "udzwig",
+          "name": "Udźwig",
+          "section": "traits",
+          "text": "Użytkowy: 28 kg. Maksymalny: 48 kg."
+        }
+      ],
+      "attacks": [
+        {
+          "id": "ugryzienie",
+          "name": "Ugryzienie",
+          "kind": "mwak",
+          "bonus": "+2 plus twoja Premia Biegłości",
+          "reach": 1.5,
+          "damage": {
+            "avg": 5,
+            "formula": "1d6 + 2",
+            "type": "piercing"
+          },
+          "rider": "Trafiony cel zostaje Pochwycony, jeśli jest rozmiaru średniego lub mniejszego."
+        }
+      ],
+      "formulas": {}
+    },
+    "dron-kroczacy": {
+      "id": "dron-kroczacy",
+      "heading": "DRON KROCZĄCY",
+      "klasa": "spec",
+      "page": 83,
+      "size": "med",
+      "creatureType": "maszyna",
+      "tt": "10 plus mod. Inteligencji i Premia Biegłości twórcy",
+      "pw": "10 x modyfikator Inteligencji twórcy",
+      "kw": null,
+      "initiative": null,
+      "speed": {
+        "walk": 9
+      },
+      "stopienZranienia": false,
+      "abilities": {
+        "str": 14,
+        "dex": 14,
+        "con": 10,
+        "int": null,
+        "wis": null,
+        "cha": null
+      },
+      "skills": {},
+      "saves": {},
+      "immunities": [
+        "psychic",
+        "poison"
+      ],
+      "conditionImmunities": [
+        "frightened",
+        "poisoned",
+        "charmed"
+      ],
+      "senses": {
+        "darkvision": 18
+      },
+      "progi": {
+        "obrazen": 5,
+        "awarii": 15
+      },
+      "features": [
+        {
+          "id": "modyfikacje",
+          "name": "Modyfikacje",
+          "section": "traits",
+          "text": "Dron może mieć zainstalowane liczne urządzenia tj. broń, kamery, oświetlenie czy skomplikowane urządzenia elektroniczne. Dokładne modyfikacje oraz ich koszt, należy ustalić z MG."
+        },
+        {
+          "id": "udzwig",
+          "name": "Udźwig",
+          "section": "traits",
+          "text": "Użytkowy: 70 kg. Maksymalny: 140 kg."
+        },
+        {
+          "id": "atak",
+          "name": "Atak",
+          "section": "actions",
+          "text": "Dron może wykonać w swojej akcji jeden atak, którego zasięg i obrażenia zależą od zamontowanej broni."
+        }
+      ],
+      "attacks": [],
+      "formulas": {
+        "atak": "2 plus Premia Biegłości twórcy i modyfikator Zręczności operatora",
+        "obrazenia": "Kość zamontowanej broni plus modyfikator Inteligencji twórcy",
+        "stObszarowe": "8 plus Premia Biegłości twórcy i modyfikator Zręczności operatora"
+      }
+    },
+    "dron-latajacy": {
+      "id": "dron-latajacy",
+      "heading": "DRON LATAJĄCY",
+      "klasa": "spec",
+      "page": 84,
+      "size": "sm",
+      "creatureType": "maszyna",
+      "tt": "10 plus mod. Inteligencji i Premia Biegłości twórcy",
+      "pw": "5 x modyfikator Inteligencji twórcy",
+      "kw": null,
+      "initiative": null,
+      "speed": {
+        "fly": 18
+      },
+      "stopienZranienia": false,
+      "abilities": {
+        "str": 10,
+        "dex": 16,
+        "con": 10,
+        "int": null,
+        "wis": null,
+        "cha": null
+      },
+      "skills": {},
+      "saves": {},
+      "immunities": [
+        "psychic",
+        "poison"
+      ],
+      "conditionImmunities": [
+        "frightened",
+        "poisoned",
+        "charmed"
+      ],
+      "senses": {
+        "darkvision": 18
+      },
+      "progi": {
+        "awarii": 10
+      },
+      "features": [
+        {
+          "id": "modyfikacje",
+          "name": "Modyfikacje",
+          "section": "traits",
+          "text": "Dron może mieć zainstalowane liczne urządzenia tj. broń, kamery, oświetlenie czy skomplikowane urządzenia elektroniczne. Dokładne modyfikacje oraz ich koszt, należy ustalić z MG."
+        },
+        {
+          "id": "udzwig",
+          "name": "Udźwig",
+          "section": "traits",
+          "text": "Użytkowy: 15 kg. Maksymalny: 30 kg."
+        },
+        {
+          "id": "atak",
+          "name": "Atak",
+          "section": "actions",
+          "text": "Dron może wykonać w swojej akcji jeden atak, którego zasięg i obrażenia zależą od zamontowanej broni."
+        }
+      ],
+      "attacks": [],
+      "formulas": {
+        "atak": "3 plus Premia Biegłości twórcy i modyfikator Zręczności operatora",
+        "obrazenia": "Kość zamontowanej broni plus modyfikator Inteligencji twórcy",
+        "stObszarowe": "8 plus Premia Biegłości twórcy i modyfikator Zręczności operatora"
+      }
+    }
+  },
+  "boxes": {
+    "ludzki-partner": {
+      "id": "ludzki-partner",
+      "heading": "LUDZKI PARTNER",
+      "klasa": "zwiadowca",
+      "page": 101,
+      "abilityPage": 100,
+      "fields": {
+        "Cechy": "Wartości Cech Bazowych do przydzielenia: 14,14,12,12,10, 8 lub 24 punkty do dowolnego rozdzielenia.",
+        "Pochodzenie": "Otrzymuje Pochodzenie zgodne z miejscem jego werbunku.",
+        "Punkty Wytrzymałości": "5 x twój poziom Zwiadowcy. Kości Wytrzymałości partnera to k6 i ma ich tyle, ile ty masz poziomów Zwiadowcy.",
+        "Wyszkolenie w pancerzu": "Może korzystać z tych pancerzy, w których ty masz wyszkolenie.",
+        "Premia Biegłości": "+2 (nie rośnie).",
+        "Rzuty Obronne": "Ma biegłość w dwóch RO wybranych przez ciebie.",
+        "Atak": "Może korzystać z każdej broni, w której masz biegłość.",
+        "Obrażenia": "Zależne od broni i jego modyfikatorów Cech Bazowych.",
+        "Sztuczki": "Zna jedną, wybraną przez ciebie Sztuczkę, której wymagania spełnia.",
+        "Umiejętności": "Ma biegłość w dwóch wybranych przez ciebie umiejętnościach lub zestawach narzędzi.",
+        "Śmierć": "Umiera na takich samych zasadach, jak BG, czyli stosuje Stopnie Zranienia i korzysta z Rzutów Przeciw Śmierci."
+      }
+    },
+    "prawa-reka": {
+      "id": "prawa-reka",
+      "heading": "ZASADY TWORZENIA PRAWEJ RĘKI",
+      "klasa": "cwaniak",
+      "page": 76,
+      "abilityPage": 75,
+      "fields": {
+        "Cechy": "Wartości Cech Bazowych do przydzielenia: 14,14,12,12,10, 8 lub 24 punkty do dowolnego rozdzielenia.",
+        "Pochodzenie": "Otrzymuje Pochodzenie zgodne z miejscem jego werbunku.",
+        "Punkty Wytrzymałości": "5 x twój poziom Cwaniaka. Kości Wytrzymałości Prawej ręki to k6 i ma ich tyle, ile ty masz obecnie poziomów Cwaniaka.",
+        "Wyszkolenie w pancerzu": "Może korzystać z tych pancerzy, w których ty masz wyszkolenie.",
+        "Premia Biegłości": "+2 (nie rośnie).",
+        "Rzuty Obronne": "Ma biegłość w dwóch RO wybranych przez ciebie.",
+        "Atak": "Może korzystać z każdej broni, w której masz biegłość.",
+        "Obrażenia": "Zależne od broni i jego modyfikatorów Cech Bazowych.",
+        "Sztuczki": "Zna jedną, wybraną przez ciebie Sztuczkę, której wymagania spełnia.",
+        "Umiejętności": "Ma biegłość w dwóch wybranych przez ciebie umiejętnościach lub zestawach narzędzi.",
+        "Śmierć": "Prawa ręka umiera na takich samych zasadach, jak BG, czyli stosuje Stopnie Zranienia i korzysta z Rzutów Przeciw Śmierci."
+      }
+    }
+  },
+  "abilities": {
+    "oswajanie-zwierzat": {
+      "page": 99,
+      "ability": "oswajanie-zwierzat",
+      "godziny": 24,
+      "k6": {
+        "1": "zmutowany owad",
+        "2": "zmutowany owad",
+        "3": "zmutowany ssak",
+        "4": "zmutowany ssak",
+        "5": "zmutowany gad",
+        "6": "zmutowany gad"
+      },
+      "dniOswajania": 3
+    },
+    "partner": {
+      "page": 101,
+      "ability": "partner",
+      "godziny": 24
+    },
+    "moja-prawa-reka": {
+      "page": 75,
+      "ability": "moja-prawa-reka",
+      "godziny": 24
+    },
+    "hakerstwo": {
+      "page": 83,
+      "akumulator": {
+        "med": 1,
+        "sm": 4
+      },
+      "agregatLNaH": 0.5
+    }
+  }
+}

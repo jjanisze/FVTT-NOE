@@ -17,7 +17,7 @@
     "validate:packs": "node dev/packs/validate-packs.mjs",
     "build:icons": "node dev/icons/gen_class_placeholders.mjs",
     "build:status-icons": "node dev/icons/gen_status_numerals.mjs",
-    "build:classes": "python dev/classes/gen_features.py && npm run build:icons && npm run build:packs && npm run validate:packs",
+    "build:classes": "python dev/classes/gen_features.py && python dev/classes/gen_companions.py && npm run build:icons && npm run build:packs && npm run validate:packs",
     "build:token-templates": "python dev/icons/gen_token_template.py",
     "build:token-placeholders": "python dev/icons/gen_token_placeholders.py",
     "review:icons": "node dev/icons/review/server.mjs",

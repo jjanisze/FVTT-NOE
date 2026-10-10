@@ -227,6 +227,18 @@ COVERAGE = {
     },
 
     # ---- Cwaniak ----
+    "moja-prawa-reka": {
+        "auto": [
+            ("Prawa ręka powiązana z tobą: PW 5 × twój poziom Cwaniaka, KW k6 × ten poziom, PB +2 (nie rośnie), "
+             "twoje biegłości w broni i pancerzu — liczone na żywo", "actors/towarzysze.mjs"),
+            ("tura zawsze tuż po twojej, we wspólnej grupie inicjatywy — pełna kontrola, bez Komendy", "combat/towarzysze-walka.mjs"),
+            ("umiera jak BG — Stopnie Zranienia i Rzuty Przeciw Śmierci", "combat/umieranie.mjs"),
+            ("narzędzie MG i kreator: cechy (zestaw albo 24 pkt), Pochodzenie, klasa Towarzysz (2 RO, 2 umiejętności, "
+             "Sztuczka); poziomy za twoim awansem", "actors/towarzysze-tworzenie.mjs"),
+        ],
+        "manual": "Szukanie nowej Prawej ręki (24 h w miejscowości) — przy stole; po nim MG tworzy ją narzędziem. "
+                  "Wikt i 1/10 twojej doli — przy stole.",
+    },
     "ekspert": {"manual": _PICK_ON_SHEET},
     "samouk": {"manual": _PICK_ON_SHEET},
 
@@ -250,6 +262,29 @@ COVERAGE = {
     "specjalizacja-zlodziej": {"manual": _PICK_ON_SHEET},
 
     # ---- Zwiadowca ----
+    "partner": {
+        "auto": [
+            ("partner powiązany z tobą: pies (TT 12 + twoja PB, PW 10 + 10 × twój mod. MDR, KW k6 × poziom Zwiadowcy) albo "
+             "człowiek (PW 5 × poziom, PB +2, twoje biegłości) — liczone na żywo", "actors/towarzysze.mjs"),
+            ("tura zawsze po twojej (wspólna grupa inicjatywy); Komenda [B] daje mu turę, bez komendy unika walki "
+             "akcją Unikanie i tura mija — z [Cofnij] dla MG", "combat/towarzysze-walka.mjs"),
+            ("umiera jak BG — Stopnie Zranienia i Rzuty Przeciw Śmierci", "combat/umieranie.mjs"),
+            ("narzędzie MG: pies z szablonu albo ludzki partner z kreatorem (cechy, Pochodzenie, klasa Towarzysz)", "actors/towarzysze-tworzenie.mjs"),
+            ("woda i jedzenie w dziennym zapotrzebowaniu drużyny", "actors/party-supplies.mjs"),
+        ],
+        "manual": "Szukanie nowego partnera (24 h) — przy stole; po nim MG tworzy go narzędziem. Skutki złej wody i karmy dla psa — MG.",
+    },
+    "oswajanie-zwierzat": {
+        "auto": [
+            ("zwierzę powiązane z tobą: TT, PW, KW i atak ze statblocku liczone z twojej PB, mod. MDR i poziomu Zwiadowcy "
+             "— na żywo", "actors/towarzysze.mjs"),
+            ("działa po twojej turze na Komendę [B] (wspólna grupa inicjatywy); bez polecenia stoi i używa Unikania", "combat/towarzysze-walka.mjs"),
+            ("umiera jak BG — STOPIEŃ ZRANIENIA w statblocku (s. 205)", "combat/umieranie.mjs"),
+            ("narzędzie MG: rzut k6 albo wybór, zwierzę z szablonu (Współpraca ssaka działa sama)", "actors/towarzysze-tworzenie.mjs"),
+            ("woda i jedzenie wg rozmiaru w dziennym zapotrzebowaniu drużyny", "actors/party-supplies.mjs"),
+        ],
+        "manual": "Szukanie (24 h) i 3 dni oswajania — przy stole; po nich MG tworzy zwierzę narzędziem. Imię nadaje gracz.",
+    },
     "moj-biom": {
         "auto": [
             ("wybór ulubionych biomów na karcie drużyny, liczba miejsc z tabeli Zwiadowcy", "actors/party-travel.mjs"),
