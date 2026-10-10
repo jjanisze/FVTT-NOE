@@ -1,0 +1,511 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.YWJmZDNlNzMyOGVh",
+      "name": "Alan",
+      "items": [
+        {
+          "_id": "alz1NyP1H09EA7nH",
+          "name": "Szybkie palce",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/szybkie-palce.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MzJhMDgyZmRiMzU1",
+      "name": "Aligator",
+      "items": [
+        {
+          "_id": "MzczMzFiOTRiOWFm",
+          "name": "Taktyka",
+          "before": "worlds/OUTPUT/characters/022_-_Aligator/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/taktyka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.D1MqhEEM3qJY5lpR",
+      "name": "CYNGIEL",
+      "items": [
+        {
+          "_id": "NvKjNniNROJPvtrT",
+          "name": "Pulp Fiction",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/pulp-fiction.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.Fgi29FeQOHnGFyPI",
+      "name": "CYWIL",
+      "items": [
+        {
+          "_id": "3dkynLqn27uqf2qL",
+          "name": "Potęga tłumu",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/potega-tlumu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MGI2NGYxM2IyZTll",
+      "name": "Cyngiel",
+      "items": [
+        {
+          "_id": "YmM3NWRiNDgzZmY5",
+          "name": "Pulp Fiction",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/pulp-fiction.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.2m5x938twoTPqNcl",
+      "name": "GENERACJA III. SZPIEG",
+      "items": [
+        {
+          "_id": "zbtTzxPuJpZ1psXl",
+          "name": "Ucieczka",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/ucieczka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.AhsmX4UQfDrAr9dw",
+      "name": "GENERACJA III. TECHMUTAS",
+      "items": [
+        {
+          "_id": "cTHtr3sxUJPFdrmf",
+          "name": "Paraliż umysłu",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/paraliz-umyslu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.rTJw3ocQiztVCBY7",
+      "name": "GENERACJA IV. MESMERYTA",
+      "items": [
+        {
+          "_id": "SGtSniO8XSENHYRO",
+          "name": "Paraliżujący ból",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/paralizujacy-bol.svg"
+        },
+        {
+          "_id": "ROhJbEnxRdtszfcf",
+          "name": "Posiłki (2/dzień)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/posilki.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.tjWfjg1JgeHRa9WC",
+      "name": "JUGGERNAUT",
+      "items": [
+        {
+          "_id": "P0a2u6l68PW7zOux",
+          "name": "Słaby punkt",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/slaby-punkt.svg"
+        },
+        {
+          "_id": "O8l0z3S3zlLLhQgz",
+          "name": "Wszędołaz",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wszedolaz.svg"
+        },
+        {
+          "_id": "IzqzaeFVDsoGGff3",
+          "name": "Zadymienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zadymienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.Z6sIdSr28syaURmI",
+      "name": "KIDNAPER",
+      "items": [
+        {
+          "_id": "vRJDsUu8aP6oLtFh",
+          "name": "Porywacz",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/porywacz.svg"
+        },
+        {
+          "_id": "wsP8tiPjaphpAhhH",
+          "name": "Ucieczka",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/ucieczka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.F7GtxAsyDXG6kPla",
+      "name": "KORZEC",
+      "items": [
+        {
+          "_id": "Q8Qn6GlE508AvO4h",
+          "name": "Rzut",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/rzut.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.td44oP8eYRTO8SeW",
+      "name": "NEONIEDŹWIEDŹ",
+      "items": [
+        {
+          "_id": "Rhy4iOimd0OX8Cw9",
+          "name": "Zamaszysty atak",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zamaszysty-atak.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.iEtm6diLHCu1QJkw",
+      "name": "SPAWACZ",
+      "items": [
+        {
+          "_id": "rOhXPY2NtowFpPLe",
+          "name": "Spawanie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/spawanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.oQH4iYWjKEWB7x7v",
+      "name": "SZERYF",
+      "items": [
+        {
+          "_id": "LZdQfh10xBhcCY3O",
+          "name": "Poddaj się!",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/poddaj-sie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MGFiZGQ2NzE5OWNh",
+      "name": "Spawacz",
+      "items": [
+        {
+          "_id": "OGNhNGJkMTUzM2Qy",
+          "name": "Spawanie",
+          "before": "worlds/OUTPUT/characters/013_-_Spawacz/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/spawanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.8kjvzT4K3g40IHjX",
+      "name": "TESTER - Ze sztuczkami",
+      "items": [
+        {
+          "_id": "48Wz37augW36GKHO",
+          "name": "Szybkie palce",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/szybkie-palce.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.bYos8iRtgi5PHjX4",
+      "name": "ŻOŁNIERZ POSTERUNKU",
+      "items": [
+        {
+          "_id": "dRSdHQzjR61RDA7i",
+          "name": "Taktyka",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/taktyka.svg"
+        },
+        {
+          "_id": "9cxzIcFdFu5K0GQr",
+          "name": "Szybkie palce",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/szybkie-palce.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.NTQ0NTc4NmE0NzJk.Actor.MzJhMDgyZmRiMzU1",
+      "name": "Aligator",
+      "items": [
+        {
+          "_id": "MzczMzFiOTRiOWFm",
+          "name": "Taktyka",
+          "before": "worlds/OUTPUT/characters/022_-_Aligator/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/taktyka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.ZjQ3MjZiYzgxOGMx.Actor.MGI2NGYxM2IyZTll",
+      "name": "Cyngiel",
+      "items": [
+        {
+          "_id": "YmM3NWRiNDgzZmY5",
+          "name": "Pulp Fiction",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/pulp-fiction.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.NTMwZDhiYTczZGY2.Actor.MGI2NGYxM2IyZTll",
+      "name": "Cyngiel",
+      "items": [
+        {
+          "_id": "YmM3NWRiNDgzZmY5",
+          "name": "Pulp Fiction",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/pulp-fiction.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.OTg2ZmRlMThjOTU0.Actor.MGFiZGQ2NzE5OWNh",
+      "name": "Spawacz",
+      "items": [
+        {
+          "_id": "OGNhNGJkMTUzM2Qy",
+          "name": "Spawanie",
+          "before": "worlds/OUTPUT/characters/013_-_Spawacz/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/spawanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.YjMwZWQ3YzcxOWI5.Actor.MGFiZGQ2NzE5OWNh",
+      "name": "Spawacz",
+      "items": [
+        {
+          "_id": "OGNhNGJkMTUzM2Qy",
+          "name": "Spawanie",
+          "before": "worlds/OUTPUT/characters/013_-_Spawacz/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/spawanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.9vEF9o7uRVHVCgRc.Actor.MzJhMDgyZmRiMzU1",
+      "name": "Aligator",
+      "items": [
+        {
+          "_id": "MzczMzFiOTRiOWFm",
+          "name": "Taktyka",
+          "before": "worlds/OUTPUT/characters/022_-_Aligator/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/taktyka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.tAIhJ5SdCRjU7CLW.Actor.MGI2NGYxM2IyZTll",
+      "name": "Cyngiel",
+      "items": [
+        {
+          "_id": "YmM3NWRiNDgzZmY5",
+          "name": "Pulp Fiction",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/pulp-fiction.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.ZBGr9qBCvDeCCIC2.Actor.MGFiZGQ2NzE5OWNh",
+      "name": "Spawacz",
+      "items": [
+        {
+          "_id": "OGNhNGJkMTUzM2Qy",
+          "name": "Spawanie",
+          "before": "worlds/OUTPUT/characters/013_-_Spawacz/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/spawanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.y7opvixN926XdaoK.Actor.D1MqhEEM3qJY5lpR",
+      "name": "CYNGIEL",
+      "items": [
+        {
+          "_id": "NvKjNniNROJPvtrT",
+          "name": "Pulp Fiction",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/pulp-fiction.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.lIgUzpiK9s7Z0Wm5.Actor.Fgi29FeQOHnGFyPI",
+      "name": "GANGUS KAPO",
+      "items": [
+        {
+          "_id": "3dkynLqn27uqf2qL",
+          "name": "Potęga tłumu",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/potega-tlumu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.iWn66IU9S1su6AEX.Actor.oQH4iYWjKEWB7x7v",
+      "name": "SZERYF",
+      "items": [
+        {
+          "_id": "LZdQfh10xBhcCY3O",
+          "name": "Poddaj się!",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/poddaj-sie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.cMpfbZGUBawSzBWK.Actor.bYos8iRtgi5PHjX4",
+      "name": "ŻOŁNIERZ POSTERUNKU",
+      "items": [
+        {
+          "_id": "dRSdHQzjR61RDA7i",
+          "name": "Taktyka",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/taktyka.svg"
+        },
+        {
+          "_id": "9cxzIcFdFu5K0GQr",
+          "name": "Szybkie palce",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/szybkie-palce.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.A86fzMPR9RL1MqZf.Actor.tjWfjg1JgeHRa9WC",
+      "name": "JUGGERNAUT",
+      "items": [
+        {
+          "_id": "P0a2u6l68PW7zOux",
+          "name": "Słaby punkt",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/slaby-punkt.svg"
+        },
+        {
+          "_id": "O8l0z3S3zlLLhQgz",
+          "name": "Wszędołaz",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wszedolaz.svg"
+        },
+        {
+          "_id": "IzqzaeFVDsoGGff3",
+          "name": "Zadymienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zadymienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.RUbXcAdccXL9yZFS.Actor.Z6sIdSr28syaURmI",
+      "name": "KIDNAPER",
+      "items": [
+        {
+          "_id": "vRJDsUu8aP6oLtFh",
+          "name": "Porywacz",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/porywacz.svg"
+        },
+        {
+          "_id": "wsP8tiPjaphpAhhH",
+          "name": "Ucieczka",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/ucieczka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.2BMdno96YjuA1itb.Actor.iEtm6diLHCu1QJkw",
+      "name": "SPAWACZ",
+      "items": [
+        {
+          "_id": "rOhXPY2NtowFpPLe",
+          "name": "Spawanie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/spawanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.Lhv4pnxEr83HLtKA.Actor.2m5x938twoTPqNcl",
+      "name": "GENERACJA III. SZPIEG",
+      "items": [
+        {
+          "_id": "zbtTzxPuJpZ1psXl",
+          "name": "Ucieczka",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/ucieczka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.pOAeS5tN1eg2aNAm.Actor.AhsmX4UQfDrAr9dw",
+      "name": "GENERACJA III. TECHMUTAS",
+      "items": [
+        {
+          "_id": "cTHtr3sxUJPFdrmf",
+          "name": "Paraliż umysłu",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/paraliz-umyslu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.gxuXT8I72CWmqm1G.Actor.rTJw3ocQiztVCBY7",
+      "name": "GENERACJA IV. MESMERYTA",
+      "items": [
+        {
+          "_id": "SGtSniO8XSENHYRO",
+          "name": "Paraliżujący ból",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/paralizujacy-bol.svg"
+        },
+        {
+          "_id": "ROhJbEnxRdtszfcf",
+          "name": "Posiłki (2/dzień)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/posilki.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.nUct6kMaNGOXebX7.Actor.F7GtxAsyDXG6kPla",
+      "name": "ALAHAMA",
+      "items": [
+        {
+          "_id": "Q8Qn6GlE508AvO4h",
+          "name": "Rzut",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/rzut.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.3gbaIvSg6AdDNxi4.Actor.td44oP8eYRTO8SeW",
+      "name": "NEONIEDŹWIEDŹ",
+      "items": [
+        {
+          "_id": "Rhy4iOimd0OX8Cw9",
+          "name": "Zamaszysty atak",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zamaszysty-atak.svg"
+        }
+      ]
+    }
+  ]
+}

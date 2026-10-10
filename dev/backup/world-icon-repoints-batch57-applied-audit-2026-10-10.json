@@ -1,0 +1,199 @@
+{
+  "version": 1,
+  "kind": "post-apply-audit",
+  "world": "output",
+  "createdAt": "2026-10-10T12:54:49.307Z",
+  "worldItems": [],
+  "actors": [
+    {
+      "uuid": "Actor.0gWeShZIv4KOO88F",
+      "name": "ALAHAMA",
+      "items": [
+        {
+          "_id": "JWx9vikDJzTKuifj",
+          "name": "Furia",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/furia.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.D1MqhEEM3qJY5lpR",
+      "name": "CYNGIEL",
+      "items": [
+        {
+          "_id": "jjkxhFMWTrcz09uR",
+          "name": "Kuloodporny",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/kuloodporny.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MGI2NGYxM2IyZTll",
+      "name": "Cyngiel",
+      "items": [
+        {
+          "_id": "ZTIwMGM0ZDU3MGQ4",
+          "name": "Kuloodporny",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/kuloodporny.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.bnbnPGBq7QPt9KRh",
+      "name": "GENERACJA II. GENOTYP WILCZY",
+      "items": [
+        {
+          "_id": "tZOw4HQp12Ul4FCS",
+          "name": "Wataha",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wataha.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.rTJw3ocQiztVCBY7",
+      "name": "GENERACJA IV. MESMERYTA",
+      "items": [
+        {
+          "_id": "jqKIxX9QcbtIlypH",
+          "name": "Pokłoń się!",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/poklon-sie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.BfwMMnZyyOp4ErKQ",
+      "name": "GLADIATOR",
+      "items": [
+        {
+          "_id": "ZQsMVpTK31G8djO0",
+          "name": "Stabilizator",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/stabilizator.svg"
+        },
+        {
+          "_id": "V7t0PaI5Fo0EeEvY",
+          "name": "Stratowanie",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/stratowanie.svg"
+        },
+        {
+          "_id": "PgBraREji2bbmkgc",
+          "name": "Parowanie",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/parowanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.BrVnUbF9JjDHb3Hw",
+      "name": "HARPIE (AKA WAMPIRY)",
+      "items": [
+        {
+          "_id": "ZNfCxqKLqjRC3Oz0",
+          "name": "Pikowanie",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/pikowanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MjBkYmViOTMxN2Q2",
+      "name": "Jason",
+      "items": [
+        {
+          "_id": "MzE2ZWQ0NzE5YzNm",
+          "name": "To moje miasto",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/to-moje-miasto.svg"
+        },
+        {
+          "_id": "Y2FhNWY4YzZmNTdm",
+          "name": "Gunfight",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/gunfight.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.1vpt0f4JRB6nov9d",
+      "name": "PAJĄK",
+      "items": [
+        {
+          "_id": "JdyorXR8RBM7dcZi",
+          "name": "Pokrycie maskujące",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/pokrycie-maskujace.svg"
+        },
+        {
+          "_id": "vsKorLhc2sgU0PNU",
+          "name": "Pełna obrona",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/pelna-obrona.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.BJxZozEHq05Xqphv",
+      "name": "PIES BOJOWY",
+      "items": [
+        {
+          "_id": "rMCQ2c5paNA8pyuh",
+          "name": "Doskonałe zmysły",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/doskonale-zmysly.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.N2E4NTliODA5YjU3",
+      "name": "Pająk",
+      "items": [
+        {
+          "_id": "Y2IzNjY2N2JiMTVi",
+          "name": "Pokrycie maskujące",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/pokrycie-maskujace.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.oQH4iYWjKEWB7x7v",
+      "name": "SZERYF",
+      "items": [
+        {
+          "_id": "h0Nzm4eDVEsacrPb",
+          "name": "To moje miasto",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/to-moje-miasto.svg"
+        },
+        {
+          "_id": "23PjeHy4cU7D3fSx",
+          "name": "Gunfight",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/gunfight.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.u9LJRDYAQV6jIApL",
+      "name": "TARAN",
+      "items": [
+        {
+          "_id": "Db8PIAfc3XaIYGwG",
+          "name": "Tropiciel",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tropiciel.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.hkab5SivPPEoyPHv",
+      "name": "TECHMORWA (MALUTKA)",
+      "items": [
+        {
+          "_id": "NP8P9VZR1trDnSaA",
+          "name": "Owipozycja",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/owipozycja.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MTg5ZjY0Y2Q2MTdj",
+      "name": "WILKOLUD",
+      "items": [
+        {
+          "_id": "MDg5MGUzNDY0NDcw",
+          "name": "Wataha",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wataha.svg"
+        }
+      ]
+    }
+  ]
+}

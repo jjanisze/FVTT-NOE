@@ -1,0 +1,427 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.TotmQd6oDLLeM6B2",
+      "name": "BIT-BOY PRZEWODNIK",
+      "items": [
+        {
+          "_id": "7Q1EwMfla7Jt6zcj",
+          "name": "Psychiczny krzyk",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/psychiczny-krzyk.svg"
+        },
+        {
+          "_id": "X4zxJG6m57nPbLMm",
+          "name": "Zauroczenie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zauroczenie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.ZDBiNWNjM2E5MTVh",
+      "name": "Bitboy Przewodnik",
+      "items": [
+        {
+          "_id": "OTA2NDMyMGJlMDQz",
+          "name": "Psychiczny krzyk",
+          "before": "worlds/OUTPUT/characters/036_-_Bitboy_Przewodnik/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/psychiczny-krzyk.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.5JqCEw9I5Ewb2fgQ",
+      "name": "GANGUS KAPO",
+      "items": [
+        {
+          "_id": "MBuHJEHaW4gfBTOa",
+          "name": "Ofiara",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/ofiara.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.CmseQba9Q7gjPWom",
+      "name": "GENERACJA I. NOCNY GHUL",
+      "items": [
+        {
+          "_id": "fYSDC4TBxuRhNxA3",
+          "name": "Niezniszczalność",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/niezniszczalnosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.Taasqgmv3ugzhYfv",
+      "name": "GENERACJA II. GENOTYP GADZI",
+      "items": [
+        {
+          "_id": "RfIVZDKWwdm20XAW",
+          "name": "Skóra gekona",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/skora-gekona.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.bnbnPGBq7QPt9KRh",
+      "name": "GENERACJA II. GENOTYP WILCZY",
+      "items": [
+        {
+          "_id": "afmYFep3Y468tXZI",
+          "name": "Upiorne wycie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/upiorne-wycie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.AhsmX4UQfDrAr9dw",
+      "name": "GENERACJA III. TECHMUTAS",
+      "items": [
+        {
+          "_id": "pVbJAS0PqiwCA8kc",
+          "name": "Przewidywanie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/przewidywanie.svg"
+        },
+        {
+          "_id": "ofaprCB9xNB4Z1VA",
+          "name": "Druga linia",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/druga-linia.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.rTJw3ocQiztVCBY7",
+      "name": "GENERACJA IV. MESMERYTA",
+      "items": [
+        {
+          "_id": "3aUkBOIHxw2lih0y",
+          "name": "Sługa Molocha",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/sluga-molocha.svg"
+        },
+        {
+          "_id": "rZV8GBzN8CazG9dl",
+          "name": "Iluzoryczny cel",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/iluzoryczny-cel.svg"
+        },
+        {
+          "_id": "i1ntqSNxgBlHu8n2",
+          "name": "Stój!",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/stoj.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.tjWfjg1JgeHRa9WC",
+      "name": "JUGGERNAUT",
+      "items": [
+        {
+          "_id": "teqdtPgIkV4ncVpK",
+          "name": "Burzyciel",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/burzyciel.svg"
+        },
+        {
+          "_id": "9H6QOwak2XT3vgWp",
+          "name": "Najechanie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/najechanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.Zjk0MWY2ODc3OTk1",
+      "name": "Pustak",
+      "items": [
+        {
+          "_id": "NzhiNjgzYTQzNjEx",
+          "name": "Ofiara",
+          "before": "worlds/OUTPUT/characters/062_-_Pustak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/ofiara.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.UfmT9pKXIpZvX2OT",
+      "name": "RÓJ SZCZURÓW",
+      "items": [
+        {
+          "_id": "aGdI8zBgiL3WbtqH",
+          "name": "Strach przed ogniem",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/strach-przed-ogniem.svg"
+        },
+        {
+          "_id": "WtCUgSjTuGJGaXkr",
+          "name": "Zaciekłość",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zacieklosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.oQH4iYWjKEWB7x7v",
+      "name": "SZERYF",
+      "items": [
+        {
+          "_id": "DZOtiogKlXnhwblX",
+          "name": "Zastępcy szeryfa",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zastepcy-szeryfa.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.u9LJRDYAQV6jIApL",
+      "name": "TARAN",
+      "items": [
+        {
+          "_id": "j83EXVPPCao22h6P",
+          "name": "Wytrwały",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wytrwaly.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.YmRjMzU5ZDY3ZGJk.Actor.Zjk0MWY2ODc3OTk1",
+      "name": "Pustak",
+      "items": [
+        {
+          "_id": "NzhiNjgzYTQzNjEx",
+          "name": "Ofiara",
+          "before": "worlds/OUTPUT/characters/062_-_Pustak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/ofiara.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.MjUxODY3MjYyZThk.Actor.Zjk0MWY2ODc3OTk1",
+      "name": "Pustak",
+      "items": [
+        {
+          "_id": "NzhiNjgzYTQzNjEx",
+          "name": "Ofiara",
+          "before": "worlds/OUTPUT/characters/062_-_Pustak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/ofiara.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ZDI1YTcyY2JmNjMx.Token.PVE66ThJ5jA6yrdW.Actor.ZDBiNWNjM2E5MTVh",
+      "name": "Bitboy Przewodnik",
+      "items": [
+        {
+          "_id": "OTA2NDMyMGJlMDQz",
+          "name": "Psychiczny krzyk",
+          "before": "worlds/OUTPUT/characters/036_-_Bitboy_Przewodnik/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/psychiczny-krzyk.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.7WKVmjHrBj5e7qTm.Actor.Zjk0MWY2ODc3OTk1",
+      "name": "Pustak",
+      "items": [
+        {
+          "_id": "NzhiNjgzYTQzNjEx",
+          "name": "Ofiara",
+          "before": "worlds/OUTPUT/characters/062_-_Pustak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/ofiara.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.oSQcyQveFJeB5tCv.Actor.ZDBiNWNjM2E5MTVh",
+      "name": "Bitboy Przewodnik",
+      "items": [
+        {
+          "_id": "OTA2NDMyMGJlMDQz",
+          "name": "Psychiczny krzyk",
+          "before": "worlds/OUTPUT/characters/036_-_Bitboy_Przewodnik/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/psychiczny-krzyk.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.yx6sbn1Pv3b8wHFE.Actor.5JqCEw9I5Ewb2fgQ",
+      "name": "GANGUS BOSS",
+      "items": [
+        {
+          "_id": "MBuHJEHaW4gfBTOa",
+          "name": "Ofiara",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/ofiara.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.iWn66IU9S1su6AEX.Actor.oQH4iYWjKEWB7x7v",
+      "name": "SZERYF",
+      "items": [
+        {
+          "_id": "DZOtiogKlXnhwblX",
+          "name": "Zastępcy szeryfa",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zastepcy-szeryfa.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.A86fzMPR9RL1MqZf.Actor.tjWfjg1JgeHRa9WC",
+      "name": "JUGGERNAUT",
+      "items": [
+        {
+          "_id": "teqdtPgIkV4ncVpK",
+          "name": "Burzyciel",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/burzyciel.svg"
+        },
+        {
+          "_id": "9H6QOwak2XT3vgWp",
+          "name": "Najechanie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/najechanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.yGmIFaAZ0qnTB1gR.Actor.bnbnPGBq7QPt9KRh",
+      "name": "PAJĄK",
+      "items": [
+        {
+          "_id": "afmYFep3Y468tXZI",
+          "name": "Upiorne wycie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/upiorne-wycie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.D6luA0XyzWcLHhmC.Actor.CmseQba9Q7gjPWom",
+      "name": "GENERACJA I. NOCNY GHUL",
+      "items": [
+        {
+          "_id": "fYSDC4TBxuRhNxA3",
+          "name": "Niezniszczalność",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/niezniszczalnosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.MU0qcsrqg3xwiW6f.Actor.Taasqgmv3ugzhYfv",
+      "name": "GENERACJA II. GENOTYP GADZI",
+      "items": [
+        {
+          "_id": "RfIVZDKWwdm20XAW",
+          "name": "Skóra gekona",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/skora-gekona.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.pOAeS5tN1eg2aNAm.Actor.AhsmX4UQfDrAr9dw",
+      "name": "GENERACJA III. TECHMUTAS",
+      "items": [
+        {
+          "_id": "pVbJAS0PqiwCA8kc",
+          "name": "Przewidywanie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/przewidywanie.svg"
+        },
+        {
+          "_id": "ofaprCB9xNB4Z1VA",
+          "name": "Druga linia",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/druga-linia.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.gxuXT8I72CWmqm1G.Actor.rTJw3ocQiztVCBY7",
+      "name": "GENERACJA IV. MESMERYTA",
+      "items": [
+        {
+          "_id": "3aUkBOIHxw2lih0y",
+          "name": "Sługa Molocha",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/sluga-molocha.svg"
+        },
+        {
+          "_id": "rZV8GBzN8CazG9dl",
+          "name": "Iluzoryczny cel",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/iluzoryczny-cel.svg"
+        },
+        {
+          "_id": "i1ntqSNxgBlHu8n2",
+          "name": "Stój!",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/stoj.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.umLQ2x0fOHrvS5ol.Actor.u9LJRDYAQV6jIApL",
+      "name": "TARAN",
+      "items": [
+        {
+          "_id": "j83EXVPPCao22h6P",
+          "name": "Wytrwały",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wytrwaly.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.CflSFAUo5JbqEl56.Actor.TotmQd6oDLLeM6B2",
+      "name": "BIT-BOY PRZEWODNIK",
+      "items": [
+        {
+          "_id": "7Q1EwMfla7Jt6zcj",
+          "name": "Psychiczny krzyk",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/psychiczny-krzyk.svg"
+        },
+        {
+          "_id": "X4zxJG6m57nPbLMm",
+          "name": "Zauroczenie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zauroczenie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.tDFhR4TusTuWgWli.Actor.UfmT9pKXIpZvX2OT",
+      "name": "RÓJ SZCZURÓW",
+      "items": [
+        {
+          "_id": "aGdI8zBgiL3WbtqH",
+          "name": "Strach przed ogniem",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/strach-przed-ogniem.svg"
+        },
+        {
+          "_id": "WtCUgSjTuGJGaXkr",
+          "name": "Zaciekłość",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zacieklosc.svg"
+        }
+      ]
+    }
+  ]
+}

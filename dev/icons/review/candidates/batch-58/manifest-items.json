@@ -1,0 +1,438 @@
+{
+  "title": "Batch 58 · 27 awaiting GM review",
+  "updated": "2026-10-10",
+  "items": [
+    {
+      "id": "batch55-tarcza-umyslu",
+      "candidates": [
+        {
+          "id": "batch58-revision",
+          "label": "Revision D · correctly directed single ray",
+          "src": "candidates/batch-58/tarcza_umyslu_revision_d.png",
+          "note": "One continuous ray reaches one shield contact from above and leaves below."
+        }
+      ]
+    },
+    {
+      "id": "batch55-zamarcie",
+      "candidates": [
+        {
+          "id": "batch58-revision",
+          "label": "Revision D · weathered recognition",
+          "src": "candidates/batch-58/zamarcie_revision_d.png",
+          "note": "A restrained adult survivor faces the insectoid without manga-like features."
+        }
+      ]
+    },
+    {
+      "id": "batch56-szosty-zmysl",
+      "candidates": [
+        {
+          "id": "batch58-revision",
+          "label": "Revision C · rugged danger sense",
+          "src": "candidates/batch-58/szosty_zmysl_revision_c.png",
+          "note": "The rear eye remains symbolic while the main profile is weathered and realistically proportioned."
+        }
+      ]
+    },
+    {
+      "id": "batch56-tylko-drasniecie",
+      "candidates": [
+        {
+          "id": "batch58-revision",
+          "label": "Revision B · complete hat and clean edge",
+          "src": "candidates/batch-58/tylko_drasniecie_revision_b.png",
+          "note": "The stray rectangle is gone and the complete hat fits inside the icon."
+        }
+      ]
+    },
+    {
+      "id": "batch57-celowanie",
+      "candidates": [
+        {
+          "id": "batch58-revision",
+          "label": "Revision B · weathered marksman",
+          "src": "candidates/batch-58/celowanie_revision_b.png",
+          "note": "A normally proportioned eye under a heavy brow aligns with the sight."
+        }
+      ]
+    },
+    {
+      "id": "batch57-naprawianie",
+      "candidates": [
+        {
+          "id": "batch58-revision",
+          "label": "Revision B · industrial robot repair",
+          "src": "candidates/batch-58/naprawianie_revision_b.png",
+          "note": "A recognizable six-axis factory robot arm works a wrench against the damaged plate."
+        }
+      ]
+    },
+    {
+      "id": "batch57-palcozerca",
+      "candidates": [
+        {
+          "id": "batch58-revision",
+          "label": "Revision B · four intact, one missing",
+          "src": "candidates/batch-58/palcozerca_revision_b.png",
+          "note": "The hand presents four complete digits and one fully separated bitten finger."
+        }
+      ]
+    },
+    {
+      "id": "batch57-roznorodne-ataki",
+      "candidates": [
+        {
+          "id": "batch58-revision",
+          "label": "Revision B · industrial attack platform",
+          "src": "candidates/batch-58/roznorodne_ataki_revision_b.png",
+          "note": "A tracked welded machine carries four distinct implements without humanoid armor."
+        }
+      ]
+    },
+    {
+      "id": "batch57-skok-lowcy",
+      "candidates": [
+        {
+          "id": "batch58-revision",
+          "label": "Revision B · clean human target",
+          "src": "candidates/batch-58/skok_lowcy_revision_b.png",
+          "note": "The recoiling adult has a clean head, torso, two arms and two legs."
+        }
+      ]
+    },
+    {
+      "id": "batch57-tanczace-pily",
+      "candidates": [
+        {
+          "id": "batch58-revision",
+          "label": "Revision B · tracked saw machine",
+          "src": "candidates/batch-58/tanczace_pily_revision_b.png",
+          "note": "Three saws orbit a squat industrial tracked chassis."
+        }
+      ]
+    },
+    {
+      "id": "batch57-trzeba-dobic",
+      "candidates": [
+        {
+          "id": "batch58-revision",
+          "label": "Revision B · descending finishing strike",
+          "src": "candidates/batch-58/trzeba_dobic_revision_b.png",
+          "note": "The return arrow is removed; two straight marks emphasize the sword striking down."
+        }
+      ]
+    },
+    {
+      "id": "batch57-wrog-molocha",
+      "candidates": [
+        {
+          "id": "batch58-revision",
+          "label": "Revision B · symbolic machine target",
+          "src": "candidates/batch-58/wrog_molocha_revision_b.png",
+          "note": "The soldier attacks a simplified angular machine-head emblem with a single camera eye."
+        }
+      ]
+    },
+    {
+      "id": "batch58-bolesny-atak",
+      "name": "Bolesny atak",
+      "tier": "Batch 58 · Cyngiel trait",
+      "context": "Once per turn, Cyngiel deals an additional 4d6 damage when attacking with advantage using a finesse or ranged weapon.",
+      "request": "One weathered gunfighter fires into one large cracked weak-point mark on an enemy torso.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · precise painful shot",
+          "src": "candidates/batch-58/bolesny_atak.png",
+          "note": "One bullet path links the gunfighter to a single dominant vulnerable point."
+        }
+      ]
+    },
+    {
+      "id": "batch58-odporny",
+      "name": "Odporny",
+      "tier": "Batch 58 · Skażony koń trait",
+      "context": "The contaminated horse can drink dirty or irradiated water and eat moldy feed without harm.",
+      "request": "One heavy mutated horse calmly drinks from polluted water beside moldy feed.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · contaminated feed resistance",
+          "src": "candidates/batch-58/odporny.png",
+          "note": "The horse drinks beside visible rot and contamination without a cartoon hazard sign."
+        }
+      ]
+    },
+    {
+      "id": "batch58-odstapienie",
+      "name": "Odstąpienie",
+      "tier": "Batch 58 · Harpia action",
+      "context": "The Harpy stops provoking opportunity attacks until the end of its turn.",
+      "request": "One gaunt harpy withdraws from one armed human across a clear gap.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · harpy disengages",
+          "src": "candidates/batch-58/odstapienie.png",
+          "note": "The airborne retreat and two movement bars read as disengagement."
+        }
+      ]
+    },
+    {
+      "id": "batch58-przyspieszenie",
+      "name": "Przyspieszenie",
+      "tier": "Batch 58 · Pulser bonus action",
+      "context": "The Pulser Dashes or Hides, usually escaping firearm range or vanishing among the treetops.",
+      "request": "One four-winged biomechanical Pulser with two swollen abdominal sacs accelerates upward.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · accelerating Pulser",
+          "src": "candidates/batch-58/przyspieszenie.png",
+          "note": "The two wing pairs, paired sacs and three heavy speed bars identify the creature and action."
+        }
+      ]
+    },
+    {
+      "id": "batch58-skakun",
+      "name": "Skakun (opcjonalnie)",
+      "tier": "Batch 58 · Gigantyczny pająk trait",
+      "context": "The giant spider can make an eighteen-metre leap.",
+      "request": "One giant spider stretches into a long horizontal leap above one broad arc.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · long spider leap",
+          "src": "candidates/batch-58/skakun.png",
+          "note": "The extended legs and single arc communicate the exceptional jump distance."
+        }
+      ]
+    },
+    {
+      "id": "batch58-skoczek",
+      "name": "Skoczek",
+      "tier": "Batch 58 · Neokot trait",
+      "context": "The neocat can leap six metres horizontally or three metres vertically.",
+      "request": "One lean feral mutant cat with long tail and ears springs upward from rubble.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · mutant cat jump",
+          "src": "candidates/batch-58/skoczek.png",
+          "note": "The elongated animal silhouette follows one strong upward arc."
+        }
+      ]
+    },
+    {
+      "id": "batch58-skok",
+      "name": "Skok",
+      "tier": "Batch 58 · Bit-Boy trait",
+      "context": "The Bit-Boy replaces ordinary movement with a long or high insect-like jump.",
+      "request": "One hunched insectoid Bit-Boy makes an enormous forward jump above one broad arc.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Bit-Boy jump",
+          "src": "candidates/batch-58/skok.png",
+          "note": "Long rear legs and the low predatory body distinguish the jump from a human leap."
+        }
+      ]
+    },
+    {
+      "id": "batch58-szarpanie",
+      "name": "Szarpanie",
+      "tier": "Batch 58 · Pies mutek action",
+      "context": "The mutant dog tears at a grappled victim for slashing damage.",
+      "request": "One heavy mutant dog grips a captive forearm and pulls backward.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · tearing grappled prey",
+          "src": "candidates/batch-58/szarpanie.png",
+          "note": "The dog, trapped arm and short tug marks show the damaging pull without gore."
+        }
+      ]
+    },
+    {
+      "id": "batch58-tchorzliwosc",
+      "name": "Tchórzliwość",
+      "tier": "Batch 58 · shared NPC morale trait",
+      "context": "Several human and machine NPCs have a percentage chance to flee or surrender under pressure.",
+      "request": "One armed adult survivor recoils from a looming claw and drops a rifle.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · morale breaks",
+          "src": "candidates/batch-58/tchorzliwosc.png",
+          "note": "The dropped weapon and defensive posture communicate serious fear without comedy."
+        }
+      ]
+    },
+    {
+      "id": "batch58-udzwig",
+      "name": "Udźwig",
+      "tier": "Batch 58 · Gigamut trait",
+      "context": "Gigamut can carry 1,400 kg routinely and up to 2,800 kg at maximum load.",
+      "request": "One colossal shaggy horned pack beast carries exactly three strapped cargo crates.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · colossal pack load",
+          "src": "candidates/batch-58/udzwig.png",
+          "note": "Three huge crates dominate the broad beast's working silhouette."
+        }
+      ]
+    },
+    {
+      "id": "batch58-unieruchomienie",
+      "name": "Unieruchomienie",
+      "tier": "Batch 58 · Bit-Boy bonus action",
+      "context": "The Bit-Boy tries to restrain a creature it has already grappled.",
+      "request": "One insectoid Bit-Boy pins one complete adult human flat with two long forelimbs.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · insectoid pin",
+          "src": "candidates/batch-58/unieruchomienie.png",
+          "note": "The two forelimbs visibly hold the prone target across the shoulders."
+        }
+      ]
+    },
+    {
+      "id": "batch58-wirujace-kiscienie",
+      "name": "Wirujące kiścienie",
+      "tier": "Batch 58 · Gladiator action",
+      "context": "The Gladiator swings its flails through every creature within three metres, dealing damage and knocking victims prone.",
+      "request": "One tracked industrial killing machine spins exactly two spiked flails around one sweep arc.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · rotating industrial flails",
+          "src": "candidates/batch-58/wirujace_kiscienie.png",
+          "note": "Two hydraulic arms and one circular path form a clear area attack."
+        }
+      ]
+    },
+    {
+      "id": "batch58-wycofanie-sie",
+      "name": "Wycofanie się",
+      "tier": "Batch 58 · Biodroid action",
+      "context": "The Biodroid Disengages while burrowing into the earth or climbing a tree.",
+      "request": "One headless armed worm-like Biodroid withdraws backward into a simple earth burrow.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Biodroid burrows away",
+          "src": "candidates/batch-58/wycofanie_sie.png",
+          "note": "The segmented headless body and backward marks show an armed creature retreating underground."
+        }
+      ]
+    },
+    {
+      "id": "batch58-zmysly",
+      "name": "Zmysły",
+      "tier": "Batch 58 · Wilczy genotyp trait",
+      "context": "The wolf genotype has advantage on Perception checks based on hearing or smell.",
+      "request": "One heavy wolf-human mutant head with two scent waves and two sound arcs.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · wolf-mutant senses",
+          "src": "candidates/batch-58/zmysly.png",
+          "note": "The long muzzle and oversized ear carry the smell-and-hearing concept without a cute expression."
+        }
+      ]
+    },
+    {
+      "id": "batch58-zasadzka",
+      "name": "Zasadzka",
+      "tier": "Batch 58 · Pająk and Szczękowij trait",
+      "context": "The creature has advantage on its first attack against a surprised target.",
+      "request": "One low spider-like mutant bursts from concealment behind an exposed adult human.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · concealed first strike",
+          "src": "candidates/batch-58/zasadzka.png",
+          "note": "The partly hidden predator and victim's exposed back communicate an ambush."
+        }
+      ]
+    }
+  ]
+}

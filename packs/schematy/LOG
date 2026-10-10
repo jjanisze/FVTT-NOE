@@ -1,1 +1,5 @@
-2026/10/08-02:36:25.260 9e08 Delete type=3 #1
+2026/10/10-19:17:15.207 9be8 Recovering log #3
+2026/10/10-19:17:15.208 9be8 Level-0 table #5: started
+2026/10/10-19:17:15.212 9be8 Level-0 table #5: 98236 bytes OK
+2026/10/10-19:17:15.215 9be8 Delete type=0 #3
+2026/10/10-19:17:15.215 9be8 Delete type=3 #2

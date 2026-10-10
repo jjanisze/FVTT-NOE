@@ -1,0 +1,634 @@
+{
+  "createdAt": "2026-10-08T17:17:06.453Z",
+  "plan": {
+    "version": 1,
+    "world": "output",
+    "items": [],
+    "actors": [
+      {
+        "uuid": "Actor.0gWeShZIv4KOO88F",
+        "name": "ALAHAMA",
+        "items": [
+          {
+            "_id": "eFQg4vO3o8e8CKwi",
+            "name": "Czaszkohełm",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/czaszkohelm.svg"
+          },
+          {
+            "_id": "ZRE642fjy9LTwzct",
+            "name": "Regeneracja",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/regeneracja.svg"
+          },
+          {
+            "_id": "P1BJsDXz7SQB51mV",
+            "name": "Szarża",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/szarza.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.Wf53EIDOGbqhl6h0",
+        "name": "BIODROID",
+        "items": [
+          {
+            "_id": "FbFglUBBrA7TStgH",
+            "name": "Regeneracja",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/regeneracja.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.LmZSlovQGxy1eM6k",
+        "name": "GANGUS BOSS",
+        "items": [
+          {
+            "_id": "YYBKFaKXtXkd8g9a",
+            "name": "Manewry",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/manewry.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.5JqCEw9I5Ewb2fgQ",
+        "name": "GANGUS KAPO",
+        "items": [
+          {
+            "_id": "AglGz0aYfDk5anaQ",
+            "name": "Manewry",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/manewry.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.Taasqgmv3ugzhYfv",
+        "name": "GENERACJA II. GENOTYP GADZI",
+        "items": [
+          {
+            "_id": "4ZcYS9Vns0p3rv1c",
+            "name": "Kamuflaż",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/kamuflaz-bestii.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.KaZm3ozqDBxOWinC",
+        "name": "GENERACJA III. GRUBAS",
+        "items": [
+          {
+            "_id": "VwwiYXD1mw6Zg585",
+            "name": "Agresja",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/agresja.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.2m5x938twoTPqNcl",
+        "name": "GENERACJA III. SZPIEG",
+        "items": [
+          {
+            "_id": "vYguxzEJ67uX7zYI",
+            "name": "Kontakt Molocha",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/kontakt-molocha.svg"
+          },
+          {
+            "_id": "zFGeTPvVFQw8pJGW",
+            "name": "Nadludzki refleks",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/nadludzki-refleks.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.AhsmX4UQfDrAr9dw",
+        "name": "GENERACJA III. TECHMUTAS",
+        "items": [
+          {
+            "_id": "nYZfw1HUXbq99zpB",
+            "name": "Nadludzki refleks",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/nadludzki-refleks.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.rTJw3ocQiztVCBY7",
+        "name": "GENERACJA IV. MESMERYTA",
+        "items": [
+          {
+            "_id": "IaGjDj4clvCk79Bg",
+            "name": "Nadludzki refleks",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/nadludzki-refleks.svg"
+          },
+          {
+            "_id": "b94vmAolM1RLVaTx",
+            "name": "Szum mentalny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/szum-mentalny.svg"
+          },
+          {
+            "_id": "R5FtIcprLwbPbQeD",
+            "name": "Ściana żaru",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/sciana-zaru.svg"
+          },
+          {
+            "_id": "7Yo36NWmwKz7kFuW",
+            "name": "Iluzoryczna niewidzialność",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/iluzoryczna-niewidzialnosc.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.tjWfjg1JgeHRa9WC",
+        "name": "JUGGERNAUT",
+        "items": [
+          {
+            "_id": "ZzIPj5w86msjwCgq",
+            "name": "Mało zwrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/malo-zwrotny.svg"
+          },
+          {
+            "_id": "lGffSJYIQFaDGQCf",
+            "name": "Przejechanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/przejechanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.YGIOkeUGVe4EImDp",
+        "name": "KITCHIN",
+        "items": [
+          {
+            "_id": "aL8nv5olmCWeJcDA",
+            "name": "Malutki",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/malutki.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.F7GtxAsyDXG6kPla",
+        "name": "KORZEC",
+        "items": [
+          {
+            "_id": "fs2ycfIWR5tSepeA",
+            "name": "Kamuflaż",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/kamuflaz-bestii.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.NTdjZGU3ZjA3MjJk",
+        "name": "Kitchin",
+        "items": [
+          {
+            "_id": "ZWE4Yjk3MGQzNjBl",
+            "name": "Malutki",
+            "before": "worlds/OUTPUT/characters/037_-_Kitchin/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/malutki.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.4pOUKx6U3HHKAw2b",
+        "name": "MEGATOR",
+        "items": [
+          {
+            "_id": "5wwCEwvfmGnCPszS",
+            "name": "Legendarna odporność (3/dzień)",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/legendarna-odpornosc.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.oWLGNP7paGjRsoYJ",
+        "name": "OBROŃCA",
+        "items": [
+          {
+            "_id": "hIDPuZU49ckuSIbR",
+            "name": "Chwytak",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/chwytak.svg"
+          },
+          {
+            "_id": "dY3coGERDSbA8cQl",
+            "name": "Szarża",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/szarza.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.UfmT9pKXIpZvX2OT",
+        "name": "RÓJ SZCZURÓW",
+        "items": [
+          {
+            "_id": "c0sEGGIFgg4dqTHt",
+            "name": "Obłażenie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/oblazenie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.7odbYt1meXScvBWR",
+        "name": "SZCZĘKOWIJ",
+        "items": [
+          {
+            "_id": "4IGxZwTaOU9XWeTV",
+            "name": "Kolec jadowy",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/weapons/kolec_jadowy.svg"
+          },
+          {
+            "_id": "GGoWKsRJdgKWwvxF",
+            "name": "Kamuflaż",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/kamuflaz-bestii.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.u9LJRDYAQV6jIApL",
+        "name": "TARAN",
+        "items": [
+          {
+            "_id": "qJa3RX9PuYN3aWyF",
+            "name": "Szarża",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/szarza.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.hkab5SivPPEoyPHv",
+        "name": "TECHMORWA (MALUTKA)",
+        "items": [
+          {
+            "_id": "ualKDWCntotXHKll",
+            "name": "Kamuflaż",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/kamuflaz-bestii.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.PSusLvUnP6AH5UUO",
+        "name": "TECHMORWA (ŚREDNIA)",
+        "items": [
+          {
+            "_id": "8hiDVSSUlBAg7yKR",
+            "name": "Kamuflaż",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/kamuflaz-bestii.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Actor.NjllMTMyMjc2NzY1",
+        "name": "Techmorwa",
+        "items": [
+          {
+            "_id": "ZDg3ZGM2MjU1MDYy",
+            "name": "Kamuflaż",
+            "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/kamuflaz-bestii.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.YTMwYTg1OGZkM2Iy.Actor.NjllMTMyMjc2NzY1",
+        "name": "Techmorwa",
+        "items": [
+          {
+            "_id": "ZDg3ZGM2MjU1MDYy",
+            "name": "Kamuflaż",
+            "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/kamuflaz-bestii.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.k3sMfvotlhDkS31c.Actor.NjllMTMyMjc2NzY1",
+        "name": "Techmorwa",
+        "items": [
+          {
+            "_id": "ZDg3ZGM2MjU1MDYy",
+            "name": "Kamuflaż",
+            "before": "worlds/OUTPUT/characters/056_-_Techmorwa/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/kamuflaz-bestii.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.qGrVyFmNeEKTwpHA.Actor.NTdjZGU3ZjA3MjJk",
+        "name": "Kitchin",
+        "items": [
+          {
+            "_id": "ZWE4Yjk3MGQzNjBl",
+            "name": "Malutki",
+            "before": "worlds/OUTPUT/characters/037_-_Kitchin/avatar.png",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/malutki.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.ZUtGI40byucUuesP.Actor.LmZSlovQGxy1eM6k",
+        "name": "CYWIL",
+        "items": [
+          {
+            "_id": "YYBKFaKXtXkd8g9a",
+            "name": "Manewry",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/manewry.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.yx6sbn1Pv3b8wHFE.Actor.5JqCEw9I5Ewb2fgQ",
+        "name": "GANGUS BOSS",
+        "items": [
+          {
+            "_id": "AglGz0aYfDk5anaQ",
+            "name": "Manewry",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/manewry.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.A86fzMPR9RL1MqZf.Actor.tjWfjg1JgeHRa9WC",
+        "name": "JUGGERNAUT",
+        "items": [
+          {
+            "_id": "ZzIPj5w86msjwCgq",
+            "name": "Mało zwrotny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/malo-zwrotny.svg"
+          },
+          {
+            "_id": "lGffSJYIQFaDGQCf",
+            "name": "Przejechanie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/przejechanie.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.FeaPuVgf8Iu9eNwb.Actor.oWLGNP7paGjRsoYJ",
+        "name": "OBROŃCA",
+        "items": [
+          {
+            "_id": "hIDPuZU49ckuSIbR",
+            "name": "Chwytak",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/chwytak.svg"
+          },
+          {
+            "_id": "dY3coGERDSbA8cQl",
+            "name": "Szarża",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/szarza.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.k1wDCDX3ytDGeVHL.Actor.Wf53EIDOGbqhl6h0",
+        "name": "BIODROID",
+        "items": [
+          {
+            "_id": "FbFglUBBrA7TStgH",
+            "name": "Regeneracja",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/regeneracja.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.GDDfOKMRuJZRnFmb.Actor.KaZm3ozqDBxOWinC",
+        "name": "GENERACJA II. GENOTYP WILCZY",
+        "items": [
+          {
+            "_id": "VwwiYXD1mw6Zg585",
+            "name": "Agresja",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/agresja.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.MU0qcsrqg3xwiW6f.Actor.Taasqgmv3ugzhYfv",
+        "name": "GENERACJA II. GENOTYP GADZI",
+        "items": [
+          {
+            "_id": "4ZcYS9Vns0p3rv1c",
+            "name": "Kamuflaż",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/kamuflaz-bestii.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.Lhv4pnxEr83HLtKA.Actor.2m5x938twoTPqNcl",
+        "name": "GENERACJA III. SZPIEG",
+        "items": [
+          {
+            "_id": "vYguxzEJ67uX7zYI",
+            "name": "Kontakt Molocha",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/kontakt-molocha.svg"
+          },
+          {
+            "_id": "zFGeTPvVFQw8pJGW",
+            "name": "Nadludzki refleks",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/nadludzki-refleks.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.pOAeS5tN1eg2aNAm.Actor.AhsmX4UQfDrAr9dw",
+        "name": "GENERACJA III. TECHMUTAS",
+        "items": [
+          {
+            "_id": "nYZfw1HUXbq99zpB",
+            "name": "Nadludzki refleks",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/nadludzki-refleks.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.gxuXT8I72CWmqm1G.Actor.rTJw3ocQiztVCBY7",
+        "name": "GENERACJA IV. MESMERYTA",
+        "items": [
+          {
+            "_id": "IaGjDj4clvCk79Bg",
+            "name": "Nadludzki refleks",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/nadludzki-refleks.svg"
+          },
+          {
+            "_id": "b94vmAolM1RLVaTx",
+            "name": "Szum mentalny",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/szum-mentalny.svg"
+          },
+          {
+            "_id": "R5FtIcprLwbPbQeD",
+            "name": "Ściana żaru",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/sciana-zaru.svg"
+          },
+          {
+            "_id": "7Yo36NWmwKz7kFuW",
+            "name": "Iluzoryczna niewidzialność",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/iluzoryczna-niewidzialnosc.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.jKq0OukOkDe45h5i.Actor.4pOUKx6U3HHKAw2b",
+        "name": "MEGATOR",
+        "items": [
+          {
+            "_id": "5wwCEwvfmGnCPszS",
+            "name": "Legendarna odporność (3/dzień)",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/legendarna-odpornosc.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.nUct6kMaNGOXebX7.Actor.F7GtxAsyDXG6kPla",
+        "name": "ALAHAMA",
+        "items": [
+          {
+            "_id": "fs2ycfIWR5tSepeA",
+            "name": "Kamuflaż",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/kamuflaz-bestii.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.muQDkZaICk0W8GTL.Actor.0gWeShZIv4KOO88F",
+        "name": "KORZEC",
+        "items": [
+          {
+            "_id": "eFQg4vO3o8e8CKwi",
+            "name": "Czaszkohełm",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/czaszkohelm.svg"
+          },
+          {
+            "_id": "ZRE642fjy9LTwzct",
+            "name": "Regeneracja",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/regeneracja.svg"
+          },
+          {
+            "_id": "P1BJsDXz7SQB51mV",
+            "name": "Szarża",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/szarza.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.FspP2MjXP3Wqbh5p.Actor.7odbYt1meXScvBWR",
+        "name": "SZCZĘKOWIJ",
+        "items": [
+          {
+            "_id": "4IGxZwTaOU9XWeTV",
+            "name": "Kolec jadowy",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/weapons/kolec_jadowy.svg"
+          },
+          {
+            "_id": "GGoWKsRJdgKWwvxF",
+            "name": "Kamuflaż",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/kamuflaz-bestii.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.umLQ2x0fOHrvS5ol.Actor.u9LJRDYAQV6jIApL",
+        "name": "TARAN",
+        "items": [
+          {
+            "_id": "qJa3RX9PuYN3aWyF",
+            "name": "Szarża",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/szarza.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.NrIZkY7SEkclyOJI.Actor.PSusLvUnP6AH5UUO",
+        "name": "TECHMORWA (ŚREDNIA)",
+        "items": [
+          {
+            "_id": "8hiDVSSUlBAg7yKR",
+            "name": "Kamuflaż",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/kamuflaz-bestii.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.IDj8DCpX4zvtqqtP.Actor.hkab5SivPPEoyPHv",
+        "name": "TECHMORWA (MALUTKA)",
+        "items": [
+          {
+            "_id": "ualKDWCntotXHKll",
+            "name": "Kamuflaż",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/kamuflaz-bestii.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.Oj00EJN9G1Xc6gLA.Actor.YGIOkeUGVe4EImDp",
+        "name": "KITCHIN",
+        "items": [
+          {
+            "_id": "aL8nv5olmCWeJcDA",
+            "name": "Malutki",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/malutki.svg"
+          }
+        ]
+      },
+      {
+        "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.tDFhR4TusTuWgWli.Actor.UfmT9pKXIpZvX2OT",
+        "name": "RÓJ SZCZURÓW",
+        "items": [
+          {
+            "_id": "c0sEGGIFgg4dqTHt",
+            "name": "Obłażenie",
+            "before": "icons/svg/upgrade.svg",
+            "img": "modules/neuroshima-2026-overrides/icons/abilities/oblazenie.svg"
+          }
+        ]
+      }
+    ]
+  }
+}

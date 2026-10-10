@@ -1,0 +1,425 @@
+{
+  "title": "Batch 57 · 27 awaiting GM review",
+  "updated": "2026-10-10",
+  "items": [
+    {
+      "id": "batch54-kuloodporny",
+      "candidates": [
+        {
+          "id": "batch57-revision",
+          "label": "Revision D · clean staggered bullets",
+          "src": "candidates/batch-57/kuloodporny_revision_d.png",
+          "note": "The top and bottom rounds now have clean noses and sit farther left, with no protruding marks."
+        }
+      ]
+    },
+    {
+      "id": "batch55-tarcza-umyslu",
+      "candidates": [
+        {
+          "id": "batch57-revision",
+          "label": "Revision C · single reflected psychic ray",
+          "src": "candidates/batch-57/tarcza_umyslu_revision_c.png",
+          "note": "One continuous wavy ray strikes the shield once and reflects upward; only the incoming lower segment carries an arrowhead."
+        }
+      ]
+    },
+    {
+      "id": "batch55-stratowanie",
+      "candidates": [
+        {
+          "id": "batch57-revision",
+          "label": "Revision C · advancing mechanical legs",
+          "src": "candidates/batch-57/stratowanie_revision_c.png",
+          "note": "Three articulated legs visibly step toward the recoiling figure."
+        }
+      ]
+    },
+    {
+      "id": "batch55-zamarcie",
+      "candidates": [
+        {
+          "id": "batch57-revision",
+          "label": "Revision C · startled recognition",
+          "src": "candidates/batch-57/zamarcie_revision_c.png",
+          "note": "The human face now shows an immediate wide-eyed reaction to the insectoid opposite it."
+        }
+      ]
+    },
+    {
+      "id": "batch56-parowanie",
+      "candidates": [
+        {
+          "id": "batch57-revision",
+          "label": "Revision B · cleaner parrying weapons",
+          "src": "candidates/batch-57/parowanie_revision_b.png",
+          "note": "A smooth knife meets a restrained four-stud mace at one clear impact point."
+        }
+      ]
+    },
+    {
+      "id": "batch56-pikowanie",
+      "candidates": [
+        {
+          "id": "batch57-revision",
+          "label": "Revision B · readable prone victim",
+          "src": "candidates/batch-57/pikowanie_revision_b.png",
+          "note": "The diving harpy remains dominant while the full prone human silhouette reads clearly."
+        }
+      ]
+    },
+    {
+      "id": "batch56-poklon-sie",
+      "candidates": [
+        {
+          "id": "batch57-revision",
+          "label": "Revision B · commanding finger",
+          "src": "candidates/batch-57/poklon_sie_revision_b.png",
+          "note": "A large pointing hand orders the victim down between two force arrows."
+        }
+      ]
+    },
+    {
+      "id": "batch56-stabilizator",
+      "candidates": [
+        {
+          "id": "batch57-revision",
+          "label": "Revision B · gyroscopic stabilizer",
+          "src": "candidates/batch-57/stabilizator_revision_b.png",
+          "note": "A futuristic three-ring gyroscope on a braced base replaces the ordinary support leg."
+        }
+      ]
+    },
+    {
+      "id": "batch56-szosty-zmysl",
+      "candidates": [
+        {
+          "id": "batch57-revision",
+          "label": "Revision B · hostile danger sense",
+          "src": "candidates/batch-57/szosty_zmysl_revision_b.png",
+          "note": "The profile has a harder scowl while the rear eye and warning rays remain clear."
+        }
+      ]
+    },
+    {
+      "id": "batch57-celowanie",
+      "name": "Celowanie",
+      "tier": "Batch 57 · Cyngiel bonus action",
+      "context": "Cyngiel chooses a target within firearm range and gains advantage on the next attack against it.",
+      "request": "One narrowed eye behind a large firearm sight and circular reticle.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · aimed shot",
+          "src": "candidates/batch-57/celowanie.png",
+          "note": "The eye, front sight and broad reticle remain legible at inventory size."
+        }
+      ]
+    },
+    {
+      "id": "batch57-doskonale-zmysly",
+      "name": "Doskonałe zmysły",
+      "tier": "Batch 57 · Pies bojowy trait",
+      "context": "The battle dog has advantage on Perception checks based on smell or hearing.",
+      "request": "One alert battle-dog head with an oversized ear, two scent lines and two sound arcs.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · canine smell and hearing",
+          "src": "candidates/batch-57/doskonale_zmysly.png",
+          "note": "The ear, muzzle and paired sensory marks communicate both enhanced senses."
+        }
+      ]
+    },
+    {
+      "id": "batch57-furia",
+      "name": "Furia",
+      "tier": "Batch 57 · Alahama trait",
+      "context": "Alahama attacks with advantage, while attacks against it also have advantage until its next turn.",
+      "request": "One horned mutant roaring with both fists raised and three broad rage rays.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · reckless fury",
+          "src": "candidates/batch-57/furia.png",
+          "note": "The exposed roaring posture reads as furious aggression and vulnerability."
+        }
+      ]
+    },
+    {
+      "id": "batch57-gunfight",
+      "name": "Gunfight",
+      "tier": "Batch 57 · Sheriff trait",
+      "context": "The Sheriff does not suffer ranged-attack disadvantage from an enemy standing within 1.5 metres.",
+      "request": "One sheriff firing a revolver past one hostile figure at arm's reach.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · point-blank gunfight",
+          "src": "candidates/batch-57/gunfight.png",
+          "note": "The overlapping figures clearly show a ranged shot made in close quarters."
+        }
+      ]
+    },
+    {
+      "id": "batch57-naprawianie",
+      "name": "Naprawianie",
+      "tier": "Batch 57 · Spawacz action",
+      "context": "The Welder repairs a malfunction or damage in an adjacent machine.",
+      "request": "One robotic hand tightening a large wrench against one cracked machine plate.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · machine repair",
+          "src": "candidates/batch-57/naprawianie.png",
+          "note": "The mechanical hand, wrench and split plate make the repair action immediate."
+        }
+      ]
+    },
+    {
+      "id": "batch57-owipozycja",
+      "name": "Owipozycja",
+      "tier": "Batch 57 · Techmorwa malutka bonus action",
+      "context": "The small techmorwa implants an egg in a creature it hits; the larva later kills the host unless removed surgically.",
+      "request": "One insect abdomen and ovipositor implanting one large egg into a simple torso cross-section.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · implanted egg",
+          "src": "candidates/batch-57/owipozycja.png",
+          "note": "The ovipositor, skin section and visible egg communicate the parasitic implant without gore."
+        }
+      ]
+    },
+    {
+      "id": "batch57-palcozerca",
+      "name": "Palcożerca",
+      "tier": "Batch 57 · Bit-Boys trait",
+      "context": "On a critical hit the creature bites off a finger, imposing a Dexterity penalty until it is replaced or regrown.",
+      "request": "One mutant mouth biting a large hand, with one severed finger shown separately and no blood.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · finger-biting mutant",
+          "src": "candidates/batch-57/palcozerca.png",
+          "note": "The toothy mouth, hand and separated finger state the consequence clearly."
+        }
+      ]
+    },
+    {
+      "id": "batch57-pelna-obrona",
+      "name": "Pełna obrona",
+      "tier": "Batch 57 · Pająk bonus action",
+      "context": "The Spider machine takes the Dodge action to concentrate on defence.",
+      "request": "One angular spider machine protected behind four crossed armored forelegs.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · braced spider defence",
+          "src": "candidates/batch-57/pelna_obrona.png",
+          "note": "Four broad limbs form a strong defensive barrier around the machine head."
+        }
+      ]
+    },
+    {
+      "id": "batch57-roznorodne-ataki",
+      "name": "Różnorodne ataki",
+      "tier": "Batch 57 · Gladiator action",
+      "context": "The Gladiator rolls 1d4 to determine which of its four distinct weapon attacks it makes.",
+      "request": "One armored gladiator surrounded by exactly four weapons: saw, flail, hammer and blade.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · four gladiator weapons",
+          "src": "candidates/batch-57/roznorodne_ataki.png",
+          "note": "The central fighter and four separated weapon silhouettes show the randomized arsenal."
+        }
+      ]
+    },
+    {
+      "id": "batch57-skok-lowcy",
+      "name": "Skok łowcy",
+      "tier": "Batch 57 · Łowca trait",
+      "context": "The Hunter leaps nine metres; a hit after the leap knocks a Medium or smaller target prone.",
+      "request": "One insectoid hunter leaping in a long arc onto one recoiling human.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · pouncing hunter",
+          "src": "candidates/batch-57/skok_lowcy.png",
+          "note": "The extended leap and falling target communicate the knockdown attack."
+        }
+      ]
+    },
+    {
+      "id": "batch57-tanczace-pily",
+      "name": "Tańczące piły",
+      "tier": "Batch 57 · Gladiator action",
+      "context": "The Gladiator spins its saws through everyone within three metres, dealing damage on a failed Dexterity save and half on success.",
+      "request": "One armored gladiator swinging exactly three circular saw blades around one broad circular arc.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · spinning saw attack",
+          "src": "candidates/batch-57/tanczace_pily.png",
+          "note": "Three large saws and one complete sweep arc read as an area attack."
+        }
+      ]
+    },
+    {
+      "id": "batch57-to-moje-miasto",
+      "name": "To moje miasto",
+      "tier": "Batch 57 · Sheriff trait",
+      "context": "On home turf the Sheriff has advantage on saving throws and ability checks.",
+      "request": "One sheriff standing before a frontier town enclosed by one protective territorial arc.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · sheriff on home turf",
+          "src": "candidates/batch-57/to_moje_miasto.png",
+          "note": "The sheriff dominates a compact town skyline inside one boundary."
+        }
+      ]
+    },
+    {
+      "id": "batch57-tropiciel",
+      "name": "Tropiciel",
+      "tier": "Batch 57 · Taran trait",
+      "context": "Taran never abandons prey once it has the scent and has advantage when tracking by smell or hearing.",
+      "request": "One horned mutant tracker following one footprint and exactly two broad scent waves.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · relentless tracker",
+          "src": "candidates/batch-57/tropiciel.png",
+          "note": "The lowered muzzle, footprint and scent trail show focused pursuit."
+        }
+      ]
+    },
+    {
+      "id": "batch57-trzeba-dobic",
+      "name": "Trzeba dobić",
+      "tier": "Batch 57 · Zombie overlay trait",
+      "context": "A zombie reduced to zero hit points rises at one hit point after one minute unless decapitated, its brain is destroyed or it is burned.",
+      "request": "One zombie rising from the ground beneath one descending blade, with one bold return arrow.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · zombie rises again",
+          "src": "candidates/batch-57/trzeba_dobic.png",
+          "note": "The rising corpse and return arrow show recovery while the blade indicates the required finishing blow."
+        }
+      ]
+    },
+    {
+      "id": "batch57-wataha",
+      "name": "Wataha",
+      "tier": "Batch 57 · Wilczy genotyp trait",
+      "context": "The wolf genotype is accompanied by 2d4 mutant dogs that obey its mental commands.",
+      "request": "One dominant mutant wolf head above exactly three smaller hounds, linked by two psychic command arcs.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · commanded pack",
+          "src": "candidates/batch-57/wataha.png",
+          "note": "The large alpha head and three subordinate hounds read as a mentally directed pack."
+        }
+      ]
+    },
+    {
+      "id": "batch57-wrog-molocha",
+      "name": "Wróg Molocha",
+      "tier": "Batch 57 · Żołnierz Posterunku trait",
+      "context": "The Outpost Soldier deals an additional 2d6 damage to Machines and Mutants.",
+      "request": "One armored soldier driving a bayonet into one cracked machine skull.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · anti-Moloch strike",
+          "src": "candidates/batch-57/wrog_molocha.png",
+          "note": "The soldier and broken mechanical head clearly identify the favored enemy."
+        }
+      ]
+    }
+  ]
+}

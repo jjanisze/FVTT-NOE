@@ -24,21 +24,21 @@ the opposite failure ("this keeps happening" — flagged 2026-09-07). This file
 is the fix: log every item found sitting on a wrong/borrowed icon here as
 it's found, generate a batch once the queue hits 9, then clear it.
 
-**Out of scope for this queue: feat / Sztuczka icons.** Those get one big
-future pass of their own, not a trickle into this queue (2026-09-07). Victor's
-homebrew feats found the same session this file was created still lack icons —
-see IMPLEMENTATION.md (19) — but belong to that future pass, not here.
+**Feat / Sztuczka icon pass:** deferred while the equipment and bestiary gaps
+were larger; Batch 60 begins the dedicated pass (2026-10-10). It mixes only
+the six carried bestiary revisions and three remaining creature/action gaps
+with the first eighteen world/compendium feature icons.
 
 Update, IMPLEMENTATION.md (21): three of the four feats named here originally
 (Osełka/Dobycie/Zasłona) **no longer exist** — they turned out to be the three
 clauses of the Sztuczka `Samuraj`, split up by the Roll20 import, and were
 merged into one canonical item that already has a proper icon. What is left on
 an actor-portrait icon across the whole party is just two homebrew feats:
-Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. Still that future pass,
-still not this queue — but it is two items, not a pile.
+Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
+Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 55** (batch 54 was generated as three 3×3 atlases on
-2026-10-08 and is awaiting GM review; bump this whenever another batch is generated).
+**Next batch number: 61** (batch 60 was generated as three 3×3 atlases on
+2026-10-10 and is awaiting GM review; bump this whenever another batch is generated).
 
 *Batch 40 (2026-09-25): Kamizelka taktyczna, .44 Mag dum-dum, Mięso suszone, Chleb, Owoce
 i warzywa, MRE, Breneka, Zużyty LAW, Magazynek bębnowy — processed and wired; LAW and the drum
@@ -199,13 +199,15 @@ sheet, raw atlases and normalized candidates are under
 | B | Pierwsze spotkanie; Atak wielokrotny; Algorytm czuwania; Współpraca; Kamuflaż; Światłowstręt; Wstrzymanie oddechu; Nadludzki refleks; Szarża |
 | C | Nie do zabicia; Brak głowy; Niewykrywalność; Telepatia; Neozmysły; Pajęcza wspinaczka; Tkacz sieci; Oplątanie; Groza |
 
-## Queue (A) — batch 54 — 27 generated, plus 1 Batch 53 carry-over
+## Batch 54 — 18 approved and installed, 10 revisions
 
-The 27-card pass contains four selected-reference revisions and twenty-three
-canonical bestiary abilities with no fitting existing asset. Kamuflaż carries over
-from Batch 53 because its candidate was selected but its decision remains Pending.
-Exact prompts, selected-reference sheet, raw atlases and normalized candidates are
-under `dev/icons/review/candidates/batch-54/`.
+The 28-card pass contained four selected-reference revisions, twenty-three canonical
+bestiary gaps and the carried-over Kamuflaż candidate. Eighteen icons were approved,
+installed and applied to 61 embedded items across 43 live actors. Ucieczka, Burzyciel,
+Druga linia, Iluzoryczny cel, Kuloodporny, Najechanie, Niezniszczalność, Ofiara,
+Przewidywanie and Psychiczny krzyk continue as selected-reference revisions in Batch 55.
+Exact prompts, reference sheets, raw atlases and normalized candidates remain under
+`dev/icons/review/candidates/batch-54/`.
 
 | Atlas | Items |
 |---|---|
@@ -213,12 +215,101 @@ under `dev/icons/review/candidates/batch-54/`.
 | B | Czaszkohełm; Druga linia; Iluzoryczna niewidzialność; Iluzoryczny cel; Kontakt Molocha; Kuloodporny; Legendarna odporność; Malutki; Mało zwrotny |
 | C | Najechanie; Niezniszczalność; Obłażenie; Ofiara; Przejechanie; Przewidywanie; Psychiczny krzyk; Szum mentalny; Ściana żaru |
 
+## Batch 55 — 17 approved and installed, 10 revisions
+
+The 27-card pass contained ten selected-reference Batch 54 revisions and seventeen
+new canonical bestiary abilities. Seventeen icons were approved, installed and applied
+to 41 embedded items across 29 live actors. Ucieczka, Kuloodporny, Porywacz, Paraliż
+umysłu, Tarcza umysłu, Stratowanie, Wszędołaz, Zadymienie, Zamarcie and Zamaszysty atak
+continue as selected-reference revisions in Batch 56. Exact prompts, reference sheets,
+raw atlases and normalized candidates remain under
+`dev/icons/review/candidates/batch-55/`.
+
+| Atlas | Items |
+|---|---|
+| A | Ucieczka revision B; Burzyciel revision B; Druga linia revision B; Iluzoryczny cel revision B; Kuloodporny revision B; Najechanie revision B; Niezniszczalność revision B; Ofiara revision B; Przewidywanie revision B |
+| B | Psychiczny krzyk revision B; Porywacz; Zauroczenie; Paraliż umysłu; Tarcza umysłu; Sługa Molocha; Stój!; Strach przed ogniem; Stratowanie |
+| C | Wszędołaz; Wytrwały; Zaciekłość; Zadymienie; Zamarcie; Zamaszysty atak; Zastępcy szeryfa; Upiorne wycie; Skóra gekona |
+
+## Batch 56 — 16 approved and installed, 9 revisions, 2 pending
+
+The 27-card pass contained ten selected-reference Batch 55 revisions and seventeen new
+canonical bestiary ability gaps. Sixteen approved icons are installed and applied to 47
+embedded items across 37 live actors. Nine requested revisions continue in Batch 57;
+Pokrycie maskujące and Tylko draśnięcie remain pending. Exact prompts, reference sheets,
+raw atlases and normalized PNG/SVG candidates remain under
+`dev/icons/review/candidates/batch-56/`.
+
+| Atlas | Items |
+|---|---|
+| A | Ucieczka revision C; Kuloodporny revision C; Porywacz revision B; Paraliż umysłu revision B; Tarcza umysłu revision B; Stratowanie revision B; Wszędołaz revision B; Zadymienie revision B; Zamarcie revision B |
+| B | Zamaszysty atak revision B; Paraliżujący ból; Parowanie; Pikowanie; Poddaj się!; Pokłoń się!; Pokrycie maskujące; Posiłki; Potęga tłumu |
+| C | Pulp Fiction; Rzut; Słaby punkt; Spawanie; Stabilizator; Szósty zmysł; Szybkie palce; Taktyka; Tylko draśnięcie |
+
+## Batch 57 — 15 approved and installed, 12 revisions
+
+The review pass contained nine selected-reference revisions, two unchanged pending cards
+carried from Batch 56, and sixteen new canonical bestiary ability gaps. Fifteen approved
+icons are installed and applied to 47 embedded items across 37 live actors. Twelve requested
+revisions continue in Batch 58. Exact prompts, reference sheets, raw atlases and normalized
+PNG/SVG candidates remain under `dev/icons/review/candidates/batch-57/`.
+
+| Atlas | Items |
+|---|---|
+| A | Kuloodporny revision D; Tarcza umysłu revision C; Stratowanie revision C; Zamarcie revision C; Parowanie revision B; Pikowanie revision B; Pokłoń się! revision B; Stabilizator revision B; Szósty zmysł revision B |
+| B | Celowanie; Doskonałe zmysły; Furia; Gunfight; Naprawianie; Owipozycja; Palcożerca; Pełna obrona; Różnorodne ataki |
+| C | Skok łowcy; Tańczące piły; To moje miasto; Tropiciel; Trzeba dobić; Wataha; Wróg Molocha; blank; blank |
+
+Unchanged pending cards in the same review pass: Pokrycie maskujące; Tylko draśnięcie.
+
+## Batch 58 — 20 approved and installed, 7 revisions
+
+The review pass contains twelve selected-reference Batch 57 revisions and fifteen newly
+verified bestiary ability gaps. Twenty approved icons are installed and applied to 89
+embedded items across 73 live actors. Seven requested redraws continue in Batch 59.
+Exact prompts, reference sheets, raw atlases, the reproducible processor and normalized
+PNG/SVG candidates remain under `dev/icons/review/candidates/batch-58/`.
+
+| Atlas | Items |
+|---|---|
+| A | Tarcza umysłu revision D; Zamarcie revision D; Szósty zmysł revision C; Tylko draśnięcie revision B; Celowanie revision B; Naprawianie revision B; Palcożerca revision B; Różnorodne ataki revision B; Skok łowcy revision B |
+| B | Tańczące piły revision B; Trzeba dobić revision B; Wróg Molocha revision B; Bolesny atak; Odporny; Odstąpienie; Przyspieszenie; Skakun (opcjonalnie); Skoczek |
+| C | Skok; Szarpanie; Tchórzliwość; Udźwig; Unieruchomienie; Wirujące kiścienie; Wycofanie się; Zmysły; Zasadzka |
+
+## Batch 59 — 21 approved and installed, 6 revisions
+
+The review pass contains seven selected-reference Batch 58 redraws and twenty newly
+verified bestiary ability and weapon gaps. Twenty-one approved icons are installed and
+applied to 97 embedded items across 61 live actors. Six requested revisions continue in
+Batch 60. Exact prompts, the seven-icon reference sheet, raw atlases, reproducible processor
+and normalized PNG/SVG candidates remain under `dev/icons/review/candidates/batch-59/`.
+
+| Atlas | Items |
+|---|---|
+| A | Zamarcie revision E; Palcożerca revision C; Odstąpienie revision B; Skakun revision B; Skok revision B; Wycofanie się revision B; Zmysły revision B; Aktywny system obrony; Aura pogardy |
+| B | Mistrz taktyki; Zasłonięcie hełmu; Ruch; Atak (Mobsprzęt); Wrażliwość na światło; Próg awarii; Tryb Turbo; Wielonożny; Rozkaz Likwidacji |
+| C | Szara Eminencja; Zimna Krew; Żywa Tarcza; Twierdzenie Kąta Prostego; Tacą i w nogi; Tylko jedno w głowie mam; Karabin laserowy; Dmuchawka; Działo ppanc |
+
+## Queue (A) — batch 60 — 27 awaiting GM review
+
+The review pass contains six selected-reference Batch 59 revisions, three remaining
+creature/action gaps and eighteen feature icons from the live world or module compendia.
+The processor additionally fills tiny enclosed scratches and pinholes while preserving
+structural negative space. Exact prompts, the six-icon reference sheet, raw atlases,
+reproducible processor and normalized PNG/SVG candidates are under
+`dev/icons/review/candidates/batch-60/`.
+
+| Atlas | Items |
+|---|---|
+| A | Aktywny system obrony revision B; Ruch revision B; Atak (Mobsprzęt) revision B; Wrażliwość na światło revision B; Karabin laserowy revision B; Dmuchawka revision B; Wymagania; Paszcza; Tylko zwarcie |
+| B | Siódme poty; Fart; Ja już swoje odchorowałem; Grad ołowiu; Coś mi tu śmierdzi; Czas patriotów; Ćwiczenie czyni mistrza; Doktor Quinn; Jeśli ma silnik, to ruszy |
+| C | Pakowanie; Patriota; Wierzę; Wychuchana spluwa; Zawzięty sukinkot; Urodzony morderca; Młynek; Kuchenny Terror; Logika Różnoboczna |
+
 ## How an item gets added here
 
 Add a row any time a review finds an item on the actor's own portrait,
 `icons/svg/mystery-man.svg`, or another clearly-wrong borrowed icon **with no
-existing dedicated asset to just repoint it to** — *except* feat/Sztuczka
-icons (see above, their own future pass). A same-file data-fix (item points
+existing dedicated asset to just repoint it to**. A same-file data-fix (item points
 at the wrong file, but the right file already exists on disk) is not a queue
 entry either — fix that immediately in place, the way every icon-sweep entry
 in IMPLEMENTATION.md already does; only queue items that need genuinely

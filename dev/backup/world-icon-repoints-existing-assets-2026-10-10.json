@@ -1,0 +1,259 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.YzI4Njk2N2IwNjI5",
+      "name": "BIT-BOY",
+      "items": [
+        {
+          "_id": "NzViYTNkYjI2N2Jl",
+          "name": "Pierwsze spotkanie.",
+          "before": "worlds/OUTPUT/characters/021_-_BIT-BOY/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.ZDBiNWNjM2E5MTVh",
+      "name": "Bitboy Przewodnik",
+      "items": [
+        {
+          "_id": "NWM4NmU0MGIyZTcz",
+          "name": "Pierwsze Spotkanie",
+          "before": "worlds/OUTPUT/characters/036_-_Bitboy_Przewodnik/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.LmZSlovQGxy1eM6k",
+      "name": "GANGUS BOSS",
+      "items": [
+        {
+          "_id": "lVYRNNCt1kSc9L2H",
+          "name": "Brutalny cios",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/brutalny-cios.svg"
+        },
+        {
+          "_id": "o8P1FTzZCULjiUoz",
+          "name": "Goła klata",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/gola-klata.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MjBkYmViOTMxN2Q2",
+      "name": "Jason",
+      "items": [
+        {
+          "_id": "OTE4MTMwYjMyNWEy",
+          "name": "Pomocnicy Szeryfa",
+          "before": "worlds/OUTPUT/characters/046_-_Jason/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zastepcy-szeryfa.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NTdjZGU3ZjA3MjJk",
+      "name": "Kitchin",
+      "items": [
+        {
+          "_id": "ODY1ZTVmMjIwODY0",
+          "name": "Pierwsze Spotkanie",
+          "before": "worlds/OUTPUT/characters/037_-_Kitchin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "NzBjNTY0ZDk3NjVj",
+          "name": "Algorytm Czuwania",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.NTcyMTA3NWZkNDU4.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "NzBjNTY0ZDk3NjVj",
+          "name": "Algorytm Czuwania",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.MmIwYjA2MTE0NzIw.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "NzBjNTY0ZDk3NjVj",
+          "name": "Algorytm Czuwania",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.ODcyMDE5YjhmNWQw.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "NzBjNTY0ZDk3NjVj",
+          "name": "Algorytm Czuwania",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.ZjU4YTg2YjRlZWQ4.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "NzBjNTY0ZDk3NjVj",
+          "name": "Algorytm Czuwania",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.NmNjY2NlMzZlYjE5.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "NzBjNTY0ZDk3NjVj",
+          "name": "Algorytm Czuwania",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.MDJiYTRkYzA2MDVm.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "NzBjNTY0ZDk3NjVj",
+          "name": "Algorytm Czuwania",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.YWI4NDViNDEyZjM4.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "NzBjNTY0ZDk3NjVj",
+          "name": "Algorytm Czuwania",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ZDI1YTcyY2JmNjMx.Token.PVE66ThJ5jA6yrdW.Actor.ZDBiNWNjM2E5MTVh",
+      "name": "Bitboy Przewodnik",
+      "items": [
+        {
+          "_id": "NWM4NmU0MGIyZTcz",
+          "name": "Pierwsze Spotkanie",
+          "before": "worlds/OUTPUT/characters/036_-_Bitboy_Przewodnik/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.3fTl0UdEmnzBAkpg.Actor.YzI4Njk2N2IwNjI5",
+      "name": "BIT-BOY",
+      "items": [
+        {
+          "_id": "NzViYTNkYjI2N2Jl",
+          "name": "Pierwsze spotkanie.",
+          "before": "worlds/OUTPUT/characters/021_-_BIT-BOY/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.kLCcxEBOPqP7gAe5.Actor.MjBkYmViOTMxN2Q2",
+      "name": "Jason",
+      "items": [
+        {
+          "_id": "OTE4MTMwYjMyNWEy",
+          "name": "Pomocnicy Szeryfa",
+          "before": "worlds/OUTPUT/characters/046_-_Jason/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zastepcy-szeryfa.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.oSQcyQveFJeB5tCv.Actor.ZDBiNWNjM2E5MTVh",
+      "name": "Bitboy Przewodnik",
+      "items": [
+        {
+          "_id": "NWM4NmU0MGIyZTcz",
+          "name": "Pierwsze Spotkanie",
+          "before": "worlds/OUTPUT/characters/036_-_Bitboy_Przewodnik/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.qGrVyFmNeEKTwpHA.Actor.NTdjZGU3ZjA3MjJk",
+      "name": "Kitchin",
+      "items": [
+        {
+          "_id": "ODY1ZTVmMjIwODY0",
+          "name": "Pierwsze Spotkanie",
+          "before": "worlds/OUTPUT/characters/037_-_Kitchin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/pierwsze-spotkanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.nFnJRikijodX7wza.Actor.MTczNGIwYmM5MDdm",
+      "name": "Kurczak",
+      "items": [
+        {
+          "_id": "NzBjNTY0ZDk3NjVj",
+          "name": "Algorytm Czuwania",
+          "before": "worlds/OUTPUT/characters/048_-_Kurczak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/algorytm-czuwania.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.ZUtGI40byucUuesP.Actor.LmZSlovQGxy1eM6k",
+      "name": "CYWIL",
+      "items": [
+        {
+          "_id": "lVYRNNCt1kSc9L2H",
+          "name": "Brutalny cios",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/brutalny-cios.svg"
+        },
+        {
+          "_id": "o8P1FTzZCULjiUoz",
+          "name": "Goła klata",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/gola-klata.svg"
+        }
+      ]
+    }
+  ]
+}

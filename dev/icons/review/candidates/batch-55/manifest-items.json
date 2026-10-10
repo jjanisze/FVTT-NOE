@@ -1,0 +1,199 @@
+{
+  "title": "Batch 55 · 27 awaiting GM review",
+  "updated": "2026-10-08",
+  "items": [
+    {
+      "id": "batch54-ucieczka",
+      "candidates": [{ "id": "batch55-revision", "label": "Revision B · clean exit arrow", "src": "candidates/batch-55/ucieczka_revision_b.png", "note": "Preserves the successful left side and replaces the cluttered right side with one compact exit arrow." }]
+    },
+    {
+      "id": "batch54-burzyciel",
+      "candidates": [{ "id": "batch55-revision", "label": "Revision B · dozer blade and brick wall", "src": "candidates/batch-55/burzyciel_revision_b.png", "note": "A recognizable blade on two push arms drives into a crumbling brick wall." }]
+    },
+    {
+      "id": "batch54-druga-linia",
+      "candidates": [{ "id": "batch55-revision", "label": "Revision B · croucher behind cover", "src": "candidates/batch-55/druga_linia_revision_b.png", "note": "Removes the armed figure and enlarges the crouched psychic sheltering behind cover." }]
+    },
+    {
+      "id": "batch54-iluzoryczny-cel",
+      "candidates": [{ "id": "batch55-revision", "label": "Revision B · cleaned redirected attack", "src": "candidates/batch-55/iluzoryczny_cel_revision_b.png", "note": "Keeps the selected composition while removing the stray fragment below it." }]
+    },
+    {
+      "id": "batch54-kuloodporny",
+      "candidates": [{ "id": "batch55-revision", "label": "Revision B · spaced bullets and plate", "src": "candidates/batch-55/kuloodporny_revision_b.png", "note": "A clearer human silhouette and three widely separated bullets make the defensive action readable." }]
+    },
+    {
+      "id": "batch54-najechanie",
+      "candidates": [{ "id": "batch55-revision", "label": "Revision B · corrected prone victim", "src": "candidates/batch-55/najechanie_revision_b.png", "note": "The victim now has two clear arms and two legs, oriented correctly beneath the tread." }]
+    },
+    {
+      "id": "batch54-niezniszczalnosc",
+      "candidates": [{ "id": "batch55-revision", "label": "Revision B · ghoul rising wounded", "src": "candidates/batch-55/niezniszczalnosc_revision_b.png", "note": "A new concept shows the ghoul rising despite a massive torso wound while its skull remains intact." }]
+    },
+    {
+      "id": "batch54-ofiara",
+      "candidates": [{ "id": "batch55-revision", "label": "Revision B · ally shoved into danger", "src": "candidates/batch-55/ofiara_revision_b.png", "note": "A cleaner second rendering makes the shove and incoming projectile unambiguous." }]
+    },
+    {
+      "id": "batch54-przewidywanie",
+      "candidates": [{ "id": "batch55-revision", "label": "Revision B · third eye and dashed paths", "src": "candidates/batch-55/przewidywanie_revision_b.png", "note": "A distinct forehead eye follows two simple dashed future trajectories." }]
+    },
+    {
+      "id": "batch54-psychiczny-krzyk",
+      "candidates": [{ "id": "batch55-revision", "label": "Revision B · closed-mouth psychic attack", "src": "candidates/batch-55/psychiczny_krzyk_revision_b.png", "note": "The focused, closed-mouth attacker projects three waves from the forehead and skull." }]
+    },
+    {
+      "id": "batch55-porywacz",
+      "name": "Porywacz",
+      "tier": "Batch 55 · Kidnaper trait",
+      "context": "Kidnaper puts a paralyzed or unconscious Medium-or-smaller victim inside a cage built into its chassis. The actor item uses the generic upgrade placeholder.",
+      "request": "One angular machine torso with an open built-in cage holding a limp human captive and exactly two mechanical arms.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show the captive cage." },
+      "candidates": [{ "id": "atlas-b", "label": "Atlas B · captive in machine cage", "src": "candidates/batch-55/porywacz.png", "note": "The limp victim sits inside a clearly integrated chassis cage." }]
+    },
+    {
+      "id": "batch55-zauroczenie",
+      "name": "Zauroczenie",
+      "tier": "Batch 55 · Bit-Boy Guide action",
+      "context": "The Guide psychically charms a target until the start of its next turn. The actor item uses the generic upgrade placeholder or portrait.",
+      "request": "One dominant staring eye sending two broad hypnotic arcs toward one human figure leaning involuntarily closer.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg or portrait", "note": "Current imagery does not identify psychic charm." },
+      "candidates": [{ "id": "atlas-b", "label": "Atlas B · hypnotic pull", "src": "candidates/batch-55/zauroczenie.png", "note": "The oversized eye and two arcs visibly draw the target inward." }]
+    },
+    {
+      "id": "batch55-paraliz-umyslu",
+      "name": "Paraliż umysłu",
+      "tier": "Batch 55 · Generation III Techmutant action",
+      "context": "The Techmutant paralyses a victim's mind unless it succeeds on a Charisma save. The actor item uses the generic upgrade placeholder.",
+      "request": "One rigid upright human held immobile inside a compact angular psychic clamp around the head and torso.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show mental paralysis." },
+      "candidates": [{ "id": "atlas-b", "label": "Atlas B · mind held rigid", "src": "candidates/batch-55/paraliz_umyslu.png", "note": "The locked posture and angular clamp communicate psychic immobilization." }]
+    },
+    {
+      "id": "batch55-tarcza-umyslu",
+      "name": "Tarcza umysłu",
+      "tier": "Batch 55 · Generation IV Mesmerist trait",
+      "context": "The Mesmerist adds Intelligence to its hit difficulty through psychic protection. The actor item uses the generic upgrade placeholder.",
+      "request": "One human head enclosed within a thick shield while exactly two psychic waves strike and break outside it.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show the mental defense." },
+      "candidates": [{ "id": "atlas-b", "label": "Atlas B · shielded mind", "src": "candidates/batch-55/tarcza_umyslu.png", "note": "The head remains isolated behind a heavy shield as waves break outside." }]
+    },
+    {
+      "id": "batch55-sluga-molocha",
+      "name": "Sługa Molocha",
+      "tier": "Batch 55 · Generation IV Mesmerist trait",
+      "context": "Moloch machines normally do not attack the Mesmerist, whose radio implant also lets it command them. The actor item uses the generic upgrade placeholder.",
+      "request": "One human head with a visible radio implant beside one angular machine hand, linked by exactly two transmission arcs.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show the machine allegiance or implant." },
+      "candidates": [{ "id": "atlas-b", "label": "Atlas B · implant commanding machine", "src": "candidates/batch-55/sluga_molocha.png", "note": "Two radio arcs connect the implanted servant to a machine hand." }]
+    },
+    {
+      "id": "batch55-stoj",
+      "name": "Stój!",
+      "tier": "Batch 55 · Generation IV Mesmerist action",
+      "context": "The Mesmerist psychically reduces a target's speed to zero. The actor item uses the generic upgrade placeholder.",
+      "request": "One large open psychic palm stopping a moving human target at one heavy vertical barrier line.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show forced stopping." },
+      "candidates": [{ "id": "atlas-b", "label": "Atlas B · psychic stop", "src": "candidates/batch-55/stoj.png", "note": "The open palm and abrupt barrier clearly halt the moving target." }]
+    },
+    {
+      "id": "batch55-strach-przed-ogniem",
+      "name": "Strach przed ogniem",
+      "tier": "Batch 55 · Rat Swarm trait",
+      "context": "The rat swarm becomes frightened near an open flame. The actor item uses the generic upgrade placeholder.",
+      "request": "Exactly four large rat silhouettes recoiling together from one simple open flame.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show the swarm's fire phobia." },
+      "candidates": [{ "id": "atlas-b", "label": "Atlas B · rats recoiling from flame", "src": "candidates/batch-55/strach_przed_ogniem.png", "note": "Four rats visibly turn away from one dominant flame." }]
+    },
+    {
+      "id": "batch55-stratowanie",
+      "name": "Stratowanie",
+      "tier": "Batch 55 · Gladiator action",
+      "context": "The Gladiator tramples a Medium-or-smaller target and knocks it prone. The actor item uses the generic upgrade placeholder.",
+      "request": "One enormous armored mechanical leg and foot stomping down beside one falling human silhouette.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show trampling." },
+      "candidates": [{ "id": "atlas-b", "label": "Atlas B · armored trampling step", "src": "candidates/batch-55/stratowanie.png", "note": "The oversized armored foot knocks a clear human silhouette down." }]
+    },
+    {
+      "id": "batch55-wszedolaz",
+      "name": "Wszędołaz",
+      "tier": "Batch 55 · Juggernaut trait",
+      "context": "Juggernaut ignores difficult terrain, does not need to breathe and can move underwater. The actor item uses the generic upgrade placeholder.",
+      "request": "One heavy tracked machine climbing over one boulder while its rear passes through exactly two broad water waves.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show all-terrain movement." },
+      "candidates": [{ "id": "atlas-c", "label": "Atlas C · machine over rock and water", "src": "candidates/batch-55/wszedolaz.png", "note": "The single silhouette crosses both a boulder and water without losing readability." }]
+    },
+    {
+      "id": "batch55-wytrwaly",
+      "name": "Wytrwały",
+      "tier": "Batch 55 · Taran trait",
+      "context": "Taran has advantage on Constitution saves while chasing its prey. The actor item uses the generic upgrade placeholder.",
+      "request": "One horned mutant runner following a scent trail toward a target with exactly two broad speed bars.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not communicate relentless pursuit." },
+      "candidates": [{ "id": "atlas-c", "label": "Atlas C · relentless scent pursuit", "src": "candidates/batch-55/wytrwaly.png", "note": "The runner holds a clear course along a scent trail toward its quarry." }]
+    },
+    {
+      "id": "batch55-zacieklosc",
+      "name": "Zaciekłość",
+      "tier": "Batch 55 · Rat Swarm trait",
+      "context": "The rat swarm can make unlimited reactions and ignores features that prevent opportunity attacks. The actor item uses the generic upgrade placeholder.",
+      "request": "Exactly four large rat heads around one central target mark, with four simple arrows pointing inward.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show the swarm's relentless reactions." },
+      "candidates": [{ "id": "atlas-c", "label": "Atlas C · swarm converging", "src": "candidates/batch-55/zacieklosc.png", "note": "Four rats converge on one target from every direction." }]
+    },
+    {
+      "id": "batch55-zadymienie",
+      "name": "Zadymienie",
+      "tier": "Batch 55 · Juggernaut action",
+      "context": "Juggernaut fills a six-metre area with smoke, hindering ranged attacks and breaking guided missile locks. The actor item uses the generic upgrade placeholder.",
+      "request": "One heavy tracked machine mostly concealed in a simple smoke mass, with only its turret and front tread visible.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show the vehicle deploying concealment smoke." },
+      "candidates": [{ "id": "atlas-c", "label": "Atlas C · machine concealed by smoke", "src": "candidates/batch-55/zadymienie.png", "note": "Dense smoke obscures most of the machine while leaving two identifying features." }]
+    },
+    {
+      "id": "batch55-zamarcie",
+      "name": "Zamarcie",
+      "tier": "Batch 55 · Kitchin trait",
+      "context": "When spotted, Kitchin freezes motionless for one round before attacking. The actor item uses the generic upgrade placeholder or portrait.",
+      "request": "One tiny rigid creature frozen beneath one large watching eye with exactly two short stillness bars.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg or portrait", "note": "Current imagery does not show the creature freezing when observed." },
+      "candidates": [{ "id": "atlas-c", "label": "Atlas C · frozen under observation", "src": "candidates/batch-55/zamarcie.png", "note": "The rigid small creature stops directly beneath a dominant eye." }]
+    },
+    {
+      "id": "batch55-zamaszysty-atak",
+      "name": "Zamaszysty atak",
+      "tier": "Batch 55 · Neoniedźwiedź action",
+      "context": "The Neoniedźwiedź's paw attack hits every target within three metres. The actor item uses the generic upgrade placeholder.",
+      "request": "One enormous mutant bear paw sweeping along one broad arc through exactly three simple target silhouettes.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show the wide multi-target attack." },
+      "candidates": [{ "id": "atlas-c", "label": "Atlas C · sweeping mutant paw", "src": "candidates/batch-55/zamaszysty_atak.png", "note": "The paw's single arc passes through three separated targets." }]
+    },
+    {
+      "id": "batch55-zastepcy-szeryfa",
+      "name": "Zastępcy szeryfa",
+      "tier": "Batch 55 · Sheriff trait",
+      "context": "On home turf, the Sheriff can call in local civilians or guards after one round. The actor item uses the generic upgrade placeholder or portrait.",
+      "request": "One large sheriff star in front of exactly four armed human silhouettes.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg or portrait", "note": "Current imagery does not show summoned deputies." },
+      "candidates": [{ "id": "atlas-c", "label": "Atlas C · sheriff and deputies", "src": "candidates/batch-55/zastepcy_szeryfa.png", "note": "The star leads a compact group of four armed helpers." }]
+    },
+    {
+      "id": "batch55-upiorne-wycie",
+      "name": "Upiorne wycie",
+      "tier": "Batch 55 · Wolf Genotype action",
+      "context": "The genotype's howl can frighten every enemy within 150 metres. The actor item uses the generic upgrade placeholder.",
+      "request": "One wolf head howling exactly three broad sound waves toward two human figures recoiling together.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show the terrifying howl." },
+      "candidates": [{ "id": "atlas-c", "label": "Atlas C · frightening howl", "src": "candidates/batch-55/upiorne_wycie.png", "note": "Three strong waves connect the howling wolf to two frightened targets." }]
+    },
+    {
+      "id": "batch55-skora-gekona",
+      "name": "Skóra gekona",
+      "tier": "Batch 55 · Reptilian Genotype trait",
+      "context": "The genotype can walk across rough surfaces and upside down. The actor item uses the generic upgrade placeholder.",
+      "request": "One mutant hand and one bare foot with broad adhesive pads gripping a single vertical wall.",
+      "current": { "src": null, "emptyLabel": "Current live icon\nupgrade.svg placeholder", "note": "Generic placeholder does not show adhesive climbing." },
+      "candidates": [{ "id": "atlas-c", "label": "Atlas C · adhesive hand and foot", "src": "candidates/batch-55/skora_gekona.png", "note": "Large pads on both hand and foot visibly adhere to a wall." }]
+    }
+  ]
+}

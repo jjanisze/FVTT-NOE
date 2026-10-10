@@ -1,0 +1,955 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.Wf53EIDOGbqhl6h0",
+      "name": "BIODROID",
+      "items": [
+        {
+          "_id": "RnzNpXlv231jcd2G",
+          "name": "Wycofanie się",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wycofanie-sie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.YzI4Njk2N2IwNjI5",
+      "name": "BIT-BOY",
+      "items": [
+        {
+          "_id": "Mzc1ZTlkMmY0YmYx",
+          "name": "Palcożerca",
+          "before": "worlds/OUTPUT/characters/021_-_BIT-BOY/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/palcozerca.svg"
+        },
+        {
+          "_id": "ODg0ZGFjMjY0ODRk",
+          "name": "Skok",
+          "before": "worlds/OUTPUT/characters/021_-_BIT-BOY/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/skok.svg"
+        },
+        {
+          "_id": "NDg2YTU1MDBlZDVk",
+          "name": "Palcożerca",
+          "before": "worlds/OUTPUT/characters/021_-_BIT-BOY/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/palcozerca.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.c6NxSwv3O3TcepJE",
+      "name": "BIT-BOYS (aka CROATS)",
+      "items": [
+        {
+          "_id": "phebbO8L5iKnqayV",
+          "name": "Palcożerca",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/palcozerca.svg"
+        },
+        {
+          "_id": "IOuxfv4IJezKBhfQ",
+          "name": "Skok",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/skok.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.YjYzNjhiMGNiM2Ix",
+      "name": "Copy of Mobsprzęt Karabin",
+      "items": [
+        {
+          "_id": "YjAwYjA3MmFkMTk5",
+          "name": "Próg awarii",
+          "before": "worlds/OUTPUT/characters/060_-_Copy_of_Mobsprz_C4_99t_Karabin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/prog-awarii.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.bnbnPGBq7QPt9KRh",
+      "name": "GENERACJA II. GENOTYP WILCZY",
+      "items": [
+        {
+          "_id": "FqbfTnL94EU9u4CD",
+          "name": "Zmysły",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zmysly.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.ZpNjrKMNRmVwAZTs",
+      "name": "GIGANTYCZNY PAJĄK",
+      "items": [
+        {
+          "_id": "OApv5dzJcJEjTyC1",
+          "name": "Skakun (opcjonalnie)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/skakun.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.BrVnUbF9JjDHb3Hw",
+      "name": "HARPIE (AKA WAMPIRY)",
+      "items": [
+        {
+          "_id": "WheaXlMNVXeAZHdY",
+          "name": "Odstąpienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/odstapienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.tjWfjg1JgeHRa9WC",
+      "name": "JUGGERNAUT",
+      "items": [
+        {
+          "_id": "qn1dPuH9eO1bB0XA",
+          "name": "Działo ppanc",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/dzialo_ppanc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.YGIOkeUGVe4EImDp",
+      "name": "KITCHIN",
+      "items": [
+        {
+          "_id": "1hobC8JeaRiByGKi",
+          "name": "Zamarcie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zamarcie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MDAwMmZlNTdkOGJi",
+      "name": "Kelner",
+      "items": [
+        {
+          "_id": "Njk2ZjVmNmE5YWY4",
+          "name": "Tacą i w nogi",
+          "before": "worlds/OUTPUT/characters/071_-_Kelner/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/taca-i-w-nogi.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NTdjZGU3ZjA3MjJk",
+      "name": "Kitchin",
+      "items": [
+        {
+          "_id": "MGQ1ZmVhNTUwODJl",
+          "name": "Zamarcie",
+          "before": "worlds/OUTPUT/characters/037_-_Kitchin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zamarcie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MGQ1OWM2Yzc3YzQx",
+      "name": "Major Lansdale",
+      "items": [
+        {
+          "_id": "NmExOTMxYmE5NmQ4",
+          "name": "Szara Eminencja",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/szara-eminencja.svg"
+        },
+        {
+          "_id": "OWMzNTZjNzg1MWQw",
+          "name": "Zimna Krew",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zimna-krew.svg"
+        },
+        {
+          "_id": "NDQ5ZDQyMzZhZTM3",
+          "name": "Żywa Tarcza",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zywa-tarcza.svg"
+        },
+        {
+          "_id": "MGFjNTRmMDY4MDUw",
+          "name": "Rozkaz Likwidacji",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/rozkaz-likwidacji.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MjVjZjU1NWRmZTRm",
+      "name": "Mobsprzęt Karabin",
+      "items": [
+        {
+          "_id": "ZWY0MWU0NWVhMDI3",
+          "name": "Próg awarii",
+          "before": "worlds/OUTPUT/characters/057_-_Mobsprz_C4_99t_Karabin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/prog-awarii.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "OTc5MjgxNjY4OTk1",
+          "name": "Tylko jedno w głowie mam",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tylko-jedno-w-glowie-mam.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.YmMyOWE3ODcxZjU1",
+      "name": "Pitagoras",
+      "items": [
+        {
+          "_id": "MjY2YTQ1MzFkY2Q0",
+          "name": "Twierdzenie Kąta Prostego",
+          "before": "worlds/OUTPUT/characters/068_-_Pitagoras/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/twierdzenie-kata-prostego.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MWQzZmFkMDUzZmVj",
+      "name": "Richard Craddock",
+      "items": [
+        {
+          "_id": "MDk2MWY0MzAwNjk4",
+          "name": "Mistrz taktyki",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/mistrz-taktyki.svg"
+        },
+        {
+          "_id": "OTlkM2UwZmU2MWMw",
+          "name": "Aura pogardy",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/aura-pogardy.svg"
+        },
+        {
+          "_id": "MTc5ZTViMzg3YzMw",
+          "name": "Zasłonięcie hełmu",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zasloniecie-helmu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.OBrjMBbhUSK6kpq3",
+      "name": "Richard Craddock Uparmored",
+      "items": [
+        {
+          "_id": "MDk2MWY0MzAwNjk4",
+          "name": "Mistrz taktyki",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/mistrz-taktyki.svg"
+        },
+        {
+          "_id": "OTlkM2UwZmU2MWMw",
+          "name": "Aura pogardy",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/aura-pogardy.svg"
+        },
+        {
+          "_id": "MTc5ZTViMzg3YzMw",
+          "name": "Zasłonięcie hełmu",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zasloniecie-helmu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MGFiZGQ2NzE5OWNh",
+      "name": "Spawacz",
+      "items": [
+        {
+          "_id": "NjU2NmJhYjg5MjM4",
+          "name": "Próg awarii",
+          "before": "worlds/OUTPUT/characters/013_-_Spawacz/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/prog-awarii.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.QvlrcHwuQPPfXhKe",
+      "name": "Tarantula (Recovered)",
+      "items": [
+        {
+          "_id": "MDM5OTM0YzdiZjI2",
+          "name": "Wielonożny",
+          "before": "worlds/OUTPUT/characters/007_-_Tarantula/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wielonozny.svg"
+        },
+        {
+          "_id": "ZjY4ZTM4MjAxZDBm",
+          "name": "Tryb Turbo",
+          "before": "worlds/OUTPUT/characters/007_-_Tarantula/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tryb-turbo.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MTg5ZjY0Y2Q2MTdj",
+      "name": "WILKOLUD",
+      "items": [
+        {
+          "_id": "NmYxODNmMTQ5OTY4",
+          "name": "Zmysły",
+          "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zmysly.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.MTFiNDFhZjBjZmUx.Actor.MTg5ZjY0Y2Q2MTdj",
+      "name": "WILKOLUD",
+      "items": [
+        {
+          "_id": "NmYxODNmMTQ5OTY4",
+          "name": "Zmysły",
+          "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zmysly.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.Y2ViZWNiNzFiMjJj.Actor.YmMyOWE3ODcxZjU1",
+      "name": "Pitagoras",
+      "items": [
+        {
+          "_id": "MjY2YTQ1MzFkY2Q0",
+          "name": "Twierdzenie Kąta Prostego",
+          "before": "worlds/OUTPUT/characters/068_-_Pitagoras/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/twierdzenie-kata-prostego.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MTEyM2VhZTEwMzJi.Token.ODNhNGRkMTFmMmFi.Actor.MWQzZmFkMDUzZmVj",
+      "name": "Richard Craddock",
+      "items": [
+        {
+          "_id": "MDk2MWY0MzAwNjk4",
+          "name": "Mistrz taktyki",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/mistrz-taktyki.svg"
+        },
+        {
+          "_id": "OTlkM2UwZmU2MWMw",
+          "name": "Aura pogardy",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/aura-pogardy.svg"
+        },
+        {
+          "_id": "MTc5ZTViMzg3YzMw",
+          "name": "Zasłonięcie hełmu",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zasloniecie-helmu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MTEyM2VhZTEwMzJi.Token.M2QxZjVmZjZlZGJj.Actor.MGQ1OWM2Yzc3YzQx",
+      "name": "Major Lansdale",
+      "items": [
+        {
+          "_id": "NmExOTMxYmE5NmQ4",
+          "name": "Szara Eminencja",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/szara-eminencja.svg"
+        },
+        {
+          "_id": "OWMzNTZjNzg1MWQw",
+          "name": "Zimna Krew",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zimna-krew.svg"
+        },
+        {
+          "_id": "NDQ5ZDQyMzZhZTM3",
+          "name": "Żywa Tarcza",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zywa-tarcza.svg"
+        },
+        {
+          "_id": "MGFjNTRmMDY4MDUw",
+          "name": "Rozkaz Likwidacji",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/rozkaz-likwidacji.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ODAxZTdmOGIwZjc0.Token.ZWQzNGJlYzJlYjZk.Actor.YmMyOWE3ODcxZjU1",
+      "name": "Pitagoras",
+      "items": [
+        {
+          "_id": "MjY2YTQ1MzFkY2Q0",
+          "name": "Twierdzenie Kąta Prostego",
+          "before": "worlds/OUTPUT/characters/068_-_Pitagoras/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/twierdzenie-kata-prostego.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.YTA1ZTMwMzhkODVl.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "OTc5MjgxNjY4OTk1",
+          "name": "Tylko jedno w głowie mam",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tylko-jedno-w-glowie-mam.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.YTExY2QwMmNhYzlm.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "OTc5MjgxNjY4OTk1",
+          "name": "Tylko jedno w głowie mam",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tylko-jedno-w-glowie-mam.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.MjMwN2FhODdjYjdl.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "OTc5MjgxNjY4OTk1",
+          "name": "Tylko jedno w głowie mam",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tylko-jedno-w-glowie-mam.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.ZTgyZWRmOGE4N2I4.Actor.MDAwMmZlNTdkOGJi",
+      "name": "Kelner",
+      "items": [
+        {
+          "_id": "Njk2ZjVmNmE5YWY4",
+          "name": "Tacą i w nogi",
+          "before": "worlds/OUTPUT/characters/071_-_Kelner/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/taca-i-w-nogi.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.ODU4YWYzY2E0ZTM4.Actor.MDAwMmZlNTdkOGJi",
+      "name": "Kelner",
+      "items": [
+        {
+          "_id": "Njk2ZjVmNmE5YWY4",
+          "name": "Tacą i w nogi",
+          "before": "worlds/OUTPUT/characters/071_-_Kelner/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/taca-i-w-nogi.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MjY5NWM0NjkzMjZj.Token.YzMyOTkxNjhkZTgw.Actor.MWQzZmFkMDUzZmVj",
+      "name": "Richard Craddock",
+      "items": [
+        {
+          "_id": "MDk2MWY0MzAwNjk4",
+          "name": "Mistrz taktyki",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/mistrz-taktyki.svg"
+        },
+        {
+          "_id": "OTlkM2UwZmU2MWMw",
+          "name": "Aura pogardy",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/aura-pogardy.svg"
+        },
+        {
+          "_id": "MTc5ZTViMzg3YzMw",
+          "name": "Zasłonięcie hełmu",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zasloniecie-helmu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MjY5NWM0NjkzMjZj.Token.ZTJiYzg0NGQ5YzVj.Actor.MGQ1OWM2Yzc3YzQx",
+      "name": "Major Lansdale",
+      "items": [
+        {
+          "_id": "NmExOTMxYmE5NmQ4",
+          "name": "Szara Eminencja",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/szara-eminencja.svg"
+        },
+        {
+          "_id": "OWMzNTZjNzg1MWQw",
+          "name": "Zimna Krew",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zimna-krew.svg"
+        },
+        {
+          "_id": "NDQ5ZDQyMzZhZTM3",
+          "name": "Żywa Tarcza",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zywa-tarcza.svg"
+        },
+        {
+          "_id": "MGFjNTRmMDY4MDUw",
+          "name": "Rozkaz Likwidacji",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/rozkaz-likwidacji.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NmY1NWM5ODk4NDg2.Token.NTQxNDJlM2U5N2M4.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "OTc5MjgxNjY4OTk1",
+          "name": "Tylko jedno w głowie mam",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tylko-jedno-w-glowie-mam.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NmY1NWM5ODk4NDg2.Token.NTRhMWQwMWVjZDU1.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "OTc5MjgxNjY4OTk1",
+          "name": "Tylko jedno w głowie mam",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tylko-jedno-w-glowie-mam.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NmY1NWM5ODk4NDg2.Token.ZGQxMDkwZWZmNGI3.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "OTc5MjgxNjY4OTk1",
+          "name": "Tylko jedno w głowie mam",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tylko-jedno-w-glowie-mam.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.OTg2ZmRlMThjOTU0.Actor.MGFiZGQ2NzE5OWNh",
+      "name": "Spawacz",
+      "items": [
+        {
+          "_id": "NjU2NmJhYjg5MjM4",
+          "name": "Próg awarii",
+          "before": "worlds/OUTPUT/characters/013_-_Spawacz/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/prog-awarii.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.YzY2NGVjMzg2Y2Jl.Actor.MjVjZjU1NWRmZTRm",
+      "name": "Mobsprzęt Karabin",
+      "items": [
+        {
+          "_id": "ZWY0MWU0NWVhMDI3",
+          "name": "Próg awarii",
+          "before": "worlds/OUTPUT/characters/057_-_Mobsprz_C4_99t_Karabin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/prog-awarii.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.YjMwZWQ3YzcxOWI5.Actor.MGFiZGQ2NzE5OWNh",
+      "name": "Spawacz",
+      "items": [
+        {
+          "_id": "NjU2NmJhYjg5MjM4",
+          "name": "Próg awarii",
+          "before": "worlds/OUTPUT/characters/013_-_Spawacz/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/prog-awarii.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.MmUzYzRkYTEwODJk.Actor.MjVjZjU1NWRmZTRm",
+      "name": "Mobsprzęt Karabin",
+      "items": [
+        {
+          "_id": "ZWY0MWU0NWVhMDI3",
+          "name": "Próg awarii",
+          "before": "worlds/OUTPUT/characters/057_-_Mobsprz_C4_99t_Karabin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/prog-awarii.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ZDI1YTcyY2JmNjMx.Token.IAzB7h1vtGuBOXgH.Actor.MWQzZmFkMDUzZmVj",
+      "name": "Generał",
+      "items": [
+        {
+          "_id": "MDk2MWY0MzAwNjk4",
+          "name": "Mistrz taktyki",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/mistrz-taktyki.svg"
+        },
+        {
+          "_id": "OTlkM2UwZmU2MWMw",
+          "name": "Aura pogardy",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/aura-pogardy.svg"
+        },
+        {
+          "_id": "MTc5ZTViMzg3YzMw",
+          "name": "Zasłonięcie hełmu",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zasloniecie-helmu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ZDI1YTcyY2JmNjMx.Token.UegLhOMhY2Ih1ces.Actor.OBrjMBbhUSK6kpq3",
+      "name": "Generał",
+      "items": [
+        {
+          "_id": "MDk2MWY0MzAwNjk4",
+          "name": "Mistrz taktyki",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/mistrz-taktyki.svg"
+        },
+        {
+          "_id": "OTlkM2UwZmU2MWMw",
+          "name": "Aura pogardy",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/aura-pogardy.svg"
+        },
+        {
+          "_id": "MTc5ZTViMzg3YzMw",
+          "name": "Zasłonięcie hełmu",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zasloniecie-helmu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.xLbeckdRxAeLy7Kr.Actor.OBrjMBbhUSK6kpq3",
+      "name": "Generał",
+      "items": [
+        {
+          "_id": "MDk2MWY0MzAwNjk4",
+          "name": "Mistrz taktyki",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/mistrz-taktyki.svg"
+        },
+        {
+          "_id": "OTlkM2UwZmU2MWMw",
+          "name": "Aura pogardy",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/aura-pogardy.svg"
+        },
+        {
+          "_id": "MTc5ZTViMzg3YzMw",
+          "name": "Zasłonięcie hełmu",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zasloniecie-helmu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.3fTl0UdEmnzBAkpg.Actor.YzI4Njk2N2IwNjI5",
+      "name": "BIT-BOY",
+      "items": [
+        {
+          "_id": "Mzc1ZTlkMmY0YmYx",
+          "name": "Palcożerca",
+          "before": "worlds/OUTPUT/characters/021_-_BIT-BOY/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/palcozerca.svg"
+        },
+        {
+          "_id": "ODg0ZGFjMjY0ODRk",
+          "name": "Skok",
+          "before": "worlds/OUTPUT/characters/021_-_BIT-BOY/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/skok.svg"
+        },
+        {
+          "_id": "NDg2YTU1MDBlZDVk",
+          "name": "Palcożerca",
+          "before": "worlds/OUTPUT/characters/021_-_BIT-BOY/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/palcozerca.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.EjUEionS5UfpjGom.Actor.MDAwMmZlNTdkOGJi",
+      "name": "Kelner",
+      "items": [
+        {
+          "_id": "Njk2ZjVmNmE5YWY4",
+          "name": "Tacą i w nogi",
+          "before": "worlds/OUTPUT/characters/071_-_Kelner/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/taca-i-w-nogi.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.b7nonxZtwZplP7RG.Actor.MGQ1OWM2Yzc3YzQx",
+      "name": "Major Lansdale",
+      "items": [
+        {
+          "_id": "NmExOTMxYmE5NmQ4",
+          "name": "Szara Eminencja",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/szara-eminencja.svg"
+        },
+        {
+          "_id": "OWMzNTZjNzg1MWQw",
+          "name": "Zimna Krew",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zimna-krew.svg"
+        },
+        {
+          "_id": "NDQ5ZDQyMzZhZTM3",
+          "name": "Żywa Tarcza",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zywa-tarcza.svg"
+        },
+        {
+          "_id": "MGFjNTRmMDY4MDUw",
+          "name": "Rozkaz Likwidacji",
+          "before": "worlds/OUTPUT/characters/069_-_Major_Lansdale/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/rozkaz-likwidacji.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.Gl88jK3qkPvRwaKb.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "OTc5MjgxNjY4OTk1",
+          "name": "Tylko jedno w głowie mam",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tylko-jedno-w-glowie-mam.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.NZWptVqo4zGEp6Di.Actor.YmMyOWE3ODcxZjU1",
+      "name": "Pitagoras",
+      "items": [
+        {
+          "_id": "MjY2YTQ1MzFkY2Q0",
+          "name": "Twierdzenie Kąta Prostego",
+          "before": "worlds/OUTPUT/characters/068_-_Pitagoras/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/twierdzenie-kata-prostego.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.nfLKq3msTf4BAw1H.Actor.MjVjZjU1NWRmZTRm",
+      "name": "Mobsprzęt Karabin",
+      "items": [
+        {
+          "_id": "ZWY0MWU0NWVhMDI3",
+          "name": "Próg awarii",
+          "before": "worlds/OUTPUT/characters/057_-_Mobsprz_C4_99t_Karabin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/prog-awarii.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.a9JLuSDOW7D3rYUk.Actor.MWQzZmFkMDUzZmVj",
+      "name": "Generał",
+      "items": [
+        {
+          "_id": "MDk2MWY0MzAwNjk4",
+          "name": "Mistrz taktyki",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/mistrz-taktyki.svg"
+        },
+        {
+          "_id": "OTlkM2UwZmU2MWMw",
+          "name": "Aura pogardy",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/aura-pogardy.svg"
+        },
+        {
+          "_id": "MTc5ZTViMzg3YzMw",
+          "name": "Zasłonięcie hełmu",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zasloniecie-helmu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.mVXNTcuWJY89jgFf.Actor.QvlrcHwuQPPfXhKe",
+      "name": "Tarantula",
+      "items": [
+        {
+          "_id": "MDM5OTM0YzdiZjI2",
+          "name": "Wielonożny",
+          "before": "worlds/OUTPUT/characters/007_-_Tarantula/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wielonozny.svg"
+        },
+        {
+          "_id": "ZjY4ZTM4MjAxZDBm",
+          "name": "Tryb Turbo",
+          "before": "worlds/OUTPUT/characters/007_-_Tarantula/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tryb-turbo.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.p6jX0F8jQmMiNwkn.Actor.MTg5ZjY0Y2Q2MTdj",
+      "name": "WILKOLUD",
+      "items": [
+        {
+          "_id": "NmYxODNmMTQ5OTY4",
+          "name": "Zmysły",
+          "before": "worlds/OUTPUT/characters/027_-_WILKOLUD/avatar.jpg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zmysly.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.qGrVyFmNeEKTwpHA.Actor.NTdjZGU3ZjA3MjJk",
+      "name": "Kitchin",
+      "items": [
+        {
+          "_id": "MGQ1ZmVhNTUwODJl",
+          "name": "Zamarcie",
+          "before": "worlds/OUTPUT/characters/037_-_Kitchin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zamarcie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.ZBGr9qBCvDeCCIC2.Actor.MGFiZGQ2NzE5OWNh",
+      "name": "Spawacz",
+      "items": [
+        {
+          "_id": "NjU2NmJhYjg5MjM4",
+          "name": "Próg awarii",
+          "before": "worlds/OUTPUT/characters/013_-_Spawacz/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/prog-awarii.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.Ni6oWhaqILFRzHtC.Actor.YjYzNjhiMGNiM2Ix",
+      "name": "Copy of Mobsprzęt Karabin",
+      "items": [
+        {
+          "_id": "YjAwYjA3MmFkMTk5",
+          "name": "Próg awarii",
+          "before": "worlds/OUTPUT/characters/060_-_Copy_of_Mobsprz_C4_99t_Karabin/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/prog-awarii.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.A86fzMPR9RL1MqZf.Actor.tjWfjg1JgeHRa9WC",
+      "name": "JUGGERNAUT",
+      "items": [
+        {
+          "_id": "qn1dPuH9eO1bB0XA",
+          "name": "Działo ppanc",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/weapons/dzialo_ppanc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.k1wDCDX3ytDGeVHL.Actor.Wf53EIDOGbqhl6h0",
+      "name": "BIODROID",
+      "items": [
+        {
+          "_id": "RnzNpXlv231jcd2G",
+          "name": "Wycofanie się",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wycofanie-sie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.yGmIFaAZ0qnTB1gR.Actor.bnbnPGBq7QPt9KRh",
+      "name": "PAJĄK",
+      "items": [
+        {
+          "_id": "FqbfTnL94EU9u4CD",
+          "name": "Zmysły",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zmysly.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.9FGaowPZraqC21xm.Actor.BrVnUbF9JjDHb3Hw",
+      "name": "HARPIE (AKA WAMPIRY)",
+      "items": [
+        {
+          "_id": "WheaXlMNVXeAZHdY",
+          "name": "Odstąpienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/odstapienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.fX3SGV7V4bapy7Ro.Actor.c6NxSwv3O3TcepJE",
+      "name": "BIT-BOYS (aka CROATS)",
+      "items": [
+        {
+          "_id": "phebbO8L5iKnqayV",
+          "name": "Palcożerca",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/palcozerca.svg"
+        },
+        {
+          "_id": "IOuxfv4IJezKBhfQ",
+          "name": "Skok",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/skok.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.Oj00EJN9G1Xc6gLA.Actor.YGIOkeUGVe4EImDp",
+      "name": "KITCHIN",
+      "items": [
+        {
+          "_id": "1hobC8JeaRiByGKi",
+          "name": "Zamarcie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zamarcie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.QXagB2aEBr9FilQx.Actor.ZpNjrKMNRmVwAZTs",
+      "name": "KOŃ (SKAŻONY)",
+      "items": [
+        {
+          "_id": "OApv5dzJcJEjTyC1",
+          "name": "Skakun (opcjonalnie)",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/skakun.svg"
+        }
+      ]
+    }
+  ]
+}

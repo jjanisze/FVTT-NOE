@@ -1,0 +1,582 @@
+{
+  "title": "Batch 60 · 27 awaiting GM review",
+  "updated": "2026-10-10",
+  "items": [
+    {
+      "id": "batch59-aktywny-system-obrony",
+      "name": "Aktywny system obrony",
+      "tier": "Batch 59 · Richard Craddock reaction",
+      "context": "As a reaction, Craddock turns his thickest armor toward a ranged attack and gains +3 TT before damage is known.",
+      "request": "One rugged armored adult twists one dominant shoulder plate into the path of an incoming bullet.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · rotated armor plate",
+          "src": "candidates/batch-59/aktywny_system_obrony.png",
+          "note": "One rugged armored adult twists one dominant shoulder plate into the path of an incoming bullet."
+        },
+        {
+          "id": "batch60-revision",
+          "label": "Revision B · powered armor moves itself",
+          "src": "candidates/batch-60/aktywny_system_obrony_revision_b.png",
+          "note": "The servo frame visibly yanks its wearer into an awkward optimal defensive pose."
+        }
+      ]
+    },
+    {
+      "id": "batch59-ruch",
+      "name": "Ruch",
+      "tier": "Batch 59 · Megator action",
+      "context": "Megator, an alligator the size of a submarine, moves up to its speed.",
+      "request": "One colossal armored mutant alligator surges forward with three bold speed streaks.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · colossal alligator movement",
+          "src": "candidates/batch-59/ruch.png",
+          "note": "One colossal armored mutant alligator surges forward with three bold speed streaks."
+        },
+        {
+          "id": "batch60-revision",
+          "label": "Revision B · organic Megator crushes a car",
+          "src": "candidates/batch-60/ruch_revision_b.png",
+          "note": "Armadillo-like organic scales and a crushed car establish the creature's immense size."
+        }
+      ]
+    },
+    {
+      "id": "batch59-atak-mobsprzet",
+      "name": "Atak",
+      "tier": "Batch 59 · Mobsprzęt action",
+      "context": "A d6 randomly determines the welded machine's chassis and weapon for the attack.",
+      "request": "One asymmetrical junk combat machine combines a buggy wheel, track, crude gun, blade and antenna.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · random junk-machine attack",
+          "src": "candidates/batch-59/atak_mobsprzet.png",
+          "note": "One asymmetrical junk combat machine combines a buggy wheel, track, crude gun, blade and antenna."
+        },
+        {
+          "id": "batch60-revision",
+          "label": "Revision B · simplified turret robot",
+          "src": "candidates/batch-60/atak_mobsprzet_revision_b.png",
+          "note": "One conventional crude tracked robot fires from a clean boxy turret."
+        }
+      ]
+    },
+    {
+      "id": "batch59-wrazliwosc-na-swiatlo",
+      "name": "Wrażliwość na światło",
+      "tier": "Batch 59 · Mrokoszczur trait",
+      "context": "Sunlight blinds the metre-long rat; a torch enrages it and a strong halogen light frightens it.",
+      "request": "One huge ugly rat with bulging eyes recoils from one strong flashlight beam.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · light-sensitive rat",
+          "src": "candidates/batch-59/wrazliwosc_na_swiatlo.png",
+          "note": "One huge ugly rat with bulging eyes recoils from one strong flashlight beam."
+        },
+        {
+          "id": "batch60-revision",
+          "label": "Revision B · vicious rat turns from broad light",
+          "src": "candidates/batch-60/wrazliwosc_na_swiatlo_revision_b.png",
+          "note": "The ugly rat turns its whole body away from a dominant wide flashlight cone."
+        }
+      ]
+    },
+    {
+      "id": "batch59-karabin-laserowy",
+      "name": "Karabin laserowy",
+      "tier": "Batch 59 · Biodroid weapon",
+      "context": "The headless upright Biodroid carries machine guns and uses a laser rifle as a dedicated attack.",
+      "request": "One headless armored worm Biodroid braces a crude industrial laser rifle firing one straight beam.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Biodroid laser rifle",
+          "src": "candidates/batch-59/karabin_laserowy.png",
+          "note": "One headless armored worm Biodroid braces a crude industrial laser rifle firing one straight beam."
+        },
+        {
+          "id": "batch60-revision",
+          "label": "Revision B · weapon-only laser rifle",
+          "src": "candidates/batch-60/karabin_laserowy_revision_b.png",
+          "note": "Only the crude industrial laser rifle remains, with no wielder or target."
+        }
+      ]
+    },
+    {
+      "id": "batch59-dmuchawka",
+      "name": "Dmuchawka",
+      "tier": "Batch 59 · Szpieg III Generacji weapon",
+      "context": "A hit forces a Constitution save or leaves the target unconscious for ten minutes.",
+      "request": "One plain-clothed human spy fires a long blowgun and one struck target collapses.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · sleep dart blowgun",
+          "src": "candidates/batch-59/dmuchawka.png",
+          "note": "One plain-clothed human spy fires a long blowgun and one struck target collapses."
+        },
+        {
+          "id": "batch60-revision",
+          "label": "Revision B · biological uncanny-valley blowgun",
+          "src": "candidates/batch-60/dmuchawka_revision_b.png",
+          "note": "A short fleshy tube grows from an almost-human face and launches one dart."
+        }
+      ]
+    },
+    {
+      "id": "batch60-wymagania",
+      "name": "Wymagania",
+      "tier": "Batch 60 · shared animal trait",
+      "context": "Poor feed or contaminated water can turn a healthy horse or war dog into a contaminated animal.",
+      "request": "A healthy horse and dog face clean feed and water while one contaminated bucket is rejected.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · proper feed and water",
+          "src": "candidates/batch-60/wymagania.png",
+          "note": "A healthy horse and dog face clean feed and water while one contaminated bucket is rejected."
+        }
+      ]
+    },
+    {
+      "id": "batch60-paszcza",
+      "name": "Paszcza",
+      "tier": "Batch 60 · Megator and Neogator action",
+      "context": "A hit from the colossal jaws grapples and restrains a Huge or smaller target.",
+      "request": "One enormous mutant alligator jaw clamps around a restrained adult torso without gore.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · colossal restraining jaws",
+          "src": "candidates/batch-60/paszcza.png",
+          "note": "One enormous mutant alligator jaw clamps around a restrained adult torso without gore."
+        }
+      ]
+    },
+    {
+      "id": "batch60-tylko-zwarcie",
+      "name": "Tylko zwarcie",
+      "tier": "Batch 60 · zombie overlay trait",
+      "context": "The zombie cannot make ranged attacks even if its original host possessed them.",
+      "request": "One decayed zombie abandons a snapped rifle and lunges forward with both clawed hands.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · melee-only zombie",
+          "src": "candidates/batch-60/tylko_zwarcie.png",
+          "note": "One decayed zombie abandons a snapped rifle and lunges forward with both clawed hands."
+        }
+      ]
+    },
+    {
+      "id": "batch60-siodme-poty",
+      "name": "Siódme poty",
+      "tier": "Batch 60 · Detroit origin feature",
+      "context": "The character gains vehicle proficiency and drives vehicles fifty percent faster.",
+      "request": "Two calloused hands grip a battered steering wheel with speed streaks and two large sweat drops.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · hard-driving vehicle skill",
+          "src": "candidates/batch-60/siodme_poty.png",
+          "note": "Two calloused hands grip a battered steering wheel with speed streaks and two large sweat drops."
+        }
+      ]
+    },
+    {
+      "id": "batch60-fart",
+      "name": "Fart",
+      "tier": "Batch 60 · Vegas origin feature",
+      "context": "After rolling a natural one, the character may reroll it once per short rest.",
+      "request": "One battered twenty-sided die escapes a spike trap along one thick reroll arrow.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · lucky reroll",
+          "src": "candidates/batch-60/fart.png",
+          "note": "One battered twenty-sided die escapes a spike trap along one thick reroll arrow."
+        }
+      ]
+    },
+    {
+      "id": "batch60-ja-juz-swoje-odchorowalem",
+      "name": "Ja już swoje odchorowałem",
+      "tier": "Batch 60 · Miami origin feature",
+      "context": "The character has advantage on Constitution saving throws.",
+      "request": "A scarred survivor stands steady while disease particles break against a chest-shaped shield.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · hardened constitution",
+          "src": "candidates/batch-60/ja_juz_swoje_odchorowalem.png",
+          "note": "A scarred survivor stands steady while disease particles break against a chest-shaped shield."
+        }
+      ]
+    },
+    {
+      "id": "batch60-grad-olowiu",
+      "name": "Grad ołowiu",
+      "tier": "Batch 60 · Sztuczka",
+      "context": "Short bursts become part of the Attack action, allowing as many short bursts as attacks in the turn.",
+      "request": "One crude rifle fires three clearly separated short burst clusters in one direction.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · repeated short bursts",
+          "src": "candidates/batch-60/grad_olowiu.png",
+          "note": "One crude rifle fires three clearly separated short burst clusters in one direction."
+        }
+      ]
+    },
+    {
+      "id": "batch60-cos-mi-tu-smierdzi",
+      "name": "Coś mi tu śmierdzi",
+      "tier": "Batch 60 · Missisipi origin feature",
+      "context": "The character automatically senses mutants within nine metres and can identify one with a Perception test.",
+      "request": "A wary survivor follows two scent trails toward a mutant partly hidden behind broken cover.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · mutant detection",
+          "src": "candidates/batch-60/cos_mi_tu_smierdzi.png",
+          "note": "A wary survivor follows two scent trails toward a mutant partly hidden behind broken cover."
+        }
+      ]
+    },
+    {
+      "id": "batch60-czas-patriotow",
+      "name": "Czas patriotów",
+      "tier": "Batch 60 · New York origin feature",
+      "context": "Once per long rest, the character gains +5 to any ability check or saving throw.",
+      "request": "A weathered survivor makes a decisive effort beneath one battered flag with a plain star patch.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · decisive patriotic effort",
+          "src": "candidates/batch-60/czas_patriotow.png",
+          "note": "A weathered survivor makes a decisive effort beneath one battered flag with a plain star patch."
+        }
+      ]
+    },
+    {
+      "id": "batch60-cwiczenie-czyni-mistrza",
+      "name": "Ćwiczenie czyni mistrza",
+      "tier": "Batch 60 · Sztuczka",
+      "context": "The feature permanently improves one or two base attributes and can be selected repeatedly.",
+      "request": "A rugged adult repeats a heavy barbell lift through three stages beside one upward progress arrow.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · repeated training",
+          "src": "candidates/batch-60/cwiczenie_czyni_mistrza.png",
+          "note": "A rugged adult repeats a heavy barbell lift through three stages beside one upward progress arrow."
+        }
+      ]
+    },
+    {
+      "id": "batch60-doktor-quinn",
+      "name": "Doktor Quinn",
+      "tier": "Batch 60 · Texas origin feature",
+      "context": "The character gains Medicine proficiency and advantage on Medicine checks.",
+      "request": "One rugged field doctor uses forceps and a bandage on a large wounded forearm.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · field medicine expertise",
+          "src": "candidates/batch-60/doktor_quinn.png",
+          "note": "One rugged field doctor uses forceps and a bandage on a large wounded forearm."
+        }
+      ]
+    },
+    {
+      "id": "batch60-jesli-ma-silnik-to-ruszy",
+      "name": "Jeśli ma silnik, to ruszy",
+      "tier": "Batch 60 · Detroit origin feature",
+      "context": "The character has advantage when building or repairing vehicles and gains mechanic-tool proficiency.",
+      "request": "A greasy mechanic hand turns a large wrench on a battered exposed engine as it ignites.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · reviving an engine",
+          "src": "candidates/batch-60/jesli_ma_silnik_to_ruszy.png",
+          "note": "A greasy mechanic hand turns a large wrench on a battered exposed engine as it ignites."
+        }
+      ]
+    },
+    {
+      "id": "batch60-pakowanie",
+      "name": "Pakowanie",
+      "tier": "Batch 60 · Sztuczka",
+      "context": "The character doubles carrying capacity and can retrieve any backpack item as a free interaction.",
+      "request": "A gloved hand instantly pulls a large wrench from one overfilled rugged backpack.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · fast overloaded backpack",
+          "src": "candidates/batch-60/pakowanie.png",
+          "note": "A gloved hand instantly pulls a large wrench from one overfilled rugged backpack."
+        }
+      ]
+    },
+    {
+      "id": "batch60-patriota",
+      "name": "Patriota",
+      "tier": "Batch 60 · Sztuczka",
+      "context": "The character improves one attribute and gains another feature from their origin list.",
+      "request": "A weathered survivor presses one hand to a battered regional flag patch and receives one additional skill token.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · additional origin feature",
+          "src": "candidates/batch-60/patriota.png",
+          "note": "A weathered survivor presses one hand to a battered regional flag patch and receives one additional skill token."
+        }
+      ]
+    },
+    {
+      "id": "batch60-wierze",
+      "name": "Wierzę",
+      "tier": "Batch 60 · Salt Lake City origin feature",
+      "context": "Once per long rest, the player invents one small inexpensive object that the GM introduces into play.",
+      "request": "A desperate survivor believes in one practical canteen appearing above an empty palm.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · believed-in useful object",
+          "src": "candidates/batch-60/wierze.png",
+          "note": "A desperate survivor believes in one practical canteen appearing above an empty palm."
+        }
+      ]
+    },
+    {
+      "id": "batch60-wychuchana-spluwa",
+      "name": "Wychuchana spluwa",
+      "tier": "Batch 60 · Appalachia origin feature",
+      "context": "One chosen firearm never jams and can be changed after a long rest.",
+      "request": "Two careful hands meticulously clean the open action of one battered pistol.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · meticulously maintained gun",
+          "src": "candidates/batch-60/wychuchana_spluwa.png",
+          "note": "Two careful hands meticulously clean the open action of one battered pistol."
+        }
+      ]
+    },
+    {
+      "id": "batch60-zawziety-sukinkot",
+      "name": "Zawzięty sukinkot",
+      "tier": "Batch 60 · Southern Hegemony origin feature",
+      "context": "Once per long rest, after dropping to zero hit points the character rises with one hit point on the next turn.",
+      "request": "One badly wounded adult pushes up from the ground beneath one thick upward arrow.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · defiant return from zero",
+          "src": "candidates/batch-60/zawziety_sukinkot.png",
+          "note": "One badly wounded adult pushes up from the ground beneath one thick upward arrow."
+        }
+      ]
+    },
+    {
+      "id": "batch60-urodzony-morderca",
+      "name": "Urodzony morderca",
+      "tier": "Batch 60 · Southern Hegemony origin feature",
+      "context": "When a damage die rolls one, the character may reroll that die once.",
+      "request": "One brutal knife strike accompanies a one-pip damage die caught by a reroll arrow.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · damage reroll",
+          "src": "candidates/batch-60/urodzony_morderca.png",
+          "note": "One brutal knife strike accompanies a one-pip damage die caught by a reroll arrow."
+        }
+      ]
+    },
+    {
+      "id": "batch60-mlynek",
+      "name": "Młynek",
+      "tier": "Batch 60 · Piekarz ability",
+      "context": "With at least three enemies nearby, the fighter may attack every one of them with a melee weapon as a bonus action.",
+      "request": "One rugged fighter swings a steel bar through one broad circular sweep against three attackers.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · three-target melee sweep",
+          "src": "candidates/batch-60/mlynek.png",
+          "note": "One rugged fighter swings a steel bar through one broad circular sweep against three attackers."
+        }
+      ]
+    },
+    {
+      "id": "batch60-kuchenny-terror",
+      "name": "Kuchenny Terror",
+      "tier": "Batch 60 · Kucharka Irena trait",
+      "context": "Irena has advantage on Intimidation checks in her kitchen while holding a kitchen tool.",
+      "request": "One severe older cook grips a heavy cleaver in a kitchen doorway while an intruder recoils.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · intimidating kitchen defender",
+          "src": "candidates/batch-60/kuchenny_terror.png",
+          "note": "One severe older cook grips a heavy cleaver in a kitchen doorway while an intruder recoils."
+        }
+      ]
+    },
+    {
+      "id": "batch60-logika-roznoboczna",
+      "name": "Logika Różnoboczna",
+      "tier": "Batch 60 · Pitagoras trait",
+      "context": "Pitagoras deals extra weapon damage with advantage or while an active ally stands beside the target.",
+      "request": "A tactical fighter strikes from a scalene triangular barrier while one ally holds the opposite corner.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · triangular flanking attack",
+          "src": "candidates/batch-60/logika_roznoboczna.png",
+          "note": "A tactical fighter strikes from a scalene triangular barrier while one ally holds the opposite corner."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,456 @@
+{
+  "title": "Batch 56 · 27 awaiting GM review",
+  "updated": "2026-10-08",
+  "items": [
+    {
+      "id": "batch54-ucieczka",
+      "candidates": [
+        {
+          "id": "batch56-revision",
+          "label": "Revision C · aligned broken circle",
+          "src": "candidates/batch-56/ucieczka_revision_c.png",
+          "note": "All three arc segments now follow one circular circumference around the escaping figure."
+        }
+      ]
+    },
+    {
+      "id": "batch54-kuloodporny",
+      "candidates": [
+        {
+          "id": "batch56-revision",
+          "label": "Revision C · hostile eyes and staggered bullets",
+          "src": "candidates/batch-56/kuloodporny_revision_c.png",
+          "note": "Mean eyes peer over the plate while the middle of three bullets is visibly staggered."
+        }
+      ]
+    },
+    {
+      "id": "batch55-porywacz",
+      "candidates": [
+        {
+          "id": "batch56-revision",
+          "label": "Revision B · readable captive anatomy",
+          "src": "candidates/batch-56/porywacz_revision_b.png",
+          "note": "The captive has a distinct head, torso, two arms and two legs inside the chassis cage."
+        }
+      ]
+    },
+    {
+      "id": "batch55-paraliz-umyslu",
+      "candidates": [
+        {
+          "id": "batch56-revision",
+          "label": "Revision B · floating psychic vice",
+          "src": "candidates/batch-56/paraliz_umyslu_revision_b.png",
+          "note": "A large mechanical vice clamps the head between four psychic rays."
+        }
+      ]
+    },
+    {
+      "id": "batch55-tarcza-umyslu",
+      "candidates": [
+        {
+          "id": "batch56-revision",
+          "label": "Revision B · visibly reflected waves",
+          "src": "candidates/batch-56/tarcza_umyslu_revision_b.png",
+          "note": "Two incoming waves strike the shield and bend sharply backward at clear impact points."
+        }
+      ]
+    },
+    {
+      "id": "batch55-stratowanie",
+      "candidates": [
+        {
+          "id": "batch56-revision",
+          "label": "Revision B · advancing insect legs",
+          "src": "candidates/batch-56/stratowanie_revision_b.png",
+          "note": "Three articulated robotic insect legs advance toward one recoiling human."
+        }
+      ]
+    },
+    {
+      "id": "batch55-wszedolaz",
+      "candidates": [
+        {
+          "id": "batch56-revision",
+          "label": "Revision B · cyborg tracked chassis",
+          "src": "candidates/batch-56/wszedolaz_revision_b.png",
+          "note": "The turret is replaced by a cyborg human torso integrated into the all-terrain chassis."
+        }
+      ]
+    },
+    {
+      "id": "batch55-zadymienie",
+      "candidates": [
+        {
+          "id": "batch56-revision",
+          "label": "Revision B · cyborg in smoke",
+          "src": "candidates/batch-56/zadymienie_revision_b.png",
+          "note": "A cyborg torso rises from the tracked chassis while dense smoke conceals the machine."
+        }
+      ]
+    },
+    {
+      "id": "batch55-zamarcie",
+      "candidates": [
+        {
+          "id": "batch56-revision",
+          "label": "Revision B · human and insectoid stare",
+          "src": "candidates/batch-56/zamarcie_revision_b.png",
+          "note": "A tense close-up puts the human and insectoid eyes directly opposite one another."
+        }
+      ]
+    },
+    {
+      "id": "batch55-zamaszysty-atak",
+      "candidates": [
+        {
+          "id": "batch56-revision",
+          "label": "Revision B · cleaned sweeping paw",
+          "src": "candidates/batch-56/zamaszysty_atak_revision_b.png",
+          "note": "Preserves the selected sweeping paw and three targets without the stray rectangle."
+        }
+      ]
+    },
+    {
+      "id": "batch56-paralizujacy-bol",
+      "name": "Paraliżujący ból",
+      "tier": "Batch 56 · Generation IV Mesmerist action",
+      "context": "The Mesmerist inflicts psychic pain that deals damage and briefly paralyses a target. The actor item uses the generic upgrade placeholder.",
+      "request": "One rigid upper body twisted by pain, with one psychic spike at each temple and exactly three pain rays.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · psychic pain",
+          "src": "candidates/batch-56/paralizujacy_bol.png",
+          "note": "Two temple spikes and three large rays show incapacitating psychic pain."
+        }
+      ]
+    },
+    {
+      "id": "batch56-parowanie",
+      "name": "Parowanie",
+      "tier": "Batch 56 · Gladiator reaction",
+      "context": "The Gladiator raises its hit difficulty against one incoming melee attack. The actor item uses the generic upgrade placeholder.",
+      "request": "One battered short blade intercepting one incoming heavy weapon at an X-shaped impact point with three sparks.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · intercepted strike",
+          "src": "candidates/batch-56/parowanie.png",
+          "note": "The crossed weapons and single impact point read clearly as a parry."
+        }
+      ]
+    },
+    {
+      "id": "batch56-pikowanie",
+      "name": "Pikowanie",
+      "tier": "Batch 56 · Harpy trait",
+      "context": "A Harpy gains an advantage and extra damage after a steep vertical dive that can knock a target prone. The actor item uses the generic upgrade placeholder.",
+      "request": "One gaunt mutant harpy diving steeply toward one prone target, wings swept back and one downward arc.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · diving harpy",
+          "src": "candidates/batch-56/pikowanie.png",
+          "note": "The swept wings and steep arc show a high-speed diving attack."
+        }
+      ]
+    },
+    {
+      "id": "batch56-poddaj-sie",
+      "name": "Poddaj się!",
+      "tier": "Batch 56 · Sheriff bonus action",
+      "context": "The Sheriff orders nearby humans to drop their weapons and become frightened. The actor item uses the generic upgrade placeholder or portrait.",
+      "request": "One stern sheriff points while exactly three opponents raise their hands and drop three separate weapons.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · commanded surrender",
+          "src": "candidates/batch-56/poddaj_sie.png",
+          "note": "Three opponents visibly surrender and drop their weapons under the sheriff’s command."
+        }
+      ]
+    },
+    {
+      "id": "batch56-poklon-sie",
+      "name": "Pokłoń się!",
+      "tier": "Batch 56 · Generation IV Mesmerist legendary action",
+      "context": "The Mesmerist psychically forces a target onto its knees. The actor item uses the generic upgrade placeholder.",
+      "request": "One large psychic hand pressing down above one human forced onto both knees, with exactly two force bars.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · forced kneeling",
+          "src": "candidates/batch-56/poklon_sie.png",
+          "note": "The downward hand and two force bars visibly compel the victim to kneel."
+        }
+      ]
+    },
+    {
+      "id": "batch56-pokrycie-maskujace",
+      "name": "Pokrycie maskujące",
+      "tier": "Batch 56 · Spider machine trait",
+      "context": "The Spider machine changes colour to blend into its surroundings and becomes harder to notice without thermal vision. The actor item uses the generic upgrade placeholder.",
+      "request": "One angular spider-machine split into three broad camouflage patches matching three simple background shapes.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · camouflaged spider machine",
+          "src": "candidates/batch-56/pokrycie_maskujace.png",
+          "note": "The machine silhouette breaks into broad patches against a sparse ruined environment."
+        }
+      ]
+    },
+    {
+      "id": "batch56-posilki",
+      "name": "Posiłki (2/dzień)",
+      "tier": "Batch 56 · Generation IV Mesmerist action",
+      "context": "The Mesmerist calls Moloch reinforcements that arrive after several rounds. The actor item uses the generic upgrade placeholder.",
+      "request": "One implanted psychic head emits two radio arcs toward an incoming group of exactly three machines.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · machine reinforcements",
+          "src": "candidates/batch-56/posilki.png",
+          "note": "Two transmission arcs summon a compact group of three distinct machine silhouettes."
+        }
+      ]
+    },
+    {
+      "id": "batch56-potega-tlumu",
+      "name": "Potęga tłumu",
+      "tier": "Batch 56 · Civilian trait",
+      "context": "A civilian fighting as part of a crowd of at least thirty people gains an attack advantage. The actor item uses the generic upgrade placeholder or portrait.",
+      "request": "One raised fist in front of exactly six packed human heads and shoulders.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · strength of the crowd",
+          "src": "candidates/batch-56/potega_tlumu.png",
+          "note": "A dominant fist rises from a dense, readable group silhouette."
+        }
+      ]
+    },
+    {
+      "id": "batch56-pulp-fiction",
+      "name": "Pulp Fiction",
+      "tier": "Batch 56 · Trigger Man trait",
+      "context": "The Trigger Man can fire a pistol one-handed without suffering the usual attack penalty. The actor item uses the generic upgrade placeholder or portrait.",
+      "request": "One hard-bitten gunslinger firing exactly two pistols in opposite directions with two muzzle flashes.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · two-pistol gunfighter",
+          "src": "candidates/batch-56/pulp_fiction.png",
+          "note": "The broad gunfighter silhouette and opposite shots communicate confident one-handed fire."
+        }
+      ]
+    },
+    {
+      "id": "batch56-rzut",
+      "name": "Rzut",
+      "tier": "Batch 56 · Korzec bonus action",
+      "context": "Korzec throws a grappled victim into the nearest tree or rock, dealing heavy damage and knocking it prone. The actor item uses the generic upgrade placeholder.",
+      "request": "One massive mutant throws one smaller human along one curved trajectory into a single rock wall.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · victim thrown into wall",
+          "src": "candidates/batch-56/rzut.png",
+          "note": "The size contrast and impact arc make the violent throw immediate."
+        }
+      ]
+    },
+    {
+      "id": "batch56-slaby-punkt",
+      "name": "Słaby punkt",
+      "tier": "Batch 56 · Juggernaut trait",
+      "context": "Juggernaut’s exposed human head lacks the damage resistance of its machine body. The actor item uses the generic upgrade placeholder.",
+      "request": "One cyborg human head integrated into armor with one crosshair centered on the exposed temple.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · exposed cyborg head",
+          "src": "candidates/batch-56/slaby_punkt.png",
+          "note": "A single target reticle identifies the vulnerable human part of the machine."
+        }
+      ]
+    },
+    {
+      "id": "batch56-spawanie",
+      "name": "Spawanie",
+      "tier": "Batch 56 · Welder machine action",
+      "context": "The Welder restores endurance to an adjacent machine. The actor item uses the generic upgrade placeholder.",
+      "request": "One industrial welding arm repairs a cracked machine plate with three sparks and one bead line.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · machine repair weld",
+          "src": "candidates/batch-56/spawanie.png",
+          "note": "A heavy welding arm visibly closes a crack in machine plating."
+        }
+      ]
+    },
+    {
+      "id": "batch56-stabilizator",
+      "name": "Stabilizator",
+      "tier": "Batch 56 · Gladiator trait",
+      "context": "The Gladiator cannot be knocked prone and has an advantage on Acrobatics checks. The actor item uses the generic upgrade placeholder.",
+      "request": "One heavy robotic lower body with two braced legs and one central hydraulic stabilizer foot.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · hydraulic bracing",
+          "src": "candidates/batch-56/stabilizator.png",
+          "note": "Two planted legs and a central ram form a stable three-point stance."
+        }
+      ]
+    },
+    {
+      "id": "batch56-szosty-zmysl",
+      "name": "Szósty zmysł",
+      "tier": "Batch 56 · Gangus Boss trait",
+      "context": "The gang boss has an advantage on Dexterity saving throws through an uncanny danger sense. The actor item uses the generic upgrade placeholder or portrait.",
+      "request": "One alert head in profile with one large eye at the back of the skull and two warning rays approaching from behind.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · danger sensed behind",
+          "src": "candidates/batch-56/szosty_zmysl.png",
+          "note": "The rear-facing eye and warning rays show awareness of unseen danger."
+        }
+      ]
+    },
+    {
+      "id": "batch56-szybkie-palce",
+      "name": "Szybkie palce",
+      "tier": "Batch 56 · Outpost Soldier bonus action",
+      "context": "The soldier rapidly replaces an empty magazine or clears a weapon jam. The actor item uses the generic upgrade placeholder.",
+      "request": "Two large hands rapidly swapping one pistol magazine with exactly three speed bars.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · rapid magazine change",
+          "src": "candidates/batch-56/szybkie_palce.png",
+          "note": "The hands, pistol and three bars show a fast reload without tiny loose ammunition."
+        }
+      ]
+    },
+    {
+      "id": "batch56-taktyka",
+      "name": "Taktyka",
+      "tier": "Batch 56 · Outpost Soldier trait",
+      "context": "The soldier gains hit difficulty while fighting close beside a conscious ally. The actor item uses the generic upgrade placeholder.",
+      "request": "Exactly two armed fighters back-to-back beneath one interlocking shield with one small plus sign between them.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · back-to-back defense",
+          "src": "candidates/batch-56/taktyka.png",
+          "note": "Two allies share one defensive shape and a compact cooperation symbol."
+        }
+      ]
+    },
+    {
+      "id": "batch56-tylko-drasniecie",
+      "name": "Tylko draśnięcie",
+      "tier": "Batch 56 · Trigger Man reaction",
+      "context": "The Trigger Man halves damage from an incoming attack. The actor item uses the generic upgrade placeholder or portrait.",
+      "request": "One defiant gunslinger remains upright as one bullet grazes a shallow notch across the shoulder.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg placeholder",
+        "note": "Generic placeholder does not describe this ability."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · shoulder graze",
+          "src": "candidates/batch-56/tylko_drasniecie.png",
+          "note": "A single glancing wound reads as reduced rather than ignored damage."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+[
+  {
+    "position": 1,
+    "row": 1,
+    "column": 1,
+    "itemId": "batch54-sciana-zaru",
+    "name": "Ściana żaru",
+    "candidateId": "atlas-c",
+    "approvedAt": "2026-10-08T17:12:41.359Z"
+  },
+  {
+    "position": 2,
+    "row": 1,
+    "column": 2,
+    "itemId": "batch54-szum-mentalny",
+    "name": "Szum mentalny",
+    "candidateId": "atlas-c",
+    "approvedAt": "2026-10-08T17:12:26.050Z"
+  },
+  {
+    "position": 3,
+    "row": 1,
+    "column": 3,
+    "itemId": "batch54-przejechanie",
+    "name": "Przejechanie",
+    "candidateId": "atlas-c",
+    "approvedAt": "2026-10-08T17:10:44.075Z"
+  },
+  {
+    "position": 4,
+    "row": 1,
+    "column": 4,
+    "itemId": "batch54-oblazenie",
+    "name": "Obłażenie",
+    "candidateId": "atlas-c",
+    "approvedAt": "2026-10-08T17:08:44.452Z"
+  },
+  {
+    "position": 5,
+    "row": 1,
+    "column": 5,
+    "itemId": "batch54-malo-zwrotny",
+    "name": "Mało zwrotny",
+    "candidateId": "atlas-b",
+    "approvedAt": "2026-10-08T17:07:42.098Z"
+  },
+  {
+    "position": 6,
+    "row": 2,
+    "column": 1,
+    "itemId": "batch54-malutki",
+    "name": "Malutki",
+    "candidateId": "atlas-b",
+    "approvedAt": "2026-10-08T17:07:34.027Z"
+  },
+  {
+    "position": 7,
+    "row": 2,
+    "column": 2,
+    "itemId": "batch54-legendarna-odpornosc",
+    "name": "Legendarna odporność (3/dzień)",
+    "candidateId": "atlas-b",
+    "approvedAt": "2026-10-08T17:07:27.282Z"
+  },
+  {
+    "position": 8,
+    "row": 2,
+    "column": 3,
+    "itemId": "batch54-kontakt-molocha",
+    "name": "Kontakt Molocha",
+    "candidateId": "atlas-b",
+    "approvedAt": "2026-10-08T17:06:36.358Z"
+  },
+  {
+    "position": 9,
+    "row": 2,
+    "column": 4,
+    "itemId": "batch54-iluzoryczna-niewidzialnosc",
+    "name": "Iluzoryczna niewidzialność",
+    "candidateId": "atlas-b",
+    "approvedAt": "2026-10-08T17:05:40.748Z"
+  },
+  {
+    "position": 10,
+    "row": 2,
+    "column": 5,
+    "itemId": "batch54-czaszkohelm",
+    "name": "Czaszkohełm",
+    "candidateId": "atlas-b",
+    "approvedAt": "2026-10-08T17:05:25.271Z"
+  },
+  {
+    "position": 11,
+    "row": 3,
+    "column": 1,
+    "itemId": "batch54-chwytak",
+    "name": "Chwytak",
+    "candidateId": "atlas-a",
+    "approvedAt": "2026-10-08T17:05:23.887Z"
+  },
+  {
+    "position": 12,
+    "row": 3,
+    "column": 2,
+    "itemId": "batch54-agresja",
+    "name": "Agresja",
+    "candidateId": "atlas-a",
+    "approvedAt": "2026-10-08T17:04:51.542Z"
+  },
+  {
+    "position": 13,
+    "row": 3,
+    "column": 3,
+    "itemId": "batch54-manewry",
+    "name": "Manewry",
+    "candidateId": "atlas-a",
+    "approvedAt": "2026-10-08T17:04:45.646Z"
+  },
+  {
+    "position": 14,
+    "row": 3,
+    "column": 4,
+    "itemId": "batch51-kolec-jadowy",
+    "name": "Kolec jadowy",
+    "candidateId": "batch54-revision",
+    "approvedAt": "2026-10-08T17:04:35.699Z"
+  },
+  {
+    "position": 15,
+    "row": 3,
+    "column": 5,
+    "itemId": "batch53-szarza",
+    "name": "SzarÅ¼a",
+    "candidateId": "batch54-revision",
+    "approvedAt": "2026-10-08T00:01:21.928Z"
+  },
+  {
+    "position": 16,
+    "row": 4,
+    "column": 1,
+    "itemId": "batch53-nadludzki-refleks",
+    "name": "Nadludzki refleks",
+    "candidateId": "batch54-revision",
+    "approvedAt": "2026-10-08T00:01:16.037Z"
+  },
+  {
+    "position": 17,
+    "row": 4,
+    "column": 2,
+    "itemId": "batch53-kamuflaz",
+    "name": "KamuflaÅ¼",
+    "candidateId": "atlas-b",
+    "approvedAt": "2026-10-08T00:01:11.778Z"
+  },
+  {
+    "position": 18,
+    "row": 4,
+    "column": 3,
+    "itemId": "batch53-regeneracja",
+    "name": "Regeneracja",
+    "candidateId": "batch54-revision",
+    "approvedAt": "2026-10-08T00:01:04.765Z"
+  },
+  {
+    "position": 19,
+    "row": 4,
+    "column": 4,
+    "itemId": "batch53-groza",
+    "name": "Groza",
+    "candidateId": "atlas-c",
+    "approvedAt": "2026-10-07T23:23:29.945Z"
+  },
+  {
+    "position": 20,
+    "row": 4,
+    "column": 5,
+    "itemId": "batch53-oplatanie",
+    "name": "OplÄ…tanie",
+    "candidateId": "atlas-c",
+    "approvedAt": "2026-10-07T23:23:17.022Z"
+  },
+  {
+    "position": 21,
+    "row": 5,
+    "column": 1,
+    "itemId": "batch53-tkacz-sieci",
+    "name": "Tkacz sieci",
+    "candidateId": "atlas-c",
+    "approvedAt": "2026-10-07T23:23:11.048Z"
+  },
+  {
+    "position": 22,
+    "row": 5,
+    "column": 2,
+    "itemId": "batch53-pajecza-wspinaczka",
+    "name": "PajÄ™cza wspinaczka",
+    "candidateId": "atlas-c",
+    "approvedAt": "2026-10-07T23:23:06.380Z"
+  },
+  {
+    "position": 23,
+    "row": 5,
+    "column": 3,
+    "itemId": "batch53-neozmysly",
+    "name": "NeozmysÅ‚y",
+    "candidateId": "atlas-c",
+    "approvedAt": "2026-10-07T23:22:56.526Z"
+  },
+  {
+    "position": 24,
+    "row": 5,
+    "column": 4,
+    "itemId": "batch53-telepatia",
+    "name": "Telepatia",
+    "candidateId": "atlas-c",
+    "approvedAt": "2026-10-07T23:22:52.177Z"
+  },
+  {
+    "position": 25,
+    "row": 5,
+    "column": 5,
+    "itemId": "batch53-niewykrywalnosc",
+    "name": "NiewykrywalnoÅ›Ä‡",
+    "candidateId": "atlas-c",
+    "approvedAt": "2026-10-07T23:22:48.471Z"
+  }
+]

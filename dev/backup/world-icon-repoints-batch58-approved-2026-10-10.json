@@ -1,0 +1,979 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.c6NxSwv3O3TcepJE",
+      "name": "BIT-BOYS (aka CROATS)",
+      "items": [
+        {
+          "_id": "nmfdVa5UpRkDdZFC",
+          "name": "Unieruchomienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/unieruchomienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.D1MqhEEM3qJY5lpR",
+      "name": "CYNGIEL",
+      "items": [
+        {
+          "_id": "69k60S4rfGg0LdFv",
+          "name": "Bolesny atak",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/bolesny-atak.svg"
+        },
+        {
+          "_id": "G1pWNTTZokf74lec",
+          "name": "Celowanie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/celowanie.svg"
+        },
+        {
+          "_id": "okLpTMa6kq9OlXEu",
+          "name": "Tylko draśnięcie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tylko-drasniecie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MGI2NGYxM2IyZTll",
+      "name": "Cyngiel",
+      "items": [
+        {
+          "_id": "Yjg4MGE1MDI0MGFk",
+          "name": "Bolesny atak",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/bolesny-atak.svg"
+        },
+        {
+          "_id": "NjBlYTJkNzU1NzQy",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        },
+        {
+          "_id": "YjllNmZhYTA0NWU1",
+          "name": "Tylko draśnięcie",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tylko-drasniecie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.ZTMwZWY4ZDMyZWE4",
+      "name": "Fatima",
+      "items": [
+        {
+          "_id": "NzdmMzIwNzEyOTk0",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/054_-_Fatima/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.LmZSlovQGxy1eM6k",
+      "name": "GANGUS BOSS",
+      "items": [
+        {
+          "_id": "ewIfRKHHWFAUCgnZ",
+          "name": "Szósty zmysł",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/szosty-zmysl.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.ODgwYjNhMTQxODkw",
+      "name": "GANGUS ŻOŁNIERZ",
+      "items": [
+        {
+          "_id": "OTA1MTBhY2E5ZDQz",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/025_-_GANGUS__C5_BBO_C5_81NIERZ/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.YzQzNWUyMzU3YzEz",
+      "name": "GANGUS ŻOŁNIERZ KARABIN",
+      "items": [
+        {
+          "_id": "NzIwNjE5ZGIwZTc1",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/032_-_GANGUS__C5_BBO_C5_81NIERZ_KARABIN/avatar.jpg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.rTJw3ocQiztVCBY7",
+      "name": "GENERACJA IV. MESMERYTA",
+      "items": [
+        {
+          "_id": "oW8cx3HqZl8Yb6qW",
+          "name": "Tarcza umysłu",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tarcza-umyslu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.r7HDvI7hurbwC4YI",
+      "name": "GIGAMUT",
+      "items": [
+        {
+          "_id": "Be8d5O8ZZ1CRwGT7",
+          "name": "Udźwig",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/udzwig.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.BfwMMnZyyOp4ErKQ",
+      "name": "GLADIATOR",
+      "items": [
+        {
+          "_id": "vynkkgGh3LQdy59X",
+          "name": "Różnorodne ataki",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/roznorodne-ataki.svg"
+        },
+        {
+          "_id": "D2cdUgogV7bItmUc",
+          "name": "Wirujące kiścienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wirujace-kiscienie.svg"
+        },
+        {
+          "_id": "Pr88Y3cwzAg3ZF6z",
+          "name": "Tańczące piły",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tanczace-pily.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MjBkYmViOTMxN2Q2",
+      "name": "Jason",
+      "items": [
+        {
+          "_id": "MTliYTNmZGEwNjNj",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/046_-_Jason/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.rF8TCCELmUMdIDJ9",
+      "name": "KOŃ (SKAŻONY)",
+      "items": [
+        {
+          "_id": "PRii5yRPofLAU9Ir",
+          "name": "Odporny",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/odporny.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.M2U4NGQ5YzgwZDYz",
+      "name": "Karambol",
+      "items": [
+        {
+          "_id": "YWRkYWNjZTNkMjQy",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/063_-_Karambol/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "NjYxMzJlODc0NTM3",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.50qspF0fBTnthKjN",
+      "name": "NEOKOT",
+      "items": [
+        {
+          "_id": "4mw7cNaGN1M1kLCd",
+          "name": "Skoczek",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/skoczek.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.1vpt0f4JRB6nov9d",
+      "name": "PAJĄK",
+      "items": [
+        {
+          "_id": "eMrf0xBztOxKbfDc",
+          "name": "Zasadzka",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zasadzka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.LP16Iu6aaNkn0Azd",
+      "name": "PIES MUTEK",
+      "items": [
+        {
+          "_id": "kTreTV1NC6zwJfZR",
+          "name": "Szarpanie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/szarpanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.V17hzI9yQN34tA06",
+      "name": "PULSER",
+      "items": [
+        {
+          "_id": "6ya9P1NAvEeDfHlL",
+          "name": "Przyspieszenie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/przyspieszenie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.N2E4NTliODA5YjU3",
+      "name": "Pająk",
+      "items": [
+        {
+          "_id": "NzEyZTFkZDA0MjYz",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.Zjk0MWY2ODc3OTk1",
+      "name": "Pustak",
+      "items": [
+        {
+          "_id": "MzVkYmYzYmQ2MDEz",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/062_-_Pustak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.iEtm6diLHCu1QJkw",
+      "name": "SPAWACZ",
+      "items": [
+        {
+          "_id": "3Fgxh3AWdaBSK0NT",
+          "name": "Naprawianie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/naprawianie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.7odbYt1meXScvBWR",
+      "name": "SZCZĘKOWIJ",
+      "items": [
+        {
+          "_id": "C66S5ukzjYjn0EXj",
+          "name": "Zasadzka",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zasadzka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MzViZDIyN2U4YmY4",
+      "name": "Skowyt",
+      "items": [
+        {
+          "_id": "OTQwNjJmNWY3YjFk",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/052_-_Skowyt/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MGFiZGQ2NzE5OWNh",
+      "name": "Spawacz",
+      "items": [
+        {
+          "_id": "ZDRhNGY1YmQwZGVj",
+          "name": "Naprawianie",
+          "before": "worlds/OUTPUT/characters/013_-_Spawacz/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/naprawianie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.IEH5knp5uVwhBr9i",
+      "name": "ŁOWCA",
+      "items": [
+        {
+          "_id": "QRKaXNUhTh9VzbY4",
+          "name": "Skok łowcy",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/skok-lowcy.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.bYos8iRtgi5PHjX4",
+      "name": "ŻOŁNIERZ POSTERUNKU",
+      "items": [
+        {
+          "_id": "P8YAa9WLv3OY4XMn",
+          "name": "Wróg Molocha",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wrog-molocha.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.YmRjMzU5ZDY3ZGJk.Actor.Zjk0MWY2ODc3OTk1",
+      "name": "Pustak",
+      "items": [
+        {
+          "_id": "MzVkYmYzYmQ2MDEz",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/062_-_Pustak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.ZjQ3MjZiYzgxOGMx.Actor.MGI2NGYxM2IyZTll",
+      "name": "Cyngiel",
+      "items": [
+        {
+          "_id": "Yjg4MGE1MDI0MGFk",
+          "name": "Bolesny atak",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/bolesny-atak.svg"
+        },
+        {
+          "_id": "NjBlYTJkNzU1NzQy",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        },
+        {
+          "_id": "YjllNmZhYTA0NWU1",
+          "name": "Tylko draśnięcie",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tylko-drasniecie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.NTMwZDhiYTczZGY2.Actor.MGI2NGYxM2IyZTll",
+      "name": "Cyngiel",
+      "items": [
+        {
+          "_id": "Yjg4MGE1MDI0MGFk",
+          "name": "Bolesny atak",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/bolesny-atak.svg"
+        },
+        {
+          "_id": "NjBlYTJkNzU1NzQy",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        },
+        {
+          "_id": "YjllNmZhYTA0NWU1",
+          "name": "Tylko draśnięcie",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tylko-drasniecie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ZTNhODA0Y2YyYTZj.Token.Zjc4NTlmYzQwZThi.Actor.MzViZDIyN2U4YmY4",
+      "name": "Skowyt",
+      "items": [
+        {
+          "_id": "OTQwNjJmNWY3YjFk",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/052_-_Skowyt/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ZTNhODA0Y2YyYTZj.Token.ODE2MjViNTlkZWZj.Actor.ODgwYjNhMTQxODkw",
+      "name": "GANGUS ŻOŁNIERZ",
+      "items": [
+        {
+          "_id": "OTA1MTBhY2E5ZDQz",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/025_-_GANGUS__C5_BBO_C5_81NIERZ/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ODAxZTdmOGIwZjc0.Token.YTA1ZDdiNmZiY2Yw.Actor.ODgwYjNhMTQxODkw",
+      "name": "GANGUS ŻOŁNIERZ",
+      "items": [
+        {
+          "_id": "OTA1MTBhY2E5ZDQz",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/025_-_GANGUS__C5_BBO_C5_81NIERZ/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ODAxZTdmOGIwZjc0.Token.YjNkNjY1YTg3ZTBk.Actor.MzViZDIyN2U4YmY4",
+      "name": "Skowyt",
+      "items": [
+        {
+          "_id": "OTQwNjJmNWY3YjFk",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/052_-_Skowyt/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.YTA1ZTMwMzhkODVl.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "NjYxMzJlODc0NTM3",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.YTExY2QwMmNhYzlm.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "NjYxMzJlODc0NTM3",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.MjMwN2FhODdjYjdl.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "NjYxMzJlODc0NTM3",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NmY1NWM5ODk4NDg2.Token.NTQxNDJlM2U5N2M4.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "NjYxMzJlODc0NTM3",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NmY1NWM5ODk4NDg2.Token.NTRhMWQwMWVjZDU1.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "NjYxMzJlODc0NTM3",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NmY1NWM5ODk4NDg2.Token.ZGQxMDkwZWZmNGI3.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "NjYxMzJlODc0NTM3",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDViNjU5MWYxOGQ1.Token.OTg2ZmRlMThjOTU0.Actor.MGFiZGQ2NzE5OWNh",
+      "name": "Spawacz",
+      "items": [
+        {
+          "_id": "ZDRhNGY1YmQwZGVj",
+          "name": "Naprawianie",
+          "before": "worlds/OUTPUT/characters/013_-_Spawacz/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/naprawianie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.YjMwZWQ3YzcxOWI5.Actor.MGFiZGQ2NzE5OWNh",
+      "name": "Spawacz",
+      "items": [
+        {
+          "_id": "ZDRhNGY1YmQwZGVj",
+          "name": "Naprawianie",
+          "before": "worlds/OUTPUT/characters/013_-_Spawacz/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/naprawianie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YWM1NGRiMjE5NTg4.Token.N2RiNTlmMTgyODY5.Actor.N2E4NTliODA5YjU3",
+      "name": "Pająk",
+      "items": [
+        {
+          "_id": "NzEyZTFkZDA0MjYz",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.NzhmMjI2NDU3OWVl.Actor.N2E4NTliODA5YjU3",
+      "name": "Pająk",
+      "items": [
+        {
+          "_id": "NzEyZTFkZDA0MjYz",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.NmQxYzI4Yzg0YmIx.Actor.N2E4NTliODA5YjU3",
+      "name": "Pająk",
+      "items": [
+        {
+          "_id": "NzEyZTFkZDA0MjYz",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.ODZmZGRjOTAzNTQ4.Actor.N2E4NTliODA5YjU3",
+      "name": "Pająk",
+      "items": [
+        {
+          "_id": "NzEyZTFkZDA0MjYz",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.MjUxODY3MjYyZThk.Actor.Zjk0MWY2ODc3OTk1",
+      "name": "Pustak",
+      "items": [
+        {
+          "_id": "MzVkYmYzYmQ2MDEz",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/062_-_Pustak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.OThhOTIwNjk2MTJm.Actor.M2U4NGQ5YzgwZDYz",
+      "name": "Karambol",
+      "items": [
+        {
+          "_id": "YWRkYWNjZTNkMjQy",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/063_-_Karambol/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.armqkHXsloMxeKCW.Actor.ZTMwZWY4ZDMyZWE4",
+      "name": "Fatima",
+      "items": [
+        {
+          "_id": "NzdmMzIwNzEyOTk0",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/054_-_Fatima/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.OjNMvtMvkQ9Irvs9.Actor.YzQzNWUyMzU3YzEz",
+      "name": "GANGUS ŻOŁNIERZ",
+      "items": [
+        {
+          "_id": "NzIwNjE5ZGIwZTc1",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/032_-_GANGUS__C5_BBO_C5_81NIERZ_KARABIN/avatar.jpg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.kLCcxEBOPqP7gAe5.Actor.MjBkYmViOTMxN2Q2",
+      "name": "Jason",
+      "items": [
+        {
+          "_id": "MTliYTNmZGEwNjNj",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/046_-_Jason/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.d9859Qwqs1Vs3Uaj.Actor.M2U4NGQ5YzgwZDYz",
+      "name": "Karambol",
+      "items": [
+        {
+          "_id": "YWRkYWNjZTNkMjQy",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/063_-_Karambol/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.Gl88jK3qkPvRwaKb.Actor.ZTkyYjkzYTQ0NTQw",
+      "name": "Motocyklista",
+      "items": [
+        {
+          "_id": "NjYxMzJlODc0NTM3",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/066_-_Motocyklista/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.7WKVmjHrBj5e7qTm.Actor.Zjk0MWY2ODc3OTk1",
+      "name": "Pustak",
+      "items": [
+        {
+          "_id": "MzVkYmYzYmQ2MDEz",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/062_-_Pustak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.zEEZjkVfZSZ5c9kA.Actor.MzViZDIyN2U4YmY4",
+      "name": "Skowyt",
+      "items": [
+        {
+          "_id": "OTQwNjJmNWY3YjFk",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/052_-_Skowyt/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.tAIhJ5SdCRjU7CLW.Actor.MGI2NGYxM2IyZTll",
+      "name": "Cyngiel",
+      "items": [
+        {
+          "_id": "Yjg4MGE1MDI0MGFk",
+          "name": "Bolesny atak",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/bolesny-atak.svg"
+        },
+        {
+          "_id": "NjBlYTJkNzU1NzQy",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        },
+        {
+          "_id": "YjllNmZhYTA0NWU1",
+          "name": "Tylko draśnięcie",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tylko-drasniecie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.HOuXliAuck3t6ud7.Actor.ODgwYjNhMTQxODkw",
+      "name": "GANGUS ŻOŁNIERZ",
+      "items": [
+        {
+          "_id": "OTA1MTBhY2E5ZDQz",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/025_-_GANGUS__C5_BBO_C5_81NIERZ/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.XWqgKGANt0e8sGu9.Actor.N2E4NTliODA5YjU3",
+      "name": "Pająk",
+      "items": [
+        {
+          "_id": "NzEyZTFkZDA0MjYz",
+          "name": "Tchórzliwość",
+          "before": "worlds/OUTPUT/characters/012_-_Paj_C4_85k/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tchorzliwosc.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.oHSm5U4FSfkCvBOF.Token.ZBGr9qBCvDeCCIC2.Actor.MGFiZGQ2NzE5OWNh",
+      "name": "Spawacz",
+      "items": [
+        {
+          "_id": "ZDRhNGY1YmQwZGVj",
+          "name": "Naprawianie",
+          "before": "worlds/OUTPUT/characters/013_-_Spawacz/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/naprawianie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.y7opvixN926XdaoK.Actor.D1MqhEEM3qJY5lpR",
+      "name": "CYNGIEL",
+      "items": [
+        {
+          "_id": "69k60S4rfGg0LdFv",
+          "name": "Bolesny atak",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/bolesny-atak.svg"
+        },
+        {
+          "_id": "G1pWNTTZokf74lec",
+          "name": "Celowanie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/celowanie.svg"
+        },
+        {
+          "_id": "okLpTMa6kq9OlXEu",
+          "name": "Tylko draśnięcie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tylko-drasniecie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.ZUtGI40byucUuesP.Actor.LmZSlovQGxy1eM6k",
+      "name": "CYWIL",
+      "items": [
+        {
+          "_id": "ewIfRKHHWFAUCgnZ",
+          "name": "Szósty zmysł",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/szosty-zmysl.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.cMpfbZGUBawSzBWK.Actor.bYos8iRtgi5PHjX4",
+      "name": "ŻOŁNIERZ POSTERUNKU",
+      "items": [
+        {
+          "_id": "P8YAa9WLv3OY4XMn",
+          "name": "Wróg Molocha",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wrog-molocha.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.U6073cTZtfAsNjMf.Actor.BfwMMnZyyOp4ErKQ",
+      "name": "GLADIATOR",
+      "items": [
+        {
+          "_id": "vynkkgGh3LQdy59X",
+          "name": "Różnorodne ataki",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/roznorodne-ataki.svg"
+        },
+        {
+          "_id": "D2cdUgogV7bItmUc",
+          "name": "Wirujące kiścienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wirujace-kiscienie.svg"
+        },
+        {
+          "_id": "Pr88Y3cwzAg3ZF6z",
+          "name": "Tańczące piły",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tanczace-pily.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.bOomiyYTAB0jWv8x.Actor.IEH5knp5uVwhBr9i",
+      "name": "ŁOWCA",
+      "items": [
+        {
+          "_id": "QRKaXNUhTh9VzbY4",
+          "name": "Skok łowcy",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/skok-lowcy.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.JBjLreQNJawo6v6b.Actor.V17hzI9yQN34tA06",
+      "name": "PULSER",
+      "items": [
+        {
+          "_id": "6ya9P1NAvEeDfHlL",
+          "name": "Przyspieszenie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/przyspieszenie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.2BMdno96YjuA1itb.Actor.iEtm6diLHCu1QJkw",
+      "name": "SPAWACZ",
+      "items": [
+        {
+          "_id": "3Fgxh3AWdaBSK0NT",
+          "name": "Naprawianie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/naprawianie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.8ZMWV3UEMwxTNT03.Actor.1vpt0f4JRB6nov9d",
+      "name": "GENERACJA III. GRUBAS",
+      "items": [
+        {
+          "_id": "eMrf0xBztOxKbfDc",
+          "name": "Zasadzka",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zasadzka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.gxuXT8I72CWmqm1G.Actor.rTJw3ocQiztVCBY7",
+      "name": "GENERACJA IV. MESMERYTA",
+      "items": [
+        {
+          "_id": "oW8cx3HqZl8Yb6qW",
+          "name": "Tarcza umysłu",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/tarcza-umyslu.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.FspP2MjXP3Wqbh5p.Actor.7odbYt1meXScvBWR",
+      "name": "SZCZĘKOWIJ",
+      "items": [
+        {
+          "_id": "C66S5ukzjYjn0EXj",
+          "name": "Zasadzka",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/zasadzka.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.KI6o941mmkpaYEjt.Actor.LP16Iu6aaNkn0Azd",
+      "name": "PIES MUTEK",
+      "items": [
+        {
+          "_id": "kTreTV1NC6zwJfZR",
+          "name": "Szarpanie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/szarpanie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.fX3SGV7V4bapy7Ro.Actor.c6NxSwv3O3TcepJE",
+      "name": "BIT-BOYS (aka CROATS)",
+      "items": [
+        {
+          "_id": "nmfdVa5UpRkDdZFC",
+          "name": "Unieruchomienie",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/unieruchomienie.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.vmBbL8kfohs5WKER.Actor.r7HDvI7hurbwC4YI",
+      "name": "GIGAMUT",
+      "items": [
+        {
+          "_id": "Be8d5O8ZZ1CRwGT7",
+          "name": "Udźwig",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/udzwig.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.OtOnfFMGzXDt1CP8.Actor.rF8TCCELmUMdIDJ9",
+      "name": "GIGANTYCZNY PAJĄK",
+      "items": [
+        {
+          "_id": "PRii5yRPofLAU9Ir",
+          "name": "Odporny",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/odporny.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.PNTKfxtv9E2PzxbZ.Token.XjJyIsFkKmsNXiIr.Actor.50qspF0fBTnthKjN",
+      "name": "NEOKOT",
+      "items": [
+        {
+          "_id": "4mw7cNaGN1M1kLCd",
+          "name": "Skoczek",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/skoczek.svg"
+        }
+      ]
+    }
+  ]
+}
