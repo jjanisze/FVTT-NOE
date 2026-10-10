@@ -1,8 +1,7 @@
 # PLAN — M3: Towarzysze i drony
 
-> Status: **PROJEKT ZAMKNIĘTY** (2026-10-08; rundy trzecia–szósta i przegląd spójności 2026-10-09).
-> Decyzje MG D1–D39 (§6.1); otwartych pytań brak (§6.3).
-> Następny krok E0. Rozmiar: **L–XL** (`PLAN_beta.md` zakładał M — drony
+> Status: **WDROŻONE** (E0–E11, 2026-10-10; projekt zamknięty 2026-10-08, rundy trzecia–szósta 2026-10-09).
+> Decyzje MG D1–D39 (§6.1); rozstrzygnięcia z wdrożenia do weta MG — §11. Rozmiar: **L–XL** (`PLAN_beta.md` zakładał M — drony
 > urosły do pełnego wsparcia z trybem zdalnego sterowania, D6, a przegląd znalazł lukę M1 w RAW s. 205,
 > D3). Wywołanie: `PLAN_beta.md` M3.
 >
@@ -1423,5 +1422,14 @@ ST 15, Obezwładnienie do końca następnej tury atakującego. Quench `emiter-em
   pole `zasilanieZSieci` w danych broni; test spójności kalibrów je pomija.
 - **Grafika:** Emiter pożycza ikonę Szokera — wiersz w `dev/icons/MISSING.md` (kolejka A, następny batch); wiersze
   żetonów dronów w sekcji E odhaczone.
+
+**2026-10-10 — E11 zrobione — M3 zamknięte.** Dokumentacja wg §10: strona gracza `docs/Towarzysze-i-drony.md`
+(towarzysz, tura i Komenda, drony od budowy po naprawę, tryb zdalny, Emiter EMP; D31 — towarzysz zmarłego właściciela),
+`docs/Pierwsze-kroki.md` (towarzysz przy tworzeniu Sędziego, Łowcy, Mafiozo), `docs/Pytania-do-autora.md` (D27, D3);
+`IMPLEMENTATION.md` — macierz (towarzysze ✅, s. 205, awarie maszyn, drony w produkcji, pokrycie 32/133), tabela plików,
+lista kontrolna; `PLAN_beta.md` — M3 odhaczone z zakresem, M5 — Szukanie towarzysza (D30); `scripts/wkk/README.md` —
+pliki WKK M3 i tabela odczytów MG luk w RAW (osobno od RAI autora); `README.md` — czcionka OSD wśród zasobów o odrębnych
+warunkach. Plakietki pokrycia, `CREDITS.md`, `build-zip.mjs` i `AGENTS.md` — w etapach E8c–E10. Notatka kampanii o Evie
+(vault) — MG.
 
 *(dalej etapy dopisują tu rozstrzygnięcia z wdrożenia, jak w `PLAN_m1_walka.md` §11)*

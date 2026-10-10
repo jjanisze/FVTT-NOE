@@ -17,9 +17,13 @@
 7. [Umieranie i powrót do zdrowia](Umieranie-i-zdrowie.md) — 0 PW, karta „Umiera”, stabilizacja,
    Stopień Zranienia i jego leczenie, kalendarzyk zdrowia, pipki Wyczerpania, zagrożenia (mróz, sen,
    duszenie się).
-8. [FAQ](FAQ.md) — najczęstsze pytania.
-9. [Errata: przepisy profesji](Errata-produkcja.md) — wiersze tabel schematów Speca gorsze od
-   przepisu standardowego.
+8. [Towarzysze i drony](Towarzysze-i-drony.md) — partner, oswojone zwierzę, prawa ręka; tura i Komenda;
+   drony Hakera: budowa, kontroler, tryb zdalny z kamerą, naprawa; Emiter EMP.
+9. [FAQ](FAQ.md) — najczęstsze pytania.
+10. [Errata: przepisy profesji](Errata-produkcja.md) — wiersze tabel schematów Speca gorsze od
+    przepisu standardowego.
+11. [Pytania do autora systemu](Pytania-do-autora.md) — Emiter EMP a opancerzenie, Stopnie Zranienia
+    przeciwników.
 
 Coś jest niejasne albo brakuje strony, której szukasz? Zgłoś to jako
 [issue na GitHubie](https://github.com/jjanisze/FVTT-NOE/issues) — braki w

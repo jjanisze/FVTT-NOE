@@ -42,6 +42,10 @@ domyślnych kompendiów SRD dnd5e (te reprezentują fantasy, nie post-apo).
    zdolności regionu.
 5. Startowa **Sztuczka** (albo 50 gambli — podręcznik, *Sztuczki*): przeciągnij ją z **Neuroshima —
    Sztuczki**. Wymagania sprawdzasz sam; są wypisane na Sztuczce.
+   **Towarzysz** — Sędzia (Partner), Łowca mutantów (Oswajanie zwierząt) i Mafiozo (Moja prawa ręka) dostają
+   drugą postać: tworzy ją MG narzędziem **Nowy towarzysz** z paska towarzyszy na karcie, ludzkiego
+   towarzysza gracz kończy kreatorem. Drony Haker buduje w zakładce Produkcja. Szczegóły:
+   [Towarzysze i drony](Towarzysze-i-drony.md).
 6. Dobierz ekwipunek z kompendiów broni/pancerzy/narzędzi.
 7. Amunicję, magazynki, materiały wybuchowe, leki, prowiant i surowce dodajesz w zakładce
    **Zasoby** — każdy panel ma na dole przycisk **DODAJ …** (cennik z podręcznika, ilość, cena

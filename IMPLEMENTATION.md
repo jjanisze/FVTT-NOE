@@ -27,7 +27,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | Pechowa jedynka: zacięcie, degradacja broni białej | ✅ | `weapons/jams.mjs`, `melee-degradation.mjs` |
 | | Stopień Zranienia, Ostatnia akcja, Nokautowanie, stany | ✅ | `combat/zranienie.mjs`, `knockout.mjs`, `config/conditions.mjs`. Stany atakującego i celu w Teście Ataku i automatyczne TK ≤ 1,5 m — silnik okoliczności ataku (`config/okolicznosci-ataku.mjs`, `combat/okolicznosci.mjs`, M1 E3); Nieprzytomność z 0 PW kończy się przy leczeniu (E1) |
 | | Neutralizacja Stopnia Zranienia (Regeneracja, Pomoc medyczna), kalendarzyk zdrowia | ✅ | `actors/rekonwalescencja.mjs`, `config/rekonwalescencja-rules.mjs` — jedna droga na każdy DO (Gojenie / Pomoc medyczna / samoleczenie WKK) w oknie Długiego odpoczynku, karta RO dla właściciela, przerzut przelicza werdykt; kalendarzyk z panelu Stan. Wyczerpanie: reguły zdejmowania, kolejność DO, uporczywe w ramce — `PLAN_m1_walka.md` E5–E6, e2e `rekonwalescencja` (NOE i WKK), `docs/Umieranie-i-zdrowie.md` |
-| | Rzuty przeciw śmierci przy obrażeniach na 0 PW, Olbrzymie obrażenia (2× maks. PW), stabilizacja | ✅ | `combat/umieranie.mjs`, `config/umieranie-rules.mjs`, `items/staza.mjs` — porażki przy 0 PW (wręcz: 2), czysta k20, karty „Umiera” / „Śmierć” (potwierdza MG) / „BN pada”, stabilizacja (Medycyna, mały medyk, staza, trzy sukcesy), 1 PW po 1k8 h na zegarze świata, DO przy 0 PW odmówiony — `PLAN_m1_walka.md` E1–E2, e2e `umieranie` |
+| | Rzuty przeciw śmierci przy obrażeniach na 0 PW, Olbrzymie obrażenia (2× maks. PW), stabilizacja | ✅ | `combat/umieranie.mjs`, `config/umieranie-rules.mjs`, `items/staza.mjs` — porażki przy 0 PW (wręcz: 2), czysta k20, karty „Umiera” / „Śmierć” (potwierdza MG) / „BN pada”, stabilizacja (Medycyna, mały medyk, staza, trzy sukcesy), 1 PW po 1k8 h na zegarze świata, DO przy 0 PW odmówiony — `PLAN_m1_walka.md` E1–E2, e2e `umieranie`. Istoty Bestiariusza ze STOPNIEM ZRANIENIA i towarzysze-istoty umierają jak BG (s. 205, M3); maszyny na 0 PW — Wyłączone (drony) |
 | | Akcja Bieganie; Utrudnienie w zwarciu i na zasięgu dalekim | ✅ | silnik okoliczności ataku (M1 E3–E4): domyślne Ułatwienie/Utrudnienie w oknie rzutu, jedna grupa plakietek z dymkiem; Bieganie i Unikanie — statusy z HUD żetonu i z panelu Stan w walce, zdejmowane na początku następnej tury. Przyspieszenie ruchu — informacyjnie (moduł nie pilnuje ruchu) |
 | | Manewry wręcz: Odepchnięcie, Pochwycenie, Wytrącenie | ✅ | `combat/melee-maneuvers.mjs` (Wytrącenie: przedmiot z ręki ląduje u stóp celu; Pochwycenie zajmuje rękę) |
 | | Broń palna jedną ręką, oburęczna/dwuręczna, atak drugą ręką; upuszczanie i podnoszenie [I] | ✅ | `combat/grip.mjs`, `actors/ground-items.mjs` — domyślne w oknie, pigułki na karcie |
@@ -43,8 +43,8 @@ M# = kamień milowy w `PLAN_beta.md`.
 | Pochodzenie | 12 Pochodzeń + 36 zdolności (dane) | ✅ | paczki `pochodzenia`, `zdolnosci-pochodzenia` |
 | | Automatyka zdolności | 🟡 | 3/36 (`game.neuroshima.pochodzenia.report()`) — M7 |
 | Klasy | 6 klas, 18 profesji, 133 zdolności (dane, awans, PW) | ✅ | paczki `klasy`, `profesje`, `zdolnosci-klasowe` |
-| | Automatyka zdolności | 🟡 | 28/133 — 10 pełnych, 18 częściowych (`game.neuroshima.zdolnosci.report()`, `config/class-features-coverage.mjs`) — M7 |
-| | Towarzysze (Partner, Oswajanie zwierząt, Prawa ręka) i drony | ❌ | M3 |
+| | Automatyka zdolności | 🟡 | 32/133 — 10 pełnych, 22 częściowe (`game.neuroshima.zdolnosci.report()`, `config/class-features-coverage.mjs`) — M7 |
+| | Towarzysze (Partner, Oswajanie zwierząt, Prawa ręka) i drony | ✅ | `actors/towarzysze*.mjs`, `combat/towarzysze-walka.mjs`, `actors/drony*.mjs`, `items/kontroler.mjs`, paczka `towarzysze`; `PLAN_m3_towarzysze.md`, `docs/Towarzysze-i-drony.md`. Wartości z właściciela, tura po nim i Komenda, umieranie jak BG; drony z produkcji, kontrolery, tryb zdalny z kamerą i OSD, zasilanie, awarie, naprawy, wrak; Emiter EMP. Szukanie nowego towarzysza — M5 |
 | Sztuczki | 53 Sztuczki (dane) | ✅ | paczka `sztuczki` |
 | | Automatyka | 🟡 | 17/53 — 5 pełnych, 12 częściowych (`game.neuroshima.sztuczki.report()`) — M7 |
 | Choroby i fobie | Choroby przewlekłe i popularne, fobie, leki, Zachód słońca | ✅ | 22/24 stanów egzekwowanych, `actors/health-panel.mjs`, `disease-effects.mjs` |
@@ -52,10 +52,10 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | Właściwości broni | 🟡 | brak: `dluga`, `ciezka`, `jednorazowa` (M6) — `PLAN_weapon_properties.md`; `ppanc`/`przebijająca` — `combat/armour-piercing.mjs` |
 | | Pancerze, hełmy, tarcze | 🟡 | `actors/armor-rules.mjs` (próg, odporność kinetyczna, kary); TT z pancerza — silnik TT; Parowanie tarczą i Krytyczna ochrona hełmu — okno „Reakcje celu” (`combat/obrona.mjs`); Cios i Osłona tarczą, szczelność ręcznie; wytrzymałość pancerzy — ustawienie świata (`production/naprawa.mjs`) |
 | | Leki i używki, narzędzia, elektronika, różności | 🟡 | 35 pozycji chemii, 22 zestawy, latarka/gogle/detonator/kwas/kolczatki; część Różności tylko jako przedmioty bez akcji |
-| | **Produkcja przedmiotów**, schematy, elaboracja amunicji, naprawianie | ✅ | `production/*`, zakładka Produkcja, paczka `schematy`; `PLAN_produkcja.md`, `docs/Produkcja.md`. Nieograne przy stole; wyniki-aktorzy (pojazdy, drony) to karta dla MG — M3/M4 |
+| | **Produkcja przedmiotów**, schematy, elaboracja amunicji, naprawianie | ✅ | `production/*`, zakładka Produkcja, paczka `schematy`; `PLAN_produkcja.md`, `docs/Produkcja.md`. Nieograne przy stole; drony — aktor i uchwyt (M3); pojazdy to karta dla MG — M4 |
 | Teczka MG | Szabrowanie, bebeszenie | ❌ | M5 |
 | | Kolory Neuroshimy (Rdza, Rtęć, Stal, Chrom) | ❌ | po becie; WKK to osobna nakładka (`scripts/wkk/`) |
-| Notatnik łowcy | Bestiariusz, SP, próg obrażeń, awarie maszyn, amunicja BN | ✅ | 51 istot, 89/260 zdolności zautomatyzowane, 25/51 docelowych żetonów |
+| Notatnik łowcy | Bestiariusz, SP, próg obrażeń, awarie maszyn, amunicja BN | ✅ | 51 istot, 89/260 zdolności zautomatyzowane, 25/51 docelowych żetonów. Awarie maszyn: rzut z pominięciem niepasujących pozycji i [Zastosuj] dla MG (`combat/maszyny.mjs`, M3) |
 | Zasady szczegółowe | Upojenie, Skażenie, Spadanie, Podpalenie, Krwawienie, Niedożywienie, Odwodnienie | ✅ | §1.5b, §4.1b–c, `combat/podpalenie.mjs`, `party-supplies.mjs` |
 | | Uduszenie, Przemarznięcie | ✅ | `actors/zagrozenia.mjs` — to samo narzędzie MG: mróz (ST z temperatury co godzinę; ciepło ubrany, śpiwór, koc), Uduszenie (faza na statusie, koniec tury w walce, karta RO przy obrażeniach, „Złap oddech” w panelu Stan); „W cieple” w oknie DO — `PLAN_m1_walka.md` E7 |
 | | Próg obrażeń, pochwycenie, wytrącenie, udźwig, typy obrażeń | ✅ | |
@@ -121,6 +121,27 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `scripts/combat/zranienie.mjs` | Stopień Zranienia (wound levels 0–4); zejście z Krytycznego zdejmuje Wyczerpanie ze Zranienia (RAI) |
 | `scripts/config/umieranie-rules.mjs` | Umieranie i zagrożenia — czyste zasady: porażki przy 0 PW, Olbrzymie obrażenia, Rzut Przeciw Śmierci, stan maszyny, oddech po turze, plan mrozu, sen (M1) |
 | `scripts/combat/umieranie.mjs` | Umieranie i stabilizacja — maszyna stanów, lejek zapisu, karty „Umiera” / „Śmierć” / „BN pada”, 1 PW po 1k8 h na zegarze świata |
+| `scripts/config/towarzysze-rules.mjs` | Towarzysze i drony — czyste zasady (M3): wartości pochodne ze wzorów, kupowanie 24 pkt, kolejność w walce, zakres aktywacji drona, Tabela awarii z pomijaniem, naprawy, sygnał i RSSI, upadek, zasilanie, TT celu EMP |
+| `scripts/config/towarzysze-data.mjs` | Rodzaje towarzyszy, statblocki, kontrolery — **GENEROWANE** (`dev/classes/gen_companions.py`) |
+| `scripts/config/osd.mjs` | OSD kamery drona — czysty układ napisów (czcionka MAX7456) |
+| `scripts/actors/towarzysze.mjs` | Towarzysz powiązany z właścicielem: flaga, roll data `@wlasciciel`/`@tworca`/`@operator`, wartości na żywo |
+| `scripts/actors/towarzysze-karta.mjs` | Pasek towarzyszy na karcie właściciela, plakietka towarzysza, drużyna |
+| `scripts/actors/towarzysze-tworzenie.mjs` | Narzędzie MG „Nowy towarzysz”, kreator ludzkiego towarzysza, poziomy za właścicielem, [Odłącz] |
+| `scripts/combat/towarzysze-walka.mjs` | Grupa inicjatywy z właścicielem, Komenda, tura bez Komendy (Unikanie) |
+| `scripts/actors/drony.mjs` | Dron: aktor ze stemplem twórcy i uchwyt (Rozłóż/Złóż, bez klonów), przekaźnik MG, nadania własności, wrak |
+| `scripts/actors/drony-sterowanie.mjs` | Komenda [B] / Steruj [A] / Reaguj [R] / Przejmij z Kontrolera, zatrzask, plakietki |
+| `scripts/actors/drony-zdalne.mjs` | Tryb zdalny: sygnał, sesja operatora, wyjścia, bramka wizji, Esc, pole sceny „Pod ziemią” |
+| `scripts/actors/drony-obraz.mjs` | Tryb wizji „Kamera drona” i analogowy kanał FPV (filtr ekranu) |
+| `scripts/actors/drony-osd.mjs` | OSD kamery drona (atlas czcionki Betaflight z `fonts/osd/`) |
+| `scripts/actors/drony-bron.mjs` | Broń zamontowana na dronie: formuły z twórcy i operatora |
+| `scripts/actors/drony-stan.mjs` | Zasilanie drona na zegarze świata, Włóż akumulator, agregat, upadek latającego |
+| `scripts/actors/drony-naprawa.mjs` | Naprawa PW (RAW) i awarii (NOE: karta MG; WKK: części wg tabeli), zajęcie Postoju |
+| `scripts/items/kontroler.mjs` | Kontrolery zdalnego sterowania (fabryczny, domowy) — dane przedmiotu i aktywności |
+| `scripts/combat/maszyny.mjs` | Stan Wyłączony z przyczynami, Tabela awarii maszyn: [Zastosuj], awarie trwałe i ich naprawa |
+| `scripts/combat/czas-efektu.mjs` | Pełne `start` efektu przestawione na innego uczestnika walki (v14) |
+| `scripts/weapons/emiter-emp.mjs` | Emiter EMP: biegłość ze zdolności, TT celu-maszyny (D27), ×0 na istoty żywe, Naładuj (230 V) |
+| `scripts/migration/migrate-towarzysze.mjs` | Migracja ręcznie zrobionego ludzkiego towarzysza (próba na sucho, kopia) |
+| `fonts/osd/` | Czcionka OSD Betaflight — osobny zasób GPL-3 (`.mcm`, licencja, nota, atlas z `dev/osd/gen_osd_font.py`) |
 | `scripts/items/staza.mjs` | Staza — przedmiot z kompendium `sprzet`, stabilizacja przez lejek umierania |
 | `scripts/config/okolicznosci-ataku.mjs` | Okoliczności Testu Ataku — czysty silnik: tabela źródeł RAW, tryb rzutu, automatyczne TK ≤ 1,5 m |
 | `scripts/combat/okolicznosci.mjs` | Okoliczności Testu Ataku — migawka sceny, jeden hak `dnd5e.preRollAttack`, plakietki na karcie, rejestr źródeł spoza RAW |
@@ -872,8 +893,8 @@ Szczegółowy plan: `PLAN_classes.md`
   nad danymi z generatora: 22/133 (6 pełnych, 16 częściowych), plakietka na każdej zdolności.
   Mój wróg okazał się niezautomatyzowany (tylko skala w awansie) — „×2" z wcześniejszego liczenia to
   dwa warianty na kartach, nie kod
-- [ ] **Towarzysze** (Partner Sędziego, Oswajanie zwierząt Łowcy mutantów, Prawa ręka Mafiozo) i **drony**
-  Montera — tylko tekst zdolności, brak aktorów — M3
+- [x] **Towarzysze** (Partner Sędziego, Oswajanie zwierząt Łowcy mutantów, Prawa ręka Mafiozo) i **drony**
+  Hakera — M3, 2026-10-10 (`PLAN_m3_towarzysze.md`; changelog „M3 E0–E10”)
 - [x] 12 Pochodzeń (origins) z bonusami cech — pack `pochodzenia` (12 itemów typu `background`,
   natywny slot dnd5e) i `zdolnosci-pochodzenia` (36 zdolności z `Tabele/Pochodzenie.md`),
   oba z `config/pochodzenia-data.mjs`. Premie +1/+1 nakłada `AbilityScoreImprovement` z `fixed`,

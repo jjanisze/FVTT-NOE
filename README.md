@@ -111,8 +111,9 @@ Szczegóły procesu (dla osób chcących też zaproponować poprawkę w kodzie) 
 ## Licencja i źródła zasobów
 
 Kod i dokumentacja modułu — licencja **MIT**, patrz [LICENSE](LICENSE). Dźwięki, ikony, grafika
-żetonów i treść wywiedziona z *Neuroshima Ostatnia Era* mają odrębne źródła i warunki — pełna
-lista w [CREDITS.md](CREDITS.md).
+żetonów, czcionka OSD kamery drona (Betaflight, **GPL-3** — osobny zasób w [`fonts/osd/`](fonts/osd/README.md))
+i treść wywiedziona z *Neuroshima Ostatnia Era* mają odrębne źródła i warunki — pełna lista w
+[CREDITS.md](CREDITS.md).
 
 Ten projekt powstaje w dużej mierze przy pomocy AI — kod i dokumentacja przy udziale Claude Code,
 część ikon wygenerowana przez Gemini/ChatGPT (szczegóły w [CREDITS.md](CREDITS.md)). Właśnie

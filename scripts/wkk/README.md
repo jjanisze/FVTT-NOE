@@ -54,6 +54,26 @@ two Trudność Trafienia rulings (`PLAN_tt.md`) and one recovery ruling (`PLAN_m
 | **Ochraniacze are armour** in ability conditions (author, 2026-10-03, PLAN_tt D4): "they give a TT bonus and sit in the Pancerze table" — so they switch off Goła klata, Tarcza wiary, Obłęd and Kuloodporność and switch on Obsługa pancerza. A helmet or shield blocks an ability only where the ability names it ("Goła klata forbids the helmet because its text says so") | `config/tt-rules.mjs` (`_wearing`), `actors/tt.mjs` (`guards` in the snapshot) |
 | **Leaving Krytyczny removes the Zranienie exhaustion** (author, 2026-10-06, PLAN_m1_walka D5): when the Stopień Zranienia drops from Krytyczny to Poważny by any path (Regeneracja, Pomoc medyczna, pips, token HUD, a deleted effect), every exhaustion level that came from the Krytyczny wound goes, if still there. NOE otherwise treats that level like any other (a Długi odpoczynek removes it); the WKK rule below makes it persistent until this exit | `combat/zranienie.mjs` (`setZranienie` → `_poZejsciu`), `config/rekonwalescencja-rules.mjs` (`REGULY_ZDEJMOWANIA.zranienie.wyjscie`, `warstwa: "RAI"`) |
 
+### GM readings of RAW gaps (M3)
+
+Not from the author, not homebrew numbers: the GM's reading of what the rulebook leaves unsaid, decided in
+`PLAN_m3_towarzysze.md` (§6.1). They live in the NOE tree like the author's RAI — they fill a silence, they do not
+change a printed value — and are listed here so a reader can tell what is not in the book. (The author's own
+ruling from M3, D31 — a dead owner's companion becomes the player's spare character — has no code; it is in
+`docs/Towarzysze-i-drony.md`.)
+
+| Reading | Where |
+|---|---|
+| A drone at 0 PW is **Wyłączony** until repaired, not dead; Olbrzymie obrażenia destroy it (D7) | `combat/umieranie.mjs`, `combat/maszyny.mjs` |
+| Deploying and folding a drone is an **Akcja** (D13) | `actors/drony.mjs` (handle activities) |
+| A folded drone weighs 25 / 4 kg and costs 70 / 90 gb (walking / flying; price from production time, s. 145 — D21) | `config/towarzysze-data.mjs` (`zlozony`), `actors/drony.mjs` |
+| Komenda and Steruj need the **controller in hand**; NPC operators are exempt (D22) | `actors/drony-sterowanie.mjs` |
+| The creator is **frozen at build time** — PB, INT and name stamped on the drone (D23) | `actors/drony.mjs` (`stempelTworcy`), roll data `@tworca` |
+| Emiter EMP and armour: a target with an armour note beside its TT defends with 10 + DEX, otherwise full TT (D27) | `weapons/emiter-emp.mjs`, `config/towarzysze-rules.mjs` (`ttCeluEmp`) |
+| "½ poziomu" rounds down, minimum 1; "24 punkty" means the point-buy table | `config/towarzysze-rules.mjs` (`wartosciPochodne`, `kupowanieCech`) |
+| A drone activation: **[B] — move, dodge, disengage, item; [A] — everything** (D36) | `config/towarzysze-rules.mjs` (`zakresAktywacji`), `actors/drony-sterowanie.mjs` |
+| The homemade controller reaches 20 m through walls / underground (D32) | `config/towarzysze-data.mjs` (`KONTROLERY`) |
+
 **Credit lives on the front page.** The author is thanked once, for all past and future rulings,
 in the module README (*Podziękowania*, decided by the GM 2026-10-03). Code comments say "author of
 the system" / RAI and state the mechanic and its reasoning — they do not repeat the name.
@@ -81,9 +101,11 @@ check (author's idea, this table's numbers — `wkk/config/pojedynczy-naboj.mjs`
 | `wkk/config/class-features-data.mjs` | Pistolero (Kowboj ability, pistol twin of Rewolwerowiec) + its `hasAbility()` entry. Host: `config/class-features-data.mjs` (the generator emits the splice) and the Kowboj pool in `config/classes-data.mjs`. Flagged `kobalt` in the pack and hidden from level-up pools when Kobalt is off (`actors/kobalt-advancement.mjs`) |
 | `wkk/config/latarka-overrides.mjs` | `LIGHT_KOBALT` — see the override pattern below |
 | `wkk/config/molotov-light.mjs` | `MOLOTOV_LIGHT_KOBALT` — a lit Molotov's light; RAW gives it none (see below) |
-| `wkk/config/production-kobalt.mjs` | Crafting (PLAN_produkcja): abandoning a Robota and its refund (D14), Robota weight interpolation (D4), schematic weight (D15), the Spec profession as an executor trait — ×0,75 / ×0,5 with the full kit, ×0,25 floor, no ST 30 (D26–D28, D32; D30 falls out of D26). Host: `config/production-rules.mjs`, each with its `..._RAW` twin |
+| `wkk/config/production-kobalt.mjs` | Crafting (PLAN_produkcja): abandoning a Robota and its refund (D14), Robota weight interpolation (D4), schematic weight (D15), the Spec profession as an executor trait — ×0,75 / ×0,5 with the full kit, ×0,25 floor, no ST 30 (D26–D28, D32; D30 falls out of D26); `BEZ_PRZEPISU_STANDARDOWEGO_KOBALT` — the factory remote controller has no standard formula recipe, only the Haker's homemade one stays (PLAN_m3 D37). Host: `config/production-rules.mjs` / `config/recipes-data.mjs`, each with its `..._RAW` twin |
 | `wkk/config/dziurawy-helm.mjs` | „Dziurawy hełm" — what a helmet leaves after Krytyczna ochrona (junk, 2 gb, its weight; PLAN_tt D12a). Host: `combat/obrona.mjs` (`breakHelmet`); without Kobalt the helmet simply disappears (RAW) |
 | `wkk/config/rekonwalescencja-kobalt.mjs` | Recovery (PLAN_m1_walka D5, D7, D8): the Krytyczny wound's exhaustion is persistent until leaving Krytyczny; Pomoc medyczna costs one medic-kit charge (not with Aspiryna i Miętusy), takes the whole Długi odpoczynek of both and one patient per medic; self-treatment — Test Inteligencji (Medycyna) ST 20, a failure adds a Stopień, the charge goes either way. Hosts: `config/rekonwalescencja-rules.mjs` (`regulaZdejmowania` with `{ kobalt }`), `actors/rekonwalescencja.mjs` |
+| `wkk/config/naprawa-awarii-kobalt.mjs` | Drone failure repairs (PLAN_m3_towarzysze D25, D28): per Tabela awarii entry the repair degree and the **specific parts** — each listed material at a fraction of the drone recipe (Drobnostka ⅕, Trochę roboty ½, Skomplikowana harówa ¾, rounded up, min. 1; Chemia fixed 2 / 3 / 4), one degree up at half PW or less; 5, 10, 12 pass on their own, 20 is a wreck. Host: `config/towarzysze-rules.mjs` (`naprawaAwarii` with `{ kobalt }`), used by `actors/drony-naprawa.mjs`; without Kobalt the GM decides (a card, NOE) |
+| `wkk/config/dostepnosc-kobalt.mjs` | Availability overrides: the factory remote controller 10% instead of 30% (PLAN_m3 D33). Host: `config/dostepnosc.mjs` (`dostepnosc(ref, { kobalt })`) |
 | `wkk/config/pojedynczy-naboj.mjs` | A round pushed into the inserted removable magazine in combat: Zwinne dłonie, ST by caliber category (12 / 14 / 15, .50 BMG 18); failure drops the round on the ground, a natural 1 jams the weapon (jam-immune weapons: plain failure). Host: `weapons/magazine.mjs` (`_performPushRoundAction`), only with Kobalt on; RAW refusal stays for Kobalt off |
 | `wkk/combat/weapon-save-properties.mjs` | `rozrywajaca` |
 | `wkk/combat/bleeding.mjs` | `dumdum` bleed profile |

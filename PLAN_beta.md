@@ -208,22 +208,25 @@ i Sztuczek Fabrykator / Złomiarz / Przydasie stoi na tym rozdziale. RAW: s. 144
 **Gotowe gdy:** postać ze schematem planuje, przepracowuje i kończy przedmiot, surowce schodzą
 z panelu, naprawa broni i pancerza idzie jedną ścieżką.
 
-### M3 — Towarzysze i drony (M)
+### M3 — Towarzysze i drony (M → L–XL) — ZROBIONE 2026-10-10
 
 Cel: profesje, których rdzeniem jest druga postać na mapie. Dotyczy m.in. Partnera Victora (Sędzia).
+Zrobione według `PLAN_m3_towarzysze.md` (E0–E11). Zakres urósł względem tej listy: **drony pełne** (produkcja,
+kontrolery, tryb zdalny z obrazem kamery i OSD, zasilanie, awarie, naprawy, wrak), **s. 205** — istoty Bestiariusza
+ze Stopniem Zranienia umierają jak BG, **Emiter EMP** z D27. Szukanie nowego towarzysza — M5 (D30).
 
-- [ ] **Aktor-towarzysz** powiązany z właścicielem (`flags.<mod>.companion.ownerId`). Statystyki
+- [x] **Aktor-towarzysz** powiązany z właścicielem (`flags.<mod>.companion.ownerId`). Statystyki
   pochodne od właściciela (PB, mod. MDR, poziom klasy — np. Psi partner: TT 12 + PB, PW 10 + 10 ×
   mod. MDR, KW k6 × poziom Zwiadowcy) liczy moduł i synchronizuje po `updateActor` właściciela —
   dnd5e nie umie formuł z cudzego aktora
-- [ ] **Szablony w nowej paczce `towarzysze`**: Psi partner (s. 100), Ludzki partner (s. 101 —
+- [x] **Szablony w nowej paczce `towarzysze`**: Psi partner (s. 100), Ludzki partner (s. 101 —
   szkielet do dokończenia przez gracza), Zmutowany owad / ssak / gad (Oswajanie zwierząt, s. 99),
   Dron kroczący i latający (s. 83), Prawa ręka Mafiozo (s. 76 — szablon postaci)
-- [ ] Tura towarzysza zawsze po turze właściciela (porządek w Combat), „bez komendy → Unikanie"
+- [x] Tura towarzysza zawsze po turze właściciela (porządek w Combat), „bez komendy → Unikanie"
   jako notka
-- [ ] Śmierć jak BG: Stopnie Zranienia i rzuty przeciw śmierci na NPC-towarzyszu (`zranienie.mjs`)
-- [ ] Wyżywienie towarzyszy w dziennym zapotrzebowaniu drużyny (`party-supplies.mjs`)
-- [ ] Emiter EMP (Zabójca maszyn, s. 101) — karta z RO i efektem na maszynach
+- [x] Śmierć jak BG: Stopnie Zranienia i rzuty przeciw śmierci na NPC-towarzyszu (`zranienie.mjs`)
+- [x] Wyżywienie towarzyszy w dziennym zapotrzebowaniu drużyny (`party-supplies.mjs`)
+- [x] Emiter EMP (Zabójca maszyn, s. 101) — karta z RO i efektem na maszynach
 
 **Gotowe gdy:** towarzysz stoi na scenie, rośnie z awansem właściciela, ginie według zasad BG.
 
@@ -261,6 +264,8 @@ mieć odbiorcę).
   7 dni), Plotkowanie (5 gb + Test CHA (Śledztwo) ST 10, +1 informacja za każde 5), Hazard (ST 20,
   wygrana ×2 / utrata stawki); Długi postój: Praca, Trening/Nauka, Budowa bazy, Koszt utrzymania
   (także towarzyszy)
+- [ ] **Szukanie nowego towarzysza** (`PLAN_m3_towarzysze.md` D30): zajęcie Postoju — Partner 24 h dzielone przez
+  gracza, oswajanie zwierzęcia 3 dni; dziś podpowiedź na pasku towarzyszy i narzędzie MG „Nowy towarzysz”
 
 **Gotowe gdy:** wiersze Eksploracja (gambling), Postój i Teczka MG (szabrowanie) bez ❌.
 
