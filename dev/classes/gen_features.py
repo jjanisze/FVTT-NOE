@@ -363,8 +363,14 @@ COVERAGE = {
              "„druga aktywacja w rundzie”", "actors/drony-sterowanie.mjs"),
             ("broń zamontowana na dronie: atak 2|3 + twoja PB + ZRC operatora, obrażenia kość broni + twój mod. INT, "
              "ST obszarowe 8 + PB + ZRC operatora; magazynek schodzi", "actors/drony-bron.mjs"),
+            ("zasilanie na zegarze świata: akumulator 1 h (średni) / 4 h (mały), agregat 0,5 l/h; wyczerpany — "
+             "Wyłączony; Włóż akumulator z uchwytu", "actors/drony-stan.mjs"),
+            ("dron na 0 PW — Wyłączony; Olbrzymie obrażenia — karta „Śmierć” (zniszczony); Tabela awarii z pominięciem "
+             "niepasujących pozycji i [Zastosuj] dla MG", "combat/maszyny.mjs"),
+            ("latający bez napędu w powietrzu — karta „Spada” z obrażeniami od upadku; Powalenie — opada bez obrażeń",
+             "actors/drony-stan.mjs"),
         ],
-        "manual": "Naprawa, zasilanie, awarie i obraz z kamery drona — przy stole (następne etapy). "
+        "manual": "Naprawa drona (PW i awarie) i obraz z kamery — przy stole (następne etapy). "
                   "Biegłość w narzędziach małego hakera zaznacza gracz.",
     },
     "serwisowanie": {

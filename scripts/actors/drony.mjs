@@ -40,6 +40,7 @@ const FOLDER = "Drony";
 /** Stałe id aktywności uchwytu (16 znaków, jak id dokumentu). */
 export const AKT_ROZLOZ = "neuroDronRozloz0";
 export const AKT_ZLOZ = "neuroDronZloz000";
+export const AKT_AKUMULATOR = "neuroDronAkumul0";
 /** Zatrzask aktywacji [A]/[B] na dronie (U20): `{ combatId, runda, tryb, operator }`. */
 export const FLAG_AKTYWACJA = "dronAktywacja";
 /** Reakcja drona [R] w rundzie: `{ combatId, runda, operator }`. */
@@ -131,7 +132,9 @@ function _opisUchwytu(dron, wpis) {
   return `<p>Złożony ${esc(wpis.nazwa.toLowerCase())}: @UUID[${dron.uuid}]{${esc(dron.name)}}. Waży ${wpis.zlozony.waga} kg; `
     + "rozłożony stoi na ziemi i nie wlicza się do udźwigu.</p>"
     + "<p><strong>Rozłóż [A]</strong> — postaw żeton drona obok siebie. <strong>Złóż [A]</strong> — dron musi stać obok "
-    + "(1,5 m). Uchwyt jest jeden — przeciągnięcie na inną kartę przenosi drona razem z nim.</p>";
+    + "(1,5 m). Uchwyt jest jeden — przeciągnięcie na inną kartę przenosi drona razem z nim.</p>"
+    + `<p><strong>Zasilanie:</strong> akumulator 24 V — ${wpis.akumulatorGodzin} h pracy rozłożonego drona (s. 83). `
+    + "<strong>Włóż akumulator [A]</strong> — świeży z ekwipunku do gniazda, stary wraca z resztą ładunku.</p>";
 }
 
 function _aktywnosc(id, name, img, sort, chatFlavor) {
@@ -159,10 +162,14 @@ export function daneUchwytu(dron, { rozlozony = false } = {}) {
       identifier: "dron",
       activities: {
         [AKT_ROZLOZ]: _aktywnosc(AKT_ROZLOZ, "Rozłóż", "icons/svg/upgrade.svg", 100000, "Dron staje na ziemi."),
-        [AKT_ZLOZ]: _aktywnosc(AKT_ZLOZ, "Złóż", "icons/svg/downgrade.svg", 200000, "Dron wraca do ekwipunku.")
+        [AKT_ZLOZ]: _aktywnosc(AKT_ZLOZ, "Złóż", "icons/svg/downgrade.svg", 200000, "Dron wraca do ekwipunku."),
+        [AKT_AKUMULATOR]: _aktywnosc(AKT_AKUMULATOR, "Włóż akumulator", "icons/svg/lightning.svg", 300000, "Świeży akumulator w gnieździe drona.")
       }
     },
-    flags: { [MODULE_ID]: { [FLAG_UCHWYT]: { aktor: dron.uuid, rodzaj: t.rodzaj, rozlozony }, dollSlot: "none" } }
+    flags: { [MODULE_ID]: {
+      [FLAG_UCHWYT]: { aktor: dron.uuid, rodzaj: t.rodzaj, rozlozony, zasilanie: { procent: 100, od: null } },
+      dollSlot: "none"
+    } }
   };
 }
 

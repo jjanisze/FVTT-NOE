@@ -47,7 +47,11 @@ import {
 import { applyZranienie, getZranienieLvl, ZRANIENIE_LEVELS } from "./zranienie.mjs";
 import { obronaOf, attackMessageFor, isMeleeAttack } from "./trafienie.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
-import { maStopnieZranienia } from "../actors/towarzysze.mjs";
+import { maStopnieZranienia, rodzajTowarzysza } from "../actors/towarzysze.mjs";
+import { wylacz, wlacz } from "./maszyny.mjs";
+
+/** Dron (towarzysz-maszyna): 0 PW → Wyłączony, Olbrzymie obrażenia → zniszczenie (PLAN_m3 §7.4). */
+const _dron = actor => !!rodzajTowarzysza(actor)?.maszyna;
 
 const MODULE_ID = "neuroshima-2026-overrides";
 /** Flaga aktora: `{ karta, przyczyna, bn, stabilnyDo }`. */
@@ -252,6 +256,9 @@ async function _obrazenia(actor, { obrazenia, pwPrzed, wrecz }) {
   if (wMaszynie(actor) && olbrzymieObrazenia({ obrazenia, maksPW: _maksPW(actor) })) {
     await zaproponujSmierc(actor, "olbrzymie", { obrazenia, maksPW: _maksPW(actor) });
   }
+  if (_dron(actor) && olbrzymieObrazenia({ obrazenia, maksPW: _maksPW(actor) })) {
+    await zaproponujSmierc(actor, "zniszczony", { obrazenia, maksPW: _maksPW(actor) });
+  }
   const n = porazkiZaObrazenia({ pwPrzed, obrazenia, wrecz: wrecz === true });
   if (n > 0 && wMaszynie(actor) && _pw(actor) <= 0) {
     await dodajPorazki(actor, n, wrecz ? "obrażenia od ataku wręcz przy 0 PW" : "obrażenia przy 0 PW");
@@ -265,6 +272,7 @@ async function _obrazenia(actor, { obrazenia, pwPrzed, wrecz }) {
 /** PW > 0 → 0. BG i BN w maszynie: Stopień + umieranie. Zwykły BN: martwy + karta MG (D2). */
 async function _naZero(actor) {
   if (_martwy(actor)) return;
+  if (_dron(actor)) return wylacz(actor, "pw0");
   if (!wMaszynie(actor)) return _bnPada(actor);
   await applyZranienie(actor, "PW spadły do 0");
   await wejdzWUmieranie(actor, "PW spadły do 0");
@@ -364,6 +372,7 @@ const ZRODLA_STABILIZACJI = Object.freeze({
 /** PW > 0: koniec umierania. Zdejmuje tylko Nieprzytomność z zejścia do 0 (U4) i stan `stable`. */
 export async function ocuc(actor) {
   if (!game.user.isGM) return;
+  if (_dron(actor)) return wlacz(actor, "pw0");
   const nasza = actor.effects.filter(e => e.statuses.has("unconscious") && e.getFlag(MODULE_ID, "zrodlo") === ZRODLO_PW0);
   if (nasza.length) await actor.deleteEmbeddedDocuments("ActiveEffect", nasza.map(e => e.id));
   if (_stabilny(actor)) await actor.toggleStatusEffect("stable", { active: false });
@@ -684,7 +693,9 @@ function _liczbySmierci(karta) {
   const l = karta.liczby ?? {};
   switch (karta.przyczyna) {
     case "rzuty": return `Porażki ${RZUT_PRZECIW_SMIERCI.tor}/${RZUT_PRZECIW_SMIERCI.tor}.`;
-    case "olbrzymie": return `Obrażenia ${_num(l.obrazenia)} ≥ 2 × ${_num(l.maksPW)} maks. PW = ${2 * _num(l.maksPW)}.`;
+    case "olbrzymie":
+    case "zniszczony": return `Obrażenia ${_num(l.obrazenia)} ≥ 2 × ${_num(l.maksPW)} maks. PW = ${2 * _num(l.maksPW)}.`;
+    case "autodestrukcja": return `Tabela awarii maszyn: ${_num(l.pozycja) || 20}.`;
     case "maksPW": return `Maksymalne PW: ${_num(l.maksPW)}.`;
     case "stopien": return "Kolejny Stopień Zranienia przy Krytycznym (4/4).";
     case "wyczerpanie": return `Wyczerpanie ${_num(l.wyczerpanie)}/6.`;

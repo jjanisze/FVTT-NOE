@@ -1263,4 +1263,29 @@ operatora (U13), drony w symulacji magazynków (U14). Quench `drony` 31, e2e `dr
 - **Pancerz celu, zasięg sygnału, upadek** — bez zmian w planie: E7c (zasilanie, Wyłączony, Olbrzymie, awarie,
   upadek) i E8 (obraz, sygnał, wyjście).
 
+**2026-10-10 — E7c zrobione — E7 zamknięte.** `combat/maszyny.mjs`: status **Wyłączony** (`config/conditions.mjs`:
+Obezwładnienie, Szybkość 0) z przyczynami naraz (`pw0`, `awaria`, `zasilanie`) — efekt znika dopiero bez żadnej;
+[Zastosuj] Tabeli awarii z pominięciem niepasujących pozycji (D10) dla każdej maszyny, także Bestiariusza.
+`actors/drony-stan.mjs`: zasilanie na zegarze świata (U15) — stan na uchwycie, procent na żywo, wyczerpanie →
+Wyłączony, **Włóż akumulator [A]**, agregat na dronie z paliwem; upadek latającego (D29) — Powalenie opada (T4),
+Wyłączony / Sparaliżowanie / Nieprzytomność w powietrzu → karta MG „Spada” (T2). `combat/umieranie.mjs`: dron na 0 PW
+→ Wyłączony (T4), naprawa ponad 0 → działa; Olbrzymie obrażenia → karta „Śmierć” z przyczyną „zniszczony”, awaria 20 —
+„autodestrukcja” (T2). Quench `drony` 42, e2e `dron` z krokami awarii, zegara i 0 PW; pełny Quench 1011/1011.
+
+- **Przyczyny Wyłączenia jako zbiór**, nie flaga tak/nie: naprawa ponad 0 PW nie może włączyć drona, który ma
+  jeszcze awarię 19 albo pusty akumulator (§7.4) — to wymaga pamięci, *dlaczego* jest wyłączony. Efekt włączony z
+  HUD-a żetonu (bez flagi) traktujemy jako decyzję MG — moduł go nie zdejmuje.
+- **Zasilanie rozliczane przy zmianie stanu, nie co tik:** `od` na uchwycie i procent na żywo (wzorzec Latarki);
+  zapis tylko przy rozłożeniu, złożeniu, Wyłączeniu i wyczerpaniu. Dron z pełnym akumulatorem od razu traci
+  przyczynę „zasilanie” — rozlicza to aktywny MG.
+- **Nowy dron ma pełny akumulator** (RAI: produkcja daje działającego drona); stary akumulator z gniazda wraca do
+  ekwipunku z resztą ładunku („Akumulator (35%)”). Ładowania akumulatorów RAW nie opisuje — procent poprawia MG na
+  karcie przedmiotu (wiersz zasilania, edycja przy wyłączonym dronie). Pojemności zbiornika agregatu RAW nie podaje
+  — tankuje MG (`game.neuroshima.drony.zatankuj(dron, litry)`).
+- **Kary celowania (awarie 3, 14) wchodzą do ataku drona:** owinięcie `getAttackData` z E7b gubiło premie aktora;
+  teraz je bierze (`actorBonus`).
+- **„Do końca następnej tury”** (awarie 5, 10, 12) liczy się w turach maszyny, a drona — operatora albo posiadacza
+  (U20), z `start.combatant` przestawionym jak Unikanie (`actors/tt.mjs`); poza walką bez czasu — zdejmuje MG.
+- **Ikona Wyłączony** — dziś pożyczona z rdzenia; wiersz w `dev/icons/MISSING.md` (sekcja F).
+
 *(dalej etapy dopisują tu rozstrzygnięcia z wdrożenia, jak w `PLAN_m1_walka.md` §11)*

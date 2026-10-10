@@ -160,7 +160,11 @@ w tej samej rundzie z plakietką „druga aktywacja”, następny atak bez plaki
 [Złóż] → żetonu nie ma, 25 kg, bez operatora. Quench `drony`: stempel, uchwyt bez klonów, własność za posiadaczem,
 stan uchwytu z żetonów (także żeton i scena skasowane ręcznie), produkcja, kontrolery (zasięgi, rodzina lalki,
 paczka, dostępność, przepisy pod Kobaltem), aktywacja (ręka, Anuluj, druga aktywacja, reakcja, plakietka ataku, BN),
-broń drona (atak, obrażenia, ST obszarowe, montaż, magazynki).
+broń drona (atak, obrażenia, ST obszarowe, montaż, magazynki). E7c w `dron`: krytyk → karta awarii MG → k20 13 →
+[Zastosuj] (TT −2); zegar +30 min → akumulator 50%; 0 PW → Wyłączony, nie martwy. Quench `drony` dokłada: Wyłączony z
+kilku przyczyn, 0 PW i Olbrzymie obrażenia (karta „zniszczony”), pominięcia Tabeli awarii i [Zastosuj] (Szybkość, TT,
+Sparaliżowanie, Podpalenie, Wyłączony, kara ataku), zasilanie (procent na zegarze, wyczerpanie, Włóż akumulator,
+agregat), upadek latającego (Powalenie — opada; Wyłączony — karta „Spada”).
 `clickCanvas` renderuje klatkę po `canvas.pan` (karta w tle nie renderuje sama, a pikery czytają zbuforowane
 przekształcenie warstwy) i wysyła `mouseMoved` bez wciśniętego przycisku — inaczej Chrome potrafi zamienić
 kliknięcie w przeciągnięcie bez `pointerdown`.

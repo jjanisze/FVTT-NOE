@@ -294,6 +294,15 @@ export const NEUROSHIMA_MARKERS = Object.freeze({
     name: "Sen",
     img: `${SVG}/sleeping.svg`,
     statuses: ["incapacitated", "unconscious"]
+  },
+  // Maszyna, która nie działa (PLAN_m3_towarzysze.md §7.4): dron na 0 PW, awaria 19 („wyłącza się do czasu
+  // naprawy”, s. 214), wyczerpany akumulator (s. 83). Przyczyny i zdejmowanie — `combat/maszyny.mjs`.
+  wylaczony: {
+    name: "Wyłączony",
+    img: "icons/svg/lightning.svg",
+    description: "<p>Maszyna nie działa: nie wykonuje akcji ani reakcji i nie porusza się. Wraca, gdy zniknie przyczyna — "
+      + "naprawa ponad 0 PW, naprawa awarii 19 albo nowy akumulator.</p>",
+    statuses: ["incapacitated"]
   }
 });
 
@@ -358,7 +367,7 @@ export const REMOVED_STATUSES = Object.freeze([
  */
 function buildConditionEffects() {
   return {
-    noMovement: new Set(["grappled", "paralyzed", "restrained", "unconscious"]),
+    noMovement: new Set(["grappled", "paralyzed", "restrained", "unconscious", "wylaczony"]),
     halfMovement: new Set(),
     crawl: new Set(["prone", "exceedingCarryingCapacity"]),
     petrification: new Set(),

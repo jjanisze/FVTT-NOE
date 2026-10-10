@@ -15,6 +15,9 @@
  *  - An attack with the drone's dagger under [B] carries "atak wymaga Steruj [A]" (D36); its to-hit is
  *    2 + creator's PB 2 + operator's DEX 1 (U13). Steruj [A] in the same round is "druga aktywacja" (D35); the
  *    next attack has no badge. Reaguj [R] — a card with the drone's attack button.
+ *  - E7c: a critical hit on the drone → the GM's failure card → k20 (forced 13) → [Zastosuj] → TT −2 until repair
+ *    (D10). The world clock moves 30 min → the walking drone's battery is at 50% (U15). 0 PW → Wyłączony, not
+ *    dead (§7.4) — the player sees the status.
  *  - [Złóż] → the token is gone, the handle is folded again, 25 kg, no operator.
  */
 
@@ -193,6 +196,41 @@ async function atakDrona() {
   }
 }
 
+/** GM: a critical hit on the drone; roll the failure table with d20 forced to `k20`; [Zastosuj]. */
+async function awaria({ k20 }) {
+  const MOD = "neuroshima-2026-overrides";
+  const pc = game.actors.getName("PC Gracz 1");
+  const u = pc.items.find(i => i.flags?.[MOD]?.dron?.aktor);
+  const dron = fromUuidSync(u.flags[MOD].dron.aktor);
+  const tt = dron.system.attributes.ac.value;
+  const before = game.messages.size;
+  await dron.applyDamage(1, { isCritical: true });
+  const karta = await window.__e2e.until(() => game.messages.contents.slice(before).find(m => m.flags?.[MOD]?.machineFailure),
+    { message: "the failure card" });
+  window.__e2e.forceD20([k20], { fallback: 3 });
+  try {
+    await window.__e2e.clickChat(karta.id, ".neuro-failure-btn");
+    const rzut = await window.__e2e.until(() => game.messages.contents.slice(before).find(m => m.flags?.[MOD]?.awariaRzut),
+      { message: "the failure roll" });
+    await window.__e2e.clickChat(rzut.id, ".neuro-failure-apply");
+    const efekt = await window.__e2e.until(() => dron.effects.find(e => e.flags?.[MOD]?.awaria === rzut.flags[MOD].awariaRzut.pozycja),
+      { message: "the failure effect" });
+    return { pozycja: rzut.flags[MOD].awariaRzut.pozycja, efekt: efekt.name, ttPrzed: tt, ttPo: dron.system.attributes.ac.value };
+  } finally {
+    window.__e2e.restoreDice();
+  }
+}
+
+/** Any client: the drone's live power and status. */
+function zasilanie() {
+  const MOD = "neuroshima-2026-overrides";
+  const pc = game.actors.getName("PC Gracz 1");
+  const u = pc.items.find(i => i.flags?.[MOD]?.dron?.aktor);
+  const dron = fromUuidSync(u.flags[MOD].dron.aktor);
+  const s = game.neuroshima.drony.stanZasilania(dron);
+  return { procent: Math.round(s.procent), pracuje: s.pracuje, wylaczony: dron.statuses.has("wylaczony"), martwy: dron.statuses.has("dead") };
+}
+
 export default {
   name: "dron",
   clients: ["gm", "Gracz 1"],
@@ -301,6 +339,45 @@ export default {
       t.equal(r.przyciski, 1, "one attack button (the dagger)");
       await t.screenshot("Gracz 1", "reakcja drona — karta z atakiem");
       await t.gm.eval(async () => { for (const c of [...game.combats]) await c.delete(); return true; });
+    });
+
+    await t.step("Critical hit → failure card → k20 13 → [Zastosuj]: TT −2 until repair (D10)", async () => {
+      const r = await t.gm.eval(awaria, { k20: 13 });
+      t.equal(r.pozycja, 13, "failure entry");
+      t.equal(r.ttPo, r.ttPrzed - 2, "TT −2");
+      t.assert(/Awaria: pancerz/.test(r.efekt), "effect named after the failure", r);
+    });
+
+    await t.step("World clock +30 min → the walking drone's battery is at 50% (U15)", async () => {
+      const przed = await p1.eval(zasilanie);
+      t.equal(przed.pracuje, true, "deployed drone draws power");
+      await t.gm.eval(async () => { await game.time.advance(1800); return true; });
+      const po = await t.waitFor(p1, (procent) => {
+        const MOD = "neuroshima-2026-overrides";
+        const u = game.user.character.items.find(i => i.flags?.[MOD]?.dron?.aktor);
+        const s = game.neuroshima.drony.stanZasilania(fromUuidSync(u.flags[MOD].dron.aktor));
+        return Math.round(s.procent) <= procent - 49 ? Math.round(s.procent) : null;
+      }, { args: [przed.procent], message: "the battery to drop" });
+      t.equal(po, przed.procent - 50, "30 min of a 1 h battery");
+    });
+
+    await t.step("0 PW → Wyłączony, not dead; the player sees it (§7.4)", async () => {
+      await t.gm.eval(async () => {
+        const MOD = "neuroshima-2026-overrides";
+        const u = game.actors.getName("PC Gracz 1").items.find(i => i.flags?.[MOD]?.dron?.aktor);
+        await fromUuidSync(u.flags[MOD].dron.aktor).update({ "system.attributes.hp.value": 0 });
+        return true;
+      });
+      const s = await t.waitFor(p1, () => {
+        const MOD = "neuroshima-2026-overrides";
+        const u = game.user.character.items.find(i => i.flags?.[MOD]?.dron?.aktor);
+        const d = fromUuidSync(u.flags[MOD].dron.aktor);
+        return d.statuses.has("wylaczony") ? { martwy: d.statuses.has("dead") } : null;
+      }, { message: "Wyłączony on the player's client" });
+      t.equal(s.martwy, false, "a machine at 0 PW is switched off, not dead");
+      const z = await p1.eval(zasilanie);
+      t.equal(z.pracuje, false, "a switched-off drone draws no power");
+      await t.screenshot("Gracz 1", "dron wyłączony");
     });
 
     await t.step("[Złóż] → the token is gone, the handle is folded again (25 kg)", async () => {

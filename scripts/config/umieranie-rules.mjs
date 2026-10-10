@@ -41,7 +41,10 @@ export const PRZYCZYNY_SMIERCI = Object.freeze({
   olbrzymie: Object.freeze({ label: "Olbrzymie obrażenia", strona: "s. 34", ostatniaAkcja: false }),
   maksPW: Object.freeze({ label: "Maksymalne PW równe 0", strona: "s. 34", ostatniaAkcja: false }),
   stopien: Object.freeze({ label: "Kolejny Stopień Zranienia ponad Krytyczny", strona: "s. 32", ostatniaAkcja: false }),
-  wyczerpanie: Object.freeze({ label: "Szósty poziom Wyczerpania", strona: "s. 35", ostatniaAkcja: false })
+  wyczerpanie: Object.freeze({ label: "Szósty poziom Wyczerpania", strona: "s. 35", ostatniaAkcja: false }),
+  // Maszyny (PLAN_m3_towarzysze.md §7.4): bez rzutów przeciw śmierci — zniszczenie, które potwierdza MG.
+  zniszczony: Object.freeze({ label: "Maszyna zniszczona — Olbrzymie obrażenia", strona: "s. 34, 214", ostatniaAkcja: false }),
+  autodestrukcja: Object.freeze({ label: "Maszyna zniszczona — natychmiastowa autodestrukcja", strona: "s. 214", ostatniaAkcja: false })
 });
 
 const _num = v => (Number.isFinite(Number(v)) ? Number(v) : 0);

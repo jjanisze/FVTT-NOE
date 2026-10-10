@@ -11,6 +11,9 @@
  * aktywacja z Kontrolera (kontroler do ręki przez lalkę — D22; operator i zatrzask — U20; druga aktywacja i
  * plakietka ataku — D35, D36), broń drona z formułą twórcy i operatora (U13), drony w symulacji magazynków (U14).
  *
+ * E7c: Wyłączony z kilku przyczyn naraz, dron na 0 PW i z Olbrzymimi obrażeniami (§7.4), Tabela awarii z
+ * pominięciami i [Zastosuj] (D10), zasilanie na zegarze z akumulatorem i agregatem (U15), upadek latającego (D29).
+ *
  * Synchronizację uchwytu robi aktywny MG — paczka zakłada, że to ta karta (piaskownica albo kampania z
  * jednym MG). Scena, folder „Drony” (gdy go nie było) i wiadomości czatu znikają w `after()`.
  */
@@ -32,6 +35,9 @@ import { familyOf, inHand } from "../actors/doll.mjs";
 import { inMagazineSystem } from "../weapons/magazine-model.mjs";
 import { dostepnosc } from "../config/dostepnosc.mjs";
 import { wszystkiePrzepisy } from "../config/recipes-data.mjs";
+import { wylacz, wlacz, jestWylaczona, przyczynyWylaczenia, cechyMaszyny, zastosujAwarie, awariaMaszyny } from "../combat/maszyny.mjs";
+import { stanZasilania, synchronizujZasilanie, wlozAkumulator, zatankuj, spada } from "../actors/drony-stan.mjs";
+import { buildProductionGearItemData } from "../items/production-gear.mjs";
 
 const flagaUchwytu = item => item?.flags?.[MODULE_ID]?.[FLAG_UCHWYT];
 
@@ -116,7 +122,8 @@ export function registerDronyTests(quench) {
         expect(uchwytDrona(wynik.dron)).to.equal(u);
         expect(posiadaczDrona(wynik.dron)).to.equal(haker);
         expect(dronyPosiadacza(haker).map(d => d.dron)).to.deep.equal([wynik.dron]);
-        expect(u.system.activities.size, "Rozłóż i Złóż").to.equal(2);
+        expect(u.system.activities.size, "Rozłóż, Złóż, Włóż akumulator").to.equal(3);
+        expect(flagaUchwytu(u).zasilanie, "pełny akumulator").to.deep.equal({ procent: 100, od: null });
       });
 
       it("latający: PW 5 × INT, 4 kg, 90 gb", async function () {
@@ -406,6 +413,179 @@ export function registerDronyTests(quench) {
       it("dron w symulacji magazynków, zwykły BN nie (U14)", function () {
         expect(inMagazineSystem(wynik.dron)).to.equal(true);
         expect(inMagazineSystem({ type: "npc", flags: {}, getFlag: () => null })).to.equal(false);
+      });
+    });
+
+    describe("Maszyny: Wyłączony, 0 PW, Olbrzymie obrażenia (§7.4)", function () {
+      let wynik;
+
+      before(async () => {
+        const haker = await scratchActor({ name: `${SCRATCH_PREFIX} Twórca maszyny`, system: { abilities: { int: { value: 14 } } } });
+        wynik = await nowyDron(haker, "dron-kroczacy");
+      });
+
+      it("jeden efekt, kilka przyczyn — znika dopiero bez żadnej", async function () {
+        // (Nie „zasilanie”: dron z pełnym akumulatorem tę przyczynę od razu traci — rozlicza to MG.)
+        await wylacz(wynik.dron, "awaria");
+        await wylacz(wynik.dron, "pw0");
+        expect(wynik.dron.effects.filter(e => e.statuses.has("wylaczony")).length).to.equal(1);
+        expect(przyczynyWylaczenia(wynik.dron).sort()).to.deep.equal(["awaria", "pw0"]);
+        expect(await wlacz(wynik.dron, "awaria")).to.equal(false);
+        expect(jestWylaczona(wynik.dron)).to.equal(true);
+        expect(await wlacz(wynik.dron, "pw0")).to.equal(true);
+        expect(jestWylaczona(wynik.dron)).to.equal(false);
+      });
+
+      it("0 PW → Wyłączony, nie martwy; naprawa ponad 0 → działa (T4)", async function () {
+        await wynik.dron.update({ "system.attributes.hp.value": 0 });
+        await waitFor(() => jestWylaczona(wynik.dron), { label: "Wyłączony" });
+        expect(wynik.dron.statuses.has("dead")).to.equal(false);
+        expect(przyczynyWylaczenia(wynik.dron)).to.deep.equal(["pw0"]);
+        await wynik.dron.update({ "system.attributes.hp.value": 5 });
+        await waitFor(() => !jestWylaczona(wynik.dron), { label: "włączony" });
+      });
+
+      it("Olbrzymie obrażenia → karta „Śmierć”: zniszczony (T2, potwierdza MG)", async function () {
+        const max = wynik.dron.system.attributes.hp.max;
+        await wynik.dron.applyDamage(2 * max + 5);
+        const karta = await waitFor(() => game.messages.contents.findLast(m =>
+          m.getFlag(MODULE_ID, "umieranieSmierc")?.actorUuid === wynik.dron.uuid), { label: "karta Śmierć" });
+        expect(karta.getFlag(MODULE_ID, "umieranieSmierc").przyczyna).to.equal("zniszczony");
+        expect(wynik.dron.statuses.has("dead"), "bez potwierdzenia nie martwy").to.equal(false);
+      });
+    });
+
+    describe("Tabela awarii: pominięcia i [Zastosuj] (D10)", function () {
+      let wynik;
+
+      before(async () => {
+        const haker = await scratchActor({ name: `${SCRATCH_PREFIX} Twórca awarii`, system: { abilities: { int: { value: 16 } } } });
+        wynik = await nowyDron(haker, "dron-kroczacy");
+      });
+
+      it("dron bez broni: 1 → 2; 14 → 17 (bez ataków), 15–16 pominięte", function () {
+        expect(cechyMaszyny(wynik.dron)).to.include({ bron: false, ataki: false });
+        expect(awariaMaszyny(wynik.dron, 1)).to.include({ pozycja: 2 });
+        const a = awariaMaszyny(wynik.dron, 14);
+        expect(a.pozycja).to.equal(17);
+        expect(a.pominiete).to.deep.equal([14, 15, 16]);
+      });
+
+      it("2 — Szybkość ½; 13 — TT −2; 5 — Sparaliżowanie; 11 — Podpalenie; 19 — Wyłączony do naprawy", async function () {
+        const szybkosc = wynik.dron.system.attributes.movement.walk;
+        const tt = wynik.dron.system.attributes.ac.value;
+        await zastosujAwarie(wynik.dron, 2);
+        expect(wynik.dron.system.attributes.movement.walk).to.equal(szybkosc / 2);
+        await zastosujAwarie(wynik.dron, 13);
+        expect(wynik.dron.system.attributes.ac.value).to.equal(tt - 2);
+        await zastosujAwarie(wynik.dron, 5);
+        await zastosujAwarie(wynik.dron, 11);
+        await zastosujAwarie(wynik.dron, 19);
+        expect(wynik.dron.system.attributes.movement.walk, "Sparaliżowanie i Wyłączony — Szybkość 0").to.equal(0);
+        expect(wynik.dron.statuses.has("paralyzed")).to.equal(true);
+        expect(wynik.dron.statuses.has("burning")).to.equal(true);
+        expect(przyczynyWylaczenia(wynik.dron)).to.include("awaria");
+        const trwale = wynik.dron.effects.filter(e => e.getFlag(MODULE_ID, "awaria"));
+        expect(trwale.map(e => e.getFlag(MODULE_ID, "awaria")).sort((x, y) => x - y)).to.deep.equal([2, 5, 13]);
+      });
+
+      it("3 — kara −2 wchodzi do ataku drona (premie aktora zostają)", async function () {
+        const operator = await scratchActor({ name: `${SCRATCH_PREFIX} Operator awarii`, system: { abilities: { dex: { value: 12 } } } });
+        await wynik.dron.update({ [`flags.${MODULE_ID}.towarzysz.operator`]: operator.uuid });
+        const docs = await game.packs.get(`${MODULE_ID}.bron`).getDocuments();
+        const [b] = await wynik.dron.createEmbeddedDocuments("Item", [game.items.fromCompendium(docs.find(d => d.name === "Sztylet"))]);
+        const bron = await waitFor(() => wynik.dron.items.get(b.id)?.system.activities.find(a => a.type === "attack") ? wynik.dron.items.get(b.id) : null,
+          { label: "aktywność ataku" });
+        const atak = () => {
+          const { parts, data } = bron.system.activities.find(a => a.type === "attack").getAttackData();
+          return new Roll(parts.join(" + "), data).evaluateSync({ strict: false }).total;
+        };
+        const przed = atak();
+        await zastosujAwarie(wynik.dron, 3);
+        expect(atak()).to.equal(przed - 2);
+      });
+    });
+
+    describe("Zasilanie: akumulator i agregat na zegarze (U15)", function () {
+      let holder, wynik, scenaZ;
+      const u = () => uchwytDrona(wynik.dron);
+
+      before(async () => {
+        scenaZ = await scenaTestowa();
+        holder = await scratchActor({ name: `${SCRATCH_PREFIX} Posiadacz zasilania` });
+        wynik = await nowyDron(holder, "dron-kroczacy");
+      });
+      after(async () => { if (game.scenes.get(scenaZ.id)) await scenaZ.delete(); });
+
+      it("złożony nie pracuje; rozłożony pracuje — 1 h akumulatora średniego drona", async function () {
+        expect(stanZasilania(wynik.dron)).to.include({ procent: 100, pracuje: false });
+        await rozloz(u(), { pozycja: { x: 200, y: 200 }, scena: scenaZ });
+        await waitFor(() => stanZasilania(wynik.dron)?.pracuje, { label: "pracuje" });
+        const od = flagaUchwytu(u()).zasilanie.od;
+        expect(od).to.equal(game.time.worldTime);
+        expect(Math.round(stanZasilania(wynik.dron, od + 1800).procent)).to.equal(50);
+        expect(stanZasilania(wynik.dron, od + 3600).procent).to.equal(0);
+      });
+
+      it("wyczerpany → Wyłączony (zasilanie); Włóż akumulator → 100%, stary wraca, dron działa", async function () {
+        await u().update({ [`flags.${MODULE_ID}.dron.zasilanie`]: { procent: 0, od: null } });
+        await synchronizujZasilanie(wynik.dron);
+        await waitFor(() => przyczynyWylaczenia(wynik.dron).includes("zasilanie"), { label: "Wyłączony z braku prądu" });
+        await holder.createEmbeddedDocuments("Item", [buildProductionGearItemData("akumulator")]);
+        await wlozAkumulator(u());
+        expect(flagaUchwytu(u()).zasilanie.procent).to.equal(100);
+        const stary = holder.items.find(i => i.name === "Akumulator (0%)");
+        expect(stary?.flags[MODULE_ID].akumulatorProcent).to.equal(0);
+        expect(holder.items.filter(i => i.flags?.[MODULE_ID]?.productionGearId === "akumulator").length, "tylko stary").to.equal(1);
+        await waitFor(() => !jestWylaczona(wynik.dron), { label: "dron działa" });
+      });
+
+      it("agregat zamontowany zasila pierwszy: 0,5 l na godzinę", async function () {
+        const [ag] = await wynik.dron.createEmbeddedDocuments("Item", [buildProductionGearItemData("agregat")]);
+        expect(wynik.dron.items.get(ag.id).flags[MODULE_ID].zamontowane).to.equal(true);
+        await zatankuj(wynik.dron, 1);
+        const s0 = stanZasilania(wynik.dron);
+        const od = flagaUchwytu(u()).zasilanie.od;
+        const s1 = stanZasilania(wynik.dron, od + 3600);
+        expect(s1.paliwoL).to.be.closeTo(s0.paliwoL - 0.5, 0.01);
+        expect(s1.procent).to.be.closeTo(s0.procent, 0.01);
+      });
+    });
+
+    describe("Upadek drona latającego (D29)", function () {
+      let wynik, scenaU;
+
+      before(async () => {
+        scenaU = await scenaTestowa();
+        const holder = await scratchActor({ name: `${SCRATCH_PREFIX} Pilot` });
+        wynik = await nowyDron(holder, "dron-latajacy");
+        await rozloz(uchwytDrona(wynik.dron), { pozycja: { x: 300, y: 300, elevation: 6 }, scena: scenaU });
+        await waitFor(() => zetonyDrona(wynik.dron).length, { label: "żeton" });
+      });
+      after(async () => { if (game.scenes.get(scenaU.id)) await scenaU.delete(); });
+
+      it("Powalenie w powietrzu — opada bez obrażeń (T4)", async function () {
+        const [t] = zetonyDrona(wynik.dron);
+        expect(t.elevation).to.equal(6);
+        const pw = wynik.dron.system.attributes.hp.value;
+        await wynik.dron.toggleStatusEffect("prone", { active: true });
+        await waitFor(() => zetonyDrona(wynik.dron)[0].elevation === 0, { label: "na ziemi" });
+        expect(wynik.dron.system.attributes.hp.value).to.equal(pw);
+        await wynik.dron.toggleStatusEffect("prone", { active: false });
+      });
+
+      it("Wyłączony w powietrzu — karta „Spada”, [Spada] kładzie żeton i zadaje obrażenia od upadku (T2)", async function () {
+        const [t] = zetonyDrona(wynik.dron);
+        await t.update({ elevation: 6 });
+        await wylacz(wynik.dron, "awaria");
+        const karta = await waitFor(() => game.messages.contents.findLast(m => m.getFlag(MODULE_ID, "dronSpada")?.token === t.uuid),
+          { label: "karta Spada" });
+        expect(karta.getFlag(MODULE_ID, "dronSpada").wysokosc).to.equal(6);
+        expect(zetonyDrona(wynik.dron)[0].elevation, "przed kliknięciem w powietrzu").to.equal(6);
+        const pw = wynik.dron.system.attributes.hp.value;
+        await spada(karta, t.uuid);
+        expect(zetonyDrona(wynik.dron)[0].elevation).to.equal(0);
+        expect(wynik.dron.system.attributes.hp.value).to.be.below(pw);
       });
     });
 

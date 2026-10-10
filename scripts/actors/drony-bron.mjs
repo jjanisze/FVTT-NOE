@@ -89,7 +89,12 @@ function _owinAtak() {
     const premia = premiaAtakuDrona(dron);
     if (premia === null) return orig.call(this, config);
     const rollData = this.getRollData();
-    return CONFIG.Dice.BasicRoll.constructParts({ toHit: premia, situational: config.situational }, rollData);
+    // Premie aktora zostają: tędy wchodzą kary awarii celowania (−2/−4, `combat/maszyny.mjs`).
+    return CONFIG.Dice.BasicRoll.constructParts({
+      toHit: premia,
+      actorBonus: this.actor?.system.bonuses?.[this.getActionType(config.attackMode)]?.attack,
+      situational: config.situational
+    }, rollData);
   };
 }
 

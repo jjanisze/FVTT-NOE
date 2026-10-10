@@ -356,3 +356,14 @@ tych dróg nie istnieje dla `towarzysz-*`, więc żeton to portret. Styl i propo
 
 Drony staną się szablonami w E7 — pliki 5 i 6 mogą przyjść już teraz; builder weźmie je przy następnym
 `fvtt packs`. Ludzcy towarzysze żetonu z paczki nie mają (czysta karta postaci).
+
+---
+
+# F. Ikony stanów (białe glify, jak `icons/statuses/`)
+
+Stany modułu bez własnej grafiki — dziś pożyczona ikona rdzenia. Styl: biały glif na przezroczystym tle, jak
+`icons/statuses/zranienie-*.svg` (`icons/statuses/ASSETS.md`); SVG reagujący na motyw.
+
+| # | Plik | Stan | Opis do promptu |
+|---|------|------|-----------------|
+| 1 | `icons/statuses/wylaczony.svg` | Wyłączony (maszyna nie działa — PLAN_m3_towarzysze.md §7.4; dziś `icons/svg/lightning.svg`) | Symbol zasilania (koło z kreską) przekreślony albo przygaszony, bez tekstu |

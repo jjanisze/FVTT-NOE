@@ -38,6 +38,7 @@
 
 import { isArmourPiercing } from "./armour-piercing.mjs";
 import { isCriticalHitOn } from "./trafienie.mjs";
+import { awariaMaszyny, zastosujAwarie, ustawTekstyAwarii } from "./maszyny.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -144,13 +145,31 @@ async function onClickFailure(event) {
   if (!actor) return;
 
   const roll = await new Roll("1d20").evaluate();
+  // D10 (PLAN_m3_towarzysze.md): pozycja po pominięciu tych, które maszyny nie dotyczą (s. 214), i [Zastosuj].
+  const a = awariaMaszyny(actor, roll.total);
+  const pominiete = a.pominiete.length ? ` <em>(pominięte: ${a.pominiete.join(", ")} — nie dotyczą tej maszyny)</em>` : "";
   await roll.toMessage({
     speaker: ChatMessage.getSpeaker({ actor }),
-    flavor: `<strong>Awaria maszyny:</strong> ${MACHINE_FAILURES[roll.total] ?? "—"}`
+    whisper: ChatMessage.getWhisperRecipients("GM").map(u => u.id),
+    flavor: `<strong>Awaria maszyny ${a.pozycja}:</strong> ${MACHINE_FAILURES[a.pozycja] ?? "—"}${pominiete}`
+      + `<div class="neuro-machine-failure"><button type="button" class="neuro-failure-apply" data-actor-uuid="${actor.uuid}" `
+      + `data-awaria="${a.pozycja}"><i class="fa-solid fa-wrench" inert></i> Zastosuj</button></div>`,
+    flags: { [MODULE_ID]: { awariaRzut: { actorUuid: actor.uuid, pozycja: a.pozycja, k20: roll.total } } }
   });
 
   btn.disabled = true;
-  btn.textContent = `⚙ Awaria ${roll.total}`;
+  btn.textContent = `⚙ Awaria ${a.pozycja}`;
+}
+
+async function onClickApply(event) {
+  event.preventDefault();
+  const btn = event.currentTarget;
+  if (!game.user.isGM) return ui.notifications.warn("Awarię stosuje MG.");
+  const actor = await fromUuid(btn.dataset.actorUuid);
+  if (!actor) return;
+  btn.disabled = true;
+  await zastosujAwarie(actor, Number(btn.dataset.awaria));
+  btn.innerHTML = `<i class="fa-solid fa-check" inert></i> Zastosowano`;
 }
 
 /* -------------------------------------------- */
@@ -186,6 +205,7 @@ function onUpdateActor(actor, changes) {
 /* -------------------------------------------- */
 
 export function registerBestiaryThresholds() {
+  ustawTekstyAwarii(MACHINE_FAILURES);
   Hooks.on("dnd5e.preCalculateDamage", onPreCalculateDamage);
   Hooks.on("dnd5e.calculateDamage", onCalculateDamage);
   Hooks.on("updateActor", onUpdateActor);
@@ -193,6 +213,9 @@ export function registerBestiaryThresholds() {
   Hooks.on("dnd5e.renderChatMessage", (message, html) => {
     for (const btn of html.querySelectorAll(".neuro-failure-btn")) {
       btn.addEventListener("click", onClickFailure);
+    }
+    for (const btn of html.querySelectorAll(".neuro-failure-apply")) {
+      btn.addEventListener("click", onClickApply);
     }
   });
 

@@ -1149,7 +1149,7 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
-### M3 E0–E7b — towarzysze: czyste zasady, wartości z właściciela, walka, karty, tworzenie, migracja, dane z podręcznika, drony z produkcji, kontrolery i sterowanie; Stopnie Zranienia wg s. 205 (2026-10-10)
+### M3 E0–E7 — towarzysze i drony I: czyste zasady, wartości z właściciela, walka, karty, tworzenie, migracja, dane z podręcznika, drony z produkcji, kontrolery i sterowanie, zasilanie, awarie; Stopnie Zranienia wg s. 205 (2026-10-10)
 
 Plan: `PLAN_m3_towarzysze.md` (decyzje MG D1–D39, postęp §11).
 
@@ -1198,8 +1198,13 @@ Plan: `PLAN_m3_towarzysze.md` (decyzje MG D1–D39, postęp §11).
   domowy ze schematu Hakera (100 m); Komenda [B], Steruj [A] i Reaguj [R] z kontrolerem w ręce (z plecaka — „Weź do
   ręki”), karta z dozwolonymi akcjami, operator na żywo, plakietki „druga aktywacja w rundzie” i „atak wymaga
   Steruj [A]”. Broń zamontowana na dronie: atak, obrażenia i ST obszarowe z twórcy i operatora; magazynek schodzi.
+- **Maszyny i stan drona** (`combat/maszyny.mjs`, `actors/drony-stan.mjs`): nowy stan Wyłączony (dron na 0 PW,
+  awaria 19, pusty akumulator — wraca, gdy zniknie ostatnia przyczyna); Tabela awarii maszyn z pominięciem
+  niepasujących pozycji i przyciskiem MG [Zastosuj] — także dla maszyn Bestiariusza; Olbrzymie obrażenia drona i
+  autodestrukcja → karta „Śmierć” do potwierdzenia; akumulator drona schodzi na zegarze świata, „Włóż akumulator”,
+  agregat z paliwem; latający dron, który stanął w powietrzu, spada (karta MG z obrażeniami od upadku).
 - **Testy:** Quench `towarzysze-zasady`, `towarzysze` i `drony`; e2e `towarzysz`, `towarzysz-tworzenie` i `dron`
-  (nowe; `dron` z produkcją, rozłożeniem i sterowaniem), `combat` (krytyk w istotę ze Stopniem i bez); mutacje dla F1, F2, kolejności, własności grupy, F17,
+  (nowe; `dron` z produkcją, rozłożeniem, sterowaniem, awarią, zasilaniem i 0 PW), `combat` (krytyk w istotę ze Stopniem i bez); mutacje dla F1, F2, kolejności, własności grupy, F17,
   poziomów za właścicielem i U23. Harness: `clickCanvas` trafia po `canvas.pan` w karcie w tle i nie zamienia
   kliknięcia w przeciągnięcie; fixture odpauzowuje grę zawsze (samouczek rdzenia odpauzowywał tylko MG).
 
