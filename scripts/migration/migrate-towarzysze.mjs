@@ -10,8 +10,11 @@
  *   2. **Towarzysz:** flaga U1; klasa-zaślepka → „Towarzysz” na poziomie klasy właściciela (awanse poziomu 1
  *      jako już dokonane — biegłości siedzą na aktorze); efekt PB +2 (U3); ręczne maks. PW → `null` (liczy
  *      moduł); Percepcja na MDR, Śledztwo na INT (F3); członek drużyny właściciela (D19); własność graczy
- *      właściciela; notka „brak automatyzacji przywołania” z biografii — out; kreator oznaczony jako zrobiony.
+ *      właściciela; notka „brak automatyzacji przywołania” z biografii — out; kreator oznaczony jako zrobiony;
+ *      Szybkość 9 m, jeśli postać jej nie ma (sprzed `character-defaults.mjs` — dnd5e bierze ją z gatunku).
  *   3. **Sztuczka (D15)** — opcjonalnie: klucz z `SZTUCZKI` zamienia dotychczasową Sztuczkę towarzysza.
+ *      Sztuczki nie niosą automatyki cech, więc premię („+1 ZRC”) podaje wołający (`premiaCechy`) — idzie tylko
+ *      razem z faktyczną zamianą, więc drugi przebieg jej nie dubluje.
  *
  * Domyślnie próba na sucho: zwraca plan i kopię obu aktorów (`kopia`) — wołający zapisuje ją lokalnie,
  * poza publicznym repozytorium. `commit: true` wykonuje. Idempotentna.
@@ -37,11 +40,12 @@ const _aktor = ref => (typeof ref === "string" ? (fromUuidSync(ref) ?? game.acto
  * @param {string} [o.rodzaj]                    `ludzki-partner` | `prawa-reka`
  * @param {string[]} [o.broniWlasciciela]        kategorie broni do dopisania właścicielowi (D14)
  * @param {string|null} [o.sztuczka]             klucz Sztuczki towarzysza (D15) albo `null` — bez zmiany
+ * @param {Record<string, number>} [o.premiaCechy]  premia Cech Bazowych nowej Sztuczki, np. `{ dex: 1 }`
  * @param {boolean} [o.commit]
  * @returns {Promise<{plan: string[], kopia: object|null, wykonane: boolean}>}
  */
 export async function migrujTowarzysza({
-  wlasciciel, towarzysz, rodzaj = "ludzki-partner", broniWlasciciela = [], sztuczka = null, commit = false
+  wlasciciel, towarzysz, rodzaj = "ludzki-partner", broniWlasciciela = [], sztuczka = null, premiaCechy = {}, commit = false
 } = {}) {
   if (!game.user.isGM) throw new Error("Migrację towarzysza wykonuje MG.");
   const owner = _aktor(wlasciciel);
@@ -84,6 +88,8 @@ export async function migrujTowarzysza({
   const bio = comp._source.system.details?.biography?.value ?? "";
   if (NOTKA_BIOGRAFII.test(bio)) plan.push(`${comp.name}: notka „brak automatyzacji przywołania” z biografii — usunięta`);
   if (comp.getFlag(MODULE_ID, "kreator")?.cechy !== true) plan.push(`${comp.name}: kreator — oznaczony jako zrobiony`);
+  const bezSzybkosci = !(Number(comp._source.system.attributes?.movement?.walk) > 0);
+  if (bezSzybkosci) plan.push(`${comp.name}: Szybkość — → 9 m (każdy człowiek startuje z 9 m)`);
 
   // 3. Sztuczka
   let nowaSztuczka = null;
@@ -99,6 +105,10 @@ export async function migrujTowarzysza({
     nowaSztuczka = await pack.getDocument(e._id);
     if (!stare.some(i => i.name === nowaSztuczka.name)) {
       plan.push(`${comp.name}: Sztuczka ${stare.map(i => i.name).join(", ") || "—"} → ${nowaSztuczka.name} (D15)`);
+      for (const [k, n] of Object.entries(premiaCechy)) {
+        const v = Number(comp._source.system.abilities?.[k]?.value) || 10;
+        plan.push(`${comp.name}: ${k.toUpperCase()} ${v} → ${v + n} (premia Sztuczki)`);
+      }
     } else nowaSztuczka = null;
   }
 
@@ -113,6 +123,7 @@ export async function migrujTowarzysza({
     [`flags.${MODULE_ID}.kreator.cechy`]: true,
     "system.attributes.hp.max": null
   };
+  if (bezSzybkosci) Object.assign(zmiany, { "system.attributes.movement.walk": 9, "system.attributes.movement.units": "m" });
   for (const [k, c] of Object.entries(CECHY_UMIEJETNOSCI)) zmiany[`system.skills.${k}.ability`] = c;
   if (NOTKA_BIOGRAFII.test(bio)) zmiany["system.details.biography.value"] = bio.replace(NOTKA_BIOGRAFII, "");
   for (const u of bezPraw) zmiany[`ownership.${u.id}`] = CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER;
@@ -132,6 +143,9 @@ export async function migrujTowarzysza({
   if (nowaSztuczka) {
     if (stare.length) await comp.deleteEmbeddedDocuments("Item", stare.map(i => i.id));
     await comp.createEmbeddedDocuments("Item", [game.items.fromCompendium(nowaSztuczka)]);
+    const premie = Object.fromEntries(Object.entries(premiaCechy).map(([k, n]) =>
+      [`system.abilities.${k}.value`, (Number(comp._source.system.abilities?.[k]?.value) || 10) + n]));
+    if (Object.keys(premie).length) await comp.update(premie);
   }
   return { plan, kopia, wykonane: true };
 }

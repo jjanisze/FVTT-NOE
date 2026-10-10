@@ -1173,7 +1173,7 @@ kreator w swoim logowaniu) — poziomy za właścicielem i U23 sprawdzone mutacj
     w kompendium, nie towarzysz.
   - *Migracja klas* (`migrate-classes`, ręczna) pomija towarzyszy — klasa „Towarzysz” nie jest zaślepką.
 
-**2026-10-10 — E5: skrypt i próba w piaskownicy; kampania czeka na MG.** `scripts/migration/migrate-towarzysze.mjs`
+**2026-10-10 — E5 zrobione (kampania przy MG).** `scripts/migration/migrate-towarzysze.mjs`
 (`game.neuroshima.towarzysze.migruj({ wlasciciel, towarzysz, broniWlasciciela, sztuczka, commit })`, na sucho
 domyślnie, idempotentna). Kopie Victora i Evie z kampanii przeszły migrację w piaskownicy; lista z §7.14 pkt 4
 na żywo: PW 15/15, KW 3k6, PB +2, klasa Towarzysz 3, Percepcja na MDR, Śledztwo na INT, AR z biegłością (palna
@@ -1181,11 +1181,20 @@ pośrednia u Victora), Komenda [B] na Partnerze, grupa inicjatywy z Victorem, tu
 Unikaniem i kartą bez niej, umieranie ze Stopniem, licznik Regeneracji po DO, dzienne zapotrzebowanie drużyny.
 Drugi przebieg nic nie planuje. Próba na sucho w kampanii daje ten sam plan.
 
+- **Kampania (decyzje MG 2026-10-10):** migracja wykonana; Sztuczka Evie — **Przycelowanie** (D15) zamiast
+  Pierwotnego instynktu, z +1 ZRC (15 → 16; Sztuczki nie niosą automatyki cech, premię podaje migracja —
+  `premiaCechy`, tylko przy faktycznej zamianie). Lista §7.14 pkt 4 w kampanii bez kroków zmieniających stan
+  (wartości, AR z biegłością, Komenda, drużyna, pasek u Victora, plakietka, brak Fuksów i kreatora) — walka,
+  umieranie, DO i dzień sprawdzone na kopiach w piaskownicy. Zrzut obu kart w przekazaniu sesji.
+- **Znalezione w kampanii:** Evie miała Szybkość 0 — postać sprzed `character-defaults.mjs` bez gatunku (dnd5e
+  bierze Szybkość z gatunku). Migracja dopisuje 9 m, gdy jej nie ma; inne postacie bez gatunku — MG (uwaga z B6).
+- **Pkt 5 §7.14** (notatka kampanii o Evie, sekcja Mechanika) — MG w vaulcie.
+
 - **Kopia (U19) poza repozytorium:** plan mówił „manifest w `dev/backup/`”, ale kopia aktora to treść kampanii
   (biografia), a repozytorium jest publiczne — kopia leży w folderze świata (`worlds/<świat>/neuro-backups/`).
 - **Znalezione przy migracji:** profesje nie nadają swoich biegłości (umiejętności, zestawu narzędzi, kategorii
   broni) — `professions.json` ma ich tekst, ale builder nie robi z niego awansów. Dotyczy wszystkich 18 profesji
   i każdej postaci, nie tylko Victora (brak mu Śledztwa i Zastraszania z biegłości Sędziego). Poza zakresem M3 —
-  do decyzji MG.
+  decyzja MG: pozycja „Biegłości profesji” w M6 `PLAN_beta.md`, z uwagą przy bramce B6.
 
 *(dalej etapy dopisują tu rozstrzygnięcia z wdrożenia, jak w `PLAN_m1_walka.md` §11)*
