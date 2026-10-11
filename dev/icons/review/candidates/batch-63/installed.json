@@ -1,0 +1,377 @@
+{
+  "date": "2026-10-12",
+  "installed": [
+    {
+      "itemId": "batch59-karabin-laserowy",
+      "name": "Karabin laserowy",
+      "candidateId": "batch61-revision",
+      "source": "candidates/batch-61/karabin_laserowy_revision_c.png",
+      "files": [
+        "icons/weapons/karabin_laserowy.svg",
+        "icons/weapons/karabin_laserowy.webp"
+      ],
+      "sourceSha256": "cefa779ef5b625733514845dd243594be63cd90affcd94691a0839bde4a54d08",
+      "webpSha256": "53f78f9031247b7ef73ddd7321e86754a922b722f686730c62d85d9cc2f7c054"
+    },
+    {
+      "itemId": "batch60-cwiczenie-czyni-mistrza",
+      "name": "Ćwiczenie czyni mistrza",
+      "candidateId": "batch61-revision",
+      "source": "candidates/batch-61/cwiczenie_czyni_mistrza_revision_b.png",
+      "files": [
+        "icons/abilities/cwiczenie-czyni-mistrza.svg",
+        "icons/abilities/cwiczenie-czyni-mistrza.webp"
+      ],
+      "sourceSha256": "c6b3dd279445bdaef66ae7f138bb4a59b1c225af4230fa820c930b120cdf8fef",
+      "webpSha256": "51103ad378691e845ef737fbcb9b1f42eecf3afee1db8cfa1d9e31c52404ddcb"
+    },
+    {
+      "itemId": "batch60-grad-olowiu",
+      "name": "Grad ołowiu",
+      "candidateId": "batch61-revision",
+      "source": "candidates/batch-61/grad_olowiu_revision_b.png",
+      "files": [
+        "icons/abilities/grad-olowiu.svg",
+        "icons/abilities/grad-olowiu.webp"
+      ],
+      "sourceSha256": "f8667b82c24e85e1f980e1d46207de79f3410dae41632787a73ad78ca9b38054",
+      "webpSha256": "acc07808d928609a4e8997d0fa60e17ef99ca49c517eb63281ecc13ea9314527"
+    },
+    {
+      "itemId": "batch60-ja-juz-swoje-odchorowalem",
+      "name": "Ja już swoje odchorowałem",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-60/ja_juz_swoje_odchorowalem.png",
+      "files": [
+        "icons/abilities/ja-juz-swoje-odchorowalem.svg",
+        "icons/abilities/ja-juz-swoje-odchorowalem.webp"
+      ],
+      "sourceSha256": "36c20f9c71870be5ac206afc7737b7aba2a155415557d7382a51f8f45a339302",
+      "webpSha256": "98ab9b72505127f56818e4cbc8dad20602668e57b9202d2b807fb3f8b6945e5e"
+    },
+    {
+      "itemId": "batch60-jesli-ma-silnik-to-ruszy",
+      "name": "Jeśli ma silnik, to ruszy",
+      "candidateId": "batch61-revision",
+      "source": "candidates/batch-61/jesli_ma_silnik_to_ruszy_revision_b.png",
+      "files": [
+        "icons/abilities/jesli-ma-silnik-to-ruszy.svg",
+        "icons/abilities/jesli-ma-silnik-to-ruszy.webp"
+      ],
+      "sourceSha256": "c4066cd6aee4fe4dbd5824bd5ba073d32f7a216e34b2601a46b367251c78217d",
+      "webpSha256": "818515942bc1cd0b6c933776fc8178859ad34f1a78c61c84b0e825c405bc6ba0"
+    },
+    {
+      "itemId": "batch60-pakowanie",
+      "name": "Pakowanie",
+      "candidateId": "batch61-revision",
+      "source": "candidates/batch-61/pakowanie_revision_b.png",
+      "files": [
+        "icons/abilities/pakowanie.svg",
+        "icons/abilities/pakowanie.webp"
+      ],
+      "sourceSha256": "7218eb30ad1705b0345fe54958a2805175c28eeadcd74064b86a3bad835ea1f9",
+      "webpSha256": "fcf367cee49cadc7285c069e986e4b9559fcf514b44d9e10ac00794a25b01d9a"
+    },
+    {
+      "itemId": "batch60-patriota",
+      "name": "Patriota",
+      "candidateId": "batch61-revision",
+      "source": "candidates/batch-61/patriota_revision_b.png",
+      "files": [
+        "icons/abilities/patriota.svg",
+        "icons/abilities/patriota.webp"
+      ],
+      "sourceSha256": "6865987b87db3ef4f86ff213238570e2feaca3316002ff01b61b5e2ccc566633",
+      "webpSha256": "83d7620e52d4d572ac9f352a08a6bdc85fce2f64b7e13d5e04bedfdfb9b01d6c"
+    },
+    {
+      "itemId": "batch60-urodzony-morderca",
+      "name": "Urodzony morderca",
+      "candidateId": "batch61-revision",
+      "source": "candidates/batch-61/urodzony_morderca_revision_b.png",
+      "files": [
+        "icons/abilities/urodzony-morderca.svg",
+        "icons/abilities/urodzony-morderca.webp"
+      ],
+      "sourceSha256": "cc755b765c5381367d4d967807744495bc79d8183b5b6801b8d615966c0abb12",
+      "webpSha256": "1109759551cfce1b2d0e706da5e1013f6a39b585e01af98af285d54cc0d64aec"
+    },
+    {
+      "itemId": "batch60-zawziety-sukinkot",
+      "name": "Zawzięty sukinkot",
+      "candidateId": "batch61-revision",
+      "source": "candidates/batch-61/zawziety_sukinkot_revision_b.png",
+      "files": [
+        "icons/abilities/zawziety-sukinkot.svg",
+        "icons/abilities/zawziety-sukinkot.webp"
+      ],
+      "sourceSha256": "df9f85620dc153139ae53447678f992b4358f10f375a9e1420cbace96b95145e",
+      "webpSha256": "7052773e36e81bd97a2cfd0bae56e6ea450cd49edd5f1e1d57c1c2d75481a4a7"
+    },
+    {
+      "itemId": "batch61-na-symulatorach-to-dzialalo",
+      "name": "Na symulatorach to działało",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-61/na_symulatorach_to_dzialalo.png",
+      "files": [
+        "icons/abilities/na-symulatorach-to-dzialalo.svg",
+        "icons/abilities/na-symulatorach-to-dzialalo.webp"
+      ],
+      "sourceSha256": "c82b28dcee42da30a63b9a710dc6efb87102d0076aab2e67c798a47ac330f437",
+      "webpSha256": "6e8ab723454d70b6f81d50f86656bff6972421a61b465b413c13750505886452"
+    },
+    {
+      "itemId": "batch61-telepata",
+      "name": "Telepata",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-61/telepata.png",
+      "files": [
+        "icons/abilities/telepata.svg",
+        "icons/abilities/telepata.webp"
+      ],
+      "sourceSha256": "76e36f851b08ed7532e7c65e7c34da0a064f45dca31bde2e625683001c0aa94f",
+      "webpSha256": "9d0d8ae4257e455728ef664d74e99845c3bb5f732298ac47017cd180c8d72f0b"
+    },
+    {
+      "itemId": "batch61-przycelowanie",
+      "name": "Przycelowanie",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-61/przycelowanie.png",
+      "files": [
+        "icons/abilities/przycelowanie.svg",
+        "icons/abilities/przycelowanie.webp"
+      ],
+      "sourceSha256": "968371915669d83f798114fbcbbb68cbdc6697a75e14b3852eadde3c2a427ec5",
+      "webpSha256": "1e79bc317da9d8817ed2b0bbb71f85580fcaf017cd51312fb6762155538a13f4"
+    },
+    {
+      "itemId": "batch61-przedwojenna-edukacja",
+      "name": "Przedwojenna edukacja",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-61/przedwojenna_edukacja.png",
+      "files": [
+        "icons/abilities/przedwojenna-edukacja.svg",
+        "icons/abilities/przedwojenna-edukacja.webp"
+      ],
+      "sourceSha256": "4c3176d513a7676a61eb6ac606562d5ce128ce4ae88ed6c84657085ae1383bfb",
+      "webpSha256": "30027aac1cae39f37c9477c66f56d120fafc854e42d65e96ac333f1bcfc4278b"
+    },
+    {
+      "itemId": "batch61-nano-tech",
+      "name": "Nano-Tech",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-61/nano_tech.png",
+      "files": [
+        "icons/abilities/nano-tech.svg",
+        "icons/abilities/nano-tech.webp"
+      ],
+      "sourceSha256": "6a10c72c15e318fae2f38a7558f6ee499459730038d4fb01376ddb4978efc71e",
+      "webpSha256": "52273dab2904a7aa84b69fa48fb1d967867f7ab4f3f8ba55a25d1962d56bd630"
+    },
+    {
+      "itemId": "batch61-dieta-cud",
+      "name": "Dieta cud",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-61/dieta_cud.png",
+      "files": [
+        "icons/abilities/dieta-cud.svg",
+        "icons/abilities/dieta-cud.webp"
+      ],
+      "sourceSha256": "e6ad47c72a1887f0ce99916bef0ede9bf7a1d2b5d6442e2f09e15c6a6810a0c7",
+      "webpSha256": "80d6f414949e33b00059111df8a59ecc526e52e5ed12c4e375cec391376c92d1"
+    },
+    {
+      "itemId": "batch61-duch-pustyni",
+      "name": "Duch pustyni",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-61/duch_pustyni.png",
+      "files": [
+        "icons/abilities/duch-pustyni.svg",
+        "icons/abilities/duch-pustyni.webp"
+      ],
+      "sourceSha256": "fbbbc3b67afabb5340a739b07fae71b94d5aa0c180c80378a2824e72278cd71f",
+      "webpSha256": "ebfd3db1d31051c04dce25b240f0ed231d0ebdf67004439a5d1b07b2da8f15fa"
+    },
+    {
+      "itemId": "batch61-ale-jazda",
+      "name": "Ale jazda!",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-61/ale_jazda.png",
+      "files": [
+        "icons/abilities/ale-jazda.svg",
+        "icons/abilities/ale-jazda.webp"
+      ],
+      "sourceSha256": "36b41bb5f44479cd77f4c70a2f373a4cebc1bcc69b9195606a3289931b4e2d95",
+      "webpSha256": "cdb40f8efaeaf61a4107443981cd6cd8ab93aec25c0d7b830a78fa255fdd3ea8"
+    },
+    {
+      "itemId": "batch61-gornik-z-dziada-pradziada",
+      "name": "Górnik z dziada pradziada",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-61/gornik_z_dziada_pradziada.png",
+      "files": [
+        "icons/abilities/gornik-z-dziada-pradziada.svg",
+        "icons/abilities/gornik-z-dziada-pradziada.webp"
+      ],
+      "sourceSha256": "ba7b3dfbcf91bd0da311932b51cf7ca873747e1c56a8c8b7da6ce9f46f97b54a",
+      "webpSha256": "3978203c6204fc95607f2635c5a92416410d2f49153e78fa462d77c767a01dea"
+    },
+    {
+      "itemId": "batch62-doba",
+      "name": "Doba",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-62/doba.png",
+      "files": [
+        "icons/actions/doba.svg",
+        "icons/actions/doba.webp"
+      ],
+      "sourceSha256": "98510688945ef36c0a11f406cc4a14b3c7b17f1473b75a57fbdd9f075bfe7514",
+      "webpSha256": "9f158454bee5c90cb563dfa8fae45610bb4e40256ebf1da52ba94a053fb7efb1"
+    },
+    {
+      "itemId": "batch62-rozbiorka",
+      "name": "Rozbiórka",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-62/rozbiorka.png",
+      "files": [
+        "icons/actions/rozbiorka.svg",
+        "icons/actions/rozbiorka.webp"
+      ],
+      "sourceSha256": "1e2dfea9a2c28bab0e0d687defe95b5049de4670ae273ebbee977f7e940fa875",
+      "webpSha256": "d894b47b35b40042a13d38e547b1218e11166f4ee53654ff02680c77d93eb49a"
+    },
+    {
+      "itemId": "batch62-wylaczony",
+      "name": "Wyłączony",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-62/wylaczony.png",
+      "files": [
+        "icons/statuses/wylaczony.svg",
+        "icons/statuses/wylaczony.webp"
+      ],
+      "sourceSha256": "37b3b324dd1ee8d2de5d7f0c3c238c4f212cd9d14f112aa01981722f05daed8c",
+      "webpSha256": "55cce4007bd462e3b4b98ff55cea4cdb74a383f1958564c1e512fd8ec8a0a9e9"
+    },
+    {
+      "itemId": "batch62-emiter-emp",
+      "name": "Emiter EMP",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-62/emiter_emp.png",
+      "files": [
+        "icons/weapons/emiter_emp.svg",
+        "icons/weapons/emiter_emp.webp"
+      ],
+      "sourceSha256": "8a08baa55f1a7b05c45c66a22ade2721b030a646c4f7835b0b2e3c3973e942d5",
+      "webpSha256": "19eeaec57bc6c39ae01ce20eea2676873d52794d7768ede8a77d30c4018ebe97"
+    },
+    {
+      "itemId": "batch62-slodycze",
+      "name": "Fanty: słodycze",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-62/slodycze.png",
+      "files": [
+        "icons/fanty/slodycze.svg",
+        "icons/fanty/slodycze.webp"
+      ],
+      "sourceSha256": "e47dfae8cb0664c2b1df7823bd9e1e5921792cf0f765956bb5377c4dc7cd584c",
+      "webpSha256": "d4527b6005947149f9542b25fd7bb2b2b5620a417ca01b4732f09b574f5e061b"
+    },
+    {
+      "itemId": "batch62-cygaro",
+      "name": "Fanty: cygaro",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-62/cygaro.png",
+      "files": [
+        "icons/fanty/cygaro.svg",
+        "icons/fanty/cygaro.webp"
+      ],
+      "sourceSha256": "96e2596942199d24309f8c9d0b53af392be96e7b72bb4de2bdcd402da41142b4",
+      "webpSha256": "55d55398007ae626d905ceb3c7606b7507a5a3c4f44f44ffd711b340654bc2ee"
+    },
+    {
+      "itemId": "batch62-prasa",
+      "name": "Fanty: prasa",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-62/prasa.png",
+      "files": [
+        "icons/fanty/prasa.svg",
+        "icons/fanty/prasa.webp"
+      ],
+      "sourceSha256": "53dafd10fbf582b2ac8d1bdb1ccfca2953cc92d82d2acfdbc86703704ca43046",
+      "webpSha256": "b5d19262b042b9203457870adca6eba85e8fd46d4fa52621a9e52afe11278752"
+    },
+    {
+      "itemId": "batch62-gra",
+      "name": "Fanty: gra",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-62/gra.png",
+      "files": [
+        "icons/fanty/gra.svg",
+        "icons/fanty/gra.webp"
+      ],
+      "sourceSha256": "6d1af73f9f6646eaa604b2399143b654ddcf2f36d135219da8a8a315f663d1ea",
+      "webpSha256": "319d185465df028251a635bcc862e7bdae143414ba8737bd59606e65aa7c5e89"
+    },
+    {
+      "itemId": "batch62-kaseta",
+      "name": "Fanty: kaseta / VHS",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-62/kaseta.png",
+      "files": [
+        "icons/fanty/kaseta.svg",
+        "icons/fanty/kaseta.webp"
+      ],
+      "sourceSha256": "84a9284a7c81f9e1b5eb66389b3c3cf0d6e0a183d1250b8e7fde0a8fb4ebd348",
+      "webpSha256": "207d50d5d02467e15ac4e28bf12d55e3152c87f9180876a079d4a1f7373a3d89"
+    },
+    {
+      "itemId": "batch62-plyta-cd",
+      "name": "Fanty: płyta CD",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-62/plyta-cd.png",
+      "files": [
+        "icons/fanty/plyta-cd.svg",
+        "icons/fanty/plyta-cd.webp"
+      ],
+      "sourceSha256": "79627b0c29de4715040200837f1507bccffacf2d7ac7612b3b1ea6fd2579a17b",
+      "webpSha256": "cfdf77e40dc5dc61de4c5af7cd99ae6e74ae2e2d9c3cb058084beab51a749ce5"
+    },
+    {
+      "itemId": "batch62-konsola",
+      "name": "Fanty: konsola / cartridge",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-62/konsola.png",
+      "files": [
+        "icons/fanty/konsola.svg",
+        "icons/fanty/konsola.webp"
+      ],
+      "sourceSha256": "1fa8f8f9e68d73d730dd3131791323604c0d9704c3c94dda69ecdab0c4f3865b",
+      "webpSha256": "3809f292cf03e3939a875c8dc70ded2e62960151fa15f5d8696798e5385e82f7"
+    },
+    {
+      "itemId": "batch62-alkohol",
+      "name": "Fanty: alkohol",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-62/alkohol.png",
+      "files": [
+        "icons/fanty/alkohol.svg",
+        "icons/fanty/alkohol.webp"
+      ],
+      "sourceSha256": "2f2331d994e2163b498bf0078d89e683ebeb129325f12f99af6ec9614d686aaf",
+      "webpSha256": "82351e5deef94bf7cf085075038c513c587daaa96cccb9ad435db089772a5c4a"
+    },
+    {
+      "itemId": "batch62-papier-toaletowy",
+      "name": "Fanty: papier toaletowy",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-62/papier-toaletowy.png",
+      "files": [
+        "icons/fanty/papier-toaletowy.svg",
+        "icons/fanty/papier-toaletowy.webp"
+      ],
+      "sourceSha256": "a7a889539c173f6248a2d33633a3295e30c41417d17168484de81eb6a087042d",
+      "webpSha256": "95f973b19c359d7a32b46eb00679b21beaae2daabd18c4e979fb75b94f01f0e9"
+    }
+  ]
+}
