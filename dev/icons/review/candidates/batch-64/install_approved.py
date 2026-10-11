@@ -24,8 +24,8 @@ def target_for(item):
     return "icons/abilities/" + item["id"].split("-", 1)[1] + ".svg"
 
 
-def main():
-    decisions = json.loads((HERE / "decisions.json").read_text(encoding="utf-8"))["active"]
+def main(decisions_name="decisions.json", report_name="installed.json"):
+    decisions = json.loads((HERE / decisions_name).read_text(encoding="utf-8"))["active"]
     current = json.loads((REVIEW / "feedback.json").read_text(encoding="utf-8"))["items"]
     approved = [item for item in decisions if item["decision"] == "approve"]
     prepared = []
@@ -64,9 +64,10 @@ def main():
                        str(bitmap.relative_to(ROOT)).replace("\\", "/")],
                        "sourceSha256": hashlib.sha256((REVIEW / item["selectedSource"]).read_bytes()).hexdigest(),
                        "webpSha256": hashlib.sha256(bitmap.read_bytes()).hexdigest()})
-    (HERE / "installed.json").write_text(json.dumps({"date": "2026-10-12", "installed": report},
+    (HERE / report_name).write_text(json.dumps({"date": "2026-10-12", "installed": report},
                                                   ensure_ascii=False, indent=2)+"\n", encoding="utf-8")
     print(f"Installed {len(report)} exact-approved WEBP/SVG pairs; packs and world untouched")
+    return report
 
 
 if __name__ == "__main__":

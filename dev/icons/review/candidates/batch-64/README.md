@@ -39,8 +39,26 @@ candidates require fresh approval before production installation.
 The separate `install_approved.py` installed nineteen incoming Batch 63 approvals
 as WEBP/SVG pairs, after checking unchanged saved selections and clean target
 paths. `installed.json` records all explicit production files and source/output
-hashes. No Batch 64 candidate is installed and no code, pack or world is changed.
-Older repoints/rebuilds remain in MISSING's "Do podpięcia".
+hashes. This incoming snapshot and delivery report are kept separate from Batch 64's
+subsequent review. Older repoints/rebuilds remain in MISSING's "Do podpięcia".
+
+The GM reviewed Batch 64 on 2026-10-12: fifteen approved, eleven revision requests,
+and Kuloodporność without a saved decision. `reviewed.json` archives the exact
+selections, verbatim notes and feedback records. `accept_review.py` installs only
+the exact approved selections, resolves their cards and leaves `feedback.json`
+byte-for-byte unchanged. `reviewed-installed.json` records the fifteen new
+WEBP/SVG deliveries and source/output hashes; `remaining-items.json` preserves
+the twelve open cards. The eleven revisions are queued in MISSING for the next
+batch. No code, pack or world was changed.
+
+```sh
+python dev/icons/review/candidates/batch-64/accept_review.py --check
+```
+
+This check verifies production pixels against the approved PNGs, hashes, margins,
+pure white visible pixels, WEBP encoding and the embedded theme-aware SVG masks.
+Running without `--check` uses the existing immutable `reviewed.json` snapshot;
+it does not consume later feedback or allocate Batch 65.
 
 Do not rerun `inspect_queue.mjs` after registering: the saved incoming decisions
 belong to this batch's exact historical source references.

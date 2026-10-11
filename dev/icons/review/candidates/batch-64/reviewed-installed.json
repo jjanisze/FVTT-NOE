@@ -1,0 +1,185 @@
+{
+  "date": "2026-10-12",
+  "installed": [
+    {
+      "itemId": "batch60-wychuchana-spluwa",
+      "name": "Wychuchana spluwa",
+      "candidateId": "batch64-revision",
+      "source": "candidates/batch-64/wychuchana_spluwa_revision_d.png",
+      "files": [
+        "icons/abilities/wychuchana-spluwa.svg",
+        "icons/abilities/wychuchana-spluwa.webp"
+      ],
+      "sourceSha256": "cb73f13d55191e28005620d47d9c7df17cfb0b004f015a8f863da7f022f36e3d",
+      "webpSha256": "02f5b5f04273c844fa8fb9cf8189ff5eea41df0095b2d84dc393df18843da35f"
+    },
+    {
+      "itemId": "batch63-gambling-we-krwi",
+      "name": "Gambling we krwi",
+      "candidateId": "batch64-revision",
+      "source": "candidates/batch-64/gambling-we-krwi_revision_b.png",
+      "files": [
+        "icons/abilities/gambling-we-krwi.svg",
+        "icons/abilities/gambling-we-krwi.webp"
+      ],
+      "sourceSha256": "a9f2c00e2f486b194047b81a78b6f9ec43e38118a22f2921b4f96d2b720215f9",
+      "webpSha256": "f1899d799f3071ce4a5f72b24695c99c29e6fec7b5c60108f57b53798e86d6ef"
+    },
+    {
+      "itemId": "batch63-hi-tech",
+      "name": "Hi-Tech",
+      "candidateId": "batch64-revision",
+      "source": "candidates/batch-64/hi-tech_revision_b.png",
+      "files": [
+        "icons/abilities/hi-tech.svg",
+        "icons/abilities/hi-tech.webp"
+      ],
+      "sourceSha256": "0f4ae546cfb99ee6ebaed465e3fc7e7c9c8a1f71ccde4f738117129fd9827121",
+      "webpSha256": "5300d30bc9e495dc0868ffb92b54a20caf45de9f0e72c3b517a00558bf9cedb9"
+    },
+    {
+      "itemId": "batch64-bez-trzymanki",
+      "name": "Bez trzymanki",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-64/bez-trzymanki.png",
+      "files": [
+        "icons/abilities/bez-trzymanki.svg",
+        "icons/abilities/bez-trzymanki.webp"
+      ],
+      "sourceSha256": "cdec5bd0fe421c5e460dc98e932ab1f2b70860fe8d2e7bf94d4088648ea749b9",
+      "webpSha256": "eaada52af3295b6556b203de2494c7293c40056bd500ff58c648ca637f7ee58a"
+    },
+    {
+      "itemId": "batch64-ciszej-niz-cien",
+      "name": "Ciszej niż cień",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-64/ciszej-niz-cien.png",
+      "files": [
+        "icons/abilities/ciszej-niz-cien.svg",
+        "icons/abilities/ciszej-niz-cien.webp"
+      ],
+      "sourceSha256": "64869b8af0b20bf6b0da4faa1c3d3847a3a2b13256946b61ef570b966c3232cc",
+      "webpSha256": "68806e251e72322f029fbfd0228d53d5004242e1a1f74fae70c706d21f844a5c"
+    },
+    {
+      "itemId": "batch64-czlowiek-pajak",
+      "name": "Człowiek-pająk",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-64/czlowiek-pajak.png",
+      "files": [
+        "icons/abilities/czlowiek-pajak.svg",
+        "icons/abilities/czlowiek-pajak.webp"
+      ],
+      "sourceSha256": "b1e8b712b157abeac3cc107abe0b3f781fe1427b711b6c833d16ec5f613dfe89",
+      "webpSha256": "0cdb114f709d45ce1851fcb6199e29204bb233d6820be866062299e549aa29d5"
+    },
+    {
+      "itemId": "batch64-fabrykator",
+      "name": "Fabrykator",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-64/fabrykator.png",
+      "files": [
+        "icons/abilities/fabrykator.svg",
+        "icons/abilities/fabrykator.webp"
+      ],
+      "sourceSha256": "9071a3d05fee3040fe3f31aa750408ba3a515f585e9a2326b1b4bd729dc7a4a7",
+      "webpSha256": "e6fbabcc8cd0f338366174c99ec330e1fc8dcb668e83d61a3fb6a574544ba0ac"
+    },
+    {
+      "itemId": "batch64-grenadier",
+      "name": "Grenadier",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-64/grenadier.png",
+      "files": [
+        "icons/abilities/grenadier.svg",
+        "icons/abilities/grenadier.webp"
+      ],
+      "sourceSha256": "da7693ed24401b446efa10868d99bb35640390ebdc819dcb263f4b5cdc918801",
+      "webpSha256": "5b1847ec1986bc945b18a16b1a3a7a59c0b31342cf629e05db45cbacbbde81a6"
+    },
+    {
+      "itemId": "batch64-immunitet",
+      "name": "Immunitet",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-64/immunitet.png",
+      "files": [
+        "icons/abilities/immunitet.svg",
+        "icons/abilities/immunitet.webp"
+      ],
+      "sourceSha256": "532a998da71df28e5671ae7765a6ea15b097b22fd92c33edcb05f5bd3032f856",
+      "webpSha256": "da97063c7f6bef28e0e20318ddaf9d453c415489ad7f292e8c23bbf366856de0"
+    },
+    {
+      "itemId": "batch64-karateka",
+      "name": "Karateka",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-64/karateka.png",
+      "files": [
+        "icons/abilities/karateka.svg",
+        "icons/abilities/karateka.webp"
+      ],
+      "sourceSha256": "1b3f104160b064c283dea515c31c244340c4bb1740abbdd5640399b36e452d45",
+      "webpSha256": "0251600f9af4f81fda75473ec98e1f4b98a472d7f1eec5c8215c0fd5c2a50e8a"
+    },
+    {
+      "itemId": "batch64-lawnik",
+      "name": "Ławnik",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-64/lawnik.png",
+      "files": [
+        "icons/abilities/lawnik.svg",
+        "icons/abilities/lawnik.webp"
+      ],
+      "sourceSha256": "2061fc74c9f2c5d8864a53dbc2088120b2d9bb72ce538f2d108a01543933b902",
+      "webpSha256": "b269c389e26d741e28614b1d989559cf8c79da097ddf64ccf03ba2d7bff99c05"
+    },
+    {
+      "itemId": "batch64-miotacz",
+      "name": "Miotacz",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-64/miotacz.png",
+      "files": [
+        "icons/abilities/miotacz.svg",
+        "icons/abilities/miotacz.webp"
+      ],
+      "sourceSha256": "592df199e1ad13b5090fb47bac3beade3ddb13a94f878a71288c3a8d4ae826e0",
+      "webpSha256": "dea080a47f5bc8babfca6946a32e801d5c5ebd14602f815fbdf5b54b43380b0f"
+    },
+    {
+      "itemId": "batch64-mistrz-broni-bialej",
+      "name": "Mistrz broni białej",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-64/mistrz-broni-bialej.png",
+      "files": [
+        "icons/abilities/mistrz-broni-bialej.svg",
+        "icons/abilities/mistrz-broni-bialej.webp"
+      ],
+      "sourceSha256": "967d86e91aab40efd318d38feb857a3359ce076ec21824af123087e37b5d0009",
+      "webpSha256": "dcac072bbfc5831a50f0a65175464c7aa6dc05166fbb8c6a261cddf378c400db"
+    },
+    {
+      "itemId": "batch64-neo",
+      "name": "Neo",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-64/neo.png",
+      "files": [
+        "icons/abilities/neo.svg",
+        "icons/abilities/neo.webp"
+      ],
+      "sourceSha256": "c9ff82ab0465e4752210e832b9b1d2d9d42e05240af1a1ad18b902310d424673",
+      "webpSha256": "ec4f5f06f90aa3deca9218a00c8b074c730d68e3a29ea19130c4ac484585dcd3"
+    },
+    {
+      "itemId": "batch64-nozownik",
+      "name": "Nożownik",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-64/nozownik.png",
+      "files": [
+        "icons/abilities/nozownik.svg",
+        "icons/abilities/nozownik.webp"
+      ],
+      "sourceSha256": "7bac8764047cf77105043eb750be77c2c3292001f6f9e30545e70335b540c0c1",
+      "webpSha256": "53164069b84dcef5d80d3b0960d6afbf826c92d66119598f034a397bb0afddb1"
+    }
+  ]
+}

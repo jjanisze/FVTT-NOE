@@ -109,6 +109,13 @@ the same lossless WEBP/SVG process. Per-file selections and hashes are in
 `dev/icons/review/candidates/batch-64/installed.json`. Batch 64's generic prompts
 and exact revision references are archived beside its review candidates.
 
+Fifteen GM-approved Batch 64 glyphs were installed on 2026-10-12 as lossless
+WEBP rasters and SVG wrappers embedding WEBP masks. These OpenAI-generated
+glyphs retain the exact reviewed pixels. Saved selections and source/output hashes
+are in `dev/icons/review/candidates/batch-64/reviewed-installed.json`; all reviewed
+decisions, including eleven revision requests and one pending glyph, are archived
+in `dev/icons/review/candidates/batch-64/reviewed.json`.
+
 ## Token art
 
 Bestiary token art is original work, borrowed (by reference, not copy) from `dnd5e`'s own
