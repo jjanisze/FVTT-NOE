@@ -104,6 +104,11 @@ are recorded in `dev/icons/review/candidates/batch-63/installed.json`.
 Batch 63's new atlas prompts and targeted Samuraj correction are archived beside
 their review candidates; pending candidates are not shipped until approved.
 
+A further 19 exact GM-approved Batch 63 glyphs were installed on 2026-10-12 using
+the same lossless WEBP/SVG process. Per-file selections and hashes are in
+`dev/icons/review/candidates/batch-64/installed.json`. Batch 64's generic prompts
+and exact revision references are archived beside its review candidates.
+
 ## Token art
 
 Bestiary token art is original work, borrowed (by reference, not copy) from `dnd5e`'s own

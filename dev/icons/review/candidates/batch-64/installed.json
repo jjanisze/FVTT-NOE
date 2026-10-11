@@ -1,0 +1,233 @@
+{
+  "date": "2026-10-12",
+  "installed": [
+    {
+      "itemId": "batch59-ruch",
+      "name": "Ruch",
+      "candidateId": "batch63-revision",
+      "source": "candidates/batch-63/ruch_revision_d.png",
+      "files": [
+        "icons/abilities/ruch.svg",
+        "icons/abilities/ruch.webp"
+      ],
+      "sourceSha256": "d0811a359fc4db9a2a941627947e1cb899456885c9bfdcceebc4b46b566dfee8",
+      "webpSha256": "8b66a30092a98809b8dc70b3896136a4d9d1b47799a6f884ae4f7e07e54f878e"
+    },
+    {
+      "itemId": "batch60-paszcza",
+      "name": "Paszcza",
+      "candidateId": "batch63-revision",
+      "source": "candidates/batch-63/paszcza_revision_c.png",
+      "files": [
+        "icons/abilities/paszcza.svg",
+        "icons/abilities/paszcza.webp"
+      ],
+      "sourceSha256": "3f0af4cfcd6ccc58cf656efc0f8483ee8aef5fd44bd5a9d6e647a9520e2f603e",
+      "webpSha256": "7917710bcfc1f70d5330590bfd3e02fd8e1bae772c785b9bfdec3f77570015f3"
+    },
+    {
+      "itemId": "batch61-nowka-sztuka",
+      "name": "Nówka sztuka",
+      "candidateId": "batch63-revision",
+      "source": "candidates/batch-63/nowka_sztuka_revision_b.png",
+      "files": [
+        "icons/abilities/nowka-sztuka.svg",
+        "icons/abilities/nowka-sztuka.webp"
+      ],
+      "sourceSha256": "e5798af6b4ea569af95b535ff63a9db3518f5281908a194cedbcf6394db23bd8",
+      "webpSha256": "09e1f018ca390ceffd20158dc215f8363dbb4997960fad10f4d799cc2e2cb22b"
+    },
+    {
+      "itemId": "batch61-polegam-tylko-na-sobie",
+      "name": "Polegam tylko na sobie",
+      "candidateId": "batch63-revision",
+      "source": "candidates/batch-63/polegam_tylko_na_sobie_revision_b.png",
+      "files": [
+        "icons/abilities/polegam-tylko-na-sobie.svg",
+        "icons/abilities/polegam-tylko-na-sobie.webp"
+      ],
+      "sourceSha256": "10fa95bfae3a752a2aa7da70dbdc5560f3f74bd3754861a95cb9b043e9baf774",
+      "webpSha256": "d4a21cdc8a8fabfb18f748f8870f7a1b18410e02a4940c2e06b6c8b2ed5eeab1"
+    },
+    {
+      "itemId": "batch61-szlachetne-urodzenie",
+      "name": "Szlachetne urodzenie",
+      "candidateId": "batch63-revision",
+      "source": "candidates/batch-63/szlachetne_urodzenie_revision_b.png",
+      "files": [
+        "icons/abilities/szlachetne-urodzenie.svg",
+        "icons/abilities/szlachetne-urodzenie.webp"
+      ],
+      "sourceSha256": "87f228a5947cef4820dd464212bb3f351c11a7f6ddfe1032178803942687be47",
+      "webpSha256": "064148c26521d055f730c8a1209d787ed169eb3677e84d1edb30e1e5c8a8d2e4"
+    },
+    {
+      "itemId": "batch61-czlowiek-aligator",
+      "name": "Człowiek-aligator",
+      "candidateId": "batch63-revision",
+      "source": "candidates/batch-63/czlowiek_aligator_revision_b.png",
+      "files": [
+        "icons/abilities/czlowiek-aligator.svg",
+        "icons/abilities/czlowiek-aligator.webp"
+      ],
+      "sourceSha256": "65ae0ef470cfe7c2e16cbafb29ffbd63ae1715a4e93af5b908e6873f98218913",
+      "webpSha256": "9a0c0792fa60ef63fe4d760f2021577eba4e4fb872d8a419e989ac8b9c77b097"
+    },
+    {
+      "itemId": "batch61-wloczykij",
+      "name": "Włóczykij",
+      "candidateId": "batch63-revision",
+      "source": "candidates/batch-63/wloczykij_revision_b.png",
+      "files": [
+        "icons/abilities/wloczykij.svg",
+        "icons/abilities/wloczykij.webp"
+      ],
+      "sourceSha256": "e4260ca9797a4f0e40fd05d1e250dc2404bd15b3afeee8bf00365df32dc3e086",
+      "webpSha256": "b1315cdc394c8b0ae66d676c03f3785a2bfbc43173a1d9a874a34797eb710901"
+    },
+    {
+      "itemId": "batch62-handel",
+      "name": "Handel",
+      "candidateId": "batch63-revision",
+      "source": "candidates/batch-63/handel_revision_b.png",
+      "files": [
+        "icons/actions/handel.svg",
+        "icons/actions/handel.webp"
+      ],
+      "sourceSha256": "5713e3cc0a064938db6ab123348d9f196c455d4c9783b4271e940e4010176ef8",
+      "webpSha256": "263578a200605e79b711425da578ad45fe963deaa0cf0c1c7de84572d61e1eb6"
+    },
+    {
+      "itemId": "batch62-zabawka",
+      "name": "Fanty: zabawka",
+      "candidateId": "batch63-revision",
+      "source": "candidates/batch-63/zabawka_revision_b.png",
+      "files": [
+        "icons/fanty/zabawka.svg",
+        "icons/fanty/zabawka.webp"
+      ],
+      "sourceSha256": "8b41cc087277753970a644390a0cbff61db7d08c3e1aabe353ce7eb136392420",
+      "webpSha256": "303562033070cd42efac2a49bd84b0472117ff3fe66805a6910fac7085985790"
+    },
+    {
+      "itemId": "batch63-kwas-w-zylach",
+      "name": "Kwas w żyłach",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-63/kwas-w-zylach.png",
+      "files": [
+        "icons/abilities/kwas-w-zylach.svg",
+        "icons/abilities/kwas-w-zylach.webp"
+      ],
+      "sourceSha256": "1885549b8bfffd95e4190535a6a21d5ff495e2181fdef290947422c59653b7a3",
+      "webpSha256": "1db651bb50f8c180947ad4f0d679a72b88fef680345a62dece6c77ac12f28958"
+    },
+    {
+      "itemId": "batch63-edukacja",
+      "name": "Edukacja",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-63/edukacja.png",
+      "files": [
+        "icons/abilities/edukacja.svg",
+        "icons/abilities/edukacja.webp"
+      ],
+      "sourceSha256": "00cc27d8b1c821120b6e1b1061d317be0a87b13548b33760e5f8afe7ec2feeff",
+      "webpSha256": "3f9d755de9abe0765693c9114446b714a4a26f20a4ca669b6cc3f987d263ebbd"
+    },
+    {
+      "itemId": "batch63-moloch-cos-slyszalem",
+      "name": "Moloch? Coś słyszałem",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-63/moloch-cos-slyszalem.png",
+      "files": [
+        "icons/abilities/moloch-cos-slyszalem.svg",
+        "icons/abilities/moloch-cos-slyszalem.webp"
+      ],
+      "sourceSha256": "20a0ed05c9ec54a5f50d9d1447653cf1b4bcfcfaed0d4a3d887b331b0294ae8c",
+      "webpSha256": "d916c20dd71655fd92f6aa3f7d1ebd4fae4014240e903a3137acc89c628bbd7a"
+    },
+    {
+      "itemId": "batch63-cholerny-kaznodzieja",
+      "name": "Cholerny kaznodzieja",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-63/cholerny-kaznodzieja.png",
+      "files": [
+        "icons/abilities/cholerny-kaznodzieja.svg",
+        "icons/abilities/cholerny-kaznodzieja.webp"
+      ],
+      "sourceSha256": "09d4d01fffc892231b11a50eb5be09a356b69e49d6d8eb4af6de5f2d73d8bbbc",
+      "webpSha256": "3d59d1e271ce74166f19c11396f9118011058469797b9c5fa5a2ec9ef7941c12"
+    },
+    {
+      "itemId": "batch63-przed-wojna-wszystko-bylo-lepiej",
+      "name": "Przed wojną wszystko było lepiej",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-63/przed-wojna-wszystko-bylo-lepiej.png",
+      "files": [
+        "icons/abilities/przed-wojna-wszystko-bylo-lepiej.svg",
+        "icons/abilities/przed-wojna-wszystko-bylo-lepiej.webp"
+      ],
+      "sourceSha256": "e892c46419193d59582a2d14adc33910177192edddf106a31be1b6e0a6a18c7a",
+      "webpSha256": "538fa1d1894381c623672d11e1f750925799f8ad6ff94f8c22d3ec584cc3c59f"
+    },
+    {
+      "itemId": "batch63-czlowiek-zwany-koniem",
+      "name": "Człowiek zwany koniem",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-63/czlowiek-zwany-koniem.png",
+      "files": [
+        "icons/abilities/czlowiek-zwany-koniem.svg",
+        "icons/abilities/czlowiek-zwany-koniem.webp"
+      ],
+      "sourceSha256": "b1927ec8a368883a46865fc828eeecb0512fbdcb99daaebaa04e26e9c181e7e6",
+      "webpSha256": "6da22b63120abd45c26d41740e034bdcde1e7d8418e5e9d93bbcd2fed030d25f"
+    },
+    {
+      "itemId": "batch63-zdrowa-okolica",
+      "name": "Zdrowa okolica",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-63/zdrowa-okolica.png",
+      "files": [
+        "icons/abilities/zdrowa-okolica.svg",
+        "icons/abilities/zdrowa-okolica.webp"
+      ],
+      "sourceSha256": "c64437f9052efd9496ed22b167542ff9a78c250d0d0ec7e66879294f2057baf6",
+      "webpSha256": "619a1f51f03079193f0b1efc6f578cd19c3a7cd18ed4ce054a5f797336e525da"
+    },
+    {
+      "itemId": "batch63-hazardzista",
+      "name": "Hazardzista",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-63/hazardzista.png",
+      "files": [
+        "icons/abilities/hazardzista.svg",
+        "icons/abilities/hazardzista.webp"
+      ],
+      "sourceSha256": "eae48e35333f6a7e947e2df41e77876a5b726875539d6a123a0ae5d27ce3aee0",
+      "webpSha256": "44c82c78063a13a51344281e8ef7ea479a0eba7685a3cffe1a90f9aed40a5d20"
+    },
+    {
+      "itemId": "batch63-aramis",
+      "name": "Aramis",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-63/aramis.png",
+      "files": [
+        "icons/abilities/aramis.svg",
+        "icons/abilities/aramis.webp"
+      ],
+      "sourceSha256": "f2eea4c1db8594cb2f44ee891be4be88c5f478c4a91f188b9fbb74f79f212d6b",
+      "webpSha256": "2b8ccd57ebcec7c8409e7dd67107e059c3880026a0df72502b6e7b60d1cf2269"
+    },
+    {
+      "itemId": "batch63-aspiryna-i-mietusy",
+      "name": "Aspiryna i Miętusy",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-63/aspiryna-i-mietusy.png",
+      "files": [
+        "icons/abilities/aspiryna-i-mietusy.svg",
+        "icons/abilities/aspiryna-i-mietusy.webp"
+      ],
+      "sourceSha256": "acde8ed69eb471cc217ca4049729f9608862cb87540d6153202f6ddf56394c73",
+      "webpSha256": "edd6c3206017427461e5d151af646941aa2d5d9bf51b53f613ea01c9c30b265d"
+    }
+  ]
+}
