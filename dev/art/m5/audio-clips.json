@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "clips": [
+    {
+      "source": "szabrowanie",
+      "start": 0,
+      "duration": 2.8,
+      "output": "sounds/postoj/szabrowanie.ogg",
+      "description": "Rubble being shifted and scattered; short scavenging cue."
+    },
+    {
+      "source": "bebeszenie-mokre",
+      "start": 0.72,
+      "duration": 2,
+      "output": "sounds/postoj/bebeszenie-mokre.ogg",
+      "description": "Wet celery crack and squish used as organic salvage foley."
+    },
+    {
+      "source": "warsztat",
+      "start": 1.25,
+      "duration": 2.3,
+      "output": "sounds/postoj/bebeszenie-metal.ogg",
+      "description": "Ratchet wrench removing machine hardware."
+    },
+    {
+      "source": "autodestrukcja-beep",
+      "start": 0,
+      "duration": 0.444,
+      "output": "sounds/postoj/autodestrukcja-beep.ogg",
+      "description": "One short alarm pulse, faded endpoints for repeated playback."
+    },
+    {
+      "source": "wymiana",
+      "start": 1.47,
+      "duration": 0.55,
+      "output": "sounds/postoj/wymiana.ogg",
+      "description": "A padded heavy object lands on a wooden box: restrained barter acknowledgement."
+    },
+    {
+      "source": "kucie",
+      "start": 0,
+      "duration": 12,
+      "tempo": 4,
+      "output": "sounds/produkcja/kucie.ogg",
+      "description": "Four real anvil strikes shortened to roughly three seconds, pitch preserved."
+    },
+    {
+      "source": "warsztat",
+      "start": 0,
+      "duration": 2.8,
+      "output": "sounds/produkcja/warsztat.ogg",
+      "description": "Ratchet wrench tightening hardware."
+    },
+    {
+      "source": "lutowanie",
+      "start": 0.1,
+      "duration": 2.8,
+      "output": "sounds/produkcja/lutowanie.ogg",
+      "description": "Keyboard clicks for the electronic/hacker work slot."
+    },
+    {
+      "source": "chemia",
+      "start": 1.4,
+      "duration": 3,
+      "output": "sounds/produkcja/chemia.ogg",
+      "description": "Laboratory bubbling and glass handling."
+    },
+    {
+      "source": "szycie",
+      "start": 2.45,
+      "duration": 2.3,
+      "output": "sounds/produkcja/szycie.ogg",
+      "description": "Several metal scissor snips."
+    },
+    {
+      "source": "drewno",
+      "start": 0.1,
+      "duration": 3,
+      "output": "sounds/produkcja/drewno.ogg",
+      "description": "Short repeated sawing strokes."
+    },
+    {
+      "source": "gotowe",
+      "start": 1,
+      "duration": 0.6,
+      "output": "sounds/produkcja/gotowe.ogg",
+      "description": "One practical metal latch click."
+    },
+    {
+      "source": "porazka",
+      "start": 1.7,
+      "duration": 1.9,
+      "output": "sounds/produkcja/porazka.ogg",
+      "description": "Wood sticks crack and break."
+    },
+    {
+      "source": "iskra",
+      "start": 0,
+      "duration": 0.171,
+      "output": "sounds/produkcja/iskra.ogg",
+      "description": "A brief real electric spark."
+    }
+  ]
+}
+

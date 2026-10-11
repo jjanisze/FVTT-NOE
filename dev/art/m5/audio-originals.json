@@ -1,0 +1,70 @@
+{
+  "checked": "2026-10-11",
+  "originals": {
+    "kucie": {
+      "file": "kucie.original.wav",
+      "url": "https://cdn.freesound.org/sounds/386/386110.wav",
+      "sha256": "c7df517ed46c51c8de3024e0a66b4429b1710e836ac5b45555219da63b5055bc"
+    },
+    "lutowanie": {
+      "file": "lutowanie.original.wav",
+      "url": "https://cdn.freesound.org/sounds/841/841273.wav",
+      "sha256": "bc2c7334714ab0d9038ad96efac88a03a26c9cfff85362399ae47652c7b869ca"
+    },
+    "chemia": {
+      "file": "chemia.original.wav",
+      "url": "https://cdn.freesound.org/sounds/648/648662.wav",
+      "sha256": "34f06be021593e42daeb18c82ef7ea963b286210c6dfa1e512bb50155e6e17e8"
+    },
+    "szycie": {
+      "file": "szycie.original.wav",
+      "url": "https://cdn.freesound.org/sounds/108/108453.wav",
+      "sha256": "a8e7bc74ad73d829385dc196df2b7fac7a264e470cc4c2e63d168a0ff9813acd"
+    },
+    "drewno": {
+      "file": "drewno.original.wav",
+      "url": "https://cdn.freesound.org/sounds/519/519661.wav",
+      "sha256": "b38b34a44cc8d3d88a763f3795658784a18f1870369a056fb4a613a5b7f984a2"
+    },
+    "gotowe": {
+      "file": "gotowe.original.flac",
+      "url": "https://cdn.freesound.org/sounds/455/455806.flac",
+      "sha256": "29e2f30d94eca7477cc1b132182907486782af82f1909c388ab805ed4c0753fb"
+    },
+    "porazka": {
+      "file": "porazka.original.wav",
+      "url": "https://cdn.freesound.org/sounds/679/679776.wav",
+      "sha256": "e68c7a2d3bbfe568878e2966d035e25be5d36c2d5290e53f92feb8726de2a46e"
+    },
+    "iskra": {
+      "file": "iskra.original.wav",
+      "url": "https://cdn.freesound.org/sounds/189/189630.wav",
+      "sha256": "1bf0d34707130f8408b0229dd5b529cdf839f75e2c8b63befb7424f842f31fb2"
+    },
+    "szabrowanie": {
+      "file": "szabrowanie.original.wav",
+      "url": "https://cdn.freesound.org/sounds/567/567249.wav",
+      "sha256": "14b0c74bde31906bfaafa13546e7deb521d9540e7bb8572ba1b4ae51f216889c"
+    },
+    "bebeszenie-mokre": {
+      "file": "bebeszenie-mokre.original.wav",
+      "url": "https://cdn.freesound.org/sounds/862/862077.wav",
+      "sha256": "24b8ad2b6932a0d5e25b50595f5e68f16906ff9e381ac710fd64c6cb22d421c0"
+    },
+    "autodestrukcja-beep": {
+      "file": "autodestrukcja-beep.original.wav",
+      "url": "https://cdn.freesound.org/sounds/667/667365.wav",
+      "sha256": "0500c5561d03fa35805cc7d7fb8cbbc369a1c8494b9f9062d58d5f23a167ad4f"
+    },
+    "wymiana": {
+      "file": "wymiana.original.wav",
+      "url": "https://cdn.freesound.org/sounds/648/648959.wav",
+      "sha256": "b0a85ed287b6700f7cb9b7b6705af69b8ca62ec8cd195bf9665a678fa36ae832"
+    },
+    "warsztat": {
+      "file": "warsztat.original.wav",
+      "url": "https://cdn.freesound.org/sounds/591/591529.wav",
+      "sha256": "78b7cf4015ddd67b784a9b95ef20338e6f6ac82edd4ad3dedfe6e683537acd52"
+    }
+  }
+}

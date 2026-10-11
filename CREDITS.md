@@ -44,6 +44,39 @@ at the time of import. The full per-file source list, author, and license is tra
 - [`dev/audio/FREESOUND_EXPLOSIVES_SOURCES.md`](dev/audio/FREESOUND_EXPLOSIVES_SOURCES.md)
 - [`dev/audio/FREESOUND_MISC_SOURCES.md`](dev/audio/FREESOUND_MISC_SOURCES.md)
 
+### Production and M5 downtime cues (Freesound, CC0)
+
+Fourteen original-download clips were imported on 2026-10-11. Each source page was
+checked for Creative Commons 0. Originals were retrieved through the logged-in
+browser's signed download links; expiring authentication queries are not retained.
+The files are trimmed, converted to mono 44.1 kHz Vorbis OGG, faded at their ends,
+and level-adjusted with a peak ceiling while preserving recorded dynamics.
+The four anvil strikes are shortened with pitch-preserving tempo adjustment.
+
+| Shipped file | Source and author | Processing / use |
+|---|---|---|
+| `sounds/postoj/szabrowanie.ogg` | [Bricks/Stones/Rocks/Gravel Falling](https://freesound.org/people/iwanPlays/sounds/567249/) — iwanPlays | Rubble being shifted and scattered; short scavenging cue. |
+| `sounds/postoj/bebeszenie-mokre.ogg` | [260710- Squishing Fresh Celery - Moist Crunch 1](https://freesound.org/people/Valerie-Vivegnis/sounds/862077/) — Valerie-Vivegnis | Wet celery crack and squish used as organic salvage foley. |
+| `sounds/postoj/bebeszenie-metal.ogg` | [Ratchet Wrench Fast Multiple](https://freesound.org/people/Rudmer_Rotteveel/sounds/591529/) — Rudmer_Rotteveel | Ratchet wrench removing machine hardware. |
+| `sounds/postoj/autodestrukcja-beep.ogg` | [alarm4.wav](https://freesound.org/people/Krokulator/sounds/667365/) — Krokulator | One short alarm pulse, faded endpoints for repeated playback. |
+| `sounds/postoj/wymiana.ogg` | [Heavy Book](https://freesound.org/people/IENBA/sounds/648959/) — IENBA | A padded heavy object lands on a wooden box: restrained barter acknowledgement. |
+| `sounds/produkcja/kucie.ogg` | [Anvil - Lokomo 125 kg - Hammer on 3mm steel 4 times](https://freesound.org/people/ldezem/sounds/386110/) — ldezem | Four real anvil strikes shortened to roughly three seconds, pitch preserved. |
+| `sounds/produkcja/warsztat.ogg` | [Ratchet Wrench Fast Multiple](https://freesound.org/people/Rudmer_Rotteveel/sounds/591529/) — Rudmer_Rotteveel | Ratchet wrench tightening hardware. |
+| `sounds/produkcja/lutowanie.ogg` | [keyboard_typing_slow_loop2](https://freesound.org/people/peoplearehappy/sounds/841273/) — peoplearehappy | Keyboard clicks for the electronic/hacker work slot. |
+| `sounds/produkcja/chemia.ogg` | [SCIENTIFIC LABORATORY AMBIENCE](https://freesound.org/people/Elenalostale/sounds/648662/) — Elenalostale | Laboratory bubbling and glass handling. |
+| `sounds/produkcja/szycie.ogg` | [Scissors.wav](https://freesound.org/people/Swoboman87/sounds/108453/) — Swoboman87 | Several metal scissor snips. |
+| `sounds/produkcja/drewno.ogg` | [Sawing Wood](https://freesound.org/people/Mateusz_Chenc/sounds/519661/) — Mateusz_Chenc | Short repeated sawing strokes. |
+| `sounds/produkcja/gotowe.ogg` | [metal latch window or door lock catcher flip back and forth1.flac](https://freesound.org/people/kyles/sounds/455806/) — kyles | One practical metal latch click. |
+| `sounds/produkcja/porazka.ogg` | [Wood Breaking](https://freesound.org/people/ominouswhoosh/sounds/679776/) — ominouswhoosh | Wood sticks crack and break. |
+| `sounds/produkcja/iskra.ogg` | [Spark](https://freesound.org/people/elliott.klein/sounds/189630/) — elliott.klein | A brief real electric spark. |
+
+License: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+Per-source metadata, exact trims and reproducible conversion are in
+`dev/art/m5/audio-sources.json`, `audio-clips.json` and `import_audio.py`;
+`audio-originals.json` and `audio-report.json` record source/output hashes and checks.
+The public HQ previews were used for initial audition only; every shipped cue was
+rebuilt from its authenticated original. No audio is copied from a game soundtrack.
+
 ### Fallout 2 decoded sound library
 
 A subset of the shipped firearm sounds (`sounds/firearms/`) is decoded from the original

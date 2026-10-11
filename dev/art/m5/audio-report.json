@@ -1,0 +1,226 @@
+[
+  {
+    "file": "sounds/postoj/szabrowanie.ogg",
+    "source": "https://freesound.org/people/iwanPlays/sounds/567249/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "14b0c74bde31906bfaafa13546e7deb521d9540e7bb8572ba1b4ae51f216889c",
+    "outputSha256": "021b7b888026ef37cf513dfe8c9fd26590bc319bdfb3a8c2d477ae44422f5823",
+    "duration": 2.8,
+    "bytes": 38190,
+    "peakDb": -5.8,
+    "rmsDb": -23.1,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/postoj/bebeszenie-mokre.ogg",
+    "source": "https://freesound.org/people/Valerie-Vivegnis/sounds/862077/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "24b8ad2b6932a0d5e25b50595f5e68f16906ff9e381ac710fd64c6cb22d421c0",
+    "outputSha256": "7c024e2703c91c9217a919c84d9940783b1e9a178718f2f03ad4acabcd85db7f",
+    "duration": 2.0,
+    "bytes": 25704,
+    "peakDb": -3.1,
+    "rmsDb": -40.4,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/postoj/bebeszenie-metal.ogg",
+    "source": "https://freesound.org/people/Rudmer_Rotteveel/sounds/591529/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "78b7cf4015ddd67b784a9b95ef20338e6f6ac82edd4ad3dedfe6e683537acd52",
+    "outputSha256": "3e75cb69f75fba7aa42629c571c744fe38419293c6f693aed503f0fb3ee0f0d8",
+    "duration": 2.3,
+    "bytes": 28340,
+    "peakDb": -3.3,
+    "rmsDb": -30.0,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/postoj/autodestrukcja-beep.ogg",
+    "source": "https://freesound.org/people/Krokulator/sounds/667365/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "0500c5561d03fa35805cc7d7fb8cbbc369a1c8494b9f9062d58d5f23a167ad4f",
+    "outputSha256": "e1d9c021338e99190bfe06c4877b335aec7307ab1a66aa698166437405440c16",
+    "duration": 0.444014,
+    "bytes": 8202,
+    "peakDb": -18.2,
+    "rmsDb": -22.9,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/postoj/wymiana.ogg",
+    "source": "https://freesound.org/people/IENBA/sounds/648959/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "b0a85ed287b6700f7cb9b7b6705af69b8ca62ec8cd195bf9665a678fa36ae832",
+    "outputSha256": "21cec01263963618bfe003e7c67a2575dc6ace83ed31bfdd0af58d4bc7aa2e57",
+    "duration": 0.55,
+    "bytes": 6498,
+    "peakDb": -8.6,
+    "rmsDb": -23.0,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/produkcja/kucie.ogg",
+    "source": "https://freesound.org/people/ldezem/sounds/386110/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "c7df517ed46c51c8de3024e0a66b4429b1710e836ac5b45555219da63b5055bc",
+    "outputSha256": "ff3f4a48d9138d9bb769a31265bab0fd41afe0fdb52deeac9623b4620e46aed9",
+    "duration": 3.004626,
+    "bytes": 24231,
+    "peakDb": -2.0,
+    "rmsDb": -26.7,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/produkcja/warsztat.ogg",
+    "source": "https://freesound.org/people/Rudmer_Rotteveel/sounds/591529/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "78b7cf4015ddd67b784a9b95ef20338e6f6ac82edd4ad3dedfe6e683537acd52",
+    "outputSha256": "0c53b5e082acc988b41f40b047c595c8971e2ac0c2cb89058a175e210683d7de",
+    "duration": 2.8,
+    "bytes": 34982,
+    "peakDb": -4.4,
+    "rmsDb": -30.4,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/produkcja/lutowanie.ogg",
+    "source": "https://freesound.org/people/peoplearehappy/sounds/841273/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "bc2c7334714ab0d9038ad96efac88a03a26c9cfff85362399ae47652c7b869ca",
+    "outputSha256": "3e4a23fc92665c1009ccf22ae0b07f87c21f0c793dd122a5a9613a9ad932b10b",
+    "duration": 2.8,
+    "bytes": 28642,
+    "peakDb": -3.6,
+    "rmsDb": -30.8,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/produkcja/chemia.ogg",
+    "source": "https://freesound.org/people/Elenalostale/sounds/648662/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "34f06be021593e42daeb18c82ef7ea963b286210c6dfa1e512bb50155e6e17e8",
+    "outputSha256": "504de48510f9be3187fa370b81681009cf5652ceeb6bc77ad7876dab8f1fe39b",
+    "duration": 3.0,
+    "bytes": 39093,
+    "peakDb": -3.3,
+    "rmsDb": -27.9,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/produkcja/szycie.ogg",
+    "source": "https://freesound.org/people/Swoboman87/sounds/108453/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "a8e7bc74ad73d829385dc196df2b7fac7a264e470cc4c2e63d168a0ff9813acd",
+    "outputSha256": "912601fd6df8aefdedb405d527df9570b05a5ee8625e683c0d3eee23dd8dc135",
+    "duration": 2.3,
+    "bytes": 26473,
+    "peakDb": -3.8,
+    "rmsDb": -30.6,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/produkcja/drewno.ogg",
+    "source": "https://freesound.org/people/Mateusz_Chenc/sounds/519661/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "b38b34a44cc8d3d88a763f3795658784a18f1870369a056fb4a613a5b7f984a2",
+    "outputSha256": "5fcccc9b6590b6eca306e57b78933aba97ab44b37e2cc764c61a6ff3e1360aae",
+    "duration": 3.0,
+    "bytes": 33571,
+    "peakDb": -8.8,
+    "rmsDb": -23.2,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/produkcja/gotowe.ogg",
+    "source": "https://freesound.org/people/kyles/sounds/455806/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "29e2f30d94eca7477cc1b132182907486782af82f1909c388ab805ed4c0753fb",
+    "outputSha256": "860552159af27e94518563383a08eab52e4370d9561d57f48c569073e6f5fff9",
+    "duration": 0.6,
+    "bytes": 9639,
+    "peakDb": -3.0,
+    "rmsDb": -27.9,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/produkcja/porazka.ogg",
+    "source": "https://freesound.org/people/ominouswhoosh/sounds/679776/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "e68c7a2d3bbfe568878e2966d035e25be5d36c2d5290e53f92feb8726de2a46e",
+    "outputSha256": "c2ba6716001c918dd9fac4c5d296d194682befddd550c468621e865cbc3cd5cc",
+    "duration": 1.9,
+    "bytes": 22714,
+    "peakDb": -3.2,
+    "rmsDb": -42.1,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  },
+  {
+    "file": "sounds/produkcja/iskra.ogg",
+    "source": "https://freesound.org/people/elliott.klein/sounds/189630/",
+    "sourceKind": "authenticated original",
+    "sourceSha256": "1bf0d34707130f8408b0229dd5b529cdf839f75e2c8b63befb7424f842f31fb2",
+    "outputSha256": "7206f026ae648a9491eef49efb9fb18821f12cdf90831c0481ca48885c521271",
+    "duration": 0.17068,
+    "bytes": 5671,
+    "peakDb": -3.2,
+    "rmsDb": -23.5,
+    "codec": {
+      "codec_name": "vorbis",
+      "sample_rate": "44100",
+      "channels": 1
+    }
+  }
+]
