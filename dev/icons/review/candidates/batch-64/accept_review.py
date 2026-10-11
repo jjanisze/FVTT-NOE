@@ -26,9 +26,9 @@ def write(path, value):
     path.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
-def check():
-    snapshot = read(HERE / "reviewed.json")
-    installed = read(HERE / "reviewed-installed.json")["installed"]
+def check(snapshot_name="reviewed.json", report_name="reviewed-installed.json"):
+    snapshot = read(HERE / snapshot_name)
+    installed = read(HERE / report_name)["installed"]
     approved = {item["id"]: item for item in snapshot["active"] if item["decision"] == "approve"}
     assert {item["itemId"] for item in installed} == set(approved), "Incomplete approved delivery"
     for item in installed:
@@ -58,14 +58,20 @@ def check():
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true", help="Validate delivered files without changing the queue")
-    if parser.parse_args().check:
-        check()
+    parser.add_argument("--snapshot", default="reviewed.json", help="Separate immutable decision snapshot for a later review")
+    parser.add_argument("--report", default="reviewed-installed.json", help="Separate installation report for that snapshot")
+    args = parser.parse_args()
+    for filename in (args.snapshot, args.report):
+        if Path(filename).name != filename or not filename.endswith(".json"):
+            parser.error("Snapshot and report must be JSON filenames in this batch directory")
+    if args.check:
+        check(args.snapshot, args.report)
         return
     manifest_path, feedback_path = REVIEW / "manifest.json", REVIEW / "feedback.json"
     manifest = read(manifest_path)
     feedback_bytes = feedback_path.read_bytes()
     feedback = json.loads(feedback_bytes)["items"]
-    snapshot_path = HERE / "reviewed.json"
+    snapshot_path = HERE / args.snapshot
     if not snapshot_path.exists():
         active = []
         for item in manifest["items"]:
@@ -82,7 +88,7 @@ def main():
                            "request": item["request"], "feedback": saved})
         write(snapshot_path, {"date": "2026-10-12", "batch": 64, "title": manifest["title"],
                               "feedbackBeforeSha256": hashlib.sha256(feedback_bytes).hexdigest(), "active": active})
-    delivered = install("reviewed.json", "reviewed-installed.json")
+    delivered = install(args.snapshot, args.report)
     assert feedback_path.read_bytes() == feedback_bytes, "Saved GM feedback changed during installation"
     by_id = {item["id"]: item for item in manifest["items"]}
     for item in delivered:
@@ -96,7 +102,7 @@ def main():
     write(HERE / "remaining-items.json", {"title": manifest["title"], "updated": manifest["updated"], "items": remaining})
     assert feedback_path.read_bytes() == feedback_bytes, "Saved GM feedback changed"
     print(f"Retained {revisions} revision requests and {len(remaining) - revisions} pending cards; feedback bytes unchanged")
-    check()
+    check(args.snapshot, args.report)
 
 
 if __name__ == "__main__":

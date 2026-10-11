@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-12",
+  "installed": [
+    {
+      "itemId": "batch64-kuloodpornosc",
+      "name": "Kuloodporność",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-64/kuloodpornosc.png",
+      "files": [
+        "icons/abilities/kuloodpornosc.svg",
+        "icons/abilities/kuloodpornosc.webp"
+      ],
+      "sourceSha256": "9abbce1a8efd31b830fc930bf20b307686181a42f61c9bc2d3ee5b88ecb17079",
+      "webpSha256": "275d87650e732b26c85b995cb49e902295d59ac42d543bd8957d96f6582a659f"
+    }
+  ]
+}

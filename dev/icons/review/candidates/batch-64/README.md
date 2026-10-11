@@ -48,11 +48,18 @@ selections, verbatim notes and feedback records. `accept_review.py` installs onl
 the exact approved selections, resolves their cards and leaves `feedback.json`
 byte-for-byte unchanged. `reviewed-installed.json` records the fifteen new
 WEBP/SVG deliveries and source/output hashes; `remaining-items.json` preserves
-the twelve open cards. The eleven revisions are queued in MISSING for the next
-batch. No code, pack or world was changed.
+the open cards. The eleven revisions are queued in MISSING for the next batch.
+No code, pack or world was changed.
+
+Kuloodporność was approved after the initial snapshot. The separate
+`reviewed-addendum.json` and `reviewed-addendum-installed.json` preserve that later
+approval and its exact WEBP/SVG delivery without changing the first snapshot.
+Batch 64 now has sixteen installed glyphs, eleven revision requests and no pending
+cards. `remaining-items.json` reflects those eleven open revision cards.
 
 ```sh
 python dev/icons/review/candidates/batch-64/accept_review.py --check
+python dev/icons/review/candidates/batch-64/accept_review.py --check --snapshot reviewed-addendum.json --report reviewed-addendum-installed.json
 ```
 
 This check verifies production pixels against the approved PNGs, hashes, margins,

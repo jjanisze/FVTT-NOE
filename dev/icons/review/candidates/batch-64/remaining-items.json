@@ -1,5 +1,5 @@
 {
-  "title": "Batch 64 · 11 revisions, 1 pending",
+  "title": "Batch 64 · 11 revisions, 0 pending",
   "updated": "2026-10-12",
   "items": [
     {
@@ -239,28 +239,6 @@
           "label": "Atlas B · Jest zajebiście",
           "src": "candidates/batch-64/jest-zajebiscie.png",
           "note": "One confident charismatic survivor raises an open hand while addressing two attentive allies shown as small shoulder silhouettes. A clear encouraging speech posture, no text-filled speech bubble, medals or floating symbols."
-        }
-      ]
-    },
-    {
-      "id": "batch64-kuloodpornosc",
-      "name": "Kuloodporność",
-      "tier": "Batch 64 · feat feature",
-      "context": "Improved defense while wearing no armour.",
-      "request": "One broad bare unarmoured torso leans away as a single bullet skims harmlessly along its side with one short curved streak. Strong shoulder and chest outline, no armour plates, shield, blood or superhero costume.",
-      "target": "icons/abilities/kuloodpornosc.svg",
-      "catalogKey": "kuloodpornosc",
-      "current": {
-        "src": null,
-        "emptyLabel": "No dedicated glyph",
-        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
-      },
-      "candidates": [
-        {
-          "id": "atlas-c",
-          "label": "Atlas C · Kuloodporność",
-          "src": "candidates/batch-64/kuloodpornosc.png",
-          "note": "One broad bare unarmoured torso leans away as a single bullet skims harmlessly along its side with one short curved streak. Strong shoulder and chest outline, no armour plates, shield, blood or superhero costume."
         }
       ]
     },

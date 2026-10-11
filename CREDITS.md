@@ -116,6 +116,12 @@ are in `dev/icons/review/candidates/batch-64/reviewed-installed.json`; all revie
 decisions, including eleven revision requests and one pending glyph, are archived
 in `dev/icons/review/candidates/batch-64/reviewed.json`.
 
+Kuloodporność's subsequent GM approval was installed with the same exact-pixel
+OpenAI-generated WEBP/SVG process, bringing Batch 64 to sixteen delivered glyphs.
+Its saved selection and hashes are in
+`dev/icons/review/candidates/batch-64/reviewed-addendum-installed.json`; the later
+decision snapshot is `dev/icons/review/candidates/batch-64/reviewed-addendum.json`.
+
 ## Token art
 
 Bestiary token art is original work, borrowed (by reference, not copy) from `dnd5e`'s own
