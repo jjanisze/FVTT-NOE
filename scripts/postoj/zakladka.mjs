@@ -58,10 +58,18 @@ export async function buildPostojContext(grupa) {
   };
 }
 
-/** Akcje zakładki (dokładane do `DEFAULT_OPTIONS.actions` karty drużyny). */
-export const AKCJE_POSTOJU = Object.freeze({
+/**
+ * Akcje zakładki (dokładane do `DEFAULT_OPTIONS.actions` karty drużyny przy jej budowie w `ready`).
+ * Kolejne etapy dopisują swoje w `init` przez `zarejestrujAkcjePostoju`.
+ */
+export const AKCJE_POSTOJU = {
   neuroPostojMiejsce: async function () { await ustawMiejsceDruzyny(this.actor); },
   neuroPostojScena: async function () { await przypiszDoSceny(this.actor); },
   neuroPostojCennik: function () { otworzCennik(); },
   neuroPostojAudyt: async function () { await audytPortfela(); }
-});
+};
+
+/** Akcje sekcji zakładki: `{ nazwa: function(event, target) }`, `this` — karta drużyny. */
+export function zarejestrujAkcjePostoju(akcje) {
+  Object.assign(AKCJE_POSTOJU, akcje);
+}

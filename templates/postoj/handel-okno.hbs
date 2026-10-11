@@ -1,0 +1,39 @@
+<section class="neuro-handel-gora">
+    {{#if obraz}}<img class="neuro-postoj-ilustracja" src="{{ obraz }}" alt="">{{/if}}
+    <p class="neuro-handel-miejsce"><i class="fa-solid fa-campground" inert></i> {{ miejsce.opis }}</p>
+
+    {{#if wymiana}}
+    <div class="neuro-handel-wymiana">
+        <span>Otwarta wymiana: <strong>{{ wymiana.handlarz }}</strong> ({{ wymiana.pozycji }} poz.)</span>
+        <button type="button" data-action="otworz"><i class="fa-solid fa-right-left" inert></i> Wróć do stołu</button>
+    </div>
+    {{/if}}
+
+    <h3><i class="fa-solid fa-store" inert></i> Punkty handlowe</h3>
+    {{#if handlarze.length}}
+    <ul class="neuro-handel-punkty">
+        {{#each handlarze}}
+        <li>
+            {{#if portret}}<img src="{{ portret }}" alt="">{{/if}}
+            <div class="opis">
+                <strong>{{ nazwa }}</strong>
+                <span>{{ kategorie }}{{#if fachowiec}} · fachowiec: {{ fachowiec }}{{/if}}</span>
+            </div>
+            <button type="button" data-action="otworz" data-uuid="{{ uuid }}"><i class="fa-solid fa-right-left" inert></i> Handluj</button>
+        </li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <p class="neuro-zapas-pusto">{{#if miejsce.ustawione}}Tu nikt nie wystawił towaru — zapytaj MG albo poszukaj czegoś konkretnego.{{else}}Drużyna nie stoi w żadnym miejscu.{{/if}}</p>
+    {{/if}}
+
+    <h3><i class="fa-solid fa-magnifying-glass" inert></i> Szukam czegoś konkretnego</h3>
+    <p class="hint">Zamówienie specjalne (s. 43): k100 − Charyzma; wynik w dostępności tego miejsca — ktoś w osadzie to ma.
+        Każde szukanie to transakcja; tego samego przedmiotu nie szukasz drugi raz tej doby.</p>
+    <div class="neuro-handel-licznik">
+        Transakcje dziś: <strong>{{ targ.transakcje }}</strong> · godziny gamblingu: <strong>{{ targ.godziny }}</strong> (PB {{ targ.pb }})
+        {{#if ro}}<span class="hint">— każda kolejna godzina: RO MDR/CHA ST 10</span>{{else}}<span class="hint">— Gambling we krwi: bez zmęczenia</span>{{/if}}
+    </div>
+    {{#if targ.szukaneNazwy.length}}<p class="neuro-handel-szukane">Szukane dziś: {{#each targ.szukaneNazwy}}{{#unless @first}}, {{/unless}}{{ this }}{{/each}}</p>{{/if}}
+    <input type="search" name="query" value="{{ query }}" placeholder="Czego szukasz? (min. 2 litery)" autocomplete="off">
+</section>

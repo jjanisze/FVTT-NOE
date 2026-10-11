@@ -12,10 +12,15 @@ import { registerKartyPostoju } from "./karty.mjs";
 import { registerMiejsce, miejsceApi } from "./miejsce.mjs";
 import { registerPortfel, audytPortfela, walutaLokalna, gbWPortfelu } from "./portfel.mjs";
 import { registerCennik, otworzCennik } from "./cennik.mjs";
-import { rzucZamowienie, gamblingWeKrwi } from "./zamowienie.mjs";
+import { rzucZamowienie, gamblingWeKrwi, registerZamowienie } from "./zamowienie.mjs";
 import { registerPrzekaznik } from "./przekaznik.mjs";
 import { registerFuksy, fuksyApi } from "../actors/fuksy.mjs";
 import { registerFanty, fantyApi } from "../items/fanty.mjs";
+import { registerHandlarz, handlarzApi } from "./handlarz.mjs";
+import { registerHandel, handelOknoApi, otworzHandel } from "./handel.mjs";
+import { registerStolWymiany, otworzStolWymiany } from "./stol-wymiany.mjs";
+import { registerZakladkaHandel } from "./zakladka-handel.mjs";
+import * as wymianaApi from "./wymiana.mjs";
 
 /** Wołane z `init`. */
 export function registerPostoj() {
@@ -27,6 +32,11 @@ export function registerPostoj() {
   registerMiejsce();
   registerPortfel();
   registerCennik();
+  registerZamowienie();
+  registerHandlarz();
+  registerHandel();
+  registerStolWymiany();
+  registerZakladkaHandel();
   console.log("Neuroshima 5e | M5 Postój i handel registered");
 }
 
@@ -38,6 +48,11 @@ export const handelApi = Object.freeze({
   walutaLokalna,
   zamowienie: rzucZamowienie,
   gamblingWeKrwi,
+  handel: otworzHandel,
+  stol: otworzStolWymiany,
+  targ: handelOknoApi,
+  punkty: handlarzApi,
+  wymiana: wymianaApi,
   zasady: handelRules
 });
 

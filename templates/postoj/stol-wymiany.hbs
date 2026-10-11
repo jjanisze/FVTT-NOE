@@ -1,0 +1,117 @@
+<section class="neuro-wymiana-okno">
+    {{#unless otwarta}}
+    <div class="neuro-wymiana-pusto">
+        <p>{{ actor.name }} nie ma otwartej wymiany.</p>
+        {{#if isGM}}<button type="button" data-action="otworzNowa"><i class="fa-solid fa-right-left" inert></i> Otwórz wymianę bez handlarza (zamówienie)</button>{{/if}}
+    </div>
+    {{else}}
+
+    <header class="neuro-wymiana-naglowek">
+        {{#if handlarz.portret}}<img class="neuro-wymiana-portret" src="{{ handlarz.portret }}" alt="">{{/if}}
+        <div class="neuro-wymiana-kto">
+            <strong>{{#if handlarz}}{{ handlarz.name }}{{else}}Ktoś w osadzie{{/if}}</strong>
+            {{#if handlarz}}<span>{{ handlarz.kategorie }}{{#if handlarz.fachowiec}} · fachowiec: {{ handlarz.fachowiec }}{{/if}}</span>{{/if}}
+            {{#if zamowienie}}<span>zamówienie specjalne — towar spoza listy</span>{{/if}}
+            {{#if isGM}}{{#if region}}<span class="neuro-postoj-mg">ceny: {{ region }}</span>{{/if}}{{/if}}
+        </div>
+        <div class="neuro-wymiana-zgoda {{#if zgoda}}is-zgoda{{/if}}">
+            {{#if zgoda}}<i class="fa-solid fa-handshake" inert></i> {{ actor.name }} się zgadza{{else}}<i class="fa-regular fa-handshake" inert></i> bez zgody gracza{{/if}}
+        </div>
+    </header>
+
+    <div class="neuro-wymiana-kolumny">
+        <section class="neuro-wymiana-kolumna neuro-wymiana-daje">
+            <h3><i class="fa-solid fa-hand-holding" inert></i> Daję <small>(przeciągnij z karty postaci)</small></h3>
+            <ul class="lista">
+                {{#each daje}}
+                <li class="{{#if zepsuty}}is-zepsuty{{/if}}">
+                    {{#if img}}<img src="{{ img }}" alt="">{{/if}}
+                    <span class="nazwa">{{ nazwa }}</span>
+                    {{#if wiele}}<input type="number" min="1" max="{{ max }}" value="{{ ilosc }}" data-ilosc data-strona="daje" data-klucz="{{ klucz }}">{{else}}<span class="ilosc">×{{ ilosc }}</span>{{/if}}
+                    <span class="cena" data-tooltip="Cena podręcznikowa">{{ podr }}</span>
+                    {{#if ../isGM}}
+                    <span class="cena mg {{#if poza}}is-poza{{/if}}" data-tooltip="{{ tip }}">{{ lokalna }}</span>
+                    <button type="button" class="neuro-cennik-btn" data-action="stan" data-klucz="{{ klucz }}" data-tooltip="Stan: zepsuty za połowę (s. 132)"><i class="fa-solid {{#if zepsuty}}fa-heart-crack{{else}}fa-heart{{/if}}" inert></i></button>
+                    {{/if}}
+                    <button type="button" class="neuro-cennik-btn" data-action="usun" data-strona="daje" data-klucz="{{ klucz }}"><i class="fa-solid fa-xmark" inert></i></button>
+                </li>
+                {{else}}<li class="pusto">Nic.</li>{{/each}}
+            </ul>
+            <p class="suma">Razem (podręcznik): <strong>{{ podrDaje }}</strong></p>
+        </section>
+
+        <section class="neuro-wymiana-kolumna neuro-wymiana-dostaje">
+            <h3><i class="fa-solid fa-hand-holding-hand" inert></i> Dostaję</h3>
+            <ul class="lista">
+                {{#each dostaje}}
+                <li>
+                    {{#if img}}<img src="{{ img }}" alt="">{{/if}}
+                    <span class="nazwa">{{ nazwa }} {{#if etykietaTypu}}<small>({{ etykietaTypu }})</small>{{/if}}</span>
+                    {{#if wiele}}<input type="number" min="1" max="{{ max }}" value="{{ ilosc }}" data-ilosc data-strona="dostaje" data-klucz="{{ klucz }}">{{else}}<span class="ilosc">×{{ ilosc }}</span>{{/if}}
+                    {{#if ../isGM}}<span class="cena mg" data-tooltip="{{ tip }}">{{ lokalna }}</span>{{/if}}
+                    <button type="button" class="neuro-cennik-btn" data-action="usun" data-strona="dostaje" data-klucz="{{ klucz }}"><i class="fa-solid fa-xmark" inert></i></button>
+                </li>
+                {{else}}<li class="pusto">Nic — wybierz z towaru.</li>{{/each}}
+            </ul>
+        </section>
+
+        {{#if handlarz}}
+        <section class="neuro-wymiana-towar">
+            <h3><i class="fa-solid fa-store" inert></i> Towar handlarza</h3>
+            <ul class="lista">
+                {{#each towar}}
+                <li class="{{#if wyczerpane}}is-wyczerpane{{/if}}">
+                    {{#if img}}<img src="{{ img }}" alt="">{{/if}}
+                    <span class="nazwa">{{ nazwa }}</span>
+                    <span class="ilosc">×{{ ilosc }}</span>
+                    {{#if ../isGM}}<span class="cena mg" data-tooltip="Standardowa: {{ std }}<br>{{ tip }}">{{ tu }}</span>{{/if}}
+                    {{#unless wyczerpane}}<button type="button" class="neuro-cennik-btn" data-action="dodajTowar" data-uuid="{{ uuid }}" data-tooltip="Do „Dostaję”"><i class="fa-solid fa-plus" inert></i></button>{{/unless}}
+                </li>
+                {{else}}<li class="pusto">Pusto.</li>{{/each}}
+            </ul>
+        </section>
+        {{/if}}
+    </div>
+
+    {{#if isGM}}
+    <section class="neuro-wymiana-mg">
+        <div class="neuro-wymiana-saldo">
+            <label>Skup <input type="number" min="0" max="200" step="5" value="{{ wycena.skup }}" data-warunek="skup">%</label>
+            <span>Daje (skup): <strong>{{ wycena.sumaDaje }}</strong></span>
+            <span>Dostaje (tutaj): <strong>{{ wycena.sumaDostaje }}</strong></span>
+            <label data-tooltip="Na korzyść gracza (+) albo handlarza (−), np. po Wpływaniu">Korekta <input type="number" step="1" value="{{ wycena.korekta }}" data-warunek="korekta"> gb</label>
+            <span class="saldo {{#if wycena.saldoUjemne}}is-ujemne{{/if}}" data-tooltip="Daje − dostaje + korekta; ≥ 0 — gracz daje dość">Saldo: <strong>{{ wycena.saldo }}</strong></span>
+        </div>
+        <div class="neuro-wymiana-narzedzia">
+            <span class="grupa">Wpływanie ST 15:
+                {{#each wplywanie}}<button type="button" class="neuro-cennik-btn" data-action="wplywanie" data-skill="{{ k }}">{{ label }}</button>{{/each}}
+            </span>
+            <span class="grupa">Przeróbka{{#if fachowiec}} ({{ fachowiec }}){{/if}}:
+                <select name="przerobka"><option value="">—</option>{{#each przerobki}}<option value="{{ id }}">{{ label }}</option>{{/each}}</select>
+                <select name="bron"><option value="">broń-cel…</option>{{#each bronie}}<option value="{{ uuid }}">{{ name }}</option>{{/each}}</select>
+                <button type="button" class="neuro-cennik-btn" data-action="przerobka"><i class="fa-solid fa-plus" inert></i></button>
+            </span>
+            <span class="grupa">Usługa:
+                <input type="text" name="uslugaOpis" placeholder="opis">
+                <input type="number" name="uslugaCena" min="0" step="1" placeholder="gb">
+                <button type="button" class="neuro-cennik-btn" data-action="usluga"><i class="fa-solid fa-plus" inert></i></button>
+            </span>
+        </div>
+        <div class="neuro-wymiana-katalog">
+            <input type="search" name="szukajKatalog" value="{{ szukajKatalog }}" placeholder="Dołóż z katalogu (reszta: .22 LR, prowiant, surowce…)" autocomplete="off">
+            {{#each katalog}}<button type="button" class="neuro-cennik-btn" data-action="katalog" data-ref="{{ ref }}">{{ nazwa }} · {{ tu }}</button>{{/each}}
+        </div>
+        <input type="text" class="neuro-wymiana-notatka" value="{{ wycena.notatka }}" data-warunek="notatka" placeholder="Notatka MG (np. zniżka po Wpływaniu)">
+    </section>
+    {{/if}}
+
+    <footer class="neuro-wymiana-stopka">
+        {{#if isGM}}
+        <button type="button" data-action="odrzuc"><i class="fa-solid fa-ban" inert></i> Odrzuć</button>
+        <button type="button" data-action="zatwierdz" class="{{#if zgoda}}is-gotowe{{/if}}"><i class="fa-solid fa-check" inert></i> Zatwierdź wymianę</button>
+        {{else}}
+        <button type="button" data-action="zgoda"><i class="fa-solid fa-handshake" inert></i> {{#if zgoda}}Cofnij zgodę{{else}}Zgadzam się{{/if}}</button>
+        {{/if}}
+    </footer>
+    {{/unless}}
+</section>

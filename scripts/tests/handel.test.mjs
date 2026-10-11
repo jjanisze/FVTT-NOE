@@ -74,6 +74,75 @@ export function registerHandelTests(quench) {
       });
     });
 
+    describe("Wymiana bez klonów (U8) i przeróbki (D31)", function () {
+      const sprzatnij = [];
+      afterEach(async () => {
+        while (sprzatnij.length) await sprzatnij.pop()();
+      });
+      const _wiadomosci = () => {
+        const przed = new Set(game.messages.map(m => m.id));
+        sprzatnij.push(async () => {
+          const nowe = game.messages.filter(m => !przed.has(m.id)).map(m => m.id);
+          if (nowe.length) await ChatMessage.deleteDocuments(nowe);
+        });
+      };
+
+      it("przerwanie po utworzeniu u celu zostawia dwa egzemplarze, nigdy zero", async function () {
+        _wiadomosci();
+        const { otworzWymiane, dodajDaje, dodajDostaje, zatwierdzWymiane } = await import("../postoj/wymiana.mjs");
+        const gracz = await scratchActor({ name: "[Quench] kupiec" });
+        const handlarz = await scratchActor({ name: "[Quench] handlarz", type: "npc", flags: { [MODULE_ID]: { handlarz: { miejsce: { rodzaj: "miasteczko" } } } } });
+        const [moj] = await gracz.createEmbeddedDocuments("Item", [{ name: "Kłódka testowa", type: "loot", system: { price: { value: 10 } } }]);
+        const [jego] = await handlarz.createEmbeddedDocuments("Item", [{ name: "Lina testowa", type: "loot", system: { price: { value: 10 } } }]);
+        await otworzWymiane(gracz, handlarz);
+        await dodajDaje(gracz, moj);
+        await dodajDostaje(gracz, { typ: "towar", uuid: jego.uuid, nazwa: jego.name, ilosc: 1 });
+        // Źródło nie daje się usunąć — wymiana pada po utworzeniu kopii u handlarza.
+        przywroc.push(stub(moj, "delete", async () => { throw new Error("przerwane"); }));
+        let blad = null;
+        try { await zatwierdzWymiane(gracz); } catch (e) { blad = e; }
+        expect(blad?.message).to.equal("przerwane");
+        const wszystkie = [...gracz.items, ...handlarz.items];
+        expect(wszystkie.filter(i => i.name === "Kłódka testowa").length, "kłódka u obu").to.equal(2);
+        expect(wszystkie.filter(i => i.name === "Lina testowa").length, "lina u obu").to.equal(2);
+      });
+
+      it("pełna wymiana: przedmioty zmieniają właściciela, bez duplikatu; stos dzieli się wg ilości", async function () {
+        _wiadomosci();
+        const { otworzWymiane, dodajDaje, dodajDostaje, zatwierdzWymiane, wymiana } = await import("../postoj/wymiana.mjs");
+        const gracz = await scratchActor({ name: "[Quench] kupiec 2" });
+        const handlarz = await scratchActor({ name: "[Quench] handlarz 2", type: "npc", flags: { [MODULE_ID]: { handlarz: { miejsce: { rodzaj: "miasteczko" } } } } });
+        const [moj] = await gracz.createEmbeddedDocuments("Item", [{ name: "Zapałki testowe", type: "consumable", system: { quantity: 5, price: { value: 1 } } }]);
+        const [jego] = await handlarz.createEmbeddedDocuments("Item", [{ name: "Naboje testowe", type: "consumable", system: { quantity: 30, price: { value: 1 } } }]);
+        await otworzWymiane(gracz, handlarz);
+        await dodajDaje(gracz, moj, 2);
+        await dodajDostaje(gracz, { typ: "towar", uuid: jego.uuid, nazwa: jego.name, ilosc: 12, max: 30 });
+        await zatwierdzWymiane(gracz);
+        expect(wymiana(gracz)).to.equal(null);
+        expect(gracz.items.getName("Zapałki testowe").system.quantity).to.equal(3);
+        expect(handlarz.items.getName("Zapałki testowe").system.quantity).to.equal(2);
+        expect(gracz.items.getName("Naboje testowe").system.quantity).to.equal(12);
+        expect(handlarz.items.getName("Naboje testowe").system.quantity).to.equal(18);
+      });
+
+      it("przeróbka niezgodna z bronią: bez montażu, ulepszenie trafia do ekwipunku (ostrzeżenie, nie blokada)", async function () {
+        _wiadomosci();
+        const { otworzWymiane, dodajPrzerobke, zatwierdzWymiane } = await import("../postoj/wymiana.mjs");
+        const gracz = await scratchActor({ name: "[Quench] z maczetą" });
+        const pack = game.packs.get(`${MODULE_ID}.bron`);
+        const idx = await pack.getIndex();
+        const maczeta = await pack.getDocument(idx.find(e => e.name === "Maczeta")._id);
+        const [bron] = await gracz.createEmbeddedDocuments("Item", [game.items.fromCompendium(maczeta)]);
+        await otworzWymiane(gracz, null, { zamowienie: true });
+        przywroc.push(stub(ui.notifications, "warn", () => {}));
+        await dodajPrzerobke(gracz, "tlumik", bron.uuid);
+        const w = await zatwierdzWymiane(gracz);
+        expect((bron.getFlag(MODULE_ID, "addons") ?? []).map(a => a.id)).to.not.include("tlumik");
+        expect(gracz.items.some(i => i.getFlag(MODULE_ID, "ulepszenie") === "tlumik"), "tłumik w ekwipunku").to.equal(true);
+        expect(w.uwagi.some(u => /nie zamontowano/.test(u))).to.equal(true);
+      });
+    });
+
     describe("Zamówienie: dane postaci (s. 43, 63)", function () {
       it("wartość Charyzmy (nie modyfikator) i Gambling we krwi z flagi zdolności albo nazwy", async function () {
         const a = await scratchActor({ system: { abilities: { cha: { value: 13 } } } });

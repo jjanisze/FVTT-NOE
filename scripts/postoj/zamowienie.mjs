@@ -12,9 +12,43 @@ import { LOKALIZACJE, REGIONY } from "../config/handel-data.mjs";
 import { isKobaltEnabled } from "../config/settings.mjs";
 import { doRoll } from "../config/losowanie.mjs";
 import { kartaPostoju, wyslijKarte } from "./karty.mjs";
+import { doMG, zarejestrujProsbe } from "./przekaznik.mjs";
+import { KATALOG } from "../config/recipes-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const esc = s => foundry.utils.escapeHTML(String(s ?? ""));
+
+/**
+ * Szept MG po udanym zamówieniu: ilość z rzutu (s. 43) i cena tutaj z rozkładem; [Dodaj do wymiany]. Tylko u MG.
+ * @returns {Promise<number>} ilość
+ */
+export async function szeptZamowienia(actor, wpis, { miejsce, kobalt = isKobaltEnabled() } = {}) {
+  const regula = iloscRegula(wpis);
+  const rIlosc = await new Roll(doRoll(regula)).evaluate();
+  const ilosc = rIlosc.total;
+  const tu = cenaTutaj(wpis, { region: miejsce?.region, kobalt });
+  await wyslijKarte(kartaPostoju({
+    ikona: "icons/svg/coins.svg",
+    tytul: `${wpis.nazwa}: ${ilosc} szt.`,
+    podtytul: `dla ${actor.name} · tylko MG`,
+    linie: [
+      `Ilość: ${regula === "1" ? "1 (wielorazowy, s. 43)" : `${regula.replace("d", "k")} = <strong>${ilosc}</strong> (s. 43)`}`,
+      `Cena tutaj: <strong>${fmtGb(tu.cena)}</strong> za szt. <span class="neuro-postoj-rozklad">(${esc(tu.rozklad.map(r => `${r.opis}: ${fmtGb(r.wartosc)}`).join(" → "))})</span>`,
+      miejsce?.region ? `Region: ${esc(REGIONY[miejsce.region]?.label)}` : "Bez regionu — ceny podręcznikowe."
+    ],
+    przyciski: [{ akcja: "zamowienieDoWymiany", label: "Dodaj do wymiany", ikona: "fa-solid fa-right-left", gm: true, dane: { aktor: actor.uuid, ref: wpis.ref ?? "", ilosc } }]
+  }), { szept: "gm", actor });
+  return ilosc;
+}
+
+/** Wykonawca prośby gracza: szept MG po jego udanym zamówieniu. */
+export function registerZamowienie() {
+  zarejestrujProsbe("zamowienieSzept", async (_n, d) => {
+    const actor = await fromUuid(d.aktor);
+    const wpis = d.ref ? KATALOG.get(d.ref) : d.wpis;
+    if (actor && wpis) await szeptZamowienia(actor, wpis, { miejsce: d.miejsce });
+  });
+}
 
 /** Gambling we krwi (Pochodzenie Nowy Jork, s. 63) — zdolność z paczki albo z nazwy. */
 export function gamblingWeKrwi(actor) {
@@ -59,23 +93,11 @@ export async function rzucZamowienie(actor, wpis, { miejsce, k100 = null, kobalt
     ]
   }), { actor, rolls: roll ? [roll] : [], flagi: { zamowienie: { ref: wpis.ref ?? null, jest: z.jest, wynik: z.wynik, prog: d.prog } } });
 
+  // Szept MG (ilość, cena tutaj) musi napisać MG — autor widzi własny szept, więc gracz nie może go tworzyć (U42).
   let ilosc = null;
   if (z.jest && szeptMG) {
-    const regula = iloscRegula(wpis);
-    const rIlosc = await new Roll(doRoll(regula)).evaluate();
-    ilosc = rIlosc.total;
-    const tu = cenaTutaj(wpis, { region: miejsce?.region, kobalt });
-    await wyslijKarte(kartaPostoju({
-      ikona: "icons/svg/coins.svg",
-      tytul: `${wpis.nazwa}: ${ilosc} szt.`,
-      podtytul: `dla ${actor.name} · tylko MG`,
-      linie: [
-        `Ilość: ${regula === "1" ? "1 (wielorazowy, s. 43)" : `${regula.replace("d", "k")} = <strong>${ilosc}</strong> (s. 43)`}`,
-        `Cena tutaj: <strong>${fmtGb(tu.cena)}</strong> za szt. <span class="neuro-postoj-rozklad">(${esc(tu.rozklad.map(r => `${r.opis}: ${fmtGb(r.wartosc)}`).join(" → "))})</span>`,
-        miejsce?.region ? `Region: ${esc(REGIONY[miejsce.region]?.label)}` : "Bez regionu — ceny podręcznikowe."
-      ],
-      przyciski: [{ akcja: "zamowienieDoWymiany", label: "Dodaj do wymiany", ikona: "fa-solid fa-right-left", gm: true, dane: { aktor: actor.uuid, ref: wpis.ref ?? "", ilosc } }]
-    }), { szept: "gm", actor, rolls: [rIlosc] });
+    if (game.user.isGM) ilosc = await szeptZamowienia(actor, wpis, { miejsce, kobalt });
+    else await doMG("zamowienieSzept", { aktor: actor.uuid, ref: wpis.ref ?? null, wpis: wpis.ref ? null : wpis, miejsce: { rodzaj: miejsce?.rodzaj ?? null, region: miejsce?.region ?? null } }, { nosiciel: actor });
   }
   return { jest: z.jest, wynik: z.wynik, prog: d.prog, k100: kosc, ilosc, wiadomosc };
 }

@@ -1,0 +1,38 @@
+<div class="neuro-zapas-blok neuro-postoj-handel">
+    <div class="neuro-zapas-naglowek">
+        <i class="fa-solid fa-store" inert></i>
+        <span class="neuro-zapas-nazwa">Punkty handlowe</span>
+        <span class="neuro-zapas-stan">{{ ctx.punkty.length }}</span>
+        {{#if isGM}}
+        <button type="button" data-action="neuroPunktNowy" data-tooltip="Generator towaru z kategorii głównych i ziarna (D29)">
+            <i class="fa-solid fa-plus" inert></i> Nowy punkt handlowy
+        </button>
+        {{/if}}
+    </div>
+    {{#if ctx.punkty.length}}
+    <ul class="neuro-zapas-lista neuro-postoj-punkty">
+        {{#each ctx.punkty}}
+        <li>
+            {{#if portret}}<img src="{{ portret }}" alt="">{{else}}<img src="icons/svg/village.svg" alt="">{{/if}}
+            <a data-action="neuroPunktKarta" data-uuid="{{ uuid }}">{{ nazwa }}</a>
+            <span class="neuro-zapas-owner">{{ kategorie }}{{#if fachowiec}} · {{ fachowiec }}{{/if}}</span>
+            <span class="neuro-zapas-qty">{{ pozycji }} poz.</span>
+            {{#if ../isGM}}
+            {{#if wizyta}}<span class="neuro-postoj-mg" data-tooltip="Gracze odwiedzili">{{ wizyta }}</span>{{/if}}
+            <button type="button" class="neuro-cennik-btn" data-action="neuroPunktLosuj" data-uuid="{{ uuid }}" data-tooltip="Losuj od nowa (zastępuje cały towar)"><i class="fa-solid fa-dice" inert></i></button>
+            <button type="button" class="neuro-cennik-btn" data-action="neuroPunktUsun" data-uuid="{{ uuid }}" data-tooltip="Usuń punkt"><i class="fa-solid fa-trash" inert></i></button>
+            {{/if}}
+        </li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <p class="neuro-zapas-pusto">Brak punktów handlowych w tym miejscu.</p>
+    {{/if}}
+    {{#if ctx.wymiany.length}}
+    <p class="neuro-postoj-wymiany">Otwarte wymiany:
+        {{#each ctx.wymiany}}
+        <button type="button" class="neuro-cennik-btn" data-action="neuroWymianaOtworz" data-uuid="{{ uuid }}">{{ nazwa }}{{#if zgoda}} ✔{{/if}}</button>
+        {{/each}}
+    </p>
+    {{/if}}
+</div>

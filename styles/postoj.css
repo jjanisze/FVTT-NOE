@@ -164,3 +164,73 @@
   background: var(--fuks-kolor, #f3c969);
   flex: 0 0 10px;
 }
+
+/* ---------- Stół wymiany (§7.6) ------------------------------------- */
+.neuro-wymiana-okno { display: flex; flex-direction: column; gap: 8px; height: 100%; min-height: 0; }
+.neuro-wymiana-pusto { padding: 24px; text-align: center; }
+.neuro-wymiana-naglowek { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+.neuro-wymiana-portret { width: 72px; height: 96px; object-fit: cover; border-radius: 6px; border: 1px solid rgba(255, 255, 255, 0.15); }
+.neuro-wymiana-kto { display: flex; flex-direction: column; gap: 2px; flex: 1 1 auto; }
+.neuro-wymiana-kto strong { font-size: 16px; }
+.neuro-wymiana-kto span { font-size: 11px; color: var(--color-text-secondary, #999); }
+.neuro-wymiana-zgoda { font-size: 12px; padding: 4px 8px; border-radius: 4px; background: rgba(128, 128, 128, 0.15); }
+.neuro-wymiana-zgoda.is-zgoda { background: rgba(39, 174, 96, 0.25); color: #6fd39a; }
+.neuro-wymiana-kolumny { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; flex: 1 1 auto; min-height: 0; }
+.neuro-wymiana-kolumna,
+.neuro-wymiana-towar { display: flex; flex-direction: column; min-height: 0; border: 1px solid rgba(128, 128, 128, 0.25); border-radius: 6px; padding: 6px; }
+.neuro-wymiana-kolumny h3 { margin: 0 0 4px; font-size: 13px; border: none; }
+.neuro-wymiana-kolumny h3 small { font-weight: normal; color: var(--color-text-secondary, #999); font-size: 10px; }
+.neuro-wymiana-kolumny .lista { list-style: none; margin: 0; padding: 0; overflow-y: auto; flex: 1 1 auto; min-height: 0; }
+.neuro-wymiana-kolumny .lista li { display: flex; align-items: center; gap: 4px; padding: 2px 0; border-bottom: 1px solid rgba(128, 128, 128, 0.12); font-size: 12px; }
+.neuro-wymiana-kolumny .lista li img { width: 22px; height: 22px; flex: 0 0 22px; border: none; background: #23271f; border-radius: 3px; object-fit: contain; }
+.neuro-wymiana-kolumny .lista li .nazwa { flex: 1 1 auto; min-width: 0; }
+.neuro-wymiana-kolumny .lista li .nazwa small { color: var(--color-text-secondary, #999); }
+.neuro-wymiana-kolumny .lista li input[type="number"] { width: 48px; flex: 0 0 48px; height: 22px; }
+.neuro-wymiana-kolumny .lista li .cena { font-size: 11px; white-space: nowrap; }
+.neuro-wymiana-kolumny .lista li .cena.mg { color: #b8860b; }
+.neuro-wymiana-kolumny .lista li .cena.is-poza { color: #c0392b; }
+.neuro-wymiana-kolumny .lista li.pusto { color: var(--color-text-secondary, #999); font-style: italic; border: none; }
+.neuro-wymiana-kolumny .lista li.is-wyczerpane { opacity: 0.45; }
+.neuro-wymiana-kolumny .lista li.is-zepsuty .nazwa { color: #c0392b; }
+.neuro-wymiana-kolumna .suma { margin: 4px 0 0; font-size: 12px; text-align: right; }
+.neuro-wymiana-mg { flex: 0 0 auto; display: flex; flex-direction: column; gap: 6px; padding: 6px; border: 1px dashed #b8860b; border-radius: 6px; font-size: 12px; }
+.neuro-wymiana-saldo, .neuro-wymiana-narzedzia, .neuro-wymiana-katalog { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.neuro-wymiana-saldo input[type="number"] { width: 60px; height: 22px; }
+.neuro-wymiana-saldo .saldo strong { color: #6fd39a; }
+.neuro-wymiana-saldo .saldo.is-ujemne strong { color: #e74c3c; }
+.neuro-wymiana-narzedzia .grupa { display: inline-flex; align-items: center; gap: 4px; }
+.neuro-wymiana-narzedzia select, .neuro-wymiana-narzedzia input { width: auto; height: 22px; font-size: 12px; }
+.neuro-wymiana-narzedzia input[name="uslugaCena"] { width: 56px; }
+.neuro-wymiana-katalog input[type="search"] { flex: 1 1 240px; width: auto; height: 24px; }
+.neuro-wymiana-notatka { width: 100%; height: 24px; }
+.neuro-wymiana-stopka { flex: 0 0 auto; display: flex; justify-content: flex-end; gap: 8px; }
+.neuro-wymiana-stopka button { flex: 0 0 auto; width: auto; padding: 0 14px; }
+.neuro-wymiana-stopka button.is-gotowe { background: rgba(39, 174, 96, 0.35); border-color: #27ae60; }
+
+/* ---------- Okno Handel gracza (§7.5) -------------------------------- */
+.neuro-handel-gora h3 { margin: 10px 0 4px; font-size: 14px; }
+.neuro-handel-gora .neuro-postoj-ilustracja { display: block; width: 100%; aspect-ratio: 3 / 1; object-fit: cover; border-radius: 6px; }
+.neuro-handel-miejsce { margin: 6px 0; font-weight: bold; }
+.neuro-handel-wymiana { display: flex; align-items: center; gap: 8px; padding: 6px; background: rgba(184, 134, 11, 0.12); border-radius: 4px; }
+.neuro-handel-wymiana button, .neuro-handel-punkty button { flex: 0 0 auto; width: auto; margin-left: auto; padding: 0 10px; }
+.neuro-handel-punkty { list-style: none; margin: 0; padding: 0; }
+.neuro-handel-punkty li { display: flex; align-items: center; gap: 8px; padding: 4px 0; border-bottom: 1px solid rgba(128, 128, 128, 0.15); }
+.neuro-handel-punkty li img { width: 40px; height: 52px; object-fit: cover; border-radius: 4px; border: none; }
+.neuro-handel-punkty .opis { display: flex; flex-direction: column; }
+.neuro-handel-punkty .opis span { font-size: 11px; color: var(--color-text-secondary, #999); }
+.neuro-handel-licznik { font-size: 12px; margin: 4px 0; }
+.neuro-handel-szukane { font-size: 11px; color: var(--color-text-secondary, #999); margin: 2px 0 6px; }
+.neuro-handel-gora input[type="search"] { width: 100%; }
+.neuro-handel-wyniki { flex: 1 1 auto; overflow-y: auto; min-height: 0; }
+.neuro-handel-wyniki ul { list-style: none; margin: 0; padding: 0; }
+.neuro-handel-wyniki li { display: flex; align-items: center; gap: 6px; padding: 3px 0; border-bottom: 1px solid rgba(128, 128, 128, 0.12); }
+.neuro-handel-wyniki li .nazwa { flex: 1 1 auto; }
+.neuro-handel-wyniki li.is-juz .nazwa { color: var(--color-text-secondary, #999); }
+
+/* ---------- Sekcja punktów handlowych (zakładka Postój) ------------- */
+.neuro-postoj-punkty li a { cursor: pointer; }
+.neuro-postoj-punkty li button.neuro-cennik-btn { flex: 0 0 auto; width: 26px; height: 22px; line-height: 20px; padding: 0; }
+.neuro-postoj-wymiany { font-size: 12px; margin: 6px 0 0; }
+.neuro-postoj-wymiany button { width: auto; display: inline-block; }
+.neuro-punkt-kategorie { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px 8px; }
+.neuro-punkt-znika { max-height: 160px; overflow-y: auto; font-size: 12px; color: #c0392b; }

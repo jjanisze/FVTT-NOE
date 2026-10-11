@@ -65,6 +65,9 @@ export const REGULY_ZDEJMOWANIA = _f({
   bezsennosc: _f({ grupaDO: GRUPA_DO.bezWyjscia }),
   kac: _f({ grupaDO: GRUPA_DO.bezWyjscia }),
   forsowanie: _f({ grupaDO: GRUPA_DO.bezWyjscia }),
+  // M5 (PLAN_m5_postoj U55): kolejne godziny gamblingu (s. 44) i koncert Gwiazdy (s. 74) — zwykłe DO.
+  gambling: _f({ grupaDO: GRUPA_DO.bezWyjscia }),
+  koncert: _f({ grupaDO: GRUPA_DO.bezWyjscia }),
   ogolne: _f({ grupaDO: GRUPA_DO.bezWyjscia }),
   przemarznie: _f({
     grupaDO: GRUPA_DO.zWyjsciem,

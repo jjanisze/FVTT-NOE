@@ -1,0 +1,14 @@
+<section class="neuro-handel-wyniki">
+    {{#if ustawione}}
+    <ul>
+        {{#each wyniki}}
+        <li class="{{#if juz}}is-juz{{/if}}">
+            <span class="nazwa">{{ nazwa }}</span>
+            {{#if juz}}<span class="hint">już dziś</span>{{else}}
+            <button type="button" class="neuro-cennik-btn" data-action="szukaj" data-ref="{{ ref }}"><i class="fa-solid fa-dice-d20" inert></i> Szukaj</button>
+            {{/if}}
+        </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</section>

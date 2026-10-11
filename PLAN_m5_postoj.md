@@ -1323,3 +1323,28 @@ egzemplarzu (zużywalne — każda sztuka osobno), ikony grup `icons/fanty/<grup
 (MISSING.md, partia 62). Nagroda publiczności w panelu PD: Fuks / 10 PD / przedmiot do 20 gb (karta MG z Fantami ≤ 20 gb).
 Quench `fuksy` (9). Na żywo: wódka z paczki przez prawdziwą aktywność — butelka znika, Fuks trwały, karta. Krok e2e
 (Fant kilkuosobowy u dwóch graczy, Gotowanie wygasa po 24 h) wchodzi do paczki `postoj` razem z dobą (E5).
+
+**2026-10-12 — E3–E4 (punkty handlowe, stół wymiany, Handel, zamówienie, przeróbki).**
+- `postoj/handlarz.mjs`: punkt = BN z flagą `handlarz` (miejsce, kategorie główne, miejsca, Podstawy, fachowiec,
+  ziarno, skup, rodzaj obrazu, `wygenerowano`, `wizyta`), towar = jego przedmioty ze znacznikiem `towar.ref`; folder
+  „Punkty handlowe”; [Nowy punkt handlowy] (kategorie albo „losuj 2–3”), [Losuj od nowa] z listą tego, co zniknie,
+  [Usuń]. Punkt należy do miejsca po nazwie (bez nazw — po rodzaju i regionie).
+- `postoj/wymiana.mjs` + `stol-wymiany.mjs`: stan na postaci (U46), okno wspólne dla obu stron i odświeżane z flagi;
+  gracz przeciąga własny towar do „Daję”, bierze z listy (nazwy i ilości, bez cen — D21), widzi sumę podręcznikową
+  (D3), [Zgadzam się]; MG: wycena (skup ze wsparciem waluty lokalnej, stan), saldo z korektą, Wpływanie jako
+  prośba dnd5e `skill` ST 15, pozycje z katalogu, usługi, **przeróbki** fachowca z bronią-celem (cena z tabeli ×
+  Usługi speców). Zatwierdzenie: utwórz u celu → usuń u źródła → montaż (`installAddonById`; niezgodne — ulepszenie do
+  ekwipunku i uwaga) → karta publiczna bez liczb + szept MG z wartościami; hak `neuroshima.wymianaZatwierdzona`.
+- `postoj/handel.mjs`: przycisk „Handel” w nagłówku karty (gdy drużyna stoi w miejscu), okno z punktami miejsca i
+  „Szukam czegoś konkretnego”; targ dnia (`flags.targ`, U45), „już szukałeś dziś”, licznik i prośba o RO jako karta
+  `request` z własnym handlerem `neuroGamblingRO` (wybór MDR/CHA, porażka — Wyczerpanie „Gambling”, cofane Fuksem);
+  sprzedaż poza punktem bez zamówienia +1. Nowe źródła Wyczerpania `gambling`, `koncert` (U55).
+- **Znalezisko z e2e:** szept MG po zamówieniu pisał klient gracza — autor widzi własny szept, więc gracz widział cenę
+  tutaj. Teraz szept tworzy MG przez przekaźnik (`zamowienieSzept`). Druga lekcja: szept **z rzutem** core pokazuje
+  wszystkim jako prywatny rzut (`ChatMessage#visible` → `isRoll`), więc szepty MG M5 nie niosą rzutów (wynik w treści).
+- Quench `handel` (+3: przerwanie po utworzeniu zostawia dwa egzemplarze, podział stosu, przeróbka niezgodna).
+  e2e **`handel`** (MG, Gracz 1, Gracz 2) zielone: punkt przez prawdziwe okno (15 miejsc, rusznikarz, towar = ziarno),
+  gracz bez cen i bez panelu MG, portfel ukryty z panelem amunicji na miejscu, wycena 50% × Vegas 150%, Wpływanie,
+  przeniesienie bez klonów, notka wizyty, zamówienie z jawnymi liczbami i szeptem tylko MG, drugi raz — odmowa,
+  trzecia transakcja przy PB 2 → RO → Wyczerpanie „Gambling”, tłumik zamontowany przez rusznikarza, [Losuj od nowa].
+  **Mutacje** (każda daje czerwone): skup 100% pod Kobaltem, kopia zamiast przeniesienia.

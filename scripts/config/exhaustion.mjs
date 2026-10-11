@@ -65,6 +65,8 @@ export const EXHAUSTION_SOURCES = {
   zranienie:    { label: "Stopień Zranienia",     color: STATE_COLORS.zranienie },
   uduszenie:    { label: "Uduszenie",             color: "#5d6d7e" },
   forsowanie:   { label: "Forsowanie",            color: "#ff8a3d" },
+  gambling:     { label: "Gambling",              color: "#c9a227" },
+  koncert:      { label: "Koncert",               color: "#d45d79" },
   ogolne:       { label: "Ogólne",                color: "#9aa0a6" }
 };
 

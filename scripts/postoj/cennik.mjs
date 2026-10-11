@@ -194,7 +194,7 @@ export class CennikMG extends HandlebarsApplicationMixin(ApplicationV2) {
     await wyslijKarte(kartaPostoju({
       ikona: "icons/svg/dice-target.svg", tytul: `${nazwa}: ${roll.total} szt.`, podtytul: "ilość u handlarza · tylko MG",
       linie: [`${regula.replace("d", "k")} = <strong>${roll.total}</strong> (s. 43)`]
-    }), { szept: "gm", rolls: [roll] });
+    }), { szept: "gm" });
   }
 
   static async #zamowienie(_ev, btn) {
