@@ -26,7 +26,7 @@ import {
 } from "../config/podroz-data.mjs";
 import { addExhaustion } from "../config/exhaustion.mjs";
 import { jestMaszyna, rodzajTowarzysza } from "./towarzysze.mjs";
-import { getFuksy, setFuksy, MAX_FUKSY } from "../combat/rerolls.mjs";
+import { przyznajFuksa, mozeMiecFuksy } from "./fuksy.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const KATEGORIE_MAP = Object.fromEntries(ZASOBY_KATEGORIE.map(c => [c.kind, c]));
@@ -360,12 +360,12 @@ export async function cook(groupActor) {
   else linie.push("Porażka — posiłek jest jadalny i na tym koniec zalet.");
 
   if (total >= GOTOWANIE_FUKS) {
+    // Fuksy v2 (PLAN_m5_postoj U24): Fuks z Gotowania wygasa po 24 h; cudze postacie — przez MG.
     const obdarowani = [];
     for (const a of creatures(groupActor)) {
-      const fuksy = getFuksy(a);
-      if (fuksy >= MAX_FUKSY) continue;
-      await setFuksy(a, fuksy + 1);
-      obdarowani.push(a.name);
+      if (!mozeMiecFuksy(a)) continue;
+      const r = await przyznajFuksa(a, "gotowanie", { etykieta: `Gotowanie (${actor.name})`, nosiciel: actor, karta: false });
+      if (!r.odmowa) obdarowani.push(a.name);
     }
     linie.push(`Wynik ${total} — <strong>Fuks</strong> na 24 h dla: ${obdarowani.join(", ") || "nikogo (wszyscy mają komplet)"}.`);
   }

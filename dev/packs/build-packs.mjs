@@ -46,6 +46,7 @@ import { GOGLE_VARIANTS, buildGogleItemData } from "../../scripts/items/gogle.mj
 import { buildKontrolerItemData } from "../../scripts/items/kontroler.mjs";
 import { KONTROLERY } from "../../scripts/config/towarzysze-data.mjs";
 import { PRODUCTION_GEAR, buildProductionGearItemData } from "../../scripts/items/production-gear.mjs";
+import { FANTY, fantItemData, ikonaFantu, idFantu } from "../../scripts/config/fanty-data.mjs";
 import { ARMORS, buildArmorItemData } from "../../scripts/config/armor-data.mjs";
 import { TOOLKITS, buildToolkitItemData } from "../../scripts/config/toolkits-data.mjs";
 import { przepisySchematow, schematItemData, kategoriaSchematu } from "../../scripts/config/schematy-data.mjs";
@@ -1827,6 +1828,17 @@ const sprzetDocs = [
   ...Object.keys(GOGLE_VARIANTS).map(buildGogle),
   ...Object.keys(KONTROLERY).map(buildKontroler),
 ];
+// Fanty (NOE s. 132–133, PLAN_m5_postoj U25) — folder „Fanty” w paczce `sprzet`. Ikona grupy, gdy plik jest
+// (`icons/fanty/<grupa>.svg`, zamówienie w MISSING.md), inaczej zapas z `GRUPY_FANTOW`.
+const FANTY_FOLDER = idFor("sprzet-folder", "fanty");
+for (const f of FANTY) {
+  const img = ikonaFantu(f, { istnieje: rel => fs.existsSync(path.join(MODULE_ROOT, rel)) });
+  sprzetDocs.push({ ...fantItemData(f, { _id: idFor("fant", idFantu(f)), img }), folder: FANTY_FOLDER, _key: null });
+}
+const sprzetFolders = [{
+  _id: FANTY_FOLDER, name: "Fanty", type: "Item", folder: null,
+  sorting: "a", sort: 0, color: null, flags: {}, description: ""
+}];
 const armorDocs = ARMORS.map(buildArmor);
 
 // Schematy (PLAN_produkcja §7) — jeden na przepis standardowy wymagający schematu, foldery wg kategorii.
@@ -1909,7 +1921,7 @@ if (wanted(PACK.granaty)) await writePack(PACK.granaty, grenadeDocs);
 if (wanted(PACK.narzedzia)) await writePack(PACK.narzedzia, toolkitDocs);
 if (wanted(PACK.bron)) await writePack(PACK.bron, weaponDocs);
 if (wanted(PACK.magazynki)) await writePack(PACK.magazynki, magazineDocs);
-if (wanted(PACK.sprzet)) await writePack(PACK.sprzet, sprzetDocs);
+if (wanted(PACK.sprzet)) await writePack(PACK.sprzet, sprzetDocs, sprzetFolders);
 if (wanted(PACK.pancerze)) await writePack(PACK.pancerze, armorDocs);
 if (wanted(PACK.schematy)) await writePack(PACK.schematy, schematDocs, schematFolders);
 if (wanted(PACK.bestiariusz)) await writeActorPack(PACK.bestiariusz, bestiaryEntries, bestiaryFolders);

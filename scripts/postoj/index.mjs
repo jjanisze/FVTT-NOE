@@ -13,11 +13,17 @@ import { registerMiejsce, miejsceApi } from "./miejsce.mjs";
 import { registerPortfel, audytPortfela, walutaLokalna, gbWPortfelu } from "./portfel.mjs";
 import { registerCennik, otworzCennik } from "./cennik.mjs";
 import { rzucZamowienie, gamblingWeKrwi } from "./zamowienie.mjs";
+import { registerPrzekaznik } from "./przekaznik.mjs";
+import { registerFuksy, fuksyApi } from "../actors/fuksy.mjs";
+import { registerFanty, fantyApi } from "../items/fanty.mjs";
 
 /** Wołane z `init`. */
 export function registerPostoj() {
   registerIlustracjeSetting();
   registerKartyPostoju();
+  registerPrzekaznik();
+  registerFuksy();
+  registerFanty();
   registerMiejsce();
   registerPortfel();
   registerCennik();
@@ -34,6 +40,9 @@ export const handelApi = Object.freeze({
   gamblingWeKrwi,
   zasady: handelRules
 });
+
+/** `game.neuroshima.fuksy`, `.fanty` */
+export { fuksyApi, fantyApi };
 
 /** `game.neuroshima.postoj` */
 export const postojApi = Object.freeze({

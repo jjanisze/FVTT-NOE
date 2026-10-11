@@ -118,6 +118,107 @@ export function rodzajFantu(idLubNazwa) {
 /** Fanty kilkuosobowe (U25) — podpowiedź Rozrywki w dziczy i wiosce (U34). */
 export const KILKUOSOBOWE = Object.freeze(FANTY.filter(f => f.kilkuosobowy).map(idFantu));
 
+/* -------------------------------------------- */
+/*  Przedmiot                                    */
+/* -------------------------------------------- */
+
+const MODULE_ID = "neuroshima-2026-overrides";
+
+/**
+ * Grupa ikony (`icons/fanty/<grupa>.svg`, zamówienie w `dev/icons/MISSING.md`) i waga szacunkowa — RAW nie
+ * podaje wag Fantów. `zapas` — ikona istniejąca dziś, dopóki grafiki grupy nie ma.
+ */
+export const GRUPY_FANTOW = Object.freeze({
+  "slodycze": Object.freeze({ waga: 0.1, zapas: "icons/items/loot/mre.svg" }),
+  "cygaro": Object.freeze({ waga: 0.05, zapas: "icons/items/loot/fajka.svg" }),
+  "prasa": Object.freeze({ waga: 0.3, zapas: "icons/items/loot/notatka.svg" }),
+  "gra": Object.freeze({ waga: 0.5, zapas: "icons/items/loot/pudelko.svg" }),
+  "kaseta": Object.freeze({ waga: 0.2, zapas: "icons/items/loot/dvd.svg" }),
+  "plyta-cd": Object.freeze({ waga: 0.1, zapas: "icons/items/loot/dvd.svg" }),
+  "konsola": Object.freeze({ waga: 1, zapas: "icons/items/loot/komputer_gamingowy.svg" }),
+  "alkohol": Object.freeze({ waga: 0.75, zapas: "icons/items/loot/manierka.svg" }),
+  "zabawka": Object.freeze({ waga: 0.3, zapas: "icons/items/loot/kaczuszka.svg" }),
+  "papier-toaletowy": Object.freeze({ waga: 0.2, zapas: "icons/items/loot/mydlo.svg" })
+});
+
+/** Grupa ikony Fantu z wiersza tabeli. */
+export function grupaFantu(f) {
+  const n = f.od;
+  if (n === 1) return "papier-toaletowy";
+  if (n <= 9) return "slodycze";
+  if (n === 10) return "cygaro";
+  if (n <= 15) return "prasa";
+  if (n <= 20) return "gra";
+  if (n <= 32) return "kaseta";
+  if (n <= 40) return "konsola";
+  if (n <= 71) return "prasa";
+  if (n <= 85) return "plyta-cd";
+  if (n <= 93) return "alkohol";
+  return "zabawka";
+}
+
+/** Ścieżka ikony: grafika grupy, gdy plik jest (`istnieje(sciezka)`), inaczej zapas. */
+export function ikonaFantu(f, { istnieje = () => false } = {}) {
+  const g = grupaFantu(f);
+  const wlasna = `icons/fanty/${g}.svg`;
+  return `modules/${MODULE_ID}/${istnieje(wlasna) ? wlasna : GRUPY_FANTOW[g].zapas}`;
+}
+
+/** Id aktywności „Użyj Fantu” (stałe 16 znaków, jak inne aktywności z paczek). */
+export const FANT_AKTYWNOSC = "neuroFantUzyj000";
+
+/**
+ * Dane przedmiotu Fantu (paczka `sprzet`, folder Fanty; Nagroda publiczności, szabrowanie).
+ * Zużywalne mają jedno użycie z `autoDestroy` — stos schodzi o sztukę. Flaga `fant.uzyli` pamięta, kto już
+ * dostał z tego przedmiotu Fuksa (s. 17: przy pierwszym wykorzystaniu) — przechodzi z nim przy wymianie.
+ */
+export function fantItemData(f, { _id, img, quantity = 1 } = {}) {
+  const rodzaj = RODZAJE_FANTOW[f.rodzaj] ?? RODZAJE_FANTOW.inne;
+  const g = grupaFantu(f);
+  const opis = [
+    `<p><strong>Fant</strong> (NOE s. 133) — ${rodzaj.label.toLowerCase()}, wart ok. <strong>${f.wartosc} gb</strong>.`,
+    ` Bohater, który wykorzysta go <strong>po raz pierwszy</strong>, dostaje Fuksa bezterminowego (s. 17).</p>`,
+    f.kilkuosobowy ? `<p>Kilkuosobowy — może z niego skorzystać kilka postaci naraz (rozrywka w dziczy, s. 47).</p>` : "",
+    f.zuzywalny ? `<p>Zużywa się przy użyciu.</p>` : "",
+    f.wymaga ? `<p>Wymaga: ${f.wymaga} (nie sprawdzane).</p>` : "",
+    `<p class="hint">Za Fant wymagający drobnej naprawy klient da połowę wartości (s. 132).</p>`
+  ].join("");
+  const typ = ["jedzenie", "napoj"].includes(f.rodzaj) ? "food" : "trinket";
+  const data = {
+    name: f.nazwa,
+    type: "consumable",
+    img: img ?? `modules/${MODULE_ID}/${GRUPY_FANTOW[g].zapas}`,
+    system: {
+      description: { value: opis, chat: "" },
+      source: { custom: "Neuroshima RPG", rules: "2024" },
+      quantity,
+      weight: { value: GRUPY_FANTOW[g].waga, units: "kg" },
+      price: { value: f.wartosc, denomination: "gb" },
+      type: { value: typ, subtype: "" },
+      uses: f.zuzywalny ? { max: "1", spent: 0, recovery: [], autoDestroy: true } : { max: "", spent: 0, recovery: [], autoDestroy: false },
+      activities: {
+        [FANT_AKTYWNOSC]: {
+          _id: FANT_AKTYWNOSC,
+          type: "utility",
+          name: rodzaj.czynnosc,
+          img: img ?? `modules/${MODULE_ID}/${GRUPY_FANTOW[g].zapas}`,
+          activation: { type: "action", value: 1, condition: "" },
+          consumption: { targets: f.zuzywalny ? [{ type: "itemUses", value: "1", target: "" }] : [], scaling: { allowed: false } },
+          flags: { [MODULE_ID]: { fantUzyj: true } }
+        }
+      }
+    },
+    flags: { [MODULE_ID]: { fant: { id: idFantu(f), rodzaj: f.rodzaj, kilkuosobowy: f.kilkuosobowy, zuzywalny: f.zuzywalny, uzyli: [] } } }
+  };
+  if (_id) data._id = _id;
+  return data;
+}
+
+/** Fanty o wartości do `limit` gb — podpowiedź Nagrody publiczności (przedmiot do 20 gb, s. 57). */
+export function fantyDo(limit) {
+  return FANTY.filter(f => f.wartosc <= limit);
+}
+
 /**
  * Losowanie Fantu (s. 133): wynik 100 — dwa kolejne rzuty (rekurencyjnie).
  * @param {() => number} rng

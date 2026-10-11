@@ -3,16 +3,18 @@
  *
  * dnd5e renders a single Inspiration star next to the level badge, backed by the
  * boolean `system.attributes.inspiration`. Fuks is not a boolean — a character
- * holds 0–3 of them (RAW), and the real resource already lives in
- * `flags.<module>.fuksy`, where `combat/rerolls.mjs` spends it.
+ * holds 0–3 of them (RAW), each with a source and possibly a term (Fuksy v2,
+ * PLAN_m5_postoj U24, D15), stored in `flags.<module>.fuksy` (`actors/fuksy.mjs`).
  *
- * The star is therefore removed and replaced with three clickable clover pips
- * bound to that flag, so the header shows the same number the reroll button
- * offers. Clicking pip N sets the count to N; clicking the highest filled pip
- * steps back down, matching how the Zranienie pips behave.
+ * The star is therefore removed and replaced with three clover pips: the colour of
+ * the source, a ring for a permanent Fuks (like persistent Wyczerpanie), a tooltip
+ * "Fuks: <origin> — do <time>". Permanent ones sit on the left; the rightmost is the
+ * first to be spent or to expire. A GM click opens the Fuks window (add with source
+ * and term, remove); players read, the reroll button spends.
  */
 
-import { getFuksy, setFuksy, MAX_FUKSY } from "../combat/rerolls.mjs";
+import { MAX_FUKSY, ZRODLA_FUKSOW, jestTrwaly as _trwaly } from "../config/fuksy-rules.mjs";
+import { fuksy, dymekFuksa, oknoFuksow } from "./fuksy.mjs";
 import { jestTowarzyszem } from "./towarzysze.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -45,27 +47,36 @@ function _onRenderCharacterSheet(app, html) {
   right.querySelector("button.inspiration")?.remove();
   right.querySelector(`.${PIPS_CLASS}`)?.remove();
 
-  const editable = actor.isOwner && app.isEditable !== false;
-  const count = getFuksy(actor);
+  const lista = fuksy(actor);
+  // Trwałe z lewej, potem „do końca sesji”, potem ulotne od najpóźniej wygasającego — skrajny prawy
+  // schodzi pierwszy (zużycie i zegar), jak pipki Wyczerpania.
+  const pokaz = [...lista].reverse();
+  const count = pokaz.length;
 
   const wrap = document.createElement("div");
   wrap.className = PIPS_CLASS;
-  wrap.dataset.tooltip = `Fuks: ${count}/${MAX_FUKSY}`;
+  wrap.dataset.tooltip = count
+    ? pokaz.map(f => foundry.utils.escapeHTML(dymekFuksa(f))).join("<br>")
+    : `Fuks: 0/${MAX_FUKSY}`;
   wrap.setAttribute("aria-label", `Fuks ${count} z ${MAX_FUKSY}`);
 
   for (let i = 1; i <= MAX_FUKSY; i++) {
+    const f = pokaz[i - 1] ?? null;
     const pip = document.createElement("button");
     pip.type = "button";
-    pip.className = `neuro-fuks-pip ${i <= count ? "is-filled" : ""}`.trim();
+    pip.className = ["neuro-fuks-pip", f ? "is-filled" : "", f && _trwaly(f) ? "is-trwaly" : ""].filter(Boolean).join(" ");
     pip.dataset.n = String(i);
+    if (f) {
+      pip.style.setProperty("--fuks-kolor", ZRODLA_FUKSOW[f.zrodlo]?.kolor ?? "#f3c969");
+      pip.dataset.tooltip = foundry.utils.escapeHTML(dymekFuksa(f));
+    }
     pip.innerHTML = `<i class="fa-solid fa-clover"></i>`;
     pip.setAttribute("aria-label", `Fuks ${i}`);
-    if (editable) {
-      pip.addEventListener("click", async ev => {
+    if (game.user.isGM) {
+      pip.addEventListener("click", ev => {
         ev.preventDefault();
         ev.stopPropagation();
-        const n = Number(ev.currentTarget.dataset.n);
-        await setFuksy(actor, n === count ? n - 1 : n);
+        oknoFuksow(actor);
       });
     } else {
       pip.disabled = true;

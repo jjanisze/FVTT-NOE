@@ -19,6 +19,7 @@
  */
 
 import { jestTowarzyszem } from "./towarzysze.mjs";
+import { nagrodaPublicznosci } from "../items/fanty.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const FLAG = "pd";
@@ -38,7 +39,7 @@ export const PD_SOURCES = {
   przechwalki: { label: "Przechwałki",        value: 10, needsNote: true,
                  hint: "Unikalna przechwałka (max 30 PD na sesję)" },
   publicznosc: { label: "Nagroda publiczności", value: 10, needsNote: false,
-                 hint: "Głosowanie współgraczy" },
+                 hint: "Głosowanie współgraczy — Fuks, 10 PD albo przedmiot do 20 gb (s. 57)" },
   grupowe:     { label: "PD grupowe",         value: 0,  needsNote: false,
                  hint: "Przyznane przez MG za postęp misji (10–50 / sesja)" }
 };
@@ -205,6 +206,13 @@ function _onRenderSheet(app, html) {
       const key = ev.currentTarget.dataset.source;
       const source = PD_SOURCES[key];
       if (!source) return;
+
+      // Nagroda publiczności (s. 57, PLAN_m5_postoj U51): Fuks bezterminowy, 10 PD albo przedmiot do 20 gb.
+      if (key === "publicznosc") {
+        await nagrodaPublicznosci(actor, { awardPD: a => awardPD(a, "publicznosc") });
+        app.render(false);
+        return;
+      }
 
       let note = "";
       let value = null;

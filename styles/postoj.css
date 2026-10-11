@@ -142,3 +142,25 @@
 
 /* ---------- Waluta lokalna w karcie przedmiotu (U41) ---------------- */
 .neuro-waluta-lokalna { margin-top: 8px; }
+
+/* ---------- Fuksy v2: pipki ze źródłem i terminem (U24, D15) -------- */
+.neuro-fuks-pip.is-filled { color: var(--fuks-kolor, #f3c969); }
+.neuro-fuks-pip.is-trwaly {
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1.5px var(--neuro-color-uporczywe, #e8dcc0);
+}
+.neuro-fuks-linia {
+  border-left: 4px solid #27ae60;
+  background: rgba(39, 174, 96, 0.08);
+  padding: 4px 8px;
+  border-radius: 0 4px 4px 0;
+  font-size: 12px;
+}
+.neuro-fuks-lista { list-style: none; margin: 0 0 8px; padding: 0; }
+.neuro-fuks-lista li { display: flex; align-items: center; gap: 6px; padding: 2px 0; }
+.neuro-fuks-lista li button { flex: 0 0 auto; width: 26px; height: 22px; line-height: 20px; margin-left: auto; }
+.neuro-fuks-kropka {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--fuks-kolor, #f3c969);
+  flex: 0 0 10px;
+}

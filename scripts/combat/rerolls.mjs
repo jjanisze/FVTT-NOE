@@ -29,11 +29,13 @@
 import { addExhaustion } from "../config/exhaustion.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
 import { jestTowarzyszem } from "../actors/towarzysze.mjs";
+import { MAX_FUKSY } from "../config/fuksy-rules.mjs";
+import { liczbaFuksow, zuzyjFuksa, przyznajFuksa, ustawLiczbeFuksow } from "../actors/fuksy.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
 /** RAW cap: a character can hold at most three Fuksy. */
-export const MAX_FUKSY = 3;
+export { MAX_FUKSY };
 
 /* -------------------------------------------- */
 /*  Registration                                 */
@@ -64,7 +66,7 @@ export function registerRerolls() {
  * @returns {number} 0 to MAX_FUKSY
  */
 export function getFuksy(actor) {
-  return actor.getFlag(MODULE_ID, "fuksy") ?? 0;
+  return liczbaFuksow(actor);
 }
 
 /**
@@ -74,9 +76,8 @@ export function getFuksy(actor) {
  * @returns {Promise<number>} New count
  */
 export async function setFuksy(actor, count) {
-  const clamped = Math.max(0, Math.min(MAX_FUKSY, count));
-  await actor.setFlag(MODULE_ID, "fuksy", clamped);
-  return clamped;
+  // Fuksy v2 (PLAN_m5_postoj U24): lista z pochodzeniem i terminem — licznik tylko dla zgodności.
+  return ustawLiczbeFuksow(actor, count);
 }
 
 /**
@@ -92,7 +93,8 @@ export async function addFuks(actor, { chat = true } = {}) {
     if (chat) ui.notifications.warn(`${actor.name} ma już maksymalną liczbę Fuksów (${MAX_FUKSY}).`);
     return current;
   }
-  const newCount = await setFuksy(actor, current + 1);
+  await przyznajFuksa(actor, "mg", { karta: false });
+  const newCount = getFuksy(actor);
   if (chat) {
     await ChatMessage.create({
       content: `<div style="border-left: 4px solid #27ae60; background: rgba(39, 174, 96, 0.08); padding: 6px 8px; border-radius: 0 4px 4px 0;">
@@ -476,8 +478,8 @@ async function _onClickFuks(event) {
     flags: _fuksRerollFlags(originalMessage)
   });
 
-  // Decrement Fuksy
-  await setFuksy(actor, fuksy - 1);
+  // Zużyj Fuksa, który wygasa najwcześniej (Fuksy v2, U24).
+  await zuzyjFuksa(actor);
   seqScrollText("FUKS!", actor, { color: "#2ecc71", fontSize: 36, duration: 2000 });
 
   // Mark source message as rerolled

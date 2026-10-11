@@ -1308,3 +1308,18 @@ w karcie przedmiotu, Żeton Luxor = Vegas. Ustawienie klienta „Ilustracje” (
 (nadpisanie MG → `ui/<zestaw>/<klucz>.webp`, jeśli jest → nic). Quench `handel` (11). Sprawdzone na żywo u MG: Cennik
 (UZI w Vegas 75 gb, skup WKK 37,5, dostępność 70%), zamówienie za Alana (k100 35 − CHA 8 = 27 ≤ 80), karta postaci bez
 portfela z panelami amunicji, surowców i prowiantu na miejscu, okno nagrody bez gb.
+
+**2026-10-12 — E2 (Fuksy v2, Fanty, Nagroda publiczności).** `actors/fuksy.mjs`: lista z pochodzeniem i terminem,
+przyznanie (komplet → odmowa i karta MG [Zamień najkrócej ważny]), zużycie najkrócej ważnego w Przerzucie,
+wygasanie na `updateWorldTime` z linią na czacie, okno MG z pipek (dodaj ze źródłem i terminem, usuń). Gracz
+dający Fuksa cudzej postaci idzie przez **przekaźnik MG M5** (`postoj/przekaznik.mjs`: prośba na własnym aktorze,
+kolejka po `nonce`, wykonawcy rejestrowani per typ — z niego skorzystają kolejne etapy). Źródła dziś: Gotowanie
+(24 h, poprawiony błąd F5), Fant i Nagroda publiczności (trwałe), Pieśń otuchy (aktywność 1×/DO dokładana Sztuczce
+Muzyk w locie, wybór 1 + mod. CHA sojuszników), MG. Pipki: kolor źródła, ramka — trwały, dymek „Fuks: … — do …”.
+**Migracja w kampanii** wykonana przy przeładowaniu (aktywny MG): Alan 1, Lorentz 1, Piekarz 3, Raynald 3, Victor 3 →
+tyle samo trwałych „sprzed M5” (sprawdzone z kopią liczb sprzed migracji). Fanty: 52 przedmioty w paczce `sprzet`
+(folder Fanty), aktywność „Zjedz / Wypij / Przeczytaj / Zagraj…”, kilkuosobowe z oknem uczestników, `uzyli` na
+egzemplarzu (zużywalne — każda sztuka osobno), ikony grup `icons/fanty/<grupa>.svg` z zapasem do czasu grafik
+(MISSING.md, partia 62). Nagroda publiczności w panelu PD: Fuks / 10 PD / przedmiot do 20 gb (karta MG z Fantami ≤ 20 gb).
+Quench `fuksy` (9). Na żywo: wódka z paczki przez prawdziwą aktywność — butelka znika, Fuks trwały, karta. Krok e2e
+(Fant kilkuosobowy u dwóch graczy, Gotowanie wygasa po 24 h) wchodzi do paczki `postoj` razem z dobą (E5).

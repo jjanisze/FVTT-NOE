@@ -193,7 +193,7 @@ import { zdolnosciApi } from "./config/class-features-coverage.mjs";
 import { resyncClassFeatures } from "./migration/resync-class-features.mjs";
 import { registerToolAvailability } from "./actors/tool-availability.mjs";
 import { registerProdukcja, produkcjaApi } from "./production/index.mjs";
-import { registerPostoj, handelApi, postojApi } from "./postoj/index.mjs";
+import { registerPostoj, handelApi, postojApi, fuksyApi, fantyApi } from "./postoj/index.mjs";
 import { registerQuenchTests, testsApi } from "./tests/index.mjs";
 import { monsterClosetApi } from "./dev/monster-closet.mjs";
 import { characterClosetApi } from "./dev/character-closet.mjs";
@@ -630,6 +630,8 @@ Hooks.once("ready", () => {
   game.neuroshima.produkcja = produkcjaApi;
   game.neuroshima.handel = handelApi;
   game.neuroshima.postoj = postojApi;
+  game.neuroshima.fuksy = fuksyApi;
+  game.neuroshima.fanty = fantyApi;
   game.neuroshima.zajecia = restActivitiesApi;
 
   /* Pasek plakietek stanu na wierszach ekwipunku. **Musi być zarejestrowany jako ostatni
