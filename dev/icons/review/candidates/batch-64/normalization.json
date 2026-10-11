@@ -1,0 +1,137 @@
+[
+  {
+    "key": "wychuchana_spluwa_revision_d",
+    "source": "raw/standalone-wychuchana.png",
+    "removedTinyPixels": 2
+  },
+  {
+    "key": "samuraj_revision_c",
+    "source": "raw/batch-64-atlas-a.png, cell 2",
+    "removedTinyPixels": 8
+  },
+  {
+    "key": "bebeszenie_revision_c",
+    "source": "raw/batch-64-atlas-a.png, cell 3",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "szabrowanie_revision_c",
+    "source": "raw/batch-64-atlas-a.png, cell 4",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "chodzmy-na-pewno-juz-utonal_revision_b",
+    "source": "raw/batch-64-atlas-a.png, cell 5",
+    "removedTinyPixels": 3
+  },
+  {
+    "key": "gambling-we-krwi_revision_b",
+    "source": "raw/batch-64-atlas-a.png, cell 6",
+    "removedTinyPixels": 3
+  },
+  {
+    "key": "zjadlem-wlasnego-psa_revision_b",
+    "source": "raw/batch-64-atlas-a.png, cell 7",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "hi-tech_revision_b",
+    "source": "raw/standalone-hi-tech.png",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "barbarka",
+    "source": "raw/batch-64-atlas-a.png, cell 9",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "bez-trzymanki",
+    "source": "raw/batch-64-atlas-b.png, cell 1",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "benzyna-zamiast-krwi",
+    "source": "raw/batch-64-atlas-b.png, cell 2",
+    "removedTinyPixels": 7
+  },
+  {
+    "key": "ciszej-niz-cien",
+    "source": "raw/batch-64-atlas-b.png, cell 3",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "czlowiek-pajak",
+    "source": "raw/batch-64-atlas-b.png, cell 4",
+    "removedTinyPixels": 6
+  },
+  {
+    "key": "fabrykator",
+    "source": "raw/batch-64-atlas-b.png, cell 5",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "fachowiec",
+    "source": "raw/batch-64-atlas-b.png, cell 6",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "grenadier",
+    "source": "raw/batch-64-atlas-b.png, cell 7",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "immunitet",
+    "source": "raw/batch-64-atlas-b.png, cell 8",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "jest-zajebiscie",
+    "source": "raw/batch-64-atlas-b.png, cell 9",
+    "removedTinyPixels": 10
+  },
+  {
+    "key": "karateka",
+    "source": "raw/batch-64-atlas-c.png, cell 1",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "kuloodpornosc",
+    "source": "raw/batch-64-atlas-c.png, cell 2",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "lawnik",
+    "source": "raw/batch-64-atlas-c.png, cell 3",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "miotacz",
+    "source": "raw/batch-64-atlas-c.png, cell 4",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "mistrz-broni-bialej",
+    "source": "raw/batch-64-atlas-c.png, cell 5",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "mistrz-walki-wrecz",
+    "source": "raw/batch-64-atlas-c.png, cell 6",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "muzyk",
+    "source": "raw/batch-64-atlas-c.png, cell 7",
+    "removedTinyPixels": 4
+  },
+  {
+    "key": "neo",
+    "source": "raw/batch-64-atlas-c.png, cell 8",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "nozownik",
+    "source": "raw/batch-64-atlas-c.png, cell 9",
+    "removedTinyPixels": 0
+  }
+]

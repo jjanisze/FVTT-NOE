@@ -1,0 +1,265 @@
+{
+  "batch": 64,
+  "date": "2026-10-12",
+  "revisions": [
+    {
+      "itemId": "batch60-wychuchana-spluwa",
+      "key": "wychuchana_spluwa_revision_d",
+      "atlas": "a",
+      "request": "Keep exactly two realistic gloved hands, the holding grip and the cleaning cloth. Lengthen the pistol slide/barrel to adult-handgun proportions, about 25% longer than the short draft. Draw one unmistakable curved trigger INSIDE its complete trigger guard, with a broad black gap around it. No third hand, floating trigger or extra guard."
+    },
+    {
+      "itemId": "batch61-samuraj",
+      "key": "samuraj_revision_c",
+      "atlas": "a",
+      "request": "Completely redraw according to the GM's new direction: one realistic adult hand grips a KATANA with a gently curved single-edged blade and plain circular guard, blade diagonal up-right. The OFF HAND is empty and held beside it in a compact martial guard position, fingers naturally extended together and palm angled toward the viewer. Exactly two anatomically correct hands, one katana. NO scabbard, draw gesture, sleeves shaped like hands, extra weapon or armoured figure."
+    },
+    {
+      "itemId": "batch62-bebeszenie",
+      "key": "bebeszenie_revision_c",
+      "atlas": "a",
+      "request": "Keep the crossed butcher knife and pliers in front of the rib outline. Repair the pliers: two straight continuous handles below the pivot, no V-shaped kink, hooked grip or bent handle. Two recognisable open jaws above the pivot. Only these TWO tools form the X; no extra tool or gore."
+    },
+    {
+      "itemId": "batch62-szabrowanie",
+      "key": "szabrowanie_revision_c",
+      "atlas": "a",
+      "request": "Preserve the crowbar levering at the front lip of the crate, but make its flattened hooked working tip distinct from the crate wall, with a broad black separation contour around the tip apart from its small real contact/fulcrum. The crowbar must not fuse with the crate. Enlarge the raised rectangular lid to clearly cover the whole crate when closed, with visible hinges and a large coherent slab."
+    },
+    {
+      "itemId": "batch63-chodzmy-na-pewno-juz-utonal",
+      "key": "chodzmy-na-pewno-juz-utonal_revision_b",
+      "atlas": "a",
+      "request": "Keep the underwater swimmer, head, front arms, waterline and air bubble. Rebuild the rear half as a natural human pelvis and exactly TWO proportional human legs: one leg trails straight behind, the other bends gently at a single knee, both ending in recognisable feet. No fused hips, extra legs, backwards knees, fins or animal parts."
+    },
+    {
+      "itemId": "batch63-gambling-we-krwi",
+      "key": "gambling-we-krwi_revision_b",
+      "atlas": "a",
+      "request": "Keep the barter trader, offered canteen, second hand and goods crate. Zoom out enough that the full cap and head are complete, with generous empty space above them. No flat cropped crown, clipped cap or missing shoulders. Preserve the useful barter gesture."
+    },
+    {
+      "itemId": "batch63-zjadlem-wlasnego-psa",
+      "key": "zjadlem-wlasnego-psa_revision_b",
+      "atlas": "a",
+      "request": "Reframe to show the COMPLETE head and menacing face of the rugged butcher, upper torso and apron. Raise the hand holding a heavy short-handled butcher's axe/hatchet to beside the shoulder, with the entire blade visible. Focus on the stern face, broad shoulders and raised tool; no clipped skull, cropped blade, dog or gore."
+    },
+    {
+      "itemId": "batch63-hi-tech",
+      "key": "hi-tech_revision_b",
+      "atlas": "a",
+      "request": "Preserve the electronic console with broad control, traces and two buttons. Replace the cartoon oversized glove/finger with an anatomically plausible adult hand in a close-fitting plain work glove: normal-sized palm, four proportional fingers, a distinct thumb, one straight index finger presses the large control. No inflated cartoon glove, mitten, giant cuff or extra finger."
+    }
+  ],
+  "fresh": [
+    {
+      "key": "barbarka",
+      "catalogKey": "barbarka",
+      "name": "Barbarka",
+      "request": "One rugged fighter delivers a headbutt: two human head-and-shoulder profiles meet forehead to forehead with one broad impact burst between them. Two intact skulls, no gore or tiny detail.",
+      "context": "Headbutt attacks and knocking a target prone.",
+      "kind": "feat",
+      "atlas": "a",
+      "target": "icons/abilities/barbarka.svg",
+      "itemId": "batch64-barbarka"
+    },
+    {
+      "key": "bez-trzymanki",
+      "catalogKey": "bezTrzymanki",
+      "name": "Bez trzymanki",
+      "request": "One rider balances a practical motorcycle with BOTH hands clearly off its handlebars, arms held out in a controlled riding posture. One coherent bike, two wheels, broad simple frame; no stunt circus pose or tiny mechanics.",
+      "context": "Riding a motorcycle without using the hands.",
+      "kind": "feat",
+      "atlas": "b",
+      "target": "icons/abilities/bez-trzymanki.svg",
+      "itemId": "batch64-bez-trzymanki"
+    },
+    {
+      "key": "benzyna-zamiast-krwi",
+      "catalogKey": "benzynaZamiastKrwi",
+      "name": "Benzyna zamiast krwi",
+      "request": "One alert driver grips a steering wheel and protects a compact car silhouette from a single incoming impact. The driver's broad shoulder blocks the impact near the car. Show vehicle protection through practical shapes, no heart, blood, logos or floating cog.",
+      "context": "Protecting a vehicle and improving its defenses.",
+      "kind": "feat",
+      "atlas": "b",
+      "target": "icons/abilities/benzyna-zamiast-krwi.svg",
+      "itemId": "batch64-benzyna-zamiast-krwi"
+    },
+    {
+      "key": "ciszej-niz-cien",
+      "catalogKey": "ciszejNizCien",
+      "name": "Ciszej niż cień",
+      "request": "One crouched survivor moves quietly close to a low broken wall, boot lifted lightly above the ground. Its broad shadow contour stays close behind. A spare stealth silhouette, no crossed-out alarm, speech bubble or tiny footprints.",
+      "context": "Enemies struggle to perceive the character's presence.",
+      "kind": "feat",
+      "atlas": "b",
+      "target": "icons/abilities/ciszej-niz-cien.svg",
+      "itemId": "batch64-ciszej-niz-cien"
+    },
+    {
+      "key": "czlowiek-pajak",
+      "catalogKey": "czlowiekPajak",
+      "name": "Człowiek-pająk",
+      "request": "One practical wasteland climber climbs a near-vertical wall using two hands and two boots, a plain rope hanging nearby. Clear bent limbs and one firm handhold. Ordinary gear, no superhero costume, spider emblem or recognizable fictional character.",
+      "context": "Improved climbing speed, terrain handling and fall saves.",
+      "kind": "feat",
+      "atlas": "b",
+      "target": "icons/abilities/czlowiek-pajak.svg",
+      "itemId": "batch64-czlowiek-pajak"
+    },
+    {
+      "key": "fabrykator",
+      "catalogKey": "fabrykator",
+      "name": "Fabrykator",
+      "request": "Two sturdy hands assemble a compact device clamped in a bench vise, one hand steadies the piece while the other tightens a large bolt with a wrench. Broad real workshop shapes, no generic giant cog or toy exploded stack.",
+      "context": "Faster production using a full complement of tools.",
+      "kind": "feat",
+      "atlas": "b",
+      "target": "icons/abilities/fabrykator.svg",
+      "itemId": "batch64-fabrykator"
+    },
+    {
+      "key": "fachowiec",
+      "catalogKey": "fachowiec",
+      "name": "Fachowiec",
+      "request": "Two capable hands hold two different real tools over a spare workbench: a wrench in one and pliers in the other. Balanced practical tool silhouettes with broad open space, no third tool or decorative badges.",
+      "context": "Proficiency with two tool sets.",
+      "kind": "feat",
+      "atlas": "b",
+      "target": "icons/abilities/fachowiec.svg",
+      "itemId": "batch64-fachowiec"
+    },
+    {
+      "key": "grenadier",
+      "catalogKey": "grenadier",
+      "name": "Grenadier",
+      "request": "One athletic survivor immediately throws a retrieved grenade with an outstretched arm and one broad throw arc; one plain grenade at the end of the arc. Clear complete hand and grenade silhouette, no explosion or instructions.",
+      "context": "Reactively throwing a grenade away, with improved throwing range.",
+      "kind": "feat",
+      "atlas": "b",
+      "target": "icons/abilities/grenadier.svg",
+      "itemId": "batch64-grenadier"
+    },
+    {
+      "key": "immunitet",
+      "catalogKey": "immunitet",
+      "name": "Immunitet",
+      "request": "One large plain medical shield with a broad cross blocks three simple disease-particle blobs outside it. Crisp joined shield shape and restrained negative space, no tiny plus marks, letters or gore.",
+      "context": "Immunity to new disease and improved saves against existing disease.",
+      "kind": "feat",
+      "atlas": "b",
+      "target": "icons/abilities/immunitet.svg",
+      "itemId": "batch64-immunitet"
+    },
+    {
+      "key": "jest-zajebiscie",
+      "catalogKey": "jestZajebiscie",
+      "name": "Jest zajebiście",
+      "request": "One confident charismatic survivor raises an open hand while addressing two attentive allies shown as small shoulder silhouettes. A clear encouraging speech posture, no text-filled speech bubble, medals or floating symbols.",
+      "context": "An encouraging deceptive speech grants allies advantage on their next check.",
+      "kind": "feat",
+      "atlas": "b",
+      "target": "icons/abilities/jest-zajebiscie.svg",
+      "itemId": "batch64-jest-zajebiscie"
+    },
+    {
+      "key": "karateka",
+      "catalogKey": "karateka",
+      "name": "Karateka",
+      "request": "One unarmed fighter makes a strong forward kick while guarding with two hands. Exactly one human body, two arms, two legs and one clear extended foot. Practical fighting clothes, no superhero or mystical glow.",
+      "context": "Improved unarmed strikes and a quick bonus-action blow.",
+      "kind": "feat",
+      "atlas": "c",
+      "target": "icons/abilities/karateka.svg",
+      "itemId": "batch64-karateka"
+    },
+    {
+      "key": "kuloodpornosc",
+      "catalogKey": "kuloodpornosc",
+      "name": "Kuloodporność",
+      "request": "One broad bare unarmoured torso leans away as a single bullet skims harmlessly along its side with one short curved streak. Strong shoulder and chest outline, no armour plates, shield, blood or superhero costume.",
+      "context": "Improved defense while wearing no armour.",
+      "kind": "feat",
+      "atlas": "c",
+      "target": "icons/abilities/kuloodpornosc.svg",
+      "itemId": "batch64-kuloodpornosc"
+    },
+    {
+      "key": "lawnik",
+      "catalogKey": "lawnik",
+      "name": "Ławnik",
+      "request": "One powerful fighter swings a heavy wooden bench as an improvised melee weapon, gripping the large top plank with both hands. A thick plank and two stout bench supports dominate; no courtroom objects, tiny debris or gore.",
+      "context": "Using very heavy improvised weapons and knocking opponents down.",
+      "kind": "feat",
+      "atlas": "c",
+      "target": "icons/abilities/lawnik.svg",
+      "itemId": "batch64-lawnik"
+    },
+    {
+      "key": "miotacz",
+      "catalogKey": "miotacz",
+      "name": "Miotacz",
+      "request": "One strong hand launches a single practical throwing knife through one broad ballistic arc. The knife's blade and handle are distinct, broad and readable. No extra knife, arrow, target label or tiny speed marks.",
+      "context": "Improved thrown-weapon range and accuracy.",
+      "kind": "feat",
+      "atlas": "c",
+      "target": "icons/abilities/miotacz.svg",
+      "itemId": "batch64-miotacz"
+    },
+    {
+      "key": "mistrz-broni-bialej",
+      "catalogKey": "mistrzBroniBialej",
+      "name": "Mistrz broni białej",
+      "request": "One firm hand drives a practical straight sword through a stout practice post, leaving one broad diagonal cut. The long blade, hand and split post read cleanly. No duel crowd, badge, wreath or famous character.",
+      "context": "Mastery of a selected melee weapon improves its damage.",
+      "kind": "feat",
+      "atlas": "c",
+      "target": "icons/abilities/mistrz-broni-bialej.svg",
+      "itemId": "batch64-mistrz-broni-bialej"
+    },
+    {
+      "key": "mistrz-walki-wrecz",
+      "catalogKey": "mistrzWalkiWrecz",
+      "name": "Mistrz walki wręcz",
+      "request": "Two fighters' forearms meet in a close defensive maneuver: one hand redirects the other fighter's attacking wrist while the free forearm stays in guard. Broad complete hands and wrists with clear grip, no extra fingers or weapons.",
+      "context": "Melee combat maneuvers and reactive parrying.",
+      "kind": "feat",
+      "atlas": "c",
+      "target": "icons/abilities/mistrz-walki-wrecz.svg",
+      "itemId": "batch64-mistrz-walki-wrecz"
+    },
+    {
+      "key": "muzyk",
+      "catalogKey": "muzyk",
+      "name": "Muzyk",
+      "request": "One anonymous survivor plays an acoustic guitar, one hand on the neck and one strumming above the sound hole, beside two small allied head silhouettes. Plain instrument, two complete hands, no music notes, lettering or famous musician.",
+      "context": "Instrument proficiencies and an encouraging song granting luck to allies.",
+      "kind": "feat",
+      "atlas": "c",
+      "target": "icons/abilities/muzyk.svg",
+      "itemId": "batch64-muzyk"
+    },
+    {
+      "key": "neo",
+      "catalogKey": "neo",
+      "name": "Neo",
+      "request": "One generic survivor leans sharply backwards to dodge a single bullet passing just in front of the chest, with one broad trajectory streak. Ordinary wasteland clothing, no sunglasses, famous film character, black trenchcoat or movie logo.",
+      "context": "A reactive burst of evasion raises defense against one attack.",
+      "kind": "feat",
+      "atlas": "c",
+      "target": "icons/abilities/neo.svg",
+      "itemId": "batch64-neo"
+    },
+    {
+      "key": "nozownik",
+      "catalogKey": "nozownik",
+      "name": "Nożownik",
+      "request": "Two practical combat knives in two strong hands: one knife thrusts forward and the other is held close in a reverse grip for a follow-up strike. Exactly two hands and two knives, spare clear negative space, no gore or extra blades.",
+      "context": "A quick follow-up knife attack after a successful hit.",
+      "kind": "feat",
+      "atlas": "c",
+      "target": "icons/abilities/nozownik.svg",
+      "itemId": "batch64-nozownik"
+    }
+  ]
+}

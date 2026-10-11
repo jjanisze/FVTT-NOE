@@ -1,0 +1,66 @@
+[
+  {
+    "itemId": "batch60-wychuchana-spluwa",
+    "atlas": "a",
+    "cell": 1,
+    "candidateId": "batch63-revision",
+    "source": "candidates/batch-63/wychuchana_spluwa_revision_c.png",
+    "feedback": "Almost perfect. Fix the trigger inside the trigger guard and lenghten the gun so it is appropriately gun-sized, as it is a little too short now."
+  },
+  {
+    "itemId": "batch61-samuraj",
+    "atlas": "a",
+    "cell": 2,
+    "candidateId": "batch63-revision",
+    "source": "candidates/batch-63/samuraj_revision_b.png",
+    "feedback": "Horrible. Just draw a hand holding a katana with the off hand in a martial position"
+  },
+  {
+    "itemId": "batch62-bebeszenie",
+    "atlas": "a",
+    "cell": 3,
+    "candidateId": "batch63-revision",
+    "source": "candidates/batch-63/bebeszenie_revision_b.png",
+    "feedback": "Almost perfect, but the pliers now have a V-shaped bent handle. Straighten and fix the pliers."
+  },
+  {
+    "itemId": "batch62-szabrowanie",
+    "atlas": "a",
+    "cell": 4,
+    "candidateId": "batch63-revision",
+    "source": "candidates/batch-63/szabrowanie_revision_b.png",
+    "feedback": "Fix the end of the crowbar, which is now fused with the crate, and make the crate top larger"
+  },
+  {
+    "itemId": "batch63-chodzmy-na-pewno-juz-utonal",
+    "atlas": "a",
+    "cell": 5,
+    "candidateId": "atlas-b",
+    "source": "candidates/batch-63/chodzmy-na-pewno-juz-utonal.png",
+    "feedback": "Revise the hind part of the figure"
+  },
+  {
+    "itemId": "batch63-gambling-we-krwi",
+    "atlas": "a",
+    "cell": 6,
+    "candidateId": "atlas-b",
+    "source": "candidates/batch-63/gambling-we-krwi.png",
+    "feedback": "Zoom out slightly so the the cap / head is not cropped"
+  },
+  {
+    "itemId": "batch63-zjadlem-wlasnego-psa",
+    "atlas": "a",
+    "cell": 7,
+    "candidateId": "atlas-b",
+    "source": "candidates/batch-63/zjadlem-wlasnego-psa.png",
+    "feedback": "Pan the camera so the head is not cropped, raise the hand with the axe somewhat, and focus on the menacing face and upper body with axe"
+  },
+  {
+    "itemId": "batch63-hi-tech",
+    "atlas": "a",
+    "cell": 8,
+    "candidateId": "atlas-c",
+    "source": "candidates/batch-63/hi-tech.png",
+    "feedback": "The gloved finger is a little too looney tunes. Rework the hand"
+  }
+]
