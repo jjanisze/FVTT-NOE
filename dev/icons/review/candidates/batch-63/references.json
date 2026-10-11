@@ -1,0 +1,106 @@
+[
+  {
+    "itemId": "batch62-handel",
+    "atlas": "a",
+    "cell": 1,
+    "candidateId": "atlas-a",
+    "source": "candidates/batch-62/handel.png",
+    "feedback": "Upper hand should be giving the bundle. The lower hand should be giving the crate."
+  },
+  {
+    "itemId": "batch62-bebeszenie",
+    "atlas": "a",
+    "cell": 2,
+    "candidateId": "atlas-a",
+    "source": "candidates/batch-62/bebeszenie.png",
+    "feedback": "The pliers should cross with the knife. Instead, the knife crosses with an unidentified tool with pliers to the side. Move the pliers over the unidentified tool."
+  },
+  {
+    "itemId": "batch62-szabrowanie",
+    "atlas": "a",
+    "cell": 3,
+    "candidateId": "atlas-a",
+    "source": "candidates/batch-62/szabrowanie.png",
+    "feedback": "Location of crowbar is wrong - rotate the crowbar so the crowbar tip is at the lip of the crate, and enlarge the lid."
+  },
+  {
+    "itemId": "batch62-zabawka",
+    "atlas": "a",
+    "cell": 4,
+    "candidateId": "atlas-b",
+    "source": "candidates/batch-62/zabawka.png",
+    "feedback": "Ears of the teddy bear are clipped - zoom out slightly so they are intact"
+  },
+  {
+    "itemId": "batch61-szlachetne-urodzenie",
+    "atlas": "a",
+    "cell": 5,
+    "candidateId": "atlas-c",
+    "source": "candidates/batch-61/szlachetne_urodzenie.png",
+    "feedback": "Make the coat brand new, and respectably looking"
+  },
+  {
+    "itemId": "batch61-czlowiek-aligator",
+    "atlas": "a",
+    "cell": 6,
+    "candidateId": "atlas-c",
+    "source": "candidates/batch-61/czlowiek_aligator.png",
+    "feedback": "Remove the alligator tail on the right"
+  },
+  {
+    "itemId": "batch61-wloczykij",
+    "atlas": "a",
+    "cell": 7,
+    "candidateId": "atlas-c",
+    "source": "candidates/batch-61/wloczykij.png",
+    "feedback": "Remove the rolled map."
+  },
+  {
+    "itemId": "batch61-polegam-tylko-na-sobie",
+    "atlas": "a",
+    "cell": 8,
+    "candidateId": "atlas-c",
+    "source": "candidates/batch-61/polegam_tylko_na_sobie.png",
+    "feedback": "Rework into a silhouette of a lone man among desolation"
+  },
+  {
+    "itemId": "batch61-nowka-sztuka",
+    "atlas": "a",
+    "cell": 9,
+    "candidateId": "atlas-b",
+    "source": "candidates/batch-61/nowka_sztuka.png",
+    "feedback": "The lid is obscured and thus does not look like a lid, but two flanges on the side. Rework the design. "
+  },
+  {
+    "itemId": "batch59-ruch",
+    "atlas": "b",
+    "cell": 1,
+    "candidateId": "batch60-revision",
+    "source": "candidates/batch-60/ruch_revision_b.png",
+    "feedback": "Make the scales more aligator like, and add speed lines indicating the Megator is moving forward"
+  },
+  {
+    "itemId": "batch60-paszcza",
+    "atlas": "b",
+    "cell": 2,
+    "candidateId": "batch61-revision",
+    "source": "candidates/batch-61/paszcza_revision_b.png",
+    "feedback": "The silhouette of the man inside the jaws is not readable. Try again."
+  },
+  {
+    "itemId": "batch60-wychuchana-spluwa",
+    "atlas": "b",
+    "cell": 3,
+    "candidateId": "batch61-revision",
+    "source": "candidates/batch-61/wychuchana_spluwa_revision_b.png",
+    "feedback": "There's still three hands. Try again."
+  },
+  {
+    "itemId": "batch61-samuraj",
+    "atlas": "b",
+    "cell": 4,
+    "candidateId": "atlas-b",
+    "source": "candidates/batch-61/samuraj.png",
+    "feedback": "Completely redo. Does not look like the requested image at all"
+  }
+]

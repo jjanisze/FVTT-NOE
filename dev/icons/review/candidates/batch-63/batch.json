@@ -1,0 +1,226 @@
+{
+  "batch": 63,
+  "date": "2026-10-12",
+  "revisions": [
+    {
+      "itemId": "batch62-handel",
+      "key": "handel_revision_b",
+      "atlas": "a",
+      "request": "Two opposing hands at different heights: the upper hand from the left gives one wrapped bundle to the right, while the lower hand from the right gives one plain crate to the left. Each hand must hold a different exchanged object."
+    },
+    {
+      "itemId": "batch62-bebeszenie",
+      "key": "bebeszenie_revision_b",
+      "atlas": "a",
+      "request": "Exactly TWO tools form an X: a butcher knife on one diagonal and recognisable pliers with two open jaws and two handles on the other. Replace the unidentified extra tool with the pliers. A restrained three-rib carcass outline stays behind them; no third tool and no gore."
+    },
+    {
+      "itemId": "batch62-szabrowanie",
+      "key": "szabrowanie_revision_b",
+      "atlas": "a",
+      "request": "A crowbar levers open a crate: rotate it so its curved working tip is visibly inserted at the front lip of the crate, the fulcrum rests on the rim, and its long handle extends up-left. The lid is a large, clearly separate slab raised behind the crate, not a narrow stick."
+    },
+    {
+      "itemId": "batch62-zabawka",
+      "key": "zabawka_revision_b",
+      "atlas": "a",
+      "request": "Preserve the existing teddy bear; zoom out enough that both rounded ears are complete and separated from the top edge. Keep all limbs, broad eye cutouts and simple toy form. No cropped ears."
+    },
+    {
+      "itemId": "batch61-szlachetne-urodzenie",
+      "key": "szlachetne_urodzenie_revision_b",
+      "atlas": "a",
+      "request": "Preserve the survivor and signet-ring gesture but replace the ragged coat with a brand-new respectable formal coat: intact smooth hem, crisp lapels and cuffs, clean symmetrical tailoring, no tears or wear."
+    },
+    {
+      "itemId": "batch61-czlowiek-aligator",
+      "key": "czlowiek_aligator_revision_b",
+      "atlas": "a",
+      "request": "Preserve the human swimmer and broad wake. Remove the alligator tail entirely from the right; no animal parts. One complete human performing a crawl stroke above a single water contour."
+    },
+    {
+      "itemId": "batch61-wloczykij",
+      "key": "wloczykij_revision_b",
+      "atlas": "a",
+      "request": "Preserve the rugged boot, reed marsh and sand dune. Remove the strapped rolled map completely; no cylindrical roll or straps above the ankle. Keep the boot silhouette legible."
+    },
+    {
+      "itemId": "batch61-polegam-tylko-na-sobie",
+      "key": "polegam_tylko_na_sobie_revision_b",
+      "atlas": "a",
+      "request": "Completely replace the forging scene with one lone rugged man standing among sparse desolation: a low broken wall, one dead tree stump and a barren ground contour. The isolated human silhouette dominates; no anvil, hammer or crafting tools."
+    },
+    {
+      "itemId": "batch61-nowka-sztuka",
+      "key": "nowka_sztuka_revision_b",
+      "atlas": "a",
+      "request": "Rework the opened bunker equipment crate so one large rectangular hinged lid is unmistakably raised BEHIND the box, with broad empty interior space and one pristine pistol partly visible inside. The lid is one complete slab with readable hinge relationship, never two side flanges."
+    },
+    {
+      "itemId": "batch59-ruch",
+      "key": "ruch_revision_d",
+      "atlas": "b",
+      "request": "Preserve the saved colossal organic crocodilian moving forward. Replace armadillo-like scales with a few broad irregular crocodile scutes along the back; strong crocodilian head, feet and long tail, no artificial segmented armour. Add three broad backward speed streaks indicating forward movement. A crushed car establishes size."
+    },
+    {
+      "itemId": "batch60-paszcza",
+      "key": "paszcza_revision_c",
+      "atlas": "b",
+      "request": "An immense open crocodilian jaw surrounds one unmistakable complete HUMAN silhouette. The human's head, torso, two arms pushing the jaws apart and two separated bent legs must all read clearly in broad negative space. Enlarge the human relative to the mouth; do not merge the body into teeth or jaw edges. No gore."
+    },
+    {
+      "itemId": "batch60-wychuchana-spluwa",
+      "key": "wychuchana_spluwa_revision_c",
+      "atlas": "b",
+      "request": "Exactly TWO gloved hands total, no extra fingers that resemble hands: the left hand grips one pistol by its grip, the right hand holds one broad cleaning cloth against its slide. Each hand attaches to one visible wrist at opposite sides. Show careful gun cleaning with only pistol, two hands and cloth."
+    },
+    {
+      "itemId": "batch61-samuraj",
+      "key": "samuraj_revision_b",
+      "atlas": "b",
+      "request": "Completely redraw as a clear practical blade-draw gesture: the left hand holds one straight scabbard horizontally at the waist; the right hand pulls one slim single-edged blade diagonally up-right, with much of the blade visibly clear of the scabbard. Exactly two hands, one blade, one scabbard. No armoured figure, helmet or busy ornaments."
+    }
+  ],
+  "fresh": [
+    {
+      "key": "kwas-w-zylach",
+      "name": "Kwas w żyłach",
+      "atlas": "b",
+      "request": "One sturdy forearm with one bold vein contour deflects two corrosive drops against a small plain shield. Poison/acid resistance, no spilled gore.",
+      "context": "Advantage on saves against poison and acid.",
+      "kind": "origin",
+      "target": "icons/abilities/kwas-w-zylach.svg",
+      "itemId": "batch63-kwas-w-zylach"
+    },
+    {
+      "key": "chodzmy-na-pewno-juz-utonal",
+      "name": "Chodźmy, na pewno już utonął",
+      "atlas": "b",
+      "request": "One human swimmer stays below a single waterline, cheeks holding breath, with one broad air bubble above the face. Show prolonged underwater endurance without a drowning victim.",
+      "context": "Extended breath holding and improved swimming Athletics.",
+      "kind": "origin",
+      "target": "icons/abilities/chodzmy-na-pewno-juz-utonal.svg",
+      "itemId": "batch63-chodzmy-na-pewno-juz-utonal"
+    },
+    {
+      "key": "edukacja",
+      "name": "Edukacja",
+      "atlas": "b",
+      "request": "One open prewar technical book, one broad medical cross on one page and a simple wrench diagram on the other. Large functional shapes only; no writing.",
+      "context": "Two proficiencies from science, medicine, history, technology or tools.",
+      "kind": "origin",
+      "target": "icons/abilities/edukacja.svg",
+      "itemId": "batch63-edukacja"
+    },
+    {
+      "key": "gambling-we-krwi",
+      "name": "Gambling we krwi",
+      "atlas": "b",
+      "request": "One confident barter trader offers a practical canteen from a crate with an open hand. A second hand indicates more goods inside; no coins, dice, cards or cash. Emphasise tireless barter and trade access.",
+      "context": "Trading without fatigue and improved goods availability.",
+      "kind": "origin",
+      "target": "icons/abilities/gambling-we-krwi.svg",
+      "itemId": "batch63-gambling-we-krwi"
+    },
+    {
+      "key": "zjadlem-wlasnego-psa",
+      "name": "Wiesz, zjadłem własnego psa",
+      "atlas": "b",
+      "request": "One intimidating rugged butcher in an apron grips a broad cleaver at his side; hard square shoulders and a stern plain face. No dog, carcass, gore or comic grin.",
+      "context": "Intimidation expertise and butcher-tool proficiency.",
+      "kind": "origin",
+      "target": "icons/abilities/zjadlem-wlasnego-psa.svg",
+      "itemId": "batch63-zjadlem-wlasnego-psa"
+    },
+    {
+      "key": "hi-tech",
+      "name": "Hi-Tech",
+      "atlas": "c",
+      "request": "One gloved finger confidently presses a large control on a compact electronic console with three broad circuit traces and two plain buttons. No text or tiny screen detail.",
+      "context": "Advantage when operating electronic devices.",
+      "kind": "origin",
+      "target": "icons/abilities/hi-tech.svg",
+      "itemId": "batch63-hi-tech"
+    },
+    {
+      "key": "moloch-cos-slyszalem",
+      "name": "Moloch? Coś słyszałem",
+      "atlas": "c",
+      "request": "One alert survivor crouches behind a thick barrier while inspecting a simple machine-head schematic on a broad handheld board. A single blast contour stays beyond the barrier; knowledge and defensive awareness.",
+      "context": "Knowledge of hostile machines and improved saves against their area attacks.",
+      "kind": "origin",
+      "target": "icons/abilities/moloch-cos-slyszalem.svg",
+      "itemId": "batch63-moloch-cos-slyszalem"
+    },
+    {
+      "key": "cholerny-kaznodzieja",
+      "name": "Cholerny kaznodzieja",
+      "atlas": "c",
+      "request": "One forceful preacher in a plain long coat raises an open hand while holding a simple closed book in the other. Strong speech posture, no religious logo, lettering or floating symbols.",
+      "context": "Persuasion, preaching and influence among believers.",
+      "kind": "origin",
+      "target": "icons/abilities/cholerny-kaznodzieja.svg",
+      "itemId": "batch63-cholerny-kaznodzieja"
+    },
+    {
+      "key": "przed-wojna-wszystko-bylo-lepiej",
+      "name": "Przed wojną wszystko było lepiej",
+      "atlas": "c",
+      "request": "One elderly survivor holds an intact open medical manual beside a simple prewar building silhouette on its page. Broad shapes, no writing or nostalgia badges.",
+      "context": "History, Medicine and prewar knowledge expertise.",
+      "kind": "origin",
+      "target": "icons/abilities/przed-wojna-wszystko-bylo-lepiej.svg",
+      "itemId": "batch63-przed-wojna-wszystko-bylo-lepiej"
+    },
+    {
+      "key": "czlowiek-zwany-koniem",
+      "name": "Człowiek zwany koniem",
+      "atlas": "c",
+      "request": "One calm human hand holds the reins close to a strong horse's head, with a gentle bandage on the animal's neck. Emphasise handling and care, not a fantasy centaur.",
+      "context": "Athletics, animal handling and medicine proficiencies.",
+      "kind": "origin",
+      "target": "icons/abilities/czlowiek-zwany-koniem.svg",
+      "itemId": "batch63-czlowiek-zwany-koniem"
+    },
+    {
+      "key": "zdrowa-okolica",
+      "name": "Zdrowa okolica",
+      "atlas": "c",
+      "request": "One healthy broad-chested survivor stands firm beneath a large clean rising sun, with one plain shield shape along the torso. Constitution and resilience, no fragile tiny plus marks.",
+      "context": "Constitution saving-throw proficiency and advantage.",
+      "kind": "origin",
+      "target": "icons/abilities/zdrowa-okolica.svg",
+      "itemId": "batch63-zdrowa-okolica"
+    },
+    {
+      "key": "hazardzista",
+      "name": "Hazardzista",
+      "atlas": "c",
+      "request": "One sly hand palms a single playing card behind a fan of two visible cards. One large plain diamond shape only; sleight of hand and deception, no ranks or lettering.",
+      "context": "Sleight of Hand and Deception proficiency.",
+      "kind": "origin",
+      "target": "icons/abilities/hazardzista.svg",
+      "itemId": "batch63-hazardzista"
+    },
+    {
+      "key": "aramis",
+      "name": "Aramis",
+      "atlas": "c",
+      "request": "Two practical fencing blades meet as one broad opponent hand loses its grip on a sword, which clearly falls away. A forceful clean disarming action, no arrows or musketeer portrait.",
+      "context": "Bonus-action disarming maneuver, with the target disadvantaged.",
+      "kind": "feat",
+      "target": "icons/abilities/aramis.svg",
+      "itemId": "batch63-aramis"
+    },
+    {
+      "key": "aspiryna-i-mietusy",
+      "name": "Aspiryna i Miętusy",
+      "atlas": "c",
+      "request": "One field medic's two hands wrap a broad bandage on a large forearm beside an obviously open empty medicine case. Treatment despite lack of supplies; no scattered pills, writing or gore.",
+      "context": "Treating a patient with an empty medic kit, at disadvantage.",
+      "kind": "feat",
+      "target": "icons/abilities/aspiryna-i-mietusy.svg",
+      "itemId": "batch63-aspiryna-i-mietusy"
+    }
+  ]
+}

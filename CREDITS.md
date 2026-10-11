@@ -97,6 +97,13 @@ then normalized by a local script. Pipeline and prompt details:
 [`dev/icons/Pipeline.md`](dev/icons/Pipeline.md). Status-effect icon spec:
 [`icons/statuses/ASSETS.md`](icons/statuses/ASSETS.md).
 
+On 2026-10-12, 31 exact GM-approved glyphs from Batches 60–62 were installed as
+lossless WEBP rasters and theme-aware SVG wrappers embedding WEBP masks. These
+OpenAI-generated glyphs retain the approved pixels; selections and source hashes
+are recorded in `dev/icons/review/candidates/batch-63/installed.json`.
+Batch 63's new atlas prompts and targeted Samuraj correction are archived beside
+their review candidates; pending candidates are not shipped until approved.
+
 ## Token art
 
 Bestiary token art is original work, borrowed (by reference, not copy) from `dnd5e`'s own
