@@ -55,6 +55,11 @@ for (const [id, z] of Object.entries(R.ZASLEPKI)) {
 for (const k of KATALOG.values()) {
   if (typeof k.nazwa !== "string" || !k.nazwa.trim()) err(`${k.ref}: brak nazwy (inne pole w pliku danych?)`);
   if (!Number.isFinite(k.cena)) err(`${k.ref}: cena nie jest liczbą`);
+  // PLAN_m5_postoj.md U4: przedmiot z cennika ma dostępność; bez niej tylko świadome wyjątki —
+  // wiersze tabel (produkcja), usługi, zaślepki, aktorzy i jawne `bezDostepnosci` (przeróbki, porcje).
+  const swiadomie = k.pochodzenie === "tabela" || k.zaslepka || k.wynik !== "item" || k.kategoria === "uslugi" || k.bezDostepnosci;
+  if (k.dostepnosc == null && !swiadomie) err(`${k.ref}: przedmiot z cennika bez dostępności (U4) — wpisz liczbę z NOE albo bezDostepnosci`);
+  if (k.dostepnosc != null && !(k.dostepnosc >= 0 && k.dostepnosc <= 100)) err(`${k.ref}: dostępność ${k.dostepnosc} poza 0–100`);
 }
 
 /* ---- surowce ---- */

@@ -16,6 +16,9 @@
  *   "range-x2"   — doubles both range values (special case for Wyważenie)
  */
 
+import { DOSTEPNOSC_NASADEK } from "./handel-data.mjs";
+import { NASADKI_KOBALT } from "../wkk/config/handel-kobalt.mjs";
+
 /** @typedef {"direct"|"property"|"conditional"|"flag-only"|"activity"|"range-x2"} ApplyMode */
 
 /**
@@ -690,6 +693,40 @@ export const ADDON_DEFS = {
 
 /** Flat array of all addon definitions. */
 export const ADDON_LIST = Object.values(ADDON_DEFS);
+
+/**
+ * Nasadka czy przeróbka (PLAN_m5_postoj.md D31, U3) — z kolumny „Wymagania montażu” (s. 128–129).
+ * RAW: fachowca wymagają ulepszenia **skomplikowane**. Nasadka montuje się na SM albo uchwycie bagnetu
+ * (celowniki, laser, noktowizor, latarka, dwójnóg, chwyt, granatnik i śrutówka podwieszane, bagnet) —
+ * towar na listach, montuje właściciel. Każde inne wymaganie (broń biała, szyna, uchwyt bagnetu,
+ * konwersja, sprężyny, trytowy, tłumik, kolby, okładziny) — przeróbka: usługa fachowca.
+ * Pod Kobaltem Osełka jest towarem (D41, `wkk/config/handel-kobalt.mjs`).
+ * @param {AddonDef} def
+ * @param {{kobalt?: boolean}} [o]
+ * @returns {"nasadka"|"przerobka"}
+ */
+export function rodzajUlepszenia(def, { kobalt = false } = {}) {
+  if (!def) return "przerobka";
+  if (kobalt && NASADKI_KOBALT.includes(def.id)) return "nasadka";
+  if (def.usesSMSlot) return "nasadka";
+  if ((def.requiresAddons ?? []).includes("uchwyt-bagnetu")) return "nasadka";
+  return "przerobka";
+}
+
+/**
+ * Dostępność nasadki (D32, odczyt MG — RAW jej nie podaje): bliźniak z tabeli Sprzętu, gdzie jest, reszta
+ * z progu ceny. Przeróbka — `null` (usługa, bez dostępności).
+ * @param {AddonDef} def
+ * @param {{kobalt?: boolean}} [o]
+ * @returns {number|null}
+ */
+export function dostepnoscNasadki(def, { kobalt = false } = {}) {
+  if (rodzajUlepszenia(def, { kobalt }) !== "nasadka") return null;
+  const blizniak = DOSTEPNOSC_NASADEK.blizniaki[def.id];
+  if (Number.isFinite(blizniak)) return blizniak;
+  const cena = Number(def.price) || 0;
+  return DOSTEPNOSC_NASADEK.progi.find(p => cena <= p.doCeny).dostepnosc;
+}
 
 /** Sight addons that are mutually exclusive — used by "no-sight" conditional. */
 export const SIGHT_ADDON_IDS = new Set([

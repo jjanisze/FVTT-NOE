@@ -9,6 +9,7 @@
 
 import { KATALOG } from "./recipes-data.mjs";
 import { DOSTEPNOSC_KOBALT } from "../wkk/config/dostepnosc-kobalt.mjs";
+import { ADDON_DEFS, dostepnoscNasadki } from "./addons-data.mjs";
 
 /**
  * Dostępność w procentach albo `null`, gdy cennik jej nie podaje.
@@ -18,8 +19,13 @@ import { DOSTEPNOSC_KOBALT } from "../wkk/config/dostepnosc-kobalt.mjs";
  */
 export function dostepnosc(ref, { kobalt = false } = {}) {
   if (kobalt && Number.isFinite(DOSTEPNOSC_KOBALT[ref])) return DOSTEPNOSC_KOBALT[ref];
-  const d = Number(KATALOG.get(ref)?.dostepnosc);
-  return Number.isFinite(d) ? d : null;
+  const wpis = KATALOG.get(ref);
+  // Pod Kobaltem część przeróbek jest towarem (Osełka, D41) — dostępność z progu ceny nasadek (D32).
+  if (kobalt && wpis?.dostepnosc == null && String(ref).startsWith("addon:")) {
+    return dostepnoscNasadki(ADDON_DEFS[String(ref).slice("addon:".length)], { kobalt: true });
+  }
+  const d = Number(wpis?.dostepnosc);
+  return wpis?.dostepnosc != null && Number.isFinite(d) ? d : null;
 }
 
 /** Linia opisu: „30%”, a gdy WKK się różni — „30% (WKK: 10%)”; `null` bez danych. */

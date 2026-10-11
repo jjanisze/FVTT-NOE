@@ -34,7 +34,7 @@ import { WEAPONS } from "./weapons-data.mjs";
 import { ARMORS } from "./armor-data.mjs";
 import { AMMO_CALIBERS, GRENADE_TYPES } from "./ammo-data.mjs";
 import { CHEMIA } from "./chemia-data.mjs";
-import { ADDON_DEFS } from "./addons-data.mjs";
+import { ADDON_DEFS, rodzajUlepszenia, dostepnoscNasadki } from "./addons-data.mjs";
 import { PROWIANT_CATALOG } from "./prowiant-data.mjs";
 import { TOOLKITS } from "./toolkits-data.mjs";
 import { REAL_GEAR, GEAR_PLACEHOLDERS } from "./gear-data.mjs";
@@ -275,6 +275,7 @@ export const KATEGORIE = Object.freeze({
   "sprzet": { label: "Sprzęt", narzedzia: "kowala", profil: "4 MK, 1 CZ" },
   "magazynki": { label: "Magazynki", narzedzia: "rusznikarza", profil: "3 CZ, 2 MK" },
   "pojazdy": { label: "Pojazdy", narzedzia: "mechanika", profil: "1 CZ, 4 MK" },
+  "paliwo": { label: "Paliwo", narzedzia: "", profil: "1 CH", jednorazowy: true },
   "uslugi": { label: "Usługi", narzedzia: "", profil: "1 CZ" }
 });
 
@@ -410,36 +411,41 @@ const NADPISANIA = {
  * wag → środek. Produkcja tworzy zwykły `loot`. Każdy wpis to zadanie dla katalogów.
  */
 const RAW_PRZEDMIOTY = [
-  ["agregat", "Agregat", 50, 15, 138, "elektronika", { narzedzia: "mechanika | elektronika" }],
-  ["akumulator", "Akumulator", 40, 20, 138, "elektronika"],
-  ["alternator", "Alternator", 40, 5, 138, "elektronika", { narzedzia: "mechanika | elektronika" }],
-  ["defibrylator", "Defibrylator", 60, 10, 138, "elektronika"],
-  ["detektor-ruchu", "Detektor ruchu", 80, 1, 138, "elektronika"],
-  ["komputer-osobisty", "Komputer osobisty", 40, 15, 138, "komputery"],
-  ["komputer-gamingowy", "Komputer gamingowy", 80, 15, 138, "komputery"],
+  ["agregat", "Agregat", 50, 15, 138, "elektronika", { narzedzia: "mechanika | elektronika", dostepnosc: 20 }],
+  ["akumulator", "Akumulator", 40, 20, 138, "elektronika", { dostepnosc: 30 }],
+  ["alternator", "Alternator", 40, 5, 138, "elektronika", { narzedzia: "mechanika | elektronika", dostepnosc: 30 }],
+  ["defibrylator", "Defibrylator", 60, 10, 138, "elektronika", { dostepnosc: 10 }],
+  ["detektor-ruchu", "Detektor ruchu", 80, 1, 138, "elektronika", { dostepnosc: 5 }],
+  ["komputer-osobisty", "Komputer osobisty", 40, 15, 138, "komputery", { dostepnosc: 30 }],
+  ["komputer-gamingowy", "Komputer gamingowy", 80, 15, 138, "komputery", { dostepnosc: 10 }],
   ["kontroler", "Kontroler zdalnego sterowania", 40, 2, 138, "elektronika", { dostepnosc: 30 }],
-  ["krotkofalowka", "Krótkofalówka", 25, 2, 138, "elektronika"],
-  ["laptop", "Laptop", 80, 5, 138, "komputery"],
-  ["miernik-skazenia", "Miernik skażenia chemicznego", 50, 5, 138, "elektronika"],
-  ["miernik-promieniowania", "Miernik promieniowania", 30, 3, 138, "elektronika"],
-  ["nosnik-danych", "Nośnik danych", 40, 0.5, 138, "elektronika"],
-  ["odtwarzacz-cd", "Odtwarzacz CD", 40, 1.5, 138, "elektronika"],
-  ["radio", "Radio", 15, 2.5, 138, "elektronika"],
-  ["turbina", "Turbina wiatrowa/wodna", 60, 25, 138, "elektronika", { narzedzia: "mechanika | elektronika" }],
-  ["wykrywacz-metalu", "Wykrywacz metalu", 30, 3, 138, "elektronika"],
-  ["wytrychy-elektroniczne", "Wytrychy elektroniczne", 25, 0.5, 138, "elektronika"],
-  ["kompas", "Kompas", 10, 0.1, 139, "sprzet", { narzedzia: "elektronika | szklarza", profil: "1 CZ, 1 MK" }],
-  ["palnik", "Palnik acetylenowo-tlenowy", 20, 2, 139, "sprzet", { narzedzia: "mechanika | slusarza", profil: "2 CH, 5 CZ, 3 MK" }],
-  ["klodka", "Kłódka", 10, 0.5, 139, "sprzet", { narzedzia: "kowala | slusarza" }],
-  ["lopata", "Łopata", 5, 2, 139, "sprzet"],
-  ["srodek-usypiajacy", "Środek usypiający (fiolka)", 20, 0.1, 139, "chemia-uzytkowa", { narzedzia: "aptekarza | chemika" }],
-  ["srodki-dezynfekujace", "Środki dezynfekujące (1 l)", 10, 1, 139, "chemia-uzytkowa", { narzedzia: "chemika | gorzelnika" }],
-  ["trucizna", "Trucizna (prosta, fiolka)", 20, 0.1, 139, "chemia-uzytkowa", { narzedzia: "chemika | aptekarza" }],
+  ["krotkofalowka", "Krótkofalówka", 25, 2, 138, "elektronika", { dostepnosc: 40 }],
+  ["laptop", "Laptop", 80, 5, 138, "komputery", { dostepnosc: 10 }],
+  ["miernik-skazenia", "Miernik skażenia chemicznego", 50, 5, 138, "elektronika", { dostepnosc: 20 }],
+  ["miernik-promieniowania", "Miernik promieniowania", 30, 3, 138, "elektronika", { dostepnosc: 30 }],
+  ["nosnik-danych", "Nośnik danych", 40, 0.5, 138, "elektronika", { dostepnosc: 30 }],
+  ["odtwarzacz-cd", "Odtwarzacz CD", 40, 1.5, 138, "elektronika", { dostepnosc: 20 }],
+  ["radio", "Radio", 15, 2.5, 138, "elektronika", { dostepnosc: 70 }],
+  ["turbina", "Turbina wiatrowa/wodna", 60, 25, 138, "elektronika", { narzedzia: "mechanika | elektronika", dostepnosc: 20 }],
+  ["wykrywacz-metalu", "Wykrywacz metalu", 30, 3, 138, "elektronika", { dostepnosc: 30 }],
+  ["wytrychy-elektroniczne", "Wytrychy elektroniczne", 25, 0.5, 138, "elektronika", { dostepnosc: 5 }],
+  ["kompas", "Kompas", 10, 0.1, 139, "sprzet", { narzedzia: "elektronika | szklarza", profil: "1 CZ, 1 MK", dostepnosc: 30 }],
+  ["palnik", "Palnik acetylenowo-tlenowy", 20, 2, 139, "sprzet", { narzedzia: "mechanika | slusarza", profil: "2 CH, 5 CZ, 3 MK", dostepnosc: 30 }],
+  ["klodka", "Kłódka", 10, 0.5, 139, "sprzet", { narzedzia: "kowala | slusarza", dostepnosc: 50 }],
+  ["lopata", "Łopata", 5, 2, 139, "sprzet", { dostepnosc: 80 }],
+  ["srodek-usypiajacy", "Środek usypiający (fiolka)", 20, 0.1, 139, "chemia-uzytkowa", { narzedzia: "aptekarza | chemika", dostepnosc: 30 }],
+  ["srodki-dezynfekujace", "Środki dezynfekujące (1 l)", 10, 1, 139, "chemia-uzytkowa", { narzedzia: "chemika | gorzelnika", dostepnosc: 50 }],
+  ["trucizna", "Trucizna (prosta, fiolka)", 20, 0.1, 139, "chemia-uzytkowa", { narzedzia: "chemika | aptekarza", dostepnosc: 30 }],
   // s. 137 podaje proch za 100 g (katalog `chemia` też), a tabele profesji porcję 20 g —
   // osobny przedmiot, żeby nie produkować ułamka sztuki (`system.quantity` jest całkowite).
-  ["proch-czarny-20g", "Proch czarny (20 g)", 10, 0.02, 137, "materialy-wybuchowe"],
-  ["proch-strzelniczy-20g", "Proch strzelniczy (20 g)", 20, 0.02, 137, "materialy-wybuchowe"],
-  ["nitrogliceryna-20g", "Nitrogliceryna (20 g)", 20, 0.02, 137, "materialy-wybuchowe"]
+  ["proch-czarny-20g", "Proch czarny (20 g)", 10, 0.02, 137, "materialy-wybuchowe", { bezDostepnosci: "porcja produkcji — w handlu 100 g" }],
+  ["proch-strzelniczy-20g", "Proch strzelniczy (20 g)", 20, 0.02, 137, "materialy-wybuchowe", { bezDostepnosci: "porcja produkcji — w handlu 100 g" }],
+  ["nitrogliceryna-20g", "Nitrogliceryna (20 g)", 20, 0.02, 137, "materialy-wybuchowe", { bezDostepnosci: "porcja produkcji — w handlu 100 ml" }],
+  // Paliwo (s. 139, Różności) — towar dla handlu (M5, kolumna cen „Paliwo”, D8); spalanie i jakość w pojeździe — M4.
+  // Rafinacja to nie produkcja z surowców (żaden zestaw jej nie wymienia), więc bez przepisu.
+  ["paliwo-dobre", "Paliwo dobre (5 l)", 75, 5, 139, "paliwo", { dostepnosc: 10, produkcja: false, schemat: false, tagi: ["paliwo"] }],
+  ["paliwo-przecietne", "Paliwo przeciętne (5 l)", 35, 5, 139, "paliwo", { dostepnosc: 40, produkcja: false, schemat: false, tagi: ["paliwo"] }],
+  ["paliwo-chrzczone", "Paliwo chrzczone (5 l)", 15, 5, 139, "paliwo", { dostepnosc: 80, produkcja: false, schemat: false, tagi: ["paliwo"] }]
 ];
 
 /**
@@ -543,7 +549,13 @@ function _surowyKatalog() {
   for (const c of AMMO_CALIBERS) add(`ammo:${c.id}`, c.label ?? c.name, c.price, c.weight, _kategoriaAmunicji(c), dost(c));
   for (const g of GRENADE_TYPES) add(`grenade:${g.id}`, g.label, g.price, g.weight, "granaty", dost(g));
   for (const [id, c] of Object.entries(CHEMIA)) add(`chemia:${id}`, c.label, c.price, c.weight, _kategoriaChemii(c), dost(c));
-  for (const a of Object.values(ADDON_DEFS)) add(`addon:${a.id}`, a.label, a.price, a.weight, _kategoriaUlepszenia(a));
+  // Dostępność nasadek — D32 (bliźniak albo próg ceny); przeróbki bez (usługa fachowca, D31).
+  for (const a of Object.values(ADDON_DEFS)) {
+    add(`addon:${a.id}`, a.label, a.price, a.weight, _kategoriaUlepszenia(a), {
+      dostepnosc: dostepnoscNasadki(a),
+      ...(rodzajUlepszenia(a) === "przerobka" ? { bezDostepnosci: "przeróbka — usługa fachowca (D31)" } : {})
+    });
+  }
   for (const p of PROWIANT_CATALOG) add(`prowiant:${p.id}`, p.label, p.price, p.weight, p.category === "woda" ? "woda" : "prowiant", dost(p));
   for (const t of TOOLKITS) add(`toolkit:${t.id}`, t.label, t.price, t.weight, "zestawy", dost(t));
   for (const g of REAL_GEAR) add(`gear:${g.id}`, g.label, g.price, g.weight, "sprzet", dost(g));
@@ -560,18 +572,25 @@ function _surowyKatalog() {
   // Przedmioty z `items/*.mjs` — liczby z ich własnych stałych (latarka: z buildera, patrz niżej).
   for (const [key, f] of Object.entries(LATARKA_FORMS)) {
     // `items/latarka.mjs` — buildLatarkaItemData: 0,3 kg, 15 gb z baterią, 60 gb z dynamem.
-    add(`item:latarka-${key}`, f.label, f.battery ? 15 : 60, 0.3, "elektronika");
+    // Dostępność (U4): Latarka 60%, Latarka dynamo 10% (Różności, s. 139).
+    add(`item:latarka-${key}`, f.label, f.battery ? 15 : 60, 0.3, "elektronika", { dostepnosc: f.battery ? 60 : 10 });
   }
-  for (const [key, v] of Object.entries(GOGLE_VARIANTS)) add(`item:gogle-${key}`, v.label, v.price, v.weight, "elektronika");
+  // Dostępność (U4) z tabeli Elektroniki (s. 130): Noktowizor 15%, Termowizor 5%.
+  const GOGLE_DOST = { noktowizor: 15, termowizor: 5 };
+  for (const [key, v] of Object.entries(GOGLE_VARIANTS)) {
+    add(`item:gogle-${key}`, v.label, v.price, v.weight, "elektronika", { dostepnosc: GOGLE_DOST[key] ?? null });
+  }
   // Baterie się ładuje (s. 138), a zapalnik elektryczny ma w tabeli Serwisowania czas wielorazowego
   // (5 h przy 5 gb) — oba liczone jak wielorazowe, zgodnie z audytem w docs/Errata-produkcja.md.
-  add("item:baterie", BATERIE_ITEM.label, BATERIE_ITEM.price, BATERIE_ITEM.weight, "elektronika", { profilDomyslny: "9 CH, 1 MK" });
-  add("item:detonator", DETONATOR.name, DETONATOR.price, DETONATOR.weight, "elektronika");
-  add("item:zapalnik-elektryczny", ELECTRIC_FUZE.name, ELECTRIC_FUZE.price, ELECTRIC_FUZE.weight, "elektronika");
-  add("item:kwas", KWAS.name, KWAS.price, KWAS.weight, "chemia-uzytkowa");
+  // Dostępność (U4): Baterie 50%, Detonator radiowy 10%, Zapalnik elektryczny 20% (s. 130), Kwas 30% (s. 139).
+  add("item:baterie", BATERIE_ITEM.label, BATERIE_ITEM.price, BATERIE_ITEM.weight, "elektronika", { profilDomyslny: "9 CH, 1 MK", dostepnosc: 50 });
+  add("item:detonator", DETONATOR.name, DETONATOR.price, DETONATOR.weight, "elektronika", { dostepnosc: 10 });
+  add("item:zapalnik-elektryczny", ELECTRIC_FUZE.name, ELECTRIC_FUZE.price, ELECTRIC_FUZE.weight, "elektronika", { dostepnosc: 20 });
+  add("item:kwas", KWAS.name, KWAS.price, KWAS.weight, "chemia-uzytkowa", { dostepnosc: 30 });
   // `items/kolczatka.mjs` — buildKolczatkaItemData: 10 gb. `items/toolkit-medyk.mjs`: 5 gb, 0,5 kg.
-  add("item:kolczatka", "Kolczatki", 10, 0.5, "sprzet", { narzedzia: "kowala", profil: "1 MK" });
-  add("item:medyk-refill", "Uzupełnienie Narzędzi Małego Medyka", 5, 0.5, "leki");
+  // Dostępność (U4): Kolczatki 40%, Uzupełnienie m. medyka 40% (s. 139).
+  add("item:kolczatka", "Kolczatki", 10, 0.5, "sprzet", { narzedzia: "kowala", profil: "1 MK", dostepnosc: 40 });
+  add("item:medyk-refill", "Uzupełnienie Narzędzi Małego Medyka", 5, 0.5, "leki", { dostepnosc: 40 });
 
   for (const [id, nazwa, cena, waga, s, kategoria, extra = {}] of RAW_PRZEDMIOTY) {
     out.push({ ref: `raw:${id}`, nazwa, cena, waga, kategoria, pochodzenie: "raw", s, ...extra });
@@ -629,6 +648,7 @@ function _zbudujKatalog() {
       tagi: [...new Set([...(kat.tagi ?? []), ...(raw.tagi ?? []), ...(nad.tagi ?? [])])],
       pochodzenie: raw.pochodzenie,
       dostepnosc: raw.dostepnosc ?? null,
+      ...(raw.bezDostepnosci ? { bezDostepnosci: raw.bezDostepnosci } : {}),
       ...(raw.s ? { s: raw.s } : {}),
       ...(raw.zaslepka ? { zaslepka: true, zamiast: raw.zamiast } : {})
     };

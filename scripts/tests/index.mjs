@@ -34,6 +34,11 @@ import { registerTowarzyszeZasadyTests } from "./towarzysze-zasady.test.mjs";
 import { registerTowarzyszeTests } from "./towarzysze.test.mjs";
 import { registerDronyTests } from "./drony.test.mjs";
 import { registerEmiterEmpTests } from "./emiter-emp.test.mjs";
+import { registerHandelZasadyTests } from "./handel-zasady.test.mjs";
+import { registerPostojZasadyTests } from "./postoj-zasady.test.mjs";
+import { registerFuksyZasadyTests } from "./fuksy-zasady.test.mjs";
+import { registerSzabrowanieZasadyTests } from "./szabrowanie-zasady.test.mjs";
+import { registerBebeszenieZasadyTests } from "./bebeszenie-zasady.test.mjs";
 import { registerConfigTests } from "./config.test.mjs";
 import { registerEquipmentDataTests } from "./ekwipunek-dane.test.mjs";
 import { registerDiseaseTests } from "./choroby.test.mjs";
@@ -84,6 +89,11 @@ export function registerQuenchTests() {
     registerTowarzyszeTests(quench);
     registerDronyTests(quench);
     registerEmiterEmpTests(quench);
+    registerHandelZasadyTests(quench);
+    registerPostojZasadyTests(quench);
+    registerFuksyZasadyTests(quench);
+    registerSzabrowanieZasadyTests(quench);
+    registerBebeszenieZasadyTests(quench);
     console.log("Neuroshima 5e | Quench batches registered");
   });
 }
