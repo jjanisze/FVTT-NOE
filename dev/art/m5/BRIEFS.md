@@ -827,5 +827,3 @@ Near-overhead battle-map token, no horizon, side view or three-quarter portrait.
 **Final spec and name:** **`tokens/towarzysz-zmutowany-gad.webp`** — **400×400 WEBP**, RGBA with genuine transparency; square frame and authored margins preserved.
 
 **Drop point:** `dev/art/m5/in/towarzysze/towarzysz-zmutowany-gad.png` — the GM's edited source; `dev/` is not shipped.
-
-
