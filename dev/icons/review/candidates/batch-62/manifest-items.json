@@ -1,0 +1,364 @@
+{
+  "title": "Batch 62 · 17 awaiting GM review",
+  "updated": "2026-10-11",
+  "items": [
+    {
+      "id": "batch62-handel",
+      "name": "Handel",
+      "tier": "Batch 62 · M5",
+      "context": "M5 player action button; toolbar/item-sheet use at small sizes.",
+      "request": "Two hands exchange a bundle above a crate; barter, no coins.",
+      "target": "icons/actions/handel.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Handel",
+          "src": "candidates/batch-62/handel.png",
+          "note": "Two hands exchange a bundle above a crate; barter, no coins."
+        }
+      ]
+    },
+    {
+      "id": "batch62-doba",
+      "name": "Doba",
+      "tier": "Batch 62 · M5",
+      "context": "M5 player action button; toolbar/item-sheet use at small sizes.",
+      "request": "Setting sun, campfire and a plain clock: daily downtime.",
+      "target": "icons/actions/doba.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Doba",
+          "src": "candidates/batch-62/doba.png",
+          "note": "Setting sun, campfire and a plain clock: daily downtime."
+        }
+      ]
+    },
+    {
+      "id": "batch62-bebeszenie",
+      "name": "Bebeszenie",
+      "tier": "Batch 62 · M5",
+      "context": "M5 player action button; toolbar/item-sheet use at small sizes.",
+      "request": "Butcher knife and pliers over ribs; no gore.",
+      "target": "icons/actions/bebeszenie.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Bebeszenie",
+          "src": "candidates/batch-62/bebeszenie.png",
+          "note": "Butcher knife and pliers over ribs; no gore."
+        }
+      ]
+    },
+    {
+      "id": "batch62-szabrowanie",
+      "name": "Szabrowanie",
+      "tier": "Batch 62 · M5",
+      "context": "M5 player action button; toolbar/item-sheet use at small sizes.",
+      "request": "A crowbar pries open a crate.",
+      "target": "icons/actions/szabrowanie.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Szabrowanie",
+          "src": "candidates/batch-62/szabrowanie.png",
+          "note": "A crowbar pries open a crate."
+        }
+      ]
+    },
+    {
+      "id": "batch62-rozbiorka",
+      "name": "Rozbiórka",
+      "tier": "Batch 62 · M5",
+      "context": "M5 player action button; toolbar/item-sheet use at small sizes.",
+      "request": "Practical wrench, broken device and detached bolts.",
+      "target": "icons/actions/rozbiorka.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Rozbiórka",
+          "src": "candidates/batch-62/rozbiorka.png",
+          "note": "Practical wrench, broken device and detached bolts."
+        }
+      ]
+    },
+    {
+      "id": "batch62-wylaczony",
+      "name": "Wyłączony",
+      "tier": "Batch 62 · status",
+      "context": "Machine off status; currently borrowing the core lightning image.",
+      "request": "A crossed-out power symbol for an inactive machine.",
+      "target": "icons/statuses/wylaczony.svg",
+      "current": {
+        "src": "icons/svg/lightning.svg",
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Wyłączony",
+          "src": "candidates/batch-62/wylaczony.png",
+          "note": "A crossed-out power symbol for an inactive machine."
+        }
+      ]
+    },
+    {
+      "id": "batch62-emiter-emp",
+      "name": "Emiter EMP",
+      "tier": "Batch 62 · M3 equipment",
+      "context": "Machine-killer equipment currently borrowing the shocker's image.",
+      "request": "Bulky handmade coil/dish emitter with a battery underneath.",
+      "target": "icons/weapons/emiter_emp.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Emiter EMP",
+          "src": "candidates/batch-62/emiter_emp.png",
+          "note": "Bulky handmade coil/dish emitter with a battery underneath."
+        }
+      ]
+    },
+    {
+      "id": "batch62-slodycze",
+      "name": "Fanty: słodycze",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "Partly unwrapped chocolate bar.",
+      "target": "icons/fanty/slodycze.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Fanty: słodycze",
+          "src": "candidates/batch-62/slodycze.png",
+          "note": "Partly unwrapped chocolate bar."
+        }
+      ]
+    },
+    {
+      "id": "batch62-cygaro",
+      "name": "Fanty: cygaro",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "One cigar and broad smoke curl.",
+      "target": "icons/fanty/cygaro.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Fanty: cygaro",
+          "src": "candidates/batch-62/cygaro.png",
+          "note": "One cigar and broad smoke curl."
+        }
+      ]
+    },
+    {
+      "id": "batch62-prasa",
+      "name": "Fanty: prasa",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "A simple open paperback.",
+      "target": "icons/fanty/prasa.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fanty: prasa",
+          "src": "candidates/batch-62/prasa.png",
+          "note": "A simple open paperback."
+        }
+      ]
+    },
+    {
+      "id": "batch62-gra",
+      "name": "Fanty: gra",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "Three plain playing cards.",
+      "target": "icons/fanty/gra.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fanty: gra",
+          "src": "candidates/batch-62/gra.png",
+          "note": "Three plain playing cards."
+        }
+      ]
+    },
+    {
+      "id": "batch62-kaseta",
+      "name": "Fanty: kaseta / VHS",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "An analogue cassette with broad reel openings.",
+      "target": "icons/fanty/kaseta.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fanty: kaseta / VHS",
+          "src": "candidates/batch-62/kaseta.png",
+          "note": "An analogue cassette with broad reel openings."
+        }
+      ]
+    },
+    {
+      "id": "batch62-plyta-cd",
+      "name": "Fanty: płyta CD",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "A compact disc with central hole.",
+      "target": "icons/fanty/plyta-cd.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fanty: płyta CD",
+          "src": "candidates/batch-62/plyta-cd.png",
+          "note": "A compact disc with central hole."
+        }
+      ]
+    },
+    {
+      "id": "batch62-konsola",
+      "name": "Fanty: konsola / cartridge",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "Controller and cartridge.",
+      "target": "icons/fanty/konsola.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fanty: konsola / cartridge",
+          "src": "candidates/batch-62/konsola.png",
+          "note": "Controller and cartridge."
+        }
+      ]
+    },
+    {
+      "id": "batch62-alkohol",
+      "name": "Fanty: alkohol",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "A squat plain liquor bottle.",
+      "target": "icons/fanty/alkohol.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fanty: alkohol",
+          "src": "candidates/batch-62/alkohol.png",
+          "note": "A squat plain liquor bottle."
+        }
+      ]
+    },
+    {
+      "id": "batch62-zabawka",
+      "name": "Fanty: zabawka",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "An ordinary teddy bear toy.",
+      "target": "icons/fanty/zabawka.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fanty: zabawka",
+          "src": "candidates/batch-62/zabawka.png",
+          "note": "An ordinary teddy bear toy."
+        }
+      ]
+    },
+    {
+      "id": "batch62-papier-toaletowy",
+      "name": "Fanty: papier toaletowy",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "Toilet roll with a broad hanging sheet.",
+      "target": "icons/fanty/papier-toaletowy.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fanty: papier toaletowy",
+          "src": "candidates/batch-62/papier-toaletowy.png",
+          "note": "Toilet roll with a broad hanging sheet."
+        }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,125 @@
+{
+  "batch": 62,
+  "glyphs": [
+    {
+      "key": "handel",
+      "name": "Handel",
+      "target": "icons/actions/handel.svg",
+      "request": "Two hands exchange a bundle above a crate; barter, no coins.",
+      "atlas": "a"
+    },
+    {
+      "key": "doba",
+      "name": "Doba",
+      "target": "icons/actions/doba.svg",
+      "request": "Setting sun, campfire and a plain clock: daily downtime.",
+      "atlas": "a"
+    },
+    {
+      "key": "bebeszenie",
+      "name": "Bebeszenie",
+      "target": "icons/actions/bebeszenie.svg",
+      "request": "Butcher knife and pliers over ribs; no gore.",
+      "atlas": "a"
+    },
+    {
+      "key": "szabrowanie",
+      "name": "Szabrowanie",
+      "target": "icons/actions/szabrowanie.svg",
+      "request": "A crowbar pries open a crate.",
+      "atlas": "a"
+    },
+    {
+      "key": "rozbiorka",
+      "name": "Rozbiórka",
+      "target": "icons/actions/rozbiorka.svg",
+      "request": "Practical wrench, broken device and detached bolts.",
+      "atlas": "a"
+    },
+    {
+      "key": "wylaczony",
+      "name": "Wyłączony",
+      "target": "icons/statuses/wylaczony.svg",
+      "request": "A crossed-out power symbol for an inactive machine.",
+      "atlas": "a"
+    },
+    {
+      "key": "emiter_emp",
+      "name": "Emiter EMP",
+      "target": "icons/weapons/emiter_emp.svg",
+      "request": "Bulky handmade coil/dish emitter with a battery underneath.",
+      "atlas": "a"
+    },
+    {
+      "key": "slodycze",
+      "name": "Fanty: słodycze",
+      "target": "icons/fanty/slodycze.svg",
+      "request": "Partly unwrapped chocolate bar.",
+      "atlas": "a"
+    },
+    {
+      "key": "cygaro",
+      "name": "Fanty: cygaro",
+      "target": "icons/fanty/cygaro.svg",
+      "request": "One cigar and broad smoke curl.",
+      "atlas": "a"
+    },
+    {
+      "key": "prasa",
+      "name": "Fanty: prasa",
+      "target": "icons/fanty/prasa.svg",
+      "request": "A simple open paperback.",
+      "atlas": "b"
+    },
+    {
+      "key": "gra",
+      "name": "Fanty: gra",
+      "target": "icons/fanty/gra.svg",
+      "request": "Three plain playing cards.",
+      "atlas": "b"
+    },
+    {
+      "key": "kaseta",
+      "name": "Fanty: kaseta / VHS",
+      "target": "icons/fanty/kaseta.svg",
+      "request": "An analogue cassette with broad reel openings.",
+      "atlas": "b"
+    },
+    {
+      "key": "plyta-cd",
+      "name": "Fanty: płyta CD",
+      "target": "icons/fanty/plyta-cd.svg",
+      "request": "A compact disc with central hole.",
+      "atlas": "b"
+    },
+    {
+      "key": "konsola",
+      "name": "Fanty: konsola / cartridge",
+      "target": "icons/fanty/konsola.svg",
+      "request": "Controller and cartridge.",
+      "atlas": "b"
+    },
+    {
+      "key": "alkohol",
+      "name": "Fanty: alkohol",
+      "target": "icons/fanty/alkohol.svg",
+      "request": "A squat plain liquor bottle.",
+      "atlas": "b"
+    },
+    {
+      "key": "zabawka",
+      "name": "Fanty: zabawka",
+      "target": "icons/fanty/zabawka.svg",
+      "request": "An ordinary teddy bear toy.",
+      "atlas": "b"
+    },
+    {
+      "key": "papier-toaletowy",
+      "name": "Fanty: papier toaletowy",
+      "target": "icons/fanty/papier-toaletowy.svg",
+      "request": "Toilet roll with a broad hanging sheet.",
+      "atlas": "b"
+    }
+  ]
+}
+
