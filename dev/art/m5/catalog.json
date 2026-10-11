@@ -1,0 +1,538 @@
+{
+  "version": 1,
+  "assets": [
+    {
+      "id": "handlarze/obwozny",
+      "set": "handlarze",
+      "key": "obwozny",
+      "kind": "portrait",
+      "output": "ui/handlarze/obwozny.webp",
+      "size": [
+        600,
+        800
+      ],
+      "subject": "A generic travelling barter seller behind a tarpaulin display attached to a battered wagon, a dog-sized mutated pack animal hitched beside it, provisions and practical wares, one warm lantern. The seller's face is partly in shadow.",
+      "purpose": "Exchange table, beside the goods list and barter controls. One side portrait, approximately 160–240 × 213–320 CSS px at a 3:4 ratio; these are composition targets pending the M5 layout. The goods and values remain outside the picture."
+    },
+    {
+      "id": "handlarze/barman",
+      "set": "handlarze",
+      "key": "barman",
+      "kind": "portrait",
+      "output": "ui/handlarze/barman.webp",
+      "size": [
+        600,
+        800
+      ],
+      "subject": "A generic barkeeper behind a counter made from barrels, unlabelled bottles, a cracked mirror repaired with broad strips of duct tape, one warm lamp. Face partly in shadow; no readable bottle labels.",
+      "purpose": "Exchange table, beside the goods list and barter controls. One side portrait, approximately 160–240 × 213–320 CSS px at a 3:4 ratio; these are composition targets pending the M5 layout. The goods and values remain outside the picture."
+    },
+    {
+      "id": "handlarze/stragan",
+      "set": "handlarze",
+      "key": "stragan",
+      "kind": "portrait",
+      "output": "ui/handlarze/stragan.webp",
+      "size": [
+        600,
+        800
+      ],
+      "subject": "A generic farmer behind a market stall with vegetable crates, a few strips of dried meat and a plain balance scale, under a salvaged canopy and warm lantern. Face partly in shadow; ordinary food, no gore.",
+      "purpose": "Exchange table, beside the goods list and barter controls. One side portrait, approximately 160–240 × 213–320 CSS px at a 3:4 ratio; these are composition targets pending the M5 layout. The goods and values remain outside the picture."
+    },
+    {
+      "id": "handlarze/wielobranzowy",
+      "set": "handlarze",
+      "key": "wielobranzowy",
+      "kind": "portrait",
+      "output": "ui/handlarze/wielobranzowy.webp",
+      "size": [
+        600,
+        800
+      ],
+      "subject": "A generic general-store seller behind a cluttered counter, shelves of fuel cans, folded blankets and plain tins reaching overhead, a dead cash register used as an ornament, one warm lamp. Face partly in shadow; no currency or readable displays.",
+      "purpose": "Exchange table, beside the goods list and barter controls. One side portrait, approximately 160–240 × 213–320 CSS px at a 3:4 ratio; these are composition targets pending the M5 layout. The goods and values remain outside the picture."
+    },
+    {
+      "id": "handlarze/bron",
+      "set": "handlarze",
+      "key": "bron",
+      "kind": "portrait",
+      "output": "ui/handlarze/bron.webp",
+      "size": [
+        600,
+        800
+      ],
+      "subject": "A generic gunsmith behind a barred counter, practical rifles hung on the wall, a repair bench at the back and closed ammunition crates, warm work light. Face partly in shadow; no weapon brands or readable crate markings.",
+      "purpose": "Exchange table, beside the goods list and barter controls. One side portrait, approximately 160–240 × 213–320 CSS px at a 3:4 ratio; these are composition targets pending the M5 layout. The goods and values remain outside the picture."
+    },
+    {
+      "id": "handlarze/apteka",
+      "set": "handlarze",
+      "key": "apteka",
+      "kind": "portrait",
+      "output": "ui/handlarze/apteka.webp",
+      "size": [
+        600,
+        800
+      ],
+      "subject": "A generic medicine trader behind wire mesh, jars and unlabelled vials, a small apothecary balance and warm lamp. The medicine display suggests an improvised pharmacy through objects alone. Face partly in shadow; omit signs, emblems and crosses to keep the no-logos requirement.",
+      "purpose": "Exchange table, beside the goods list and barter controls. One side portrait, approximately 160–240 × 213–320 CSS px at a 3:4 ratio; these are composition targets pending the M5 layout. The goods and values remain outside the picture."
+    },
+    {
+      "id": "handlarze/warsztat",
+      "set": "handlarze",
+      "key": "warsztat",
+      "kind": "portrait",
+      "output": "ui/handlarze/warsztat.webp",
+      "size": [
+        600,
+        800
+      ],
+      "subject": "A generic scrap and electronics trader behind a repair bench, piles of useful parts, thick cables and one dismantled radio under a warm workshop lamp. Face partly in shadow; no readable dials or labels.",
+      "purpose": "Exchange table, beside the goods list and barter controls. One side portrait, approximately 160–240 × 213–320 CSS px at a 3:4 ratio; these are composition targets pending the M5 layout. The goods and values remain outside the picture."
+    },
+    {
+      "id": "postoj/utrzymanie-nedzny",
+      "set": "postoj",
+      "key": "utrzymanie-nedzny",
+      "kind": "banner",
+      "output": "ui/postoj/utrzymanie-nedzny.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "subject": "A miserable sleeping corner in a ruined building: a rag bedding pile on bare concrete, an unlabelled tin warming over a tiny fire, water dripping through the broken roof. Warm firelight surrounded by cold, damp rubble. No foreground person.",
+      "purpose": "Player Doba window when selecting upkeep, individual daily summary card, and narrative time-skip summary. One banner above the sleep, activities and barter account fields; never behind text. Compose for approximately 600–900 × 200–300 CSS px in a window and 300–360 × 100–120 px on a chat card; final responsive dimensions depend on the M5 layout."
+    },
+    {
+      "id": "postoj/utrzymanie-normalny",
+      "set": "postoj",
+      "key": "utrzymanie-normalny",
+      "kind": "banner",
+      "output": "ui/postoj/utrzymanie-normalny.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "subject": "A modest, maintained room: a simple bunk, a rough table with a bowl of stew, a kerosene lamp and a boarded window. Warm lamp glow and practical shelter against a harsh ruined exterior. No foreground person.",
+      "purpose": "Player Doba window when selecting upkeep, individual daily summary card, and narrative time-skip summary. One banner above the sleep, activities and barter account fields; never behind text. Compose for approximately 600–900 × 200–300 CSS px in a window and 300–360 × 100–120 px on a chat card; final responsive dimensions depend on the M5 layout."
+    },
+    {
+      "id": "postoj/utrzymanie-bogaty",
+      "set": "postoj",
+      "key": "utrzymanie-bogaty",
+      "kind": "banner",
+      "output": "ui/postoj/utrzymanie-bogaty.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "subject": "A comfortable salvaged room: a proper bed with a thick blanket, an unlabelled bottle of prewar liquor, a gramophone and soft warm lamplight. Sparse recovered comforts still belong in a grim post-apocalyptic world. No foreground person.",
+      "purpose": "Player Doba window when selecting upkeep, individual daily summary card, and narrative time-skip summary. One banner above the sleep, activities and barter account fields; never behind text. Compose for approximately 600–900 × 200–300 CSS px in a window and 300–360 × 100–120 px on a chat card; final responsive dimensions depend on the M5 layout."
+    },
+    {
+      "id": "oboz/pustynia",
+      "set": "oboz",
+      "key": "pustynia",
+      "kind": "banner",
+      "output": "ui/oboz/pustynia.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "subject": "A night campfire sheltered behind the wreck of a truck, sand dunes and a starry sky. Arrange the fire, truck silhouette and dune horizon inside the middle horizontal band; warm shelter in a cold empty desert.",
+      "purpose": "Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery."
+    },
+    {
+      "id": "oboz/preria",
+      "set": "oboz",
+      "key": "preria",
+      "kind": "banner",
+      "output": "ui/oboz/preria.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "subject": "A night campfire in tall prairie grass near a rusted windmill, a distant storm visible as dark clouds and faint lightning. The fire and shelter read clearly in the central strip.",
+      "purpose": "Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery."
+    },
+    {
+      "id": "oboz/las",
+      "set": "oboz",
+      "key": "las",
+      "kind": "banner",
+      "output": "ui/oboz/las.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "subject": "A night campfire between huge, sickly overgrown forest trees, plain hammocks strung nearby and low mist. Suitable for both forest and mutated jungle. Show the lower trunks, hammocks and fire in the central strip, with oppressive dark foliage beyond.",
+      "purpose": "Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery."
+    },
+    {
+      "id": "oboz/gory",
+      "set": "oboz",
+      "key": "gory",
+      "kind": "banner",
+      "output": "ui/oboz/gory.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "subject": "A night campfire under a rock overhang beside a snowdrift and an abandoned cable-car station. Keep sheltered fire, snow edge and the station silhouette together in the central strip.",
+      "purpose": "Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery."
+    },
+    {
+      "id": "oboz/bagna",
+      "set": "oboz",
+      "key": "bagna",
+      "kind": "banner",
+      "output": "ui/oboz/bagna.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "subject": "A night campfire safely contained on a rough plank jetty above black swamp water, a small moored boat and a few fireflies. The jetty, warm flame and boat stay in the middle strip; no glowing fantasy creatures.",
+      "purpose": "Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery."
+    },
+    {
+      "id": "oboz/ruiny",
+      "set": "oboz",
+      "key": "ruiny",
+      "kind": "banner",
+      "output": "ui/oboz/ruiny.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "subject": "A night fire burning in a barrel inside a ruined office lobby, broken columns and distant unmarked machine lights beyond shattered windows. Suitable for city ruins and machine territory. No recognizable machines or factions.",
+      "purpose": "Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery."
+    },
+    {
+      "id": "oboz/podziemia",
+      "set": "oboz",
+      "key": "podziemia",
+      "kind": "banner",
+      "output": "ui/oboz/podziemia.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "subject": "A night camp on an abandoned subway platform lit by a carbide lamp beside a small campfire. Dark tunnel mouth, cracked tiles and abstract paint stains on the walls. The stains must never resemble letters or readable graffiti.",
+      "purpose": "Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery."
+    },
+    {
+      "id": "ruiny/apteka",
+      "set": "ruiny",
+      "key": "apteka",
+      "kind": "banner",
+      "output": "ui/ruiny/apteka.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "subject": "The interior of a looted pharmacy: fallen shelving, scattered unlabelled blister packs and empty cabinets, a flashlight's warm beam against cold daylight from a cracked window. No shop sign, glowing green cross, emblem or readable packaging.",
+      "purpose": "Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size."
+    },
+    {
+      "id": "ruiny/biuro",
+      "set": "ruiny",
+      "key": "biuro",
+      "kind": "banner",
+      "output": "ui/ruiny/biuro.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "subject": "An abandoned apartment that can also suggest a small office: dusty shelves and desk, faded picture frames with indistinct scenery rather than identifiable faces, vines entering through a broken window. A warm flashlight beam crosses the room.",
+      "purpose": "Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size."
+    },
+    {
+      "id": "ruiny/magazyn",
+      "set": "ruiny",
+      "key": "magazyn",
+      "kind": "banner",
+      "output": "ui/ruiny/magazyn.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "subject": "A small ruined warehouse with tall storage racks, torn plain cardboard boxes and a forklift tipped on its side. Warm inspection light against dusty cool daylight; no readable shipping labels.",
+      "purpose": "Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size."
+    },
+    {
+      "id": "ruiny/piwnica",
+      "set": "ruiny",
+      "key": "piwnica",
+      "kind": "banner",
+      "output": "ui/ruiny/piwnica.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "subject": "A cramped abandoned cellar with jars on shelves, exposed pipes and a thin shaft of daylight from a tiny high window. A warm flashlight pool picks out the central shelves. No labels on jars.",
+      "purpose": "Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size."
+    },
+    {
+      "id": "ruiny/sklepik",
+      "set": "ruiny",
+      "key": "sklepik",
+      "kind": "banner",
+      "output": "ui/ruiny/sklepik.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "subject": "A ruined neighbourhood shop: smashed display window, low counter and overturned drinks refrigerator with plain unlabelled bottles. Warm flashlight beam and cold daylight; no advertising, price tags or logos.",
+      "purpose": "Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size."
+    },
+    {
+      "id": "ruiny/warsztat",
+      "set": "ruiny",
+      "key": "warsztat",
+      "kind": "banner",
+      "output": "ui/ruiny/warsztat.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "subject": "A ruined car repair workshop with an inspection pit, broad tools hung on a board and a car supported without wheels. Warm inspection lamp, dusty cool daylight; no number plate, badges or shop lettering.",
+      "purpose": "Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size."
+    },
+    {
+      "id": "ruiny/wrak",
+      "set": "ruiny",
+      "key": "wrak",
+      "kind": "banner",
+      "output": "ui/ruiny/wrak.webp",
+      "size": [
+        1200,
+        400
+      ],
+      "subject": "The torn fuselage of a generic passenger aircraft resting in sand, rows of battered seats visible inside and cables hanging from the ceiling. Warm flashlight beam against cold daylight through the breach. No airline livery, logos, lettering or bodies.",
+      "purpose": "Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size."
+    },
+    {
+      "id": "wraki/maly",
+      "set": "wraki",
+      "key": "maly",
+      "kind": "token",
+      "output": "tokens/wraki/maly.webp",
+      "size": [
+        400,
+        400
+      ],
+      "fill": 70,
+      "subject": "A torn small drone body: bent sheet metal, a few splayed cables and scorched panels, no intact rotors. A compact mechanical wreck, no living creature.",
+      "purpose": "Replaces a Small machine token after self-destruction. A 1×1 grid token, roughly 70 screen px per square; the wreck occupies about 70% of its frame and may sit beside other combat tokens and an independently drawn explosion decal."
+    },
+    {
+      "id": "wraki/sredni",
+      "set": "wraki",
+      "key": "sredni",
+      "kind": "token",
+      "output": "tokens/wraki/sredni.webp",
+      "size": [
+        400,
+        400
+      ],
+      "fill": 90,
+      "subject": "The burnt skeleton of a human-sized machine, twisted mechanical limbs and charred joints. Scorching is painted on the metal; no smoke clouds or separate ground effects.",
+      "purpose": "Replaces a Medium machine token after self-destruction. A 1×1 grid token, roughly 70 screen px per square; the wreck fills about 90% of the frame. It remains readable beside intact tokens and an independent explosion decal."
+    },
+    {
+      "id": "wraki/duzy",
+      "set": "wraki",
+      "key": "duzy",
+      "kind": "token",
+      "output": "tokens/wraki/duzy.webp",
+      "size": [
+        800,
+        800
+      ],
+      "fill": 90,
+      "subject": "The opened wreck hull of a heavy machine, cracked armour plates and exposed servos, with a few bent supports lying close to the hull. Mechanically distinct from the human-sized skeleton.",
+      "purpose": "Replaces a Large machine token after self-destruction. A 2×2 grid token, roughly 140 × 140 screen px at a 70 px grid; the wreck fills about 90% of its frame and has no baked scene background."
+    },
+    {
+      "id": "wraki/gigantyczny",
+      "set": "wraki",
+      "key": "gigantyczny",
+      "kind": "token",
+      "output": "tokens/wraki/gigantyczny.webp",
+      "size": [
+        1600,
+        1600
+      ],
+      "fill": 92,
+      "subject": "The immense burned hull of a generic war machine with broken tracks and collapsed mechanical legs spread close to its body. Suggest the violent collapse with torn metal alone; no ground, crater, rubble terrain or recognisable franchise robot.",
+      "purpose": "Shared wreck artwork for the largest machine tokens; Foundry retains the original token footprint. At a 70 px grid a 4×4 footprint is about 280 × 280 screen px. Use a 1600 px master for the largest documented token class and about 92% frame fill."
+    },
+    {
+      "id": "objekty/grenade-molotov",
+      "set": "objekty",
+      "key": "grenade-molotov",
+      "kind": "object",
+      "output": "vfx/grenade-molotov.webp",
+      "size": [
+        128
+      ],
+      "subject": "A brown-tinted glass bottle lying on its side, viewed directly from above, with a cloth rag stuffed into its neck and a small bright flame burning at the rag. Liquid visible in the bottle. No label.",
+      "purpose": "Older section B request: physical explosive lying on the map as a Tile, usually only 20–30 screen px. It appears beside token art and a separately rendered fuze/area marker, so the object silhouette dominates. These are object pictures, not white inventory glyphs."
+    },
+    {
+      "id": "objekty/grenade-dynamite",
+      "set": "objekty",
+      "key": "grenade-dynamite",
+      "kind": "object",
+      "output": "vfx/grenade-dynamite.webp",
+      "size": [
+        128
+      ],
+      "subject": "One red dynamite stick lying flat, directly overhead, a short fuse at one end with a small bright sparking tip. No printed warning or label.",
+      "purpose": "Older section B request: physical explosive lying on the map as a Tile, usually only 20–30 screen px. It appears beside token art and a separately rendered fuze/area marker, so the object silhouette dominates. These are object pictures, not white inventory glyphs."
+    },
+    {
+      "id": "objekty/grenade-c4-remote",
+      "set": "objekty",
+      "key": "grenade-c4-remote",
+      "kind": "object",
+      "output": "vfx/grenade-c4-remote.webp",
+      "size": [
+        128
+      ],
+      "subject": "An off-white plastic explosive block in olive wrapping, lying flat, an electric cap pushed into it and two short wires trailing from it. No markings.",
+      "purpose": "Older section B request: physical explosive lying on the map as a Tile, usually only 20–30 screen px. It appears beside token art and a separately rendered fuze/area marker, so the object silhouette dominates. These are object pictures, not white inventory glyphs."
+    },
+    {
+      "id": "objekty/grenade-ied",
+      "set": "objekty",
+      "key": "grenade-ied",
+      "kind": "object",
+      "output": "vfx/grenade-ied.webp",
+      "size": [
+        128
+      ],
+      "subject": "A short steel pipe bomb with end caps and a small wind-up alarm clock taped to it with thick wires. Directly overhead, practical battered metal and duct tape; clock face has hands but no numerals.",
+      "purpose": "Older section B request: physical explosive lying on the map as a Tile, usually only 20–30 screen px. It appears beside token art and a separately rendered fuze/area marker, so the object silhouette dominates. These are object pictures, not white inventory glyphs."
+    },
+    {
+      "id": "objekty/grenade-ied-radio",
+      "set": "objekty",
+      "key": "grenade-ied-radio",
+      "kind": "object",
+      "output": "vfx/grenade-ied-radio.webp",
+      "size": [
+        128
+      ],
+      "subject": "The same compact steel pipe bomb form with a small radio receiver box and a short whip antenna replacing the clock. Directly overhead; no labels, readouts or lettering.",
+      "purpose": "Older section B request: physical explosive lying on the map as a Tile, usually only 20–30 screen px. It appears beside token art and a separately rendered fuze/area marker, so the object silhouette dominates. These are object pictures, not white inventory glyphs."
+    },
+    {
+      "id": "objekty/grenade-smoke",
+      "set": "objekty",
+      "key": "grenade-smoke",
+      "kind": "object",
+      "output": "vfx/grenade-smoke.webp",
+      "size": [
+        128
+      ],
+      "subject": "A cylindrical smoke grenade lying on its side, directly overhead, with a pull ring and a very small pale wisp at its opening. Preserve readable metal body edges and real alpha around the wisp.",
+      "purpose": "Older section B request: physical explosive lying on the map as a Tile, usually only 20–30 screen px. It appears beside token art and a separately rendered fuze/area marker, so the object silhouette dominates. These are object pictures, not white inventory glyphs."
+    },
+    {
+      "id": "objekty/grenade-flashbang",
+      "set": "objekty",
+      "key": "grenade-flashbang",
+      "kind": "object",
+      "output": "vfx/grenade-flashbang.webp",
+      "size": [
+        128
+      ],
+      "subject": "A flashbang lying on its side, directly overhead, a perforated cylindrical body, spoon lever and pin ring. Broad clean holes; no markings.",
+      "purpose": "Older section B request: physical explosive lying on the map as a Tile, usually only 20–30 screen px. It appears beside token art and a separately rendered fuze/area marker, so the object silhouette dominates. These are object pictures, not white inventory glyphs."
+    },
+    {
+      "id": "objekty/grenade-incendiary",
+      "set": "objekty",
+      "key": "grenade-incendiary",
+      "kind": "object",
+      "output": "vfx/grenade-incendiary.webp",
+      "size": [
+        128
+      ],
+      "subject": "An incendiary grenade canister lying on its side, directly overhead, one plain red identification band without lettering.",
+      "purpose": "Older section B request: physical explosive lying on the map as a Tile, usually only 20–30 screen px. It appears beside token art and a separately rendered fuze/area marker, so the object silhouette dominates. These are object pictures, not white inventory glyphs."
+    },
+    {
+      "id": "objekty/grenade-improvised",
+      "set": "objekty",
+      "key": "grenade-improvised",
+      "kind": "object",
+      "output": "vfx/grenade-improvised.webp",
+      "size": [
+        128
+      ],
+      "subject": "An improvised tin-can grenade lying on its side, directly overhead, broad nails and bolts visible at an opening, duct tape and a short fuse. No food brand or label.",
+      "purpose": "Older section B request: physical explosive lying on the map as a Tile, usually only 20–30 screen px. It appears beside token art and a separately rendered fuze/area marker, so the object silhouette dominates. These are object pictures, not white inventory glyphs."
+    },
+    {
+      "id": "towarzysze/towarzysz-psi-partner",
+      "set": "towarzysze",
+      "key": "towarzysz-psi-partner",
+      "kind": "token",
+      "output": "tokens/towarzysz-psi-partner.webp",
+      "size": [
+        400,
+        400
+      ],
+      "fill": 70,
+      "subject": "A scruffy short-haired wasteland mongrel dog, a simple collar with a short piece of chain, crouched forward, head toward the bottom of the frame, legs splayed enough to read from overhead.",
+      "purpose": "Older section E request: Psi partner, Small companion token on a 1×1 grid beside the party's tokens. About 70 px per grid square, with the body filling 70% of the frame; this must be a usable overhead token, not a portrait."
+    },
+    {
+      "id": "towarzysze/towarzysz-zmutowany-owad",
+      "set": "towarzysze",
+      "key": "towarzysz-zmutowany-owad",
+      "kind": "token",
+      "output": "tokens/towarzysz-zmutowany-owad.webp",
+      "size": [
+        400,
+        400
+      ],
+      "fill": 70,
+      "subject": "A dog-sized mutated burrowing insect, thick chitin armour, strong digging forelegs, side legs and broad mandibles. Head toward the bottom of the frame. No wings or upright humanoid pose.",
+      "purpose": "Older section E request: mutated insect, Small companion token on a 1×1 grid, body filling about 70% of the frame; silhouette must distinguish it from the dog at roughly 70 screen px."
+    },
+    {
+      "id": "towarzysze/towarzysz-zmutowany-ssak",
+      "set": "towarzysze",
+      "key": "towarzysz-zmutowany-ssak",
+      "kind": "token",
+      "output": "tokens/towarzysz-zmutowany-ssak.webp",
+      "size": [
+        800,
+        800
+      ],
+      "fill": 90,
+      "subject": "A powerful Large mutated predator with a bear-like body, canine muzzle and sparse bare skin patches among coarse fur. Hunched forward, head toward the bottom of the frame, limbs splayed; no wounds or gore.",
+      "purpose": "Older section E request: mutated mammal, Large companion token on a 2×2 grid, roughly 140 × 140 screen px; body occupies about 90% of the frame beside humanoid party tokens."
+    },
+    {
+      "id": "towarzysze/towarzysz-zmutowany-gad",
+      "set": "towarzysze",
+      "key": "towarzysz-zmutowany-gad",
+      "kind": "token",
+      "output": "tokens/towarzysz-zmutowany-gad.webp",
+      "size": [
+        400,
+        400
+      ],
+      "fill": 90,
+      "subject": "A Medium amphibious mutated lizard, mud-coloured scales, broad paddled tail and splayed clawed feet. Hunched forward with its head toward the bottom of the frame; recognisable as a lizard from near-overhead.",
+      "purpose": "Older section E request: mutated reptile, Medium companion token on a 1×1 grid, roughly 70 × 70 screen px; body fills about 90% of the frame, visibly larger than the Small dog and insect."
+    }
+  ]
+}
+
