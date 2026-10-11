@@ -13,6 +13,7 @@ No candidates are approved or installed by this batch.
 ```sh
 python dev/icons/review/candidates/batch-62/process_batch.py
 python dev/icons/review/candidates/batch-62/build_review.py
+python dev/icons/review/candidates/batch-62/validate_batch.py
 npm run validate:icon-candidates
 npm run review:icons
 ```
