@@ -193,6 +193,7 @@ import { zdolnosciApi } from "./config/class-features-coverage.mjs";
 import { resyncClassFeatures } from "./migration/resync-class-features.mjs";
 import { registerToolAvailability } from "./actors/tool-availability.mjs";
 import { registerProdukcja, produkcjaApi } from "./production/index.mjs";
+import { registerPostoj, handelApi, postojApi } from "./postoj/index.mjs";
 import { registerQuenchTests, testsApi } from "./tests/index.mjs";
 import { monsterClosetApi } from "./dev/monster-closet.mjs";
 import { characterClosetApi } from "./dev/character-closet.mjs";
@@ -374,6 +375,8 @@ Hooks.once("init", () => {
   registerToolAvailability();
   // Produkcja — Roboty, przepisy, karty czatu (PLAN_produkcja). game.neuroshima.produkcja
   registerProdukcja();
+  // M5 — handel, postój, szabrowanie, bebeszenie (PLAN_m5_postoj). game.neuroshima.handel / .postoj
+  registerPostoj();
 
   // Nasłuch map wypchniętych z Tiled. W init, bo rejestruje ustawienia świata.
   registerMapWatch();
@@ -625,6 +628,8 @@ Hooks.once("ready", () => {
   game.neuroshima.podroz = travelApi;
   game.neuroshima.zapasy = suppliesApi;
   game.neuroshima.produkcja = produkcjaApi;
+  game.neuroshima.handel = handelApi;
+  game.neuroshima.postoj = postojApi;
   game.neuroshima.zajecia = restActivitiesApi;
 
   /* Pasek plakietek stanu na wierszach ekwipunku. **Musi być zarejestrowany jako ostatni

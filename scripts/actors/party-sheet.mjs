@@ -28,6 +28,7 @@ import { buildSuppliesContext, consumeDailyNeeds, hunt, cook } from "./party-sup
 import { confirmLootClose, forceEndLootSession, lootLockContext } from "./party-loot-lock.mjs";
 import { towarzysz } from "./towarzysze.mjs";
 import { RODZAJE } from "../config/towarzysze-data.mjs";
+import { buildPostojContext, AKCJE_POSTOJU, szablonySekcji } from "../postoj/zakladka.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const TPL = `modules/${MODULE_ID}/templates`;
@@ -36,11 +37,14 @@ const HEADER_TEMPLATE = `${TPL}/party-header.hbs`;
 const MEMBERS_TEMPLATE = `${TPL}/party-members.hbs`;
 const MEMBER_TEMPLATE = `${TPL}/party-member.hbs`;
 const ZAPASY_TEMPLATE = `${TPL}/party-tab-zapasy.hbs`;
+// Postój (PLAN_m5_postoj §7.3): miejsce, handel, doba, przeskok, szabrowanie.
+const POSTOJ_TEMPLATE = `${TPL}/party-tab-postoj.hbs`;
 
 const PARTY_TABS = [
   { tab: "members", label: "Drużyna", icon: "fas fa-users" },
   { tab: "inventory", label: "Ekwipunek", svg: "systems/dnd5e/icons/svg/backpack.svg" },
   { tab: "zapasy", label: "Zapasy", icon: "fas fa-boxes-stacked" },
+  { tab: "postoj", label: "Postój", icon: "fas fa-campground" },
   { tab: "biography", label: "Kronika", icon: "fas fa-feather" }
 ];
 
@@ -229,7 +233,8 @@ function buildPartySheetClass(Base) {
         neuroFeed: onFeedParty,
         neuroHunt: onHunt,
         neuroCook: onCook,
-        neuroForceEndLoot: onForceEndLoot
+        neuroForceEndLoot: onForceEndLoot,
+        ...AKCJE_POSTOJU
       }
     };
 
@@ -242,6 +247,11 @@ function buildPartySheetClass(Base) {
         if (key === "inventory") out.zapasy = {
           container: { classes: ["tab-body"], id: "tabs" },
           template: ZAPASY_TEMPLATE,
+          scrollable: [""]
+        };
+        if (key === "inventory") out.postoj = {
+          container: { classes: ["tab-body"], id: "tabs" },
+          template: POSTOJ_TEMPLATE,
           scrollable: [""]
         };
       }
@@ -286,6 +296,7 @@ function buildPartySheetClass(Base) {
     async _preparePartContext(partId, context, options) {
       context = await super._preparePartContext(partId, context, options);
       if (partId === "zapasy") context.zapasy = buildSuppliesContext(this.actor);
+      if (partId === "postoj") context.postoj = await buildPostojContext(this.actor);
       return context;
     }
 
@@ -340,7 +351,7 @@ export function registerPartySheet() {
       }
     );
     foundry.applications.handlebars.loadTemplates([
-      HEADER_TEMPLATE, MEMBERS_TEMPLATE, MEMBER_TEMPLATE, ZAPASY_TEMPLATE
+      HEADER_TEMPLATE, MEMBERS_TEMPLATE, MEMBER_TEMPLATE, ZAPASY_TEMPLATE, POSTOJ_TEMPLATE, ...szablonySekcji()
     ]);
     console.log("Neuroshima 5e | Party sheet registered");
   });

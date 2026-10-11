@@ -1293,3 +1293,18 @@ Spike'i:
    łapie zmianę delty): Drawing wybuchu powstaje, flaga znika.
 6. **Portfel** — `.currency` w ekwipunku to `<section>`, wszystkie wstrzyknięcia (amunicja, granaty, magazynki,
    prowiant, surowce) robią `.after()` na nim — `display: none` zostawia kotwicę. Sprawdzenie na żywo w E1.
+
+**2026-10-12 — E1 (miejsce, Cennik, portfel, waluty).** Warstwa Foundry M5 w `scripts/postoj/` (wejście
+`index.mjs`, API `game.neuroshima.handel` i `.postoj`); karty czatu M5 w stylu kart produkcji z własnym atrybutem
+`data-neuro-postoj` i jednym nasłuchem capture (`postoj/karty.mjs`). Zakładka **Postój** na karcie drużyny (miejsce,
+obraz Miejsca tylko z wyboru MG, przyciski MG; sekcje kolejnych etapów rejestrują się w `zakladka.mjs`). Okno
+Miejsca (MG), [Przypisz do sceny], szept MG przy aktywacji sceny z innym miejscem. **Cennik** (kontrolki żetonów i
+zakładka): wyszukiwarka i grupy towaru, przeciągnięty przedmiot (rozpoznany w katalogu przez `refDlaPrzedmiotu`,
+inaczej z własnej ceny), cena tutaj / skup / dostępność z rozkładem w dymku, [Rzuć] ilość, stan zepsuty, [Za gracza:
+zamówienie] — karta publiczna z jawnymi liczbami i szept MG z ilością i ceną (`postoj/zamowienie.mjs`; licznik i
+limit — E4). Portfel ukryty CSS-em (`styles/postoj.css` — nowy arkusz, **wymaga restartu serwera** przy pierwszym
+wczytaniu), audyt `game.neuroshima.handel.audytPortfela()`, nagroda w gb z ostrzeżeniem MG. Waluta lokalna: pole MG
+w karcie przedmiotu, Żeton Luxor = Vegas. Ustawienie klienta „Ilustracje” (D45) i rozwiązywacz `config/ilustracje.mjs`
+(nadpisanie MG → `ui/<zestaw>/<klucz>.webp`, jeśli jest → nic). Quench `handel` (11). Sprawdzone na żywo u MG: Cennik
+(UZI w Vegas 75 gb, skup WKK 37,5, dostępność 70%), zamówienie za Alana (k100 35 − CHA 8 = 27 ≤ 80), karta postaci bez
+portfela z panelami amunicji, surowców i prowiantu na miejscu, okno nagrody bez gb.

@@ -31,6 +31,11 @@ import { kosc, rzucKosci, wybierzBezZwracania } from "./losowanie.mjs";
 const _r2 = v => Math.round(v * 100) / 100;
 const _pct = m => `${Math.round(m * 100)}%`;
 
+/** „12,5 gb” — polski przecinek, do dwóch miejsc. */
+export function fmtGb(v) {
+  return `${String(_r2(Number(v) || 0)).replace(".", ",")} gb`;
+}
+
 /* -------------------------------------------- */
 /*  Kategorie                                    */
 /* -------------------------------------------- */

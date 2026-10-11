@@ -1,0 +1,45 @@
+<section class="neuro-cennik-form">
+    <div class="neuro-cennik-miejsce">
+        <label>Rodzaj
+            <select name="rodzaj">
+                <option value="">— bez modyfikatora</option>
+                {{#each rodzaje}}<option value="{{ k }}" {{#if wybrany}}selected{{/if}}>{{ label }}</option>{{/each}}
+            </select>
+        </label>
+        <label>Region
+            <select name="region">
+                <option value="">— ceny podręcznikowe</option>
+                {{#each regiony}}<option value="{{ k }}" {{#if wybrany}}selected{{/if}}>{{ label }}</option>{{/each}}
+            </select>
+        </label>
+        <label class="neuro-cennik-skup" data-tooltip="Po ile handlarz kupuje od graczy: NOE 100%, WKK 50% (D3). Wpływanie i korekta MG podnoszą.">
+            Skup <input type="range" name="skup" min="0" max="150" step="5" value="{{ stan.skup }}">
+            <output class="neuro-cennik-skup-wartosc">{{ stan.skup }}%</output>
+            <span class="neuro-cennik-hint">domyślnie {{ skupDomyslny }}%{{#if kobalt}} (WKK){{/if}}</span>
+        </label>
+    </div>
+    <div class="neuro-cennik-druzyna">
+        {{#if druzyna}}
+        <span><i class="fa-solid fa-campground" inert></i> {{ druzyna }}: {{ miejsceDruzyny }}</span>
+        {{#if inneNizDruzyny}}
+        <button type="button" data-action="zapiszMiejsce" data-tooltip="Ustaw ten rodzaj i region jako miejsce drużyny">
+            <i class="fa-solid fa-floppy-disk" inert></i> Zapisz jako miejsce drużyny
+        </button>
+        {{/if}}
+        {{/if}}
+    </div>
+    <div class="neuro-cennik-szukaj">
+        <input type="search" name="query" value="{{ stan.query }}" placeholder="Szukaj przedmiotu… (albo przeciągnij przedmiot do okna)" autocomplete="off">
+        <select name="grupa">
+            <option value="">wszystkie grupy</option>
+            {{#each grupy}}<option value="{{ k }}" {{#if wybrany}}selected{{/if}}>{{ label }}</option>{{/each}}
+        </select>
+        <label class="neuro-cennik-aktor" data-tooltip="Za kogo rzucić zamówienie specjalne (k100 − CHA)">
+            Za gracza
+            <select name="aktor">
+                <option value="">—</option>
+                {{#each aktorzy}}<option value="{{ uuid }}" {{#if wybrany}}selected{{/if}}>{{ name }} (CHA {{ cha }})</option>{{/each}}
+            </select>
+        </label>
+    </div>
+</section>

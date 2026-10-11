@@ -1,0 +1,50 @@
+<section class="tab {{ tab.cssClass }} neuro-postoj" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    {{#with postoj}}
+
+    {{#if obraz}}<img class="neuro-postoj-ilustracja neuro-postoj-miejsce-obraz" src="{{ obraz }}" alt="">{{/if}}
+
+    <div class="neuro-zapas-blok neuro-postoj-miejsce">
+        <div class="neuro-zapas-naglowek">
+            <i class="fa-solid fa-campground" inert></i>
+            <span class="neuro-zapas-nazwa">Miejsce postoju</span>
+            <span class="neuro-zapas-stan">{{ miejsce.opis }}</span>
+            {{#if isGM}}
+            <button type="button" data-action="neuroPostojMiejsce" data-tooltip="Rodzaj, region, knajpa, obraz (MG)">
+                <i class="fa-solid fa-pen" inert></i> Ustaw miejsce
+            </button>
+            {{/if}}
+        </div>
+        {{#if miejsce.ustawione}}
+        <ul class="neuro-postoj-fakty">
+            <li><span>Rodzaj</span> {{ miejsce.rodzaj }}{{#if isGM}} <small class="neuro-postoj-mg">(dostępność {{#if (gt miejsce.modyfikator 0)}}+{{/if}}{{ miejsce.modyfikator }})</small>{{/if}}</li>
+            <li><span>Region</span> {{#if miejsce.region}}{{ miejsce.region }}{{else}}—{{/if}}</li>
+            <li><span>Knajpa</span> {{#if miejsce.knajpa}}jest{{else}}brak{{/if}}</li>
+            {{#if miejsce.maksStawka}}<li><span>Hazard</span> stawka do {{ miejsce.maksStawka }} gb</li>{{/if}}
+        </ul>
+        {{else}}
+        <p class="neuro-zapas-pusto">Miejsce nieustawione — handel i postój zapytają MG.</p>
+        {{/if}}
+    </div>
+
+    {{#if isGM}}
+    <div class="neuro-zapasy-akcje neuro-postoj-mg-akcje">
+        <button type="button" data-action="neuroPostojCennik" data-tooltip="Ceny i dostępność tutaj (tylko MG)">
+            <i class="fa-solid fa-scale-balanced" inert></i> Cennik
+        </button>
+        {{#if scena}}
+        <button type="button" data-action="neuroPostojScena" data-tooltip="Zapisz to miejsce jako domyślne dla aktywnej sceny „{{ scena.nazwa }}”">
+            <i class="fa-solid fa-map-location-dot" inert></i> Przypisz do sceny{{#if scena.ma}} (nadpisze){{/if}}
+        </button>
+        {{/if}}
+        <button type="button" data-action="neuroPostojAudyt" data-tooltip="Kto ma gamble w ukrytym portfelu (D17)">
+            <i class="fa-solid fa-coins" inert></i> Audyt portfela
+        </button>
+    </div>
+    {{/if}}
+
+    {{#each sekcje}}
+    {{> (lookup this "szablon") ctx=ctx isGM=../isGM }}
+    {{/each}}
+
+    {{/with}}
+</section>

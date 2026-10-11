@@ -1,0 +1,24 @@
+<section class="neuro-cennik-lista">
+    {{#if puste}}
+    <p class="neuro-cennik-pusto">Wpisz nazwę, wybierz grupę towaru albo przeciągnij przedmiot (z karty, kompendium, czatu) do tego okna.</p>
+    {{else}}
+    <table class="neuro-cennik-tabela">
+        <thead>
+            <tr>
+                <th class="nazwa">Przedmiot</th>
+                <th data-tooltip="Cena z tabel NOE">Podręcznik</th>
+                <th data-tooltip="Region × kolumna cen (s. 44) × stan">Tutaj</th>
+                <th data-tooltip="Po ile handlarz kupuje">Skup</th>
+                <th data-tooltip="Dostępność z tabeli + lokalizacja (s. 43)">Dost.</th>
+                <th data-tooltip="Ilość u handlarza (s. 43)">Ilość</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each wlasne}}{{> "modules/neuroshima-2026-overrides/templates/postoj/cennik-wiersz.hbs" }}{{/each}}
+            {{#each wyniki}}{{> "modules/neuroshima-2026-overrides/templates/postoj/cennik-wiersz.hbs" }}{{/each}}
+        </tbody>
+    </table>
+    {{#if (gte wyniki.length limit)}}<p class="neuro-cennik-hint">Pokazano pierwsze {{ limit }} — zawęź wyszukiwanie.</p>{{/if}}
+    {{/if}}
+</section>

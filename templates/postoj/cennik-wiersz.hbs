@@ -1,0 +1,32 @@
+<tr class="{{#if wlasny}}is-wlasny{{/if}} {{#if zepsuty}}is-zepsuty{{/if}}" data-ref="{{ ref }}">
+    <td class="nazwa"><div class="neuro-cennik-nazwa">
+        {{#if img}}<img src="{{ img }}" alt="">{{/if}}
+        <span>{{ nazwa }}</span>
+        <small class="neuro-cennik-kolumna">{{ kolumna }}</small>
+    </div></td>
+    <td>{{ podr }}</td>
+    <td class="tutaj" data-tooltip="{{ tuTip }}"><strong>{{ tu }}</strong></td>
+    <td data-tooltip="{{ skupTip }}">{{ skup }}</td>
+    <td class="{{#if dostBrak}}is-brak{{/if}}" data-tooltip="{{ dostTip }}">{{ dost }}</td>
+    <td>
+        {{#if (eq regula "1")}}1{{else}}
+        <button type="button" class="neuro-cennik-btn" data-action="rzucIlosc" data-regula="{{ regula }}" data-nazwa="{{ nazwa }}" data-tooltip="Rzuć ilość (szept MG)">
+            <i class="fa-solid fa-dice" inert></i> {{ ilosc }}
+        </button>{{/if}}
+    </td>
+    <td class="akcje">
+        <button type="button" class="neuro-cennik-btn" data-action="stan" data-klucz="{{ klucz }}" data-tooltip="Stan: {{ stanLabel }} — zepsuty za połowę (s. 132)">
+            <i class="fa-solid {{#if zepsuty}}fa-heart-crack{{else}}fa-heart{{/if}}" inert></i>
+        </button>
+        {{#if moznaZamowic}}
+        <button type="button" class="neuro-cennik-btn" data-action="zamowienie" data-ref="{{ ref }}" data-tooltip="Za gracza: rzuć zamówienie (k100 − CHA)">
+            <i class="fa-solid fa-magnifying-glass" inert></i>
+        </button>
+        {{/if}}
+        {{#if wlasny}}
+        <button type="button" class="neuro-cennik-btn" data-action="usunWiersz" data-indeks="{{ indeks }}" data-tooltip="Usuń wiersz">
+            <i class="fa-solid fa-xmark" inert></i>
+        </button>
+        {{/if}}
+    </td>
+</tr>

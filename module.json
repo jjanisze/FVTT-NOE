@@ -179,7 +179,7 @@
     }
   ],
   "esmodules": ["scripts/main.mjs"],
-  "styles": ["styles/neuroshima.css"],
+  "styles": ["styles/neuroshima.css", "styles/postoj.css"],
   "languages": [
     {
       "lang": "en",

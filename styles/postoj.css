@@ -1,0 +1,144 @@
+/* =====================================================================
+ * Neuroshima 5e — M5: handel, postój, szabrowanie (PLAN_m5_postoj.md)
+ * ===================================================================== */
+
+/* ---------- Portfel ukryty (D17, U43) --------------------------------
+ * Zawsze barter: gamble to miara wartości, nie waluta (s. 43). Sekcja
+ * `.currency` zostaje w DOM — pod nią wstrzykują się panele ekwipunku
+ * (amunicja, granaty, magazynki, prowiant, surowce robią `.after()`). */
+.dnd5e2 section.currency {
+  display: none !important;
+}
+
+/* ---------- Karty czatu --------------------------------------------- */
+.neuro-postoj-card.is-bogaty { --robota-accent: #c9a227; border: 1px solid #c9a227; }
+.neuro-postoj-card .neuro-postoj-ilustracja {
+  display: block;
+  width: calc(100% + 16px);
+  margin: -6px -8px 6px;
+  aspect-ratio: 3 / 1;
+  object-fit: cover;
+  border-radius: 0 4px 0 0;
+}
+.neuro-postoj-rozklad {
+  color: var(--color-text-secondary, #777);
+  font-size: 11px;
+}
+
+/* ---------- Okna M5 (wspólne) --------------------------------------- */
+.neuro-postoj-okno .window-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px;
+}
+.neuro-postoj-okno button.neuro-cennik-btn {
+  flex: 0 0 auto;
+  width: auto;
+  min-width: 26px;
+  height: 24px;
+  padding: 0 6px;
+  line-height: 22px;
+  font-size: 12px;
+}
+
+/* ---------- Cennik MG (§7.4) ---------------------------------------- */
+.neuro-cennik-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 0 0 auto;
+}
+.neuro-cennik-miejsce,
+.neuro-cennik-szukaj,
+.neuro-cennik-druzyna {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+.neuro-cennik-miejsce label,
+.neuro-cennik-szukaj label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+.neuro-cennik-szukaj input[type="search"] { flex: 1 1 260px; width: auto; }
+.neuro-cennik-form select { flex: 0 0 auto; width: auto; }
+.neuro-cennik-skup input[type="range"] { width: 120px; }
+.neuro-cennik-skup output { min-width: 3em; font-weight: bold; }
+.neuro-cennik-hint { color: var(--color-text-secondary, #888); font-size: 11px; }
+.neuro-cennik-druzyna { font-size: 12px; color: var(--color-text-secondary, #888); }
+.neuro-cennik-druzyna button { flex: 0 0 auto; width: auto; height: 24px; line-height: 22px; font-size: 12px; }
+
+.neuro-cennik-lista {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  min-height: 0;
+}
+.neuro-cennik-pusto { padding: 24px; text-align: center; color: var(--color-text-secondary, #888); }
+.neuro-cennik-tabela { width: 100%; border-collapse: collapse; font-size: 12px; }
+.neuro-cennik-tabela th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--color-cool-5, #2a2a2a);
+  color: var(--color-light-1, #eee);
+  text-align: left;
+  padding: 3px 6px;
+  font-weight: normal;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+.neuro-cennik-tabela td { padding: 3px 6px; border-bottom: 1px solid rgba(128, 128, 128, 0.2); white-space: nowrap; }
+.neuro-cennik-tabela td.nazwa { white-space: normal; width: 40%; }
+.neuro-cennik-nazwa { display: flex; align-items: center; gap: 6px; }
+.neuro-cennik-tabela td.nazwa img { width: 24px; height: 24px; flex: 0 0 24px; border: none; background: #23271f; border-radius: 3px; object-fit: contain; }
+.neuro-cennik-tabela td.tutaj strong { color: var(--color-text-hyperlink, #b8860b); }
+.neuro-cennik-tabela td.is-brak { color: var(--color-text-secondary, #888); font-style: italic; }
+.neuro-cennik-tabela td.akcje { text-align: right; }
+.neuro-cennik-tabela td button.neuro-cennik-btn { display: inline-flex; align-items: center; justify-content: center; gap: 4px; margin: 0 0 0 2px; }
+.neuro-cennik-tabela tr.is-wlasny { background: rgba(184, 134, 11, 0.08); }
+.neuro-cennik-tabela tr.is-zepsuty td.tutaj strong { color: #c0392b; }
+.neuro-cennik-kolumna { color: var(--color-text-secondary, #888); font-size: 10px; margin-left: auto; }
+
+/* ---------- Zakładka Postój na karcie drużyny (§7.3) ---------------- */
+.neuro-postoj .neuro-postoj-ilustracja {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 1;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+.neuro-postoj .neuro-zapas-naglowek button {
+  flex: 0 0 auto;
+  width: auto;
+  margin-left: auto;
+  height: 24px;
+  line-height: 22px;
+  font-size: 12px;
+}
+.neuro-postoj-fakty {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 2px 12px;
+}
+.neuro-postoj-fakty li span {
+  display: inline-block;
+  min-width: 5.5em;
+  color: var(--color-text-secondary, #888);
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 0.5px;
+}
+.neuro-postoj-mg { color: #b8860b; }
+.neuro-postoj-mg-akcje { margin-top: 6px; }
+
+/* ---------- Waluta lokalna w karcie przedmiotu (U41) ---------------- */
+.neuro-waluta-lokalna { margin-top: 8px; }
