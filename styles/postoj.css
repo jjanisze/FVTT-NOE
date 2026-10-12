@@ -303,3 +303,31 @@
 .neuro-baza-pasek { flex: 1 1 80px; height: 6px; background: rgba(127, 127, 127, 0.25); border-radius: 3px; overflow: hidden; }
 .neuro-baza-pasek > span { display: block; height: 100%; background: var(--neuro-ok, #6aa84f); }
 .neuro-baza-efekt { flex-basis: 100%; font-size: 12px; color: var(--color-text-secondary, #999); }
+
+/* Przeskok (§7.15): plan u góry (przewijany), podgląd na dole (przewijany), stopka z przyciskami. */
+.neuro-przeskok .window-content { display: flex; flex-direction: column; gap: 6px; overflow: hidden; }
+.neuro-przeskok [data-application-part="form"],
+.neuro-przeskok .window-content > .neuro-przeskok-form { flex: 1 1 55%; overflow-y: auto; min-height: 0; }
+.neuro-przeskok [data-application-part="podglad"],
+.neuro-przeskok .window-content > .neuro-przeskok-podglad { flex: 1 1 45%; overflow-y: auto; min-height: 0; border-top: 1px solid rgba(128, 128, 128, 0.3); padding-top: 4px; }
+.neuro-przeskok-ilustracja { display: block; width: 100%; aspect-ratio: 4 / 1; object-fit: cover; border-radius: 6px; margin-bottom: 4px; }
+.neuro-przeskok-naglowek { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.neuro-przeskok-naglowek input[name="dni"] { width: 64px; text-align: center; font-weight: bold; }
+.neuro-przeskok-miejsce { font-size: 12px; color: var(--color-text-secondary, #999); }
+.neuro-przeskok-form .hint { font-size: 11px; color: var(--color-text-secondary, #999); margin: 2px 0; }
+.neuro-przeskok-postac { margin: 0 0 6px; }
+.neuro-przeskok-postac legend { display: flex; align-items: center; gap: 6px; font-weight: 600; }
+.neuro-przeskok-postac legend img, .neuro-przeskok-wynik header img { width: 22px; height: 22px; border: none; border-radius: 3px; object-fit: cover; }
+.neuro-przeskok-etykieta { flex: 0 0 72px; font-size: 12px; font-weight: 600; }
+.neuro-przeskok-form .neuro-zajecie-rzad select { flex: 1 1 160px; width: auto; min-width: 0; }
+.neuro-przeskok-form .neuro-zajecie-rzad input[name$=".pasywna"] { width: 48px; }
+.neuro-przeskok-podglad h3 { margin: 0 0 4px; font-size: 13px; border: none; }
+.neuro-przeskok-zapasy { margin: 0 0 4px; font-size: 12px; }
+.neuro-przeskok-wynik { margin: 0 0 6px; padding: 4px 6px; border: 1px solid rgba(128, 128, 128, 0.25); border-radius: 4px; }
+.neuro-przeskok-wynik header { display: flex; align-items: center; gap: 6px; }
+.neuro-przeskok-saldo { margin-left: auto; font-size: 12px; }
+.neuro-przeskok-saldo.is-ujemne strong { color: #e74c3c; }
+.neuro-przeskok-wynik ul { margin: 2px 0 0; padding-left: 18px; font-size: 12px; }
+.neuro-przeskok-wynik p.neuro-zle { margin: 2px 0 0; font-size: 12px; }
+.neuro-przeskok-stopka { display: flex; justify-content: flex-end; gap: 6px; padding-top: 4px; }
+.neuro-przeskok-stopka button { flex: 0 0 auto; }

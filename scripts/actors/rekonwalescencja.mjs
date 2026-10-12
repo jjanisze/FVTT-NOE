@@ -227,6 +227,8 @@ async function _zuzyjLadunek(pacjent, zapas) {
 
 async function _onRestCompleted(actor, result, config) {
   if (!(result?.longRest || config?.type === "long")) return;
+  // Przeskok (PLAN_m5_postoj §7.15): jeden DO za N dób — Stopień ustawia przeskok z kalendarzyka, bez RO dzień po dniu.
+  if (config?.neuroPrzeskok) return;
   if (!actor?.isOwner || !["character", "npc"].includes(actor.type)) return;
   const s = getZranienieLvl(actor);
   if (s <= 0) {

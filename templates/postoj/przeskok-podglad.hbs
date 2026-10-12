@@ -1,0 +1,36 @@
+<section class="neuro-przeskok-podglad">
+    <h3><i class="fa-solid fa-eye" inert></i> Za {{ dni }} {{#if (eq dni 1)}}dobę{{else}}dób{{/if}}</h3>
+    {{#if zapasy}}
+    <p class="neuro-przeskok-zapasy {{#if zapasy.brak}}neuro-zle{{/if}}">Zapasy ({{ zapasy.kto }}): jedzenie na {{ zapasy.jedzenie }}, woda na {{ zapasy.woda }} dób{{#if zapasy.brak}} — zabraknie przed końcem; skutki rozstrzyga MG{{/if}}.</p>
+    {{/if}}
+    {{#each podglady}}
+    <div class="neuro-przeskok-wynik" data-actor="{{ id }}">
+        <header>
+            <img src="{{ img }}" alt=""> <strong>{{ nazwa }}</strong>
+            <span class="neuro-przeskok-saldo {{#if ujemne}}is-ujemne{{/if}}">saldo <strong>{{ saldo }}</strong></span>
+        </header>
+        <ul>
+            <li>Rachunek: −{{ koszty }} · +{{ zarobki }}{{#if nadwyzkaPrzed}} · +{{ nadwyzkaPrzed }} nadwyżka{{/if}}</li>
+            {{#if trening}}<li>Trening: {{ trening }}</li>{{/if}}
+            {{#if budowa}}<li>Budowa: {{ budowa }}</li>{{/if}}
+            {{#each p.roboty}}<li>Robota {{ nazwa }}: {{ opis }}{{#if gotowa}}{{#if test}} → Test przyjęty jako sukces{{else}} → Test rzuca gracz{{/if}}{{/if}}</li>{{/each}}
+            {{#if wyczerpanie}}<li>Wyczerpanie: {{ wyczerpanie }}</li>{{/if}}
+            {{#if zdrowie}}
+            <li>Zranienie: {{ zdrowie.opis }} →
+                <select data-stopien="{{ id }}" data-tooltip="Stopień po przeskoku (domyślnie „zwykle”)">
+                    {{#each zdrowie.opcje}}<option value="{{ s }}" {{#if selected}}selected{{/if}}>{{ label }}</option>{{/each}}
+                </select>
+            </li>
+            {{/if}}
+            {{#each p.choroby}}<li>{{ this }}</li>{{/each}}
+            {{#if p.fuksyWygasna}}<li>Fuksy ulotne: wygaśnie {{ p.fuksyWygasna }}.</li>{{/if}}
+            {{#if bogaty}}<li>Bogate życie (WKK): {{ bogaty }}.</li>{{/if}}
+        </ul>
+        {{#each p.ostrzezenia}}<p class="neuro-zle"><i class="fa-solid fa-triangle-exclamation" inert></i> {{ this }}</p>{{/each}}
+    </div>
+    {{/each}}
+    <footer class="neuro-przeskok-stopka">
+        <button type="button" data-action="odNowa"><i class="fa-solid fa-rotate-left" inert></i> Plan od nowa</button>
+        <button type="button" data-action="zatwierdz" {{#if otwartaDoba}}disabled{{/if}}><i class="fa-solid fa-forward-fast" inert></i> Przeskocz {{ dni }} {{#if (eq dni 1)}}dobę{{else}}dób{{/if}}</button>
+    </footer>
+</section>

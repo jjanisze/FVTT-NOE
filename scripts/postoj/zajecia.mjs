@@ -170,6 +170,29 @@ export function wyszkolenieItemData(cel) {
   };
 }
 
+/**
+ * Godziny Treningu na celu (doba albo przeskok — U31): postęp na postaci, po 300 h cecha „Wyszkolenie: X” raz.
+ * @returns {Promise<string[]>} linie podsumowania
+ */
+export async function dodajGodzinyTreningu(actor, cel, godziny, trener = "") {
+  const h = Math.max(0, _n(godziny));
+  if (!cel || !h) return [];
+  const przed = treningi(actor)[cel]?.godziny ?? 0;
+  const p = postepTreningu({ dotychczas: przed, godziny: h });
+  await actor.update({ [`flags.${MODULE_ID}.${FLAGA_TRENINGU}.${cel}`]: { godziny: p.godziny, trener: trener ?? "" } });
+  const linie = [`Trening: ${esc(_etykieta(cel))} — ${p.godziny}/${TRENING.godziny} h.`];
+  if (!String(trener ?? "").trim()) linie.push(`<span class="neuro-zle">Bez trenera — RAW wymaga trenera (MG).</span>`);
+  if (p.ukonczony && przed < TRENING.godziny) {
+    const [typ, k] = cel.split(":");
+    if (typ === "tool" && !actor.system.tools?.[k]) {
+      await actor.update({ [`system.tools.${k}`]: { value: 0, ability: CONFIG.DND5E.tools[k]?.ability ?? "int" } });
+    }
+    await actor.createEmbeddedDocuments("Item", [wyszkolenieItemData(cel)]);
+    linie.push(`<strong>Ukończony:</strong> Wyszkolenie: ${esc(_etykieta(cel))}.`);
+  }
+  return linie;
+}
+
 const TRENING_DEF = {
   id: "trening",
   label: "Trening / Nauka (s. 47)",
@@ -197,21 +220,7 @@ const TRENING_DEF = {
   async apply(actor, v) {
     const h = v?.cel ? Math.min(TRENING.maksDziennie, _n(v.godziny)) : 0;
     if (!h) return null;
-    const t = treningi(actor);
-    const przed = t[v.cel]?.godziny ?? 0;
-    const p = postepTreningu({ dotychczas: przed, godziny: h });
-    await actor.update({ [`flags.${MODULE_ID}.${FLAGA_TRENINGU}.${v.cel}`]: { godziny: p.godziny, trener: v.trener ?? "" } });
-    const linie = [`Trening: ${esc(_etykieta(v.cel))} — ${p.godziny}/${TRENING.godziny} h.`];
-    if (!String(v.trener ?? "").trim()) linie.push(`<span class="neuro-zle">Bez trenera — RAW wymaga trenera (MG).</span>`);
-    if (p.ukonczony && przed < TRENING.godziny) {
-      const [typ, k] = v.cel.split(":");
-      if (typ === "tool" && !actor.system.tools?.[k]) {
-        await actor.update({ [`system.tools.${k}`]: { value: 0, ability: CONFIG.DND5E.tools[k]?.ability ?? "int" } });
-      }
-      await actor.createEmbeddedDocuments("Item", [wyszkolenieItemData(v.cel)]);
-      linie.push(`<strong>Ukończony:</strong> Wyszkolenie: ${esc(_etykieta(v.cel))}.`);
-    }
-    return { linie, minuty: h * 60 };
+    return { linie: await dodajGodzinyTreningu(actor, v.cel, h, v.trener), minuty: h * 60 };
   }
 };
 
@@ -264,6 +273,32 @@ function _kontekstBazy(grupa) {
   };
 }
 
+/**
+ * Godziny Budowy na projekcie drużyny postaci (doba albo przeskok — U32); po wymaganych — karta MG raz.
+ * @returns {Promise<string[]>} linie podsumowania
+ */
+export async function dodajGodzinyBudowy(actor, projekt, godziny) {
+  const nazwa = String(projekt ?? "").trim();
+  const h = Math.max(0, _n(godziny));
+  if (!nazwa || !h) return [];
+  const g = _grupaPostaci(actor);
+  if (!g || !game.user.isGM) return [`Budowa: ${esc(nazwa)} ${h} h (zapis u MG).`];
+  const pr = foundry.utils.deepClone(projektyBazy(g));
+  let p = pr.find(x => x.nazwa.toLowerCase() === nazwa.toLowerCase());
+  if (!p) { p = { nazwa, godziny: 0, wymagane: null, efekt: "" }; pr.push(p); }
+  const przed = p.godziny;
+  const wynik = postepBudowy({ dotychczas: p.godziny, godziny: h, wymagane: p.wymagane ?? 0 });
+  p.godziny = wynik.godziny;
+  await g.update({ [`flags.${MODULE_ID}.postoj.baza.projekty`]: pr });
+  const linie = [`Budowa: ${esc(p.nazwa)} — ${p.godziny}${p.wymagane ? `/${p.wymagane}` : ""} h.`];
+  if (wynik.ukonczona && przed < p.wymagane) {
+    await wyslijKarte(kartaPostoju({ ikona: "icons/svg/house.svg", tytul: `Baza: ${p.nazwa} ukończona`, podtytul: g.name,
+      linie: [p.efekt ? esc(p.efekt) : "Korzyść ustala MG (s. 47)."] }), { szept: "gm" });
+    linie.push(`<strong>Ukończona.</strong>`);
+  }
+  return linie;
+}
+
 const BUDOWA_DEF = {
   id: "budowa",
   label: "Budowa bazy (s. 47)",
@@ -288,22 +323,7 @@ const BUDOWA_DEF = {
     const nazwa = String(v?.projekt ?? "").trim();
     const h = nazwa ? Math.min(BUDOWA.maksDziennie, _n(v.godziny)) : 0;
     if (!h) return null;
-    const g = _grupaPostaci(actor);
-    if (!g || !game.user.isGM) return { linie: [`Budowa: ${esc(nazwa)} ${h} h (zapis u MG).`], minuty: h * 60 };
-    const pr = foundry.utils.deepClone(projektyBazy(g));
-    let p = pr.find(x => x.nazwa.toLowerCase() === nazwa.toLowerCase());
-    if (!p) { p = { nazwa, godziny: 0, wymagane: null, efekt: "" }; pr.push(p); }
-    const przed = p.godziny;
-    const wynik = postepBudowy({ dotychczas: p.godziny, godziny: h, wymagane: p.wymagane ?? 0 });
-    p.godziny = wynik.godziny;
-    await g.update({ [`flags.${MODULE_ID}.postoj.baza.projekty`]: pr });
-    const linie = [`Budowa: ${esc(nazwa)} — ${p.godziny}${p.wymagane ? `/${p.wymagane}` : ""} h.`];
-    if (wynik.ukonczona && przed < p.wymagane) {
-      await wyslijKarte(kartaPostoju({ ikona: "icons/svg/house.svg", tytul: `Baza: ${nazwa} ukończona`, podtytul: g.name,
-        linie: [p.efekt ? esc(p.efekt) : "Korzyść ustala MG (s. 47)."] }), { szept: "gm" });
-      linie.push(`<strong>Ukończona.</strong>`);
-    }
-    return { linie, minuty: h * 60 };
+    return { linie: await dodajGodzinyBudowy(actor, nazwa, h), minuty: h * 60 };
   }
 };
 
@@ -520,3 +540,6 @@ export function registerZajeciaPostoju() {
 }
 
 export const __testing = Object.freeze({ pasywnaDla, wyszkolenieItemData, testHazardu: _testHazardu });
+
+/** Etykiety i listy celów — także dla okna przeskoku. */
+export { _etykieta as etykietaCelu, _celeTreningu as celeTreningu, _skille as opcjeUmiejetnosci, _narzedzia as opcjeNarzedzi };

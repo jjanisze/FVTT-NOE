@@ -41,6 +41,7 @@ import { registerSzabrowanieZasadyTests } from "./szabrowanie-zasady.test.mjs";
 import { registerBebeszenieZasadyTests } from "./bebeszenie-zasady.test.mjs";
 import { registerHandelTests } from "./handel.test.mjs";
 import { registerZajeciaPostojuTests } from "./zajecia-postoju.test.mjs";
+import { registerPrzeskokTests } from "./przeskok.test.mjs";
 import { registerFuksyTests } from "./fuksy.test.mjs";
 import { registerConfigTests } from "./config.test.mjs";
 import { registerEquipmentDataTests } from "./ekwipunek-dane.test.mjs";
@@ -100,6 +101,7 @@ export function registerQuenchTests() {
     registerHandelTests(quench);
     registerFuksyTests(quench);
     registerZajeciaPostojuTests(quench);
+    registerPrzeskokTests(quench);
     console.log("Neuroshima 5e | Quench batches registered");
   });
 }

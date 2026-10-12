@@ -300,17 +300,20 @@ export function przeskok({ dni, plan = {}, stan = {}, kobalt = false } = {}) {
   const region = stan.region ?? null;
   const dzien = 86400;
 
-  // Rachunek doby typowej × N.
+  // Postępy. Trening i Budowa z wymaganymi godzinami kończą się w trakcie — dalej nie kosztują.
+  const trening = postepTreningu({ dotychczas: stan.trening?.godziny ?? 0, godziny: (plan.trening?.godziny ?? 0) * N, region });
+  const budowa = postepBudowy({ dotychczas: stan.budowa?.godziny ?? 0, godziny: (plan.budowa?.godziny ?? 0) * N, wymagane: stan.budowa?.wymagane ?? 0 });
+  const hTreningu = Math.max(0, trening.godziny - _num(stan.trening?.godziny));
+  const hBudowy = Math.max(0, budowa.godziny - _num(stan.budowa?.godziny));
+
+  // Rachunek: doba typowa × N, bez dób po ukończeniu Treningu i Budowy.
   const kosztDnia = kosztUtrzymania(plan.utrzymanie) + _num(plan.inneKoszty)
     + postepTreningu({ godziny: plan.trening?.godziny ?? 0, region }).koszt
     + postepBudowy({ godziny: plan.budowa?.godziny ?? 0 }).koszt;
   const zarobekDnia = zarobekPracy({ pasywna: plan.praca?.pasywna ?? 0, godziny: plan.praca?.godziny ?? 0 }) + _num(plan.inneZarobki);
-  const koszty = Math.round(kosztDnia * N * 100) / 100;
+  const koszty = Math.round(((kosztUtrzymania(plan.utrzymanie) + _num(plan.inneKoszty)) * N
+    + postepTreningu({ godziny: hTreningu, region }).koszt + postepBudowy({ godziny: hBudowy }).koszt) * 100) / 100;
   const zarobki = Math.round(zarobekDnia * N * 100) / 100;
-
-  // Postępy.
-  const trening = postepTreningu({ dotychczas: stan.trening?.godziny ?? 0, godziny: (plan.trening?.godziny ?? 0) * N, region });
-  const budowa = postepBudowy({ dotychczas: stan.budowa?.godziny ?? 0, godziny: (plan.budowa?.godziny ?? 0) * N, wymagane: stan.budowa?.wymagane ?? 0 });
   const minutyRoboty = Math.max(0, _num(plan.robota?.godziny)) * 60 * N;
   const zostaloRoboty = stan.robota ? Math.max(0, _num(stan.robota.zostaloMinut) - minutyRoboty) : null;
 

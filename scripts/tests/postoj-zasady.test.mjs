@@ -150,6 +150,12 @@ export function registerPostojZasadyTests(quench) {
         expect(p.wyczerpanie.zwykleZdjete, "NOE: Bezsenność to zwykły poziom").to.equal(3);
         expect(p.fuksyWygasna).to.equal(1);
         expect(p.sekundy).to.equal(30 * DZIEN);
+        const q = przeskok({
+          dni: 30,
+          plan: { utrzymanie: "normalny", trening: { godziny: 10 }, budowa: { godziny: 2 } },
+          stan: { trening: { godziny: 200 }, budowa: { godziny: 0, wymagane: 10 }, region: "nowy-jork" }
+        });
+        expect(q.rachunek.koszty, "trening kończy się po 10 dobach, budowa po 5 — dalej nie kosztują").to.equal(10 * 30 + 2.5 * 10 + 10);
       });
 
       it("WKK: Bezsenność schodzi odsypianiem (poziom na dobę); Bogaty — Fuks co 10 dób, zostaje z ostatnich 7", function () {

@@ -1,0 +1,65 @@
+<form class="neuro-przeskok-form">
+    {{#if obraz}}<img class="neuro-przeskok-ilustracja" src="{{ obraz }}" alt="">{{/if}}
+    <div class="neuro-przeskok-naglowek">
+        <label>Dób <input type="number" name="dni" min="1" max="365" step="1" value="{{ dni }}"></label>
+        <span class="neuro-przeskok-miejsce"><i class="fa-solid fa-location-dot" inert></i> {{ miejsce }}</span>
+        {{#if otwartaDoba}}<span class="neuro-zle">Drużyna ma otwartą dobę — zatwierdź ją albo zamknij.</span>{{/if}}
+    </div>
+    <p class="hint">Dzień typowy na postać — z ostatniej zatwierdzonej doby. Wartości oczekiwane, bez rzutów dzień po dniu (D19); zegar ruszy raz.</p>
+
+    {{#each postacie}}
+    <fieldset class="neuro-przeskok-postac" data-actor="{{ id }}">
+        <legend><img src="{{ img }}" alt=""> {{ nazwa }}</legend>
+        <div class="neuro-zajecie-rzad">
+            <label>Sen <input type="number" name="p.{{ id }}.sen" min="6" max="24" step="1" value="{{ plan.sen }}"> h</label>
+            {{#if utrzymanie}}
+            <select name="p.{{ id }}.utrzymanie">
+                {{#each utrzymanie}}<option value="{{ k }}" {{#if selected}}selected{{/if}}>{{ label }}</option>{{/each}}
+            </select>
+            {{else}}
+            <span class="hint">Dzicz — bez utrzymania, jedzenie i woda z zapasów.</span>
+            {{/if}}
+        </div>
+        <div class="neuro-zajecie-rzad">
+            <span class="neuro-przeskok-etykieta">Praca</span>
+            <select name="p.{{ id }}.praca.klucz">
+                <option value="">—</option>
+                {{#each praca}}<optgroup label="{{ grupa }}">{{#each opcje}}<option value="{{ value }}" {{#if selected}}selected{{/if}}>{{ label }}</option>{{/each}}</optgroup>{{/each}}
+            </select>
+            <label><input type="number" name="p.{{ id }}.praca.godziny" min="0" max="10" step="1" value="{{ plan.praca.godziny }}"> h/dobę</label>
+            <label data-tooltip="Wartość pasywna ustalona z MG (puste — z karty)">pasywna <input type="number" name="p.{{ id }}.praca.pasywna" min="0" step="1" value="{{ plan.praca.pasywna }}" placeholder="{{ pasywnaKarty }}"></label>
+        </div>
+        <div class="neuro-zajecie-rzad">
+            <span class="neuro-przeskok-etykieta">Trening</span>
+            <select name="p.{{ id }}.trening.cel">
+                <option value="">—</option>
+                {{#each cele}}<optgroup label="{{ grupa }}">{{#each opcje}}<option value="{{ value }}" {{#if selected}}selected{{/if}}>{{ label }}</option>{{/each}}</optgroup>{{/each}}
+            </select>
+            <label><input type="number" name="p.{{ id }}.trening.godziny" min="0" max="10" step="1" value="{{ plan.trening.godziny }}"> h/dobę</label>
+            <input type="text" name="p.{{ id }}.trening.trener" value="{{ plan.trening.trener }}" placeholder="trener">
+        </div>
+        <div class="neuro-zajecie-rzad">
+            <span class="neuro-przeskok-etykieta">Budowa</span>
+            <input type="text" name="p.{{ id }}.budowa.projekt" value="{{ plan.budowa.projekt }}" placeholder="projekt bazy" list="neuro-przeskok-projekty-{{ id }}">
+            <datalist id="neuro-przeskok-projekty-{{ id }}">{{#each projekty}}<option value="{{ this }}">{{/each}}</datalist>
+            <label><input type="number" name="p.{{ id }}.budowa.godziny" min="0" max="10" step="1" value="{{ plan.budowa.godziny }}"> h/dobę</label>
+        </div>
+        {{#each roboty}}
+        <div class="neuro-zajecie-rzad">
+            <span class="neuro-przeskok-etykieta">Robota</span> <span>{{ nazwa }}</span>
+            {{#unless czeka}}<label><input type="number" name="p.{{ ../id }}.roboty.{{ id }}" min="0" max="10" step="0.5" value="{{ godziny }}"> h/dobę</label>{{/unless}}
+            <label class="checkbox" data-tooltip="Bez rzutu — Test końcowy liczy się jako zdany. Odznaczone: Test rzuca gracz."><input type="checkbox" name="p.{{ ../id }}.testy.{{ id }}" {{#if test}}checked{{/if}}> przyjmij sukces Testu</label>
+        </div>
+        {{/each}}
+        {{#if rany}}
+        <div class="neuro-zajecie-rzad">
+            <span class="neuro-przeskok-etykieta">Zranienie</span>
+            <select name="p.{{ id }}.droga">
+                <option value="cialo" {{#unless drogaMedyk}}selected{{/unless}}>Gojenie (RO co 3 DO)</option>
+                <option value="medyk" {{#if drogaMedyk}}selected{{/if}}>Z pomocą medyczną co DO</option>
+            </select>
+        </div>
+        {{/if}}
+    </fieldset>
+    {{/each}}
+</form>

@@ -1376,4 +1376,24 @@ Quench `fuksy` (9). Na żywo: wódka z paczki przez prawdziwą aktywność — b
   kolejność jedzenie → DO, dawka z utrzymania, zegar raz; doba druga — Rozrywka i rzut Hazardu w oknie (saldo z
   wynikiem), 5 h snu i Praca, Fuks Rozrywki, prośba RO ST 10 do gracza, nadwyżka na jutro, porażka RO u gracza →
   uporczywa Bezsenność. **Mutacja:** Rozrywka bez sprawdzania miejsca — czerwone.
-- Poza zakresem tej sesji (z §11 E6): dola Prawej ręki (U39) jako linia T0 w podsumowaniu — do E7 razem z przeskokiem.
+- Dola Prawej ręki (U39) — zrobiona w E7 (niżej).
+
+**2026-10-12 — E7 (przeskok narracyjny).**
+- `postoj/przeskok.mjs`: [Przeskok] w rzędzie MG zakładki Postój → okno: liczba dób, plan dnia typowego na postać
+  (z ostatniej zatwierdzonej doby: sen ≥ 6 h, utrzymanie, Praca z pasywną MG, Trening z trenerem, Budowa, godziny
+  na Roboty i „przyjmij sukces Testu”, droga leczenia), podgląd na żywo: rachunek (z nadwyżką z konta), postęp
+  Treningu/Budowy/Robót, Wyczerpanie przez N DO (`kolejnoscDO`, pod WKK odsypianie; jedzenie przed odpoczynkiem —
+  Niedożywienie schodzi tylko najedzonemu), Zranienie z kalendarzyka (najszybciej / zwykle / prawie pewnie, MG
+  wybiera Stopień), choroby (dawka z utrzymania albo „MG”), Fuksy ulotne do wygaśnięcia, Bogaty WKK, zapasy w
+  dziczy, ostrzeżenia (praca > 10 h, brak trenera, 0 PW). Zatwierdzenie: jedzenie (utrzymanie albo N racji naraz
+  — `zuzyjZapasyNaDni`, braki to linia dla MG, bez rzutów), jeden DO dnd5e (`exhaustionDelta: 0`, `neuroPrzeskok`
+  — Rekonwalescencja go pomija), Kości do pełna przy N > 1, Wyczerpanie i Stopień z podglądu, Trening/Budowa przez
+  te same funkcje co doba (`dodajGodzinyTreningu`, `dodajGodzinyBudowy`), Roboty `pracuj` + `rozstrzygnij` albo
+  Test u gracza, Zachód słońca raz, konto, zegar +N dób raz, Fuks Bogatego z resztą terminu, historia („przeskok N
+  dób” na zakładce), karta na postać + karta MG; hak `neuroshima.przeskok`. Otwarta doba blokuje przeskok.
+- Zasady: `przeskok()` nie liczy kosztu Treningu i Budowy po ich ukończeniu (wcześniej mnożył dobę typową × N).
+- U39: dola Prawej ręki — linia T0 na karcie doby i przeskoku (1/10 zarobków z pracy, bez nadwyżki i towaru).
+- Quench `postoj-przeskok` (9, bez zatwierdzenia — zegar kampanii zostaje); e2e **`postoj`** krok E7 zielony:
+  okno z zakładki, 30 dób, Robota 10 h/dobę z przyjętym Testem, Trening Atletyki od 100 h → „Wyszkolenie” z
+  biegłością, Bezsenność odespana, Fuks Rozrywki wygasł, zegar +30 dób jednym zapisem, karty. **Mutacja:** zegar
+  w dwóch krokach — czerwone.

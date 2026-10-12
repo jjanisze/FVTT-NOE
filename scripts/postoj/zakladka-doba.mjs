@@ -47,7 +47,7 @@ async function _kontekst(grupa) {
     data: d ? formatWorldDate() : null,
     wiersze,
     wszyscy: wiersze.length > 0 && wiersze.every(w => w.stan === "zgloszony"),
-    historia: (grupa.getFlag(MODULE_ID, "postoj")?.historia ?? []).slice(-3).reverse().map(h => ({ dzien: h.dzien, miejsce: h.miejsce, ile: h.postacie?.length ?? 0 }))
+    historia: (grupa.getFlag(MODULE_ID, "postoj")?.historia ?? []).slice(-3).reverse().map(h => ({ dzien: h.dzien, miejsce: h.miejsce, ile: h.postacie?.length ?? 0, przeskok: h.przeskok ?? null }))
   };
 }
 

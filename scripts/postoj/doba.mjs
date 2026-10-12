@@ -189,6 +189,22 @@ export function towarzyszeDoUtrzymania(actor) {
     .map(x => ({ actor: x.actor, czlowiek: x.rodzaj.typAktora === "character", nazwa: x.rodzaj.nazwa }));
 }
 
+/**
+ * U39 — dola Prawej ręki (1/10 zarobków właściciela, s. 75): linia T0 w podsumowaniu, bez podziału automatycznego
+ * (barter). `zarobki` — tylko z pracy (bez nadwyżki, towaru i korekty MG). Null bez Prawej ręki albo bez zarobków.
+ */
+export function dolaPrawejReki(actor, zarobki) {
+  const z = Number(zarobki) || 0;
+  if (z <= 0) return null;
+  const reka = towarzyszeWlasciciela(actor).find(a => towarzysz(a)?.rodzaj === "prawa-reka");
+  if (!reka) return null;
+  return `Dola Prawej ręki (${esc(reka.name)}): 1/10 zarobków — ${fmtGb(Math.floor(z * 10) / 100)}; rozliczcie się barterem (s. 75).`;
+}
+
+/** Zarobki doby z pracy — bez nadwyżki z wczoraj, towaru na rachunek i korekty MG. */
+export const zarobkiZPracy = linie => (linie ?? []).filter(l => l.rodzaj === "zarobek" && !l.nadwyzka && !l.towar && !l.mg)
+  .reduce((s, l) => s + (Number(l.kwota) || 0), 0);
+
 /** Czy postać ma poziomy Przemarznięcia — pole „W cieple” (s. 258). */
 export function maPrzemarzniecie(actor) {
   return zrodlaWyczerpania(actor).some(s => s.source === "przemarznie");
@@ -230,7 +246,7 @@ export async function rachunekDoby(actor, s, { grupa = null } = {}) {
     try { linie.push(...(def.rachunek(v, ctx) ?? [])); } catch (err) { console.warn(`${MODULE_ID} | rachunek ${def.id}`, err); }
   }
   const k = konto(actor);
-  if (k.nadwyzka > 0) linie.push({ rodzaj: "zarobek", kwota: k.nadwyzka, opis: "Nadwyżka z poprzedniej doby" });
+  if (k.nadwyzka > 0) linie.push({ rodzaj: "zarobek", kwota: k.nadwyzka, opis: "Nadwyżka z poprzedniej doby", nadwyzka: true });
   const skup = skupDomyslny({ kobalt });
   for (const d of s.doloz) {
     const item = fromUuidSync(d.uuid);
@@ -427,7 +443,8 @@ export async function zatwierdzDobe(grupa) {
         ...(w.s.utrzymanie ? [`Utrzymanie: <strong>${UTRZYMANIE[w.s.utrzymanie].label}</strong>`] : []),
         ...w.linie,
         `Rachunek: ${w.r.linie.map(l => `${l.rodzaj === "koszt" ? "−" : "+"}${fmtGb(l.kwota)} ${esc(l.opis)}`).join(" · ") || "—"}`,
-        `Saldo: <strong>${fmtGb(w.r.saldo)}</strong>${w.r.saldo > 0 ? " — nadwyżka na jutro" : ""}`
+        `Saldo: <strong>${fmtGb(w.r.saldo)}</strong>${w.r.saldo > 0 ? " — nadwyżka na jutro" : ""}`,
+        ...[dolaPrawejReki(w.actor, zarobkiZPracy(w.r.linie))].filter(Boolean)
       ]
     }), { actor: w.actor });
   }

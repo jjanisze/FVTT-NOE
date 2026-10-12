@@ -38,6 +38,6 @@
         </tbody>
     </table>
     {{else}}
-    {{#if ctx.historia.length}}<p class="hint">Ostatnie doby: {{#each ctx.historia}}{{#unless @first}} · {{/unless}}{{ dzien }} ({{ ile }} post.){{/each}}</p>{{/if}}
+    {{#if ctx.historia.length}}<p class="hint">Ostatnie doby: {{#each ctx.historia}}{{#unless @first}} · {{/unless}}{{ dzien }} ({{#if przeskok}}przeskok {{ przeskok }} dób{{else}}{{ ile }} post.{{/if}}){{/each}}</p>{{/if}}
     {{/if}}
 </div>

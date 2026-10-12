@@ -13,6 +13,9 @@
  *    the draft and the bill); Gracz 2 sleeps 5 h and works a Technika shift. Approval: Gracz 1 gets the Rozrywka
  *    Fuks, Gracz 2 only a short rest and a Kobalt sleep save (ST 10) as a request card; the surplus carries over.
  *    Gracz 2 fails the save from his own client -> a Bezsenność level that an ordinary long rest will not lift.
+ *  - E7, a 30-day skip through the GM window: Gracz 1 works 10 h a day on a real Robota (final test accepted),
+ *    Gracz 2 trains Atletyka from 100 h. One write, clock +30 days once, Training done ("Wyszkolenie" feat), the
+ *    Robota finished, Bezsenność slept off (WKK), the 7-day Rozrywka Fuks expired, cards per PC and one for the GM.
  */
 
 /* Functions below run in the browser (serialised): no closures over this file. */
@@ -241,6 +244,81 @@ async function rzutSnu({ id }) {
   };
 }
 
+/** GM: a Robota for Gracz 1, 100 h of Atletyka training for Gracz 2. */
+async function przeskokPrzygotuj() {
+  const MOD = "neuroshima-2026-overrides";
+  const p1 = game.actors.getName("PC Gracz 1");
+  const p2 = game.actors.getName("PC Gracz 2");
+  const P = game.neuroshima.produkcja;
+  // An ad hoc GM Robota (access granted by the GM), with the raw materials it lacks handed over first.
+  const przepis = [...P.dane.PRZEPISY_STANDARDOWE.values()].find(x => x.wynik?.ref?.startsWith("grenade:"));
+  const ocena = P.ocena(p1, przepis, { adHocMG: true });
+  if (!ocena.alokacja.ok) await P.surowce.giveMany(p1, ocena.alokacja.brak);
+  const robota = await P.start(p1, przepis, { mimoBrakow: true, adHocMG: true });
+  await p2.update({ [`flags.${MOD}.trening.skill:atl`]: { godziny: 100, trener: "Stary Joe" } });
+  const { zrodlaWyczerpania } = await import(`/modules/${MOD}/scripts/config/exhaustion.mjs`);
+  return {
+    robota: robota ? { uuid: robota.uuid, id: P.daneRoboty(robota)?.id } : null,
+    p2bez: zrodlaWyczerpania(p2).filter(z => z.source === "bezsennosc").length,
+    p1fuksy: game.neuroshima.fuksy.lista(p1).map(f => f.zrodlo).sort(),
+    czas: game.time.worldTime
+  };
+}
+
+/** GM: [Przeskok] on the Postój tab → 30 days, plans, preview, [Przeskocz] → confirm. */
+async function przeskok({ robotaId, czas0 }) {
+  const MOD = "neuroshima-2026-overrides";
+  const party = game.actors.party;
+  const p1 = game.actors.getName("PC Gracz 1");
+  const p2 = game.actors.getName("PC Gracz 2");
+  await party.sheet.render(true);
+  party.sheet.changeTab("postoj", "primary");
+  (await window.__e2e.until(() => party.sheet.element.querySelector('[data-action="neuroPostojPrzeskok"]'), { message: "[Przeskok]" })).click();
+  const okno = await window.__e2e.until(() => window.__e2e.findApps({ title: "Przeskok —" })[0], { message: "the skip window" });
+  const form = await window.__e2e.until(() => okno.element.querySelector("form.neuro-przeskok-form"), { message: "the form" });
+  const set = (name, v) => {
+    const el = form.querySelector(`[name="${name}"]`);
+    if (!el) throw new Error(`no field ${name}`);
+    if (el.type === "checkbox") el.checked = v; else el.value = v;
+    el.dispatchEvent(new Event("change", { bubbles: true }));
+  };
+  set("dni", 30);
+  set(`p.${p1.id}.roboty.${robotaId}`, 10);
+  set(`p.${p1.id}.testy.${robotaId}`, true);
+  set(`p.${p2.id}.trening.cel`, "skill:atl");
+  set(`p.${p2.id}.trening.godziny`, 10);
+  set(`p.${p2.id}.trening.trener`, "Stary Joe");
+  const podglad = await window.__e2e.until(() => {
+    const t = okno.element.querySelector(".neuro-przeskok-podglad")?.textContent.replace(/\s+/g, " ") ?? "";
+    return /Za 30 dób/.test(t) && /300\/300 h — ukończony/.test(t) ? t : null;
+  }, { message: "the preview for 30 days" });
+  const n0 = game.messages.size;
+  let czasy = 0;
+  const hook = Hooks.on("updateWorldTime", () => { czasy++; });
+  okno.element.querySelector('[data-action="zatwierdz"]').click();
+  const potw = await window.__e2e.clickDialog({ title: "Przeskok o 30" }, "yes");
+  await window.__e2e.until(() => game.time.worldTime - czas0 >= 30 * 86400, { timeoutMs: 30000, message: "the clock" });
+  await window.__e2e.until(() => !okno.rendered, { timeoutMs: 15000, message: "the window closed" });
+  await window.__e2e.quiet({ idleMs: 1000 });
+  Hooks.off("updateWorldTime", hook);
+  const { zrodlaWyczerpania } = await import(`/modules/${MOD}/scripts/config/exhaustion.mjs`);
+  const nowe = game.messages.contents.slice(n0).map(m => ({ szept: m.whisper.length > 0, tekst: m.content.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim() }));
+  return {
+    potw,
+    podglad: podglad.slice(0, 600),
+    dt: game.time.worldTime - czas0, czasy,
+    wyszkolenie: Boolean(p2.items.find(i => i.name === "Wyszkolenie: Atletyka")),
+    atletyka: p2.system.skills.atl.value,
+    robotyP1: game.neuroshima.produkcja.roboty(p1).length,
+    p2bez: zrodlaWyczerpania(p2).filter(z => z.source === "bezsennosc").length,
+    p1fuksy: game.neuroshima.fuksy.lista(p1).map(f => f.zrodlo).sort(),
+    karty: nowe.filter(m => /30 dób później/.test(m.tekst)).map(m => m.tekst.slice(0, 300)),
+    mg: nowe.find(m => m.szept && /Przeskok: 30 dób/.test(m.tekst))?.tekst ?? null,
+    historia: party.getFlag(MOD, "postoj")?.historia?.at(-1)?.przeskok ?? null,
+    kontoDni: p2.getFlag(MOD, "postojKonto")?.dni ?? null
+  };
+}
+
 export default {
   name: "postoj",
   clients: ["gm", "Gracz 1", "Gracz 2"],
@@ -340,6 +418,26 @@ export default {
       t.assert(r.zrodla.includes("bezsennosc"), "source: Bezsenność", r.zrodla);
       t.equal(r.uporczywa, true, "persistent under WKK Sen (D35)");
       await t.screenshot("Gracz 2", "RO snu - porazka");
+    });
+
+    await t.step("E7: a 30-day skip — Robota 10 h/day (test accepted), Atletyka training from 100 h", async () => {
+      const prz = await t.gm.eval(przeskokPrzygotuj);
+      t.assert(Boolean(prz.robota?.id), "a Robota started for Gracz 1", prz);
+      t.equal(prz.p2bez, 1, "Gracz 2 carries the Bezsenność level from the failed save");
+      const r = await t.gm.eval(przeskok, { robotaId: prz.robota.id, czas0: prz.czas });
+      t.assert(Boolean(r.potw), "the confirm dialog");
+      t.equal(r.dt, 30 * 86400, "clock +30 days");
+      t.equal(r.czasy, 1, "one world-time update");
+      t.equal(r.wyszkolenie, true, "Training done: Wyszkolenie: Atletyka");
+      t.assert(r.atletyka >= 1, "…and its effect gives proficiency", r.atletyka);
+      t.equal(r.robotyP1, 0, "the Robota finished (final test accepted)");
+      t.equal(r.p2bez, 0, "Bezsenność slept off (WKK, D35)");
+      t.assert(!r.p1fuksy.includes("rozrywka"), "the 7-day Rozrywka Fuks expired", r.p1fuksy);
+      t.equal(r.karty.length, 2, "a summary card per PC", r.karty);
+      t.assert(Boolean(r.mg), "one GM card");
+      t.equal(r.historia, 30, "history records the skip");
+      t.assert(r.kontoDni >= 30, "the account counts the days", r.kontoDni);
+      await t.screenshot("gm", "przeskok 30 dob");
     });
   }
 };

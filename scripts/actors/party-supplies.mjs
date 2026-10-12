@@ -315,6 +315,42 @@ export async function consumeDailyNeeds(groupActor, { aktorzy = null, pokrycie =
   return wiersze;
 }
 
+/**
+ * Na ile dób starczą zapasy podanym aktorom (wspólna pula drużyny, pojazdu i ich ekwipunku) — przeskok (D19).
+ * @returns {{jedzenie: number, woda: number}}  `Infinity`, gdy nikt nie je
+ */
+export function zapasyNaDni(groupActor, aktorzy = null) {
+  const kto = aktorzy ?? creatures(groupActor);
+  const pula = supplyActors(groupActor);
+  const out = {};
+  for (const kind of ["jedzenie", "woda"]) {
+    const naDobe = kto.reduce((s, a) => s + dailyNeed(a)[kind], 0);
+    out[kind] = naDobe > 0 ? Math.floor(countSupply(pula, kind) / naDobe + 0.0001) : Infinity;
+  }
+  return out;
+}
+
+/**
+ * Przeskok (D19, U58): `dni` pełnych racji naraz, bez rzutów dzień po dniu. Starczyło na wszystkie doby — znaczniki
+ * głodu i pragnienia schodzą; zabrakło — zapasy schodzą do zera, znaczniki zostają, a skutki (Niedożywienie,
+ * Odwodnienie) rozstrzyga MG z linii podsumowania.
+ * @returns {Promise<{jedzenie: number, woda: number, dni: number}>}  na ile dób faktycznie starczyło
+ */
+export async function zuzyjZapasyNaDni(groupActor, { aktorzy = null, dni = 1 } = {}) {
+  const kto = aktorzy ?? creatures(groupActor);
+  const N = Math.max(0, Math.floor(Number(dni) || 0));
+  const wspolne = [groupActor, groupActor.system.primaryVehicle].filter(Boolean);
+  const starczylo = zapasyNaDni(groupActor, kto);
+  const out = { dni: N };
+  for (const kind of ["jedzenie", "woda"]) {
+    const ile = Math.min(N, starczylo[kind]);
+    out[kind] = ile;
+    for (const actor of kto) await drawSupply([actor, ...wspolne], kind, dailyNeed(actor)[kind] * ile);
+    if (ile >= N) for (const actor of kto) await actor.toggleStatusEffect(ZNACZNIK[kind], { active: false });
+  }
+  return out;
+}
+
 /* -------------------------------------------- */
 /*  Polowanie i gotowanie                        */
 /* -------------------------------------------- */
@@ -417,4 +453,4 @@ export async function cook(groupActor) {
 }
 
 /** Eksponowane jako `game.neuroshima.zapasy`. */
-export const suppliesApi = { buildSuppliesContext, consumeDailyNeeds, hunt, cook, dailyNeed, drawFuel, countSupply };
+export const suppliesApi = { buildSuppliesContext, consumeDailyNeeds, hunt, cook, dailyNeed, drawFuel, countSupply, zapasyNaDni, zuzyjZapasyNaDni };
