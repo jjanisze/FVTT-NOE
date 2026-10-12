@@ -1,0 +1,90 @@
+[
+  {
+    "itemId": "batch61-samuraj",
+    "atlas": "a",
+    "cell": 1,
+    "candidateId": "batch64-revision",
+    "source": "candidates/batch-64/samuraj_revision_c.png",
+    "feedback": "Modify the off hand into a upward facing palm, fingers slightly curled (come here! gesture)"
+  },
+  {
+    "itemId": "batch62-bebeszenie",
+    "atlas": "a",
+    "cell": 2,
+    "candidateId": "batch64-revision",
+    "source": "candidates/batch-64/bebeszenie_revision_c.png",
+    "feedback": "Failure again, same reason, unnatural, broken pliers, no improvement since last generation. Regenerate completely. Crossed pliers and butchers knife, rib outline above."
+  },
+  {
+    "itemId": "batch62-szabrowanie",
+    "atlas": "a",
+    "cell": 3,
+    "candidateId": "batch64-revision",
+    "source": "candidates/batch-64/szabrowanie_revision_c.png",
+    "feedback": "The silhouette of the crowbar and the silhouette of the crate should be separated and distinct. The tip of the crowbar is still merged with the crate."
+  },
+  {
+    "itemId": "batch63-chodzmy-na-pewno-juz-utonal",
+    "atlas": "a",
+    "cell": 4,
+    "candidateId": "batch64-revision",
+    "source": "candidates/batch-64/chodzmy-na-pewno-juz-utonal_revision_b.png",
+    "feedback": "The legs are better, but now the figure is missing a hand"
+  },
+  {
+    "itemId": "batch63-zjadlem-wlasnego-psa",
+    "atlas": "a",
+    "cell": 5,
+    "candidateId": "batch64-revision",
+    "source": "candidates/batch-64/zjadlem-wlasnego-psa_revision_b.png",
+    "feedback": "The axe of the hatchet is pointing the wrong way. Zoom in a little bit on the face still, and make the man's head balt, but keep the beard"
+  },
+  {
+    "itemId": "batch64-barbarka",
+    "atlas": "a",
+    "cell": 6,
+    "candidateId": "atlas-a",
+    "source": "candidates/batch-64/barbarka.png",
+    "feedback": "Modify the image so one man is delivering the blow, the other is the target. Not symmetric. One man is getting his nose crushed."
+  },
+  {
+    "itemId": "batch64-benzyna-zamiast-krwi",
+    "atlas": "a",
+    "cell": 7,
+    "candidateId": "atlas-b",
+    "source": "candidates/batch-64/benzyna-zamiast-krwi.png",
+    "feedback": "Remove the seatbelt, and put a \"Carmageddon Max Damage\" like grin on the driver's face"
+  },
+  {
+    "itemId": "batch64-fachowiec",
+    "atlas": "a",
+    "cell": 8,
+    "candidateId": "atlas-b",
+    "source": "candidates/batch-64/fachowiec.png",
+    "feedback": "The hands need to be more visually separated from the workbench, and they need to come downwards from the shoulders"
+  },
+  {
+    "itemId": "batch64-jest-zajebiscie",
+    "atlas": "a",
+    "cell": 9,
+    "candidateId": "atlas-b",
+    "source": "candidates/batch-64/jest-zajebiscie.png",
+    "feedback": "Modify the raised hand so it shows a thumbs up, and the facial expression into a chill smile"
+  },
+  {
+    "itemId": "batch64-mistrz-walki-wrecz",
+    "atlas": "b",
+    "cell": 1,
+    "candidateId": "atlas-c",
+    "source": "candidates/batch-64/mistrz-walki-wrecz.png",
+    "feedback": "Fix the hands of the grapple - it seems like we have an extra pair of hands. Incorrect anatomy of the wrist grapple itself."
+  },
+  {
+    "itemId": "batch64-muzyk",
+    "atlas": "b",
+    "cell": 2,
+    "candidateId": "atlas-c",
+    "source": "candidates/batch-64/muzyk.png",
+    "feedback": "Replace the blob on the lower left with a silhouette of an audience member. I think it was supposed to be a leg previously."
+  }
+]

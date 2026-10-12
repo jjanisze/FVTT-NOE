@@ -1,0 +1,137 @@
+[
+  {
+    "key": "samuraj_revision_d",
+    "source": "raw/batch-65-atlas-a.png, cell 1",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "bebeszenie_revision_d",
+    "source": "raw/batch-65-atlas-a.png, cell 2",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "szabrowanie_revision_d",
+    "source": "raw/batch-65-atlas-a.png, cell 3",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "chodzmy-na-pewno-juz-utonal_revision_c",
+    "source": "raw/batch-65-atlas-a.png, cell 4",
+    "removedTinyPixels": 4
+  },
+  {
+    "key": "zjadlem-wlasnego-psa_revision_c",
+    "source": "raw/standalone-zjadlem-wlasnego-psa_revision_c.png",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "barbarka_revision_b",
+    "source": "raw/batch-65-atlas-a.png, cell 6",
+    "removedTinyPixels": 8
+  },
+  {
+    "key": "benzyna-zamiast-krwi_revision_b",
+    "source": "raw/batch-65-atlas-a.png, cell 7",
+    "removedTinyPixels": 4
+  },
+  {
+    "key": "fachowiec_revision_b",
+    "source": "raw/standalone-fachowiec_revision_b.png",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "jest-zajebiscie_revision_b",
+    "source": "raw/batch-65-atlas-a.png, cell 9",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "mistrz-walki-wrecz_revision_b",
+    "source": "raw/batch-65-atlas-b.png, cell 1",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "muzyk_revision_b",
+    "source": "raw/standalone-muzyk_revision_b.png",
+    "removedTinyPixels": 3
+  },
+  {
+    "key": "padnij-powstan",
+    "source": "raw/batch-65-atlas-b.png, cell 3",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "pancerny",
+    "source": "raw/batch-65-atlas-b.png, cell 4",
+    "removedTinyPixels": 1
+  },
+  {
+    "key": "pan-plaster",
+    "source": "raw/batch-65-atlas-b.png, cell 5",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "pewna-reka",
+    "source": "raw/batch-65-atlas-b.png, cell 6",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "pierwotny-instynkt",
+    "source": "raw/batch-65-atlas-b.png, cell 7",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "plug-and-play",
+    "source": "raw/batch-65-atlas-b.png, cell 8",
+    "removedTinyPixels": 56
+  },
+  {
+    "key": "przydasie",
+    "source": "raw/batch-65-atlas-b.png, cell 9",
+    "removedTinyPixels": 2
+  },
+  {
+    "key": "robin-hood",
+    "source": "raw/batch-65-atlas-c.png, cell 1",
+    "removedTinyPixels": 5
+  },
+  {
+    "key": "rodeo",
+    "source": "raw/batch-65-atlas-c.png, cell 2",
+    "removedTinyPixels": 1
+  },
+  {
+    "key": "rozroba",
+    "source": "raw/batch-65-atlas-c.png, cell 3",
+    "removedTinyPixels": 1
+  },
+  {
+    "key": "ruchome-gniazdo-ckm",
+    "source": "raw/batch-65-atlas-c.png, cell 4",
+    "removedTinyPixels": 1
+  },
+  {
+    "key": "siekierezada",
+    "source": "raw/batch-65-atlas-c.png, cell 5",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "snajper",
+    "source": "raw/batch-65-atlas-c.png, cell 6",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "szachista",
+    "source": "raw/batch-65-atlas-c.png, cell 7",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "szkolenie-w-broni",
+    "source": "raw/batch-65-atlas-c.png, cell 8",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "szkolenie-w-ciezkim-pancerzu",
+    "source": "raw/batch-65-atlas-c.png, cell 9",
+    "removedTinyPixels": 0
+  }
+]
