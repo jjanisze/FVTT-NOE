@@ -1,0 +1,441 @@
+{
+  "title": "Batch 66 · 16 awaiting GM review",
+  "updated": "2026-10-12",
+  "items": [
+    {
+      "id": "batch62-bebeszenie",
+      "name": "Bebeszenie",
+      "tier": "Batch 62 · M5",
+      "context": "M5 player action button; toolbar/item-sheet use at small sizes.",
+      "request": "Completely regenerate as an ISOLATED glyph with no defective prior image supplied. One intact real pair of combination pliers crosses one butcher knife below a simple rib outline. Both pliers handles must be fully visible, straight, continuous and symmetric below the pivot, pointing down at a small angle; neither handle may bend 90 degrees or join the knife. Two coherent jaws above one pivot. No animal skull, additional tool, hand or gore.",
+      "target": "icons/actions/bebeszenie.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/bebeszenie_revision_e.png",
+          "note": "Completely regenerate as an ISOLATED glyph with no defective prior image supplied. One intact real pair of combination pliers crosses one butcher knife below a simple rib outline. Both pliers handles must be fully visible, straight, continuous and symmetric below the pivot, pointing down at a small angle; neither handle may bend 90 degrees or join the knife. Two coherent jaws above one pivot. No animal skull, additional tool, hand or gore."
+        },
+        {
+          "id": "batch65-revision",
+          "label": "Batch 65 revision",
+          "src": "candidates/batch-65/bebeszenie_revision_d.png",
+          "note": "Completely REGENERATE this tool composition instead of copying the broken pliers. One normal pair of combination pliers crosses one broad butcher knife below a small clean rib-cage outline. Pliers have exactly two continuous straight handles, one central pivot and two short coherent jaws; the handles are thick straight bars, not hooks or zigzags. Knife has one solid blade and one straight handle. Keep the two tools separated by a broad black cutout at the crossing. No hand, gore or extra tools."
+        },
+        {
+          "id": "batch64-revision",
+          "label": "Batch 64 revision",
+          "src": "candidates/batch-64/bebeszenie_revision_c.png",
+          "note": "Keep the crossed butcher knife and pliers in front of the rib outline. Repair the pliers: two straight continuous handles below the pivot, no V-shaped kink, hooked grip or bent handle. Two recognisable open jaws above the pivot. Only these TWO tools form the X; no extra tool or gore."
+        },
+        {
+          "id": "batch63-revision",
+          "label": "Batch 63 revision",
+          "src": "candidates/batch-63/bebeszenie_revision_b.png",
+          "note": "Exactly TWO tools form an X: a butcher knife on one diagonal and recognisable pliers with two open jaws and two handles on the other. Replace the unidentified extra tool with the pliers. A restrained three-rib carcass outline stays behind them; no third tool and no gore."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Bebeszenie",
+          "src": "candidates/batch-62/bebeszenie.png",
+          "note": "Butcher knife and pliers over ribs; no gore."
+        }
+      ]
+    },
+    {
+      "id": "batch64-barbarka",
+      "name": "Barbarka",
+      "tier": "Batch 64 · feat feature",
+      "context": "Headbutt attacks and knocking a target prone.",
+      "request": "Raise the LEFT attacker's head relative to the right victim by about one-third of a head height, until the center of the attacker's FOREHEAD just above his eyebrows contacts the RIGHT victim's NOSE bridge/tip. Forehead-to-nose is the ONLY contact point, never jaw, chin or forehead-to-forehead. Keep the left attacker leaning forward, right victim recoiling, two asymmetric complete head profiles and one small impact mark at the victim's nose. No gore.",
+      "target": "icons/abilities/barbarka.svg",
+      "catalogKey": "barbarka",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/barbarka_revision_c.png",
+          "note": "Raise the LEFT attacker's head relative to the right victim by about one-third of a head height, until the center of the attacker's FOREHEAD just above his eyebrows contacts the RIGHT victim's NOSE bridge/tip. Forehead-to-nose is the ONLY contact point, never jaw, chin or forehead-to-forehead. Keep the left attacker leaning forward, right victim recoiling, two asymmetric complete head profiles and one small impact mark at the victim's nose. No gore."
+        },
+        {
+          "id": "batch65-revision",
+          "label": "Batch 65 revision",
+          "src": "candidates/batch-65/barbarka_revision_b.png",
+          "note": "Make the headbutt visibly ASYMMETRIC. Left attacker bends forward and drives his forehead into the right victim's nose; right victim's head tilts back and recoils. Only the attacker delivers the blow. Different head angles and postures, one restrained impact burst at the victim's nose, two intact heads. No mirrored forehead-to-forehead pose, blood or gore."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Barbarka",
+          "src": "candidates/batch-64/barbarka.png",
+          "note": "One rugged fighter delivers a headbutt: two human head-and-shoulder profiles meet forehead to forehead with one broad impact burst between them. Two intact skulls, no gore or tiny detail."
+        }
+      ]
+    },
+    {
+      "id": "batch64-mistrz-walki-wrecz",
+      "name": "Mistrz walki wręcz",
+      "tier": "Batch 64 · feat feature",
+      "context": "Melee combat maneuvers and reactive parrying.",
+      "request": "Keep the exact two-forearm, two-hand wrist-grapple pose. Remove ONLY the unnecessary BLACK LINE across the lower gripping hand's wrist, so that hand joins its own forearm in ONE CONTINUOUS WHITE silhouette. Retain the useful separation of the opponent's wrist from the gripping fingers. No severed wrist, bracelet/seam at that wrist, extra hand or altered grip.",
+      "target": "icons/abilities/mistrz-walki-wrecz.svg",
+      "catalogKey": "mistrzWalkiWrecz",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/mistrz-walki-wrecz_revision_c.png",
+          "note": "Keep the exact two-forearm, two-hand wrist-grapple pose. Remove ONLY the unnecessary BLACK LINE across the lower gripping hand's wrist, so that hand joins its own forearm in ONE CONTINUOUS WHITE silhouette. Retain the useful separation of the opponent's wrist from the gripping fingers. No severed wrist, bracelet/seam at that wrist, extra hand or altered grip."
+        },
+        {
+          "id": "batch65-revision",
+          "label": "Batch 65 revision",
+          "src": "candidates/batch-65/mistrz-walki-wrecz_revision_b.png",
+          "note": "Rebuild the wrist grapple with correct anatomy: show exactly TWO opposing forearms and exactly TWO hands. One defender hand wraps its thumb and four fingers around the attacker's single wrist; the attacker's hand remains at the end of that forearm. Use a readable simple wrist control, with a broad black contour between gripping fingers and wrist. Omit other guard hands entirely. No extra hand pair, branching wrist or third forearm."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Mistrz walki wręcz",
+          "src": "candidates/batch-64/mistrz-walki-wrecz.png",
+          "note": "Two fighters' forearms meet in a close defensive maneuver: one hand redirects the other fighter's attacking wrist while the free forearm stays in guard. Broad complete hands and wrists with clear grip, no extra fingers or weapons."
+        }
+      ]
+    },
+    {
+      "id": "batch65-padnij-powstan",
+      "name": "Padnij/Powstań",
+      "tier": "Batch 65 · feat feature",
+      "context": "Wstawanie nie kosztuje Szybkości; Szybkość +3 m; wyjście z zasięgu ataku wręcz bez ataków okazyjnych.",
+      "request": "Keep the rising survivor's kneeling-to-standing pose and whole body. ADD two simple broad directional arrows: a DOWNWARD arrow beside the left shoulder toward the ground indicates dropping prone, and an UPWARD arrow beside the right shoulder indicates immediately getting up. Each arrow has one clear arrowhead and one short shaft, separated from the person. These arrows are explicitly requested; no duplicate ghost bodies, labels or decorative symbols.",
+      "target": "icons/abilities/padnij-powstan.svg",
+      "catalogKey": "padnijPowstan",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/padnij-powstan_revision_b.png",
+          "note": "Keep the rising survivor's kneeling-to-standing pose and whole body. ADD two simple broad directional arrows: a DOWNWARD arrow beside the left shoulder toward the ground indicates dropping prone, and an UPWARD arrow beside the right shoulder indicates immediately getting up. Each arrow has one clear arrowhead and one short shaft, separated from the person. These arrows are explicitly requested; no duplicate ghost bodies, labels or decorative symbols."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Padnij/Powstań",
+          "src": "candidates/batch-65/padnij-powstan.png",
+          "note": "One practical survivor rises from a low kneel into a ready stance, with one knee near the ground, the other foot planted and both hands clear. A single complete body conveys getting up quickly; no duplicate ghost figures or arrows."
+        }
+      ]
+    },
+    {
+      "id": "batch65-pancerny",
+      "name": "Pancerny",
+      "tier": "Batch 65 · feat feature",
+      "context": "W ciężkim pancerzu: Próg obrażeń 10 przeciwko obrażeniom ciętym, kłutym i obuchowym (sumuje się z progiem pancerza).",
+      "request": "Keep the broad heavy armour breastplate and shoulder guards. Replace the straight impact marks with ONE round projectile ricocheting off the outer plate. Show an incoming diagonal path from upper-right toward the armour, then an outgoing path toward lower-right away from the SAME contact point: a clearly angled V/corner bounce, no straight I-shaped trajectory through the armour. Put the round ball on the outgoing path, one small contact burst on the plate, no penetration, shield, blood or text.",
+      "target": "icons/abilities/pancerny.svg",
+      "catalogKey": "pancerny",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/pancerny_revision_b.png",
+          "note": "Keep the broad heavy armour breastplate and shoulder guards. Replace the straight impact marks with ONE round projectile ricocheting off the outer plate. Show an incoming diagonal path from upper-right toward the armour, then an outgoing path toward lower-right away from the SAME contact point: a clearly angled V/corner bounce, no straight I-shaped trajectory through the armour. Put the round ball on the outgoing path, one small contact burst on the plate, no penetration, shield, blood or text."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Pancerny",
+          "src": "candidates/batch-65/pancerny.png",
+          "note": "One broad practical heavy armour breastplate and shoulder guards withstand one blunt incoming impact. Thick overlapping plates and a single small impact mark outside the armour. No person face, giant shield, logo or ornate fantasy armour."
+        }
+      ]
+    },
+    {
+      "id": "batch65-pan-plaster",
+      "name": "Pan Plaster",
+      "tier": "Batch 65 · feat feature",
+      "context": "+1 MDR lub INT; narzędzia małego medyka rzucają dodatkową kostkę PW; połowa dawki leku zaspokaja dzienne zapotrzebowanie.",
+      "request": "Redraw from a slightly elevated three-quarter perspective so the PATIENT'S complete forearm, wrist and HAND remain visible. The forearm lies diagonally across the center; the patient's open hand with all five fingers is fully visible toward upper-right, naturally connected to the wrist. Two separate medic hands approach from lower-left and apply one broad dressing to the forearm. Keep a small open first-aid pouch below. Exactly three hands total, no amputated wrist, missing patient hand, merged glove, injury or blood.",
+      "target": "icons/abilities/pan-plaster.svg",
+      "catalogKey": "panPlaster",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/pan-plaster_revision_b.png",
+          "note": "Redraw from a slightly elevated three-quarter perspective so the PATIENT'S complete forearm, wrist and HAND remain visible. The forearm lies diagonally across the center; the patient's open hand with all five fingers is fully visible toward upper-right, naturally connected to the wrist. Two separate medic hands approach from lower-left and apply one broad dressing to the forearm. Keep a small open first-aid pouch below. Exactly three hands total, no amputated wrist, missing patient hand, merged glove, injury or blood."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Pan Plaster",
+          "src": "candidates/batch-65/pan-plaster.png",
+          "note": "Two adult hands apply one broad adhesive medical dressing to a plain forearm beside a small open first-aid pouch. A practical medic gesture with one clear dressing and one pouch, no injury, blood, text or tiny medicine labels."
+        }
+      ]
+    },
+    {
+      "id": "batch65-pierwotny-instynkt",
+      "name": "Pierwotny instynkt",
+      "tier": "Batch 65 · feat feature",
+      "context": "+5 do Inicjatywy; +5 do Testów Percepcji.",
+      "request": "Keep the alert head turn, ready forearm and broad disturbance arcs. Replace the anime-like young face and spiky hair with a rugged MIDDLE-AGED adult survivor in a sober western utilitarian stencil style: close-cropped hair, realistic small watchful eye, firm brow, square natural jaw and restrained stubble. No manga/anime eyes, glossy hair spikes, cute youthful face, supernatural halo or exaggerated cartoon features.",
+      "target": "icons/abilities/pierwotny-instynkt.svg",
+      "catalogKey": "pierwotnyInstynkt",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/pierwotny-instynkt_revision_b.png",
+          "note": "Keep the alert head turn, ready forearm and broad disturbance arcs. Replace the anime-like young face and spiky hair with a rugged MIDDLE-AGED adult survivor in a sober western utilitarian stencil style: close-cropped hair, realistic small watchful eye, firm brow, square natural jaw and restrained stubble. No manga/anime eyes, glossy hair spikes, cute youthful face, supernatural halo or exaggerated cartoon features."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Pierwotny instynkt",
+          "src": "candidates/batch-65/pierwotny-instynkt.png",
+          "note": "One alert survivor's head turns sharply toward a nearby simple disturbance contour, one ear and watchful eye visible in a spare profile. A broad raised forearm in a ready defensive gesture. No animal ears, extra eye, supernatural halo or tiny rays."
+        }
+      ]
+    },
+    {
+      "id": "batch65-siekierezada",
+      "name": "Siekierezada",
+      "tier": "Batch 65 · feat feature",
+      "context": "+1 SIŁ lub ZRC; wyciągnięcie 2 siekierek jednocześnie w 1 Darmowej Interakcji; zasięg rzutu siekierkami ×2; TT +1 przy walce dwiema siekierkami.",
+      "request": "Cross the TWO FOREARMS/WRISTS into an X at the lower center, while the TWO HATCHETS remain separate and UPRIGHT at upper-left and upper-right. The forearm from lower-left reaches the hand at upper-right; the forearm from lower-right reaches the hand at upper-left. Exactly two complete hands each grip one hatchet. Both straight axe handles stay nearly vertical, never crossing each other; blades face outward. Broad black overlap contour at the crossed arms, no extra limb, crossed axe heads or gore.",
+      "target": "icons/abilities/siekierezada.svg",
+      "catalogKey": "siekierezada",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/siekierezada_revision_b.png",
+          "note": "Cross the TWO FOREARMS/WRISTS into an X at the lower center, while the TWO HATCHETS remain separate and UPRIGHT at upper-left and upper-right. The forearm from lower-left reaches the hand at upper-right; the forearm from lower-right reaches the hand at upper-left. Exactly two complete hands each grip one hatchet. Both straight axe handles stay nearly vertical, never crossing each other; blades face outward. Broad black overlap contour at the crossed arms, no extra limb, crossed axe heads or gore."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Siekierezada",
+          "src": "candidates/batch-65/siekierezada.png",
+          "note": "Two adult hands hold TWO practical matching hatchets in crossed combat positions. Each hatchet has one straight short handle and one broad coherent axe head with cutting edge facing away from its user's hand. Exactly two hands and two hatchets; no third blade, ornate axes or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch65-szkolenie-w-broni",
+      "name": "Szkolenie w broni",
+      "tier": "Batch 65 · feat feature",
+      "context": "+1 SIŁ lub ZRC; biegłość w jednej wybranej kategorii broni.",
+      "request": "Remove ONLY the LOWEST supporting hand and its forearm from the selected knife-training icon. Keep the upper learner hand that firmly grips the knife, the upper instructor hand pointing toward the training post, and the complete solid post. Exactly TWO hands remain: one grips the knife, one points. No lower supporting wrist/stump, additional blade or other change.",
+      "target": "icons/abilities/szkolenie-w-broni.svg",
+      "catalogKey": "szkolenieWBroni",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/szkolenie-w-broni_revision_b.png",
+          "note": "Remove ONLY the LOWEST supporting hand and its forearm from the selected knife-training icon. Keep the upper learner hand that firmly grips the knife, the upper instructor hand pointing toward the training post, and the complete solid post. Exactly TWO hands remain: one grips the knife, one points. No lower supporting wrist/stump, additional blade or other change."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Szkolenie w broni",
+          "src": "candidates/batch-65/szkolenie-w-broni.png",
+          "note": "One learner's sturdy hands practice with a plain combat knife while an instructor's single guiding forearm points toward a solid training post. Clear knife blade, two learner hands and one instructor hand, no extra weapons, badges or text."
+        }
+      ]
+    },
+    {
+      "id": "batch66-szkolenie-w-srednim-pancerzu",
+      "name": "Szkolenie w średnim pancerzu",
+      "tier": "Batch 66 · feat feature",
+      "context": "+1 SIŁ lub KON; wyszkolenie w średnich pancerzach.",
+      "request": "One ordinary trainee secures a broad strap on a practical medium armour vest, with one hand pulling the strap and the other steadying it. Modest torso plates with flexible gaps and bare sleeve shoulders distinguish it from a massive heavy breastplate. Complete head-and-shoulder silhouette, two plausible hands, no ornate fantasy armour or floating shield.",
+      "target": "icons/abilities/szkolenie-w-srednim-pancerzu.svg",
+      "catalogKey": "szkolenieWSrednimPancerzu",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Szkolenie w średnim pancerzu",
+          "src": "candidates/batch-66/szkolenie-w-srednim-pancerzu.png",
+          "note": "One ordinary trainee secures a broad strap on a practical medium armour vest, with one hand pulling the strap and the other steadying it. Modest torso plates with flexible gaps and bare sleeve shoulders distinguish it from a massive heavy breastplate. Complete head-and-shoulder silhouette, two plausible hands, no ornate fantasy armour or floating shield."
+        }
+      ]
+    },
+    {
+      "id": "batch66-szturmowiec",
+      "name": "Szturmowiec",
+      "tier": "Batch 66 · feat feature",
+      "context": "Strzelanie krótkimi seriami (KS) w normalnym zasięgu bez Utrudnienia.",
+      "request": "One practical adult rifleman fires a controlled short burst while advancing in a compact standing stance. Two hands hold one ordinary assault rifle firmly, one small muzzle flash and two short restrained shot streaks. Complete head, arms and legs, no belt-fed heavy gun, cartoon soldier or tiny camouflage texture.",
+      "target": "icons/abilities/szturmowiec.svg",
+      "catalogKey": "szturmowiec",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Szturmowiec",
+          "src": "candidates/batch-66/szturmowiec.png",
+          "note": "One practical adult rifleman fires a controlled short burst while advancing in a compact standing stance. Two hands hold one ordinary assault rifle firmly, one small muzzle flash and two short restrained shot streaks. Complete head, arms and legs, no belt-fed heavy gun, cartoon soldier or tiny camouflage texture."
+        }
+      ]
+    },
+    {
+      "id": "batch66-szybki-bill",
+      "name": "Szybki Bill",
+      "tier": "Batch 66 · feat feature",
+      "context": "+1 ZRC lub KON; biegłość w Inicjatywie (+PB do Inicjatywy); Długie susy [B] — Bieganie w Akcji Bonusowej.",
+      "request": "One generic athletic wasteland survivor takes a long, fast running stride, one leg extended forward and the other trailing, arms pumping naturally. Exactly one complete human body with two arms, two legs and sturdy boots. Ordinary clothes, no recognizable western or film character, giant arrows or cape.",
+      "target": "icons/abilities/szybki-bill.svg",
+      "catalogKey": "szybkiBill",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Szybki Bill",
+          "src": "candidates/batch-66/szybki-bill.png",
+          "note": "One generic athletic wasteland survivor takes a long, fast running stride, one leg extended forward and the other trailing, arms pumping naturally. Exactly one complete human body with two arms, two legs and sturdy boots. Ordinary clothes, no recognizable western or film character, giant arrows or cape."
+        }
+      ]
+    },
+    {
+      "id": "batch66-ucz-sie-ucz",
+      "name": "Ucz się, ucz",
+      "tier": "Batch 66 · feat feature",
+      "context": "+1 dowolna Cecha; biegłość w 2 wybranych umiejętnościach.",
+      "request": "Two adult hands study an open practical manual on a simple desk beside one plain training tool. One hand holds a page, the other follows a broad blank diagram mark. Complete book, two hands and one small wrench; no readable writing, numbers, graduation cap, floating brain or giant cog.",
+      "target": "icons/abilities/ucz-sie-ucz.svg",
+      "catalogKey": "uczSieUcz",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Ucz się, ucz",
+          "src": "candidates/batch-66/ucz-sie-ucz.png",
+          "note": "Two adult hands study an open practical manual on a simple desk beside one plain training tool. One hand holds a page, the other follows a broad blank diagram mark. Complete book, two hands and one small wrench; no readable writing, numbers, graduation cap, floating brain or giant cog."
+        }
+      ]
+    },
+    {
+      "id": "batch66-ukryty-cel",
+      "name": "Ukryty cel",
+      "tier": "Batch 66 · feat feature",
+      "context": "Ignorujesz osłonę ½ i ¾ celu; ignorujesz Utrudnienie z akcji Unikanie.",
+      "request": "One anonymous rifleman aims past the edge of a broad broken cover slab toward one partially exposed opposing head-and-shoulder silhouette. The barrel clears the slab's edge; the target's head and one shoulder emerge beyond it. Two separate coherent figures, one rifle and one cover block, no crosshair overlay, transparency, labels or gore.",
+      "target": "icons/abilities/ukryty-cel.svg",
+      "catalogKey": "ukrytyCel",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Ukryty cel",
+          "src": "candidates/batch-66/ukryty-cel.png",
+          "note": "One anonymous rifleman aims past the edge of a broad broken cover slab toward one partially exposed opposing head-and-shoulder silhouette. The barrel clears the slab's edge; the target's head and one shoulder emerge beyond it. Two separate coherent figures, one rifle and one cover block, no crosshair overlay, transparency, labels or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch66-wrestler",
+      "name": "Wrestler",
+      "tier": "Batch 66 · feat feature",
+      "context": "+1 SIŁ; Ułatwienie do Testów Ataku wobec Pochwyconego; Duszenie (zamiast ataku — 1 + mod. SIŁ obrażeń obuchowych); Rzut na matę (Pochwycony duży lub mniejszy, z Utrudnieniem → Powalenie).",
+      "request": "Two ordinary adult fighters in one anatomically coherent standing wrestling hold: one firmly controls the opponent's upper body from behind, two visible forearms wrap around the torso without covering the neck. The opponent bends forward and braces with two hands. Two complete heads and believable connected limbs; no extra hand, duplicated torso, ring ropes, franchise character or gore.",
+      "target": "icons/abilities/wrestler.svg",
+      "catalogKey": "wrestler",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Wrestler",
+          "src": "candidates/batch-66/wrestler.png",
+          "note": "Two ordinary adult fighters in one anatomically coherent standing wrestling hold: one firmly controls the opponent's upper body from behind, two visible forearms wrap around the torso without covering the neck. The opponent bends forward and braces with two hands. Two complete heads and believable connected limbs; no extra hand, duplicated torso, ring ropes, franchise character or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch66-zlomiarz",
+      "name": "Złomiarz",
+      "tier": "Batch 66 · feat feature",
+      "context": "+1 INT lub MDR; Ułatwienie w Testach Śledztwa przy wycenianiu przedmiotów; Ułatwienie w Testach MDR/INT podczas szabrowania.",
+      "request": "One practical salvager crouches beside a small tray of metal scrap and examines one useful alternator-like component with two hands. Clear head, two hands, one large useful part and three broad scrap shapes. Plain worn work clothes, no giant generic cog, unreadable clutter, value labels or coins.",
+      "target": "icons/abilities/zlomiarz.svg",
+      "catalogKey": "zlomiarz",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Złomiarz",
+          "src": "candidates/batch-66/zlomiarz.png",
+          "note": "One practical salvager crouches beside a small tray of metal scrap and examines one useful alternator-like component with two hands. Clear head, two hands, one large useful part and three broad scrap shapes. Plain worn work clothes, no giant generic cog, unreadable clutter, value labels or coins."
+        }
+      ]
+    }
+  ]
+}

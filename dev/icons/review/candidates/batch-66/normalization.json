@@ -1,0 +1,82 @@
+[
+  {
+    "key": "barbarka_revision_c",
+    "source": "raw/batch-66-atlas-a.png, cell 1",
+    "removedTinyPixels": 5
+  },
+  {
+    "key": "mistrz-walki-wrecz_revision_c",
+    "source": "raw/batch-66-atlas-a.png, cell 2",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "padnij-powstan_revision_b",
+    "source": "raw/batch-66-atlas-a.png, cell 3",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "pancerny_revision_b",
+    "source": "raw/batch-66-atlas-a.png, cell 4",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "pan-plaster_revision_b",
+    "source": "raw/batch-66-atlas-a.png, cell 5",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "pierwotny-instynkt_revision_b",
+    "source": "raw/batch-66-atlas-a.png, cell 6",
+    "removedTinyPixels": 16
+  },
+  {
+    "key": "siekierezada_revision_b",
+    "source": "raw/batch-66-atlas-a.png, cell 7",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "szkolenie-w-broni_revision_b",
+    "source": "raw/batch-66-atlas-a.png, cell 8",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "bebeszenie_revision_e",
+    "source": "raw/standalone-bebeszenie_revision_e.png",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "szkolenie-w-srednim-pancerzu",
+    "source": "raw/batch-66-atlas-b.png, cell 1",
+    "removedTinyPixels": 5
+  },
+  {
+    "key": "szturmowiec",
+    "source": "raw/batch-66-atlas-b.png, cell 2",
+    "removedTinyPixels": 8
+  },
+  {
+    "key": "szybki-bill",
+    "source": "raw/batch-66-atlas-b.png, cell 3",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "ucz-sie-ucz",
+    "source": "raw/batch-66-atlas-b.png, cell 4",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "ukryty-cel",
+    "source": "raw/batch-66-atlas-b.png, cell 5",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "wrestler",
+    "source": "raw/batch-66-atlas-b.png, cell 6",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "zlomiarz",
+    "source": "raw/batch-66-atlas-b.png, cell 7",
+    "removedTinyPixels": 42
+  }
+]

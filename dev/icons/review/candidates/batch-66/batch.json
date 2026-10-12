@@ -1,0 +1,140 @@
+{
+  "batch": 66,
+  "date": "2026-10-12",
+  "revisions": [
+    {
+      "itemId": "batch64-barbarka",
+      "key": "barbarka_revision_c",
+      "atlas": "a",
+      "request": "Raise the LEFT attacker's head relative to the right victim by about one-third of a head height, until the center of the attacker's FOREHEAD just above his eyebrows contacts the RIGHT victim's NOSE bridge/tip. Forehead-to-nose is the ONLY contact point, never jaw, chin or forehead-to-forehead. Keep the left attacker leaning forward, right victim recoiling, two asymmetric complete head profiles and one small impact mark at the victim's nose. No gore."
+    },
+    {
+      "itemId": "batch64-mistrz-walki-wrecz",
+      "key": "mistrz-walki-wrecz_revision_c",
+      "atlas": "a",
+      "request": "Keep the exact two-forearm, two-hand wrist-grapple pose. Remove ONLY the unnecessary BLACK LINE across the lower gripping hand's wrist, so that hand joins its own forearm in ONE CONTINUOUS WHITE silhouette. Retain the useful separation of the opponent's wrist from the gripping fingers. No severed wrist, bracelet/seam at that wrist, extra hand or altered grip."
+    },
+    {
+      "itemId": "batch65-padnij-powstan",
+      "key": "padnij-powstan_revision_b",
+      "atlas": "a",
+      "request": "Keep the rising survivor's kneeling-to-standing pose and whole body. ADD two simple broad directional arrows: a DOWNWARD arrow beside the left shoulder toward the ground indicates dropping prone, and an UPWARD arrow beside the right shoulder indicates immediately getting up. Each arrow has one clear arrowhead and one short shaft, separated from the person. These arrows are explicitly requested; no duplicate ghost bodies, labels or decorative symbols."
+    },
+    {
+      "itemId": "batch65-pancerny",
+      "key": "pancerny_revision_b",
+      "atlas": "a",
+      "request": "Keep the broad heavy armour breastplate and shoulder guards. Replace the straight impact marks with ONE round projectile ricocheting off the outer plate. Show an incoming diagonal path from upper-right toward the armour, then an outgoing path toward lower-right away from the SAME contact point: a clearly angled V/corner bounce, no straight I-shaped trajectory through the armour. Put the round ball on the outgoing path, one small contact burst on the plate, no penetration, shield, blood or text."
+    },
+    {
+      "itemId": "batch65-pan-plaster",
+      "key": "pan-plaster_revision_b",
+      "atlas": "a",
+      "request": "Redraw from a slightly elevated three-quarter perspective so the PATIENT'S complete forearm, wrist and HAND remain visible. The forearm lies diagonally across the center; the patient's open hand with all five fingers is fully visible toward upper-right, naturally connected to the wrist. Two separate medic hands approach from lower-left and apply one broad dressing to the forearm. Keep a small open first-aid pouch below. Exactly three hands total, no amputated wrist, missing patient hand, merged glove, injury or blood."
+    },
+    {
+      "itemId": "batch65-pierwotny-instynkt",
+      "key": "pierwotny-instynkt_revision_b",
+      "atlas": "a",
+      "request": "Keep the alert head turn, ready forearm and broad disturbance arcs. Replace the anime-like young face and spiky hair with a rugged MIDDLE-AGED adult survivor in a sober western utilitarian stencil style: close-cropped hair, realistic small watchful eye, firm brow, square natural jaw and restrained stubble. No manga/anime eyes, glossy hair spikes, cute youthful face, supernatural halo or exaggerated cartoon features."
+    },
+    {
+      "itemId": "batch65-siekierezada",
+      "key": "siekierezada_revision_b",
+      "atlas": "a",
+      "request": "Cross the TWO FOREARMS/WRISTS into an X at the lower center, while the TWO HATCHETS remain separate and UPRIGHT at upper-left and upper-right. The forearm from lower-left reaches the hand at upper-right; the forearm from lower-right reaches the hand at upper-left. Exactly two complete hands each grip one hatchet. Both straight axe handles stay nearly vertical, never crossing each other; blades face outward. Broad black overlap contour at the crossed arms, no extra limb, crossed axe heads or gore."
+    },
+    {
+      "itemId": "batch65-szkolenie-w-broni",
+      "key": "szkolenie-w-broni_revision_b",
+      "atlas": "a",
+      "request": "Remove ONLY the LOWEST supporting hand and its forearm from the selected knife-training icon. Keep the upper learner hand that firmly grips the knife, the upper instructor hand pointing toward the training post, and the complete solid post. Exactly TWO hands remain: one grips the knife, one points. No lower supporting wrist/stump, additional blade or other change."
+    },
+    {
+      "itemId": "batch62-bebeszenie",
+      "key": "bebeszenie_revision_e",
+      "atlas": "a",
+      "isolated": true,
+      "request": "Completely regenerate as an ISOLATED glyph with no defective prior image supplied. One intact real pair of combination pliers crosses one butcher knife below a simple rib outline. Both pliers handles must be fully visible, straight, continuous and symmetric below the pivot, pointing down at a small angle; neither handle may bend 90 degrees or join the knife. Two coherent jaws above one pivot. No animal skull, additional tool, hand or gore."
+    }
+  ],
+  "fresh": [
+    {
+      "key": "szkolenie-w-srednim-pancerzu",
+      "catalogKey": "szkolenieWSrednimPancerzu",
+      "name": "Szkolenie w średnim pancerzu",
+      "request": "One ordinary trainee secures a broad strap on a practical medium armour vest, with one hand pulling the strap and the other steadying it. Modest torso plates with flexible gaps and bare sleeve shoulders distinguish it from a massive heavy breastplate. Complete head-and-shoulder silhouette, two plausible hands, no ornate fantasy armour or floating shield.",
+      "context": "+1 SIŁ lub KON; wyszkolenie w średnich pancerzach.",
+      "kind": "feat",
+      "atlas": "b",
+      "target": "icons/abilities/szkolenie-w-srednim-pancerzu.svg",
+      "itemId": "batch66-szkolenie-w-srednim-pancerzu"
+    },
+    {
+      "key": "szturmowiec",
+      "catalogKey": "szturmowiec",
+      "name": "Szturmowiec",
+      "request": "One practical adult rifleman fires a controlled short burst while advancing in a compact standing stance. Two hands hold one ordinary assault rifle firmly, one small muzzle flash and two short restrained shot streaks. Complete head, arms and legs, no belt-fed heavy gun, cartoon soldier or tiny camouflage texture.",
+      "context": "Strzelanie krótkimi seriami (KS) w normalnym zasięgu bez Utrudnienia.",
+      "kind": "feat",
+      "atlas": "b",
+      "target": "icons/abilities/szturmowiec.svg",
+      "itemId": "batch66-szturmowiec"
+    },
+    {
+      "key": "szybki-bill",
+      "catalogKey": "szybkiBill",
+      "name": "Szybki Bill",
+      "request": "One generic athletic wasteland survivor takes a long, fast running stride, one leg extended forward and the other trailing, arms pumping naturally. Exactly one complete human body with two arms, two legs and sturdy boots. Ordinary clothes, no recognizable western or film character, giant arrows or cape.",
+      "context": "+1 ZRC lub KON; biegłość w Inicjatywie (+PB do Inicjatywy); Długie susy [B] — Bieganie w Akcji Bonusowej.",
+      "kind": "feat",
+      "atlas": "b",
+      "target": "icons/abilities/szybki-bill.svg",
+      "itemId": "batch66-szybki-bill"
+    },
+    {
+      "key": "ucz-sie-ucz",
+      "catalogKey": "uczSieUcz",
+      "name": "Ucz się, ucz",
+      "request": "Two adult hands study an open practical manual on a simple desk beside one plain training tool. One hand holds a page, the other follows a broad blank diagram mark. Complete book, two hands and one small wrench; no readable writing, numbers, graduation cap, floating brain or giant cog.",
+      "context": "+1 dowolna Cecha; biegłość w 2 wybranych umiejętnościach.",
+      "kind": "feat",
+      "atlas": "b",
+      "target": "icons/abilities/ucz-sie-ucz.svg",
+      "itemId": "batch66-ucz-sie-ucz"
+    },
+    {
+      "key": "ukryty-cel",
+      "catalogKey": "ukrytyCel",
+      "name": "Ukryty cel",
+      "request": "One anonymous rifleman aims past the edge of a broad broken cover slab toward one partially exposed opposing head-and-shoulder silhouette. The barrel clears the slab's edge; the target's head and one shoulder emerge beyond it. Two separate coherent figures, one rifle and one cover block, no crosshair overlay, transparency, labels or gore.",
+      "context": "Ignorujesz osłonę ½ i ¾ celu; ignorujesz Utrudnienie z akcji Unikanie.",
+      "kind": "feat",
+      "atlas": "b",
+      "target": "icons/abilities/ukryty-cel.svg",
+      "itemId": "batch66-ukryty-cel"
+    },
+    {
+      "key": "wrestler",
+      "catalogKey": "wrestler",
+      "name": "Wrestler",
+      "request": "Two ordinary adult fighters in one anatomically coherent standing wrestling hold: one firmly controls the opponent's upper body from behind, two visible forearms wrap around the torso without covering the neck. The opponent bends forward and braces with two hands. Two complete heads and believable connected limbs; no extra hand, duplicated torso, ring ropes, franchise character or gore.",
+      "context": "+1 SIŁ; Ułatwienie do Testów Ataku wobec Pochwyconego; Duszenie (zamiast ataku — 1 + mod. SIŁ obrażeń obuchowych); Rzut na matę (Pochwycony duży lub mniejszy, z Utrudnieniem → Powalenie).",
+      "kind": "feat",
+      "atlas": "b",
+      "target": "icons/abilities/wrestler.svg",
+      "itemId": "batch66-wrestler"
+    },
+    {
+      "key": "zlomiarz",
+      "catalogKey": "zlomiarz",
+      "name": "Złomiarz",
+      "request": "One practical salvager crouches beside a small tray of metal scrap and examines one useful alternator-like component with two hands. Clear head, two hands, one large useful part and three broad scrap shapes. Plain worn work clothes, no giant generic cog, unreadable clutter, value labels or coins.",
+      "context": "+1 INT lub MDR; Ułatwienie w Testach Śledztwa przy wycenianiu przedmiotów; Ułatwienie w Testach MDR/INT podczas szabrowania.",
+      "kind": "feat",
+      "atlas": "b",
+      "target": "icons/abilities/zlomiarz.svg",
+      "itemId": "batch66-zlomiarz"
+    }
+  ]
+}

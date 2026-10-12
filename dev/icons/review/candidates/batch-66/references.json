@@ -1,0 +1,83 @@
+[
+  {
+    "itemId": "batch64-barbarka",
+    "atlas": "a",
+    "cell": 1,
+    "candidateId": "batch65-revision",
+    "source": "candidates/batch-65/barbarka_revision_b.png",
+    "feedback": "Close - now the man on the left is hitting the jaw. Adjust their relative heights so the contact is FOREHEAD ON NOSE (left on right)",
+    "suppliedToGenerator": true
+  },
+  {
+    "itemId": "batch64-mistrz-walki-wrecz",
+    "atlas": "a",
+    "cell": 2,
+    "candidateId": "batch65-revision",
+    "source": "candidates/batch-65/mistrz-walki-wrecz_revision_b.png",
+    "feedback": "There's an unnecesary line separating the wrist of the lower hand",
+    "suppliedToGenerator": true
+  },
+  {
+    "itemId": "batch65-padnij-powstan",
+    "atlas": "a",
+    "cell": 3,
+    "candidateId": "atlas-b",
+    "source": "candidates/batch-65/padnij-powstan.png",
+    "feedback": "Add arrows indicating that the character just went prone and is now standing up",
+    "suppliedToGenerator": true
+  },
+  {
+    "itemId": "batch65-pancerny",
+    "atlas": "a",
+    "cell": 4,
+    "candidateId": "atlas-b",
+    "source": "candidates/batch-65/pancerny.png",
+    "feedback": "The image should show the ball reflecting off the armor, in a V-like fashion, not an I-like way",
+    "suppliedToGenerator": true
+  },
+  {
+    "itemId": "batch65-pan-plaster",
+    "atlas": "a",
+    "cell": 5,
+    "candidateId": "atlas-b",
+    "source": "candidates/batch-65/pan-plaster.png",
+    "feedback": "The rest of the bandaged hand disappears. Redraw the image from a slightly different perspective.",
+    "suppliedToGenerator": true
+  },
+  {
+    "itemId": "batch65-pierwotny-instynkt",
+    "atlas": "a",
+    "cell": 6,
+    "candidateId": "atlas-b",
+    "source": "candidates/batch-65/pierwotny-instynkt.png",
+    "feedback": "Slightly too anime-like",
+    "suppliedToGenerator": true
+  },
+  {
+    "itemId": "batch65-siekierezada",
+    "atlas": "a",
+    "cell": 7,
+    "candidateId": "atlas-c",
+    "source": "candidates/batch-65/siekierezada.png",
+    "feedback": "It's the hands that should cross, not the axes. ",
+    "suppliedToGenerator": true
+  },
+  {
+    "itemId": "batch65-szkolenie-w-broni",
+    "atlas": "a",
+    "cell": 8,
+    "candidateId": "atlas-c",
+    "source": "candidates/batch-65/szkolenie-w-broni.png",
+    "feedback": "Remove the lower hand",
+    "suppliedToGenerator": true
+  },
+  {
+    "itemId": "batch62-bebeszenie",
+    "atlas": "a",
+    "cell": 9,
+    "candidateId": "batch65-revision",
+    "source": "candidates/batch-65/bebeszenie_revision_d.png",
+    "feedback": "Same error - again - the pliers have one handle straight, the second at a 90 degree angle. ",
+    "suppliedToGenerator": false
+  }
+]

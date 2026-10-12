@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-12",
+  "reviewItems": 332,
+  "resolvedReviewItems": 305,
+  "activeReviewItems": 27,
+  "canonical": {
+    "origin": {
+      "total": 36,
+      "dedicatedFiles": 34,
+      "unresolvedReview": 2,
+      "unqueuedGaps": 0
+    },
+    "feat": {
+      "total": 53,
+      "dedicatedFiles": 23,
+      "unresolvedReview": 23,
+      "unqueuedGaps": 7
+    }
+  }
+}

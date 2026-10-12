@@ -1,0 +1,23 @@
+{
+  "date": "2026-10-12",
+  "phase": "after Batch 65 installations, before Batch 66 registration",
+  "resolvedReviewItems": 323,
+  "activeReviewItems": 9,
+  "unqueuedCanonicalGaps": 7,
+  "knownIconBacklog": 339,
+  "approximateCompletedPercent": 95,
+  "canonical": {
+    "origin": {
+      "total": 36,
+      "dedicatedFiles": 36,
+      "unresolvedReview": 0,
+      "unqueuedGaps": 0
+    },
+    "feat": {
+      "total": 53,
+      "dedicatedFiles": 38,
+      "unresolvedReview": 8,
+      "unqueuedGaps": 7
+    }
+  }
+}
