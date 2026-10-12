@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-12",
+  "active": [
+    {
+      "id": "batch62-bebeszenie",
+      "name": "Bebeszenie",
+      "tier": "Batch 62 · M5",
+      "decision": "revise",
+      "candidateId": "batch66-revision",
+      "selectedSource": "candidates/batch-66/bebeszenie_revision_e.png",
+      "target": "icons/actions/bebeszenie.svg",
+      "catalogKey": null,
+      "notes": "Now the composition is awkward, with a tiny little ribcage above large pliers and a knife. My suggestion is to split all three elements - no more crossing. Butcher's knife, ribcage, small lightning splitting the image, stack of PCBs, pliers",
+      "context": "M5 player action button; toolbar/item-sheet use at small sizes.",
+      "request": "Completely regenerate as an ISOLATED glyph with no defective prior image supplied. One intact real pair of combination pliers crosses one butcher knife below a simple rib outline. Both pliers handles must be fully visible, straight, continuous and symmetric below the pivot, pointing down at a small angle; neither handle may bend 90 degrees or join the knife. Two coherent jaws above one pivot. No animal skull, additional tool, hand or gore."
+    },
+    {
+      "id": "batch65-pan-plaster",
+      "name": "Pan Plaster",
+      "tier": "Batch 65 · feat feature",
+      "decision": "revise",
+      "candidateId": "batch66-revision",
+      "selectedSource": "candidates/batch-66/pan-plaster_revision_b.png",
+      "target": "icons/abilities/pan-plaster.svg",
+      "catalogKey": "panPlaster",
+      "notes": "Rotate the hand being bandaged by 90 degrees left (so it is opposite diagonal). Do not modify the pair of hands performing the medical procedure.",
+      "context": "+1 MDR lub INT; narzędzia małego medyka rzucają dodatkową kostkę PW; połowa dawki leku zaspokaja dzienne zapotrzebowanie.",
+      "request": "Redraw from a slightly elevated three-quarter perspective so the PATIENT'S complete forearm, wrist and HAND remain visible. The forearm lies diagonally across the center; the patient's open hand with all five fingers is fully visible toward upper-right, naturally connected to the wrist. Two separate medic hands approach from lower-left and apply one broad dressing to the forearm. Keep a small open first-aid pouch below. Exactly three hands total, no amputated wrist, missing patient hand, merged glove, injury or blood."
+    },
+    {
+      "id": "batch65-pierwotny-instynkt",
+      "name": "Pierwotny instynkt",
+      "tier": "Batch 65 · feat feature",
+      "decision": "revise",
+      "candidateId": "batch66-revision",
+      "selectedSource": "candidates/batch-66/pierwotny-instynkt_revision_b.png",
+      "target": "icons/abilities/pierwotny-instynkt.svg",
+      "catalogKey": "pierwotnyInstynkt",
+      "notes": "Okay better, but now the lines of the face have too much detail. Keep the expression, simplify the lines.",
+      "context": "+5 do Inicjatywy; +5 do Testów Percepcji.",
+      "request": "Keep the alert head turn, ready forearm and broad disturbance arcs. Replace the anime-like young face and spiky hair with a rugged MIDDLE-AGED adult survivor in a sober western utilitarian stencil style: close-cropped hair, realistic small watchful eye, firm brow, square natural jaw and restrained stubble. No manga/anime eyes, glossy hair spikes, cute youthful face, supernatural halo or exaggerated cartoon features."
+    },
+    {
+      "id": "batch66-szybki-bill",
+      "name": "Szybki Bill",
+      "tier": "Batch 66 · feat feature",
+      "decision": "revise",
+      "candidateId": "atlas-b",
+      "selectedSource": "candidates/batch-66/szybki-bill.png",
+      "target": "icons/abilities/szybki-bill.svg",
+      "catalogKey": "szybkiBill",
+      "notes": "Add lines to the left of the character showing how fast he is",
+      "context": "+1 ZRC lub KON; biegłość w Inicjatywie (+PB do Inicjatywy); Długie susy [B] — Bieganie w Akcji Bonusowej.",
+      "request": "One generic athletic wasteland survivor takes a long, fast running stride, one leg extended forward and the other trailing, arms pumping naturally. Exactly one complete human body with two arms, two legs and sturdy boots. Ordinary clothes, no recognizable western or film character, giant arrows or cape."
+    },
+    {
+      "id": "batch66-ucz-sie-ucz",
+      "name": "Ucz się, ucz",
+      "tier": "Batch 66 · feat feature",
+      "decision": "revise",
+      "candidateId": "atlas-b",
+      "selectedSource": "candidates/batch-66/ucz-sie-ucz.png",
+      "target": "icons/abilities/ucz-sie-ucz.svg",
+      "catalogKey": "uczSieUcz",
+      "notes": "Remove the wrench. Add abstract lines symbolizing text on the left page. No readable writing.",
+      "context": "+1 dowolna Cecha; biegłość w 2 wybranych umiejętnościach.",
+      "request": "Two adult hands study an open practical manual on a simple desk beside one plain training tool. One hand holds a page, the other follows a broad blank diagram mark. Complete book, two hands and one small wrench; no readable writing, numbers, graduation cap, floating brain or giant cog."
+    },
+    {
+      "id": "batch66-ukryty-cel",
+      "name": "Ukryty cel",
+      "tier": "Batch 66 · feat feature",
+      "decision": "revise",
+      "candidateId": "atlas-b",
+      "selectedSource": "candidates/batch-66/ukryty-cel.png",
+      "target": "icons/abilities/ukryty-cel.svg",
+      "catalogKey": "ukrytyCel",
+      "notes": "Put distance between the shooter and the target. Show the shot going through the cover and hitting the figure behind it.",
+      "context": "Ignorujesz osłonę ½ i ¾ celu; ignorujesz Utrudnienie z akcji Unikanie.",
+      "request": "One anonymous rifleman aims past the edge of a broad broken cover slab toward one partially exposed opposing head-and-shoulder silhouette. The barrel clears the slab's edge; the target's head and one shoulder emerge beyond it. Two separate coherent figures, one rifle and one cover block, no crosshair overlay, transparency, labels or gore."
+    }
+  ]
+}

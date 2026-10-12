@@ -1,0 +1,47 @@
+[
+  {
+    "key": "bebeszenie_revision_f",
+    "source": "raw/batch-67-atlas-a.png, cell 1",
+    "removedTinyPixels": 68
+  },
+  {
+    "key": "pan-plaster_revision_c",
+    "source": "raw/standalone-pan-plaster_revision_c.png",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "pierwotny-instynkt_revision_c",
+    "source": "raw/batch-67-atlas-a.png, cell 3",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "szybki-bill_revision_b",
+    "source": "raw/batch-67-atlas-a.png, cell 4",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "ucz-sie-ucz_revision_b",
+    "source": "raw/batch-67-atlas-a.png, cell 5",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "ukryty-cel_revision_b",
+    "source": "raw/batch-67-atlas-a.png, cell 6",
+    "removedTinyPixels": 7
+  },
+  {
+    "key": "paliwo_dobre",
+    "source": "raw/batch-67-atlas-a.png, cell 7",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "paliwo_przecietne",
+    "source": "raw/batch-67-atlas-a.png, cell 8",
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "paliwo_chrzczone",
+    "source": "raw/batch-67-atlas-a.png, cell 9",
+    "removedTinyPixels": 0
+  }
+]

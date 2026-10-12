@@ -1,0 +1,1366 @@
+{
+  "date": "2026-10-12",
+  "catalog": [
+    {
+      "kind": "origin",
+      "key": "nowka-sztuka",
+      "label": "Nówka sztuka",
+      "text": "Zabierasz z bunkra 1 dowolny przedmiot warty maks. 100 gb.",
+      "origin": "asgard",
+      "proposed": "icons/abilities/nowka-sztuka.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/nowka-sztuka.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch61-nowka-sztuka"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "przedwojenna-edukacja",
+      "label": "Przedwojenna edukacja",
+      "text": "Ułatwienie w Testach INT dot. wiedzy sprzed Molocha + biegłość w 1 zestawie narzędzi.",
+      "origin": "asgard",
+      "proposed": "icons/abilities/przedwojenna-edukacja.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/przedwojenna-edukacja.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch61-przedwojenna-edukacja"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "nano-tech",
+      "label": "Nano-Tech",
+      "text": "Ułatwienie przy konstruowaniu/naprawianiu urządzeń elektronicznych + biegłość w narzędziach małego elektronika.",
+      "origin": "asgard",
+      "proposed": "icons/abilities/nano-tech.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/nano-tech.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch61-nano-tech"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "dieta-cud",
+      "label": "Dieta cud",
+      "text": "Potrzebujesz tylko 1 l wody i 250 g jedzenia dziennie; środki lecznicze przywracają 2× więcej PW + biegłość m. kucharz.",
+      "origin": "czlowiek-pustyni",
+      "proposed": "icons/abilities/dieta-cud.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/dieta-cud.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch61-dieta-cud"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "duch-pustyni",
+      "label": "Duch pustyni",
+      "text": "Ułatwienie do Skradania się i Survivalu na pustyni i piaszczystym terenie.",
+      "origin": "czlowiek-pustyni",
+      "proposed": "icons/abilities/duch-pustyni.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/duch-pustyni.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch61-duch-pustyni"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "polegam-tylko-na-sobie",
+      "label": "Polegam tylko na sobie",
+      "text": "Biegłość m. kowal; własnoręcznie wykonana broń biała/miotana: +1 do Testów Ataku i obrażeń.",
+      "origin": "czlowiek-pustyni",
+      "proposed": "icons/abilities/polegam-tylko-na-sobie.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/polegam-tylko-na-sobie.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch61-polegam-tylko-na-sobie"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "siodme-poty",
+      "label": "Siódme poty",
+      "text": "Biegłość w Pojazdach; pojazdy którymi jeździsz poruszają się o 50% szybciej.",
+      "origin": "detroit",
+      "proposed": "icons/abilities/siodme-poty.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/siodme-poty.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch60-siodme-poty"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "jesli-ma-silnik-to-ruszy",
+      "label": "Jeśli ma silnik, to ruszy",
+      "text": "Ułatwienie przy konstruowaniu/naprawianiu pojazdów + biegłość m. mechanik.",
+      "origin": "detroit",
+      "proposed": "icons/abilities/jesli-ma-silnik-to-ruszy.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/jesli-ma-silnik-to-ruszy.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch60-jesli-ma-silnik-to-ruszy"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "ale-jazda",
+      "label": "Ale jazda!",
+      "text": "Brak Utrudnienia do Testów Ataku przy strzelaniu z jadącego pojazdu / wierzchowca / podczas spadania.",
+      "origin": "detroit",
+      "proposed": "icons/abilities/ale-jazda.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/ale-jazda.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch61-ale-jazda"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "gornik-z-dziada-pradziada",
+      "label": "Górnik z dziada pradziada",
+      "text": "Ułatwienie w Testach SIŁ (Atletyka) + Udźwig ×2.",
+      "origin": "appalachy",
+      "proposed": "icons/abilities/gornik-z-dziada-pradziada.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/gornik-z-dziada-pradziada.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch61-gornik-z-dziada-pradziada"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "wychuchana-spluwa",
+      "label": "Wychuchana spluwa",
+      "text": "Wybrany egzemplarz broni palnej nigdy się nie zatnie; można zmienić po Długim odpoczynku + biegłość m. rusznikarz.",
+      "origin": "appalachy",
+      "proposed": "icons/abilities/wychuchana-spluwa.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/wychuchana-spluwa.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch60-wychuchana-spluwa"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "szlachetne-urodzenie",
+      "label": "Szlachetne urodzenie",
+      "text": "2 biegłości z listy: Historia, Oszustwo, Perswazja, Zastraszanie.",
+      "origin": "appalachy",
+      "proposed": "icons/abilities/szlachetne-urodzenie.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/szlachetne-urodzenie.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch61-szlachetne-urodzenie"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "czlowiek-aligator",
+      "label": "Człowiek-aligator",
+      "text": "Szybkość pływania = bazowa Szybkość.",
+      "origin": "miami",
+      "proposed": "icons/abilities/czlowiek-aligator.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/czlowiek-aligator.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch61-czlowiek-aligator"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "ja-juz-swoje-odchorowalem",
+      "label": "Ja już swoje odchorowałem",
+      "text": "Ułatwienie w Rzutach Obronnych na Kondycję.",
+      "origin": "miami",
+      "proposed": "icons/abilities/ja-juz-swoje-odchorowalem.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/ja-juz-swoje-odchorowalem.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch60-ja-juz-swoje-odchorowalem"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "wloczykij",
+      "label": "Włóczykij",
+      "text": "Podmokłe tereny i rozległe piaski to nie trudny teren + biegłość m. kartograf.",
+      "origin": "miami",
+      "proposed": "icons/abilities/wloczykij.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/wloczykij.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch61-wloczykij"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "cos-mi-tu-smierdzi",
+      "label": "Coś mi tu śmierdzi",
+      "text": "Automatyczne wyczucie mutantów w zasięgu 9 m; Test Percepcji ST 15 → wskazanie konkretnej istoty.",
+      "origin": "missisipi",
+      "proposed": "icons/abilities/cos-mi-tu-smierdzi.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/cos-mi-tu-smierdzi.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch60-cos-mi-tu-smierdzi"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "kwas-w-zylach",
+      "label": "Kwas w żyłach",
+      "text": "Ułatwienie w RO przeciw truciznom i kwasom.",
+      "origin": "missisipi",
+      "proposed": "icons/abilities/kwas-w-zylach.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/kwas-w-zylach.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch63-kwas-w-zylach"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "chodzmy-na-pewno-juz-utonal",
+      "label": "Chodźmy, na pewno już utonął",
+      "text": "Wstrzymanie oddechu 2 min × mod. KON; Ułatwienie w Testach SIŁ (Atletyka) przy pływaniu.",
+      "origin": "missisipi",
+      "proposed": "icons/abilities/chodzmy-na-pewno-juz-utonal.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/chodzmy-na-pewno-juz-utonal.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch63-chodzmy-na-pewno-juz-utonal"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "edukacja",
+      "label": "Edukacja",
+      "text": "2 biegłości z listy: Przyroda, Medycyna, Historia, Technika, dowolne narzędzia.",
+      "origin": "nowy-jork",
+      "proposed": "icons/abilities/edukacja.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/edukacja.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch63-edukacja"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "gambling-we-krwi",
+      "label": "Gambling we krwi",
+      "text": "Nigdy nie męczysz się gamblingiem; +5% do dostępności towarów.",
+      "origin": "nowy-jork",
+      "proposed": "icons/abilities/gambling-we-krwi.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/gambling-we-krwi.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch63-gambling-we-krwi"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "czas-patriotow",
+      "label": "Czas patriotów",
+      "text": "1×/Długi Odpoczynek: +5 do dowolnego Testu Cechy lub Rzutu Obronnego.",
+      "origin": "nowy-jork",
+      "proposed": "icons/abilities/czas-patriotow.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/czas-patriotow.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch60-czas-patriotow"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "urodzony-morderca",
+      "label": "Urodzony morderca",
+      "text": "Jeśli na kości obrażeń wypadnie 1, możesz raz powtórzyć rzut tą kością.",
+      "origin": "hegemonia",
+      "proposed": "icons/abilities/urodzony-morderca.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/urodzony-morderca.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch60-urodzony-morderca"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "zjadlem-wlasnego-psa",
+      "label": "Wiesz, zjadłem własnego psa",
+      "text": "Biegłość w Zastraszaniu + Ułatwienie w Testach Zastraszania + biegłość m. rzeźnik.",
+      "origin": "hegemonia",
+      "proposed": "icons/abilities/zjadlem-wlasnego-psa.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/zjadlem-wlasnego-psa.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch63-zjadlem-wlasnego-psa"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "zawziety-sukinkot",
+      "label": "Zawzięty sukinkot",
+      "text": "1×/Długi Odpoczynek: gdy PW → 0, na początku następnej tury wstajesz z 1 PW i przeprowadzasz turę normalnie.",
+      "origin": "hegemonia",
+      "proposed": "icons/abilities/zawziety-sukinkot.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/zawziety-sukinkot.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch60-zawziety-sukinkot"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "na-symulatorach-to-dzialalo",
+      "label": "Na symulatorach to działało",
+      "text": "2 biegłości z listy: Pojazdy, Technika, m. mechanik, m. elektronik.",
+      "origin": "posterunek",
+      "proposed": "icons/abilities/na-symulatorach-to-dzialalo.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/na-symulatorach-to-dzialalo.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch61-na-symulatorach-to-dzialalo"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "hi-tech",
+      "label": "Hi-Tech",
+      "text": "Ułatwienie do każdego Testu Cechy związanego z obsługą urządzenia elektronicznego.",
+      "origin": "posterunek",
+      "proposed": "icons/abilities/hi-tech.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/hi-tech.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch63-hi-tech"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "moloch-cos-slyszalem",
+      "label": "Moloch? Coś słyszałem",
+      "text": "Ułatwienie w Testach INT o maszynach Molocha + Ułatwienie w RO przeciw ich zdolnościom i atakom obszarowym.",
+      "origin": "posterunek",
+      "proposed": "icons/abilities/moloch-cos-slyszalem.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/moloch-cos-slyszalem.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch63-moloch-cos-slyszalem"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "cholerny-kaznodzieja",
+      "label": "Cholerny kaznodzieja",
+      "text": "Biegłość w Perswazji + Ułatwienie przy przekonywaniu do wiary; Ułatwienie w testach Wpływania na wyznawców.",
+      "origin": "salt-lake-city",
+      "proposed": "icons/abilities/cholerny-kaznodzieja.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/cholerny-kaznodzieja.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch63-cholerny-kaznodzieja"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "przed-wojna-wszystko-bylo-lepiej",
+      "label": "Przed wojną wszystko było lepiej",
+      "text": "Biegłość w Historii i Medycynie + Ułatwienie w testach o wiedzy sprzed wojny.",
+      "origin": "salt-lake-city",
+      "proposed": "icons/abilities/przed-wojna-wszystko-bylo-lepiej.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/przed-wojna-wszystko-bylo-lepiej.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch63-przed-wojna-wszystko-bylo-lepiej"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "wierze",
+      "label": "Wierzę",
+      "text": "1×/Długi Odpoczynek: wymyślasz drobny przedmiot (maks. 5 gb) — MG musi wprowadzić go do gry. Musi być łatwy do zabrania i przypadkowy.",
+      "origin": "salt-lake-city",
+      "proposed": "icons/abilities/wierze.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/wierze.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch60-wierze"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "czlowiek-zwany-koniem",
+      "label": "Człowiek zwany koniem",
+      "text": "2 biegłości z listy: Atletyka, Tresura, Medycyna.",
+      "origin": "teksas",
+      "proposed": "icons/abilities/czlowiek-zwany-koniem.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/czlowiek-zwany-koniem.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch63-czlowiek-zwany-koniem"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "doktor-quinn",
+      "label": "Doktor Quinn",
+      "text": "Biegłość w Medycynie + Ułatwienie w Testach Medycyny.",
+      "origin": "teksas",
+      "proposed": "icons/abilities/doktor-quinn.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/doktor-quinn.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch60-doktor-quinn"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "zdrowa-okolica",
+      "label": "Zdrowa okolica",
+      "text": "Biegłość w RO na Kondycję + Ułatwienie w Rzutach Obronnych na Kondycję.",
+      "origin": "teksas",
+      "proposed": "icons/abilities/zdrowa-okolica.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/zdrowa-okolica.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch63-zdrowa-okolica"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "hazardzista",
+      "label": "Hazardzista",
+      "text": "Biegłość w Zwinnych dłoniach i Oszustwie.",
+      "origin": "vegas",
+      "proposed": "icons/abilities/hazardzista.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/hazardzista.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch63-hazardzista"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "telepata",
+      "label": "Telepata",
+      "text": "Biegłość w Intuicji + Ułatwienie w Testach Intuicji.",
+      "origin": "vegas",
+      "proposed": "icons/abilities/telepata.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/telepata.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch61-telepata"
+      ]
+    },
+    {
+      "kind": "origin",
+      "key": "fart",
+      "label": "Fart",
+      "text": "Naturalne 1 na k20 → powtórz rzut (wynik nowego obowiązuje). Odnawia się po Krótkim odpoczynku.",
+      "origin": "vegas",
+      "proposed": "icons/abilities/fart.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/fart.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch60-fart"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "aramis",
+      "label": "Aramis",
+      "text": "+1 SIŁ lub ZRC; Wytrącenie w Akcji Bonusowej; Utrudnienie dla celu przy Rozbrajaniu.",
+      "proposed": "icons/abilities/aramis.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/aramis.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch63-aramis"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "aspirynaIMietusy",
+      "label": "Aspiryna i Miętusy",
+      "text": "+1 INT lub CHA; leczenie narzędziami małego medyka nawet bez zapasów (z Utrudnieniem).",
+      "proposed": "icons/abilities/aspiryna-i-mietusy.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/aspiryna-i-mietusy.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch63-aspiryna-i-mietusy"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "barbarka",
+      "label": "Barbarka",
+      "text": "Atak głową 1k4; atak głową w głowę w Akcji Bonusowej (trafienie krytyczne); możliwość Powalenia przy ataku głową.",
+      "proposed": "icons/abilities/barbarka.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/barbarka.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-barbarka"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "bezTrzymanki",
+      "label": "Bez trzymanki",
+      "text": "+1 ZRC lub MDR; kierowanie jednośladem bez rąk (z Utrudnieniem MDR).",
+      "proposed": "icons/abilities/bez-trzymanki.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/bez-trzymanki.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-bez-trzymanki"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "benzynaZamiastKrwi",
+      "label": "Benzyna zamiast krwi",
+      "text": "TT pojazdu +MDR; możliwość przyjęcia ataku w pojazd w Reakcji; pojazd korzysta z Unikania / Odstąpienia jak kierowca.",
+      "proposed": "icons/abilities/benzyna-zamiast-krwi.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/benzyna-zamiast-krwi.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-benzyna-zamiast-krwi"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "ciszejNizCien",
+      "label": "Ciszej niż cień",
+      "text": "+1 ZRC; przeciwnicy mają Utrudnienie w Testach Percepcji dotyczących wykrycia obecności.",
+      "proposed": "icons/abilities/ciszej-niz-cien.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/ciszej-niz-cien.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-ciszej-niz-cien"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "czlowiekPajak",
+      "label": "Człowiek-pająk",
+      "text": "+1 SIŁ lub ZRC; Szybkość wspinaczki = Szybkość (wolne ręce / zestaw wspinaczkowy); pochylony teren nie jest trudnym terenem; Ułatwienie w RO przy upadku.",
+      "proposed": "icons/abilities/czlowiek-pajak.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/czlowiek-pajak.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-czlowiek-pajak"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "cwiczenieCzyniMistrza",
+      "label": "Ćwiczenie czyni mistrza",
+      "text": "+1 do dwóch Cech Bazowych lub +2 do jednej (max 20). Można wybierać wielokrotnie.",
+      "proposed": "icons/abilities/cwiczenie-czyni-mistrza.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/cwiczenie-czyni-mistrza.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch60-cwiczenie-czyni-mistrza"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "fabrykator",
+      "label": "Fabrykator",
+      "text": "+1 INT lub ZRC; produkcja przedmiotów 50% szybciej (mnóstwo narzędzi).",
+      "proposed": "icons/abilities/fabrykator.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/fabrykator.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-fabrykator"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "fachowiec",
+      "label": "Fachowiec",
+      "text": "+1 dowolna Cecha; biegłość w 2 wybranych zestawach narzędzi.",
+      "proposed": "icons/abilities/fachowiec.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/fachowiec.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-fachowiec"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "gradOlowiu",
+      "label": "Grad ołowiu",
+      "text": "Strzelanie krótką serią (KS) staje się częścią akcji Atakowania — tyle KS ile ataków w turze.",
+      "proposed": "icons/abilities/grad-olowiu.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/grad-olowiu.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch60-grad-olowiu"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "grenadier",
+      "label": "Grenadier",
+      "text": "+1 SIŁ; Stalowe jaja [R] — podbiegnięcie do granatu (4,5 m) i rzut w Reakcji bez ataków okazyjnych; dwukrotny zasięg rzutu granatem.",
+      "proposed": "icons/abilities/grenadier.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/grenadier.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-grenadier"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "gunfight",
+      "label": "Gunfight",
+      "text": "+1 ZRC; brak Utrudnienia do Testów Ataku bronią palną od wrogów w zasięgu do 1,5 m.",
+      "proposed": "icons/abilities/gunfight.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/gunfight.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch57-gunfight"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "immunitet",
+      "label": "Immunitet",
+      "text": "+1 KON; nigdy nie złapiesz nowej choroby; Ułatwienie w RO przeciw chorobom już posiadanym.",
+      "proposed": "icons/abilities/immunitet.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/immunitet.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-immunitet"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "jestZajebiscie",
+      "label": "Jest zajebiście",
+      "text": "Zajebista gadka [A] — sporny Test CHA (Oszustwo) vs. Intuicja drużyny; ci, którzy polegli, dostają Ułatwienie w najbliższym teście.",
+      "proposed": "icons/abilities/jest-zajebiscie.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/jest-zajebiscie.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-jest-zajebiscie"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "karateka",
+      "label": "Karateka",
+      "text": "Ataki ręką/nogą 1k6 (SIŁ lub ZRC); Szybki cios [B] — jeden atak wręcz w Akcji Bonusowej.",
+      "proposed": "icons/abilities/karateka.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/karateka.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-karateka"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "kuloodpornosc",
+      "label": "Kuloodporność",
+      "text": "Bez pancerza: TT + Premia Biegłości.",
+      "proposed": "icons/abilities/kuloodpornosc.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/kuloodpornosc.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-kuloodpornosc"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "lawnik",
+      "label": "Ławnik",
+      "text": "+1 SIŁ lub KON; biegłość broń improwizowana (ciężkie 10 kg+ → 3k4 obrażeń obuchowych); Ułatwienie przy ataku ciężkim przedmiotem; możliwość Powalenia.",
+      "proposed": "icons/abilities/lawnik.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/lawnik.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-lawnik"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "miotacz",
+      "label": "Miotacz",
+      "text": "Zasięg broni rzucanej ×2; +2 do Testów Ataku bronią rzucaną.",
+      "proposed": "icons/abilities/miotacz.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/miotacz.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-miotacz"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "mistrzBroniBialej",
+      "label": "Mistrz broni białej",
+      "text": "+1 INT lub ZRC; Fechmistrz — wybrana broń biała zadaje dodatkową kostkę obrażeń (zmiana po Długim Odpoczynku z treningiem).",
+      "proposed": "icons/abilities/mistrz-broni-bialej.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/mistrz-broni-bialej.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-mistrz-broni-bialej"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "mistrzWalkiWrecz",
+      "label": "Mistrz walki wręcz",
+      "text": "Manewry [B] — Odepchnięcie / Odstąpienie / Wytrącenie w Akcji Bonusowej; Parowanie [R] — TT +1k4 przeciw jednemu atakowi wręcz.",
+      "proposed": "icons/abilities/mistrz-walki-wrecz.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/mistrz-walki-wrecz.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-mistrz-walki-wrecz"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "muzyk",
+      "label": "Muzyk",
+      "text": "+1 CHA; biegłość w 2 instrumentach; Pieśń otuchy (1×/Długi Odpoczynek) — Fuks dla 1 + mod. CHA sojuszników.",
+      "proposed": "icons/abilities/muzyk.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/muzyk.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-muzyk"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "neo",
+      "label": "Neo",
+      "text": "Bullet time [R] — gdy zostaniesz trafiony, możesz w Reakcji podnieść swoją TT o 5 wobec tego ataku.",
+      "proposed": "icons/abilities/neo.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/neo.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-neo"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "nozownik",
+      "label": "Nożownik",
+      "text": "Nożownik [B] — po trafieniu nożem w turze, w Akcji Bonusowej drugi atak nożem; jeśli trafisz, zadajesz obrażenia krytyczne.",
+      "proposed": "icons/abilities/nozownik.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/nozownik.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch64-nozownik"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "padnijPowstan",
+      "label": "Padnij/Powstań",
+      "text": "Wstawanie nie kosztuje Szybkości; Szybkość +3 m; wyjście z zasięgu ataku wręcz bez ataków okazyjnych.",
+      "proposed": "icons/abilities/padnij-powstan.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/padnij-powstan.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch65-padnij-powstan"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "pakowanie",
+      "label": "Pakowanie",
+      "text": "+1 MDR lub INT; wyciągnięcie dowolnego przedmiotu z plecaka jako Darmowa Interakcja; Udźwig ×2.",
+      "proposed": "icons/abilities/pakowanie.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/pakowanie.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch60-pakowanie"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "pancerny",
+      "label": "Pancerny",
+      "text": "W ciężkim pancerzu: Próg obrażeń 10 przeciwko obrażeniom ciętym, kłutym i obuchowym (sumuje się z progiem pancerza).",
+      "proposed": "icons/abilities/pancerny.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/pancerny.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch65-pancerny"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "panPlaster",
+      "label": "Pan Plaster",
+      "text": "+1 MDR lub INT; narzędzia małego medyka rzucają dodatkową kostkę PW; połowa dawki leku zaspokaja dzienne zapotrzebowanie.",
+      "proposed": "icons/abilities/pan-plaster.svg",
+      "represented": true,
+      "existing": [],
+      "resolved": false,
+      "reviewIds": [
+        "batch65-pan-plaster"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "patriota",
+      "label": "Patriota",
+      "text": "+1 dowolna Cecha; dodatkowa zdolność z listy zdolności swojego Pochodzenia.",
+      "proposed": "icons/abilities/patriota.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/patriota.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch60-patriota"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "pewnaReka",
+      "label": "Pewna ręka",
+      "text": "+1 ZRC; Pewny strzał [B] — Szybkość spada do 0, ale Ułatwienie do 1 ataku dystansowego (nie przy seriach); brak Utrudnienia za niestabilne podłoże.",
+      "proposed": "icons/abilities/pewna-reka.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/pewna-reka.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch65-pewna-reka"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "pierwotnyInstynkt",
+      "label": "Pierwotny instynkt",
+      "text": "+5 do Inicjatywy; +5 do Testów Percepcji.",
+      "proposed": "icons/abilities/pierwotny-instynkt.svg",
+      "represented": true,
+      "existing": [],
+      "resolved": false,
+      "reviewIds": [
+        "batch65-pierwotny-instynkt"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "plugAndPlay",
+      "label": "Plug & Play",
+      "text": "Ułatwienie przy przejmowaniu paneli sterowania urządzeń elektronicznych; możliwość sterowania ciężkimi maszynami / wozami bojowymi laptopem.",
+      "proposed": "icons/abilities/plug-and-play.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/plug-and-play.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch65-plug-and-play"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "przycelowanie",
+      "label": "Przycelowanie",
+      "text": "+1 ZRC; Celuję w… [B] — wycelowanie w konkretną kończynę lub element; TT wzrasta, ale trafienie daje efekt wg tabeli Przycelowania.",
+      "proposed": "icons/abilities/przycelowanie.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/przycelowanie.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch61-przycelowanie"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "przydasie",
+      "label": "Przydasie",
+      "text": "+1 INT lub MDR; surowce potrzebne do produkcji własnoręcznie wykonywanych przedmiotów tańsze o 50%.",
+      "proposed": "icons/abilities/przydasie.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/przydasie.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch65-przydasie"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "pulpFiction",
+      "label": "Pulp Fiction",
+      "text": "+1 ZRC; brak Utrudnienia przy strzelaniu pistoletem / PM jedną ręką; każda broń palna krótka zyskuje właściwość lekka.",
+      "proposed": "icons/abilities/pulp-fiction.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/pulp-fiction.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch56-pulp-fiction"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "robinHood",
+      "label": "Robin Hood",
+      "text": "Stalowe palce [I] — ładowanie broni miotanej w Darmowej Interakcji; Celowanie [B] — Ułatwienie do ataku z łuku / kuszy po Akcji Bonusowej.",
+      "proposed": "icons/abilities/robin-hood.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/robin-hood.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch65-robin-hood"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "rodeo",
+      "label": "Rodeo",
+      "text": "+1 MDR; ujeżdżanie dzikich zwierząt (Test MDR Tresura ST 10 + mod. SIŁ istoty); Kawalerzysta — TT wierzchowca + Premia Biegłości.",
+      "proposed": "icons/abilities/rodeo.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/rodeo.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch65-rodeo"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "rozroba",
+      "label": "Rozróba",
+      "text": "+1 SIŁ lub KON; Młynek [B] — gdy co najmniej 3 wrogów jest w zasięgu 1,5 m, w Akcji Bonusowej jeden atak wręcz bronią białą przeciw każdemu z nich.",
+      "proposed": "icons/abilities/rozroba.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/rozroba.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch65-rozroba"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "ruchomeGniazdoCkm",
+      "label": "Ruchome gniazdo CKM",
+      "text": "Chmura ołowiu — długa seria (DS) pakuje 2× więcej pocisków (podwójne kostki obrażeń wobec celów w polu rażenia).",
+      "proposed": "icons/abilities/ruchome-gniazdo-ckm.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/ruchome-gniazdo-ckm.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch65-ruchome-gniazdo-ckm"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "samuraj",
+      "label": "Samuraj",
+      "text": "+1 SIŁ lub ZRC; +1 do Testów Ataku i obrażeń bronią zadającą obrażenia cięte; dobycie finezyjnej broni białej zadającej obrażenia cięte bez Darmowej Interakcji; TT +1, gdy dzierżysz finezyjną broń białą zadającą obrażenia cięte.",
+      "proposed": "icons/abilities/samuraj.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/samuraj.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch61-samuraj"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "siekierezada",
+      "label": "Siekierezada",
+      "text": "+1 SIŁ lub ZRC; wyciągnięcie 2 siekierek jednocześnie w 1 Darmowej Interakcji; zasięg rzutu siekierkami ×2; TT +1 przy walce dwiema siekierkami.",
+      "proposed": "icons/abilities/siekierezada.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/siekierezada.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch65-siekierezada"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "snajper",
+      "label": "Snajper",
+      "text": "+1 ZRC lub MDR; brak Utrudnienia za daleki dystans; zasięg daleki broni dystansowej ×2.",
+      "proposed": "icons/abilities/snajper.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/snajper.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch65-snajper"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "szachista",
+      "label": "Szachista",
+      "text": "Roszada — podczas Unikania: TT +3 i brak ataków okazyjnych do początku następnej tury.",
+      "proposed": "icons/abilities/szachista.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/szachista.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch65-szachista"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "szkolenieWBroni",
+      "label": "Szkolenie w broni",
+      "text": "+1 SIŁ lub ZRC; biegłość w jednej wybranej kategorii broni.",
+      "proposed": "icons/abilities/szkolenie-w-broni.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/szkolenie-w-broni.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch65-szkolenie-w-broni"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "szkolenieWCiezkimPancerzu",
+      "label": "Szkolenie w ciężkim pancerzu",
+      "text": "+1 SIŁ lub KON; wyszkolenie w ciężkich pancerzach.",
+      "proposed": "icons/abilities/szkolenie-w-ciezkim-pancerzu.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/szkolenie-w-ciezkim-pancerzu.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch65-szkolenie-w-ciezkim-pancerzu"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "szkolenieWSrednimPancerzu",
+      "label": "Szkolenie w średnim pancerzu",
+      "text": "+1 SIŁ lub KON; wyszkolenie w średnich pancerzach.",
+      "proposed": "icons/abilities/szkolenie-w-srednim-pancerzu.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/szkolenie-w-srednim-pancerzu.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch66-szkolenie-w-srednim-pancerzu"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "szturmowiec",
+      "label": "Szturmowiec",
+      "text": "Strzelanie krótkimi seriami (KS) w normalnym zasięgu bez Utrudnienia.",
+      "proposed": "icons/abilities/szturmowiec.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/szturmowiec.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch66-szturmowiec"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "szybkiBill",
+      "label": "Szybki Bill",
+      "text": "+1 ZRC lub KON; biegłość w Inicjatywie (+PB do Inicjatywy); Długie susy [B] — Bieganie w Akcji Bonusowej.",
+      "proposed": "icons/abilities/szybki-bill.svg",
+      "represented": true,
+      "existing": [],
+      "resolved": false,
+      "reviewIds": [
+        "batch66-szybki-bill"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "szybkiePalce",
+      "label": "Szybkie palce",
+      "text": "+1 ZRC; Szybka wymiana [B] — zmiana magazynka lub szybkoładowacza w Akcji Bonusowej; Szybkie przeładowanie [B] — ignorowanie właściwości przeładowanie (albo 1 nabój rewolweru / karabinu w Akcji Bonusowej).",
+      "proposed": "icons/abilities/szybkie-palce.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/szybkie-palce.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch56-szybkie-palce"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "uczSieUcz",
+      "label": "Ucz się, ucz",
+      "text": "+1 dowolna Cecha; biegłość w 2 wybranych umiejętnościach.",
+      "proposed": "icons/abilities/ucz-sie-ucz.svg",
+      "represented": true,
+      "existing": [],
+      "resolved": false,
+      "reviewIds": [
+        "batch66-ucz-sie-ucz"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "ukrytyCel",
+      "label": "Ukryty cel",
+      "text": "Ignorujesz osłonę ½ i ¾ celu; ignorujesz Utrudnienie z akcji Unikanie.",
+      "proposed": "icons/abilities/ukryty-cel.svg",
+      "represented": true,
+      "existing": [],
+      "resolved": false,
+      "reviewIds": [
+        "batch66-ukryty-cel"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "wrestler",
+      "label": "Wrestler",
+      "text": "+1 SIŁ; Ułatwienie do Testów Ataku wobec Pochwyconego; Duszenie (zamiast ataku — 1 + mod. SIŁ obrażeń obuchowych); Rzut na matę (Pochwycony duży lub mniejszy, z Utrudnieniem → Powalenie).",
+      "proposed": "icons/abilities/wrestler.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/wrestler.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch66-wrestler"
+      ]
+    },
+    {
+      "kind": "feat",
+      "key": "zlomiarz",
+      "label": "Złomiarz",
+      "text": "+1 INT lub MDR; Ułatwienie w Testach Śledztwa przy wycenianiu przedmiotów; Ułatwienie w Testach MDR/INT podczas szabrowania.",
+      "proposed": "icons/abilities/zlomiarz.svg",
+      "represented": true,
+      "existing": [
+        "icons/abilities/zlomiarz.svg"
+      ],
+      "resolved": true,
+      "reviewIds": [
+        "batch66-zlomiarz"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "batch": 67,
+  "date": "2026-10-12",
+  "revisions": [
+    {
+      "itemId": "batch62-bebeszenie",
+      "key": "bebeszenie_revision_f",
+      "atlas": "a",
+      "request": "Redesign the entire composition into TWO balanced, uncrossed groups separated by a small central vertical lightning-bolt divider. LEFT: one upright butcher's knife beside a LARGE simple ribcage outline; RIGHT: one stack of two broad printed circuit boards beside one smaller intact pair of pliers. Knife, ribcage, PCB stack and pliers are separate non-touching silhouettes with generous black gaps. Ribcage is comparable in height to the tools, never tiny decoration above them. No crossed tools, skull, hands or gore. Keep the pliers' two straight symmetric handles below one pivot. The modest central lightning bolt divides organic butchery from electronic salvage; no text.",
+      "freshComposition": true
+    },
+    {
+      "itemId": "batch65-pan-plaster",
+      "key": "pan-plaster_revision_c",
+      "atlas": "a",
+      "request": "Keep BOTH medic hands, their exact positions/gestures, the dressing and the first-aid pouch UNCHANGED. Rotate ONLY the patient's forearm/hand 90 degrees counterclockwise LEFT around the dressing contact area: it must now run toward upper-left rather than upper-right, the opposite diagonal. The patient's whole wrist, palm, thumb and four fingers remain connected and visible. Do not rotate, move, mirror or redraw either medic hand. Exactly three complete hands, no new tool, injury or blood.",
+      "freshComposition": false
+    },
+    {
+      "itemId": "batch65-pierwotny-instynkt",
+      "key": "pierwotny-instynkt_revision_c",
+      "atlas": "a",
+      "request": "Keep the same rugged adult expression, alert head turn, raised ready forearm and three broad disturbance arcs. SIMPLIFY the face: retain only one broad brow/eye cut, a clear nose contour and a single plain mouth line; retain one solid beard silhouette if needed. Remove cheek creases, wrinkle lines, individual stubble hairs, tiny hatch marks and fine forehead detail. Preserve the alert stern expression, no anime styling or younger replacement face.",
+      "freshComposition": false
+    },
+    {
+      "itemId": "batch66-szybki-bill",
+      "key": "szybki-bill_revision_b",
+      "atlas": "a",
+      "request": "Keep the exact running survivor's pose, two arms, two legs and all body proportions. Add THREE broad short horizontal SPEED STROKES to the LEFT of the runner, behind the back and trailing leg, with clear black space separating them from the body. The lines indicate rapid movement toward the right. No arrowheads, duplicate body, extra limb or lettering.",
+      "freshComposition": false
+    },
+    {
+      "itemId": "batch66-ucz-sie-ucz",
+      "key": "ucz-sie-ucz_revision_b",
+      "atlas": "a",
+      "request": "Keep the two studying hands and open manual with its simple right-page diagram. REMOVE the wrench completely and leave that lower area blank. Add four short broad abstract parallel line marks to the LEFT page, suggesting paragraphs without any readable letters, words or numbers. Preserve the book outline, page turn and hand positions. No new tool or text.",
+      "freshComposition": false
+    },
+    {
+      "itemId": "batch66-ukryty-cel",
+      "key": "ukryty-cel_revision_b",
+      "atlas": "a",
+      "request": "Spread the scene horizontally: shooter on the LEFT, one broad cover slab at CENTER, target figure on the RIGHT with an obvious black gap separating target from the slab. Leave generous space between shooter and slab too. Show one clear horizontal shot path from the rifle muzzle THROUGH a small hole in the slab and ending at the target's torso, with one restrained impact mark. Full target head and shoulders visible, two anatomically coherent figures and one gun. The shot penetrates cover rather than going around its edge. No blood, wound detail, death depiction, labels or extra shots.",
+      "freshComposition": false
+    }
+  ],
+  "fresh": [
+    {
+      "key": "paliwo_dobre",
+      "catalogKey": "raw:paliwo-dobre",
+      "name": "Paliwo dobre (5 l)",
+      "request": "One clean sturdy METAL fuel jerrycan with a broad squared rectangular body, a neat triple bridge handle, securely latched corner cap and one large diamond-shaped pressed reinforcing panel. Upright practical five-litre can, intact manufactured silhouette. No letters, brand, numerals, stars, medals, gradients or texture.",
+      "context": "Canonical trade/production catalog fuel grade; inventory row, barter list and chat card. Five-litre container, distinct grade silhouette.",
+      "kind": "fuel",
+      "atlas": "a",
+      "target": "icons/items/loot/paliwo_dobre.svg",
+      "itemId": "batch67-paliwo-dobre",
+      "currentSrc": "icons/svg/item-bag.svg"
+    },
+    {
+      "key": "paliwo_przecietne",
+      "catalogKey": "raw:paliwo-przecietne",
+      "name": "Paliwo przeciętne (5 l)",
+      "request": "One ordinary utilitarian METAL fuel can with a slightly rounded tall body, ONE simple carrying loop, ordinary screw cap and a broad X-shaped pressed reinforcement panel. A small broad dent in one shoulder conveys a used but serviceable container. Clearly distinguish its rounded body/single loop/X panel from the clean square triple-handle good-fuel can. No rust specks, fine wear, lettering, logo or number.",
+      "context": "Canonical trade/production catalog fuel grade; inventory row, barter list and chat card. Five-litre container, distinct grade silhouette.",
+      "kind": "fuel",
+      "atlas": "a",
+      "target": "icons/items/loot/paliwo_przecietne.svg",
+      "itemId": "batch67-paliwo-przecietne",
+      "currentSrc": "icons/svg/item-bag.svg"
+    },
+    {
+      "key": "paliwo_chrzczone",
+      "catalogKey": "raw:paliwo-chrzczone",
+      "name": "Paliwo chrzczone (5 l)",
+      "request": "One reused squat PLASTIC fuel jug with a large molded side handle, broad screw cap and one thick plain repair-tape band around its middle. A simple broad side inspection window shows two separated liquid layers as two large white masses divided by one thick black horizontal gap, implying adulteration. Distinct squat plastic jug silhouette, no text, hazard label, droplets floating outside it, tiny scratches or brand.",
+      "context": "Canonical trade/production catalog fuel grade; inventory row, barter list and chat card. Five-litre container, distinct grade silhouette.",
+      "kind": "fuel",
+      "atlas": "a",
+      "target": "icons/items/loot/paliwo_chrzczone.svg",
+      "itemId": "batch67-paliwo-chrzczone",
+      "currentSrc": "icons/svg/item-bag.svg"
+    }
+  ]
+}

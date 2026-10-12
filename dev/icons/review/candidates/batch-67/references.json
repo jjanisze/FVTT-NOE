@@ -1,0 +1,56 @@
+[
+  {
+    "itemId": "batch62-bebeszenie",
+    "atlas": "a",
+    "cell": 1,
+    "candidateId": "batch66-revision",
+    "source": "candidates/batch-66/bebeszenie_revision_e.png",
+    "feedback": "Now the composition is awkward, with a tiny little ribcage above large pliers and a knife. My suggestion is to split all three elements - no more crossing. Butcher's knife, ribcage, small lightning splitting the image, stack of PCBs, pliers",
+    "suppliedToGenerator": false
+  },
+  {
+    "itemId": "batch65-pan-plaster",
+    "atlas": "a",
+    "cell": 2,
+    "candidateId": "batch66-revision",
+    "source": "candidates/batch-66/pan-plaster_revision_b.png",
+    "feedback": "Rotate the hand being bandaged by 90 degrees left (so it is opposite diagonal). Do not modify the pair of hands performing the medical procedure.",
+    "suppliedToGenerator": true
+  },
+  {
+    "itemId": "batch65-pierwotny-instynkt",
+    "atlas": "a",
+    "cell": 3,
+    "candidateId": "batch66-revision",
+    "source": "candidates/batch-66/pierwotny-instynkt_revision_b.png",
+    "feedback": "Okay better, but now the lines of the face have too much detail. Keep the expression, simplify the lines.",
+    "suppliedToGenerator": true
+  },
+  {
+    "itemId": "batch66-szybki-bill",
+    "atlas": "a",
+    "cell": 4,
+    "candidateId": "atlas-b",
+    "source": "candidates/batch-66/szybki-bill.png",
+    "feedback": "Add lines to the left of the character showing how fast he is",
+    "suppliedToGenerator": true
+  },
+  {
+    "itemId": "batch66-ucz-sie-ucz",
+    "atlas": "a",
+    "cell": 5,
+    "candidateId": "atlas-b",
+    "source": "candidates/batch-66/ucz-sie-ucz.png",
+    "feedback": "Remove the wrench. Add abstract lines symbolizing text on the left page. No readable writing.",
+    "suppliedToGenerator": true
+  },
+  {
+    "itemId": "batch66-ukryty-cel",
+    "atlas": "a",
+    "cell": 6,
+    "candidateId": "atlas-b",
+    "source": "candidates/batch-66/ukryty-cel.png",
+    "feedback": "Put distance between the shooter and the target. Show the shot going through the cover and hitting the figure behind it.",
+    "suppliedToGenerator": true
+  }
+]

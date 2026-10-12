@@ -1,0 +1,27 @@
+{
+  "date": "2026-10-12",
+  "reviewItems": 342,
+  "resolvedReviewItems": 333,
+  "activeReviewItems": 9,
+  "activeRevisions": 6,
+  "activeNewFuelGrades": 3,
+  "canonical": {
+    "origin": {"total": 36, "dedicatedFiles": 36},
+    "feat": {"total": 53, "dedicatedFiles": 48}
+  },
+  "physicalItemCatalog": {
+    "entries": 333,
+    "configuredCustomIcons": 329,
+    "missingReferencedModuleFiles": 0,
+    "chemistryEntries": 35,
+    "medicineEntriesWithDistinctConfiguredIcons": 23,
+    "newFuelArtGapsAwaitingReview": 3,
+    "medicRefillExistingIconNeedsWiring": 1
+  },
+  "validation": {
+    "batchMasks": 9,
+    "reviewCollectionPngSvgPairs": 537,
+    "visibleReviewCards": 9,
+    "failedReviewImages": 0
+  }
+}
