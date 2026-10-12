@@ -10,7 +10,13 @@ separate icon review pipeline; this folder does not generate pictures.
 
 Save an edited PNG to `in/<set>/<key>.png`, using the exact name in its brief.
 `catalog.json` records every final path, dimension and alpha requirement. Sources
-stay under `dev/` and are not shipped. There is no source artwork here yet.
+stay under `dev/` and are not shipped. On 2026-10-12 the seven trader portraits
+and three upkeep banners were supplied by the GM and packaged at their final paths.
+Portraits are 600×800 RGB WEBP; upkeep banners are 1200×400 RGB WEBP.
+`delivered-2026-10-12.json` records source/output hashes and validation results.
+The three upkeep sources arrived under `in/handlarze/`; identical copies were placed
+under their canonical `in/postoj/` drop paths, preserving the original drops.
+Future upkeep edits should use the canonical drop paths recorded in the briefs.
 
 ```sh
 python dev/art/m5/pack.py --list
@@ -18,6 +24,7 @@ python dev/art/m5/pack.py
 python dev/art/m5/pack.py --asset handlarze/bron
 python dev/art/m5/pack.py --check
 python dev/art/m5/test_pack.py
+python dev/art/m5/record_delivery.py
 ```
 
 The default command processes only sources that exist; absent sources stay queued.
@@ -37,3 +44,8 @@ Do not credit prompts or undelivered pictures as finished artwork. M5 uses exact
 filenames and needs no code repoint, pack rebuild or live world change. Older B/E
 assets that need a compendium rebuild or live update go under "Do podpięcia" in
 MISSING for the GM.
+
+`record_delivery.py` validates outputs with present edited sources, records their
+provenance/hashes and produces a local `out/delivery-preview.png` contact sheet.
+It does not alter source art or final images. Camps, ruins, wrecks and the older
+object/companion images remain queued until their edited sources arrive.

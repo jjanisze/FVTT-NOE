@@ -1,0 +1,197 @@
+{
+  "date": "2026-10-12",
+  "provenance": "AI-generated with OpenAI DALL-E, hand-edited by the GM",
+  "processing": "Existing pack.py: centered crop, resize, WEBP conversion only",
+  "delivered": [
+    {
+      "id": "handlarze/obwozny",
+      "source": "dev/art/m5/in/handlarze/obwozny.png",
+      "output": "ui/handlarze/obwozny.webp",
+      "sourceSize": [
+        948,
+        1660
+      ],
+      "sourceSha256": "34d032541b03477b9528a9e1f67a3cf37a4469a9d635217654b7991ac627bcc7",
+      "outputSha256": "f9a519cf8ac97c96061da9d900b170e4393c04ec3f864d76d71086c799835f6a",
+      "validation": {
+        "asset": "handlarze/obwozny",
+        "file": "ui/handlarze/obwozny.webp",
+        "width": 600,
+        "height": 800,
+        "mode": "RGB",
+        "bytes": 157170
+      }
+    },
+    {
+      "id": "handlarze/barman",
+      "source": "dev/art/m5/in/handlarze/barman.png",
+      "output": "ui/handlarze/barman.webp",
+      "sourceSize": [
+        948,
+        1659
+      ],
+      "sourceSha256": "cca23d8fe72de6c0fcf2da856deed383580f605798aa6059a168b06b7032bb85",
+      "outputSha256": "a66d4f962bd6efeba69e71355131a14c70178a542b5387cbe189542391473871",
+      "validation": {
+        "asset": "handlarze/barman",
+        "file": "ui/handlarze/barman.webp",
+        "width": 600,
+        "height": 800,
+        "mode": "RGB",
+        "bytes": 134150
+      }
+    },
+    {
+      "id": "handlarze/stragan",
+      "source": "dev/art/m5/in/handlarze/stragan.png",
+      "output": "ui/handlarze/stragan.webp",
+      "sourceSize": [
+        948,
+        1659
+      ],
+      "sourceSha256": "6ace9a98c6f67fa57bb822147fc0255c3e1b929c5a812c8433c41ee1f85391f2",
+      "outputSha256": "bf0622c42e0abbe2a6ebb25aa0c43e5c5b83e825645cefd6ccfbbca17c7d1cc7",
+      "validation": {
+        "asset": "handlarze/stragan",
+        "file": "ui/handlarze/stragan.webp",
+        "width": 600,
+        "height": 800,
+        "mode": "RGB",
+        "bytes": 155952
+      }
+    },
+    {
+      "id": "handlarze/wielobranzowy",
+      "source": "dev/art/m5/in/handlarze/wielobranzowy.png",
+      "output": "ui/handlarze/wielobranzowy.webp",
+      "sourceSize": [
+        948,
+        1659
+      ],
+      "sourceSha256": "3f844180e580694e2edad232ccf5ab8cf931d819ab47d84c3ba14af433b75c77",
+      "outputSha256": "136a3ac5d04acd88891ee5bee845495b7cd8a9c0af96d32e4a795a6dd755291b",
+      "validation": {
+        "asset": "handlarze/wielobranzowy",
+        "file": "ui/handlarze/wielobranzowy.webp",
+        "width": 600,
+        "height": 800,
+        "mode": "RGB",
+        "bytes": 131310
+      }
+    },
+    {
+      "id": "handlarze/bron",
+      "source": "dev/art/m5/in/handlarze/bron.png",
+      "output": "ui/handlarze/bron.webp",
+      "sourceSize": [
+        948,
+        1659
+      ],
+      "sourceSha256": "33e0b4b5a0b88de097ec25c49f9bf5712ee3dbb0e6c479f3b4e050296ce8e600",
+      "outputSha256": "80b68ce7133d21f49312c2734eda95a8fc89c2ef6b3e95666f38cbf29cefafbb",
+      "validation": {
+        "asset": "handlarze/bron",
+        "file": "ui/handlarze/bron.webp",
+        "width": 600,
+        "height": 800,
+        "mode": "RGB",
+        "bytes": 134124
+      }
+    },
+    {
+      "id": "handlarze/apteka",
+      "source": "dev/art/m5/in/handlarze/apteka.png",
+      "output": "ui/handlarze/apteka.webp",
+      "sourceSize": [
+        948,
+        1660
+      ],
+      "sourceSha256": "ed9c90885a179ed1429b7b95602454d3956ccbfae55f2e826f0730b5644eac10",
+      "outputSha256": "7b243849b924f96bd676815399976b69bcf495c95dd56996379d69bd87b2f677",
+      "validation": {
+        "asset": "handlarze/apteka",
+        "file": "ui/handlarze/apteka.webp",
+        "width": 600,
+        "height": 800,
+        "mode": "RGB",
+        "bytes": 167676
+      }
+    },
+    {
+      "id": "handlarze/warsztat",
+      "source": "dev/art/m5/in/handlarze/warsztat.png",
+      "output": "ui/handlarze/warsztat.webp",
+      "sourceSize": [
+        948,
+        1659
+      ],
+      "sourceSha256": "8e5c4034090d9ec1832f9579724278fdca8e26151dd70c78650345fe11e6d777",
+      "outputSha256": "76765988909afbcc10038f37d31a34b38385fc13bdecc1b0d6f9d99c09fdb913",
+      "validation": {
+        "asset": "handlarze/warsztat",
+        "file": "ui/handlarze/warsztat.webp",
+        "width": 600,
+        "height": 800,
+        "mode": "RGB",
+        "bytes": 122310
+      }
+    },
+    {
+      "id": "postoj/utrzymanie-nedzny",
+      "source": "dev/art/m5/in/postoj/utrzymanie-nedzny.png",
+      "output": "ui/postoj/utrzymanie-nedzny.webp",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "37a0667e8a64b6591e009977d6266d2b0bf1b818c29186cf17af340803923dbb",
+      "outputSha256": "ba88f55d1613accad76b3d4155277c7fbb3ffa83c79e61335cdaea0c52d1ab6a",
+      "validation": {
+        "asset": "postoj/utrzymanie-nedzny",
+        "file": "ui/postoj/utrzymanie-nedzny.webp",
+        "width": 1200,
+        "height": 400,
+        "mode": "RGB",
+        "bytes": 94424
+      }
+    },
+    {
+      "id": "postoj/utrzymanie-normalny",
+      "source": "dev/art/m5/in/postoj/utrzymanie-normalny.png",
+      "output": "ui/postoj/utrzymanie-normalny.webp",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "6ace90842f08eb8567a1654614ac57a12f5b97aed5549e71a45ab9b447216610",
+      "outputSha256": "d6ad0fd0ff8e08bfd87778e15cdaf39e03b4cbe86b83d43eca6bba0aa0975282",
+      "validation": {
+        "asset": "postoj/utrzymanie-normalny",
+        "file": "ui/postoj/utrzymanie-normalny.webp",
+        "width": 1200,
+        "height": 400,
+        "mode": "RGB",
+        "bytes": 110570
+      }
+    },
+    {
+      "id": "postoj/utrzymanie-bogaty",
+      "source": "dev/art/m5/in/postoj/utrzymanie-bogaty.png",
+      "output": "ui/postoj/utrzymanie-bogaty.webp",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "839d9922308cfbfc0bb2cc066ab881b9f89f1a42bde38676a9a181d2f564f512",
+      "outputSha256": "e09fa77988eeb87067cb389a47abd2703d8b6dbf96914fa31999ff0b00e1e2b5",
+      "validation": {
+        "asset": "postoj/utrzymanie-bogaty",
+        "file": "ui/postoj/utrzymanie-bogaty.webp",
+        "width": 1200,
+        "height": 400,
+        "mode": "RGB",
+        "bytes": 140398
+      }
+    }
+  ]
+}

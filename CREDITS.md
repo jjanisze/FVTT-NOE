@@ -128,6 +128,23 @@ These OpenAI-generated glyphs retain the reviewed pixels. Saved selections and
 source/output hashes are in `dev/icons/review/candidates/batch-66/installed.json`;
 the incoming decisions are archived in `dev/icons/review/candidates/batch-66/decisions.json`.
 
+## M5 trader and upkeep illustrations
+
+Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only
+crops, resizes and converts to opaque WEBP. Dimensions and source/output hashes
+are recorded in `dev/art/m5/delivered-2026-10-12.json`.
+
+- `ui/handlarze/obwozny.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/handlarze/barman.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/handlarze/stragan.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/handlarze/wielobranzowy.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/handlarze/bron.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/handlarze/apteka.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/handlarze/warsztat.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/postoj/utrzymanie-nedzny.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/postoj/utrzymanie-normalny.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/postoj/utrzymanie-bogaty.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+
 ## Token art
 
 Bestiary token art is original work, borrowed (by reference, not copy) from `dnd5e`'s own

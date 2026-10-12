@@ -1,3 +1,5 @@
 # Local GM-painted source drops and downloaded audio previews; never shipped.
 in/
 audio/in/
+# Generated local contact sheets; final art lives under ui/ and tokens/.
+out/
