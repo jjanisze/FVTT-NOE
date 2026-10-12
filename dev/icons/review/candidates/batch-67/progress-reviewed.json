@@ -1,0 +1,21 @@
+{
+  "date": "2026-10-13",
+  "phase": "after Batch 67 review installation",
+  "resolvedReviewItems": 340,
+  "activeReviewItems": 2,
+  "knownIconBacklog": 342,
+  "approximateCompletedPercent": 99.4,
+  "canonical": {
+    "origin": {
+      "total": 36,
+      "dedicatedFiles": 36
+    },
+    "feat": {
+      "total": 53,
+      "dedicatedFiles": 52
+    }
+  },
+  "fuelGradeArtDelivered": 2,
+  "fuelGradeArtRemaining": 1,
+  "catalogWiringRemainsForGM": true
+}

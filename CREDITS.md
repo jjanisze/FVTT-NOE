@@ -135,6 +135,14 @@ Batch 65 candidate chosen by the GM. Per-file sources and hashes are in
 `dev/icons/review/candidates/batch-66/reviewed-installed.json`; all sixteen
 decisions are archived in `dev/icons/review/candidates/batch-66/reviewed.json`.
 
+Seven exact GM-approved selections from Batch 67 were installed on 2026-10-13
+as lossless WEBP and theme-aware SVG wrappers embedding WEBP. These original
+OpenAI-generated glyphs cover Bebeszenie, Pierwotny instynkt, Szybki Bill,
+Ucz się, ucz, Ukryty cel, good fuel and average fuel. Exact selected sources,
+final paths and hashes are in
+`dev/icons/review/candidates/batch-67/reviewed-installed.json`; the complete GM
+review is archived in `dev/icons/review/candidates/batch-67/reviewed.json`.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

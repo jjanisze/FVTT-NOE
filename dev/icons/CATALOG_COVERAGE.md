@@ -32,6 +32,13 @@ that code. The medic refill requires only an image repoint of `REFILL_IMG` in
 `scripts/items/toolkit-medyk.mjs`; new art is unnecessary. These wiring tasks are
 recorded in MISSING's "Do podpięcia".
 
+Delivery update, 2026-10-13: the good and average fuel candidates are approved
+and installed as the WEBP/SVG pairs above. Adulterated fuel needs a revision
+to a cheap plastic juice jug without an inspection window (Batch 68). The
+original catalog wiring count stays at 329/333 until the GM updates its resolver;
+installing art alone does not change item definitions. Exact delivery evidence:
+`review/candidates/batch-67/reviewed-installed.json`.
+
 The earlier 98% progress estimate described the known review queue, origins and
 Sztuczki, not an exhaustive item audit. This source audit expands the backlog with
 the three fuel variants. Shared images across magazine families or different

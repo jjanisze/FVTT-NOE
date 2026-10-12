@@ -1,0 +1,188 @@
+{
+  "date": "2026-10-13",
+  "batch": 67,
+  "title": "Batch 67 · 9 awaiting GM review",
+  "feedbackBeforeSha256": "1b99feb1bdca593311cee85652a65b11e414d7ad755a36ee8a7bf9e246fa7d34",
+  "active": [
+    {
+      "id": "batch62-bebeszenie",
+      "name": "Bebeszenie",
+      "tier": "Batch 62 · M5",
+      "decision": "approve",
+      "candidateId": "batch67-revision",
+      "selectedSource": "candidates/batch-67/bebeszenie_revision_f.png",
+      "target": "icons/actions/bebeszenie.svg",
+      "catalogKey": null,
+      "notes": "",
+      "context": "M5 player action button; toolbar/item-sheet use at small sizes.",
+      "request": "Redesign the entire composition into TWO balanced, uncrossed groups separated by a small central vertical lightning-bolt divider. LEFT: one upright butcher's knife beside a LARGE simple ribcage outline; RIGHT: one stack of two broad printed circuit boards beside one smaller intact pair of pliers. Knife, ribcage, PCB stack and pliers are separate non-touching silhouettes with generous black gaps. Ribcage is comparable in height to the tools, never tiny decoration above them. No crossed tools, skull, hands or gore. Keep the pliers' two straight symmetric handles below one pivot. The modest central lightning bolt divides organic butchery from electronic salvage; no text.",
+      "feedback": {
+        "itemId": "batch62-bebeszenie",
+        "decision": "approve",
+        "candidateId": "batch67-revision",
+        "notes": "",
+        "updatedAt": "2026-10-12T22:22:21.136Z"
+      }
+    },
+    {
+      "id": "batch65-pan-plaster",
+      "name": "Pan Plaster",
+      "tier": "Batch 65 · feat feature",
+      "decision": "revise",
+      "candidateId": "batch67-revision",
+      "selectedSource": "candidates/batch-67/pan-plaster_revision_c.png",
+      "target": "icons/abilities/pan-plaster.svg",
+      "catalogKey": "panPlaster",
+      "notes": "Alright, another 180 degrees oughta do it. Now the hand looks like it's coming from the first aid box.",
+      "context": "+1 MDR lub INT; narzędzia małego medyka rzucają dodatkową kostkę PW; połowa dawki leku zaspokaja dzienne zapotrzebowanie.",
+      "request": "Keep BOTH medic hands, their exact positions/gestures, the dressing and the first-aid pouch UNCHANGED. Rotate ONLY the patient's forearm/hand 90 degrees counterclockwise LEFT around the dressing contact area: it must now run toward upper-left rather than upper-right, the opposite diagonal. The patient's whole wrist, palm, thumb and four fingers remain connected and visible. Do not rotate, move, mirror or redraw either medic hand. Exactly three complete hands, no new tool, injury or blood.",
+      "feedback": {
+        "itemId": "batch65-pan-plaster",
+        "decision": "revise",
+        "candidateId": "batch67-revision",
+        "notes": "Alright, another 180 degrees oughta do it. Now the hand looks like it's coming from the first aid box.",
+        "updatedAt": "2026-10-12T22:23:16.345Z"
+      }
+    },
+    {
+      "id": "batch65-pierwotny-instynkt",
+      "name": "Pierwotny instynkt",
+      "tier": "Batch 65 · feat feature",
+      "decision": "approve",
+      "candidateId": "batch67-revision",
+      "selectedSource": "candidates/batch-67/pierwotny-instynkt_revision_c.png",
+      "target": "icons/abilities/pierwotny-instynkt.svg",
+      "catalogKey": "pierwotnyInstynkt",
+      "notes": "",
+      "context": "+5 do Inicjatywy; +5 do Testów Percepcji.",
+      "request": "Keep the same rugged adult expression, alert head turn, raised ready forearm and three broad disturbance arcs. SIMPLIFY the face: retain only one broad brow/eye cut, a clear nose contour and a single plain mouth line; retain one solid beard silhouette if needed. Remove cheek creases, wrinkle lines, individual stubble hairs, tiny hatch marks and fine forehead detail. Preserve the alert stern expression, no anime styling or younger replacement face.",
+      "feedback": {
+        "itemId": "batch65-pierwotny-instynkt",
+        "decision": "approve",
+        "candidateId": "batch67-revision",
+        "notes": "",
+        "updatedAt": "2026-10-12T22:23:22.292Z"
+      }
+    },
+    {
+      "id": "batch66-szybki-bill",
+      "name": "Szybki Bill",
+      "tier": "Batch 66 · feat feature",
+      "decision": "approve",
+      "candidateId": "batch67-revision",
+      "selectedSource": "candidates/batch-67/szybki-bill_revision_b.png",
+      "target": "icons/abilities/szybki-bill.svg",
+      "catalogKey": "szybkiBill",
+      "notes": "",
+      "context": "+1 ZRC lub KON; biegłość w Inicjatywie (+PB do Inicjatywy); Długie susy [B] — Bieganie w Akcji Bonusowej.",
+      "request": "Keep the exact running survivor's pose, two arms, two legs and all body proportions. Add THREE broad short horizontal SPEED STROKES to the LEFT of the runner, behind the back and trailing leg, with clear black space separating them from the body. The lines indicate rapid movement toward the right. No arrowheads, duplicate body, extra limb or lettering.",
+      "feedback": {
+        "itemId": "batch66-szybki-bill",
+        "decision": "approve",
+        "candidateId": "batch67-revision",
+        "notes": "",
+        "updatedAt": "2026-10-12T22:23:27.759Z"
+      }
+    },
+    {
+      "id": "batch66-ucz-sie-ucz",
+      "name": "Ucz się, ucz",
+      "tier": "Batch 66 · feat feature",
+      "decision": "approve",
+      "candidateId": "batch67-revision",
+      "selectedSource": "candidates/batch-67/ucz-sie-ucz_revision_b.png",
+      "target": "icons/abilities/ucz-sie-ucz.svg",
+      "catalogKey": "uczSieUcz",
+      "notes": "",
+      "context": "+1 dowolna Cecha; biegłość w 2 wybranych umiejętnościach.",
+      "request": "Keep the two studying hands and open manual with its simple right-page diagram. REMOVE the wrench completely and leave that lower area blank. Add four short broad abstract parallel line marks to the LEFT page, suggesting paragraphs without any readable letters, words or numbers. Preserve the book outline, page turn and hand positions. No new tool or text.",
+      "feedback": {
+        "itemId": "batch66-ucz-sie-ucz",
+        "decision": "approve",
+        "candidateId": "batch67-revision",
+        "notes": "",
+        "updatedAt": "2026-10-12T22:23:33.182Z"
+      }
+    },
+    {
+      "id": "batch66-ukryty-cel",
+      "name": "Ukryty cel",
+      "tier": "Batch 66 · feat feature",
+      "decision": "approve",
+      "candidateId": "batch67-revision",
+      "selectedSource": "candidates/batch-67/ukryty-cel_revision_b.png",
+      "target": "icons/abilities/ukryty-cel.svg",
+      "catalogKey": "ukrytyCel",
+      "notes": "",
+      "context": "Ignorujesz osłonę ½ i ¾ celu; ignorujesz Utrudnienie z akcji Unikanie.",
+      "request": "Spread the scene horizontally: shooter on the LEFT, one broad cover slab at CENTER, target figure on the RIGHT with an obvious black gap separating target from the slab. Leave generous space between shooter and slab too. Show one clear horizontal shot path from the rifle muzzle THROUGH a small hole in the slab and ending at the target's torso, with one restrained impact mark. Full target head and shoulders visible, two anatomically coherent figures and one gun. The shot penetrates cover rather than going around its edge. No blood, wound detail, death depiction, labels or extra shots.",
+      "feedback": {
+        "itemId": "batch66-ukryty-cel",
+        "decision": "approve",
+        "candidateId": "batch67-revision",
+        "notes": "",
+        "updatedAt": "2026-10-12T22:23:39.750Z"
+      }
+    },
+    {
+      "id": "batch67-paliwo-dobre",
+      "name": "Paliwo dobre (5 l)",
+      "tier": "Batch 67 · fuel grade",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-67/paliwo_dobre.png",
+      "target": "icons/items/loot/paliwo_dobre.svg",
+      "catalogKey": "raw:paliwo-dobre",
+      "notes": "",
+      "context": "Canonical trade/production catalog fuel grade; inventory row, barter list and chat card. Five-litre container, distinct grade silhouette.",
+      "request": "One clean sturdy METAL fuel jerrycan with a broad squared rectangular body, a neat triple bridge handle, securely latched corner cap and one large diamond-shaped pressed reinforcing panel. Upright practical five-litre can, intact manufactured silhouette. No letters, brand, numerals, stars, medals, gradients or texture.",
+      "feedback": {
+        "itemId": "batch67-paliwo-dobre",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-12T22:23:47.978Z"
+      }
+    },
+    {
+      "id": "batch67-paliwo-przecietne",
+      "name": "Paliwo przeciętne (5 l)",
+      "tier": "Batch 67 · fuel grade",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-67/paliwo_przecietne.png",
+      "target": "icons/items/loot/paliwo_przecietne.svg",
+      "catalogKey": "raw:paliwo-przecietne",
+      "notes": "",
+      "context": "Canonical trade/production catalog fuel grade; inventory row, barter list and chat card. Five-litre container, distinct grade silhouette.",
+      "request": "One ordinary utilitarian METAL fuel can with a slightly rounded tall body, ONE simple carrying loop, ordinary screw cap and a broad X-shaped pressed reinforcement panel. A small broad dent in one shoulder conveys a used but serviceable container. Clearly distinguish its rounded body/single loop/X panel from the clean square triple-handle good-fuel can. No rust specks, fine wear, lettering, logo or number.",
+      "feedback": {
+        "itemId": "batch67-paliwo-przecietne",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-12T22:23:51.625Z"
+      }
+    },
+    {
+      "id": "batch67-paliwo-chrzczone",
+      "name": "Paliwo chrzczone (5 l)",
+      "tier": "Batch 67 · fuel grade",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-67/paliwo_chrzczone.png",
+      "target": "icons/items/loot/paliwo_chrzczone.svg",
+      "catalogKey": "raw:paliwo-chrzczone",
+      "notes": "Get rid of the inspection window, and make it look like a cheap plastic orange juice jug",
+      "context": "Canonical trade/production catalog fuel grade; inventory row, barter list and chat card. Five-litre container, distinct grade silhouette.",
+      "request": "One reused squat PLASTIC fuel jug with a large molded side handle, broad screw cap and one thick plain repair-tape band around its middle. A simple broad side inspection window shows two separated liquid layers as two large white masses divided by one thick black horizontal gap, implying adulteration. Distinct squat plastic jug silhouette, no text, hazard label, droplets floating outside it, tiny scratches or brand.",
+      "feedback": {
+        "itemId": "batch67-paliwo-chrzczone",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Get rid of the inspection window, and make it look like a cheap plastic orange juice jug",
+        "updatedAt": "2026-10-12T22:24:37.977Z"
+      }
+    }
+  ]
+}

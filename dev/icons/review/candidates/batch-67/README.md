@@ -54,3 +54,13 @@ was inspected at 64/32/24/16 px. `progress.json` is the incoming snapshot;
 `prepared-progress.json` records the expanded queue after registration.
 
 Do not rerun `inspect_queue.mjs`: the incoming snapshot is historical.
+
+GM review received 2026-10-13: seven approvals installed by
+`accept_current_review.py`, preserving exact selected pixels and unchanged
+feedback. `reviewed.json` archives all nine decisions, `reviewed-installed.json`
+records source/output hashes and final paths, and `reviewed-remaining-items.json`
+preserves the two requests for Pan Plaster and adulterated fuel. Validation checks
+all seven WEBP/SVG pairs against the exact saved PNG sources. Only these two
+subjects continue in Batch 68; origins are 36/36 and Sztuczki 52/53 delivered.
+Good and average fuel still need their GM resolver mappings. Bebeszenie uses
+the exact M5 action filename and needs no wiring.

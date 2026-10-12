@@ -1,0 +1,89 @@
+{
+  "date": "2026-10-13",
+  "installed": [
+    {
+      "itemId": "batch62-bebeszenie",
+      "name": "Bebeszenie",
+      "candidateId": "batch67-revision",
+      "source": "candidates/batch-67/bebeszenie_revision_f.png",
+      "files": [
+        "icons/actions/bebeszenie.svg",
+        "icons/actions/bebeszenie.webp"
+      ],
+      "sourceSha256": "e0eac24e963548ea5099acb2a88f8ef6eefdd48d5d8f34f8b36aa6157c6c5534",
+      "webpSha256": "02657f02449831b432ab5021f05c3b9556de603ca0e83f553f19e40d5450f866"
+    },
+    {
+      "itemId": "batch65-pierwotny-instynkt",
+      "name": "Pierwotny instynkt",
+      "candidateId": "batch67-revision",
+      "source": "candidates/batch-67/pierwotny-instynkt_revision_c.png",
+      "files": [
+        "icons/abilities/pierwotny-instynkt.svg",
+        "icons/abilities/pierwotny-instynkt.webp"
+      ],
+      "sourceSha256": "7741a57729f1dd8a8ec9e57f9be53c383ae97382ec0b4bdaf7162f9392aa4f63",
+      "webpSha256": "5d0f57a100ae20d78ae942acbbe4c529d02b188f6bfc7a7fb49c669e9e0b400d"
+    },
+    {
+      "itemId": "batch66-szybki-bill",
+      "name": "Szybki Bill",
+      "candidateId": "batch67-revision",
+      "source": "candidates/batch-67/szybki-bill_revision_b.png",
+      "files": [
+        "icons/abilities/szybki-bill.svg",
+        "icons/abilities/szybki-bill.webp"
+      ],
+      "sourceSha256": "38920d36cda51ab0ff4d558e1c4be1168086a19cc9ec987e41ca40013ad24065",
+      "webpSha256": "a0ddb14c78647a2d5adec1984b72e6cb1dc1ce859b56734d5e31efbf952b9f4b"
+    },
+    {
+      "itemId": "batch66-ucz-sie-ucz",
+      "name": "Ucz się, ucz",
+      "candidateId": "batch67-revision",
+      "source": "candidates/batch-67/ucz-sie-ucz_revision_b.png",
+      "files": [
+        "icons/abilities/ucz-sie-ucz.svg",
+        "icons/abilities/ucz-sie-ucz.webp"
+      ],
+      "sourceSha256": "3b66d14d3b469a0b20398231953938f57d02d3196437ecbf9666ec8fd949e8cc",
+      "webpSha256": "41959b230e80d19208b554013b00cbffc6e26ca0c963ac93f4159f45db1d6ad4"
+    },
+    {
+      "itemId": "batch66-ukryty-cel",
+      "name": "Ukryty cel",
+      "candidateId": "batch67-revision",
+      "source": "candidates/batch-67/ukryty-cel_revision_b.png",
+      "files": [
+        "icons/abilities/ukryty-cel.svg",
+        "icons/abilities/ukryty-cel.webp"
+      ],
+      "sourceSha256": "57eca03cb9a66127c7880ff0a45aea8e573c7fb5a3b35c937c9fece1f0edcc34",
+      "webpSha256": "18eec1a891bd75d1aabc51bfee8b3f6daca231de5aa61a0399d5cbd17997d217"
+    },
+    {
+      "itemId": "batch67-paliwo-dobre",
+      "name": "Paliwo dobre (5 l)",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-67/paliwo_dobre.png",
+      "files": [
+        "icons/items/loot/paliwo_dobre.svg",
+        "icons/items/loot/paliwo_dobre.webp"
+      ],
+      "sourceSha256": "4937310bf436401229028b0c61d9f5e921539c295d4f7f9419f19a058ef56004",
+      "webpSha256": "ec90a169a9d054c5450d3f2affa62534e3a66c9b3c5b39610784e7365b1abe6b"
+    },
+    {
+      "itemId": "batch67-paliwo-przecietne",
+      "name": "Paliwo przeciętne (5 l)",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-67/paliwo_przecietne.png",
+      "files": [
+        "icons/items/loot/paliwo_przecietne.svg",
+        "icons/items/loot/paliwo_przecietne.webp"
+      ],
+      "sourceSha256": "3167ea73655f0e64f2559c548df249799508417f92d4ca7e51fddb956a840ffc",
+      "webpSha256": "506490c1bf3099b028c995bcb87c09e47c468b511b90b3a2b9def4c1eea01a78"
+    }
+  ]
+}
