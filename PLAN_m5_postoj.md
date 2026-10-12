@@ -1490,3 +1490,8 @@ Quench `fuksy` (9). Na żywo: wódka z paczki przez prawdziwą aktywność — b
   część ilustracji — zamówienia w `dev/icons/MISSING.md`, moduł działa bez nich; test przy stole (B7). Odczyty do
   potwierdzenia przez MG w grze: tik odliczania autodestrukcji na rundach, wejścia bebeszenia (menu zestawu i HUD
   zamiast aktywności), przeskok bez rzutów.
+
+- **Po E11:** naturalna 20 przy szabrowaniu i naturalna 1 przy bebeszeniu czytane z kości (`roll.d20.total`), nie
+  z `isCritical` / `isFumble` — te zwracają `false`, gdy rzut nie ma w opcjach progu krytyka. Uruchomione jedna po
+  drugiej (`--suites=postoj,szabrowanie,…`) suite'y M5 sypią się na wyjątkach rdzenia w klientach graczy i na
+  wymuszonych kościach, które nie trafiają do rzutu; każda osobno jest zielona — sprawa harnessu (`dev/agent`).

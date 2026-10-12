@@ -220,7 +220,8 @@ async function _handlerSzabrowanie(actor, request, data, { event } = {}) {
   foundry.utils.setProperty(md, `flags.${MODULE_ID}.szabrowanieRzut`, { actorUuid: actor.uuid, ...data });
   const [roll] = (await actor.rollSkill({ skill, ability: SZABROWANIE.cecha, target: SZABROWANIE.st, advantage: !!u[skill], event }, {}, { data: md })) ?? [];
   if (!roll) return null;
-  await doMG("szabrowanieWynik", { ...data, aktor: actor.uuid, total: roll.total, nat20: !!roll.isCritical });
+  // Naturalna 20 z kości, nie z `isCritical` — ten bywa `false`, gdy rzut nie ma progu krytyka (test cechy).
+  await doMG("szabrowanieWynik", { ...data, aktor: actor.uuid, total: roll.total, nat20: roll.d20?.total === 20 });
   return roll.parent ?? null;
 }
 

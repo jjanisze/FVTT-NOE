@@ -260,7 +260,8 @@ export async function bebesz(token, o) {
     : await wyk.rollSkill({ skill: klucz, ability: def.test.cecha, target: o.st, advantage: !!o.ulatwienie }, {}, { data: { flavor } });
   const roll = Array.isArray(r) ? r[0] : r;
   if (!roll) return null;
-  const nat1 = roll.dice?.[0]?.total === 1 || roll.isFumble === true;
+  // Naturalna 1 z kości (zachowanej przy Ułatwieniu), nie z `isFumble` — ten zależy od progu w opcjach rzutu.
+  const nat1 = (roll.d20 ?? roll.dice?.[0])?.total === 1;
   return doMG("bebeszenieWynik", {
     trup: trup.uuid, token: token.uuid, wykonawca: wyk.uuid, tabela: o.tabela, total: roll.total, st: o.st, nat1,
     zakres: o.zakres || null, cel: o.cel, minuty: o.minuty, pomocnicy: o.pomocnicy.length
