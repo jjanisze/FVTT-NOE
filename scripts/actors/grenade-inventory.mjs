@@ -999,7 +999,9 @@ export function listChargeTiles() {
 function onUpdateActor(actor, changes) {
   if (!game.user.isActiveGM) return;
   const pending = foundry.utils.getProperty(changes, `flags.${MODULE_ID}.${FLAG_PENDING_EXPLOSIVE}`);
-  if (pending) _spawnExplosiveMarker(actor, pending).catch(e => console.warn(`${MODULE_ID} | grenade-inventory: spawn failed`, e));
+  // Prośba zawsze ma `nonce`. Zdjęcie flagi z aktora syntetycznego (żeton niepołączony) przychodzi jako pusty
+  // obiekt, nie `-=` — bez tego warunku stawiało drugi, domyślny znacznik 1,5 m w (0, 0) oglądanej sceny.
+  if (pending?.nonce) _spawnExplosiveMarker(actor, pending).catch(e => console.warn(`${MODULE_ID} | grenade-inventory: spawn failed`, e));
   const charge = foundry.utils.getProperty(changes, `flags.${MODULE_ID}.${FLAG_PENDING_CHARGE}`);
   if (charge?.anchor) _spawnPendingCharge(actor, charge).catch(e => console.warn(`${MODULE_ID} | grenade-inventory: charge spawn failed`, e));
 }

@@ -5,7 +5,7 @@
  * Content comes from Podrecznik/NOE/13 NOTATNIK ŁOWCY/ via extract_bestiary.py;
  * automation metadata comes from the RULES/AUTOMATION layers in the generator.
  *
- * 52 creatures, 260 features (92 automated), 1 attack riders.
+ * 52 creatures, 260 features (100 automated), 1 attack riders.
  */
 
 export const BESTIARY = {
@@ -231,7 +231,28 @@ export const BESTIARY = {
         "text": "Biodroid nigdy nie może być Zaskoczony."
       },
       {
-        "automation": null,
+        "automation": {
+          "czasStanow": "1 min",
+          "kind": "autodestrukcja",
+          "obrazenia": [
+            {
+              "srednio": 12,
+              "typ": "explosive",
+              "wzor": "4d6"
+            }
+          ],
+          "polowa": true,
+          "promien": 3.0,
+          "rzut": {
+            "cecha": "dex",
+            "st": 15
+          },
+          "stany": [
+            "prone",
+            "deafened"
+          ],
+          "szansa": 30
+        },
         "id": "autodestrukcja-30",
         "name": "Autodestrukcja (30%)",
         "section": "traits",
@@ -2593,7 +2614,28 @@ export const BESTIARY = {
         "text": "Gladiator nigdy nie jest Zaskoczony."
       },
       {
-        "automation": null,
+        "automation": {
+          "czasStanow": "1 min",
+          "kind": "autodestrukcja",
+          "obrazenia": [
+            {
+              "srednio": 12,
+              "typ": "explosive",
+              "wzor": "4d6"
+            }
+          ],
+          "polowa": true,
+          "promien": 3.0,
+          "rzut": {
+            "cecha": "dex",
+            "st": 15
+          },
+          "stany": [
+            "prone",
+            "deafened"
+          ],
+          "szansa": 80
+        },
         "id": "autodestrukcja-80",
         "name": "Autodestrukcja (80%)",
         "section": "traits",
@@ -2959,7 +3001,28 @@ export const BESTIARY = {
         "text": "Juggernaut nigdy nie jest Zaskoczony."
       },
       {
-        "automation": null,
+        "automation": {
+          "czasStanow": "1 min",
+          "kind": "autodestrukcja",
+          "obrazenia": [
+            {
+              "srednio": 36,
+              "typ": "explosive",
+              "wzor": "12d6"
+            }
+          ],
+          "polowa": true,
+          "promien": 9.0,
+          "rzut": {
+            "cecha": "dex",
+            "st": 15
+          },
+          "stany": [
+            "prone",
+            "deafened"
+          ],
+          "szansa": 100
+        },
         "id": "autodestrukcja-100",
         "name": "Autodestrukcja (100%)",
         "section": "traits",
@@ -3317,7 +3380,28 @@ export const BESTIARY = {
         "text": "Kidnaper nigdy nie jest Zaskoczony."
       },
       {
-        "automation": null,
+        "automation": {
+          "czasStanow": "1 min",
+          "kind": "autodestrukcja",
+          "obrazenia": [
+            {
+              "srednio": 12,
+              "typ": "explosive",
+              "wzor": "4d6"
+            }
+          ],
+          "polowa": true,
+          "promien": 3.0,
+          "rzut": {
+            "cecha": "dex",
+            "st": 15
+          },
+          "stany": [
+            "prone",
+            "deafened"
+          ],
+          "szansa": 70
+        },
         "id": "autodestrukcja-70",
         "name": "Autodestrukcja (70%)",
         "section": "traits",
@@ -4198,7 +4282,28 @@ export const BESTIARY = {
         "text": "Łowca nigdy nie jest Zaskoczony."
       },
       {
-        "automation": null,
+        "automation": {
+          "czasStanow": "1 min",
+          "kind": "autodestrukcja",
+          "obrazenia": [
+            {
+              "srednio": 9,
+              "typ": "explosive",
+              "wzor": "3d6"
+            }
+          ],
+          "polowa": true,
+          "promien": 1.5,
+          "rzut": {
+            "cecha": "dex",
+            "st": 15
+          },
+          "stany": [
+            "prone",
+            "deafened"
+          ],
+          "szansa": 50
+        },
         "id": "autodestrukcja-50",
         "name": "Autodestrukcja (50%)",
         "section": "traits",
@@ -4490,7 +4595,28 @@ export const BESTIARY = {
         "text": "Mobsprzęt nigdy nie jest Zaskoczony."
       },
       {
-        "automation": null,
+        "automation": {
+          "czasStanow": "1 min",
+          "kind": "autodestrukcja",
+          "obrazenia": [
+            {
+              "srednio": 12,
+              "typ": "explosive",
+              "wzor": "4d6"
+            }
+          ],
+          "polowa": true,
+          "promien": 3.0,
+          "rzut": {
+            "cecha": "dex",
+            "st": 15
+          },
+          "stany": [
+            "prone",
+            "deafened"
+          ],
+          "szansa": 100
+        },
         "id": "autodestrukcja-100",
         "name": "Autodestrukcja (100%)",
         "section": "traits",
@@ -5268,7 +5394,28 @@ export const BESTIARY = {
         "text": "Obrońca nigdy nie jest Zaskoczony."
       },
       {
-        "automation": null,
+        "automation": {
+          "czasStanow": "1 min",
+          "kind": "autodestrukcja",
+          "obrazenia": [
+            {
+              "srednio": 24,
+              "typ": "explosive",
+              "wzor": "8d6"
+            }
+          ],
+          "polowa": true,
+          "promien": 6.0,
+          "rzut": {
+            "cecha": "dex",
+            "st": 15
+          },
+          "stany": [
+            "prone",
+            "deafened"
+          ],
+          "szansa": 80
+        },
         "id": "autodestrukcja-80",
         "name": "Autodestrukcja (80%)",
         "section": "traits",
@@ -5761,7 +5908,28 @@ export const BESTIARY = {
         "text": "Pulser nigdy nie jest Zaskoczony."
       },
       {
-        "automation": null,
+        "automation": {
+          "czasStanow": "1 min",
+          "kind": "autodestrukcja",
+          "obrazenia": [
+            {
+              "srednio": 9,
+              "typ": "explosive",
+              "wzor": "3d6"
+            }
+          ],
+          "polowa": true,
+          "promien": 3.0,
+          "rzut": {
+            "cecha": "dex",
+            "st": 15
+          },
+          "stany": [
+            "prone",
+            "deafened"
+          ],
+          "szansa": 20
+        },
         "id": "autodestrukcja-20",
         "name": "Autodestrukcja (20%)",
         "section": "traits",

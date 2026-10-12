@@ -126,6 +126,39 @@ def rule_atak_wielokrotny(cid, feat):
     return {"kind": "multiattack"}
 
 
+AUTODESTRUKCJA_NAME = re.compile(r"^autodestrukcja\s*\((\d{1,3})\s*%\)$", re.I)
+STAN_WORDS = {"powalenie": "prone", "ogłuchnięcie": "deafened", "oślepienie": "blinded", "unieruchomienie": "restrained"}
+
+
+def rule_autodestrukcja(cid, feat):
+    """Autodestrukcja (N%) — PLAN_m5_postoj U21. Machines print the same sentence with different numbers:
+    "RO na Zręczność o ST 15, w promieniu 3 m. Porażka: 12 (4k6) obrażeń wybuchowych, Powalenie i Ogłuchnięcie
+    na 1 minutę. Sukces: połowa obrażeń." The structure feeds the runtime (scripts/combat/autodestrukcja.mjs):
+    the GM rolls k100 against `szansa` at 0 HP, k4 rounds of countdown, then the blast card. Strict: a sentence
+    that does not parse is a build warning, not a silent half-automation."""
+    m = AUTODESTRUKCJA_NAME.match(feat["name"].strip())
+    text = feat["text"]
+    save = re.search(r"RO na (\w+) o ST (\d+)", text)
+    radius = re.search(r"w promieniu (\d+(?:,\d+)?) m", text)
+    dmg = re.search(r"(\d+) \((\d+k\d+)\) obrażeń (\w+)", text)
+    if not (m and save and radius and dmg):
+        warnings.append(f"{cid}: Autodestrukcja — nie rozpoznano tekstu: {text[:80]}")
+        return None
+    ability = ABIL_WORDS.get(save.group(1).lower())
+    stany = [v for k, v in STAN_WORDS.items() if k in text.lower()]
+    czas = re.search(r"na (\d+) minut", text)
+    return {
+        "kind": "autodestrukcja",
+        "szansa": int(m.group(1)),
+        "promien": float(radius.group(1).replace(",", ".")),
+        "rzut": {"cecha": ability, "st": int(save.group(2))},
+        "obrazenia": [{"wzor": dice(dmg.group(2)), "srednio": int(dmg.group(1)), "typ": "explosive"}],
+        "stany": stany,
+        "czasStanow": f"{czas.group(1)} min" if czas else None,
+        "polowa": "połowa obrażeń" in text.lower(),
+    }
+
+
 RULES = {
     "pierwsze-spotkanie": rule_pierwsze_spotkanie,
     "wspolpraca": rule_wspolpraca,
@@ -239,6 +272,8 @@ def automate(cid, feat):
     key = f"{cid}.{slug(feat['name'])}"
     if key in AUTOMATION:
         return AUTOMATION[key]
+    if AUTODESTRUKCJA_NAME.match(feat["name"].strip()):
+        return rule_autodestrukcja(cid, feat)
     rule = RULES.get(slug(feat["name"]))
     return rule(cid, feat) if rule else None
 

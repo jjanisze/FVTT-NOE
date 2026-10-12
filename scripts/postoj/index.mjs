@@ -27,6 +27,7 @@ import { registerZakladkaDoba } from "./zakladka-doba.mjs";
 import { registerZajeciaPostoju, treningi, projektyBazy, pasywnaDla, ustawProjektBazy } from "./zajecia.mjs";
 import { registerPrzeskok, przeskokApi } from "./przeskok.mjs";
 import { registerSzabrowanie, szabrowanieApi } from "./szabrowanie.mjs";
+import { registerAutodestrukcja, autodestrukcjaApi } from "../combat/autodestrukcja.mjs";
 
 /** Wołane z `init`. */
 export function registerPostoj() {
@@ -49,6 +50,7 @@ export function registerPostoj() {
   registerZajeciaPostoju();
   registerPrzeskok();
   registerSzabrowanie();
+  registerAutodestrukcja();
   console.log("Neuroshima 5e | M5 Postój i handel registered");
 }
 
@@ -78,6 +80,7 @@ export const postojApi = Object.freeze({
   zajecia: { treningi, projektyBazy, ustawProjektBazy, pasywna: pasywnaDla },
   przeskok: przeskokApi,
   szabrowanie: szabrowanieApi,
+  autodestrukcja: autodestrukcjaApi,
   ilustracja,
   wyczyscPamiecIlustracji,
   zasady: postojRules

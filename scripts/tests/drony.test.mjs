@@ -230,6 +230,8 @@ export function registerDronyTests(quench) {
     });
 
     describe("Rozłóż / Złóż — stan uchwytu z żetonów (U12)", function () {
+      // Prośba przez przekaźnik MG to ~0,6 s na krok; dwa kroki i zapisy własności nie mieszczą się w 2 s mocha.
+      this.timeout(8000);
       let holder, wynik;
       const u = () => uchwytDrona(wynik.dron);
 
@@ -694,6 +696,8 @@ export function registerDronyTests(quench) {
     });
 
     describe("Własność operatora przez przekaźnik (D12): nadanie, przejęcie, zwolnienie", function () {
+      // Prośba przez przekaźnik MG to ~0,6 s na krok; dwa kroki i zapisy własności nie mieszczą się w 2 s mocha.
+      this.timeout(8000);
       let operator, wynik, g1, g2, scenaW;
       const OWNER = CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER;
       const nadane = () => wynik.dron.flags[MODULE_ID]?.[FLAG_NADANE] ?? {};

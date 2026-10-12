@@ -418,6 +418,8 @@ export async function potwierdzSmierc(message) {
   if (!_martwy(actor)) await actor.toggleStatusEffect("dead", { active: true, overlay: true });
   const nowa = { ...karta, stan: "potwierdzona" };
   await message.update({ content: _trescSmierci(actor, nowa), [`flags.${MODULE_ID}.${KARTA_SMIERC}`]: nowa });
+  // Awaria 20 → wybuch ścieżką autodestrukcji (PLAN_m5_postoj §7.18).
+  Hooks.callAll("neuroshima.smiercPotwierdzona", actor, nowa);
   await _odswiezKarte(actor, { koniec: true });
   await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor }),
@@ -454,6 +456,8 @@ async function _bnPada(actor) {
     content: _trescBN(actor, { stan: "martwy" }),
     flags: { [MODULE_ID]: { [KARTA_BN]: { actorUuid: actor.uuid, stan: "martwy" } } }
   });
+  // Maszyna z cechą autodestrukcji (PLAN_m5_postoj §7.18) — `combat/autodestrukcja.mjs`.
+  Hooks.callAll("neuroshima.bnPada", actor);
 }
 
 /**

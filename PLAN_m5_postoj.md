@@ -1424,3 +1424,27 @@ Quench `fuksy` (9). Na żywo: wódka z paczki przez prawdziwą aktywność — b
   tylko u MG z odnośnikiem, trzech szukających, ≥ 20 z nat. 20 → podwójnie, przedmiot, Fant; porażka →
   [Spróbuj] za kogoś; [Przesuń czas] +40 min; ostrzeżenie o powtórce), `boot` z 18 paczkami. **Mutacja:**
   publiczna karta komplikacji — czerwone.
+
+**2026-10-12 — E9 (autodestrukcja maszyn).**
+- Generator Bestiariusza (U21): reguła po nazwie „Autodestrukcja (N%)” parsuje zdanie statblocku w
+  `{ kind, szansa, promien, rzut, obrazenia[], stany[], czasStanow, polowa }` — 8 maszyn (RAW ma 8, nie 9), ścisła
+  (nierozpoznany tekst = ostrzeżenie generatora). `bestiary-data.mjs` przegenerowany (92 → 100 automatyzacji);
+  paczki `bestiariusz` nie przebudowano (budowniczy niesie cudze, niezatwierdzone zmiany ikon) — runtime czyta
+  automatykę z cechy przedmiotu, potem z danych po id, potem z nazwy i opisu cechy (maszyna MG).
+- `combat/autodestrukcja.mjs`: „BN pada” (`neuroshima.bnPada` z `umieranie.mjs`) → szept MG [Rzuć k100] (bez
+  rzutów w szepcie); w szansie k4 rund — **odczyt:** tyka na początku każdej rundy walki (`tikRaz`, raz na rundę),
+  bo martwa maszyna zwykle wypada z kolejki i jej tura by nie przyszła; poza walką — linia „za N × 6 s” i [Wybuch]
+  u MG; publiczna linia odliczania; [Anuluj odliczanie]. Wybuch ścieżką granatów (`requestBlast` — kwadrat o boku
+  2 × promień jak granaty, z VFX; `postExplosiveCard` z RO, obrażeniami i stanami), `dead`, zniszczone CE/CH/CZ
+  w fladze, wrak żetonu (`tokens/wraki/<rozmiar>.webp`, gdy plik jest — zamówione w MISSING.md H; inaczej
+  przyciemnienie), „(wrak)”, oryginał w fladze żetonu, [Przywróć grafikę]. Awaria 20 drona: potwierdzona karta
+  „Śmierć — autodestrukcja” (`neuroshima.smiercPotwierdzona`) → od razu wybuch; bez parametrów — wrak i linia MG.
+- **Znalezisko (stary błąd F12):** zdjęcie flagi prośby wybuchu z aktora syntetycznego (żeton niepołączony)
+  przychodzi w `updateActor` jako pusty obiekt, nie `-=` — `grenade-inventory` stawiał drugi, domyślny znacznik
+  1,5 m w (0, 0) **oglądanej sceny** (także dla min i ładunków podkładanych przez BN). Warunek na `nonce`; cztery
+  takie znaczniki z dzisiejszych testów usunięte ze sceny „Start” kampanii. Spike E0 (5) tego nie wyłapał.
+- Testy dronów D12/U12: prośba przez przekaźnik MG to ~0,6 s na krok — dwa kroki z zapisami własności siedziały na
+  granicy 2 s mocha, a M5 dokłada ~0,3 s; limit 8 s jak w reszcie pliku. Pełny Quench 1176/1176.
+- Quench `autodestrukcja` (6); e2e **`autodestrukcja`** zielone (Gladiator z Bestiariusza na oglądanej scenie, 0 PW
+  → szept tylko MG, k100 = 1 → k4 = 1 → linia dla stołu, następna runda → karta wybuchu, jeden znacznik, brak
+  zabłąkanego szablonu, wrak, `dead`, CE/CH/CZ; [Przywróć grafikę]). **Mutacja:** bez warunku `nonce` — czerwone.
