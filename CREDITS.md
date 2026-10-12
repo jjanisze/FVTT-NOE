@@ -128,6 +128,13 @@ These OpenAI-generated glyphs retain the reviewed pixels. Saved selections and
 source/output hashes are in `dev/icons/review/candidates/batch-66/installed.json`;
 the incoming decisions are archived in `dev/icons/review/candidates/batch-66/decisions.json`.
 
+Ten exact GM-approved selections from Batch 66's review were installed on
+2026-10-12 as lossless WEBP rasters and theme-aware SVG wrappers. These
+OpenAI-generated glyphs retain the selected pixels, including Barbarka's older
+Batch 65 candidate chosen by the GM. Per-file sources and hashes are in
+`dev/icons/review/candidates/batch-66/reviewed-installed.json`; all sixteen
+decisions are archived in `dev/icons/review/candidates/batch-66/reviewed.json`.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

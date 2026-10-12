@@ -58,3 +58,25 @@ queue files. No Batch 66 candidate is installed before fresh GM approval.
 
 Do not rerun `inspect_queue.mjs` or `report_progress.mjs`: their snapshots are
 historical. Raw images and candidate previews remain local under existing ignores.
+
+The GM reviewed Batch 66 on 2026-10-12: ten approved, six revisions, no pending
+or rejected decisions. `accept_current_review.py` uses a separate `reviewed.json`
+snapshot and `reviewed-installed.json` report, preserving the incoming Batch 65
+archives. The ten chosen glyphs are installed as exact-pixel WEBP/SVG pairs.
+Barbarka uses the older Batch 65 candidate that the GM selected; no new candidate
+was substituted. All saved feedback remained byte-for-byte unchanged during
+installation. `reviewed-remaining-items.json` preserves the six open cards.
+
+The remaining requests cover Bebeszenie's uncrossed organic/electronic composition,
+the patient's hand rotation, simpler facial lines, running speed strokes, the book
+page marks/removal of the wrench, and a shot through cover with separated figures.
+These requests are recorded in MISSING for Batch 67; no new images are generated.
+`progress-reviewed.json` records 333 resolved icons and six remaining revisions
+(roughly 98% of the known icon backlog), origins 36/36 and Sztuczki 48/53 delivered.
+
+```sh
+python dev/icons/review/candidates/batch-66/accept_current_review.py --check
+```
+
+The check validates source/output hashes, exact approved pixels, WEBP encoding,
+white visible pixels, 20 px margins and embedded theme-aware SVG masks.

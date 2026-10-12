@@ -1,0 +1,125 @@
+{
+  "date": "2026-10-12",
+  "installed": [
+    {
+      "itemId": "batch64-barbarka",
+      "name": "Barbarka",
+      "candidateId": "batch65-revision",
+      "source": "candidates/batch-65/barbarka_revision_b.png",
+      "files": [
+        "icons/abilities/barbarka.svg",
+        "icons/abilities/barbarka.webp"
+      ],
+      "sourceSha256": "c9cb32f97c73242462ee6ab0f9bc92d08954d0e80210df68bfa929e3d35be4d3",
+      "webpSha256": "c7b416ac90856218ef59970ce8c8d17eef692011c732a96e1e2ea2222f90abf1"
+    },
+    {
+      "itemId": "batch64-mistrz-walki-wrecz",
+      "name": "Mistrz walki wręcz",
+      "candidateId": "batch66-revision",
+      "source": "candidates/batch-66/mistrz-walki-wrecz_revision_c.png",
+      "files": [
+        "icons/abilities/mistrz-walki-wrecz.svg",
+        "icons/abilities/mistrz-walki-wrecz.webp"
+      ],
+      "sourceSha256": "7794af709d31db8e2cb385373680eca7428f17fe6ab4f1002a3fc8d73c511a3d",
+      "webpSha256": "feb4c056a0c151ced2326a932ea7db1fa44943fd5227af9048e5fdde6792e16c"
+    },
+    {
+      "itemId": "batch65-padnij-powstan",
+      "name": "Padnij/Powstań",
+      "candidateId": "batch66-revision",
+      "source": "candidates/batch-66/padnij-powstan_revision_b.png",
+      "files": [
+        "icons/abilities/padnij-powstan.svg",
+        "icons/abilities/padnij-powstan.webp"
+      ],
+      "sourceSha256": "9157bf68d2a4e50b3f6c499ef6e37432ca21d84ae2a2f0f89c1503b3c60c013f",
+      "webpSha256": "6f74ceb45d8ea2b9c2aed9f8cdef3b43a41cb0bf4bfc440203e0e8eaf9629a89"
+    },
+    {
+      "itemId": "batch65-pancerny",
+      "name": "Pancerny",
+      "candidateId": "batch66-revision",
+      "source": "candidates/batch-66/pancerny_revision_b.png",
+      "files": [
+        "icons/abilities/pancerny.svg",
+        "icons/abilities/pancerny.webp"
+      ],
+      "sourceSha256": "9679b438743cf634bf37b1bab2a422b2e36a7c2803ba52cbcc7d30c0979afffd",
+      "webpSha256": "bbf16985e0b39eb03d7c6a1e6c289e5bae0f6f43aa8bdfae8c2f381890e33843"
+    },
+    {
+      "itemId": "batch65-siekierezada",
+      "name": "Siekierezada",
+      "candidateId": "batch66-revision",
+      "source": "candidates/batch-66/siekierezada_revision_b.png",
+      "files": [
+        "icons/abilities/siekierezada.svg",
+        "icons/abilities/siekierezada.webp"
+      ],
+      "sourceSha256": "8838f27b9a1bb8ee0bced4a7ed1ade14ad792b94e95ecb12cf5e98a0563014f6",
+      "webpSha256": "9af9c5a402d6ce38d08ac65d6715399ef80c67fb0bddc94b21358fb6896fc99d"
+    },
+    {
+      "itemId": "batch65-szkolenie-w-broni",
+      "name": "Szkolenie w broni",
+      "candidateId": "batch66-revision",
+      "source": "candidates/batch-66/szkolenie-w-broni_revision_b.png",
+      "files": [
+        "icons/abilities/szkolenie-w-broni.svg",
+        "icons/abilities/szkolenie-w-broni.webp"
+      ],
+      "sourceSha256": "b6dd86b88a2e53dc77addac364f0c5bd2e6d3abbd5df7325ba228479e4655c7f",
+      "webpSha256": "caf2fca43bf269d552252b4444c6a1623ed813df884ffeeeb5fc5b4440bca49b"
+    },
+    {
+      "itemId": "batch66-szkolenie-w-srednim-pancerzu",
+      "name": "Szkolenie w średnim pancerzu",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-66/szkolenie-w-srednim-pancerzu.png",
+      "files": [
+        "icons/abilities/szkolenie-w-srednim-pancerzu.svg",
+        "icons/abilities/szkolenie-w-srednim-pancerzu.webp"
+      ],
+      "sourceSha256": "6bfb20e53636243bb6357ded81e9cd9493f2811df9f0b679ca30577a0b31405a",
+      "webpSha256": "435ac454669e7fbc46b694e3621a838ab23496465b85bfc9a88c8056ec4fa03f"
+    },
+    {
+      "itemId": "batch66-szturmowiec",
+      "name": "Szturmowiec",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-66/szturmowiec.png",
+      "files": [
+        "icons/abilities/szturmowiec.svg",
+        "icons/abilities/szturmowiec.webp"
+      ],
+      "sourceSha256": "99328c5365b63c228dc7a8100847947f36977a4c397c299aa8650e6dc1cd7567",
+      "webpSha256": "0d222cc4b1a51fbe2d32aca0ce0c5eed704abc85241f5655d14b841f9e86f300"
+    },
+    {
+      "itemId": "batch66-wrestler",
+      "name": "Wrestler",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-66/wrestler.png",
+      "files": [
+        "icons/abilities/wrestler.svg",
+        "icons/abilities/wrestler.webp"
+      ],
+      "sourceSha256": "1aa44c6df6ba4c32201fa08e1f1b52309d7e4c811ad1c13534968e120ff05cef",
+      "webpSha256": "417a9ae776d066480cdd6d788fe3f30ffa8150a00b4baa9bacb13a37db9ac38e"
+    },
+    {
+      "itemId": "batch66-zlomiarz",
+      "name": "Złomiarz",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-66/zlomiarz.png",
+      "files": [
+        "icons/abilities/zlomiarz.svg",
+        "icons/abilities/zlomiarz.webp"
+      ],
+      "sourceSha256": "e8b8ffd5cb2de20398516a689ebf4e7a9f54492023aee775aa7156af53fdefe8",
+      "webpSha256": "b2e3b5caba3bd38a7ad6d5211338dbadbc50304bd0f663d687ff7166a1a4adb6"
+    }
+  ]
+}
