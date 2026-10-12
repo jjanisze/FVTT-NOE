@@ -122,6 +122,12 @@ Its saved selection and hashes are in
 `dev/icons/review/candidates/batch-64/reviewed-addendum-installed.json`; the later
 decision snapshot is `dev/icons/review/candidates/batch-64/reviewed-addendum.json`.
 
+Eighteen exact GM-approved Batch 65 glyphs were installed on 2026-10-12 as
+lossless WEBP rasters and theme-aware SVG wrappers embedding WEBP masks.
+These OpenAI-generated glyphs retain the reviewed pixels. Saved selections and
+source/output hashes are in `dev/icons/review/candidates/batch-66/installed.json`;
+the incoming decisions are archived in `dev/icons/review/candidates/batch-66/decisions.json`.
+
 ## Token art
 
 Bestiary token art is original work, borrowed (by reference, not copy) from `dnd5e`'s own

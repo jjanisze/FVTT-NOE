@@ -1,0 +1,221 @@
+{
+  "date": "2026-10-12",
+  "installed": [
+    {
+      "itemId": "batch61-samuraj",
+      "name": "Samuraj",
+      "candidateId": "batch65-revision",
+      "source": "candidates/batch-65/samuraj_revision_d.png",
+      "files": [
+        "icons/abilities/samuraj.svg",
+        "icons/abilities/samuraj.webp"
+      ],
+      "sourceSha256": "2c7b93e0218beeef8ffab8194110d718e8e48e7bf735503a59f39ca343f18cbd",
+      "webpSha256": "e5445d312fa9eee37ae380e42c74b4f9b3f2d2a4480ef314d442dd6945e8fff5"
+    },
+    {
+      "itemId": "batch62-szabrowanie",
+      "name": "Szabrowanie",
+      "candidateId": "batch65-revision",
+      "source": "candidates/batch-65/szabrowanie_revision_d.png",
+      "files": [
+        "icons/actions/szabrowanie.svg",
+        "icons/actions/szabrowanie.webp"
+      ],
+      "sourceSha256": "76994584f3e40ec8fed546082bd8c1d241762dc25e221c399cb06c549c6367aa",
+      "webpSha256": "25bd6238371a761df3703c30c8fbbd0998b31a8d77dc7e6002a7c961d32df01e"
+    },
+    {
+      "itemId": "batch63-chodzmy-na-pewno-juz-utonal",
+      "name": "Chodźmy, na pewno już utonął",
+      "candidateId": "batch65-revision",
+      "source": "candidates/batch-65/chodzmy-na-pewno-juz-utonal_revision_c.png",
+      "files": [
+        "icons/abilities/chodzmy-na-pewno-juz-utonal.svg",
+        "icons/abilities/chodzmy-na-pewno-juz-utonal.webp"
+      ],
+      "sourceSha256": "f77797af810d38b5552e319ac8d8872dde7565b88222a369c584f7577fda41cd",
+      "webpSha256": "8727c1979b0af9554f9c3e54498b9b64c6395aedd9468e9e55d275a903236902"
+    },
+    {
+      "itemId": "batch63-zjadlem-wlasnego-psa",
+      "name": "Wiesz, zjadłem własnego psa",
+      "candidateId": "batch65-revision",
+      "source": "candidates/batch-65/zjadlem-wlasnego-psa_revision_c.png",
+      "files": [
+        "icons/abilities/zjadlem-wlasnego-psa.svg",
+        "icons/abilities/zjadlem-wlasnego-psa.webp"
+      ],
+      "sourceSha256": "3b5ca130ceffcd0e4651632a736c7e12667a3cabbc1859a83f4e54eec74799be",
+      "webpSha256": "f61f31cec94ef118f6ecde16a4eabc9f93c5016ae35d0fbbeb39cf78783faa6f"
+    },
+    {
+      "itemId": "batch64-benzyna-zamiast-krwi",
+      "name": "Benzyna zamiast krwi",
+      "candidateId": "batch65-revision",
+      "source": "candidates/batch-65/benzyna-zamiast-krwi_revision_b.png",
+      "files": [
+        "icons/abilities/benzyna-zamiast-krwi.svg",
+        "icons/abilities/benzyna-zamiast-krwi.webp"
+      ],
+      "sourceSha256": "d095d9636c899ef3c8aa1991caee82a96607ce6779ba81f5c158d6c07585feb1",
+      "webpSha256": "84c013b929e594701ad04c0c17aa39f98f57e31db86fbcc7daebbe6ad1ed801e"
+    },
+    {
+      "itemId": "batch64-fachowiec",
+      "name": "Fachowiec",
+      "candidateId": "batch65-revision",
+      "source": "candidates/batch-65/fachowiec_revision_b.png",
+      "files": [
+        "icons/abilities/fachowiec.svg",
+        "icons/abilities/fachowiec.webp"
+      ],
+      "sourceSha256": "d750b0be3805f27ffb548ed9324a0a1eb68853f889f35a040d5c44890099911f",
+      "webpSha256": "6a4547f52fe935a111d6340ad060077a6259f791d6d58e3d59498c10048bfaff"
+    },
+    {
+      "itemId": "batch64-jest-zajebiscie",
+      "name": "Jest zajebiście",
+      "candidateId": "batch65-revision",
+      "source": "candidates/batch-65/jest-zajebiscie_revision_b.png",
+      "files": [
+        "icons/abilities/jest-zajebiscie.svg",
+        "icons/abilities/jest-zajebiscie.webp"
+      ],
+      "sourceSha256": "af3d0a46e0f20a43a8881bf0726ce4143bdbd808133cd0988d6972671f998af9",
+      "webpSha256": "e0fe97de733891114b3906357eb4f09941a2300b8910ec71298cc75f64bdce0b"
+    },
+    {
+      "itemId": "batch64-muzyk",
+      "name": "Muzyk",
+      "candidateId": "batch65-revision",
+      "source": "candidates/batch-65/muzyk_revision_b.png",
+      "files": [
+        "icons/abilities/muzyk.svg",
+        "icons/abilities/muzyk.webp"
+      ],
+      "sourceSha256": "d63e596a5868aa5680c5a50062403a208517223eb3430eecc8b9c87b030af08b",
+      "webpSha256": "5c7467f30ba8dbe980058e7153b05465abdb1803dd9931d4beb77245d283e23d"
+    },
+    {
+      "itemId": "batch65-pewna-reka",
+      "name": "Pewna ręka",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-65/pewna-reka.png",
+      "files": [
+        "icons/abilities/pewna-reka.svg",
+        "icons/abilities/pewna-reka.webp"
+      ],
+      "sourceSha256": "108ff4fbb0037371d7d6bc720a8e5005f586a6d4ae45e171447725e3059e81bf",
+      "webpSha256": "61655239d6c325cbd930494cd162fa5a3a1dd7a38840fe6fe9f8ce64b16c595a"
+    },
+    {
+      "itemId": "batch65-plug-and-play",
+      "name": "Plug & Play",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-65/plug-and-play.png",
+      "files": [
+        "icons/abilities/plug-and-play.svg",
+        "icons/abilities/plug-and-play.webp"
+      ],
+      "sourceSha256": "f434895890c8b207fdb55709dfdc9a920f2b5448e4675e5603fb6ed58d40f65d",
+      "webpSha256": "6f8690a3fe038466d02d62e20fe5bc8a8d57f81e9b63e63dfb3675276b8ca2ee"
+    },
+    {
+      "itemId": "batch65-przydasie",
+      "name": "Przydasie",
+      "candidateId": "atlas-b",
+      "source": "candidates/batch-65/przydasie.png",
+      "files": [
+        "icons/abilities/przydasie.svg",
+        "icons/abilities/przydasie.webp"
+      ],
+      "sourceSha256": "90e9270aff624c5d29f1ff0c9fb0645c376b9aa224bc926f387949d5f0d8a4f9",
+      "webpSha256": "50512d854ab0b7404d5c659273f02922d9848dd659c45f9b87acaf0dcd94b936"
+    },
+    {
+      "itemId": "batch65-robin-hood",
+      "name": "Robin Hood",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-65/robin-hood.png",
+      "files": [
+        "icons/abilities/robin-hood.svg",
+        "icons/abilities/robin-hood.webp"
+      ],
+      "sourceSha256": "ff15f5e0dedda872934eca27b292065a074e8b8920e904c2679ee41fcf15036c",
+      "webpSha256": "27173b84891f5b7fca3bf16dbfec82be5d8e9775b67fe5455155e58fa2d5b53f"
+    },
+    {
+      "itemId": "batch65-rodeo",
+      "name": "Rodeo",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-65/rodeo.png",
+      "files": [
+        "icons/abilities/rodeo.svg",
+        "icons/abilities/rodeo.webp"
+      ],
+      "sourceSha256": "0a1cf36067c45c2af76aaa5b64591b2937955d9275b2fa48556eed5ebd08dcd9",
+      "webpSha256": "f2392dfe398df3f2d537ebd29dc277dec8cc04b28459f7911da2b2f1ddb31594"
+    },
+    {
+      "itemId": "batch65-rozroba",
+      "name": "Rozróba",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-65/rozroba.png",
+      "files": [
+        "icons/abilities/rozroba.svg",
+        "icons/abilities/rozroba.webp"
+      ],
+      "sourceSha256": "0e4f07b45609ffeafce25c705b86be8ee73ce71893c3cb6560243803e6823463",
+      "webpSha256": "ef23814469aeffd0e5cfc0fe12262bb11c7c405b9f34d6ff7c70680b72674e7f"
+    },
+    {
+      "itemId": "batch65-ruchome-gniazdo-ckm",
+      "name": "Ruchome gniazdo CKM",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-65/ruchome-gniazdo-ckm.png",
+      "files": [
+        "icons/abilities/ruchome-gniazdo-ckm.svg",
+        "icons/abilities/ruchome-gniazdo-ckm.webp"
+      ],
+      "sourceSha256": "56e25ac4530d22faf337f157c119c25006be35673572bc7450cf7ce47cbea9ea",
+      "webpSha256": "e9e57992168fd2b1e5f6c170e57fc62bc41e09e0522d91e6d4002231de2c9fb5"
+    },
+    {
+      "itemId": "batch65-snajper",
+      "name": "Snajper",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-65/snajper.png",
+      "files": [
+        "icons/abilities/snajper.svg",
+        "icons/abilities/snajper.webp"
+      ],
+      "sourceSha256": "a6550a06b9fc1e2ea2c2d2f0eff3229a4c3483d38c0bd3c568cf746e30db0aa3",
+      "webpSha256": "29dd71f3d80979231a2856aed89773997046f43e11d86b3ad13f6f7e2814119b"
+    },
+    {
+      "itemId": "batch65-szachista",
+      "name": "Szachista",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-65/szachista.png",
+      "files": [
+        "icons/abilities/szachista.svg",
+        "icons/abilities/szachista.webp"
+      ],
+      "sourceSha256": "de16ffbb9cd22daee9ad4f0de3155e769b945103f4686691eb612929d3580010",
+      "webpSha256": "615adb23ae83c5e5f06367afbdbb4eb61ec8515940c85d9d5ea035e415afa1bb"
+    },
+    {
+      "itemId": "batch65-szkolenie-w-ciezkim-pancerzu",
+      "name": "Szkolenie w ciężkim pancerzu",
+      "candidateId": "atlas-c",
+      "source": "candidates/batch-65/szkolenie-w-ciezkim-pancerzu.png",
+      "files": [
+        "icons/abilities/szkolenie-w-ciezkim-pancerzu.svg",
+        "icons/abilities/szkolenie-w-ciezkim-pancerzu.webp"
+      ],
+      "sourceSha256": "b1e0d38a5b8d1165a16528fc317c66ac3fa9d72a184ea8fe71aa349d540b36b8",
+      "webpSha256": "197d40c63e8a0b5edba19f26c8ca4503cd2596e4d45d219fbb16c4434eaa5e4a"
+    }
+  ]
+}

@@ -1,0 +1,233 @@
+{
+  "title": "Batch 65 · 8 revisions, 1 rejected, 0 pending",
+  "updated": "2026-10-12",
+  "items": [
+    {
+      "id": "batch62-bebeszenie",
+      "name": "Bebeszenie",
+      "tier": "Batch 62 · M5",
+      "context": "M5 player action button; toolbar/item-sheet use at small sizes.",
+      "request": "Completely REGENERATE this tool composition instead of copying the broken pliers. One normal pair of combination pliers crosses one broad butcher knife below a small clean rib-cage outline. Pliers have exactly two continuous straight handles, one central pivot and two short coherent jaws; the handles are thick straight bars, not hooks or zigzags. Knife has one solid blade and one straight handle. Keep the two tools separated by a broad black cutout at the crossing. No hand, gore or extra tools.",
+      "target": "icons/actions/bebeszenie.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "batch65-revision",
+          "label": "Batch 65 revision",
+          "src": "candidates/batch-65/bebeszenie_revision_d.png",
+          "note": "Completely REGENERATE this tool composition instead of copying the broken pliers. One normal pair of combination pliers crosses one broad butcher knife below a small clean rib-cage outline. Pliers have exactly two continuous straight handles, one central pivot and two short coherent jaws; the handles are thick straight bars, not hooks or zigzags. Knife has one solid blade and one straight handle. Keep the two tools separated by a broad black cutout at the crossing. No hand, gore or extra tools."
+        },
+        {
+          "id": "batch64-revision",
+          "label": "Batch 64 revision",
+          "src": "candidates/batch-64/bebeszenie_revision_c.png",
+          "note": "Keep the crossed butcher knife and pliers in front of the rib outline. Repair the pliers: two straight continuous handles below the pivot, no V-shaped kink, hooked grip or bent handle. Two recognisable open jaws above the pivot. Only these TWO tools form the X; no extra tool or gore."
+        },
+        {
+          "id": "batch63-revision",
+          "label": "Batch 63 revision",
+          "src": "candidates/batch-63/bebeszenie_revision_b.png",
+          "note": "Exactly TWO tools form an X: a butcher knife on one diagonal and recognisable pliers with two open jaws and two handles on the other. Replace the unidentified extra tool with the pliers. A restrained three-rib carcass outline stays behind them; no third tool and no gore."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Bebeszenie",
+          "src": "candidates/batch-62/bebeszenie.png",
+          "note": "Butcher knife and pliers over ribs; no gore."
+        }
+      ]
+    },
+    {
+      "id": "batch64-barbarka",
+      "name": "Barbarka",
+      "tier": "Batch 64 · feat feature",
+      "context": "Headbutt attacks and knocking a target prone.",
+      "request": "Make the headbutt visibly ASYMMETRIC. Left attacker bends forward and drives his forehead into the right victim's nose; right victim's head tilts back and recoils. Only the attacker delivers the blow. Different head angles and postures, one restrained impact burst at the victim's nose, two intact heads. No mirrored forehead-to-forehead pose, blood or gore.",
+      "target": "icons/abilities/barbarka.svg",
+      "catalogKey": "barbarka",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch65-revision",
+          "label": "Batch 65 revision",
+          "src": "candidates/batch-65/barbarka_revision_b.png",
+          "note": "Make the headbutt visibly ASYMMETRIC. Left attacker bends forward and drives his forehead into the right victim's nose; right victim's head tilts back and recoils. Only the attacker delivers the blow. Different head angles and postures, one restrained impact burst at the victim's nose, two intact heads. No mirrored forehead-to-forehead pose, blood or gore."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Barbarka",
+          "src": "candidates/batch-64/barbarka.png",
+          "note": "One rugged fighter delivers a headbutt: two human head-and-shoulder profiles meet forehead to forehead with one broad impact burst between them. Two intact skulls, no gore or tiny detail."
+        }
+      ]
+    },
+    {
+      "id": "batch64-mistrz-walki-wrecz",
+      "name": "Mistrz walki wręcz",
+      "tier": "Batch 64 · feat feature",
+      "context": "Melee combat maneuvers and reactive parrying.",
+      "request": "Rebuild the wrist grapple with correct anatomy: show exactly TWO opposing forearms and exactly TWO hands. One defender hand wraps its thumb and four fingers around the attacker's single wrist; the attacker's hand remains at the end of that forearm. Use a readable simple wrist control, with a broad black contour between gripping fingers and wrist. Omit other guard hands entirely. No extra hand pair, branching wrist or third forearm.",
+      "target": "icons/abilities/mistrz-walki-wrecz.svg",
+      "catalogKey": "mistrzWalkiWrecz",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch65-revision",
+          "label": "Batch 65 revision",
+          "src": "candidates/batch-65/mistrz-walki-wrecz_revision_b.png",
+          "note": "Rebuild the wrist grapple with correct anatomy: show exactly TWO opposing forearms and exactly TWO hands. One defender hand wraps its thumb and four fingers around the attacker's single wrist; the attacker's hand remains at the end of that forearm. Use a readable simple wrist control, with a broad black contour between gripping fingers and wrist. Omit other guard hands entirely. No extra hand pair, branching wrist or third forearm."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Mistrz walki wręcz",
+          "src": "candidates/batch-64/mistrz-walki-wrecz.png",
+          "note": "Two fighters' forearms meet in a close defensive maneuver: one hand redirects the other fighter's attacking wrist while the free forearm stays in guard. Broad complete hands and wrists with clear grip, no extra fingers or weapons."
+        }
+      ]
+    },
+    {
+      "id": "batch65-padnij-powstan",
+      "name": "Padnij/Powstań",
+      "tier": "Batch 65 · feat feature",
+      "context": "Wstawanie nie kosztuje Szybkości; Szybkość +3 m; wyjście z zasięgu ataku wręcz bez ataków okazyjnych.",
+      "request": "One practical survivor rises from a low kneel into a ready stance, with one knee near the ground, the other foot planted and both hands clear. A single complete body conveys getting up quickly; no duplicate ghost figures or arrows.",
+      "target": "icons/abilities/padnij-powstan.svg",
+      "catalogKey": "padnijPowstan",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Padnij/Powstań",
+          "src": "candidates/batch-65/padnij-powstan.png",
+          "note": "One practical survivor rises from a low kneel into a ready stance, with one knee near the ground, the other foot planted and both hands clear. A single complete body conveys getting up quickly; no duplicate ghost figures or arrows."
+        }
+      ]
+    },
+    {
+      "id": "batch65-pancerny",
+      "name": "Pancerny",
+      "tier": "Batch 65 · feat feature",
+      "context": "W ciężkim pancerzu: Próg obrażeń 10 przeciwko obrażeniom ciętym, kłutym i obuchowym (sumuje się z progiem pancerza).",
+      "request": "One broad practical heavy armour breastplate and shoulder guards withstand one blunt incoming impact. Thick overlapping plates and a single small impact mark outside the armour. No person face, giant shield, logo or ornate fantasy armour.",
+      "target": "icons/abilities/pancerny.svg",
+      "catalogKey": "pancerny",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Pancerny",
+          "src": "candidates/batch-65/pancerny.png",
+          "note": "One broad practical heavy armour breastplate and shoulder guards withstand one blunt incoming impact. Thick overlapping plates and a single small impact mark outside the armour. No person face, giant shield, logo or ornate fantasy armour."
+        }
+      ]
+    },
+    {
+      "id": "batch65-pan-plaster",
+      "name": "Pan Plaster",
+      "tier": "Batch 65 · feat feature",
+      "context": "+1 MDR lub INT; narzędzia małego medyka rzucają dodatkową kostkę PW; połowa dawki leku zaspokaja dzienne zapotrzebowanie.",
+      "request": "Two adult hands apply one broad adhesive medical dressing to a plain forearm beside a small open first-aid pouch. A practical medic gesture with one clear dressing and one pouch, no injury, blood, text or tiny medicine labels.",
+      "target": "icons/abilities/pan-plaster.svg",
+      "catalogKey": "panPlaster",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Pan Plaster",
+          "src": "candidates/batch-65/pan-plaster.png",
+          "note": "Two adult hands apply one broad adhesive medical dressing to a plain forearm beside a small open first-aid pouch. A practical medic gesture with one clear dressing and one pouch, no injury, blood, text or tiny medicine labels."
+        }
+      ]
+    },
+    {
+      "id": "batch65-pierwotny-instynkt",
+      "name": "Pierwotny instynkt",
+      "tier": "Batch 65 · feat feature",
+      "context": "+5 do Inicjatywy; +5 do Testów Percepcji.",
+      "request": "One alert survivor's head turns sharply toward a nearby simple disturbance contour, one ear and watchful eye visible in a spare profile. A broad raised forearm in a ready defensive gesture. No animal ears, extra eye, supernatural halo or tiny rays.",
+      "target": "icons/abilities/pierwotny-instynkt.svg",
+      "catalogKey": "pierwotnyInstynkt",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Pierwotny instynkt",
+          "src": "candidates/batch-65/pierwotny-instynkt.png",
+          "note": "One alert survivor's head turns sharply toward a nearby simple disturbance contour, one ear and watchful eye visible in a spare profile. A broad raised forearm in a ready defensive gesture. No animal ears, extra eye, supernatural halo or tiny rays."
+        }
+      ]
+    },
+    {
+      "id": "batch65-siekierezada",
+      "name": "Siekierezada",
+      "tier": "Batch 65 · feat feature",
+      "context": "+1 SIŁ lub ZRC; wyciągnięcie 2 siekierek jednocześnie w 1 Darmowej Interakcji; zasięg rzutu siekierkami ×2; TT +1 przy walce dwiema siekierkami.",
+      "request": "Two adult hands hold TWO practical matching hatchets in crossed combat positions. Each hatchet has one straight short handle and one broad coherent axe head with cutting edge facing away from its user's hand. Exactly two hands and two hatchets; no third blade, ornate axes or gore.",
+      "target": "icons/abilities/siekierezada.svg",
+      "catalogKey": "siekierezada",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Siekierezada",
+          "src": "candidates/batch-65/siekierezada.png",
+          "note": "Two adult hands hold TWO practical matching hatchets in crossed combat positions. Each hatchet has one straight short handle and one broad coherent axe head with cutting edge facing away from its user's hand. Exactly two hands and two hatchets; no third blade, ornate axes or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch65-szkolenie-w-broni",
+      "name": "Szkolenie w broni",
+      "tier": "Batch 65 · feat feature",
+      "context": "+1 SIŁ lub ZRC; biegłość w jednej wybranej kategorii broni.",
+      "request": "One learner's sturdy hands practice with a plain combat knife while an instructor's single guiding forearm points toward a solid training post. Clear knife blade, two learner hands and one instructor hand, no extra weapons, badges or text.",
+      "target": "icons/abilities/szkolenie-w-broni.svg",
+      "catalogKey": "szkolenieWBroni",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Szkolenie w broni",
+          "src": "candidates/batch-65/szkolenie-w-broni.png",
+          "note": "One learner's sturdy hands practice with a plain combat knife while an instructor's single guiding forearm points toward a solid training post. Clear knife blade, two learner hands and one instructor hand, no extra weapons, badges or text."
+        }
+      ]
+    }
+  ]
+}
