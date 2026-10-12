@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Neuroshima icon browser</title>
+  <link rel="stylesheet" href="review.css">
+  <link rel="stylesheet" href="browser.css">
+</head>
+<body>
+  <header>
+    <div><p class="eyebrow">Neuroshima asset pipeline</p><h1>Icon browser</h1></div>
+    <nav aria-label="Asset tools"><a href="/">Review queue</a><a href="browser.html" aria-current="page">Browse icons</a></nav>
+  </header>
+  <section class="library-tools" aria-label="Icon filters">
+    <p class="library-intro">Browse the current icons at inventory size. Flag anything too detailed, dithered, or out of style for a replacement batch.</p>
+    <div class="filters">
+      <label>Search<input id="search" type="search" placeholder="Name, filename, or notes…"></label>
+      <label>Category<select id="category"><option value="">All categories</option></select></label>
+      <label>Review status<select id="status"><option value="all">All icons</option><option value="unreviewed">Unreviewed</option><option value="redo">Flagged for redo</option><option value="keep">Keep current</option><option value="updated">Changed since review</option></select></label>
+      <button id="clear-filters" class="quiet" type="button">Clear filters</button>
+    </div>
+    <div class="library-summary"><p id="summary" aria-live="polite">Loading icons…</p><p id="save-status" role="status"></p></div>
+    <div class="pagination"><span class="page-range"></span><div><button data-page-prev class="quiet" type="button">Previous page</button><button data-page-next class="quiet" type="button">Next page</button></div></div>
+  </section>
+  <main id="library" class="library-grid"></main>
+  <footer class="pagination library-footer"><span class="page-range"></span><div><button data-page-prev class="quiet" type="button">Previous page</button><button data-page-next class="quiet" type="button">Next page</button></div></footer>
+  <dialog id="icon-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-heading"><div><p id="dialog-category" class="eyebrow"></p><h2 id="dialog-title"></h2></div><button id="close-dialog" class="quiet" type="button" aria-label="Close icon review">Close</button></div>
+    <div class="dialog-content">
+      <section><div id="large-preview" class="large-preview"></div><div id="dialog-scales" class="scales"></div><p id="dimensions" class="metadata"></p><p id="dialog-source" class="source-path"></p><label>Preview file<select id="variant"></select></label></section>
+      <section class="style-form">
+        <p id="current-decision" class="decision-status"></p>
+        <fieldset><legend>What should change?</legend><div id="reasons" class="reason-options"></div></fieldset>
+        <label>Notes<textarea id="style-notes" rows="5" maxlength="10000" placeholder="For example: fewer facial lines, broad black gaps, no anime expression."></textarea></label>
+        <p class="hint">Flags are saved for the next replacement batch. New candidates come back through the review queue.</p>
+        <p id="dialog-message" role="status"></p>
+      </section>
+    </div>
+    <div class="dialog-actions"><button id="keep-next" class="keep" type="button">Keep &amp; next</button><button id="redo-next" type="button">Flag for redo &amp; next</button><button id="clear-decision" class="quiet" type="button">Clear decision</button><div class="icon-navigation"><button id="previous-icon" class="quiet" type="button">Previous</button><span id="icon-position"></span><button id="next-icon" class="quiet" type="button">Next</button></div></div>
+  </dialog>
+  <script type="module" src="browser.mjs"></script>
+</body>
+</html>

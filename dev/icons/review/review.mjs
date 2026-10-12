@@ -83,3 +83,9 @@ function updateSummary() {
     `${decisions.filter(x => x === "pending").length} pending`;
 }
 updateSummary();
+if (!activeItems.length) {
+  const empty = document.createElement("p");
+  empty.className = "queue-complete";
+  empty.textContent = "All queued icons are resolved. Browse all icons to flag anything that needs a style pass.";
+  host.append(empty);
+}

@@ -8,20 +8,18 @@ import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { buildCatalog, saveStyleFeedback } from "./catalog.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MODULE_ROOT = path.resolve(HERE, "../../..");
-const ICON_ROOT = path.join(MODULE_ROOT, "icons");
-const MANIFEST = path.join(HERE, "manifest.json");
-const FEEDBACK = path.join(HERE, "feedback.json");
-const FEEDBACK_BACKUP = path.join(HERE, "feedback.json.bak");
 const PORT = Number(process.argv.find(a => a.startsWith("--port="))?.slice(7) ?? 41741);
 const HOST = "127.0.0.1";
 const TYPES = new Map([
   [".html", "text/html; charset=utf-8"], [".css", "text/css; charset=utf-8"],
   [".js", "text/javascript; charset=utf-8"], [".mjs", "text/javascript; charset=utf-8"],
   [".json", "application/json; charset=utf-8"],
-  [".png", "image/png"], [".svg", "image/svg+xml; charset=utf-8"], [".webp", "image/webp"]
+  [".png", "image/png"], [".svg", "image/svg+xml; charset=utf-8"], [".webp", "image/webp"],
+  [".jpg", "image/jpeg"], [".jpeg", "image/jpeg"], [".gif", "image/gif"], [".avif", "image/avif"]
 ]);
 
 const json = (res, status, value) => {
@@ -74,9 +72,22 @@ function validateFeedback(input, manifest) {
   return { itemId: item.id, decision: input.decision, candidateId, notes, updatedAt: new Date().toISOString() };
 }
 
+export function createReviewServer({ moduleRoot = MODULE_ROOT, reviewRoot = path.join(moduleRoot, "dev/icons/review") } = {}) {
+const ICON_ROOT = path.join(moduleRoot, "icons");
+const MANIFEST = path.join(reviewRoot, "manifest.json");
+const FEEDBACK = path.join(reviewRoot, "feedback.json");
+const FEEDBACK_BACKUP = path.join(reviewRoot, "feedback.json.bak");
 const server = http.createServer(async (req, res) => {
   try {
     const url = new URL(req.url, `http://${HOST}:${PORT}`);
+    if (req.method === "POST") {
+      if (!req.headers["content-type"]?.startsWith("application/json")) throw new Error("Expected JSON payload");
+      if (req.headers.origin && req.headers.origin !== `http://${HOST}:${req.socket.localPort}`) throw new Error("Invalid request origin");
+    }
+    if (req.method === "GET" && url.pathname === "/api/catalog") return json(res, 200, buildCatalog(moduleRoot, reviewRoot));
+    if (req.method === "POST" && url.pathname === "/api/style-feedback") {
+      return json(res, 200, saveStyleFeedback(moduleRoot, reviewRoot, await bodyJson(req)));
+    }
     if (req.method === "GET" && url.pathname === "/api/manifest") return json(res, 200, readJson(MANIFEST, { items: [] }));
     if (req.method === "GET" && url.pathname === "/api/feedback") {
       return json(res, 200, readJson(FEEDBACK, readJson(FEEDBACK_BACKUP, { version: 1, items: {} })));
@@ -105,16 +116,22 @@ const server = http.createServer(async (req, res) => {
       return json(res, 200, entry);
     }
     if (req.method !== "GET") return json(res, 405, { error: "Method not allowed" });
-    if (url.pathname.startsWith("/icons/")) return sendFile(res, safePath(ICON_ROOT, url.pathname.slice(7)));
-    const relative = url.pathname === "/" ? "index.html" : url.pathname.slice(1);
-    return sendFile(res, safePath(HERE, relative));
+    if (url.pathname.startsWith("/icons/")) return sendFile(res, safePath(ICON_ROOT, decodeURIComponent(url.pathname.slice(7))));
+    const relative = url.pathname === "/" ? "index.html" : decodeURIComponent(url.pathname.slice(1));
+    return sendFile(res, safePath(reviewRoot, relative));
   } catch (err) {
     console.error(err);
-    return json(res, 400, { error: err.message });
+    return json(res, err.status ?? 400, { error: err.message });
   }
 });
+return server;
+}
 
-server.listen(PORT, HOST, () => {
-  console.log(`Icon review: http://${HOST}:${PORT}/`);
-  console.log(`Feedback:   ${FEEDBACK}`);
-});
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const server = createReviewServer();
+  server.listen(PORT, HOST, () => {
+    console.log(`Icon review: http://${HOST}:${PORT}/`);
+    console.log(`Icon browser: http://${HOST}:${PORT}/browser.html`);
+    console.log(`Feedback:   ${path.join(HERE, "feedback.json")}`);
+  });
+}
