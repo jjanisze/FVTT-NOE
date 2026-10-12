@@ -49,3 +49,11 @@ the full review collection passes with 539 PNG/SVG pairs. The previews were
 inspected at 64/32/24/16 px, and the browser shows exactly two pending cards
 with both Batch 68 revisions selected and no failed images. The delivery/review
 census is archived in `prepared-progress.json`.
+
+Final GM review, 2026-10-13: both candidates approved and installed as exact
+lossless WEBP/SVG pairs. `reviewed.json` preserves both decisions;
+`reviewed-installed.json` records final paths and hashes. Run
+`accept_current_review.py --check` to compare delivery against the selected PNGs.
+`progress-reviewed.json` records 342/342 resolved review cards, origins 36/36,
+Sztuczki 53/53 and all three fuel-grade icons delivered. Fuel resolver mappings
+and older pack/world repoints remain for the GM.

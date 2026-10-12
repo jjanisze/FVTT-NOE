@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-13",
+  "resolvedReviewItems": 342,
+  "activeReviewItems": 0,
+  "knownIconBacklog": 342,
+  "canonical": {
+    "origin": {
+      "total": 36,
+      "dedicatedFiles": 36
+    },
+    "feat": {
+      "total": 53,
+      "dedicatedFiles": 53
+    }
+  },
+  "fuelGradeArtDelivered": 3,
+  "catalogWiringRemainsForGM": true,
+  "paintedArtCountedSeparately": true
+}

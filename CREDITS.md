@@ -143,6 +143,11 @@ final paths and hashes are in
 `dev/icons/review/candidates/batch-67/reviewed-installed.json`; the complete GM
 review is archived in `dev/icons/review/candidates/batch-67/reviewed.json`.
 
+The final two original OpenAI-generated glyphs, Pan Plaster and adulterated fuel,
+were approved by the GM and installed on 2026-10-13 as exact lossless WEBP/SVG
+pairs. Their selected sources, final paths and hashes are archived in
+`dev/icons/review/candidates/batch-68/reviewed-installed.json`.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

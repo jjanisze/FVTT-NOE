@@ -39,6 +39,10 @@ original catalog wiring count stays at 329/333 until the GM updates its resolver
 installing art alone does not change item definitions. Exact delivery evidence:
 `review/candidates/batch-67/reviewed-installed.json`.
 
+Final delivery update, 2026-10-13: the revised adulterated-fuel juice jug is
+approved and installed too; all three grade assets are ready for GM wiring.
+Evidence: `review/candidates/batch-68/reviewed-installed.json`.
+
 The earlier 98% progress estimate described the known review queue, origins and
 Sztuczki, not an exhaustive item audit. This source audit expands the backlog with
 the three fuel variants. Shared images across magazine families or different

@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-13",
+  "installed": [
+    {
+      "itemId": "batch65-pan-plaster",
+      "name": "Pan Plaster",
+      "candidateId": "batch68-revision",
+      "source": "candidates/batch-68/pan-plaster_revision_d.png",
+      "files": [
+        "icons/abilities/pan-plaster.svg",
+        "icons/abilities/pan-plaster.webp"
+      ],
+      "sourceSha256": "a400f932b7ff4fea2fad9aa3e183e065cc5dcc6f14c22d64f5ac2179c936d3e6",
+      "webpSha256": "55cb1114cf070f45d8f5f00a0cac406ac9960a494fd4e24bcf64b3feecb5aaff"
+    },
+    {
+      "itemId": "batch67-paliwo-chrzczone",
+      "name": "Paliwo chrzczone (5 l)",
+      "candidateId": "batch68-revision",
+      "source": "candidates/batch-68/paliwo_chrzczone_revision_b.png",
+      "files": [
+        "icons/items/loot/paliwo_chrzczone.svg",
+        "icons/items/loot/paliwo_chrzczone.webp"
+      ],
+      "sourceSha256": "200dfc87176a236aa4b5ef0164bc42b5366c6d171eead37ed7fd7dc05f0000e1",
+      "webpSha256": "1be91abf516d1b3f1e7fdf51eb8494a68056d6bfc6928ae3c5bd676064960ca6"
+    }
+  ]
+}
