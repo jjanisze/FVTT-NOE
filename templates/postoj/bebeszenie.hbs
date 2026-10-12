@@ -1,0 +1,60 @@
+<form class="neuro-bebeszenie-form">
+    <header class="neuro-bebeszenie-trup">
+        <img src="{{ trup.img }}" alt="">
+        <div>
+            <strong>{{ trup.nazwa }}</strong>
+            <span>{{ trup.kategoria }} · {{ trup.rozmiar }} · {{ tabela }}{{#if wkk}} (WKK){{/if}}</span>
+            <span>Do wybebeszenia: {{ pula }}{{#if proby}} · prób: {{ proby }}{{/if}}</span>
+            {{#if autodestrukcja}}<span>Autodestrukcja: {{ autodestrukcja }}</span>{{/if}}
+        </div>
+    </header>
+    {{#if jawne}}<p class="neuro-zle"><i class="fa-solid fa-eye" inert></i> Człowiek albo mutant — przed rzutem wiadomość dla wszystkich (D10).</p>{{/if}}
+    {{#if hybryda}}
+    <div class="form-group">
+        <label>Tabela</label>
+        <div class="form-fields"><select name="tabela">{{#each tabele}}<option value="{{ k }}" {{#if selected}}selected{{/if}}>{{ label }}</option>{{/each}}</select></div>
+        <p class="hint">Hybryda — wybór tabeli (U16).</p>
+    </div>
+    {{/if}}
+    <div class="form-group">
+        <label>Wykonawca</label>
+        <div class="form-fields"><select name="wykonawca">{{#each wykonawcy}}<option value="{{ id }}" {{#if selected}}selected{{/if}}>{{ nazwa }}</option>{{/each}}</select></div>
+    </div>
+    <div class="form-group">
+        <label>Test{{#if st}} (ST {{ st }}){{/if}}</label>
+        <div class="form-fields"><select name="test">{{#each testy}}<option value="{{ k }}" {{#if selected}}selected{{/if}} {{#if disabled}}disabled{{/if}}>{{ label }}</option>{{/each}}</select></div>
+    </div>
+    {{#if pomocnicy.length}}
+    <fieldset class="neuro-bebeszenie-pomocnicy">
+        <legend>Pomocnicy</legend>
+        {{#each pomocnicy}}<label class="checkbox"><input type="checkbox" data-pomocnik="{{ id }}" {{#if zaznaczony}}checked{{/if}}> {{ nazwa }}{{#unless zestaw}} <span class="hint">(bez narzędzi)</span>{{/unless}}</label>{{/each}}
+        <div class="neuro-zajecie-rzad">
+            <button type="button" class="neuro-cennik-btn" data-action="pomocnicy"><i class="fa-solid fa-hands-helping" inert></i> Poproś o test ST 10</button>
+            <label class="checkbox"><input type="checkbox" name="ulatwienie" {{#if ulatwienie}}checked{{/if}}> pomocnik z narzędziami zdał — Ułatwienie</label>
+        </div>
+        <p class="hint">Każda osoba skraca czas (D12).</p>
+    </fieldset>
+    {{/if}}
+    <div class="form-group">
+        <label>Zakres</label>
+        <div class="form-fields"><select name="zakres">{{#each zakresy}}<option value="{{ k }}" {{#if selected}}selected{{/if}}>{{ label }}</option>{{/each}}</select></div>
+        <p class="hint">Jeden surowiec — krócej (U18). Porażka: 10% teraz, połowa przepada, reszta na kolejną próbę.</p>
+    </div>
+    <div class="form-group">
+        <label>Zdobycz do</label>
+        <div class="form-fields"><select name="cel">{{#each cele}}<option value="{{ k }}" {{#if selected}}selected{{/if}}>{{ label }}</option>{{/each}}</select></div>
+    </div>
+    <div class="form-group">
+        <label>Czas</label>
+        <div class="form-fields"><input type="number" name="minuty" min="1" step="5" value="{{ minuty }}"> <span>min</span></div>
+        <p class="hint">Z tabeli: {{ minutyDomyslne }} min (część puli, osoby, zakres).</p>
+    </div>
+    {{#if blokada}}<p class="neuro-zle"><i class="fa-solid fa-triangle-exclamation" inert></i> {{ blokada }}</p>{{/if}}
+    <footer class="form-footer">
+        {{#if zglosMG}}
+        <button type="button" data-action="bebesz"><i class="fa-solid fa-bell" inert></i> Zgłoś MG (autodestrukcja)</button>
+        {{else}}
+        <button type="button" data-action="bebesz" {{#if blokada}}disabled{{/if}}><i class="fa-solid fa-drumstick-bite" inert></i> Bebesz</button>
+        {{/if}}
+    </footer>
+</form>

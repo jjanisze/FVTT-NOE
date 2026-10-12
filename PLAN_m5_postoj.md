@@ -1448,3 +1448,23 @@ Quench `fuksy` (9). Na żywo: wódka z paczki przez prawdziwą aktywność — b
 - Quench `autodestrukcja` (6); e2e **`autodestrukcja`** zielone (Gladiator z Bestiariusza na oglądanej scenie, 0 PW
   → szept tylko MG, k100 = 1 → k4 = 1 → linia dla stołu, następna runda → karta wybuchu, jeden znacznik, brak
   zabłąkanego szablonu, wrak, `dead`, CE/CH/CZ; [Przywróć grafikę]). **Mutacja:** bez warunku `nonce` — czerwone.
+
+**2026-10-12 — E10 (bebeszenie, rozbiórka).**
+- `postoj/bebeszenie.mjs`. **Odczyt U15:** zamiast aktywności na zestawie (wymagałaby przebudowy paczki
+  `narzedzia` i nie dotarłaby do rozdanych kopii — dryf katalogu) — pozycja „Bebeszenie celu” w menu zestawów
+  rzeźnika, medyka, elektronika, mechanika, kowala (cel — namierzony martwy żeton) i przycisk w HUD martwego
+  żetonu (MG; gracz HUD-u cudzego żetonu nie otworzy). Okno: tabela z kategorii (Bestiariusz po id, inaczej
+  etykieta typu), hybryda — wybór, test (zestaw z tabeli albo Survival / Technika), pomocnicy (czas ÷ osoby; [Poproś
+  o test ST 10] — prośba dnd5e `skill`; Ułatwienie zaznacza gracz po zdanym teście), zakres, cel zdobyczy
+  (wykonawca, pojazd drużyny, Miejsca, stos na ziemi — Miejsce „Stos — <trup>” z żetonem), czas do nadpisania;
+  blokady (nie trup, brak wiersza rozmiaru, pula pusta, autodestrukcja nierozstrzygnięta — [Zgłoś MG], odliczanie).
+  Człowiek i mutant — publiczna wiadomość przed rzutem (D10). Rzut wykonawcy → przekaźnik → MG: pula na trupie
+  (`flags.bebeszenie`), sukces / porażka (10% / 40% reszty, U17), nat. 1 przy maszynie (U19: karta k100 albo
+  utrata CE/CH/CZ), zdobycz lejkami (surowce, `prowiant:mieso`), karta z [Przesuń czas].
+- `postoj/rozbiorka.mjs` (D22, U52): „Rozbierz na surowce” w menu przedmiotu (zepsuty: zacięty, do naprawy wg
+  `stanNaprawy`, wrak drona; MG — każdy) → karta MG z propozycją (połowa surowców przepisu w dół; wrak drona —
+  przepis drona; bez przepisu ¼ ceny jako części), [Zatwierdź…] z liczbami do poprawy → surowce, przedmiot znika,
+  czas „Trochę roboty”.
+- Quench `bebeszenie` (6); e2e **`bebeszenie`** zielone (gracz: namierzenie → menu zestawu → okno → 18 → MO i
+  mięso, trup pusty, karta u gracza; MG: HUD na cywilu → wiadomość D10 publiczna przed rzutem; rozbiórka zaciętego
+  Bata → propozycja tylko MG → +3 MO). **Mutacja:** nat. 1 bez utraty CE/CH/CZ — czerwone.

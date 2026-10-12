@@ -28,6 +28,8 @@ import { registerZajeciaPostoju, treningi, projektyBazy, pasywnaDla, ustawProjek
 import { registerPrzeskok, przeskokApi } from "./przeskok.mjs";
 import { registerSzabrowanie, szabrowanieApi } from "./szabrowanie.mjs";
 import { registerAutodestrukcja, autodestrukcjaApi } from "../combat/autodestrukcja.mjs";
+import { registerBebeszenie, bebeszenieApi } from "./bebeszenie.mjs";
+import { registerRozbiorka, rozbiorkaApi } from "./rozbiorka.mjs";
 
 /** Wołane z `init`. */
 export function registerPostoj() {
@@ -51,6 +53,8 @@ export function registerPostoj() {
   registerPrzeskok();
   registerSzabrowanie();
   registerAutodestrukcja();
+  registerBebeszenie();
+  registerRozbiorka();
   console.log("Neuroshima 5e | M5 Postój i handel registered");
 }
 
@@ -81,6 +85,8 @@ export const postojApi = Object.freeze({
   przeskok: przeskokApi,
   szabrowanie: szabrowanieApi,
   autodestrukcja: autodestrukcjaApi,
+  bebeszenie: bebeszenieApi,
+  rozbiorka: rozbiorkaApi,
   ilustracja,
   wyczyscPamiecIlustracji,
   zasady: postojRules

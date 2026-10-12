@@ -340,3 +340,11 @@
 .neuro-szabrowanie-rodzaje { display: inline-flex; flex-wrap: wrap; gap: 6px; font-size: 12px; }
 .neuro-szabrowanie-osoby legend button { margin-left: 4px; }
 .neuro-szabrowanie-wlasna input[type="number"] { width: 56px; }
+
+/* Bebeszenie (§7.19): okno. */
+.neuro-bebeszenie-trup { display: flex; gap: 8px; align-items: center; margin-bottom: 6px; }
+.neuro-bebeszenie-trup img { width: 48px; height: 48px; border: none; border-radius: 4px; object-fit: cover; }
+.neuro-bebeszenie-trup div { display: flex; flex-direction: column; gap: 1px; }
+.neuro-bebeszenie-trup span { font-size: 12px; color: var(--color-text-secondary, #999); }
+.neuro-bebeszenie-form .hint { font-size: 11px; color: var(--color-text-secondary, #999); margin: 2px 0; }
+.neuro-bebeszenie-pomocnicy label.checkbox { display: block; }
