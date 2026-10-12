@@ -33,29 +33,29 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | Broń palna jedną ręką, oburęczna/dwuręczna, atak drugą ręką; upuszczanie i podnoszenie [I] | ✅ | `combat/grip.mjs`, `actors/ground-items.mjs` — domyślne w oknie, pigułki na karcie |
 | Eksploracja | Światło, pole widzenia 220°, noktowizja/termowizja, latarki, flary | ✅ | `items/light-sources.mjs`, `vision-sources.mjs`, `gogle.mjs`, `config/fov.mjs` |
 | | Podróż: tempo, biomy, trudny teren, porządek marszu | ✅ | `actors/party-travel.mjs`, `config/podroz-data.mjs` |
-| | Gambling: dostępność, ceny regionalne | ❌ | tylko zewnętrzny `Integracje/loot_generator.py` — M5 |
+| | Gambling: dostępność, ceny regionalne, punkty handlowe, zamówienie specjalne, stół wymiany, przeróbki | ✅ | `postoj/handel.mjs`, `handlarz.mjs`, `wymiana.mjs`, `stol-wymiany.mjs`, `zamowienie.mjs`, `config/handel-*.mjs`; portfel ukryty (barter), waluty lokalne, limit transakcji z RO; `docs/Handel-i-postoj.md` (M5) |
 | Postój | Odpoczynki 4 h / 24 h, zakłócenie (notatka), czyszczenie broni, gotowanie, polowanie; produkcja i naprawa (KO 1 h, DO 10 h) | ✅ | `config/rest.mjs`, `actors/party-supplies.mjs`, `actors/rest-activities.mjs` (sekcja „Zajęcia”), §1.7 |
 | | Sen (doba bez snu) | ✅ | `actors/zagrozenia.mjs` — narzędzie MG „Zagrożenia” w kontrolkach żetonów: RO na Kondycję ST 20 dla zaznaczonych, porażka — Bezsenność (M1 E7, e2e `zagrozenia`) |
-| | Rozrywka, plotkowanie, hazard, Długi postój (praca, trening, baza, koszt utrzymania) | ❌ | M5 |
+| | Doba postoju: sen, koszt utrzymania, Praca, Trening/Nauka, Budowa bazy, Rozrywka, Plotki, Hazard, Za garść gambli, szukanie towarzysza; rachunek; przeskok narracyjny | ✅ | `postoj/doba.mjs`, `doba-okno.mjs`, `zajecia.mjs`, `przeskok.mjs`, `config/postoj-rules.mjs`; gracz proponuje szkic, MG zatwierdza drużynę; WKK: sen, jakość wody, Bogate życie (M5) |
 | Tworzenie postaci | Poziomy, PD, PW/KW, wieloklasowość, karta | ✅ | `actors/pd-panel.mjs`, `pw.mjs`, `class-rules.mjs`, `sheet-shell.mjs` |
 | | Udźwig (dwa progi), przedmioty podręczne (3 sloty) | ✅ | `config/encumbrance-config.mjs`, `actors/udzwig-*.mjs`, `handy-items.mjs`, `handy-belt.mjs` |
 | | **Lalka** (dla graczy: Oporządzenie): dwie ręce, 4 + 3 egzemplarze broni pod ręką, pas, noszone (pancerz, hełm, ochraniacze, Głowa/Twarz/Ramię/Strój); dobywanie, chwyt, koszty ruchów | ✅ | `actors/doll*.mjs`, `combat/grip.mjs`, `PLAN_paper_doll.md`. Migracja D9 zastosowana, przekaźnik sprawdzony z klientem gracza, paczki przebudowane, grafika zaakceptowana. Zostały ikony „śmieci sprzedawcy" (partia 42) |
 | Pochodzenie | 12 Pochodzeń + 36 zdolności (dane) | ✅ | paczki `pochodzenia`, `zdolnosci-pochodzenia` |
-| | Automatyka zdolności | 🟡 | 3/36 (`game.neuroshima.pochodzenia.report()`) — M7 |
+| | Automatyka zdolności | 🟡 | 4/36 (`game.neuroshima.pochodzenia.report()`) — M7 |
 | Klasy | 6 klas, 18 profesji, 133 zdolności (dane, awans, PW) | ✅ | paczki `klasy`, `profesje`, `zdolnosci-klasowe` |
-| | Automatyka zdolności | 🟡 | 32/133 — 10 pełnych, 22 częściowe (`game.neuroshima.zdolnosci.report()`, `config/class-features-coverage.mjs`) — M7 |
-| | Towarzysze (Partner, Oswajanie zwierząt, Prawa ręka) i drony | ✅ | `actors/towarzysze*.mjs`, `combat/towarzysze-walka.mjs`, `actors/drony*.mjs`, `items/kontroler.mjs`, paczka `towarzysze`; `PLAN_m3_towarzysze.md`, `docs/Towarzysze-i-drony.md`. Wartości z właściciela, tura po nim i Komenda, umieranie jak BG; drony z produkcji, kontrolery, tryb zdalny z kamerą i OSD, zasilanie, awarie, naprawy, wrak; Emiter EMP. Szukanie nowego towarzysza — M5 |
+| | Automatyka zdolności | 🟡 | 33/133 — 10 pełnych, 23 częściowe (`game.neuroshima.zdolnosci.report()`, `config/class-features-coverage.mjs`) — M7 |
+| | Towarzysze (Partner, Oswajanie zwierząt, Prawa ręka) i drony | ✅ | `actors/towarzysze*.mjs`, `combat/towarzysze-walka.mjs`, `actors/drony*.mjs`, `items/kontroler.mjs`, paczka `towarzysze`; `PLAN_m3_towarzysze.md`, `docs/Towarzysze-i-drony.md`. Wartości z właściciela, tura po nim i Komenda, umieranie jak BG; drony z produkcji, kontrolery, tryb zdalny z kamerą i OSD, zasilanie, awarie, naprawy, wrak; Emiter EMP. Szukanie nowego towarzysza — zajęcie doby postoju (M5) |
 | Sztuczki | 53 Sztuczki (dane) | ✅ | paczka `sztuczki` |
-| | Automatyka | 🟡 | 17/53 — 5 pełnych, 12 częściowych (`game.neuroshima.sztuczki.report()`) — M7 |
+| | Automatyka | 🟡 | 18/53 — 5 pełnych, 13 częściowych (`game.neuroshima.sztuczki.report()`) — M7 |
 | Choroby i fobie | Choroby przewlekłe i popularne, fobie, leki, Zachód słońca | ✅ | 22/24 stanów egzekwowanych, `actors/health-panel.mjs`, `disease-effects.mjs` |
 | Ekwipunek | Broń, kalibry, magazynki symulacyjne, tryby ognia, granaty, miny i ładunki, ulepszenia | ✅ | `weapons/*`, `actors/grenade-inventory.mjs`, `placed-charges.mjs` |
 | | Właściwości broni | 🟡 | brak: `dluga`, `ciezka`, `jednorazowa` (M6) — `PLAN_weapon_properties.md`; `ppanc`/`przebijająca` — `combat/armour-piercing.mjs` |
 | | Pancerze, hełmy, tarcze | 🟡 | `actors/armor-rules.mjs` (próg, odporność kinetyczna, kary); TT z pancerza — silnik TT; Parowanie tarczą i Krytyczna ochrona hełmu — okno „Reakcje celu” (`combat/obrona.mjs`); Cios i Osłona tarczą, szczelność ręcznie; wytrzymałość pancerzy — ustawienie świata (`production/naprawa.mjs`) |
-| | Leki i używki, narzędzia, elektronika, różności | 🟡 | 35 pozycji chemii, 22 zestawy, latarka/gogle/detonator/kwas/kolczatki; część Różności tylko jako przedmioty bez akcji |
+| | Leki i używki, narzędzia, elektronika, różności | 🟡 | 35 pozycji chemii, 22 zestawy, latarka/gogle/detonator/kwas/kolczatki; Fanty (51, folder w `sprzet`) z aktywnością dającą Fuksa (M5); część Różności tylko jako przedmioty bez akcji |
 | | **Produkcja przedmiotów**, schematy, elaboracja amunicji, naprawianie | ✅ | `production/*`, zakładka Produkcja, paczka `schematy`; `PLAN_produkcja.md`, `docs/Produkcja.md`. Nieograne przy stole; drony — aktor i uchwyt (M3); pojazdy to karta dla MG — M4 |
-| Teczka MG | Szabrowanie, bebeszenie | ❌ | M5 |
+| Teczka MG | Szabrowanie (komplikacja w ukryciu, losowe przedmioty), bebeszenie, rozbiórka; paczka `tabele` | ✅ | `postoj/szabrowanie.mjs`, `bebeszenie.mjs`, `rozbiorka.mjs`, `config/szabrowanie-data.mjs`, `bebeszenie-data.mjs`, `dev/packs/tabele.mjs` (26 RollTable); `docs/Wyprawy.md` (M5) |
 | | Kolory Neuroshimy (Rdza, Rtęć, Stal, Chrom) | ❌ | po becie; WKK to osobna nakładka (`scripts/wkk/`) |
-| Notatnik łowcy | Bestiariusz, SP, próg obrażeń, awarie maszyn, amunicja BN | ✅ | 51 istot, 89/260 zdolności zautomatyzowane, 25/51 docelowych żetonów. Awarie maszyn: rzut z pominięciem niepasujących pozycji i [Zastosuj] dla MG (`combat/maszyny.mjs`, M3) |
+| Notatnik łowcy | Bestiariusz, SP, próg obrażeń, awarie maszyn, amunicja BN, autodestrukcja | ✅ | 51 istot, 100/260 zdolności zautomatyzowane (autodestrukcja 8 maszyn — odliczanie, wybuch, wrak: `combat/autodestrukcja.mjs`, M5), 25/51 docelowych żetonów. Awarie maszyn: rzut z pominięciem niepasujących pozycji i [Zastosuj] dla MG (`combat/maszyny.mjs`, M3) |
 | Zasady szczegółowe | Upojenie, Skażenie, Spadanie, Podpalenie, Krwawienie, Niedożywienie, Odwodnienie | ✅ | §1.5b, §4.1b–c, `combat/podpalenie.mjs`, `party-supplies.mjs` |
 | | Uduszenie, Przemarznięcie | ✅ | `actors/zagrozenia.mjs` — to samo narzędzie MG: mróz (ST z temperatury co godzinę; ciepło ubrany, śpiwór, koc), Uduszenie (faza na statusie, koniec tury w walce, karta RO przy obrażeniach, „Złap oddech” w panelu Stan); „W cieple” w oknie DO — `PLAN_m1_walka.md` E7 |
 | | Próg obrażeń, pochwycenie, wytrącenie, udźwig, typy obrażeń | ✅ | |
@@ -301,6 +301,11 @@ M# = kamień milowy w `PLAN_beta.md`.
 | `dev/validate-recipes.mjs` | `npm run validate:recipes` — spójność przepisów, audyt przepisów profesji, braki katalogu |
 | `scripts/doc-liveness.mjs` | Czy dokument jeszcze istnieje, zanim async sync do niego zapisze |
 | `scripts/world-clock.mjs` | Przesunięcie zegara świata przez MG („wydaj N minut") |
+| `scripts/postoj/*` | M5 (`PLAN_m5_postoj.md`): `index.mjs` (rejestracja, API `game.neuroshima.handel` / `.postoj` / `.fuksy` / `.fanty`), `karty.mjs` (karty czatu z `data-neuro-postoj`), `przekaznik.mjs` (prośby gracza wykonywane przez MG), `miejsce.mjs`, `portfel.mjs`, `cennik.mjs`, `zamowienie.mjs`, `handlarz.mjs`, `handel.mjs`, `wymiana.mjs` + `stol-wymiany.mjs`, `zakladka*.mjs` (zakładka Postój), `doba.mjs` + `doba-okno.mjs`, `zajecia.mjs`, `przeskok.mjs`, `szabrowanie.mjs`, `bebeszenie.mjs`, `rozbiorka.mjs` |
+| `scripts/config/{handel-data,handel-rules,postoj-rules,fuksy-rules,fanty-data,szabrowanie-data,bebeszenie-data,autodestrukcja-rules,losowanie,ilustracje}.mjs` | Czyste zasady i dane M5 (bez `game`, czytane też przez Node — paczka `tabele`); liczby WKK w `scripts/wkk/config/{handel,sen,utrzymanie,woda,bebeszenie}-kobalt.mjs` |
+| `scripts/actors/fuksy.mjs`, `fuks-pips.mjs`, `scripts/items/fanty.mjs` | Fuksy v2 (lista ze źródłem i terminem, maks. 3, kropki przy Przerzucie) i Fanty (aktywność, kilkuosobowe) |
+| `scripts/combat/autodestrukcja.mjs` | Autodestrukcja maszyn: karta MG z k100, odliczanie na rundach, wybuch ścieżką granatów, wrak żetonu |
+| `dev/packs/tabele.mjs` | Paczka `tabele` (RollTable) z danych szabrowania i Fantów; domknięcia sprawdza `build-packs` i `validate-packs` |
 | `scripts/migration/*` (pozostałe) | Jednorazowe migracje: `migrate-classes`, `migrate-effect-priorities`, `migrate-gadzety`, `migrate-gear-graduation`, `migrate-medyk-graduation`, `migrate-pistolet-race`, `migrate-tool-substitutes`, `migrate-zeton-luxor`, `normalize-fov-angle`, `normalize-sight-range`, `rescale-surowce-units`, `apply-weapon-icons-macro.js` — opis przy wpisie changelogu, który je wprowadził |
 
 ---
@@ -1112,10 +1117,10 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   `duration` FVTT zamiast własnego licznika, płomień Sequencera na żetonie, akcja „Ugaś się"
   w panelu STAN). **Przemarznięcie, Uduszenie i Sen** (doba bez snu) — zrobione w M1 E7 (2026-10-07):
   `actors/zagrozenia.mjs`, narzędzie MG „Zagrożenia”
-- [~] Rest activities — **polowanie i gotowanie zrobione** (`party-supplies.mjs`: `hunt()` — 1 h,
+- [x] Rest activities — **polowanie i gotowanie zrobione** (`party-supplies.mjs`: `hunt()` — 1 h,
   Test Mądrości (Sztuka przetrwania) ST 15; `cook()`). Czyszczenie broni było gotowe od dawna (§1.7, aktywność
-  odpoczynku 1 h). Zostają: rozrywka, plotkowanie, hazard i aktywności Długiego postoju (praca, trening,
-  budowa bazy, koszt utrzymania) — `PLAN_beta.md` M5
+  odpoczynku 1 h). Rozrywka, plotkowanie, hazard i aktywności Długiego postoju (praca, trening, budowa bazy, koszt
+  utrzymania) — M5, 2026-10-12 (`PLAN_m5_postoj.md`)
 - [~] Vehicles (actor type + combat + chase system) — projekt: [PLAN_poscigi.md](PLAN_poscigi.md)
   (2026-09-11). **Zrobione:** `config/vehicles-data.mjs` (14 podwozi z tabeli s. 262, środowiska
   pościgu, stałe zasad); `scenes/poscig.mjs` + `scenes/poscig-canvas.mjs` — generowana plansza
@@ -1131,7 +1136,7 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   `actors/vehicle-portrait.mjs` — oba wstrzykują się w `renderVehicleActorSheet`.
   Siedem cichych pułapek v14 znalezionych po drodze: PLAN §9a / ARCHITECTURE §11.
   Domknięcie rozdziału — `PLAN_beta.md` M4
-- [x] Crafting system (schematy, produkcja, naprawa) — v0.17.0 (`PLAN_beta.md` M2); szabrowanie i bebeszenie — M5
+- [x] Crafting system (schematy, produkcja, naprawa) — v0.17.0 (`PLAN_beta.md` M2); szabrowanie, bebeszenie i rozbiórka — M5 (2026-10-12)
 - [ ] Drones — M3
 
 ## Phase 5: Content & Polish
@@ -1169,6 +1174,29 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### M5 E0–E11 — handel, postój, Fuksy i Fanty, szabrowanie, bebeszenie, autodestrukcja (2026-10-12)
+
+Plan: `PLAN_m5_postoj.md` (decyzje MG D1–D45, ustalenia U1–U58, postęp §11).
+
+- **Handel:** miejsce postoju na drużynie i scenie, portfel ukryty (barter), waluty lokalne, Cennik MG, punkty
+  handlowe z towarem z danych RAW, stół wymiany dla obu stron (gracz widzi sumę z podręcznika, MG wycenę na miejscu),
+  Wpływanie, przeróbki u fachowca, zamówienie specjalne z szeptem MG, limit transakcji z RO „Gambling”.
+- **Doba postoju:** szkic gracza (sen, utrzymanie, towarzysze, zajęcia rejestru, towar na rachunek) i zatwierdzenie
+  MG dla całej drużyny w kolejności jedzenie → odpoczynek → Zachód słońca → rachunek → zegar; zajęcia Praca,
+  Trening („Wyszkolenie: X”), Budowa bazy, Rozrywka, Plotki, Hazard, koncert, szukanie towarzysza; przeskok
+  narracyjny o N dób jednym zapisem. WKK: RO za krótki sen i odsypianie Bezsenności, jakość wody, Bogate życie.
+- **Fuksy v2 i Fanty:** lista Fuksów ze źródłem i terminem (migracja z liczby), Fanty w paczce `sprzet` z aktywnością.
+- **Wyprawy:** szabrowanie (komplikacja w ukryciu, prośba do szukających, rozliczenie u MG, pamięć ruin), losowe
+  przedmioty z katalogu, paczka `tabele`; bebeszenie (HUD martwego żetonu, menu zestawów, pula na trupie, powtórki);
+  rozbiórka na surowce; autodestrukcja maszyn z Bestiariusza (generator) i awarii 20 dronów.
+- **Poprawki przy okazji:** uuid jako klucz obiektu w fladze rozwija się przy zapisie (poziom utrzymania ludzkiego
+  towarzysza był ignorowany); zdjęcie flagi wybuchu z aktora syntetycznego stawiało drugi znacznik w (0, 0)
+  oglądanej sceny (`grenade-inventory`).
+- **Testy:** Quench `handel-zasady`, `postoj-zasady`, `fuksy-zasady`, `szabrowanie-zasady`, `bebeszenie-zasady`,
+  `handel`, `fuksy`, `postoj-zajecia`, `postoj-przeskok`, `szabrowanie`, `autodestrukcja`, `bebeszenie` (pełny Quench
+  1176/1176); e2e `handel`, `postoj`, `szabrowanie`, `autodestrukcja`, `bebeszenie`, `boot` z 18 paczkami.
+- **Dokumentacja:** `docs/Handel-i-postoj.md`, `docs/Wyprawy.md`, Kobalt 17–22, Pytania do autora 3–16, errata Fantów.
 
 ### M3 E0–E10 — towarzysze i drony: czyste zasady, wartości z właściciela, walka, karty, tworzenie, migracja, dane z podręcznika, drony z produkcji, kontrolery i sterowanie, zasilanie, awarie, tryb zdalny, sygnał, obraz kamery, OSD, naprawy i Emiter EMP; Stopnie Zranienia wg s. 205 (2026-10-10)
 

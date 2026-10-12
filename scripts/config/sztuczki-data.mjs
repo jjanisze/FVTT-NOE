@@ -259,7 +259,12 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 CHA; biegłość w 2 instrumentach; Pieśń otuchy (1×/Długi Odpoczynek) — "
       + "Fuks dla 1 + mod. CHA sojuszników.",
     category: "wsparcie",
-    auto: []
+    auto: [{
+      what: "Pieśń otuchy — aktywność na Sztuczce, 1×/Długi odpoczynek: wybór 1 + mod. CHA sojuszników, każdy dostaje "
+        + "Fuksa (u cudzych postaci przez przekaźnik MG).",
+      where: "actors/fuksy.mjs"
+    }],
+    manual: "+1 CHA i biegłości w dwóch instrumentach dopisuje gracz."
   },
   neo: {
     label: "Neo",

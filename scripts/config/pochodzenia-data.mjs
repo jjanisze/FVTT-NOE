@@ -338,7 +338,13 @@ export const ORIGIN_ABILITIES = Object.freeze({
     roll: "3–4",
     label: "Gambling we krwi",
     text: "Nigdy nie męczysz się gamblingiem; +5% do dostępności towarów.",
-    auto: []
+    auto: [{
+      what: "Bez Rzutów Obronnych za kolejne godziny targowania (limit transakcji z premii z biegłości).",
+      where: "postoj/handel.mjs"
+    }, {
+      what: "+5 do dostępności przy zamówieniu specjalnym — premia w wyniku zamówienia.",
+      where: "postoj/zamowienie.mjs"
+    }]
   },
   "czas-patriotow": {
     id: "czas-patriotow",

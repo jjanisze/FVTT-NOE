@@ -247,27 +247,36 @@ Cel: pościg od startu do mety bez notatek MG. Projekt: `PLAN_poscigi.md` §10.
 
 **Gotowe gdy:** wiersz Pojazdy i pościgi w macierzy = ✅/🟡.
 
-### M5 — Szabrowanie, bebeszenie, handel, postój (M)
+### M5 — Szabrowanie, bebeszenie, handel, postój (M → L)
 
 Cel: dzień w mieście i wyprawa po ruinach mają narzędzia w Foundry. Zależy od M2 (surowce muszą
-mieć odbiorcę).
+mieć odbiorcę). **Plan: [PLAN_m5_postoj.md](PLAN_m5_postoj.md)** (projekt 2026-10-11, decyzje MG D1–D45,
+ustalenia U1–U58 przyjęte jako robocze; etapy E0–E11 **wdrożone 2026-10-12**, postęp — §11 planu). Zakres urósł: zawsze barter (portfel gb
+ukryty), interfejs handlu dla MG, doba postoju „gracz proponuje, MG zatwierdza”, Fuksy trwałe i ulotne, Fanty,
+autodestrukcja maszyn z wrakiem na mapie, przeskok narracyjny, rozbiórka. Lista niżej to skrót — wiążący jest
+plan.
 
-- [ ] **Szabrowanie ruin** (s. 270–271): rodzaj ruin → czas, szansa komplikacji k100, surowce;
+- [x] **Szabrowanie ruin** (s. 270–271): rodzaj ruin → czas, szansa komplikacji k100, surowce;
   Tabela komplikacji k10 (s. 270, spotkania z Bestiariusza); wykrywacz metalu = Ułatwienie.
   RollTables w paczce + dialog MG; wynik trafia do panelu Surowców
-- [ ] **Bebeszenie** bestii (rozmiar → czas, ST, materiały organiczne, mięso) i maszyn Molocha
-  (CE/CZ/MK) (s. 269) — przycisk na martwym żetonie, kategoria z `creature-types.mjs`
-- [ ] **Gambling** (s. 43–44): modyfikatory dostępności lokalizacji, ceny regionalne, test
-  dostępności. Przenieść logikę `Integracje/loot_generator.py` do okna handlarza albo przynajmniej
-  do tabel w paczce
-- [ ] **Aktywności postoju** na karcie drużyny (s. 46–47): Rozrywka (10 h + 50 gb → Fuks na
+- [x] **Bebeszenie** bestii (rozmiar → czas, ST, materiały organiczne, mięso) i maszyn Molocha
+  (CE/CZ/MK) (s. 269) — przycisk na martwym żetonie, kategoria z `creature-types.mjs`; **autodestrukcja**
+  przy 0 PW (s. 204) z odliczaniem, wybuchem i wrakiem na mapie
+- [x] **Gambling** (s. 43–44): modyfikatory dostępności lokalizacji, ceny regionalne; punkty handlowe z listą
+  towaru (RAW) jako domyślna droga handlu, generator listy z danych RAW; zamówienie specjalne (k100 − CHA, limit
+  transakcji) na to, czego nie ma na liście; stół wymiany (barter) z wyceną widoczną tylko dla MG; przeróbki
+  broni u fachowca (s. 128)
+- [x] **Aktywności postoju** w dobie postoju (s. 45–47): Rozrywka (10 h + 50 gb → Fuks na
   7 dni), Plotkowanie (5 gb + Test CHA (Śledztwo) ST 10, +1 informacja za każde 5), Hazard (ST 20,
   wygrana ×2 / utrata stawki); Długi postój: Praca, Trening/Nauka, Budowa bazy, Koszt utrzymania
-  (także towarzyszy)
-- [ ] **Szukanie nowego towarzysza** (`PLAN_m3_towarzysze.md` D30): zajęcie Postoju — Partner 24 h dzielone przez
+  (także towarzyszy); sen 6 h (NOE i WKK; WKK: RO za krótki sen, odsypianie); przeskok narracyjny dla długich postojów
+- [x] **Szukanie nowego towarzysza** (`PLAN_m3_towarzysze.md` D30): zajęcie Postoju — Partner 24 h dzielone przez
   gracza, oswajanie zwierzęcia 3 dni; dziś podpowiedź na pasku towarzyszy i narzędzie MG „Nowy towarzysz”
+- [x] **Fuksy trwałe i ulotne** (źródło, termin — Gotowanie 24 h dziś nie wygasa) i **Fanty** (s. 132–133)
 
-**Gotowe gdy:** wiersze Eksploracja (gambling), Postój i Teczka MG (szabrowanie) bez ❌.
+**Gotowe gdy:** wiersze Eksploracja (gambling), Postój i Teczka MG (szabrowanie) bez ❌. — **Spełnione 2026-10-12.**
+Zostaje: stanowiska Bazar i Złomowisko w Poligonie (czekają na sam Poligon, `PLAN_human_testing.md`), dźwięki i
+część ilustracji (zamówienia w `dev/icons/MISSING.md`), test przy stole (B7).
 
 ### M6 — Drobne zasady RAW (S każda)
 

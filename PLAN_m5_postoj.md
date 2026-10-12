@@ -1468,3 +1468,25 @@ Quench `fuksy` (9). Na żywo: wódka z paczki przez prawdziwą aktywność — b
 - Quench `bebeszenie` (6); e2e **`bebeszenie`** zielone (gracz: namierzenie → menu zestawu → okno → 18 → MO i
   mięso, trup pusty, karta u gracza; MG: HUD na cywilu → wiadomość D10 publiczna przed rzutem; rozbiórka zaciętego
   Bata → propozycja tylko MG → +3 MO). **Mutacja:** nat. 1 bez utraty CE/CH/CZ — czerwone.
+
+**2026-10-12 — E11 (dokumentacja i porządki §10).**
+- `docs/`: nowe strony gracza **Handel i postój** i **Wyprawy** (szabrowanie, losowe przedmioty, bebeszenie,
+  autodestrukcja, rozbiórka); Pierwsze kroki — kompendia (sprzęt, schematy, towarzysze, Tabele), Fuksy i ukryty
+  portfel, nowe ustawienia; Kobalt 17–22 (skup 50%, Osełka, sen, woda, Bogate życie, wiersze bebeszenia — z uwagą,
+  że uzdatniania wody moduł nie automatyzuje); errata Fantów (85); Pytania do autora 3–16; spis treści.
+- `scripts/wkk/README.md`: tabela odczytów MG luk RAW (M5) i wiersze pięciu plików `wkk/config/*-kobalt.mjs`.
+- `IMPLEMENTATION.md`: macierz (Gambling, Postój, Teczka MG ✅; szukanie towarzysza; Fanty; autodestrukcja w
+  Notatniku; liczniki pokrycia), tabela plików, wpis changelogu M5. `PLAN_beta.md` M5 odhaczone. `AGENTS.md` —
+  wiersz paczki `tabele` (E8).
+- Rejestry pokrycia (B5): Gambling we krwi (bez RO za godziny targowania, +5 do zamówienia), Muzyk — Pieśń otuchy,
+  Za garść gambli, Partner / Oswajanie / Moja prawa ręka (szukanie jako zajęcie doby, dola Prawej ręki); paczki
+  `zdolnosci-klasowe`, `zdolnosci-pochodzenia`, `sztuczki` przebudowane (plakietki). Liczniki: klasy 33/133,
+  Sztuczki 18/53, Pochodzenia 4/36. Śmieciarza i Antykwariusza nie ma w danych modułu — Ułatwienie Śmieciarza
+  czyta szabrowanie po nazwie cechy.
+- Test `dane-ekwipunku` (detonator): własne czekanie na hak `createItem` (do 2,3 s) równe limitowi mocha — limit 6 s.
+  Pełny Quench 1182, e2e `boot`, `handel`, `postoj`, `szabrowanie`, `autodestrukcja`, `bebeszenie` zielone.
+- **Zostaje poza M5:** stanowiska Bazar i Złomowisko w Poligonie — `PLAN_human_testing.md` to jeszcze projekt
+  (Poligonu nie ma w kodzie), więc stanowiska czekają na niego; dźwięki (szabrowanie, bebeszenie, odliczanie) i
+  część ilustracji — zamówienia w `dev/icons/MISSING.md`, moduł działa bez nich; test przy stole (B7). Odczyty do
+  potwierdzenia przez MG w grze: tik odliczania autodestrukcji na rundach, wejścia bebeszenia (menu zestawu i HUD
+  zamiast aktywności), przeskok bez rzutów.

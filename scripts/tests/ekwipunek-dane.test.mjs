@@ -613,6 +613,7 @@ export function registerEquipmentDataTests(quench) {
         });
 
         it("zakup daje oba: pilot na karcie dokłada 10 zapalników swojego zestawu; przeniesiony — nie", async function () {
+          this.timeout(6000); // własne czekanie na hook `createItem` to do 2 s + 0,3 s — tyle, co cały limit mocha
           const actor = await scratchActor();
           await actor.createEmbeddedDocuments("Item", [detonator.buildDetonatorItemData()]);
           // Zapalniki tworzy hook `createItem` — po osobnym zapisie.

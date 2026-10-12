@@ -235,12 +235,23 @@ COVERAGE = {
             ("umiera jak BG — Stopnie Zranienia i Rzuty Przeciw Śmierci", "combat/umieranie.mjs"),
             ("narzędzie MG i kreator: cechy (zestaw albo 24 pkt), Pochodzenie, klasa Towarzysz (2 RO, 2 umiejętności, "
              "Sztuczka); poziomy za twoim awansem", "actors/towarzysze-tworzenie.mjs"),
+            ("szukanie nowej Prawej ręki: zajęcie doby postoju (24 h w miejscowości, dzielone na doby), potem karta MG "
+             "z [Nowy towarzysz]", "postoj/zajecia.mjs"),
+            ("dola 1/10 twoich zarobków z pracy — linia na karcie doby i przeskoku", "postoj/doba.mjs"),
         ],
-        "manual": "Szukanie nowej Prawej ręki (24 h w miejscowości) — przy stole; po nim MG tworzy ją narzędziem. "
-                  "Wikt i 1/10 twojej doli — przy stole.",
+        "manual": "Wikt i podział doli (barter) — przy stole.",
     },
     "ekspert": {"manual": _PICK_ON_SHEET},
     "samouk": {"manual": _PICK_ON_SHEET},
+
+    "za-garsc-gambli": {
+        "auto": [
+            ("koncert w dobie postoju: 4 h pracy raz na dobę, miejsce z mnożnikiem, rzut Występów w oknie doby, "
+             "zarobek do rachunku", "postoj/zajecia.mjs"),
+            ("+1 Wyczerpanie „Koncert” po zatwierdzeniu doby", "postoj/zajecia.mjs"),
+        ],
+        "manual": "Test instrumentu zamiast Występów — MG poprawia wynik w oknie.",
+    },
 
     # ---- Spec ----
     "szybka-produkcja": {
@@ -271,8 +282,10 @@ COVERAGE = {
             ("umiera jak BG — Stopnie Zranienia i Rzuty Przeciw Śmierci", "combat/umieranie.mjs"),
             ("narzędzie MG: pies z szablonu albo ludzki partner z kreatorem (cechy, Pochodzenie, klasa Towarzysz)", "actors/towarzysze-tworzenie.mjs"),
             ("woda i jedzenie w dziennym zapotrzebowaniu drużyny", "actors/party-supplies.mjs"),
+            ("szukanie nowego partnera: zajęcie doby postoju (24 h, dzielone na doby), potem karta MG z [Nowy towarzysz]",
+             "postoj/zajecia.mjs"),
         ],
-        "manual": "Szukanie nowego partnera (24 h) — przy stole; po nim MG tworzy go narzędziem. Skutki złej wody i karmy dla psa — MG.",
+        "manual": "Skutki złej karmy dla psa — MG.",
     },
     "oswajanie-zwierzat": {
         "auto": [
@@ -282,8 +295,10 @@ COVERAGE = {
             ("umiera jak BG — STOPIEŃ ZRANIENIA w statblocku (s. 205)", "combat/umieranie.mjs"),
             ("narzędzie MG: rzut k6 albo wybór, zwierzę z szablonu (Współpraca ssaka działa sama)", "actors/towarzysze-tworzenie.mjs"),
             ("woda i jedzenie wg rozmiaru w dziennym zapotrzebowaniu drużyny", "actors/party-supplies.mjs"),
+            ("szukanie zwierzęcia: zajęcie doby postoju (24 h, dzielone na doby), potem karta MG z [Nowy towarzysz]",
+             "postoj/zajecia.mjs"),
         ],
-        "manual": "Szukanie (24 h) i 3 dni oswajania — przy stole; po nich MG tworzy zwierzę narzędziem. Imię nadaje gracz.",
+        "manual": "3 dni oswajania po szukaniu — przy stole. Imię nadaje gracz.",
     },
     "moj-biom": {
         "auto": [

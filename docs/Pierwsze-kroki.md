@@ -24,7 +24,8 @@ usuwa mechaniki niezwiązane z Neuroshimą (np. rzucanie zaklęć).
 
 Moduł dostarcza własny folder kompendiów **Neuroshima** (widoczny w zakładce Compendium Packs):
 klasy, profesje, zdolności, sztuczki, pochodzenia, broń, pancerze, lekarstwa, amunicja, granaty,
-narzędzia i bestiariusz. Twórz postacie, przeciągając przedmioty/klasy z tych kompendiów — nie z
+narzędzia, sprzęt (w nim Fanty), schematy, bestiariusz, towarzysze i **Tabele** (komplikacje szabrowania,
+losowe przedmioty, Fanty — do losowania ręcznego). Twórz postacie, przeciągając przedmioty/klasy z tych kompendiów — nie z
 domyślnych kompendiów SRD dnd5e (te reprezentują fantasy, nie post-apo).
 
 ## 4. Postać gracza
@@ -50,6 +51,9 @@ domyślnych kompendiów SRD dnd5e (te reprezentują fantasy, nie post-apo).
 7. Amunicję, magazynki, materiały wybuchowe, leki, prowiant i surowce dodajesz w zakładce
    **Zasoby** — każdy panel ma na dole przycisk **DODAJ …** (cennik z podręcznika, ilość, cena
    i waga na żywo; ta sama pozycja trafia do istniejącego stosu).
+8. **Fuksy** to kropki obok przycisku Przerzutu — najwyżej trzy, każdy ze swoim źródłem i terminem; MG nadaje je
+   i odbiera w oknie Fuksów. **Gamble** nie leżą w portfelu (jest ukryty) — handluje się towarem. Jedno i drugie:
+   [Handel i postój](Handel-i-postoj.md).
 
 Pełny przegląd tego, co konkretnie różni się od standardowego dnd5e (i dlaczego), jest w
 [Zmiany-wzgledem-dnd5e.md](Zmiany-wzgledem-dnd5e.md).
@@ -59,3 +63,7 @@ Pełny przegląd tego, co konkretnie różni się od standardowego dnd5e (i dlac
 Sprawdź **Configure Settings → Neuroshima: Ostatnia Era** — moduł ma kilka przełączników (m.in.
 zależnych od tego, czy Sequencer jest zainstalowany). Wartości domyślne są bezpieczne do startu;
 nie trzeba nic zmieniać, żeby zacząć grać.
+
+Z postoju i handlu warto znać trzy: **Ilustracje postoju** (malowane obrazy w oknach postoju, handlu i szabrowania;
+ustawienie każdego gracza osobno) oraz dwa podustawienia Koloru Kobaltu — **Kobalt: sen** i **Kobalt: jakość wody**
+([Kobalt](Kobalt.md)).

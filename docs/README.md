@@ -19,11 +19,15 @@
    duszenie się).
 8. [Towarzysze i drony](Towarzysze-i-drony.md) — partner, oswojone zwierzę, prawa ręka; tura i Komenda;
    drony Hakera: budowa, kontroler, tryb zdalny z kamerą, naprawa; Emiter EMP.
-9. [FAQ](FAQ.md) — najczęstsze pytania.
-10. [Errata: przepisy profesji](Errata-produkcja.md) — wiersze tabel schematów Speca gorsze od
-    przepisu standardowego.
-11. [Pytania do autora systemu](Pytania-do-autora.md) — Emiter EMP a opancerzenie, Stopnie Zranienia
-    przeciwników.
+9. [Handel i postój](Handel-i-postoj.md) — miejsce postoju, barter i stół wymiany, zamówienie specjalne,
+   doba w osadzie (sen, utrzymanie, praca, rachunek), przeskok, Fuksy i Fanty.
+10. [Wyprawy](Wyprawy.md) — szabrowanie ruin, losowe przedmioty, bebeszenie, autodestrukcja maszyn,
+    rozbiórka na surowce.
+11. [FAQ](FAQ.md) — najczęstsze pytania.
+12. [Errata](Errata-produkcja.md) — wiersze tabel schematów Speca gorsze od przepisu standardowego;
+    wynik 85 Tabeli Fantów.
+13. [Pytania do autora systemu](Pytania-do-autora.md) — Emiter EMP a opancerzenie, Stopnie Zranienia
+    przeciwników; handel, sen, szabrowanie, bebeszenie, Fanty.
 
 Coś jest niejasne albo brakuje strony, której szukasz? Zgłoś to jako
 [issue na GitHubie](https://github.com/jjanisze/FVTT-NOE/issues) — braki w

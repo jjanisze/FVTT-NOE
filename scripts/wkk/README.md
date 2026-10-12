@@ -74,6 +74,27 @@ ruling from M3, D31 — a dead owner's companion becomes the player's spare char
 | A drone activation: **[B] — move, dodge, disengage, item; [A] — everything** (D36) | `config/towarzysze-rules.mjs` (`zakresAktywacji`), `actors/drony-sterowanie.mjs` |
 | The homemade controller reaches 20 m through walls / underground (D32) | `config/towarzysze-data.mjs` (`KONTROLERY`) |
 
+### GM readings of RAW gaps (M5)
+
+Trade, the stop-over and expeditions (`PLAN_m5_postoj.md`). Same status as the M3 table: they fill a silence in the
+book and stay in the NOE tree; the questions for the author are in `docs/Pytania-do-autora.md`.
+
+| Reading | Where |
+|---|---|
+| One transaction = one approved exchange or one special order; trading hours = ⌈transactions ÷ PB⌉, a save per extra hour; a second search for the same item the same day is refused (D2, U6) | `postoj/handel.mjs`, `config/handel-rules.mjs` (`godzinyGamblingu`, `potrzebaRO`) |
+| A trading post's stock: 2–3 goods groups chosen by the GM, each catalogue entry rolls its availability, plus staples (D29) | `config/handel-rules.mjs` (`generujTowar`), `config/handel-data.mjs` (`GRUPY_TOWARU`, `PODSTAWY`) |
+| Price columns for armour, ammo, tool kits and raw materials (D8); attachments vs. gunsmith work-overs (D31) | `config/handel-data.mjs` (`KATEGORIA_CENOWA`, `KATEGORIA_CENOWA_SUROWCA`), `config/handel-rules.mjs` |
+| Attachment availability: the gear-table twin, otherwise a price threshold (D32) | `config/handel-data.mjs` (`DOSTEPNOSC_NASADEK`), `config/addons-data.mjs` |
+| Tables without a d100 column roll weighted by availability (D9) | `config/szabrowanie-data.mjs` (`losujPrzedmiot`), `dev/packs/tabele.mjs` |
+| Fant table: the print skips 85 — read as 81–85 (U25) | `config/fanty-data.mjs` |
+| Sleep: 4–5 h gives short-rest benefits, 1 h counts as no sleep (D20) | `config/postoj-rules.mjs` (`skutkiSnu`) |
+| Work ≤ 10 h a day, the passive value pays 1 gb per point per 10 h (U30, U48) | `config/postoj-rules.mjs` (`zarobekPracy`, `budzetDoby`) |
+| Normal and Rich upkeep cover the chronic-disease dose at sunset (D13) | `actors/health-panel.mjs` (`sunsetCheck` with `dawkaZUtrzymania`), `postoj/doba.mjs` |
+| Several searchers / helpers divide the time; scavenging splits the resource types (D12) | `config/szabrowanie-data.mjs` (`czasSzabrowania`, `podzialRodzajow`), `config/bebeszenie-data.mjs` (`czasBebeszenia`) |
+| One resource only: time × 1 / number of types (U18); a failed butchering leaves 40% for the next try, recursively (U17) | `config/bebeszenie-data.mjs` (`czasBebeszenia`, `wynikBebeszenia`) |
+| Dismantling gives half the recipe's materials, rounded down (D22) | `postoj/rozbiorka.mjs` |
+| Self-destruct countdown ticks at the start of each combat round (a dead machine leaves the turn order) | `combat/autodestrukcja.mjs` |
+
 **Credit lives on the front page.** The author is thanked once, for all past and future rulings,
 in the module README (*Podziękowania*, decided by the GM 2026-10-03). Code comments say "author of
 the system" / RAI and state the mechanic and its reasoning — they do not repeat the name.
@@ -107,6 +128,11 @@ check (author's idea, this table's numbers — `wkk/config/pojedynczy-naboj.mjs`
 | `wkk/config/naprawa-awarii-kobalt.mjs` | Drone failure repairs (PLAN_m3_towarzysze D25, D28): per Tabela awarii entry the repair degree and the **specific parts** — each listed material at a fraction of the drone recipe (Drobnostka ⅕, Trochę roboty ½, Skomplikowana harówa ¾, rounded up, min. 1; Chemia fixed 2 / 3 / 4), one degree up at half PW or less; 5, 10, 12 pass on their own, 20 is a wreck. Host: `config/towarzysze-rules.mjs` (`naprawaAwarii` with `{ kobalt }`), used by `actors/drony-naprawa.mjs`; without Kobalt the GM decides (a card, NOE) |
 | `wkk/config/dostepnosc-kobalt.mjs` | Availability overrides: the factory remote controller 10% instead of 30% (PLAN_m3 D33). Host: `config/dostepnosc.mjs` (`dostepnosc(ref, { kobalt })`) |
 | `wkk/config/pojedynczy-naboj.mjs` | A round pushed into the inserted removable magazine in combat: Zwinne dłonie, ST by caliber category (12 / 14 / 15, .50 BMG 18); failure drops the round on the ground, a natural 1 jams the weapon (jam-immune weapons: plain failure). Host: `weapons/magazine.mjs` (`_performPushRoundAction`), only with Kobalt on; RAW refusal stays for Kobalt off |
+| `wkk/config/handel-kobalt.mjs` | Trade (PLAN_m5_postoj D3, D41): traders buy at 50% of the regional price (`SKUP_KOBALT`, NOE 100%); the whetstone (Naostrzenie) is a trade good, not only a smith's work-over (`NASADKI_KOBALT`). Hosts: `config/handel-rules.mjs` (`skupDomyslny`, `generujTowar`), `config/addons-data.mjs` |
+| `wkk/config/sen-kobalt.mjs` | Sleep (D20, D35): a CON save for 4–5 h (ST 10) and 2–3 h (ST 15) of sleep, failure — Bezsenność; Bezsenność is persistent and comes off by sleeping it off (12 h — one level, 18 h — two). Hosts: `config/postoj-rules.mjs` (`skutkiSnu`), `config/rekonwalescencja-rules.mjs` (`regulaZdejmowania` with `senKobalt`); sub-setting `kobaltSen` |
+| `wkk/config/utrzymanie-kobalt.mjs` | Rich upkeep (D38): a Fuks chance of 1 / (11 − n) per day without one, certain on day 10, 7-day Fuks. Host: `config/postoj-rules.mjs` (`szansaBogaty`, `dzienBogaty`, `przeskok`) |
+| `wkk/config/woda-kobalt.mjs` | Water quality (D37 — a rule from the system's test version, dropped from print): dirty ST 10 → infectious disease, radioactive ST 15 → exhaustion, chemical ST 15 → 1d6 acid and exhaustion; qualities, cleanest first. Hosts: `config/postoj-rules.mjs` (`skutkiWody`), `actors/party-supplies.mjs`, `postoj/doba.mjs`; sub-setting `kobaltWoda` |
+| `wkk/config/bebeszenie-kobalt.mjs` | Butchering rows the book lacks (D36): Tiny beast, Gargantuan machine. Host: `config/bebeszenie-data.mjs` (`wierszBebeszenia`) |
 | `wkk/combat/weapon-save-properties.mjs` | `rozrywajaca` |
 | `wkk/combat/bleeding.mjs` | `dumdum` bleed profile |
 | `wkk/registry.mjs` | Every WKK export in one place — see its own header comment |

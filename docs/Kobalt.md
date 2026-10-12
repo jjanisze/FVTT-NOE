@@ -207,6 +207,68 @@ To Test k20, więc Fuks wolno.
 
 ✅ *Trzecia droga w sekcji Rekonwalescencja okna Długiego odpoczynku; karta z testem w czacie.*
 
+### 17. Handlarz skupuje po połowie ceny
+
+Podręcznik: towar sprzedaje się po cenie regionu. Z Kobaltem handlarz **skupuje po połowie** ceny regionalnej
+(waluta lokalna w swoim regionie — pełna wartość). To punkt wyjścia, nie sufit: Wpływanie i korekta MG w oknie
+wymiany podnoszą stawkę.
+
+✅ *Wycena MG w oknie wymiany; gracz widzi tylko sumę z podręcznika.*
+
+### 18. Osełka jako towar
+
+Podręcznik: naostrzenie broni białej to przeróbka u kowala. Z Kobaltem **Osełka** jest też zwykłym towarem — na
+listach handlarzy i w zamówieniach (dostępność 50%, cena jak w tabeli ulepszeń); używa jej właściciel broni.
+
+✅ *Generator towaru i zamówienie specjalne.*
+
+### 19. Sen: krótki sen męczy, Bezsenność trzeba odespać
+
+Podręcznik: 6 h snu to Długi odpoczynek, krócej — mniej korzyści, doba bez snu — RO ST 20. Z Kobaltem
+(podustawienie **Kobalt: sen**, domyślnie włączone):
+
+- 4–5 h snu — korzyści Krótkiego odpoczynku i **Rzut Obronny na Kondycję ST 10**; 2–3 h — **ST 15**. Porażka to
+  poziom Wyczerpania **Bezsenność**.
+- **Bezsenność jest uporczywa** — zwykły Długi odpoczynek jej nie zdejmuje. Schodzi **odsypianiem**: 12 h snu
+  zdejmuje jeden poziom, 18 h — dwa (dobrze przespana doba to także Długi odpoczynek, więc schodzi i zwykły
+  poziom).
+
+✅ *Pole snu w oknie Doby i w oknie Długiego odpoczynku; karta prośby z rzutem do gracza; pipka Bezsenności ma
+kwadratową ramkę.*
+
+### 20. Jakość wody
+
+Wycofana z druku zasada z wersji testowej systemu — na stole trudna do pilnowania, w Foundry łatwa. Z Kobaltem
+(podustawienie **Kobalt: jakość wody**, domyślnie włączone), raz na dobę picia gorszej wody:
+
+- **brudna** (Nędzne utrzymanie, zapasy) — RO na Kondycję ST 10, porażka: choroba zakaźna (biegunka); kto już
+  choruje, nie rzuca. Gotowanie (15 min) albo tabletki uzdatniające robią z niej pitną — to na razie rozstrzyga MG,
+  moduł uzdatniania nie automatyzuje;
+- **skażona radioaktywnie** — RO ST 15, porażka: Wyczerpanie;
+- **skażona chemicznie** — RO ST 15, porażka: 1k6 obrażeń od kwasu i Wyczerpanie.
+
+Zapasy schodzą od najczystszej wody. Zwierzęta mogą pić brudną.
+
+✅ *Rzut przy zatwierdzeniu doby, karta prośby do gracza.*
+
+### 21. Bogate życie przynosi szczęście
+
+Podręcznik: Bogate utrzymanie niczym mechanicznie nie różni się od Normalnego. Z Kobaltem każdy dzień Bogatego
+życia daje szansę na **Fuksa** (na 7 dni), rosnącą z każdym dniem bez niego: pierwszego dnia 1 na 10, dziesiątego
+— pewny. Fuks zeruje licznik.
+
+✅ *Rzut przy zatwierdzeniu doby; przeskok liczy pewnego Fuksa co 10 dób.*
+
+### 22. Bebeszenie najmniejszych bestii i największych maszyn
+
+Tabele bebeszenia nie mają Malutkiej bestii ani Ogromnej maszyny. Z Kobaltem:
+
+- **Malutka bestia** — 15 min, ST 5, 2 kg materiałów organicznych, 5 kg mięsa;
+- **Ogromna maszyna** — dwa razy Wielka (64 h; chemikalia 100 kg, metal 6000 kg, elektronika 100 kg, części
+  200 kg), ST 25 (podręcznik nie ma w bebeszeniu ST wyższego niż 25).
+
+✅ *Okno bebeszenia oznacza takie wiersze jako WKK.*
+
 ## Dopisywanie nowej zasady
 
 Każda nowa zasada Kobaltu jako osobny nagłówek `###`, w miarę możności:

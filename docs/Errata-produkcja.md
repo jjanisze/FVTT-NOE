@@ -83,3 +83,9 @@ wszystkie pojazdy Mechaniki (ST 20–25 vs 30, Rower i Deskorolka też),
 Kompas (4 h / 2 gb vs 10 h / 5 gb), Krótkofalówka (24 h vs 25 h), Nośnik danych i Monitorek (względem
 ceny 40), broń ciężka i droższa połowa każdej kategorii Rusznikarstwa (ST). Reszta wierszy — w tym
 wszystkie granaty, miny, dodatki do broni i większość elektroniki — jest równa standardowi co do liczby.
+
+## Inne — Tabela Fantów bez wyniku 85 (s. 132–133)
+
+Tabela Fantów przeskakuje z „81–84” na „86–87”: wynik 85 nie istnieje. Moduł czyta wiersz jako **81–85** (płyta
+CD z muzyką rozrywkową); tak samo w paczce Tabele. Do potwierdzenia przez autora — szczegóły w
+[Pytaniach do autora](Pytania-do-autora.md#11-wynik-85-tabeli-fantów-s-132133).
