@@ -34,7 +34,8 @@ night: lifecycle and test commands refuse; the GM switches modes by saying so.
 
 | Output | Source of truth | Run |
 |---|---|---|
-| `packs/*` (all 16 compendia) | `scripts/config/*-data.mjs`, item builders in `scripts/**` | `npm run fvtt -- packs` |
+| `packs/*` (all 18 compendia) | `scripts/config/*-data.mjs`, item builders in `scripts/**` | `npm run fvtt -- packs` |
+| RollTables (pack `tabele`) | `scripts/config/szabrowanie-data.mjs`, `fanty-data.mjs` (the same data the in-module roller uses) → `dev/packs/tabele.mjs` | `npm run fvtt -- packs --only=tabele`; ranges must close and every result must resolve (`validate-packs`) |
 | Bestiariusz (pack `bestiariusz`), `scripts/config/bestiary-data.mjs` | NOE Markdown in the campaign vault (`Podrecznik/NOE/13 NOTATNIK ŁOWCY/`) → `dev/bestiary/bestiary.json` | `npm run build:bestiary` (then `fvtt packs`). Never create or edit monster actors by hand. The parser is strict (unknown label/skill/damage type/condition = build error). Portraits: the world's `characters/<NNN>_-_<Name>/avatar.*` (fuzzy name match, `PORTRAIT_ALIASES` in `build-packs.mjs`); top-down token art `tokens/<creature-id>.png` wins over `tokens/aliases.json` and `tokens/_placeholder/`. Details: IMPLEMENTATION.md, "Bestiariusz" |
 | `scripts/config/class-features-data.mjs`, `scripts/config/towarzysze-data.mjs` | `dev/classes/classes.json`, `professions.json`, `companions.json` (← `extract_classes.py`/`extract_professions.py`/`extract_companions.py` from NOE) | `npm run build:classes` |
 | Class/status placeholder icons, token templates | `dev/icons/gen_*` | `npm run build:icons`, `build:status-icons`, `build:token-templates`; real art requests go in `dev/icons/MISSING.md`; icon pipeline: `dev/icons/Pipeline.md` |

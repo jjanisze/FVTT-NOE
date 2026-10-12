@@ -1,0 +1,57 @@
+<form class="neuro-szabrowanie-form">
+    {{#if obraz}}<img class="neuro-postoj-ilustracja" src="{{ obraz }}" alt="">{{/if}}
+    <div class="form-group">
+        <label>Ruina</label>
+        <div class="form-fields">
+            <select name="ruina">{{#each ruiny}}<option value="{{ k }}" {{#if selected}}selected{{/if}}>{{ label }}</option>{{/each}}</select>
+        </div>
+        <p class="hint">Surowce: {{ surowce }} (×100 g; metal ×1 kg). Komplikacja: {{ ruina.komplikacje }}% (s. 271).</p>
+    </div>
+    {{#if wlasna}}
+    <fieldset class="neuro-szabrowanie-wlasna">
+        <legend>Własna ruina</legend>
+        <div class="neuro-zajecie-rzad">
+            <input type="text" name="wlasna.label" value="{{ wlasna.label }}" placeholder="nazwa rodzaju">
+            <label>Czas <input type="number" name="wlasna.minuty" min="0" step="5" value="{{ wlasna.minuty }}"> min</label>
+            <label>Komplikacja <input type="number" name="wlasna.komplikacje" min="0" max="100" step="5" value="{{ wlasna.komplikacje }}"> %</label>
+        </div>
+        <div class="neuro-zajecie-rzad">
+            {{#each wlasna.surowceLista}}<label>{{ label }} <input type="text" name="wlasna.surowce.{{ k }}" value="{{ v }}" placeholder="np. 2d8" size="5"></label>{{/each}}
+        </div>
+    </fieldset>
+    {{/if}}
+    <div class="form-group">
+        <label>Miejsce</label>
+        <div class="form-fields"><input type="text" name="nazwa" value="{{ nazwa }}" placeholder="np. apteka przy dworcu"></div>
+        <p class="hint">Pamięć ruin: ta sama osoba nie szuka drugi raz tego samego rodzaju w tym miejscu (RAW).</p>
+    </div>
+    <fieldset class="neuro-szabrowanie-osoby">
+        <legend>Szukający i rodzaje surowców <button type="button" class="neuro-cennik-btn" data-action="podzial" data-tooltip="Podział po kolei (D12)"><i class="fa-solid fa-shuffle" inert></i></button></legend>
+        {{#each osoby}}
+        <div class="neuro-szabrowanie-osoba">
+            <label class="checkbox"><input type="checkbox" data-osoba="{{ id }}" {{#if wybrany}}checked{{/if}}> <img src="{{ img }}" alt=""> {{ nazwa }}</label>
+            {{#if wybrany}}
+            <span class="neuro-szabrowanie-rodzaje">
+                {{#each rodzaje}}<label class="checkbox"><input type="checkbox" data-osoba="{{ ../id }}" data-rodzaj="{{ k }}" {{#if zaznaczony}}checked{{/if}}> {{ label }}</label>{{/each}}
+            </span>
+            {{/if}}
+            {{#if ulatwienia}}<span class="hint">Ułatwienie: {{ ulatwienia }}</span>{{/if}}
+        </div>
+        {{/each}}
+    </fieldset>
+    <div class="form-group">
+        <label>Komplikacja</label>
+        <div class="form-fields"><select name="komplikacja">{{#each komplikacje}}<option value="{{ k }}" {{#if selected}}selected{{/if}}>{{ label }}</option>{{/each}}</select></div>
+        <p class="hint">Rzut w ukryciu; MG może wstawić coś innego (s. 271). Wynik tylko w szepcie MG.</p>
+    </div>
+    <div class="form-group">
+        <label>Czas</label>
+        <div class="form-fields"><input type="number" name="minuty" min="0" step="5" value="{{ minuty }}"> <span>min</span></div>
+        <p class="hint">{{ ruina.minuty }} min ÷ liczba szukających = {{ minutyDomyslne }} min (D12); do nadpisania.</p>
+    </div>
+    {{#each ostrzezenia}}<p class="neuro-zle"><i class="fa-solid fa-triangle-exclamation" inert></i> {{ this }}</p>{{/each}}
+    {{#if pamiec.length}}<p class="hint">Przeszukane: {{#each pamiec}}{{#unless @first}} · {{/unless}}{{ this }}{{/each}}</p>{{/if}}
+    <footer class="form-footer">
+        <button type="button" data-action="szabruj" {{#unless mozna}}disabled{{/unless}}><i class="fa-solid fa-magnifying-glass" inert></i> Szabruj</button>
+    </footer>
+</form>

@@ -331,3 +331,12 @@
 .neuro-przeskok-wynik p.neuro-zle { margin: 2px 0 0; font-size: 12px; }
 .neuro-przeskok-stopka { display: flex; justify-content: flex-end; gap: 6px; padding-top: 4px; }
 .neuro-przeskok-stopka button { flex: 0 0 auto; }
+
+/* Szabrowanie (§7.16): okno MG. */
+.neuro-szabrowanie-form .neuro-postoj-ilustracja { display: block; width: 100%; aspect-ratio: 3 / 1; object-fit: cover; border-radius: 6px; margin-bottom: 6px; }
+.neuro-szabrowanie-form .hint { font-size: 11px; color: var(--color-text-secondary, #999); margin: 2px 0; }
+.neuro-szabrowanie-osoba { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 2px 0; }
+.neuro-szabrowanie-osoba img { width: 20px; height: 20px; border: none; border-radius: 3px; vertical-align: middle; object-fit: cover; }
+.neuro-szabrowanie-rodzaje { display: inline-flex; flex-wrap: wrap; gap: 6px; font-size: 12px; }
+.neuro-szabrowanie-osoby legend button { margin-left: 4px; }
+.neuro-szabrowanie-wlasna input[type="number"] { width: 56px; }

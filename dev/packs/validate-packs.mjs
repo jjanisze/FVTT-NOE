@@ -20,6 +20,7 @@ import { CLASS_FEATURES, resolveGrant } from "../../scripts/config/class-feature
 import { SZTUCZKI } from "../../scripts/config/sztuczki-data.mjs";
 import { ORIGIN_ABILITIES, POCHODZENIA, attrBonus } from "../../scripts/config/pochodzenia-data.mjs";
 import { STATBLOKI, RODZAJE } from "../../scripts/config/towarzysze-data.mjs";
+import { bledyTabel } from "./tabele.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -269,6 +270,31 @@ notes.push(`towarzysze: klasa ${klasaTowarzysza ? "jest" : "BRAK"}, ${szablony.l
 notes.push(`features: ${features.length} (uses ${withUses}, activities ${withActivity}, art ${withArt})`);
 notes.push(`sztuczki: ${sztuczki.length} docs; Pochodzenia: ${origins.length}, ich zdolności: ${pochodzenia.length}`);
 notes.push(`advancements: ${[...klasy, ...profesje, ...origins].reduce((n, d) => n + d.system.advancement.length, 0)}`);
+
+/* ---- tabele (PLAN_m5_postoj §7.17, U14): domknięcia zakresów i odnośniki do istniejących dokumentów ---- */
+{
+  const docs = await load("tabele");
+  const wyniki = new Map(docs.filter(d => Array.isArray(d.range)).map(d => [d._id, d]));
+  const tabele = docs.filter(d => typeof d.formula === "string").map(t => ({ ...t, results: t.results.map(id => wyniki.get(id)).filter(Boolean) }));
+  for (const t of docs.filter(d => typeof d.formula === "string")) {
+    if (t.results.some(id => !wyniki.has(id))) fail(`tabele: ${t.name} — wynik bez dokumentu`);
+  }
+  for (const b of bledyTabel(tabele)) fail(`tabele: ${b}`);
+  const paczki = new Map();
+  const idyPaczki = async name => {
+    if (!paczki.has(name)) paczki.set(name, new Set((await load(name)).map(d => d._id)));
+    return paczki.get(name);
+  };
+  let linki = 0;
+  for (const r of wyniki.values()) {
+    if (r.type !== "document") continue;
+    const m = /^Compendium\.([^.]+)\.([^.]+)\.[A-Za-z]+\.([A-Za-z0-9]{16})$/.exec(r.documentUuid ?? "");
+    if (!m || m[1] !== MODULE_ID) { fail(`tabele: ${r.name} — odnośnik ${r.documentUuid}`); continue; }
+    if (!(await idyPaczki(m[2])).has(m[3])) fail(`tabele: ${r.name} — brak ${r.documentUuid}`);
+    linki++;
+  }
+  notes.push(`tabele: ${tabele.length} tabel, ${wyniki.size} wyników, ${linki} odnośników`);
+}
 
 /* ---- report ---- */
 console.log("Neuroshima 5e — pack validation\n");

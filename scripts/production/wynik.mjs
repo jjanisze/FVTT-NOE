@@ -321,4 +321,7 @@ export async function refDlaPrzedmiotu(item) {
   return null;
 }
 
+/** Deterministyczne id dokumentu kompendium (`idFor` z `dev/packs/build-packs.mjs`) — np. aktor Bestiariusza. */
+export const idKompendium = _idFor;
+
 export const __testing = Object.freeze({ idFor: _idFor, PACZKI, SPRZET });

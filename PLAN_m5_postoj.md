@@ -1397,3 +1397,30 @@ Quench `fuksy` (9). Na żywo: wódka z paczki przez prawdziwą aktywność — b
   okno z zakładki, 30 dób, Robota 10 h/dobę z przyjętym Testem, Trening Atletyki od 100 h → „Wyszkolenie” z
   biegłością, Bezsenność odespana, Fuks Rozrywki wygasł, zegar +30 dób jednym zapisem, karty. **Mutacja:** zegar
   w dwóch krokach — czerwone.
+
+**2026-10-12 — E8 (szabrowanie, losowanie, paczka `tabele`).**
+- `postoj/szabrowanie.mjs`: [Szabrowanie] w kontrolkach żetonów (MG) i w rzędzie MG zakładki Postój → okno: ruina
+  (7 z RAW albo własna z polami), miejsce, szukający z podziałem rodzajów (D12, po kolei; ręcznie), komplikacja
+  (losowo / brak / wstawiona przez MG — s. 271), czas ÷ N do nadpisania, ilustracja ruiny, ostrzeżenia z pamięci
+  ruin (U10). Komplikacja w ukryciu → szept MG bez rzutów: mieszkańcy z liczbą i odnośnikiem `@UUID` do aktora
+  Bestiariusza, pułapki ([Poproś o RO] — prośba `neuroPulapkaRO`, porażka nakłada stany; [Obrażenia] — rzut
+  obrażeń dnd5e), opary ([Nałóż Zatrucie]), skażenie ([Oznacz Skażenie N] — `setTrackLevel`), [Kontynuuj]. Prośba
+  `neuroSzabrowanie` do szukających: wybór Percepcja / Śledztwo, Ułatwienia (wykrywacz metalu — Percepcja,
+  Śmieciarz — oba), rzut gracza → przekaźnik → MG rozlicza: kości surowców na karcie, ≥ 20 — podwójnie i
+  `losujPrzedmiot` (katalog → `utworzWynik`, wiersz bez katalogu → loot, Schemat z paczki, istota/pojazd — karta
+  MG), nat. 20 — Fant; porażka — [Spróbuj: …] dla innych szukających; koniec — karta MG [Przesuń czas].
+- Paczka **`tabele`** (`dev/packs/tabele.mjs`, 26 tabel, 407 wyników): komplikacje, Losowe przedmioty z
+  odnośnikami do tabel kategorii (core losuje zagnieżdżone), kolumny k100/k12, kategorie bez kolumny jako tabele
+  ważone dostępnością (D9), Fanty (100 — „rzuć dwa razy”), Zdobyczna apteczka. Wyniki-dokumenty z
+  `uuidWKompendium` (Node), Fantów, Schematów i Bestiariusza (`idKompendium` z `production/wynik.mjs`).
+  `build-packs` sprawdza domknięcia przed zapisem, `validate-packs` — domknięcia i każdy odnośnik; `module.json`,
+  folder paczek, `AGENTS.md`. Na żywo: 299 odnośników rozwiązanych, rzut 72 → „Broń palna długa” → broń.
+- **Znaleziska:** (1) uuid „Actor.x” jako klucz obiektu w fladze rozwija się przy zapisie w `{Actor: {x}}` —
+  przydział szukających trzymamy po id; ten sam błąd siedział w E5: poziom utrzymania ludzkiego towarzysza w
+  szkicu doby był po cichu ignorowany (zawsze „znalazł robotę”) — naprawione, test regresji. (2) Zapis flagi
+  scala obiekty: [Spróbuj] musi usunąć stary wynik kluczem `-=`, inaczej nowy rzut się nie liczy (test).
+  (3) Wymuszone kości e2e nie działają w kliencie MG — szukający MG w e2e ma Mądrość 30.
+- Quench `szabrowanie` (6) + regresja towarzysza w `postoj-zajecia`; e2e **`szabrowanie`** zielone (komplikacja
+  tylko u MG z odnośnikiem, trzech szukających, ≥ 20 z nat. 20 → podwójnie, przedmiot, Fant; porażka →
+  [Spróbuj] za kogoś; [Przesuń czas] +40 min; ostrzeżenie o powtórce), `boot` z 18 paczkami. **Mutacja:**
+  publiczna karta komplikacji — czerwone.

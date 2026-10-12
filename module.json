@@ -168,6 +168,13 @@
       "type": "Actor",
       "system": "dnd5e",
       "ownership": { "PLAYER": "NONE", "ASSISTANT": "OWNER" }
+    },
+    {
+      "name": "tabele",
+      "label": "Neuroshima — Tabele",
+      "path": "packs/tabele",
+      "type": "RollTable",
+      "ownership": { "PLAYER": "NONE", "ASSISTANT": "OWNER" }
     }
   ],
   "packFolders": [
@@ -175,7 +182,7 @@
       "name": "Neuroshima",
       "sorting": "m",
       "color": "#6b3f1f",
-      "packs": ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "pochodzenia", "zdolnosci-pochodzenia", "bron", "magazynki", "sprzet", "pancerze", "lekarstwa", "amunicja", "granaty", "narzedzia", "schematy", "bestiariusz", "towarzysze"]
+      "packs": ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "pochodzenia", "zdolnosci-pochodzenia", "bron", "magazynki", "sprzet", "pancerze", "lekarstwa", "amunicja", "granaty", "narzedzia", "schematy", "bestiariusz", "towarzysze", "tabele"]
     }
   ],
   "esmodules": ["scripts/main.mjs"],

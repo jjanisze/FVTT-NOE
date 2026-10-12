@@ -11,7 +11,7 @@
 import { MODULE_ID, scratchActor, scratchGroupActor, scratchCleanup } from "./helpers.mjs";
 import { zajeciaWidoku, zastosujZajecia } from "../actors/rest-activities.mjs";
 import { ZAJECIA_POSTOJU, treningi, projektyBazy, ustawProjektBazy, pasywnaDla } from "../postoj/zajecia.mjs";
-import { rachunekDoby } from "../postoj/doba.mjs";
+import { rachunekDoby, szkic } from "../postoj/doba.mjs";
 import { setMiejsce } from "../postoj/miejsce.mjs";
 import { fuksy } from "../actors/fuksy.mjs";
 import { zrodlaWyczerpania } from "../config/exhaustion.mjs";
@@ -59,6 +59,16 @@ export function registerZajeciaPostojuTests(quench) {
         r = await rachunekDoby(a, szkicZ({ praca: { klucz: "skill:tch", godziny: 5 } }, { pasywna: 25 }), { grupa: g });
         expect(r.linie.find(l => l.opis.startsWith("Praca")).kwota).to.equal(12);
         expect(def("praca").godziny({ godziny: 14 })).to.equal(10);
+      });
+
+      it("utrzymanie ludzkiego towarzysza przeżywa zapis szkicu (klucz: id — uuid „Actor.x” rozwija się w fladze)", async function () {
+        const a = await scratchActor();
+        const reka = await scratchActor({ name: "[Quench] Prawa ręka", flags: { [MODULE_ID]: { towarzysz: { wlasciciel: a.uuid, rodzaj: "prawa-reka", klasa: "cwaniak" } } } });
+        const g = await scratchGroupActor({ system: { members: [{ actor: a.id }] } });
+        await setMiejsce(g, { rodzaj: "miasteczko" });
+        await a.setFlag(MODULE_ID, "szkicDoby", { ...szkicZ({}), towarzysze: { [reka.id]: "normalny" } });
+        const r = await rachunekDoby(a, szkic(a), { grupa: g });
+        expect(r.linie.find(l => l.opis.includes(reka.name))).to.include({ rodzaj: "koszt", kwota: 10 });
       });
 
       it("Hazard: stawka to koszt, wygrana oddaje dwie stawki (na czysto +stawka), porażka — nic (U36)", function () {

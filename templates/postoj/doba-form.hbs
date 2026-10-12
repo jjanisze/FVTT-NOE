@@ -22,7 +22,7 @@
         {{#each towarzysze}}
         <div class="form-group">
             <label>{{ nazwa }}</label>
-            {{#if opcje}}<select name="towarzysze.{{ uuid }}">{{#each opcje}}<option value="{{ k }}" {{#if wybrany}}selected{{/if}}>{{ label }}</option>{{/each}}</select>
+            {{#if opcje}}<select name="towarzysze.{{ id }}">{{#each opcje}}<option value="{{ k }}" {{#if wybrany}}selected{{/if}}>{{ label }}</option>{{/each}}</select>
             {{else}}<span class="hint">zwierzę — woda i jedzenie z zapasów (s. 47)</span>{{/if}}
         </div>
         {{/each}}

@@ -54,6 +54,7 @@ import { BESTIARY } from "../../scripts/config/bestiary-data.mjs";
 import { BLOOD_TYPES, NEUROSHIMA_CREATURE_TYPES } from "../../scripts/config/creature-types.mjs";
 import { computeFovAngle } from "../../scripts/config/fov.mjs";
 import { szablonyTowarzyszy, klasaTowarzysza } from "./build-towarzysze.mjs";
+import { budujTabele, bledyTabel, zapiszTabele } from "./tabele.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -84,7 +85,8 @@ const PACK = {
   sprzet: "sprzet",
   pancerze: "pancerze",
   schematy: "schematy",
-  towarzysze: "towarzysze"
+  towarzysze: "towarzysze",
+  tabele: "tabele"
 };
 
 /** Portrait art migrated from Roll20 lives here, one folder per character. */
@@ -1951,6 +1953,17 @@ if (wanted(PACK.bestiariusz)) {
 if (wanted(PACK.towarzysze)) {
   const towarzysze = szablonyTowarzyszy({ buildNpc, idFor, MODULE_ID });
   await writeActorPack(PACK.towarzysze, towarzysze.entries, towarzysze.folders);
+}
+
+// Tabele (PLAN_m5_postoj §7.17, U14) — RollTable z danych szabrowania i Fantów; domknięcia przed zapisem.
+if (wanted(PACK.tabele)) {
+  const tabele = await budujTabele({ idFor, MODULE_ID });
+  const bledy = bledyTabel(tabele.tables);
+  if (bledy.length) {
+    console.error(`TABELE — ZAKRESY:\n${bledy.join("\n")}`);
+    process.exit(1);
+  }
+  await zapiszTabele(path.join(PACKS_ROOT, PACK.tabele), tabele, { ClassicLevel, stats: v14Stats });
 }
 
 const advCount = classDocs.reduce((n, d) => n + d.system.advancement.length, 0)

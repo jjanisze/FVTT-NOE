@@ -118,10 +118,10 @@ export class DobaOkno extends HandlebarsApplicationMixin(ApplicationV2) {
       context.wCieploZaznaczone = s.wCieple;
       context.utrzymanie = wMiejscowosci ? Object.entries(UTRZYMANIE).map(([k, u]) => ({ k, label: `${u.label} — ${u.koszt} gb`, wybrany: s.utrzymanie === k })) : null;
       context.towarzysze = towarzyszeDoUtrzymania(this.actor).map(t => ({
-        uuid: t.actor.uuid, nazwa: t.actor.name, czlowiek: t.czlowiek,
+        uuid: t.actor.uuid, id: t.actor.id, nazwa: t.actor.name, czlowiek: t.czlowiek,
         opcje: wMiejscowosci && t.czlowiek ? [
-          ...Object.entries(UTRZYMANIE).map(([k, u]) => ({ k, label: `${u.label} — ${u.koszt} gb`, wybrany: s.towarzysze[t.actor.uuid] === k })),
-          { k: "robota", label: "znalazł robotę — sam się utrzyma (s. 47)", wybrany: (s.towarzysze[t.actor.uuid] ?? "robota") === "robota" }
+          ...Object.entries(UTRZYMANIE).map(([k, u]) => ({ k, label: `${u.label} — ${u.koszt} gb`, wybrany: s.towarzysze[t.actor.id] === k })),
+          { k: "robota", label: "znalazł robotę — sam się utrzyma (s. 47)", wybrany: (s.towarzysze[t.actor.id] ?? "robota") === "robota" }
         ] : null
       }));
       const ctx = { actor: this.actor, miejsce: m, szkic: s, kobalt, widok: "doba" };

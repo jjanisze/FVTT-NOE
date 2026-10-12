@@ -236,7 +236,7 @@ export async function rachunekDoby(actor, s, { grupa = null } = {}) {
     linie.push({ rodzaj: "koszt", kwota: kosztUtrzymania(s.utrzymanie), opis: `Utrzymanie: ${UTRZYMANIE[s.utrzymanie].label}` });
   }
   for (const t of towarzyszeDoUtrzymania(actor)) {
-    const v = s.towarzysze?.[t.actor.uuid] ?? (t.czlowiek ? "robota" : null);
+    const v = s.towarzysze?.[t.actor.id] ?? (t.czlowiek ? "robota" : null);
     if (t.czlowiek && UTRZYMANIE[v]) linie.push({ rodzaj: "koszt", kwota: kosztUtrzymania(v), opis: `Utrzymanie: ${t.actor.name} (${UTRZYMANIE[v].label})` });
   }
   const ctx = { actor, miejsce: m, szkic: s, kobalt };
@@ -343,7 +343,7 @@ export async function zatwierdzDobe(grupa) {
     if (w.s.utrzymanie) pokrycie[w.actor.id] = { ...pokrycieUtrzymania(w.s.utrzymanie), etykieta: UTRZYMANIE[w.s.utrzymanie].label };
     for (const t of towarzyszeDoUtrzymania(w.actor)) {
       aktorzy.push(t.actor);
-      const v = w.s.towarzysze?.[t.actor.uuid] ?? (t.czlowiek ? "robota" : null);
+      const v = w.s.towarzysze?.[t.actor.id] ?? (t.czlowiek ? "robota" : null);
       if (t.czlowiek && UTRZYMANIE[v]) pokrycie[t.actor.id] = { ...pokrycieUtrzymania(v), etykieta: UTRZYMANIE[v].label };
       else if (t.czlowiek && v === "robota") pokrycie[t.actor.id] = { jedzenie: true, woda: "pitna", leki: false, etykieta: "znalazł robotę" };
       // Zwierzę właściciela na Nędznym poziomie: brudna woda za darmo, jedzenie z zapasów (s. 47, D13, D23).
