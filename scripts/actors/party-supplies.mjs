@@ -25,6 +25,7 @@ import {
   NIEDOZYWIENIE_ST, POLOWANIE_ST, GOTOWANIE_ST, GOTOWANIE_FUKS
 } from "../config/podroz-data.mjs";
 import { addExhaustion } from "../config/exhaustion.mjs";
+import { JAKOSCI_WODY, JAKOSC_Z_PROWIANTU } from "../wkk/config/woda-kobalt.mjs";
 import { jestMaszyna, rodzajTowarzysza } from "./towarzysze.mjs";
 import { przyznajFuksa, mozeMiecFuksy } from "./fuksy.mjs";
 
@@ -198,12 +199,31 @@ export async function drawFuel(actors, litry) {
  * RAW nie zna połówek racji, a udawanie ułamków w `quantity` psułoby wagę ekwipunku.
  * @returns {Promise<number>} Ile faktycznie udało się zdjąć.
  */
-async function drawSupply(actors, kind, need) {
+/**
+ * Jakość wody w zapasach (WKK D37): z `prowiantId` (`woda_filtrowana`, `woda_pitna`, `woda_brudna`, skażone WKK),
+ * inaczej z nazwy; bez wskazówek — pitna.
+ */
+export function jakoscWody(item) {
+  const id = item?.flags?.[MODULE_ID]?.prowiantId;
+  if (id && JAKOSC_Z_PROWIANTU[id]) return JAKOSC_Z_PROWIANTU[id];
+  const n = String(item?.name ?? "").toLowerCase();
+  if (/brudn/.test(n)) return "brudna";
+  if (/filtrowan/.test(n)) return "filtrowana";
+  if (/skażon.*rad|radioakt/.test(n)) return "skazona-rad";
+  if (/skażon.*chem|chemicz/.test(n)) return "skazona-chem";
+  return "pitna";
+}
+
+async function drawSupply(actors, kind, need, slad = null) {
   let remaining = need;
   for (const actor of actors) {
     if (remaining <= 0.0001) break;
-    for (const e of entriesFor(actor, kind)) {
+    const wpisy = entriesFor(actor, kind);
+    // Woda: najpierw najczystsza (D37) — gorszą pije się dopiero, gdy czystej zabraknie.
+    if (kind === "woda") wpisy.sort((a, b) => JAKOSCI_WODY.indexOf(jakoscWody(a.item)) - JAKOSCI_WODY.indexOf(jakoscWody(b.item)));
+    for (const e of wpisy) {
       if (remaining <= 0.0001) break;
+      if (slad && kind === "woda") slad.jakosci.add(jakoscWody(e.item));
       const units = Math.min(e.qty, Math.ceil(remaining / e.per));
       remaining -= units * e.per;
       const left = e.qty - units;
@@ -221,23 +241,42 @@ async function drawSupply(actors, kind, need) {
  * Woda poniżej połowy → poziom Wyczerpania **bez rzutu**, RAW nie daje tu szansy.
  * Oba źródła są oznaczone (`niedozywienie` / `odwodnienie`), więc długi odpoczynek ich nie zdejmie.
  */
-export async function consumeDailyNeeds(groupActor) {
+export async function consumeDailyNeeds(groupActor, { aktorzy = null, pokrycie = null, karta = true } = {}) {
   const wspolne = [groupActor, groupActor.system.primaryVehicle].filter(Boolean);
   const wiersze = [];
 
-  for (const actor of creatures(groupActor)) {
+  for (const actor of aktorzy ?? creatures(groupActor)) {
     const need = dailyNeed(actor);
-    const wynik = { name: actor.name, notatki: [] };
+    const wynik = { name: actor.name, notatki: [], actor, woda: null };
 
-    for (const kind of ["jedzenie", "woda"]) {
+    // Koszt utrzymania (PLAN_m5_postoj U33): jedzenie i woda doby są w cenie — zapasy nie schodzą, znaczniki
+    // Niedożywienia i Odwodnienia znikają jak po pełnej racji. `woda` — jakość z poziomu (WKK D37).
+    const p = pokrycie?.[actor.id];
+    if (p?.tylkoWoda) {
+      // Zwierzę właściciela na Nędznym poziomie pije brudną wodę (s. 47, D13); jedzenie — z zapasów.
+      await actor.toggleStatusEffect(ZNACZNIK.woda, { active: false });
+      wynik.woda = p.woda ?? "brudna";
+      wynik.notatki.push(`Woda: ${wynik.woda} (Nędzne utrzymanie właściciela, s. 47).`);
+    }
+    if (p?.jedzenie) {
+      for (const kind of ["jedzenie", "woda"]) await actor.toggleStatusEffect(ZNACZNIK[kind], { active: false });
+      wynik.woda = p.woda ?? null;
+      wynik.notatki.push(`Utrzymanie${p.etykieta ? ` (${p.etykieta})` : ""}: jedzenie i woda${p.woda ? ` (${p.woda})` : ""} — pełna racja, zapasy nietknięte.`);
+      wiersze.push(wynik);
+      continue;
+    }
+
+    const slad = { jakosci: new Set() };
+    for (const kind of p?.tylkoWoda ? ["jedzenie"] : ["jedzenie", "woda"]) {
       const wanted = need[kind];
-      const got = await drawSupply([actor, ...wspolne], kind, wanted);
+      const got = await drawSupply([actor, ...wspolne], kind, wanted, slad);
       const unit = KATEGORIE_MAP[kind].unit;
       const label = KATEGORIE_MAP[kind].label;
 
       if (got >= wanted - 0.0001) {
         // Tylko pełna racja zdejmuje znacznik — RAW: „nie da się usunąć, dopóki nie zje pełnej porcji".
         await actor.toggleStatusEffect(ZNACZNIK[kind], { active: false });
+        if (kind === "woda") wynik.woda = [...slad.jakosci].sort((a, b) => JAKOSCI_WODY.indexOf(b) - JAKOSCI_WODY.indexOf(a))[0] ?? "pitna";
         wynik.notatki.push(`${label}: ${round(got)} ${unit} — pełna racja.`);
         continue;
       }
@@ -267,12 +306,13 @@ export async function consumeDailyNeeds(groupActor) {
     wiersze.push(wynik);
   }
 
-  await ChatMessage.create({
+  if (karta) await ChatMessage.create({
     speaker: ChatMessage.getSpeaker({ actor: groupActor }),
     content: `<div class="neuro-zapasy-card"><h3>Dzienne zapotrzebowanie</h3>`
       + wiersze.map(w => `<p><strong>${w.name}</strong><br>${w.notatki.join("<br>")}</p>`).join("")
       + `</div>`
   });
+  return wiersze;
 }
 
 /* -------------------------------------------- */

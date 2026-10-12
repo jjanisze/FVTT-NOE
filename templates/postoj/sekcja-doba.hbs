@@ -1,0 +1,43 @@
+<div class="neuro-zapas-blok neuro-postoj-doba">
+    <div class="neuro-zapas-naglowek">
+        <i class="fa-solid fa-sun" inert></i>
+        <span class="neuro-zapas-nazwa">Doba postoju</span>
+        <span class="neuro-zapas-stan">{{#if ctx.otwarta}}{{ ctx.data }}{{else}}zamknięta{{/if}}</span>
+        {{#if isGM}}
+        {{#if ctx.otwarta}}
+        <button type="button" data-action="neuroDobaZatwierdz" class="{{#if ctx.wszyscy}}is-gotowe{{/if}}" data-tooltip="Jedzenie → odpoczynek → Zachód słońca → rachunek → zegar +24 h (U27)">
+            <i class="fa-solid fa-check-double" inert></i> Zatwierdź dobę
+        </button>
+        <button type="button" data-action="neuroDobaZamknij" class="neuro-cennik-btn" data-tooltip="Zamknij bez zatwierdzenia"><i class="fa-solid fa-xmark" inert></i></button>
+        {{else}}
+        <button type="button" data-action="neuroDobaOtworz" data-tooltip="Każdy gracz ułoży swoją dobę; zatwierdzasz wszystkich naraz">
+            <i class="fa-solid fa-sun" inert></i> Otwórz dobę
+        </button>
+        {{/if}}
+        {{/if}}
+    </div>
+    {{#if ctx.otwarta}}
+    <table class="neuro-doba-tabela">
+        <thead><tr><th>Postać</th><th>Stan</th><th>Sen</th><th>Zajęcia</th><th>Praca</th><th>Utrzymanie</th><th>Saldo</th><th></th></tr></thead>
+        <tbody>
+            {{#each ctx.wiersze}}
+            <tr class="is-{{ stan }}">
+                <td><img src="{{ img }}" alt=""> {{ nazwa }}</td>
+                <td>{{ stanLabel }}{{#if domyslny}} <small>(domyślny)</small>{{/if}}</td>
+                <td>{{#if sen includeZero=true}}{{ sen }} h{{/if}}</td>
+                <td>{{#if zajecia includeZero=true}}{{ zajecia }} h{{/if}}</td>
+                <td>{{#if praca includeZero=true}}{{ praca }} h{{/if}}</td>
+                <td>{{ utrzymanie }}</td>
+                <td class="{{#if ujemne}}is-ujemne{{/if}}">{{ saldo }}{{#if przekroczenia}}<br><small class="is-ujemne">{{ przekroczenia }}</small>{{/if}}</td>
+                <td class="akcje">
+                    {{#if (or ../isGM moj)}}<button type="button" class="neuro-cennik-btn" data-action="neuroDobaSzkic" data-uuid="{{ uuid }}" data-tooltip="Szkic doby"><i class="fa-solid fa-pen" inert></i></button>{{/if}}
+                    {{#if ../isGM}}<button type="button" class="neuro-cennik-btn" data-action="neuroDobaDomyslny" data-uuid="{{ uuid }}" data-tooltip="Szkic domyślny (U28): jak wczoraj albo sen, bez zajęć"><i class="fa-solid fa-wand-magic" inert></i></button>{{/if}}
+                </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    {{#if ctx.historia.length}}<p class="hint">Ostatnie doby: {{#each ctx.historia}}{{#unless @first}} · {{/unless}}{{ dzien }} ({{ ile }} post.){{/each}}</p>{{/if}}
+    {{/if}}
+</div>

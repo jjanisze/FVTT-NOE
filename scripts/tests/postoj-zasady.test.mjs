@@ -66,7 +66,7 @@ export function registerPostojZasadyTests(quench) {
 
       it("woda WKK (D37): brudna RO 10 → biegunka (chory nie rzuca), skażona RO 15; NOE — nic", function () {
         expect(skutkiWody("brudna")).to.equal(null);
-        expect(skutkiWody("brudna", { kobalt: true })).to.include({ st: 10, choroba: "biegunka" });
+        expect(skutkiWody("brudna", { kobalt: true })).to.include({ st: 10, choroba: "zakazna" });
         expect(skutkiWody("brudna", { kobalt: true, juzChoruje: true })).to.equal(null);
         expect(skutkiWody("skazona-rad", { kobalt: true })).to.include({ st: 15, wyczerpanie: "skazenie" });
         expect(skutkiWody("skazona-chem", { kobalt: true })).to.include({ st: 15, obrazenia: "1d6" });

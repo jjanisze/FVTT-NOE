@@ -28,6 +28,7 @@
  */
 
 import { ZRANIENIE_UPORCZYWE_KOBALT } from "../wkk/config/rekonwalescencja-kobalt.mjs";
+import { BEZSENNOSC_UPORCZYWA_KOBALT } from "../wkk/config/sen-kobalt.mjs";
 
 /** Regeneracja: RO na Kondycję po tylu kolejnych DO, z tym ST (s. 33). */
 export const REGENERACJA = Object.freeze({ dni: 3, cecha: "con", st: 15 });
@@ -121,13 +122,18 @@ function _klucz(zrodlo) {
  *   wyjscia: {id: string, opis: string, warstwa: string, strona?: string}[],
  *   warstwa: "NOE"|"WKK", opis: string}}
  */
-export function regulaZdejmowania(zrodlo, { kobalt = false, spelnione = [] } = {}) {
+export function regulaZdejmowania(zrodlo, { kobalt = false, spelnione = [], senKobalt = true } = {}) {
   const key = _klucz(zrodlo);
   let row = REGULY_ZDEJMOWANIA[key];
   let warstwa = "NOE";
   if (kobalt && key === "zranienie") {
     // D5, WKK: uporczywe do zejścia z Krytycznego; wyjście RAI zostaje — to ono je wtedy zdejmuje.
     row = { ...row, grupaDO: null, uporczywe: ZRANIENIE_UPORCZYWE_KOBALT.uporczywe };
+    warstwa = "WKK";
+  }
+  if (kobalt && senKobalt !== false && key === "bezsennosc") {
+    // PLAN_m5_postoj D35, WKK „Sen”: uporczywa, schodzi odsypianiem (12 h / 18 h snu) — nie zwykłym DO.
+    row = { ...row, grupaDO: null, uporczywe: BEZSENNOSC_UPORCZYWA_KOBALT.uporczywe };
     warstwa = "WKK";
   }
   let uporczywe = row.uporczywe ?? null;

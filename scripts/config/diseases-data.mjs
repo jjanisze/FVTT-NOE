@@ -257,6 +257,11 @@ export function hasStageLadder(entry) {
   return diseaseStages(entry).length > 1;
 }
 
+/** Choroba przewlekła (NOE albo WKK) — dawka z utrzymania przy Zachodzie słońca (PLAN_m5_postoj U33). */
+export function jestPrzewlekla(entry) {
+  return (entry?.key in CHRONIC_DISEASES) || (entry?.key in KOBALT_DISEASES);
+}
+
 /**
  * True when the entry is a chronic disease sitting at its baseline stage.
  * Ten stan jest permanentny i gracz go nie zdejmie, więc znacznik na żetonie nie

@@ -1,0 +1,12 @@
+<header class="neuro-doba-naglowek">
+    {{#if otwarta}}
+    {{#if obraz}}<img class="neuro-postoj-ilustracja" src="{{ obraz }}" alt="">{{/if}}
+    <div class="neuro-doba-tytul">
+        <strong><i class="fa-solid fa-sun" inert></i> {{ data }}</strong>
+        <span>{{ miejsce }} · {{ czas }}</span>
+        {{#if zgloszony}}<span class="neuro-doba-stan is-zgloszony"><i class="fa-solid fa-check" inert></i> zgłoszona — czeka na MG</span>{{else}}<span class="neuro-doba-stan">szkic</span>{{/if}}
+    </div>
+    {{else}}
+    <p class="neuro-zapas-pusto">Drużyna nie ma otwartej doby postoju.</p>
+    {{/if}}
+</header>

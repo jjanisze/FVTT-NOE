@@ -39,7 +39,7 @@ const MODULE_ID = "neuroshima-2026-overrides";
 
 import { seqScrollText } from "../weapons/sequencer.mjs";
 import { STATE_COLORS } from "./state-colors.mjs";
-import { isKobaltEnabled } from "./settings.mjs";
+import { isKobaltEnabled, isKobaltSen } from "./settings.mjs";
 import { formatWorldTime } from "../world-clock.mjs";
 import {
   REGULY_ZDEJMOWANIA, KRYTYCZNY, kolejnoscDO, normalizujZrodla, widokWyczerpania, zrodlaPoWyjsciu
@@ -160,7 +160,7 @@ export function warunkiSpelnione(actor) {
 
 /** Opcje reguł zdejmowania dla tego aktora: warstwa (Kobalt) i spełnione warunki. */
 export function opcjeZdejmowania(actor) {
-  return { kobalt: isKobaltEnabled(), spelnione: warunkiSpelnione(actor) };
+  return { kobalt: isKobaltEnabled(), spelnione: warunkiSpelnione(actor), senKobalt: isKobaltSen() };
 }
 
 /**

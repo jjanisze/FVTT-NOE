@@ -1348,3 +1348,32 @@ Quench `fuksy` (9). Na żywo: wódka z paczki przez prawdziwą aktywność — b
   przeniesienie bez klonów, notka wizyty, zamówienie z jawnymi liczbami i szeptem tylko MG, drugi raz — odmowa,
   trzecia transakcja przy PB 2 → RO → Wyczerpanie „Gambling”, tłumik zamontowany przez rusznikarza, [Losuj od nowa].
   **Mutacje** (każda daje czerwone): skup 100% pod Kobaltem, kopia zamiast przeniesienia.
+
+**2026-10-12 — E5–E6 (doba postoju, zajęcia, WKK snu i wody).**
+- `postoj/doba.mjs` + `doba-okno.mjs` + `zakladka-doba.mjs`: MG [Otwórz dobę] na zakładce Postój → karta [Ułóż dobę];
+  gracz układa szkic (`flags.szkicDoby`: sen, zajęcia rejestru, utrzymanie, towarzysze, towar na rachunek, w cieple)
+  w oknie Doba (z karty albo z przycisku w nagłówku), z paskami doby/pracy i rachunkiem na żywo; [Jak wczoraj],
+  [Zgłoś]/[Wycofaj]. MG widzi tabelę stanów, [Szkic], [Domyślny] (U28), panel MG w oknie (korekta, ST snu,
+  pasywna Pracy, uwagi). Zatwierdzenie w kolejności U27: rachunki → jedzenie i woda (`consumeDailyNeeds` z
+  pokryciem utrzymania; zwierzęta Nędznego — brudna woda) → odpoczynek wg snu (DO z zajęciami, KO, albo same
+  zajęcia) → Zachód słońca z dawką z utrzymania dla przewlekłych → Bogaty WKK → konto (nadwyżka na jutro) →
+  zegar +24 h raz → historia → karty per postać + karta MG; haki `neuroshima.doba{Odpoczynek,Rachunek,Zatwierdzona}`.
+- Rejestr zajęć (`actors/rest-activities.mjs`) ma `widoki` (D26): okna dnd5e, „doba”, „przeskok”; `zastosujZajecia`
+  wołane wprost, gdy sen nie dał DO. `postoj/zajecia.mjs` — osiem zajęć postoju: Praca (pasywna, nadpisanie MG),
+  Trening (300 h → cecha „Wyszkolenie: X” z efektem; narzędzia z zasianym wpisem), Budowa bazy (projekty drużyny,
+  sekcja „Baza” na zakładce dla MG: wymagane godziny i efekt, karta MG po ukończeniu), Za garść gambli, Rozrywka,
+  Plotki (karta MG z liczbą informacji), Hazard (test z tabeli gier, stawka w rachunku), Szukanie towarzysza (24 h
+  w dobach → karta MG z [Nowy towarzysz]). Rzuty (plotki, hazard, koncert) gracz wykonuje w oknie doby; wynik idzie
+  do szkicu i rachunku. Miejsce dociera do `apply` jako `config.neuroMiejsce`.
+- WKK (podustawienia „Kobalt: sen” i „Kobalt: jakość wody”, domyślnie wł.): RO za 4–5 h (ST 10) i 2–3 h (ST 15) jako
+  prośba `neuroSenRO`; Bezsenność uporczywa — schodzi odsypianiem (12 h / 18 h), także w oknie DO dnd5e (pole snu);
+  woda brudna → choroba zakaźna, skażona → Wyczerpanie / kwas (`neuroWodaRO`).
+- **Znalezisko z e2e:** okno Doby otwarte od wczoraj nie dostawało szkicu nowej doby (szkic zapewniał tylko pierwszy
+  render), a formularz rysowany raz zostawał wczorajszy. Teraz szkic zapewnia otwarcie, a zmiana `dobaId` pod
+  otwartym oknem rysuje formularz od nowa (z opóźnieniem — zapis szkicu to para zdejmij + zapisz).
+- Quench `postoj-zajecia` (10) + poprawki: `rekonwalescencja` (reguła Bezsenności pod WKK), `handel` (kolejność
+  `createEmbeddedDocuments` niestała — po nazwie). e2e **`postoj`** zielone, dwie doby: Fant wspólny, Normalny/Bogaty,
+  kolejność jedzenie → DO, dawka z utrzymania, zegar raz; doba druga — Rozrywka i rzut Hazardu w oknie (saldo z
+  wynikiem), 5 h snu i Praca, Fuks Rozrywki, prośba RO ST 10 do gracza, nadwyżka na jutro, porażka RO u gracza →
+  uporczywa Bezsenność. **Mutacja:** Rozrywka bez sprawdzania miejsca — czerwone.
+- Poza zakresem tej sesji (z §11 E6): dola Prawej ręki (U39) jako linia T0 w podsumowaniu — do E7 razem z przeskokiem.

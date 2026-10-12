@@ -40,6 +40,7 @@ import { registerFuksyZasadyTests } from "./fuksy-zasady.test.mjs";
 import { registerSzabrowanieZasadyTests } from "./szabrowanie-zasady.test.mjs";
 import { registerBebeszenieZasadyTests } from "./bebeszenie-zasady.test.mjs";
 import { registerHandelTests } from "./handel.test.mjs";
+import { registerZajeciaPostojuTests } from "./zajecia-postoju.test.mjs";
 import { registerFuksyTests } from "./fuksy.test.mjs";
 import { registerConfigTests } from "./config.test.mjs";
 import { registerEquipmentDataTests } from "./ekwipunek-dane.test.mjs";
@@ -98,6 +99,7 @@ export function registerQuenchTests() {
     registerBebeszenieZasadyTests(quench);
     registerHandelTests(quench);
     registerFuksyTests(quench);
+    registerZajeciaPostojuTests(quench);
     console.log("Neuroshima 5e | Quench batches registered");
   });
 }

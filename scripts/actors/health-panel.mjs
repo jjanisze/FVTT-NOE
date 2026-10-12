@@ -33,7 +33,7 @@
 import {
   DISEASE_STAGES, CHRONIC_DISEASES, SUNSET_SAVE, NO_REST_FLAG,
   getDisease, diseaseStages, hasStageLadder, diseaseOptions,
-  dailySaveFor, chronicKeys
+  dailySaveFor, chronicKeys, jestPrzewlekla
 } from "../config/diseases-data.mjs";
 import {
   PHOBIAS, PHOBIA_SAVE, PHOBIA_CURE_STREAK, getPhobia, phobiaOptions, phobiaSaveDc
@@ -501,7 +501,7 @@ async function _rollDailySave(actor, entry, daily, bezKorzysciDo) {
  * @param {object} [options]
  * @param {Actor[]} [options.actors]  Defaults to every player-owned character.
  */
-export async function sunsetCheck({ actors } = {}) {
+export async function sunsetCheck({ actors, dawkaZUtrzymania = null } = {}) {
   if (!game.user.isGM) return ui.notifications.warn("Zachód słońca może uruchomić tylko MG.");
 
   const pool = actors ?? game.actors.filter(a => a.type === "character" && a.hasPlayerOwner);
@@ -528,6 +528,12 @@ export async function sunsetCheck({ actors } = {}) {
       if (!hasStageLadder(entry)) continue;
       if (dosedToday(entry)) {
         lines.push(`<li><strong>${actor.name}</strong> — ${entry.name}: dawka wzięta.</li>`);
+        continue;
+      }
+      // Utrzymanie Normalne i Bogate stać na leki (s. 47, PLAN_m5_postoj D13, U33) — choroby przewlekłe dostają
+      // dawkę z utrzymania; ostre i zakaźne leczy się dalej z ekwipunku.
+      if (dawkaZUtrzymania?.has?.(actor.id) && jestPrzewlekla(entry)) {
+        lines.push(`<li><strong>${actor.name}</strong> — ${entry.name}: dawka z utrzymania.</li>`);
         continue;
       }
 

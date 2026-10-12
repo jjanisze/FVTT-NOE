@@ -1,0 +1,24 @@
+<div class="neuro-zapas-blok neuro-postoj-baza">
+    <div class="neuro-zapas-naglowek">
+        <i class="fa-solid fa-house-chimney" inert></i>
+        <span class="neuro-zapas-nazwa">Baza</span>
+        <span class="neuro-zapas-stan">{{#if ctx.projekty.length}}{{ ctx.projekty.length }} {{#if (eq ctx.projekty.length 1)}}projekt{{else}}projekty{{/if}}{{else}}bez projektów{{/if}}</span>
+        {{#if isGM}}
+        <button type="button" data-action="neuroBazaProjekt" data-tooltip="Projekt bazy: wymagane godziny i efekt (s. 47)">
+            <i class="fa-solid fa-plus" inert></i> Projekt
+        </button>
+        {{/if}}
+    </div>
+    {{#each ctx.projekty}}
+    <div class="neuro-baza-projekt{{#if gotowy}} is-gotowy{{/if}}">
+        <span class="neuro-baza-nazwa">{{ nazwa }}</span>
+        <span class="neuro-baza-postep">{{ godziny }}{{#if wymagane}} / {{ wymagane }}{{/if}} h</span>
+        {{#if procent includeZero=true}}<span class="neuro-baza-pasek"><span style="width: {{ procent }}%"></span></span>{{/if}}
+        {{#if efekt}}<span class="neuro-baza-efekt">{{ efekt }}</span>{{/if}}
+        {{#if @root.isGM}}
+        <button type="button" class="neuro-cennik-btn" data-action="neuroBazaProjekt" data-nazwa="{{ nazwa }}" data-tooltip="Zmień"><i class="fa-solid fa-pen" inert></i></button>
+        <button type="button" class="neuro-cennik-btn" data-action="neuroBazaUsun" data-nazwa="{{ nazwa }}" data-tooltip="Usuń"><i class="fa-solid fa-trash" inert></i></button>
+        {{/if}}
+    </div>
+    {{/each}}
+</div>

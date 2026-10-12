@@ -16,6 +16,17 @@ export const RO_KROTKI_SEN_KOBALT = Object.freeze([
 ]);
 
 /**
+ * D35 — pod Kobaltem Bezsenność jest uporczywa: zwykły Długi odpoczynek jej nie zdejmuje, schodzi odsypianiem
+ * (`ODSYPIANIE_KOBALT`). Kształt reguły zdejmowania hosta (`config/rekonwalescencja-rules.mjs`).
+ */
+export const BEZSENNOSC_UPORCZYWA_KOBALT = Object.freeze({
+  uporczywe: Object.freeze({
+    dopoki: "odsypianie",
+    opis: "Uporczywe (WKK) — schodzi odsypianiem: 12 h snu zdejmuje poziom, 18 h — dwa"
+  })
+});
+
+/**
  * D35 — odsypianie: pod Kobaltem Bezsenność jest uporczywa i zwykłe DO jej nie zdejmuje. Zdejmuje ją sen
  * ponad normę: 12 h — jeden poziom, 18 h — dwa. Nie więcej — reszta doby to jedzenie, leki i troska o siebie.
  */

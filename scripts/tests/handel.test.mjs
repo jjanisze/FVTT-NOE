@@ -52,11 +52,15 @@ export function registerHandelTests(quench) {
     describe("Waluty lokalne i portfel (U41, U43)", function () {
       it("waluta lokalna z flagi; Żeton Luxor to waluta Vegas także bez flagi", async function () {
         const a = await scratchActor();
-        const [zeton, zwykly, zFlaga] = await a.createEmbeddedDocuments("Item", [
+        const utworzone = await a.createEmbeddedDocuments("Item", [
           buildZetonLuxorItemData({ quantity: 3 }),
           { name: "Kapsel", type: "loot" },
           { name: "Dolar NY", type: "loot", flags: { [MODULE_ID]: { walutaLokalna: { region: "nowy-jork" } } } }
         ]);
+        // Kolejność wyniku `createEmbeddedDocuments` nie jest stała — po nazwie, nie po pozycji.
+        const zwykly = utworzone.find(i => i.name === "Kapsel");
+        const zFlaga = utworzone.find(i => i.name === "Dolar NY");
+        const zeton = utworzone.find(i => i !== zwykly && i !== zFlaga);
         expect(walutaLokalna(zeton)).to.deep.equal({ region: "vegas" });
         expect(walutaLokalna(zwykly)).to.equal(null);
         expect(walutaLokalna(zFlaga)).to.deep.equal({ region: "nowy-jork" });

@@ -13,13 +13,13 @@ export const JAKOSCI_WODY = Object.freeze(["filtrowana", "pitna", "brudna", "ska
 
 /**
  * D37 — RO KON raz na dobę picia gorszej wody:
- *   - brudna: ST 10, porażka — Choroba zakaźna (biegunka, s. 111; antybiotyk 10 dni); kto już choruje, nie rzuca;
+ *   - brudna: ST 10, porażka — Choroba zakaźna (`zakazna`: biegunka, s. 111; antybiotyk 10 dni); kto już choruje, nie rzuca;
  *   - skażona radioaktywnie: ST 15, porażka — Wyczerpanie „Skażenie radioaktywne”;
  *   - skażona chemicznie: ST 15, porażka — 1k6 od kwasu i Wyczerpanie.
  * Gotowanie 15 min albo WD-Tabs czynią wodę pitną (tylko brudną).
  */
 export const WODA_KOBALT = Object.freeze({
-  "brudna": Object.freeze({ label: "brudna", st: 10, choroba: "biegunka", uzdatnialna: true }),
+  "brudna": Object.freeze({ label: "brudna", st: 10, choroba: "zakazna", opisChoroby: "biegunka po brudnej wodzie (s. 111)", uzdatnialna: true }),
   "skazona-rad": Object.freeze({ label: "skażona radioaktywnie", st: 15, wyczerpanie: "skazenie", uzdatnialna: false }),
   "skazona-chem": Object.freeze({ label: "skażona chemicznie", st: 15, obrazenia: "1d6", typObrazen: "acid", wyczerpanie: "zatrucie", uzdatnialna: false })
 });

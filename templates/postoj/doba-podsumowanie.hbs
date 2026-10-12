@@ -1,0 +1,50 @@
+<section class="neuro-doba-podsumowanie">
+    {{#if otwarta}}
+    <div class="neuro-doba-paski">
+        <div class="neuro-doba-pasek {{#if pasek.ponad}}is-ponad{{/if}}" data-tooltip="Doba: sen + zajęcia = 24 h (D7)">
+            <span class="etykieta">Doba {{ pasek.suma }} / {{ pasek.doba }} h</span>
+            <div class="tor"><div class="sen" style="width:{{ pasek.procentSen }}%"></div><div class="zajecia" style="width:{{ pasek.procentZajecia }}%"></div></div>
+        </div>
+        <div class="neuro-doba-pasek {{#if pasek.ponadPraca}}is-ponad{{/if}}" data-tooltip="Praca: produkcja, naprawa, Praca, Trening, Budowa, koncert — razem do 10 h (s. 145, s. 47)">
+            <span class="etykieta">Praca {{ pasek.praca }} / {{ pasek.limitPracy }} h</span>
+            <div class="tor"><div class="praca" style="width:{{ pasek.procentPracy }}%"></div></div>
+        </div>
+        <p class="neuro-doba-skutek">Sen {{ pasek.sen }} h → <strong>{{ skutkiSnu }}</strong>{{#if roSnu}} · RO KON ST {{ roSnu }}{{/if}}</p>
+    </div>
+
+    <div class="neuro-doba-rachunek" data-tooltip="Przeciągnij własny towar, żeby zapłacić nim za dobę (wycena jak przy sprzedaży)">
+        <h3><i class="fa-solid fa-receipt" inert></i> Rachunek</h3>
+        <ul>
+            {{#each rachunek}}<li class="is-{{ rodzaj }}"><span>{{ opis }}</span><span class="kwota">{{ kwotaTxt }}</span></li>{{else}}<li class="pusto">Nic do zapłaty.</li>{{/each}}
+        </ul>
+        {{#if doloz.length}}
+        <ul class="neuro-doba-towar">
+            {{#each doloz}}
+            <li>{{#if img}}<img src="{{ img }}" alt="">{{/if}} {{ nazwa }}
+                <input type="number" min="1" value="{{ ilosc }}" data-doloz="{{ uuid }}">
+                <button type="button" class="neuro-cennik-btn" data-action="usunTowar" data-uuid="{{ uuid }}"><i class="fa-solid fa-xmark" inert></i></button></li>
+            {{/each}}
+        </ul>
+        {{/if}}
+        <p class="neuro-doba-saldo {{#if ujemne}}is-ujemne{{/if}}">Saldo: <strong>{{ saldo }}</strong>{{#if ujemne}} — dołóż towar albo dogadaj się z MG{{/if}}</p>
+    </div>
+
+    {{#if isGM}}
+    <div class="neuro-doba-mg">
+        <label data-tooltip="Na korzyść gracza (+), np. zniżka po Wpływaniu">Korekta <input type="number" step="1" value="{{ mg.korekta }}" data-mg="korekta"> gb</label>
+        <label data-tooltip="Nadpisuje ST rzutu za krótki sen">ST snu <input type="number" min="0" step="1" value="{{ mg.stSnu }}" data-mg="stSnu" placeholder="z D20"></label>
+        <label data-tooltip="Nadpisuje wartość pasywną Pracy (s. 47 — ustalona z MG)">Pasywna <input type="number" min="0" step="1" value="{{ mg.pasywna }}" data-mg="pasywna" placeholder="z karty"></label>
+        <input type="text" value="{{ mg.uwagi }}" data-mg="uwagi" placeholder="Uwagi MG">
+    </div>
+    {{/if}}
+
+    <footer class="neuro-doba-stopka">
+        {{#if wczoraj}}<button type="button" data-action="jakWczoraj"><i class="fa-solid fa-clock-rotate-left" inert></i> Jak wczoraj</button>{{/if}}
+        {{#if zgloszony}}
+        <button type="button" data-action="wycofaj"><i class="fa-solid fa-rotate-left" inert></i> Wycofaj</button>
+        {{else}}
+        <button type="button" data-action="zglos" class="is-gotowe"><i class="fa-solid fa-check" inert></i> Zgłoś dobę</button>
+        {{/if}}
+    </footer>
+    {{/if}}
+</section>

@@ -67,9 +67,17 @@ export function registerRekonwalescencjaTests(quench) {
       });
 
       it("Kobalt nie zmienia innych źródeł", function () {
-        for (const k of Object.keys(REGULY_ZDEJMOWANIA).filter(k => k !== "zranienie")) {
+        for (const k of Object.keys(REGULY_ZDEJMOWANIA).filter(k => !["zranienie", "bezsennosc"].includes(k))) {
           expect(regulaZdejmowania(k, { kobalt: true }), k).to.deep.equal(regulaZdejmowania(k));
         }
+      });
+
+      it("WKK „Sen” (M5 D35): Bezsenność uporczywa do odsypiania; bez podustawienia — jak NOE", function () {
+        const wkk = regulaZdejmowania("bezsennosc", { kobalt: true });
+        expect(wkk).to.include({ zwyklyDO: false, warstwa: "WKK" });
+        expect(wkk.opis).to.match(/odsypianiem/);
+        expect(regulaZdejmowania("bezsennosc", { kobalt: true, senKobalt: false })).to.deep.equal(regulaZdejmowania("bezsennosc"));
+        expect(regulaZdejmowania("bezsennosc", { kobalt: true, spelnione: ["odsypianie"] }).zwyklyDO, "odespana").to.equal(true);
       });
 
       it("nieznane źródło liczy się jak Ogólne; wpis i goły klucz dają to samo", function () {

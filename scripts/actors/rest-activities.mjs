@@ -20,6 +20,14 @@
  *               na żywo (`form` — formularz okna) i nie stosują się po odpoczynku (`wartosci` —
  *               `config.neuroZajecia`). Bez okna (`form` i `wartosci` puste) decyduje stan zapisany.
  *
+ * **Trzy widoki jednej definicji** (PLAN_m5_postoj D26, U26): okna KO/DO dnd5e, szkic doby postoju i przeskok.
+ * `widoki` — gdzie zajęcie się pokazuje (domyślnie: rodzaje odpoczynku, a z DO także „doba” i „przeskok”);
+ * zajęcia postoju (Praca, Trening…) mają `widoki: ["doba", "przeskok"]` i nie wchodzą do okien dnd5e. Budżet
+ * doby: `praca` (≤ 10 h) albo `czas` (tylko do 24 h; `null` znaczy to samo). Opcjonalne pola doby:
+ *   render(actor, typ, ctx)  — `ctx` szkicu (`miejsce`, `szkic`, `kobalt`) w widoku „doba”,
+ *   rachunek(wartosc, ctx) → linie rachunku `{ rodzaj: "koszt"|"zarobek", kwota, opis }` (D18, U29),
+ *   przeskok(wartosc, ctx) → skutki doby typowej dla przeskoku (D19).
+ *
  * **Zastosowanie w `dnd5e.restCompleted`, nie w `pre…`** — anulowany odpoczynek nie zjada godzin.
  * Jedna zbiorcza wiadomość na czacie; przekroczenie budżetu to ostrzeżenie, nie blokada (L9).
  */
@@ -35,7 +43,19 @@ const REJESTR = [];
 /** Rejestruje zajęcie odpoczynku. Kolejność rejestracji = kolejność w oknie. */
 export function registerRestActivity(def) {
   if (REJESTR.some(d => d.id === def.id)) return;
-  REJESTR.push({ restTypes: ["short", "long"], budzet: null, ...def });
+  const restTypes = def.restTypes ?? ["short", "long"];
+  const widoki = def.widoki ?? [...restTypes, ...(restTypes.includes("long") ? ["doba", "przeskok"] : [])];
+  REJESTR.push({ budzet: null, ...def, restTypes, widoki });
+}
+
+/** Definicje zajęć widoczne w danym widoku (`short`, `long`, `doba`, `przeskok`). */
+export function zajeciaWidoku(widok) {
+  return REJESTR.filter(d => d.widoki.includes(widok));
+}
+
+/** Budżet zajęcia w danym rodzaju odpoczynku: `praca` albo `czas`. */
+export function budzetZajecia(def, typ = "long") {
+  return _budzetDef(def, typ) === "praca" ? "praca" : "czas";
 }
 
 const _budzetDef = (def, typ) => (typeof def.budzet === "function" ? def.budzet(typ) : def.budzet);
@@ -58,7 +78,7 @@ function _odswiezBudzet(app, root) {
   const form = app.element.querySelector("form") ?? app.element;
   let praca = 0;
   for (const def of REJESTR) {
-    if (!def.restTypes.includes(typ) || _budzetDef(def, typ) !== "praca") continue;
+    if (!def.widoki.includes(typ) || _budzetDef(def, typ) !== "praca") continue;
     try { praca += Number(def.minuty?.(form, typ)) || 0; } catch { /* pomiń */ }
   }
   const limit = budzetPracy(typ);
@@ -109,7 +129,7 @@ function _wstrzyknij(app) {
 
   const sekcje = [];
   for (const def of REJESTR) {
-    if (!def.restTypes.includes(typ)) continue;
+    if (!def.widoki.includes(typ)) continue;
     let html = null;
     try { html = def.render(actor, typ); } catch (err) { console.warn(`${MODULE_ID} | zajęcie ${def.id}`, err); }
     if (html) sekcje.push(`<fieldset class="neuro-zajecie" data-zajecie="${def.id}"><legend>${def.label}</legend>${html}</fieldset>`);
@@ -154,6 +174,19 @@ async function _onRestCompleted(actor, result, config) {
   const wartosci = config?.[KLUCZ];
   if (!wartosci || !actor?.isOwner) return;
   const typ = config.type ?? (result?.longRest ? "long" : "short");
+  await zastosujZajecia(actor, wartosci, { typ, result, config });
+}
+
+/**
+ * Stosuje zajęcia z wartości formularza (`neuroZajecia`) — po odpoczynku dnd5e albo wprost z zatwierdzenia doby
+ * postoju, gdy sen nie dał DO (PLAN_m5_postoj U27: praca i produkcja odbyły się i tak). Jedna karta na czacie.
+ * @param {Actor} actor
+ * @param {object} wartosci
+ * @param {{typ?: string, result?: object|null, config?: object, karta?: boolean, widok?: string}} [o]
+ * @returns {Promise<string[]>} linie
+ */
+export async function zastosujZajecia(actor, wartosci, { typ = "long", result = null, config = {}, karta = true, widok = null } = {}) {
+  if (!wartosci) return [];
   const linie = [];
   const poOdpoczynku = [];
   let praca = 0;
@@ -161,7 +194,8 @@ async function _onRestCompleted(actor, result, config) {
   if (blokada) linie.push(`<i class="fa-solid fa-lock" inert></i> ${blokada.powod}`);
   for (const def of REJESTR) {
     const v = wartosci[def.id];
-    if (v == null || !def.restTypes.includes(typ)) continue;
+    if (v == null) continue;
+    if (!(widok ? def.widoki.includes(widok) : def.restTypes.includes(typ))) continue;
     if (blokada && def !== blokada.def) continue;
     try {
       const r = await def.apply(actor, v, { restType: typ, result, config });
@@ -174,7 +208,12 @@ async function _onRestCompleted(actor, result, config) {
       linie.push(`<span class="bad">${def.label}: błąd — szczegóły w konsoli.</span>`);
     }
   }
-  if (!linie.length) return;
+  if (!linie.length || !karta) {
+    for (const fn of poOdpoczynku) {
+      try { await fn(); } catch (err) { console.error(`${MODULE_ID} | po odpoczynku`, err); }
+    }
+    return linie;
+  }
   const limit = budzetPracy(typ);
   const ostrzezenie = praca > limit
     ? (typ === "short"
@@ -194,6 +233,7 @@ async function _onRestCompleted(actor, result, config) {
   for (const fn of poOdpoczynku) {
     try { await fn(); } catch (err) { console.error(`${MODULE_ID} | po odpoczynku`, err); }
   }
+  return linie;
 }
 
 export function registerRestActivities() {
@@ -205,5 +245,8 @@ export function registerRestActivities() {
 }
 
 export const restActivitiesApi = Object.freeze({
-  register: registerRestActivity, budzet: budzetPracy, lista: () => [...REJESTR], blokada: _blokada
+  register: registerRestActivity, budzet: budzetPracy, lista: () => [...REJESTR], blokada: _blokada,
+  widok: zajeciaWidoku, zastosuj: zastosujZajecia
 });
+
+export { _blokada as blokadaZajec };

@@ -234,3 +234,72 @@
 .neuro-postoj-wymiany button { width: auto; display: inline-block; }
 .neuro-punkt-kategorie { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px 8px; }
 .neuro-punkt-znika { max-height: 160px; overflow-y: auto; font-size: 12px; color: #c0392b; }
+
+/* ---------- Doba postoju (§7.11) ------------------------------------ */
+.neuro-doba .window-content { display: flex; flex-direction: column; gap: 6px; }
+.neuro-doba-naglowek { flex: 0 0 auto; }
+.neuro-doba-naglowek .neuro-postoj-ilustracja { display: block; width: 100%; aspect-ratio: 3 / 1; object-fit: cover; border-radius: 6px; margin-bottom: 4px; }
+.neuro-doba-tytul { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
+.neuro-doba-tytul span { font-size: 12px; color: var(--color-text-secondary, #999); }
+.neuro-doba-stan { padding: 1px 6px; border-radius: 3px; background: rgba(128, 128, 128, 0.2); }
+.neuro-doba-stan.is-zgloszony { background: rgba(39, 174, 96, 0.25); color: #6fd39a; }
+.neuro-doba .window-content > .neuro-doba-form,
+.neuro-doba [data-application-part="form"] { flex: 1 1 auto; overflow-y: auto; min-height: 0; }
+.neuro-doba-form fieldset { margin: 0 0 6px; }
+.neuro-doba-form .hint { font-size: 11px; color: var(--color-text-secondary, #999); margin: 2px 0; }
+.neuro-doba-form select { width: 100%; }
+.neuro-doba-podsumowanie { flex: 0 0 auto; display: flex; flex-direction: column; gap: 6px; border-top: 1px solid rgba(128, 128, 128, 0.3); padding-top: 6px; }
+.neuro-doba-pasek { display: flex; align-items: center; gap: 8px; font-size: 12px; }
+.neuro-doba-pasek .etykieta { flex: 0 0 150px; }
+.neuro-doba-pasek .tor { flex: 1 1 auto; height: 10px; background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(128, 128, 128, 0.35); border-radius: 3px; display: flex; overflow: hidden; }
+.neuro-doba-pasek .sen { background: #3d5a99; }
+.neuro-doba-pasek .zajecia { background: #b8860b; }
+.neuro-doba-pasek .praca { background: #c96b2c; }
+.neuro-doba-pasek.is-ponad .etykieta { color: #e74c3c; font-weight: bold; }
+.neuro-doba-pasek.is-ponad .tor { border-color: #e74c3c; }
+.neuro-doba-skutek { margin: 0; font-size: 12px; }
+.neuro-doba-rachunek h3 { margin: 0 0 2px; font-size: 13px; border: none; }
+.neuro-doba-rachunek ul { list-style: none; margin: 0; padding: 0; font-size: 12px; }
+.neuro-doba-rachunek li { display: flex; justify-content: space-between; gap: 8px; padding: 1px 0; }
+.neuro-doba-rachunek li.is-koszt .kwota { color: #e07a5f; }
+.neuro-doba-rachunek li.is-zarobek .kwota { color: #6fd39a; }
+.neuro-doba-rachunek li.pusto { color: var(--color-text-secondary, #999); font-style: italic; }
+.neuro-doba-towar li { justify-content: flex-start !important; align-items: center; }
+.neuro-doba-towar img { width: 20px; height: 20px; border: none; }
+.neuro-doba-towar input { width: 48px; height: 20px; margin-left: auto; }
+.neuro-doba-saldo { margin: 4px 0 0; font-size: 13px; text-align: right; }
+.neuro-doba-saldo.is-ujemne strong { color: #e74c3c; }
+.neuro-doba-mg { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; padding: 4px; border: 1px dashed #b8860b; border-radius: 4px; font-size: 12px; }
+.neuro-doba-mg input[type="number"] { width: 60px; height: 22px; }
+.neuro-doba-mg input[type="text"] { flex: 1 1 160px; height: 22px; }
+.neuro-doba-stopka { display: flex; justify-content: flex-end; gap: 8px; }
+.neuro-doba-stopka button { flex: 0 0 auto; width: auto; padding: 0 12px; }
+.neuro-doba-stopka button.is-gotowe, .neuro-postoj-doba button.is-gotowe { background: rgba(39, 174, 96, 0.35); border-color: #27ae60; }
+.neuro-doba-btn.is-zgloszony { box-shadow: 0 0 0 2px #27ae60 inset; }
+.neuro-doba-tabela { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 4px; }
+.neuro-doba-tabela th { text-align: left; font-weight: normal; font-size: 10px; text-transform: uppercase; color: var(--color-text-secondary, #999); padding: 2px 4px; }
+.neuro-doba-tabela td { padding: 2px 4px; border-top: 1px solid rgba(128, 128, 128, 0.15); }
+.neuro-doba-tabela td img { width: 22px; height: 22px; border: none; vertical-align: middle; }
+.neuro-doba-tabela tr.is-zgloszony td:nth-child(2) { color: #6fd39a; }
+.neuro-doba-tabela .is-ujemne { color: #e74c3c; }
+.neuro-doba-tabela td.akcje { white-space: nowrap; text-align: right; }
+.neuro-postoj-doba .neuro-zapas-naglowek button { margin-left: 4px; }
+.neuro-postoj-doba .neuro-zapas-naglowek button:first-of-type { margin-left: auto; }
+
+/* Zajęcia postoju (E6): rząd pól — wybór, godziny, kwota — i rzut w oknie doby. */
+.neuro-zajecie-rzad { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin: 2px 0; }
+.neuro-doba-form .neuro-zajecie-rzad select { flex: 1 1 160px; width: auto; min-width: 0; }
+.neuro-zajecie-rzad input[type="number"] { width: 56px; text-align: center; }
+.neuro-zajecie-rzad input[type="text"] { flex: 1 1 140px; }
+.neuro-zajecie-rzad label { display: inline-flex; gap: 4px; align-items: center; white-space: nowrap; }
+.neuro-zajecie-wynik { font-size: 12px; color: var(--color-text-secondary, #999); }
+.neuro-doba-mg label input[data-mg="pasywna"] { width: 48px; }
+
+/* Baza (U32): projekty drużyny na zakładce Postój. */
+.neuro-baza-projekt { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 2px 4px; }
+.neuro-baza-projekt.is-gotowy .neuro-baza-nazwa { color: var(--neuro-ok, #6aa84f); }
+.neuro-baza-nazwa { font-weight: 600; }
+.neuro-baza-postep { font-size: 12px; }
+.neuro-baza-pasek { flex: 1 1 80px; height: 6px; background: rgba(127, 127, 127, 0.25); border-radius: 3px; overflow: hidden; }
+.neuro-baza-pasek > span { display: block; height: 100%; background: var(--neuro-ok, #6aa84f); }
+.neuro-baza-efekt { flex-basis: 100%; font-size: 12px; color: var(--color-text-secondary, #999); }

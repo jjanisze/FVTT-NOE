@@ -10,7 +10,9 @@
  *   „Zakłócenie Długiego odpoczynku" (rozdział Eksploracja).
  */
 
-import { W_CIEPLE, zrodlaWyczerpania } from "./exhaustion.mjs";
+import { W_CIEPLE, zrodlaWyczerpania, removeExhaustion } from "./exhaustion.mjs";
+import { skutkiSnu, SEN_DOMYSLNY_H } from "./postoj-rules.mjs";
+import { isKobaltSen } from "./settings.mjs";
 import { NO_REST_FLAG } from "./diseases-data.mjs";
 import { formatWorldTime } from "../world-clock.mjs";
 
@@ -57,6 +59,7 @@ function buildLongRestDialog(Base) {
       }
       _poleWCieple(this, body);
       _notaChoroby(this, body);
+      _poleSnu(this, body);
     }
   };
 }
@@ -98,6 +101,60 @@ function _poleWCieple(app, body) {
   else body.append(div);
 }
 
+/**
+ * Sen (s. 45, PLAN_m5_postoj D20, D34, D35): pole godzin snu w oknie DO (podróż, dzicz). Zgodnie z decyzją wyżej
+ * (bez cichego przekierowania odpoczynku) pole **oznacza** skutki: mniej niż 6 h — ostrzeżenie w oknie i linia na
+ * czacie („korzyści tylko KO — rozlicz ręcznie”); RO za krótki sen i odsypianie Bezsenności (WKK) wykonuje hak
+ * `dnd5e.restCompleted` (`_poSnie`). Wartość idzie do konfiguracji odpoczynku jako `neuroSen`.
+ */
+function _poleSnu(app, body) {
+  const actor = app.actor ?? app.document;
+  if (!body || app.isPartyGroup || !actor || actor.type !== "character" || body.querySelector(".neuro-rest-sen")) return;
+  const kobalt = isKobaltSen();
+  const div = document.createElement("div");
+  div.className = "form-group neuro-rest-sen";
+  div.innerHTML = `<label>Sen (godzin)</label><div class="form-fields"><input type="number" name="neuroSen" min="0" max="24" step="1" value="${SEN_DOMYSLNY_H}"></div>
+    <p class="hint neuro-rest-sen-skutek"></p>`;
+  const opis = div.querySelector(".neuro-rest-sen-skutek");
+  const odswiez = () => {
+    const h = Number(div.querySelector("input").value);
+    const s = skutkiSnu(h, { kobalt });
+    opis.classList.toggle("neuro-zle", s.korzysci !== "DO");
+    opis.textContent = (s.korzysci === "DO" ? "Długi odpoczynek" : s.korzysci === "KO"
+      ? "Za mało snu na Długi odpoczynek — korzyści tylko Krótkiego (s. 46); wybierz KO albo rozlicz ręcznie"
+      : "Za mało snu — bez korzyści odpoczynku")
+      + (s.ro ? ` · RO KON ST ${s.ro} po odpoczynku` : "") + (s.odsypianie ? ` · odsypianie: −${s.odsypianie} Bezsenność (WKK)` : "");
+  };
+  div.querySelector("input").addEventListener("input", odswiez);
+  odswiez();
+  const footer = body.querySelector(".form-footer");
+  if (footer) footer.before(div);
+  else body.append(div);
+}
+
+/** Po DO z polem snu: odsypianie (WKK), RO za krótki sen, linia o korzyściach poniżej 6 h. */
+async function _poSnie(actor, result, config) {
+  if (config?.neuroSen === undefined || config?.neuroSen === null || !actor?.isOwner) return;
+  const h = Number(config.neuroSen);
+  const s = skutkiSnu(h, { kobalt: isKobaltSen() });
+  const linie = [];
+  if (s.odsypianie) {
+    let n = 0;
+    for (let i = 0; i < s.odsypianie; i++) {
+      if (!zrodlaWyczerpania(actor).some(x => x.source === "bezsennosc")) break;
+      await removeExhaustion(actor, "bezsennosc", { chat: false });
+      n++;
+    }
+    if (n) linie.push(`Odsypianie (WKK): −${n} Bezsenność.`);
+  }
+  if (s.korzysci !== "DO") linie.push(`Sen ${h} h — ${s.korzysci === "KO" ? "korzyści tylko Krótkiego odpoczynku (s. 46)" : "bez korzyści odpoczynku"}: MG rozlicza różnicę.`);
+  if (linie.length) await ChatMessage.create({ speaker: ChatMessage.getSpeaker({ actor }), content: `<div class="neuro-rest-note warn">${linie.join("<br>")}</div>` });
+  if (s.ro) {
+    const { _prosbaSnu } = await import("../postoj/doba.mjs");
+    await _prosbaSnu(actor, s.ro, h);
+  }
+}
+
 export function registerRestOverrides() {
   const restTypes = CONFIG.DND5E.restTypes;
   if (!restTypes) {
@@ -126,6 +183,7 @@ export function registerRestOverrides() {
   if (restTypes.long?.dialogClass) {
     restTypes.long.dialogClass = buildLongRestDialog(restTypes.long.dialogClass);
   }
+  Hooks.on("dnd5e.restCompleted", _poSnie);
 
   console.log("Neuroshima 5e | Rest durations overridden (KO: 4h, DO: 24h)");
 }

@@ -21,6 +21,21 @@ export function isKobaltEnabled() {
   return game.settings.get(MODULE_ID, "kobaltEnabled");
 }
 
+/**
+ * Podustawienia Kobaltu M5 (PLAN_m5_postoj U54): „Sen (WKK)” — RO za sen poniżej 6 h i uporczywa Bezsenność
+ * schodząca odsypianiem (D20, D35); „Jakość wody (WKK)” — RO przy brudnej i skażonej wodzie (D37). Obie domyślnie
+ * włączone i działają tylko z włączonym Kobaltem — inny stół z WKK może chcieć wyłączyć je osobno.
+ */
+export function isKobaltSen() {
+  if (typeof game === "undefined") return true;
+  return isKobaltEnabled() && game.settings.get(MODULE_ID, "kobaltSen") !== false;
+}
+
+export function isKobaltWoda() {
+  if (typeof game === "undefined") return true;
+  return isKobaltEnabled() && game.settings.get(MODULE_ID, "kobaltWoda") !== false;
+}
+
 export function registerSettings() {
   game.settings.register(MODULE_ID, SETTING_SWAY, {
     name: "Animacja pojazdów na planszy pościgu",
@@ -36,6 +51,17 @@ export function registerSettings() {
     config: true,
     type: Boolean,
     default: true,
+  });
+
+  game.settings.register(MODULE_ID, "kobaltSen", {
+    name: "Kobalt: sen (WKK)",
+    hint: "RO na Kondycję za sen poniżej 6 h, Bezsenność schodzi tylko odsypianiem (12 h / 18 h snu). Działa z Kolorem Kobaltu.",
+    scope: "world", config: true, type: Boolean, default: true
+  });
+  game.settings.register(MODULE_ID, "kobaltWoda", {
+    name: "Kobalt: jakość wody (WKK)",
+    hint: "RO przy piciu brudnej i skażonej wody (Nędzne utrzymanie, zapasy). Działa z Kolorem Kobaltu.",
+    scope: "world", config: true, type: Boolean, default: true
   });
 
   game.settings.register(MODULE_ID, "weaponSoundVolume", {

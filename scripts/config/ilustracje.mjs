@@ -20,6 +20,12 @@ export const ZESTAWY_ILUSTRACJI = Object.freeze({
   ruiny: Object.freeze(["apteka", "biuro", "magazyn", "piwnica", "sklepik", "warsztat", "wrak"])
 });
 
+/** Biom z panelu Podróży → obraz obozu (§7.23): neodżungla jak las; miasto i tereny maszyn jak ruiny. */
+export const OBOZ_Z_BIOMU = Object.freeze({
+  pustynia: "pustynia", preria: "preria", las: "las", neodzungla: "las", gory: "gory", bagna: "bagna",
+  ruiny: "ruiny", miasto: "ruiny", "tereny-maszyn": "ruiny", podziemia: "podziemia"
+});
+
 const _istnieje = new Map();
 
 /** Czy plik jest na serwerze (HEAD, wynik zapamiętany na sesję). */

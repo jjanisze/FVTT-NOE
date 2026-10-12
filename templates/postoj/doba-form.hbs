@@ -1,0 +1,44 @@
+<form class="neuro-doba-form" autocomplete="off">
+    {{#if otwarta}}
+    <fieldset class="neuro-doba-sen">
+        <legend><i class="fa-solid fa-bed" inert></i> Sen</legend>
+        <div class="form-group">
+            <label>Godzin snu</label>
+            <input type="number" name="sen" min="0" max="24" step="1" value="{{ sen }}">
+        </div>
+        <p class="hint">{{ podpowiedzSnu }}</p>
+        {{#if bezsennosc}}<p class="hint neuro-doba-odsypianie">Bezsenność pod Kobaltem schodzi tylko odsypianiem: 12 h snu — jeden poziom, 18 h — dwa (D35).</p>{{/if}}
+        {{#if choroba}}<p class="neuro-rest-note warn">Choroba (s. 111): odpoczynek do {{ choroba }} nie da korzyści.</p>{{/if}}
+        {{#if wCieple}}<label class="checkbox"><input type="checkbox" name="wCieple" {{#if wCieploZaznaczone}}checked{{/if}}> W cieple — schodzi całe Przemarznięcie (s. 258)</label>{{/if}}
+    </fieldset>
+
+    {{#if utrzymanie}}
+    <fieldset class="neuro-doba-utrzymanie">
+        <legend><i class="fa-solid fa-house-chimney" inert></i> Utrzymanie (s. 47)</legend>
+        <select name="utrzymanie">
+            {{#each utrzymanie}}<option value="{{ k }}" {{#if wybrany}}selected{{/if}}>{{ label }}</option>{{/each}}
+        </select>
+        <p class="hint">Jedzenie i woda doby w cenie — zapasy nie schodzą. Nędzny: najgorsza woda, bez leków; Normalny i Bogaty: leki na choroby przewlekłe przy Zachodzie słońca.</p>
+        {{#each towarzysze}}
+        <div class="form-group">
+            <label>{{ nazwa }}</label>
+            {{#if opcje}}<select name="towarzysze.{{ uuid }}">{{#each opcje}}<option value="{{ k }}" {{#if wybrany}}selected{{/if}}>{{ label }}</option>{{/each}}</select>
+            {{else}}<span class="hint">zwierzę — woda i jedzenie z zapasów (s. 47)</span>{{/if}}
+        </div>
+        {{/each}}
+    </fieldset>
+    {{else}}
+    {{#if towarzysze.length}}<p class="hint">Dzicz — bez kosztu utrzymania; zapasy jak co dzień ({{#each towarzysze}}{{#unless @first}}, {{/unless}}{{ nazwa }}{{/each}} też).</p>{{/if}}
+    {{/if}}
+
+    <section class="neuro-zajecia neuro-doba-zajecia">
+        <h3 class="neuro-zajecia-tytul"><i class="fa-solid fa-screwdriver-wrench" inert></i> Zajęcia</h3>
+        {{#each sekcje}}
+        <fieldset class="neuro-zajecie" data-zajecie="{{ id }}" data-budzet="{{ budzet }}">
+            <legend>{{ label }}{{#if (eq budzet "praca")}} <small>· praca</small>{{/if}}</legend>
+            {{{ html }}}
+        </fieldset>
+        {{/each}}
+    </section>
+    {{/if}}
+</form>
