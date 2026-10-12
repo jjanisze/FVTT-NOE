@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-13",
+  "batch": 68,
+  "revisions": [
+    {
+      "itemId": "batch65-pan-plaster",
+      "name": "Pan Plaster",
+      "key": "pan-plaster_revision_d",
+      "target": "icons/abilities/pan-plaster.svg",
+      "request": "Rotate ONLY the complete patient's forearm, wrist and open hand another 180 degrees around the dressing contact area. The patient's proximal arm now enters from UPPER LEFT and its fingers point LOWER RIGHT. Keep the two treating hands entering from LEFT, their cuffs, gestures and positions, and the open first-aid pouch unchanged. Leave an obvious black gap between every part of the patient arm/hand and the pouch: the arm belongs to a patient outside the frame and must never originate in the box. Exactly three complete hands, connected wrists and no extra tool, injury or blood.",
+      "reference": "raw/reference-pan-plaster_revision_d.png",
+      "output": "raw/standalone-pan-plaster_revision_d.png"
+    },
+    {
+      "itemId": "batch67-paliwo-chrzczone",
+      "name": "Paliwo chrzczone (5 l)",
+      "key": "paliwo_chrzczone_revision_b",
+      "target": "icons/items/loot/paliwo_chrzczone.svg",
+      "request": "Replace the industrial windowed container with one CHEAP PLASTIC ORANGE-JUICE JUG repurposed for adulterated fuel. A broad lightweight squat jug body with rounded shoulders, a small ordinary screw cap and a simple thin molded grip conveys cheap beverage packaging. REMOVE the inspection window and its liquid layers completely. Plain opaque body: no side window, label panel, tape band, pressed metal X, diamond reinforcement, lettering, logo, numerals, fruit symbol or visible liquid. Keep the white-only glyph style: orange juice describes the container, not its color.",
+      "reference": "raw/reference-paliwo_chrzczone_revision_b.png",
+      "output": "raw/standalone-paliwo_chrzczone_revision_b.png"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "itemId": "batch65-pan-plaster",
+    "candidateId": "batch67-revision",
+    "source": "candidates/batch-67/pan-plaster_revision_c.png",
+    "sourceSha256": "b71e90921e8f6fc05585e692fa77f33610d29a05d9a12b457d855560c73bc09a",
+    "feedback": "Alright, another 180 degrees oughta do it. Now the hand looks like it's coming from the first aid box.",
+    "reference": "raw/reference-pan-plaster_revision_d.png"
+  },
+  {
+    "itemId": "batch67-paliwo-chrzczone",
+    "candidateId": "atlas-a",
+    "source": "candidates/batch-67/paliwo_chrzczone.png",
+    "sourceSha256": "733a6e8d854790b41cf8802c7e570a32adcf84a1510c2594cffcc42232671e8f",
+    "feedback": "Get rid of the inspection window, and make it look like a cheap plastic orange juice jug",
+    "reference": "raw/reference-paliwo_chrzczone_revision_b.png"
+  }
+]

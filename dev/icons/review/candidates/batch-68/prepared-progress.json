@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-13",
+  "reviewItems": 342,
+  "resolvedReviewItems": 340,
+  "activeReviewItems": 2,
+  "approximateCompletedPercent": 99.4,
+  "canonical": {
+    "origin": {"total": 36, "dedicatedFiles": 36},
+    "feat": {"total": 53, "dedicatedFiles": 52}
+  },
+  "validation": {
+    "batchMasks": 2,
+    "reviewCollectionPngSvgPairs": 539,
+    "visibleReviewCards": 2,
+    "failedReviewImages": 0
+  },
+  "fuelGradeArtDelivered": 2,
+  "fuelGradeArtAwaitingReview": 1,
+  "catalogWiringRemainsForGM": true
+}

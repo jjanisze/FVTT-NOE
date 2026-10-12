@@ -1,0 +1,74 @@
+{
+  "title": "Batch 68 · 2 targeted revisions awaiting GM review",
+  "updated": "2026-10-13",
+  "items": [
+    {
+      "id": "batch65-pan-plaster",
+      "name": "Pan Plaster",
+      "tier": "Batch 65 · feat feature",
+      "context": "+1 MDR lub INT; narzędzia małego medyka rzucają dodatkową kostkę PW; połowa dawki leku zaspokaja dzienne zapotrzebowanie.",
+      "request": "Rotate ONLY the complete patient's forearm, wrist and open hand another 180 degrees around the dressing contact area. The patient's proximal arm now enters from UPPER LEFT and its fingers point LOWER RIGHT. Keep the two treating hands entering from LEFT, their cuffs, gestures and positions, and the open first-aid pouch unchanged. Leave an obvious black gap between every part of the patient arm/hand and the pouch: the arm belongs to a patient outside the frame and must never originate in the box. Exactly three complete hands, connected wrists and no extra tool, injury or blood.",
+      "target": "icons/abilities/pan-plaster.svg",
+      "catalogKey": "panPlaster",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch68-revision",
+          "label": "Batch 68 targeted revision",
+          "src": "candidates/batch-68/pan-plaster_revision_d.png",
+          "note": "Rotate ONLY the complete patient's forearm, wrist and open hand another 180 degrees around the dressing contact area. The patient's proximal arm now enters from UPPER LEFT and its fingers point LOWER RIGHT. Keep the two treating hands entering from LEFT, their cuffs, gestures and positions, and the open first-aid pouch unchanged. Leave an obvious black gap between every part of the patient arm/hand and the pouch: the arm belongs to a patient outside the frame and must never originate in the box. Exactly three complete hands, connected wrists and no extra tool, injury or blood."
+        },
+        {
+          "id": "batch67-revision",
+          "label": "Batch 67 revision",
+          "src": "candidates/batch-67/pan-plaster_revision_c.png",
+          "note": "Keep BOTH medic hands, their exact positions/gestures, the dressing and the first-aid pouch UNCHANGED. Rotate ONLY the patient's forearm/hand 90 degrees counterclockwise LEFT around the dressing contact area: it must now run toward upper-left rather than upper-right, the opposite diagonal. The patient's whole wrist, palm, thumb and four fingers remain connected and visible. Do not rotate, move, mirror or redraw either medic hand. Exactly three complete hands, no new tool, injury or blood."
+        },
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/pan-plaster_revision_b.png",
+          "note": "Redraw from a slightly elevated three-quarter perspective so the PATIENT'S complete forearm, wrist and HAND remain visible. The forearm lies diagonally across the center; the patient's open hand with all five fingers is fully visible toward upper-right, naturally connected to the wrist. Two separate medic hands approach from lower-left and apply one broad dressing to the forearm. Keep a small open first-aid pouch below. Exactly three hands total, no amputated wrist, missing patient hand, merged glove, injury or blood."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Pan Plaster",
+          "src": "candidates/batch-65/pan-plaster.png",
+          "note": "Two adult hands apply one broad adhesive medical dressing to a plain forearm beside a small open first-aid pouch. A practical medic gesture with one clear dressing and one pouch, no injury, blood, text or tiny medicine labels."
+        }
+      ]
+    },
+    {
+      "id": "batch67-paliwo-chrzczone",
+      "name": "Paliwo chrzczone (5 l)",
+      "tier": "Batch 67 · fuel grade",
+      "context": "Canonical trade/production catalog fuel grade; inventory row, barter list and chat card. Five-litre container, distinct grade silhouette.",
+      "request": "Replace the industrial windowed container with one CHEAP PLASTIC ORANGE-JUICE JUG repurposed for adulterated fuel. A broad lightweight squat jug body with rounded shoulders, a small ordinary screw cap and a simple thin molded grip conveys cheap beverage packaging. REMOVE the inspection window and its liquid layers completely. Plain opaque body: no side window, label panel, tape band, pressed metal X, diamond reinforcement, lettering, logo, numerals, fruit symbol or visible liquid. Keep the white-only glyph style: orange juice describes the container, not its color.",
+      "target": "icons/items/loot/paliwo_chrzczone.svg",
+      "catalogKey": "raw:paliwo-chrzczone",
+      "current": {
+        "src": null,
+        "emptyLabel": "icons/svg/item-bag.svg",
+        "note": "Catalog currently falls back to the core item-bag icon; no dedicated grade glyph exists."
+      },
+      "candidates": [
+        {
+          "id": "batch68-revision",
+          "label": "Batch 68 targeted revision",
+          "src": "candidates/batch-68/paliwo_chrzczone_revision_b.png",
+          "note": "Replace the industrial windowed container with one CHEAP PLASTIC ORANGE-JUICE JUG repurposed for adulterated fuel. A broad lightweight squat jug body with rounded shoulders, a small ordinary screw cap and a simple thin molded grip conveys cheap beverage packaging. REMOVE the inspection window and its liquid layers completely. Plain opaque body: no side window, label panel, tape band, pressed metal X, diamond reinforcement, lettering, logo, numerals, fruit symbol or visible liquid. Keep the white-only glyph style: orange juice describes the container, not its color."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Paliwo chrzczone (5 l)",
+          "src": "candidates/batch-67/paliwo_chrzczone.png",
+          "note": "One reused squat PLASTIC fuel jug with a large molded side handle, broad screw cap and one thick plain repair-tape band around its middle. A simple broad side inspection window shows two separated liquid layers as two large white masses divided by one thick black horizontal gap, implying adulteration. Distinct squat plastic jug silhouette, no text, hazard label, droplets floating outside it, tiny scratches or brand."
+        }
+      ]
+    }
+  ]
+}

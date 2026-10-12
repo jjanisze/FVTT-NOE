@@ -1,0 +1,20 @@
+{
+  "generator": "OpenAI built-in image generation",
+  "date": "2026-10-13",
+  "mode": "two targeted standalone revisions",
+  "revisions": [
+    {
+      "key": "pan-plaster_revision_d",
+      "reference": "raw/reference-pan-plaster_revision_d.png",
+      "output": "raw/standalone-pan-plaster_revision_d.png",
+      "prompt": "Use case: precise-object-edit. Asset type: one white inventory glyph, not an atlas. Edit target: the attached exact selected Pan Plaster icon. GM feedback: 'Alright, another 180 degrees oughta do it. Now the hand looks like it is coming from the first aid box.' Change ONLY the patient's complete diagonal forearm, wrist and open hand: rotate this ONE patient arm another 180 degrees around its central bandage contact point. The patient palm and fingers must now point LOWER RIGHT, while the proximal patient forearm comes from UPPER LEFT, from outside the picture. This is the reverse of the attached patient's palm pointing upper-left with its arm heading into the box. Preserve the two treating hands entering from LEFT, both cuffs, the upper pinching hand, the lower dressing hand, their exact gestures and positions. Preserve the open first-aid pouch and its contents at lower-right. Critically, there is a broad visible BLACK GAP between the patient's entire forearm/hand and the first-aid pouch or lid; no skin emerges from, touches, joins or disappears behind the box. Put the rotated patient hand above/right of the bandage with fingers pointing down-right, clearly separated above the pouch. The patient's arm origin is upper-left, above the treating wrists. Exactly three complete anatomically coherent hands, no cropped patient wrist, all five digits connected, no fourth hand. Keep existing broad flat pure-white #FFFFFF glyphs and pure-black #000000 background, not grey or shaded. Preserve the existing simple utilitarian stencil style; no added detail, tiny hatching, texture, text, logo, numerals, injury or blood. Complete glyph centered on square with generous blank margin, readable at 16 px."
+    },
+    {
+      "key": "paliwo_chrzczone_revision_b",
+      "reference": "raw/reference-paliwo_chrzczone_revision_b.png",
+      "output": "raw/standalone-paliwo_chrzczone_revision_b.png",
+      "prompt": "Use case: precise-object-edit. Asset type: one white inventory glyph, not an atlas. Input image is the selected adulterated-fuel container, supplied as a style and replacement target. GM feedback: 'Get rid of the inspection window, and make it look like a cheap plastic orange juice jug.' Replace the whole industrial-looking windowed jerrycan with ONE ordinary cheap PLASTIC ORANGE-JUICE JUG reused to hold adulterated fuel. A lightweight squat gallon beverage jug: rounded rectangular body, softly rounded sloping shoulders, small normal screw cap on a short neck and a thin simple integrated finger grip high on the right shoulder. The modest grip and cap must look like cheap disposable supermarket beverage packaging, not a heavy metal fuel can. Plain opaque white body with at most two broad black cuts defining the hollow finger grip and cap separation. REMOVE the inspection window, its frame and all liquid layers completely. Remove the repair tape band and industrial reinforcement too. No label panel, window, side rectangle, metal pressed X/diamond panel, large military bridge handle, visible liquid, fruit pictogram, orange wedge, brand, text, logo, numbers or warning label. Orange juice describes the familiar jug SHAPE, not its color: pure solid WHITE #FFFFFF icon only on perfectly clean pure BLACK #000000 square background. Minimal utilitarian vector-like stencil style matching the reference, broad silhouette and broad black gaps, no shading, grey, texture, tiny scratches or speckles. One complete upright centered jug with generous blank margins on every side; make its cheap plastic beverage-container structure recognizable at 16/24/32 px."
+    }
+  ],
+  "targetedCorrections": []
+}

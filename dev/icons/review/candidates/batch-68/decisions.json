@@ -1,0 +1,45 @@
+{
+  "date": "2026-10-13",
+  "batch": 68,
+  "feedbackBeforeSha256": "1b99feb1bdca593311cee85652a65b11e414d7ad755a36ee8a7bf9e246fa7d34",
+  "active": [
+    {
+      "id": "batch65-pan-plaster",
+      "name": "Pan Plaster",
+      "tier": "Batch 65 · feat feature",
+      "target": "icons/abilities/pan-plaster.svg",
+      "catalogKey": "panPlaster",
+      "decision": "revise",
+      "candidateId": "batch67-revision",
+      "selectedSource": "candidates/batch-67/pan-plaster_revision_c.png",
+      "notes": "Alright, another 180 degrees oughta do it. Now the hand looks like it's coming from the first aid box.",
+      "feedback": {
+        "itemId": "batch65-pan-plaster",
+        "decision": "revise",
+        "candidateId": "batch67-revision",
+        "notes": "Alright, another 180 degrees oughta do it. Now the hand looks like it's coming from the first aid box.",
+        "updatedAt": "2026-10-12T22:23:16.345Z"
+      },
+      "context": "+1 MDR lub INT; narzędzia małego medyka rzucają dodatkową kostkę PW; połowa dawki leku zaspokaja dzienne zapotrzebowanie."
+    },
+    {
+      "id": "batch67-paliwo-chrzczone",
+      "name": "Paliwo chrzczone (5 l)",
+      "tier": "Batch 67 · fuel grade",
+      "target": "icons/items/loot/paliwo_chrzczone.svg",
+      "catalogKey": "raw:paliwo-chrzczone",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-67/paliwo_chrzczone.png",
+      "notes": "Get rid of the inspection window, and make it look like a cheap plastic orange juice jug",
+      "feedback": {
+        "itemId": "batch67-paliwo-chrzczone",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Get rid of the inspection window, and make it look like a cheap plastic orange juice jug",
+        "updatedAt": "2026-10-12T22:24:37.977Z"
+      },
+      "context": "Canonical trade/production catalog fuel grade; inventory row, barter list and chat card. Five-litre container, distinct grade silhouette."
+    }
+  ]
+}
