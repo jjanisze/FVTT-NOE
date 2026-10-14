@@ -92,8 +92,8 @@ export async function clearStation(stationId) {
   }
   if (actorIds.size) await Actor.implementation.deleteDocuments([...actorIds]);
   report.actors = actorIds.size;
-  // (The ability hotbar's per-actor macros go with their actor — the module deletes them itself; a second
-  // delete from here raced it into "Macro … does not exist" server errors.)
+  // Automatic ability macros belong to users and are managed by their hotbar sync. Only the station's
+  // explicitly tagged macros belong to this cleanup.
   for (const [cls, list] of [[Item, docs.items], [JournalEntry, docs.journal], [RollTable, docs.tables], [Macro, docs.macros]]) {
     if (list.length) await cls.implementation.deleteDocuments(list.map(d => d.id));
     report.other += list.length;

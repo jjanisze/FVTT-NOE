@@ -617,6 +617,9 @@ seat may not make falls back to an inline image. (6) ✅ a persona through dnd5e
   and a GM syncs every character it edits: building characters in a row deleted the same macro twice ("Macro …
   does not exist!" server errors). **Fixed:** one sync chain per client. Open for the GM: should the GM's hotbar
   follow other people's characters at all?
+  **Release gate follow-up:** macros are now scoped to their user's author/ownership; a player's sync never
+  deletes the GM's macros, and GM cleanup never deletes the player's. The `postac` e2e suite covers both clients
+  and replacement of a legacy shared macro. Public `hotbar.sync` also goes through the client queue.
 - `fvtt eval` printed page origins (host and port) in page-exception text — stripped in `lib/cdp.mjs`.
 
 **Open:** stale verdicts per

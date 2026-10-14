@@ -257,5 +257,44 @@ export default {
       }) ? true : null, { args: [ids], message: "one Cichy krok effect on each character" });
       await t.quiet();
     });
+
+    await t.step("ability macros belong to each user: replace a legacy shared macro, then GM cleanup preserves the player's macro", async () => {
+      const ids = await t.gm.eval(async name => {
+        const MOD = "neuroshima-2026-overrides";
+        const docs = await game.packs.get(`${MOD}.zdolnosci-klasowe`).getDocuments();
+        const feat = docs.find(i => i.getFlag(MOD, "abilityId") === "berserk");
+        const player = game.actors.getName(name);
+        const gm = game.actors.getName("Agent · Cichy krok");
+        await game.users.getName("Gracz 3").update({ character: player.id });
+        for (const actor of [gm, player]) await actor.createEmbeddedDocuments("Item", [game.items.fromCompendium(feat)]);
+        return { gm: gm.id, player: player.id };
+      }, ACTOR);
+      await t.quiet();
+      const sync = async id => {
+        const MOD = "neuroshima-2026-overrides";
+        await game.modules.get(MOD).api.hotbar.sync(game.actors.get(id));
+        const macro = game.macros.find(m => m.getFlag(MOD, "abilityId") === "berserk" && m.author === game.user);
+        return { macro: macro?.id, author: macro?._source.author, user: game.user.id };
+      };
+      const [gm, player] = await Promise.all([t.gm.eval(sync, ids.gm), p.eval(sync, ids.player)]);
+      t.assert(gm.macro && player.macro && gm.macro !== player.macro, "separate documents for the GM and player", { gm, player });
+      t.equal(player.author, player.user, "the player owns their automatic macro");
+      const slot = await t.gm.eval(async ({ macro, playerMacro }) => {
+        const user = game.users.getName("Gracz 3");
+        const slot = Number(Object.entries(user.hotbar).find(([, id]) => id === playerMacro)[0]);
+        await user.assignHotbarMacro(game.macros.get(macro), slot);
+        return slot;
+      }, { macro: gm.macro, playerMacro: player.macro });
+      const migrated = await p.eval(sync, ids.player);
+      t.equal(migrated.macro, player.macro, "reuse the player's macro instead of modifying the GM's legacy shared macro");
+      await t.gm.eval(async ({ actor, macro }) => {
+        const a = game.actors.get(actor);
+        await a.deleteEmbeddedDocuments("Item", a.items.filter(i => i.getFlag("neuroshima-2026-overrides", "abilityId") === "berserk").map(i => i.id));
+        await game.modules.get("neuroshima-2026-overrides").api.hotbar.sync(a);
+      }, { actor: ids.gm, macro: gm.macro });
+      await t.waitFor(p, ({ macro, slot }) => game.macros.has(macro) && game.user.hotbar[slot] === macro ? true : null,
+        { args: [{ macro: player.macro, slot }], message: "player's macro survives GM cleanup" });
+      await t.quiet();
+    });
   }
 };

@@ -1192,6 +1192,9 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   czy dokument nadal istnieje, także w trakcie kasowania; Cichy krok zapisuje efekt tylko u aktywnego MG.
   Automatyczna Pieśń otuchy nie otwiera edytora aktywności w trakcie awansu. Regresje: Quench `drony`
   i `fuksy`, e2e `dron` (usunięcie drona i operatora) oraz `postac` (Cichy krok przy podłączonych graczach).
+- Makra zdolności należą do użytkownika: pasek gracza zastępuje stare współdzielone makro bez zapisu
+  do dokumentu MG, a synchronizacja MG nie usuwa makr gracza. Publiczne `hotbar.sync` korzysta z kolejki;
+  e2e `postac` sprawdza własność, przejście ze starego makra i sprzątanie przy dwóch klientach.
 - Weryfikacja przed bramką: wszystkie 44 paczki Quench, 1184/1184 testów; e2e `postac`, `dron`, `handel`;
   testy statyczne, agentów, przeglądarki ikon i pakowania ilustracji oraz walidatory kandydatów ikon.
 

@@ -20,9 +20,14 @@
 
 import { CLASS_FEATURES } from "../config/class-features-data.mjs";
 import { isStateActive } from "./class-state.mjs";
+import { isDocumentLive } from "../doc-liveness.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const FLAG_ABILITY = "abilityId";
+
+// Ability commands resolve the current character, but their documents belong to one user.
+// Sharing a GM's macro with a player let either client's sync delete the other's document.
+const belongsToUser = (macro, user) => (macro?.getFlag(MODULE_ID, "userId") ?? macro?._source.author) === user.id;
 
 /* -------------------------------------------- */
 /*  Macro management                             */
@@ -76,7 +81,8 @@ export function queueHotbarSync(actor, options) {
   const prev = _syncChain.get(HOTBAR) ?? Promise.resolve();
   const next = prev.catch(() => {}).then(() => syncHotbar(actor, options));
   _syncChain.set(HOTBAR, next);
-  next.finally(() => { if (_syncChain.get(HOTBAR) === next) _syncChain.delete(HOTBAR); });
+  const settled = () => { if (_syncChain.get(HOTBAR) === next) _syncChain.delete(HOTBAR); };
+  next.then(settled, settled);
   return next;
 }
 
@@ -86,7 +92,7 @@ function scheduleHotbarSync(actor) {
   clearTimeout(_syncTimer.get(actor.id));
   _syncTimer.set(actor.id, setTimeout(() => {
     _syncTimer.delete(actor.id);
-    queueHotbarSync(actor);
+    queueHotbarSync(actor).catch(err => console.error(`${MODULE_ID} | ability hotbar`, err));
   }, 150));
 }
 
@@ -96,7 +102,7 @@ function scheduleHotbarSync(actor) {
  * Prefer `queueHotbarSync` from event handlers — see the note above.
  */
 export async function syncHotbar(actor, { user = game.user } = {}) {
-  if (!actor || actor.type !== "character") return;
+  if (!isDocumentLive(actor) || actor.type !== "character") return;
   if (user.character?.id !== actor.id && !user.isGM) return;
 
   const eligible = _eligibleAbilities(actor);
@@ -111,20 +117,25 @@ export async function syncHotbar(actor, { user = game.user } = {}) {
     occupied.add(Number(slot));
     const macro = game.macros.get(macroId);
     const abilityId = macro?.getFlag(MODULE_ID, FLAG_ABILITY);
-    if (abilityId) owned.set(abilityId, Number(slot));
+    if (abilityId && !belongsToUser(macro, user)) {
+      // Replace a legacy shared automatic macro on this user's bar, without touching its author.
+      await user.assignHotbarMacro(null, Number(slot));
+      occupied.delete(Number(slot));
+    } else if (abilityId) owned.set(abilityId, Number(slot));
   }
 
   // Remove macros for abilities the actor no longer has.
   for (const [abilityId, slot] of owned) {
     if (wanted.has(abilityId)) continue;
-    await user.assignHotbarMacro(null, slot);
     const macro = game.macros.get(slots[slot]);
-    if (macro?.getFlag(MODULE_ID, FLAG_ABILITY)) await macro.delete();
+    await user.assignHotbarMacro(null, slot);
+    if (isDocumentLive(macro) && belongsToUser(macro, user) && macro.canUserModify(game.user, "delete")) await macro.delete();
     occupied.delete(slot);
   }
 
   // Add macros for newly-gained abilities, into the first free slot.
   for (const { abilityId, item, feature } of eligible) {
+    if (!isDocumentLive(actor) || !isDocumentLive(item)) return;
     if (owned.has(abilityId)) continue;
 
     let slot = null;
@@ -138,9 +149,12 @@ export async function syncHotbar(actor, { user = game.user } = {}) {
 
     // Reuse an existing macro for this ability if one is lying around unplaced
     // (and delete any extras), so a lost race can never leave duplicates behind.
-    const existing = game.macros.filter(m => m.getFlag(MODULE_ID, FLAG_ABILITY) === abilityId);
+    const existing = game.macros.filter(m => m.getFlag(MODULE_ID, FLAG_ABILITY) === abilityId
+      && belongsToUser(m, user) && isDocumentLive(m));
     let macro = existing[0] ?? null;
-    for (const dup of existing.slice(1)) await dup.delete();
+    for (const dup of existing.slice(1)) {
+      if (isDocumentLive(dup) && dup.canUserModify(game.user, "delete")) await dup.delete();
+    }
 
     if (macro) {
       await macro.update({ name: feature.label, img: item.img ?? _iconFor(feature, false) });
@@ -150,8 +164,10 @@ export async function syncHotbar(actor, { user = game.user } = {}) {
         type: "script",
         img: item.img ?? _iconFor(feature, false),
         scope: "global",
+        author: user.id,
+        ownership: { [user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
         command: _macroCommand(abilityId),
-        flags: { [MODULE_ID]: { [FLAG_ABILITY]: abilityId, actorId: actor.id } }
+        flags: { [MODULE_ID]: { [FLAG_ABILITY]: abilityId, actorId: actor.id, userId: user.id } }
       });
     }
 
@@ -292,13 +308,13 @@ export function registerAbilityHotbar() {
   }
 
   Hooks.once("ready", () => {
-    if (game.user.character) syncHotbar(game.user.character);
+    if (game.user.character) queueHotbarSync(game.user.character);
   });
 
   const mod = game.modules?.get(MODULE_ID);
   if (mod) {
     mod.api ??= {};
-    mod.api.hotbar = { use: useAbility, sync: syncHotbar };
+    mod.api.hotbar = { use: useAbility, sync: queueHotbarSync };
   }
 
   console.log(`${MODULE_ID} | Ability hotbar registered`);

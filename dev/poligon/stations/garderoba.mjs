@@ -65,6 +65,7 @@ export default {
     p("bn", "Karta BN", "Uzbrojony BN: pasek boczny 180 px, broń, reakcje", "Karta Gangusa."),
     p("opiekun", "Towarzysze", "Pasek towarzyszy z trzema (człowiek, pies, dron) — miejsce na karcie", "Karta Opiekuna."),
     p("pd-fuksy", "Karta", "PD, Fuksy, hotbar zdolności — czytelność i kliknięcia", "Karty typowych postaci klas."),
+    p("hotbar-wlasnosc", "Karta", "Pasek MG i gracza ma własne makra; reset stanowiska lub utrata zdolności nie kasują skrótów drugiego użytkownika", "MG i Gracz 1 z Berserkiem; usuń zdolność u MG, potem resetuj stanowisko i sprawdź pasek gracza."),
     p("kamizelka", "NOE / WKK", "Kamizelka taktyczna (+1 miejsce na pasie), Darmowe upuszczanie, wyłączenia pancerza wspomaganego (D23) — Hełm z plecaka Weterana na głowę", "Wariant NOE / WKK; Żołnierz i Weteran.", "WKK")
   ]
 };
