@@ -71,7 +71,9 @@ await step("static", async () => {
   const runs = [
     node("dev/validate-tests.mjs"),
     node("--test", "dev/e2e/nevada-stream.test.mjs"),
+    node("--test", "dev/icons/review/browser.test.mjs"),
     node("--test", ...testFiles),
+    run(PYTHON, ["dev/art/m5/test_pack.py"]),
     node("dev/validate-css.mjs"),
     node("dev/validate-recipes.mjs")
   ];

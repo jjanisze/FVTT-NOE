@@ -5,7 +5,7 @@
 **Etap: alfa** (v0.16.0, przegląd 2026-09-26; v0.18.0 2026-10-08 — M0 i M1 zamknięte, czysta instalacja
 B6 sprawdzana przy każdym wydaniu). Walka, ekwipunek, stany i przetrwanie grają się od początku do końca
 przy żywym stole, walka i powrót do zdrowia wg RAW (M1); produkcja przedmiotów i naprawa (v0.17.0) czekają
-na pierwszą sesję; towarzysze, drony (M3) oraz handel i postój (M5) wchodzą do v0.19.0 (2026-10-14).
+na pierwszą sesję; towarzysze, drony (M3) oraz handel i postój (M5) wchodzą do v0.19.0 (2026-10-15).
 Większość pojazdów nie istnieje. Droga do wczesnej bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
 
 RAW = `Neuro 5e/Podrecznik/NOE/` — konwersja PDF-a „październik” (jedyne źródło; numery stron to
@@ -1176,7 +1176,7 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
-### v0.19.0 — Towarzysze, drony, handel i postój (2026-10-14)
+### v0.19.0 — Towarzysze, drony, handel i postój (2026-10-15)
 
 - Towarzysze i drony (M3): tworzenie, wartości z właściciela, wspólna inicjatywa, sterowanie zdalne,
   obraz kamery i OSD, zasilanie, awarie, naprawy oraz Emiter EMP.
@@ -1197,6 +1197,8 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   e2e `postac` sprawdza własność, przejście ze starego makra i sprzątanie przy dwóch klientach.
 - Weryfikacja przed bramką: wszystkie 44 paczki Quench, 1184/1184 testów; e2e `postac`, `dron`, `handel`;
   testy statyczne, agentów, przeglądarki ikon i pakowania ilustracji oraz walidatory kandydatów ikon.
+- Bramka statyczna uruchamia również testy przeglądarki ikon i pakowania ilustracji; CI przygotowuje
+  Python 3.13 oraz Pillow, wymagane przez walidację atlasu OSD i narzędzia grafik.
 
 ### Poligon — teren testów MG, warstwa 7 (2026-10-12)
 
