@@ -5,9 +5,12 @@ import path from "node:path";
 const port = Number(process.argv.find(arg => arg.startsWith("--cdp-port="))?.slice(11) ?? process.env.CDP_PORT);
 if (!Number.isInteger(port) || port <= 0) throw new Error("Podaj port CDP Chrome: --cdp-port=<port> albo zmienna CDP_PORT (port z .mcp.json projektu — nie wpisujemy go do repo).");
 const backupArg = process.argv.find(arg => arg.startsWith("--backup="))?.slice(9);
+const pageUrl = process.argv.find(arg => arg.startsWith("--page-url="))?.slice(11);
 const backup = path.resolve(backupArg ?? "dev/backup/world-icon-repoints-2026-10-03.json");
 const pages = await (await fetch(`http://127.0.0.1:${port}/json/list`)).json();
-const page = pages.find(candidate => candidate.type === "page" && /\/game(?:$|[?#])/.test(candidate.url));
+const page = pages.find(candidate => candidate.type === "page"
+  && /\/game(?:$|[?#])/.test(candidate.url)
+  && (!pageUrl || candidate.url.startsWith(pageUrl)));
 if (!page) throw new Error(`No Foundry /game page found on Chrome CDP port ${port}`);
 
 const ws = new WebSocket(page.webSocketDebuggerUrl);

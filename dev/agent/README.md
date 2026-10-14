@@ -5,7 +5,7 @@ Harness-neutral CLI (Claude Code, Copilot, Codex: anything that runs a shell). D
 
 ```sh
 npm run fvtt -- doctor                      # start here: what is up, what is wrong, what to do
-npm run fvtt -- <command> [--profile=campaign|sandbox] [--key=value] [--flag]
+npm run fvtt -- <command> [--profile=campaign|sandbox|release|poligon] [--key=value] [--flag]
 npm run fvtt -- help                        # every command with its options
 ```
 
@@ -33,6 +33,13 @@ to stderr. Exit code `0` ok · `1` failed · `2` refused by a guard · `3` usage
 | `logs [--since=<min>] [--level=warn] [--grep=<re>]` | the server's own JSON log (ports redacted) |
 | `mode [development\|runtime]` | D2/D9 — set `runtime` only when the GM says so |
 | `sandbox:init` | create/refresh the sandbox data path (idempotent) |
+| `poligon:init [--skip-packs] [--force]` | the GM's testing ground ([`dev/poligon/README.md`](../poligon/README.md)): its own data path and port, the campaign's active modules (asked from a ready campaign page), world `poligon` (Gamemaster + Gracz 1–5, with a Poligon marker file), the world's loader (`esmodules`) and the Data-root junction to `dev/poligon`, packs from the working tree, the campaign's rule settings copied once. Idempotent |
+| `poligon:start [--seats=3\|1,4\|"Gracz 2"] [--no-gm] [--klon] [--force]` | start the Poligon world (or the clone) and open seats: the GM's and players' windows, each an isolated browser context; switching worlds is a restart behind the human guard |
+| `poligon:clone [--refresh]` | one-way copy of the campaign world onto the Poligon path under its own id (LevelDB without `LOCK`, the campaign keeps running), `[KLON]` title, red banner; replaces only a clone it made, never while it runs. `poligon:start --klon` restarts the Poligon server into it |
+| `poligon:stop [--force]` | stop the Poligon server — refused while someone fvtt did not log in is connected |
+| `poligon:reset <station…> \| --all \| --list` | rebuild stations in a GM page (`game.poligon.stations.reset`) — **only when the GM asks** (H-D9) |
+| `poligon:obsada [--rebuild] [--only=id,id]` | build the persona compendium through dnd5e's real advancement |
+| `poligon:findings [--since=<min\|ISO>] [--open] [--md]` | the GM's findings (journal "Poligon · Uwagi") as JSON; `--md` → `logs/poligon/` (git-ignored) |
 | `init --mcp-json=<path>` | create the local config (once per machine) |
 
 ## Rules (enforced in code, `lib/guards.mjs`, tested in `test/guards.test.mjs`)
@@ -47,6 +54,12 @@ to stderr. Exit code `0` ok · `1` failed · `2` refused by a guard · `3` usage
 - **Secrets**: the admin password lives in `%LOCALAPPDATA%\neuroshima-agent\secrets.clixml` (DPAPI),
   written by the GM with `Set-AgentSecret.ps1`. It never appears in argv, output, logs or the repo;
   the browser gets a session cookie, not the password.
+- **Poligon** (`PLAN_human_testing.md` §3.2): `world:*` and `e2e` refuse `--profile=poligon`; `stop`,
+  `restart`, `kill`, `packs` and `poligon:stop` on it refuse while a user fvtt did not log in is connected
+  (a person — the default context and the `seat-*` contexts count as people), `--force` only on the GM's
+  word; logins there always go to an isolated `seat-<user>` context (the session cookie is per host, not
+  per port — a Poligon login in Chrome's default context would log the campaign tab out); the world
+  `poligon` is protected and can never pass the delete guards.
 - **Nothing machine-specific in this repo** (it is public): install/data paths and the Chrome
   endpoint come from `%LOCALAPPDATA%\neuroshima-agent\config.json`; ports from each data path's
   `Config/options.json`. Output never prints hosts or ports.
@@ -54,6 +67,8 @@ to stderr. Exit code `0` ok · `1` failed · `2` refused by a guard · `3` usage
 ## Profiles
 
 - `campaign` — the GM's data path and world. The dev module there *is* this working tree.
+- `poligon` — `%LOCALAPPDATA%\FoundryVTT-Poligon`, set up like the sandbox, own port, concurrent with both;
+  the GM's, not an agent's (`poligon:*` above). Its default world is `poligon`.
 - `sandbox` — `%LOCALAPPDATA%\FoundryVTT-Agent`, own port, runs concurrently (D1). Packages are real
   folders of junctions to the campaign install **except `packs/`** (a running world holds its
   packs' LevelDB; sharing them would lock one server out). This module's sandbox packs are built

@@ -1043,11 +1043,18 @@ odtworzenie nie posprząta.
 
 #### Odnośniki są kaflami, nie żetonami
 
-Wzorce dnd5e i pasmo drużyny w Szafie z potworami to `Tile`, nie `Token`. Kafel nie
+Wzorce dnd5e w obu szafach to `Tile`, nie `Token`. Kafel nie
 potrzebuje aktora (zero śmieci w świecie), a QuickScale rusza wyłącznie żetony — więc
 odnośnika nie da się przypadkiem przeskalować w połowie godziny klikania. Render jest
 identyczny: `TileDocument` też ma `texture.fit`, a `contain` robi to samo co na żetonie.
-Pasmo z `band.tile` w `layoutBands()` rysuje się kaflami zamiast trafiać do `placements`.
+
+#### Szafa pakietu i szafa kampanii (2026-10-11)
+
+Szafa z potworami czyta tylko kompendium i wzorce dnd5e — działa w każdym świecie z
+modułem (Poligon, piaskownica) i nie ma po co stać w kampanii. Szafa z postaciami
+kalibruje aktorów kampanii, więc żyje tylko tam, i to na czas kalibracji: zbuduj,
+skalibruj, `apply()`, `remove()`. Pasmo „Drużyna” z kaflami postaci graczy w Szafie z
+potworami usunięte — wiązało szafę pakietu z aktorami kampanii.
 
 #### Pasma Szafy z postaciami to audyt
 

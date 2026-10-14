@@ -1,0 +1,252 @@
+/* Poligon (PLAN_human_testing.md §3.2): nobody may mistake this tab for the campaign. */
+
+:root {
+  --poligon-hazard: repeating-linear-gradient(-45deg, #f2c200 0 14px, #1b1b1b 14px 28px);
+  --poligon-ink: #1b1b1b;
+  --poligon-paper: #f2c200;
+  --poligon-ok: #2e7d32;
+  --poligon-bad: #c62828;
+  --poligon-note: #1565c0;
+}
+
+/* A hazard frame around the whole viewport, under every window and over the canvas. */
+body.poligon::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 10000;
+  border: 4px solid transparent;
+  border-image: var(--poligon-hazard) 8;
+}
+
+body.poligon.poligon-klon::after {
+  border-image: repeating-linear-gradient(-45deg, #d32f2f 0 14px, #1b1b1b 14px 28px) 8;
+}
+
+#poligon-banner {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10001;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 2px 14px 3px;
+  border-radius: 0 0 6px 6px;
+  background: var(--poligon-hazard);
+  font: 700 13px/1.2 var(--font-sans, sans-serif);
+  letter-spacing: 0.12em;
+  pointer-events: none;
+}
+
+#poligon-banner span {
+  background: var(--poligon-paper);
+  color: var(--poligon-ink);
+  padding: 1px 8px;
+  border-radius: 3px;
+}
+
+#poligon-banner .poligon-badge {
+  background: var(--poligon-bad);
+  color: #fff;
+  letter-spacing: 0.04em;
+}
+
+#poligon-banner .poligon-badge.wariant {
+  background: var(--poligon-ink);
+  color: var(--poligon-paper);
+}
+
+/* ---------------------------------------------------------------- panel */
+
+.poligon-panel .window-content {
+  padding: 0;
+  overflow: hidden;
+}
+
+.poligon-panel .poligon-body {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  font-size: var(--font-size-13, 13px);
+}
+
+.poligon-panel nav.poligon-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  padding: 4px 6px 0;
+  border-bottom: 2px solid var(--poligon-paper);
+  background: var(--poligon-ink);
+}
+
+.poligon-panel nav.poligon-tabs button {
+  flex: 0 0 auto;
+  width: auto;
+  height: 26px;
+  line-height: 24px;
+  padding: 0 8px;
+  margin: 0;
+  border-radius: 4px 4px 0 0;
+  border: none;
+  background: #333;
+  color: #ddd;
+  font-size: 12px;
+}
+
+.poligon-panel nav.poligon-tabs button.active {
+  background: var(--poligon-paper);
+  color: var(--poligon-ink);
+  font-weight: 700;
+}
+
+.poligon-panel .poligon-tab {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 10px 12px;
+}
+
+.poligon-panel h3 {
+  margin: 10px 0 4px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--color-border-light-2, #8884);
+}
+
+.poligon-panel .poligon-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 3px 0;
+  border-bottom: 1px dotted #8883;
+}
+
+.poligon-panel .poligon-row .grow {
+  flex: 1;
+  min-width: 0;
+}
+
+.poligon-panel .poligon-row button,
+.poligon-panel .poligon-actions button {
+  flex: 0 0 auto;
+  width: auto;
+  height: 24px;
+  line-height: 22px;
+  padding: 0 8px;
+  margin: 0;
+  font-size: 12px;
+}
+
+.poligon-panel .poligon-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 4px 0;
+}
+
+.poligon-panel .poligon-muted {
+  opacity: 0.7;
+  font-size: 11px;
+}
+
+.poligon-panel .poligon-state {
+  font-size: 11px;
+  padding: 0 5px;
+  border-radius: 3px;
+  background: #8883;
+}
+
+.poligon-panel .poligon-state.built { background: var(--poligon-ok); color: #fff; }
+.poligon-panel .poligon-state.stale { background: #ef6c00; color: #fff; }
+.poligon-panel .poligon-state.never { background: #8885; }
+.poligon-panel .poligon-state.active { outline: 2px solid var(--poligon-paper); }
+
+.poligon-panel .poligon-prio {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 0 4px;
+  border-radius: 3px;
+  background: var(--poligon-ink);
+  color: var(--poligon-paper);
+}
+
+.poligon-panel .poligon-probe {
+  padding: 5px 0;
+  border-bottom: 1px dotted #8884;
+}
+
+.poligon-panel .poligon-probe .text { font-weight: 600; }
+.poligon-panel .poligon-probe .how { font-size: 11px; opacity: 0.8; margin-top: 2px; }
+
+.poligon-panel .poligon-probe .verdicts {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+  margin-top: 3px;
+}
+
+.poligon-panel .poligon-probe .verdicts button {
+  flex: 0 0 auto;
+  width: 28px;
+  height: 22px;
+  line-height: 20px;
+  padding: 0;
+  margin: 0;
+  font-size: 12px;
+}
+
+.poligon-panel .poligon-probe .verdicts button.on.ok { background: var(--poligon-ok); color: #fff; }
+.poligon-panel .poligon-probe .verdicts button.on.bad { background: var(--poligon-bad); color: #fff; }
+.poligon-panel .poligon-probe.stale-verdict .verdicts::after {
+  content: "zmiany od werdyktu — spójrz jeszcze raz";
+  font-size: 10px;
+  color: #ef6c00;
+}
+
+.poligon-panel .poligon-layer {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 0 4px;
+  border-radius: 3px;
+  margin-right: 4px;
+}
+
+.poligon-panel .poligon-layer.NOE { background: #455a64; color: #fff; }
+.poligon-panel .poligon-layer.RAI { background: #6a1b9a; color: #fff; }
+.poligon-panel .poligon-layer.WKK { background: #1565c0; color: #fff; }
+.poligon-panel .poligon-layer.VETO { background: #ef6c00; color: #fff; }
+
+.poligon-panel code {
+  user-select: all;
+  font-size: 11px;
+}
+
+.poligon-panel .poligon-kv {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 2px 10px;
+  font-size: 12px;
+}
+
+.poligon-panel .poligon-warn { color: #ef6c00; font-weight: 600; }
+.poligon-panel .poligon-bad { color: var(--poligon-bad); font-weight: 600; }
+.poligon-panel .poligon-good { color: var(--poligon-ok); font-weight: 600; }
+
+/* Uwaga form */
+.poligon-uwaga textarea {
+  width: 100%;
+  min-height: 110px;
+}
+
+.poligon-uwaga .poligon-severity {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.poligon-uwaga img.poligon-shot {
+  max-width: 100%;
+  max-height: 160px;
+  border: 1px solid #8886;
+}

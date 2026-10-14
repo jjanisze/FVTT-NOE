@@ -26,9 +26,12 @@ export const FILES = {
 };
 
 export const MODULE_ID = "neuroshima-2026-overrides";
-/** campaign: the GM's world · sandbox: dev, module linked to the working tree · release: module from the zip. */
-export const PROFILES = ["campaign", "sandbox", "release"];
-const DEFAULT_DATA = { sandbox: "FoundryVTT-Agent", release: "FoundryVTT-Release" };
+/**
+ * campaign: the GM's world · sandbox: dev, module linked to the working tree · release: module from the zip ·
+ * poligon: the GM's own testing ground (PLAN_human_testing.md), linked like the sandbox, never an agent's.
+ */
+export const PROFILES = ["campaign", "sandbox", "release", "poligon"];
+const DEFAULT_DATA = { sandbox: "FoundryVTT-Agent", release: "FoundryVTT-Release", poligon: "FoundryVTT-Poligon" };
 
 /** Foundry's own default data path resolution (paths.mjs `userDataPaths`, minus CLI args). */
 export function defaultFoundryDataPath() {
@@ -103,7 +106,8 @@ export function resolveProfile(cfg, name = "campaign") {
       code: "no-profile",
       hint: name === "campaign" ? "Start Foundry once and set a port in Configuration."
         : name === "release" ? "Run `npm run release:check` (it builds the zip and installs the release sandbox)."
-          : "Run `npm run fvtt -- sandbox:init`."
+          : name === "poligon" ? "Run `npm run fvtt -- poligon:init`."
+            : "Run `npm run fvtt -- sandbox:init`."
     });
   }
   const tls = Boolean(options.sslCert && options.sslKey);
@@ -124,9 +128,12 @@ export function resolveProfile(cfg, name = "campaign") {
   };
 }
 
-/** Worlds no tool may ever delete, whatever their id: the config list plus the campaign world. */
+/** The Poligon's persistent world id (PLAN_human_testing.md §3.1) — the GM's, never an agent's. */
+export const POLIGON_WORLD = "poligon";
+
+/** Worlds no tool may ever delete, whatever their id: the config list, the campaign world, the Poligon. */
 export function protectedWorlds(cfg) {
-  return new Set([...(cfg.protectedWorlds ?? []), cfg.campaign?.world].filter(Boolean));
+  return new Set([...(cfg.protectedWorlds ?? []), cfg.campaign?.world, POLIGON_WORLD].filter(Boolean));
 }
 
 export function installPaths(cfg) {

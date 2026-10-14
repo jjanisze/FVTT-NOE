@@ -1205,6 +1205,7 @@ const BESTIARY_ITEM_ICONS = Object.freeze({
   "megator.zioniecie-2-walke": `modules/${MODULE_ID}/icons/weapons/zioniecie_radioaktywne.svg`,
   "mrokoszczur.zakazenie": `modules/${MODULE_ID}/icons/abilities/zakazenie.svg`,
   "mrokoszczur.czuly-wech": `modules/${MODULE_ID}/icons/abilities/czuly-wech.svg`,
+  "mobsprzet.atak": `modules/${MODULE_ID}/icons/abilities/atak-mobsprzet.svg`,
   "mobsprzet.autodestrukcja-100": `modules/${MODULE_ID}/icons/abilities/autodestrukcja.svg`,
   "myslacy-szczur.szczurze-nozki": `modules/${MODULE_ID}/icons/abilities/szczurze-nozki.svg`,
   "neogator.miazdzenie": `modules/${MODULE_ID}/icons/weapons/miazdzenie.svg`,
@@ -1225,6 +1226,10 @@ const BESTIARY_ITEM_ICONS = Object.freeze({
 });
 
 const BESTIARY_SHARED_ITEM_ICONS = Object.freeze({
+  "dmuchawka": `modules/${MODULE_ID}/icons/weapons/dmuchawka.svg`,
+  "wrazliwosc-na-swiatlo": `modules/${MODULE_ID}/icons/abilities/wrazliwosc-na-swiatlo.svg`,
+  "wymagania": `modules/${MODULE_ID}/icons/abilities/wymagania.svg`,
+  "tylko-zwarcie": `modules/${MODULE_ID}/icons/abilities/tylko-zwarcie.svg`,
   "pierwsze-spotkanie": `modules/${MODULE_ID}/icons/abilities/pierwsze-spotkanie.svg`,
   "atak-wielokrotny": `modules/${MODULE_ID}/icons/abilities/atak-wielokrotny.svg`,
   "algorytm-czuwania": `modules/${MODULE_ID}/icons/abilities/algorytm-czuwania.svg`,

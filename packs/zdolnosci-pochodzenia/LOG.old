@@ -1,5 +1,5 @@
-2026/10/12-15:54:54.802 cf44 Recovering log #3
-2026/10/12-15:54:54.803 cf44 Level-0 table #5: started
-2026/10/12-15:54:54.806 cf44 Level-0 table #5: 15335 bytes OK
-2026/10/12-15:54:54.811 cf44 Delete type=0 #3
-2026/10/12-15:54:54.811 cf44 Delete type=3 #2
+2026/10/14-23:12:39.017 3224 Recovering log #3
+2026/10/14-23:12:39.018 3224 Level-0 table #5: started
+2026/10/14-23:12:39.021 3224 Level-0 table #5: 15302 bytes OK
+2026/10/14-23:12:39.025 3224 Delete type=0 #3
+2026/10/14-23:12:39.025 3224 Delete type=3 #2

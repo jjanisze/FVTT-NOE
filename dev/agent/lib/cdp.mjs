@@ -143,7 +143,9 @@ export async function evaluate(browser, targetId, expression, { timeoutMs = 60_0
     }, { timeoutMs: timeoutMs + 5000 });
     if (r.exceptionDetails) {
       const d = r.exceptionDetails;
-      throw new CliError(`Page threw: ${d.exception?.description ?? d.text}`.slice(0, 2000), { code: "page-exception" });
+      // Stack frames carry the page origin (host:port); paths are enough and output never prints ports.
+      const text = String(d.exception?.description ?? d.text).replace(/https?:\/\/[^/\s)]+/g, "");
+      throw new CliError(`Page threw: ${text}`.slice(0, 2000), { code: "page-exception" });
     }
     return r.result.value;
   });

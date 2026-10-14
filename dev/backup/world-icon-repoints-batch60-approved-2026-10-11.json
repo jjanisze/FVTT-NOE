@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.MDE2NTZjOTlmYzU4",
+      "name": "Buźka",
+      "items": [
+        {
+          "_id": "ejjPbnCynNXoPy9m",
+          "name": "Wierzę",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/wierze.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.VHf9rRnSdxRzVtLa",
+      "name": "Evie",
+      "items": [
+        {
+          "_id": "OzTjHBtpWoHY9pj7",
+          "name": "Czas patriotów",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/czas-patriotow.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NzhmNDJhNTU1MDQ1",
+      "name": "Góra",
+      "items": [
+        {
+          "_id": "s7sVsAwUIeDHAy6F",
+          "name": "Fart",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/fart.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NmEwODIwMmQ4YzY1",
+      "name": "Iris",
+      "items": [
+        {
+          "_id": "Un8DNhMPeXqB6GCh",
+          "name": "Doktor Quinn",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/doktor-quinn.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NzI5NGUxMzFhNzg1",
+      "name": "Kluczyk",
+      "items": [
+        {
+          "_id": "Zx3anBR5Ea6wYVdL",
+          "name": "Siódme poty",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/siodme-poty.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NTJiOTczNjQxNTgx",
+      "name": "Kucharka Irena",
+      "items": [
+        {
+          "_id": "NGE1OTgzOGU0NzNh",
+          "name": "Kuchenny Terror",
+          "before": "worlds/OUTPUT/characters/070_-_Kucharka_Irena/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/kuchenny-terror.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NDQxN2RkMTJiOGNh",
+      "name": "Laffitte",
+      "items": [
+        {
+          "_id": "33XHZQEAcS60kCpN",
+          "name": "Fart",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/fart.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MDczZGFlMTBkMWQ5",
+      "name": "Piekarz",
+      "items": [
+        {
+          "_id": "MzhiNGZjYjhiMjU3",
+          "name": "Młynek",
+          "before": "worlds/OUTPUT/characters/033_-_Piekarz/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/mlynek.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.NjBkNTk3OWY1ODRj",
+      "name": "Raynald of Châtillon",
+      "items": [
+        {
+          "_id": "51BhtXsadP41WQAH",
+          "name": "Coś mi tu śmierdzi",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/cos-mi-tu-smierdzi.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MWQzZmFkMDUzZmVj",
+      "name": "Richard Craddock",
+      "items": [
+        {
+          "_id": "Y2U0NmViZGJiNDVk",
+          "name": "Aktywny system obrony",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/aktywny-system-obrony.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.OBrjMBbhUSK6kpq3",
+      "name": "Richard Craddock Uparmored",
+      "items": [
+        {
+          "_id": "Y2U0NmViZGJiNDVk",
+          "name": "Aktywny system obrony",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/aktywny-system-obrony.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.ZmNkNTY1YzhlY2Fk",
+      "name": "Victor von Blitz",
+      "items": [
+        {
+          "_id": "dEruBmomYRAePWl6",
+          "name": "Siódme poty",
+          "before": "icons/svg/upgrade.svg",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/siodme-poty.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MTEyM2VhZTEwMzJi.Token.ODNhNGRkMTFmMmFi.Actor.MWQzZmFkMDUzZmVj",
+      "name": "Richard Craddock",
+      "items": [
+        {
+          "_id": "Y2U0NmViZGJiNDVk",
+          "name": "Aktywny system obrony",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/aktywny-system-obrony.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MzFjOThhMmZiMWUy.Token.MWRiZTM3NzIwZDVi.Actor.NTJiOTczNjQxNTgx",
+      "name": "Kucharka Irena",
+      "items": [
+        {
+          "_id": "NGE1OTgzOGU0NzNh",
+          "name": "Kuchenny Terror",
+          "before": "worlds/OUTPUT/characters/070_-_Kucharka_Irena/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/kuchenny-terror.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.MjY5NWM0NjkzMjZj.Token.YzMyOTkxNjhkZTgw.Actor.MWQzZmFkMDUzZmVj",
+      "name": "Richard Craddock",
+      "items": [
+        {
+          "_id": "Y2U0NmViZGJiNDVk",
+          "name": "Aktywny system obrony",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/aktywny-system-obrony.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ZDI1YTcyY2JmNjMx.Token.IAzB7h1vtGuBOXgH.Actor.MWQzZmFkMDUzZmVj",
+      "name": "Generał",
+      "items": [
+        {
+          "_id": "Y2U0NmViZGJiNDVk",
+          "name": "Aktywny system obrony",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/aktywny-system-obrony.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ZDI1YTcyY2JmNjMx.Token.UegLhOMhY2Ih1ces.Actor.OBrjMBbhUSK6kpq3",
+      "name": "Generał",
+      "items": [
+        {
+          "_id": "Y2U0NmViZGJiNDVk",
+          "name": "Aktywny system obrony",
+          "before": "worlds/OUTPUT/characters/064_-_Richard_Craddock/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/aktywny-system-obrony.svg"
+        }
+      ]
+    }
+  ]
+}

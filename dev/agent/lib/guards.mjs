@@ -21,8 +21,68 @@ export const COMMAND_CLASS = {
   start: "lifecycle", stop: "lifecycle", restart: "lifecycle", kill: "lifecycle", packs: "lifecycle",
   backup: "lifecycle", "sandbox:init": "lifecycle", "sandbox:sync": "lifecycle",
   "world:create": "lifecycle", "world:launch": "lifecycle", "world:delete": "lifecycle", "world:seed": "testing",
-  "release:check": "lifecycle"
+  "release:check": "lifecycle",
+  // The Poligon (PLAN_human_testing.md §6): findings are a read; a station reset or the persona build
+  // writes into the GM's testing world (testing); init/start/stop move a server (lifecycle).
+  "poligon:init": "lifecycle", "poligon:start": "lifecycle", "poligon:stop": "lifecycle",
+  "poligon:reset": "testing", "poligon:obsada": "testing", "poligon:findings": "read", "poligon:clone": "lifecycle"
 };
+
+/**
+ * Commands that create, switch or delete worlds, or run e2e: sandbox data paths only. The Poligon is
+ * the GM's — an e2e run there would shut down the world under them (§3.1, option B's whole problem).
+ */
+const SANDBOX_ONLY = new Set(["world:create", "world:seed", "world:launch", "world:delete", "e2e"]);
+
+export function checkSandboxOnly(command, profileName) {
+  if (!SANDBOX_ONLY.has(command)) return;
+  if (profileName === "poligon") {
+    throw refuse(`\`${command}\` never runs on the Poligon (the GM's testing ground).`, "poligon",
+      "Agent worlds and e2e runs live on the sandbox (`--profile=sandbox`, the default). The Poligon has `poligon:*`.");
+  }
+}
+
+/**
+ * H5 (§3.6): where a campaign clone may be written. The target must be a world folder on the Poligon's
+ * data path and nowhere under the campaign's; an existing folder is replaced only when it carries the
+ * clone marker naming it, is a real folder (no junction), nothing holds its databases, and `--refresh`
+ * was asked for. The clone keeps the campaign world's id, so these checks are all that separates a
+ * refresh from an overwrite of the wrong thing.
+ */
+export function checkCloneTarget({ dir, id, worldsRoot, campaignData, exists, isLink = false, marker = null, refresh = false, active = false, heldDbs = [] }) {
+  const norm = p => String(p ?? "").replaceAll("\\", "/").replace(/\/+$/, "").toLowerCase();
+  const d = norm(dir);
+  if (!d.startsWith(`${norm(worldsRoot)}/`) || d !== `${norm(worldsRoot)}/${String(id).toLowerCase()}`) {
+    throw refuse(`Clone target ${dir} is not worlds/${id} of the Poligon.`, "clone-target");
+  }
+  if (campaignData && (d === norm(campaignData) || d.startsWith(`${norm(campaignData)}/`))) {
+    throw refuse("The clone target lies on the campaign's data path.", "campaign");
+  }
+  if (!exists) return;
+  if (isLink) throw refuse(`worlds/${id} on the Poligon is a link, not a clone folder.`, "link");
+  if (!marker || marker.id !== id || marker.kind !== "klon") {
+    throw refuse(`worlds/${id} on the Poligon has no clone marker naming it — not made by poligon:clone.`, "no-marker",
+      "Ask the GM; fvtt replaces only clones it made.");
+  }
+  if (!refresh) throw refuse(`A clone of ${id} already exists.`, "exists", "`--refresh` replaces it with a fresh copy.");
+  if (active) throw refuse(`The clone ${id} is running on the Poligon server.`, "active-world", "`npm run fvtt -- poligon:stop` (or start the Poligon world) first.");
+  if (heldDbs.length) throw refuse(`The clone has open databases: ${heldDbs.slice(0, 3).join(", ")}.`, "db-held");
+}
+
+/**
+ * H-D9 / §3.2: a Poligon server may only be stopped or restarted by an agent while no human is in it.
+ * `connected` = users the server counts as connected; `agentUsers` = distinct users logged in from
+ * pages in browser contexts fvtt made for itself (never the default context, never a player seat it
+ * opened for the GM). Anything more is a person.
+ */
+export function checkNoHumans({ connected, agentUsers = 0, force = false }) {
+  if (force) return;
+  const humans = Math.max(0, Number(connected ?? 0) - agentUsers);
+  if (humans > 0) {
+    throw refuse(`${humans} user(s) connected to the Poligon that fvtt did not log in — the GM may be in the middle of a test.`, "human-present",
+      "Ask the GM first; `--force` only when they said so.", { connected, agentUsers });
+  }
+}
 
 /**
  * D2 + D9: development mode allows everything; runtime mode (game night, co-GM work) is

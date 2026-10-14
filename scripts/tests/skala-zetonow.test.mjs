@@ -224,17 +224,6 @@ export function registerTokenScaleTests(quench) {
         expect(artKind(fake("")), "pusty src").to.equal("none");
         expect(artKind(fake("systems/dnd5e/tokens/humanoid/Bandit.webp")), "grafika dnd5e").to.equal("art");
       });
-
-      it("pasmo odnośnikowe to wyłącznie postacie z grafiką", function () {
-        for (const entry of characterClosetApi.partyReference()) {
-          const actor = game.actors.getName(entry.name);
-          expect(actor, entry.name).to.exist;
-          expect(actor.type, entry.name).to.equal("character");
-          expect(artKind(actor), entry.name).to.equal("art");
-          expect(entry.scale, `${entry.name} skala`).to.be.greaterThan(0);
-          expect(SIZES, `${entry.name} rozmiar`).to.have.property(entry.size);
-        }
-      });
     });
   });
 }

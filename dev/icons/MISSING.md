@@ -37,8 +37,15 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 61** (batch 60 was generated as three 3×3 atlases on
-2026-10-10 and is awaiting GM review; bump this whenever another batch is generated).
+**Next batch number: 69** (Batch 68: both approved and installed; the
+known glyph queue is complete. Future style-review flags use the next batch).
+
+**Icon coverage, 2026-10-13:** origins 36/36, Sztuczki 53/53, all M5
+action glyphs and all three fuel-grade icons delivered. The known icon review
+queue is 342/342 resolved, with no open decisions. All 23 medicines have
+distinct configured icons. Fuel resolver mappings and the existing medic-refill
+icon repoint remain for the GM. Painted-art briefs/deliveries are separate.
+Final census: `review/candidates/batch-68/progress-reviewed.json`.
 
 *Batch 40 (2026-09-25): Kamizelka taktyczna, .44 Mag dum-dum, Mięso suszone, Chleb, Owoce
 i warzywa, MRE, Breneka, Zużyty LAW, Magazynek bębnowy — processed and wired; LAW and the drum
@@ -290,26 +297,298 @@ and normalized PNG/SVG candidates remain under `dev/icons/review/candidates/batc
 | B | Mistrz taktyki; Zasłonięcie hełmu; Ruch; Atak (Mobsprzęt); Wrażliwość na światło; Próg awarii; Tryb Turbo; Wielonożny; Rozkaz Likwidacji |
 | C | Szara Eminencja; Zimna Krew; Żywa Tarcza; Twierdzenie Kąta Prostego; Tacą i w nogi; Tylko jedno w głowie mam; Karabin laserowy; Dmuchawka; Działo ppanc |
 
-## Queue (A) — batch 60 — 27 awaiting GM review
+## Batch 60 — 15 approved and installed, 12 revisions
 
-The review pass contains six selected-reference Batch 59 revisions, three remaining
-creature/action gaps and eighteen feature icons from the live world or module compendia.
-The processor additionally fills tiny enclosed scratches and pinholes while preserving
-structural negative space. Exact prompts, the six-icon reference sheet, raw atlases,
-reproducible processor and normalized PNG/SVG candidates are under
-`dev/icons/review/candidates/batch-60/`.
+Fifteen approved icons are installed in production paths and wired into generated
+compendia or exact live-item mappings. The backup-first live migration updated 17
+embedded items across 17 actor documents. A refreshed audit also found three naming
+variants that could reuse approved art; that separate alias migration updated another
+15 embedded items. Twelve requested revisions continue in Batch 61. Exact prompts,
+reference sheet, raw atlases, reproducible processor and normalized PNG/SVG candidates
+remain under `dev/icons/review/candidates/batch-60/`.
+
+## Batch 61 — 18 approved and installed, 9 revisions in Batch 63
+
+Installed 2026-10-12 from the GM's exact saved selections as WEBP/SVG pairs.
+Ja już swoje odchorowałem deliberately uses its selected Batch 60 candidate.
+Source filenames, approvals and hashes: `review/candidates/batch-63/installed.json`.
+Ruch, Paszcza, Wychuchana spluwa, Samuraj, Nówka sztuka, Polegam tylko na sobie,
+Szlachetne urodzenie, Człowiek-aligator and Włóczykij continue in Batch 63.
+Compendium/live repoints remain under "Do podpięcia"; no pack or world writes.
+
+The review pass contains twelve exact-selected-reference revisions and fifteen new
+feature icons. Four new icons address current live actor placeholders first; eleven
+continue the origin-feature compendium pass. The processor removes tiny isolated marks
+and fills only tiny enclosed pinholes while preserving structural negative space. Exact
+prompts, two exact-candidate reference sheets, raw atlases, reproducible processor and
+normalized PNG/SVG candidates are under `dev/icons/review/candidates/batch-61/`.
 
 | Atlas | Items |
 |---|---|
-| A | Aktywny system obrony revision B; Ruch revision B; Atak (Mobsprzęt) revision B; Wrażliwość na światło revision B; Karabin laserowy revision B; Dmuchawka revision B; Wymagania; Paszcza; Tylko zwarcie |
-| B | Siódme poty; Fart; Ja już swoje odchorowałem; Grad ołowiu; Coś mi tu śmierdzi; Czas patriotów; Ćwiczenie czyni mistrza; Doktor Quinn; Jeśli ma silnik, to ruszy |
-| C | Pakowanie; Patriota; Wierzę; Wychuchana spluwa; Zawzięty sukinkot; Urodzony morderca; Młynek; Kuchenny Terror; Logika Różnoboczna |
+| A | Ruch revision C; Karabin laserowy revision C; Ćwiczenie czyni mistrza revision B; Grad ołowiu revision B; Ja już swoje odchorowałem revision B; Jeśli ma silnik, to ruszy revision B; Pakowanie revision B; Paszcza revision B; Patriota revision B |
+| B | Urodzony morderca revision B; Wychuchana spluwa revision B; Zawzięty sukinkot revision B; Na symulatorach to działało; Telepata; Przycelowanie; Samuraj; Nówka sztuka; Przedwojenna edukacja |
+| C | Nano-Tech; Dieta cud; Duch pustyni; Polegam tylko na sobie; Ale jazda!; Górnik z dziada pradziada; Szlachetne urodzenie; Człowiek-aligator; Włóczykij |
 
-## Queue (A) — do następnego batcha
+## Batch 62 — 12 approved and installed (A), 4 revisions in Batch 63
+
+Generated as two atlases together with the §F machine-off glyph (17 candidates total).
+Exact prompts, source order and reproducible processors: `review/candidates/batch-62/`.
+The GM approved 13 of the 17 candidates (12 in A and the §F machine-off glyph).
+Installed 2026-10-12: Doba, Rozbiórka, Emiter EMP, Wyłączony and nine Fanty groups
+(all except Zabawka). Handel, Bebeszenie, Szabrowanie and Zabawka continue in Batch 63.
+Production rasters are WEBP, including the SVG's embedded mask. Exact approval
+provenance: `review/candidates/batch-63/installed.json`.
+
+Fanty stems: `slodycze`, `cygaro`, `prasa`, `gra`, `kaseta`, `plyta-cd`, `konsola`,
+`alkohol`, `zabawka`, `papier-toaletowy`. M5 action paths remain exactly as listed below.
 
 | # | File | Item / where it shows up | Suggested prompt content |
 |---|------|--------------------------|---------------------------|
 | 1 | `icons/weapons/emiter_emp.svg` | Emiter EMP (NOE s. 101, Zabójca Maszyn; PLAN_m3_towarzysze.md §7.12) — dziś pożycza `paralyzer.svg` Szokera | Heavy, bulky handheld EMP emitter: a stubby barrel ending in a dish or coil, a battery pack slung under it, cables, a crude grip — homemade, wasteland-built |
+| 2 | `icons/actions/handel.svg` | Handel — przycisk w nagłówku karty (PLAN_m5_postoj.md §7.5) | Two hands exchanging a bundle over a crate — barter, no coins |
+| 3 | `icons/actions/bebeszenie.svg` | Bebeszenie (§7.19) | Butcher's knife and a pair of pliers crossed over a carcass rib outline |
+| 4 | `icons/actions/szabrowanie.svg` | Szabrowanie (§7.16) | Crowbar prying open a battered crate, a few scraps spilling out |
+| 5 | `icons/actions/rozbiorka.svg` | Rozbiórka / recykling (§7.20) | Wrench and a few loose bolts and gears falling apart from a broken device |
+| 6 | `icons/actions/doba.svg` | Doba postoju (§7.11) | Sun half-set over a campfire, a small clock dial in the sky |
+| 7–16 | `icons/fanty/<rodzaj>.svg` | Fanty (NOE s. 132–133; §7.10) — jedna ikona na grupę: słodycze (batonik/chipsy/czekolada), cygaro, prasa (pisemko/komiks/książka), gra (karty/planszówka), kaseta/VHS, płyta CD, konsola/cartridge, alkohol, zabawka (maskotka/klocki/lalka/autko RC), papier toaletowy | One pre-war luxury object per glyph, recognisable at 24 px |
+
+## Batch 63 — 19 approved and installed, 8 revisions in Batch 64
+
+Thirteen exact-selected-reference revisions from Batches 61–62, twelve remaining
+canonical origin features, and two Sztuczki. New gaps were checked against the
+canonical catalog, existing icon paths and all review cards. Generic prompts,
+reference selections and archived GM notes: `review/candidates/batch-63/`.
+Nineteen exact-selected approvals were installed as WEBP/SVG pairs on 2026-10-12.
+Approval provenance: `review/candidates/batch-64/installed.json`. Wychuchana spluwa,
+Samuraj, Bebeszenie, Szabrowanie, Chodźmy, na pewno już utonął, Gambling we krwi,
+Wiesz, zjadłem własnego psa and Hi-Tech continue in Batch 64. Old selections and
+notes are preserved before the new candidates become pending.
+
+| Atlas | Candidates |
+|---|---|
+| A | Handel revision B; Bebeszenie revision B; Szabrowanie revision B; Zabawka revision B; Szlachetne urodzenie revision B; Człowiek-aligator revision B; Włóczykij revision B; Polegam tylko na sobie revision B; Nówka sztuka revision B |
+| B | Ruch revision D; Paszcza revision C; Wychuchana spluwa revision C; Samuraj revision B (targeted correction); Kwas w żyłach; Chodźmy, na pewno już utonął; Edukacja; Gambling we krwi; Wiesz, zjadłem własnego psa |
+| C | Hi-Tech; Moloch? Coś słyszałem; Cholerny kaznodzieja; Przed wojną wszystko było lepiej; Człowiek zwany koniem; Zdrowa okolica; Hazardzista; Aramis; Aspiryna i Miętusy |
+
+New output stems under `icons/abilities/`: `kwas-w-zylach`,
+`chodzmy-na-pewno-juz-utonal`, `edukacja`, `gambling-we-krwi`,
+`zjadlem-wlasnego-psa`, `hi-tech`, `moloch-cos-slyszalem`,
+`cholerny-kaznodzieja`, `przed-wojna-wszystko-bylo-lepiej`,
+`czlowiek-zwany-koniem`, `zdrowa-okolica`, `hazardzista`, `aramis`,
+`aspiryna-i-mietusy`. WEBP/SVG pairs only after GM approval.
+
+## Batch 64 — 16 approved and installed, 11 revisions in Batch 65
+
+Eight exact-selected-reference revisions and nineteen new canonical Sztuczki.
+Every new gap was checked against its canonical key, proposed slug and all existing
+review cards. Source notes, selections, exact prompts and processors are archived in
+`review/candidates/batch-64/`. The saved review approved fifteen glyphs, now installed
+as exact-pixel WEBP/SVG pairs. `reviewed.json` preserves the initial 27 saved decisions;
+`reviewed-installed.json` lists those fifteen deliveries and source/output hashes.
+Kuloodporność was approved shortly afterwards and is also installed; its saved
+decision and delivery are in `reviewed-addendum.json` and
+`reviewed-addendum-installed.json`. Eleven revision requests continue in Batch 65;
+their exact old selections and notes are archived before replacement.
+
+Approved: Wychuchana spluwa, Gambling we krwi, Hi-Tech, Bez trzymanki, Ciszej niż cień,
+Człowiek-pająk, Fabrykator, Grenadier, Immunitet, Karateka, Ławnik, Miotacz,
+Mistrz broni białej, Neo, Nożownik and Kuloodporność. Code/pack/world repoints remain for the GM.
+
+| Revision carried into Batch 65 | Required change from the saved GM review |
+|---|---|
+| Samuraj | Keep the katana hand; turn the empty off hand palm upward with slightly curled fingers, a "come here" gesture. |
+| Bebeszenie | Regenerate completely: intact crossed pliers and a butcher's knife, with a rib outline above. Broad plausible pliers handles and jaws; no broken or fused tool. |
+| Szabrowanie | Separate the complete crowbar silhouette from the crate silhouette; its tip must not merge into the crate. |
+| Chodźmy, na pewno już utonął | Keep the improved legs; restore the missing hand with complete human anatomy. |
+| Wiesz, zjadłem własnego psa | Correct the hatchet blade orientation, move closer to the face, make the head bald and retain the beard. |
+| Barbarka | Asymmetric headbutt: one man delivers the blow, the other receives the nose impact; no gore. |
+| Benzyna zamiast krwi | Remove the seatbelt and add a wild, menacing driver's grin; keep the figure generic. |
+| Fachowiec | Show arms descending naturally from the shoulders; separate both hands clearly from the workbench. |
+| Jest zajebiście | Make the raised hand a thumbs-up and give the speaker a relaxed smile. |
+| Mistrz walki wręcz | Correct the wrist-grapple anatomy and remove the apparent extra pair of hands. |
+| Muzyk | Replace the lower-left blob with a distinct audience-member silhouette. |
+
+Exact selected references and verbatim review notes are in `reviewed.json`;
+`remaining-items.json` preserves the eleven cards as they stood after installation.
+Batch 65 selects their new replacements as pending, retaining these old candidates.
+
+| Atlas | Candidates |
+|---|---|
+| A | Wychuchana spluwa revision D; Samuraj revision C; Bebeszenie revision C; Szabrowanie revision C; Chodźmy, na pewno już utonął revision B; Gambling we krwi revision B; Wiesz, zjadłem własnego psa revision B; Hi-Tech revision B; Barbarka |
+| B | Bez trzymanki; Benzyna zamiast krwi; Ciszej niż cień; Człowiek-pająk; Fabrykator; Fachowiec; Grenadier; Immunitet; Jest zajebiście |
+| C | Karateka; Kuloodporność; Ławnik; Miotacz; Mistrz broni białej; Mistrz walki wręcz; Muzyk; Neo; Nożownik |
+
+| File | Item / delivery status | Original prompt content |
+|---|---|---|
+| `icons/abilities/barbarka.svg` | Barbarka — revision queued | One rugged fighter delivers a headbutt: two human head-and-shoulder profiles meet forehead to forehead with one broad impact burst between them. Two intact skulls, no gore or tiny detail. |
+| `icons/abilities/bez-trzymanki.svg` | Bez trzymanki — **done** | One rider balances a practical motorcycle with BOTH hands clearly off its handlebars, arms held out in a controlled riding posture. One coherent bike, two wheels, broad simple frame; no stunt circus pose or tiny mechanics. |
+| `icons/abilities/benzyna-zamiast-krwi.svg` | Benzyna zamiast krwi — revision queued | One alert driver grips a steering wheel and protects a compact car silhouette from a single incoming impact. The driver's broad shoulder blocks the impact near the car. Show vehicle protection through practical shapes, no heart, blood, logos or floating cog. |
+| `icons/abilities/ciszej-niz-cien.svg` | Ciszej niż cień — **done** | One crouched survivor moves quietly close to a low broken wall, boot lifted lightly above the ground. Its broad shadow contour stays close behind. A spare stealth silhouette, no crossed-out alarm, speech bubble or tiny footprints. |
+| `icons/abilities/czlowiek-pajak.svg` | Człowiek-pająk — **done** | One practical wasteland climber climbs a near-vertical wall using two hands and two boots, a plain rope hanging nearby. Clear bent limbs and one firm handhold. Ordinary gear, no superhero costume, spider emblem or recognizable fictional character. |
+| `icons/abilities/fabrykator.svg` | Fabrykator — **done** | Two sturdy hands assemble a compact device clamped in a bench vise, one hand steadies the piece while the other tightens a large bolt with a wrench. Broad real workshop shapes, no generic giant cog or toy exploded stack. |
+| `icons/abilities/fachowiec.svg` | Fachowiec — revision queued | Two capable hands hold two different real tools over a spare workbench: a wrench in one and pliers in the other. Balanced practical tool silhouettes with broad open space, no third tool or decorative badges. |
+| `icons/abilities/grenadier.svg` | Grenadier — **done** | One athletic survivor immediately throws a retrieved grenade with an outstretched arm and one broad throw arc; one plain grenade at the end of the arc. Clear complete hand and grenade silhouette, no explosion or instructions. |
+| `icons/abilities/immunitet.svg` | Immunitet — **done** | One large plain medical shield with a broad cross blocks three simple disease-particle blobs outside it. Crisp joined shield shape and restrained negative space, no tiny plus marks, letters or gore. |
+| `icons/abilities/jest-zajebiscie.svg` | Jest zajebiście — revision queued | One confident charismatic survivor raises an open hand while addressing two attentive allies shown as small shoulder silhouettes. A clear encouraging speech posture, no text-filled speech bubble, medals or floating symbols. |
+| `icons/abilities/karateka.svg` | Karateka — **done** | One unarmed fighter makes a strong forward kick while guarding with two hands. Exactly one human body, two arms, two legs and one clear extended foot. Practical fighting clothes, no superhero or mystical glow. |
+| `icons/abilities/kuloodpornosc.svg` | Kuloodporność — **done** | One broad bare unarmoured torso leans away as a single bullet skims harmlessly along its side with one short curved streak. Strong shoulder and chest outline, no armour plates, shield, blood or superhero costume. |
+| `icons/abilities/lawnik.svg` | Ławnik — **done** | One powerful fighter swings a heavy wooden bench as an improvised melee weapon, gripping the large top plank with both hands. A thick plank and two stout bench supports dominate; no courtroom objects, tiny debris or gore. |
+| `icons/abilities/miotacz.svg` | Miotacz — **done** | One strong hand launches a single practical throwing knife through one broad ballistic arc. The knife's blade and handle are distinct, broad and readable. No extra knife, arrow, target label or tiny speed marks. |
+| `icons/abilities/mistrz-broni-bialej.svg` | Mistrz broni białej — **done** | One firm hand drives a practical straight sword through a stout practice post, leaving one broad diagonal cut. The long blade, hand and split post read cleanly. No duel crowd, badge, wreath or famous character. |
+| `icons/abilities/mistrz-walki-wrecz.svg` | Mistrz walki wręcz — revision queued | Two fighters' forearms meet in a close defensive maneuver: one hand redirects the other fighter's attacking wrist while the free forearm stays in guard. Broad complete hands and wrists with clear grip, no extra fingers or weapons. |
+| `icons/abilities/muzyk.svg` | Muzyk — revision queued | One anonymous survivor plays an acoustic guitar, one hand on the neck and one strumming above the sound hole, beside two small allied head silhouettes. Plain instrument, two complete hands, no music notes, lettering or famous musician. |
+| `icons/abilities/neo.svg` | Neo — **done** | One generic survivor leans sharply backwards to dodge a single bullet passing just in front of the chest, with one broad trajectory streak. Ordinary wasteland clothing, no sunglasses, famous film character, black trenchcoat or movie logo. |
+| `icons/abilities/nozownik.svg` | Nożownik — **done** | Two practical combat knives in two strong hands: one knife thrusts forward and the other is held close in a reverse grip for a follow-up strike. Exactly two hands and two knives, spare clear negative space, no gore or extra blades. |
+
+Production paths pair each approved `.svg` with a lossless `.webp`; SVG masks
+embed WEBP. Canonical camelCase Sztuczka keys are recorded separately as `catalogKey`
+in `batch.json`, so later GM repoints can map them to these exact file stems.
+
+## Batch 65 — 18 approved and installed, 9 returned items in Batch 66
+
+Eighteen exact-selected glyphs are installed as lossless WEBP and theme-aware SVG
+masks. `review/candidates/batch-66/installed.json` records their paths, source
+selections and hashes; `decisions.json` preserves all 27 incoming decisions.
+Eight items requested revisions; Bebeszenie was rejected for repeated bent-handle
+anatomy and receives a fresh isolated redraw. No Batch 65 decision is pending.
+
+| Delivered file | Item / status |
+|---|---|
+| `icons/abilities/samuraj.svg` + `.webp` | Samuraj — **done** |
+| `icons/actions/szabrowanie.svg` + `.webp` | Szabrowanie — **done** |
+| `icons/abilities/chodzmy-na-pewno-juz-utonal.svg` + `.webp` | Chodźmy, na pewno już utonął — **done** |
+| `icons/abilities/zjadlem-wlasnego-psa.svg` + `.webp` | Wiesz, zjadłem własnego psa — **done** |
+| `icons/abilities/benzyna-zamiast-krwi.svg` + `.webp` | Benzyna zamiast krwi — **done** |
+| `icons/abilities/fachowiec.svg` + `.webp` | Fachowiec — **done** |
+| `icons/abilities/jest-zajebiscie.svg` + `.webp` | Jest zajebiście — **done** |
+| `icons/abilities/muzyk.svg` + `.webp` | Muzyk — **done** |
+| `icons/abilities/pewna-reka.svg` + `.webp` | Pewna ręka — **done** |
+| `icons/abilities/plug-and-play.svg` + `.webp` | Plug & Play — **done** |
+| `icons/abilities/przydasie.svg` + `.webp` | Przydasie — **done** |
+| `icons/abilities/robin-hood.svg` + `.webp` | Robin Hood — **done** |
+| `icons/abilities/rodeo.svg` + `.webp` | Rodeo — **done** |
+| `icons/abilities/rozroba.svg` + `.webp` | Rozróba — **done** |
+| `icons/abilities/ruchome-gniazdo-ckm.svg` + `.webp` | Ruchome gniazdo CKM — **done** |
+| `icons/abilities/snajper.svg` + `.webp` | Snajper — **done** |
+| `icons/abilities/szachista.svg` + `.webp` | Szachista — **done** |
+| `icons/abilities/szkolenie-w-ciezkim-pancerzu.svg` + `.webp` | Szkolenie w ciężkim pancerzu — **done** |
+
+| Returned item | Saved GM request |
+|---|---|
+| Barbarka (revise) | Close - now the man on the left is hitting the jaw. Adjust their relative heights so the contact is FOREHEAD ON NOSE (left on right) |
+| Mistrz walki wręcz (revise) | There's an unnecesary line separating the wrist of the lower hand |
+| Padnij/Powstań (revise) | Add arrows indicating that the character just went prone and is now standing up |
+| Pancerny (revise) | The image should show the ball reflecting off the armor, in a V-like fashion, not an I-like way |
+| Pan Plaster (revise) | The rest of the bandaged hand disappears. Redraw the image from a slightly different perspective. |
+| Pierwotny instynkt (revise) | Slightly too anime-like |
+| Siekierezada (revise) | It's the hands that should cross, not the axes. |
+| Szkolenie w broni (revise) | Remove the lower hand |
+| Bebeszenie (reject) | Same error - again - the pliers have one handle straight, the second at a 90 degree angle. |
+
+## Batch 66 — 10 approved and installed, 6 revisions in Batch 67
+
+Eight exact-reference edits, one completely fresh isolated Bebeszenie redraw,
+and the last seven untouched canonical Sztuczki. The rejected pliers glyph is
+archived for diagnosis and is excluded from generation inputs. Generic prompts,
+exact selections, processors and the registered cards are in
+`review/candidates/batch-66/`. Ten exact-approved WEBP/SVG pairs are now installed.
+`reviewed.json` archives all sixteen current decisions and selections;
+`reviewed-installed.json` records delivered paths and hashes. Barbarka deliberately
+uses the older `batch65-revision` candidate selected by the GM. All other deliveries
+use their saved Batch 66 selections. Six revisions continue in Batch 67;
+their exact prior selections and notes are archived before replacement.
+
+| Source | Candidates |
+|---|---|
+| Atlas A, cells 1–8 | Barbarka revision C; Mistrz walki wręcz revision C; Padnij/Powstań revision B; Pancerny revision B; Pan Plaster revision B; Pierwotny instynkt revision B; Siekierezada revision B; Szkolenie w broni revision B |
+| Isolated redraw, replacing A9 | Bebeszenie revision E — two straight symmetric pliers handles, one pivot, one separate knife and a simple rib outline |
+| Atlas B, cells 1–7 | Szkolenie w średnim pancerzu; Szturmowiec; Szybki Bill; Ucz się, ucz; Ukryty cel; Wrestler; Złomiarz |
+
+| Final SVG (WEBP paired after approval) | Item / delivery status | Original Batch 66 prompt |
+|---|---|---|
+| `icons/abilities/barbarka.svg` | Barbarka — **done** | Raise the LEFT attacker's head relative to the right victim by about one-third of a head height, until the center of the attacker's FOREHEAD just above his eyebrows contacts the RIGHT victim's NOSE bridge/tip. Forehead-to-nose is the ONLY contact point, never jaw, chin or forehead-to-forehead. Keep the left attacker leaning forward, right victim recoiling, two asymmetric complete head profiles and one small impact mark at the victim's nose. No gore. |
+| `icons/abilities/mistrz-walki-wrecz.svg` | Mistrz walki wręcz — **done** | Keep the exact two-forearm, two-hand wrist-grapple pose. Remove ONLY the unnecessary BLACK LINE across the lower gripping hand's wrist, so that hand joins its own forearm in ONE CONTINUOUS WHITE silhouette. Retain the useful separation of the opponent's wrist from the gripping fingers. No severed wrist, bracelet/seam at that wrist, extra hand or altered grip. |
+| `icons/abilities/padnij-powstan.svg` | Padnij/Powstań — **done** | Keep the rising survivor's kneeling-to-standing pose and whole body. ADD two simple broad directional arrows: a DOWNWARD arrow beside the left shoulder toward the ground indicates dropping prone, and an UPWARD arrow beside the right shoulder indicates immediately getting up. Each arrow has one clear arrowhead and one short shaft, separated from the person. These arrows are explicitly requested; no duplicate ghost bodies, labels or decorative symbols. |
+| `icons/abilities/pancerny.svg` | Pancerny — **done** | Keep the broad heavy armour breastplate and shoulder guards. Replace the straight impact marks with ONE round projectile ricocheting off the outer plate. Show an incoming diagonal path from upper-right toward the armour, then an outgoing path toward lower-right away from the SAME contact point: a clearly angled V/corner bounce, no straight I-shaped trajectory through the armour. Put the round ball on the outgoing path, one small contact burst on the plate, no penetration, shield, blood or text. |
+| `icons/abilities/pan-plaster.svg` | Pan Plaster | Redraw from a slightly elevated three-quarter perspective so the PATIENT'S complete forearm, wrist and HAND remain visible. The forearm lies diagonally across the center; the patient's open hand with all five fingers is fully visible toward upper-right, naturally connected to the wrist. Two separate medic hands approach from lower-left and apply one broad dressing to the forearm. Keep a small open first-aid pouch below. Exactly three hands total, no amputated wrist, missing patient hand, merged glove, injury or blood. |
+| `icons/abilities/pierwotny-instynkt.svg` | Pierwotny instynkt | Keep the alert head turn, ready forearm and broad disturbance arcs. Replace the anime-like young face and spiky hair with a rugged MIDDLE-AGED adult survivor in a sober western utilitarian stencil style: close-cropped hair, realistic small watchful eye, firm brow, square natural jaw and restrained stubble. No manga/anime eyes, glossy hair spikes, cute youthful face, supernatural halo or exaggerated cartoon features. |
+| `icons/abilities/siekierezada.svg` | Siekierezada — **done** | Cross the TWO FOREARMS/WRISTS into an X at the lower center, while the TWO HATCHETS remain separate and UPRIGHT at upper-left and upper-right. The forearm from lower-left reaches the hand at upper-right; the forearm from lower-right reaches the hand at upper-left. Exactly two complete hands each grip one hatchet. Both straight axe handles stay nearly vertical, never crossing each other; blades face outward. Broad black overlap contour at the crossed arms, no extra limb, crossed axe heads or gore. |
+| `icons/abilities/szkolenie-w-broni.svg` | Szkolenie w broni — **done** | Remove ONLY the LOWEST supporting hand and its forearm from the selected knife-training icon. Keep the upper learner hand that firmly grips the knife, the upper instructor hand pointing toward the training post, and the complete solid post. Exactly TWO hands remain: one grips the knife, one points. No lower supporting wrist/stump, additional blade or other change. |
+| `icons/actions/bebeszenie.svg` | Bebeszenie | Completely regenerate as an ISOLATED glyph with no defective prior image supplied. One intact real pair of combination pliers crosses one butcher knife below a simple rib outline. Both pliers handles must be fully visible, straight, continuous and symmetric below the pivot, pointing down at a small angle; neither handle may bend 90 degrees or join the knife. Two coherent jaws above one pivot. No animal skull, additional tool, hand or gore. |
+| `icons/abilities/szkolenie-w-srednim-pancerzu.svg` | Szkolenie w średnim pancerzu (`szkolenieWSrednimPancerzu`) — **done** | One ordinary trainee secures a broad strap on a practical medium armour vest, with one hand pulling the strap and the other steadying it. |
+| `icons/abilities/szturmowiec.svg` | Szturmowiec (`szturmowiec`) — **done** | One practical adult rifleman fires a controlled short burst while advancing in a compact standing stance. |
+| `icons/abilities/szybki-bill.svg` | Szybki Bill (`szybkiBill`) | One generic athletic wasteland survivor takes a long, fast running stride, one leg extended forward and the other trailing, arms pumping naturally. |
+| `icons/abilities/ucz-sie-ucz.svg` | Ucz się, ucz (`uczSieUcz`) | Two adult hands study an open practical manual on a simple desk beside one plain training tool. |
+| `icons/abilities/ukryty-cel.svg` | Ukryty cel (`ukrytyCel`) | One anonymous rifleman aims past the edge of a broad broken cover slab toward one partially exposed opposing head-and-shoulder silhouette. |
+| `icons/abilities/wrestler.svg` | Wrestler (`wrestler`) — **done** | Two ordinary adult fighters in one anatomically coherent standing wrestling hold: one firmly controls the opponent's upper body from behind, two visible forearms wrap around the torso without covering the neck. |
+| `icons/abilities/zlomiarz.svg` | Złomiarz (`zlomiarz`) — **done** | One practical salvager crouches beside a small tray of metal scrap and examines one useful alternator-like component with two hands. |
+
+All 36 canonical origin abilities have dedicated glyph files. All 53 canonical
+Sztuczki have either delivered glyphs (48) or revision requests (5). Bebeszenie is
+the sixth remaining revision and the last M5 action glyph in review. No untouched
+origin/Sztuczka icon gaps remain. The broader physical-item audit also adds
+three missing fuel-grade icons to Batch 67.
+
+### Revisions carried into Batch 67
+
+Exact selected sources and verbatim feedback are preserved in `reviewed.json`;
+`reviewed-remaining-items.json` archives the six cards before their replacement.
+Batch 67 supplies new pending candidates, retaining these old sources and notes.
+
+| File | Item | Required change from the saved GM review |
+|---|---|---|
+| `icons/actions/bebeszenie.svg` | Bebeszenie | Now the composition is awkward, with a tiny little ribcage above large pliers and a knife. My suggestion is to split all three elements - no more crossing. Butcher's knife, ribcage, small lightning splitting the image, stack of PCBs, pliers |
+| `icons/abilities/pan-plaster.svg` | Pan Plaster | Rotate the hand being bandaged by 90 degrees left (so it is opposite diagonal). Do not modify the pair of hands performing the medical procedure. |
+| `icons/abilities/pierwotny-instynkt.svg` | Pierwotny instynkt | Okay better, but now the lines of the face have too much detail. Keep the expression, simplify the lines. |
+| `icons/abilities/szybki-bill.svg` | Szybki Bill | Add lines to the left of the character showing how fast he is |
+| `icons/abilities/ucz-sie-ucz.svg` | Ucz się, ucz | Remove the wrench. Add abstract lines symbolizing text on the left page. No readable writing. |
+| `icons/abilities/ukryty-cel.svg` | Ukryty cel | Put distance between the shooter and the target. Show the shot going through the cover and hitting the figure behind it. |
+
+## Batch 67 — 7 approved and installed, 2 revisions
+
+Delivered 2026-10-13: exact saved selections as 256×256 white-alpha WEBP
+and theme-aware SVG wrappers embedding WEBP. Full decisions and hashes:
+`review/candidates/batch-67/reviewed.json` and `reviewed-installed.json`.
+Saved feedback is unchanged; approved cards are resolved.
+
+| Item | Final SVG (+ WEBP) | Delivery |
+|---|---|---|
+| Bebeszenie | `icons/actions/bebeszenie.svg` | **done** |
+| Pan Plaster | `icons/abilities/pan-plaster.svg` | Revision required |
+| Pierwotny instynkt | `icons/abilities/pierwotny-instynkt.svg` | **done** |
+| Szybki Bill | `icons/abilities/szybki-bill.svg` | **done** |
+| Ucz się, ucz | `icons/abilities/ucz-sie-ucz.svg` | **done** |
+| Ukryty cel | `icons/abilities/ukryty-cel.svg` | **done** |
+| Paliwo dobre (5 l) | `icons/items/loot/paliwo_dobre.svg` | **done** |
+| Paliwo przeciętne (5 l) | `icons/items/loot/paliwo_przecietne.svg` | **done** |
+| Paliwo chrzczone (5 l) | `icons/items/loot/paliwo_chrzczone.svg` | Revision required |
+
+### Saved requests for Batch 68
+
+| Item | Required change from the exact selected Batch 67 candidate |
+|---|---|
+| Pan Plaster | Alright, another 180 degrees oughta do it. Now the hand looks like it's coming from the first aid box. |
+| Paliwo chrzczone (5 l) | Get rid of the inspection window, and make it look like a cheap plastic orange juice jug |
+
+Good and average fuel art is ready for the GM mappings below. Adulterated
+fuel waits for fresh approval. Medicine art needs no regeneration. Bebeszenie
+uses the exact M5 filename and needs no wiring. No packs or world changes.
+
+## Batch 68 — both approved and installed
+
+Delivered 2026-10-13: exact saved Pan Plaster and adulterated-fuel selections
+as lossless WEBP and theme-aware SVG wrappers. Decisions, source/output hashes
+and complete validation: `review/candidates/batch-68/reviewed.json`,
+`reviewed-installed.json`, `accept_current_review.py --check`.
+
+| Item | Final SVG (+ WEBP) | Delivery |
+|---|---|---|
+| Pan Plaster | `icons/abilities/pan-plaster.svg` | **done** |
+| Paliwo chrzczone (5 l) | `icons/items/loot/paliwo_chrzczone.svg` | **done** |
+
+All 342 existing review cards are resolved. The three fuel-grade icons are
+ready for GM resolver mappings; Pan Plaster remains an older Sztuczka
+repoint/rebuild task. No packs or world documents were changed.
 
 ## How an item gets added here
 
@@ -368,6 +647,11 @@ Batching: same 9-per-grid rule as class A, separate grid.
 
 ## Queue (B) — 9/9, gotowy do wygenerowania
 
+**Briefy gotowe 2026-10-11:** [dev/art/m5/BRIEFS.md](../art/m5/BRIEFS.md), zestaw
+`objekty`. MG generuje i edytuje; źródła `dev/art/m5/in/objekty/<key>.png`.
+`python dev/art/m5/pack.py` przycina do alpha i konwertuje do `vfx/<key>.webp`.
+Żaden z tych plików nie został jeszcze dostarczony.
+
 Ordered by how long the object stays on the map. Thrown grenades lie there until the end of the
 turn; placed charges can lie there for hours of game time.
 
@@ -402,17 +686,28 @@ Freesound CC0 (przeglądarka → podpisany URL → ffmpeg → ogg), wpis w `CRED
 sloty są w `scripts/production/oprawa.mjs` (`PRACA`, `ZDARZENIA`) — pusty slot (`null`) gra ciszę.
 Część ma dziś tymczasowy zamiennik z plików, które już są w repo.
 
-| # | Slot | Plik docelowy | Dziś | Czego szukać |
-|---|------|---------------|------|--------------|
-| 1 | praca: kucie (kowal) | `sounds/produkcja/kucie.ogg` | `melee/degrade_chip.ogg` | kilka uderzeń młotka o kowadło, 2–3 s |
-| 2 | praca: warsztat (mechanik) | `sounds/produkcja/warsztat.ogg` | cisza | klucz grzechoczący, dokręcanie śruby |
-| 3 | praca: lutowanie (elektronik, haker) | `sounds/produkcja/lutowanie.ogg` | cisza | syk lutownicy, klikanie klawiatury |
-| 4 | praca: chemia (chemik, aptekarz, gorzelnik) | `sounds/produkcja/chemia.ogg` | `gadzety/dezynfekcja.ogg` | bulgotanie, brzęk szkła laboratoryjnego |
-| 5 | praca: szycie (krawiec) | `sounds/produkcja/szycie.ogg` | cisza | nożyce, przeciąganie nici przez skórę |
-| 6 | praca: drewno (stolarz) | `sounds/produkcja/drewno.ogg` | cisza | piłowanie, strugarka |
-| 7 | ukończenie | `sounds/produkcja/gotowe.ogg` | cisza | krótki, satysfakcjonujący „klik-zatrzask” + metaliczny dźwięk |
-| 8 | porażka / porzucenie | `sounds/produkcja/porazka.ogg` | cisza | coś pęka, sypie się na podłogę |
-| 9 | Szybka produkcja („iskra”) | `sounds/produkcja/iskra.ogg` | `explosives/detonator_switch.ogg` | elektryczny trzask iskry, bardzo krótki |
+**Dostarczone 2026-10-11 — wszystkie 14 plików:** Freesound CC0, oryginalne nagrania
+pobrane przez zalogowaną przeglądarkę → mono 44.1 kHz Vorbis OGG. Źródła, autorzy
+i licencje: [CREDITS.md](../../CREDITS.md); konwersja i pomiary:
+[dev/art/m5/AUDIO.md](../art/m5/AUDIO.md). Assety gotowe; kolumna „Dziś” poniżej
+opisuje dotychczasowe sloty. Podpięcie starszych slotów produkcji pozostaje dla MG.
+
+| # | Slot | Plik docelowy | Dziś | Czego szukać | Stan assetu |
+|---|------|---------------|------|--------------|---|
+| 1 | praca: kucie (kowal) | `sounds/produkcja/kucie.ogg` | `melee/degrade_chip.ogg` | kilka uderzeń młotka o kowadło, 2–3 s | **Gotowe 2026-10-11** |
+| 2 | praca: warsztat (mechanik) | `sounds/produkcja/warsztat.ogg` | cisza | klucz grzechoczący, dokręcanie śruby | **Gotowe 2026-10-11** |
+| 3 | praca: lutowanie (elektronik, haker) | `sounds/produkcja/lutowanie.ogg` | cisza | syk lutownicy, klikanie klawiatury | **Gotowe 2026-10-11** |
+| 4 | praca: chemia (chemik, aptekarz, gorzelnik) | `sounds/produkcja/chemia.ogg` | `gadzety/dezynfekcja.ogg` | bulgotanie, brzęk szkła laboratoryjnego | **Gotowe 2026-10-11** |
+| 5 | praca: szycie (krawiec) | `sounds/produkcja/szycie.ogg` | cisza | nożyce, przeciąganie nici przez skórę | **Gotowe 2026-10-11** |
+| 6 | praca: drewno (stolarz) | `sounds/produkcja/drewno.ogg` | cisza | piłowanie, strugarka | **Gotowe 2026-10-11** |
+| 7 | ukończenie | `sounds/produkcja/gotowe.ogg` | cisza | krótki, satysfakcjonujący „klik-zatrzask” + metaliczny dźwięk | **Gotowe 2026-10-11** |
+| 8 | porażka / porzucenie | `sounds/produkcja/porazka.ogg` | cisza | coś pęka, sypie się na podłogę | **Gotowe 2026-10-11** |
+| 9 | Szybka produkcja („iskra”) | `sounds/produkcja/iskra.ogg` | `explosives/detonator_switch.ogg` | elektryczny trzask iskry, bardzo krótki | **Gotowe 2026-10-11** |
+| 10 | szabrowanie (PLAN_m5_postoj.md §7.16) | `sounds/postoj/szabrowanie.ogg` | brak slotu | przekopywanie gruzu, przesuwanie blach, 2–3 s | **Gotowe 2026-10-11** |
+| 11 | bebeszenie: organiczne (§7.19) | `sounds/postoj/bebeszenie-mokre.ogg` | brak slotu | mokre cięcie, chrząstka | **Gotowe 2026-10-11** |
+| 12 | bebeszenie: maszyna (§7.19) | `sounds/postoj/bebeszenie-metal.ogg` | brak slotu | odkręcanie, wyrywanie płyty, iskra | **Gotowe 2026-10-11** |
+| 13 | odliczanie autodestrukcji (§7.18) | `sounds/postoj/autodestrukcja-beep.ogg` | brak slotu | elektroniczny pisk alarmowy, krótki, do zapętlenia | **Gotowe 2026-10-11** |
+| 14 | zatwierdzona wymiana (§7.6) | `sounds/postoj/wymiana.ogg` | brak slotu | stuknięcie skrzynki o ladę, krótki pomruk zgody | **Gotowe 2026-10-11** |
 
 ---
 
@@ -437,6 +732,10 @@ anchors re-measured in `scripts/config/doll-anchors.mjs`. The hand-drawn stand-i
 
 # E. Żetony towarzyszy (top-down)
 
+**Briefy gotowe 2026-10-11:** [dev/art/m5/BRIEFS.md](../art/m5/BRIEFS.md), zestaw
+`towarzysze`; źródła `dev/art/m5/in/towarzysze/<key>.png`. Pozostają w kolejce do
+wygenerowania i ręcznej edycji przez MG; packer zachowuje proporcje Mały / Średni.
+
 Szablony paczki `towarzysze` (PLAN_m3_towarzysze.md §7.13, dodane 2026-10-10) biorą żeton jak Bestiariusz:
 `tokens/<id>.webp` (własna grafika, najwyższy priorytet) → `tokens/aliases.json` → zaślepka. Dziś żadna z
 tych dróg nie istnieje dla `towarzysz-*`, więc żeton to portret. Styl i proporcje: `tokens/PROMPT.md`
@@ -458,9 +757,164 @@ Drony mają już żetony i portrety (PLAN_m3_towarzysze.md §11, E8a). Zostają 
 
 # F. Ikony stanów (białe glify, jak `icons/statuses/`)
 
+**Batch 62 — zatwierdzony i dostarczony 2026-10-12:** `icons/statuses/wylaczony.svg`
+i `.webp` z atlasu A. Repoint definicji stanu pozostaje dla MG; bez zmiany świata.
+
 Stany modułu bez własnej grafiki — dziś pożyczona ikona rdzenia. Styl: biały glif na przezroczystym tle, jak
 `icons/statuses/zranienie-*.svg` (`icons/statuses/ASSETS.md`); SVG reagujący na motyw.
 
 | # | Plik | Stan | Opis do promptu |
 |---|------|------|-----------------|
 | 1 | `icons/statuses/wylaczony.svg` | Wyłączony (maszyna nie działa — PLAN_m3_towarzysze.md §7.4; dziś `icons/svg/lightning.svg`) | Symbol zasilania (koło z kreską) przekreślony albo przygaszony, bez tekstu |
+
+---
+
+# G. Ilustracje teatru wyobraźni (PLAN_m5_postoj.md §7.23, D42–D45, dodane 2026-10-11)
+
+**Briefy gotowe 2026-10-11:** wszystkie 24 obrazy mają osobny gotowy prompt,
+przeznaczenie, rozmiar wyświetlania, kadrowanie i dokładny drop point w
+[dev/art/m5/BRIEFS.md](../art/m5/BRIEFS.md). Kolejność: handlarze + utrzymanie →
+obozy → ruiny. MG generuje obrazy w DALL-E i ręcznie edytuje źródła; agent ich nie
+generuje. Zapis: `dev/art/m5/in/<zestaw>/<klucz>.png`; pakowanie:
+`python dev/art/m5/pack.py` (albo `--asset handlarze/bron`), kontrola: `--check`.
+Dostarczone 2026-10-12: siedem portretów handlarzy (600×800 RGB WEBP) i trzy
+bannery utrzymania (1200×400 RGB WEBP). Źródła MG przetworzono wyłącznie przez
+crop/resize/konwersję; raport i hashe: `dev/art/m5/delivered-2026-10-12.json`.
+Obozy i ruiny pozostają otwarte. Nazwy docelowe nie zmieniają się.
+
+Obraz tylko tam, gdzie nie ma mapy: okna i karty graczy na postoju, w dziczy i przy szabrowaniu. Jeden obraz na
+powierzchnię, czysta dekoracja — brak pliku = brak obrazu. Obrazy ogólne (bar pasuje do każdego baru); MG może
+każdy nadpisać własnym. **Nazwa pliku = okablowanie** (`config/ilustracje.mjs`).
+
+**Styl (D44), wspólny dla całej sekcji:** malowana ilustracja w duchu kart obozu z Baldur's Gate 3 — ciepłe
+źródło światła (ognisko, lampa, neon) przeciw ponuremu, postapokaliptycznemu pustkowiu Neuroshimy. Bez tekstu,
+bez rozpoznawalnych postaci na pierwszym planie (sylwetki w tle dopuszczalne), bez gore. WEBP.
+**Formaty:** sceny 3:1 (1200 × 400), portrety handlarzy 3:4 (600 × 800), WEBP bez alpha.
+Malowane obrazy: osobna generacja MG dla każdego promptu; atlasy po 9 dotyczą tylko glifów.
+
+**Utrzymanie** — okno Doba (zmienia się przy wyborze poziomu), karta podsumowania doby, przeskok. 3:1.
+
+| # | Plik | Poziom | Opis do promptu |
+|---|------|--------|-----------------|
+| 1 | `ui/postoj/utrzymanie-nedzny.webp` | **done** — Nędzny | Barłóg w ruinie: szmaty na betonie, puszka nad małym ogniskiem, przeciekający dach |
+| 2 | `ui/postoj/utrzymanie-normalny.webp` | **done** — Normalny | Skromna izba: prycza, stół z miską gulaszu, lampa naftowa, zabite deskami okno |
+| 3 | `ui/postoj/utrzymanie-bogaty.webp` | **done** — Bogaty | Wygodna komnata: łóżko z kocem, butelka przedwojennego trunku, gramofon, ciepłe światło |
+
+**Obóz wg biomu** — okna KO / DO w dziczy i Doba poza miejscowością; biom z podróży drużyny. 3:1, noc, ognisko.
+
+| # | Plik | Biomy | Opis do promptu |
+|---|------|-------|-----------------|
+| 4 | `ui/oboz/pustynia.webp` | Pustynia | Ognisko za wrakiem ciężarówki, wydmy, rozgwieżdżone niebo |
+| 5 | `ui/oboz/preria.webp` | Preria | Obóz w wysokiej trawie przy zardzewiałym wiatraku, burza na horyzoncie |
+| 6 | `ui/oboz/las.webp` | Las, Neodżungla | Ognisko między potężnymi, chorobliwie wyrośniętymi drzewami, hamaki, mgła |
+| 7 | `ui/oboz/gory.webp` | Góry | Obóz pod skalnym nawisem, zaspą śniegu i opuszczoną stacją kolejki |
+| 8 | `ui/oboz/bagna.webp` | Bagna | Ognisko na pomoście z desek nad czarną wodą, łódka, robaczki świętojańskie |
+| 9 | `ui/oboz/ruiny.webp` | Ruiny, Miasto, Tereny Maszyn | Ognisko w beczce w zrujnowanym holu biurowca, w oddali światła maszyn |
+| 10 | `ui/oboz/podziemia.webp` | Podziemia | Obóz na peronie metra, lampa karbidowa, ściany w graffiti |
+
+**Handlarze** — stół wymiany, obok listy towaru; rodzaje z przykładów handlarzy RAW (s. 43–44). 3:4, postać za
+ladą / straganem, twarz w półcieniu (to każdy handlarz tego rodzaju, nie konkretny BN).
+
+| # | Plik | Rodzaj | Opis do promptu |
+|---|------|--------|-----------------|
+| 11 | `ui/handlarze/obwozny.webp` | **done** — Obwoźny sprzedawca (dzicz) | Wóz zaprzężony w zmutowane zwierzę, towar na plandece, latarnia |
+| 12 | `ui/handlarze/barman.webp` | **done** — Barman (wioska) | Kontuar z beczek, butelki bez etykiet, taśma klejąca na lustrze |
+| 13 | `ui/handlarze/stragan.webp` | **done** — Stragan rolnika | Skrzynki z warzywami, wiszące suszone mięso, waga szalkowa |
+| 14 | `ui/handlarze/wielobranzowy.webp` | **done** — Sklep wielobranżowy, targowisko | Zagracone półki pod sufit, kanistry, koce, puszki, kasa rejestrująca jako ozdoba |
+| 15 | `ui/handlarze/bron.webp` | **done** — Sklep z bronią, rusznikarz | Kraty, karabiny na ścianie, warsztat rusznikarski z tyłu, skrzynki amunicji |
+| 16 | `ui/handlarze/apteka.webp` | **done** — Apteka, prochy | Słoiki i fiolki za siatką, czerwony krzyż namalowany ręcznie, waga apteczna |
+| 17 | `ui/handlarze/warsztat.webp` | **done** — Złomiarz, warsztat, elektronika | Stosy części, kable, rozkręcone radio, lampa warsztatowa |
+
+**Ruiny** — karta prośby szabrowania u graczy; 7 rodzajów z tabeli szabrowania (s. 271). 3:1, wnętrze, dzień
+albo latarka.
+
+| # | Plik | Rodzaj ruin | Opis do promptu |
+|---|------|-------------|-----------------|
+| 18 | `ui/ruiny/apteka.webp` | Apteka | Splądrowana apteka: przewrócone regały, rozsypane blistry, zielony krzyż bez prądu |
+| 19 | `ui/ruiny/biuro.webp` | Biuro / mieszkanie | Opuszczone mieszkanie: kurz, zdjęcia na ścianie, pnącza przez okno |
+| 20 | `ui/ruiny/magazyn.webp` | Niewielki magazyn | Regały wysokiego składowania, rozdarte kartony, wózek widłowy na boku |
+| 21 | `ui/ruiny/piwnica.webp` | Piwnica / strych | Ciasna piwnica: słoiki na półkach, rury, smuga światła z okienka |
+| 22 | `ui/ruiny/sklepik.webp` | Sklepik | Sklepik osiedlowy: zbita witryna, lada, przewrócona lodówka z napojami |
+| 23 | `ui/ruiny/warsztat.webp` | Warsztat / pracownia | Warsztat samochodowy: kanał, narzędzia na tablicy, auto bez kół |
+| 24 | `ui/ruiny/wrak.webp` | Wrak samolotu / statku | Rozerwany kadłub samolotu w piasku, rzędy foteli, kable zwisające z sufitu |
+
+---
+
+# H. Żetony wraków (top-down, PLAN_m5_postoj.md §7.18, dodane 2026-10-11)
+
+**Briefy gotowe 2026-10-11:** cztery wraki w [dev/art/m5/BRIEFS.md](../art/m5/BRIEFS.md),
+źródła `dev/art/m5/in/wraki/<klucz>.png`. Finalnie 400×400 (Mały, 70% kadru),
+400×400 (Średni, 90%), 800×800 (Duży, 90%), 1600×1600 (największe maszyny, 92%).
+Rzeczywista alpha, bez cienia, gruntu i krateru; packer nie usuwa tła i nie rysuje.
+Wiersze pozostają otwarte do dostarczenia źródeł i sprawdzenia gotowych WEBP.
+
+Po autodestrukcji maszyny żeton podmienia grafikę na wrak w rozmiarze żetonu. Styl jak `tokens/PROMPT.md`
+(widok z góry), przezroczyste tło, bez cienia. WEBP. Brak pliku = żeton zostaje, tylko ślad wybuchu.
+
+| # | Plik | Rozmiar | Opis do promptu |
+|---|------|---------|-----------------|
+| 1 | `tokens/wraki/maly.webp` | mały | Rozerwany korpus małego drona: wygięta blacha, kable, okopcenie |
+| 2 | `tokens/wraki/sredni.webp` | średni | Wypalony szkielet maszyny wielkości człowieka, poskręcane kończyny, dymiące ślady |
+| 3 | `tokens/wraki/duzy.webp` | duży | Rozbebeszony kadłub ciężkiej maszyny, pęknięte płyty pancerza, odsłonięte serwa |
+| 4 | `tokens/wraki/gigantyczny.webp` | gigantyczny / ogromny | Ogromne, wypalone cielsko machiny Molocha, rozsypane gąsienice / nogi, krater wokół |
+
+---
+
+## Do podpięcia — przez MG
+
+- **Starsze dźwięki produkcji (§C 1–9):** pliki w `sounds/produkcja/` są gotowe.
+  Przepointować odpowiednie sloty `PRACA` i `ZDARZENIA` w
+  `scripts/production/oprawa.mjs`; agent assetowy nie zmienia tego kodu.
+- **Glify zatwierdzone 2026-10-12 (31 par WEBP/SVG):** pliki są zainstalowane.
+  Lista wszystkich ścieżek: `review/candidates/batch-63/installed.json`.
+  Zdolności pochodzenia biorą nazwę z pliku przy następnym rebuildzie
+  `zdolnosci-pochodzenia`; Sztuczki mogą wymagać repointu `img` i rebuildu
+  `sztuczki`. Karabin laserowy: `icons/weapons/karabin_laserowy.svg` — repoint
+  ataku Biodroida i rebuild Bestiariusza. Emiter EMP: repoint `img` / rebuild
+  `towarzysze`; Wyłączony: repoint definicji stanu. Istniejące przedmioty i
+  efekty w świecie podmienia osobno MG. Bez przebudów ani migracji świata.
+  Nazwy M5 Doba / Rozbiórka / Fanty są gotowe bez dodatkowego okablowania.
+- **Dodatkowe 19 glifów zatwierdzonych 2026-10-12 (Batch 63):** zainstalowane
+  ścieżki w `review/candidates/batch-64/installed.json`. Handel i Zabawka używają
+  nazw M5 bez dodatkowego okablowania; starsze Sztuczki, zdolności pochodzenia
+  i ataki Bestiariusza wymagające repointu / rebuildów pozostają dla MG, jak wyżej.
+- **Dodatkowe 16 glifów zatwierdzonych 2026-10-12 (Batch 64):** zainstalowane
+  ścieżki i wybrane źródła w `review/candidates/batch-64/reviewed-installed.json`
+  oraz `review/candidates/batch-64/reviewed-addendum-installed.json`.
+  Zdolności pochodzenia: następny rebuild `zdolnosci-pochodzenia`. Sztuczki:
+  repoint `img` na wymienione pliki i rebuild `sztuczki`; istniejące przedmioty
+  w świecie podmienia osobno MG. Agent assetowy nie wykonuje tych operacji.
+- **Dodatkowe 18 glifów zatwierdzonych 2026-10-12 (Batch 65):** ścieżki w
+  `review/candidates/batch-66/installed.json`. Szabrowanie używa dokładnej nazwy M5,
+  bez dodatkowego okablowania. Wszystkie zdolności pochodzenia mają teraz pliki;
+  ich rebuild oraz repoint `img` / rebuild starszych Sztuczek i migracje istniejących
+  przedmiotów pozostają dla MG. Agent assetowy nie wykonuje tych operacji.
+- **Dodatkowe 10 glifów zatwierdzonych 2026-10-12 (Batch 66):** ścieżki i
+  wybrane źródła w `review/candidates/batch-66/reviewed-installed.json`.
+  Starsze Sztuczki wymagające repointu `img` / rebuildu i aktualizacji istniejących
+  przedmiotów w świecie pozostają dla MG. Agent assetowy nie wykonuje migracji.
+- **Audyt katalogu 2026-10-12 — paliwo (wszystkie trzy grafiki gotowe):** dodać do
+  `RAW_IKONY` w `scripts/production/wynik.mjs` mapy `paliwo-dobre` →
+  `paliwo_dobre.svg`, `paliwo-przecietne` → `paliwo_przecietne.svg`,
+  `paliwo-chrzczone` → `paliwo_chrzczone.svg` (wszystkie w `icons/items/loot/`).
+  Zachować istniejące refy `raw:paliwo-*`; następnie przepointować starsze
+  przedmioty przez MG. Agent assetowy nie edytuje tego resolvera ani świata.
+- **Audyt katalogu 2026-10-12 — uzupełnienie medyka (gotowa grafika):** zmienić
+  `REFILL_IMG` w `scripts/items/toolkit-medyk.mjs` z `icons/svg/heal.svg` na
+  `modules/neuroshima-2026-overrides/icons/items/loot/uzupelnienie_medyka.svg`.
+  Aktualizację istniejących przedmiotów wykonuje MG. Nowa generacja zbędna.
+- **Dodatkowe 7 glifów zatwierdzonych 2026-10-13 (Batch 67):** dokładne ścieżki
+  i źródła w `review/candidates/batch-67/reviewed-installed.json`. Bebeszenie
+  używa nazwy M5 i nie wymaga wiring. Cztery starsze Sztuczki pozostają do
+  repointu / rebuildu i aktualizacji przez MG; agent nie zmienia świata.
+- **Malowane obrazy (§B/§E/§G/§H):** handlarze i utrzymanie są dostarczone;
+  pozostałe obrazy oczekują na źródła MG w
+  `dev/art/m5/in/<zestaw>/<klucz>.png`. Packer → kontrola gotowego WEBP → oznaczenie
+  dostarczonego wiersza → wpis w CREDITS: „AI-generated with OpenAI DALL-E,
+  hand-edited by the GM”. M5 używa dokładnych nazw, bez dodatkowego okablowania.
+
+Nowe briefy, katalog i skrypty oraz dźwięki są w commitach `Assets: …`.
+`MISSING.md` i główny `review/manifest.json` były już zmodyfikowane na starcie;
+aktualizacje kolejki pozostawiono w drzewie roboczym, bez włączania wcześniejszych
+zmian do commitów tej sesji. Metadata Batch 62 są niezależnie zachowane w
+`review/candidates/batch-62/manifest-items.json`; importer tylko dopisuje karty.

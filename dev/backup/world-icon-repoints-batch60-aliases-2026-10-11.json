@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "world": "output",
+  "items": [],
+  "actors": [
+    {
+      "uuid": "Actor.ZDBiNWNjM2E5MTVh",
+      "name": "Bitboy Przewodnik",
+      "items": [
+        {
+          "_id": "OGIyNmQzMTBjMjBi",
+          "name": "Atak Wielokrotny",
+          "before": "worlds/OUTPUT/characters/036_-_Bitboy_Przewodnik/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MGI2NGYxM2IyZTll",
+      "name": "Cyngiel",
+      "items": [
+        {
+          "_id": "OGM4ZGVlNzk0MDc0",
+          "name": "Atak Wielokrotny",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.MjBkYmViOTMxN2Q2",
+      "name": "Jason",
+      "items": [
+        {
+          "_id": "OWZhYmJlODhkYzA2",
+          "name": "Atak Wielokrotny",
+          "before": "worlds/OUTPUT/characters/046_-_Jason/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.M2U4NGQ5YzgwZDYz",
+      "name": "Karambol",
+      "items": [
+        {
+          "_id": "MGZiZDk1NWI2ZjEx",
+          "name": "Atak Wielokrotny",
+          "before": "worlds/OUTPUT/characters/063_-_Karambol/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.YmMyOWE3ODcxZjU1",
+      "name": "Pitagoras",
+      "items": [
+        {
+          "_id": "Yjc0NDEyZWRhMmZi",
+          "name": "Logika Różnoboczna (Ukradkowy Atak, 1/Turę)",
+          "before": "worlds/OUTPUT/characters/068_-_Pitagoras/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/logika-roznoboczna.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.Zjk0MWY2ODc3OTk1",
+      "name": "Pustak",
+      "items": [
+        {
+          "_id": "N2EwNTg4NGExMmY1",
+          "name": "Atak Wielokrotny",
+          "before": "worlds/OUTPUT/characters/062_-_Pustak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Actor.QvlrcHwuQPPfXhKe",
+      "name": "Tarantula (Recovered)",
+      "items": [
+        {
+          "_id": "YTA4YjlkM2IxZDBi",
+          "name": "Próg Awarii",
+          "before": "worlds/OUTPUT/characters/007_-_Tarantula/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/prog-awarii.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.YmRjMzU5ZDY3ZGJk.Actor.Zjk0MWY2ODc3OTk1",
+      "name": "Pustak",
+      "items": [
+        {
+          "_id": "N2EwNTg4NGExMmY1",
+          "name": "Atak Wielokrotny",
+          "before": "worlds/OUTPUT/characters/062_-_Pustak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.Y2ViZWNiNzFiMjJj.Actor.YmMyOWE3ODcxZjU1",
+      "name": "Pitagoras",
+      "items": [
+        {
+          "_id": "Yjc0NDEyZWRhMmZi",
+          "name": "Logika Różnoboczna (Ukradkowy Atak, 1/Turę)",
+          "before": "worlds/OUTPUT/characters/068_-_Pitagoras/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/logika-roznoboczna.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.ZjQ3MjZiYzgxOGMx.Actor.MGI2NGYxM2IyZTll",
+      "name": "Cyngiel",
+      "items": [
+        {
+          "_id": "OGM4ZGVlNzk0MDc0",
+          "name": "Atak Wielokrotny",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.NDhhZGMzNmUyMmE1.Token.NTMwZDhiYTczZGY2.Actor.MGI2NGYxM2IyZTll",
+      "name": "Cyngiel",
+      "items": [
+        {
+          "_id": "OGM4ZGVlNzk0MDc0",
+          "name": "Atak Wielokrotny",
+          "before": "worlds/OUTPUT/characters/038_-_Cyngiel/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ODAxZTdmOGIwZjc0.Token.ZWQzNGJlYzJlYjZk.Actor.YmMyOWE3ODcxZjU1",
+      "name": "Pitagoras",
+      "items": [
+        {
+          "_id": "Yjc0NDEyZWRhMmZi",
+          "name": "Logika Różnoboczna (Ukradkowy Atak, 1/Turę)",
+          "before": "worlds/OUTPUT/characters/068_-_Pitagoras/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/logika-roznoboczna.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.MjUxODY3MjYyZThk.Actor.Zjk0MWY2ODc3OTk1",
+      "name": "Pustak",
+      "items": [
+        {
+          "_id": "N2EwNTg4NGExMmY1",
+          "name": "Atak Wielokrotny",
+          "before": "worlds/OUTPUT/characters/062_-_Pustak/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.YjhjOWVhNmViNWRk.Token.OThhOTIwNjk2MTJm.Actor.M2U4NGQ5YzgwZDYz",
+      "name": "Karambol",
+      "items": [
+        {
+          "_id": "MGZiZDk1NWI2ZjEx",
+          "name": "Atak Wielokrotny",
+          "before": "worlds/OUTPUT/characters/063_-_Karambol/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+        }
+      ]
+    },
+    {
+      "uuid": "Scene.ZDI1YTcyY2JmNjMx.Token.PVE66ThJ5jA6yrdW.Actor.ZDBiNWNjM2E5MTVh",
+      "name": "Bitboy Przewodnik",
+      "items": [
+        {
+          "_id": "OGIyNmQzMTBjMjBi",
+          "name": "Atak Wielokrotny",
+          "before": "worlds/OUTPUT/characters/036_-_Bitboy_Przewodnik/avatar.png",
+          "img": "modules/neuroshima-2026-overrides/icons/abilities/atak-wielokrotny.svg"
+        }
+      ]
+    }
+  ]
+}

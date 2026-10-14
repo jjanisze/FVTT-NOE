@@ -126,12 +126,6 @@ const perRow = cell => Math.max(1, Math.floor((L.maxContent - cell - L.refGap + 
  * @property {string} [color]
  * @property {object[]} items     pozycje; każda musi mieć `size`
  * @property {string} [note]      druga linia podpisu, np. „do wymiany"
- * @property {(item: object) => {src: string, scale?: number}|null} [tile]
- *   Gdy podane, pasmo jest rysowane **kaflami**, nie żetonami: pozycje nie trafiają
- *   do `placements`, tylko od razu do `tiles`. Tak wygląda pasmo odnośnikowe —
- *   grafika, na którą się patrzy, ale której się nie kalibruje. Kafel nie
- *   potrzebuje aktora i nie da się go ruszyć QuickScale'em, więc odnośnik
- *   zostaje odnośnikiem przez całą sesję klikania.
  */
 
 /**
@@ -166,8 +160,7 @@ export function layoutBands({ legend, bands }) {
     if (!band.items?.length) continue;
 
     // Tytuł i dopisek osobnymi rysunkami, bo jeden `Drawing` ma jeden rozmiar
-    // czcionki. Sklejone w jeden napis przy 52 px dopisek („odnośnik — aktualna
-    // skala postaci graczy; kalibracja w Szafie z postaciami") wychodził poza
+    // czcionki. Sklejony w jeden napis przy 52 px dłuższy dopisek wychodził poza
     // prawą krawędź kanwy — Foundry nie zawija tekstu rysunku.
     drawings.push(label({
       x: L.margin, y, w: fullWidth, h: band.note ? L.bandLabel - 0.6 : L.bandLabel,
@@ -205,31 +198,7 @@ export function layoutBands({ legend, bands }) {
 
         let x = contentX + cell + L.refGap;
         for (const item of chunk) {
-          const asTile = band.tile?.(item);
-          if (asTile?.src) {
-            tiles.push(artTile({
-              src: asTile.src,
-              sizePx: footprint * L.gridSize,
-              scale: asTile.scale ?? 1,
-              cell, cellX: x, cellY: y,
-              role: "sample", meta: { band: band.id ?? null, name: asTile.name ?? null }
-            }));
-            // Kafel nie ma plakietki tak jak żeton, a bez nazwy pasmo
-            // odnośnikowe to sześć anonimowych sylwetek. Podpis idzie
-            // w przerwę między rzędami, więc nie zjada wysokości.
-            if (asTile.name) {
-              drawings.push(label({
-                x, y: y + cell - 0.1, w: cell, h: L.rowGap, size: 20, role: "sample-name",
-                text: asTile.scale && asTile.scale !== 1
-                  ? `${asTile.name}  ×${asTile.scale}`
-                  : asTile.name
-              }));
-            }
-          } else if (!band.tile) {
-            placements.push({ item, band, cellX: x, cellY: y, cell });
-          }
-          // `band.tile` zwracające null = pozycja bez grafiki; zostawiamy puste
-          // miejsce zamiast kafla, żeby rząd nie zmieniał rytmu.
+          placements.push({ item, band, cellX: x, cellY: y, cell });
           x += cell + L.gap;
         }
         // Ostatnia komórka kończy się `gap` przed `x` — plakietka z nazwą

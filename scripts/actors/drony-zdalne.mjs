@@ -11,7 +11,9 @@
  *     (rdzeń: gracz widzi wtedy wyłącznie przez kontrolowany żeton), kamera podąża za dronem. Ruch — rdzeń v14.
  *   - **Bramka wizji:** gracz widzi przez żeton drona tylko w swojej sesji zdalnej. Bez niej właściciel uchwytu
  *     patrzyłby przez drona, ilekroć nie kontroluje innego żetonu (rdzeń: „nic nie kontroluje → widzi przez
- *     wszystkie swoje”). MG — bez zmian.
+ *     wszystkie swoje”). Dron wybrany poza sesją nie gasi wzroku postaci. MG — bez zmian.
+ *   - **Wejście** to założenie gogli: karty operatora, drona i kontrolera się zamykają, kamera tnie na drona
+ *     pod szumem „szukania kanału” (`drony-obraz.mjs`).
  *   - **Wyjście** — kontrola i widok wracają, dron staje (D35): Esc; utrata sygnału (D24: FAILSAFE, po chwili
  *     cięcie); kontroler poza ręką albo u kogoś innego (D22); operator nieprzytomny; dron Wyłączony (obraz gaśnie
  *     w szum, po chwili wyjście); żeton drona
@@ -214,9 +216,11 @@ export async function wejdz(dron, { operator, kontroler, tryb, znacznik }) {
     poprzednie: canvas.tokens.controlled.filter(t => t !== token).map(t => t.id),
     start: Date.now(), sygnal: null, failsafeOd: null, wylaczonyOd: null
   };
+  _zamknijKarty(dron, operator, kontroler);
   token.control({ releaseOthers: true });
   _odswiezWizje(token);
-  canvas.animatePan({ x: token.center.x, y: token.center.y, duration: 250 });
+  // Cięcie na drona bez przelotu kamery: zakrywa je szum „szukania kanału” (`drony-obraz.mjs`).
+  canvas.pan({ x: token.center.x, y: token.center.y });
   _pasek(dron);
   _tik = setInterval(_sprawdz, TIK_MS);
   _sprawdz();
@@ -274,6 +278,15 @@ function _przywrocKontrole(s) {
   }
   const t = wrocone[0];
   if (t) canvas.animatePan({ x: t.center.x, y: t.center.y, duration: 250 });
+}
+
+/** Wejście to założenie gogli: karty operatora, drona i kontrolera się zamykają, a Esc zostaje dla wyjścia. */
+function _zamknijKarty(...docs) {
+  for (const doc of docs) {
+    for (const app of Object.values(doc?.apps ?? {})) {
+      if (app.rendered) app.close().catch(err => console.warn(`${MODULE_ID} | dron: zamknięcie karty`, err));
+    }
+  }
 }
 
 /** Żeton i percepcja po zmianie bramki wizji. */
@@ -362,14 +375,28 @@ function _onUpdateCombat(combat, changes) {
   if (combat.combatant?.actor !== operator) wyjdz("tura");
 }
 
-/** Bramka wizji: gracz patrzy przez drona tylko w swojej sesji zdalnej. */
+/** Dron, który ma wzrok, ale poza sesją zdalną nie patrzy (bramka). */
+function _slepyDron(token) {
+  return jestDronem(token.actor) && !wTrybieZdalnym(token.document);
+}
+
+/**
+ * Bramka wizji: gracz patrzy przez drona tylko w swojej sesji zdalnej. Wybrany poza sesją (klik na planszy,
+ * [Pokaż żeton]) nie patrzy — więc nie odbiera też wzroku reszcie żetonów gracza (rdzeń: „kontrolujesz coś ze
+ * wzrokiem → widzisz tylko przez to”), inaczej postać właściciela gaśnie w ciemności.
+ */
 function _owinWizje() {
   const proto = foundry.canvas.placeables.Token.prototype;
   const oryginal = proto._isVisionSource;
   proto._isVisionSource = function () {
     const wynik = oryginal.call(this);
-    if (!wynik || game.user.isGM || !jestDronem(this.actor)) return wynik;
-    return wTrybieZdalnym(this.document);
+    if (game.user.isGM) return wynik;
+    if (jestDronem(this.actor)) return wynik && wTrybieZdalnym(this.document);
+    if (wynik || this.controlled || !canvas.visibility.tokenVision || !this.hasSight || this.document.hidden) return wynik;
+    if (this.document.level !== canvas.level?.id || !this.actor?.testUserPermission(game.user, "OBSERVER")) return wynik;
+    // Rdzeń odmówił, bo coś ze wzrokiem jest kontrolowane — jeśli to same ślepe drony, patrzymy jak bez kontroli.
+    const zeWzrokiem = this.layer.controlled.filter(t => !t.document.hidden && t.hasSight);
+    return zeWzrokiem.length > 0 && zeWzrokiem.every(_slepyDron);
   };
 }
 

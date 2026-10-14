@@ -72,17 +72,31 @@ export async function createWorld(ctx, { slug, modules = DEFAULT_MODULES, player
   if (ctx.profile.isCampaign) throw refuse("Agent worlds live in the sandbox data path, never the campaign's.", "campaign", "Use --profile=sandbox.");
   const id = agentWorldId(slug);
   if (fs.existsSync(path.join(worldsDir(ctx), id))) throw refuse(`World ${id} already exists.`, "exists", "Pick another slug, or `world:delete` it first.");
+  return bootstrapWorld(ctx, {
+    id, title: `Agent · ${slug}`, description: "Sandbox world created by fvtt (PLAN_agentic_improvements.md). Safe to delete.",
+    marker: { file: MARKER, data: { fixture } }, modules, players, startServer
+  });
+}
+
+/**
+ * Create, launch and bootstrap a world with a fixed id on a non-campaign profile — the body of
+ * `createWorld`, shared with the Poligon (`poligon:init`, PLAN_human_testing.md §3.1), whose world is
+ * not an agent world and carries its own marker.
+ */
+export async function bootstrapWorld(ctx, { id, title, description, marker, modules = DEFAULT_MODULES, players = DEFAULT_PLAYERS, startServer }) {
+  if (ctx.profile.isCampaign) throw refuse("fvtt never creates worlds on the campaign data path.", "campaign");
+  if (fs.existsSync(path.join(worldsDir(ctx), id))) throw refuse(`World ${id} already exists.`, "exists");
   const missing = modules.filter(m => !fs.existsSync(path.join(ctx.profile.data, "modules", m, "module.json")));
-  if (missing.length) throw new CliError(`Modules not in the sandbox: ${missing.join(", ")}.`, { code: "usage", hint: "`fvtt sandbox:init` links them from the campaign install." });
+  if (missing.length) throw new CliError(`Modules not in the ${ctx.profile.name} data path: ${missing.join(", ")}.`, { code: "usage", hint: "`fvtt sandbox:init` / `poligon:init` link them from the campaign install." });
 
   const client = new FoundryClient(ctx.profile);
   await toSetupScreen(ctx, startServer, client);
   await client.adminAuth();
   note(`creating ${id}`);
-  await client.createWorld({ id, title: `Agent · ${slug}`, system: "dnd5e", description: "Sandbox world created by fvtt (PLAN_agentic_improvements.md). Safe to delete.", launch: true });
+  await client.createWorld({ id, title, system: "dnd5e", description, launch: true });
   // Marker first thing: from here on, only fvtt's own guards decide whether this can go.
-  fs.writeFileSync(path.join(worldsDir(ctx), id, MARKER), JSON.stringify({
-    id, created: new Date().toISOString(), by: process.env.FVTT_AGENT ?? "fvtt", fixture, modules, players
+  fs.writeFileSync(path.join(worldsDir(ctx), id, marker.file), JSON.stringify({
+    id, created: new Date().toISOString(), by: process.env.FVTT_AGENT ?? "fvtt", ...marker.data, modules, players
   }, null, 2));
   const up = await poll(async () => { const s = await client.status(); return s.active && s.world === id ? s : null; }, { timeoutMs: 180_000, intervalMs: 1000 });
   if (!up) throw new CliError(`World ${id} did not come up after creation.`, { code: "not-ready", hint: "`fvtt logs --profile=sandbox --level=warn`." });

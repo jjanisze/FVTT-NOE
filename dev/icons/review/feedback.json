@@ -1501,10 +1501,10 @@
     },
     "batch59-ruch": {
       "itemId": "batch59-ruch",
-      "decision": "revise",
-      "candidateId": "batch60-revision",
-      "notes": "Add lines/bolts indicating speed streaks. Make the plates irregular and scale-like. Remove detail and make it more icon-like.",
-      "updatedAt": "2026-10-10T16:58:26.252Z"
+      "decision": "approve",
+      "candidateId": "batch63-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:51:21.419Z"
     },
     "batch59-atak-mobsprzet": {
       "itemId": "batch59-atak-mobsprzet",
@@ -1592,10 +1592,10 @@
     },
     "batch59-karabin-laserowy": {
       "itemId": "batch59-karabin-laserowy",
-      "decision": "revise",
-      "candidateId": "batch60-revision",
-      "notes": "Simplify the icon.",
-      "updatedAt": "2026-10-10T16:58:47.435Z"
+      "decision": "approve",
+      "candidateId": "batch61-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:14:52.973Z"
     },
     "batch59-dmuchawka": {
       "itemId": "batch59-dmuchawka",
@@ -1620,10 +1620,10 @@
     },
     "batch60-paszcza": {
       "itemId": "batch60-paszcza",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Modify the silhouette so it appears as if the person is trying unsuccessfully to get out",
-      "updatedAt": "2026-10-10T16:59:35.125Z"
+      "decision": "approve",
+      "candidateId": "batch63-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:51:25.982Z"
     },
     "batch60-tylko-zwarcie": {
       "itemId": "batch60-tylko-zwarcie",
@@ -1648,17 +1648,17 @@
     },
     "batch60-ja-juz-swoje-odchorowalem": {
       "itemId": "batch60-ja-juz-swoje-odchorowalem",
-      "decision": "revise",
+      "decision": "approve",
       "candidateId": "atlas-b",
-      "notes": "Modify the style to be more icon-like and readable.",
-      "updatedAt": "2026-10-10T17:00:11.889Z"
+      "notes": "",
+      "updatedAt": "2026-10-11T22:15:24.438Z"
     },
     "batch60-grad-olowiu": {
       "itemId": "batch60-grad-olowiu",
-      "decision": "revise",
-      "candidateId": "atlas-b",
-      "notes": "Remove the redundant secondary and third muzzle flashes mid-air. Retain the muzzle flash at the barrel. Add more bullets and bullet streaks. Simplify the icon.",
-      "updatedAt": "2026-10-10T17:01:00.699Z"
+      "decision": "approve",
+      "candidateId": "batch61-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:15:03.287Z"
     },
     "batch60-cos-mi-tu-smierdzi": {
       "itemId": "batch60-cos-mi-tu-smierdzi",
@@ -1676,10 +1676,10 @@
     },
     "batch60-cwiczenie-czyni-mistrza": {
       "itemId": "batch60-cwiczenie-czyni-mistrza",
-      "decision": "revise",
-      "candidateId": "atlas-b",
-      "notes": "Remove the middle stage. Just the preparing to lift and lifted stage. Retain the upward progress arrow.",
-      "updatedAt": "2026-10-10T17:01:58.510Z"
+      "decision": "approve",
+      "candidateId": "batch61-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:14:57.413Z"
     },
     "batch60-doktor-quinn": {
       "itemId": "batch60-doktor-quinn",
@@ -1690,24 +1690,24 @@
     },
     "batch60-jesli-ma-silnik-to-ruszy": {
       "itemId": "batch60-jesli-ma-silnik-to-ruszy",
-      "decision": "revise",
-      "candidateId": "atlas-b",
-      "notes": "Simplify the icon and remove non-essential detail.",
-      "updatedAt": "2026-10-10T17:02:16.373Z"
+      "decision": "approve",
+      "candidateId": "batch61-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:15:29.438Z"
     },
     "batch60-pakowanie": {
       "itemId": "batch60-pakowanie",
-      "decision": "revise",
-      "candidateId": "atlas-c",
-      "notes": "Simplify the graphics a bit and modify both the hand and arrow to indicate an item being put in, rather than out.",
-      "updatedAt": "2026-10-10T17:02:49.921Z"
+      "decision": "approve",
+      "candidateId": "batch61-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:15:37.155Z"
     },
     "batch60-patriota": {
       "itemId": "batch60-patriota",
-      "decision": "revise",
-      "candidateId": "atlas-c",
-      "notes": "Simplify. Move the patch to the left shoulder (where a flag would be on a uniform)",
-      "updatedAt": "2026-10-10T17:03:26.957Z"
+      "decision": "approve",
+      "candidateId": "batch61-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:16:12.471Z"
     },
     "batch60-wierze": {
       "itemId": "batch60-wierze",
@@ -1718,24 +1718,24 @@
     },
     "batch60-wychuchana-spluwa": {
       "itemId": "batch60-wychuchana-spluwa",
-      "decision": "revise",
-      "candidateId": "atlas-c",
-      "notes": "Simplify graphics, and remove one redundant hand. One holds (daintily), the other cleans with a fine cloth. Both hands are in white gloves.",
-      "updatedAt": "2026-10-10T17:04:17.924Z"
+      "decision": "approve",
+      "candidateId": "batch64-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:31:24.373Z"
     },
     "batch60-zawziety-sukinkot": {
       "itemId": "batch60-zawziety-sukinkot",
-      "decision": "revise",
-      "candidateId": "atlas-c",
-      "notes": "Simplify graphics and show a grizzled man rising.",
-      "updatedAt": "2026-10-10T17:04:44.962Z"
+      "decision": "approve",
+      "candidateId": "batch61-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:16:56.202Z"
     },
     "batch60-urodzony-morderca": {
       "itemId": "batch60-urodzony-morderca",
-      "decision": "revise",
-      "candidateId": "atlas-c",
-      "notes": "Clean up the silhouette of the knife, and remove dithering. Clean lines.",
-      "updatedAt": "2026-10-10T17:05:06.872Z"
+      "decision": "approve",
+      "candidateId": "batch61-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:16:16.754Z"
     },
     "batch60-mlynek": {
       "itemId": "batch60-mlynek",
@@ -1757,6 +1757,643 @@
       "candidateId": "atlas-c",
       "notes": "",
       "updatedAt": "2026-10-10T17:05:31.511Z"
+    },
+    "batch61-na-symulatorach-to-dzialalo": {
+      "itemId": "batch61-na-symulatorach-to-dzialalo",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:17:06.898Z"
+    },
+    "batch61-telepata": {
+      "itemId": "batch61-telepata",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:17:14.605Z"
+    },
+    "batch61-przycelowanie": {
+      "itemId": "batch61-przycelowanie",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:17:18.880Z"
+    },
+    "batch61-samuraj": {
+      "itemId": "batch61-samuraj",
+      "decision": "approve",
+      "candidateId": "batch65-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T00:31:59.544Z"
+    },
+    "batch61-nowka-sztuka": {
+      "itemId": "batch61-nowka-sztuka",
+      "decision": "approve",
+      "candidateId": "batch63-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:56:22.389Z"
+    },
+    "batch61-przedwojenna-edukacja": {
+      "itemId": "batch61-przedwojenna-edukacja",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:21:09.261Z"
+    },
+    "batch61-nano-tech": {
+      "itemId": "batch61-nano-tech",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:21:13.101Z"
+    },
+    "batch61-dieta-cud": {
+      "itemId": "batch61-dieta-cud",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:21:17.327Z"
+    },
+    "batch61-duch-pustyni": {
+      "itemId": "batch61-duch-pustyni",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:21:21.017Z"
+    },
+    "batch61-polegam-tylko-na-sobie": {
+      "itemId": "batch61-polegam-tylko-na-sobie",
+      "decision": "approve",
+      "candidateId": "batch63-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:56:30.324Z"
+    },
+    "batch61-ale-jazda": {
+      "itemId": "batch61-ale-jazda",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:22:13.693Z"
+    },
+    "batch61-gornik-z-dziada-pradziada": {
+      "itemId": "batch61-gornik-z-dziada-pradziada",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:22:17.593Z"
+    },
+    "batch61-szlachetne-urodzenie": {
+      "itemId": "batch61-szlachetne-urodzenie",
+      "decision": "approve",
+      "candidateId": "batch63-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:03:12.599Z"
+    },
+    "batch61-czlowiek-aligator": {
+      "itemId": "batch61-czlowiek-aligator",
+      "decision": "approve",
+      "candidateId": "batch63-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:03:16.301Z"
+    },
+    "batch61-wloczykij": {
+      "itemId": "batch61-wloczykij",
+      "decision": "approve",
+      "candidateId": "batch63-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:03:20.903Z"
+    },
+    "batch62-handel": {
+      "itemId": "batch62-handel",
+      "decision": "approve",
+      "candidateId": "batch63-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:03:24.819Z"
+    },
+    "batch62-doba": {
+      "itemId": "batch62-doba",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:24:11.052Z"
+    },
+    "batch62-bebeszenie": {
+      "itemId": "batch62-bebeszenie",
+      "decision": "approve",
+      "candidateId": "batch67-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T22:22:21.136Z"
+    },
+    "batch62-szabrowanie": {
+      "itemId": "batch62-szabrowanie",
+      "decision": "approve",
+      "candidateId": "batch65-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T00:32:31.242Z"
+    },
+    "batch62-rozbiorka": {
+      "itemId": "batch62-rozbiorka",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:26:45.644Z"
+    },
+    "batch62-wylaczony": {
+      "itemId": "batch62-wylaczony",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:26:50.807Z"
+    },
+    "batch62-emiter-emp": {
+      "itemId": "batch62-emiter-emp",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:26:55.832Z"
+    },
+    "batch62-slodycze": {
+      "itemId": "batch62-slodycze",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:26:59.683Z"
+    },
+    "batch62-cygaro": {
+      "itemId": "batch62-cygaro",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:27:12.693Z"
+    },
+    "batch62-prasa": {
+      "itemId": "batch62-prasa",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:27:17.872Z"
+    },
+    "batch62-gra": {
+      "itemId": "batch62-gra",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:28:52.125Z"
+    },
+    "batch62-kaseta": {
+      "itemId": "batch62-kaseta",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:28:56.157Z"
+    },
+    "batch62-plyta-cd": {
+      "itemId": "batch62-plyta-cd",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:29:00.754Z"
+    },
+    "batch62-konsola": {
+      "itemId": "batch62-konsola",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:29:04.131Z"
+    },
+    "batch62-alkohol": {
+      "itemId": "batch62-alkohol",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:29:08.119Z"
+    },
+    "batch62-zabawka": {
+      "itemId": "batch62-zabawka",
+      "decision": "approve",
+      "candidateId": "batch63-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:05:37.529Z"
+    },
+    "batch62-papier-toaletowy": {
+      "itemId": "batch62-papier-toaletowy",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T22:29:34.190Z"
+    },
+    "batch63-kwas-w-zylach": {
+      "itemId": "batch63-kwas-w-zylach",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:05:46.742Z"
+    },
+    "batch63-chodzmy-na-pewno-juz-utonal": {
+      "itemId": "batch63-chodzmy-na-pewno-juz-utonal",
+      "decision": "approve",
+      "candidateId": "batch65-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:28:12.410Z"
+    },
+    "batch63-edukacja": {
+      "itemId": "batch63-edukacja",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:06:09.438Z"
+    },
+    "batch63-gambling-we-krwi": {
+      "itemId": "batch63-gambling-we-krwi",
+      "decision": "approve",
+      "candidateId": "batch64-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:35:07.204Z"
+    },
+    "batch63-zjadlem-wlasnego-psa": {
+      "itemId": "batch63-zjadlem-wlasnego-psa",
+      "decision": "approve",
+      "candidateId": "batch65-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:28:05.574Z"
+    },
+    "batch63-hi-tech": {
+      "itemId": "batch63-hi-tech",
+      "decision": "approve",
+      "candidateId": "batch64-revision",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:36:09.505Z"
+    },
+    "batch63-moloch-cos-slyszalem": {
+      "itemId": "batch63-moloch-cos-slyszalem",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:08:12.629Z"
+    },
+    "batch63-cholerny-kaznodzieja": {
+      "itemId": "batch63-cholerny-kaznodzieja",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:08:16.770Z"
+    },
+    "batch63-przed-wojna-wszystko-bylo-lepiej": {
+      "itemId": "batch63-przed-wojna-wszystko-bylo-lepiej",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:08:22.650Z"
+    },
+    "batch63-czlowiek-zwany-koniem": {
+      "itemId": "batch63-czlowiek-zwany-koniem",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:08:36.671Z"
+    },
+    "batch63-zdrowa-okolica": {
+      "itemId": "batch63-zdrowa-okolica",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:08:41.639Z"
+    },
+    "batch63-hazardzista": {
+      "itemId": "batch63-hazardzista",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:08:45.697Z"
+    },
+    "batch63-aramis": {
+      "itemId": "batch63-aramis",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:08:51.691Z"
+    },
+    "batch63-aspiryna-i-mietusy": {
+      "itemId": "batch63-aspiryna-i-mietusy",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:08:57.747Z"
+    },
+    "batch64-barbarka": {
+      "itemId": "batch64-barbarka",
+      "decision": "approve",
+      "candidateId": "batch65-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:48:28.644Z"
+    },
+    "batch64-bez-trzymanki": {
+      "itemId": "batch64-bez-trzymanki",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:36:55.971Z"
+    },
+    "batch64-benzyna-zamiast-krwi": {
+      "itemId": "batch64-benzyna-zamiast-krwi",
+      "decision": "approve",
+      "candidateId": "batch65-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:26:48.721Z"
+    },
+    "batch64-ciszej-niz-cien": {
+      "itemId": "batch64-ciszej-niz-cien",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:38:26.218Z"
+    },
+    "batch64-czlowiek-pajak": {
+      "itemId": "batch64-czlowiek-pajak",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:38:30.600Z"
+    },
+    "batch64-fabrykator": {
+      "itemId": "batch64-fabrykator",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:38:38.259Z"
+    },
+    "batch64-fachowiec": {
+      "itemId": "batch64-fachowiec",
+      "decision": "approve",
+      "candidateId": "batch65-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:26:46.274Z"
+    },
+    "batch64-grenadier": {
+      "itemId": "batch64-grenadier",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:41:48.181Z"
+    },
+    "batch64-immunitet": {
+      "itemId": "batch64-immunitet",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:41:52.105Z"
+    },
+    "batch64-jest-zajebiscie": {
+      "itemId": "batch64-jest-zajebiscie",
+      "decision": "approve",
+      "candidateId": "batch65-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:26:43.704Z"
+    },
+    "batch64-karateka": {
+      "itemId": "batch64-karateka",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:42:30.496Z"
+    },
+    "batch64-lawnik": {
+      "itemId": "batch64-lawnik",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:42:51.658Z"
+    },
+    "batch64-miotacz": {
+      "itemId": "batch64-miotacz",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:42:57.003Z"
+    },
+    "batch64-mistrz-broni-bialej": {
+      "itemId": "batch64-mistrz-broni-bialej",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:43:03.706Z"
+    },
+    "batch64-mistrz-walki-wrecz": {
+      "itemId": "batch64-mistrz-walki-wrecz",
+      "decision": "approve",
+      "candidateId": "batch66-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:48:32.305Z"
+    },
+    "batch64-muzyk": {
+      "itemId": "batch64-muzyk",
+      "decision": "approve",
+      "candidateId": "batch65-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:10:03.458Z"
+    },
+    "batch64-neo": {
+      "itemId": "batch64-neo",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:44:19.992Z"
+    },
+    "batch64-nozownik": {
+      "itemId": "batch64-nozownik",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:44:25.035Z"
+    },
+    "batch64-kuloodpornosc": {
+      "itemId": "batch64-kuloodpornosc",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-11T23:50:30.843Z"
+    },
+    "batch65-padnij-powstan": {
+      "itemId": "batch65-padnij-powstan",
+      "decision": "approve",
+      "candidateId": "batch66-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:48:36.075Z"
+    },
+    "batch65-szkolenie-w-ciezkim-pancerzu": {
+      "itemId": "batch65-szkolenie-w-ciezkim-pancerzu",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:06:13.722Z"
+    },
+    "batch65-szkolenie-w-broni": {
+      "itemId": "batch65-szkolenie-w-broni",
+      "decision": "approve",
+      "candidateId": "batch66-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:52:41.967Z"
+    },
+    "batch65-szachista": {
+      "itemId": "batch65-szachista",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:06:37.836Z"
+    },
+    "batch65-snajper": {
+      "itemId": "batch65-snajper",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:06:41.810Z"
+    },
+    "batch65-siekierezada": {
+      "itemId": "batch65-siekierezada",
+      "decision": "approve",
+      "candidateId": "batch66-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:52:37.300Z"
+    },
+    "batch65-ruchome-gniazdo-ckm": {
+      "itemId": "batch65-ruchome-gniazdo-ckm",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:07:37.786Z"
+    },
+    "batch65-rozroba": {
+      "itemId": "batch65-rozroba",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:07:42.214Z"
+    },
+    "batch65-rodeo": {
+      "itemId": "batch65-rodeo",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:07:48.080Z"
+    },
+    "batch65-robin-hood": {
+      "itemId": "batch65-robin-hood",
+      "decision": "approve",
+      "candidateId": "atlas-c",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:07:51.559Z"
+    },
+    "batch65-przydasie": {
+      "itemId": "batch65-przydasie",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:07:56.391Z"
+    },
+    "batch65-plug-and-play": {
+      "itemId": "batch65-plug-and-play",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:08:01.685Z"
+    },
+    "batch65-pierwotny-instynkt": {
+      "itemId": "batch65-pierwotny-instynkt",
+      "decision": "approve",
+      "candidateId": "batch67-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T22:23:22.292Z"
+    },
+    "batch65-pewna-reka": {
+      "itemId": "batch65-pewna-reka",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:08:19.422Z"
+    },
+    "batch65-pan-plaster": {
+      "itemId": "batch65-pan-plaster",
+      "decision": "approve",
+      "candidateId": "batch68-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T22:37:00.426Z"
+    },
+    "batch65-pancerny": {
+      "itemId": "batch65-pancerny",
+      "decision": "approve",
+      "candidateId": "batch66-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:48:39.499Z"
+    },
+    "batch66-szkolenie-w-srednim-pancerzu": {
+      "itemId": "batch66-szkolenie-w-srednim-pancerzu",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:52:48.651Z"
+    },
+    "batch66-szturmowiec": {
+      "itemId": "batch66-szturmowiec",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:52:55.260Z"
+    },
+    "batch66-szybki-bill": {
+      "itemId": "batch66-szybki-bill",
+      "decision": "approve",
+      "candidateId": "batch67-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T22:23:27.759Z"
+    },
+    "batch66-ucz-sie-ucz": {
+      "itemId": "batch66-ucz-sie-ucz",
+      "decision": "approve",
+      "candidateId": "batch67-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T22:23:33.182Z"
+    },
+    "batch66-ukryty-cel": {
+      "itemId": "batch66-ukryty-cel",
+      "decision": "approve",
+      "candidateId": "batch67-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T22:23:39.750Z"
+    },
+    "batch66-wrestler": {
+      "itemId": "batch66-wrestler",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:55:16.694Z"
+    },
+    "batch66-zlomiarz": {
+      "itemId": "batch66-zlomiarz",
+      "decision": "approve",
+      "candidateId": "atlas-b",
+      "notes": "",
+      "updatedAt": "2026-10-12T18:55:21.937Z"
+    },
+    "batch67-paliwo-dobre": {
+      "itemId": "batch67-paliwo-dobre",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-12T22:23:47.978Z"
+    },
+    "batch67-paliwo-przecietne": {
+      "itemId": "batch67-paliwo-przecietne",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-12T22:23:51.625Z"
+    },
+    "batch67-paliwo-chrzczone": {
+      "itemId": "batch67-paliwo-chrzczone",
+      "decision": "approve",
+      "candidateId": "batch68-revision",
+      "notes": "",
+      "updatedAt": "2026-10-12T22:37:07.257Z"
     }
   }
 }

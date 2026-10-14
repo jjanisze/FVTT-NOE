@@ -18,8 +18,10 @@
  *  - E8a, remote mode (§7.10): Gracz 1 controls only the drone and sees through it; a real D key (core WASD) moves it; a real
  *    Esc gives control and view back to his PC. Przejmij sterowanie (out of combat) → signal at three distances with
  *    the scene "pod ziemią" (factory 50 m): 1 / ≈0.5 / ≈0.2; inside the shed (a wall between) → the 50 m range
- *    (U17). Raised past 300 m → FAILSAFE, then the cut: control and view return (D24). The holder's player does
- *    not see through the drone outside remote mode. Gracz 2 with his own controller takes over (D12): Gracz 1's
+ *    (U17). Entering closes the operator's sheet and starts with the channel search (pure static, ~0.5 s). Raised
+ *    past 300 m → FAILSAFE, then the cut: control and view return (D24). The holder's player does not see through
+ *    the drone outside remote mode; [Pokaż żeton] on the drone only moves the view, and a drone picked on the canvas
+ *    outside remote mode does not black out the PC. Gracz 2 with his own controller takes over (D12): Gracz 1's
  *    session ends, Gracz 2 owns the drone only until his Esc. The controller knocked out of hand ends it (D22).
  *  - E8b, the image (D34, U16): the drone's token looks through "Kamera drona"; the operator's screen carries the
  *    analog FPV filter while in remote mode (screenshots at full, half and ¾ range); a blinded drone (failure 8) is
@@ -267,6 +269,45 @@ function zdalny({ dronId }) {
   };
 }
 
+/** Player: [Pokaż żeton] on the drone's bar row with the PC selected; then the drone picked on the canvas. */
+async function pokazZeton({ dronId }) {
+  const pc = game.user.character;
+  const td = canvas.scene.tokens.find(x => x.actorId === dronId).object;
+  const tp = canvas.scene.tokens.find(x => x.actorId === pc.id).object;
+  const nazwy = () => canvas.tokens.controlled.map(x => x === td ? "dron" : x === tp ? "pc" : x.name);
+  tp.control({ releaseOthers: true });
+  await pc.sheet.render(true);
+  const b = await window.__e2e.until(() => pc.sheet.element?.querySelector(
+    `.neuro-towarzysz-row[data-uuid="${td.actor.uuid}"] button[data-akcja="zeton"]`), { message: "[Pokaż żeton] on the drone row" });
+  b.click();
+  await new Promise(r => setTimeout(r, 400));
+  const out = {
+    kontrolowane: nazwy(), wizjaPC: !!tp.vision?.active,
+    widok: Math.hypot(canvas.stage.pivot.x - td.center.x, canvas.stage.pivot.y - td.center.y)
+  };
+  await pc.sheet.close();
+  // A click on the drone outside remote mode: it does not look, so the PC must not go dark either.
+  td.control({ releaseOthers: true });
+  out.wybrany = { kontrolowane: nazwy(), pc: tp._isVisionSource(), dron: td._isVisionSource() };
+  tp.control({ releaseOthers: true });
+  return out;
+}
+
+/** Player: the PC's sheet open, and the first frame of the FPV channel recorded at the next remote-mode entry. */
+async function przedWejsciem() {
+  const pc = game.user.character;
+  await pc.sheet.render(true);
+  await window.__e2e.until(() => pc.sheet.rendered, { message: "PC sheet open" });
+  window.__e2eWejscie = null;
+  // The session's first check ("tik") runs before "wejscie" — the filter goes on with the latter.
+  const id = Hooks.on("neuroshima.dronZdalny", ({ stan }) => {
+    if (stan !== "wejscie") return;
+    Hooks.off("neuroshima.dronZdalny", id);
+    window.__e2eWejscie = { kanal: game.neuroshima.drony.kanalFpv() };
+  });
+  return true;
+}
+
 /** GM: teleport the drone's token (no wall-stopped walk) and set the scene's "pod ziemią". */
 async function przestaw({ x, y, elevation = 0, podZiemia = null }) {
   const MOD = "neuroshima-2026-overrides";
@@ -484,11 +525,26 @@ export default {
       t.equal(r.owner, true, "Gracz 1 owns the drone (holder)");
       t.equal(r.pc, true, "core: the PC is a vision source");
       t.equal(r.dron, false, "the drone is not (gate, §7.10)");
+      const p = await p1.eval(pokazZeton, { dronId });
+      t.equal(JSON.stringify(p.kontrolowane), JSON.stringify(["pc"]), "[Pokaż żeton] on a drone keeps the PC selected");
+      t.equal(p.wizjaPC, true, "and the PC keeps seeing");
+      t.assert(p.widok < 2, "the view is centred on the drone", p);
+      t.equal(JSON.stringify(p.wybrany.kontrolowane), JSON.stringify(["dron"]), "the drone picked on the canvas");
+      t.equal(p.wybrany.pc, true, "the PC still sees with the drone selected outside remote mode");
+      t.equal(p.wybrany.dron, false, "the drone still does not");
     });
 
     await t.step("Przejmij sterowanie → signal at three distances under \"pod ziemią\" (50 m): 1 / ≈0.5 / ≈0.2; a wall → 50 m (U17)", async () => {
+      await p1.eval(przedWejsciem);
       const r = await p1.eval(aktywnosc, { id: "neuroDronPrzejm0" });
       t.equal(r.tryb, "Z", "Przejmij sterowanie, out of combat");
+      const wejscie = await t.waitFor(p1, () => window.__e2eWejscie ?? null, { message: "the remote-mode entry" });
+      t.equal(wejscie.kanal?.szum, 1, "finding the channel: the first frame is pure static");
+      t.equal(wejscie.kanal?.strojenie, true, "still tuning at the entry");
+      t.equal(await t.waitFor(p1, () => game.user.character.sheet.rendered ? null : true, { message: "the PC sheet to close" }),
+        true, "entering closes the operator's sheet");
+      t.equal(await t.waitFor(p1, () => game.neuroshima.drony.kanalFpv()?.strojenie === false ? true : null,
+        { timeoutMs: 1500, message: "the channel found within ~0.5 s" }), true, "the channel is found");
       const powitanie = await t.waitFor(p1, () => {
         const o = game.neuroshima.drony.osdDrona();
         const linie = o?.elementy.filter(e => e.id.startsWith("powitanie")).map(e => e.tekst) ?? [];

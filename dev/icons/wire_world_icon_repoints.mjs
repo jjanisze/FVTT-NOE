@@ -215,6 +215,23 @@ const ICONS = Object.freeze({
   "Tacą i w nogi": `${ABILITY_ROOT}taca-i-w-nogi.svg`,
   "Tylko jedno w głowie mam": `${ABILITY_ROOT}tylko-jedno-w-glowie-mam.svg`,
   "Działo ppanc": `${ROOT}dzialo_ppanc.svg`,
+  "Aktywny system obrony": `${ABILITY_ROOT}aktywny-system-obrony.svg`,
+  "Wra\u017cliwo\u015b\u0107 na \u015bwiat\u0142o": `${ABILITY_ROOT}wrazliwosc-na-swiatlo.svg`,
+  "Dmuchawka": `${ROOT}dmuchawka.svg`,
+  "Wymagania": `${ABILITY_ROOT}wymagania.svg`,
+  "Si\u00f3dme poty": `${ABILITY_ROOT}siodme-poty.svg`,
+  "Fart": `${ABILITY_ROOT}fart.svg`,
+  "Co\u015b mi tu \u015bmierdzi": `${ABILITY_ROOT}cos-mi-tu-smierdzi.svg`,
+  "Czas patriot\u00f3w": `${ABILITY_ROOT}czas-patriotow.svg`,
+  "Doktor Quinn": `${ABILITY_ROOT}doktor-quinn.svg`,
+  "Tylko zwarcie": `${ABILITY_ROOT}tylko-zwarcie.svg`,
+  "Wierz\u0119": `${ABILITY_ROOT}wierze.svg`,
+  "M\u0142ynek": `${ABILITY_ROOT}mlynek.svg`,
+  "Kuchenny Terror": `${ABILITY_ROOT}kuchenny-terror.svg`,
+  "Logika R\u00f3\u017cnoboczna": `${ABILITY_ROOT}logika-roznoboczna.svg`,
+  "Logika R\u00f3\u017cnoboczna (Ukradkowy Atak, 1/Tur\u0119)": `${ABILITY_ROOT}logika-roznoboczna.svg`,
+  "Atak Wielokrotny": `${ABILITY_ROOT}atak-wielokrotny.svg`,
+  "Pr\u00f3g Awarii": `${ABILITY_ROOT}prog-awarii.svg`,
   "Brutalny cios": `${ABILITY_ROOT}brutalny-cios.svg`,
   "Goła klata": `${ABILITY_ROOT}gola-klata.svg`,
   "Pomocnicy Szeryfa": `${ABILITY_ROOT}zastepcy-szeryfa.svg`,
@@ -244,6 +261,9 @@ const ICONS = Object.freeze({
 });
 
 const ACTOR_ICONS = Object.freeze({
+  "MOBSPRZ\u0118T": Object.freeze({
+    "Atak": `${ABILITY_ROOT}atak-mobsprzet.svg`
+  }),
   "GIGANTYCZNY PAJ\u0104K": Object.freeze({
     "Odn\u00f3\u017ce": `${ROOT}odnoze_gigantyczny_pajak.svg`
   }),

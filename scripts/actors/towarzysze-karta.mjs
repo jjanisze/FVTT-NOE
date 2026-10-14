@@ -6,7 +6,8 @@
  *     Zranienia, stany; [Karta], [Komenda] (Partner i zwierzę — U8), [Pokaż żeton]. Właściciel ze
  *     zdolnością, a bez towarzysza: MG widzi [Nowy towarzysz] (narzędzie E4), gracz — podpowiedź szukania
  *     (D30: zajęcie Postoju to M5).
- *     Drony w ekwipunku (E7a) — ten sam wiersz z [Rozłóż]/[Złóż] zamiast Komendy.
+ *     Drony w ekwipunku (E7a) — ten sam wiersz z [Rozłóż]/[Złóż] zamiast Komendy; [Pokaż żeton] drona tylko
+ *     przesuwa widok i pulsuje w jego miejscu — nie odbiera kontroli postaci.
  *   - **Plakietka „Towarzysz: <właściciel>”** w nagłówku karty towarzysza, z dymkiem rozkładu wartości
  *     pochodnych („TT 14 = 12 + PB właściciela 2”); bez właściciela — ostrzeżenie „wartości z szablonu”.
  *     Dron: „<rodzaj> · twórca X”, w dymku stempel (D23), posiadacz i „System ruszył <data>”.
@@ -141,7 +142,9 @@ async function _onPrzycisk(ev, owner, comp, uchwyt) {
     case "zeton": {
       const token = comp.getActiveTokens?.(true)?.[0] ?? null;
       if (!token) return ui.notifications.info(`${comp.name} nie ma żetonu na tej scenie.`);
-      if (token.isOwner) token.control({ releaseOthers: true });
+      // Dron: tylko miejsce (puls widzi sam klikający) — sterowanie i jego widok idą przez kontroler (§7.10).
+      if (rodzajTowarzysza(comp).maszyna) canvas.controls.drawPing(token.center, { style: "pulse", user: game.user });
+      else if (token.isOwner) token.control({ releaseOthers: true });
       return canvas.animatePan({ x: token.center.x, y: token.center.y, duration: 250 });
     }
   }

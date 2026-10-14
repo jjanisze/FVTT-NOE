@@ -186,4 +186,102 @@ test("config: CDP endpoint comes from the MCP config; port and prefix from optio
   assert.throws(() => resolveProfile({}, "staging"), /Unknown profile/);
 });
 
+/* ---------------------------------------------------------------------------------- */
+/*  Poligon (PLAN_human_testing.md §3.2, §6)                                           */
+/* ---------------------------------------------------------------------------------- */
+
+const { checkSandboxOnly, checkNoHumans } = await import("../lib/guards.mjs");
+const { protectedWorlds, PROFILES, POLIGON_WORLD } = await import("../lib/config.mjs");
+const { seatName, writeLoader, LOADER } = await import("../lib/poligon.mjs");
+
+test("poligon: world:* and e2e never run on the Poligon profile; the sandbox still may", () => {
+  for (const cmd of ["world:create", "world:seed", "world:launch", "world:delete", "e2e"]) {
+    assert.throws(() => checkSandboxOnly(cmd, "poligon"), refusedWith("poligon"), cmd);
+    checkSandboxOnly(cmd, "sandbox");
+  }
+  for (const cmd of ["login", "eval", "quench", "packs", "logs", "reload"]) checkSandboxOnly(cmd, "poligon");
+});
+
+test("poligon: a connected person blocks agent lifecycle; agents' own users and --force do not", () => {
+  checkNoHumans({ connected: 0 });
+  checkNoHumans({ connected: 2, agentUsers: 2 });
+  assert.throws(() => checkNoHumans({ connected: 1, agentUsers: 0 }), refusedWith("human-present"));
+  assert.throws(() => checkNoHumans({ connected: 3, agentUsers: 1 }), refusedWith("human-present"));
+  checkNoHumans({ connected: 3, agentUsers: 0, force: true });
+});
+
+test("poligon: the world is protected and can never pass the delete guards", () => {
+  assert.ok(PROFILES.includes("poligon"));
+  assert.ok(protectedWorlds({ campaign: { world: "output" } }).has(POLIGON_WORLD));
+  assert.throws(() => checkWorldDeletable({ ...okWorld, id: POLIGON_WORLD, marker: { id: POLIGON_WORLD } }), refusedWith("not-agent-world"));
+});
+
+test("poligon: every command classified; runtime mode freezes all but the findings read (H-D5)", () => {
+  for (const cmd of ["poligon:init", "poligon:start", "poligon:stop", "poligon:reset", "poligon:obsada"]) {
+    assert.ok(COMMAND_CLASS[cmd], cmd);
+    assert.throws(() => checkMode(runtime, cmd, { profile: "poligon" }), refusedWith("mode"), cmd);
+  }
+  checkMode(runtime, "poligon:findings", { profile: "poligon" });
+});
+
+test("poligon: seat contexts get stable ascii names", () => {
+  assert.equal(seatName("Gracz 1"), "seat-gracz-1");
+  assert.equal(seatName("Gamemaster"), "seat-gamemaster");
+  assert.equal(seatName("Łucja Żółć"), "seat-lucja-zolc");
+});
+
+test("poligon: the loader is written once into world.json, idempotently, and imports only /agent-poligon/", () => {
+  const world = path.join(tmp, "worlds", "poligon");
+  fs.mkdirSync(world, { recursive: true });
+  fs.writeFileSync(path.join(world, "world.json"), JSON.stringify({ id: "poligon", title: "Poligon", esmodules: [] }));
+  assert.equal(writeLoader(world).changed, true);
+  assert.equal(writeLoader(world).changed, false);
+  const manifest = JSON.parse(fs.readFileSync(path.join(world, "world.json"), "utf8"));
+  assert.deepEqual(manifest.esmodules, [LOADER]);
+  const loader = fs.readFileSync(path.join(world, LOADER), "utf8");
+  assert.match(loader, /import "\.\.\/\.\.\/agent-poligon\/poligon\.mjs";/);
+  assert.match(loader, /__poligon = Object\.freeze\(\{ world: "poligon"/);
+});
+
+test("poligon:clone writes only worlds/<id> on the Poligon, replaces only its own marked clone, on --refresh", async () => {
+  const { checkCloneTarget } = await import("../lib/guards.mjs");
+  const base = { id: "output", worldsRoot: "D:/Poligon/Data/worlds", campaignData: "D:/Campaign", dir: "D:/Poligon/Data/worlds/output", exists: false };
+  checkCloneTarget(base);
+  assert.throws(() => checkCloneTarget({ ...base, dir: "D:/Poligon/Data/worlds/poligon" }), refusedWith("clone-target"));
+  assert.throws(() => checkCloneTarget({ ...base, dir: "D:/Campaign/Data/worlds/output", worldsRoot: "D:/Campaign/Data/worlds" }), refusedWith("campaign"));
+  assert.throws(() => checkCloneTarget({ ...base, dir: "D:/Poligon/Data/worlds/output/../output2" }), refusedWith("clone-target"));
+  const own = { ...base, exists: true, marker: { id: "output", kind: "klon" } };
+  assert.throws(() => checkCloneTarget(own), refusedWith("exists"));
+  checkCloneTarget({ ...own, refresh: true });
+  assert.throws(() => checkCloneTarget({ ...own, refresh: true, marker: null }), refusedWith("no-marker"));
+  assert.throws(() => checkCloneTarget({ ...own, refresh: true, marker: { id: "output", kind: "poligon" } }), refusedWith("no-marker"));
+  assert.throws(() => checkCloneTarget({ ...own, refresh: true, isLink: true }), refusedWith("link"));
+  assert.throws(() => checkCloneTarget({ ...own, refresh: true, active: true }), refusedWith("active-world"));
+  assert.throws(() => checkCloneTarget({ ...own, refresh: true, heldDbs: ["worlds/output/data/actors"] }), refusedWith("db-held"));
+});
+
+test("poligon: in-browser guard — only the world the loader stamped, or an agent sandbox world", async () => {
+  const { poligonKind, assertPoligon } = await import("../../poligon/lib/guard.mjs");
+  const saved = { game: globalThis.game, stamp: globalThis.__poligon };
+  try {
+    globalThis.game = { world: { id: "output" } };
+    delete globalThis.__poligon;
+    assert.equal(poligonKind(), null, "the campaign (no loader stamp) is refused");
+    assert.throws(() => assertPoligon(), /refused/);
+    globalThis.__poligon = { world: "poligon", kind: "poligon" };
+    assert.equal(poligonKind(), null, "a stamp for another world does not count");
+    globalThis.game = { world: { id: "poligon" } };
+    assert.equal(poligonKind(), "poligon");
+    globalThis.__poligon = { world: "output", kind: "klon" };
+    globalThis.game = { world: { id: "output" } };
+    assert.equal(poligonKind(), "klon", "a clone carries its own stamp");
+    delete globalThis.__poligon;
+    globalThis.game = { world: { id: "agent-e2e-20261012" } };
+    assert.equal(poligonKind(), "sandbox");
+  } finally {
+    globalThis.game = saved.game;
+    if (saved.stamp) globalThis.__poligon = saved.stamp; else delete globalThis.__poligon;
+  }
+});
+
 test.after(() => fs.rmSync(tmp, { recursive: true, force: true }));

@@ -13,6 +13,8 @@ logs/*.txt
 logs/*.log
 # fvtt e2e runs (reports, screenshots): local evidence, not repo content
 logs/e2e/
+# Poligon findings exported by `fvtt poligon:findings --md` (H-D6): the journal is the source, this a copy
+logs/poligon/
 # release:check reports (local data paths inside) and the zip it builds
 logs/release/
 # scratch evidence from preview/recording sessions

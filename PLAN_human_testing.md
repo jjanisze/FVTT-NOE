@@ -1,6 +1,11 @@
 # PLAN — Poligon: a human testing ground for NOE and WKK
 
-> Status: **DRAFT** (2026-10-10) — research only, no code yet; GM decisions pending (§10).
+> Status: **code in place for H0–H5, H7 and most of H6 (2026-10-12, §12)**. The
+> stages' "done when" items that are GM sessions — §5.0's veto verdicts and Scenariusz zero, the E7 pass in
+> Lazaret, a Ciemnia session, the closet calibration, production played once — are the GM's next step.
+> Recommended answers to §10 adopted provisionally, GM may veto. Benchmark: **M3 (companions and drones) is the first
+> station** (§5.0). Campaign cleanup done 2026-10-11 (§8).
+> Code: `dev/poligon/` (README there), `fvtt poligon:*` (`dev/agent/lib/poligon.mjs`), e2e suite `poligon`.
 > Sibling of [PLAN_agentic_improvements.md](PLAN_agentic_improvements.md): layers 1–6 are the agents'
 > tools, this is the human's. It reuses that plan's CLI (`fvtt`), sandbox data-path machinery,
 > fixtures, guards and the closets' scene plumbing (`scripts/dev/test-scenes.mjs`).
@@ -24,6 +29,9 @@ on 2026-10-10 (read-only snapshot):
 | Test actors and folders | `TESTER - Ze sztuczkami`, `TESTCHAR`, `TEST-cichy-krok-race`, `Copy of Mobsprzęt Karabin`; folders `Testowe`, `Szafa z potworami — kopie jednorazowe` |
 | Agent leftovers | world item `__neuro_probe__` |
 | Real actors used as test benches | Zbrojownia, Piekarz |
+
+**Removed 2026-10-11** with the GM's approval: every row above except the two test benches, plus the four
+stub actors in `Testowe`. What cannot be regenerated was exported first to the world's `neuro-backups/`.
 
 ### 1.2 What a test in the campaign world really touches
 
@@ -200,9 +208,15 @@ M3 E5 took for Evie by hand).
 - Marker `.poligon-clone.json`; a refresh replaces only a marked folder on a non-campaign data path
   (guard and tests in the style of `world:delete`). Banner "KLON — nie kampania". One-way: nothing
   flows back. Never in the repo.
-- The same layout makes bestiary portraits resolve in the Poligon (they point into
-  `worlds/output/characters/`, §11). Without a clone: a lone `worlds/output/characters` junction —
-  spike H0 (3).
+- Bestiary portraits are no longer a reason for the clone: they leave the pack (§11) and reach the GM's
+  worlds through a private art module, which the Poligon links like any other module.
+- **First clone made by hand 2026-10-11** for the trailer recording, on the agents' sandbox data path:
+  campaign stopped for the copy (about a minute), world folder copied without LevelDB `LOCK` files, the
+  two Data-root `assets/` images copied, `[KLON]` title prefix and the marker written by Node (no BOM),
+  `sandbox:init`, launch. Every campaign asset resolved, server log clean. Lessons for `poligon:clone`:
+  the clone shares `localhost` cookies with the campaign tab (log in through an isolated context or
+  another browser); while it runs on the sandbox server, any agent `e2e` / `world:*` would shut it down —
+  runtime mode, or the Poligon's own data path.
 
 ### 3.7 Uwagi (findings)
 
@@ -229,11 +243,12 @@ cover today.
 
 | Area | H | I | F | C today | Priority → station |
 |---|:-:|:-:|:-:|---|---|
+| Companions and drones (M3, closed 2026-10-10, never played): owner bar, Komenda, initiative groups, creation wizard, drone build → deploy → controller → remote mode, analog camera and OSD, signal, power, failures, repairs, EMP; ~45 implementation calls awaiting the GM's veto | ●●● | ●●● | ●● | e2e `towarzysz`, `towarzysz-tworzenie`, `dron`; Quench | **P0** Hangar (benchmark) |
 | Attack flow: card, verdict, okoliczności badges, Reakcje celu, fire modes, magazines, jams, damage tray | ●●● | ●●● | ●●● | e2e, functional | **P1** Strzelnica |
 | VFX and sound: tracers, muzzle flash, explosions, sound banks, Splatter, scrolling text | ●●● | ●● | ●●● | nothing can assert it | **P1** Strzelnica |
 | Explosives on the map: area picker, throw, mines / C4 / IED, detonation, Mołotow, kolczatka | ●●● | ●●● | ●● | e2e grenade | **P1** Strzelnica |
 | Sheet and inventory: shell, Stan, Zasoby, lalka, pas, sections, Udźwig bar, pips, ulepszenia, Fuksy, PD, hotbar | ●●● | ●●● | ●●● | Quench `lalka` | **P1** Garderoba |
-| Vision and light: latarki, NVG / thermal, 220°, flary, pochodnia, darkness; drone video | ●●● | ●●● | ●● | none | **P1** Ciemnia |
+| Vision and light: latarki, NVG / thermal, 220°, flary, pochodnia, darkness (the drone camera: Hangar) | ●●● | ●●● | ●● | none | **P1** Ciemnia |
 | Health: Stan tracks, status icons and HUD, umieranie cards, DO window with Rekonwalescencja, kalendarzyk, choroby, Zagrożenia tool | ●● | ●●● | ●●● | Quench + e2e | **P1** Lazaret |
 | Combat at table scale: tracker, groups, companions, NPC reactions, drops, ground items, chat volume, performance | ●●● | ●●● | ●●● | e2e, small | P2 Arena |
 | Production and repair (never played at the table) | ●● | ●●● | ●● | Quench rules | P2 Kuźnia |
@@ -243,6 +258,7 @@ cover today.
 | Icons and art in context | ●●● | ● | ●●● | icon review (candidates only) | P3 Galeria |
 | Chase board | ●●● | ●● | ● | e2e + performance harness | P3 Pościg |
 | Maps `… (2026)`, props, difficult-terrain hints | ●●● | ●● | ●● | Maps pipeline | P3 Mapy |
+| Trade, postój, scavenging, gutting, autodestruction (M5, planned — `PLAN_m5_postoj.md`): GM price list, trade table with GM-only numbers, merchants, the day ledger (players propose, GM commits), Fuksy v2 and Fanty, wrecks | ●●● | ●●● | ●● | e2e `handel`, `postoj`, `szabrowanie`, `bebeszenie` (planned) | **P1** Bazar, Złomowisko (when M5 lands) |
 
 **Deprioritised — no station of their own:** data tables and their closure; the rules engines (TT
 computation, okoliczności engine, umieranie / rekonwalescencja / production rules, disease ladders);
@@ -255,6 +271,74 @@ Kuźnia).
 
 Probes below are examples; the full card lives with each builder. Probe cards are in Polish in the
 panel (H-D8).
+
+### 5.0 Hangar — the M3 benchmark (P0)
+
+**Why first.** M3 is the largest feature with nothing in the campaign to try it on: no drones, one
+migrated companion (Evie), and the controller, remote mode, camera and OSD exist only in e2e runs.
+It touches every human blind spot at once — look (analog camera, OSD), feel (activation flow, Esc,
+WASD), several seats (operator handover, a player's death-save cards), scale (two companions and a
+drone on one sheet), time (battery on the clock) and NOE/WKK (repairs). And `PLAN_m3_towarzysze.md`
+§11 ends every stage with *rozstrzygnięcia do weta MG* — about 45 calls nobody has judged yet. The
+station's first job is to put each of them in front of the GM.
+
+**Coverage before this revision:** one bullet in Ciemnia (OSD, signal, handover), one phrase each in
+Kuźnia (production → deploy), Kreator (companion wizard) and Arena (a dog and a drone in the party),
+and Opiekun on Garderoba's roster. No station owned M3, and none of the veto list was referenced.
+
+**Setup** (three player seats — operator handover and death saves need them):
+- **Yard** — an outdoor scene ≥ 150 m long with markers at 20 / 50 / 100 m from the operator's spot and a
+  walled building; **Basement** — a second scene with the „Pod ziemią” scene setting.
+- Obsada: a Haker (Spec/Monter, INT +3 — the creator) with a finished walking drone carrying a weapon
+  and magazine, a flying drone, and one Robota near completion; Gracz 1 with the factory controller,
+  Gracz 2 with the homemade one; Sędzia with a Ludzki partner (Gracz 3), Łowca Mutantów with a tamed
+  mammal, Mafiozo with a Prawa ręka, Zabójca Maszyn with an Emiter EMP; Magazyn with surowce and spare
+  batteries.
+- Targets: Obrońca (armour note — EMP), Spawacz (Próg awarii), Gangus Kapo (has Stopień — dies like a
+  PC now), Cywil (no Stopień), a living creature for EMP.
+
+**Probes**
+- *Companions:* the owner's bar at 212 px with two companions and a drone; the badge tooltip; the
+  initiative group in the tracker; Komenda → turn; no Komenda → the „bez komendy” card from a player's
+  seat, [Cofnij]; a companion's death-save cards; the party sheet; the DO medic pool; dirty water.
+- *Creation:* GM tool → the player's wizard (Cechy → Pochodzenie → klasa) in their own seat; k6 animal;
+  [Odłącz]; the warning when „Towarzysz” is dropped on a PC.
+- *Drone, hands and items:* Robota → handle with „System ruszył …”; handle weight on the Udźwig bar;
+  the refused clone; Rozłóż preview and click; Złóż warning; [Weź do ręki] and the doll moving things
+  out of the hand; badges „atak wymaga Steruj [A]” and „druga aktywacja”; [R].
+- *Remote mode:* Esc (windows first), WASD vs arrows, camera follow, end of the operator's turn; the
+  analog picture at 20 / 50 / 100 m, through a wall and in the Basement; FAILSAFE timing; the OSD at
+  1366×768, 1920×1080 and 2560×1440, next to chat and sidebar — action list, ARMED and ammo, BAT LOW;
+  handover to Gracz 2; frame time with the filter on.
+- *Failures, repairs, power:* the [Zastosuj] card (GM sees, player does not); skipped entries; the
+  borrowed „Wyłączony” icon; the flying drone's „Spada” card; battery on the handle and the OSD across a
+  clock jump; Włóż akumulator; Napraw PW (1 h); the same failure repaired under NOE (GM card) and under
+  WKK (Robota with parts); the wreck.
+- *EMP:* hit against Obrońca at TT 10 — is the reason visible; the ×0 tray against a living target;
+  Porażenie on machines only; the 230 V card.
+- *Bestiary, RAW s. 205:* Gangus Kapo at 0 PW enters dying instead of „BN pada” — does that slow a
+  fight with five such enemies too much; a crit on Cywil gives no Stopień.
+
+**Veto walk** — every *rozstrzygnięcie do weta MG* in `PLAN_m3_towarzysze.md` §11 becomes a probe on the
+card, grouped by stage, with ✅ keep / ❌ change (→ an Uwaga). Highlights: the signal curve („at 0,5 the
+OSD is barely readable — snow too strong”, E0); picture colour — colour in light, black and white in the
+dark and on weak signal (D38); no motion toggle for tearing and rolling (E8b); OSD in the free canvas
+area, 24 rows (E8c); the end of the operator's turn ends remote mode (E8a); a new drone with a full
+battery (E7c); one repair Robota per drone (E9); EMP 8 kg / 200 gb and the GM charging card (E10).
+
+**Scenariusz zero** — one scripted session through the whole thing: the Robota finishes → Gracz 1
+scouts the Basement until FAILSAFE → Gracz 2 takes over from the yard → a fight in the yard (partners
+with and without Komenda, a drone attack in [A], [R], a crit → failure, the flying drone switched off in
+the air, EMP on Obrońca, Gangus Kapo dying) → afterwards: Napraw PW, the failure under NOE, then Kobalt on
+and the Robota, a clock jump and a battery swap, a Long rest with the medic pool, the day's supplies.
+
+**Done when:** every veto probe has a verdict; Scenariusz zero ran once with three seats; findings are
+triaged into `PLAN_m3_towarzysze.md` §11 or a follow-up plan. It is also the Poligon's own acceptance test
+(H1).
+
+**Before the Poligon exists:** write the builder first, as a sandbox fixture (`fvtt world:create hangar
+--fixture=hangar`). When the Poligon exists, the same builder becomes the station. Until then no agent runs
+`e2e` or `world:*` on the sandbox while the GM is in it — that is H-D1's whole argument.
 
 ### 5.1 Strzelnica (P1)
 
@@ -325,10 +409,12 @@ a kit and Aspiryna i Miętusy; a Staza.
 - **Arena** — a medium map with cover; Drużyna Poligonu (five, a dog, a drone, Prawa ręka) against
   8–12 from the Bestiariusz (armed humans with reactions, a machine, a swarm, something big). Judge:
   wall-clock time and clicks per round, the tracker with initiative groups, the chat after three rounds,
-  NPC drops and ground items, BN pada, frame time.
-- **Bestiariusz** — the monster closet moved here (the campaign scene goes, §8) plus a statblock walk:
-  NPC sheet, reactions, `dropsAs`. Hosts PLAN_monster_closet §11 step 2 — harvest works the same, only
-  the venue changes.
+  NPC drops and ground items, BN pada, frame time. M3 here only at table scale — its own probes are in
+  the Hangar.
+- **Bestiariusz** — the package closet (Szafa z potworami) plus a statblock walk: NPC sheet, reactions,
+  `dropsAs`. Hosts PLAN_monster_closet §11 step 2. Since 2026-10-11 the closet reads only the compendium
+  and the dnd5e references (the „Drużyna” band of campaign PCs is gone), so it runs here unchanged; the
+  campaign closet (Szafa z postaciami) stays a campaign tool, built only for a calibration session.
 - **Kuźnia** — Spec personas with schematics and surowce; jammed, damaged and degraded weapons, damaged
   armour, a broken helmet [WKK Dziurawy hełm]. Judge: the Produkcja tab, a project over time (Czas),
   Szybka produkcja, repair paths, the oprawa sounds; drone production → rozłóż.
@@ -337,6 +423,9 @@ a kit and Aspiryna i Miętusy; a Staza.
   options hidden with Kobalt off. The kind of hole M6 "Biegłości profesji" was gets seen here.
 - **Droga** — Drużyna Poligonu and its vehicle; a day of travel through biomes, supplies, hunting, rest
   activities, Zachód słońca. Judge: the party sheet's density and clicks per travel day.
+- **Bazar** and **Złomowisko** (M5, P1 once M5 lands) — specified in `PLAN_m5_postoj.md` §8 (layer 7):
+  a town with merchants, the trade table and a postój day for five; ruins, corpses and a machine at 1 PW for
+  scavenging, gutting and autodestruction. Built first as sandbox fixtures, like the Hangar.
 
 ### 5.6 Third wave (P3)
 
@@ -344,7 +433,7 @@ a kit and Aspiryna i Miętusy; a Staza.
   dark; status icons at token size and two zooms; activity and class icons; placeholders highlighted
   against `dev/icons/MISSING.md`. Judges the shipped set's consistency in context — the icon review
   queue judges candidates one at a time.
-- **Pościg** — the `poscig` fixture as a station; the campaign's `Pościg — test` goes (§8).
+- **Pościg** — the `poscig` fixture as a station (the campaign's `Pościg — test` is gone, §8).
 - **Mapy** — preview `… (2026)` scenes before they reach the campaign, with Obsada at scale: walls,
   lights, difficult-terrain hints, props, the "Mapa Schrödingera" check. Needs the Maps repo's
   `tools/push.py` to target profile `poligon`.
@@ -383,17 +472,24 @@ are readable offline.
   since the commit it was given on — "look again after these changes".
 - **`AGENTS.md`**: one row for `fvtt poligon:*`, the rule above, and "never test in the campaign world".
 
-## 8. Campaign cleanup and hygiene (last, GM approval)
+## 8. Campaign cleanup and hygiene
 
-1. Foundry backup of the campaign (`fvtt backup`).
-2. A read-only dry-run list (`fvtt eval`): §1.1 plus anything flagged `testScene` / `fixture` /
-   `poligon` or named like test data. The GM ticks what goes.
-3. Delete. **Szafa z postaciami stays** — it calibrates real campaign actors, its output is their
-   `prototypeToken`. Zbrojownia stays if it still hands out items (H-D4); testing on it stops either
-   way. Piekarz goes back to being a character.
-4. **Hygiene check** in `doctor`: test-looking documents in the campaign (names `TEST*`, `__*`,
-   `[Quench]*`, the flags above, folder `Testowe`) are a *problem*, target 0 — agents' leftovers
-   included.
+**Done 2026-10-11** (GM approval): the §1.1 leftovers, both calibration scenes and the 51 disposable
+closet copies, plus the four stub actors in `Testowe`. Nothing unharvested in either closet (checked
+before). What cannot be regenerated — the two test scenes, eight actors, the folder, the item and two
+tokens on `Start` — was exported to `worlds/<world>/neuro-backups/` and verified before the delete.
+Zbrojownia and Piekarz stay; testing on them stops.
+
+Found on the way: an upload from the agent's `fvtt login` tab is refused („User [] does not have
+permission to upload files” — the HTTP upload route does not see that session), so backups are written by
+redirecting `fvtt eval` output to the file. Worth a `fvtt backup` command.
+
+What remains:
+1. **The campaign closet is built on demand** — `characterCloset.regenerate()` for a calibration session,
+   `apply()`, then `remove()`. No standing calibration scene in the campaign.
+2. **Hygiene check** in `doctor`: test-looking documents in the campaign (names `TEST*`, `__*`,
+   `[Quench]*`, flags `testScene` / `fixture` / `poligon`, folder `Testowe`) are a *problem*, target 0 —
+   agents' leftovers included.
 
 Related, out of scope: Quench layers 1–5 run in the campaign world by default (TESTING §5), and
 `e2e --quench` in the sandbox is already the reliable venue. Moving the default is a separate decision.
@@ -402,16 +498,17 @@ Related, out of scope: Quench layers 1–5 run in the campaign world by default 
 
 | Stage | Content | Size | Done when |
 |---|---|:-:|---|
-| **H0** Spikes | (1) `poligon` data path up beside campaign and sandbox; (2) world `esmodules` from `/agent-poligon/` loads in the Poligon and nothing reaches the campaign; (3) `worlds/output/characters/…` served in the Poligon; (4) a campaign LevelDB copied while the campaign runs opens cleanly as `output` on the Poligon server; (5) `getDisplayMedia` frame → upload; (6) one persona through advancement headless, and how long it takes | S | each spike's yes/no recorded in this file |
-| **H1** Skeleton + first station | `poligon:init/start/stop/reset`, guards with tests; panel (Stanowiska, Świeżość, banner); Magazyn; Obsada v1; Plac; **Strzelnica** | M | the GM opens the Poligon with one command and resets Strzelnica three times with no leftovers; campaign document counts identical before and after |
-| **H2** Core human stations | Garderoba, Ciemnia, Lazaret; panel Wariant, Czas, Kości, Widok gracza, Liczniki; full Obsada | M–L | the GM completes the E7 manual pass in Lazaret and one Ciemnia session from a player's seat — in the Poligon |
+| **H0** Spikes | (1) `poligon` data path up beside campaign and sandbox; (2) world `esmodules` from `/agent-poligon/` loads in the Poligon and nothing reaches the campaign; (3) a private art module's `compendiumArtMappings` applies in the Poligon (§11); (4) a campaign LevelDB copied while the campaign runs opens cleanly as `output` on the Poligon server; (5) `getDisplayMedia` frame → upload; (6) one persona through advancement headless, and how long it takes | S | each spike's yes/no recorded in this file |
+| **H1** Skeleton + benchmark | `poligon:init/start/stop/reset`, guards with tests; panel (Stanowiska, Świeżość, banner, Karta prób, Widok gracza); Magazyn; Obsada v1 with the M3 personas; Plac; **Hangar** (§5.0) | M | the GM opens the Poligon with one command, resets Hangar three times with no leftovers, and §5.0's done-when holds; campaign document counts identical before and after |
+| **H2** Core human stations | Strzelnica, Garderoba, Ciemnia, Lazaret; panel Wariant, Czas, Kości, Liczniki; full Obsada | M–L | the GM completes the E7 manual pass in Lazaret and one Ciemnia session from a player's seat — in the Poligon |
 | **H3** Loop + rot guard | Uwagi, journal, `poligon:findings`; e2e `poligon`; TESTING.md Warstwa 7; AGENTS.md | S–M | a finding written in the Poligon reaches a plan without retyping; a broken builder turns `e2e --suites=poligon` red |
 | **H4** Second wave | Arena, Bestiariusz (closet moved), Kuźnia, Kreator, Droga; Obsada ↔ ledger invariant | M–L | monster closet calibration pass done in the Poligon; production played end to end once |
 | **H5** Klon kampanii | `poligon:clone`, its guards and tests, banner | M | a migration rehearsed on the clone; the campaign's documents unchanged |
 | **H6** Third wave | Galeria, Pościg, Mapy, Scenariusze, stale verdicts | S each | per station: the GM's first session left at least one Uwaga or an explicit "nic" |
-| **H7** Campaign cleanup | §8 | S | `doctor` hygiene at 0 through two weeks of development |
+| **H7** Campaign hygiene | §8 (cleanup done 2026-10-11); `doctor` check | S | `doctor` hygiene at 0 through two weeks of development |
 
-H1 first: from day one it is faster than the Zbrojownia/Piekarz habit. H2–H3 make it a loop.
+H1 first: from day one it is faster than the Zbrojownia/Piekarz habit, and it starts on the feature with
+the most unjudged calls. H2–H3 make it a loop.
 
 ## 10. Decisions for the GM
 
@@ -420,7 +517,7 @@ H1 first: from day one it is faster than the Zbrojownia/Piekarz habit. H2–H3 m
 | H-D1 | Own data path (C) or a world on the agents' sandbox (B)? | C |
 | H-D2 | Poligon code via world `esmodules` (nothing shipped) or a gated loader in the module? | `esmodules`, if H0 (2) holds |
 | H-D3 | Campaign clone: yes? Same id `output`? Asset folders junctioned (an upload in the clone would land in the campaign's folders) or copied? | yes; same id; junction the big read-mostly folders, copy the rest |
-| H-D4 | After cleanup: Zbrojownia, Szafa z postaciami, Piekarz? | Zbrojownia only if it still hands out items; keep the Szafa; Piekarz back to normal |
+| H-D4 | After cleanup: Zbrojownia, Szafa z postaciami, Piekarz? | **Decided 2026-10-11:** Zbrojownia and Piekarz stay; Szafa z postaciami on demand only (§8); the package closet loses its campaign band and moves to the Poligon |
 | H-D5 | Runtime mode: Poligon frozen for agents like the sandbox (D9)? | yes for agents; the GM can still use a Poligon that is already running |
 | H-D6 | Findings: journal as source, export to `logs/poligon/` (ignored) or to the vault? | journal + `logs/poligon/` |
 | H-D7 | Playtest nights with real players in the Poligon (needs it reachable like the campaign)? | later, not before H4 |
@@ -430,14 +527,97 @@ H1 first: from day one it is faster than the Zbrojownia/Piekarz habit. H2–H3 m
 
 ## 11. Found while planning
 
-- Bestiary portraits in the `bestiariusz` pack point at `worlds/output/characters/…`, a folder that
-  exists only in this campaign's world. In the Poligon, the sandbox and any other install they will not
-  load (H0 (3) confirms); the release gate does not look at portraits. A separate fix (ship the
-  portraits, or a fallback), not this plan.
+- **Bestiary portraits** (checked 2026-10-11): 37 of 51 actors in `bestiariusz` have `img` in
+  `worlds/output/characters/…` — the book's own illustrations, ripped from the PDF (Biodroid carries the
+  artist's signature); the other 14 have `mystery-man`. Broken in every other world, and not
+  publishable anyway (`CREDITS.md`: no book pages are redistributed; Portal Games has no fan-content
+  policy we could find). What other systems do: the free system ships **no** creature art (pf2e's default
+  NPC icon, dnd5e's SRD source with `img: null`, WFRP4e, Free League, CoC7), and art arrives through a
+  **separate module mapped onto the compendium** — since v14 a core feature: `CompendiumArt`,
+  `flags.compendiumArtMappings.<system>` in the art module's `module.json`, a mapping file keyed by pack
+  and actor id, a per-package toggle in core settings (dnd5e's own Forgotten Adventures art and Paizo's
+  paid token packs both work this way). Proposal, awaiting the GM: the public pack's portrait = our own
+  token art (or the placeholder); the book illustrations go into a **private, never-published art
+  module** that maps them onto the pack's stable actor ids — the GM's worlds, campaign and Poligon keep
+  them. `build-packs.mjs` then drops the world path and the hardcoded data path (below). Original
+  portraits for public users can come later; the module is not on the official listing, so the Foundry
+  AI policy does not constrain that.
+- **Detection:** a `validate-packs` rule — every image path in every pack must sit in `modules/<id>/`,
+  `systems/dnd5e/` or core `icons/`, and a module path must exist on disk. It would have caught all 37,
+  plus any icon pointing at a missing file, at the release gate.
 - `dev/packs/build-packs.mjs` hardcodes the campaign's absolute data path in two constants — a
   machine-specific path in a public repo (AGENTS.md rule). It should come from the local `fvtt` config.
-- The campaign world carries test and agent leftovers (§1.1); the §8 hygiene check would flag them.
+- The campaign world carried test and agent leftovers (§1.1) — removed 2026-10-11 (§8).
 - Human-only items that should move into the Poligon instead of waiting for the campaign: the monster
   closet calibration (PLAN_monster_closet §11), the E7 manual pass (PLAN_m1_walka), the first play of
   production (PLAN_produkcja). M6's review of which proficiencies each PC picked is campaign work and
   stays there.
+
+## 12. Implementation (2026-10-12)
+
+**H0 spikes** — (1) ✅ the `poligon` data path runs beside campaign and sandbox: `poligon:init` built it in 76 s
+(own port, the campaign's seven active modules asked from a ready campaign page, packs from the working tree).
+(2) ✅ world `esmodules` work: core loads a world's own esmodules last (`dist/server/views/view.mjs`), resolved
+inside the world folder and required to exist — so the world carries a small real loader file that stamps the page
+(`globalThis.__poligon`) and imports `/agent-poligon/poligon.mjs`; `world.json` keeps the entry across Foundry's own
+rewrites. `World.launch` uses the cached manifest, so init edits `world.json` with the server stopped. The campaign has
+neither junction nor loader. (3) not needed in H1 — portraits wait for the art module (§11).
+(4) ✅ `poligon:clone` copied the running campaign's world (715 MB, LevelDB without `LOCK`, 1.5 s) and the clone
+opened on the Poligon server with the campaign's exact document counts and all 179 world-path assets resolving.
+(5) ✅ canvas half: a GM seat uploads into `worlds/poligon/uwagi/` (the §8 refusal was the campaign's fvtt tab); the
+whole-tab path (`getDisplayMedia`) needs the browser's consent click — a human's, untested by agents; an upload a
+seat may not make falls back to an inline image. (6) ✅ a persona through dnd5e's real AdvancementManager headless:
+7 s at level 3, ~10 s at 5, 22 s at 12 (multiclass).
+
+**Decisions taken as recommended (GM veto open):** H-D1 C · H-D2 world `esmodules` · H-D3 yes, same id, but
+**copied, not junctioned** (0.7 GB copies in seconds; no upload can reach the campaign) · H-D5 yes · H-D6 journal +
+`logs/poligon/` · H-D8 Polish · H-D9 only when asked · H-D10 five players. H-D7 later.
+
+**Built** (see `dev/poligon/README.md`):
+- `fvtt`: profile `poligon`; `poligon:init/start/stop/reset/obsada/findings`; `doctor` shows the Poligon and the
+  campaign hygiene count (§8 — 0 on 2026-10-12); guards with tests: `world:*`/`e2e` refuse the profile, lifecycle
+  refuses while a person is connected (`--force` on the GM's word), the world is protected, runtime mode freezes it.
+- **Seats are isolated browser contexts, always.** Found on the way: Foundry's `session` cookie is per host, not per
+  port, so a Poligon login in Chrome's default context would replace the campaign tab's session (same for the
+  sandbox's default-context logins). `fvtt login --profile=poligon` therefore always opens a `seat-<user>` context.
+- Panel with all §3.5 sections; Kości rigs per die size (`DiceTerm#randomFace`), not one `randomUniform` queue — a d6
+  rolled first no longer eats the d20's face. Uwagi with context and screenshots (players' seats too).
+- **16 stations** — Hangar (the whole veto walk of `PLAN_m3_towarzysze.md` §11, ~45 VETO probes), Magazyn, Plac,
+  Strzelnica, Garderoba, Ciemnia, Lazaret, Bazar and Złomowisko (M5 landed), Arena, Bestiariusz, Kuźnia, Kreator,
+  Droga, Pościg, Galeria. All build with no missing pick; a reset of one station touches nothing else.
+- **Obsada: 42 personas**; the §3.4 invariant holds — all 18 automated Sztuczki, 34 automated class/profession
+  abilities and 4 Pochodzenie abilities sit on a persona (`game.poligon.obsada.coverage()`).
+- e2e suite `poligon` (sandbox): the Obsada, the invariant, every station, a no-leftover reset check.
+- H5: `poligon:clone [--refresh]` (guards tested: only `worlds/<id>` on the Poligon path, never under the
+  campaign's, replaces only its own marked clone, never while running or held) and `poligon:start --klon`
+  (a restart into the clone — the server only finds new worlds at startup; `poligon:start` switches back). The clone
+  carries the loader with `kind: "klon"`: red frame, "KLON — NIE KAMPANIA", `[KLON]` title.
+- TESTING.md Warstwa 7; module and vault `AGENTS.md` ("never test in the campaign world").
+
+**Deviations from the text above:**
+- A station owns its scenes **whole** (§3.3 said "deletes exactly that"): a reset deletes the scenes with whatever
+  was played onto them — ground items, placed charges, blood, templates — so nothing needs tidying. Actors still die
+  only with `disposable: true`; actors made by module funnels (drones, companions, merchants, a workshop Miejsce) are
+  adopted into the station's flags. The ability hotbar's per-actor macros go with their actor.
+- `scripts/dev/test-scenes.mjs` is reused for its flags; station scenes are built by `lib/kit.mjs` (darkness,
+  vision, walls, lights, metric grid). The Bestiariusz station keeps the closet's own regenerate/remove contract.
+- Builder lessons: loadouts can immobilise (two 20 kg accumulators on the STR 8 Haker) — a reset now reports any
+  overloaded non-Chomik persona as a build problem; bulk materials live in a production Miejsce, not on smiths.
+
+**Found by the Poligon on its first day** (filed as Uwagi in the Poligon journal for triage):
+- *Cichy krok* (`actors/cichy-krok.mjs` `_syncCichyKrokTerrain`) runs on every client that sees a level-up's
+  `createItem`; a player's client tries to create the GM-only effect → "lacks permission to create ActiveEffect"
+  server errors whenever the GM levels a Zwiadowca to 3 with a player connected. Needs an owner/active-GM gate.
+- Drone power sync (`actors/drony-stan.mjs` `_synchronizuj`) has no `isDocumentLive` check, unlike its neighbours:
+  deleting a scene with a deployed drone and then the drone's holder makes it write to a deleted actor (server
+  error). The Poligon's reset waits for the sync queue; the module still has the race.
+- The GM's ability hotbar (`actors/ability-hotbar.mjs`) synced per actor while every sync writes the one hotbar,
+  and a GM syncs every character it edits: building characters in a row deleted the same macro twice ("Macro …
+  does not exist!" server errors). **Fixed:** one sync chain per client. Open for the GM: should the GM's hotbar
+  follow other people's characters at all?
+- `fvtt eval` printed page origins (host and port) in page-exception text — stripped in `lib/cdp.mjs`.
+
+**Open:** stale verdicts per
+file (H6: verdicts remember their commit and the panel flags a ✅ from another commit, not per-file changes);
+Mapy (needs `tools/push.py` to target the profile); Scenariusze (composition of builders); foundry-mcp reading the
+Poligon path offline; adding `--suites=poligon` to `release:check` (it takes ~10 min).

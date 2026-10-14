@@ -53,9 +53,10 @@ tylko z drzewkiem wyników.
 
 ---
 
-## 3. Co testujemy — sześć warstw
+## 3. Co testujemy — siedem warstw
 
-Kolejność od najtańszej i najpewniejszej do najbardziej kruchej.
+Kolejność od najtańszej i najpewniejszej do najbardziej kruchej. Warstwy 1–6 to narzędzia agentów (kontrakty);
+warstwa 7 to człowiek na Poligonie — to, czego żaden test nie oceni.
 
 ### Warstwa 1 — tabele danych (najwyższy zwrot)
 Czyste struktury: `WEAPONS`, `ARMORS`, `ADDON_DEFS`, `TOOLKITS`, `ALL_DISEASES`, `SZTUCZKI`.
@@ -207,6 +208,33 @@ Jednorazowe sprawdzenie w żywej karcie bez chrome-devtools: `npm run fvtt -- ev
 **Reguła:** zmiana dotykająca UI, kanwy, walki, dialogów albo uprawnień graczy nie jest skończona,
 dopóki przebieg warstwy 6 (albo skryptowe sprawdzenie w piaskownicy) tego nie pokaże — ze zrzutem
 ekranu w przekazaniu.
+
+### Warstwa 7 — człowiek na Poligonie
+
+Warstwy 1–6 sprawdzają kontrakty. Nie ocenią **wyglądu** (VFX, światło, ikony, układ), **odczucia** (dźwięk,
+tempo animacji, ile kliknięć kosztuje strzał), **skali** (300 przedmiotów, 15 żetonów, czat po trzech rundach),
+**perspektywy** gracza, **kombinacji**, których żadna paczka nie składa, ani **wierności** Neuroshimie. To robi MG —
+na Poligonie, nigdy w świecie kampanii (`PLAN_human_testing.md`, `dev/poligon/README.md`):
+
+```sh
+npm run fvtt -- poligon:init               # raz: własna ścieżka danych, świat „poligon”, Gracz 1–5, paczki
+npm run fvtt -- poligon:start --seats=3    # okno MG + trzy okna graczy (osobne konteksty przeglądarki)
+```
+
+Panel (przycisk z kolbą w narzędziach żetonów, Ctrl+Shift+P): **Stanowiska** (Hangar, Magazyn, Plac, Strzelnica,
+Garderoba, Ciemnia, Lazaret, Bazar, Złomowisko, Arena, Bestiariusz, Kuźnia, Kreator, Droga, Pościg, Galeria — [Idź],
+[Reset] jednego stanowiska), **Karta prób** (co ocenić i jak, NOE / RAI / WKK / VETO, ✅ ❌ 💬 z commitem), **Obsada**
+(42 postacie zbudowane prawdziwym awansem dnd5e), **Wariant**, **Czas**, **Kości**, **Widok gracza**, **Liczniki**,
+**Świeżość**, **Uwagi**. Uwaga (Ctrl+Shift+U, z każdego miejsca) trafia do dziennika „Poligon · Uwagi” z kontekstem i
+zrzutem; agent czyta je przez `npm run fvtt -- poligon:findings --open --md` i rozdziela do planów.
+
+Strażnik przed gniciem: paczka e2e `poligon` (warstwa 6, piaskownica) buduje całą Obsadę i każde stanowisko,
+sprawdza niezmiennik „każda zautomatyzowana Sztuczka, zdolność klasy/profesji i Pochodzenia siedzi na jakiejś osobie”
+i że reset nie zostawia śladów — zepsuty budowniczy to czerwony przebieg agenta, nie stracony wieczór MG.
+
+**Reguła:** zmiana dotykająca UI, kanwy, VFX, dźwięku albo wieloetapowego przepływu dokłada lub poprawia próby
+swojego stanowiska (`dev/poligon/stations/<id>.mjs`), a przekazanie wymienia stanowisko i próby do obejrzenia.
+Zamyka je werdykt MG, nie agenta. Agent przebudowuje stanowisko tylko na prośbę MG.
 
 ---
 

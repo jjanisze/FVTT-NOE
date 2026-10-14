@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "title": "Batch 60 · 27 awaiting GM review",
-  "updated": "2026-10-10",
+  "title": "Batch 68 · 0 revisions, 0 rejected, 0 pending",
+  "updated": "2026-10-13",
   "items": [
     {
       "id": "batch41-schemat-notatka",
@@ -5204,7 +5204,8 @@
           "src": "candidates/batch-60/aktywny_system_obrony_revision_b.png",
           "note": "The servo frame visibly yanks its wearer into an awkward optimal defensive pose."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch59-aura-pogardy",
@@ -5270,32 +5271,6 @@
       "status": "resolved"
     },
     {
-      "id": "batch59-ruch",
-      "name": "Ruch",
-      "tier": "Batch 59 · Megator action",
-      "context": "Megator, an alligator the size of a submarine, moves up to its speed.",
-      "request": "One colossal armored mutant alligator surges forward with three bold speed streaks.",
-      "current": {
-        "src": null,
-        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
-        "note": "Current imagery is generic or actor-specific."
-      },
-      "candidates": [
-        {
-          "id": "atlas-b",
-          "label": "Atlas B · colossal alligator movement",
-          "src": "candidates/batch-59/ruch.png",
-          "note": "One colossal armored mutant alligator surges forward with three bold speed streaks."
-        },
-        {
-          "id": "batch60-revision",
-          "label": "Revision B · organic Megator crushes a car",
-          "src": "candidates/batch-60/ruch_revision_b.png",
-          "note": "Armadillo-like organic scales and a crushed car establish the creature's immense size."
-        }
-      ]
-    },
-    {
       "id": "batch59-atak-mobsprzet",
       "name": "Atak",
       "tier": "Batch 59 · Mobsprzęt action",
@@ -5319,7 +5294,8 @@
           "src": "candidates/batch-60/atak_mobsprzet_revision_b.png",
           "note": "One conventional crude tracked robot fires from a clean boxy turret."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch59-wrazliwosc-na-swiatlo",
@@ -5345,7 +5321,8 @@
           "src": "candidates/batch-60/wrazliwosc_na_swiatlo_revision_b.png",
           "note": "The ugly rat turns its whole body away from a dominant wide flashlight cone."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch59-prog-awarii",
@@ -5558,32 +5535,6 @@
       "status": "resolved"
     },
     {
-      "id": "batch59-karabin-laserowy",
-      "name": "Karabin laserowy",
-      "tier": "Batch 59 · Biodroid weapon",
-      "context": "The headless upright Biodroid carries machine guns and uses a laser rifle as a dedicated attack.",
-      "request": "One headless armored worm Biodroid braces a crude industrial laser rifle firing one straight beam.",
-      "current": {
-        "src": null,
-        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
-        "note": "Current imagery is generic or actor-specific."
-      },
-      "candidates": [
-        {
-          "id": "atlas-c",
-          "label": "Atlas C · Biodroid laser rifle",
-          "src": "candidates/batch-59/karabin_laserowy.png",
-          "note": "One headless armored worm Biodroid braces a crude industrial laser rifle firing one straight beam."
-        },
-        {
-          "id": "batch60-revision",
-          "label": "Revision B · weapon-only laser rifle",
-          "src": "candidates/batch-60/karabin_laserowy_revision_b.png",
-          "note": "Only the crude industrial laser rifle remains, with no wielder or target."
-        }
-      ]
-    },
-    {
       "id": "batch59-dmuchawka",
       "name": "Dmuchawka",
       "tier": "Batch 59 · Szpieg III Generacji weapon",
@@ -5607,7 +5558,8 @@
           "src": "candidates/batch-60/dmuchawka_revision_b.png",
           "note": "A short fleshy tube grows from an almost-human face and launches one dart."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch59-dzialo-ppanc",
@@ -5648,27 +5600,8 @@
           "src": "candidates/batch-60/wymagania.png",
           "note": "A healthy horse and dog face clean feed and water while one contaminated bucket is rejected."
         }
-      ]
-    },
-    {
-      "id": "batch60-paszcza",
-      "name": "Paszcza",
-      "tier": "Batch 60 · Megator and Neogator action",
-      "context": "A hit from the colossal jaws grapples and restrains a Huge or smaller target.",
-      "request": "One enormous mutant alligator jaw clamps around a restrained adult torso without gore.",
-      "current": {
-        "src": null,
-        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
-        "note": "Current imagery is generic or actor-specific."
-      },
-      "candidates": [
-        {
-          "id": "atlas-a",
-          "label": "Atlas A · colossal restraining jaws",
-          "src": "candidates/batch-60/paszcza.png",
-          "note": "One enormous mutant alligator jaw clamps around a restrained adult torso without gore."
-        }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch60-tylko-zwarcie",
@@ -5688,7 +5621,8 @@
           "src": "candidates/batch-60/tylko_zwarcie.png",
           "note": "One decayed zombie abandons a snapped rifle and lunges forward with both clawed hands."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch60-siodme-poty",
@@ -5708,7 +5642,8 @@
           "src": "candidates/batch-60/siodme_poty.png",
           "note": "Two calloused hands grip a battered steering wheel with speed streaks and two large sweat drops."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch60-fart",
@@ -5728,47 +5663,8 @@
           "src": "candidates/batch-60/fart.png",
           "note": "One battered twenty-sided die escapes a spike trap along one thick reroll arrow."
         }
-      ]
-    },
-    {
-      "id": "batch60-ja-juz-swoje-odchorowalem",
-      "name": "Ja już swoje odchorowałem",
-      "tier": "Batch 60 · Miami origin feature",
-      "context": "The character has advantage on Constitution saving throws.",
-      "request": "A scarred survivor stands steady while disease particles break against a chest-shaped shield.",
-      "current": {
-        "src": null,
-        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
-        "note": "Current imagery is generic or actor-specific."
-      },
-      "candidates": [
-        {
-          "id": "atlas-b",
-          "label": "Atlas B · hardened constitution",
-          "src": "candidates/batch-60/ja_juz_swoje_odchorowalem.png",
-          "note": "A scarred survivor stands steady while disease particles break against a chest-shaped shield."
-        }
-      ]
-    },
-    {
-      "id": "batch60-grad-olowiu",
-      "name": "Grad ołowiu",
-      "tier": "Batch 60 · Sztuczka",
-      "context": "Short bursts become part of the Attack action, allowing as many short bursts as attacks in the turn.",
-      "request": "One crude rifle fires three clearly separated short burst clusters in one direction.",
-      "current": {
-        "src": null,
-        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
-        "note": "Current imagery is generic or actor-specific."
-      },
-      "candidates": [
-        {
-          "id": "atlas-b",
-          "label": "Atlas B · repeated short bursts",
-          "src": "candidates/batch-60/grad_olowiu.png",
-          "note": "One crude rifle fires three clearly separated short burst clusters in one direction."
-        }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch60-cos-mi-tu-smierdzi",
@@ -5788,7 +5684,8 @@
           "src": "candidates/batch-60/cos_mi_tu_smierdzi.png",
           "note": "A wary survivor follows two scent trails toward a mutant partly hidden behind broken cover."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch60-czas-patriotow",
@@ -5808,27 +5705,8 @@
           "src": "candidates/batch-60/czas_patriotow.png",
           "note": "A weathered survivor makes a decisive effort beneath one battered flag with a plain star patch."
         }
-      ]
-    },
-    {
-      "id": "batch60-cwiczenie-czyni-mistrza",
-      "name": "Ćwiczenie czyni mistrza",
-      "tier": "Batch 60 · Sztuczka",
-      "context": "The feature permanently improves one or two base attributes and can be selected repeatedly.",
-      "request": "A rugged adult repeats a heavy barbell lift through three stages beside one upward progress arrow.",
-      "current": {
-        "src": null,
-        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
-        "note": "Current imagery is generic or actor-specific."
-      },
-      "candidates": [
-        {
-          "id": "atlas-b",
-          "label": "Atlas B · repeated training",
-          "src": "candidates/batch-60/cwiczenie_czyni_mistrza.png",
-          "note": "A rugged adult repeats a heavy barbell lift through three stages beside one upward progress arrow."
-        }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch60-doktor-quinn",
@@ -5848,67 +5726,8 @@
           "src": "candidates/batch-60/doktor_quinn.png",
           "note": "One rugged field doctor uses forceps and a bandage on a large wounded forearm."
         }
-      ]
-    },
-    {
-      "id": "batch60-jesli-ma-silnik-to-ruszy",
-      "name": "Jeśli ma silnik, to ruszy",
-      "tier": "Batch 60 · Detroit origin feature",
-      "context": "The character has advantage when building or repairing vehicles and gains mechanic-tool proficiency.",
-      "request": "A greasy mechanic hand turns a large wrench on a battered exposed engine as it ignites.",
-      "current": {
-        "src": null,
-        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
-        "note": "Current imagery is generic or actor-specific."
-      },
-      "candidates": [
-        {
-          "id": "atlas-b",
-          "label": "Atlas B · reviving an engine",
-          "src": "candidates/batch-60/jesli_ma_silnik_to_ruszy.png",
-          "note": "A greasy mechanic hand turns a large wrench on a battered exposed engine as it ignites."
-        }
-      ]
-    },
-    {
-      "id": "batch60-pakowanie",
-      "name": "Pakowanie",
-      "tier": "Batch 60 · Sztuczka",
-      "context": "The character doubles carrying capacity and can retrieve any backpack item as a free interaction.",
-      "request": "A gloved hand instantly pulls a large wrench from one overfilled rugged backpack.",
-      "current": {
-        "src": null,
-        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
-        "note": "Current imagery is generic or actor-specific."
-      },
-      "candidates": [
-        {
-          "id": "atlas-c",
-          "label": "Atlas C · fast overloaded backpack",
-          "src": "candidates/batch-60/pakowanie.png",
-          "note": "A gloved hand instantly pulls a large wrench from one overfilled rugged backpack."
-        }
-      ]
-    },
-    {
-      "id": "batch60-patriota",
-      "name": "Patriota",
-      "tier": "Batch 60 · Sztuczka",
-      "context": "The character improves one attribute and gains another feature from their origin list.",
-      "request": "A weathered survivor presses one hand to a battered regional flag patch and receives one additional skill token.",
-      "current": {
-        "src": null,
-        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
-        "note": "Current imagery is generic or actor-specific."
-      },
-      "candidates": [
-        {
-          "id": "atlas-c",
-          "label": "Atlas C · additional origin feature",
-          "src": "candidates/batch-60/patriota.png",
-          "note": "A weathered survivor presses one hand to a battered regional flag patch and receives one additional skill token."
-        }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch60-wierze",
@@ -5928,67 +5747,8 @@
           "src": "candidates/batch-60/wierze.png",
           "note": "A desperate survivor believes in one practical canteen appearing above an empty palm."
         }
-      ]
-    },
-    {
-      "id": "batch60-wychuchana-spluwa",
-      "name": "Wychuchana spluwa",
-      "tier": "Batch 60 · Appalachia origin feature",
-      "context": "One chosen firearm never jams and can be changed after a long rest.",
-      "request": "Two careful hands meticulously clean the open action of one battered pistol.",
-      "current": {
-        "src": null,
-        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
-        "note": "Current imagery is generic or actor-specific."
-      },
-      "candidates": [
-        {
-          "id": "atlas-c",
-          "label": "Atlas C · meticulously maintained gun",
-          "src": "candidates/batch-60/wychuchana_spluwa.png",
-          "note": "Two careful hands meticulously clean the open action of one battered pistol."
-        }
-      ]
-    },
-    {
-      "id": "batch60-zawziety-sukinkot",
-      "name": "Zawzięty sukinkot",
-      "tier": "Batch 60 · Southern Hegemony origin feature",
-      "context": "Once per long rest, after dropping to zero hit points the character rises with one hit point on the next turn.",
-      "request": "One badly wounded adult pushes up from the ground beneath one thick upward arrow.",
-      "current": {
-        "src": null,
-        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
-        "note": "Current imagery is generic or actor-specific."
-      },
-      "candidates": [
-        {
-          "id": "atlas-c",
-          "label": "Atlas C · defiant return from zero",
-          "src": "candidates/batch-60/zawziety_sukinkot.png",
-          "note": "One badly wounded adult pushes up from the ground beneath one thick upward arrow."
-        }
-      ]
-    },
-    {
-      "id": "batch60-urodzony-morderca",
-      "name": "Urodzony morderca",
-      "tier": "Batch 60 · Southern Hegemony origin feature",
-      "context": "When a damage die rolls one, the character may reroll that die once.",
-      "request": "One brutal knife strike accompanies a one-pip damage die caught by a reroll arrow.",
-      "current": {
-        "src": null,
-        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
-        "note": "Current imagery is generic or actor-specific."
-      },
-      "candidates": [
-        {
-          "id": "atlas-c",
-          "label": "Atlas C · damage reroll",
-          "src": "candidates/batch-60/urodzony_morderca.png",
-          "note": "One brutal knife strike accompanies a one-pip damage die caught by a reroll arrow."
-        }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch60-mlynek",
@@ -6008,7 +5768,8 @@
           "src": "candidates/batch-60/mlynek.png",
           "note": "One rugged fighter swings a steel bar through one broad circular sweep against three attackers."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch60-kuchenny-terror",
@@ -6028,7 +5789,8 @@
           "src": "candidates/batch-60/kuchenny_terror.png",
           "note": "One severe older cook grips a heavy cleaver in a kitchen doorway while an intruder recoils."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch60-logika-roznoboczna",
@@ -6048,7 +5810,2697 @@
           "src": "candidates/batch-60/logika_roznoboczna.png",
           "note": "A tactical fighter strikes from a scalene triangular barrier while one ally holds the opposite corner."
         }
-      ]
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch59-ruch",
+      "name": "Ruch",
+      "tier": "Batch 59 · Megator action",
+      "context": "Megator, an alligator the size of a submarine, moves up to its speed.",
+      "request": "Preserve the saved colossal organic crocodilian moving forward. Replace armadillo-like scales with a few broad irregular crocodile scutes along the back; strong crocodilian head, feet and long tail, no artificial segmented armour. Add three broad backward speed streaks indicating forward movement. A crushed car establishes size.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch63-revision",
+          "label": "Batch 63 revision",
+          "src": "candidates/batch-63/ruch_revision_d.png",
+          "note": "Preserve the saved colossal organic crocodilian moving forward. Replace armadillo-like scales with a few broad irregular crocodile scutes along the back; strong crocodilian head, feet and long tail, no artificial segmented armour. Add three broad backward speed streaks indicating forward movement. A crushed car establishes size."
+        },
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · faster organic Megator",
+          "src": "candidates/batch-61/ruch_revision_c.png",
+          "note": "Irregular scales, a crushed car and three bold speed streaks."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · colossal alligator movement",
+          "src": "candidates/batch-59/ruch.png",
+          "note": "One colossal armored mutant alligator surges forward with three bold speed streaks."
+        },
+        {
+          "id": "batch60-revision",
+          "label": "Revision B · organic Megator crushes a car",
+          "src": "candidates/batch-60/ruch_revision_b.png",
+          "note": "Armadillo-like organic scales and a crushed car establish the creature's immense size."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/ruch.svg"
+    },
+    {
+      "id": "batch59-karabin-laserowy",
+      "name": "Karabin laserowy",
+      "tier": "Batch 59 · Biodroid weapon",
+      "context": "The headless upright Biodroid carries machine guns and uses a laser rifle as a dedicated attack.",
+      "request": "One headless armored worm Biodroid braces a crude industrial laser rifle firing one straight beam.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · simplified laser rifle",
+          "src": "candidates/batch-61/karabin_laserowy_revision_c.png",
+          "note": "Only the weapon remains, reduced to a clean industrial silhouette."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Biodroid laser rifle",
+          "src": "candidates/batch-59/karabin_laserowy.png",
+          "note": "One headless armored worm Biodroid braces a crude industrial laser rifle firing one straight beam."
+        },
+        {
+          "id": "batch60-revision",
+          "label": "Revision B · weapon-only laser rifle",
+          "src": "candidates/batch-60/karabin_laserowy_revision_b.png",
+          "note": "Only the crude industrial laser rifle remains, with no wielder or target."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/weapons/karabin_laserowy.svg"
+    },
+    {
+      "id": "batch60-cwiczenie-czyni-mistrza",
+      "name": "Ćwiczenie czyni mistrza",
+      "tier": "Batch 60 · Sztuczka",
+      "context": "The feature permanently improves one or two base attributes and can be selected repeatedly.",
+      "request": "A rugged adult repeats a heavy barbell lift through three stages beside one upward progress arrow.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · two-stage training",
+          "src": "candidates/batch-61/cwiczenie_czyni_mistrza_revision_b.png",
+          "note": "Only the preparation and completed lift remain beneath one progress arrow."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · repeated training",
+          "src": "candidates/batch-60/cwiczenie_czyni_mistrza.png",
+          "note": "A rugged adult repeats a heavy barbell lift through three stages beside one upward progress arrow."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/cwiczenie-czyni-mistrza.svg"
+    },
+    {
+      "id": "batch60-grad-olowiu",
+      "name": "Grad ołowiu",
+      "tier": "Batch 60 · Sztuczka",
+      "context": "Short bursts become part of the Attack action, allowing as many short bursts as attacks in the turn.",
+      "request": "One crude rifle fires three clearly separated short burst clusters in one direction.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · single muzzle flash",
+          "src": "candidates/batch-61/grad_olowiu_revision_b.png",
+          "note": "One muzzle flash launches a dense fan of bullets and long streaks."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · repeated short bursts",
+          "src": "candidates/batch-60/grad_olowiu.png",
+          "note": "One crude rifle fires three clearly separated short burst clusters in one direction."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/grad-olowiu.svg"
+    },
+    {
+      "id": "batch60-ja-juz-swoje-odchorowalem",
+      "name": "Ja już swoje odchorowałem",
+      "tier": "Batch 60 · Miami origin feature",
+      "context": "The character has advantage on Constitution saving throws.",
+      "request": "A scarred survivor stands steady while disease particles break against a chest-shaped shield.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · simplified disease resistance",
+          "src": "candidates/batch-61/ja_juz_swoje_odchorowalem_revision_b.png",
+          "note": "A shield blocks three disease particles from a scarred survivor."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · hardened constitution",
+          "src": "candidates/batch-60/ja_juz_swoje_odchorowalem.png",
+          "note": "A scarred survivor stands steady while disease particles break against a chest-shaped shield."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/ja-juz-swoje-odchorowalem.svg"
+    },
+    {
+      "id": "batch60-jesli-ma-silnik-to-ruszy",
+      "name": "Jeśli ma silnik, to ruszy",
+      "tier": "Batch 60 · Detroit origin feature",
+      "context": "The character has advantage when building or repairing vehicles and gains mechanic-tool proficiency.",
+      "request": "A greasy mechanic hand turns a large wrench on a battered exposed engine as it ignites.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · simplified engine repair",
+          "src": "candidates/batch-61/jesli_ma_silnik_to_ruszy_revision_b.png",
+          "note": "One wrench, one engine block and one ignition spark."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · reviving an engine",
+          "src": "candidates/batch-60/jesli_ma_silnik_to_ruszy.png",
+          "note": "A greasy mechanic hand turns a large wrench on a battered exposed engine as it ignites."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/jesli-ma-silnik-to-ruszy.svg"
+    },
+    {
+      "id": "batch60-pakowanie",
+      "name": "Pakowanie",
+      "tier": "Batch 60 · Sztuczka",
+      "context": "The character doubles carrying capacity and can retrieve any backpack item as a free interaction.",
+      "request": "A gloved hand instantly pulls a large wrench from one overfilled rugged backpack.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · putting an item into the pack",
+          "src": "candidates/batch-61/pakowanie_revision_b.png",
+          "note": "The hand and bold arrow clearly push the wrench inward."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · fast overloaded backpack",
+          "src": "candidates/batch-60/pakowanie.png",
+          "note": "A gloved hand instantly pulls a large wrench from one overfilled rugged backpack."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/pakowanie.svg"
+    },
+    {
+      "id": "batch60-paszcza",
+      "name": "Paszcza",
+      "tier": "Batch 60 · Megator and Neogator action",
+      "context": "A hit from the colossal jaws grapples and restrains a Huge or smaller target.",
+      "request": "An immense open crocodilian jaw surrounds one unmistakable complete HUMAN silhouette. The human's head, torso, two arms pushing the jaws apart and two separated bent legs must all read clearly in broad negative space. Enlarge the human relative to the mouth; do not merge the body into teeth or jaw edges. No gore.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch63-revision",
+          "label": "Batch 63 revision",
+          "src": "candidates/batch-63/paszcza_revision_c.png",
+          "note": "An immense open crocodilian jaw surrounds one unmistakable complete HUMAN silhouette. The human's head, torso, two arms pushing the jaws apart and two separated bent legs must all read clearly in broad negative space. Enlarge the human relative to the mouth; do not merge the body into teeth or jaw edges. No gore."
+        },
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · struggling inside the jaws",
+          "src": "candidates/batch-61/paszcza_revision_b.png",
+          "note": "The trapped adult visibly pushes against the enormous jaws."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · colossal restraining jaws",
+          "src": "candidates/batch-60/paszcza.png",
+          "note": "One enormous mutant alligator jaw clamps around a restrained adult torso without gore."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/paszcza.svg"
+    },
+    {
+      "id": "batch60-patriota",
+      "name": "Patriota",
+      "tier": "Batch 60 · Sztuczka",
+      "context": "The character improves one attribute and gains another feature from their origin list.",
+      "request": "A weathered survivor presses one hand to a battered regional flag patch and receives one additional skill token.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · left-shoulder patch",
+          "src": "candidates/batch-61/patriota_revision_b.png",
+          "note": "The flag patch sits on the left shoulder of a simplified uniformed torso."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · additional origin feature",
+          "src": "candidates/batch-60/patriota.png",
+          "note": "A weathered survivor presses one hand to a battered regional flag patch and receives one additional skill token."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/patriota.svg"
+    },
+    {
+      "id": "batch60-urodzony-morderca",
+      "name": "Urodzony morderca",
+      "tier": "Batch 60 · Southern Hegemony origin feature",
+      "context": "When a damage die rolls one, the character may reroll that die once.",
+      "request": "One brutal knife strike accompanies a one-pip damage die caught by a reroll arrow.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · clean knife reroll",
+          "src": "candidates/batch-61/urodzony_morderca_revision_b.png",
+          "note": "Clean knife, one-pip die and a single reroll arrow with no dithering."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · damage reroll",
+          "src": "candidates/batch-60/urodzony_morderca.png",
+          "note": "One brutal knife strike accompanies a one-pip damage die caught by a reroll arrow."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/urodzony-morderca.svg"
+    },
+    {
+      "id": "batch60-wychuchana-spluwa",
+      "name": "Wychuchana spluwa",
+      "tier": "Batch 60 · Appalachia origin feature",
+      "context": "One chosen firearm never jams and can be changed after a long rest.",
+      "request": "Keep exactly two realistic gloved hands, the holding grip and the cleaning cloth. Lengthen the pistol slide/barrel to adult-handgun proportions, about 25% longer than the short draft. Draw one unmistakable curved trigger INSIDE its complete trigger guard, with a broad black gap around it. No third hand, floating trigger or extra guard.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch64-revision",
+          "label": "Batch 64 revision",
+          "src": "candidates/batch-64/wychuchana_spluwa_revision_d.png",
+          "note": "Keep exactly two realistic gloved hands, the holding grip and the cleaning cloth. Lengthen the pistol slide/barrel to adult-handgun proportions, about 25% longer than the short draft. Draw one unmistakable curved trigger INSIDE its complete trigger guard, with a broad black gap around it. No third hand, floating trigger or extra guard."
+        },
+        {
+          "id": "batch63-revision",
+          "label": "Batch 63 revision",
+          "src": "candidates/batch-63/wychuchana_spluwa_revision_c.png",
+          "note": "Exactly TWO gloved hands total, no extra fingers that resemble hands: the left hand grips one pistol by its grip, the right hand holds one broad cleaning cloth against its slide. Each hand attaches to one visible wrist at opposite sides. Show careful gun cleaning with only pistol, two hands and cloth."
+        },
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · two careful white gloves",
+          "src": "candidates/batch-61/wychuchana_spluwa_revision_b.png",
+          "note": "One gloved hand holds the pistol while the other wipes it with a cloth."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · meticulously maintained gun",
+          "src": "candidates/batch-60/wychuchana_spluwa.png",
+          "note": "Two careful hands meticulously clean the open action of one battered pistol."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/wychuchana-spluwa.svg"
+    },
+    {
+      "id": "batch60-zawziety-sukinkot",
+      "name": "Zawzięty sukinkot",
+      "tier": "Batch 60 · Southern Hegemony origin feature",
+      "context": "Once per long rest, after dropping to zero hit points the character rises with one hit point on the next turn.",
+      "request": "One badly wounded adult pushes up from the ground beneath one thick upward arrow.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · grizzled man rising",
+          "src": "candidates/batch-61/zawziety_sukinkot_revision_b.png",
+          "note": "A wounded grizzled man forcefully rises beneath one arrow."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · defiant return from zero",
+          "src": "candidates/batch-60/zawziety_sukinkot.png",
+          "note": "One badly wounded adult pushes up from the ground beneath one thick upward arrow."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/zawziety-sukinkot.svg"
+    },
+    {
+      "id": "batch61-na-symulatorach-to-dzialalo",
+      "name": "Na symulatorach to działało",
+      "tier": "Batch 61 · Posterunek origin feature",
+      "context": "The character gains two proficiencies chosen from vehicles, technology, mechanic tools and electronic tools.",
+      "request": "Two hands work a battered steering wheel while a small simulator screen repeats the wheel silhouette.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · vehicle simulator training",
+          "src": "candidates/batch-61/na_symulatorach_to_dzialalo.png",
+          "note": "Two hands work a battered steering wheel while a small simulator screen repeats the wheel silhouette."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/na-symulatorach-to-dzialalo.svg"
+    },
+    {
+      "id": "batch61-telepata",
+      "name": "Telepata",
+      "tier": "Batch 61 · Vegas origin feature",
+      "context": "The character gains Insight proficiency and advantage on Insight checks.",
+      "request": "One wary profile reads another person's expression through one bold eye and a short mental signal.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · reading another person",
+          "src": "candidates/batch-61/telepata.png",
+          "note": "One wary profile reads another person's expression through one bold eye and a short mental signal."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/telepata.svg"
+    },
+    {
+      "id": "batch61-przycelowanie",
+      "name": "Przycelowanie",
+      "tier": "Batch 61 · Sztuczka",
+      "context": "The character can target a specific body part or component at increased hit difficulty for a special effect.",
+      "request": "One rifle sight crosshair locks onto the knee of a running human silhouette.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · deliberate called shot",
+          "src": "candidates/batch-61/przycelowanie.png",
+          "note": "One rifle sight crosshair locks onto the knee of a running human silhouette."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/przycelowanie.svg"
+    },
+    {
+      "id": "batch61-samuraj",
+      "name": "Samuraj",
+      "tier": "Batch 61 · Sztuczka",
+      "context": "The character improves bladed attacks, draws a finesse slashing weapon freely and gains protection while wielding it.",
+      "request": "Keep the exact selected katana and sword hand. Change ONLY the empty off hand: palm faces upward, fingers slightly curled toward the viewer in a clear beckoning 'come here' gesture. Thumb stays distinct from four fingers; exactly two adult hands and one katana. No scabbard.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch65-revision",
+          "label": "Batch 65 revision",
+          "src": "candidates/batch-65/samuraj_revision_d.png",
+          "note": "Keep the exact selected katana and sword hand. Change ONLY the empty off hand: palm faces upward, fingers slightly curled toward the viewer in a clear beckoning 'come here' gesture. Thumb stays distinct from four fingers; exactly two adult hands and one katana. No scabbard."
+        },
+        {
+          "id": "batch64-revision",
+          "label": "Batch 64 revision",
+          "src": "candidates/batch-64/samuraj_revision_c.png",
+          "note": "Completely redraw according to the GM's new direction: one realistic adult hand grips a KATANA with a gently curved single-edged blade and plain circular guard, blade diagonal up-right. The OFF HAND is empty and held beside it in a compact martial guard position, fingers naturally extended together and palm angled toward the viewer. Exactly two anatomically correct hands, one katana. NO scabbard, draw gesture, sleeves shaped like hands, extra weapon or armoured figure."
+        },
+        {
+          "id": "batch63-revision",
+          "label": "Batch 63 revision",
+          "src": "candidates/batch-63/samuraj_revision_b.png",
+          "note": "Completely redraw as a clear practical blade-draw gesture: the left hand holds one straight scabbard horizontally at the waist; the right hand pulls one slim single-edged blade diagonally up-right, with much of the blade visibly clear of the scabbard. Exactly two hands, one blade, one scabbard. No armoured figure, helmet or busy ornaments."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · rapid blade draw",
+          "src": "candidates/batch-61/samuraj.png",
+          "note": "Two hands rapidly draw one slim blade from its scabbard in a strong diagonal sweep."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/samuraj.svg"
+    },
+    {
+      "id": "batch61-nowka-sztuka",
+      "name": "Nówka sztuka",
+      "tier": "Batch 61 · Asgard origin feature",
+      "context": "The character leaves the bunker with one chosen item worth at most 100 gamble.",
+      "request": "Rework the opened bunker equipment crate so one large rectangular hinged lid is unmistakably raised BEHIND the box, with broad empty interior space and one pristine pistol partly visible inside. The lid is one complete slab with readable hinge relationship, never two side flanges.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch63-revision",
+          "label": "Batch 63 revision",
+          "src": "candidates/batch-63/nowka_sztuka_revision_b.png",
+          "note": "Rework the opened bunker equipment crate so one large rectangular hinged lid is unmistakably raised BEHIND the box, with broad empty interior space and one pristine pistol partly visible inside. The lid is one complete slab with readable hinge relationship, never two side flanges."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · pristine bunker equipment",
+          "src": "candidates/batch-61/nowka_sztuka.png",
+          "note": "One pristine new pistol rises from an opened sealed bunker equipment crate."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/nowka-sztuka.svg"
+    },
+    {
+      "id": "batch61-przedwojenna-edukacja",
+      "name": "Przedwojenna edukacja",
+      "tier": "Batch 61 · Asgard origin feature",
+      "context": "The character has advantage on Intelligence checks about the prewar world and gains one tool proficiency.",
+      "request": "One intact open technical manual shows a bridge diagram with one solid wrench across the other page.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · prewar technical education",
+          "src": "candidates/batch-61/przedwojenna_edukacja.png",
+          "note": "One intact open technical manual shows a bridge diagram with one solid wrench across the other page."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/przedwojenna-edukacja.svg"
+    },
+    {
+      "id": "batch61-nano-tech",
+      "name": "Nano-Tech",
+      "tier": "Batch 61 · Asgard origin feature",
+      "context": "The character has advantage when building or repairing electronics and gains electronic-tool proficiency.",
+      "request": "A large circuit board is repaired by a precision probe and soldering tip with only a few thick traces.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · precision electronics repair",
+          "src": "candidates/batch-61/nano_tech.png",
+          "note": "A large circuit board is repaired by a precision probe and soldering tip with only a few thick traces."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/nano-tech.svg"
+    },
+    {
+      "id": "batch61-dieta-cud",
+      "name": "Dieta cud",
+      "tier": "Batch 61 · Człowiek Pustyni origin feature",
+      "context": "The character needs fewer daily supplies, receives twice as much healing and gains cook-tool proficiency.",
+      "request": "A small ration and canteen restore a sturdy torso marked by one plain medical cross.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · efficient desert diet",
+          "src": "candidates/batch-61/dieta_cud.png",
+          "note": "A small ration and canteen restore a sturdy torso marked by one plain medical cross."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/dieta-cud.svg"
+    },
+    {
+      "id": "batch61-duch-pustyni",
+      "name": "Duch pustyni",
+      "tier": "Batch 61 · Człowiek Pustyni origin feature",
+      "context": "The character has advantage on Stealth and Survival checks in deserts and sandy terrain.",
+      "request": "One hooded scout crouches behind a dune and partly blends into its contour.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · desert stealth",
+          "src": "candidates/batch-61/duch_pustyni.png",
+          "note": "One hooded scout crouches behind a dune and partly blends into its contour."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/duch-pustyni.svg"
+    },
+    {
+      "id": "batch61-polegam-tylko-na-sobie",
+      "name": "Polegam tylko na sobie",
+      "tier": "Batch 61 · Człowiek Pustyni origin feature",
+      "context": "The character gains smith-tool proficiency and improves attacks made with self-crafted melee or thrown weapons.",
+      "request": "Completely replace the forging scene with one lone rugged man standing among sparse desolation: a low broken wall, one dead tree stump and a barren ground contour. The isolated human silhouette dominates; no anvil, hammer or crafting tools.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch63-revision",
+          "label": "Batch 63 revision",
+          "src": "candidates/batch-63/polegam_tylko_na_sobie_revision_b.png",
+          "note": "Completely replace the forging scene with one lone rugged man standing among sparse desolation: a low broken wall, one dead tree stump and a barren ground contour. The isolated human silhouette dominates; no anvil, hammer or crafting tools."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · self-forged weapon",
+          "src": "candidates/batch-61/polegam_tylko_na_sobie.png",
+          "note": "One hand forges a practical knife on an anvil with one hammer and three sparks."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/polegam-tylko-na-sobie.svg"
+    },
+    {
+      "id": "batch61-ale-jazda",
+      "name": "Ale jazda!",
+      "tier": "Batch 61 · Detroit origin feature",
+      "context": "The character ignores attack disadvantage while shooting from a moving vehicle, mount or during a fall.",
+      "request": "One survivor fires a compact firearm from a speeding rugged motorcycle.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · shooting from a moving vehicle",
+          "src": "candidates/batch-61/ale_jazda.png",
+          "note": "One survivor fires a compact firearm from a speeding rugged motorcycle."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/ale-jazda.svg"
+    },
+    {
+      "id": "batch61-gornik-z-dziada-pradziada",
+      "name": "Górnik z dziada pradziada",
+      "tier": "Batch 61 · Appalachia origin feature",
+      "context": "The character has advantage on Strength Athletics checks and doubles carrying capacity.",
+      "request": "One powerful miner carries a huge ore sack and grips one pickaxe.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · powerful miner",
+          "src": "candidates/batch-61/gornik_z_dziada_pradziada.png",
+          "note": "One powerful miner carries a huge ore sack and grips one pickaxe."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/gornik-z-dziada-pradziada.svg"
+    },
+    {
+      "id": "batch61-szlachetne-urodzenie",
+      "name": "Szlachetne urodzenie",
+      "tier": "Batch 61 · Appalachia origin feature",
+      "context": "The character gains two social or historical proficiencies.",
+      "request": "Preserve the survivor and signet-ring gesture but replace the ragged coat with a brand-new respectable formal coat: intact smooth hem, crisp lapels and cuffs, clean symmetrical tailoring, no tears or wear.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch63-revision",
+          "label": "Batch 63 revision",
+          "src": "candidates/batch-63/szlachetne_urodzenie_revision_b.png",
+          "note": "Preserve the survivor and signet-ring gesture but replace the ragged coat with a brand-new respectable formal coat: intact smooth hem, crisp lapels and cuffs, clean symmetrical tailoring, no tears or wear."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · restrained inherited authority",
+          "src": "candidates/batch-61/szlachetne_urodzenie.png",
+          "note": "One composed survivor in a battered formal coat raises a signet-ring hand."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/szlachetne-urodzenie.svg"
+    },
+    {
+      "id": "batch61-czlowiek-aligator",
+      "name": "Człowiek-aligator",
+      "tier": "Batch 61 · Miami origin feature",
+      "context": "The character gains a swimming speed equal to their normal speed.",
+      "request": "Preserve the human swimmer and broad wake. Remove the alligator tail entirely from the right; no animal parts. One complete human performing a crawl stroke above a single water contour.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch63-revision",
+          "label": "Batch 63 revision",
+          "src": "candidates/batch-63/czlowiek_aligator_revision_b.png",
+          "note": "Preserve the human swimmer and broad wake. Remove the alligator tail entirely from the right; no animal parts. One complete human performing a crawl stroke above a single water contour."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · powerful swimmer",
+          "src": "candidates/batch-61/czlowiek_aligator.png",
+          "note": "One powerful human swimmer makes a crawl stroke beside a blunt alligator tail and one wake."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/czlowiek-aligator.svg"
+    },
+    {
+      "id": "batch61-wloczykij",
+      "name": "Włóczykij",
+      "tier": "Batch 61 · Miami origin feature",
+      "context": "Wetlands and broad sands are no longer difficult terrain, and the character gains cartographer-tool proficiency.",
+      "request": "Preserve the rugged boot, reed marsh and sand dune. Remove the strapped rolled map completely; no cylindrical roll or straps above the ankle. Keep the boot silhouette legible.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch63-revision",
+          "label": "Batch 63 revision",
+          "src": "candidates/batch-63/wloczykij_revision_b.png",
+          "note": "Preserve the rugged boot, reed marsh and sand dune. Remove the strapped rolled map completely; no cylindrical roll or straps above the ankle. Keep the boot silhouette legible."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · traveller across marsh and sand",
+          "src": "candidates/batch-61/wloczykij.png",
+          "note": "One rugged boot strides from reed marsh into a sand dune with a rolled map strapped above it."
+        }
+      ],
+      "status": "resolved",
+      "target": "icons/abilities/wloczykij.svg"
+    },
+    {
+      "id": "batch62-handel",
+      "name": "Handel",
+      "tier": "Batch 62 · M5",
+      "context": "M5 player action button; toolbar/item-sheet use at small sizes.",
+      "request": "Two opposing hands at different heights: the upper hand from the left gives one wrapped bundle to the right, while the lower hand from the right gives one plain crate to the left. Each hand must hold a different exchanged object.",
+      "target": "icons/actions/handel.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "batch63-revision",
+          "label": "Batch 63 revision",
+          "src": "candidates/batch-63/handel_revision_b.png",
+          "note": "Two opposing hands at different heights: the upper hand from the left gives one wrapped bundle to the right, while the lower hand from the right gives one plain crate to the left. Each hand must hold a different exchanged object."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Handel",
+          "src": "candidates/batch-62/handel.png",
+          "note": "Two hands exchange a bundle above a crate; barter, no coins."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch62-doba",
+      "name": "Doba",
+      "tier": "Batch 62 · M5",
+      "context": "M5 player action button; toolbar/item-sheet use at small sizes.",
+      "request": "Setting sun, campfire and a plain clock: daily downtime.",
+      "target": "icons/actions/doba.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Doba",
+          "src": "candidates/batch-62/doba.png",
+          "note": "Setting sun, campfire and a plain clock: daily downtime."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch62-bebeszenie",
+      "name": "Bebeszenie",
+      "tier": "Batch 62 · M5",
+      "context": "M5 player action button; toolbar/item-sheet use at small sizes.",
+      "request": "Redesign the entire composition into TWO balanced, uncrossed groups separated by a small central vertical lightning-bolt divider. LEFT: one upright butcher's knife beside a LARGE simple ribcage outline; RIGHT: one stack of two broad printed circuit boards beside one smaller intact pair of pliers. Knife, ribcage, PCB stack and pliers are separate non-touching silhouettes with generous black gaps. Ribcage is comparable in height to the tools, never tiny decoration above them. No crossed tools, skull, hands or gore. Keep the pliers' two straight symmetric handles below one pivot. The modest central lightning bolt divides organic butchery from electronic salvage; no text.",
+      "target": "icons/actions/bebeszenie.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "batch67-revision",
+          "label": "Batch 67 revision",
+          "src": "candidates/batch-67/bebeszenie_revision_f.png",
+          "note": "Redesign the entire composition into TWO balanced, uncrossed groups separated by a small central vertical lightning-bolt divider. LEFT: one upright butcher's knife beside a LARGE simple ribcage outline; RIGHT: one stack of two broad printed circuit boards beside one smaller intact pair of pliers. Knife, ribcage, PCB stack and pliers are separate non-touching silhouettes with generous black gaps. Ribcage is comparable in height to the tools, never tiny decoration above them. No crossed tools, skull, hands or gore. Keep the pliers' two straight symmetric handles below one pivot. The modest central lightning bolt divides organic butchery from electronic salvage; no text."
+        },
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/bebeszenie_revision_e.png",
+          "note": "Completely regenerate as an ISOLATED glyph with no defective prior image supplied. One intact real pair of combination pliers crosses one butcher knife below a simple rib outline. Both pliers handles must be fully visible, straight, continuous and symmetric below the pivot, pointing down at a small angle; neither handle may bend 90 degrees or join the knife. Two coherent jaws above one pivot. No animal skull, additional tool, hand or gore."
+        },
+        {
+          "id": "batch65-revision",
+          "label": "Batch 65 revision",
+          "src": "candidates/batch-65/bebeszenie_revision_d.png",
+          "note": "Completely REGENERATE this tool composition instead of copying the broken pliers. One normal pair of combination pliers crosses one broad butcher knife below a small clean rib-cage outline. Pliers have exactly two continuous straight handles, one central pivot and two short coherent jaws; the handles are thick straight bars, not hooks or zigzags. Knife has one solid blade and one straight handle. Keep the two tools separated by a broad black cutout at the crossing. No hand, gore or extra tools."
+        },
+        {
+          "id": "batch64-revision",
+          "label": "Batch 64 revision",
+          "src": "candidates/batch-64/bebeszenie_revision_c.png",
+          "note": "Keep the crossed butcher knife and pliers in front of the rib outline. Repair the pliers: two straight continuous handles below the pivot, no V-shaped kink, hooked grip or bent handle. Two recognisable open jaws above the pivot. Only these TWO tools form the X; no extra tool or gore."
+        },
+        {
+          "id": "batch63-revision",
+          "label": "Batch 63 revision",
+          "src": "candidates/batch-63/bebeszenie_revision_b.png",
+          "note": "Exactly TWO tools form an X: a butcher knife on one diagonal and recognisable pliers with two open jaws and two handles on the other. Replace the unidentified extra tool with the pliers. A restrained three-rib carcass outline stays behind them; no third tool and no gore."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Bebeszenie",
+          "src": "candidates/batch-62/bebeszenie.png",
+          "note": "Butcher knife and pliers over ribs; no gore."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch62-szabrowanie",
+      "name": "Szabrowanie",
+      "tier": "Batch 62 · M5",
+      "context": "M5 player action button; toolbar/item-sheet use at small sizes.",
+      "request": "Keep the open crate and its full-size raised lid. Draw one complete crowbar leaning diagonally BESIDE the crate, with its flattened hooked tip fully visible and a continuous broad BLACK GAP between the entire crowbar and crate/lid. Do not show contact with the crate; distinct non-touching silhouettes are essential. Only one crate and one crowbar.",
+      "target": "icons/actions/szabrowanie.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "batch65-revision",
+          "label": "Batch 65 revision",
+          "src": "candidates/batch-65/szabrowanie_revision_d.png",
+          "note": "Keep the open crate and its full-size raised lid. Draw one complete crowbar leaning diagonally BESIDE the crate, with its flattened hooked tip fully visible and a continuous broad BLACK GAP between the entire crowbar and crate/lid. Do not show contact with the crate; distinct non-touching silhouettes are essential. Only one crate and one crowbar."
+        },
+        {
+          "id": "batch64-revision",
+          "label": "Batch 64 revision",
+          "src": "candidates/batch-64/szabrowanie_revision_c.png",
+          "note": "Preserve the crowbar levering at the front lip of the crate, but make its flattened hooked working tip distinct from the crate wall, with a broad black separation contour around the tip apart from its small real contact/fulcrum. The crowbar must not fuse with the crate. Enlarge the raised rectangular lid to clearly cover the whole crate when closed, with visible hinges and a large coherent slab."
+        },
+        {
+          "id": "batch63-revision",
+          "label": "Batch 63 revision",
+          "src": "candidates/batch-63/szabrowanie_revision_b.png",
+          "note": "A crowbar levers open a crate: rotate it so its curved working tip is visibly inserted at the front lip of the crate, the fulcrum rests on the rim, and its long handle extends up-left. The lid is a large, clearly separate slab raised behind the crate, not a narrow stick."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Szabrowanie",
+          "src": "candidates/batch-62/szabrowanie.png",
+          "note": "A crowbar pries open a crate."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch62-rozbiorka",
+      "name": "Rozbiórka",
+      "tier": "Batch 62 · M5",
+      "context": "M5 player action button; toolbar/item-sheet use at small sizes.",
+      "request": "Practical wrench, broken device and detached bolts.",
+      "target": "icons/actions/rozbiorka.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Rozbiórka",
+          "src": "candidates/batch-62/rozbiorka.png",
+          "note": "Practical wrench, broken device and detached bolts."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch62-wylaczony",
+      "name": "Wyłączony",
+      "tier": "Batch 62 · status",
+      "context": "Machine off status; currently borrowing the core lightning image.",
+      "request": "A crossed-out power symbol for an inactive machine.",
+      "target": "icons/statuses/wylaczony.svg",
+      "current": {
+        "src": "icons/svg/lightning.svg",
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Wyłączony",
+          "src": "candidates/batch-62/wylaczony.png",
+          "note": "A crossed-out power symbol for an inactive machine."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch62-emiter-emp",
+      "name": "Emiter EMP",
+      "tier": "Batch 62 · M3 equipment",
+      "context": "Machine-killer equipment currently borrowing the shocker's image.",
+      "request": "Bulky handmade coil/dish emitter with a battery underneath.",
+      "target": "icons/weapons/emiter_emp.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Emiter EMP",
+          "src": "candidates/batch-62/emiter_emp.png",
+          "note": "Bulky handmade coil/dish emitter with a battery underneath."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch62-slodycze",
+      "name": "Fanty: słodycze",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "Partly unwrapped chocolate bar.",
+      "target": "icons/fanty/slodycze.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Fanty: słodycze",
+          "src": "candidates/batch-62/slodycze.png",
+          "note": "Partly unwrapped chocolate bar."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch62-cygaro",
+      "name": "Fanty: cygaro",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "One cigar and broad smoke curl.",
+      "target": "icons/fanty/cygaro.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Fanty: cygaro",
+          "src": "candidates/batch-62/cygaro.png",
+          "note": "One cigar and broad smoke curl."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch62-prasa",
+      "name": "Fanty: prasa",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "A simple open paperback.",
+      "target": "icons/fanty/prasa.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fanty: prasa",
+          "src": "candidates/batch-62/prasa.png",
+          "note": "A simple open paperback."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch62-gra",
+      "name": "Fanty: gra",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "Three plain playing cards.",
+      "target": "icons/fanty/gra.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fanty: gra",
+          "src": "candidates/batch-62/gra.png",
+          "note": "Three plain playing cards."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch62-kaseta",
+      "name": "Fanty: kaseta / VHS",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "An analogue cassette with broad reel openings.",
+      "target": "icons/fanty/kaseta.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fanty: kaseta / VHS",
+          "src": "candidates/batch-62/kaseta.png",
+          "note": "An analogue cassette with broad reel openings."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch62-plyta-cd",
+      "name": "Fanty: płyta CD",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "A compact disc with central hole.",
+      "target": "icons/fanty/plyta-cd.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fanty: płyta CD",
+          "src": "candidates/batch-62/plyta-cd.png",
+          "note": "A compact disc with central hole."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch62-konsola",
+      "name": "Fanty: konsola / cartridge",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "Controller and cartridge.",
+      "target": "icons/fanty/konsola.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fanty: konsola / cartridge",
+          "src": "candidates/batch-62/konsola.png",
+          "note": "Controller and cartridge."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch62-alkohol",
+      "name": "Fanty: alkohol",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "A squat plain liquor bottle.",
+      "target": "icons/fanty/alkohol.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fanty: alkohol",
+          "src": "candidates/batch-62/alkohol.png",
+          "note": "A squat plain liquor bottle."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch62-zabawka",
+      "name": "Fanty: zabawka",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "Preserve the existing teddy bear; zoom out enough that both rounded ears are complete and separated from the top edge. Keep all limbs, broad eye cutouts and simple toy form. No cropped ears.",
+      "target": "icons/fanty/zabawka.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "batch63-revision",
+          "label": "Batch 63 revision",
+          "src": "candidates/batch-63/zabawka_revision_b.png",
+          "note": "Preserve the existing teddy bear; zoom out enough that both rounded ears are complete and separated from the top edge. Keep all limbs, broad eye cutouts and simple toy form. No cropped ears."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fanty: zabawka",
+          "src": "candidates/batch-62/zabawka.png",
+          "note": "An ordinary teddy bear toy."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch62-papier-toaletowy",
+      "name": "Fanty: papier toaletowy",
+      "tier": "Batch 62 · M5",
+      "context": "One reusable icon for a group of prewar luxury items; inventory rows and loot cards.",
+      "request": "Toilet roll with a broad hanging sheet.",
+      "target": "icons/fanty/papier-toaletowy.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "Dedicated icon not delivered",
+        "note": "Candidate only; installation requires GM approval."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fanty: papier toaletowy",
+          "src": "candidates/batch-62/papier-toaletowy.png",
+          "note": "Toilet roll with a broad hanging sheet."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch63-kwas-w-zylach",
+      "name": "Kwas w żyłach",
+      "tier": "Batch 63 · origin feature",
+      "context": "Advantage on saves against poison and acid.",
+      "request": "One sturdy forearm with one bold vein contour deflects two corrosive drops against a small plain shield. Poison/acid resistance, no spilled gore.",
+      "target": "icons/abilities/kwas-w-zylach.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent from the canonical catalog's icon path and existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Kwas w żyłach",
+          "src": "candidates/batch-63/kwas-w-zylach.png",
+          "note": "One sturdy forearm with one bold vein contour deflects two corrosive drops against a small plain shield. Poison/acid resistance, no spilled gore."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch63-chodzmy-na-pewno-juz-utonal",
+      "name": "Chodźmy, na pewno już utonął",
+      "tier": "Batch 63 · origin feature",
+      "context": "Extended breath holding and improved swimming Athletics.",
+      "request": "Keep the swimmer's improved pelvis and exactly two legs, head, waterline and one air bubble. Restore the missing hand: exactly two naturally connected arms, each ending in one complete adult hand, swimming forward. Separate the forward hands with broad negative space. No amputated wrist, additional arm, fused hands or fins.",
+      "target": "icons/abilities/chodzmy-na-pewno-juz-utonal.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent from the canonical catalog's icon path and existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch65-revision",
+          "label": "Batch 65 revision",
+          "src": "candidates/batch-65/chodzmy-na-pewno-juz-utonal_revision_c.png",
+          "note": "Keep the swimmer's improved pelvis and exactly two legs, head, waterline and one air bubble. Restore the missing hand: exactly two naturally connected arms, each ending in one complete adult hand, swimming forward. Separate the forward hands with broad negative space. No amputated wrist, additional arm, fused hands or fins."
+        },
+        {
+          "id": "batch64-revision",
+          "label": "Batch 64 revision",
+          "src": "candidates/batch-64/chodzmy-na-pewno-juz-utonal_revision_b.png",
+          "note": "Keep the underwater swimmer, head, front arms, waterline and air bubble. Rebuild the rear half as a natural human pelvis and exactly TWO proportional human legs: one leg trails straight behind, the other bends gently at a single knee, both ending in recognisable feet. No fused hips, extra legs, backwards knees, fins or animal parts."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Chodźmy, na pewno już utonął",
+          "src": "candidates/batch-63/chodzmy-na-pewno-juz-utonal.png",
+          "note": "One human swimmer stays below a single waterline, cheeks holding breath, with one broad air bubble above the face. Show prolonged underwater endurance without a drowning victim."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch63-edukacja",
+      "name": "Edukacja",
+      "tier": "Batch 63 · origin feature",
+      "context": "Two proficiencies from science, medicine, history, technology or tools.",
+      "request": "One open prewar technical book, one broad medical cross on one page and a simple wrench diagram on the other. Large functional shapes only; no writing.",
+      "target": "icons/abilities/edukacja.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent from the canonical catalog's icon path and existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Edukacja",
+          "src": "candidates/batch-63/edukacja.png",
+          "note": "One open prewar technical book, one broad medical cross on one page and a simple wrench diagram on the other. Large functional shapes only; no writing."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch63-gambling-we-krwi",
+      "name": "Gambling we krwi",
+      "tier": "Batch 63 · origin feature",
+      "context": "Trading without fatigue and improved goods availability.",
+      "request": "Keep the barter trader, offered canteen, second hand and goods crate. Zoom out enough that the full cap and head are complete, with generous empty space above them. No flat cropped crown, clipped cap or missing shoulders. Preserve the useful barter gesture.",
+      "target": "icons/abilities/gambling-we-krwi.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent from the canonical catalog's icon path and existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch64-revision",
+          "label": "Batch 64 revision",
+          "src": "candidates/batch-64/gambling-we-krwi_revision_b.png",
+          "note": "Keep the barter trader, offered canteen, second hand and goods crate. Zoom out enough that the full cap and head are complete, with generous empty space above them. No flat cropped crown, clipped cap or missing shoulders. Preserve the useful barter gesture."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Gambling we krwi",
+          "src": "candidates/batch-63/gambling-we-krwi.png",
+          "note": "One confident barter trader offers a practical canteen from a crate with an open hand. A second hand indicates more goods inside; no coins, dice, cards or cash. Emphasise tireless barter and trade access."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch63-zjadlem-wlasnego-psa",
+      "name": "Wiesz, zjadłem własnego psa",
+      "tier": "Batch 63 · origin feature",
+      "context": "Intimidation expertise and butcher-tool proficiency.",
+      "request": "Move a little closer to the butcher's face while showing his whole uncropped BALD head, heavy beard, stern expression, apron shoulders and raised axe hand. Replace the backwards hatchet head with a normal hatchet: straight short haft, solid eye seated on the haft, broad axe blade projects outward away from the man's head with the cutting edge facing outward. Keep the blade and hand complete. No hair, clipped skull or gore.",
+      "target": "icons/abilities/zjadlem-wlasnego-psa.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent from the canonical catalog's icon path and existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch65-revision",
+          "label": "Batch 65 revision",
+          "src": "candidates/batch-65/zjadlem-wlasnego-psa_revision_c.png",
+          "note": "Move a little closer to the butcher's face while showing his whole uncropped BALD head, heavy beard, stern expression, apron shoulders and raised axe hand. Replace the backwards hatchet head with a normal hatchet: straight short haft, solid eye seated on the haft, broad axe blade projects outward away from the man's head with the cutting edge facing outward. Keep the blade and hand complete. No hair, clipped skull or gore."
+        },
+        {
+          "id": "batch64-revision",
+          "label": "Batch 64 revision",
+          "src": "candidates/batch-64/zjadlem-wlasnego-psa_revision_b.png",
+          "note": "Reframe to show the COMPLETE head and menacing face of the rugged butcher, upper torso and apron. Raise the hand holding a heavy short-handled butcher's axe/hatchet to beside the shoulder, with the entire blade visible. Focus on the stern face, broad shoulders and raised tool; no clipped skull, cropped blade, dog or gore."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Wiesz, zjadłem własnego psa",
+          "src": "candidates/batch-63/zjadlem-wlasnego-psa.png",
+          "note": "One intimidating rugged butcher in an apron grips a broad cleaver at his side; hard square shoulders and a stern plain face. No dog, carcass, gore or comic grin."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch63-hi-tech",
+      "name": "Hi-Tech",
+      "tier": "Batch 63 · origin feature",
+      "context": "Advantage when operating electronic devices.",
+      "request": "Preserve the electronic console with broad control, traces and two buttons. Replace the cartoon oversized glove/finger with an anatomically plausible adult hand in a close-fitting plain work glove: normal-sized palm, four proportional fingers, a distinct thumb, one straight index finger presses the large control. No inflated cartoon glove, mitten, giant cuff or extra finger.",
+      "target": "icons/abilities/hi-tech.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent from the canonical catalog's icon path and existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch64-revision",
+          "label": "Batch 64 revision",
+          "src": "candidates/batch-64/hi-tech_revision_b.png",
+          "note": "Preserve the electronic console with broad control, traces and two buttons. Replace the cartoon oversized glove/finger with an anatomically plausible adult hand in a close-fitting plain work glove: normal-sized palm, four proportional fingers, a distinct thumb, one straight index finger presses the large control. No inflated cartoon glove, mitten, giant cuff or extra finger."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Hi-Tech",
+          "src": "candidates/batch-63/hi-tech.png",
+          "note": "One gloved finger confidently presses a large control on a compact electronic console with three broad circuit traces and two plain buttons. No text or tiny screen detail."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch63-moloch-cos-slyszalem",
+      "name": "Moloch? Coś słyszałem",
+      "tier": "Batch 63 · origin feature",
+      "context": "Knowledge of hostile machines and improved saves against their area attacks.",
+      "request": "One alert survivor crouches behind a thick barrier while inspecting a simple machine-head schematic on a broad handheld board. A single blast contour stays beyond the barrier; knowledge and defensive awareness.",
+      "target": "icons/abilities/moloch-cos-slyszalem.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent from the canonical catalog's icon path and existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Moloch? Coś słyszałem",
+          "src": "candidates/batch-63/moloch-cos-slyszalem.png",
+          "note": "One alert survivor crouches behind a thick barrier while inspecting a simple machine-head schematic on a broad handheld board. A single blast contour stays beyond the barrier; knowledge and defensive awareness."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch63-cholerny-kaznodzieja",
+      "name": "Cholerny kaznodzieja",
+      "tier": "Batch 63 · origin feature",
+      "context": "Persuasion, preaching and influence among believers.",
+      "request": "One forceful preacher in a plain long coat raises an open hand while holding a simple closed book in the other. Strong speech posture, no religious logo, lettering or floating symbols.",
+      "target": "icons/abilities/cholerny-kaznodzieja.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent from the canonical catalog's icon path and existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Cholerny kaznodzieja",
+          "src": "candidates/batch-63/cholerny-kaznodzieja.png",
+          "note": "One forceful preacher in a plain long coat raises an open hand while holding a simple closed book in the other. Strong speech posture, no religious logo, lettering or floating symbols."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch63-przed-wojna-wszystko-bylo-lepiej",
+      "name": "Przed wojną wszystko było lepiej",
+      "tier": "Batch 63 · origin feature",
+      "context": "History, Medicine and prewar knowledge expertise.",
+      "request": "One elderly survivor holds an intact open medical manual beside a simple prewar building silhouette on its page. Broad shapes, no writing or nostalgia badges.",
+      "target": "icons/abilities/przed-wojna-wszystko-bylo-lepiej.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent from the canonical catalog's icon path and existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Przed wojną wszystko było lepiej",
+          "src": "candidates/batch-63/przed-wojna-wszystko-bylo-lepiej.png",
+          "note": "One elderly survivor holds an intact open medical manual beside a simple prewar building silhouette on its page. Broad shapes, no writing or nostalgia badges."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch63-czlowiek-zwany-koniem",
+      "name": "Człowiek zwany koniem",
+      "tier": "Batch 63 · origin feature",
+      "context": "Athletics, animal handling and medicine proficiencies.",
+      "request": "One calm human hand holds the reins close to a strong horse's head, with a gentle bandage on the animal's neck. Emphasise handling and care, not a fantasy centaur.",
+      "target": "icons/abilities/czlowiek-zwany-koniem.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent from the canonical catalog's icon path and existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Człowiek zwany koniem",
+          "src": "candidates/batch-63/czlowiek-zwany-koniem.png",
+          "note": "One calm human hand holds the reins close to a strong horse's head, with a gentle bandage on the animal's neck. Emphasise handling and care, not a fantasy centaur."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch63-zdrowa-okolica",
+      "name": "Zdrowa okolica",
+      "tier": "Batch 63 · origin feature",
+      "context": "Constitution saving-throw proficiency and advantage.",
+      "request": "One healthy broad-chested survivor stands firm beneath a large clean rising sun, with one plain shield shape along the torso. Constitution and resilience, no fragile tiny plus marks.",
+      "target": "icons/abilities/zdrowa-okolica.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent from the canonical catalog's icon path and existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Zdrowa okolica",
+          "src": "candidates/batch-63/zdrowa-okolica.png",
+          "note": "One healthy broad-chested survivor stands firm beneath a large clean rising sun, with one plain shield shape along the torso. Constitution and resilience, no fragile tiny plus marks."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch63-hazardzista",
+      "name": "Hazardzista",
+      "tier": "Batch 63 · origin feature",
+      "context": "Sleight of Hand and Deception proficiency.",
+      "request": "One sly hand palms a single playing card behind a fan of two visible cards. One large plain diamond shape only; sleight of hand and deception, no ranks or lettering.",
+      "target": "icons/abilities/hazardzista.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent from the canonical catalog's icon path and existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Hazardzista",
+          "src": "candidates/batch-63/hazardzista.png",
+          "note": "One sly hand palms a single playing card behind a fan of two visible cards. One large plain diamond shape only; sleight of hand and deception, no ranks or lettering."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch63-aramis",
+      "name": "Aramis",
+      "tier": "Batch 63 · feat feature",
+      "context": "Bonus-action disarming maneuver, with the target disadvantaged.",
+      "request": "Two practical fencing blades meet as one broad opponent hand loses its grip on a sword, which clearly falls away. A forceful clean disarming action, no arrows or musketeer portrait.",
+      "target": "icons/abilities/aramis.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent from the canonical catalog's icon path and existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Aramis",
+          "src": "candidates/batch-63/aramis.png",
+          "note": "Two practical fencing blades meet as one broad opponent hand loses its grip on a sword, which clearly falls away. A forceful clean disarming action, no arrows or musketeer portrait."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch63-aspiryna-i-mietusy",
+      "name": "Aspiryna i Miętusy",
+      "tier": "Batch 63 · feat feature",
+      "context": "Treating a patient with an empty medic kit, at disadvantage.",
+      "request": "One field medic's two hands wrap a broad bandage on a large forearm beside an obviously open empty medicine case. Treatment despite lack of supplies; no scattered pills, writing or gore.",
+      "target": "icons/abilities/aspiryna-i-mietusy.svg",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent from the canonical catalog's icon path and existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Aspiryna i Miętusy",
+          "src": "candidates/batch-63/aspiryna-i-mietusy.png",
+          "note": "One field medic's two hands wrap a broad bandage on a large forearm beside an obviously open empty medicine case. Treatment despite lack of supplies; no scattered pills, writing or gore."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-barbarka",
+      "name": "Barbarka",
+      "tier": "Batch 64 · feat feature",
+      "context": "Headbutt attacks and knocking a target prone.",
+      "request": "Raise the LEFT attacker's head relative to the right victim by about one-third of a head height, until the center of the attacker's FOREHEAD just above his eyebrows contacts the RIGHT victim's NOSE bridge/tip. Forehead-to-nose is the ONLY contact point, never jaw, chin or forehead-to-forehead. Keep the left attacker leaning forward, right victim recoiling, two asymmetric complete head profiles and one small impact mark at the victim's nose. No gore.",
+      "target": "icons/abilities/barbarka.svg",
+      "catalogKey": "barbarka",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/barbarka_revision_c.png",
+          "note": "Raise the LEFT attacker's head relative to the right victim by about one-third of a head height, until the center of the attacker's FOREHEAD just above his eyebrows contacts the RIGHT victim's NOSE bridge/tip. Forehead-to-nose is the ONLY contact point, never jaw, chin or forehead-to-forehead. Keep the left attacker leaning forward, right victim recoiling, two asymmetric complete head profiles and one small impact mark at the victim's nose. No gore."
+        },
+        {
+          "id": "batch65-revision",
+          "label": "Batch 65 revision",
+          "src": "candidates/batch-65/barbarka_revision_b.png",
+          "note": "Make the headbutt visibly ASYMMETRIC. Left attacker bends forward and drives his forehead into the right victim's nose; right victim's head tilts back and recoils. Only the attacker delivers the blow. Different head angles and postures, one restrained impact burst at the victim's nose, two intact heads. No mirrored forehead-to-forehead pose, blood or gore."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Barbarka",
+          "src": "candidates/batch-64/barbarka.png",
+          "note": "One rugged fighter delivers a headbutt: two human head-and-shoulder profiles meet forehead to forehead with one broad impact burst between them. Two intact skulls, no gore or tiny detail."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-bez-trzymanki",
+      "name": "Bez trzymanki",
+      "tier": "Batch 64 · feat feature",
+      "context": "Riding a motorcycle without using the hands.",
+      "request": "One rider balances a practical motorcycle with BOTH hands clearly off its handlebars, arms held out in a controlled riding posture. One coherent bike, two wheels, broad simple frame; no stunt circus pose or tiny mechanics.",
+      "target": "icons/abilities/bez-trzymanki.svg",
+      "catalogKey": "bezTrzymanki",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Bez trzymanki",
+          "src": "candidates/batch-64/bez-trzymanki.png",
+          "note": "One rider balances a practical motorcycle with BOTH hands clearly off its handlebars, arms held out in a controlled riding posture. One coherent bike, two wheels, broad simple frame; no stunt circus pose or tiny mechanics."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-benzyna-zamiast-krwi",
+      "name": "Benzyna zamiast krwi",
+      "tier": "Batch 64 · feat feature",
+      "context": "Protecting a vehicle and improving its defenses.",
+      "request": "Keep the driver gripping the steering wheel and the small protected car silhouette. Remove the seatbelt/diagonal torso strap completely. Change the driver's face to a wild menacing wide toothy grin with raised cheeks; a generic reckless wasteland driver, no recognizable game character or logo. Keep the head fully visible and the hands anatomically normal.",
+      "target": "icons/abilities/benzyna-zamiast-krwi.svg",
+      "catalogKey": "benzynaZamiastKrwi",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch65-revision",
+          "label": "Batch 65 revision",
+          "src": "candidates/batch-65/benzyna-zamiast-krwi_revision_b.png",
+          "note": "Keep the driver gripping the steering wheel and the small protected car silhouette. Remove the seatbelt/diagonal torso strap completely. Change the driver's face to a wild menacing wide toothy grin with raised cheeks; a generic reckless wasteland driver, no recognizable game character or logo. Keep the head fully visible and the hands anatomically normal."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Benzyna zamiast krwi",
+          "src": "candidates/batch-64/benzyna-zamiast-krwi.png",
+          "note": "One alert driver grips a steering wheel and protects a compact car silhouette from a single incoming impact. The driver's broad shoulder blocks the impact near the car. Show vehicle protection through practical shapes, no heart, blood, logos or floating cog."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-ciszej-niz-cien",
+      "name": "Ciszej niż cień",
+      "tier": "Batch 64 · feat feature",
+      "context": "Enemies struggle to perceive the character's presence.",
+      "request": "One crouched survivor moves quietly close to a low broken wall, boot lifted lightly above the ground. Its broad shadow contour stays close behind. A spare stealth silhouette, no crossed-out alarm, speech bubble or tiny footprints.",
+      "target": "icons/abilities/ciszej-niz-cien.svg",
+      "catalogKey": "ciszejNizCien",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Ciszej niż cień",
+          "src": "candidates/batch-64/ciszej-niz-cien.png",
+          "note": "One crouched survivor moves quietly close to a low broken wall, boot lifted lightly above the ground. Its broad shadow contour stays close behind. A spare stealth silhouette, no crossed-out alarm, speech bubble or tiny footprints."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-czlowiek-pajak",
+      "name": "Człowiek-pająk",
+      "tier": "Batch 64 · feat feature",
+      "context": "Improved climbing speed, terrain handling and fall saves.",
+      "request": "One practical wasteland climber climbs a near-vertical wall using two hands and two boots, a plain rope hanging nearby. Clear bent limbs and one firm handhold. Ordinary gear, no superhero costume, spider emblem or recognizable fictional character.",
+      "target": "icons/abilities/czlowiek-pajak.svg",
+      "catalogKey": "czlowiekPajak",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Człowiek-pająk",
+          "src": "candidates/batch-64/czlowiek-pajak.png",
+          "note": "One practical wasteland climber climbs a near-vertical wall using two hands and two boots, a plain rope hanging nearby. Clear bent limbs and one firm handhold. Ordinary gear, no superhero costume, spider emblem or recognizable fictional character."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-fabrykator",
+      "name": "Fabrykator",
+      "tier": "Batch 64 · feat feature",
+      "context": "Faster production using a full complement of tools.",
+      "request": "Two sturdy hands assemble a compact device clamped in a bench vise, one hand steadies the piece while the other tightens a large bolt with a wrench. Broad real workshop shapes, no generic giant cog or toy exploded stack.",
+      "target": "icons/abilities/fabrykator.svg",
+      "catalogKey": "fabrykator",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fabrykator",
+          "src": "candidates/batch-64/fabrykator.png",
+          "note": "Two sturdy hands assemble a compact device clamped in a bench vise, one hand steadies the piece while the other tightens a large bolt with a wrench. Broad real workshop shapes, no generic giant cog or toy exploded stack."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-fachowiec",
+      "name": "Fachowiec",
+      "tier": "Batch 64 · feat feature",
+      "context": "Proficiency with two tool sets.",
+      "request": "Keep the mechanic with wrench in one hand and pliers in the other above the workbench. Both upper arms descend naturally from their own shoulders, elbows bend outward and forearms connect to exactly two complete hands. Position both hands and tools ABOVE the bench with a broad black gap between the bench and each hand/tool. No hands growing out of the tabletop, disconnected arms or extra tools.",
+      "target": "icons/abilities/fachowiec.svg",
+      "catalogKey": "fachowiec",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch65-revision",
+          "label": "Batch 65 revision",
+          "src": "candidates/batch-65/fachowiec_revision_b.png",
+          "note": "Keep the mechanic with wrench in one hand and pliers in the other above the workbench. Both upper arms descend naturally from their own shoulders, elbows bend outward and forearms connect to exactly two complete hands. Position both hands and tools ABOVE the bench with a broad black gap between the bench and each hand/tool. No hands growing out of the tabletop, disconnected arms or extra tools."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Fachowiec",
+          "src": "candidates/batch-64/fachowiec.png",
+          "note": "Two capable hands hold two different real tools over a spare workbench: a wrench in one and pliers in the other. Balanced practical tool silhouettes with broad open space, no third tool or decorative badges."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-grenadier",
+      "name": "Grenadier",
+      "tier": "Batch 64 · feat feature",
+      "context": "Reactively throwing a grenade away, with improved throwing range.",
+      "request": "One athletic survivor immediately throws a retrieved grenade with an outstretched arm and one broad throw arc; one plain grenade at the end of the arc. Clear complete hand and grenade silhouette, no explosion or instructions.",
+      "target": "icons/abilities/grenadier.svg",
+      "catalogKey": "grenadier",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Grenadier",
+          "src": "candidates/batch-64/grenadier.png",
+          "note": "One athletic survivor immediately throws a retrieved grenade with an outstretched arm and one broad throw arc; one plain grenade at the end of the arc. Clear complete hand and grenade silhouette, no explosion or instructions."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-immunitet",
+      "name": "Immunitet",
+      "tier": "Batch 64 · feat feature",
+      "context": "Immunity to new disease and improved saves against existing disease.",
+      "request": "One large plain medical shield with a broad cross blocks three simple disease-particle blobs outside it. Crisp joined shield shape and restrained negative space, no tiny plus marks, letters or gore.",
+      "target": "icons/abilities/immunitet.svg",
+      "catalogKey": "immunitet",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Immunitet",
+          "src": "candidates/batch-64/immunitet.png",
+          "note": "One large plain medical shield with a broad cross blocks three simple disease-particle blobs outside it. Crisp joined shield shape and restrained negative space, no tiny plus marks, letters or gore."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-jest-zajebiscie",
+      "name": "Jest zajebiście",
+      "tier": "Batch 64 · feat feature",
+      "context": "An encouraging deceptive speech grants allies advantage on their next check.",
+      "request": "Preserve the speaker and two attentive allied head-and-shoulder silhouettes. Replace the raised open hand with one unambiguous THUMBS-UP: four fingers folded into a compact fist and one thumb pointing upward. Give the speaker a relaxed friendly smile and calm eyebrows. No pointing index finger, spread fingers, speech text or extra hand.",
+      "target": "icons/abilities/jest-zajebiscie.svg",
+      "catalogKey": "jestZajebiscie",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch65-revision",
+          "label": "Batch 65 revision",
+          "src": "candidates/batch-65/jest-zajebiscie_revision_b.png",
+          "note": "Preserve the speaker and two attentive allied head-and-shoulder silhouettes. Replace the raised open hand with one unambiguous THUMBS-UP: four fingers folded into a compact fist and one thumb pointing upward. Give the speaker a relaxed friendly smile and calm eyebrows. No pointing index finger, spread fingers, speech text or extra hand."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Jest zajebiście",
+          "src": "candidates/batch-64/jest-zajebiscie.png",
+          "note": "One confident charismatic survivor raises an open hand while addressing two attentive allies shown as small shoulder silhouettes. A clear encouraging speech posture, no text-filled speech bubble, medals or floating symbols."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-karateka",
+      "name": "Karateka",
+      "tier": "Batch 64 · feat feature",
+      "context": "Improved unarmed strikes and a quick bonus-action blow.",
+      "request": "One unarmed fighter makes a strong forward kick while guarding with two hands. Exactly one human body, two arms, two legs and one clear extended foot. Practical fighting clothes, no superhero or mystical glow.",
+      "target": "icons/abilities/karateka.svg",
+      "catalogKey": "karateka",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Karateka",
+          "src": "candidates/batch-64/karateka.png",
+          "note": "One unarmed fighter makes a strong forward kick while guarding with two hands. Exactly one human body, two arms, two legs and one clear extended foot. Practical fighting clothes, no superhero or mystical glow."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-kuloodpornosc",
+      "name": "Kuloodporność",
+      "tier": "Batch 64 · feat feature",
+      "context": "Improved defense while wearing no armour.",
+      "request": "One broad bare unarmoured torso leans away as a single bullet skims harmlessly along its side with one short curved streak. Strong shoulder and chest outline, no armour plates, shield, blood or superhero costume.",
+      "target": "icons/abilities/kuloodpornosc.svg",
+      "catalogKey": "kuloodpornosc",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Kuloodporność",
+          "src": "candidates/batch-64/kuloodpornosc.png",
+          "note": "One broad bare unarmoured torso leans away as a single bullet skims harmlessly along its side with one short curved streak. Strong shoulder and chest outline, no armour plates, shield, blood or superhero costume."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-lawnik",
+      "name": "Ławnik",
+      "tier": "Batch 64 · feat feature",
+      "context": "Using very heavy improvised weapons and knocking opponents down.",
+      "request": "One powerful fighter swings a heavy wooden bench as an improvised melee weapon, gripping the large top plank with both hands. A thick plank and two stout bench supports dominate; no courtroom objects, tiny debris or gore.",
+      "target": "icons/abilities/lawnik.svg",
+      "catalogKey": "lawnik",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Ławnik",
+          "src": "candidates/batch-64/lawnik.png",
+          "note": "One powerful fighter swings a heavy wooden bench as an improvised melee weapon, gripping the large top plank with both hands. A thick plank and two stout bench supports dominate; no courtroom objects, tiny debris or gore."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-miotacz",
+      "name": "Miotacz",
+      "tier": "Batch 64 · feat feature",
+      "context": "Improved thrown-weapon range and accuracy.",
+      "request": "One strong hand launches a single practical throwing knife through one broad ballistic arc. The knife's blade and handle are distinct, broad and readable. No extra knife, arrow, target label or tiny speed marks.",
+      "target": "icons/abilities/miotacz.svg",
+      "catalogKey": "miotacz",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Miotacz",
+          "src": "candidates/batch-64/miotacz.png",
+          "note": "One strong hand launches a single practical throwing knife through one broad ballistic arc. The knife's blade and handle are distinct, broad and readable. No extra knife, arrow, target label or tiny speed marks."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-mistrz-broni-bialej",
+      "name": "Mistrz broni białej",
+      "tier": "Batch 64 · feat feature",
+      "context": "Mastery of a selected melee weapon improves its damage.",
+      "request": "One firm hand drives a practical straight sword through a stout practice post, leaving one broad diagonal cut. The long blade, hand and split post read cleanly. No duel crowd, badge, wreath or famous character.",
+      "target": "icons/abilities/mistrz-broni-bialej.svg",
+      "catalogKey": "mistrzBroniBialej",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Mistrz broni białej",
+          "src": "candidates/batch-64/mistrz-broni-bialej.png",
+          "note": "One firm hand drives a practical straight sword through a stout practice post, leaving one broad diagonal cut. The long blade, hand and split post read cleanly. No duel crowd, badge, wreath or famous character."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-mistrz-walki-wrecz",
+      "name": "Mistrz walki wręcz",
+      "tier": "Batch 64 · feat feature",
+      "context": "Melee combat maneuvers and reactive parrying.",
+      "request": "Keep the exact two-forearm, two-hand wrist-grapple pose. Remove ONLY the unnecessary BLACK LINE across the lower gripping hand's wrist, so that hand joins its own forearm in ONE CONTINUOUS WHITE silhouette. Retain the useful separation of the opponent's wrist from the gripping fingers. No severed wrist, bracelet/seam at that wrist, extra hand or altered grip.",
+      "target": "icons/abilities/mistrz-walki-wrecz.svg",
+      "catalogKey": "mistrzWalkiWrecz",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/mistrz-walki-wrecz_revision_c.png",
+          "note": "Keep the exact two-forearm, two-hand wrist-grapple pose. Remove ONLY the unnecessary BLACK LINE across the lower gripping hand's wrist, so that hand joins its own forearm in ONE CONTINUOUS WHITE silhouette. Retain the useful separation of the opponent's wrist from the gripping fingers. No severed wrist, bracelet/seam at that wrist, extra hand or altered grip."
+        },
+        {
+          "id": "batch65-revision",
+          "label": "Batch 65 revision",
+          "src": "candidates/batch-65/mistrz-walki-wrecz_revision_b.png",
+          "note": "Rebuild the wrist grapple with correct anatomy: show exactly TWO opposing forearms and exactly TWO hands. One defender hand wraps its thumb and four fingers around the attacker's single wrist; the attacker's hand remains at the end of that forearm. Use a readable simple wrist control, with a broad black contour between gripping fingers and wrist. Omit other guard hands entirely. No extra hand pair, branching wrist or third forearm."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Mistrz walki wręcz",
+          "src": "candidates/batch-64/mistrz-walki-wrecz.png",
+          "note": "Two fighters' forearms meet in a close defensive maneuver: one hand redirects the other fighter's attacking wrist while the free forearm stays in guard. Broad complete hands and wrists with clear grip, no extra fingers or weapons."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-muzyk",
+      "name": "Muzyk",
+      "tier": "Batch 64 · feat feature",
+      "context": "Instrument proficiencies and an encouraging song granting luck to allies.",
+      "request": "Keep the anonymous guitarist, plain acoustic guitar, left hand on the neck and right hand strumming. Replace ONLY the ambiguous lower-left blob with a clear audience member's head-and-shoulders silhouette, facing the musician and visibly separated by black space. Keep the other audience silhouette distinct. No extra musician leg, music notes, words or famous musician.",
+      "target": "icons/abilities/muzyk.svg",
+      "catalogKey": "muzyk",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch65-revision",
+          "label": "Batch 65 revision",
+          "src": "candidates/batch-65/muzyk_revision_b.png",
+          "note": "Keep the anonymous guitarist, plain acoustic guitar, left hand on the neck and right hand strumming. Replace ONLY the ambiguous lower-left blob with a clear audience member's head-and-shoulders silhouette, facing the musician and visibly separated by black space. Keep the other audience silhouette distinct. No extra musician leg, music notes, words or famous musician."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Muzyk",
+          "src": "candidates/batch-64/muzyk.png",
+          "note": "One anonymous survivor plays an acoustic guitar, one hand on the neck and one strumming above the sound hole, beside two small allied head silhouettes. Plain instrument, two complete hands, no music notes, lettering or famous musician."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-neo",
+      "name": "Neo",
+      "tier": "Batch 64 · feat feature",
+      "context": "A reactive burst of evasion raises defense against one attack.",
+      "request": "One generic survivor leans sharply backwards to dodge a single bullet passing just in front of the chest, with one broad trajectory streak. Ordinary wasteland clothing, no sunglasses, famous film character, black trenchcoat or movie logo.",
+      "target": "icons/abilities/neo.svg",
+      "catalogKey": "neo",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Neo",
+          "src": "candidates/batch-64/neo.png",
+          "note": "One generic survivor leans sharply backwards to dodge a single bullet passing just in front of the chest, with one broad trajectory streak. Ordinary wasteland clothing, no sunglasses, famous film character, black trenchcoat or movie logo."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch64-nozownik",
+      "name": "Nożownik",
+      "tier": "Batch 64 · feat feature",
+      "context": "A quick follow-up knife attack after a successful hit.",
+      "request": "Two practical combat knives in two strong hands: one knife thrusts forward and the other is held close in a reverse grip for a follow-up strike. Exactly two hands and two knives, spare clear negative space, no gore or extra blades.",
+      "target": "icons/abilities/nozownik.svg",
+      "catalogKey": "nozownik",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Nożownik",
+          "src": "candidates/batch-64/nozownik.png",
+          "note": "Two practical combat knives in two strong hands: one knife thrusts forward and the other is held close in a reverse grip for a follow-up strike. Exactly two hands and two knives, spare clear negative space, no gore or extra blades."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch65-padnij-powstan",
+      "name": "Padnij/Powstań",
+      "tier": "Batch 65 · feat feature",
+      "context": "Wstawanie nie kosztuje Szybkości; Szybkość +3 m; wyjście z zasięgu ataku wręcz bez ataków okazyjnych.",
+      "request": "Keep the rising survivor's kneeling-to-standing pose and whole body. ADD two simple broad directional arrows: a DOWNWARD arrow beside the left shoulder toward the ground indicates dropping prone, and an UPWARD arrow beside the right shoulder indicates immediately getting up. Each arrow has one clear arrowhead and one short shaft, separated from the person. These arrows are explicitly requested; no duplicate ghost bodies, labels or decorative symbols.",
+      "target": "icons/abilities/padnij-powstan.svg",
+      "catalogKey": "padnijPowstan",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/padnij-powstan_revision_b.png",
+          "note": "Keep the rising survivor's kneeling-to-standing pose and whole body. ADD two simple broad directional arrows: a DOWNWARD arrow beside the left shoulder toward the ground indicates dropping prone, and an UPWARD arrow beside the right shoulder indicates immediately getting up. Each arrow has one clear arrowhead and one short shaft, separated from the person. These arrows are explicitly requested; no duplicate ghost bodies, labels or decorative symbols."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Padnij/Powstań",
+          "src": "candidates/batch-65/padnij-powstan.png",
+          "note": "One practical survivor rises from a low kneel into a ready stance, with one knee near the ground, the other foot planted and both hands clear. A single complete body conveys getting up quickly; no duplicate ghost figures or arrows."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch65-pancerny",
+      "name": "Pancerny",
+      "tier": "Batch 65 · feat feature",
+      "context": "W ciężkim pancerzu: Próg obrażeń 10 przeciwko obrażeniom ciętym, kłutym i obuchowym (sumuje się z progiem pancerza).",
+      "request": "Keep the broad heavy armour breastplate and shoulder guards. Replace the straight impact marks with ONE round projectile ricocheting off the outer plate. Show an incoming diagonal path from upper-right toward the armour, then an outgoing path toward lower-right away from the SAME contact point: a clearly angled V/corner bounce, no straight I-shaped trajectory through the armour. Put the round ball on the outgoing path, one small contact burst on the plate, no penetration, shield, blood or text.",
+      "target": "icons/abilities/pancerny.svg",
+      "catalogKey": "pancerny",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/pancerny_revision_b.png",
+          "note": "Keep the broad heavy armour breastplate and shoulder guards. Replace the straight impact marks with ONE round projectile ricocheting off the outer plate. Show an incoming diagonal path from upper-right toward the armour, then an outgoing path toward lower-right away from the SAME contact point: a clearly angled V/corner bounce, no straight I-shaped trajectory through the armour. Put the round ball on the outgoing path, one small contact burst on the plate, no penetration, shield, blood or text."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Pancerny",
+          "src": "candidates/batch-65/pancerny.png",
+          "note": "One broad practical heavy armour breastplate and shoulder guards withstand one blunt incoming impact. Thick overlapping plates and a single small impact mark outside the armour. No person face, giant shield, logo or ornate fantasy armour."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch65-pan-plaster",
+      "name": "Pan Plaster",
+      "tier": "Batch 65 · feat feature",
+      "context": "+1 MDR lub INT; narzędzia małego medyka rzucają dodatkową kostkę PW; połowa dawki leku zaspokaja dzienne zapotrzebowanie.",
+      "request": "Rotate ONLY the complete patient's forearm, wrist and open hand another 180 degrees around the dressing contact area. The patient's proximal arm now enters from UPPER LEFT and its fingers point LOWER RIGHT. Keep the two treating hands entering from LEFT, their cuffs, gestures and positions, and the open first-aid pouch unchanged. Leave an obvious black gap between every part of the patient arm/hand and the pouch: the arm belongs to a patient outside the frame and must never originate in the box. Exactly three complete hands, connected wrists and no extra tool, injury or blood.",
+      "target": "icons/abilities/pan-plaster.svg",
+      "catalogKey": "panPlaster",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch68-revision",
+          "label": "Batch 68 targeted revision",
+          "src": "candidates/batch-68/pan-plaster_revision_d.png",
+          "note": "Rotate ONLY the complete patient's forearm, wrist and open hand another 180 degrees around the dressing contact area. The patient's proximal arm now enters from UPPER LEFT and its fingers point LOWER RIGHT. Keep the two treating hands entering from LEFT, their cuffs, gestures and positions, and the open first-aid pouch unchanged. Leave an obvious black gap between every part of the patient arm/hand and the pouch: the arm belongs to a patient outside the frame and must never originate in the box. Exactly three complete hands, connected wrists and no extra tool, injury or blood."
+        },
+        {
+          "id": "batch67-revision",
+          "label": "Batch 67 revision",
+          "src": "candidates/batch-67/pan-plaster_revision_c.png",
+          "note": "Keep BOTH medic hands, their exact positions/gestures, the dressing and the first-aid pouch UNCHANGED. Rotate ONLY the patient's forearm/hand 90 degrees counterclockwise LEFT around the dressing contact area: it must now run toward upper-left rather than upper-right, the opposite diagonal. The patient's whole wrist, palm, thumb and four fingers remain connected and visible. Do not rotate, move, mirror or redraw either medic hand. Exactly three complete hands, no new tool, injury or blood."
+        },
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/pan-plaster_revision_b.png",
+          "note": "Redraw from a slightly elevated three-quarter perspective so the PATIENT'S complete forearm, wrist and HAND remain visible. The forearm lies diagonally across the center; the patient's open hand with all five fingers is fully visible toward upper-right, naturally connected to the wrist. Two separate medic hands approach from lower-left and apply one broad dressing to the forearm. Keep a small open first-aid pouch below. Exactly three hands total, no amputated wrist, missing patient hand, merged glove, injury or blood."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Pan Plaster",
+          "src": "candidates/batch-65/pan-plaster.png",
+          "note": "Two adult hands apply one broad adhesive medical dressing to a plain forearm beside a small open first-aid pouch. A practical medic gesture with one clear dressing and one pouch, no injury, blood, text or tiny medicine labels."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch65-pewna-reka",
+      "name": "Pewna ręka",
+      "tier": "Batch 65 · feat feature",
+      "context": "+1 ZRC; Pewny strzał [B] — Szybkość spada do 0, ale Ułatwienie do 1 ataku dystansowego (nie przy seriach); brak Utrudnienia za niestabilne podłoże.",
+      "request": "One steady adult shooter supports a practical rifle firmly with two hands, elbows braced on a low rest. Complete head and both hands, clear straight barrel and stock. Emphasize the stable shooting posture, no bullseye, floating crosshair or decorative badge.",
+      "target": "icons/abilities/pewna-reka.svg",
+      "catalogKey": "pewnaReka",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Pewna ręka",
+          "src": "candidates/batch-65/pewna-reka.png",
+          "note": "One steady adult shooter supports a practical rifle firmly with two hands, elbows braced on a low rest. Complete head and both hands, clear straight barrel and stock. Emphasize the stable shooting posture, no bullseye, floating crosshair or decorative badge."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch65-pierwotny-instynkt",
+      "name": "Pierwotny instynkt",
+      "tier": "Batch 65 · feat feature",
+      "context": "+5 do Inicjatywy; +5 do Testów Percepcji.",
+      "request": "Keep the same rugged adult expression, alert head turn, raised ready forearm and three broad disturbance arcs. SIMPLIFY the face: retain only one broad brow/eye cut, a clear nose contour and a single plain mouth line; retain one solid beard silhouette if needed. Remove cheek creases, wrinkle lines, individual stubble hairs, tiny hatch marks and fine forehead detail. Preserve the alert stern expression, no anime styling or younger replacement face.",
+      "target": "icons/abilities/pierwotny-instynkt.svg",
+      "catalogKey": "pierwotnyInstynkt",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch67-revision",
+          "label": "Batch 67 revision",
+          "src": "candidates/batch-67/pierwotny-instynkt_revision_c.png",
+          "note": "Keep the same rugged adult expression, alert head turn, raised ready forearm and three broad disturbance arcs. SIMPLIFY the face: retain only one broad brow/eye cut, a clear nose contour and a single plain mouth line; retain one solid beard silhouette if needed. Remove cheek creases, wrinkle lines, individual stubble hairs, tiny hatch marks and fine forehead detail. Preserve the alert stern expression, no anime styling or younger replacement face."
+        },
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/pierwotny-instynkt_revision_b.png",
+          "note": "Keep the alert head turn, ready forearm and broad disturbance arcs. Replace the anime-like young face and spiky hair with a rugged MIDDLE-AGED adult survivor in a sober western utilitarian stencil style: close-cropped hair, realistic small watchful eye, firm brow, square natural jaw and restrained stubble. No manga/anime eyes, glossy hair spikes, cute youthful face, supernatural halo or exaggerated cartoon features."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Pierwotny instynkt",
+          "src": "candidates/batch-65/pierwotny-instynkt.png",
+          "note": "One alert survivor's head turns sharply toward a nearby simple disturbance contour, one ear and watchful eye visible in a spare profile. A broad raised forearm in a ready defensive gesture. No animal ears, extra eye, supernatural halo or tiny rays."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch65-plug-and-play",
+      "name": "Plug & Play",
+      "tier": "Batch 65 · feat feature",
+      "context": "Ułatwienie przy przejmowaniu paneli sterowania urządzeń elektronicznych; możliwość sterowania ciężkimi maszynami / wozami bojowymi laptopem.",
+      "request": "One normal adult hand plugs a thick data cable into a rugged open laptop. A small tracked-machine silhouette appears on its otherwise blank screen, showing machine control. Exactly one cable connector and one hand, broad laptop keyboard shape, no letters or logo.",
+      "target": "icons/abilities/plug-and-play.svg",
+      "catalogKey": "plugAndPlay",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Plug & Play",
+          "src": "candidates/batch-65/plug-and-play.png",
+          "note": "One normal adult hand plugs a thick data cable into a rugged open laptop. A small tracked-machine silhouette appears on its otherwise blank screen, showing machine control. Exactly one cable connector and one hand, broad laptop keyboard shape, no letters or logo."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch65-przydasie",
+      "name": "Przydasie",
+      "tier": "Batch 65 · feat feature",
+      "context": "+1 INT lub MDR; surowce potrzebne do produkcji własnoręcznie wykonywanych przedmiotów tańsze o 50%.",
+      "request": "One adult hand selects a useful large bolt from a small open tray containing three distinct reusable scrap parts: bolt, metal bracket and wire coil. Real salvaged workshop pieces, one tray and one hand. No money symbols, giant cog or tiny clutter.",
+      "target": "icons/abilities/przydasie.svg",
+      "catalogKey": "przydasie",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Przydasie",
+          "src": "candidates/batch-65/przydasie.png",
+          "note": "One adult hand selects a useful large bolt from a small open tray containing three distinct reusable scrap parts: bolt, metal bracket and wire coil. Real salvaged workshop pieces, one tray and one hand. No money symbols, giant cog or tiny clutter."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch65-robin-hood",
+      "name": "Robin Hood",
+      "tier": "Batch 65 · feat feature",
+      "context": "Stalowe palce [I] — ładowanie broni miotanej w Darmowej Interakcji; Celowanie [B] — Ułatwienie do ataku z łuku / kuszy po Akcji Bonusowej.",
+      "request": "One generic wasteland archer aims a practical bow with exactly two hands, one on the grip and one drawing the string with a single nocked arrow. Complete head, bent bow limbs and clean string triangle. Plain clothing, no recognizable folklore or film character, feathered cap, target logo or text.",
+      "target": "icons/abilities/robin-hood.svg",
+      "catalogKey": "robinHood",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Robin Hood",
+          "src": "candidates/batch-65/robin-hood.png",
+          "note": "One generic wasteland archer aims a practical bow with exactly two hands, one on the grip and one drawing the string with a single nocked arrow. Complete head, bent bow limbs and clean string triangle. Plain clothing, no recognizable folklore or film character, feathered cap, target logo or text."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch65-rodeo",
+      "name": "Rodeo",
+      "tier": "Batch 65 · feat feature",
+      "context": "+1 MDR; ujeżdżanie dzikich zwierząt (Test MDR Tresura ST 10 + mod. SIŁ istoty); Kawalerzysta — TT wierzchowca + Premia Biegłości.",
+      "request": "One ordinary rider stays seated on the back of a bucking horse, gripping a plain rein with one hand while the other steadies the posture. One complete horse and one rider with believable anatomy, broad bent legs, no cowboy franchise character or decorative lasso.",
+      "target": "icons/abilities/rodeo.svg",
+      "catalogKey": "rodeo",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Rodeo",
+          "src": "candidates/batch-65/rodeo.png",
+          "note": "One ordinary rider stays seated on the back of a bucking horse, gripping a plain rein with one hand while the other steadies the posture. One complete horse and one rider with believable anatomy, broad bent legs, no cowboy franchise character or decorative lasso."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch65-rozroba",
+      "name": "Rozróba",
+      "tier": "Batch 65 · feat feature",
+      "context": "+1 SIŁ lub KON; Młynek [B] — gdy co najmniej 3 wrogów jest w zasięgu 1,5 m, w Akcji Bonusowej jeden atak wręcz bronią białą przeciw każdemu z nich.",
+      "request": "One rugged fighter swings one short melee club through a broad arc between THREE nearby opposing head-and-shoulder silhouettes. One attacker, one club, three opponents spaced clearly around him. No duplicate attacker arms, gore or tiny motion lines.",
+      "target": "icons/abilities/rozroba.svg",
+      "catalogKey": "rozroba",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Rozróba",
+          "src": "candidates/batch-65/rozroba.png",
+          "note": "One rugged fighter swings one short melee club through a broad arc between THREE nearby opposing head-and-shoulder silhouettes. One attacker, one club, three opponents spaced clearly around him. No duplicate attacker arms, gore or tiny motion lines."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch65-ruchome-gniazdo-ckm",
+      "name": "Ruchome gniazdo CKM",
+      "tier": "Batch 65 · feat feature",
+      "context": "Chmura ołowiu — długa seria (DS) pakuje 2× więcej pocisków (podwójne kostki obrażeń wobec celów w polu rażenia).",
+      "request": "One powerful survivor fires a heavy belt-fed machine gun from the hip, gripping the rear pistol grip and front support handle. Broad long barrel, solid receiver and short clearly linked ammunition belt; one restrained muzzle flash. Two hands, one gun, no turret vehicle or text.",
+      "target": "icons/abilities/ruchome-gniazdo-ckm.svg",
+      "catalogKey": "ruchomeGniazdoCkm",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Ruchome gniazdo CKM",
+          "src": "candidates/batch-65/ruchome-gniazdo-ckm.png",
+          "note": "One powerful survivor fires a heavy belt-fed machine gun from the hip, gripping the rear pistol grip and front support handle. Broad long barrel, solid receiver and short clearly linked ammunition belt; one restrained muzzle flash. Two hands, one gun, no turret vehicle or text."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch65-siekierezada",
+      "name": "Siekierezada",
+      "tier": "Batch 65 · feat feature",
+      "context": "+1 SIŁ lub ZRC; wyciągnięcie 2 siekierek jednocześnie w 1 Darmowej Interakcji; zasięg rzutu siekierkami ×2; TT +1 przy walce dwiema siekierkami.",
+      "request": "Cross the TWO FOREARMS/WRISTS into an X at the lower center, while the TWO HATCHETS remain separate and UPRIGHT at upper-left and upper-right. The forearm from lower-left reaches the hand at upper-right; the forearm from lower-right reaches the hand at upper-left. Exactly two complete hands each grip one hatchet. Both straight axe handles stay nearly vertical, never crossing each other; blades face outward. Broad black overlap contour at the crossed arms, no extra limb, crossed axe heads or gore.",
+      "target": "icons/abilities/siekierezada.svg",
+      "catalogKey": "siekierezada",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/siekierezada_revision_b.png",
+          "note": "Cross the TWO FOREARMS/WRISTS into an X at the lower center, while the TWO HATCHETS remain separate and UPRIGHT at upper-left and upper-right. The forearm from lower-left reaches the hand at upper-right; the forearm from lower-right reaches the hand at upper-left. Exactly two complete hands each grip one hatchet. Both straight axe handles stay nearly vertical, never crossing each other; blades face outward. Broad black overlap contour at the crossed arms, no extra limb, crossed axe heads or gore."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Siekierezada",
+          "src": "candidates/batch-65/siekierezada.png",
+          "note": "Two adult hands hold TWO practical matching hatchets in crossed combat positions. Each hatchet has one straight short handle and one broad coherent axe head with cutting edge facing away from its user's hand. Exactly two hands and two hatchets; no third blade, ornate axes or gore."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch65-snajper",
+      "name": "Snajper",
+      "tier": "Batch 65 · feat feature",
+      "context": "+1 ZRC lub MDR; brak Utrudnienia za daleki dystans; zasięg daleki broni dystansowej ×2.",
+      "request": "One prone anonymous marksman aims a long practical scoped rifle resting on a low bipod. Broad body contour, two connected hands, one scope tube and one long barrel. Plain gear, no floating target/crosshair, badge or tiny camouflage marks.",
+      "target": "icons/abilities/snajper.svg",
+      "catalogKey": "snajper",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Snajper",
+          "src": "candidates/batch-65/snajper.png",
+          "note": "One prone anonymous marksman aims a long practical scoped rifle resting on a low bipod. Broad body contour, two connected hands, one scope tube and one long barrel. Plain gear, no floating target/crosshair, badge or tiny camouflage marks."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch65-szachista",
+      "name": "Szachista",
+      "tier": "Batch 65 · feat feature",
+      "context": "Roszada — podczas Unikania: TT +3 i brak ataków okazyjnych do początku następnej tury.",
+      "request": "One broad chess king and one solid castle rook swap defensive positions behind a simple protective arc. Two sober recognizable chess silhouettes on a short base line; no checkerboard, letters, double-headed arrows or oversized cog.",
+      "target": "icons/abilities/szachista.svg",
+      "catalogKey": "szachista",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Szachista",
+          "src": "candidates/batch-65/szachista.png",
+          "note": "One broad chess king and one solid castle rook swap defensive positions behind a simple protective arc. Two sober recognizable chess silhouettes on a short base line; no checkerboard, letters, double-headed arrows or oversized cog."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch65-szkolenie-w-broni",
+      "name": "Szkolenie w broni",
+      "tier": "Batch 65 · feat feature",
+      "context": "+1 SIŁ lub ZRC; biegłość w jednej wybranej kategorii broni.",
+      "request": "Remove ONLY the LOWEST supporting hand and its forearm from the selected knife-training icon. Keep the upper learner hand that firmly grips the knife, the upper instructor hand pointing toward the training post, and the complete solid post. Exactly TWO hands remain: one grips the knife, one points. No lower supporting wrist/stump, additional blade or other change.",
+      "target": "icons/abilities/szkolenie-w-broni.svg",
+      "catalogKey": "szkolenieWBroni",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch66-revision",
+          "label": "Batch 66 revision",
+          "src": "candidates/batch-66/szkolenie-w-broni_revision_b.png",
+          "note": "Remove ONLY the LOWEST supporting hand and its forearm from the selected knife-training icon. Keep the upper learner hand that firmly grips the knife, the upper instructor hand pointing toward the training post, and the complete solid post. Exactly TWO hands remain: one grips the knife, one points. No lower supporting wrist/stump, additional blade or other change."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Szkolenie w broni",
+          "src": "candidates/batch-65/szkolenie-w-broni.png",
+          "note": "One learner's sturdy hands practice with a plain combat knife while an instructor's single guiding forearm points toward a solid training post. Clear knife blade, two learner hands and one instructor hand, no extra weapons, badges or text."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch65-szkolenie-w-ciezkim-pancerzu",
+      "name": "Szkolenie w ciężkim pancerzu",
+      "tier": "Batch 65 · feat feature",
+      "context": "+1 SIŁ lub KON; wyszkolenie w ciężkich pancerzach.",
+      "request": "One practical trainee tightens a broad side strap on a heavy plate breastplate, with one hand drawing the strap and the other bracing a thick shoulder plate. Simple complete armour shape with massive plates, no face, fantasy ornament, logo or floating shield.",
+      "target": "icons/abilities/szkolenie-w-ciezkim-pancerzu.svg",
+      "catalogKey": "szkolenieWCiezkimPancerzu",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Szkolenie w ciężkim pancerzu",
+          "src": "candidates/batch-65/szkolenie-w-ciezkim-pancerzu.png",
+          "note": "One practical trainee tightens a broad side strap on a heavy plate breastplate, with one hand drawing the strap and the other bracing a thick shoulder plate. Simple complete armour shape with massive plates, no face, fantasy ornament, logo or floating shield."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch66-szkolenie-w-srednim-pancerzu",
+      "name": "Szkolenie w średnim pancerzu",
+      "tier": "Batch 66 · feat feature",
+      "context": "+1 SIŁ lub KON; wyszkolenie w średnich pancerzach.",
+      "request": "One ordinary trainee secures a broad strap on a practical medium armour vest, with one hand pulling the strap and the other steadying it. Modest torso plates with flexible gaps and bare sleeve shoulders distinguish it from a massive heavy breastplate. Complete head-and-shoulder silhouette, two plausible hands, no ornate fantasy armour or floating shield.",
+      "target": "icons/abilities/szkolenie-w-srednim-pancerzu.svg",
+      "catalogKey": "szkolenieWSrednimPancerzu",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Szkolenie w średnim pancerzu",
+          "src": "candidates/batch-66/szkolenie-w-srednim-pancerzu.png",
+          "note": "One ordinary trainee secures a broad strap on a practical medium armour vest, with one hand pulling the strap and the other steadying it. Modest torso plates with flexible gaps and bare sleeve shoulders distinguish it from a massive heavy breastplate. Complete head-and-shoulder silhouette, two plausible hands, no ornate fantasy armour or floating shield."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch66-szturmowiec",
+      "name": "Szturmowiec",
+      "tier": "Batch 66 · feat feature",
+      "context": "Strzelanie krótkimi seriami (KS) w normalnym zasięgu bez Utrudnienia.",
+      "request": "One practical adult rifleman fires a controlled short burst while advancing in a compact standing stance. Two hands hold one ordinary assault rifle firmly, one small muzzle flash and two short restrained shot streaks. Complete head, arms and legs, no belt-fed heavy gun, cartoon soldier or tiny camouflage texture.",
+      "target": "icons/abilities/szturmowiec.svg",
+      "catalogKey": "szturmowiec",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Szturmowiec",
+          "src": "candidates/batch-66/szturmowiec.png",
+          "note": "One practical adult rifleman fires a controlled short burst while advancing in a compact standing stance. Two hands hold one ordinary assault rifle firmly, one small muzzle flash and two short restrained shot streaks. Complete head, arms and legs, no belt-fed heavy gun, cartoon soldier or tiny camouflage texture."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch66-szybki-bill",
+      "name": "Szybki Bill",
+      "tier": "Batch 66 · feat feature",
+      "context": "+1 ZRC lub KON; biegłość w Inicjatywie (+PB do Inicjatywy); Długie susy [B] — Bieganie w Akcji Bonusowej.",
+      "request": "Keep the exact running survivor's pose, two arms, two legs and all body proportions. Add THREE broad short horizontal SPEED STROKES to the LEFT of the runner, behind the back and trailing leg, with clear black space separating them from the body. The lines indicate rapid movement toward the right. No arrowheads, duplicate body, extra limb or lettering.",
+      "target": "icons/abilities/szybki-bill.svg",
+      "catalogKey": "szybkiBill",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch67-revision",
+          "label": "Batch 67 revision",
+          "src": "candidates/batch-67/szybki-bill_revision_b.png",
+          "note": "Keep the exact running survivor's pose, two arms, two legs and all body proportions. Add THREE broad short horizontal SPEED STROKES to the LEFT of the runner, behind the back and trailing leg, with clear black space separating them from the body. The lines indicate rapid movement toward the right. No arrowheads, duplicate body, extra limb or lettering."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Szybki Bill",
+          "src": "candidates/batch-66/szybki-bill.png",
+          "note": "One generic athletic wasteland survivor takes a long, fast running stride, one leg extended forward and the other trailing, arms pumping naturally. Exactly one complete human body with two arms, two legs and sturdy boots. Ordinary clothes, no recognizable western or film character, giant arrows or cape."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch66-ucz-sie-ucz",
+      "name": "Ucz się, ucz",
+      "tier": "Batch 66 · feat feature",
+      "context": "+1 dowolna Cecha; biegłość w 2 wybranych umiejętnościach.",
+      "request": "Keep the two studying hands and open manual with its simple right-page diagram. REMOVE the wrench completely and leave that lower area blank. Add four short broad abstract parallel line marks to the LEFT page, suggesting paragraphs without any readable letters, words or numbers. Preserve the book outline, page turn and hand positions. No new tool or text.",
+      "target": "icons/abilities/ucz-sie-ucz.svg",
+      "catalogKey": "uczSieUcz",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch67-revision",
+          "label": "Batch 67 revision",
+          "src": "candidates/batch-67/ucz-sie-ucz_revision_b.png",
+          "note": "Keep the two studying hands and open manual with its simple right-page diagram. REMOVE the wrench completely and leave that lower area blank. Add four short broad abstract parallel line marks to the LEFT page, suggesting paragraphs without any readable letters, words or numbers. Preserve the book outline, page turn and hand positions. No new tool or text."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Ucz się, ucz",
+          "src": "candidates/batch-66/ucz-sie-ucz.png",
+          "note": "Two adult hands study an open practical manual on a simple desk beside one plain training tool. One hand holds a page, the other follows a broad blank diagram mark. Complete book, two hands and one small wrench; no readable writing, numbers, graduation cap, floating brain or giant cog."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch66-ukryty-cel",
+      "name": "Ukryty cel",
+      "tier": "Batch 66 · feat feature",
+      "context": "Ignorujesz osłonę ½ i ¾ celu; ignorujesz Utrudnienie z akcji Unikanie.",
+      "request": "Spread the scene horizontally: shooter on the LEFT, one broad cover slab at CENTER, target figure on the RIGHT with an obvious black gap separating target from the slab. Leave generous space between shooter and slab too. Show one clear horizontal shot path from the rifle muzzle THROUGH a small hole in the slab and ending at the target's torso, with one restrained impact mark. Full target head and shoulders visible, two anatomically coherent figures and one gun. The shot penetrates cover rather than going around its edge. No blood, wound detail, death depiction, labels or extra shots.",
+      "target": "icons/abilities/ukryty-cel.svg",
+      "catalogKey": "ukrytyCel",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "batch67-revision",
+          "label": "Batch 67 revision",
+          "src": "candidates/batch-67/ukryty-cel_revision_b.png",
+          "note": "Spread the scene horizontally: shooter on the LEFT, one broad cover slab at CENTER, target figure on the RIGHT with an obvious black gap separating target from the slab. Leave generous space between shooter and slab too. Show one clear horizontal shot path from the rifle muzzle THROUGH a small hole in the slab and ending at the target's torso, with one restrained impact mark. Full target head and shoulders visible, two anatomically coherent figures and one gun. The shot penetrates cover rather than going around its edge. No blood, wound detail, death depiction, labels or extra shots."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Ukryty cel",
+          "src": "candidates/batch-66/ukryty-cel.png",
+          "note": "One anonymous rifleman aims past the edge of a broad broken cover slab toward one partially exposed opposing head-and-shoulder silhouette. The barrel clears the slab's edge; the target's head and one shoulder emerge beyond it. Two separate coherent figures, one rifle and one cover block, no crosshair overlay, transparency, labels or gore."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch66-wrestler",
+      "name": "Wrestler",
+      "tier": "Batch 66 · feat feature",
+      "context": "+1 SIŁ; Ułatwienie do Testów Ataku wobec Pochwyconego; Duszenie (zamiast ataku — 1 + mod. SIŁ obrażeń obuchowych); Rzut na matę (Pochwycony duży lub mniejszy, z Utrudnieniem → Powalenie).",
+      "request": "Two ordinary adult fighters in one anatomically coherent standing wrestling hold: one firmly controls the opponent's upper body from behind, two visible forearms wrap around the torso without covering the neck. The opponent bends forward and braces with two hands. Two complete heads and believable connected limbs; no extra hand, duplicated torso, ring ropes, franchise character or gore.",
+      "target": "icons/abilities/wrestler.svg",
+      "catalogKey": "wrestler",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Wrestler",
+          "src": "candidates/batch-66/wrestler.png",
+          "note": "Two ordinary adult fighters in one anatomically coherent standing wrestling hold: one firmly controls the opponent's upper body from behind, two visible forearms wrap around the torso without covering the neck. The opponent bends forward and braces with two hands. Two complete heads and believable connected limbs; no extra hand, duplicated torso, ring ropes, franchise character or gore."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch66-zlomiarz",
+      "name": "Złomiarz",
+      "tier": "Batch 66 · feat feature",
+      "context": "+1 INT lub MDR; Ułatwienie w Testach Śledztwa przy wycenianiu przedmiotów; Ułatwienie w Testach MDR/INT podczas szabrowania.",
+      "request": "One practical salvager crouches beside a small tray of metal scrap and examines one useful alternator-like component with two hands. Clear head, two hands, one large useful part and three broad scrap shapes. Plain worn work clothes, no giant generic cog, unreadable clutter, value labels or coins.",
+      "target": "icons/abilities/zlomiarz.svg",
+      "catalogKey": "zlomiarz",
+      "current": {
+        "src": null,
+        "emptyLabel": "No dedicated glyph",
+        "note": "Confirmed absent at both canonical and proposed icon paths and absent from existing review cards."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · Złomiarz",
+          "src": "candidates/batch-66/zlomiarz.png",
+          "note": "One practical salvager crouches beside a small tray of metal scrap and examines one useful alternator-like component with two hands. Clear head, two hands, one large useful part and three broad scrap shapes. Plain worn work clothes, no giant generic cog, unreadable clutter, value labels or coins."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch67-paliwo-dobre",
+      "name": "Paliwo dobre (5 l)",
+      "tier": "Batch 67 · fuel grade",
+      "context": "Canonical trade/production catalog fuel grade; inventory row, barter list and chat card. Five-litre container, distinct grade silhouette.",
+      "request": "One clean sturdy METAL fuel jerrycan with a broad squared rectangular body, a neat triple bridge handle, securely latched corner cap and one large diamond-shaped pressed reinforcing panel. Upright practical five-litre can, intact manufactured silhouette. No letters, brand, numerals, stars, medals, gradients or texture.",
+      "target": "icons/items/loot/paliwo_dobre.svg",
+      "catalogKey": "raw:paliwo-dobre",
+      "current": {
+        "src": null,
+        "emptyLabel": "icons/svg/item-bag.svg",
+        "note": "Catalog currently falls back to the core item-bag icon; no dedicated grade glyph exists."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Paliwo dobre (5 l)",
+          "src": "candidates/batch-67/paliwo_dobre.png",
+          "note": "One clean sturdy METAL fuel jerrycan with a broad squared rectangular body, a neat triple bridge handle, securely latched corner cap and one large diamond-shaped pressed reinforcing panel. Upright practical five-litre can, intact manufactured silhouette. No letters, brand, numerals, stars, medals, gradients or texture."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch67-paliwo-przecietne",
+      "name": "Paliwo przeciętne (5 l)",
+      "tier": "Batch 67 · fuel grade",
+      "context": "Canonical trade/production catalog fuel grade; inventory row, barter list and chat card. Five-litre container, distinct grade silhouette.",
+      "request": "One ordinary utilitarian METAL fuel can with a slightly rounded tall body, ONE simple carrying loop, ordinary screw cap and a broad X-shaped pressed reinforcement panel. A small broad dent in one shoulder conveys a used but serviceable container. Clearly distinguish its rounded body/single loop/X panel from the clean square triple-handle good-fuel can. No rust specks, fine wear, lettering, logo or number.",
+      "target": "icons/items/loot/paliwo_przecietne.svg",
+      "catalogKey": "raw:paliwo-przecietne",
+      "current": {
+        "src": null,
+        "emptyLabel": "icons/svg/item-bag.svg",
+        "note": "Catalog currently falls back to the core item-bag icon; no dedicated grade glyph exists."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Paliwo przeciętne (5 l)",
+          "src": "candidates/batch-67/paliwo_przecietne.png",
+          "note": "One ordinary utilitarian METAL fuel can with a slightly rounded tall body, ONE simple carrying loop, ordinary screw cap and a broad X-shaped pressed reinforcement panel. A small broad dent in one shoulder conveys a used but serviceable container. Clearly distinguish its rounded body/single loop/X panel from the clean square triple-handle good-fuel can. No rust specks, fine wear, lettering, logo or number."
+        }
+      ],
+      "status": "resolved"
+    },
+    {
+      "id": "batch67-paliwo-chrzczone",
+      "name": "Paliwo chrzczone (5 l)",
+      "tier": "Batch 67 · fuel grade",
+      "context": "Canonical trade/production catalog fuel grade; inventory row, barter list and chat card. Five-litre container, distinct grade silhouette.",
+      "request": "Replace the industrial windowed container with one CHEAP PLASTIC ORANGE-JUICE JUG repurposed for adulterated fuel. A broad lightweight squat jug body with rounded shoulders, a small ordinary screw cap and a simple thin molded grip conveys cheap beverage packaging. REMOVE the inspection window and its liquid layers completely. Plain opaque body: no side window, label panel, tape band, pressed metal X, diamond reinforcement, lettering, logo, numerals, fruit symbol or visible liquid. Keep the white-only glyph style: orange juice describes the container, not its color.",
+      "target": "icons/items/loot/paliwo_chrzczone.svg",
+      "catalogKey": "raw:paliwo-chrzczone",
+      "current": {
+        "src": null,
+        "emptyLabel": "icons/svg/item-bag.svg",
+        "note": "Catalog currently falls back to the core item-bag icon; no dedicated grade glyph exists."
+      },
+      "candidates": [
+        {
+          "id": "batch68-revision",
+          "label": "Batch 68 targeted revision",
+          "src": "candidates/batch-68/paliwo_chrzczone_revision_b.png",
+          "note": "Replace the industrial windowed container with one CHEAP PLASTIC ORANGE-JUICE JUG repurposed for adulterated fuel. A broad lightweight squat jug body with rounded shoulders, a small ordinary screw cap and a simple thin molded grip conveys cheap beverage packaging. REMOVE the inspection window and its liquid layers completely. Plain opaque body: no side window, label panel, tape band, pressed metal X, diamond reinforcement, lettering, logo, numerals, fruit symbol or visible liquid. Keep the white-only glyph style: orange juice describes the container, not its color."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · Paliwo chrzczone (5 l)",
+          "src": "candidates/batch-67/paliwo_chrzczone.png",
+          "note": "One reused squat PLASTIC fuel jug with a large molded side handle, broad screw cap and one thick plain repair-tape band around its middle. A simple broad side inspection window shows two separated liquid layers as two large white masses divided by one thick black horizontal gap, implying adulteration. Distinct squat plastic jug silhouette, no text, hazard label, droplets floating outside it, tiny scratches or brand."
+        }
+      ],
+      "status": "resolved"
     }
   ]
 }

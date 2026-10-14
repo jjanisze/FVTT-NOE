@@ -25,6 +25,7 @@ CDP snippets, not process kills, not asking the GM to close Foundry:
 | Run the Quench batches (layers 1–5) | `npm run fvtt -- quench [--filter=…]` |
 | GM + players, real combat, clicks — in a throwaway world | `npm run fvtt -- e2e [--suites=…]` (layer 6) |
 | A sandbox world to poke at | `npm run fvtt -- world:create <slug> --fixture=skirmish` |
+| The GM's testing ground (layer 7): stations, personas, findings | `npm run fvtt -- poligon:start --seats=3`, `poligon:reset <station>` (only when the GM asks), `poligon:findings --open --md` — [dev/poligon/README.md](dev/poligon/README.md) |
 | Before tagging a release | `npm run release:check -- --tag` |
 
 Mode: `development` (default) — agents may stop/start/restart Foundry unprompted. `runtime` = game
@@ -58,6 +59,11 @@ night: lifecycle and test commands refuse; the GM switches modes by saying so.
 - **Tests:** `npm test` (static), `npm run test:agent`, `fvtt quench`, `fvtt e2e`. A change touching
   UI, canvas, combat, dialogs or player permissions is not done without a layer-6 run or sandbox
   check — screenshot in the hand-off ([TESTING.md](TESTING.md) §3).
+- **Never test in the campaign world** — no test actors, scenes or items there, no Zbrojownia/Piekarz
+  experiments; `fvtt doctor` counts test-looking campaign documents as a problem. Agents test in the
+  sandbox; the GM tests on the **Poligon**. A change touching UI, canvas, VFX, sound or a multi-step flow
+  adds or updates its station's probes (`dev/poligon/stations/`) and the hand-off names the station and
+  probes for the GM (TESTING.md, Warstwa 7). Agents reseed a Poligon station only when the GM asks.
 - **Assets:** WEBP, not PNG, for anything shipped.
 - **Sandbox mirror:** the sandbox copy of this module junctions each top-level folder at `fvtt sandbox:init`; a new
   top-level folder (like `fonts/`) is served there only after another `fvtt sandbox:init` (it adds what is missing).

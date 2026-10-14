@@ -5,7 +5,8 @@
 **Etap: alfa** (v0.16.0, przegląd 2026-09-26; v0.18.0 2026-10-08 — M0 i M1 zamknięte, czysta instalacja
 B6 sprawdzana przy każdym wydaniu). Walka, ekwipunek, stany i przetrwanie grają się od początku do końca
 przy żywym stole, walka i powrót do zdrowia wg RAW (M1); produkcja przedmiotów i naprawa (v0.17.0) czekają
-na pierwszą sesję; towarzysze, ekonomia i większość pojazdów nie istnieją. Droga do wczesnej bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
+na pierwszą sesję; towarzysze, drony (M3) oraz handel i postój (M5) wchodzą do v0.19.0 (2026-10-14).
+Większość pojazdów nie istnieje. Droga do wczesnej bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
 
 RAW = `Neuro 5e/Podrecznik/NOE/` — konwersja PDF-a „październik” (jedyne źródło; numery stron to
 strony drukowane tego wydania). Zmiany względem marca: `Neuro 5e/Podrecznik/CHANGELOG.md`.
@@ -1174,6 +1175,33 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### v0.19.0 — Towarzysze, drony, handel i postój (2026-10-14)
+
+- Towarzysze i drony (M3): tworzenie, wartości z właściciela, wspólna inicjatywa, sterowanie zdalne,
+  obraz kamery i OSD, zasilanie, awarie, naprawy oraz Emiter EMP.
+- Handel i postój (M5): punkty handlowe, wymiana, doba postoju i przeskok czasu, Fuksy ze źródłami,
+  Fanty, szabrowanie, bebeszenie, rozbiórka i autodestrukcja maszyn; nowe kompendium tabel.
+- Poprawki dronów: lot jako domyślny ruch, strojenie obrazu przy wejściu w tryb zdalny,
+  zachowanie widoku postaci poza sterowaniem i wskazywanie miejsca drona bez przejęcia jego żetonu.
+- Synchronizacja paska makr odbywa się kolejno dla całego klienta; kalibracja żetonów rozdziela
+  garderobę postaci i Bestiariusz. Poligon dodaje 16 stanowisk i 42 postaci do prób MG.
+- Zatwierdzone ikony, ilustracje i dźwięki produkcji oraz postoju; przeglądarka ikon pamięta uwagi
+  o stylu. Szczegóły M3, M5 i Poligonu opisano w kolejnych wpisach.
+
+### Poligon — teren testów MG, warstwa 7 (2026-10-12)
+
+Plan: `PLAN_human_testing.md` (§12 — co zbudowane, spike'i H0, odstępstwa). Narzędzie: `dev/poligon/README.md`.
+Trzecia ścieżka danych (`fvtt poligon:init/start/stop/reset/obsada/findings`), świat `poligon` z MG i Graczami 1–5,
+kod Poligonu tylko przez własny loader świata i połączenie `/agent-poligon/` — w kampanii go nie ma. 16 stanowisk
+(Hangar z całym wetem M3, Magazyn, Plac, Strzelnica, Garderoba, Ciemnia, Lazaret, Bazar, Złomowisko, Arena,
+Bestiariusz, Kuźnia, Kreator, Droga, Pościg, Galeria), panel (Karta prób z werdyktami, Wariant, Czas, Kości,
+Widok gracza, Liczniki, Świeżość, Uwagi), Obsada 42 postaci zbudowanych prawdziwym awansem dnd5e (pokrywa każdą
+zautomatyzowaną Sztuczkę, zdolność klasy/profesji i Pochodzenia), paczka e2e `poligon` jako strażnik. `fvtt doctor`
+liczy testowe dokumenty w kampanii. W module jedna poprawka znaleziona przez Poligon: synchronizacja paska
+makr (`actors/ability-hotbar.mjs`) ma jeden łańcuch na klienta zamiast na aktora — MG budujący kilka postaci po kolei
+kasował to samo makro dwa razy. Dwa dalsze znaleziska (Cichy krok u gracza, zasilanie drona po skasowaniu) czekają
+w dzienniku „Poligon · Uwagi” i w `PLAN_human_testing.md` §12.
 
 ### M5 E0–E11 — handel, postój, Fuksy i Fanty, szabrowanie, bebeszenie, autodestrukcja (2026-10-12)
 

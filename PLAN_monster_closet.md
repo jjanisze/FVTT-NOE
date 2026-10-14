@@ -316,3 +316,8 @@ Tiles, so there is no second place to calibrate them and no junk actors.
 
 It immediately showed something: every PC except Piekarz reads noticeably smaller than
 the Bandit reference.
+
+**Removed 2026-10-11 (GM decision).** The band tied the package closet to campaign actors;
+the closet now reads only the compendium and the dnd5e references, so it runs in any
+world with the module (the Poligon, `PLAN_human_testing.md`). The Character Closet stays
+the campaign's closet and is built only for a calibration session, then `remove()`d.

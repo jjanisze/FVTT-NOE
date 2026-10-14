@@ -144,6 +144,7 @@ export async function initSandbox({ campaignData, sandboxData, moduleRoot, modul
       id: MODULE_ID, skip: MODULE_SKIP, ownPacks: true, onlyFiles: ["module.json", "README.md", "LICENSE", "CREDITS.md"]
     });
   linkE2E(data, moduleRoot);
+  linkPoligon(data, moduleRoot);
 
   for (const id of modules) {
     const src = path.join(campaignData, "Data", "modules", id);
@@ -199,6 +200,18 @@ export function linkE2E(dataRoot, moduleRoot) {
   const src = path.join(moduleRoot, "dev", "e2e");
   const dst = path.join(dataRoot, "agent-e2e");
   if (fs.existsSync(src) && !fs.existsSync(dst)) fs.symlinkSync(src, dst, "junction");
+}
+
+/**
+ * The Poligon's code (PLAN_human_testing.md §3.2), served at `/agent-poligon/…` the same way: outside
+ * every package, on non-campaign data paths only. The Poligon world loads it through its own
+ * `esmodules`; the sandbox needs it for the `poligon` e2e suite, which builds every station.
+ */
+export function linkPoligon(dataRoot, moduleRoot) {
+  const src = path.join(moduleRoot, "dev", "poligon");
+  const dst = path.join(dataRoot, "agent-poligon");
+  if (fs.existsSync(src) && !fs.existsSync(dst)) fs.symlinkSync(src, dst, "junction");
+  return fs.existsSync(dst);
 }
 
 export function sandboxModuleDir(sandboxData) {

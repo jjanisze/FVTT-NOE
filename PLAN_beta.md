@@ -1,8 +1,9 @@
 # PLAN — Droga do wczesnej bety
 
 > Status: **AKTYWNY** (2026-09-26, moduł v0.16.0; przegląd 2026-10-03, v0.17.1; v0.18.0 2026-10-08 —
-> M0, M1 i M2 zrobione). Etap bieżący: **alfa** — późna dla walki, ekwipunku, przetrwania i produkcji,
-> wczesna dla pojazdów, towarzyszy i ekonomii. Bramki spełnione: B3, B5, B6.
+> M0, M1 i M2 zrobione; M3 2026-10-10, jeszcze bez wydania). Etap bieżący: **alfa** — późna dla walki,
+> ekwipunku, przetrwania, produkcji i towarzyszy, wczesna dla pojazdów i ekonomii. Bramki spełnione: B3,
+> B5, B6 (z dziurą: biegłości profesji — M6).
 >
 > Skąd ten plan: przegląd IMPLEMENTATION.md ↔ RAW z 2026-09-26. Macierz pokrycia RAW mieszka
 > w [IMPLEMENTATION.md § Stan projektu](IMPLEMENTATION.md#stan-projektu) i to ona jest źródłem

@@ -16,6 +16,8 @@
  *     przesuwanie linii → toczenie się obrazu → sam szum. Sam szum także przy FAILSAFE (D24), dronie Wyłączonym i
  *     Oślepionym (awaria 8, „OPTYKA”). Krzywa śniegu łagodna w połowie zasięgu — strojenie z E0 („przy 0,5 OSD
  *     ledwo czytelne”).
+ *   - **Szukanie kanału** przy wejściu (`STROJENIE_MS`, półtorej sekundy): błysk samego szumu, pod którym kamera tnie na
+ *     drona, potem obraz łapie synchronizację i staje na bieżącej jakości sygnału (`strojenie`).
  */
 
 import { HOOK_ZDALNY } from "./drony-zdalne.mjs";
@@ -43,6 +45,27 @@ export function celObrazu(sesja, dron) {
   const st = dron?.statuses;
   const szum = sesja.failsafeOd || sesja.wylaczonyOd || sesja.sygnal?.utracony || st?.has("blinded") || st?.has("wylaczony") ? 1 : 0;
   return { jakosc, szum };
+}
+
+/** „Szukanie kanału” przy wejściu: cały błysk szumu i złapanie obrazu. */
+export const STROJENIE_MS = 1500;
+/** Część strojenia, przez którą jest sam szum. */
+const STROJENIE_SZUM = 0.3;
+
+/**
+ * Obraz w trakcie „szukania kanału” (wejście w tryb zdalny): sam szum, potem odbiornik łapie synchronizację —
+ * obraz toczy się, rwie, nabiera koloru i staje na jakości sygnału. Ta sama droga degradacji co w `FRAGMENT`,
+ * przebyta wstecz.
+ * @param {number} k  postęp strojenia 0..1
+ * @param {{jakosc: number, szum: number}} cel  `celObrazu`
+ * @returns {{jakosc: number, szum: number}}
+ */
+export function strojenie(k, cel) {
+  if (!(k < 1)) return { jakosc: cel.jakosc, szum: cel.szum };
+  if (k <= STROJENIE_SZUM) return { jakosc: 0, szum: 1 };
+  const x = (k - STROJENIE_SZUM) / (1 - STROJENIE_SZUM);
+  const e = 1 - (1 - x) ** 3;
+  return { jakosc: cel.jakosc * e, szum: 1 + (cel.szum - 1) * e };
 }
 
 /* -------------------------------------------- */
@@ -153,24 +176,34 @@ void main() {
   gl_FragColor = vec4(clamp(kolor, 0.0, 1.0), 1.0);
 }`;
 
-/** @type {{filter: PIXI.Filter, cel: {jakosc: number, szum: number}, tik: Function, filterArea: any}|null} */
+/**
+ * @type {{filter: PIXI.Filter, cel: {jakosc: number, szum: number}, tik: Function, filterArea: any,
+ *   strojenieOd: number}|null}
+ */
 let _kanal = null;
 
 function _zalozFiltr(sesja) {
   if (_kanal || !canvas?.stage) return;
-  const filter = new PIXI.Filter(undefined, FRAGMENT, { uJakosc: 1, uSzum: 0, uCzas: 0 });
+  // Pierwsza klatka to już sam szum — pod nim kamera tnie na drona (`drony-zdalne.mjs`).
+  const filter = new PIXI.Filter(undefined, FRAGMENT, { uJakosc: 0, uSzum: 1, uCzas: 0 });
   filter.resolution = canvas.app.renderer.resolution;
   const cel = celObrazu(sesja, fromUuidSync(sesja.dronUuid));
-  filter.uniforms.uJakosc = cel.jakosc;
-  filter.uniforms.uSzum = cel.szum;
   const tik = () => {
-    const dt = Math.min(0.1, canvas.app.ticker.deltaMS / 1000);
+    const teraz = performance.now();
     const u = filter.uniforms;
-    u.uCzas = (performance.now() / 1000) % 3600;
+    u.uCzas = (teraz / 1000) % 3600;
+    const k = (teraz - _kanal.strojenieOd) / STROJENIE_MS;
+    if (k < 1) {
+      const s = strojenie(k, _kanal.cel);
+      u.uJakosc = s.jakosc;
+      u.uSzum = s.szum;
+      return;
+    }
+    const dt = Math.min(0.1, canvas.app.ticker.deltaMS / 1000);
     u.uJakosc += (_kanal.cel.jakosc - u.uJakosc) * Math.min(1, dt * 4);
     u.uSzum += (_kanal.cel.szum - u.uSzum) * Math.min(1, dt * 10);
   };
-  _kanal = { filter, cel, tik, filterArea: canvas.stage.filterArea };
+  _kanal = { filter, cel, tik, filterArea: canvas.stage.filterArea, strojenieOd: performance.now() };
   canvas.stage.filterArea = canvas.app.renderer.screen;
   canvas.stage.filters = [...(canvas.stage.filters ?? []), filter];
   canvas.app.ticker.add(tik);
@@ -199,7 +232,8 @@ function _onZdalny({ stan, sesja }) {
 export function kanalFpv() {
   if (!_kanal) return null;
   const u = _kanal.filter.uniforms;
-  return { jakosc: u.uJakosc, szum: u.uSzum, cel: { ..._kanal.cel }, naScenie: !!canvas.stage.filters?.includes(_kanal.filter) };
+  return { jakosc: u.uJakosc, szum: u.uSzum, cel: { ..._kanal.cel }, naScenie: !!canvas.stage.filters?.includes(_kanal.filter),
+    strojenie: performance.now() - _kanal.strojenieOd < STROJENIE_MS };
 }
 
 /* -------------------------------------------- */
@@ -220,4 +254,4 @@ export function registerDronyObraz() {
   Hooks.on("canvasTearDown", _zdejmijFiltr);
 }
 
-export const dronyObrazApi = Object.freeze({ KAMERA_ID, celObrazu, kanalFpv });
+export const dronyObrazApi = Object.freeze({ KAMERA_ID, celObrazu, strojenie, kanalFpv });

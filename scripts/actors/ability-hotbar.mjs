@@ -59,17 +59,24 @@ function _iconFor(feature, active) {
  * each observe the same "not yet owned" state and each create a macro, producing
  * duplicates. Syncs are therefore debounced per actor and then chained so only one
  * runs at a time.
+ *
+ * The chain is one per client, not per actor (2026-10-12): every sync writes the same
+ * hotbar, and a GM syncs every character it edits. Two characters' syncs running at
+ * once each removed the other's "unwanted" macros and deleted the same macro twice —
+ * "Macro … does not exist!" server errors whenever several characters were built in a
+ * row (the Poligon's station resets, PLAN_human_testing.md §12).
  */
-const _syncChain = new Map();   // actorId -> tail promise
+const HOTBAR = "hotbar";
+const _syncChain = new Map();   // HOTBAR -> tail promise
 const _syncTimer = new Map();   // actorId -> debounce timeout
 
-/** Queue a sync, serialised behind any sync already running for this actor. */
+/** Queue a sync, serialised behind any hotbar sync already running on this client. */
 export function queueHotbarSync(actor, options) {
   if (!actor?.id) return Promise.resolve();
-  const prev = _syncChain.get(actor.id) ?? Promise.resolve();
+  const prev = _syncChain.get(HOTBAR) ?? Promise.resolve();
   const next = prev.catch(() => {}).then(() => syncHotbar(actor, options));
-  _syncChain.set(actor.id, next);
-  next.finally(() => { if (_syncChain.get(actor.id) === next) _syncChain.delete(actor.id); });
+  _syncChain.set(HOTBAR, next);
+  next.finally(() => { if (_syncChain.get(HOTBAR) === next) _syncChain.delete(HOTBAR); });
   return next;
 }
 

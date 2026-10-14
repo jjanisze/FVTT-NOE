@@ -6,6 +6,9 @@
  * do jednego: ocenić na oko, czy grafika żetonu wypełnia swoje pole siatki tak
  * jak powinna, i poprawić to QuickScale'em.
  *
+ * Szafa pakietu: czyta tylko kompendium i wzorce dnd5e, nigdy aktorów świata — działa
+ * w każdym świecie z modułem (Poligon, piaskownica), nie tylko w kampanii.
+ *
  * ## Po co to w ogóle
  *
  * 662 żetony dnd5e są rysowane ręcznie i kadrowane spójnie — dlatego „Mały" i
@@ -51,10 +54,6 @@ import { NEUROSHIMA_CREATURE_TYPES } from "../config/creature-types.mjs";
 import { regenerateTestScene, findTestScene, taggedTokens, clearTestScene } from "./test-scenes.mjs";
 import { SIZES, knownSize, round2, storedScale } from "./token-sizes.mjs";
 import { layoutBands, cellPosition } from "./closet-layout.mjs";
-// Kierunek zależności jest celowy: „kto jest drużyną i czy ma grafikę" to
-// pytanie Szafy z postaciami, a ta szafa tylko je zadaje, żeby postawić
-// pasmo odnośnikowe. Jedna definicja, obie sceny.
-import { partyReference } from "./character-closet.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const CLOSET_ID = "monster-closet";
@@ -104,34 +103,18 @@ async function plan() {
   const { creatures, missingPack } = await loadCreatures();
   if (missingPack) throw new Error(`Nie znalazłem packa ${PACK_ID}.`);
 
-  // Drużyna na górze, kaflami. Wzorce dnd5e mówią, jak wygląda poprawnie
-  // skadrowany żeton w ogóle; pytanie, które pada przy stole, brzmi jednak
-  // „czy ten Megator jest dobry **obok Alana**". Kafle, nie żetony: odnośnika
-  // nie trzeba kalibrować, a kafel nie tworzy kopii aktora i nie da się go
-  // ruszyć QuickScale'em. Skala jest ta, którą postać ma naprawdę — pasmo
-  // pokazuje żeton taki, jaki wchodzi na mapę.
-  const party = partyReference();
-  const bands = [
-    {
-      id: "druzyna", title: "Drużyna", color: "#e8d9a0",
-      note: "odnośnik — aktualna skala postaci graczy; kalibracja w Szafie z postaciami",
-      items: party,
-      tile: p => ({ src: p.src, scale: p.scale, name: p.name })
-    },
-    ...CATEGORY_ORDER.map(category => ({
-      id: category,
-      title: NEUROSHIMA_CREATURE_TYPES[category]?.plural ?? category,
-      color: CATEGORY_COLOR[category],
-      items: creatures.filter(c => c.category === category)
-    }))
-  ];
+  const bands = CATEGORY_ORDER.map(category => ({
+    id: category,
+    title: NEUROSHIMA_CREATURE_TYPES[category]?.plural ?? category,
+    color: CATEGORY_COLOR[category],
+    items: creatures.filter(c => c.category === category)
+  }));
 
   const { placements, ...scenePlan } = layoutBands({
     bands,
     legend: "SZAFA Z POTWORAMI — kalibracja skali żetonów Bestiariusza\n"
       + "Rząd = rozmiar istoty. Pierwszy kafel w rzędzie to wzorzec dnd5e przy skali 1,0 (zablokowany).\n"
       + "Procent w podpisie po lewej = wypełnienie kadru dłuższym wymiarem obwiedni.\n"
-      + "Pasmo „Drużyna” na górze to kafle — odnośnik, nie cel kalibracji.\n"
       + "\n"
       + "QUICKSCALE — zaznacz żeton, potem:\n"
       + "[ mniejszy        ] większy        \\ przywróć skalę z prototypu\n"

@@ -414,34 +414,8 @@ async function remove() {
   return wiped;
 }
 
-/**
- * Postacie graczy z realną grafiką żetonu — pasmo odnośnikowe dla innych szaf.
- *
- * Mieszka tutaj, a nie w `monster-closet.mjs`, bo „kto jest drużyną i czy ma
- * grafikę" to pytanie tej szafy; Szafa z potworami tylko je zadaje. Dzięki temu
- * poprawka w `artKind()` albo w `isTooling()` działa w obu miejscach naraz.
- *
- * Zwraca **aktualną skalę** każdej postaci, żeby odnośnik pokazywał żeton taki,
- * jaki naprawdę wchodzi na mapę — a nie taki, jaki byłby przy skali 1,0.
- */
-export function partyReference() {
-  return game.actors
-    .filter(a => a.type === "character"
-      && !a.getFlag(MODULE_ID, "testScene.id")
-      && !isTooling(a)
-      && artKind(a) === "art")
-    .map(a => ({
-      name: a.name,
-      size: knownSize(a.system?.traits?.size),
-      src: a.prototypeToken.texture.src,
-      scale: round2(a.prototypeToken.texture.scaleX)
-    }))
-    .sort((a, b) => a.name.localeCompare(b.name, "pl"));
-}
-
 export const characterClosetApi = {
   regenerate, harvest, apply, report, remove,
   scene: () => findTestScene(CLOSET_ID),
-  partyReference,
   BANDS
 };

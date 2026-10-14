@@ -1,0 +1,630 @@
+{
+  "title": "Batch 61 · 27 awaiting GM review",
+  "updated": "2026-10-11",
+  "items": [
+    {
+      "id": "batch59-ruch",
+      "name": "Ruch",
+      "tier": "Batch 59 · Megator action",
+      "context": "Megator, an alligator the size of a submarine, moves up to its speed.",
+      "request": "One colossal armored mutant alligator surges forward with three bold speed streaks.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · faster organic Megator",
+          "src": "candidates/batch-61/ruch_revision_c.png",
+          "note": "Irregular scales, a crushed car and three bold speed streaks."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · colossal alligator movement",
+          "src": "candidates/batch-59/ruch.png",
+          "note": "One colossal armored mutant alligator surges forward with three bold speed streaks."
+        },
+        {
+          "id": "batch60-revision",
+          "label": "Revision B · organic Megator crushes a car",
+          "src": "candidates/batch-60/ruch_revision_b.png",
+          "note": "Armadillo-like organic scales and a crushed car establish the creature's immense size."
+        }
+      ]
+    },
+    {
+      "id": "batch59-karabin-laserowy",
+      "name": "Karabin laserowy",
+      "tier": "Batch 59 · Biodroid weapon",
+      "context": "The headless upright Biodroid carries machine guns and uses a laser rifle as a dedicated attack.",
+      "request": "One headless armored worm Biodroid braces a crude industrial laser rifle firing one straight beam.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · simplified laser rifle",
+          "src": "candidates/batch-61/karabin_laserowy_revision_c.png",
+          "note": "Only the weapon remains, reduced to a clean industrial silhouette."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · Biodroid laser rifle",
+          "src": "candidates/batch-59/karabin_laserowy.png",
+          "note": "One headless armored worm Biodroid braces a crude industrial laser rifle firing one straight beam."
+        },
+        {
+          "id": "batch60-revision",
+          "label": "Revision B · weapon-only laser rifle",
+          "src": "candidates/batch-60/karabin_laserowy_revision_b.png",
+          "note": "Only the crude industrial laser rifle remains, with no wielder or target."
+        }
+      ]
+    },
+    {
+      "id": "batch60-cwiczenie-czyni-mistrza",
+      "name": "Ćwiczenie czyni mistrza",
+      "tier": "Batch 60 · Sztuczka",
+      "context": "The feature permanently improves one or two base attributes and can be selected repeatedly.",
+      "request": "A rugged adult repeats a heavy barbell lift through three stages beside one upward progress arrow.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · two-stage training",
+          "src": "candidates/batch-61/cwiczenie_czyni_mistrza_revision_b.png",
+          "note": "Only the preparation and completed lift remain beneath one progress arrow."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · repeated training",
+          "src": "candidates/batch-60/cwiczenie_czyni_mistrza.png",
+          "note": "A rugged adult repeats a heavy barbell lift through three stages beside one upward progress arrow."
+        }
+      ]
+    },
+    {
+      "id": "batch60-grad-olowiu",
+      "name": "Grad ołowiu",
+      "tier": "Batch 60 · Sztuczka",
+      "context": "Short bursts become part of the Attack action, allowing as many short bursts as attacks in the turn.",
+      "request": "One crude rifle fires three clearly separated short burst clusters in one direction.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · single muzzle flash",
+          "src": "candidates/batch-61/grad_olowiu_revision_b.png",
+          "note": "One muzzle flash launches a dense fan of bullets and long streaks."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · repeated short bursts",
+          "src": "candidates/batch-60/grad_olowiu.png",
+          "note": "One crude rifle fires three clearly separated short burst clusters in one direction."
+        }
+      ]
+    },
+    {
+      "id": "batch60-ja-juz-swoje-odchorowalem",
+      "name": "Ja już swoje odchorowałem",
+      "tier": "Batch 60 · Miami origin feature",
+      "context": "The character has advantage on Constitution saving throws.",
+      "request": "A scarred survivor stands steady while disease particles break against a chest-shaped shield.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · simplified disease resistance",
+          "src": "candidates/batch-61/ja_juz_swoje_odchorowalem_revision_b.png",
+          "note": "A shield blocks three disease particles from a scarred survivor."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · hardened constitution",
+          "src": "candidates/batch-60/ja_juz_swoje_odchorowalem.png",
+          "note": "A scarred survivor stands steady while disease particles break against a chest-shaped shield."
+        }
+      ]
+    },
+    {
+      "id": "batch60-jesli-ma-silnik-to-ruszy",
+      "name": "Jeśli ma silnik, to ruszy",
+      "tier": "Batch 60 · Detroit origin feature",
+      "context": "The character has advantage when building or repairing vehicles and gains mechanic-tool proficiency.",
+      "request": "A greasy mechanic hand turns a large wrench on a battered exposed engine as it ignites.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · simplified engine repair",
+          "src": "candidates/batch-61/jesli_ma_silnik_to_ruszy_revision_b.png",
+          "note": "One wrench, one engine block and one ignition spark."
+        },
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · reviving an engine",
+          "src": "candidates/batch-60/jesli_ma_silnik_to_ruszy.png",
+          "note": "A greasy mechanic hand turns a large wrench on a battered exposed engine as it ignites."
+        }
+      ]
+    },
+    {
+      "id": "batch60-pakowanie",
+      "name": "Pakowanie",
+      "tier": "Batch 60 · Sztuczka",
+      "context": "The character doubles carrying capacity and can retrieve any backpack item as a free interaction.",
+      "request": "A gloved hand instantly pulls a large wrench from one overfilled rugged backpack.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · putting an item into the pack",
+          "src": "candidates/batch-61/pakowanie_revision_b.png",
+          "note": "The hand and bold arrow clearly push the wrench inward."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · fast overloaded backpack",
+          "src": "candidates/batch-60/pakowanie.png",
+          "note": "A gloved hand instantly pulls a large wrench from one overfilled rugged backpack."
+        }
+      ]
+    },
+    {
+      "id": "batch60-paszcza",
+      "name": "Paszcza",
+      "tier": "Batch 60 · Megator and Neogator action",
+      "context": "A hit from the colossal jaws grapples and restrains a Huge or smaller target.",
+      "request": "One enormous mutant alligator jaw clamps around a restrained adult torso without gore.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · struggling inside the jaws",
+          "src": "candidates/batch-61/paszcza_revision_b.png",
+          "note": "The trapped adult visibly pushes against the enormous jaws."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Atlas A · colossal restraining jaws",
+          "src": "candidates/batch-60/paszcza.png",
+          "note": "One enormous mutant alligator jaw clamps around a restrained adult torso without gore."
+        }
+      ]
+    },
+    {
+      "id": "batch60-patriota",
+      "name": "Patriota",
+      "tier": "Batch 60 · Sztuczka",
+      "context": "The character improves one attribute and gains another feature from their origin list.",
+      "request": "A weathered survivor presses one hand to a battered regional flag patch and receives one additional skill token.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · left-shoulder patch",
+          "src": "candidates/batch-61/patriota_revision_b.png",
+          "note": "The flag patch sits on the left shoulder of a simplified uniformed torso."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · additional origin feature",
+          "src": "candidates/batch-60/patriota.png",
+          "note": "A weathered survivor presses one hand to a battered regional flag patch and receives one additional skill token."
+        }
+      ]
+    },
+    {
+      "id": "batch60-urodzony-morderca",
+      "name": "Urodzony morderca",
+      "tier": "Batch 60 · Southern Hegemony origin feature",
+      "context": "When a damage die rolls one, the character may reroll that die once.",
+      "request": "One brutal knife strike accompanies a one-pip damage die caught by a reroll arrow.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · clean knife reroll",
+          "src": "candidates/batch-61/urodzony_morderca_revision_b.png",
+          "note": "Clean knife, one-pip die and a single reroll arrow with no dithering."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · damage reroll",
+          "src": "candidates/batch-60/urodzony_morderca.png",
+          "note": "One brutal knife strike accompanies a one-pip damage die caught by a reroll arrow."
+        }
+      ]
+    },
+    {
+      "id": "batch60-wychuchana-spluwa",
+      "name": "Wychuchana spluwa",
+      "tier": "Batch 60 · Appalachia origin feature",
+      "context": "One chosen firearm never jams and can be changed after a long rest.",
+      "request": "Two careful hands meticulously clean the open action of one battered pistol.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · two careful white gloves",
+          "src": "candidates/batch-61/wychuchana_spluwa_revision_b.png",
+          "note": "One gloved hand holds the pistol while the other wipes it with a cloth."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · meticulously maintained gun",
+          "src": "candidates/batch-60/wychuchana_spluwa.png",
+          "note": "Two careful hands meticulously clean the open action of one battered pistol."
+        }
+      ]
+    },
+    {
+      "id": "batch60-zawziety-sukinkot",
+      "name": "Zawzięty sukinkot",
+      "tier": "Batch 60 · Southern Hegemony origin feature",
+      "context": "Once per long rest, after dropping to zero hit points the character rises with one hit point on the next turn.",
+      "request": "One badly wounded adult pushes up from the ground beneath one thick upward arrow.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "batch61-revision",
+          "label": "Batch 61 revision · grizzled man rising",
+          "src": "candidates/batch-61/zawziety_sukinkot_revision_b.png",
+          "note": "A wounded grizzled man forcefully rises beneath one arrow."
+        },
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · defiant return from zero",
+          "src": "candidates/batch-60/zawziety_sukinkot.png",
+          "note": "One badly wounded adult pushes up from the ground beneath one thick upward arrow."
+        }
+      ]
+    },
+    {
+      "id": "batch61-na-symulatorach-to-dzialalo",
+      "name": "Na symulatorach to działało",
+      "tier": "Batch 61 · Posterunek origin feature",
+      "context": "The character gains two proficiencies chosen from vehicles, technology, mechanic tools and electronic tools.",
+      "request": "Two hands work a battered steering wheel while a small simulator screen repeats the wheel silhouette.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · vehicle simulator training",
+          "src": "candidates/batch-61/na_symulatorach_to_dzialalo.png",
+          "note": "Two hands work a battered steering wheel while a small simulator screen repeats the wheel silhouette."
+        }
+      ]
+    },
+    {
+      "id": "batch61-telepata",
+      "name": "Telepata",
+      "tier": "Batch 61 · Vegas origin feature",
+      "context": "The character gains Insight proficiency and advantage on Insight checks.",
+      "request": "One wary profile reads another person's expression through one bold eye and a short mental signal.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · reading another person",
+          "src": "candidates/batch-61/telepata.png",
+          "note": "One wary profile reads another person's expression through one bold eye and a short mental signal."
+        }
+      ]
+    },
+    {
+      "id": "batch61-przycelowanie",
+      "name": "Przycelowanie",
+      "tier": "Batch 61 · Sztuczka",
+      "context": "The character can target a specific body part or component at increased hit difficulty for a special effect.",
+      "request": "One rifle sight crosshair locks onto the knee of a running human silhouette.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · deliberate called shot",
+          "src": "candidates/batch-61/przycelowanie.png",
+          "note": "One rifle sight crosshair locks onto the knee of a running human silhouette."
+        }
+      ]
+    },
+    {
+      "id": "batch61-samuraj",
+      "name": "Samuraj",
+      "tier": "Batch 61 · Sztuczka",
+      "context": "The character improves bladed attacks, draws a finesse slashing weapon freely and gains protection while wielding it.",
+      "request": "Two hands rapidly draw one slim blade from its scabbard in a strong diagonal sweep.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · rapid blade draw",
+          "src": "candidates/batch-61/samuraj.png",
+          "note": "Two hands rapidly draw one slim blade from its scabbard in a strong diagonal sweep."
+        }
+      ]
+    },
+    {
+      "id": "batch61-nowka-sztuka",
+      "name": "Nówka sztuka",
+      "tier": "Batch 61 · Asgard origin feature",
+      "context": "The character leaves the bunker with one chosen item worth at most 100 gamble.",
+      "request": "One pristine new pistol rises from an opened sealed bunker equipment crate.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · pristine bunker equipment",
+          "src": "candidates/batch-61/nowka_sztuka.png",
+          "note": "One pristine new pistol rises from an opened sealed bunker equipment crate."
+        }
+      ]
+    },
+    {
+      "id": "batch61-przedwojenna-edukacja",
+      "name": "Przedwojenna edukacja",
+      "tier": "Batch 61 · Asgard origin feature",
+      "context": "The character has advantage on Intelligence checks about the prewar world and gains one tool proficiency.",
+      "request": "One intact open technical manual shows a bridge diagram with one solid wrench across the other page.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-b",
+          "label": "Atlas B · prewar technical education",
+          "src": "candidates/batch-61/przedwojenna_edukacja.png",
+          "note": "One intact open technical manual shows a bridge diagram with one solid wrench across the other page."
+        }
+      ]
+    },
+    {
+      "id": "batch61-nano-tech",
+      "name": "Nano-Tech",
+      "tier": "Batch 61 · Asgard origin feature",
+      "context": "The character has advantage when building or repairing electronics and gains electronic-tool proficiency.",
+      "request": "A large circuit board is repaired by a precision probe and soldering tip with only a few thick traces.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · precision electronics repair",
+          "src": "candidates/batch-61/nano_tech.png",
+          "note": "A large circuit board is repaired by a precision probe and soldering tip with only a few thick traces."
+        }
+      ]
+    },
+    {
+      "id": "batch61-dieta-cud",
+      "name": "Dieta cud",
+      "tier": "Batch 61 · Człowiek Pustyni origin feature",
+      "context": "The character needs fewer daily supplies, receives twice as much healing and gains cook-tool proficiency.",
+      "request": "A small ration and canteen restore a sturdy torso marked by one plain medical cross.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · efficient desert diet",
+          "src": "candidates/batch-61/dieta_cud.png",
+          "note": "A small ration and canteen restore a sturdy torso marked by one plain medical cross."
+        }
+      ]
+    },
+    {
+      "id": "batch61-duch-pustyni",
+      "name": "Duch pustyni",
+      "tier": "Batch 61 · Człowiek Pustyni origin feature",
+      "context": "The character has advantage on Stealth and Survival checks in deserts and sandy terrain.",
+      "request": "One hooded scout crouches behind a dune and partly blends into its contour.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · desert stealth",
+          "src": "candidates/batch-61/duch_pustyni.png",
+          "note": "One hooded scout crouches behind a dune and partly blends into its contour."
+        }
+      ]
+    },
+    {
+      "id": "batch61-polegam-tylko-na-sobie",
+      "name": "Polegam tylko na sobie",
+      "tier": "Batch 61 · Człowiek Pustyni origin feature",
+      "context": "The character gains smith-tool proficiency and improves attacks made with self-crafted melee or thrown weapons.",
+      "request": "One hand forges a practical knife on an anvil with one hammer and three sparks.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · self-forged weapon",
+          "src": "candidates/batch-61/polegam_tylko_na_sobie.png",
+          "note": "One hand forges a practical knife on an anvil with one hammer and three sparks."
+        }
+      ]
+    },
+    {
+      "id": "batch61-ale-jazda",
+      "name": "Ale jazda!",
+      "tier": "Batch 61 · Detroit origin feature",
+      "context": "The character ignores attack disadvantage while shooting from a moving vehicle, mount or during a fall.",
+      "request": "One survivor fires a compact firearm from a speeding rugged motorcycle.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · shooting from a moving vehicle",
+          "src": "candidates/batch-61/ale_jazda.png",
+          "note": "One survivor fires a compact firearm from a speeding rugged motorcycle."
+        }
+      ]
+    },
+    {
+      "id": "batch61-gornik-z-dziada-pradziada",
+      "name": "Górnik z dziada pradziada",
+      "tier": "Batch 61 · Appalachia origin feature",
+      "context": "The character has advantage on Strength Athletics checks and doubles carrying capacity.",
+      "request": "One powerful miner carries a huge ore sack and grips one pickaxe.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · powerful miner",
+          "src": "candidates/batch-61/gornik_z_dziada_pradziada.png",
+          "note": "One powerful miner carries a huge ore sack and grips one pickaxe."
+        }
+      ]
+    },
+    {
+      "id": "batch61-szlachetne-urodzenie",
+      "name": "Szlachetne urodzenie",
+      "tier": "Batch 61 · Appalachia origin feature",
+      "context": "The character gains two social or historical proficiencies.",
+      "request": "One composed survivor in a battered formal coat raises a signet-ring hand.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · restrained inherited authority",
+          "src": "candidates/batch-61/szlachetne_urodzenie.png",
+          "note": "One composed survivor in a battered formal coat raises a signet-ring hand."
+        }
+      ]
+    },
+    {
+      "id": "batch61-czlowiek-aligator",
+      "name": "Człowiek-aligator",
+      "tier": "Batch 61 · Miami origin feature",
+      "context": "The character gains a swimming speed equal to their normal speed.",
+      "request": "One powerful human swimmer makes a crawl stroke beside a blunt alligator tail and one wake.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · powerful swimmer",
+          "src": "candidates/batch-61/czlowiek_aligator.png",
+          "note": "One powerful human swimmer makes a crawl stroke beside a blunt alligator tail and one wake."
+        }
+      ]
+    },
+    {
+      "id": "batch61-wloczykij",
+      "name": "Włóczykij",
+      "tier": "Batch 61 · Miami origin feature",
+      "context": "Wetlands and broad sands are no longer difficult terrain, and the character gains cartographer-tool proficiency.",
+      "request": "One rugged boot strides from reed marsh into a sand dune with a rolled map strapped above it.",
+      "current": {
+        "src": null,
+        "emptyLabel": "Current live icon\nupgrade.svg or portrait",
+        "note": "Current imagery is generic or actor-specific."
+      },
+      "candidates": [
+        {
+          "id": "atlas-c",
+          "label": "Atlas C · traveller across marsh and sand",
+          "src": "candidates/batch-61/wloczykij.png",
+          "note": "One rugged boot strides from reed marsh into a sand dune with a rolled map strapped above it."
+        }
+      ]
+    }
+  ]
+}

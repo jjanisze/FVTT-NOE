@@ -22,6 +22,8 @@
  *     Własność drona idzie za posiadaczem: gracze-właściciele posiadacza są właścicielami drona.
  *   - **Wrak (U11, E9):** dron zniszczony (status „martwy” po karcie „Śmierć”) — uchwyt to „Wrak drona”: da się go
  *     złożyć i nieść, nie da się rozłożyć ani naprawić; złom i surowce rozstrzyga MG (M5). Stan wynika z drona.
+ *   - **Dron latający lata:** żeton bez chodu rusza się domyślnie lotem (`akcjaRuchu`). Rdzeń zakłada „walk”, a przy
+ *     chodzie 0 dnd5e maluje miarkę na czerwono od pierwszego pola i animuje ruch o połowę wolniej.
  */
 
 import { RODZAJE } from "../config/towarzysze-data.mjs";
@@ -650,6 +652,25 @@ function _owinUpuszczanie() {
   };
 }
 
+/**
+ * Domyślna akcja ruchu żetonu, gdy aktor nie chodzi: pierwsza szybkość, którą ma (dron latający: lot 18 m).
+ * Ogólne, choć dziś dotyczy tylko drona latającego — w Bestiariuszu każdy ma chód.
+ * @param {object|null} ruch  `system.attributes.movement`
+ * @returns {string|null}  akcja ruchu albo `null` — zostaje rdzenna
+ */
+export function akcjaRuchu(ruch) {
+  if (!ruch || Number(ruch.walk) > 0) return null;
+  return ["fly", "swim", "climb", "burrow"].find(k => Number(ruch[k]) > 0) ?? null;
+}
+
+function _owinAkcjeRuchu() {
+  const proto = CONFIG.Token.documentClass.prototype;
+  const oryginal = proto._inferMovementAction;
+  proto._inferMovementAction = function () {
+    return akcjaRuchu(this.actor?.system?.attributes?.movement) ?? oryginal.call(this);
+  };
+}
+
 function _owinDuplikowanie() {
   const proto = CONFIG.Item.documentClass.prototype;
   const desc = Object.getOwnPropertyDescriptor(proto, "canDuplicate")
@@ -666,6 +687,8 @@ function _owinDuplikowanie() {
 /* -------------------------------------------- */
 
 export function registerDrony() {
+  // Przy `init`: żetony scen przygotowują się przed `setup`.
+  _owinAkcjeRuchu();
   Hooks.on("dnd5e.preUseActivity", _onPreUseActivity);
   Hooks.on("preCreateItem", _preCreateItem);
   Hooks.on("preUpdateItem", _preUpdateItem);

@@ -14,19 +14,24 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import {
-  FILES, MODULE_ID, PROFILES, STATE_DIR, cdpUrl, defaultFoundryDataPath, installPaths, loadConfig,
-  readJson, readMode, resolveProfile, writeJson
+  FILES, MODULE_ID, POLIGON_WORLD, PROFILES, STATE_DIR, cdpUrl, defaultFoundryDataPath, installPaths, loadConfig,
+  profileDataPath, readJson, readMode, readServerOptions, resolveProfile, writeJson
 } from "./lib/config.mjs";
 import { CliError, EXIT, errorResult, note, print, refuse } from "./lib/output.mjs";
-import { checkMode, COMMAND_CLASS } from "./lib/guards.mjs";
+import { checkCloneTarget, checkMode, checkSandboxOnly, COMMAND_CLASS } from "./lib/guards.mjs";
 import { hasSecret, verifyAgainstDataPath } from "./lib/secret.mjs";
 import { serverState, startServer, stopServer } from "./lib/server.mjs";
 import { holders, lockExclusive, lockShared } from "./lib/mutex.mjs";
 import { readLog } from "./lib/logs.mjs";
 import { FoundryClient } from "./lib/foundry-http.mjs";
 import { killTree } from "./lib/proc.mjs";
+import { heldDatabases } from "./lib/leveldb.mjs";
 import { initSandbox } from "./lib/sandbox.mjs";
-import { createWorld, deleteWorld, launchWorld, listWorlds, shutdownWorldAndWait, DEFAULT_MODULES, DEFAULT_PLAYERS } from "./lib/worlds.mjs";
+import { bootstrapWorld, createWorld, deleteWorld, launchWorld, listWorlds, shutdownWorldAndWait, DEFAULT_MODULES, DEFAULT_PLAYERS } from "./lib/worlds.mjs";
+import {
+  callPoligon, campaignModules, cloneCampaign, guardHumans, mirrorCampaignSettings, openSeat, readCloneMarker, poligonExists, poligonGmPage, presence, readPoligonMarker,
+  requireRunningPoligon, writeLoader, writeStamp, POLIGON_GM, POLIGON_MARKER, POLIGON_PLAYERS, seatName
+} from "./lib/poligon.mjs";
 import { seedFixture } from "./lib/fixtures.mjs";
 import { runE2E, suiteNames } from "./lib/e2e.mjs";
 import { browserSession, browserVersion, evaluate, hardReload, waitGameReady } from "./lib/cdp.mjs";
@@ -61,6 +66,7 @@ const seconds = (v, dflt) => (v === undefined || v === true ? dflt : Number(v) *
 
 function guard(ctx, command, extra) {
   checkMode(ctx.mode, command, { profile: ctx.profile?.name, ...extra });
+  checkSandboxOnly(command, ctx.profile?.name);
 }
 
 /**
@@ -266,11 +272,25 @@ command("doctor", "Everything at once: config, mode, secret, servers, Chrome, mu
           problems.push(`${name}: ${d.userName} is logged in from ${d.pages.length} tabs (${d.pages.map(x => x.targetId.slice(0, 8)).join(", ")}) — every active-GM automation runs once per tab.`);
           hints.push(`${name}: close all but one of ${d.userName}'s tabs (chrome-devtools close_page); world:create/e2e dispose fvtt's own contexts.`);
         }
+        if (name === "campaign" && out.profiles.campaign?.active) {
+          const page = list.find(p => p.ready);
+          if (page) {
+            const found = await evaluate(browser, page.targetId, CAMPAIGN_HYGIENE, { timeoutMs: 10_000 }).catch(err => ({ error: err.message }));
+            out.campaignHygiene = Array.isArray(found) ? { testDocuments: found.length, found: found.slice(0, 20) } : found;
+            if (Array.isArray(found) && found.length) {
+              problems.push(`campaign: ${found.length} test-looking document(s) in the campaign world (${found.slice(0, 3).join("; ")}${found.length > 3 ? " …" : ""}) — testing happens on the Poligon.`);
+              hints.push("Ask the GM before removing anything from the campaign; export first (PLAN_human_testing.md §8).");
+            }
+          }
+        }
       }
     } finally {
       browser.close();
     }
   }
+
+  out.poligon = poligonDoctor(ctx, out.profiles.poligon);
+  if (out.poligon.packsStale) hints.push(`poligon: packs older than ${out.poligon.stamp.packs.newestSource} — \`npm run fvtt -- packs --profile=poligon\` (with the GM's OK while they are in it).`);
 
   out.python = pythonCheck();
   if (out.python.python3IsStoreStub) hints.push("`python3` is the Windows Store stub here — call `python` (the vault .venv is first on PATH).");
@@ -281,6 +301,36 @@ command("doctor", "Everything at once: config, mode, secret, servers, Chrome, mu
   out.ok = problems.length === 0;
   return out;
 });
+
+/**
+ * §8 hygiene (H7): test-looking documents in the campaign world are a problem, target 0. Read-only;
+ * runs in a ready campaign page. Names `TEST*`, `__*`, `[Quench]*`, `Agent ·*`, the `Testowe` folder,
+ * and anything carrying the module's `testScene` / `fixture` / `poligon` flags.
+ */
+const CAMPAIGN_HYGIENE = `(() => {
+  const MOD = ${JSON.stringify(MODULE_ID)};
+  const named = n => /^(TEST|__|\\[Quench\\]|Agent ·|\\[POLIGON\\])/i.test(String(n ?? "")) || n === "Testowe";
+  const flagged = d => { const f = d.flags?.[MOD] ?? {}; return Boolean(f.testScene || f.fixture || f.poligon); };
+  const out = [];
+  for (const [kind, coll] of [["Actor", game.actors], ["Item", game.items], ["Scene", game.scenes], ["JournalEntry", game.journal],
+    ["Folder", game.folders], ["RollTable", game.tables], ["Macro", game.macros], ["Playlist", game.playlists]]) {
+    for (const d of coll ?? []) if (named(d.name) || flagged(d)) out.push(kind + ": " + d.name);
+  }
+  return out;
+})()`;
+
+/** The Poligon's line in `doctor`: initialised? world, marker, the freshness stamp. */
+function poligonDoctor(ctx, profileState) {
+  if (!profileState?.dataPath) return { initialised: false, hint: "`npm run fvtt -- poligon:init` sets it up (PLAN_human_testing.md)." };
+  const pctx = { ...ctx, profile: resolveProfile(ctx.cfg, "poligon") };
+  const stamp = readJson(path.join(pctx.profile.data, "agent-poligon-state", "stamp.json"));
+  return {
+    initialised: poligonExists(pctx), marker: readPoligonMarker(pctx), running: profileState.active && profileState.world === POLIGON_WORLD,
+    klon: readCloneMarker(pctx, ctx.cfg.campaign?.world) ?? null, klonRunning: Boolean(profileState.active && profileState.world === ctx.cfg.campaign?.world),
+    connectedUsers: profileState.connectedUsers ?? null, stamp, packsStale: Boolean(stamp?.packs?.stale),
+    loaderJunction: fs.existsSync(path.join(pctx.profile.data, "agent-poligon"))
+  };
+}
 
 function pythonCheck() {
   const where = name => (spawnSync("where.exe", [name], { encoding: "utf8", windowsHide: true }).stdout ?? "").trim().split(/\r?\n/).filter(Boolean);
@@ -352,8 +402,21 @@ command("users", "Users of the running world (id, name, role) via the socket —
 
 command("login", "Log Chrome into the running world as a user (D8). --user=<name|id> (default: the only GM) [--context=<name> isolated] [--page=<targetId>]", async opts => {
   const ctx = context(opts);
+  // The Poligon's GM is "Gamemaster" (its world has no MCP user), and its logins never use Chrome's
+  // default context: the session cookie is per host, not per port, so it would log the campaign tab out.
+  if (ctx.profile.name === "poligon" && !opts.user) opts.user = POLIGON_GM;
   const user = await resolveUser(ctx, opts.user);
   guard(ctx, "login", { loginRole: user.gm ? "gm" : "player" });
+  if (ctx.profile.name === "poligon" && !opts.page && (!opts.context || opts.context === "default")) {
+    const browser = await browserSession(ctx.cdp);
+    try {
+      const seat = await openSeat(ctx, browser, user.name);
+      return { ok: true, profile: ctx.profile.name, user: { id: user.id, name: user.name, gm: user.gm }, context: seat.context, pages: [seat.page],
+        hint: "Poligon seats are isolated browser windows (own cookies), so the campaign tab stays logged in." };
+    } finally {
+      browser.close();
+    }
+  }
   const browser = await browserSession(ctx.cdp);
   try {
     let browserContextId = null;
@@ -500,6 +563,7 @@ command("quench", "Run the module's Quench batches in a GM page. [--filter=<key 
 command("stop", "Stop a profile's server: world shutdown → /quit → kill only if stuck. [--force] (kill without a stored password)", async opts => {
   const ctx = context(opts);
   guard(ctx, "stop");
+  await guardHumans(ctx, { force: Boolean(opts.force) });
   await lockExclusive(ctx.profile.name, "stop", seconds(opts.wait, 0));
   return { ok: true, profile: ctx.profile.name, ...(await stopServer(ctx, { force: Boolean(opts.force) })) };
 });
@@ -516,6 +580,7 @@ command("start", "Start a profile's server (desktop app, D3) behind the LevelDB 
 command("restart", "Stop and start the same world, then log every Foundry tab back in as its previous user (D8).", async opts => {
   const ctx = context(opts);
   guard(ctx, "restart");
+  await guardHumans(ctx, { force: Boolean(opts.force) });
   await lockExclusive(ctx.profile.name, "restart", seconds(opts.wait, 120_000));
   const before = await serverState(ctx);
   const world = opts.world ?? before.status.world ?? ctx.profile.defaultWorld;
@@ -529,6 +594,7 @@ command("restart", "Stop and start the same world, then log every Foundry tab ba
 command("kill", "Kill a profile's Foundry process(es) — Foundry's executable only, never Chrome.", async opts => {
   const ctx = context(opts);
   guard(ctx, "kill");
+  await guardHumans(ctx, { force: Boolean(opts.force) });
   await lockExclusive(ctx.profile.name, "kill", seconds(opts.wait, 0));
   const s = await serverState(ctx);
   if (!s.servers.length) return { ok: true, profile: ctx.profile.name, killed: [], note: "No Foundry process for this data path." };
@@ -538,6 +604,7 @@ command("kill", "Kill a profile's Foundry process(es) — Foundry's executable o
 command("packs", "Rebuild compendium packs and come back: stop → build:packs → validate:packs → start same world → re-login tabs. [--only=a,b] [--skip-validate] [--start]", async opts => {
   const ctx = context(opts);
   guard(ctx, "packs");
+  await guardHumans(ctx, { force: Boolean(opts.force) });
   await lockExclusive(ctx.profile.name, "packs", seconds(opts.wait, 600_000));
   const t0 = Date.now();
   const before = await serverState(ctx);
@@ -563,6 +630,7 @@ command("packs", "Rebuild compendium packs and come back: stop → build:packs �
     }
   }
   const ok = build.ok && (validate?.ok ?? true) && !startError && sessions.every(s => s.ok);
+  if (ctx.profile.name === "poligon") writeStamp(ctx, MODULE_ROOT); // the panel's Świeżość reads it
   return {
     ok, profile: ctx.profile.name, world, ms: Date.now() - t0, stop, build, validate, start, startError, sessions,
     ...(ok ? {} : { hint: !build.ok ? "Build failed — packs may be partial; read build.stderr." : startError ? "Server did not come back — `fvtt logs --level=warn`." : undefined })
@@ -677,7 +745,230 @@ command("e2e", "Layer 6: fresh sandbox world, GM + player clients, suites from d
   return { ...res, ...(res.ok ? {} : { hint: "World and tabs kept for inspection; read the report, look at the screenshots. `fvtt e2e --reuse` reruns without recreating." }) };
 });
 
-command("help", "This list.", async () => ({ ok: true, usage: "npm run fvtt -- <command> [--profile=campaign|sandbox] [--key=value]", commands: HELP }));
+/* ------------------------------------------------------------------------------------ */
+/*  Poligon — the GM's testing ground (PLAN_human_testing.md §6)                         */
+/* ------------------------------------------------------------------------------------ */
+
+function poligonContext(opts) {
+  return context({ ...opts, profile: "poligon" });
+}
+
+const seatList = v => {
+  if (v === undefined || v === false) return [];
+  if (v === true) return POLIGON_PLAYERS.slice(0, 3);
+  const s = String(v).trim();
+  if (/^\d+$/.test(s)) return POLIGON_PLAYERS.slice(0, Math.min(Number(s), POLIGON_PLAYERS.length));
+  return s.split(",").map(x => x.trim()).filter(Boolean).map(x => (/^\d+$/.test(x) ? `Gracz ${x}` : x));
+};
+
+command("poligon:init", "Create/refresh the Poligon: own data path and port, modules as the campaign runs them, world `poligon` with Gamemaster + Gracz 1–5, its loader, packs from the working tree. Idempotent. [--skip-packs] [--force] (restart while someone is connected)", async opts => {
+  const cfg = loadConfig();
+  const base = { cfg, install: installPaths(cfg), cdp: cdpUrl(cfg), mode: readMode(), opts };
+  checkMode(base.mode, "poligon:init");
+  await lockExclusive("poligon", "poligon:init", seconds(opts.wait, 0));
+  const t0 = Date.now();
+  const campaign = resolveProfile(cfg, "campaign");
+  const dataPath = profileDataPath(cfg, "poligon");
+  const { modules, from } = await campaignModules(base, campaign);
+
+  // A server already running on the Poligon goes down only with nobody in it.
+  let ctx = null;
+  try { ctx = { ...base, profile: resolveProfile(cfg, "poligon") }; } catch { /* first run: no options.json yet */ }
+  const steps = [];
+  if (ctx) {
+    const s = await serverState(ctx);
+    if (s.status.reachable || s.servers.length) {
+      await guardHumans(ctx, { force: Boolean(opts.force) });
+      await stopServer(ctx);
+      steps.push("stopped the running Poligon server");
+    }
+  }
+
+  const report = await initSandbox({
+    campaignData: campaign.dataPath, sandboxData: dataPath, moduleRoot: MODULE_ROOT, modules: modules.filter(m => m !== MODULE_ID)
+  });
+  ctx = { ...base, profile: resolveProfile(cfg, "poligon") };
+
+  let build = null;
+  if (!opts["skip-packs"]) {
+    const out = [`--out=${path.join(moduleDirOf(ctx), "packs")}`];
+    build = runNode("dev/packs/build-packs.mjs", out);
+    if (build.ok) build.validate = runNode("dev/packs/validate-packs.mjs", out);
+    if (!build.ok) return { ok: false, ...report, build, hint: "Pack build failed — read build.stderr." };
+  }
+
+  let world = { id: POLIGON_WORLD, created: false };
+  if (!poligonExists(ctx)) {
+    const created = await bootstrapWorld(ctx, {
+      id: POLIGON_WORLD, title: "Poligon",
+      description: "Poligon — the GM's testing ground (PLAN_human_testing.md). Created by `fvtt poligon:init`; never deleted by fvtt.",
+      marker: { file: POLIGON_MARKER, data: { kind: "poligon", modulesFrom: from } },
+      modules, players: POLIGON_PLAYERS, startServer
+    });
+    world = { id: POLIGON_WORLD, created: true, users: created.users.map(u => u.name) };
+    await stopServer(ctx);
+    steps.push("created the world, stopped to add its loader");
+  }
+  const loader = writeLoader(path.join(ctx.profile.data, "worlds", POLIGON_WORLD));
+  // Foundry's own default world for this data path, so a bare `fvtt start --profile=poligon` opens it.
+  const optionsFile = path.join(ctx.profile.dataPath, "Config", "options.json");
+  const options = readServerOptions(ctx.profile.dataPath);
+  if (options.world !== POLIGON_WORLD) fs.writeFileSync(optionsFile, JSON.stringify({ ...options, world: POLIGON_WORLD }, null, 2));
+
+  const start = await startServer(ctx, { world: POLIGON_WORLD });
+  const stamp = writeStamp(ctx, MODULE_ROOT);
+  const settings = await mirrorCampaignSettings(base, campaign, ctx);
+  return {
+    ok: true, dataPath, ms: Date.now() - t0, modules, modulesFrom: from, world, loader, steps, start, settings,
+    created: report.created, build: build ? { ok: build.ok, validate: build.validate?.ok ?? null, ms: build.ms } : "skipped",
+    stamp: { commit: stamp.commit, dirty: stamp.dirty },
+    hint: "`npm run fvtt -- poligon:start --seats=3` opens the GM's seat and three player windows; the panel is the 'Poligon' button in the scene controls."
+  };
+});
+
+command("poligon:start", "Start the Poligon world (or, --klon, the campaign clone) and open seats: the GM's window plus player windows. [--seats=3 | --seats=1,4 | --seats=\"Gracz 2\"] [--no-gm] [--klon] [--force] (switch worlds while someone is connected)", async opts => {
+  const ctx = poligonContext(opts);
+  guard(ctx, "poligon:start");
+  if (!poligonExists(ctx)) throw refuse("No Poligon world yet.", "no-world", "`npm run fvtt -- poligon:init`.");
+  const target = opts.klon ? ctx.cfg.campaign?.world : POLIGON_WORLD;
+  if (opts.klon && !readCloneMarker(ctx, target)) throw refuse("No campaign clone on the Poligon.", "no-clone", "`npm run fvtt -- poligon:clone`.");
+  await lockExclusive(ctx.profile.name, "poligon:start", seconds(opts.wait, 0));
+  const status = await new FoundryClient(ctx.profile).status();
+  let start = { already: true };
+  if (status.active && status.world !== target) {
+    // Switching worlds sends everyone in the other one back to /join — the human guard first. A running
+    // server knows only the worlds it found at startup, so the switch is a restart (a fresh clone appears).
+    await guardHumans(ctx, { force: Boolean(opts.force) });
+    await stopServer(ctx);
+    start = await startServer(ctx, { world: target });
+  } else if (!status.active) {
+    if (status.reachable) await stopServer(ctx); // setup screen: relaunch straight into the world
+    start = await startServer(ctx, { world: target });
+  }
+  const stamp = writeStamp(ctx, MODULE_ROOT);
+  const seats = [];
+  const gmName = opts.klon ? await cloneGm(ctx) : POLIGON_GM;
+  const wanted = [...(opts["no-gm"] ? [] : [gmName]), ...seatList(opts.seats)];
+  if (wanted.length) {
+    const browser = await browserSession(ctx.cdp);
+    try {
+      for (const name of wanted) {
+        try {
+          seats.push(await openSeat(ctx, browser, name));
+        } catch (err) {
+          seats.push({ user: name, error: err.message });
+        }
+      }
+    } finally {
+      browser.close();
+    }
+  }
+  return {
+    ok: seats.every(s => !s.error), profile: "poligon", world: target, klon: Boolean(opts.klon), start, seats,
+    stamp: { commit: stamp.commit, dirty: stamp.dirty, packsStale: stamp.packs.stale },
+    hint: opts.klon
+      ? "The clone is a copy: nothing flows back to the campaign. Red banner KLON in every tab. `npm run fvtt -- poligon:start` switches back."
+      : stamp.packs.stale
+        ? `Packs are older than ${stamp.packs.newestSource} — \`npm run fvtt -- packs --profile=poligon\`.`
+        : "Each seat is its own browser window (isolated cookies). Panel: the 'Poligon' button in the scene controls."
+  };
+});
+
+/** The clone's GM seat: a full GM other than the agents' own login user (the campaign's `loginUser`). */
+async function cloneGm(ctx) {
+  const users = await new FoundryClient(ctx.profile).users();
+  const gms = users.filter(u => u.role >= 4);
+  const agent = String(ctx.cfg.campaign?.loginUser ?? "").toLowerCase();
+  return (gms.find(u => u.name.toLowerCase() !== agent) ?? gms[0])?.name ?? null;
+}
+
+command("poligon:clone", "Copy the campaign world onto the Poligon's data path (same id, one-way, marker, [KLON] title, red banner). The campaign keeps running; nothing flows back. [--refresh] (replace an existing clone fvtt made)", async opts => {
+  const ctx = poligonContext(opts);
+  guard(ctx, "poligon:clone");
+  if (!poligonExists(ctx)) throw refuse("No Poligon yet.", "no-world", "`npm run fvtt -- poligon:init`.");
+  const id = ctx.cfg.campaign?.world;
+  if (!id) throw new CliError("config.json names no campaign world.", { code: "usage" });
+  await lockExclusive(ctx.profile.name, "poligon:clone", seconds(opts.wait, 0));
+  const campaign = resolveProfile(ctx.cfg, "campaign");
+  const st = await new FoundryClient(ctx.profile).status();
+  const heldDbs = heldDatabases(ctx.profile.data).held.filter(h => h.startsWith(`worlds/${id}/`));
+  const res = cloneCampaign({
+    campaign, poligon: ctx.profile, id,
+    guard: g => checkCloneTarget({
+      ...g, id, worldsRoot: path.join(ctx.profile.data, "worlds"), campaignData: campaign.dataPath,
+      refresh: Boolean(opts.refresh), active: Boolean(st.active && st.world === id), heldDbs
+    })
+  });
+  return { ok: true, ...res, hint: "`npm run fvtt -- poligon:start --klon` opens it (the Poligon server restarts into the clone; `poligon:start` switches back)." };
+});
+
+command("poligon:stop", "Stop the Poligon server — refused while someone fvtt did not log in is connected. [--force] (the GM said so)", async opts => {
+  const ctx = poligonContext(opts);
+  guard(ctx, "poligon:stop");
+  const who = await guardHumans(ctx, { force: Boolean(opts.force) });
+  await lockExclusive(ctx.profile.name, "poligon:stop", seconds(opts.wait, 0));
+  return { ok: true, profile: "poligon", presence: who, ...(await stopServer(ctx, { force: Boolean(opts.force) })) };
+});
+
+command("poligon:reset", "Rebuild Poligon stations in a GM page: <station…> | --all | --list. Only when the GM asks (H-D9).", async opts => {
+  const ctx = poligonContext(opts);
+  guard(ctx, "poligon:reset");
+  await requireRunningPoligon(ctx);
+  writeStamp(ctx, MODULE_ROOT);
+  const browser = await browserSession(ctx.cdp);
+  try {
+    const page = await poligonGmPage(ctx, browser);
+    if (opts.list) return { ok: true, stations: await callPoligon(ctx, browser, page, "game.poligon.stations.list()") };
+    const ids = opts.all ? "all" : opts._.map(String);
+    if (ids !== "all" && !ids.length) throw new CliError("Name a station, or --all.", { code: "usage", hint: "`fvtt poligon:reset --list` lists them." });
+    const res = await callPoligon(ctx, browser, page, `game.poligon.stations.reset(${JSON.stringify(ids)}, { source: "fvtt" })`, { timeoutMs: seconds(opts.timeout, 900_000) });
+    return { ok: res.every(r => r.ok), page, results: res };
+  } finally {
+    browser.close();
+  }
+});
+
+command("poligon:obsada", "Build the persona compendium (Poligon · Obsada) through dnd5e's real advancement. [--rebuild] [--only=id,id]", async opts => {
+  const ctx = poligonContext(opts);
+  guard(ctx, "poligon:obsada");
+  await requireRunningPoligon(ctx);
+  const browser = await browserSession(ctx.cdp);
+  try {
+    const page = await poligonGmPage(ctx, browser);
+    const only = typeof opts.only === "string" ? opts.only.split(",").map(s => s.trim()).filter(Boolean) : null;
+    const res = await callPoligon(ctx, browser, page, `game.poligon.obsada.build(${JSON.stringify({ rebuild: Boolean(opts.rebuild), only })})`, { timeoutMs: seconds(opts.timeout, 1_800_000) });
+    return { ok: !res.failed?.length, page, ...res };
+  } finally {
+    browser.close();
+  }
+});
+
+command("poligon:findings", "Findings (Uwagi) from the Poligon journal → JSON; --md also writes logs/poligon/uwagi-<date>.md. [--since=<minutes|ISO>] [--open]", async opts => {
+  const ctx = poligonContext(opts);
+  guard(ctx, "poligon:findings");
+  await requireRunningPoligon(ctx);
+  let since = null;
+  if (opts.since && opts.since !== true) since = /^\d+$/.test(String(opts.since)) ? new Date(Date.now() - Number(opts.since) * 60_000).toISOString() : new Date(opts.since).toISOString();
+  const browser = await browserSession(ctx.cdp);
+  try {
+    const page = await poligonGmPage(ctx, browser);
+    const res = await callPoligon(ctx, browser, page, `game.poligon.uwagi.export(${JSON.stringify({ since, open: Boolean(opts.open) })})`);
+    let file = null;
+    if (opts.md) {
+      const dir = path.join(MODULE_ROOT, "logs", "poligon");
+      fs.mkdirSync(dir, { recursive: true });
+      const d = new Date();
+      const stamp = `${d.getFullYear()}${String(d.getMonth() + 1).padStart(2, "0")}${String(d.getDate()).padStart(2, "0")}-${String(d.getHours()).padStart(2, "0")}${String(d.getMinutes()).padStart(2, "0")}`;
+      file = path.join(dir, `uwagi-${stamp}.md`);
+      fs.writeFileSync(file, res.markdown);
+    }
+    return { ok: true, count: res.findings.length, open: res.findings.filter(f => !f.status).length, findings: res.findings, ...(file ? { file: path.relative(MODULE_ROOT, file).replaceAll("\\", "/") } : {}) };
+  } finally {
+    browser.close();
+  }
+});
+
+command("help", "This list.", async () => ({ ok: true, usage: "npm run fvtt -- <command> [--profile=campaign|sandbox|release|poligon] [--key=value]", commands: HELP }));
 
 /* ------------------------------------------------------------------------------------ */
 

@@ -38,7 +38,7 @@
 import { MODULE_ID, SCRATCH_PREFIX, scratchActor, scratchCleanup, captureWarnings, waitFor, stub, walkaTestowa } from "./helpers.mjs";
 import {
   utworzDrona, rozloz, zloz, przeniesUchwyt, uchwyt, uchwytDrona, dronUchwytu, posiadaczDrona, dronyPosiadacza,
-  zetonyDrona, jestDronem, rodzajZPrzepisu, daneUchwytu, liniaUruchomienia, FLAG_UCHWYT
+  zetonyDrona, jestDronem, rodzajZPrzepisu, daneUchwytu, liniaUruchomienia, akcjaRuchu, FLAG_UCHWYT
 } from "../actors/drony.mjs";
 import { towarzysz, jestMaszyna, maStopnieZranienia, jestTowarzyszem } from "../actors/towarzysze.mjs";
 import { robotaApi as ROBOTA } from "../production/robota.mjs";
@@ -49,7 +49,7 @@ import {
 } from "../items/kontroler.mjs";
 import { sygnalDrona, FLAG_POD_ZIEMIA } from "../actors/drony-zdalne.mjs";
 import { zmianyOdebrania, FLAG_NADANE, FLAG_STEROWANIE } from "../actors/drony.mjs";
-import { KAMERA_ID, celObrazu } from "../actors/drony-obraz.mjs";
+import { KAMERA_ID, celObrazu, strojenie, STROJENIE_MS } from "../actors/drony-obraz.mjs";
 import { tekstOsd, liniaRssi, liniaZasilania, ostrzezeniaOsd, ukladOsd, ZNAK } from "../config/osd.mjs";
 import { stanOsd, ATLAS_OSD } from "../actors/drony-osd.mjs";
 import { naprawPWDrona, naprawAwarieDrona, planNaprawyAwarii } from "../actors/drony-naprawa.mjs";
@@ -595,6 +595,14 @@ export function registerDronyTests(quench) {
       });
       after(async () => { if (game.scenes.get(scenaU.id)) await scenaU.delete(); });
 
+      it("żeton rusza się lotem — chód 0, lot 18 m (miarka i animacja według lotu)", function () {
+        expect(zetonyDrona(wynik.dron)[0].movementAction).to.equal("fly");
+        expect(akcjaRuchu({ walk: 0, fly: 18 })).to.equal("fly");
+        expect(akcjaRuchu({ walk: 9, fly: 18 }), "chodzi — zostaje rdzenna").to.equal(null);
+        expect(akcjaRuchu({ walk: 0, fly: 0, swim: 6 })).to.equal("swim");
+        expect(akcjaRuchu(null)).to.equal(null);
+      });
+
       it("Powalenie w powietrzu — opada bez obrażeń (T4)", async function () {
         const [t] = zetonyDrona(wynik.dron);
         expect(t.elevation).to.equal(6);
@@ -820,6 +828,18 @@ export function registerDronyTests(quench) {
         expect(celObrazu({ sygnal: { jakosc: 0, utracony: true }, failsafeOd: 1 }, st()).szum).to.equal(1);
         expect(celObrazu({ sygnal: { jakosc: 1 }, wylaczonyOd: 1 }, st("wylaczony")).szum).to.equal(1);
         expect(celObrazu({ sygnal: { jakosc: 1 } }, st("blinded")), "awaria 8 — optyka").to.deep.equal({ jakosc: 1, szum: 1 });
+      });
+
+      it("szukanie kanału: błysk samego szumu, potem obraz staje na jakości sygnału — razem półtorej sekundy", function () {
+        const cel = { jakosc: 0.6, szum: 0 };
+        expect(STROJENIE_MS).to.equal(1500);
+        expect(strojenie(0, cel)).to.deep.equal({ jakosc: 0, szum: 1 });
+        expect(strojenie(0.3, cel), "wciąż sam szum").to.deep.equal({ jakosc: 0, szum: 1 });
+        const w = strojenie(0.5, cel);
+        expect(w.szum).to.be.above(0).and.below(1);
+        expect(w.jakosc).to.be.above(0).and.below(cel.jakosc);
+        expect(strojenie(1, cel)).to.deep.equal(cel);
+        expect(strojenie(0.9, { jakosc: 1, szum: 1 }).szum, "oślepiony dron zostaje w szumie").to.equal(1);
       });
 
       it("tryb „Kamera drona” zarejestrowany jak Widzenie w ciemności (kolor w świetle, czerń i biel w ciemności)", function () {
