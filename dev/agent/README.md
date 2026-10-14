@@ -92,6 +92,12 @@ to stderr. Exit code `0` ok · `1` failed · `2` refused by a guard · `3` usage
 
 ## Extending
 
+E2e initializes an empty scene on every client before the first fixture, so optional canvas modules
+cannot race the initial wall draw ahead of Foundry's render queues. `logs/e2e/<run>/report.json` is
+updated after every suite (`running: true` until the final report); failed assertions and console
+errors are available while later suites continue. Suite actor names must not collide with Poligon
+station names when both run in the same throwaway world.
+
 One CLI, one config, one secret store, one mutex — new needs extend `fvtt.mjs`, no parallel
 scripts. A new command must be classified in `guards.COMMAND_CLASS` (registration throws
 otherwise) and its refusals tested. Foundry's HTTP shapes live only in `lib/foundry-http.mjs`.

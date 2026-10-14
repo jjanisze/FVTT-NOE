@@ -1199,6 +1199,11 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   testy statyczne, agentów, przeglądarki ikon i pakowania ilustracji oraz walidatory kandydatów ikon.
 - Bramka statyczna uruchamia również testy przeglądarki ikon i pakowania ilustracji; CI przygotowuje
   Python 3.13 oraz Pillow, wymagane przez walidację atlasu OSD i narzędzia grafik.
+- Integracyjne próby wydania: wymuszone kości szabrowania pozostają aktywne do zakończenia rzutu,
+  próba zagrożeń używa aktualnej listy Fuksów, a tworzenie towarzysza ma nazwy odrębne od Poligonu.
+  Piaskownica inicjuje pustą kanwę u wszystkich klientów przed pierwszymi ścianami; z Sequencerem
+  i Splatterem ich rysowanie mogło wyprzedzić powstanie kolejek renderowania. Raport e2e zapisuje
+  postęp po każdej paczce, także gdy dalszy przebieg zostanie przerwany.
 
 ### Poligon — teren testów MG, warstwa 7 (2026-10-12)
 

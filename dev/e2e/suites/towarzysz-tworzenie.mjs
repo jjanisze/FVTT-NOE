@@ -254,7 +254,7 @@ export default {
     });
 
     await t.step("GM [Nowy towarzysz] → Lucky, Prawa ręka: Gracz 2's, Towarzysze folder, party, PB +2, full PW", async () => {
-      const r = await t.gm.eval(nowy, { owner: "PC Gracz 2", nazwa: "Lucky" });
+      const r = await t.gm.eval(nowy, { owner: "PC Gracz 2", nazwa: "Agent · Lucky — tworzenie" });
       t.equal(r.rodzaj, "prawa-reka", "kind");
       t.equal(r.klasa, "cwaniak", "owner's class for the level");
       t.equal(r.typ, "character", "actor type");
@@ -268,7 +268,7 @@ export default {
     });
 
     await t.step("GM [Nowy towarzysz] → Kieł, mutated mammal from the template: TT and PW from the owner, Współpraca", async () => {
-      const r = await t.gm.eval(nowy, { owner: "PC Gracz 1", rodzaj: "zmutowany-ssak", nazwa: "Kieł" });
+      const r = await t.gm.eval(nowy, { owner: "PC Gracz 1", rodzaj: "zmutowany-ssak", nazwa: "Agent · Kieł — tworzenie" });
       t.equal(r.rodzaj, "zmutowany-ssak", "kind");
       t.equal(r.typ, "npc", "actor type");
       t.equal(r.tt, 13, "TT = 11 + owner's PB 2");
@@ -279,17 +279,17 @@ export default {
     });
 
     await t.step("Gracz 2 walks Lucky's creator: Cechy (24 pkt), Pochodzenie, the Towarzysz class — levels follow the owner", async () => {
-      await t.waitFor(p2, () => Boolean(game.actors.getName("Lucky")?.isOwner), { message: "Gracz 2 to own Lucky" });
-      const k = await p2.eval(kreator, { nazwa: "Lucky" });
+      await t.waitFor(p2, () => Boolean(game.actors.getName("Agent · Lucky — tworzenie")?.isOwner), { message: "Gracz 2 to own Lucky" });
+      const k = await p2.eval(kreator, { nazwa: "Agent · Lucky — tworzenie" });
       t.equal(k.przedTem.join(","), "cechy,pochodzenie!,klasa!", "steps unlock in order");
       t.assert(/24\/24/.test(k.koszt ?? ""), "point counter", k);
       const pochodzenieKroki = await p2.eval(advance, {});
       t.assert(pochodzenieKroki.length >= 1, "Pochodzenie went through the manager", pochodzenieKroki);
-      await p2.eval(krokKlasy, { nazwa: "Lucky" });
+      await p2.eval(krokKlasy, { nazwa: "Agent · Lucky — tworzenie" });
       const kroki = await p2.eval(advance, {});
       t.equal(kroki.join(" → "),
         "Trait:Rzuty obronne → Trait:Umiejętności lub zestawy narzędzi → ItemChoice:Sztuczka (której wymagania spełnia)", "class steps");
-      const s = await p2.eval(stan, { nazwa: "Lucky" });
+      const s = await p2.eval(stan, { nazwa: "Agent · Lucky — tworzenie" });
       t.equal(s.kreator, 0, "creator pills gone");
       t.equal(s.poziom, 3, "Towarzysz level = owner's Cwaniak level");
       t.equal(s.kw, "3d6", "KW 3k6");
@@ -310,14 +310,14 @@ export default {
 
     await t.step("U5: the owner's Cwaniak 3 → 4 → Lucky's class 4, PW 20/20", async () => {
       t.equal(await t.gm.eval(awans, { owner: "PC Gracz 2", klasa: "cwaniak", poziom: 4 }), 4, "owner's level");
-      const s = await t.gm.eval(stan, { nazwa: "Lucky" });
+      const s = await t.gm.eval(stan, { nazwa: "Agent · Lucky — tworzenie" });
       t.equal(s.poziom, 4, "Towarzysz level");
       t.equal(s.hp.join("/"), "20/20", "PW grew by the max's delta");
       t.equal(s.kw, "4d6", "KW");
     });
 
     await t.step("D31: the GM's [Odłącz] on Kieł removes the companion flag", async () => {
-      const r = await t.gm.eval(odlacz, { nazwa: "Kieł" });
+      const r = await t.gm.eval(odlacz, { nazwa: "Agent · Kieł — tworzenie" });
       t.equal(r.flag, null, "companion flag");
     });
   }

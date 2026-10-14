@@ -361,10 +361,27 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
 
   const browser = await browserSession(ctx.cdp);
   const report = { run: runId, world, startedAt: new Date().toISOString(), suites: [] };
+  const saveProgress = () => fs.writeFileSync(path.join(run.dir, "report.json"), JSON.stringify({ ...report, running: true }, null, 2));
   run.startedAt = logSince ?? new Date(); // server-log window: from world creation when there was one
   try {
     const clients = await openClients(ctx, browser, needed, { trace: traceWrites });
     await evictDuplicates(ctx, browser, clients);
+    // The first fixture activates a scene and creates six walls immediately. With extra canvas
+    // modules, their draw callbacks could run before Foundry initialized pendingRenderFlags.
+    // Initialize an empty canvas for every client first; normal fixture reseeding removes it.
+    const initialScene = await clients.get("gm").eval(async moduleId => {
+      if (game.scenes.active) return game.scenes.active.id;
+      const level = foundry.documents.BaseScene.metadata.defaultLevelId;
+      const scene = await Scene.implementation.create({ name: "Agent · Start", width: 1000, height: 1000,
+        initialLevel: level, levels: [{ _id: level, name: "Teren", elevation: { bottom: 0, top: null } }],
+        flags: { [moduleId]: { fixture: "skirmish" } } });
+      await scene.activate();
+      return scene.id;
+    }, MODULE_ID);
+    for (const c of clients.values()) await c.eval(async id => {
+      await window.__e2e.until(() => canvas.ready && canvas.scene?.id === id && canvas.pendingRenderFlags,
+        { timeoutMs: 30_000, message: "the initial canvas render queues" });
+    }, initialScene);
     report.clients = [...clients.values()].map(c => ({ name: c.name, user: c.user }));
     for (const [i, suite] of loaded.entries()) {
       const t0 = Date.now();
@@ -412,6 +429,7 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
         consoleErrors, screenshots: t.screenshots, notes: t.notes, ...(writes ? { writes } : {})
       });
       note(`${ok ? "PASS" : "FAIL"} ${suite.name} (${Date.now() - t0} ms)`);
+      saveProgress();
     }
     if (quench) {
       // The module's Quench batches inside this world (release gate: the "recommended" world).

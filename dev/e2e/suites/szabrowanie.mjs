@@ -77,14 +77,20 @@ function widzi({ id }) {
 
 /** A searcher clicks [Szukaj] on the request card, picks the skill and the roll mode with forced d20s. */
 async function szukaj({ prosba, skill, tryb, d20, wiersz = null }) {
-  window.__e2e.forceD20(d20);
-  const sel = wiersz ? `li[data-uuid="${wiersz}"] [data-action="handleRequest"]` : '[data-action="handleRequest"]';
-  const ok = await window.__e2e.clickChat(prosba, sel, { timeoutMs: 10000 });
-  const dlg = await window.__e2e.clickDialog({ title: "Szabrowanie — czego szukasz?" }, skill);
-  const rzut = await window.__e2e.pressRollDialog(tryb);
-  await window.__e2e.quiet({ idleMs: 600 });
-  window.__e2e.restoreDice();
-  return { ok, dlg: !!dlg, rzut };
+  const n0 = game.messages.size;
+  // Roll configuration can evaluate previews before the actual skill roll. Keep its final face
+  // deterministic too, and restore the generator only once the roll message exists.
+  window.__e2e.forceD20(d20, { fallback: d20.at(-1) });
+  try {
+    const sel = wiersz ? `li[data-uuid="${wiersz}"] [data-action="handleRequest"]` : '[data-action="handleRequest"]';
+    const ok = await window.__e2e.clickChat(prosba, sel, { timeoutMs: 10000 });
+    const dlg = await window.__e2e.clickDialog({ title: "Szabrowanie — czego szukasz?" }, skill);
+    const rzut = await window.__e2e.pressRollDialog(tryb);
+    await window.__e2e.until(() => game.messages.contents.slice(n0).find(m => m.rolls.length
+      && m.flags?.dnd5e?.requestResult?.requestId === prosba), { message: "the completed scavenging skill roll" });
+    await window.__e2e.quiet({ idleMs: 600 });
+    return { ok, dlg: !!dlg, rzut };
+  } finally { window.__e2e.restoreDice(); }
 }
 
 /** GM: wait for the result card of `nazwa`; read loot and buttons. */
