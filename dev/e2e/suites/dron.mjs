@@ -18,7 +18,7 @@
  *  - E8a, remote mode (§7.10): Gracz 1 controls only the drone and sees through it; a real D key (core WASD) moves it; a real
  *    Esc gives control and view back to his PC. Przejmij sterowanie (out of combat) → signal at three distances with
  *    the scene "pod ziemią" (factory 50 m): 1 / ≈0.5 / ≈0.2; inside the shed (a wall between) → the 50 m range
- *    (U17). Entering closes the operator's sheet and starts with the channel search (pure static, ~0.5 s). Raised
+ *    (U17). Entering closes the operator's sheet and starts with the channel search (1.5 s). Raised
  *    past 300 m → FAILSAFE, then the cut: control and view return (D24). The holder's player does not see through
  *    the drone outside remote mode; [Pokaż żeton] on the drone only moves the view, and a drone picked on the canvas
  *    outside remote mode does not black out the PC. Gracz 2 with his own controller takes over (D12): Gracz 1's
@@ -544,7 +544,7 @@ export default {
       t.equal(await t.waitFor(p1, () => game.user.character.sheet.rendered ? null : true, { message: "the PC sheet to close" }),
         true, "entering closes the operator's sheet");
       t.equal(await t.waitFor(p1, () => game.neuroshima.drony.kanalFpv()?.strojenie === false ? true : null,
-        { timeoutMs: 1500, message: "the channel found within ~0.5 s" }), true, "the channel is found");
+        { timeoutMs: 4000, message: "the channel found after its 1.5 s tuning period" }), true, "the channel is found");
       const powitanie = await t.waitFor(p1, () => {
         const o = game.neuroshima.drony.osdDrona();
         const linie = o?.elementy.filter(e => e.id.startsWith("powitanie")).map(e => e.tekst) ?? [];
@@ -800,6 +800,24 @@ export default {
       const st = await t.gm.eval(stan);
       t.equal(st.zetony.length, 0, "no drone token");
       t.equal(st.operator, null, "folding drops the operator");
+    });
+
+    await t.step("GM deletes the active drone and operator together → remote mode exits without stale document writes", async () => {
+      await t.gm.eval(async id => {
+        const d = game.actors.get(id);
+        await game.neuroshima.drony.rozloz(game.neuroshima.drony.uchwytDrona(d),
+          { pozycja: { x: 500, y: 600 }, scena: canvas.scene });
+      }, dronId);
+      await p1.eval(aktywnosc, { id: "neuroDronPrzejm0", wRece: "yes" });
+      await t.waitFor(p1, () => game.neuroshima.drony.sesjaZdalna() ? true : null,
+        { message: "remote mode before deleting both actors" });
+      await t.quiet();
+      await t.gm.eval(async id => {
+        await Actor.implementation.deleteDocuments([id, game.actors.getName("PC Gracz 1").id]);
+      }, dronId);
+      await t.waitFor(p1, () => game.neuroshima.drony.sesjaZdalna() ? null : true,
+        { message: "remote mode exits after deleting both actors" });
+      await t.quiet();
     });
 
     // The fixture reseeds only its own flagged documents; the drone and its folder are this suite's.

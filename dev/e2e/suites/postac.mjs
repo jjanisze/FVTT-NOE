@@ -238,5 +238,24 @@ export default {
       // has none of — a character built from zero walked 0 m until 2026-10-08.
       t.equal(s.speed, "9 m", "GM: Szybkość");
     });
+
+    await t.step("Cichy krok: the active GM creates one terrain effect with players connected, for owned and unowned characters", async () => {
+      const ids = await t.gm.eval(async name => {
+        const MOD = "neuroshima-2026-overrides";
+        const docs = await game.packs.get(`${MOD}.zdolnosci-klasowe`).getDocuments();
+        const feat = docs.find(i => i.getFlag(MOD, "abilityId") === "cichy-krok");
+        const unowned = await Actor.implementation.create({ name: "Agent · Cichy krok", type: "character",
+          flags: { [MOD]: { fixture: "skirmish" } } });
+        const actors = [game.actors.getName(name), unowned];
+        for (const actor of actors) await actor.createEmbeddedDocuments("Item", [game.items.fromCompendium(feat)]);
+        return actors.map(a => a.id);
+      }, ACTOR);
+      await t.waitFor(t.gm, ids => ids.every(id => {
+        const a = game.actors.get(id);
+        return a.effects.filter(e => e.getFlag("neuroshima-2026-overrides", "cichyKrokTeren")).length === 1
+          && a.system.attributes.movement.ignoredDifficultTerrain.has("all");
+      }) ? true : null, { args: [ids], message: "one Cichy krok effect on each character" });
+      await t.quiet();
+    });
   }
 };

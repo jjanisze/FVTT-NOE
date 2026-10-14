@@ -579,6 +579,22 @@ export function registerDronyTests(quench) {
         expect(s1.paliwoL).to.be.closeTo(s0.paliwoL - 0.5, 0.01);
         expect(s1.procent).to.be.closeTo(s0.procent, 0.01);
       });
+
+      it("rozliczenie skasowanego drona nie zapisuje uchwytu ani efektów na usuniętym aktorze", async function () {
+        const posiadacz = await scratchActor({ name: `${SCRATCH_PREFIX} Usuwany dron` });
+        const { dron } = await nowyDron(posiadacz, "dron-kroczacy");
+        const uchwyt = uchwytDrona(dron);
+        await rozloz(uchwyt, { pozycja: { x: 400, y: 400 }, scena: scenaZ });
+        await synchronizujZasilanie(dron);
+        expect(flagaUchwytu(uchwyt).zasilanie.od, "pracujący akumulator przed usunięciem").to.equal(game.time.worldTime);
+        await dron.delete();
+        let zapisy = 0;
+        const przywroc = stub(uchwyt, "update", async () => { zapisy++; });
+        try {
+          await synchronizujZasilanie(dron);
+          expect(zapisy, "stare rozliczenie nie dotyka uchwytu").to.equal(0);
+        } finally { przywroc(); }
+      });
     });
 
     describe("Upadek drona latającego (D29)", function () {

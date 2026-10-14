@@ -35,6 +35,7 @@ import {
 import { rodzajKontrolera } from "../items/kontroler.mjs";
 import { isDollActor, inHand } from "./doll.mjs";
 import { isPoscigScene, xNaTor, dystansZnacznikow } from "../scenes/poscig.mjs";
+import { isDocumentLive } from "../doc-liveness.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -245,7 +246,9 @@ export async function wyjdz(powod = "esc", { bezKanwy = false } = {}) {
   if (tekst) (powod === "sygnal" || powod === "wylaczony" ? ui.notifications.warn : ui.notifications.info).call(ui.notifications, tekst);
   Hooks.callAll(HOOK_ZDALNY, { stan: "wyjscie", sesja: s, powod });
   const operator = fromUuidSync(s.operatorUuid);
-  if (!game.user.isGM && operator?.isOwner) {
+  const dron = fromUuidSync(s.dronUuid);
+  // Rozbiórka sceny może kończyć sesję po skasowaniu aktorów; wtedy nie ma już własności do oddania.
+  if (!game.user.isGM && operator?.isOwner && isDocumentLive(operator) && isDocumentLive(dron)) {
     await prosbaDoMG(operator, { akcja: "zwolnij", dron: s.dronUuid }).catch(err => console.error(`${MODULE_ID} | zwolnij`, err));
   }
 }

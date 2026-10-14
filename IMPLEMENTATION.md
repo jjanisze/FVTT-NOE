@@ -1188,6 +1188,12 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
   garderobę postaci i Bestiariusz. Poligon dodaje 16 stanowisk i 42 postaci do prób MG.
 - Zatwierdzone ikony, ilustracje i dźwięki produkcji oraz postoju; przeglądarka ikon pamięta uwagi
   o stylu. Szczegóły M3, M5 i Poligonu opisano w kolejnych wpisach.
+- Poprawki z bramki wydania: synchronizacja uchwytu i zasilania drona oraz oddanie sterowania sprawdzają,
+  czy dokument nadal istnieje, także w trakcie kasowania; Cichy krok zapisuje efekt tylko u aktywnego MG.
+  Automatyczna Pieśń otuchy nie otwiera edytora aktywności w trakcie awansu. Regresje: Quench `drony`
+  i `fuksy`, e2e `dron` (usunięcie drona i operatora) oraz `postac` (Cichy krok przy podłączonych graczach).
+- Weryfikacja przed bramką: wszystkie 44 paczki Quench, 1184/1184 testów; e2e `postac`, `dron`, `handel`;
+  testy statyczne, agentów, przeglądarki ikon i pakowania ilustracji oraz walidatory kandydatów ikon.
 
 ### Poligon — teren testów MG, warstwa 7 (2026-10-12)
 
@@ -1200,8 +1206,8 @@ Widok gracza, Liczniki, Świeżość, Uwagi), Obsada 42 postaci zbudowanych praw
 zautomatyzowaną Sztuczkę, zdolność klasy/profesji i Pochodzenia), paczka e2e `poligon` jako strażnik. `fvtt doctor`
 liczy testowe dokumenty w kampanii. W module jedna poprawka znaleziona przez Poligon: synchronizacja paska
 makr (`actors/ability-hotbar.mjs`) ma jeden łańcuch na klienta zamiast na aktora — MG budujący kilka postaci po kolei
-kasował to samo makro dwa razy. Dwa dalsze znaleziska (Cichy krok u gracza, zasilanie drona po skasowaniu) czekają
-w dzienniku „Poligon · Uwagi” i w `PLAN_human_testing.md` §12.
+kasował to samo makro dwa razy. Dwa dalsze znaleziska (Cichy krok u gracza, zasilanie drona po skasowaniu)
+zamknięto przy bramce v0.19.0; pierwotne zgłoszenia są w dzienniku „Poligon · Uwagi”.
 
 ### M5 E0–E11 — handel, postój, Fuksy i Fanty, szabrowanie, bebeszenie, autodestrukcja (2026-10-12)
 

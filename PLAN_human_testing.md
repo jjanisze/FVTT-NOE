@@ -607,10 +607,12 @@ seat may not make falls back to an inline image. (6) ✅ a persona through dnd5e
 **Found by the Poligon on its first day** (filed as Uwagi in the Poligon journal for triage):
 - *Cichy krok* (`actors/cichy-krok.mjs` `_syncCichyKrokTerrain`) runs on every client that sees a level-up's
   `createItem`; a player's client tries to create the GM-only effect → "lacks permission to create ActiveEffect"
-  server errors whenever the GM levels a Zwiadowca to 3 with a player connected. Needs an owner/active-GM gate.
+  server errors whenever the GM levels a Zwiadowca to 3 with a player connected. **Fixed for v0.19.0:** only the
+  active GM synchronizes the effect; `postac` e2e covers owned and unowned characters with players connected.
 - Drone power sync (`actors/drony-stan.mjs` `_synchronizuj`) has no `isDocumentLive` check, unlike its neighbours:
   deleting a scene with a deployed drone and then the drone's holder makes it write to a deleted actor (server
-  error). The Poligon's reset waits for the sync queue; the module still has the race.
+  error). **Fixed for v0.19.0:** drone handle/power sync and remote release use `isDocumentLive`, including
+  checks between writes; Quench covers a stale drone and `dron` e2e deletes the active drone and operator together.
 - The GM's ability hotbar (`actors/ability-hotbar.mjs`) synced per actor while every sync writes the one hotbar,
   and a GM syncs every character it edits: building characters in a row deleted the same macro twice ("Macro …
   does not exist!" server errors). **Fixed:** one sync chain per client. Open for the GM: should the GM's hotbar
@@ -620,4 +622,4 @@ seat may not make falls back to an inline image. (6) ✅ a persona through dnd5e
 **Open:** stale verdicts per
 file (H6: verdicts remember their commit and the panel flags a ✅ from another commit, not per-file changes);
 Mapy (needs `tools/push.py` to target the profile); Scenariusze (composition of builders); foundry-mcp reading the
-Poligon path offline; adding `--suites=poligon` to `release:check` (it takes ~10 min).
+Poligon path offline. The release gate already discovers `poligon` among all e2e suites (about 10 min per world).

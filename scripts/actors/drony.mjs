@@ -31,6 +31,7 @@ import { FLAG, towarzysz, rodzajTowarzysza } from "./towarzysze.mjs";
 import { szablonTowarzysza } from "./towarzysze-tworzenie.mjs";
 import { odlegloscAktorow } from "../production/przenoszenie.mjs";
 import { formatWorldDate } from "../world-clock.mjs";
+import { isDocumentLive } from "../doc-liveness.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -346,6 +347,7 @@ export async function prosbaDoMG(actor, dane) {
 }
 
 async function _prosba(actor, dane) {
+  if (!isDocumentLive(actor)) return;
   const nonce = foundry.utils.randomID(12);
   if (!game.users.activeGM) ui.notifications.warn("Brak MG online — prośba o drona czeka, aż MG wejdzie do gry.");
   await actor.update({ [`flags.${MODULE_ID}.${FLAG_PROSBY}.${nonce}`]: { ...dane, user: game.user.id } });
@@ -365,7 +367,9 @@ async function _obsluzProsby(actor) {
       console.error(`${MODULE_ID} | prośba o drona (${dane.akcja})`, err);
     } finally {
       // Zawsze — prośba jest jednorazowa; błąd nie może jej zostawić do powtórki przy następnej zmianie.
-      try { await actor.update({ [`flags.${MODULE_ID}.${FLAG_PROSBY}.-=${nonce}`]: null }); } catch { /* aktor zniknął */ }
+      if (isDocumentLive(actor)) {
+        try { await actor.update({ [`flags.${MODULE_ID}.${FLAG_PROSBY}.-=${nonce}`]: null }); } catch { /* aktor zniknął */ }
+      }
       _wToku.delete(nonce);
     }
   }
@@ -520,8 +524,9 @@ export function jestWrakiem(dron) {
 
 /** Uchwyt zgodny z dronem: stan z żetonów (U12), nazwa i obrazek drona. Pisze tylko różnice. */
 async function _synchronizuj(dron) {
+  if (!isDocumentLive(dron)) return;
   const u = uchwytDrona(dron);
-  if (!u) return;
+  if (!isDocumentLive(u)) return;
   const wpis = rodzajTowarzysza(dron);
   if (!wpis) return;
   const rozlozony = dronRozlozony(dron);

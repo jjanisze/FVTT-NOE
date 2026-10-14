@@ -137,6 +137,7 @@ export default {
     p("awaria", "Awarie", "Karta [Zastosuj]: MG widzi, gracz nie; pominięte wpisy; ikona „Wyłączony”", "Kości → k20; krytyk na Kroczaka."),
     p("spada", "Awarie", "Latający dron wyłączony w powietrzu → karta „Spada”", "Osa rozłożona, w górze, do 0 PW."),
     p("bateria", "Zasilanie", "Akumulator na uchwycie i w OSD po skoku zegara; Włóż akumulator", "Czas → +1 h, +10 min."),
+    p("usun-drona", "Zasilanie", "Usunięcie drona albo operatora w trybie zdalnym kończy sesję bez błędów zasilania i własności", "Przejmij sterowanie, usuń drona, potem powtórz z usunięciem operatora; sprawdź konsolę."),
     p("naprawa", "Naprawy", "Napraw PW (1 h); ta sama awaria naprawiona pod NOE (karta MG) i pod WKK (Robota z częściami); wrak", "Wariant NOE/WKK, uchwyt → Napraw.", "WKK"),
     // EMP
     p("emp-obronca", "EMP", "Trafienie w Obrońcę przy TT 10 + ZRC — czy powód jest widoczny", "Gracz 5: Emiter EMP w Obrońcę."),

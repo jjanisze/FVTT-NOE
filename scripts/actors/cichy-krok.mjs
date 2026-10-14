@@ -89,7 +89,8 @@ function _isWearingHeavyArmor(actor) {
  * unhandled promise rejection (and the scary error toast) on the losing call(s).
  */
 async function _syncCichyKrokTerrain(actor) {
-  if (!actor?.effects) return;
+  // Hooki dokumentów docierają też do graczy; efekt zapisuje jeden aktywny MG.
+  if (!game.user.isActiveGM || !actor?.effects) return;
   /* Debounce sprawia, że ten sync budzi się po haku, który go zamówił — czasem już po
      skasowaniu aktora. Patrz `scripts/doc-liveness.mjs`. */
   if (!isDocumentLive(actor)) return;

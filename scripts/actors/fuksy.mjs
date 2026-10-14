@@ -229,7 +229,7 @@ async function _zapewnijPiesn(item) {
     uses: { max: "1", spent: 0, recovery: [{ period: "lr", type: "recoverAll" }] },
     consumption: { targets: [{ type: "activityUses", value: "1" }] },
     flags: { [MODULE_ID]: { [PIESN]: true } }
-  });
+  }, { renderSheet: false });
 }
 
 /** Wybór sojuszników i Fuksy na 24 h dla 1 + mod. CHA z nich (s. 105). */

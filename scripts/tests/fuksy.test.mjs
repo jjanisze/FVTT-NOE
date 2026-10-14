@@ -8,7 +8,7 @@
  * Okna, pipki i aktywność z prawdziwego kliknięcia — warstwa 6 (`postoj`).
  */
 
-import { MODULE_ID, scratchActor, scratchCleanup } from "./helpers.mjs";
+import { MODULE_ID, scratchActor, scratchCleanup, waitFor } from "./helpers.mjs";
 import { fuksy, liczbaFuksow, przyznajFuksa, zuzyjFuksa, migrujFuksy, zdejmijWygasle, mozeMiecFuksy } from "../actors/fuksy.mjs";
 import { getFuksy, setFuksy } from "../combat/rerolls.mjs";
 import { FANTY, fantItemData, idFantu, FANT_AKTYWNOSC } from "../config/fanty-data.mjs";
@@ -90,6 +90,19 @@ export function registerFuksyTests(quench) {
       it("BG ma Fuksy, BN nie", async function () {
         expect(mozeMiecFuksy(await scratchActor())).to.equal(true);
         expect(mozeMiecFuksy(await scratchActor({ name: "[Quench] bn", type: "npc" }))).to.equal(false);
+      });
+    });
+
+    describe("Pieśń otuchy", function () {
+      it("Muzyk dostaje aktywność bez otwierania edytora podczas awansu", async function () {
+        const a = await scratchActor();
+        const [item] = await a.createEmbeddedDocuments("Item", [{ name: "Muzyk", type: "feat",
+          flags: { [MODULE_ID]: { sztuczka: "muzyk" } } }]);
+        const activity = await waitFor(() => a.items.get(item.id)?.system.activities.find(x => x.flags?.[MODULE_ID]?.piesnOtuchy),
+          { label: "Pieśń otuchy na Muzyku" });
+        expect(activity.name).to.equal("Pieśń otuchy");
+        const editors = [...foundry.applications.instances.values()].filter(app => app.rendered && app.document === activity);
+        expect(editors, "automatyczna aktywność nie otwiera edytora").to.have.length(0);
       });
     });
 

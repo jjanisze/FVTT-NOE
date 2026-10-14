@@ -22,6 +22,7 @@ import { jestDronem, uchwyt, uchwytDrona, dronUchwytu, zetonyDrona, FLAG_UCHWYT,
 import { jestWylaczona, wylacz, wlacz } from "../combat/maszyny.mjs";
 import { registerPowerSource, formatRemaining } from "../items/power-source.mjs";
 import { fall } from "../combat/falling.mjs";
+import { isDocumentLive } from "../doc-liveness.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const FLAG_AKU_PROCENT = "akumulatorProcent";
@@ -93,9 +94,10 @@ export function synchronizujZasilanie(dron) {
 }
 
 async function _synchronizuj(dron) {
-  if (!game.user.isActiveGM) return;
+  // Kolejka może ruszyć dopiero po usunięciu drona albo jego posiadacza.
+  if (!game.user.isActiveGM || !isDocumentLive(dron)) return;
   const u = uchwytDrona(dron);
-  if (!u) return;
+  if (!isDocumentLive(u)) return;
   const teraz = game.time.worldTime;
   const s = stanZasilania(dron, teraz);
   const z = _zasilanie(u);
@@ -109,7 +111,10 @@ async function _synchronizuj(dron) {
   } else if (chce) {
     zmiany[`flags.${MODULE_ID}.${FLAG_UCHWYT}.zasilanie`] = { procent: z.procent, od: teraz };
   }
+  if (!isDocumentLive(dron) || !isDocumentLive(u)) return;
   if (Object.keys(zmiany).length) await u.update(zmiany);
+  // Zapis uchwytu oddaje sterowanie; w tym czasie dron mógł zniknąć.
+  if (!isDocumentLive(dron)) return;
   // Wyczerpanie przy pracy → Wyłączony; prąd wrócił → zdejmujemy tę jedną przyczynę.
   if (!maPrad && zetonyDrona(dron).length) await wylacz(dron, "zasilanie");
   else if (maPrad) await wlacz(dron, "zasilanie");

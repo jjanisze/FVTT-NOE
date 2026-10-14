@@ -27,6 +27,7 @@ export default {
   proby: [
     p("od-zera", "Tworzenie", "Postać od zera: klasa, Pochodzenie, Sztuczka z kompendiów na kartę — z Pierwszymi krokami obok", "Gracz 1: Kompendium → przeciągnij na kartę; docs/Pierwsze-kroki.md."),
     p("awans", "Awans", "Poziom 1 → 3 (profesja) → 5: wybory, zdolności, skale", "Gracz 2: przycisk awansu na karcie."),
+    p("cichy-krok", "Awans", "Zwiadowca 3 dostaje jeden efekt Cichy krok bez błędów uprawnień przy podłączonych graczach", "MG awansuje Zwiadowcę, potem powtórz w oknie właściciela; sprawdź efekt i konsolę."),
     p("wieloklasowosc", "Awans", "Wieloklasowość: druga klasa, biegłości, PW", "Gracz 3: druga klasa po poziomie 3."),
     p("kobalt", "NOE / WKK", "Opcje tylko Kobaltu ukryte przy Kobalcie wył.", "Wariant NOE → ta sama ścieżka.", "WKK"),
     p("towarzysz", "Towarzysze", "Kreator towarzysza: Cechy → Pochodzenie → klasa w oknie gracza", "Pasek Mafiozo → [Nowy towarzysz] (MG); Gracz 4 przechodzi kreator.")
