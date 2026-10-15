@@ -1,0 +1,44 @@
+{
+  "batch85-szybkie-nogi": {
+    "itemId": "batch85-szybkie-nogi",
+    "decision": "revise",
+    "candidateId": "batch88-revision",
+    "notes": "Close. Add motion lines showing the moonwalking motion (front leg going backwards, back leg going forwards)",
+    "updatedAt": "2026-10-15T23:31:10.932Z"
+  },
+  "batch87-trajektoria": {
+    "itemId": "batch87-trajektoria",
+    "decision": "revise",
+    "candidateId": "batch88-revision",
+    "notes": "Close - redraw the image so the arc terminates EXACTLY AT the bullseye. Keep the composition.",
+    "updatedAt": "2026-10-15T23:31:47.816Z"
+  },
+  "batch89-za-garsc-gambli": {
+    "itemId": "batch89-za-garsc-gambli",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Swap the coins in the hat for bullets",
+    "updatedAt": "2026-10-15T23:33:00.030Z"
+  },
+  "batch89-zawolajcie-kolegow": {
+    "itemId": "batch89-zawolajcie-kolegow",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Rotate the frontmost first 180 degrees, with it's palm facing the camera. Keep the gesture and keep the other fists",
+    "updatedAt": "2026-10-15T23:33:57.812Z"
+  },
+  "batch89-zawsze-w-siodle": {
+    "itemId": "batch89-zawsze-w-siodle",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Rethink the concept. Maybe something more symbollic, or perhaps a cowboy on a horse in unusual circumstances?",
+    "updatedAt": "2026-10-15T23:35:02.672Z"
+  },
+  "batch89-zew-areny": {
+    "itemId": "batch89-zew-areny",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Change the image of a bell to the image of a roaring audience",
+    "updatedAt": "2026-10-15T23:35:47.791Z"
+  }
+}

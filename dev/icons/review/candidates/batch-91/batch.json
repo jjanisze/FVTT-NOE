@@ -1,0 +1,196 @@
+{
+  "date": "2026-10-16",
+  "batch": 91,
+  "generalFeedback": "Apply exact saved revisions. Broad sober white glyphs, natural adult anatomy, no anime or gruff portrait default; varied practical objects and symbols.",
+  "subjects": [
+    {
+      "kind": "class",
+      "key": "cwaniak",
+      "name": "Cwaniak",
+      "owner": "cwaniak",
+      "ownerLabel": "Cwaniak",
+      "target": "icons/klasy/cwaniak.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/cwaniak.svg",
+          "variant": "default",
+          "sourceSha256": "aa8669e1745b216b6ab4e23aeb55fc20df54d4922261d3e37210e95491e1f57c"
+        }
+      ],
+      "ruleContext": "",
+      "context": "class: Cwaniak; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "CLASS EMBLEM: TWO overlapping complete PLAYING CARDS angled slightly apart. The FRONT card carries ONE large black CLUBS pip; the rear card shows ONE large black SPADES pip in its exposed portion. Thick white card masses with broad black separation at overlap. Cunning and luck in a sober compact practical emblem. No letters, numbers, joker face, person, dice, tiny corner indices, textures or decorative frame.",
+      "itemId": "batch91-cwaniak"
+    },
+    {
+      "kind": "class",
+      "key": "spec",
+      "name": "Spec",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/klasy/spec.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/spec.svg",
+          "variant": "default",
+          "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+        }
+      ],
+      "ruleContext": "",
+      "context": "class: Spec; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "request": "CLASS EMBLEM: ONE complete practical OPEN-END WRENCH lies diagonally across ONE square CIRCUIT CHIP with exactly TWO thick short connector pins on each of its four sides. Wrench has a broad open jaw and complete handle; broad black cut separates the overlapping objects. Technical expertise, simple sturdy white masses. No fine circuitry, giant cog, person, face, lettering, numbers, labels or extra tools.",
+      "itemId": "batch91-spec"
+    },
+    {
+      "kind": "class",
+      "key": "twardziel",
+      "name": "Twardziel",
+      "owner": "twardziel",
+      "ownerLabel": "Twardziel",
+      "target": "icons/klasy/twardziel.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/twardziel.svg",
+          "variant": "default",
+          "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac"
+        }
+      ],
+      "ruleContext": "",
+      "context": "class: Twardziel; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "request": "CLASS EMBLEM: ONE sturdy BODY-ARMOR VEST with TWO broad horizontal plate cuts, behind ONE complete practical SHOTGUN lying diagonally across it. Shotgun has a clear shoulder stock, one straight barrel, thick pump grip and empty trigger guard, simplified into broad masses. Durable martial survivor represented by equipment, compact white glyph. No person, face, helmet, lettering, numbers, engraved parts, tiny fittings, blood or injury.",
+      "itemId": "batch91-twardziel"
+    },
+    {
+      "kind": "class",
+      "key": "zlodziej",
+      "name": "Złodziej",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/klasy/zlodziej.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/zlodziej.svg",
+          "variant": "default",
+          "sourceSha256": "a66384a8f44176c0f6fa824edd1758ceabfbe9645b1370870ec07d93179b50d2"
+        }
+      ],
+      "ruleContext": "",
+      "context": "class: Złodziej; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "request": "CLASS EMBLEM: ONE sturdy OPEN PADLOCK with its thick shackle visibly lifted free at one side. ONE broad simple LOCKPICK is inserted into the large keyhole from lower-right. Complete coherent lock and pick, generous black separation and thick white masses. Sober thief's tools emblem, no hooded portrait, hand, person, fine key teeth, actual lock instructions, letters, numerals or extra props.",
+      "itemId": "batch91-zlodziej"
+    },
+    {
+      "kind": "class",
+      "key": "zwiadowca",
+      "name": "Zwiadowca",
+      "owner": "zwiadowca",
+      "ownerLabel": "Zwiadowca",
+      "target": "icons/klasy/zwiadowca.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/zwiadowca.svg",
+          "variant": "default",
+          "sourceSha256": "67b410b391ee6dda233c64b0bbdf051d8d4bc1909260d06ef79fa3e6c328307a"
+        }
+      ],
+      "ruleContext": "",
+      "context": "class: Zwiadowca; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 5,
+      "request": "CLASS EMBLEM: ONE complete practical pair of BINOCULARS above ONE broad BOOTPRINT. Binoculars have two thick barrels, two round objective lenses and one central hinge. Bootprint has a large heel, broad sole and only TWO black tread cuts. Scouting and tracking, sturdy compact white glyph with clear black separation between objects. No person, face, dangling thin straps, tiny fittings, letters, numbers or map labels.",
+      "itemId": "batch91-zwiadowca"
+    },
+    {
+      "kind": "profession",
+      "key": "chemik",
+      "name": "Chemik",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/profesje/chemik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/chemik.svg",
+          "variant": "default",
+          "sourceSha256": "4662220129374902fd41b90cf730c337c276df09c02f494defe3e6bbf31b6c27"
+        }
+      ],
+      "ruleContext": "",
+      "context": "profession: Chemik; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 6,
+      "request": "PROFESSION EMBLEM: ONE stout ROUND-BOTTOM LAB FLASK with a short neck, thick rim and TWO large bubble holes in its broad liquid mass. ONE complete DROPPER PIPETTE with a broad rubber bulb lies diagonally across the flask, separated by a broad black cut. Practical chemistry, sparse compact white object glyph. No formulas, recipes, labels, measurements, person, face, skull, tiny bubbles, extra glassware or lettering.",
+      "itemId": "batch91-chemik"
+    },
+    {
+      "kind": "profession",
+      "key": "ganger",
+      "name": "Ganger",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/profesje/ganger.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/ganger.svg",
+          "variant": "default",
+          "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+        }
+      ],
+      "ruleContext": "",
+      "context": "profession: Ganger; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 7,
+      "request": "PROFESSION EMBLEM: ONE complete improvised BASEBALL BAT bearing THREE broad blunt STUDS crosses ONE MOTORCYCLE WHEEL with THREE thick spokes. Bat has a complete broad grip and knob; wheel is a sturdy tire ring with clear open gaps. Road gang equipment, sober compact white silhouette with strong black separation. No person, face, real gang insignia, swastika, text, logos, fine tire tread, tiny nails, thin chains or gore.",
+      "itemId": "batch91-ganger"
+    },
+    {
+      "kind": "profession",
+      "key": "gladiator",
+      "name": "Gladiator",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/profesje/gladiator.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/gladiator.svg",
+          "variant": "default",
+          "sourceSha256": "3433cbb512a34091de6d3a17e330060f24df47337d2253a38bd345c0787f80a9"
+        }
+      ],
+      "ruleContext": "",
+      "context": "profession: Gladiator; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 8,
+      "request": "PROFESSION EMBLEM: ONE salvaged ARENA HELMET with a practical CAGE FACEGUARD made of THREE broad vertical bars and one thick brow, beside ONE complete BARE CLENCHED FIST with short wrist. Helmet contains no visible face. Strong compact white masses, natural coherent fist, broad black gaps. Improvised arena fighter equipment, no fantasy ornament, feather, horns, gruff portrait, fine mesh, tiny rivets, lettering, blood or gore.",
+      "itemId": "batch91-gladiator"
+    },
+    {
+      "kind": "profession",
+      "key": "gwiazda",
+      "name": "Gwiazda",
+      "owner": "cwaniak",
+      "ownerLabel": "Cwaniak",
+      "target": "icons/profesje/gwiazda.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/gwiazda.svg",
+          "variant": "default",
+          "sourceSha256": "997555ee74146e5b8f1f2c6fc7becca90ebb51a404117b24454afee28df7fca7"
+        }
+      ],
+      "ruleContext": "",
+      "context": "profession: Gwiazda; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 9,
+      "request": "PROFESSION EMBLEM: ONE complete handheld MICROPHONE lies diagonally across ONE bold FIVE-POINT STAR. Microphone has a broad rounded grille with only TWO thick black grille cuts, a complete stout handle and one short broad cable curve. Stage performance and fame, compact sober white object silhouette with broad black separation. No person, face, fine grille mesh, lettering, musical notes, logo, numbers, sparkle clutter or decorative frame.",
+      "itemId": "batch91-gwiazda"
+    }
+  ]
+}

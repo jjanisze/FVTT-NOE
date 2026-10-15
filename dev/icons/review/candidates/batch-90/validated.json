@@ -1,0 +1,16 @@
+{
+  "batch": 90,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "szybkie-nogi": "8067b5637b361bbd1f6299e379a20b29d29a58324e91047d33ebb9a44832ea97",
+    "trajektoria": "9e0d68498fb787852ed84e1bc8e31e2c7d02b0e3270efd540799c5d82667cc0e",
+    "za-garsc-gambli": "c40f77e44c203c5b45ef9a9e4505196bbc3af44c3d9a7f38108f7810b908df3e",
+    "zawolajcie-kolegow": "9398ff9fda6a2ed0539e691b0d58b687c52b04635b9057f9c2a327880f2acc07",
+    "zawsze-w-siodle": "58aef67d9e9465f24885f61c7a8d7e5c078b701e6bb8cc8a47b72c2a502e9e71",
+    "zew-areny": "3c559f4d909952c86f8e710e2498fd7abdc02ae54fa59d98e534558088740cde",
+    "zryw": "3e0312df08df360d0068131c2529e13a03c393d2df92e42abdf8360c14bf7682",
+    "zwinnosc-szczura": "bd4305db1ae6cd702c9285f868ac2e45f8035b5bd673ac775e9eae097f6b5a5b",
+    "brutal": "e2de016d5a162663b137803b2c5a92517b3c2b78eaf97243b9d5277d9491917d"
+  }
+}

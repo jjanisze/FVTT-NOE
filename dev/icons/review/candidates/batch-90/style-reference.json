@@ -1,0 +1,41 @@
+{
+  "role": "Reference cells 1-6 are EXACT selected revision sources: 1 preserve boots but add opposite moonwalk motion; 2 extend arc endpoint to EXACT bullseye center; 3 replace coins with cartridges; 4 turn only foreground hand to palm-facing; 5 replace saddle with sleeping mounted cowboy; 6 replace bell with roaring audience. Reference cells 7-9 are STYLE ONLY for the new bottom-row subjects. Functional motion arrows in cell 1 are specifically requested and override the general restriction on decorative arrows.",
+  "sources": [
+    {
+      "source": "dev/icons/review/candidates/batch-88/szybkie-nogi.png",
+      "sha256": "396423cfc20ec349daacebaac4431fa99fe6eedd3628cc94583579ae317063e9"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-88/trajektoria.png",
+      "sha256": "b9fb77fe1bf030ae2a0b123848a30676f4bf8caea4926f53a481b77ed2531382"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-89/za-garsc-gambli.png",
+      "sha256": "6afb20d85dea172237e1988ed69071d87b9937fc2388a70c07b132d36b8058bf"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-89/zawolajcie-kolegow.png",
+      "sha256": "e8f1c30ee6f2acafd3471b5af30862d84dedf6ee7c170d9e61887e6ac2294941"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-89/zawsze-w-siodle.png",
+      "sha256": "0920f5b301d75ecd8c2fb211c9db75ec013e7ee43207b667575a103c078bd946"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-89/zew-areny.png",
+      "sha256": "f12ee1e69ca78371e13d47562e58a912a79a4371adfdc3ef340ae54c0891a54c"
+    },
+    {
+      "source": "icons/abilities/bez-tajemnic.webp",
+      "sha256": "1c6544d59989a4dd08c9faf2728da3f5d902adabf1886f080627ea5d90013eb7"
+    },
+    {
+      "source": "icons/abilities/kocie-kosci.webp",
+      "sha256": "ee5d25740ab235e515c3e32405a25e41eceba7005bcd83cc2a6ebae4d52e30db"
+    },
+    {
+      "source": "icons/abilities/dziewiec-zyc.webp",
+      "sha256": "0cf20df0e99b7078ccc55a513e67d81a2672d09a49374eca0815731a2aa34317"
+    }
+  ]
+}

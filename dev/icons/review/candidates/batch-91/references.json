@@ -1,0 +1,59 @@
+{
+  "role": "Exact native targets, not style inputs",
+  "files": [
+    {
+      "key": "cwaniak",
+      "source": "icons/klasy/cwaniak.svg",
+      "variant": "default",
+      "sourceSha256": "aa8669e1745b216b6ab4e23aeb55fc20df54d4922261d3e37210e95491e1f57c"
+    },
+    {
+      "key": "spec",
+      "source": "icons/klasy/spec.svg",
+      "variant": "default",
+      "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+    },
+    {
+      "key": "twardziel",
+      "source": "icons/klasy/twardziel.svg",
+      "variant": "default",
+      "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac"
+    },
+    {
+      "key": "zlodziej",
+      "source": "icons/klasy/zlodziej.svg",
+      "variant": "default",
+      "sourceSha256": "a66384a8f44176c0f6fa824edd1758ceabfbe9645b1370870ec07d93179b50d2"
+    },
+    {
+      "key": "zwiadowca",
+      "source": "icons/klasy/zwiadowca.svg",
+      "variant": "default",
+      "sourceSha256": "67b410b391ee6dda233c64b0bbdf051d8d4bc1909260d06ef79fa3e6c328307a"
+    },
+    {
+      "key": "chemik",
+      "source": "icons/profesje/chemik.svg",
+      "variant": "default",
+      "sourceSha256": "4662220129374902fd41b90cf730c337c276df09c02f494defe3e6bbf31b6c27"
+    },
+    {
+      "key": "ganger",
+      "source": "icons/profesje/ganger.svg",
+      "variant": "default",
+      "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+    },
+    {
+      "key": "gladiator",
+      "source": "icons/profesje/gladiator.svg",
+      "variant": "default",
+      "sourceSha256": "3433cbb512a34091de6d3a17e330060f24df47337d2253a38bd345c0787f80a9"
+    },
+    {
+      "key": "gwiazda",
+      "source": "icons/profesje/gwiazda.svg",
+      "variant": "default",
+      "sourceSha256": "997555ee74146e5b8f1f2c6fc7becca90ebb51a404117b24454afee28df7fca7"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batch 89 · 5 approved subjects delivered; 6 awaiting revision",
+  "title": "Batches 90 + 91 · 18 awaiting GM review",
   "updated": "2026-10-16",
   "items": [
     {
@@ -11881,8 +11881,8 @@
     {
       "id": "batch85-szybkie-nogi",
       "name": "Szybkie nogi",
-      "tier": "Batch 88 · Złodziej",
-      "batch": 88,
+      "tier": "Batch 90 · Złodziej",
+      "batch": 90,
       "placeholderKey": "feature:szybkie-nogi",
       "target": "icons/abilities/szybkie-nogi.svg",
       "deliveryTargets": [
@@ -11893,12 +11893,18 @@
         }
       ],
       "context": "Class/profession ability: Szybkie nogi; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Łączysz swoją zwinność i szybkość, w celu zwiększenia szansy przetrwania na polu walki. Możesz w Akcji Bonusowej wykonać Odstąpienie, Przyspieszenie lub Ukrywanie się. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "REVISION of reference cell 2. Preserve the same two rugged boots, trouser cuffs and common ground line. SWAP THE FEET: the RIGHT boot is now FLAT on the ground, the LEFT boot is now balanced on its TOE with heel raised HIGH. Both toes still point RIGHT. CROSS THE TWO LOWER LEGS into a clear natural X ABOVE THE ANKLES: the calf entering from upper-LEFT continues diagonally DOWN-RIGHT into the flat right boot, and the calf entering from upper-RIGHT continues diagonally DOWN-LEFT into the toe-balanced left boot. One broad black separation at the crossing identifies which leg is in front. Natural moonwalk stance, exactly two complete boots, no extra leg, airborne step, full person, text or recognizable performer.",
+      "request": "REVISION of reference cell 1. PRESERVE EXACTLY the crossed lower legs and two right-facing rugged boots: FLAT boot at RIGHT, TOE-BALANCED boot at LEFT with heel raised. Add TWO unmistakable short broad directional MOTION ARROWS beside the boots, specifically requested as functional motion notation: beside the front flat RIGHT boot, an arrow points LEFT, showing that foot sliding BACKWARD; beside the rear toe-balanced LEFT boot, a separate arrow points RIGHT, showing that foot sliding FORWARD. Keep these two arrows visibly separated at different heights so they cannot merge or suggest both feet going the same way. Arrows are simple sober diagram strokes, no decorative or playful treatment. Do not change the boot pose, crossing, anatomy or ground line; exactly two complete boots, no full person, text or recognizable performer.",
       "current": {
         "src": "/icons/abilities/szybkie-nogi.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch90-revision",
+          "label": "Batch 90 · revised Szybkie nogi",
+          "src": "candidates/batch-90/szybkie-nogi.png",
+          "note": "REVISION of reference cell 1. PRESERVE EXACTLY the crossed lower legs and two right-facing rugged boots: FLAT boot at RIGHT, TOE-BALANCED boot at LEFT with heel raised. Add TWO unmistakable short broad directional MOTION ARROWS beside the boots, specifically requested as functional motion notation: beside the front flat RIGHT boot, an arrow points LEFT, showing that foot sliding BACKWARD; beside the rear toe-balanced LEFT boot, a separate arrow points RIGHT, showing that foot sliding FORWARD. Keep these two arrows visibly separated at different heights so they cannot merge or suggest both feet going the same way. Arrows are simple sober diagram strokes, no decorative or playful treatment. Do not change the boot pose, crossing, anatomy or ground line; exactly two complete boots, no full person, text or recognizable performer."
+        },
         {
           "id": "batch88-revision",
           "label": "Batch 88 · revised Szybkie nogi",
@@ -12060,8 +12066,8 @@
     {
       "id": "batch87-trajektoria",
       "name": "Trajektoria",
-      "tier": "Batch 88 · Spec",
-      "batch": 88,
+      "tier": "Batch 90 · Spec",
+      "batch": 90,
       "placeholderKey": "feature:trajektoria",
       "target": "icons/abilities/trajektoria.svg",
       "deliveryTargets": [
@@ -12072,12 +12078,18 @@
         }
       ],
       "context": "Class/profession ability: Trajektoria; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy wykonujesz Test Ataku dystansowego, możesz dodać do niego swój modyfikator Inteligencji. Tej zdolności możesz użyć tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po odbyciu Długiego odpoczynku. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "REVISION of reference cell 4. Retain the existing lower-RIGHT BULLSEYE with its broad ring, four ticks and central dot. Put ONE complete BULLET exactly at the TOP/APEX, the HIGHEST MIDDLE POINT of ONE ballistic arc, pointing HORIZONTALLY RIGHT along the tangent. BEFORE the bullet on the LEFT: ONE continuous thick SOLID curved line rises from lower-left to the bullet's flat base. AFTER the bullet on the RIGHT: exactly THREE broad SEPARATE DASH SEGMENTS descend along the curve toward the retained lower-right bullseye. Solid before, dashed after. Nothing in the arc sits above the apex bullet. Broad stencil diagram, no second bullet, cartridge casing, actual measurements, numbers, labels or extra rings.",
+      "request": "REVISION of reference cell 2. Keep the entire composition: single right-facing bullet at the top apex, solid rising approach on LEFT, THREE thick separated dashed descending segments on RIGHT, and bullseye at lower-RIGHT. The ONLY change: extend the LAST descending dash THROUGH the upper target rim and all the way to the EXACT CENTRAL DOT of the bullseye. Path endpoint and central dot MUST TOUCH AND COINCIDE. Do not stop at an outer ring, tick or black gap; do not overshoot beyond center. Keep the existing target, ticks, bullet and curve positions. Broad unlabelled stencil diagram, no measurements, numbers, labels, extra rings or second bullet.",
       "current": {
         "src": "/icons/abilities/trajektoria.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch90-revision",
+          "label": "Batch 90 · revised Trajektoria",
+          "src": "candidates/batch-90/trajektoria.png",
+          "note": "REVISION of reference cell 2. Keep the entire composition: single right-facing bullet at the top apex, solid rising approach on LEFT, THREE thick separated dashed descending segments on RIGHT, and bullseye at lower-RIGHT. The ONLY change: extend the LAST descending dash THROUGH the upper target rim and all the way to the EXACT CENTRAL DOT of the bullseye. Path endpoint and central dot MUST TOUCH AND COINCIDE. Do not stop at an outer ring, tick or black gap; do not overshoot beyond center. Keep the existing target, ticks, bullet and curve positions. Broad unlabelled stencil diagram, no measurements, numbers, labels, extra rings or second bullet."
+        },
         {
           "id": "batch88-revision",
           "label": "Batch 88 · revised Trajektoria",
@@ -12515,8 +12527,8 @@
     {
       "id": "batch89-za-garsc-gambli",
       "name": "Za garść gambli",
-      "tier": "Batch 89 · Gwiazda",
-      "batch": 89,
+      "tier": "Batch 90 · Gwiazda",
+      "batch": 90,
       "placeholderKey": "feature:za-garsc-gambli",
       "target": "icons/abilities/za-garsc-gambli.svg",
       "deliveryTargets": [
@@ -12527,12 +12539,18 @@
         }
       ],
       "context": "Class/profession ability: Za garść gambli; owner Gwiazda. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Każda dziura i miasteczko w Podzielonych Stanach potrzebuje muzyki. Każdy klub i śmierdzący bar bez okien, przyjmie twoje usługi zapewniające rozrywkę stałej klienteli. Zawsze dostaniesz dach nad głową i żarcie, a może i będzie za co się napić. Raz dziennie dajesz czterogodzinny koncert w lokalnej knajpie lub klubie, a od twoich umiejętności zależy, ile zarobisz (patrz tabela poniżej). Po skończeniu koncertu otrzymujesz jeden poziom Wyczerpania. MIEJSCE KONCERTU MNOŻNIK WYNIKU TESTU CHARYZMY (WY Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "ONE complete practical SAXOPHONE with a broad flared bell and curved neck above ONE open BUSKER'S HAT containing TWO thick blank COINS. Saxophone has only THREE broad key cuts, sturdy coherent tube and complete mouthpiece. A street performance earns tips, sober compact object emblem. Clear black gaps, no player, face, musical-note lettering, logo, numerals, tiny keys, fine engraving or extra instruments.",
+      "request": "REVISION of reference cell 3. Preserve the saxophone, hat and composition. Replace BOTH COINS inside the busker's hat with TWO COMPLETE RIFLE CARTRIDGES standing at slight opposite angles, each with a broad pointed bullet tip, long straight casing and thick flat base. Their tips project clearly above the hat opening. Remove every coin circle. Exactly two cartridges and one saxophone and one hat. Keep all shapes broad and readable, no player, face, tiny markings, engraving, text, logos or extra instruments.",
       "current": {
         "src": "/icons/abilities/za-garsc-gambli.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch90-revision",
+          "label": "Batch 90 · revised Za garść gambli",
+          "src": "candidates/batch-90/za-garsc-gambli.png",
+          "note": "REVISION of reference cell 3. Preserve the saxophone, hat and composition. Replace BOTH COINS inside the busker's hat with TWO COMPLETE RIFLE CARTRIDGES standing at slight opposite angles, each with a broad pointed bullet tip, long straight casing and thick flat base. Their tips project clearly above the hat opening. Remove every coin circle. Exactly two cartridges and one saxophone and one hat. Keep all shapes broad and readable, no player, face, tiny markings, engraving, text, logos or extra instruments."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 89 · Za garść gambli",
@@ -12574,8 +12592,8 @@
     {
       "id": "batch89-zawolajcie-kolegow",
       "name": "Zawołajcie kolegów",
-      "tier": "Batch 89 · Gladiator",
-      "batch": 89,
+      "tier": "Batch 90 · Gladiator",
+      "batch": 90,
       "placeholderKey": "feature:zawolajcie-kolegow",
       "target": "icons/abilities/zawolajcie-kolegow.svg",
       "deliveryTargets": [
@@ -12586,12 +12604,18 @@
         }
       ],
       "context": "Class/profession ability: Zawołajcie kolegów; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Jeśli w zasięgu 1,5 metra od ciebie znajduje się co najmniej dwóch przeciwników, otrzymujesz Ułatwienie do Testów Ataków wręcz. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "ONE large complete BARE HAND BECKONS confidently upward, fingers curling inward once, with TWO smaller opposing CLENCHED FISTS above-left and above-right. Exactly three hands with coherent thumbs/fingers and short complete wrists, clear broad black gaps. A fighter challenges multiple opponents to come closer. No whole person, portrait, extra hands, text, numbers, weapons, wounds, gore or decorative arrows.",
+      "request": "REVISION of reference cell 4. Preserve both small opposing fists above and the foreground beckoning gesture. Rotate ONLY the LARGE FOREGROUND HAND around its VERTICAL AXIS so its PALM FACES THE VIEWER. Do NOT turn the hand upside down. Wrist remains below, fingertips curl inward at the top in the same beckoning gesture, but show the broad PALM and one palm crease, NOT the backs of fingers or fingernails. Thumb is on the viewer's RIGHT after the rotation. Exactly one coherent thumb and four coherent fingers, some fingers may overlap naturally. Two upper fists stay unchanged. Large black gaps and natural adult anatomy, no extra hands, whole person, face, lettering or gore.",
       "current": {
         "src": "/icons/abilities/zawolajcie-kolegow.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch90-revision",
+          "label": "Batch 90 · revised Zawołajcie kolegów",
+          "src": "candidates/batch-90/zawolajcie-kolegow.png",
+          "note": "REVISION of reference cell 4. Preserve both small opposing fists above and the foreground beckoning gesture. Rotate ONLY the LARGE FOREGROUND HAND around its VERTICAL AXIS so its PALM FACES THE VIEWER. Do NOT turn the hand upside down. Wrist remains below, fingertips curl inward at the top in the same beckoning gesture, but show the broad PALM and one palm crease, NOT the backs of fingers or fingernails. Thumb is on the viewer's RIGHT after the rotation. Exactly one coherent thumb and four coherent fingers, some fingers may overlap naturally. Two upper fists stay unchanged. Large black gaps and natural adult anatomy, no extra hands, whole person, face, lettering or gore."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 89 · Zawołajcie kolegów",
@@ -12603,8 +12627,8 @@
     {
       "id": "batch89-zawsze-w-siodle",
       "name": "Zawsze w siodle",
-      "tier": "Batch 89 · Kowboj",
-      "batch": 89,
+      "tier": "Batch 90 · Kowboj",
+      "batch": 90,
       "placeholderKey": "feature:zawsze-w-siodle",
       "target": "icons/abilities/zawsze-w-siodle.svg",
       "deliveryTargets": [
@@ -12615,12 +12639,18 @@
         }
       ],
       "context": "Class/profession ability: Zawsze w siodle; owner Kowboj. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Prawdziwy kowboj piechotą chodzi tylko do kibla, baru i burdelu. Jeśli nie masz konia lub motocykla, los zsyła ci okazję do jego zdobycia na najbliższym Długim odpoczynku. Porzucony harley lub koń bez jeźdźca, to coś, co po prostu ci się przydarza. Pamiętaj, żeby nadać mu imię i módl się do zapomnianych bogów, żeby nie spotkać jego prawowitego właściciela. I pamiętaj - nie możesz go nikomu sprzedać. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "ONE complete sturdy WESTERN RIDING SADDLE in clear side profile, broad seat, simple pommel and cantle, ONE large hanging STIRRUP and ONE rolled blanket secured behind. Practical adult horse tack, coherent straps simplified into two broad bands. Strong compact silhouette, generous negative space, no rider, horse, portrait, fine leather tooling, tiny stitching, logos or text.",
+      "request": "RECONCEPTUALIZE reference cell 5 entirely. ONE ordinary adult COWBOY peacefully ASLEEP while still sitting securely in a saddle on ONE calm standing HORSE in side profile. Cowboy slumps naturally forward, forearms resting on the horse's neck and broad hat shading the lowered face; both legs hang naturally at the horse's sides, with ONE visible broad boot in a stirrup. The calm horse has a complete body, simple head, four coherent legs and one tail. Broad compact white glyph, very sparse tack, clear black separations between rider, saddle and horse. Unusual but grounded asleep-in-the-saddle situation, no beard portrait, anime, comedy exaggeration, floating limbs, fine hair, detailed scenery, text or logos.",
       "current": {
         "src": "/icons/abilities/zawsze-w-siodle.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch90-revision",
+          "label": "Batch 90 · revised Zawsze w siodle",
+          "src": "candidates/batch-90/zawsze-w-siodle.png",
+          "note": "RECONCEPTUALIZE reference cell 5 entirely. ONE ordinary adult COWBOY peacefully ASLEEP while still sitting securely in a saddle on ONE calm standing HORSE in side profile. Cowboy slumps naturally forward, forearms resting on the horse's neck and broad hat shading the lowered face; both legs hang naturally at the horse's sides, with ONE visible broad boot in a stirrup. The calm horse has a complete body, simple head, four coherent legs and one tail. Broad compact white glyph, very sparse tack, clear black separations between rider, saddle and horse. Unusual but grounded asleep-in-the-saddle situation, no beard portrait, anime, comedy exaggeration, floating limbs, fine hair, detailed scenery, text or logos."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 89 · Zawsze w siodle",
@@ -12632,8 +12662,8 @@
     {
       "id": "batch89-zew-areny",
       "name": "Zew areny",
-      "tier": "Batch 89 · Gladiator",
-      "batch": 89,
+      "tier": "Batch 90 · Gladiator",
+      "batch": 90,
       "placeholderKey": "feature:zew-areny",
       "target": "icons/abilities/zew-areny.svg",
       "deliveryTargets": [
@@ -12644,12 +12674,18 @@
         }
       ],
       "context": "Class/profession ability: Zew areny; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Podczas walki słyszysz doping widzów, nawet jeśli ich wokół ciebie nie ma. Kiedy jesteś w Berserku, zyskujesz: Doping. Otrzymujesz niewrażliwość na stan Przerażenie. Praca nóg. Przeciwnicy mają Utrudnienie w testach ataków okazyjnych przeciw tobie. Skok Gladiatora. Maksymalna wysokość i odległość twojego skoku ulega podwojeniu. Jeśli twój skok zakończy się na polu istoty nie większej od ciebie o więcej niż jeden rozmiar, musi ona zdać RO na Siłę, inaczej otrzyma stan Powalenie oraz 1k6 obrażeń o Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "ONE sturdy hanging ARENA BELL with a large visible clapper and ONE simple broad mounting bracket, flanked by TWO complete raised BARE CLENCHED FISTS. Intact short wrists and natural fingers, thick iron bell rim with one broad black cut. The ring calls combat and crowd energy, sober salvaged equipment. Clear black gaps, no audience faces, gruff fighter portrait, ornate architecture, text, numerals, tiny fittings or gore.",
+      "request": "REVISION of reference cell 6: COMPLETELY REPLACE THE BELL AND BRACKET with a ROARING AUDIENCE of exactly THREE ordinary ADULT HEAD-AND-SHOULDER FIGURES behind ONE low broad arena rail. Center spectator raises BOTH FISTS, outer spectators each raise ONE arm in cheering. Exactly four raised arms total, each clearly attached to its own torso; no floating hands or extra fingers. Three natural adult heads, two tiny broad open-mouth cuts convey cheering, no detailed faces. Broad compact crowd silhouette with clear black gaps and simple plain clothing. No bell, bracket, gruff bearded portraits, anime, tiny crowd texture, text, logos or gore.",
       "current": {
         "src": "/icons/abilities/zew-areny.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch90-revision",
+          "label": "Batch 90 · revised Zew areny",
+          "src": "candidates/batch-90/zew-areny.png",
+          "note": "REVISION of reference cell 6: COMPLETELY REPLACE THE BELL AND BRACKET with a ROARING AUDIENCE of exactly THREE ordinary ADULT HEAD-AND-SHOULDER FIGURES behind ONE low broad arena rail. Center spectator raises BOTH FISTS, outer spectators each raise ONE arm in cheering. Exactly four raised arms total, each clearly attached to its own torso; no floating hands or extra fingers. Three natural adult heads, two tiny broad open-mouth cuts convey cheering, no detailed faces. Broad compact crowd silhouette with clear black gaps and simple plain clothing. No bell, bracket, gruff bearded portraits, anime, tiny crowd texture, text, logos or gore."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 89 · Zew areny",
@@ -12687,6 +12723,354 @@
         }
       ],
       "status": "resolved"
+    },
+    {
+      "id": "batch90-zryw",
+      "name": "Zryw",
+      "tier": "Batch 90 · Twardziel",
+      "batch": 90,
+      "placeholderKey": "feature:zryw",
+      "target": "icons/abilities/zryw.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zryw.svg",
+          "variant": "default",
+          "sourceSha256": "f566600e180e85a4ce1d0e5cad346aa40e8038faf41d5ec23b4906fb7cdd00f2"
+        }
+      ],
+      "context": "Class/profession ability: Zryw; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Wspinasz się na szczyt swoich możliwości. W swojej turze możesz wykonać jeszcze jedną Akcję lub Akcję Bonusową. Po użyciu tej zdolności musisz ukończyć Krótki lub Długi odpoczynek, zanim będziesz mógł jej ponownie użyć. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE stout complete STOPWATCH with ONE thick LIGHTNING BOLT cut in black inside its broad white circular face. One broad top button and two short shoulder buttons; no hands or other face markings. Action burst and extra effort as a compact sober object emblem. Large simple shapes and clear negative space, no person, running legs, arrows, dice, numerals, letters, thin chain or detailed clockwork.",
+      "current": {
+        "src": "/icons/abilities/zryw.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 90 · Zryw",
+          "src": "candidates/batch-90/zryw.png",
+          "note": "ONE stout complete STOPWATCH with ONE thick LIGHTNING BOLT cut in black inside its broad white circular face. One broad top button and two short shoulder buttons; no hands or other face markings. Action burst and extra effort as a compact sober object emblem. Large simple shapes and clear negative space, no person, running legs, arrows, dice, numerals, letters, thin chain or detailed clockwork."
+        }
+      ]
+    },
+    {
+      "id": "batch90-zwinnosc-szczura",
+      "name": "Zwinność szczura",
+      "tier": "Batch 90 · Szczur",
+      "batch": 90,
+      "placeholderKey": "feature:zwinnosc-szczura",
+      "target": "icons/abilities/zwinnosc-szczura.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zwinnosc-szczura.svg",
+          "variant": "default",
+          "sourceSha256": "20a0205b2ab30b9c8623635c37168cd1a87b5bc3f8394660576357d9defd58d7"
+        }
+      ],
+      "context": "Class/profession ability: Zwinność szczura; owner Szczur. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Wspinacz. Potrafisz szybko i efektywnie się wspinać. Otrzymujesz Szybkość wspinania równą twojej Szybkości ruchu. Skoczek. Kiedy skaczesz, możesz testować Akrobatykę zamiast Atletyki. Maksymalną odległość skoku wyliczasz, uwzględniając wartość Zręczności, a nie Siły. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE realistically proportioned adult RAT climbing ONE thick vertical ROPE, body viewed from the side, head upward, exactly four natural small paws gripping the rope. One rounded ear, one small eye, pointed muzzle and one long curved tail complete its silhouette. Broad simple masses, two large rope cuts at most, generous black gaps. Agile climbing animal, no cute mascot, anime face, fine fur, whisker texture, extra limbs, decorative frame, writing or numbers.",
+      "current": {
+        "src": "/icons/abilities/zwinnosc-szczura.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 90 · Zwinność szczura",
+          "src": "candidates/batch-90/zwinnosc-szczura.png",
+          "note": "ONE realistically proportioned adult RAT climbing ONE thick vertical ROPE, body viewed from the side, head upward, exactly four natural small paws gripping the rope. One rounded ear, one small eye, pointed muzzle and one long curved tail complete its silhouette. Broad simple masses, two large rope cuts at most, generous black gaps. Agile climbing animal, no cute mascot, anime face, fine fur, whisker texture, extra limbs, decorative frame, writing or numbers."
+        }
+      ]
+    },
+    {
+      "id": "batch90-brutal",
+      "name": "Brutal",
+      "tier": "Batch 90 · Brutal",
+      "batch": 90,
+      "placeholderKey": "class:brutal",
+      "target": "icons/klasy/brutal.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/brutal.svg",
+          "variant": "default",
+          "sourceSha256": "83bf2a94a6a88bb853e8e3de117926e3e503d06a79bbd186bc69e8f9ecaeb915"
+        }
+      ],
+      "context": "class: Brutal; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "CLASS EMBLEM: ONE powerful complete BARE CLENCHED FIST wrapped in THREE broad BROKEN CHAIN LINKS, with TWO clearly snapped chain ends beside the short wrist. Strong natural hand anatomy, coherent thumb and folded fingers, solid masses and broad black separations. Brute strength and berserk freedom, sober compact glyph. No person, head, beard portrait, armor, fine chain, text, real insignia, blood or gore.",
+      "current": {
+        "src": "/icons/klasy/brutal.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 90 · Brutal",
+          "src": "candidates/batch-90/brutal.png",
+          "note": "CLASS EMBLEM: ONE powerful complete BARE CLENCHED FIST wrapped in THREE broad BROKEN CHAIN LINKS, with TWO clearly snapped chain ends beside the short wrist. Strong natural hand anatomy, coherent thumb and folded fingers, solid masses and broad black separations. Brute strength and berserk freedom, sober compact glyph. No person, head, beard portrait, armor, fine chain, text, real insignia, blood or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch91-cwaniak",
+      "name": "Cwaniak",
+      "tier": "Batch 91 · Cwaniak",
+      "batch": 91,
+      "placeholderKey": "class:cwaniak",
+      "target": "icons/klasy/cwaniak.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/cwaniak.svg",
+          "variant": "default",
+          "sourceSha256": "aa8669e1745b216b6ab4e23aeb55fc20df54d4922261d3e37210e95491e1f57c"
+        }
+      ],
+      "context": "class: Cwaniak; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "CLASS EMBLEM: TWO overlapping complete PLAYING CARDS angled slightly apart. The FRONT card carries ONE large black CLUBS pip; the rear card shows ONE large black SPADES pip in its exposed portion. Thick white card masses with broad black separation at overlap. Cunning and luck in a sober compact practical emblem. No letters, numbers, joker face, person, dice, tiny corner indices, textures or decorative frame.",
+      "current": {
+        "src": "/icons/klasy/cwaniak.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 91 · Cwaniak",
+          "src": "candidates/batch-91/cwaniak.png",
+          "note": "CLASS EMBLEM: TWO overlapping complete PLAYING CARDS angled slightly apart. The FRONT card carries ONE large black CLUBS pip; the rear card shows ONE large black SPADES pip in its exposed portion. Thick white card masses with broad black separation at overlap. Cunning and luck in a sober compact practical emblem. No letters, numbers, joker face, person, dice, tiny corner indices, textures or decorative frame."
+        }
+      ]
+    },
+    {
+      "id": "batch91-spec",
+      "name": "Spec",
+      "tier": "Batch 91 · Spec",
+      "batch": 91,
+      "placeholderKey": "class:spec",
+      "target": "icons/klasy/spec.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/spec.svg",
+          "variant": "default",
+          "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+        }
+      ],
+      "context": "class: Spec; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "CLASS EMBLEM: ONE complete practical OPEN-END WRENCH lies diagonally across ONE square CIRCUIT CHIP with exactly TWO thick short connector pins on each of its four sides. Wrench has a broad open jaw and complete handle; broad black cut separates the overlapping objects. Technical expertise, simple sturdy white masses. No fine circuitry, giant cog, person, face, lettering, numbers, labels or extra tools.",
+      "current": {
+        "src": "/icons/klasy/spec.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 91 · Spec",
+          "src": "candidates/batch-91/spec.png",
+          "note": "CLASS EMBLEM: ONE complete practical OPEN-END WRENCH lies diagonally across ONE square CIRCUIT CHIP with exactly TWO thick short connector pins on each of its four sides. Wrench has a broad open jaw and complete handle; broad black cut separates the overlapping objects. Technical expertise, simple sturdy white masses. No fine circuitry, giant cog, person, face, lettering, numbers, labels or extra tools."
+        }
+      ]
+    },
+    {
+      "id": "batch91-twardziel",
+      "name": "Twardziel",
+      "tier": "Batch 91 · Twardziel",
+      "batch": 91,
+      "placeholderKey": "class:twardziel",
+      "target": "icons/klasy/twardziel.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/twardziel.svg",
+          "variant": "default",
+          "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac"
+        }
+      ],
+      "context": "class: Twardziel; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "CLASS EMBLEM: ONE sturdy BODY-ARMOR VEST with TWO broad horizontal plate cuts, behind ONE complete practical SHOTGUN lying diagonally across it. Shotgun has a clear shoulder stock, one straight barrel, thick pump grip and empty trigger guard, simplified into broad masses. Durable martial survivor represented by equipment, compact white glyph. No person, face, helmet, lettering, numbers, engraved parts, tiny fittings, blood or injury.",
+      "current": {
+        "src": "/icons/klasy/twardziel.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 91 · Twardziel",
+          "src": "candidates/batch-91/twardziel.png",
+          "note": "CLASS EMBLEM: ONE sturdy BODY-ARMOR VEST with TWO broad horizontal plate cuts, behind ONE complete practical SHOTGUN lying diagonally across it. Shotgun has a clear shoulder stock, one straight barrel, thick pump grip and empty trigger guard, simplified into broad masses. Durable martial survivor represented by equipment, compact white glyph. No person, face, helmet, lettering, numbers, engraved parts, tiny fittings, blood or injury."
+        }
+      ]
+    },
+    {
+      "id": "batch91-zlodziej",
+      "name": "Złodziej",
+      "tier": "Batch 91 · Złodziej",
+      "batch": 91,
+      "placeholderKey": "class:zlodziej",
+      "target": "icons/klasy/zlodziej.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/zlodziej.svg",
+          "variant": "default",
+          "sourceSha256": "a66384a8f44176c0f6fa824edd1758ceabfbe9645b1370870ec07d93179b50d2"
+        }
+      ],
+      "context": "class: Złodziej; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "CLASS EMBLEM: ONE sturdy OPEN PADLOCK with its thick shackle visibly lifted free at one side. ONE broad simple LOCKPICK is inserted into the large keyhole from lower-right. Complete coherent lock and pick, generous black separation and thick white masses. Sober thief's tools emblem, no hooded portrait, hand, person, fine key teeth, actual lock instructions, letters, numerals or extra props.",
+      "current": {
+        "src": "/icons/klasy/zlodziej.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 91 · Złodziej",
+          "src": "candidates/batch-91/zlodziej.png",
+          "note": "CLASS EMBLEM: ONE sturdy OPEN PADLOCK with its thick shackle visibly lifted free at one side. ONE broad simple LOCKPICK is inserted into the large keyhole from lower-right. Complete coherent lock and pick, generous black separation and thick white masses. Sober thief's tools emblem, no hooded portrait, hand, person, fine key teeth, actual lock instructions, letters, numerals or extra props."
+        }
+      ]
+    },
+    {
+      "id": "batch91-zwiadowca",
+      "name": "Zwiadowca",
+      "tier": "Batch 91 · Zwiadowca",
+      "batch": 91,
+      "placeholderKey": "class:zwiadowca",
+      "target": "icons/klasy/zwiadowca.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/zwiadowca.svg",
+          "variant": "default",
+          "sourceSha256": "67b410b391ee6dda233c64b0bbdf051d8d4bc1909260d06ef79fa3e6c328307a"
+        }
+      ],
+      "context": "class: Zwiadowca; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "CLASS EMBLEM: ONE complete practical pair of BINOCULARS above ONE broad BOOTPRINT. Binoculars have two thick barrels, two round objective lenses and one central hinge. Bootprint has a large heel, broad sole and only TWO black tread cuts. Scouting and tracking, sturdy compact white glyph with clear black separation between objects. No person, face, dangling thin straps, tiny fittings, letters, numbers or map labels.",
+      "current": {
+        "src": "/icons/klasy/zwiadowca.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 91 · Zwiadowca",
+          "src": "candidates/batch-91/zwiadowca.png",
+          "note": "CLASS EMBLEM: ONE complete practical pair of BINOCULARS above ONE broad BOOTPRINT. Binoculars have two thick barrels, two round objective lenses and one central hinge. Bootprint has a large heel, broad sole and only TWO black tread cuts. Scouting and tracking, sturdy compact white glyph with clear black separation between objects. No person, face, dangling thin straps, tiny fittings, letters, numbers or map labels."
+        }
+      ]
+    },
+    {
+      "id": "batch91-chemik",
+      "name": "Chemik",
+      "tier": "Batch 91 · Spec",
+      "batch": 91,
+      "placeholderKey": "profession:chemik",
+      "target": "icons/profesje/chemik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/chemik.svg",
+          "variant": "default",
+          "sourceSha256": "4662220129374902fd41b90cf730c337c276df09c02f494defe3e6bbf31b6c27"
+        }
+      ],
+      "context": "profession: Chemik; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "PROFESSION EMBLEM: ONE stout ROUND-BOTTOM LAB FLASK with a short neck, thick rim and TWO large bubble holes in its broad liquid mass. ONE complete DROPPER PIPETTE with a broad rubber bulb lies diagonally across the flask, separated by a broad black cut. Practical chemistry, sparse compact white object glyph. No formulas, recipes, labels, measurements, person, face, skull, tiny bubbles, extra glassware or lettering.",
+      "current": {
+        "src": "/icons/profesje/chemik.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 91 · Chemik",
+          "src": "candidates/batch-91/chemik.png",
+          "note": "PROFESSION EMBLEM: ONE stout ROUND-BOTTOM LAB FLASK with a short neck, thick rim and TWO large bubble holes in its broad liquid mass. ONE complete DROPPER PIPETTE with a broad rubber bulb lies diagonally across the flask, separated by a broad black cut. Practical chemistry, sparse compact white object glyph. No formulas, recipes, labels, measurements, person, face, skull, tiny bubbles, extra glassware or lettering."
+        }
+      ]
+    },
+    {
+      "id": "batch91-ganger",
+      "name": "Ganger",
+      "tier": "Batch 91 · Brutal",
+      "batch": 91,
+      "placeholderKey": "profession:ganger",
+      "target": "icons/profesje/ganger.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/ganger.svg",
+          "variant": "default",
+          "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+        }
+      ],
+      "context": "profession: Ganger; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "PROFESSION EMBLEM: ONE complete improvised BASEBALL BAT bearing THREE broad blunt STUDS crosses ONE MOTORCYCLE WHEEL with THREE thick spokes. Bat has a complete broad grip and knob; wheel is a sturdy tire ring with clear open gaps. Road gang equipment, sober compact white silhouette with strong black separation. No person, face, real gang insignia, swastika, text, logos, fine tire tread, tiny nails, thin chains or gore.",
+      "current": {
+        "src": "/icons/profesje/ganger.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 91 · Ganger",
+          "src": "candidates/batch-91/ganger.png",
+          "note": "PROFESSION EMBLEM: ONE complete improvised BASEBALL BAT bearing THREE broad blunt STUDS crosses ONE MOTORCYCLE WHEEL with THREE thick spokes. Bat has a complete broad grip and knob; wheel is a sturdy tire ring with clear open gaps. Road gang equipment, sober compact white silhouette with strong black separation. No person, face, real gang insignia, swastika, text, logos, fine tire tread, tiny nails, thin chains or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch91-gladiator",
+      "name": "Gladiator",
+      "tier": "Batch 91 · Brutal",
+      "batch": 91,
+      "placeholderKey": "profession:gladiator",
+      "target": "icons/profesje/gladiator.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/gladiator.svg",
+          "variant": "default",
+          "sourceSha256": "3433cbb512a34091de6d3a17e330060f24df47337d2253a38bd345c0787f80a9"
+        }
+      ],
+      "context": "profession: Gladiator; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "PROFESSION EMBLEM: ONE salvaged ARENA HELMET with a practical CAGE FACEGUARD made of THREE broad vertical bars and one thick brow, beside ONE complete BARE CLENCHED FIST with short wrist. Helmet contains no visible face. Strong compact white masses, natural coherent fist, broad black gaps. Improvised arena fighter equipment, no fantasy ornament, feather, horns, gruff portrait, fine mesh, tiny rivets, lettering, blood or gore.",
+      "current": {
+        "src": "/icons/profesje/gladiator.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 91 · Gladiator",
+          "src": "candidates/batch-91/gladiator.png",
+          "note": "PROFESSION EMBLEM: ONE salvaged ARENA HELMET with a practical CAGE FACEGUARD made of THREE broad vertical bars and one thick brow, beside ONE complete BARE CLENCHED FIST with short wrist. Helmet contains no visible face. Strong compact white masses, natural coherent fist, broad black gaps. Improvised arena fighter equipment, no fantasy ornament, feather, horns, gruff portrait, fine mesh, tiny rivets, lettering, blood or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch91-gwiazda",
+      "name": "Gwiazda",
+      "tier": "Batch 91 · Cwaniak",
+      "batch": 91,
+      "placeholderKey": "profession:gwiazda",
+      "target": "icons/profesje/gwiazda.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/gwiazda.svg",
+          "variant": "default",
+          "sourceSha256": "997555ee74146e5b8f1f2c6fc7becca90ebb51a404117b24454afee28df7fca7"
+        }
+      ],
+      "context": "profession: Gwiazda; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "PROFESSION EMBLEM: ONE complete handheld MICROPHONE lies diagonally across ONE bold FIVE-POINT STAR. Microphone has a broad rounded grille with only TWO thick black grille cuts, a complete stout handle and one short broad cable curve. Stage performance and fame, compact sober white object silhouette with broad black separation. No person, face, fine grille mesh, lettering, musical notes, logo, numbers, sparkle clutter or decorative frame.",
+      "current": {
+        "src": "/icons/profesje/gwiazda.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 91 · Gwiazda",
+          "src": "candidates/batch-91/gwiazda.png",
+          "note": "PROFESSION EMBLEM: ONE complete handheld MICROPHONE lies diagonally across ONE bold FIVE-POINT STAR. Microphone has a broad rounded grille with only TWO thick black grille cuts, a complete stout handle and one short broad cable curve. Stage performance and fame, compact sober white object silhouette with broad black separation. No person, face, fine grille mesh, lettering, musical notes, logo, numbers, sparkle clutter or decorative frame."
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,16 @@
+{
+  "batch": 91,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "cwaniak": "7e8b4413dee98eb034978626415365c684258a17e5c13a8251f797847ea76b00",
+    "spec": "87a8c6502b0d938c4b44704b069ee5a541e9026a3926357a62dd904d3ea60d4e",
+    "twardziel": "b4ddb9d0fd571dc75160bd687fba571eff850b7f2a5b4a0aaf51619637be90bd",
+    "zlodziej": "e1a87307b65de029bf6e44229ff030452a328c077e3af0c69eb57e2ed2ec99ac",
+    "zwiadowca": "88364f7f2c2e6eb22077a6907df520624090cad6f19708d8ef62aeb1fc38cb8e",
+    "chemik": "6cf24f60ee4ac5bc90ba5d32940b93f5ab68e543329ca7044daa5bb3752b9c36",
+    "ganger": "a4ab1a5b11abe47ec0204d4e1a159418ecc50f218094551713987934137bfb43",
+    "gladiator": "9490b3e4144eeacc061295471468ba1817701c1ba19ad8a2f255c7f5a78dd5cf",
+    "gwiazda": "6f734af1fb465b7e5c61ee70bd17ff9b8977203523a9ed2a5e37b1d8efef44fb"
+  }
+}

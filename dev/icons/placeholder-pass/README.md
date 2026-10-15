@@ -117,6 +117,14 @@ contains nine fresh subjects. The first 127 unique roadmap subjects are
 allocated; Zryw is next at zero-based index 127. The next free batch number
 is 90.
 
+After Batch 88–89 review, 121 subjects are delivered at 123 native SVG filenames
+with WEBP sidecars. The current audit leaves 32 subjects / 32 placeholder files.
+Batch 90 contains six saved revisions and three fresh subjects; Batch 91
+contains nine fresh subjects. These finish allocating the ability icons and
+start the class/profession emblems. The first 139 unique roadmap subjects are
+allocated; Kaznodzieja Nowej Ery is next at zero-based index 139. Fourteen
+subjects await their first generation. The next free batch number is 92.
+
 The GM's durable direction is to avoid repeated gruff male survivor portraits:
 prefer the actual objects, hands, actions and generic adults, with no anime.
 That instruction is also recorded in Pipeline.md.
@@ -161,6 +169,10 @@ That instruction is also recorded in Pipeline.md.
   [exact prompts](../review/candidates/batch-88/prompts.json).
 - [Batch 89 candidates](../review/candidates/batch-89/README.md) and
   [exact prompts](../review/candidates/batch-89/prompts.json).
+- [Batch 90 candidates](../review/candidates/batch-90/README.md) and
+  [exact prompts](../review/candidates/batch-90/prompts.json).
+- [Batch 91 candidates](../review/candidates/batch-91/README.md) and
+  [exact prompts](../review/candidates/batch-91/prompts.json).
 
 The numbered `prepare_*.py` files freeze their actual
 allocations and

@@ -1,0 +1,346 @@
+{
+  "date": "2026-10-16",
+  "batch": 90,
+  "generalFeedback": "Apply exact saved revisions. Broad sober white glyphs, natural adult anatomy, no anime or gruff portrait default; varied practical objects and symbols.",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "szybkie-nogi",
+      "name": "Szybkie nogi",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/abilities/szybkie-nogi.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-nogi.svg",
+          "variant": "default",
+          "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398"
+        }
+      ],
+      "ruleContext": "Łączysz swoją zwinność i szybkość, w celu zwiększenia szansy przetrwania na polu walki. Możesz w Akcji Bonusowej wykonać Odstąpienie, Przyspieszenie lub Ukrywanie się.",
+      "context": "Class/profession ability: Szybkie nogi; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "REVISION of reference cell 1. PRESERVE EXACTLY the crossed lower legs and two right-facing rugged boots: FLAT boot at RIGHT, TOE-BALANCED boot at LEFT with heel raised. Add TWO unmistakable short broad directional MOTION ARROWS beside the boots, specifically requested as functional motion notation: beside the front flat RIGHT boot, an arrow points LEFT, showing that foot sliding BACKWARD; beside the rear toe-balanced LEFT boot, a separate arrow points RIGHT, showing that foot sliding FORWARD. Keep these two arrows visibly separated at different heights so they cannot merge or suggest both feet going the same way. Arrows are simple sober diagram strokes, no decorative or playful treatment. Do not change the boot pose, crossing, anatomy or ground line; exactly two complete boots, no full person, text or recognizable performer.",
+      "itemId": "batch85-szybkie-nogi",
+      "revisionOf": {
+        "id": "batch85-szybkie-nogi",
+        "name": "Szybkie nogi",
+        "decision": "revise",
+        "candidateId": "batch88-revision",
+        "selectedSource": "candidates/batch-88/szybkie-nogi.png",
+        "sourceSha256": "396423cfc20ec349daacebaac4431fa99fe6eedd3628cc94583579ae317063e9",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/szybkie-nogi.svg",
+            "variant": "default",
+            "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398"
+          }
+        ],
+        "notes": "Close. Add motion lines showing the moonwalking motion (front leg going backwards, back leg going forwards)",
+        "feedback": {
+          "itemId": "batch85-szybkie-nogi",
+          "decision": "revise",
+          "candidateId": "batch88-revision",
+          "notes": "Close. Add motion lines showing the moonwalking motion (front leg going backwards, back leg going forwards)",
+          "updatedAt": "2026-10-15T23:31:10.932Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "trajektoria",
+      "name": "Trajektoria",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/abilities/trajektoria.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/trajektoria.svg",
+          "variant": "default",
+          "sourceSha256": "ee9e7f28b3d095225871f6ef754ef95dd68cfd7c6c16ed99f6344663f6453e9f"
+        }
+      ],
+      "ruleContext": "Kiedy wykonujesz Test Ataku dystansowego, możesz dodać do niego swój modyfikator Inteligencji. Tej zdolności możesz użyć tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po odbyciu Długiego odpoczynku.",
+      "context": "Class/profession ability: Trajektoria; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "request": "REVISION of reference cell 2. Keep the entire composition: single right-facing bullet at the top apex, solid rising approach on LEFT, THREE thick separated dashed descending segments on RIGHT, and bullseye at lower-RIGHT. The ONLY change: extend the LAST descending dash THROUGH the upper target rim and all the way to the EXACT CENTRAL DOT of the bullseye. Path endpoint and central dot MUST TOUCH AND COINCIDE. Do not stop at an outer ring, tick or black gap; do not overshoot beyond center. Keep the existing target, ticks, bullet and curve positions. Broad unlabelled stencil diagram, no measurements, numbers, labels, extra rings or second bullet.",
+      "itemId": "batch87-trajektoria",
+      "revisionOf": {
+        "id": "batch87-trajektoria",
+        "name": "Trajektoria",
+        "decision": "revise",
+        "candidateId": "batch88-revision",
+        "selectedSource": "candidates/batch-88/trajektoria.png",
+        "sourceSha256": "b9fb77fe1bf030ae2a0b123848a30676f4bf8caea4926f53a481b77ed2531382",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/trajektoria.svg",
+            "variant": "default",
+            "sourceSha256": "ee9e7f28b3d095225871f6ef754ef95dd68cfd7c6c16ed99f6344663f6453e9f"
+          }
+        ],
+        "notes": "Close - redraw the image so the arc terminates EXACTLY AT the bullseye. Keep the composition.",
+        "feedback": {
+          "itemId": "batch87-trajektoria",
+          "decision": "revise",
+          "candidateId": "batch88-revision",
+          "notes": "Close - redraw the image so the arc terminates EXACTLY AT the bullseye. Keep the composition.",
+          "updatedAt": "2026-10-15T23:31:47.816Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "za-garsc-gambli",
+      "name": "Za garść gambli",
+      "owner": "gwiazda",
+      "ownerLabel": "Gwiazda",
+      "target": "icons/abilities/za-garsc-gambli.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/za-garsc-gambli.svg",
+          "variant": "default",
+          "sourceSha256": "cde71508cf8b7d7d178fb4e178ed549c877817d5ff504315a1e4682cb3c634dc"
+        }
+      ],
+      "ruleContext": "Każda dziura i miasteczko w Podzielonych Stanach potrzebuje muzyki. Każdy klub i śmierdzący bar bez okien, przyjmie twoje usługi zapewniające rozrywkę stałej klienteli. Zawsze dostaniesz dach nad głową i żarcie, a może i będzie za co się napić. Raz dziennie dajesz czterogodzinny koncert w lokalnej knajpie lub klubie, a od twoich umiejętności zależy, ile zarobisz (patrz tabela poniżej). Po skończeniu koncertu otrzymujesz jeden poziom Wyczerpania. MIEJSCE KONCERTU MNOŻNIK WYNIKU TESTU CHARYZMY (WYSTĘPY) LUB TESTU INSTRUMENTU Ulica x 0,5 gb Tania knajpa x 1 gb Dobra knajpa x 2 gb Drogi klub x 3 gb PRZYKŁAD: Siadasz przy ruchliwej ulicy, wyciągasz saksofon i po czterech godzinach koncertu wykonujesz test Zręczności (Saksofon). Twój wynik to 15, więc do czapki wpadła ci równowartość ok. 7 gambli. Gdybyś dał koncert w drogim klubie, zgarnąłbyś sześć razy tyle.",
+      "context": "Class/profession ability: Za garść gambli; owner Gwiazda. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "request": "REVISION of reference cell 3. Preserve the saxophone, hat and composition. Replace BOTH COINS inside the busker's hat with TWO COMPLETE RIFLE CARTRIDGES standing at slight opposite angles, each with a broad pointed bullet tip, long straight casing and thick flat base. Their tips project clearly above the hat opening. Remove every coin circle. Exactly two cartridges and one saxophone and one hat. Keep all shapes broad and readable, no player, face, tiny markings, engraving, text, logos or extra instruments.",
+      "itemId": "batch89-za-garsc-gambli",
+      "revisionOf": {
+        "id": "batch89-za-garsc-gambli",
+        "name": "Za garść gambli",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-89/za-garsc-gambli.png",
+        "sourceSha256": "6afb20d85dea172237e1988ed69071d87b9937fc2388a70c07b132d36b8058bf",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/za-garsc-gambli.svg",
+            "variant": "default",
+            "sourceSha256": "cde71508cf8b7d7d178fb4e178ed549c877817d5ff504315a1e4682cb3c634dc"
+          }
+        ],
+        "notes": "Swap the coins in the hat for bullets",
+        "feedback": {
+          "itemId": "batch89-za-garsc-gambli",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Swap the coins in the hat for bullets",
+          "updatedAt": "2026-10-15T23:33:00.030Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "zawolajcie-kolegow",
+      "name": "Zawołajcie kolegów",
+      "owner": "gladiator",
+      "ownerLabel": "Gladiator",
+      "target": "icons/abilities/zawolajcie-kolegow.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawolajcie-kolegow.svg",
+          "variant": "default",
+          "sourceSha256": "abfc18f9af0e406acc37d35e09766a779dad7eeabed31cf74d1f1a8e14b3748d"
+        }
+      ],
+      "ruleContext": "Jeśli w zasięgu 1,5 metra od ciebie znajduje się co najmniej dwóch przeciwników, otrzymujesz Ułatwienie do Testów Ataków wręcz.",
+      "context": "Class/profession ability: Zawołajcie kolegów; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "request": "REVISION of reference cell 4. Preserve both small opposing fists above and the foreground beckoning gesture. Rotate ONLY the LARGE FOREGROUND HAND around its VERTICAL AXIS so its PALM FACES THE VIEWER. Do NOT turn the hand upside down. Wrist remains below, fingertips curl inward at the top in the same beckoning gesture, but show the broad PALM and one palm crease, NOT the backs of fingers or fingernails. Thumb is on the viewer's RIGHT after the rotation. Exactly one coherent thumb and four coherent fingers, some fingers may overlap naturally. Two upper fists stay unchanged. Large black gaps and natural adult anatomy, no extra hands, whole person, face, lettering or gore.",
+      "itemId": "batch89-zawolajcie-kolegow",
+      "revisionOf": {
+        "id": "batch89-zawolajcie-kolegow",
+        "name": "Zawołajcie kolegów",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-89/zawolajcie-kolegow.png",
+        "sourceSha256": "e8f1c30ee6f2acafd3471b5af30862d84dedf6ee7c170d9e61887e6ac2294941",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/zawolajcie-kolegow.svg",
+            "variant": "default",
+            "sourceSha256": "abfc18f9af0e406acc37d35e09766a779dad7eeabed31cf74d1f1a8e14b3748d"
+          }
+        ],
+        "notes": "Rotate the frontmost first 180 degrees, with it's palm facing the camera. Keep the gesture and keep the other fists",
+        "feedback": {
+          "itemId": "batch89-zawolajcie-kolegow",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Rotate the frontmost first 180 degrees, with it's palm facing the camera. Keep the gesture and keep the other fists",
+          "updatedAt": "2026-10-15T23:33:57.812Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "zawsze-w-siodle",
+      "name": "Zawsze w siodle",
+      "owner": "kowboj",
+      "ownerLabel": "Kowboj",
+      "target": "icons/abilities/zawsze-w-siodle.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawsze-w-siodle.svg",
+          "variant": "default",
+          "sourceSha256": "5e64e1f696dd5bdd4d4b71e08d22eaa07280cd5ed0b88c6ff05b3ebe43f1881f"
+        }
+      ],
+      "ruleContext": "Prawdziwy kowboj piechotą chodzi tylko do kibla, baru i burdelu. Jeśli nie masz konia lub motocykla, los zsyła ci okazję do jego zdobycia na najbliższym Długim odpoczynku. Porzucony harley lub koń bez jeźdźca, to coś, co po prostu ci się przydarza. Pamiętaj, żeby nadać mu imię i módl się do zapomnianych bogów, żeby nie spotkać jego prawowitego właściciela. I pamiętaj - nie możesz go nikomu sprzedać.",
+      "context": "Class/profession ability: Zawsze w siodle; owner Kowboj. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 5,
+      "request": "RECONCEPTUALIZE reference cell 5 entirely. ONE ordinary adult COWBOY peacefully ASLEEP while still sitting securely in a saddle on ONE calm standing HORSE in side profile. Cowboy slumps naturally forward, forearms resting on the horse's neck and broad hat shading the lowered face; both legs hang naturally at the horse's sides, with ONE visible broad boot in a stirrup. The calm horse has a complete body, simple head, four coherent legs and one tail. Broad compact white glyph, very sparse tack, clear black separations between rider, saddle and horse. Unusual but grounded asleep-in-the-saddle situation, no beard portrait, anime, comedy exaggeration, floating limbs, fine hair, detailed scenery, text or logos.",
+      "itemId": "batch89-zawsze-w-siodle",
+      "revisionOf": {
+        "id": "batch89-zawsze-w-siodle",
+        "name": "Zawsze w siodle",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-89/zawsze-w-siodle.png",
+        "sourceSha256": "0920f5b301d75ecd8c2fb211c9db75ec013e7ee43207b667575a103c078bd946",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/zawsze-w-siodle.svg",
+            "variant": "default",
+            "sourceSha256": "5e64e1f696dd5bdd4d4b71e08d22eaa07280cd5ed0b88c6ff05b3ebe43f1881f"
+          }
+        ],
+        "notes": "Rethink the concept. Maybe something more symbollic, or perhaps a cowboy on a horse in unusual circumstances?",
+        "feedback": {
+          "itemId": "batch89-zawsze-w-siodle",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Rethink the concept. Maybe something more symbollic, or perhaps a cowboy on a horse in unusual circumstances?",
+          "updatedAt": "2026-10-15T23:35:02.672Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "zew-areny",
+      "name": "Zew areny",
+      "owner": "gladiator",
+      "ownerLabel": "Gladiator",
+      "target": "icons/abilities/zew-areny.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zew-areny.svg",
+          "variant": "default",
+          "sourceSha256": "7524b5d3e92bf9189e5964e1b4a5065a2986e42c5cb8af9fbee57f0f8d06f987"
+        }
+      ],
+      "ruleContext": "Podczas walki słyszysz doping widzów, nawet jeśli ich wokół ciebie nie ma. Kiedy jesteś w Berserku, zyskujesz: Doping. Otrzymujesz niewrażliwość na stan Przerażenie. Praca nóg. Przeciwnicy mają Utrudnienie w testach ataków okazyjnych przeciw tobie. Skok Gladiatora. Maksymalna wysokość i odległość twojego skoku ulega podwojeniu. Jeśli twój skok zakończy się na polu istoty nie większej od ciebie o więcej niż jeden rozmiar, musi ona zdać RO na Siłę, inaczej otrzyma stan Powalenie oraz 1k6 obrażeń obuchowych za każde 3 metry długości lub wysokości twojego skoku. ST Rzutu Obronnego to 8 plus twój modyfikator Siły plus Premia Biegłości.",
+      "context": "Class/profession ability: Zew areny; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 6,
+      "request": "REVISION of reference cell 6: COMPLETELY REPLACE THE BELL AND BRACKET with a ROARING AUDIENCE of exactly THREE ordinary ADULT HEAD-AND-SHOULDER FIGURES behind ONE low broad arena rail. Center spectator raises BOTH FISTS, outer spectators each raise ONE arm in cheering. Exactly four raised arms total, each clearly attached to its own torso; no floating hands or extra fingers. Three natural adult heads, two tiny broad open-mouth cuts convey cheering, no detailed faces. Broad compact crowd silhouette with clear black gaps and simple plain clothing. No bell, bracket, gruff bearded portraits, anime, tiny crowd texture, text, logos or gore.",
+      "itemId": "batch89-zew-areny",
+      "revisionOf": {
+        "id": "batch89-zew-areny",
+        "name": "Zew areny",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-89/zew-areny.png",
+        "sourceSha256": "f12ee1e69ca78371e13d47562e58a912a79a4371adfdc3ef340ae54c0891a54c",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/zew-areny.svg",
+            "variant": "default",
+            "sourceSha256": "7524b5d3e92bf9189e5964e1b4a5065a2986e42c5cb8af9fbee57f0f8d06f987"
+          }
+        ],
+        "notes": "Change the image of a bell to the image of a roaring audience",
+        "feedback": {
+          "itemId": "batch89-zew-areny",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Change the image of a bell to the image of a roaring audience",
+          "updatedAt": "2026-10-15T23:35:47.791Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "zryw",
+      "name": "Zryw",
+      "owner": "twardziel",
+      "ownerLabel": "Twardziel",
+      "target": "icons/abilities/zryw.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zryw.svg",
+          "variant": "default",
+          "sourceSha256": "f566600e180e85a4ce1d0e5cad346aa40e8038faf41d5ec23b4906fb7cdd00f2"
+        }
+      ],
+      "ruleContext": "Wspinasz się na szczyt swoich możliwości. W swojej turze możesz wykonać jeszcze jedną Akcję lub Akcję Bonusową. Po użyciu tej zdolności musisz ukończyć Krótki lub Długi odpoczynek, zanim będziesz mógł jej ponownie użyć.",
+      "context": "Class/profession ability: Zryw; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 7,
+      "request": "ONE stout complete STOPWATCH with ONE thick LIGHTNING BOLT cut in black inside its broad white circular face. One broad top button and two short shoulder buttons; no hands or other face markings. Action burst and extra effort as a compact sober object emblem. Large simple shapes and clear negative space, no person, running legs, arrows, dice, numerals, letters, thin chain or detailed clockwork.",
+      "itemId": "batch90-zryw"
+    },
+    {
+      "kind": "feature",
+      "key": "zwinnosc-szczura",
+      "name": "Zwinność szczura",
+      "owner": "szczur",
+      "ownerLabel": "Szczur",
+      "target": "icons/abilities/zwinnosc-szczura.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zwinnosc-szczura.svg",
+          "variant": "default",
+          "sourceSha256": "20a0205b2ab30b9c8623635c37168cd1a87b5bc3f8394660576357d9defd58d7"
+        }
+      ],
+      "ruleContext": "Wspinacz. Potrafisz szybko i efektywnie się wspinać. Otrzymujesz Szybkość wspinania równą twojej Szybkości ruchu. Skoczek. Kiedy skaczesz, możesz testować Akrobatykę zamiast Atletyki. Maksymalną odległość skoku wyliczasz, uwzględniając wartość Zręczności, a nie Siły.",
+      "context": "Class/profession ability: Zwinność szczura; owner Szczur. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 8,
+      "request": "ONE realistically proportioned adult RAT climbing ONE thick vertical ROPE, body viewed from the side, head upward, exactly four natural small paws gripping the rope. One rounded ear, one small eye, pointed muzzle and one long curved tail complete its silhouette. Broad simple masses, two large rope cuts at most, generous black gaps. Agile climbing animal, no cute mascot, anime face, fine fur, whisker texture, extra limbs, decorative frame, writing or numbers.",
+      "itemId": "batch90-zwinnosc-szczura"
+    },
+    {
+      "kind": "class",
+      "key": "brutal",
+      "name": "Brutal",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/klasy/brutal.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/brutal.svg",
+          "variant": "default",
+          "sourceSha256": "83bf2a94a6a88bb853e8e3de117926e3e503d06a79bbd186bc69e8f9ecaeb915"
+        }
+      ],
+      "ruleContext": "",
+      "context": "class: Brutal; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 9,
+      "request": "CLASS EMBLEM: ONE powerful complete BARE CLENCHED FIST wrapped in THREE broad BROKEN CHAIN LINKS, with TWO clearly snapped chain ends beside the short wrist. Strong natural hand anatomy, coherent thumb and folded fingers, solid masses and broad black separations. Brute strength and berserk freedom, sober compact glyph. No person, head, beard portrait, armor, fine chain, text, real insignia, blood or gore.",
+      "itemId": "batch90-brutal"
+    }
+  ],
+  "ownershipRegions": [
+    {
+      "cell": 8,
+      "box": [
+        674,
+        824,
+        684,
+        835
+      ],
+      "reason": "Visually inspected 47-pixel disconnected top rope segment belongs to the rat in cell 8, not the mounted cowboy in cell 5. Assign its whole source component without drawing or clipping."
+    }
+  ]
+}
