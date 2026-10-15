@@ -2796,17 +2796,17 @@
     },
     "batch78-mutant-na-sniadanie": {
       "itemId": "batch78-mutant-na-sniadanie",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch80-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T22:16:28.642Z"
+      "updatedAt": "2026-10-15T22:19:15.770Z"
     },
     "batch78-nie-do-zdarcia": {
       "itemId": "batch78-nie-do-zdarcia",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch80-revision",
-      "notes": "",
-      "updatedAt": "2026-10-15T22:16:28.643Z"
+      "notes": "Both concepts don't work. Try something different that shows inhuman resilience to damage.",
+      "updatedAt": "2026-10-15T22:20:21.055Z"
     },
     "batch78-nie-klekam": {
       "itemId": "batch78-nie-klekam",
@@ -2838,10 +2838,10 @@
     },
     "batch79-oswajanie-zwierzat": {
       "itemId": "batch79-oswajanie-zwierzat",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch80-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T22:16:28.643Z"
+      "updatedAt": "2026-10-15T22:20:28.114Z"
     },
     "batch79-pancerna-fura": {
       "itemId": "batch79-pancerna-fura",
@@ -2859,31 +2859,31 @@
     },
     "batch79-partner": {
       "itemId": "batch79-partner",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch80-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T22:16:28.644Z"
+      "updatedAt": "2026-10-15T22:20:32.692Z"
     },
     "batch79-pirotechnika": {
       "itemId": "batch79-pirotechnika",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch80-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T22:16:28.644Z"
+      "updatedAt": "2026-10-15T22:20:38.171Z"
     },
     "batch79-pistolero": {
       "itemId": "batch79-pistolero",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch80-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T22:16:28.644Z"
+      "updatedAt": "2026-10-15T22:20:45.597Z"
     },
     "batch79-podstepny-atak": {
       "itemId": "batch79-podstepny-atak",
-      "decision": "pending",
-      "candidateId": "batch80-revision",
+      "decision": "approve",
+      "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-15T22:16:28.645Z"
+      "updatedAt": "2026-10-15T22:20:55.406Z"
     },
     "batch79-pogon": {
       "itemId": "batch79-pogon",
@@ -2898,6 +2898,83 @@
       "candidateId": "atlas-a",
       "notes": "",
       "updatedAt": "2026-10-15T22:10:38.370Z"
+    },
+    "batch80-renoma": {
+      "itemId": "batch80-renoma",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:21:00.660Z"
+    },
+    "batch80-reputacja": {
+      "itemId": "batch80-reputacja",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "We already have enough shaking hand icons. Develop a different concept.",
+      "updatedAt": "2026-10-15T22:21:40.281Z"
+    },
+    "batch81-rewolwerowiec": {
+      "itemId": "batch81-rewolwerowiec",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:21:45.284Z"
+    },
+    "batch81-rusznikarstwo": {
+      "itemId": "batch81-rusznikarstwo",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:21:54.907Z"
+    },
+    "batch81-rutyna": {
+      "itemId": "batch81-rutyna",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Different concept - a soldier with unfazed expression crawling under barbed wire and gunfire.",
+      "updatedAt": "2026-10-15T22:22:43.144Z"
+    },
+    "batch81-rzeznik": {
+      "itemId": "batch81-rzeznik",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Different idea: one hand holds up the target's arm, the other prepares to deliver a blow in the vital armpit area",
+      "updatedAt": "2026-10-15T22:24:17.564Z"
+    },
+    "batch81-rzuc-bron-i-gleba": {
+      "itemId": "batch81-rzuc-bron-i-gleba",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "The hand should be holding a gun pointing at the perpetrator. Do not change the person or his weapon on the ground.",
+      "updatedAt": "2026-10-15T22:25:00.953Z"
+    },
+    "batch81-samouk": {
+      "itemId": "batch81-samouk",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "We already have enough books. Consider a different idea.",
+      "updatedAt": "2026-10-15T22:25:25.179Z"
+    },
+    "batch81-saper": {
+      "itemId": "batch81-saper",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Two hands dexterously manipulating some object requiring high dexterity",
+      "updatedAt": "2026-10-15T22:26:36.494Z"
+    },
+    "batch81-serwisowanie": {
+      "itemId": "batch81-serwisowanie",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Put the service window on the bottom, not the side (devices aren't built like that)",
+      "updatedAt": "2026-10-15T22:27:14.822Z"
+    },
+    "batch81-skrytka": {
+      "itemId": "batch81-skrytka",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:27:29.407Z"
     }
   }
 }

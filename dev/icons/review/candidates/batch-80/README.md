@@ -53,3 +53,8 @@ targeted correction. Contact sheets were inspected at 64/32/24/16 px. The full
 collection has 656 valid PNG/SVG pairs. The gallery has 18 pending cards,
 43 options, all new candidates selected and no broken images. Evidence:
 `raw/review-preview.png` and `../../../placeholder-pass/progress-80-81.json`.
+
+Saved GM review: seven approvals installed, including the older Batch 79
+Podstępny atak selection. Nie do zdarcia and Reputacja carry their exact new
+concept requests into Batch 82. Decisions are preserved in `reviewed.json`;
+selected sources and delivered hashes are in `reviewed-installed.json`.

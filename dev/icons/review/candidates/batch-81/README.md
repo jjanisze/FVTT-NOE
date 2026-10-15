@@ -48,3 +48,8 @@ needed. Contact sheets were inspected at 64/32/24/16 px. All 656 candidate pairs
 validate; the combined gallery has 18 pending cards, 43 options and no broken
 images. Evidence: `../batch-80/raw/review-preview.png` and
 `../../../placeholder-pass/progress-80-81.json`.
+
+Saved GM review: three approvals installed. Six revisions carry their exact
+notes into Batch 82: Rutyna, Rzeźnik, Rzuć broń i gleba!, Samouk, Saper and
+Serwisowanie. `reviewed.json` preserves all decisions; `reviewed-installed.json`
+records the exact delivered sources and hashes.

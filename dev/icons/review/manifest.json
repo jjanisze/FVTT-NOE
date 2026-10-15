@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batches 80 + 81 · 18 awaiting GM review",
+  "title": "Batch 81 · 3 approved subjects delivered; 8 awaiting revision",
   "updated": "2026-10-16",
   "items": [
     {
@@ -10417,7 +10417,8 @@
           "src": "candidates/batch-78/mutant-na-sniadanie.png",
           "note": "ONE complete bare adult hand holding a practical hunting KNIFE diagonally upward, guarding against ONE large curved NONHUMAN CLAW entering from the opposite side. The hand has coherent thumb, fingers and short wrist; knife complete blade, guard and grip. Strong black gap separates blade and claw; hunter prepared against mutants. No human portrait, severed limb, blood, gore, tiny scratches or decorative rays."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch78-nie-do-zdarcia",
@@ -10607,7 +10608,8 @@
           "src": "candidates/batch-79/oswajanie-zwierzat.png",
           "note": "ONE complete BARE ADULT HAND gently PETTING THE HEAD of ONE seated realistic MUTATED DOG in side view. The dog has exactly ONE short blunt HORN on its forehead, natural canine muzzle, folded hindlegs and one long tail; otherwise sober animal anatomy. Hand joins a short forearm and rests naturally between ear and horn. Broad simple white masses, large black gaps, no full person, cute mascot, anime eyes, collar lettering or injury."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch79-pancerna-fura",
@@ -10702,7 +10704,8 @@
           "src": "candidates/batch-79/partner.png",
           "note": "ONE loyal NORMAL DOG seated attentively beside ONE plain ADULT BOOT AND LOWER TROUSER LEG. Natural adult canine profile, upright ears, complete forelegs, folded hindquarters and one tail curled on the ground. The leg stands beside the dog, clear black gap, no full human portrait or hand. No horn, mutation, petting gesture, anime mascot, fine fur or collar text. Distinct from the mutated-dog taming icon."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch79-pirotechnika",
@@ -10737,7 +10740,8 @@
           "src": "candidates/batch-79/pirotechnika.png",
           "note": "ONE compact bundle of THREE plain cylindrical EXPLOSIVE STICKS bound by TWO broad bands, with ONE short thick fuse curving upward from the top and ONE simple diagonal wrench beside the bundle. A generic fictional explosives-crafting inventory symbol, no functional internals. Broad black gaps and simple intact shapes. No diagrams, instructions, measurements, labels, digits, fine wiring, flame, person or giant cog."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch79-pistolero",
@@ -10772,7 +10776,8 @@
           "src": "candidates/batch-79/pistolero.png",
           "note": "TWO complete SEMIAUTOMATIC PISTOLS crossed symmetrically, barrels pointing upper-left and upper-right, grips down. Recognizable broad slides, complete grips and clearly empty trigger guards; one plain black cut along each slide. Equal gun size, coherent crossing with black separation. No hands, revolver cylinders, text, engraving, tiny controls, ammunition cloud or human portrait."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch79-podstepny-atak",
@@ -10807,7 +10812,8 @@
           "src": "candidates/batch-79/podstepny-atak.png",
           "note": "ONE complete BARE ADULT HAND secretly holding ONE short DAGGER behind ONE broad hanging CLOAK FOLD. The hand and dagger peek out to the right of the fabric, blade angled downward; coherent grip, thumb, short wrist and full blade. One broad black fabric fold only. Sober concealed dirty attack motif, no whole person, hooded face, victim, wound, blood, fine fabric texture or extra weapon."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch79-pogon",
@@ -10896,7 +10902,8 @@
           "src": "candidates/batch-80/renoma.png",
           "note": "ONE immaculate formal SUIT JACKET shown frontally from neck opening to waist, NO HEAD. Broad tailored lapels, ONE neat necktie, one large pocket square and two simple front buttons convey expensive presentation and social standing. Clear shoulder outline, sleeves shortened at waist level, sober practical adult garment. Broad white silhouette with black collar and lapel cuts. No portrait, logo, lettering, tiny stitching, luxury brand or ornate jewelry."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch80-reputacja",
@@ -10954,7 +10961,8 @@
           "src": "candidates/batch-81/rewolwerowiec.png",
           "note": "ONE complete classic practical REVOLVER angled upward-right beside ONE stout SIX-ROUND SPEEDLOADER below-left. Clear long straight barrel, round cylinder with two broad flute cuts, natural sloping grip and intact empty trigger guard. Speedloader is a compact round holder with six broad cartridge ends and ONE large central knob, no fine mechanism. Gunslinger quick draw and reload, no hand, face, recognizable movie character, logo, text or engraving."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch81-rusznikarstwo",
@@ -10983,7 +10991,8 @@
           "src": "candidates/batch-81/rusznikarstwo.png",
           "note": "ONE complete plain RIFLE RECEIVER AND BARREL clamped securely in a sturdy BENCH VISE, with ONE broad-handled SCREWDRIVER meeting the receiver from above. The rifle points right, with complete shoulder stock on left and simple trigger guard below; vise grips the receiver from beneath. Broad coherent workshop silhouette, just a few large functional cuts. No hands, person, tiny parts, measurements, schematics, instructions, labels or giant cog."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch81-rutyna",
@@ -11186,7 +11195,8 @@
           "src": "candidates/batch-81/skrytka.png",
           "note": "ONE rugged BOOT in clear side view with its broad HOLLOW HEEL swung slightly OPEN to reveal ONE short concealed KNIFE lying horizontally in the compartment. One simple hinge and thick heel walls, recognizable intact boot upper and sole. Strong black gap shows hidden storage. No leg, full person, hand, injury, fine laces, labels, measurements or extra weapon."
         }
-      ]
+      ],
+      "status": "resolved"
     }
   ]
 }

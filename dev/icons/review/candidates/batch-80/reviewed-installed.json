@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-16",
+  "batch": 80,
+  "approvedSubjects": 7,
+  "remainingSubjects": 11,
+  "installed": [
+    {
+      "itemId": "batch78-mutant-na-sniadanie",
+      "candidateId": "batch80-revision",
+      "source": "candidates/batch-80/mutant-na-sniadanie.png",
+      "sourceSha256": "a16a7a1831a8738f1a385dbba29dc60216433d66df6819ab24ed9951eeb37e14",
+      "files": [
+        "icons/abilities/mutant-na-sniadanie.svg",
+        "icons/abilities/mutant-na-sniadanie.webp"
+      ],
+      "svgSha256": "c3bd4a5c54825fdfd2b0a93db7eb41aefe8b97076d9259894308009ea0234b99",
+      "webpSha256": "5a4019127a119948e85965c17b97bc714bc161620e810355400ab737e9ee357f"
+    },
+    {
+      "itemId": "batch79-oswajanie-zwierzat",
+      "candidateId": "batch80-revision",
+      "source": "candidates/batch-80/oswajanie-zwierzat.png",
+      "sourceSha256": "2ba3b8ec6eaaa437290f100defc5f0eac5acecde7a846b6818d6021576bff58d",
+      "files": [
+        "icons/abilities/oswajanie-zwierzat.svg",
+        "icons/abilities/oswajanie-zwierzat.webp"
+      ],
+      "svgSha256": "525ae36004f276ccdd2d595ae408a877c0f3a9b6862bdfaf7e8e3a94645b06d4",
+      "webpSha256": "205d07789d3f971497b94f12b69977b493fe07ad61cefeb2ac04bee6e39daf86"
+    },
+    {
+      "itemId": "batch79-partner",
+      "candidateId": "batch80-revision",
+      "source": "candidates/batch-80/partner.png",
+      "sourceSha256": "fba0446ca80343e3090c7b53a43bd39a9581b408329d38cf96de70daccd90dd3",
+      "files": [
+        "icons/abilities/partner.svg",
+        "icons/abilities/partner.webp"
+      ],
+      "svgSha256": "217a5f5d3838b1c4a5f4e6754a8f41eb3ad35712708f4153c34a2725ed495041",
+      "webpSha256": "f63e0c2166b81411bc6707274c3d9f1f312de67579e8e475f3a02bf682cb3686"
+    },
+    {
+      "itemId": "batch79-pirotechnika",
+      "candidateId": "batch80-revision",
+      "source": "candidates/batch-80/pirotechnika.png",
+      "sourceSha256": "b11c265c0b264b4e7b2f81885dc7e78c3274ebef16c23e57c665d6d6bb615ef9",
+      "files": [
+        "icons/abilities/pirotechnika.svg",
+        "icons/abilities/pirotechnika.webp"
+      ],
+      "svgSha256": "0f3b5632e2bce9fae4f8c36ab01e6f126e4312a0a9e0e77c4b633ddcdd77d67e",
+      "webpSha256": "abe7c81596883b565d45848ebff39eaa0f189ec3824b04747c8e974c913f4039"
+    },
+    {
+      "itemId": "batch79-pistolero",
+      "candidateId": "batch80-revision",
+      "source": "candidates/batch-80/pistolero.png",
+      "sourceSha256": "932fb7b274ff2f25befc00bb2043a62a3a3072df4027b01f680e9e946159a78f",
+      "files": [
+        "icons/abilities/pistolero.svg",
+        "icons/abilities/pistolero.webp"
+      ],
+      "svgSha256": "2567df942844d301fdb4cb58978cf5be4f58466943f78c83ee2ec4819a915e4d",
+      "webpSha256": "5ef39c71ee0359517785c164ea14b74730a69383c06eec8da3ce7343ade225f6"
+    },
+    {
+      "itemId": "batch79-podstepny-atak",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-79/podstepny-atak.png",
+      "sourceSha256": "f229583e12f75a41fb3d1a4a9b62b331b09fa2ad91af40eb695a5f2fb00944a5",
+      "files": [
+        "icons/abilities/podstepny-atak.svg",
+        "icons/abilities/podstepny-atak.webp"
+      ],
+      "svgSha256": "4706f745d3cb5731c0fc5b0d2dacba3aac82bce5fd20f974e3bf08b4da18b79f",
+      "webpSha256": "efa15ada2c97d29d9f220c2ca52a60d859800fd9d54497586d653daf0b740712"
+    },
+    {
+      "itemId": "batch80-renoma",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-80/renoma.png",
+      "sourceSha256": "0645bca5bfbae4b5005e665c86c9e31bf5e63c684f9a7d3d01a22fc1aba298b6",
+      "files": [
+        "icons/abilities/renoma.svg",
+        "icons/abilities/renoma.webp"
+      ],
+      "svgSha256": "ddb03934e890c4c2cdeb9ec3eb70efacddbd04e14d7659b997c1998e3c668942",
+      "webpSha256": "e87cfc0911c9c6722ae6c34cdd85b3ccddf7bd0c2bf2e02f1c0c153056a606c5"
+    }
+  ]
+}

@@ -1,32 +1,22 @@
 {
   "stats": {
     "date": "2026-10-16",
-    "confirmedPlaceholderFiles": 88,
-    "referencedPlaceholderFiles": 88,
+    "confirmedPlaceholderFiles": 78,
+    "referencedPlaceholderFiles": 78,
     "unmappedPlaceholderFiles": 0,
     "activeVariants": 0,
     "referencedActiveVariants": 0,
-    "abilityPlaceholderFiles": 64,
+    "abilityPlaceholderFiles": 54,
     "missingExpectedFiles": 0,
-    "artSubjects": 88,
+    "artSubjects": 78,
     "byKind": {
       "class": 6,
       "profession": 18,
-      "feature": 64
+      "feature": 54
     },
     "scope": "Exact generator signature plus canonical class/profession definitions; no world or pack reads"
   },
   "placeholders": [
-    {
-      "kind": "feature",
-      "id": "mutant-na-sniadanie",
-      "label": "Mutant na śniadanie",
-      "owner": "lowca-mutantow",
-      "variant": "default",
-      "source": "icons/abilities/mutant-na-sniadanie.svg",
-      "sourceSha256": "75f1793b8c61d67e215c153eb5b2e4dc27f7d587a99e778ca25bc0b88e3002d9",
-      "referenced": true
-    },
     {
       "kind": "feature",
       "id": "nie-do-zdarcia",
@@ -39,92 +29,12 @@
     },
     {
       "kind": "feature",
-      "id": "oswajanie-zwierzat",
-      "label": "Oswajanie zwierząt",
-      "owner": "lowca-mutantow",
-      "variant": "default",
-      "source": "icons/abilities/oswajanie-zwierzat.svg",
-      "sourceSha256": "5fc5cad5aaecaa9d56243072e94ea7e3bee03600bc7070a38124678da0dc552d",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "partner",
-      "label": "Partner",
-      "owner": "sedzia",
-      "variant": "default",
-      "source": "icons/abilities/partner.svg",
-      "sourceSha256": "37a4bb62098769912673161ff53187408cea86af79f3c616cb33d8002dc05c56",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "pirotechnika",
-      "label": "Pirotechnika",
-      "owner": "chemik",
-      "variant": "default",
-      "source": "icons/abilities/pirotechnika.svg",
-      "sourceSha256": "2050978b23be1ccab45a97da1c85a001290b07825acce0d8183bc9e6ac011574",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "pistolero",
-      "label": "Pistolero",
-      "owner": "kowboj",
-      "variant": "default",
-      "source": "icons/abilities/pistolero.svg",
-      "sourceSha256": "ab2f88b1f8370a4770722ca05b476fea3d28ade7854b12b071a5ce7a97653c88",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "podstepny-atak",
-      "label": "Podstępny atak",
-      "owner": "zlodziej",
-      "variant": "default",
-      "source": "icons/abilities/podstepny-atak.svg",
-      "sourceSha256": "9a5dd41c0418a0fa745c1bcb60e5baee6a7cec0b1c14db85f088eaffbb7b1d39",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "renoma",
-      "label": "Renoma",
-      "owner": "mafiozo",
-      "variant": "default",
-      "source": "icons/abilities/renoma.svg",
-      "sourceSha256": "2c250443f8ff9417077e1af3d5ab755525b7b3aa3e383c7707b1c40629ef5fe2",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "reputacja",
       "label": "Reputacja",
       "owner": "najemnik",
       "variant": "default",
       "source": "icons/abilities/reputacja.svg",
       "sourceSha256": "c6171ebd37c1959b6113941043ad6f1b8d62bcd891256673b15441335d5ba3d2",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "rewolwerowiec",
-      "label": "Rewolwerowiec",
-      "owner": "kowboj",
-      "variant": "default",
-      "source": "icons/abilities/rewolwerowiec.svg",
-      "sourceSha256": "5932894cb0904c52300d34a290a16a8d353d786ccacace5058b05c1c725c5b50",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "rusznikarstwo",
-      "label": "Rusznikarstwo",
-      "owner": "chemik",
-      "variant": "default",
-      "source": "icons/abilities/rusznikarstwo.svg",
-      "sourceSha256": "dcec8366016e63f63cc169a3c17cfcc06696ada67a7db003f5ae8ac9f419eb14",
       "referenced": true
     },
     {
@@ -185,16 +95,6 @@
       "variant": "default",
       "source": "icons/abilities/serwisowanie.svg",
       "sourceSha256": "43659a4c590f9892703aeb2c53a00353153e0794c7e15840196730ebfe4afb08",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "skrytka",
-      "label": "Skrytka",
-      "owner": "kurier",
-      "variant": "default",
-      "source": "icons/abilities/skrytka.svg",
-      "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a",
       "referenced": true
     },
     {
@@ -902,19 +802,6 @@
   "subjects": [
     {
       "kind": "feature",
-      "id": "mutant-na-sniadanie",
-      "label": "Mutant na śniadanie",
-      "owner": "lowca-mutantow",
-      "files": [
-        {
-          "source": "icons/abilities/mutant-na-sniadanie.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "nie-do-zdarcia",
       "label": "Nie do zdarcia",
       "owner": "gladiator",
@@ -928,116 +815,12 @@
     },
     {
       "kind": "feature",
-      "id": "oswajanie-zwierzat",
-      "label": "Oswajanie zwierząt",
-      "owner": "lowca-mutantow",
-      "files": [
-        {
-          "source": "icons/abilities/oswajanie-zwierzat.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "partner",
-      "label": "Partner",
-      "owner": "sedzia",
-      "files": [
-        {
-          "source": "icons/abilities/partner.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "pirotechnika",
-      "label": "Pirotechnika",
-      "owner": "chemik",
-      "files": [
-        {
-          "source": "icons/abilities/pirotechnika.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "pistolero",
-      "label": "Pistolero",
-      "owner": "kowboj",
-      "files": [
-        {
-          "source": "icons/abilities/pistolero.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "podstepny-atak",
-      "label": "Podstępny atak",
-      "owner": "zlodziej",
-      "files": [
-        {
-          "source": "icons/abilities/podstepny-atak.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "renoma",
-      "label": "Renoma",
-      "owner": "mafiozo",
-      "files": [
-        {
-          "source": "icons/abilities/renoma.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "reputacja",
       "label": "Reputacja",
       "owner": "najemnik",
       "files": [
         {
           "source": "icons/abilities/reputacja.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "rewolwerowiec",
-      "label": "Rewolwerowiec",
-      "owner": "kowboj",
-      "files": [
-        {
-          "source": "icons/abilities/rewolwerowiec.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "rusznikarstwo",
-      "label": "Rusznikarstwo",
-      "owner": "chemik",
-      "files": [
-        {
-          "source": "icons/abilities/rusznikarstwo.svg",
           "variant": "default",
           "status": "generated placeholder"
         }
@@ -1116,19 +899,6 @@
       "files": [
         {
           "source": "icons/abilities/serwisowanie.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "skrytka",
-      "label": "Skrytka",
-      "owner": "kurier",
-      "files": [
-        {
-          "source": "icons/abilities/skrytka.svg",
           "variant": "default",
           "status": "generated placeholder"
         }

@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-16",
+  "batch": 81,
+  "approvedSubjects": 3,
+  "remainingSubjects": 8,
+  "installed": [
+    {
+      "itemId": "batch81-rewolwerowiec",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-81/rewolwerowiec.png",
+      "sourceSha256": "80e407d16fa5385c7180de8bd84bd333a612fc58de43ce8cdfbf107fa6a48743",
+      "files": [
+        "icons/abilities/rewolwerowiec.svg",
+        "icons/abilities/rewolwerowiec.webp"
+      ],
+      "svgSha256": "ec7a81c2588daa4d68af2a28214b69f289b5910442cf7d3cd86c300e98430a24",
+      "webpSha256": "b1641127c842f37ae86dcb9120a6dafc17535facd614b0a6e0e2b96e510a1191"
+    },
+    {
+      "itemId": "batch81-rusznikarstwo",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-81/rusznikarstwo.png",
+      "sourceSha256": "714affb395ecbdaf604cd92a82fb5b3e1073dbdc381c22f92ad9175f7e4620bf",
+      "files": [
+        "icons/abilities/rusznikarstwo.svg",
+        "icons/abilities/rusznikarstwo.webp"
+      ],
+      "svgSha256": "2b4ce7af8c93148216b9aefbb8ddaf45ca0de5152688db377d240a11406468f0",
+      "webpSha256": "9b6f9e0956ed5ff3eba4631b4175802bf43fffa1fd0d4ac7a23aaea2c02305ca"
+    },
+    {
+      "itemId": "batch81-skrytka",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-81/skrytka.png",
+      "sourceSha256": "94add179ca57df755a294bab01f4a7ee2b88a028a2eb028cf320dc50c8598d1c",
+      "files": [
+        "icons/abilities/skrytka.svg",
+        "icons/abilities/skrytka.webp"
+      ],
+      "svgSha256": "e8f2b6c0c930e57f6f1c70803dd43f14a0e0cfc29e742c788dc25494ea942dd0",
+      "webpSha256": "f94fe3eaf877541affdb51b5b122e83a6a4edd2fb1b44b3b041bcf7b39bd0c45"
+    }
+  ]
+}
