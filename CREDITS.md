@@ -160,6 +160,12 @@ Their exact selected sources and SVG/WEBP delivery hashes are archived in
 `dev/icons/review/candidates/batch-70/reviewed-installed.json` and
 `dev/icons/review/candidates/batch-71/reviewed-installed.json`.
 
+Twelve further white glyphs from Batches 72–73 were AI-generated with OpenAI's
+built-in image tool, reviewed by the GM and installed on 2026-10-15. Exact
+selected sources and delivered SVG/WEBP hashes are archived in
+`dev/icons/review/candidates/batch-72/reviewed-installed.json` and
+`dev/icons/review/candidates/batch-73/reviewed-installed.json`.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

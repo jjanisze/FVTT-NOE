@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-15",
+  "batch": 73,
+  "approvedSubjects": 7,
+  "remainingSubjects": 6,
+  "installed": [
+    {
+      "itemId": "batch73-jeden-strzal",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-73/jeden-strzal.png",
+      "sourceSha256": "208ee0a95a2c70277208b9638a4702b066a06e945110c482c5af330db7a1883b",
+      "files": [
+        "icons/abilities/jeden-strzal.svg",
+        "icons/abilities/jeden-strzal.webp"
+      ],
+      "svgSha256": "79196f7476c5fd61f824403d98be1cb4fff830fb721d4256754581d494483b91",
+      "webpSha256": "630483b1cfd0de31820e70b6e48466f05ab060509c2fe979b56125f1174c2272"
+    },
+    {
+      "itemId": "batch73-jeden-z-nas",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-73/jeden-z-nas.png",
+      "sourceSha256": "0f17a96dc23e097e51bef677ec34711da2e3df8cbc42ec4d7ce9cc293a561567",
+      "files": [
+        "icons/abilities/jeden-z-nas.svg",
+        "icons/abilities/jeden-z-nas.webp"
+      ],
+      "svgSha256": "11418dd4263bbdb2a0124f8ca593daf75c2b059204f3cf3fe5e0d8fea9fd2ae4",
+      "webpSha256": "58dddd7d223765a4c179fcaed4c45cf1300d569647e5645d8eabf9527ffefdfb"
+    },
+    {
+      "itemId": "batch73-jeden-z-nich",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-73/jeden-z-nich.png",
+      "sourceSha256": "71158ee8022ec1d84920b69e31b71385d54348dce1136c3b5558c7c2b763ad5b",
+      "files": [
+        "icons/abilities/jeden-z-nich.svg",
+        "icons/abilities/jeden-z-nich.webp"
+      ],
+      "svgSha256": "32c2ab37bd8ce0f42e3662571539839b49063dcc9918b1fb9b617c63a50506fc",
+      "webpSha256": "a158a924204c535ca36f8613cd8c9247a9c7be9100091b78e76f4700ab67d21e"
+    },
+    {
+      "itemId": "batch73-kakofonia",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-73/kakofonia.png",
+      "sourceSha256": "a3680c9c01b9b7489dd9a5ccd5c9ea30ee929894b4bef53338102c5f3f2da164",
+      "files": [
+        "icons/abilities/kakofonia.svg",
+        "icons/abilities/kakofonia.webp"
+      ],
+      "svgSha256": "4407f20995f51bb86af0ea01d392578a667a188cfb22b73a92a4f1f36348d053",
+      "webpSha256": "90f15ff09fae6bc5118ebf312d7a0592617510630ce2f05c36de2a59ae0e1205"
+    },
+    {
+      "itemId": "batch73-kamuflaz",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-73/kamuflaz.png",
+      "sourceSha256": "3327c3cb82b19b04f8a11ffa08e17f7386c19089e9720aac5936541bc9f7a122",
+      "files": [
+        "icons/abilities/kamuflaz.svg",
+        "icons/abilities/kamuflaz.webp"
+      ],
+      "svgSha256": "aeb6daa0e03e842d4dc80e13d325307e6e2dfac65fc07bdad0fddefe1bf8db0f",
+      "webpSha256": "8ff5c968cdecef54a9d9ed725a4fec48c19227092b8667f1c184ad0fa695547c"
+    },
+    {
+      "itemId": "batch73-kaskader",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-73/kaskader.png",
+      "sourceSha256": "af71a1791eb3bbd16fa0b25b8adbbff79a02d3b453bd9d15cf6257fe04aa444f",
+      "files": [
+        "icons/abilities/kaskader.svg",
+        "icons/abilities/kaskader.webp"
+      ],
+      "svgSha256": "7236077e89f00bfb27b778d21bda94be0ab95d86f94ee768d4edf554e9ae61d3",
+      "webpSha256": "f98690edfa75200f16d0e1442a14427e47a7deec01488831cc662bac60283407"
+    },
+    {
+      "itemId": "batch73-kocie-kosci",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-73/kocie-kosci.png",
+      "sourceSha256": "d638127e7f9aa16b3b8aeb91e31b54d2773f6eb15ce377feb6969127631d7d05",
+      "files": [
+        "icons/abilities/kocie-kosci.svg",
+        "icons/abilities/kocie-kosci.webp"
+      ],
+      "svgSha256": "7816008b4bd8055deb803a9ddf4c136ba2ac6c97a8c145e7bea890a5944e7e80",
+      "webpSha256": "ee5d25740ab235e515c3e32405a25e41eceba7005bcd83cc2a6ebae4d52e30db"
+    }
+  ]
+}

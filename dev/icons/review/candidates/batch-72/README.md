@@ -49,3 +49,8 @@ Final validation: both nine-mask batches pass, and the full collection contains
 review gallery shows 18 pending cards, 42 options, all new candidates selected
 and no failed images. Two isolated revision-registration tests pass. Evidence:
 `raw/review-preview.png` and `../../../placeholder-pass/progress-72-73.json`.
+
+GM review, 2026-10-15: five exact selections approved and installed. Bez
+tajemnic, Elektronik, Inteligentna obrona and Jak dbasz, tak masz carry their
+saved revisions into Batch 74. Exact decisions and delivery hashes are in
+`reviewed.json` and `reviewed-installed.json`.

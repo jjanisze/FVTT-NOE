@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-15",
+  "batch": 72,
+  "feedbackBeforeSha256": "9c604918f37c416dc18f57b32bbccf1afb25b53cedab87492dda5976b788a167",
+  "active": [
+    {
+      "id": "batch69-bez-tajemnic",
+      "name": "Bez tajemnic",
+      "decision": "revise",
+      "candidateId": "batch72-revision",
+      "selectedSource": "candidates/batch-72/bez-tajemnic.png",
+      "sourceSha256": "0699862ae28c4df642c84289fb8332264676f7f9e53914d6e2e99355b13593f7",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/bez-tajemnic.svg",
+          "variant": "default",
+          "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411"
+        }
+      ],
+      "notes": "Better, but the shoulder connection to the body (inside the looking glass) needs correction, as the head does not naturally connect to the shoulders.",
+      "feedback": {
+        "itemId": "batch69-bez-tajemnic",
+        "decision": "revise",
+        "candidateId": "batch72-revision",
+        "notes": "Better, but the shoulder connection to the body (inside the looking glass) needs correction, as the head does not naturally connect to the shoulders.",
+        "updatedAt": "2026-10-15T21:05:04.942Z"
+      }
+    },
+    {
+      "id": "batch71-dwoch-na-jednego",
+      "name": "Dwóch na jednego",
+      "decision": "approve",
+      "candidateId": "batch72-revision",
+      "selectedSource": "candidates/batch-72/dwoch-na-jednego.png",
+      "sourceSha256": "815b93eef1b821da335624d0b3ce83325e101c1beda9d3c535651a9bbdc6d773",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/dwoch-na-jednego.svg",
+          "variant": "default",
+          "sourceSha256": "abf98f1ae8f9018ba49f8b45cd85fd2a8b9fa6924e0a773dad9c08339dcf66d3"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch71-dwoch-na-jednego",
+        "decision": "approve",
+        "candidateId": "batch72-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:05:09.950Z"
+      }
+    },
+    {
+      "id": "batch71-ekspert",
+      "name": "Ekspert",
+      "decision": "approve",
+      "candidateId": "batch72-revision",
+      "selectedSource": "candidates/batch-72/ekspert.png",
+      "sourceSha256": "b72544cfd23c8300f4ba97011b5b2fe5ab25f8b745813e8a633a9a4e9df5c914",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ekspert.svg",
+          "variant": "default",
+          "sourceSha256": "232cba987b6f917ef305d366a6f0c46625c645084e43e17b491a2e681606b201"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch71-ekspert",
+        "decision": "approve",
+        "candidateId": "batch72-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:05:13.964Z"
+      }
+    },
+    {
+      "id": "batch71-elektronik",
+      "name": "Elektronik",
+      "decision": "revise",
+      "candidateId": "batch72-revision",
+      "selectedSource": "candidates/batch-72/elektronik.png",
+      "sourceSha256": "e679d4322210a5ad943ec70337324f1662d1f4059b3cea1cbde3b4b1a8970dd0",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/elektronik.svg",
+          "variant": "default",
+          "sourceSha256": "f390a9b077c44175d9cd142eb44c91d2b5ebcec9b555de04ec0e68c851576564"
+        }
+      ],
+      "notes": "Try again. Rotate the shackle outward (to the left)",
+      "feedback": {
+        "itemId": "batch71-elektronik",
+        "decision": "revise",
+        "candidateId": "batch72-revision",
+        "notes": "Try again. Rotate the shackle outward (to the left)",
+        "updatedAt": "2026-10-15T21:05:39.255Z"
+      }
+    },
+    {
+      "id": "batch71-gola-klata",
+      "name": "Goła klata",
+      "decision": "approve",
+      "candidateId": "batch72-revision",
+      "selectedSource": "candidates/batch-72/gola-klata.png",
+      "sourceSha256": "6080073d1099d1a48bc1b93b26c7cac9cbc09018abff5a66c9f0c96627d19dfa",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/gola-klata.svg",
+          "variant": "default",
+          "sourceSha256": "96223da7b4372786dd758e23ca14db7c4c44b8f731e301fb0d1cca1547db1407"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch71-gola-klata",
+        "decision": "approve",
+        "candidateId": "batch72-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:05:43.733Z"
+      }
+    },
+    {
+      "id": "batch72-hakerstwo",
+      "name": "Hakerstwo",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-72/hakerstwo.png",
+      "sourceSha256": "dbc162ad9a0e5905121a52197de75d853c6a4686e95f4170065d432a60950bd8",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/hakerstwo.svg",
+          "variant": "default",
+          "sourceSha256": "8fcff882ddb01cff3baa85928c1b79317f431775fc3b342a0c009303cf337424"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch72-hakerstwo",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:05:52.507Z"
+      }
+    },
+    {
+      "id": "batch72-inteligentna-obrona",
+      "name": "Inteligentna obrona",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-72/inteligentna-obrona.png",
+      "sourceSha256": "3caeb5205fdeaac2c8d3e000083886f48bade82f3e6dd86dabc9bcfbbf91ab08",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/inteligentna-obrona.svg",
+          "variant": "default",
+          "sourceSha256": "5b7e57821da7b2a5b79ca7ed7f2ea853bb24fc69438852d979e9f58436f251e1"
+        }
+      ],
+      "notes": "Add some way to indicate that the character is defending not with agility, but by predicting the opponent. Maybe a formula or a sequence or something indicating defense by outthinking the opponent.",
+      "feedback": {
+        "itemId": "batch72-inteligentna-obrona",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Add some way to indicate that the character is defending not with agility, but by predicting the opponent. Maybe a formula or a sequence or something indicating defense by outthinking the opponent.",
+        "updatedAt": "2026-10-15T21:07:09.651Z"
+      }
+    },
+    {
+      "id": "batch72-ja-i-moj-gang",
+      "name": "Ja i mój gang!",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-72/ja-i-moj-gang.png",
+      "sourceSha256": "b92d859a408eaeb717bcd413e11594ffa628797c9ca556919a184fa60102563c",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ja-i-moj-gang.svg",
+          "variant": "default",
+          "sourceSha256": "144fa6f6e9e15324316614d4c16db94b36e42c324911e5c55c3fc6b3006f4cbc"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch72-ja-i-moj-gang",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:07:14.362Z"
+      }
+    },
+    {
+      "id": "batch72-jak-dbasz-tak-masz",
+      "name": "Jak dbasz, tak masz",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-72/jak-dbasz-tak-masz.png",
+      "sourceSha256": "057bc2b1a6351793f3a5243b836516bf42ff7f8e3964833221edc23f932debf5",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/jak-dbasz-tak-masz.svg",
+          "variant": "default",
+          "sourceSha256": "1858ccf0a0018938a0f1d49497cc3414762297e7176c434791d8511f2d06b632"
+        }
+      ],
+      "notes": "The finger of the hand holding the gun should be on the trigger guard , not on the trigger itself",
+      "feedback": {
+        "itemId": "batch72-jak-dbasz-tak-masz",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "The finger of the hand holding the gun should be on the trigger guard , not on the trigger itself",
+        "updatedAt": "2026-10-15T21:08:00.397Z"
+      }
+    }
+  ]
+}

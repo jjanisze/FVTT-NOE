@@ -1,18 +1,18 @@
 {
   "stats": {
     "date": "2026-10-15",
-    "confirmedPlaceholderFiles": 136,
-    "referencedPlaceholderFiles": 135,
+    "confirmedPlaceholderFiles": 124,
+    "referencedPlaceholderFiles": 123,
     "unmappedPlaceholderFiles": 1,
     "activeVariants": 1,
     "referencedActiveVariants": 0,
-    "abilityPlaceholderFiles": 112,
+    "abilityPlaceholderFiles": 100,
     "missingExpectedFiles": 0,
-    "artSubjects": 135,
+    "artSubjects": 123,
     "byKind": {
       "class": 6,
       "profession": 18,
-      "feature": 111
+      "feature": 99
     },
     "scope": "Exact generator signature plus canonical class/profession definitions; no world or pack reads"
   },
@@ -29,52 +29,12 @@
     },
     {
       "kind": "feature",
-      "id": "dwoch-na-jednego",
-      "label": "Dwóch na jednego",
-      "owner": "ganger",
-      "variant": "default",
-      "source": "icons/abilities/dwoch-na-jednego.svg",
-      "sourceSha256": "abf98f1ae8f9018ba49f8b45cd85fd2a8b9fa6924e0a773dad9c08339dcf66d3",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "ekspert",
-      "label": "Ekspert",
-      "owner": "cwaniak",
-      "variant": "default",
-      "source": "icons/abilities/ekspert.svg",
-      "sourceSha256": "232cba987b6f917ef305d366a6f0c46625c645084e43e17b491a2e681606b201",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "elektronik",
       "label": "Elektronik",
       "owner": "zlodziej",
       "variant": "default",
       "source": "icons/abilities/elektronik.svg",
       "sourceSha256": "f390a9b077c44175d9cd142eb44c91d2b5ebcec9b555de04ec0e68c851576564",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "gola-klata",
-      "label": "Goła klata",
-      "owner": "brutal",
-      "variant": "default",
-      "source": "icons/abilities/gola-klata.svg",
-      "sourceSha256": "96223da7b4372786dd758e23ca14db7c4c44b8f731e301fb0d1cca1547db1407",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "hakerstwo",
-      "label": "Hakerstwo",
-      "owner": "monter",
-      "variant": "default",
-      "source": "icons/abilities/hakerstwo.svg",
-      "sourceSha256": "8fcff882ddb01cff3baa85928c1b79317f431775fc3b342a0c009303cf337424",
       "referenced": true
     },
     {
@@ -89,52 +49,12 @@
     },
     {
       "kind": "feature",
-      "id": "ja-i-moj-gang",
-      "label": "Ja i mój gang!",
-      "owner": "ganger",
-      "variant": "default",
-      "source": "icons/abilities/ja-i-moj-gang.svg",
-      "sourceSha256": "144fa6f6e9e15324316614d4c16db94b36e42c324911e5c55c3fc6b3006f4cbc",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "jak-dbasz-tak-masz",
       "label": "Jak dbasz, tak masz",
       "owner": "zolnierz",
       "variant": "default",
       "source": "icons/abilities/jak-dbasz-tak-masz.svg",
       "sourceSha256": "1858ccf0a0018938a0f1d49497cc3414762297e7176c434791d8511f2d06b632",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "jeden-strzal",
-      "label": "Jeden strzał",
-      "owner": "zabojca",
-      "variant": "default",
-      "source": "icons/abilities/jeden-strzal.svg",
-      "sourceSha256": "10ac2815b3f1a04de8a13b648591e46e9073af4b6ca9db9ce83bc85349e38af5",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "jeden-z-nas",
-      "label": "Jeden z nas",
-      "owner": "sedzia",
-      "variant": "default",
-      "source": "icons/abilities/jeden-z-nas.svg",
-      "sourceSha256": "28fa080a15a9a3e2b8dd8f3f49ea93fa3dbb178673188b1e5cfe264f05a5a31b",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "jeden-z-nich",
-      "label": "Jeden z nich",
-      "owner": "ganger",
-      "variant": "default",
-      "source": "icons/abilities/jeden-z-nich.svg",
-      "sourceSha256": "aa8b2735ea1d8c400cb474fd3a0ec3dcf9ae52ab87cde86fc3b6f078466f4443",
       "referenced": true
     },
     {
@@ -149,52 +69,12 @@
     },
     {
       "kind": "feature",
-      "id": "kakofonia",
-      "label": "Kakofonia",
-      "owner": "gwiazda",
-      "variant": "default",
-      "source": "icons/abilities/kakofonia.svg",
-      "sourceSha256": "3a2c179ee0daa35e59e80857907a37548a47e5bc2279f49dee9e14a450205121",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "kamuflaz",
-      "label": "Kamuflaż",
-      "owner": "zabojca",
-      "variant": "default",
-      "source": "icons/abilities/kamuflaz.svg",
-      "sourceSha256": "2e42997c538547908929c5ba2d36652efa7a66429facc1809b7849b49093f50b",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "kaskader",
-      "label": "Kaskader",
-      "owner": "wojownik-autostrady",
-      "variant": "default",
-      "source": "icons/abilities/kaskader.svg",
-      "sourceSha256": "0ae034225b437ef358ec5775f92884b68a0d9355593fa7ef197f6b423cd90c78",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "klusownik",
       "label": "Kłusownik",
       "owner": "zwiadowca",
       "variant": "default",
       "source": "icons/abilities/klusownik.svg",
       "sourceSha256": "6fff1379ce2c2409ce200ab84a898fc371a8434b6a6b6808baf68b77df161091",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "kocie-kosci",
-      "label": "Kocie kości",
-      "owner": "zlodziej",
-      "variant": "default",
-      "source": "icons/abilities/kocie-kosci.svg",
-      "sourceSha256": "e64aec557d717b15492bd8565218d67c72ee3f0669a81d2da0e33e7ded075e2a",
       "referenced": true
     },
     {
@@ -1394,64 +1274,12 @@
     },
     {
       "kind": "feature",
-      "id": "dwoch-na-jednego",
-      "label": "Dwóch na jednego",
-      "owner": "ganger",
-      "files": [
-        {
-          "source": "icons/abilities/dwoch-na-jednego.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "ekspert",
-      "label": "Ekspert",
-      "owner": "cwaniak",
-      "files": [
-        {
-          "source": "icons/abilities/ekspert.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "elektronik",
       "label": "Elektronik",
       "owner": "zlodziej",
       "files": [
         {
           "source": "icons/abilities/elektronik.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "gola-klata",
-      "label": "Goła klata",
-      "owner": "brutal",
-      "files": [
-        {
-          "source": "icons/abilities/gola-klata.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "hakerstwo",
-      "label": "Hakerstwo",
-      "owner": "monter",
-      "files": [
-        {
-          "source": "icons/abilities/hakerstwo.svg",
           "variant": "default",
           "status": "generated placeholder"
         }
@@ -1472,64 +1300,12 @@
     },
     {
       "kind": "feature",
-      "id": "ja-i-moj-gang",
-      "label": "Ja i mój gang!",
-      "owner": "ganger",
-      "files": [
-        {
-          "source": "icons/abilities/ja-i-moj-gang.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "jak-dbasz-tak-masz",
       "label": "Jak dbasz, tak masz",
       "owner": "zolnierz",
       "files": [
         {
           "source": "icons/abilities/jak-dbasz-tak-masz.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "jeden-strzal",
-      "label": "Jeden strzał",
-      "owner": "zabojca",
-      "files": [
-        {
-          "source": "icons/abilities/jeden-strzal.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "jeden-z-nas",
-      "label": "Jeden z nas",
-      "owner": "sedzia",
-      "files": [
-        {
-          "source": "icons/abilities/jeden-z-nas.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "jeden-z-nich",
-      "label": "Jeden z nich",
-      "owner": "ganger",
-      "files": [
-        {
-          "source": "icons/abilities/jeden-z-nich.svg",
           "variant": "default",
           "status": "generated placeholder"
         }
@@ -1550,64 +1326,12 @@
     },
     {
       "kind": "feature",
-      "id": "kakofonia",
-      "label": "Kakofonia",
-      "owner": "gwiazda",
-      "files": [
-        {
-          "source": "icons/abilities/kakofonia.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "kamuflaz",
-      "label": "Kamuflaż",
-      "owner": "zabojca",
-      "files": [
-        {
-          "source": "icons/abilities/kamuflaz.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "kaskader",
-      "label": "Kaskader",
-      "owner": "wojownik-autostrady",
-      "files": [
-        {
-          "source": "icons/abilities/kaskader.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "klusownik",
       "label": "Kłusownik",
       "owner": "zwiadowca",
       "files": [
         {
           "source": "icons/abilities/klusownik.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "kocie-kosci",
-      "label": "Kocie kości",
-      "owner": "zlodziej",
-      "files": [
-        {
-          "source": "icons/abilities/kocie-kosci.svg",
           "variant": "default",
           "status": "generated placeholder"
         }

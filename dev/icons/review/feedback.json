@@ -2418,10 +2418,10 @@
     },
     "batch69-bez-tajemnic": {
       "itemId": "batch69-bez-tajemnic",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch72-revision",
-      "notes": "",
-      "updatedAt": "2026-10-15T20:52:45.664Z"
+      "notes": "Better, but the shoulder connection to the body (inside the looking glass) needs correction, as the head does not naturally connect to the shoulders.",
+      "updatedAt": "2026-10-15T21:05:04.942Z"
     },
     "batch69-bezlitosny-przywodca": {
       "itemId": "batch69-bezlitosny-przywodca",
@@ -2495,10 +2495,10 @@
     },
     "batch71-dwoch-na-jednego": {
       "itemId": "batch71-dwoch-na-jednego",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch72-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T20:52:45.671Z"
+      "updatedAt": "2026-10-15T21:05:09.950Z"
     },
     "batch71-dziewiec-zyc": {
       "itemId": "batch71-dziewiec-zyc",
@@ -2509,17 +2509,17 @@
     },
     "batch71-ekspert": {
       "itemId": "batch71-ekspert",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch72-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T20:52:45.677Z"
+      "updatedAt": "2026-10-15T21:05:13.964Z"
     },
     "batch71-elektronik": {
       "itemId": "batch71-elektronik",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch72-revision",
-      "notes": "",
-      "updatedAt": "2026-10-15T20:52:45.678Z"
+      "notes": "Try again. Rotate the shackle outward (to the left)",
+      "updatedAt": "2026-10-15T21:05:39.255Z"
     },
     "batch71-emiter-emp": {
       "itemId": "batch71-emiter-emp",
@@ -2551,10 +2551,101 @@
     },
     "batch71-gola-klata": {
       "itemId": "batch71-gola-klata",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch72-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T20:52:45.679Z"
+      "updatedAt": "2026-10-15T21:05:43.733Z"
+    },
+    "batch72-hakerstwo": {
+      "itemId": "batch72-hakerstwo",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:05:52.507Z"
+    },
+    "batch72-inteligentna-obrona": {
+      "itemId": "batch72-inteligentna-obrona",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Add some way to indicate that the character is defending not with agility, but by predicting the opponent. Maybe a formula or a sequence or something indicating defense by outthinking the opponent.",
+      "updatedAt": "2026-10-15T21:07:09.651Z"
+    },
+    "batch72-ja-i-moj-gang": {
+      "itemId": "batch72-ja-i-moj-gang",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:07:14.362Z"
+    },
+    "batch72-jak-dbasz-tak-masz": {
+      "itemId": "batch72-jak-dbasz-tak-masz",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "The finger of the hand holding the gun should be on the trigger guard , not on the trigger itself",
+      "updatedAt": "2026-10-15T21:08:00.397Z"
+    },
+    "batch73-jeden-strzal": {
+      "itemId": "batch73-jeden-strzal",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:08:05.130Z"
+    },
+    "batch73-jeden-z-nas": {
+      "itemId": "batch73-jeden-z-nas",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:08:09.862Z"
+    },
+    "batch73-jeden-z-nich": {
+      "itemId": "batch73-jeden-z-nich",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:08:15.173Z"
+    },
+    "batch73-jezdziec": {
+      "itemId": "batch73-jezdziec",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Correct the man's unnatural silhouette",
+      "updatedAt": "2026-10-15T21:10:05.224Z"
+    },
+    "batch73-kakofonia": {
+      "itemId": "batch73-kakofonia",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:10:14.253Z"
+    },
+    "batch73-kamuflaz": {
+      "itemId": "batch73-kamuflaz",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:10:19.943Z"
+    },
+    "batch73-kaskader": {
+      "itemId": "batch73-kaskader",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:10:25.048Z"
+    },
+    "batch73-klusownik": {
+      "itemId": "batch73-klusownik",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "The trap is poorly drawn. Redraw the trap, with a central pivot/hinge mechanism.",
+      "updatedAt": "2026-10-15T21:11:25.687Z"
+    },
+    "batch73-kocie-kosci": {
+      "itemId": "batch73-kocie-kosci",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:11:37.564Z"
     }
   }
 }

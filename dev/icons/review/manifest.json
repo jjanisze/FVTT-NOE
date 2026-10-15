@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batches 72 + 73 · 18 awaiting GM review",
+  "title": "Batch 73 · 7 approved subjects delivered; 6 awaiting revision",
   "updated": "2026-10-15",
   "items": [
     {
@@ -8989,7 +8989,8 @@
           "src": "candidates/batch-71/dwoch-na-jednego.png",
           "note": "ONE plain full-body adult silhouette at centre, flanked by TWO large clenched fists converging from left and right at torso level. The central figure raises their forearms defensively. Clear gaps between the two incoming fists and the complete human figure; a coordinated two-on-one melee attack. Smooth featureless head and natural adult proportions, no beard, face portrait, anime, injuries, blood, extra fists or decorative arrows."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch71-dziewiec-zyc",
@@ -9054,7 +9055,8 @@
           "src": "candidates/batch-71/ekspert.png",
           "note": "One complete adult hand using a sturdy mechanical vernier CALIPER to measure a large plain hexagonal bolt head. Broad coherent caliper jaws grip the bolt, one clear sliding beam and a simple thumb position. Precise expert workmanship shown through the actual tool. No ruler ticks, digits, labels, generic cog, face, extra hand, scattered parts or tiny engraving."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch71-elektronik",
@@ -9244,7 +9246,8 @@
           "src": "candidates/batch-71/gola-klata.png",
           "note": "One plain ANDROGYNOUS adult upper torso, cropped from the base of the neck to just above the waist, front three-quarter view. Natural ordinary athletic build, bare shoulders and chest represented as one modest abstract solid silhouette with just three broad anatomical cuts. One short near-miss stroke passes outside a shoulder to imply unarmoured evasiveness. No head or portrait, no armor, helmet or shield, no nipples, erotic detail, bodybuilder muscles, scars or anime anatomy."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch72-hakerstwo",
@@ -9273,7 +9276,8 @@
           "src": "candidates/batch-72/hakerstwo.png",
           "note": "One rugged OPEN LAPTOP, three-quarter front view, with ONE large square processor symbol on its screen and two broad right-angle circuit tracks. A single compact plug/cable enters the laptop's side. Thick practical casing, complete screen hinge and simplified keyboard indicated by two broad rows only. Computer expertise and programming, no person, hooded hacker portrait, text, letters, digits, code lines, logos or tiny keyboard keys."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch72-inteligentna-obrona",
@@ -9331,7 +9335,8 @@
           "src": "candidates/batch-72/ja-i-moj-gang.png",
           "note": "THREE generic adult full-body silhouettes in a tight triangular fighting formation: one broad central figure a little ahead, two smaller allies behind on either side, all holding clenched fists ready at chest height. Clear black gaps between the three complete bodies and their arms. Strong group solidarity, plain practical clothes and smooth featureless heads, no gruff face portrait, pointing hand, extra people, banner, emblem, tiny details or gore."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch72-jak-dbasz-tak-masz",
@@ -9389,7 +9394,8 @@
           "src": "candidates/batch-73/jeden-strzal.png",
           "note": "ONE complete upright rifle cartridge centered inside ONE bold circular scope reticle. The cartridge has a clear pointed bullet, straight casing and broad base rim; the reticle uses four short thick inward crosshair bars, leaving clear black gaps around the cartridge. A single prepared precise shot. No second bullet, numerals, writing, gun, eye, face, target rings, fine engraving or decorative stars."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch73-jeden-z-nas",
@@ -9418,7 +9424,8 @@
           "src": "candidates/batch-73/jeden-z-nas.png",
           "note": "ONE complete adult handshake beneath ONE plain shield-shaped law-enforcement badge with a single broad five-point star cut in its centre. Both bare hands have coherent thumbs, fingers and short wrists. The badge is generic, unbranded and unlettered; no real agency insignia. Compact recognition and professional solidarity motif, no human faces, extra hands, names, numerals, ornate wreath or tiny detail."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch73-jeden-z-nich",
@@ -9447,7 +9454,8 @@
           "src": "candidates/batch-73/jeden-z-nich.png",
           "note": "One bare adult upper arm and forearm with a clenched fist, showing ONE bold simple SKULL TATTOO as a black negative-space emblem on the upper arm. The tattoo has two large eye holes and one solid block jaw, no fine teeth or ornament. A tough generic gang affiliation motif, not a recognizable gang logo. Complete arm silhouette, broad black cuts, no person portrait, other tattoo, lettering, symbols, injury, blood or gore."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch73-jezdziec",
@@ -9505,7 +9513,8 @@
           "src": "candidates/batch-73/kakofonia.png",
           "note": "One plain generic adult head and small shoulders with TWO complete hands pressed over the ears. THREE short broad irregular angular sound wedges approach the head from the sides, conveying harsh discordant noise. Smooth simple head, no detailed facial expression, no beard or portrait; coherent fingers, wrists and ear placement. No music notes, text, exclamation marks, anime face, tiny jagged noise texture or extra hands."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch73-kamuflaz",
@@ -9534,7 +9543,8 @@
           "src": "candidates/batch-73/kamuflaz.png",
           "note": "One generic adult sniper head and shoulders concealed in a simple practical GHILLIE HOOD behind THREE broad rough-edged leaves. A single plain rifle barrel projects to the right through the foliage. The hood and leaves merge into one compact camouflage silhouette with large black gaps, no face details or eyes. Clear complete barrel, simple natural plant shapes, no dense grass texture, micro-fringe, anime, portrait, logos or text."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch73-kaskader",
@@ -9563,7 +9573,8 @@
           "src": "candidates/batch-73/kaskader.png",
           "note": "ONE complete rugged compact CAR in side profile, nose slightly raised, airborne as it jumps a narrow gap between TWO low ledge edges. One broad motion sweep behind the car conveys momentum. Two large visible wheels, thick body and just two broad window cuts; no driver or fine machinery. Keep the whole car and both ledge ends inside the cell. No second car, digits, logos, flames, explosion or playful arrows."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch73-klusownik",
@@ -9621,7 +9632,8 @@
           "src": "candidates/batch-73/kocie-kosci.png",
           "note": "ONE geometrically coherent ISOMETRIC CUBE die with a large simple CAT-PAW PRINT cut into the front white face: one broad pad and four large toe dots. The visible flat top face has one pip and the right side has two pips. Straight edges meet at consistent shared vertices; broad black seams separate the three white planes. Compact feline luck/resource motif. No whole cat, other die, bone, numeral, lettering, cylinder, rounded tub, extra face or fine dots."
         }
-      ]
+      ],
+      "status": "resolved"
     }
   ]
 }

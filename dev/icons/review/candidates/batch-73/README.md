@@ -41,3 +41,7 @@ with 584 PNG/SVG pairs, and the 18-card combined review page has no broken
 images. The previews were inspected at 64/32/24/16 px; no standalone correction
 was needed. Combined evidence is in `../../../placeholder-pass/progress-72-73.json`
 and `../batch-72/raw/review-preview.png`.
+
+GM review, 2026-10-15: seven exact selections approved and installed. Jeździec
+and Kłusownik carry saved anatomy/hinge corrections into Batch 74. Exact
+decisions and delivered hashes are in `reviewed.json` / `reviewed-installed.json`.

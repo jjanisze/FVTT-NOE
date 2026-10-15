@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-15",
+  "batch": 72,
+  "approvedSubjects": 5,
+  "remainingSubjects": 13,
+  "installed": [
+    {
+      "itemId": "batch71-dwoch-na-jednego",
+      "candidateId": "batch72-revision",
+      "source": "candidates/batch-72/dwoch-na-jednego.png",
+      "sourceSha256": "815b93eef1b821da335624d0b3ce83325e101c1beda9d3c535651a9bbdc6d773",
+      "files": [
+        "icons/abilities/dwoch-na-jednego.svg",
+        "icons/abilities/dwoch-na-jednego.webp"
+      ],
+      "svgSha256": "efd1983ed049ae7d47e8260fcf2eaae8590dde7adb20abed9baa78137cdfb335",
+      "webpSha256": "13b9a1306fdb95ff93da7074eda18a2d8995f21e4a7d5482fcaf277b1ceca8b7"
+    },
+    {
+      "itemId": "batch71-ekspert",
+      "candidateId": "batch72-revision",
+      "source": "candidates/batch-72/ekspert.png",
+      "sourceSha256": "b72544cfd23c8300f4ba97011b5b2fe5ab25f8b745813e8a633a9a4e9df5c914",
+      "files": [
+        "icons/abilities/ekspert.svg",
+        "icons/abilities/ekspert.webp"
+      ],
+      "svgSha256": "446f1f0a01f5000909cd061d013f7ed79831da4537f1c988ff6f18679a51b3ef",
+      "webpSha256": "882555876a81951379ccddd98d105483a826407bbd267e3872dd51dc323b0acf"
+    },
+    {
+      "itemId": "batch71-gola-klata",
+      "candidateId": "batch72-revision",
+      "source": "candidates/batch-72/gola-klata.png",
+      "sourceSha256": "6080073d1099d1a48bc1b93b26c7cac9cbc09018abff5a66c9f0c96627d19dfa",
+      "files": [
+        "icons/abilities/gola-klata.svg",
+        "icons/abilities/gola-klata.webp"
+      ],
+      "svgSha256": "012fa33eb0c054694f96fc8e8ef5216498dc8234f349de3265a10512965949ff",
+      "webpSha256": "99b453ea96e3400e58fc9f799b32b8cdb79c5e5945f1e442d875a9a484b2a5ba"
+    },
+    {
+      "itemId": "batch72-hakerstwo",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-72/hakerstwo.png",
+      "sourceSha256": "dbc162ad9a0e5905121a52197de75d853c6a4686e95f4170065d432a60950bd8",
+      "files": [
+        "icons/abilities/hakerstwo.svg",
+        "icons/abilities/hakerstwo.webp"
+      ],
+      "svgSha256": "b5f1c37fdafad394757d73150bc27775624a1e0d7a7ca5b3d4abea84b0c16fd8",
+      "webpSha256": "7f7cc2647762b2521bd22f0c0fecd23378688928841a4f3842fcdad0b84935fc"
+    },
+    {
+      "itemId": "batch72-ja-i-moj-gang",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-72/ja-i-moj-gang.png",
+      "sourceSha256": "b92d859a408eaeb717bcd413e11594ffa628797c9ca556919a184fa60102563c",
+      "files": [
+        "icons/abilities/ja-i-moj-gang.svg",
+        "icons/abilities/ja-i-moj-gang.webp"
+      ],
+      "svgSha256": "4b700ca91756e558fae472b08b859fb12ba6075b5b46eb4ea3f8fe6fedf1c0e0",
+      "webpSha256": "d5e34a09c131dbb4610458d76b00c0028fbd2f1cc053114296b20ef8191ab9f1"
+    }
+  ]
+}
