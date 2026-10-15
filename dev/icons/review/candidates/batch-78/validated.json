@@ -1,0 +1,16 @@
+{
+  "batch": 78,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 10,
+  "candidateHashes": {
+    "kondycha": "61fe2970af08d487cc1f02f9b3890ba508a7c4003c6d498b6d7c9d685f479e58",
+    "maszyna-do-zabijania": "69447c610f05b587e7943480fbaed9fa20f62f0aefd120855a48efd02327f5bc",
+    "motywacja": "263a81c01f8dee26822442cc4acb410feca20007deb03a4c98aeef2cccd1ead8",
+    "mutant-na-sniadanie": "129785321a24ccab916a1bf45e9eeac6b6566cdb2438fdfc2373e942dcb7cbd3",
+    "nie-do-zdarcia": "fe5fdfa5785c7b33f6e5b0d578ca36dd44a596c13b24eec2ad0ec2dca25308f7",
+    "nie-klekam": "165256e2846d319f77f148c63c49728f54557618f46891befbbeaaea207bd90f",
+    "obelga": "1cbd5e6cd4e145637ffa30b1006e4a8131407c9cabb1629ca66c6d93f3431663",
+    "obsluga-pancerza": "de2aa052799c99635ca1f470fef64b99769cef17e1f69af3229c0b9c6327d8b1",
+    "odwazny-czy-glupi": "be8cd928953b60e5759ea4a96c5a49d1accdbc8740e51184235dedb1d719b1bb"
+  }
+}

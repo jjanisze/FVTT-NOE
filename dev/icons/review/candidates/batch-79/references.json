@@ -1,0 +1,59 @@
+{
+  "role": "Exact native targets, not style inputs",
+  "files": [
+    {
+      "key": "oswajanie-zwierzat",
+      "source": "icons/abilities/oswajanie-zwierzat.svg",
+      "variant": "default",
+      "sourceSha256": "5fc5cad5aaecaa9d56243072e94ea7e3bee03600bc7070a38124678da0dc552d"
+    },
+    {
+      "key": "pancerna-fura",
+      "source": "icons/abilities/pancerna-fura.svg",
+      "variant": "default",
+      "sourceSha256": "ad03acdc92b3e15d2689f8caadc7d0609b58bce1fbe5601ab1cde783441fbcc9"
+    },
+    {
+      "key": "paranoja",
+      "source": "icons/abilities/paranoja.svg",
+      "variant": "default",
+      "sourceSha256": "334dfbff614a3cab3be29ebb4ba450b0d0545f5ea20f1814ebb0101cc1b69973"
+    },
+    {
+      "key": "partner",
+      "source": "icons/abilities/partner.svg",
+      "variant": "default",
+      "sourceSha256": "37a4bb62098769912673161ff53187408cea86af79f3c616cb33d8002dc05c56"
+    },
+    {
+      "key": "pirotechnika",
+      "source": "icons/abilities/pirotechnika.svg",
+      "variant": "default",
+      "sourceSha256": "2050978b23be1ccab45a97da1c85a001290b07825acce0d8183bc9e6ac011574"
+    },
+    {
+      "key": "pistolero",
+      "source": "icons/abilities/pistolero.svg",
+      "variant": "default",
+      "sourceSha256": "ab2f88b1f8370a4770722ca05b476fea3d28ade7854b12b071a5ce7a97653c88"
+    },
+    {
+      "key": "podstepny-atak",
+      "source": "icons/abilities/podstepny-atak.svg",
+      "variant": "default",
+      "sourceSha256": "9a5dd41c0418a0fa745c1bcb60e5baee6a7cec0b1c14db85f088eaffbb7b1d39"
+    },
+    {
+      "key": "pogon",
+      "source": "icons/abilities/pogon.svg",
+      "variant": "default",
+      "sourceSha256": "03bdb94245452bc8e4b2bed022b27294276b1339306ff87f8624a374f1a3143a"
+    },
+    {
+      "key": "pogromca",
+      "source": "icons/abilities/pogromca.svg",
+      "variant": "default",
+      "sourceSha256": "03bdb94245452bc8e4b2bed022b27294276b1339306ff87f8624a374f1a3143a"
+    }
+  ]
+}

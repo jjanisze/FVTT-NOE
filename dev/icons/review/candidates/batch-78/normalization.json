@@ -1,0 +1,65 @@
+[
+  {
+    "key": "kondycha",
+    "source": "raw/batch-78-atlas-a.png, cell 1",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "maszyna-do-zabijania",
+    "source": "raw/batch-78-atlas-a.png, cell 2",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "motywacja",
+    "source": "raw/batch-78-atlas-a.png, cell 3",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "mutant-na-sniadanie",
+    "source": "raw/batch-78-atlas-a.png, cell 4",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 394,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "nie-do-zdarcia",
+    "source": "raw/batch-78-atlas-a.png, cell 5",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "nie-klekam",
+    "source": "raw/batch-78-atlas-a.png, cell 6",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "obelga",
+    "source": "raw/batch-78-atlas-a.png, cell 7",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "obsluga-pancerza",
+    "source": "raw/batch-78-atlas-a.png, cell 8",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "odwazny-czy-glupi",
+    "source": "raw/batch-78-atlas-a.png, cell 9",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  }
+]

@@ -1,0 +1,275 @@
+{
+  "date": "2026-10-15",
+  "batch": 78,
+  "generalFeedback": "Follow exact saved revisions. Broad white glyphs; varied objects, hands and ordinary adults; no repeated gruff male portraits, anime or dithering.",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "kondycha",
+      "name": "Kondycha",
+      "owner": "twardziel",
+      "ownerLabel": "Twardziel",
+      "target": "icons/abilities/kondycha.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/kondycha.svg",
+          "variant": "default",
+          "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f"
+        },
+        {
+          "source": "icons/abilities/kondycha_active.svg",
+          "variant": "legacy-active",
+          "sourceSha256": "fe94e499463c22895956f7b690560a97d315a576f5dc27d3d5140c5010c7fbf1"
+        }
+      ],
+      "ruleContext": "Kiedy brakuje ci sił, bierzesz głęboki oddech i walczysz dalej. W Akcji Bonusowej możesz odzyskać Punkty Wytrzymałości w liczbie 1k8 + twój poziom Twardziela. Możesz skorzystać z tej zdolności tyle razy, ile wynosi twój modyfikator Kondycji. Zdolność odnawia się po ukończeniu Długiego odpoczynku.",
+      "context": "Class/profession ability: Kondycha; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "The approved glyph is shared by these exact base/active filenames. Existing hotbar code supplies the active pulsing frame; no mechanics or styling code changes.",
+      "cell": 1,
+      "request": "REVISION of reference cell 1: KEEP THE EXACT EXISTING FIGURE AND POSE: determined adult rising, lowered head, planted feet, one hand on thigh and other fist down. Change ONLY by adding ONE broad UPWARD ARROW BEHIND the character to show getting up. The arrow rises beside and behind the left shoulder, with a thick stem and one simple triangular head; clear black separation keeps the existing body readable. Preserve clothing, anatomy, proportions, expression and pose. This specifically requested sober arrow overrides the general no-decorative-arrows rule. No new person or anime.",
+      "itemId": "batch74-kondycha",
+      "revisionOf": {
+        "id": "batch74-kondycha",
+        "name": "Kondycha",
+        "decision": "revise",
+        "candidateId": "batch76-revision",
+        "selectedSource": "candidates/batch-76/kondycha.png",
+        "sourceSha256": "93073810dc787a2002a9ee64affb9d9b1023c5992aa8355b4fe09f5516636a7e",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/kondycha.svg",
+            "variant": "default",
+            "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f"
+          },
+          {
+            "source": "icons/abilities/kondycha_active.svg",
+            "variant": "legacy-active",
+            "sourceSha256": "fe94e499463c22895956f7b690560a97d315a576f5dc27d3d5140c5010c7fbf1"
+          }
+        ],
+        "notes": "Almost perfect. Add an arrow behind the character, illustrating him getting up. Keep the character and the pose.",
+        "feedback": {
+          "itemId": "batch74-kondycha",
+          "decision": "revise",
+          "candidateId": "batch76-revision",
+          "notes": "Almost perfect. Add an arrow behind the character, illustrating him getting up. Keep the character and the pose.",
+          "updatedAt": "2026-10-15T21:44:58.313Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "maszyna-do-zabijania",
+      "name": "Maszyna do zabijania",
+      "owner": "najemnik",
+      "ownerLabel": "Najemnik",
+      "target": "icons/abilities/maszyna-do-zabijania.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/maszyna-do-zabijania.svg",
+          "variant": "default",
+          "sourceSha256": "bf846c0d06aaf67a251b1c02723bad0ff64fb927cbe0e7403f79722605cf8045"
+        }
+      ],
+      "ruleContext": "Kiedy jesteś w Berserku, zyskujesz: Promocja [B]. Możesz wykonać dodatkowo jeden Atak wręcz w Akcji Bonusowej. Zwód. Raz w rundzie możesz wykonać jeden Atak wręcz oparty na Sile z Ułatwieniem.",
+      "context": "Class/profession ability: Maszyna do zabijania; owner Najemnik. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "request": "REVISION of reference cell 2. Keep exactly SEVEN SIMPLE SKULLS in a miniature THREE-ROW THREE-COLUMN tally: top row THREE, middle row THREE, bottom row ONLY ONE AT LEFT; bottom-middle and bottom-right EMPTY BLACK. REMOVE ALL individual diagonal slashes. Instead draw EXACTLY TWO CONTINUOUS STRAIGHT HORIZONTAL STRIKE-THROUGH LINES: one crosses the ENTIRE TOP ROW from left of first skull through all three skulls and the black gaps to right of third skull; one crosses the ENTIRE MIDDLE ROW in the same way. Long broad WHITE bars, with a thin black separation edge where crossing white skulls so each bar reads as ONE UNBROKEN LINE. Bottom-left skull is unstruck. No separate per-skull strikes, diagonal marks, extra skulls or inner grid. All of this stays inside ONE outer atlas cell.",
+      "itemId": "batch75-maszyna-do-zabijania",
+      "revisionOf": {
+        "id": "batch75-maszyna-do-zabijania",
+        "name": "Maszyna do zabijania",
+        "decision": "revise",
+        "candidateId": "batch76-revision",
+        "selectedSource": "candidates/batch-76/maszyna-do-zabijania.png",
+        "sourceSha256": "83a32cf1c44ddc37d768e61312d067e62b1e905530418b24621ae27e28e6b8c6",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/maszyna-do-zabijania.svg",
+            "variant": "default",
+            "sourceSha256": "bf846c0d06aaf67a251b1c02723bad0ff64fb927cbe0e7403f79722605cf8045"
+          }
+        ],
+        "notes": "Close. Instead of striking through INDIVIDUAL SKULLS, the TWO ENTIRE ROWS should be stricken through with HORIZONAL LINES",
+        "feedback": {
+          "itemId": "batch75-maszyna-do-zabijania",
+          "decision": "revise",
+          "candidateId": "batch76-revision",
+          "notes": "Close. Instead of striking through INDIVIDUAL SKULLS, the TWO ENTIRE ROWS should be stricken through with HORIZONAL LINES",
+          "updatedAt": "2026-10-15T21:46:28.835Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "motywacja",
+      "name": "Motywacja",
+      "owner": "cwaniak",
+      "ownerLabel": "Cwaniak",
+      "target": "icons/abilities/motywacja.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/motywacja.svg",
+          "variant": "default",
+          "sourceSha256": "bcda91b7757cd11b9788e8ca5578d415ead01ae547b242ba46eecbc7c255adce"
+        }
+      ],
+      "ruleContext": "Motywujesz towarzysza za pomocą słów lub muzyki. Kiedy twój sojusznik wykonuje dowolny test, możesz w swojej Reakcji zwiększyć jego szanse na sukces. Sojusznik musi się znajdować w zasięgu 18 metrów od ciebie, a twoja Reakcja musi nastąpić przed poznaniem efektu testu. Sojusznik dodaje kość Motywacji, do swojego Testu k20. Wartość kości Motywacji określa tabela Zdolności klasowych Cwaniaka. Możesz użyć tej zdolność tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po Krótkim odpoczynku.",
+      "context": "Class/profession ability: Motywacja; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "request": "COMPLETELY NEW CONCEPT replacing the megaphone and die in reference cell 3. A cheerful ordinary adult COACH on the LEFT gives ONE clear THUMBS-UP toward a barely conscious exhausted adult BOXER seated slumped on a plain corner stool on the RIGHT. Coach leans encouragingly toward boxer, with one broad simple smile; boxer has drooping head and two large boxing gloves resting limply on thighs. Two coherent natural adult bodies, plain practical sports clothes, short neutral hair, no beard portrait, no exaggerated expression, no anime, no ring ropes, blood or injury. Simplify into broad white silhouettes and large black gaps, not detailed illustration. Keep the full compact encouraging gesture readable at tiny size.",
+      "itemId": "batch77-motywacja",
+      "revisionOf": {
+        "id": "batch77-motywacja",
+        "name": "Motywacja",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-77/motywacja.png",
+        "sourceSha256": "6969362aede30064d4f4ab62825dc638a8dbefad255664dd5882a6e7dc4bd7de",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/motywacja.svg",
+            "variant": "default",
+            "sourceSha256": "bcda91b7757cd11b9788e8ca5578d415ead01ae547b242ba46eecbc7c255adce"
+          }
+        ],
+        "notes": "Need a different concept. Maybe a cheerful coach with his thumbs up encouraging a barely conscious boxer?",
+        "feedback": {
+          "itemId": "batch77-motywacja",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Need a different concept. Maybe a cheerful coach with his thumbs up encouraging a barely conscious boxer?",
+          "updatedAt": "2026-10-15T21:51:23.570Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "mutant-na-sniadanie",
+      "name": "Mutant na śniadanie",
+      "owner": "lowca-mutantow",
+      "ownerLabel": "Łowca Mutantów",
+      "target": "icons/abilities/mutant-na-sniadanie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/mutant-na-sniadanie.svg",
+          "variant": "default",
+          "sourceSha256": "75f1793b8c61d67e215c153eb5b2e4dc27f7d587a99e778ca25bc0b88e3002d9"
+        }
+      ],
+      "ruleContext": "Trochę tego tałatajstwa już zdechło dzięki tobie. Wiesz najlepiej, jak z nimi walczyć i jak się przed nimi bronić. Refleks łowcy. Kiedy rozpoczynasz walkę z mutantem lub potworem, zyskujesz premię do Inicjatywy, równą twojej Premii Biegłości. Zabójca mutantów. Kiedy walczysz z mutantem lub potworem, możesz raz w rundzie zaatakować go z Ułatwieniem. Unik łowcy [R]. Jeśli zostajesz trafiony atakiem przez mutanta lub potwora, możesz użyć Reakcji, żeby wobec tego ataku podnieść swoją TT o wartość twojej Premii Biegłości.",
+      "context": "Class/profession ability: Mutant na śniadanie; owner Łowca Mutantów. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "request": "ONE complete bare adult hand holding a practical hunting KNIFE diagonally upward, guarding against ONE large curved NONHUMAN CLAW entering from the opposite side. The hand has coherent thumb, fingers and short wrist; knife complete blade, guard and grip. Strong black gap separates blade and claw; hunter prepared against mutants. No human portrait, severed limb, blood, gore, tiny scratches or decorative rays.",
+      "itemId": "batch78-mutant-na-sniadanie"
+    },
+    {
+      "kind": "feature",
+      "key": "nie-do-zdarcia",
+      "name": "Nie do zdarcia",
+      "owner": "gladiator",
+      "ownerLabel": "Gladiator",
+      "target": "icons/abilities/nie-do-zdarcia.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/nie-do-zdarcia.svg",
+          "variant": "default",
+          "sourceSha256": "2415ac9a0eb191d6b5a62d4dfa4cd279193ab027f2b8ccb63424891669c03f1b"
+        }
+      ],
+      "ruleContext": "Każde trafienie, które zadałoby ci obrażenia krytyczne, zadaje zamiast tego normalne obrażenia. To nic, że obrywasz siekierą w głowę lub kulką prosto w serce. To wcale nie było w głowę tylko w ucho, a serce masz po drugiej stronie!",
+      "context": "Class/profession ability: Nie do zdarcia; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 5,
+      "request": "ONE sturdy BARE ADULT FOREARM held upright defensively, with ONE visibly FLATTENED BULLET glancing away beside it and TWO short broad impact strokes. Complete clenched fist and wrist, strong uninjured human arm, broad contours and sparse black anatomical cuts. The arm's extraordinary toughness is the motif. No armor, wound, gore, bodybuilder portrait, extra hands or fine stippling.",
+      "itemId": "batch78-nie-do-zdarcia"
+    },
+    {
+      "kind": "feature",
+      "key": "nie-klekam",
+      "name": "Nie klękam",
+      "owner": "twardziel",
+      "ownerLabel": "Twardziel",
+      "target": "icons/abilities/nie-klekam.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/nie-klekam.svg",
+          "variant": "default",
+          "sourceSha256": "2b9024095583328cc8e8691e95e227163fc4fb2be30650b494391757e4b8cb17"
+        }
+      ],
+      "ruleContext": "Twoje doświadczenie bojowe pozwala ci przetrwać w najtrudniejszych sytuacjach. Masz biegłość we wszystkich Rzutach Obronnych.",
+      "context": "Class/profession ability: Nie klękam; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 6,
+      "request": "ONE generic ADULT standing absolutely UPRIGHT, feet planted apart, shoulders level and hands calmly clenched at sides, resisting hardship. One simple broad protective arch curves behind the shoulders. Smooth featureless head, ordinary adult proportions and plain practical shirt/trousers. Full coherent body with broad black gaps between arms and torso, both legs visible. No beard, gruff portrait, kneeling, cape, superhero costume, anime or intricate shield.",
+      "itemId": "batch78-nie-klekam"
+    },
+    {
+      "kind": "feature",
+      "key": "obelga",
+      "name": "Obelga",
+      "owner": "cwaniak",
+      "ownerLabel": "Cwaniak",
+      "target": "icons/abilities/obelga.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/obelga.svg",
+          "variant": "default",
+          "sourceSha256": "f8c8d712dc18d26ae769bee4bff8b17ce67b6aa36773113b6126437c4f3d195d"
+        }
+      ],
+      "ruleContext": "Zamiast wykonywać akcję Atakowanie, możesz obrazić istotę w zasięgu 18 metrów, która cię widzi i słyszy. Istota nie musi cię rozumieć, ponieważ sam ton twojego głosu ocieka pogardą. Jeżeli do końca twojej następnej tury cel zaatakuje kogoś innego niż ty, wykonuje Testy Ataku z Utrudnieniem. Tej zdolności możesz użyć tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po ukończeniu Krótkiego odpoczynku.",
+      "context": "Class/profession ability: Obelga; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 7,
+      "request": "ONE complete BARE ADULT HAND making an unmistakable insulting MIDDLE-FINGER gesture: middle finger fully extended upright, other three fingers folded into palm, thumb across their front. Natural coherent hand anatomy, short wrist, broad white silhouette and just two black folded-knuckle cuts. No face, words, lettering, speech bubble, glove, extra fingers or fine fingernails.",
+      "itemId": "batch78-obelga"
+    },
+    {
+      "kind": "feature",
+      "key": "obsluga-pancerza",
+      "name": "Obsługa pancerza",
+      "owner": "wyjadacz-option",
+      "ownerLabel": "wyjadacz-option",
+      "target": "icons/abilities/obsluga-pancerza.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/obsluga-pancerza.svg",
+          "variant": "default",
+          "sourceSha256": "31dc7548af241a9d649a7add411298527d65ec112603fe33151aad41a830d0d2"
+        }
+      ],
+      "ruleContext": "Kiedy nosisz pancerz, otrzymujesz +2 do Trudności Trafienia.",
+      "context": "Class/profession ability: Obsługa pancerza; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 8,
+      "request": "ONE complete practical BODY-ARMOR VEST, with ONE bare adult hand pulling its broad SIDE STRAP through a large simple BUCKLE to fit it securely. Clear shoulder straps, neck opening and two large front armor plates only. Intact hand/wrist, coherent single strap and buckle. Broad black separations, no person or head, tiny stitching, labels, camouflage, tactical microdetail or giant cog.",
+      "itemId": "batch78-obsluga-pancerza"
+    },
+    {
+      "kind": "feature",
+      "key": "odwazny-czy-glupi",
+      "name": "Odważny czy głupi",
+      "owner": "ganger",
+      "ownerLabel": "Ganger",
+      "target": "icons/abilities/odwazny-czy-glupi.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/odwazny-czy-glupi.svg",
+          "variant": "default",
+          "sourceSha256": "374469ecf6d4cc708be851510518c42f24caca3ee47dcfe85af8556e6005cd84"
+        }
+      ],
+      "ruleContext": "Nie ma na tym świecie istot, które byłyby w stanie ci zagrozić. Głupi. Zyskujesz niewrażliwość na stan Przerażenie. Odważny. Wszyscy sojusznicy w odległości 9 metrów od ciebie, otrzymują premię +1k4 do RO przeciwko Przerażeniu.",
+      "context": "Class/profession ability: Odważny czy głupi; owner Ganger. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 9,
+      "request": "ONE plain generic ADULT, full body, HANDS ON HIPS and CHIN RAISED, calmly confronting ONE LARGE BESTIAL CLAW looming at the side. Confident oblivious stance, smooth featureless head, ordinary adult build, practical plain clothes and two complete planted legs. Clear black gap separates human and nonhuman threat. One person only, no beard portrait, anime, detailed monster face, gore or decorative question mark.",
+      "itemId": "batch78-odwazny-czy-glupi"
+    }
+  ]
+}

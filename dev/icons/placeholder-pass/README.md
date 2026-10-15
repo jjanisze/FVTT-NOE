@@ -75,6 +75,13 @@ subjects are now allocated; the next untouched subject is at zero-based index
 57. Check the actual review manifest before allocating further subjects;
 planned batch numbers no longer match these actual groups.
 
+After Batch 76–77 review, fifty-four subjects are delivered at fifty-five native
+SVG filenames with WEBP sidecars. The current audit leaves 99 subjects / 100
+placeholder files. Batch 78 contains three saved revisions and six fresh
+subjects; Batch 79 contains nine fresh subjects. The first 72 unique roadmap
+subjects are allocated; the next untouched subject is Renoma at zero-based
+index 72. The next free batch number is 80.
+
 The GM's durable direction is to avoid repeated gruff male survivor portraits:
 prefer the actual objects, hands, actions and generic adults, with no anime.
 That instruction is also recorded in Pipeline.md.
@@ -95,6 +102,10 @@ That instruction is also recorded in Pipeline.md.
   [exact prompts](../review/candidates/batch-76/prompts.json).
 - [Batch 77 candidates](../review/candidates/batch-77/README.md) and
   [exact prompts](../review/candidates/batch-77/prompts.json).
+- [Batch 78 candidates](../review/candidates/batch-78/README.md) and
+  [exact prompts](../review/candidates/batch-78/prompts.json).
+- [Batch 79 candidates](../review/candidates/batch-79/README.md) and
+  [exact prompts](../review/candidates/batch-79/prompts.json).
 
 The numbered `prepare_*.py` files freeze their actual
 allocations and

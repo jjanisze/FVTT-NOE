@@ -1,0 +1,65 @@
+{
+  "role": "Exact native targets, not style inputs",
+  "files": [
+    {
+      "key": "kondycha",
+      "source": "icons/abilities/kondycha.svg",
+      "variant": "default",
+      "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f"
+    },
+    {
+      "key": "kondycha",
+      "source": "icons/abilities/kondycha_active.svg",
+      "variant": "legacy-active",
+      "sourceSha256": "fe94e499463c22895956f7b690560a97d315a576f5dc27d3d5140c5010c7fbf1"
+    },
+    {
+      "key": "maszyna-do-zabijania",
+      "source": "icons/abilities/maszyna-do-zabijania.svg",
+      "variant": "default",
+      "sourceSha256": "bf846c0d06aaf67a251b1c02723bad0ff64fb927cbe0e7403f79722605cf8045"
+    },
+    {
+      "key": "motywacja",
+      "source": "icons/abilities/motywacja.svg",
+      "variant": "default",
+      "sourceSha256": "bcda91b7757cd11b9788e8ca5578d415ead01ae547b242ba46eecbc7c255adce"
+    },
+    {
+      "key": "mutant-na-sniadanie",
+      "source": "icons/abilities/mutant-na-sniadanie.svg",
+      "variant": "default",
+      "sourceSha256": "75f1793b8c61d67e215c153eb5b2e4dc27f7d587a99e778ca25bc0b88e3002d9"
+    },
+    {
+      "key": "nie-do-zdarcia",
+      "source": "icons/abilities/nie-do-zdarcia.svg",
+      "variant": "default",
+      "sourceSha256": "2415ac9a0eb191d6b5a62d4dfa4cd279193ab027f2b8ccb63424891669c03f1b"
+    },
+    {
+      "key": "nie-klekam",
+      "source": "icons/abilities/nie-klekam.svg",
+      "variant": "default",
+      "sourceSha256": "2b9024095583328cc8e8691e95e227163fc4fb2be30650b494391757e4b8cb17"
+    },
+    {
+      "key": "obelga",
+      "source": "icons/abilities/obelga.svg",
+      "variant": "default",
+      "sourceSha256": "f8c8d712dc18d26ae769bee4bff8b17ce67b6aa36773113b6126437c4f3d195d"
+    },
+    {
+      "key": "obsluga-pancerza",
+      "source": "icons/abilities/obsluga-pancerza.svg",
+      "variant": "default",
+      "sourceSha256": "31dc7548af241a9d649a7add411298527d65ec112603fe33151aad41a830d0d2"
+    },
+    {
+      "key": "odwazny-czy-glupi",
+      "source": "icons/abilities/odwazny-czy-glupi.svg",
+      "variant": "default",
+      "sourceSha256": "374469ecf6d4cc708be851510518c42f24caca3ee47dcfe85af8556e6005cd84"
+    }
+  ]
+}

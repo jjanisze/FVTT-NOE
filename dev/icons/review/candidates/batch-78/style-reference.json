@@ -1,0 +1,41 @@
+{
+  "role": "Reference cells 1-3 are EXACT selected revision subjects. Cell 1: preserve the figure and add only the requested upward arrow. Cell 2: preserve seven-skull tally but replace individual diagonal strikes with two continuous HORIZONTAL row strikes. Cell 3: entirely replace megaphone/die with the requested coach and exhausted boxer. Reference cells 4-9 are STYLE ONLY: create the new subjects below. Specific requested arrow and strike lines override general decorative-mark avoidance.",
+  "sources": [
+    {
+      "source": "dev/icons/review/candidates/batch-76/kondycha.png",
+      "sha256": "93073810dc787a2002a9ee64affb9d9b1023c5992aa8355b4fe09f5516636a7e"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-76/maszyna-do-zabijania.png",
+      "sha256": "83a32cf1c44ddc37d768e61312d067e62b1e905530418b24621ae27e28e6b8c6"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-77/motywacja.png",
+      "sha256": "6969362aede30064d4f4ab62825dc638a8dbefad255664dd5882a6e7dc4bd7de"
+    },
+    {
+      "source": "icons/abilities/jeden-strzal.webp",
+      "sha256": "630483b1cfd0de31820e70b6e48466f05ab060509c2fe979b56125f1174c2272"
+    },
+    {
+      "source": "icons/abilities/dobra-rada.webp",
+      "sha256": "fdccc87d323fa38b3bd48ec84dd4f4b2662bf64412360f1d3524778acf024da6"
+    },
+    {
+      "source": "icons/abilities/emiter-emp.webp",
+      "sha256": "e052c015b34c427698455fc79fac5cff36d25211fff085141a02440c157a1fdc"
+    },
+    {
+      "source": "icons/abilities/bez-tajemnic.webp",
+      "sha256": "1c6544d59989a4dd08c9faf2728da3f5d902adabf1886f080627ea5d90013eb7"
+    },
+    {
+      "source": "icons/abilities/kocie-kosci.webp",
+      "sha256": "ee5d25740ab235e515c3e32405a25e41eceba7005bcd83cc2a6ebae4d52e30db"
+    },
+    {
+      "source": "icons/abilities/dziewiec-zyc.webp",
+      "sha256": "0cf20df0e99b7078ccc55a513e67d81a2672d09a49374eca0815731a2aa34317"
+    }
+  ]
+}

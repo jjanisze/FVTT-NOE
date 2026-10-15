@@ -1,0 +1,196 @@
+{
+  "date": "2026-10-15",
+  "batch": 79,
+  "generalFeedback": "Follow exact saved revisions. Broad white glyphs; varied objects, hands and ordinary adults; no repeated gruff male portraits, anime or dithering.",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "oswajanie-zwierzat",
+      "name": "Oswajanie zwierząt",
+      "owner": "lowca-mutantow",
+      "ownerLabel": "Łowca Mutantów",
+      "target": "icons/abilities/oswajanie-zwierzat.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/oswajanie-zwierzat.svg",
+          "variant": "default",
+          "sourceSha256": "5fc5cad5aaecaa9d56243072e94ea7e3bee03600bc7070a38124678da0dc552d"
+        }
+      ],
+      "ruleContext": "Znajdujesz zmutowanego zwierzaka i sprawiasz, żeby łaził za tobą i wykonywał twoje polecenia. W czasie walki działa natychmiast po twojej turze, jeśli przeznaczysz swoją Akcję Bonusową na wydanie mu polecenia. Oswojone zwierzę wykonuje pełny zakres swoich akcji i walczy do utraty przytomności. Jeśli nie otrzyma żadnego polecenia, nie przemieszcza się i używa akcji Unikanie. Oswajanie zwierzęcia. Jeśli nie posiadasz żadnego oswojonego zwierzęcia, możesz poświęcić 24 godziny na szukanie odpowiedniego kandydata. Rzuć 1k6, żeby dowiedzieć się, jakie stworzenie znajdujesz (1-2: zmutowany owad, 3-4: zmutowany ssak, 5-6: zmutowany gad). Jest to zwykle osobnik słaby, ranny lub odtrącony przez swoje stado. Czas leczenia i oswajania trwa 3 dni. Oswojonemu zwierzęciu musisz nadać imię i nie możesz go nikomu sprzedać ani oddać. Musisz mu zapewniać wodę i pożywienie. ZMUTOWANY OWAD Małe zwierzę TT: 14 plus twoja Premia Biegłości INICJATYWA +6 (16) PW: 3 plus 10 x twój modyfikator Mądrości SZYBKOŚĆ: 9 m, wspinanie 9 m, kopanie 4,5 m STOPIEŃ ZRANIENIA O O O O KW k6 x ½ twojego poziomu Zwiadowcy SIŁ ZRC KON INT MDR CHA 8 (-1) 18 (+4) 14 (+2) 4 (-3) 16 (+3) 4 (-3) UMIEJĘTNOŚCI Skradanie się +6 NIEWRAŻLIWOŚĆ NA OBRAŻENIA radioaktywne, od trucizny ZMYSŁY Ślepowidzenie 9 m, Pasywna Percepcja 13 ZDOLNOŚCI Kopacz. Kiedy zakopuje się w piachu lub w ziemi, nie prowokuje ataków okazyjnych. Pajęcza wspinaczka. Może chodzić po każdej chropowatej powierzchni, nawet do góry nogami. Udźwig. Użytkowy: 16 kg. Maksymalny: 32 kg. AKCJE Ukąszenie. Atak wręcz: +4 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 6 (1k4 + 4) kłute. ZMUTOWANY SSAK Duże zwierzę TT: 11 plus twoja Premia Biegłości INICJATYWA -1 (9) PW: 9 plus 10 x twój modyfikator Mądrości SZYBKOŚĆ: 12 m, wspinanie 6 m STOPIEŃ ZRANIENIA O O O O KW k10 x ½ twojego poziomu Zwiadowcy SIŁ ZRC KON INT MDR CHA 18 (+4) 12 (+1) 12 (+1) 6 (-2) 14 (+2) 4 (-3) UMIEJĘTNOŚCI Atletyka +6 ZMYSŁY Noktowizja 18 m, Pasywna Percepcja 12 ZDOLNOŚCI Doskonałe zmysły. Ma Ułatwienie w Testach Mądrości (Percepcja) opartych na węchu i słuchu. Współpraca. Jeśli w zasięgu do 1,5 metra od przeciwnika znajduje się przytomny sojusznik, otrzymuje Ułatwienie do Testów Ataku wręcz. Udźwig. Użytkowy: 180 kg. Maksymalny: 360 kg. AKCJE Atak kończyną. Atak wręcz: +4 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 10 (2k6 + 4) obuchowe i trafiony cel otrzymuje stan Powalenie, jeśli jest rozmiaru średniego lub mniejszego. ZMUTOWANY GAD Średnie zwierzę TT: 12 plus twoja Premia Biegłości INICJATYWA +2 (12) PW: 6 plus 10 x twój modyfikator Mądrości SZYBKOŚĆ: 9 m, pływanie 18 m STOPIEŃ ZRANIENIA O O O O KW k8 x ½ twojego poziomu Zwiadowcy. SIŁ ZRC KON INT MDR CHA 14 (+2) 14 (+2) 18 (+4) 4 (-3) 12 (+1) 4 (-3) UMIEJĘTNOŚCI Percepcja +3 ZMYSŁY Termowizja 18 m, Pasywna Percepcja 13 ZDOLNOŚCI Ziemnowodny. Potrafi oddychać zarówno na lądzie, jak i pod wodą. Udźwig. Użytkowy: 70 kg. Maksymalny: 140 kg. AKCJE Ugryzienie. Atak wręcz: +2 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 5 (1k6 + 2) kłute. Trafiona istota musi zdać RO na Kondycję o ST 10, inaczej zostanie Zatruta na 1 minutę. Cel wykonuje ponowny RO na końcu swojej tury.",
+      "context": "Class/profession ability: Oswajanie zwierząt; owner Łowca Mutantów. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "ONE complete BARE ADULT HAND gently PETTING THE HEAD of ONE seated realistic MUTATED DOG in side view. The dog has exactly ONE short blunt HORN on its forehead, natural canine muzzle, folded hindlegs and one long tail; otherwise sober animal anatomy. Hand joins a short forearm and rests naturally between ear and horn. Broad simple white masses, large black gaps, no full person, cute mascot, anime eyes, collar lettering or injury.",
+      "itemId": "batch79-oswajanie-zwierzat"
+    },
+    {
+      "kind": "feature",
+      "key": "pancerna-fura",
+      "name": "Pancerna fura",
+      "owner": "wojownik-autostrady",
+      "ownerLabel": "Wojownik Autostrady",
+      "target": "icons/abilities/pancerna-fura.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pancerna-fura.svg",
+          "variant": "default",
+          "sourceSha256": "ad03acdc92b3e15d2689f8caadc7d0609b58bce1fbe5601ab1cde783441fbcc9"
+        }
+      ],
+      "ruleContext": "Twoja maszyna jest twoją twierdzą. OC. Jeśli prowadzisz pojazd mechaniczny, który daje jakąś Osłonę pasażerom, to ty i twoi pasażerowie otrzymujecie dodatkową premię do Trudności Trafienia, równą twojemu modyfikatorowi Mądrości. Premia działa, tylko kiedy pojazd jest w ruchu. AC [B]. W Akcji Bonusowej możesz uruchomić lub zatrzymać pojazd, wykonać nim Przyspieszenie, Odstąpienie lub Unikanie.",
+      "context": "Class/profession ability: Pancerna fura; owner Wojownik Autostrady. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "request": "ONE compact rugged ARMORED SUV in clear three-quarter front view. Broad bolted armor plates, two large black windshield panes, two chunky visible tires and one simple heavy front bumper. Complete recognizable vehicle with a compact cabin and covered rear, solid practical proportions. Use only a few broad structural cuts. No turret, driver, tiny bolts, texture, logos, letters or numerals.",
+      "itemId": "batch79-pancerna-fura"
+    },
+    {
+      "kind": "feature",
+      "key": "paranoja",
+      "name": "Paranoja",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/abilities/paranoja.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/paranoja.svg",
+          "variant": "default",
+          "sourceSha256": "334dfbff614a3cab3be29ebb4ba450b0d0545f5ea20f1814ebb0101cc1b69973"
+        }
+      ],
+      "ruleContext": "Twój lęk przed zagrożeniem jest tak wielki, że wszędzie spodziewasz się zasadzki. Nikt nie jest w stanie cię zaskoczyć i otrzymujesz Ułatwienie w testach Inicjatywy.",
+      "context": "Class/profession ability: Paranoja; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "request": "THREE plain NATURAL HUMAN EYE SYMBOLS arranged in a compact vigilant fan: one large horizontal eye in the center, one smaller eye above-left and one above-right angled slightly outward. Each eye is an almond silhouette with one broad black pupil, no eyelashes or shading. Three eyes watching every direction, clear broad black gaps. No anime eyes, face, portrait, rays, occult triangle or tiny detail.",
+      "itemId": "batch79-paranoja"
+    },
+    {
+      "kind": "feature",
+      "key": "partner",
+      "name": "Partner",
+      "owner": "sedzia",
+      "ownerLabel": "Sędzia",
+      "target": "icons/abilities/partner.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/partner.svg",
+          "variant": "default",
+          "sourceSha256": "37a4bb62098769912673161ff53187408cea86af79f3c616cb33d8002dc05c56"
+        }
+      ],
+      "ruleContext": "Wierny uczeń lub ulubione zwierzę to idealni partnerzy Sędziego. W tym świecie nikt nie przetrwa samotnie. Twój partner ma imię, wykonuje twoje polecenia, nawet walczy u twego boku, jeśli tylko potrafi. Może jednak zginąć, a wtedy będziesz szukać nowego. Sędzia zwykle ciągnie ze sobą młodego człowieka, który chce nauczyć się fachu… albo psa. Partner ma swoją turę zawsze po twojej turze. Nie może działać samodzielnie, więc w swojej Akcji Bonusowej wydajesz mu komendę. Jeśli nie wydasz mu żadnego polecenia, unika walki, broni się akcją Unikanie i szuka osłony. PSI PARTNER Małe zwierzę TT: 12 plus twoja Premia Biegłości INICJATYWA +4 (14) PW: 10 plus 10 x twój modyfikator z Mądrości SZYBKOŚĆ: 18 m STOPIEŃ ZRANIENIA O O O O KW k6 x twój poziom Zwiadowcy SIŁ ZRC KON INT MDR CHA 14 (+2) 14 (+2) 12 (+1) 8 (-1) 14 (+2) 6 (-2) RZUTY OBRONNE ZRC +4, MDR +4 UMIEJĘTNOŚCI Percepcja +4, Skradanie się +4 ZMYSŁY Noktowizja 18 metrów, Pasywna Percepcja 14 ZDOLNOŚCI Doskonałe zmysły. Pies ma Ułatwienie w Testach Mądrości (Percepcja) opartych na węchu i słuchu. Współpraca. Jeśli w zasięgu do 1,5 metra od przeciwnika znajduje się przytomny sojusznik, pies otrzymuje Ułatwienie do Testów Ataku wręcz. Psi bohater. Umiera na takich samych zasadach jak BG, czyli stosuje Stopnie Zranienia i wykonuje Rzuty Przeciw Śmierci. Wymagania. Pojenie skażoną wodą i nieodpowiednie karmienie może pogorszyć jego zdrowie. Udźwig. Użytkowy: 28 kg. Maksymalny: 48 kg. AKCJE Ugryzienie. Atak wręcz: +2 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 5 (1k6 + 2) kłute i trafiony cel zostaje Pochwycony, jeśli jest rozmiaru średniego lub mniejszego. Szukanie partnera. Jeśli nie masz partnera, możesz poświęcić 24 godziny na szukanie odpowiedniego kandydata. Na zbłąkanego kundla lub pełnego ideałów człowieka natkniesz się zarówno w mieście, jak i w dowolnej, zabitej dechami dziurze. Partnera nie możesz nikomu odstąpić (lub sprzedać w przypadku psa) oraz musisz mu zapewnić wodę i pożywienie. LUDZKI PARTNER Tworzysz partnera na czystej karcie postaci. Cechy: Wartości Cech Bazowych do przydzielenia: 14,14,12,12,10, 8 lub 24 punkty do dowolnego rozdzielenia. Pochodzenie: Otrzymuje Pochodzenie zgodne z miejscem jego werbunku. Punkty Wytrzymałości. 5 x twój poziom Zwiadowcy. Kości Wytrzymałości partnera to k6 i ma ich tyle, ile ty masz poziomów Zwiadowcy. Wyszkolenie w pancerzu: Może korzystać z tych pancerzy, w których ty masz wyszkolenie. Premia Biegłości: +2 (nie rośnie). Rzuty Obronne: Ma biegłość w dwóch RO wybranych przez ciebie. Atak: Może korzystać z każdej broni, w której masz biegłość. Obrażenia. Zależne od broni i jego modyfikatorów Cech Bazowych. Sztuczki. Zna jedną, wybraną przez ciebie Sztuczkę, której wymagania spełnia. Umiejętności. Ma biegłość w dwóch wybranych przez ciebie umiejętnościach lub zestawach narzędzi. Śmierć: Umiera na takich samych zasadach, jak BG, czyli stosuje Stopnie Zranienia i korzysta z Rzutów Przeciw Śmierci.",
+      "context": "Class/profession ability: Partner; owner Sędzia. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "request": "ONE loyal NORMAL DOG seated attentively beside ONE plain ADULT BOOT AND LOWER TROUSER LEG. Natural adult canine profile, upright ears, complete forelegs, folded hindquarters and one tail curled on the ground. The leg stands beside the dog, clear black gap, no full human portrait or hand. No horn, mutation, petting gesture, anime mascot, fine fur or collar text. Distinct from the mutated-dog taming icon.",
+      "itemId": "batch79-partner"
+    },
+    {
+      "kind": "feature",
+      "key": "pirotechnika",
+      "name": "Pirotechnika",
+      "owner": "chemik",
+      "ownerLabel": "Chemik",
+      "target": "icons/abilities/pirotechnika.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pirotechnika.svg",
+          "variant": "default",
+          "sourceSha256": "2050978b23be1ccab45a97da1c85a001290b07825acce0d8183bc9e6ac011574"
+        }
+      ],
+      "ruleContext": "Zupełnie ci już odwaliło i bierzesz się za robienie BUM. Dynamit i granaty, czego chcieć więcej? Potrzebne ci tylko narzędzia małego chemika, małego rusznikarza, surowce i czas. Otrzymujesz wylistowane obok schematy pirotechniczne. SCHEMATY PIROTECHNICZNE NAZWA ST PRODUKCJA SUROWCE Dynamit (laska) 15 20 godzin 19 CH, 1 MK Granat dymny 15 20 godzin 15 CH, 4 CZ, 1 MK Granat gazowy 20 30 godzin 25 CH, 4 CZ, 1 MK Granat hukowy 20 30 godzin 25 CH, 4 CZ, 1 MK Granat improwizowany 10 10 godzin 9 CH, 1 MK/MO Granat odłamkowy 20 35 godzin 30 CH, 4 CZ, 1 MK Granat zapalający 20 35 godzin 30 CH, 4 CZ, 1 MK Granat 40 mm 15 15 godzin 10 CH, 3 CZ, 2 MK IED 15 20 godzin 5 CE, 10 CH, 4 CZ, 1 MK Koktajl Mołotowa 5 1 minuta 4 CH, 1 MK Mina przeciwpiechotna 25 40 godzin 30 CH, 5 CZ, 5 MK Mina przeciwpancerna 25 60 godzin 5 CE, 40 CH, 5 CZ, 10 MK Plastik C4 (100 g) 25 50 godzin 50 CH Pocisk 60 mm 20 30 godzin 25 CH, 1 CZ, 4 MK Proch czarny (20 g) 10 5 godzin 2 CH, 3 MK/MO Proch strzelniczy (20 g) 15 10 godzin 5 CH, 5 MK/MO SUROWCE CH - Chemia CE - Części elektroniczne CZ - Części zamienne MK - Materiały konstrukcyjne MO - Materiały organiczne",
+      "context": "Class/profession ability: Pirotechnika; owner Chemik. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 5,
+      "request": "ONE compact bundle of THREE plain cylindrical EXPLOSIVE STICKS bound by TWO broad bands, with ONE short thick fuse curving upward from the top and ONE simple diagonal wrench beside the bundle. A generic fictional explosives-crafting inventory symbol, no functional internals. Broad black gaps and simple intact shapes. No diagrams, instructions, measurements, labels, digits, fine wiring, flame, person or giant cog.",
+      "itemId": "batch79-pirotechnika"
+    },
+    {
+      "kind": "feature",
+      "key": "pistolero",
+      "name": "Pistolero",
+      "owner": "kowboj",
+      "ownerLabel": "Kowboj",
+      "target": "icons/abilities/pistolero.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pistolero.svg",
+          "variant": "default",
+          "sourceSha256": "ab2f88b1f8370a4770722ca05b476fea3d28ade7854b12b071a5ce7a97653c88"
+        }
+      ],
+      "ruleContext": "Pistolet w dłoni jest dla ciebie równie naturalny jak but na stopie. Dobywanie. Jeśli nosisz jeden lub dwa pistolety w kaburach, możesz je dobyć lub schować bez zużywania darmowej interakcji z przedmiotem. Niezawodny. Pistolet w twoich rękach nigdy się nie zacina. Jednoręki. Strzelasz z pistoletu jedną ręką bez Utrudnienia. Pistolety traktujesz jako broń o właściwości lekka i poręczna. Strzał z biodra. +5 do testów Inicjatywy, jeśli trzymasz w ręce lub będziesz dobywać pistolet. Powąchaj to. Gdy celujesz z pistoletu do istoty w zasięgu 1,5 m, możesz wykonać Test Zastraszania z Ułatwieniem, używając SIŁ lub CHA.",
+      "context": "Class/profession ability: Pistolero; owner Kowboj. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 6,
+      "request": "TWO complete SEMIAUTOMATIC PISTOLS crossed symmetrically, barrels pointing upper-left and upper-right, grips down. Recognizable broad slides, complete grips and clearly empty trigger guards; one plain black cut along each slide. Equal gun size, coherent crossing with black separation. No hands, revolver cylinders, text, engraving, tiny controls, ammunition cloud or human portrait.",
+      "itemId": "batch79-pistolero"
+    },
+    {
+      "kind": "feature",
+      "key": "podstepny-atak",
+      "name": "Podstępny atak",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/abilities/podstepny-atak.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/podstepny-atak.svg",
+          "variant": "default",
+          "sourceSha256": "9a5dd41c0418a0fa745c1bcb60e5baee6a7cec0b1c14db85f088eaffbb7b1d39"
+        }
+      ],
+      "ruleContext": "Twoje ataki są nie tylko bolesne, ale i upierdliwe. Kiedy zadajesz obrażenia, używając Bolesnego ataku, możesz zamiast dodatkowych obrażeń nałożyć specjalny efekt (wymieniony poniżej) na cel. Kilka takich samych efektów się nie kumuluje. Krwawienie. Żywa istota otrzymuje 1k8 obrażeń na początku swojej tury. Krwawienie ustaje po opatrzeniu rany. Spowolnienie. Szybkość celu spada o 1k6 x 1,5 m do końca twojej następnej tury. Oślepienie. Cel zostaje Oślepiony do końca twojej następnej tury.",
+      "context": "Class/profession ability: Podstępny atak; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 7,
+      "request": "ONE complete BARE ADULT HAND secretly holding ONE short DAGGER behind ONE broad hanging CLOAK FOLD. The hand and dagger peek out to the right of the fabric, blade angled downward; coherent grip, thumb, short wrist and full blade. One broad black fabric fold only. Sober concealed dirty attack motif, no whole person, hooded face, victim, wound, blood, fine fabric texture or extra weapon.",
+      "itemId": "batch79-podstepny-atak"
+    },
+    {
+      "kind": "feature",
+      "key": "pogon",
+      "name": "Pogoń",
+      "owner": "zwiadowca",
+      "ownerLabel": "Zwiadowca",
+      "target": "icons/abilities/pogon.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pogon.svg",
+          "variant": "default",
+          "sourceSha256": "03bdb94245452bc8e4b2bed022b27294276b1339306ff87f8624a374f1a3143a"
+        }
+      ],
+      "ruleContext": "Rzuty Obronne, w których porażka oznacza otrzymanie stanu Wyczerpanie, wykonujesz z Ułatwieniem.",
+      "context": "Class/profession ability: Pogoń; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 8,
+      "request": "ONE plain generic ADULT RUNNING in a determined long stride, full natural body in side profile, opposite arm and leg forward. TWO broad short motion strokes behind the back express sustained pursuit. Smooth featureless head, ordinary adult proportions and plain practical clothes, coherent two arms and two legs. No gruff portrait, backpack clutter, anime, exaggerated muscles, decorative arrow or tiny dust marks.",
+      "itemId": "batch79-pogon"
+    },
+    {
+      "kind": "feature",
+      "key": "pogromca",
+      "name": "Pogromca",
+      "owner": "lowca-mutantow",
+      "ownerLabel": "Łowca Mutantów",
+      "target": "icons/abilities/pogromca.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pogromca.svg",
+          "variant": "default",
+          "sourceSha256": "03bdb94245452bc8e4b2bed022b27294276b1339306ff87f8624a374f1a3143a"
+        }
+      ],
+      "ruleContext": "Jeśli wydasz 100 gambli na surowce i poświęcisz 100 godzin pracy, to zbudujesz strzelbę na mutanty i potwory o wdzięcznej nazwie Pogromca. Strzela ona nabojami przypominającymi małe strzykawki napełnione chemikaliami. W czasie Długiego odpoczynku możesz stworzyć tyle naboi, ile wynosi twoja Premia Biegłości. Koszt stworzenia jednego takiego naboju to 10 gb, a trafiony nim mutant lub potwór otrzymuje obrażenia krytyczne. Naboje mogą zawierać truciznę, kwas lub po prostu eksplodować. Tylko Łowca mutantów jest biegły w używaniu Pogromcy. Nazwa: Pogromca Tryb ognia: Pojedynczy Magazynek: 1 Obrażenia: 4k6 od trucizny/kwasu/ognia Zasięg: 9/18 metrów Właściwości: Ładowanie Koszt produkcji: 10 MK, 10 CE, 80 CZ Koszt produkcji pocisku: 1 MK, 1 CZ, 8 CH",
+      "context": "Class/profession ability: Pogromca; owner Łowca Mutantów. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 9,
+      "request": "ONE rugged SINGLE-SHOT SHOTGUN in complete side profile, angled gently upward to the right, with one thick barrel, simple break-action receiver, practical shoulder stock and clear empty trigger guard. Below it ONE large SYRINGE-LIKE CHEMICAL SHOTGUN SHELL: stout short cartridge body, one broad plunger end and short pointed tip. Broad black separation makes gun and special shell distinct. A mutant-hunting weapon glyph, no person, wound, gore, labels, tiny mechanism, engraving or extra shell.",
+      "itemId": "batch79-pogromca"
+    }
+  ]
+}

@@ -1,0 +1,267 @@
+{
+  "title": "Batches 78 + 79 · 18 awaiting GM review",
+  "updated": "2026-10-15",
+  "items": [
+    {
+      "id": "batch79-oswajanie-zwierzat",
+      "name": "Oswajanie zwierząt",
+      "tier": "Batch 79 · Łowca Mutantów",
+      "batch": 79,
+      "placeholderKey": "feature:oswajanie-zwierzat",
+      "target": "icons/abilities/oswajanie-zwierzat.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/oswajanie-zwierzat.svg",
+          "variant": "default",
+          "sourceSha256": "5fc5cad5aaecaa9d56243072e94ea7e3bee03600bc7070a38124678da0dc552d"
+        }
+      ],
+      "context": "Class/profession ability: Oswajanie zwierząt; owner Łowca Mutantów. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Znajdujesz zmutowanego zwierzaka i sprawiasz, żeby łaził za tobą i wykonywał twoje polecenia. W czasie walki działa natychmiast po twojej turze, jeśli przeznaczysz swoją Akcję Bonusową na wydanie mu polecenia. Oswojone zwierzę wykonuje pełny zakres swoich akcji i walczy do utraty przytomności. Jeśli nie otrzyma żadnego polecenia, nie przemieszcza się i używa akcji Unikanie. Oswajanie zwierzęcia. Jeśli nie posiadasz żadnego oswojonego zwierzęcia, możesz poświęcić 24 godziny na szukanie odpowiedni Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete BARE ADULT HAND gently PETTING THE HEAD of ONE seated realistic MUTATED DOG in side view. The dog has exactly ONE short blunt HORN on its forehead, natural canine muzzle, folded hindlegs and one long tail; otherwise sober animal anatomy. Hand joins a short forearm and rests naturally between ear and horn. Broad simple white masses, large black gaps, no full person, cute mascot, anime eyes, collar lettering or injury.",
+      "current": {
+        "src": "/icons/abilities/oswajanie-zwierzat.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 79 · Oswajanie zwierząt",
+          "src": "candidates/batch-79/oswajanie-zwierzat.png",
+          "note": "ONE complete BARE ADULT HAND gently PETTING THE HEAD of ONE seated realistic MUTATED DOG in side view. The dog has exactly ONE short blunt HORN on its forehead, natural canine muzzle, folded hindlegs and one long tail; otherwise sober animal anatomy. Hand joins a short forearm and rests naturally between ear and horn. Broad simple white masses, large black gaps, no full person, cute mascot, anime eyes, collar lettering or injury."
+        }
+      ]
+    },
+    {
+      "id": "batch79-pancerna-fura",
+      "name": "Pancerna fura",
+      "tier": "Batch 79 · Wojownik Autostrady",
+      "batch": 79,
+      "placeholderKey": "feature:pancerna-fura",
+      "target": "icons/abilities/pancerna-fura.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pancerna-fura.svg",
+          "variant": "default",
+          "sourceSha256": "ad03acdc92b3e15d2689f8caadc7d0609b58bce1fbe5601ab1cde783441fbcc9"
+        }
+      ],
+      "context": "Class/profession ability: Pancerna fura; owner Wojownik Autostrady. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Twoja maszyna jest twoją twierdzą. OC. Jeśli prowadzisz pojazd mechaniczny, który daje jakąś Osłonę pasażerom, to ty i twoi pasażerowie otrzymujecie dodatkową premię do Trudności Trafienia, równą twojemu modyfikatorowi Mądrości. Premia działa, tylko kiedy pojazd jest w ruchu. AC [B]. W Akcji Bonusowej możesz uruchomić lub zatrzymać pojazd, wykonać nim Przyspieszenie, Odstąpienie lub Unikanie. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE compact rugged ARMORED SUV in clear three-quarter front view. Broad bolted armor plates, two large black windshield panes, two chunky visible tires and one simple heavy front bumper. Complete recognizable vehicle with a compact cabin and covered rear, solid practical proportions. Use only a few broad structural cuts. No turret, driver, tiny bolts, texture, logos, letters or numerals.",
+      "current": {
+        "src": "/icons/abilities/pancerna-fura.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 79 · Pancerna fura",
+          "src": "candidates/batch-79/pancerna-fura.png",
+          "note": "ONE compact rugged ARMORED SUV in clear three-quarter front view. Broad bolted armor plates, two large black windshield panes, two chunky visible tires and one simple heavy front bumper. Complete recognizable vehicle with a compact cabin and covered rear, solid practical proportions. Use only a few broad structural cuts. No turret, driver, tiny bolts, texture, logos, letters or numerals."
+        }
+      ]
+    },
+    {
+      "id": "batch79-paranoja",
+      "name": "Paranoja",
+      "tier": "Batch 79 · Brutal",
+      "batch": 79,
+      "placeholderKey": "feature:paranoja",
+      "target": "icons/abilities/paranoja.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/paranoja.svg",
+          "variant": "default",
+          "sourceSha256": "334dfbff614a3cab3be29ebb4ba450b0d0545f5ea20f1814ebb0101cc1b69973"
+        }
+      ],
+      "context": "Class/profession ability: Paranoja; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Twój lęk przed zagrożeniem jest tak wielki, że wszędzie spodziewasz się zasadzki. Nikt nie jest w stanie cię zaskoczyć i otrzymujesz Ułatwienie w testach Inicjatywy. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "THREE plain NATURAL HUMAN EYE SYMBOLS arranged in a compact vigilant fan: one large horizontal eye in the center, one smaller eye above-left and one above-right angled slightly outward. Each eye is an almond silhouette with one broad black pupil, no eyelashes or shading. Three eyes watching every direction, clear broad black gaps. No anime eyes, face, portrait, rays, occult triangle or tiny detail.",
+      "current": {
+        "src": "/icons/abilities/paranoja.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 79 · Paranoja",
+          "src": "candidates/batch-79/paranoja.png",
+          "note": "THREE plain NATURAL HUMAN EYE SYMBOLS arranged in a compact vigilant fan: one large horizontal eye in the center, one smaller eye above-left and one above-right angled slightly outward. Each eye is an almond silhouette with one broad black pupil, no eyelashes or shading. Three eyes watching every direction, clear broad black gaps. No anime eyes, face, portrait, rays, occult triangle or tiny detail."
+        }
+      ]
+    },
+    {
+      "id": "batch79-partner",
+      "name": "Partner",
+      "tier": "Batch 79 · Sędzia",
+      "batch": 79,
+      "placeholderKey": "feature:partner",
+      "target": "icons/abilities/partner.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/partner.svg",
+          "variant": "default",
+          "sourceSha256": "37a4bb62098769912673161ff53187408cea86af79f3c616cb33d8002dc05c56"
+        }
+      ],
+      "context": "Class/profession ability: Partner; owner Sędzia. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Wierny uczeń lub ulubione zwierzę to idealni partnerzy Sędziego. W tym świecie nikt nie przetrwa samotnie. Twój partner ma imię, wykonuje twoje polecenia, nawet walczy u twego boku, jeśli tylko potrafi. Może jednak zginąć, a wtedy będziesz szukać nowego. Sędzia zwykle ciągnie ze sobą młodego człowieka, który chce nauczyć się fachu… albo psa. Partner ma swoją turę zawsze po twojej turze. Nie może działać samodzielnie, więc w swojej Akcji Bonusowej wydajesz mu komendę. Jeśli nie wydasz mu żadnego  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE loyal NORMAL DOG seated attentively beside ONE plain ADULT BOOT AND LOWER TROUSER LEG. Natural adult canine profile, upright ears, complete forelegs, folded hindquarters and one tail curled on the ground. The leg stands beside the dog, clear black gap, no full human portrait or hand. No horn, mutation, petting gesture, anime mascot, fine fur or collar text. Distinct from the mutated-dog taming icon.",
+      "current": {
+        "src": "/icons/abilities/partner.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 79 · Partner",
+          "src": "candidates/batch-79/partner.png",
+          "note": "ONE loyal NORMAL DOG seated attentively beside ONE plain ADULT BOOT AND LOWER TROUSER LEG. Natural adult canine profile, upright ears, complete forelegs, folded hindquarters and one tail curled on the ground. The leg stands beside the dog, clear black gap, no full human portrait or hand. No horn, mutation, petting gesture, anime mascot, fine fur or collar text. Distinct from the mutated-dog taming icon."
+        }
+      ]
+    },
+    {
+      "id": "batch79-pirotechnika",
+      "name": "Pirotechnika",
+      "tier": "Batch 79 · Chemik",
+      "batch": 79,
+      "placeholderKey": "feature:pirotechnika",
+      "target": "icons/abilities/pirotechnika.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pirotechnika.svg",
+          "variant": "default",
+          "sourceSha256": "2050978b23be1ccab45a97da1c85a001290b07825acce0d8183bc9e6ac011574"
+        }
+      ],
+      "context": "Class/profession ability: Pirotechnika; owner Chemik. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zupełnie ci już odwaliło i bierzesz się za robienie BUM. Dynamit i granaty, czego chcieć więcej? Potrzebne ci tylko narzędzia małego chemika, małego rusznikarza, surowce i czas. Otrzymujesz wylistowane obok schematy pirotechniczne. SCHEMATY PIROTECHNICZNE NAZWA ST PRODUKCJA SUROWCE Dynamit (laska) 15 20 godzin 19 CH, 1 MK Granat dymny 15 20 godzin 15 CH, 4 CZ, 1 MK Granat gazowy 20 30 godzin 25 CH, 4 CZ, 1 MK Granat hukowy 20 30 godzin 25 CH, 4 CZ, 1 MK Granat improwizowany 10 10 godzin 9 CH, 1  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE compact bundle of THREE plain cylindrical EXPLOSIVE STICKS bound by TWO broad bands, with ONE short thick fuse curving upward from the top and ONE simple diagonal wrench beside the bundle. A generic fictional explosives-crafting inventory symbol, no functional internals. Broad black gaps and simple intact shapes. No diagrams, instructions, measurements, labels, digits, fine wiring, flame, person or giant cog.",
+      "current": {
+        "src": "/icons/abilities/pirotechnika.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 79 · Pirotechnika",
+          "src": "candidates/batch-79/pirotechnika.png",
+          "note": "ONE compact bundle of THREE plain cylindrical EXPLOSIVE STICKS bound by TWO broad bands, with ONE short thick fuse curving upward from the top and ONE simple diagonal wrench beside the bundle. A generic fictional explosives-crafting inventory symbol, no functional internals. Broad black gaps and simple intact shapes. No diagrams, instructions, measurements, labels, digits, fine wiring, flame, person or giant cog."
+        }
+      ]
+    },
+    {
+      "id": "batch79-pistolero",
+      "name": "Pistolero",
+      "tier": "Batch 79 · Kowboj",
+      "batch": 79,
+      "placeholderKey": "feature:pistolero",
+      "target": "icons/abilities/pistolero.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pistolero.svg",
+          "variant": "default",
+          "sourceSha256": "ab2f88b1f8370a4770722ca05b476fea3d28ade7854b12b071a5ce7a97653c88"
+        }
+      ],
+      "context": "Class/profession ability: Pistolero; owner Kowboj. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Pistolet w dłoni jest dla ciebie równie naturalny jak but na stopie. Dobywanie. Jeśli nosisz jeden lub dwa pistolety w kaburach, możesz je dobyć lub schować bez zużywania darmowej interakcji z przedmiotem. Niezawodny. Pistolet w twoich rękach nigdy się nie zacina. Jednoręki. Strzelasz z pistoletu jedną ręką bez Utrudnienia. Pistolety traktujesz jako broń o właściwości lekka i poręczna. Strzał z biodra. +5 do testów Inicjatywy, jeśli trzymasz w ręce lub będziesz dobywać pistolet. Powąchaj to. Gdy Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "TWO complete SEMIAUTOMATIC PISTOLS crossed symmetrically, barrels pointing upper-left and upper-right, grips down. Recognizable broad slides, complete grips and clearly empty trigger guards; one plain black cut along each slide. Equal gun size, coherent crossing with black separation. No hands, revolver cylinders, text, engraving, tiny controls, ammunition cloud or human portrait.",
+      "current": {
+        "src": "/icons/abilities/pistolero.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 79 · Pistolero",
+          "src": "candidates/batch-79/pistolero.png",
+          "note": "TWO complete SEMIAUTOMATIC PISTOLS crossed symmetrically, barrels pointing upper-left and upper-right, grips down. Recognizable broad slides, complete grips and clearly empty trigger guards; one plain black cut along each slide. Equal gun size, coherent crossing with black separation. No hands, revolver cylinders, text, engraving, tiny controls, ammunition cloud or human portrait."
+        }
+      ]
+    },
+    {
+      "id": "batch79-podstepny-atak",
+      "name": "Podstępny atak",
+      "tier": "Batch 79 · Złodziej",
+      "batch": 79,
+      "placeholderKey": "feature:podstepny-atak",
+      "target": "icons/abilities/podstepny-atak.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/podstepny-atak.svg",
+          "variant": "default",
+          "sourceSha256": "9a5dd41c0418a0fa745c1bcb60e5baee6a7cec0b1c14db85f088eaffbb7b1d39"
+        }
+      ],
+      "context": "Class/profession ability: Podstępny atak; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Twoje ataki są nie tylko bolesne, ale i upierdliwe. Kiedy zadajesz obrażenia, używając Bolesnego ataku, możesz zamiast dodatkowych obrażeń nałożyć specjalny efekt (wymieniony poniżej) na cel. Kilka takich samych efektów się nie kumuluje. Krwawienie. Żywa istota otrzymuje 1k8 obrażeń na początku swojej tury. Krwawienie ustaje po opatrzeniu rany. Spowolnienie. Szybkość celu spada o 1k6 x 1,5 m do końca twojej następnej tury. Oślepienie. Cel zostaje Oślepiony do końca twojej następnej tury. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete BARE ADULT HAND secretly holding ONE short DAGGER behind ONE broad hanging CLOAK FOLD. The hand and dagger peek out to the right of the fabric, blade angled downward; coherent grip, thumb, short wrist and full blade. One broad black fabric fold only. Sober concealed dirty attack motif, no whole person, hooded face, victim, wound, blood, fine fabric texture or extra weapon.",
+      "current": {
+        "src": "/icons/abilities/podstepny-atak.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 79 · Podstępny atak",
+          "src": "candidates/batch-79/podstepny-atak.png",
+          "note": "ONE complete BARE ADULT HAND secretly holding ONE short DAGGER behind ONE broad hanging CLOAK FOLD. The hand and dagger peek out to the right of the fabric, blade angled downward; coherent grip, thumb, short wrist and full blade. One broad black fabric fold only. Sober concealed dirty attack motif, no whole person, hooded face, victim, wound, blood, fine fabric texture or extra weapon."
+        }
+      ]
+    },
+    {
+      "id": "batch79-pogon",
+      "name": "Pogoń",
+      "tier": "Batch 79 · Zwiadowca",
+      "batch": 79,
+      "placeholderKey": "feature:pogon",
+      "target": "icons/abilities/pogon.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pogon.svg",
+          "variant": "default",
+          "sourceSha256": "03bdb94245452bc8e4b2bed022b27294276b1339306ff87f8624a374f1a3143a"
+        }
+      ],
+      "context": "Class/profession ability: Pogoń; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Rzuty Obronne, w których porażka oznacza otrzymanie stanu Wyczerpanie, wykonujesz z Ułatwieniem. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE plain generic ADULT RUNNING in a determined long stride, full natural body in side profile, opposite arm and leg forward. TWO broad short motion strokes behind the back express sustained pursuit. Smooth featureless head, ordinary adult proportions and plain practical clothes, coherent two arms and two legs. No gruff portrait, backpack clutter, anime, exaggerated muscles, decorative arrow or tiny dust marks.",
+      "current": {
+        "src": "/icons/abilities/pogon.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 79 · Pogoń",
+          "src": "candidates/batch-79/pogon.png",
+          "note": "ONE plain generic ADULT RUNNING in a determined long stride, full natural body in side profile, opposite arm and leg forward. TWO broad short motion strokes behind the back express sustained pursuit. Smooth featureless head, ordinary adult proportions and plain practical clothes, coherent two arms and two legs. No gruff portrait, backpack clutter, anime, exaggerated muscles, decorative arrow or tiny dust marks."
+        }
+      ]
+    },
+    {
+      "id": "batch79-pogromca",
+      "name": "Pogromca",
+      "tier": "Batch 79 · Łowca Mutantów",
+      "batch": 79,
+      "placeholderKey": "feature:pogromca",
+      "target": "icons/abilities/pogromca.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pogromca.svg",
+          "variant": "default",
+          "sourceSha256": "03bdb94245452bc8e4b2bed022b27294276b1339306ff87f8624a374f1a3143a"
+        }
+      ],
+      "context": "Class/profession ability: Pogromca; owner Łowca Mutantów. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Jeśli wydasz 100 gambli na surowce i poświęcisz 100 godzin pracy, to zbudujesz strzelbę na mutanty i potwory o wdzięcznej nazwie Pogromca. Strzela ona nabojami przypominającymi małe strzykawki napełnione chemikaliami. W czasie Długiego odpoczynku możesz stworzyć tyle naboi, ile wynosi twoja Premia Biegłości. Koszt stworzenia jednego takiego naboju to 10 gb, a trafiony nim mutant lub potwór otrzymuje obrażenia krytyczne. Naboje mogą zawierać truciznę, kwas lub po prostu eksplodować. Tylko Łowca m Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE rugged SINGLE-SHOT SHOTGUN in complete side profile, angled gently upward to the right, with one thick barrel, simple break-action receiver, practical shoulder stock and clear empty trigger guard. Below it ONE large SYRINGE-LIKE CHEMICAL SHOTGUN SHELL: stout short cartridge body, one broad plunger end and short pointed tip. Broad black separation makes gun and special shell distinct. A mutant-hunting weapon glyph, no person, wound, gore, labels, tiny mechanism, engraving or extra shell.",
+      "current": {
+        "src": "/icons/abilities/pogromca.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 79 · Pogromca",
+          "src": "candidates/batch-79/pogromca.png",
+          "note": "ONE rugged SINGLE-SHOT SHOTGUN in complete side profile, angled gently upward to the right, with one thick barrel, simple break-action receiver, practical shoulder stock and clear empty trigger guard. Below it ONE large SYRINGE-LIKE CHEMICAL SHOTGUN SHELL: stout short cartridge body, one broad plunger end and short pointed tip. Broad black separation makes gun and special shell distinct. A mutant-hunting weapon glyph, no person, wound, gore, labels, tiny mechanism, engraving or extra shell."
+        }
+      ]
+    }
+  ]
+}

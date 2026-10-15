@@ -1,0 +1,23 @@
+{
+  "batch74-kondycha": {
+    "itemId": "batch74-kondycha",
+    "decision": "revise",
+    "candidateId": "batch76-revision",
+    "notes": "Almost perfect. Add an arrow behind the character, illustrating him getting up. Keep the character and the pose.",
+    "updatedAt": "2026-10-15T21:44:58.313Z"
+  },
+  "batch75-maszyna-do-zabijania": {
+    "itemId": "batch75-maszyna-do-zabijania",
+    "decision": "revise",
+    "candidateId": "batch76-revision",
+    "notes": "Close. Instead of striking through INDIVIDUAL SKULLS, the TWO ENTIRE ROWS should be stricken through with HORIZONAL LINES",
+    "updatedAt": "2026-10-15T21:46:28.835Z"
+  },
+  "batch77-motywacja": {
+    "itemId": "batch77-motywacja",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Need a different concept. Maybe a cheerful coach with his thumbs up encouraging a barely conscious boxer?",
+    "updatedAt": "2026-10-15T21:51:23.570Z"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "batch": 79,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "oswajanie-zwierzat": "0397cbe643b9f8626e819410472b4bdec88c8fa89e439eaafd524fad4854b7d7",
+    "pancerna-fura": "63703d6c5200577d22711f46224db4976b4d97446de96329b3c088c3a20edda1",
+    "paranoja": "6bbd18177641590e478ded04615d9367edb20390d24b54e0189c34128f712285",
+    "partner": "77fbc98bffa7ddcbf1803993d7a4a2369dde0bade7d95ad660367e449b4d9321",
+    "pirotechnika": "40ac6adc564a15655bf3420dee07c885713eb6632d315b56bba34efaafba4160",
+    "pistolero": "0accc6f5ff796dc20287c83ce860c445653f436794fe31dd478a1f9eea07ae92",
+    "podstepny-atak": "f229583e12f75a41fb3d1a4a9b62b331b09fa2ad91af40eb695a5f2fb00944a5",
+    "pogon": "4a729a7ac5bae44f4ef7d108720869a398b123bce7db5e3e3cf6451b4b53795f",
+    "pogromca": "49bcf7a4baa5817bfb53931ea4667dc83b107f32332cb172e85413c40497f4da"
+  }
+}
