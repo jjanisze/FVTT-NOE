@@ -49,16 +49,20 @@ The legacy Kondycha active file is a compatibility target, not a new ability.
 No runtime code, compendia or campaign-world changes are needed for this pass.
 Only mark a placeholder delivered after the approved files exist and validate.
 
-## Actual allocations after Batch 69 review
+## Actual allocations
 
-Five approved subjects are delivered (six files); the current audit leaves
-148 subjects / 149 placeholder files. The next request is two atlases of nine.
+After Batch 69 review, five approved subjects were delivered (six files).
 Batch 70 contains the four saved revisions plus five fresh subjects. Batch 71
 contains the next nine fresh subjects. Together these consume the first 23
 unique subjects of the frozen roadmap; fourteen are fresh in this request.
-The next untouched roadmap subject is at zero-based index 23. Check the actual
-review manifest before allocating further subjects; planned batch numbers no
-longer match these actual groups.
+
+After Batch 70–71 review, eighteen subjects are delivered at nineteen native
+SVG filenames with WEBP sidecars. The current audit leaves 135 subjects / 136
+placeholder files. Batch 72 contains five revisions and four fresh subjects;
+Batch 73 contains the next nine fresh subjects. The first 36 unique roadmap
+subjects are now allocated; the next untouched subject is at zero-based index
+36. Check the actual review manifest before allocating further subjects;
+planned batch numbers no longer match these actual groups.
 
 The GM's durable direction is to avoid repeated gruff male survivor portraits:
 prefer the actual objects, hands, actions and generic adults, with no anime.
@@ -68,8 +72,13 @@ That instruction is also recorded in Pipeline.md.
   [exact prompts](../review/candidates/batch-70/prompts.json).
 - [Batch 71 candidates](../review/candidates/batch-71/README.md) and
   [exact prompts](../review/candidates/batch-71/prompts.json).
+- [Batch 72 candidates](../review/candidates/batch-72/README.md) and
+  [exact prompts](../review/candidates/batch-72/prompts.json).
+- [Batch 73 candidates](../review/candidates/batch-73/README.md) and
+  [exact prompts](../review/candidates/batch-73/prompts.json).
 
-`prepare_70_71.py` freezes these actual allocations and incoming decisions; do
-not rerun it. `compose_reference.py` only rebuilds their recorded contact sheets.
+`prepare_70_71.py` and `prepare_72_73.py` freeze their actual allocations and
+incoming decisions; do not rerun them. `compose_reference.py` only rebuilds
+their recorded contact sheets.
 `register.test.mjs` checks revision history, unrelated feedback preservation,
 idempotence and refusal of a newer GM correction in isolated fixtures.

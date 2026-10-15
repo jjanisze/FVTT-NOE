@@ -1,0 +1,37 @@
+{
+  "batch69-bez-tajemnic": {
+    "itemId": "batch69-bez-tajemnic",
+    "decision": "revise",
+    "candidateId": "batch70-revision",
+    "notes": "You also made the face too human. Correct the anatomy of the shoulders and make the face more mutant-like.",
+    "updatedAt": "2026-10-15T20:39:35.253Z"
+  },
+  "batch71-dwoch-na-jednego": {
+    "itemId": "batch71-dwoch-na-jednego",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Below the left fist is a single lone triangle. Remove it.",
+    "updatedAt": "2026-10-15T20:41:30.337Z"
+  },
+  "batch71-ekspert": {
+    "itemId": "batch71-ekspert",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "The calipers should extend past the hand",
+    "updatedAt": "2026-10-15T20:42:22.362Z"
+  },
+  "batch71-elektronik": {
+    "itemId": "batch71-elektronik",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Rotate the shackle of the padlock left",
+    "updatedAt": "2026-10-15T20:42:47.464Z"
+  },
+  "batch71-gola-klata": {
+    "itemId": "batch71-gola-klata",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Make the chest more muscular and with a healed battle scar",
+    "updatedAt": "2026-10-15T20:44:29.894Z"
+  }
+}

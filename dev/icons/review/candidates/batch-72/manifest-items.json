@@ -1,0 +1,303 @@
+{
+  "title": "Batch 72 · 9 awaiting GM review",
+  "updated": "2026-10-15",
+  "items": [
+    {
+      "id": "batch69-bez-tajemnic",
+      "name": "Bez tajemnic",
+      "tier": "Batch 72 · Łowca Mutantów",
+      "batch": 72,
+      "placeholderKey": "feature:bez-tajemnic",
+      "target": "icons/abilities/bez-tajemnic.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/bez-tajemnic.svg",
+          "variant": "default",
+          "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411"
+        }
+      ],
+      "context": "Class/profession ability: Bez tajemnic; owner Łowca Mutantów. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Znasz się na mutantach i potworach jak nikt inny. Jeśli spotkasz mutanta lub potwora i zdasz Test Inteligencji (Przyroda), zyskujesz wiedzę na jego temat. MG zdradza ci jego zwyczajową nazwę (ST 10), słabe punkty (ST 15) i trzy wybrane współczynniki (ST 20). Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 1. Keep the single large magnifying glass and broad crosshair examining a mutant head. The head must be CLEARLY NONHUMAN: a bulging sloped cranium, one blunt horn, a thick irregular ear, a short broad projecting muzzle and ONE blunt lower tusk. Use broad readable shapes, no fine teeth, stippling or gore. Correct the shoulder anatomy: head, natural neck and bust ALL face RIGHT; the near shoulder sits directly below the neck, the back/shoulder bulk extends LEFT behind it, while the chest/front contour faces RIGHT. One coherent shoulder girdle, no twisted neck, detached shoulder or reversed chest. Do not turn the mutant into a clean human with a horn. Keep the magnifier complete.",
+      "current": {
+        "src": "/icons/abilities/bez-tajemnic.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch72-revision",
+          "label": "Batch 72 · revised Bez tajemnic",
+          "src": "candidates/batch-72/bez-tajemnic.png",
+          "note": "REVISION of reference cell 1. Keep the single large magnifying glass and broad crosshair examining a mutant head. The head must be CLEARLY NONHUMAN: a bulging sloped cranium, one blunt horn, a thick irregular ear, a short broad projecting muzzle and ONE blunt lower tusk. Use broad readable shapes, no fine teeth, stippling or gore. Correct the shoulder anatomy: head, natural neck and bust ALL face RIGHT; the near shoulder sits directly below the neck, the back/shoulder bulk extends LEFT behind it, while the chest/front contour faces RIGHT. One coherent shoulder girdle, no twisted neck, detached shoulder or reversed chest. Do not turn the mutant into a clean human with a horn. Keep the magnifier complete."
+        },
+        {
+          "id": "batch70-revision",
+          "label": "Batch 70 · revised Bez tajemnic",
+          "src": "candidates/batch-70/bez-tajemnic.png",
+          "note": "REVISION of reference cell 3. Keep one large magnifying glass examining one mutant head in profile, a blunt horn and one broad crosshair on the head. Correct the anatomy so the head, neck and bust ALL face RIGHT. Mirror the torso orientation relative to the old image: the back/shoulder mass is behind the neck on the LEFT, the chest/front contour is toward the RIGHT. A single continuous natural neck joins the head to that correctly oriented torso. Do not rotate the whole image or leave a backward torso. No gore or tiny facial stippling."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 69 · Bez tajemnic",
+          "src": "candidates/batch-69/bez-tajemnic.png",
+          "note": "One large practical magnifying glass examining a simple mutant's head in profile: one broad ear, one short blunt horn and a solid neck silhouette. In the lens, one simple crosshair cut marks a vulnerable point on the head. The lens and head overlap clearly with broad black gaps, not multiple heads; no gore, tiny teeth, laboratory labels or decorative symbols."
+        }
+      ]
+    },
+    {
+      "id": "batch71-dwoch-na-jednego",
+      "name": "Dwóch na jednego",
+      "tier": "Batch 72 · Ganger",
+      "batch": 72,
+      "placeholderKey": "feature:dwoch-na-jednego",
+      "target": "icons/abilities/dwoch-na-jednego.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/dwoch-na-jednego.svg",
+          "variant": "default",
+          "sourceSha256": "abf98f1ae8f9018ba49f8b45cd85fd2a8b9fa6924e0a773dad9c08339dcf66d3"
+        }
+      ],
+      "context": "Class/profession ability: Dwóch na jednego; owner Ganger. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Uwielbiasz kopać leżącego frajera wspólnie z kumplami. Jeśli zaatakujesz wręcz istotę, która została zaatakowana w ten sam sposób przez twojego sojusznika, otrzymujesz +2 do Testów Ataku wręcz przeciwko niej, do końca twojej tury. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 2. Keep the exact concept and pose: one plain full-body adult silhouette defending between two large fists entering from left and right. REMOVE ONLY the isolated small white TRIANGLE below the LEFT incoming fist. Leave that area clean black. Keep all fists, fingers, wrists, central limbs and their relative positions complete. Do not add any replacement motion mark, triangle, debris, portrait or extra limb. Natural adult proportions, no anime.",
+      "current": {
+        "src": "/icons/abilities/dwoch-na-jednego.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch72-revision",
+          "label": "Batch 72 · revised Dwóch na jednego",
+          "src": "candidates/batch-72/dwoch-na-jednego.png",
+          "note": "REVISION of reference cell 2. Keep the exact concept and pose: one plain full-body adult silhouette defending between two large fists entering from left and right. REMOVE ONLY the isolated small white TRIANGLE below the LEFT incoming fist. Leave that area clean black. Keep all fists, fingers, wrists, central limbs and their relative positions complete. Do not add any replacement motion mark, triangle, debris, portrait or extra limb. Natural adult proportions, no anime."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 71 · Dwóch na jednego",
+          "src": "candidates/batch-71/dwoch-na-jednego.png",
+          "note": "ONE plain full-body adult silhouette at centre, flanked by TWO large clenched fists converging from left and right at torso level. The central figure raises their forearms defensively. Clear gaps between the two incoming fists and the complete human figure; a coordinated two-on-one melee attack. Smooth featureless head and natural adult proportions, no beard, face portrait, anime, injuries, blood, extra fists or decorative arrows."
+        }
+      ]
+    },
+    {
+      "id": "batch71-ekspert",
+      "name": "Ekspert",
+      "tier": "Batch 72 · Cwaniak",
+      "batch": 72,
+      "placeholderKey": "feature:ekspert",
+      "target": "icons/abilities/ekspert.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ekspert.svg",
+          "variant": "default",
+          "sourceSha256": "232cba987b6f917ef305d366a6f0c46625c645084e43e17b491a2e681606b201"
+        }
+      ],
+      "context": "Class/profession ability: Ekspert; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Wybierasz dwie umiejętności lub jedną umiejętność i jedno narzędzie, w których masz biegłość. Od tej pory specjalizujesz się w nich, więc Premia Biegłości ulega podwojeniu. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 3. Keep one bare adult hand holding mechanical vernier CALIPERS with their jaws on the LEFT, measuring the hexagonal hardware. Correct the caliper beam: the same rigid straight horizontal rail must continue THROUGH the sliding jaw and visibly project to the RIGHT BEYOND THE ENTIRE HAND by a clear substantial length. Show an uninterrupted exposed rail tail to the right of the hand, not a rail ending at the thumb or disappearing into the fist. Complete jaws and coherent five-finger grip. No ruler ticks, digits, tiny engraving or extra tool.",
+      "current": {
+        "src": "/icons/abilities/ekspert.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch72-revision",
+          "label": "Batch 72 · revised Ekspert",
+          "src": "candidates/batch-72/ekspert.png",
+          "note": "REVISION of reference cell 3. Keep one bare adult hand holding mechanical vernier CALIPERS with their jaws on the LEFT, measuring the hexagonal hardware. Correct the caliper beam: the same rigid straight horizontal rail must continue THROUGH the sliding jaw and visibly project to the RIGHT BEYOND THE ENTIRE HAND by a clear substantial length. Show an uninterrupted exposed rail tail to the right of the hand, not a rail ending at the thumb or disappearing into the fist. Complete jaws and coherent five-finger grip. No ruler ticks, digits, tiny engraving or extra tool."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 71 · Ekspert",
+          "src": "candidates/batch-71/ekspert.png",
+          "note": "One complete adult hand using a sturdy mechanical vernier CALIPER to measure a large plain hexagonal bolt head. Broad coherent caliper jaws grip the bolt, one clear sliding beam and a simple thumb position. Precise expert workmanship shown through the actual tool. No ruler ticks, digits, labels, generic cog, face, extra hand, scattered parts or tiny engraving."
+        }
+      ]
+    },
+    {
+      "id": "batch71-elektronik",
+      "name": "Elektronik",
+      "tier": "Batch 72 · Złodziej",
+      "batch": 72,
+      "placeholderKey": "feature:elektronik",
+      "target": "icons/abilities/elektronik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/elektronik.svg",
+          "variant": "default",
+          "sourceSha256": "f390a9b077c44175d9cd142eb44c91d2b5ebcec9b555de04ec0e68c851576564"
+        }
+      ],
+      "context": "Class/profession ability: Elektronik; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Elektroniczne zabezpieczenia rozgryzasz równie łatwo, co te tradycyjne. A nawet łatwiej. Zawsze, kiedy mierzysz się z elektronicznym systemem zabezpieczeń, otrzymujesz Ułatwienie do testu narzędzi małego ślusarza lub małego elektronika. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 4. Keep the upright electronic padlock body, large chip, two broad circuit traces and screwdriver. Rotate/swing the U-shaped metal SHACKLE toward the LEFT around its engaged hinge: the arch leans about 45 degrees counterclockwise and projects to the LEFT of the body, the free tip is clearly swung away to the left with an open gap. One end remains naturally hinged in the top of the lock. Do not rotate the whole lock or leave the shackle upright opening right. Keep the body, chip and screwdriver orientation unchanged. No tiny circuitry or text.",
+      "current": {
+        "src": "/icons/abilities/elektronik.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch72-revision",
+          "label": "Batch 72 · revised Elektronik",
+          "src": "candidates/batch-72/elektronik.png",
+          "note": "REVISION of reference cell 4. Keep the upright electronic padlock body, large chip, two broad circuit traces and screwdriver. Rotate/swing the U-shaped metal SHACKLE toward the LEFT around its engaged hinge: the arch leans about 45 degrees counterclockwise and projects to the LEFT of the body, the free tip is clearly swung away to the left with an open gap. One end remains naturally hinged in the top of the lock. Do not rotate the whole lock or leave the shackle upright opening right. Keep the body, chip and screwdriver orientation unchanged. No tiny circuitry or text."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 71 · Elektronik",
+          "src": "candidates/batch-71/elektronik.png",
+          "note": "One robust electronic PADLOCK shown open, with a large square circuit chip cut into its body and just TWO broad right-angle circuit traces. One short practical screwdriver meets the lock's service opening. Clear complete shackle, thick body and intact tool handle. Electronic security bypass, not a pile of components. No digits, labels, huge cog, sparks, face or delicate circuit pattern."
+        }
+      ]
+    },
+    {
+      "id": "batch71-gola-klata",
+      "name": "Goła klata",
+      "tier": "Batch 72 · Brutal",
+      "batch": 72,
+      "placeholderKey": "feature:gola-klata",
+      "target": "icons/abilities/gola-klata.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/gola-klata.svg",
+          "variant": "default",
+          "sourceSha256": "96223da7b4372786dd758e23ca14db7c4c44b8f731e301fb0d1cca1547db1407"
+        }
+      ],
+      "context": "Class/profession ability: Goła klata; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy nie nosisz żadnego pancerza, hełmu ani tarczy twoja Trudność Trafienia wynosi 10 + twoje modyfikatory Zręczności i Kondycji. Ta zdolność nie łączy się z podobnie działającymi zdolnościami innych klas. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 5. Keep the headless bare adult upper torso and two near-miss strokes. Make the chest and shoulders distinctly MORE MUSCULAR: broad developed pectorals, rounded deltoids and a thick upper chest, with restrained natural adult anatomy. Add ONE clearly HEALED BATTLE SCAR diagonally across the upper chest, represented by a broad short black groove with two short cross-notches. Closed old scar only, no open wound, blood, stitches, gore, nipples or body hair. No head or face, no armour, shield, erotic detail or anime anatomy. Strong broad stencil cuts, not fine muscle hatching.",
+      "current": {
+        "src": "/icons/abilities/gola-klata.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch72-revision",
+          "label": "Batch 72 · revised Goła klata",
+          "src": "candidates/batch-72/gola-klata.png",
+          "note": "REVISION of reference cell 5. Keep the headless bare adult upper torso and two near-miss strokes. Make the chest and shoulders distinctly MORE MUSCULAR: broad developed pectorals, rounded deltoids and a thick upper chest, with restrained natural adult anatomy. Add ONE clearly HEALED BATTLE SCAR diagonally across the upper chest, represented by a broad short black groove with two short cross-notches. Closed old scar only, no open wound, blood, stitches, gore, nipples or body hair. No head or face, no armour, shield, erotic detail or anime anatomy. Strong broad stencil cuts, not fine muscle hatching."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 71 · Goła klata",
+          "src": "candidates/batch-71/gola-klata.png",
+          "note": "One plain ANDROGYNOUS adult upper torso, cropped from the base of the neck to just above the waist, front three-quarter view. Natural ordinary athletic build, bare shoulders and chest represented as one modest abstract solid silhouette with just three broad anatomical cuts. One short near-miss stroke passes outside a shoulder to imply unarmoured evasiveness. No head or portrait, no armor, helmet or shield, no nipples, erotic detail, bodybuilder muscles, scars or anime anatomy."
+        }
+      ]
+    },
+    {
+      "id": "batch72-hakerstwo",
+      "name": "Hakerstwo",
+      "tier": "Batch 72 · Monter",
+      "batch": 72,
+      "placeholderKey": "feature:hakerstwo",
+      "target": "icons/abilities/hakerstwo.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/hakerstwo.svg",
+          "variant": "default",
+          "sourceSha256": "8fcff882ddb01cff3baa85928c1b79317f431775fc3b342a0c009303cf337424"
+        }
+      ],
+      "context": "Class/profession ability: Hakerstwo; owner Monter. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Czerwone oczy, blada cera, skrzywione plecy i słownictwo, którego nikt nie rozumie. Już raz pomylili cię z mutantem i drogo za to zapłacili. W Posterunku byłbyś szychą, ale nie przyjmujesz rozkazów od głupszych od siebie. Otrzymujesz biegłość w narzędziach małego hakera. Potrafisz produkować sprzęt komputerowy i drony, ale potrzebujesz do tego narzędzi małego hakera, małego elektronika, surowców i czasu. Otrzymujesz wylistowane poniżej schematy hakerskie. SCHEMATY HAKERSKIE NAZWA ST PRODUKCJA SU Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "One rugged OPEN LAPTOP, three-quarter front view, with ONE large square processor symbol on its screen and two broad right-angle circuit tracks. A single compact plug/cable enters the laptop's side. Thick practical casing, complete screen hinge and simplified keyboard indicated by two broad rows only. Computer expertise and programming, no person, hooded hacker portrait, text, letters, digits, code lines, logos or tiny keyboard keys.",
+      "current": {
+        "src": "/icons/abilities/hakerstwo.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 72 · Hakerstwo",
+          "src": "candidates/batch-72/hakerstwo.png",
+          "note": "One rugged OPEN LAPTOP, three-quarter front view, with ONE large square processor symbol on its screen and two broad right-angle circuit tracks. A single compact plug/cable enters the laptop's side. Thick practical casing, complete screen hinge and simplified keyboard indicated by two broad rows only. Computer expertise and programming, no person, hooded hacker portrait, text, letters, digits, code lines, logos or tiny keyboard keys."
+        }
+      ]
+    },
+    {
+      "id": "batch72-inteligentna-obrona",
+      "name": "Inteligentna obrona",
+      "tier": "Batch 72 · Spec",
+      "batch": 72,
+      "placeholderKey": "feature:inteligentna-obrona",
+      "target": "icons/abilities/inteligentna-obrona.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/inteligentna-obrona.svg",
+          "variant": "default",
+          "sourceSha256": "5b7e57821da7b2a5b79ca7ed7f2ea853bb24fc69438852d979e9f58436f251e1"
+        }
+      ],
+      "context": "Class/profession ability: Inteligentna obrona; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy zostajesz trafiony atakiem, przed poznaniem ilości obrażeń, możesz w Reakcji zwiększyć swoją Trudność Trafienia o wartość modyfikatora Inteligencji, do początku swojej następnej tury, by w ten sposób uniknąć trafienia. Możesz użyć tej zdolności tyle razy, ile wynosi twój modyfikator Inteligencji. Zdolność odnawia się po odbyciu Krótkiego odpoczynku. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "One plain gender-neutral adult upper-body silhouette calmly turning a raised open palm to guide ONE incoming punch past the shoulder. The defender leans slightly aside and the attack passes through a clear black gap, with ONE broad curved deflection stroke. Natural anatomy, complete palm, fist and wrists, smooth featureless head. Clever anticipation and defence, no armour, physical shield, beard, portrait, brain symbol, giant cog, extra arms or anime expression.",
+      "current": {
+        "src": "/icons/abilities/inteligentna-obrona.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 72 · Inteligentna obrona",
+          "src": "candidates/batch-72/inteligentna-obrona.png",
+          "note": "One plain gender-neutral adult upper-body silhouette calmly turning a raised open palm to guide ONE incoming punch past the shoulder. The defender leans slightly aside and the attack passes through a clear black gap, with ONE broad curved deflection stroke. Natural anatomy, complete palm, fist and wrists, smooth featureless head. Clever anticipation and defence, no armour, physical shield, beard, portrait, brain symbol, giant cog, extra arms or anime expression."
+        }
+      ]
+    },
+    {
+      "id": "batch72-ja-i-moj-gang",
+      "name": "Ja i mój gang!",
+      "tier": "Batch 72 · Ganger",
+      "batch": 72,
+      "placeholderKey": "feature:ja-i-moj-gang",
+      "target": "icons/abilities/ja-i-moj-gang.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ja-i-moj-gang.svg",
+          "variant": "default",
+          "sourceSha256": "144fa6f6e9e15324316614d4c16db94b36e42c324911e5c55c3fc6b3006f4cbc"
+        }
+      ],
+      "context": "Class/profession ability: Ja i mój gang!; owner Ganger. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy jesteś w Berserku, twoi towarzysze stają się twoim gangiem, walczącym niczym wataha zmutowanych wilków. Jeśli sojusznicy stoją w promieniu 3 metrów od ciebie, otrzymują Ułatwienie w Testach Ataku przeciw wrogim istotom, które widzisz. Zawsze prowadzisz swój gang do krwawego zwycięstwa! Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "THREE generic adult full-body silhouettes in a tight triangular fighting formation: one broad central figure a little ahead, two smaller allies behind on either side, all holding clenched fists ready at chest height. Clear black gaps between the three complete bodies and their arms. Strong group solidarity, plain practical clothes and smooth featureless heads, no gruff face portrait, pointing hand, extra people, banner, emblem, tiny details or gore.",
+      "current": {
+        "src": "/icons/abilities/ja-i-moj-gang.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 72 · Ja i mój gang!",
+          "src": "candidates/batch-72/ja-i-moj-gang.png",
+          "note": "THREE generic adult full-body silhouettes in a tight triangular fighting formation: one broad central figure a little ahead, two smaller allies behind on either side, all holding clenched fists ready at chest height. Clear black gaps between the three complete bodies and their arms. Strong group solidarity, plain practical clothes and smooth featureless heads, no gruff face portrait, pointing hand, extra people, banner, emblem, tiny details or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch72-jak-dbasz-tak-masz",
+      "name": "Jak dbasz, tak masz",
+      "tier": "Batch 72 · Żołnierz",
+      "batch": 72,
+      "placeholderKey": "feature:jak-dbasz-tak-masz",
+      "target": "icons/abilities/jak-dbasz-tak-masz.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/jak-dbasz-tak-masz.svg",
+          "variant": "default",
+          "sourceSha256": "1858ccf0a0018938a0f1d49497cc3414762297e7176c434791d8511f2d06b632"
+        }
+      ],
+      "context": "Class/profession ability: Jak dbasz, tak masz; owner Żołnierz. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Nikt nie potrafi składać, rozkładać i czyścić broni szybciej od ciebie. Robisz to z zamkniętymi oczami, paląc papierosa i śpiewając Oh my darling. Broń palna w twoich rękach nigdy się nie zacina, a jeśli już masz taką w dłoniach, wystarczy ci Akcja Bonusowa, żeby ją naprawić. Z kolei uszkodzoną broń białą, naprawiasz w czasie Krótkiego odpoczynku. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "One robust handgun held horizontally while ONE complete bare hand uses a folded cleaning cloth to wipe the slide/barrel. A small plain spouted oil can sits just below, with ONE broad drop beside the spout. A coherent practical firearm maintenance scene. Complete gun muzzle, grip, hand and cloth, broad black gaps. No loose gun parts, text, logos, tiny screws, face, cigarette, decoration or extra hands.",
+      "current": {
+        "src": "/icons/abilities/jak-dbasz-tak-masz.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 72 · Jak dbasz, tak masz",
+          "src": "candidates/batch-72/jak-dbasz-tak-masz.png",
+          "note": "One robust handgun held horizontally while ONE complete bare hand uses a folded cleaning cloth to wipe the slide/barrel. A small plain spouted oil can sits just below, with ONE broad drop beside the spout. A coherent practical firearm maintenance scene. Complete gun muzzle, grip, hand and cloth, broad black gaps. No loose gun parts, text, logos, tiny screws, face, cigarette, decoration or extra hands."
+        }
+      ]
+    }
+  ]
+}

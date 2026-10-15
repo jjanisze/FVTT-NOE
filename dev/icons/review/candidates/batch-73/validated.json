@@ -1,0 +1,16 @@
+{
+  "batch": 73,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "jeden-strzal": "208ee0a95a2c70277208b9638a4702b066a06e945110c482c5af330db7a1883b",
+    "jeden-z-nas": "0f17a96dc23e097e51bef677ec34711da2e3df8cbc42ec4d7ce9cc293a561567",
+    "jeden-z-nich": "71158ee8022ec1d84920b69e31b71385d54348dce1136c3b5558c7c2b763ad5b",
+    "jezdziec": "16c753c26004ed7666eed2324107edf9fc5f1f76cc8d0042d7ba087b628a7135",
+    "kakofonia": "a3680c9c01b9b7489dd9a5ccd5c9ea30ee929894b4bef53338102c5f3f2da164",
+    "kamuflaz": "3327c3cb82b19b04f8a11ffa08e17f7386c19089e9720aac5936541bc9f7a122",
+    "kaskader": "af71a1791eb3bbd16fa0b25b8adbbff79a02d3b453bd9d15cf6257fe04aa444f",
+    "klusownik": "b1e52818c58cda3bf5065cc2b8c9de000195846b4223cae2a3d089b89784b3ff",
+    "kocie-kosci": "d638127e7f9aa16b3b8aeb91e31b54d2773f6eb15ce377feb6969127631d7d05"
+  }
+}

@@ -1,0 +1,267 @@
+{
+  "title": "Batches 72 + 73 · 18 awaiting GM review",
+  "updated": "2026-10-15",
+  "items": [
+    {
+      "id": "batch73-jeden-strzal",
+      "name": "Jeden strzał",
+      "tier": "Batch 73 · Zabójca",
+      "batch": 73,
+      "placeholderKey": "feature:jeden-strzal",
+      "target": "icons/abilities/jeden-strzal.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/jeden-strzal.svg",
+          "variant": "default",
+          "sourceSha256": "10ac2815b3f1a04de8a13b648591e46e9073af4b6ca9db9ce83bc85349e38af5"
+        }
+      ],
+      "context": "Class/profession ability: Jeden strzał; owner Zabójca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Potrafisz się przygotować do zabijania lepiej niż ktokolwiek inny. Jeśli atakujesz bronią finezyjną lub strzelasz ogniem pojedynczym, otrzymujesz nowe możliwości. Pierwszy atak. W pierwszej rundzie walki, jeśli wykonujesz atak przed turą swojego celu, otrzymujesz Ułatwienie do pierwszego Testu Ataku przeciwko temu celowi. Celowanie [B]. W czasie walki i poza nią możesz zastygnąć w bezruchu i lepiej wycelować. Jeśli w swojej turze nie wykonasz ruchu, możesz poświęcić Akcję Bonusową na lepsze wyce Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete upright rifle cartridge centered inside ONE bold circular scope reticle. The cartridge has a clear pointed bullet, straight casing and broad base rim; the reticle uses four short thick inward crosshair bars, leaving clear black gaps around the cartridge. A single prepared precise shot. No second bullet, numerals, writing, gun, eye, face, target rings, fine engraving or decorative stars.",
+      "current": {
+        "src": "/icons/abilities/jeden-strzal.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 73 · Jeden strzał",
+          "src": "candidates/batch-73/jeden-strzal.png",
+          "note": "ONE complete upright rifle cartridge centered inside ONE bold circular scope reticle. The cartridge has a clear pointed bullet, straight casing and broad base rim; the reticle uses four short thick inward crosshair bars, leaving clear black gaps around the cartridge. A single prepared precise shot. No second bullet, numerals, writing, gun, eye, face, target rings, fine engraving or decorative stars."
+        }
+      ]
+    },
+    {
+      "id": "batch73-jeden-z-nas",
+      "name": "Jeden z nas",
+      "tier": "Batch 73 · Sędzia",
+      "batch": 73,
+      "placeholderKey": "feature:jeden-z-nas",
+      "target": "icons/abilities/jeden-z-nas.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/jeden-z-nas.svg",
+          "variant": "default",
+          "sourceSha256": "28fa080a15a9a3e2b8dd8f3f49ea93fa3dbb178673188b1e5cfe264f05a5a31b"
+        }
+      ],
+      "context": "Class/profession ability: Jeden z nas; owner Sędzia. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Nie musisz się za każdym razem tłumaczyć miejscowym stróżom prawa, kiedy ubijesz jakiegoś gangusa lub złodzieja. Nie tracisz czasu na dyskusje, mówisz, że jesteś z „policji” i że to było konieczne, a oni tylko kiwają głowami. Jesteś jednym z nich. Dodatkowo, kiedy próbujesz przekonać do czegoś lokalnych stróżów prawa, otrzymujesz Ułatwienie w testach Wpływania. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete adult handshake beneath ONE plain shield-shaped law-enforcement badge with a single broad five-point star cut in its centre. Both bare hands have coherent thumbs, fingers and short wrists. The badge is generic, unbranded and unlettered; no real agency insignia. Compact recognition and professional solidarity motif, no human faces, extra hands, names, numerals, ornate wreath or tiny detail.",
+      "current": {
+        "src": "/icons/abilities/jeden-z-nas.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 73 · Jeden z nas",
+          "src": "candidates/batch-73/jeden-z-nas.png",
+          "note": "ONE complete adult handshake beneath ONE plain shield-shaped law-enforcement badge with a single broad five-point star cut in its centre. Both bare hands have coherent thumbs, fingers and short wrists. The badge is generic, unbranded and unlettered; no real agency insignia. Compact recognition and professional solidarity motif, no human faces, extra hands, names, numerals, ornate wreath or tiny detail."
+        }
+      ]
+    },
+    {
+      "id": "batch73-jeden-z-nich",
+      "name": "Jeden z nich",
+      "tier": "Batch 73 · Ganger",
+      "batch": 73,
+      "placeholderKey": "feature:jeden-z-nich",
+      "target": "icons/abilities/jeden-z-nich.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/jeden-z-nich.svg",
+          "variant": "default",
+          "sourceSha256": "aa8b2735ea1d8c400cb474fd3a0ec3dcf9ae52ab87cde86fc3b6f078466f4443"
+        }
+      ],
+      "context": "Class/profession ability: Jeden z nich; owner Ganger. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Tatuujesz sobie symbol przynależności do siejącego grozę gangu. Byle kto ci nie podskoczy, a reszta nie ma odwagi się z tobą sprzeczać. Postrach okolicy. Otrzymujesz biegłość w umiejętności Zastraszanie. Jeśli już ją masz, otrzymujesz zamiast tego Specjalizację. Sami swoi. Bandziory traktują cię jak swojego. Masz Ułatwienie w testach opartych na Charyzmie, kiedy gadasz z typami twojego pokroju. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "One bare adult upper arm and forearm with a clenched fist, showing ONE bold simple SKULL TATTOO as a black negative-space emblem on the upper arm. The tattoo has two large eye holes and one solid block jaw, no fine teeth or ornament. A tough generic gang affiliation motif, not a recognizable gang logo. Complete arm silhouette, broad black cuts, no person portrait, other tattoo, lettering, symbols, injury, blood or gore.",
+      "current": {
+        "src": "/icons/abilities/jeden-z-nich.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 73 · Jeden z nich",
+          "src": "candidates/batch-73/jeden-z-nich.png",
+          "note": "One bare adult upper arm and forearm with a clenched fist, showing ONE bold simple SKULL TATTOO as a black negative-space emblem on the upper arm. The tattoo has two large eye holes and one solid block jaw, no fine teeth or ornament. A tough generic gang affiliation motif, not a recognizable gang logo. Complete arm silhouette, broad black cuts, no person portrait, other tattoo, lettering, symbols, injury, blood or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch73-jezdziec",
+      "name": "Jeździec",
+      "tier": "Batch 73 · wyjadacz-option",
+      "batch": 73,
+      "placeholderKey": "feature:jezdziec",
+      "target": "icons/abilities/jezdziec.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/jezdziec.svg",
+          "variant": "default",
+          "sourceSha256": "53a7bf1784b2ef9efc618431127aba39c0d53875bf9e974bc2020a40ce759507"
+        }
+      ],
+      "context": "Class/profession ability: Jeździec; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy dosiadasz wierzchowca, nie musisz używać rąk, żeby nim kierować. Nie otrzymujesz Utrudnienia do Testów Ataków dystansowych związanego z niestabilnym podłożem, kiedy na nim jedziesz. Wsiadanie i zsiadanie z wierzchowca kosztuje cię tylko 1,5 metra ruchu. Trudność Trafienia twojego wierzchowca zwiększa się o wartość twojej Premii Biegłości. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "Full side view of ONE realistic adult HORSE with ONE generic adult rider seated confidently in the saddle. The rider's hands rest at their hips, clearly not holding reins; the horse moves in a composed walking stride with four complete legs and one tail. Broad simplified natural animal and human anatomy, smooth featureless rider head. No pony/cartoon proportions, ornate tack, weapon, face portrait, extra rider or tiny reins.",
+      "current": {
+        "src": "/icons/abilities/jezdziec.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 73 · Jeździec",
+          "src": "candidates/batch-73/jezdziec.png",
+          "note": "Full side view of ONE realistic adult HORSE with ONE generic adult rider seated confidently in the saddle. The rider's hands rest at their hips, clearly not holding reins; the horse moves in a composed walking stride with four complete legs and one tail. Broad simplified natural animal and human anatomy, smooth featureless rider head. No pony/cartoon proportions, ornate tack, weapon, face portrait, extra rider or tiny reins."
+        }
+      ]
+    },
+    {
+      "id": "batch73-kakofonia",
+      "name": "Kakofonia",
+      "tier": "Batch 73 · Gwiazda",
+      "batch": 73,
+      "placeholderKey": "feature:kakofonia",
+      "target": "icons/abilities/kakofonia.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/kakofonia.svg",
+          "variant": "default",
+          "sourceSha256": "3a2c179ee0daa35e59e80857907a37548a47e5bc2279f49dee9e14a450205121"
+        }
+      ],
+      "context": "Class/profession ability: Kakofonia; owner Gwiazda. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. W swojej Akcji możesz wydobyć ze swojego instrumentu lub z gardła zestaw głośnych nieharmonicznych dźwięków, który może zdezorientować twoich wrogów. Każda słysząca istota w promieniu 9 metrów wokół ciebie, wykonuje RO na Kondycję o ST równym 8 plus twój modyfikator Charyzmy i twoja Premia Biegłości. Porażka w Rzucie Obronnym oznacza Obezwładnienie istoty do początku twojej następnej tury. Twoi sojusznicy mają Ułatwienie w tym RO. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "One plain generic adult head and small shoulders with TWO complete hands pressed over the ears. THREE short broad irregular angular sound wedges approach the head from the sides, conveying harsh discordant noise. Smooth simple head, no detailed facial expression, no beard or portrait; coherent fingers, wrists and ear placement. No music notes, text, exclamation marks, anime face, tiny jagged noise texture or extra hands.",
+      "current": {
+        "src": "/icons/abilities/kakofonia.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 73 · Kakofonia",
+          "src": "candidates/batch-73/kakofonia.png",
+          "note": "One plain generic adult head and small shoulders with TWO complete hands pressed over the ears. THREE short broad irregular angular sound wedges approach the head from the sides, conveying harsh discordant noise. Smooth simple head, no detailed facial expression, no beard or portrait; coherent fingers, wrists and ear placement. No music notes, text, exclamation marks, anime face, tiny jagged noise texture or extra hands."
+        }
+      ]
+    },
+    {
+      "id": "batch73-kamuflaz",
+      "name": "Kamuflaż",
+      "tier": "Batch 73 · Zabójca",
+      "batch": 73,
+      "placeholderKey": "feature:kamuflaz",
+      "target": "icons/abilities/kamuflaz.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/kamuflaz.svg",
+          "variant": "default",
+          "sourceSha256": "2e42997c538547908929c5ba2d36652efa7a66429facc1809b7849b49093f50b"
+        }
+      ],
+      "context": "Class/profession ability: Kamuflaż; owner Zabójca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Jesteś w stanie przygotować sobie kamuflaż tak dobrze pasujący do otoczenia, że nawet po oddaniu strzału, trudno cię dostrzec. Ghillie. Jeśli przygotujesz sobie strój maskujący i pomalujesz twarz zgodnie z barwami otoczenia, otrzymujesz Ułatwienie do Testów Skradania się. Niewidoczny. Jeśli przed strzałem z broni dystansowej lub rzucanej, masz stan Niewidoczność, to nie stajesz się widoczny po wykonaniu ataku, dopóki się nie przemieścisz. Warunkiem jest noszenie stroju maskującego i malowanie tw Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "One generic adult sniper head and shoulders concealed in a simple practical GHILLIE HOOD behind THREE broad rough-edged leaves. A single plain rifle barrel projects to the right through the foliage. The hood and leaves merge into one compact camouflage silhouette with large black gaps, no face details or eyes. Clear complete barrel, simple natural plant shapes, no dense grass texture, micro-fringe, anime, portrait, logos or text.",
+      "current": {
+        "src": "/icons/abilities/kamuflaz.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 73 · Kamuflaż",
+          "src": "candidates/batch-73/kamuflaz.png",
+          "note": "One generic adult sniper head and shoulders concealed in a simple practical GHILLIE HOOD behind THREE broad rough-edged leaves. A single plain rifle barrel projects to the right through the foliage. The hood and leaves merge into one compact camouflage silhouette with large black gaps, no face details or eyes. Clear complete barrel, simple natural plant shapes, no dense grass texture, micro-fringe, anime, portrait, logos or text."
+        }
+      ]
+    },
+    {
+      "id": "batch73-kaskader",
+      "name": "Kaskader",
+      "tier": "Batch 73 · Wojownik Autostrady",
+      "batch": 73,
+      "placeholderKey": "feature:kaskader",
+      "target": "icons/abilities/kaskader.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/kaskader.svg",
+          "variant": "default",
+          "sourceSha256": "0ae034225b437ef358ec5775f92884b68a0d9355593fa7ef197f6b423cd90c78"
+        }
+      ],
+      "context": "Class/profession ability: Kaskader; owner Wojownik Autostrady. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Twoje wyczyny za kierownicą przerażają twoich pasażerów. Kierując dowolnym pojazdem silnikowym, potrafisz wykonywać triki jak filmowy kaskader. Schody to też jezdnia. Potrafisz jeździć pojazdem po schodach (jeśli się zmieścisz wszerz i na zakrętach) z pełną Szybkością pojazdu. Skoczek. Przeskakujesz pojazdem przez dziury i przepaści o czterokrotnej długości twojego pojazdu, jeśli się rozpędzisz na odległości 60 metrów. Na dwóch kółkach. Umiesz jechać na dwóch bocznych kołach, żeby zmieścić się w Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete rugged compact CAR in side profile, nose slightly raised, airborne as it jumps a narrow gap between TWO low ledge edges. One broad motion sweep behind the car conveys momentum. Two large visible wheels, thick body and just two broad window cuts; no driver or fine machinery. Keep the whole car and both ledge ends inside the cell. No second car, digits, logos, flames, explosion or playful arrows.",
+      "current": {
+        "src": "/icons/abilities/kaskader.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 73 · Kaskader",
+          "src": "candidates/batch-73/kaskader.png",
+          "note": "ONE complete rugged compact CAR in side profile, nose slightly raised, airborne as it jumps a narrow gap between TWO low ledge edges. One broad motion sweep behind the car conveys momentum. Two large visible wheels, thick body and just two broad window cuts; no driver or fine machinery. Keep the whole car and both ledge ends inside the cell. No second car, digits, logos, flames, explosion or playful arrows."
+        }
+      ]
+    },
+    {
+      "id": "batch73-klusownik",
+      "name": "Kłusownik",
+      "tier": "Batch 73 · Zwiadowca",
+      "batch": 73,
+      "placeholderKey": "feature:klusownik",
+      "target": "icons/abilities/klusownik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/klusownik.svg",
+          "variant": "default",
+          "sourceSha256": "6fff1379ce2c2409ce200ab84a898fc371a8434b6a6b6808baf68b77df161091"
+        }
+      ],
+      "context": "Class/profession ability: Kłusownik; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Masz doświadczenie w zakładaniu pułapek. Wystarczy chwila, żeby z tego, co masz pod ręką, zmontować coś przydatnego. Jeśli masz zestaw narzędzi małego kłusownika, poświęcisz minutę i wykonasz Test Survivalu lub narzędzi małego kłusownika, możesz zbudować pułapkę. Skonsultuj jej szczegóły i działanie z MG. ST zauważenia pułapki, wyzwolenia się z niej lub uniknięcia części obrażeń, to 8 plus twój modyfikator Mądrości i Premia Biegłości. ST zakładania i działanie przykładowych pułapek podajemy w ta Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE open practical steel LEG-HOLD TRAP seen slightly from above: two broad curved jaws with just THREE large blunt teeth each, a large central pressure plate and a short sturdy chain of THREE links. Coherent hinged functional device with generous black gaps and complete jaws. No caught animal, human, injury, blood, gore, labels, fine springs or scattered parts.",
+      "current": {
+        "src": "/icons/abilities/klusownik.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 73 · Kłusownik",
+          "src": "candidates/batch-73/klusownik.png",
+          "note": "ONE open practical steel LEG-HOLD TRAP seen slightly from above: two broad curved jaws with just THREE large blunt teeth each, a large central pressure plate and a short sturdy chain of THREE links. Coherent hinged functional device with generous black gaps and complete jaws. No caught animal, human, injury, blood, gore, labels, fine springs or scattered parts."
+        }
+      ]
+    },
+    {
+      "id": "batch73-kocie-kosci",
+      "name": "Kocie kości",
+      "tier": "Batch 73 · Złodziej",
+      "batch": 73,
+      "placeholderKey": "feature:kocie-kosci",
+      "target": "icons/abilities/kocie-kosci.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/kocie-kosci.svg",
+          "variant": "default",
+          "sourceSha256": "e64aec557d717b15492bd8565218d67c72ee3f0669a81d2da0e33e7ded075e2a"
+        }
+      ],
+      "context": "Class/profession ability: Kocie kości; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kot zawsze spada na cztery łapy tak jak ty. Możesz użyć jednej lub więcej Kocich kości w Reakcji na niekorzystny obrót spraw w poniższych sytuacjach: Ciche łapy [R]. Podczas akcji Ukrywania się, kiedy przeciwnik odkryje twoją obecność, możesz w Reakcji dorzucić je do wyniku swojego testu. Cztery łapy [R]. Kiedy spadasz z dużej wysokości, możesz w Reakcji wykorzystać je, żeby zmniejszyć obrażenia od upadku. Otrzymane obrażenia zmniejszają się o wynik, który wypadł na użytych Kocich kościach. Zgra Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE geometrically coherent ISOMETRIC CUBE die with a large simple CAT-PAW PRINT cut into the front white face: one broad pad and four large toe dots. The visible flat top face has one pip and the right side has two pips. Straight edges meet at consistent shared vertices; broad black seams separate the three white planes. Compact feline luck/resource motif. No whole cat, other die, bone, numeral, lettering, cylinder, rounded tub, extra face or fine dots.",
+      "current": {
+        "src": "/icons/abilities/kocie-kosci.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 73 · Kocie kości",
+          "src": "candidates/batch-73/kocie-kosci.png",
+          "note": "ONE geometrically coherent ISOMETRIC CUBE die with a large simple CAT-PAW PRINT cut into the front white face: one broad pad and four large toe dots. The visible flat top face has one pip and the right side has two pips. Straight edges meet at consistent shared vertices; broad black seams separate the three white planes. Compact feline luck/resource motif. No whole cat, other die, bone, numeral, lettering, cylinder, rounded tub, extra face or fine dots."
+        }
+      ]
+    }
+  ]
+}

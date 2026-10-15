@@ -1,0 +1,41 @@
+{
+  "role": "Reference cells 1-5 are the EXACT subjects to revise in output cells 1-5; preserve each subject except its stated correction. Reference cells 6-9 are STYLE ONLY and must be replaced by the NEW subjects listed below.",
+  "sources": [
+    {
+      "source": "dev/icons/review/candidates/batch-70/bez-tajemnic.png",
+      "sha256": "0b848779202667cd3a4477af74670a911a121fe5659319b711c9330da3ad1c79"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-71/dwoch-na-jednego.png",
+      "sha256": "6d6ed05f2bc9b6c1abe6d16d8498e18d3878c5a4cf888aac687a135d42371f15"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-71/ekspert.png",
+      "sha256": "7f3261157db66a30dab9ffb7b37540f0e202f650f244505e1bf38382033b8077"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-71/elektronik.png",
+      "sha256": "c51ba724c7475a10ef0f9606ceba01b81dab9c09ef5ad1a7e95d851d05aa869f"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-71/gola-klata.png",
+      "sha256": "8b614b3916e1eacc2c3f54206df3023b5048775be1aa8b561bf8d87b567bad3a"
+    },
+    {
+      "source": "icons/abilities/pan-plaster.webp",
+      "sha256": "55cb1114cf070f45d8f5f00a0cac406ac9960a494fd4e24bcf64b3feecb5aaff"
+    },
+    {
+      "source": "icons/abilities/drzwi-w-drzwi.webp",
+      "sha256": "ca72ad9f4489e359bf07e6bfe793ca936051dc3f9a98dea751c047e5de11e453"
+    },
+    {
+      "source": "icons/abilities/bystrzacha.webp",
+      "sha256": "b9f18860e548bf76cd2d289da226ae0ab6d1b25d432a47f7cc97399a3fb3c273"
+    },
+    {
+      "source": "icons/abilities/clint.webp",
+      "sha256": "16d709e33905bbcb2f1413ed92597ec86a23e0face53e796221ff4ccf4eceabe"
+    }
+  ]
+}

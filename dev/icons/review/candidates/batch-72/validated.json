@@ -1,0 +1,16 @@
+{
+  "batch": 72,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "bez-tajemnic": "0699862ae28c4df642c84289fb8332264676f7f9e53914d6e2e99355b13593f7",
+    "dwoch-na-jednego": "815b93eef1b821da335624d0b3ce83325e101c1beda9d3c535651a9bbdc6d773",
+    "ekspert": "b72544cfd23c8300f4ba97011b5b2fe5ab25f8b745813e8a633a9a4e9df5c914",
+    "elektronik": "e679d4322210a5ad943ec70337324f1662d1f4059b3cea1cbde3b4b1a8970dd0",
+    "gola-klata": "6080073d1099d1a48bc1b93b26c7cac9cbc09018abff5a66c9f0c96627d19dfa",
+    "hakerstwo": "dbc162ad9a0e5905121a52197de75d853c6a4686e95f4170065d432a60950bd8",
+    "inteligentna-obrona": "3caeb5205fdeaac2c8d3e000083886f48bade82f3e6dd86dabc9bcfbbf91ab08",
+    "ja-i-moj-gang": "b92d859a408eaeb717bcd413e11594ffa628797c9ca556919a184fa60102563c",
+    "jak-dbasz-tak-masz": "057bc2b1a6351793f3a5243b836516bf42ff7f8e3964833221edc23f932debf5"
+  }
+}

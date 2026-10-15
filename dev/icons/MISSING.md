@@ -37,8 +37,8 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 72** (the previous 342-card queue is resolved; the newly
-audited class/profession placeholder backlog remains and is listed below).
+**Next batch number: 74** (18 candidates in 2 batches await GM review;
+production replacements require a saved approval).
 
 **Icon coverage correction, 2026-10-15:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
@@ -661,6 +661,64 @@ Evidence: `review/candidates/batch-71/reviewed.json` and `reviewed-installed.jso
 | 9 | Goła klata | `icons/abilities/gola-klata.svg` | Revision in Batch 72 |
 
 <!-- placeholder-batch-71:end -->
+
+<!-- placeholder-batch-72:start -->
+## Queue (A) — Batch 72 — 9 awaiting GM review
+
+One 3×3 atlas in the established white-glyph style; native initials badges remain
+until the GM approves a selected candidate. Exact sources/hashes, generic prompts
+and targets: `review/candidates/batch-72/`.
+
+| Cell | Item | Exact SVG delivery targets (+ WEBP) |
+|---|---|---|
+| 1 | Bez tajemnic (revision) | `icons/abilities/bez-tajemnic.svg` |
+| 2 | Dwóch na jednego (revision) | `icons/abilities/dwoch-na-jednego.svg` |
+| 3 | Ekspert (revision) | `icons/abilities/ekspert.svg` |
+| 4 | Elektronik (revision) | `icons/abilities/elektronik.svg` |
+| 5 | Goła klata (revision) | `icons/abilities/gola-klata.svg` |
+| 6 | Hakerstwo | `icons/abilities/hakerstwo.svg` |
+| 7 | Inteligentna obrona | `icons/abilities/inteligentna-obrona.svg` |
+| 8 | Ja i mój gang! | `icons/abilities/ja-i-moj-gang.svg` |
+| 9 | Jak dbasz, tak masz | `icons/abilities/jak-dbasz-tak-masz.svg` |
+
+Saved revision notes and original selected-source hashes are retained in batch.json
+and revision-feedback-before.json. Old candidates remain available; only these
+revision cards are reset to pending with the new candidate selected.
+
+The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
+nine). Later batch numbers are provisional: saved revisions take priority and
+may add batches. Base/active files share approved pixels; the existing active
+hotbar pulse remains in the code. Old unused active filenames are compatibility
+targets, without new mechanics or wiring. Code, packs and world state are untouched.
+
+<!-- placeholder-batch-72:end -->
+
+<!-- placeholder-batch-73:start -->
+## Queue (A) — Batch 73 — 9 awaiting GM review
+
+One 3×3 atlas in the established white-glyph style; native initials badges remain
+until the GM approves a selected candidate. Exact sources/hashes, generic prompts
+and targets: `review/candidates/batch-73/`.
+
+| Cell | Item | Exact SVG delivery targets (+ WEBP) |
+|---|---|---|
+| 1 | Jeden strzał | `icons/abilities/jeden-strzal.svg` |
+| 2 | Jeden z nas | `icons/abilities/jeden-z-nas.svg` |
+| 3 | Jeden z nich | `icons/abilities/jeden-z-nich.svg` |
+| 4 | Jeździec | `icons/abilities/jezdziec.svg` |
+| 5 | Kakofonia | `icons/abilities/kakofonia.svg` |
+| 6 | Kamuflaż | `icons/abilities/kamuflaz.svg` |
+| 7 | Kaskader | `icons/abilities/kaskader.svg` |
+| 8 | Kłusownik | `icons/abilities/klusownik.svg` |
+| 9 | Kocie kości | `icons/abilities/kocie-kosci.svg` |
+
+The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
+nine). Later batch numbers are provisional: saved revisions take priority and
+may add batches. Base/active files share approved pixels; the existing active
+hotbar pulse remains in the code. Old unused active filenames are compatibility
+targets, without new mechanics or wiring. Code, packs and world state are untouched.
+
+<!-- placeholder-batch-73:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source

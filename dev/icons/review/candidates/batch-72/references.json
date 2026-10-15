@@ -1,0 +1,59 @@
+{
+  "role": "Exact native targets, not style inputs",
+  "files": [
+    {
+      "key": "bez-tajemnic",
+      "source": "icons/abilities/bez-tajemnic.svg",
+      "variant": "default",
+      "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411"
+    },
+    {
+      "key": "dwoch-na-jednego",
+      "source": "icons/abilities/dwoch-na-jednego.svg",
+      "variant": "default",
+      "sourceSha256": "abf98f1ae8f9018ba49f8b45cd85fd2a8b9fa6924e0a773dad9c08339dcf66d3"
+    },
+    {
+      "key": "ekspert",
+      "source": "icons/abilities/ekspert.svg",
+      "variant": "default",
+      "sourceSha256": "232cba987b6f917ef305d366a6f0c46625c645084e43e17b491a2e681606b201"
+    },
+    {
+      "key": "elektronik",
+      "source": "icons/abilities/elektronik.svg",
+      "variant": "default",
+      "sourceSha256": "f390a9b077c44175d9cd142eb44c91d2b5ebcec9b555de04ec0e68c851576564"
+    },
+    {
+      "key": "gola-klata",
+      "source": "icons/abilities/gola-klata.svg",
+      "variant": "default",
+      "sourceSha256": "96223da7b4372786dd758e23ca14db7c4c44b8f731e301fb0d1cca1547db1407"
+    },
+    {
+      "key": "hakerstwo",
+      "source": "icons/abilities/hakerstwo.svg",
+      "variant": "default",
+      "sourceSha256": "8fcff882ddb01cff3baa85928c1b79317f431775fc3b342a0c009303cf337424"
+    },
+    {
+      "key": "inteligentna-obrona",
+      "source": "icons/abilities/inteligentna-obrona.svg",
+      "variant": "default",
+      "sourceSha256": "5b7e57821da7b2a5b79ca7ed7f2ea853bb24fc69438852d979e9f58436f251e1"
+    },
+    {
+      "key": "ja-i-moj-gang",
+      "source": "icons/abilities/ja-i-moj-gang.svg",
+      "variant": "default",
+      "sourceSha256": "144fa6f6e9e15324316614d4c16db94b36e42c324911e5c55c3fc6b3006f4cbc"
+    },
+    {
+      "key": "jak-dbasz-tak-masz",
+      "source": "icons/abilities/jak-dbasz-tak-masz.svg",
+      "variant": "default",
+      "sourceSha256": "1858ccf0a0018938a0f1d49497cc3414762297e7176c434791d8511f2d06b632"
+    }
+  ]
+}

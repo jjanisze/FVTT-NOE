@@ -2418,10 +2418,10 @@
     },
     "batch69-bez-tajemnic": {
       "itemId": "batch69-bez-tajemnic",
-      "decision": "revise",
-      "candidateId": "batch70-revision",
-      "notes": "You also made the face too human. Correct the anatomy of the shoulders and make the face more mutant-like.",
-      "updatedAt": "2026-10-15T20:39:35.253Z"
+      "decision": "pending",
+      "candidateId": "batch72-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T20:52:45.664Z"
     },
     "batch69-bezlitosny-przywodca": {
       "itemId": "batch69-bezlitosny-przywodca",
@@ -2495,10 +2495,10 @@
     },
     "batch71-dwoch-na-jednego": {
       "itemId": "batch71-dwoch-na-jednego",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Below the left fist is a single lone triangle. Remove it.",
-      "updatedAt": "2026-10-15T20:41:30.337Z"
+      "decision": "pending",
+      "candidateId": "batch72-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T20:52:45.671Z"
     },
     "batch71-dziewiec-zyc": {
       "itemId": "batch71-dziewiec-zyc",
@@ -2509,17 +2509,17 @@
     },
     "batch71-ekspert": {
       "itemId": "batch71-ekspert",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "The calipers should extend past the hand",
-      "updatedAt": "2026-10-15T20:42:22.362Z"
+      "decision": "pending",
+      "candidateId": "batch72-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T20:52:45.677Z"
     },
     "batch71-elektronik": {
       "itemId": "batch71-elektronik",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Rotate the shackle of the padlock left",
-      "updatedAt": "2026-10-15T20:42:47.464Z"
+      "decision": "pending",
+      "candidateId": "batch72-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T20:52:45.678Z"
     },
     "batch71-emiter-emp": {
       "itemId": "batch71-emiter-emp",
@@ -2551,10 +2551,10 @@
     },
     "batch71-gola-klata": {
       "itemId": "batch71-gola-klata",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Make the chest more muscular and with a healed battle scar",
-      "updatedAt": "2026-10-15T20:44:29.894Z"
+      "decision": "pending",
+      "candidateId": "batch72-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T20:52:45.679Z"
     }
   }
 }
