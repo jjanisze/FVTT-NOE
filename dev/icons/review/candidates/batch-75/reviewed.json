@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-15",
+  "batch": 75,
+  "feedbackBeforeSha256": "629a739b0949578cd9b26dba712b7028618ea59991f05b6ee71a19ae102172e5",
+  "active": [
+    {
+      "id": "batch75-lets-rock",
+      "name": "Let’s rock!",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-75/lets-rock.png",
+      "sourceSha256": "05bff3e3341e41223984f50fc8ee57087632910fdb1b8dba4f4f4d852a3bc198",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/lets-rock.svg",
+          "variant": "default",
+          "sourceSha256": "6c6281cdd5089a4a9dc6fdaf933633f66c94d0c8c453259d100e95d833315141"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch75-lets-rock",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:28:14.644Z"
+      }
+    },
+    {
+      "id": "batch75-lapiduch",
+      "name": "Łapiduch",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-75/lapiduch.png",
+      "sourceSha256": "061802b6ed556ccfa4651dd1cdbecc94f647b36f9617df6a60fe5d298cf20a7f",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/lapiduch.svg",
+          "variant": "default",
+          "sourceSha256": "913fffceec2f2490e4b84cdb4ea2c01368fc2d6d8cf518b701f681ea0286447b"
+        }
+      ],
+      "notes": "Missing a head. Rotate the hands 90 degrees, and put some head on the body (with X for eyes)",
+      "feedback": {
+        "itemId": "batch75-lapiduch",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Missing a head. Rotate the hands 90 degrees, and put some head on the body (with X for eyes)",
+        "updatedAt": "2026-10-15T21:28:49.691Z"
+      }
+    },
+    {
+      "id": "batch75-laska-boza",
+      "name": "Łaska boża",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-75/laska-boza.png",
+      "sourceSha256": "06132efb5f38efc2acf08b9c6b7742356c7653e938c4c040d1ce2ea7e4792cff",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/laska-boza.svg",
+          "variant": "default",
+          "sourceSha256": "e5324a36a95884b60732d688880fea6f1243709fbc4a38e8a3e644b87f6802a5"
+        }
+      ],
+      "notes": "Single godly hand, and add mannah from heaven",
+      "feedback": {
+        "itemId": "batch75-laska-boza",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Single godly hand, and add mannah from heaven",
+        "updatedAt": "2026-10-15T21:29:20.459Z"
+      }
+    },
+    {
+      "id": "batch75-leb-jak-sklep",
+      "name": "Łeb jak sklep",
+      "decision": "reject",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-75/leb-jak-sklep.png",
+      "sourceSha256": "8ecd5b433d768796c083388b8c7cc84208157ee33574af7a4caf11599aa31fce",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/leb-jak-sklep.svg",
+          "variant": "default",
+          "sourceSha256": "ab1446c5808fb43984e0c4f1357f4cd68fda82f47990700123c1db790a7efc87"
+        }
+      ],
+      "notes": "Try again.",
+      "feedback": {
+        "itemId": "batch75-leb-jak-sklep",
+        "decision": "reject",
+        "candidateId": "atlas-a",
+        "notes": "Try again.",
+        "updatedAt": "2026-10-15T21:29:34.015Z"
+      }
+    },
+    {
+      "id": "batch75-lyzeczka",
+      "name": "Łyżeczka",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-75/lyzeczka.png",
+      "sourceSha256": "8278a8c52f7e2567c961a73381ab3ea1603904c369cfb430b57922a6e27ca9ca",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/lyzeczka.svg",
+          "variant": "default",
+          "sourceSha256": "843e5b1041de1b116e2ea0625ae0c2a732deff2aafc70ab3e28ee5d7baf7ddcc"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch75-lyzeczka",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:29:40.787Z"
+      }
+    },
+    {
+      "id": "batch75-maszyna-do-zabijania",
+      "name": "Maszyna do zabijania",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-75/maszyna-do-zabijania.png",
+      "sourceSha256": "9b7a7385863824e140aae37971eff727bb1d20deeb47f5d69520782d057844c8",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/maszyna-do-zabijania.svg",
+          "variant": "default",
+          "sourceSha256": "bf846c0d06aaf67a251b1c02723bad0ff64fb927cbe0e7403f79722605cf8045"
+        }
+      ],
+      "notes": "Different concept. Draw a series of simple skulls symbolizing kills. 3 rows, 3 columns. First two rows are full and stricken through. The last row is missing 2 skulls.",
+      "feedback": {
+        "itemId": "batch75-maszyna-do-zabijania",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Different concept. Draw a series of simple skulls symbolizing kills. 3 rows, 3 columns. First two rows are full and stricken through. The last row is missing 2 skulls.",
+        "updatedAt": "2026-10-15T21:31:35.051Z"
+      }
+    },
+    {
+      "id": "batch75-matrix",
+      "name": "Matrix",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-75/matrix.png",
+      "sourceSha256": "18e87e9c99f80d62c3e25d48fd4e540395b38f3053044ae618565229d54c5775",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/matrix.svg",
+          "variant": "default",
+          "sourceSha256": "6bcdc39ecb83504a5b09b9bb5f3e86b517e9a9652e89e70877e12f5ec24fd851"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch75-matrix",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:31:46.220Z"
+      }
+    },
+    {
+      "id": "batch75-mechanika",
+      "name": "Mechanika",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-75/mechanika.png",
+      "sourceSha256": "a6c64bdd71c667af189ccf29fc22bb382d04ab6a6699cb51863d15946a2e582b",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/mechanika.svg",
+          "variant": "default",
+          "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037"
+        }
+      ],
+      "notes": "Revise the engine into something more recognizable",
+      "feedback": {
+        "itemId": "batch75-mechanika",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Revise the engine into something more recognizable",
+        "updatedAt": "2026-10-15T21:32:11.596Z"
+      }
+    },
+    {
+      "id": "batch75-moja-prawa-reka",
+      "name": "Moja prawa ręka",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-75/moja-prawa-reka.png",
+      "sourceSha256": "302d370f305276a4bf996a19dd6d0f62e5ecf5068957b5fdac6e6db52126022d",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moja-prawa-reka.svg",
+          "variant": "default",
+          "sourceSha256": "e81f004a47420ab36475a8e8d6a27c09b8e45aa296643e49ec352b764ec372f2"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch75-moja-prawa-reka",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:32:20.370Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "date": "2026-10-15",
+  "batch": 74,
+  "feedbackBeforeSha256": "629a739b0949578cd9b26dba712b7028618ea59991f05b6ee71a19ae102172e5",
+  "active": [
+    {
+      "id": "batch69-bez-tajemnic",
+      "name": "Bez tajemnic",
+      "decision": "approve",
+      "candidateId": "batch74-revision",
+      "selectedSource": "candidates/batch-74/bez-tajemnic.png",
+      "sourceSha256": "bb4af84e7346e9c333f43b9ba024f07878fc0a53c5e528dc0927c29eef68b4a4",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/bez-tajemnic.svg",
+          "variant": "default",
+          "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch69-bez-tajemnic",
+        "decision": "approve",
+        "candidateId": "batch74-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:23:58.301Z"
+      }
+    },
+    {
+      "id": "batch71-elektronik",
+      "name": "Elektronik",
+      "decision": "approve",
+      "candidateId": "batch72-revision",
+      "selectedSource": "candidates/batch-72/elektronik.png",
+      "sourceSha256": "e679d4322210a5ad943ec70337324f1662d1f4059b3cea1cbde3b4b1a8970dd0",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/elektronik.svg",
+          "variant": "default",
+          "sourceSha256": "f390a9b077c44175d9cd142eb44c91d2b5ebcec9b555de04ec0e68c851576564"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch71-elektronik",
+        "decision": "approve",
+        "candidateId": "batch72-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:24:11.368Z"
+      }
+    },
+    {
+      "id": "batch72-inteligentna-obrona",
+      "name": "Inteligentna obrona",
+      "decision": "approve",
+      "candidateId": "batch74-revision",
+      "selectedSource": "candidates/batch-74/inteligentna-obrona.png",
+      "sourceSha256": "6034828b8d93cf1f0e09f8874e50b36e6095a43352100de51b9381a5bdbe434a",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/inteligentna-obrona.svg",
+          "variant": "default",
+          "sourceSha256": "5b7e57821da7b2a5b79ca7ed7f2ea853bb24fc69438852d979e9f58436f251e1"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch72-inteligentna-obrona",
+        "decision": "approve",
+        "candidateId": "batch74-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:24:29.030Z"
+      }
+    },
+    {
+      "id": "batch72-jak-dbasz-tak-masz",
+      "name": "Jak dbasz, tak masz",
+      "decision": "revise",
+      "candidateId": "batch74-revision",
+      "selectedSource": "candidates/batch-74/jak-dbasz-tak-masz.png",
+      "sourceSha256": "ac5ce65836c628f918adef38a637f72eac08c1db2e6b11f38587ab3a366a5848",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/jak-dbasz-tak-masz.svg",
+          "variant": "default",
+          "sourceSha256": "1858ccf0a0018938a0f1d49497cc3414762297e7176c434791d8511f2d06b632"
+        }
+      ],
+      "notes": "The finger should be ON the trigger guard, and extending OVER it.",
+      "feedback": {
+        "itemId": "batch72-jak-dbasz-tak-masz",
+        "decision": "revise",
+        "candidateId": "batch74-revision",
+        "notes": "The finger should be ON the trigger guard, and extending OVER it.",
+        "updatedAt": "2026-10-15T21:25:21.330Z"
+      }
+    },
+    {
+      "id": "batch73-jezdziec",
+      "name": "Jeździec",
+      "decision": "revise",
+      "candidateId": "batch74-revision",
+      "selectedSource": "candidates/batch-74/jezdziec.png",
+      "sourceSha256": "84006bde897e510e07d9ebee84c5d485d7ff4b5169f816c062803973b45aa1ea",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/jezdziec.svg",
+          "variant": "default",
+          "sourceSha256": "53a7bf1784b2ef9efc618431127aba39c0d53875bf9e974bc2020a40ce759507"
+        }
+      ],
+      "notes": "Redraw this image into more of a cowboy / showman pose",
+      "feedback": {
+        "itemId": "batch73-jezdziec",
+        "decision": "revise",
+        "candidateId": "batch74-revision",
+        "notes": "Redraw this image into more of a cowboy / showman pose",
+        "updatedAt": "2026-10-15T21:25:53.106Z"
+      }
+    },
+    {
+      "id": "batch73-klusownik",
+      "name": "Kłusownik",
+      "decision": "revise",
+      "candidateId": "batch74-revision",
+      "selectedSource": "candidates/batch-74/klusownik.png",
+      "sourceSha256": "1b0145b4c41282c9fb364ab2ee7a4f83a4c6ca81fcb6da81f912050e590efd43",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/klusownik.svg",
+          "variant": "default",
+          "sourceSha256": "6fff1379ce2c2409ce200ab84a898fc371a8434b6a6b6808baf68b77df161091"
+        }
+      ],
+      "notes": "Better, but now the teeth are split. Draw a simple, two-part trap with jaws on left and right, hinge between them, and pressure plate in the middle.",
+      "feedback": {
+        "itemId": "batch73-klusownik",
+        "decision": "revise",
+        "candidateId": "batch74-revision",
+        "notes": "Better, but now the teeth are split. Draw a simple, two-part trap with jaws on left and right, hinge between them, and pressure plate in the middle.",
+        "updatedAt": "2026-10-15T21:26:35.755Z"
+      }
+    },
+    {
+      "id": "batch74-kolejka",
+      "name": "Kolejka",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-74/kolejka.png",
+      "sourceSha256": "a91779f56e935891190e00b06cabf5017de48548b34cd4c62ed632f74328d730",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/kolejka.svg",
+          "variant": "default",
+          "sourceSha256": "970158402b9fe22b4683b3c9087cb345f496206b7af68c32ac725927512384de"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch74-kolejka",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:26:44.100Z"
+      }
+    },
+    {
+      "id": "batch74-kondycha",
+      "name": "Kondycha",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-74/kondycha.png",
+      "sourceSha256": "27c0e6073d7897f4badce82df1501358dd7bb8728178ca7d1f9b6175c8c73a7f",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/kondycha.svg",
+          "variant": "default",
+          "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f"
+        },
+        {
+          "source": "icons/abilities/kondycha_active.svg",
+          "variant": "legacy-active",
+          "sourceSha256": "fe94e499463c22895956f7b690560a97d315a576f5dc27d3d5140c5010c7fbf1"
+        }
+      ],
+      "notes": "Try a pose of a figure having just stood up, with a lowered head, and shaded, determined eyes. More \"This ain't over!\", less \"Phew!\"",
+      "feedback": {
+        "itemId": "batch74-kondycha",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Try a pose of a figure having just stood up, with a lowered head, and shaded, determined eyes. More \"This ain't over!\", less \"Phew!\"",
+        "updatedAt": "2026-10-15T21:28:00.534Z"
+      }
+    },
+    {
+      "id": "batch74-krwawy-aniol",
+      "name": "Krwawy anioł",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-74/krwawy-aniol.png",
+      "sourceSha256": "02391a943929face7e27421775e3e808252cf85d9dd772202ea9c97b11b42705",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/krwawy-aniol.svg",
+          "variant": "default",
+          "sourceSha256": "dd55a607d3c756d7faad45f077907136f9659e3828ba06c199d32a7ded373458"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch74-krwawy-aniol",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:28:09.995Z"
+      }
+    }
+  ]
+}

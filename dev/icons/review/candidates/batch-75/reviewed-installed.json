@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-15",
+  "batch": 75,
+  "approvedSubjects": 4,
+  "remainingSubjects": 9,
+  "installed": [
+    {
+      "itemId": "batch75-lets-rock",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-75/lets-rock.png",
+      "sourceSha256": "05bff3e3341e41223984f50fc8ee57087632910fdb1b8dba4f4f4d852a3bc198",
+      "files": [
+        "icons/abilities/lets-rock.svg",
+        "icons/abilities/lets-rock.webp"
+      ],
+      "svgSha256": "fd2953619947bec1695def218c4c85b1585b4292e171a9fd861baef8a2d4bca5",
+      "webpSha256": "fc3622b4c3228bd6664c5b0ba9b5be5ab8733ac6f2a0c415773b8debc4cb1b5d"
+    },
+    {
+      "itemId": "batch75-lyzeczka",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-75/lyzeczka.png",
+      "sourceSha256": "8278a8c52f7e2567c961a73381ab3ea1603904c369cfb430b57922a6e27ca9ca",
+      "files": [
+        "icons/abilities/lyzeczka.svg",
+        "icons/abilities/lyzeczka.webp"
+      ],
+      "svgSha256": "bdd3095868c4a1d5bb371f0d99a3693e25f86946e678266ba414f3d0a158a778",
+      "webpSha256": "0b1369f67e7fb00ed0aa994fcaa83195134f4936f5cbbcfa6f9c8fd2303e4482"
+    },
+    {
+      "itemId": "batch75-matrix",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-75/matrix.png",
+      "sourceSha256": "18e87e9c99f80d62c3e25d48fd4e540395b38f3053044ae618565229d54c5775",
+      "files": [
+        "icons/abilities/matrix.svg",
+        "icons/abilities/matrix.webp"
+      ],
+      "svgSha256": "7f8bcdffa2aa6227068dd6ee414189979a82e65966876bf17f71d1871418a780",
+      "webpSha256": "643215222894d6154e7e4655ac70fc7969220dd969414d4cf122026917ac4452"
+    },
+    {
+      "itemId": "batch75-moja-prawa-reka",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-75/moja-prawa-reka.png",
+      "sourceSha256": "302d370f305276a4bf996a19dd6d0f62e5ecf5068957b5fdac6e6db52126022d",
+      "files": [
+        "icons/abilities/moja-prawa-reka.svg",
+        "icons/abilities/moja-prawa-reka.webp"
+      ],
+      "svgSha256": "1f799e016bcfa732a52c107f4e8544fa4807557011ccd4f7888a6613e88c00d4",
+      "webpSha256": "dd09cfd65abad045e89aea3fbaa0ac1c6a7c1122b61fc7b2763b4ae296ddd9d7"
+    }
+  ]
+}

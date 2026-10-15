@@ -1,52 +1,22 @@
 {
   "stats": {
     "date": "2026-10-15",
-    "confirmedPlaceholderFiles": 124,
-    "referencedPlaceholderFiles": 123,
+    "confirmedPlaceholderFiles": 115,
+    "referencedPlaceholderFiles": 114,
     "unmappedPlaceholderFiles": 1,
     "activeVariants": 1,
     "referencedActiveVariants": 0,
-    "abilityPlaceholderFiles": 100,
+    "abilityPlaceholderFiles": 91,
     "missingExpectedFiles": 0,
-    "artSubjects": 123,
+    "artSubjects": 114,
     "byKind": {
       "class": 6,
       "profession": 18,
-      "feature": 99
+      "feature": 90
     },
     "scope": "Exact generator signature plus canonical class/profession definitions; no world or pack reads"
   },
   "placeholders": [
-    {
-      "kind": "feature",
-      "id": "bez-tajemnic",
-      "label": "Bez tajemnic",
-      "owner": "lowca-mutantow",
-      "variant": "default",
-      "source": "icons/abilities/bez-tajemnic.svg",
-      "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "elektronik",
-      "label": "Elektronik",
-      "owner": "zlodziej",
-      "variant": "default",
-      "source": "icons/abilities/elektronik.svg",
-      "sourceSha256": "f390a9b077c44175d9cd142eb44c91d2b5ebcec9b555de04ec0e68c851576564",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "inteligentna-obrona",
-      "label": "Inteligentna obrona",
-      "owner": "spec",
-      "variant": "default",
-      "source": "icons/abilities/inteligentna-obrona.svg",
-      "sourceSha256": "5b7e57821da7b2a5b79ca7ed7f2ea853bb24fc69438852d979e9f58436f251e1",
-      "referenced": true
-    },
     {
       "kind": "feature",
       "id": "jak-dbasz-tak-masz",
@@ -79,16 +49,6 @@
     },
     {
       "kind": "feature",
-      "id": "kolejka",
-      "label": "Kolejka",
-      "owner": "cwaniak",
-      "variant": "default",
-      "source": "icons/abilities/kolejka.svg",
-      "sourceSha256": "970158402b9fe22b4683b3c9087cb345f496206b7af68c32ac725927512384de",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "kondycha",
       "label": "Kondycha",
       "owner": "twardziel",
@@ -105,26 +65,6 @@
       "source": "icons/abilities/kondycha_active.svg",
       "sourceSha256": "fe94e499463c22895956f7b690560a97d315a576f5dc27d3d5140c5010c7fbf1",
       "referenced": false
-    },
-    {
-      "kind": "feature",
-      "id": "krwawy-aniol",
-      "label": "Krwawy anioł",
-      "owner": "medyk",
-      "variant": "default",
-      "source": "icons/abilities/krwawy-aniol.svg",
-      "sourceSha256": "dd55a607d3c756d7faad45f077907136f9659e3828ba06c199d32a7ded373458",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "lets-rock",
-      "label": "Let’s rock!",
-      "owner": "gwiazda",
-      "variant": "default",
-      "source": "icons/abilities/lets-rock.svg",
-      "sourceSha256": "6c6281cdd5089a4a9dc6fdaf933633f66c94d0c8c453259d100e95d833315141",
-      "referenced": true
     },
     {
       "kind": "feature",
@@ -158,16 +98,6 @@
     },
     {
       "kind": "feature",
-      "id": "lyzeczka",
-      "label": "Łyżeczka",
-      "owner": "gladiator",
-      "variant": "default",
-      "source": "icons/abilities/lyzeczka.svg",
-      "sourceSha256": "843e5b1041de1b116e2ea0625ae0c2a732deff2aafc70ab3e28ee5d7baf7ddcc",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "maszyna-do-zabijania",
       "label": "Maszyna do zabijania",
       "owner": "najemnik",
@@ -178,32 +108,12 @@
     },
     {
       "kind": "feature",
-      "id": "matrix",
-      "label": "Matrix",
-      "owner": "zlodziej",
-      "variant": "default",
-      "source": "icons/abilities/matrix.svg",
-      "sourceSha256": "6bcdc39ecb83504a5b09b9bb5f3e86b517e9a9652e89e70877e12f5ec24fd851",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "mechanika",
       "label": "Mechanika",
       "owner": "monter",
       "variant": "default",
       "source": "icons/abilities/mechanika.svg",
       "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "moja-prawa-reka",
-      "label": "Moja prawa ręka",
-      "owner": "mafiozo",
-      "variant": "default",
-      "source": "icons/abilities/moja-prawa-reka.svg",
-      "sourceSha256": "e81f004a47420ab36475a8e8d6a27c09b8e45aa296643e49ec352b764ec372f2",
       "referenced": true
     },
     {
@@ -1261,45 +1171,6 @@
   "subjects": [
     {
       "kind": "feature",
-      "id": "bez-tajemnic",
-      "label": "Bez tajemnic",
-      "owner": "lowca-mutantow",
-      "files": [
-        {
-          "source": "icons/abilities/bez-tajemnic.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "elektronik",
-      "label": "Elektronik",
-      "owner": "zlodziej",
-      "files": [
-        {
-          "source": "icons/abilities/elektronik.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "inteligentna-obrona",
-      "label": "Inteligentna obrona",
-      "owner": "spec",
-      "files": [
-        {
-          "source": "icons/abilities/inteligentna-obrona.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "jak-dbasz-tak-masz",
       "label": "Jak dbasz, tak masz",
       "owner": "zolnierz",
@@ -1339,51 +1210,12 @@
     },
     {
       "kind": "feature",
-      "id": "kolejka",
-      "label": "Kolejka",
-      "owner": "cwaniak",
-      "files": [
-        {
-          "source": "icons/abilities/kolejka.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "kondycha",
       "label": "Kondycha",
       "owner": "twardziel",
       "files": [
         {
           "source": "icons/abilities/kondycha.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "krwawy-aniol",
-      "label": "Krwawy anioł",
-      "owner": "medyk",
-      "files": [
-        {
-          "source": "icons/abilities/krwawy-aniol.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "lets-rock",
-      "label": "Let’s rock!",
-      "owner": "gwiazda",
-      "files": [
-        {
-          "source": "icons/abilities/lets-rock.svg",
           "variant": "default",
           "status": "generated placeholder"
         }
@@ -1430,19 +1262,6 @@
     },
     {
       "kind": "feature",
-      "id": "lyzeczka",
-      "label": "Łyżeczka",
-      "owner": "gladiator",
-      "files": [
-        {
-          "source": "icons/abilities/lyzeczka.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "maszyna-do-zabijania",
       "label": "Maszyna do zabijania",
       "owner": "najemnik",
@@ -1456,38 +1275,12 @@
     },
     {
       "kind": "feature",
-      "id": "matrix",
-      "label": "Matrix",
-      "owner": "zlodziej",
-      "files": [
-        {
-          "source": "icons/abilities/matrix.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "mechanika",
       "label": "Mechanika",
       "owner": "monter",
       "files": [
         {
           "source": "icons/abilities/mechanika.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "moja-prawa-reka",
-      "label": "Moja prawa ręka",
-      "owner": "mafiozo",
-      "files": [
-        {
-          "source": "icons/abilities/moja-prawa-reka.svg",
           "variant": "default",
           "status": "generated placeholder"
         }

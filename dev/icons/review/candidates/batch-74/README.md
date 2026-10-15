@@ -58,3 +58,8 @@ were inspected at 64/32/24/16 px. The live gallery shows 18 pending cards, 45
 options, all new candidates selected and no broken images. Two isolated
 revision-registration tests pass. Combined evidence:
 `../../../placeholder-pass/progress-74-75.json` and `raw/review-preview.png`.
+
+GM review, 2026-10-15: five exact selections approved and installed. Elektronik
+uses the explicitly selected older Batch 72 glyph, validated against its own
+archived source hash. Four requests carry into Batch 76. Decisions and hashes
+are in `reviewed.json` / `reviewed-installed.json`.

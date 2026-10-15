@@ -2418,10 +2418,10 @@
     },
     "batch69-bez-tajemnic": {
       "itemId": "batch69-bez-tajemnic",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch74-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T21:19:43.448Z"
+      "updatedAt": "2026-10-15T21:23:58.301Z"
     },
     "batch69-bezlitosny-przywodca": {
       "itemId": "batch69-bezlitosny-przywodca",
@@ -2516,10 +2516,10 @@
     },
     "batch71-elektronik": {
       "itemId": "batch71-elektronik",
-      "decision": "pending",
-      "candidateId": "batch74-revision",
+      "decision": "approve",
+      "candidateId": "batch72-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T21:19:43.449Z"
+      "updatedAt": "2026-10-15T21:24:11.368Z"
     },
     "batch71-emiter-emp": {
       "itemId": "batch71-emiter-emp",
@@ -2565,10 +2565,10 @@
     },
     "batch72-inteligentna-obrona": {
       "itemId": "batch72-inteligentna-obrona",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch74-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T21:19:43.449Z"
+      "updatedAt": "2026-10-15T21:24:29.030Z"
     },
     "batch72-ja-i-moj-gang": {
       "itemId": "batch72-ja-i-moj-gang",
@@ -2579,10 +2579,10 @@
     },
     "batch72-jak-dbasz-tak-masz": {
       "itemId": "batch72-jak-dbasz-tak-masz",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch74-revision",
-      "notes": "",
-      "updatedAt": "2026-10-15T21:19:43.450Z"
+      "notes": "The finger should be ON the trigger guard, and extending OVER it.",
+      "updatedAt": "2026-10-15T21:25:21.330Z"
     },
     "batch73-jeden-strzal": {
       "itemId": "batch73-jeden-strzal",
@@ -2607,10 +2607,10 @@
     },
     "batch73-jezdziec": {
       "itemId": "batch73-jezdziec",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch74-revision",
-      "notes": "",
-      "updatedAt": "2026-10-15T21:19:43.450Z"
+      "notes": "Redraw this image into more of a cowboy / showman pose",
+      "updatedAt": "2026-10-15T21:25:53.106Z"
     },
     "batch73-kakofonia": {
       "itemId": "batch73-kakofonia",
@@ -2635,10 +2635,10 @@
     },
     "batch73-klusownik": {
       "itemId": "batch73-klusownik",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch74-revision",
-      "notes": "",
-      "updatedAt": "2026-10-15T21:19:43.450Z"
+      "notes": "Better, but now the teeth are split. Draw a simple, two-part trap with jaws on left and right, hinge between them, and pressure plate in the middle.",
+      "updatedAt": "2026-10-15T21:26:35.755Z"
     },
     "batch73-kocie-kosci": {
       "itemId": "batch73-kocie-kosci",
@@ -2646,6 +2646,90 @@
       "candidateId": "atlas-a",
       "notes": "",
       "updatedAt": "2026-10-15T21:11:37.564Z"
+    },
+    "batch74-kolejka": {
+      "itemId": "batch74-kolejka",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:26:44.100Z"
+    },
+    "batch74-kondycha": {
+      "itemId": "batch74-kondycha",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Try a pose of a figure having just stood up, with a lowered head, and shaded, determined eyes. More \"This ain't over!\", less \"Phew!\"",
+      "updatedAt": "2026-10-15T21:28:00.534Z"
+    },
+    "batch74-krwawy-aniol": {
+      "itemId": "batch74-krwawy-aniol",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:28:09.995Z"
+    },
+    "batch75-lets-rock": {
+      "itemId": "batch75-lets-rock",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:28:14.644Z"
+    },
+    "batch75-lapiduch": {
+      "itemId": "batch75-lapiduch",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Missing a head. Rotate the hands 90 degrees, and put some head on the body (with X for eyes)",
+      "updatedAt": "2026-10-15T21:28:49.691Z"
+    },
+    "batch75-laska-boza": {
+      "itemId": "batch75-laska-boza",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Single godly hand, and add mannah from heaven",
+      "updatedAt": "2026-10-15T21:29:20.459Z"
+    },
+    "batch75-leb-jak-sklep": {
+      "itemId": "batch75-leb-jak-sklep",
+      "decision": "reject",
+      "candidateId": "atlas-a",
+      "notes": "Try again.",
+      "updatedAt": "2026-10-15T21:29:34.015Z"
+    },
+    "batch75-lyzeczka": {
+      "itemId": "batch75-lyzeczka",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:29:40.787Z"
+    },
+    "batch75-maszyna-do-zabijania": {
+      "itemId": "batch75-maszyna-do-zabijania",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Different concept. Draw a series of simple skulls symbolizing kills. 3 rows, 3 columns. First two rows are full and stricken through. The last row is missing 2 skulls.",
+      "updatedAt": "2026-10-15T21:31:35.051Z"
+    },
+    "batch75-matrix": {
+      "itemId": "batch75-matrix",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:31:46.220Z"
+    },
+    "batch75-mechanika": {
+      "itemId": "batch75-mechanika",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Revise the engine into something more recognizable",
+      "updatedAt": "2026-10-15T21:32:11.596Z"
+    },
+    "batch75-moja-prawa-reka": {
+      "itemId": "batch75-moja-prawa-reka",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:32:20.370Z"
     }
   }
 }

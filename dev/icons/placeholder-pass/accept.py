@@ -26,6 +26,14 @@ def sha(file):
     return hashlib.sha256(file.read_bytes()).hexdigest()
 
 
+def selected_source(subject, selected):
+    source = (REVIEW / selected["src"]).resolve()
+    assert source.is_relative_to(REVIEW / "candidates"), "Selected source escapes the candidate tree"
+    provenance = read(source.parent / "validated.json")
+    assert sha(source) == provenance["candidateHashes"][subject["key"]], "Selected candidate changed"
+    return source
+
+
 def check(here):
     report = read(here / "reviewed-installed.json")
     for item in report["installed"]:
@@ -54,7 +62,6 @@ def main():
         check(here)
         return
     batch = read(here / "batch.json")
-    validated = read(here / "validated.json")
     manifest_file, feedback_file = REVIEW / "manifest.json", REVIEW / "feedback.json"
     manifest = read(manifest_file)
     feedback_bytes = feedback_file.read_bytes()
@@ -65,9 +72,7 @@ def main():
     for subject in batch["subjects"]:
         card, saved = cards[subject["itemId"]], feedback[subject["itemId"]]
         selected = next(candidate for candidate in card["candidates"] if candidate["id"] == saved["candidateId"])
-        source = (REVIEW / selected["src"]).resolve()
-        assert source.is_relative_to(here.resolve()), "Selected source is not from this batch"
-        assert sha(source) == validated["candidateHashes"][subject["key"]]
+        source = selected_source(subject, selected)
         snapshot.append({"id": card["id"], "name": card["name"], "decision": saved["decision"],
                          "candidateId": selected["id"], "selectedSource": selected["src"],
                          "sourceSha256": sha(source), "deliveryTargets": subject["deliveryTargets"],

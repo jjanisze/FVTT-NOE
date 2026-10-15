@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batches 74 + 75 · 18 awaiting GM review",
+  "title": "Batch 75 · 4 approved subjects delivered; 9 awaiting revision",
   "updated": "2026-10-15",
   "items": [
     {
@@ -8654,7 +8654,8 @@
           "src": "candidates/batch-69/bez-tajemnic.png",
           "note": "One large practical magnifying glass examining a simple mutant's head in profile: one broad ear, one short blunt horn and a solid neck silhouette. In the lens, one simple crosshair cut marks a vulnerable point on the head. The lens and head overlap clearly with broad black gaps, not multiple heads; no gore, tiny teeth, laboratory labels or decorative symbols."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch69-bezlitosny-przywodca",
@@ -9103,7 +9104,8 @@
           "src": "candidates/batch-71/elektronik.png",
           "note": "One robust electronic PADLOCK shown open, with a large square circuit chip cut into its body and just TWO broad right-angle circuit traces. One short practical screwdriver meets the lock's service opening. Clear complete shackle, thick body and intact tool handle. Electronic security bypass, not a pile of components. No digits, labels, huge cog, sparks, face or delicate circuit pattern."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch71-emiter-emp",
@@ -9324,7 +9326,8 @@
           "src": "candidates/batch-72/inteligentna-obrona.png",
           "note": "One plain gender-neutral adult upper-body silhouette calmly turning a raised open palm to guide ONE incoming punch past the shoulder. The defender leans slightly aside and the attack passes through a clear black gap, with ONE broad curved deflection stroke. Natural anatomy, complete palm, fist and wrists, smooth featureless head. Clever anticipation and defence, no armour, physical shield, beard, portrait, brain symbol, giant cog, extra arms or anime expression."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch72-ja-i-moj-gang",
@@ -9698,7 +9701,8 @@
           "src": "candidates/batch-74/kolejka.png",
           "note": "One complete plain bottle of homemade spirits between TWO sturdy tin drinking mugs, grouped as a shared round of drinks during a rest. One mug is held by a complete bare adult hand entering from the left; the other mug rests beside the bottle. Broad practical silhouettes, clear handles and bottle neck, no labels, liquid shading, bubbles, fancy glassware, face portrait, extra bottle or tiny details."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch74-kondycha",
@@ -9761,7 +9765,8 @@
           "src": "candidates/batch-74/krwawy-aniol.png",
           "note": "ONE robust complete medical SYRINGE upright at centre, framed by TWO broad simplified ANGEL WINGS that spread outward symmetrically from its barrel. Each wing has only three large feather blocks, no fine feather texture. A sober lifesaving medic emblem, not a character or fantasy painting. Clear plunger, syringe barrel and short intact needle; broad black gaps. No person, face, blood, gore, halo, text, logos or tiny measurement ticks."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch75-lets-rock",
@@ -9790,7 +9795,8 @@
           "src": "candidates/batch-75/lets-rock.png",
           "note": "One rugged practical ELECTRIC GUITAR angled upward-right, complete body, neck and headstock, with TWO broad outward sound arcs. A single large pickup cut and three thick string marks at most; no tiny frets. Music rallying allies for battle. No performer, face portrait, skull decoration, lettering, brand logo, music notes, flames, star or fine engraving."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch75-lapiduch",
@@ -9906,7 +9912,8 @@
           "src": "candidates/batch-75/lyzeczka.png",
           "note": "ONE complete bare adult fist firmly gripping the handle of a large plain old TEASPOON, raised diagonally like an improvised melee weapon. The oval spoon bowl is clearly visible and the long handle joins the fist coherently; one broad restrained striking trail behind the spoon. Actual simple object used as a weapon, serious practical silhouette. No person, face, food, bowl, decorative stars, serrations, engraving, extra spoon or extra hand."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch75-maszyna-do-zabijania",
@@ -9964,7 +9971,8 @@
           "src": "candidates/batch-75/matrix.png",
           "note": "ONE generic adult full-body silhouette in plain fitted practical clothes bends backward in a controlled evasive motion as THREE broad parallel projectiles pass safely ABOVE the torso. Natural continuous spine, balanced bent knees, complete arms and feet, smooth featureless head. Clear black gaps between body and projectiles. No recognizable actor or character, sunglasses, trench coat, long coat, film costume, anime face, extra limbs, tiny bullets, text or symbols."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch75-mechanika",
@@ -10022,7 +10030,8 @@
           "src": "candidates/batch-75/moja-prawa-reka.png",
           "note": "TWO plain generic adults stand side by side: a slightly taller leader rests ONE complete hand naturally on the shoulder of a trusted companion who carries a compact BACKPACK. Both figures have ordinary adult proportions, practical simple clothes and smooth featureless heads. Clear gap between bodies and coherent shoulder/hand contact. Loyal recruited partner, not a literal isolated right hand. No gruff portrait, extra person, gun, uniform insignia, writing, anime or tiny backpack straps."
         }
-      ]
+      ],
+      "status": "resolved"
     }
   ]
 }

@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-15",
+  "batch": 74,
+  "approvedSubjects": 5,
+  "remainingSubjects": 13,
+  "installed": [
+    {
+      "itemId": "batch69-bez-tajemnic",
+      "candidateId": "batch74-revision",
+      "source": "candidates/batch-74/bez-tajemnic.png",
+      "sourceSha256": "bb4af84e7346e9c333f43b9ba024f07878fc0a53c5e528dc0927c29eef68b4a4",
+      "files": [
+        "icons/abilities/bez-tajemnic.svg",
+        "icons/abilities/bez-tajemnic.webp"
+      ],
+      "svgSha256": "d56ff71b91f428a9e4faecca0b02af4f884177d59e2433e423a24f9c46a2a3a0",
+      "webpSha256": "1c6544d59989a4dd08c9faf2728da3f5d902adabf1886f080627ea5d90013eb7"
+    },
+    {
+      "itemId": "batch71-elektronik",
+      "candidateId": "batch72-revision",
+      "source": "candidates/batch-72/elektronik.png",
+      "sourceSha256": "e679d4322210a5ad943ec70337324f1662d1f4059b3cea1cbde3b4b1a8970dd0",
+      "files": [
+        "icons/abilities/elektronik.svg",
+        "icons/abilities/elektronik.webp"
+      ],
+      "svgSha256": "9224e79a48fb85254ac33bb5aba8bfe928963ebb617174db2ed548bc40d615d3",
+      "webpSha256": "ce52ff6cd6413f94ad0cdee7c0ccd9f78a04e11904055971b48704836ea50b74"
+    },
+    {
+      "itemId": "batch72-inteligentna-obrona",
+      "candidateId": "batch74-revision",
+      "source": "candidates/batch-74/inteligentna-obrona.png",
+      "sourceSha256": "6034828b8d93cf1f0e09f8874e50b36e6095a43352100de51b9381a5bdbe434a",
+      "files": [
+        "icons/abilities/inteligentna-obrona.svg",
+        "icons/abilities/inteligentna-obrona.webp"
+      ],
+      "svgSha256": "5aa37a2543f8546fabbc840390e45d5a58b6384a36e849ff0a2a2f19ba58d254",
+      "webpSha256": "e7be54294dfa75c83f7a2bf530feb4016fc3568fdf58a79301920f64ea629e72"
+    },
+    {
+      "itemId": "batch74-kolejka",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-74/kolejka.png",
+      "sourceSha256": "a91779f56e935891190e00b06cabf5017de48548b34cd4c62ed632f74328d730",
+      "files": [
+        "icons/abilities/kolejka.svg",
+        "icons/abilities/kolejka.webp"
+      ],
+      "svgSha256": "7975d1524b5476bd2cf323542da04a0a6a722fa42b78cf3436ccffa090b9dd76",
+      "webpSha256": "949de7ff4d52455e239b2c7caa1d61c0322a187e9b49b9516fc982ee2bb72b01"
+    },
+    {
+      "itemId": "batch74-krwawy-aniol",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-74/krwawy-aniol.png",
+      "sourceSha256": "02391a943929face7e27421775e3e808252cf85d9dd772202ea9c97b11b42705",
+      "files": [
+        "icons/abilities/krwawy-aniol.svg",
+        "icons/abilities/krwawy-aniol.webp"
+      ],
+      "svgSha256": "afd0fba3ddb314df04c6c3fd86da3b755774bbcfeb612ca5df16746334942e84",
+      "webpSha256": "63a9259db68a4f0c16bbf42a2e315ce98a82c43701874391ddccf399325d28f8"
+    }
+  ]
+}

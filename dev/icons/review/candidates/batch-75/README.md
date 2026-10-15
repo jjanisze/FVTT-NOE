@@ -45,3 +45,8 @@ contains 602 valid PNG/SVG pairs. Contact sheets were inspected at 64/32/24/16 p
 The eighteen-card combined gallery has all new candidates selected and no broken
 images. Evidence: `../../../placeholder-pass/progress-74-75.json` and
 `../batch-74/raw/review-preview.png`.
+
+GM review, 2026-10-15: four exact selections approved and installed. Four
+revision requests and the rejected Łeb jak sklep concept carry into Batch 76.
+All decisions, verbatim notes and delivered hashes are in `reviewed.json` /
+`reviewed-installed.json`.
