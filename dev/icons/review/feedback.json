@@ -2936,10 +2936,10 @@
     },
     "batch81-rzeznik": {
       "itemId": "batch81-rzeznik",
-      "decision": "revise",
-      "candidateId": "batch86-revision",
-      "notes": "The knife should be even lower, targetting below the armpit. Make the expression afraid. ",
-      "updatedAt": "2026-10-15T23:10:02.843Z"
+      "decision": "pending",
+      "candidateId": "batch88-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:24:08.019Z"
     },
     "batch81-rzuc-bron-i-gleba": {
       "itemId": "batch81-rzuc-bron-i-gleba",
@@ -3104,10 +3104,10 @@
     },
     "batch85-szybkie-nogi": {
       "itemId": "batch85-szybkie-nogi",
-      "decision": "revise",
-      "candidateId": "batch86-revision",
-      "notes": "Close, but you need to swap the feet and cross the legs.",
-      "updatedAt": "2026-10-15T23:11:04.736Z"
+      "decision": "pending",
+      "candidateId": "batch88-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:24:08.019Z"
     },
     "batch85-szybkie-rece": {
       "itemId": "batch85-szybkie-rece",
@@ -3118,10 +3118,10 @@
     },
     "batch85-szybkosc-kota": {
       "itemId": "batch85-szybkosc-kota",
-      "decision": "revise",
-      "candidateId": "batch86-revision",
-      "notes": "Move the lines elsewhere to better signal ducking of the cat. It looks like its butt is vibrating.",
-      "updatedAt": "2026-10-15T23:11:46.441Z"
+      "decision": "pending",
+      "candidateId": "batch88-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:24:08.020Z"
     },
     "batch87-smiertelna-obelga": {
       "itemId": "batch87-smiertelna-obelga",
@@ -3139,10 +3139,10 @@
     },
     "batch87-trajektoria": {
       "itemId": "batch87-trajektoria",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Modify the image so the arc is split into a solid line before the bullet, dashed after. Retain the bullseye at the bottom. Put the bullet at the top/apex of the trajectory",
-      "updatedAt": "2026-10-15T23:12:52.242Z"
+      "decision": "pending",
+      "candidateId": "batch88-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:24:08.020Z"
     },
     "batch87-trening-w-zbroi": {
       "itemId": "batch87-trening-w-zbroi",

@@ -1,0 +1,59 @@
+{
+  "role": "Exact native targets, not style inputs",
+  "files": [
+    {
+      "key": "rzeznik",
+      "source": "icons/abilities/rzeznik.svg",
+      "variant": "default",
+      "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+    },
+    {
+      "key": "szybkie-nogi",
+      "source": "icons/abilities/szybkie-nogi.svg",
+      "variant": "default",
+      "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398"
+    },
+    {
+      "key": "szybkosc-kota",
+      "source": "icons/abilities/szybkosc-kota.svg",
+      "variant": "default",
+      "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a"
+    },
+    {
+      "key": "trajektoria",
+      "source": "icons/abilities/trajektoria.svg",
+      "variant": "default",
+      "sourceSha256": "ee9e7f28b3d095225871f6ef754ef95dd68cfd7c6c16ed99f6344663f6453e9f"
+    },
+    {
+      "key": "ulubiona-bron-zwiadowca",
+      "source": "icons/abilities/ulubiona-bron-zwiadowca.svg",
+      "variant": "default",
+      "sourceSha256": "dfaab0fdee5a2eea18b28777faf5ebc65ce32f1d61ee9ade770ee5d77bf936b3"
+    },
+    {
+      "key": "w-czuly-punkt",
+      "source": "icons/abilities/w-czuly-punkt.svg",
+      "variant": "default",
+      "sourceSha256": "494b773b1bd3d580fe42cd13ca56fe001b8830b33a0f0ffbf75508a7a8719794"
+    },
+    {
+      "key": "wsciekly-cios",
+      "source": "icons/abilities/wsciekly-cios.svg",
+      "variant": "default",
+      "sourceSha256": "52ae2a6a7a2a4e2d93821ffb52e603891237b164515cc23a18067020927610f8"
+    },
+    {
+      "key": "wyczulone-zmysly",
+      "source": "icons/abilities/wyczulone-zmysly.svg",
+      "variant": "default",
+      "sourceSha256": "630c1143f620eb4e0a6950df06c7462b5e045a9a032023f9885ca0df95177edf"
+    },
+    {
+      "key": "wyjadacz-zwiadowca",
+      "source": "icons/abilities/wyjadacz-zwiadowca.svg",
+      "variant": "default",
+      "sourceSha256": "c8495031166e511cfbbfe32844e060cd26b509110a766d30a4cc9fd9456e2012"
+    }
+  ]
+}

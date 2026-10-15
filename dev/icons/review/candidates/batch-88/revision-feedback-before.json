@@ -1,0 +1,30 @@
+{
+  "batch81-rzeznik": {
+    "itemId": "batch81-rzeznik",
+    "decision": "revise",
+    "candidateId": "batch86-revision",
+    "notes": "The knife should be even lower, targetting below the armpit. Make the expression afraid. ",
+    "updatedAt": "2026-10-15T23:10:02.843Z"
+  },
+  "batch85-szybkie-nogi": {
+    "itemId": "batch85-szybkie-nogi",
+    "decision": "revise",
+    "candidateId": "batch86-revision",
+    "notes": "Close, but you need to swap the feet and cross the legs.",
+    "updatedAt": "2026-10-15T23:11:04.736Z"
+  },
+  "batch85-szybkosc-kota": {
+    "itemId": "batch85-szybkosc-kota",
+    "decision": "revise",
+    "candidateId": "batch86-revision",
+    "notes": "Move the lines elsewhere to better signal ducking of the cat. It looks like its butt is vibrating.",
+    "updatedAt": "2026-10-15T23:11:46.441Z"
+  },
+  "batch87-trajektoria": {
+    "itemId": "batch87-trajektoria",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Modify the image so the arc is split into a solid line before the bullet, dashed after. Retain the bullseye at the bottom. Put the bullet at the top/apex of the trajectory",
+    "updatedAt": "2026-10-15T23:12:52.242Z"
+  }
+}

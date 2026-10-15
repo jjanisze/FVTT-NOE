@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batch 87 · 8 approved subjects delivered; 4 awaiting revision",
+  "title": "Batches 88 + 89 · 18 awaiting GM review",
   "updated": "2026-10-16",
   "items": [
     {
@@ -11047,8 +11047,8 @@
     {
       "id": "batch81-rzeznik",
       "name": "Rzeźnik",
-      "tier": "Batch 86 · wyjadacz-option",
-      "batch": 86,
+      "tier": "Batch 88 · wyjadacz-option",
+      "batch": 88,
       "placeholderKey": "feature:rzeznik",
       "target": "icons/abilities/rzeznik.svg",
       "deliveryTargets": [
@@ -11059,12 +11059,18 @@
         }
       ],
       "context": "Class/profession ability: Rzeźnik; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "REVISION of reference cell 1. Preserve the raised arm, upper holding hand, target torso and angry threatened expression EXACTLY. Change ONLY the knife hand: LOWER that hand by roughly ONE FIST HEIGHT and angle its complete short knife UPWARD toward the ARMPIT where the raised arm joins the torso. The tip stops SHORT of the body with a clear black gap. It must aim BELOW the upper arm, not at the biceps. Same two attacker hands and one target, coherent fingers/grip, no extra limb. Fictional threat before contact only: no stabbing, wound, blood, gore or exposed tissue.",
+      "request": "REVISION of reference cell 1. Keep the raised arm, upper holding hand and target torso. Move the LOWER KNIFE HAND MUCH LOWER AGAIN, to LOWER CHEST/RIB HEIGHT. Its knife points almost HORIZONTALLY RIGHT, only slightly upward, with the tip aiming at the SIDE OF THE RIBS WELL BELOW THE ARMPIT. NOT at the raised upper arm or the armpit itself. Tip stops short of the shirt with a black gap. Lower the hand and blade together by another full fist height; make this change clearly visible. Change the face to AFRAID: raised inner brow, one widened natural eye and small rounded open mouth, no angry scowl or grin. Same coherent adult, exactly two attacker hands. Fictional threat before contact only: no stabbing, wound, blood, exposed tissue or gore; no anime exaggeration.",
       "current": {
         "src": "/icons/abilities/rzeznik.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch88-revision",
+          "label": "Batch 88 · revised Rzeźnik",
+          "src": "candidates/batch-88/rzeznik.png",
+          "note": "REVISION of reference cell 1. Keep the raised arm, upper holding hand and target torso. Move the LOWER KNIFE HAND MUCH LOWER AGAIN, to LOWER CHEST/RIB HEIGHT. Its knife points almost HORIZONTALLY RIGHT, only slightly upward, with the tip aiming at the SIDE OF THE RIBS WELL BELOW THE ARMPIT. NOT at the raised upper arm or the armpit itself. Tip stops short of the shirt with a black gap. Lower the hand and blade together by another full fist height; make this change clearly visible. Change the face to AFRAID: raised inner brow, one widened natural eye and small rounded open mouth, no angry scowl or grin. Same coherent adult, exactly two attacker hands. Fictional threat before contact only: no stabbing, wound, blood, exposed tissue or gore; no anime exaggeration."
+        },
         {
           "id": "batch86-revision",
           "label": "Batch 86 · revised Rzeźnik",
@@ -11874,8 +11880,8 @@
     {
       "id": "batch85-szybkie-nogi",
       "name": "Szybkie nogi",
-      "tier": "Batch 86 · Złodziej",
-      "batch": 86,
+      "tier": "Batch 88 · Złodziej",
+      "batch": 88,
       "placeholderKey": "feature:szybkie-nogi",
       "target": "icons/abilities/szybkie-nogi.svg",
       "deliveryTargets": [
@@ -11886,12 +11892,18 @@
         }
       ],
       "context": "Class/profession ability: Szybkie nogi; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Łączysz swoją zwinność i szybkość, w celu zwiększenia szansy przetrwania na polu walki. Możesz w Akcji Bonusowej wykonać Odstąpienie, Przyspieszenie lub Ukrywanie się. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "REVISION of reference cell 7. Keep the SAME rugged boots and short trouser legs, but pose them in a classic MOONWALK SLIDE on ONE common ground line. BOTH toes point RIGHT. The LEFT/REAR BOOT stays completely FLAT and slides backward LEFT; the RIGHT/FRONT BOOT balances on its TOE with heel raised HIGH, sole sloping upward at a steep angle. Natural ankle bend and calf stance; neither boot is airborne. Two broad short motion strokes trail behind the sliding flat boot. Exactly two intact boots, same broad details, no full person, recognizable performer, text or extra feet.",
+      "request": "REVISION of reference cell 2. Preserve the same two rugged boots, trouser cuffs and common ground line. SWAP THE FEET: the RIGHT boot is now FLAT on the ground, the LEFT boot is now balanced on its TOE with heel raised HIGH. Both toes still point RIGHT. CROSS THE TWO LOWER LEGS into a clear natural X ABOVE THE ANKLES: the calf entering from upper-LEFT continues diagonally DOWN-RIGHT into the flat right boot, and the calf entering from upper-RIGHT continues diagonally DOWN-LEFT into the toe-balanced left boot. One broad black separation at the crossing identifies which leg is in front. Natural moonwalk stance, exactly two complete boots, no extra leg, airborne step, full person, text or recognizable performer.",
       "current": {
         "src": "/icons/abilities/szybkie-nogi.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch88-revision",
+          "label": "Batch 88 · revised Szybkie nogi",
+          "src": "candidates/batch-88/szybkie-nogi.png",
+          "note": "REVISION of reference cell 2. Preserve the same two rugged boots, trouser cuffs and common ground line. SWAP THE FEET: the RIGHT boot is now FLAT on the ground, the LEFT boot is now balanced on its TOE with heel raised HIGH. Both toes still point RIGHT. CROSS THE TWO LOWER LEGS into a clear natural X ABOVE THE ANKLES: the calf entering from upper-LEFT continues diagonally DOWN-RIGHT into the flat right boot, and the calf entering from upper-RIGHT continues diagonally DOWN-LEFT into the toe-balanced left boot. One broad black separation at the crossing identifies which leg is in front. Natural moonwalk stance, exactly two complete boots, no extra leg, airborne step, full person, text or recognizable performer."
+        },
         {
           "id": "batch86-revision",
           "label": "Batch 86 · revised Szybkie nogi",
@@ -11945,8 +11957,8 @@
     {
       "id": "batch85-szybkosc-kota",
       "name": "Szybkość kota",
-      "tier": "Batch 86 · Złodziej",
-      "batch": 86,
+      "tier": "Batch 88 · Złodziej",
+      "batch": 88,
       "placeholderKey": "feature:szybkosc-kota",
       "target": "icons/abilities/szybkosc-kota.svg",
       "deliveryTargets": [
@@ -11957,12 +11969,18 @@
         }
       ],
       "context": "Class/profession ability: Szybkość kota; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Uczysz się unikać kul i ataków wręcz, jak na przedwojennych filmach akcji. Odskok [R]. Kiedy otrzymujesz obrażenia w wyniku bezpośredniego ataku, możesz w Reakcji zmniejszyć je o połowę (zaokrąglając w dół). Odskok nie działa, kiedy otrzymujesz obrażenia psychiczne. Szybkie łapy. Twoja Szybkość rośnie o 3 metry. Refleks. Możesz dorzucić jedną Kocią kość do testu Inicjatywy. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "REVISION of reference cell 9. Keep the same realistic CAT CROUCH, four legs, long tail, left-facing orientation and bullet passing above. ADD THREE broad CURVED EVASION STROKES behind the cat's back and hindquarters, sweeping DOWNWARD around its body to show a quick dodge beneath the bullet. Strokes stay clearly separate from the complete cat, with no arrowheads or extra tails. Preserve natural animal proportions and one small eye cut. No anime mascot, fine fur, injury, gore, text or extra animal.",
+      "request": "REVISION of reference cell 3. KEEP THE CAT, crouched body, four paws, tail, left-facing head and bullet unchanged. REMOVE EVERY MOTION ARC from the HINDQUARTERS AND TAIL. Show DUCKING OF THE HEAD instead: place TWO short broad DOWNWARD-CURVING MOTION STROKES directly ABOVE and slightly IN FRONT OF THE HEAD AND FRONT SHOULDERS, descending toward the lowered forehead. A third short vertical stroke may sit above the neck. Clear black gaps separate strokes from ears and bullet. No marks behind the rear half of the cat, no vibrating-butt effect, extra tails, arrows, anime, fine fur or injury.",
       "current": {
         "src": "/icons/abilities/szybkosc-kota.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch88-revision",
+          "label": "Batch 88 · revised Szybkość kota",
+          "src": "candidates/batch-88/szybkosc-kota.png",
+          "note": "REVISION of reference cell 3. KEEP THE CAT, crouched body, four paws, tail, left-facing head and bullet unchanged. REMOVE EVERY MOTION ARC from the HINDQUARTERS AND TAIL. Show DUCKING OF THE HEAD instead: place TWO short broad DOWNWARD-CURVING MOTION STROKES directly ABOVE and slightly IN FRONT OF THE HEAD AND FRONT SHOULDERS, descending toward the lowered forehead. A third short vertical stroke may sit above the neck. Clear black gaps separate strokes from ears and bullet. No marks behind the rear half of the cat, no vibrating-butt effect, extra tails, arrows, anime, fine fur or injury."
+        },
         {
           "id": "batch86-revision",
           "label": "Batch 86 · revised Szybkość kota",
@@ -12040,8 +12058,8 @@
     {
       "id": "batch87-trajektoria",
       "name": "Trajektoria",
-      "tier": "Batch 87 · Spec",
-      "batch": 87,
+      "tier": "Batch 88 · Spec",
+      "batch": 88,
       "placeholderKey": "feature:trajektoria",
       "target": "icons/abilities/trajektoria.svg",
       "deliveryTargets": [
@@ -12052,12 +12070,18 @@
         }
       ],
       "context": "Class/profession ability: Trajektoria; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy wykonujesz Test Ataku dystansowego, możesz dodać do niego swój modyfikator Inteligencji. Tej zdolności możesz użyć tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po odbyciu Długiego odpoczynku. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "ONE complete pointed BULLET follows ONE broad curved BALLISTIC ARC that ends at ONE simple TARGET CROSSHAIR on the right. Bullet sits along the arc near its high middle section and points down-right along the curve; complete short projectile with flat base, no cartridge casing. Large black gaps and a single clear path. Sober generic aim-calculation emblem, no actual measurements, formula, numerals, coordinates, diagram labels, gun, face or decorative arrows.",
+      "request": "REVISION of reference cell 4. Retain the existing lower-RIGHT BULLSEYE with its broad ring, four ticks and central dot. Put ONE complete BULLET exactly at the TOP/APEX, the HIGHEST MIDDLE POINT of ONE ballistic arc, pointing HORIZONTALLY RIGHT along the tangent. BEFORE the bullet on the LEFT: ONE continuous thick SOLID curved line rises from lower-left to the bullet's flat base. AFTER the bullet on the RIGHT: exactly THREE broad SEPARATE DASH SEGMENTS descend along the curve toward the retained lower-right bullseye. Solid before, dashed after. Nothing in the arc sits above the apex bullet. Broad stencil diagram, no second bullet, cartridge casing, actual measurements, numbers, labels or extra rings.",
       "current": {
         "src": "/icons/abilities/trajektoria.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch88-revision",
+          "label": "Batch 88 · revised Trajektoria",
+          "src": "candidates/batch-88/trajektoria.png",
+          "note": "REVISION of reference cell 4. Retain the existing lower-RIGHT BULLSEYE with its broad ring, four ticks and central dot. Put ONE complete BULLET exactly at the TOP/APEX, the HIGHEST MIDDLE POINT of ONE ballistic arc, pointing HORIZONTALLY RIGHT along the tangent. BEFORE the bullet on the LEFT: ONE continuous thick SOLID curved line rises from lower-left to the bullet's flat base. AFTER the bullet on the RIGHT: exactly THREE broad SEPARATE DASH SEGMENTS descend along the curve toward the retained lower-right bullseye. Solid before, dashed after. Nothing in the arc sits above the apex bullet. Broad stencil diagram, no second bullet, cartridge casing, actual measurements, numbers, labels or extra rings."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 87 · Trajektoria",
@@ -12245,6 +12269,412 @@
         }
       ],
       "status": "resolved"
+    },
+    {
+      "id": "batch88-ulubiona-bron-zwiadowca",
+      "name": "Ulubiona broń",
+      "tier": "Batch 88 · Zwiadowca",
+      "batch": 88,
+      "placeholderKey": "feature:ulubiona-bron-zwiadowca",
+      "target": "icons/abilities/ulubiona-bron-zwiadowca.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ulubiona-bron-zwiadowca.svg",
+          "variant": "default",
+          "sourceSha256": "dfaab0fdee5a2eea18b28777faf5ebc65ce32f1d61ee9ade770ee5d77bf936b3"
+        }
+      ],
+      "context": "Class/profession ability: Ulubiona broń; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Wybierz jeden konkretny model broni, której lubisz używać (np. nóż taktyczny lub pistolet G17). Od tej pory, jeśli wykonujesz Ulubioną bronią akcję Atakowanie, możesz w Akcji Bonusowej wykonać nią jeszcze jeden atak (broń dystansowa musi mieć załadowaną amunicję). Możesz zmienić ulubioną broń na inną w czasie Długiego odpoczynku, poświęcając godzinę na trening. Na 9. poziomie możesz mieć jednocześnie dwie ulubione bronie. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "Complete the favorite-weapon FAMILY: ONE practical complete SCOPED RIFLE angled upward-right, clear shoulder stock, straight barrel, scope and empty trigger guard. ONE thick CIRCULAR FAVORITE BADGE beside the stock contains ONE bold FIVE-POINT STAR cut in black, matching the approved revolver's badge in reference cell 5. Same simple badge scale and white stencil weight, changing only the weapon. No hand, person, engraving, text, numerals, tiny scope fittings or logo.",
+      "current": {
+        "src": "/icons/abilities/ulubiona-bron-zwiadowca.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 88 · Ulubiona broń",
+          "src": "candidates/batch-88/ulubiona-bron-zwiadowca.png",
+          "note": "Complete the favorite-weapon FAMILY: ONE practical complete SCOPED RIFLE angled upward-right, clear shoulder stock, straight barrel, scope and empty trigger guard. ONE thick CIRCULAR FAVORITE BADGE beside the stock contains ONE bold FIVE-POINT STAR cut in black, matching the approved revolver's badge in reference cell 5. Same simple badge scale and white stencil weight, changing only the weapon. No hand, person, engraving, text, numerals, tiny scope fittings or logo."
+        }
+      ]
+    },
+    {
+      "id": "batch88-w-czuly-punkt",
+      "name": "W czuły punkt",
+      "tier": "Batch 88 · Spec",
+      "batch": 88,
+      "placeholderKey": "feature:w-czuly-punkt",
+      "target": "icons/abilities/w-czuly-punkt.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/w-czuly-punkt.svg",
+          "variant": "default",
+          "sourceSha256": "494b773b1bd3d580fe42cd13ca56fe001b8830b33a0f0ffbf75508a7a8719794"
+        }
+      ],
+      "context": "Class/profession ability: W czuły punkt; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Do wszystkich obrażeń, które zadajesz, możesz dodać swój modyfikator Inteligencji. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE plain headless TRAINING MANNEQUIN TORSO, with shoulder stubs and broad intact chest. ONE thick circular TARGET CROSSHAIR marks its CENTER; ONE short blunt POINTER meets the reticle from lower-right. A schematic precise-strike emblem, no real anatomical labels or injury. Broad simple white shapes with black separation, no face, limbs, organs, wound, gore, lettering, numerals, tiny muscles or extra targets.",
+      "current": {
+        "src": "/icons/abilities/w-czuly-punkt.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 88 · W czuły punkt",
+          "src": "candidates/batch-88/w-czuly-punkt.png",
+          "note": "ONE plain headless TRAINING MANNEQUIN TORSO, with shoulder stubs and broad intact chest. ONE thick circular TARGET CROSSHAIR marks its CENTER; ONE short blunt POINTER meets the reticle from lower-right. A schematic precise-strike emblem, no real anatomical labels or injury. Broad simple white shapes with black separation, no face, limbs, organs, wound, gore, lettering, numerals, tiny muscles or extra targets."
+        }
+      ]
+    },
+    {
+      "id": "batch88-wsciekly-cios",
+      "name": "Wściekły cios",
+      "tier": "Batch 88 · Brutal",
+      "batch": 88,
+      "placeholderKey": "feature:wsciekly-cios",
+      "target": "icons/abilities/wsciekly-cios.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wsciekly-cios.svg",
+          "variant": "default",
+          "sourceSha256": "52ae2a6a7a2a4e2d93821ffb52e603891237b164515cc23a18067020927610f8"
+        }
+      ],
+      "context": "Class/profession ability: Wściekły cios; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Raz w rundzie, kiedy trafisz atakiem opartym na Sile, możesz dodać do obrażeń kości Wściekłego ciosu. Masz ich tyle, ile poziomów Brutala, a każda z nich zadaje dodatkowo 1k6 obrażeń. PRZYKŁAD: Na 5. poziomie Brutala masz 5 kości Wściekłego ciosu. Do pojedynczego ataku możesz dodać maksymalnie 3 kości Wściekłego ciosu. Kości tej zdolności odnawiają się po odbyciu Długiego odpoczynku. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete powerful BARE CLENCHED FIST smashes ONE stout rectangular STONE BLOCK into exactly TWO large separated chunks. Complete short wrist and coherent thumb/folded fingers, one broad angular impact wedge between fist and block. Forceful furious strike, sober functional silhouette with large black gaps. No person, portrait, extra hand, tiny debris, texture, blood, wound, gore or written marks.",
+      "current": {
+        "src": "/icons/abilities/wsciekly-cios.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 88 · Wściekły cios",
+          "src": "candidates/batch-88/wsciekly-cios.png",
+          "note": "ONE complete powerful BARE CLENCHED FIST smashes ONE stout rectangular STONE BLOCK into exactly TWO large separated chunks. Complete short wrist and coherent thumb/folded fingers, one broad angular impact wedge between fist and block. Forceful furious strike, sober functional silhouette with large black gaps. No person, portrait, extra hand, tiny debris, texture, blood, wound, gore or written marks."
+        }
+      ]
+    },
+    {
+      "id": "batch88-wyczulone-zmysly",
+      "name": "Wyczulone zmysły",
+      "tier": "Batch 88 · Zwiadowca",
+      "batch": 88,
+      "placeholderKey": "feature:wyczulone-zmysly",
+      "target": "icons/abilities/wyczulone-zmysly.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wyczulone-zmysly.svg",
+          "variant": "default",
+          "sourceSha256": "630c1143f620eb4e0a6950df06c7462b5e045a9a032023f9885ca0df95177edf"
+        }
+      ],
+      "context": "Class/profession ability: Wyczulone zmysły; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Masz stałe Ułatwienie do testów Percepcji, więc twoja Pasywna Percepcja rośnie o 5. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE large natural HUMAN EAR beside ONE plain natural HUMAN EYE, staggered diagonally with TWO broad sound-wave arcs between them. External sensory symbols only: ear has two large inner folds, eye one almond contour and round black pupil. Clear strong white masses, generous black space and natural proportions. No whole face, beard portrait, anime lashes, giant stylized eye, gore, tiny wrinkles, text or extra organs.",
+      "current": {
+        "src": "/icons/abilities/wyczulone-zmysly.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 88 · Wyczulone zmysły",
+          "src": "candidates/batch-88/wyczulone-zmysly.png",
+          "note": "ONE large natural HUMAN EAR beside ONE plain natural HUMAN EYE, staggered diagonally with TWO broad sound-wave arcs between them. External sensory symbols only: ear has two large inner folds, eye one almond contour and round black pupil. Clear strong white masses, generous black space and natural proportions. No whole face, beard portrait, anime lashes, giant stylized eye, gore, tiny wrinkles, text or extra organs."
+        }
+      ]
+    },
+    {
+      "id": "batch88-wyjadacz-zwiadowca",
+      "name": "Wyjadacz",
+      "tier": "Batch 88 · Zwiadowca",
+      "batch": 88,
+      "placeholderKey": "feature:wyjadacz-zwiadowca",
+      "target": "icons/abilities/wyjadacz-zwiadowca.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wyjadacz-zwiadowca.svg",
+          "variant": "default",
+          "sourceSha256": "c8495031166e511cfbbfe32844e060cd26b509110a766d30a4cc9fd9456e2012"
+        }
+      ],
+      "context": "Class/profession ability: Wyjadacz; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zwiadowca to prawdziwy zawodowiec. Wybierz jedną z poniższych zdolności, która podkreśli ten fakt. Na 11. poziomie możesz wybrać kolejną zdolność z tej listy, ale każdą z nich możesz wybrać tylko raz. Jeździec Kiedy dosiadasz wierzchowca, nie musisz używać rąk, żeby nim kierować. Nie otrzymujesz Utrudnienia do Testów Ataków dystansowych związanego z niestabilnym podłożem, kiedy na nim jedziesz. Wsiadanie i zsiadanie z wierzchowca kosztuje cię tylko 1,5 metra ruchu. Trudność Trafienia twojego wie Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "Veteran-expertise badge FAMILY: ONE sturdy rounded-rectangle SHOULDER PATCH with a thick white border. Its UPPER HALF contains ONE simple FOUR-POINT COMPASS NEEDLE emblem with no letters. Its LOWER HALF contains exactly THREE broad stacked CHEVRONS pointing upward. Broad black gaps separate emblem, chevrons and rim. A fictional scout-veteran patch, same construction as the armored-veteran counterpart. No person, face, numbers, writing, real unit insignia, tiny stitching or decorative laurel.",
+      "current": {
+        "src": "/icons/abilities/wyjadacz-zwiadowca.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 88 · Wyjadacz",
+          "src": "candidates/batch-88/wyjadacz-zwiadowca.png",
+          "note": "Veteran-expertise badge FAMILY: ONE sturdy rounded-rectangle SHOULDER PATCH with a thick white border. Its UPPER HALF contains ONE simple FOUR-POINT COMPASS NEEDLE emblem with no letters. Its LOWER HALF contains exactly THREE broad stacked CHEVRONS pointing upward. Broad black gaps separate emblem, chevrons and rim. A fictional scout-veteran patch, same construction as the armored-veteran counterpart. No person, face, numbers, writing, real unit insignia, tiny stitching or decorative laurel."
+        }
+      ]
+    },
+    {
+      "id": "batch89-wyjadacz",
+      "name": "Wyjadacz",
+      "tier": "Batch 89 · Twardziel",
+      "batch": 89,
+      "placeholderKey": "feature:wyjadacz",
+      "target": "icons/abilities/wyjadacz.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wyjadacz.svg",
+          "variant": "default",
+          "sourceSha256": "374e50918253c177a15139376fef0f5f6f1199181433d72dac3671f12add84f8"
+        }
+      ],
+      "context": "Class/profession ability: Wyjadacz; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Twardziel to zawodowiec, jeśli chodzi o obsługę broni i pancerzy. Wybierz jedną zdolność z poniższej listy, która podkreśli ten fakt. Na 7. poziomie Twardziela możesz wybrać kolejną zdolność z listy, ale każdą z nich wybierasz tylko raz. Obsługa pancerza Kiedy nosisz pancerz, otrzymujesz +2 do TT. Rzeźnik Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią. Sokole oko Otrzymujesz modyfikator +3 do Testów Ataku broni Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "Veteran-expertise badge FAMILY: ONE sturdy rounded-rectangle SHOULDER PATCH with a thick white border. Its UPPER HALF contains ONE simple BODY-ARMOR VEST emblem with two broad plate cuts. Its LOWER HALF contains exactly THREE broad stacked CHEVRONS pointing upward. Broad black gaps separate emblem, chevrons and rim. Same patch proportions, rim and chevron scale as the scout-veteran counterpart; change only the upper emblem. No person, face, letters, numbers, real unit insignia, tiny stitching or laurel.",
+      "current": {
+        "src": "/icons/abilities/wyjadacz.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 89 · Wyjadacz",
+          "src": "candidates/batch-89/wyjadacz.png",
+          "note": "Veteran-expertise badge FAMILY: ONE sturdy rounded-rectangle SHOULDER PATCH with a thick white border. Its UPPER HALF contains ONE simple BODY-ARMOR VEST emblem with two broad plate cuts. Its LOWER HALF contains exactly THREE broad stacked CHEVRONS pointing upward. Broad black gaps separate emblem, chevrons and rim. Same patch proportions, rim and chevron scale as the scout-veteran counterpart; change only the upper emblem. No person, face, letters, numbers, real unit insignia, tiny stitching or laurel."
+        }
+      ]
+    },
+    {
+      "id": "batch89-wyksztalciuch",
+      "name": "Wykształciuch",
+      "tier": "Batch 89 · Spec",
+      "batch": 89,
+      "placeholderKey": "feature:wyksztalciuch",
+      "target": "icons/abilities/wyksztalciuch.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wyksztalciuch.svg",
+          "variant": "default",
+          "sourceSha256": "a6797cc50ff6fe13453bdf1b33603c2aabc2228ae45d9d991431da62a0739804"
+        }
+      ],
+      "context": "Class/profession ability: Wykształciuch; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Jeśli jeszcze nie wiesz wszystkiego, to dobierz sobie dwie umiejętności lub dwie biegłości w narzędziach. Jesteś Specem, ty zawsze wiesz wszystko! Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE plain GRADUATION MORTARBOARD above ONE sturdy SMALL TOOLBOX, with one short broad tassel, a complete carrying handle and two simple lid cuts. A large wrench head and screwdriver handle peek from the open box, broad functional silhouettes only. Learning adds practical skills, not a book motif. No person, face, lettering, numerals, tiny tools, academic logo, fine stitching or giant cog.",
+      "current": {
+        "src": "/icons/abilities/wyksztalciuch.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 89 · Wykształciuch",
+          "src": "candidates/batch-89/wyksztalciuch.png",
+          "note": "ONE plain GRADUATION MORTARBOARD above ONE sturdy SMALL TOOLBOX, with one short broad tassel, a complete carrying handle and two simple lid cuts. A large wrench head and screwdriver handle peek from the open box, broad functional silhouettes only. Learning adds practical skills, not a book motif. No person, face, lettering, numerals, tiny tools, academic logo, fine stitching or giant cog."
+        }
+      ]
+    },
+    {
+      "id": "batch89-z-bara",
+      "name": "Z bara!",
+      "tier": "Batch 89 · Brutal",
+      "batch": 89,
+      "placeholderKey": "feature:z-bara",
+      "target": "icons/abilities/z-bara.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/z-bara.svg",
+          "variant": "default",
+          "sourceSha256": "51fbd774b71851e9964b73a04f795fa5d1b71962759d5cd5c517912046a27b4a"
+        }
+      ],
+      "context": "Class/profession ability: Z bara!; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy jesteś pod wpływem zdolności Berserk, to w Akcji Bonusowej możesz wykonać Odepchnięcie istoty dużej lub mniejszej od ciebie. Cel musi zdać RO na Siłę lub Zręczność, inaczej go odpychasz o 1,5 metra od siebie lub przewracasz, nakładając na niego stan Powalenie. Stopień Trudności RO wynosi 8 plus twój modyfikator Siły i Premia Biegłości. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "TWO generic ADULT UPPER TORSOS in side view. LEFT adult leans their SHOULDER into the RIGHT adult's chest in a powerful SHOULDER SHOVE; the right figure tilts backward off balance with one arm out. Short coherent necks, smooth featureless heads and complete visible arms, plain clothes. One broad contact wedge at the shoulder, large black gaps. Torso-level compact composition, no running legs, gruff portraits, anime, weapon, injury, blood or extra limbs.",
+      "current": {
+        "src": "/icons/abilities/z-bara.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 89 · Z bara!",
+          "src": "candidates/batch-89/z-bara.png",
+          "note": "TWO generic ADULT UPPER TORSOS in side view. LEFT adult leans their SHOULDER into the RIGHT adult's chest in a powerful SHOULDER SHOVE; the right figure tilts backward off balance with one arm out. Short coherent necks, smooth featureless heads and complete visible arms, plain clothes. One broad contact wedge at the shoulder, large black gaps. Torso-level compact composition, no running legs, gruff portraits, anime, weapon, injury, blood or extra limbs."
+        }
+      ]
+    },
+    {
+      "id": "batch89-za-garsc-gambli",
+      "name": "Za garść gambli",
+      "tier": "Batch 89 · Gwiazda",
+      "batch": 89,
+      "placeholderKey": "feature:za-garsc-gambli",
+      "target": "icons/abilities/za-garsc-gambli.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/za-garsc-gambli.svg",
+          "variant": "default",
+          "sourceSha256": "cde71508cf8b7d7d178fb4e178ed549c877817d5ff504315a1e4682cb3c634dc"
+        }
+      ],
+      "context": "Class/profession ability: Za garść gambli; owner Gwiazda. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Każda dziura i miasteczko w Podzielonych Stanach potrzebuje muzyki. Każdy klub i śmierdzący bar bez okien, przyjmie twoje usługi zapewniające rozrywkę stałej klienteli. Zawsze dostaniesz dach nad głową i żarcie, a może i będzie za co się napić. Raz dziennie dajesz czterogodzinny koncert w lokalnej knajpie lub klubie, a od twoich umiejętności zależy, ile zarobisz (patrz tabela poniżej). Po skończeniu koncertu otrzymujesz jeden poziom Wyczerpania. MIEJSCE KONCERTU MNOŻNIK WYNIKU TESTU CHARYZMY (WY Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete practical SAXOPHONE with a broad flared bell and curved neck above ONE open BUSKER'S HAT containing TWO thick blank COINS. Saxophone has only THREE broad key cuts, sturdy coherent tube and complete mouthpiece. A street performance earns tips, sober compact object emblem. Clear black gaps, no player, face, musical-note lettering, logo, numerals, tiny keys, fine engraving or extra instruments.",
+      "current": {
+        "src": "/icons/abilities/za-garsc-gambli.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 89 · Za garść gambli",
+          "src": "candidates/batch-89/za-garsc-gambli.png",
+          "note": "ONE complete practical SAXOPHONE with a broad flared bell and curved neck above ONE open BUSKER'S HAT containing TWO thick blank COINS. Saxophone has only THREE broad key cuts, sturdy coherent tube and complete mouthpiece. A street performance earns tips, sober compact object emblem. Clear black gaps, no player, face, musical-note lettering, logo, numerals, tiny keys, fine engraving or extra instruments."
+        }
+      ]
+    },
+    {
+      "id": "batch89-zabojczy-cios",
+      "name": "Zabójczy cios",
+      "tier": "Batch 89 · Brutal",
+      "batch": 89,
+      "placeholderKey": "feature:zabojczy-cios",
+      "target": "icons/abilities/zabojczy-cios.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zabojczy-cios.svg",
+          "variant": "default",
+          "sourceSha256": "a0e2a925f1b54f341304533b07aa2e16f3357c454d0a15c0291f21281e588bc2"
+        }
+      ],
+      "context": "Class/profession ability: Zabójczy cios; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Wiesz już gdzie uderzać, żeby wyrządzić największe szkody. Kiedy trafiasz krytycznie atakiem wręcz, zamiast podwajać, potrajasz kostki obrażeń. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete BARE CLENCHED FIST strikes ONE simple symbolic SKULL, splitting the skull emblem into TWO broad pieces with a single large crack. Skull has two big eye holes and block jaw, no fine teeth. Complete wrist, coherent thumb/folded fingers, one broad impact wedge. Flat non-graphic deadly-strike symbol, no human body, wound, blood, realistic head injury, gore, tiny fragments or text.",
+      "current": {
+        "src": "/icons/abilities/zabojczy-cios.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 89 · Zabójczy cios",
+          "src": "candidates/batch-89/zabojczy-cios.png",
+          "note": "ONE complete BARE CLENCHED FIST strikes ONE simple symbolic SKULL, splitting the skull emblem into TWO broad pieces with a single large crack. Skull has two big eye holes and block jaw, no fine teeth. Complete wrist, coherent thumb/folded fingers, one broad impact wedge. Flat non-graphic deadly-strike symbol, no human body, wound, blood, realistic head injury, gore, tiny fragments or text."
+        }
+      ]
+    },
+    {
+      "id": "batch89-zawolajcie-kolegow",
+      "name": "Zawołajcie kolegów",
+      "tier": "Batch 89 · Gladiator",
+      "batch": 89,
+      "placeholderKey": "feature:zawolajcie-kolegow",
+      "target": "icons/abilities/zawolajcie-kolegow.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawolajcie-kolegow.svg",
+          "variant": "default",
+          "sourceSha256": "abfc18f9af0e406acc37d35e09766a779dad7eeabed31cf74d1f1a8e14b3748d"
+        }
+      ],
+      "context": "Class/profession ability: Zawołajcie kolegów; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Jeśli w zasięgu 1,5 metra od ciebie znajduje się co najmniej dwóch przeciwników, otrzymujesz Ułatwienie do Testów Ataków wręcz. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE large complete BARE HAND BECKONS confidently upward, fingers curling inward once, with TWO smaller opposing CLENCHED FISTS above-left and above-right. Exactly three hands with coherent thumbs/fingers and short complete wrists, clear broad black gaps. A fighter challenges multiple opponents to come closer. No whole person, portrait, extra hands, text, numbers, weapons, wounds, gore or decorative arrows.",
+      "current": {
+        "src": "/icons/abilities/zawolajcie-kolegow.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 89 · Zawołajcie kolegów",
+          "src": "candidates/batch-89/zawolajcie-kolegow.png",
+          "note": "ONE large complete BARE HAND BECKONS confidently upward, fingers curling inward once, with TWO smaller opposing CLENCHED FISTS above-left and above-right. Exactly three hands with coherent thumbs/fingers and short complete wrists, clear broad black gaps. A fighter challenges multiple opponents to come closer. No whole person, portrait, extra hands, text, numbers, weapons, wounds, gore or decorative arrows."
+        }
+      ]
+    },
+    {
+      "id": "batch89-zawsze-w-siodle",
+      "name": "Zawsze w siodle",
+      "tier": "Batch 89 · Kowboj",
+      "batch": 89,
+      "placeholderKey": "feature:zawsze-w-siodle",
+      "target": "icons/abilities/zawsze-w-siodle.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawsze-w-siodle.svg",
+          "variant": "default",
+          "sourceSha256": "5e64e1f696dd5bdd4d4b71e08d22eaa07280cd5ed0b88c6ff05b3ebe43f1881f"
+        }
+      ],
+      "context": "Class/profession ability: Zawsze w siodle; owner Kowboj. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Prawdziwy kowboj piechotą chodzi tylko do kibla, baru i burdelu. Jeśli nie masz konia lub motocykla, los zsyła ci okazję do jego zdobycia na najbliższym Długim odpoczynku. Porzucony harley lub koń bez jeźdźca, to coś, co po prostu ci się przydarza. Pamiętaj, żeby nadać mu imię i módl się do zapomnianych bogów, żeby nie spotkać jego prawowitego właściciela. I pamiętaj - nie możesz go nikomu sprzedać. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete sturdy WESTERN RIDING SADDLE in clear side profile, broad seat, simple pommel and cantle, ONE large hanging STIRRUP and ONE rolled blanket secured behind. Practical adult horse tack, coherent straps simplified into two broad bands. Strong compact silhouette, generous negative space, no rider, horse, portrait, fine leather tooling, tiny stitching, logos or text.",
+      "current": {
+        "src": "/icons/abilities/zawsze-w-siodle.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 89 · Zawsze w siodle",
+          "src": "candidates/batch-89/zawsze-w-siodle.png",
+          "note": "ONE complete sturdy WESTERN RIDING SADDLE in clear side profile, broad seat, simple pommel and cantle, ONE large hanging STIRRUP and ONE rolled blanket secured behind. Practical adult horse tack, coherent straps simplified into two broad bands. Strong compact silhouette, generous negative space, no rider, horse, portrait, fine leather tooling, tiny stitching, logos or text."
+        }
+      ]
+    },
+    {
+      "id": "batch89-zew-areny",
+      "name": "Zew areny",
+      "tier": "Batch 89 · Gladiator",
+      "batch": 89,
+      "placeholderKey": "feature:zew-areny",
+      "target": "icons/abilities/zew-areny.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zew-areny.svg",
+          "variant": "default",
+          "sourceSha256": "7524b5d3e92bf9189e5964e1b4a5065a2986e42c5cb8af9fbee57f0f8d06f987"
+        }
+      ],
+      "context": "Class/profession ability: Zew areny; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Podczas walki słyszysz doping widzów, nawet jeśli ich wokół ciebie nie ma. Kiedy jesteś w Berserku, zyskujesz: Doping. Otrzymujesz niewrażliwość na stan Przerażenie. Praca nóg. Przeciwnicy mają Utrudnienie w testach ataków okazyjnych przeciw tobie. Skok Gladiatora. Maksymalna wysokość i odległość twojego skoku ulega podwojeniu. Jeśli twój skok zakończy się na polu istoty nie większej od ciebie o więcej niż jeden rozmiar, musi ona zdać RO na Siłę, inaczej otrzyma stan Powalenie oraz 1k6 obrażeń o Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE sturdy hanging ARENA BELL with a large visible clapper and ONE simple broad mounting bracket, flanked by TWO complete raised BARE CLENCHED FISTS. Intact short wrists and natural fingers, thick iron bell rim with one broad black cut. The ring calls combat and crowd energy, sober salvaged equipment. Clear black gaps, no audience faces, gruff fighter portrait, ornate architecture, text, numerals, tiny fittings or gore.",
+      "current": {
+        "src": "/icons/abilities/zew-areny.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 89 · Zew areny",
+          "src": "candidates/batch-89/zew-areny.png",
+          "note": "ONE sturdy hanging ARENA BELL with a large visible clapper and ONE simple broad mounting bracket, flanked by TWO complete raised BARE CLENCHED FISTS. Intact short wrists and natural fingers, thick iron bell rim with one broad black cut. The ring calls combat and crowd energy, sober salvaged equipment. Clear black gaps, no audience faces, gruff fighter portrait, ornate architecture, text, numerals, tiny fittings or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch89-znajomosci",
+      "name": "Znajomości",
+      "tier": "Batch 89 · Kurier",
+      "batch": 89,
+      "placeholderKey": "feature:znajomosci",
+      "target": "icons/abilities/znajomosci.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/znajomosci.svg",
+          "variant": "default",
+          "sourceSha256": "52a6498ef58a5200bda88b5386d7d4ea50b09c4e73c503a5a419b8fcde60629c"
+        }
+      ],
+      "context": "Class/profession ability: Znajomości; owner Kurier. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Podzielone Stany to twój dom i prawie wszędzie masz jakiegoś znajomka. Kiedy jesteś w cywilizowanym miejscu, wykonaj Test Charyzmy. Im lepszy wynik, tym bardziej znaczący w lokalnej społeczności jest twój znajomy. WYNIK TESTU CHARYZMY ZNAJOMOŚĆ 1-9 Nikogo tu nie znasz z imienia. 10-14 Masz znajomka, który tu mieszka. 15-19 Masz tu znajomka, który prowadzi biznes lub jest stróżem porządku. 20+ Twój znajomek to gruba szycha, która tu rządzi. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "Exactly THREE plain generic ADULT HEAD-AND-SHOULDER SILHOUETTES form ONE clear SOCIAL NETWORK: one larger silhouette at TOP CENTER, two smaller at lower-left and lower-right. TWO broad straight connector strokes link the top silhouette to the lower pair, with clear black spacing from their heads. Smooth featureless natural adult heads, sober diagram-like icon. No handshake, face detail, beard, anime, labels, numbers, arrows or extra people.",
+      "current": {
+        "src": "/icons/abilities/znajomosci.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 89 · Znajomości",
+          "src": "candidates/batch-89/znajomosci.png",
+          "note": "Exactly THREE plain generic ADULT HEAD-AND-SHOULDER SILHOUETTES form ONE clear SOCIAL NETWORK: one larger silhouette at TOP CENTER, two smaller at lower-left and lower-right. TWO broad straight connector strokes link the top silhouette to the lower pair, with clear black spacing from their heads. Smooth featureless natural adult heads, sober diagram-like icon. No handshake, face detail, beard, anime, labels, numbers, arrows or extra people."
+        }
+      ]
     }
   ]
 }

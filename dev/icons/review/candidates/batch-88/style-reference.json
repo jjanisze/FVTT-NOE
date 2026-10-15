@@ -1,0 +1,41 @@
+{
+  "role": "Reference cells 1-4 are EXACT selected revision sources. Cell 1 needs the knife MUCH LOWER, below the armpit at lower ribs, and an AFRAID expression. Cell 2 swaps boots and crosses lower legs. Cell 3 moves evasion marks from rear to HEAD. Cell 4 places bullet at apex, solid approach and dashed descent. Cells 5-9 are STYLE ONLY; reference cell 5 specifically establishes the approved favorite-weapon badge. Output cell 9 begins a veteran-patch family: same thick rounded rectangle, upper emblem and three lower chevrons as its counterpart.",
+  "sources": [
+    {
+      "source": "dev/icons/review/candidates/batch-86/rzeznik.png",
+      "sha256": "16a64677aee4cdefc82d0df8554664227d8da2462d1e0074cfd61b72e04ef1b1"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-86/szybkie-nogi.png",
+      "sha256": "bdf5d9ad31df3dc62bc90e29f10f7f9c25218de9a971f7799e7fc5037fafcf40"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-86/szybkosc-kota.png",
+      "sha256": "1c3703f16744b08af72ea655ca802393b9efc515fd0b3a15458dd33c787fa765"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-87/trajektoria.png",
+      "sha256": "8a9938722a9816e50e511ffd91bf3c93933f0c2dc72ce2fcd8b58f1ab0ca0b6c"
+    },
+    {
+      "source": "icons/abilities/ulubiona-bron-twardziel.webp",
+      "sha256": "d5ee0b6859d1ed1d5453d3fdef5a028407546fc9faae7807fea132c9598ad98c"
+    },
+    {
+      "source": "icons/abilities/emiter-emp.webp",
+      "sha256": "e052c015b34c427698455fc79fac5cff36d25211fff085141a02440c157a1fdc"
+    },
+    {
+      "source": "icons/abilities/bez-tajemnic.webp",
+      "sha256": "1c6544d59989a4dd08c9faf2728da3f5d902adabf1886f080627ea5d90013eb7"
+    },
+    {
+      "source": "icons/abilities/kocie-kosci.webp",
+      "sha256": "ee5d25740ab235e515c3e32405a25e41eceba7005bcd83cc2a6ebae4d52e30db"
+    },
+    {
+      "source": "icons/abilities/dziewiec-zyc.webp",
+      "sha256": "0cf20df0e99b7078ccc55a513e67d81a2672d09a49374eca0815731a2aa34317"
+    }
+  ]
+}

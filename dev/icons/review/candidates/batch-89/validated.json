@@ -1,0 +1,16 @@
+{
+  "batch": 89,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "wyjadacz": "84d42c0d7d546c673827021f2d702daa08f50dd08f5a5ae72ca7032f7d72d6a3",
+    "wyksztalciuch": "a9bfb1e2c4725dc8dc4bfc5969a18ef665f3a5e3b463a6447b9d95ee7f23f680",
+    "z-bara": "4dc3bc735e1932627fba571deabcd0902289ddc4a77829fe5a3e78f562fad290",
+    "za-garsc-gambli": "6afb20d85dea172237e1988ed69071d87b9937fc2388a70c07b132d36b8058bf",
+    "zabojczy-cios": "8fc999f2aa3779457610e5793a8c49694c26a07985e0af0ab38abedcc0c4416a",
+    "zawolajcie-kolegow": "e8f1c30ee6f2acafd3471b5af30862d84dedf6ee7c170d9e61887e6ac2294941",
+    "zawsze-w-siodle": "0920f5b301d75ecd8c2fb211c9db75ec013e7ee43207b667575a103c078bd946",
+    "zew-areny": "f12ee1e69ca78371e13d47562e58a912a79a4371adfdc3ef340ae54c0891a54c",
+    "znajomosci": "7750a29d6a84f5e0faf9192c0755ef979d41cefa4acc18d6bf8c9d31cee22f2f"
+  }
+}

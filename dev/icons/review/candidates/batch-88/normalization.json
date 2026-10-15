@@ -1,0 +1,65 @@
+[
+  {
+    "key": "rzeznik",
+    "source": "raw/batch-88-atlas-a.png, cell 1",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "szybkie-nogi",
+    "source": "raw/standalone-szybkie-nogi.png",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "szybkosc-kota",
+    "source": "raw/batch-88-atlas-a.png, cell 3",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "trajektoria",
+    "source": "raw/batch-88-atlas-a.png, cell 4",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "ulubiona-bron-zwiadowca",
+    "source": "raw/batch-88-atlas-a.png, cell 5",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "w-czuly-punkt",
+    "source": "raw/batch-88-atlas-a.png, cell 6",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "wsciekly-cios",
+    "source": "raw/batch-88-atlas-a.png, cell 7",
+    "removedTinyPixels": 1,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "wyczulone-zmysly",
+    "source": "raw/batch-88-atlas-a.png, cell 8",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "wyjadacz-zwiadowca",
+    "source": "raw/batch-88-atlas-a.png, cell 9",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  }
+]

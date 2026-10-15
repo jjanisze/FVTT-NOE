@@ -1,0 +1,16 @@
+{
+  "batch": 88,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "rzeznik": "777ea6c03de242e4ebc8345a5305369ef5494e328d8a39234e9c5b29ee842af4",
+    "szybkie-nogi": "396423cfc20ec349daacebaac4431fa99fe6eedd3628cc94583579ae317063e9",
+    "szybkosc-kota": "d97001891bfe036602d65a0ebae46739165e3eeb4770e22a0f3168b2442e3ce4",
+    "trajektoria": "b9fb77fe1bf030ae2a0b123848a30676f4bf8caea4926f53a481b77ed2531382",
+    "ulubiona-bron-zwiadowca": "862a785d46701cda42d4041703645d6dda64abcef4756243655f81294c83cac3",
+    "w-czuly-punkt": "46ebae27d1c24cb7d054d91d666d17d98f36a792be0ebf034a0632a4d44e1cb0",
+    "wsciekly-cios": "0f1645e779d7b674bea99bd82493f203269cc4cb2dda2ba902d5e7deb3afd728",
+    "wyczulone-zmysly": "7ee8f577e3f4cc88713521b3770063d7f7e0da478bcc4e5cd902fa7ef19b121d",
+    "wyjadacz-zwiadowca": "b4c51eeb755d654e3abad33ce5431839cdc0820c068cb080d3160c776ebed19a"
+  }
+}

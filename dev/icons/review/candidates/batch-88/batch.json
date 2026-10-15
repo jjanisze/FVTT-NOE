@@ -1,0 +1,288 @@
+{
+  "date": "2026-10-16",
+  "batch": 88,
+  "generalFeedback": "Apply exact saved revisions. Broad sober white glyphs, natural adult anatomy, no anime or gruff portrait default; varied practical objects and symbols.",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "rzeznik",
+      "name": "Rzeźnik",
+      "owner": "wyjadacz-option",
+      "ownerLabel": "wyjadacz-option",
+      "target": "icons/abilities/rzeznik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/rzeznik.svg",
+          "variant": "default",
+          "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+        }
+      ],
+      "ruleContext": "Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią.",
+      "context": "Class/profession ability: Rzeźnik; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "REVISION of reference cell 1. Keep the raised arm, upper holding hand and target torso. Move the LOWER KNIFE HAND MUCH LOWER AGAIN, to LOWER CHEST/RIB HEIGHT. Its knife points almost HORIZONTALLY RIGHT, only slightly upward, with the tip aiming at the SIDE OF THE RIBS WELL BELOW THE ARMPIT. NOT at the raised upper arm or the armpit itself. Tip stops short of the shirt with a black gap. Lower the hand and blade together by another full fist height; make this change clearly visible. Change the face to AFRAID: raised inner brow, one widened natural eye and small rounded open mouth, no angry scowl or grin. Same coherent adult, exactly two attacker hands. Fictional threat before contact only: no stabbing, wound, blood, exposed tissue or gore; no anime exaggeration.",
+      "itemId": "batch81-rzeznik",
+      "revisionOf": {
+        "id": "batch81-rzeznik",
+        "name": "Rzeźnik",
+        "decision": "revise",
+        "candidateId": "batch86-revision",
+        "selectedSource": "candidates/batch-86/rzeznik.png",
+        "sourceSha256": "16a64677aee4cdefc82d0df8554664227d8da2462d1e0074cfd61b72e04ef1b1",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/rzeznik.svg",
+            "variant": "default",
+            "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+          }
+        ],
+        "notes": "The knife should be even lower, targetting below the armpit. Make the expression afraid. ",
+        "feedback": {
+          "itemId": "batch81-rzeznik",
+          "decision": "revise",
+          "candidateId": "batch86-revision",
+          "notes": "The knife should be even lower, targetting below the armpit. Make the expression afraid. ",
+          "updatedAt": "2026-10-15T23:10:02.843Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "szybkie-nogi",
+      "name": "Szybkie nogi",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/abilities/szybkie-nogi.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-nogi.svg",
+          "variant": "default",
+          "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398"
+        }
+      ],
+      "ruleContext": "Łączysz swoją zwinność i szybkość, w celu zwiększenia szansy przetrwania na polu walki. Możesz w Akcji Bonusowej wykonać Odstąpienie, Przyspieszenie lub Ukrywanie się.",
+      "context": "Class/profession ability: Szybkie nogi; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "request": "REVISION of reference cell 2. Preserve the same two rugged boots, trouser cuffs and common ground line. SWAP THE FEET: the RIGHT boot is now FLAT on the ground, the LEFT boot is now balanced on its TOE with heel raised HIGH. Both toes still point RIGHT. CROSS THE TWO LOWER LEGS into a clear natural X ABOVE THE ANKLES: the calf entering from upper-LEFT continues diagonally DOWN-RIGHT into the flat right boot, and the calf entering from upper-RIGHT continues diagonally DOWN-LEFT into the toe-balanced left boot. One broad black separation at the crossing identifies which leg is in front. Natural moonwalk stance, exactly two complete boots, no extra leg, airborne step, full person, text or recognizable performer.",
+      "itemId": "batch85-szybkie-nogi",
+      "revisionOf": {
+        "id": "batch85-szybkie-nogi",
+        "name": "Szybkie nogi",
+        "decision": "revise",
+        "candidateId": "batch86-revision",
+        "selectedSource": "candidates/batch-86/szybkie-nogi.png",
+        "sourceSha256": "bdf5d9ad31df3dc62bc90e29f10f7f9c25218de9a971f7799e7fc5037fafcf40",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/szybkie-nogi.svg",
+            "variant": "default",
+            "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398"
+          }
+        ],
+        "notes": "Close, but you need to swap the feet and cross the legs.",
+        "feedback": {
+          "itemId": "batch85-szybkie-nogi",
+          "decision": "revise",
+          "candidateId": "batch86-revision",
+          "notes": "Close, but you need to swap the feet and cross the legs.",
+          "updatedAt": "2026-10-15T23:11:04.736Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "szybkosc-kota",
+      "name": "Szybkość kota",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/abilities/szybkosc-kota.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkosc-kota.svg",
+          "variant": "default",
+          "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a"
+        }
+      ],
+      "ruleContext": "Uczysz się unikać kul i ataków wręcz, jak na przedwojennych filmach akcji. Odskok [R]. Kiedy otrzymujesz obrażenia w wyniku bezpośredniego ataku, możesz w Reakcji zmniejszyć je o połowę (zaokrąglając w dół). Odskok nie działa, kiedy otrzymujesz obrażenia psychiczne. Szybkie łapy. Twoja Szybkość rośnie o 3 metry. Refleks. Możesz dorzucić jedną Kocią kość do testu Inicjatywy.",
+      "context": "Class/profession ability: Szybkość kota; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "request": "REVISION of reference cell 3. KEEP THE CAT, crouched body, four paws, tail, left-facing head and bullet unchanged. REMOVE EVERY MOTION ARC from the HINDQUARTERS AND TAIL. Show DUCKING OF THE HEAD instead: place TWO short broad DOWNWARD-CURVING MOTION STROKES directly ABOVE and slightly IN FRONT OF THE HEAD AND FRONT SHOULDERS, descending toward the lowered forehead. A third short vertical stroke may sit above the neck. Clear black gaps separate strokes from ears and bullet. No marks behind the rear half of the cat, no vibrating-butt effect, extra tails, arrows, anime, fine fur or injury.",
+      "itemId": "batch85-szybkosc-kota",
+      "revisionOf": {
+        "id": "batch85-szybkosc-kota",
+        "name": "Szybkość kota",
+        "decision": "revise",
+        "candidateId": "batch86-revision",
+        "selectedSource": "candidates/batch-86/szybkosc-kota.png",
+        "sourceSha256": "1c3703f16744b08af72ea655ca802393b9efc515fd0b3a15458dd33c787fa765",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/szybkosc-kota.svg",
+            "variant": "default",
+            "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a"
+          }
+        ],
+        "notes": "Move the lines elsewhere to better signal ducking of the cat. It looks like its butt is vibrating.",
+        "feedback": {
+          "itemId": "batch85-szybkosc-kota",
+          "decision": "revise",
+          "candidateId": "batch86-revision",
+          "notes": "Move the lines elsewhere to better signal ducking of the cat. It looks like its butt is vibrating.",
+          "updatedAt": "2026-10-15T23:11:46.441Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "trajektoria",
+      "name": "Trajektoria",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/abilities/trajektoria.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/trajektoria.svg",
+          "variant": "default",
+          "sourceSha256": "ee9e7f28b3d095225871f6ef754ef95dd68cfd7c6c16ed99f6344663f6453e9f"
+        }
+      ],
+      "ruleContext": "Kiedy wykonujesz Test Ataku dystansowego, możesz dodać do niego swój modyfikator Inteligencji. Tej zdolności możesz użyć tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po odbyciu Długiego odpoczynku.",
+      "context": "Class/profession ability: Trajektoria; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "request": "REVISION of reference cell 4. Retain the existing lower-RIGHT BULLSEYE with its broad ring, four ticks and central dot. Put ONE complete BULLET exactly at the TOP/APEX, the HIGHEST MIDDLE POINT of ONE ballistic arc, pointing HORIZONTALLY RIGHT along the tangent. BEFORE the bullet on the LEFT: ONE continuous thick SOLID curved line rises from lower-left to the bullet's flat base. AFTER the bullet on the RIGHT: exactly THREE broad SEPARATE DASH SEGMENTS descend along the curve toward the retained lower-right bullseye. Solid before, dashed after. Nothing in the arc sits above the apex bullet. Broad stencil diagram, no second bullet, cartridge casing, actual measurements, numbers, labels or extra rings.",
+      "itemId": "batch87-trajektoria",
+      "revisionOf": {
+        "id": "batch87-trajektoria",
+        "name": "Trajektoria",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-87/trajektoria.png",
+        "sourceSha256": "8a9938722a9816e50e511ffd91bf3c93933f0c2dc72ce2fcd8b58f1ab0ca0b6c",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/trajektoria.svg",
+            "variant": "default",
+            "sourceSha256": "ee9e7f28b3d095225871f6ef754ef95dd68cfd7c6c16ed99f6344663f6453e9f"
+          }
+        ],
+        "notes": "Modify the image so the arc is split into a solid line before the bullet, dashed after. Retain the bullseye at the bottom. Put the bullet at the top/apex of the trajectory",
+        "feedback": {
+          "itemId": "batch87-trajektoria",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Modify the image so the arc is split into a solid line before the bullet, dashed after. Retain the bullseye at the bottom. Put the bullet at the top/apex of the trajectory",
+          "updatedAt": "2026-10-15T23:12:52.242Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "ulubiona-bron-zwiadowca",
+      "name": "Ulubiona broń",
+      "owner": "zwiadowca",
+      "ownerLabel": "Zwiadowca",
+      "target": "icons/abilities/ulubiona-bron-zwiadowca.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ulubiona-bron-zwiadowca.svg",
+          "variant": "default",
+          "sourceSha256": "dfaab0fdee5a2eea18b28777faf5ebc65ce32f1d61ee9ade770ee5d77bf936b3"
+        }
+      ],
+      "ruleContext": "Wybierz jeden konkretny model broni, której lubisz używać (np. nóż taktyczny lub pistolet G17). Od tej pory, jeśli wykonujesz Ulubioną bronią akcję Atakowanie, możesz w Akcji Bonusowej wykonać nią jeszcze jeden atak (broń dystansowa musi mieć załadowaną amunicję). Możesz zmienić ulubioną broń na inną w czasie Długiego odpoczynku, poświęcając godzinę na trening. Na 9. poziomie możesz mieć jednocześnie dwie ulubione bronie.",
+      "context": "Class/profession ability: Ulubiona broń; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 5,
+      "request": "Complete the favorite-weapon FAMILY: ONE practical complete SCOPED RIFLE angled upward-right, clear shoulder stock, straight barrel, scope and empty trigger guard. ONE thick CIRCULAR FAVORITE BADGE beside the stock contains ONE bold FIVE-POINT STAR cut in black, matching the approved revolver's badge in reference cell 5. Same simple badge scale and white stencil weight, changing only the weapon. No hand, person, engraving, text, numerals, tiny scope fittings or logo.",
+      "itemId": "batch88-ulubiona-bron-zwiadowca"
+    },
+    {
+      "kind": "feature",
+      "key": "w-czuly-punkt",
+      "name": "W czuły punkt",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/abilities/w-czuly-punkt.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/w-czuly-punkt.svg",
+          "variant": "default",
+          "sourceSha256": "494b773b1bd3d580fe42cd13ca56fe001b8830b33a0f0ffbf75508a7a8719794"
+        }
+      ],
+      "ruleContext": "Do wszystkich obrażeń, które zadajesz, możesz dodać swój modyfikator Inteligencji.",
+      "context": "Class/profession ability: W czuły punkt; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 6,
+      "request": "ONE plain headless TRAINING MANNEQUIN TORSO, with shoulder stubs and broad intact chest. ONE thick circular TARGET CROSSHAIR marks its CENTER; ONE short blunt POINTER meets the reticle from lower-right. A schematic precise-strike emblem, no real anatomical labels or injury. Broad simple white shapes with black separation, no face, limbs, organs, wound, gore, lettering, numerals, tiny muscles or extra targets.",
+      "itemId": "batch88-w-czuly-punkt"
+    },
+    {
+      "kind": "feature",
+      "key": "wsciekly-cios",
+      "name": "Wściekły cios",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/abilities/wsciekly-cios.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wsciekly-cios.svg",
+          "variant": "default",
+          "sourceSha256": "52ae2a6a7a2a4e2d93821ffb52e603891237b164515cc23a18067020927610f8"
+        }
+      ],
+      "ruleContext": "Raz w rundzie, kiedy trafisz atakiem opartym na Sile, możesz dodać do obrażeń kości Wściekłego ciosu. Masz ich tyle, ile poziomów Brutala, a każda z nich zadaje dodatkowo 1k6 obrażeń. PRZYKŁAD: Na 5. poziomie Brutala masz 5 kości Wściekłego ciosu. Do pojedynczego ataku możesz dodać maksymalnie 3 kości Wściekłego ciosu. Kości tej zdolności odnawiają się po odbyciu Długiego odpoczynku.",
+      "context": "Class/profession ability: Wściekły cios; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 7,
+      "request": "ONE complete powerful BARE CLENCHED FIST smashes ONE stout rectangular STONE BLOCK into exactly TWO large separated chunks. Complete short wrist and coherent thumb/folded fingers, one broad angular impact wedge between fist and block. Forceful furious strike, sober functional silhouette with large black gaps. No person, portrait, extra hand, tiny debris, texture, blood, wound, gore or written marks.",
+      "itemId": "batch88-wsciekly-cios"
+    },
+    {
+      "kind": "feature",
+      "key": "wyczulone-zmysly",
+      "name": "Wyczulone zmysły",
+      "owner": "zwiadowca",
+      "ownerLabel": "Zwiadowca",
+      "target": "icons/abilities/wyczulone-zmysly.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wyczulone-zmysly.svg",
+          "variant": "default",
+          "sourceSha256": "630c1143f620eb4e0a6950df06c7462b5e045a9a032023f9885ca0df95177edf"
+        }
+      ],
+      "ruleContext": "Masz stałe Ułatwienie do testów Percepcji, więc twoja Pasywna Percepcja rośnie o 5.",
+      "context": "Class/profession ability: Wyczulone zmysły; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 8,
+      "request": "ONE large natural HUMAN EAR beside ONE plain natural HUMAN EYE, staggered diagonally with TWO broad sound-wave arcs between them. External sensory symbols only: ear has two large inner folds, eye one almond contour and round black pupil. Clear strong white masses, generous black space and natural proportions. No whole face, beard portrait, anime lashes, giant stylized eye, gore, tiny wrinkles, text or extra organs.",
+      "itemId": "batch88-wyczulone-zmysly"
+    },
+    {
+      "kind": "feature",
+      "key": "wyjadacz-zwiadowca",
+      "name": "Wyjadacz",
+      "owner": "zwiadowca",
+      "ownerLabel": "Zwiadowca",
+      "target": "icons/abilities/wyjadacz-zwiadowca.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wyjadacz-zwiadowca.svg",
+          "variant": "default",
+          "sourceSha256": "c8495031166e511cfbbfe32844e060cd26b509110a766d30a4cc9fd9456e2012"
+        }
+      ],
+      "ruleContext": "Zwiadowca to prawdziwy zawodowiec. Wybierz jedną z poniższych zdolności, która podkreśli ten fakt. Na 11. poziomie możesz wybrać kolejną zdolność z tej listy, ale każdą z nich możesz wybrać tylko raz. Jeździec Kiedy dosiadasz wierzchowca, nie musisz używać rąk, żeby nim kierować. Nie otrzymujesz Utrudnienia do Testów Ataków dystansowych związanego z niestabilnym podłożem, kiedy na nim jedziesz. Wsiadanie i zsiadanie z wierzchowca kosztuje cię tylko 1,5 metra ruchu. Trudność Trafienia twojego wierzchowca zwiększa się o wartość twojej Premii Biegłości. PRZYKŁADOWE PUŁAPKI PUŁAPKA ST DZIAŁANIE POTRZEBNE MATERIAŁY Potykacz 5 Istota otrzymuje stan Powalenie Brak Alarm 5 Wywołanie hałasu w promieniu 36 m Metalowe puszki lub naczynia Wnyki 10 Istota otrzymuje stan Pochwycenie Brak Sieć 10 Istota jest pod wpływem stanu Pochwycenie i Unieruchomienie Sieć Pułapka z granatem 15 Granat eksploduje po uruchomieniu wyzwalacza Granat Pułapka z bronią białą 15 Cel musi zdać RO na Zręczność, lub zostaje trafiony. Pułapka zadaje podstawowe obrażenia użytej broni Broń biała Pułapka z bronią samoczynną 20 Obszar zostaje ostrzelany długą serią. Obrażenia zależne od użytej broni i pojemności magazynka Karabin lub pistolet umożliwiający strzelanie serią. Obsługa pancerza Kiedy nosisz pancerz, otrzymujesz +2 do Trudności Trafienia. Rzeźnik Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią. Sokole oko Otrzymujesz modyfikator +3 do Testów Ataku bronią palną, dystansową i rzucaną. Stalowy nadgarstek Kiedy strzelasz z broni palnej krótkiej i pistoletów maszynowych jedną ręką, nie otrzymujesz związanego z tym Utrudnienia do Testów Ataku (tak jakby miały właściwość poręczna). Dodatkowo każda broń palna krótka w twoich rękach zyskuje właściwość lekka. Zasadzka Jeśli twój przeciwnik jest zaskoczony lub w pierwszej turze walki działasz przed nim, otrzymujesz Ułatwienie w Testach Ataku przeciwko niemu, do końca swojej tury.",
+      "context": "Class/profession ability: Wyjadacz; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 9,
+      "request": "Veteran-expertise badge FAMILY: ONE sturdy rounded-rectangle SHOULDER PATCH with a thick white border. Its UPPER HALF contains ONE simple FOUR-POINT COMPASS NEEDLE emblem with no letters. Its LOWER HALF contains exactly THREE broad stacked CHEVRONS pointing upward. Broad black gaps separate emblem, chevrons and rim. A fictional scout-veteran patch, same construction as the armored-veteran counterpart. No person, face, numbers, writing, real unit insignia, tiny stitching or decorative laurel.",
+      "itemId": "batch88-wyjadacz-zwiadowca"
+    }
+  ]
+}

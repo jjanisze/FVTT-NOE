@@ -1,0 +1,59 @@
+{
+  "role": "Exact native targets, not style inputs",
+  "files": [
+    {
+      "key": "wyjadacz",
+      "source": "icons/abilities/wyjadacz.svg",
+      "variant": "default",
+      "sourceSha256": "374e50918253c177a15139376fef0f5f6f1199181433d72dac3671f12add84f8"
+    },
+    {
+      "key": "wyksztalciuch",
+      "source": "icons/abilities/wyksztalciuch.svg",
+      "variant": "default",
+      "sourceSha256": "a6797cc50ff6fe13453bdf1b33603c2aabc2228ae45d9d991431da62a0739804"
+    },
+    {
+      "key": "z-bara",
+      "source": "icons/abilities/z-bara.svg",
+      "variant": "default",
+      "sourceSha256": "51fbd774b71851e9964b73a04f795fa5d1b71962759d5cd5c517912046a27b4a"
+    },
+    {
+      "key": "za-garsc-gambli",
+      "source": "icons/abilities/za-garsc-gambli.svg",
+      "variant": "default",
+      "sourceSha256": "cde71508cf8b7d7d178fb4e178ed549c877817d5ff504315a1e4682cb3c634dc"
+    },
+    {
+      "key": "zabojczy-cios",
+      "source": "icons/abilities/zabojczy-cios.svg",
+      "variant": "default",
+      "sourceSha256": "a0e2a925f1b54f341304533b07aa2e16f3357c454d0a15c0291f21281e588bc2"
+    },
+    {
+      "key": "zawolajcie-kolegow",
+      "source": "icons/abilities/zawolajcie-kolegow.svg",
+      "variant": "default",
+      "sourceSha256": "abfc18f9af0e406acc37d35e09766a779dad7eeabed31cf74d1f1a8e14b3748d"
+    },
+    {
+      "key": "zawsze-w-siodle",
+      "source": "icons/abilities/zawsze-w-siodle.svg",
+      "variant": "default",
+      "sourceSha256": "5e64e1f696dd5bdd4d4b71e08d22eaa07280cd5ed0b88c6ff05b3ebe43f1881f"
+    },
+    {
+      "key": "zew-areny",
+      "source": "icons/abilities/zew-areny.svg",
+      "variant": "default",
+      "sourceSha256": "7524b5d3e92bf9189e5964e1b4a5065a2986e42c5cb8af9fbee57f0f8d06f987"
+    },
+    {
+      "key": "znajomosci",
+      "source": "icons/abilities/znajomosci.svg",
+      "variant": "default",
+      "sourceSha256": "52a6498ef58a5200bda88b5386d7d4ea50b09c4e73c503a5a419b8fcde60629c"
+    }
+  ]
+}

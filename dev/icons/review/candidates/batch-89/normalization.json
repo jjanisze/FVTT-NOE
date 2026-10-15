@@ -1,0 +1,65 @@
+[
+  {
+    "key": "wyjadacz",
+    "source": "raw/batch-89-atlas-a.png, cell 1",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "wyksztalciuch",
+    "source": "raw/batch-89-atlas-a.png, cell 2",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "z-bara",
+    "source": "raw/batch-89-atlas-a.png, cell 3",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 42,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "za-garsc-gambli",
+    "source": "raw/batch-89-atlas-a.png, cell 4",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "zabojczy-cios",
+    "source": "raw/batch-89-atlas-a.png, cell 5",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "zawolajcie-kolegow",
+    "source": "raw/batch-89-atlas-a.png, cell 6",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "zawsze-w-siodle",
+    "source": "raw/batch-89-atlas-a.png, cell 7",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "zew-areny",
+    "source": "raw/batch-89-atlas-a.png, cell 8",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 164,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "znajomosci",
+    "source": "raw/batch-89-atlas-a.png, cell 9",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  }
+]

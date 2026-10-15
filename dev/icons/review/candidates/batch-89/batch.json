@@ -1,0 +1,196 @@
+{
+  "date": "2026-10-16",
+  "batch": 89,
+  "generalFeedback": "Apply exact saved revisions. Broad sober white glyphs, natural adult anatomy, no anime or gruff portrait default; varied practical objects and symbols.",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "wyjadacz",
+      "name": "Wyjadacz",
+      "owner": "twardziel",
+      "ownerLabel": "Twardziel",
+      "target": "icons/abilities/wyjadacz.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wyjadacz.svg",
+          "variant": "default",
+          "sourceSha256": "374e50918253c177a15139376fef0f5f6f1199181433d72dac3671f12add84f8"
+        }
+      ],
+      "ruleContext": "Twardziel to zawodowiec, jeśli chodzi o obsługę broni i pancerzy. Wybierz jedną zdolność z poniższej listy, która podkreśli ten fakt. Na 7. poziomie Twardziela możesz wybrać kolejną zdolność z listy, ale każdą z nich wybierasz tylko raz. Obsługa pancerza Kiedy nosisz pancerz, otrzymujesz +2 do TT. Rzeźnik Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią. Sokole oko Otrzymujesz modyfikator +3 do Testów Ataku bronią palną, dystansową i rzucaną. Stalowy nadgarstek Kiedy strzelasz z broni palnej krótkiej i pistoletów maszynowych jedną ręką, nie otrzymujesz związanego z tym Utrudnienia do Testów Ataku (tak jakby miały właściwość poręczna). Dodatkowo każda broń palna krótka w twoich rękach zyskuje właściwość lekka.",
+      "context": "Class/profession ability: Wyjadacz; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "Veteran-expertise badge FAMILY: ONE sturdy rounded-rectangle SHOULDER PATCH with a thick white border. Its UPPER HALF contains ONE simple BODY-ARMOR VEST emblem with two broad plate cuts. Its LOWER HALF contains exactly THREE broad stacked CHEVRONS pointing upward. Broad black gaps separate emblem, chevrons and rim. Same patch proportions, rim and chevron scale as the scout-veteran counterpart; change only the upper emblem. No person, face, letters, numbers, real unit insignia, tiny stitching or laurel.",
+      "itemId": "batch89-wyjadacz"
+    },
+    {
+      "kind": "feature",
+      "key": "wyksztalciuch",
+      "name": "Wykształciuch",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/abilities/wyksztalciuch.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wyksztalciuch.svg",
+          "variant": "default",
+          "sourceSha256": "a6797cc50ff6fe13453bdf1b33603c2aabc2228ae45d9d991431da62a0739804"
+        }
+      ],
+      "ruleContext": "Jeśli jeszcze nie wiesz wszystkiego, to dobierz sobie dwie umiejętności lub dwie biegłości w narzędziach. Jesteś Specem, ty zawsze wiesz wszystko!",
+      "context": "Class/profession ability: Wykształciuch; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "request": "ONE plain GRADUATION MORTARBOARD above ONE sturdy SMALL TOOLBOX, with one short broad tassel, a complete carrying handle and two simple lid cuts. A large wrench head and screwdriver handle peek from the open box, broad functional silhouettes only. Learning adds practical skills, not a book motif. No person, face, lettering, numerals, tiny tools, academic logo, fine stitching or giant cog.",
+      "itemId": "batch89-wyksztalciuch"
+    },
+    {
+      "kind": "feature",
+      "key": "z-bara",
+      "name": "Z bara!",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/abilities/z-bara.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/z-bara.svg",
+          "variant": "default",
+          "sourceSha256": "51fbd774b71851e9964b73a04f795fa5d1b71962759d5cd5c517912046a27b4a"
+        }
+      ],
+      "ruleContext": "Kiedy jesteś pod wpływem zdolności Berserk, to w Akcji Bonusowej możesz wykonać Odepchnięcie istoty dużej lub mniejszej od ciebie. Cel musi zdać RO na Siłę lub Zręczność, inaczej go odpychasz o 1,5 metra od siebie lub przewracasz, nakładając na niego stan Powalenie. Stopień Trudności RO wynosi 8 plus twój modyfikator Siły i Premia Biegłości.",
+      "context": "Class/profession ability: Z bara!; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "request": "TWO generic ADULT UPPER TORSOS in side view. LEFT adult leans their SHOULDER into the RIGHT adult's chest in a powerful SHOULDER SHOVE; the right figure tilts backward off balance with one arm out. Short coherent necks, smooth featureless heads and complete visible arms, plain clothes. One broad contact wedge at the shoulder, large black gaps. Torso-level compact composition, no running legs, gruff portraits, anime, weapon, injury, blood or extra limbs.",
+      "itemId": "batch89-z-bara"
+    },
+    {
+      "kind": "feature",
+      "key": "za-garsc-gambli",
+      "name": "Za garść gambli",
+      "owner": "gwiazda",
+      "ownerLabel": "Gwiazda",
+      "target": "icons/abilities/za-garsc-gambli.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/za-garsc-gambli.svg",
+          "variant": "default",
+          "sourceSha256": "cde71508cf8b7d7d178fb4e178ed549c877817d5ff504315a1e4682cb3c634dc"
+        }
+      ],
+      "ruleContext": "Każda dziura i miasteczko w Podzielonych Stanach potrzebuje muzyki. Każdy klub i śmierdzący bar bez okien, przyjmie twoje usługi zapewniające rozrywkę stałej klienteli. Zawsze dostaniesz dach nad głową i żarcie, a może i będzie za co się napić. Raz dziennie dajesz czterogodzinny koncert w lokalnej knajpie lub klubie, a od twoich umiejętności zależy, ile zarobisz (patrz tabela poniżej). Po skończeniu koncertu otrzymujesz jeden poziom Wyczerpania. MIEJSCE KONCERTU MNOŻNIK WYNIKU TESTU CHARYZMY (WYSTĘPY) LUB TESTU INSTRUMENTU Ulica x 0,5 gb Tania knajpa x 1 gb Dobra knajpa x 2 gb Drogi klub x 3 gb PRZYKŁAD: Siadasz przy ruchliwej ulicy, wyciągasz saksofon i po czterech godzinach koncertu wykonujesz test Zręczności (Saksofon). Twój wynik to 15, więc do czapki wpadła ci równowartość ok. 7 gambli. Gdybyś dał koncert w drogim klubie, zgarnąłbyś sześć razy tyle.",
+      "context": "Class/profession ability: Za garść gambli; owner Gwiazda. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "request": "ONE complete practical SAXOPHONE with a broad flared bell and curved neck above ONE open BUSKER'S HAT containing TWO thick blank COINS. Saxophone has only THREE broad key cuts, sturdy coherent tube and complete mouthpiece. A street performance earns tips, sober compact object emblem. Clear black gaps, no player, face, musical-note lettering, logo, numerals, tiny keys, fine engraving or extra instruments.",
+      "itemId": "batch89-za-garsc-gambli"
+    },
+    {
+      "kind": "feature",
+      "key": "zabojczy-cios",
+      "name": "Zabójczy cios",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/abilities/zabojczy-cios.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zabojczy-cios.svg",
+          "variant": "default",
+          "sourceSha256": "a0e2a925f1b54f341304533b07aa2e16f3357c454d0a15c0291f21281e588bc2"
+        }
+      ],
+      "ruleContext": "Wiesz już gdzie uderzać, żeby wyrządzić największe szkody. Kiedy trafiasz krytycznie atakiem wręcz, zamiast podwajać, potrajasz kostki obrażeń.",
+      "context": "Class/profession ability: Zabójczy cios; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 5,
+      "request": "ONE complete BARE CLENCHED FIST strikes ONE simple symbolic SKULL, splitting the skull emblem into TWO broad pieces with a single large crack. Skull has two big eye holes and block jaw, no fine teeth. Complete wrist, coherent thumb/folded fingers, one broad impact wedge. Flat non-graphic deadly-strike symbol, no human body, wound, blood, realistic head injury, gore, tiny fragments or text.",
+      "itemId": "batch89-zabojczy-cios"
+    },
+    {
+      "kind": "feature",
+      "key": "zawolajcie-kolegow",
+      "name": "Zawołajcie kolegów",
+      "owner": "gladiator",
+      "ownerLabel": "Gladiator",
+      "target": "icons/abilities/zawolajcie-kolegow.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawolajcie-kolegow.svg",
+          "variant": "default",
+          "sourceSha256": "abfc18f9af0e406acc37d35e09766a779dad7eeabed31cf74d1f1a8e14b3748d"
+        }
+      ],
+      "ruleContext": "Jeśli w zasięgu 1,5 metra od ciebie znajduje się co najmniej dwóch przeciwników, otrzymujesz Ułatwienie do Testów Ataków wręcz.",
+      "context": "Class/profession ability: Zawołajcie kolegów; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 6,
+      "request": "ONE large complete BARE HAND BECKONS confidently upward, fingers curling inward once, with TWO smaller opposing CLENCHED FISTS above-left and above-right. Exactly three hands with coherent thumbs/fingers and short complete wrists, clear broad black gaps. A fighter challenges multiple opponents to come closer. No whole person, portrait, extra hands, text, numbers, weapons, wounds, gore or decorative arrows.",
+      "itemId": "batch89-zawolajcie-kolegow"
+    },
+    {
+      "kind": "feature",
+      "key": "zawsze-w-siodle",
+      "name": "Zawsze w siodle",
+      "owner": "kowboj",
+      "ownerLabel": "Kowboj",
+      "target": "icons/abilities/zawsze-w-siodle.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawsze-w-siodle.svg",
+          "variant": "default",
+          "sourceSha256": "5e64e1f696dd5bdd4d4b71e08d22eaa07280cd5ed0b88c6ff05b3ebe43f1881f"
+        }
+      ],
+      "ruleContext": "Prawdziwy kowboj piechotą chodzi tylko do kibla, baru i burdelu. Jeśli nie masz konia lub motocykla, los zsyła ci okazję do jego zdobycia na najbliższym Długim odpoczynku. Porzucony harley lub koń bez jeźdźca, to coś, co po prostu ci się przydarza. Pamiętaj, żeby nadać mu imię i módl się do zapomnianych bogów, żeby nie spotkać jego prawowitego właściciela. I pamiętaj - nie możesz go nikomu sprzedać.",
+      "context": "Class/profession ability: Zawsze w siodle; owner Kowboj. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 7,
+      "request": "ONE complete sturdy WESTERN RIDING SADDLE in clear side profile, broad seat, simple pommel and cantle, ONE large hanging STIRRUP and ONE rolled blanket secured behind. Practical adult horse tack, coherent straps simplified into two broad bands. Strong compact silhouette, generous negative space, no rider, horse, portrait, fine leather tooling, tiny stitching, logos or text.",
+      "itemId": "batch89-zawsze-w-siodle"
+    },
+    {
+      "kind": "feature",
+      "key": "zew-areny",
+      "name": "Zew areny",
+      "owner": "gladiator",
+      "ownerLabel": "Gladiator",
+      "target": "icons/abilities/zew-areny.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zew-areny.svg",
+          "variant": "default",
+          "sourceSha256": "7524b5d3e92bf9189e5964e1b4a5065a2986e42c5cb8af9fbee57f0f8d06f987"
+        }
+      ],
+      "ruleContext": "Podczas walki słyszysz doping widzów, nawet jeśli ich wokół ciebie nie ma. Kiedy jesteś w Berserku, zyskujesz: Doping. Otrzymujesz niewrażliwość na stan Przerażenie. Praca nóg. Przeciwnicy mają Utrudnienie w testach ataków okazyjnych przeciw tobie. Skok Gladiatora. Maksymalna wysokość i odległość twojego skoku ulega podwojeniu. Jeśli twój skok zakończy się na polu istoty nie większej od ciebie o więcej niż jeden rozmiar, musi ona zdać RO na Siłę, inaczej otrzyma stan Powalenie oraz 1k6 obrażeń obuchowych za każde 3 metry długości lub wysokości twojego skoku. ST Rzutu Obronnego to 8 plus twój modyfikator Siły plus Premia Biegłości.",
+      "context": "Class/profession ability: Zew areny; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 8,
+      "request": "ONE sturdy hanging ARENA BELL with a large visible clapper and ONE simple broad mounting bracket, flanked by TWO complete raised BARE CLENCHED FISTS. Intact short wrists and natural fingers, thick iron bell rim with one broad black cut. The ring calls combat and crowd energy, sober salvaged equipment. Clear black gaps, no audience faces, gruff fighter portrait, ornate architecture, text, numerals, tiny fittings or gore.",
+      "itemId": "batch89-zew-areny"
+    },
+    {
+      "kind": "feature",
+      "key": "znajomosci",
+      "name": "Znajomości",
+      "owner": "kurier",
+      "ownerLabel": "Kurier",
+      "target": "icons/abilities/znajomosci.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/znajomosci.svg",
+          "variant": "default",
+          "sourceSha256": "52a6498ef58a5200bda88b5386d7d4ea50b09c4e73c503a5a419b8fcde60629c"
+        }
+      ],
+      "ruleContext": "Podzielone Stany to twój dom i prawie wszędzie masz jakiegoś znajomka. Kiedy jesteś w cywilizowanym miejscu, wykonaj Test Charyzmy. Im lepszy wynik, tym bardziej znaczący w lokalnej społeczności jest twój znajomy. WYNIK TESTU CHARYZMY ZNAJOMOŚĆ 1-9 Nikogo tu nie znasz z imienia. 10-14 Masz znajomka, który tu mieszka. 15-19 Masz tu znajomka, który prowadzi biznes lub jest stróżem porządku. 20+ Twój znajomek to gruba szycha, która tu rządzi.",
+      "context": "Class/profession ability: Znajomości; owner Kurier. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 9,
+      "request": "Exactly THREE plain generic ADULT HEAD-AND-SHOULDER SILHOUETTES form ONE clear SOCIAL NETWORK: one larger silhouette at TOP CENTER, two smaller at lower-left and lower-right. TWO broad straight connector strokes link the top silhouette to the lower pair, with clear black spacing from their heads. Smooth featureless natural adult heads, sober diagram-like icon. No handshake, face detail, beard, anime, labels, numbers, arrows or extra people.",
+      "itemId": "batch89-znajomosci"
+    }
+  ]
+}
