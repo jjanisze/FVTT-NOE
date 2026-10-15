@@ -45,3 +45,7 @@ The full collection passes with 566 PNG/SVG pairs. The review page shows all
 no broken images. Combined progress and history checks are archived in
 `../../../placeholder-pass/progress-70-71.json`; the review screenshot is
 `../batch-70/raw/review-preview.png`.
+
+GM review, 2026-10-15: five exact selections approved and installed. Dwóch na
+jednego, Ekspert, Elektronik and Goła klata carry saved revisions into Batch 72.
+Decisions and delivered hashes are in `reviewed.json` / `reviewed-installed.json`.

@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-15",
+  "batch": 70,
+  "approvedSubjects": 8,
+  "remainingSubjects": 10,
+  "installed": [
+    {
+      "itemId": "batch69-a-co-mi-tam",
+      "candidateId": "batch70-revision",
+      "source": "candidates/batch-70/a-co-mi-tam.png",
+      "sourceSha256": "a55494d44119df53f3cb90960c6999731056d7161ea9a02f364d72b0dc872f0d",
+      "files": [
+        "icons/abilities/a-co-mi-tam.svg",
+        "icons/abilities/a-co-mi-tam.webp"
+      ],
+      "svgSha256": "f11d8ec7f86c48cb54d167bfdb05cd882a219307916a81b9d4cbffa02c3d0750",
+      "webpSha256": "295219db7b01df9788419ad22adf3f59382a975e5e2217ab4428929c17644828"
+    },
+    {
+      "itemId": "batch69-amen",
+      "candidateId": "batch70-revision",
+      "source": "candidates/batch-70/amen.png",
+      "sourceSha256": "71d62b8a0d636ac16abb4d84cf2bd57256a5201d70d66fb2616ed8e4a9642393",
+      "files": [
+        "icons/abilities/amen.svg",
+        "icons/abilities/amen.webp"
+      ],
+      "svgSha256": "cfc71baea09345600d69eba7f8e7ae6df0939ad8584ffcb801aad78a4200bba3",
+      "webpSha256": "8608e8e9b504db587616a2bcdfe844dd8efb02644e186d78ffc1566f852a11fc"
+    },
+    {
+      "itemId": "batch69-clint",
+      "candidateId": "batch70-revision",
+      "source": "candidates/batch-70/clint.png",
+      "sourceSha256": "4eac3a0f43a120e74ab080b04e2716f927cd095b2364b6336622b3af8a1cda2a",
+      "files": [
+        "icons/abilities/clint.svg",
+        "icons/abilities/clint.webp"
+      ],
+      "svgSha256": "88187ad6102c3a38ce9e36d4c75a2e8b66ebae27394f4ed731b44411efa31a7a",
+      "webpSha256": "16d709e33905bbcb2f1413ed92597ec86a23e0face53e796221ff4ccf4eceabe"
+    },
+    {
+      "itemId": "batch70-cwaniacki-zwod",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-70/cwaniacki-zwod.png",
+      "sourceSha256": "404e95d49b1acc449a140cf7c223b6627f01dd04984172e5a231a2e447af8dfb",
+      "files": [
+        "icons/abilities/cwaniacki-zwod.svg",
+        "icons/abilities/cwaniacki-zwod.webp"
+      ],
+      "svgSha256": "9abb53ca562bb879acc46ecec3354696ed788413e9ff99d910f8af73f91dfd1b",
+      "webpSha256": "2cb325447d1c257b9103cb058a27966b4535ac79febda9ffa2ba36494affdb10"
+    },
+    {
+      "itemId": "batch70-dobra-rada",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-70/dobra-rada.png",
+      "sourceSha256": "04f7336cdc373189b805b382dd2679f819bb7b43efb22dd375a20f78d1741d25",
+      "files": [
+        "icons/abilities/dobra-rada.svg",
+        "icons/abilities/dobra-rada.webp"
+      ],
+      "svgSha256": "fadc4c23a21486d154e43688261ef22c2dce798aaee1d0cb27f221737092a756",
+      "webpSha256": "fdccc87d323fa38b3bd48ec84dd4f4b2662bf64412360f1d3524778acf024da6"
+    },
+    {
+      "itemId": "batch70-doktor-brain",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-70/doktor-brain.png",
+      "sourceSha256": "af4096797837c8df4dc8089ecf87caac9d632e14750cd54c9d42233bb24b221a",
+      "files": [
+        "icons/abilities/doktor-brain.svg",
+        "icons/abilities/doktor-brain.webp"
+      ],
+      "svgSha256": "2af780b76f697230346d8675bc98b84104a3cd6562142766ad9d205041017509",
+      "webpSha256": "b9566b4bfa2dc558923421a90022babd09935b88617b64550da9783cc763e0cf"
+    },
+    {
+      "itemId": "batch70-drugi-atak",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-70/drugi-atak.png",
+      "sourceSha256": "0ff2929f23beb4cfd41be84504a3b66a01412fadcb9f3f72b008b2ed88cd7b0f",
+      "files": [
+        "icons/abilities/drugi-atak.svg",
+        "icons/abilities/drugi-atak.webp"
+      ],
+      "svgSha256": "95cde6ba5d4be22249908d728d591a7b3f79f4c40b0d9cd3bfef04eda5a86edb",
+      "webpSha256": "b0da66a2ca7039a3524faba262e3fddaa5eee01414a40bc2bda78048baf0b038"
+    },
+    {
+      "itemId": "batch70-drzwi-w-drzwi",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-70/drzwi-w-drzwi.png",
+      "sourceSha256": "ee76c80c7c806862e417857e18854ed04ed434f47c0758f85af14f03d9d2ebd9",
+      "files": [
+        "icons/abilities/drzwi-w-drzwi.svg",
+        "icons/abilities/drzwi-w-drzwi.webp"
+      ],
+      "svgSha256": "0fb1b8e623b35937adbdf067a1752ebb92ccef5a8b6d7f532741dc46674cf762",
+      "webpSha256": "ca72ad9f4489e359bf07e6bfe793ca936051dc3f9a98dea751c047e5de11e453"
+    }
+  ]
+}

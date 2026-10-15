@@ -37,12 +37,12 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 72** (18 candidates in 2 batches await GM review;
-production replacements require a saved approval).
+**Next batch number: 72** (the previous 342-card queue is resolved; the newly
+audited class/profession placeholder backlog remains and is listed below).
 
 **Icon coverage correction, 2026-10-15:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
-149 generated initials badges (148 canonically referenced art subjects).
+136 generated initials badges (135 canonically referenced art subjects).
 Origins, Sztuczki, M5 actions and fuel-grade deliveries from the earlier pass
 remain delivered; these counts do not cover all module icons. See the class
 placeholder backlog and `class-placeholder-audit.json`. GM wiring and painted
@@ -621,69 +621,53 @@ targets, without new mechanics or wiring. Code, packs and world state are untouc
 <!-- placeholder-batch-69:end -->
 
 <!-- placeholder-batch-70:start -->
-## Queue (A) — Batch 70 — 9 awaiting GM review
+## Reviewed (A) — Batch 70 — 8 delivered, 1 revisions
 
-One 3×3 atlas in the established white-glyph style; native initials badges remain
-until the GM approves a selected candidate. Exact sources/hashes, generic prompts
-and targets: `review/candidates/batch-70/`.
+Saved GM review: 8 subjects installed as exact approved SVG/WEBP pairs.
+The 1 remaining requests carry their exact notes into Batch 72.
+Evidence: `review/candidates/batch-70/reviewed.json` and `reviewed-installed.json`.
 
-| Cell | Item | Exact SVG delivery targets (+ WEBP) |
-|---|---|---|
-| 1 | A co mi tam! (revision) | `icons/abilities/a-co-mi-tam.svg` |
-| 2 | Amen (revision) | `icons/abilities/amen.svg` |
-| 3 | Bez tajemnic (revision) | `icons/abilities/bez-tajemnic.svg` |
-| 4 | Clint (revision) | `icons/abilities/clint.svg` |
-| 5 | Cwaniacki zwód | `icons/abilities/cwaniacki-zwod.svg` |
-| 6 | Dobra rada | `icons/abilities/dobra-rada.svg` |
-| 7 | Doktor Brain | `icons/abilities/doktor-brain.svg` |
-| 8 | Drugi atak | `icons/abilities/drugi-atak.svg` |
-| 9 | Drzwi w drzwi | `icons/abilities/drzwi-w-drzwi.svg` |
-
-Saved revision notes and original selected-source hashes are retained in batch.json
-and revision-feedback-before.json. Old candidates remain available; only these
-revision cards are reset to pending with the new candidate selected.
-
-The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
-nine). Later batch numbers are provisional: saved revisions take priority and
-may add batches. Base/active files share approved pixels; the existing active
-hotbar pulse remains in the code. Old unused active filenames are compatibility
-targets, without new mechanics or wiring. Code, packs and world state are untouched.
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | A co mi tam! | `icons/abilities/a-co-mi-tam.svg` | **done** |
+| 2 | Amen | `icons/abilities/amen.svg` | **done** |
+| 3 | Bez tajemnic | `icons/abilities/bez-tajemnic.svg` | Revision in Batch 72 |
+| 4 | Clint | `icons/abilities/clint.svg` | **done** |
+| 5 | Cwaniacki zwód | `icons/abilities/cwaniacki-zwod.svg` | **done** |
+| 6 | Dobra rada | `icons/abilities/dobra-rada.svg` | **done** |
+| 7 | Doktor Brain | `icons/abilities/doktor-brain.svg` | **done** |
+| 8 | Drugi atak | `icons/abilities/drugi-atak.svg` | **done** |
+| 9 | Drzwi w drzwi | `icons/abilities/drzwi-w-drzwi.svg` | **done** |
 
 <!-- placeholder-batch-70:end -->
 
 <!-- placeholder-batch-71:start -->
-## Queue (A) — Batch 71 — 9 awaiting GM review
+## Reviewed (A) — Batch 71 — 5 delivered, 4 revisions
 
-One 3×3 atlas in the established white-glyph style; native initials badges remain
-until the GM approves a selected candidate. Exact sources/hashes, generic prompts
-and targets: `review/candidates/batch-71/`.
+Saved GM review: 5 subjects installed as exact approved SVG/WEBP pairs.
+The 4 remaining requests carry their exact notes into Batch 72.
+Evidence: `review/candidates/batch-71/reviewed.json` and `reviewed-installed.json`.
 
-| Cell | Item | Exact SVG delivery targets (+ WEBP) |
-|---|---|---|
-| 1 | Dwóch na jednego | `icons/abilities/dwoch-na-jednego.svg` |
-| 2 | Dziewięć żyć | `icons/abilities/dziewiec-zyc.svg` |
-| 3 | Ekspert | `icons/abilities/ekspert.svg` |
-| 4 | Elektronik | `icons/abilities/elektronik.svg` |
-| 5 | Emiter EMP | `icons/abilities/emiter-emp.svg` |
-| 6 | Empiryk | `icons/abilities/empiryk.svg` |
-| 7 | Farmacja | `icons/abilities/farmacja.svg` |
-| 8 | Głowa do góry! | `icons/abilities/glowa-do-gory.svg` |
-| 9 | Goła klata | `icons/abilities/gola-klata.svg` |
-
-The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
-nine). Later batch numbers are provisional: saved revisions take priority and
-may add batches. Base/active files share approved pixels; the existing active
-hotbar pulse remains in the code. Old unused active filenames are compatibility
-targets, without new mechanics or wiring. Code, packs and world state are untouched.
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Dwóch na jednego | `icons/abilities/dwoch-na-jednego.svg` | Revision in Batch 72 |
+| 2 | Dziewięć żyć | `icons/abilities/dziewiec-zyc.svg` | **done** |
+| 3 | Ekspert | `icons/abilities/ekspert.svg` | Revision in Batch 72 |
+| 4 | Elektronik | `icons/abilities/elektronik.svg` | Revision in Batch 72 |
+| 5 | Emiter EMP | `icons/abilities/emiter-emp.svg` | **done** |
+| 6 | Empiryk | `icons/abilities/empiryk.svg` | **done** |
+| 7 | Farmacja | `icons/abilities/farmacja.svg` | **done** |
+| 8 | Głowa do góry! | `icons/abilities/glowa-do-gory.svg` | **done** |
+| 9 | Goła klata | `icons/abilities/gola-klata.svg` | Revision in Batch 72 |
 
 <!-- placeholder-batch-71:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source
 
-Audit 2026-10-15: **149 generated initials SVGs**, including 6 classes,
-18 professions and 125 ability files. 1 ability files are active-state
-variants. Canonically referenced art requests below represent **148 subjects**;
+Audit 2026-10-15: **136 generated initials SVGs**, including 6 classes,
+18 professions and 112 ability files. 1 ability files are active-state
+variants. Canonically referenced art requests below represent **135 subjects**;
 base/active variants share a subject and must keep their existing exact filenames.
 These were outside the previous 342-card generation queue. File existence was not
 evidence of finished artwork. Native badges were confirmed against the exact
@@ -696,23 +680,10 @@ and the next free batch; fresh GM approval is required before replacement.
 
 | Kind | Subject | Owner | Exact SVG targets (+ WEBP after approval) | Status |
 |---|---|---|---|---|
-| feature | A co mi tam! | szczur | `icons/abilities/a-co-mi-tam.svg` | Needs art |
-| feature | Amen | kaznodzieja-nowej-ery | `icons/abilities/amen.svg` | Needs art |
 | feature | Bez tajemnic | lowca-mutantow | `icons/abilities/bez-tajemnic.svg` | Needs art |
-| feature | Clint | kowboj | `icons/abilities/clint.svg` | Needs art |
-| feature | Cwaniacki zwód | cwaniak | `icons/abilities/cwaniacki-zwod.svg` | Needs art |
-| feature | Dobra rada | spec | `icons/abilities/dobra-rada.svg` | Needs art |
-| feature | Doktor Brain | medyk | `icons/abilities/doktor-brain.svg` | Needs art |
-| feature | Drugi atak | brutal | `icons/abilities/drugi-atak.svg` | Needs art |
-| feature | Drzwi w drzwi | wojownik-autostrady | `icons/abilities/drzwi-w-drzwi.svg` | Needs art |
 | feature | Dwóch na jednego | ganger | `icons/abilities/dwoch-na-jednego.svg` | Needs art |
-| feature | Dziewięć żyć | zlodziej | `icons/abilities/dziewiec-zyc.svg` | Needs art |
 | feature | Ekspert | cwaniak | `icons/abilities/ekspert.svg` | Needs art |
 | feature | Elektronik | zlodziej | `icons/abilities/elektronik.svg` | Needs art |
-| feature | Emiter EMP | zabojca-maszyn | `icons/abilities/emiter-emp.svg` | Needs art |
-| feature | Empiryk | zabojca-maszyn | `icons/abilities/empiryk.svg` | Needs art |
-| feature | Farmacja | medyk | `icons/abilities/farmacja.svg` | Needs art |
-| feature | Głowa do góry! | cwaniak | `icons/abilities/glowa-do-gory.svg` | Needs art |
 | feature | Goła klata | brutal | `icons/abilities/gola-klata.svg` | Needs art |
 | feature | Hakerstwo | monter | `icons/abilities/hakerstwo.svg` | Needs art |
 | feature | Inteligentna obrona | spec | `icons/abilities/inteligentna-obrona.svg` | Needs art |

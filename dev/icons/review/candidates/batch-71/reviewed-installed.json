@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-15",
+  "batch": 71,
+  "approvedSubjects": 5,
+  "remainingSubjects": 5,
+  "installed": [
+    {
+      "itemId": "batch71-dziewiec-zyc",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-71/dziewiec-zyc.png",
+      "sourceSha256": "44515325c962def8d7f2508ed429013438d4252f9d3f0176864bbe25e7e63d75",
+      "files": [
+        "icons/abilities/dziewiec-zyc.svg",
+        "icons/abilities/dziewiec-zyc.webp"
+      ],
+      "svgSha256": "1b2583d96cc329855d337b28c718d950fb460a04411ed68bfe2d7548f58c4f8c",
+      "webpSha256": "0cf20df0e99b7078ccc55a513e67d81a2672d09a49374eca0815731a2aa34317"
+    },
+    {
+      "itemId": "batch71-emiter-emp",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-71/emiter-emp.png",
+      "sourceSha256": "aea2a63977233ada0dd5b4cd71dfb13bab87888dfdff3c22537fcfec92c44bd0",
+      "files": [
+        "icons/abilities/emiter-emp.svg",
+        "icons/abilities/emiter-emp.webp"
+      ],
+      "svgSha256": "5c02abe0b971be9e949b5fab7915e14356724858cd6c47e17f62e8f106484905",
+      "webpSha256": "e052c015b34c427698455fc79fac5cff36d25211fff085141a02440c157a1fdc"
+    },
+    {
+      "itemId": "batch71-empiryk",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-71/empiryk.png",
+      "sourceSha256": "cc377f798baae0b6f9fc441d4447b0c28032c9ef4d8d0ec455120c07e01c53d2",
+      "files": [
+        "icons/abilities/empiryk.svg",
+        "icons/abilities/empiryk.webp"
+      ],
+      "svgSha256": "01f40cb528aaa5031e7749d7feb2e20db1ab30d844c70f40ae8e7ffbfc6641f0",
+      "webpSha256": "5e7554c770c293284c964ea0117756cbe83cee322bda7d0c8a0a2c203e8200ff"
+    },
+    {
+      "itemId": "batch71-farmacja",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-71/farmacja.png",
+      "sourceSha256": "8aca069716cc1308bff1b7adb74b6de8e56936f185a29c1d8eb7ea943e5fc633",
+      "files": [
+        "icons/abilities/farmacja.svg",
+        "icons/abilities/farmacja.webp"
+      ],
+      "svgSha256": "1e8ca6bd7df99eb7e72165388790de8da3c9b9869871b478d982a0bd7e9da80f",
+      "webpSha256": "b28f740955ce7f3d18844c38258333b11db1348e8eccf46f85fdae0b220b7076"
+    },
+    {
+      "itemId": "batch71-glowa-do-gory",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-71/glowa-do-gory.png",
+      "sourceSha256": "7c656851e95c9b2cf9fe095903fa246e603209b7a82e17bd56687c913df5dd9e",
+      "files": [
+        "icons/abilities/glowa-do-gory.svg",
+        "icons/abilities/glowa-do-gory.webp"
+      ],
+      "svgSha256": "be7c92bcdccb5ac70b93d776247c0d9f9cecb747e2b91db40166828968a4502f",
+      "webpSha256": "01fd8a6394e8d077339d08432cb1bb80bbcfe2918d49f3561fbaa2e291c2e581"
+    }
+  ]
+}

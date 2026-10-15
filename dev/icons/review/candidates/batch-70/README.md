@@ -54,3 +54,7 @@ options, all new candidates selected and no failed images. Four extraction
 regressions and two isolated revision-registration tests pass. The handoff
 screenshot is `raw/review-preview.png`; combined counts and preserved-history
 checks are archived in `../../../placeholder-pass/progress-70-71.json`.
+
+GM review, 2026-10-15: eight exact selections approved and installed; Bez
+tajemnic carries the requested mutant face and shoulder corrections into
+Batch 72. Decisions and hashes are in `reviewed.json` / `reviewed-installed.json`.

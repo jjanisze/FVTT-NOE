@@ -1,42 +1,22 @@
 {
   "stats": {
     "date": "2026-10-15",
-    "confirmedPlaceholderFiles": 149,
-    "referencedPlaceholderFiles": 148,
+    "confirmedPlaceholderFiles": 136,
+    "referencedPlaceholderFiles": 135,
     "unmappedPlaceholderFiles": 1,
     "activeVariants": 1,
     "referencedActiveVariants": 0,
-    "abilityPlaceholderFiles": 125,
+    "abilityPlaceholderFiles": 112,
     "missingExpectedFiles": 0,
-    "artSubjects": 148,
+    "artSubjects": 135,
     "byKind": {
       "class": 6,
       "profession": 18,
-      "feature": 124
+      "feature": 111
     },
     "scope": "Exact generator signature plus canonical class/profession definitions; no world or pack reads"
   },
   "placeholders": [
-    {
-      "kind": "feature",
-      "id": "a-co-mi-tam",
-      "label": "A co mi tam!",
-      "owner": "szczur",
-      "variant": "default",
-      "source": "icons/abilities/a-co-mi-tam.svg",
-      "sourceSha256": "85bde63ef0c7543abf85a5c53d3d35a3c1bb8d6eb0774a25c59afbfc59be1647",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "amen",
-      "label": "Amen",
-      "owner": "kaznodzieja-nowej-ery",
-      "variant": "default",
-      "source": "icons/abilities/amen.svg",
-      "sourceSha256": "9062f3b8c40db134e5353eec62370cdeecb586ab463d9ba946dac4317cd0f615",
-      "referenced": true
-    },
     {
       "kind": "feature",
       "id": "bez-tajemnic",
@@ -49,82 +29,12 @@
     },
     {
       "kind": "feature",
-      "id": "clint",
-      "label": "Clint",
-      "owner": "kowboj",
-      "variant": "default",
-      "source": "icons/abilities/clint.svg",
-      "sourceSha256": "5ee6cc654890f6d6bf88be57504342dcbc53ffeea273004d6cf970576cee2d61",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "cwaniacki-zwod",
-      "label": "Cwaniacki zwód",
-      "owner": "cwaniak",
-      "variant": "default",
-      "source": "icons/abilities/cwaniacki-zwod.svg",
-      "sourceSha256": "92cf284356f1cc96aeab112afc135f826720e6f89822a49dd76526aca5e58f44",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "dobra-rada",
-      "label": "Dobra rada",
-      "owner": "spec",
-      "variant": "default",
-      "source": "icons/abilities/dobra-rada.svg",
-      "sourceSha256": "9dfe5a97c8a9a000027fc7fa69ccb052eaf2b53099a2b72712a2ed0de24a9b79",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "doktor-brain",
-      "label": "Doktor Brain",
-      "owner": "medyk",
-      "variant": "default",
-      "source": "icons/abilities/doktor-brain.svg",
-      "sourceSha256": "6ab38a26190fd849a7d57137b1d58a07bf5c5b193d101e52adf87d4269536f91",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "drugi-atak",
-      "label": "Drugi atak",
-      "owner": "brutal",
-      "variant": "default",
-      "source": "icons/abilities/drugi-atak.svg",
-      "sourceSha256": "8485b908a3ec63be916ca5e1be37cb3133fdab80874a615a3127ebadf97e49c2",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "drzwi-w-drzwi",
-      "label": "Drzwi w drzwi",
-      "owner": "wojownik-autostrady",
-      "variant": "default",
-      "source": "icons/abilities/drzwi-w-drzwi.svg",
-      "sourceSha256": "e90a74d5a078cc693572423f53f02e5a598da739e570338c0de89f8d555bfae0",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "dwoch-na-jednego",
       "label": "Dwóch na jednego",
       "owner": "ganger",
       "variant": "default",
       "source": "icons/abilities/dwoch-na-jednego.svg",
       "sourceSha256": "abf98f1ae8f9018ba49f8b45cd85fd2a8b9fa6924e0a773dad9c08339dcf66d3",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "dziewiec-zyc",
-      "label": "Dziewięć żyć",
-      "owner": "zlodziej",
-      "variant": "default",
-      "source": "icons/abilities/dziewiec-zyc.svg",
-      "sourceSha256": "5052a5bb6298ba74d8ae2ea27a3353bc847d749e088078b50cabce0a6a7a9f26",
       "referenced": true
     },
     {
@@ -145,46 +55,6 @@
       "variant": "default",
       "source": "icons/abilities/elektronik.svg",
       "sourceSha256": "f390a9b077c44175d9cd142eb44c91d2b5ebcec9b555de04ec0e68c851576564",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "emiter-emp",
-      "label": "Emiter EMP",
-      "owner": "zabojca-maszyn",
-      "variant": "default",
-      "source": "icons/abilities/emiter-emp.svg",
-      "sourceSha256": "30e74a80bf10eebc2cc7c79b466d9323d765fb269da0c910addaccc500e1f96e",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "empiryk",
-      "label": "Empiryk",
-      "owner": "zabojca-maszyn",
-      "variant": "default",
-      "source": "icons/abilities/empiryk.svg",
-      "sourceSha256": "c3969d155f78163b17980cabe9279254fd483d9ad394b4eebefdf82b3fc4e9e2",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "farmacja",
-      "label": "Farmacja",
-      "owner": "medyk",
-      "variant": "default",
-      "source": "icons/abilities/farmacja.svg",
-      "sourceSha256": "c76a242ba8cd132a2de5d72c1b09dffbaba3e8aa8326ef3e26176b7d00db1b4f",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "glowa-do-gory",
-      "label": "Głowa do góry!",
-      "owner": "cwaniak",
-      "variant": "default",
-      "source": "icons/abilities/glowa-do-gory.svg",
-      "sourceSha256": "d4c9125b3a8ab930e1da0ab57ff9efc0c9fa5773909f10506ce92e7ce4989a3b",
       "referenced": true
     },
     {
@@ -1511,32 +1381,6 @@
   "subjects": [
     {
       "kind": "feature",
-      "id": "a-co-mi-tam",
-      "label": "A co mi tam!",
-      "owner": "szczur",
-      "files": [
-        {
-          "source": "icons/abilities/a-co-mi-tam.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "amen",
-      "label": "Amen",
-      "owner": "kaznodzieja-nowej-ery",
-      "files": [
-        {
-          "source": "icons/abilities/amen.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "bez-tajemnic",
       "label": "Bez tajemnic",
       "owner": "lowca-mutantow",
@@ -1550,103 +1394,12 @@
     },
     {
       "kind": "feature",
-      "id": "clint",
-      "label": "Clint",
-      "owner": "kowboj",
-      "files": [
-        {
-          "source": "icons/abilities/clint.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "cwaniacki-zwod",
-      "label": "Cwaniacki zwód",
-      "owner": "cwaniak",
-      "files": [
-        {
-          "source": "icons/abilities/cwaniacki-zwod.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "dobra-rada",
-      "label": "Dobra rada",
-      "owner": "spec",
-      "files": [
-        {
-          "source": "icons/abilities/dobra-rada.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "doktor-brain",
-      "label": "Doktor Brain",
-      "owner": "medyk",
-      "files": [
-        {
-          "source": "icons/abilities/doktor-brain.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "drugi-atak",
-      "label": "Drugi atak",
-      "owner": "brutal",
-      "files": [
-        {
-          "source": "icons/abilities/drugi-atak.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "drzwi-w-drzwi",
-      "label": "Drzwi w drzwi",
-      "owner": "wojownik-autostrady",
-      "files": [
-        {
-          "source": "icons/abilities/drzwi-w-drzwi.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "dwoch-na-jednego",
       "label": "Dwóch na jednego",
       "owner": "ganger",
       "files": [
         {
           "source": "icons/abilities/dwoch-na-jednego.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "dziewiec-zyc",
-      "label": "Dziewięć żyć",
-      "owner": "zlodziej",
-      "files": [
-        {
-          "source": "icons/abilities/dziewiec-zyc.svg",
           "variant": "default",
           "status": "generated placeholder"
         }
@@ -1673,58 +1426,6 @@
       "files": [
         {
           "source": "icons/abilities/elektronik.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "emiter-emp",
-      "label": "Emiter EMP",
-      "owner": "zabojca-maszyn",
-      "files": [
-        {
-          "source": "icons/abilities/emiter-emp.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "empiryk",
-      "label": "Empiryk",
-      "owner": "zabojca-maszyn",
-      "files": [
-        {
-          "source": "icons/abilities/empiryk.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "farmacja",
-      "label": "Farmacja",
-      "owner": "medyk",
-      "files": [
-        {
-          "source": "icons/abilities/farmacja.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "glowa-do-gory",
-      "label": "Głowa do góry!",
-      "owner": "cwaniak",
-      "files": [
-        {
-          "source": "icons/abilities/glowa-do-gory.svg",
           "variant": "default",
           "status": "generated placeholder"
         }

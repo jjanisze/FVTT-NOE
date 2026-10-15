@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-15",
+  "batch": 71,
+  "feedbackBeforeSha256": "77ca77e43af4ec39be7b9c86b2317f51c8f666aba16a0f158f25d8837cdbdd47",
+  "active": [
+    {
+      "id": "batch71-dwoch-na-jednego",
+      "name": "Dwóch na jednego",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-71/dwoch-na-jednego.png",
+      "sourceSha256": "6d6ed05f2bc9b6c1abe6d16d8498e18d3878c5a4cf888aac687a135d42371f15",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/dwoch-na-jednego.svg",
+          "variant": "default",
+          "sourceSha256": "abf98f1ae8f9018ba49f8b45cd85fd2a8b9fa6924e0a773dad9c08339dcf66d3"
+        }
+      ],
+      "notes": "Below the left fist is a single lone triangle. Remove it.",
+      "feedback": {
+        "itemId": "batch71-dwoch-na-jednego",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Below the left fist is a single lone triangle. Remove it.",
+        "updatedAt": "2026-10-15T20:41:30.337Z"
+      }
+    },
+    {
+      "id": "batch71-dziewiec-zyc",
+      "name": "Dziewięć żyć",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-71/dziewiec-zyc.png",
+      "sourceSha256": "44515325c962def8d7f2508ed429013438d4252f9d3f0176864bbe25e7e63d75",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/dziewiec-zyc.svg",
+          "variant": "default",
+          "sourceSha256": "5052a5bb6298ba74d8ae2ea27a3353bc847d749e088078b50cabce0a6a7a9f26"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch71-dziewiec-zyc",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:41:51.375Z"
+      }
+    },
+    {
+      "id": "batch71-ekspert",
+      "name": "Ekspert",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-71/ekspert.png",
+      "sourceSha256": "7f3261157db66a30dab9ffb7b37540f0e202f650f244505e1bf38382033b8077",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ekspert.svg",
+          "variant": "default",
+          "sourceSha256": "232cba987b6f917ef305d366a6f0c46625c645084e43e17b491a2e681606b201"
+        }
+      ],
+      "notes": "The calipers should extend past the hand",
+      "feedback": {
+        "itemId": "batch71-ekspert",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "The calipers should extend past the hand",
+        "updatedAt": "2026-10-15T20:42:22.362Z"
+      }
+    },
+    {
+      "id": "batch71-elektronik",
+      "name": "Elektronik",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-71/elektronik.png",
+      "sourceSha256": "c51ba724c7475a10ef0f9606ceba01b81dab9c09ef5ad1a7e95d851d05aa869f",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/elektronik.svg",
+          "variant": "default",
+          "sourceSha256": "f390a9b077c44175d9cd142eb44c91d2b5ebcec9b555de04ec0e68c851576564"
+        }
+      ],
+      "notes": "Rotate the shackle of the padlock left",
+      "feedback": {
+        "itemId": "batch71-elektronik",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Rotate the shackle of the padlock left",
+        "updatedAt": "2026-10-15T20:42:47.464Z"
+      }
+    },
+    {
+      "id": "batch71-emiter-emp",
+      "name": "Emiter EMP",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-71/emiter-emp.png",
+      "sourceSha256": "aea2a63977233ada0dd5b4cd71dfb13bab87888dfdff3c22537fcfec92c44bd0",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/emiter-emp.svg",
+          "variant": "default",
+          "sourceSha256": "30e74a80bf10eebc2cc7c79b466d9323d765fb269da0c910addaccc500e1f96e"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch71-emiter-emp",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:42:53.499Z"
+      }
+    },
+    {
+      "id": "batch71-empiryk",
+      "name": "Empiryk",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-71/empiryk.png",
+      "sourceSha256": "cc377f798baae0b6f9fc441d4447b0c28032c9ef4d8d0ec455120c07e01c53d2",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/empiryk.svg",
+          "variant": "default",
+          "sourceSha256": "c3969d155f78163b17980cabe9279254fd483d9ad394b4eebefdf82b3fc4e9e2"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch71-empiryk",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:43:16.517Z"
+      }
+    },
+    {
+      "id": "batch71-farmacja",
+      "name": "Farmacja",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-71/farmacja.png",
+      "sourceSha256": "8aca069716cc1308bff1b7adb74b6de8e56936f185a29c1d8eb7ea943e5fc633",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/farmacja.svg",
+          "variant": "default",
+          "sourceSha256": "c76a242ba8cd132a2de5d72c1b09dffbaba3e8aa8326ef3e26176b7d00db1b4f"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch71-farmacja",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:43:24.658Z"
+      }
+    },
+    {
+      "id": "batch71-glowa-do-gory",
+      "name": "Głowa do góry!",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-71/glowa-do-gory.png",
+      "sourceSha256": "7c656851e95c9b2cf9fe095903fa246e603209b7a82e17bd56687c913df5dd9e",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/glowa-do-gory.svg",
+          "variant": "default",
+          "sourceSha256": "d4c9125b3a8ab930e1da0ab57ff9efc0c9fa5773909f10506ce92e7ce4989a3b"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch71-glowa-do-gory",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:43:37.824Z"
+      }
+    },
+    {
+      "id": "batch71-gola-klata",
+      "name": "Goła klata",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-71/gola-klata.png",
+      "sourceSha256": "8b614b3916e1eacc2c3f54206df3023b5048775be1aa8b561bf8d87b567bad3a",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/gola-klata.svg",
+          "variant": "default",
+          "sourceSha256": "96223da7b4372786dd758e23ca14db7c4c44b8f731e301fb0d1cca1547db1407"
+        }
+      ],
+      "notes": "Make the chest more muscular and with a healed battle scar",
+      "feedback": {
+        "itemId": "batch71-gola-klata",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Make the chest more muscular and with a healed battle scar",
+        "updatedAt": "2026-10-15T20:44:29.894Z"
+      }
+    }
+  ]
+}

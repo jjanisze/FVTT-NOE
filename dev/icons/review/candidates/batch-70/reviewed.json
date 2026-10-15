@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-15",
+  "batch": 70,
+  "feedbackBeforeSha256": "77ca77e43af4ec39be7b9c86b2317f51c8f666aba16a0f158f25d8837cdbdd47",
+  "active": [
+    {
+      "id": "batch69-a-co-mi-tam",
+      "name": "A co mi tam!",
+      "decision": "approve",
+      "candidateId": "batch70-revision",
+      "selectedSource": "candidates/batch-70/a-co-mi-tam.png",
+      "sourceSha256": "a55494d44119df53f3cb90960c6999731056d7161ea9a02f364d72b0dc872f0d",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/a-co-mi-tam.svg",
+          "variant": "default",
+          "sourceSha256": "85bde63ef0c7543abf85a5c53d3d35a3c1bb8d6eb0774a25c59afbfc59be1647"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch69-a-co-mi-tam",
+        "decision": "approve",
+        "candidateId": "batch70-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:38:56.067Z"
+      }
+    },
+    {
+      "id": "batch69-amen",
+      "name": "Amen",
+      "decision": "approve",
+      "candidateId": "batch70-revision",
+      "selectedSource": "candidates/batch-70/amen.png",
+      "sourceSha256": "71d62b8a0d636ac16abb4d84cf2bd57256a5201d70d66fb2616ed8e4a9642393",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/amen.svg",
+          "variant": "default",
+          "sourceSha256": "9062f3b8c40db134e5353eec62370cdeecb586ab463d9ba946dac4317cd0f615"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch69-amen",
+        "decision": "approve",
+        "candidateId": "batch70-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:39:00.677Z"
+      }
+    },
+    {
+      "id": "batch69-bez-tajemnic",
+      "name": "Bez tajemnic",
+      "decision": "revise",
+      "candidateId": "batch70-revision",
+      "selectedSource": "candidates/batch-70/bez-tajemnic.png",
+      "sourceSha256": "0b848779202667cd3a4477af74670a911a121fe5659319b711c9330da3ad1c79",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/bez-tajemnic.svg",
+          "variant": "default",
+          "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411"
+        }
+      ],
+      "notes": "You also made the face too human. Correct the anatomy of the shoulders and make the face more mutant-like.",
+      "feedback": {
+        "itemId": "batch69-bez-tajemnic",
+        "decision": "revise",
+        "candidateId": "batch70-revision",
+        "notes": "You also made the face too human. Correct the anatomy of the shoulders and make the face more mutant-like.",
+        "updatedAt": "2026-10-15T20:39:35.253Z"
+      }
+    },
+    {
+      "id": "batch69-clint",
+      "name": "Clint",
+      "decision": "approve",
+      "candidateId": "batch70-revision",
+      "selectedSource": "candidates/batch-70/clint.png",
+      "sourceSha256": "4eac3a0f43a120e74ab080b04e2716f927cd095b2364b6336622b3af8a1cda2a",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/clint.svg",
+          "variant": "default",
+          "sourceSha256": "5ee6cc654890f6d6bf88be57504342dcbc53ffeea273004d6cf970576cee2d61"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch69-clint",
+        "decision": "approve",
+        "candidateId": "batch70-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:39:41.654Z"
+      }
+    },
+    {
+      "id": "batch70-cwaniacki-zwod",
+      "name": "Cwaniacki zwód",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-70/cwaniacki-zwod.png",
+      "sourceSha256": "404e95d49b1acc449a140cf7c223b6627f01dd04984172e5a231a2e447af8dfb",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/cwaniacki-zwod.svg",
+          "variant": "default",
+          "sourceSha256": "92cf284356f1cc96aeab112afc135f826720e6f89822a49dd76526aca5e58f44"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch70-cwaniacki-zwod",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:40:04.659Z"
+      }
+    },
+    {
+      "id": "batch70-dobra-rada",
+      "name": "Dobra rada",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-70/dobra-rada.png",
+      "sourceSha256": "04f7336cdc373189b805b382dd2679f819bb7b43efb22dd375a20f78d1741d25",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/dobra-rada.svg",
+          "variant": "default",
+          "sourceSha256": "9dfe5a97c8a9a000027fc7fa69ccb052eaf2b53099a2b72712a2ed0de24a9b79"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch70-dobra-rada",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:40:16.095Z"
+      }
+    },
+    {
+      "id": "batch70-doktor-brain",
+      "name": "Doktor Brain",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-70/doktor-brain.png",
+      "sourceSha256": "af4096797837c8df4dc8089ecf87caac9d632e14750cd54c9d42233bb24b221a",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/doktor-brain.svg",
+          "variant": "default",
+          "sourceSha256": "6ab38a26190fd849a7d57137b1d58a07bf5c5b193d101e52adf87d4269536f91"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch70-doktor-brain",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:40:25.069Z"
+      }
+    },
+    {
+      "id": "batch70-drugi-atak",
+      "name": "Drugi atak",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-70/drugi-atak.png",
+      "sourceSha256": "0ff2929f23beb4cfd41be84504a3b66a01412fadcb9f3f72b008b2ed88cd7b0f",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/drugi-atak.svg",
+          "variant": "default",
+          "sourceSha256": "8485b908a3ec63be916ca5e1be37cb3133fdab80874a615a3127ebadf97e49c2"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch70-drugi-atak",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:40:36.017Z"
+      }
+    },
+    {
+      "id": "batch70-drzwi-w-drzwi",
+      "name": "Drzwi w drzwi",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-70/drzwi-w-drzwi.png",
+      "sourceSha256": "ee76c80c7c806862e417857e18854ed04ed434f47c0758f85af14f03d9d2ebd9",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/drzwi-w-drzwi.svg",
+          "variant": "default",
+          "sourceSha256": "e90a74d5a078cc693572423f53f02e5a598da739e570338c0de89f8d555bfae0"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch70-drzwi-w-drzwi",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:40:44.403Z"
+      }
+    }
+  ]
+}
