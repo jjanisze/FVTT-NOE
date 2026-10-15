@@ -2796,17 +2796,17 @@
     },
     "batch78-mutant-na-sniadanie": {
       "itemId": "batch78-mutant-na-sniadanie",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Different concept: A mutant's severed head with it's tongue sticking out, pinned with a knife",
-      "updatedAt": "2026-10-15T22:05:59.076Z"
+      "decision": "pending",
+      "candidateId": "batch80-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:16:28.642Z"
     },
     "batch78-nie-do-zdarcia": {
       "itemId": "batch78-nie-do-zdarcia",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Different concept - a burly figure with a determined expression casually stuffing their intestines back into their abdominal cavity",
-      "updatedAt": "2026-10-15T22:07:20.204Z"
+      "decision": "pending",
+      "candidateId": "batch80-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:16:28.643Z"
     },
     "batch78-nie-klekam": {
       "itemId": "batch78-nie-klekam",
@@ -2838,10 +2838,10 @@
     },
     "batch79-oswajanie-zwierzat": {
       "itemId": "batch79-oswajanie-zwierzat",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Remove the horn, and add some boils and bulges",
-      "updatedAt": "2026-10-15T22:08:23.008Z"
+      "decision": "pending",
+      "candidateId": "batch80-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:16:28.643Z"
     },
     "batch79-pancerna-fura": {
       "itemId": "batch79-pancerna-fura",
@@ -2859,31 +2859,31 @@
     },
     "batch79-partner": {
       "itemId": "batch79-partner",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Add a second leg with boot ",
-      "updatedAt": "2026-10-15T22:08:54.718Z"
+      "decision": "pending",
+      "candidateId": "batch80-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:16:28.644Z"
     },
     "batch79-pirotechnika": {
       "itemId": "batch79-pirotechnika",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Replace the wrench with a beaker and pipette",
-      "updatedAt": "2026-10-15T22:09:17.432Z"
+      "decision": "pending",
+      "candidateId": "batch80-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:16:28.644Z"
     },
     "batch79-pistolero": {
       "itemId": "batch79-pistolero",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Good concept, but need to correct the shape of the pistols ",
-      "updatedAt": "2026-10-15T22:09:47.288Z"
+      "decision": "pending",
+      "candidateId": "batch80-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:16:28.644Z"
     },
     "batch79-podstepny-atak": {
       "itemId": "batch79-podstepny-atak",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Off hand should be unshrouding the attacking hand",
-      "updatedAt": "2026-10-15T22:10:26.453Z"
+      "decision": "pending",
+      "candidateId": "batch80-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:16:28.645Z"
     },
     "batch79-pogon": {
       "itemId": "batch79-pogon",

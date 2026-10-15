@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "title": "Batch 79 · 4 approved subjects delivered; 7 awaiting revision",
-  "updated": "2026-10-15",
+  "title": "Batches 80 + 81 · 18 awaiting GM review",
+  "updated": "2026-10-16",
   "items": [
     {
       "id": "batch41-schemat-notatka",
@@ -10387,8 +10387,8 @@
     {
       "id": "batch78-mutant-na-sniadanie",
       "name": "Mutant na śniadanie",
-      "tier": "Batch 78 · Łowca Mutantów",
-      "batch": 78,
+      "tier": "Batch 80 · Łowca Mutantów",
+      "batch": 80,
       "placeholderKey": "feature:mutant-na-sniadanie",
       "target": "icons/abilities/mutant-na-sniadanie.svg",
       "deliveryTargets": [
@@ -10399,12 +10399,18 @@
         }
       ],
       "context": "Class/profession ability: Mutant na śniadanie; owner Łowca Mutantów. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Trochę tego tałatajstwa już zdechło dzięki tobie. Wiesz najlepiej, jak z nimi walczyć i jak się przed nimi bronić. Refleks łowcy. Kiedy rozpoczynasz walkę z mutantem lub potworem, zyskujesz premię do Inicjatywy, równą twojej Premii Biegłości. Zabójca mutantów. Kiedy walczysz z mutantem lub potworem, możesz raz w rundzie zaatakować go z Ułatwieniem. Unik łowcy [R]. Jeśli zostajesz trafiony atakiem przez mutanta lub potwora, możesz użyć Reakcji, żeby wobec tego ataku podnieść swoją TT o wartość tw Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "ONE complete bare adult hand holding a practical hunting KNIFE diagonally upward, guarding against ONE large curved NONHUMAN CLAW entering from the opposite side. The hand has coherent thumb, fingers and short wrist; knife complete blade, guard and grip. Strong black gap separates blade and claw; hunter prepared against mutants. No human portrait, severed limb, blood, gore, tiny scratches or decorative rays.",
+      "request": "NEW CONCEPT for reference cell 1: a SINGLE DEAD NONHUMAN MUTANT HEAD as a flat symbolic trophy emblem, one blunt horn, misshapen heavy cranium, broad muzzle, one tusk and a large TONGUE hanging from the slack open mouth. ONE complete hunting KNIFE pins the head vertically from above, handle clearly visible at top. This is a NON-GRAPHIC WHITE STENCIL: clean flat lower silhouette, no neck tissue or cross-section, no blood, gore, realistic wounds or exposed flesh. No human head, body, hand, plaque, extra weapon or tiny teeth. The head and knife form one compact coherent emblem with broad negative space.",
       "current": {
         "src": "/icons/abilities/mutant-na-sniadanie.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch80-revision",
+          "label": "Batch 80 · revised Mutant na śniadanie",
+          "src": "candidates/batch-80/mutant-na-sniadanie.png",
+          "note": "NEW CONCEPT for reference cell 1: a SINGLE DEAD NONHUMAN MUTANT HEAD as a flat symbolic trophy emblem, one blunt horn, misshapen heavy cranium, broad muzzle, one tusk and a large TONGUE hanging from the slack open mouth. ONE complete hunting KNIFE pins the head vertically from above, handle clearly visible at top. This is a NON-GRAPHIC WHITE STENCIL: clean flat lower silhouette, no neck tissue or cross-section, no blood, gore, realistic wounds or exposed flesh. No human head, body, hand, plaque, extra weapon or tiny teeth. The head and knife form one compact coherent emblem with broad negative space."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 78 · Mutant na śniadanie",
@@ -10416,8 +10422,8 @@
     {
       "id": "batch78-nie-do-zdarcia",
       "name": "Nie do zdarcia",
-      "tier": "Batch 78 · Gladiator",
-      "batch": 78,
+      "tier": "Batch 80 · Gladiator",
+      "batch": 80,
       "placeholderKey": "feature:nie-do-zdarcia",
       "target": "icons/abilities/nie-do-zdarcia.svg",
       "deliveryTargets": [
@@ -10428,12 +10434,18 @@
         }
       ],
       "context": "Class/profession ability: Nie do zdarcia; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Każde trafienie, które zadałoby ci obrażenia krytyczne, zadaje zamiast tego normalne obrażenia. To nic, że obrywasz siekierą w głowę lub kulką prosto w serce. To wcale nie było w głowę tylko w ucho, a serce masz po drugiej stronie! Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "ONE sturdy BARE ADULT FOREARM held upright defensively, with ONE visibly FLATTENED BULLET glancing away beside it and TWO short broad impact strokes. Complete clenched fist and wrist, strong uninjured human arm, broad contours and sparse black anatomical cuts. The arm's extraordinary toughness is the motif. No armor, wound, gore, bodybuilder portrait, extra hands or fine stippling.",
+      "request": "NEW NON-GRAPHIC toughness concept replacing the bare forearm in reference cell 2. ONE BURLY generic ADULT from knees upward, determined lowered head and calm expression, casually TUCKING LOOSE ABDOMINAL BANDAGES back UNDER THE FRONT OF THEIR SHIRT with BOTH HANDS. Show exactly TWO broad looped CLOTH STRIPS across the waist and one flat bandage end, clearly fabric; the shirt behind them remains intact and covers the belly. Broad strong adult anatomy, plain practical clothes, no beard or anime. Preserve the idea of casually patching oneself up through a restrained bandage gesture. NO exposed internal organs, open wound, blood, gore, visible abdominal cavity or anatomical injury. Hands, wrists and elbows complete and coherent.",
       "current": {
         "src": "/icons/abilities/nie-do-zdarcia.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch80-revision",
+          "label": "Batch 80 · revised Nie do zdarcia",
+          "src": "candidates/batch-80/nie-do-zdarcia.png",
+          "note": "NEW NON-GRAPHIC toughness concept replacing the bare forearm in reference cell 2. ONE BURLY generic ADULT from knees upward, determined lowered head and calm expression, casually TUCKING LOOSE ABDOMINAL BANDAGES back UNDER THE FRONT OF THEIR SHIRT with BOTH HANDS. Show exactly TWO broad looped CLOTH STRIPS across the waist and one flat bandage end, clearly fabric; the shirt behind them remains intact and covers the belly. Broad strong adult anatomy, plain practical clothes, no beard or anime. Preserve the idea of casually patching oneself up through a restrained bandage gesture. NO exposed internal organs, open wound, blood, gore, visible abdominal cavity or anatomical injury. Hands, wrists and elbows complete and coherent."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 78 · Nie do zdarcia",
@@ -10565,8 +10577,8 @@
     {
       "id": "batch79-oswajanie-zwierzat",
       "name": "Oswajanie zwierząt",
-      "tier": "Batch 79 · Łowca Mutantów",
-      "batch": 79,
+      "tier": "Batch 80 · Łowca Mutantów",
+      "batch": 80,
       "placeholderKey": "feature:oswajanie-zwierzat",
       "target": "icons/abilities/oswajanie-zwierzat.svg",
       "deliveryTargets": [
@@ -10577,12 +10589,18 @@
         }
       ],
       "context": "Class/profession ability: Oswajanie zwierząt; owner Łowca Mutantów. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Znajdujesz zmutowanego zwierzaka i sprawiasz, żeby łaził za tobą i wykonywał twoje polecenia. W czasie walki działa natychmiast po twojej turze, jeśli przeznaczysz swoją Akcję Bonusową na wydanie mu polecenia. Oswojone zwierzę wykonuje pełny zakres swoich akcji i walczy do utraty przytomności. Jeśli nie otrzyma żadnego polecenia, nie przemieszcza się i używa akcji Unikanie. Oswajanie zwierzęcia. Jeśli nie posiadasz żadnego oswojonego zwierzęcia, możesz poświęcić 24 godziny na szukanie odpowiedni Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "ONE complete BARE ADULT HAND gently PETTING THE HEAD of ONE seated realistic MUTATED DOG in side view. The dog has exactly ONE short blunt HORN on its forehead, natural canine muzzle, folded hindlegs and one long tail; otherwise sober animal anatomy. Hand joins a short forearm and rests naturally between ear and horn. Broad simple white masses, large black gaps, no full person, cute mascot, anime eyes, collar lettering or injury.",
+      "request": "REVISION of reference cell 3. Preserve the same seated dog, petting hand, natural canine proportions and side view. REMOVE THE HORN COMPLETELY. Instead add THREE broad rounded MUTATION BULGES to the dog's forehead, shoulder and flank. Each is a smooth attached bump interrupting the outer contour, with one large simple black separation cut at most, not a horn, spike or texture. Gentle hand naturally rests on the head. No bleeding sores, wound detail, scattered stippling, cute anime mascot or extra limb.",
       "current": {
         "src": "/icons/abilities/oswajanie-zwierzat.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch80-revision",
+          "label": "Batch 80 · revised Oswajanie zwierząt",
+          "src": "candidates/batch-80/oswajanie-zwierzat.png",
+          "note": "REVISION of reference cell 3. Preserve the same seated dog, petting hand, natural canine proportions and side view. REMOVE THE HORN COMPLETELY. Instead add THREE broad rounded MUTATION BULGES to the dog's forehead, shoulder and flank. Each is a smooth attached bump interrupting the outer contour, with one large simple black separation cut at most, not a horn, spike or texture. Gentle hand naturally rests on the head. No bleeding sores, wound detail, scattered stippling, cute anime mascot or extra limb."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 79 · Oswajanie zwierząt",
@@ -10654,8 +10672,8 @@
     {
       "id": "batch79-partner",
       "name": "Partner",
-      "tier": "Batch 79 · Sędzia",
-      "batch": 79,
+      "tier": "Batch 80 · Sędzia",
+      "batch": 80,
       "placeholderKey": "feature:partner",
       "target": "icons/abilities/partner.svg",
       "deliveryTargets": [
@@ -10666,12 +10684,18 @@
         }
       ],
       "context": "Class/profession ability: Partner; owner Sędzia. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Wierny uczeń lub ulubione zwierzę to idealni partnerzy Sędziego. W tym świecie nikt nie przetrwa samotnie. Twój partner ma imię, wykonuje twoje polecenia, nawet walczy u twego boku, jeśli tylko potrafi. Może jednak zginąć, a wtedy będziesz szukać nowego. Sędzia zwykle ciągnie ze sobą młodego człowieka, który chce nauczyć się fachu… albo psa. Partner ma swoją turę zawsze po twojej turze. Nie może działać samodzielnie, więc w swojej Akcji Bonusowej wydajesz mu komendę. Jeśli nie wydasz mu żadnego  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "ONE loyal NORMAL DOG seated attentively beside ONE plain ADULT BOOT AND LOWER TROUSER LEG. Natural adult canine profile, upright ears, complete forelegs, folded hindquarters and one tail curled on the ground. The leg stands beside the dog, clear black gap, no full human portrait or hand. No horn, mutation, petting gesture, anime mascot, fine fur or collar text. Distinct from the mutated-dog taming icon.",
+      "request": "REVISION of reference cell 4. Preserve the same loyal seated NORMAL DOG and existing plain boot with trouser leg. ADD THE ADULT'S SECOND LOWER LEG AND BOOT beside the first, both feet fully visible and planted on the same ground line. Natural parallel stance, two separate trouser legs with broad black gap, dog looking up beside them. Exactly one dog and TWO complete boots/legs, no full person, hand, mutation, collar text or tiny fur.",
       "current": {
         "src": "/icons/abilities/partner.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch80-revision",
+          "label": "Batch 80 · revised Partner",
+          "src": "candidates/batch-80/partner.png",
+          "note": "REVISION of reference cell 4. Preserve the same loyal seated NORMAL DOG and existing plain boot with trouser leg. ADD THE ADULT'S SECOND LOWER LEG AND BOOT beside the first, both feet fully visible and planted on the same ground line. Natural parallel stance, two separate trouser legs with broad black gap, dog looking up beside them. Exactly one dog and TWO complete boots/legs, no full person, hand, mutation, collar text or tiny fur."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 79 · Partner",
@@ -10683,8 +10707,8 @@
     {
       "id": "batch79-pirotechnika",
       "name": "Pirotechnika",
-      "tier": "Batch 79 · Chemik",
-      "batch": 79,
+      "tier": "Batch 80 · Chemik",
+      "batch": 80,
       "placeholderKey": "feature:pirotechnika",
       "target": "icons/abilities/pirotechnika.svg",
       "deliveryTargets": [
@@ -10695,12 +10719,18 @@
         }
       ],
       "context": "Class/profession ability: Pirotechnika; owner Chemik. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zupełnie ci już odwaliło i bierzesz się za robienie BUM. Dynamit i granaty, czego chcieć więcej? Potrzebne ci tylko narzędzia małego chemika, małego rusznikarza, surowce i czas. Otrzymujesz wylistowane obok schematy pirotechniczne. SCHEMATY PIROTECHNICZNE NAZWA ST PRODUKCJA SUROWCE Dynamit (laska) 15 20 godzin 19 CH, 1 MK Granat dymny 15 20 godzin 15 CH, 4 CZ, 1 MK Granat gazowy 20 30 godzin 25 CH, 4 CZ, 1 MK Granat hukowy 20 30 godzin 25 CH, 4 CZ, 1 MK Granat improwizowany 10 10 godzin 9 CH, 1  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "ONE compact bundle of THREE plain cylindrical EXPLOSIVE STICKS bound by TWO broad bands, with ONE short thick fuse curving upward from the top and ONE simple diagonal wrench beside the bundle. A generic fictional explosives-crafting inventory symbol, no functional internals. Broad black gaps and simple intact shapes. No diagrams, instructions, measurements, labels, digits, fine wiring, flame, person or giant cog.",
+      "request": "REVISION of reference cell 5. Preserve the bundle of THREE sticks, TWO broad binding bands and the single short curved fuse. REMOVE THE WRENCH. Replace it with ONE stout simple CHEMISTRY BEAKER beside the bundle and ONE complete DROPPER PIPETTE angled downward over the beaker's open rim. Pipette has a broad bulb, thick stem and short tip; beaker has clear rim, pouring lip and one broad liquid-level cut. Large black separation, no measurement ticks, numbers, labels, fine wires, chemical recipes, construction instructions or flames.",
       "current": {
         "src": "/icons/abilities/pirotechnika.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch80-revision",
+          "label": "Batch 80 · revised Pirotechnika",
+          "src": "candidates/batch-80/pirotechnika.png",
+          "note": "REVISION of reference cell 5. Preserve the bundle of THREE sticks, TWO broad binding bands and the single short curved fuse. REMOVE THE WRENCH. Replace it with ONE stout simple CHEMISTRY BEAKER beside the bundle and ONE complete DROPPER PIPETTE angled downward over the beaker's open rim. Pipette has a broad bulb, thick stem and short tip; beaker has clear rim, pouring lip and one broad liquid-level cut. Large black separation, no measurement ticks, numbers, labels, fine wires, chemical recipes, construction instructions or flames."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 79 · Pirotechnika",
@@ -10712,8 +10742,8 @@
     {
       "id": "batch79-pistolero",
       "name": "Pistolero",
-      "tier": "Batch 79 · Kowboj",
-      "batch": 79,
+      "tier": "Batch 80 · Kowboj",
+      "batch": 80,
       "placeholderKey": "feature:pistolero",
       "target": "icons/abilities/pistolero.svg",
       "deliveryTargets": [
@@ -10724,12 +10754,18 @@
         }
       ],
       "context": "Class/profession ability: Pistolero; owner Kowboj. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Pistolet w dłoni jest dla ciebie równie naturalny jak but na stopie. Dobywanie. Jeśli nosisz jeden lub dwa pistolety w kaburach, możesz je dobyć lub schować bez zużywania darmowej interakcji z przedmiotem. Niezawodny. Pistolet w twoich rękach nigdy się nie zacina. Jednoręki. Strzelasz z pistoletu jedną ręką bez Utrudnienia. Pistolety traktujesz jako broń o właściwości lekka i poręczna. Strzał z biodra. +5 do testów Inicjatywy, jeśli trzymasz w ręce lub będziesz dobywać pistolet. Powąchaj to. Gdy Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "TWO complete SEMIAUTOMATIC PISTOLS crossed symmetrically, barrels pointing upper-left and upper-right, grips down. Recognizable broad slides, complete grips and clearly empty trigger guards; one plain black cut along each slide. Equal gun size, coherent crossing with black separation. No hands, revolver cylinders, text, engraving, tiny controls, ammunition cloud or human portrait.",
+      "request": "REVISION of reference cell 6. Keep TWO CROSSED SEMIAUTOMATIC PISTOLS pointing upper-left and upper-right, but CORRECT BOTH GUN SHAPES into coherent plain classic service-pistol silhouettes. Each has ONE straight rectangular SLIDE along the top ending at the muzzle, a short rear overhang, a sturdy receiver below, ONE backward-sloping grip below the rear, and ONE rounded TRIGGER GUARD directly in FRONT of that grip with one simple trigger inside. NO bent slide, extra muzzle, reversed grip, protruding rail block or fused receiver. Guns overlap ONLY at the lower grips, with a broad BLACK SEPARATION CUT identifying each complete gun. Equal sizes, two complete barrels and two natural angled grips. No hands, revolver cylinder, tiny controls, text or engraving.",
       "current": {
         "src": "/icons/abilities/pistolero.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch80-revision",
+          "label": "Batch 80 · revised Pistolero",
+          "src": "candidates/batch-80/pistolero.png",
+          "note": "REVISION of reference cell 6. Keep TWO CROSSED SEMIAUTOMATIC PISTOLS pointing upper-left and upper-right, but CORRECT BOTH GUN SHAPES into coherent plain classic service-pistol silhouettes. Each has ONE straight rectangular SLIDE along the top ending at the muzzle, a short rear overhang, a sturdy receiver below, ONE backward-sloping grip below the rear, and ONE rounded TRIGGER GUARD directly in FRONT of that grip with one simple trigger inside. NO bent slide, extra muzzle, reversed grip, protruding rail block or fused receiver. Guns overlap ONLY at the lower grips, with a broad BLACK SEPARATION CUT identifying each complete gun. Equal sizes, two complete barrels and two natural angled grips. No hands, revolver cylinder, tiny controls, text or engraving."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 79 · Pistolero",
@@ -10741,8 +10777,8 @@
     {
       "id": "batch79-podstepny-atak",
       "name": "Podstępny atak",
-      "tier": "Batch 79 · Złodziej",
-      "batch": 79,
+      "tier": "Batch 80 · Złodziej",
+      "batch": 80,
       "placeholderKey": "feature:podstepny-atak",
       "target": "icons/abilities/podstepny-atak.svg",
       "deliveryTargets": [
@@ -10753,12 +10789,18 @@
         }
       ],
       "context": "Class/profession ability: Podstępny atak; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Twoje ataki są nie tylko bolesne, ale i upierdliwe. Kiedy zadajesz obrażenia, używając Bolesnego ataku, możesz zamiast dodatkowych obrażeń nałożyć specjalny efekt (wymieniony poniżej) na cel. Kilka takich samych efektów się nie kumuluje. Krwawienie. Żywa istota otrzymuje 1k8 obrażeń na początku swojej tury. Krwawienie ustaje po opatrzeniu rany. Spowolnienie. Szybkość celu spada o 1k6 x 1,5 m do końca twojej następnej tury. Oślepienie. Cel zostaje Oślepiony do końca twojej następnej tury. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "ONE complete BARE ADULT HAND secretly holding ONE short DAGGER behind ONE broad hanging CLOAK FOLD. The hand and dagger peek out to the right of the fabric, blade angled downward; coherent grip, thumb, short wrist and full blade. One broad black fabric fold only. Sober concealed dirty attack motif, no whole person, hooded face, victim, wound, blood, fine fabric texture or extra weapon.",
+      "request": "REVISION of reference cell 7. Preserve the cloak fold and ONE ATTACKING HAND gripping a complete downward-pointing dagger. ADD ONE OFF HAND above-left, visibly PINCHING THE CLOAK EDGE AND PULLING IT LEFTWARD to UNCOVER the knife hand on the right. The off hand moves the fabric away; it does NOT hold another weapon or grip the attacking wrist. Two coherent hands, short complete wrists, each with one natural thumb and folded fingers. One broad fabric fold, large black gaps, no face, full person, victim, wound, blood or tiny cloth texture.",
       "current": {
         "src": "/icons/abilities/podstepny-atak.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch80-revision",
+          "label": "Batch 80 · revised Podstępny atak",
+          "src": "candidates/batch-80/podstepny-atak.png",
+          "note": "REVISION of reference cell 7. Preserve the cloak fold and ONE ATTACKING HAND gripping a complete downward-pointing dagger. ADD ONE OFF HAND above-left, visibly PINCHING THE CLOAK EDGE AND PULLING IT LEFTWARD to UNCOVER the knife hand on the right. The off hand moves the fabric away; it does NOT hold another weapon or grip the attacking wrist. Two coherent hands, short complete wrists, each with one natural thumb and folded fingers. One broad fabric fold, large black gaps, no face, full person, victim, wound, blood or tiny cloth texture."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 79 · Podstępny atak",
@@ -10826,6 +10868,325 @@
         }
       ],
       "status": "resolved"
+    },
+    {
+      "id": "batch80-renoma",
+      "name": "Renoma",
+      "tier": "Batch 80 · Mafiozo",
+      "batch": 80,
+      "placeholderKey": "feature:renoma",
+      "target": "icons/abilities/renoma.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/renoma.svg",
+          "variant": "default",
+          "sourceSha256": "2c250443f8ff9417077e1af3d5ab755525b7b3aa3e383c7707b1c40629ef5fe2"
+        }
+      ],
+      "context": "Class/profession ability: Renoma; owner Mafiozo. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Nie można strzelić człowiekowi w głowę, mając ubłocone buty. Chciałbyś, żeby ktoś cię potrącił nieumytym pontiakiem? Trzeba szanować klientów i wrogów. Trudno nie uwierzyć człowiekowi takiemu jak ty. Człowiekowi, który ma swoją renomę i wie, że ubiór świadczy o szacunku. Każde 50 gambli towarów luksusowych, które nosisz na sobie, daje ci premię +1 do testów Wpływania. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE immaculate formal SUIT JACKET shown frontally from neck opening to waist, NO HEAD. Broad tailored lapels, ONE neat necktie, one large pocket square and two simple front buttons convey expensive presentation and social standing. Clear shoulder outline, sleeves shortened at waist level, sober practical adult garment. Broad white silhouette with black collar and lapel cuts. No portrait, logo, lettering, tiny stitching, luxury brand or ornate jewelry.",
+      "current": {
+        "src": "/icons/abilities/renoma.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 80 · Renoma",
+          "src": "candidates/batch-80/renoma.png",
+          "note": "ONE immaculate formal SUIT JACKET shown frontally from neck opening to waist, NO HEAD. Broad tailored lapels, ONE neat necktie, one large pocket square and two simple front buttons convey expensive presentation and social standing. Clear shoulder outline, sleeves shortened at waist level, sober practical adult garment. Broad white silhouette with black collar and lapel cuts. No portrait, logo, lettering, tiny stitching, luxury brand or ornate jewelry."
+        }
+      ]
+    },
+    {
+      "id": "batch80-reputacja",
+      "name": "Reputacja",
+      "tier": "Batch 80 · Najemnik",
+      "batch": 80,
+      "placeholderKey": "feature:reputacja",
+      "target": "icons/abilities/reputacja.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/reputacja.svg",
+          "variant": "default",
+          "sourceSha256": "c6171ebd37c1959b6113941043ad6f1b8d62bcd891256673b15441335d5ba3d2"
+        }
+      ],
+      "context": "Class/profession ability: Reputacja; owner Najemnik. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Ty nie nawalasz. Zawsze kończysz podjęte zlecenie. Twoja reputacja podąża za tobą krok w krok. Kiedy negocjujesz stawkę, masz Ułatwienie w testach Wpływania. A kiedy zadanie zostanie wykonane, otrzymujesz premię 1k4 x 10% wynegocjowanej stawki. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "TWO complete BARE ADULT HANDS in ONE firm trustworthy HANDSHAKE, centered above ONE large simple COIN with a broad blank center and thick rim. Complete short wrists, coherent overlapping fingers and thumbs, strong black separation around the clasp. A reliable contractor securing better pay. Compact utilitarian emblem, no face, written contract, currency sign, numerals, lettering, tiny fingernails or decorative rays.",
+      "current": {
+        "src": "/icons/abilities/reputacja.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 80 · Reputacja",
+          "src": "candidates/batch-80/reputacja.png",
+          "note": "TWO complete BARE ADULT HANDS in ONE firm trustworthy HANDSHAKE, centered above ONE large simple COIN with a broad blank center and thick rim. Complete short wrists, coherent overlapping fingers and thumbs, strong black separation around the clasp. A reliable contractor securing better pay. Compact utilitarian emblem, no face, written contract, currency sign, numerals, lettering, tiny fingernails or decorative rays."
+        }
+      ]
+    },
+    {
+      "id": "batch81-rewolwerowiec",
+      "name": "Rewolwerowiec",
+      "tier": "Batch 81 · Kowboj",
+      "batch": 81,
+      "placeholderKey": "feature:rewolwerowiec",
+      "target": "icons/abilities/rewolwerowiec.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/rewolwerowiec.svg",
+          "variant": "default",
+          "sourceSha256": "5932894cb0904c52300d34a290a16a8d353d786ccacace5058b05c1c725c5b50"
+        }
+      ],
+      "context": "Class/profession ability: Rewolwerowiec; owner Kowboj. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Wyciągasz rewolwer i strzelasz, zanim ktokolwiek zdąży mrugnąć okiem. Dobywanie. Jeśli nosisz jeden lub dwa rewolwery w kaburach, możesz je dobyć lub schować, bez zużywania darmowej interakcji z przedmiotem. Niezawodny. Rewolwer w twoich rękach nigdy się nie zacina. Jednoręki. Możesz strzelać z rewolweru jedną ręką, bez otrzymywania Utrudnienia do ataku z tego tytułu. Rewolwery traktujesz jako broń o właściwości lekka i poręczna. Strzał z biodra. Otrzymujesz +5 do testów Inicjatywy, jeśli trzyma Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete classic practical REVOLVER angled upward-right beside ONE stout SIX-ROUND SPEEDLOADER below-left. Clear long straight barrel, round cylinder with two broad flute cuts, natural sloping grip and intact empty trigger guard. Speedloader is a compact round holder with six broad cartridge ends and ONE large central knob, no fine mechanism. Gunslinger quick draw and reload, no hand, face, recognizable movie character, logo, text or engraving.",
+      "current": {
+        "src": "/icons/abilities/rewolwerowiec.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 81 · Rewolwerowiec",
+          "src": "candidates/batch-81/rewolwerowiec.png",
+          "note": "ONE complete classic practical REVOLVER angled upward-right beside ONE stout SIX-ROUND SPEEDLOADER below-left. Clear long straight barrel, round cylinder with two broad flute cuts, natural sloping grip and intact empty trigger guard. Speedloader is a compact round holder with six broad cartridge ends and ONE large central knob, no fine mechanism. Gunslinger quick draw and reload, no hand, face, recognizable movie character, logo, text or engraving."
+        }
+      ]
+    },
+    {
+      "id": "batch81-rusznikarstwo",
+      "name": "Rusznikarstwo",
+      "tier": "Batch 81 · Chemik",
+      "batch": 81,
+      "placeholderKey": "feature:rusznikarstwo",
+      "target": "icons/abilities/rusznikarstwo.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/rusznikarstwo.svg",
+          "variant": "default",
+          "sourceSha256": "dcec8366016e63f63cc169a3c17cfcc06696ada67a7db003f5ae8ac9f419eb14"
+        }
+      ],
+      "context": "Class/profession ability: Rusznikarstwo; owner Chemik. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Nie ma nic lepszego niż zapach prochu o poranku. Broń palna to twoja największa miłość. Potrafisz ją wytwarzać i ulepszać. Potrzebne ci tylko narzędzia małego kowala i małego rusznikarza, surowce i czas. Otrzymujesz wylistowane poniżej schematy rusznikarskie. SCHEMATY RUSZNIKARSKIE NAZWA ST PRODUKCJA SUROWCE Broń palna krótka 15 Cena x 1 godz. (CZ + MK) = 50% CENY Broń palna pośrednia 20 Cena x 1 godz. (CZ + MK) = 50% CENY Broń palna długa 25 Cena x 1 godz. (CZ + MK) = 50% CENY Broń miotana: kus Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete plain RIFLE RECEIVER AND BARREL clamped securely in a sturdy BENCH VISE, with ONE broad-handled SCREWDRIVER meeting the receiver from above. The rifle points right, with complete shoulder stock on left and simple trigger guard below; vise grips the receiver from beneath. Broad coherent workshop silhouette, just a few large functional cuts. No hands, person, tiny parts, measurements, schematics, instructions, labels or giant cog.",
+      "current": {
+        "src": "/icons/abilities/rusznikarstwo.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 81 · Rusznikarstwo",
+          "src": "candidates/batch-81/rusznikarstwo.png",
+          "note": "ONE complete plain RIFLE RECEIVER AND BARREL clamped securely in a sturdy BENCH VISE, with ONE broad-handled SCREWDRIVER meeting the receiver from above. The rifle points right, with complete shoulder stock on left and simple trigger guard below; vise grips the receiver from beneath. Broad coherent workshop silhouette, just a few large functional cuts. No hands, person, tiny parts, measurements, schematics, instructions, labels or giant cog."
+        }
+      ]
+    },
+    {
+      "id": "batch81-rutyna",
+      "name": "Rutyna",
+      "tier": "Batch 81 · Żołnierz",
+      "batch": 81,
+      "placeholderKey": "feature:rutyna",
+      "target": "icons/abilities/rutyna.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/rutyna.svg",
+          "variant": "default",
+          "sourceSha256": "ec4fbae53cf1be1d52125b9e3d96acd0054cae17fcc33274d72cdf2d59cd1c68"
+        }
+      ],
+      "context": "Class/profession ability: Rutyna; owner Żołnierz. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy inni panikują, ty wykonujesz rutynowe działania na polu walki. Ostrzał artylerii, eksplodujące granaty, czy seria z karabinu, to tylko elementy taktyczne, utrudniające wykonanie misji. Kalkulujesz i oceniasz ryzyko, będąc tam, gdzie są największe szanse na przeżycie. W czasie walki masz Ułatwienie w Rzutach Obronnych na Zręczność i Mądrość. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE plain generic ADULT SOLDIER WALKING CALMLY in side view, full natural body, practical simple helmet and plain clothes, holding one complete rifle pointed safely DOWN at the side. ONE restrained broad angular impact wedge behind the soldier conveys nearby battle while the figure stays composed. Smooth featureless face, no beard portrait, heroic pose, anime, tiny equipment clutter, ammunition spray, gore or extra limbs.",
+      "current": {
+        "src": "/icons/abilities/rutyna.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 81 · Rutyna",
+          "src": "candidates/batch-81/rutyna.png",
+          "note": "ONE plain generic ADULT SOLDIER WALKING CALMLY in side view, full natural body, practical simple helmet and plain clothes, holding one complete rifle pointed safely DOWN at the side. ONE restrained broad angular impact wedge behind the soldier conveys nearby battle while the figure stays composed. Smooth featureless face, no beard portrait, heroic pose, anime, tiny equipment clutter, ammunition spray, gore or extra limbs."
+        }
+      ]
+    },
+    {
+      "id": "batch81-rzeznik",
+      "name": "Rzeźnik",
+      "tier": "Batch 81 · wyjadacz-option",
+      "batch": 81,
+      "placeholderKey": "feature:rzeznik",
+      "target": "icons/abilities/rzeznik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/rzeznik.svg",
+          "variant": "default",
+          "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+        }
+      ],
+      "context": "Class/profession ability: Rzeźnik; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete BARE ADULT HAND gripping ONE large sturdy MEAT CLEAVER raised diagonally. Broad rectangular blade with a single clean cutting edge, short complete grip and coherent fingers/thumb/wrist. A powerful single-weapon melee strike, sober inventory object. No other weapon, victim, wound, blood, gore, face, blade engraving or tiny scratches.",
+      "current": {
+        "src": "/icons/abilities/rzeznik.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 81 · Rzeźnik",
+          "src": "candidates/batch-81/rzeznik.png",
+          "note": "ONE complete BARE ADULT HAND gripping ONE large sturdy MEAT CLEAVER raised diagonally. Broad rectangular blade with a single clean cutting edge, short complete grip and coherent fingers/thumb/wrist. A powerful single-weapon melee strike, sober inventory object. No other weapon, victim, wound, blood, gore, face, blade engraving or tiny scratches."
+        }
+      ]
+    },
+    {
+      "id": "batch81-rzuc-bron-i-gleba",
+      "name": "Rzuć broń i gleba!",
+      "tier": "Batch 81 · Sędzia",
+      "batch": 81,
+      "placeholderKey": "feature:rzuc-bron-i-gleba",
+      "target": "icons/abilities/rzuc-bron-i-gleba.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/rzuc-bron-i-gleba.svg",
+          "variant": "default",
+          "sourceSha256": "4c636b9bca6cc749b0096229c7a396284331f794259e6606f8c79d4d69db29a1"
+        }
+      ],
+      "context": "Class/profession ability: Rzuć broń i gleba!; owner Sędzia. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Siła twojego głosu potrafi zmusić największego cwaniaka do upuszczenia broni. W Akcji Bonusowej możesz krzyknąć polecenie do wybranego człowieka w zasięgu 9 metrów i zmusić go do poddania się. Przeciwnik wykonuje Rzut Obronny na Mądrość o ST równym 8 plus twój modyfikator Charyzmy i Premia Biegłości. Porażka w teście oznacza, że natychmiast upuszcza broń, kładzie się na ziemię i jest pod wpływem stanu Przerażenie do końca twojej następnej tury. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete BARE ADULT HAND making a firm STOP gesture, PALM OUT with five coherent fingers. Beside it, ONE small plain generic ADULT lies face-down on the ground with hands beside head, and ONE complete dropped pistol lies separately just beyond reach. Compact surrender-to-command emblem. Full natural body, smooth featureless head, broad black gaps. No injury, blood, face portrait, words, speech bubble, lettering or extra person.",
+      "current": {
+        "src": "/icons/abilities/rzuc-bron-i-gleba.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 81 · Rzuć broń i gleba!",
+          "src": "candidates/batch-81/rzuc-bron-i-gleba.png",
+          "note": "ONE complete BARE ADULT HAND making a firm STOP gesture, PALM OUT with five coherent fingers. Beside it, ONE small plain generic ADULT lies face-down on the ground with hands beside head, and ONE complete dropped pistol lies separately just beyond reach. Compact surrender-to-command emblem. Full natural body, smooth featureless head, broad black gaps. No injury, blood, face portrait, words, speech bubble, lettering or extra person."
+        }
+      ]
+    },
+    {
+      "id": "batch81-samouk",
+      "name": "Samouk",
+      "tier": "Batch 81 · Cwaniak",
+      "batch": 81,
+      "placeholderKey": "feature:samouk",
+      "target": "icons/abilities/samouk.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/samouk.svg",
+          "variant": "default",
+          "sourceSha256": "5ffbdf20810d44bf8cfe02fd79de99a7faf88e53d10daa78d5dd978967e20b09"
+        }
+      ],
+      "context": "Class/profession ability: Samouk; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Otrzymujesz biegłość w dwóch wybranych umiejętnościach lub jednej wybranej umiejętności i jednym dowolnym zestawie narzędzi. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE OPEN PRACTICAL BOOK with TWO broad pages. One page contains ONE large WRENCH silhouette; the other contains ONE simple LIGHT BULB symbol with broad base and two short rays. Thick book spine, complete page edges and generous black cuts. Self-taught skills through study, no text, numerals, tiny page lines, human face, giant cog or decorative border.",
+      "current": {
+        "src": "/icons/abilities/samouk.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 81 · Samouk",
+          "src": "candidates/batch-81/samouk.png",
+          "note": "ONE OPEN PRACTICAL BOOK with TWO broad pages. One page contains ONE large WRENCH silhouette; the other contains ONE simple LIGHT BULB symbol with broad base and two short rays. Thick book spine, complete page edges and generous black cuts. Self-taught skills through study, no text, numerals, tiny page lines, human face, giant cog or decorative border."
+        }
+      ]
+    },
+    {
+      "id": "batch81-saper",
+      "name": "Saper",
+      "tier": "Batch 81 · Złodziej",
+      "batch": 81,
+      "placeholderKey": "feature:saper",
+      "target": "icons/abilities/saper.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/saper.svg",
+          "variant": "default",
+          "sourceSha256": "21bc5dcff219b13bd1dcd75f6d28c9701502542bedbf504f50d196e8bb7e2d78"
+        }
+      ],
+      "context": "Class/profession ability: Saper; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Jesteś jak saper, tyle że ty się nie mylisz, nawet raz. Przy każdym teście umiejętności, w której masz Specjalizację, możesz traktować każdy wynik 9 lub mniej na k20, jak 10. Ta zdolność odnawia się po ukończeniu Krótkiego lub Długiego odpoczynku. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete BARE ADULT HAND carefully turns a LARGE PADLOCK KEY in ONE sturdy openable MECHANICAL PADLOCK; a small plain CUBE DIE beside it shows three broad pips on its front face. Expertise makes a difficult precise task reliable. Coherent key bow, stem, lock body and shackle; broad black gaps. Not an explosive-disposal diagram. No wires, instructions, labels, numerals, tiny teeth, face or giant cog.",
+      "current": {
+        "src": "/icons/abilities/saper.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 81 · Saper",
+          "src": "candidates/batch-81/saper.png",
+          "note": "ONE complete BARE ADULT HAND carefully turns a LARGE PADLOCK KEY in ONE sturdy openable MECHANICAL PADLOCK; a small plain CUBE DIE beside it shows three broad pips on its front face. Expertise makes a difficult precise task reliable. Coherent key bow, stem, lock body and shackle; broad black gaps. Not an explosive-disposal diagram. No wires, instructions, labels, numerals, tiny teeth, face or giant cog."
+        }
+      ]
+    },
+    {
+      "id": "batch81-serwisowanie",
+      "name": "Serwisowanie",
+      "tier": "Batch 81 · Monter",
+      "batch": 81,
+      "placeholderKey": "feature:serwisowanie",
+      "target": "icons/abilities/serwisowanie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/serwisowanie.svg",
+          "variant": "default",
+          "sourceSha256": "43659a4c590f9892703aeb2c53a00353153e0794c7e15840196730ebfe4afb08"
+        }
+      ],
+      "context": "Class/profession ability: Serwisowanie; owner Monter. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedyś był taki serial o kolesiu, który ze sreberka, spinacza i butelki po denaturacie robił telefon. Otrzymujesz biegłość w narzędziach małego elektronika. Potrafisz naprawiać i produkować urządzenia elektroniczne i drobne mechanizmy. Potrzebne ci tylko narzędzia małego chemika, małego elektronika, surowce i czas. Otrzymujesz wylistowane poniżej schematy elektroniczne. SCHEMATY ELEKTRONICZNE NAZWA ST PRODUKCJA SUROWCE Agregat 20 50 godzin 1 CE, 15 CZ, 9 MK Akumulator 15 40 godzin 5 CH, 10 CZ, 5 Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE sturdy HANDHELD RADIO shown frontally with ONE short broad ANTENNA, a large plain tuning knob and TWO broad speaker slots. A complete SOLDERING IRON with thick handle approaches one simple open SERVICE PANEL at the lower side. Clear coherent device and tool, sparse broad structural cuts only. No person, hand, tiny circuitry, schematic, instructions, markings, text, numerals or giant cog.",
+      "current": {
+        "src": "/icons/abilities/serwisowanie.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 81 · Serwisowanie",
+          "src": "candidates/batch-81/serwisowanie.png",
+          "note": "ONE sturdy HANDHELD RADIO shown frontally with ONE short broad ANTENNA, a large plain tuning knob and TWO broad speaker slots. A complete SOLDERING IRON with thick handle approaches one simple open SERVICE PANEL at the lower side. Clear coherent device and tool, sparse broad structural cuts only. No person, hand, tiny circuitry, schematic, instructions, markings, text, numerals or giant cog."
+        }
+      ]
+    },
+    {
+      "id": "batch81-skrytka",
+      "name": "Skrytka",
+      "tier": "Batch 81 · Kurier",
+      "batch": 81,
+      "placeholderKey": "feature:skrytka",
+      "target": "icons/abilities/skrytka.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/skrytka.svg",
+          "variant": "default",
+          "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a"
+        }
+      ],
+      "context": "Class/profession ability: Skrytka; owner Kurier. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Potrafisz schować kontrabandę w wozie tak, żeby żaden pies jej nie wyniuchał, i ukryć niewielką broń tak, żeby obmacujący cię zbok niczego nie wymacał. Kiedy ukrywasz przedmiot lub istotę o rozmiarze nie większym niż mały, testujesz swoją umiejętność Skradanie się i wykonujesz test z Ułatwieniem. Przedmiot lub istota otrzymuje stan Niewidoczność. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE rugged BOOT in clear side view with its broad HOLLOW HEEL swung slightly OPEN to reveal ONE short concealed KNIFE lying horizontally in the compartment. One simple hinge and thick heel walls, recognizable intact boot upper and sole. Strong black gap shows hidden storage. No leg, full person, hand, injury, fine laces, labels, measurements or extra weapon.",
+      "current": {
+        "src": "/icons/abilities/skrytka.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 81 · Skrytka",
+          "src": "candidates/batch-81/skrytka.png",
+          "note": "ONE rugged BOOT in clear side view with its broad HOLLOW HEEL swung slightly OPEN to reveal ONE short concealed KNIFE lying horizontally in the compartment. One simple hinge and thick heel walls, recognizable intact boot upper and sole. Strong black gap shows hidden storage. No leg, full person, hand, injury, fine laces, labels, measurements or extra weapon."
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,16 @@
+{
+  "batch": 80,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "mutant-na-sniadanie": "a16a7a1831a8738f1a385dbba29dc60216433d66df6819ab24ed9951eeb37e14",
+    "nie-do-zdarcia": "4546e681be7b2d7018ea8ae6c378d011b25cbc081ae9fe3ec208e7edce02866b",
+    "oswajanie-zwierzat": "2ba3b8ec6eaaa437290f100defc5f0eac5acecde7a846b6818d6021576bff58d",
+    "partner": "fba0446ca80343e3090c7b53a43bd39a9581b408329d38cf96de70daccd90dd3",
+    "pirotechnika": "b11c265c0b264b4e7b2f81885dc7e78c3274ebef16c23e57c665d6d6bb615ef9",
+    "pistolero": "932fb7b274ff2f25befc00bb2043a62a3a3072df4027b01f680e9e946159a78f",
+    "podstepny-atak": "5af828da9a63e7a487a07c9a957e0bbceb4566c54ef9c38271aa08858d179ff3",
+    "renoma": "0645bca5bfbae4b5005e665c86c9e31bf5e63c684f9a7d3d01a22fc1aba298b6",
+    "reputacja": "c50fb279e16f565c25e702f3c6a44f3df4afa69a64e9416a9205a1ed936735ba"
+  }
+}

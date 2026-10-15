@@ -1,0 +1,59 @@
+{
+  "role": "Exact native targets, not style inputs",
+  "files": [
+    {
+      "key": "rewolwerowiec",
+      "source": "icons/abilities/rewolwerowiec.svg",
+      "variant": "default",
+      "sourceSha256": "5932894cb0904c52300d34a290a16a8d353d786ccacace5058b05c1c725c5b50"
+    },
+    {
+      "key": "rusznikarstwo",
+      "source": "icons/abilities/rusznikarstwo.svg",
+      "variant": "default",
+      "sourceSha256": "dcec8366016e63f63cc169a3c17cfcc06696ada67a7db003f5ae8ac9f419eb14"
+    },
+    {
+      "key": "rutyna",
+      "source": "icons/abilities/rutyna.svg",
+      "variant": "default",
+      "sourceSha256": "ec4fbae53cf1be1d52125b9e3d96acd0054cae17fcc33274d72cdf2d59cd1c68"
+    },
+    {
+      "key": "rzeznik",
+      "source": "icons/abilities/rzeznik.svg",
+      "variant": "default",
+      "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+    },
+    {
+      "key": "rzuc-bron-i-gleba",
+      "source": "icons/abilities/rzuc-bron-i-gleba.svg",
+      "variant": "default",
+      "sourceSha256": "4c636b9bca6cc749b0096229c7a396284331f794259e6606f8c79d4d69db29a1"
+    },
+    {
+      "key": "samouk",
+      "source": "icons/abilities/samouk.svg",
+      "variant": "default",
+      "sourceSha256": "5ffbdf20810d44bf8cfe02fd79de99a7faf88e53d10daa78d5dd978967e20b09"
+    },
+    {
+      "key": "saper",
+      "source": "icons/abilities/saper.svg",
+      "variant": "default",
+      "sourceSha256": "21bc5dcff219b13bd1dcd75f6d28c9701502542bedbf504f50d196e8bb7e2d78"
+    },
+    {
+      "key": "serwisowanie",
+      "source": "icons/abilities/serwisowanie.svg",
+      "variant": "default",
+      "sourceSha256": "43659a4c590f9892703aeb2c53a00353153e0794c7e15840196730ebfe4afb08"
+    },
+    {
+      "key": "skrytka",
+      "source": "icons/abilities/skrytka.svg",
+      "variant": "default",
+      "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a"
+    }
+  ]
+}

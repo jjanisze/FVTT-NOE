@@ -1,0 +1,59 @@
+{
+  "role": "Exact native targets, not style inputs",
+  "files": [
+    {
+      "key": "mutant-na-sniadanie",
+      "source": "icons/abilities/mutant-na-sniadanie.svg",
+      "variant": "default",
+      "sourceSha256": "75f1793b8c61d67e215c153eb5b2e4dc27f7d587a99e778ca25bc0b88e3002d9"
+    },
+    {
+      "key": "nie-do-zdarcia",
+      "source": "icons/abilities/nie-do-zdarcia.svg",
+      "variant": "default",
+      "sourceSha256": "2415ac9a0eb191d6b5a62d4dfa4cd279193ab027f2b8ccb63424891669c03f1b"
+    },
+    {
+      "key": "oswajanie-zwierzat",
+      "source": "icons/abilities/oswajanie-zwierzat.svg",
+      "variant": "default",
+      "sourceSha256": "5fc5cad5aaecaa9d56243072e94ea7e3bee03600bc7070a38124678da0dc552d"
+    },
+    {
+      "key": "partner",
+      "source": "icons/abilities/partner.svg",
+      "variant": "default",
+      "sourceSha256": "37a4bb62098769912673161ff53187408cea86af79f3c616cb33d8002dc05c56"
+    },
+    {
+      "key": "pirotechnika",
+      "source": "icons/abilities/pirotechnika.svg",
+      "variant": "default",
+      "sourceSha256": "2050978b23be1ccab45a97da1c85a001290b07825acce0d8183bc9e6ac011574"
+    },
+    {
+      "key": "pistolero",
+      "source": "icons/abilities/pistolero.svg",
+      "variant": "default",
+      "sourceSha256": "ab2f88b1f8370a4770722ca05b476fea3d28ade7854b12b071a5ce7a97653c88"
+    },
+    {
+      "key": "podstepny-atak",
+      "source": "icons/abilities/podstepny-atak.svg",
+      "variant": "default",
+      "sourceSha256": "9a5dd41c0418a0fa745c1bcb60e5baee6a7cec0b1c14db85f088eaffbb7b1d39"
+    },
+    {
+      "key": "renoma",
+      "source": "icons/abilities/renoma.svg",
+      "variant": "default",
+      "sourceSha256": "2c250443f8ff9417077e1af3d5ab755525b7b3aa3e383c7707b1c40629ef5fe2"
+    },
+    {
+      "key": "reputacja",
+      "source": "icons/abilities/reputacja.svg",
+      "variant": "default",
+      "sourceSha256": "c6171ebd37c1959b6113941043ad6f1b8d62bcd891256673b15441335d5ba3d2"
+    }
+  ]
+}

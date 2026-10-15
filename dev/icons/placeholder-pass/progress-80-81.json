@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-16",
+  "preparedBatches": [
+    80,
+    81
+  ],
+  "nextFreeBatch": 82,
+  "originalPlaceholderSubjects": 153,
+  "originalPlaceholderFiles": 155,
+  "approvedSubjectsDelivered": 65,
+  "nativeSvgTargetsReplaced": 67,
+  "remainingPlaceholderSubjects": 88,
+  "remainingPlaceholderFiles": 88,
+  "pendingReviewSubjects": 18,
+  "prospectiveSvgDeliveryTargets": 18,
+  "reworkCandidates": 7,
+  "savedRevisionDecisions": 7,
+  "savedRejectedConcepts": 0,
+  "freshCandidates": 11,
+  "subjectsAwaitingGeneration": 70,
+  "nextUntouchedRoadmapIndex": 83,
+  "reviewCardsTotal": 425,
+  "reviewCardsResolved": 407,
+  "unrelatedDecisionsPreserved": true,
+  "unrelatedCardsPreserved": true,
+  "exactReworkDecisionsArchived": 7,
+  "remainingProductionHashesUnchanged": 88,
+  "candidateCollectionValidatedPairs": 656,
+  "nonGraphicAdaptations": [
+    "nie-do-zdarcia: abdominal bandages beneath intact clothing"
+  ],
+  "browser": {
+    "cards": 18,
+    "options": 43,
+    "brokenImages": 0,
+    "errors": 0,
+    "newCandidatesSelected": 18,
+    "pendingDecisions": 18,
+    "screenshot": "../review/candidates/batch-80/raw/review-preview.png"
+  },
+  "newCandidatesInstalledBeforeApproval": 0
+}

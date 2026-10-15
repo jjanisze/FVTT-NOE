@@ -1,0 +1,41 @@
+{
+  "role": "Reference cells 1-7 are the EXACT selected revision sources. Cells 1-2 need entirely new non-graphic concepts; cells 3-7 need the specific object/anatomy corrections listed below. Reference cells 8-9 are STYLE ONLY for the two new subjects. Keep every complete glyph inside its own cell and all injury symbolism flat and non-graphic.",
+  "sources": [
+    {
+      "source": "dev/icons/review/candidates/batch-78/mutant-na-sniadanie.png",
+      "sha256": "129785321a24ccab916a1bf45e9eeac6b6566cdb2438fdfc2373e942dcb7cbd3"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-78/nie-do-zdarcia.png",
+      "sha256": "fe5fdfa5785c7b33f6e5b0d578ca36dd44a596c13b24eec2ad0ec2dca25308f7"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-79/oswajanie-zwierzat.png",
+      "sha256": "0397cbe643b9f8626e819410472b4bdec88c8fa89e439eaafd524fad4854b7d7"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-79/partner.png",
+      "sha256": "77fbc98bffa7ddcbf1803993d7a4a2369dde0bade7d95ad660367e449b4d9321"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-79/pirotechnika.png",
+      "sha256": "40ac6adc564a15655bf3420dee07c885713eb6632d315b56bba34efaafba4160"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-79/pistolero.png",
+      "sha256": "0accc6f5ff796dc20287c83ce860c445653f436794fe31dd478a1f9eea07ae92"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-79/podstepny-atak.png",
+      "sha256": "f229583e12f75a41fb3d1a4a9b62b331b09fa2ad91af40eb695a5f2fb00944a5"
+    },
+    {
+      "source": "icons/abilities/kocie-kosci.webp",
+      "sha256": "ee5d25740ab235e515c3e32405a25e41eceba7005bcd83cc2a6ebae4d52e30db"
+    },
+    {
+      "source": "icons/abilities/dziewiec-zyc.webp",
+      "sha256": "0cf20df0e99b7078ccc55a513e67d81a2672d09a49374eca0815731a2aa34317"
+    }
+  ]
+}

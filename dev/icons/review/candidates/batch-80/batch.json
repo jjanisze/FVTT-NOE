@@ -1,0 +1,358 @@
+{
+  "date": "2026-10-16",
+  "batch": 80,
+  "generalFeedback": "Apply saved revisions, with injury imagery kept non-graphic. Broad white glyphs, varied objects and generic adults; no repeated gruff portraits, anime or dithering.",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "mutant-na-sniadanie",
+      "name": "Mutant na śniadanie",
+      "owner": "lowca-mutantow",
+      "ownerLabel": "Łowca Mutantów",
+      "target": "icons/abilities/mutant-na-sniadanie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/mutant-na-sniadanie.svg",
+          "variant": "default",
+          "sourceSha256": "75f1793b8c61d67e215c153eb5b2e4dc27f7d587a99e778ca25bc0b88e3002d9"
+        }
+      ],
+      "ruleContext": "Trochę tego tałatajstwa już zdechło dzięki tobie. Wiesz najlepiej, jak z nimi walczyć i jak się przed nimi bronić. Refleks łowcy. Kiedy rozpoczynasz walkę z mutantem lub potworem, zyskujesz premię do Inicjatywy, równą twojej Premii Biegłości. Zabójca mutantów. Kiedy walczysz z mutantem lub potworem, możesz raz w rundzie zaatakować go z Ułatwieniem. Unik łowcy [R]. Jeśli zostajesz trafiony atakiem przez mutanta lub potwora, możesz użyć Reakcji, żeby wobec tego ataku podnieść swoją TT o wartość twojej Premii Biegłości.",
+      "context": "Class/profession ability: Mutant na śniadanie; owner Łowca Mutantów. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "NEW CONCEPT for reference cell 1: a SINGLE DEAD NONHUMAN MUTANT HEAD as a flat symbolic trophy emblem, one blunt horn, misshapen heavy cranium, broad muzzle, one tusk and a large TONGUE hanging from the slack open mouth. ONE complete hunting KNIFE pins the head vertically from above, handle clearly visible at top. This is a NON-GRAPHIC WHITE STENCIL: clean flat lower silhouette, no neck tissue or cross-section, no blood, gore, realistic wounds or exposed flesh. No human head, body, hand, plaque, extra weapon or tiny teeth. The head and knife form one compact coherent emblem with broad negative space.",
+      "itemId": "batch78-mutant-na-sniadanie",
+      "revisionOf": {
+        "id": "batch78-mutant-na-sniadanie",
+        "name": "Mutant na śniadanie",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-78/mutant-na-sniadanie.png",
+        "sourceSha256": "129785321a24ccab916a1bf45e9eeac6b6566cdb2438fdfc2373e942dcb7cbd3",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/mutant-na-sniadanie.svg",
+            "variant": "default",
+            "sourceSha256": "75f1793b8c61d67e215c153eb5b2e4dc27f7d587a99e778ca25bc0b88e3002d9"
+          }
+        ],
+        "notes": "Different concept: A mutant's severed head with it's tongue sticking out, pinned with a knife",
+        "feedback": {
+          "itemId": "batch78-mutant-na-sniadanie",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Different concept: A mutant's severed head with it's tongue sticking out, pinned with a knife",
+          "updatedAt": "2026-10-15T22:05:59.076Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "nie-do-zdarcia",
+      "name": "Nie do zdarcia",
+      "owner": "gladiator",
+      "ownerLabel": "Gladiator",
+      "target": "icons/abilities/nie-do-zdarcia.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/nie-do-zdarcia.svg",
+          "variant": "default",
+          "sourceSha256": "2415ac9a0eb191d6b5a62d4dfa4cd279193ab027f2b8ccb63424891669c03f1b"
+        }
+      ],
+      "ruleContext": "Każde trafienie, które zadałoby ci obrażenia krytyczne, zadaje zamiast tego normalne obrażenia. To nic, że obrywasz siekierą w głowę lub kulką prosto w serce. To wcale nie było w głowę tylko w ucho, a serce masz po drugiej stronie!",
+      "context": "Class/profession ability: Nie do zdarcia; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "request": "NEW NON-GRAPHIC toughness concept replacing the bare forearm in reference cell 2. ONE BURLY generic ADULT from knees upward, determined lowered head and calm expression, casually TUCKING LOOSE ABDOMINAL BANDAGES back UNDER THE FRONT OF THEIR SHIRT with BOTH HANDS. Show exactly TWO broad looped CLOTH STRIPS across the waist and one flat bandage end, clearly fabric; the shirt behind them remains intact and covers the belly. Broad strong adult anatomy, plain practical clothes, no beard or anime. Preserve the idea of casually patching oneself up through a restrained bandage gesture. NO exposed internal organs, open wound, blood, gore, visible abdominal cavity or anatomical injury. Hands, wrists and elbows complete and coherent.",
+      "itemId": "batch78-nie-do-zdarcia",
+      "revisionOf": {
+        "id": "batch78-nie-do-zdarcia",
+        "name": "Nie do zdarcia",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-78/nie-do-zdarcia.png",
+        "sourceSha256": "fe5fdfa5785c7b33f6e5b0d578ca36dd44a596c13b24eec2ad0ec2dca25308f7",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/nie-do-zdarcia.svg",
+            "variant": "default",
+            "sourceSha256": "2415ac9a0eb191d6b5a62d4dfa4cd279193ab027f2b8ccb63424891669c03f1b"
+          }
+        ],
+        "notes": "Different concept - a burly figure with a determined expression casually stuffing their intestines back into their abdominal cavity",
+        "feedback": {
+          "itemId": "batch78-nie-do-zdarcia",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Different concept - a burly figure with a determined expression casually stuffing their intestines back into their abdominal cavity",
+          "updatedAt": "2026-10-15T22:07:20.204Z"
+        }
+      },
+      "adaptation": "Non-graphic alternative: the saved exposed-organ injury request is represented by abdominal bandages tucked under an intact shirt."
+    },
+    {
+      "kind": "feature",
+      "key": "oswajanie-zwierzat",
+      "name": "Oswajanie zwierząt",
+      "owner": "lowca-mutantow",
+      "ownerLabel": "Łowca Mutantów",
+      "target": "icons/abilities/oswajanie-zwierzat.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/oswajanie-zwierzat.svg",
+          "variant": "default",
+          "sourceSha256": "5fc5cad5aaecaa9d56243072e94ea7e3bee03600bc7070a38124678da0dc552d"
+        }
+      ],
+      "ruleContext": "Znajdujesz zmutowanego zwierzaka i sprawiasz, żeby łaził za tobą i wykonywał twoje polecenia. W czasie walki działa natychmiast po twojej turze, jeśli przeznaczysz swoją Akcję Bonusową na wydanie mu polecenia. Oswojone zwierzę wykonuje pełny zakres swoich akcji i walczy do utraty przytomności. Jeśli nie otrzyma żadnego polecenia, nie przemieszcza się i używa akcji Unikanie. Oswajanie zwierzęcia. Jeśli nie posiadasz żadnego oswojonego zwierzęcia, możesz poświęcić 24 godziny na szukanie odpowiedniego kandydata. Rzuć 1k6, żeby dowiedzieć się, jakie stworzenie znajdujesz (1-2: zmutowany owad, 3-4: zmutowany ssak, 5-6: zmutowany gad). Jest to zwykle osobnik słaby, ranny lub odtrącony przez swoje stado. Czas leczenia i oswajania trwa 3 dni. Oswojonemu zwierzęciu musisz nadać imię i nie możesz go nikomu sprzedać ani oddać. Musisz mu zapewniać wodę i pożywienie. ZMUTOWANY OWAD Małe zwierzę TT: 14 plus twoja Premia Biegłości INICJATYWA +6 (16) PW: 3 plus 10 x twój modyfikator Mądrości SZYBKOŚĆ: 9 m, wspinanie 9 m, kopanie 4,5 m STOPIEŃ ZRANIENIA O O O O KW k6 x ½ twojego poziomu Zwiadowcy SIŁ ZRC KON INT MDR CHA 8 (-1) 18 (+4) 14 (+2) 4 (-3) 16 (+3) 4 (-3) UMIEJĘTNOŚCI Skradanie się +6 NIEWRAŻLIWOŚĆ NA OBRAŻENIA radioaktywne, od trucizny ZMYSŁY Ślepowidzenie 9 m, Pasywna Percepcja 13 ZDOLNOŚCI Kopacz. Kiedy zakopuje się w piachu lub w ziemi, nie prowokuje ataków okazyjnych. Pajęcza wspinaczka. Może chodzić po każdej chropowatej powierzchni, nawet do góry nogami. Udźwig. Użytkowy: 16 kg. Maksymalny: 32 kg. AKCJE Ukąszenie. Atak wręcz: +4 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 6 (1k4 + 4) kłute. ZMUTOWANY SSAK Duże zwierzę TT: 11 plus twoja Premia Biegłości INICJATYWA -1 (9) PW: 9 plus 10 x twój modyfikator Mądrości SZYBKOŚĆ: 12 m, wspinanie 6 m STOPIEŃ ZRANIENIA O O O O KW k10 x ½ twojego poziomu Zwiadowcy SIŁ ZRC KON INT MDR CHA 18 (+4) 12 (+1) 12 (+1) 6 (-2) 14 (+2) 4 (-3) UMIEJĘTNOŚCI Atletyka +6 ZMYSŁY Noktowizja 18 m, Pasywna Percepcja 12 ZDOLNOŚCI Doskonałe zmysły. Ma Ułatwienie w Testach Mądrości (Percepcja) opartych na węchu i słuchu. Współpraca. Jeśli w zasięgu do 1,5 metra od przeciwnika znajduje się przytomny sojusznik, otrzymuje Ułatwienie do Testów Ataku wręcz. Udźwig. Użytkowy: 180 kg. Maksymalny: 360 kg. AKCJE Atak kończyną. Atak wręcz: +4 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 10 (2k6 + 4) obuchowe i trafiony cel otrzymuje stan Powalenie, jeśli jest rozmiaru średniego lub mniejszego. ZMUTOWANY GAD Średnie zwierzę TT: 12 plus twoja Premia Biegłości INICJATYWA +2 (12) PW: 6 plus 10 x twój modyfikator Mądrości SZYBKOŚĆ: 9 m, pływanie 18 m STOPIEŃ ZRANIENIA O O O O KW k8 x ½ twojego poziomu Zwiadowcy. SIŁ ZRC KON INT MDR CHA 14 (+2) 14 (+2) 18 (+4) 4 (-3) 12 (+1) 4 (-3) UMIEJĘTNOŚCI Percepcja +3 ZMYSŁY Termowizja 18 m, Pasywna Percepcja 13 ZDOLNOŚCI Ziemnowodny. Potrafi oddychać zarówno na lądzie, jak i pod wodą. Udźwig. Użytkowy: 70 kg. Maksymalny: 140 kg. AKCJE Ugryzienie. Atak wręcz: +2 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 5 (1k6 + 2) kłute. Trafiona istota musi zdać RO na Kondycję o ST 10, inaczej zostanie Zatruta na 1 minutę. Cel wykonuje ponowny RO na końcu swojej tury.",
+      "context": "Class/profession ability: Oswajanie zwierząt; owner Łowca Mutantów. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "request": "REVISION of reference cell 3. Preserve the same seated dog, petting hand, natural canine proportions and side view. REMOVE THE HORN COMPLETELY. Instead add THREE broad rounded MUTATION BULGES to the dog's forehead, shoulder and flank. Each is a smooth attached bump interrupting the outer contour, with one large simple black separation cut at most, not a horn, spike or texture. Gentle hand naturally rests on the head. No bleeding sores, wound detail, scattered stippling, cute anime mascot or extra limb.",
+      "itemId": "batch79-oswajanie-zwierzat",
+      "revisionOf": {
+        "id": "batch79-oswajanie-zwierzat",
+        "name": "Oswajanie zwierząt",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-79/oswajanie-zwierzat.png",
+        "sourceSha256": "0397cbe643b9f8626e819410472b4bdec88c8fa89e439eaafd524fad4854b7d7",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/oswajanie-zwierzat.svg",
+            "variant": "default",
+            "sourceSha256": "5fc5cad5aaecaa9d56243072e94ea7e3bee03600bc7070a38124678da0dc552d"
+          }
+        ],
+        "notes": "Remove the horn, and add some boils and bulges",
+        "feedback": {
+          "itemId": "batch79-oswajanie-zwierzat",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Remove the horn, and add some boils and bulges",
+          "updatedAt": "2026-10-15T22:08:23.008Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "partner",
+      "name": "Partner",
+      "owner": "sedzia",
+      "ownerLabel": "Sędzia",
+      "target": "icons/abilities/partner.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/partner.svg",
+          "variant": "default",
+          "sourceSha256": "37a4bb62098769912673161ff53187408cea86af79f3c616cb33d8002dc05c56"
+        }
+      ],
+      "ruleContext": "Wierny uczeń lub ulubione zwierzę to idealni partnerzy Sędziego. W tym świecie nikt nie przetrwa samotnie. Twój partner ma imię, wykonuje twoje polecenia, nawet walczy u twego boku, jeśli tylko potrafi. Może jednak zginąć, a wtedy będziesz szukać nowego. Sędzia zwykle ciągnie ze sobą młodego człowieka, który chce nauczyć się fachu… albo psa. Partner ma swoją turę zawsze po twojej turze. Nie może działać samodzielnie, więc w swojej Akcji Bonusowej wydajesz mu komendę. Jeśli nie wydasz mu żadnego polecenia, unika walki, broni się akcją Unikanie i szuka osłony. PSI PARTNER Małe zwierzę TT: 12 plus twoja Premia Biegłości INICJATYWA +4 (14) PW: 10 plus 10 x twój modyfikator z Mądrości SZYBKOŚĆ: 18 m STOPIEŃ ZRANIENIA O O O O KW k6 x twój poziom Zwiadowcy SIŁ ZRC KON INT MDR CHA 14 (+2) 14 (+2) 12 (+1) 8 (-1) 14 (+2) 6 (-2) RZUTY OBRONNE ZRC +4, MDR +4 UMIEJĘTNOŚCI Percepcja +4, Skradanie się +4 ZMYSŁY Noktowizja 18 metrów, Pasywna Percepcja 14 ZDOLNOŚCI Doskonałe zmysły. Pies ma Ułatwienie w Testach Mądrości (Percepcja) opartych na węchu i słuchu. Współpraca. Jeśli w zasięgu do 1,5 metra od przeciwnika znajduje się przytomny sojusznik, pies otrzymuje Ułatwienie do Testów Ataku wręcz. Psi bohater. Umiera na takich samych zasadach jak BG, czyli stosuje Stopnie Zranienia i wykonuje Rzuty Przeciw Śmierci. Wymagania. Pojenie skażoną wodą i nieodpowiednie karmienie może pogorszyć jego zdrowie. Udźwig. Użytkowy: 28 kg. Maksymalny: 48 kg. AKCJE Ugryzienie. Atak wręcz: +2 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 5 (1k6 + 2) kłute i trafiony cel zostaje Pochwycony, jeśli jest rozmiaru średniego lub mniejszego. Szukanie partnera. Jeśli nie masz partnera, możesz poświęcić 24 godziny na szukanie odpowiedniego kandydata. Na zbłąkanego kundla lub pełnego ideałów człowieka natkniesz się zarówno w mieście, jak i w dowolnej, zabitej dechami dziurze. Partnera nie możesz nikomu odstąpić (lub sprzedać w przypadku psa) oraz musisz mu zapewnić wodę i pożywienie. LUDZKI PARTNER Tworzysz partnera na czystej karcie postaci. Cechy: Wartości Cech Bazowych do przydzielenia: 14,14,12,12,10, 8 lub 24 punkty do dowolnego rozdzielenia. Pochodzenie: Otrzymuje Pochodzenie zgodne z miejscem jego werbunku. Punkty Wytrzymałości. 5 x twój poziom Zwiadowcy. Kości Wytrzymałości partnera to k6 i ma ich tyle, ile ty masz poziomów Zwiadowcy. Wyszkolenie w pancerzu: Może korzystać z tych pancerzy, w których ty masz wyszkolenie. Premia Biegłości: +2 (nie rośnie). Rzuty Obronne: Ma biegłość w dwóch RO wybranych przez ciebie. Atak: Może korzystać z każdej broni, w której masz biegłość. Obrażenia. Zależne od broni i jego modyfikatorów Cech Bazowych. Sztuczki. Zna jedną, wybraną przez ciebie Sztuczkę, której wymagania spełnia. Umiejętności. Ma biegłość w dwóch wybranych przez ciebie umiejętnościach lub zestawach narzędzi. Śmierć: Umiera na takich samych zasadach, jak BG, czyli stosuje Stopnie Zranienia i korzysta z Rzutów Przeciw Śmierci.",
+      "context": "Class/profession ability: Partner; owner Sędzia. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "request": "REVISION of reference cell 4. Preserve the same loyal seated NORMAL DOG and existing plain boot with trouser leg. ADD THE ADULT'S SECOND LOWER LEG AND BOOT beside the first, both feet fully visible and planted on the same ground line. Natural parallel stance, two separate trouser legs with broad black gap, dog looking up beside them. Exactly one dog and TWO complete boots/legs, no full person, hand, mutation, collar text or tiny fur.",
+      "itemId": "batch79-partner",
+      "revisionOf": {
+        "id": "batch79-partner",
+        "name": "Partner",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-79/partner.png",
+        "sourceSha256": "77fbc98bffa7ddcbf1803993d7a4a2369dde0bade7d95ad660367e449b4d9321",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/partner.svg",
+            "variant": "default",
+            "sourceSha256": "37a4bb62098769912673161ff53187408cea86af79f3c616cb33d8002dc05c56"
+          }
+        ],
+        "notes": "Add a second leg with boot ",
+        "feedback": {
+          "itemId": "batch79-partner",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Add a second leg with boot ",
+          "updatedAt": "2026-10-15T22:08:54.718Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "pirotechnika",
+      "name": "Pirotechnika",
+      "owner": "chemik",
+      "ownerLabel": "Chemik",
+      "target": "icons/abilities/pirotechnika.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pirotechnika.svg",
+          "variant": "default",
+          "sourceSha256": "2050978b23be1ccab45a97da1c85a001290b07825acce0d8183bc9e6ac011574"
+        }
+      ],
+      "ruleContext": "Zupełnie ci już odwaliło i bierzesz się za robienie BUM. Dynamit i granaty, czego chcieć więcej? Potrzebne ci tylko narzędzia małego chemika, małego rusznikarza, surowce i czas. Otrzymujesz wylistowane obok schematy pirotechniczne. SCHEMATY PIROTECHNICZNE NAZWA ST PRODUKCJA SUROWCE Dynamit (laska) 15 20 godzin 19 CH, 1 MK Granat dymny 15 20 godzin 15 CH, 4 CZ, 1 MK Granat gazowy 20 30 godzin 25 CH, 4 CZ, 1 MK Granat hukowy 20 30 godzin 25 CH, 4 CZ, 1 MK Granat improwizowany 10 10 godzin 9 CH, 1 MK/MO Granat odłamkowy 20 35 godzin 30 CH, 4 CZ, 1 MK Granat zapalający 20 35 godzin 30 CH, 4 CZ, 1 MK Granat 40 mm 15 15 godzin 10 CH, 3 CZ, 2 MK IED 15 20 godzin 5 CE, 10 CH, 4 CZ, 1 MK Koktajl Mołotowa 5 1 minuta 4 CH, 1 MK Mina przeciwpiechotna 25 40 godzin 30 CH, 5 CZ, 5 MK Mina przeciwpancerna 25 60 godzin 5 CE, 40 CH, 5 CZ, 10 MK Plastik C4 (100 g) 25 50 godzin 50 CH Pocisk 60 mm 20 30 godzin 25 CH, 1 CZ, 4 MK Proch czarny (20 g) 10 5 godzin 2 CH, 3 MK/MO Proch strzelniczy (20 g) 15 10 godzin 5 CH, 5 MK/MO SUROWCE CH - Chemia CE - Części elektroniczne CZ - Części zamienne MK - Materiały konstrukcyjne MO - Materiały organiczne",
+      "context": "Class/profession ability: Pirotechnika; owner Chemik. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 5,
+      "request": "REVISION of reference cell 5. Preserve the bundle of THREE sticks, TWO broad binding bands and the single short curved fuse. REMOVE THE WRENCH. Replace it with ONE stout simple CHEMISTRY BEAKER beside the bundle and ONE complete DROPPER PIPETTE angled downward over the beaker's open rim. Pipette has a broad bulb, thick stem and short tip; beaker has clear rim, pouring lip and one broad liquid-level cut. Large black separation, no measurement ticks, numbers, labels, fine wires, chemical recipes, construction instructions or flames.",
+      "itemId": "batch79-pirotechnika",
+      "revisionOf": {
+        "id": "batch79-pirotechnika",
+        "name": "Pirotechnika",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-79/pirotechnika.png",
+        "sourceSha256": "40ac6adc564a15655bf3420dee07c885713eb6632d315b56bba34efaafba4160",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/pirotechnika.svg",
+            "variant": "default",
+            "sourceSha256": "2050978b23be1ccab45a97da1c85a001290b07825acce0d8183bc9e6ac011574"
+          }
+        ],
+        "notes": "Replace the wrench with a beaker and pipette",
+        "feedback": {
+          "itemId": "batch79-pirotechnika",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Replace the wrench with a beaker and pipette",
+          "updatedAt": "2026-10-15T22:09:17.432Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "pistolero",
+      "name": "Pistolero",
+      "owner": "kowboj",
+      "ownerLabel": "Kowboj",
+      "target": "icons/abilities/pistolero.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pistolero.svg",
+          "variant": "default",
+          "sourceSha256": "ab2f88b1f8370a4770722ca05b476fea3d28ade7854b12b071a5ce7a97653c88"
+        }
+      ],
+      "ruleContext": "Pistolet w dłoni jest dla ciebie równie naturalny jak but na stopie. Dobywanie. Jeśli nosisz jeden lub dwa pistolety w kaburach, możesz je dobyć lub schować bez zużywania darmowej interakcji z przedmiotem. Niezawodny. Pistolet w twoich rękach nigdy się nie zacina. Jednoręki. Strzelasz z pistoletu jedną ręką bez Utrudnienia. Pistolety traktujesz jako broń o właściwości lekka i poręczna. Strzał z biodra. +5 do testów Inicjatywy, jeśli trzymasz w ręce lub będziesz dobywać pistolet. Powąchaj to. Gdy celujesz z pistoletu do istoty w zasięgu 1,5 m, możesz wykonać Test Zastraszania z Ułatwieniem, używając SIŁ lub CHA.",
+      "context": "Class/profession ability: Pistolero; owner Kowboj. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 6,
+      "request": "REVISION of reference cell 6. Keep TWO CROSSED SEMIAUTOMATIC PISTOLS pointing upper-left and upper-right, but CORRECT BOTH GUN SHAPES into coherent plain classic service-pistol silhouettes. Each has ONE straight rectangular SLIDE along the top ending at the muzzle, a short rear overhang, a sturdy receiver below, ONE backward-sloping grip below the rear, and ONE rounded TRIGGER GUARD directly in FRONT of that grip with one simple trigger inside. NO bent slide, extra muzzle, reversed grip, protruding rail block or fused receiver. Guns overlap ONLY at the lower grips, with a broad BLACK SEPARATION CUT identifying each complete gun. Equal sizes, two complete barrels and two natural angled grips. No hands, revolver cylinder, tiny controls, text or engraving.",
+      "itemId": "batch79-pistolero",
+      "revisionOf": {
+        "id": "batch79-pistolero",
+        "name": "Pistolero",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-79/pistolero.png",
+        "sourceSha256": "0accc6f5ff796dc20287c83ce860c445653f436794fe31dd478a1f9eea07ae92",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/pistolero.svg",
+            "variant": "default",
+            "sourceSha256": "ab2f88b1f8370a4770722ca05b476fea3d28ade7854b12b071a5ce7a97653c88"
+          }
+        ],
+        "notes": "Good concept, but need to correct the shape of the pistols ",
+        "feedback": {
+          "itemId": "batch79-pistolero",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Good concept, but need to correct the shape of the pistols ",
+          "updatedAt": "2026-10-15T22:09:47.288Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "podstepny-atak",
+      "name": "Podstępny atak",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/abilities/podstepny-atak.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/podstepny-atak.svg",
+          "variant": "default",
+          "sourceSha256": "9a5dd41c0418a0fa745c1bcb60e5baee6a7cec0b1c14db85f088eaffbb7b1d39"
+        }
+      ],
+      "ruleContext": "Twoje ataki są nie tylko bolesne, ale i upierdliwe. Kiedy zadajesz obrażenia, używając Bolesnego ataku, możesz zamiast dodatkowych obrażeń nałożyć specjalny efekt (wymieniony poniżej) na cel. Kilka takich samych efektów się nie kumuluje. Krwawienie. Żywa istota otrzymuje 1k8 obrażeń na początku swojej tury. Krwawienie ustaje po opatrzeniu rany. Spowolnienie. Szybkość celu spada o 1k6 x 1,5 m do końca twojej następnej tury. Oślepienie. Cel zostaje Oślepiony do końca twojej następnej tury.",
+      "context": "Class/profession ability: Podstępny atak; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 7,
+      "request": "REVISION of reference cell 7. Preserve the cloak fold and ONE ATTACKING HAND gripping a complete downward-pointing dagger. ADD ONE OFF HAND above-left, visibly PINCHING THE CLOAK EDGE AND PULLING IT LEFTWARD to UNCOVER the knife hand on the right. The off hand moves the fabric away; it does NOT hold another weapon or grip the attacking wrist. Two coherent hands, short complete wrists, each with one natural thumb and folded fingers. One broad fabric fold, large black gaps, no face, full person, victim, wound, blood or tiny cloth texture.",
+      "itemId": "batch79-podstepny-atak",
+      "revisionOf": {
+        "id": "batch79-podstepny-atak",
+        "name": "Podstępny atak",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-79/podstepny-atak.png",
+        "sourceSha256": "f229583e12f75a41fb3d1a4a9b62b331b09fa2ad91af40eb695a5f2fb00944a5",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/podstepny-atak.svg",
+            "variant": "default",
+            "sourceSha256": "9a5dd41c0418a0fa745c1bcb60e5baee6a7cec0b1c14db85f088eaffbb7b1d39"
+          }
+        ],
+        "notes": "Off hand should be unshrouding the attacking hand",
+        "feedback": {
+          "itemId": "batch79-podstepny-atak",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Off hand should be unshrouding the attacking hand",
+          "updatedAt": "2026-10-15T22:10:26.453Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "renoma",
+      "name": "Renoma",
+      "owner": "mafiozo",
+      "ownerLabel": "Mafiozo",
+      "target": "icons/abilities/renoma.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/renoma.svg",
+          "variant": "default",
+          "sourceSha256": "2c250443f8ff9417077e1af3d5ab755525b7b3aa3e383c7707b1c40629ef5fe2"
+        }
+      ],
+      "ruleContext": "Nie można strzelić człowiekowi w głowę, mając ubłocone buty. Chciałbyś, żeby ktoś cię potrącił nieumytym pontiakiem? Trzeba szanować klientów i wrogów. Trudno nie uwierzyć człowiekowi takiemu jak ty. Człowiekowi, który ma swoją renomę i wie, że ubiór świadczy o szacunku. Każde 50 gambli towarów luksusowych, które nosisz na sobie, daje ci premię +1 do testów Wpływania.",
+      "context": "Class/profession ability: Renoma; owner Mafiozo. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 8,
+      "request": "ONE immaculate formal SUIT JACKET shown frontally from neck opening to waist, NO HEAD. Broad tailored lapels, ONE neat necktie, one large pocket square and two simple front buttons convey expensive presentation and social standing. Clear shoulder outline, sleeves shortened at waist level, sober practical adult garment. Broad white silhouette with black collar and lapel cuts. No portrait, logo, lettering, tiny stitching, luxury brand or ornate jewelry.",
+      "itemId": "batch80-renoma"
+    },
+    {
+      "kind": "feature",
+      "key": "reputacja",
+      "name": "Reputacja",
+      "owner": "najemnik",
+      "ownerLabel": "Najemnik",
+      "target": "icons/abilities/reputacja.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/reputacja.svg",
+          "variant": "default",
+          "sourceSha256": "c6171ebd37c1959b6113941043ad6f1b8d62bcd891256673b15441335d5ba3d2"
+        }
+      ],
+      "ruleContext": "Ty nie nawalasz. Zawsze kończysz podjęte zlecenie. Twoja reputacja podąża za tobą krok w krok. Kiedy negocjujesz stawkę, masz Ułatwienie w testach Wpływania. A kiedy zadanie zostanie wykonane, otrzymujesz premię 1k4 x 10% wynegocjowanej stawki.",
+      "context": "Class/profession ability: Reputacja; owner Najemnik. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 9,
+      "request": "TWO complete BARE ADULT HANDS in ONE firm trustworthy HANDSHAKE, centered above ONE large simple COIN with a broad blank center and thick rim. Complete short wrists, coherent overlapping fingers and thumbs, strong black separation around the clasp. A reliable contractor securing better pay. Compact utilitarian emblem, no face, written contract, currency sign, numerals, lettering, tiny fingernails or decorative rays.",
+      "itemId": "batch80-reputacja"
+    }
+  ]
+}

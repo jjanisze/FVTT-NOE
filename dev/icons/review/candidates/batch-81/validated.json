@@ -1,0 +1,16 @@
+{
+  "batch": 81,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "rewolwerowiec": "80e407d16fa5385c7180de8bd84bd333a612fc58de43ce8cdfbf107fa6a48743",
+    "rusznikarstwo": "714affb395ecbdaf604cd92a82fb5b3e1073dbdc381c22f92ad9175f7e4620bf",
+    "rutyna": "ff5cc1e96b730dc229556451890ccd857d50ad375a1ab19c2e902ba050ffe7b6",
+    "rzeznik": "9959a42367ce339c7580774da34c1c5d23259b8dbd760b8358ba3defcee8ddc5",
+    "rzuc-bron-i-gleba": "1d4945f8656a3c18c4bddabb0a29ccb2676764163fd5b706e60ea3b99d8f7408",
+    "samouk": "a482c3221e3b3ef28b94245bfc7658408bf4adc389107715452b7e78ef9e691e",
+    "saper": "97b365cea329c3aaf5549c1c39cec2fc9a290ecd61d160932265d6cf87f839a9",
+    "serwisowanie": "e094f4377066ad801a0cde3cfd6833f30750915638580ba031bfeb50af8bff71",
+    "skrytka": "94add179ca57df755a294bab01f4a7ee2b88a028a2eb028cf320dc50c8598d1c"
+  }
+}
