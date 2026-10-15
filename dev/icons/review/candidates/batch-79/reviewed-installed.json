@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-15",
+  "batch": 79,
+  "approvedSubjects": 4,
+  "remainingSubjects": 7,
+  "installed": [
+    {
+      "itemId": "batch79-pancerna-fura",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-79/pancerna-fura.png",
+      "sourceSha256": "63703d6c5200577d22711f46224db4976b4d97446de96329b3c088c3a20edda1",
+      "files": [
+        "icons/abilities/pancerna-fura.svg",
+        "icons/abilities/pancerna-fura.webp"
+      ],
+      "svgSha256": "7b4ab05625009468f239f80f18b75113d5f4af76ef9b80e068ad726ebb1ee597",
+      "webpSha256": "0216e6cf0ec6bb3661242824fae429dd010ecdfded3c56848be26f8295b377bd"
+    },
+    {
+      "itemId": "batch79-paranoja",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-79/paranoja.png",
+      "sourceSha256": "6bbd18177641590e478ded04615d9367edb20390d24b54e0189c34128f712285",
+      "files": [
+        "icons/abilities/paranoja.svg",
+        "icons/abilities/paranoja.webp"
+      ],
+      "svgSha256": "d5c0441e8c20f78a2d276e094be3d4eed80ab72edfef2190580ec107b5979103",
+      "webpSha256": "c3ce25c6f7db5469905da911fbe02f86d1e6effc6fe4be807151f4c97fb1c14b"
+    },
+    {
+      "itemId": "batch79-pogon",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-79/pogon.png",
+      "sourceSha256": "4a729a7ac5bae44f4ef7d108720869a398b123bce7db5e3e3cf6451b4b53795f",
+      "files": [
+        "icons/abilities/pogon.svg",
+        "icons/abilities/pogon.webp"
+      ],
+      "svgSha256": "1b73a4e9162ade377df368a5353fd53f584d7f61c3fbcb95d0d13de200f6e6ad",
+      "webpSha256": "b15fe2afaa7b7c9390e8d22211cb0c7dbab99feebdd7fa56bc3c80f9042ee447"
+    },
+    {
+      "itemId": "batch79-pogromca",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-79/pogromca.png",
+      "sourceSha256": "49bcf7a4baa5817bfb53931ea4667dc83b107f32332cb172e85413c40497f4da",
+      "files": [
+        "icons/abilities/pogromca.svg",
+        "icons/abilities/pogromca.webp"
+      ],
+      "svgSha256": "b4e1c737c92bbd98404ac1861c39418f99fe30b4c12f72c9c3d44f897176fc67",
+      "webpSha256": "1fa871605a585011e12dc18f8fb9497d46a46492eb21e3918577b6897edcab03"
+    }
+  ]
+}

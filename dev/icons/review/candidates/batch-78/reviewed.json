@@ -1,0 +1,219 @@
+{
+  "date": "2026-10-15",
+  "batch": 78,
+  "feedbackBeforeSha256": "7bff69e3bffce67f54ba45b2d772a5e283ede3483cbdb10e1cf74d32768dba25",
+  "active": [
+    {
+      "id": "batch74-kondycha",
+      "name": "Kondycha",
+      "decision": "approve",
+      "candidateId": "batch78-revision",
+      "selectedSource": "candidates/batch-78/kondycha.png",
+      "sourceSha256": "61fe2970af08d487cc1f02f9b3890ba508a7c4003c6d498b6d7c9d685f479e58",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/kondycha.svg",
+          "variant": "default",
+          "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f"
+        },
+        {
+          "source": "icons/abilities/kondycha_active.svg",
+          "variant": "legacy-active",
+          "sourceSha256": "fe94e499463c22895956f7b690560a97d315a576f5dc27d3d5140c5010c7fbf1"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch74-kondycha",
+        "decision": "approve",
+        "candidateId": "batch78-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:04:42.792Z"
+      }
+    },
+    {
+      "id": "batch75-maszyna-do-zabijania",
+      "name": "Maszyna do zabijania",
+      "decision": "approve",
+      "candidateId": "batch78-revision",
+      "selectedSource": "candidates/batch-78/maszyna-do-zabijania.png",
+      "sourceSha256": "69447c610f05b587e7943480fbaed9fa20f62f0aefd120855a48efd02327f5bc",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/maszyna-do-zabijania.svg",
+          "variant": "default",
+          "sourceSha256": "bf846c0d06aaf67a251b1c02723bad0ff64fb927cbe0e7403f79722605cf8045"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch75-maszyna-do-zabijania",
+        "decision": "approve",
+        "candidateId": "batch78-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:04:48.500Z"
+      }
+    },
+    {
+      "id": "batch77-motywacja",
+      "name": "Motywacja",
+      "decision": "approve",
+      "candidateId": "batch78-revision",
+      "selectedSource": "candidates/batch-78/motywacja.png",
+      "sourceSha256": "263a81c01f8dee26822442cc4acb410feca20007deb03a4c98aeef2cccd1ead8",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/motywacja.svg",
+          "variant": "default",
+          "sourceSha256": "bcda91b7757cd11b9788e8ca5578d415ead01ae547b242ba46eecbc7c255adce"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch77-motywacja",
+        "decision": "approve",
+        "candidateId": "batch78-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:04:54.602Z"
+      }
+    },
+    {
+      "id": "batch78-mutant-na-sniadanie",
+      "name": "Mutant na śniadanie",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-78/mutant-na-sniadanie.png",
+      "sourceSha256": "129785321a24ccab916a1bf45e9eeac6b6566cdb2438fdfc2373e942dcb7cbd3",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/mutant-na-sniadanie.svg",
+          "variant": "default",
+          "sourceSha256": "75f1793b8c61d67e215c153eb5b2e4dc27f7d587a99e778ca25bc0b88e3002d9"
+        }
+      ],
+      "notes": "Different concept: A mutant's severed head with it's tongue sticking out, pinned with a knife",
+      "feedback": {
+        "itemId": "batch78-mutant-na-sniadanie",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Different concept: A mutant's severed head with it's tongue sticking out, pinned with a knife",
+        "updatedAt": "2026-10-15T22:05:59.076Z"
+      }
+    },
+    {
+      "id": "batch78-nie-do-zdarcia",
+      "name": "Nie do zdarcia",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-78/nie-do-zdarcia.png",
+      "sourceSha256": "fe5fdfa5785c7b33f6e5b0d578ca36dd44a596c13b24eec2ad0ec2dca25308f7",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/nie-do-zdarcia.svg",
+          "variant": "default",
+          "sourceSha256": "2415ac9a0eb191d6b5a62d4dfa4cd279193ab027f2b8ccb63424891669c03f1b"
+        }
+      ],
+      "notes": "Different concept - a burly figure with a determined expression casually stuffing their intestines back into their abdominal cavity",
+      "feedback": {
+        "itemId": "batch78-nie-do-zdarcia",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Different concept - a burly figure with a determined expression casually stuffing their intestines back into their abdominal cavity",
+        "updatedAt": "2026-10-15T22:07:20.204Z"
+      }
+    },
+    {
+      "id": "batch78-nie-klekam",
+      "name": "Nie klękam",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-78/nie-klekam.png",
+      "sourceSha256": "165256e2846d319f77f148c63c49728f54557618f46891befbbeaaea207bd90f",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/nie-klekam.svg",
+          "variant": "default",
+          "sourceSha256": "2b9024095583328cc8e8691e95e227163fc4fb2be30650b494391757e4b8cb17"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch78-nie-klekam",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:07:32.218Z"
+      }
+    },
+    {
+      "id": "batch78-obelga",
+      "name": "Obelga",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-78/obelga.png",
+      "sourceSha256": "1cbd5e6cd4e145637ffa30b1006e4a8131407c9cabb1629ca66c6d93f3431663",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/obelga.svg",
+          "variant": "default",
+          "sourceSha256": "f8c8d712dc18d26ae769bee4bff8b17ce67b6aa36773113b6126437c4f3d195d"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch78-obelga",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:07:40.845Z"
+      }
+    },
+    {
+      "id": "batch78-obsluga-pancerza",
+      "name": "Obsługa pancerza",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-78/obsluga-pancerza.png",
+      "sourceSha256": "de2aa052799c99635ca1f470fef64b99769cef17e1f69af3229c0b9c6327d8b1",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/obsluga-pancerza.svg",
+          "variant": "default",
+          "sourceSha256": "31dc7548af241a9d649a7add411298527d65ec112603fe33151aad41a830d0d2"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch78-obsluga-pancerza",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:07:46.501Z"
+      }
+    },
+    {
+      "id": "batch78-odwazny-czy-glupi",
+      "name": "Odważny czy głupi",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-78/odwazny-czy-glupi.png",
+      "sourceSha256": "be8cd928953b60e5759ea4a96c5a49d1accdbc8740e51184235dedb1d719b1bb",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/odwazny-czy-glupi.svg",
+          "variant": "default",
+          "sourceSha256": "374469ecf6d4cc708be851510518c42f24caca3ee47dcfe85af8556e6005cd84"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch78-odwazny-czy-glupi",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:07:52.864Z"
+      }
+    }
+  ]
+}

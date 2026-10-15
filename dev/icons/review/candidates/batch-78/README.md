@@ -52,3 +52,9 @@ The complete collection contains 638 valid PNG/SVG pairs. The live gallery has
 18 pending cards, 41 options, all new candidates selected and no broken images.
 Evidence: `raw/review-preview.png` and
 `../../../placeholder-pass/progress-78-79.json`.
+
+Saved GM review: seven approved subjects installed at eight native SVG/WEBP
+targets, including both Kondycha filenames. Mutant na śniadanie and Nie do
+zdarcia carry their exact requested new concepts into Batch 80. Decisions and
+selected sources are preserved in `reviewed.json`; delivery hashes are in
+`reviewed-installed.json`.

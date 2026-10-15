@@ -46,3 +46,8 @@ px. The complete collection contains 638 valid PNG/SVG pairs. The combined
 gallery has 18 pending cards, 41 options and no broken images, with all new
 candidates selected. Evidence: `../batch-78/raw/review-preview.png` and
 `../../../placeholder-pass/progress-78-79.json`.
+
+Saved GM review: four approved subjects installed. Five exact saved revision
+requests carry into Batch 80: taming, companion, pyrotechnics, pistol shapes
+and the second hand revealing the concealed dagger. `reviewed.json` preserves
+all decisions; `reviewed-installed.json` records exact delivered hashes.

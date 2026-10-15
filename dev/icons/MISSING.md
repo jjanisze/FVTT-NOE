@@ -37,12 +37,12 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 80** (18 candidates in 2 batches await GM review;
-production replacements require a saved approval).
+**Next batch number: 80** (the previous 342-card queue is resolved; the newly
+audited class/profession placeholder backlog remains and is listed below).
 
-**Icon coverage correction, 2026-10-15:** the previous 342 review cards are resolved,
+**Icon coverage correction, 2026-10-16:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
-100 generated initials badges (99 canonically referenced art subjects).
+88 generated initials badges (88 canonically referenced art subjects).
 Origins, Sztuczki, M5 actions and fuel-grade deliveries from the earlier pass
 remain delivered; these counts do not cover all module icons. See the class
 placeholder backlog and `class-placeholder-audit.json`. GM wiring and painted
@@ -789,69 +789,53 @@ Evidence: `review/candidates/batch-77/reviewed.json` and `reviewed-installed.jso
 <!-- placeholder-batch-77:end -->
 
 <!-- placeholder-batch-78:start -->
-## Queue (A) — Batch 78 — 9 awaiting GM review
+## Reviewed (A) — Batch 78 — 7 delivered, 2 revisions
 
-One 3×3 atlas in the established white-glyph style; native initials badges remain
-until the GM approves a selected candidate. Exact sources/hashes, generic prompts
-and targets: `review/candidates/batch-78/`.
+Saved GM review: 7 subjects installed as exact approved SVG/WEBP pairs.
+The 2 remaining requests carry their exact notes into Batch 80.
+Evidence: `review/candidates/batch-78/reviewed.json` and `reviewed-installed.json`.
 
-| Cell | Item | Exact SVG delivery targets (+ WEBP) |
-|---|---|---|
-| 1 | Kondycha (revision) | `icons/abilities/kondycha.svg`; `icons/abilities/kondycha_active.svg` |
-| 2 | Maszyna do zabijania (revision) | `icons/abilities/maszyna-do-zabijania.svg` |
-| 3 | Motywacja (revision) | `icons/abilities/motywacja.svg` |
-| 4 | Mutant na śniadanie | `icons/abilities/mutant-na-sniadanie.svg` |
-| 5 | Nie do zdarcia | `icons/abilities/nie-do-zdarcia.svg` |
-| 6 | Nie klękam | `icons/abilities/nie-klekam.svg` |
-| 7 | Obelga | `icons/abilities/obelga.svg` |
-| 8 | Obsługa pancerza | `icons/abilities/obsluga-pancerza.svg` |
-| 9 | Odważny czy głupi | `icons/abilities/odwazny-czy-glupi.svg` |
-
-Saved revision notes and original selected-source hashes are retained in batch.json
-and revision-feedback-before.json. Old candidates remain available; only these
-revision cards are reset to pending with the new candidate selected.
-
-The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
-nine). Later batch numbers are provisional: saved revisions take priority and
-may add batches. Base/active files share approved pixels; the existing active
-hotbar pulse remains in the code. Old unused active filenames are compatibility
-targets, without new mechanics or wiring. Code, packs and world state are untouched.
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Kondycha | `icons/abilities/kondycha.svg`; `icons/abilities/kondycha_active.svg` | **done** |
+| 2 | Maszyna do zabijania | `icons/abilities/maszyna-do-zabijania.svg` | **done** |
+| 3 | Motywacja | `icons/abilities/motywacja.svg` | **done** |
+| 4 | Mutant na śniadanie | `icons/abilities/mutant-na-sniadanie.svg` | Revision in Batch 80 |
+| 5 | Nie do zdarcia | `icons/abilities/nie-do-zdarcia.svg` | Revision in Batch 80 |
+| 6 | Nie klękam | `icons/abilities/nie-klekam.svg` | **done** |
+| 7 | Obelga | `icons/abilities/obelga.svg` | **done** |
+| 8 | Obsługa pancerza | `icons/abilities/obsluga-pancerza.svg` | **done** |
+| 9 | Odważny czy głupi | `icons/abilities/odwazny-czy-glupi.svg` | **done** |
 
 <!-- placeholder-batch-78:end -->
 
 <!-- placeholder-batch-79:start -->
-## Queue (A) — Batch 79 — 9 awaiting GM review
+## Reviewed (A) — Batch 79 — 4 delivered, 5 revisions
 
-One 3×3 atlas in the established white-glyph style; native initials badges remain
-until the GM approves a selected candidate. Exact sources/hashes, generic prompts
-and targets: `review/candidates/batch-79/`.
+Saved GM review: 4 subjects installed as exact approved SVG/WEBP pairs.
+The 5 remaining requests carry their exact notes into Batch 80.
+Evidence: `review/candidates/batch-79/reviewed.json` and `reviewed-installed.json`.
 
-| Cell | Item | Exact SVG delivery targets (+ WEBP) |
-|---|---|---|
-| 1 | Oswajanie zwierząt | `icons/abilities/oswajanie-zwierzat.svg` |
-| 2 | Pancerna fura | `icons/abilities/pancerna-fura.svg` |
-| 3 | Paranoja | `icons/abilities/paranoja.svg` |
-| 4 | Partner | `icons/abilities/partner.svg` |
-| 5 | Pirotechnika | `icons/abilities/pirotechnika.svg` |
-| 6 | Pistolero | `icons/abilities/pistolero.svg` |
-| 7 | Podstępny atak | `icons/abilities/podstepny-atak.svg` |
-| 8 | Pogoń | `icons/abilities/pogon.svg` |
-| 9 | Pogromca | `icons/abilities/pogromca.svg` |
-
-The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
-nine). Later batch numbers are provisional: saved revisions take priority and
-may add batches. Base/active files share approved pixels; the existing active
-hotbar pulse remains in the code. Old unused active filenames are compatibility
-targets, without new mechanics or wiring. Code, packs and world state are untouched.
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Oswajanie zwierząt | `icons/abilities/oswajanie-zwierzat.svg` | Revision in Batch 80 |
+| 2 | Pancerna fura | `icons/abilities/pancerna-fura.svg` | **done** |
+| 3 | Paranoja | `icons/abilities/paranoja.svg` | **done** |
+| 4 | Partner | `icons/abilities/partner.svg` | Revision in Batch 80 |
+| 5 | Pirotechnika | `icons/abilities/pirotechnika.svg` | Revision in Batch 80 |
+| 6 | Pistolero | `icons/abilities/pistolero.svg` | Revision in Batch 80 |
+| 7 | Podstępny atak | `icons/abilities/podstepny-atak.svg` | Revision in Batch 80 |
+| 8 | Pogoń | `icons/abilities/pogon.svg` | **done** |
+| 9 | Pogromca | `icons/abilities/pogromca.svg` | **done** |
 
 <!-- placeholder-batch-79:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source
 
-Audit 2026-10-15: **100 generated initials SVGs**, including 6 classes,
-18 professions and 76 ability files. 1 ability files are active-state
-variants. Canonically referenced art requests below represent **99 subjects**;
+Audit 2026-10-16: **88 generated initials SVGs**, including 6 classes,
+18 professions and 64 ability files. 0 ability files are active-state
+variants. Canonically referenced art requests below represent **88 subjects**;
 base/active variants share a subject and must keep their existing exact filenames.
 These were outside the previous 342-card generation queue. File existence was not
 evidence of finished artwork. Native badges were confirmed against the exact
@@ -864,24 +848,13 @@ and the next free batch; fresh GM approval is required before replacement.
 
 | Kind | Subject | Owner | Exact SVG targets (+ WEBP after approval) | Status |
 |---|---|---|---|---|
-| feature | Kondycha | twardziel | `icons/abilities/kondycha.svg` | Needs art |
-| feature | Maszyna do zabijania | najemnik | `icons/abilities/maszyna-do-zabijania.svg` | Needs art |
-| feature | Motywacja | cwaniak | `icons/abilities/motywacja.svg` | Needs art |
 | feature | Mutant na śniadanie | lowca-mutantow | `icons/abilities/mutant-na-sniadanie.svg` | Needs art |
 | feature | Nie do zdarcia | gladiator | `icons/abilities/nie-do-zdarcia.svg` | Needs art |
-| feature | Nie klękam | twardziel | `icons/abilities/nie-klekam.svg` | Needs art |
-| feature | Obelga | cwaniak | `icons/abilities/obelga.svg` | Needs art |
-| feature | Obsługa pancerza | wyjadacz-option | `icons/abilities/obsluga-pancerza.svg` | Needs art |
-| feature | Odważny czy głupi | ganger | `icons/abilities/odwazny-czy-glupi.svg` | Needs art |
 | feature | Oswajanie zwierząt | lowca-mutantow | `icons/abilities/oswajanie-zwierzat.svg` | Needs art |
-| feature | Pancerna fura | wojownik-autostrady | `icons/abilities/pancerna-fura.svg` | Needs art |
-| feature | Paranoja | brutal | `icons/abilities/paranoja.svg` | Needs art |
 | feature | Partner | sedzia | `icons/abilities/partner.svg` | Needs art |
 | feature | Pirotechnika | chemik | `icons/abilities/pirotechnika.svg` | Needs art |
 | feature | Pistolero | kowboj | `icons/abilities/pistolero.svg` | Needs art |
 | feature | Podstępny atak | zlodziej | `icons/abilities/podstepny-atak.svg` | Needs art |
-| feature | Pogoń | zwiadowca | `icons/abilities/pogon.svg` | Needs art |
-| feature | Pogromca | lowca-mutantow | `icons/abilities/pogromca.svg` | Needs art |
 | feature | Renoma | mafiozo | `icons/abilities/renoma.svg` | Needs art |
 | feature | Reputacja | najemnik | `icons/abilities/reputacja.svg` | Needs art |
 | feature | Rewolwerowiec | kowboj | `icons/abilities/rewolwerowiec.svg` | Needs art |
@@ -963,8 +936,6 @@ and the next free batch; fresh GM approval is required before replacement.
 | profession | Zabójca | zlodziej | `icons/profesje/zabojca.svg` | Needs art |
 | profession | Zabójca Maszyn | zwiadowca | `icons/profesje/zabojca-maszyn.svg` | Needs art |
 | profession | Żołnierz | twardziel | `icons/profesje/zolnierz.svg` | Needs art |
-
-1 additional old badges have no canonical match; listed in the audit, not assumed to need new art.
 
 <!-- class-placeholder-audit:end -->
 

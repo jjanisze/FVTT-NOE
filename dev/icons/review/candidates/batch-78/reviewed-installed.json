@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-15",
+  "batch": 78,
+  "approvedSubjects": 7,
+  "remainingSubjects": 11,
+  "installed": [
+    {
+      "itemId": "batch74-kondycha",
+      "candidateId": "batch78-revision",
+      "source": "candidates/batch-78/kondycha.png",
+      "sourceSha256": "61fe2970af08d487cc1f02f9b3890ba508a7c4003c6d498b6d7c9d685f479e58",
+      "files": [
+        "icons/abilities/kondycha.svg",
+        "icons/abilities/kondycha.webp"
+      ],
+      "svgSha256": "6e92d938453ed4da91fd59c1f719ec815a50032f215e43f9b2bdf9b2f87f627b",
+      "webpSha256": "3995c6a117d3c672de41e2e6358200b650401f1c2e99ac5222aba9776bd72748"
+    },
+    {
+      "itemId": "batch74-kondycha",
+      "candidateId": "batch78-revision",
+      "source": "candidates/batch-78/kondycha.png",
+      "sourceSha256": "61fe2970af08d487cc1f02f9b3890ba508a7c4003c6d498b6d7c9d685f479e58",
+      "files": [
+        "icons/abilities/kondycha_active.svg",
+        "icons/abilities/kondycha_active.webp"
+      ],
+      "svgSha256": "b98cdb1c2384c5ce02b175e1f43f4648eb45faa4ef38d758834e0eb64e1848ac",
+      "webpSha256": "3995c6a117d3c672de41e2e6358200b650401f1c2e99ac5222aba9776bd72748"
+    },
+    {
+      "itemId": "batch75-maszyna-do-zabijania",
+      "candidateId": "batch78-revision",
+      "source": "candidates/batch-78/maszyna-do-zabijania.png",
+      "sourceSha256": "69447c610f05b587e7943480fbaed9fa20f62f0aefd120855a48efd02327f5bc",
+      "files": [
+        "icons/abilities/maszyna-do-zabijania.svg",
+        "icons/abilities/maszyna-do-zabijania.webp"
+      ],
+      "svgSha256": "306dab3c26c585458ad63b82a7f9493045efe828b309b144398b23a1b9a03798",
+      "webpSha256": "02b33f1f7ca456ab8f75fff204395c53352f29e2e7140e04bf531266cddafbf1"
+    },
+    {
+      "itemId": "batch77-motywacja",
+      "candidateId": "batch78-revision",
+      "source": "candidates/batch-78/motywacja.png",
+      "sourceSha256": "263a81c01f8dee26822442cc4acb410feca20007deb03a4c98aeef2cccd1ead8",
+      "files": [
+        "icons/abilities/motywacja.svg",
+        "icons/abilities/motywacja.webp"
+      ],
+      "svgSha256": "58aedf228a9703e8415afd56dac5b1ac9446b107eda497df1f9e8c9a68709b7f",
+      "webpSha256": "64b04544632a1e3bf6f89b9701e012ae54ffebf85837315e277a18e03a92f157"
+    },
+    {
+      "itemId": "batch78-nie-klekam",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-78/nie-klekam.png",
+      "sourceSha256": "165256e2846d319f77f148c63c49728f54557618f46891befbbeaaea207bd90f",
+      "files": [
+        "icons/abilities/nie-klekam.svg",
+        "icons/abilities/nie-klekam.webp"
+      ],
+      "svgSha256": "1a34dc2d34f97b4502c323d368bc58e19c97375a957312e838a03a4fe2d4685a",
+      "webpSha256": "b7ed3293c72ca4126d011826d67fdbe8c59e656a3a2c4629025332b136dfeef2"
+    },
+    {
+      "itemId": "batch78-obelga",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-78/obelga.png",
+      "sourceSha256": "1cbd5e6cd4e145637ffa30b1006e4a8131407c9cabb1629ca66c6d93f3431663",
+      "files": [
+        "icons/abilities/obelga.svg",
+        "icons/abilities/obelga.webp"
+      ],
+      "svgSha256": "61e461a395fc03987035ea143606d5f8613d0a4ebb860dbff6bcad3160219ee6",
+      "webpSha256": "38eeb74607a1408fa96ea1d0b3de0bc8d9a4449f0036abce1fb70374ad80e40c"
+    },
+    {
+      "itemId": "batch78-obsluga-pancerza",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-78/obsluga-pancerza.png",
+      "sourceSha256": "de2aa052799c99635ca1f470fef64b99769cef17e1f69af3229c0b9c6327d8b1",
+      "files": [
+        "icons/abilities/obsluga-pancerza.svg",
+        "icons/abilities/obsluga-pancerza.webp"
+      ],
+      "svgSha256": "af283950be5abe91a35035de7e4204c8b19d1c85f156f14dd07ec400bd760e51",
+      "webpSha256": "dfd882528ed46e091274ca2133d58dacca7dd9cbb65a3ae10c9db0759f4be354"
+    },
+    {
+      "itemId": "batch78-odwazny-czy-glupi",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-78/odwazny-czy-glupi.png",
+      "sourceSha256": "be8cd928953b60e5759ea4a96c5a49d1accdbc8740e51184235dedb1d719b1bb",
+      "files": [
+        "icons/abilities/odwazny-czy-glupi.svg",
+        "icons/abilities/odwazny-czy-glupi.webp"
+      ],
+      "svgSha256": "d9bf7ca8cf4730dde1bcc853710b34c05f6f806b7c6313aaedf2ed484572786c",
+      "webpSha256": "be958da36c64569b9bb771a8764c90dc14c5a8bf7762cd2a733b012c406cb186"
+    }
+  ]
+}

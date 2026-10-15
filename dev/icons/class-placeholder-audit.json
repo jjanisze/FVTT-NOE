@@ -1,61 +1,22 @@
 {
   "stats": {
-    "date": "2026-10-15",
-    "confirmedPlaceholderFiles": 100,
-    "referencedPlaceholderFiles": 99,
-    "unmappedPlaceholderFiles": 1,
-    "activeVariants": 1,
+    "date": "2026-10-16",
+    "confirmedPlaceholderFiles": 88,
+    "referencedPlaceholderFiles": 88,
+    "unmappedPlaceholderFiles": 0,
+    "activeVariants": 0,
     "referencedActiveVariants": 0,
-    "abilityPlaceholderFiles": 76,
+    "abilityPlaceholderFiles": 64,
     "missingExpectedFiles": 0,
-    "artSubjects": 99,
+    "artSubjects": 88,
     "byKind": {
       "class": 6,
       "profession": 18,
-      "feature": 75
+      "feature": 64
     },
     "scope": "Exact generator signature plus canonical class/profession definitions; no world or pack reads"
   },
   "placeholders": [
-    {
-      "kind": "feature",
-      "id": "kondycha",
-      "label": "Kondycha",
-      "owner": "twardziel",
-      "variant": "default",
-      "source": "icons/abilities/kondycha.svg",
-      "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f",
-      "referenced": true
-    },
-    {
-      "kind": "unmapped",
-      "id": "abilities/kondycha_active",
-      "label": "Kondycha active",
-      "variant": "unknown",
-      "source": "icons/abilities/kondycha_active.svg",
-      "sourceSha256": "fe94e499463c22895956f7b690560a97d315a576f5dc27d3d5140c5010c7fbf1",
-      "referenced": false
-    },
-    {
-      "kind": "feature",
-      "id": "maszyna-do-zabijania",
-      "label": "Maszyna do zabijania",
-      "owner": "najemnik",
-      "variant": "default",
-      "source": "icons/abilities/maszyna-do-zabijania.svg",
-      "sourceSha256": "bf846c0d06aaf67a251b1c02723bad0ff64fb927cbe0e7403f79722605cf8045",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "motywacja",
-      "label": "Motywacja",
-      "owner": "cwaniak",
-      "variant": "default",
-      "source": "icons/abilities/motywacja.svg",
-      "sourceSha256": "bcda91b7757cd11b9788e8ca5578d415ead01ae547b242ba46eecbc7c255adce",
-      "referenced": true
-    },
     {
       "kind": "feature",
       "id": "mutant-na-sniadanie",
@@ -78,72 +39,12 @@
     },
     {
       "kind": "feature",
-      "id": "nie-klekam",
-      "label": "Nie klękam",
-      "owner": "twardziel",
-      "variant": "default",
-      "source": "icons/abilities/nie-klekam.svg",
-      "sourceSha256": "2b9024095583328cc8e8691e95e227163fc4fb2be30650b494391757e4b8cb17",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "obelga",
-      "label": "Obelga",
-      "owner": "cwaniak",
-      "variant": "default",
-      "source": "icons/abilities/obelga.svg",
-      "sourceSha256": "f8c8d712dc18d26ae769bee4bff8b17ce67b6aa36773113b6126437c4f3d195d",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "obsluga-pancerza",
-      "label": "Obsługa pancerza",
-      "owner": "wyjadacz-option",
-      "variant": "default",
-      "source": "icons/abilities/obsluga-pancerza.svg",
-      "sourceSha256": "31dc7548af241a9d649a7add411298527d65ec112603fe33151aad41a830d0d2",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "odwazny-czy-glupi",
-      "label": "Odważny czy głupi",
-      "owner": "ganger",
-      "variant": "default",
-      "source": "icons/abilities/odwazny-czy-glupi.svg",
-      "sourceSha256": "374469ecf6d4cc708be851510518c42f24caca3ee47dcfe85af8556e6005cd84",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "oswajanie-zwierzat",
       "label": "Oswajanie zwierząt",
       "owner": "lowca-mutantow",
       "variant": "default",
       "source": "icons/abilities/oswajanie-zwierzat.svg",
       "sourceSha256": "5fc5cad5aaecaa9d56243072e94ea7e3bee03600bc7070a38124678da0dc552d",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "pancerna-fura",
-      "label": "Pancerna fura",
-      "owner": "wojownik-autostrady",
-      "variant": "default",
-      "source": "icons/abilities/pancerna-fura.svg",
-      "sourceSha256": "ad03acdc92b3e15d2689f8caadc7d0609b58bce1fbe5601ab1cde783441fbcc9",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "paranoja",
-      "label": "Paranoja",
-      "owner": "brutal",
-      "variant": "default",
-      "source": "icons/abilities/paranoja.svg",
-      "sourceSha256": "334dfbff614a3cab3be29ebb4ba450b0d0545f5ea20f1814ebb0101cc1b69973",
       "referenced": true
     },
     {
@@ -184,26 +85,6 @@
       "variant": "default",
       "source": "icons/abilities/podstepny-atak.svg",
       "sourceSha256": "9a5dd41c0418a0fa745c1bcb60e5baee6a7cec0b1c14db85f088eaffbb7b1d39",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "pogon",
-      "label": "Pogoń",
-      "owner": "zwiadowca",
-      "variant": "default",
-      "source": "icons/abilities/pogon.svg",
-      "sourceSha256": "03bdb94245452bc8e4b2bed022b27294276b1339306ff87f8624a374f1a3143a",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "pogromca",
-      "label": "Pogromca",
-      "owner": "lowca-mutantow",
-      "variant": "default",
-      "source": "icons/abilities/pogromca.svg",
-      "sourceSha256": "03bdb94245452bc8e4b2bed022b27294276b1339306ff87f8624a374f1a3143a",
       "referenced": true
     },
     {
@@ -1021,45 +902,6 @@
   "subjects": [
     {
       "kind": "feature",
-      "id": "kondycha",
-      "label": "Kondycha",
-      "owner": "twardziel",
-      "files": [
-        {
-          "source": "icons/abilities/kondycha.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "maszyna-do-zabijania",
-      "label": "Maszyna do zabijania",
-      "owner": "najemnik",
-      "files": [
-        {
-          "source": "icons/abilities/maszyna-do-zabijania.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "motywacja",
-      "label": "Motywacja",
-      "owner": "cwaniak",
-      "files": [
-        {
-          "source": "icons/abilities/motywacja.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "mutant-na-sniadanie",
       "label": "Mutant na śniadanie",
       "owner": "lowca-mutantow",
@@ -1086,90 +928,12 @@
     },
     {
       "kind": "feature",
-      "id": "nie-klekam",
-      "label": "Nie klękam",
-      "owner": "twardziel",
-      "files": [
-        {
-          "source": "icons/abilities/nie-klekam.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "obelga",
-      "label": "Obelga",
-      "owner": "cwaniak",
-      "files": [
-        {
-          "source": "icons/abilities/obelga.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "obsluga-pancerza",
-      "label": "Obsługa pancerza",
-      "owner": "wyjadacz-option",
-      "files": [
-        {
-          "source": "icons/abilities/obsluga-pancerza.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "odwazny-czy-glupi",
-      "label": "Odważny czy głupi",
-      "owner": "ganger",
-      "files": [
-        {
-          "source": "icons/abilities/odwazny-czy-glupi.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "oswajanie-zwierzat",
       "label": "Oswajanie zwierząt",
       "owner": "lowca-mutantow",
       "files": [
         {
           "source": "icons/abilities/oswajanie-zwierzat.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "pancerna-fura",
-      "label": "Pancerna fura",
-      "owner": "wojownik-autostrady",
-      "files": [
-        {
-          "source": "icons/abilities/pancerna-fura.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "paranoja",
-      "label": "Paranoja",
-      "owner": "brutal",
-      "files": [
-        {
-          "source": "icons/abilities/paranoja.svg",
           "variant": "default",
           "status": "generated placeholder"
         }
@@ -1222,32 +986,6 @@
       "files": [
         {
           "source": "icons/abilities/podstepny-atak.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "pogon",
-      "label": "Pogoń",
-      "owner": "zwiadowca",
-      "files": [
-        {
-          "source": "icons/abilities/pogon.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "pogromca",
-      "label": "Pogromca",
-      "owner": "lowca-mutantow",
-      "files": [
-        {
-          "source": "icons/abilities/pogromca.svg",
           "variant": "default",
           "status": "generated placeholder"
         }

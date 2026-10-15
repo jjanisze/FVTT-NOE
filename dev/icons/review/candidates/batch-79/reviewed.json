@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-15",
+  "batch": 79,
+  "feedbackBeforeSha256": "7bff69e3bffce67f54ba45b2d772a5e283ede3483cbdb10e1cf74d32768dba25",
+  "active": [
+    {
+      "id": "batch79-oswajanie-zwierzat",
+      "name": "Oswajanie zwierząt",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-79/oswajanie-zwierzat.png",
+      "sourceSha256": "0397cbe643b9f8626e819410472b4bdec88c8fa89e439eaafd524fad4854b7d7",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/oswajanie-zwierzat.svg",
+          "variant": "default",
+          "sourceSha256": "5fc5cad5aaecaa9d56243072e94ea7e3bee03600bc7070a38124678da0dc552d"
+        }
+      ],
+      "notes": "Remove the horn, and add some boils and bulges",
+      "feedback": {
+        "itemId": "batch79-oswajanie-zwierzat",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Remove the horn, and add some boils and bulges",
+        "updatedAt": "2026-10-15T22:08:23.008Z"
+      }
+    },
+    {
+      "id": "batch79-pancerna-fura",
+      "name": "Pancerna fura",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-79/pancerna-fura.png",
+      "sourceSha256": "63703d6c5200577d22711f46224db4976b4d97446de96329b3c088c3a20edda1",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pancerna-fura.svg",
+          "variant": "default",
+          "sourceSha256": "ad03acdc92b3e15d2689f8caadc7d0609b58bce1fbe5601ab1cde783441fbcc9"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch79-pancerna-fura",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:08:26.967Z"
+      }
+    },
+    {
+      "id": "batch79-paranoja",
+      "name": "Paranoja",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-79/paranoja.png",
+      "sourceSha256": "6bbd18177641590e478ded04615d9367edb20390d24b54e0189c34128f712285",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/paranoja.svg",
+          "variant": "default",
+          "sourceSha256": "334dfbff614a3cab3be29ebb4ba450b0d0545f5ea20f1814ebb0101cc1b69973"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch79-paranoja",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:08:34.550Z"
+      }
+    },
+    {
+      "id": "batch79-partner",
+      "name": "Partner",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-79/partner.png",
+      "sourceSha256": "77fbc98bffa7ddcbf1803993d7a4a2369dde0bade7d95ad660367e449b4d9321",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/partner.svg",
+          "variant": "default",
+          "sourceSha256": "37a4bb62098769912673161ff53187408cea86af79f3c616cb33d8002dc05c56"
+        }
+      ],
+      "notes": "Add a second leg with boot ",
+      "feedback": {
+        "itemId": "batch79-partner",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Add a second leg with boot ",
+        "updatedAt": "2026-10-15T22:08:54.718Z"
+      }
+    },
+    {
+      "id": "batch79-pirotechnika",
+      "name": "Pirotechnika",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-79/pirotechnika.png",
+      "sourceSha256": "40ac6adc564a15655bf3420dee07c885713eb6632d315b56bba34efaafba4160",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pirotechnika.svg",
+          "variant": "default",
+          "sourceSha256": "2050978b23be1ccab45a97da1c85a001290b07825acce0d8183bc9e6ac011574"
+        }
+      ],
+      "notes": "Replace the wrench with a beaker and pipette",
+      "feedback": {
+        "itemId": "batch79-pirotechnika",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Replace the wrench with a beaker and pipette",
+        "updatedAt": "2026-10-15T22:09:17.432Z"
+      }
+    },
+    {
+      "id": "batch79-pistolero",
+      "name": "Pistolero",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-79/pistolero.png",
+      "sourceSha256": "0accc6f5ff796dc20287c83ce860c445653f436794fe31dd478a1f9eea07ae92",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pistolero.svg",
+          "variant": "default",
+          "sourceSha256": "ab2f88b1f8370a4770722ca05b476fea3d28ade7854b12b071a5ce7a97653c88"
+        }
+      ],
+      "notes": "Good concept, but need to correct the shape of the pistols ",
+      "feedback": {
+        "itemId": "batch79-pistolero",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Good concept, but need to correct the shape of the pistols ",
+        "updatedAt": "2026-10-15T22:09:47.288Z"
+      }
+    },
+    {
+      "id": "batch79-podstepny-atak",
+      "name": "Podstępny atak",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-79/podstepny-atak.png",
+      "sourceSha256": "f229583e12f75a41fb3d1a4a9b62b331b09fa2ad91af40eb695a5f2fb00944a5",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/podstepny-atak.svg",
+          "variant": "default",
+          "sourceSha256": "9a5dd41c0418a0fa745c1bcb60e5baee6a7cec0b1c14db85f088eaffbb7b1d39"
+        }
+      ],
+      "notes": "Off hand should be unshrouding the attacking hand",
+      "feedback": {
+        "itemId": "batch79-podstepny-atak",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Off hand should be unshrouding the attacking hand",
+        "updatedAt": "2026-10-15T22:10:26.453Z"
+      }
+    },
+    {
+      "id": "batch79-pogon",
+      "name": "Pogoń",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-79/pogon.png",
+      "sourceSha256": "4a729a7ac5bae44f4ef7d108720869a398b123bce7db5e3e3cf6451b4b53795f",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pogon.svg",
+          "variant": "default",
+          "sourceSha256": "03bdb94245452bc8e4b2bed022b27294276b1339306ff87f8624a374f1a3143a"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch79-pogon",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:10:33.223Z"
+      }
+    },
+    {
+      "id": "batch79-pogromca",
+      "name": "Pogromca",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-79/pogromca.png",
+      "sourceSha256": "49bcf7a4baa5817bfb53931ea4667dc83b107f32332cb172e85413c40497f4da",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pogromca.svg",
+          "variant": "default",
+          "sourceSha256": "03bdb94245452bc8e4b2bed022b27294276b1339306ff87f8624a374f1a3143a"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch79-pogromca",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:10:38.370Z"
+      }
+    }
+  ]
+}
