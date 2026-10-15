@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-16",
+  "batch": 84,
+  "feedbackBeforeSha256": "9eb422d7d6fb50c31826fc649d598764a4d8d3f03d4c792cd39da15a03a42478",
+  "active": [
+    {
+      "id": "batch81-rzeznik",
+      "name": "Rzeźnik",
+      "decision": "revise",
+      "candidateId": "batch84-revision",
+      "selectedSource": "candidates/batch-84/rzeznik.png",
+      "sourceSha256": "fd16d809bc4a2aafe479c1d84ba2c5fd6f6beda8a112d997aef410b2e3498f0a",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/rzeznik.svg",
+          "variant": "default",
+          "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+        }
+      ],
+      "notes": "Almost perfect. The hand with the knife should be slightly lower, aiming for the armpit",
+      "feedback": {
+        "itemId": "batch81-rzeznik",
+        "decision": "revise",
+        "candidateId": "batch84-revision",
+        "notes": "Almost perfect. The hand with the knife should be slightly lower, aiming for the armpit",
+        "updatedAt": "2026-10-15T22:52:25.331Z"
+      }
+    },
+    {
+      "id": "batch81-serwisowanie",
+      "name": "Serwisowanie",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-81/serwisowanie.png",
+      "sourceSha256": "e094f4377066ad801a0cde3cfd6833f30750915638580ba031bfeb50af8bff71",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/serwisowanie.svg",
+          "variant": "default",
+          "sourceSha256": "43659a4c590f9892703aeb2c53a00353153e0794c7e15840196730ebfe4afb08"
+        }
+      ],
+      "notes": "Ok that doesn't work. Change this to a TV with it's back off.",
+      "feedback": {
+        "itemId": "batch81-serwisowanie",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Ok that doesn't work. Change this to a TV with it's back off.",
+        "updatedAt": "2026-10-15T22:52:54.369Z"
+      }
+    },
+    {
+      "id": "batch83-slang",
+      "name": "Slang",
+      "decision": "approve",
+      "candidateId": "batch84-revision",
+      "selectedSource": "candidates/batch-84/slang.png",
+      "sourceSha256": "adc422a3c551a96058afff3ab8e2c179bd5e6d4fc79458c5cb01f80307c79b5f",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/slang.svg",
+          "variant": "default",
+          "sourceSha256": "489859c79ecce12c7e1b0f181602b1783d0f6a30b4c2d8a804bb5b86cbb6b03a"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch83-slang",
+        "decision": "approve",
+        "candidateId": "batch84-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:53:18.507Z"
+      }
+    },
+    {
+      "id": "batch83-sokole-oko",
+      "name": "Sokole oko",
+      "decision": "approve",
+      "candidateId": "batch84-revision",
+      "selectedSource": "candidates/batch-84/sokole-oko.png",
+      "sourceSha256": "9806b35e60bf86f9f2e472c90237b18c9bf9c1e3ae686a9cbaf29dc29edfa061",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/sokole-oko.svg",
+          "variant": "default",
+          "sourceSha256": "f77e36828e55586e9b5ef5a3a6ccee4af8e64cc8eac5133e7a09dba91479cff0"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch83-sokole-oko",
+        "decision": "approve",
+        "candidateId": "batch84-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:53:24.236Z"
+      }
+    },
+    {
+      "id": "batch83-solowa",
+      "name": "Solówa",
+      "decision": "approve",
+      "candidateId": "batch84-revision",
+      "selectedSource": "candidates/batch-84/solowa.png",
+      "sourceSha256": "042bb2414cb17c1a4fa48cac32a01c849a157f6847278a347cd5c60a8bc16436",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/solowa.svg",
+          "variant": "default",
+          "sourceSha256": "16292b6c0c8db69ab2f8bea7e081414ba89c3a547b6e38d4c3617b090b74a98e"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch83-solowa",
+        "decision": "approve",
+        "candidateId": "batch84-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:53:29.814Z"
+      }
+    },
+    {
+      "id": "batch83-specjalizacja-spec",
+      "name": "Specjalizacja",
+      "decision": "approve",
+      "candidateId": "batch84-revision",
+      "selectedSource": "candidates/batch-84/specjalizacja-spec.png",
+      "sourceSha256": "cec7502c93be1a2758cef2b04a39bcfbb36edcf3fb07b91230caabc91e15ea4d",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/specjalizacja-spec.svg",
+          "variant": "default",
+          "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch83-specjalizacja-spec",
+        "decision": "approve",
+        "candidateId": "batch84-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:53:33.738Z"
+      }
+    },
+    {
+      "id": "batch83-spieprzysz-to",
+      "name": "Spieprzysz to!",
+      "decision": "revise",
+      "candidateId": "batch84-revision",
+      "selectedSource": "candidates/batch-84/spieprzysz-to.png",
+      "sourceSha256": "ea7da0edd90808addbb68ee97d9ae028c1ea0eb945c04bd0dc5480800410f8ca",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/spieprzysz-to.svg",
+          "variant": "default",
+          "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+        }
+      ],
+      "notes": "Almost perfect, but less anime",
+      "feedback": {
+        "itemId": "batch83-spieprzysz-to",
+        "decision": "revise",
+        "candidateId": "batch84-revision",
+        "notes": "Almost perfect, but less anime",
+        "updatedAt": "2026-10-15T22:53:46.132Z"
+      }
+    },
+    {
+      "id": "batch84-strzelec",
+      "name": "Strzelec",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-84/strzelec.png",
+      "sourceSha256": "fb22e18e1294627054e02aaff67158b751bf62a8a37dcbb9c2ba22b49b39e628",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/strzelec.svg",
+          "variant": "default",
+          "sourceSha256": "83f2d526727e86cc244e8b6a68f665534890643d70b4b9348734e1f569f73a95"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch84-strzelec",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:53:50.448Z"
+      }
+    },
+    {
+      "id": "batch84-stylowa",
+      "name": "Stylówa",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-84/stylowa.png",
+      "sourceSha256": "946711ac83eaf483f6543dc38b809181d33c1b76c00c70af2ff16cdb14acdbec",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/stylowa.svg",
+          "variant": "default",
+          "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+        }
+      ],
+      "notes": "Lower the chain into where it would naturally reside. Add a fancy baseball cap.",
+      "feedback": {
+        "itemId": "batch84-stylowa",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Lower the chain into where it would naturally reside. Add a fancy baseball cap.",
+        "updatedAt": "2026-10-15T22:54:18.271Z"
+      }
+    }
+  ]
+}

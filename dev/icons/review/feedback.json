@@ -2936,10 +2936,10 @@
     },
     "batch81-rzeznik": {
       "itemId": "batch81-rzeznik",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch84-revision",
-      "notes": "",
-      "updatedAt": "2026-10-15T22:49:27.988Z"
+      "notes": "Almost perfect. The hand with the knife should be slightly lower, aiming for the armpit",
+      "updatedAt": "2026-10-15T22:52:25.331Z"
     },
     "batch81-rzuc-bron-i-gleba": {
       "itemId": "batch81-rzuc-bron-i-gleba",
@@ -2964,10 +2964,10 @@
     },
     "batch81-serwisowanie": {
       "itemId": "batch81-serwisowanie",
-      "decision": "pending",
-      "candidateId": "batch84-revision",
-      "notes": "",
-      "updatedAt": "2026-10-15T22:49:27.989Z"
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Ok that doesn't work. Change this to a TV with it's back off.",
+      "updatedAt": "2026-10-15T22:52:54.369Z"
     },
     "batch81-skrytka": {
       "itemId": "batch81-skrytka",
@@ -2985,10 +2985,10 @@
     },
     "batch83-slang": {
       "itemId": "batch83-slang",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch84-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T22:49:27.989Z"
+      "updatedAt": "2026-10-15T22:53:18.507Z"
     },
     "batch83-smakuje-jak-arszenik": {
       "itemId": "batch83-smakuje-jak-arszenik",
@@ -2999,24 +2999,24 @@
     },
     "batch83-sokole-oko": {
       "itemId": "batch83-sokole-oko",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch84-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T22:49:27.990Z"
+      "updatedAt": "2026-10-15T22:53:24.236Z"
     },
     "batch83-solowa": {
       "itemId": "batch83-solowa",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch84-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T22:49:27.990Z"
+      "updatedAt": "2026-10-15T22:53:29.814Z"
     },
     "batch83-specjalizacja-spec": {
       "itemId": "batch83-specjalizacja-spec",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch84-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T22:49:27.991Z"
+      "updatedAt": "2026-10-15T22:53:33.738Z"
     },
     "batch83-specjalizacja-zlodziej": {
       "itemId": "batch83-specjalizacja-zlodziej",
@@ -3027,10 +3027,10 @@
     },
     "batch83-spieprzysz-to": {
       "itemId": "batch83-spieprzysz-to",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch84-revision",
-      "notes": "",
-      "updatedAt": "2026-10-15T22:49:27.992Z"
+      "notes": "Almost perfect, but less anime",
+      "updatedAt": "2026-10-15T22:53:46.132Z"
     },
     "batch83-sportowiec": {
       "itemId": "batch83-sportowiec",
@@ -3045,6 +3045,83 @@
       "candidateId": "atlas-a",
       "notes": "",
       "updatedAt": "2026-10-15T22:42:40.244Z"
+    },
+    "batch84-strzelec": {
+      "itemId": "batch84-strzelec",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:53:50.448Z"
+    },
+    "batch84-stylowa": {
+      "itemId": "batch84-stylowa",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Lower the chain into where it would naturally reside. Add a fancy baseball cap.",
+      "updatedAt": "2026-10-15T22:54:18.271Z"
+    },
+    "batch85-szalencza-szarza": {
+      "itemId": "batch85-szalencza-szarza",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Needs a different concept - we have enough \"guy running\" icons.",
+      "updatedAt": "2026-10-15T22:54:55.122Z"
+    },
+    "batch85-szary": {
+      "itemId": "batch85-szary",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:55:01.134Z"
+    },
+    "batch85-szczescie": {
+      "itemId": "batch85-szczescie",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:55:05.413Z"
+    },
+    "batch85-szybka-gadka": {
+      "itemId": "batch85-szybka-gadka",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:55:10.837Z"
+    },
+    "batch85-szybka-produkcja": {
+      "itemId": "batch85-szybka-produkcja",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:55:15.755Z"
+    },
+    "batch85-szybkie-badanie": {
+      "itemId": "batch85-szybkie-badanie",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "A figure of sherlock holmes with a magnifying glass, simultaneously inspecting the ground through the glass and sprinting",
+      "updatedAt": "2026-10-15T22:56:30.549Z"
+    },
+    "batch85-szybkie-nogi": {
+      "itemId": "batch85-szybkie-nogi",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Change the position of the feet into a Michael Jackson moonwalk. Keep the boots.",
+      "updatedAt": "2026-10-15T22:56:54.826Z"
+    },
+    "batch85-szybkie-rece": {
+      "itemId": "batch85-szybkie-rece",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Modify the graphics to indicate the hands are moving very fast, like a blur",
+      "updatedAt": "2026-10-15T22:57:15.207Z"
+    },
+    "batch85-szybkosc-kota": {
+      "itemId": "batch85-szybkosc-kota",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Add lines indicating evastion.",
+      "updatedAt": "2026-10-15T22:57:47.236Z"
     }
   }
 }

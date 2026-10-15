@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-16",
+  "batch": 84,
+  "approvedSubjects": 5,
+  "remainingSubjects": 13,
+  "installed": [
+    {
+      "itemId": "batch83-slang",
+      "candidateId": "batch84-revision",
+      "source": "candidates/batch-84/slang.png",
+      "sourceSha256": "adc422a3c551a96058afff3ab8e2c179bd5e6d4fc79458c5cb01f80307c79b5f",
+      "files": [
+        "icons/abilities/slang.svg",
+        "icons/abilities/slang.webp"
+      ],
+      "svgSha256": "15a47aca8c3f9212209ce14202760df8cfba501c131b1012a213b0fac3b01d4e",
+      "webpSha256": "3065f7de12e03ef020deff8de7cde1745c1075318dd01e84eb2c4f7b0451b650"
+    },
+    {
+      "itemId": "batch83-sokole-oko",
+      "candidateId": "batch84-revision",
+      "source": "candidates/batch-84/sokole-oko.png",
+      "sourceSha256": "9806b35e60bf86f9f2e472c90237b18c9bf9c1e3ae686a9cbaf29dc29edfa061",
+      "files": [
+        "icons/abilities/sokole-oko.svg",
+        "icons/abilities/sokole-oko.webp"
+      ],
+      "svgSha256": "40cd36f6c4dfa87a0323de5b62b09d7d8890a6a4d89aae07698063d9931c624b",
+      "webpSha256": "3fa1ee910d277f6ed6d64b29c59017cecf9cbcb161e856a7f4b0e89aed626a17"
+    },
+    {
+      "itemId": "batch83-solowa",
+      "candidateId": "batch84-revision",
+      "source": "candidates/batch-84/solowa.png",
+      "sourceSha256": "042bb2414cb17c1a4fa48cac32a01c849a157f6847278a347cd5c60a8bc16436",
+      "files": [
+        "icons/abilities/solowa.svg",
+        "icons/abilities/solowa.webp"
+      ],
+      "svgSha256": "e99e04a9536243d88675fe4758c107ea96c769d5bff7edbf8a5b7e16d52aeeb5",
+      "webpSha256": "c166bed77a93be7617d97a87c20351ac781d8821b4f9af13310233d01488c5e2"
+    },
+    {
+      "itemId": "batch83-specjalizacja-spec",
+      "candidateId": "batch84-revision",
+      "source": "candidates/batch-84/specjalizacja-spec.png",
+      "sourceSha256": "cec7502c93be1a2758cef2b04a39bcfbb36edcf3fb07b91230caabc91e15ea4d",
+      "files": [
+        "icons/abilities/specjalizacja-spec.svg",
+        "icons/abilities/specjalizacja-spec.webp"
+      ],
+      "svgSha256": "6f849078929b79a0fa7c63022ac4dc37acebeb0de8dab32dcacf9a11fefa6275",
+      "webpSha256": "63824e42cb2a1442d277739a7f0205e5f21296e2060e077b43a78ee7b5aa5a18"
+    },
+    {
+      "itemId": "batch84-strzelec",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-84/strzelec.png",
+      "sourceSha256": "fb22e18e1294627054e02aaff67158b751bf62a8a37dcbb9c2ba22b49b39e628",
+      "files": [
+        "icons/abilities/strzelec.svg",
+        "icons/abilities/strzelec.webp"
+      ],
+      "svgSha256": "a1ba862a28381611923147962ae140f602af6eccd15b22fe49453eb93efedcfa",
+      "webpSha256": "f2773034b5274e126b5b2219f3d2e0174e631f050442417da05a24020eca83cb"
+    }
+  ]
+}

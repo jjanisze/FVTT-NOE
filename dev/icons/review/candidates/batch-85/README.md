@@ -46,3 +46,8 @@ generation correction was needed. Contact sheets were inspected at
 18 pending cards, 45 options and no broken images, with all new candidates
 selected. Evidence: `../batch-84/raw/review-preview.png` and
 `../../../placeholder-pass/progress-84-85.json`.
+
+Saved GM review: four approvals installed. Szaleńcza szarża, Szybkie badanie,
+Szybkie nogi, Szybkie ręce and Szybkość kota carry exact notes into Batch 86.
+`reviewed.json` preserves all decisions; `reviewed-installed.json` records
+selected sources and delivered hashes.

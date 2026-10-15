@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batches 84 + 85 · 18 awaiting GM review",
+  "title": "Batch 85 · 4 approved subjects delivered; 9 awaiting revision",
   "updated": "2026-10-16",
   "items": [
     {
@@ -11327,7 +11327,8 @@
           "src": "candidates/batch-83/slang.png",
           "note": "TWO smooth generic ADULT HEADS AND SHORT NECKS in profile facing each other, having a casual STREET CONVERSATION. The speaker on LEFT holds ONE plain CIGARETTE between two bare fingers low beside the chin; TWO short broad speech strokes point toward the listener. Natural adult proportions, minimal face cuts, no beard or gruff portrait. No smoke cloud, lettering, named gang signs, speech-bubble text, book, handshake, anime or tiny hair detail. Clear black gaps between heads and coherent small hand."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch83-smakuje-jak-arszenik",
@@ -11392,7 +11393,8 @@
           "src": "candidates/batch-83/sokole-oko.png",
           "note": "ONE large realistic FALCON EYE in a compact SIDE-PROFILE PATCH: a broad swept avian brow and two simple feather-edge cuts frame one natural round iris. ONE broad CROSSHAIR centered on the pupil conveys exceptional aim. Sober sharp bird anatomy, complete eye, restrained black negative space, no full bird body or extra target rings. No anime human eye, lashes, human face, tiny feather texture, writing or numerals."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch83-solowa",
@@ -11427,7 +11429,8 @@
           "src": "candidates/batch-83/solowa.png",
           "note": "ONE plain generic ADULT in a confident full-body fighting stance on LEFT, one open bare hand BECKONING toward ONE smaller generic opponent on RIGHT. The beckoning hand is raised at chest level, fingers curling inward once; other arm hangs ready at side. Opponent faces the challenger, hands raised defensively. Exactly two natural adult bodies with smooth featureless heads and plain clothes, complete limbs, broad black separation. A one-on-one challenge, no crowd, portrait, anime, lettering, weapons, injury or gore."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch83-specjalizacja-spec",
@@ -11462,7 +11465,8 @@
           "src": "candidates/batch-83/specjalizacja-spec.png",
           "note": "TWO complete PRECISION TOOLS crossed in a compact emblem: ONE sturdy VERNIER CALIPER with two clearly open jaws and one sliding beam; ONE short practical SCREWDRIVER with thick handle and intact straight tip. Equal visual weight, a broad black cut separates their overlap. Technical expertise through real tools, sparse functional detail. No scale ticks, numerals, lettering, generic cog, person, hands, book or scattered parts."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch83-specjalizacja-zlodziej",
@@ -11616,7 +11620,8 @@
           "src": "candidates/batch-84/strzelec.png",
           "note": "ONE complete practical SCOPED RIFLE resting on ONE broad SANDBAG with a deployed TWO-LEG BIPOD below the front barrel. Clear shoulder stock, long straight barrel, simple scope tube above the receiver and empty trigger guard. A prepared stable sniper position, no person. Broad white structural shapes, sparse black cuts, no fine screws, logos, labels, numerals, muzzle flash, tiny scope reticle or background landscape."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch84-stylowa",
@@ -11703,7 +11708,8 @@
           "src": "candidates/batch-85/szary.png",
           "note": "ONE plain generic adult SCAVENGER in a loose coat stoops to pick up ONE short SCRAP PIPE. Full natural body, smooth small featureless head, ordinary practical clothes and boots. ONE large simple CROSSED-OUT EYE SYMBOL behind the shoulders shows being overlooked while scavenging openly. Broad eye outline and one thick diagonal slash, clear black gap from the figure. No beard portrait, hooded assassin face, fine rubbish pile, dithering, grey shading, text or extra person."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch85-szczescie",
@@ -11732,7 +11738,8 @@
           "src": "candidates/batch-85/szczescie.png",
           "note": "ONE sturdy upright HORSESHOE with exactly FOUR broad nail holes, surrounding ONE natural FOUR-LEAF CLOVER with a short complete stem. Broad real object silhouettes and generous black gaps; restrained practical good-luck charm. No die, numerals, words, sparkling stars, cartoon face, thin leaf veins, fine metal texture or extra clover."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch85-szybka-gadka",
@@ -11761,7 +11768,8 @@
           "src": "candidates/batch-85/szybka-gadka.png",
           "note": "ONE broad EMPTY SPEECH BUBBLE shaped as a horizontal rounded rectangle with ONE clear short tail at lower-right. THREE short thick parallel MOTION STROKES behind the LEFT edge express fast speech. Single compact sober white glyph, large black interior and thick continuous border. No person, face, letters, words, symbols inside, second bubble, book, handshake or playful arrows."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch85-szybka-produkcja",
@@ -11790,7 +11798,8 @@
           "src": "candidates/batch-85/szybka-produkcja.png",
           "note": "ONE complete stout OPEN-ENDED WRENCH crosses diagonally over ONE simple STOPWATCH. Watch has a clear broad circular rim, ONE large top button and TWO broad hands on its blank face; wrench has one intact open jaw and round handle end. Rapid workshop production shown through tool and time. Strong black cut separates overlap, no numerals, ticks, writing, cog, person, extra tool or tiny clock detail."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch85-szybkie-badanie",

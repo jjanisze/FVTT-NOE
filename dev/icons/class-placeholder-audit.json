@@ -1,18 +1,18 @@
 {
   "stats": {
     "date": "2026-10-16",
-    "confirmedPlaceholderFiles": 67,
-    "referencedPlaceholderFiles": 67,
+    "confirmedPlaceholderFiles": 58,
+    "referencedPlaceholderFiles": 58,
     "unmappedPlaceholderFiles": 0,
     "activeVariants": 0,
     "referencedActiveVariants": 0,
-    "abilityPlaceholderFiles": 43,
+    "abilityPlaceholderFiles": 34,
     "missingExpectedFiles": 0,
-    "artSubjects": 67,
+    "artSubjects": 58,
     "byKind": {
       "class": 6,
       "profession": 18,
-      "feature": 43
+      "feature": 34
     },
     "scope": "Exact generator signature plus canonical class/profession definitions; no world or pack reads"
   },
@@ -39,62 +39,12 @@
     },
     {
       "kind": "feature",
-      "id": "slang",
-      "label": "Slang",
-      "owner": "kurier",
-      "variant": "default",
-      "source": "icons/abilities/slang.svg",
-      "sourceSha256": "489859c79ecce12c7e1b0f181602b1783d0f6a30b4c2d8a804bb5b86cbb6b03a",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "sokole-oko",
-      "label": "Sokole oko",
-      "owner": "wyjadacz-option",
-      "variant": "default",
-      "source": "icons/abilities/sokole-oko.svg",
-      "sourceSha256": "f77e36828e55586e9b5ef5a3a6ccee4af8e64cc8eac5133e7a09dba91479cff0",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "solowa",
-      "label": "Solówa",
-      "owner": "brutal",
-      "variant": "default",
-      "source": "icons/abilities/solowa.svg",
-      "sourceSha256": "16292b6c0c8db69ab2f8bea7e081414ba89c3a547b6e38d4c3617b090b74a98e",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "specjalizacja-spec",
-      "label": "Specjalizacja",
-      "owner": "spec",
-      "variant": "default",
-      "source": "icons/abilities/specjalizacja-spec.svg",
-      "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "spieprzysz-to",
       "label": "Spieprzysz to!",
       "owner": "cwaniak",
       "variant": "default",
       "source": "icons/abilities/spieprzysz-to.svg",
       "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "strzelec",
-      "label": "Strzelec",
-      "owner": "zabojca",
-      "variant": "default",
-      "source": "icons/abilities/strzelec.svg",
-      "sourceSha256": "83f2d526727e86cc244e8b6a68f665534890643d70b4b9348734e1f569f73a95",
       "referenced": true
     },
     {
@@ -115,46 +65,6 @@
       "variant": "default",
       "source": "icons/abilities/szalencza-szarza.svg",
       "sourceSha256": "9e95f50b6dbc04a319f31dcec9fb8d74148e1070eee6bad2a75b662766c30c5d",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "szary",
-      "label": "Szary",
-      "owner": "szczur",
-      "variant": "default",
-      "source": "icons/abilities/szary.svg",
-      "sourceSha256": "4bd810a23039817a14513e84ba592a708fcc8b78f385cd35e6d7916c79b7cae5",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "szczescie",
-      "label": "Szczęście",
-      "owner": "cwaniak",
-      "variant": "default",
-      "source": "icons/abilities/szczescie.svg",
-      "sourceSha256": "8892c6c990b0e616334126fb8141a93503a784e10887592afc6227744b830e0b",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "szybka-gadka",
-      "label": "Szybka gadka",
-      "owner": "cwaniak",
-      "variant": "default",
-      "source": "icons/abilities/szybka-gadka.svg",
-      "sourceSha256": "a8d2f4dbe822751f88cf2f77490de6b9756d996cf5f92625e55160251d407b23",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "szybka-produkcja",
-      "label": "Szybka produkcja",
-      "owner": "spec",
-      "variant": "default",
-      "source": "icons/abilities/szybka-produkcja.svg",
-      "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7",
       "referenced": true
     },
     {
@@ -718,77 +628,12 @@
     },
     {
       "kind": "feature",
-      "id": "slang",
-      "label": "Slang",
-      "owner": "kurier",
-      "files": [
-        {
-          "source": "icons/abilities/slang.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "sokole-oko",
-      "label": "Sokole oko",
-      "owner": "wyjadacz-option",
-      "files": [
-        {
-          "source": "icons/abilities/sokole-oko.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "solowa",
-      "label": "Solówa",
-      "owner": "brutal",
-      "files": [
-        {
-          "source": "icons/abilities/solowa.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "specjalizacja-spec",
-      "label": "Specjalizacja",
-      "owner": "spec",
-      "files": [
-        {
-          "source": "icons/abilities/specjalizacja-spec.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "spieprzysz-to",
       "label": "Spieprzysz to!",
       "owner": "cwaniak",
       "files": [
         {
           "source": "icons/abilities/spieprzysz-to.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "strzelec",
-      "label": "Strzelec",
-      "owner": "zabojca",
-      "files": [
-        {
-          "source": "icons/abilities/strzelec.svg",
           "variant": "default",
           "status": "generated placeholder"
         }
@@ -815,58 +660,6 @@
       "files": [
         {
           "source": "icons/abilities/szalencza-szarza.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "szary",
-      "label": "Szary",
-      "owner": "szczur",
-      "files": [
-        {
-          "source": "icons/abilities/szary.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "szczescie",
-      "label": "Szczęście",
-      "owner": "cwaniak",
-      "files": [
-        {
-          "source": "icons/abilities/szczescie.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "szybka-gadka",
-      "label": "Szybka gadka",
-      "owner": "cwaniak",
-      "files": [
-        {
-          "source": "icons/abilities/szybka-gadka.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "szybka-produkcja",
-      "label": "Szybka produkcja",
-      "owner": "spec",
-      "files": [
-        {
-          "source": "icons/abilities/szybka-produkcja.svg",
           "variant": "default",
           "status": "generated placeholder"
         }

@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-16",
+  "batch": 85,
+  "approvedSubjects": 4,
+  "remainingSubjects": 9,
+  "installed": [
+    {
+      "itemId": "batch85-szary",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-85/szary.png",
+      "sourceSha256": "40b5c0ba7f4192abd5699b44f6eabaadee44afc53705888b9d66038e86bbf196",
+      "files": [
+        "icons/abilities/szary.svg",
+        "icons/abilities/szary.webp"
+      ],
+      "svgSha256": "2c6358eb48f677b5668084ce6f93108bb194d0febacc897eaeb41068c7cdbd53",
+      "webpSha256": "23ce1ba292c680838d890af45b72eaa5ce760d0b0380b10612e26ff597401cac"
+    },
+    {
+      "itemId": "batch85-szczescie",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-85/szczescie.png",
+      "sourceSha256": "905233a2b4951873127019eba32caf7c392201a495be02b2840c3eee953282fb",
+      "files": [
+        "icons/abilities/szczescie.svg",
+        "icons/abilities/szczescie.webp"
+      ],
+      "svgSha256": "4abfd5988c9a3d5457adfbcd22c11f1cd327843184b14a8138bcf336183b68f6",
+      "webpSha256": "4e5e246166fdf17a88e111fe924b00c7cbbc9ecbb9da521439d67d7cc4dc7911"
+    },
+    {
+      "itemId": "batch85-szybka-gadka",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-85/szybka-gadka.png",
+      "sourceSha256": "8179def0a23a532eb39a072b99e41fae0647338d63cad383d0930e9bff517bbd",
+      "files": [
+        "icons/abilities/szybka-gadka.svg",
+        "icons/abilities/szybka-gadka.webp"
+      ],
+      "svgSha256": "600d27ec8bcea479c0421554bd411e59ae8369bb80502d263ab4c300ff4244b1",
+      "webpSha256": "7d84c35f4037fa21b51fab028b4c2f7038f6a56f3cbac8c3ece0cde6387523b8"
+    },
+    {
+      "itemId": "batch85-szybka-produkcja",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-85/szybka-produkcja.png",
+      "sourceSha256": "a8e4754ecaa89a041d4dce567f18596f385c9b335648dc4c2bcbec0325ba09ac",
+      "files": [
+        "icons/abilities/szybka-produkcja.svg",
+        "icons/abilities/szybka-produkcja.webp"
+      ],
+      "svgSha256": "7e5e8a54674b94deb355eb65c7311345561aaa7f729f8e4b4e01ea226aa30297",
+      "webpSha256": "794c1a2cf24e2c4f1f7b65ca8bb74dd583cbafaf45e23798fe0620555348255c"
+    }
+  ]
+}

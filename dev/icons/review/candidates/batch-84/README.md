@@ -53,3 +53,8 @@ generation correction was needed. Contact sheets were inspected at
 has 18 pending cards, 45 options, all new candidates selected and no broken
 images. Evidence: `raw/review-preview.png` and
 `../../../placeholder-pass/progress-84-85.json`.
+
+Saved GM review: five approvals installed. Rzeźnik, Serwisowanie, Spieprzysz
+to! and Stylówa carry their exact saved notes into Batch 86. Serwisowanie's
+selected source is the older Batch 81 candidate, retained with its own hash.
+Decisions are in `reviewed.json`; deliveries are in `reviewed-installed.json`.

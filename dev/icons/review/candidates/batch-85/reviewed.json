@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-16",
+  "batch": 85,
+  "feedbackBeforeSha256": "9eb422d7d6fb50c31826fc649d598764a4d8d3f03d4c792cd39da15a03a42478",
+  "active": [
+    {
+      "id": "batch85-szalencza-szarza",
+      "name": "Szaleńcza szarża",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-85/szalencza-szarza.png",
+      "sourceSha256": "1199750c735b867eacc3615b2b93cbc42e0e956ab21fc68986cc9d3771760f3a",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szalencza-szarza.svg",
+          "variant": "default",
+          "sourceSha256": "9e95f50b6dbc04a319f31dcec9fb8d74148e1070eee6bad2a75b662766c30c5d"
+        }
+      ],
+      "notes": "Needs a different concept - we have enough \"guy running\" icons.",
+      "feedback": {
+        "itemId": "batch85-szalencza-szarza",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Needs a different concept - we have enough \"guy running\" icons.",
+        "updatedAt": "2026-10-15T22:54:55.122Z"
+      }
+    },
+    {
+      "id": "batch85-szary",
+      "name": "Szary",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-85/szary.png",
+      "sourceSha256": "40b5c0ba7f4192abd5699b44f6eabaadee44afc53705888b9d66038e86bbf196",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szary.svg",
+          "variant": "default",
+          "sourceSha256": "4bd810a23039817a14513e84ba592a708fcc8b78f385cd35e6d7916c79b7cae5"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch85-szary",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:55:01.134Z"
+      }
+    },
+    {
+      "id": "batch85-szczescie",
+      "name": "Szczęście",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-85/szczescie.png",
+      "sourceSha256": "905233a2b4951873127019eba32caf7c392201a495be02b2840c3eee953282fb",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szczescie.svg",
+          "variant": "default",
+          "sourceSha256": "8892c6c990b0e616334126fb8141a93503a784e10887592afc6227744b830e0b"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch85-szczescie",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:55:05.413Z"
+      }
+    },
+    {
+      "id": "batch85-szybka-gadka",
+      "name": "Szybka gadka",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-85/szybka-gadka.png",
+      "sourceSha256": "8179def0a23a532eb39a072b99e41fae0647338d63cad383d0930e9bff517bbd",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybka-gadka.svg",
+          "variant": "default",
+          "sourceSha256": "a8d2f4dbe822751f88cf2f77490de6b9756d996cf5f92625e55160251d407b23"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch85-szybka-gadka",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:55:10.837Z"
+      }
+    },
+    {
+      "id": "batch85-szybka-produkcja",
+      "name": "Szybka produkcja",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-85/szybka-produkcja.png",
+      "sourceSha256": "a8e4754ecaa89a041d4dce567f18596f385c9b335648dc4c2bcbec0325ba09ac",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybka-produkcja.svg",
+          "variant": "default",
+          "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch85-szybka-produkcja",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:55:15.755Z"
+      }
+    },
+    {
+      "id": "batch85-szybkie-badanie",
+      "name": "Szybkie badanie",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-85/szybkie-badanie.png",
+      "sourceSha256": "68ee573c92b385f9d9e019ccdf930070a8830eaee427058535d9313869b243ca",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-badanie.svg",
+          "variant": "default",
+          "sourceSha256": "6c308b62d0703643d9c0ce5875908af22dc5c1956d0cc77e13f8e962b5e1de20"
+        }
+      ],
+      "notes": "A figure of sherlock holmes with a magnifying glass, simultaneously inspecting the ground through the glass and sprinting",
+      "feedback": {
+        "itemId": "batch85-szybkie-badanie",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "A figure of sherlock holmes with a magnifying glass, simultaneously inspecting the ground through the glass and sprinting",
+        "updatedAt": "2026-10-15T22:56:30.549Z"
+      }
+    },
+    {
+      "id": "batch85-szybkie-nogi",
+      "name": "Szybkie nogi",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-85/szybkie-nogi.png",
+      "sourceSha256": "d6468d4b2c4763082fef3942721e14d9dcc16f0b2ec94cb2617e93884e37e4b7",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-nogi.svg",
+          "variant": "default",
+          "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398"
+        }
+      ],
+      "notes": "Change the position of the feet into a Michael Jackson moonwalk. Keep the boots.",
+      "feedback": {
+        "itemId": "batch85-szybkie-nogi",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Change the position of the feet into a Michael Jackson moonwalk. Keep the boots.",
+        "updatedAt": "2026-10-15T22:56:54.826Z"
+      }
+    },
+    {
+      "id": "batch85-szybkie-rece",
+      "name": "Szybkie ręce",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-85/szybkie-rece.png",
+      "sourceSha256": "037f48351b330277a89f084b131cb4f26fdde09b599c83b17c7a2bd8c42e3c07",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-rece.svg",
+          "variant": "default",
+          "sourceSha256": "3c0b28c465cc993c60c6f501645989b90d99c505ada827d16ea0b8b3fdd9759b"
+        }
+      ],
+      "notes": "Modify the graphics to indicate the hands are moving very fast, like a blur",
+      "feedback": {
+        "itemId": "batch85-szybkie-rece",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Modify the graphics to indicate the hands are moving very fast, like a blur",
+        "updatedAt": "2026-10-15T22:57:15.207Z"
+      }
+    },
+    {
+      "id": "batch85-szybkosc-kota",
+      "name": "Szybkość kota",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-85/szybkosc-kota.png",
+      "sourceSha256": "5306f807d117634d1625487c8c4b4841c7a9c6c733380cfe6fe698e3488bc143",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkosc-kota.svg",
+          "variant": "default",
+          "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a"
+        }
+      ],
+      "notes": "Add lines indicating evastion.",
+      "feedback": {
+        "itemId": "batch85-szybkosc-kota",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Add lines indicating evastion.",
+        "updatedAt": "2026-10-15T22:57:47.236Z"
+      }
+    }
+  ]
+}
