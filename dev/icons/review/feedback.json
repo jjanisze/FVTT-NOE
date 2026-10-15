@@ -2936,10 +2936,10 @@
     },
     "batch81-rzeznik": {
       "itemId": "batch81-rzeznik",
-      "decision": "revise",
-      "candidateId": "batch84-revision",
-      "notes": "Almost perfect. The hand with the knife should be slightly lower, aiming for the armpit",
-      "updatedAt": "2026-10-15T22:52:25.331Z"
+      "decision": "pending",
+      "candidateId": "batch86-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:08:01.878Z"
     },
     "batch81-rzuc-bron-i-gleba": {
       "itemId": "batch81-rzuc-bron-i-gleba",
@@ -2964,10 +2964,10 @@
     },
     "batch81-serwisowanie": {
       "itemId": "batch81-serwisowanie",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Ok that doesn't work. Change this to a TV with it's back off.",
-      "updatedAt": "2026-10-15T22:52:54.369Z"
+      "decision": "pending",
+      "candidateId": "batch86-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:08:01.879Z"
     },
     "batch81-skrytka": {
       "itemId": "batch81-skrytka",
@@ -3027,10 +3027,10 @@
     },
     "batch83-spieprzysz-to": {
       "itemId": "batch83-spieprzysz-to",
-      "decision": "revise",
-      "candidateId": "batch84-revision",
-      "notes": "Almost perfect, but less anime",
-      "updatedAt": "2026-10-15T22:53:46.132Z"
+      "decision": "pending",
+      "candidateId": "batch86-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:08:01.881Z"
     },
     "batch83-sportowiec": {
       "itemId": "batch83-sportowiec",
@@ -3055,17 +3055,17 @@
     },
     "batch84-stylowa": {
       "itemId": "batch84-stylowa",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Lower the chain into where it would naturally reside. Add a fancy baseball cap.",
-      "updatedAt": "2026-10-15T22:54:18.271Z"
+      "decision": "pending",
+      "candidateId": "batch86-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:08:01.881Z"
     },
     "batch85-szalencza-szarza": {
       "itemId": "batch85-szalencza-szarza",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Needs a different concept - we have enough \"guy running\" icons.",
-      "updatedAt": "2026-10-15T22:54:55.122Z"
+      "decision": "pending",
+      "candidateId": "batch86-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:08:01.882Z"
     },
     "batch85-szary": {
       "itemId": "batch85-szary",
@@ -3097,31 +3097,31 @@
     },
     "batch85-szybkie-badanie": {
       "itemId": "batch85-szybkie-badanie",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "A figure of sherlock holmes with a magnifying glass, simultaneously inspecting the ground through the glass and sprinting",
-      "updatedAt": "2026-10-15T22:56:30.549Z"
+      "decision": "pending",
+      "candidateId": "batch86-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:08:01.882Z"
     },
     "batch85-szybkie-nogi": {
       "itemId": "batch85-szybkie-nogi",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Change the position of the feet into a Michael Jackson moonwalk. Keep the boots.",
-      "updatedAt": "2026-10-15T22:56:54.826Z"
+      "decision": "pending",
+      "candidateId": "batch86-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:08:01.883Z"
     },
     "batch85-szybkie-rece": {
       "itemId": "batch85-szybkie-rece",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Modify the graphics to indicate the hands are moving very fast, like a blur",
-      "updatedAt": "2026-10-15T22:57:15.207Z"
+      "decision": "pending",
+      "candidateId": "batch86-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:08:01.883Z"
     },
     "batch85-szybkosc-kota": {
       "itemId": "batch85-szybkosc-kota",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Add lines indicating evastion.",
-      "updatedAt": "2026-10-15T22:57:47.236Z"
+      "decision": "pending",
+      "candidateId": "batch86-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:08:01.883Z"
     }
   }
 }

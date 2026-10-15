@@ -1,0 +1,16 @@
+{
+  "batch": 87,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "smiertelna-obelga": "8e9fee60011e4a004e76322f78a02c00cb10416414de2ef400da5bec024fa51d",
+    "tarcza-wiary": "de7efb95c370e94f35de833dc1fa9980ac2c6a6ecfe1912f59106d35f1fa28d4",
+    "trajektoria": "8a9938722a9816e50e511ffd91bf3c93933f0c2dc72ce2fcd8b58f1ab0ca0b6c",
+    "trening-w-zbroi": "563f994ed9ba4f8e94a49d0f2b7919b4316e12ea0470fe1dab2bcebca0a8584c",
+    "truciciel": "5a4503a4bb5fbde1d05123841fe5ce3fe101496e78543dfbe08cf7ed38e7740d",
+    "trzeci-atak": "bc1ff582a09b8f98a121408cf58b42d0ffd8005198dc8a5650dbb59ec08b470d",
+    "twardosc": "8cda68a556c55c66347e3e8d707fc6a750c3ab66eb329166acc468a202a1dd88",
+    "ulubiona-bron-twardziel": "9c2df64730f96ae7ffd687aec6de2fb2a198ca10c790070da1398d6691324da9",
+    "ulubiona-bron-zlodziej": "4f34bc3c77f8f67d73e5f94f252490c879061b042da4e33de54167f00846114b"
+  }
+}

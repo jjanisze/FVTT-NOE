@@ -37,8 +37,8 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 86** (the previous 342-card queue is resolved; the newly
-audited class/profession placeholder backlog remains and is listed below).
+**Next batch number: 88** (18 candidates in 2 batches await GM review;
+production replacements require a saved approval).
 
 **Icon coverage correction, 2026-10-16:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
@@ -955,6 +955,64 @@ Evidence: `review/candidates/batch-85/reviewed.json` and `reviewed-installed.jso
 | 9 | Szybkość kota | `icons/abilities/szybkosc-kota.svg` | Revision in Batch 86 |
 
 <!-- placeholder-batch-85:end -->
+
+<!-- placeholder-batch-86:start -->
+## Queue (A) — Batch 86 — 9 awaiting GM review
+
+One 3×3 atlas in the established white-glyph style; native initials badges remain
+until the GM approves a selected candidate. Exact sources/hashes, generic prompts
+and targets: `review/candidates/batch-86/`.
+
+| Cell | Item | Exact SVG delivery targets (+ WEBP) |
+|---|---|---|
+| 1 | Rzeźnik (revision) | `icons/abilities/rzeznik.svg` |
+| 2 | Serwisowanie (revision) | `icons/abilities/serwisowanie.svg` |
+| 3 | Spieprzysz to! (revision) | `icons/abilities/spieprzysz-to.svg` |
+| 4 | Stylówa (revision) | `icons/abilities/stylowa.svg` |
+| 5 | Szaleńcza szarża (revision) | `icons/abilities/szalencza-szarza.svg` |
+| 6 | Szybkie badanie (revision) | `icons/abilities/szybkie-badanie.svg` |
+| 7 | Szybkie nogi (revision) | `icons/abilities/szybkie-nogi.svg` |
+| 8 | Szybkie ręce (revision) | `icons/abilities/szybkie-rece.svg` |
+| 9 | Szybkość kota (revision) | `icons/abilities/szybkosc-kota.svg` |
+
+Saved revision notes and original selected-source hashes are retained in batch.json
+and revision-feedback-before.json. Old candidates remain available; only these
+revision cards are reset to pending with the new candidate selected.
+
+The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
+nine). Later batch numbers are provisional: saved revisions take priority and
+may add batches. Base/active files share approved pixels; the existing active
+hotbar pulse remains in the code. Old unused active filenames are compatibility
+targets, without new mechanics or wiring. Code, packs and world state are untouched.
+
+<!-- placeholder-batch-86:end -->
+
+<!-- placeholder-batch-87:start -->
+## Queue (A) — Batch 87 — 9 awaiting GM review
+
+One 3×3 atlas in the established white-glyph style; native initials badges remain
+until the GM approves a selected candidate. Exact sources/hashes, generic prompts
+and targets: `review/candidates/batch-87/`.
+
+| Cell | Item | Exact SVG delivery targets (+ WEBP) |
+|---|---|---|
+| 1 | Śmiertelna obelga | `icons/abilities/smiertelna-obelga.svg` |
+| 2 | Tarcza wiary | `icons/abilities/tarcza-wiary.svg` |
+| 3 | Trajektoria | `icons/abilities/trajektoria.svg` |
+| 4 | Trening w zbroi | `icons/abilities/trening-w-zbroi.svg` |
+| 5 | Truciciel | `icons/abilities/truciciel.svg` |
+| 6 | Trzeci atak | `icons/abilities/trzeci-atak.svg` |
+| 7 | Twardość | `icons/abilities/twardosc.svg` |
+| 8 | Ulubiona broń | `icons/abilities/ulubiona-bron-twardziel.svg` |
+| 9 | Ulubiona broń | `icons/abilities/ulubiona-bron-zlodziej.svg` |
+
+The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
+nine). Later batch numbers are provisional: saved revisions take priority and
+may add batches. Base/active files share approved pixels; the existing active
+hotbar pulse remains in the code. Old unused active filenames are compatibility
+targets, without new mechanics or wiring. Code, packs and world state are untouched.
+
+<!-- placeholder-batch-87:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source

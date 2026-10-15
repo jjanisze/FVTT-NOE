@@ -1,0 +1,267 @@
+{
+  "title": "Batches 86 + 87 · 18 awaiting GM review",
+  "updated": "2026-10-16",
+  "items": [
+    {
+      "id": "batch87-smiertelna-obelga",
+      "name": "Śmiertelna obelga",
+      "tier": "Batch 87 · Cwaniak",
+      "batch": 87,
+      "placeholderKey": "feature:smiertelna-obelga",
+      "target": "icons/abilities/smiertelna-obelga.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/smiertelna-obelga.svg",
+          "variant": "default",
+          "sourceSha256": "a91c9321996572a6ccc97f32dad2be58d916219392befce71bed9edc100404d2"
+        }
+      ],
+      "context": "Class/profession ability: Śmiertelna obelga; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy rzucasz Obelgę, twoje słowa zadają dodatkowo 1k6 x twój modyfikator Charyzmy obrażeń psychicznych, osłabiających wolę walki przeciwnika. Jeśli twoja zdolność Obelga zmniejszy PW celu do 0, upada on i osuwa się w bezdenną otchłań rozpaczy. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete BARE ADULT HAND making the same clear upright MIDDLE-FINGER INSULT gesture as the established insult-icon family. Above-right sits ONE small broad SPEECH BUBBLE containing ONE simple BLACK SKULL symbol, representing psychologically devastating words. Natural folded fingers and thumb, short complete wrist, strong black gap between hand and bubble. Skull has two large eye holes and block jaw, no fine teeth. No words, numerals, gore, severed parts, face, anime, extra fingers or tiny fingernails.",
+      "current": {
+        "src": "/icons/abilities/smiertelna-obelga.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 87 · Śmiertelna obelga",
+          "src": "candidates/batch-87/smiertelna-obelga.png",
+          "note": "ONE complete BARE ADULT HAND making the same clear upright MIDDLE-FINGER INSULT gesture as the established insult-icon family. Above-right sits ONE small broad SPEECH BUBBLE containing ONE simple BLACK SKULL symbol, representing psychologically devastating words. Natural folded fingers and thumb, short complete wrist, strong black gap between hand and bubble. Skull has two large eye holes and block jaw, no fine teeth. No words, numerals, gore, severed parts, face, anime, extra fingers or tiny fingernails."
+        }
+      ]
+    },
+    {
+      "id": "batch87-tarcza-wiary",
+      "name": "Tarcza wiary",
+      "tier": "Batch 87 · kaznodzieja-nowej-ery",
+      "batch": 87,
+      "placeholderKey": "feature:tarcza-wiary",
+      "target": "icons/abilities/tarcza-wiary.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/tarcza-wiary.svg",
+          "variant": "default",
+          "sourceSha256": "f15b76b5c233a3602845af8b4aa50a5750a05f6bd4f8eafddbb846fb649b00ab"
+        }
+      ],
+      "context": "Class/profession ability: Tarcza wiary; owner kaznodzieja-nowej-ery. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Jeśli nie nosisz pancerza, możesz dodać modyfikator Charyzmy do swojej Trudności Trafienia. Tej zdolności nie można łączyć z innymi podobnymi (np. Goła Klata). Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "TWO complete natural ADULT PRAYING HANDS joined palm-to-palm INSIDE ONE thick SHIELD OUTLINE. Short wrists, coherent fingers and thumbs, broad black gap separates hands from shield rim. A compact symbol of faith providing protection without worn armor. Sparse broad anatomical cuts, no deity portrait, specific religious emblem, person, plate armor, text, numerals, fine fingernails or decorative rays.",
+      "current": {
+        "src": "/icons/abilities/tarcza-wiary.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 87 · Tarcza wiary",
+          "src": "candidates/batch-87/tarcza-wiary.png",
+          "note": "TWO complete natural ADULT PRAYING HANDS joined palm-to-palm INSIDE ONE thick SHIELD OUTLINE. Short wrists, coherent fingers and thumbs, broad black gap separates hands from shield rim. A compact symbol of faith providing protection without worn armor. Sparse broad anatomical cuts, no deity portrait, specific religious emblem, person, plate armor, text, numerals, fine fingernails or decorative rays."
+        }
+      ]
+    },
+    {
+      "id": "batch87-trajektoria",
+      "name": "Trajektoria",
+      "tier": "Batch 87 · Spec",
+      "batch": 87,
+      "placeholderKey": "feature:trajektoria",
+      "target": "icons/abilities/trajektoria.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/trajektoria.svg",
+          "variant": "default",
+          "sourceSha256": "ee9e7f28b3d095225871f6ef754ef95dd68cfd7c6c16ed99f6344663f6453e9f"
+        }
+      ],
+      "context": "Class/profession ability: Trajektoria; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy wykonujesz Test Ataku dystansowego, możesz dodać do niego swój modyfikator Inteligencji. Tej zdolności możesz użyć tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po odbyciu Długiego odpoczynku. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete pointed BULLET follows ONE broad curved BALLISTIC ARC that ends at ONE simple TARGET CROSSHAIR on the right. Bullet sits along the arc near its high middle section and points down-right along the curve; complete short projectile with flat base, no cartridge casing. Large black gaps and a single clear path. Sober generic aim-calculation emblem, no actual measurements, formula, numerals, coordinates, diagram labels, gun, face or decorative arrows.",
+      "current": {
+        "src": "/icons/abilities/trajektoria.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 87 · Trajektoria",
+          "src": "candidates/batch-87/trajektoria.png",
+          "note": "ONE complete pointed BULLET follows ONE broad curved BALLISTIC ARC that ends at ONE simple TARGET CROSSHAIR on the right. Bullet sits along the arc near its high middle section and points down-right along the curve; complete short projectile with flat base, no cartridge casing. Large black gaps and a single clear path. Sober generic aim-calculation emblem, no actual measurements, formula, numerals, coordinates, diagram labels, gun, face or decorative arrows."
+        }
+      ]
+    },
+    {
+      "id": "batch87-trening-w-zbroi",
+      "name": "Trening w zbroi",
+      "tier": "Batch 87 · Żołnierz",
+      "batch": 87,
+      "placeholderKey": "feature:trening-w-zbroi",
+      "target": "icons/abilities/trening-w-zbroi.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/trening-w-zbroi.svg",
+          "variant": "default",
+          "sourceSha256": "3d074d4e7585a2bc35935f42f4d59b1133b1a307601d3461872a49ebe3894d68"
+        }
+      ],
+      "context": "Class/profession ability: Trening w zbroi; owner Żołnierz. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Robienie pompek w pancerzu i z kowadłem na plecach, to twoje codzienne zajęcie. Nie otrzymujesz kar do Testów Zręczności (Skradanie się) wynikających z noszenia pancerza. Twoja maksymalna premia ze Zręczności do Trudności Trafienia wynikająca z ograniczeń noszonego pancerza, zwiększa się o 1. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE generic ADULT in a thick practical ARMOR VEST doing a PUSH-UP in side view, body straight, two complete hands braced on the ground and toes behind. ONE small plain ANVIL rests stably across the upper back as an exaggerated training load. Vest has just two broad plate cuts, anvil one stout base and one short horn. Natural adult anatomy, featureless head, broad black gaps. No gruff portrait, anime, fine armor texture, injury, blood, text or extra limbs.",
+      "current": {
+        "src": "/icons/abilities/trening-w-zbroi.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 87 · Trening w zbroi",
+          "src": "candidates/batch-87/trening-w-zbroi.png",
+          "note": "ONE generic ADULT in a thick practical ARMOR VEST doing a PUSH-UP in side view, body straight, two complete hands braced on the ground and toes behind. ONE small plain ANVIL rests stably across the upper back as an exaggerated training load. Vest has just two broad plate cuts, anvil one stout base and one short horn. Natural adult anatomy, featureless head, broad black gaps. No gruff portrait, anime, fine armor texture, injury, blood, text or extra limbs."
+        }
+      ]
+    },
+    {
+      "id": "batch87-truciciel",
+      "name": "Truciciel",
+      "tier": "Batch 87 · Szczur",
+      "batch": 87,
+      "placeholderKey": "feature:truciciel",
+      "target": "icons/abilities/truciciel.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/truciciel.svg",
+          "variant": "default",
+          "sourceSha256": "19a03b9f1a10236a1d5b2bdc1809576c2ab03fcb0b0102c49453c874a62f8d15"
+        }
+      ],
+      "context": "Class/profession ability: Truciciel; owner Szczur. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Jeśli posiadasz narzędzia małego chemika, możesz w czasie Długiego odpoczynku wyprodukować jedną porcję trucizny. Ta porcja zawiera 10 ml trującego olejku. W Akcji Bonusowej możesz nałożyć ją na ostrze broni lub na maksymalnie trzy groty. Trucizna pozostaje aktywna przez 1 minutę lub do momentu aplikacji, zależnie od tego, co wydarzy się pierwsze. Cel trafiony zatrutą bronią lub pociskiem musi zdać RO na Kondycję (ST 8 plus twój modyfikator Inteligencji i Premia Biegłości), lub otrzymuje stan Za Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE stout plain POISON VIAL with a small BLACK SKULL emblem beside ONE complete practical DAGGER angled upward. ONE broad chemical DROPLET hangs near the blade tip without a victim. Clear stopper, intact blade, guard and grip; skull simplified to two eye holes and block jaw. Compact fictional poison-weapon inventory emblem, no chemical names, recipes, instructions, measurements, hands, face, blood, gore or tiny etching.",
+      "current": {
+        "src": "/icons/abilities/truciciel.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 87 · Truciciel",
+          "src": "candidates/batch-87/truciciel.png",
+          "note": "ONE stout plain POISON VIAL with a small BLACK SKULL emblem beside ONE complete practical DAGGER angled upward. ONE broad chemical DROPLET hangs near the blade tip without a victim. Clear stopper, intact blade, guard and grip; skull simplified to two eye holes and block jaw. Compact fictional poison-weapon inventory emblem, no chemical names, recipes, instructions, measurements, hands, face, blood, gore or tiny etching."
+        }
+      ]
+    },
+    {
+      "id": "batch87-trzeci-atak",
+      "name": "Trzeci atak",
+      "tier": "Batch 87 · Twardziel",
+      "batch": 87,
+      "placeholderKey": "feature:trzeci-atak",
+      "target": "icons/abilities/trzeci-atak.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/trzeci-atak.svg",
+          "variant": "default",
+          "sourceSha256": "9d23db2fc45eaf9517eec2a5f9911af04926458c45c5b739d261e2269dba4ca2"
+        }
+      ],
+      "context": "Class/profession ability: Trzeci atak; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy wykonujesz w swojej turze akcję Atakowanie, możesz zaatakować trzykrotnie. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "Exactly THREE complete BARE CLENCHED FISTS staggered diagonally as THREE successive punches. Each has one short complete wrist, coherent thumb over folded fingers and only two broad knuckle cuts. ONE short broad motion stroke behind each fist. Equal robust visual weight and clear black gaps, consistent with the existing two-punch icon family. No whole person, face, extra hands, gloves, numerals, text, injury or gore.",
+      "current": {
+        "src": "/icons/abilities/trzeci-atak.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 87 · Trzeci atak",
+          "src": "candidates/batch-87/trzeci-atak.png",
+          "note": "Exactly THREE complete BARE CLENCHED FISTS staggered diagonally as THREE successive punches. Each has one short complete wrist, coherent thumb over folded fingers and only two broad knuckle cuts. ONE short broad motion stroke behind each fist. Equal robust visual weight and clear black gaps, consistent with the existing two-punch icon family. No whole person, face, extra hands, gloves, numerals, text, injury or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch87-twardosc",
+      "name": "Twardość",
+      "tier": "Batch 87 · Twardziel",
+      "batch": 87,
+      "placeholderKey": "feature:twardosc",
+      "target": "icons/abilities/twardosc.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/twardosc.svg",
+          "variant": "default",
+          "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac"
+        }
+      ],
+      "context": "Class/profession ability: Twardość; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Posiadasz wrodzoną „odporność na śmierć” i ogromną ilość szczęścia. Do każdego Rzutu Obronnego (oraz do Rzutu Przeciw Śmierci), którego nie zdasz, możesz dodać wynik z jednej kości Twardości, zgodnie z kolumną Twardość w tabeli Zdolności klasowych Twardziela. Masz tych kości tyle, ile wynosi twój modyfikator Kondycji. Pula kości Twardości odnawia się po ukończeniu Długiego odpoczynku. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE broad intact HUMAN HEART SYMBOL, simple familiar heart outline, centered inside ONE sturdy upright HORSESHOE with four large nail holes. Thick unbroken heart silhouette and clear black gap around it; luck and resilience against death. Sober compact charm consistent with the luck-icon family, no dice. No exposed anatomical organ, gore, face, lettering, numerals, tiny texture, sparkling stars or extra clover.",
+      "current": {
+        "src": "/icons/abilities/twardosc.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 87 · Twardość",
+          "src": "candidates/batch-87/twardosc.png",
+          "note": "ONE broad intact HUMAN HEART SYMBOL, simple familiar heart outline, centered inside ONE sturdy upright HORSESHOE with four large nail holes. Thick unbroken heart silhouette and clear black gap around it; luck and resilience against death. Sober compact charm consistent with the luck-icon family, no dice. No exposed anatomical organ, gore, face, lettering, numerals, tiny texture, sparkling stars or extra clover."
+        }
+      ]
+    },
+    {
+      "id": "batch87-ulubiona-bron-twardziel",
+      "name": "Ulubiona broń",
+      "tier": "Batch 87 · Twardziel",
+      "batch": 87,
+      "placeholderKey": "feature:ulubiona-bron-twardziel",
+      "target": "icons/abilities/ulubiona-bron-twardziel.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ulubiona-bron-twardziel.svg",
+          "variant": "default",
+          "sourceSha256": "dafcb8feb9dab7bd29f9657d5e8a122c40a44e74933726168a701b237b0d7962"
+        }
+      ],
+      "context": "Class/profession ability: Ulubiona broń; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Wybierz jeden model broni (np. Peacemaker), której lubisz używać. Od tej pory, jeśli wykonujesz ulubioną bronią akcję Atakowanie, możesz w Akcji Bonusowej wykonać nią jeszcze jeden atak (broń dystansowa musi mieć załadowaną amunicję). Na wyższych poziomach Twardziela, liczba twoich ulubionych broni rośnie zgodnie z kolumną Ulubiona broń w tabeli Zdolności klasowych Twardziela. Możesz zmienić jedną Ulubioną broń na inną w czasie Długiego odpoczynku, poświęcając godzinę na trening. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete sturdy SIX-SHOT REVOLVER angled upward-right, with a full straight barrel, clear cylinder, natural grip and empty trigger guard. ONE small thick CIRCULAR FAVORITE BADGE beside the grip contains ONE bold FIVE-POINT STAR cut into its face. Broad practical weapon silhouette, sparse functional black cuts and clear badge gap. Favorite-weapon family uses the same star badge across variants. No hand, portrait, engraving, tiny controls, text, logos or cartoon sparkle.",
+      "current": {
+        "src": "/icons/abilities/ulubiona-bron-twardziel.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 87 · Ulubiona broń",
+          "src": "candidates/batch-87/ulubiona-bron-twardziel.png",
+          "note": "ONE complete sturdy SIX-SHOT REVOLVER angled upward-right, with a full straight barrel, clear cylinder, natural grip and empty trigger guard. ONE small thick CIRCULAR FAVORITE BADGE beside the grip contains ONE bold FIVE-POINT STAR cut into its face. Broad practical weapon silhouette, sparse functional black cuts and clear badge gap. Favorite-weapon family uses the same star badge across variants. No hand, portrait, engraving, tiny controls, text, logos or cartoon sparkle."
+        }
+      ]
+    },
+    {
+      "id": "batch87-ulubiona-bron-zlodziej",
+      "name": "Ulubiona broń",
+      "tier": "Batch 87 · Złodziej",
+      "batch": 87,
+      "placeholderKey": "feature:ulubiona-bron-zlodziej",
+      "target": "icons/abilities/ulubiona-bron-zlodziej.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ulubiona-bron-zlodziej.svg",
+          "variant": "default",
+          "sourceSha256": "e59bb541928bb19c71ac057365f0874748ceebe5b881d3ffeb30c65ce1ae6ad8"
+        }
+      ],
+      "context": "Class/profession ability: Ulubiona broń; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Wybierz jeden model broni (np. szoker), w którym masz biegłość. Od tej pory, jeśli wykonujesz tą bronią akcję Atakowanie, możesz w Akcji Bonusowej wykonać nią jeszcze jeden atak (broń dystansowa musi mieć załadowaną amunicję). Możesz zmienić Ulubioną broń na inną w czasie Długiego odpoczynku, poświęcając godzinę na trening. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete practical TACTICAL KNIFE angled upward-right, broad short blade, simple guard and intact wrapped grip with two large band cuts. ONE small thick CIRCULAR FAVORITE BADGE beside the grip contains ONE bold FIVE-POINT STAR cut into its face, matching the previous cell's badge shape and scale. Clear black gap, sober utilitarian favorite-weapon family. No hand, portrait, wound, blood, fine serrations, text, logos or cartoon sparkle.",
+      "current": {
+        "src": "/icons/abilities/ulubiona-bron-zlodziej.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 87 · Ulubiona broń",
+          "src": "candidates/batch-87/ulubiona-bron-zlodziej.png",
+          "note": "ONE complete practical TACTICAL KNIFE angled upward-right, broad short blade, simple guard and intact wrapped grip with two large band cuts. ONE small thick CIRCULAR FAVORITE BADGE beside the grip contains ONE bold FIVE-POINT STAR cut into its face, matching the previous cell's badge shape and scale. Clear black gap, sober utilitarian favorite-weapon family. No hand, portrait, wound, blood, fine serrations, text, logos or cartoon sparkle."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,403 @@
+{
+  "date": "2026-10-16",
+  "batch": 86,
+  "generalFeedback": "Follow specific saved revisions. Broad white glyphs, no anime or repeated running humans; use requested moonwalk, detective and fast-motion poses with natural anatomy.",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "rzeznik",
+      "name": "Rzeźnik",
+      "owner": "wyjadacz-option",
+      "ownerLabel": "wyjadacz-option",
+      "target": "icons/abilities/rzeznik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/rzeznik.svg",
+          "variant": "default",
+          "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+        }
+      ],
+      "ruleContext": "Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią.",
+      "context": "Class/profession ability: Rzeźnik; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "REVISION of reference cell 1. Preserve the raised arm, upper holding hand, target torso and angry threatened expression EXACTLY. Change ONLY the knife hand: LOWER that hand by roughly ONE FIST HEIGHT and angle its complete short knife UPWARD toward the ARMPIT where the raised arm joins the torso. The tip stops SHORT of the body with a clear black gap. It must aim BELOW the upper arm, not at the biceps. Same two attacker hands and one target, coherent fingers/grip, no extra limb. Fictional threat before contact only: no stabbing, wound, blood, gore or exposed tissue.",
+      "itemId": "batch81-rzeznik",
+      "revisionOf": {
+        "id": "batch81-rzeznik",
+        "name": "Rzeźnik",
+        "decision": "revise",
+        "candidateId": "batch84-revision",
+        "selectedSource": "candidates/batch-84/rzeznik.png",
+        "sourceSha256": "fd16d809bc4a2aafe479c1d84ba2c5fd6f6beda8a112d997aef410b2e3498f0a",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/rzeznik.svg",
+            "variant": "default",
+            "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+          }
+        ],
+        "notes": "Almost perfect. The hand with the knife should be slightly lower, aiming for the armpit",
+        "feedback": {
+          "itemId": "batch81-rzeznik",
+          "decision": "revise",
+          "candidateId": "batch84-revision",
+          "notes": "Almost perfect. The hand with the knife should be slightly lower, aiming for the armpit",
+          "updatedAt": "2026-10-15T22:52:25.331Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "serwisowanie",
+      "name": "Serwisowanie",
+      "owner": "monter",
+      "ownerLabel": "Monter",
+      "target": "icons/abilities/serwisowanie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/serwisowanie.svg",
+          "variant": "default",
+          "sourceSha256": "43659a4c590f9892703aeb2c53a00353153e0794c7e15840196730ebfe4afb08"
+        }
+      ],
+      "ruleContext": "Kiedyś był taki serial o kolesiu, który ze sreberka, spinacza i butelki po denaturacie robił telefon. Otrzymujesz biegłość w narzędziach małego elektronika. Potrafisz naprawiać i produkować urządzenia elektroniczne i drobne mechanizmy. Potrzebne ci tylko narzędzia małego chemika, małego elektronika, surowce i czas. Otrzymujesz wylistowane poniżej schematy elektroniczne. SCHEMATY ELEKTRONICZNE NAZWA ST PRODUKCJA SUROWCE Agregat 20 50 godzin 1 CE, 15 CZ, 9 MK Akumulator 15 40 godzin 5 CH, 10 CZ, 5 MK Alternator 15 40 godzin 15 CZ, 1 CE, 4 MK Baterie 10 20 godzin 9 CH, 1 MK Celownik optyczny 15 20 godzin 5 CE, 5 CZ, 10 MK Defibrylator 20 60 godzin 5 CE, 20 CZ, 5 MK Detektor ruchu 25 80 godzin 30 CE, 5 CZ, 5 MK Krótkofalówka 10 24 godziny 1 CE, 10 CZ, 1 MK Kompas 5 4 godziny 1 CZ, 1 MK Laserowy wskaźnik celu 20 60 godzin 9 CE, 20 CZ, 1 MK Latarka 10 20 godzin 9 CZ, 1 MK Miernik skażenia chemicznego 20 50 godzin 5 CE, 5 CH, 10 CZ, 5 MK Miernik promieniowania 15 30 godzin 3 CE, 2 CH, 8 CZ, 2 MK Noktowizor 20 70 godzin 25 CE, 7 CZ, 3 MK Palnik acetylenowo-tlenowy 10 20 godzin 2 CH, 5 CZ, 3 MK Odtwarzacz CD 15 40 godzin 15 CE, 4 CZ, 1 MK Powiększalnik 20 60 godzin 9 CE, 20 CZ, 1 MK Radio 10 15 godzin 3 CE, 3 CZ, 1 MK Termowizor 30 200 godzin 90 CE, 5 CZ, 5 MK Turbina wiatrowa/wodna 20 60 godzin 5 CE, 10 CZ, 15 MK Wykrywacz metalu 15 30 godzin 5 CE, 5 CZ, 5 MK Wytrychy elektroniczne 20 50 godzin 20 CE, 4 CZ, 1 MK Zapalnik elektryczny 5 5 godzin 5 CZ Zegarek 10 20 godzin 9 CZ, 1MK",
+      "context": "Class/profession ability: Serwisowanie; owner Monter. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "request": "ENTIRELY NEW SUBJECT replacing the radio in reference cell 2. ONE old practical CRT TELEVISION viewed from the REAR in simple three-quarter view, its BACK COVER REMOVED and propped beside it. Broad boxy cabinet on two short feet, TWO short rabbit-ear ANTENNA RODS above, one large rounded CRT tube housing visible inside and ONE simple rectangular circuit-board block below. Detached back cover has just TWO broad vent slots. ONE complete sturdy screwdriver rests beside the base. Sparse coherent solid shapes, no detailed wiring, circuit schematic, text, numbers, tiny components, radio, hands or face.",
+      "itemId": "batch81-serwisowanie",
+      "revisionOf": {
+        "id": "batch81-serwisowanie",
+        "name": "Serwisowanie",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-81/serwisowanie.png",
+        "sourceSha256": "e094f4377066ad801a0cde3cfd6833f30750915638580ba031bfeb50af8bff71",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/serwisowanie.svg",
+            "variant": "default",
+            "sourceSha256": "43659a4c590f9892703aeb2c53a00353153e0794c7e15840196730ebfe4afb08"
+          }
+        ],
+        "notes": "Ok that doesn't work. Change this to a TV with it's back off.",
+        "feedback": {
+          "itemId": "batch81-serwisowanie",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Ok that doesn't work. Change this to a TV with it's back off.",
+          "updatedAt": "2026-10-15T22:52:54.369Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "spieprzysz-to",
+      "name": "Spieprzysz to!",
+      "owner": "cwaniak",
+      "ownerLabel": "Cwaniak",
+      "target": "icons/abilities/spieprzysz-to.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/spieprzysz-to.svg",
+          "variant": "default",
+          "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+        }
+      ],
+      "ruleContext": "Potrafisz każdego wytrącić z równowagi. Kiedy istota, którą widzisz w promieniu 18 m, wykonała udany Test Ataku lub Rzut Obronny, możesz w swojej Reakcji sprawić, by powtórzyła rzut i wybrała gorszy wynik. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po ukończeniu Krótkiego odpoczynku.",
+      "context": "Class/profession ability: Spieprzysz to!; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "request": "REVISION of reference cell 3. Keep the head angle, pointing hand, speech strokes and sneering mockery concept, but REMOVE THE ANIME/CARTOON FACE. Redraw as an ordinary natural ADULT with rounded skull, plain SHORT CLOSE-CROPPED HAIR, normal small eye, modest nose and ordinary jaw. ONE broad raised eyebrow and ONE smaller natural open half-smile with a raised lip corner convey scorn. Remove swept/spiky fringe, exaggerated hooked brow, giant crescent grin, oversized tooth shape and stylized sharp cheek. No beard or gruff survivor portrait, idealized hero face, manga or tiny wrinkles. Broad sparse stencil cuts only; coherent hand stays unchanged. No dice.",
+      "itemId": "batch83-spieprzysz-to",
+      "revisionOf": {
+        "id": "batch83-spieprzysz-to",
+        "name": "Spieprzysz to!",
+        "decision": "revise",
+        "candidateId": "batch84-revision",
+        "selectedSource": "candidates/batch-84/spieprzysz-to.png",
+        "sourceSha256": "ea7da0edd90808addbb68ee97d9ae028c1ea0eb945c04bd0dc5480800410f8ca",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/spieprzysz-to.svg",
+            "variant": "default",
+            "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+          }
+        ],
+        "notes": "Almost perfect, but less anime",
+        "feedback": {
+          "itemId": "batch83-spieprzysz-to",
+          "decision": "revise",
+          "candidateId": "batch84-revision",
+          "notes": "Almost perfect, but less anime",
+          "updatedAt": "2026-10-15T22:53:46.132Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "stylowa",
+      "name": "Stylówa",
+      "owner": "gwiazda",
+      "ownerLabel": "Gwiazda",
+      "target": "icons/abilities/stylowa.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/stylowa.svg",
+          "variant": "default",
+          "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+        }
+      ],
+      "ruleContext": "Wygląd jest twoją wizytówką, ma robić wrażenie i podkreślać wyjątkowość twojego charakteru. Ubierasz się w drogie ciuchy, nosisz na widoku cenne gadżety i drogą biżuterię. Te błyskotki mogą przyciągać złodziei, ale kij im w oko, bo to robi ci imidż na dzielni. Każde 50 gambli towarów luksusowych, które nosisz na sobie, zapewnia ci premię +1 do testów Wpływania.",
+      "context": "Class/profession ability: Stylówa; owner Gwiazda. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "request": "REVISION of reference cell 4. Keep the aviator sunglasses and heavy chain, but LOWER THE NECKLACE to where it hangs on an INVISIBLE WEARER'S NECK, well BELOW the glasses: leave a vertical black gap at least ONE FULL LENS HEIGHT between glasses and chain. Necklace must NOT attach to the glasses' temples. ADD ONE fancy practical BASEBALL CAP ABOVE THE SUNGLASSES, broad curved bill, six-panel crown simplified into two large cuts, ONE bold decorative stripe and NO logo. Three separate wearable items arranged as cap at top, glasses at eye level, necklace low at collar level. No human face, words, tiny seams, sparkle or extra jewelry.",
+      "itemId": "batch84-stylowa",
+      "revisionOf": {
+        "id": "batch84-stylowa",
+        "name": "Stylówa",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-84/stylowa.png",
+        "sourceSha256": "946711ac83eaf483f6543dc38b809181d33c1b76c00c70af2ff16cdb14acdbec",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/stylowa.svg",
+            "variant": "default",
+            "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+          }
+        ],
+        "notes": "Lower the chain into where it would naturally reside. Add a fancy baseball cap.",
+        "feedback": {
+          "itemId": "batch84-stylowa",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Lower the chain into where it would naturally reside. Add a fancy baseball cap.",
+          "updatedAt": "2026-10-15T22:54:18.271Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "szalencza-szarza",
+      "name": "Szaleńcza szarża",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/abilities/szalencza-szarza.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szalencza-szarza.svg",
+          "variant": "default",
+          "sourceSha256": "9e95f50b6dbc04a319f31dcec9fb8d74148e1070eee6bad2a75b662766c30c5d"
+        }
+      ],
+      "ruleContext": "Twoja szybkość rośnie o 3 m, a jeśli wykonasz akcję Przyspieszenie, przeciwnicy mają Utrudnienie do Testów Ataków dystansowych przeciw tobie, do początku twojej następnej tury.",
+      "context": "Class/profession ability: Szaleńcza szarża; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 5,
+      "request": "ENTIRELY NEW NONHUMAN CONCEPT: ONE realistic powerful BULL CHARGING to the RIGHT, head lowered with TWO broad forward horns, heavy shoulders, natural compact body and four complete bovine legs. ONE long tail sweeps behind, TWO short broad motion strokes convey the reckless surge. Natural animal anatomy and one small eye cut, sober strong white silhouette with sparse black cuts. NO RUNNING HUMAN, portrait, cartoon mascot, anime, gore, nose-ring, fine fur or decorative arrow.",
+      "itemId": "batch85-szalencza-szarza",
+      "revisionOf": {
+        "id": "batch85-szalencza-szarza",
+        "name": "Szaleńcza szarża",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-85/szalencza-szarza.png",
+        "sourceSha256": "1199750c735b867eacc3615b2b93cbc42e0e956ab21fc68986cc9d3771760f3a",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/szalencza-szarza.svg",
+            "variant": "default",
+            "sourceSha256": "9e95f50b6dbc04a319f31dcec9fb8d74148e1070eee6bad2a75b662766c30c5d"
+          }
+        ],
+        "notes": "Needs a different concept - we have enough \"guy running\" icons.",
+        "feedback": {
+          "itemId": "batch85-szalencza-szarza",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Needs a different concept - we have enough \"guy running\" icons.",
+          "updatedAt": "2026-10-15T22:54:55.122Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "szybkie-badanie",
+      "name": "Szybkie badanie",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/abilities/szybkie-badanie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-badanie.svg",
+          "variant": "default",
+          "sourceSha256": "6c308b62d0703643d9c0ce5875908af22dc5c1956d0cc77e13f8e962b5e1de20"
+        }
+      ],
+      "ruleContext": "W czasie walki możesz wykonać akcję Badanie w swojej Akcji Bonusowej. Jesteś w stanie bardzo szybko zdobyć cenne informacje dotyczące np. miejsca walki, najbliższych urządzeń lub wybranych statystyk przeciwnika, zależnie od używanej umiejętności (patrz akcja Badanie w rozdziale Eksploracja s. 41). PRZYKŁAD: Wykonując Test Inteligencji (Technika) o ST 15, dotyczący wrogiej maszyny Molocha, możesz się dowiedzieć, ile ma PW lub jak wysoka jest jej TT.",
+      "context": "Class/profession ability: Szybkie badanie; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 6,
+      "request": "ENTIRELY NEW CONCEPT: ONE generic OLD-FASHIONED DETECTIVE in a plain DEERSTALKER CAP and short cape, SPRINTING while examining the GROUND through ONE large MAGNIFYING GLASS. Full natural adult body in side view facing RIGHT, torso leaning forward, one knee lifted and other leg driving behind. One complete hand holds the magnifier low just in FRONT of the leading foot; the small plain face looks DOWN through the lens. Other arm balances naturally behind. Two broad short motion strokes, no actor likeness, named character, detailed face, beard portrait, anime, book or extra limbs. Complete hat, lens and handle.",
+      "itemId": "batch85-szybkie-badanie",
+      "revisionOf": {
+        "id": "batch85-szybkie-badanie",
+        "name": "Szybkie badanie",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-85/szybkie-badanie.png",
+        "sourceSha256": "68ee573c92b385f9d9e019ccdf930070a8830eaee427058535d9313869b243ca",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/szybkie-badanie.svg",
+            "variant": "default",
+            "sourceSha256": "6c308b62d0703643d9c0ce5875908af22dc5c1956d0cc77e13f8e962b5e1de20"
+          }
+        ],
+        "notes": "A figure of sherlock holmes with a magnifying glass, simultaneously inspecting the ground through the glass and sprinting",
+        "feedback": {
+          "itemId": "batch85-szybkie-badanie",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "A figure of sherlock holmes with a magnifying glass, simultaneously inspecting the ground through the glass and sprinting",
+          "updatedAt": "2026-10-15T22:56:30.549Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "szybkie-nogi",
+      "name": "Szybkie nogi",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/abilities/szybkie-nogi.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-nogi.svg",
+          "variant": "default",
+          "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398"
+        }
+      ],
+      "ruleContext": "Łączysz swoją zwinność i szybkość, w celu zwiększenia szansy przetrwania na polu walki. Możesz w Akcji Bonusowej wykonać Odstąpienie, Przyspieszenie lub Ukrywanie się.",
+      "context": "Class/profession ability: Szybkie nogi; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 7,
+      "request": "REVISION of reference cell 7. Keep the SAME rugged boots and short trouser legs, but pose them in a classic MOONWALK SLIDE on ONE common ground line. BOTH toes point RIGHT. The LEFT/REAR BOOT stays completely FLAT and slides backward LEFT; the RIGHT/FRONT BOOT balances on its TOE with heel raised HIGH, sole sloping upward at a steep angle. Natural ankle bend and calf stance; neither boot is airborne. Two broad short motion strokes trail behind the sliding flat boot. Exactly two intact boots, same broad details, no full person, recognizable performer, text or extra feet.",
+      "itemId": "batch85-szybkie-nogi",
+      "revisionOf": {
+        "id": "batch85-szybkie-nogi",
+        "name": "Szybkie nogi",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-85/szybkie-nogi.png",
+        "sourceSha256": "d6468d4b2c4763082fef3942721e14d9dcc16f0b2ec94cb2617e93884e37e4b7",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/szybkie-nogi.svg",
+            "variant": "default",
+            "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398"
+          }
+        ],
+        "notes": "Change the position of the feet into a Michael Jackson moonwalk. Keep the boots.",
+        "feedback": {
+          "itemId": "batch85-szybkie-nogi",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Change the position of the feet into a Michael Jackson moonwalk. Keep the boots.",
+          "updatedAt": "2026-10-15T22:56:54.826Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "szybkie-rece",
+      "name": "Szybkie ręce",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/abilities/szybkie-rece.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-rece.svg",
+          "variant": "default",
+          "sourceSha256": "3c0b28c465cc993c60c6f501645989b90d99c505ada827d16ea0b8b3fdd9759b"
+        }
+      ],
+      "ruleContext": "W czasie walki jesteś w stanie robić dwie rzeczy naraz. W swojej turze możesz wykonać jedną akcję więcej oprócz zwykłej akcji i możliwej Akcji Bonusowej. Akcja ta może być przeznaczona jedynie na akcję Używanie. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Zręczności. Zdolność odnawia się po odbyciu Krótkiego odpoczynku.",
+      "context": "Class/profession ability: Szybkie ręce; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 8,
+      "request": "REVISION of reference cell 8. Preserve the TWO real hands, their two toggles and one control box. Make the hands move VERY FAST using TWO broad parallel CURVED SPEED STROKES behind EACH wrist, plus ONE short OFFSET PARTIAL CONTOUR echo beside each hand. Real hands remain solid WHITE and anatomically coherent. Motion echoes are separated broad white arcs, NOT extra complete ghost hands or fingers. Keep both switches and box unchanged, clean broad black gaps. No grey photographic blur, gradient, dithering, thin streaks, extra arms, text or numbers.",
+      "itemId": "batch85-szybkie-rece",
+      "revisionOf": {
+        "id": "batch85-szybkie-rece",
+        "name": "Szybkie ręce",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-85/szybkie-rece.png",
+        "sourceSha256": "037f48351b330277a89f084b131cb4f26fdde09b599c83b17c7a2bd8c42e3c07",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/szybkie-rece.svg",
+            "variant": "default",
+            "sourceSha256": "3c0b28c465cc993c60c6f501645989b90d99c505ada827d16ea0b8b3fdd9759b"
+          }
+        ],
+        "notes": "Modify the graphics to indicate the hands are moving very fast, like a blur",
+        "feedback": {
+          "itemId": "batch85-szybkie-rece",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Modify the graphics to indicate the hands are moving very fast, like a blur",
+          "updatedAt": "2026-10-15T22:57:15.207Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "szybkosc-kota",
+      "name": "Szybkość kota",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/abilities/szybkosc-kota.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkosc-kota.svg",
+          "variant": "default",
+          "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a"
+        }
+      ],
+      "ruleContext": "Uczysz się unikać kul i ataków wręcz, jak na przedwojennych filmach akcji. Odskok [R]. Kiedy otrzymujesz obrażenia w wyniku bezpośredniego ataku, możesz w Reakcji zmniejszyć je o połowę (zaokrąglając w dół). Odskok nie działa, kiedy otrzymujesz obrażenia psychiczne. Szybkie łapy. Twoja Szybkość rośnie o 3 metry. Refleks. Możesz dorzucić jedną Kocią kość do testu Inicjatywy.",
+      "context": "Class/profession ability: Szybkość kota; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 9,
+      "request": "REVISION of reference cell 9. Keep the same realistic CAT CROUCH, four legs, long tail, left-facing orientation and bullet passing above. ADD THREE broad CURVED EVASION STROKES behind the cat's back and hindquarters, sweeping DOWNWARD around its body to show a quick dodge beneath the bullet. Strokes stay clearly separate from the complete cat, with no arrowheads or extra tails. Preserve natural animal proportions and one small eye cut. No anime mascot, fine fur, injury, gore, text or extra animal.",
+      "itemId": "batch85-szybkosc-kota",
+      "revisionOf": {
+        "id": "batch85-szybkosc-kota",
+        "name": "Szybkość kota",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-85/szybkosc-kota.png",
+        "sourceSha256": "5306f807d117634d1625487c8c4b4841c7a9c6c733380cfe6fe698e3488bc143",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/szybkosc-kota.svg",
+            "variant": "default",
+            "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a"
+          }
+        ],
+        "notes": "Add lines indicating evastion.",
+        "feedback": {
+          "itemId": "batch85-szybkosc-kota",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Add lines indicating evastion.",
+          "updatedAt": "2026-10-15T22:57:47.236Z"
+        }
+      }
+    }
+  ]
+}

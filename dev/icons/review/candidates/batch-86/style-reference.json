@@ -1,0 +1,41 @@
+{
+  "role": "ALL nine reference cells are EXACT selected revision sources. Follow each requested correction. Cell 2 replaces the radio ENTIRELY with an open-backed CRT TV; cell 5 replaces the running human ENTIRELY with a charging bull; cell 6 replaces the robot with a generic detective sprinting while inspecting the ground. Specific requested moonwalk and motion strokes override general avoidance of decorative marks, but preserve pure white stencil style.",
+  "sources": [
+    {
+      "source": "dev/icons/review/candidates/batch-84/rzeznik.png",
+      "sha256": "fd16d809bc4a2aafe479c1d84ba2c5fd6f6beda8a112d997aef410b2e3498f0a"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-81/serwisowanie.png",
+      "sha256": "e094f4377066ad801a0cde3cfd6833f30750915638580ba031bfeb50af8bff71"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-84/spieprzysz-to.png",
+      "sha256": "ea7da0edd90808addbb68ee97d9ae028c1ea0eb945c04bd0dc5480800410f8ca"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-84/stylowa.png",
+      "sha256": "946711ac83eaf483f6543dc38b809181d33c1b76c00c70af2ff16cdb14acdbec"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-85/szalencza-szarza.png",
+      "sha256": "1199750c735b867eacc3615b2b93cbc42e0e956ab21fc68986cc9d3771760f3a"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-85/szybkie-badanie.png",
+      "sha256": "68ee573c92b385f9d9e019ccdf930070a8830eaee427058535d9313869b243ca"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-85/szybkie-nogi.png",
+      "sha256": "d6468d4b2c4763082fef3942721e14d9dcc16f0b2ec94cb2617e93884e37e4b7"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-85/szybkie-rece.png",
+      "sha256": "037f48351b330277a89f084b131cb4f26fdde09b599c83b17c7a2bd8c42e3c07"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-85/szybkosc-kota.png",
+      "sha256": "5306f807d117634d1625487c8c4b4841c7a9c6c733380cfe6fe698e3488bc143"
+    }
+  ]
+}

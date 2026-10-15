@@ -1,0 +1,59 @@
+{
+  "role": "Exact native targets, not style inputs",
+  "files": [
+    {
+      "key": "rzeznik",
+      "source": "icons/abilities/rzeznik.svg",
+      "variant": "default",
+      "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+    },
+    {
+      "key": "serwisowanie",
+      "source": "icons/abilities/serwisowanie.svg",
+      "variant": "default",
+      "sourceSha256": "43659a4c590f9892703aeb2c53a00353153e0794c7e15840196730ebfe4afb08"
+    },
+    {
+      "key": "spieprzysz-to",
+      "source": "icons/abilities/spieprzysz-to.svg",
+      "variant": "default",
+      "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+    },
+    {
+      "key": "stylowa",
+      "source": "icons/abilities/stylowa.svg",
+      "variant": "default",
+      "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+    },
+    {
+      "key": "szalencza-szarza",
+      "source": "icons/abilities/szalencza-szarza.svg",
+      "variant": "default",
+      "sourceSha256": "9e95f50b6dbc04a319f31dcec9fb8d74148e1070eee6bad2a75b662766c30c5d"
+    },
+    {
+      "key": "szybkie-badanie",
+      "source": "icons/abilities/szybkie-badanie.svg",
+      "variant": "default",
+      "sourceSha256": "6c308b62d0703643d9c0ce5875908af22dc5c1956d0cc77e13f8e962b5e1de20"
+    },
+    {
+      "key": "szybkie-nogi",
+      "source": "icons/abilities/szybkie-nogi.svg",
+      "variant": "default",
+      "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398"
+    },
+    {
+      "key": "szybkie-rece",
+      "source": "icons/abilities/szybkie-rece.svg",
+      "variant": "default",
+      "sourceSha256": "3c0b28c465cc993c60c6f501645989b90d99c505ada827d16ea0b8b3fdd9759b"
+    },
+    {
+      "key": "szybkosc-kota",
+      "source": "icons/abilities/szybkosc-kota.svg",
+      "variant": "default",
+      "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a"
+    }
+  ]
+}

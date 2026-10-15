@@ -1,0 +1,16 @@
+{
+  "batch": 86,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "rzeznik": "16a64677aee4cdefc82d0df8554664227d8da2462d1e0074cfd61b72e04ef1b1",
+    "serwisowanie": "87b699b3e8eb7dceb50f173d286d0b655d473298031ae67e14e91444da452feb",
+    "spieprzysz-to": "39de177a014d7016415b51e93263bfe23311a8c252fe9b25377f84f49b4913e0",
+    "stylowa": "b0b7e2b788f1c17e9cbb08f62fd5827f4b2fa6de53755e11f99760fdf584f3c6",
+    "szalencza-szarza": "46edafb2e4a86115ddc7300fcf16e7a8984f71aba252baf4e82b63774b5f5715",
+    "szybkie-badanie": "c15259fbc8b11b37bb6074b7657b5a0fc9a8ce05fd5b245bfc0c129de501ee27",
+    "szybkie-nogi": "bdf5d9ad31df3dc62bc90e29f10f7f9c25218de9a971f7799e7fc5037fafcf40",
+    "szybkie-rece": "b36ab994090a8c1d879a6a30308c94876cd0b4f2526a342ab1186ede641b0f53",
+    "szybkosc-kota": "1c3703f16744b08af72ea655ca802393b9efc515fd0b3a15458dd33c787fa765"
+  }
+}

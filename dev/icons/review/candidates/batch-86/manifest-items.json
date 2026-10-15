@@ -1,0 +1,351 @@
+{
+  "title": "Batch 86 · 9 awaiting GM review",
+  "updated": "2026-10-16",
+  "items": [
+    {
+      "id": "batch81-rzeznik",
+      "name": "Rzeźnik",
+      "tier": "Batch 86 · wyjadacz-option",
+      "batch": 86,
+      "placeholderKey": "feature:rzeznik",
+      "target": "icons/abilities/rzeznik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/rzeznik.svg",
+          "variant": "default",
+          "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+        }
+      ],
+      "context": "Class/profession ability: Rzeźnik; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 1. Preserve the raised arm, upper holding hand, target torso and angry threatened expression EXACTLY. Change ONLY the knife hand: LOWER that hand by roughly ONE FIST HEIGHT and angle its complete short knife UPWARD toward the ARMPIT where the raised arm joins the torso. The tip stops SHORT of the body with a clear black gap. It must aim BELOW the upper arm, not at the biceps. Same two attacker hands and one target, coherent fingers/grip, no extra limb. Fictional threat before contact only: no stabbing, wound, blood, gore or exposed tissue.",
+      "current": {
+        "src": "/icons/abilities/rzeznik.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch86-revision",
+          "label": "Batch 86 · revised Rzeźnik",
+          "src": "candidates/batch-86/rzeznik.png",
+          "note": "REVISION of reference cell 1. Preserve the raised arm, upper holding hand, target torso and angry threatened expression EXACTLY. Change ONLY the knife hand: LOWER that hand by roughly ONE FIST HEIGHT and angle its complete short knife UPWARD toward the ARMPIT where the raised arm joins the torso. The tip stops SHORT of the body with a clear black gap. It must aim BELOW the upper arm, not at the biceps. Same two attacker hands and one target, coherent fingers/grip, no extra limb. Fictional threat before contact only: no stabbing, wound, blood, gore or exposed tissue."
+        },
+        {
+          "id": "batch84-revision",
+          "label": "Batch 84 · revised Rzeźnik",
+          "src": "candidates/batch-84/rzeznik.png",
+          "note": "REVISION of reference cell 1. Preserve the target torso and raised arm, and the upper attacker's hand holding that wrist. ADD ONE complete practical KNIFE held by the LOWER FREE HAND, blade pointing toward the exposed underarm but NOT TOUCHING the target. Correct natural fingers/thumb around the knife grip, full short blade and guard. Change the target's expression from calm to visibly THREATENED AND ANGRY: one broad lowered brow, narrow natural eye cut and tense open mouth. Same pose and framing, all limbs coherent. Before-contact fictional threat only: no stab, impact, blood, wound, exposed tissue or gore. No extra hand, weapon or anime face."
+        },
+        {
+          "id": "batch82-revision",
+          "label": "Batch 82 · revised Rzeźnik",
+          "src": "candidates/batch-82/rzeznik.png",
+          "note": "NEW CONCEPT requested, shown BEFORE CONTACT and NON-GRAPHIC. ONE generic adult TARGET'S upper torso at RIGHT with one arm raised high. ONE attacker's bare HAND enters from upper-left and HOLDS UP that raised WRIST. The attacker's OTHER bare hand is a complete CLENCHED FIST drawn back at lower-left, poised toward the target's exposed UNDERARM below the raised shoulder. The attacker is represented ONLY by those two hands and short forearms, no second head. Target has one smooth small head and natural joined neck/shoulder/elbow. Clear black separation identifies each arm, holding hand and poised fist. No cleaver, weapon, impact, injury, blood, wound, exposed anatomy, gore or tiny face detail."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 81 · Rzeźnik",
+          "src": "candidates/batch-81/rzeznik.png",
+          "note": "ONE complete BARE ADULT HAND gripping ONE large sturdy MEAT CLEAVER raised diagonally. Broad rectangular blade with a single clean cutting edge, short complete grip and coherent fingers/thumb/wrist. A powerful single-weapon melee strike, sober inventory object. No other weapon, victim, wound, blood, gore, face, blade engraving or tiny scratches."
+        }
+      ]
+    },
+    {
+      "id": "batch81-serwisowanie",
+      "name": "Serwisowanie",
+      "tier": "Batch 86 · Monter",
+      "batch": 86,
+      "placeholderKey": "feature:serwisowanie",
+      "target": "icons/abilities/serwisowanie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/serwisowanie.svg",
+          "variant": "default",
+          "sourceSha256": "43659a4c590f9892703aeb2c53a00353153e0794c7e15840196730ebfe4afb08"
+        }
+      ],
+      "context": "Class/profession ability: Serwisowanie; owner Monter. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedyś był taki serial o kolesiu, który ze sreberka, spinacza i butelki po denaturacie robił telefon. Otrzymujesz biegłość w narzędziach małego elektronika. Potrafisz naprawiać i produkować urządzenia elektroniczne i drobne mechanizmy. Potrzebne ci tylko narzędzia małego chemika, małego elektronika, surowce i czas. Otrzymujesz wylistowane poniżej schematy elektroniczne. SCHEMATY ELEKTRONICZNE NAZWA ST PRODUKCJA SUROWCE Agregat 20 50 godzin 1 CE, 15 CZ, 9 MK Akumulator 15 40 godzin 5 CH, 10 CZ, 5 Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ENTIRELY NEW SUBJECT replacing the radio in reference cell 2. ONE old practical CRT TELEVISION viewed from the REAR in simple three-quarter view, its BACK COVER REMOVED and propped beside it. Broad boxy cabinet on two short feet, TWO short rabbit-ear ANTENNA RODS above, one large rounded CRT tube housing visible inside and ONE simple rectangular circuit-board block below. Detached back cover has just TWO broad vent slots. ONE complete sturdy screwdriver rests beside the base. Sparse coherent solid shapes, no detailed wiring, circuit schematic, text, numbers, tiny components, radio, hands or face.",
+      "current": {
+        "src": "/icons/abilities/serwisowanie.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch86-revision",
+          "label": "Batch 86 · revised Serwisowanie",
+          "src": "candidates/batch-86/serwisowanie.png",
+          "note": "ENTIRELY NEW SUBJECT replacing the radio in reference cell 2. ONE old practical CRT TELEVISION viewed from the REAR in simple three-quarter view, its BACK COVER REMOVED and propped beside it. Broad boxy cabinet on two short feet, TWO short rabbit-ear ANTENNA RODS above, one large rounded CRT tube housing visible inside and ONE simple rectangular circuit-board block below. Detached back cover has just TWO broad vent slots. ONE complete sturdy screwdriver rests beside the base. Sparse coherent solid shapes, no detailed wiring, circuit schematic, text, numbers, tiny components, radio, hands or face."
+        },
+        {
+          "id": "batch84-revision",
+          "label": "Batch 84 · revised Serwisowanie",
+          "src": "candidates/batch-84/serwisowanie.png",
+          "note": "REDRAW the good existing concept in reference cell 2 more coherently. ONE compact handheld RADIO in three-quarter view, one CONTINUOUS SOLID ANTENNA joined to the top, one large tuning knob and two broad speaker slots. The UNDERSIDE faces partly toward the viewer. ONE rectangular SERVICE HATCH on that BOTTOM PLANE opens downward on ONE clear hinge; a complete soldering iron from lower-right meets the bottom service opening. Vertical side panels stay CLOSED. Broad clean device planes, simple solid handle and soldering tip, no disconnected antenna fragments, floating panels, tiny circuitry, labels, numbers or person."
+        },
+        {
+          "id": "batch82-revision",
+          "label": "Batch 82 · revised Serwisowanie",
+          "src": "candidates/batch-82/serwisowanie.png",
+          "note": "REVISION of reference cell 8. Preserve ONE sturdy handheld RADIO, its single antenna, tuning knob, two speaker slots and complete SOLDERING IRON. MOVE THE SERVICE OPENING FROM THE SIDE TO THE UNDERSIDE OF THE RADIO. Tilt the radio slightly into a simple three-quarter view so its BOTTOM PLANE is clearly visible. A single broad rectangular hatch on that BOTTOM face hinges DOWNWARD; the soldering tip approaches the bottom opening from lower-right. All vertical side panels remain SOLID AND CLOSED. Not a lower side or front door. Broad structural cuts and coherent device geometry, no tiny circuitry, labels, numbers, extra antenna or person."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 81 · Serwisowanie",
+          "src": "candidates/batch-81/serwisowanie.png",
+          "note": "ONE sturdy HANDHELD RADIO shown frontally with ONE short broad ANTENNA, a large plain tuning knob and TWO broad speaker slots. A complete SOLDERING IRON with thick handle approaches one simple open SERVICE PANEL at the lower side. Clear coherent device and tool, sparse broad structural cuts only. No person, hand, tiny circuitry, schematic, instructions, markings, text, numerals or giant cog."
+        }
+      ]
+    },
+    {
+      "id": "batch83-spieprzysz-to",
+      "name": "Spieprzysz to!",
+      "tier": "Batch 86 · Cwaniak",
+      "batch": 86,
+      "placeholderKey": "feature:spieprzysz-to",
+      "target": "icons/abilities/spieprzysz-to.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/spieprzysz-to.svg",
+          "variant": "default",
+          "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+        }
+      ],
+      "context": "Class/profession ability: Spieprzysz to!; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Potrafisz każdego wytrącić z równowagi. Kiedy istota, którą widzisz w promieniu 18 m, wykonała udany Test Ataku lub Rzut Obronny, możesz w swojej Reakcji sprawić, by powtórzyła rzut i wybrała gorszy wynik. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po ukończeniu Krótkiego odpoczynku. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 3. Keep the head angle, pointing hand, speech strokes and sneering mockery concept, but REMOVE THE ANIME/CARTOON FACE. Redraw as an ordinary natural ADULT with rounded skull, plain SHORT CLOSE-CROPPED HAIR, normal small eye, modest nose and ordinary jaw. ONE broad raised eyebrow and ONE smaller natural open half-smile with a raised lip corner convey scorn. Remove swept/spiky fringe, exaggerated hooked brow, giant crescent grin, oversized tooth shape and stylized sharp cheek. No beard or gruff survivor portrait, idealized hero face, manga or tiny wrinkles. Broad sparse stencil cuts only; coherent hand stays unchanged. No dice.",
+      "current": {
+        "src": "/icons/abilities/spieprzysz-to.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch86-revision",
+          "label": "Batch 86 · revised Spieprzysz to!",
+          "src": "candidates/batch-86/spieprzysz-to.png",
+          "note": "REVISION of reference cell 3. Keep the head angle, pointing hand, speech strokes and sneering mockery concept, but REMOVE THE ANIME/CARTOON FACE. Redraw as an ordinary natural ADULT with rounded skull, plain SHORT CLOSE-CROPPED HAIR, normal small eye, modest nose and ordinary jaw. ONE broad raised eyebrow and ONE smaller natural open half-smile with a raised lip corner convey scorn. Remove swept/spiky fringe, exaggerated hooked brow, giant crescent grin, oversized tooth shape and stylized sharp cheek. No beard or gruff survivor portrait, idealized hero face, manga or tiny wrinkles. Broad sparse stencil cuts only; coherent hand stays unchanged. No dice."
+        },
+        {
+          "id": "batch84-revision",
+          "label": "Batch 84 · revised Spieprzysz to!",
+          "src": "candidates/batch-84/spieprzysz-to.png",
+          "note": "ENTIRELY NEW CONCEPT: vicious MOCKERY, with NO DICE. ONE ordinary generic ADULT HEAD AND SHORT SHOULDERS in three-quarter view facing RIGHT, sneering scornfully: one raised broad eyebrow, one narrowed natural eye and an OPEN MOUTH with one corner curled upward. ONE complete bare hand beside the face POINTS DERISIVELY right, while TWO short broad angular speech strokes emerge from the mouth. Sober human adult expression, minimal broad facial cuts, short neutral hair, no beard portrait, anime, oversized eyes, clown face, lettering, speech-bubble text, book or extra person."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 83 · Spieprzysz to!",
+          "src": "candidates/batch-83/spieprzysz-to.png",
+          "note": "ONE complete BARE ADULT HAND uses its extended INDEX FINGER to FLICK ONE coherent CUBE DIE onto an edge, forcing a reroll. Die has exactly three visible flat planes with straight shared edges: ONE big pip on front, TWO on right side, ONE on top. One broad short impact wedge at fingertip, no motion arrow. Natural hand/thumb/folded fingers and short wrist, strong black gap around die. No second die, written words, numerals, speech bubble, book, tiny fingernails or cartoon face."
+        }
+      ]
+    },
+    {
+      "id": "batch84-stylowa",
+      "name": "Stylówa",
+      "tier": "Batch 86 · Gwiazda",
+      "batch": 86,
+      "placeholderKey": "feature:stylowa",
+      "target": "icons/abilities/stylowa.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/stylowa.svg",
+          "variant": "default",
+          "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+        }
+      ],
+      "context": "Class/profession ability: Stylówa; owner Gwiazda. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Wygląd jest twoją wizytówką, ma robić wrażenie i podkreślać wyjątkowość twojego charakteru. Ubierasz się w drogie ciuchy, nosisz na widoku cenne gadżety i drogą biżuterię. Te błyskotki mogą przyciągać złodziei, ale kij im w oko, bo to robi ci imidż na dzielni. Każde 50 gambli towarów luksusowych, które nosisz na sobie, zapewnia ci premię +1 do testów Wpływania. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 4. Keep the aviator sunglasses and heavy chain, but LOWER THE NECKLACE to where it hangs on an INVISIBLE WEARER'S NECK, well BELOW the glasses: leave a vertical black gap at least ONE FULL LENS HEIGHT between glasses and chain. Necklace must NOT attach to the glasses' temples. ADD ONE fancy practical BASEBALL CAP ABOVE THE SUNGLASSES, broad curved bill, six-panel crown simplified into two large cuts, ONE bold decorative stripe and NO logo. Three separate wearable items arranged as cap at top, glasses at eye level, necklace low at collar level. No human face, words, tiny seams, sparkle or extra jewelry.",
+      "current": {
+        "src": "/icons/abilities/stylowa.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch86-revision",
+          "label": "Batch 86 · revised Stylówa",
+          "src": "candidates/batch-86/stylowa.png",
+          "note": "REVISION of reference cell 4. Keep the aviator sunglasses and heavy chain, but LOWER THE NECKLACE to where it hangs on an INVISIBLE WEARER'S NECK, well BELOW the glasses: leave a vertical black gap at least ONE FULL LENS HEIGHT between glasses and chain. Necklace must NOT attach to the glasses' temples. ADD ONE fancy practical BASEBALL CAP ABOVE THE SUNGLASSES, broad curved bill, six-panel crown simplified into two large cuts, ONE bold decorative stripe and NO logo. Three separate wearable items arranged as cap at top, glasses at eye level, necklace low at collar level. No human face, words, tiny seams, sparkle or extra jewelry."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 84 · Stylówa",
+          "src": "candidates/batch-84/stylowa.png",
+          "note": "ONE complete pair of practical AVIATOR SUNGLASSES above ONE heavy CURB-CHAIN NECKLACE arranged in a compact loop. Broad lens frames and bridge, large clean black lens openings, necklace made of only SIX broad joined links. Expensive wearable style in a rough wasteland, sober practical objects. No head, face, suit jacket, text, logo, currency sign, tiny jewelry engraving, sparkle or ornate pendant."
+        }
+      ]
+    },
+    {
+      "id": "batch85-szalencza-szarza",
+      "name": "Szaleńcza szarża",
+      "tier": "Batch 86 · Brutal",
+      "batch": 86,
+      "placeholderKey": "feature:szalencza-szarza",
+      "target": "icons/abilities/szalencza-szarza.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szalencza-szarza.svg",
+          "variant": "default",
+          "sourceSha256": "9e95f50b6dbc04a319f31dcec9fb8d74148e1070eee6bad2a75b662766c30c5d"
+        }
+      ],
+      "context": "Class/profession ability: Szaleńcza szarża; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Twoja szybkość rośnie o 3 m, a jeśli wykonasz akcję Przyspieszenie, przeciwnicy mają Utrudnienie do Testów Ataków dystansowych przeciw tobie, do początku twojej następnej tury. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ENTIRELY NEW NONHUMAN CONCEPT: ONE realistic powerful BULL CHARGING to the RIGHT, head lowered with TWO broad forward horns, heavy shoulders, natural compact body and four complete bovine legs. ONE long tail sweeps behind, TWO short broad motion strokes convey the reckless surge. Natural animal anatomy and one small eye cut, sober strong white silhouette with sparse black cuts. NO RUNNING HUMAN, portrait, cartoon mascot, anime, gore, nose-ring, fine fur or decorative arrow.",
+      "current": {
+        "src": "/icons/abilities/szalencza-szarza.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch86-revision",
+          "label": "Batch 86 · revised Szaleńcza szarża",
+          "src": "candidates/batch-86/szalencza-szarza.png",
+          "note": "ENTIRELY NEW NONHUMAN CONCEPT: ONE realistic powerful BULL CHARGING to the RIGHT, head lowered with TWO broad forward horns, heavy shoulders, natural compact body and four complete bovine legs. ONE long tail sweeps behind, TWO short broad motion strokes convey the reckless surge. Natural animal anatomy and one small eye cut, sober strong white silhouette with sparse black cuts. NO RUNNING HUMAN, portrait, cartoon mascot, anime, gore, nose-ring, fine fur or decorative arrow."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 85 · Szaleńcza szarża",
+          "src": "candidates/batch-85/szalencza-szarza.png",
+          "note": "ONE generic ADULT CHARGING FORWARD low and fast to the RIGHT, shoulder leading, full natural body, one leg drives behind and the other steps forward. TWO broad BULLET STREAKS narrowly miss BEHIND the back, separate from the intact body. Plain practical clothes, smooth featureless head and complete limbs, clear broad black gaps. Reckless speed makes the person hard to hit. No gun in hands, portrait, beard, anime, injury, blood, extra limbs or decorative arrow."
+        }
+      ]
+    },
+    {
+      "id": "batch85-szybkie-badanie",
+      "name": "Szybkie badanie",
+      "tier": "Batch 86 · Spec",
+      "batch": 86,
+      "placeholderKey": "feature:szybkie-badanie",
+      "target": "icons/abilities/szybkie-badanie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-badanie.svg",
+          "variant": "default",
+          "sourceSha256": "6c308b62d0703643d9c0ce5875908af22dc5c1956d0cc77e13f8e962b5e1de20"
+        }
+      ],
+      "context": "Class/profession ability: Szybkie badanie; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. W czasie walki możesz wykonać akcję Badanie w swojej Akcji Bonusowej. Jesteś w stanie bardzo szybko zdobyć cenne informacje dotyczące np. miejsca walki, najbliższych urządzeń lub wybranych statystyk przeciwnika, zależnie od używanej umiejętności (patrz akcja Badanie w rozdziale Eksploracja s. 41). PRZYKŁAD: Wykonując Test Inteligencji (Technika) o ST 15, dotyczący wrogiej maszyny Molocha, możesz się dowiedzieć, ile ma PW lub jak wysoka jest jej TT. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ENTIRELY NEW CONCEPT: ONE generic OLD-FASHIONED DETECTIVE in a plain DEERSTALKER CAP and short cape, SPRINTING while examining the GROUND through ONE large MAGNIFYING GLASS. Full natural adult body in side view facing RIGHT, torso leaning forward, one knee lifted and other leg driving behind. One complete hand holds the magnifier low just in FRONT of the leading foot; the small plain face looks DOWN through the lens. Other arm balances naturally behind. Two broad short motion strokes, no actor likeness, named character, detailed face, beard portrait, anime, book or extra limbs. Complete hat, lens and handle.",
+      "current": {
+        "src": "/icons/abilities/szybkie-badanie.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch86-revision",
+          "label": "Batch 86 · revised Szybkie badanie",
+          "src": "candidates/batch-86/szybkie-badanie.png",
+          "note": "ENTIRELY NEW CONCEPT: ONE generic OLD-FASHIONED DETECTIVE in a plain DEERSTALKER CAP and short cape, SPRINTING while examining the GROUND through ONE large MAGNIFYING GLASS. Full natural adult body in side view facing RIGHT, torso leaning forward, one knee lifted and other leg driving behind. One complete hand holds the magnifier low just in FRONT of the leading foot; the small plain face looks DOWN through the lens. Other arm balances naturally behind. Two broad short motion strokes, no actor likeness, named character, detailed face, beard portrait, anime, book or extra limbs. Complete hat, lens and handle."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 85 · Szybkie badanie",
+          "src": "candidates/batch-85/szybkie-badanie.png",
+          "note": "ONE large practical MAGNIFYING GLASS inspects ONE boxy ROBOT SENSOR HEAD with a single large round CAMERA LENS and two broad ventilation cuts. Complete short mechanical neck, coherent magnifier rim/handle, broad black gaps. TWO short broad motion strokes behind the magnifier indicate quick examination. Sober salvaged machine, no human face, book, tiny circuitry, numbers, lettering, extra lenses or cartoon robot expression."
+        }
+      ]
+    },
+    {
+      "id": "batch85-szybkie-nogi",
+      "name": "Szybkie nogi",
+      "tier": "Batch 86 · Złodziej",
+      "batch": 86,
+      "placeholderKey": "feature:szybkie-nogi",
+      "target": "icons/abilities/szybkie-nogi.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-nogi.svg",
+          "variant": "default",
+          "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398"
+        }
+      ],
+      "context": "Class/profession ability: Szybkie nogi; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Łączysz swoją zwinność i szybkość, w celu zwiększenia szansy przetrwania na polu walki. Możesz w Akcji Bonusowej wykonać Odstąpienie, Przyspieszenie lub Ukrywanie się. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 7. Keep the SAME rugged boots and short trouser legs, but pose them in a classic MOONWALK SLIDE on ONE common ground line. BOTH toes point RIGHT. The LEFT/REAR BOOT stays completely FLAT and slides backward LEFT; the RIGHT/FRONT BOOT balances on its TOE with heel raised HIGH, sole sloping upward at a steep angle. Natural ankle bend and calf stance; neither boot is airborne. Two broad short motion strokes trail behind the sliding flat boot. Exactly two intact boots, same broad details, no full person, recognizable performer, text or extra feet.",
+      "current": {
+        "src": "/icons/abilities/szybkie-nogi.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch86-revision",
+          "label": "Batch 86 · revised Szybkie nogi",
+          "src": "candidates/batch-86/szybkie-nogi.png",
+          "note": "REVISION of reference cell 7. Keep the SAME rugged boots and short trouser legs, but pose them in a classic MOONWALK SLIDE on ONE common ground line. BOTH toes point RIGHT. The LEFT/REAR BOOT stays completely FLAT and slides backward LEFT; the RIGHT/FRONT BOOT balances on its TOE with heel raised HIGH, sole sloping upward at a steep angle. Natural ankle bend and calf stance; neither boot is airborne. Two broad short motion strokes trail behind the sliding flat boot. Exactly two intact boots, same broad details, no full person, recognizable performer, text or extra feet."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 85 · Szybkie nogi",
+          "src": "candidates/batch-85/szybkie-nogi.png",
+          "note": "TWO complete rugged BOOTS AND SHORT LOWER TROUSER LEGS in a fast evasive STEP: the leading boot points right and lands toe-first, while the rear boot lifts with heel high. Upper calf hems end cleanly inside the cell; no cropped border. TWO short broad horizontal motion strokes trail left. Natural foot/ankle proportions, broad sparse sole cuts and clear black gap. No full person, face, tiny laces, extra feet, text or arrow."
+        }
+      ]
+    },
+    {
+      "id": "batch85-szybkie-rece",
+      "name": "Szybkie ręce",
+      "tier": "Batch 86 · Spec",
+      "batch": 86,
+      "placeholderKey": "feature:szybkie-rece",
+      "target": "icons/abilities/szybkie-rece.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-rece.svg",
+          "variant": "default",
+          "sourceSha256": "3c0b28c465cc993c60c6f501645989b90d99c505ada827d16ea0b8b3fdd9759b"
+        }
+      ],
+      "context": "Class/profession ability: Szybkie ręce; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. W czasie walki jesteś w stanie robić dwie rzeczy naraz. W swojej turze możesz wykonać jedną akcję więcej oprócz zwykłej akcji i możliwej Akcji Bonusowej. Akcja ta może być przeznaczona jedynie na akcję Używanie. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Zręczności. Zdolność odnawia się po odbyciu Krótkiego odpoczynku. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 8. Preserve the TWO real hands, their two toggles and one control box. Make the hands move VERY FAST using TWO broad parallel CURVED SPEED STROKES behind EACH wrist, plus ONE short OFFSET PARTIAL CONTOUR echo beside each hand. Real hands remain solid WHITE and anatomically coherent. Motion echoes are separated broad white arcs, NOT extra complete ghost hands or fingers. Keep both switches and box unchanged, clean broad black gaps. No grey photographic blur, gradient, dithering, thin streaks, extra arms, text or numbers.",
+      "current": {
+        "src": "/icons/abilities/szybkie-rece.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch86-revision",
+          "label": "Batch 86 · revised Szybkie ręce",
+          "src": "candidates/batch-86/szybkie-rece.png",
+          "note": "REVISION of reference cell 8. Preserve the TWO real hands, their two toggles and one control box. Make the hands move VERY FAST using TWO broad parallel CURVED SPEED STROKES behind EACH wrist, plus ONE short OFFSET PARTIAL CONTOUR echo beside each hand. Real hands remain solid WHITE and anatomically coherent. Motion echoes are separated broad white arcs, NOT extra complete ghost hands or fingers. Keep both switches and box unchanged, clean broad black gaps. No grey photographic blur, gradient, dithering, thin streaks, extra arms, text or numbers."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 85 · Szybkie ręce",
+          "src": "candidates/batch-85/szybkie-rece.png",
+          "note": "TWO complete BARE ADULT HANDS simultaneously operate TWO large TOGGLE SWITCHES on ONE compact rectangular CONTROL BOX. Left hand enters from LEFT and flips the left switch upward; right hand enters from RIGHT and flips the right switch downward. Each hand has one coherent thumb, fingers and short wrist, broad black separation. Only two simple toggles and one box, spare functional shapes. No face, text, labels, extra hands, tiny circuitry, fine fingernails or elaborate control panel."
+        }
+      ]
+    },
+    {
+      "id": "batch85-szybkosc-kota",
+      "name": "Szybkość kota",
+      "tier": "Batch 86 · Złodziej",
+      "batch": 86,
+      "placeholderKey": "feature:szybkosc-kota",
+      "target": "icons/abilities/szybkosc-kota.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkosc-kota.svg",
+          "variant": "default",
+          "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a"
+        }
+      ],
+      "context": "Class/profession ability: Szybkość kota; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Uczysz się unikać kul i ataków wręcz, jak na przedwojennych filmach akcji. Odskok [R]. Kiedy otrzymujesz obrażenia w wyniku bezpośredniego ataku, możesz w Reakcji zmniejszyć je o połowę (zaokrąglając w dół). Odskok nie działa, kiedy otrzymujesz obrażenia psychiczne. Szybkie łapy. Twoja Szybkość rośnie o 3 metry. Refleks. Możesz dorzucić jedną Kocią kość do testu Inicjatywy. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 9. Keep the same realistic CAT CROUCH, four legs, long tail, left-facing orientation and bullet passing above. ADD THREE broad CURVED EVASION STROKES behind the cat's back and hindquarters, sweeping DOWNWARD around its body to show a quick dodge beneath the bullet. Strokes stay clearly separate from the complete cat, with no arrowheads or extra tails. Preserve natural animal proportions and one small eye cut. No anime mascot, fine fur, injury, gore, text or extra animal.",
+      "current": {
+        "src": "/icons/abilities/szybkosc-kota.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch86-revision",
+          "label": "Batch 86 · revised Szybkość kota",
+          "src": "candidates/batch-86/szybkosc-kota.png",
+          "note": "REVISION of reference cell 9. Keep the same realistic CAT CROUCH, four legs, long tail, left-facing orientation and bullet passing above. ADD THREE broad CURVED EVASION STROKES behind the cat's back and hindquarters, sweeping DOWNWARD around its body to show a quick dodge beneath the bullet. Strokes stay clearly separate from the complete cat, with no arrowheads or extra tails. Preserve natural animal proportions and one small eye cut. No anime mascot, fine fur, injury, gore, text or extra animal."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 85 · Szybkość kota",
+          "src": "candidates/batch-85/szybkosc-kota.png",
+          "note": "ONE realistic adult CAT facing LEFT in a LOW EVASIVE CROUCH, forepaws braced, one hindleg ready to spring and one long tail curved high behind. ONE broad BULLET STREAK passes safely ABOVE its back, with a clear black gap. Natural cat proportions, four complete legs and one small eye cut; compact grounded pose rather than the earlier airborne leap. Sober agility emblem, no cute mascot, anime eyes, face portrait, injury, fine fur, extra tail, numerals or decorative arrows."
+        }
+      ]
+    }
+  ]
+}
