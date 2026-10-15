@@ -46,3 +46,8 @@ generation correction was needed. Contact sheets were inspected at
 18 pending cards, 45 options and no broken images, with all new candidates
 selected. Evidence: `../batch-82/raw/review-preview.png` and
 `../../../placeholder-pass/progress-82-83.json`.
+
+Saved GM review: four approvals installed. Slang, Sokole oko, Solówa,
+Specjalizacja — Spec and Spieprzysz to! carry their exact revision notes into
+Batch 84. Decisions are in `reviewed.json`; delivered sources and hashes are
+in `reviewed-installed.json`.

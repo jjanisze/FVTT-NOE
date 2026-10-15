@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-16",
+  "batch": 82,
+  "approvedSubjects": 7,
+  "remainingSubjects": 11,
+  "installed": [
+    {
+      "itemId": "batch78-nie-do-zdarcia",
+      "candidateId": "batch82-revision",
+      "source": "candidates/batch-82/nie-do-zdarcia.png",
+      "sourceSha256": "e970ac0ef206eeee7de3ce70fb06ed13dba31a95c0b8716284911a68efdbc5a9",
+      "files": [
+        "icons/abilities/nie-do-zdarcia.svg",
+        "icons/abilities/nie-do-zdarcia.webp"
+      ],
+      "svgSha256": "79b3aca71f0fed3fedc982d0d9fcb9025acd5c9ecc6cfff729a795453a59f14c",
+      "webpSha256": "99fa4ccdd9ad5237a5b2ac1f2d94735bd2ab1683f8d56df82fc8d09a68a1c339"
+    },
+    {
+      "itemId": "batch80-reputacja",
+      "candidateId": "batch82-revision",
+      "source": "candidates/batch-82/reputacja.png",
+      "sourceSha256": "6c6d8f6e3b4b9bd78e00b03c4201c1badf450b78066325ca575d07ce2f95eafa",
+      "files": [
+        "icons/abilities/reputacja.svg",
+        "icons/abilities/reputacja.webp"
+      ],
+      "svgSha256": "0e77e91c2fb2a92ad29e930e8961f63435360b679aa237cfe3a013252dc5bae6",
+      "webpSha256": "f88fa7cd5f56d7f7d69712caf41882f60f1fb44daf072c60743efed622bf28a4"
+    },
+    {
+      "itemId": "batch81-rutyna",
+      "candidateId": "batch82-revision",
+      "source": "candidates/batch-82/rutyna.png",
+      "sourceSha256": "84477577bb5fdc3a00318a683bb396ece044efc0c4c3e8cda2a869fce6751b62",
+      "files": [
+        "icons/abilities/rutyna.svg",
+        "icons/abilities/rutyna.webp"
+      ],
+      "svgSha256": "32d80668675e6aba9d0311e94eed9863d00ea4599dcd7d39aef70cb36f06b7f0",
+      "webpSha256": "165e85bd58b4c7acda2d7a8e384e8c45f90c5ae1934d398cfa7c28043d00bc1b"
+    },
+    {
+      "itemId": "batch81-rzuc-bron-i-gleba",
+      "candidateId": "batch82-revision",
+      "source": "candidates/batch-82/rzuc-bron-i-gleba.png",
+      "sourceSha256": "e80889559fc4ebbed4be76ae9c56ae38c8b43e613c78a4b6469b6f7e2258425e",
+      "files": [
+        "icons/abilities/rzuc-bron-i-gleba.svg",
+        "icons/abilities/rzuc-bron-i-gleba.webp"
+      ],
+      "svgSha256": "fd5a5452b0020dd6df6d1ec915babae3fccdbcc3be7b94d53b7009b788bed3fd",
+      "webpSha256": "40741d5f2f810bd7ca6b31c7973c7d9c0176c98bd4628fc0fcf64cc598c79054"
+    },
+    {
+      "itemId": "batch81-samouk",
+      "candidateId": "batch82-revision",
+      "source": "candidates/batch-82/samouk.png",
+      "sourceSha256": "b53883bc1805f622e5288739ec6bea16da8c41000fac024d5c302bef2dc91ade",
+      "files": [
+        "icons/abilities/samouk.svg",
+        "icons/abilities/samouk.webp"
+      ],
+      "svgSha256": "be0e48d49023d6e33307ef44c9e6ba3f83b5c04556dc942db8530988e5befed4",
+      "webpSha256": "f4ea83813681ff297858a5d87126a340b348131e1ed92c1dc6009c4ca03c8a7b"
+    },
+    {
+      "itemId": "batch81-saper",
+      "candidateId": "batch82-revision",
+      "source": "candidates/batch-82/saper.png",
+      "sourceSha256": "e1c35f74655101241ec3b50059d9b08010ecc18efc357a9720cfe95d9df192ad",
+      "files": [
+        "icons/abilities/saper.svg",
+        "icons/abilities/saper.webp"
+      ],
+      "svgSha256": "fee554da4bccec798ceaedd2240ba024e1c8e17c33b3b849585931dcc98f0ec6",
+      "webpSha256": "0a19b451addb081a4cd3c11eb1823bf3deba410a41ff76c80d6126e3ad32da7f"
+    },
+    {
+      "itemId": "batch82-skuteczny-cios",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-82/skuteczny-cios.png",
+      "sourceSha256": "bc4773d6846a13af3abd370698251bd99c6d46d79a5a7ce0e6f9a8d3d7dc7331",
+      "files": [
+        "icons/abilities/skuteczny-cios.svg",
+        "icons/abilities/skuteczny-cios.webp"
+      ],
+      "svgSha256": "461b6c37503cbd7ad75d6fde10142c573d54728097c2064908469377b31d2e7b",
+      "webpSha256": "275520f4d6362ecebfc2bdd5c3e40ec437272d52da76cc8c3c612d1c95b7460d"
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-16",
+  "batch": 83,
+  "feedbackBeforeSha256": "337d3de42e748e0b603190aeac61f2a1d3ef7284efebf0d08fe3fc277275d36a",
+  "active": [
+    {
+      "id": "batch83-slang",
+      "name": "Slang",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-83/slang.png",
+      "sourceSha256": "3443ad430712d05d4e99ce6e78872f885ef0976514a03b6325a69215ffddab9f",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/slang.svg",
+          "variant": "default",
+          "sourceSha256": "489859c79ecce12c7e1b0f181602b1783d0f6a30b4c2d8a804bb5b86cbb6b03a"
+        }
+      ],
+      "notes": "Replace the triangles with a speech bubble shared by both characters, and some gang symbols or prison tattoo inspired stuff inside",
+      "feedback": {
+        "itemId": "batch83-slang",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Replace the triangles with a speech bubble shared by both characters, and some gang symbols or prison tattoo inspired stuff inside",
+        "updatedAt": "2026-10-15T22:40:02.246Z"
+      }
+    },
+    {
+      "id": "batch83-smakuje-jak-arszenik",
+      "name": "Smakuje jak arszenik",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-83/smakuje-jak-arszenik.png",
+      "sourceSha256": "e8c8445e9cf9842f94cb0f7353058215f4d1ecb8d8c8a9e1c90d62c3ea3cfd9e",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/smakuje-jak-arszenik.svg",
+          "variant": "default",
+          "sourceSha256": "ef80cfb0acf2d2ed390490e28e63dd51cb030f8acc6c023946dd456bfe7735f4"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch83-smakuje-jak-arszenik",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:40:07.355Z"
+      }
+    },
+    {
+      "id": "batch83-sokole-oko",
+      "name": "Sokole oko",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-83/sokole-oko.png",
+      "sourceSha256": "b15845a25851593eba8c99e1ea752d7bd74278988bdbd801c86bbdb8e0af653a",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/sokole-oko.svg",
+          "variant": "default",
+          "sourceSha256": "f77e36828e55586e9b5ef5a3a6ccee4af8e64cc8eac5133e7a09dba91479cff0"
+        }
+      ],
+      "notes": "Almost perfect - but the bird is missing it's lower beak",
+      "feedback": {
+        "itemId": "batch83-sokole-oko",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Almost perfect - but the bird is missing it's lower beak",
+        "updatedAt": "2026-10-15T22:40:31.864Z"
+      }
+    },
+    {
+      "id": "batch83-solowa",
+      "name": "Solówa",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-83/solowa.png",
+      "sourceSha256": "ee34168f6d67192ec9dc1784b971cfe058b80e9aae2b2ade3bfde923306e1ced",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/solowa.svg",
+          "variant": "default",
+          "sourceSha256": "16292b6c0c8db69ab2f8bea7e081414ba89c3a547b6e38d4c3617b090b74a98e"
+        }
+      ],
+      "notes": "The man on the left should be pointing ",
+      "feedback": {
+        "itemId": "batch83-solowa",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "The man on the left should be pointing ",
+        "updatedAt": "2026-10-15T22:41:00.183Z"
+      }
+    },
+    {
+      "id": "batch83-specjalizacja-spec",
+      "name": "Specjalizacja",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-83/specjalizacja-spec.png",
+      "sourceSha256": "885d72903d338d45428f0be7dbec0f9276bffb61ac354ce0ff4e8f5c572bb683",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/specjalizacja-spec.svg",
+          "variant": "default",
+          "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+        }
+      ],
+      "notes": "The calipers are slightly bent and mis-shapen. Simplify and redraw.",
+      "feedback": {
+        "itemId": "batch83-specjalizacja-spec",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "The calipers are slightly bent and mis-shapen. Simplify and redraw.",
+        "updatedAt": "2026-10-15T22:41:26.141Z"
+      }
+    },
+    {
+      "id": "batch83-specjalizacja-zlodziej",
+      "name": "Specjalizacja",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-83/specjalizacja-zlodziej.png",
+      "sourceSha256": "0b79294b8735533267c31bb5b83d9b5f1d55b928cf82dc532ccb3277c92beca4",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/specjalizacja-zlodziej.svg",
+          "variant": "default",
+          "sourceSha256": "aa18e02bf650fcb14d2859147716f4666740b1a736992465f424b179eca3514e"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch83-specjalizacja-zlodziej",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:41:30.327Z"
+      }
+    },
+    {
+      "id": "batch83-spieprzysz-to",
+      "name": "Spieprzysz to!",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-83/spieprzysz-to.png",
+      "sourceSha256": "35afc3122c23364f8a8aa19fea53818f283218e8ee56c5bedda41c735fc18759",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/spieprzysz-to.svg",
+          "variant": "default",
+          "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+        }
+      ],
+      "notes": "No dice. Need different concept. Think vicious mockery, or sneering",
+      "feedback": {
+        "itemId": "batch83-spieprzysz-to",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "No dice. Need different concept. Think vicious mockery, or sneering",
+        "updatedAt": "2026-10-15T22:42:27.018Z"
+      }
+    },
+    {
+      "id": "batch83-sportowiec",
+      "name": "Sportowiec",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-83/sportowiec.png",
+      "sourceSha256": "56441db52c04f8fda39caa835f550334ca0ef42771373ab195cf248634ef567f",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/sportowiec.svg",
+          "variant": "default",
+          "sourceSha256": "37b3ced0ffe7f36e8828abcbc13c7ced4d35f0a9920ed540ededad58cc340a44"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch83-sportowiec",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:42:31.448Z"
+      }
+    },
+    {
+      "id": "batch83-stalowy-nadgarstek",
+      "name": "Stalowy nadgarstek",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-83/stalowy-nadgarstek.png",
+      "sourceSha256": "d5431d53873cd9285076c10ccf351ead29778f86a4f32507e0037a0bc0842aaa",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/stalowy-nadgarstek.svg",
+          "variant": "default",
+          "sourceSha256": "d8c83aacec0f8c7db11eb80e668cda442b05324c6b48f72c2ad871b6f155346e"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch83-stalowy-nadgarstek",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T22:42:40.244Z"
+      }
+    }
+  ]
+}

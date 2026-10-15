@@ -56,3 +56,7 @@ Contact sheets were inspected at 64/32/24/16 px. All 674 candidate pairs pass;
 the gallery has 18 pending cards, 45 options, all new candidates selected and
 no broken images. Evidence: `raw/review-preview.png` and
 `../../../placeholder-pass/progress-82-83.json`.
+
+Saved GM review: seven approvals installed. Rzeźnik and Serwisowanie carry
+their exact saved notes into Batch 84. `reviewed.json` preserves every decision;
+`reviewed-installed.json` records selected sources and delivered hashes.

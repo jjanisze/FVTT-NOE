@@ -1,52 +1,22 @@
 {
   "stats": {
     "date": "2026-10-16",
-    "confirmedPlaceholderFiles": 78,
-    "referencedPlaceholderFiles": 78,
+    "confirmedPlaceholderFiles": 67,
+    "referencedPlaceholderFiles": 67,
     "unmappedPlaceholderFiles": 0,
     "activeVariants": 0,
     "referencedActiveVariants": 0,
-    "abilityPlaceholderFiles": 54,
+    "abilityPlaceholderFiles": 43,
     "missingExpectedFiles": 0,
-    "artSubjects": 78,
+    "artSubjects": 67,
     "byKind": {
       "class": 6,
       "profession": 18,
-      "feature": 54
+      "feature": 43
     },
     "scope": "Exact generator signature plus canonical class/profession definitions; no world or pack reads"
   },
   "placeholders": [
-    {
-      "kind": "feature",
-      "id": "nie-do-zdarcia",
-      "label": "Nie do zdarcia",
-      "owner": "gladiator",
-      "variant": "default",
-      "source": "icons/abilities/nie-do-zdarcia.svg",
-      "sourceSha256": "2415ac9a0eb191d6b5a62d4dfa4cd279193ab027f2b8ccb63424891669c03f1b",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "reputacja",
-      "label": "Reputacja",
-      "owner": "najemnik",
-      "variant": "default",
-      "source": "icons/abilities/reputacja.svg",
-      "sourceSha256": "c6171ebd37c1959b6113941043ad6f1b8d62bcd891256673b15441335d5ba3d2",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "rutyna",
-      "label": "Rutyna",
-      "owner": "zolnierz",
-      "variant": "default",
-      "source": "icons/abilities/rutyna.svg",
-      "sourceSha256": "ec4fbae53cf1be1d52125b9e3d96acd0054cae17fcc33274d72cdf2d59cd1c68",
-      "referenced": true
-    },
     {
       "kind": "feature",
       "id": "rzeznik",
@@ -55,36 +25,6 @@
       "variant": "default",
       "source": "icons/abilities/rzeznik.svg",
       "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "rzuc-bron-i-gleba",
-      "label": "Rzuć broń i gleba!",
-      "owner": "sedzia",
-      "variant": "default",
-      "source": "icons/abilities/rzuc-bron-i-gleba.svg",
-      "sourceSha256": "4c636b9bca6cc749b0096229c7a396284331f794259e6606f8c79d4d69db29a1",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "samouk",
-      "label": "Samouk",
-      "owner": "cwaniak",
-      "variant": "default",
-      "source": "icons/abilities/samouk.svg",
-      "sourceSha256": "5ffbdf20810d44bf8cfe02fd79de99a7faf88e53d10daa78d5dd978967e20b09",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "saper",
-      "label": "Saper",
-      "owner": "zlodziej",
-      "variant": "default",
-      "source": "icons/abilities/saper.svg",
-      "sourceSha256": "21bc5dcff219b13bd1dcd75f6d28c9701502542bedbf504f50d196e8bb7e2d78",
       "referenced": true
     },
     {
@@ -99,32 +39,12 @@
     },
     {
       "kind": "feature",
-      "id": "skuteczny-cios",
-      "label": "Skuteczny cios",
-      "owner": "najemnik",
-      "variant": "default",
-      "source": "icons/abilities/skuteczny-cios.svg",
-      "sourceSha256": "8a0bd8ecaf3bbff77b70dab08d02b5b9a0973086616d17ef48df1a13a004fe8b",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "slang",
       "label": "Slang",
       "owner": "kurier",
       "variant": "default",
       "source": "icons/abilities/slang.svg",
       "sourceSha256": "489859c79ecce12c7e1b0f181602b1783d0f6a30b4c2d8a804bb5b86cbb6b03a",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "smakuje-jak-arszenik",
-      "label": "Smakuje jak arszenik",
-      "owner": "chemik",
-      "variant": "default",
-      "source": "icons/abilities/smakuje-jak-arszenik.svg",
-      "sourceSha256": "ef80cfb0acf2d2ed390490e28e63dd51cb030f8acc6c023946dd456bfe7735f4",
       "referenced": true
     },
     {
@@ -159,42 +79,12 @@
     },
     {
       "kind": "feature",
-      "id": "specjalizacja-zlodziej",
-      "label": "Specjalizacja",
-      "owner": "zlodziej",
-      "variant": "default",
-      "source": "icons/abilities/specjalizacja-zlodziej.svg",
-      "sourceSha256": "aa18e02bf650fcb14d2859147716f4666740b1a736992465f424b179eca3514e",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "spieprzysz-to",
       "label": "Spieprzysz to!",
       "owner": "cwaniak",
       "variant": "default",
       "source": "icons/abilities/spieprzysz-to.svg",
       "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "sportowiec",
-      "label": "Sportowiec",
-      "owner": "zwiadowca",
-      "variant": "default",
-      "source": "icons/abilities/sportowiec.svg",
-      "sourceSha256": "37b3ced0ffe7f36e8828abcbc13c7ced4d35f0a9920ed540ededad58cc340a44",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "stalowy-nadgarstek",
-      "label": "Stalowy nadgarstek",
-      "owner": "wyjadacz-option",
-      "variant": "default",
-      "source": "icons/abilities/stalowy-nadgarstek.svg",
-      "sourceSha256": "d8c83aacec0f8c7db11eb80e668cda442b05324c6b48f72c2ad871b6f155346e",
       "referenced": true
     },
     {
@@ -802,90 +692,12 @@
   "subjects": [
     {
       "kind": "feature",
-      "id": "nie-do-zdarcia",
-      "label": "Nie do zdarcia",
-      "owner": "gladiator",
-      "files": [
-        {
-          "source": "icons/abilities/nie-do-zdarcia.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "reputacja",
-      "label": "Reputacja",
-      "owner": "najemnik",
-      "files": [
-        {
-          "source": "icons/abilities/reputacja.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "rutyna",
-      "label": "Rutyna",
-      "owner": "zolnierz",
-      "files": [
-        {
-          "source": "icons/abilities/rutyna.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "rzeznik",
       "label": "Rzeźnik",
       "owner": "wyjadacz-option",
       "files": [
         {
           "source": "icons/abilities/rzeznik.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "rzuc-bron-i-gleba",
-      "label": "Rzuć broń i gleba!",
-      "owner": "sedzia",
-      "files": [
-        {
-          "source": "icons/abilities/rzuc-bron-i-gleba.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "samouk",
-      "label": "Samouk",
-      "owner": "cwaniak",
-      "files": [
-        {
-          "source": "icons/abilities/samouk.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "saper",
-      "label": "Saper",
-      "owner": "zlodziej",
-      "files": [
-        {
-          "source": "icons/abilities/saper.svg",
           "variant": "default",
           "status": "generated placeholder"
         }
@@ -906,38 +718,12 @@
     },
     {
       "kind": "feature",
-      "id": "skuteczny-cios",
-      "label": "Skuteczny cios",
-      "owner": "najemnik",
-      "files": [
-        {
-          "source": "icons/abilities/skuteczny-cios.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "slang",
       "label": "Slang",
       "owner": "kurier",
       "files": [
         {
           "source": "icons/abilities/slang.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "smakuje-jak-arszenik",
-      "label": "Smakuje jak arszenik",
-      "owner": "chemik",
-      "files": [
-        {
-          "source": "icons/abilities/smakuje-jak-arszenik.svg",
           "variant": "default",
           "status": "generated placeholder"
         }
@@ -984,51 +770,12 @@
     },
     {
       "kind": "feature",
-      "id": "specjalizacja-zlodziej",
-      "label": "Specjalizacja",
-      "owner": "zlodziej",
-      "files": [
-        {
-          "source": "icons/abilities/specjalizacja-zlodziej.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "spieprzysz-to",
       "label": "Spieprzysz to!",
       "owner": "cwaniak",
       "files": [
         {
           "source": "icons/abilities/spieprzysz-to.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "sportowiec",
-      "label": "Sportowiec",
-      "owner": "zwiadowca",
-      "files": [
-        {
-          "source": "icons/abilities/sportowiec.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "stalowy-nadgarstek",
-      "label": "Stalowy nadgarstek",
-      "owner": "wyjadacz-option",
-      "files": [
-        {
-          "source": "icons/abilities/stalowy-nadgarstek.svg",
           "variant": "default",
           "status": "generated placeholder"
         }

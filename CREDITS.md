@@ -190,6 +190,11 @@ Podstępny atak uses the GM-selected older Batch 79 candidate. Exact sources and
 hashes are in `dev/icons/review/candidates/batch-80/reviewed-installed.json`
 and `dev/icons/review/candidates/batch-81/reviewed-installed.json`.
 
+Eleven further GM selections from the Batch 82–83 review were installed on
+2026-10-16 as exact SVG/WEBP masks generated with OpenAI's built-in image tool.
+Sources and hashes are recorded in `dev/icons/review/candidates/batch-82/reviewed-installed.json`
+and `dev/icons/review/candidates/batch-83/reviewed-installed.json`.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

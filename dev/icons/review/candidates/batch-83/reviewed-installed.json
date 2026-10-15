@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-16",
+  "batch": 83,
+  "approvedSubjects": 4,
+  "remainingSubjects": 7,
+  "installed": [
+    {
+      "itemId": "batch83-smakuje-jak-arszenik",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-83/smakuje-jak-arszenik.png",
+      "sourceSha256": "e8c8445e9cf9842f94cb0f7353058215f4d1ecb8d8c8a9e1c90d62c3ea3cfd9e",
+      "files": [
+        "icons/abilities/smakuje-jak-arszenik.svg",
+        "icons/abilities/smakuje-jak-arszenik.webp"
+      ],
+      "svgSha256": "a16c68bf64e5857cc55941841d09a5651fd19d06e4e3c41529140187c4084dd7",
+      "webpSha256": "4f60a17ce93fb24b3542cd929359daef1f58b2fa23550ee393d099885fb41b42"
+    },
+    {
+      "itemId": "batch83-specjalizacja-zlodziej",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-83/specjalizacja-zlodziej.png",
+      "sourceSha256": "0b79294b8735533267c31bb5b83d9b5f1d55b928cf82dc532ccb3277c92beca4",
+      "files": [
+        "icons/abilities/specjalizacja-zlodziej.svg",
+        "icons/abilities/specjalizacja-zlodziej.webp"
+      ],
+      "svgSha256": "b73f6d6aa678bf1fb4aca18ab44d0298b7d2a185cfee825eed5733cd38d1a38f",
+      "webpSha256": "be6954d56a2082e694bff09a96eaea3658111258242a6fe527f9c42173aee0ba"
+    },
+    {
+      "itemId": "batch83-sportowiec",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-83/sportowiec.png",
+      "sourceSha256": "56441db52c04f8fda39caa835f550334ca0ef42771373ab195cf248634ef567f",
+      "files": [
+        "icons/abilities/sportowiec.svg",
+        "icons/abilities/sportowiec.webp"
+      ],
+      "svgSha256": "5257f866b310d097a1de4b444b351054aad2328b60c79ad9bc0667ef60e205a8",
+      "webpSha256": "73cf45d9901fa75f4a34f775777d10d28eae9ae4ab46777601800aec1fa68f09"
+    },
+    {
+      "itemId": "batch83-stalowy-nadgarstek",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-83/stalowy-nadgarstek.png",
+      "sourceSha256": "d5431d53873cd9285076c10ccf351ead29778f86a4f32507e0037a0bc0842aaa",
+      "files": [
+        "icons/abilities/stalowy-nadgarstek.svg",
+        "icons/abilities/stalowy-nadgarstek.webp"
+      ],
+      "svgSha256": "1a5404d220a5c37aaa9a47404afa59879532bde1ab34aaa08d44827755ab5fa7",
+      "webpSha256": "9e7ae98e14e7e942494c24b698f406ba32c0209d5accf644da2cdf4a7768a725"
+    }
+  ]
+}

@@ -37,12 +37,12 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 84** (18 candidates in 2 batches await GM review;
-production replacements require a saved approval).
+**Next batch number: 84** (the previous 342-card queue is resolved; the newly
+audited class/profession placeholder backlog remains and is listed below).
 
 **Icon coverage correction, 2026-10-16:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
-78 generated initials badges (78 canonically referenced art subjects).
+67 generated initials badges (67 canonically referenced art subjects).
 Origins, Sztuczki, M5 actions and fuel-grade deliveries from the earlier pass
 remain delivered; these counts do not cover all module icons. See the class
 placeholder backlog and `class-placeholder-audit.json`. GM wiring and painted
@@ -873,69 +873,53 @@ Evidence: `review/candidates/batch-81/reviewed.json` and `reviewed-installed.jso
 <!-- placeholder-batch-81:end -->
 
 <!-- placeholder-batch-82:start -->
-## Queue (A) — Batch 82 — 9 awaiting GM review
+## Reviewed (A) — Batch 82 — 7 delivered, 2 revisions
 
-One 3×3 atlas in the established white-glyph style; native initials badges remain
-until the GM approves a selected candidate. Exact sources/hashes, generic prompts
-and targets: `review/candidates/batch-82/`.
+Saved GM review: 7 subjects installed as exact approved SVG/WEBP pairs.
+The 2 remaining requests carry their exact notes into Batch 84.
+Evidence: `review/candidates/batch-82/reviewed.json` and `reviewed-installed.json`.
 
-| Cell | Item | Exact SVG delivery targets (+ WEBP) |
-|---|---|---|
-| 1 | Nie do zdarcia (revision) | `icons/abilities/nie-do-zdarcia.svg` |
-| 2 | Reputacja (revision) | `icons/abilities/reputacja.svg` |
-| 3 | Rutyna (revision) | `icons/abilities/rutyna.svg` |
-| 4 | Rzeźnik (revision) | `icons/abilities/rzeznik.svg` |
-| 5 | Rzuć broń i gleba! (revision) | `icons/abilities/rzuc-bron-i-gleba.svg` |
-| 6 | Samouk (revision) | `icons/abilities/samouk.svg` |
-| 7 | Saper (revision) | `icons/abilities/saper.svg` |
-| 8 | Serwisowanie (revision) | `icons/abilities/serwisowanie.svg` |
-| 9 | Skuteczny cios | `icons/abilities/skuteczny-cios.svg` |
-
-Saved revision notes and original selected-source hashes are retained in batch.json
-and revision-feedback-before.json. Old candidates remain available; only these
-revision cards are reset to pending with the new candidate selected.
-
-The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
-nine). Later batch numbers are provisional: saved revisions take priority and
-may add batches. Base/active files share approved pixels; the existing active
-hotbar pulse remains in the code. Old unused active filenames are compatibility
-targets, without new mechanics or wiring. Code, packs and world state are untouched.
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Nie do zdarcia | `icons/abilities/nie-do-zdarcia.svg` | **done** |
+| 2 | Reputacja | `icons/abilities/reputacja.svg` | **done** |
+| 3 | Rutyna | `icons/abilities/rutyna.svg` | **done** |
+| 4 | Rzeźnik | `icons/abilities/rzeznik.svg` | Revision in Batch 84 |
+| 5 | Rzuć broń i gleba! | `icons/abilities/rzuc-bron-i-gleba.svg` | **done** |
+| 6 | Samouk | `icons/abilities/samouk.svg` | **done** |
+| 7 | Saper | `icons/abilities/saper.svg` | **done** |
+| 8 | Serwisowanie | `icons/abilities/serwisowanie.svg` | Revision in Batch 84 |
+| 9 | Skuteczny cios | `icons/abilities/skuteczny-cios.svg` | **done** |
 
 <!-- placeholder-batch-82:end -->
 
 <!-- placeholder-batch-83:start -->
-## Queue (A) — Batch 83 — 9 awaiting GM review
+## Reviewed (A) — Batch 83 — 4 delivered, 5 revisions
 
-One 3×3 atlas in the established white-glyph style; native initials badges remain
-until the GM approves a selected candidate. Exact sources/hashes, generic prompts
-and targets: `review/candidates/batch-83/`.
+Saved GM review: 4 subjects installed as exact approved SVG/WEBP pairs.
+The 5 remaining requests carry their exact notes into Batch 84.
+Evidence: `review/candidates/batch-83/reviewed.json` and `reviewed-installed.json`.
 
-| Cell | Item | Exact SVG delivery targets (+ WEBP) |
-|---|---|---|
-| 1 | Slang | `icons/abilities/slang.svg` |
-| 2 | Smakuje jak arszenik | `icons/abilities/smakuje-jak-arszenik.svg` |
-| 3 | Sokole oko | `icons/abilities/sokole-oko.svg` |
-| 4 | Solówa | `icons/abilities/solowa.svg` |
-| 5 | Specjalizacja | `icons/abilities/specjalizacja-spec.svg` |
-| 6 | Specjalizacja | `icons/abilities/specjalizacja-zlodziej.svg` |
-| 7 | Spieprzysz to! | `icons/abilities/spieprzysz-to.svg` |
-| 8 | Sportowiec | `icons/abilities/sportowiec.svg` |
-| 9 | Stalowy nadgarstek | `icons/abilities/stalowy-nadgarstek.svg` |
-
-The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
-nine). Later batch numbers are provisional: saved revisions take priority and
-may add batches. Base/active files share approved pixels; the existing active
-hotbar pulse remains in the code. Old unused active filenames are compatibility
-targets, without new mechanics or wiring. Code, packs and world state are untouched.
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Slang | `icons/abilities/slang.svg` | Revision in Batch 84 |
+| 2 | Smakuje jak arszenik | `icons/abilities/smakuje-jak-arszenik.svg` | **done** |
+| 3 | Sokole oko | `icons/abilities/sokole-oko.svg` | Revision in Batch 84 |
+| 4 | Solówa | `icons/abilities/solowa.svg` | Revision in Batch 84 |
+| 5 | Specjalizacja | `icons/abilities/specjalizacja-spec.svg` | Revision in Batch 84 |
+| 6 | Specjalizacja | `icons/abilities/specjalizacja-zlodziej.svg` | **done** |
+| 7 | Spieprzysz to! | `icons/abilities/spieprzysz-to.svg` | Revision in Batch 84 |
+| 8 | Sportowiec | `icons/abilities/sportowiec.svg` | **done** |
+| 9 | Stalowy nadgarstek | `icons/abilities/stalowy-nadgarstek.svg` | **done** |
 
 <!-- placeholder-batch-83:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source
 
-Audit 2026-10-16: **78 generated initials SVGs**, including 6 classes,
-18 professions and 54 ability files. 0 ability files are active-state
-variants. Canonically referenced art requests below represent **78 subjects**;
+Audit 2026-10-16: **67 generated initials SVGs**, including 6 classes,
+18 professions and 43 ability files. 0 ability files are active-state
+variants. Canonically referenced art requests below represent **67 subjects**;
 base/active variants share a subject and must keep their existing exact filenames.
 These were outside the previous 342-card generation queue. File existence was not
 evidence of finished artwork. Native badges were confirmed against the exact
@@ -948,24 +932,13 @@ and the next free batch; fresh GM approval is required before replacement.
 
 | Kind | Subject | Owner | Exact SVG targets (+ WEBP after approval) | Status |
 |---|---|---|---|---|
-| feature | Nie do zdarcia | gladiator | `icons/abilities/nie-do-zdarcia.svg` | Needs art |
-| feature | Reputacja | najemnik | `icons/abilities/reputacja.svg` | Needs art |
-| feature | Rutyna | zolnierz | `icons/abilities/rutyna.svg` | Needs art |
 | feature | Rzeźnik | wyjadacz-option | `icons/abilities/rzeznik.svg` | Needs art |
-| feature | Rzuć broń i gleba! | sedzia | `icons/abilities/rzuc-bron-i-gleba.svg` | Needs art |
-| feature | Samouk | cwaniak | `icons/abilities/samouk.svg` | Needs art |
-| feature | Saper | zlodziej | `icons/abilities/saper.svg` | Needs art |
 | feature | Serwisowanie | monter | `icons/abilities/serwisowanie.svg` | Needs art |
-| feature | Skuteczny cios | najemnik | `icons/abilities/skuteczny-cios.svg` | Needs art |
 | feature | Slang | kurier | `icons/abilities/slang.svg` | Needs art |
-| feature | Smakuje jak arszenik | chemik | `icons/abilities/smakuje-jak-arszenik.svg` | Needs art |
 | feature | Sokole oko | wyjadacz-option | `icons/abilities/sokole-oko.svg` | Needs art |
 | feature | Solówa | brutal | `icons/abilities/solowa.svg` | Needs art |
 | feature | Specjalizacja | spec | `icons/abilities/specjalizacja-spec.svg` | Needs art |
-| feature | Specjalizacja | zlodziej | `icons/abilities/specjalizacja-zlodziej.svg` | Needs art |
 | feature | Spieprzysz to! | cwaniak | `icons/abilities/spieprzysz-to.svg` | Needs art |
-| feature | Sportowiec | zwiadowca | `icons/abilities/sportowiec.svg` | Needs art |
-| feature | Stalowy nadgarstek | wyjadacz-option | `icons/abilities/stalowy-nadgarstek.svg` | Needs art |
 | feature | Strzelec | zabojca | `icons/abilities/strzelec.svg` | Needs art |
 | feature | Stylówa | gwiazda | `icons/abilities/stylowa.svg` | Needs art |
 | feature | Szaleńcza szarża | brutal | `icons/abilities/szalencza-szarza.svg` | Needs art |

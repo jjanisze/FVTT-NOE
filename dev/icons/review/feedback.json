@@ -2803,10 +2803,10 @@
     },
     "batch78-nie-do-zdarcia": {
       "itemId": "batch78-nie-do-zdarcia",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch82-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T22:35:13.595Z"
+      "updatedAt": "2026-10-15T22:36:40.865Z"
     },
     "batch78-nie-klekam": {
       "itemId": "batch78-nie-klekam",
@@ -2908,10 +2908,10 @@
     },
     "batch80-reputacja": {
       "itemId": "batch80-reputacja",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch82-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T22:35:13.596Z"
+      "updatedAt": "2026-10-15T22:36:49.082Z"
     },
     "batch81-rewolwerowiec": {
       "itemId": "batch81-rewolwerowiec",
@@ -2929,45 +2929,45 @@
     },
     "batch81-rutyna": {
       "itemId": "batch81-rutyna",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch82-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T22:35:13.596Z"
+      "updatedAt": "2026-10-15T22:36:56.702Z"
     },
     "batch81-rzeznik": {
       "itemId": "batch81-rzeznik",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch82-revision",
-      "notes": "",
-      "updatedAt": "2026-10-15T22:35:13.597Z"
+      "notes": "Add a knife into the free, lower hand. Change the expression of the figure into a threatened, angry or afraid one",
+      "updatedAt": "2026-10-15T22:37:48.108Z"
     },
     "batch81-rzuc-bron-i-gleba": {
       "itemId": "batch81-rzuc-bron-i-gleba",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch82-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T22:35:13.597Z"
+      "updatedAt": "2026-10-15T22:37:58.792Z"
     },
     "batch81-samouk": {
       "itemId": "batch81-samouk",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch82-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T22:35:13.597Z"
+      "updatedAt": "2026-10-15T22:38:04.756Z"
     },
     "batch81-saper": {
       "itemId": "batch81-saper",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch82-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T22:35:13.598Z"
+      "updatedAt": "2026-10-15T22:38:17.382Z"
     },
     "batch81-serwisowanie": {
       "itemId": "batch81-serwisowanie",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch82-revision",
-      "notes": "",
-      "updatedAt": "2026-10-15T22:35:13.598Z"
+      "notes": "Good concept, give it another try.",
+      "updatedAt": "2026-10-15T22:38:41.788Z"
     },
     "batch81-skrytka": {
       "itemId": "batch81-skrytka",
@@ -2975,6 +2975,76 @@
       "candidateId": "atlas-a",
       "notes": "",
       "updatedAt": "2026-10-15T22:27:29.407Z"
+    },
+    "batch82-skuteczny-cios": {
+      "itemId": "batch82-skuteczny-cios",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:38:56.878Z"
+    },
+    "batch83-slang": {
+      "itemId": "batch83-slang",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Replace the triangles with a speech bubble shared by both characters, and some gang symbols or prison tattoo inspired stuff inside",
+      "updatedAt": "2026-10-15T22:40:02.246Z"
+    },
+    "batch83-smakuje-jak-arszenik": {
+      "itemId": "batch83-smakuje-jak-arszenik",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:40:07.355Z"
+    },
+    "batch83-sokole-oko": {
+      "itemId": "batch83-sokole-oko",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Almost perfect - but the bird is missing it's lower beak",
+      "updatedAt": "2026-10-15T22:40:31.864Z"
+    },
+    "batch83-solowa": {
+      "itemId": "batch83-solowa",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "The man on the left should be pointing ",
+      "updatedAt": "2026-10-15T22:41:00.183Z"
+    },
+    "batch83-specjalizacja-spec": {
+      "itemId": "batch83-specjalizacja-spec",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "The calipers are slightly bent and mis-shapen. Simplify and redraw.",
+      "updatedAt": "2026-10-15T22:41:26.141Z"
+    },
+    "batch83-specjalizacja-zlodziej": {
+      "itemId": "batch83-specjalizacja-zlodziej",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:41:30.327Z"
+    },
+    "batch83-spieprzysz-to": {
+      "itemId": "batch83-spieprzysz-to",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "No dice. Need different concept. Think vicious mockery, or sneering",
+      "updatedAt": "2026-10-15T22:42:27.018Z"
+    },
+    "batch83-sportowiec": {
+      "itemId": "batch83-sportowiec",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:42:31.448Z"
+    },
+    "batch83-stalowy-nadgarstek": {
+      "itemId": "batch83-stalowy-nadgarstek",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T22:42:40.244Z"
     }
   }
 }
