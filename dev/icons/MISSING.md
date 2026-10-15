@@ -37,8 +37,8 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 76** (the previous 342-card queue is resolved; the newly
-audited class/profession placeholder backlog remains and is listed below).
+**Next batch number: 78** (18 candidates in 2 batches await GM review;
+production replacements require a saved approval).
 
 **Icon coverage correction, 2026-10-15:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
@@ -745,6 +745,64 @@ Evidence: `review/candidates/batch-75/reviewed.json` and `reviewed-installed.jso
 | 9 | Moja prawa ręka | `icons/abilities/moja-prawa-reka.svg` | **done** |
 
 <!-- placeholder-batch-75:end -->
+
+<!-- placeholder-batch-76:start -->
+## Queue (A) — Batch 76 — 9 awaiting GM review
+
+One 3×3 atlas in the established white-glyph style; native initials badges remain
+until the GM approves a selected candidate. Exact sources/hashes, generic prompts
+and targets: `review/candidates/batch-76/`.
+
+| Cell | Item | Exact SVG delivery targets (+ WEBP) |
+|---|---|---|
+| 1 | Jak dbasz, tak masz (revision) | `icons/abilities/jak-dbasz-tak-masz.svg` |
+| 2 | Jeździec (revision) | `icons/abilities/jezdziec.svg` |
+| 3 | Kłusownik (revision) | `icons/abilities/klusownik.svg` |
+| 4 | Kondycha (revision) | `icons/abilities/kondycha.svg`; `icons/abilities/kondycha_active.svg` |
+| 5 | Łapiduch (revision) | `icons/abilities/lapiduch.svg` |
+| 6 | Łaska boża (revision) | `icons/abilities/laska-boza.svg` |
+| 7 | Łeb jak sklep (revision) | `icons/abilities/leb-jak-sklep.svg` |
+| 8 | Maszyna do zabijania (revision) | `icons/abilities/maszyna-do-zabijania.svg` |
+| 9 | Mechanika (revision) | `icons/abilities/mechanika.svg` |
+
+Saved revision notes and original selected-source hashes are retained in batch.json
+and revision-feedback-before.json. Old candidates remain available; only these
+revision cards are reset to pending with the new candidate selected.
+
+The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
+nine). Later batch numbers are provisional: saved revisions take priority and
+may add batches. Base/active files share approved pixels; the existing active
+hotbar pulse remains in the code. Old unused active filenames are compatibility
+targets, without new mechanics or wiring. Code, packs and world state are untouched.
+
+<!-- placeholder-batch-76:end -->
+
+<!-- placeholder-batch-77:start -->
+## Queue (A) — Batch 77 — 9 awaiting GM review
+
+One 3×3 atlas in the established white-glyph style; native initials badges remain
+until the GM approves a selected candidate. Exact sources/hashes, generic prompts
+and targets: `review/candidates/batch-77/`.
+
+| Cell | Item | Exact SVG delivery targets (+ WEBP) |
+|---|---|---|
+| 1 | Motywacja | `icons/abilities/motywacja.svg` |
+| 2 | Mój biom | `icons/abilities/moj-biom.svg` |
+| 3 | Mój bóg kule nosi | `icons/abilities/moj-bog-kule-nosi.svg` |
+| 4 | Mój wróg | `icons/abilities/moj-wrog.svg` |
+| 5 | Mój wróg: Ludzie | `icons/abilities/moj-wrog-ludzie.svg` |
+| 6 | Mój wróg: Maszyny | `icons/abilities/moj-wrog-maszyny.svg` |
+| 7 | Mój wróg: Mutanty | `icons/abilities/moj-wrog-mutanty.svg` |
+| 8 | Mój wróg: Potwory | `icons/abilities/moj-wrog-potwory.svg` |
+| 9 | Mój wróg: Zwierzęta | `icons/abilities/moj-wrog-zwierzeta.svg` |
+
+The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
+nine). Later batch numbers are provisional: saved revisions take priority and
+may add batches. Base/active files share approved pixels; the existing active
+hotbar pulse remains in the code. Old unused active filenames are compatibility
+targets, without new mechanics or wiring. Code, packs and world state are untouched.
+
+<!-- placeholder-batch-77:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source

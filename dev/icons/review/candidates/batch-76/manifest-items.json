@@ -1,0 +1,344 @@
+{
+  "title": "Batch 76 · 9 awaiting GM review",
+  "updated": "2026-10-15",
+  "items": [
+    {
+      "id": "batch72-jak-dbasz-tak-masz",
+      "name": "Jak dbasz, tak masz",
+      "tier": "Batch 76 · Żołnierz",
+      "batch": 76,
+      "placeholderKey": "feature:jak-dbasz-tak-masz",
+      "target": "icons/abilities/jak-dbasz-tak-masz.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/jak-dbasz-tak-masz.svg",
+          "variant": "default",
+          "sourceSha256": "1858ccf0a0018938a0f1d49497cc3414762297e7176c434791d8511f2d06b632"
+        }
+      ],
+      "context": "Class/profession ability: Jak dbasz, tak masz; owner Żołnierz. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Nikt nie potrafi składać, rozkładać i czyścić broni szybciej od ciebie. Robisz to z zamkniętymi oczami, paląc papierosa i śpiewając Oh my darling. Broń palna w twoich rękach nigdy się nie zacina, a jeśli już masz taką w dłoniach, wystarczy ci Akcja Bonusowa, żeby ją naprawić. Z kolei uszkodzoną broń białą, naprawiasz w czasie Krótkiego odpoczynku. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 1. Preserve handgun, two hands, wiping cloth and oil can. Fix the HOLDING HAND'S INDEX FINGER emphatically: ONE long STRAIGHT index finger lies ON THE OUTSIDE TOP EDGE OF THE TRIGGER GUARD and extends FORWARD OVER AND BEYOND THE FRONT OF THAT GUARD toward the muzzle by a full fingertip length. Show the finger as a clear horizontal white bar immediately above the guard, with its entire tip visibly PAST the guard's front curve. The trigger guard's enclosed opening remains an EMPTY BLACK OVAL below that straight finger, with NO fingertip curled into the hole and no contact with the trigger. Remaining fingers wrap the grip naturally. Keep the wiping hand above the slide; no new hand, finger or weapon.",
+      "current": {
+        "src": "/icons/abilities/jak-dbasz-tak-masz.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch76-revision",
+          "label": "Batch 76 · revised Jak dbasz, tak masz",
+          "src": "candidates/batch-76/jak-dbasz-tak-masz.png",
+          "note": "REVISION of reference cell 1. Preserve handgun, two hands, wiping cloth and oil can. Fix the HOLDING HAND'S INDEX FINGER emphatically: ONE long STRAIGHT index finger lies ON THE OUTSIDE TOP EDGE OF THE TRIGGER GUARD and extends FORWARD OVER AND BEYOND THE FRONT OF THAT GUARD toward the muzzle by a full fingertip length. Show the finger as a clear horizontal white bar immediately above the guard, with its entire tip visibly PAST the guard's front curve. The trigger guard's enclosed opening remains an EMPTY BLACK OVAL below that straight finger, with NO fingertip curled into the hole and no contact with the trigger. Remaining fingers wrap the grip naturally. Keep the wiping hand above the slide; no new hand, finger or weapon."
+        },
+        {
+          "id": "batch74-revision",
+          "label": "Batch 74 · revised Jak dbasz, tak masz",
+          "src": "candidates/batch-74/jak-dbasz-tak-masz.png",
+          "note": "REVISION of reference cell 4. Preserve the complete handgun, supporting bare hand, other hand wiping with a cloth, and small oil can. Correct ONLY the holding hand's INDEX FINGER: straighten it along the OUTSIDE UPPER EDGE OF THE TRIGGER GUARD, clearly resting on the outer guard/frame. It must stay ENTIRELY OUTSIDE the black trigger-guard opening, with an obvious uninterrupted black gap INSIDE the guard around the untouched trigger. No fingertip curls onto or touches the trigger. The remaining fingers wrap naturally around the grip and the thumb stays coherent. Keep the wiping hand and rag above the slide. No extra finger, hand, weapon or text."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 72 · Jak dbasz, tak masz",
+          "src": "candidates/batch-72/jak-dbasz-tak-masz.png",
+          "note": "One robust handgun held horizontally while ONE complete bare hand uses a folded cleaning cloth to wipe the slide/barrel. A small plain spouted oil can sits just below, with ONE broad drop beside the spout. A coherent practical firearm maintenance scene. Complete gun muzzle, grip, hand and cloth, broad black gaps. No loose gun parts, text, logos, tiny screws, face, cigarette, decoration or extra hands."
+        }
+      ]
+    },
+    {
+      "id": "batch73-jezdziec",
+      "name": "Jeździec",
+      "tier": "Batch 76 · wyjadacz-option",
+      "batch": 76,
+      "placeholderKey": "feature:jezdziec",
+      "target": "icons/abilities/jezdziec.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/jezdziec.svg",
+          "variant": "default",
+          "sourceSha256": "53a7bf1784b2ef9efc618431127aba39c0d53875bf9e974bc2020a40ce759507"
+        }
+      ],
+      "context": "Class/profession ability: Jeździec; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy dosiadasz wierzchowca, nie musisz używać rąk, żeby nim kierować. Nie otrzymujesz Utrudnienia do Testów Ataków dystansowych związanego z niestabilnym podłożem, kiedy na nim jedziesz. Wsiadanie i zsiadanie z wierzchowca kosztuje cię tylko 1,5 metra ruchu. Trudność Trafienia twojego wierzchowca zwiększa się o wartość twojej Premii Biegłości. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 2. Redraw the rider as a generic adult COWBOY SHOWMAN on the same complete realistic horse. The rider sits naturally and proudly balanced in the saddle, raises ONE plain broad-brimmed cowboy HAT above the head in a showman salute, and extends the other arm loosely outward in a confident flourish. Head remains small and featureless, ordinary adult torso, coherent shoulders/elbows, hips seated, natural bent knee and boot in the stirrup. No hands holding reins. Horse in a poised side-view stance with one foreleg slightly lifted, four complete natural legs and one tail. Generic western showmanship, no recognizable actor or character, beard portrait, anime, toy proportions or tiny tack.",
+      "current": {
+        "src": "/icons/abilities/jezdziec.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch76-revision",
+          "label": "Batch 76 · revised Jeździec",
+          "src": "candidates/batch-76/jezdziec.png",
+          "note": "REVISION of reference cell 2. Redraw the rider as a generic adult COWBOY SHOWMAN on the same complete realistic horse. The rider sits naturally and proudly balanced in the saddle, raises ONE plain broad-brimmed cowboy HAT above the head in a showman salute, and extends the other arm loosely outward in a confident flourish. Head remains small and featureless, ordinary adult torso, coherent shoulders/elbows, hips seated, natural bent knee and boot in the stirrup. No hands holding reins. Horse in a poised side-view stance with one foreleg slightly lifted, four complete natural legs and one tail. Generic western showmanship, no recognizable actor or character, beard portrait, anime, toy proportions or tiny tack."
+        },
+        {
+          "id": "batch74-revision",
+          "label": "Batch 74 · revised Jeździec",
+          "src": "candidates/batch-74/jezdziec.png",
+          "note": "REVISION of reference cell 5. Keep the realistic horse in complete side view, but REDRAW THE RIDER with natural seated adult anatomy. Hips sit securely in the saddle, pelvis under the chest, upright torso with a slight natural forward balance, ordinary neck and small featureless head. The visible near thigh slopes DOWN-FORWARD from the hip; a real knee bend leads to the lower leg descending DOWN-BACK, with a complete foot near the stirrup below the saddle. The far leg is mostly hidden behind the horse. Forearms rest naturally forward on the thighs/saddle front; both hands are relaxed and DO NOT hold reins. No stiff arms-akimbo pose, elongated torso, tiny dangling mannequin legs or angular puppet silhouette. Preserve the complete four-legged horse, tail and saddle. Broad natural silhouette, no face portrait, anime or tiny tack."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 73 · Jeździec",
+          "src": "candidates/batch-73/jezdziec.png",
+          "note": "Full side view of ONE realistic adult HORSE with ONE generic adult rider seated confidently in the saddle. The rider's hands rest at their hips, clearly not holding reins; the horse moves in a composed walking stride with four complete legs and one tail. Broad simplified natural animal and human anatomy, smooth featureless rider head. No pony/cartoon proportions, ornate tack, weapon, face portrait, extra rider or tiny reins."
+        }
+      ]
+    },
+    {
+      "id": "batch73-klusownik",
+      "name": "Kłusownik",
+      "tier": "Batch 76 · Zwiadowca",
+      "batch": 76,
+      "placeholderKey": "feature:klusownik",
+      "target": "icons/abilities/klusownik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/klusownik.svg",
+          "variant": "default",
+          "sourceSha256": "6fff1379ce2c2409ce200ab84a898fc371a8434b6a6b6808baf68b77df161091"
+        }
+      ],
+      "context": "Class/profession ability: Kłusownik; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Masz doświadczenie w zakładaniu pułapek. Wystarczy chwila, żeby z tego, co masz pod ręką, zmontować coś przydatnego. Jeśli masz zestaw narzędzi małego kłusownika, poświęcisz minutę i wykonasz Test Survivalu lub narzędzi małego kłusownika, możesz zbudować pułapkę. Skonsultuj jej szczegóły i działanie z MG. ST zauważenia pułapki, wyzwolenia się z niej lub uniknięcia części obrażeń, to 8 plus twój modyfikator Mądrości i Premia Biegłości. ST zakładania i działanie przykładowych pułapek podajemy w ta Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 3. Completely simplify the trap to TWO PARTS in clean TOP-DOWN view: one CONTINUOUS SEMICIRCULAR STEEL JAW on the LEFT and one CONTINUOUS SEMICIRCULAR JAW on the RIGHT. Each jaw has THREE broad teeth attached directly to that SAME uninterrupted curved steel arc. No split tooth clusters or four quarter-jaws. Both jaw ends attach to TWO clear round hinge pivots on a CENTRAL VERTICAL AXIS at the TOP and BOTTOM of the oval. A single round PRESSURE PLATE sits in the exact MIDDLE between left and right jaws, connected to the central base by one short trigger lever. Common hinge mechanism and complete base; simple symmetric functional two-jaw trap. Remove chain and unnecessary springs to keep the mechanism clear. No animal, injury, gore, floating teeth or text.",
+      "current": {
+        "src": "/icons/abilities/klusownik.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch76-revision",
+          "label": "Batch 76 · revised Kłusownik",
+          "src": "candidates/batch-76/klusownik.png",
+          "note": "REVISION of reference cell 3. Completely simplify the trap to TWO PARTS in clean TOP-DOWN view: one CONTINUOUS SEMICIRCULAR STEEL JAW on the LEFT and one CONTINUOUS SEMICIRCULAR JAW on the RIGHT. Each jaw has THREE broad teeth attached directly to that SAME uninterrupted curved steel arc. No split tooth clusters or four quarter-jaws. Both jaw ends attach to TWO clear round hinge pivots on a CENTRAL VERTICAL AXIS at the TOP and BOTTOM of the oval. A single round PRESSURE PLATE sits in the exact MIDDLE between left and right jaws, connected to the central base by one short trigger lever. Common hinge mechanism and complete base; simple symmetric functional two-jaw trap. Remove chain and unnecessary springs to keep the mechanism clear. No animal, injury, gore, floating teeth or text."
+        },
+        {
+          "id": "batch74-revision",
+          "label": "Batch 74 · revised Kłusownik",
+          "src": "candidates/batch-74/klusownik.png",
+          "note": "REVISION of reference cell 6. REDRAW the open steel leg-hold trap as a coherent functional device in three-quarter top view. TWO opposing semicircular jaw halves attach symmetrically to ONE straight CENTRAL CROSSBAR/AXLE. Show LARGE ROUND PIVOT HINGES at its two ends, aligned on the SAME axis through the middle of the trap, visibly joining both jaws to the base. A single round pressure pan sits just ABOVE the centre of this axle, with its short trigger lever visibly connected to a broad leaf-spring base beneath. The jaws form a symmetrical open oval around that central mechanism, with only three broad teeth per half. Add a short two-link chain attached to the solid base. Clear common hinge mechanism, no floating crown jaws, impossible disconnected jaw halves, scattered parts or fine springs. No animal, injury, gore or text."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 73 · Kłusownik",
+          "src": "candidates/batch-73/klusownik.png",
+          "note": "ONE open practical steel LEG-HOLD TRAP seen slightly from above: two broad curved jaws with just THREE large blunt teeth each, a large central pressure plate and a short sturdy chain of THREE links. Coherent hinged functional device with generous black gaps and complete jaws. No caught animal, human, injury, blood, gore, labels, fine springs or scattered parts."
+        }
+      ]
+    },
+    {
+      "id": "batch74-kondycha",
+      "name": "Kondycha",
+      "tier": "Batch 76 · Twardziel",
+      "batch": 76,
+      "placeholderKey": "feature:kondycha",
+      "target": "icons/abilities/kondycha.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/kondycha.svg",
+          "variant": "default",
+          "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f"
+        },
+        {
+          "source": "icons/abilities/kondycha_active.svg",
+          "variant": "legacy-active",
+          "sourceSha256": "fe94e499463c22895956f7b690560a97d315a576f5dc27d3d5140c5010c7fbf1"
+        }
+      ],
+      "context": "Class/profession ability: Kondycha; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy brakuje ci sił, bierzesz głęboki oddech i walczysz dalej. W Akcji Bonusowej możesz odzyskać Punkty Wytrzymałości w liczbie 1k8 + twój poziom Twardziela. Możesz skorzystać z tej zdolności tyle razy, ile wynosi twój modyfikator Kondycji. Zdolność odnawia się po ukończeniu Długiego odpoczynku. The approved glyph is shared by these exact base/active filenames. Existing hotbar code supplies the active pulsing frame; no mechanics or styling code changes.",
+      "request": "REVISION of reference cell 4. Replace the relieved breathing pose with a determined generic adult who has JUST STOOD BACK UP TO CONTINUE FIGHTING. Three-quarter/full-body view: feet planted apart, one knee still slightly bent from rising, one complete hand pushes off the thigh and the other hangs clenched at the side. Torso leans a little forward; HEAD LOWERED with the eyes looking resolutely upward from beneath one broad SOLID BLACK BROW SHADOW and two narrow white eye cuts. The attitude is defiant 'this is not over', never relieved or sighing. Plain practical shirt and trousers, ordinary rugged ANDROGYNOUS adult proportions, minimal face detail. Remove breath arcs and hand-on-heart gesture. No anime eyes, exaggerated jaw, readable words, grey shading, extra limbs or gruff portrait close-up.",
+      "current": {
+        "src": "/icons/abilities/kondycha.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch76-revision",
+          "label": "Batch 76 · revised Kondycha",
+          "src": "candidates/batch-76/kondycha.png",
+          "note": "REVISION of reference cell 4. Replace the relieved breathing pose with a determined generic adult who has JUST STOOD BACK UP TO CONTINUE FIGHTING. Three-quarter/full-body view: feet planted apart, one knee still slightly bent from rising, one complete hand pushes off the thigh and the other hangs clenched at the side. Torso leans a little forward; HEAD LOWERED with the eyes looking resolutely upward from beneath one broad SOLID BLACK BROW SHADOW and two narrow white eye cuts. The attitude is defiant 'this is not over', never relieved or sighing. Plain practical shirt and trousers, ordinary rugged ANDROGYNOUS adult proportions, minimal face detail. Remove breath arcs and hand-on-heart gesture. No anime eyes, exaggerated jaw, readable words, grey shading, extra limbs or gruff portrait close-up."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 74 · Kondycha",
+          "src": "candidates/batch-74/kondycha.png",
+          "note": "One generic adult upper body in a plain loose shirt, taking a restorative DEEP BREATH. One complete hand rests flat over the sternum; TWO broad expanding curved breath arcs flank the upper chest. Smooth featureless head slightly raised, natural ordinary build and coherent neck/shoulders. Calm recovery of stamina, not a roaring bodybuilder or gruff portrait. No medical cross, heart emblem, numbers, plus sign, swoosh, anime expression or fine ribs."
+        }
+      ]
+    },
+    {
+      "id": "batch75-lapiduch",
+      "name": "Łapiduch",
+      "tier": "Batch 76 · Medyk",
+      "batch": 76,
+      "placeholderKey": "feature:lapiduch",
+      "target": "icons/abilities/lapiduch.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/lapiduch.svg",
+          "variant": "default",
+          "sourceSha256": "913fffceec2f2490e4b84cdb4ea2c01368fc2d6d8cf518b701f681ea0286447b"
+        }
+      ],
+      "context": "Class/profession ability: Łapiduch; owner Medyk. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy inni tracą nadzieję, ty wciąż walczysz o życie pacjenta. Podejmujesz reanimację i liczysz na cud, uciskając serce i robiąc usta-usta. Reanimacja trwa 1 minutę, a jej sukces zależy od twoich umiejętności i czasu, który upłynął od zatrzymania akcji serca. Udana akcja reanimacji przywraca pacjentowi funkcje życiowe, lecz jego stan wciąż nie jest stabilny. Ta zdolność nie działa na pacjenta, który otrzymał Olbrzymie obrażenia (patrz rozdział Walka s. 34). CZAS OD USTANIA TĘTNA ST TESTU MEDYCYN Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 5. Keep CPR chest compressions, but ADD a complete plain adult PATIENT HEAD naturally joined to the neck and shoulders, with TWO simple BLACK X-SHAPED EYES as explicitly requested. The patient lies on their back, viewed from above, head at the TOP. ROTATE the correctly STACKED COMPRESSING HANDS 90 degrees: both rescuer forearms now enter HORIZONTALLY FROM THE RIGHT, fingers pointing LEFT, with the lower palm heel centered on the sternum and the other hand stacked on it. Head stays clearly above the hands. Coherent fingers, wrists, neck and shoulders; exactly one patient and two rescuer hands, no extra limbs. Sober broad white stencil, no anime face, wound, blood, gore or written labels; X eyes are facial marks only.",
+      "current": {
+        "src": "/icons/abilities/lapiduch.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch76-revision",
+          "label": "Batch 76 · revised Łapiduch",
+          "src": "candidates/batch-76/lapiduch.png",
+          "note": "REVISION of reference cell 5. Keep CPR chest compressions, but ADD a complete plain adult PATIENT HEAD naturally joined to the neck and shoulders, with TWO simple BLACK X-SHAPED EYES as explicitly requested. The patient lies on their back, viewed from above, head at the TOP. ROTATE the correctly STACKED COMPRESSING HANDS 90 degrees: both rescuer forearms now enter HORIZONTALLY FROM THE RIGHT, fingers pointing LEFT, with the lower palm heel centered on the sternum and the other hand stacked on it. Head stays clearly above the hands. Coherent fingers, wrists, neck and shoulders; exactly one patient and two rescuer hands, no extra limbs. Sober broad white stencil, no anime face, wound, blood, gore or written labels; X eyes are facial marks only."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 75 · Łapiduch",
+          "src": "candidates/batch-75/lapiduch.png",
+          "note": "Two complete adult hands STACKED CORRECTLY for CPR, with one palm heel pressing at the centre of ONE plain adult chest seen from above. The upper hand covers the lower hand naturally; two short broad downward compression marks show pressure on the sternum. Only shoulders and upper chest of the patient, no patient's head or face, no extra hands or fingers. Coherent sober resuscitation diagram, broad black gaps and natural hand anatomy, no injuries, blood, gore, text or tiny anatomy."
+        }
+      ]
+    },
+    {
+      "id": "batch75-laska-boza",
+      "name": "Łaska boża",
+      "tier": "Batch 76 · kaznodzieja-nowej-ery",
+      "batch": 76,
+      "placeholderKey": "feature:laska-boza",
+      "target": "icons/abilities/laska-boza.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/laska-boza.svg",
+          "variant": "default",
+          "sourceSha256": "e5324a36a95884b60732d688880fea6f1243709fbc4a38e8a3e644b87f6802a5"
+        }
+      ],
+      "context": "Class/profession ability: Łaska boża; owner kaznodzieja-nowej-ery. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. W Akcji Bonusowej możesz natchnąć swoich sojuszników w promieniu 18 metrów łaską bożą. Sojusznicy muszą słyszeć twój głos. Obdarzony Łaską bożą otrzymuje +1k4 do Testów Ataków i Rzutów Obronnych, do początku twojej następnej tury. Możesz obdarzyć tą premią tylu sojuszników, ile masz poziomów Cwaniaka. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 6. Use ONE SINGLE LARGE GODLY HAND emerging downward from ONE simple broad CLOUD at the top, palm open in blessing. Remove the second old blessing hand. Add MANNA FALLING FROM HEAVEN: THREE distinct small bread pieces/loaves descend from the divine hand toward THREE tiny plain allied head-and-shoulder silhouettes below. Each bread piece is a broad oval with one single large bread-score cut, not a dot, spark or stone. Keep the hierarchy clear: cloud and one hand above, three manna pieces in the middle, three generic allies below. Broad black gaps, no realistic deity face, named religious figure, extra hand, tiny speckled shower, readable text or anime.",
+      "current": {
+        "src": "/icons/abilities/laska-boza.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch76-revision",
+          "label": "Batch 76 · revised Łaska boża",
+          "src": "candidates/batch-76/laska-boza.png",
+          "note": "REVISION of reference cell 6. Use ONE SINGLE LARGE GODLY HAND emerging downward from ONE simple broad CLOUD at the top, palm open in blessing. Remove the second old blessing hand. Add MANNA FALLING FROM HEAVEN: THREE distinct small bread pieces/loaves descend from the divine hand toward THREE tiny plain allied head-and-shoulder silhouettes below. Each bread piece is a broad oval with one single large bread-score cut, not a dot, spark or stone. Keep the hierarchy clear: cloud and one hand above, three manna pieces in the middle, three generic allies below. Broad black gaps, no realistic deity face, named religious figure, extra hand, tiny speckled shower, readable text or anime."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 75 · Łaska boża",
+          "src": "candidates/batch-75/laska-boza.png",
+          "note": "Two complete open adult hands reaching outward in a calm BLESSING gesture over THREE small plain human head-and-shoulder silhouettes grouped below. Three short broad downward rays connect the hands' gesture to the allies. Generic adult heads without facial features or hair detail; one compact benevolent group support emblem. No named religious figure, denomination symbol, halo, cartoon star, lettering, numbers, extra hands or fine rays."
+        }
+      ]
+    },
+    {
+      "id": "batch75-leb-jak-sklep",
+      "name": "Łeb jak sklep",
+      "tier": "Batch 76 · Spec",
+      "batch": 76,
+      "placeholderKey": "feature:leb-jak-sklep",
+      "target": "icons/abilities/leb-jak-sklep.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/leb-jak-sklep.svg",
+          "variant": "default",
+          "sourceSha256": "ab1446c5808fb43984e0c4f1357f4cd68fda82f47990700123c1db790a7efc87"
+        }
+      ],
+      "context": "Class/profession ability: Łeb jak sklep; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Miewasz przebłyski prawdziwego geniuszu. Kiedy wykonujesz Test Inteligencji lub dowolnego zestawu narzędzi, możesz dorzucić 1k4 do wyniku. Masz tyle tych kostek, ile wynosi twoja Premia Biegłości. Im masz wyższy poziom, tym wartość kostek rośnie, zgodnie z kolumną Łeb jak sklep w poniższej tabeli Zdolności klasowych Speca. Zdolność odnawia się po Długim odpoczynku. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REJECTED CONCEPT in reference cell 7: create a COMPLETELY DIFFERENT SINGLE-OBJECT design. ONE sturdy old INDUSTRIAL INCANDESCENT LIGHT BULB symbolizing a flash of genius. A large clear bulb outline contains ONE simple brain-shaped FILAMENT with only three broad lobe cuts; a thick screw base has just two broad black bands. Three short broad restrained light rays outside the bulb. No separate brain floating above, no wrench, die, pyramid, human head, giant cog, tiny filament wires, lettering, numerals or cartoon expression. Serious practical workshop object, coherent clean broad white stencil, generous black negative space and tiny-icon readability.",
+      "current": {
+        "src": "/icons/abilities/leb-jak-sklep.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch76-revision",
+          "label": "Batch 76 · revised Łeb jak sklep",
+          "src": "candidates/batch-76/leb-jak-sklep.png",
+          "note": "REJECTED CONCEPT in reference cell 7: create a COMPLETELY DIFFERENT SINGLE-OBJECT design. ONE sturdy old INDUSTRIAL INCANDESCENT LIGHT BULB symbolizing a flash of genius. A large clear bulb outline contains ONE simple brain-shaped FILAMENT with only three broad lobe cuts; a thick screw base has just two broad black bands. Three short broad restrained light rays outside the bulb. No separate brain floating above, no wrench, die, pyramid, human head, giant cog, tiny filament wires, lettering, numerals or cartoon expression. Serious practical workshop object, coherent clean broad white stencil, generous black negative space and tiny-icon readability."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 75 · Łeb jak sklep",
+          "src": "candidates/batch-75/leb-jak-sklep.png",
+          "note": "ONE simple schematic BRAIN with just three large lobe cuts above ONE sturdy open-ended WRENCH and ONE small geometrically coherent TETRAHEDRAL DIE. The four-sided die is a clear triangular pyramid with two visible triangular white planes separated by one broad black edge, no numbers or pips. Insight improving clever tool work, compact clear arrangement with black gaps. No human face, lightbulb, giant cog, fine brain folds, letters or tiny ruler markings."
+        }
+      ]
+    },
+    {
+      "id": "batch75-maszyna-do-zabijania",
+      "name": "Maszyna do zabijania",
+      "tier": "Batch 76 · Najemnik",
+      "batch": 76,
+      "placeholderKey": "feature:maszyna-do-zabijania",
+      "target": "icons/abilities/maszyna-do-zabijania.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/maszyna-do-zabijania.svg",
+          "variant": "default",
+          "sourceSha256": "bf846c0d06aaf67a251b1c02723bad0ff64fb927cbe0e7403f79722605cf8045"
+        }
+      ],
+      "context": "Class/profession ability: Maszyna do zabijania; owner Najemnik. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy jesteś w Berserku, zyskujesz: Promocja [B]. Możesz wykonać dodatkowo jeden Atak wręcz w Akcji Bonusowej. Zwód. Raz w rundzie możesz wykonać jeden Atak wręcz oparty na Sile z Ułatwieniem. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "DIFFERENT CONCEPT requested for reference cell 8. THIS ONE OUTER ATLAS CELL contains a miniature KILL TALLY laid out in THREE ROWS and THREE COLUMNS. Exactly SEVEN SIMPLE SKULLS total: top row has THREE, middle row has THREE, bottom row has ONLY ONE at the LEFT; bottom-middle and bottom-right stay EMPTY BLACK. Every skull is one simple white oval cranium with two big black eye holes and a block jaw, no fine teeth or gore. The SIX skulls in the first two rows are EACH STRUCK THROUGH by ONE broad diagonal BLACK slash cutting the white skull from upper-left to lower-right. The seventh skull at bottom-left is NOT struck through. Equal skull sizes, aligned rows/columns, broad black spacing. No fist, chain, extra skull, numerals, writing, decorative border or inner grid lines. Outer atlas still contains nine different subjects: this seven-skull tally stays wholly inside cell 8.",
+      "current": {
+        "src": "/icons/abilities/maszyna-do-zabijania.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch76-revision",
+          "label": "Batch 76 · revised Maszyna do zabijania",
+          "src": "candidates/batch-76/maszyna-do-zabijania.png",
+          "note": "DIFFERENT CONCEPT requested for reference cell 8. THIS ONE OUTER ATLAS CELL contains a miniature KILL TALLY laid out in THREE ROWS and THREE COLUMNS. Exactly SEVEN SIMPLE SKULLS total: top row has THREE, middle row has THREE, bottom row has ONLY ONE at the LEFT; bottom-middle and bottom-right stay EMPTY BLACK. Every skull is one simple white oval cranium with two big black eye holes and a block jaw, no fine teeth or gore. The SIX skulls in the first two rows are EACH STRUCK THROUGH by ONE broad diagonal BLACK slash cutting the white skull from upper-left to lower-right. The seventh skull at bottom-left is NOT struck through. Equal skull sizes, aligned rows/columns, broad black spacing. No fist, chain, extra skull, numerals, writing, decorative border or inner grid lines. Outer atlas still contains nine different subjects: this seven-skull tally stays wholly inside cell 8."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 75 · Maszyna do zabijania",
+          "src": "candidates/batch-75/maszyna-do-zabijania.png",
+          "note": "ONE powerful bare clenched fist drives through ONE thick steel CHAIN LINK, breaking that link into two broad separated halves while TWO intact links trail behind. Two short broad impact wedges convey relentless melee strength. Coherent fist with complete short wrist, heavy practical chain and clear black gaps. No literal robot, person portrait, huge gear, extra fist, fine fragments, gore, blood, text or anime anatomy."
+        }
+      ]
+    },
+    {
+      "id": "batch75-mechanika",
+      "name": "Mechanika",
+      "tier": "Batch 76 · Monter",
+      "batch": 76,
+      "placeholderKey": "feature:mechanika",
+      "target": "icons/abilities/mechanika.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/mechanika.svg",
+          "variant": "default",
+          "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037"
+        }
+      ],
+      "context": "Class/profession ability: Mechanika; owner Monter. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Smar zastępuje ci krem do rąk, benzyna pachnie jak najlepsze perfumy, a dźwięk dobrze pracującego silnika jest milszy niż miłosne szepty. Jesteś w stanie zbudować swój własny pojazd i zabrać go na rajd! Otrzymujesz biegłość w narzędziach małego mechanika. Potrafisz naprawiać, ulepszać i budować pojazdy, a nawet konstruować mechaniczne pancerze. Potrzebne ci narzędzia małego mechanika i małego kowala, surowce i czas. Otrzymujesz wylistowane poniżej schematy mechaniczne. SCHEMATY MECHANICZNE NAZWA Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 9. Redraw as ONE immediately recognizable CAR ENGINE SIDE-PROFILE silhouette, using the familiar sober engine shape from vehicle instrument panels: a broad horizontal engine block, one small OIL-FILL CAP on top, a stepped gearbox protrusion at the LEFT, a large round FAN/PULLEY housing at the RIGHT and a low oil pan beneath. One clear thick wrench rests diagonally across the lower front. Few broad black structural cuts only. It must read as a motor engine at 16 pixels, not a Lego block, three open cups/chimneys, holes in a box or a generic giant cog. Complete coherent engine and tool, no detailed exposed pistons, wiring, labels, numbers, logo or person.",
+      "current": {
+        "src": "/icons/abilities/mechanika.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch76-revision",
+          "label": "Batch 76 · revised Mechanika",
+          "src": "candidates/batch-76/mechanika.png",
+          "note": "REVISION of reference cell 9. Redraw as ONE immediately recognizable CAR ENGINE SIDE-PROFILE silhouette, using the familiar sober engine shape from vehicle instrument panels: a broad horizontal engine block, one small OIL-FILL CAP on top, a stepped gearbox protrusion at the LEFT, a large round FAN/PULLEY housing at the RIGHT and a low oil pan beneath. One clear thick wrench rests diagonally across the lower front. Few broad black structural cuts only. It must read as a motor engine at 16 pixels, not a Lego block, three open cups/chimneys, holes in a box or a generic giant cog. Complete coherent engine and tool, no detailed exposed pistons, wiring, labels, numbers, logo or person."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 75 · Mechanika",
+          "src": "candidates/batch-75/mechanika.png",
+          "note": "ONE compact practical ENGINE BLOCK in three-quarter side view with three broad cylinder-head forms and a complete thick OPEN-ENDED WRENCH fitted onto one large bolt at the front. A coherent vehicle mechanic's repair motif; just a few large black structural cuts. No huge generic cog, loose toy parts, person, face, intricate wires, oily texture, tiny bolts, logo, lettering or numbers."
+        }
+      ]
+    }
+  ]
+}

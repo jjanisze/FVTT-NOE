@@ -2579,10 +2579,10 @@
     },
     "batch72-jak-dbasz-tak-masz": {
       "itemId": "batch72-jak-dbasz-tak-masz",
-      "decision": "revise",
-      "candidateId": "batch74-revision",
-      "notes": "The finger should be ON the trigger guard, and extending OVER it.",
-      "updatedAt": "2026-10-15T21:25:21.330Z"
+      "decision": "pending",
+      "candidateId": "batch76-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:41:32.487Z"
     },
     "batch73-jeden-strzal": {
       "itemId": "batch73-jeden-strzal",
@@ -2607,10 +2607,10 @@
     },
     "batch73-jezdziec": {
       "itemId": "batch73-jezdziec",
-      "decision": "revise",
-      "candidateId": "batch74-revision",
-      "notes": "Redraw this image into more of a cowboy / showman pose",
-      "updatedAt": "2026-10-15T21:25:53.106Z"
+      "decision": "pending",
+      "candidateId": "batch76-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:41:32.487Z"
     },
     "batch73-kakofonia": {
       "itemId": "batch73-kakofonia",
@@ -2635,10 +2635,10 @@
     },
     "batch73-klusownik": {
       "itemId": "batch73-klusownik",
-      "decision": "revise",
-      "candidateId": "batch74-revision",
-      "notes": "Better, but now the teeth are split. Draw a simple, two-part trap with jaws on left and right, hinge between them, and pressure plate in the middle.",
-      "updatedAt": "2026-10-15T21:26:35.755Z"
+      "decision": "pending",
+      "candidateId": "batch76-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:41:32.488Z"
     },
     "batch73-kocie-kosci": {
       "itemId": "batch73-kocie-kosci",
@@ -2656,10 +2656,10 @@
     },
     "batch74-kondycha": {
       "itemId": "batch74-kondycha",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Try a pose of a figure having just stood up, with a lowered head, and shaded, determined eyes. More \"This ain't over!\", less \"Phew!\"",
-      "updatedAt": "2026-10-15T21:28:00.534Z"
+      "decision": "pending",
+      "candidateId": "batch76-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:41:32.488Z"
     },
     "batch74-krwawy-aniol": {
       "itemId": "batch74-krwawy-aniol",
@@ -2677,24 +2677,24 @@
     },
     "batch75-lapiduch": {
       "itemId": "batch75-lapiduch",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Missing a head. Rotate the hands 90 degrees, and put some head on the body (with X for eyes)",
-      "updatedAt": "2026-10-15T21:28:49.691Z"
+      "decision": "pending",
+      "candidateId": "batch76-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:41:32.489Z"
     },
     "batch75-laska-boza": {
       "itemId": "batch75-laska-boza",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Single godly hand, and add mannah from heaven",
-      "updatedAt": "2026-10-15T21:29:20.459Z"
+      "decision": "pending",
+      "candidateId": "batch76-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:41:32.489Z"
     },
     "batch75-leb-jak-sklep": {
       "itemId": "batch75-leb-jak-sklep",
-      "decision": "reject",
-      "candidateId": "atlas-a",
-      "notes": "Try again.",
-      "updatedAt": "2026-10-15T21:29:34.015Z"
+      "decision": "pending",
+      "candidateId": "batch76-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:41:32.490Z"
     },
     "batch75-lyzeczka": {
       "itemId": "batch75-lyzeczka",
@@ -2705,10 +2705,10 @@
     },
     "batch75-maszyna-do-zabijania": {
       "itemId": "batch75-maszyna-do-zabijania",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Different concept. Draw a series of simple skulls symbolizing kills. 3 rows, 3 columns. First two rows are full and stricken through. The last row is missing 2 skulls.",
-      "updatedAt": "2026-10-15T21:31:35.051Z"
+      "decision": "pending",
+      "candidateId": "batch76-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:41:32.490Z"
     },
     "batch75-matrix": {
       "itemId": "batch75-matrix",
@@ -2719,10 +2719,10 @@
     },
     "batch75-mechanika": {
       "itemId": "batch75-mechanika",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Revise the engine into something more recognizable",
-      "updatedAt": "2026-10-15T21:32:11.596Z"
+      "decision": "pending",
+      "candidateId": "batch76-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:41:32.490Z"
     },
     "batch75-moja-prawa-reka": {
       "itemId": "batch75-moja-prawa-reka",

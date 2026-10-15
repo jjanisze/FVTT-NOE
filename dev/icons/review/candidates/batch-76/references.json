@@ -1,0 +1,65 @@
+{
+  "role": "Exact native targets, not style inputs",
+  "files": [
+    {
+      "key": "jak-dbasz-tak-masz",
+      "source": "icons/abilities/jak-dbasz-tak-masz.svg",
+      "variant": "default",
+      "sourceSha256": "1858ccf0a0018938a0f1d49497cc3414762297e7176c434791d8511f2d06b632"
+    },
+    {
+      "key": "jezdziec",
+      "source": "icons/abilities/jezdziec.svg",
+      "variant": "default",
+      "sourceSha256": "53a7bf1784b2ef9efc618431127aba39c0d53875bf9e974bc2020a40ce759507"
+    },
+    {
+      "key": "klusownik",
+      "source": "icons/abilities/klusownik.svg",
+      "variant": "default",
+      "sourceSha256": "6fff1379ce2c2409ce200ab84a898fc371a8434b6a6b6808baf68b77df161091"
+    },
+    {
+      "key": "kondycha",
+      "source": "icons/abilities/kondycha.svg",
+      "variant": "default",
+      "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f"
+    },
+    {
+      "key": "kondycha",
+      "source": "icons/abilities/kondycha_active.svg",
+      "variant": "legacy-active",
+      "sourceSha256": "fe94e499463c22895956f7b690560a97d315a576f5dc27d3d5140c5010c7fbf1"
+    },
+    {
+      "key": "lapiduch",
+      "source": "icons/abilities/lapiduch.svg",
+      "variant": "default",
+      "sourceSha256": "913fffceec2f2490e4b84cdb4ea2c01368fc2d6d8cf518b701f681ea0286447b"
+    },
+    {
+      "key": "laska-boza",
+      "source": "icons/abilities/laska-boza.svg",
+      "variant": "default",
+      "sourceSha256": "e5324a36a95884b60732d688880fea6f1243709fbc4a38e8a3e644b87f6802a5"
+    },
+    {
+      "key": "leb-jak-sklep",
+      "source": "icons/abilities/leb-jak-sklep.svg",
+      "variant": "default",
+      "sourceSha256": "ab1446c5808fb43984e0c4f1357f4cd68fda82f47990700123c1db790a7efc87"
+    },
+    {
+      "key": "maszyna-do-zabijania",
+      "source": "icons/abilities/maszyna-do-zabijania.svg",
+      "variant": "default",
+      "sourceSha256": "bf846c0d06aaf67a251b1c02723bad0ff64fb927cbe0e7403f79722605cf8045"
+    },
+    {
+      "key": "mechanika",
+      "source": "icons/abilities/mechanika.svg",
+      "variant": "default",
+      "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037"
+    }
+  ]
+}

@@ -63,11 +63,16 @@ Batch 73 contains the next nine fresh subjects. The first 36 unique roadmap
 subjects were allocated at that point.
 
 After Batch 72–73 review, thirty subjects are delivered at thirty-one native
-SVG filenames with WEBP sidecars. The current audit leaves 123 subjects / 124
-placeholder files. Batch 74 contains six revisions and three fresh subjects;
+SVG filenames with WEBP sidecars. Batch 74 contains six revisions and three fresh subjects;
 Batch 75 contains the next nine fresh subjects. The first 48 unique roadmap
+subjects were allocated at that point.
+
+After Batch 74–75 review, thirty-nine subjects are delivered at forty native
+SVG filenames with WEBP sidecars. The current audit leaves 114 subjects / 115
+placeholder files. Batch 76 contains nine reworks, including one rejected
+concept; Batch 77 contains nine fresh subjects. The first 57 unique roadmap
 subjects are now allocated; the next untouched subject is at zero-based index
-48. Check the actual review manifest before allocating further subjects;
+57. Check the actual review manifest before allocating further subjects;
 planned batch numbers no longer match these actual groups.
 
 The GM's durable direction is to avoid repeated gruff male survivor portraits:
@@ -86,8 +91,12 @@ That instruction is also recorded in Pipeline.md.
   [exact prompts](../review/candidates/batch-74/prompts.json).
 - [Batch 75 candidates](../review/candidates/batch-75/README.md) and
   [exact prompts](../review/candidates/batch-75/prompts.json).
+- [Batch 76 candidates](../review/candidates/batch-76/README.md) and
+  [exact prompts](../review/candidates/batch-76/prompts.json).
+- [Batch 77 candidates](../review/candidates/batch-77/README.md) and
+  [exact prompts](../review/candidates/batch-77/prompts.json).
 
-`prepare_70_71.py`, `prepare_72_73.py` and `prepare_74_75.py` freeze their actual
+The numbered `prepare_*.py` files freeze their actual
 allocations and
 incoming decisions; do not rerun them. `compose_reference.py` only rebuilds
 their recorded contact sheets.

@@ -1,0 +1,41 @@
+{
+  "role": "ALL nine reference cells are the EXACT selected subjects for output cells 1-9. Apply the specific correction or complete new concept requested for each. Cell 7 is a rejected concept and MUST be replaced entirely; cell 8 has a new seven-skull tally concept. Keep every output inside its own outer grid cell.",
+  "sources": [
+    {
+      "source": "dev/icons/review/candidates/batch-74/jak-dbasz-tak-masz.png",
+      "sha256": "ac5ce65836c628f918adef38a637f72eac08c1db2e6b11f38587ab3a366a5848"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-74/jezdziec.png",
+      "sha256": "84006bde897e510e07d9ebee84c5d485d7ff4b5169f816c062803973b45aa1ea"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-74/klusownik.png",
+      "sha256": "1b0145b4c41282c9fb364ab2ee7a4f83a4c6ca81fcb6da81f912050e590efd43"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-74/kondycha.png",
+      "sha256": "27c0e6073d7897f4badce82df1501358dd7bb8728178ca7d1f9b6175c8c73a7f"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-75/lapiduch.png",
+      "sha256": "061802b6ed556ccfa4651dd1cdbecc94f647b36f9617df6a60fe5d298cf20a7f"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-75/laska-boza.png",
+      "sha256": "06132efb5f38efc2acf08b9c6b7742356c7653e938c4c040d1ce2ea7e4792cff"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-75/leb-jak-sklep.png",
+      "sha256": "8ecd5b433d768796c083388b8c7cc84208157ee33574af7a4caf11599aa31fce"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-75/maszyna-do-zabijania.png",
+      "sha256": "9b7a7385863824e140aae37971eff727bb1d20deeb47f5d69520782d057844c8"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-75/mechanika.png",
+      "sha256": "a6c64bdd71c667af189ccf29fc22bb382d04ab6a6699cb51863d15946a2e582b"
+    }
+  ]
+}

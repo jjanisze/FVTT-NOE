@@ -1,0 +1,267 @@
+{
+  "title": "Batches 76 + 77 · 18 awaiting GM review",
+  "updated": "2026-10-15",
+  "items": [
+    {
+      "id": "batch77-motywacja",
+      "name": "Motywacja",
+      "tier": "Batch 77 · Cwaniak",
+      "batch": 77,
+      "placeholderKey": "feature:motywacja",
+      "target": "icons/abilities/motywacja.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/motywacja.svg",
+          "variant": "default",
+          "sourceSha256": "bcda91b7757cd11b9788e8ca5578d415ead01ae547b242ba46eecbc7c255adce"
+        }
+      ],
+      "context": "Class/profession ability: Motywacja; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Motywujesz towarzysza za pomocą słów lub muzyki. Kiedy twój sojusznik wykonuje dowolny test, możesz w swojej Reakcji zwiększyć jego szanse na sukces. Sojusznik musi się znajdować w zasięgu 18 metrów od ciebie, a twoja Reakcja musi nastąpić przed poznaniem efektu testu. Sojusznik dodaje kość Motywacji, do swojego Testu k20. Wartość kości Motywacji określa tabela Zdolności klasowych Cwaniaka. Możesz użyć tej zdolność tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po Krótkim  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE practical handheld MEGAPHONE angled right, emitting TWO broad sound arcs toward ONE simple coherent CUBE DIE below-right. The die has three visible planes with straight shared edges and three large pips on the front, no digits. Encouragement granting an ally an extra roll. Solid megaphone cone, complete handle and broad black gaps. No person, face, gruff speaker portrait, lettering, music notes, star, tiny grille or extra dice.",
+      "current": {
+        "src": "/icons/abilities/motywacja.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 77 · Motywacja",
+          "src": "candidates/batch-77/motywacja.png",
+          "note": "ONE practical handheld MEGAPHONE angled right, emitting TWO broad sound arcs toward ONE simple coherent CUBE DIE below-right. The die has three visible planes with straight shared edges and three large pips on the front, no digits. Encouragement granting an ally an extra roll. Solid megaphone cone, complete handle and broad black gaps. No person, face, gruff speaker portrait, lettering, music notes, star, tiny grille or extra dice."
+        }
+      ]
+    },
+    {
+      "id": "batch77-moj-biom",
+      "name": "Mój biom",
+      "tier": "Batch 77 · Zwiadowca",
+      "batch": 77,
+      "placeholderKey": "feature:moj-biom",
+      "target": "icons/abilities/moj-biom.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moj-biom.svg",
+          "variant": "default",
+          "sourceSha256": "3a0047be0bcef2bb1ec4cc5d21505522e7f5a74e7dbc3577f56181f6da21e3ba"
+        }
+      ],
+      "context": "Class/profession ability: Mój biom; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Twoje doświadczenie i naturalny talent sprawiają, że umiesz przetrwać tam, gdzie innych zjadają mrokoszczury. Wybierz dwa ulubione biomy z listy: Bagna, Góry, Las, Miasto, Neodżungla, Podziemia, Preria, Pustynia, Ruiny, Tereny Maszyn. W Testach Inteligencji i Mądrości związanych z tymi biomami masz Ułatwienie. Podróżując przez te specyficzne obszary, otrzymujesz dodatkowe korzyści: • Kiedy poruszacie się pieszo, trudny teren nie spowalnia cię, ani twojej drużyny, • Nikt i nic nie jest w stanie c Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE unfolded practical MAP with two broad panels: a large simple FIR TREE silhouette on one panel and one bold MOUNTAIN PEAK on the other, with a single thick path cut along the fold. A compact terrain-knowledge emblem. Complete paper edges, broad black gaps and just a few functional folds. No map labels, coordinates, tiny contour lines, compass lettering, human face, decorative arrows or landscape shading.",
+      "current": {
+        "src": "/icons/abilities/moj-biom.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 77 · Mój biom",
+          "src": "candidates/batch-77/moj-biom.png",
+          "note": "ONE unfolded practical MAP with two broad panels: a large simple FIR TREE silhouette on one panel and one bold MOUNTAIN PEAK on the other, with a single thick path cut along the fold. A compact terrain-knowledge emblem. Complete paper edges, broad black gaps and just a few functional folds. No map labels, coordinates, tiny contour lines, compass lettering, human face, decorative arrows or landscape shading."
+        }
+      ]
+    },
+    {
+      "id": "batch77-moj-bog-kule-nosi",
+      "name": "Mój bóg kule nosi",
+      "tier": "Batch 77 · kaznodzieja-nowej-ery",
+      "batch": 77,
+      "placeholderKey": "feature:moj-bog-kule-nosi",
+      "target": "icons/abilities/moj-bog-kule-nosi.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moj-bog-kule-nosi.svg",
+          "variant": "default",
+          "sourceSha256": "d57cac0507304dbba52121db1d76ac1505e4fb174e29dd226ad9823476f72a80"
+        }
+      ],
+      "context": "Class/profession ability: Mój bóg kule nosi; owner kaznodzieja-nowej-ery. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Twoja broń prowadzona jest ręką bóstwa, by skuteczniej wykańczać grzeszników. Raz na turę, kiedy zadasz obrażenia w Teście Ataku bronią palną, możesz dodać 1k10 obrażeń. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete upright rifle CARTRIDGE cupped in ONE open adult PALM, with THREE short broad divine light rays above the bullet tip. A single broad arch behind the cartridge frames this guided shot, kept distinct from the supporting hand. Coherent plain bare fingers and thumb, complete bullet/casing/base rim. No deity portrait, face, denomination symbol, real logo, letters, numerals, extra cartridge or fine engraving.",
+      "current": {
+        "src": "/icons/abilities/moj-bog-kule-nosi.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 77 · Mój bóg kule nosi",
+          "src": "candidates/batch-77/moj-bog-kule-nosi.png",
+          "note": "ONE complete upright rifle CARTRIDGE cupped in ONE open adult PALM, with THREE short broad divine light rays above the bullet tip. A single broad arch behind the cartridge frames this guided shot, kept distinct from the supporting hand. Coherent plain bare fingers and thumb, complete bullet/casing/base rim. No deity portrait, face, denomination symbol, real logo, letters, numerals, extra cartridge or fine engraving."
+        }
+      ]
+    },
+    {
+      "id": "batch77-moj-wrog",
+      "name": "Mój wróg",
+      "tier": "Batch 77 · Zwiadowca",
+      "batch": 77,
+      "placeholderKey": "feature:moj-wrog",
+      "target": "icons/abilities/moj-wrog.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moj-wrog.svg",
+          "variant": "default",
+          "sourceSha256": "086ac2b583abee3c1d804960103eb2a4457d0ffaff27036d02899bd32961116f"
+        }
+      ],
+      "context": "Class/profession ability: Mój wróg; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Masz doświadczenie w zabijaniu określonego typu przeciwników. Wybierasz, czy specjalizujesz się w tropieniu i zabijaniu Ludzi, Maszyn, Mutantów, Potworów czy Zwierząt. Masz Ułatwienie w Testach Mądrości (Survival), kiedy tropisz swoich wrogów i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg w tabeli Zdolności klasowych Zwiadowcy. PRZYKŁAD: Pierwszopoziomowy Zwiadowca, którego wrogiem s Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "General enemy-tracking emblem: ONE large clear BOOT PRINT centered inside ONE thick circular TARGET RETICLE with four short cardinal ticks. Two broad tread cuts only. Clear black gap between the print and reticle, no second footprint, head, skull, words, numerals, eye, extra rings or delicate tracking marks.",
+      "current": {
+        "src": "/icons/abilities/moj-wrog.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 77 · Mój wróg",
+          "src": "candidates/batch-77/moj-wrog.png",
+          "note": "General enemy-tracking emblem: ONE large clear BOOT PRINT centered inside ONE thick circular TARGET RETICLE with four short cardinal ticks. Two broad tread cuts only. Clear black gap between the print and reticle, no second footprint, head, skull, words, numerals, eye, extra rings or delicate tracking marks."
+        }
+      ]
+    },
+    {
+      "id": "batch77-moj-wrog-ludzie",
+      "name": "Mój wróg: Ludzie",
+      "tier": "Batch 77 · moj-wrog-option",
+      "batch": 77,
+      "placeholderKey": "feature:moj-wrog-ludzie",
+      "target": "icons/abilities/moj-wrog-ludzie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moj-wrog-ludzie.svg",
+          "variant": "default",
+          "sourceSha256": "d8b5cbf7401549a902dec78dfefdc4ce2e2d6901250352a392e67022f77defd0"
+        }
+      ],
+      "context": "Class/profession ability: Mój wróg: Ludzie; owner moj-wrog-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Twoim wrogiem są Ludzie. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "Human enemy category: ONE smooth generic ADULT HUMAN HEAD AND SHORT NECK in right-facing profile centered inside ONE thick circular TARGET RETICLE with four short cardinal ticks. Plain natural adult nose and jaw, one broad ear cut, no hair texture, beard, stern brow or detailed expression. This is a neutral category silhouette, not a gruff survivor portrait. Broad black gap between head and circle. No tiny face details, text or extra head.",
+      "current": {
+        "src": "/icons/abilities/moj-wrog-ludzie.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 77 · Mój wróg: Ludzie",
+          "src": "candidates/batch-77/moj-wrog-ludzie.png",
+          "note": "Human enemy category: ONE smooth generic ADULT HUMAN HEAD AND SHORT NECK in right-facing profile centered inside ONE thick circular TARGET RETICLE with four short cardinal ticks. Plain natural adult nose and jaw, one broad ear cut, no hair texture, beard, stern brow or detailed expression. This is a neutral category silhouette, not a gruff survivor portrait. Broad black gap between head and circle. No tiny face details, text or extra head."
+        }
+      ]
+    },
+    {
+      "id": "batch77-moj-wrog-maszyny",
+      "name": "Mój wróg: Maszyny",
+      "tier": "Batch 77 · moj-wrog-option",
+      "batch": 77,
+      "placeholderKey": "feature:moj-wrog-maszyny",
+      "target": "icons/abilities/moj-wrog-maszyny.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moj-wrog-maszyny.svg",
+          "variant": "default",
+          "sourceSha256": "448d669cb911e5dbee66aa19e11a185f03b3da58db36f7b6806fa5edebf97366"
+        }
+      ],
+      "context": "Class/profession ability: Mój wróg: Maszyny; owner moj-wrog-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Twoim wrogiem są Maszyny. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "Machine enemy category: ONE angular INDUSTRIAL ROBOT SENSOR HEAD centered inside ONE thick circular TARGET RETICLE with four short cardinal ticks. A boxy casing, one large circular camera aperture and two broad rectangular ventilation cuts, a short mechanical neck. Sober machine design, not a human face or cartoon robot expression. Clear black gap around the head; no tiny circuitry, giant cog, anime, text or extra antennae.",
+      "current": {
+        "src": "/icons/abilities/moj-wrog-maszyny.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 77 · Mój wróg: Maszyny",
+          "src": "candidates/batch-77/moj-wrog-maszyny.png",
+          "note": "Machine enemy category: ONE angular INDUSTRIAL ROBOT SENSOR HEAD centered inside ONE thick circular TARGET RETICLE with four short cardinal ticks. A boxy casing, one large circular camera aperture and two broad rectangular ventilation cuts, a short mechanical neck. Sober machine design, not a human face or cartoon robot expression. Clear black gap around the head; no tiny circuitry, giant cog, anime, text or extra antennae."
+        }
+      ]
+    },
+    {
+      "id": "batch77-moj-wrog-mutanty",
+      "name": "Mój wróg: Mutanty",
+      "tier": "Batch 77 · moj-wrog-option",
+      "batch": 77,
+      "placeholderKey": "feature:moj-wrog-mutanty",
+      "target": "icons/abilities/moj-wrog-mutanty.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moj-wrog-mutanty.svg",
+          "variant": "default",
+          "sourceSha256": "448d669cb911e5dbee66aa19e11a185f03b3da58db36f7b6806fa5edebf97366"
+        }
+      ],
+      "context": "Class/profession ability: Mój wróg: Mutanty; owner moj-wrog-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Twoim wrogiem są Mutanty. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "Mutant enemy category: ONE clearly NONHUMAN MUTANT HEAD in right-facing profile centered inside ONE thick circular TARGET RETICLE with four short cardinal ticks. Lumpy overgrown cranium, ONE blunt horn, misshapen swept ear, heavy brow, broad projecting muzzle and ONE short lower tusk, matching the sober approved mutant language. Head and short natural neck only, no shoulders or magnifying-glass handle. No ordinary human-with-a-horn face, gore, tiny stippling, anime, text or extra head.",
+      "current": {
+        "src": "/icons/abilities/moj-wrog-mutanty.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 77 · Mój wróg: Mutanty",
+          "src": "candidates/batch-77/moj-wrog-mutanty.png",
+          "note": "Mutant enemy category: ONE clearly NONHUMAN MUTANT HEAD in right-facing profile centered inside ONE thick circular TARGET RETICLE with four short cardinal ticks. Lumpy overgrown cranium, ONE blunt horn, misshapen swept ear, heavy brow, broad projecting muzzle and ONE short lower tusk, matching the sober approved mutant language. Head and short natural neck only, no shoulders or magnifying-glass handle. No ordinary human-with-a-horn face, gore, tiny stippling, anime, text or extra head."
+        }
+      ]
+    },
+    {
+      "id": "batch77-moj-wrog-potwory",
+      "name": "Mój wróg: Potwory",
+      "tier": "Batch 77 · moj-wrog-option",
+      "batch": 77,
+      "placeholderKey": "feature:moj-wrog-potwory",
+      "target": "icons/abilities/moj-wrog-potwory.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moj-wrog-potwory.svg",
+          "variant": "default",
+          "sourceSha256": "271645990c42c48e5ef70e18049a082c16dbd51afb67b3eded7cd026ef18e985"
+        }
+      ],
+      "context": "Class/profession ability: Mój wróg: Potwory; owner moj-wrog-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Twoim wrogiem są Potwory. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "Monster enemy category: ONE BESTIAL NONHUMANOID PREDATOR HEAD in side profile centered inside ONE thick circular TARGET RETICLE with four short cardinal ticks. Low long heavy skull, TWO short swept-back horns, a broad open jaw with only three large blunt teeth and one small eye cut. Distinct from the humanoid one-horn mutant: a feral creature head, no human ear or chin. Clear black gap around it, no gore, tiny teeth, anime face, text or extra head.",
+      "current": {
+        "src": "/icons/abilities/moj-wrog-potwory.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 77 · Mój wróg: Potwory",
+          "src": "candidates/batch-77/moj-wrog-potwory.png",
+          "note": "Monster enemy category: ONE BESTIAL NONHUMANOID PREDATOR HEAD in side profile centered inside ONE thick circular TARGET RETICLE with four short cardinal ticks. Low long heavy skull, TWO short swept-back horns, a broad open jaw with only three large blunt teeth and one small eye cut. Distinct from the humanoid one-horn mutant: a feral creature head, no human ear or chin. Clear black gap around it, no gore, tiny teeth, anime face, text or extra head."
+        }
+      ]
+    },
+    {
+      "id": "batch77-moj-wrog-zwierzeta",
+      "name": "Mój wróg: Zwierzęta",
+      "tier": "Batch 77 · moj-wrog-option",
+      "batch": 77,
+      "placeholderKey": "feature:moj-wrog-zwierzeta",
+      "target": "icons/abilities/moj-wrog-zwierzeta.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moj-wrog-zwierzeta.svg",
+          "variant": "default",
+          "sourceSha256": "e2a4ae3f74b141db1753d1d6a9b4771c54109e7fb007cb0f1b9a64eb7c44de6e"
+        }
+      ],
+      "context": "Class/profession ability: Mój wróg: Zwierzęta; owner moj-wrog-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Twoim wrogiem są Zwierzęta. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "Animal enemy category: ONE realistic WOLF HEAD AND SHORT NECK in right-facing profile centered inside ONE thick circular TARGET RETICLE with four short cardinal ticks. Natural pointed ears, long canine muzzle, one simple eye cut and three broad fur tufts at most. A normal adult animal, no horns or mutations, no cartoon mascot/anime eyes or human expression. Clear black gap around the head; no fine fur, gore, text or extra head.",
+      "current": {
+        "src": "/icons/abilities/moj-wrog-zwierzeta.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 77 · Mój wróg: Zwierzęta",
+          "src": "candidates/batch-77/moj-wrog-zwierzeta.png",
+          "note": "Animal enemy category: ONE realistic WOLF HEAD AND SHORT NECK in right-facing profile centered inside ONE thick circular TARGET RETICLE with four short cardinal ticks. Natural pointed ears, long canine muzzle, one simple eye cut and three broad fur tufts at most. A normal adult animal, no horns or mutations, no cartoon mascot/anime eyes or human expression. Clear black gap around the head; no fine fur, gore, text or extra head."
+        }
+      ]
+    }
+  ]
+}

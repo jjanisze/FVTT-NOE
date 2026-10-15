@@ -1,0 +1,16 @@
+{
+  "batch": 77,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "motywacja": "6969362aede30064d4f4ab62825dc638a8dbefad255664dd5882a6e7dc4bd7de",
+    "moj-biom": "ff2c0ed54e5f69eb441d98c965930d66fc65b4ab26696d347b590c87448acb57",
+    "moj-bog-kule-nosi": "24a8bd3fc00f4bc473b765b28a4feacdc2a926891627a596028061a8be089df0",
+    "moj-wrog": "4100ecc206e6a8b178208566002ad7f1b7fe270aa1925863ef13c087c6391878",
+    "moj-wrog-ludzie": "739394bbac781c094f2b11169c76bf1cead2d8e1965871a21fbafb17f85edc4d",
+    "moj-wrog-maszyny": "4e43009ea03382334e800a8a9be728a671eb329c4b72c92349d04a433af60d64",
+    "moj-wrog-mutanty": "efa6b6cc26e8e020bb39d4b37e4a5c68c5e1615142693f3f0294d7aef142827d",
+    "moj-wrog-potwory": "ba63be533b335008714cf42a777d3f70bf97477b6846fc67a55220b862ac1425",
+    "moj-wrog-zwierzeta": "427efe22e5da4ffead7a0283f41a5cda619ffd5a47061cd5138662a57b6e19f1"
+  }
+}

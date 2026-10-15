@@ -1,0 +1,16 @@
+{
+  "batch": 76,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 10,
+  "candidateHashes": {
+    "jak-dbasz-tak-masz": "e5cc25a494e2b6fef420f72d4d882fe91abd5da4d7f15f6bd46e72707c1adeac",
+    "jezdziec": "97c33846515f5c6b80b5f100485cd4049d4d7a26fa8fcc3f9df0c79bda83a3f1",
+    "klusownik": "98fac733ca0777664d1a98a760fbd8e4c735c689dd663eb8f7c8357a86ffe3f9",
+    "kondycha": "93073810dc787a2002a9ee64affb9d9b1023c5992aa8355b4fe09f5516636a7e",
+    "lapiduch": "09b6d9e70ae65d1803b3f1314d26670619fa44d3af1e356d40f53627d9ef63fb",
+    "laska-boza": "12083c28cb5f5bfdf5513046db71c74711bc95721103e2fed34069c82d273255",
+    "leb-jak-sklep": "e472a55f5521037a15cd35d69d0dfcd076adf78adfb0f1b65130ff7554c865fd",
+    "maszyna-do-zabijania": "83a32cf1c44ddc37d768e61312d067e62b1e905530418b24621ae27e28e6b8c6",
+    "mechanika": "3c4d59fd4c6f7abbf72a323592cc933aa4c913c44d4e9ec87eb9c4c4825b50f4"
+  }
+}
