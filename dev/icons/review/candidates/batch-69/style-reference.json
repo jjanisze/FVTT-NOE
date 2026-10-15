@@ -1,0 +1,14 @@
+{
+  "role": "style only; replace all subjects",
+  "sources": [
+    "icons/abilities/pierwotny-instynkt.webp",
+    "icons/abilities/szybki-bill.webp",
+    "icons/abilities/ucz-sie-ucz.webp",
+    "icons/actions/bebeszenie.webp",
+    "icons/abilities/ukryty-cel.webp",
+    "icons/abilities/pan-plaster.webp",
+    "icons/items/loot/paliwo_dobre.webp",
+    "icons/statuses/wylaczony.webp",
+    "icons/abilities/siekierezada.webp"
+  ]
+}

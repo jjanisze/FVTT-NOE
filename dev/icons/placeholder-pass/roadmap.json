@@ -1,0 +1,2856 @@
+{
+  "date": "2026-10-15",
+  "subjects": 153,
+  "placeholderFiles": 155,
+  "batches": [
+    {
+      "batch": 69,
+      "subjects": [
+        {
+          "kind": "feature",
+          "key": "a-co-mi-tam",
+          "name": "A co mi tam!",
+          "owner": "szczur",
+          "ownerLabel": "Szczur",
+          "target": "icons/abilities/a-co-mi-tam.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/a-co-mi-tam.svg",
+              "variant": "default",
+              "sourceSha256": "85bde63ef0c7543abf85a5c53d3d35a3c1bb8d6eb0774a25c59afbfc59be1647"
+            }
+          ],
+          "ruleContext": "Masz Ułatwienie w Rzutach Obronnych przeciw chorobom, truciznom i radiacji. Masz również odporność na obrażenia od trucizn, chorób i promieniowania. Tak, na alkohol niestety też, bo to przecież trucizna. Jeśli masz chorobę przewlekłą, nie doznasz jednak cudownego ozdrowienia.",
+          "context": "Class/profession ability: A co mi tam!; owner Szczur. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "amen",
+          "name": "Amen",
+          "owner": "kaznodzieja-nowej-ery",
+          "ownerLabel": "kaznodzieja-nowej-ery",
+          "target": "icons/abilities/amen.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/amen.svg",
+              "variant": "default",
+              "sourceSha256": "9062f3b8c40db134e5353eec62370cdeecb586ab463d9ba946dac4317cd0f615"
+            }
+          ],
+          "ruleContext": "Kiedy odniesiesz porażkę w Teście Cechy, Ataku lub Rzucie Obronnym, wypowiadasz słowo AMEN i dorzucasz do wyniku testu 1k6. Musisz zaakceptować nowy wynik. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po Długim odpoczynku.",
+          "context": "Class/profession ability: Amen; owner kaznodzieja-nowej-ery. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "berserk",
+          "name": "Berserk",
+          "owner": "brutal",
+          "ownerLabel": "Brutal",
+          "target": "icons/abilities/berserk.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/berserk.svg",
+              "variant": "default",
+              "sourceSha256": "7e0ca9a1bb0a2332ce46368c3a77d59480a7f4a0bc7e2e4c2db8e3a00ce59934"
+            },
+            {
+              "source": "icons/abilities/berserk_active.svg",
+              "variant": "active",
+              "sourceSha256": "34150f4dcc40ab72db9d6519f4d8865212561724f4f93da06366d511f3b4f64a"
+            }
+          ],
+          "ruleContext": "W Akcji Bonusowej możesz wpaść w Berserk. W tym swoistym szale otrzymujesz następujące korzyści: Siła Berserkera. Masz Ułatwienie w testach Siły i RO na Siłę. Obrażenia Berserkera. Kiedy wykonujesz atak oparty na Sile — bronią lub bez broni i zadajesz obrażenia, dorzucasz dodatkową kość obrażeń rosnącą wraz z poziomem Brutala, zgodnie z kolumną Obrażenia Berserkera w tabeli Zdolności Klasowych Brutala. Szarża Berserkera [B]. Jeśli przeznaczysz całą swoją Szybkość na zbliżenie się do przeciwnika, którego widzisz lub słyszysz, możesz w Akcji Bonusowej wykonać Przyspieszenie w jego kierunku. Obłęd Berserkera. Jeśli nie nosisz żadnego pancerza, hełmu ani tarczy, twoja TT rośnie o wartość modyfikatora Siły. Czas trwania. Berserk trwa 10 rund (do końca twojej ostatniej tury), chyba że otrzymasz stan Nieprzytomność, Obezwładnienie czy Zauroczenie, które go przerywają. Kiedy Berserk się zakończy, zmęczenie sprawia, że nie wykonujesz żadnej akcji do końca twojej następnej tury. Liczbę dostępnych na danym poziomie Berserków, znajdziesz w tabeli Zdolności klasowe Brutala. Liczba ta odnawia się po odbyciu Długiego odpoczynku.",
+          "context": "Class/profession ability: Berserk; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "The approved glyph is shared by these exact base/active filenames. Existing hotbar code supplies the active pulsing frame; no mechanics or styling code changes."
+        },
+        {
+          "kind": "feature",
+          "key": "bez-tajemnic",
+          "name": "Bez tajemnic",
+          "owner": "lowca-mutantow",
+          "ownerLabel": "Łowca Mutantów",
+          "target": "icons/abilities/bez-tajemnic.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/bez-tajemnic.svg",
+              "variant": "default",
+              "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411"
+            }
+          ],
+          "ruleContext": "Znasz się na mutantach i potworach jak nikt inny. Jeśli spotkasz mutanta lub potwora i zdasz Test Inteligencji (Przyroda), zyskujesz wiedzę na jego temat. MG zdradza ci jego zwyczajową nazwę (ST 10), słabe punkty (ST 15) i trzy wybrane współczynniki (ST 20).",
+          "context": "Class/profession ability: Bez tajemnic; owner Łowca Mutantów. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "bezlitosny-przywodca",
+          "name": "Bezlitosny przywódca",
+          "owner": "mafiozo",
+          "ownerLabel": "Mafiozo",
+          "target": "icons/abilities/bezlitosny-przywodca.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/bezlitosny-przywodca.svg",
+              "variant": "default",
+              "sourceSha256": "0b1104155975ba5fe68b0d7de3cee344154300467ccf8485c0494e52bf2ba622"
+            }
+          ],
+          "ruleContext": "Twoja mafia to twoja rodzina. Zabijesz każdego, kto choćby krzywo spojrzy na twojego brata, siostrę, matkę czy psa. Wszyscy, którzy noszą wytatuowany symbol twojej mafijnej rodziny, są pod twoją ochroną i twoim skutecznym przywództwem. Vendetta: Otrzymujesz Ułatwienie w Teście Ataku przeciw istocie, która zadała obrażenia członkowi twojej mafii w przeciągu ostatniej rundy. Szef każe [B]: W Akcji Bonusowej możesz wydać rozkaz ataku członkowi swojej grupy. Ten w Reakcji, może zaatakować wskazaną przez ciebie istotę, znajdującą się w zasięgu jego ataku.",
+          "context": "Class/profession ability: Bezlitosny przywódca; owner Mafiozo. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "brutalny-cios",
+          "name": "Brutalny cios",
+          "owner": "brutal",
+          "ownerLabel": "Brutal",
+          "target": "icons/abilities/brutalny-cios.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/brutalny-cios.svg",
+              "variant": "default",
+              "sourceSha256": "953582c6d91772ef56e9125cd75d1759e9e8bf01817dcd33c16330b7ad986aa4"
+            }
+          ],
+          "ruleContext": "Kiedy używasz kości Wściekłego ciosu w ataku wręcz, możesz nałożyć na cel jeden dodatkowy efekt zgodny z poniższą tabelą. Efekty o tym samym działaniu się nie kumulują. TYP OBRAŻEŃ EFEKT Obuchowe Powalenie. Automatyczne powalenie istoty, maksymalnie o jeden rozmiar większej od ciebie. Cięte Osłabienie. Cel otrzymuje karę -1k4 do Testów Ataku (tj. jego wynik pomniejszany jest o 1k4) do początku twojej następnej tury. Kłute Okulawienie. Szybkość istoty spada o 6 m, do początku twojej następnej tury.",
+          "context": "Class/profession ability: Brutalny cios; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "bystrzacha",
+          "name": "Bystrzacha",
+          "owner": "spec",
+          "ownerLabel": "Spec",
+          "target": "icons/abilities/bystrzacha.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/bystrzacha.svg",
+              "variant": "default",
+              "sourceSha256": "13659d562f71a640d6b49b4ac1db8b24e77da389d67298ed5ed8bb58e7fd7325"
+            }
+          ],
+          "ruleContext": "Dodajesz połowę swojej Premii Biegłości (zaokrągloną w dół) do wszystkich umiejętności, w których nie masz biegłości.",
+          "context": "Class/profession ability: Bystrzacha; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "cichy-krok",
+          "name": "Cichy krok",
+          "owner": "zwiadowca",
+          "ownerLabel": "Zwiadowca",
+          "target": "icons/abilities/cichy-krok.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/cichy-krok.svg",
+              "variant": "default",
+              "sourceSha256": "8c9ad2fa1efbd2e365755c19f97e23faee33ab24d8a491449da0a5c9f2544d61"
+            }
+          ],
+          "ruleContext": "Nie otrzymujesz Utrudnienia do testów Skradania się za noszenie pancerza. Otrzymujesz Ułatwienie w Testach Ukrywania się, jeśli nie nosisz ciężkiego pancerza. Trudny teren nie spowalnia twojego ruchu.",
+          "context": "Class/profession ability: Cichy krok; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "clint",
+          "name": "Clint",
+          "owner": "kowboj",
+          "ownerLabel": "Kowboj",
+          "target": "icons/abilities/clint.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/clint.svg",
+              "variant": "default",
+              "sourceSha256": "5ee6cc654890f6d6bf88be57504342dcbc53ffeea273004d6cf970576cee2d61"
+            }
+          ],
+          "ruleContext": "Poprawka. Raz na walkę możesz powtórzyć jeden Test Ataku bronią palną. Zabójcza spluwa. Rewolwery w twoich rękach zadają jedną dodatkową kość obrażeń. PRZYKŁAD: Peacemaker w twoich dłoniach zadaje 2k8, zamiast 1k8 obrażeń.",
+          "context": "Class/profession ability: Clint; owner Kowboj. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        }
+      ]
+    },
+    {
+      "batch": 70,
+      "subjects": [
+        {
+          "kind": "feature",
+          "key": "cwaniacki-zwod",
+          "name": "Cwaniacki zwód",
+          "owner": "cwaniak",
+          "ownerLabel": "Cwaniak",
+          "target": "icons/abilities/cwaniacki-zwod.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/cwaniacki-zwod.svg",
+              "variant": "default",
+              "sourceSha256": "92cf284356f1cc96aeab112afc135f826720e6f89822a49dd76526aca5e58f44"
+            }
+          ],
+          "ruleContext": "Jeśli nie nosisz ciężkiego pancerza, to w Akcji Bonusowej możesz wykonać akcję Odstąpienie i przemieścić się przez obszar zajmowany przez przeciwników, nie prowokując ataków okazyjnych.",
+          "context": "Class/profession ability: Cwaniacki zwód; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "dobra-rada",
+          "name": "Dobra rada",
+          "owner": "spec",
+          "ownerLabel": "Spec",
+          "target": "icons/abilities/dobra-rada.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/dobra-rada.svg",
+              "variant": "default",
+              "sourceSha256": "9dfe5a97c8a9a000027fc7fa69ccb052eaf2b53099a2b72712a2ed0de24a9b79"
+            }
+          ],
+          "ruleContext": "W Akcji Bonusowej możesz wybrać jednego sojusznika, który cię słyszy i dać mu dobrą radę. Do początku twojej następnej tury otrzymuje premię do Testu Cechy, Ataku lub Rzutu Obronnego, równą twojemu modyfikatorowi Inteligencji. Możesz użyć tej zdolności tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po odbyciu Krótkiego odpoczynku.",
+          "context": "Class/profession ability: Dobra rada; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "doktor-brain",
+          "name": "Doktor Brain",
+          "owner": "medyk",
+          "ownerLabel": "Medyk",
+          "target": "icons/abilities/doktor-brain.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/doktor-brain.svg",
+              "variant": "default",
+              "sourceSha256": "6ab38a26190fd849a7d57137b1d58a07bf5c5b193d101e52adf87d4269536f91"
+            }
+          ],
+          "ruleContext": "Chcesz być jajogłowym mutantem geniuszem? Proszę bardzo. Znajdujesz martwego mutanta i tworzysz serum z jego rdzenia mózgowego, które sobie aplikujesz. Wartość twojej Cechy Inteligencja rośnie na stałe o 4 (do maksymalnie 20). Twój organizm płaci jednak za to wielką cenę. Zmniejsz na stałe swoją Kondycję lub Zręczność o 2.",
+          "context": "Class/profession ability: Doktor Brain; owner Medyk. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "drugi-atak",
+          "name": "Drugi atak",
+          "owner": "brutal",
+          "ownerLabel": "Brutal",
+          "target": "icons/abilities/drugi-atak.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/drugi-atak.svg",
+              "variant": "default",
+              "sourceSha256": "8485b908a3ec63be916ca5e1be37cb3133fdab80874a615a3127ebadf97e49c2"
+            }
+          ],
+          "ruleContext": "Kiedy wykonujesz w swojej turze akcję Atakowanie, możesz zaatakować dwukrotnie.",
+          "context": "Class/profession ability: Drugi atak; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "drzwi-w-drzwi",
+          "name": "Drzwi w drzwi",
+          "owner": "wojownik-autostrady",
+          "ownerLabel": "Wojownik Autostrady",
+          "target": "icons/abilities/drzwi-w-drzwi.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/drzwi-w-drzwi.svg",
+              "variant": "default",
+              "sourceSha256": "e90a74d5a078cc693572423f53f02e5a598da739e570338c0de89f8d555bfae0"
+            }
+          ],
+          "ruleContext": "Twój pojazd to twoja broń. Samochód, motor czy autobus to równie zabójcze zabawki, co twój gnat. Rajdowiec. Podczas walki, wyścigu i pościgu wykonujesz wszystkie Testy Mądrości (Pojazdy) z Ułatwieniem. Szybkość twojego pojazdu rośnie o 50%. Konwojent. Nie otrzymujesz Utrudnienia do Testów Ataków, wynikających z niestabilnego podłoża, kiedy jedziesz pojazdem, zarówno jako pasażer, jak i kierowca. Taranowanie. Istoty, które taranujesz swoim pojazdem, otrzymują Utrudnienie do RO na Zręczność.",
+          "context": "Class/profession ability: Drzwi w drzwi; owner Wojownik Autostrady. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "dwoch-na-jednego",
+          "name": "Dwóch na jednego",
+          "owner": "ganger",
+          "ownerLabel": "Ganger",
+          "target": "icons/abilities/dwoch-na-jednego.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/dwoch-na-jednego.svg",
+              "variant": "default",
+              "sourceSha256": "abf98f1ae8f9018ba49f8b45cd85fd2a8b9fa6924e0a773dad9c08339dcf66d3"
+            }
+          ],
+          "ruleContext": "Uwielbiasz kopać leżącego frajera wspólnie z kumplami. Jeśli zaatakujesz wręcz istotę, która została zaatakowana w ten sam sposób przez twojego sojusznika, otrzymujesz +2 do Testów Ataku wręcz przeciwko niej, do końca twojej tury.",
+          "context": "Class/profession ability: Dwóch na jednego; owner Ganger. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "dziewiec-zyc",
+          "name": "Dziewięć żyć",
+          "owner": "zlodziej",
+          "ownerLabel": "Złodziej",
+          "target": "icons/abilities/dziewiec-zyc.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/dziewiec-zyc.svg",
+              "variant": "default",
+              "sourceSha256": "5052a5bb6298ba74d8ae2ea27a3353bc847d749e088078b50cabce0a6a7a9f26"
+            }
+          ],
+          "ruleContext": "Łatwiej ustrzelić nocą czarnego kota niż cię trafić. Zyskujesz nowe sposoby na wykorzystanie Kocich kości.",
+          "context": "Class/profession ability: Dziewięć żyć; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "ekspert",
+          "name": "Ekspert",
+          "owner": "cwaniak",
+          "ownerLabel": "Cwaniak",
+          "target": "icons/abilities/ekspert.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/ekspert.svg",
+              "variant": "default",
+              "sourceSha256": "232cba987b6f917ef305d366a6f0c46625c645084e43e17b491a2e681606b201"
+            }
+          ],
+          "ruleContext": "Wybierasz dwie umiejętności lub jedną umiejętność i jedno narzędzie, w których masz biegłość. Od tej pory specjalizujesz się w nich, więc Premia Biegłości ulega podwojeniu.",
+          "context": "Class/profession ability: Ekspert; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "elektronik",
+          "name": "Elektronik",
+          "owner": "zlodziej",
+          "ownerLabel": "Złodziej",
+          "target": "icons/abilities/elektronik.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/elektronik.svg",
+              "variant": "default",
+              "sourceSha256": "f390a9b077c44175d9cd142eb44c91d2b5ebcec9b555de04ec0e68c851576564"
+            }
+          ],
+          "ruleContext": "Elektroniczne zabezpieczenia rozgryzasz równie łatwo, co te tradycyjne. A nawet łatwiej. Zawsze, kiedy mierzysz się z elektronicznym systemem zabezpieczeń, otrzymujesz Ułatwienie do testu narzędzi małego ślusarza lub małego elektronika.",
+          "context": "Class/profession ability: Elektronik; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        }
+      ]
+    },
+    {
+      "batch": 71,
+      "subjects": [
+        {
+          "kind": "feature",
+          "key": "emiter-emp",
+          "name": "Emiter EMP",
+          "owner": "zabojca-maszyn",
+          "ownerLabel": "Zabójca Maszyn",
+          "target": "icons/abilities/emiter-emp.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/emiter-emp.svg",
+              "variant": "default",
+              "sourceSha256": "30e74a80bf10eebc2cc7c79b466d9323d765fb269da0c910addaccc500e1f96e"
+            }
+          ],
+          "ruleContext": "Jeśli wydasz 100 gambli na surowce i poświęcisz 100 godzin pracy, to zbudujesz ciężką, nieporęczną broń wyspecjalizowaną w niszczeniu maszyn. Emiter strzela impulsem elektromagnetycznym, który zakłóca działanie lub niszczy niemal każdą maszynę. Nie działa na istoty żywe i urządzenia, które nie używają mikroprocesorów. Emiter EMP ładuje się prądem elektrycznym 230 V, a akumulator starcza na 6 wystrzałów. Ta broń ignoruje TT pochodzącą z opancerzenia maszyny. Tylko Zabójca Maszyn jest biegły w używaniu tej specyficznej broni. Nazwa: Emiter EMP Tryb ognia: Pojedynczy Magazynek: 6 Obrażenia: 8k6 od elektryczności Zasięg: 9/15 metrów Właściwości: Ładowanie Porażenie: Trafiony cel wykonuje Rzut Obronny na Kondycję o ST 15 inaczej otrzymuje stan Obezwładnienie do końca twojej następnej tury Koszt produkcji: 20 MK, 40 CE, 40 CZ",
+          "context": "Class/profession ability: Emiter EMP; owner Zabójca Maszyn. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "empiryk",
+          "name": "Empiryk",
+          "owner": "zabojca-maszyn",
+          "ownerLabel": "Zabójca Maszyn",
+          "target": "icons/abilities/empiryk.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/empiryk.svg",
+              "variant": "default",
+              "sourceSha256": "c3969d155f78163b17980cabe9279254fd483d9ad394b4eebefdf82b3fc4e9e2"
+            }
+          ],
+          "ruleContext": "Nikt nie wie, jak to robisz, ale potrafisz przewidzieć zachowanie każdej maszyny. Jeśli zostajesz trafiony przez maszynę, możesz użyć Reakcji, żeby wobec tego ataku podnieść swoją TT o wartość twojej Premii Biegłości. Zyskujesz również Ułatwienie w Rzutach Obronnych na efekty wywoływane przez maszyny.",
+          "context": "Class/profession ability: Empiryk; owner Zabójca Maszyn. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "farmacja",
+          "name": "Farmacja",
+          "owner": "medyk",
+          "ownerLabel": "Medyk",
+          "target": "icons/abilities/farmacja.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/farmacja.svg",
+              "variant": "default",
+              "sourceSha256": "c76a242ba8cd132a2de5d72c1b09dffbaba3e8aa8326ef3e26176b7d00db1b4f"
+            }
+          ],
+          "ruleContext": "Podobno medyk nie jest maszynką do skręcania leków z piasku. Ale ty znasz się na chemii i farmakologii, więc wiesz, że lekarstwa można ukręcić ze wszystkiego innego. Zyskujesz biegłość w narzędziach małego aptekarza. Potrafisz produkować leki i substancje leczące, używając składników chemicznych, jak i organicznych. Potrzebne ci narzędzia małego chemika, małego aptekarza, surowce i czas. Otrzymujesz wylistowane poniżej schematy farmaceutyczne. SCHEMATY FARMACEUTYCZNE NAZWA ST PRODUKCJA SUROWCE Antybiotyk (10 dawek) 10 20 godzin 20 CH/MO Alkohol tani (1 l) 10 3 godziny 3 CH/MO AR 23 (1 szt) 25 35 godzin 33 CH, 1 CZ, 1 MK AR-35 BETA (1 szt) 25 50 godzin 49 CH, 1 CZ,1 MK Deadline (1 szt) 20 25 godzin 25 CH/MO, 1 MK Detoks (5 fiolek) 10 20 godzin 20 CH/MO Medpak (1 szt) 15 13 godzin 11 CH/MO, 1 CZ, 1 MK Nitrogliceryna (20 g) 15 10 godzin 10 CH/MO Painkiller (10 tabletek) 10 10 godzin 10 CH/ MO Pocisk - strzykawka (1 szt) 10 3 godziny 2 CZ, 1 MK Proch czarny (20 g) 10 5 godzin 2 CH, 3 MK/MO Proch strzelniczy (20 g) 15 10 godzin 5 CH, 5 MK/MO RadOff (1 szt) 15 15 godzin 14 CH/MO, 1 MK Środki dezynfekujące (1 l) 10 5 godzin 5 CH/MO Środek usypiający (1 fiol.) 10 10 godzin 10 CH/MO Tornado (1 działka) 25 50 godzin 50 CH/MO Trybiotyl (1 porcja) 15 15 godzin 15 CH/MO Trucizna (1 fiolka) 10 10 godzin 10 CH/MO Uzupełnienie zestawu małego medyka (1 użycie) 10 5 godzin 5 CH/MO, 1 MK WD-TABS (10 tabletek) 10 10 godzin 10 CH/MO Zamiennik dowolnego leku (5 dawek) 20 10 godzin 10 CH/MO",
+          "context": "Class/profession ability: Farmacja; owner Medyk. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "glowa-do-gory",
+          "name": "Głowa do góry!",
+          "owner": "cwaniak",
+          "ownerLabel": "Cwaniak",
+          "target": "icons/abilities/glowa-do-gory.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/glowa-do-gory.svg",
+              "variant": "default",
+              "sourceSha256": "d4c9125b3a8ab930e1da0ab57ff9efc0c9fa5773909f10506ce92e7ce4989a3b"
+            }
+          ],
+          "ruleContext": "Kiedy ty lub twoi towarzysze jesteście pod wpływem stanu Przerażenie, możesz wlać odwagę w wasze serca. W swojej akcji rozpoczynasz występ (deklamację, przemowę, modlitwę, grę na instrumencie) trwający do końca twojej następnej tury. Ty i wszyscy słyszący cię sojusznicy w zasięgu 18 metrów automatycznie zdajecie RO przeciw Przerażeniu.",
+          "context": "Class/profession ability: Głowa do góry!; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "gola-klata",
+          "name": "Goła klata",
+          "owner": "brutal",
+          "ownerLabel": "Brutal",
+          "target": "icons/abilities/gola-klata.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/gola-klata.svg",
+              "variant": "default",
+              "sourceSha256": "96223da7b4372786dd758e23ca14db7c4c44b8f731e301fb0d1cca1547db1407"
+            }
+          ],
+          "ruleContext": "Kiedy nie nosisz żadnego pancerza, hełmu ani tarczy twoja Trudność Trafienia wynosi 10 + twoje modyfikatory Zręczności i Kondycji. Ta zdolność nie łączy się z podobnie działającymi zdolnościami innych klas.",
+          "context": "Class/profession ability: Goła klata; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "hakerstwo",
+          "name": "Hakerstwo",
+          "owner": "monter",
+          "ownerLabel": "Monter",
+          "target": "icons/abilities/hakerstwo.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/hakerstwo.svg",
+              "variant": "default",
+              "sourceSha256": "8fcff882ddb01cff3baa85928c1b79317f431775fc3b342a0c009303cf337424"
+            }
+          ],
+          "ruleContext": "Czerwone oczy, blada cera, skrzywione plecy i słownictwo, którego nikt nie rozumie. Już raz pomylili cię z mutantem i drogo za to zapłacili. W Posterunku byłbyś szychą, ale nie przyjmujesz rozkazów od głupszych od siebie. Otrzymujesz biegłość w narzędziach małego hakera. Potrafisz produkować sprzęt komputerowy i drony, ale potrzebujesz do tego narzędzi małego hakera, małego elektronika, surowców i czasu. Otrzymujesz wylistowane poniżej schematy hakerskie. SCHEMATY HAKERSKIE NAZWA ST PRODUKCJA SUROWCE Adapter wifi 10 30 godzin 10 CE, 4 CZ, 1 MK Dron kroczący 20 70 godzin 15 CE, 1 CH, 10 CZ, 9 MK Dron latający 25 90 godzin 10 CE, 1 CH, 29 CZ, 5 MK Komputer osobisty 15 40 godzin 15 CE, 1 CH, 3 CZ, 1 MK Komputer gamingowy 25 80 godzin 30 CE, 1 CH, 8 CZ, 1 MK Kontroler zdalnego sterowania (zasięg 100 m) 15 40 godzin 10 CE, 9 CZ, 1 MK Laptop 25 80 godzin 30 CE, 1 CH, 8 CZ, 1 MK Laptop wojskowy 30 140 godzin 50 CE, 1 CH, 14 CZ, 5 MK Monitorek 10 20 godzin 7 CE, 2 CZ, 1 MK Nośnik danych 10 20 godzin 8 CE, 1 CZ, 1 MK Przeprogramowanie malutkiej i małej maszyny Molocha 10 25 godzin 10 CE, 2 CZ Przeprogramowanie średniej maszyny Molocha 15 50 godzin 20 CE, 5 CZ Przeprogramowanie dużej maszyny Molocha 20 100 godzin 40 CE, 10 CZ Router 10 20 godzin 8 CE, 1 CZ, 1 MK Drony. Jako Haker możesz zbudować własnego drona, który działa według poniższych zasad. Kierowanie. Aby móc kierować dronem, potrzebny jest kontroler zdalnego sterowania. W Akcji Bonusowej możesz wydawać proste polecenia, tj., broń się, idź tam, podążaj za mną, podnieś to, upuść to, zostań. Dron nie atakuje samodzielnie. W Akcji możesz przejąć pełne sterowanie i używając zamontowanych kamer, wykorzystać wszystkie jego zdolności. Naprawianie. Poświęcając godzinę pracy, możesz przy pomocy odpowiednich narzędzi przywrócić swojej maszynie PW, w ilości 2k6 + twój modyfikator Inteligencji. Zasilanie. Akumulator 24V wystarcza na 1 godzinę pracy średniego drona i 4 godziny pracy małego. Instalacja agregatu prądotwórczego pozwala na dodatkowe zasilanie spalinowe (0,5 l paliwa/1 h). DRON KROCZĄCY Średnia maszyna TT: 10 plus mod. Inteligencji i Premia Biegłości twórcy PW: 10 x modyfikator Inteligencji twórcy; PRÓG OBRAŻEŃ 5 PRÓG AWARII 15. SIŁ ZRC KON INT MDR CHA 14 (+2) 14 (+2) 10 (+0) – – – SZYBKOŚĆ: 9 m NIEWRAŻLIWOŚĆ NA OBRAŻENIA psychiczne, od trucizny NIEWRAŻLIWOŚĆ NA STANY Przerażenie, Zatrucie, Zauroczenie ZMYSŁY Noktowizja 18 m ZDOLNOŚCI Modyfikacje. Dron może mieć zainstalowane liczne urządzenia tj. broń, kamery, oświetlenie czy skomplikowane urządzenia elektroniczne. Dokładne modyfikacje oraz ich koszt, należy ustalić z MG. Udźwig. Użytkowy: 70 kg. Maksymalny: 140 kg. AKCJE Atak. Dron może wykonać w swojej akcji jeden atak, którego zasięg i obrażenia zależą od zamontowanej broni. Wzór premii ataku drona. 2 plus Premia Biegłości twórcy i modyfikator Zręczności operatora. Wzór na obrażenia drona. Kość zamontowanej broni plus modyfikator Inteligencji twórcy. Wzór na RO w przypadku ataku obszarowego. 8 plus Premia Biegłości twórcy i modyfikator Zręczności operatora. DRON LATAJĄCY Mała maszyna TT: 10 plus mod. Inteligencji i Premia Biegłości twórcy PW: 5 x modyfikator Inteligencji twórcy, PRÓG AWARII: 10 SIŁ ZRC KON INT MDR CHA 10 (+0) 16 (+3) 10 (+0) – – – SZYBKOŚĆ: lot 18 m NIEWRAŻLIWOŚĆ NA OBRAŻENIA psychiczne, od trucizny NIEWRAŻLIWOŚĆ NA STANY Przerażenie, Zatrucie, Zauroczenie ZMYSŁY Noktowizja 18 m ZDOLNOŚCI Modyfikacje. Dron może mieć zainstalowane liczne urządzenia tj. broń, kamery, oświetlenie czy skomplikowane urządzenia elektroniczne. Dokładne modyfikacje oraz ich koszt, należy ustalić z MG. Udźwig. Użytkowy: 15 kg. Maksymalny: 30 kg. AKCJE Atak. Dron może wykonać w swojej akcji jeden atak, którego zasięg i obrażenia zależą od zamontowanej broni. Wzór premii ataku drona. 3 plus Premia Biegłości twórcy i modyfikator Zręczności operatora. Wzór na obrażenia drona. Kość zamontowanej broni plus modyfikator Inteligencji twórcy. Wzór na RO w przypadku ataku obszarowego. 8 plus Premia Biegłości twórcy i modyfikator Zręczności operatora.",
+          "context": "Class/profession ability: Hakerstwo; owner Monter. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "inteligentna-obrona",
+          "name": "Inteligentna obrona",
+          "owner": "spec",
+          "ownerLabel": "Spec",
+          "target": "icons/abilities/inteligentna-obrona.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/inteligentna-obrona.svg",
+              "variant": "default",
+              "sourceSha256": "5b7e57821da7b2a5b79ca7ed7f2ea853bb24fc69438852d979e9f58436f251e1"
+            }
+          ],
+          "ruleContext": "Kiedy zostajesz trafiony atakiem, przed poznaniem ilości obrażeń, możesz w Reakcji zwiększyć swoją Trudność Trafienia o wartość modyfikatora Inteligencji, do początku swojej następnej tury, by w ten sposób uniknąć trafienia. Możesz użyć tej zdolności tyle razy, ile wynosi twój modyfikator Inteligencji. Zdolność odnawia się po odbyciu Krótkiego odpoczynku.",
+          "context": "Class/profession ability: Inteligentna obrona; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "ja-i-moj-gang",
+          "name": "Ja i mój gang!",
+          "owner": "ganger",
+          "ownerLabel": "Ganger",
+          "target": "icons/abilities/ja-i-moj-gang.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/ja-i-moj-gang.svg",
+              "variant": "default",
+              "sourceSha256": "144fa6f6e9e15324316614d4c16db94b36e42c324911e5c55c3fc6b3006f4cbc"
+            }
+          ],
+          "ruleContext": "Kiedy jesteś w Berserku, twoi towarzysze stają się twoim gangiem, walczącym niczym wataha zmutowanych wilków. Jeśli sojusznicy stoją w promieniu 3 metrów od ciebie, otrzymują Ułatwienie w Testach Ataku przeciw wrogim istotom, które widzisz. Zawsze prowadzisz swój gang do krwawego zwycięstwa!",
+          "context": "Class/profession ability: Ja i mój gang!; owner Ganger. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "jak-dbasz-tak-masz",
+          "name": "Jak dbasz, tak masz",
+          "owner": "zolnierz",
+          "ownerLabel": "Żołnierz",
+          "target": "icons/abilities/jak-dbasz-tak-masz.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/jak-dbasz-tak-masz.svg",
+              "variant": "default",
+              "sourceSha256": "1858ccf0a0018938a0f1d49497cc3414762297e7176c434791d8511f2d06b632"
+            }
+          ],
+          "ruleContext": "Nikt nie potrafi składać, rozkładać i czyścić broni szybciej od ciebie. Robisz to z zamkniętymi oczami, paląc papierosa i śpiewając Oh my darling. Broń palna w twoich rękach nigdy się nie zacina, a jeśli już masz taką w dłoniach, wystarczy ci Akcja Bonusowa, żeby ją naprawić. Z kolei uszkodzoną broń białą, naprawiasz w czasie Krótkiego odpoczynku.",
+          "context": "Class/profession ability: Jak dbasz, tak masz; owner Żołnierz. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        }
+      ]
+    },
+    {
+      "batch": 72,
+      "subjects": [
+        {
+          "kind": "feature",
+          "key": "jeden-strzal",
+          "name": "Jeden strzał",
+          "owner": "zabojca",
+          "ownerLabel": "Zabójca",
+          "target": "icons/abilities/jeden-strzal.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/jeden-strzal.svg",
+              "variant": "default",
+              "sourceSha256": "10ac2815b3f1a04de8a13b648591e46e9073af4b6ca9db9ce83bc85349e38af5"
+            }
+          ],
+          "ruleContext": "Potrafisz się przygotować do zabijania lepiej niż ktokolwiek inny. Jeśli atakujesz bronią finezyjną lub strzelasz ogniem pojedynczym, otrzymujesz nowe możliwości. Pierwszy atak. W pierwszej rundzie walki, jeśli wykonujesz atak przed turą swojego celu, otrzymujesz Ułatwienie do pierwszego Testu Ataku przeciwko temu celowi. Celowanie [B]. W czasie walki i poza nią możesz zastygnąć w bezruchu i lepiej wycelować. Jeśli w swojej turze nie wykonasz ruchu, możesz poświęcić Akcję Bonusową na lepsze wycelowanie i wykonać jeden atak z Ułatwieniem.",
+          "context": "Class/profession ability: Jeden strzał; owner Zabójca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "jeden-z-nas",
+          "name": "Jeden z nas",
+          "owner": "sedzia",
+          "ownerLabel": "Sędzia",
+          "target": "icons/abilities/jeden-z-nas.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/jeden-z-nas.svg",
+              "variant": "default",
+              "sourceSha256": "28fa080a15a9a3e2b8dd8f3f49ea93fa3dbb178673188b1e5cfe264f05a5a31b"
+            }
+          ],
+          "ruleContext": "Nie musisz się za każdym razem tłumaczyć miejscowym stróżom prawa, kiedy ubijesz jakiegoś gangusa lub złodzieja. Nie tracisz czasu na dyskusje, mówisz, że jesteś z „policji” i że to było konieczne, a oni tylko kiwają głowami. Jesteś jednym z nich. Dodatkowo, kiedy próbujesz przekonać do czegoś lokalnych stróżów prawa, otrzymujesz Ułatwienie w testach Wpływania.",
+          "context": "Class/profession ability: Jeden z nas; owner Sędzia. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "jeden-z-nich",
+          "name": "Jeden z nich",
+          "owner": "ganger",
+          "ownerLabel": "Ganger",
+          "target": "icons/abilities/jeden-z-nich.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/jeden-z-nich.svg",
+              "variant": "default",
+              "sourceSha256": "aa8b2735ea1d8c400cb474fd3a0ec3dcf9ae52ab87cde86fc3b6f078466f4443"
+            }
+          ],
+          "ruleContext": "Tatuujesz sobie symbol przynależności do siejącego grozę gangu. Byle kto ci nie podskoczy, a reszta nie ma odwagi się z tobą sprzeczać. Postrach okolicy. Otrzymujesz biegłość w umiejętności Zastraszanie. Jeśli już ją masz, otrzymujesz zamiast tego Specjalizację. Sami swoi. Bandziory traktują cię jak swojego. Masz Ułatwienie w testach opartych na Charyzmie, kiedy gadasz z typami twojego pokroju.",
+          "context": "Class/profession ability: Jeden z nich; owner Ganger. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "jezdziec",
+          "name": "Jeździec",
+          "owner": "wyjadacz-option",
+          "ownerLabel": "wyjadacz-option",
+          "target": "icons/abilities/jezdziec.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/jezdziec.svg",
+              "variant": "default",
+              "sourceSha256": "53a7bf1784b2ef9efc618431127aba39c0d53875bf9e974bc2020a40ce759507"
+            }
+          ],
+          "ruleContext": "Kiedy dosiadasz wierzchowca, nie musisz używać rąk, żeby nim kierować. Nie otrzymujesz Utrudnienia do Testów Ataków dystansowych związanego z niestabilnym podłożem, kiedy na nim jedziesz. Wsiadanie i zsiadanie z wierzchowca kosztuje cię tylko 1,5 metra ruchu. Trudność Trafienia twojego wierzchowca zwiększa się o wartość twojej Premii Biegłości.",
+          "context": "Class/profession ability: Jeździec; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "kakofonia",
+          "name": "Kakofonia",
+          "owner": "gwiazda",
+          "ownerLabel": "Gwiazda",
+          "target": "icons/abilities/kakofonia.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/kakofonia.svg",
+              "variant": "default",
+              "sourceSha256": "3a2c179ee0daa35e59e80857907a37548a47e5bc2279f49dee9e14a450205121"
+            }
+          ],
+          "ruleContext": "W swojej Akcji możesz wydobyć ze swojego instrumentu lub z gardła zestaw głośnych nieharmonicznych dźwięków, który może zdezorientować twoich wrogów. Każda słysząca istota w promieniu 9 metrów wokół ciebie, wykonuje RO na Kondycję o ST równym 8 plus twój modyfikator Charyzmy i twoja Premia Biegłości. Porażka w Rzucie Obronnym oznacza Obezwładnienie istoty do początku twojej następnej tury. Twoi sojusznicy mają Ułatwienie w tym RO.",
+          "context": "Class/profession ability: Kakofonia; owner Gwiazda. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "kamuflaz",
+          "name": "Kamuflaż",
+          "owner": "zabojca",
+          "ownerLabel": "Zabójca",
+          "target": "icons/abilities/kamuflaz.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/kamuflaz.svg",
+              "variant": "default",
+              "sourceSha256": "2e42997c538547908929c5ba2d36652efa7a66429facc1809b7849b49093f50b"
+            }
+          ],
+          "ruleContext": "Jesteś w stanie przygotować sobie kamuflaż tak dobrze pasujący do otoczenia, że nawet po oddaniu strzału, trudno cię dostrzec. Ghillie. Jeśli przygotujesz sobie strój maskujący i pomalujesz twarz zgodnie z barwami otoczenia, otrzymujesz Ułatwienie do Testów Skradania się. Niewidoczny. Jeśli przed strzałem z broni dystansowej lub rzucanej, masz stan Niewidoczność, to nie stajesz się widoczny po wykonaniu ataku, dopóki się nie przemieścisz. Warunkiem jest noszenie stroju maskującego i malowanie twarzy, które pasują do otoczenia. Cel pozna jedynie kierunek, z którego wykonano atak, chyba że używasz broni o właściwości cicha.",
+          "context": "Class/profession ability: Kamuflaż; owner Zabójca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "kaskader",
+          "name": "Kaskader",
+          "owner": "wojownik-autostrady",
+          "ownerLabel": "Wojownik Autostrady",
+          "target": "icons/abilities/kaskader.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/kaskader.svg",
+              "variant": "default",
+              "sourceSha256": "0ae034225b437ef358ec5775f92884b68a0d9355593fa7ef197f6b423cd90c78"
+            }
+          ],
+          "ruleContext": "Twoje wyczyny za kierownicą przerażają twoich pasażerów. Kierując dowolnym pojazdem silnikowym, potrafisz wykonywać triki jak filmowy kaskader. Schody to też jezdnia. Potrafisz jeździć pojazdem po schodach (jeśli się zmieścisz wszerz i na zakrętach) z pełną Szybkością pojazdu. Skoczek. Przeskakujesz pojazdem przez dziury i przepaści o czterokrotnej długości twojego pojazdu, jeśli się rozpędzisz na odległości 60 metrów. Na dwóch kółkach. Umiesz jechać na dwóch bocznych kołach, żeby zmieścić się w wąskiej uliczce lub pomiędzy dwiema ciężarówkami. Każda z tych czynności wymaga Testu Mądrości (Pojazdy) o ST 15, który wykonujesz z Ułatwieniem. Porażka w teście oznacza, że pojazd uległ małym uszkodzeniom. Porażka o 5 i więcej, oznacza awarię pojazdu i obrażenia u pasażerów.",
+          "context": "Class/profession ability: Kaskader; owner Wojownik Autostrady. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "klusownik",
+          "name": "Kłusownik",
+          "owner": "zwiadowca",
+          "ownerLabel": "Zwiadowca",
+          "target": "icons/abilities/klusownik.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/klusownik.svg",
+              "variant": "default",
+              "sourceSha256": "6fff1379ce2c2409ce200ab84a898fc371a8434b6a6b6808baf68b77df161091"
+            }
+          ],
+          "ruleContext": "Masz doświadczenie w zakładaniu pułapek. Wystarczy chwila, żeby z tego, co masz pod ręką, zmontować coś przydatnego. Jeśli masz zestaw narzędzi małego kłusownika, poświęcisz minutę i wykonasz Test Survivalu lub narzędzi małego kłusownika, możesz zbudować pułapkę. Skonsultuj jej szczegóły i działanie z MG. ST zauważenia pułapki, wyzwolenia się z niej lub uniknięcia części obrażeń, to 8 plus twój modyfikator Mądrości i Premia Biegłości. ST zakładania i działanie przykładowych pułapek podajemy w tabeli poniżej.",
+          "context": "Class/profession ability: Kłusownik; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "kocie-kosci",
+          "name": "Kocie kości",
+          "owner": "zlodziej",
+          "ownerLabel": "Złodziej",
+          "target": "icons/abilities/kocie-kosci.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/kocie-kosci.svg",
+              "variant": "default",
+              "sourceSha256": "e64aec557d717b15492bd8565218d67c72ee3f0669a81d2da0e33e7ded075e2a"
+            }
+          ],
+          "ruleContext": "Kot zawsze spada na cztery łapy tak jak ty. Możesz użyć jednej lub więcej Kocich kości w Reakcji na niekorzystny obrót spraw w poniższych sytuacjach: Ciche łapy [R]. Podczas akcji Ukrywania się, kiedy przeciwnik odkryje twoją obecność, możesz w Reakcji dorzucić je do wyniku swojego testu. Cztery łapy [R]. Kiedy spadasz z dużej wysokości, możesz w Reakcji wykorzystać je, żeby zmniejszyć obrażenia od upadku. Otrzymane obrażenia zmniejszają się o wynik, który wypadł na użytych Kocich kościach. Zgrabne łapy. Kiedy wykonujesz Test Zręczności (Akrobatyka) i wynik nie jest zadowalający, możesz dorzucić Kocie kości do rzutu przed poznaniem efektu testu. Wartość Kociej kości zwiększa się wraz z twoim poziomem Złodzieja zgodnie z kolumną Kocie kości w tabeli Zdolności klasowych Złodzieja. Posiadasz tyle Kocich kości, ile wynosi twój modyfikator Zręczności. Liczba Kocich kości odnawia się po odbyciu Długiego odpoczynku.",
+          "context": "Class/profession ability: Kocie kości; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        }
+      ]
+    },
+    {
+      "batch": 73,
+      "subjects": [
+        {
+          "kind": "feature",
+          "key": "kolejka",
+          "name": "Kolejka",
+          "owner": "cwaniak",
+          "ownerLabel": "Cwaniak",
+          "target": "icons/abilities/kolejka.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/kolejka.svg",
+              "variant": "default",
+              "sourceSha256": "970158402b9fe22b4683b3c9087cb345f496206b7af68c32ac725927512384de"
+            }
+          ],
+          "ruleContext": "Podczas Krótkiego odpoczynku, puszczasz wśród towarzyszy kolejkę z napitkiem własnej roboty. Każdy, kto pije, odzyskuje dodatkowo +1k4 PW za każdą wydaną Kość Wytrzymałości, podczas tego odpoczynku. Pokrzepiająca siła płynąca ze zdolności Kolejka rośnie zgodnie z ostatnią kolumną w tabeli Zdolności klasowych Cwaniaka.",
+          "context": "Class/profession ability: Kolejka; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "kondycha",
+          "name": "Kondycha",
+          "owner": "twardziel",
+          "ownerLabel": "Twardziel",
+          "target": "icons/abilities/kondycha.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/kondycha.svg",
+              "variant": "default",
+              "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f"
+            },
+            {
+              "source": "icons/abilities/kondycha_active.svg",
+              "variant": "legacy-active",
+              "sourceSha256": "fe94e499463c22895956f7b690560a97d315a576f5dc27d3d5140c5010c7fbf1"
+            }
+          ],
+          "ruleContext": "Kiedy brakuje ci sił, bierzesz głęboki oddech i walczysz dalej. W Akcji Bonusowej możesz odzyskać Punkty Wytrzymałości w liczbie 1k8 + twój poziom Twardziela. Możesz skorzystać z tej zdolności tyle razy, ile wynosi twój modyfikator Kondycji. Zdolność odnawia się po ukończeniu Długiego odpoczynku.",
+          "context": "Class/profession ability: Kondycha; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "The approved glyph is shared by these exact base/active filenames. Existing hotbar code supplies the active pulsing frame; no mechanics or styling code changes."
+        },
+        {
+          "kind": "feature",
+          "key": "krwawy-aniol",
+          "name": "Krwawy anioł",
+          "owner": "medyk",
+          "ownerLabel": "Medyk",
+          "target": "icons/abilities/krwawy-aniol.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/krwawy-aniol.svg",
+              "variant": "default",
+              "sourceSha256": "dd55a607d3c756d7faad45f077907136f9659e3828ba06c199d32a7ded373458"
+            }
+          ],
+          "ruleContext": "Potrafisz używać leków skuteczniej niż ktokolwiek inny. Wiesz, gdzie wbić strzykawkę, żeby pacjent szybko stanął na nogi i zyskał więcej energii do walki. Od tej pory, kiedy używasz zestawu małego medyka, przywracasz więcej Punktów Wytrzymałości. Zamiast kostki k4 używasz na 3. poz. - k6, na 6. poz. - k8, na 9. poz. - k10, a na 12. poz. - k12.",
+          "context": "Class/profession ability: Krwawy anioł; owner Medyk. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "lets-rock",
+          "name": "Let’s rock!",
+          "owner": "gwiazda",
+          "ownerLabel": "Gwiazda",
+          "target": "icons/abilities/lets-rock.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/lets-rock.svg",
+              "variant": "default",
+              "sourceSha256": "6c6281cdd5089a4a9dc6fdaf933633f66c94d0c8c453259d100e95d833315141"
+            }
+          ],
+          "ruleContext": "Potrafisz swoją muzyką lub śpiewem zagrzewać towarzyszy do boju. W swojej akcji wykonujesz „bojowy kawałek”, który pomaga się skupić i dodaje sił. Wszyscy sojusznicy, którzy cię słyszą i są w zasięgu 27 metrów od ciebie, otrzymują premię do Testów Ataku lub Rzutów Obronnych, zależną od wyniku testu umiejętności Występy lub instrumentu muzycznego. Premia działa do początku twojej następnej tury. Zdolność Let’s rock możesz powtarzać w nieskończoność, za każdym razem ponownie testując umiejętność Występy. Jeśli w czasie występu otrzymasz stan Nieprzytomność, Obezwładnienie lub Ogłuchnięcie, efekt natychmiast się kończy. WYNIK TESTU PREMIA DO TESTÓW SOJUSZNIKÓW 5 – 9 +1 10 – 14 +2 15 – 19 +3 20 – 24 +4 25 + +5",
+          "context": "Class/profession ability: Let’s rock!; owner Gwiazda. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "lapiduch",
+          "name": "Łapiduch",
+          "owner": "medyk",
+          "ownerLabel": "Medyk",
+          "target": "icons/abilities/lapiduch.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/lapiduch.svg",
+              "variant": "default",
+              "sourceSha256": "913fffceec2f2490e4b84cdb4ea2c01368fc2d6d8cf518b701f681ea0286447b"
+            }
+          ],
+          "ruleContext": "Kiedy inni tracą nadzieję, ty wciąż walczysz o życie pacjenta. Podejmujesz reanimację i liczysz na cud, uciskając serce i robiąc usta-usta. Reanimacja trwa 1 minutę, a jej sukces zależy od twoich umiejętności i czasu, który upłynął od zatrzymania akcji serca. Udana akcja reanimacji przywraca pacjentowi funkcje życiowe, lecz jego stan wciąż nie jest stabilny. Ta zdolność nie działa na pacjenta, który otrzymał Olbrzymie obrażenia (patrz rozdział Walka s. 34). CZAS OD USTANIA TĘTNA ST TESTU MEDYCYNY do 1 minuty ST 15 do 2 minut ST 20 do 4 minut ST 25 do 8 minut ST 30",
+          "context": "Class/profession ability: Łapiduch; owner Medyk. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "laska-boza",
+          "name": "Łaska boża",
+          "owner": "kaznodzieja-nowej-ery",
+          "ownerLabel": "kaznodzieja-nowej-ery",
+          "target": "icons/abilities/laska-boza.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/laska-boza.svg",
+              "variant": "default",
+              "sourceSha256": "e5324a36a95884b60732d688880fea6f1243709fbc4a38e8a3e644b87f6802a5"
+            }
+          ],
+          "ruleContext": "W Akcji Bonusowej możesz natchnąć swoich sojuszników w promieniu 18 metrów łaską bożą. Sojusznicy muszą słyszeć twój głos. Obdarzony Łaską bożą otrzymuje +1k4 do Testów Ataków i Rzutów Obronnych, do początku twojej następnej tury. Możesz obdarzyć tą premią tylu sojuszników, ile masz poziomów Cwaniaka.",
+          "context": "Class/profession ability: Łaska boża; owner kaznodzieja-nowej-ery. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "leb-jak-sklep",
+          "name": "Łeb jak sklep",
+          "owner": "spec",
+          "ownerLabel": "Spec",
+          "target": "icons/abilities/leb-jak-sklep.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/leb-jak-sklep.svg",
+              "variant": "default",
+              "sourceSha256": "ab1446c5808fb43984e0c4f1357f4cd68fda82f47990700123c1db790a7efc87"
+            }
+          ],
+          "ruleContext": "Miewasz przebłyski prawdziwego geniuszu. Kiedy wykonujesz Test Inteligencji lub dowolnego zestawu narzędzi, możesz dorzucić 1k4 do wyniku. Masz tyle tych kostek, ile wynosi twoja Premia Biegłości. Im masz wyższy poziom, tym wartość kostek rośnie, zgodnie z kolumną Łeb jak sklep w poniższej tabeli Zdolności klasowych Speca. Zdolność odnawia się po Długim odpoczynku.",
+          "context": "Class/profession ability: Łeb jak sklep; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "lyzeczka",
+          "name": "Łyżeczka",
+          "owner": "gladiator",
+          "ownerLabel": "Gladiator",
+          "target": "icons/abilities/lyzeczka.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/lyzeczka.svg",
+              "variant": "default",
+              "sourceSha256": "843e5b1041de1b116e2ea0625ae0c2a732deff2aafc70ab3e28ee5d7baf7ddcc"
+            }
+          ],
+          "ruleContext": "Długopis, felga, wąż ogrodowy, hydrant, kula bilardowa czy mała zardzewiała łyżeczka, stanowi broń, w której masz biegłość. Możesz tym przedmiotem walczyć wręcz lub nim rzucać na dystans do 6 metrów. Maksymalna waga tej tzw. „łyżeczki” to wartość twojej Siły. Kość i typ obrażeń zależne są od wagi i rodzaju przedmiotu (ustal to z MG). Jeśli w Teście ataku „łyżeczką” wypadnie naturalna 1, rozpada się ona na dwie równe części. WAGA PRZEDMIOTU OBRAŻENIA WŁADANIE do 5 kg 1k6 Jednoręczne 6 - 11 kg 2k6 Oburęczne 12 -17 kg 3k6 Oburęczne 18 - 20 kg 4k6 Oburęczne",
+          "context": "Class/profession ability: Łyżeczka; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "maszyna-do-zabijania",
+          "name": "Maszyna do zabijania",
+          "owner": "najemnik",
+          "ownerLabel": "Najemnik",
+          "target": "icons/abilities/maszyna-do-zabijania.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/maszyna-do-zabijania.svg",
+              "variant": "default",
+              "sourceSha256": "bf846c0d06aaf67a251b1c02723bad0ff64fb927cbe0e7403f79722605cf8045"
+            }
+          ],
+          "ruleContext": "Kiedy jesteś w Berserku, zyskujesz: Promocja [B]. Możesz wykonać dodatkowo jeden Atak wręcz w Akcji Bonusowej. Zwód. Raz w rundzie możesz wykonać jeden Atak wręcz oparty na Sile z Ułatwieniem.",
+          "context": "Class/profession ability: Maszyna do zabijania; owner Najemnik. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        }
+      ]
+    },
+    {
+      "batch": 74,
+      "subjects": [
+        {
+          "kind": "feature",
+          "key": "matrix",
+          "name": "Matrix",
+          "owner": "zlodziej",
+          "ownerLabel": "Złodziej",
+          "target": "icons/abilities/matrix.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/matrix.svg",
+              "variant": "default",
+              "sourceSha256": "6bcdc39ecb83504a5b09b9bb5f3e86b517e9a9652e89e70877e12f5ec24fd851"
+            }
+          ],
+          "ruleContext": "Zyskujesz niezwykłą zdolność unikania seryjnego ostrzału, wybuchów granatów czy miotaczy ognia. Kiedy jesteś w polu rażenia ataku obszarowego, który umożliwia ci wykonanie Rzutu Obronnego na Zręczność, żeby zmniejszyć obrażenia o połowę, to po udanym RO, nie otrzymujesz żadnych obrażeń, a w przypadku niepowodzenia — tylko połowę (zaokrągloną w dół). Tej zdolności możesz użyć tyle razy, ile wynosi twoja Premia Biegłości. Matrix odnawia się po odbyciu Długiego odpoczynku.",
+          "context": "Class/profession ability: Matrix; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "mechanika",
+          "name": "Mechanika",
+          "owner": "monter",
+          "ownerLabel": "Monter",
+          "target": "icons/abilities/mechanika.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/mechanika.svg",
+              "variant": "default",
+              "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037"
+            }
+          ],
+          "ruleContext": "Smar zastępuje ci krem do rąk, benzyna pachnie jak najlepsze perfumy, a dźwięk dobrze pracującego silnika jest milszy niż miłosne szepty. Jesteś w stanie zbudować swój własny pojazd i zabrać go na rajd! Otrzymujesz biegłość w narzędziach małego mechanika. Potrafisz naprawiać, ulepszać i budować pojazdy, a nawet konstruować mechaniczne pancerze. Potrzebne ci narzędzia małego mechanika i małego kowala, surowce i czas. Otrzymujesz wylistowane poniżej schematy mechaniczne. SCHEMATY MECHANICZNE NAZWA ST PRODUKCJA SUROWCE Buggy 20 500 godzin 50 CZ, 200 MK Deskorolka 5 20 godzin 5 CZ, 5 MK Motorower 20 200 godzin 50 CZ, 50 MK Motocykl 25 300 godzin 50 CZ, 100 MK Osobówka (składak) 20 1000 godzin 100 CZ, 400 MK Paralotnia 25 100 godzin 20 CZ, 30 MK Pancerz wspomagany 30 1000 godzin 100 CE, 100 CZ, 300 MK Rower 10 40 godzin 10 CZ, 10 MK Traktor (mały) 20 1000 godzin 100 CZ, 400 MK Wózek typu dwukółka 10 20 godzin 1 CZ, 19 MK",
+          "context": "Class/profession ability: Mechanika; owner Monter. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "moja-prawa-reka",
+          "name": "Moja prawa ręka",
+          "owner": "mafiozo",
+          "ownerLabel": "Mafiozo",
+          "target": "icons/abilities/moja-prawa-reka.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/moja-prawa-reka.svg",
+              "variant": "default",
+              "sourceSha256": "e81f004a47420ab36475a8e8d6a27c09b8e45aa296643e49ec352b764ec372f2"
+            }
+          ],
+          "ruleContext": "Zaczynasz budować własną mafię. Werbujesz obiecującego człowieka, który wykonuje twoje polecenia aż po grób. Skąd go wziąć? Wyrzutka, który potrzebuje szefa, znajdziesz w każdej dziurze i ruinie. Wystarczy obiecać mu lepsze życie, dać spluwę do ręki, wydziarać tatuaż i wcielić do twojej mafijnej rodziny. Będzie robić, co każesz. Nosić plecak, pociągać za spust i nadstawiać tyłka. Ty zapewniasz mu wikt i dziesiątą część swojej doli. Jeśli nie masz odpowiedniego kandydata lub ostatni zginął, możesz poświęcić 24 godziny na szukanie nowego w miejscowości, w której przebywasz. Prawa ręka działa natychmiast po twojej turze, ale masz pełną kontrolę nad akcjami tej postaci. ZASADY TWORZENIA PRAWEJ RĘKI Tworzysz Prawą rękę na czystej karcie postaci. Cechy: Wartości Cech Bazowych do przydzielenia: 14,14,12,12,10, 8 lub 24 punkty do dowolnego rozdzielenia. Pochodzenie: Otrzymuje Pochodzenie zgodne z miejscem jego werbunku. Punkty Wytrzymałości: 5 x twój poziom Cwaniaka. Kości Wytrzymałości Prawej ręki to k6 i ma ich tyle, ile ty masz obecnie poziomów Cwaniaka. Wyszkolenie w pancerzu: Może korzystać z tych pancerzy, w których ty masz wyszkolenie. Premia Biegłości: +2 (nie rośnie). Rzuty Obronne: Ma biegłość w dwóch RO wybranych przez ciebie. Atak: Może korzystać z każdej broni, w której masz biegłość. Obrażenia: Zależne od broni i jego modyfikatorów Cech Bazowych. Sztuczki: Zna jedną, wybraną przez ciebie Sztuczkę, której wymagania spełnia. Umiejętności: Ma biegłość w dwóch wybranych przez ciebie umiejętnościach lub zestawach narzędzi. Śmierć: Prawa ręka umiera na takich samych zasadach, jak BG, czyli stosuje Stopnie Zranienia i korzysta z Rzutów Przeciw Śmierci.",
+          "context": "Class/profession ability: Moja prawa ręka; owner Mafiozo. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "motywacja",
+          "name": "Motywacja",
+          "owner": "cwaniak",
+          "ownerLabel": "Cwaniak",
+          "target": "icons/abilities/motywacja.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/motywacja.svg",
+              "variant": "default",
+              "sourceSha256": "bcda91b7757cd11b9788e8ca5578d415ead01ae547b242ba46eecbc7c255adce"
+            }
+          ],
+          "ruleContext": "Motywujesz towarzysza za pomocą słów lub muzyki. Kiedy twój sojusznik wykonuje dowolny test, możesz w swojej Reakcji zwiększyć jego szanse na sukces. Sojusznik musi się znajdować w zasięgu 18 metrów od ciebie, a twoja Reakcja musi nastąpić przed poznaniem efektu testu. Sojusznik dodaje kość Motywacji, do swojego Testu k20. Wartość kości Motywacji określa tabela Zdolności klasowych Cwaniaka. Możesz użyć tej zdolność tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po Krótkim odpoczynku.",
+          "context": "Class/profession ability: Motywacja; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "moj-biom",
+          "name": "Mój biom",
+          "owner": "zwiadowca",
+          "ownerLabel": "Zwiadowca",
+          "target": "icons/abilities/moj-biom.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/moj-biom.svg",
+              "variant": "default",
+              "sourceSha256": "3a0047be0bcef2bb1ec4cc5d21505522e7f5a74e7dbc3577f56181f6da21e3ba"
+            }
+          ],
+          "ruleContext": "Twoje doświadczenie i naturalny talent sprawiają, że umiesz przetrwać tam, gdzie innych zjadają mrokoszczury. Wybierz dwa ulubione biomy z listy: Bagna, Góry, Las, Miasto, Neodżungla, Podziemia, Preria, Pustynia, Ruiny, Tereny Maszyn. W Testach Inteligencji i Mądrości związanych z tymi biomami masz Ułatwienie. Podróżując przez te specyficzne obszary, otrzymujesz dodatkowe korzyści: • Kiedy poruszacie się pieszo, trudny teren nie spowalnia cię, ani twojej drużyny, • Nikt i nic nie jest w stanie cię zaskoczyć. • Kiedy podróżujesz samotnie, możesz się skradać w tempie normalnego ruchu. • Jeśli poświęcisz 8 godzin na szukanie wody i pożywienia, jesteś w stanie wyżywić cztery osoby przez jedną dobę. • Tropiąc istoty, poznajesz ich dokładną liczebność, rozmiar i wiesz, kiedy zostawiły ślady. Wraz z awansem na kolejne poziomy Zwiadowcy, następne rodzaje biomów stają się dla ciebie swojskie i znane. Ich liczba podana jest w kolumnie Mój biom w tabeli Zdolności klasowych Zwiadowcy.",
+          "context": "Class/profession ability: Mój biom; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "moj-bog-kule-nosi",
+          "name": "Mój bóg kule nosi",
+          "owner": "kaznodzieja-nowej-ery",
+          "ownerLabel": "kaznodzieja-nowej-ery",
+          "target": "icons/abilities/moj-bog-kule-nosi.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/moj-bog-kule-nosi.svg",
+              "variant": "default",
+              "sourceSha256": "d57cac0507304dbba52121db1d76ac1505e4fb174e29dd226ad9823476f72a80"
+            }
+          ],
+          "ruleContext": "Twoja broń prowadzona jest ręką bóstwa, by skuteczniej wykańczać grzeszników. Raz na turę, kiedy zadasz obrażenia w Teście Ataku bronią palną, możesz dodać 1k10 obrażeń.",
+          "context": "Class/profession ability: Mój bóg kule nosi; owner kaznodzieja-nowej-ery. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "moj-wrog",
+          "name": "Mój wróg",
+          "owner": "zwiadowca",
+          "ownerLabel": "Zwiadowca",
+          "target": "icons/abilities/moj-wrog.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/moj-wrog.svg",
+              "variant": "default",
+              "sourceSha256": "086ac2b583abee3c1d804960103eb2a4457d0ffaff27036d02899bd32961116f"
+            }
+          ],
+          "ruleContext": "Masz doświadczenie w zabijaniu określonego typu przeciwników. Wybierasz, czy specjalizujesz się w tropieniu i zabijaniu Ludzi, Maszyn, Mutantów, Potworów czy Zwierząt. Masz Ułatwienie w Testach Mądrości (Survival), kiedy tropisz swoich wrogów i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg w tabeli Zdolności klasowych Zwiadowcy. PRZYKŁAD: Pierwszopoziomowy Zwiadowca, którego wrogiem są Potwory, dodaje +1 do Testów Ataków wykonywanych przeciwko wszelkim potworom oraz każdy jego atak zadaje im dodatkowo 1k6 obrażeń. Na 5. i 9. poziomie, możesz wybrać kolejny typ wroga.",
+          "context": "Class/profession ability: Mój wróg; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "moj-wrog-ludzie",
+          "name": "Mój wróg: Ludzie",
+          "owner": "moj-wrog-option",
+          "ownerLabel": "moj-wrog-option",
+          "target": "icons/abilities/moj-wrog-ludzie.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/moj-wrog-ludzie.svg",
+              "variant": "default",
+              "sourceSha256": "d8b5cbf7401549a902dec78dfefdc4ce2e2d6901250352a392e67022f77defd0"
+            }
+          ],
+          "ruleContext": "Twoim wrogiem są Ludzie. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg.",
+          "context": "Class/profession ability: Mój wróg: Ludzie; owner moj-wrog-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "moj-wrog-maszyny",
+          "name": "Mój wróg: Maszyny",
+          "owner": "moj-wrog-option",
+          "ownerLabel": "moj-wrog-option",
+          "target": "icons/abilities/moj-wrog-maszyny.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/moj-wrog-maszyny.svg",
+              "variant": "default",
+              "sourceSha256": "448d669cb911e5dbee66aa19e11a185f03b3da58db36f7b6806fa5edebf97366"
+            }
+          ],
+          "ruleContext": "Twoim wrogiem są Maszyny. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg.",
+          "context": "Class/profession ability: Mój wróg: Maszyny; owner moj-wrog-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        }
+      ]
+    },
+    {
+      "batch": 75,
+      "subjects": [
+        {
+          "kind": "feature",
+          "key": "moj-wrog-mutanty",
+          "name": "Mój wróg: Mutanty",
+          "owner": "moj-wrog-option",
+          "ownerLabel": "moj-wrog-option",
+          "target": "icons/abilities/moj-wrog-mutanty.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/moj-wrog-mutanty.svg",
+              "variant": "default",
+              "sourceSha256": "448d669cb911e5dbee66aa19e11a185f03b3da58db36f7b6806fa5edebf97366"
+            }
+          ],
+          "ruleContext": "Twoim wrogiem są Mutanty. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg.",
+          "context": "Class/profession ability: Mój wróg: Mutanty; owner moj-wrog-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "moj-wrog-potwory",
+          "name": "Mój wróg: Potwory",
+          "owner": "moj-wrog-option",
+          "ownerLabel": "moj-wrog-option",
+          "target": "icons/abilities/moj-wrog-potwory.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/moj-wrog-potwory.svg",
+              "variant": "default",
+              "sourceSha256": "271645990c42c48e5ef70e18049a082c16dbd51afb67b3eded7cd026ef18e985"
+            }
+          ],
+          "ruleContext": "Twoim wrogiem są Potwory. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg.",
+          "context": "Class/profession ability: Mój wróg: Potwory; owner moj-wrog-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "moj-wrog-zwierzeta",
+          "name": "Mój wróg: Zwierzęta",
+          "owner": "moj-wrog-option",
+          "ownerLabel": "moj-wrog-option",
+          "target": "icons/abilities/moj-wrog-zwierzeta.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/moj-wrog-zwierzeta.svg",
+              "variant": "default",
+              "sourceSha256": "e2a4ae3f74b141db1753d1d6a9b4771c54109e7fb007cb0f1b9a64eb7c44de6e"
+            }
+          ],
+          "ruleContext": "Twoim wrogiem są Zwierzęta. Masz Ułatwienie w Testach Mądrości (Survival), kiedy ich tropisz, i w Testach Inteligencji, kiedy przypominasz sobie fakty na ich temat. Kiedy ich atakujesz, otrzymujesz modyfikator do ataku i obrażeń zgodny z kolumną Mój wróg.",
+          "context": "Class/profession ability: Mój wróg: Zwierzęta; owner moj-wrog-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "mutant-na-sniadanie",
+          "name": "Mutant na śniadanie",
+          "owner": "lowca-mutantow",
+          "ownerLabel": "Łowca Mutantów",
+          "target": "icons/abilities/mutant-na-sniadanie.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/mutant-na-sniadanie.svg",
+              "variant": "default",
+              "sourceSha256": "75f1793b8c61d67e215c153eb5b2e4dc27f7d587a99e778ca25bc0b88e3002d9"
+            }
+          ],
+          "ruleContext": "Trochę tego tałatajstwa już zdechło dzięki tobie. Wiesz najlepiej, jak z nimi walczyć i jak się przed nimi bronić. Refleks łowcy. Kiedy rozpoczynasz walkę z mutantem lub potworem, zyskujesz premię do Inicjatywy, równą twojej Premii Biegłości. Zabójca mutantów. Kiedy walczysz z mutantem lub potworem, możesz raz w rundzie zaatakować go z Ułatwieniem. Unik łowcy [R]. Jeśli zostajesz trafiony atakiem przez mutanta lub potwora, możesz użyć Reakcji, żeby wobec tego ataku podnieść swoją TT o wartość twojej Premii Biegłości.",
+          "context": "Class/profession ability: Mutant na śniadanie; owner Łowca Mutantów. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "nie-do-zdarcia",
+          "name": "Nie do zdarcia",
+          "owner": "gladiator",
+          "ownerLabel": "Gladiator",
+          "target": "icons/abilities/nie-do-zdarcia.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/nie-do-zdarcia.svg",
+              "variant": "default",
+              "sourceSha256": "2415ac9a0eb191d6b5a62d4dfa4cd279193ab027f2b8ccb63424891669c03f1b"
+            }
+          ],
+          "ruleContext": "Każde trafienie, które zadałoby ci obrażenia krytyczne, zadaje zamiast tego normalne obrażenia. To nic, że obrywasz siekierą w głowę lub kulką prosto w serce. To wcale nie było w głowę tylko w ucho, a serce masz po drugiej stronie!",
+          "context": "Class/profession ability: Nie do zdarcia; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "nie-klekam",
+          "name": "Nie klękam",
+          "owner": "twardziel",
+          "ownerLabel": "Twardziel",
+          "target": "icons/abilities/nie-klekam.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/nie-klekam.svg",
+              "variant": "default",
+              "sourceSha256": "2b9024095583328cc8e8691e95e227163fc4fb2be30650b494391757e4b8cb17"
+            }
+          ],
+          "ruleContext": "Twoje doświadczenie bojowe pozwala ci przetrwać w najtrudniejszych sytuacjach. Masz biegłość we wszystkich Rzutach Obronnych.",
+          "context": "Class/profession ability: Nie klękam; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "obelga",
+          "name": "Obelga",
+          "owner": "cwaniak",
+          "ownerLabel": "Cwaniak",
+          "target": "icons/abilities/obelga.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/obelga.svg",
+              "variant": "default",
+              "sourceSha256": "f8c8d712dc18d26ae769bee4bff8b17ce67b6aa36773113b6126437c4f3d195d"
+            }
+          ],
+          "ruleContext": "Zamiast wykonywać akcję Atakowanie, możesz obrazić istotę w zasięgu 18 metrów, która cię widzi i słyszy. Istota nie musi cię rozumieć, ponieważ sam ton twojego głosu ocieka pogardą. Jeżeli do końca twojej następnej tury cel zaatakuje kogoś innego niż ty, wykonuje Testy Ataku z Utrudnieniem. Tej zdolności możesz użyć tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po ukończeniu Krótkiego odpoczynku.",
+          "context": "Class/profession ability: Obelga; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "obsluga-pancerza",
+          "name": "Obsługa pancerza",
+          "owner": "wyjadacz-option",
+          "ownerLabel": "wyjadacz-option",
+          "target": "icons/abilities/obsluga-pancerza.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/obsluga-pancerza.svg",
+              "variant": "default",
+              "sourceSha256": "31dc7548af241a9d649a7add411298527d65ec112603fe33151aad41a830d0d2"
+            }
+          ],
+          "ruleContext": "Kiedy nosisz pancerz, otrzymujesz +2 do Trudności Trafienia.",
+          "context": "Class/profession ability: Obsługa pancerza; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "odwazny-czy-glupi",
+          "name": "Odważny czy głupi",
+          "owner": "ganger",
+          "ownerLabel": "Ganger",
+          "target": "icons/abilities/odwazny-czy-glupi.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/odwazny-czy-glupi.svg",
+              "variant": "default",
+              "sourceSha256": "374469ecf6d4cc708be851510518c42f24caca3ee47dcfe85af8556e6005cd84"
+            }
+          ],
+          "ruleContext": "Nie ma na tym świecie istot, które byłyby w stanie ci zagrozić. Głupi. Zyskujesz niewrażliwość na stan Przerażenie. Odważny. Wszyscy sojusznicy w odległości 9 metrów od ciebie, otrzymują premię +1k4 do RO przeciwko Przerażeniu.",
+          "context": "Class/profession ability: Odważny czy głupi; owner Ganger. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        }
+      ]
+    },
+    {
+      "batch": 76,
+      "subjects": [
+        {
+          "kind": "feature",
+          "key": "oswajanie-zwierzat",
+          "name": "Oswajanie zwierząt",
+          "owner": "lowca-mutantow",
+          "ownerLabel": "Łowca Mutantów",
+          "target": "icons/abilities/oswajanie-zwierzat.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/oswajanie-zwierzat.svg",
+              "variant": "default",
+              "sourceSha256": "5fc5cad5aaecaa9d56243072e94ea7e3bee03600bc7070a38124678da0dc552d"
+            }
+          ],
+          "ruleContext": "Znajdujesz zmutowanego zwierzaka i sprawiasz, żeby łaził za tobą i wykonywał twoje polecenia. W czasie walki działa natychmiast po twojej turze, jeśli przeznaczysz swoją Akcję Bonusową na wydanie mu polecenia. Oswojone zwierzę wykonuje pełny zakres swoich akcji i walczy do utraty przytomności. Jeśli nie otrzyma żadnego polecenia, nie przemieszcza się i używa akcji Unikanie. Oswajanie zwierzęcia. Jeśli nie posiadasz żadnego oswojonego zwierzęcia, możesz poświęcić 24 godziny na szukanie odpowiedniego kandydata. Rzuć 1k6, żeby dowiedzieć się, jakie stworzenie znajdujesz (1-2: zmutowany owad, 3-4: zmutowany ssak, 5-6: zmutowany gad). Jest to zwykle osobnik słaby, ranny lub odtrącony przez swoje stado. Czas leczenia i oswajania trwa 3 dni. Oswojonemu zwierzęciu musisz nadać imię i nie możesz go nikomu sprzedać ani oddać. Musisz mu zapewniać wodę i pożywienie. ZMUTOWANY OWAD Małe zwierzę TT: 14 plus twoja Premia Biegłości INICJATYWA +6 (16) PW: 3 plus 10 x twój modyfikator Mądrości SZYBKOŚĆ: 9 m, wspinanie 9 m, kopanie 4,5 m STOPIEŃ ZRANIENIA O O O O KW k6 x ½ twojego poziomu Zwiadowcy SIŁ ZRC KON INT MDR CHA 8 (-1) 18 (+4) 14 (+2) 4 (-3) 16 (+3) 4 (-3) UMIEJĘTNOŚCI Skradanie się +6 NIEWRAŻLIWOŚĆ NA OBRAŻENIA radioaktywne, od trucizny ZMYSŁY Ślepowidzenie 9 m, Pasywna Percepcja 13 ZDOLNOŚCI Kopacz. Kiedy zakopuje się w piachu lub w ziemi, nie prowokuje ataków okazyjnych. Pajęcza wspinaczka. Może chodzić po każdej chropowatej powierzchni, nawet do góry nogami. Udźwig. Użytkowy: 16 kg. Maksymalny: 32 kg. AKCJE Ukąszenie. Atak wręcz: +4 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 6 (1k4 + 4) kłute. ZMUTOWANY SSAK Duże zwierzę TT: 11 plus twoja Premia Biegłości INICJATYWA -1 (9) PW: 9 plus 10 x twój modyfikator Mądrości SZYBKOŚĆ: 12 m, wspinanie 6 m STOPIEŃ ZRANIENIA O O O O KW k10 x ½ twojego poziomu Zwiadowcy SIŁ ZRC KON INT MDR CHA 18 (+4) 12 (+1) 12 (+1) 6 (-2) 14 (+2) 4 (-3) UMIEJĘTNOŚCI Atletyka +6 ZMYSŁY Noktowizja 18 m, Pasywna Percepcja 12 ZDOLNOŚCI Doskonałe zmysły. Ma Ułatwienie w Testach Mądrości (Percepcja) opartych na węchu i słuchu. Współpraca. Jeśli w zasięgu do 1,5 metra od przeciwnika znajduje się przytomny sojusznik, otrzymuje Ułatwienie do Testów Ataku wręcz. Udźwig. Użytkowy: 180 kg. Maksymalny: 360 kg. AKCJE Atak kończyną. Atak wręcz: +4 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 10 (2k6 + 4) obuchowe i trafiony cel otrzymuje stan Powalenie, jeśli jest rozmiaru średniego lub mniejszego. ZMUTOWANY GAD Średnie zwierzę TT: 12 plus twoja Premia Biegłości INICJATYWA +2 (12) PW: 6 plus 10 x twój modyfikator Mądrości SZYBKOŚĆ: 9 m, pływanie 18 m STOPIEŃ ZRANIENIA O O O O KW k8 x ½ twojego poziomu Zwiadowcy. SIŁ ZRC KON INT MDR CHA 14 (+2) 14 (+2) 18 (+4) 4 (-3) 12 (+1) 4 (-3) UMIEJĘTNOŚCI Percepcja +3 ZMYSŁY Termowizja 18 m, Pasywna Percepcja 13 ZDOLNOŚCI Ziemnowodny. Potrafi oddychać zarówno na lądzie, jak i pod wodą. Udźwig. Użytkowy: 70 kg. Maksymalny: 140 kg. AKCJE Ugryzienie. Atak wręcz: +2 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 5 (1k6 + 2) kłute. Trafiona istota musi zdać RO na Kondycję o ST 10, inaczej zostanie Zatruta na 1 minutę. Cel wykonuje ponowny RO na końcu swojej tury.",
+          "context": "Class/profession ability: Oswajanie zwierząt; owner Łowca Mutantów. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "pancerna-fura",
+          "name": "Pancerna fura",
+          "owner": "wojownik-autostrady",
+          "ownerLabel": "Wojownik Autostrady",
+          "target": "icons/abilities/pancerna-fura.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/pancerna-fura.svg",
+              "variant": "default",
+              "sourceSha256": "ad03acdc92b3e15d2689f8caadc7d0609b58bce1fbe5601ab1cde783441fbcc9"
+            }
+          ],
+          "ruleContext": "Twoja maszyna jest twoją twierdzą. OC. Jeśli prowadzisz pojazd mechaniczny, który daje jakąś Osłonę pasażerom, to ty i twoi pasażerowie otrzymujecie dodatkową premię do Trudności Trafienia, równą twojemu modyfikatorowi Mądrości. Premia działa, tylko kiedy pojazd jest w ruchu. AC [B]. W Akcji Bonusowej możesz uruchomić lub zatrzymać pojazd, wykonać nim Przyspieszenie, Odstąpienie lub Unikanie.",
+          "context": "Class/profession ability: Pancerna fura; owner Wojownik Autostrady. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "paranoja",
+          "name": "Paranoja",
+          "owner": "brutal",
+          "ownerLabel": "Brutal",
+          "target": "icons/abilities/paranoja.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/paranoja.svg",
+              "variant": "default",
+              "sourceSha256": "334dfbff614a3cab3be29ebb4ba450b0d0545f5ea20f1814ebb0101cc1b69973"
+            }
+          ],
+          "ruleContext": "Twój lęk przed zagrożeniem jest tak wielki, że wszędzie spodziewasz się zasadzki. Nikt nie jest w stanie cię zaskoczyć i otrzymujesz Ułatwienie w testach Inicjatywy.",
+          "context": "Class/profession ability: Paranoja; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "partner",
+          "name": "Partner",
+          "owner": "sedzia",
+          "ownerLabel": "Sędzia",
+          "target": "icons/abilities/partner.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/partner.svg",
+              "variant": "default",
+              "sourceSha256": "37a4bb62098769912673161ff53187408cea86af79f3c616cb33d8002dc05c56"
+            }
+          ],
+          "ruleContext": "Wierny uczeń lub ulubione zwierzę to idealni partnerzy Sędziego. W tym świecie nikt nie przetrwa samotnie. Twój partner ma imię, wykonuje twoje polecenia, nawet walczy u twego boku, jeśli tylko potrafi. Może jednak zginąć, a wtedy będziesz szukać nowego. Sędzia zwykle ciągnie ze sobą młodego człowieka, który chce nauczyć się fachu… albo psa. Partner ma swoją turę zawsze po twojej turze. Nie może działać samodzielnie, więc w swojej Akcji Bonusowej wydajesz mu komendę. Jeśli nie wydasz mu żadnego polecenia, unika walki, broni się akcją Unikanie i szuka osłony. PSI PARTNER Małe zwierzę TT: 12 plus twoja Premia Biegłości INICJATYWA +4 (14) PW: 10 plus 10 x twój modyfikator z Mądrości SZYBKOŚĆ: 18 m STOPIEŃ ZRANIENIA O O O O KW k6 x twój poziom Zwiadowcy SIŁ ZRC KON INT MDR CHA 14 (+2) 14 (+2) 12 (+1) 8 (-1) 14 (+2) 6 (-2) RZUTY OBRONNE ZRC +4, MDR +4 UMIEJĘTNOŚCI Percepcja +4, Skradanie się +4 ZMYSŁY Noktowizja 18 metrów, Pasywna Percepcja 14 ZDOLNOŚCI Doskonałe zmysły. Pies ma Ułatwienie w Testach Mądrości (Percepcja) opartych na węchu i słuchu. Współpraca. Jeśli w zasięgu do 1,5 metra od przeciwnika znajduje się przytomny sojusznik, pies otrzymuje Ułatwienie do Testów Ataku wręcz. Psi bohater. Umiera na takich samych zasadach jak BG, czyli stosuje Stopnie Zranienia i wykonuje Rzuty Przeciw Śmierci. Wymagania. Pojenie skażoną wodą i nieodpowiednie karmienie może pogorszyć jego zdrowie. Udźwig. Użytkowy: 28 kg. Maksymalny: 48 kg. AKCJE Ugryzienie. Atak wręcz: +2 plus twoja Premia Biegłości; zasięg 1,5 m; Obrażenia: 5 (1k6 + 2) kłute i trafiony cel zostaje Pochwycony, jeśli jest rozmiaru średniego lub mniejszego. Szukanie partnera. Jeśli nie masz partnera, możesz poświęcić 24 godziny na szukanie odpowiedniego kandydata. Na zbłąkanego kundla lub pełnego ideałów człowieka natkniesz się zarówno w mieście, jak i w dowolnej, zabitej dechami dziurze. Partnera nie możesz nikomu odstąpić (lub sprzedać w przypadku psa) oraz musisz mu zapewnić wodę i pożywienie. LUDZKI PARTNER Tworzysz partnera na czystej karcie postaci. Cechy: Wartości Cech Bazowych do przydzielenia: 14,14,12,12,10, 8 lub 24 punkty do dowolnego rozdzielenia. Pochodzenie: Otrzymuje Pochodzenie zgodne z miejscem jego werbunku. Punkty Wytrzymałości. 5 x twój poziom Zwiadowcy. Kości Wytrzymałości partnera to k6 i ma ich tyle, ile ty masz poziomów Zwiadowcy. Wyszkolenie w pancerzu: Może korzystać z tych pancerzy, w których ty masz wyszkolenie. Premia Biegłości: +2 (nie rośnie). Rzuty Obronne: Ma biegłość w dwóch RO wybranych przez ciebie. Atak: Może korzystać z każdej broni, w której masz biegłość. Obrażenia. Zależne od broni i jego modyfikatorów Cech Bazowych. Sztuczki. Zna jedną, wybraną przez ciebie Sztuczkę, której wymagania spełnia. Umiejętności. Ma biegłość w dwóch wybranych przez ciebie umiejętnościach lub zestawach narzędzi. Śmierć: Umiera na takich samych zasadach, jak BG, czyli stosuje Stopnie Zranienia i korzysta z Rzutów Przeciw Śmierci.",
+          "context": "Class/profession ability: Partner; owner Sędzia. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "pirotechnika",
+          "name": "Pirotechnika",
+          "owner": "chemik",
+          "ownerLabel": "Chemik",
+          "target": "icons/abilities/pirotechnika.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/pirotechnika.svg",
+              "variant": "default",
+              "sourceSha256": "2050978b23be1ccab45a97da1c85a001290b07825acce0d8183bc9e6ac011574"
+            }
+          ],
+          "ruleContext": "Zupełnie ci już odwaliło i bierzesz się za robienie BUM. Dynamit i granaty, czego chcieć więcej? Potrzebne ci tylko narzędzia małego chemika, małego rusznikarza, surowce i czas. Otrzymujesz wylistowane obok schematy pirotechniczne. SCHEMATY PIROTECHNICZNE NAZWA ST PRODUKCJA SUROWCE Dynamit (laska) 15 20 godzin 19 CH, 1 MK Granat dymny 15 20 godzin 15 CH, 4 CZ, 1 MK Granat gazowy 20 30 godzin 25 CH, 4 CZ, 1 MK Granat hukowy 20 30 godzin 25 CH, 4 CZ, 1 MK Granat improwizowany 10 10 godzin 9 CH, 1 MK/MO Granat odłamkowy 20 35 godzin 30 CH, 4 CZ, 1 MK Granat zapalający 20 35 godzin 30 CH, 4 CZ, 1 MK Granat 40 mm 15 15 godzin 10 CH, 3 CZ, 2 MK IED 15 20 godzin 5 CE, 10 CH, 4 CZ, 1 MK Koktajl Mołotowa 5 1 minuta 4 CH, 1 MK Mina przeciwpiechotna 25 40 godzin 30 CH, 5 CZ, 5 MK Mina przeciwpancerna 25 60 godzin 5 CE, 40 CH, 5 CZ, 10 MK Plastik C4 (100 g) 25 50 godzin 50 CH Pocisk 60 mm 20 30 godzin 25 CH, 1 CZ, 4 MK Proch czarny (20 g) 10 5 godzin 2 CH, 3 MK/MO Proch strzelniczy (20 g) 15 10 godzin 5 CH, 5 MK/MO SUROWCE CH - Chemia CE - Części elektroniczne CZ - Części zamienne MK - Materiały konstrukcyjne MO - Materiały organiczne",
+          "context": "Class/profession ability: Pirotechnika; owner Chemik. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "pistolero",
+          "name": "Pistolero",
+          "owner": "kowboj",
+          "ownerLabel": "Kowboj",
+          "target": "icons/abilities/pistolero.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/pistolero.svg",
+              "variant": "default",
+              "sourceSha256": "ab2f88b1f8370a4770722ca05b476fea3d28ade7854b12b071a5ce7a97653c88"
+            }
+          ],
+          "ruleContext": "Pistolet w dłoni jest dla ciebie równie naturalny jak but na stopie. Dobywanie. Jeśli nosisz jeden lub dwa pistolety w kaburach, możesz je dobyć lub schować bez zużywania darmowej interakcji z przedmiotem. Niezawodny. Pistolet w twoich rękach nigdy się nie zacina. Jednoręki. Strzelasz z pistoletu jedną ręką bez Utrudnienia. Pistolety traktujesz jako broń o właściwości lekka i poręczna. Strzał z biodra. +5 do testów Inicjatywy, jeśli trzymasz w ręce lub będziesz dobywać pistolet. Powąchaj to. Gdy celujesz z pistoletu do istoty w zasięgu 1,5 m, możesz wykonać Test Zastraszania z Ułatwieniem, używając SIŁ lub CHA.",
+          "context": "Class/profession ability: Pistolero; owner Kowboj. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "podstepny-atak",
+          "name": "Podstępny atak",
+          "owner": "zlodziej",
+          "ownerLabel": "Złodziej",
+          "target": "icons/abilities/podstepny-atak.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/podstepny-atak.svg",
+              "variant": "default",
+              "sourceSha256": "9a5dd41c0418a0fa745c1bcb60e5baee6a7cec0b1c14db85f088eaffbb7b1d39"
+            }
+          ],
+          "ruleContext": "Twoje ataki są nie tylko bolesne, ale i upierdliwe. Kiedy zadajesz obrażenia, używając Bolesnego ataku, możesz zamiast dodatkowych obrażeń nałożyć specjalny efekt (wymieniony poniżej) na cel. Kilka takich samych efektów się nie kumuluje. Krwawienie. Żywa istota otrzymuje 1k8 obrażeń na początku swojej tury. Krwawienie ustaje po opatrzeniu rany. Spowolnienie. Szybkość celu spada o 1k6 x 1,5 m do końca twojej następnej tury. Oślepienie. Cel zostaje Oślepiony do końca twojej następnej tury.",
+          "context": "Class/profession ability: Podstępny atak; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "pogon",
+          "name": "Pogoń",
+          "owner": "zwiadowca",
+          "ownerLabel": "Zwiadowca",
+          "target": "icons/abilities/pogon.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/pogon.svg",
+              "variant": "default",
+              "sourceSha256": "03bdb94245452bc8e4b2bed022b27294276b1339306ff87f8624a374f1a3143a"
+            }
+          ],
+          "ruleContext": "Rzuty Obronne, w których porażka oznacza otrzymanie stanu Wyczerpanie, wykonujesz z Ułatwieniem.",
+          "context": "Class/profession ability: Pogoń; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "pogromca",
+          "name": "Pogromca",
+          "owner": "lowca-mutantow",
+          "ownerLabel": "Łowca Mutantów",
+          "target": "icons/abilities/pogromca.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/pogromca.svg",
+              "variant": "default",
+              "sourceSha256": "03bdb94245452bc8e4b2bed022b27294276b1339306ff87f8624a374f1a3143a"
+            }
+          ],
+          "ruleContext": "Jeśli wydasz 100 gambli na surowce i poświęcisz 100 godzin pracy, to zbudujesz strzelbę na mutanty i potwory o wdzięcznej nazwie Pogromca. Strzela ona nabojami przypominającymi małe strzykawki napełnione chemikaliami. W czasie Długiego odpoczynku możesz stworzyć tyle naboi, ile wynosi twoja Premia Biegłości. Koszt stworzenia jednego takiego naboju to 10 gb, a trafiony nim mutant lub potwór otrzymuje obrażenia krytyczne. Naboje mogą zawierać truciznę, kwas lub po prostu eksplodować. Tylko Łowca mutantów jest biegły w używaniu Pogromcy. Nazwa: Pogromca Tryb ognia: Pojedynczy Magazynek: 1 Obrażenia: 4k6 od trucizny/kwasu/ognia Zasięg: 9/18 metrów Właściwości: Ładowanie Koszt produkcji: 10 MK, 10 CE, 80 CZ Koszt produkcji pocisku: 1 MK, 1 CZ, 8 CH",
+          "context": "Class/profession ability: Pogromca; owner Łowca Mutantów. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        }
+      ]
+    },
+    {
+      "batch": 77,
+      "subjects": [
+        {
+          "kind": "feature",
+          "key": "renoma",
+          "name": "Renoma",
+          "owner": "mafiozo",
+          "ownerLabel": "Mafiozo",
+          "target": "icons/abilities/renoma.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/renoma.svg",
+              "variant": "default",
+              "sourceSha256": "2c250443f8ff9417077e1af3d5ab755525b7b3aa3e383c7707b1c40629ef5fe2"
+            }
+          ],
+          "ruleContext": "Nie można strzelić człowiekowi w głowę, mając ubłocone buty. Chciałbyś, żeby ktoś cię potrącił nieumytym pontiakiem? Trzeba szanować klientów i wrogów. Trudno nie uwierzyć człowiekowi takiemu jak ty. Człowiekowi, który ma swoją renomę i wie, że ubiór świadczy o szacunku. Każde 50 gambli towarów luksusowych, które nosisz na sobie, daje ci premię +1 do testów Wpływania.",
+          "context": "Class/profession ability: Renoma; owner Mafiozo. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "reputacja",
+          "name": "Reputacja",
+          "owner": "najemnik",
+          "ownerLabel": "Najemnik",
+          "target": "icons/abilities/reputacja.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/reputacja.svg",
+              "variant": "default",
+              "sourceSha256": "c6171ebd37c1959b6113941043ad6f1b8d62bcd891256673b15441335d5ba3d2"
+            }
+          ],
+          "ruleContext": "Ty nie nawalasz. Zawsze kończysz podjęte zlecenie. Twoja reputacja podąża za tobą krok w krok. Kiedy negocjujesz stawkę, masz Ułatwienie w testach Wpływania. A kiedy zadanie zostanie wykonane, otrzymujesz premię 1k4 x 10% wynegocjowanej stawki.",
+          "context": "Class/profession ability: Reputacja; owner Najemnik. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "rewolwerowiec",
+          "name": "Rewolwerowiec",
+          "owner": "kowboj",
+          "ownerLabel": "Kowboj",
+          "target": "icons/abilities/rewolwerowiec.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/rewolwerowiec.svg",
+              "variant": "default",
+              "sourceSha256": "5932894cb0904c52300d34a290a16a8d353d786ccacace5058b05c1c725c5b50"
+            }
+          ],
+          "ruleContext": "Wyciągasz rewolwer i strzelasz, zanim ktokolwiek zdąży mrugnąć okiem. Dobywanie. Jeśli nosisz jeden lub dwa rewolwery w kaburach, możesz je dobyć lub schować, bez zużywania darmowej interakcji z przedmiotem. Niezawodny. Rewolwer w twoich rękach nigdy się nie zacina. Jednoręki. Możesz strzelać z rewolweru jedną ręką, bez otrzymywania Utrudnienia do ataku z tego tytułu. Rewolwery traktujesz jako broń o właściwości lekka i poręczna. Strzał z biodra. Otrzymujesz +5 do testów Inicjatywy, jeśli trzymasz w ręce lub będziesz dobywać rewolwer. Szybkoładowacz [B]. Jeśli masz wolną rękę, to w Akcji Bonusowej, możesz z pomocą pełnego szybkoładowcza (aka speedloadera) uzupełnić pusty bębenek rewolweru.",
+          "context": "Class/profession ability: Rewolwerowiec; owner Kowboj. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "rusznikarstwo",
+          "name": "Rusznikarstwo",
+          "owner": "chemik",
+          "ownerLabel": "Chemik",
+          "target": "icons/abilities/rusznikarstwo.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/rusznikarstwo.svg",
+              "variant": "default",
+              "sourceSha256": "dcec8366016e63f63cc169a3c17cfcc06696ada67a7db003f5ae8ac9f419eb14"
+            }
+          ],
+          "ruleContext": "Nie ma nic lepszego niż zapach prochu o poranku. Broń palna to twoja największa miłość. Potrafisz ją wytwarzać i ulepszać. Potrzebne ci tylko narzędzia małego kowala i małego rusznikarza, surowce i czas. Otrzymujesz wylistowane poniżej schematy rusznikarskie. SCHEMATY RUSZNIKARSKIE NAZWA ST PRODUKCJA SUROWCE Broń palna krótka 15 Cena x 1 godz. (CZ + MK) = 50% CENY Broń palna pośrednia 20 Cena x 1 godz. (CZ + MK) = 50% CENY Broń palna długa 25 Cena x 1 godz. (CZ + MK) = 50% CENY Broń miotana: kusze 20 Cena x 1 godz. (CZ + MK) = 50% CENY Broń palna ciężka i specjalna 25 Koszt x 2 godz. (CZ + MK) = 50% CENY Celownik trytowy 10 20 godzin 9 CZ, 1 MK Chwyt przedni 10 20 godzin 5 CZ, 5 MK Dwójnóg 15 30 godzin 5 CZ, 10 MK/MO Granatnik podwieszany 20 70 godzin 15 CZ, 20 MK Kolba dostawna 10 20 godzin 10 MK/MO Kolba składana 15 30 godzin 1 CZ, 14 MK/MO Konwersja komory i lufy 20 60 godzin 5 CZ, 25 MK Nowy zestaw sprężyn 15 40 godzin 20 CZ Okładziny uchwytu 10 20 godzin 10 MK/MO Pocisk 60 mm 20 30 godzin 20 CH, 1 CZ, 9 MK Pocisk 120 mm 25 45 godzin 40 CH, 1 CZ, 4 MK Szyna montażowa 15 30 godzin 1 CZ, 14 MK Śrutówka podlufowa 20 50 godzin 15 CZ, 10 MK Tłumik 20 60 godzin 10 CZ, 20 MK Trójnóg 15 40 godzin 5 CZ, 15 MK/MO Uchwyt bagnetu 5 10 godzin 5 MK Zmiana poj. magazynka 10 20 godzin 5 CZ, 5 MK",
+          "context": "Class/profession ability: Rusznikarstwo; owner Chemik. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "rutyna",
+          "name": "Rutyna",
+          "owner": "zolnierz",
+          "ownerLabel": "Żołnierz",
+          "target": "icons/abilities/rutyna.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/rutyna.svg",
+              "variant": "default",
+              "sourceSha256": "ec4fbae53cf1be1d52125b9e3d96acd0054cae17fcc33274d72cdf2d59cd1c68"
+            }
+          ],
+          "ruleContext": "Kiedy inni panikują, ty wykonujesz rutynowe działania na polu walki. Ostrzał artylerii, eksplodujące granaty, czy seria z karabinu, to tylko elementy taktyczne, utrudniające wykonanie misji. Kalkulujesz i oceniasz ryzyko, będąc tam, gdzie są największe szanse na przeżycie. W czasie walki masz Ułatwienie w Rzutach Obronnych na Zręczność i Mądrość.",
+          "context": "Class/profession ability: Rutyna; owner Żołnierz. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "rzeznik",
+          "name": "Rzeźnik",
+          "owner": "wyjadacz-option",
+          "ownerLabel": "wyjadacz-option",
+          "target": "icons/abilities/rzeznik.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/rzeznik.svg",
+              "variant": "default",
+              "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+            }
+          ],
+          "ruleContext": "Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią.",
+          "context": "Class/profession ability: Rzeźnik; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "rzuc-bron-i-gleba",
+          "name": "Rzuć broń i gleba!",
+          "owner": "sedzia",
+          "ownerLabel": "Sędzia",
+          "target": "icons/abilities/rzuc-bron-i-gleba.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/rzuc-bron-i-gleba.svg",
+              "variant": "default",
+              "sourceSha256": "4c636b9bca6cc749b0096229c7a396284331f794259e6606f8c79d4d69db29a1"
+            }
+          ],
+          "ruleContext": "Siła twojego głosu potrafi zmusić największego cwaniaka do upuszczenia broni. W Akcji Bonusowej możesz krzyknąć polecenie do wybranego człowieka w zasięgu 9 metrów i zmusić go do poddania się. Przeciwnik wykonuje Rzut Obronny na Mądrość o ST równym 8 plus twój modyfikator Charyzmy i Premia Biegłości. Porażka w teście oznacza, że natychmiast upuszcza broń, kładzie się na ziemię i jest pod wpływem stanu Przerażenie do końca twojej następnej tury.",
+          "context": "Class/profession ability: Rzuć broń i gleba!; owner Sędzia. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "samouk",
+          "name": "Samouk",
+          "owner": "cwaniak",
+          "ownerLabel": "Cwaniak",
+          "target": "icons/abilities/samouk.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/samouk.svg",
+              "variant": "default",
+              "sourceSha256": "5ffbdf20810d44bf8cfe02fd79de99a7faf88e53d10daa78d5dd978967e20b09"
+            }
+          ],
+          "ruleContext": "Otrzymujesz biegłość w dwóch wybranych umiejętnościach lub jednej wybranej umiejętności i jednym dowolnym zestawie narzędzi.",
+          "context": "Class/profession ability: Samouk; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "saper",
+          "name": "Saper",
+          "owner": "zlodziej",
+          "ownerLabel": "Złodziej",
+          "target": "icons/abilities/saper.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/saper.svg",
+              "variant": "default",
+              "sourceSha256": "21bc5dcff219b13bd1dcd75f6d28c9701502542bedbf504f50d196e8bb7e2d78"
+            }
+          ],
+          "ruleContext": "Jesteś jak saper, tyle że ty się nie mylisz, nawet raz. Przy każdym teście umiejętności, w której masz Specjalizację, możesz traktować każdy wynik 9 lub mniej na k20, jak 10. Ta zdolność odnawia się po ukończeniu Krótkiego lub Długiego odpoczynku.",
+          "context": "Class/profession ability: Saper; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        }
+      ]
+    },
+    {
+      "batch": 78,
+      "subjects": [
+        {
+          "kind": "feature",
+          "key": "serwisowanie",
+          "name": "Serwisowanie",
+          "owner": "monter",
+          "ownerLabel": "Monter",
+          "target": "icons/abilities/serwisowanie.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/serwisowanie.svg",
+              "variant": "default",
+              "sourceSha256": "43659a4c590f9892703aeb2c53a00353153e0794c7e15840196730ebfe4afb08"
+            }
+          ],
+          "ruleContext": "Kiedyś był taki serial o kolesiu, który ze sreberka, spinacza i butelki po denaturacie robił telefon. Otrzymujesz biegłość w narzędziach małego elektronika. Potrafisz naprawiać i produkować urządzenia elektroniczne i drobne mechanizmy. Potrzebne ci tylko narzędzia małego chemika, małego elektronika, surowce i czas. Otrzymujesz wylistowane poniżej schematy elektroniczne. SCHEMATY ELEKTRONICZNE NAZWA ST PRODUKCJA SUROWCE Agregat 20 50 godzin 1 CE, 15 CZ, 9 MK Akumulator 15 40 godzin 5 CH, 10 CZ, 5 MK Alternator 15 40 godzin 15 CZ, 1 CE, 4 MK Baterie 10 20 godzin 9 CH, 1 MK Celownik optyczny 15 20 godzin 5 CE, 5 CZ, 10 MK Defibrylator 20 60 godzin 5 CE, 20 CZ, 5 MK Detektor ruchu 25 80 godzin 30 CE, 5 CZ, 5 MK Krótkofalówka 10 24 godziny 1 CE, 10 CZ, 1 MK Kompas 5 4 godziny 1 CZ, 1 MK Laserowy wskaźnik celu 20 60 godzin 9 CE, 20 CZ, 1 MK Latarka 10 20 godzin 9 CZ, 1 MK Miernik skażenia chemicznego 20 50 godzin 5 CE, 5 CH, 10 CZ, 5 MK Miernik promieniowania 15 30 godzin 3 CE, 2 CH, 8 CZ, 2 MK Noktowizor 20 70 godzin 25 CE, 7 CZ, 3 MK Palnik acetylenowo-tlenowy 10 20 godzin 2 CH, 5 CZ, 3 MK Odtwarzacz CD 15 40 godzin 15 CE, 4 CZ, 1 MK Powiększalnik 20 60 godzin 9 CE, 20 CZ, 1 MK Radio 10 15 godzin 3 CE, 3 CZ, 1 MK Termowizor 30 200 godzin 90 CE, 5 CZ, 5 MK Turbina wiatrowa/wodna 20 60 godzin 5 CE, 10 CZ, 15 MK Wykrywacz metalu 15 30 godzin 5 CE, 5 CZ, 5 MK Wytrychy elektroniczne 20 50 godzin 20 CE, 4 CZ, 1 MK Zapalnik elektryczny 5 5 godzin 5 CZ Zegarek 10 20 godzin 9 CZ, 1MK",
+          "context": "Class/profession ability: Serwisowanie; owner Monter. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "skrytka",
+          "name": "Skrytka",
+          "owner": "kurier",
+          "ownerLabel": "Kurier",
+          "target": "icons/abilities/skrytka.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/skrytka.svg",
+              "variant": "default",
+              "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a"
+            }
+          ],
+          "ruleContext": "Potrafisz schować kontrabandę w wozie tak, żeby żaden pies jej nie wyniuchał, i ukryć niewielką broń tak, żeby obmacujący cię zbok niczego nie wymacał. Kiedy ukrywasz przedmiot lub istotę o rozmiarze nie większym niż mały, testujesz swoją umiejętność Skradanie się i wykonujesz test z Ułatwieniem. Przedmiot lub istota otrzymuje stan Niewidoczność.",
+          "context": "Class/profession ability: Skrytka; owner Kurier. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "skuteczny-cios",
+          "name": "Skuteczny cios",
+          "owner": "najemnik",
+          "ownerLabel": "Najemnik",
+          "target": "icons/abilities/skuteczny-cios.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/skuteczny-cios.svg",
+              "variant": "default",
+              "sourceSha256": "8a0bd8ecaf3bbff77b70dab08d02b5b9a0973086616d17ef48df1a13a004fe8b"
+            }
+          ],
+          "ruleContext": "Twoje Wściekłe ciosy stają się skuteczniejsze, ale kosztem siły uderzenia. Możesz zużyć jedną kostkę Wściekłego ciosu, żeby zyskać jedną z poniższych przewag w walce. Potężny cios! Kiedy trafisz istotę atakiem wręcz, możesz w jego ramach wykonać Odepchnięcie. Sprytny cios! Kiedy trafisz istotę atakiem wręcz, możesz w jego ramach wykonać Wytrącenie. Zamaszysty cios! Jeśli w zasięgu 1,5 m od trafionej przez ciebie istoty, znajduje się druga istota, znajdująca się w zasięgu twojego ataku wręcz, możesz wykonać przeciw niej dodatkowo jeden atak wręcz.",
+          "context": "Class/profession ability: Skuteczny cios; owner Najemnik. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "slang",
+          "name": "Slang",
+          "owner": "kurier",
+          "ownerLabel": "Kurier",
+          "target": "icons/abilities/slang.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/slang.svg",
+              "variant": "default",
+              "sourceSha256": "489859c79ecce12c7e1b0f181602b1783d0f6a30b4c2d8a804bb5b86cbb6b03a"
+            }
+          ],
+          "ruleContext": "Wiesz, jak gadać z tubylcami w każdym zakątku Podzielonych Stanów. Szybko rozpoznajesz lokalnych złodziejaszków, prawidłowo oceniasz zakapiorów i wiesz, co powiedzieć, żeby zrobić jakiś biznes. W kilka chwil zdobywasz informacje o tym, kto tu rządzi, jakie ma problemy i z kim lepiej nie zadzierać. Na to wszystko wystarczy ci godzina i kilka fajek. A kiedy MG prosi cię o testy Perswazji lub Śledztwa związane z tym półświatkiem, masz w nich Ułatwienie. Dlaczego? Bo jesteś: spoko ziom, swój na każdej dzielni, co złego to nie ja.",
+          "context": "Class/profession ability: Slang; owner Kurier. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "smakuje-jak-arszenik",
+          "name": "Smakuje jak arszenik",
+          "owner": "chemik",
+          "ownerLabel": "Chemik",
+          "target": "icons/abilities/smakuje-jak-arszenik.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/smakuje-jak-arszenik.svg",
+              "variant": "default",
+              "sourceSha256": "ef80cfb0acf2d2ed390490e28e63dd51cb030f8acc6c023946dd456bfe7735f4"
+            }
+          ],
+          "ruleContext": "Lata babrania się w toksycznych świństwach zrobiły swoje. Zyskujesz odporność na obrażenia od kwasu i trucizny. Masz też Ułatwienie w Rzutach Obronnych na Kondycję, przeciw działaniu kwasów, trucizn i skażenia radioaktywnego.",
+          "context": "Class/profession ability: Smakuje jak arszenik; owner Chemik. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "sokole-oko",
+          "name": "Sokole oko",
+          "owner": "wyjadacz-option",
+          "ownerLabel": "wyjadacz-option",
+          "target": "icons/abilities/sokole-oko.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/sokole-oko.svg",
+              "variant": "default",
+              "sourceSha256": "f77e36828e55586e9b5ef5a3a6ccee4af8e64cc8eac5133e7a09dba91479cff0"
+            }
+          ],
+          "ruleContext": "Otrzymujesz modyfikator +3 do Testów Ataku bronią palną, dystansową i rzucaną.",
+          "context": "Class/profession ability: Sokole oko; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "solowa",
+          "name": "Solówa",
+          "owner": "brutal",
+          "ownerLabel": "Brutal",
+          "target": "icons/abilities/solowa.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/solowa.svg",
+              "variant": "default",
+              "sourceSha256": "16292b6c0c8db69ab2f8bea7e081414ba89c3a547b6e38d4c3617b090b74a98e"
+            }
+          ],
+          "ruleContext": "W Akcji Bonusowej możesz wybrać istotę, którą widzisz w zasięgu 18 metrów. Prowokujesz ją do atakowania tylko ciebie, jeśli nie zda ona RO na Inteligencję o ST 8 plus twoja Premia Biegłości i modyfikator Siły. Efekt trwa, dopóki istota cię widzi lub zda Rzut Obronny na końcu swojej następnej tury.",
+          "context": "Class/profession ability: Solówa; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "specjalizacja-spec",
+          "name": "Specjalizacja",
+          "owner": "spec",
+          "ownerLabel": "Spec",
+          "target": "icons/abilities/specjalizacja-spec.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/specjalizacja-spec.svg",
+              "variant": "default",
+              "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+            }
+          ],
+          "ruleContext": "Wybierasz dwie ze swoich biegłości w umiejętnościach albo dwie biegłości w narzędziach, lub jedną biegłość w umiejętności i jedną biegłość w narzędziach. W każdym teście wykonywanym z ich użyciem Premia Biegłości liczy się podwójnie.",
+          "context": "Class/profession ability: Specjalizacja; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "specjalizacja-zlodziej",
+          "name": "Specjalizacja",
+          "owner": "zlodziej",
+          "ownerLabel": "Złodziej",
+          "target": "icons/abilities/specjalizacja-zlodziej.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/specjalizacja-zlodziej.svg",
+              "variant": "default",
+              "sourceSha256": "aa18e02bf650fcb14d2859147716f4666740b1a736992465f424b179eca3514e"
+            }
+          ],
+          "ruleContext": "Wybierasz jedną ze swoich biegłości w umiejętnościach i jedną z biegłości w używaniu narzędzi. W każdym teście wykonywanym z ich użyciem Premia Biegłości liczy się podwójnie. Na 5. poziomie wybierasz kolejną biegłość w umiejętnościach lub w narzędziach i zyskujesz dla niej ten sam efekt.",
+          "context": "Class/profession ability: Specjalizacja; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        }
+      ]
+    },
+    {
+      "batch": 79,
+      "subjects": [
+        {
+          "kind": "feature",
+          "key": "spieprzysz-to",
+          "name": "Spieprzysz to!",
+          "owner": "cwaniak",
+          "ownerLabel": "Cwaniak",
+          "target": "icons/abilities/spieprzysz-to.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/spieprzysz-to.svg",
+              "variant": "default",
+              "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+            }
+          ],
+          "ruleContext": "Potrafisz każdego wytrącić z równowagi. Kiedy istota, którą widzisz w promieniu 18 m, wykonała udany Test Ataku lub Rzut Obronny, możesz w swojej Reakcji sprawić, by powtórzyła rzut i wybrała gorszy wynik. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po ukończeniu Krótkiego odpoczynku.",
+          "context": "Class/profession ability: Spieprzysz to!; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "sportowiec",
+          "name": "Sportowiec",
+          "owner": "zwiadowca",
+          "ownerLabel": "Zwiadowca",
+          "target": "icons/abilities/sportowiec.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/sportowiec.svg",
+              "variant": "default",
+              "sourceSha256": "37b3ced0ffe7f36e8828abcbc13c7ced4d35f0a9920ed540ededad58cc340a44"
+            }
+          ],
+          "ruleContext": "Twoja Szybkość rośnie o 3 metry. Zyskujesz również Ułatwienie w testach Atletyki, kiedy się wspinasz, pływasz lub skaczesz.",
+          "context": "Class/profession ability: Sportowiec; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "stalowy-nadgarstek",
+          "name": "Stalowy nadgarstek",
+          "owner": "wyjadacz-option",
+          "ownerLabel": "wyjadacz-option",
+          "target": "icons/abilities/stalowy-nadgarstek.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/stalowy-nadgarstek.svg",
+              "variant": "default",
+              "sourceSha256": "d8c83aacec0f8c7db11eb80e668cda442b05324c6b48f72c2ad871b6f155346e"
+            }
+          ],
+          "ruleContext": "Kiedy strzelasz z broni palnej krótkiej i pistoletów maszynowych jedną ręką, nie otrzymujesz związanego z tym Utrudnienia do Testów Ataku (tak jakby miały właściwość poręczna). Dodatkowo każda broń palna krótka w twoich rękach zyskuje właściwość lekka.",
+          "context": "Class/profession ability: Stalowy nadgarstek; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "strzelec",
+          "name": "Strzelec",
+          "owner": "zabojca",
+          "ownerLabel": "Zabójca",
+          "target": "icons/abilities/strzelec.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/strzelec.svg",
+              "variant": "default",
+              "sourceSha256": "83f2d526727e86cc244e8b6a68f665534890643d70b4b9348734e1f569f73a95"
+            }
+          ],
+          "ruleContext": "Jedni lubią zabijać nożem, inni cenią truciznę, a ty wolisz zabijać z daleka. Jeżeli przygotujesz stanowisko snajperskie z bronią z celownikiem optycznym i poświęcisz 5 rund na precyzyjne mierzenie do celu, to dopóki się nie poruszysz, zyskujesz dwie poniższe, dodatkowe korzyści. Powiększenie. Trzykrotne zwiększenie maksymalnego zasięgu dla tej broni. Przewaga balistyczna. Brak Utrudnienia za strzelanie na dalekim dystansie tą bronią.",
+          "context": "Class/profession ability: Strzelec; owner Zabójca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "stylowa",
+          "name": "Stylówa",
+          "owner": "gwiazda",
+          "ownerLabel": "Gwiazda",
+          "target": "icons/abilities/stylowa.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/stylowa.svg",
+              "variant": "default",
+              "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+            }
+          ],
+          "ruleContext": "Wygląd jest twoją wizytówką, ma robić wrażenie i podkreślać wyjątkowość twojego charakteru. Ubierasz się w drogie ciuchy, nosisz na widoku cenne gadżety i drogą biżuterię. Te błyskotki mogą przyciągać złodziei, ale kij im w oko, bo to robi ci imidż na dzielni. Każde 50 gambli towarów luksusowych, które nosisz na sobie, zapewnia ci premię +1 do testów Wpływania.",
+          "context": "Class/profession ability: Stylówa; owner Gwiazda. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "szalencza-szarza",
+          "name": "Szaleńcza szarża",
+          "owner": "brutal",
+          "ownerLabel": "Brutal",
+          "target": "icons/abilities/szalencza-szarza.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/szalencza-szarza.svg",
+              "variant": "default",
+              "sourceSha256": "9e95f50b6dbc04a319f31dcec9fb8d74148e1070eee6bad2a75b662766c30c5d"
+            }
+          ],
+          "ruleContext": "Twoja szybkość rośnie o 3 m, a jeśli wykonasz akcję Przyspieszenie, przeciwnicy mają Utrudnienie do Testów Ataków dystansowych przeciw tobie, do początku twojej następnej tury.",
+          "context": "Class/profession ability: Szaleńcza szarża; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "szary",
+          "name": "Szary",
+          "owner": "szczur",
+          "ownerLabel": "Szczur",
+          "target": "icons/abilities/szary.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/szary.svg",
+              "variant": "default",
+              "sourceSha256": "4bd810a23039817a14513e84ba592a708fcc8b78f385cd35e6d7916c79b7cae5"
+            }
+          ],
+          "ruleContext": "Szczurów jest pełno. Żebracy, włóczędzy, ludzkie wraki. Nikt z nimi nie gada. Nikt nie zwraca na nich uwagi. Jeśli zachowujesz się inteligentnie, wykorzystując ludzką pogardę, potrafisz stać się niezauważalny (otrzymujesz stan Niewidoczność). Mądra kryjówka. Dodajesz modyfikator Inteligencji lub Mądrości do testów Skradania się. Nie widzisz mnie. Możesz próbować ukrywać się na otwartym terenie, nawet w jasnym świetle dnia, czy na środku pustego hangaru, np. jako zwykły żul szukający złomu. Jeśli nic nie mówisz i nie robisz hałasu, masz Ułatwienie w Testach Ukrywania się, dopóki kogoś nie zaatakujesz lub nie zrobisz czegoś głośnego.",
+          "context": "Class/profession ability: Szary; owner Szczur. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "szczescie",
+          "name": "Szczęście",
+          "owner": "cwaniak",
+          "ownerLabel": "Cwaniak",
+          "target": "icons/abilities/szczescie.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/szczescie.svg",
+              "variant": "default",
+              "sourceSha256": "8892c6c990b0e616334126fb8141a93503a784e10887592afc6227744b830e0b"
+            }
+          ],
+          "ruleContext": "Raz w rundzie możesz powtórzyć dowolny test, którego wynik ci nie odpowiada. Powtórzony test zawiera takie samo Ułatwienie lub Utrudnienie, jak test pierwotny. Wynik, który otrzymasz w przerzucie, musisz zaakceptować. Możesz użyć tej zdolności tyle razy, ile wskazuje kolumna Szczęście w tabeli Zdolności klasowych Cwaniaka. Zdolność Szczęście odnawia się po Długim odpoczynku.",
+          "context": "Class/profession ability: Szczęście; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "szybka-gadka",
+          "name": "Szybka gadka",
+          "owner": "cwaniak",
+          "ownerLabel": "Cwaniak",
+          "target": "icons/abilities/szybka-gadka.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/szybka-gadka.svg",
+              "variant": "default",
+              "sourceSha256": "a8d2f4dbe822751f88cf2f77490de6b9756d996cf5f92625e55160251d407b23"
+            }
+          ],
+          "ruleContext": "W czasie walki możesz wykonać akcję Wpływanie w swojej Akcji Bonusowej. Swoimi błyskawicznymi i celnymi słowami, możesz np. oszukać przeciwnika, zdezorientować go lub przekonać do wycofania się. PRZYKŁAD: Wykonując Test Charyzmy (Zastraszanie) o ST 15, próbujesz nastraszyć gangusa, żeby uciekł z pola walki. Albo wykonując Test Charyzmy (Oszustwo) o ST 15, próbujesz przekonać mutanta, żeby nie robił ci krzywdy, bo też jesteś mutantem. Lub wykonując test Mądrości (Tresura) o ST 15, próbujesz uspokoić rozwścieczonego neoniedźwiedzia. Po więcej szczegółów zajrzyj do podrozdziału Interakcje z istotami (s .41).",
+          "context": "Class/profession ability: Szybka gadka; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        }
+      ]
+    },
+    {
+      "batch": 80,
+      "subjects": [
+        {
+          "kind": "feature",
+          "key": "szybka-produkcja",
+          "name": "Szybka produkcja",
+          "owner": "spec",
+          "ownerLabel": "Spec",
+          "target": "icons/abilities/szybka-produkcja.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/szybka-produkcja.svg",
+              "variant": "default",
+              "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+            }
+          ],
+          "ruleContext": "Raz na Krótki lub Długi odpoczynek, poza normalnymi zasadami produkcji, możesz stworzyć niewielkie przedmioty, jeśli masz odpowiednie narzędzia, surowce i schematy. Sumaryczna wartość tych przedmiotów nie może przekraczać 25 gb, a czas produkcji to 1 minuta x 1 gb wartości. PRZYKŁAD: Potrzebujesz 20 minut, żeby wyprodukować samoróbkę (20 gb), granat improwizowany (20 gb), medpak (20 gb), 2 noże do rzucania (2 x 10 gb) lub 12 naboi 9 mm (10 x 2 gb). Na poziomie 11 możesz szybko wyprodukować przedmioty warte sumarycznie 50 gb (patrz podrozdział Produkcja przedmiotów s. 144).",
+          "context": "Class/profession ability: Szybka produkcja; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "szybkie-badanie",
+          "name": "Szybkie badanie",
+          "owner": "spec",
+          "ownerLabel": "Spec",
+          "target": "icons/abilities/szybkie-badanie.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/szybkie-badanie.svg",
+              "variant": "default",
+              "sourceSha256": "6c308b62d0703643d9c0ce5875908af22dc5c1956d0cc77e13f8e962b5e1de20"
+            }
+          ],
+          "ruleContext": "W czasie walki możesz wykonać akcję Badanie w swojej Akcji Bonusowej. Jesteś w stanie bardzo szybko zdobyć cenne informacje dotyczące np. miejsca walki, najbliższych urządzeń lub wybranych statystyk przeciwnika, zależnie od używanej umiejętności (patrz akcja Badanie w rozdziale Eksploracja s. 41). PRZYKŁAD: Wykonując Test Inteligencji (Technika) o ST 15, dotyczący wrogiej maszyny Molocha, możesz się dowiedzieć, ile ma PW lub jak wysoka jest jej TT.",
+          "context": "Class/profession ability: Szybkie badanie; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "szybkie-nogi",
+          "name": "Szybkie nogi",
+          "owner": "zlodziej",
+          "ownerLabel": "Złodziej",
+          "target": "icons/abilities/szybkie-nogi.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/szybkie-nogi.svg",
+              "variant": "default",
+              "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398"
+            }
+          ],
+          "ruleContext": "Łączysz swoją zwinność i szybkość, w celu zwiększenia szansy przetrwania na polu walki. Możesz w Akcji Bonusowej wykonać Odstąpienie, Przyspieszenie lub Ukrywanie się.",
+          "context": "Class/profession ability: Szybkie nogi; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "szybkie-rece",
+          "name": "Szybkie ręce",
+          "owner": "spec",
+          "ownerLabel": "Spec",
+          "target": "icons/abilities/szybkie-rece.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/szybkie-rece.svg",
+              "variant": "default",
+              "sourceSha256": "3c0b28c465cc993c60c6f501645989b90d99c505ada827d16ea0b8b3fdd9759b"
+            }
+          ],
+          "ruleContext": "W czasie walki jesteś w stanie robić dwie rzeczy naraz. W swojej turze możesz wykonać jedną akcję więcej oprócz zwykłej akcji i możliwej Akcji Bonusowej. Akcja ta może być przeznaczona jedynie na akcję Używanie. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Zręczności. Zdolność odnawia się po odbyciu Krótkiego odpoczynku.",
+          "context": "Class/profession ability: Szybkie ręce; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "szybkosc-kota",
+          "name": "Szybkość kota",
+          "owner": "zlodziej",
+          "ownerLabel": "Złodziej",
+          "target": "icons/abilities/szybkosc-kota.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/szybkosc-kota.svg",
+              "variant": "default",
+              "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a"
+            }
+          ],
+          "ruleContext": "Uczysz się unikać kul i ataków wręcz, jak na przedwojennych filmach akcji. Odskok [R]. Kiedy otrzymujesz obrażenia w wyniku bezpośredniego ataku, możesz w Reakcji zmniejszyć je o połowę (zaokrąglając w dół). Odskok nie działa, kiedy otrzymujesz obrażenia psychiczne. Szybkie łapy. Twoja Szybkość rośnie o 3 metry. Refleks. Możesz dorzucić jedną Kocią kość do testu Inicjatywy.",
+          "context": "Class/profession ability: Szybkość kota; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "smiertelna-obelga",
+          "name": "Śmiertelna obelga",
+          "owner": "cwaniak",
+          "ownerLabel": "Cwaniak",
+          "target": "icons/abilities/smiertelna-obelga.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/smiertelna-obelga.svg",
+              "variant": "default",
+              "sourceSha256": "a91c9321996572a6ccc97f32dad2be58d916219392befce71bed9edc100404d2"
+            }
+          ],
+          "ruleContext": "Kiedy rzucasz Obelgę, twoje słowa zadają dodatkowo 1k6 x twój modyfikator Charyzmy obrażeń psychicznych, osłabiających wolę walki przeciwnika. Jeśli twoja zdolność Obelga zmniejszy PW celu do 0, upada on i osuwa się w bezdenną otchłań rozpaczy.",
+          "context": "Class/profession ability: Śmiertelna obelga; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "tarcza-wiary",
+          "name": "Tarcza wiary",
+          "owner": "kaznodzieja-nowej-ery",
+          "ownerLabel": "kaznodzieja-nowej-ery",
+          "target": "icons/abilities/tarcza-wiary.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/tarcza-wiary.svg",
+              "variant": "default",
+              "sourceSha256": "f15b76b5c233a3602845af8b4aa50a5750a05f6bd4f8eafddbb846fb649b00ab"
+            }
+          ],
+          "ruleContext": "Jeśli nie nosisz pancerza, możesz dodać modyfikator Charyzmy do swojej Trudności Trafienia. Tej zdolności nie można łączyć z innymi podobnymi (np. Goła Klata).",
+          "context": "Class/profession ability: Tarcza wiary; owner kaznodzieja-nowej-ery. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "trajektoria",
+          "name": "Trajektoria",
+          "owner": "spec",
+          "ownerLabel": "Spec",
+          "target": "icons/abilities/trajektoria.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/trajektoria.svg",
+              "variant": "default",
+              "sourceSha256": "ee9e7f28b3d095225871f6ef754ef95dd68cfd7c6c16ed99f6344663f6453e9f"
+            }
+          ],
+          "ruleContext": "Kiedy wykonujesz Test Ataku dystansowego, możesz dodać do niego swój modyfikator Inteligencji. Tej zdolności możesz użyć tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po odbyciu Długiego odpoczynku.",
+          "context": "Class/profession ability: Trajektoria; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "trening-w-zbroi",
+          "name": "Trening w zbroi",
+          "owner": "zolnierz",
+          "ownerLabel": "Żołnierz",
+          "target": "icons/abilities/trening-w-zbroi.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/trening-w-zbroi.svg",
+              "variant": "default",
+              "sourceSha256": "3d074d4e7585a2bc35935f42f4d59b1133b1a307601d3461872a49ebe3894d68"
+            }
+          ],
+          "ruleContext": "Robienie pompek w pancerzu i z kowadłem na plecach, to twoje codzienne zajęcie. Nie otrzymujesz kar do Testów Zręczności (Skradanie się) wynikających z noszenia pancerza. Twoja maksymalna premia ze Zręczności do Trudności Trafienia wynikająca z ograniczeń noszonego pancerza, zwiększa się o 1.",
+          "context": "Class/profession ability: Trening w zbroi; owner Żołnierz. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        }
+      ]
+    },
+    {
+      "batch": 81,
+      "subjects": [
+        {
+          "kind": "feature",
+          "key": "truciciel",
+          "name": "Truciciel",
+          "owner": "szczur",
+          "ownerLabel": "Szczur",
+          "target": "icons/abilities/truciciel.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/truciciel.svg",
+              "variant": "default",
+              "sourceSha256": "19a03b9f1a10236a1d5b2bdc1809576c2ab03fcb0b0102c49453c874a62f8d15"
+            }
+          ],
+          "ruleContext": "Jeśli posiadasz narzędzia małego chemika, możesz w czasie Długiego odpoczynku wyprodukować jedną porcję trucizny. Ta porcja zawiera 10 ml trującego olejku. W Akcji Bonusowej możesz nałożyć ją na ostrze broni lub na maksymalnie trzy groty. Trucizna pozostaje aktywna przez 1 minutę lub do momentu aplikacji, zależnie od tego, co wydarzy się pierwsze. Cel trafiony zatrutą bronią lub pociskiem musi zdać RO na Kondycję (ST 8 plus twój modyfikator Inteligencji i Premia Biegłości), lub otrzymuje stan Zatrucie na 1 minutę. Cel powtarza Rzut Obronny na końcu swojej tury.",
+          "context": "Class/profession ability: Truciciel; owner Szczur. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "trzeci-atak",
+          "name": "Trzeci atak",
+          "owner": "twardziel",
+          "ownerLabel": "Twardziel",
+          "target": "icons/abilities/trzeci-atak.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/trzeci-atak.svg",
+              "variant": "default",
+              "sourceSha256": "9d23db2fc45eaf9517eec2a5f9911af04926458c45c5b739d261e2269dba4ca2"
+            }
+          ],
+          "ruleContext": "Kiedy wykonujesz w swojej turze akcję Atakowanie, możesz zaatakować trzykrotnie.",
+          "context": "Class/profession ability: Trzeci atak; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "twardosc",
+          "name": "Twardość",
+          "owner": "twardziel",
+          "ownerLabel": "Twardziel",
+          "target": "icons/abilities/twardosc.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/twardosc.svg",
+              "variant": "default",
+              "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac"
+            }
+          ],
+          "ruleContext": "Posiadasz wrodzoną „odporność na śmierć” i ogromną ilość szczęścia. Do każdego Rzutu Obronnego (oraz do Rzutu Przeciw Śmierci), którego nie zdasz, możesz dodać wynik z jednej kości Twardości, zgodnie z kolumną Twardość w tabeli Zdolności klasowych Twardziela. Masz tych kości tyle, ile wynosi twój modyfikator Kondycji. Pula kości Twardości odnawia się po ukończeniu Długiego odpoczynku.",
+          "context": "Class/profession ability: Twardość; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "ulubiona-bron-twardziel",
+          "name": "Ulubiona broń",
+          "owner": "twardziel",
+          "ownerLabel": "Twardziel",
+          "target": "icons/abilities/ulubiona-bron-twardziel.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/ulubiona-bron-twardziel.svg",
+              "variant": "default",
+              "sourceSha256": "dafcb8feb9dab7bd29f9657d5e8a122c40a44e74933726168a701b237b0d7962"
+            }
+          ],
+          "ruleContext": "Wybierz jeden model broni (np. Peacemaker), której lubisz używać. Od tej pory, jeśli wykonujesz ulubioną bronią akcję Atakowanie, możesz w Akcji Bonusowej wykonać nią jeszcze jeden atak (broń dystansowa musi mieć załadowaną amunicję). Na wyższych poziomach Twardziela, liczba twoich ulubionych broni rośnie zgodnie z kolumną Ulubiona broń w tabeli Zdolności klasowych Twardziela. Możesz zmienić jedną Ulubioną broń na inną w czasie Długiego odpoczynku, poświęcając godzinę na trening.",
+          "context": "Class/profession ability: Ulubiona broń; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "ulubiona-bron-zlodziej",
+          "name": "Ulubiona broń",
+          "owner": "zlodziej",
+          "ownerLabel": "Złodziej",
+          "target": "icons/abilities/ulubiona-bron-zlodziej.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/ulubiona-bron-zlodziej.svg",
+              "variant": "default",
+              "sourceSha256": "e59bb541928bb19c71ac057365f0874748ceebe5b881d3ffeb30c65ce1ae6ad8"
+            }
+          ],
+          "ruleContext": "Wybierz jeden model broni (np. szoker), w którym masz biegłość. Od tej pory, jeśli wykonujesz tą bronią akcję Atakowanie, możesz w Akcji Bonusowej wykonać nią jeszcze jeden atak (broń dystansowa musi mieć załadowaną amunicję). Możesz zmienić Ulubioną broń na inną w czasie Długiego odpoczynku, poświęcając godzinę na trening.",
+          "context": "Class/profession ability: Ulubiona broń; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "ulubiona-bron-zwiadowca",
+          "name": "Ulubiona broń",
+          "owner": "zwiadowca",
+          "ownerLabel": "Zwiadowca",
+          "target": "icons/abilities/ulubiona-bron-zwiadowca.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/ulubiona-bron-zwiadowca.svg",
+              "variant": "default",
+              "sourceSha256": "dfaab0fdee5a2eea18b28777faf5ebc65ce32f1d61ee9ade770ee5d77bf936b3"
+            }
+          ],
+          "ruleContext": "Wybierz jeden konkretny model broni, której lubisz używać (np. nóż taktyczny lub pistolet G17). Od tej pory, jeśli wykonujesz Ulubioną bronią akcję Atakowanie, możesz w Akcji Bonusowej wykonać nią jeszcze jeden atak (broń dystansowa musi mieć załadowaną amunicję). Możesz zmienić ulubioną broń na inną w czasie Długiego odpoczynku, poświęcając godzinę na trening. Na 9. poziomie możesz mieć jednocześnie dwie ulubione bronie.",
+          "context": "Class/profession ability: Ulubiona broń; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "w-czuly-punkt",
+          "name": "W czuły punkt",
+          "owner": "spec",
+          "ownerLabel": "Spec",
+          "target": "icons/abilities/w-czuly-punkt.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/w-czuly-punkt.svg",
+              "variant": "default",
+              "sourceSha256": "494b773b1bd3d580fe42cd13ca56fe001b8830b33a0f0ffbf75508a7a8719794"
+            }
+          ],
+          "ruleContext": "Do wszystkich obrażeń, które zadajesz, możesz dodać swój modyfikator Inteligencji.",
+          "context": "Class/profession ability: W czuły punkt; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "wsciekly-cios",
+          "name": "Wściekły cios",
+          "owner": "brutal",
+          "ownerLabel": "Brutal",
+          "target": "icons/abilities/wsciekly-cios.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/wsciekly-cios.svg",
+              "variant": "default",
+              "sourceSha256": "52ae2a6a7a2a4e2d93821ffb52e603891237b164515cc23a18067020927610f8"
+            }
+          ],
+          "ruleContext": "Raz w rundzie, kiedy trafisz atakiem opartym na Sile, możesz dodać do obrażeń kości Wściekłego ciosu. Masz ich tyle, ile poziomów Brutala, a każda z nich zadaje dodatkowo 1k6 obrażeń. PRZYKŁAD: Na 5. poziomie Brutala masz 5 kości Wściekłego ciosu. Do pojedynczego ataku możesz dodać maksymalnie 3 kości Wściekłego ciosu. Kości tej zdolności odnawiają się po odbyciu Długiego odpoczynku.",
+          "context": "Class/profession ability: Wściekły cios; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "wyczulone-zmysly",
+          "name": "Wyczulone zmysły",
+          "owner": "zwiadowca",
+          "ownerLabel": "Zwiadowca",
+          "target": "icons/abilities/wyczulone-zmysly.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/wyczulone-zmysly.svg",
+              "variant": "default",
+              "sourceSha256": "630c1143f620eb4e0a6950df06c7462b5e045a9a032023f9885ca0df95177edf"
+            }
+          ],
+          "ruleContext": "Masz stałe Ułatwienie do testów Percepcji, więc twoja Pasywna Percepcja rośnie o 5.",
+          "context": "Class/profession ability: Wyczulone zmysły; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        }
+      ]
+    },
+    {
+      "batch": 82,
+      "subjects": [
+        {
+          "kind": "feature",
+          "key": "wyjadacz-zwiadowca",
+          "name": "Wyjadacz",
+          "owner": "zwiadowca",
+          "ownerLabel": "Zwiadowca",
+          "target": "icons/abilities/wyjadacz-zwiadowca.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/wyjadacz-zwiadowca.svg",
+              "variant": "default",
+              "sourceSha256": "c8495031166e511cfbbfe32844e060cd26b509110a766d30a4cc9fd9456e2012"
+            }
+          ],
+          "ruleContext": "Zwiadowca to prawdziwy zawodowiec. Wybierz jedną z poniższych zdolności, która podkreśli ten fakt. Na 11. poziomie możesz wybrać kolejną zdolność z tej listy, ale każdą z nich możesz wybrać tylko raz. Jeździec Kiedy dosiadasz wierzchowca, nie musisz używać rąk, żeby nim kierować. Nie otrzymujesz Utrudnienia do Testów Ataków dystansowych związanego z niestabilnym podłożem, kiedy na nim jedziesz. Wsiadanie i zsiadanie z wierzchowca kosztuje cię tylko 1,5 metra ruchu. Trudność Trafienia twojego wierzchowca zwiększa się o wartość twojej Premii Biegłości. PRZYKŁADOWE PUŁAPKI PUŁAPKA ST DZIAŁANIE POTRZEBNE MATERIAŁY Potykacz 5 Istota otrzymuje stan Powalenie Brak Alarm 5 Wywołanie hałasu w promieniu 36 m Metalowe puszki lub naczynia Wnyki 10 Istota otrzymuje stan Pochwycenie Brak Sieć 10 Istota jest pod wpływem stanu Pochwycenie i Unieruchomienie Sieć Pułapka z granatem 15 Granat eksploduje po uruchomieniu wyzwalacza Granat Pułapka z bronią białą 15 Cel musi zdać RO na Zręczność, lub zostaje trafiony. Pułapka zadaje podstawowe obrażenia użytej broni Broń biała Pułapka z bronią samoczynną 20 Obszar zostaje ostrzelany długą serią. Obrażenia zależne od użytej broni i pojemności magazynka Karabin lub pistolet umożliwiający strzelanie serią. Obsługa pancerza Kiedy nosisz pancerz, otrzymujesz +2 do Trudności Trafienia. Rzeźnik Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią. Sokole oko Otrzymujesz modyfikator +3 do Testów Ataku bronią palną, dystansową i rzucaną. Stalowy nadgarstek Kiedy strzelasz z broni palnej krótkiej i pistoletów maszynowych jedną ręką, nie otrzymujesz związanego z tym Utrudnienia do Testów Ataku (tak jakby miały właściwość poręczna). Dodatkowo każda broń palna krótka w twoich rękach zyskuje właściwość lekka. Zasadzka Jeśli twój przeciwnik jest zaskoczony lub w pierwszej turze walki działasz przed nim, otrzymujesz Ułatwienie w Testach Ataku przeciwko niemu, do końca swojej tury.",
+          "context": "Class/profession ability: Wyjadacz; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "wyjadacz",
+          "name": "Wyjadacz",
+          "owner": "twardziel",
+          "ownerLabel": "Twardziel",
+          "target": "icons/abilities/wyjadacz.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/wyjadacz.svg",
+              "variant": "default",
+              "sourceSha256": "374e50918253c177a15139376fef0f5f6f1199181433d72dac3671f12add84f8"
+            }
+          ],
+          "ruleContext": "Twardziel to zawodowiec, jeśli chodzi o obsługę broni i pancerzy. Wybierz jedną zdolność z poniższej listy, która podkreśli ten fakt. Na 7. poziomie Twardziela możesz wybrać kolejną zdolność z listy, ale każdą z nich wybierasz tylko raz. Obsługa pancerza Kiedy nosisz pancerz, otrzymujesz +2 do TT. Rzeźnik Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią. Sokole oko Otrzymujesz modyfikator +3 do Testów Ataku bronią palną, dystansową i rzucaną. Stalowy nadgarstek Kiedy strzelasz z broni palnej krótkiej i pistoletów maszynowych jedną ręką, nie otrzymujesz związanego z tym Utrudnienia do Testów Ataku (tak jakby miały właściwość poręczna). Dodatkowo każda broń palna krótka w twoich rękach zyskuje właściwość lekka.",
+          "context": "Class/profession ability: Wyjadacz; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "wyksztalciuch",
+          "name": "Wykształciuch",
+          "owner": "spec",
+          "ownerLabel": "Spec",
+          "target": "icons/abilities/wyksztalciuch.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/wyksztalciuch.svg",
+              "variant": "default",
+              "sourceSha256": "a6797cc50ff6fe13453bdf1b33603c2aabc2228ae45d9d991431da62a0739804"
+            }
+          ],
+          "ruleContext": "Jeśli jeszcze nie wiesz wszystkiego, to dobierz sobie dwie umiejętności lub dwie biegłości w narzędziach. Jesteś Specem, ty zawsze wiesz wszystko!",
+          "context": "Class/profession ability: Wykształciuch; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "z-bara",
+          "name": "Z bara!",
+          "owner": "brutal",
+          "ownerLabel": "Brutal",
+          "target": "icons/abilities/z-bara.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/z-bara.svg",
+              "variant": "default",
+              "sourceSha256": "51fbd774b71851e9964b73a04f795fa5d1b71962759d5cd5c517912046a27b4a"
+            }
+          ],
+          "ruleContext": "Kiedy jesteś pod wpływem zdolności Berserk, to w Akcji Bonusowej możesz wykonać Odepchnięcie istoty dużej lub mniejszej od ciebie. Cel musi zdać RO na Siłę lub Zręczność, inaczej go odpychasz o 1,5 metra od siebie lub przewracasz, nakładając na niego stan Powalenie. Stopień Trudności RO wynosi 8 plus twój modyfikator Siły i Premia Biegłości.",
+          "context": "Class/profession ability: Z bara!; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "za-garsc-gambli",
+          "name": "Za garść gambli",
+          "owner": "gwiazda",
+          "ownerLabel": "Gwiazda",
+          "target": "icons/abilities/za-garsc-gambli.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/za-garsc-gambli.svg",
+              "variant": "default",
+              "sourceSha256": "cde71508cf8b7d7d178fb4e178ed549c877817d5ff504315a1e4682cb3c634dc"
+            }
+          ],
+          "ruleContext": "Każda dziura i miasteczko w Podzielonych Stanach potrzebuje muzyki. Każdy klub i śmierdzący bar bez okien, przyjmie twoje usługi zapewniające rozrywkę stałej klienteli. Zawsze dostaniesz dach nad głową i żarcie, a może i będzie za co się napić. Raz dziennie dajesz czterogodzinny koncert w lokalnej knajpie lub klubie, a od twoich umiejętności zależy, ile zarobisz (patrz tabela poniżej). Po skończeniu koncertu otrzymujesz jeden poziom Wyczerpania. MIEJSCE KONCERTU MNOŻNIK WYNIKU TESTU CHARYZMY (WYSTĘPY) LUB TESTU INSTRUMENTU Ulica x 0,5 gb Tania knajpa x 1 gb Dobra knajpa x 2 gb Drogi klub x 3 gb PRZYKŁAD: Siadasz przy ruchliwej ulicy, wyciągasz saksofon i po czterech godzinach koncertu wykonujesz test Zręczności (Saksofon). Twój wynik to 15, więc do czapki wpadła ci równowartość ok. 7 gambli. Gdybyś dał koncert w drogim klubie, zgarnąłbyś sześć razy tyle.",
+          "context": "Class/profession ability: Za garść gambli; owner Gwiazda. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "zabojczy-cios",
+          "name": "Zabójczy cios",
+          "owner": "brutal",
+          "ownerLabel": "Brutal",
+          "target": "icons/abilities/zabojczy-cios.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/zabojczy-cios.svg",
+              "variant": "default",
+              "sourceSha256": "a0e2a925f1b54f341304533b07aa2e16f3357c454d0a15c0291f21281e588bc2"
+            }
+          ],
+          "ruleContext": "Wiesz już gdzie uderzać, żeby wyrządzić największe szkody. Kiedy trafiasz krytycznie atakiem wręcz, zamiast podwajać, potrajasz kostki obrażeń.",
+          "context": "Class/profession ability: Zabójczy cios; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "zawolajcie-kolegow",
+          "name": "Zawołajcie kolegów",
+          "owner": "gladiator",
+          "ownerLabel": "Gladiator",
+          "target": "icons/abilities/zawolajcie-kolegow.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/zawolajcie-kolegow.svg",
+              "variant": "default",
+              "sourceSha256": "abfc18f9af0e406acc37d35e09766a779dad7eeabed31cf74d1f1a8e14b3748d"
+            }
+          ],
+          "ruleContext": "Jeśli w zasięgu 1,5 metra od ciebie znajduje się co najmniej dwóch przeciwników, otrzymujesz Ułatwienie do Testów Ataków wręcz.",
+          "context": "Class/profession ability: Zawołajcie kolegów; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "zawsze-w-siodle",
+          "name": "Zawsze w siodle",
+          "owner": "kowboj",
+          "ownerLabel": "Kowboj",
+          "target": "icons/abilities/zawsze-w-siodle.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/zawsze-w-siodle.svg",
+              "variant": "default",
+              "sourceSha256": "5e64e1f696dd5bdd4d4b71e08d22eaa07280cd5ed0b88c6ff05b3ebe43f1881f"
+            }
+          ],
+          "ruleContext": "Prawdziwy kowboj piechotą chodzi tylko do kibla, baru i burdelu. Jeśli nie masz konia lub motocykla, los zsyła ci okazję do jego zdobycia na najbliższym Długim odpoczynku. Porzucony harley lub koń bez jeźdźca, to coś, co po prostu ci się przydarza. Pamiętaj, żeby nadać mu imię i módl się do zapomnianych bogów, żeby nie spotkać jego prawowitego właściciela. I pamiętaj - nie możesz go nikomu sprzedać.",
+          "context": "Class/profession ability: Zawsze w siodle; owner Kowboj. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "zew-areny",
+          "name": "Zew areny",
+          "owner": "gladiator",
+          "ownerLabel": "Gladiator",
+          "target": "icons/abilities/zew-areny.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/zew-areny.svg",
+              "variant": "default",
+              "sourceSha256": "7524b5d3e92bf9189e5964e1b4a5065a2986e42c5cb8af9fbee57f0f8d06f987"
+            }
+          ],
+          "ruleContext": "Podczas walki słyszysz doping widzów, nawet jeśli ich wokół ciebie nie ma. Kiedy jesteś w Berserku, zyskujesz: Doping. Otrzymujesz niewrażliwość na stan Przerażenie. Praca nóg. Przeciwnicy mają Utrudnienie w testach ataków okazyjnych przeciw tobie. Skok Gladiatora. Maksymalna wysokość i odległość twojego skoku ulega podwojeniu. Jeśli twój skok zakończy się na polu istoty nie większej od ciebie o więcej niż jeden rozmiar, musi ona zdać RO na Siłę, inaczej otrzyma stan Powalenie oraz 1k6 obrażeń obuchowych za każde 3 metry długości lub wysokości twojego skoku. ST Rzutu Obronnego to 8 plus twój modyfikator Siły plus Premia Biegłości.",
+          "context": "Class/profession ability: Zew areny; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        }
+      ]
+    },
+    {
+      "batch": 83,
+      "subjects": [
+        {
+          "kind": "feature",
+          "key": "znajomosci",
+          "name": "Znajomości",
+          "owner": "kurier",
+          "ownerLabel": "Kurier",
+          "target": "icons/abilities/znajomosci.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/znajomosci.svg",
+              "variant": "default",
+              "sourceSha256": "52a6498ef58a5200bda88b5386d7d4ea50b09c4e73c503a5a419b8fcde60629c"
+            }
+          ],
+          "ruleContext": "Podzielone Stany to twój dom i prawie wszędzie masz jakiegoś znajomka. Kiedy jesteś w cywilizowanym miejscu, wykonaj Test Charyzmy. Im lepszy wynik, tym bardziej znaczący w lokalnej społeczności jest twój znajomy. WYNIK TESTU CHARYZMY ZNAJOMOŚĆ 1-9 Nikogo tu nie znasz z imienia. 10-14 Masz znajomka, który tu mieszka. 15-19 Masz tu znajomka, który prowadzi biznes lub jest stróżem porządku. 20+ Twój znajomek to gruba szycha, która tu rządzi.",
+          "context": "Class/profession ability: Znajomości; owner Kurier. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "zryw",
+          "name": "Zryw",
+          "owner": "twardziel",
+          "ownerLabel": "Twardziel",
+          "target": "icons/abilities/zryw.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/zryw.svg",
+              "variant": "default",
+              "sourceSha256": "f566600e180e85a4ce1d0e5cad346aa40e8038faf41d5ec23b4906fb7cdd00f2"
+            }
+          ],
+          "ruleContext": "Wspinasz się na szczyt swoich możliwości. W swojej turze możesz wykonać jeszcze jedną Akcję lub Akcję Bonusową. Po użyciu tej zdolności musisz ukończyć Krótki lub Długi odpoczynek, zanim będziesz mógł jej ponownie użyć.",
+          "context": "Class/profession ability: Zryw; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "feature",
+          "key": "zwinnosc-szczura",
+          "name": "Zwinność szczura",
+          "owner": "szczur",
+          "ownerLabel": "Szczur",
+          "target": "icons/abilities/zwinnosc-szczura.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/abilities/zwinnosc-szczura.svg",
+              "variant": "default",
+              "sourceSha256": "20a0205b2ab30b9c8623635c37168cd1a87b5bc3f8394660576357d9defd58d7"
+            }
+          ],
+          "ruleContext": "Wspinacz. Potrafisz szybko i efektywnie się wspinać. Otrzymujesz Szybkość wspinania równą twojej Szybkości ruchu. Skoczek. Kiedy skaczesz, możesz testować Akrobatykę zamiast Atletyki. Maksymalną odległość skoku wyliczasz, uwzględniając wartość Zręczności, a nie Siły.",
+          "context": "Class/profession ability: Zwinność szczura; owner Szczur. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "class",
+          "key": "brutal",
+          "name": "Brutal",
+          "owner": "brutal",
+          "ownerLabel": "Brutal",
+          "target": "icons/klasy/brutal.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/klasy/brutal.svg",
+              "variant": "default",
+              "sourceSha256": "83bf2a94a6a88bb853e8e3de117926e3e503d06a79bbd186bc69e8f9ecaeb915"
+            }
+          ],
+          "ruleContext": "",
+          "context": "class: Brutal; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "class",
+          "key": "cwaniak",
+          "name": "Cwaniak",
+          "owner": "cwaniak",
+          "ownerLabel": "Cwaniak",
+          "target": "icons/klasy/cwaniak.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/klasy/cwaniak.svg",
+              "variant": "default",
+              "sourceSha256": "aa8669e1745b216b6ab4e23aeb55fc20df54d4922261d3e37210e95491e1f57c"
+            }
+          ],
+          "ruleContext": "",
+          "context": "class: Cwaniak; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "class",
+          "key": "spec",
+          "name": "Spec",
+          "owner": "spec",
+          "ownerLabel": "Spec",
+          "target": "icons/klasy/spec.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/klasy/spec.svg",
+              "variant": "default",
+              "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+            }
+          ],
+          "ruleContext": "",
+          "context": "class: Spec; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "class",
+          "key": "twardziel",
+          "name": "Twardziel",
+          "owner": "twardziel",
+          "ownerLabel": "Twardziel",
+          "target": "icons/klasy/twardziel.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/klasy/twardziel.svg",
+              "variant": "default",
+              "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac"
+            }
+          ],
+          "ruleContext": "",
+          "context": "class: Twardziel; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "class",
+          "key": "zlodziej",
+          "name": "Złodziej",
+          "owner": "zlodziej",
+          "ownerLabel": "Złodziej",
+          "target": "icons/klasy/zlodziej.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/klasy/zlodziej.svg",
+              "variant": "default",
+              "sourceSha256": "a66384a8f44176c0f6fa824edd1758ceabfbe9645b1370870ec07d93179b50d2"
+            }
+          ],
+          "ruleContext": "",
+          "context": "class: Złodziej; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "class",
+          "key": "zwiadowca",
+          "name": "Zwiadowca",
+          "owner": "zwiadowca",
+          "ownerLabel": "Zwiadowca",
+          "target": "icons/klasy/zwiadowca.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/klasy/zwiadowca.svg",
+              "variant": "default",
+              "sourceSha256": "67b410b391ee6dda233c64b0bbdf051d8d4bc1909260d06ef79fa3e6c328307a"
+            }
+          ],
+          "ruleContext": "",
+          "context": "class: Zwiadowca; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        }
+      ]
+    },
+    {
+      "batch": 84,
+      "subjects": [
+        {
+          "kind": "profession",
+          "key": "chemik",
+          "name": "Chemik",
+          "owner": "spec",
+          "ownerLabel": "Spec",
+          "target": "icons/profesje/chemik.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/chemik.svg",
+              "variant": "default",
+              "sourceSha256": "4662220129374902fd41b90cf730c337c276df09c02f494defe3e6bbf31b6c27"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Chemik; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "profession",
+          "key": "ganger",
+          "name": "Ganger",
+          "owner": "brutal",
+          "ownerLabel": "Brutal",
+          "target": "icons/profesje/ganger.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/ganger.svg",
+              "variant": "default",
+              "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Ganger; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "profession",
+          "key": "gladiator",
+          "name": "Gladiator",
+          "owner": "brutal",
+          "ownerLabel": "Brutal",
+          "target": "icons/profesje/gladiator.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/gladiator.svg",
+              "variant": "default",
+              "sourceSha256": "3433cbb512a34091de6d3a17e330060f24df47337d2253a38bd345c0787f80a9"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Gladiator; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "profession",
+          "key": "gwiazda",
+          "name": "Gwiazda",
+          "owner": "cwaniak",
+          "ownerLabel": "Cwaniak",
+          "target": "icons/profesje/gwiazda.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/gwiazda.svg",
+              "variant": "default",
+              "sourceSha256": "997555ee74146e5b8f1f2c6fc7becca90ebb51a404117b24454afee28df7fca7"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Gwiazda; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "profession",
+          "key": "kaznodzieja",
+          "name": "Kaznodzieja Nowej Ery",
+          "owner": "cwaniak",
+          "ownerLabel": "Cwaniak",
+          "target": "icons/profesje/kaznodzieja.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/kaznodzieja.svg",
+              "variant": "default",
+              "sourceSha256": "138bbdbdc8637e3e936dd2e1a3d07183dcb20d37f4b66a0c9b4087b482e3eef0"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Kaznodzieja Nowej Ery; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "profession",
+          "key": "kowboj",
+          "name": "Kowboj",
+          "owner": "twardziel",
+          "ownerLabel": "Twardziel",
+          "target": "icons/profesje/kowboj.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/kowboj.svg",
+              "variant": "default",
+              "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Kowboj; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "profession",
+          "key": "kurier",
+          "name": "Kurier",
+          "owner": "zlodziej",
+          "ownerLabel": "Złodziej",
+          "target": "icons/profesje/kurier.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/kurier.svg",
+              "variant": "default",
+              "sourceSha256": "96d9ac95260eca111c41639200ccefe8132a864cee353706bd089fc5693a30d7"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Kurier; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "profession",
+          "key": "lowca-mutantow",
+          "name": "Łowca Mutantów",
+          "owner": "zwiadowca",
+          "ownerLabel": "Zwiadowca",
+          "target": "icons/profesje/lowca-mutantow.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/lowca-mutantow.svg",
+              "variant": "default",
+              "sourceSha256": "8c35340f8fbd1ef9b1d1fa0c63d40e02a4fc8fc32a6e390441711fe48b637bc0"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Łowca Mutantów; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "profession",
+          "key": "mafiozo",
+          "name": "Mafiozo",
+          "owner": "cwaniak",
+          "ownerLabel": "Cwaniak",
+          "target": "icons/profesje/mafiozo.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/mafiozo.svg",
+              "variant": "default",
+              "sourceSha256": "91d52d1ffa320d4542e393e155df7810d01868b46b3dd9a5f75500eb65f36c88"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Mafiozo; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        }
+      ]
+    },
+    {
+      "batch": 85,
+      "subjects": [
+        {
+          "kind": "profession",
+          "key": "medyk",
+          "name": "Medyk",
+          "owner": "spec",
+          "ownerLabel": "Spec",
+          "target": "icons/profesje/medyk.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/medyk.svg",
+              "variant": "default",
+              "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Medyk; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "profession",
+          "key": "monter",
+          "name": "Monter",
+          "owner": "spec",
+          "ownerLabel": "Spec",
+          "target": "icons/profesje/monter.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/monter.svg",
+              "variant": "default",
+              "sourceSha256": "a266c80a0c3a394ac90455249a8599e49ebaff0d4d35577f630f8810913c801a"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Monter; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "profession",
+          "key": "najemnik",
+          "name": "Najemnik",
+          "owner": "brutal",
+          "ownerLabel": "Brutal",
+          "target": "icons/profesje/najemnik.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/najemnik.svg",
+              "variant": "default",
+              "sourceSha256": "2a4d32936b801162e47078613bb8694d9e2fb05dcc24e13752a64f657fa18716"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Najemnik; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "profession",
+          "key": "sedzia",
+          "name": "Sędzia",
+          "owner": "zwiadowca",
+          "ownerLabel": "Zwiadowca",
+          "target": "icons/profesje/sedzia.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/sedzia.svg",
+              "variant": "default",
+              "sourceSha256": "874c3e1ff80a895921e5675d617b0e8528280017b875614f1aeaef321f650eeb"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Sędzia; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "profession",
+          "key": "szczur",
+          "name": "Szczur",
+          "owner": "zlodziej",
+          "ownerLabel": "Złodziej",
+          "target": "icons/profesje/szczur.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/szczur.svg",
+              "variant": "default",
+              "sourceSha256": "4bd810a23039817a14513e84ba592a708fcc8b78f385cd35e6d7916c79b7cae5"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Szczur; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "profession",
+          "key": "wojownik-autostrady",
+          "name": "Wojownik Autostrady",
+          "owner": "twardziel",
+          "ownerLabel": "Twardziel",
+          "target": "icons/profesje/wojownik-autostrady.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/wojownik-autostrady.svg",
+              "variant": "default",
+              "sourceSha256": "e01f31847380231e9d631e52c4abeb248ae3d4926c2bc01f16c05a20e1f6961a"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Wojownik Autostrady; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "profession",
+          "key": "zabojca",
+          "name": "Zabójca",
+          "owner": "zlodziej",
+          "ownerLabel": "Złodziej",
+          "target": "icons/profesje/zabojca.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/zabojca.svg",
+              "variant": "default",
+              "sourceSha256": "f2ab1c6f403e02b4faddbdae54b60e69cc65fcfe9af70ba39eae69a2259618fd"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Zabójca; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "profession",
+          "key": "zabojca-maszyn",
+          "name": "Zabójca Maszyn",
+          "owner": "zwiadowca",
+          "ownerLabel": "Zwiadowca",
+          "target": "icons/profesje/zabojca-maszyn.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/zabojca-maszyn.svg",
+              "variant": "default",
+              "sourceSha256": "0c741cf9f957a63bc5ccc664ec9c16c5709904676a638e76017979b364a811d5"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Zabójca Maszyn; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        },
+        {
+          "kind": "profession",
+          "key": "zolnierz",
+          "name": "Żołnierz",
+          "owner": "twardziel",
+          "ownerLabel": "Twardziel",
+          "target": "icons/profesje/zolnierz.svg",
+          "deliveryTargets": [
+            {
+              "source": "icons/profesje/zolnierz.svg",
+              "variant": "default",
+              "sourceSha256": "5ea9f370436a15b721d359267424f0cff11887f5f11ceca09e09944336492654"
+            }
+          ],
+          "ruleContext": "",
+          "context": "profession: Żołnierz; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+          "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring."
+        }
+      ]
+    }
+  ]
+}

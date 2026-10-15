@@ -37,8 +37,8 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 69** (the previous 342-card queue is resolved; the newly
-audited class/profession placeholder backlog remains and is listed below).
+**Next batch number: 70** (Batch 69: nine replacement candidates await GM review;
+no production placeholders are replaced before approval).
 
 **Icon coverage correction, 2026-10-15:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
@@ -590,6 +590,33 @@ and complete validation: `review/candidates/batch-68/reviewed.json`,
 All 342 existing review cards are resolved. The three fuel-grade icons are
 ready for GM resolver mappings; Pan Plaster remains an older Sztuczka
 repoint/rebuild task. No packs or world documents were changed.
+
+<!-- placeholder-batch-69:start -->
+## Queue (A) — Batch 69 — 9 awaiting GM review
+
+One 3×3 atlas in the established white-glyph style; native initials badges remain
+until the GM approves a selected candidate. Exact sources/hashes, generic prompts
+and targets: `review/candidates/batch-69/`.
+
+| Cell | Item | Exact SVG delivery targets (+ WEBP) |
+|---|---|---|
+| 1 | A co mi tam! | `icons/abilities/a-co-mi-tam.svg` |
+| 2 | Amen | `icons/abilities/amen.svg` |
+| 3 | Berserk | `icons/abilities/berserk.svg`; `icons/abilities/berserk_active.svg` |
+| 4 | Bez tajemnic | `icons/abilities/bez-tajemnic.svg` |
+| 5 | Bezlitosny przywódca | `icons/abilities/bezlitosny-przywodca.svg` |
+| 6 | Brutalny cios | `icons/abilities/brutalny-cios.svg` |
+| 7 | Bystrzacha | `icons/abilities/bystrzacha.svg` |
+| 8 | Cichy krok | `icons/abilities/cichy-krok.svg` |
+| 9 | Clint | `icons/abilities/clint.svg` |
+
+The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
+nine). Later batch numbers are provisional: saved revisions take priority and
+may add batches. Base/active files share approved pixels; the existing active
+hotbar pulse remains in the code. Old unused active filenames are compatibility
+targets, without new mechanics or wiring. Code, packs and world state are untouched.
+
+<!-- placeholder-batch-69:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source

@@ -1,0 +1,65 @@
+{
+  "role": "Existing placeholders are recorded as delivery targets, not supplied as style references.",
+  "files": [
+    {
+      "key": "a-co-mi-tam",
+      "source": "icons/abilities/a-co-mi-tam.svg",
+      "variant": "default",
+      "sourceSha256": "85bde63ef0c7543abf85a5c53d3d35a3c1bb8d6eb0774a25c59afbfc59be1647"
+    },
+    {
+      "key": "amen",
+      "source": "icons/abilities/amen.svg",
+      "variant": "default",
+      "sourceSha256": "9062f3b8c40db134e5353eec62370cdeecb586ab463d9ba946dac4317cd0f615"
+    },
+    {
+      "key": "berserk",
+      "source": "icons/abilities/berserk.svg",
+      "variant": "default",
+      "sourceSha256": "7e0ca9a1bb0a2332ce46368c3a77d59480a7f4a0bc7e2e4c2db8e3a00ce59934"
+    },
+    {
+      "key": "berserk",
+      "source": "icons/abilities/berserk_active.svg",
+      "variant": "active",
+      "sourceSha256": "34150f4dcc40ab72db9d6519f4d8865212561724f4f93da06366d511f3b4f64a"
+    },
+    {
+      "key": "bez-tajemnic",
+      "source": "icons/abilities/bez-tajemnic.svg",
+      "variant": "default",
+      "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411"
+    },
+    {
+      "key": "bezlitosny-przywodca",
+      "source": "icons/abilities/bezlitosny-przywodca.svg",
+      "variant": "default",
+      "sourceSha256": "0b1104155975ba5fe68b0d7de3cee344154300467ccf8485c0494e52bf2ba622"
+    },
+    {
+      "key": "brutalny-cios",
+      "source": "icons/abilities/brutalny-cios.svg",
+      "variant": "default",
+      "sourceSha256": "953582c6d91772ef56e9125cd75d1759e9e8bf01817dcd33c16330b7ad986aa4"
+    },
+    {
+      "key": "bystrzacha",
+      "source": "icons/abilities/bystrzacha.svg",
+      "variant": "default",
+      "sourceSha256": "13659d562f71a640d6b49b4ac1db8b24e77da389d67298ed5ed8bb58e7fd7325"
+    },
+    {
+      "key": "cichy-krok",
+      "source": "icons/abilities/cichy-krok.svg",
+      "variant": "default",
+      "sourceSha256": "8c9ad2fa1efbd2e365755c19f97e23faee33ab24d8a491449da0a5c9f2544d61"
+    },
+    {
+      "key": "clint",
+      "source": "icons/abilities/clint.svg",
+      "variant": "default",
+      "sourceSha256": "5ee6cc654890f6d6bf88be57504342dcbc53ffeea273004d6cf970576cee2d61"
+    }
+  ]
+}

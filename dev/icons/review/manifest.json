@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "title": "Batch 68 · 0 revisions, 0 rejected, 0 pending",
-  "updated": "2026-10-13",
+  "title": "Batch 69 · 9 awaiting GM review",
+  "updated": "2026-10-15",
   "items": [
     {
       "id": "batch41-schemat-notatka",
@@ -8501,6 +8501,272 @@
         }
       ],
       "status": "resolved"
+    },
+    {
+      "id": "batch69-a-co-mi-tam",
+      "name": "A co mi tam!",
+      "tier": "Batch 69 · Szczur",
+      "batch": 69,
+      "placeholderKey": "feature:a-co-mi-tam",
+      "target": "icons/abilities/a-co-mi-tam.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/a-co-mi-tam.svg",
+          "variant": "default",
+          "sourceSha256": "85bde63ef0c7543abf85a5c53d3d35a3c1bb8d6eb0774a25c59afbfc59be1647"
+        }
+      ],
+      "context": "Class/profession ability: A co mi tam!; owner Szczur. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Masz Ułatwienie w Rzutach Obronnych przeciw chorobom, truciznom i radiacji. Masz również odporność na obrażenia od trucizn, chorób i promieniowania. Tak, na alkohol niestety też, bo to przecież trucizna. Jeśli masz chorobę przewlekłą, nie doznasz jednak cudownego ozdrowienia. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "A calm rugged adult survivor from the chest up, shrugging off a dangerous drink: one complete hand holds a small plain bottle near the shoulder, with one broad radiation trefoil behind the opposite shoulder. Untroubled expression, solid short hair and one simple mouth cut. Innate resistance to poison, disease and radiation; no gas mask or protective suit, no lettering.",
+      "current": {
+        "src": "/icons/abilities/a-co-mi-tam.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 69 · A co mi tam!",
+          "src": "candidates/batch-69/a-co-mi-tam.png",
+          "note": "A calm rugged adult survivor from the chest up, shrugging off a dangerous drink: one complete hand holds a small plain bottle near the shoulder, with one broad radiation trefoil behind the opposite shoulder. Untroubled expression, solid short hair and one simple mouth cut. Innate resistance to poison, disease and radiation; no gas mask or protective suit, no lettering."
+        }
+      ]
+    },
+    {
+      "id": "batch69-amen",
+      "name": "Amen",
+      "tier": "Batch 69 · kaznodzieja-nowej-ery",
+      "batch": 69,
+      "placeholderKey": "feature:amen",
+      "target": "icons/abilities/amen.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/amen.svg",
+          "variant": "default",
+          "sourceSha256": "9062f3b8c40db134e5353eec62370cdeecb586ab463d9ba946dac4317cd0f615"
+        }
+      ],
+      "context": "Class/profession ability: Amen; owner kaznodzieja-nowej-ery. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy odniesiesz porażkę w Teście Cechy, Ataku lub Rzucie Obronnym, wypowiadasz słowo AMEN i dorzucasz do wyniku testu 1k6. Musisz zaakceptować nowy wynik. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po Długim odpoczynku. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "Two complete realistic adult hands pressed together in prayer above ONE simple six-sided die with three large pips. Broad plain sleeves, clear black gaps between folded thumbs and palms. A compact prayer-and-second-chance motif; no written words, cross, halo, recognizable religious figure, extra hands or tiny fingernails.",
+      "current": {
+        "src": "/icons/abilities/amen.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 69 · Amen",
+          "src": "candidates/batch-69/amen.png",
+          "note": "Two complete realistic adult hands pressed together in prayer above ONE simple six-sided die with three large pips. Broad plain sleeves, clear black gaps between folded thumbs and palms. A compact prayer-and-second-chance motif; no written words, cross, halo, recognizable religious figure, extra hands or tiny fingernails."
+        }
+      ]
+    },
+    {
+      "id": "batch69-berserk",
+      "name": "Berserk",
+      "tier": "Batch 69 · Brutal",
+      "batch": 69,
+      "placeholderKey": "feature:berserk",
+      "target": "icons/abilities/berserk.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/berserk.svg",
+          "variant": "default",
+          "sourceSha256": "7e0ca9a1bb0a2332ce46368c3a77d59480a7f4a0bc7e2e4c2db8e3a00ce59934"
+        },
+        {
+          "source": "icons/abilities/berserk_active.svg",
+          "variant": "active",
+          "sourceSha256": "34150f4dcc40ab72db9d6519f4d8865212561724f4f93da06366d511f3b4f64a"
+        }
+      ],
+      "context": "Class/profession ability: Berserk; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. W Akcji Bonusowej możesz wpaść w Berserk. W tym swoistym szale otrzymujesz następujące korzyści: Siła Berserkera. Masz Ułatwienie w testach Siły i RO na Siłę. Obrażenia Berserkera. Kiedy wykonujesz atak oparty na Sile — bronią lub bez broni i zadajesz obrażenia, dorzucasz dodatkową kość obrażeń rosnącą wraz z poziomem Brutala, zgodnie z kolumną Obrażenia Berserkera w tabeli Zdolności Klasowych Brutala. Szarża Berserkera [B]. Jeśli przeznaczysz całą swoją Szybkość na zbliżenie się do przeciwnika, The approved glyph is shared by these exact base/active filenames. Existing hotbar code supplies the active pulsing frame; no mechanics or styling code changes.",
+      "request": "One powerful rugged adult survivor from bare chest upward, roaring with two clenched fists raised near the shoulders. Thick neck and broad chest, solid cropped hair, a single stern brow cut and simple open mouth. Two short broad angular adrenaline strokes outside the shoulders. Coherent realistic fists and arms; no anime hair, fine facial hatching, fangs, extra limbs or gore.",
+      "current": {
+        "src": "/icons/abilities/berserk.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 69 · Berserk",
+          "src": "candidates/batch-69/berserk.png",
+          "note": "One powerful rugged adult survivor from bare chest upward, roaring with two clenched fists raised near the shoulders. Thick neck and broad chest, solid cropped hair, a single stern brow cut and simple open mouth. Two short broad angular adrenaline strokes outside the shoulders. Coherent realistic fists and arms; no anime hair, fine facial hatching, fangs, extra limbs or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch69-bez-tajemnic",
+      "name": "Bez tajemnic",
+      "tier": "Batch 69 · Łowca Mutantów",
+      "batch": 69,
+      "placeholderKey": "feature:bez-tajemnic",
+      "target": "icons/abilities/bez-tajemnic.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/bez-tajemnic.svg",
+          "variant": "default",
+          "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411"
+        }
+      ],
+      "context": "Class/profession ability: Bez tajemnic; owner Łowca Mutantów. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Znasz się na mutantach i potworach jak nikt inny. Jeśli spotkasz mutanta lub potwora i zdasz Test Inteligencji (Przyroda), zyskujesz wiedzę na jego temat. MG zdradza ci jego zwyczajową nazwę (ST 10), słabe punkty (ST 15) i trzy wybrane współczynniki (ST 20). Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "One large practical magnifying glass examining a simple mutant's head in profile: one broad ear, one short blunt horn and a solid neck silhouette. In the lens, one simple crosshair cut marks a vulnerable point on the head. The lens and head overlap clearly with broad black gaps, not multiple heads; no gore, tiny teeth, laboratory labels or decorative symbols.",
+      "current": {
+        "src": "/icons/abilities/bez-tajemnic.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 69 · Bez tajemnic",
+          "src": "candidates/batch-69/bez-tajemnic.png",
+          "note": "One large practical magnifying glass examining a simple mutant's head in profile: one broad ear, one short blunt horn and a solid neck silhouette. In the lens, one simple crosshair cut marks a vulnerable point on the head. The lens and head overlap clearly with broad black gaps, not multiple heads; no gore, tiny teeth, laboratory labels or decorative symbols."
+        }
+      ]
+    },
+    {
+      "id": "batch69-bezlitosny-przywodca",
+      "name": "Bezlitosny przywódca",
+      "tier": "Batch 69 · Mafiozo",
+      "batch": 69,
+      "placeholderKey": "feature:bezlitosny-przywodca",
+      "target": "icons/abilities/bezlitosny-przywodca.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/bezlitosny-przywodca.svg",
+          "variant": "default",
+          "sourceSha256": "0b1104155975ba5fe68b0d7de3cee344154300467ccf8485c0494e52bf2ba622"
+        }
+      ],
+      "context": "Class/profession ability: Bezlitosny przywódca; owner Mafiozo. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Twoja mafia to twoja rodzina. Zabijesz każdego, kto choćby krzywo spojrzy na twojego brata, siostrę, matkę czy psa. Wszyscy, którzy noszą wytatuowany symbol twojej mafijnej rodziny, są pod twoją ochroną i twoim skutecznym przywództwem. Vendetta: Otrzymujesz Ułatwienie w Teście Ataku przeciw istocie, która zadała obrażenia członkowi twojej mafii w przeciągu ostatniej rundy. Szef każe [B]: W Akcji Bonusowej możesz wydać rozkaz ataku członkowi swojej grupy. Ten w Reakcji, może zaatakować wskazaną p Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "One stern adult gang leader shown from the chest up, one complete arm extended to point decisively toward the right. Two smaller subordinate shoulder-and-head silhouettes sit behind the leader, one on either side. Clear separation between all three people, serious practical clothing, no fine face detail, badge, lettering, crown or extra hands.",
+      "current": {
+        "src": "/icons/abilities/bezlitosny-przywodca.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 69 · Bezlitosny przywódca",
+          "src": "candidates/batch-69/bezlitosny-przywodca.png",
+          "note": "One stern adult gang leader shown from the chest up, one complete arm extended to point decisively toward the right. Two smaller subordinate shoulder-and-head silhouettes sit behind the leader, one on either side. Clear separation between all three people, serious practical clothing, no fine face detail, badge, lettering, crown or extra hands."
+        }
+      ]
+    },
+    {
+      "id": "batch69-brutalny-cios",
+      "name": "Brutalny cios",
+      "tier": "Batch 69 · Brutal",
+      "batch": 69,
+      "placeholderKey": "feature:brutalny-cios",
+      "target": "icons/abilities/brutalny-cios.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/brutalny-cios.svg",
+          "variant": "default",
+          "sourceSha256": "953582c6d91772ef56e9125cd75d1759e9e8bf01817dcd33c16330b7ad986aa4"
+        }
+      ],
+      "context": "Class/profession ability: Brutalny cios; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy używasz kości Wściekłego ciosu w ataku wręcz, możesz nałożyć na cel jeden dodatkowy efekt zgodny z poniższą tabelą. Efekty o tym samym działaniu się nie kumulują. TYP OBRAŻEŃ EFEKT Obuchowe Powalenie. Automatyczne powalenie istoty, maksymalnie o jeden rozmiar większej od ciebie. Cięte Osłabienie. Cel otrzymuje karę -1k4 do Testów Ataku (tj. jego wynik pomniejszany jest o 1k4) do początku twojej następnej tury. Kłute Okulawienie. Szybkość istoty spada o 6 m, do początku twojej następnej tur Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "One heavy clenched fist entering from the upper left strikes the shoulder of a simple full human silhouette, which tilts backward and loses its footing toward the lower right. A single broad angular impact wedge at the shoulder conveys a powerful knockdown. Both legs and the head remain complete; no blood, wound detail, crushed face, extra fist or extra person.",
+      "current": {
+        "src": "/icons/abilities/brutalny-cios.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 69 · Brutalny cios",
+          "src": "candidates/batch-69/brutalny-cios.png",
+          "note": "One heavy clenched fist entering from the upper left strikes the shoulder of a simple full human silhouette, which tilts backward and loses its footing toward the lower right. A single broad angular impact wedge at the shoulder conveys a powerful knockdown. Both legs and the head remain complete; no blood, wound detail, crushed face, extra fist or extra person."
+        }
+      ]
+    },
+    {
+      "id": "batch69-bystrzacha",
+      "name": "Bystrzacha",
+      "tier": "Batch 69 · Spec",
+      "batch": 69,
+      "placeholderKey": "feature:bystrzacha",
+      "target": "icons/abilities/bystrzacha.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/bystrzacha.svg",
+          "variant": "default",
+          "sourceSha256": "13659d562f71a640d6b49b4ac1db8b24e77da389d67298ed5ed8bb58e7fd7325"
+        }
+      ],
+      "context": "Class/profession ability: Bystrzacha; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Dodajesz połowę swojej Premii Biegłości (zaokrągloną w dół) do wszystkich umiejętności, w których nie masz biegłości. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "One robust practical folding multitool, opened with its pliers at the top and one broad screwdriver blade and one short utility knife folded out to the sides. A coherent single tool with intact handles and one visible hinge; broad functional silhouettes and generous black gaps. Versatile hands-on competence, no giant cog, brain, decorative stars, scattered toy parts, lettering or tiny serrations.",
+      "current": {
+        "src": "/icons/abilities/bystrzacha.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 69 · Bystrzacha",
+          "src": "candidates/batch-69/bystrzacha.png",
+          "note": "One robust practical folding multitool, opened with its pliers at the top and one broad screwdriver blade and one short utility knife folded out to the sides. A coherent single tool with intact handles and one visible hinge; broad functional silhouettes and generous black gaps. Versatile hands-on competence, no giant cog, brain, decorative stars, scattered toy parts, lettering or tiny serrations."
+        }
+      ]
+    },
+    {
+      "id": "batch69-cichy-krok",
+      "name": "Cichy krok",
+      "tier": "Batch 69 · Zwiadowca",
+      "batch": 69,
+      "placeholderKey": "feature:cichy-krok",
+      "target": "icons/abilities/cichy-krok.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/cichy-krok.svg",
+          "variant": "default",
+          "sourceSha256": "8c9ad2fa1efbd2e365755c19f97e23faee33ab24d8a491449da0a5c9f2544d61"
+        }
+      ],
+      "context": "Class/profession ability: Cichy krok; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Nie otrzymujesz Utrudnienia do testów Skradania się za noszenie pancerza. Otrzymujesz Ułatwienie w Testach Ukrywania się, jeśli nie nosisz ciężkiego pancerza. Trudny teren nie spowalnia twojego ruchu. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "One complete sturdy boot in three-quarter side view, making a careful quiet toe-step across two low flat rocks, heel raised. Two short broad air trails behind the heel suggest light silent movement. Broad boot shape with only a few practical seam cutouts; no tiny laces, texture, footprint trail, extra boot, labels or cartoon sound effect.",
+      "current": {
+        "src": "/icons/abilities/cichy-krok.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 69 · Cichy krok",
+          "src": "candidates/batch-69/cichy-krok.png",
+          "note": "One complete sturdy boot in three-quarter side view, making a careful quiet toe-step across two low flat rocks, heel raised. Two short broad air trails behind the heel suggest light silent movement. Broad boot shape with only a few practical seam cutouts; no tiny laces, texture, footprint trail, extra boot, labels or cartoon sound effect."
+        }
+      ]
+    },
+    {
+      "id": "batch69-clint",
+      "name": "Clint",
+      "tier": "Batch 69 · Kowboj",
+      "batch": 69,
+      "placeholderKey": "feature:clint",
+      "target": "icons/abilities/clint.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/clint.svg",
+          "variant": "default",
+          "sourceSha256": "5ee6cc654890f6d6bf88be57504342dcbc53ffeea273004d6cf970576cee2d61"
+        }
+      ],
+      "context": "Class/profession ability: Clint; owner Kowboj. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Poprawka. Raz na walkę możesz powtórzyć jeden Test Ataku bronią palną. Zabójcza spluwa. Rewolwery w twoich rękach zadają jedną dodatkową kość obrażeń. PRZYKŁAD: Peacemaker w twoich dłoniach zadaje 2k8, zamiast 1k8 obrażeń. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "One realistic adult gloved hand holding a classic six-shot revolver in clear side profile, barrel aimed toward the upper right. Large coherent cylinder and simple trigger guard, intact grip, thumb and fingers. Two short broad recoil or quick-draw strokes behind the hand. A generic skilled gunslinger motif, no celebrity portrait, recognizable character, extra gun, extra barrel, lettering or fine engraving.",
+      "current": {
+        "src": "/icons/abilities/clint.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 69 · Clint",
+          "src": "candidates/batch-69/clint.png",
+          "note": "One realistic adult gloved hand holding a classic six-shot revolver in clear side profile, barrel aimed toward the upper right. Large coherent cylinder and simple trigger guard, intact grip, thumb and fingers. Two short broad recoil or quick-draw strokes behind the hand. A generic skilled gunslinger motif, no celebrity portrait, recognizable character, extra gun, extra barrel, lettering or fine engraving."
+        }
+      ]
     }
   ]
 }

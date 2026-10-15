@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-15",
+  "batch": 69,
+  "priorReviewCardsPreserved": 342,
+  "priorReviewCardsResolved": 342,
+  "feedbackBytesUnchanged": true,
+  "reviewCardsTotal": 351,
+  "newPendingSubjects": 9,
+  "prospectiveDeliveryFiles": 10,
+  "nativePlaceholderFiles": 155,
+  "nativePlaceholderSubjects": 153,
+  "plannedNineSubjectGroups": 17,
+  "productionHashesUnchanged": 155,
+  "candidateCollectionValidatedPairs": 548,
+  "extractionRegressionTestsPassed": 4,
+  "browser": {
+    "cards": 9,
+    "options": 18,
+    "brokenImages": 0,
+    "errors": 0,
+    "allNewCandidatesSelected": true,
+    "screenshot": "raw/review-preview.png"
+  },
+  "installedByThisBatch": 0,
+  "approvalRequiredBeforeDelivery": true
+}

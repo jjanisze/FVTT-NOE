@@ -1,0 +1,16 @@
+{
+  "batch": 69,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 10,
+  "candidateHashes": {
+    "a-co-mi-tam": "33155763891a9ca0946efd702f97b73e481d0d5016310e38b833e4c3f9402e4f",
+    "amen": "287f1d096984fb7dfadd7c93b396093a7c3f551b72778998ea23869e333bf185",
+    "berserk": "ed6fd86b0a29a0a0918bfc27ac5c8c8d13ce26f948424a0f90c8df0933f338d1",
+    "bez-tajemnic": "fa5d11270a588121d8f88153561bf4425d3eaeb9a9755e4578b2c1b68e77dd7a",
+    "bezlitosny-przywodca": "364133ffd5446029a56688813c2d2b79b343f30aeda25af06f5219e0f85ce6dc",
+    "brutalny-cios": "bfc3c1f94d8d12ac43cafb29da985b2bc973d235240ab5fa7134e5d0c5aa1e86",
+    "bystrzacha": "2388ac1ffd8598ae13a5b11161067f44af4088b3d886c125807252d80e9abe6a",
+    "cichy-krok": "2a8b9582e20e4a4626cbd6cfbadf4d43f753778a2754d713e1034068da48fef0",
+    "clint": "36511b1af2d6cf7f0c37a378d5643221fdbcb7bdd41032747aa9b715d06f8357"
+  }
+}
