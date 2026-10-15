@@ -1,0 +1,58 @@
+{
+  "batch78-nie-do-zdarcia": {
+    "itemId": "batch78-nie-do-zdarcia",
+    "decision": "revise",
+    "candidateId": "batch80-revision",
+    "notes": "Both concepts don't work. Try something different that shows inhuman resilience to damage.",
+    "updatedAt": "2026-10-15T22:20:21.055Z"
+  },
+  "batch80-reputacja": {
+    "itemId": "batch80-reputacja",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "We already have enough shaking hand icons. Develop a different concept.",
+    "updatedAt": "2026-10-15T22:21:40.281Z"
+  },
+  "batch81-rutyna": {
+    "itemId": "batch81-rutyna",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Different concept - a soldier with unfazed expression crawling under barbed wire and gunfire.",
+    "updatedAt": "2026-10-15T22:22:43.144Z"
+  },
+  "batch81-rzeznik": {
+    "itemId": "batch81-rzeznik",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Different idea: one hand holds up the target's arm, the other prepares to deliver a blow in the vital armpit area",
+    "updatedAt": "2026-10-15T22:24:17.564Z"
+  },
+  "batch81-rzuc-bron-i-gleba": {
+    "itemId": "batch81-rzuc-bron-i-gleba",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "The hand should be holding a gun pointing at the perpetrator. Do not change the person or his weapon on the ground.",
+    "updatedAt": "2026-10-15T22:25:00.953Z"
+  },
+  "batch81-samouk": {
+    "itemId": "batch81-samouk",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "We already have enough books. Consider a different idea.",
+    "updatedAt": "2026-10-15T22:25:25.179Z"
+  },
+  "batch81-saper": {
+    "itemId": "batch81-saper",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Two hands dexterously manipulating some object requiring high dexterity",
+    "updatedAt": "2026-10-15T22:26:36.494Z"
+  },
+  "batch81-serwisowanie": {
+    "itemId": "batch81-serwisowanie",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Put the service window on the bottom, not the side (devices aren't built like that)",
+    "updatedAt": "2026-10-15T22:27:14.822Z"
+  }
+}

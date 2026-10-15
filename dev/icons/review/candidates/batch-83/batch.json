@@ -1,0 +1,196 @@
+{
+  "date": "2026-10-16",
+  "batch": 83,
+  "generalFeedback": "Follow exact saved revisions. Avoid repeated handshakes and books where new concepts are requested. Broad white glyphs, generic adults, no gruff portrait default, anime or dithering.",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "slang",
+      "name": "Slang",
+      "owner": "kurier",
+      "ownerLabel": "Kurier",
+      "target": "icons/abilities/slang.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/slang.svg",
+          "variant": "default",
+          "sourceSha256": "489859c79ecce12c7e1b0f181602b1783d0f6a30b4c2d8a804bb5b86cbb6b03a"
+        }
+      ],
+      "ruleContext": "Wiesz, jak gadać z tubylcami w każdym zakątku Podzielonych Stanów. Szybko rozpoznajesz lokalnych złodziejaszków, prawidłowo oceniasz zakapiorów i wiesz, co powiedzieć, żeby zrobić jakiś biznes. W kilka chwil zdobywasz informacje o tym, kto tu rządzi, jakie ma problemy i z kim lepiej nie zadzierać. Na to wszystko wystarczy ci godzina i kilka fajek. A kiedy MG prosi cię o testy Perswazji lub Śledztwa związane z tym półświatkiem, masz w nich Ułatwienie. Dlaczego? Bo jesteś: spoko ziom, swój na każdej dzielni, co złego to nie ja.",
+      "context": "Class/profession ability: Slang; owner Kurier. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "TWO smooth generic ADULT HEADS AND SHORT NECKS in profile facing each other, having a casual STREET CONVERSATION. The speaker on LEFT holds ONE plain CIGARETTE between two bare fingers low beside the chin; TWO short broad speech strokes point toward the listener. Natural adult proportions, minimal face cuts, no beard or gruff portrait. No smoke cloud, lettering, named gang signs, speech-bubble text, book, handshake, anime or tiny hair detail. Clear black gaps between heads and coherent small hand.",
+      "itemId": "batch83-slang"
+    },
+    {
+      "kind": "feature",
+      "key": "smakuje-jak-arszenik",
+      "name": "Smakuje jak arszenik",
+      "owner": "chemik",
+      "ownerLabel": "Chemik",
+      "target": "icons/abilities/smakuje-jak-arszenik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/smakuje-jak-arszenik.svg",
+          "variant": "default",
+          "sourceSha256": "ef80cfb0acf2d2ed390490e28e63dd51cb030f8acc6c023946dd456bfe7735f4"
+        }
+      ],
+      "ruleContext": "Lata babrania się w toksycznych świństwach zrobiły swoje. Zyskujesz odporność na obrażenia od kwasu i trucizny. Masz też Ułatwienie w Rzutach Obronnych na Kondycję, przeciw działaniu kwasów, trucizn i skażenia radioaktywnego.",
+      "context": "Class/profession ability: Smakuje jak arszenik; owner Chemik. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "request": "ONE broad sturdy SHIELD outline containing ONE large CHEMICAL DROPLET with a simple BLACK SKULL symbol cut inside it. Droplet, shield and skull have thick coherent white bridges and generous negative space. Resistance to toxins and acid, sober compact protection emblem. Skull is one plain oval, two broad eye holes and a block jaw, no tiny teeth. No human face, poison instructions, writing, labels, numerals, extra bottles, blood or gore.",
+      "itemId": "batch83-smakuje-jak-arszenik"
+    },
+    {
+      "kind": "feature",
+      "key": "sokole-oko",
+      "name": "Sokole oko",
+      "owner": "wyjadacz-option",
+      "ownerLabel": "wyjadacz-option",
+      "target": "icons/abilities/sokole-oko.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/sokole-oko.svg",
+          "variant": "default",
+          "sourceSha256": "f77e36828e55586e9b5ef5a3a6ccee4af8e64cc8eac5133e7a09dba91479cff0"
+        }
+      ],
+      "ruleContext": "Otrzymujesz modyfikator +3 do Testów Ataku bronią palną, dystansową i rzucaną.",
+      "context": "Class/profession ability: Sokole oko; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "request": "ONE large realistic FALCON EYE in a compact SIDE-PROFILE PATCH: a broad swept avian brow and two simple feather-edge cuts frame one natural round iris. ONE broad CROSSHAIR centered on the pupil conveys exceptional aim. Sober sharp bird anatomy, complete eye, restrained black negative space, no full bird body or extra target rings. No anime human eye, lashes, human face, tiny feather texture, writing or numerals.",
+      "itemId": "batch83-sokole-oko"
+    },
+    {
+      "kind": "feature",
+      "key": "solowa",
+      "name": "Solówa",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/abilities/solowa.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/solowa.svg",
+          "variant": "default",
+          "sourceSha256": "16292b6c0c8db69ab2f8bea7e081414ba89c3a547b6e38d4c3617b090b74a98e"
+        }
+      ],
+      "ruleContext": "W Akcji Bonusowej możesz wybrać istotę, którą widzisz w zasięgu 18 metrów. Prowokujesz ją do atakowania tylko ciebie, jeśli nie zda ona RO na Inteligencję o ST 8 plus twoja Premia Biegłości i modyfikator Siły. Efekt trwa, dopóki istota cię widzi lub zda Rzut Obronny na końcu swojej następnej tury.",
+      "context": "Class/profession ability: Solówa; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "request": "ONE plain generic ADULT in a confident full-body fighting stance on LEFT, one open bare hand BECKONING toward ONE smaller generic opponent on RIGHT. The beckoning hand is raised at chest level, fingers curling inward once; other arm hangs ready at side. Opponent faces the challenger, hands raised defensively. Exactly two natural adult bodies with smooth featureless heads and plain clothes, complete limbs, broad black separation. A one-on-one challenge, no crowd, portrait, anime, lettering, weapons, injury or gore.",
+      "itemId": "batch83-solowa"
+    },
+    {
+      "kind": "feature",
+      "key": "specjalizacja-spec",
+      "name": "Specjalizacja",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/abilities/specjalizacja-spec.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/specjalizacja-spec.svg",
+          "variant": "default",
+          "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+        }
+      ],
+      "ruleContext": "Wybierasz dwie ze swoich biegłości w umiejętnościach albo dwie biegłości w narzędziach, lub jedną biegłość w umiejętności i jedną biegłość w narzędziach. W każdym teście wykonywanym z ich użyciem Premia Biegłości liczy się podwójnie.",
+      "context": "Class/profession ability: Specjalizacja; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 5,
+      "request": "TWO complete PRECISION TOOLS crossed in a compact emblem: ONE sturdy VERNIER CALIPER with two clearly open jaws and one sliding beam; ONE short practical SCREWDRIVER with thick handle and intact straight tip. Equal visual weight, a broad black cut separates their overlap. Technical expertise through real tools, sparse functional detail. No scale ticks, numerals, lettering, generic cog, person, hands, book or scattered parts.",
+      "itemId": "batch83-specjalizacja-spec"
+    },
+    {
+      "kind": "feature",
+      "key": "specjalizacja-zlodziej",
+      "name": "Specjalizacja",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/abilities/specjalizacja-zlodziej.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/specjalizacja-zlodziej.svg",
+          "variant": "default",
+          "sourceSha256": "aa18e02bf650fcb14d2859147716f4666740b1a736992465f424b179eca3514e"
+        }
+      ],
+      "ruleContext": "Wybierasz jedną ze swoich biegłości w umiejętnościach i jedną z biegłości w używaniu narzędzi. W każdym teście wykonywanym z ich użyciem Premia Biegłości liczy się podwójnie. Na 5. poziomie wybierasz kolejną biegłość w umiejętnościach lub w narzędziach i zyskujesz dla niej ten sam efekt.",
+      "context": "Class/profession ability: Specjalizacja; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 6,
+      "request": "ONE OPEN LEATHER LOCKPICK ROLL with exactly THREE broad distinct LOCKPICK TOOLS seated in simple pockets: one hook tip, one straight probe and one short bent tension wrench. Strong complete handles and large black pocket cuts, one plain tie strap at the side. Professional precision tools, sober compact inventory silhouette. No instructions, lock diagram, hands, face, labels, tiny stitching, numerals, generic cog or book.",
+      "itemId": "batch83-specjalizacja-zlodziej"
+    },
+    {
+      "kind": "feature",
+      "key": "spieprzysz-to",
+      "name": "Spieprzysz to!",
+      "owner": "cwaniak",
+      "ownerLabel": "Cwaniak",
+      "target": "icons/abilities/spieprzysz-to.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/spieprzysz-to.svg",
+          "variant": "default",
+          "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+        }
+      ],
+      "ruleContext": "Potrafisz każdego wytrącić z równowagi. Kiedy istota, którą widzisz w promieniu 18 m, wykonała udany Test Ataku lub Rzut Obronny, możesz w swojej Reakcji sprawić, by powtórzyła rzut i wybrała gorszy wynik. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po ukończeniu Krótkiego odpoczynku.",
+      "context": "Class/profession ability: Spieprzysz to!; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 7,
+      "request": "ONE complete BARE ADULT HAND uses its extended INDEX FINGER to FLICK ONE coherent CUBE DIE onto an edge, forcing a reroll. Die has exactly three visible flat planes with straight shared edges: ONE big pip on front, TWO on right side, ONE on top. One broad short impact wedge at fingertip, no motion arrow. Natural hand/thumb/folded fingers and short wrist, strong black gap around die. No second die, written words, numerals, speech bubble, book, tiny fingernails or cartoon face.",
+      "itemId": "batch83-spieprzysz-to"
+    },
+    {
+      "kind": "feature",
+      "key": "sportowiec",
+      "name": "Sportowiec",
+      "owner": "zwiadowca",
+      "ownerLabel": "Zwiadowca",
+      "target": "icons/abilities/sportowiec.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/sportowiec.svg",
+          "variant": "default",
+          "sourceSha256": "37b3ced0ffe7f36e8828abcbc13c7ced4d35f0a9920ed540ededad58cc340a44"
+        }
+      ],
+      "ruleContext": "Twoja Szybkość rośnie o 3 metry. Zyskujesz również Ułatwienie w testach Atletyki, kiedy się wspinasz, pływasz lub skaczesz.",
+      "context": "Class/profession ability: Sportowiec; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 8,
+      "request": "ONE generic ADULT ATHLETE VAULTING OVER ONE LOW PLAIN WALL. Both complete bare hands plant on the broad wall top, torso leans forward, one knee drawn over the wall and trailing leg extended behind. Natural adult proportions, smooth featureless head, plain practical clothes and boots. Strong broad black gaps between bent limbs and wall, single coherent athletic action. No gruff portrait, anime, gym logos, tiny brick texture, text or motion arrows.",
+      "itemId": "batch83-sportowiec"
+    },
+    {
+      "kind": "feature",
+      "key": "stalowy-nadgarstek",
+      "name": "Stalowy nadgarstek",
+      "owner": "wyjadacz-option",
+      "ownerLabel": "wyjadacz-option",
+      "target": "icons/abilities/stalowy-nadgarstek.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/stalowy-nadgarstek.svg",
+          "variant": "default",
+          "sourceSha256": "d8c83aacec0f8c7db11eb80e668cda442b05324c6b48f72c2ad871b6f155346e"
+        }
+      ],
+      "ruleContext": "Kiedy strzelasz z broni palnej krótkiej i pistoletów maszynowych jedną ręką, nie otrzymujesz związanego z tym Utrudnienia do Testów Ataku (tak jakby miały właściwość poręczna). Dodatkowo każda broń palna krótka w twoich rękach zyskuje właściwość lekka.",
+      "context": "Class/profession ability: Stalowy nadgarstek; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 9,
+      "request": "ONE complete BARE ADULT HAND AND STRAIGHT FOREARM holds ONE compact SUBMACHINE GUN LEVEL toward the RIGHT with ONE HAND ONLY. Strong steady wrist, coherent fingers around the single grip, thumb natural and index finger straight along the receiver outside the trigger guard. Complete short barrel, simple receiver, one short magazine and a compact folded stock. Sparse broad black structural cuts, no second hand, body, head, recoil cloud, prosthetic wrist, elaborate accessories, lettering or tiny controls.",
+      "itemId": "batch83-stalowy-nadgarstek"
+    }
+  ]
+}

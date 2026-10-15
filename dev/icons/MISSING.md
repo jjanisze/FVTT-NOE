@@ -37,8 +37,8 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 82** (the previous 342-card queue is resolved; the newly
-audited class/profession placeholder backlog remains and is listed below).
+**Next batch number: 84** (18 candidates in 2 batches await GM review;
+production replacements require a saved approval).
 
 **Icon coverage correction, 2026-10-16:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
@@ -871,6 +871,64 @@ Evidence: `review/candidates/batch-81/reviewed.json` and `reviewed-installed.jso
 | 9 | Skrytka | `icons/abilities/skrytka.svg` | **done** |
 
 <!-- placeholder-batch-81:end -->
+
+<!-- placeholder-batch-82:start -->
+## Queue (A) — Batch 82 — 9 awaiting GM review
+
+One 3×3 atlas in the established white-glyph style; native initials badges remain
+until the GM approves a selected candidate. Exact sources/hashes, generic prompts
+and targets: `review/candidates/batch-82/`.
+
+| Cell | Item | Exact SVG delivery targets (+ WEBP) |
+|---|---|---|
+| 1 | Nie do zdarcia (revision) | `icons/abilities/nie-do-zdarcia.svg` |
+| 2 | Reputacja (revision) | `icons/abilities/reputacja.svg` |
+| 3 | Rutyna (revision) | `icons/abilities/rutyna.svg` |
+| 4 | Rzeźnik (revision) | `icons/abilities/rzeznik.svg` |
+| 5 | Rzuć broń i gleba! (revision) | `icons/abilities/rzuc-bron-i-gleba.svg` |
+| 6 | Samouk (revision) | `icons/abilities/samouk.svg` |
+| 7 | Saper (revision) | `icons/abilities/saper.svg` |
+| 8 | Serwisowanie (revision) | `icons/abilities/serwisowanie.svg` |
+| 9 | Skuteczny cios | `icons/abilities/skuteczny-cios.svg` |
+
+Saved revision notes and original selected-source hashes are retained in batch.json
+and revision-feedback-before.json. Old candidates remain available; only these
+revision cards are reset to pending with the new candidate selected.
+
+The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
+nine). Later batch numbers are provisional: saved revisions take priority and
+may add batches. Base/active files share approved pixels; the existing active
+hotbar pulse remains in the code. Old unused active filenames are compatibility
+targets, without new mechanics or wiring. Code, packs and world state are untouched.
+
+<!-- placeholder-batch-82:end -->
+
+<!-- placeholder-batch-83:start -->
+## Queue (A) — Batch 83 — 9 awaiting GM review
+
+One 3×3 atlas in the established white-glyph style; native initials badges remain
+until the GM approves a selected candidate. Exact sources/hashes, generic prompts
+and targets: `review/candidates/batch-83/`.
+
+| Cell | Item | Exact SVG delivery targets (+ WEBP) |
+|---|---|---|
+| 1 | Slang | `icons/abilities/slang.svg` |
+| 2 | Smakuje jak arszenik | `icons/abilities/smakuje-jak-arszenik.svg` |
+| 3 | Sokole oko | `icons/abilities/sokole-oko.svg` |
+| 4 | Solówa | `icons/abilities/solowa.svg` |
+| 5 | Specjalizacja | `icons/abilities/specjalizacja-spec.svg` |
+| 6 | Specjalizacja | `icons/abilities/specjalizacja-zlodziej.svg` |
+| 7 | Spieprzysz to! | `icons/abilities/spieprzysz-to.svg` |
+| 8 | Sportowiec | `icons/abilities/sportowiec.svg` |
+| 9 | Stalowy nadgarstek | `icons/abilities/stalowy-nadgarstek.svg` |
+
+The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
+nine). Later batch numbers are provisional: saved revisions take priority and
+may add batches. Base/active files share approved pixels; the existing active
+hotbar pulse remains in the code. Old unused active filenames are compatibility
+targets, without new mechanics or wiring. Code, packs and world state are untouched.
+
+<!-- placeholder-batch-83:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source

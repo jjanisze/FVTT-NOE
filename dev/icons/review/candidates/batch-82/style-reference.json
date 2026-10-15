@@ -1,0 +1,41 @@
+{
+  "role": "Reference cells 1-8 are EXACT selected revision subjects. Cells 1,2,3,4,6,7 require entirely new concepts as specified; cell 5 preserves the prone person and dropped gun while replacing the stop palm, and cell 8 moves the service hatch to the actual UNDERSIDE. Reference cell 9 is STYLE ONLY for a new subject. No books for cell 6 and no handshake for cell 2. Keep each complete glyph inside its own cell.",
+  "sources": [
+    {
+      "source": "dev/icons/review/candidates/batch-80/nie-do-zdarcia.png",
+      "sha256": "4546e681be7b2d7018ea8ae6c378d011b25cbc081ae9fe3ec208e7edce02866b"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-80/reputacja.png",
+      "sha256": "c50fb279e16f565c25e702f3c6a44f3df4afa69a64e9416a9205a1ed936735ba"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-81/rutyna.png",
+      "sha256": "ff5cc1e96b730dc229556451890ccd857d50ad375a1ab19c2e902ba050ffe7b6"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-81/rzeznik.png",
+      "sha256": "9959a42367ce339c7580774da34c1c5d23259b8dbd760b8358ba3defcee8ddc5"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-81/rzuc-bron-i-gleba.png",
+      "sha256": "1d4945f8656a3c18c4bddabb0a29ccb2676764163fd5b706e60ea3b99d8f7408"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-81/samouk.png",
+      "sha256": "a482c3221e3b3ef28b94245bfc7658408bf4adc389107715452b7e78ef9e691e"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-81/saper.png",
+      "sha256": "97b365cea329c3aaf5549c1c39cec2fc9a290ecd61d160932265d6cf87f839a9"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-81/serwisowanie.png",
+      "sha256": "e094f4377066ad801a0cde3cfd6833f30750915638580ba031bfeb50af8bff71"
+    },
+    {
+      "source": "icons/abilities/dziewiec-zyc.webp",
+      "sha256": "0cf20df0e99b7078ccc55a513e67d81a2672d09a49374eca0815731a2aa34317"
+    }
+  ]
+}

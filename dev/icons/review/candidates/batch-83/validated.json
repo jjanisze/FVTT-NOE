@@ -1,0 +1,16 @@
+{
+  "batch": 83,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "slang": "3443ad430712d05d4e99ce6e78872f885ef0976514a03b6325a69215ffddab9f",
+    "smakuje-jak-arszenik": "e8c8445e9cf9842f94cb0f7353058215f4d1ecb8d8c8a9e1c90d62c3ea3cfd9e",
+    "sokole-oko": "b15845a25851593eba8c99e1ea752d7bd74278988bdbd801c86bbdb8e0af653a",
+    "solowa": "ee34168f6d67192ec9dc1784b971cfe058b80e9aae2b2ade3bfde923306e1ced",
+    "specjalizacja-spec": "885d72903d338d45428f0be7dbec0f9276bffb61ac354ce0ff4e8f5c572bb683",
+    "specjalizacja-zlodziej": "0b79294b8735533267c31bb5b83d9b5f1d55b928cf82dc532ccb3277c92beca4",
+    "spieprzysz-to": "35afc3122c23364f8a8aa19fea53818f283218e8ee56c5bedda41c735fc18759",
+    "sportowiec": "56441db52c04f8fda39caa835f550334ca0ef42771373ab195cf248634ef567f",
+    "stalowy-nadgarstek": "d5431d53873cd9285076c10ccf351ead29778f86a4f32507e0037a0bc0842aaa"
+  }
+}

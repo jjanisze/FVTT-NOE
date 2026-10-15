@@ -1,0 +1,16 @@
+{
+  "batch": 82,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "nie-do-zdarcia": "e970ac0ef206eeee7de3ce70fb06ed13dba31a95c0b8716284911a68efdbc5a9",
+    "reputacja": "6c6d8f6e3b4b9bd78e00b03c4201c1badf450b78066325ca575d07ce2f95eafa",
+    "rutyna": "84477577bb5fdc3a00318a683bb396ece044efc0c4c3e8cda2a869fce6751b62",
+    "rzeznik": "06a30091e56403833cc5fb59424a213bca8d02804199bbc584b81542da489481",
+    "rzuc-bron-i-gleba": "e80889559fc4ebbed4be76ae9c56ae38c8b43e613c78a4b6469b6f7e2258425e",
+    "samouk": "b53883bc1805f622e5288739ec6bea16da8c41000fac024d5c302bef2dc91ade",
+    "saper": "e1c35f74655101241ec3b50059d9b08010ecc18efc357a9720cfe95d9df192ad",
+    "serwisowanie": "01d1c533f8d6592fda114d09e1071db44cfac909a236b951201e740071698b7e",
+    "skuteczny-cios": "bc4773d6846a13af3abd370698251bd99c6d46d79a5a7ce0e6f9a8d3d7dc7331"
+  }
+}

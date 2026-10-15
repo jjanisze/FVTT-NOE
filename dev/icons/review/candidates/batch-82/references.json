@@ -1,0 +1,59 @@
+{
+  "role": "Exact native targets, not style inputs",
+  "files": [
+    {
+      "key": "nie-do-zdarcia",
+      "source": "icons/abilities/nie-do-zdarcia.svg",
+      "variant": "default",
+      "sourceSha256": "2415ac9a0eb191d6b5a62d4dfa4cd279193ab027f2b8ccb63424891669c03f1b"
+    },
+    {
+      "key": "reputacja",
+      "source": "icons/abilities/reputacja.svg",
+      "variant": "default",
+      "sourceSha256": "c6171ebd37c1959b6113941043ad6f1b8d62bcd891256673b15441335d5ba3d2"
+    },
+    {
+      "key": "rutyna",
+      "source": "icons/abilities/rutyna.svg",
+      "variant": "default",
+      "sourceSha256": "ec4fbae53cf1be1d52125b9e3d96acd0054cae17fcc33274d72cdf2d59cd1c68"
+    },
+    {
+      "key": "rzeznik",
+      "source": "icons/abilities/rzeznik.svg",
+      "variant": "default",
+      "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+    },
+    {
+      "key": "rzuc-bron-i-gleba",
+      "source": "icons/abilities/rzuc-bron-i-gleba.svg",
+      "variant": "default",
+      "sourceSha256": "4c636b9bca6cc749b0096229c7a396284331f794259e6606f8c79d4d69db29a1"
+    },
+    {
+      "key": "samouk",
+      "source": "icons/abilities/samouk.svg",
+      "variant": "default",
+      "sourceSha256": "5ffbdf20810d44bf8cfe02fd79de99a7faf88e53d10daa78d5dd978967e20b09"
+    },
+    {
+      "key": "saper",
+      "source": "icons/abilities/saper.svg",
+      "variant": "default",
+      "sourceSha256": "21bc5dcff219b13bd1dcd75f6d28c9701502542bedbf504f50d196e8bb7e2d78"
+    },
+    {
+      "key": "serwisowanie",
+      "source": "icons/abilities/serwisowanie.svg",
+      "variant": "default",
+      "sourceSha256": "43659a4c590f9892703aeb2c53a00353153e0794c7e15840196730ebfe4afb08"
+    },
+    {
+      "key": "skuteczny-cios",
+      "source": "icons/abilities/skuteczny-cios.svg",
+      "variant": "default",
+      "sourceSha256": "8a0bd8ecaf3bbff77b70dab08d02b5b9a0973086616d17ef48df1a13a004fe8b"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "role": "Exact native targets, not style inputs",
+  "files": [
+    {
+      "key": "slang",
+      "source": "icons/abilities/slang.svg",
+      "variant": "default",
+      "sourceSha256": "489859c79ecce12c7e1b0f181602b1783d0f6a30b4c2d8a804bb5b86cbb6b03a"
+    },
+    {
+      "key": "smakuje-jak-arszenik",
+      "source": "icons/abilities/smakuje-jak-arszenik.svg",
+      "variant": "default",
+      "sourceSha256": "ef80cfb0acf2d2ed390490e28e63dd51cb030f8acc6c023946dd456bfe7735f4"
+    },
+    {
+      "key": "sokole-oko",
+      "source": "icons/abilities/sokole-oko.svg",
+      "variant": "default",
+      "sourceSha256": "f77e36828e55586e9b5ef5a3a6ccee4af8e64cc8eac5133e7a09dba91479cff0"
+    },
+    {
+      "key": "solowa",
+      "source": "icons/abilities/solowa.svg",
+      "variant": "default",
+      "sourceSha256": "16292b6c0c8db69ab2f8bea7e081414ba89c3a547b6e38d4c3617b090b74a98e"
+    },
+    {
+      "key": "specjalizacja-spec",
+      "source": "icons/abilities/specjalizacja-spec.svg",
+      "variant": "default",
+      "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+    },
+    {
+      "key": "specjalizacja-zlodziej",
+      "source": "icons/abilities/specjalizacja-zlodziej.svg",
+      "variant": "default",
+      "sourceSha256": "aa18e02bf650fcb14d2859147716f4666740b1a736992465f424b179eca3514e"
+    },
+    {
+      "key": "spieprzysz-to",
+      "source": "icons/abilities/spieprzysz-to.svg",
+      "variant": "default",
+      "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+    },
+    {
+      "key": "sportowiec",
+      "source": "icons/abilities/sportowiec.svg",
+      "variant": "default",
+      "sourceSha256": "37b3ced0ffe7f36e8828abcbc13c7ced4d35f0a9920ed540ededad58cc340a44"
+    },
+    {
+      "key": "stalowy-nadgarstek",
+      "source": "icons/abilities/stalowy-nadgarstek.svg",
+      "variant": "default",
+      "sourceSha256": "d8c83aacec0f8c7db11eb80e668cda442b05324c6b48f72c2ad871b6f155346e"
+    }
+  ]
+}
