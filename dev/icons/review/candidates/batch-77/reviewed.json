@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-15",
+  "batch": 77,
+  "feedbackBeforeSha256": "faaa3e621a3ae9fb844b4633bc1640906a8408e9ff91a0213f8658b3f6d18fff",
+  "active": [
+    {
+      "id": "batch77-motywacja",
+      "name": "Motywacja",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-77/motywacja.png",
+      "sourceSha256": "6969362aede30064d4f4ab62825dc638a8dbefad255664dd5882a6e7dc4bd7de",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/motywacja.svg",
+          "variant": "default",
+          "sourceSha256": "bcda91b7757cd11b9788e8ca5578d415ead01ae547b242ba46eecbc7c255adce"
+        }
+      ],
+      "notes": "Need a different concept. Maybe a cheerful coach with his thumbs up encouraging a barely conscious boxer?",
+      "feedback": {
+        "itemId": "batch77-motywacja",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Need a different concept. Maybe a cheerful coach with his thumbs up encouraging a barely conscious boxer?",
+        "updatedAt": "2026-10-15T21:51:23.570Z"
+      }
+    },
+    {
+      "id": "batch77-moj-biom",
+      "name": "Mój biom",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-77/moj-biom.png",
+      "sourceSha256": "ff2c0ed54e5f69eb441d98c965930d66fc65b4ab26696d347b590c87448acb57",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moj-biom.svg",
+          "variant": "default",
+          "sourceSha256": "3a0047be0bcef2bb1ec4cc5d21505522e7f5a74e7dbc3577f56181f6da21e3ba"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch77-moj-biom",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:51:28.854Z"
+      }
+    },
+    {
+      "id": "batch77-moj-bog-kule-nosi",
+      "name": "Mój bóg kule nosi",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-77/moj-bog-kule-nosi.png",
+      "sourceSha256": "24a8bd3fc00f4bc473b765b28a4feacdc2a926891627a596028061a8be089df0",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moj-bog-kule-nosi.svg",
+          "variant": "default",
+          "sourceSha256": "d57cac0507304dbba52121db1d76ac1505e4fb174e29dd226ad9823476f72a80"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch77-moj-bog-kule-nosi",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:51:37.894Z"
+      }
+    },
+    {
+      "id": "batch77-moj-wrog",
+      "name": "Mój wróg",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-77/moj-wrog.png",
+      "sourceSha256": "4100ecc206e6a8b178208566002ad7f1b7fe270aa1925863ef13c087c6391878",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moj-wrog.svg",
+          "variant": "default",
+          "sourceSha256": "086ac2b583abee3c1d804960103eb2a4457d0ffaff27036d02899bd32961116f"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch77-moj-wrog",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:51:43.451Z"
+      }
+    },
+    {
+      "id": "batch77-moj-wrog-ludzie",
+      "name": "Mój wróg: Ludzie",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-77/moj-wrog-ludzie.png",
+      "sourceSha256": "739394bbac781c094f2b11169c76bf1cead2d8e1965871a21fbafb17f85edc4d",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moj-wrog-ludzie.svg",
+          "variant": "default",
+          "sourceSha256": "d8b5cbf7401549a902dec78dfefdc4ce2e2d6901250352a392e67022f77defd0"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch77-moj-wrog-ludzie",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:51:50.444Z"
+      }
+    },
+    {
+      "id": "batch77-moj-wrog-maszyny",
+      "name": "Mój wróg: Maszyny",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-77/moj-wrog-maszyny.png",
+      "sourceSha256": "4e43009ea03382334e800a8a9be728a671eb329c4b72c92349d04a433af60d64",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moj-wrog-maszyny.svg",
+          "variant": "default",
+          "sourceSha256": "448d669cb911e5dbee66aa19e11a185f03b3da58db36f7b6806fa5edebf97366"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch77-moj-wrog-maszyny",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:51:54.215Z"
+      }
+    },
+    {
+      "id": "batch77-moj-wrog-mutanty",
+      "name": "Mój wróg: Mutanty",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-77/moj-wrog-mutanty.png",
+      "sourceSha256": "efa6b6cc26e8e020bb39d4b37e4a5c68c5e1615142693f3f0294d7aef142827d",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moj-wrog-mutanty.svg",
+          "variant": "default",
+          "sourceSha256": "448d669cb911e5dbee66aa19e11a185f03b3da58db36f7b6806fa5edebf97366"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch77-moj-wrog-mutanty",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:51:58.661Z"
+      }
+    },
+    {
+      "id": "batch77-moj-wrog-potwory",
+      "name": "Mój wróg: Potwory",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-77/moj-wrog-potwory.png",
+      "sourceSha256": "ba63be533b335008714cf42a777d3f70bf97477b6846fc67a55220b862ac1425",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moj-wrog-potwory.svg",
+          "variant": "default",
+          "sourceSha256": "271645990c42c48e5ef70e18049a082c16dbd51afb67b3eded7cd026ef18e985"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch77-moj-wrog-potwory",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:52:03.317Z"
+      }
+    },
+    {
+      "id": "batch77-moj-wrog-zwierzeta",
+      "name": "Mój wróg: Zwierzęta",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-77/moj-wrog-zwierzeta.png",
+      "sourceSha256": "427efe22e5da4ffead7a0283f41a5cda619ffd5a47061cd5138662a57b6e19f1",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moj-wrog-zwierzeta.svg",
+          "variant": "default",
+          "sourceSha256": "e2a4ae3f74b141db1753d1d6a9b4771c54109e7fb007cb0f1b9a64eb7c44de6e"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch77-moj-wrog-zwierzeta",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:52:07.803Z"
+      }
+    }
+  ]
+}

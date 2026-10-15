@@ -172,6 +172,12 @@ image tool; Elektronik uses the GM-selected older Batch 72 candidate. Exact
 sources and hashes are archived in `dev/icons/review/candidates/batch-74/reviewed-installed.json`
 and `dev/icons/review/candidates/batch-75/reviewed-installed.json`.
 
+Fifteen further GM selections from the Batch 76–77 review were installed on
+2026-10-15 as exact SVG/WEBP masks generated with OpenAI's built-in image tool.
+Mechanika uses the GM-selected older Batch 75 candidate. Exact sources and
+hashes are archived in `dev/icons/review/candidates/batch-76/reviewed-installed.json`
+and `dev/icons/review/candidates/batch-77/reviewed-installed.json`.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

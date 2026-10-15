@@ -51,3 +51,8 @@ including the intact reticle ticks and the distinct enemy-category silhouettes.
 All eighteen new combined-review candidates are selected with pending decisions
 and no broken images. Evidence: `../../../placeholder-pass/progress-76-77.json`
 and `../batch-76/raw/review-preview.png`.
+
+Saved GM review: eight approvals installed. Motywacja carries the requested new
+coach-and-boxer concept into Batch 78. `reviewed.json` preserves all decisions;
+`reviewed-installed.json` records the selected sources and exact delivered
+SVG/WEBP hashes.

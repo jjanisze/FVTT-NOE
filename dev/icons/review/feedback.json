@@ -2579,10 +2579,10 @@
     },
     "batch72-jak-dbasz-tak-masz": {
       "itemId": "batch72-jak-dbasz-tak-masz",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch76-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T21:41:32.487Z"
+      "updatedAt": "2026-10-15T21:43:56.600Z"
     },
     "batch73-jeden-strzal": {
       "itemId": "batch73-jeden-strzal",
@@ -2607,10 +2607,10 @@
     },
     "batch73-jezdziec": {
       "itemId": "batch73-jezdziec",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch76-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T21:41:32.487Z"
+      "updatedAt": "2026-10-15T21:44:02.109Z"
     },
     "batch73-kakofonia": {
       "itemId": "batch73-kakofonia",
@@ -2635,10 +2635,10 @@
     },
     "batch73-klusownik": {
       "itemId": "batch73-klusownik",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch76-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T21:41:32.488Z"
+      "updatedAt": "2026-10-15T21:44:08.104Z"
     },
     "batch73-kocie-kosci": {
       "itemId": "batch73-kocie-kosci",
@@ -2656,10 +2656,10 @@
     },
     "batch74-kondycha": {
       "itemId": "batch74-kondycha",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch76-revision",
-      "notes": "",
-      "updatedAt": "2026-10-15T21:41:32.488Z"
+      "notes": "Almost perfect. Add an arrow behind the character, illustrating him getting up. Keep the character and the pose.",
+      "updatedAt": "2026-10-15T21:44:58.313Z"
     },
     "batch74-krwawy-aniol": {
       "itemId": "batch74-krwawy-aniol",
@@ -2677,24 +2677,24 @@
     },
     "batch75-lapiduch": {
       "itemId": "batch75-lapiduch",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch76-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T21:41:32.489Z"
+      "updatedAt": "2026-10-15T21:45:04.080Z"
     },
     "batch75-laska-boza": {
       "itemId": "batch75-laska-boza",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch76-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T21:41:32.489Z"
+      "updatedAt": "2026-10-15T21:45:10.921Z"
     },
     "batch75-leb-jak-sklep": {
       "itemId": "batch75-leb-jak-sklep",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch76-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T21:41:32.490Z"
+      "updatedAt": "2026-10-15T21:45:16.652Z"
     },
     "batch75-lyzeczka": {
       "itemId": "batch75-lyzeczka",
@@ -2705,10 +2705,10 @@
     },
     "batch75-maszyna-do-zabijania": {
       "itemId": "batch75-maszyna-do-zabijania",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch76-revision",
-      "notes": "",
-      "updatedAt": "2026-10-15T21:41:32.490Z"
+      "notes": "Close. Instead of striking through INDIVIDUAL SKULLS, the TWO ENTIRE ROWS should be stricken through with HORIZONAL LINES",
+      "updatedAt": "2026-10-15T21:46:28.835Z"
     },
     "batch75-matrix": {
       "itemId": "batch75-matrix",
@@ -2719,10 +2719,10 @@
     },
     "batch75-mechanika": {
       "itemId": "batch75-mechanika",
-      "decision": "pending",
-      "candidateId": "batch76-revision",
+      "decision": "approve",
+      "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-15T21:41:32.490Z"
+      "updatedAt": "2026-10-15T21:49:45.823Z"
     },
     "batch75-moja-prawa-reka": {
       "itemId": "batch75-moja-prawa-reka",
@@ -2730,6 +2730,69 @@
       "candidateId": "atlas-a",
       "notes": "",
       "updatedAt": "2026-10-15T21:32:20.370Z"
+    },
+    "batch77-motywacja": {
+      "itemId": "batch77-motywacja",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Need a different concept. Maybe a cheerful coach with his thumbs up encouraging a barely conscious boxer?",
+      "updatedAt": "2026-10-15T21:51:23.570Z"
+    },
+    "batch77-moj-biom": {
+      "itemId": "batch77-moj-biom",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:51:28.854Z"
+    },
+    "batch77-moj-bog-kule-nosi": {
+      "itemId": "batch77-moj-bog-kule-nosi",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:51:37.894Z"
+    },
+    "batch77-moj-wrog": {
+      "itemId": "batch77-moj-wrog",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:51:43.451Z"
+    },
+    "batch77-moj-wrog-ludzie": {
+      "itemId": "batch77-moj-wrog-ludzie",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:51:50.444Z"
+    },
+    "batch77-moj-wrog-maszyny": {
+      "itemId": "batch77-moj-wrog-maszyny",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:51:54.215Z"
+    },
+    "batch77-moj-wrog-mutanty": {
+      "itemId": "batch77-moj-wrog-mutanty",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:51:58.661Z"
+    },
+    "batch77-moj-wrog-potwory": {
+      "itemId": "batch77-moj-wrog-potwory",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:52:03.317Z"
+    },
+    "batch77-moj-wrog-zwierzeta": {
+      "itemId": "batch77-moj-wrog-zwierzeta",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:52:07.803Z"
     }
   }
 }

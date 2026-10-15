@@ -37,12 +37,12 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 78** (18 candidates in 2 batches await GM review;
-production replacements require a saved approval).
+**Next batch number: 78** (the previous 342-card queue is resolved; the newly
+audited class/profession placeholder backlog remains and is listed below).
 
 **Icon coverage correction, 2026-10-15:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
-115 generated initials badges (114 canonically referenced art subjects).
+100 generated initials badges (99 canonically referenced art subjects).
 Origins, Sztuczki, M5 actions and fuel-grade deliveries from the earlier pass
 remain delivered; these counts do not cover all module icons. See the class
 placeholder backlog and `class-placeholder-audit.json`. GM wiring and painted
@@ -747,69 +747,53 @@ Evidence: `review/candidates/batch-75/reviewed.json` and `reviewed-installed.jso
 <!-- placeholder-batch-75:end -->
 
 <!-- placeholder-batch-76:start -->
-## Queue (A) — Batch 76 — 9 awaiting GM review
+## Reviewed (A) — Batch 76 — 7 delivered, 2 revisions
 
-One 3×3 atlas in the established white-glyph style; native initials badges remain
-until the GM approves a selected candidate. Exact sources/hashes, generic prompts
-and targets: `review/candidates/batch-76/`.
+Saved GM review: 7 subjects installed as exact approved SVG/WEBP pairs.
+The 2 remaining requests carry their exact notes into Batch 78.
+Evidence: `review/candidates/batch-76/reviewed.json` and `reviewed-installed.json`.
 
-| Cell | Item | Exact SVG delivery targets (+ WEBP) |
-|---|---|---|
-| 1 | Jak dbasz, tak masz (revision) | `icons/abilities/jak-dbasz-tak-masz.svg` |
-| 2 | Jeździec (revision) | `icons/abilities/jezdziec.svg` |
-| 3 | Kłusownik (revision) | `icons/abilities/klusownik.svg` |
-| 4 | Kondycha (revision) | `icons/abilities/kondycha.svg`; `icons/abilities/kondycha_active.svg` |
-| 5 | Łapiduch (revision) | `icons/abilities/lapiduch.svg` |
-| 6 | Łaska boża (revision) | `icons/abilities/laska-boza.svg` |
-| 7 | Łeb jak sklep (revision) | `icons/abilities/leb-jak-sklep.svg` |
-| 8 | Maszyna do zabijania (revision) | `icons/abilities/maszyna-do-zabijania.svg` |
-| 9 | Mechanika (revision) | `icons/abilities/mechanika.svg` |
-
-Saved revision notes and original selected-source hashes are retained in batch.json
-and revision-feedback-before.json. Old candidates remain available; only these
-revision cards are reset to pending with the new candidate selected.
-
-The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
-nine). Later batch numbers are provisional: saved revisions take priority and
-may add batches. Base/active files share approved pixels; the existing active
-hotbar pulse remains in the code. Old unused active filenames are compatibility
-targets, without new mechanics or wiring. Code, packs and world state are untouched.
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Jak dbasz, tak masz | `icons/abilities/jak-dbasz-tak-masz.svg` | **done** |
+| 2 | Jeździec | `icons/abilities/jezdziec.svg` | **done** |
+| 3 | Kłusownik | `icons/abilities/klusownik.svg` | **done** |
+| 4 | Kondycha | `icons/abilities/kondycha.svg`; `icons/abilities/kondycha_active.svg` | Revision in Batch 78 |
+| 5 | Łapiduch | `icons/abilities/lapiduch.svg` | **done** |
+| 6 | Łaska boża | `icons/abilities/laska-boza.svg` | **done** |
+| 7 | Łeb jak sklep | `icons/abilities/leb-jak-sklep.svg` | **done** |
+| 8 | Maszyna do zabijania | `icons/abilities/maszyna-do-zabijania.svg` | Revision in Batch 78 |
+| 9 | Mechanika | `icons/abilities/mechanika.svg` | **done** |
 
 <!-- placeholder-batch-76:end -->
 
 <!-- placeholder-batch-77:start -->
-## Queue (A) — Batch 77 — 9 awaiting GM review
+## Reviewed (A) — Batch 77 — 8 delivered, 1 revisions
 
-One 3×3 atlas in the established white-glyph style; native initials badges remain
-until the GM approves a selected candidate. Exact sources/hashes, generic prompts
-and targets: `review/candidates/batch-77/`.
+Saved GM review: 8 subjects installed as exact approved SVG/WEBP pairs.
+The 1 remaining requests carry their exact notes into Batch 78.
+Evidence: `review/candidates/batch-77/reviewed.json` and `reviewed-installed.json`.
 
-| Cell | Item | Exact SVG delivery targets (+ WEBP) |
-|---|---|---|
-| 1 | Motywacja | `icons/abilities/motywacja.svg` |
-| 2 | Mój biom | `icons/abilities/moj-biom.svg` |
-| 3 | Mój bóg kule nosi | `icons/abilities/moj-bog-kule-nosi.svg` |
-| 4 | Mój wróg | `icons/abilities/moj-wrog.svg` |
-| 5 | Mój wróg: Ludzie | `icons/abilities/moj-wrog-ludzie.svg` |
-| 6 | Mój wróg: Maszyny | `icons/abilities/moj-wrog-maszyny.svg` |
-| 7 | Mój wróg: Mutanty | `icons/abilities/moj-wrog-mutanty.svg` |
-| 8 | Mój wróg: Potwory | `icons/abilities/moj-wrog-potwory.svg` |
-| 9 | Mój wróg: Zwierzęta | `icons/abilities/moj-wrog-zwierzeta.svg` |
-
-The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
-nine). Later batch numbers are provisional: saved revisions take priority and
-may add batches. Base/active files share approved pixels; the existing active
-hotbar pulse remains in the code. Old unused active filenames are compatibility
-targets, without new mechanics or wiring. Code, packs and world state are untouched.
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Motywacja | `icons/abilities/motywacja.svg` | Revision in Batch 78 |
+| 2 | Mój biom | `icons/abilities/moj-biom.svg` | **done** |
+| 3 | Mój bóg kule nosi | `icons/abilities/moj-bog-kule-nosi.svg` | **done** |
+| 4 | Mój wróg | `icons/abilities/moj-wrog.svg` | **done** |
+| 5 | Mój wróg: Ludzie | `icons/abilities/moj-wrog-ludzie.svg` | **done** |
+| 6 | Mój wróg: Maszyny | `icons/abilities/moj-wrog-maszyny.svg` | **done** |
+| 7 | Mój wróg: Mutanty | `icons/abilities/moj-wrog-mutanty.svg` | **done** |
+| 8 | Mój wróg: Potwory | `icons/abilities/moj-wrog-potwory.svg` | **done** |
+| 9 | Mój wróg: Zwierzęta | `icons/abilities/moj-wrog-zwierzeta.svg` | **done** |
 
 <!-- placeholder-batch-77:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source
 
-Audit 2026-10-15: **115 generated initials SVGs**, including 6 classes,
-18 professions and 91 ability files. 1 ability files are active-state
-variants. Canonically referenced art requests below represent **114 subjects**;
+Audit 2026-10-15: **100 generated initials SVGs**, including 6 classes,
+18 professions and 76 ability files. 1 ability files are active-state
+variants. Canonically referenced art requests below represent **99 subjects**;
 base/active variants share a subject and must keep their existing exact filenames.
 These were outside the previous 342-card generation queue. File existence was not
 evidence of finished artwork. Native badges were confirmed against the exact
@@ -822,24 +806,9 @@ and the next free batch; fresh GM approval is required before replacement.
 
 | Kind | Subject | Owner | Exact SVG targets (+ WEBP after approval) | Status |
 |---|---|---|---|---|
-| feature | Jak dbasz, tak masz | zolnierz | `icons/abilities/jak-dbasz-tak-masz.svg` | Needs art |
-| feature | Jeździec | wyjadacz-option | `icons/abilities/jezdziec.svg` | Needs art |
-| feature | Kłusownik | zwiadowca | `icons/abilities/klusownik.svg` | Needs art |
 | feature | Kondycha | twardziel | `icons/abilities/kondycha.svg` | Needs art |
-| feature | Łapiduch | medyk | `icons/abilities/lapiduch.svg` | Needs art |
-| feature | Łaska boża | kaznodzieja-nowej-ery | `icons/abilities/laska-boza.svg` | Needs art |
-| feature | Łeb jak sklep | spec | `icons/abilities/leb-jak-sklep.svg` | Needs art |
 | feature | Maszyna do zabijania | najemnik | `icons/abilities/maszyna-do-zabijania.svg` | Needs art |
-| feature | Mechanika | monter | `icons/abilities/mechanika.svg` | Needs art |
 | feature | Motywacja | cwaniak | `icons/abilities/motywacja.svg` | Needs art |
-| feature | Mój biom | zwiadowca | `icons/abilities/moj-biom.svg` | Needs art |
-| feature | Mój bóg kule nosi | kaznodzieja-nowej-ery | `icons/abilities/moj-bog-kule-nosi.svg` | Needs art |
-| feature | Mój wróg | zwiadowca | `icons/abilities/moj-wrog.svg` | Needs art |
-| feature | Mój wróg: Ludzie | moj-wrog-option | `icons/abilities/moj-wrog-ludzie.svg` | Needs art |
-| feature | Mój wróg: Maszyny | moj-wrog-option | `icons/abilities/moj-wrog-maszyny.svg` | Needs art |
-| feature | Mój wróg: Mutanty | moj-wrog-option | `icons/abilities/moj-wrog-mutanty.svg` | Needs art |
-| feature | Mój wróg: Potwory | moj-wrog-option | `icons/abilities/moj-wrog-potwory.svg` | Needs art |
-| feature | Mój wróg: Zwierzęta | moj-wrog-option | `icons/abilities/moj-wrog-zwierzeta.svg` | Needs art |
 | feature | Mutant na śniadanie | lowca-mutantow | `icons/abilities/mutant-na-sniadanie.svg` | Needs art |
 | feature | Nie do zdarcia | gladiator | `icons/abilities/nie-do-zdarcia.svg` | Needs art |
 | feature | Nie klękam | twardziel | `icons/abilities/nie-klekam.svg` | Needs art |

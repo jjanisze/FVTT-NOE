@@ -1,0 +1,219 @@
+{
+  "date": "2026-10-15",
+  "batch": 76,
+  "feedbackBeforeSha256": "faaa3e621a3ae9fb844b4633bc1640906a8408e9ff91a0213f8658b3f6d18fff",
+  "active": [
+    {
+      "id": "batch72-jak-dbasz-tak-masz",
+      "name": "Jak dbasz, tak masz",
+      "decision": "approve",
+      "candidateId": "batch76-revision",
+      "selectedSource": "candidates/batch-76/jak-dbasz-tak-masz.png",
+      "sourceSha256": "e5cc25a494e2b6fef420f72d4d882fe91abd5da4d7f15f6bd46e72707c1adeac",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/jak-dbasz-tak-masz.svg",
+          "variant": "default",
+          "sourceSha256": "1858ccf0a0018938a0f1d49497cc3414762297e7176c434791d8511f2d06b632"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch72-jak-dbasz-tak-masz",
+        "decision": "approve",
+        "candidateId": "batch76-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:43:56.600Z"
+      }
+    },
+    {
+      "id": "batch73-jezdziec",
+      "name": "Jeździec",
+      "decision": "approve",
+      "candidateId": "batch76-revision",
+      "selectedSource": "candidates/batch-76/jezdziec.png",
+      "sourceSha256": "97c33846515f5c6b80b5f100485cd4049d4d7a26fa8fcc3f9df0c79bda83a3f1",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/jezdziec.svg",
+          "variant": "default",
+          "sourceSha256": "53a7bf1784b2ef9efc618431127aba39c0d53875bf9e974bc2020a40ce759507"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch73-jezdziec",
+        "decision": "approve",
+        "candidateId": "batch76-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:44:02.109Z"
+      }
+    },
+    {
+      "id": "batch73-klusownik",
+      "name": "Kłusownik",
+      "decision": "approve",
+      "candidateId": "batch76-revision",
+      "selectedSource": "candidates/batch-76/klusownik.png",
+      "sourceSha256": "98fac733ca0777664d1a98a760fbd8e4c735c689dd663eb8f7c8357a86ffe3f9",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/klusownik.svg",
+          "variant": "default",
+          "sourceSha256": "6fff1379ce2c2409ce200ab84a898fc371a8434b6a6b6808baf68b77df161091"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch73-klusownik",
+        "decision": "approve",
+        "candidateId": "batch76-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:44:08.104Z"
+      }
+    },
+    {
+      "id": "batch74-kondycha",
+      "name": "Kondycha",
+      "decision": "revise",
+      "candidateId": "batch76-revision",
+      "selectedSource": "candidates/batch-76/kondycha.png",
+      "sourceSha256": "93073810dc787a2002a9ee64affb9d9b1023c5992aa8355b4fe09f5516636a7e",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/kondycha.svg",
+          "variant": "default",
+          "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f"
+        },
+        {
+          "source": "icons/abilities/kondycha_active.svg",
+          "variant": "legacy-active",
+          "sourceSha256": "fe94e499463c22895956f7b690560a97d315a576f5dc27d3d5140c5010c7fbf1"
+        }
+      ],
+      "notes": "Almost perfect. Add an arrow behind the character, illustrating him getting up. Keep the character and the pose.",
+      "feedback": {
+        "itemId": "batch74-kondycha",
+        "decision": "revise",
+        "candidateId": "batch76-revision",
+        "notes": "Almost perfect. Add an arrow behind the character, illustrating him getting up. Keep the character and the pose.",
+        "updatedAt": "2026-10-15T21:44:58.313Z"
+      }
+    },
+    {
+      "id": "batch75-lapiduch",
+      "name": "Łapiduch",
+      "decision": "approve",
+      "candidateId": "batch76-revision",
+      "selectedSource": "candidates/batch-76/lapiduch.png",
+      "sourceSha256": "09b6d9e70ae65d1803b3f1314d26670619fa44d3af1e356d40f53627d9ef63fb",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/lapiduch.svg",
+          "variant": "default",
+          "sourceSha256": "913fffceec2f2490e4b84cdb4ea2c01368fc2d6d8cf518b701f681ea0286447b"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch75-lapiduch",
+        "decision": "approve",
+        "candidateId": "batch76-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:45:04.080Z"
+      }
+    },
+    {
+      "id": "batch75-laska-boza",
+      "name": "Łaska boża",
+      "decision": "approve",
+      "candidateId": "batch76-revision",
+      "selectedSource": "candidates/batch-76/laska-boza.png",
+      "sourceSha256": "12083c28cb5f5bfdf5513046db71c74711bc95721103e2fed34069c82d273255",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/laska-boza.svg",
+          "variant": "default",
+          "sourceSha256": "e5324a36a95884b60732d688880fea6f1243709fbc4a38e8a3e644b87f6802a5"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch75-laska-boza",
+        "decision": "approve",
+        "candidateId": "batch76-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:45:10.921Z"
+      }
+    },
+    {
+      "id": "batch75-leb-jak-sklep",
+      "name": "Łeb jak sklep",
+      "decision": "approve",
+      "candidateId": "batch76-revision",
+      "selectedSource": "candidates/batch-76/leb-jak-sklep.png",
+      "sourceSha256": "e472a55f5521037a15cd35d69d0dfcd076adf78adfb0f1b65130ff7554c865fd",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/leb-jak-sklep.svg",
+          "variant": "default",
+          "sourceSha256": "ab1446c5808fb43984e0c4f1357f4cd68fda82f47990700123c1db790a7efc87"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch75-leb-jak-sklep",
+        "decision": "approve",
+        "candidateId": "batch76-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:45:16.652Z"
+      }
+    },
+    {
+      "id": "batch75-maszyna-do-zabijania",
+      "name": "Maszyna do zabijania",
+      "decision": "revise",
+      "candidateId": "batch76-revision",
+      "selectedSource": "candidates/batch-76/maszyna-do-zabijania.png",
+      "sourceSha256": "83a32cf1c44ddc37d768e61312d067e62b1e905530418b24621ae27e28e6b8c6",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/maszyna-do-zabijania.svg",
+          "variant": "default",
+          "sourceSha256": "bf846c0d06aaf67a251b1c02723bad0ff64fb927cbe0e7403f79722605cf8045"
+        }
+      ],
+      "notes": "Close. Instead of striking through INDIVIDUAL SKULLS, the TWO ENTIRE ROWS should be stricken through with HORIZONAL LINES",
+      "feedback": {
+        "itemId": "batch75-maszyna-do-zabijania",
+        "decision": "revise",
+        "candidateId": "batch76-revision",
+        "notes": "Close. Instead of striking through INDIVIDUAL SKULLS, the TWO ENTIRE ROWS should be stricken through with HORIZONAL LINES",
+        "updatedAt": "2026-10-15T21:46:28.835Z"
+      }
+    },
+    {
+      "id": "batch75-mechanika",
+      "name": "Mechanika",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-75/mechanika.png",
+      "sourceSha256": "a6c64bdd71c667af189ccf29fc22bb382d04ab6a6699cb51863d15946a2e582b",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/mechanika.svg",
+          "variant": "default",
+          "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch75-mechanika",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T21:49:45.823Z"
+      }
+    }
+  ]
+}

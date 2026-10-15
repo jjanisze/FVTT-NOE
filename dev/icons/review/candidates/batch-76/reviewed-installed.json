@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-15",
+  "batch": 76,
+  "approvedSubjects": 7,
+  "remainingSubjects": 11,
+  "installed": [
+    {
+      "itemId": "batch72-jak-dbasz-tak-masz",
+      "candidateId": "batch76-revision",
+      "source": "candidates/batch-76/jak-dbasz-tak-masz.png",
+      "sourceSha256": "e5cc25a494e2b6fef420f72d4d882fe91abd5da4d7f15f6bd46e72707c1adeac",
+      "files": [
+        "icons/abilities/jak-dbasz-tak-masz.svg",
+        "icons/abilities/jak-dbasz-tak-masz.webp"
+      ],
+      "svgSha256": "c498db3c802aaded14a4522a7aa1948c681a6d9c3344e639e84cdaedb52f4bc6",
+      "webpSha256": "feffe39426f15b6027610b71ae4dd6088f027bfcd1b0fccfc8e110ecd8c301f9"
+    },
+    {
+      "itemId": "batch73-jezdziec",
+      "candidateId": "batch76-revision",
+      "source": "candidates/batch-76/jezdziec.png",
+      "sourceSha256": "97c33846515f5c6b80b5f100485cd4049d4d7a26fa8fcc3f9df0c79bda83a3f1",
+      "files": [
+        "icons/abilities/jezdziec.svg",
+        "icons/abilities/jezdziec.webp"
+      ],
+      "svgSha256": "52d4f5617129a1531fccd9d09c585f4f87a968bd483e927b79a238ef347f37ac",
+      "webpSha256": "a7d4ede726aa53b4dfb29aa08c8b84abaa62f1786cc1158fecca46f96aa3df23"
+    },
+    {
+      "itemId": "batch73-klusownik",
+      "candidateId": "batch76-revision",
+      "source": "candidates/batch-76/klusownik.png",
+      "sourceSha256": "98fac733ca0777664d1a98a760fbd8e4c735c689dd663eb8f7c8357a86ffe3f9",
+      "files": [
+        "icons/abilities/klusownik.svg",
+        "icons/abilities/klusownik.webp"
+      ],
+      "svgSha256": "5aba5e64d52c9e81496a1c9faccf1995850d4eb7705bb1b9d856c9e5ac6c5e37",
+      "webpSha256": "7e758728b396c4f670a5bd9cd83ded641aa7acd6c531b3bc43ad1cd4a4ce66f2"
+    },
+    {
+      "itemId": "batch75-lapiduch",
+      "candidateId": "batch76-revision",
+      "source": "candidates/batch-76/lapiduch.png",
+      "sourceSha256": "09b6d9e70ae65d1803b3f1314d26670619fa44d3af1e356d40f53627d9ef63fb",
+      "files": [
+        "icons/abilities/lapiduch.svg",
+        "icons/abilities/lapiduch.webp"
+      ],
+      "svgSha256": "c13000d2cbcc6acbb3f7f0bbb34fbeac03a971d4cbaf452c6bbaa04130845fe9",
+      "webpSha256": "139e065e69623bb3d8c7d5512b0ff4895491ebdcb7dbd4efa7c2ea3b55e99217"
+    },
+    {
+      "itemId": "batch75-laska-boza",
+      "candidateId": "batch76-revision",
+      "source": "candidates/batch-76/laska-boza.png",
+      "sourceSha256": "12083c28cb5f5bfdf5513046db71c74711bc95721103e2fed34069c82d273255",
+      "files": [
+        "icons/abilities/laska-boza.svg",
+        "icons/abilities/laska-boza.webp"
+      ],
+      "svgSha256": "087d7e03032eb67527cd3abd9956ad575702156e7f09fbf6394e86b8e3a1e7a9",
+      "webpSha256": "dafcdf320a39bf874fbe8f4d11536d54f5ad13eec6ac88b58a453f50572ca7b3"
+    },
+    {
+      "itemId": "batch75-leb-jak-sklep",
+      "candidateId": "batch76-revision",
+      "source": "candidates/batch-76/leb-jak-sklep.png",
+      "sourceSha256": "e472a55f5521037a15cd35d69d0dfcd076adf78adfb0f1b65130ff7554c865fd",
+      "files": [
+        "icons/abilities/leb-jak-sklep.svg",
+        "icons/abilities/leb-jak-sklep.webp"
+      ],
+      "svgSha256": "1ce2906b0b7653e758be2ab1dce690bea66242e4467b6a029b39f4feddea0c40",
+      "webpSha256": "be47a973cda514ce335de2870d75511894059b2290e93e63b81695f8ed86bdd3"
+    },
+    {
+      "itemId": "batch75-mechanika",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-75/mechanika.png",
+      "sourceSha256": "a6c64bdd71c667af189ccf29fc22bb382d04ab6a6699cb51863d15946a2e582b",
+      "files": [
+        "icons/abilities/mechanika.svg",
+        "icons/abilities/mechanika.webp"
+      ],
+      "svgSha256": "534de6a91376a571b7b90bf7e2a10b0903d3de8c761fd0eb57de6c5f6b9e01a3",
+      "webpSha256": "a12a617ef67812e271fd9c9dfc9b8b36be7c32d66152e01f7dc7d0262c8c8e65"
+    }
+  ]
+}

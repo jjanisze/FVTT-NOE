@@ -1,52 +1,22 @@
 {
   "stats": {
     "date": "2026-10-15",
-    "confirmedPlaceholderFiles": 115,
-    "referencedPlaceholderFiles": 114,
+    "confirmedPlaceholderFiles": 100,
+    "referencedPlaceholderFiles": 99,
     "unmappedPlaceholderFiles": 1,
     "activeVariants": 1,
     "referencedActiveVariants": 0,
-    "abilityPlaceholderFiles": 91,
+    "abilityPlaceholderFiles": 76,
     "missingExpectedFiles": 0,
-    "artSubjects": 114,
+    "artSubjects": 99,
     "byKind": {
       "class": 6,
       "profession": 18,
-      "feature": 90
+      "feature": 75
     },
     "scope": "Exact generator signature plus canonical class/profession definitions; no world or pack reads"
   },
   "placeholders": [
-    {
-      "kind": "feature",
-      "id": "jak-dbasz-tak-masz",
-      "label": "Jak dbasz, tak masz",
-      "owner": "zolnierz",
-      "variant": "default",
-      "source": "icons/abilities/jak-dbasz-tak-masz.svg",
-      "sourceSha256": "1858ccf0a0018938a0f1d49497cc3414762297e7176c434791d8511f2d06b632",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "jezdziec",
-      "label": "Jeździec",
-      "owner": "wyjadacz-option",
-      "variant": "default",
-      "source": "icons/abilities/jezdziec.svg",
-      "sourceSha256": "53a7bf1784b2ef9efc618431127aba39c0d53875bf9e974bc2020a40ce759507",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "klusownik",
-      "label": "Kłusownik",
-      "owner": "zwiadowca",
-      "variant": "default",
-      "source": "icons/abilities/klusownik.svg",
-      "sourceSha256": "6fff1379ce2c2409ce200ab84a898fc371a8434b6a6b6808baf68b77df161091",
-      "referenced": true
-    },
     {
       "kind": "feature",
       "id": "kondycha",
@@ -68,36 +38,6 @@
     },
     {
       "kind": "feature",
-      "id": "lapiduch",
-      "label": "Łapiduch",
-      "owner": "medyk",
-      "variant": "default",
-      "source": "icons/abilities/lapiduch.svg",
-      "sourceSha256": "913fffceec2f2490e4b84cdb4ea2c01368fc2d6d8cf518b701f681ea0286447b",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "laska-boza",
-      "label": "Łaska boża",
-      "owner": "kaznodzieja-nowej-ery",
-      "variant": "default",
-      "source": "icons/abilities/laska-boza.svg",
-      "sourceSha256": "e5324a36a95884b60732d688880fea6f1243709fbc4a38e8a3e644b87f6802a5",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "leb-jak-sklep",
-      "label": "Łeb jak sklep",
-      "owner": "spec",
-      "variant": "default",
-      "source": "icons/abilities/leb-jak-sklep.svg",
-      "sourceSha256": "ab1446c5808fb43984e0c4f1357f4cd68fda82f47990700123c1db790a7efc87",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "maszyna-do-zabijania",
       "label": "Maszyna do zabijania",
       "owner": "najemnik",
@@ -108,102 +48,12 @@
     },
     {
       "kind": "feature",
-      "id": "mechanika",
-      "label": "Mechanika",
-      "owner": "monter",
-      "variant": "default",
-      "source": "icons/abilities/mechanika.svg",
-      "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "motywacja",
       "label": "Motywacja",
       "owner": "cwaniak",
       "variant": "default",
       "source": "icons/abilities/motywacja.svg",
       "sourceSha256": "bcda91b7757cd11b9788e8ca5578d415ead01ae547b242ba46eecbc7c255adce",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "moj-biom",
-      "label": "Mój biom",
-      "owner": "zwiadowca",
-      "variant": "default",
-      "source": "icons/abilities/moj-biom.svg",
-      "sourceSha256": "3a0047be0bcef2bb1ec4cc5d21505522e7f5a74e7dbc3577f56181f6da21e3ba",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "moj-bog-kule-nosi",
-      "label": "Mój bóg kule nosi",
-      "owner": "kaznodzieja-nowej-ery",
-      "variant": "default",
-      "source": "icons/abilities/moj-bog-kule-nosi.svg",
-      "sourceSha256": "d57cac0507304dbba52121db1d76ac1505e4fb174e29dd226ad9823476f72a80",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "moj-wrog",
-      "label": "Mój wróg",
-      "owner": "zwiadowca",
-      "variant": "default",
-      "source": "icons/abilities/moj-wrog.svg",
-      "sourceSha256": "086ac2b583abee3c1d804960103eb2a4457d0ffaff27036d02899bd32961116f",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "moj-wrog-ludzie",
-      "label": "Mój wróg: Ludzie",
-      "owner": "moj-wrog-option",
-      "variant": "default",
-      "source": "icons/abilities/moj-wrog-ludzie.svg",
-      "sourceSha256": "d8b5cbf7401549a902dec78dfefdc4ce2e2d6901250352a392e67022f77defd0",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "moj-wrog-maszyny",
-      "label": "Mój wróg: Maszyny",
-      "owner": "moj-wrog-option",
-      "variant": "default",
-      "source": "icons/abilities/moj-wrog-maszyny.svg",
-      "sourceSha256": "448d669cb911e5dbee66aa19e11a185f03b3da58db36f7b6806fa5edebf97366",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "moj-wrog-mutanty",
-      "label": "Mój wróg: Mutanty",
-      "owner": "moj-wrog-option",
-      "variant": "default",
-      "source": "icons/abilities/moj-wrog-mutanty.svg",
-      "sourceSha256": "448d669cb911e5dbee66aa19e11a185f03b3da58db36f7b6806fa5edebf97366",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "moj-wrog-potwory",
-      "label": "Mój wróg: Potwory",
-      "owner": "moj-wrog-option",
-      "variant": "default",
-      "source": "icons/abilities/moj-wrog-potwory.svg",
-      "sourceSha256": "271645990c42c48e5ef70e18049a082c16dbd51afb67b3eded7cd026ef18e985",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "moj-wrog-zwierzeta",
-      "label": "Mój wróg: Zwierzęta",
-      "owner": "moj-wrog-option",
-      "variant": "default",
-      "source": "icons/abilities/moj-wrog-zwierzeta.svg",
-      "sourceSha256": "e2a4ae3f74b141db1753d1d6a9b4771c54109e7fb007cb0f1b9a64eb7c44de6e",
       "referenced": true
     },
     {
@@ -1171,90 +1021,12 @@
   "subjects": [
     {
       "kind": "feature",
-      "id": "jak-dbasz-tak-masz",
-      "label": "Jak dbasz, tak masz",
-      "owner": "zolnierz",
-      "files": [
-        {
-          "source": "icons/abilities/jak-dbasz-tak-masz.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "jezdziec",
-      "label": "Jeździec",
-      "owner": "wyjadacz-option",
-      "files": [
-        {
-          "source": "icons/abilities/jezdziec.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "klusownik",
-      "label": "Kłusownik",
-      "owner": "zwiadowca",
-      "files": [
-        {
-          "source": "icons/abilities/klusownik.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "kondycha",
       "label": "Kondycha",
       "owner": "twardziel",
       "files": [
         {
           "source": "icons/abilities/kondycha.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "lapiduch",
-      "label": "Łapiduch",
-      "owner": "medyk",
-      "files": [
-        {
-          "source": "icons/abilities/lapiduch.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "laska-boza",
-      "label": "Łaska boża",
-      "owner": "kaznodzieja-nowej-ery",
-      "files": [
-        {
-          "source": "icons/abilities/laska-boza.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "leb-jak-sklep",
-      "label": "Łeb jak sklep",
-      "owner": "spec",
-      "files": [
-        {
-          "source": "icons/abilities/leb-jak-sklep.svg",
           "variant": "default",
           "status": "generated placeholder"
         }
@@ -1275,129 +1047,12 @@
     },
     {
       "kind": "feature",
-      "id": "mechanika",
-      "label": "Mechanika",
-      "owner": "monter",
-      "files": [
-        {
-          "source": "icons/abilities/mechanika.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "motywacja",
       "label": "Motywacja",
       "owner": "cwaniak",
       "files": [
         {
           "source": "icons/abilities/motywacja.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "moj-biom",
-      "label": "Mój biom",
-      "owner": "zwiadowca",
-      "files": [
-        {
-          "source": "icons/abilities/moj-biom.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "moj-bog-kule-nosi",
-      "label": "Mój bóg kule nosi",
-      "owner": "kaznodzieja-nowej-ery",
-      "files": [
-        {
-          "source": "icons/abilities/moj-bog-kule-nosi.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "moj-wrog",
-      "label": "Mój wróg",
-      "owner": "zwiadowca",
-      "files": [
-        {
-          "source": "icons/abilities/moj-wrog.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "moj-wrog-ludzie",
-      "label": "Mój wróg: Ludzie",
-      "owner": "moj-wrog-option",
-      "files": [
-        {
-          "source": "icons/abilities/moj-wrog-ludzie.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "moj-wrog-maszyny",
-      "label": "Mój wróg: Maszyny",
-      "owner": "moj-wrog-option",
-      "files": [
-        {
-          "source": "icons/abilities/moj-wrog-maszyny.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "moj-wrog-mutanty",
-      "label": "Mój wróg: Mutanty",
-      "owner": "moj-wrog-option",
-      "files": [
-        {
-          "source": "icons/abilities/moj-wrog-mutanty.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "moj-wrog-potwory",
-      "label": "Mój wróg: Potwory",
-      "owner": "moj-wrog-option",
-      "files": [
-        {
-          "source": "icons/abilities/moj-wrog-potwory.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "moj-wrog-zwierzeta",
-      "label": "Mój wróg: Zwierzęta",
-      "owner": "moj-wrog-option",
-      "files": [
-        {
-          "source": "icons/abilities/moj-wrog-zwierzeta.svg",
           "variant": "default",
           "status": "generated placeholder"
         }

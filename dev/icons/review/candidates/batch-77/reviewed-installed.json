@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-15",
+  "batch": 77,
+  "approvedSubjects": 8,
+  "remainingSubjects": 3,
+  "installed": [
+    {
+      "itemId": "batch77-moj-biom",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-77/moj-biom.png",
+      "sourceSha256": "ff2c0ed54e5f69eb441d98c965930d66fc65b4ab26696d347b590c87448acb57",
+      "files": [
+        "icons/abilities/moj-biom.svg",
+        "icons/abilities/moj-biom.webp"
+      ],
+      "svgSha256": "29cdfa29b58588cb5a03807867863402544da4dbc6b44aee6d1630da713ad773",
+      "webpSha256": "84928cdabf9f96a1340333d768fb273818f4d794b07157c07bf057d671f795e1"
+    },
+    {
+      "itemId": "batch77-moj-bog-kule-nosi",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-77/moj-bog-kule-nosi.png",
+      "sourceSha256": "24a8bd3fc00f4bc473b765b28a4feacdc2a926891627a596028061a8be089df0",
+      "files": [
+        "icons/abilities/moj-bog-kule-nosi.svg",
+        "icons/abilities/moj-bog-kule-nosi.webp"
+      ],
+      "svgSha256": "51331b7d34237cf12297d30c5da20108a9a29a254757726e36072cd826999055",
+      "webpSha256": "2d15b3cb7d572ac0379841ea899086a3aa8664dfaec000ff5796fbe90a79a7c8"
+    },
+    {
+      "itemId": "batch77-moj-wrog",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-77/moj-wrog.png",
+      "sourceSha256": "4100ecc206e6a8b178208566002ad7f1b7fe270aa1925863ef13c087c6391878",
+      "files": [
+        "icons/abilities/moj-wrog.svg",
+        "icons/abilities/moj-wrog.webp"
+      ],
+      "svgSha256": "471e1b351529cd27b0cc9381355da0484386dc0397d416143fe19c261b506925",
+      "webpSha256": "12bd4ede94a6c0bb546bb177c11a91f46a6213dfed75ec4e6e6187872555c5bc"
+    },
+    {
+      "itemId": "batch77-moj-wrog-ludzie",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-77/moj-wrog-ludzie.png",
+      "sourceSha256": "739394bbac781c094f2b11169c76bf1cead2d8e1965871a21fbafb17f85edc4d",
+      "files": [
+        "icons/abilities/moj-wrog-ludzie.svg",
+        "icons/abilities/moj-wrog-ludzie.webp"
+      ],
+      "svgSha256": "1ef01c2e2e64297bec39f6041afc228ea810a69491466ca422ac55f3cf50396c",
+      "webpSha256": "2aa1d3cd49db4005b675ab972b15bcdf22e9d45235c932cd2553ffc0da7bfff9"
+    },
+    {
+      "itemId": "batch77-moj-wrog-maszyny",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-77/moj-wrog-maszyny.png",
+      "sourceSha256": "4e43009ea03382334e800a8a9be728a671eb329c4b72c92349d04a433af60d64",
+      "files": [
+        "icons/abilities/moj-wrog-maszyny.svg",
+        "icons/abilities/moj-wrog-maszyny.webp"
+      ],
+      "svgSha256": "37ceb5d6d0dcbdd7629c1546089cd0e6336718bdd3b2ebc2e6af3e75065e29aa",
+      "webpSha256": "60b1ef17bda836bfc8bb121822d96f6585a27da5feda8af5d5b5a0dbb96677d3"
+    },
+    {
+      "itemId": "batch77-moj-wrog-mutanty",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-77/moj-wrog-mutanty.png",
+      "sourceSha256": "efa6b6cc26e8e020bb39d4b37e4a5c68c5e1615142693f3f0294d7aef142827d",
+      "files": [
+        "icons/abilities/moj-wrog-mutanty.svg",
+        "icons/abilities/moj-wrog-mutanty.webp"
+      ],
+      "svgSha256": "62f61f700ade3e4f629c88a0b1cdd69d4af62eb5e6c62cde6ddbbda7951423fd",
+      "webpSha256": "01f9fc3da99020a50500e6cc8e046ec17112216290d3989cc64fa755080ebd57"
+    },
+    {
+      "itemId": "batch77-moj-wrog-potwory",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-77/moj-wrog-potwory.png",
+      "sourceSha256": "ba63be533b335008714cf42a777d3f70bf97477b6846fc67a55220b862ac1425",
+      "files": [
+        "icons/abilities/moj-wrog-potwory.svg",
+        "icons/abilities/moj-wrog-potwory.webp"
+      ],
+      "svgSha256": "17bbcf5ff9a131074ea485abbba914031a11345f0c03bd6b01a4da1bd7407eb2",
+      "webpSha256": "e6b0fd1372258a3a328ed453306fab7c694bf727226c80e3a812170b659690b7"
+    },
+    {
+      "itemId": "batch77-moj-wrog-zwierzeta",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-77/moj-wrog-zwierzeta.png",
+      "sourceSha256": "427efe22e5da4ffead7a0283f41a5cda619ffd5a47061cd5138662a57b6e19f1",
+      "files": [
+        "icons/abilities/moj-wrog-zwierzeta.svg",
+        "icons/abilities/moj-wrog-zwierzeta.webp"
+      ],
+      "svgSha256": "d07afb4adbf030e8c4a60a856bcbf1831de6d1bd6a229d03deb5a81101cb503c",
+      "webpSha256": "171391f4aae262606d2b04eceb42af47f0da063a9bf423d4f3f04db1f48fd565"
+    }
+  ]
+}

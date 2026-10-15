@@ -52,3 +52,8 @@ Contact sheets were inspected at 64/32/24/16 px, including the exact seven-skull
 tally. The live gallery shows 18 pending cards, 48 options and no failed images.
 Combined evidence: `../../../placeholder-pass/progress-76-77.json` and
 `raw/review-preview.png`.
+
+Saved GM review: seven approvals installed, including the older Batch 75
+Mechanika selection. Kondycha and Maszyna do zabijania carry exact saved notes
+into Batch 78. `reviewed.json` preserves all decisions; `reviewed-installed.json`
+records the selected source and exact delivered SVG/WEBP hashes.
