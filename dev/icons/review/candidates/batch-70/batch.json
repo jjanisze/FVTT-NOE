@@ -1,0 +1,288 @@
+{
+  "date": "2026-10-15",
+  "batch": 70,
+  "generalFeedback": "Avoid repeated gruff male survivor busts; use objects, gestures and generic adult figures with no anime styling.",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "a-co-mi-tam",
+      "name": "A co mi tam!",
+      "owner": "szczur",
+      "ownerLabel": "Szczur",
+      "target": "icons/abilities/a-co-mi-tam.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/a-co-mi-tam.svg",
+          "variant": "default",
+          "sourceSha256": "85bde63ef0c7543abf85a5c53d3d35a3c1bb8d6eb0774a25c59afbfc59be1647"
+        }
+      ],
+      "ruleContext": "Masz Ułatwienie w Rzutach Obronnych przeciw chorobom, truciznom i radiacji. Masz również odporność na obrażenia od trucizn, chorób i promieniowania. Tak, na alkohol niestety też, bo to przecież trucizna. Jeśli masz chorobę przewlekłą, nie doznasz jednak cudownego ozdrowienia.",
+      "context": "Class/profession ability: A co mi tam!; owner Szczur. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "itemId": "batch69-a-co-mi-tam",
+      "request": "Revised A co mi tam: a rugged ANDROGYNOUS generic adult in a plain loose practical hood, with an ordinary build and a simple calm oval face. Keep one plain bottle near the shoulder and the large radiation trefoil. No beard, square jaw, thick muscular neck, visible hair detail or idealized face. The final targeted edit overrides the atlas's short-haired portrait; exact generation prompts remain in prompts.json. Broad white stencil cuts, natural adult proportions, no anime or spiky hair.",
+      "revisionOf": {
+        "id": "batch69-a-co-mi-tam",
+        "name": "A co mi tam!",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-69/a-co-mi-tam.png",
+        "sourceSha256": "33155763891a9ca0946efd702f97b73e481d0d5016310e38b833e4c3f9402e4f",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/a-co-mi-tam.svg",
+            "variant": "default",
+            "sourceSha256": "85bde63ef0c7543abf85a5c53d3d35a3c1bb8d6eb0774a25c59afbfc59be1647"
+          }
+        ],
+        "notes": "Swap the rugged man for a more androgenous, generic, rugged figure. ",
+        "feedback": {
+          "itemId": "batch69-a-co-mi-tam",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Swap the rugged man for a more androgenous, generic, rugged figure. ",
+          "updatedAt": "2026-10-15T20:15:40.276Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "amen",
+      "name": "Amen",
+      "owner": "kaznodzieja-nowej-ery",
+      "ownerLabel": "kaznodzieja-nowej-ery",
+      "target": "icons/abilities/amen.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/amen.svg",
+          "variant": "default",
+          "sourceSha256": "9062f3b8c40db134e5353eec62370cdeecb586ab463d9ba946dac4317cd0f615"
+        }
+      ],
+      "ruleContext": "Kiedy odniesiesz porażkę w Teście Cechy, Ataku lub Rzucie Obronnym, wypowiadasz słowo AMEN i dorzucasz do wyniku testu 1k6. Musisz zaakceptować nowy wynik. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po Długim odpoczynku.",
+      "context": "Class/profession ability: Amen; owner kaznodzieja-nowej-ery. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "itemId": "batch69-amen",
+      "request": "REVISION of reference cell 2. Keep the pair of adult praying hands above ONE die. Correct the die into a geometrically coherent ISOMETRIC CUBE, not a cylinder or rounded tub: one square-like front face with three broad black pips, one flat quadrilateral top face with one pip and one right-side face with two pips. All three faces meet at consistent shared vertices and straight edges; broad black seam cuts separate the white planes. The hands stay complete and realistic, no added symbols or text.",
+      "revisionOf": {
+        "id": "batch69-amen",
+        "name": "Amen",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-69/amen.png",
+        "sourceSha256": "287f1d096984fb7dfadd7c93b396093a7c3f551b72778998ea23869e333bf185",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/amen.svg",
+            "variant": "default",
+            "sourceSha256": "9062f3b8c40db134e5353eec62370cdeecb586ab463d9ba946dac4317cd0f615"
+          }
+        ],
+        "notes": "Fix the geometry of the die.",
+        "feedback": {
+          "itemId": "batch69-amen",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Fix the geometry of the die.",
+          "updatedAt": "2026-10-15T20:16:00.470Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "bez-tajemnic",
+      "name": "Bez tajemnic",
+      "owner": "lowca-mutantow",
+      "ownerLabel": "Łowca Mutantów",
+      "target": "icons/abilities/bez-tajemnic.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/bez-tajemnic.svg",
+          "variant": "default",
+          "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411"
+        }
+      ],
+      "ruleContext": "Znasz się na mutantach i potworach jak nikt inny. Jeśli spotkasz mutanta lub potwora i zdasz Test Inteligencji (Przyroda), zyskujesz wiedzę na jego temat. MG zdradza ci jego zwyczajową nazwę (ST 10), słabe punkty (ST 15) i trzy wybrane współczynniki (ST 20).",
+      "context": "Class/profession ability: Bez tajemnic; owner Łowca Mutantów. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "itemId": "batch69-bez-tajemnic",
+      "request": "REVISION of reference cell 3. Keep one large magnifying glass examining one mutant head in profile, a blunt horn and one broad crosshair on the head. Correct the anatomy so the head, neck and bust ALL face RIGHT. Mirror the torso orientation relative to the old image: the back/shoulder mass is behind the neck on the LEFT, the chest/front contour is toward the RIGHT. A single continuous natural neck joins the head to that correctly oriented torso. Do not rotate the whole image or leave a backward torso. No gore or tiny facial stippling.",
+      "revisionOf": {
+        "id": "batch69-bez-tajemnic",
+        "name": "Bez tajemnic",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-69/bez-tajemnic.png",
+        "sourceSha256": "fa5d11270a588121d8f88153561bf4425d3eaeb9a9755e4578b2c1b68e77dd7a",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/bez-tajemnic.svg",
+            "variant": "default",
+            "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411"
+          }
+        ],
+        "notes": "The mutant's head is facing the opposite way it's body is pointing. Mirror EITHER the head OR the body ",
+        "feedback": {
+          "itemId": "batch69-bez-tajemnic",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "The mutant's head is facing the opposite way it's body is pointing. Mirror EITHER the head OR the body ",
+          "updatedAt": "2026-10-15T20:17:03.299Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "clint",
+      "name": "Clint",
+      "owner": "kowboj",
+      "ownerLabel": "Kowboj",
+      "target": "icons/abilities/clint.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/clint.svg",
+          "variant": "default",
+          "sourceSha256": "5ee6cc654890f6d6bf88be57504342dcbc53ffeea273004d6cf970576cee2d61"
+        }
+      ],
+      "ruleContext": "Poprawka. Raz na walkę możesz powtórzyć jeden Test Ataku bronią palną. Zabójcza spluwa. Rewolwery w twoich rękach zadają jedną dodatkową kość obrażeń. PRZYKŁAD: Peacemaker w twoich dłoniach zadaje 2k8, zamiast 1k8 obrażeń.",
+      "context": "Class/profession ability: Clint; owner Kowboj. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "itemId": "batch69-clint",
+      "request": "REVISION of reference cell 4. Keep the same revolver silhouette and its upward-right angle, single cylinder, intact barrel, trigger guard and gripping hand pose. Remove the glove completely. Show ONE BARE adult hand with natural coherent fingers and thumb; broad sparse black knuckle cuts only. No glove seam, wrist strap, protective padding, panel or ribbing anywhere on the hand. A plain sleeve may end before the wrist. No engraving, actor portrait or text.",
+      "revisionOf": {
+        "id": "batch69-clint",
+        "name": "Clint",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-69/clint.png",
+        "sourceSha256": "36511b1af2d6cf7f0c37a378d5643221fdbcb7bdd41032747aa9b715d06f8357",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/clint.svg",
+            "variant": "default",
+            "sourceSha256": "5ee6cc654890f6d6bf88be57504342dcbc53ffeea273004d6cf970576cee2d61"
+          }
+        ],
+        "notes": "Remove the glove from the hand",
+        "feedback": {
+          "itemId": "batch69-clint",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Remove the glove from the hand",
+          "updatedAt": "2026-10-15T20:18:09.903Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "cwaniacki-zwod",
+      "name": "Cwaniacki zwód",
+      "owner": "cwaniak",
+      "ownerLabel": "Cwaniak",
+      "target": "icons/abilities/cwaniacki-zwod.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/cwaniacki-zwod.svg",
+          "variant": "default",
+          "sourceSha256": "92cf284356f1cc96aeab112afc135f826720e6f89822a49dd76526aca5e58f44"
+        }
+      ],
+      "ruleContext": "Jeśli nie nosisz ciężkiego pancerza, to w Akcji Bonusowej możesz wykonać akcję Odstąpienie i przemieścić się przez obszar zajmowany przez przeciwników, nie prowokując ataków okazyjnych.",
+      "context": "Class/profession ability: Cwaniacki zwód; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 5,
+      "request": "One lean generic adult in plain practical clothes, shown full-body making a quick low sidestep around ONE upright blocking human silhouette. The moving figure bends and slips past the blocker; one broad sweep behind the moving leg indicates the dodge. Exactly two people with simple smooth featureless heads and natural adult proportions, no faces or male survivor portrait. Clear black separation between bodies and complete limbs, no arrow, extra limb or injury.",
+      "itemId": "batch70-cwaniacki-zwod"
+    },
+    {
+      "kind": "feature",
+      "key": "dobra-rada",
+      "name": "Dobra rada",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/abilities/dobra-rada.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/dobra-rada.svg",
+          "variant": "default",
+          "sourceSha256": "9dfe5a97c8a9a000027fc7fa69ccb052eaf2b53099a2b72712a2ed0de24a9b79"
+        }
+      ],
+      "ruleContext": "W Akcji Bonusowej możesz wybrać jednego sojusznika, który cię słyszy i dać mu dobrą radę. Do początku twojej następnej tury otrzymuje premię do Testu Cechy, Ataku lub Rzutu Obronnego, równą twojemu modyfikatorowi Inteligencji. Możesz użyć tej zdolności tyle razy, ile wynosi twoja Premia Biegłości. Zdolność odnawia się po odbyciu Krótkiego odpoczynku.",
+      "context": "Class/profession ability: Dobra rada; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 6,
+      "request": "Two plain gender-neutral adult heads in profile facing each other, with shoulders kept small. The speaker on the left cups ONE complete hand near their mouth; two short broad sound strokes point toward the listener's visible ear on the right. The listener tilts their head attentively. Smooth heads, no hair detail, beard or portrait expressions. Advice given to an ally, no speech bubble, writing, lightbulb, lettering or decorative symbols.",
+      "itemId": "batch70-dobra-rada"
+    },
+    {
+      "kind": "feature",
+      "key": "doktor-brain",
+      "name": "Doktor Brain",
+      "owner": "medyk",
+      "ownerLabel": "Medyk",
+      "target": "icons/abilities/doktor-brain.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/doktor-brain.svg",
+          "variant": "default",
+          "sourceSha256": "6ab38a26190fd849a7d57137b1d58a07bf5c5b193d101e52adf87d4269536f91"
+        }
+      ],
+      "ruleContext": "Chcesz być jajogłowym mutantem geniuszem? Proszę bardzo. Znajdujesz martwego mutanta i tworzysz serum z jego rdzenia mózgowego, które sobie aplikujesz. Wartość twojej Cechy Inteligencja rośnie na stałe o 4 (do maksymalnie 20). Twój organizm płaci jednak za to wielką cenę. Zmniejsz na stałe swoją Kondycję lub Zręczność o 2.",
+      "context": "Class/profession ability: Doktor Brain; owner Medyk. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 7,
+      "request": "One simple intact brain silhouette with only three broad lobe cuts, paired with ONE robust medical syringe angled upward beside it. The brain is a sober schematic symbol for intellect, not a specimen or gore. The complete syringe has a clear barrel, plunger and short intact needle. Compact single brain-and-serum motif, no head, face, cartoon expression, drips, labels, numerals or tiny brain folds.",
+      "itemId": "batch70-doktor-brain"
+    },
+    {
+      "kind": "feature",
+      "key": "drugi-atak",
+      "name": "Drugi atak",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/abilities/drugi-atak.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/drugi-atak.svg",
+          "variant": "default",
+          "sourceSha256": "8485b908a3ec63be916ca5e1be37cb3133fdab80874a615a3127ebadf97e49c2"
+        }
+      ],
+      "ruleContext": "Kiedy wykonujesz w swojej turze akcję Atakowanie, możesz zaatakować dwukrotnie.",
+      "context": "Class/profession ability: Drugi atak; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 8,
+      "request": "Two powerful bare clenched fists, staggered diagonally as a one-two punch: one slightly forward at upper-right, the other behind at lower-left. Each fist has a complete short wrist; two short broad impact trails convey consecutive strikes. No whole person, head, crossed weapons, numerals, extra hands, gore, fine fingernails or glove panels. A clean strong two-hit silhouette with a broad black gap between the fists.",
+      "itemId": "batch70-drugi-atak"
+    },
+    {
+      "kind": "feature",
+      "key": "drzwi-w-drzwi",
+      "name": "Drzwi w drzwi",
+      "owner": "wojownik-autostrady",
+      "ownerLabel": "Wojownik Autostrady",
+      "target": "icons/abilities/drzwi-w-drzwi.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/drzwi-w-drzwi.svg",
+          "variant": "default",
+          "sourceSha256": "e90a74d5a078cc693572423f53f02e5a598da739e570338c0de89f8d555bfae0"
+        }
+      ],
+      "ruleContext": "Twój pojazd to twoja broń. Samochód, motor czy autobus to równie zabójcze zabawki, co twój gnat. Rajdowiec. Podczas walki, wyścigu i pościgu wykonujesz wszystkie Testy Mądrości (Pojazdy) z Ułatwieniem. Szybkość twojego pojazdu rośnie o 50%. Konwojent. Nie otrzymujesz Utrudnienia do Testów Ataków, wynikających z niestabilnego podłoża, kiedy jedziesz pojazdem, zarówno jako pasażer, jak i kierowca. Taranowanie. Istoty, które taranujesz swoim pojazdem, otrzymują Utrudnienie do RO na Zręczność.",
+      "context": "Class/profession ability: Drzwi w drzwi; owner Wojownik Autostrady. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 9,
+      "request": "Top-down view of TWO complete rugged compact cars driving parallel and close together, one slightly ahead. Their SIDE DOORS make contact at the centre, marked by ONE small broad angular contact wedge. Recognizable roofs, windshields and four thick tires per car, just a few broad window cuts. Both vehicles fit completely inside this cell. No drivers, faces, fine mechanical detail, logos, writing or decorative arrows.",
+      "itemId": "batch70-drzwi-w-drzwi"
+    }
+  ]
+}

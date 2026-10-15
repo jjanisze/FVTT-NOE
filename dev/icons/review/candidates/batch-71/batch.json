@@ -1,0 +1,196 @@
+{
+  "date": "2026-10-15",
+  "batch": 71,
+  "generalFeedback": "Avoid repeated gruff male survivor busts; use objects, gestures and generic adult figures with no anime styling.",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "dwoch-na-jednego",
+      "name": "Dwóch na jednego",
+      "owner": "ganger",
+      "ownerLabel": "Ganger",
+      "target": "icons/abilities/dwoch-na-jednego.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/dwoch-na-jednego.svg",
+          "variant": "default",
+          "sourceSha256": "abf98f1ae8f9018ba49f8b45cd85fd2a8b9fa6924e0a773dad9c08339dcf66d3"
+        }
+      ],
+      "ruleContext": "Uwielbiasz kopać leżącego frajera wspólnie z kumplami. Jeśli zaatakujesz wręcz istotę, która została zaatakowana w ten sam sposób przez twojego sojusznika, otrzymujesz +2 do Testów Ataku wręcz przeciwko niej, do końca twojej tury.",
+      "context": "Class/profession ability: Dwóch na jednego; owner Ganger. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "ONE plain full-body adult silhouette at centre, flanked by TWO large clenched fists converging from left and right at torso level. The central figure raises their forearms defensively. Clear gaps between the two incoming fists and the complete human figure; a coordinated two-on-one melee attack. Smooth featureless head and natural adult proportions, no beard, face portrait, anime, injuries, blood, extra fists or decorative arrows.",
+      "itemId": "batch71-dwoch-na-jednego"
+    },
+    {
+      "kind": "feature",
+      "key": "dziewiec-zyc",
+      "name": "Dziewięć żyć",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/abilities/dziewiec-zyc.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/dziewiec-zyc.svg",
+          "variant": "default",
+          "sourceSha256": "5052a5bb6298ba74d8ae2ea27a3353bc847d749e088078b50cabce0a6a7a9f26"
+        }
+      ],
+      "ruleContext": "Łatwiej ustrzelić nocą czarnego kota niż cię trafić. Zyskujesz nowe sposoby na wykorzystanie Kocich kości.",
+      "context": "Class/profession ability: Dziewięć żyć; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "request": "One lean realistic domestic CAT in a dynamic sideways leap, arched long tail and complete four legs. One short broad near-miss streak passes just behind its hindquarters. Alert ears and one simple eye cut only; a serious agile survival silhouette, not a mascot or cartoon. No dice, numerals, halo, hearts, skulls, extra tails, human face or decorative stars.",
+      "itemId": "batch71-dziewiec-zyc"
+    },
+    {
+      "kind": "feature",
+      "key": "ekspert",
+      "name": "Ekspert",
+      "owner": "cwaniak",
+      "ownerLabel": "Cwaniak",
+      "target": "icons/abilities/ekspert.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ekspert.svg",
+          "variant": "default",
+          "sourceSha256": "232cba987b6f917ef305d366a6f0c46625c645084e43e17b491a2e681606b201"
+        }
+      ],
+      "ruleContext": "Wybierasz dwie umiejętności lub jedną umiejętność i jedno narzędzie, w których masz biegłość. Od tej pory specjalizujesz się w nich, więc Premia Biegłości ulega podwojeniu.",
+      "context": "Class/profession ability: Ekspert; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "request": "One complete adult hand using a sturdy mechanical vernier CALIPER to measure a large plain hexagonal bolt head. Broad coherent caliper jaws grip the bolt, one clear sliding beam and a simple thumb position. Precise expert workmanship shown through the actual tool. No ruler ticks, digits, labels, generic cog, face, extra hand, scattered parts or tiny engraving.",
+      "itemId": "batch71-ekspert"
+    },
+    {
+      "kind": "feature",
+      "key": "elektronik",
+      "name": "Elektronik",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/abilities/elektronik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/elektronik.svg",
+          "variant": "default",
+          "sourceSha256": "f390a9b077c44175d9cd142eb44c91d2b5ebcec9b555de04ec0e68c851576564"
+        }
+      ],
+      "ruleContext": "Elektroniczne zabezpieczenia rozgryzasz równie łatwo, co te tradycyjne. A nawet łatwiej. Zawsze, kiedy mierzysz się z elektronicznym systemem zabezpieczeń, otrzymujesz Ułatwienie do testu narzędzi małego ślusarza lub małego elektronika.",
+      "context": "Class/profession ability: Elektronik; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "request": "One robust electronic PADLOCK shown open, with a large square circuit chip cut into its body and just TWO broad right-angle circuit traces. One short practical screwdriver meets the lock's service opening. Clear complete shackle, thick body and intact tool handle. Electronic security bypass, not a pile of components. No digits, labels, huge cog, sparks, face or delicate circuit pattern.",
+      "itemId": "batch71-elektronik"
+    },
+    {
+      "kind": "feature",
+      "key": "emiter-emp",
+      "name": "Emiter EMP",
+      "owner": "zabojca-maszyn",
+      "ownerLabel": "Zabójca Maszyn",
+      "target": "icons/abilities/emiter-emp.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/emiter-emp.svg",
+          "variant": "default",
+          "sourceSha256": "30e74a80bf10eebc2cc7c79b466d9323d765fb269da0c910addaccc500e1f96e"
+        }
+      ],
+      "ruleContext": "Jeśli wydasz 100 gambli na surowce i poświęcisz 100 godzin pracy, to zbudujesz ciężką, nieporęczną broń wyspecjalizowaną w niszczeniu maszyn. Emiter strzela impulsem elektromagnetycznym, który zakłóca działanie lub niszczy niemal każdą maszynę. Nie działa na istoty żywe i urządzenia, które nie używają mikroprocesorów. Emiter EMP ładuje się prądem elektrycznym 230 V, a akumulator starcza na 6 wystrzałów. Ta broń ignoruje TT pochodzącą z opancerzenia maszyny. Tylko Zabójca Maszyn jest biegły w używaniu tej specyficznej broni. Nazwa: Emiter EMP Tryb ognia: Pojedynczy Magazynek: 6 Obrażenia: 8k6 od elektryczności Zasięg: 9/15 metrów Właściwości: Ładowanie Porażenie: Trafiony cel wykonuje Rzut Obronny na Kondycję o ST 15 inaczej otrzymuje stan Obezwładnienie do końca twojej następnej tury Koszt produkcji: 20 MK, 40 CE, 40 CZ",
+      "context": "Class/profession ability: Emiter EMP; owner Zabójca Maszyn. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 5,
+      "request": "One heavy improvised electromagnetic RIFLE in clear side profile aimed right, with a large blunt emitter coil at the muzzle, a compact rectangular battery beneath the receiver, practical shoulder stock and one complete grip. TWO broad concentric pulse arcs emerge ahead of the muzzle. Sober salvaged engineering, no fantasy wand, human face, intricate cables, text, logos, circuit microdetail or toy proportions.",
+      "itemId": "batch71-emiter-emp"
+    },
+    {
+      "kind": "feature",
+      "key": "empiryk",
+      "name": "Empiryk",
+      "owner": "zabojca-maszyn",
+      "ownerLabel": "Zabójca Maszyn",
+      "target": "icons/abilities/empiryk.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/empiryk.svg",
+          "variant": "default",
+          "sourceSha256": "c3969d155f78163b17980cabe9279254fd483d9ad394b4eebefdf82b3fc4e9e2"
+        }
+      ],
+      "ruleContext": "Nikt nie wie, jak to robisz, ale potrafisz przewidzieć zachowanie każdej maszyny. Jeśli zostajesz trafiony przez maszynę, możesz użyć Reakcji, żeby wobec tego ataku podnieść swoją TT o wartość twojej Premii Biegłości. Zyskujesz również Ułatwienie w Rzutach Obronnych na efekty wywoływane przez maszyny.",
+      "context": "Class/profession ability: Empiryk; owner Zabójca Maszyn. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 6,
+      "request": "One open BARE HUMAN PALM raised defensively on the right against ONE approaching industrial robotic claw on the left. A single broad curved deflection stroke between them shows anticipating and avoiding a machine's attack. The claw has a rectangular wrist housing and two sturdy articulated fingers. Both hands are complete and separated by black space. No full person, head, shield emblem, giant cog, sparks, anime or tiny robot joints.",
+      "itemId": "batch71-empiryk"
+    },
+    {
+      "kind": "feature",
+      "key": "farmacja",
+      "name": "Farmacja",
+      "owner": "medyk",
+      "ownerLabel": "Medyk",
+      "target": "icons/abilities/farmacja.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/farmacja.svg",
+          "variant": "default",
+          "sourceSha256": "c76a242ba8cd132a2de5d72c1b09dffbaba3e8aa8326ef3e26176b7d00db1b4f"
+        }
+      ],
+      "ruleContext": "Podobno medyk nie jest maszynką do skręcania leków z piasku. Ale ty znasz się na chemii i farmakologii, więc wiesz, że lekarstwa można ukręcić ze wszystkiego innego. Zyskujesz biegłość w narzędziach małego aptekarza. Potrafisz produkować leki i substancje leczące, używając składników chemicznych, jak i organicznych. Potrzebne ci narzędzia małego chemika, małego aptekarza, surowce i czas. Otrzymujesz wylistowane poniżej schematy farmaceutyczne. SCHEMATY FARMACEUTYCZNE NAZWA ST PRODUKCJA SUROWCE Antybiotyk (10 dawek) 10 20 godzin 20 CH/MO Alkohol tani (1 l) 10 3 godziny 3 CH/MO AR 23 (1 szt) 25 35 godzin 33 CH, 1 CZ, 1 MK AR-35 BETA (1 szt) 25 50 godzin 49 CH, 1 CZ,1 MK Deadline (1 szt) 20 25 godzin 25 CH/MO, 1 MK Detoks (5 fiolek) 10 20 godzin 20 CH/MO Medpak (1 szt) 15 13 godzin 11 CH/MO, 1 CZ, 1 MK Nitrogliceryna (20 g) 15 10 godzin 10 CH/MO Painkiller (10 tabletek) 10 10 godzin 10 CH/ MO Pocisk - strzykawka (1 szt) 10 3 godziny 2 CZ, 1 MK Proch czarny (20 g) 10 5 godzin 2 CH, 3 MK/MO Proch strzelniczy (20 g) 15 10 godzin 5 CH, 5 MK/MO RadOff (1 szt) 15 15 godzin 14 CH/MO, 1 MK Środki dezynfekujące (1 l) 10 5 godzin 5 CH/MO Środek usypiający (1 fiol.) 10 10 godzin 10 CH/MO Tornado (1 działka) 25 50 godzin 50 CH/MO Trybiotyl (1 porcja) 15 15 godzin 15 CH/MO Trucizna (1 fiolka) 10 10 godzin 10 CH/MO Uzupełnienie zestawu małego medyka (1 użycie) 10 5 godzin 5 CH/MO, 1 MK WD-TABS (10 tabletek) 10 10 godzin 10 CH/MO Zamiennik dowolnego leku (5 dawek) 20 10 godzin 10 CH/MO",
+      "context": "Class/profession ability: Farmacja; owner Medyk. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 7,
+      "request": "One squat practical pharmacist's MORTAR with a thick PESTLE resting inside, plus ONE large medicine capsule in front and ONE simple broad leaf beside it. A compact grounded pharmaceutical preparation arrangement with only three broad internal cuts. Complete objects and generous black separation. No person, skull, logo, writing, scale markings, tiny herb veins, ornamental scrollwork or scattered pills.",
+      "itemId": "batch71-farmacja"
+    },
+    {
+      "kind": "feature",
+      "key": "glowa-do-gory",
+      "name": "Głowa do góry!",
+      "owner": "cwaniak",
+      "ownerLabel": "Cwaniak",
+      "target": "icons/abilities/glowa-do-gory.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/glowa-do-gory.svg",
+          "variant": "default",
+          "sourceSha256": "d4c9125b3a8ab930e1da0ab57ff9efc0c9fa5773909f10506ce92e7ce4989a3b"
+        }
+      ],
+      "ruleContext": "Kiedy ty lub twoi towarzysze jesteście pod wpływem stanu Przerażenie, możesz wlać odwagę w wasze serca. W swojej akcji rozpoczynasz występ (deklamację, przemowę, modlitwę, grę na instrumencie) trwający do końca twojej następnej tury. Ty i wszyscy słyszący cię sojusznicy w zasięgu 18 metrów automatycznie zdajecie RO przeciw Przerażeniu.",
+      "context": "Class/profession ability: Głowa do góry!; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 8,
+      "request": "One plain handheld MICROPHONE angled upward with TWO broad outward sound arcs; behind it, ONE open adult hand is raised upright in a steady encouraging gesture. Speech or song restoring courage. A simple solid microphone head with two broad grille cuts and one intact handle. No face, performer portrait, text, music notes, heart, rays, raised fist or fine grille mesh.",
+      "itemId": "batch71-glowa-do-gory"
+    },
+    {
+      "kind": "feature",
+      "key": "gola-klata",
+      "name": "Goła klata",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/abilities/gola-klata.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/gola-klata.svg",
+          "variant": "default",
+          "sourceSha256": "96223da7b4372786dd758e23ca14db7c4c44b8f731e301fb0d1cca1547db1407"
+        }
+      ],
+      "ruleContext": "Kiedy nie nosisz żadnego pancerza, hełmu ani tarczy twoja Trudność Trafienia wynosi 10 + twoje modyfikatory Zręczności i Kondycji. Ta zdolność nie łączy się z podobnie działającymi zdolnościami innych klas.",
+      "context": "Class/profession ability: Goła klata; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 9,
+      "request": "One plain ANDROGYNOUS adult upper torso, cropped from the base of the neck to just above the waist, front three-quarter view. Natural ordinary athletic build, bare shoulders and chest represented as one modest abstract solid silhouette with just three broad anatomical cuts. One short near-miss stroke passes outside a shoulder to imply unarmoured evasiveness. No head or portrait, no armor, helmet or shield, no nipples, erotic detail, bodybuilder muscles, scars or anime anatomy.",
+      "itemId": "batch71-gola-klata"
+    }
+  ]
+}

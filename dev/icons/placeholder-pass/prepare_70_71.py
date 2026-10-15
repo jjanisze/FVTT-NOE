@@ -1,0 +1,132 @@
+"""Freeze four saved revisions and fourteen fresh subjects in two nine-cell atlases."""
+import hashlib
+import json
+from pathlib import Path
+from PIL import Image
+
+ROOT = Path(__file__).resolve().parents[3]
+REVIEW = ROOT / "dev/icons/review"
+DATE = "2026-10-15"
+
+
+def read(file):
+    return json.loads(file.read_text(encoding="utf-8"))
+
+
+def write(file, value):
+    file.write_text(json.dumps(value, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def sha(file):
+    return hashlib.sha256(file.read_bytes()).hexdigest()
+
+
+MOTIFS = {
+    "a-co-mi-tam": "REVISION of reference cell 1. Keep the plain bottle held near one shoulder and the large radiation trefoil beside the other shoulder. Replace the bearded muscular man with a rugged but ANDROGYNOUS generic adult from the chest upward: ordinary build, simple short neutral hair, smooth jaw, no beard, no moustache, no pronounced masculine brow, no idealized pretty face. A calm untroubled expression, one or two broad facial cuts only. The person resists poison and radiation; not a protective suit. Natural adult anatomy, no anime or spiky hair.",
+    "amen": "REVISION of reference cell 2. Keep the pair of adult praying hands above ONE die. Correct the die into a geometrically coherent ISOMETRIC CUBE, not a cylinder or rounded tub: one square-like front face with three broad black pips, one flat quadrilateral top face with one pip and one right-side face with two pips. All three faces meet at consistent shared vertices and straight edges; broad black seam cuts separate the white planes. The hands stay complete and realistic, no added symbols or text.",
+    "bez-tajemnic": "REVISION of reference cell 3. Keep one large magnifying glass examining one mutant head in profile, a blunt horn and one broad crosshair on the head. Correct the anatomy so the head, neck and bust ALL face RIGHT. Mirror the torso orientation relative to the old image: the back/shoulder mass is behind the neck on the LEFT, the chest/front contour is toward the RIGHT. A single continuous natural neck joins the head to that correctly oriented torso. Do not rotate the whole image or leave a backward torso. No gore or tiny facial stippling.",
+    "clint": "REVISION of reference cell 4. Keep the same revolver silhouette and its upward-right angle, single cylinder, intact barrel, trigger guard and gripping hand pose. Remove the glove completely. Show ONE BARE adult hand with natural coherent fingers and thumb; broad sparse black knuckle cuts only. No glove seam, wrist strap, protective padding, panel or ribbing anywhere on the hand. A plain sleeve may end before the wrist. No engraving, actor portrait or text.",
+    "cwaniacki-zwod": "One lean generic adult in plain practical clothes, shown full-body making a quick low sidestep around ONE upright blocking human silhouette. The moving figure bends and slips past the blocker; one broad sweep behind the moving leg indicates the dodge. Exactly two people with simple smooth featureless heads and natural adult proportions, no faces or male survivor portrait. Clear black separation between bodies and complete limbs, no arrow, extra limb or injury.",
+    "dobra-rada": "Two plain gender-neutral adult heads in profile facing each other, with shoulders kept small. The speaker on the left cups ONE complete hand near their mouth; two short broad sound strokes point toward the listener's visible ear on the right. The listener tilts their head attentively. Smooth heads, no hair detail, beard or portrait expressions. Advice given to an ally, no speech bubble, writing, lightbulb, lettering or decorative symbols.",
+    "doktor-brain": "One simple intact brain silhouette with only three broad lobe cuts, paired with ONE robust medical syringe angled upward beside it. The brain is a sober schematic symbol for intellect, not a specimen or gore. The complete syringe has a clear barrel, plunger and short intact needle. Compact single brain-and-serum motif, no head, face, cartoon expression, drips, labels, numerals or tiny brain folds.",
+    "drugi-atak": "Two powerful bare clenched fists, staggered diagonally as a one-two punch: one slightly forward at upper-right, the other behind at lower-left. Each fist has a complete short wrist; two short broad impact trails convey consecutive strikes. No whole person, head, crossed weapons, numerals, extra hands, gore, fine fingernails or glove panels. A clean strong two-hit silhouette with a broad black gap between the fists.",
+    "drzwi-w-drzwi": "Top-down view of TWO complete rugged compact cars driving parallel and close together, one slightly ahead. Their SIDE DOORS make contact at the centre, marked by ONE small broad angular contact wedge. Recognizable roofs, windshields and four thick tires per car, just a few broad window cuts. Both vehicles fit completely inside this cell. No drivers, faces, fine mechanical detail, logos, writing or decorative arrows.",
+    "dwoch-na-jednego": "ONE plain full-body adult silhouette at centre, flanked by TWO large clenched fists converging from left and right at torso level. The central figure raises their forearms defensively. Clear gaps between the two incoming fists and the complete human figure; a coordinated two-on-one melee attack. Smooth featureless head and natural adult proportions, no beard, face portrait, anime, injuries, blood, extra fists or decorative arrows.",
+    "dziewiec-zyc": "One lean realistic domestic CAT in a dynamic sideways leap, arched long tail and complete four legs. One short broad near-miss streak passes just behind its hindquarters. Alert ears and one simple eye cut only; a serious agile survival silhouette, not a mascot or cartoon. No dice, numerals, halo, hearts, skulls, extra tails, human face or decorative stars.",
+    "ekspert": "One complete adult hand using a sturdy mechanical vernier CALIPER to measure a large plain hexagonal bolt head. Broad coherent caliper jaws grip the bolt, one clear sliding beam and a simple thumb position. Precise expert workmanship shown through the actual tool. No ruler ticks, digits, labels, generic cog, face, extra hand, scattered parts or tiny engraving.",
+    "elektronik": "One robust electronic PADLOCK shown open, with a large square circuit chip cut into its body and just TWO broad right-angle circuit traces. One short practical screwdriver meets the lock's service opening. Clear complete shackle, thick body and intact tool handle. Electronic security bypass, not a pile of components. No digits, labels, huge cog, sparks, face or delicate circuit pattern.",
+    "emiter-emp": "One heavy improvised electromagnetic RIFLE in clear side profile aimed right, with a large blunt emitter coil at the muzzle, a compact rectangular battery beneath the receiver, practical shoulder stock and one complete grip. TWO broad concentric pulse arcs emerge ahead of the muzzle. Sober salvaged engineering, no fantasy wand, human face, intricate cables, text, logos, circuit microdetail or toy proportions.",
+    "empiryk": "One open BARE HUMAN PALM raised defensively on the right against ONE approaching industrial robotic claw on the left. A single broad curved deflection stroke between them shows anticipating and avoiding a machine's attack. The claw has a rectangular wrist housing and two sturdy articulated fingers. Both hands are complete and separated by black space. No full person, head, shield emblem, giant cog, sparks, anime or tiny robot joints.",
+    "farmacja": "One squat practical pharmacist's MORTAR with a thick PESTLE resting inside, plus ONE large medicine capsule in front and ONE simple broad leaf beside it. A compact grounded pharmaceutical preparation arrangement with only three broad internal cuts. Complete objects and generous black separation. No person, skull, logo, writing, scale markings, tiny herb veins, ornamental scrollwork or scattered pills.",
+    "glowa-do-gory": "One plain handheld MICROPHONE angled upward with TWO broad outward sound arcs; behind it, ONE open adult hand is raised upright in a steady encouraging gesture. Speech or song restoring courage. A simple solid microphone head with two broad grille cuts and one intact handle. No face, performer portrait, text, music notes, heart, rays, raised fist or fine grille mesh.",
+    "gola-klata": "One plain ANDROGYNOUS adult upper torso, cropped from the base of the neck to just above the waist, front three-quarter view. Natural ordinary athletic build, bare shoulders and chest represented as one modest abstract solid silhouette with just three broad anatomical cuts. One short near-miss stroke passes outside a shoulder to imply unarmoured evasiveness. No head or portrait, no armor, helmet or shield, no nipples, erotic detail, bodybuilder muscles, scars or anime anatomy."
+}
+
+GENERAL = (
+    "Use case: stylized-concept / style-transfer. Asset: tiny post-apocalyptic tabletop inventory glyphs. "
+    "Create ONE square atlas with exactly NINE separate equal cells, a 3x3 grid in strict ROW-MAJOR order. "
+    "No visible grid, no cell labels. PURE SOLID WHITE #FFFFFF glyphs on perfectly clean PURE BLACK #000000. "
+    "Match the reference's broad sober stencil silhouettes and restrained large black negative-space cuts. "
+    "Keep every complete subject in the middle 60% of its cell with at least 20% blank margin on ALL FOUR sides. "
+    "No mark or body part may cross cell boundaries. All heads, wrists, fingers, tool handles, vehicles and barrels remain complete. "
+    "These must read at 16/24/32 px: simplify details rather than draw a miniature illustration. "
+    "NO grey shading, gradients, hatching, dithering, distressed edges, speckles, thin wrinkles, hair strands, readable text, initials, numerals, logos, borders or watermark. "
+    "NO anime, manga, chibi, spiky hair, huge eyes, heroic pretty faces or cartoon anatomy. "
+    "Do NOT default to repeated bearded gruff male survivor portraits: use the actual objects, gestures or generic adult action silhouettes requested below. "
+    "Human figures have natural adult proportions and minimal or featureless faces; generic abilities need no gender stereotype. "
+    "No gore. No playful arrows, giant generic cogs or floating toy fragments.\n"
+)
+
+
+def main():
+    roadmap = read(ROOT / "dev/icons/placeholder-pass/roadmap.json")
+    old_batch = read(REVIEW / "candidates/batch-69/batch.json")
+    reviewed = read(REVIEW / "candidates/batch-69/reviewed.json")
+    feedback_file = REVIEW / "feedback.json"
+    feedback_bytes = feedback_file.read_bytes()
+    feedback = json.loads(feedback_bytes)["items"]
+    manifest = read(REVIEW / "manifest.json")
+    old_subjects = {subject["itemId"]: subject for subject in old_batch["subjects"]}
+    revisions = []
+    for entry in reviewed["active"]:
+        if entry["decision"] != "revise":
+            continue
+        assert feedback[entry["id"]] == entry["feedback"], "GM review changed"
+        subject = dict(old_subjects[entry["id"]])
+        subject["revisionOf"] = entry
+        revisions.append(subject)
+    assert len(revisions) == 4
+    fresh = [subject for batch in roadmap["batches"] for subject in batch["subjects"]][9:23]
+    assert len(fresh) == 14
+    groups = {70: revisions + fresh[:5], 71: fresh[5:]}
+    style_paths = ["icons/abilities/bystrzacha.webp", "icons/abilities/cichy-krok.webp",
+                   "icons/abilities/brutalny-cios.webp", "icons/abilities/ucz-sie-ucz.webp",
+                   "icons/actions/bebeszenie.webp", "icons/abilities/pan-plaster.webp",
+                   "icons/items/loot/paliwo_dobre.webp", "icons/statuses/wylaczony.webp",
+                   "icons/abilities/siekierezada.webp"]
+    for number, subjects in groups.items():
+        here = REVIEW / "candidates" / f"batch-{number}"
+        assert not here.exists(), f"Batch {number} is already allocated"
+        (here / "raw").mkdir(parents=True)
+        entries, targets = [], []
+        for index, original in enumerate(subjects):
+            subject = dict(original)
+            subject.update(cell=index + 1, request=MOTIFS[subject["key"]])
+            subject.setdefault("itemId", f"batch{number}-{subject['key']}")
+            for target in subject["deliveryTargets"]:
+                assert sha(ROOT / target["source"]) == target["sourceSha256"], "Native target changed"
+                targets.append({"key": subject["key"], **target})
+            entries.append(subject)
+        write(here / "batch.json", {"date": DATE, "batch": number,
+              "generalFeedback": "Avoid repeated gruff male survivor busts; use objects, gestures and generic adult figures with no anime styling.", "subjects": entries})
+        reference_paths = list(style_paths)
+        if number == 70:
+            reference_paths[:4] = ["dev/icons/review/" + subject["revisionOf"]["selectedSource"] for subject in revisions]
+        canvas = Image.new("RGB", (768, 768), "black")
+        for index, source in enumerate(reference_paths):
+            with Image.open(ROOT / source) as original:
+                rgba = original.convert("RGBA")
+                rgba.thumbnail((256, 256), Image.Resampling.LANCZOS)
+                canvas.paste(rgba, ((index % 3) * 256, (index // 3) * 256), rgba)
+        canvas.save(here / "raw/style-reference.png")
+        role = ("Reference cells 1-4 are the EXACT subjects to revise in output cells 1-4; preserve each subject except the stated correction. Reference cells 5-9 are style-only and must be replaced with the NEW subjects listed below."
+                if number == 70 else "Every attached reference cell is STYLE ONLY. Replace ALL nine subjects with the NEW subjects below; do not copy any reference object or composition.")
+        prompt = GENERAL + role + "\nROW-MAJOR CONTENTS:\n" + "\n".join(
+            f"{subject['cell']}. {subject['key']}: {subject['request']}" for subject in entries)
+        write(here / "prompts.json", {"generator": "OpenAI built-in image generation", "date": DATE,
+              "reference": "raw/style-reference.png", "role": role, "atlas": prompt, "targetedCorrections": []})
+        write(here / "style-reference.json", {"role": role, "sources": [
+            {"source": source, "sha256": sha(ROOT / source)} for source in reference_paths]})
+        write(here / "references.json", {"role": "Exact native delivery targets; never used as style references", "files": targets})
+        write(here / "incoming.json", {"date": DATE, "batch": number,
+              "feedbackSha256": hashlib.sha256(feedback_bytes).hexdigest(), "priorReviewItems": len(manifest["items"]),
+              "priorResolvedItems": sum(item.get("status") == "resolved" for item in manifest["items"]),
+              "revisionCount": sum("revisionOf" in subject for subject in entries),
+              "freshCount": sum("revisionOf" not in subject for subject in entries),
+              "remainingPlaceholderFiles": 149, "remainingPlaceholderSubjects": 148})
+        print(f"Batch {number}: " + ", ".join(subject["key"] for subject in entries))
+    assert feedback_file.read_bytes() == feedback_bytes
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,30 @@
+{
+  "batch69-a-co-mi-tam": {
+    "itemId": "batch69-a-co-mi-tam",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Swap the rugged man for a more androgenous, generic, rugged figure. ",
+    "updatedAt": "2026-10-15T20:15:40.276Z"
+  },
+  "batch69-amen": {
+    "itemId": "batch69-amen",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Fix the geometry of the die.",
+    "updatedAt": "2026-10-15T20:16:00.470Z"
+  },
+  "batch69-bez-tajemnic": {
+    "itemId": "batch69-bez-tajemnic",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "The mutant's head is facing the opposite way it's body is pointing. Mirror EITHER the head OR the body ",
+    "updatedAt": "2026-10-15T20:17:03.299Z"
+  },
+  "batch69-clint": {
+    "itemId": "batch69-clint",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Remove the glove from the hand",
+    "updatedAt": "2026-10-15T20:18:09.903Z"
+  }
+}

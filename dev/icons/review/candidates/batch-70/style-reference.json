@@ -1,0 +1,41 @@
+{
+  "role": "Reference cells 1-4 are the EXACT subjects to revise in output cells 1-4; preserve each subject except the stated correction. Reference cells 5-9 are style-only and must be replaced with the NEW subjects listed below.",
+  "sources": [
+    {
+      "source": "dev/icons/review/candidates/batch-69/a-co-mi-tam.png",
+      "sha256": "33155763891a9ca0946efd702f97b73e481d0d5016310e38b833e4c3f9402e4f"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-69/amen.png",
+      "sha256": "287f1d096984fb7dfadd7c93b396093a7c3f551b72778998ea23869e333bf185"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-69/bez-tajemnic.png",
+      "sha256": "fa5d11270a588121d8f88153561bf4425d3eaeb9a9755e4578b2c1b68e77dd7a"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-69/clint.png",
+      "sha256": "36511b1af2d6cf7f0c37a378d5643221fdbcb7bdd41032747aa9b715d06f8357"
+    },
+    {
+      "source": "icons/actions/bebeszenie.webp",
+      "sha256": "02657f02449831b432ab5021f05c3b9556de603ca0e83f553f19e40d5450f866"
+    },
+    {
+      "source": "icons/abilities/pan-plaster.webp",
+      "sha256": "55cb1114cf070f45d8f5f00a0cac406ac9960a494fd4e24bcf64b3feecb5aaff"
+    },
+    {
+      "source": "icons/items/loot/paliwo_dobre.webp",
+      "sha256": "ec90a169a9d054c5450d3f2affa62534e3a66c9b3c5b39610784e7365b1abe6b"
+    },
+    {
+      "source": "icons/statuses/wylaczony.webp",
+      "sha256": "55cce4007bd462e3b4b98ff55cea4cdb74a383f1958564c1e512fd8ec8a0a9e9"
+    },
+    {
+      "source": "icons/abilities/siekierezada.webp",
+      "sha256": "9af9c5a402d6ce38d08ac65d6715399ef80c67fb0bddc94b21358fb6896fc99d"
+    }
+  ]
+}

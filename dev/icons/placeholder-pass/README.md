@@ -48,3 +48,28 @@ the approved glyph because the existing hotbar already draws an active pulse.
 The legacy Kondycha active file is a compatibility target, not a new ability.
 No runtime code, compendia or campaign-world changes are needed for this pass.
 Only mark a placeholder delivered after the approved files exist and validate.
+
+## Actual allocations after Batch 69 review
+
+Five approved subjects are delivered (six files); the current audit leaves
+148 subjects / 149 placeholder files. The next request is two atlases of nine.
+Batch 70 contains the four saved revisions plus five fresh subjects. Batch 71
+contains the next nine fresh subjects. Together these consume the first 23
+unique subjects of the frozen roadmap; fourteen are fresh in this request.
+The next untouched roadmap subject is at zero-based index 23. Check the actual
+review manifest before allocating further subjects; planned batch numbers no
+longer match these actual groups.
+
+The GM's durable direction is to avoid repeated gruff male survivor portraits:
+prefer the actual objects, hands, actions and generic adults, with no anime.
+That instruction is also recorded in Pipeline.md.
+
+- [Batch 70 candidates](../review/candidates/batch-70/README.md) and
+  [exact prompts](../review/candidates/batch-70/prompts.json).
+- [Batch 71 candidates](../review/candidates/batch-71/README.md) and
+  [exact prompts](../review/candidates/batch-71/prompts.json).
+
+`prepare_70_71.py` freezes these actual allocations and incoming decisions; do
+not rerun it. `compose_reference.py` only rebuilds their recorded contact sheets.
+`register.test.mjs` checks revision history, unrelated feedback preservation,
+idempotence and refusal of a newer GM correction in isolated fixtures.

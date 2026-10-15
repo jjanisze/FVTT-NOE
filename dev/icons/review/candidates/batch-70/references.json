@@ -1,0 +1,59 @@
+{
+  "role": "Exact native delivery targets; never used as style references",
+  "files": [
+    {
+      "key": "a-co-mi-tam",
+      "source": "icons/abilities/a-co-mi-tam.svg",
+      "variant": "default",
+      "sourceSha256": "85bde63ef0c7543abf85a5c53d3d35a3c1bb8d6eb0774a25c59afbfc59be1647"
+    },
+    {
+      "key": "amen",
+      "source": "icons/abilities/amen.svg",
+      "variant": "default",
+      "sourceSha256": "9062f3b8c40db134e5353eec62370cdeecb586ab463d9ba946dac4317cd0f615"
+    },
+    {
+      "key": "bez-tajemnic",
+      "source": "icons/abilities/bez-tajemnic.svg",
+      "variant": "default",
+      "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411"
+    },
+    {
+      "key": "clint",
+      "source": "icons/abilities/clint.svg",
+      "variant": "default",
+      "sourceSha256": "5ee6cc654890f6d6bf88be57504342dcbc53ffeea273004d6cf970576cee2d61"
+    },
+    {
+      "key": "cwaniacki-zwod",
+      "source": "icons/abilities/cwaniacki-zwod.svg",
+      "variant": "default",
+      "sourceSha256": "92cf284356f1cc96aeab112afc135f826720e6f89822a49dd76526aca5e58f44"
+    },
+    {
+      "key": "dobra-rada",
+      "source": "icons/abilities/dobra-rada.svg",
+      "variant": "default",
+      "sourceSha256": "9dfe5a97c8a9a000027fc7fa69ccb052eaf2b53099a2b72712a2ed0de24a9b79"
+    },
+    {
+      "key": "doktor-brain",
+      "source": "icons/abilities/doktor-brain.svg",
+      "variant": "default",
+      "sourceSha256": "6ab38a26190fd849a7d57137b1d58a07bf5c5b193d101e52adf87d4269536f91"
+    },
+    {
+      "key": "drugi-atak",
+      "source": "icons/abilities/drugi-atak.svg",
+      "variant": "default",
+      "sourceSha256": "8485b908a3ec63be916ca5e1be37cb3133fdab80874a615a3127ebadf97e49c2"
+    },
+    {
+      "key": "drzwi-w-drzwi",
+      "source": "icons/abilities/drzwi-w-drzwi.svg",
+      "variant": "default",
+      "sourceSha256": "e90a74d5a078cc693572423f53f02e5a598da739e570338c0de89f8d555bfae0"
+    }
+  ]
+}

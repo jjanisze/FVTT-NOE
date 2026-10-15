@@ -1,0 +1,16 @@
+{
+  "batch": 70,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "a-co-mi-tam": "a55494d44119df53f3cb90960c6999731056d7161ea9a02f364d72b0dc872f0d",
+    "amen": "71d62b8a0d636ac16abb4d84cf2bd57256a5201d70d66fb2616ed8e4a9642393",
+    "bez-tajemnic": "0b848779202667cd3a4477af74670a911a121fe5659319b711c9330da3ad1c79",
+    "clint": "4eac3a0f43a120e74ab080b04e2716f927cd095b2364b6336622b3af8a1cda2a",
+    "cwaniacki-zwod": "404e95d49b1acc449a140cf7c223b6627f01dd04984172e5a231a2e447af8dfb",
+    "dobra-rada": "04f7336cdc373189b805b382dd2679f819bb7b43efb22dd375a20f78d1741d25",
+    "doktor-brain": "af4096797837c8df4dc8089ecf87caac9d632e14750cd54c9d42233bb24b221a",
+    "drugi-atak": "0ff2929f23beb4cfd41be84504a3b66a01412fadcb9f3f72b008b2ed88cd7b0f",
+    "drzwi-w-drzwi": "ee76c80c7c806862e417857e18854ed04ed434f47c0758f85af14f03d9d2ebd9"
+  }
+}

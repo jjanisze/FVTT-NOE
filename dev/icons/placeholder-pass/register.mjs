@@ -1,4 +1,4 @@
-/** Add one nine-icon batch to GM review, preserving every saved decision byte. */
+/** Add nine review candidates, archiving saved revisions before selecting replacements. */
 import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
@@ -18,6 +18,9 @@ const manifestFile = path.join(REVIEW, "manifest.json");
 const feedbackFile = path.join(REVIEW, "feedback.json");
 const manifest = JSON.parse(fs.readFileSync(manifestFile, "utf8"));
 const feedback = fs.readFileSync(feedbackFile);
+const stored = JSON.parse(feedback);
+const originalDecisions = structuredClone(stored.items);
+const revisions = new Set();
 const ids = new Set(manifest.items.map(item => item.id));
 const cards = [];
 for (const subject of batch.subjects) {
@@ -27,35 +30,62 @@ for (const subject of batch.subjects) {
     const bytes = fs.readFileSync(path.join(ROOT, target.source));
     if (createHash("sha256").update(bytes).digest("hex") !== target.sourceSha256) throw new Error(`Production placeholder changed: ${target.source}`);
   }
-  const card = { id: subject.itemId, name: subject.name, tier: `Batch ${number} · ${subject.ownerLabel}`,
+  let card = { id: subject.itemId, name: subject.name, tier: `Batch ${number} · ${subject.ownerLabel}`,
     batch: number, placeholderKey: `${subject.kind}:${subject.key}`, target: subject.target,
     deliveryTargets: subject.deliveryTargets,
     context: `${subject.context} ${subject.ruleContext.slice(0, 500)} ${subject.note}`,
     request: subject.request, current: { src: "/" + subject.target, note: "Generated initials placeholder; all exact delivery filenames are recorded above." },
     candidates: [{ id: "atlas-a", label: `Batch ${number} · ${subject.name}`, src: source, note: subject.request }] };
+  if (subject.revisionOf) {
+    const existing = manifest.items.find(item => item.id === subject.itemId);
+    if (!existing || existing.status === "resolved") throw new Error("Revision card is missing or already delivered");
+    const candidate = { ...card.candidates[0], id: `batch${number}-revision`, label: `Batch ${number} · revised ${subject.name}` };
+    if (!existing.candidates.some(item => item.id === candidate.id)) {
+      if (JSON.stringify(stored.items[subject.itemId]) !== JSON.stringify(subject.revisionOf.feedback)) throw new Error("GM revision feedback changed; retain the newer decision");
+      const selected = existing.candidates.find(item => item.id === subject.revisionOf.candidateId);
+      if (selected?.src !== subject.revisionOf.selectedSource || createHash("sha256").update(fs.readFileSync(path.join(REVIEW, selected.src))).digest("hex") !== subject.revisionOf.sourceSha256) throw new Error("Revision reference changed");
+      existing.candidates.unshift(candidate);
+      stored.items[subject.itemId] = { itemId: subject.itemId, decision: "pending", candidateId: candidate.id,
+        notes: "", updatedAt: new Date().toISOString() };
+      revisions.add(subject.itemId);
+    } else if (JSON.stringify(existing.candidates.find(item => item.id === candidate.id)) !== JSON.stringify(candidate)) throw new Error("Existing revision candidate differs");
+    Object.assign(existing, { tier: card.tier, batch: number, request: subject.request, context: card.context });
+    card = existing;
+  } else if (!ids.has(card.id)) {
+    manifest.items.push(card);
+    ids.add(card.id);
+  } else if (JSON.stringify(manifest.items.find(item => item.id === card.id).candidates) !== JSON.stringify(card.candidates)) throw new Error("Existing review card differs; retain its history");
   cards.push(card);
-  if (!ids.has(card.id)) manifest.items.push(card);
-  else if (JSON.stringify(manifest.items.find(item => item.id === card.id).candidates) !== JSON.stringify(card.candidates)) throw new Error("Existing review card differs; retain its history");
 }
-manifest.title = `Batch ${number} · ${manifest.items.filter(item => item.status !== "resolved").length} awaiting GM review`;
+const active = manifest.items.filter(item => item.status !== "resolved");
+const batchNumbers = [...new Set(active.map(item => item.batch).filter(Boolean))].sort((a, b) => a - b);
+manifest.title = `${batchNumbers.length > 1 ? "Batches" : "Batch"} ${batchNumbers.join(" + ")} · ${active.length} awaiting GM review`;
 manifest.updated = batch.date;
+if (!fs.readFileSync(feedbackFile).equals(feedback)) throw new Error("GM feedback changed during registration preflight");
+for (const [id, value] of Object.entries(originalDecisions)) {
+  if (!revisions.has(id) && JSON.stringify(stored.items[id]) !== JSON.stringify(value)) throw new Error("Unrelated GM decision changed");
+}
 fs.writeFileSync(manifestFile, JSON.stringify(manifest, null, 2) + "\n");
 fs.writeFileSync(path.join(directory, "manifest-items.json"), JSON.stringify({ title: manifest.title, updated: manifest.updated, items: cards }, null, 2) + "\n");
-if (!fs.readFileSync(feedbackFile).equals(feedback)) throw new Error("GM feedback changed during registration");
+if (revisions.size) {
+  fs.writeFileSync(path.join(directory, "revision-feedback-before.json"), JSON.stringify(Object.fromEntries([...revisions].map(id => [id, originalDecisions[id]])), null, 2) + "\n");
+  fs.writeFileSync(feedbackFile, JSON.stringify(stored, null, 2) + "\n");
+} else if (!fs.readFileSync(feedbackFile).equals(feedback)) throw new Error("GM feedback changed during registration");
 
 const missingFile = path.join(ROOT, "dev/icons/MISSING.md");
 let missing = fs.readFileSync(missingFile, "utf8").replaceAll("\r\n", "\n");
 const next = Number(missing.match(/\*\*Next batch number: (\d+)\*\*/)?.[1]);
 if (!next) throw new Error("Next free batch is missing");
 missing = replaceQueueParagraph(missing, "**Next batch number:",
-  `**Next batch number: ${Math.max(next, number + 1)}** (Batch ${number}: nine replacement candidates await GM review;\nno production placeholders are replaced before approval).`);
+  `**Next batch number: ${Math.max(next, number + 1)}** (${active.length} candidates in ${batchNumbers.length} batches await GM review;\nproduction replacements require a saved approval).`);
 const begin = `<!-- placeholder-batch-${number}:start -->`, end = `<!-- placeholder-batch-${number}:end -->`;
 const lines = [begin, `## Queue (A) — Batch ${number} — 9 awaiting GM review`, "",
   "One 3×3 atlas in the established white-glyph style; native initials badges remain",
   "until the GM approves a selected candidate. Exact sources/hashes, generic prompts",
   `and targets: \`review/candidates/batch-${number}/\`.`, "",
   "| Cell | Item | Exact SVG delivery targets (+ WEBP) |", "|---|---|---|"];
-for (const subject of batch.subjects) lines.push(`| ${subject.cell} | ${subject.name} | ${subject.deliveryTargets.map(target => `\`${target.source}\``).join("; ")} |`);
+for (const subject of batch.subjects) lines.push(`| ${subject.cell} | ${subject.name}${subject.revisionOf ? " (revision)" : ""} | ${subject.deliveryTargets.map(target => `\`${target.source}\``).join("; ")} |`);
+if (batch.subjects.some(subject => subject.revisionOf)) lines.push("", "Saved revision notes and original selected-source hashes are retained in batch.json", "and revision-feedback-before.json. Old candidates remain available; only these", "revision cards are reset to pending with the new candidate selected.");
 lines.push("", "The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of",
   "nine). Later batch numbers are provisional: saved revisions take priority and",
   "may add batches. Base/active files share approved pixels; the existing active",
@@ -71,4 +101,4 @@ else {
   missing = missing.slice(0, anchor) + section + "\n\n" + missing.slice(anchor);
 }
 fs.writeFileSync(missingFile, missing);
-console.log(`Registered nine Batch ${number} cards; all saved feedback bytes retained, no assets installed`);
+console.log(`Registered nine Batch ${number} candidates; ${revisions.size} revision selections reset with exact feedback archived; unrelated decisions retained`);

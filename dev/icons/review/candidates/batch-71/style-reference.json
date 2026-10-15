@@ -1,0 +1,41 @@
+{
+  "role": "Every attached reference cell is STYLE ONLY. Replace ALL nine subjects with the NEW subjects below; do not copy any reference object or composition.",
+  "sources": [
+    {
+      "source": "icons/abilities/bystrzacha.webp",
+      "sha256": "b9f18860e548bf76cd2d289da226ae0ab6d1b25d432a47f7cc97399a3fb3c273"
+    },
+    {
+      "source": "icons/abilities/cichy-krok.webp",
+      "sha256": "1cad85f583007d0f2b81fb7b4db87cf37afb3fd8ffc20ded9eb6265245a5918c"
+    },
+    {
+      "source": "icons/abilities/brutalny-cios.webp",
+      "sha256": "8ca65071a9dcef5d25cad4bfc46ad9595ec41c38e12e7cb0e17a03ba3c6310c9"
+    },
+    {
+      "source": "icons/abilities/ucz-sie-ucz.webp",
+      "sha256": "41959b230e80d19208b554013b00cbffc6e26ca0c963ac93f4159f45db1d6ad4"
+    },
+    {
+      "source": "icons/actions/bebeszenie.webp",
+      "sha256": "02657f02449831b432ab5021f05c3b9556de603ca0e83f553f19e40d5450f866"
+    },
+    {
+      "source": "icons/abilities/pan-plaster.webp",
+      "sha256": "55cb1114cf070f45d8f5f00a0cac406ac9960a494fd4e24bcf64b3feecb5aaff"
+    },
+    {
+      "source": "icons/items/loot/paliwo_dobre.webp",
+      "sha256": "ec90a169a9d054c5450d3f2affa62534e3a66c9b3c5b39610784e7365b1abe6b"
+    },
+    {
+      "source": "icons/statuses/wylaczony.webp",
+      "sha256": "55cce4007bd462e3b4b98ff55cea4cdb74a383f1958564c1e512fd8ec8a0a9e9"
+    },
+    {
+      "source": "icons/abilities/siekierezada.webp",
+      "sha256": "9af9c5a402d6ce38d08ac65d6715399ef80c67fb0bddc94b21358fb6896fc99d"
+    }
+  ]
+}

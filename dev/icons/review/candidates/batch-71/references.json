@@ -1,0 +1,59 @@
+{
+  "role": "Exact native delivery targets; never used as style references",
+  "files": [
+    {
+      "key": "dwoch-na-jednego",
+      "source": "icons/abilities/dwoch-na-jednego.svg",
+      "variant": "default",
+      "sourceSha256": "abf98f1ae8f9018ba49f8b45cd85fd2a8b9fa6924e0a773dad9c08339dcf66d3"
+    },
+    {
+      "key": "dziewiec-zyc",
+      "source": "icons/abilities/dziewiec-zyc.svg",
+      "variant": "default",
+      "sourceSha256": "5052a5bb6298ba74d8ae2ea27a3353bc847d749e088078b50cabce0a6a7a9f26"
+    },
+    {
+      "key": "ekspert",
+      "source": "icons/abilities/ekspert.svg",
+      "variant": "default",
+      "sourceSha256": "232cba987b6f917ef305d366a6f0c46625c645084e43e17b491a2e681606b201"
+    },
+    {
+      "key": "elektronik",
+      "source": "icons/abilities/elektronik.svg",
+      "variant": "default",
+      "sourceSha256": "f390a9b077c44175d9cd142eb44c91d2b5ebcec9b555de04ec0e68c851576564"
+    },
+    {
+      "key": "emiter-emp",
+      "source": "icons/abilities/emiter-emp.svg",
+      "variant": "default",
+      "sourceSha256": "30e74a80bf10eebc2cc7c79b466d9323d765fb269da0c910addaccc500e1f96e"
+    },
+    {
+      "key": "empiryk",
+      "source": "icons/abilities/empiryk.svg",
+      "variant": "default",
+      "sourceSha256": "c3969d155f78163b17980cabe9279254fd483d9ad394b4eebefdf82b3fc4e9e2"
+    },
+    {
+      "key": "farmacja",
+      "source": "icons/abilities/farmacja.svg",
+      "variant": "default",
+      "sourceSha256": "c76a242ba8cd132a2de5d72c1b09dffbaba3e8aa8326ef3e26176b7d00db1b4f"
+    },
+    {
+      "key": "glowa-do-gory",
+      "source": "icons/abilities/glowa-do-gory.svg",
+      "variant": "default",
+      "sourceSha256": "d4c9125b3a8ab930e1da0ab57ff9efc0c9fa5773909f10506ce92e7ce4989a3b"
+    },
+    {
+      "key": "gola-klata",
+      "source": "icons/abilities/gola-klata.svg",
+      "variant": "default",
+      "sourceSha256": "96223da7b4372786dd758e23ca14db7c4c44b8f731e301fb0d1cca1547db1407"
+    }
+  ]
+}

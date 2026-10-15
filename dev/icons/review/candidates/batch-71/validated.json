@@ -1,0 +1,16 @@
+{
+  "batch": 71,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "dwoch-na-jednego": "6d6ed05f2bc9b6c1abe6d16d8498e18d3878c5a4cf888aac687a135d42371f15",
+    "dziewiec-zyc": "44515325c962def8d7f2508ed429013438d4252f9d3f0176864bbe25e7e63d75",
+    "ekspert": "7f3261157db66a30dab9ffb7b37540f0e202f650f244505e1bf38382033b8077",
+    "elektronik": "c51ba724c7475a10ef0f9606ceba01b81dab9c09ef5ad1a7e95d851d05aa869f",
+    "emiter-emp": "aea2a63977233ada0dd5b4cd71dfb13bab87888dfdff3c22537fcfec92c44bd0",
+    "empiryk": "cc377f798baae0b6f9fc441d4447b0c28032c9ef4d8d0ec455120c07e01c53d2",
+    "farmacja": "8aca069716cc1308bff1b7adb74b6de8e56936f185a29c1d8eb7ea943e5fc633",
+    "glowa-do-gory": "7c656851e95c9b2cf9fe095903fa246e603209b7a82e17bd56687c913df5dd9e",
+    "gola-klata": "8b614b3916e1eacc2c3f54206df3023b5048775be1aa8b561bf8d87b567bad3a"
+  }
+}
