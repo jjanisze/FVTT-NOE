@@ -1,0 +1,104 @@
+{
+  "date": "2026-10-16",
+  "batch": 87,
+  "approvedSubjects": 8,
+  "remainingSubjects": 4,
+  "installed": [
+    {
+      "itemId": "batch87-smiertelna-obelga",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-87/smiertelna-obelga.png",
+      "sourceSha256": "8e9fee60011e4a004e76322f78a02c00cb10416414de2ef400da5bec024fa51d",
+      "files": [
+        "icons/abilities/smiertelna-obelga.svg",
+        "icons/abilities/smiertelna-obelga.webp"
+      ],
+      "svgSha256": "cc960ce2e30383605f911c009c73dade8afd2bcad75cda600a7e3a447d3839fb",
+      "webpSha256": "9879d5e189fa76ec6523553094525769dbe18fa81234b13587abd95d7d998014"
+    },
+    {
+      "itemId": "batch87-tarcza-wiary",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-87/tarcza-wiary.png",
+      "sourceSha256": "de7efb95c370e94f35de833dc1fa9980ac2c6a6ecfe1912f59106d35f1fa28d4",
+      "files": [
+        "icons/abilities/tarcza-wiary.svg",
+        "icons/abilities/tarcza-wiary.webp"
+      ],
+      "svgSha256": "0b0e5371852366bfc9bc9d5eafca5dc648f25e6b9038a3a0481676e3c745aa4e",
+      "webpSha256": "daed2f8bea6099c39993c7501127ecdbba05d533112b4d236e59d5cb5c4ce5a7"
+    },
+    {
+      "itemId": "batch87-trening-w-zbroi",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-87/trening-w-zbroi.png",
+      "sourceSha256": "563f994ed9ba4f8e94a49d0f2b7919b4316e12ea0470fe1dab2bcebca0a8584c",
+      "files": [
+        "icons/abilities/trening-w-zbroi.svg",
+        "icons/abilities/trening-w-zbroi.webp"
+      ],
+      "svgSha256": "9c482b3ad323a00b2259492382a848215593b71034f4b563d7bc499dac552449",
+      "webpSha256": "b5abd257581033bbf6cc7e52b8e1f45a4fdbeb0cd4166ccb08f997d42775a34c"
+    },
+    {
+      "itemId": "batch87-truciciel",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-87/truciciel.png",
+      "sourceSha256": "5a4503a4bb5fbde1d05123841fe5ce3fe101496e78543dfbe08cf7ed38e7740d",
+      "files": [
+        "icons/abilities/truciciel.svg",
+        "icons/abilities/truciciel.webp"
+      ],
+      "svgSha256": "ba49077c9ed86a73dd109568291a38c7d887a8f347c44ee517af08355d5de49c",
+      "webpSha256": "9e793b6dcd3e2f36abb62485a54761e14c837b37d251cc054da6b04439b66784"
+    },
+    {
+      "itemId": "batch87-trzeci-atak",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-87/trzeci-atak.png",
+      "sourceSha256": "bc1ff582a09b8f98a121408cf58b42d0ffd8005198dc8a5650dbb59ec08b470d",
+      "files": [
+        "icons/abilities/trzeci-atak.svg",
+        "icons/abilities/trzeci-atak.webp"
+      ],
+      "svgSha256": "dd26b7a830a146c5e016515681869ac7b818a7995d7a48d72dc064af3295f7c2",
+      "webpSha256": "44d5eaa9e4f1acc873ef397f6a27d0bfd9ac6edcbddefcc9fac5a2d7d4db28c8"
+    },
+    {
+      "itemId": "batch87-twardosc",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-87/twardosc.png",
+      "sourceSha256": "8cda68a556c55c66347e3e8d707fc6a750c3ab66eb329166acc468a202a1dd88",
+      "files": [
+        "icons/abilities/twardosc.svg",
+        "icons/abilities/twardosc.webp"
+      ],
+      "svgSha256": "855ba2161c473f69b8336bbbb29e5ff9391060cda99619494f6de47eea63e8fe",
+      "webpSha256": "14b02543d7ea7f06096374f434f295d61d04542fb901b0035d53e66eced862b3"
+    },
+    {
+      "itemId": "batch87-ulubiona-bron-twardziel",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-87/ulubiona-bron-twardziel.png",
+      "sourceSha256": "9c2df64730f96ae7ffd687aec6de2fb2a198ca10c790070da1398d6691324da9",
+      "files": [
+        "icons/abilities/ulubiona-bron-twardziel.svg",
+        "icons/abilities/ulubiona-bron-twardziel.webp"
+      ],
+      "svgSha256": "4f0ba57f938b18e6a48f6f109fff1794c068026e0001a49e04f5c650804b1b18",
+      "webpSha256": "d5ee0b6859d1ed1d5453d3fdef5a028407546fc9faae7807fea132c9598ad98c"
+    },
+    {
+      "itemId": "batch87-ulubiona-bron-zlodziej",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-87/ulubiona-bron-zlodziej.png",
+      "sourceSha256": "4f34bc3c77f8f67d73e5f94f252490c879061b042da4e33de54167f00846114b",
+      "files": [
+        "icons/abilities/ulubiona-bron-zlodziej.svg",
+        "icons/abilities/ulubiona-bron-zlodziej.webp"
+      ],
+      "svgSha256": "86e4a11213091e7731b99499d9ee07e1dd2841b94fbd04691bbb812fd3c72f3f",
+      "webpSha256": "631c988a83a0997d6d9f90c66d2b7ca9b7bef8211e7cfa29985e89581deb8819"
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-16",
+  "batch": 87,
+  "feedbackBeforeSha256": "9789cd8f383c8197576178e3f5554202d072be3379afc40f01764a81e90c8253",
+  "active": [
+    {
+      "id": "batch87-smiertelna-obelga",
+      "name": "Śmiertelna obelga",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-87/smiertelna-obelga.png",
+      "sourceSha256": "8e9fee60011e4a004e76322f78a02c00cb10416414de2ef400da5bec024fa51d",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/smiertelna-obelga.svg",
+          "variant": "default",
+          "sourceSha256": "a91c9321996572a6ccc97f32dad2be58d916219392befce71bed9edc100404d2"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch87-smiertelna-obelga",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:11:55.334Z"
+      }
+    },
+    {
+      "id": "batch87-tarcza-wiary",
+      "name": "Tarcza wiary",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-87/tarcza-wiary.png",
+      "sourceSha256": "de7efb95c370e94f35de833dc1fa9980ac2c6a6ecfe1912f59106d35f1fa28d4",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/tarcza-wiary.svg",
+          "variant": "default",
+          "sourceSha256": "f15b76b5c233a3602845af8b4aa50a5750a05f6bd4f8eafddbb846fb649b00ab"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch87-tarcza-wiary",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:11:59.795Z"
+      }
+    },
+    {
+      "id": "batch87-trajektoria",
+      "name": "Trajektoria",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-87/trajektoria.png",
+      "sourceSha256": "8a9938722a9816e50e511ffd91bf3c93933f0c2dc72ce2fcd8b58f1ab0ca0b6c",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/trajektoria.svg",
+          "variant": "default",
+          "sourceSha256": "ee9e7f28b3d095225871f6ef754ef95dd68cfd7c6c16ed99f6344663f6453e9f"
+        }
+      ],
+      "notes": "Modify the image so the arc is split into a solid line before the bullet, dashed after. Retain the bullseye at the bottom. Put the bullet at the top/apex of the trajectory",
+      "feedback": {
+        "itemId": "batch87-trajektoria",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Modify the image so the arc is split into a solid line before the bullet, dashed after. Retain the bullseye at the bottom. Put the bullet at the top/apex of the trajectory",
+        "updatedAt": "2026-10-15T23:12:52.242Z"
+      }
+    },
+    {
+      "id": "batch87-trening-w-zbroi",
+      "name": "Trening w zbroi",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-87/trening-w-zbroi.png",
+      "sourceSha256": "563f994ed9ba4f8e94a49d0f2b7919b4316e12ea0470fe1dab2bcebca0a8584c",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/trening-w-zbroi.svg",
+          "variant": "default",
+          "sourceSha256": "3d074d4e7585a2bc35935f42f4d59b1133b1a307601d3461872a49ebe3894d68"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch87-trening-w-zbroi",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:12:57.776Z"
+      }
+    },
+    {
+      "id": "batch87-truciciel",
+      "name": "Truciciel",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-87/truciciel.png",
+      "sourceSha256": "5a4503a4bb5fbde1d05123841fe5ce3fe101496e78543dfbe08cf7ed38e7740d",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/truciciel.svg",
+          "variant": "default",
+          "sourceSha256": "19a03b9f1a10236a1d5b2bdc1809576c2ab03fcb0b0102c49453c874a62f8d15"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch87-truciciel",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:13:02.573Z"
+      }
+    },
+    {
+      "id": "batch87-trzeci-atak",
+      "name": "Trzeci atak",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-87/trzeci-atak.png",
+      "sourceSha256": "bc1ff582a09b8f98a121408cf58b42d0ffd8005198dc8a5650dbb59ec08b470d",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/trzeci-atak.svg",
+          "variant": "default",
+          "sourceSha256": "9d23db2fc45eaf9517eec2a5f9911af04926458c45c5b739d261e2269dba4ca2"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch87-trzeci-atak",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:13:07.401Z"
+      }
+    },
+    {
+      "id": "batch87-twardosc",
+      "name": "Twardość",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-87/twardosc.png",
+      "sourceSha256": "8cda68a556c55c66347e3e8d707fc6a750c3ab66eb329166acc468a202a1dd88",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/twardosc.svg",
+          "variant": "default",
+          "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch87-twardosc",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:13:11.947Z"
+      }
+    },
+    {
+      "id": "batch87-ulubiona-bron-twardziel",
+      "name": "Ulubiona broń",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-87/ulubiona-bron-twardziel.png",
+      "sourceSha256": "9c2df64730f96ae7ffd687aec6de2fb2a198ca10c790070da1398d6691324da9",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ulubiona-bron-twardziel.svg",
+          "variant": "default",
+          "sourceSha256": "dafcb8feb9dab7bd29f9657d5e8a122c40a44e74933726168a701b237b0d7962"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch87-ulubiona-bron-twardziel",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:13:16.994Z"
+      }
+    },
+    {
+      "id": "batch87-ulubiona-bron-zlodziej",
+      "name": "Ulubiona broń",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-87/ulubiona-bron-zlodziej.png",
+      "sourceSha256": "4f34bc3c77f8f67d73e5f94f252490c879061b042da4e33de54167f00846114b",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ulubiona-bron-zlodziej.svg",
+          "variant": "default",
+          "sourceSha256": "e59bb541928bb19c71ac057365f0874748ceebe5b881d3ffeb30c65ce1ae6ad8"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch87-ulubiona-bron-zlodziej",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:13:21.016Z"
+      }
+    }
+  ]
+}

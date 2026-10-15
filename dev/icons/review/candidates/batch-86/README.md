@@ -56,3 +56,8 @@ was needed. Contact sheets were inspected at 64/32/24/16 px, including both
 standalone edits. All 710 candidate pairs validate. The gallery has 18 pending
 cards, 50 options, all new candidates selected and no broken images. Evidence:
 `raw/review-preview.png` and `../../../placeholder-pass/progress-86-87.json`.
+
+Saved GM review: six approvals installed, including the focused Stylówa
+correction. Rzeźnik, Szybkie nogi and Szybkość kota carry exact saved notes
+into Batch 88. Decisions are in `reviewed.json`; exact delivered sources and
+hashes are in `reviewed-installed.json`.

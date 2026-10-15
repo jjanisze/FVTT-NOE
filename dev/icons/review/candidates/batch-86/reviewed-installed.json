@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-16",
+  "batch": 86,
+  "approvedSubjects": 6,
+  "remainingSubjects": 12,
+  "installed": [
+    {
+      "itemId": "batch81-serwisowanie",
+      "candidateId": "batch86-revision",
+      "source": "candidates/batch-86/serwisowanie.png",
+      "sourceSha256": "87b699b3e8eb7dceb50f173d286d0b655d473298031ae67e14e91444da452feb",
+      "files": [
+        "icons/abilities/serwisowanie.svg",
+        "icons/abilities/serwisowanie.webp"
+      ],
+      "svgSha256": "5832cb38249540029c4d3a60c81137ac2ac6abbe46c8fa508b292130440b8cee",
+      "webpSha256": "a89041fa3e9fa4bb50477c7da9035948f9d1a75a018da07f9b93cbc30a940e84"
+    },
+    {
+      "itemId": "batch83-spieprzysz-to",
+      "candidateId": "batch86-revision",
+      "source": "candidates/batch-86/spieprzysz-to.png",
+      "sourceSha256": "39de177a014d7016415b51e93263bfe23311a8c252fe9b25377f84f49b4913e0",
+      "files": [
+        "icons/abilities/spieprzysz-to.svg",
+        "icons/abilities/spieprzysz-to.webp"
+      ],
+      "svgSha256": "cb13ba38ae0d8bcebf1bcd539dbf93c13688dfe436984f54f45c1ef1523abeee",
+      "webpSha256": "2ec26a3a1950838b41230a4d2a26a264253495b79bec0601aefe41ea26ed0501"
+    },
+    {
+      "itemId": "batch84-stylowa",
+      "candidateId": "batch86-revision",
+      "source": "candidates/batch-86/stylowa.png",
+      "sourceSha256": "b0b7e2b788f1c17e9cbb08f62fd5827f4b2fa6de53755e11f99760fdf584f3c6",
+      "files": [
+        "icons/abilities/stylowa.svg",
+        "icons/abilities/stylowa.webp"
+      ],
+      "svgSha256": "0e7eb608df571d1b8126f023b7233ce8863e7674a30c0580fdf123c4c51bd9e4",
+      "webpSha256": "207f9b6db05d750517269b0829ec616d813a3356a9fc67b245a0c9e5998d3017"
+    },
+    {
+      "itemId": "batch85-szalencza-szarza",
+      "candidateId": "batch86-revision",
+      "source": "candidates/batch-86/szalencza-szarza.png",
+      "sourceSha256": "46edafb2e4a86115ddc7300fcf16e7a8984f71aba252baf4e82b63774b5f5715",
+      "files": [
+        "icons/abilities/szalencza-szarza.svg",
+        "icons/abilities/szalencza-szarza.webp"
+      ],
+      "svgSha256": "6030e922b481d9ca64083212ecbebdfd9547f2dbd8ae67708586b9aa33990a82",
+      "webpSha256": "6c2fe7830b118078612980433672a2282ac64b3a47cc8095a4e3473376c09798"
+    },
+    {
+      "itemId": "batch85-szybkie-badanie",
+      "candidateId": "batch86-revision",
+      "source": "candidates/batch-86/szybkie-badanie.png",
+      "sourceSha256": "c15259fbc8b11b37bb6074b7657b5a0fc9a8ce05fd5b245bfc0c129de501ee27",
+      "files": [
+        "icons/abilities/szybkie-badanie.svg",
+        "icons/abilities/szybkie-badanie.webp"
+      ],
+      "svgSha256": "adad465ca495f5bd9c7ac86f7c3a29e6fd3a14ac439ba741fab373e8bdb3a01d",
+      "webpSha256": "3afc600648a442e4f22439b38cae6ac35c37c00b6ce20325e3fa5bea6e100aaf"
+    },
+    {
+      "itemId": "batch85-szybkie-rece",
+      "candidateId": "batch86-revision",
+      "source": "candidates/batch-86/szybkie-rece.png",
+      "sourceSha256": "b36ab994090a8c1d879a6a30308c94876cd0b4f2526a342ab1186ede641b0f53",
+      "files": [
+        "icons/abilities/szybkie-rece.svg",
+        "icons/abilities/szybkie-rece.webp"
+      ],
+      "svgSha256": "17f4ed7d16e67b1f47189b3079be8d95160abc7826d785cd0cee180bcbcb6583",
+      "webpSha256": "28673c9928ff9a454fe05b3884068c6f49819e26ae72a599ddcdbd54171e2494"
+    }
+  ]
+}

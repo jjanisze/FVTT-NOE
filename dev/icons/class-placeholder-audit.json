@@ -1,18 +1,18 @@
 {
   "stats": {
     "date": "2026-10-16",
-    "confirmedPlaceholderFiles": 58,
-    "referencedPlaceholderFiles": 58,
+    "confirmedPlaceholderFiles": 44,
+    "referencedPlaceholderFiles": 44,
     "unmappedPlaceholderFiles": 0,
     "activeVariants": 0,
     "referencedActiveVariants": 0,
-    "abilityPlaceholderFiles": 34,
+    "abilityPlaceholderFiles": 20,
     "missingExpectedFiles": 0,
-    "artSubjects": 58,
+    "artSubjects": 44,
     "byKind": {
       "class": 6,
       "profession": 18,
-      "feature": 34
+      "feature": 20
     },
     "scope": "Exact generator signature plus canonical class/profession definitions; no world or pack reads"
   },
@@ -29,72 +29,12 @@
     },
     {
       "kind": "feature",
-      "id": "serwisowanie",
-      "label": "Serwisowanie",
-      "owner": "monter",
-      "variant": "default",
-      "source": "icons/abilities/serwisowanie.svg",
-      "sourceSha256": "43659a4c590f9892703aeb2c53a00353153e0794c7e15840196730ebfe4afb08",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "spieprzysz-to",
-      "label": "Spieprzysz to!",
-      "owner": "cwaniak",
-      "variant": "default",
-      "source": "icons/abilities/spieprzysz-to.svg",
-      "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "stylowa",
-      "label": "Stylówa",
-      "owner": "gwiazda",
-      "variant": "default",
-      "source": "icons/abilities/stylowa.svg",
-      "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "szalencza-szarza",
-      "label": "Szaleńcza szarża",
-      "owner": "brutal",
-      "variant": "default",
-      "source": "icons/abilities/szalencza-szarza.svg",
-      "sourceSha256": "9e95f50b6dbc04a319f31dcec9fb8d74148e1070eee6bad2a75b662766c30c5d",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "szybkie-badanie",
-      "label": "Szybkie badanie",
-      "owner": "spec",
-      "variant": "default",
-      "source": "icons/abilities/szybkie-badanie.svg",
-      "sourceSha256": "6c308b62d0703643d9c0ce5875908af22dc5c1956d0cc77e13f8e962b5e1de20",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "szybkie-nogi",
       "label": "Szybkie nogi",
       "owner": "zlodziej",
       "variant": "default",
       "source": "icons/abilities/szybkie-nogi.svg",
       "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "szybkie-rece",
-      "label": "Szybkie ręce",
-      "owner": "spec",
-      "variant": "default",
-      "source": "icons/abilities/szybkie-rece.svg",
-      "sourceSha256": "3c0b28c465cc993c60c6f501645989b90d99c505ada827d16ea0b8b3fdd9759b",
       "referenced": true
     },
     {
@@ -109,92 +49,12 @@
     },
     {
       "kind": "feature",
-      "id": "smiertelna-obelga",
-      "label": "Śmiertelna obelga",
-      "owner": "cwaniak",
-      "variant": "default",
-      "source": "icons/abilities/smiertelna-obelga.svg",
-      "sourceSha256": "a91c9321996572a6ccc97f32dad2be58d916219392befce71bed9edc100404d2",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "tarcza-wiary",
-      "label": "Tarcza wiary",
-      "owner": "kaznodzieja-nowej-ery",
-      "variant": "default",
-      "source": "icons/abilities/tarcza-wiary.svg",
-      "sourceSha256": "f15b76b5c233a3602845af8b4aa50a5750a05f6bd4f8eafddbb846fb649b00ab",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "trajektoria",
       "label": "Trajektoria",
       "owner": "spec",
       "variant": "default",
       "source": "icons/abilities/trajektoria.svg",
       "sourceSha256": "ee9e7f28b3d095225871f6ef754ef95dd68cfd7c6c16ed99f6344663f6453e9f",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "trening-w-zbroi",
-      "label": "Trening w zbroi",
-      "owner": "zolnierz",
-      "variant": "default",
-      "source": "icons/abilities/trening-w-zbroi.svg",
-      "sourceSha256": "3d074d4e7585a2bc35935f42f4d59b1133b1a307601d3461872a49ebe3894d68",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "truciciel",
-      "label": "Truciciel",
-      "owner": "szczur",
-      "variant": "default",
-      "source": "icons/abilities/truciciel.svg",
-      "sourceSha256": "19a03b9f1a10236a1d5b2bdc1809576c2ab03fcb0b0102c49453c874a62f8d15",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "trzeci-atak",
-      "label": "Trzeci atak",
-      "owner": "twardziel",
-      "variant": "default",
-      "source": "icons/abilities/trzeci-atak.svg",
-      "sourceSha256": "9d23db2fc45eaf9517eec2a5f9911af04926458c45c5b739d261e2269dba4ca2",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "twardosc",
-      "label": "Twardość",
-      "owner": "twardziel",
-      "variant": "default",
-      "source": "icons/abilities/twardosc.svg",
-      "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "ulubiona-bron-twardziel",
-      "label": "Ulubiona broń",
-      "owner": "twardziel",
-      "variant": "default",
-      "source": "icons/abilities/ulubiona-bron-twardziel.svg",
-      "sourceSha256": "dafcb8feb9dab7bd29f9657d5e8a122c40a44e74933726168a701b237b0d7962",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "ulubiona-bron-zlodziej",
-      "label": "Ulubiona broń",
-      "owner": "zlodziej",
-      "variant": "default",
-      "source": "icons/abilities/ulubiona-bron-zlodziej.svg",
-      "sourceSha256": "e59bb541928bb19c71ac057365f0874748ceebe5b881d3ffeb30c65ce1ae6ad8",
       "referenced": true
     },
     {
@@ -615,90 +475,12 @@
     },
     {
       "kind": "feature",
-      "id": "serwisowanie",
-      "label": "Serwisowanie",
-      "owner": "monter",
-      "files": [
-        {
-          "source": "icons/abilities/serwisowanie.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "spieprzysz-to",
-      "label": "Spieprzysz to!",
-      "owner": "cwaniak",
-      "files": [
-        {
-          "source": "icons/abilities/spieprzysz-to.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "stylowa",
-      "label": "Stylówa",
-      "owner": "gwiazda",
-      "files": [
-        {
-          "source": "icons/abilities/stylowa.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "szalencza-szarza",
-      "label": "Szaleńcza szarża",
-      "owner": "brutal",
-      "files": [
-        {
-          "source": "icons/abilities/szalencza-szarza.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "szybkie-badanie",
-      "label": "Szybkie badanie",
-      "owner": "spec",
-      "files": [
-        {
-          "source": "icons/abilities/szybkie-badanie.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "szybkie-nogi",
       "label": "Szybkie nogi",
       "owner": "zlodziej",
       "files": [
         {
           "source": "icons/abilities/szybkie-nogi.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "szybkie-rece",
-      "label": "Szybkie ręce",
-      "owner": "spec",
-      "files": [
-        {
-          "source": "icons/abilities/szybkie-rece.svg",
           "variant": "default",
           "status": "generated placeholder"
         }
@@ -719,116 +501,12 @@
     },
     {
       "kind": "feature",
-      "id": "smiertelna-obelga",
-      "label": "Śmiertelna obelga",
-      "owner": "cwaniak",
-      "files": [
-        {
-          "source": "icons/abilities/smiertelna-obelga.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "tarcza-wiary",
-      "label": "Tarcza wiary",
-      "owner": "kaznodzieja-nowej-ery",
-      "files": [
-        {
-          "source": "icons/abilities/tarcza-wiary.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "trajektoria",
       "label": "Trajektoria",
       "owner": "spec",
       "files": [
         {
           "source": "icons/abilities/trajektoria.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "trening-w-zbroi",
-      "label": "Trening w zbroi",
-      "owner": "zolnierz",
-      "files": [
-        {
-          "source": "icons/abilities/trening-w-zbroi.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "truciciel",
-      "label": "Truciciel",
-      "owner": "szczur",
-      "files": [
-        {
-          "source": "icons/abilities/truciciel.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "trzeci-atak",
-      "label": "Trzeci atak",
-      "owner": "twardziel",
-      "files": [
-        {
-          "source": "icons/abilities/trzeci-atak.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "twardosc",
-      "label": "Twardość",
-      "owner": "twardziel",
-      "files": [
-        {
-          "source": "icons/abilities/twardosc.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "ulubiona-bron-twardziel",
-      "label": "Ulubiona broń",
-      "owner": "twardziel",
-      "files": [
-        {
-          "source": "icons/abilities/ulubiona-bron-twardziel.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "ulubiona-bron-zlodziej",
-      "label": "Ulubiona broń",
-      "owner": "zlodziej",
-      "files": [
-        {
-          "source": "icons/abilities/ulubiona-bron-zlodziej.svg",
           "variant": "default",
           "status": "generated placeholder"
         }

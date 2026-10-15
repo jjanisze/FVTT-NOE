@@ -2936,10 +2936,10 @@
     },
     "batch81-rzeznik": {
       "itemId": "batch81-rzeznik",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch86-revision",
-      "notes": "",
-      "updatedAt": "2026-10-15T23:08:01.878Z"
+      "notes": "The knife should be even lower, targetting below the armpit. Make the expression afraid. ",
+      "updatedAt": "2026-10-15T23:10:02.843Z"
     },
     "batch81-rzuc-bron-i-gleba": {
       "itemId": "batch81-rzuc-bron-i-gleba",
@@ -2964,10 +2964,10 @@
     },
     "batch81-serwisowanie": {
       "itemId": "batch81-serwisowanie",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch86-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T23:08:01.879Z"
+      "updatedAt": "2026-10-15T23:10:16.283Z"
     },
     "batch81-skrytka": {
       "itemId": "batch81-skrytka",
@@ -3027,10 +3027,10 @@
     },
     "batch83-spieprzysz-to": {
       "itemId": "batch83-spieprzysz-to",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch86-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T23:08:01.881Z"
+      "updatedAt": "2026-10-15T23:10:21.085Z"
     },
     "batch83-sportowiec": {
       "itemId": "batch83-sportowiec",
@@ -3055,17 +3055,17 @@
     },
     "batch84-stylowa": {
       "itemId": "batch84-stylowa",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch86-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T23:08:01.881Z"
+      "updatedAt": "2026-10-15T23:10:25.074Z"
     },
     "batch85-szalencza-szarza": {
       "itemId": "batch85-szalencza-szarza",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch86-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T23:08:01.882Z"
+      "updatedAt": "2026-10-15T23:10:30.868Z"
     },
     "batch85-szary": {
       "itemId": "batch85-szary",
@@ -3097,31 +3097,94 @@
     },
     "batch85-szybkie-badanie": {
       "itemId": "batch85-szybkie-badanie",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch86-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T23:08:01.882Z"
+      "updatedAt": "2026-10-15T23:10:38.044Z"
     },
     "batch85-szybkie-nogi": {
       "itemId": "batch85-szybkie-nogi",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch86-revision",
-      "notes": "",
-      "updatedAt": "2026-10-15T23:08:01.883Z"
+      "notes": "Close, but you need to swap the feet and cross the legs.",
+      "updatedAt": "2026-10-15T23:11:04.736Z"
     },
     "batch85-szybkie-rece": {
       "itemId": "batch85-szybkie-rece",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch86-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T23:08:01.883Z"
+      "updatedAt": "2026-10-15T23:11:09.055Z"
     },
     "batch85-szybkosc-kota": {
       "itemId": "batch85-szybkosc-kota",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch86-revision",
+      "notes": "Move the lines elsewhere to better signal ducking of the cat. It looks like its butt is vibrating.",
+      "updatedAt": "2026-10-15T23:11:46.441Z"
+    },
+    "batch87-smiertelna-obelga": {
+      "itemId": "batch87-smiertelna-obelga",
+      "decision": "approve",
+      "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-15T23:08:01.883Z"
+      "updatedAt": "2026-10-15T23:11:55.334Z"
+    },
+    "batch87-tarcza-wiary": {
+      "itemId": "batch87-tarcza-wiary",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:11:59.795Z"
+    },
+    "batch87-trajektoria": {
+      "itemId": "batch87-trajektoria",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Modify the image so the arc is split into a solid line before the bullet, dashed after. Retain the bullseye at the bottom. Put the bullet at the top/apex of the trajectory",
+      "updatedAt": "2026-10-15T23:12:52.242Z"
+    },
+    "batch87-trening-w-zbroi": {
+      "itemId": "batch87-trening-w-zbroi",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:12:57.776Z"
+    },
+    "batch87-truciciel": {
+      "itemId": "batch87-truciciel",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:13:02.573Z"
+    },
+    "batch87-trzeci-atak": {
+      "itemId": "batch87-trzeci-atak",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:13:07.401Z"
+    },
+    "batch87-twardosc": {
+      "itemId": "batch87-twardosc",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:13:11.947Z"
+    },
+    "batch87-ulubiona-bron-twardziel": {
+      "itemId": "batch87-ulubiona-bron-twardziel",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:13:16.994Z"
+    },
+    "batch87-ulubiona-bron-zlodziej": {
+      "itemId": "batch87-ulubiona-bron-zlodziej",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:13:21.016Z"
     }
   }
 }

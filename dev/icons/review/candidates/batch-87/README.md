@@ -48,3 +48,7 @@ pairs validate. The combined gallery has 18 pending cards, 50 options and no
 broken images, with all new candidates selected. Evidence:
 `../batch-86/raw/review-preview.png` and
 `../../../placeholder-pass/progress-86-87.json`.
+
+Saved GM review: eight approvals installed. Trajektoria carries its exact arc,
+apex and dashed-line request into Batch 88. `reviewed.json` preserves every
+decision; `reviewed-installed.json` records selected sources and delivery hashes.

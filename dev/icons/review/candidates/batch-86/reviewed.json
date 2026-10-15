@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-16",
+  "batch": 86,
+  "feedbackBeforeSha256": "9789cd8f383c8197576178e3f5554202d072be3379afc40f01764a81e90c8253",
+  "active": [
+    {
+      "id": "batch81-rzeznik",
+      "name": "Rzeźnik",
+      "decision": "revise",
+      "candidateId": "batch86-revision",
+      "selectedSource": "candidates/batch-86/rzeznik.png",
+      "sourceSha256": "16a64677aee4cdefc82d0df8554664227d8da2462d1e0074cfd61b72e04ef1b1",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/rzeznik.svg",
+          "variant": "default",
+          "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+        }
+      ],
+      "notes": "The knife should be even lower, targetting below the armpit. Make the expression afraid. ",
+      "feedback": {
+        "itemId": "batch81-rzeznik",
+        "decision": "revise",
+        "candidateId": "batch86-revision",
+        "notes": "The knife should be even lower, targetting below the armpit. Make the expression afraid. ",
+        "updatedAt": "2026-10-15T23:10:02.843Z"
+      }
+    },
+    {
+      "id": "batch81-serwisowanie",
+      "name": "Serwisowanie",
+      "decision": "approve",
+      "candidateId": "batch86-revision",
+      "selectedSource": "candidates/batch-86/serwisowanie.png",
+      "sourceSha256": "87b699b3e8eb7dceb50f173d286d0b655d473298031ae67e14e91444da452feb",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/serwisowanie.svg",
+          "variant": "default",
+          "sourceSha256": "43659a4c590f9892703aeb2c53a00353153e0794c7e15840196730ebfe4afb08"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch81-serwisowanie",
+        "decision": "approve",
+        "candidateId": "batch86-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:10:16.283Z"
+      }
+    },
+    {
+      "id": "batch83-spieprzysz-to",
+      "name": "Spieprzysz to!",
+      "decision": "approve",
+      "candidateId": "batch86-revision",
+      "selectedSource": "candidates/batch-86/spieprzysz-to.png",
+      "sourceSha256": "39de177a014d7016415b51e93263bfe23311a8c252fe9b25377f84f49b4913e0",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/spieprzysz-to.svg",
+          "variant": "default",
+          "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch83-spieprzysz-to",
+        "decision": "approve",
+        "candidateId": "batch86-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:10:21.085Z"
+      }
+    },
+    {
+      "id": "batch84-stylowa",
+      "name": "Stylówa",
+      "decision": "approve",
+      "candidateId": "batch86-revision",
+      "selectedSource": "candidates/batch-86/stylowa.png",
+      "sourceSha256": "b0b7e2b788f1c17e9cbb08f62fd5827f4b2fa6de53755e11f99760fdf584f3c6",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/stylowa.svg",
+          "variant": "default",
+          "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch84-stylowa",
+        "decision": "approve",
+        "candidateId": "batch86-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:10:25.074Z"
+      }
+    },
+    {
+      "id": "batch85-szalencza-szarza",
+      "name": "Szaleńcza szarża",
+      "decision": "approve",
+      "candidateId": "batch86-revision",
+      "selectedSource": "candidates/batch-86/szalencza-szarza.png",
+      "sourceSha256": "46edafb2e4a86115ddc7300fcf16e7a8984f71aba252baf4e82b63774b5f5715",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szalencza-szarza.svg",
+          "variant": "default",
+          "sourceSha256": "9e95f50b6dbc04a319f31dcec9fb8d74148e1070eee6bad2a75b662766c30c5d"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch85-szalencza-szarza",
+        "decision": "approve",
+        "candidateId": "batch86-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:10:30.868Z"
+      }
+    },
+    {
+      "id": "batch85-szybkie-badanie",
+      "name": "Szybkie badanie",
+      "decision": "approve",
+      "candidateId": "batch86-revision",
+      "selectedSource": "candidates/batch-86/szybkie-badanie.png",
+      "sourceSha256": "c15259fbc8b11b37bb6074b7657b5a0fc9a8ce05fd5b245bfc0c129de501ee27",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-badanie.svg",
+          "variant": "default",
+          "sourceSha256": "6c308b62d0703643d9c0ce5875908af22dc5c1956d0cc77e13f8e962b5e1de20"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch85-szybkie-badanie",
+        "decision": "approve",
+        "candidateId": "batch86-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:10:38.044Z"
+      }
+    },
+    {
+      "id": "batch85-szybkie-nogi",
+      "name": "Szybkie nogi",
+      "decision": "revise",
+      "candidateId": "batch86-revision",
+      "selectedSource": "candidates/batch-86/szybkie-nogi.png",
+      "sourceSha256": "bdf5d9ad31df3dc62bc90e29f10f7f9c25218de9a971f7799e7fc5037fafcf40",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-nogi.svg",
+          "variant": "default",
+          "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398"
+        }
+      ],
+      "notes": "Close, but you need to swap the feet and cross the legs.",
+      "feedback": {
+        "itemId": "batch85-szybkie-nogi",
+        "decision": "revise",
+        "candidateId": "batch86-revision",
+        "notes": "Close, but you need to swap the feet and cross the legs.",
+        "updatedAt": "2026-10-15T23:11:04.736Z"
+      }
+    },
+    {
+      "id": "batch85-szybkie-rece",
+      "name": "Szybkie ręce",
+      "decision": "approve",
+      "candidateId": "batch86-revision",
+      "selectedSource": "candidates/batch-86/szybkie-rece.png",
+      "sourceSha256": "b36ab994090a8c1d879a6a30308c94876cd0b4f2526a342ab1186ede641b0f53",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-rece.svg",
+          "variant": "default",
+          "sourceSha256": "3c0b28c465cc993c60c6f501645989b90d99c505ada827d16ea0b8b3fdd9759b"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch85-szybkie-rece",
+        "decision": "approve",
+        "candidateId": "batch86-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:11:09.055Z"
+      }
+    },
+    {
+      "id": "batch85-szybkosc-kota",
+      "name": "Szybkość kota",
+      "decision": "revise",
+      "candidateId": "batch86-revision",
+      "selectedSource": "candidates/batch-86/szybkosc-kota.png",
+      "sourceSha256": "1c3703f16744b08af72ea655ca802393b9efc515fd0b3a15458dd33c787fa765",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkosc-kota.svg",
+          "variant": "default",
+          "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a"
+        }
+      ],
+      "notes": "Move the lines elsewhere to better signal ducking of the cat. It looks like its butt is vibrating.",
+      "feedback": {
+        "itemId": "batch85-szybkosc-kota",
+        "decision": "revise",
+        "candidateId": "batch86-revision",
+        "notes": "Move the lines elsewhere to better signal ducking of the cat. It looks like its butt is vibrating.",
+        "updatedAt": "2026-10-15T23:11:46.441Z"
+      }
+    }
+  ]
+}
