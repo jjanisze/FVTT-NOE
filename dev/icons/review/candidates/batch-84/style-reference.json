@@ -1,0 +1,41 @@
+{
+  "role": "Reference cells 1-7 are the EXACT selected revision sources. Apply each saved correction: knife and threatened expression; coherent underside radio hatch; shared symbolic speech bubble; missing lower beak; pointing hand; straight simplified caliper. Cell 7 replaces the die concept ENTIRELY with sneering mockery. Reference cells 8-9 are STYLE ONLY for the two new subjects. Keep every complete glyph within its own cell.",
+  "sources": [
+    {
+      "source": "dev/icons/review/candidates/batch-82/rzeznik.png",
+      "sha256": "06a30091e56403833cc5fb59424a213bca8d02804199bbc584b81542da489481"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-82/serwisowanie.png",
+      "sha256": "01d1c533f8d6592fda114d09e1071db44cfac909a236b951201e740071698b7e"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-83/slang.png",
+      "sha256": "3443ad430712d05d4e99ce6e78872f885ef0976514a03b6325a69215ffddab9f"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-83/sokole-oko.png",
+      "sha256": "b15845a25851593eba8c99e1ea752d7bd74278988bdbd801c86bbdb8e0af653a"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-83/solowa.png",
+      "sha256": "ee34168f6d67192ec9dc1784b971cfe058b80e9aae2b2ade3bfde923306e1ced"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-83/specjalizacja-spec.png",
+      "sha256": "885d72903d338d45428f0be7dbec0f9276bffb61ac354ce0ff4e8f5c572bb683"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-83/spieprzysz-to.png",
+      "sha256": "35afc3122c23364f8a8aa19fea53818f283218e8ee56c5bedda41c735fc18759"
+    },
+    {
+      "source": "icons/abilities/kocie-kosci.webp",
+      "sha256": "ee5d25740ab235e515c3e32405a25e41eceba7005bcd83cc2a6ebae4d52e30db"
+    },
+    {
+      "source": "icons/abilities/dziewiec-zyc.webp",
+      "sha256": "0cf20df0e99b7078ccc55a513e67d81a2672d09a49374eca0815731a2aa34317"
+    }
+  ]
+}

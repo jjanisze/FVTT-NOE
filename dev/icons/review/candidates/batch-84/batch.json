@@ -1,0 +1,357 @@
+{
+  "date": "2026-10-16",
+  "batch": 84,
+  "generalFeedback": "Apply exact saved revisions. Broad white glyphs, varied practical objects and generic adults; avoid gruff survivor defaults, anime, dithering and repeated dice.",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "rzeznik",
+      "name": "Rzeźnik",
+      "owner": "wyjadacz-option",
+      "ownerLabel": "wyjadacz-option",
+      "target": "icons/abilities/rzeznik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/rzeznik.svg",
+          "variant": "default",
+          "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+        }
+      ],
+      "ruleContext": "Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią.",
+      "context": "Class/profession ability: Rzeźnik; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "REVISION of reference cell 1. Preserve the target torso and raised arm, and the upper attacker's hand holding that wrist. ADD ONE complete practical KNIFE held by the LOWER FREE HAND, blade pointing toward the exposed underarm but NOT TOUCHING the target. Correct natural fingers/thumb around the knife grip, full short blade and guard. Change the target's expression from calm to visibly THREATENED AND ANGRY: one broad lowered brow, narrow natural eye cut and tense open mouth. Same pose and framing, all limbs coherent. Before-contact fictional threat only: no stab, impact, blood, wound, exposed tissue or gore. No extra hand, weapon or anime face.",
+      "itemId": "batch81-rzeznik",
+      "revisionOf": {
+        "id": "batch81-rzeznik",
+        "name": "Rzeźnik",
+        "decision": "revise",
+        "candidateId": "batch82-revision",
+        "selectedSource": "candidates/batch-82/rzeznik.png",
+        "sourceSha256": "06a30091e56403833cc5fb59424a213bca8d02804199bbc584b81542da489481",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/rzeznik.svg",
+            "variant": "default",
+            "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+          }
+        ],
+        "notes": "Add a knife into the free, lower hand. Change the expression of the figure into a threatened, angry or afraid one",
+        "feedback": {
+          "itemId": "batch81-rzeznik",
+          "decision": "revise",
+          "candidateId": "batch82-revision",
+          "notes": "Add a knife into the free, lower hand. Change the expression of the figure into a threatened, angry or afraid one",
+          "updatedAt": "2026-10-15T22:37:48.108Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "serwisowanie",
+      "name": "Serwisowanie",
+      "owner": "monter",
+      "ownerLabel": "Monter",
+      "target": "icons/abilities/serwisowanie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/serwisowanie.svg",
+          "variant": "default",
+          "sourceSha256": "43659a4c590f9892703aeb2c53a00353153e0794c7e15840196730ebfe4afb08"
+        }
+      ],
+      "ruleContext": "Kiedyś był taki serial o kolesiu, który ze sreberka, spinacza i butelki po denaturacie robił telefon. Otrzymujesz biegłość w narzędziach małego elektronika. Potrafisz naprawiać i produkować urządzenia elektroniczne i drobne mechanizmy. Potrzebne ci tylko narzędzia małego chemika, małego elektronika, surowce i czas. Otrzymujesz wylistowane poniżej schematy elektroniczne. SCHEMATY ELEKTRONICZNE NAZWA ST PRODUKCJA SUROWCE Agregat 20 50 godzin 1 CE, 15 CZ, 9 MK Akumulator 15 40 godzin 5 CH, 10 CZ, 5 MK Alternator 15 40 godzin 15 CZ, 1 CE, 4 MK Baterie 10 20 godzin 9 CH, 1 MK Celownik optyczny 15 20 godzin 5 CE, 5 CZ, 10 MK Defibrylator 20 60 godzin 5 CE, 20 CZ, 5 MK Detektor ruchu 25 80 godzin 30 CE, 5 CZ, 5 MK Krótkofalówka 10 24 godziny 1 CE, 10 CZ, 1 MK Kompas 5 4 godziny 1 CZ, 1 MK Laserowy wskaźnik celu 20 60 godzin 9 CE, 20 CZ, 1 MK Latarka 10 20 godzin 9 CZ, 1 MK Miernik skażenia chemicznego 20 50 godzin 5 CE, 5 CH, 10 CZ, 5 MK Miernik promieniowania 15 30 godzin 3 CE, 2 CH, 8 CZ, 2 MK Noktowizor 20 70 godzin 25 CE, 7 CZ, 3 MK Palnik acetylenowo-tlenowy 10 20 godzin 2 CH, 5 CZ, 3 MK Odtwarzacz CD 15 40 godzin 15 CE, 4 CZ, 1 MK Powiększalnik 20 60 godzin 9 CE, 20 CZ, 1 MK Radio 10 15 godzin 3 CE, 3 CZ, 1 MK Termowizor 30 200 godzin 90 CE, 5 CZ, 5 MK Turbina wiatrowa/wodna 20 60 godzin 5 CE, 10 CZ, 15 MK Wykrywacz metalu 15 30 godzin 5 CE, 5 CZ, 5 MK Wytrychy elektroniczne 20 50 godzin 20 CE, 4 CZ, 1 MK Zapalnik elektryczny 5 5 godzin 5 CZ Zegarek 10 20 godzin 9 CZ, 1MK",
+      "context": "Class/profession ability: Serwisowanie; owner Monter. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "request": "REDRAW the good existing concept in reference cell 2 more coherently. ONE compact handheld RADIO in three-quarter view, one CONTINUOUS SOLID ANTENNA joined to the top, one large tuning knob and two broad speaker slots. The UNDERSIDE faces partly toward the viewer. ONE rectangular SERVICE HATCH on that BOTTOM PLANE opens downward on ONE clear hinge; a complete soldering iron from lower-right meets the bottom service opening. Vertical side panels stay CLOSED. Broad clean device planes, simple solid handle and soldering tip, no disconnected antenna fragments, floating panels, tiny circuitry, labels, numbers or person.",
+      "itemId": "batch81-serwisowanie",
+      "revisionOf": {
+        "id": "batch81-serwisowanie",
+        "name": "Serwisowanie",
+        "decision": "revise",
+        "candidateId": "batch82-revision",
+        "selectedSource": "candidates/batch-82/serwisowanie.png",
+        "sourceSha256": "01d1c533f8d6592fda114d09e1071db44cfac909a236b951201e740071698b7e",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/serwisowanie.svg",
+            "variant": "default",
+            "sourceSha256": "43659a4c590f9892703aeb2c53a00353153e0794c7e15840196730ebfe4afb08"
+          }
+        ],
+        "notes": "Good concept, give it another try.",
+        "feedback": {
+          "itemId": "batch81-serwisowanie",
+          "decision": "revise",
+          "candidateId": "batch82-revision",
+          "notes": "Good concept, give it another try.",
+          "updatedAt": "2026-10-15T22:38:41.788Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "slang",
+      "name": "Slang",
+      "owner": "kurier",
+      "ownerLabel": "Kurier",
+      "target": "icons/abilities/slang.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/slang.svg",
+          "variant": "default",
+          "sourceSha256": "489859c79ecce12c7e1b0f181602b1783d0f6a30b4c2d8a804bb5b86cbb6b03a"
+        }
+      ],
+      "ruleContext": "Wiesz, jak gadać z tubylcami w każdym zakątku Podzielonych Stanów. Szybko rozpoznajesz lokalnych złodziejaszków, prawidłowo oceniasz zakapiorów i wiesz, co powiedzieć, żeby zrobić jakiś biznes. W kilka chwil zdobywasz informacje o tym, kto tu rządzi, jakie ma problemy i z kim lepiej nie zadzierać. Na to wszystko wystarczy ci godzina i kilka fajek. A kiedy MG prosi cię o testy Perswazji lub Śledztwa związane z tym półświatkiem, masz w nich Ułatwienie. Dlaczego? Bo jesteś: spoko ziom, swój na każdej dzielni, co złego to nie ja.",
+      "context": "Class/profession ability: Slang; owner Kurier. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "request": "REVISION of reference cell 3. Keep BOTH generic adult heads, cigarette and small hand. REMOVE THE TWO TRIANGULAR SPEECH STROKES. Replace them with ONE large SHARED SPEECH BUBBLE ABOVE BOTH HEADS, with TWO broad short tails, one toward each mouth. Inside the bubble place exactly TWO simple fictional STREET/PRISON-TATTOO MOTIFS: ONE plain SKULL and ONE BROKEN CHAIN LINK. Broad stencil symbols only, no gore or thin tiny detail. The bubble is shared, not two separate bubbles. No letters, numerals, real gang insignia, logos, anime, beard or extra head.",
+      "itemId": "batch83-slang",
+      "revisionOf": {
+        "id": "batch83-slang",
+        "name": "Slang",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-83/slang.png",
+        "sourceSha256": "3443ad430712d05d4e99ce6e78872f885ef0976514a03b6325a69215ffddab9f",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/slang.svg",
+            "variant": "default",
+            "sourceSha256": "489859c79ecce12c7e1b0f181602b1783d0f6a30b4c2d8a804bb5b86cbb6b03a"
+          }
+        ],
+        "notes": "Replace the triangles with a speech bubble shared by both characters, and some gang symbols or prison tattoo inspired stuff inside",
+        "feedback": {
+          "itemId": "batch83-slang",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Replace the triangles with a speech bubble shared by both characters, and some gang symbols or prison tattoo inspired stuff inside",
+          "updatedAt": "2026-10-15T22:40:02.246Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "sokole-oko",
+      "name": "Sokole oko",
+      "owner": "wyjadacz-option",
+      "ownerLabel": "wyjadacz-option",
+      "target": "icons/abilities/sokole-oko.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/sokole-oko.svg",
+          "variant": "default",
+          "sourceSha256": "f77e36828e55586e9b5ef5a3a6ccee4af8e64cc8eac5133e7a09dba91479cff0"
+        }
+      ],
+      "ruleContext": "Otrzymujesz modyfikator +3 do Testów Ataku bronią palną, dystansową i rzucaną.",
+      "context": "Class/profession ability: Sokole oko; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "request": "REVISION of reference cell 4. Preserve the existing falcon-eye shape, feather-edge silhouette, broad crosshair, upper beak and overall scale. ADD THE MISSING LOWER BEAK: one short broad lower MANDIBLE naturally attached below the hooked upper bill, separated by ONE clear BLACK MOUTH GAP. Lower bill points forward-right and meets below the upper hooked tip; both upper and lower beak bases join the bird's face coherently. Do not leave a floating white triangle or replace the whole eye concept. No tiny feather texture, extra eye, anime lashes, text or portrait.",
+      "itemId": "batch83-sokole-oko",
+      "revisionOf": {
+        "id": "batch83-sokole-oko",
+        "name": "Sokole oko",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-83/sokole-oko.png",
+        "sourceSha256": "b15845a25851593eba8c99e1ea752d7bd74278988bdbd801c86bbdb8e0af653a",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/sokole-oko.svg",
+            "variant": "default",
+            "sourceSha256": "f77e36828e55586e9b5ef5a3a6ccee4af8e64cc8eac5133e7a09dba91479cff0"
+          }
+        ],
+        "notes": "Almost perfect - but the bird is missing it's lower beak",
+        "feedback": {
+          "itemId": "batch83-sokole-oko",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Almost perfect - but the bird is missing it's lower beak",
+          "updatedAt": "2026-10-15T22:40:31.864Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "solowa",
+      "name": "Solówa",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/abilities/solowa.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/solowa.svg",
+          "variant": "default",
+          "sourceSha256": "16292b6c0c8db69ab2f8bea7e081414ba89c3a547b6e38d4c3617b090b74a98e"
+        }
+      ],
+      "ruleContext": "W Akcji Bonusowej możesz wybrać istotę, którą widzisz w zasięgu 18 metrów. Prowokujesz ją do atakowania tylko ciebie, jeśli nie zda ona RO na Inteligencję o ST 8 plus twoja Premia Biegłości i modyfikator Siły. Efekt trwa, dopóki istota cię widzi lub zda Rzut Obronny na końcu swojej następnej tury.",
+      "context": "Class/profession ability: Solówa; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 5,
+      "request": "REVISION of reference cell 5. Keep both complete adult figures, their positions and the right opponent's guard. Change ONLY the LEFT figure's raised beckoning hand into an unmistakable POINTING HAND: arm extends toward the RIGHT opponent, ONE long straight INDEX FINGER points directly AT THAT OPPONENT; thumb and remaining three fingers fold naturally into the palm. No open beckoning palm or curled pointing finger. Generic smooth heads and ordinary adult anatomy, complete limbs, broad black gap, no weapon, injury, anime or extra person.",
+      "itemId": "batch83-solowa",
+      "revisionOf": {
+        "id": "batch83-solowa",
+        "name": "Solówa",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-83/solowa.png",
+        "sourceSha256": "ee34168f6d67192ec9dc1784b971cfe058b80e9aae2b2ade3bfde923306e1ced",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/solowa.svg",
+            "variant": "default",
+            "sourceSha256": "16292b6c0c8db69ab2f8bea7e081414ba89c3a547b6e38d4c3617b090b74a98e"
+          }
+        ],
+        "notes": "The man on the left should be pointing ",
+        "feedback": {
+          "itemId": "batch83-solowa",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "The man on the left should be pointing ",
+          "updatedAt": "2026-10-15T22:41:00.183Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "specjalizacja-spec",
+      "name": "Specjalizacja",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/abilities/specjalizacja-spec.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/specjalizacja-spec.svg",
+          "variant": "default",
+          "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+        }
+      ],
+      "ruleContext": "Wybierasz dwie ze swoich biegłości w umiejętnościach albo dwie biegłości w narzędziach, lub jedną biegłość w umiejętności i jedną biegłość w narzędziach. W każdym teście wykonywanym z ich użyciem Premia Biegłości liczy się podwójnie.",
+      "context": "Class/profession ability: Specjalizacja; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 6,
+      "request": "REVISION of reference cell 6. Keep the crossed CALIPER AND SCREWDRIVER concept, but redraw the caliper with perfectly STRAIGHT mechanical geometry. One straight broad rectangular MAIN BEAM. ONE fixed measuring jaw at the left end and ONE sliding jaw near the middle descend PERPENDICULAR to the beam; the two long measuring-jaw faces are PARALLEL and face each other across one broad open black gap. Slider is ONE plain rectangular block wrapped around the straight beam. Omit small inner jaws, depth rod and scale markings. Both jaws, beam and slider are rigid, square and unbent. Complete simple screwdriver crosses behind with a black overlap cut. No curved caliper beam, wrench head, extra jaws, fine ticks, text, hands or cog.",
+      "itemId": "batch83-specjalizacja-spec",
+      "revisionOf": {
+        "id": "batch83-specjalizacja-spec",
+        "name": "Specjalizacja",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-83/specjalizacja-spec.png",
+        "sourceSha256": "885d72903d338d45428f0be7dbec0f9276bffb61ac354ce0ff4e8f5c572bb683",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/specjalizacja-spec.svg",
+            "variant": "default",
+            "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+          }
+        ],
+        "notes": "The calipers are slightly bent and mis-shapen. Simplify and redraw.",
+        "feedback": {
+          "itemId": "batch83-specjalizacja-spec",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "The calipers are slightly bent and mis-shapen. Simplify and redraw.",
+          "updatedAt": "2026-10-15T22:41:26.141Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "spieprzysz-to",
+      "name": "Spieprzysz to!",
+      "owner": "cwaniak",
+      "ownerLabel": "Cwaniak",
+      "target": "icons/abilities/spieprzysz-to.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/spieprzysz-to.svg",
+          "variant": "default",
+          "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+        }
+      ],
+      "ruleContext": "Potrafisz każdego wytrącić z równowagi. Kiedy istota, którą widzisz w promieniu 18 m, wykonała udany Test Ataku lub Rzut Obronny, możesz w swojej Reakcji sprawić, by powtórzyła rzut i wybrała gorszy wynik. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po ukończeniu Krótkiego odpoczynku.",
+      "context": "Class/profession ability: Spieprzysz to!; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 7,
+      "request": "ENTIRELY NEW CONCEPT: vicious MOCKERY, with NO DICE. ONE ordinary generic ADULT HEAD AND SHORT SHOULDERS in three-quarter view facing RIGHT, sneering scornfully: one raised broad eyebrow, one narrowed natural eye and an OPEN MOUTH with one corner curled upward. ONE complete bare hand beside the face POINTS DERISIVELY right, while TWO short broad angular speech strokes emerge from the mouth. Sober human adult expression, minimal broad facial cuts, short neutral hair, no beard portrait, anime, oversized eyes, clown face, lettering, speech-bubble text, book or extra person.",
+      "itemId": "batch83-spieprzysz-to",
+      "revisionOf": {
+        "id": "batch83-spieprzysz-to",
+        "name": "Spieprzysz to!",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-83/spieprzysz-to.png",
+        "sourceSha256": "35afc3122c23364f8a8aa19fea53818f283218e8ee56c5bedda41c735fc18759",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/spieprzysz-to.svg",
+            "variant": "default",
+            "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+          }
+        ],
+        "notes": "No dice. Need different concept. Think vicious mockery, or sneering",
+        "feedback": {
+          "itemId": "batch83-spieprzysz-to",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "No dice. Need different concept. Think vicious mockery, or sneering",
+          "updatedAt": "2026-10-15T22:42:27.018Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "strzelec",
+      "name": "Strzelec",
+      "owner": "zabojca",
+      "ownerLabel": "Zabójca",
+      "target": "icons/abilities/strzelec.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/strzelec.svg",
+          "variant": "default",
+          "sourceSha256": "83f2d526727e86cc244e8b6a68f665534890643d70b4b9348734e1f569f73a95"
+        }
+      ],
+      "ruleContext": "Jedni lubią zabijać nożem, inni cenią truciznę, a ty wolisz zabijać z daleka. Jeżeli przygotujesz stanowisko snajperskie z bronią z celownikiem optycznym i poświęcisz 5 rund na precyzyjne mierzenie do celu, to dopóki się nie poruszysz, zyskujesz dwie poniższe, dodatkowe korzyści. Powiększenie. Trzykrotne zwiększenie maksymalnego zasięgu dla tej broni. Przewaga balistyczna. Brak Utrudnienia za strzelanie na dalekim dystansie tą bronią.",
+      "context": "Class/profession ability: Strzelec; owner Zabójca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 8,
+      "request": "ONE complete practical SCOPED RIFLE resting on ONE broad SANDBAG with a deployed TWO-LEG BIPOD below the front barrel. Clear shoulder stock, long straight barrel, simple scope tube above the receiver and empty trigger guard. A prepared stable sniper position, no person. Broad white structural shapes, sparse black cuts, no fine screws, logos, labels, numerals, muzzle flash, tiny scope reticle or background landscape.",
+      "itemId": "batch84-strzelec"
+    },
+    {
+      "kind": "feature",
+      "key": "stylowa",
+      "name": "Stylówa",
+      "owner": "gwiazda",
+      "ownerLabel": "Gwiazda",
+      "target": "icons/abilities/stylowa.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/stylowa.svg",
+          "variant": "default",
+          "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+        }
+      ],
+      "ruleContext": "Wygląd jest twoją wizytówką, ma robić wrażenie i podkreślać wyjątkowość twojego charakteru. Ubierasz się w drogie ciuchy, nosisz na widoku cenne gadżety i drogą biżuterię. Te błyskotki mogą przyciągać złodziei, ale kij im w oko, bo to robi ci imidż na dzielni. Każde 50 gambli towarów luksusowych, które nosisz na sobie, zapewnia ci premię +1 do testów Wpływania.",
+      "context": "Class/profession ability: Stylówa; owner Gwiazda. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 9,
+      "request": "ONE complete pair of practical AVIATOR SUNGLASSES above ONE heavy CURB-CHAIN NECKLACE arranged in a compact loop. Broad lens frames and bridge, large clean black lens openings, necklace made of only SIX broad joined links. Expensive wearable style in a rough wasteland, sober practical objects. No head, face, suit jacket, text, logo, currency sign, tiny jewelry engraving, sparkle or ornate pendant.",
+      "itemId": "batch84-stylowa"
+    }
+  ]
+}

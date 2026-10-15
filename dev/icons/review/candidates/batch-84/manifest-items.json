@@ -1,0 +1,321 @@
+{
+  "title": "Batch 84 · 9 awaiting GM review",
+  "updated": "2026-10-16",
+  "items": [
+    {
+      "id": "batch81-rzeznik",
+      "name": "Rzeźnik",
+      "tier": "Batch 84 · wyjadacz-option",
+      "batch": 84,
+      "placeholderKey": "feature:rzeznik",
+      "target": "icons/abilities/rzeznik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/rzeznik.svg",
+          "variant": "default",
+          "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+        }
+      ],
+      "context": "Class/profession ability: Rzeźnik; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedy atakujesz dowolną bronią, nie trzymając w drugiej ręce innej broni, otrzymujesz modyfikator +3 do obrażeń zadawanych tą bronią. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 1. Preserve the target torso and raised arm, and the upper attacker's hand holding that wrist. ADD ONE complete practical KNIFE held by the LOWER FREE HAND, blade pointing toward the exposed underarm but NOT TOUCHING the target. Correct natural fingers/thumb around the knife grip, full short blade and guard. Change the target's expression from calm to visibly THREATENED AND ANGRY: one broad lowered brow, narrow natural eye cut and tense open mouth. Same pose and framing, all limbs coherent. Before-contact fictional threat only: no stab, impact, blood, wound, exposed tissue or gore. No extra hand, weapon or anime face.",
+      "current": {
+        "src": "/icons/abilities/rzeznik.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch84-revision",
+          "label": "Batch 84 · revised Rzeźnik",
+          "src": "candidates/batch-84/rzeznik.png",
+          "note": "REVISION of reference cell 1. Preserve the target torso and raised arm, and the upper attacker's hand holding that wrist. ADD ONE complete practical KNIFE held by the LOWER FREE HAND, blade pointing toward the exposed underarm but NOT TOUCHING the target. Correct natural fingers/thumb around the knife grip, full short blade and guard. Change the target's expression from calm to visibly THREATENED AND ANGRY: one broad lowered brow, narrow natural eye cut and tense open mouth. Same pose and framing, all limbs coherent. Before-contact fictional threat only: no stab, impact, blood, wound, exposed tissue or gore. No extra hand, weapon or anime face."
+        },
+        {
+          "id": "batch82-revision",
+          "label": "Batch 82 · revised Rzeźnik",
+          "src": "candidates/batch-82/rzeznik.png",
+          "note": "NEW CONCEPT requested, shown BEFORE CONTACT and NON-GRAPHIC. ONE generic adult TARGET'S upper torso at RIGHT with one arm raised high. ONE attacker's bare HAND enters from upper-left and HOLDS UP that raised WRIST. The attacker's OTHER bare hand is a complete CLENCHED FIST drawn back at lower-left, poised toward the target's exposed UNDERARM below the raised shoulder. The attacker is represented ONLY by those two hands and short forearms, no second head. Target has one smooth small head and natural joined neck/shoulder/elbow. Clear black separation identifies each arm, holding hand and poised fist. No cleaver, weapon, impact, injury, blood, wound, exposed anatomy, gore or tiny face detail."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 81 · Rzeźnik",
+          "src": "candidates/batch-81/rzeznik.png",
+          "note": "ONE complete BARE ADULT HAND gripping ONE large sturdy MEAT CLEAVER raised diagonally. Broad rectangular blade with a single clean cutting edge, short complete grip and coherent fingers/thumb/wrist. A powerful single-weapon melee strike, sober inventory object. No other weapon, victim, wound, blood, gore, face, blade engraving or tiny scratches."
+        }
+      ]
+    },
+    {
+      "id": "batch81-serwisowanie",
+      "name": "Serwisowanie",
+      "tier": "Batch 84 · Monter",
+      "batch": 84,
+      "placeholderKey": "feature:serwisowanie",
+      "target": "icons/abilities/serwisowanie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/serwisowanie.svg",
+          "variant": "default",
+          "sourceSha256": "43659a4c590f9892703aeb2c53a00353153e0794c7e15840196730ebfe4afb08"
+        }
+      ],
+      "context": "Class/profession ability: Serwisowanie; owner Monter. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Kiedyś był taki serial o kolesiu, który ze sreberka, spinacza i butelki po denaturacie robił telefon. Otrzymujesz biegłość w narzędziach małego elektronika. Potrafisz naprawiać i produkować urządzenia elektroniczne i drobne mechanizmy. Potrzebne ci tylko narzędzia małego chemika, małego elektronika, surowce i czas. Otrzymujesz wylistowane poniżej schematy elektroniczne. SCHEMATY ELEKTRONICZNE NAZWA ST PRODUKCJA SUROWCE Agregat 20 50 godzin 1 CE, 15 CZ, 9 MK Akumulator 15 40 godzin 5 CH, 10 CZ, 5 Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REDRAW the good existing concept in reference cell 2 more coherently. ONE compact handheld RADIO in three-quarter view, one CONTINUOUS SOLID ANTENNA joined to the top, one large tuning knob and two broad speaker slots. The UNDERSIDE faces partly toward the viewer. ONE rectangular SERVICE HATCH on that BOTTOM PLANE opens downward on ONE clear hinge; a complete soldering iron from lower-right meets the bottom service opening. Vertical side panels stay CLOSED. Broad clean device planes, simple solid handle and soldering tip, no disconnected antenna fragments, floating panels, tiny circuitry, labels, numbers or person.",
+      "current": {
+        "src": "/icons/abilities/serwisowanie.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch84-revision",
+          "label": "Batch 84 · revised Serwisowanie",
+          "src": "candidates/batch-84/serwisowanie.png",
+          "note": "REDRAW the good existing concept in reference cell 2 more coherently. ONE compact handheld RADIO in three-quarter view, one CONTINUOUS SOLID ANTENNA joined to the top, one large tuning knob and two broad speaker slots. The UNDERSIDE faces partly toward the viewer. ONE rectangular SERVICE HATCH on that BOTTOM PLANE opens downward on ONE clear hinge; a complete soldering iron from lower-right meets the bottom service opening. Vertical side panels stay CLOSED. Broad clean device planes, simple solid handle and soldering tip, no disconnected antenna fragments, floating panels, tiny circuitry, labels, numbers or person."
+        },
+        {
+          "id": "batch82-revision",
+          "label": "Batch 82 · revised Serwisowanie",
+          "src": "candidates/batch-82/serwisowanie.png",
+          "note": "REVISION of reference cell 8. Preserve ONE sturdy handheld RADIO, its single antenna, tuning knob, two speaker slots and complete SOLDERING IRON. MOVE THE SERVICE OPENING FROM THE SIDE TO THE UNDERSIDE OF THE RADIO. Tilt the radio slightly into a simple three-quarter view so its BOTTOM PLANE is clearly visible. A single broad rectangular hatch on that BOTTOM face hinges DOWNWARD; the soldering tip approaches the bottom opening from lower-right. All vertical side panels remain SOLID AND CLOSED. Not a lower side or front door. Broad structural cuts and coherent device geometry, no tiny circuitry, labels, numbers, extra antenna or person."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 81 · Serwisowanie",
+          "src": "candidates/batch-81/serwisowanie.png",
+          "note": "ONE sturdy HANDHELD RADIO shown frontally with ONE short broad ANTENNA, a large plain tuning knob and TWO broad speaker slots. A complete SOLDERING IRON with thick handle approaches one simple open SERVICE PANEL at the lower side. Clear coherent device and tool, sparse broad structural cuts only. No person, hand, tiny circuitry, schematic, instructions, markings, text, numerals or giant cog."
+        }
+      ]
+    },
+    {
+      "id": "batch83-slang",
+      "name": "Slang",
+      "tier": "Batch 84 · Kurier",
+      "batch": 84,
+      "placeholderKey": "feature:slang",
+      "target": "icons/abilities/slang.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/slang.svg",
+          "variant": "default",
+          "sourceSha256": "489859c79ecce12c7e1b0f181602b1783d0f6a30b4c2d8a804bb5b86cbb6b03a"
+        }
+      ],
+      "context": "Class/profession ability: Slang; owner Kurier. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Wiesz, jak gadać z tubylcami w każdym zakątku Podzielonych Stanów. Szybko rozpoznajesz lokalnych złodziejaszków, prawidłowo oceniasz zakapiorów i wiesz, co powiedzieć, żeby zrobić jakiś biznes. W kilka chwil zdobywasz informacje o tym, kto tu rządzi, jakie ma problemy i z kim lepiej nie zadzierać. Na to wszystko wystarczy ci godzina i kilka fajek. A kiedy MG prosi cię o testy Perswazji lub Śledztwa związane z tym półświatkiem, masz w nich Ułatwienie. Dlaczego? Bo jesteś: spoko ziom, swój na każd Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 3. Keep BOTH generic adult heads, cigarette and small hand. REMOVE THE TWO TRIANGULAR SPEECH STROKES. Replace them with ONE large SHARED SPEECH BUBBLE ABOVE BOTH HEADS, with TWO broad short tails, one toward each mouth. Inside the bubble place exactly TWO simple fictional STREET/PRISON-TATTOO MOTIFS: ONE plain SKULL and ONE BROKEN CHAIN LINK. Broad stencil symbols only, no gore or thin tiny detail. The bubble is shared, not two separate bubbles. No letters, numerals, real gang insignia, logos, anime, beard or extra head.",
+      "current": {
+        "src": "/icons/abilities/slang.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch84-revision",
+          "label": "Batch 84 · revised Slang",
+          "src": "candidates/batch-84/slang.png",
+          "note": "REVISION of reference cell 3. Keep BOTH generic adult heads, cigarette and small hand. REMOVE THE TWO TRIANGULAR SPEECH STROKES. Replace them with ONE large SHARED SPEECH BUBBLE ABOVE BOTH HEADS, with TWO broad short tails, one toward each mouth. Inside the bubble place exactly TWO simple fictional STREET/PRISON-TATTOO MOTIFS: ONE plain SKULL and ONE BROKEN CHAIN LINK. Broad stencil symbols only, no gore or thin tiny detail. The bubble is shared, not two separate bubbles. No letters, numerals, real gang insignia, logos, anime, beard or extra head."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 83 · Slang",
+          "src": "candidates/batch-83/slang.png",
+          "note": "TWO smooth generic ADULT HEADS AND SHORT NECKS in profile facing each other, having a casual STREET CONVERSATION. The speaker on LEFT holds ONE plain CIGARETTE between two bare fingers low beside the chin; TWO short broad speech strokes point toward the listener. Natural adult proportions, minimal face cuts, no beard or gruff portrait. No smoke cloud, lettering, named gang signs, speech-bubble text, book, handshake, anime or tiny hair detail. Clear black gaps between heads and coherent small hand."
+        }
+      ]
+    },
+    {
+      "id": "batch83-sokole-oko",
+      "name": "Sokole oko",
+      "tier": "Batch 84 · wyjadacz-option",
+      "batch": 84,
+      "placeholderKey": "feature:sokole-oko",
+      "target": "icons/abilities/sokole-oko.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/sokole-oko.svg",
+          "variant": "default",
+          "sourceSha256": "f77e36828e55586e9b5ef5a3a6ccee4af8e64cc8eac5133e7a09dba91479cff0"
+        }
+      ],
+      "context": "Class/profession ability: Sokole oko; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Otrzymujesz modyfikator +3 do Testów Ataku bronią palną, dystansową i rzucaną. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 4. Preserve the existing falcon-eye shape, feather-edge silhouette, broad crosshair, upper beak and overall scale. ADD THE MISSING LOWER BEAK: one short broad lower MANDIBLE naturally attached below the hooked upper bill, separated by ONE clear BLACK MOUTH GAP. Lower bill points forward-right and meets below the upper hooked tip; both upper and lower beak bases join the bird's face coherently. Do not leave a floating white triangle or replace the whole eye concept. No tiny feather texture, extra eye, anime lashes, text or portrait.",
+      "current": {
+        "src": "/icons/abilities/sokole-oko.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch84-revision",
+          "label": "Batch 84 · revised Sokole oko",
+          "src": "candidates/batch-84/sokole-oko.png",
+          "note": "REVISION of reference cell 4. Preserve the existing falcon-eye shape, feather-edge silhouette, broad crosshair, upper beak and overall scale. ADD THE MISSING LOWER BEAK: one short broad lower MANDIBLE naturally attached below the hooked upper bill, separated by ONE clear BLACK MOUTH GAP. Lower bill points forward-right and meets below the upper hooked tip; both upper and lower beak bases join the bird's face coherently. Do not leave a floating white triangle or replace the whole eye concept. No tiny feather texture, extra eye, anime lashes, text or portrait."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 83 · Sokole oko",
+          "src": "candidates/batch-83/sokole-oko.png",
+          "note": "ONE large realistic FALCON EYE in a compact SIDE-PROFILE PATCH: a broad swept avian brow and two simple feather-edge cuts frame one natural round iris. ONE broad CROSSHAIR centered on the pupil conveys exceptional aim. Sober sharp bird anatomy, complete eye, restrained black negative space, no full bird body or extra target rings. No anime human eye, lashes, human face, tiny feather texture, writing or numerals."
+        }
+      ]
+    },
+    {
+      "id": "batch83-solowa",
+      "name": "Solówa",
+      "tier": "Batch 84 · Brutal",
+      "batch": 84,
+      "placeholderKey": "feature:solowa",
+      "target": "icons/abilities/solowa.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/solowa.svg",
+          "variant": "default",
+          "sourceSha256": "16292b6c0c8db69ab2f8bea7e081414ba89c3a547b6e38d4c3617b090b74a98e"
+        }
+      ],
+      "context": "Class/profession ability: Solówa; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. W Akcji Bonusowej możesz wybrać istotę, którą widzisz w zasięgu 18 metrów. Prowokujesz ją do atakowania tylko ciebie, jeśli nie zda ona RO na Inteligencję o ST 8 plus twoja Premia Biegłości i modyfikator Siły. Efekt trwa, dopóki istota cię widzi lub zda Rzut Obronny na końcu swojej następnej tury. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 5. Keep both complete adult figures, their positions and the right opponent's guard. Change ONLY the LEFT figure's raised beckoning hand into an unmistakable POINTING HAND: arm extends toward the RIGHT opponent, ONE long straight INDEX FINGER points directly AT THAT OPPONENT; thumb and remaining three fingers fold naturally into the palm. No open beckoning palm or curled pointing finger. Generic smooth heads and ordinary adult anatomy, complete limbs, broad black gap, no weapon, injury, anime or extra person.",
+      "current": {
+        "src": "/icons/abilities/solowa.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch84-revision",
+          "label": "Batch 84 · revised Solówa",
+          "src": "candidates/batch-84/solowa.png",
+          "note": "REVISION of reference cell 5. Keep both complete adult figures, their positions and the right opponent's guard. Change ONLY the LEFT figure's raised beckoning hand into an unmistakable POINTING HAND: arm extends toward the RIGHT opponent, ONE long straight INDEX FINGER points directly AT THAT OPPONENT; thumb and remaining three fingers fold naturally into the palm. No open beckoning palm or curled pointing finger. Generic smooth heads and ordinary adult anatomy, complete limbs, broad black gap, no weapon, injury, anime or extra person."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 83 · Solówa",
+          "src": "candidates/batch-83/solowa.png",
+          "note": "ONE plain generic ADULT in a confident full-body fighting stance on LEFT, one open bare hand BECKONING toward ONE smaller generic opponent on RIGHT. The beckoning hand is raised at chest level, fingers curling inward once; other arm hangs ready at side. Opponent faces the challenger, hands raised defensively. Exactly two natural adult bodies with smooth featureless heads and plain clothes, complete limbs, broad black separation. A one-on-one challenge, no crowd, portrait, anime, lettering, weapons, injury or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch83-specjalizacja-spec",
+      "name": "Specjalizacja",
+      "tier": "Batch 84 · Spec",
+      "batch": 84,
+      "placeholderKey": "feature:specjalizacja-spec",
+      "target": "icons/abilities/specjalizacja-spec.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/specjalizacja-spec.svg",
+          "variant": "default",
+          "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+        }
+      ],
+      "context": "Class/profession ability: Specjalizacja; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Wybierasz dwie ze swoich biegłości w umiejętnościach albo dwie biegłości w narzędziach, lub jedną biegłość w umiejętności i jedną biegłość w narzędziach. W każdym teście wykonywanym z ich użyciem Premia Biegłości liczy się podwójnie. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 6. Keep the crossed CALIPER AND SCREWDRIVER concept, but redraw the caliper with perfectly STRAIGHT mechanical geometry. One straight broad rectangular MAIN BEAM. ONE fixed measuring jaw at the left end and ONE sliding jaw near the middle descend PERPENDICULAR to the beam; the two long measuring-jaw faces are PARALLEL and face each other across one broad open black gap. Slider is ONE plain rectangular block wrapped around the straight beam. Omit small inner jaws, depth rod and scale markings. Both jaws, beam and slider are rigid, square and unbent. Complete simple screwdriver crosses behind with a black overlap cut. No curved caliper beam, wrench head, extra jaws, fine ticks, text, hands or cog.",
+      "current": {
+        "src": "/icons/abilities/specjalizacja-spec.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch84-revision",
+          "label": "Batch 84 · revised Specjalizacja",
+          "src": "candidates/batch-84/specjalizacja-spec.png",
+          "note": "REVISION of reference cell 6. Keep the crossed CALIPER AND SCREWDRIVER concept, but redraw the caliper with perfectly STRAIGHT mechanical geometry. One straight broad rectangular MAIN BEAM. ONE fixed measuring jaw at the left end and ONE sliding jaw near the middle descend PERPENDICULAR to the beam; the two long measuring-jaw faces are PARALLEL and face each other across one broad open black gap. Slider is ONE plain rectangular block wrapped around the straight beam. Omit small inner jaws, depth rod and scale markings. Both jaws, beam and slider are rigid, square and unbent. Complete simple screwdriver crosses behind with a black overlap cut. No curved caliper beam, wrench head, extra jaws, fine ticks, text, hands or cog."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 83 · Specjalizacja",
+          "src": "candidates/batch-83/specjalizacja-spec.png",
+          "note": "TWO complete PRECISION TOOLS crossed in a compact emblem: ONE sturdy VERNIER CALIPER with two clearly open jaws and one sliding beam; ONE short practical SCREWDRIVER with thick handle and intact straight tip. Equal visual weight, a broad black cut separates their overlap. Technical expertise through real tools, sparse functional detail. No scale ticks, numerals, lettering, generic cog, person, hands, book or scattered parts."
+        }
+      ]
+    },
+    {
+      "id": "batch83-spieprzysz-to",
+      "name": "Spieprzysz to!",
+      "tier": "Batch 84 · Cwaniak",
+      "batch": 84,
+      "placeholderKey": "feature:spieprzysz-to",
+      "target": "icons/abilities/spieprzysz-to.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/spieprzysz-to.svg",
+          "variant": "default",
+          "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+        }
+      ],
+      "context": "Class/profession ability: Spieprzysz to!; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Potrafisz każdego wytrącić z równowagi. Kiedy istota, którą widzisz w promieniu 18 m, wykonała udany Test Ataku lub Rzut Obronny, możesz w swojej Reakcji sprawić, by powtórzyła rzut i wybrała gorszy wynik. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Charyzmy. Zdolność odnawia się po ukończeniu Krótkiego odpoczynku. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ENTIRELY NEW CONCEPT: vicious MOCKERY, with NO DICE. ONE ordinary generic ADULT HEAD AND SHORT SHOULDERS in three-quarter view facing RIGHT, sneering scornfully: one raised broad eyebrow, one narrowed natural eye and an OPEN MOUTH with one corner curled upward. ONE complete bare hand beside the face POINTS DERISIVELY right, while TWO short broad angular speech strokes emerge from the mouth. Sober human adult expression, minimal broad facial cuts, short neutral hair, no beard portrait, anime, oversized eyes, clown face, lettering, speech-bubble text, book or extra person.",
+      "current": {
+        "src": "/icons/abilities/spieprzysz-to.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch84-revision",
+          "label": "Batch 84 · revised Spieprzysz to!",
+          "src": "candidates/batch-84/spieprzysz-to.png",
+          "note": "ENTIRELY NEW CONCEPT: vicious MOCKERY, with NO DICE. ONE ordinary generic ADULT HEAD AND SHORT SHOULDERS in three-quarter view facing RIGHT, sneering scornfully: one raised broad eyebrow, one narrowed natural eye and an OPEN MOUTH with one corner curled upward. ONE complete bare hand beside the face POINTS DERISIVELY right, while TWO short broad angular speech strokes emerge from the mouth. Sober human adult expression, minimal broad facial cuts, short neutral hair, no beard portrait, anime, oversized eyes, clown face, lettering, speech-bubble text, book or extra person."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 83 · Spieprzysz to!",
+          "src": "candidates/batch-83/spieprzysz-to.png",
+          "note": "ONE complete BARE ADULT HAND uses its extended INDEX FINGER to FLICK ONE coherent CUBE DIE onto an edge, forcing a reroll. Die has exactly three visible flat planes with straight shared edges: ONE big pip on front, TWO on right side, ONE on top. One broad short impact wedge at fingertip, no motion arrow. Natural hand/thumb/folded fingers and short wrist, strong black gap around die. No second die, written words, numerals, speech bubble, book, tiny fingernails or cartoon face."
+        }
+      ]
+    },
+    {
+      "id": "batch84-strzelec",
+      "name": "Strzelec",
+      "tier": "Batch 84 · Zabójca",
+      "batch": 84,
+      "placeholderKey": "feature:strzelec",
+      "target": "icons/abilities/strzelec.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/strzelec.svg",
+          "variant": "default",
+          "sourceSha256": "83f2d526727e86cc244e8b6a68f665534890643d70b4b9348734e1f569f73a95"
+        }
+      ],
+      "context": "Class/profession ability: Strzelec; owner Zabójca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Jedni lubią zabijać nożem, inni cenią truciznę, a ty wolisz zabijać z daleka. Jeżeli przygotujesz stanowisko snajperskie z bronią z celownikiem optycznym i poświęcisz 5 rund na precyzyjne mierzenie do celu, to dopóki się nie poruszysz, zyskujesz dwie poniższe, dodatkowe korzyści. Powiększenie. Trzykrotne zwiększenie maksymalnego zasięgu dla tej broni. Przewaga balistyczna. Brak Utrudnienia za strzelanie na dalekim dystansie tą bronią. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete practical SCOPED RIFLE resting on ONE broad SANDBAG with a deployed TWO-LEG BIPOD below the front barrel. Clear shoulder stock, long straight barrel, simple scope tube above the receiver and empty trigger guard. A prepared stable sniper position, no person. Broad white structural shapes, sparse black cuts, no fine screws, logos, labels, numerals, muzzle flash, tiny scope reticle or background landscape.",
+      "current": {
+        "src": "/icons/abilities/strzelec.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 84 · Strzelec",
+          "src": "candidates/batch-84/strzelec.png",
+          "note": "ONE complete practical SCOPED RIFLE resting on ONE broad SANDBAG with a deployed TWO-LEG BIPOD below the front barrel. Clear shoulder stock, long straight barrel, simple scope tube above the receiver and empty trigger guard. A prepared stable sniper position, no person. Broad white structural shapes, sparse black cuts, no fine screws, logos, labels, numerals, muzzle flash, tiny scope reticle or background landscape."
+        }
+      ]
+    },
+    {
+      "id": "batch84-stylowa",
+      "name": "Stylówa",
+      "tier": "Batch 84 · Gwiazda",
+      "batch": 84,
+      "placeholderKey": "feature:stylowa",
+      "target": "icons/abilities/stylowa.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/stylowa.svg",
+          "variant": "default",
+          "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+        }
+      ],
+      "context": "Class/profession ability: Stylówa; owner Gwiazda. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Wygląd jest twoją wizytówką, ma robić wrażenie i podkreślać wyjątkowość twojego charakteru. Ubierasz się w drogie ciuchy, nosisz na widoku cenne gadżety i drogą biżuterię. Te błyskotki mogą przyciągać złodziei, ale kij im w oko, bo to robi ci imidż na dzielni. Każde 50 gambli towarów luksusowych, które nosisz na sobie, zapewnia ci premię +1 do testów Wpływania. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete pair of practical AVIATOR SUNGLASSES above ONE heavy CURB-CHAIN NECKLACE arranged in a compact loop. Broad lens frames and bridge, large clean black lens openings, necklace made of only SIX broad joined links. Expensive wearable style in a rough wasteland, sober practical objects. No head, face, suit jacket, text, logo, currency sign, tiny jewelry engraving, sparkle or ornate pendant.",
+      "current": {
+        "src": "/icons/abilities/stylowa.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 84 · Stylówa",
+          "src": "candidates/batch-84/stylowa.png",
+          "note": "ONE complete pair of practical AVIATOR SUNGLASSES above ONE heavy CURB-CHAIN NECKLACE arranged in a compact loop. Broad lens frames and bridge, large clean black lens openings, necklace made of only SIX broad joined links. Expensive wearable style in a rough wasteland, sober practical objects. No head, face, suit jacket, text, logo, currency sign, tiny jewelry engraving, sparkle or ornate pendant."
+        }
+      ]
+    }
+  ]
+}

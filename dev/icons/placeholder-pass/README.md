@@ -96,6 +96,13 @@ subject; Batch 83 contains nine fresh subjects. The first 93 unique roadmap
 subjects are allocated; Strzelec is next at zero-based index 93. The next free
 batch number is 84.
 
+After Batch 82–83 review, eighty-six subjects are delivered at eighty-eight
+native SVG filenames with WEBP sidecars. The current audit leaves 67 subjects /
+67 placeholder files. Batch 84 contains seven saved revisions and two fresh
+subjects; Batch 85 contains nine fresh subjects. The first 104 unique roadmap
+subjects are allocated; Śmiertelna obelga is next at zero-based index 104.
+The next free batch number is 86.
+
 The GM's durable direction is to avoid repeated gruff male survivor portraits:
 prefer the actual objects, hands, actions and generic adults, with no anime.
 That instruction is also recorded in Pipeline.md.
@@ -128,6 +135,10 @@ That instruction is also recorded in Pipeline.md.
   [exact prompts](../review/candidates/batch-82/prompts.json).
 - [Batch 83 candidates](../review/candidates/batch-83/README.md) and
   [exact prompts](../review/candidates/batch-83/prompts.json).
+- [Batch 84 candidates](../review/candidates/batch-84/README.md) and
+  [exact prompts](../review/candidates/batch-84/prompts.json).
+- [Batch 85 candidates](../review/candidates/batch-85/README.md) and
+  [exact prompts](../review/candidates/batch-85/prompts.json).
 
 The numbered `prepare_*.py` files freeze their actual
 allocations and

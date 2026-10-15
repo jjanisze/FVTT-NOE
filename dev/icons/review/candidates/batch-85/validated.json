@@ -1,0 +1,16 @@
+{
+  "batch": 85,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "szalencza-szarza": "1199750c735b867eacc3615b2b93cbc42e0e956ab21fc68986cc9d3771760f3a",
+    "szary": "40b5c0ba7f4192abd5699b44f6eabaadee44afc53705888b9d66038e86bbf196",
+    "szczescie": "905233a2b4951873127019eba32caf7c392201a495be02b2840c3eee953282fb",
+    "szybka-gadka": "8179def0a23a532eb39a072b99e41fae0647338d63cad383d0930e9bff517bbd",
+    "szybka-produkcja": "a8e4754ecaa89a041d4dce567f18596f385c9b335648dc4c2bcbec0325ba09ac",
+    "szybkie-badanie": "68ee573c92b385f9d9e019ccdf930070a8830eaee427058535d9313869b243ca",
+    "szybkie-nogi": "d6468d4b2c4763082fef3942721e14d9dcc16f0b2ec94cb2617e93884e37e4b7",
+    "szybkie-rece": "037f48351b330277a89f084b131cb4f26fdde09b599c83b17c7a2bd8c42e3c07",
+    "szybkosc-kota": "5306f807d117634d1625487c8c4b4841c7a9c6c733380cfe6fe698e3488bc143"
+  }
+}

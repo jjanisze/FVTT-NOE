@@ -1,0 +1,59 @@
+{
+  "role": "Exact native targets, not style inputs",
+  "files": [
+    {
+      "key": "rzeznik",
+      "source": "icons/abilities/rzeznik.svg",
+      "variant": "default",
+      "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+    },
+    {
+      "key": "serwisowanie",
+      "source": "icons/abilities/serwisowanie.svg",
+      "variant": "default",
+      "sourceSha256": "43659a4c590f9892703aeb2c53a00353153e0794c7e15840196730ebfe4afb08"
+    },
+    {
+      "key": "slang",
+      "source": "icons/abilities/slang.svg",
+      "variant": "default",
+      "sourceSha256": "489859c79ecce12c7e1b0f181602b1783d0f6a30b4c2d8a804bb5b86cbb6b03a"
+    },
+    {
+      "key": "sokole-oko",
+      "source": "icons/abilities/sokole-oko.svg",
+      "variant": "default",
+      "sourceSha256": "f77e36828e55586e9b5ef5a3a6ccee4af8e64cc8eac5133e7a09dba91479cff0"
+    },
+    {
+      "key": "solowa",
+      "source": "icons/abilities/solowa.svg",
+      "variant": "default",
+      "sourceSha256": "16292b6c0c8db69ab2f8bea7e081414ba89c3a547b6e38d4c3617b090b74a98e"
+    },
+    {
+      "key": "specjalizacja-spec",
+      "source": "icons/abilities/specjalizacja-spec.svg",
+      "variant": "default",
+      "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+    },
+    {
+      "key": "spieprzysz-to",
+      "source": "icons/abilities/spieprzysz-to.svg",
+      "variant": "default",
+      "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+    },
+    {
+      "key": "strzelec",
+      "source": "icons/abilities/strzelec.svg",
+      "variant": "default",
+      "sourceSha256": "83f2d526727e86cc244e8b6a68f665534890643d70b4b9348734e1f569f73a95"
+    },
+    {
+      "key": "stylowa",
+      "source": "icons/abilities/stylowa.svg",
+      "variant": "default",
+      "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741"
+    }
+  ]
+}

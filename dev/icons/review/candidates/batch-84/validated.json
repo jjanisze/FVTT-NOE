@@ -1,0 +1,16 @@
+{
+  "batch": 84,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "rzeznik": "fd16d809bc4a2aafe479c1d84ba2c5fd6f6beda8a112d997aef410b2e3498f0a",
+    "serwisowanie": "19acb6b783a60b16dc187041420f4a3f5555a8d1728d34696c252b268342afe5",
+    "slang": "adc422a3c551a96058afff3ab8e2c179bd5e6d4fc79458c5cb01f80307c79b5f",
+    "sokole-oko": "9806b35e60bf86f9f2e472c90237b18c9bf9c1e3ae686a9cbaf29dc29edfa061",
+    "solowa": "042bb2414cb17c1a4fa48cac32a01c849a157f6847278a347cd5c60a8bc16436",
+    "specjalizacja-spec": "cec7502c93be1a2758cef2b04a39bcfbb36edcf3fb07b91230caabc91e15ea4d",
+    "spieprzysz-to": "ea7da0edd90808addbb68ee97d9ae028c1ea0eb945c04bd0dc5480800410f8ca",
+    "strzelec": "fb22e18e1294627054e02aaff67158b751bf62a8a37dcbb9c2ba22b49b39e628",
+    "stylowa": "946711ac83eaf483f6543dc38b809181d33c1b76c00c70af2ff16cdb14acdbec"
+  }
+}

@@ -1,0 +1,196 @@
+{
+  "date": "2026-10-16",
+  "batch": 85,
+  "generalFeedback": "Apply exact saved revisions. Broad white glyphs, varied practical objects and generic adults; avoid gruff survivor defaults, anime, dithering and repeated dice.",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "szalencza-szarza",
+      "name": "Szaleńcza szarża",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/abilities/szalencza-szarza.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szalencza-szarza.svg",
+          "variant": "default",
+          "sourceSha256": "9e95f50b6dbc04a319f31dcec9fb8d74148e1070eee6bad2a75b662766c30c5d"
+        }
+      ],
+      "ruleContext": "Twoja szybkość rośnie o 3 m, a jeśli wykonasz akcję Przyspieszenie, przeciwnicy mają Utrudnienie do Testów Ataków dystansowych przeciw tobie, do początku twojej następnej tury.",
+      "context": "Class/profession ability: Szaleńcza szarża; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "ONE generic ADULT CHARGING FORWARD low and fast to the RIGHT, shoulder leading, full natural body, one leg drives behind and the other steps forward. TWO broad BULLET STREAKS narrowly miss BEHIND the back, separate from the intact body. Plain practical clothes, smooth featureless head and complete limbs, clear broad black gaps. Reckless speed makes the person hard to hit. No gun in hands, portrait, beard, anime, injury, blood, extra limbs or decorative arrow.",
+      "itemId": "batch85-szalencza-szarza"
+    },
+    {
+      "kind": "feature",
+      "key": "szary",
+      "name": "Szary",
+      "owner": "szczur",
+      "ownerLabel": "Szczur",
+      "target": "icons/abilities/szary.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szary.svg",
+          "variant": "default",
+          "sourceSha256": "4bd810a23039817a14513e84ba592a708fcc8b78f385cd35e6d7916c79b7cae5"
+        }
+      ],
+      "ruleContext": "Szczurów jest pełno. Żebracy, włóczędzy, ludzkie wraki. Nikt z nimi nie gada. Nikt nie zwraca na nich uwagi. Jeśli zachowujesz się inteligentnie, wykorzystując ludzką pogardę, potrafisz stać się niezauważalny (otrzymujesz stan Niewidoczność). Mądra kryjówka. Dodajesz modyfikator Inteligencji lub Mądrości do testów Skradania się. Nie widzisz mnie. Możesz próbować ukrywać się na otwartym terenie, nawet w jasnym świetle dnia, czy na środku pustego hangaru, np. jako zwykły żul szukający złomu. Jeśli nic nie mówisz i nie robisz hałasu, masz Ułatwienie w Testach Ukrywania się, dopóki kogoś nie zaatakujesz lub nie zrobisz czegoś głośnego.",
+      "context": "Class/profession ability: Szary; owner Szczur. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "request": "ONE plain generic adult SCAVENGER in a loose coat stoops to pick up ONE short SCRAP PIPE. Full natural body, smooth small featureless head, ordinary practical clothes and boots. ONE large simple CROSSED-OUT EYE SYMBOL behind the shoulders shows being overlooked while scavenging openly. Broad eye outline and one thick diagonal slash, clear black gap from the figure. No beard portrait, hooded assassin face, fine rubbish pile, dithering, grey shading, text or extra person.",
+      "itemId": "batch85-szary"
+    },
+    {
+      "kind": "feature",
+      "key": "szczescie",
+      "name": "Szczęście",
+      "owner": "cwaniak",
+      "ownerLabel": "Cwaniak",
+      "target": "icons/abilities/szczescie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szczescie.svg",
+          "variant": "default",
+          "sourceSha256": "8892c6c990b0e616334126fb8141a93503a784e10887592afc6227744b830e0b"
+        }
+      ],
+      "ruleContext": "Raz w rundzie możesz powtórzyć dowolny test, którego wynik ci nie odpowiada. Powtórzony test zawiera takie samo Ułatwienie lub Utrudnienie, jak test pierwotny. Wynik, który otrzymasz w przerzucie, musisz zaakceptować. Możesz użyć tej zdolności tyle razy, ile wskazuje kolumna Szczęście w tabeli Zdolności klasowych Cwaniaka. Zdolność Szczęście odnawia się po Długim odpoczynku.",
+      "context": "Class/profession ability: Szczęście; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "request": "ONE sturdy upright HORSESHOE with exactly FOUR broad nail holes, surrounding ONE natural FOUR-LEAF CLOVER with a short complete stem. Broad real object silhouettes and generous black gaps; restrained practical good-luck charm. No die, numerals, words, sparkling stars, cartoon face, thin leaf veins, fine metal texture or extra clover.",
+      "itemId": "batch85-szczescie"
+    },
+    {
+      "kind": "feature",
+      "key": "szybka-gadka",
+      "name": "Szybka gadka",
+      "owner": "cwaniak",
+      "ownerLabel": "Cwaniak",
+      "target": "icons/abilities/szybka-gadka.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybka-gadka.svg",
+          "variant": "default",
+          "sourceSha256": "a8d2f4dbe822751f88cf2f77490de6b9756d996cf5f92625e55160251d407b23"
+        }
+      ],
+      "ruleContext": "W czasie walki możesz wykonać akcję Wpływanie w swojej Akcji Bonusowej. Swoimi błyskawicznymi i celnymi słowami, możesz np. oszukać przeciwnika, zdezorientować go lub przekonać do wycofania się. PRZYKŁAD: Wykonując Test Charyzmy (Zastraszanie) o ST 15, próbujesz nastraszyć gangusa, żeby uciekł z pola walki. Albo wykonując Test Charyzmy (Oszustwo) o ST 15, próbujesz przekonać mutanta, żeby nie robił ci krzywdy, bo też jesteś mutantem. Lub wykonując test Mądrości (Tresura) o ST 15, próbujesz uspokoić rozwścieczonego neoniedźwiedzia. Po więcej szczegółów zajrzyj do podrozdziału Interakcje z istotami (s .41).",
+      "context": "Class/profession ability: Szybka gadka; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "request": "ONE broad EMPTY SPEECH BUBBLE shaped as a horizontal rounded rectangle with ONE clear short tail at lower-right. THREE short thick parallel MOTION STROKES behind the LEFT edge express fast speech. Single compact sober white glyph, large black interior and thick continuous border. No person, face, letters, words, symbols inside, second bubble, book, handshake or playful arrows.",
+      "itemId": "batch85-szybka-gadka"
+    },
+    {
+      "kind": "feature",
+      "key": "szybka-produkcja",
+      "name": "Szybka produkcja",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/abilities/szybka-produkcja.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybka-produkcja.svg",
+          "variant": "default",
+          "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+        }
+      ],
+      "ruleContext": "Raz na Krótki lub Długi odpoczynek, poza normalnymi zasadami produkcji, możesz stworzyć niewielkie przedmioty, jeśli masz odpowiednie narzędzia, surowce i schematy. Sumaryczna wartość tych przedmiotów nie może przekraczać 25 gb, a czas produkcji to 1 minuta x 1 gb wartości. PRZYKŁAD: Potrzebujesz 20 minut, żeby wyprodukować samoróbkę (20 gb), granat improwizowany (20 gb), medpak (20 gb), 2 noże do rzucania (2 x 10 gb) lub 12 naboi 9 mm (10 x 2 gb). Na poziomie 11 możesz szybko wyprodukować przedmioty warte sumarycznie 50 gb (patrz podrozdział Produkcja przedmiotów s. 144).",
+      "context": "Class/profession ability: Szybka produkcja; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 5,
+      "request": "ONE complete stout OPEN-ENDED WRENCH crosses diagonally over ONE simple STOPWATCH. Watch has a clear broad circular rim, ONE large top button and TWO broad hands on its blank face; wrench has one intact open jaw and round handle end. Rapid workshop production shown through tool and time. Strong black cut separates overlap, no numerals, ticks, writing, cog, person, extra tool or tiny clock detail.",
+      "itemId": "batch85-szybka-produkcja"
+    },
+    {
+      "kind": "feature",
+      "key": "szybkie-badanie",
+      "name": "Szybkie badanie",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/abilities/szybkie-badanie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-badanie.svg",
+          "variant": "default",
+          "sourceSha256": "6c308b62d0703643d9c0ce5875908af22dc5c1956d0cc77e13f8e962b5e1de20"
+        }
+      ],
+      "ruleContext": "W czasie walki możesz wykonać akcję Badanie w swojej Akcji Bonusowej. Jesteś w stanie bardzo szybko zdobyć cenne informacje dotyczące np. miejsca walki, najbliższych urządzeń lub wybranych statystyk przeciwnika, zależnie od używanej umiejętności (patrz akcja Badanie w rozdziale Eksploracja s. 41). PRZYKŁAD: Wykonując Test Inteligencji (Technika) o ST 15, dotyczący wrogiej maszyny Molocha, możesz się dowiedzieć, ile ma PW lub jak wysoka jest jej TT.",
+      "context": "Class/profession ability: Szybkie badanie; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 6,
+      "request": "ONE large practical MAGNIFYING GLASS inspects ONE boxy ROBOT SENSOR HEAD with a single large round CAMERA LENS and two broad ventilation cuts. Complete short mechanical neck, coherent magnifier rim/handle, broad black gaps. TWO short broad motion strokes behind the magnifier indicate quick examination. Sober salvaged machine, no human face, book, tiny circuitry, numbers, lettering, extra lenses or cartoon robot expression.",
+      "itemId": "batch85-szybkie-badanie"
+    },
+    {
+      "kind": "feature",
+      "key": "szybkie-nogi",
+      "name": "Szybkie nogi",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/abilities/szybkie-nogi.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-nogi.svg",
+          "variant": "default",
+          "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398"
+        }
+      ],
+      "ruleContext": "Łączysz swoją zwinność i szybkość, w celu zwiększenia szansy przetrwania na polu walki. Możesz w Akcji Bonusowej wykonać Odstąpienie, Przyspieszenie lub Ukrywanie się.",
+      "context": "Class/profession ability: Szybkie nogi; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 7,
+      "request": "TWO complete rugged BOOTS AND SHORT LOWER TROUSER LEGS in a fast evasive STEP: the leading boot points right and lands toe-first, while the rear boot lifts with heel high. Upper calf hems end cleanly inside the cell; no cropped border. TWO short broad horizontal motion strokes trail left. Natural foot/ankle proportions, broad sparse sole cuts and clear black gap. No full person, face, tiny laces, extra feet, text or arrow.",
+      "itemId": "batch85-szybkie-nogi"
+    },
+    {
+      "kind": "feature",
+      "key": "szybkie-rece",
+      "name": "Szybkie ręce",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/abilities/szybkie-rece.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-rece.svg",
+          "variant": "default",
+          "sourceSha256": "3c0b28c465cc993c60c6f501645989b90d99c505ada827d16ea0b8b3fdd9759b"
+        }
+      ],
+      "ruleContext": "W czasie walki jesteś w stanie robić dwie rzeczy naraz. W swojej turze możesz wykonać jedną akcję więcej oprócz zwykłej akcji i możliwej Akcji Bonusowej. Akcja ta może być przeznaczona jedynie na akcję Używanie. Tej zdolności możesz użyć tyle razy, ile wynosi twój modyfikator Zręczności. Zdolność odnawia się po odbyciu Krótkiego odpoczynku.",
+      "context": "Class/profession ability: Szybkie ręce; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 8,
+      "request": "TWO complete BARE ADULT HANDS simultaneously operate TWO large TOGGLE SWITCHES on ONE compact rectangular CONTROL BOX. Left hand enters from LEFT and flips the left switch upward; right hand enters from RIGHT and flips the right switch downward. Each hand has one coherent thumb, fingers and short wrist, broad black separation. Only two simple toggles and one box, spare functional shapes. No face, text, labels, extra hands, tiny circuitry, fine fingernails or elaborate control panel.",
+      "itemId": "batch85-szybkie-rece"
+    },
+    {
+      "kind": "feature",
+      "key": "szybkosc-kota",
+      "name": "Szybkość kota",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/abilities/szybkosc-kota.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkosc-kota.svg",
+          "variant": "default",
+          "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a"
+        }
+      ],
+      "ruleContext": "Uczysz się unikać kul i ataków wręcz, jak na przedwojennych filmach akcji. Odskok [R]. Kiedy otrzymujesz obrażenia w wyniku bezpośredniego ataku, możesz w Reakcji zmniejszyć je o połowę (zaokrąglając w dół). Odskok nie działa, kiedy otrzymujesz obrażenia psychiczne. Szybkie łapy. Twoja Szybkość rośnie o 3 metry. Refleks. Możesz dorzucić jedną Kocią kość do testu Inicjatywy.",
+      "context": "Class/profession ability: Szybkość kota; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 9,
+      "request": "ONE realistic adult CAT facing LEFT in a LOW EVASIVE CROUCH, forepaws braced, one hindleg ready to spring and one long tail curved high behind. ONE broad BULLET STREAK passes safely ABOVE its back, with a clear black gap. Natural cat proportions, four complete legs and one small eye cut; compact grounded pose rather than the earlier airborne leap. Sober agility emblem, no cute mascot, anime eyes, face portrait, injury, fine fur, extra tail, numerals or decorative arrows.",
+      "itemId": "batch85-szybkosc-kota"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "role": "Exact native targets, not style inputs",
+  "files": [
+    {
+      "key": "szalencza-szarza",
+      "source": "icons/abilities/szalencza-szarza.svg",
+      "variant": "default",
+      "sourceSha256": "9e95f50b6dbc04a319f31dcec9fb8d74148e1070eee6bad2a75b662766c30c5d"
+    },
+    {
+      "key": "szary",
+      "source": "icons/abilities/szary.svg",
+      "variant": "default",
+      "sourceSha256": "4bd810a23039817a14513e84ba592a708fcc8b78f385cd35e6d7916c79b7cae5"
+    },
+    {
+      "key": "szczescie",
+      "source": "icons/abilities/szczescie.svg",
+      "variant": "default",
+      "sourceSha256": "8892c6c990b0e616334126fb8141a93503a784e10887592afc6227744b830e0b"
+    },
+    {
+      "key": "szybka-gadka",
+      "source": "icons/abilities/szybka-gadka.svg",
+      "variant": "default",
+      "sourceSha256": "a8d2f4dbe822751f88cf2f77490de6b9756d996cf5f92625e55160251d407b23"
+    },
+    {
+      "key": "szybka-produkcja",
+      "source": "icons/abilities/szybka-produkcja.svg",
+      "variant": "default",
+      "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+    },
+    {
+      "key": "szybkie-badanie",
+      "source": "icons/abilities/szybkie-badanie.svg",
+      "variant": "default",
+      "sourceSha256": "6c308b62d0703643d9c0ce5875908af22dc5c1956d0cc77e13f8e962b5e1de20"
+    },
+    {
+      "key": "szybkie-nogi",
+      "source": "icons/abilities/szybkie-nogi.svg",
+      "variant": "default",
+      "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398"
+    },
+    {
+      "key": "szybkie-rece",
+      "source": "icons/abilities/szybkie-rece.svg",
+      "variant": "default",
+      "sourceSha256": "3c0b28c465cc993c60c6f501645989b90d99c505ada827d16ea0b8b3fdd9759b"
+    },
+    {
+      "key": "szybkosc-kota",
+      "source": "icons/abilities/szybkosc-kota.svg",
+      "variant": "default",
+      "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a"
+    }
+  ]
+}
