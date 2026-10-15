@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-16",
+  "batch": 89,
+  "approvedSubjects": 5,
+  "remainingSubjects": 6,
+  "installed": [
+    {
+      "itemId": "batch89-wyjadacz",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-89/wyjadacz.png",
+      "sourceSha256": "84d42c0d7d546c673827021f2d702daa08f50dd08f5a5ae72ca7032f7d72d6a3",
+      "files": [
+        "icons/abilities/wyjadacz.svg",
+        "icons/abilities/wyjadacz.webp"
+      ],
+      "svgSha256": "0897725e84a51e933487e698f5e00e7605321856ca3d48564be96fab85e4dc8d",
+      "webpSha256": "7c74c5086f0af7cb34d1d0b88626855f8f89c07c55accceabed3ebe5d596ba2f"
+    },
+    {
+      "itemId": "batch89-wyksztalciuch",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-89/wyksztalciuch.png",
+      "sourceSha256": "a9bfb1e2c4725dc8dc4bfc5969a18ef665f3a5e3b463a6447b9d95ee7f23f680",
+      "files": [
+        "icons/abilities/wyksztalciuch.svg",
+        "icons/abilities/wyksztalciuch.webp"
+      ],
+      "svgSha256": "de5ca081c3c0df3813df672aa92617c51af2ade6243129de1e64c0d7e2d93fde",
+      "webpSha256": "9f0c3540d7b4969abcc8dd8d7364e536c147b9089ec9aea75830e989fa42965b"
+    },
+    {
+      "itemId": "batch89-z-bara",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-89/z-bara.png",
+      "sourceSha256": "4dc3bc735e1932627fba571deabcd0902289ddc4a77829fe5a3e78f562fad290",
+      "files": [
+        "icons/abilities/z-bara.svg",
+        "icons/abilities/z-bara.webp"
+      ],
+      "svgSha256": "aa30f668bf2e6584c4605d4b535a5627c172b45ac92284c56eef4dd478de9e96",
+      "webpSha256": "a2243e8ade51649d9699c67d075ca7848d902636c448b1ed1581128a6dadd6b6"
+    },
+    {
+      "itemId": "batch89-zabojczy-cios",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-89/zabojczy-cios.png",
+      "sourceSha256": "8fc999f2aa3779457610e5793a8c49694c26a07985e0af0ab38abedcc0c4416a",
+      "files": [
+        "icons/abilities/zabojczy-cios.svg",
+        "icons/abilities/zabojczy-cios.webp"
+      ],
+      "svgSha256": "a168c704f188b7456d6f710a81c89d58eb27b30115316c0826fe4953ed784369",
+      "webpSha256": "e6896cc94eddd5194ffaa964f07de95b4555d734b447f37b3f20df259db470eb"
+    },
+    {
+      "itemId": "batch89-znajomosci",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-89/znajomosci.png",
+      "sourceSha256": "7750a29d6a84f5e0faf9192c0755ef979d41cefa4acc18d6bf8c9d31cee22f2f",
+      "files": [
+        "icons/abilities/znajomosci.svg",
+        "icons/abilities/znajomosci.webp"
+      ],
+      "svgSha256": "b72ae70ec6f2473add6db26401cc39814c33f772d9e9a331b07c60d4e68b3ca6",
+      "webpSha256": "5120e376b7dd035241e09c85bc9fd3cf63df6c1171d41470c8ba7610bf40d227"
+    }
+  ]
+}

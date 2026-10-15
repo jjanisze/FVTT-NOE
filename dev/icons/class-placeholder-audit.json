@@ -1,32 +1,22 @@
 {
   "stats": {
     "date": "2026-10-16",
-    "confirmedPlaceholderFiles": 44,
-    "referencedPlaceholderFiles": 44,
+    "confirmedPlaceholderFiles": 32,
+    "referencedPlaceholderFiles": 32,
     "unmappedPlaceholderFiles": 0,
     "activeVariants": 0,
     "referencedActiveVariants": 0,
-    "abilityPlaceholderFiles": 20,
+    "abilityPlaceholderFiles": 8,
     "missingExpectedFiles": 0,
-    "artSubjects": 44,
+    "artSubjects": 32,
     "byKind": {
       "class": 6,
       "profession": 18,
-      "feature": 20
+      "feature": 8
     },
     "scope": "Exact generator signature plus canonical class/profession definitions; no world or pack reads"
   },
   "placeholders": [
-    {
-      "kind": "feature",
-      "id": "rzeznik",
-      "label": "Rzeźnik",
-      "owner": "wyjadacz-option",
-      "variant": "default",
-      "source": "icons/abilities/rzeznik.svg",
-      "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4",
-      "referenced": true
-    },
     {
       "kind": "feature",
       "id": "szybkie-nogi",
@@ -35,16 +25,6 @@
       "variant": "default",
       "source": "icons/abilities/szybkie-nogi.svg",
       "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "szybkosc-kota",
-      "label": "Szybkość kota",
-      "owner": "zlodziej",
-      "variant": "default",
-      "source": "icons/abilities/szybkosc-kota.svg",
-      "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a",
       "referenced": true
     },
     {
@@ -59,102 +39,12 @@
     },
     {
       "kind": "feature",
-      "id": "ulubiona-bron-zwiadowca",
-      "label": "Ulubiona broń",
-      "owner": "zwiadowca",
-      "variant": "default",
-      "source": "icons/abilities/ulubiona-bron-zwiadowca.svg",
-      "sourceSha256": "dfaab0fdee5a2eea18b28777faf5ebc65ce32f1d61ee9ade770ee5d77bf936b3",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "w-czuly-punkt",
-      "label": "W czuły punkt",
-      "owner": "spec",
-      "variant": "default",
-      "source": "icons/abilities/w-czuly-punkt.svg",
-      "sourceSha256": "494b773b1bd3d580fe42cd13ca56fe001b8830b33a0f0ffbf75508a7a8719794",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "wsciekly-cios",
-      "label": "Wściekły cios",
-      "owner": "brutal",
-      "variant": "default",
-      "source": "icons/abilities/wsciekly-cios.svg",
-      "sourceSha256": "52ae2a6a7a2a4e2d93821ffb52e603891237b164515cc23a18067020927610f8",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "wyczulone-zmysly",
-      "label": "Wyczulone zmysły",
-      "owner": "zwiadowca",
-      "variant": "default",
-      "source": "icons/abilities/wyczulone-zmysly.svg",
-      "sourceSha256": "630c1143f620eb4e0a6950df06c7462b5e045a9a032023f9885ca0df95177edf",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "wyjadacz-zwiadowca",
-      "label": "Wyjadacz",
-      "owner": "zwiadowca",
-      "variant": "default",
-      "source": "icons/abilities/wyjadacz-zwiadowca.svg",
-      "sourceSha256": "c8495031166e511cfbbfe32844e060cd26b509110a766d30a4cc9fd9456e2012",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "wyjadacz",
-      "label": "Wyjadacz",
-      "owner": "twardziel",
-      "variant": "default",
-      "source": "icons/abilities/wyjadacz.svg",
-      "sourceSha256": "374e50918253c177a15139376fef0f5f6f1199181433d72dac3671f12add84f8",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "wyksztalciuch",
-      "label": "Wykształciuch",
-      "owner": "spec",
-      "variant": "default",
-      "source": "icons/abilities/wyksztalciuch.svg",
-      "sourceSha256": "a6797cc50ff6fe13453bdf1b33603c2aabc2228ae45d9d991431da62a0739804",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "z-bara",
-      "label": "Z bara!",
-      "owner": "brutal",
-      "variant": "default",
-      "source": "icons/abilities/z-bara.svg",
-      "sourceSha256": "51fbd774b71851e9964b73a04f795fa5d1b71962759d5cd5c517912046a27b4a",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "za-garsc-gambli",
       "label": "Za garść gambli",
       "owner": "gwiazda",
       "variant": "default",
       "source": "icons/abilities/za-garsc-gambli.svg",
       "sourceSha256": "cde71508cf8b7d7d178fb4e178ed549c877817d5ff504315a1e4682cb3c634dc",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "zabojczy-cios",
-      "label": "Zabójczy cios",
-      "owner": "brutal",
-      "variant": "default",
-      "source": "icons/abilities/zabojczy-cios.svg",
-      "sourceSha256": "a0e2a925f1b54f341304533b07aa2e16f3357c454d0a15c0291f21281e588bc2",
       "referenced": true
     },
     {
@@ -185,16 +75,6 @@
       "variant": "default",
       "source": "icons/abilities/zew-areny.svg",
       "sourceSha256": "7524b5d3e92bf9189e5964e1b4a5065a2986e42c5cb8af9fbee57f0f8d06f987",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "znajomosci",
-      "label": "Znajomości",
-      "owner": "kurier",
-      "variant": "default",
-      "source": "icons/abilities/znajomosci.svg",
-      "sourceSha256": "52a6498ef58a5200bda88b5386d7d4ea50b09c4e73c503a5a419b8fcde60629c",
       "referenced": true
     },
     {
@@ -462,38 +342,12 @@
   "subjects": [
     {
       "kind": "feature",
-      "id": "rzeznik",
-      "label": "Rzeźnik",
-      "owner": "wyjadacz-option",
-      "files": [
-        {
-          "source": "icons/abilities/rzeznik.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "szybkie-nogi",
       "label": "Szybkie nogi",
       "owner": "zlodziej",
       "files": [
         {
           "source": "icons/abilities/szybkie-nogi.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "szybkosc-kota",
-      "label": "Szybkość kota",
-      "owner": "zlodziej",
-      "files": [
-        {
-          "source": "icons/abilities/szybkosc-kota.svg",
           "variant": "default",
           "status": "generated placeholder"
         }
@@ -514,129 +368,12 @@
     },
     {
       "kind": "feature",
-      "id": "ulubiona-bron-zwiadowca",
-      "label": "Ulubiona broń",
-      "owner": "zwiadowca",
-      "files": [
-        {
-          "source": "icons/abilities/ulubiona-bron-zwiadowca.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "w-czuly-punkt",
-      "label": "W czuły punkt",
-      "owner": "spec",
-      "files": [
-        {
-          "source": "icons/abilities/w-czuly-punkt.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "wsciekly-cios",
-      "label": "Wściekły cios",
-      "owner": "brutal",
-      "files": [
-        {
-          "source": "icons/abilities/wsciekly-cios.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "wyczulone-zmysly",
-      "label": "Wyczulone zmysły",
-      "owner": "zwiadowca",
-      "files": [
-        {
-          "source": "icons/abilities/wyczulone-zmysly.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "wyjadacz-zwiadowca",
-      "label": "Wyjadacz",
-      "owner": "zwiadowca",
-      "files": [
-        {
-          "source": "icons/abilities/wyjadacz-zwiadowca.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "wyjadacz",
-      "label": "Wyjadacz",
-      "owner": "twardziel",
-      "files": [
-        {
-          "source": "icons/abilities/wyjadacz.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "wyksztalciuch",
-      "label": "Wykształciuch",
-      "owner": "spec",
-      "files": [
-        {
-          "source": "icons/abilities/wyksztalciuch.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "z-bara",
-      "label": "Z bara!",
-      "owner": "brutal",
-      "files": [
-        {
-          "source": "icons/abilities/z-bara.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "za-garsc-gambli",
       "label": "Za garść gambli",
       "owner": "gwiazda",
       "files": [
         {
           "source": "icons/abilities/za-garsc-gambli.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "zabojczy-cios",
-      "label": "Zabójczy cios",
-      "owner": "brutal",
-      "files": [
-        {
-          "source": "icons/abilities/zabojczy-cios.svg",
           "variant": "default",
           "status": "generated placeholder"
         }
@@ -676,19 +413,6 @@
       "files": [
         {
           "source": "icons/abilities/zew-areny.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "znajomosci",
-      "label": "Znajomości",
-      "owner": "kurier",
-      "files": [
-        {
-          "source": "icons/abilities/znajomosci.svg",
           "variant": "default",
           "status": "generated placeholder"
         }

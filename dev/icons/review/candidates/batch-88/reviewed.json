@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-16",
+  "batch": 88,
+  "feedbackBeforeSha256": "cbb5a80a9772a265335aeff3c77e69d825021b2f1c856549ef3370ba4c71696a",
+  "active": [
+    {
+      "id": "batch81-rzeznik",
+      "name": "Rzeźnik",
+      "decision": "approve",
+      "candidateId": "batch88-revision",
+      "selectedSource": "candidates/batch-88/rzeznik.png",
+      "sourceSha256": "777ea6c03de242e4ebc8345a5305369ef5494e328d8a39234e9c5b29ee842af4",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/rzeznik.svg",
+          "variant": "default",
+          "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch81-rzeznik",
+        "decision": "approve",
+        "candidateId": "batch88-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:30:25.290Z"
+      }
+    },
+    {
+      "id": "batch85-szybkie-nogi",
+      "name": "Szybkie nogi",
+      "decision": "revise",
+      "candidateId": "batch88-revision",
+      "selectedSource": "candidates/batch-88/szybkie-nogi.png",
+      "sourceSha256": "396423cfc20ec349daacebaac4431fa99fe6eedd3628cc94583579ae317063e9",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-nogi.svg",
+          "variant": "default",
+          "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398"
+        }
+      ],
+      "notes": "Close. Add motion lines showing the moonwalking motion (front leg going backwards, back leg going forwards)",
+      "feedback": {
+        "itemId": "batch85-szybkie-nogi",
+        "decision": "revise",
+        "candidateId": "batch88-revision",
+        "notes": "Close. Add motion lines showing the moonwalking motion (front leg going backwards, back leg going forwards)",
+        "updatedAt": "2026-10-15T23:31:10.932Z"
+      }
+    },
+    {
+      "id": "batch85-szybkosc-kota",
+      "name": "Szybkość kota",
+      "decision": "approve",
+      "candidateId": "batch88-revision",
+      "selectedSource": "candidates/batch-88/szybkosc-kota.png",
+      "sourceSha256": "d97001891bfe036602d65a0ebae46739165e3eeb4770e22a0f3168b2442e3ce4",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkosc-kota.svg",
+          "variant": "default",
+          "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch85-szybkosc-kota",
+        "decision": "approve",
+        "candidateId": "batch88-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:31:17.315Z"
+      }
+    },
+    {
+      "id": "batch87-trajektoria",
+      "name": "Trajektoria",
+      "decision": "revise",
+      "candidateId": "batch88-revision",
+      "selectedSource": "candidates/batch-88/trajektoria.png",
+      "sourceSha256": "b9fb77fe1bf030ae2a0b123848a30676f4bf8caea4926f53a481b77ed2531382",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/trajektoria.svg",
+          "variant": "default",
+          "sourceSha256": "ee9e7f28b3d095225871f6ef754ef95dd68cfd7c6c16ed99f6344663f6453e9f"
+        }
+      ],
+      "notes": "Close - redraw the image so the arc terminates EXACTLY AT the bullseye. Keep the composition.",
+      "feedback": {
+        "itemId": "batch87-trajektoria",
+        "decision": "revise",
+        "candidateId": "batch88-revision",
+        "notes": "Close - redraw the image so the arc terminates EXACTLY AT the bullseye. Keep the composition.",
+        "updatedAt": "2026-10-15T23:31:47.816Z"
+      }
+    },
+    {
+      "id": "batch88-ulubiona-bron-zwiadowca",
+      "name": "Ulubiona broń",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-88/ulubiona-bron-zwiadowca.png",
+      "sourceSha256": "862a785d46701cda42d4041703645d6dda64abcef4756243655f81294c83cac3",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ulubiona-bron-zwiadowca.svg",
+          "variant": "default",
+          "sourceSha256": "dfaab0fdee5a2eea18b28777faf5ebc65ce32f1d61ee9ade770ee5d77bf936b3"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch88-ulubiona-bron-zwiadowca",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:31:52.722Z"
+      }
+    },
+    {
+      "id": "batch88-w-czuly-punkt",
+      "name": "W czuły punkt",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-88/w-czuly-punkt.png",
+      "sourceSha256": "46ebae27d1c24cb7d054d91d666d17d98f36a792be0ebf034a0632a4d44e1cb0",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/w-czuly-punkt.svg",
+          "variant": "default",
+          "sourceSha256": "494b773b1bd3d580fe42cd13ca56fe001b8830b33a0f0ffbf75508a7a8719794"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch88-w-czuly-punkt",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:31:58.574Z"
+      }
+    },
+    {
+      "id": "batch88-wsciekly-cios",
+      "name": "Wściekły cios",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-88/wsciekly-cios.png",
+      "sourceSha256": "0f1645e779d7b674bea99bd82493f203269cc4cb2dda2ba902d5e7deb3afd728",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wsciekly-cios.svg",
+          "variant": "default",
+          "sourceSha256": "52ae2a6a7a2a4e2d93821ffb52e603891237b164515cc23a18067020927610f8"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch88-wsciekly-cios",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:32:03.370Z"
+      }
+    },
+    {
+      "id": "batch88-wyczulone-zmysly",
+      "name": "Wyczulone zmysły",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-88/wyczulone-zmysly.png",
+      "sourceSha256": "7ee8f577e3f4cc88713521b3770063d7f7e0da478bcc4e5cd902fa7ef19b121d",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wyczulone-zmysly.svg",
+          "variant": "default",
+          "sourceSha256": "630c1143f620eb4e0a6950df06c7462b5e045a9a032023f9885ca0df95177edf"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch88-wyczulone-zmysly",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:32:08.028Z"
+      }
+    },
+    {
+      "id": "batch88-wyjadacz-zwiadowca",
+      "name": "Wyjadacz",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-88/wyjadacz-zwiadowca.png",
+      "sourceSha256": "b4c51eeb755d654e3abad33ce5431839cdc0820c068cb080d3160c776ebed19a",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wyjadacz-zwiadowca.svg",
+          "variant": "default",
+          "sourceSha256": "c8495031166e511cfbbfe32844e060cd26b509110a766d30a4cc9fd9456e2012"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch88-wyjadacz-zwiadowca",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:32:27.878Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-16",
+  "batch": 89,
+  "feedbackBeforeSha256": "cbb5a80a9772a265335aeff3c77e69d825021b2f1c856549ef3370ba4c71696a",
+  "active": [
+    {
+      "id": "batch89-wyjadacz",
+      "name": "Wyjadacz",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-89/wyjadacz.png",
+      "sourceSha256": "84d42c0d7d546c673827021f2d702daa08f50dd08f5a5ae72ca7032f7d72d6a3",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wyjadacz.svg",
+          "variant": "default",
+          "sourceSha256": "374e50918253c177a15139376fef0f5f6f1199181433d72dac3671f12add84f8"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch89-wyjadacz",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:32:32.213Z"
+      }
+    },
+    {
+      "id": "batch89-wyksztalciuch",
+      "name": "Wykształciuch",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-89/wyksztalciuch.png",
+      "sourceSha256": "a9bfb1e2c4725dc8dc4bfc5969a18ef665f3a5e3b463a6447b9d95ee7f23f680",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wyksztalciuch.svg",
+          "variant": "default",
+          "sourceSha256": "a6797cc50ff6fe13453bdf1b33603c2aabc2228ae45d9d991431da62a0739804"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch89-wyksztalciuch",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:32:37.098Z"
+      }
+    },
+    {
+      "id": "batch89-z-bara",
+      "name": "Z bara!",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-89/z-bara.png",
+      "sourceSha256": "4dc3bc735e1932627fba571deabcd0902289ddc4a77829fe5a3e78f562fad290",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/z-bara.svg",
+          "variant": "default",
+          "sourceSha256": "51fbd774b71851e9964b73a04f795fa5d1b71962759d5cd5c517912046a27b4a"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch89-z-bara",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:32:41.954Z"
+      }
+    },
+    {
+      "id": "batch89-za-garsc-gambli",
+      "name": "Za garść gambli",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-89/za-garsc-gambli.png",
+      "sourceSha256": "6afb20d85dea172237e1988ed69071d87b9937fc2388a70c07b132d36b8058bf",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/za-garsc-gambli.svg",
+          "variant": "default",
+          "sourceSha256": "cde71508cf8b7d7d178fb4e178ed549c877817d5ff504315a1e4682cb3c634dc"
+        }
+      ],
+      "notes": "Swap the coins in the hat for bullets",
+      "feedback": {
+        "itemId": "batch89-za-garsc-gambli",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Swap the coins in the hat for bullets",
+        "updatedAt": "2026-10-15T23:33:00.030Z"
+      }
+    },
+    {
+      "id": "batch89-zabojczy-cios",
+      "name": "Zabójczy cios",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-89/zabojczy-cios.png",
+      "sourceSha256": "8fc999f2aa3779457610e5793a8c49694c26a07985e0af0ab38abedcc0c4416a",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zabojczy-cios.svg",
+          "variant": "default",
+          "sourceSha256": "a0e2a925f1b54f341304533b07aa2e16f3357c454d0a15c0291f21281e588bc2"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch89-zabojczy-cios",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:33:13.325Z"
+      }
+    },
+    {
+      "id": "batch89-zawolajcie-kolegow",
+      "name": "Zawołajcie kolegów",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-89/zawolajcie-kolegow.png",
+      "sourceSha256": "e8f1c30ee6f2acafd3471b5af30862d84dedf6ee7c170d9e61887e6ac2294941",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawolajcie-kolegow.svg",
+          "variant": "default",
+          "sourceSha256": "abfc18f9af0e406acc37d35e09766a779dad7eeabed31cf74d1f1a8e14b3748d"
+        }
+      ],
+      "notes": "Rotate the frontmost first 180 degrees, with it's palm facing the camera. Keep the gesture and keep the other fists",
+      "feedback": {
+        "itemId": "batch89-zawolajcie-kolegow",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Rotate the frontmost first 180 degrees, with it's palm facing the camera. Keep the gesture and keep the other fists",
+        "updatedAt": "2026-10-15T23:33:57.812Z"
+      }
+    },
+    {
+      "id": "batch89-zawsze-w-siodle",
+      "name": "Zawsze w siodle",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-89/zawsze-w-siodle.png",
+      "sourceSha256": "0920f5b301d75ecd8c2fb211c9db75ec013e7ee43207b667575a103c078bd946",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawsze-w-siodle.svg",
+          "variant": "default",
+          "sourceSha256": "5e64e1f696dd5bdd4d4b71e08d22eaa07280cd5ed0b88c6ff05b3ebe43f1881f"
+        }
+      ],
+      "notes": "Rethink the concept. Maybe something more symbollic, or perhaps a cowboy on a horse in unusual circumstances?",
+      "feedback": {
+        "itemId": "batch89-zawsze-w-siodle",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Rethink the concept. Maybe something more symbollic, or perhaps a cowboy on a horse in unusual circumstances?",
+        "updatedAt": "2026-10-15T23:35:02.672Z"
+      }
+    },
+    {
+      "id": "batch89-zew-areny",
+      "name": "Zew areny",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-89/zew-areny.png",
+      "sourceSha256": "f12ee1e69ca78371e13d47562e58a912a79a4371adfdc3ef340ae54c0891a54c",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zew-areny.svg",
+          "variant": "default",
+          "sourceSha256": "7524b5d3e92bf9189e5964e1b4a5065a2986e42c5cb8af9fbee57f0f8d06f987"
+        }
+      ],
+      "notes": "Change the image of a bell to the image of a roaring audience",
+      "feedback": {
+        "itemId": "batch89-zew-areny",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Change the image of a bell to the image of a roaring audience",
+        "updatedAt": "2026-10-15T23:35:47.791Z"
+      }
+    },
+    {
+      "id": "batch89-znajomosci",
+      "name": "Znajomości",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-89/znajomosci.png",
+      "sourceSha256": "7750a29d6a84f5e0faf9192c0755ef979d41cefa4acc18d6bf8c9d31cee22f2f",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/znajomosci.svg",
+          "variant": "default",
+          "sourceSha256": "52a6498ef58a5200bda88b5386d7d4ea50b09c4e73c503a5a419b8fcde60629c"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch89-znajomosci",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:35:54.347Z"
+      }
+    }
+  ]
+}

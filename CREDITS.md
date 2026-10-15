@@ -206,6 +206,11 @@ Stylówa uses its focused generated correction. Sources and hashes are in
 `dev/icons/review/candidates/batch-86/reviewed-installed.json` and
 `dev/icons/review/candidates/batch-87/reviewed-installed.json`.
 
+Twelve further GM selections from the Batch 88–89 review were installed on
+2026-10-16 as exact SVG/WEBP masks generated with OpenAI's built-in image tool.
+Sources and hashes are in `dev/icons/review/candidates/batch-88/reviewed-installed.json`
+and `dev/icons/review/candidates/batch-89/reviewed-installed.json`.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

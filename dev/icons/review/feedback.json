@@ -2936,10 +2936,10 @@
     },
     "batch81-rzeznik": {
       "itemId": "batch81-rzeznik",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch88-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T23:24:08.019Z"
+      "updatedAt": "2026-10-15T23:30:25.290Z"
     },
     "batch81-rzuc-bron-i-gleba": {
       "itemId": "batch81-rzuc-bron-i-gleba",
@@ -3104,10 +3104,10 @@
     },
     "batch85-szybkie-nogi": {
       "itemId": "batch85-szybkie-nogi",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch88-revision",
-      "notes": "",
-      "updatedAt": "2026-10-15T23:24:08.019Z"
+      "notes": "Close. Add motion lines showing the moonwalking motion (front leg going backwards, back leg going forwards)",
+      "updatedAt": "2026-10-15T23:31:10.932Z"
     },
     "batch85-szybkie-rece": {
       "itemId": "batch85-szybkie-rece",
@@ -3118,10 +3118,10 @@
     },
     "batch85-szybkosc-kota": {
       "itemId": "batch85-szybkosc-kota",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch88-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T23:24:08.020Z"
+      "updatedAt": "2026-10-15T23:31:17.315Z"
     },
     "batch87-smiertelna-obelga": {
       "itemId": "batch87-smiertelna-obelga",
@@ -3139,10 +3139,10 @@
     },
     "batch87-trajektoria": {
       "itemId": "batch87-trajektoria",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch88-revision",
-      "notes": "",
-      "updatedAt": "2026-10-15T23:24:08.020Z"
+      "notes": "Close - redraw the image so the arc terminates EXACTLY AT the bullseye. Keep the composition.",
+      "updatedAt": "2026-10-15T23:31:47.816Z"
     },
     "batch87-trening-w-zbroi": {
       "itemId": "batch87-trening-w-zbroi",
@@ -3185,6 +3185,104 @@
       "candidateId": "atlas-a",
       "notes": "",
       "updatedAt": "2026-10-15T23:13:21.016Z"
+    },
+    "batch88-ulubiona-bron-zwiadowca": {
+      "itemId": "batch88-ulubiona-bron-zwiadowca",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:31:52.722Z"
+    },
+    "batch88-w-czuly-punkt": {
+      "itemId": "batch88-w-czuly-punkt",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:31:58.574Z"
+    },
+    "batch88-wsciekly-cios": {
+      "itemId": "batch88-wsciekly-cios",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:32:03.370Z"
+    },
+    "batch88-wyczulone-zmysly": {
+      "itemId": "batch88-wyczulone-zmysly",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:32:08.028Z"
+    },
+    "batch88-wyjadacz-zwiadowca": {
+      "itemId": "batch88-wyjadacz-zwiadowca",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:32:27.878Z"
+    },
+    "batch89-wyjadacz": {
+      "itemId": "batch89-wyjadacz",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:32:32.213Z"
+    },
+    "batch89-wyksztalciuch": {
+      "itemId": "batch89-wyksztalciuch",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:32:37.098Z"
+    },
+    "batch89-z-bara": {
+      "itemId": "batch89-z-bara",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:32:41.954Z"
+    },
+    "batch89-za-garsc-gambli": {
+      "itemId": "batch89-za-garsc-gambli",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Swap the coins in the hat for bullets",
+      "updatedAt": "2026-10-15T23:33:00.030Z"
+    },
+    "batch89-zabojczy-cios": {
+      "itemId": "batch89-zabojczy-cios",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:33:13.325Z"
+    },
+    "batch89-zawolajcie-kolegow": {
+      "itemId": "batch89-zawolajcie-kolegow",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Rotate the frontmost first 180 degrees, with it's palm facing the camera. Keep the gesture and keep the other fists",
+      "updatedAt": "2026-10-15T23:33:57.812Z"
+    },
+    "batch89-zawsze-w-siodle": {
+      "itemId": "batch89-zawsze-w-siodle",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Rethink the concept. Maybe something more symbollic, or perhaps a cowboy on a horse in unusual circumstances?",
+      "updatedAt": "2026-10-15T23:35:02.672Z"
+    },
+    "batch89-zew-areny": {
+      "itemId": "batch89-zew-areny",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Change the image of a bell to the image of a roaring audience",
+      "updatedAt": "2026-10-15T23:35:47.791Z"
+    },
+    "batch89-znajomosci": {
+      "itemId": "batch89-znajomosci",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-15T23:35:54.347Z"
     }
   }
 }

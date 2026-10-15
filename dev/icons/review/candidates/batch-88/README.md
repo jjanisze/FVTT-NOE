@@ -58,3 +58,8 @@ inspected at 64/32/24/16 px. All 728 candidate pairs validate. The gallery has
 18 pending cards, 45 options, all new candidates selected and no broken images.
 Evidence: `raw/review-preview.png` and
 `../../../placeholder-pass/progress-88-89.json`.
+
+Saved GM review: seven approvals installed. Szybkie nogi and Trajektoria
+carry exact motion-line and trajectory-endpoint requests into Batch 90.
+`reviewed.json` preserves every decision; `reviewed-installed.json` records
+selected sources and delivered hashes.

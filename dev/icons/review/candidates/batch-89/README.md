@@ -50,3 +50,8 @@ generation correction was needed. Contact sheets were inspected at
 18 pending cards, 45 options and no broken images, with new candidates selected.
 Evidence: `../batch-88/raw/review-preview.png` and
 `../../../placeholder-pass/progress-88-89.json`.
+
+Saved GM review: five approvals installed. Za garść gambli, Zawołajcie kolegów,
+Zawsze w siodle and Zew areny carry exact saved notes into Batch 90. Decisions
+are in `reviewed.json`; delivery sources and hashes are in
+`reviewed-installed.json`.

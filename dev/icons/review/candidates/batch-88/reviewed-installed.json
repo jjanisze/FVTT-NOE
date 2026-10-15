@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-16",
+  "batch": 88,
+  "approvedSubjects": 7,
+  "remainingSubjects": 11,
+  "installed": [
+    {
+      "itemId": "batch81-rzeznik",
+      "candidateId": "batch88-revision",
+      "source": "candidates/batch-88/rzeznik.png",
+      "sourceSha256": "777ea6c03de242e4ebc8345a5305369ef5494e328d8a39234e9c5b29ee842af4",
+      "files": [
+        "icons/abilities/rzeznik.svg",
+        "icons/abilities/rzeznik.webp"
+      ],
+      "svgSha256": "c10d28d8c01865de4b323ff76ab04f28814f0e5f36f7696bd333d40079670136",
+      "webpSha256": "e6cf7243a9da1eb4e9277bc434af522da8ba0872a21c0dbe3c36e2138b8cda18"
+    },
+    {
+      "itemId": "batch85-szybkosc-kota",
+      "candidateId": "batch88-revision",
+      "source": "candidates/batch-88/szybkosc-kota.png",
+      "sourceSha256": "d97001891bfe036602d65a0ebae46739165e3eeb4770e22a0f3168b2442e3ce4",
+      "files": [
+        "icons/abilities/szybkosc-kota.svg",
+        "icons/abilities/szybkosc-kota.webp"
+      ],
+      "svgSha256": "de26fd9101df4920f5cbe887b0f4054a38e49f3d6c2fabb4dd3913b7e4f5b249",
+      "webpSha256": "98ff371c3c37643448503c3c4f4e13d8facffe5c5bf2af138e552bda1aeed7f9"
+    },
+    {
+      "itemId": "batch88-ulubiona-bron-zwiadowca",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-88/ulubiona-bron-zwiadowca.png",
+      "sourceSha256": "862a785d46701cda42d4041703645d6dda64abcef4756243655f81294c83cac3",
+      "files": [
+        "icons/abilities/ulubiona-bron-zwiadowca.svg",
+        "icons/abilities/ulubiona-bron-zwiadowca.webp"
+      ],
+      "svgSha256": "27af2eee4b680419b8f490e6ff95a8a881db16793ffc3c2e98686e382ce650b7",
+      "webpSha256": "5eb2a27e9b30840992cb76b18e5d8fdf1de15f06f7f3e91e97fdcf1d6d6890a0"
+    },
+    {
+      "itemId": "batch88-w-czuly-punkt",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-88/w-czuly-punkt.png",
+      "sourceSha256": "46ebae27d1c24cb7d054d91d666d17d98f36a792be0ebf034a0632a4d44e1cb0",
+      "files": [
+        "icons/abilities/w-czuly-punkt.svg",
+        "icons/abilities/w-czuly-punkt.webp"
+      ],
+      "svgSha256": "83864a630f4826053572fb43e60e6689aedf48a5c9e7b8d6b647fbbf38cd902d",
+      "webpSha256": "5d3beb526e997fd4d520bb8d197c51a2cfa91e7a3f77f9cbf9e2eb5d54f2e1f5"
+    },
+    {
+      "itemId": "batch88-wsciekly-cios",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-88/wsciekly-cios.png",
+      "sourceSha256": "0f1645e779d7b674bea99bd82493f203269cc4cb2dda2ba902d5e7deb3afd728",
+      "files": [
+        "icons/abilities/wsciekly-cios.svg",
+        "icons/abilities/wsciekly-cios.webp"
+      ],
+      "svgSha256": "594b04c8d445435552aa8e4eb46ab09aa75806c440f870f89f59ce46ef1dd4e0",
+      "webpSha256": "ca853b80e6f54aa1923f492725bed2c599a31b2e4f5c5ddfdf8302e7bfba95c9"
+    },
+    {
+      "itemId": "batch88-wyczulone-zmysly",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-88/wyczulone-zmysly.png",
+      "sourceSha256": "7ee8f577e3f4cc88713521b3770063d7f7e0da478bcc4e5cd902fa7ef19b121d",
+      "files": [
+        "icons/abilities/wyczulone-zmysly.svg",
+        "icons/abilities/wyczulone-zmysly.webp"
+      ],
+      "svgSha256": "3b644368686cd60a817470a4ac84f8be0cadfaefbab42326f2961eb760c66ec6",
+      "webpSha256": "2681bdac9c19f0117df2cbf2cced04ca719d3acf0a6e579489408d49097f46a0"
+    },
+    {
+      "itemId": "batch88-wyjadacz-zwiadowca",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-88/wyjadacz-zwiadowca.png",
+      "sourceSha256": "b4c51eeb755d654e3abad33ce5431839cdc0820c068cb080d3160c776ebed19a",
+      "files": [
+        "icons/abilities/wyjadacz-zwiadowca.svg",
+        "icons/abilities/wyjadacz-zwiadowca.webp"
+      ],
+      "svgSha256": "1a908caaae7055ad831d09d8489532b1e3d5c4b041795346980cde6c185c5172",
+      "webpSha256": "6b686fa3bf1b7b99b0aaff5ed7361f18a9d77afb0b47fdf2d2adecb21359e19c"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batches 88 + 89 · 18 awaiting GM review",
+  "title": "Batch 89 · 5 approved subjects delivered; 6 awaiting revision",
   "updated": "2026-10-16",
   "items": [
     {
@@ -11095,7 +11095,8 @@
           "src": "candidates/batch-81/rzeznik.png",
           "note": "ONE complete BARE ADULT HAND gripping ONE large sturdy MEAT CLEAVER raised diagonally. Broad rectangular blade with a single clean cutting edge, short complete grip and coherent fingers/thumb/wrist. A powerful single-weapon melee strike, sober inventory object. No other weapon, victim, wound, blood, gore, face, blade engraving or tiny scratches."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch81-rzuc-bron-i-gleba",
@@ -11993,7 +11994,8 @@
           "src": "candidates/batch-85/szybkosc-kota.png",
           "note": "ONE realistic adult CAT facing LEFT in a LOW EVASIVE CROUCH, forepaws braced, one hindleg ready to spring and one long tail curved high behind. ONE broad BULLET STREAK passes safely ABOVE its back, with a clear black gap. Natural cat proportions, four complete legs and one small eye cut; compact grounded pose rather than the earlier airborne leap. Sober agility emblem, no cute mascot, anime eyes, face portrait, injury, fine fur, extra tail, numerals or decorative arrows."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch87-smiertelna-obelga",
@@ -12297,7 +12299,8 @@
           "src": "candidates/batch-88/ulubiona-bron-zwiadowca.png",
           "note": "Complete the favorite-weapon FAMILY: ONE practical complete SCOPED RIFLE angled upward-right, clear shoulder stock, straight barrel, scope and empty trigger guard. ONE thick CIRCULAR FAVORITE BADGE beside the stock contains ONE bold FIVE-POINT STAR cut in black, matching the approved revolver's badge in reference cell 5. Same simple badge scale and white stencil weight, changing only the weapon. No hand, person, engraving, text, numerals, tiny scope fittings or logo."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch88-w-czuly-punkt",
@@ -12326,7 +12329,8 @@
           "src": "candidates/batch-88/w-czuly-punkt.png",
           "note": "ONE plain headless TRAINING MANNEQUIN TORSO, with shoulder stubs and broad intact chest. ONE thick circular TARGET CROSSHAIR marks its CENTER; ONE short blunt POINTER meets the reticle from lower-right. A schematic precise-strike emblem, no real anatomical labels or injury. Broad simple white shapes with black separation, no face, limbs, organs, wound, gore, lettering, numerals, tiny muscles or extra targets."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch88-wsciekly-cios",
@@ -12355,7 +12359,8 @@
           "src": "candidates/batch-88/wsciekly-cios.png",
           "note": "ONE complete powerful BARE CLENCHED FIST smashes ONE stout rectangular STONE BLOCK into exactly TWO large separated chunks. Complete short wrist and coherent thumb/folded fingers, one broad angular impact wedge between fist and block. Forceful furious strike, sober functional silhouette with large black gaps. No person, portrait, extra hand, tiny debris, texture, blood, wound, gore or written marks."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch88-wyczulone-zmysly",
@@ -12384,7 +12389,8 @@
           "src": "candidates/batch-88/wyczulone-zmysly.png",
           "note": "ONE large natural HUMAN EAR beside ONE plain natural HUMAN EYE, staggered diagonally with TWO broad sound-wave arcs between them. External sensory symbols only: ear has two large inner folds, eye one almond contour and round black pupil. Clear strong white masses, generous black space and natural proportions. No whole face, beard portrait, anime lashes, giant stylized eye, gore, tiny wrinkles, text or extra organs."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch88-wyjadacz-zwiadowca",
@@ -12413,7 +12419,8 @@
           "src": "candidates/batch-88/wyjadacz-zwiadowca.png",
           "note": "Veteran-expertise badge FAMILY: ONE sturdy rounded-rectangle SHOULDER PATCH with a thick white border. Its UPPER HALF contains ONE simple FOUR-POINT COMPASS NEEDLE emblem with no letters. Its LOWER HALF contains exactly THREE broad stacked CHEVRONS pointing upward. Broad black gaps separate emblem, chevrons and rim. A fictional scout-veteran patch, same construction as the armored-veteran counterpart. No person, face, numbers, writing, real unit insignia, tiny stitching or decorative laurel."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch89-wyjadacz",
@@ -12442,7 +12449,8 @@
           "src": "candidates/batch-89/wyjadacz.png",
           "note": "Veteran-expertise badge FAMILY: ONE sturdy rounded-rectangle SHOULDER PATCH with a thick white border. Its UPPER HALF contains ONE simple BODY-ARMOR VEST emblem with two broad plate cuts. Its LOWER HALF contains exactly THREE broad stacked CHEVRONS pointing upward. Broad black gaps separate emblem, chevrons and rim. Same patch proportions, rim and chevron scale as the scout-veteran counterpart; change only the upper emblem. No person, face, letters, numbers, real unit insignia, tiny stitching or laurel."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch89-wyksztalciuch",
@@ -12471,7 +12479,8 @@
           "src": "candidates/batch-89/wyksztalciuch.png",
           "note": "ONE plain GRADUATION MORTARBOARD above ONE sturdy SMALL TOOLBOX, with one short broad tassel, a complete carrying handle and two simple lid cuts. A large wrench head and screwdriver handle peek from the open box, broad functional silhouettes only. Learning adds practical skills, not a book motif. No person, face, lettering, numerals, tiny tools, academic logo, fine stitching or giant cog."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch89-z-bara",
@@ -12500,7 +12509,8 @@
           "src": "candidates/batch-89/z-bara.png",
           "note": "TWO generic ADULT UPPER TORSOS in side view. LEFT adult leans their SHOULDER into the RIGHT adult's chest in a powerful SHOULDER SHOVE; the right figure tilts backward off balance with one arm out. Short coherent necks, smooth featureless heads and complete visible arms, plain clothes. One broad contact wedge at the shoulder, large black gaps. Torso-level compact composition, no running legs, gruff portraits, anime, weapon, injury, blood or extra limbs."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch89-za-garsc-gambli",
@@ -12558,7 +12568,8 @@
           "src": "candidates/batch-89/zabojczy-cios.png",
           "note": "ONE complete BARE CLENCHED FIST strikes ONE simple symbolic SKULL, splitting the skull emblem into TWO broad pieces with a single large crack. Skull has two big eye holes and block jaw, no fine teeth. Complete wrist, coherent thumb/folded fingers, one broad impact wedge. Flat non-graphic deadly-strike symbol, no human body, wound, blood, realistic head injury, gore, tiny fragments or text."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch89-zawolajcie-kolegow",
@@ -12674,7 +12685,8 @@
           "src": "candidates/batch-89/znajomosci.png",
           "note": "Exactly THREE plain generic ADULT HEAD-AND-SHOULDER SILHOUETTES form ONE clear SOCIAL NETWORK: one larger silhouette at TOP CENTER, two smaller at lower-left and lower-right. TWO broad straight connector strokes link the top silhouette to the lower pair, with clear black spacing from their heads. Smooth featureless natural adult heads, sober diagram-like icon. No handshake, face detail, beard, anime, labels, numbers, arrows or extra people."
         }
-      ]
+      ],
+      "status": "resolved"
     }
   ]
 }
