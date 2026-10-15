@@ -148,6 +148,12 @@ were approved by the GM and installed on 2026-10-13 as exact lossless WEBP/SVG
 pairs. Their selected sources, final paths and hashes are archived in
 `dev/icons/review/candidates/batch-68/reviewed-installed.json`.
 
+Five Batch 69 white glyphs were AI-generated with OpenAI's built-in image tool,
+reviewed by the GM and installed on 2026-10-15: Berserk (base and active),
+Bezlitosny przywódca, Brutalny cios, Bystrzacha and Cichy krok. Exact approved
+sources and delivered SVG/WEBP hashes are archived in
+`dev/icons/review/candidates/batch-69/reviewed-installed.json`.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

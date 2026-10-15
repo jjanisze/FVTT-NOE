@@ -37,12 +37,12 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 70** (Batch 69: nine replacement candidates await GM review;
-no production placeholders are replaced before approval).
+**Next batch number: 70** (the previous 342-card queue is resolved; the newly
+audited class/profession placeholder backlog remains and is listed below).
 
 **Icon coverage correction, 2026-10-15:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
-155 generated initials badges (153 canonically referenced art subjects).
+149 generated initials badges (148 canonically referenced art subjects).
 Origins, Sztuczki, M5 actions and fuel-grade deliveries from the earlier pass
 remain delivered; these counts do not cover all module icons. See the class
 placeholder backlog and `class-placeholder-audit.json`. GM wiring and painted
@@ -592,11 +592,13 @@ ready for GM resolver mappings; Pan Plaster remains an older Sztuczka
 repoint/rebuild task. No packs or world documents were changed.
 
 <!-- placeholder-batch-69:start -->
-## Queue (A) — Batch 69 — 9 awaiting GM review
+## Reviewed (A) — Batch 69 — 5 approved subjects delivered, 4 revisions
 
-One 3×3 atlas in the established white-glyph style; native initials badges remain
-until the GM approves a selected candidate. Exact sources/hashes, generic prompts
-and targets: `review/candidates/batch-69/`.
+GM review 2026-10-15: Berserk (base and active), Bezlitosny przywódca, Brutalny
+cios, Bystrzacha and Cichy krok are installed as exact approved SVG/WEBP masks.
+Six native placeholder files are replaced. A co mi tam!, Amen, Bez tajemnic
+and Clint carry their saved revision notes into Batch 70. Exact decisions and
+delivered hashes: `review/candidates/batch-69/reviewed*.json`.
 
 | Cell | Item | Exact SVG delivery targets (+ WEBP) |
 |---|---|---|
@@ -621,9 +623,9 @@ targets, without new mechanics or wiring. Code, packs and world state are untouc
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source
 
-Audit 2026-10-15: **155 generated initials SVGs**, including 6 classes,
-18 professions and 131 ability files. 2 ability files are active-state
-variants. Canonically referenced art requests below represent **153 subjects**;
+Audit 2026-10-15: **149 generated initials SVGs**, including 6 classes,
+18 professions and 125 ability files. 1 ability files are active-state
+variants. Canonically referenced art requests below represent **148 subjects**;
 base/active variants share a subject and must keep their existing exact filenames.
 These were outside the previous 342-card generation queue. File existence was not
 evidence of finished artwork. Native badges were confirmed against the exact
@@ -638,12 +640,7 @@ and the next free batch; fresh GM approval is required before replacement.
 |---|---|---|---|---|
 | feature | A co mi tam! | szczur | `icons/abilities/a-co-mi-tam.svg` | Needs art |
 | feature | Amen | kaznodzieja-nowej-ery | `icons/abilities/amen.svg` | Needs art |
-| feature | Berserk | brutal | `icons/abilities/berserk.svg`; `icons/abilities/berserk_active.svg` | Needs art |
 | feature | Bez tajemnic | lowca-mutantow | `icons/abilities/bez-tajemnic.svg` | Needs art |
-| feature | Bezlitosny przywódca | mafiozo | `icons/abilities/bezlitosny-przywodca.svg` | Needs art |
-| feature | Brutalny cios | brutal | `icons/abilities/brutalny-cios.svg` | Needs art |
-| feature | Bystrzacha | spec | `icons/abilities/bystrzacha.svg` | Needs art |
-| feature | Cichy krok | zwiadowca | `icons/abilities/cichy-krok.svg` | Needs art |
 | feature | Clint | kowboj | `icons/abilities/clint.svg` | Needs art |
 | feature | Cwaniacki zwód | cwaniak | `icons/abilities/cwaniacki-zwod.svg` | Needs art |
 | feature | Dobra rada | spec | `icons/abilities/dobra-rada.svg` | Needs art |

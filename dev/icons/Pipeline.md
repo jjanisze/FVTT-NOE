@@ -71,6 +71,11 @@ Use the following structured prompt for generation:
   Show the actual object or a sober functional diagram whenever it remains legible.
 - Readability gate: inspect every candidate at 64, 32 and 16 px. Fine detail that
   only works in the source image does not count as successful icon detail.
+- Subject variety (GM feedback, 2026-10-15): do not default every ability to a
+  gruff male survivor bust. Prefer its actual object, gesture or action; when
+  a person is needed, use a generic adult figure with restrained facial detail
+  and natural proportions. Androgynous figures are appropriate for general
+  abilities. Avoid anime styling, spiky hair and exaggerated faces.
 - Contents: Input text, e.g. "Revolver", "Semi-automatic pistol", "Short Automatic Weapon", "Medium Automatic Weapon", "Long Automatic Weapon", "Support Weapon", "Scoped Long Weapon", "Special", "Shotgun", "Lever-action".
 
 Prompt with reference file(s) should be executed, and raw results placed into `in/`.

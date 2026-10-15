@@ -1,18 +1,18 @@
 {
   "stats": {
     "date": "2026-10-15",
-    "confirmedPlaceholderFiles": 155,
-    "referencedPlaceholderFiles": 154,
+    "confirmedPlaceholderFiles": 149,
+    "referencedPlaceholderFiles": 148,
     "unmappedPlaceholderFiles": 1,
-    "activeVariants": 2,
-    "referencedActiveVariants": 1,
-    "abilityPlaceholderFiles": 131,
+    "activeVariants": 1,
+    "referencedActiveVariants": 0,
+    "abilityPlaceholderFiles": 125,
     "missingExpectedFiles": 0,
-    "artSubjects": 153,
+    "artSubjects": 148,
     "byKind": {
       "class": 6,
       "profession": 18,
-      "feature": 130
+      "feature": 124
     },
     "scope": "Exact generator signature plus canonical class/profession definitions; no world or pack reads"
   },
@@ -39,72 +39,12 @@
     },
     {
       "kind": "feature",
-      "id": "berserk",
-      "label": "Berserk",
-      "owner": "brutal",
-      "variant": "default",
-      "source": "icons/abilities/berserk.svg",
-      "sourceSha256": "7e0ca9a1bb0a2332ce46368c3a77d59480a7f4a0bc7e2e4c2db8e3a00ce59934",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "berserk",
-      "label": "Berserk",
-      "owner": "brutal",
-      "variant": "active",
-      "source": "icons/abilities/berserk_active.svg",
-      "sourceSha256": "34150f4dcc40ab72db9d6519f4d8865212561724f4f93da06366d511f3b4f64a",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "bez-tajemnic",
       "label": "Bez tajemnic",
       "owner": "lowca-mutantow",
       "variant": "default",
       "source": "icons/abilities/bez-tajemnic.svg",
       "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "bezlitosny-przywodca",
-      "label": "Bezlitosny przywódca",
-      "owner": "mafiozo",
-      "variant": "default",
-      "source": "icons/abilities/bezlitosny-przywodca.svg",
-      "sourceSha256": "0b1104155975ba5fe68b0d7de3cee344154300467ccf8485c0494e52bf2ba622",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "brutalny-cios",
-      "label": "Brutalny cios",
-      "owner": "brutal",
-      "variant": "default",
-      "source": "icons/abilities/brutalny-cios.svg",
-      "sourceSha256": "953582c6d91772ef56e9125cd75d1759e9e8bf01817dcd33c16330b7ad986aa4",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "bystrzacha",
-      "label": "Bystrzacha",
-      "owner": "spec",
-      "variant": "default",
-      "source": "icons/abilities/bystrzacha.svg",
-      "sourceSha256": "13659d562f71a640d6b49b4ac1db8b24e77da389d67298ed5ed8bb58e7fd7325",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "cichy-krok",
-      "label": "Cichy krok",
-      "owner": "zwiadowca",
-      "variant": "default",
-      "source": "icons/abilities/cichy-krok.svg",
-      "sourceSha256": "8c9ad2fa1efbd2e365755c19f97e23faee33ab24d8a491449da0a5c9f2544d61",
       "referenced": true
     },
     {
@@ -1597,82 +1537,12 @@
     },
     {
       "kind": "feature",
-      "id": "berserk",
-      "label": "Berserk",
-      "owner": "brutal",
-      "files": [
-        {
-          "source": "icons/abilities/berserk.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        },
-        {
-          "source": "icons/abilities/berserk_active.svg",
-          "variant": "active",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "bez-tajemnic",
       "label": "Bez tajemnic",
       "owner": "lowca-mutantow",
       "files": [
         {
           "source": "icons/abilities/bez-tajemnic.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "bezlitosny-przywodca",
-      "label": "Bezlitosny przywódca",
-      "owner": "mafiozo",
-      "files": [
-        {
-          "source": "icons/abilities/bezlitosny-przywodca.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "brutalny-cios",
-      "label": "Brutalny cios",
-      "owner": "brutal",
-      "files": [
-        {
-          "source": "icons/abilities/brutalny-cios.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "bystrzacha",
-      "label": "Bystrzacha",
-      "owner": "spec",
-      "files": [
-        {
-          "source": "icons/abilities/bystrzacha.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "cichy-krok",
-      "label": "Cichy krok",
-      "owner": "zwiadowca",
-      "files": [
-        {
-          "source": "icons/abilities/cichy-krok.svg",
           "variant": "default",
           "status": "generated placeholder"
         }

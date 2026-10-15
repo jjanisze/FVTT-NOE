@@ -50,3 +50,10 @@ the review state and all ten original target hashes. Do not rerun preparation.
 The registrar appends nine pending cards and preserves all saved feedback.
 Its independent archive is `manifest-items.json`. No code, pack rebuild, live
 repoint or campaign-world write is part of this batch.
+
+GM review, 2026-10-15: five subjects approved and delivered at six exact SVG
+filenames with WEBP sidecars (Berserk base/active, Bezlitosny przywódca,
+Brutalny cios, Bystrzacha, Cichy krok). Four revisions retain verbatim feedback
+in `reviewed.json` and enter Batch 70. `reviewed-installed.json` records hashes;
+verify with `python dev/icons/placeholder-pass/accept.py --batch=69 --check`.
+The refreshed source audit finds 149 placeholder files / 148 remaining subjects.

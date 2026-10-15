@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-15",
+  "batch": 69,
+  "approvedSubjects": 5,
+  "remainingSubjects": 4,
+  "installed": [
+    {
+      "itemId": "batch69-berserk",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-69/berserk.png",
+      "sourceSha256": "ed6fd86b0a29a0a0918bfc27ac5c8c8d13ce26f948424a0f90c8df0933f338d1",
+      "files": [
+        "icons/abilities/berserk.svg",
+        "icons/abilities/berserk.webp"
+      ],
+      "svgSha256": "3f00a26725d44b3039dc2ab4da8a22f23a5638f43e604f7a3121730e195a09dc",
+      "webpSha256": "acfd0c356391a6fad23dbd3d200dccfa8e31b7bc36dd9fffda4bde0270c78cfb"
+    },
+    {
+      "itemId": "batch69-berserk",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-69/berserk.png",
+      "sourceSha256": "ed6fd86b0a29a0a0918bfc27ac5c8c8d13ce26f948424a0f90c8df0933f338d1",
+      "files": [
+        "icons/abilities/berserk_active.svg",
+        "icons/abilities/berserk_active.webp"
+      ],
+      "svgSha256": "19a7013ad4b7f4ca402a9c1c13315203505cfca0bacbe5cbfdf7c24a448ca2bc",
+      "webpSha256": "acfd0c356391a6fad23dbd3d200dccfa8e31b7bc36dd9fffda4bde0270c78cfb"
+    },
+    {
+      "itemId": "batch69-bezlitosny-przywodca",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-69/bezlitosny-przywodca.png",
+      "sourceSha256": "364133ffd5446029a56688813c2d2b79b343f30aeda25af06f5219e0f85ce6dc",
+      "files": [
+        "icons/abilities/bezlitosny-przywodca.svg",
+        "icons/abilities/bezlitosny-przywodca.webp"
+      ],
+      "svgSha256": "4865e8e0f52a83c9342b8702e46bdd36a43386b94f805212edc9e7d441710ebd",
+      "webpSha256": "33ca30c0396bf7dfff3b4864a09525171653f282e308613050c88a1568a7cee9"
+    },
+    {
+      "itemId": "batch69-brutalny-cios",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-69/brutalny-cios.png",
+      "sourceSha256": "bfc3c1f94d8d12ac43cafb29da985b2bc973d235240ab5fa7134e5d0c5aa1e86",
+      "files": [
+        "icons/abilities/brutalny-cios.svg",
+        "icons/abilities/brutalny-cios.webp"
+      ],
+      "svgSha256": "0a424c62e77e6857652785bdcdb093ddcb24df09b236a72e1c342148005f439d",
+      "webpSha256": "8ca65071a9dcef5d25cad4bfc46ad9595ec41c38e12e7cb0e17a03ba3c6310c9"
+    },
+    {
+      "itemId": "batch69-bystrzacha",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-69/bystrzacha.png",
+      "sourceSha256": "2388ac1ffd8598ae13a5b11161067f44af4088b3d886c125807252d80e9abe6a",
+      "files": [
+        "icons/abilities/bystrzacha.svg",
+        "icons/abilities/bystrzacha.webp"
+      ],
+      "svgSha256": "d8e0e3198401af1debf37254df1fe855e00ee4691d7dfea49c84328c3829fb5f",
+      "webpSha256": "b9f18860e548bf76cd2d289da226ae0ab6d1b25d432a47f7cc97399a3fb3c273"
+    },
+    {
+      "itemId": "batch69-cichy-krok",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-69/cichy-krok.png",
+      "sourceSha256": "2a8b9582e20e4a4626cbd6cfbadf4d43f753778a2754d713e1034068da48fef0",
+      "files": [
+        "icons/abilities/cichy-krok.svg",
+        "icons/abilities/cichy-krok.webp"
+      ],
+      "svgSha256": "5603fbf48cd2f6a8c2e635d2ce46786a90c71ab27178d1b76144b8bc8d48140e",
+      "webpSha256": "1cad85f583007d0f2b81fb7b4db87cf37afb3fd8ffc20ded9eb6265245a5918c"
+    }
+  ]
+}

@@ -1,0 +1,219 @@
+{
+  "date": "2026-10-15",
+  "batch": 69,
+  "feedbackBeforeSha256": "9841eae17875f2475e506ba12f72443e0a26c05160c6614dc107cf060f8d4b43",
+  "active": [
+    {
+      "id": "batch69-a-co-mi-tam",
+      "name": "A co mi tam!",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-69/a-co-mi-tam.png",
+      "sourceSha256": "33155763891a9ca0946efd702f97b73e481d0d5016310e38b833e4c3f9402e4f",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/a-co-mi-tam.svg",
+          "variant": "default",
+          "sourceSha256": "85bde63ef0c7543abf85a5c53d3d35a3c1bb8d6eb0774a25c59afbfc59be1647"
+        }
+      ],
+      "notes": "Swap the rugged man for a more androgenous, generic, rugged figure. ",
+      "feedback": {
+        "itemId": "batch69-a-co-mi-tam",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Swap the rugged man for a more androgenous, generic, rugged figure. ",
+        "updatedAt": "2026-10-15T20:15:40.276Z"
+      }
+    },
+    {
+      "id": "batch69-amen",
+      "name": "Amen",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-69/amen.png",
+      "sourceSha256": "287f1d096984fb7dfadd7c93b396093a7c3f551b72778998ea23869e333bf185",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/amen.svg",
+          "variant": "default",
+          "sourceSha256": "9062f3b8c40db134e5353eec62370cdeecb586ab463d9ba946dac4317cd0f615"
+        }
+      ],
+      "notes": "Fix the geometry of the die.",
+      "feedback": {
+        "itemId": "batch69-amen",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Fix the geometry of the die.",
+        "updatedAt": "2026-10-15T20:16:00.470Z"
+      }
+    },
+    {
+      "id": "batch69-berserk",
+      "name": "Berserk",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-69/berserk.png",
+      "sourceSha256": "ed6fd86b0a29a0a0918bfc27ac5c8c8d13ce26f948424a0f90c8df0933f338d1",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/berserk.svg",
+          "variant": "default",
+          "sourceSha256": "7e0ca9a1bb0a2332ce46368c3a77d59480a7f4a0bc7e2e4c2db8e3a00ce59934"
+        },
+        {
+          "source": "icons/abilities/berserk_active.svg",
+          "variant": "active",
+          "sourceSha256": "34150f4dcc40ab72db9d6519f4d8865212561724f4f93da06366d511f3b4f64a"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch69-berserk",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:16:12.513Z"
+      }
+    },
+    {
+      "id": "batch69-bez-tajemnic",
+      "name": "Bez tajemnic",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-69/bez-tajemnic.png",
+      "sourceSha256": "fa5d11270a588121d8f88153561bf4425d3eaeb9a9755e4578b2c1b68e77dd7a",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/bez-tajemnic.svg",
+          "variant": "default",
+          "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411"
+        }
+      ],
+      "notes": "The mutant's head is facing the opposite way it's body is pointing. Mirror EITHER the head OR the body ",
+      "feedback": {
+        "itemId": "batch69-bez-tajemnic",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "The mutant's head is facing the opposite way it's body is pointing. Mirror EITHER the head OR the body ",
+        "updatedAt": "2026-10-15T20:17:03.299Z"
+      }
+    },
+    {
+      "id": "batch69-bezlitosny-przywodca",
+      "name": "Bezlitosny przywódca",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-69/bezlitosny-przywodca.png",
+      "sourceSha256": "364133ffd5446029a56688813c2d2b79b343f30aeda25af06f5219e0f85ce6dc",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/bezlitosny-przywodca.svg",
+          "variant": "default",
+          "sourceSha256": "0b1104155975ba5fe68b0d7de3cee344154300467ccf8485c0494e52bf2ba622"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch69-bezlitosny-przywodca",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:17:16.512Z"
+      }
+    },
+    {
+      "id": "batch69-brutalny-cios",
+      "name": "Brutalny cios",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-69/brutalny-cios.png",
+      "sourceSha256": "bfc3c1f94d8d12ac43cafb29da985b2bc973d235240ab5fa7134e5d0c5aa1e86",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/brutalny-cios.svg",
+          "variant": "default",
+          "sourceSha256": "953582c6d91772ef56e9125cd75d1759e9e8bf01817dcd33c16330b7ad986aa4"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch69-brutalny-cios",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:17:24.137Z"
+      }
+    },
+    {
+      "id": "batch69-bystrzacha",
+      "name": "Bystrzacha",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-69/bystrzacha.png",
+      "sourceSha256": "2388ac1ffd8598ae13a5b11161067f44af4088b3d886c125807252d80e9abe6a",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/bystrzacha.svg",
+          "variant": "default",
+          "sourceSha256": "13659d562f71a640d6b49b4ac1db8b24e77da389d67298ed5ed8bb58e7fd7325"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch69-bystrzacha",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:17:40.068Z"
+      }
+    },
+    {
+      "id": "batch69-cichy-krok",
+      "name": "Cichy krok",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-69/cichy-krok.png",
+      "sourceSha256": "2a8b9582e20e4a4626cbd6cfbadf4d43f753778a2754d713e1034068da48fef0",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/cichy-krok.svg",
+          "variant": "default",
+          "sourceSha256": "8c9ad2fa1efbd2e365755c19f97e23faee33ab24d8a491449da0a5c9f2544d61"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch69-cichy-krok",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T20:17:52.238Z"
+      }
+    },
+    {
+      "id": "batch69-clint",
+      "name": "Clint",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-69/clint.png",
+      "sourceSha256": "36511b1af2d6cf7f0c37a378d5643221fdbcb7bdd41032747aa9b715d06f8357",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/clint.svg",
+          "variant": "default",
+          "sourceSha256": "5ee6cc654890f6d6bf88be57504342dcbc53ffeea273004d6cf970576cee2d61"
+        }
+      ],
+      "notes": "Remove the glove from the hand",
+      "feedback": {
+        "itemId": "batch69-clint",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Remove the glove from the hand",
+        "updatedAt": "2026-10-15T20:18:09.903Z"
+      }
+    }
+  ]
+}
