@@ -6,6 +6,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildCatalog, saveStyleFeedback, mergeStyleQueue } from "./catalog.mjs";
 import { createReviewServer } from "./server.mjs";
+import { isGeneratedPlaceholder } from "./placeholders.mjs";
+import { replaceQueueParagraph } from "./queue-paragraph.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SCRATCH = path.resolve(HERE, "audits");
@@ -44,6 +46,29 @@ function payload(icon, status = "redo") {
   return { iconId: icon.id, source: variant.source, sourceSha256: variant.sha256,
            status, reasons: ["detail", "anime"], notes: "Fewer face lines; broad black gaps." };
 }
+
+test("queue paragraph updates preserve history with Windows line endings and reject unbounded matches", () => {
+  const old = "Introduction.\r\n\r\n**Counter** first line\r\nsecond line\r\n\r\n## Old history\r\nPreserve every row.\r\n";
+  const changed = replaceQueueParagraph(old, "**Counter**", "**Counter** updated");
+  assert.equal(changed, "Introduction.\n\n**Counter** updated\n\n## Old history\nPreserve every row.\n");
+  assert.throws(() => replaceQueueParagraph("**Counter** " + "x".repeat(1100) + "\n\nHistory", "**Counter**", "new"));
+  assert.throws(() => replaceQueueParagraph("**Counter** no terminator", "**Counter**", "new"));
+});
+
+test("placeholder classification requires the exact generated badge signature", t => {
+  const f = fixture(t);
+  const badge = '<svg viewBox="0 0 64 64"><linearGradient id="g"><stop stop-color="#101012"/></linearGradient><text style="paint-order:stroke" stroke-width="0.8">ABC</text></svg>';
+  assert.equal(isGeneratedPlaceholder(badge), true);
+  assert.equal(isGeneratedPlaceholder('<svg><text>12</text></svg>'), false);
+  assert.equal(isGeneratedPlaceholder('<svg><image href="data:image/webp;base64,abc"/></svg>'), false);
+  f.write("icons/abilities/placeholder.svg", badge);
+  const catalog = buildCatalog(f.root, f.review);
+  assert.equal(catalog.icons.filter(icon => icon.placeholder).length, 1);
+  const placeholder = catalog.icons.find(icon => icon.id === "abilities/placeholder");
+  assert.equal(placeholder.variants[0].placeholder, true);
+  saveStyleFeedback(f.root, f.review, { ...payload(placeholder), reasons: ["placeholder"] });
+  assert.ok(fs.readFileSync(path.join(f.root, "dev/icons/MISSING.md"), "utf8").includes("Placeholder / initials"));
+});
 
 test("catalog groups format sidecars, keeps canonical labels and excludes non-images", t => {
   const f = fixture(t), catalog = buildCatalog(f.root, f.review);

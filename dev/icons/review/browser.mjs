@@ -2,6 +2,7 @@ const $ = selector => document.querySelector(selector);
 const PAGE_SIZE = 36;
 const dialog = $("#icon-dialog");
 const search = $("#search"), category = $("#category"), status = $("#status");
+const artwork = $("#artwork");
 let icons = [], filtered = [], reasons = [], page = 1, currentId = null;
 
 const fold = value => String(value).toLocaleLowerCase("pl").normalize("NFD").replace(/\p{Diacritic}/gu, "").replaceAll("ł", "l");
@@ -35,18 +36,30 @@ function badge(icon) {
   span.className = "badge badge-" + value; span.textContent = statusLabel(value); return span;
 }
 
+function badges(icon) {
+  const group = document.createElement("span"); group.className = "badge-group"; group.append(badge(icon));
+  if (icon.placeholder) {
+    const span = document.createElement("span"); span.className = "badge badge-placeholder";
+    span.textContent = "Generated placeholder"; group.append(span);
+  }
+  return group;
+}
+
 function readFilters() {
   const params = new URLSearchParams(location.search);
   search.value = params.get("q") ?? "";
   category.value = params.get("category") ?? "";
   status.value = params.get("status") ?? "all";
   if (!status.value) status.value = "all";
+  artwork.value = params.get("art") ?? "all";
+  if (!artwork.value) artwork.value = "all";
   page = Math.max(1, Number(params.get("page")) || 1);
 }
 
 function render() {
   const query = fold(search.value.trim());
   filtered = icons.filter(icon => (!category.value || icon.category === category.value)
+    && (artwork.value === "all" || (artwork.value === "placeholder" ? icon.placeholder : !icon.placeholder))
     && (status.value === "all" || reviewStatus(icon) === status.value)
     && (!query || fold([icon.id, icon.name, ...icon.aliases, icon.review?.notes ?? "",
       ...(icon.review?.reasons ?? []).map(id => reasons.find(reason => reason.id === id)?.label ?? id)].join(" ")).includes(query)));
@@ -56,10 +69,11 @@ function render() {
   if (search.value.trim()) params.set("q", search.value.trim());
   if (category.value) params.set("category", category.value);
   if (status.value !== "all") params.set("status", status.value);
+  if (artwork.value !== "all") params.set("art", artwork.value);
   if (page > 1) params.set("page", page);
   history.replaceState(null, "", location.pathname + (params.size ? "?" + params : ""));
   const counts = value => icons.filter(icon => reviewStatus(icon) === value).length;
-  $("#summary").textContent = `${icons.length} icons · ${counts("redo")} flagged · ${counts("keep")} kept · ${counts("unreviewed")} unreviewed` + (counts("updated") ? ` · ${counts("updated")} changed` : "");
+  $("#summary").textContent = `${icons.length} icons · ${icons.filter(icon => icon.placeholder).length} placeholders · ${counts("redo")} flagged · ${counts("keep")} kept · ${counts("unreviewed")} unreviewed` + (counts("updated") ? ` · ${counts("updated")} changed` : "");
   const start = (page - 1) * PAGE_SIZE, visible = filtered.slice(start, start + PAGE_SIZE);
   const host = $("#library"); host.replaceChildren();
   for (const icon of visible) {
@@ -72,7 +86,7 @@ function render() {
     const actions = document.createElement("div"); actions.className = "card-actions";
     const button = document.createElement("button"); button.type = "button"; button.className = "quiet"; button.textContent = "Review style";
     button.setAttribute("aria-label", "Review style of " + icon.name); button.addEventListener("click", () => openIcon(icon.id));
-    actions.append(badge(icon), button); card.append(heading, group, tile, scales(variant), source, actions); host.append(card);
+    actions.append(badges(icon), button); card.append(heading, group, tile, scales(variant), source, actions); host.append(card);
   }
   if (!visible.length) {
     const empty = document.createElement("p"); empty.className = "library-empty"; empty.textContent = "No icons match these filters."; host.append(empty);
@@ -99,10 +113,10 @@ function openIcon(id) {
   const icon = icons.find(item => item.id === id); if (!icon) return;
   currentId = id;
   $("#dialog-title").textContent = icon.name; $("#dialog-category").textContent = categoryName(icon.category);
-  $("#current-decision").replaceChildren(badge(icon));
+  $("#current-decision").replaceChildren(badges(icon));
   if (icon.review?.stale) $("#current-decision").append(document.createTextNode(" This file has changed. Review the current image again."));
   $("#variant").replaceChildren(...icon.variants.map(variant => {
-    const option = document.createElement("option"); option.value = variant.source; option.textContent = variant.format + " — " + variant.source; return option;
+    const option = document.createElement("option"); option.value = variant.source; option.textContent = variant.format + " — " + variant.source + (variant.placeholder ? " (placeholder)" : ""); return option;
   }));
   $("#variant").value = chosenVariant(icon).source;
   $("#style-notes").value = icon.review?.notes ?? "";
@@ -163,8 +177,8 @@ try {
   readFilters(); render();
 } catch (error) { $("#summary").textContent = "Cannot load icons: " + error.message; }
 
-for (const field of [search, category, status]) field.addEventListener(field === search ? "input" : "change", () => { page = 1; render(); });
-$("#clear-filters").addEventListener("click", () => { search.value = ""; category.value = ""; status.value = "all"; page = 1; render(); });
+for (const field of [search, category, status, artwork]) field.addEventListener(field === search ? "input" : "change", () => { page = 1; render(); });
+$("#clear-filters").addEventListener("click", () => { search.value = ""; category.value = ""; status.value = "all"; artwork.value = "all"; page = 1; render(); });
 for (const button of document.querySelectorAll("[data-page-prev]")) button.addEventListener("click", () => { page--; render(); window.scrollTo(0, 0); });
 for (const button of document.querySelectorAll("[data-page-next]")) button.addEventListener("click", () => { page++; render(); window.scrollTo(0, 0); });
 $("#variant").addEventListener("change", updatePreview);

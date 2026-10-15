@@ -37,15 +37,16 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 69** (Batch 68: both approved and installed; the
-known glyph queue is complete. Future style-review flags use the next batch).
+**Next batch number: 69** (the previous 342-card queue is resolved; the newly
+audited class/profession placeholder backlog remains and is listed below).
 
-**Icon coverage, 2026-10-13:** origins 36/36, Sztuczki 53/53, all M5
-action glyphs and all three fuel-grade icons delivered. The known icon review
-queue is 342/342 resolved, with no open decisions. All 23 medicines have
-distinct configured icons. Fuel resolver mappings and the existing medic-refill
-icon repoint remain for the GM. Painted-art briefs/deliveries are separate.
-Final census: `review/candidates/batch-68/progress-reviewed.json`.
+**Icon coverage correction, 2026-10-15:** the previous 342 review cards are resolved,
+but that queue omitted class/profession artwork. The source audit confirms
+155 generated initials badges (153 canonically referenced art subjects).
+Origins, Sztuczki, M5 actions and fuel-grade deliveries from the earlier pass
+remain delivered; these counts do not cover all module icons. See the class
+placeholder backlog and `class-placeholder-audit.json`. GM wiring and painted
+art remain separate.
 
 *Batch 40 (2026-09-25): Kamizelka taktyczna, .44 Mag dum-dum, Mięso suszone, Chleb, Owoce
 i warzywa, MRE, Breneka, Zużyty LAW, Magazynek bębnowy — processed and wired; LAW and the drum
@@ -589,6 +590,182 @@ and complete validation: `review/candidates/batch-68/reviewed.json`,
 All 342 existing review cards are resolved. The three fuel-grade icons are
 ready for GM resolver mappings; Pan Plaster remains an older Sztuczka
 repoint/rebuild task. No packs or world documents were changed.
+
+<!-- class-placeholder-audit:start -->
+## Class/profession placeholder backlog — confirmed from source
+
+Audit 2026-10-15: **155 generated initials SVGs**, including 6 classes,
+18 professions and 131 ability files. 2 ability files are active-state
+variants. Canonically referenced art requests below represent **153 subjects**;
+base/active variants share a subject and must keep their existing exact filenames.
+These were outside the previous 342-card generation queue. File existence was not
+evidence of finished artwork. Native badges were confirmed against the exact
+`gen_class_placeholders.mjs` SVG signature, not inferred from arbitrary SVG text.
+
+Evidence: `class-placeholder-audit.json`; reproduce with `node dev/icons/audit-class-placeholders.mjs`.
+This is an art backlog, not a pack/world migration. Generic white-glyph prompts
+must use the corresponding class/profession/feature definition. Use Pipeline.md
+and the next free batch; fresh GM approval is required before replacement.
+
+| Kind | Subject | Owner | Exact SVG targets (+ WEBP after approval) | Status |
+|---|---|---|---|---|
+| feature | A co mi tam! | szczur | `icons/abilities/a-co-mi-tam.svg` | Needs art |
+| feature | Amen | kaznodzieja-nowej-ery | `icons/abilities/amen.svg` | Needs art |
+| feature | Berserk | brutal | `icons/abilities/berserk.svg`; `icons/abilities/berserk_active.svg` | Needs art |
+| feature | Bez tajemnic | lowca-mutantow | `icons/abilities/bez-tajemnic.svg` | Needs art |
+| feature | Bezlitosny przywódca | mafiozo | `icons/abilities/bezlitosny-przywodca.svg` | Needs art |
+| feature | Brutalny cios | brutal | `icons/abilities/brutalny-cios.svg` | Needs art |
+| feature | Bystrzacha | spec | `icons/abilities/bystrzacha.svg` | Needs art |
+| feature | Cichy krok | zwiadowca | `icons/abilities/cichy-krok.svg` | Needs art |
+| feature | Clint | kowboj | `icons/abilities/clint.svg` | Needs art |
+| feature | Cwaniacki zwód | cwaniak | `icons/abilities/cwaniacki-zwod.svg` | Needs art |
+| feature | Dobra rada | spec | `icons/abilities/dobra-rada.svg` | Needs art |
+| feature | Doktor Brain | medyk | `icons/abilities/doktor-brain.svg` | Needs art |
+| feature | Drugi atak | brutal | `icons/abilities/drugi-atak.svg` | Needs art |
+| feature | Drzwi w drzwi | wojownik-autostrady | `icons/abilities/drzwi-w-drzwi.svg` | Needs art |
+| feature | Dwóch na jednego | ganger | `icons/abilities/dwoch-na-jednego.svg` | Needs art |
+| feature | Dziewięć żyć | zlodziej | `icons/abilities/dziewiec-zyc.svg` | Needs art |
+| feature | Ekspert | cwaniak | `icons/abilities/ekspert.svg` | Needs art |
+| feature | Elektronik | zlodziej | `icons/abilities/elektronik.svg` | Needs art |
+| feature | Emiter EMP | zabojca-maszyn | `icons/abilities/emiter-emp.svg` | Needs art |
+| feature | Empiryk | zabojca-maszyn | `icons/abilities/empiryk.svg` | Needs art |
+| feature | Farmacja | medyk | `icons/abilities/farmacja.svg` | Needs art |
+| feature | Głowa do góry! | cwaniak | `icons/abilities/glowa-do-gory.svg` | Needs art |
+| feature | Goła klata | brutal | `icons/abilities/gola-klata.svg` | Needs art |
+| feature | Hakerstwo | monter | `icons/abilities/hakerstwo.svg` | Needs art |
+| feature | Inteligentna obrona | spec | `icons/abilities/inteligentna-obrona.svg` | Needs art |
+| feature | Ja i mój gang! | ganger | `icons/abilities/ja-i-moj-gang.svg` | Needs art |
+| feature | Jak dbasz, tak masz | zolnierz | `icons/abilities/jak-dbasz-tak-masz.svg` | Needs art |
+| feature | Jeden strzał | zabojca | `icons/abilities/jeden-strzal.svg` | Needs art |
+| feature | Jeden z nas | sedzia | `icons/abilities/jeden-z-nas.svg` | Needs art |
+| feature | Jeden z nich | ganger | `icons/abilities/jeden-z-nich.svg` | Needs art |
+| feature | Jeździec | wyjadacz-option | `icons/abilities/jezdziec.svg` | Needs art |
+| feature | Kakofonia | gwiazda | `icons/abilities/kakofonia.svg` | Needs art |
+| feature | Kamuflaż | zabojca | `icons/abilities/kamuflaz.svg` | Needs art |
+| feature | Kaskader | wojownik-autostrady | `icons/abilities/kaskader.svg` | Needs art |
+| feature | Kłusownik | zwiadowca | `icons/abilities/klusownik.svg` | Needs art |
+| feature | Kocie kości | zlodziej | `icons/abilities/kocie-kosci.svg` | Needs art |
+| feature | Kolejka | cwaniak | `icons/abilities/kolejka.svg` | Needs art |
+| feature | Kondycha | twardziel | `icons/abilities/kondycha.svg` | Needs art |
+| feature | Krwawy anioł | medyk | `icons/abilities/krwawy-aniol.svg` | Needs art |
+| feature | Let’s rock! | gwiazda | `icons/abilities/lets-rock.svg` | Needs art |
+| feature | Łapiduch | medyk | `icons/abilities/lapiduch.svg` | Needs art |
+| feature | Łaska boża | kaznodzieja-nowej-ery | `icons/abilities/laska-boza.svg` | Needs art |
+| feature | Łeb jak sklep | spec | `icons/abilities/leb-jak-sklep.svg` | Needs art |
+| feature | Łyżeczka | gladiator | `icons/abilities/lyzeczka.svg` | Needs art |
+| feature | Maszyna do zabijania | najemnik | `icons/abilities/maszyna-do-zabijania.svg` | Needs art |
+| feature | Matrix | zlodziej | `icons/abilities/matrix.svg` | Needs art |
+| feature | Mechanika | monter | `icons/abilities/mechanika.svg` | Needs art |
+| feature | Moja prawa ręka | mafiozo | `icons/abilities/moja-prawa-reka.svg` | Needs art |
+| feature | Motywacja | cwaniak | `icons/abilities/motywacja.svg` | Needs art |
+| feature | Mój biom | zwiadowca | `icons/abilities/moj-biom.svg` | Needs art |
+| feature | Mój bóg kule nosi | kaznodzieja-nowej-ery | `icons/abilities/moj-bog-kule-nosi.svg` | Needs art |
+| feature | Mój wróg | zwiadowca | `icons/abilities/moj-wrog.svg` | Needs art |
+| feature | Mój wróg: Ludzie | moj-wrog-option | `icons/abilities/moj-wrog-ludzie.svg` | Needs art |
+| feature | Mój wróg: Maszyny | moj-wrog-option | `icons/abilities/moj-wrog-maszyny.svg` | Needs art |
+| feature | Mój wróg: Mutanty | moj-wrog-option | `icons/abilities/moj-wrog-mutanty.svg` | Needs art |
+| feature | Mój wróg: Potwory | moj-wrog-option | `icons/abilities/moj-wrog-potwory.svg` | Needs art |
+| feature | Mój wróg: Zwierzęta | moj-wrog-option | `icons/abilities/moj-wrog-zwierzeta.svg` | Needs art |
+| feature | Mutant na śniadanie | lowca-mutantow | `icons/abilities/mutant-na-sniadanie.svg` | Needs art |
+| feature | Nie do zdarcia | gladiator | `icons/abilities/nie-do-zdarcia.svg` | Needs art |
+| feature | Nie klękam | twardziel | `icons/abilities/nie-klekam.svg` | Needs art |
+| feature | Obelga | cwaniak | `icons/abilities/obelga.svg` | Needs art |
+| feature | Obsługa pancerza | wyjadacz-option | `icons/abilities/obsluga-pancerza.svg` | Needs art |
+| feature | Odważny czy głupi | ganger | `icons/abilities/odwazny-czy-glupi.svg` | Needs art |
+| feature | Oswajanie zwierząt | lowca-mutantow | `icons/abilities/oswajanie-zwierzat.svg` | Needs art |
+| feature | Pancerna fura | wojownik-autostrady | `icons/abilities/pancerna-fura.svg` | Needs art |
+| feature | Paranoja | brutal | `icons/abilities/paranoja.svg` | Needs art |
+| feature | Partner | sedzia | `icons/abilities/partner.svg` | Needs art |
+| feature | Pirotechnika | chemik | `icons/abilities/pirotechnika.svg` | Needs art |
+| feature | Pistolero | kowboj | `icons/abilities/pistolero.svg` | Needs art |
+| feature | Podstępny atak | zlodziej | `icons/abilities/podstepny-atak.svg` | Needs art |
+| feature | Pogoń | zwiadowca | `icons/abilities/pogon.svg` | Needs art |
+| feature | Pogromca | lowca-mutantow | `icons/abilities/pogromca.svg` | Needs art |
+| feature | Renoma | mafiozo | `icons/abilities/renoma.svg` | Needs art |
+| feature | Reputacja | najemnik | `icons/abilities/reputacja.svg` | Needs art |
+| feature | Rewolwerowiec | kowboj | `icons/abilities/rewolwerowiec.svg` | Needs art |
+| feature | Rusznikarstwo | chemik | `icons/abilities/rusznikarstwo.svg` | Needs art |
+| feature | Rutyna | zolnierz | `icons/abilities/rutyna.svg` | Needs art |
+| feature | Rzeźnik | wyjadacz-option | `icons/abilities/rzeznik.svg` | Needs art |
+| feature | Rzuć broń i gleba! | sedzia | `icons/abilities/rzuc-bron-i-gleba.svg` | Needs art |
+| feature | Samouk | cwaniak | `icons/abilities/samouk.svg` | Needs art |
+| feature | Saper | zlodziej | `icons/abilities/saper.svg` | Needs art |
+| feature | Serwisowanie | monter | `icons/abilities/serwisowanie.svg` | Needs art |
+| feature | Skrytka | kurier | `icons/abilities/skrytka.svg` | Needs art |
+| feature | Skuteczny cios | najemnik | `icons/abilities/skuteczny-cios.svg` | Needs art |
+| feature | Slang | kurier | `icons/abilities/slang.svg` | Needs art |
+| feature | Smakuje jak arszenik | chemik | `icons/abilities/smakuje-jak-arszenik.svg` | Needs art |
+| feature | Sokole oko | wyjadacz-option | `icons/abilities/sokole-oko.svg` | Needs art |
+| feature | Solówa | brutal | `icons/abilities/solowa.svg` | Needs art |
+| feature | Specjalizacja | spec | `icons/abilities/specjalizacja-spec.svg` | Needs art |
+| feature | Specjalizacja | zlodziej | `icons/abilities/specjalizacja-zlodziej.svg` | Needs art |
+| feature | Spieprzysz to! | cwaniak | `icons/abilities/spieprzysz-to.svg` | Needs art |
+| feature | Sportowiec | zwiadowca | `icons/abilities/sportowiec.svg` | Needs art |
+| feature | Stalowy nadgarstek | wyjadacz-option | `icons/abilities/stalowy-nadgarstek.svg` | Needs art |
+| feature | Strzelec | zabojca | `icons/abilities/strzelec.svg` | Needs art |
+| feature | Stylówa | gwiazda | `icons/abilities/stylowa.svg` | Needs art |
+| feature | Szaleńcza szarża | brutal | `icons/abilities/szalencza-szarza.svg` | Needs art |
+| feature | Szary | szczur | `icons/abilities/szary.svg` | Needs art |
+| feature | Szczęście | cwaniak | `icons/abilities/szczescie.svg` | Needs art |
+| feature | Szybka gadka | cwaniak | `icons/abilities/szybka-gadka.svg` | Needs art |
+| feature | Szybka produkcja | spec | `icons/abilities/szybka-produkcja.svg` | Needs art |
+| feature | Szybkie badanie | spec | `icons/abilities/szybkie-badanie.svg` | Needs art |
+| feature | Szybkie nogi | zlodziej | `icons/abilities/szybkie-nogi.svg` | Needs art |
+| feature | Szybkie ręce | spec | `icons/abilities/szybkie-rece.svg` | Needs art |
+| feature | Szybkość kota | zlodziej | `icons/abilities/szybkosc-kota.svg` | Needs art |
+| feature | Śmiertelna obelga | cwaniak | `icons/abilities/smiertelna-obelga.svg` | Needs art |
+| feature | Tarcza wiary | kaznodzieja-nowej-ery | `icons/abilities/tarcza-wiary.svg` | Needs art |
+| feature | Trajektoria | spec | `icons/abilities/trajektoria.svg` | Needs art |
+| feature | Trening w zbroi | zolnierz | `icons/abilities/trening-w-zbroi.svg` | Needs art |
+| feature | Truciciel | szczur | `icons/abilities/truciciel.svg` | Needs art |
+| feature | Trzeci atak | twardziel | `icons/abilities/trzeci-atak.svg` | Needs art |
+| feature | Twardość | twardziel | `icons/abilities/twardosc.svg` | Needs art |
+| feature | Ulubiona broń | twardziel | `icons/abilities/ulubiona-bron-twardziel.svg` | Needs art |
+| feature | Ulubiona broń | zlodziej | `icons/abilities/ulubiona-bron-zlodziej.svg` | Needs art |
+| feature | Ulubiona broń | zwiadowca | `icons/abilities/ulubiona-bron-zwiadowca.svg` | Needs art |
+| feature | W czuły punkt | spec | `icons/abilities/w-czuly-punkt.svg` | Needs art |
+| feature | Wściekły cios | brutal | `icons/abilities/wsciekly-cios.svg` | Needs art |
+| feature | Wyczulone zmysły | zwiadowca | `icons/abilities/wyczulone-zmysly.svg` | Needs art |
+| feature | Wyjadacz | zwiadowca | `icons/abilities/wyjadacz-zwiadowca.svg` | Needs art |
+| feature | Wyjadacz | twardziel | `icons/abilities/wyjadacz.svg` | Needs art |
+| feature | Wykształciuch | spec | `icons/abilities/wyksztalciuch.svg` | Needs art |
+| feature | Z bara! | brutal | `icons/abilities/z-bara.svg` | Needs art |
+| feature | Za garść gambli | gwiazda | `icons/abilities/za-garsc-gambli.svg` | Needs art |
+| feature | Zabójczy cios | brutal | `icons/abilities/zabojczy-cios.svg` | Needs art |
+| feature | Zawołajcie kolegów | gladiator | `icons/abilities/zawolajcie-kolegow.svg` | Needs art |
+| feature | Zawsze w siodle | kowboj | `icons/abilities/zawsze-w-siodle.svg` | Needs art |
+| feature | Zew areny | gladiator | `icons/abilities/zew-areny.svg` | Needs art |
+| feature | Znajomości | kurier | `icons/abilities/znajomosci.svg` | Needs art |
+| feature | Zryw | twardziel | `icons/abilities/zryw.svg` | Needs art |
+| feature | Zwinność szczura | szczur | `icons/abilities/zwinnosc-szczura.svg` | Needs art |
+| class | Brutal | brutal | `icons/klasy/brutal.svg` | Needs art |
+| class | Cwaniak | cwaniak | `icons/klasy/cwaniak.svg` | Needs art |
+| class | Spec | spec | `icons/klasy/spec.svg` | Needs art |
+| class | Twardziel | twardziel | `icons/klasy/twardziel.svg` | Needs art |
+| class | Złodziej | zlodziej | `icons/klasy/zlodziej.svg` | Needs art |
+| class | Zwiadowca | zwiadowca | `icons/klasy/zwiadowca.svg` | Needs art |
+| profession | Chemik | spec | `icons/profesje/chemik.svg` | Needs art |
+| profession | Ganger | brutal | `icons/profesje/ganger.svg` | Needs art |
+| profession | Gladiator | brutal | `icons/profesje/gladiator.svg` | Needs art |
+| profession | Gwiazda | cwaniak | `icons/profesje/gwiazda.svg` | Needs art |
+| profession | Kaznodzieja Nowej Ery | cwaniak | `icons/profesje/kaznodzieja.svg` | Needs art |
+| profession | Kowboj | twardziel | `icons/profesje/kowboj.svg` | Needs art |
+| profession | Kurier | zlodziej | `icons/profesje/kurier.svg` | Needs art |
+| profession | Łowca Mutantów | zwiadowca | `icons/profesje/lowca-mutantow.svg` | Needs art |
+| profession | Mafiozo | cwaniak | `icons/profesje/mafiozo.svg` | Needs art |
+| profession | Medyk | spec | `icons/profesje/medyk.svg` | Needs art |
+| profession | Monter | spec | `icons/profesje/monter.svg` | Needs art |
+| profession | Najemnik | brutal | `icons/profesje/najemnik.svg` | Needs art |
+| profession | Sędzia | zwiadowca | `icons/profesje/sedzia.svg` | Needs art |
+| profession | Szczur | zlodziej | `icons/profesje/szczur.svg` | Needs art |
+| profession | Wojownik Autostrady | twardziel | `icons/profesje/wojownik-autostrady.svg` | Needs art |
+| profession | Zabójca | zlodziej | `icons/profesje/zabojca.svg` | Needs art |
+| profession | Zabójca Maszyn | zwiadowca | `icons/profesje/zabojca-maszyn.svg` | Needs art |
+| profession | Żołnierz | twardziel | `icons/profesje/zolnierz.svg` | Needs art |
+
+1 additional old badges have no canonical match; listed in the audit, not assumed to need new art.
+
+<!-- class-placeholder-audit:end -->
 
 ## How an item gets added here
 

@@ -60,3 +60,9 @@ python dev/icons/preview-catalog-audit.py
 Full generic per-item evidence is in [catalog-icons-2026-10-12.json](catalog-icons-2026-10-12.json).
 The local contact sheet is `review/candidates/batch-67/raw/catalog-preview.png`.
 No campaign names or private data are written to this report.
+
+Coverage correction, 2026-10-15: this physical-item audit did not cover class or
+profession icons. A separate exact-signature/source audit found 155 generated
+initials badges, of which 154 are canonically referenced (153 art subjects).
+Their backlog is now in MISSING; evidence is `class-placeholder-audit.json`.
+The completed 342-card review queue did not mean all module icons had real art.

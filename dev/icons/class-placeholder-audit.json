@@ -1,0 +1,3567 @@
+{
+  "stats": {
+    "date": "2026-10-15",
+    "confirmedPlaceholderFiles": 155,
+    "referencedPlaceholderFiles": 154,
+    "unmappedPlaceholderFiles": 1,
+    "activeVariants": 2,
+    "referencedActiveVariants": 1,
+    "abilityPlaceholderFiles": 131,
+    "missingExpectedFiles": 0,
+    "artSubjects": 153,
+    "byKind": {
+      "class": 6,
+      "profession": 18,
+      "feature": 130
+    },
+    "scope": "Exact generator signature plus canonical class/profession definitions; no world or pack reads"
+  },
+  "placeholders": [
+    {
+      "kind": "feature",
+      "id": "a-co-mi-tam",
+      "label": "A co mi tam!",
+      "owner": "szczur",
+      "variant": "default",
+      "source": "icons/abilities/a-co-mi-tam.svg",
+      "sourceSha256": "85bde63ef0c7543abf85a5c53d3d35a3c1bb8d6eb0774a25c59afbfc59be1647",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "amen",
+      "label": "Amen",
+      "owner": "kaznodzieja-nowej-ery",
+      "variant": "default",
+      "source": "icons/abilities/amen.svg",
+      "sourceSha256": "9062f3b8c40db134e5353eec62370cdeecb586ab463d9ba946dac4317cd0f615",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "berserk",
+      "label": "Berserk",
+      "owner": "brutal",
+      "variant": "default",
+      "source": "icons/abilities/berserk.svg",
+      "sourceSha256": "7e0ca9a1bb0a2332ce46368c3a77d59480a7f4a0bc7e2e4c2db8e3a00ce59934",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "berserk",
+      "label": "Berserk",
+      "owner": "brutal",
+      "variant": "active",
+      "source": "icons/abilities/berserk_active.svg",
+      "sourceSha256": "34150f4dcc40ab72db9d6519f4d8865212561724f4f93da06366d511f3b4f64a",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "bez-tajemnic",
+      "label": "Bez tajemnic",
+      "owner": "lowca-mutantow",
+      "variant": "default",
+      "source": "icons/abilities/bez-tajemnic.svg",
+      "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "bezlitosny-przywodca",
+      "label": "Bezlitosny przywódca",
+      "owner": "mafiozo",
+      "variant": "default",
+      "source": "icons/abilities/bezlitosny-przywodca.svg",
+      "sourceSha256": "0b1104155975ba5fe68b0d7de3cee344154300467ccf8485c0494e52bf2ba622",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "brutalny-cios",
+      "label": "Brutalny cios",
+      "owner": "brutal",
+      "variant": "default",
+      "source": "icons/abilities/brutalny-cios.svg",
+      "sourceSha256": "953582c6d91772ef56e9125cd75d1759e9e8bf01817dcd33c16330b7ad986aa4",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "bystrzacha",
+      "label": "Bystrzacha",
+      "owner": "spec",
+      "variant": "default",
+      "source": "icons/abilities/bystrzacha.svg",
+      "sourceSha256": "13659d562f71a640d6b49b4ac1db8b24e77da389d67298ed5ed8bb58e7fd7325",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "cichy-krok",
+      "label": "Cichy krok",
+      "owner": "zwiadowca",
+      "variant": "default",
+      "source": "icons/abilities/cichy-krok.svg",
+      "sourceSha256": "8c9ad2fa1efbd2e365755c19f97e23faee33ab24d8a491449da0a5c9f2544d61",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "clint",
+      "label": "Clint",
+      "owner": "kowboj",
+      "variant": "default",
+      "source": "icons/abilities/clint.svg",
+      "sourceSha256": "5ee6cc654890f6d6bf88be57504342dcbc53ffeea273004d6cf970576cee2d61",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "cwaniacki-zwod",
+      "label": "Cwaniacki zwód",
+      "owner": "cwaniak",
+      "variant": "default",
+      "source": "icons/abilities/cwaniacki-zwod.svg",
+      "sourceSha256": "92cf284356f1cc96aeab112afc135f826720e6f89822a49dd76526aca5e58f44",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "dobra-rada",
+      "label": "Dobra rada",
+      "owner": "spec",
+      "variant": "default",
+      "source": "icons/abilities/dobra-rada.svg",
+      "sourceSha256": "9dfe5a97c8a9a000027fc7fa69ccb052eaf2b53099a2b72712a2ed0de24a9b79",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "doktor-brain",
+      "label": "Doktor Brain",
+      "owner": "medyk",
+      "variant": "default",
+      "source": "icons/abilities/doktor-brain.svg",
+      "sourceSha256": "6ab38a26190fd849a7d57137b1d58a07bf5c5b193d101e52adf87d4269536f91",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "drugi-atak",
+      "label": "Drugi atak",
+      "owner": "brutal",
+      "variant": "default",
+      "source": "icons/abilities/drugi-atak.svg",
+      "sourceSha256": "8485b908a3ec63be916ca5e1be37cb3133fdab80874a615a3127ebadf97e49c2",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "drzwi-w-drzwi",
+      "label": "Drzwi w drzwi",
+      "owner": "wojownik-autostrady",
+      "variant": "default",
+      "source": "icons/abilities/drzwi-w-drzwi.svg",
+      "sourceSha256": "e90a74d5a078cc693572423f53f02e5a598da739e570338c0de89f8d555bfae0",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "dwoch-na-jednego",
+      "label": "Dwóch na jednego",
+      "owner": "ganger",
+      "variant": "default",
+      "source": "icons/abilities/dwoch-na-jednego.svg",
+      "sourceSha256": "abf98f1ae8f9018ba49f8b45cd85fd2a8b9fa6924e0a773dad9c08339dcf66d3",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "dziewiec-zyc",
+      "label": "Dziewięć żyć",
+      "owner": "zlodziej",
+      "variant": "default",
+      "source": "icons/abilities/dziewiec-zyc.svg",
+      "sourceSha256": "5052a5bb6298ba74d8ae2ea27a3353bc847d749e088078b50cabce0a6a7a9f26",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "ekspert",
+      "label": "Ekspert",
+      "owner": "cwaniak",
+      "variant": "default",
+      "source": "icons/abilities/ekspert.svg",
+      "sourceSha256": "232cba987b6f917ef305d366a6f0c46625c645084e43e17b491a2e681606b201",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "elektronik",
+      "label": "Elektronik",
+      "owner": "zlodziej",
+      "variant": "default",
+      "source": "icons/abilities/elektronik.svg",
+      "sourceSha256": "f390a9b077c44175d9cd142eb44c91d2b5ebcec9b555de04ec0e68c851576564",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "emiter-emp",
+      "label": "Emiter EMP",
+      "owner": "zabojca-maszyn",
+      "variant": "default",
+      "source": "icons/abilities/emiter-emp.svg",
+      "sourceSha256": "30e74a80bf10eebc2cc7c79b466d9323d765fb269da0c910addaccc500e1f96e",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "empiryk",
+      "label": "Empiryk",
+      "owner": "zabojca-maszyn",
+      "variant": "default",
+      "source": "icons/abilities/empiryk.svg",
+      "sourceSha256": "c3969d155f78163b17980cabe9279254fd483d9ad394b4eebefdf82b3fc4e9e2",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "farmacja",
+      "label": "Farmacja",
+      "owner": "medyk",
+      "variant": "default",
+      "source": "icons/abilities/farmacja.svg",
+      "sourceSha256": "c76a242ba8cd132a2de5d72c1b09dffbaba3e8aa8326ef3e26176b7d00db1b4f",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "glowa-do-gory",
+      "label": "Głowa do góry!",
+      "owner": "cwaniak",
+      "variant": "default",
+      "source": "icons/abilities/glowa-do-gory.svg",
+      "sourceSha256": "d4c9125b3a8ab930e1da0ab57ff9efc0c9fa5773909f10506ce92e7ce4989a3b",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "gola-klata",
+      "label": "Goła klata",
+      "owner": "brutal",
+      "variant": "default",
+      "source": "icons/abilities/gola-klata.svg",
+      "sourceSha256": "96223da7b4372786dd758e23ca14db7c4c44b8f731e301fb0d1cca1547db1407",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "hakerstwo",
+      "label": "Hakerstwo",
+      "owner": "monter",
+      "variant": "default",
+      "source": "icons/abilities/hakerstwo.svg",
+      "sourceSha256": "8fcff882ddb01cff3baa85928c1b79317f431775fc3b342a0c009303cf337424",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "inteligentna-obrona",
+      "label": "Inteligentna obrona",
+      "owner": "spec",
+      "variant": "default",
+      "source": "icons/abilities/inteligentna-obrona.svg",
+      "sourceSha256": "5b7e57821da7b2a5b79ca7ed7f2ea853bb24fc69438852d979e9f58436f251e1",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "ja-i-moj-gang",
+      "label": "Ja i mój gang!",
+      "owner": "ganger",
+      "variant": "default",
+      "source": "icons/abilities/ja-i-moj-gang.svg",
+      "sourceSha256": "144fa6f6e9e15324316614d4c16db94b36e42c324911e5c55c3fc6b3006f4cbc",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "jak-dbasz-tak-masz",
+      "label": "Jak dbasz, tak masz",
+      "owner": "zolnierz",
+      "variant": "default",
+      "source": "icons/abilities/jak-dbasz-tak-masz.svg",
+      "sourceSha256": "1858ccf0a0018938a0f1d49497cc3414762297e7176c434791d8511f2d06b632",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "jeden-strzal",
+      "label": "Jeden strzał",
+      "owner": "zabojca",
+      "variant": "default",
+      "source": "icons/abilities/jeden-strzal.svg",
+      "sourceSha256": "10ac2815b3f1a04de8a13b648591e46e9073af4b6ca9db9ce83bc85349e38af5",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "jeden-z-nas",
+      "label": "Jeden z nas",
+      "owner": "sedzia",
+      "variant": "default",
+      "source": "icons/abilities/jeden-z-nas.svg",
+      "sourceSha256": "28fa080a15a9a3e2b8dd8f3f49ea93fa3dbb178673188b1e5cfe264f05a5a31b",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "jeden-z-nich",
+      "label": "Jeden z nich",
+      "owner": "ganger",
+      "variant": "default",
+      "source": "icons/abilities/jeden-z-nich.svg",
+      "sourceSha256": "aa8b2735ea1d8c400cb474fd3a0ec3dcf9ae52ab87cde86fc3b6f078466f4443",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "jezdziec",
+      "label": "Jeździec",
+      "owner": "wyjadacz-option",
+      "variant": "default",
+      "source": "icons/abilities/jezdziec.svg",
+      "sourceSha256": "53a7bf1784b2ef9efc618431127aba39c0d53875bf9e974bc2020a40ce759507",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "kakofonia",
+      "label": "Kakofonia",
+      "owner": "gwiazda",
+      "variant": "default",
+      "source": "icons/abilities/kakofonia.svg",
+      "sourceSha256": "3a2c179ee0daa35e59e80857907a37548a47e5bc2279f49dee9e14a450205121",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "kamuflaz",
+      "label": "Kamuflaż",
+      "owner": "zabojca",
+      "variant": "default",
+      "source": "icons/abilities/kamuflaz.svg",
+      "sourceSha256": "2e42997c538547908929c5ba2d36652efa7a66429facc1809b7849b49093f50b",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "kaskader",
+      "label": "Kaskader",
+      "owner": "wojownik-autostrady",
+      "variant": "default",
+      "source": "icons/abilities/kaskader.svg",
+      "sourceSha256": "0ae034225b437ef358ec5775f92884b68a0d9355593fa7ef197f6b423cd90c78",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "klusownik",
+      "label": "Kłusownik",
+      "owner": "zwiadowca",
+      "variant": "default",
+      "source": "icons/abilities/klusownik.svg",
+      "sourceSha256": "6fff1379ce2c2409ce200ab84a898fc371a8434b6a6b6808baf68b77df161091",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "kocie-kosci",
+      "label": "Kocie kości",
+      "owner": "zlodziej",
+      "variant": "default",
+      "source": "icons/abilities/kocie-kosci.svg",
+      "sourceSha256": "e64aec557d717b15492bd8565218d67c72ee3f0669a81d2da0e33e7ded075e2a",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "kolejka",
+      "label": "Kolejka",
+      "owner": "cwaniak",
+      "variant": "default",
+      "source": "icons/abilities/kolejka.svg",
+      "sourceSha256": "970158402b9fe22b4683b3c9087cb345f496206b7af68c32ac725927512384de",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "kondycha",
+      "label": "Kondycha",
+      "owner": "twardziel",
+      "variant": "default",
+      "source": "icons/abilities/kondycha.svg",
+      "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f",
+      "referenced": true
+    },
+    {
+      "kind": "unmapped",
+      "id": "abilities/kondycha_active",
+      "label": "Kondycha active",
+      "variant": "unknown",
+      "source": "icons/abilities/kondycha_active.svg",
+      "sourceSha256": "fe94e499463c22895956f7b690560a97d315a576f5dc27d3d5140c5010c7fbf1",
+      "referenced": false
+    },
+    {
+      "kind": "feature",
+      "id": "krwawy-aniol",
+      "label": "Krwawy anioł",
+      "owner": "medyk",
+      "variant": "default",
+      "source": "icons/abilities/krwawy-aniol.svg",
+      "sourceSha256": "dd55a607d3c756d7faad45f077907136f9659e3828ba06c199d32a7ded373458",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "lets-rock",
+      "label": "Let’s rock!",
+      "owner": "gwiazda",
+      "variant": "default",
+      "source": "icons/abilities/lets-rock.svg",
+      "sourceSha256": "6c6281cdd5089a4a9dc6fdaf933633f66c94d0c8c453259d100e95d833315141",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "lapiduch",
+      "label": "Łapiduch",
+      "owner": "medyk",
+      "variant": "default",
+      "source": "icons/abilities/lapiduch.svg",
+      "sourceSha256": "913fffceec2f2490e4b84cdb4ea2c01368fc2d6d8cf518b701f681ea0286447b",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "laska-boza",
+      "label": "Łaska boża",
+      "owner": "kaznodzieja-nowej-ery",
+      "variant": "default",
+      "source": "icons/abilities/laska-boza.svg",
+      "sourceSha256": "e5324a36a95884b60732d688880fea6f1243709fbc4a38e8a3e644b87f6802a5",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "leb-jak-sklep",
+      "label": "Łeb jak sklep",
+      "owner": "spec",
+      "variant": "default",
+      "source": "icons/abilities/leb-jak-sklep.svg",
+      "sourceSha256": "ab1446c5808fb43984e0c4f1357f4cd68fda82f47990700123c1db790a7efc87",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "lyzeczka",
+      "label": "Łyżeczka",
+      "owner": "gladiator",
+      "variant": "default",
+      "source": "icons/abilities/lyzeczka.svg",
+      "sourceSha256": "843e5b1041de1b116e2ea0625ae0c2a732deff2aafc70ab3e28ee5d7baf7ddcc",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "maszyna-do-zabijania",
+      "label": "Maszyna do zabijania",
+      "owner": "najemnik",
+      "variant": "default",
+      "source": "icons/abilities/maszyna-do-zabijania.svg",
+      "sourceSha256": "bf846c0d06aaf67a251b1c02723bad0ff64fb927cbe0e7403f79722605cf8045",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "matrix",
+      "label": "Matrix",
+      "owner": "zlodziej",
+      "variant": "default",
+      "source": "icons/abilities/matrix.svg",
+      "sourceSha256": "6bcdc39ecb83504a5b09b9bb5f3e86b517e9a9652e89e70877e12f5ec24fd851",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "mechanika",
+      "label": "Mechanika",
+      "owner": "monter",
+      "variant": "default",
+      "source": "icons/abilities/mechanika.svg",
+      "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "moja-prawa-reka",
+      "label": "Moja prawa ręka",
+      "owner": "mafiozo",
+      "variant": "default",
+      "source": "icons/abilities/moja-prawa-reka.svg",
+      "sourceSha256": "e81f004a47420ab36475a8e8d6a27c09b8e45aa296643e49ec352b764ec372f2",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "motywacja",
+      "label": "Motywacja",
+      "owner": "cwaniak",
+      "variant": "default",
+      "source": "icons/abilities/motywacja.svg",
+      "sourceSha256": "bcda91b7757cd11b9788e8ca5578d415ead01ae547b242ba46eecbc7c255adce",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "moj-biom",
+      "label": "Mój biom",
+      "owner": "zwiadowca",
+      "variant": "default",
+      "source": "icons/abilities/moj-biom.svg",
+      "sourceSha256": "3a0047be0bcef2bb1ec4cc5d21505522e7f5a74e7dbc3577f56181f6da21e3ba",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "moj-bog-kule-nosi",
+      "label": "Mój bóg kule nosi",
+      "owner": "kaznodzieja-nowej-ery",
+      "variant": "default",
+      "source": "icons/abilities/moj-bog-kule-nosi.svg",
+      "sourceSha256": "d57cac0507304dbba52121db1d76ac1505e4fb174e29dd226ad9823476f72a80",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "moj-wrog",
+      "label": "Mój wróg",
+      "owner": "zwiadowca",
+      "variant": "default",
+      "source": "icons/abilities/moj-wrog.svg",
+      "sourceSha256": "086ac2b583abee3c1d804960103eb2a4457d0ffaff27036d02899bd32961116f",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "moj-wrog-ludzie",
+      "label": "Mój wróg: Ludzie",
+      "owner": "moj-wrog-option",
+      "variant": "default",
+      "source": "icons/abilities/moj-wrog-ludzie.svg",
+      "sourceSha256": "d8b5cbf7401549a902dec78dfefdc4ce2e2d6901250352a392e67022f77defd0",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "moj-wrog-maszyny",
+      "label": "Mój wróg: Maszyny",
+      "owner": "moj-wrog-option",
+      "variant": "default",
+      "source": "icons/abilities/moj-wrog-maszyny.svg",
+      "sourceSha256": "448d669cb911e5dbee66aa19e11a185f03b3da58db36f7b6806fa5edebf97366",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "moj-wrog-mutanty",
+      "label": "Mój wróg: Mutanty",
+      "owner": "moj-wrog-option",
+      "variant": "default",
+      "source": "icons/abilities/moj-wrog-mutanty.svg",
+      "sourceSha256": "448d669cb911e5dbee66aa19e11a185f03b3da58db36f7b6806fa5edebf97366",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "moj-wrog-potwory",
+      "label": "Mój wróg: Potwory",
+      "owner": "moj-wrog-option",
+      "variant": "default",
+      "source": "icons/abilities/moj-wrog-potwory.svg",
+      "sourceSha256": "271645990c42c48e5ef70e18049a082c16dbd51afb67b3eded7cd026ef18e985",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "moj-wrog-zwierzeta",
+      "label": "Mój wróg: Zwierzęta",
+      "owner": "moj-wrog-option",
+      "variant": "default",
+      "source": "icons/abilities/moj-wrog-zwierzeta.svg",
+      "sourceSha256": "e2a4ae3f74b141db1753d1d6a9b4771c54109e7fb007cb0f1b9a64eb7c44de6e",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "mutant-na-sniadanie",
+      "label": "Mutant na śniadanie",
+      "owner": "lowca-mutantow",
+      "variant": "default",
+      "source": "icons/abilities/mutant-na-sniadanie.svg",
+      "sourceSha256": "75f1793b8c61d67e215c153eb5b2e4dc27f7d587a99e778ca25bc0b88e3002d9",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "nie-do-zdarcia",
+      "label": "Nie do zdarcia",
+      "owner": "gladiator",
+      "variant": "default",
+      "source": "icons/abilities/nie-do-zdarcia.svg",
+      "sourceSha256": "2415ac9a0eb191d6b5a62d4dfa4cd279193ab027f2b8ccb63424891669c03f1b",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "nie-klekam",
+      "label": "Nie klękam",
+      "owner": "twardziel",
+      "variant": "default",
+      "source": "icons/abilities/nie-klekam.svg",
+      "sourceSha256": "2b9024095583328cc8e8691e95e227163fc4fb2be30650b494391757e4b8cb17",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "obelga",
+      "label": "Obelga",
+      "owner": "cwaniak",
+      "variant": "default",
+      "source": "icons/abilities/obelga.svg",
+      "sourceSha256": "f8c8d712dc18d26ae769bee4bff8b17ce67b6aa36773113b6126437c4f3d195d",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "obsluga-pancerza",
+      "label": "Obsługa pancerza",
+      "owner": "wyjadacz-option",
+      "variant": "default",
+      "source": "icons/abilities/obsluga-pancerza.svg",
+      "sourceSha256": "31dc7548af241a9d649a7add411298527d65ec112603fe33151aad41a830d0d2",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "odwazny-czy-glupi",
+      "label": "Odważny czy głupi",
+      "owner": "ganger",
+      "variant": "default",
+      "source": "icons/abilities/odwazny-czy-glupi.svg",
+      "sourceSha256": "374469ecf6d4cc708be851510518c42f24caca3ee47dcfe85af8556e6005cd84",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "oswajanie-zwierzat",
+      "label": "Oswajanie zwierząt",
+      "owner": "lowca-mutantow",
+      "variant": "default",
+      "source": "icons/abilities/oswajanie-zwierzat.svg",
+      "sourceSha256": "5fc5cad5aaecaa9d56243072e94ea7e3bee03600bc7070a38124678da0dc552d",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "pancerna-fura",
+      "label": "Pancerna fura",
+      "owner": "wojownik-autostrady",
+      "variant": "default",
+      "source": "icons/abilities/pancerna-fura.svg",
+      "sourceSha256": "ad03acdc92b3e15d2689f8caadc7d0609b58bce1fbe5601ab1cde783441fbcc9",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "paranoja",
+      "label": "Paranoja",
+      "owner": "brutal",
+      "variant": "default",
+      "source": "icons/abilities/paranoja.svg",
+      "sourceSha256": "334dfbff614a3cab3be29ebb4ba450b0d0545f5ea20f1814ebb0101cc1b69973",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "partner",
+      "label": "Partner",
+      "owner": "sedzia",
+      "variant": "default",
+      "source": "icons/abilities/partner.svg",
+      "sourceSha256": "37a4bb62098769912673161ff53187408cea86af79f3c616cb33d8002dc05c56",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "pirotechnika",
+      "label": "Pirotechnika",
+      "owner": "chemik",
+      "variant": "default",
+      "source": "icons/abilities/pirotechnika.svg",
+      "sourceSha256": "2050978b23be1ccab45a97da1c85a001290b07825acce0d8183bc9e6ac011574",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "pistolero",
+      "label": "Pistolero",
+      "owner": "kowboj",
+      "variant": "default",
+      "source": "icons/abilities/pistolero.svg",
+      "sourceSha256": "ab2f88b1f8370a4770722ca05b476fea3d28ade7854b12b071a5ce7a97653c88",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "podstepny-atak",
+      "label": "Podstępny atak",
+      "owner": "zlodziej",
+      "variant": "default",
+      "source": "icons/abilities/podstepny-atak.svg",
+      "sourceSha256": "9a5dd41c0418a0fa745c1bcb60e5baee6a7cec0b1c14db85f088eaffbb7b1d39",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "pogon",
+      "label": "Pogoń",
+      "owner": "zwiadowca",
+      "variant": "default",
+      "source": "icons/abilities/pogon.svg",
+      "sourceSha256": "03bdb94245452bc8e4b2bed022b27294276b1339306ff87f8624a374f1a3143a",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "pogromca",
+      "label": "Pogromca",
+      "owner": "lowca-mutantow",
+      "variant": "default",
+      "source": "icons/abilities/pogromca.svg",
+      "sourceSha256": "03bdb94245452bc8e4b2bed022b27294276b1339306ff87f8624a374f1a3143a",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "renoma",
+      "label": "Renoma",
+      "owner": "mafiozo",
+      "variant": "default",
+      "source": "icons/abilities/renoma.svg",
+      "sourceSha256": "2c250443f8ff9417077e1af3d5ab755525b7b3aa3e383c7707b1c40629ef5fe2",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "reputacja",
+      "label": "Reputacja",
+      "owner": "najemnik",
+      "variant": "default",
+      "source": "icons/abilities/reputacja.svg",
+      "sourceSha256": "c6171ebd37c1959b6113941043ad6f1b8d62bcd891256673b15441335d5ba3d2",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "rewolwerowiec",
+      "label": "Rewolwerowiec",
+      "owner": "kowboj",
+      "variant": "default",
+      "source": "icons/abilities/rewolwerowiec.svg",
+      "sourceSha256": "5932894cb0904c52300d34a290a16a8d353d786ccacace5058b05c1c725c5b50",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "rusznikarstwo",
+      "label": "Rusznikarstwo",
+      "owner": "chemik",
+      "variant": "default",
+      "source": "icons/abilities/rusznikarstwo.svg",
+      "sourceSha256": "dcec8366016e63f63cc169a3c17cfcc06696ada67a7db003f5ae8ac9f419eb14",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "rutyna",
+      "label": "Rutyna",
+      "owner": "zolnierz",
+      "variant": "default",
+      "source": "icons/abilities/rutyna.svg",
+      "sourceSha256": "ec4fbae53cf1be1d52125b9e3d96acd0054cae17fcc33274d72cdf2d59cd1c68",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "rzeznik",
+      "label": "Rzeźnik",
+      "owner": "wyjadacz-option",
+      "variant": "default",
+      "source": "icons/abilities/rzeznik.svg",
+      "sourceSha256": "93f2d0ed68791ba5d94343449614e08e4672ebf6e54b2323318d76ed46c039d4",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "rzuc-bron-i-gleba",
+      "label": "Rzuć broń i gleba!",
+      "owner": "sedzia",
+      "variant": "default",
+      "source": "icons/abilities/rzuc-bron-i-gleba.svg",
+      "sourceSha256": "4c636b9bca6cc749b0096229c7a396284331f794259e6606f8c79d4d69db29a1",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "samouk",
+      "label": "Samouk",
+      "owner": "cwaniak",
+      "variant": "default",
+      "source": "icons/abilities/samouk.svg",
+      "sourceSha256": "5ffbdf20810d44bf8cfe02fd79de99a7faf88e53d10daa78d5dd978967e20b09",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "saper",
+      "label": "Saper",
+      "owner": "zlodziej",
+      "variant": "default",
+      "source": "icons/abilities/saper.svg",
+      "sourceSha256": "21bc5dcff219b13bd1dcd75f6d28c9701502542bedbf504f50d196e8bb7e2d78",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "serwisowanie",
+      "label": "Serwisowanie",
+      "owner": "monter",
+      "variant": "default",
+      "source": "icons/abilities/serwisowanie.svg",
+      "sourceSha256": "43659a4c590f9892703aeb2c53a00353153e0794c7e15840196730ebfe4afb08",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "skrytka",
+      "label": "Skrytka",
+      "owner": "kurier",
+      "variant": "default",
+      "source": "icons/abilities/skrytka.svg",
+      "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "skuteczny-cios",
+      "label": "Skuteczny cios",
+      "owner": "najemnik",
+      "variant": "default",
+      "source": "icons/abilities/skuteczny-cios.svg",
+      "sourceSha256": "8a0bd8ecaf3bbff77b70dab08d02b5b9a0973086616d17ef48df1a13a004fe8b",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "slang",
+      "label": "Slang",
+      "owner": "kurier",
+      "variant": "default",
+      "source": "icons/abilities/slang.svg",
+      "sourceSha256": "489859c79ecce12c7e1b0f181602b1783d0f6a30b4c2d8a804bb5b86cbb6b03a",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "smakuje-jak-arszenik",
+      "label": "Smakuje jak arszenik",
+      "owner": "chemik",
+      "variant": "default",
+      "source": "icons/abilities/smakuje-jak-arszenik.svg",
+      "sourceSha256": "ef80cfb0acf2d2ed390490e28e63dd51cb030f8acc6c023946dd456bfe7735f4",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "sokole-oko",
+      "label": "Sokole oko",
+      "owner": "wyjadacz-option",
+      "variant": "default",
+      "source": "icons/abilities/sokole-oko.svg",
+      "sourceSha256": "f77e36828e55586e9b5ef5a3a6ccee4af8e64cc8eac5133e7a09dba91479cff0",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "solowa",
+      "label": "Solówa",
+      "owner": "brutal",
+      "variant": "default",
+      "source": "icons/abilities/solowa.svg",
+      "sourceSha256": "16292b6c0c8db69ab2f8bea7e081414ba89c3a547b6e38d4c3617b090b74a98e",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "specjalizacja-spec",
+      "label": "Specjalizacja",
+      "owner": "spec",
+      "variant": "default",
+      "source": "icons/abilities/specjalizacja-spec.svg",
+      "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "specjalizacja-zlodziej",
+      "label": "Specjalizacja",
+      "owner": "zlodziej",
+      "variant": "default",
+      "source": "icons/abilities/specjalizacja-zlodziej.svg",
+      "sourceSha256": "aa18e02bf650fcb14d2859147716f4666740b1a736992465f424b179eca3514e",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "spieprzysz-to",
+      "label": "Spieprzysz to!",
+      "owner": "cwaniak",
+      "variant": "default",
+      "source": "icons/abilities/spieprzysz-to.svg",
+      "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "sportowiec",
+      "label": "Sportowiec",
+      "owner": "zwiadowca",
+      "variant": "default",
+      "source": "icons/abilities/sportowiec.svg",
+      "sourceSha256": "37b3ced0ffe7f36e8828abcbc13c7ced4d35f0a9920ed540ededad58cc340a44",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "stalowy-nadgarstek",
+      "label": "Stalowy nadgarstek",
+      "owner": "wyjadacz-option",
+      "variant": "default",
+      "source": "icons/abilities/stalowy-nadgarstek.svg",
+      "sourceSha256": "d8c83aacec0f8c7db11eb80e668cda442b05324c6b48f72c2ad871b6f155346e",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "strzelec",
+      "label": "Strzelec",
+      "owner": "zabojca",
+      "variant": "default",
+      "source": "icons/abilities/strzelec.svg",
+      "sourceSha256": "83f2d526727e86cc244e8b6a68f665534890643d70b4b9348734e1f569f73a95",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "stylowa",
+      "label": "Stylówa",
+      "owner": "gwiazda",
+      "variant": "default",
+      "source": "icons/abilities/stylowa.svg",
+      "sourceSha256": "aa79fdc47f58fbb59f2175f4c800c0f76892b95f961198059af1154122579741",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "szalencza-szarza",
+      "label": "Szaleńcza szarża",
+      "owner": "brutal",
+      "variant": "default",
+      "source": "icons/abilities/szalencza-szarza.svg",
+      "sourceSha256": "9e95f50b6dbc04a319f31dcec9fb8d74148e1070eee6bad2a75b662766c30c5d",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "szary",
+      "label": "Szary",
+      "owner": "szczur",
+      "variant": "default",
+      "source": "icons/abilities/szary.svg",
+      "sourceSha256": "4bd810a23039817a14513e84ba592a708fcc8b78f385cd35e6d7916c79b7cae5",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "szczescie",
+      "label": "Szczęście",
+      "owner": "cwaniak",
+      "variant": "default",
+      "source": "icons/abilities/szczescie.svg",
+      "sourceSha256": "8892c6c990b0e616334126fb8141a93503a784e10887592afc6227744b830e0b",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "szybka-gadka",
+      "label": "Szybka gadka",
+      "owner": "cwaniak",
+      "variant": "default",
+      "source": "icons/abilities/szybka-gadka.svg",
+      "sourceSha256": "a8d2f4dbe822751f88cf2f77490de6b9756d996cf5f92625e55160251d407b23",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "szybka-produkcja",
+      "label": "Szybka produkcja",
+      "owner": "spec",
+      "variant": "default",
+      "source": "icons/abilities/szybka-produkcja.svg",
+      "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "szybkie-badanie",
+      "label": "Szybkie badanie",
+      "owner": "spec",
+      "variant": "default",
+      "source": "icons/abilities/szybkie-badanie.svg",
+      "sourceSha256": "6c308b62d0703643d9c0ce5875908af22dc5c1956d0cc77e13f8e962b5e1de20",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "szybkie-nogi",
+      "label": "Szybkie nogi",
+      "owner": "zlodziej",
+      "variant": "default",
+      "source": "icons/abilities/szybkie-nogi.svg",
+      "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "szybkie-rece",
+      "label": "Szybkie ręce",
+      "owner": "spec",
+      "variant": "default",
+      "source": "icons/abilities/szybkie-rece.svg",
+      "sourceSha256": "3c0b28c465cc993c60c6f501645989b90d99c505ada827d16ea0b8b3fdd9759b",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "szybkosc-kota",
+      "label": "Szybkość kota",
+      "owner": "zlodziej",
+      "variant": "default",
+      "source": "icons/abilities/szybkosc-kota.svg",
+      "sourceSha256": "d5a7edd6ffa564d2698687a8d85f2c13f70a342a0c874103eafa2cd10d4c002a",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "smiertelna-obelga",
+      "label": "Śmiertelna obelga",
+      "owner": "cwaniak",
+      "variant": "default",
+      "source": "icons/abilities/smiertelna-obelga.svg",
+      "sourceSha256": "a91c9321996572a6ccc97f32dad2be58d916219392befce71bed9edc100404d2",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "tarcza-wiary",
+      "label": "Tarcza wiary",
+      "owner": "kaznodzieja-nowej-ery",
+      "variant": "default",
+      "source": "icons/abilities/tarcza-wiary.svg",
+      "sourceSha256": "f15b76b5c233a3602845af8b4aa50a5750a05f6bd4f8eafddbb846fb649b00ab",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "trajektoria",
+      "label": "Trajektoria",
+      "owner": "spec",
+      "variant": "default",
+      "source": "icons/abilities/trajektoria.svg",
+      "sourceSha256": "ee9e7f28b3d095225871f6ef754ef95dd68cfd7c6c16ed99f6344663f6453e9f",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "trening-w-zbroi",
+      "label": "Trening w zbroi",
+      "owner": "zolnierz",
+      "variant": "default",
+      "source": "icons/abilities/trening-w-zbroi.svg",
+      "sourceSha256": "3d074d4e7585a2bc35935f42f4d59b1133b1a307601d3461872a49ebe3894d68",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "truciciel",
+      "label": "Truciciel",
+      "owner": "szczur",
+      "variant": "default",
+      "source": "icons/abilities/truciciel.svg",
+      "sourceSha256": "19a03b9f1a10236a1d5b2bdc1809576c2ab03fcb0b0102c49453c874a62f8d15",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "trzeci-atak",
+      "label": "Trzeci atak",
+      "owner": "twardziel",
+      "variant": "default",
+      "source": "icons/abilities/trzeci-atak.svg",
+      "sourceSha256": "9d23db2fc45eaf9517eec2a5f9911af04926458c45c5b739d261e2269dba4ca2",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "twardosc",
+      "label": "Twardość",
+      "owner": "twardziel",
+      "variant": "default",
+      "source": "icons/abilities/twardosc.svg",
+      "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "ulubiona-bron-twardziel",
+      "label": "Ulubiona broń",
+      "owner": "twardziel",
+      "variant": "default",
+      "source": "icons/abilities/ulubiona-bron-twardziel.svg",
+      "sourceSha256": "dafcb8feb9dab7bd29f9657d5e8a122c40a44e74933726168a701b237b0d7962",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "ulubiona-bron-zlodziej",
+      "label": "Ulubiona broń",
+      "owner": "zlodziej",
+      "variant": "default",
+      "source": "icons/abilities/ulubiona-bron-zlodziej.svg",
+      "sourceSha256": "e59bb541928bb19c71ac057365f0874748ceebe5b881d3ffeb30c65ce1ae6ad8",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "ulubiona-bron-zwiadowca",
+      "label": "Ulubiona broń",
+      "owner": "zwiadowca",
+      "variant": "default",
+      "source": "icons/abilities/ulubiona-bron-zwiadowca.svg",
+      "sourceSha256": "dfaab0fdee5a2eea18b28777faf5ebc65ce32f1d61ee9ade770ee5d77bf936b3",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "w-czuly-punkt",
+      "label": "W czuły punkt",
+      "owner": "spec",
+      "variant": "default",
+      "source": "icons/abilities/w-czuly-punkt.svg",
+      "sourceSha256": "494b773b1bd3d580fe42cd13ca56fe001b8830b33a0f0ffbf75508a7a8719794",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "wsciekly-cios",
+      "label": "Wściekły cios",
+      "owner": "brutal",
+      "variant": "default",
+      "source": "icons/abilities/wsciekly-cios.svg",
+      "sourceSha256": "52ae2a6a7a2a4e2d93821ffb52e603891237b164515cc23a18067020927610f8",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "wyczulone-zmysly",
+      "label": "Wyczulone zmysły",
+      "owner": "zwiadowca",
+      "variant": "default",
+      "source": "icons/abilities/wyczulone-zmysly.svg",
+      "sourceSha256": "630c1143f620eb4e0a6950df06c7462b5e045a9a032023f9885ca0df95177edf",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "wyjadacz-zwiadowca",
+      "label": "Wyjadacz",
+      "owner": "zwiadowca",
+      "variant": "default",
+      "source": "icons/abilities/wyjadacz-zwiadowca.svg",
+      "sourceSha256": "c8495031166e511cfbbfe32844e060cd26b509110a766d30a4cc9fd9456e2012",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "wyjadacz",
+      "label": "Wyjadacz",
+      "owner": "twardziel",
+      "variant": "default",
+      "source": "icons/abilities/wyjadacz.svg",
+      "sourceSha256": "374e50918253c177a15139376fef0f5f6f1199181433d72dac3671f12add84f8",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "wyksztalciuch",
+      "label": "Wykształciuch",
+      "owner": "spec",
+      "variant": "default",
+      "source": "icons/abilities/wyksztalciuch.svg",
+      "sourceSha256": "a6797cc50ff6fe13453bdf1b33603c2aabc2228ae45d9d991431da62a0739804",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "z-bara",
+      "label": "Z bara!",
+      "owner": "brutal",
+      "variant": "default",
+      "source": "icons/abilities/z-bara.svg",
+      "sourceSha256": "51fbd774b71851e9964b73a04f795fa5d1b71962759d5cd5c517912046a27b4a",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "za-garsc-gambli",
+      "label": "Za garść gambli",
+      "owner": "gwiazda",
+      "variant": "default",
+      "source": "icons/abilities/za-garsc-gambli.svg",
+      "sourceSha256": "cde71508cf8b7d7d178fb4e178ed549c877817d5ff504315a1e4682cb3c634dc",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "zabojczy-cios",
+      "label": "Zabójczy cios",
+      "owner": "brutal",
+      "variant": "default",
+      "source": "icons/abilities/zabojczy-cios.svg",
+      "sourceSha256": "a0e2a925f1b54f341304533b07aa2e16f3357c454d0a15c0291f21281e588bc2",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "zawolajcie-kolegow",
+      "label": "Zawołajcie kolegów",
+      "owner": "gladiator",
+      "variant": "default",
+      "source": "icons/abilities/zawolajcie-kolegow.svg",
+      "sourceSha256": "abfc18f9af0e406acc37d35e09766a779dad7eeabed31cf74d1f1a8e14b3748d",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "zawsze-w-siodle",
+      "label": "Zawsze w siodle",
+      "owner": "kowboj",
+      "variant": "default",
+      "source": "icons/abilities/zawsze-w-siodle.svg",
+      "sourceSha256": "5e64e1f696dd5bdd4d4b71e08d22eaa07280cd5ed0b88c6ff05b3ebe43f1881f",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "zew-areny",
+      "label": "Zew areny",
+      "owner": "gladiator",
+      "variant": "default",
+      "source": "icons/abilities/zew-areny.svg",
+      "sourceSha256": "7524b5d3e92bf9189e5964e1b4a5065a2986e42c5cb8af9fbee57f0f8d06f987",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "znajomosci",
+      "label": "Znajomości",
+      "owner": "kurier",
+      "variant": "default",
+      "source": "icons/abilities/znajomosci.svg",
+      "sourceSha256": "52a6498ef58a5200bda88b5386d7d4ea50b09c4e73c503a5a419b8fcde60629c",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "zryw",
+      "label": "Zryw",
+      "owner": "twardziel",
+      "variant": "default",
+      "source": "icons/abilities/zryw.svg",
+      "sourceSha256": "f566600e180e85a4ce1d0e5cad346aa40e8038faf41d5ec23b4906fb7cdd00f2",
+      "referenced": true
+    },
+    {
+      "kind": "feature",
+      "id": "zwinnosc-szczura",
+      "label": "Zwinność szczura",
+      "owner": "szczur",
+      "variant": "default",
+      "source": "icons/abilities/zwinnosc-szczura.svg",
+      "sourceSha256": "20a0205b2ab30b9c8623635c37168cd1a87b5bc3f8394660576357d9defd58d7",
+      "referenced": true
+    },
+    {
+      "kind": "class",
+      "id": "brutal",
+      "label": "Brutal",
+      "owner": "brutal",
+      "variant": "default",
+      "source": "icons/klasy/brutal.svg",
+      "sourceSha256": "83bf2a94a6a88bb853e8e3de117926e3e503d06a79bbd186bc69e8f9ecaeb915",
+      "referenced": true
+    },
+    {
+      "kind": "class",
+      "id": "cwaniak",
+      "label": "Cwaniak",
+      "owner": "cwaniak",
+      "variant": "default",
+      "source": "icons/klasy/cwaniak.svg",
+      "sourceSha256": "aa8669e1745b216b6ab4e23aeb55fc20df54d4922261d3e37210e95491e1f57c",
+      "referenced": true
+    },
+    {
+      "kind": "class",
+      "id": "spec",
+      "label": "Spec",
+      "owner": "spec",
+      "variant": "default",
+      "source": "icons/klasy/spec.svg",
+      "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7",
+      "referenced": true
+    },
+    {
+      "kind": "class",
+      "id": "twardziel",
+      "label": "Twardziel",
+      "owner": "twardziel",
+      "variant": "default",
+      "source": "icons/klasy/twardziel.svg",
+      "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac",
+      "referenced": true
+    },
+    {
+      "kind": "class",
+      "id": "zlodziej",
+      "label": "Złodziej",
+      "owner": "zlodziej",
+      "variant": "default",
+      "source": "icons/klasy/zlodziej.svg",
+      "sourceSha256": "a66384a8f44176c0f6fa824edd1758ceabfbe9645b1370870ec07d93179b50d2",
+      "referenced": true
+    },
+    {
+      "kind": "class",
+      "id": "zwiadowca",
+      "label": "Zwiadowca",
+      "owner": "zwiadowca",
+      "variant": "default",
+      "source": "icons/klasy/zwiadowca.svg",
+      "sourceSha256": "67b410b391ee6dda233c64b0bbdf051d8d4bc1909260d06ef79fa3e6c328307a",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "chemik",
+      "label": "Chemik",
+      "owner": "spec",
+      "variant": "default",
+      "source": "icons/profesje/chemik.svg",
+      "sourceSha256": "4662220129374902fd41b90cf730c337c276df09c02f494defe3e6bbf31b6c27",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "ganger",
+      "label": "Ganger",
+      "owner": "brutal",
+      "variant": "default",
+      "source": "icons/profesje/ganger.svg",
+      "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "gladiator",
+      "label": "Gladiator",
+      "owner": "brutal",
+      "variant": "default",
+      "source": "icons/profesje/gladiator.svg",
+      "sourceSha256": "3433cbb512a34091de6d3a17e330060f24df47337d2253a38bd345c0787f80a9",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "gwiazda",
+      "label": "Gwiazda",
+      "owner": "cwaniak",
+      "variant": "default",
+      "source": "icons/profesje/gwiazda.svg",
+      "sourceSha256": "997555ee74146e5b8f1f2c6fc7becca90ebb51a404117b24454afee28df7fca7",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "kaznodzieja",
+      "label": "Kaznodzieja Nowej Ery",
+      "owner": "cwaniak",
+      "variant": "default",
+      "source": "icons/profesje/kaznodzieja.svg",
+      "sourceSha256": "138bbdbdc8637e3e936dd2e1a3d07183dcb20d37f4b66a0c9b4087b482e3eef0",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "kowboj",
+      "label": "Kowboj",
+      "owner": "twardziel",
+      "variant": "default",
+      "source": "icons/profesje/kowboj.svg",
+      "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "kurier",
+      "label": "Kurier",
+      "owner": "zlodziej",
+      "variant": "default",
+      "source": "icons/profesje/kurier.svg",
+      "sourceSha256": "96d9ac95260eca111c41639200ccefe8132a864cee353706bd089fc5693a30d7",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "lowca-mutantow",
+      "label": "Łowca Mutantów",
+      "owner": "zwiadowca",
+      "variant": "default",
+      "source": "icons/profesje/lowca-mutantow.svg",
+      "sourceSha256": "8c35340f8fbd1ef9b1d1fa0c63d40e02a4fc8fc32a6e390441711fe48b637bc0",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "mafiozo",
+      "label": "Mafiozo",
+      "owner": "cwaniak",
+      "variant": "default",
+      "source": "icons/profesje/mafiozo.svg",
+      "sourceSha256": "91d52d1ffa320d4542e393e155df7810d01868b46b3dd9a5f75500eb65f36c88",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "medyk",
+      "label": "Medyk",
+      "owner": "spec",
+      "variant": "default",
+      "source": "icons/profesje/medyk.svg",
+      "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "monter",
+      "label": "Monter",
+      "owner": "spec",
+      "variant": "default",
+      "source": "icons/profesje/monter.svg",
+      "sourceSha256": "a266c80a0c3a394ac90455249a8599e49ebaff0d4d35577f630f8810913c801a",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "najemnik",
+      "label": "Najemnik",
+      "owner": "brutal",
+      "variant": "default",
+      "source": "icons/profesje/najemnik.svg",
+      "sourceSha256": "2a4d32936b801162e47078613bb8694d9e2fb05dcc24e13752a64f657fa18716",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "sedzia",
+      "label": "Sędzia",
+      "owner": "zwiadowca",
+      "variant": "default",
+      "source": "icons/profesje/sedzia.svg",
+      "sourceSha256": "874c3e1ff80a895921e5675d617b0e8528280017b875614f1aeaef321f650eeb",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "szczur",
+      "label": "Szczur",
+      "owner": "zlodziej",
+      "variant": "default",
+      "source": "icons/profesje/szczur.svg",
+      "sourceSha256": "4bd810a23039817a14513e84ba592a708fcc8b78f385cd35e6d7916c79b7cae5",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "wojownik-autostrady",
+      "label": "Wojownik Autostrady",
+      "owner": "twardziel",
+      "variant": "default",
+      "source": "icons/profesje/wojownik-autostrady.svg",
+      "sourceSha256": "e01f31847380231e9d631e52c4abeb248ae3d4926c2bc01f16c05a20e1f6961a",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "zabojca",
+      "label": "Zabójca",
+      "owner": "zlodziej",
+      "variant": "default",
+      "source": "icons/profesje/zabojca.svg",
+      "sourceSha256": "f2ab1c6f403e02b4faddbdae54b60e69cc65fcfe9af70ba39eae69a2259618fd",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "zabojca-maszyn",
+      "label": "Zabójca Maszyn",
+      "owner": "zwiadowca",
+      "variant": "default",
+      "source": "icons/profesje/zabojca-maszyn.svg",
+      "sourceSha256": "0c741cf9f957a63bc5ccc664ec9c16c5709904676a638e76017979b364a811d5",
+      "referenced": true
+    },
+    {
+      "kind": "profession",
+      "id": "zolnierz",
+      "label": "Żołnierz",
+      "owner": "twardziel",
+      "variant": "default",
+      "source": "icons/profesje/zolnierz.svg",
+      "sourceSha256": "5ea9f370436a15b721d359267424f0cff11887f5f11ceca09e09944336492654",
+      "referenced": true
+    }
+  ],
+  "missing": [],
+  "subjects": [
+    {
+      "kind": "feature",
+      "id": "a-co-mi-tam",
+      "label": "A co mi tam!",
+      "owner": "szczur",
+      "files": [
+        {
+          "source": "icons/abilities/a-co-mi-tam.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "amen",
+      "label": "Amen",
+      "owner": "kaznodzieja-nowej-ery",
+      "files": [
+        {
+          "source": "icons/abilities/amen.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "berserk",
+      "label": "Berserk",
+      "owner": "brutal",
+      "files": [
+        {
+          "source": "icons/abilities/berserk.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        },
+        {
+          "source": "icons/abilities/berserk_active.svg",
+          "variant": "active",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "bez-tajemnic",
+      "label": "Bez tajemnic",
+      "owner": "lowca-mutantow",
+      "files": [
+        {
+          "source": "icons/abilities/bez-tajemnic.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "bezlitosny-przywodca",
+      "label": "Bezlitosny przywódca",
+      "owner": "mafiozo",
+      "files": [
+        {
+          "source": "icons/abilities/bezlitosny-przywodca.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "brutalny-cios",
+      "label": "Brutalny cios",
+      "owner": "brutal",
+      "files": [
+        {
+          "source": "icons/abilities/brutalny-cios.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "bystrzacha",
+      "label": "Bystrzacha",
+      "owner": "spec",
+      "files": [
+        {
+          "source": "icons/abilities/bystrzacha.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "cichy-krok",
+      "label": "Cichy krok",
+      "owner": "zwiadowca",
+      "files": [
+        {
+          "source": "icons/abilities/cichy-krok.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "clint",
+      "label": "Clint",
+      "owner": "kowboj",
+      "files": [
+        {
+          "source": "icons/abilities/clint.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "cwaniacki-zwod",
+      "label": "Cwaniacki zwód",
+      "owner": "cwaniak",
+      "files": [
+        {
+          "source": "icons/abilities/cwaniacki-zwod.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "dobra-rada",
+      "label": "Dobra rada",
+      "owner": "spec",
+      "files": [
+        {
+          "source": "icons/abilities/dobra-rada.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "doktor-brain",
+      "label": "Doktor Brain",
+      "owner": "medyk",
+      "files": [
+        {
+          "source": "icons/abilities/doktor-brain.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "drugi-atak",
+      "label": "Drugi atak",
+      "owner": "brutal",
+      "files": [
+        {
+          "source": "icons/abilities/drugi-atak.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "drzwi-w-drzwi",
+      "label": "Drzwi w drzwi",
+      "owner": "wojownik-autostrady",
+      "files": [
+        {
+          "source": "icons/abilities/drzwi-w-drzwi.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "dwoch-na-jednego",
+      "label": "Dwóch na jednego",
+      "owner": "ganger",
+      "files": [
+        {
+          "source": "icons/abilities/dwoch-na-jednego.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "dziewiec-zyc",
+      "label": "Dziewięć żyć",
+      "owner": "zlodziej",
+      "files": [
+        {
+          "source": "icons/abilities/dziewiec-zyc.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "ekspert",
+      "label": "Ekspert",
+      "owner": "cwaniak",
+      "files": [
+        {
+          "source": "icons/abilities/ekspert.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "elektronik",
+      "label": "Elektronik",
+      "owner": "zlodziej",
+      "files": [
+        {
+          "source": "icons/abilities/elektronik.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "emiter-emp",
+      "label": "Emiter EMP",
+      "owner": "zabojca-maszyn",
+      "files": [
+        {
+          "source": "icons/abilities/emiter-emp.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "empiryk",
+      "label": "Empiryk",
+      "owner": "zabojca-maszyn",
+      "files": [
+        {
+          "source": "icons/abilities/empiryk.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "farmacja",
+      "label": "Farmacja",
+      "owner": "medyk",
+      "files": [
+        {
+          "source": "icons/abilities/farmacja.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "glowa-do-gory",
+      "label": "Głowa do góry!",
+      "owner": "cwaniak",
+      "files": [
+        {
+          "source": "icons/abilities/glowa-do-gory.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "gola-klata",
+      "label": "Goła klata",
+      "owner": "brutal",
+      "files": [
+        {
+          "source": "icons/abilities/gola-klata.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "hakerstwo",
+      "label": "Hakerstwo",
+      "owner": "monter",
+      "files": [
+        {
+          "source": "icons/abilities/hakerstwo.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "inteligentna-obrona",
+      "label": "Inteligentna obrona",
+      "owner": "spec",
+      "files": [
+        {
+          "source": "icons/abilities/inteligentna-obrona.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "ja-i-moj-gang",
+      "label": "Ja i mój gang!",
+      "owner": "ganger",
+      "files": [
+        {
+          "source": "icons/abilities/ja-i-moj-gang.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "jak-dbasz-tak-masz",
+      "label": "Jak dbasz, tak masz",
+      "owner": "zolnierz",
+      "files": [
+        {
+          "source": "icons/abilities/jak-dbasz-tak-masz.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "jeden-strzal",
+      "label": "Jeden strzał",
+      "owner": "zabojca",
+      "files": [
+        {
+          "source": "icons/abilities/jeden-strzal.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "jeden-z-nas",
+      "label": "Jeden z nas",
+      "owner": "sedzia",
+      "files": [
+        {
+          "source": "icons/abilities/jeden-z-nas.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "jeden-z-nich",
+      "label": "Jeden z nich",
+      "owner": "ganger",
+      "files": [
+        {
+          "source": "icons/abilities/jeden-z-nich.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "jezdziec",
+      "label": "Jeździec",
+      "owner": "wyjadacz-option",
+      "files": [
+        {
+          "source": "icons/abilities/jezdziec.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "kakofonia",
+      "label": "Kakofonia",
+      "owner": "gwiazda",
+      "files": [
+        {
+          "source": "icons/abilities/kakofonia.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "kamuflaz",
+      "label": "Kamuflaż",
+      "owner": "zabojca",
+      "files": [
+        {
+          "source": "icons/abilities/kamuflaz.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "kaskader",
+      "label": "Kaskader",
+      "owner": "wojownik-autostrady",
+      "files": [
+        {
+          "source": "icons/abilities/kaskader.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "klusownik",
+      "label": "Kłusownik",
+      "owner": "zwiadowca",
+      "files": [
+        {
+          "source": "icons/abilities/klusownik.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "kocie-kosci",
+      "label": "Kocie kości",
+      "owner": "zlodziej",
+      "files": [
+        {
+          "source": "icons/abilities/kocie-kosci.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "kolejka",
+      "label": "Kolejka",
+      "owner": "cwaniak",
+      "files": [
+        {
+          "source": "icons/abilities/kolejka.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "kondycha",
+      "label": "Kondycha",
+      "owner": "twardziel",
+      "files": [
+        {
+          "source": "icons/abilities/kondycha.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "krwawy-aniol",
+      "label": "Krwawy anioł",
+      "owner": "medyk",
+      "files": [
+        {
+          "source": "icons/abilities/krwawy-aniol.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "lets-rock",
+      "label": "Let’s rock!",
+      "owner": "gwiazda",
+      "files": [
+        {
+          "source": "icons/abilities/lets-rock.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "lapiduch",
+      "label": "Łapiduch",
+      "owner": "medyk",
+      "files": [
+        {
+          "source": "icons/abilities/lapiduch.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "laska-boza",
+      "label": "Łaska boża",
+      "owner": "kaznodzieja-nowej-ery",
+      "files": [
+        {
+          "source": "icons/abilities/laska-boza.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "leb-jak-sklep",
+      "label": "Łeb jak sklep",
+      "owner": "spec",
+      "files": [
+        {
+          "source": "icons/abilities/leb-jak-sklep.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "lyzeczka",
+      "label": "Łyżeczka",
+      "owner": "gladiator",
+      "files": [
+        {
+          "source": "icons/abilities/lyzeczka.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "maszyna-do-zabijania",
+      "label": "Maszyna do zabijania",
+      "owner": "najemnik",
+      "files": [
+        {
+          "source": "icons/abilities/maszyna-do-zabijania.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "matrix",
+      "label": "Matrix",
+      "owner": "zlodziej",
+      "files": [
+        {
+          "source": "icons/abilities/matrix.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "mechanika",
+      "label": "Mechanika",
+      "owner": "monter",
+      "files": [
+        {
+          "source": "icons/abilities/mechanika.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "moja-prawa-reka",
+      "label": "Moja prawa ręka",
+      "owner": "mafiozo",
+      "files": [
+        {
+          "source": "icons/abilities/moja-prawa-reka.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "motywacja",
+      "label": "Motywacja",
+      "owner": "cwaniak",
+      "files": [
+        {
+          "source": "icons/abilities/motywacja.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "moj-biom",
+      "label": "Mój biom",
+      "owner": "zwiadowca",
+      "files": [
+        {
+          "source": "icons/abilities/moj-biom.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "moj-bog-kule-nosi",
+      "label": "Mój bóg kule nosi",
+      "owner": "kaznodzieja-nowej-ery",
+      "files": [
+        {
+          "source": "icons/abilities/moj-bog-kule-nosi.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "moj-wrog",
+      "label": "Mój wróg",
+      "owner": "zwiadowca",
+      "files": [
+        {
+          "source": "icons/abilities/moj-wrog.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "moj-wrog-ludzie",
+      "label": "Mój wróg: Ludzie",
+      "owner": "moj-wrog-option",
+      "files": [
+        {
+          "source": "icons/abilities/moj-wrog-ludzie.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "moj-wrog-maszyny",
+      "label": "Mój wróg: Maszyny",
+      "owner": "moj-wrog-option",
+      "files": [
+        {
+          "source": "icons/abilities/moj-wrog-maszyny.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "moj-wrog-mutanty",
+      "label": "Mój wróg: Mutanty",
+      "owner": "moj-wrog-option",
+      "files": [
+        {
+          "source": "icons/abilities/moj-wrog-mutanty.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "moj-wrog-potwory",
+      "label": "Mój wróg: Potwory",
+      "owner": "moj-wrog-option",
+      "files": [
+        {
+          "source": "icons/abilities/moj-wrog-potwory.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "moj-wrog-zwierzeta",
+      "label": "Mój wróg: Zwierzęta",
+      "owner": "moj-wrog-option",
+      "files": [
+        {
+          "source": "icons/abilities/moj-wrog-zwierzeta.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "mutant-na-sniadanie",
+      "label": "Mutant na śniadanie",
+      "owner": "lowca-mutantow",
+      "files": [
+        {
+          "source": "icons/abilities/mutant-na-sniadanie.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "nie-do-zdarcia",
+      "label": "Nie do zdarcia",
+      "owner": "gladiator",
+      "files": [
+        {
+          "source": "icons/abilities/nie-do-zdarcia.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "nie-klekam",
+      "label": "Nie klękam",
+      "owner": "twardziel",
+      "files": [
+        {
+          "source": "icons/abilities/nie-klekam.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "obelga",
+      "label": "Obelga",
+      "owner": "cwaniak",
+      "files": [
+        {
+          "source": "icons/abilities/obelga.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "obsluga-pancerza",
+      "label": "Obsługa pancerza",
+      "owner": "wyjadacz-option",
+      "files": [
+        {
+          "source": "icons/abilities/obsluga-pancerza.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "odwazny-czy-glupi",
+      "label": "Odważny czy głupi",
+      "owner": "ganger",
+      "files": [
+        {
+          "source": "icons/abilities/odwazny-czy-glupi.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "oswajanie-zwierzat",
+      "label": "Oswajanie zwierząt",
+      "owner": "lowca-mutantow",
+      "files": [
+        {
+          "source": "icons/abilities/oswajanie-zwierzat.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "pancerna-fura",
+      "label": "Pancerna fura",
+      "owner": "wojownik-autostrady",
+      "files": [
+        {
+          "source": "icons/abilities/pancerna-fura.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "paranoja",
+      "label": "Paranoja",
+      "owner": "brutal",
+      "files": [
+        {
+          "source": "icons/abilities/paranoja.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "partner",
+      "label": "Partner",
+      "owner": "sedzia",
+      "files": [
+        {
+          "source": "icons/abilities/partner.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "pirotechnika",
+      "label": "Pirotechnika",
+      "owner": "chemik",
+      "files": [
+        {
+          "source": "icons/abilities/pirotechnika.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "pistolero",
+      "label": "Pistolero",
+      "owner": "kowboj",
+      "files": [
+        {
+          "source": "icons/abilities/pistolero.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "podstepny-atak",
+      "label": "Podstępny atak",
+      "owner": "zlodziej",
+      "files": [
+        {
+          "source": "icons/abilities/podstepny-atak.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "pogon",
+      "label": "Pogoń",
+      "owner": "zwiadowca",
+      "files": [
+        {
+          "source": "icons/abilities/pogon.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "pogromca",
+      "label": "Pogromca",
+      "owner": "lowca-mutantow",
+      "files": [
+        {
+          "source": "icons/abilities/pogromca.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "renoma",
+      "label": "Renoma",
+      "owner": "mafiozo",
+      "files": [
+        {
+          "source": "icons/abilities/renoma.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "reputacja",
+      "label": "Reputacja",
+      "owner": "najemnik",
+      "files": [
+        {
+          "source": "icons/abilities/reputacja.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "rewolwerowiec",
+      "label": "Rewolwerowiec",
+      "owner": "kowboj",
+      "files": [
+        {
+          "source": "icons/abilities/rewolwerowiec.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "rusznikarstwo",
+      "label": "Rusznikarstwo",
+      "owner": "chemik",
+      "files": [
+        {
+          "source": "icons/abilities/rusznikarstwo.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "rutyna",
+      "label": "Rutyna",
+      "owner": "zolnierz",
+      "files": [
+        {
+          "source": "icons/abilities/rutyna.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "rzeznik",
+      "label": "Rzeźnik",
+      "owner": "wyjadacz-option",
+      "files": [
+        {
+          "source": "icons/abilities/rzeznik.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "rzuc-bron-i-gleba",
+      "label": "Rzuć broń i gleba!",
+      "owner": "sedzia",
+      "files": [
+        {
+          "source": "icons/abilities/rzuc-bron-i-gleba.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "samouk",
+      "label": "Samouk",
+      "owner": "cwaniak",
+      "files": [
+        {
+          "source": "icons/abilities/samouk.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "saper",
+      "label": "Saper",
+      "owner": "zlodziej",
+      "files": [
+        {
+          "source": "icons/abilities/saper.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "serwisowanie",
+      "label": "Serwisowanie",
+      "owner": "monter",
+      "files": [
+        {
+          "source": "icons/abilities/serwisowanie.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "skrytka",
+      "label": "Skrytka",
+      "owner": "kurier",
+      "files": [
+        {
+          "source": "icons/abilities/skrytka.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "skuteczny-cios",
+      "label": "Skuteczny cios",
+      "owner": "najemnik",
+      "files": [
+        {
+          "source": "icons/abilities/skuteczny-cios.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "slang",
+      "label": "Slang",
+      "owner": "kurier",
+      "files": [
+        {
+          "source": "icons/abilities/slang.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "smakuje-jak-arszenik",
+      "label": "Smakuje jak arszenik",
+      "owner": "chemik",
+      "files": [
+        {
+          "source": "icons/abilities/smakuje-jak-arszenik.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "sokole-oko",
+      "label": "Sokole oko",
+      "owner": "wyjadacz-option",
+      "files": [
+        {
+          "source": "icons/abilities/sokole-oko.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "solowa",
+      "label": "Solówa",
+      "owner": "brutal",
+      "files": [
+        {
+          "source": "icons/abilities/solowa.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "specjalizacja-spec",
+      "label": "Specjalizacja",
+      "owner": "spec",
+      "files": [
+        {
+          "source": "icons/abilities/specjalizacja-spec.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "specjalizacja-zlodziej",
+      "label": "Specjalizacja",
+      "owner": "zlodziej",
+      "files": [
+        {
+          "source": "icons/abilities/specjalizacja-zlodziej.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "spieprzysz-to",
+      "label": "Spieprzysz to!",
+      "owner": "cwaniak",
+      "files": [
+        {
+          "source": "icons/abilities/spieprzysz-to.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "sportowiec",
+      "label": "Sportowiec",
+      "owner": "zwiadowca",
+      "files": [
+        {
+          "source": "icons/abilities/sportowiec.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "stalowy-nadgarstek",
+      "label": "Stalowy nadgarstek",
+      "owner": "wyjadacz-option",
+      "files": [
+        {
+          "source": "icons/abilities/stalowy-nadgarstek.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "strzelec",
+      "label": "Strzelec",
+      "owner": "zabojca",
+      "files": [
+        {
+          "source": "icons/abilities/strzelec.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "stylowa",
+      "label": "Stylówa",
+      "owner": "gwiazda",
+      "files": [
+        {
+          "source": "icons/abilities/stylowa.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "szalencza-szarza",
+      "label": "Szaleńcza szarża",
+      "owner": "brutal",
+      "files": [
+        {
+          "source": "icons/abilities/szalencza-szarza.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "szary",
+      "label": "Szary",
+      "owner": "szczur",
+      "files": [
+        {
+          "source": "icons/abilities/szary.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "szczescie",
+      "label": "Szczęście",
+      "owner": "cwaniak",
+      "files": [
+        {
+          "source": "icons/abilities/szczescie.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "szybka-gadka",
+      "label": "Szybka gadka",
+      "owner": "cwaniak",
+      "files": [
+        {
+          "source": "icons/abilities/szybka-gadka.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "szybka-produkcja",
+      "label": "Szybka produkcja",
+      "owner": "spec",
+      "files": [
+        {
+          "source": "icons/abilities/szybka-produkcja.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "szybkie-badanie",
+      "label": "Szybkie badanie",
+      "owner": "spec",
+      "files": [
+        {
+          "source": "icons/abilities/szybkie-badanie.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "szybkie-nogi",
+      "label": "Szybkie nogi",
+      "owner": "zlodziej",
+      "files": [
+        {
+          "source": "icons/abilities/szybkie-nogi.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "szybkie-rece",
+      "label": "Szybkie ręce",
+      "owner": "spec",
+      "files": [
+        {
+          "source": "icons/abilities/szybkie-rece.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "szybkosc-kota",
+      "label": "Szybkość kota",
+      "owner": "zlodziej",
+      "files": [
+        {
+          "source": "icons/abilities/szybkosc-kota.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "smiertelna-obelga",
+      "label": "Śmiertelna obelga",
+      "owner": "cwaniak",
+      "files": [
+        {
+          "source": "icons/abilities/smiertelna-obelga.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "tarcza-wiary",
+      "label": "Tarcza wiary",
+      "owner": "kaznodzieja-nowej-ery",
+      "files": [
+        {
+          "source": "icons/abilities/tarcza-wiary.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "trajektoria",
+      "label": "Trajektoria",
+      "owner": "spec",
+      "files": [
+        {
+          "source": "icons/abilities/trajektoria.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "trening-w-zbroi",
+      "label": "Trening w zbroi",
+      "owner": "zolnierz",
+      "files": [
+        {
+          "source": "icons/abilities/trening-w-zbroi.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "truciciel",
+      "label": "Truciciel",
+      "owner": "szczur",
+      "files": [
+        {
+          "source": "icons/abilities/truciciel.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "trzeci-atak",
+      "label": "Trzeci atak",
+      "owner": "twardziel",
+      "files": [
+        {
+          "source": "icons/abilities/trzeci-atak.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "twardosc",
+      "label": "Twardość",
+      "owner": "twardziel",
+      "files": [
+        {
+          "source": "icons/abilities/twardosc.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "ulubiona-bron-twardziel",
+      "label": "Ulubiona broń",
+      "owner": "twardziel",
+      "files": [
+        {
+          "source": "icons/abilities/ulubiona-bron-twardziel.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "ulubiona-bron-zlodziej",
+      "label": "Ulubiona broń",
+      "owner": "zlodziej",
+      "files": [
+        {
+          "source": "icons/abilities/ulubiona-bron-zlodziej.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "ulubiona-bron-zwiadowca",
+      "label": "Ulubiona broń",
+      "owner": "zwiadowca",
+      "files": [
+        {
+          "source": "icons/abilities/ulubiona-bron-zwiadowca.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "w-czuly-punkt",
+      "label": "W czuły punkt",
+      "owner": "spec",
+      "files": [
+        {
+          "source": "icons/abilities/w-czuly-punkt.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "wsciekly-cios",
+      "label": "Wściekły cios",
+      "owner": "brutal",
+      "files": [
+        {
+          "source": "icons/abilities/wsciekly-cios.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "wyczulone-zmysly",
+      "label": "Wyczulone zmysły",
+      "owner": "zwiadowca",
+      "files": [
+        {
+          "source": "icons/abilities/wyczulone-zmysly.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "wyjadacz-zwiadowca",
+      "label": "Wyjadacz",
+      "owner": "zwiadowca",
+      "files": [
+        {
+          "source": "icons/abilities/wyjadacz-zwiadowca.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "wyjadacz",
+      "label": "Wyjadacz",
+      "owner": "twardziel",
+      "files": [
+        {
+          "source": "icons/abilities/wyjadacz.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "wyksztalciuch",
+      "label": "Wykształciuch",
+      "owner": "spec",
+      "files": [
+        {
+          "source": "icons/abilities/wyksztalciuch.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "z-bara",
+      "label": "Z bara!",
+      "owner": "brutal",
+      "files": [
+        {
+          "source": "icons/abilities/z-bara.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "za-garsc-gambli",
+      "label": "Za garść gambli",
+      "owner": "gwiazda",
+      "files": [
+        {
+          "source": "icons/abilities/za-garsc-gambli.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "zabojczy-cios",
+      "label": "Zabójczy cios",
+      "owner": "brutal",
+      "files": [
+        {
+          "source": "icons/abilities/zabojczy-cios.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "zawolajcie-kolegow",
+      "label": "Zawołajcie kolegów",
+      "owner": "gladiator",
+      "files": [
+        {
+          "source": "icons/abilities/zawolajcie-kolegow.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "zawsze-w-siodle",
+      "label": "Zawsze w siodle",
+      "owner": "kowboj",
+      "files": [
+        {
+          "source": "icons/abilities/zawsze-w-siodle.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "zew-areny",
+      "label": "Zew areny",
+      "owner": "gladiator",
+      "files": [
+        {
+          "source": "icons/abilities/zew-areny.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "znajomosci",
+      "label": "Znajomości",
+      "owner": "kurier",
+      "files": [
+        {
+          "source": "icons/abilities/znajomosci.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "zryw",
+      "label": "Zryw",
+      "owner": "twardziel",
+      "files": [
+        {
+          "source": "icons/abilities/zryw.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "feature",
+      "id": "zwinnosc-szczura",
+      "label": "Zwinność szczura",
+      "owner": "szczur",
+      "files": [
+        {
+          "source": "icons/abilities/zwinnosc-szczura.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "class",
+      "id": "brutal",
+      "label": "Brutal",
+      "owner": "brutal",
+      "files": [
+        {
+          "source": "icons/klasy/brutal.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "class",
+      "id": "cwaniak",
+      "label": "Cwaniak",
+      "owner": "cwaniak",
+      "files": [
+        {
+          "source": "icons/klasy/cwaniak.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "class",
+      "id": "spec",
+      "label": "Spec",
+      "owner": "spec",
+      "files": [
+        {
+          "source": "icons/klasy/spec.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "class",
+      "id": "twardziel",
+      "label": "Twardziel",
+      "owner": "twardziel",
+      "files": [
+        {
+          "source": "icons/klasy/twardziel.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "class",
+      "id": "zlodziej",
+      "label": "Złodziej",
+      "owner": "zlodziej",
+      "files": [
+        {
+          "source": "icons/klasy/zlodziej.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "class",
+      "id": "zwiadowca",
+      "label": "Zwiadowca",
+      "owner": "zwiadowca",
+      "files": [
+        {
+          "source": "icons/klasy/zwiadowca.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "chemik",
+      "label": "Chemik",
+      "owner": "spec",
+      "files": [
+        {
+          "source": "icons/profesje/chemik.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "ganger",
+      "label": "Ganger",
+      "owner": "brutal",
+      "files": [
+        {
+          "source": "icons/profesje/ganger.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "gladiator",
+      "label": "Gladiator",
+      "owner": "brutal",
+      "files": [
+        {
+          "source": "icons/profesje/gladiator.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "gwiazda",
+      "label": "Gwiazda",
+      "owner": "cwaniak",
+      "files": [
+        {
+          "source": "icons/profesje/gwiazda.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "kaznodzieja",
+      "label": "Kaznodzieja Nowej Ery",
+      "owner": "cwaniak",
+      "files": [
+        {
+          "source": "icons/profesje/kaznodzieja.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "kowboj",
+      "label": "Kowboj",
+      "owner": "twardziel",
+      "files": [
+        {
+          "source": "icons/profesje/kowboj.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "kurier",
+      "label": "Kurier",
+      "owner": "zlodziej",
+      "files": [
+        {
+          "source": "icons/profesje/kurier.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "lowca-mutantow",
+      "label": "Łowca Mutantów",
+      "owner": "zwiadowca",
+      "files": [
+        {
+          "source": "icons/profesje/lowca-mutantow.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "mafiozo",
+      "label": "Mafiozo",
+      "owner": "cwaniak",
+      "files": [
+        {
+          "source": "icons/profesje/mafiozo.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "medyk",
+      "label": "Medyk",
+      "owner": "spec",
+      "files": [
+        {
+          "source": "icons/profesje/medyk.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "monter",
+      "label": "Monter",
+      "owner": "spec",
+      "files": [
+        {
+          "source": "icons/profesje/monter.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "najemnik",
+      "label": "Najemnik",
+      "owner": "brutal",
+      "files": [
+        {
+          "source": "icons/profesje/najemnik.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "sedzia",
+      "label": "Sędzia",
+      "owner": "zwiadowca",
+      "files": [
+        {
+          "source": "icons/profesje/sedzia.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "szczur",
+      "label": "Szczur",
+      "owner": "zlodziej",
+      "files": [
+        {
+          "source": "icons/profesje/szczur.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "wojownik-autostrady",
+      "label": "Wojownik Autostrady",
+      "owner": "twardziel",
+      "files": [
+        {
+          "source": "icons/profesje/wojownik-autostrady.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "zabojca",
+      "label": "Zabójca",
+      "owner": "zlodziej",
+      "files": [
+        {
+          "source": "icons/profesje/zabojca.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "zabojca-maszyn",
+      "label": "Zabójca Maszyn",
+      "owner": "zwiadowca",
+      "files": [
+        {
+          "source": "icons/profesje/zabojca-maszyn.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    },
+    {
+      "kind": "profession",
+      "id": "zolnierz",
+      "label": "Żołnierz",
+      "owner": "twardziel",
+      "files": [
+        {
+          "source": "icons/profesje/zolnierz.svg",
+          "variant": "default",
+          "status": "generated placeholder"
+        }
+      ]
+    }
+  ]
+}

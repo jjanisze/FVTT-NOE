@@ -85,3 +85,21 @@ Initial browser validation: 891 icon entries, 1,444 file variants, 16 categories
 five unit/API tests and the browser persistence round-trip pass. Existing known
 glyph review cards are all resolved (342/342), including the final Batch 68
 approvals. Painted-art source deliveries and GM wiring remain separate.
+
+Coverage correction, 2026-10-15: the earlier 342-card review queue omitted
+class/profession initials placeholders. The source audit confirms 155 badge
+files: 131 abilities, six classes and 18 professions. Of these, 154 files are
+still referenced by canonical definitions and represent 153 art subjects;
+`kondycha_active.svg` is a legacy badge with no current definition match.
+These are now queued in MISSING with exact filenames and evidence in
+`dev/icons/class-placeholder-audit.json`. Reproduce the audit with
+`node dev/icons/audit-class-placeholders.mjs`.
+
+Use **Artwork → Generated placeholders** to see them directly. Detection matches
+the exact initials-generator signature; it does not treat all SVG text or
+native vector art as placeholders. Cards show a placeholder badge, and
+**Placeholder / initials** is also available as a flag reason. The audit queues
+referenced placeholders automatically; manual style notes can add art direction.
+Existing history and other queue sections are preserved when updating the audit.
+Seven unit/API checks, including CRLF preservation, and the actual browser
+filter/save/reload/clear and narrow-layout checks cover this extension.

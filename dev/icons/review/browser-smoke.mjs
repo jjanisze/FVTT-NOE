@@ -17,6 +17,7 @@ fs.mkdirSync(review, { recursive: true });
 fs.mkdirSync(path.join(fixture, "icons/abilities"), { recursive: true });
 for (const file of ["browser.html", "browser.mjs", "browser.css", "review.css"]) fs.copyFileSync(path.join(HERE, file), path.join(review, file));
 for (const name of ["one", "two"]) fs.writeFileSync(path.join(fixture, `icons/abilities/${name}.svg`), '<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256"><rect x="48" y="33" width="160" height="190" fill="white"/></svg>');
+fs.writeFileSync(path.join(fixture, "icons/abilities/two.svg"), '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g"><stop stop-color="#101012"/></linearGradient></defs><rect width="64" height="64" fill="url(#g)"/><text x="16" y="40" fill="white" style="paint-order:stroke" stroke-width="0.8">T</text></svg>');
 const approved = JSON.stringify({ version: 1, items: { sentinel: { decision: "approve", notes: "Existing decision" } } });
 fs.writeFileSync(path.join(review, "feedback.json"), approved);
 fs.writeFileSync(path.join(review, "manifest.json"), JSON.stringify({ items: [] }));
@@ -111,6 +112,21 @@ try {
   });
   assert.equal(mobile.overflow, false); assert.equal(mobile.dialogOverflow, false);
   await fixtureSocket.call("Emulation.clearDeviceMetricsOverride");
+  assert.equal(await evaluate(fixtureSocket, () => {
+    document.querySelector("#close-dialog").click();
+    const filter = document.querySelector("#artwork"); filter.value = "placeholder"; filter.dispatchEvent(new Event("change"));
+    return document.querySelectorAll(".library-card").length === 1
+      && document.querySelector(".library-card").dataset.iconId === "abilities/two"
+      && !!document.querySelector(".badge-placeholder");
+  }), true);
+  await fixtureSocket.call("Page.reload", { ignoreCache: true });
+  assert.equal(await evaluate(fixtureSocket, async () => {
+    for (let attempt = 0; attempt < 100; attempt++) {
+      if (document.querySelectorAll(".library-card").length === 1 && document.querySelector("#artwork").value === "placeholder") return true;
+      await new Promise(resolve => setTimeout(resolve, 50));
+    }
+    throw new Error("Placeholder filter was not restored after reload");
+  }), true);
 
   const pages = await (await fetch(`${cdp}/json/list`)).json();
   const real = pages.find(page => page.type === "page" && new URL(page.url).pathname === "/browser.html" && !page.url.startsWith(fixtureOrigin));
@@ -128,7 +144,7 @@ try {
   assert.ok(inspected.cards > 0); assert.equal(inspected.broken, 0); assert.equal(inspected.overflow, false);
   const shot = await realSocket.call("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
   fs.writeFileSync(path.join(HERE, "browser-preview.png"), Buffer.from(shot.data, "base64"));
-  console.log(JSON.stringify({ ...inspected, fixtureSaveReloadClearPassed: true, mobileLayoutPassed: true,
+  console.log(JSON.stringify({ ...inspected, fixtureSaveReloadClearPassed: true, mobileLayoutPassed: true, placeholderFilterPassed: true,
     screenshot: "dev/icons/review/browser-preview.png" }));
 } finally {
   fixtureSocket?.close(); realSocket?.close();

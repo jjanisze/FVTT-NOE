@@ -3,12 +3,14 @@ import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
+import { isGeneratedPlaceholder } from "./placeholders.mjs";
 
 const EXTENSIONS = new Map([[".svg", 0], [".webp", 1], [".png", 2], [".jpg", 3], [".jpeg", 4], [".avif", 5], [".gif", 6]]);
 const START = "<!-- icon-style-review:start -->";
 const END = "<!-- icon-style-review:end -->";
 const hashes = new Map();
 export const REASONS = [
+  { id: "placeholder", label: "Placeholder / initials" },
   { id: "detail", label: "Too detailed" },
   { id: "dither", label: "Dithered / speckled" },
   { id: "anime", label: "Anime / cartoon" },
@@ -54,6 +56,9 @@ export function buildCatalog(moduleRoot, reviewRoot) {
   for (const item of readJson(path.join(moduleRoot, "dev/icons/catalog-icons-2026-10-12.json"), { items: [] }).items) {
     addLabel(item.relative, item.label);
   }
+  for (const item of readJson(path.join(moduleRoot, "dev/icons/class-placeholder-audit.json"), { placeholders: [] }).placeholders) {
+    addLabel(item.source, item.label);
+  }
   for (const item of readJson(path.join(reviewRoot, "manifest.json"), { items: [] }).items) {
     addLabel(item.target, item.name);
   }
@@ -69,7 +74,8 @@ export function buildCatalog(moduleRoot, reviewRoot) {
       const id = relative.slice(0, -extension.length);
       const stat = fs.statSync(file);
       const variant = { source: `icons/${relative}`, format: extension.slice(1).toUpperCase(),
-                        bytes: stat.size, sha256: hashFile(file, stat) };
+                        bytes: stat.size, sha256: hashFile(file, stat),
+                        placeholder: extension === ".svg" && isGeneratedPlaceholder(fs.readFileSync(file, "utf8")) };
       const group = groups.get(id) ?? { id, name: [...(labels.get(id) ?? [humanize(path.basename(id))])][0],
                                       aliases: [...(labels.get(id) ?? [])],
                                       category: path.posix.dirname(id) === "." ? "Other" : path.posix.dirname(id), variants: [] };
@@ -83,6 +89,7 @@ export function buildCatalog(moduleRoot, reviewRoot) {
   for (const icon of icons) {
     icon.variants.sort((a, b) => EXTENSIONS.get(path.extname(a.source).toLowerCase()) - EXTENSIONS.get(path.extname(b.source).toLowerCase()));
     icon.preferred = icon.variants[0].source;
+    icon.placeholder = icon.variants.some(variant => variant.placeholder);
     icon.review = stored.items[icon.id] ?? null;
     if (icon.review) {
       const selected = icon.variants.find(variant => variant.source === icon.review.source);
@@ -162,6 +169,7 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const reviewRoot = path.dirname(fileURLToPath(import.meta.url));
   const catalog = buildCatalog(path.resolve(reviewRoot, "../../.."), reviewRoot);
   console.log(JSON.stringify({ icons: catalog.icons.length,
+    placeholders: catalog.icons.filter(icon => icon.placeholder).length,
     files: catalog.icons.reduce((count, icon) => count + icon.variants.length, 0),
     categories: catalog.categories.length }, null, 2));
 }
