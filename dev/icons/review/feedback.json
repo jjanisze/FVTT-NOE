@@ -2418,10 +2418,10 @@
     },
     "batch69-bez-tajemnic": {
       "itemId": "batch69-bez-tajemnic",
-      "decision": "revise",
-      "candidateId": "batch72-revision",
-      "notes": "Better, but the shoulder connection to the body (inside the looking glass) needs correction, as the head does not naturally connect to the shoulders.",
-      "updatedAt": "2026-10-15T21:05:04.942Z"
+      "decision": "pending",
+      "candidateId": "batch74-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:19:43.448Z"
     },
     "batch69-bezlitosny-przywodca": {
       "itemId": "batch69-bezlitosny-przywodca",
@@ -2516,10 +2516,10 @@
     },
     "batch71-elektronik": {
       "itemId": "batch71-elektronik",
-      "decision": "revise",
-      "candidateId": "batch72-revision",
-      "notes": "Try again. Rotate the shackle outward (to the left)",
-      "updatedAt": "2026-10-15T21:05:39.255Z"
+      "decision": "pending",
+      "candidateId": "batch74-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:19:43.449Z"
     },
     "batch71-emiter-emp": {
       "itemId": "batch71-emiter-emp",
@@ -2565,10 +2565,10 @@
     },
     "batch72-inteligentna-obrona": {
       "itemId": "batch72-inteligentna-obrona",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Add some way to indicate that the character is defending not with agility, but by predicting the opponent. Maybe a formula or a sequence or something indicating defense by outthinking the opponent.",
-      "updatedAt": "2026-10-15T21:07:09.651Z"
+      "decision": "pending",
+      "candidateId": "batch74-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:19:43.449Z"
     },
     "batch72-ja-i-moj-gang": {
       "itemId": "batch72-ja-i-moj-gang",
@@ -2579,10 +2579,10 @@
     },
     "batch72-jak-dbasz-tak-masz": {
       "itemId": "batch72-jak-dbasz-tak-masz",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "The finger of the hand holding the gun should be on the trigger guard , not on the trigger itself",
-      "updatedAt": "2026-10-15T21:08:00.397Z"
+      "decision": "pending",
+      "candidateId": "batch74-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:19:43.450Z"
     },
     "batch73-jeden-strzal": {
       "itemId": "batch73-jeden-strzal",
@@ -2607,10 +2607,10 @@
     },
     "batch73-jezdziec": {
       "itemId": "batch73-jezdziec",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Correct the man's unnatural silhouette",
-      "updatedAt": "2026-10-15T21:10:05.224Z"
+      "decision": "pending",
+      "candidateId": "batch74-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:19:43.450Z"
     },
     "batch73-kakofonia": {
       "itemId": "batch73-kakofonia",
@@ -2635,10 +2635,10 @@
     },
     "batch73-klusownik": {
       "itemId": "batch73-klusownik",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "The trap is poorly drawn. Redraw the trap, with a central pivot/hinge mechanism.",
-      "updatedAt": "2026-10-15T21:11:25.687Z"
+      "decision": "pending",
+      "candidateId": "batch74-revision",
+      "notes": "",
+      "updatedAt": "2026-10-15T21:19:43.450Z"
     },
     "batch73-kocie-kosci": {
       "itemId": "batch73-kocie-kosci",

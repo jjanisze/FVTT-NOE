@@ -57,11 +57,17 @@ contains the next nine fresh subjects. Together these consume the first 23
 unique subjects of the frozen roadmap; fourteen are fresh in this request.
 
 After Batch 70–71 review, eighteen subjects are delivered at nineteen native
-SVG filenames with WEBP sidecars. The current audit leaves 135 subjects / 136
-placeholder files. Batch 72 contains five revisions and four fresh subjects;
+SVG filenames with WEBP sidecars. Batch 72 contains five revisions and four
+fresh subjects;
 Batch 73 contains the next nine fresh subjects. The first 36 unique roadmap
+subjects were allocated at that point.
+
+After Batch 72–73 review, thirty subjects are delivered at thirty-one native
+SVG filenames with WEBP sidecars. The current audit leaves 123 subjects / 124
+placeholder files. Batch 74 contains six revisions and three fresh subjects;
+Batch 75 contains the next nine fresh subjects. The first 48 unique roadmap
 subjects are now allocated; the next untouched subject is at zero-based index
-36. Check the actual review manifest before allocating further subjects;
+48. Check the actual review manifest before allocating further subjects;
 planned batch numbers no longer match these actual groups.
 
 The GM's durable direction is to avoid repeated gruff male survivor portraits:
@@ -76,8 +82,13 @@ That instruction is also recorded in Pipeline.md.
   [exact prompts](../review/candidates/batch-72/prompts.json).
 - [Batch 73 candidates](../review/candidates/batch-73/README.md) and
   [exact prompts](../review/candidates/batch-73/prompts.json).
+- [Batch 74 candidates](../review/candidates/batch-74/README.md) and
+  [exact prompts](../review/candidates/batch-74/prompts.json).
+- [Batch 75 candidates](../review/candidates/batch-75/README.md) and
+  [exact prompts](../review/candidates/batch-75/prompts.json).
 
-`prepare_70_71.py` and `prepare_72_73.py` freeze their actual allocations and
+`prepare_70_71.py`, `prepare_72_73.py` and `prepare_74_75.py` freeze their actual
+allocations and
 incoming decisions; do not rerun them. `compose_reference.py` only rebuilds
 their recorded contact sheets.
 `register.test.mjs` checks revision history, unrelated feedback preservation,

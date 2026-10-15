@@ -1,0 +1,16 @@
+{
+  "batch": 74,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 10,
+  "candidateHashes": {
+    "bez-tajemnic": "bb4af84e7346e9c333f43b9ba024f07878fc0a53c5e528dc0927c29eef68b4a4",
+    "elektronik": "6f444e923b5ca14556fe6651e15debb4cca228a7fcee76ed704ee5add71f3a25",
+    "inteligentna-obrona": "6034828b8d93cf1f0e09f8874e50b36e6095a43352100de51b9381a5bdbe434a",
+    "jak-dbasz-tak-masz": "ac5ce65836c628f918adef38a637f72eac08c1db2e6b11f38587ab3a366a5848",
+    "jezdziec": "84006bde897e510e07d9ebee84c5d485d7ff4b5169f816c062803973b45aa1ea",
+    "klusownik": "1b0145b4c41282c9fb364ab2ee7a4f83a4c6ca81fcb6da81f912050e590efd43",
+    "kolejka": "a91779f56e935891190e00b06cabf5017de48548b34cd4c62ed632f74328d730",
+    "kondycha": "27c0e6073d7897f4badce82df1501358dd7bb8728178ca7d1f9b6175c8c73a7f",
+    "krwawy-aniol": "02391a943929face7e27421775e3e808252cf85d9dd772202ea9c97b11b42705"
+  }
+}

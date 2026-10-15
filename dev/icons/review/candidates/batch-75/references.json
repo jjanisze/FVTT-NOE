@@ -1,0 +1,59 @@
+{
+  "role": "Exact native targets, not style inputs",
+  "files": [
+    {
+      "key": "lets-rock",
+      "source": "icons/abilities/lets-rock.svg",
+      "variant": "default",
+      "sourceSha256": "6c6281cdd5089a4a9dc6fdaf933633f66c94d0c8c453259d100e95d833315141"
+    },
+    {
+      "key": "lapiduch",
+      "source": "icons/abilities/lapiduch.svg",
+      "variant": "default",
+      "sourceSha256": "913fffceec2f2490e4b84cdb4ea2c01368fc2d6d8cf518b701f681ea0286447b"
+    },
+    {
+      "key": "laska-boza",
+      "source": "icons/abilities/laska-boza.svg",
+      "variant": "default",
+      "sourceSha256": "e5324a36a95884b60732d688880fea6f1243709fbc4a38e8a3e644b87f6802a5"
+    },
+    {
+      "key": "leb-jak-sklep",
+      "source": "icons/abilities/leb-jak-sklep.svg",
+      "variant": "default",
+      "sourceSha256": "ab1446c5808fb43984e0c4f1357f4cd68fda82f47990700123c1db790a7efc87"
+    },
+    {
+      "key": "lyzeczka",
+      "source": "icons/abilities/lyzeczka.svg",
+      "variant": "default",
+      "sourceSha256": "843e5b1041de1b116e2ea0625ae0c2a732deff2aafc70ab3e28ee5d7baf7ddcc"
+    },
+    {
+      "key": "maszyna-do-zabijania",
+      "source": "icons/abilities/maszyna-do-zabijania.svg",
+      "variant": "default",
+      "sourceSha256": "bf846c0d06aaf67a251b1c02723bad0ff64fb927cbe0e7403f79722605cf8045"
+    },
+    {
+      "key": "matrix",
+      "source": "icons/abilities/matrix.svg",
+      "variant": "default",
+      "sourceSha256": "6bcdc39ecb83504a5b09b9bb5f3e86b517e9a9652e89e70877e12f5ec24fd851"
+    },
+    {
+      "key": "mechanika",
+      "source": "icons/abilities/mechanika.svg",
+      "variant": "default",
+      "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037"
+    },
+    {
+      "key": "moja-prawa-reka",
+      "source": "icons/abilities/moja-prawa-reka.svg",
+      "variant": "default",
+      "sourceSha256": "e81f004a47420ab36475a8e8d6a27c09b8e45aa296643e49ec352b764ec372f2"
+    }
+  ]
+}

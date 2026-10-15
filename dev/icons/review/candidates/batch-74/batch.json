@@ -1,0 +1,339 @@
+{
+  "date": "2026-10-15",
+  "batch": 74,
+  "generalFeedback": "Objects, gestures and generic adults; no repeated gruff portraits or anime. Prioritize exact anatomy, mechanisms and saved revisions.",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "bez-tajemnic",
+      "name": "Bez tajemnic",
+      "owner": "lowca-mutantow",
+      "ownerLabel": "Łowca Mutantów",
+      "target": "icons/abilities/bez-tajemnic.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/bez-tajemnic.svg",
+          "variant": "default",
+          "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411"
+        }
+      ],
+      "ruleContext": "Znasz się na mutantach i potworach jak nikt inny. Jeśli spotkasz mutanta lub potwora i zdasz Test Inteligencji (Przyroda), zyskujesz wiedzę na jego temat. MG zdradza ci jego zwyczajową nazwę (ST 10), słabe punkty (ST 15) i trzy wybrane współczynniki (ST 20).",
+      "context": "Class/profession ability: Bez tajemnic; owner Łowca Mutantów. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "itemId": "batch69-bez-tajemnic",
+      "request": "REVISION of reference cell 1. Preserve the current unmistakably NONHUMAN mutant face, horn, heavy brow, blunt tusk, irregular ear, magnifying glass and crosshair. Fix the neck/shoulder connection INSIDE THE LENS. Make the lens contain ONE COMPLETE ANATOMICALLY COHERENT HEAD-AND-SHOULDERS BUST, all facing RIGHT. Slightly reduce/raise the complete bust so the full neck, sloping trapezius and one rounded near shoulder are visible together WITHIN the circular lens. The neck grows continuously out of the shoulder girdle, directly beneath and behind the jaw; no dangling neck stump. The chest/front contour points RIGHT and the back contour lies LEFT. REMOVE the separate enlarged bust floating BELOW the lens: it caused two incompatible body scales. Outside the lens there is only its handle, not a second body. One continuous natural mutant bust inside one lens, broad black anatomical cuts, no extra head, human face, gore or hatching.",
+      "revisionOf": {
+        "id": "batch69-bez-tajemnic",
+        "name": "Bez tajemnic",
+        "decision": "revise",
+        "candidateId": "batch72-revision",
+        "selectedSource": "candidates/batch-72/bez-tajemnic.png",
+        "sourceSha256": "0699862ae28c4df642c84289fb8332264676f7f9e53914d6e2e99355b13593f7",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/bez-tajemnic.svg",
+            "variant": "default",
+            "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411"
+          }
+        ],
+        "notes": "Better, but the shoulder connection to the body (inside the looking glass) needs correction, as the head does not naturally connect to the shoulders.",
+        "feedback": {
+          "itemId": "batch69-bez-tajemnic",
+          "decision": "revise",
+          "candidateId": "batch72-revision",
+          "notes": "Better, but the shoulder connection to the body (inside the looking glass) needs correction, as the head does not naturally connect to the shoulders.",
+          "updatedAt": "2026-10-15T21:05:04.942Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "elektronik",
+      "name": "Elektronik",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/abilities/elektronik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/elektronik.svg",
+          "variant": "default",
+          "sourceSha256": "f390a9b077c44175d9cd142eb44c91d2b5ebcec9b555de04ec0e68c851576564"
+        }
+      ],
+      "ruleContext": "Elektroniczne zabezpieczenia rozgryzasz równie łatwo, co te tradycyjne. A nawet łatwiej. Zawsze, kiedy mierzysz się z elektronicznym systemem zabezpieczeń, otrzymujesz Ułatwienie do testu narzędzi małego ślusarza lub małego elektronika.",
+      "context": "Class/profession ability: Elektronik; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "request": "REVISION of reference cell 2. Keep the upright electronic padlock body, chip/circuit emblem and screwdriver to the right. Rotate the SHACKLE a full 90 degrees COUNTERCLOCKWISE OUTWARD TO THE LEFT, not another slight tilt. The U now lies HORIZONTALLY, like a thick C-SHAPE projecting LEFT of the lock: curved arch at far LEFT, two short straight parallel prongs pointing RIGHT. The lower prong remains engaged in a clear small hinge at the TOP-LEFT corner of the lock body; the upper prong is FREE in empty space ABOVE-LEFT of the body, leaving an obvious open gap. The arch is outside the body footprint on the left. Do NOT leave an upright upside-down-U arch over the body or a free-floating shackle. Body remains vertical and screwdriver remains on the right. Broad white structural shapes, no text or fine circuitry.",
+      "itemId": "batch71-elektronik",
+      "revisionOf": {
+        "id": "batch71-elektronik",
+        "name": "Elektronik",
+        "decision": "revise",
+        "candidateId": "batch72-revision",
+        "selectedSource": "candidates/batch-72/elektronik.png",
+        "sourceSha256": "e679d4322210a5ad943ec70337324f1662d1f4059b3cea1cbde3b4b1a8970dd0",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/elektronik.svg",
+            "variant": "default",
+            "sourceSha256": "f390a9b077c44175d9cd142eb44c91d2b5ebcec9b555de04ec0e68c851576564"
+          }
+        ],
+        "notes": "Try again. Rotate the shackle outward (to the left)",
+        "feedback": {
+          "itemId": "batch71-elektronik",
+          "decision": "revise",
+          "candidateId": "batch72-revision",
+          "notes": "Try again. Rotate the shackle outward (to the left)",
+          "updatedAt": "2026-10-15T21:05:39.255Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "inteligentna-obrona",
+      "name": "Inteligentna obrona",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/abilities/inteligentna-obrona.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/inteligentna-obrona.svg",
+          "variant": "default",
+          "sourceSha256": "5b7e57821da7b2a5b79ca7ed7f2ea853bb24fc69438852d979e9f58436f251e1"
+        }
+      ],
+      "ruleContext": "Kiedy zostajesz trafiony atakiem, przed poznaniem ilości obrażeń, możesz w Reakcji zwiększyć swoją Trudność Trafienia o wartość modyfikatora Inteligencji, do początku swojej następnej tury, by w ten sposób uniknąć trafienia. Możesz użyć tej zdolności tyle razy, ile wynosi twój modyfikator Inteligencji. Zdolność odnawia się po odbyciu Krótkiego odpoczynku.",
+      "context": "Class/profession ability: Inteligentna obrona; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "request": "REVISION of reference cell 3. Keep a generic adult using one open palm to guide an incoming fist aside, but make the torso UPRIGHT and composed, without an agile lean or movement swoosh. Add a LARGE simple schematic BRAIN above/behind the defender's smooth head, with just three broad black fold cuts. Connect this brain to a clear THREE-NODE PREDICTION SEQUENCE above the incoming fist: three large solid round nodes joined by two thick straight angled segments, forecasting where the fist will go and ending safely outside the shoulder. This is a sober tactical calculation diagram showing anticipation and outthinking, not speed or acrobatics. Complete natural hands/wrists, clear black gaps. No fine formulas, tiny lettering, face portrait, lightbulb, giant cog, anime expression or extra arms.",
+      "itemId": "batch72-inteligentna-obrona",
+      "revisionOf": {
+        "id": "batch72-inteligentna-obrona",
+        "name": "Inteligentna obrona",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-72/inteligentna-obrona.png",
+        "sourceSha256": "3caeb5205fdeaac2c8d3e000083886f48bade82f3e6dd86dabc9bcfbbf91ab08",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/inteligentna-obrona.svg",
+            "variant": "default",
+            "sourceSha256": "5b7e57821da7b2a5b79ca7ed7f2ea853bb24fc69438852d979e9f58436f251e1"
+          }
+        ],
+        "notes": "Add some way to indicate that the character is defending not with agility, but by predicting the opponent. Maybe a formula or a sequence or something indicating defense by outthinking the opponent.",
+        "feedback": {
+          "itemId": "batch72-inteligentna-obrona",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Add some way to indicate that the character is defending not with agility, but by predicting the opponent. Maybe a formula or a sequence or something indicating defense by outthinking the opponent.",
+          "updatedAt": "2026-10-15T21:07:09.651Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "jak-dbasz-tak-masz",
+      "name": "Jak dbasz, tak masz",
+      "owner": "zolnierz",
+      "ownerLabel": "Żołnierz",
+      "target": "icons/abilities/jak-dbasz-tak-masz.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/jak-dbasz-tak-masz.svg",
+          "variant": "default",
+          "sourceSha256": "1858ccf0a0018938a0f1d49497cc3414762297e7176c434791d8511f2d06b632"
+        }
+      ],
+      "ruleContext": "Nikt nie potrafi składać, rozkładać i czyścić broni szybciej od ciebie. Robisz to z zamkniętymi oczami, paląc papierosa i śpiewając Oh my darling. Broń palna w twoich rękach nigdy się nie zacina, a jeśli już masz taką w dłoniach, wystarczy ci Akcja Bonusowa, żeby ją naprawić. Z kolei uszkodzoną broń białą, naprawiasz w czasie Krótkiego odpoczynku.",
+      "context": "Class/profession ability: Jak dbasz, tak masz; owner Żołnierz. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "request": "REVISION of reference cell 4. Preserve the complete handgun, supporting bare hand, other hand wiping with a cloth, and small oil can. Correct ONLY the holding hand's INDEX FINGER: straighten it along the OUTSIDE UPPER EDGE OF THE TRIGGER GUARD, clearly resting on the outer guard/frame. It must stay ENTIRELY OUTSIDE the black trigger-guard opening, with an obvious uninterrupted black gap INSIDE the guard around the untouched trigger. No fingertip curls onto or touches the trigger. The remaining fingers wrap naturally around the grip and the thumb stays coherent. Keep the wiping hand and rag above the slide. No extra finger, hand, weapon or text.",
+      "itemId": "batch72-jak-dbasz-tak-masz",
+      "revisionOf": {
+        "id": "batch72-jak-dbasz-tak-masz",
+        "name": "Jak dbasz, tak masz",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-72/jak-dbasz-tak-masz.png",
+        "sourceSha256": "057bc2b1a6351793f3a5243b836516bf42ff7f8e3964833221edc23f932debf5",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/jak-dbasz-tak-masz.svg",
+            "variant": "default",
+            "sourceSha256": "1858ccf0a0018938a0f1d49497cc3414762297e7176c434791d8511f2d06b632"
+          }
+        ],
+        "notes": "The finger of the hand holding the gun should be on the trigger guard , not on the trigger itself",
+        "feedback": {
+          "itemId": "batch72-jak-dbasz-tak-masz",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "The finger of the hand holding the gun should be on the trigger guard , not on the trigger itself",
+          "updatedAt": "2026-10-15T21:08:00.397Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "jezdziec",
+      "name": "Jeździec",
+      "owner": "wyjadacz-option",
+      "ownerLabel": "wyjadacz-option",
+      "target": "icons/abilities/jezdziec.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/jezdziec.svg",
+          "variant": "default",
+          "sourceSha256": "53a7bf1784b2ef9efc618431127aba39c0d53875bf9e974bc2020a40ce759507"
+        }
+      ],
+      "ruleContext": "Kiedy dosiadasz wierzchowca, nie musisz używać rąk, żeby nim kierować. Nie otrzymujesz Utrudnienia do Testów Ataków dystansowych związanego z niestabilnym podłożem, kiedy na nim jedziesz. Wsiadanie i zsiadanie z wierzchowca kosztuje cię tylko 1,5 metra ruchu. Trudność Trafienia twojego wierzchowca zwiększa się o wartość twojej Premii Biegłości.",
+      "context": "Class/profession ability: Jeździec; owner wyjadacz-option. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 5,
+      "request": "REVISION of reference cell 5. Keep the realistic horse in complete side view, but REDRAW THE RIDER with natural seated adult anatomy. Hips sit securely in the saddle, pelvis under the chest, upright torso with a slight natural forward balance, ordinary neck and small featureless head. The visible near thigh slopes DOWN-FORWARD from the hip; a real knee bend leads to the lower leg descending DOWN-BACK, with a complete foot near the stirrup below the saddle. The far leg is mostly hidden behind the horse. Forearms rest naturally forward on the thighs/saddle front; both hands are relaxed and DO NOT hold reins. No stiff arms-akimbo pose, elongated torso, tiny dangling mannequin legs or angular puppet silhouette. Preserve the complete four-legged horse, tail and saddle. Broad natural silhouette, no face portrait, anime or tiny tack.",
+      "itemId": "batch73-jezdziec",
+      "revisionOf": {
+        "id": "batch73-jezdziec",
+        "name": "Jeździec",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-73/jezdziec.png",
+        "sourceSha256": "16c753c26004ed7666eed2324107edf9fc5f1f76cc8d0042d7ba087b628a7135",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/jezdziec.svg",
+            "variant": "default",
+            "sourceSha256": "53a7bf1784b2ef9efc618431127aba39c0d53875bf9e974bc2020a40ce759507"
+          }
+        ],
+        "notes": "Correct the man's unnatural silhouette",
+        "feedback": {
+          "itemId": "batch73-jezdziec",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Correct the man's unnatural silhouette",
+          "updatedAt": "2026-10-15T21:10:05.224Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "klusownik",
+      "name": "Kłusownik",
+      "owner": "zwiadowca",
+      "ownerLabel": "Zwiadowca",
+      "target": "icons/abilities/klusownik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/klusownik.svg",
+          "variant": "default",
+          "sourceSha256": "6fff1379ce2c2409ce200ab84a898fc371a8434b6a6b6808baf68b77df161091"
+        }
+      ],
+      "ruleContext": "Masz doświadczenie w zakładaniu pułapek. Wystarczy chwila, żeby z tego, co masz pod ręką, zmontować coś przydatnego. Jeśli masz zestaw narzędzi małego kłusownika, poświęcisz minutę i wykonasz Test Survivalu lub narzędzi małego kłusownika, możesz zbudować pułapkę. Skonsultuj jej szczegóły i działanie z MG. ST zauważenia pułapki, wyzwolenia się z niej lub uniknięcia części obrażeń, to 8 plus twój modyfikator Mądrości i Premia Biegłości. ST zakładania i działanie przykładowych pułapek podajemy w tabeli poniżej.",
+      "context": "Class/profession ability: Kłusownik; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 6,
+      "request": "REVISION of reference cell 6. REDRAW the open steel leg-hold trap as a coherent functional device in three-quarter top view. TWO opposing semicircular jaw halves attach symmetrically to ONE straight CENTRAL CROSSBAR/AXLE. Show LARGE ROUND PIVOT HINGES at its two ends, aligned on the SAME axis through the middle of the trap, visibly joining both jaws to the base. A single round pressure pan sits just ABOVE the centre of this axle, with its short trigger lever visibly connected to a broad leaf-spring base beneath. The jaws form a symmetrical open oval around that central mechanism, with only three broad teeth per half. Add a short two-link chain attached to the solid base. Clear common hinge mechanism, no floating crown jaws, impossible disconnected jaw halves, scattered parts or fine springs. No animal, injury, gore or text.",
+      "itemId": "batch73-klusownik",
+      "revisionOf": {
+        "id": "batch73-klusownik",
+        "name": "Kłusownik",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-73/klusownik.png",
+        "sourceSha256": "b1e52818c58cda3bf5065cc2b8c9de000195846b4223cae2a3d089b89784b3ff",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/klusownik.svg",
+            "variant": "default",
+            "sourceSha256": "6fff1379ce2c2409ce200ab84a898fc371a8434b6a6b6808baf68b77df161091"
+          }
+        ],
+        "notes": "The trap is poorly drawn. Redraw the trap, with a central pivot/hinge mechanism.",
+        "feedback": {
+          "itemId": "batch73-klusownik",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "The trap is poorly drawn. Redraw the trap, with a central pivot/hinge mechanism.",
+          "updatedAt": "2026-10-15T21:11:25.687Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "kolejka",
+      "name": "Kolejka",
+      "owner": "cwaniak",
+      "ownerLabel": "Cwaniak",
+      "target": "icons/abilities/kolejka.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/kolejka.svg",
+          "variant": "default",
+          "sourceSha256": "970158402b9fe22b4683b3c9087cb345f496206b7af68c32ac725927512384de"
+        }
+      ],
+      "ruleContext": "Podczas Krótkiego odpoczynku, puszczasz wśród towarzyszy kolejkę z napitkiem własnej roboty. Każdy, kto pije, odzyskuje dodatkowo +1k4 PW za każdą wydaną Kość Wytrzymałości, podczas tego odpoczynku. Pokrzepiająca siła płynąca ze zdolności Kolejka rośnie zgodnie z ostatnią kolumną w tabeli Zdolności klasowych Cwaniaka.",
+      "context": "Class/profession ability: Kolejka; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 7,
+      "request": "One complete plain bottle of homemade spirits between TWO sturdy tin drinking mugs, grouped as a shared round of drinks during a rest. One mug is held by a complete bare adult hand entering from the left; the other mug rests beside the bottle. Broad practical silhouettes, clear handles and bottle neck, no labels, liquid shading, bubbles, fancy glassware, face portrait, extra bottle or tiny details.",
+      "itemId": "batch74-kolejka"
+    },
+    {
+      "kind": "feature",
+      "key": "kondycha",
+      "name": "Kondycha",
+      "owner": "twardziel",
+      "ownerLabel": "Twardziel",
+      "target": "icons/abilities/kondycha.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/kondycha.svg",
+          "variant": "default",
+          "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f"
+        },
+        {
+          "source": "icons/abilities/kondycha_active.svg",
+          "variant": "legacy-active",
+          "sourceSha256": "fe94e499463c22895956f7b690560a97d315a576f5dc27d3d5140c5010c7fbf1"
+        }
+      ],
+      "ruleContext": "Kiedy brakuje ci sił, bierzesz głęboki oddech i walczysz dalej. W Akcji Bonusowej możesz odzyskać Punkty Wytrzymałości w liczbie 1k8 + twój poziom Twardziela. Możesz skorzystać z tej zdolności tyle razy, ile wynosi twój modyfikator Kondycji. Zdolność odnawia się po ukończeniu Długiego odpoczynku.",
+      "context": "Class/profession ability: Kondycha; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "The approved glyph is shared by these exact base/active filenames. Existing hotbar code supplies the active pulsing frame; no mechanics or styling code changes.",
+      "cell": 8,
+      "request": "One generic adult upper body in a plain loose shirt, taking a restorative DEEP BREATH. One complete hand rests flat over the sternum; TWO broad expanding curved breath arcs flank the upper chest. Smooth featureless head slightly raised, natural ordinary build and coherent neck/shoulders. Calm recovery of stamina, not a roaring bodybuilder or gruff portrait. No medical cross, heart emblem, numbers, plus sign, swoosh, anime expression or fine ribs.",
+      "itemId": "batch74-kondycha"
+    },
+    {
+      "kind": "feature",
+      "key": "krwawy-aniol",
+      "name": "Krwawy anioł",
+      "owner": "medyk",
+      "ownerLabel": "Medyk",
+      "target": "icons/abilities/krwawy-aniol.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/krwawy-aniol.svg",
+          "variant": "default",
+          "sourceSha256": "dd55a607d3c756d7faad45f077907136f9659e3828ba06c199d32a7ded373458"
+        }
+      ],
+      "ruleContext": "Potrafisz używać leków skuteczniej niż ktokolwiek inny. Wiesz, gdzie wbić strzykawkę, żeby pacjent szybko stanął na nogi i zyskał więcej energii do walki. Od tej pory, kiedy używasz zestawu małego medyka, przywracasz więcej Punktów Wytrzymałości. Zamiast kostki k4 używasz na 3. poz. - k6, na 6. poz. - k8, na 9. poz. - k10, a na 12. poz. - k12.",
+      "context": "Class/profession ability: Krwawy anioł; owner Medyk. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 9,
+      "request": "ONE robust complete medical SYRINGE upright at centre, framed by TWO broad simplified ANGEL WINGS that spread outward symmetrically from its barrel. Each wing has only three large feather blocks, no fine feather texture. A sober lifesaving medic emblem, not a character or fantasy painting. Clear plunger, syringe barrel and short intact needle; broad black gaps. No person, face, blood, gore, halo, text, logos or tiny measurement ticks.",
+      "itemId": "batch74-krwawy-aniol"
+    }
+  ]
+}

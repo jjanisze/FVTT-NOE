@@ -1,0 +1,65 @@
+{
+  "role": "Exact native targets, not style inputs",
+  "files": [
+    {
+      "key": "bez-tajemnic",
+      "source": "icons/abilities/bez-tajemnic.svg",
+      "variant": "default",
+      "sourceSha256": "5d056013735d0f93286d1ae2c2d22371405a7714b502d54c500cf0d45facb411"
+    },
+    {
+      "key": "elektronik",
+      "source": "icons/abilities/elektronik.svg",
+      "variant": "default",
+      "sourceSha256": "f390a9b077c44175d9cd142eb44c91d2b5ebcec9b555de04ec0e68c851576564"
+    },
+    {
+      "key": "inteligentna-obrona",
+      "source": "icons/abilities/inteligentna-obrona.svg",
+      "variant": "default",
+      "sourceSha256": "5b7e57821da7b2a5b79ca7ed7f2ea853bb24fc69438852d979e9f58436f251e1"
+    },
+    {
+      "key": "jak-dbasz-tak-masz",
+      "source": "icons/abilities/jak-dbasz-tak-masz.svg",
+      "variant": "default",
+      "sourceSha256": "1858ccf0a0018938a0f1d49497cc3414762297e7176c434791d8511f2d06b632"
+    },
+    {
+      "key": "jezdziec",
+      "source": "icons/abilities/jezdziec.svg",
+      "variant": "default",
+      "sourceSha256": "53a7bf1784b2ef9efc618431127aba39c0d53875bf9e974bc2020a40ce759507"
+    },
+    {
+      "key": "klusownik",
+      "source": "icons/abilities/klusownik.svg",
+      "variant": "default",
+      "sourceSha256": "6fff1379ce2c2409ce200ab84a898fc371a8434b6a6b6808baf68b77df161091"
+    },
+    {
+      "key": "kolejka",
+      "source": "icons/abilities/kolejka.svg",
+      "variant": "default",
+      "sourceSha256": "970158402b9fe22b4683b3c9087cb345f496206b7af68c32ac725927512384de"
+    },
+    {
+      "key": "kondycha",
+      "source": "icons/abilities/kondycha.svg",
+      "variant": "default",
+      "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f"
+    },
+    {
+      "key": "kondycha",
+      "source": "icons/abilities/kondycha_active.svg",
+      "variant": "legacy-active",
+      "sourceSha256": "fe94e499463c22895956f7b690560a97d315a576f5dc27d3d5140c5010c7fbf1"
+    },
+    {
+      "key": "krwawy-aniol",
+      "source": "icons/abilities/krwawy-aniol.svg",
+      "variant": "default",
+      "sourceSha256": "dd55a607d3c756d7faad45f077907136f9659e3828ba06c199d32a7ded373458"
+    }
+  ]
+}

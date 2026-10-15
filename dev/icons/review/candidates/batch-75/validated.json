@@ -1,0 +1,16 @@
+{
+  "batch": 75,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "lets-rock": "05bff3e3341e41223984f50fc8ee57087632910fdb1b8dba4f4f4d852a3bc198",
+    "lapiduch": "061802b6ed556ccfa4651dd1cdbecc94f647b36f9617df6a60fe5d298cf20a7f",
+    "laska-boza": "06132efb5f38efc2acf08b9c6b7742356c7653e938c4c040d1ce2ea7e4792cff",
+    "leb-jak-sklep": "8ecd5b433d768796c083388b8c7cc84208157ee33574af7a4caf11599aa31fce",
+    "lyzeczka": "8278a8c52f7e2567c961a73381ab3ea1603904c369cfb430b57922a6e27ca9ca",
+    "maszyna-do-zabijania": "9b7a7385863824e140aae37971eff727bb1d20deeb47f5d69520782d057844c8",
+    "matrix": "18e87e9c99f80d62c3e25d48fd4e540395b38f3053044ae618565229d54c5775",
+    "mechanika": "a6c64bdd71c667af189ccf29fc22bb382d04ab6a6699cb51863d15946a2e582b",
+    "moja-prawa-reka": "302d370f305276a4bf996a19dd6d0f62e5ecf5068957b5fdac6e6db52126022d"
+  }
+}

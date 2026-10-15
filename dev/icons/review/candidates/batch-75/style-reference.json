@@ -1,0 +1,41 @@
+{
+  "role": "ALL nine reference cells are STYLE ONLY. Replace every subject with the NEW contents below; do not copy the old objects or compositions.",
+  "sources": [
+    {
+      "source": "icons/abilities/ekspert.webp",
+      "sha256": "882555876a81951379ccddd98d105483a826407bbd267e3872dd51dc323b0acf"
+    },
+    {
+      "source": "icons/abilities/hakerstwo.webp",
+      "sha256": "7f7cc2647762b2521bd22f0c0fecd23378688928841a4f3842fcdad0b84935fc"
+    },
+    {
+      "source": "icons/abilities/gola-klata.webp",
+      "sha256": "99b453ea96e3400e58fc9f799b32b8cdb79c5e5945f1e442d875a9a484b2a5ba"
+    },
+    {
+      "source": "icons/abilities/ja-i-moj-gang.webp",
+      "sha256": "d5e34a09c131dbb4610458d76b00c0028fbd2f1cc053114296b20ef8191ab9f1"
+    },
+    {
+      "source": "icons/abilities/kocie-kosci.webp",
+      "sha256": "ee5d25740ab235e515c3e32405a25e41eceba7005bcd83cc2a6ebae4d52e30db"
+    },
+    {
+      "source": "icons/abilities/kaskader.webp",
+      "sha256": "f98690edfa75200f16d0e1442a14427e47a7deec01488831cc662bac60283407"
+    },
+    {
+      "source": "icons/abilities/jeden-strzal.webp",
+      "sha256": "630483b1cfd0de31820e70b6e48466f05ab060509c2fe979b56125f1174c2272"
+    },
+    {
+      "source": "icons/abilities/pan-plaster.webp",
+      "sha256": "55cb1114cf070f45d8f5f00a0cac406ac9960a494fd4e24bcf64b3feecb5aaff"
+    },
+    {
+      "source": "icons/abilities/clint.webp",
+      "sha256": "16d709e33905bbcb2f1413ed92597ec86a23e0face53e796221ff4ccf4eceabe"
+    }
+  ]
+}

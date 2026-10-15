@@ -1,0 +1,196 @@
+{
+  "date": "2026-10-15",
+  "batch": 75,
+  "generalFeedback": "Objects, gestures and generic adults; no repeated gruff portraits or anime. Prioritize exact anatomy, mechanisms and saved revisions.",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "lets-rock",
+      "name": "Let’s rock!",
+      "owner": "gwiazda",
+      "ownerLabel": "Gwiazda",
+      "target": "icons/abilities/lets-rock.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/lets-rock.svg",
+          "variant": "default",
+          "sourceSha256": "6c6281cdd5089a4a9dc6fdaf933633f66c94d0c8c453259d100e95d833315141"
+        }
+      ],
+      "ruleContext": "Potrafisz swoją muzyką lub śpiewem zagrzewać towarzyszy do boju. W swojej akcji wykonujesz „bojowy kawałek”, który pomaga się skupić i dodaje sił. Wszyscy sojusznicy, którzy cię słyszą i są w zasięgu 27 metrów od ciebie, otrzymują premię do Testów Ataku lub Rzutów Obronnych, zależną od wyniku testu umiejętności Występy lub instrumentu muzycznego. Premia działa do początku twojej następnej tury. Zdolność Let’s rock możesz powtarzać w nieskończoność, za każdym razem ponownie testując umiejętność Występy. Jeśli w czasie występu otrzymasz stan Nieprzytomność, Obezwładnienie lub Ogłuchnięcie, efekt natychmiast się kończy. WYNIK TESTU PREMIA DO TESTÓW SOJUSZNIKÓW 5 – 9 +1 10 – 14 +2 15 – 19 +3 20 – 24 +4 25 + +5",
+      "context": "Class/profession ability: Let’s rock!; owner Gwiazda. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "One rugged practical ELECTRIC GUITAR angled upward-right, complete body, neck and headstock, with TWO broad outward sound arcs. A single large pickup cut and three thick string marks at most; no tiny frets. Music rallying allies for battle. No performer, face portrait, skull decoration, lettering, brand logo, music notes, flames, star or fine engraving.",
+      "itemId": "batch75-lets-rock"
+    },
+    {
+      "kind": "feature",
+      "key": "lapiduch",
+      "name": "Łapiduch",
+      "owner": "medyk",
+      "ownerLabel": "Medyk",
+      "target": "icons/abilities/lapiduch.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/lapiduch.svg",
+          "variant": "default",
+          "sourceSha256": "913fffceec2f2490e4b84cdb4ea2c01368fc2d6d8cf518b701f681ea0286447b"
+        }
+      ],
+      "ruleContext": "Kiedy inni tracą nadzieję, ty wciąż walczysz o życie pacjenta. Podejmujesz reanimację i liczysz na cud, uciskając serce i robiąc usta-usta. Reanimacja trwa 1 minutę, a jej sukces zależy od twoich umiejętności i czasu, który upłynął od zatrzymania akcji serca. Udana akcja reanimacji przywraca pacjentowi funkcje życiowe, lecz jego stan wciąż nie jest stabilny. Ta zdolność nie działa na pacjenta, który otrzymał Olbrzymie obrażenia (patrz rozdział Walka s. 34). CZAS OD USTANIA TĘTNA ST TESTU MEDYCYNY do 1 minuty ST 15 do 2 minut ST 20 do 4 minut ST 25 do 8 minut ST 30",
+      "context": "Class/profession ability: Łapiduch; owner Medyk. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "request": "Two complete adult hands STACKED CORRECTLY for CPR, with one palm heel pressing at the centre of ONE plain adult chest seen from above. The upper hand covers the lower hand naturally; two short broad downward compression marks show pressure on the sternum. Only shoulders and upper chest of the patient, no patient's head or face, no extra hands or fingers. Coherent sober resuscitation diagram, broad black gaps and natural hand anatomy, no injuries, blood, gore, text or tiny anatomy.",
+      "itemId": "batch75-lapiduch"
+    },
+    {
+      "kind": "feature",
+      "key": "laska-boza",
+      "name": "Łaska boża",
+      "owner": "kaznodzieja-nowej-ery",
+      "ownerLabel": "kaznodzieja-nowej-ery",
+      "target": "icons/abilities/laska-boza.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/laska-boza.svg",
+          "variant": "default",
+          "sourceSha256": "e5324a36a95884b60732d688880fea6f1243709fbc4a38e8a3e644b87f6802a5"
+        }
+      ],
+      "ruleContext": "W Akcji Bonusowej możesz natchnąć swoich sojuszników w promieniu 18 metrów łaską bożą. Sojusznicy muszą słyszeć twój głos. Obdarzony Łaską bożą otrzymuje +1k4 do Testów Ataków i Rzutów Obronnych, do początku twojej następnej tury. Możesz obdarzyć tą premią tylu sojuszników, ile masz poziomów Cwaniaka.",
+      "context": "Class/profession ability: Łaska boża; owner kaznodzieja-nowej-ery. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "request": "Two complete open adult hands reaching outward in a calm BLESSING gesture over THREE small plain human head-and-shoulder silhouettes grouped below. Three short broad downward rays connect the hands' gesture to the allies. Generic adult heads without facial features or hair detail; one compact benevolent group support emblem. No named religious figure, denomination symbol, halo, cartoon star, lettering, numbers, extra hands or fine rays.",
+      "itemId": "batch75-laska-boza"
+    },
+    {
+      "kind": "feature",
+      "key": "leb-jak-sklep",
+      "name": "Łeb jak sklep",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/abilities/leb-jak-sklep.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/leb-jak-sklep.svg",
+          "variant": "default",
+          "sourceSha256": "ab1446c5808fb43984e0c4f1357f4cd68fda82f47990700123c1db790a7efc87"
+        }
+      ],
+      "ruleContext": "Miewasz przebłyski prawdziwego geniuszu. Kiedy wykonujesz Test Inteligencji lub dowolnego zestawu narzędzi, możesz dorzucić 1k4 do wyniku. Masz tyle tych kostek, ile wynosi twoja Premia Biegłości. Im masz wyższy poziom, tym wartość kostek rośnie, zgodnie z kolumną Łeb jak sklep w poniższej tabeli Zdolności klasowych Speca. Zdolność odnawia się po Długim odpoczynku.",
+      "context": "Class/profession ability: Łeb jak sklep; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "request": "ONE simple schematic BRAIN with just three large lobe cuts above ONE sturdy open-ended WRENCH and ONE small geometrically coherent TETRAHEDRAL DIE. The four-sided die is a clear triangular pyramid with two visible triangular white planes separated by one broad black edge, no numbers or pips. Insight improving clever tool work, compact clear arrangement with black gaps. No human face, lightbulb, giant cog, fine brain folds, letters or tiny ruler markings.",
+      "itemId": "batch75-leb-jak-sklep"
+    },
+    {
+      "kind": "feature",
+      "key": "lyzeczka",
+      "name": "Łyżeczka",
+      "owner": "gladiator",
+      "ownerLabel": "Gladiator",
+      "target": "icons/abilities/lyzeczka.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/lyzeczka.svg",
+          "variant": "default",
+          "sourceSha256": "843e5b1041de1b116e2ea0625ae0c2a732deff2aafc70ab3e28ee5d7baf7ddcc"
+        }
+      ],
+      "ruleContext": "Długopis, felga, wąż ogrodowy, hydrant, kula bilardowa czy mała zardzewiała łyżeczka, stanowi broń, w której masz biegłość. Możesz tym przedmiotem walczyć wręcz lub nim rzucać na dystans do 6 metrów. Maksymalna waga tej tzw. „łyżeczki” to wartość twojej Siły. Kość i typ obrażeń zależne są od wagi i rodzaju przedmiotu (ustal to z MG). Jeśli w Teście ataku „łyżeczką” wypadnie naturalna 1, rozpada się ona na dwie równe części. WAGA PRZEDMIOTU OBRAŻENIA WŁADANIE do 5 kg 1k6 Jednoręczne 6 - 11 kg 2k6 Oburęczne 12 -17 kg 3k6 Oburęczne 18 - 20 kg 4k6 Oburęczne",
+      "context": "Class/profession ability: Łyżeczka; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 5,
+      "request": "ONE complete bare adult fist firmly gripping the handle of a large plain old TEASPOON, raised diagonally like an improvised melee weapon. The oval spoon bowl is clearly visible and the long handle joins the fist coherently; one broad restrained striking trail behind the spoon. Actual simple object used as a weapon, serious practical silhouette. No person, face, food, bowl, decorative stars, serrations, engraving, extra spoon or extra hand.",
+      "itemId": "batch75-lyzeczka"
+    },
+    {
+      "kind": "feature",
+      "key": "maszyna-do-zabijania",
+      "name": "Maszyna do zabijania",
+      "owner": "najemnik",
+      "ownerLabel": "Najemnik",
+      "target": "icons/abilities/maszyna-do-zabijania.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/maszyna-do-zabijania.svg",
+          "variant": "default",
+          "sourceSha256": "bf846c0d06aaf67a251b1c02723bad0ff64fb927cbe0e7403f79722605cf8045"
+        }
+      ],
+      "ruleContext": "Kiedy jesteś w Berserku, zyskujesz: Promocja [B]. Możesz wykonać dodatkowo jeden Atak wręcz w Akcji Bonusowej. Zwód. Raz w rundzie możesz wykonać jeden Atak wręcz oparty na Sile z Ułatwieniem.",
+      "context": "Class/profession ability: Maszyna do zabijania; owner Najemnik. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 6,
+      "request": "ONE powerful bare clenched fist drives through ONE thick steel CHAIN LINK, breaking that link into two broad separated halves while TWO intact links trail behind. Two short broad impact wedges convey relentless melee strength. Coherent fist with complete short wrist, heavy practical chain and clear black gaps. No literal robot, person portrait, huge gear, extra fist, fine fragments, gore, blood, text or anime anatomy.",
+      "itemId": "batch75-maszyna-do-zabijania"
+    },
+    {
+      "kind": "feature",
+      "key": "matrix",
+      "name": "Matrix",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/abilities/matrix.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/matrix.svg",
+          "variant": "default",
+          "sourceSha256": "6bcdc39ecb83504a5b09b9bb5f3e86b517e9a9652e89e70877e12f5ec24fd851"
+        }
+      ],
+      "ruleContext": "Zyskujesz niezwykłą zdolność unikania seryjnego ostrzału, wybuchów granatów czy miotaczy ognia. Kiedy jesteś w polu rażenia ataku obszarowego, który umożliwia ci wykonanie Rzutu Obronnego na Zręczność, żeby zmniejszyć obrażenia o połowę, to po udanym RO, nie otrzymujesz żadnych obrażeń, a w przypadku niepowodzenia — tylko połowę (zaokrągloną w dół). Tej zdolności możesz użyć tyle razy, ile wynosi twoja Premia Biegłości. Matrix odnawia się po odbyciu Długiego odpoczynku.",
+      "context": "Class/profession ability: Matrix; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 7,
+      "request": "ONE generic adult full-body silhouette in plain fitted practical clothes bends backward in a controlled evasive motion as THREE broad parallel projectiles pass safely ABOVE the torso. Natural continuous spine, balanced bent knees, complete arms and feet, smooth featureless head. Clear black gaps between body and projectiles. No recognizable actor or character, sunglasses, trench coat, long coat, film costume, anime face, extra limbs, tiny bullets, text or symbols.",
+      "itemId": "batch75-matrix"
+    },
+    {
+      "kind": "feature",
+      "key": "mechanika",
+      "name": "Mechanika",
+      "owner": "monter",
+      "ownerLabel": "Monter",
+      "target": "icons/abilities/mechanika.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/mechanika.svg",
+          "variant": "default",
+          "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037"
+        }
+      ],
+      "ruleContext": "Smar zastępuje ci krem do rąk, benzyna pachnie jak najlepsze perfumy, a dźwięk dobrze pracującego silnika jest milszy niż miłosne szepty. Jesteś w stanie zbudować swój własny pojazd i zabrać go na rajd! Otrzymujesz biegłość w narzędziach małego mechanika. Potrafisz naprawiać, ulepszać i budować pojazdy, a nawet konstruować mechaniczne pancerze. Potrzebne ci narzędzia małego mechanika i małego kowala, surowce i czas. Otrzymujesz wylistowane poniżej schematy mechaniczne. SCHEMATY MECHANICZNE NAZWA ST PRODUKCJA SUROWCE Buggy 20 500 godzin 50 CZ, 200 MK Deskorolka 5 20 godzin 5 CZ, 5 MK Motorower 20 200 godzin 50 CZ, 50 MK Motocykl 25 300 godzin 50 CZ, 100 MK Osobówka (składak) 20 1000 godzin 100 CZ, 400 MK Paralotnia 25 100 godzin 20 CZ, 30 MK Pancerz wspomagany 30 1000 godzin 100 CE, 100 CZ, 300 MK Rower 10 40 godzin 10 CZ, 10 MK Traktor (mały) 20 1000 godzin 100 CZ, 400 MK Wózek typu dwukółka 10 20 godzin 1 CZ, 19 MK",
+      "context": "Class/profession ability: Mechanika; owner Monter. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 8,
+      "request": "ONE compact practical ENGINE BLOCK in three-quarter side view with three broad cylinder-head forms and a complete thick OPEN-ENDED WRENCH fitted onto one large bolt at the front. A coherent vehicle mechanic's repair motif; just a few large black structural cuts. No huge generic cog, loose toy parts, person, face, intricate wires, oily texture, tiny bolts, logo, lettering or numbers.",
+      "itemId": "batch75-mechanika"
+    },
+    {
+      "kind": "feature",
+      "key": "moja-prawa-reka",
+      "name": "Moja prawa ręka",
+      "owner": "mafiozo",
+      "ownerLabel": "Mafiozo",
+      "target": "icons/abilities/moja-prawa-reka.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/moja-prawa-reka.svg",
+          "variant": "default",
+          "sourceSha256": "e81f004a47420ab36475a8e8d6a27c09b8e45aa296643e49ec352b764ec372f2"
+        }
+      ],
+      "ruleContext": "Zaczynasz budować własną mafię. Werbujesz obiecującego człowieka, który wykonuje twoje polecenia aż po grób. Skąd go wziąć? Wyrzutka, który potrzebuje szefa, znajdziesz w każdej dziurze i ruinie. Wystarczy obiecać mu lepsze życie, dać spluwę do ręki, wydziarać tatuaż i wcielić do twojej mafijnej rodziny. Będzie robić, co każesz. Nosić plecak, pociągać za spust i nadstawiać tyłka. Ty zapewniasz mu wikt i dziesiątą część swojej doli. Jeśli nie masz odpowiedniego kandydata lub ostatni zginął, możesz poświęcić 24 godziny na szukanie nowego w miejscowości, w której przebywasz. Prawa ręka działa natychmiast po twojej turze, ale masz pełną kontrolę nad akcjami tej postaci. ZASADY TWORZENIA PRAWEJ RĘKI Tworzysz Prawą rękę na czystej karcie postaci. Cechy: Wartości Cech Bazowych do przydzielenia: 14,14,12,12,10, 8 lub 24 punkty do dowolnego rozdzielenia. Pochodzenie: Otrzymuje Pochodzenie zgodne z miejscem jego werbunku. Punkty Wytrzymałości: 5 x twój poziom Cwaniaka. Kości Wytrzymałości Prawej ręki to k6 i ma ich tyle, ile ty masz obecnie poziomów Cwaniaka. Wyszkolenie w pancerzu: Może korzystać z tych pancerzy, w których ty masz wyszkolenie. Premia Biegłości: +2 (nie rośnie). Rzuty Obronne: Ma biegłość w dwóch RO wybranych przez ciebie. Atak: Może korzystać z każdej broni, w której masz biegłość. Obrażenia: Zależne od broni i jego modyfikatorów Cech Bazowych. Sztuczki: Zna jedną, wybraną przez ciebie Sztuczkę, której wymagania spełnia. Umiejętności: Ma biegłość w dwóch wybranych przez ciebie umiejętnościach lub zestawach narzędzi. Śmierć: Prawa ręka umiera na takich samych zasadach, jak BG, czyli stosuje Stopnie Zranienia i korzysta z Rzutów Przeciw Śmierci.",
+      "context": "Class/profession ability: Moja prawa ręka; owner Mafiozo. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 9,
+      "request": "TWO plain generic adults stand side by side: a slightly taller leader rests ONE complete hand naturally on the shoulder of a trusted companion who carries a compact BACKPACK. Both figures have ordinary adult proportions, practical simple clothes and smooth featureless heads. Clear gap between bodies and coherent shoulder/hand contact. Loyal recruited partner, not a literal isolated right hand. No gruff portrait, extra person, gun, uniform insignia, writing, anime or tiny backpack straps.",
+      "itemId": "batch75-moja-prawa-reka"
+    }
+  ]
+}
