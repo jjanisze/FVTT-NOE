@@ -1,0 +1,361 @@
+{
+  "title": "Batches 102 + 103 + 104 + 105 · 29 style revisions awaiting GM review",
+  "updated": "2026-10-17",
+  "items": [
+    {
+      "id": "style104-tanczace-pily",
+      "name": "Tańczące piły",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/tanczace-pily.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/tanczace-pily.svg",
+          "variant": "default",
+          "sourceSha256": "bc10bf45e8c50157464d4d784c069a08139e10da323f800c1ae196386084b51a"
+        }
+      ],
+      "context": "Ability: Tańczące piły. A robot sweeps spinning saws through nearby enemies. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "TWO complete CIRCULAR SAW BLADES on TWO short stout articulated TOOL ARMS, sweeping opposite sides of ONE small central mechanical mounting block. Each blade is a plain disk with EIGHT large teeth and ONE large central hole. ONE broad curved sweep behind each blade. No entire robot, tracks, fine teeth, tiny bolts, blood or extra blade.",
+      "styleReview": {
+        "iconId": "abilities/tanczace-pily",
+        "status": "redo",
+        "source": "icons/abilities/tanczace-pily.svg",
+        "sourceSha256": "bc10bf45e8c50157464d4d784c069a08139e10da323f800c1ae196386084b51a",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:10:28.231Z"
+      },
+      "current": {
+        "src": "/icons/abilities/tanczace-pily.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Tańczące piły",
+          "src": "candidates/batch-104/tanczace-pily.png",
+          "note": "TWO complete CIRCULAR SAW BLADES on TWO short stout articulated TOOL ARMS, sweeping opposite sides of ONE small central mechanical mounting block. Each blade is a plain disk with EIGHT large teeth and ONE large central hole. ONE broad curved sweep behind each blade. No entire robot, tracks, fine teeth, tiny bolts, blood or extra blade."
+        }
+      ]
+    },
+    {
+      "id": "style104-tryb-turbo",
+      "name": "Tryb Turbo",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/tryb-turbo.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/tryb-turbo.svg",
+          "variant": "default",
+          "sourceSha256": "ca5c334cb1ac92b5ca2c8ecb2990ad504167e31bcbbd1b3f373fc2735ba55118"
+        }
+      ],
+      "context": "Ability: Tryb Turbo. A multi-legged combat machine temporarily moves and strikes faster. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE compact SIX-LEGGED INDUSTRIAL WALKER in three-quarter side view, moving forward with TWO broad speed strokes behind it. One plain rectangular body, SIX stout legs each with ONE simple elbow and ONE complete broad foot, three legs on each side. One broad side panel cut. No gun, smoke plume, microdetail, cables, people or text.",
+      "styleReview": {
+        "iconId": "abilities/tryb-turbo",
+        "status": "redo",
+        "source": "icons/abilities/tryb-turbo.svg",
+        "sourceSha256": "ca5c334cb1ac92b5ca2c8ecb2990ad504167e31bcbbd1b3f373fc2735ba55118",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:10:40.212Z"
+      },
+      "current": {
+        "src": "/icons/abilities/tryb-turbo.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Tryb Turbo",
+          "src": "candidates/batch-104/tryb-turbo.png",
+          "note": "ONE compact SIX-LEGGED INDUSTRIAL WALKER in three-quarter side view, moving forward with TWO broad speed strokes behind it. One plain rectangular body, SIX stout legs each with ONE simple elbow and ONE complete broad foot, three legs on each side. One broad side panel cut. No gun, smoke plume, microdetail, cables, people or text."
+        }
+      ]
+    },
+    {
+      "id": "style104-twierdzenie-kata-prostego",
+      "name": "Twierdzenie Kąta Prostego",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/twierdzenie-kata-prostego.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/twierdzenie-kata-prostego.svg",
+          "variant": "default",
+          "sourceSha256": "31e78fa56154b4104741b6b7cc6ebd831656095c90b6cd27fdf369ecaf312725"
+        }
+      ],
+      "context": "Ability: Twierdzenie Kąta Prostego. A timely melee interception halts an approaching enemy. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE plain generic adult GUARD at LEFT braces and thrusts ONE short broad BATON horizontally toward the upper torso of ONE approaching generic adult at RIGHT. The approaching figure visibly STOPS, leaning back with one foot firmly planted and palms raised. Exactly two complete natural adult silhouettes, featureless heads and broad black separation. Clear melee interception; no geometric wall, right-angle symbol, diagram, arrow, blood or tiny details.",
+      "styleReview": {
+        "iconId": "abilities/twierdzenie-kata-prostego",
+        "status": "redo",
+        "source": "icons/abilities/twierdzenie-kata-prostego.svg",
+        "sourceSha256": "31e78fa56154b4104741b6b7cc6ebd831656095c90b6cd27fdf369ecaf312725",
+        "reasons": [
+          "detail",
+          "other"
+        ],
+        "notes": "Unclear graphical intent.",
+        "updatedAt": "2026-10-16T22:11:04.278Z"
+      },
+      "current": {
+        "src": "/icons/abilities/twierdzenie-kata-prostego.svg",
+        "note": "Existing shipped art flagged for style revision: detail, other. Unclear graphical intent."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Twierdzenie Kąta Prostego",
+          "src": "candidates/batch-104/twierdzenie-kata-prostego.png",
+          "note": "ONE plain generic adult GUARD at LEFT braces and thrusts ONE short broad BATON horizontally toward the upper torso of ONE approaching generic adult at RIGHT. The approaching figure visibly STOPS, leaning back with one foot firmly planted and palms raised. Exactly two complete natural adult silhouettes, featureless heads and broad black separation. Clear melee interception; no geometric wall, right-angle symbol, diagram, arrow, blood or tiny details."
+        }
+      ]
+    },
+    {
+      "id": "style104-tylko-zwarcie",
+      "name": "Tylko zwarcie",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/tylko-zwarcie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/tylko-zwarcie.svg",
+          "variant": "default",
+          "sourceSha256": "ce21c07be39d4e6477f48757e1a010d594233f496644d906a4f674e5665069fa"
+        }
+      ],
+      "context": "Ability: Tylko zwarcie. An undead creature can attack only in close combat. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "TWO broad complete grasping HUMAN HANDS reaching forward, palms slightly downward, with short plain ragged sleeve ends. Complete thumbs and grouped natural fingers, ONE large black gap between hands. No gun, crossed-out symbol, face, head, bone, gore, fingernail detail or tiny rags.",
+      "styleReview": {
+        "iconId": "abilities/tylko-zwarcie",
+        "status": "redo",
+        "source": "icons/abilities/tylko-zwarcie.svg",
+        "sourceSha256": "ce21c07be39d4e6477f48757e1a010d594233f496644d906a4f674e5665069fa",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:11.581Z"
+      },
+      "current": {
+        "src": "/icons/abilities/tylko-zwarcie.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Tylko zwarcie",
+          "src": "candidates/batch-104/tylko-zwarcie.png",
+          "note": "TWO broad complete grasping HUMAN HANDS reaching forward, palms slightly downward, with short plain ragged sleeve ends. Complete thumbs and grouped natural fingers, ONE large black gap between hands. No gun, crossed-out symbol, face, head, bone, gore, fingernail detail or tiny rags."
+        }
+      ]
+    },
+    {
+      "id": "style104-wierze",
+      "name": "Wierzę",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/wierze.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wierze.svg",
+          "variant": "default",
+          "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c"
+        }
+      ],
+      "context": "Ability: Wierzę. A small everyday object unexpectedly becomes available. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE complete open adult PALM holds ONE small sturdy plain KEY and ONE short lit CANDLE stands beside the wrist. Key has a broad rounded bow, short shaft and TWO broad teeth. Candle has one simple steady flame. Quiet hopeful discovery, not magic. No person, face, thought bubble, rays, particles, game token, text or fine wick.",
+      "styleReview": {
+        "iconId": "abilities/wierze",
+        "status": "redo",
+        "source": "icons/abilities/wierze.svg",
+        "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:24.996Z"
+      },
+      "current": {
+        "src": "/icons/abilities/wierze.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Wierzę",
+          "src": "candidates/batch-104/wierze.png",
+          "note": "ONE complete open adult PALM holds ONE small sturdy plain KEY and ONE short lit CANDLE stands beside the wrist. Key has a broad rounded bow, short shaft and TWO broad teeth. Candle has one simple steady flame. Quiet hopeful discovery, not magic. No person, face, thought bubble, rays, particles, game token, text or fine wick."
+        }
+      ]
+    },
+    {
+      "id": "style104-wielonozny",
+      "name": "Wielonożny",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/wielonozny.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wielonozny.svg",
+          "variant": "default",
+          "sourceSha256": "588eb40f2878962ff870a67c4cbeb761ac8b899f2cf5e708280ac8898f64d27d"
+        }
+      ],
+      "context": "Ability: Wielonożny. A multi-legged machine moves across difficult ground. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE simple rectangular INDUSTRIAL WALKER BODY on SIX broad articulated LEGS steps over TWO low jagged ROCKS. Three legs on each side, each with one thick elbow and a complete broad foot, all feet visible and clear of rocks. One broad side panel cut. No guns, smoke, bolts, cables, rubble pile, thin joints or extra legs.",
+      "styleReview": {
+        "iconId": "abilities/wielonozny",
+        "status": "redo",
+        "source": "icons/abilities/wielonozny.svg",
+        "sourceSha256": "588eb40f2878962ff870a67c4cbeb761ac8b899f2cf5e708280ac8898f64d27d",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:33.403Z"
+      },
+      "current": {
+        "src": "/icons/abilities/wielonozny.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Wielonożny",
+          "src": "candidates/batch-104/wielonozny.png",
+          "note": "ONE simple rectangular INDUSTRIAL WALKER BODY on SIX broad articulated LEGS steps over TWO low jagged ROCKS. Three legs on each side, each with one thick elbow and a complete broad foot, all feet visible and clear of rocks. One broad side panel cut. No guns, smoke, bolts, cables, rubble pile, thin joints or extra legs."
+        }
+      ]
+    },
+    {
+      "id": "style104-wirujace-kiscienie",
+      "name": "Wirujące kiścienie",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/wirujace-kiscienie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wirujace-kiscienie.svg",
+          "variant": "default",
+          "sourceSha256": "2b8bb6f73adb3b502a185d6aee31173171af229f0e131d04936f1735d612093d"
+        }
+      ],
+      "context": "Ability: Wirujące kiścienie. A robot swings flails around itself to damage and knock down enemies. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "TWO complete CHAIN FLAILS sweeping outward in opposing arcs from ONE small central plain mechanical MOUNT. Each flail has one short stout arm, a chain represented by THREE large connected simple oval links and ONE broad ball with FOUR short blunt spikes. ONE broad sweep per flail, no whole robot, tracks, fine link mesh, blood or extra balls.",
+      "styleReview": {
+        "iconId": "abilities/wirujace-kiscienie",
+        "status": "redo",
+        "source": "icons/abilities/wirujace-kiscienie.svg",
+        "sourceSha256": "2b8bb6f73adb3b502a185d6aee31173171af229f0e131d04936f1735d612093d",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:40.578Z"
+      },
+      "current": {
+        "src": "/icons/abilities/wirujace-kiscienie.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Wirujące kiścienie",
+          "src": "candidates/batch-104/wirujace-kiscienie.png",
+          "note": "TWO complete CHAIN FLAILS sweeping outward in opposing arcs from ONE small central plain mechanical MOUNT. Each flail has one short stout arm, a chain represented by THREE large connected simple oval links and ONE broad ball with FOUR short blunt spikes. ONE broad sweep per flail, no whole robot, tracks, fine link mesh, blood or extra balls."
+        }
+      ]
+    },
+    {
+      "id": "style104-wrazliwosc-na-swiatlo",
+      "name": "Wrażliwość na światło",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+          "variant": "default",
+          "sourceSha256": "e48c8aedc3ef8941ac486c2ea64f2d97499f31242ba40d030be30898431e65a7"
+        }
+      ],
+      "context": "Ability: Wrażliwość na światło. A large rat recoils from strong light. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE natural RAT in simple side profile recoils from ONE plain FLASHLIGHT at RIGHT. The rat crouches low, one forepaw covering its eye, ears folded back; complete body and ONE long curved tail. The light is ONE broad clean cone separated from the rat. No facial expression, fur texture, teeth, tiny whiskers or cartoon anatomy.",
+      "styleReview": {
+        "iconId": "abilities/wrazliwosc-na-swiatlo",
+        "status": "redo",
+        "source": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+        "sourceSha256": "e48c8aedc3ef8941ac486c2ea64f2d97499f31242ba40d030be30898431e65a7",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:46.135Z"
+      },
+      "current": {
+        "src": "/icons/abilities/wrazliwosc-na-swiatlo.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Wrażliwość na światło",
+          "src": "candidates/batch-104/wrazliwosc-na-swiatlo.png",
+          "note": "ONE natural RAT in simple side profile recoils from ONE plain FLASHLIGHT at RIGHT. The rat crouches low, one forepaw covering its eye, ears folded back; complete body and ONE long curved tail. The light is ONE broad clean cone separated from the rat. No facial expression, fur texture, teeth, tiny whiskers or cartoon anatomy."
+        }
+      ]
+    },
+    {
+      "id": "style104-wymagania",
+      "name": "Wymagania",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/wymagania.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wymagania.svg",
+          "variant": "default",
+          "sourceSha256": "7a93fc83a0710411564860ca13fb3bc50c5769c95c11f9755ae3caf7120012c1"
+        }
+      ],
+      "context": "Ability: Wymagania. Working animals need suitable feed and clean water. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE plain feed SACK with a broad open top beside ONE complete WATER BUCKET, with TWO large simple grain ears rising from the sack. One broad black fold cut in the sack and one thick bucket handle only. A sober animal-care supply symbol. No animals, faces, pile of props, crossed-out symbol, letters, tiny grain dots or logos.",
+      "styleReview": {
+        "iconId": "abilities/wymagania",
+        "status": "redo",
+        "source": "icons/abilities/wymagania.svg",
+        "sourceSha256": "7a93fc83a0710411564860ca13fb3bc50c5769c95c11f9755ae3caf7120012c1",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:56.594Z"
+      },
+      "current": {
+        "src": "/icons/abilities/wymagania.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Wymagania",
+          "src": "candidates/batch-104/wymagania.png",
+          "note": "ONE plain feed SACK with a broad open top beside ONE complete WATER BUCKET, with TWO large simple grain ears rising from the sack. One broad black fold cut in the sack and one thick bucket handle only. A sober animal-care supply symbol. No animals, faces, pile of props, crossed-out symbol, letters, tiny grain dots or logos."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "files": [
+    {
+      "source": "icons/abilities/prog-awarii.svg",
+      "sha256": "c75daa7d763f1c448fb5412573766513450334e031c6ace1469662f163cc17b2"
+    },
+    {
+      "source": "icons/abilities/prog-awarii.png",
+      "sha256": "c227cc060a81c3adaffee025353d0521d8f11afa91b60866244a09e8feaac527"
+    },
+    {
+      "source": "icons/abilities/przyspieszenie.svg",
+      "sha256": "f294bc506fa503f8d73b051f0a6d3e134a799b9cb992567df13ca672c36a47ee"
+    },
+    {
+      "source": "icons/abilities/przyspieszenie.png",
+      "sha256": "dc4ab62f58ea939a292d4d7acab253e34f381a9bd755361325f65a4d92ee980c"
+    },
+    {
+      "source": "icons/abilities/rozkaz-likwidacji.svg",
+      "sha256": "01a3e9d892437d576716d91fb43a5ebbb8256fa6fb7c525a88e3bdcc13c41f93"
+    },
+    {
+      "source": "icons/abilities/rozkaz-likwidacji.png",
+      "sha256": "1ab5f5f3139fb60719efd4df9d0207ef15315c9405634adff3d4ba2b01941e9b"
+    },
+    {
+      "source": "icons/abilities/roznorodne-ataki.svg",
+      "sha256": "4e5fc009bd91c06ca413e362fa4bfc486d715f37d7ebd471f211a977e22c10da"
+    },
+    {
+      "source": "icons/abilities/roznorodne-ataki.png",
+      "sha256": "31161947d10883ae638ff6f0f3fe58114c6e6461af974efcdd5e15a3b55c2f75"
+    },
+    {
+      "source": "icons/abilities/siodme-poty.svg",
+      "sha256": "3c151c5f915b0e845f6dcf2f0b9b69c7c22df023e0eb7fd048d76cfadce77c59"
+    },
+    {
+      "source": "icons/abilities/siodme-poty.webp",
+      "sha256": "66580fa2b932d560e17989d8143f7c5c8e58b458158c7e8283886133f0c3a0b6"
+    },
+    {
+      "source": "icons/abilities/skakun.svg",
+      "sha256": "6616be2a54fe7dd9ffef7b11dc3f5001982aeccbad8ec078d197bbaabc401883"
+    },
+    {
+      "source": "icons/abilities/skakun.png",
+      "sha256": "c9212501ff3ab897a08eeb5771929ea905398892af925deddb58864dbc014aeb"
+    },
+    {
+      "source": "icons/abilities/szara-eminencja.svg",
+      "sha256": "26f2c1ad6c13b50274bc07252608dbe2a3a8fa8adc68204157e411276abafb29"
+    },
+    {
+      "source": "icons/abilities/szara-eminencja.png",
+      "sha256": "3b925d17b4007a522b6ef0b2fce6f39a896cc51914705d304fd750d5c6b06a99"
+    },
+    {
+      "source": "icons/abilities/szarpanie.svg",
+      "sha256": "fe1f81639adf52e3b99e7a43efd7abaf1714e4ca0039011cb394ae2c146d0245"
+    },
+    {
+      "source": "icons/abilities/szarpanie.png",
+      "sha256": "4225a0271b7a3efe75cd66a6c5b970b2526d871853cb12f40684835e272469b5"
+    },
+    {
+      "source": "icons/abilities/taca-i-w-nogi.svg",
+      "sha256": "4272d8941f5ceb46ec0963b746f990623449e02aaa632ef8c4c8b46f9fa89645"
+    },
+    {
+      "source": "icons/abilities/taca-i-w-nogi.png",
+      "sha256": "261632435fa1e80a1a01d0f2b391df08ed9b8bf3786e61de2997d217ae290be7"
+    }
+  ]
+}

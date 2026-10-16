@@ -3465,6 +3465,209 @@
       "candidateId": "atlas-a",
       "notes": "",
       "updatedAt": "2026-10-16T00:47:37.705Z"
+    },
+    "style102-logika-roznoboczna": {
+      "itemId": "style102-logika-roznoboczna",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:30:22.845Z"
+    },
+    "style102-doktor-quinn": {
+      "itemId": "style102-doktor-quinn",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:30:31.155Z"
+    },
+    "style102-fart": {
+      "itemId": "style102-fart",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.078Z"
+    },
+    "style102-ja-juz-swoje-odchorowalem": {
+      "itemId": "style102-ja-juz-swoje-odchorowalem",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.078Z"
+    },
+    "style102-kuchenny-terror": {
+      "itemId": "style102-kuchenny-terror",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.078Z"
+    },
+    "style102-mlynek": {
+      "itemId": "style102-mlynek",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.078Z"
+    },
+    "style102-naprawianie": {
+      "itemId": "style102-naprawianie",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.079Z"
+    },
+    "style102-odporny": {
+      "itemId": "style102-odporny",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.079Z"
+    },
+    "style102-patriota": {
+      "itemId": "style102-patriota",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.079Z"
+    },
+    "style103-prog-awarii": {
+      "itemId": "style103-prog-awarii",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.082Z"
+    },
+    "style103-przyspieszenie": {
+      "itemId": "style103-przyspieszenie",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.082Z"
+    },
+    "style103-rozkaz-likwidacji": {
+      "itemId": "style103-rozkaz-likwidacji",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.083Z"
+    },
+    "style103-roznorodne-ataki": {
+      "itemId": "style103-roznorodne-ataki",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.083Z"
+    },
+    "style103-siodme-poty": {
+      "itemId": "style103-siodme-poty",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.083Z"
+    },
+    "style103-skakun": {
+      "itemId": "style103-skakun",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.083Z"
+    },
+    "style103-szara-eminencja": {
+      "itemId": "style103-szara-eminencja",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.083Z"
+    },
+    "style103-szarpanie": {
+      "itemId": "style103-szarpanie",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.084Z"
+    },
+    "style103-taca-i-w-nogi": {
+      "itemId": "style103-taca-i-w-nogi",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.084Z"
+    },
+    "style104-tanczace-pily": {
+      "itemId": "style104-tanczace-pily",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.087Z"
+    },
+    "style104-tryb-turbo": {
+      "itemId": "style104-tryb-turbo",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.087Z"
+    },
+    "style104-twierdzenie-kata-prostego": {
+      "itemId": "style104-twierdzenie-kata-prostego",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.087Z"
+    },
+    "style104-tylko-zwarcie": {
+      "itemId": "style104-tylko-zwarcie",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.088Z"
+    },
+    "style104-wierze": {
+      "itemId": "style104-wierze",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.088Z"
+    },
+    "style104-wielonozny": {
+      "itemId": "style104-wielonozny",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.088Z"
+    },
+    "style104-wirujace-kiscienie": {
+      "itemId": "style104-wirujace-kiscienie",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.088Z"
+    },
+    "style104-wrazliwosc-na-swiatlo": {
+      "itemId": "style104-wrazliwosc-na-swiatlo",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.089Z"
+    },
+    "style104-wymagania": {
+      "itemId": "style104-wymagania",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.089Z"
+    },
+    "style105-zasloniecie-helmu": {
+      "itemId": "style105-zasloniecie-helmu",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.090Z"
+    },
+    "style105-zawziety-sukinkot": {
+      "itemId": "style105-zawziety-sukinkot",
+      "decision": "pending",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T22:28:16.090Z"
     }
   }
 }

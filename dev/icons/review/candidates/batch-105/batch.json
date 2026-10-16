@@ -1,0 +1,82 @@
+{
+  "date": "2026-10-17",
+  "batch": 105,
+  "pass": "browser-style-revisions",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "zasloniecie-helmu",
+      "name": "Zasłonięcie hełmu",
+      "owner": "style-review",
+      "ownerLabel": "Style review",
+      "cell": 1,
+      "target": "icons/abilities/zasloniecie-helmu.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zasloniecie-helmu.svg",
+          "variant": "default",
+          "sourceSha256": "ef104c0f5efdc6e989b48ed75f0dfc914eaabcf88e2ac5f5ccb03eab23141836"
+        }
+      ],
+      "itemId": "style105-zasloniecie-helmu",
+      "ruleContext": "An automatic helmet seals its protective faceplate.",
+      "context": "Ability: Zasłonięcie hełmu. An automatic helmet seals its protective faceplate. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "note": "Style replacement at the exact existing filename; fresh GM approval required. No wiring or world writes.",
+      "styleFeedback": {
+        "iconId": "abilities/zasloniecie-helmu",
+        "status": "redo",
+        "source": "icons/abilities/zasloniecie-helmu.svg",
+        "sourceSha256": "ef104c0f5efdc6e989b48ed75f0dfc914eaabcf88e2ac5f5ccb03eab23141836",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:12:07.307Z"
+      },
+      "request": "ONE complete modern industrial HELMET in three-quarter SIDE PROFILE with ONE large CLOSED PROTECTIVE FACEPLATE. One thick side hinge and ONE broad black visor opening, with ONE broad curved motion stroke above the faceplate showing closure. No person, neck armor, skull, tiny screws, circuitry, gauge, text or fine reflections."
+    },
+    {
+      "kind": "feature",
+      "key": "zawziety-sukinkot",
+      "name": "Zawzięty sukinkot",
+      "owner": "style-review",
+      "ownerLabel": "Style review",
+      "cell": 2,
+      "target": "icons/abilities/zawziety-sukinkot.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawziety-sukinkot.svg",
+          "variant": "default",
+          "sourceSha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3"
+        }
+      ],
+      "itemId": "style105-zawziety-sukinkot",
+      "ruleContext": "A fallen person gets back up despite severe injury.",
+      "context": "Ability: Zawzięty sukinkot. A fallen person gets back up despite severe injury. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "note": "Style replacement at the exact existing filename; fresh GM approval required. No wiring or world writes.",
+      "styleFeedback": {
+        "iconId": "abilities/zawziety-sukinkot",
+        "status": "redo",
+        "source": "icons/abilities/zawziety-sukinkot.svg",
+        "sourceSha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:12:20.232Z"
+      },
+      "request": "ONE complete generic adult rises from ONE knee: one boot planted, one knee still touching the ground, ONE palm braced on the ground and the other hand pressing the planted thigh. Smooth featureless head, natural ordinary build, broad simple clothing. A determined rising pose without an arrow. No beard portrait, injuries, blood, torn fine fabric, texture or extra limb."
+    }
+  ],
+  "partialAtlas": true,
+  "emptyCells": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "batch": 105,
+  "validatedMasks": 2,
+  "prospectiveDeliveryTargets": 2,
+  "candidateHashes": {
+    "zasloniecie-helmu": "48f997e66c3b353a4014c9a1bbeb8cf544c1cf207ad866c97203ece325c5bc08",
+    "zawziety-sukinkot": "2a7d48d2155b88ee380b98f60b7e25884656f8fdf6caab83ec29a0e603c81352"
+  }
+}

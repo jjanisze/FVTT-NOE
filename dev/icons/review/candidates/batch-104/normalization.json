@@ -1,0 +1,65 @@
+[
+  {
+    "key": "tanczace-pily",
+    "source": "raw/batch-104-atlas-a.png, cell 1",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "tryb-turbo",
+    "source": "raw/batch-104-atlas-a.png, cell 2",
+    "removedTinyPixels": 11,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "twierdzenie-kata-prostego",
+    "source": "raw/batch-104-atlas-a.png, cell 3",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "tylko-zwarcie",
+    "source": "raw/batch-104-atlas-a.png, cell 4",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "wierze",
+    "source": "raw/batch-104-atlas-a.png, cell 5",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "wielonozny",
+    "source": "raw/batch-104-atlas-a.png, cell 6",
+    "removedTinyPixels": 1,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "wirujace-kiscienie",
+    "source": "raw/batch-104-atlas-a.png, cell 7",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "wrazliwosc-na-swiatlo",
+    "source": "raw/batch-104-atlas-a.png, cell 8",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  },
+  {
+    "key": "wymagania",
+    "source": "raw/batch-104-atlas-a.png, cell 9",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  }
+]

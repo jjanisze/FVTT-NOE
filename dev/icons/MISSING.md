@@ -37,8 +37,8 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 102** (the previous 342-card queue is resolved; the newly
-audited class/profession placeholder backlog remains and is listed below).
+**Next batch number: 106** (29 style revisions await GM review;
+the original 153-subject placeholder pass is complete).
 
 **Icon coverage correction, 2026-10-17:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
@@ -1268,6 +1268,91 @@ and the next free batch; fresh GM approval is required before replacement.
 |---|---|---|---|---|
 
 <!-- class-placeholder-audit:end -->
+
+<!-- style-batch-102:start -->
+## Queue (A) — Batch 102 — 9 style revisions
+
+Broad white-glyph replacements for saved browser flags; existing art stays
+until fresh GM approval. Exact source and sidecar hashes, verbatim feedback
+and prompts: `review/candidates/batch-102/`.
+
+| Cell | Subject | Exact SVG target (+ WEBP) |
+|---|---|---|
+| 1 | Logika Różnoboczna | `icons/abilities/logika-roznoboczna.svg` |
+| 2 | Doktor Quinn | `icons/abilities/doktor-quinn.svg` |
+| 3 | Fart | `icons/abilities/fart.svg` |
+| 4 | Ja już swoje odchorowałem | `icons/abilities/ja-juz-swoje-odchorowalem.svg` |
+| 5 | Kuchenny Terror | `icons/abilities/kuchenny-terror.svg` |
+| 6 | Młynek | `icons/abilities/mlynek.svg` |
+| 7 | Naprawianie | `icons/abilities/naprawianie.svg` |
+| 8 | Odporny | `icons/abilities/odporny.svg` |
+| 9 | Patriota | `icons/abilities/patriota.svg` |
+
+Browser style flags remain unchanged while candidates await approval.
+
+<!-- style-batch-102:end -->
+
+<!-- style-batch-103:start -->
+## Queue (A) — Batch 103 — 9 style revisions
+
+Broad white-glyph replacements for saved browser flags; existing art stays
+until fresh GM approval. Exact source and sidecar hashes, verbatim feedback
+and prompts: `review/candidates/batch-103/`.
+
+| Cell | Subject | Exact SVG target (+ WEBP) |
+|---|---|---|
+| 1 | Próg awarii | `icons/abilities/prog-awarii.svg` |
+| 2 | Przyspieszenie | `icons/abilities/przyspieszenie.svg` |
+| 3 | Rozkaz Likwidacji | `icons/abilities/rozkaz-likwidacji.svg` |
+| 4 | Różnorodne ataki | `icons/abilities/roznorodne-ataki.svg` |
+| 5 | Siódme poty | `icons/abilities/siodme-poty.svg` |
+| 6 | Skakun | `icons/abilities/skakun.svg` |
+| 7 | Szara Eminencja | `icons/abilities/szara-eminencja.svg` |
+| 8 | Szarpanie | `icons/abilities/szarpanie.svg` |
+| 9 | Tacą i w nogi | `icons/abilities/taca-i-w-nogi.svg` |
+
+Browser style flags remain unchanged while candidates await approval.
+
+<!-- style-batch-103:end -->
+
+<!-- style-batch-104:start -->
+## Queue (A) — Batch 104 — 9 style revisions
+
+Broad white-glyph replacements for saved browser flags; existing art stays
+until fresh GM approval. Exact source and sidecar hashes, verbatim feedback
+and prompts: `review/candidates/batch-104/`.
+
+| Cell | Subject | Exact SVG target (+ WEBP) |
+|---|---|---|
+| 1 | Tańczące piły | `icons/abilities/tanczace-pily.svg` |
+| 2 | Tryb Turbo | `icons/abilities/tryb-turbo.svg` |
+| 3 | Twierdzenie Kąta Prostego | `icons/abilities/twierdzenie-kata-prostego.svg` |
+| 4 | Tylko zwarcie | `icons/abilities/tylko-zwarcie.svg` |
+| 5 | Wierzę | `icons/abilities/wierze.svg` |
+| 6 | Wielonożny | `icons/abilities/wielonozny.svg` |
+| 7 | Wirujące kiścienie | `icons/abilities/wirujace-kiscienie.svg` |
+| 8 | Wrażliwość na światło | `icons/abilities/wrazliwosc-na-swiatlo.svg` |
+| 9 | Wymagania | `icons/abilities/wymagania.svg` |
+
+Browser style flags remain unchanged while candidates await approval.
+
+<!-- style-batch-104:end -->
+
+<!-- style-batch-105:start -->
+## Queue (A) — Batch 105 — 2 style revisions
+
+Broad white-glyph replacements for saved browser flags; existing art stays
+until fresh GM approval. Exact source and sidecar hashes, verbatim feedback
+and prompts: `review/candidates/batch-105/`.
+
+| Cell | Subject | Exact SVG target (+ WEBP) |
+|---|---|---|
+| 1 | Zasłonięcie hełmu | `icons/abilities/zasloniecie-helmu.svg` |
+| 2 | Zawzięty sukinkot | `icons/abilities/zawziety-sukinkot.svg` |
+
+Browser style flags remain unchanged while candidates await approval.
+
+<!-- style-batch-105:end -->
 
 <!-- icon-style-review:start -->
 ## Style review — icons flagged for redo

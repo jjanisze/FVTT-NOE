@@ -1,0 +1,16 @@
+{
+  "batch": 104,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "tanczace-pily": "e5793be06916d7ab9212a65281e67a9959dc953fd46fb9323b2c4cd4063002fd",
+    "tryb-turbo": "5df931eb18328cf1c26da893c89fb2604d70c32151b43f38dbdab70719b00b88",
+    "twierdzenie-kata-prostego": "920287fc0a80daa92dfa9bd642bddf273947571a79668eb45b4b97f4dc52cac9",
+    "tylko-zwarcie": "3366bbdd46851d4e2e0b69c2329d72555f02825a88d9bbd545a5a3ee595714d3",
+    "wierze": "8822e33a53b8b94aac73578619427fbc787befa5d5d57311cdea008bd7f1142f",
+    "wielonozny": "517c9938c77ca9c664ff5a591b51d2d6ed4fafb4c1bc69a3af53d1c472fe6d1c",
+    "wirujace-kiscienie": "b8b812933b7fc2894a41f617d053c292bd8ad33a7c22034f62aba5d68955ba7b",
+    "wrazliwosc-na-swiatlo": "6b75817f899ac007d526fab0137e17a96cef8f2747d014a9d0846ae174e99c92",
+    "wymagania": "734f9122610490b0e8be72ca606feedd17b29acc1e5fa9222ee53f3481115105"
+  }
+}

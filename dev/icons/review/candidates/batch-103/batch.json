@@ -1,0 +1,296 @@
+{
+  "date": "2026-10-17",
+  "batch": 103,
+  "pass": "browser-style-revisions",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "prog-awarii",
+      "name": "Próg awarii",
+      "owner": "style-review",
+      "ownerLabel": "Style review",
+      "cell": 1,
+      "target": "icons/abilities/prog-awarii.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/prog-awarii.svg",
+          "variant": "default",
+          "sourceSha256": "c75daa7d763f1c448fb5412573766513450334e031c6ace1469662f163cc17b2"
+        }
+      ],
+      "itemId": "style103-prog-awarii",
+      "ruleContext": "A machine malfunctions after enough accumulated damage.",
+      "context": "Ability: Próg awarii. A machine malfunctions after enough accumulated damage. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "note": "Style replacement at the exact existing filename; fresh GM approval required. No wiring or world writes.",
+      "styleFeedback": {
+        "iconId": "abilities/prog-awarii",
+        "status": "redo",
+        "source": "icons/abilities/prog-awarii.svg",
+        "sourceSha256": "c75daa7d763f1c448fb5412573766513450334e031c6ace1469662f163cc17b2",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:08:48.702Z"
+      },
+      "request": "ONE squat industrial MOTOR HOUSING split by ONE broad zigzag BLACK CRACK, with ONE large loose bolt lying below. Thick simple casing, two broad cooling-slot cuts, no gauge, scale, numeral, little wires, smoke, debris cloud or fine damage texture."
+    },
+    {
+      "kind": "feature",
+      "key": "przyspieszenie",
+      "name": "Przyspieszenie",
+      "owner": "style-review",
+      "ownerLabel": "Style review",
+      "cell": 2,
+      "target": "icons/abilities/przyspieszenie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/przyspieszenie.svg",
+          "variant": "default",
+          "sourceSha256": "f294bc506fa503f8d73b051f0a6d3e134a799b9cb992567df13ca672c36a47ee"
+        }
+      ],
+      "itemId": "style103-przyspieszenie",
+      "ruleContext": "A winged creature rapidly dashes or hides.",
+      "context": "Ability: Przyspieszenie. A winged creature rapidly dashes or hides. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "note": "Style replacement at the exact existing filename; fresh GM approval required. No wiring or world writes.",
+      "styleFeedback": {
+        "iconId": "abilities/przyspieszenie",
+        "status": "redo",
+        "source": "icons/abilities/przyspieszenie.svg",
+        "sourceSha256": "f294bc506fa503f8d73b051f0a6d3e134a799b9cb992567df13ca672c36a47ee",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:08:53.765Z"
+      },
+      "request": "ONE streamlined broad-winged WASP-LIKE CREATURE in clear side profile flying diagonally upward, with TWO short broad speed strokes behind it. Simple oval abdomen, two broad wings, six short complete legs grouped below the body, two antennae. No tiny veins, hair, teeth, face expression or detailed armor."
+    },
+    {
+      "kind": "feature",
+      "key": "rozkaz-likwidacji",
+      "name": "Rozkaz Likwidacji",
+      "owner": "style-review",
+      "ownerLabel": "Style review",
+      "cell": 3,
+      "target": "icons/abilities/rozkaz-likwidacji.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/rozkaz-likwidacji.svg",
+          "variant": "default",
+          "sourceSha256": "01a3e9d892437d576716d91fb43a5ebbb8256fa6fb7c525a88e3bdcc13c41f93"
+        }
+      ],
+      "itemId": "style103-rozkaz-likwidacji",
+      "ruleContext": "A quiet command lets an ally make an immediate weapon attack.",
+      "context": "Ability: Rozkaz Likwidacji. A quiet command lets an ally make an immediate weapon attack. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "note": "Style replacement at the exact existing filename; fresh GM approval required. No wiring or world writes.",
+      "styleFeedback": {
+        "iconId": "abilities/rozkaz-likwidacji",
+        "status": "redo",
+        "source": "icons/abilities/rozkaz-likwidacji.svg",
+        "sourceSha256": "01a3e9d892437d576716d91fb43a5ebbb8256fa6fb7c525a88e3bdcc13c41f93",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:09:09.031Z"
+      },
+      "request": "ONE complete adult HAND gives a clear forward POINTING gesture beside ONE complete compact RIFLE in side profile aimed in the same direction. Index extended, other fingers folded coherently with one visible thumb. Rifle has simple stock, receiver, complete grip and straight barrel. No people, victim, blood, speech bubble, writing or shooting rays."
+    },
+    {
+      "kind": "feature",
+      "key": "roznorodne-ataki",
+      "name": "Różnorodne ataki",
+      "owner": "style-review",
+      "ownerLabel": "Style review",
+      "cell": 4,
+      "target": "icons/abilities/roznorodne-ataki.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/roznorodne-ataki.svg",
+          "variant": "default",
+          "sourceSha256": "4e5fc009bd91c06ca413e362fa4bfc486d715f37d7ebd471f211a977e22c10da"
+        }
+      ],
+      "itemId": "style103-roznorodne-ataki",
+      "ruleContext": "A combat robot attacks with several different weapons.",
+      "context": "Ability: Różnorodne ataki. A combat robot attacks with several different weapons. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "note": "Style replacement at the exact existing filename; fresh GM approval required. No wiring or world writes.",
+      "styleFeedback": {
+        "iconId": "abilities/roznorodne-ataki",
+        "status": "redo",
+        "source": "icons/abilities/roznorodne-ataki.svg",
+        "sourceSha256": "4e5fc009bd91c06ca413e362fa4bfc486d715f37d7ebd471f211a977e22c10da",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:09:13.127Z"
+      },
+      "request": "A compact fan of FOUR complete simple tools: ONE broad HAMMER, ONE short KNIFE, ONE CIRCULAR SAW on a short handle, and ONE short CHAIN FLAIL with a plain solid ball. Distinct silhouettes with thick black gaps, no robot body, tracks, tiny chain links, bolts, dice, arrows or labels."
+    },
+    {
+      "kind": "feature",
+      "key": "siodme-poty",
+      "name": "Siódme poty",
+      "owner": "style-review",
+      "ownerLabel": "Style review",
+      "cell": 5,
+      "target": "icons/abilities/siodme-poty.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/siodme-poty.svg",
+          "variant": "default",
+          "sourceSha256": "3c151c5f915b0e845f6dcf2f0b9b69c7c22df023e0eb7fd048d76cfadce77c59"
+        }
+      ],
+      "itemId": "style103-siodme-poty",
+      "ruleContext": "Skilled driving pushes a vehicle to greater speed.",
+      "context": "Ability: Siódme poty. Skilled driving pushes a vehicle to greater speed. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "note": "Style replacement at the exact existing filename; fresh GM approval required. No wiring or world writes.",
+      "styleFeedback": {
+        "iconId": "abilities/siodme-poty",
+        "status": "redo",
+        "source": "icons/abilities/siodme-poty.svg",
+        "sourceSha256": "3c151c5f915b0e845f6dcf2f0b9b69c7c22df023e0eb7fd048d76cfadce77c59",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:09:35.615Z"
+      },
+      "request": "ONE complete rugged GAS PEDAL being pressed by ONE sturdy complete BOOT, in simple side profile, with TWO broad short speed strokes behind the heel. Thick sole, simple pedal hinge and base, one broad tread cut only. No steering wheel, hands, sweat drops, fine laces, numeral or gauge."
+    },
+    {
+      "kind": "feature",
+      "key": "skakun",
+      "name": "Skakun",
+      "owner": "style-review",
+      "ownerLabel": "Style review",
+      "cell": 6,
+      "target": "icons/abilities/skakun.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/skakun.svg",
+          "variant": "default",
+          "sourceSha256": "6616be2a54fe7dd9ffef7b11dc3f5001982aeccbad8ec078d197bbaabc401883"
+        }
+      ],
+      "itemId": "style103-skakun",
+      "ruleContext": "A giant spider makes a powerful long leap.",
+      "context": "Ability: Skakun. A giant spider makes a powerful long leap. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "note": "Style replacement at the exact existing filename; fresh GM approval required. No wiring or world writes.",
+      "styleFeedback": {
+        "iconId": "abilities/skakun",
+        "status": "redo",
+        "source": "icons/abilities/skakun.svg",
+        "sourceSha256": "6616be2a54fe7dd9ffef7b11dc3f5001982aeccbad8ec078d197bbaabc401883",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:09:39.296Z"
+      },
+      "request": "ONE SPIDER in a clear sideways LEAP over ONE low rock: ONE oval abdomen, one smaller connected cephalothorax, EIGHT thick complete bent legs and two short fangs. Four legs visible on each side, natural spider anatomy. One broad short launch streak behind it. No hair, tiny eyes, intricate joints or extra legs."
+    },
+    {
+      "kind": "feature",
+      "key": "szara-eminencja",
+      "name": "Szara Eminencja",
+      "owner": "style-review",
+      "ownerLabel": "Style review",
+      "cell": 7,
+      "target": "icons/abilities/szara-eminencja.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szara-eminencja.svg",
+          "variant": "default",
+          "sourceSha256": "26f2c1ad6c13b50274bc07252608dbe2a3a8fa8adc68204157e411276abafb29"
+        }
+      ],
+      "itemId": "style103-szara-eminencja",
+      "ruleContext": "An inconspicuous person hides among more noticeable people.",
+      "context": "Ability: Szara Eminencja. An inconspicuous person hides among more noticeable people. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "note": "Style replacement at the exact existing filename; fresh GM approval required. No wiring or world writes.",
+      "styleFeedback": {
+        "iconId": "abilities/szara-eminencja",
+        "status": "redo",
+        "source": "icons/abilities/szara-eminencja.svg",
+        "sourceSha256": "26f2c1ad6c13b50274bc07252608dbe2a3a8fa8adc68204157e411276abafb29",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:10:04.311Z"
+      },
+      "request": "THREE simple generic adult upper-body silhouettes standing close: TWO larger broad figures in FRONT, and ONE smaller full smooth head and narrow shoulders partially concealed BETWEEN and BEHIND them. Strong white masses separated by broad black gaps. The concealed person has no face; front heads in simple profile. No gruff portraits, beards, cloak texture, eyes, anime or text."
+    },
+    {
+      "kind": "feature",
+      "key": "szarpanie",
+      "name": "Szarpanie",
+      "owner": "style-review",
+      "ownerLabel": "Style review",
+      "cell": 8,
+      "target": "icons/abilities/szarpanie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szarpanie.svg",
+          "variant": "default",
+          "sourceSha256": "fe1f81639adf52e3b99e7a43efd7abaf1714e4ca0039011cb394ae2c146d0245"
+        }
+      ],
+      "itemId": "style103-szarpanie",
+      "ruleContext": "A mutant dog clamps onto and tears at a grabbed limb.",
+      "context": "Ability: Szarpanie. A mutant dog clamps onto and tears at a grabbed limb. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "note": "Style replacement at the exact existing filename; fresh GM approval required. No wiring or world writes.",
+      "styleFeedback": {
+        "iconId": "abilities/szarpanie",
+        "status": "redo",
+        "source": "icons/abilities/szarpanie.svg",
+        "sourceSha256": "fe1f81639adf52e3b99e7a43efd7abaf1714e4ca0039011cb394ae2c146d0245",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:10:09.023Z"
+      },
+      "request": "ONE natural CANINE HEAD in side profile gripping ONE broad rolled piece of cloth between its jaws, with TWO broad short opposing pull strokes. Strong muzzle, triangular ear, one simple eye cut and two large teeth only. No whole victim, severed limb, blood, fur texture, extra jaws or fine teeth."
+    },
+    {
+      "kind": "feature",
+      "key": "taca-i-w-nogi",
+      "name": "Tacą i w nogi",
+      "owner": "style-review",
+      "ownerLabel": "Style review",
+      "cell": 9,
+      "target": "icons/abilities/taca-i-w-nogi.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/taca-i-w-nogi.svg",
+          "variant": "default",
+          "sourceSha256": "4272d8941f5ceb46ec0963b746f990623449e02aaa632ef8c4c8b46f9fa89645"
+        }
+      ],
+      "itemId": "style103-taca-i-w-nogi",
+      "ruleContext": "A waiter strikes with a tray then escapes quickly.",
+      "context": "Ability: Tacą i w nogi. A waiter strikes with a tray then escapes quickly. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "note": "Style replacement at the exact existing filename; fresh GM approval required. No wiring or world writes.",
+      "styleFeedback": {
+        "iconId": "abilities/taca-i-w-nogi",
+        "status": "redo",
+        "source": "icons/abilities/taca-i-w-nogi.svg",
+        "sourceSha256": "4272d8941f5ceb46ec0963b746f990623449e02aaa632ef8c4c8b46f9fa89645",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:10:22.846Z"
+      },
+      "request": "ONE complete generic adult in a compact running pose carries ONE broad SERVING TRAY raised upright at the leading hand like a shield. Natural complete arms and legs, smooth featureless head, plain shirt and trousers. TWO short broad speed strokes behind the back foot. No victim, face, beard, apron detail, crockery, text or gore."
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "title": "Batch 101 · 1 approved subjects delivered; 0 awaiting revision",
-  "updated": "2026-10-16",
+  "title": "Batches 102 + 103 + 104 + 105 · 29 style revisions awaiting GM review",
+  "updated": "2026-10-17",
   "items": [
     {
       "id": "batch90-brutal",
@@ -13743,6 +13743,1150 @@
         }
       ],
       "status": "resolved"
+    },
+    {
+      "id": "style102-logika-roznoboczna",
+      "name": "Logika Różnoboczna",
+      "tier": "Batch 102 · Style review",
+      "batch": 102,
+      "target": "icons/abilities/logika-roznoboczna.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/logika-roznoboczna.svg",
+          "variant": "default",
+          "sourceSha256": "dc44d931476838d92105b526a834f1ba640ccd13743e3ed1dc8d62e021c52efb"
+        }
+      ],
+      "context": "Ability: Logika Różnoboczna. Coordinated melee and flanking improve weapon damage. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "One plain broad SHIELD at center flanked by TWO complete short combat KNIVES pointing inward from opposite sides. The two knives approach the defender from different directions, showing coordinated flanking. Thick black gaps keep all three objects distinct. No people, triangular wall, angles, diagram, runes or measurements.",
+      "styleReview": {
+        "iconId": "abilities/logika-roznoboczna",
+        "status": "redo",
+        "source": "icons/abilities/logika-roznoboczna.svg",
+        "sourceSha256": "dc44d931476838d92105b526a834f1ba640ccd13743e3ed1dc8d62e021c52efb",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:05:25.501Z"
+      },
+      "current": {
+        "src": "/icons/abilities/logika-roznoboczna.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 102 · Logika Różnoboczna",
+          "src": "candidates/batch-102/logika-roznoboczna.png",
+          "note": "One plain broad SHIELD at center flanked by TWO complete short combat KNIVES pointing inward from opposite sides. The two knives approach the defender from different directions, showing coordinated flanking. Thick black gaps keep all three objects distinct. No people, triangular wall, angles, diagram, runes or measurements."
+        }
+      ]
+    },
+    {
+      "id": "style102-doktor-quinn",
+      "name": "Doktor Quinn",
+      "tier": "Batch 102 · Style review",
+      "batch": 102,
+      "target": "icons/abilities/doktor-quinn.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/doktor-quinn.svg",
+          "variant": "default",
+          "sourceSha256": "2d2c62da17b68d3a5b47c160d98c8d8ac3e68e46868aaeb90a5edec3503f4e73"
+        }
+      ],
+      "context": "Ability: Doktor Quinn. Medical training improves treatment checks. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE complete bare adult HAND wraps ONE broad clean BANDAGE around ONE intact forearm. A short loose bandage roll remains visible beside the wrist. Natural anatomy, broad overlapping cloth strips with just TWO black dividing cuts. Medical care without a portrait, needles, blood, tiny fingers or fabric texture.",
+      "styleReview": {
+        "iconId": "abilities/doktor-quinn",
+        "status": "redo",
+        "source": "icons/abilities/doktor-quinn.svg",
+        "sourceSha256": "2d2c62da17b68d3a5b47c160d98c8d8ac3e68e46868aaeb90a5edec3503f4e73",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:06:38.962Z"
+      },
+      "current": {
+        "src": "/icons/abilities/doktor-quinn.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 102 · Doktor Quinn",
+          "src": "candidates/batch-102/doktor-quinn.png",
+          "note": "ONE complete bare adult HAND wraps ONE broad clean BANDAGE around ONE intact forearm. A short loose bandage roll remains visible beside the wrist. Natural anatomy, broad overlapping cloth strips with just TWO black dividing cuts. Medical care without a portrait, needles, blood, tiny fingers or fabric texture."
+        }
+      ]
+    },
+    {
+      "id": "style102-fart",
+      "name": "Fart",
+      "tier": "Batch 102 · Style review",
+      "batch": 102,
+      "target": "icons/abilities/fart.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/fart.svg",
+          "variant": "default",
+          "sourceSha256": "e859293a7c7cdfd65610d16e6042104a590f47f2a9673289c3d06aa5c01269ea"
+        }
+      ],
+      "context": "Ability: Fart. A fortunate second chance after a failure. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE ordinary FOUR-LEAF CLOVER with four broad clearly separate heart-shaped leaves attached to ONE short curved stem. Large black separations between the leaves. A grounded physical luck symbol. No dice, cards, game pieces, numerals, reroll arrows, mechanical counters, stars or extra objects.",
+      "styleReview": {
+        "iconId": "abilities/fart",
+        "status": "redo",
+        "source": "icons/abilities/fart.svg",
+        "sourceSha256": "e859293a7c7cdfd65610d16e6042104a590f47f2a9673289c3d06aa5c01269ea",
+        "reasons": [
+          "detail",
+          "dither",
+          "subject"
+        ],
+        "notes": "Also dice. That takes out of the game by directly suggesting mechanics.",
+        "updatedAt": "2026-10-16T22:07:13.574Z"
+      },
+      "current": {
+        "src": "/icons/abilities/fart.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither, subject. Also dice. That takes out of the game by directly suggesting mechanics."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 102 · Fart",
+          "src": "candidates/batch-102/fart.png",
+          "note": "ONE ordinary FOUR-LEAF CLOVER with four broad clearly separate heart-shaped leaves attached to ONE short curved stem. Large black separations between the leaves. A grounded physical luck symbol. No dice, cards, game pieces, numerals, reroll arrows, mechanical counters, stars or extra objects."
+        }
+      ]
+    },
+    {
+      "id": "style102-ja-juz-swoje-odchorowalem",
+      "name": "Ja już swoje odchorowałem",
+      "tier": "Batch 102 · Style review",
+      "batch": 102,
+      "target": "icons/abilities/ja-juz-swoje-odchorowalem.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ja-juz-swoje-odchorowalem.svg",
+          "variant": "default",
+          "sourceSha256": "005386cdc9cb9b29df7a3bd967ecda88fae2c9e561bf71835d44ced92532dbc5"
+        }
+      ],
+      "context": "Ability: Ja już swoje odchorowałem. Resilience against illness and other bodily hazards. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE broad plain SHIELD with ONE simple medical PLUS cut out of its center; TWO large simple disease particles stop outside its outer edge. Each particle is one plain circle with four short broad prongs. Exactly shield and two particles, no person, face, scratches, fine rays or texture.",
+      "styleReview": {
+        "iconId": "abilities/ja-juz-swoje-odchorowalem",
+        "status": "redo",
+        "source": "icons/abilities/ja-juz-swoje-odchorowalem.svg",
+        "sourceSha256": "005386cdc9cb9b29df7a3bd967ecda88fae2c9e561bf71835d44ced92532dbc5",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:07:36.683Z"
+      },
+      "current": {
+        "src": "/icons/abilities/ja-juz-swoje-odchorowalem.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 102 · Ja już swoje odchorowałem",
+          "src": "candidates/batch-102/ja-juz-swoje-odchorowalem.png",
+          "note": "ONE broad plain SHIELD with ONE simple medical PLUS cut out of its center; TWO large simple disease particles stop outside its outer edge. Each particle is one plain circle with four short broad prongs. Exactly shield and two particles, no person, face, scratches, fine rays or texture."
+        }
+      ]
+    },
+    {
+      "id": "style102-kuchenny-terror",
+      "name": "Kuchenny Terror",
+      "tier": "Batch 102 · Style review",
+      "batch": 102,
+      "target": "icons/abilities/kuchenny-terror.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/kuchenny-terror.svg",
+          "variant": "default",
+          "sourceSha256": "49d5f51e50496194dfd944a83a980c35ba79902f0bf7ce6255b1a33e10920f27"
+        }
+      ],
+      "context": "Ability: Kuchenny Terror. A cook intimidates intruders using a kitchen tool. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE complete heavy kitchen CLEAVER beside ONE plain tied COOK'S APRON. Broad rectangular blade with one clean edge, stout complete handle. Apron has a broad bib, simple waist ties and an uninterrupted hem. No cook, face, victim, writing, tiny pocket, stitching, blood or gore.",
+      "styleReview": {
+        "iconId": "abilities/kuchenny-terror",
+        "status": "redo",
+        "source": "icons/abilities/kuchenny-terror.svg",
+        "sourceSha256": "49d5f51e50496194dfd944a83a980c35ba79902f0bf7ce6255b1a33e10920f27",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:07:47.988Z"
+      },
+      "current": {
+        "src": "/icons/abilities/kuchenny-terror.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 102 · Kuchenny Terror",
+          "src": "candidates/batch-102/kuchenny-terror.png",
+          "note": "ONE complete heavy kitchen CLEAVER beside ONE plain tied COOK'S APRON. Broad rectangular blade with one clean edge, stout complete handle. Apron has a broad bib, simple waist ties and an uninterrupted hem. No cook, face, victim, writing, tiny pocket, stitching, blood or gore."
+        }
+      ]
+    },
+    {
+      "id": "style102-mlynek",
+      "name": "Młynek",
+      "tier": "Batch 102 · Style review",
+      "batch": 102,
+      "target": "icons/abilities/mlynek.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/mlynek.svg",
+          "variant": "default",
+          "sourceSha256": "c0c2389b2c428a7888224e39695bdc5d92f888c8cbc98684443bd9f743b12ce8"
+        }
+      ],
+      "context": "Ability: Młynek. A sweeping melee attack reaches several nearby enemies. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE complete stout combat BATON with ONE broad clean curved SWEEP surrounding its tip and THREE small plain shield silhouettes spaced outside the sweep. Coherent compact sweeping attack motif. No arrows, numerals, faces, full crowd, impact debris or multiple thin trails.",
+      "styleReview": {
+        "iconId": "abilities/mlynek",
+        "status": "redo",
+        "source": "icons/abilities/mlynek.svg",
+        "sourceSha256": "c0c2389b2c428a7888224e39695bdc5d92f888c8cbc98684443bd9f743b12ce8",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:07:59.071Z"
+      },
+      "current": {
+        "src": "/icons/abilities/mlynek.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 102 · Młynek",
+          "src": "candidates/batch-102/mlynek.png",
+          "note": "ONE complete stout combat BATON with ONE broad clean curved SWEEP surrounding its tip and THREE small plain shield silhouettes spaced outside the sweep. Coherent compact sweeping attack motif. No arrows, numerals, faces, full crowd, impact debris or multiple thin trails."
+        }
+      ]
+    },
+    {
+      "id": "style102-naprawianie",
+      "name": "Naprawianie",
+      "tier": "Batch 102 · Style review",
+      "batch": 102,
+      "target": "icons/abilities/naprawianie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/naprawianie.svg",
+          "variant": "default",
+          "sourceSha256": "2a46fa053ff7b86452f7e13b78a8267e43655f52dd0524d84af1e7113383e1f1"
+        }
+      ],
+      "context": "Ability: Naprawianie. An engineering device repairs an adjacent machine. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE sturdy simplified ROBOTIC ARM ending in a broad OPEN-END WRENCH that grips ONE large hexagonal NUT. Arm has only TWO thick linked segments and TWO large joints on one small base. Exactly actual repair equipment, no giant cog, tiny cables, panel screws, sparks or lettering.",
+      "styleReview": {
+        "iconId": "abilities/naprawianie",
+        "status": "redo",
+        "source": "icons/abilities/naprawianie.svg",
+        "sourceSha256": "2a46fa053ff7b86452f7e13b78a8267e43655f52dd0524d84af1e7113383e1f1",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:08:10.150Z"
+      },
+      "current": {
+        "src": "/icons/abilities/naprawianie.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 102 · Naprawianie",
+          "src": "candidates/batch-102/naprawianie.png",
+          "note": "ONE sturdy simplified ROBOTIC ARM ending in a broad OPEN-END WRENCH that grips ONE large hexagonal NUT. Arm has only TWO thick linked segments and TWO large joints on one small base. Exactly actual repair equipment, no giant cog, tiny cables, panel screws, sparks or lettering."
+        }
+      ]
+    },
+    {
+      "id": "style102-odporny",
+      "name": "Odporny",
+      "tier": "Batch 102 · Style review",
+      "batch": 102,
+      "target": "icons/abilities/odporny.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/odporny.svg",
+          "variant": "default",
+          "sourceSha256": "5dfe6297fc4d7d0fa012f6129dc6a6dc24417e94a461b29d3d0ca5ea88c529c2"
+        }
+      ],
+      "context": "Ability: Odporny. A hardy horse tolerates polluted water and poor feed. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE natural HORSE HEAD and neck in simple side profile, muzzle lowered toward ONE small water bowl. One broad black mane separation and ONE small eye cut only. Two broad concentric water arcs in the bowl. No human, bridle fittings, hair strands, bubbles, mushrooms, textured fur or skull.",
+      "styleReview": {
+        "iconId": "abilities/odporny",
+        "status": "redo",
+        "source": "icons/abilities/odporny.svg",
+        "sourceSha256": "5dfe6297fc4d7d0fa012f6129dc6a6dc24417e94a461b29d3d0ca5ea88c529c2",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:08:23.605Z"
+      },
+      "current": {
+        "src": "/icons/abilities/odporny.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 102 · Odporny",
+          "src": "candidates/batch-102/odporny.png",
+          "note": "ONE natural HORSE HEAD and neck in simple side profile, muzzle lowered toward ONE small water bowl. One broad black mane separation and ONE small eye cut only. Two broad concentric water arcs in the bowl. No human, bridle fittings, hair strands, bubbles, mushrooms, textured fur or skull."
+        }
+      ]
+    },
+    {
+      "id": "style102-patriota",
+      "name": "Patriota",
+      "tier": "Batch 102 · Style review",
+      "batch": 102,
+      "target": "icons/abilities/patriota.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/patriota.svg",
+          "variant": "default",
+          "sourceSha256": "9151ff746b0ebc0c3c86b20fb9511a946cc86bf7fef4e1e6b7ec2822c27ebb06"
+        }
+      ],
+      "context": "Ability: Patriota. Pride in one's origin grants additional training. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE complete bare adult HAND presses flat over ONE large plain CLOTH PATCH attached to a simple shoulder-shaped panel. The patch is a broad blank rectangle with ONE large diagonal black stripe. Natural hand with grouped fingers and one separate thumb. No face, flag of any real nation, insignia, text, stitching or game token.",
+      "styleReview": {
+        "iconId": "abilities/patriota",
+        "status": "redo",
+        "source": "icons/abilities/patriota.svg",
+        "sourceSha256": "9151ff746b0ebc0c3c86b20fb9511a946cc86bf7fef4e1e6b7ec2822c27ebb06",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:08:36.385Z"
+      },
+      "current": {
+        "src": "/icons/abilities/patriota.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 102 · Patriota",
+          "src": "candidates/batch-102/patriota.png",
+          "note": "ONE complete bare adult HAND presses flat over ONE large plain CLOTH PATCH attached to a simple shoulder-shaped panel. The patch is a broad blank rectangle with ONE large diagonal black stripe. Natural hand with grouped fingers and one separate thumb. No face, flag of any real nation, insignia, text, stitching or game token."
+        }
+      ]
+    },
+    {
+      "id": "style103-prog-awarii",
+      "name": "Próg awarii",
+      "tier": "Batch 103 · Style review",
+      "batch": 103,
+      "target": "icons/abilities/prog-awarii.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/prog-awarii.svg",
+          "variant": "default",
+          "sourceSha256": "c75daa7d763f1c448fb5412573766513450334e031c6ace1469662f163cc17b2"
+        }
+      ],
+      "context": "Ability: Próg awarii. A machine malfunctions after enough accumulated damage. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE squat industrial MOTOR HOUSING split by ONE broad zigzag BLACK CRACK, with ONE large loose bolt lying below. Thick simple casing, two broad cooling-slot cuts, no gauge, scale, numeral, little wires, smoke, debris cloud or fine damage texture.",
+      "styleReview": {
+        "iconId": "abilities/prog-awarii",
+        "status": "redo",
+        "source": "icons/abilities/prog-awarii.svg",
+        "sourceSha256": "c75daa7d763f1c448fb5412573766513450334e031c6ace1469662f163cc17b2",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:08:48.702Z"
+      },
+      "current": {
+        "src": "/icons/abilities/prog-awarii.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 103 · Próg awarii",
+          "src": "candidates/batch-103/prog-awarii.png",
+          "note": "ONE squat industrial MOTOR HOUSING split by ONE broad zigzag BLACK CRACK, with ONE large loose bolt lying below. Thick simple casing, two broad cooling-slot cuts, no gauge, scale, numeral, little wires, smoke, debris cloud or fine damage texture."
+        }
+      ]
+    },
+    {
+      "id": "style103-przyspieszenie",
+      "name": "Przyspieszenie",
+      "tier": "Batch 103 · Style review",
+      "batch": 103,
+      "target": "icons/abilities/przyspieszenie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/przyspieszenie.svg",
+          "variant": "default",
+          "sourceSha256": "f294bc506fa503f8d73b051f0a6d3e134a799b9cb992567df13ca672c36a47ee"
+        }
+      ],
+      "context": "Ability: Przyspieszenie. A winged creature rapidly dashes or hides. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE streamlined broad-winged WASP-LIKE CREATURE in clear side profile flying diagonally upward, with TWO short broad speed strokes behind it. Simple oval abdomen, two broad wings, six short complete legs grouped below the body, two antennae. No tiny veins, hair, teeth, face expression or detailed armor.",
+      "styleReview": {
+        "iconId": "abilities/przyspieszenie",
+        "status": "redo",
+        "source": "icons/abilities/przyspieszenie.svg",
+        "sourceSha256": "f294bc506fa503f8d73b051f0a6d3e134a799b9cb992567df13ca672c36a47ee",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:08:53.765Z"
+      },
+      "current": {
+        "src": "/icons/abilities/przyspieszenie.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 103 · Przyspieszenie",
+          "src": "candidates/batch-103/przyspieszenie.png",
+          "note": "ONE streamlined broad-winged WASP-LIKE CREATURE in clear side profile flying diagonally upward, with TWO short broad speed strokes behind it. Simple oval abdomen, two broad wings, six short complete legs grouped below the body, two antennae. No tiny veins, hair, teeth, face expression or detailed armor."
+        }
+      ]
+    },
+    {
+      "id": "style103-rozkaz-likwidacji",
+      "name": "Rozkaz Likwidacji",
+      "tier": "Batch 103 · Style review",
+      "batch": 103,
+      "target": "icons/abilities/rozkaz-likwidacji.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/rozkaz-likwidacji.svg",
+          "variant": "default",
+          "sourceSha256": "01a3e9d892437d576716d91fb43a5ebbb8256fa6fb7c525a88e3bdcc13c41f93"
+        }
+      ],
+      "context": "Ability: Rozkaz Likwidacji. A quiet command lets an ally make an immediate weapon attack. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE complete adult HAND gives a clear forward POINTING gesture beside ONE complete compact RIFLE in side profile aimed in the same direction. Index extended, other fingers folded coherently with one visible thumb. Rifle has simple stock, receiver, complete grip and straight barrel. No people, victim, blood, speech bubble, writing or shooting rays.",
+      "styleReview": {
+        "iconId": "abilities/rozkaz-likwidacji",
+        "status": "redo",
+        "source": "icons/abilities/rozkaz-likwidacji.svg",
+        "sourceSha256": "01a3e9d892437d576716d91fb43a5ebbb8256fa6fb7c525a88e3bdcc13c41f93",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:09:09.031Z"
+      },
+      "current": {
+        "src": "/icons/abilities/rozkaz-likwidacji.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 103 · Rozkaz Likwidacji",
+          "src": "candidates/batch-103/rozkaz-likwidacji.png",
+          "note": "ONE complete adult HAND gives a clear forward POINTING gesture beside ONE complete compact RIFLE in side profile aimed in the same direction. Index extended, other fingers folded coherently with one visible thumb. Rifle has simple stock, receiver, complete grip and straight barrel. No people, victim, blood, speech bubble, writing or shooting rays."
+        }
+      ]
+    },
+    {
+      "id": "style103-roznorodne-ataki",
+      "name": "Różnorodne ataki",
+      "tier": "Batch 103 · Style review",
+      "batch": 103,
+      "target": "icons/abilities/roznorodne-ataki.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/roznorodne-ataki.svg",
+          "variant": "default",
+          "sourceSha256": "4e5fc009bd91c06ca413e362fa4bfc486d715f37d7ebd471f211a977e22c10da"
+        }
+      ],
+      "context": "Ability: Różnorodne ataki. A combat robot attacks with several different weapons. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "A compact fan of FOUR complete simple tools: ONE broad HAMMER, ONE short KNIFE, ONE CIRCULAR SAW on a short handle, and ONE short CHAIN FLAIL with a plain solid ball. Distinct silhouettes with thick black gaps, no robot body, tracks, tiny chain links, bolts, dice, arrows or labels.",
+      "styleReview": {
+        "iconId": "abilities/roznorodne-ataki",
+        "status": "redo",
+        "source": "icons/abilities/roznorodne-ataki.svg",
+        "sourceSha256": "4e5fc009bd91c06ca413e362fa4bfc486d715f37d7ebd471f211a977e22c10da",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:09:13.127Z"
+      },
+      "current": {
+        "src": "/icons/abilities/roznorodne-ataki.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 103 · Różnorodne ataki",
+          "src": "candidates/batch-103/roznorodne-ataki.png",
+          "note": "A compact fan of FOUR complete simple tools: ONE broad HAMMER, ONE short KNIFE, ONE CIRCULAR SAW on a short handle, and ONE short CHAIN FLAIL with a plain solid ball. Distinct silhouettes with thick black gaps, no robot body, tracks, tiny chain links, bolts, dice, arrows or labels."
+        }
+      ]
+    },
+    {
+      "id": "style103-siodme-poty",
+      "name": "Siódme poty",
+      "tier": "Batch 103 · Style review",
+      "batch": 103,
+      "target": "icons/abilities/siodme-poty.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/siodme-poty.svg",
+          "variant": "default",
+          "sourceSha256": "3c151c5f915b0e845f6dcf2f0b9b69c7c22df023e0eb7fd048d76cfadce77c59"
+        }
+      ],
+      "context": "Ability: Siódme poty. Skilled driving pushes a vehicle to greater speed. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE complete rugged GAS PEDAL being pressed by ONE sturdy complete BOOT, in simple side profile, with TWO broad short speed strokes behind the heel. Thick sole, simple pedal hinge and base, one broad tread cut only. No steering wheel, hands, sweat drops, fine laces, numeral or gauge.",
+      "styleReview": {
+        "iconId": "abilities/siodme-poty",
+        "status": "redo",
+        "source": "icons/abilities/siodme-poty.svg",
+        "sourceSha256": "3c151c5f915b0e845f6dcf2f0b9b69c7c22df023e0eb7fd048d76cfadce77c59",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:09:35.615Z"
+      },
+      "current": {
+        "src": "/icons/abilities/siodme-poty.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 103 · Siódme poty",
+          "src": "candidates/batch-103/siodme-poty.png",
+          "note": "ONE complete rugged GAS PEDAL being pressed by ONE sturdy complete BOOT, in simple side profile, with TWO broad short speed strokes behind the heel. Thick sole, simple pedal hinge and base, one broad tread cut only. No steering wheel, hands, sweat drops, fine laces, numeral or gauge."
+        }
+      ]
+    },
+    {
+      "id": "style103-skakun",
+      "name": "Skakun",
+      "tier": "Batch 103 · Style review",
+      "batch": 103,
+      "target": "icons/abilities/skakun.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/skakun.svg",
+          "variant": "default",
+          "sourceSha256": "6616be2a54fe7dd9ffef7b11dc3f5001982aeccbad8ec078d197bbaabc401883"
+        }
+      ],
+      "context": "Ability: Skakun. A giant spider makes a powerful long leap. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE SPIDER in a clear sideways LEAP over ONE low rock: ONE oval abdomen, one smaller connected cephalothorax, EIGHT thick complete bent legs and two short fangs. Four legs visible on each side, natural spider anatomy. One broad short launch streak behind it. No hair, tiny eyes, intricate joints or extra legs.",
+      "styleReview": {
+        "iconId": "abilities/skakun",
+        "status": "redo",
+        "source": "icons/abilities/skakun.svg",
+        "sourceSha256": "6616be2a54fe7dd9ffef7b11dc3f5001982aeccbad8ec078d197bbaabc401883",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:09:39.296Z"
+      },
+      "current": {
+        "src": "/icons/abilities/skakun.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 103 · Skakun",
+          "src": "candidates/batch-103/skakun.png",
+          "note": "ONE SPIDER in a clear sideways LEAP over ONE low rock: ONE oval abdomen, one smaller connected cephalothorax, EIGHT thick complete bent legs and two short fangs. Four legs visible on each side, natural spider anatomy. One broad short launch streak behind it. No hair, tiny eyes, intricate joints or extra legs."
+        }
+      ]
+    },
+    {
+      "id": "style103-szara-eminencja",
+      "name": "Szara Eminencja",
+      "tier": "Batch 103 · Style review",
+      "batch": 103,
+      "target": "icons/abilities/szara-eminencja.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szara-eminencja.svg",
+          "variant": "default",
+          "sourceSha256": "26f2c1ad6c13b50274bc07252608dbe2a3a8fa8adc68204157e411276abafb29"
+        }
+      ],
+      "context": "Ability: Szara Eminencja. An inconspicuous person hides among more noticeable people. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "THREE simple generic adult upper-body silhouettes standing close: TWO larger broad figures in FRONT, and ONE smaller full smooth head and narrow shoulders partially concealed BETWEEN and BEHIND them. Strong white masses separated by broad black gaps. The concealed person has no face; front heads in simple profile. No gruff portraits, beards, cloak texture, eyes, anime or text.",
+      "styleReview": {
+        "iconId": "abilities/szara-eminencja",
+        "status": "redo",
+        "source": "icons/abilities/szara-eminencja.svg",
+        "sourceSha256": "26f2c1ad6c13b50274bc07252608dbe2a3a8fa8adc68204157e411276abafb29",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:10:04.311Z"
+      },
+      "current": {
+        "src": "/icons/abilities/szara-eminencja.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 103 · Szara Eminencja",
+          "src": "candidates/batch-103/szara-eminencja.png",
+          "note": "THREE simple generic adult upper-body silhouettes standing close: TWO larger broad figures in FRONT, and ONE smaller full smooth head and narrow shoulders partially concealed BETWEEN and BEHIND them. Strong white masses separated by broad black gaps. The concealed person has no face; front heads in simple profile. No gruff portraits, beards, cloak texture, eyes, anime or text."
+        }
+      ]
+    },
+    {
+      "id": "style103-szarpanie",
+      "name": "Szarpanie",
+      "tier": "Batch 103 · Style review",
+      "batch": 103,
+      "target": "icons/abilities/szarpanie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szarpanie.svg",
+          "variant": "default",
+          "sourceSha256": "fe1f81639adf52e3b99e7a43efd7abaf1714e4ca0039011cb394ae2c146d0245"
+        }
+      ],
+      "context": "Ability: Szarpanie. A mutant dog clamps onto and tears at a grabbed limb. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE natural CANINE HEAD in side profile gripping ONE broad rolled piece of cloth between its jaws, with TWO broad short opposing pull strokes. Strong muzzle, triangular ear, one simple eye cut and two large teeth only. No whole victim, severed limb, blood, fur texture, extra jaws or fine teeth.",
+      "styleReview": {
+        "iconId": "abilities/szarpanie",
+        "status": "redo",
+        "source": "icons/abilities/szarpanie.svg",
+        "sourceSha256": "fe1f81639adf52e3b99e7a43efd7abaf1714e4ca0039011cb394ae2c146d0245",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:10:09.023Z"
+      },
+      "current": {
+        "src": "/icons/abilities/szarpanie.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 103 · Szarpanie",
+          "src": "candidates/batch-103/szarpanie.png",
+          "note": "ONE natural CANINE HEAD in side profile gripping ONE broad rolled piece of cloth between its jaws, with TWO broad short opposing pull strokes. Strong muzzle, triangular ear, one simple eye cut and two large teeth only. No whole victim, severed limb, blood, fur texture, extra jaws or fine teeth."
+        }
+      ]
+    },
+    {
+      "id": "style103-taca-i-w-nogi",
+      "name": "Tacą i w nogi",
+      "tier": "Batch 103 · Style review",
+      "batch": 103,
+      "target": "icons/abilities/taca-i-w-nogi.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/taca-i-w-nogi.svg",
+          "variant": "default",
+          "sourceSha256": "4272d8941f5ceb46ec0963b746f990623449e02aaa632ef8c4c8b46f9fa89645"
+        }
+      ],
+      "context": "Ability: Tacą i w nogi. A waiter strikes with a tray then escapes quickly. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE complete generic adult in a compact running pose carries ONE broad SERVING TRAY raised upright at the leading hand like a shield. Natural complete arms and legs, smooth featureless head, plain shirt and trousers. TWO short broad speed strokes behind the back foot. No victim, face, beard, apron detail, crockery, text or gore.",
+      "styleReview": {
+        "iconId": "abilities/taca-i-w-nogi",
+        "status": "redo",
+        "source": "icons/abilities/taca-i-w-nogi.svg",
+        "sourceSha256": "4272d8941f5ceb46ec0963b746f990623449e02aaa632ef8c4c8b46f9fa89645",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:10:22.846Z"
+      },
+      "current": {
+        "src": "/icons/abilities/taca-i-w-nogi.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 103 · Tacą i w nogi",
+          "src": "candidates/batch-103/taca-i-w-nogi.png",
+          "note": "ONE complete generic adult in a compact running pose carries ONE broad SERVING TRAY raised upright at the leading hand like a shield. Natural complete arms and legs, smooth featureless head, plain shirt and trousers. TWO short broad speed strokes behind the back foot. No victim, face, beard, apron detail, crockery, text or gore."
+        }
+      ]
+    },
+    {
+      "id": "style104-tanczace-pily",
+      "name": "Tańczące piły",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/tanczace-pily.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/tanczace-pily.svg",
+          "variant": "default",
+          "sourceSha256": "bc10bf45e8c50157464d4d784c069a08139e10da323f800c1ae196386084b51a"
+        }
+      ],
+      "context": "Ability: Tańczące piły. A robot sweeps spinning saws through nearby enemies. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "TWO complete CIRCULAR SAW BLADES on TWO short stout articulated TOOL ARMS, sweeping opposite sides of ONE small central mechanical mounting block. Each blade is a plain disk with EIGHT large teeth and ONE large central hole. ONE broad curved sweep behind each blade. No entire robot, tracks, fine teeth, tiny bolts, blood or extra blade.",
+      "styleReview": {
+        "iconId": "abilities/tanczace-pily",
+        "status": "redo",
+        "source": "icons/abilities/tanczace-pily.svg",
+        "sourceSha256": "bc10bf45e8c50157464d4d784c069a08139e10da323f800c1ae196386084b51a",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:10:28.231Z"
+      },
+      "current": {
+        "src": "/icons/abilities/tanczace-pily.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Tańczące piły",
+          "src": "candidates/batch-104/tanczace-pily.png",
+          "note": "TWO complete CIRCULAR SAW BLADES on TWO short stout articulated TOOL ARMS, sweeping opposite sides of ONE small central mechanical mounting block. Each blade is a plain disk with EIGHT large teeth and ONE large central hole. ONE broad curved sweep behind each blade. No entire robot, tracks, fine teeth, tiny bolts, blood or extra blade."
+        }
+      ]
+    },
+    {
+      "id": "style104-tryb-turbo",
+      "name": "Tryb Turbo",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/tryb-turbo.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/tryb-turbo.svg",
+          "variant": "default",
+          "sourceSha256": "ca5c334cb1ac92b5ca2c8ecb2990ad504167e31bcbbd1b3f373fc2735ba55118"
+        }
+      ],
+      "context": "Ability: Tryb Turbo. A multi-legged combat machine temporarily moves and strikes faster. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE compact SIX-LEGGED INDUSTRIAL WALKER in three-quarter side view, moving forward with TWO broad speed strokes behind it. One plain rectangular body, SIX stout legs each with ONE simple elbow and ONE complete broad foot, three legs on each side. One broad side panel cut. No gun, smoke plume, microdetail, cables, people or text.",
+      "styleReview": {
+        "iconId": "abilities/tryb-turbo",
+        "status": "redo",
+        "source": "icons/abilities/tryb-turbo.svg",
+        "sourceSha256": "ca5c334cb1ac92b5ca2c8ecb2990ad504167e31bcbbd1b3f373fc2735ba55118",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:10:40.212Z"
+      },
+      "current": {
+        "src": "/icons/abilities/tryb-turbo.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Tryb Turbo",
+          "src": "candidates/batch-104/tryb-turbo.png",
+          "note": "ONE compact SIX-LEGGED INDUSTRIAL WALKER in three-quarter side view, moving forward with TWO broad speed strokes behind it. One plain rectangular body, SIX stout legs each with ONE simple elbow and ONE complete broad foot, three legs on each side. One broad side panel cut. No gun, smoke plume, microdetail, cables, people or text."
+        }
+      ]
+    },
+    {
+      "id": "style104-twierdzenie-kata-prostego",
+      "name": "Twierdzenie Kąta Prostego",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/twierdzenie-kata-prostego.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/twierdzenie-kata-prostego.svg",
+          "variant": "default",
+          "sourceSha256": "31e78fa56154b4104741b6b7cc6ebd831656095c90b6cd27fdf369ecaf312725"
+        }
+      ],
+      "context": "Ability: Twierdzenie Kąta Prostego. A timely melee interception halts an approaching enemy. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE plain generic adult GUARD at LEFT braces and thrusts ONE short broad BATON horizontally toward the upper torso of ONE approaching generic adult at RIGHT. The approaching figure visibly STOPS, leaning back with one foot firmly planted and palms raised. Exactly two complete natural adult silhouettes, featureless heads and broad black separation. Clear melee interception; no geometric wall, right-angle symbol, diagram, arrow, blood or tiny details.",
+      "styleReview": {
+        "iconId": "abilities/twierdzenie-kata-prostego",
+        "status": "redo",
+        "source": "icons/abilities/twierdzenie-kata-prostego.svg",
+        "sourceSha256": "31e78fa56154b4104741b6b7cc6ebd831656095c90b6cd27fdf369ecaf312725",
+        "reasons": [
+          "detail",
+          "other"
+        ],
+        "notes": "Unclear graphical intent.",
+        "updatedAt": "2026-10-16T22:11:04.278Z"
+      },
+      "current": {
+        "src": "/icons/abilities/twierdzenie-kata-prostego.svg",
+        "note": "Existing shipped art flagged for style revision: detail, other. Unclear graphical intent."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Twierdzenie Kąta Prostego",
+          "src": "candidates/batch-104/twierdzenie-kata-prostego.png",
+          "note": "ONE plain generic adult GUARD at LEFT braces and thrusts ONE short broad BATON horizontally toward the upper torso of ONE approaching generic adult at RIGHT. The approaching figure visibly STOPS, leaning back with one foot firmly planted and palms raised. Exactly two complete natural adult silhouettes, featureless heads and broad black separation. Clear melee interception; no geometric wall, right-angle symbol, diagram, arrow, blood or tiny details."
+        }
+      ]
+    },
+    {
+      "id": "style104-tylko-zwarcie",
+      "name": "Tylko zwarcie",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/tylko-zwarcie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/tylko-zwarcie.svg",
+          "variant": "default",
+          "sourceSha256": "ce21c07be39d4e6477f48757e1a010d594233f496644d906a4f674e5665069fa"
+        }
+      ],
+      "context": "Ability: Tylko zwarcie. An undead creature can attack only in close combat. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "TWO broad complete grasping HUMAN HANDS reaching forward, palms slightly downward, with short plain ragged sleeve ends. Complete thumbs and grouped natural fingers, ONE large black gap between hands. No gun, crossed-out symbol, face, head, bone, gore, fingernail detail or tiny rags.",
+      "styleReview": {
+        "iconId": "abilities/tylko-zwarcie",
+        "status": "redo",
+        "source": "icons/abilities/tylko-zwarcie.svg",
+        "sourceSha256": "ce21c07be39d4e6477f48757e1a010d594233f496644d906a4f674e5665069fa",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:11.581Z"
+      },
+      "current": {
+        "src": "/icons/abilities/tylko-zwarcie.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Tylko zwarcie",
+          "src": "candidates/batch-104/tylko-zwarcie.png",
+          "note": "TWO broad complete grasping HUMAN HANDS reaching forward, palms slightly downward, with short plain ragged sleeve ends. Complete thumbs and grouped natural fingers, ONE large black gap between hands. No gun, crossed-out symbol, face, head, bone, gore, fingernail detail or tiny rags."
+        }
+      ]
+    },
+    {
+      "id": "style104-wierze",
+      "name": "Wierzę",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/wierze.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wierze.svg",
+          "variant": "default",
+          "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c"
+        }
+      ],
+      "context": "Ability: Wierzę. A small everyday object unexpectedly becomes available. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE complete open adult PALM holds ONE small sturdy plain KEY and ONE short lit CANDLE stands beside the wrist. Key has a broad rounded bow, short shaft and TWO broad teeth. Candle has one simple steady flame. Quiet hopeful discovery, not magic. No person, face, thought bubble, rays, particles, game token, text or fine wick.",
+      "styleReview": {
+        "iconId": "abilities/wierze",
+        "status": "redo",
+        "source": "icons/abilities/wierze.svg",
+        "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:24.996Z"
+      },
+      "current": {
+        "src": "/icons/abilities/wierze.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Wierzę",
+          "src": "candidates/batch-104/wierze.png",
+          "note": "ONE complete open adult PALM holds ONE small sturdy plain KEY and ONE short lit CANDLE stands beside the wrist. Key has a broad rounded bow, short shaft and TWO broad teeth. Candle has one simple steady flame. Quiet hopeful discovery, not magic. No person, face, thought bubble, rays, particles, game token, text or fine wick."
+        }
+      ]
+    },
+    {
+      "id": "style104-wielonozny",
+      "name": "Wielonożny",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/wielonozny.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wielonozny.svg",
+          "variant": "default",
+          "sourceSha256": "588eb40f2878962ff870a67c4cbeb761ac8b899f2cf5e708280ac8898f64d27d"
+        }
+      ],
+      "context": "Ability: Wielonożny. A multi-legged machine moves across difficult ground. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE simple rectangular INDUSTRIAL WALKER BODY on SIX broad articulated LEGS steps over TWO low jagged ROCKS. Three legs on each side, each with one thick elbow and a complete broad foot, all feet visible and clear of rocks. One broad side panel cut. No guns, smoke, bolts, cables, rubble pile, thin joints or extra legs.",
+      "styleReview": {
+        "iconId": "abilities/wielonozny",
+        "status": "redo",
+        "source": "icons/abilities/wielonozny.svg",
+        "sourceSha256": "588eb40f2878962ff870a67c4cbeb761ac8b899f2cf5e708280ac8898f64d27d",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:33.403Z"
+      },
+      "current": {
+        "src": "/icons/abilities/wielonozny.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Wielonożny",
+          "src": "candidates/batch-104/wielonozny.png",
+          "note": "ONE simple rectangular INDUSTRIAL WALKER BODY on SIX broad articulated LEGS steps over TWO low jagged ROCKS. Three legs on each side, each with one thick elbow and a complete broad foot, all feet visible and clear of rocks. One broad side panel cut. No guns, smoke, bolts, cables, rubble pile, thin joints or extra legs."
+        }
+      ]
+    },
+    {
+      "id": "style104-wirujace-kiscienie",
+      "name": "Wirujące kiścienie",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/wirujace-kiscienie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wirujace-kiscienie.svg",
+          "variant": "default",
+          "sourceSha256": "2b8bb6f73adb3b502a185d6aee31173171af229f0e131d04936f1735d612093d"
+        }
+      ],
+      "context": "Ability: Wirujące kiścienie. A robot swings flails around itself to damage and knock down enemies. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "TWO complete CHAIN FLAILS sweeping outward in opposing arcs from ONE small central plain mechanical MOUNT. Each flail has one short stout arm, a chain represented by THREE large connected simple oval links and ONE broad ball with FOUR short blunt spikes. ONE broad sweep per flail, no whole robot, tracks, fine link mesh, blood or extra balls.",
+      "styleReview": {
+        "iconId": "abilities/wirujace-kiscienie",
+        "status": "redo",
+        "source": "icons/abilities/wirujace-kiscienie.svg",
+        "sourceSha256": "2b8bb6f73adb3b502a185d6aee31173171af229f0e131d04936f1735d612093d",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:40.578Z"
+      },
+      "current": {
+        "src": "/icons/abilities/wirujace-kiscienie.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Wirujące kiścienie",
+          "src": "candidates/batch-104/wirujace-kiscienie.png",
+          "note": "TWO complete CHAIN FLAILS sweeping outward in opposing arcs from ONE small central plain mechanical MOUNT. Each flail has one short stout arm, a chain represented by THREE large connected simple oval links and ONE broad ball with FOUR short blunt spikes. ONE broad sweep per flail, no whole robot, tracks, fine link mesh, blood or extra balls."
+        }
+      ]
+    },
+    {
+      "id": "style104-wrazliwosc-na-swiatlo",
+      "name": "Wrażliwość na światło",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+          "variant": "default",
+          "sourceSha256": "e48c8aedc3ef8941ac486c2ea64f2d97499f31242ba40d030be30898431e65a7"
+        }
+      ],
+      "context": "Ability: Wrażliwość na światło. A large rat recoils from strong light. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE natural RAT in simple side profile recoils from ONE plain FLASHLIGHT at RIGHT. The rat crouches low, one forepaw covering its eye, ears folded back; complete body and ONE long curved tail. The light is ONE broad clean cone separated from the rat. No facial expression, fur texture, teeth, tiny whiskers or cartoon anatomy.",
+      "styleReview": {
+        "iconId": "abilities/wrazliwosc-na-swiatlo",
+        "status": "redo",
+        "source": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+        "sourceSha256": "e48c8aedc3ef8941ac486c2ea64f2d97499f31242ba40d030be30898431e65a7",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:46.135Z"
+      },
+      "current": {
+        "src": "/icons/abilities/wrazliwosc-na-swiatlo.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Wrażliwość na światło",
+          "src": "candidates/batch-104/wrazliwosc-na-swiatlo.png",
+          "note": "ONE natural RAT in simple side profile recoils from ONE plain FLASHLIGHT at RIGHT. The rat crouches low, one forepaw covering its eye, ears folded back; complete body and ONE long curved tail. The light is ONE broad clean cone separated from the rat. No facial expression, fur texture, teeth, tiny whiskers or cartoon anatomy."
+        }
+      ]
+    },
+    {
+      "id": "style104-wymagania",
+      "name": "Wymagania",
+      "tier": "Batch 104 · Style review",
+      "batch": 104,
+      "target": "icons/abilities/wymagania.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wymagania.svg",
+          "variant": "default",
+          "sourceSha256": "7a93fc83a0710411564860ca13fb3bc50c5769c95c11f9755ae3caf7120012c1"
+        }
+      ],
+      "context": "Ability: Wymagania. Working animals need suitable feed and clean water. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE plain feed SACK with a broad open top beside ONE complete WATER BUCKET, with TWO large simple grain ears rising from the sack. One broad black fold cut in the sack and one thick bucket handle only. A sober animal-care supply symbol. No animals, faces, pile of props, crossed-out symbol, letters, tiny grain dots or logos.",
+      "styleReview": {
+        "iconId": "abilities/wymagania",
+        "status": "redo",
+        "source": "icons/abilities/wymagania.svg",
+        "sourceSha256": "7a93fc83a0710411564860ca13fb3bc50c5769c95c11f9755ae3caf7120012c1",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:56.594Z"
+      },
+      "current": {
+        "src": "/icons/abilities/wymagania.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Wymagania",
+          "src": "candidates/batch-104/wymagania.png",
+          "note": "ONE plain feed SACK with a broad open top beside ONE complete WATER BUCKET, with TWO large simple grain ears rising from the sack. One broad black fold cut in the sack and one thick bucket handle only. A sober animal-care supply symbol. No animals, faces, pile of props, crossed-out symbol, letters, tiny grain dots or logos."
+        }
+      ]
+    },
+    {
+      "id": "style105-zasloniecie-helmu",
+      "name": "Zasłonięcie hełmu",
+      "tier": "Batch 105 · Style review",
+      "batch": 105,
+      "target": "icons/abilities/zasloniecie-helmu.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zasloniecie-helmu.svg",
+          "variant": "default",
+          "sourceSha256": "ef104c0f5efdc6e989b48ed75f0dfc914eaabcf88e2ac5f5ccb03eab23141836"
+        }
+      ],
+      "context": "Ability: Zasłonięcie hełmu. An automatic helmet seals its protective faceplate. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE complete modern industrial HELMET in three-quarter SIDE PROFILE with ONE large CLOSED PROTECTIVE FACEPLATE. One thick side hinge and ONE broad black visor opening, with ONE broad curved motion stroke above the faceplate showing closure. No person, neck armor, skull, tiny screws, circuitry, gauge, text or fine reflections.",
+      "styleReview": {
+        "iconId": "abilities/zasloniecie-helmu",
+        "status": "redo",
+        "source": "icons/abilities/zasloniecie-helmu.svg",
+        "sourceSha256": "ef104c0f5efdc6e989b48ed75f0dfc914eaabcf88e2ac5f5ccb03eab23141836",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:12:07.307Z"
+      },
+      "current": {
+        "src": "/icons/abilities/zasloniecie-helmu.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 105 · Zasłonięcie hełmu",
+          "src": "candidates/batch-105/zasloniecie-helmu.png",
+          "note": "ONE complete modern industrial HELMET in three-quarter SIDE PROFILE with ONE large CLOSED PROTECTIVE FACEPLATE. One thick side hinge and ONE broad black visor opening, with ONE broad curved motion stroke above the faceplate showing closure. No person, neck armor, skull, tiny screws, circuitry, gauge, text or fine reflections."
+        }
+      ]
+    },
+    {
+      "id": "style105-zawziety-sukinkot",
+      "name": "Zawzięty sukinkot",
+      "tier": "Batch 105 · Style review",
+      "batch": 105,
+      "target": "icons/abilities/zawziety-sukinkot.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawziety-sukinkot.svg",
+          "variant": "default",
+          "sourceSha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3"
+        }
+      ],
+      "context": "Ability: Zawzięty sukinkot. A fallen person gets back up despite severe injury. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE complete generic adult rises from ONE knee: one boot planted, one knee still touching the ground, ONE palm braced on the ground and the other hand pressing the planted thigh. Smooth featureless head, natural ordinary build, broad simple clothing. A determined rising pose without an arrow. No beard portrait, injuries, blood, torn fine fabric, texture or extra limb.",
+      "styleReview": {
+        "iconId": "abilities/zawziety-sukinkot",
+        "status": "redo",
+        "source": "icons/abilities/zawziety-sukinkot.svg",
+        "sourceSha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:12:20.232Z"
+      },
+      "current": {
+        "src": "/icons/abilities/zawziety-sukinkot.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 105 · Zawzięty sukinkot",
+          "src": "candidates/batch-105/zawziety-sukinkot.png",
+          "note": "ONE complete generic adult rises from ONE knee: one boot planted, one knee still touching the ground, ONE palm braced on the ground and the other hand pressing the planted thigh. Smooth featureless head, natural ordinary build, broad simple clothing. A determined rising pose without an arrow. No beard portrait, injuries, blood, torn fine fabric, texture or extra limb."
+        }
+      ]
     }
   ]
 }

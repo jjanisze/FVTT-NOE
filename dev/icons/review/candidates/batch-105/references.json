@@ -1,0 +1,20 @@
+{
+  "files": [
+    {
+      "source": "icons/abilities/zasloniecie-helmu.svg",
+      "sha256": "ef104c0f5efdc6e989b48ed75f0dfc914eaabcf88e2ac5f5ccb03eab23141836"
+    },
+    {
+      "source": "icons/abilities/zasloniecie-helmu.png",
+      "sha256": "2ae6eb53f6f6e4cb12fa89fff89a38d40b3b922701892cb31f210e0c0eaf8456"
+    },
+    {
+      "source": "icons/abilities/zawziety-sukinkot.svg",
+      "sha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3"
+    },
+    {
+      "source": "icons/abilities/zawziety-sukinkot.webp",
+      "sha256": "7052773e36e81bd97a2cfd0bae56e6ea450cd49edd5f1e1d57c1c2d75481a4a7"
+    }
+  ]
+}

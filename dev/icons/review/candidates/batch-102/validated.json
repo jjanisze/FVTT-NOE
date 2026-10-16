@@ -1,0 +1,16 @@
+{
+  "batch": 102,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "logika-roznoboczna": "5a2a12f5b60c3c0a7125e59c8f6375b3079cc6d03b6350aa0d35da7ea74cdf75",
+    "doktor-quinn": "a5f7c025f0151b65179b4f84c5640f99de81da32eb48913f1c57c181bff74315",
+    "fart": "9de381fc3216a849b6bf2520f81035c5b1a858f0929b2fd501de5c76ccd3deb1",
+    "ja-juz-swoje-odchorowalem": "eff1e5b59f09967dcb18bb6b2039d23e4d25cf7dcf0884c7aaa303c6c3a7818f",
+    "kuchenny-terror": "80b059e1f8d1b9da744c19334714f0e01a519f86bfd4fde6859993ab42655a2e",
+    "mlynek": "d51c36cae4580848c1fff3fde7504013a0a7cb139e248e9629ee1aefc3740075",
+    "naprawianie": "a18efbbc50cebb725a546481a3b41fce2a01ff2318791a98bd7c2434cc9dba6d",
+    "odporny": "fb7d2e9aa1202474c843d539848581e836e383ca043c2f212f03caff107df99d",
+    "patriota": "4bce2aa0bcdcbe8f672ead4f8458775cbaeeac852f606a9d563f0882b75b145f"
+  }
+}

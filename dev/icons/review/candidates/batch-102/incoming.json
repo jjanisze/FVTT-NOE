@@ -1,0 +1,186 @@
+{
+  "date": "2026-10-17",
+  "batch": 102,
+  "styleReviews": [
+    {
+      "iconId": "abilities/logika-roznoboczna",
+      "status": "redo",
+      "source": "icons/abilities/logika-roznoboczna.svg",
+      "sourceSha256": "dc44d931476838d92105b526a834f1ba640ccd13743e3ed1dc8d62e021c52efb",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:05:25.501Z"
+    },
+    {
+      "iconId": "abilities/doktor-quinn",
+      "status": "redo",
+      "source": "icons/abilities/doktor-quinn.svg",
+      "sourceSha256": "2d2c62da17b68d3a5b47c160d98c8d8ac3e68e46868aaeb90a5edec3503f4e73",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:06:38.962Z"
+    },
+    {
+      "iconId": "abilities/fart",
+      "status": "redo",
+      "source": "icons/abilities/fart.svg",
+      "sourceSha256": "e859293a7c7cdfd65610d16e6042104a590f47f2a9673289c3d06aa5c01269ea",
+      "reasons": [
+        "detail",
+        "dither",
+        "subject"
+      ],
+      "notes": "Also dice. That takes out of the game by directly suggesting mechanics.",
+      "updatedAt": "2026-10-16T22:07:13.574Z"
+    },
+    {
+      "iconId": "abilities/ja-juz-swoje-odchorowalem",
+      "status": "redo",
+      "source": "icons/abilities/ja-juz-swoje-odchorowalem.svg",
+      "sourceSha256": "005386cdc9cb9b29df7a3bd967ecda88fae2c9e561bf71835d44ced92532dbc5",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:07:36.683Z"
+    },
+    {
+      "iconId": "abilities/kuchenny-terror",
+      "status": "redo",
+      "source": "icons/abilities/kuchenny-terror.svg",
+      "sourceSha256": "49d5f51e50496194dfd944a83a980c35ba79902f0bf7ce6255b1a33e10920f27",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:07:47.988Z"
+    },
+    {
+      "iconId": "abilities/mlynek",
+      "status": "redo",
+      "source": "icons/abilities/mlynek.svg",
+      "sourceSha256": "c0c2389b2c428a7888224e39695bdc5d92f888c8cbc98684443bd9f743b12ce8",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:07:59.071Z"
+    },
+    {
+      "iconId": "abilities/naprawianie",
+      "status": "redo",
+      "source": "icons/abilities/naprawianie.svg",
+      "sourceSha256": "2a46fa053ff7b86452f7e13b78a8267e43655f52dd0524d84af1e7113383e1f1",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:08:10.150Z"
+    },
+    {
+      "iconId": "abilities/odporny",
+      "status": "redo",
+      "source": "icons/abilities/odporny.svg",
+      "sourceSha256": "5dfe6297fc4d7d0fa012f6129dc6a6dc24417e94a461b29d3d0ca5ea88c529c2",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:08:23.605Z"
+    },
+    {
+      "iconId": "abilities/patriota",
+      "status": "redo",
+      "source": "icons/abilities/patriota.svg",
+      "sourceSha256": "9151ff746b0ebc0c3c86b20fb9511a946cc86bf7fef4e1e6b7ec2822c27ebb06",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:08:36.385Z"
+    }
+  ],
+  "productionFiles": [
+    {
+      "source": "icons/abilities/logika-roznoboczna.svg",
+      "sha256": "dc44d931476838d92105b526a834f1ba640ccd13743e3ed1dc8d62e021c52efb"
+    },
+    {
+      "source": "icons/abilities/logika-roznoboczna.webp",
+      "sha256": "e54627c818772d84e0d1623ba157d54dfd16a130eaac2a43fefa9bc72674b25b"
+    },
+    {
+      "source": "icons/abilities/doktor-quinn.svg",
+      "sha256": "2d2c62da17b68d3a5b47c160d98c8d8ac3e68e46868aaeb90a5edec3503f4e73"
+    },
+    {
+      "source": "icons/abilities/doktor-quinn.webp",
+      "sha256": "1b7d43c0ca56ded1d46b997a773e15b6bbbb84c9575607a12c839a272ad2b11c"
+    },
+    {
+      "source": "icons/abilities/fart.svg",
+      "sha256": "e859293a7c7cdfd65610d16e6042104a590f47f2a9673289c3d06aa5c01269ea"
+    },
+    {
+      "source": "icons/abilities/fart.webp",
+      "sha256": "6d722b63942f77750e31ca9f05c2a2529561c5f237763f0b500046ca0598aad6"
+    },
+    {
+      "source": "icons/abilities/ja-juz-swoje-odchorowalem.svg",
+      "sha256": "005386cdc9cb9b29df7a3bd967ecda88fae2c9e561bf71835d44ced92532dbc5"
+    },
+    {
+      "source": "icons/abilities/ja-juz-swoje-odchorowalem.webp",
+      "sha256": "98ab9b72505127f56818e4cbc8dad20602668e57b9202d2b807fb3f8b6945e5e"
+    },
+    {
+      "source": "icons/abilities/kuchenny-terror.svg",
+      "sha256": "49d5f51e50496194dfd944a83a980c35ba79902f0bf7ce6255b1a33e10920f27"
+    },
+    {
+      "source": "icons/abilities/kuchenny-terror.webp",
+      "sha256": "7878d5f47524ab2ca9778f107f0eb95b923572e830f792e0f38dea54a179139a"
+    },
+    {
+      "source": "icons/abilities/mlynek.svg",
+      "sha256": "c0c2389b2c428a7888224e39695bdc5d92f888c8cbc98684443bd9f743b12ce8"
+    },
+    {
+      "source": "icons/abilities/mlynek.webp",
+      "sha256": "508ff2649b7e8cadf772c1bc3caf2fed911a9074ca54f9199c0fe55cb5e74f94"
+    },
+    {
+      "source": "icons/abilities/naprawianie.svg",
+      "sha256": "2a46fa053ff7b86452f7e13b78a8267e43655f52dd0524d84af1e7113383e1f1"
+    },
+    {
+      "source": "icons/abilities/naprawianie.png",
+      "sha256": "434edcdf427754aaf3329d373157606ec72f68d0f7cc011f252da2501cc674fb"
+    },
+    {
+      "source": "icons/abilities/odporny.svg",
+      "sha256": "5dfe6297fc4d7d0fa012f6129dc6a6dc24417e94a461b29d3d0ca5ea88c529c2"
+    },
+    {
+      "source": "icons/abilities/odporny.png",
+      "sha256": "66c5b5e362a92ebbe3df717c6d7a31ca286c50d54096d5837b89a00e8d472478"
+    },
+    {
+      "source": "icons/abilities/patriota.svg",
+      "sha256": "9151ff746b0ebc0c3c86b20fb9511a946cc86bf7fef4e1e6b7ec2822c27ebb06"
+    },
+    {
+      "source": "icons/abilities/patriota.webp",
+      "sha256": "83d7620e52d4d572ac9f352a08a6bdc85fce2f64b7e13d5e04bedfdfb9b01d6c"
+    }
+  ]
+}

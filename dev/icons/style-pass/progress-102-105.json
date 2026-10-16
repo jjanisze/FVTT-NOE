@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-17",
+  "preparedBatches": [
+    102,
+    103,
+    104,
+    105
+  ],
+  "nextFreeBatch": 106,
+  "styleFlagsConsumed": 29,
+  "styleCandidatesPrepared": 29,
+  "subjectsPerBatch": [
+    9,
+    9,
+    9,
+    2
+  ],
+  "emptyCellsBatch105": [
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "originalPlaceholderSubjectsDelivered": 153,
+  "nativePlaceholderTargetsDelivered": 155,
+  "remainingGeneratedPlaceholders": 0,
+  "reviewCardsTotal": 524,
+  "earlierResolvedCardsPreserved": 495,
+  "verbatimStyleDecisionsArchived": 29,
+  "unchangedProductionFilesVerified": 58,
+  "newCandidatesInstalledBeforeApproval": 0,
+  "candidateCollectionValidatedPairs": 828,
+  "approvalProvenanceOptionsVerified": 29,
+  "additionalUnpreparedStyleFlags": 0,
+  "browser": {
+    "cards": 29,
+    "options": 58,
+    "brokenImages": 0,
+    "errors": 0,
+    "newCandidatesSelected": 29,
+    "pendingDecisions": 29,
+    "screenshot": "../review/candidates/batch-102/raw/review-preview.png"
+  }
+}

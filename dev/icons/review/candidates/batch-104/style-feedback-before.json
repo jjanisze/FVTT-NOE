@@ -1,0 +1,105 @@
+{
+  "abilities/tanczace-pily": {
+    "iconId": "abilities/tanczace-pily",
+    "status": "redo",
+    "source": "icons/abilities/tanczace-pily.svg",
+    "sourceSha256": "bc10bf45e8c50157464d4d784c069a08139e10da323f800c1ae196386084b51a",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:10:28.231Z"
+  },
+  "abilities/tryb-turbo": {
+    "iconId": "abilities/tryb-turbo",
+    "status": "redo",
+    "source": "icons/abilities/tryb-turbo.svg",
+    "sourceSha256": "ca5c334cb1ac92b5ca2c8ecb2990ad504167e31bcbbd1b3f373fc2735ba55118",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:10:40.212Z"
+  },
+  "abilities/twierdzenie-kata-prostego": {
+    "iconId": "abilities/twierdzenie-kata-prostego",
+    "status": "redo",
+    "source": "icons/abilities/twierdzenie-kata-prostego.svg",
+    "sourceSha256": "31e78fa56154b4104741b6b7cc6ebd831656095c90b6cd27fdf369ecaf312725",
+    "reasons": [
+      "detail",
+      "other"
+    ],
+    "notes": "Unclear graphical intent.",
+    "updatedAt": "2026-10-16T22:11:04.278Z"
+  },
+  "abilities/tylko-zwarcie": {
+    "iconId": "abilities/tylko-zwarcie",
+    "status": "redo",
+    "source": "icons/abilities/tylko-zwarcie.svg",
+    "sourceSha256": "ce21c07be39d4e6477f48757e1a010d594233f496644d906a4f674e5665069fa",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:11:11.581Z"
+  },
+  "abilities/wierze": {
+    "iconId": "abilities/wierze",
+    "status": "redo",
+    "source": "icons/abilities/wierze.svg",
+    "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:11:24.996Z"
+  },
+  "abilities/wielonozny": {
+    "iconId": "abilities/wielonozny",
+    "status": "redo",
+    "source": "icons/abilities/wielonozny.svg",
+    "sourceSha256": "588eb40f2878962ff870a67c4cbeb761ac8b899f2cf5e708280ac8898f64d27d",
+    "reasons": [
+      "detail",
+      "dither"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:11:33.403Z"
+  },
+  "abilities/wirujace-kiscienie": {
+    "iconId": "abilities/wirujace-kiscienie",
+    "status": "redo",
+    "source": "icons/abilities/wirujace-kiscienie.svg",
+    "sourceSha256": "2b8bb6f73adb3b502a185d6aee31173171af229f0e131d04936f1735d612093d",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:11:40.578Z"
+  },
+  "abilities/wrazliwosc-na-swiatlo": {
+    "iconId": "abilities/wrazliwosc-na-swiatlo",
+    "status": "redo",
+    "source": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+    "sourceSha256": "e48c8aedc3ef8941ac486c2ea64f2d97499f31242ba40d030be30898431e65a7",
+    "reasons": [
+      "detail",
+      "dither"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:11:46.135Z"
+  },
+  "abilities/wymagania": {
+    "iconId": "abilities/wymagania",
+    "status": "redo",
+    "source": "icons/abilities/wymagania.svg",
+    "sourceSha256": "7a93fc83a0710411564860ca13fb3bc50c5769c95c11f9755ae3caf7120012c1",
+    "reasons": [
+      "detail",
+      "dither"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:11:56.594Z"
+  }
+}

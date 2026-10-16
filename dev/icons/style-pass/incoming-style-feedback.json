@@ -1,0 +1,344 @@
+{
+  "date": "2026-10-17",
+  "batches": [
+    102,
+    103,
+    104,
+    105
+  ],
+  "sourceFileSha256": "016b0e81129a1ab6c74dd1bb66468ead46bfdea7ff2a0850a1715ce9e830bbb9",
+  "items": [
+    {
+      "iconId": "abilities/logika-roznoboczna",
+      "status": "redo",
+      "source": "icons/abilities/logika-roznoboczna.svg",
+      "sourceSha256": "dc44d931476838d92105b526a834f1ba640ccd13743e3ed1dc8d62e021c52efb",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:05:25.501Z"
+    },
+    {
+      "iconId": "abilities/doktor-quinn",
+      "status": "redo",
+      "source": "icons/abilities/doktor-quinn.svg",
+      "sourceSha256": "2d2c62da17b68d3a5b47c160d98c8d8ac3e68e46868aaeb90a5edec3503f4e73",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:06:38.962Z"
+    },
+    {
+      "iconId": "abilities/fart",
+      "status": "redo",
+      "source": "icons/abilities/fart.svg",
+      "sourceSha256": "e859293a7c7cdfd65610d16e6042104a590f47f2a9673289c3d06aa5c01269ea",
+      "reasons": [
+        "detail",
+        "dither",
+        "subject"
+      ],
+      "notes": "Also dice. That takes out of the game by directly suggesting mechanics.",
+      "updatedAt": "2026-10-16T22:07:13.574Z"
+    },
+    {
+      "iconId": "abilities/ja-juz-swoje-odchorowalem",
+      "status": "redo",
+      "source": "icons/abilities/ja-juz-swoje-odchorowalem.svg",
+      "sourceSha256": "005386cdc9cb9b29df7a3bd967ecda88fae2c9e561bf71835d44ced92532dbc5",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:07:36.683Z"
+    },
+    {
+      "iconId": "abilities/kuchenny-terror",
+      "status": "redo",
+      "source": "icons/abilities/kuchenny-terror.svg",
+      "sourceSha256": "49d5f51e50496194dfd944a83a980c35ba79902f0bf7ce6255b1a33e10920f27",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:07:47.988Z"
+    },
+    {
+      "iconId": "abilities/mlynek",
+      "status": "redo",
+      "source": "icons/abilities/mlynek.svg",
+      "sourceSha256": "c0c2389b2c428a7888224e39695bdc5d92f888c8cbc98684443bd9f743b12ce8",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:07:59.071Z"
+    },
+    {
+      "iconId": "abilities/naprawianie",
+      "status": "redo",
+      "source": "icons/abilities/naprawianie.svg",
+      "sourceSha256": "2a46fa053ff7b86452f7e13b78a8267e43655f52dd0524d84af1e7113383e1f1",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:08:10.150Z"
+    },
+    {
+      "iconId": "abilities/odporny",
+      "status": "redo",
+      "source": "icons/abilities/odporny.svg",
+      "sourceSha256": "5dfe6297fc4d7d0fa012f6129dc6a6dc24417e94a461b29d3d0ca5ea88c529c2",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:08:23.605Z"
+    },
+    {
+      "iconId": "abilities/patriota",
+      "status": "redo",
+      "source": "icons/abilities/patriota.svg",
+      "sourceSha256": "9151ff746b0ebc0c3c86b20fb9511a946cc86bf7fef4e1e6b7ec2822c27ebb06",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:08:36.385Z"
+    },
+    {
+      "iconId": "abilities/prog-awarii",
+      "status": "redo",
+      "source": "icons/abilities/prog-awarii.svg",
+      "sourceSha256": "c75daa7d763f1c448fb5412573766513450334e031c6ace1469662f163cc17b2",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:08:48.702Z"
+    },
+    {
+      "iconId": "abilities/przyspieszenie",
+      "status": "redo",
+      "source": "icons/abilities/przyspieszenie.svg",
+      "sourceSha256": "f294bc506fa503f8d73b051f0a6d3e134a799b9cb992567df13ca672c36a47ee",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:08:53.765Z"
+    },
+    {
+      "iconId": "abilities/rozkaz-likwidacji",
+      "status": "redo",
+      "source": "icons/abilities/rozkaz-likwidacji.svg",
+      "sourceSha256": "01a3e9d892437d576716d91fb43a5ebbb8256fa6fb7c525a88e3bdcc13c41f93",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:09:09.031Z"
+    },
+    {
+      "iconId": "abilities/roznorodne-ataki",
+      "status": "redo",
+      "source": "icons/abilities/roznorodne-ataki.svg",
+      "sourceSha256": "4e5fc009bd91c06ca413e362fa4bfc486d715f37d7ebd471f211a977e22c10da",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:09:13.127Z"
+    },
+    {
+      "iconId": "abilities/siodme-poty",
+      "status": "redo",
+      "source": "icons/abilities/siodme-poty.svg",
+      "sourceSha256": "3c151c5f915b0e845f6dcf2f0b9b69c7c22df023e0eb7fd048d76cfadce77c59",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:09:35.615Z"
+    },
+    {
+      "iconId": "abilities/skakun",
+      "status": "redo",
+      "source": "icons/abilities/skakun.svg",
+      "sourceSha256": "6616be2a54fe7dd9ffef7b11dc3f5001982aeccbad8ec078d197bbaabc401883",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:09:39.296Z"
+    },
+    {
+      "iconId": "abilities/szara-eminencja",
+      "status": "redo",
+      "source": "icons/abilities/szara-eminencja.svg",
+      "sourceSha256": "26f2c1ad6c13b50274bc07252608dbe2a3a8fa8adc68204157e411276abafb29",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:10:04.311Z"
+    },
+    {
+      "iconId": "abilities/szarpanie",
+      "status": "redo",
+      "source": "icons/abilities/szarpanie.svg",
+      "sourceSha256": "fe1f81639adf52e3b99e7a43efd7abaf1714e4ca0039011cb394ae2c146d0245",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:10:09.023Z"
+    },
+    {
+      "iconId": "abilities/taca-i-w-nogi",
+      "status": "redo",
+      "source": "icons/abilities/taca-i-w-nogi.svg",
+      "sourceSha256": "4272d8941f5ceb46ec0963b746f990623449e02aaa632ef8c4c8b46f9fa89645",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:10:22.846Z"
+    },
+    {
+      "iconId": "abilities/tanczace-pily",
+      "status": "redo",
+      "source": "icons/abilities/tanczace-pily.svg",
+      "sourceSha256": "bc10bf45e8c50157464d4d784c069a08139e10da323f800c1ae196386084b51a",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:10:28.231Z"
+    },
+    {
+      "iconId": "abilities/tryb-turbo",
+      "status": "redo",
+      "source": "icons/abilities/tryb-turbo.svg",
+      "sourceSha256": "ca5c334cb1ac92b5ca2c8ecb2990ad504167e31bcbbd1b3f373fc2735ba55118",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:10:40.212Z"
+    },
+    {
+      "iconId": "abilities/twierdzenie-kata-prostego",
+      "status": "redo",
+      "source": "icons/abilities/twierdzenie-kata-prostego.svg",
+      "sourceSha256": "31e78fa56154b4104741b6b7cc6ebd831656095c90b6cd27fdf369ecaf312725",
+      "reasons": [
+        "detail",
+        "other"
+      ],
+      "notes": "Unclear graphical intent.",
+      "updatedAt": "2026-10-16T22:11:04.278Z"
+    },
+    {
+      "iconId": "abilities/tylko-zwarcie",
+      "status": "redo",
+      "source": "icons/abilities/tylko-zwarcie.svg",
+      "sourceSha256": "ce21c07be39d4e6477f48757e1a010d594233f496644d906a4f674e5665069fa",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:11:11.581Z"
+    },
+    {
+      "iconId": "abilities/wierze",
+      "status": "redo",
+      "source": "icons/abilities/wierze.svg",
+      "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:11:24.996Z"
+    },
+    {
+      "iconId": "abilities/wielonozny",
+      "status": "redo",
+      "source": "icons/abilities/wielonozny.svg",
+      "sourceSha256": "588eb40f2878962ff870a67c4cbeb761ac8b899f2cf5e708280ac8898f64d27d",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:11:33.403Z"
+    },
+    {
+      "iconId": "abilities/wirujace-kiscienie",
+      "status": "redo",
+      "source": "icons/abilities/wirujace-kiscienie.svg",
+      "sourceSha256": "2b8bb6f73adb3b502a185d6aee31173171af229f0e131d04936f1735d612093d",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:11:40.578Z"
+    },
+    {
+      "iconId": "abilities/wrazliwosc-na-swiatlo",
+      "status": "redo",
+      "source": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+      "sourceSha256": "e48c8aedc3ef8941ac486c2ea64f2d97499f31242ba40d030be30898431e65a7",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:11:46.135Z"
+    },
+    {
+      "iconId": "abilities/wymagania",
+      "status": "redo",
+      "source": "icons/abilities/wymagania.svg",
+      "sourceSha256": "7a93fc83a0710411564860ca13fb3bc50c5769c95c11f9755ae3caf7120012c1",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:11:56.594Z"
+    },
+    {
+      "iconId": "abilities/zasloniecie-helmu",
+      "status": "redo",
+      "source": "icons/abilities/zasloniecie-helmu.svg",
+      "sourceSha256": "ef104c0f5efdc6e989b48ed75f0dfc914eaabcf88e2ac5f5ccb03eab23141836",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:12:07.307Z"
+    },
+    {
+      "iconId": "abilities/zawziety-sukinkot",
+      "status": "redo",
+      "source": "icons/abilities/zawziety-sukinkot.svg",
+      "sourceSha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:12:20.232Z"
+    }
+  ]
+}

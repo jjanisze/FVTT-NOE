@@ -1,0 +1,25 @@
+{
+  "abilities/zasloniecie-helmu": {
+    "iconId": "abilities/zasloniecie-helmu",
+    "status": "redo",
+    "source": "icons/abilities/zasloniecie-helmu.svg",
+    "sourceSha256": "ef104c0f5efdc6e989b48ed75f0dfc914eaabcf88e2ac5f5ccb03eab23141836",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:12:07.307Z"
+  },
+  "abilities/zawziety-sukinkot": {
+    "iconId": "abilities/zawziety-sukinkot",
+    "status": "redo",
+    "source": "icons/abilities/zawziety-sukinkot.svg",
+    "sourceSha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3",
+    "reasons": [
+      "detail",
+      "dither"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:12:20.232Z"
+  }
+}

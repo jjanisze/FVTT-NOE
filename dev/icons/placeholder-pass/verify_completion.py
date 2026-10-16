@@ -34,7 +34,8 @@ for target, item in installed.items():
     with Image.open(io.BytesIO(base64.b64decode(href.split(",", 1)[1]))) as image:
         assert image.convert("RGBA").tobytes() == expected
 assert read(ROOT / "dev/icons/class-placeholder-audit.json")["stats"]["confirmedPlaceholderFiles"] == 0
-assert all(c.get("status") == "resolved" for c in read(REVIEW / "manifest.json")["items"])
+original_cards = [c for c in read(REVIEW / "manifest.json")["items"] if c.get("placeholderKey")]
+assert len(original_cards) == 153 and all(c.get("status") == "resolved" for c in original_cards)
 write(ROOT / "dev/icons/placeholder-pass/completed-2026-10-17.json", {
     "date": "2026-10-17", "subjectsDelivered": 153, "nativeSvgTargetsDelivered": 155,
     "remainingGeneratedPlaceholders": 0, "exactApprovedMasksVerified": 155,

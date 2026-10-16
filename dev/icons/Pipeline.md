@@ -70,6 +70,12 @@ pipeline step; the review server never changes a shipped asset.
 Queue metadata is in `review/manifest.json`; exact prompts and raw candidates
 stay beside their normalized candidates. See `review/README.md`.
 
+Browser style flags are independent from generation approvals. The first
+style replacement pass is documented in `style-pass/README.md`: it freezes
+the exact flagged SVG and existing WEBP hashes, preserves saved notes, and
+adds fresh candidate cards while retaining earlier delivered reviews.
+Generating a revision does not clear its style flag or authorize installation.
+
 # Prompt
 Use the following structured prompt for generation:
 - Reference Image Instructions: "I have attached `reference_weapon.svg`. Use this image strictly as a style and format reference. Notice that it is a flat, single-color silhouette with no gradients, shading, or complex internal details. Do not recreate the sword, just match its exact level of simplicity, style, and contrast for the new items."

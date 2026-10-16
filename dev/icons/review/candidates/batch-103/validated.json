@@ -1,0 +1,16 @@
+{
+  "batch": 103,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "prog-awarii": "89002c90e137114ded15079dca0c8051b604704cddc900dc3c3dc04a8c378cd2",
+    "przyspieszenie": "c3a38f484ed043ef6e1c7682c4998b42f3b5ce51f671de525e375eb47e6e695b",
+    "rozkaz-likwidacji": "bae51c69fa751b4c218d6cedb0a8a1512d02bd96dfedbdf4a41112f30ca66d3b",
+    "roznorodne-ataki": "c83a8fd33136c3f6624102904cc56c32b9d67f591eb3b643f6b7217ed5b3ff2d",
+    "siodme-poty": "e8ad544dea3a146ad48eaabf7a232313e8aef5dd2854ff44f5f2c13db3f74470",
+    "skakun": "9ea1f85e1a5317c1ec497b362167147c59aa699e1e70df0256d2a946480ae7c9",
+    "szara-eminencja": "2b2e90b9ce9fa320d39caeefd79154ecba46b15cda7dc2e625968a7a5a033c02",
+    "szarpanie": "7445637419c141b4a7722a6147a64e23108be298864a36e120da49792f609a3b",
+    "taca-i-w-nogi": "d66195ffcca533d79aba484c94164e8d0638db83ee2734a49e8cddac834056ea"
+  }
+}

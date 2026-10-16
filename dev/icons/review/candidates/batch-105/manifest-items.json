@@ -1,0 +1,85 @@
+{
+  "title": "Batches 102 + 103 + 104 + 105 · 29 style revisions awaiting GM review",
+  "updated": "2026-10-17",
+  "items": [
+    {
+      "id": "style105-zasloniecie-helmu",
+      "name": "Zasłonięcie hełmu",
+      "tier": "Batch 105 · Style review",
+      "batch": 105,
+      "target": "icons/abilities/zasloniecie-helmu.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zasloniecie-helmu.svg",
+          "variant": "default",
+          "sourceSha256": "ef104c0f5efdc6e989b48ed75f0dfc914eaabcf88e2ac5f5ccb03eab23141836"
+        }
+      ],
+      "context": "Ability: Zasłonięcie hełmu. An automatic helmet seals its protective faceplate. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE complete modern industrial HELMET in three-quarter SIDE PROFILE with ONE large CLOSED PROTECTIVE FACEPLATE. One thick side hinge and ONE broad black visor opening, with ONE broad curved motion stroke above the faceplate showing closure. No person, neck armor, skull, tiny screws, circuitry, gauge, text or fine reflections.",
+      "styleReview": {
+        "iconId": "abilities/zasloniecie-helmu",
+        "status": "redo",
+        "source": "icons/abilities/zasloniecie-helmu.svg",
+        "sourceSha256": "ef104c0f5efdc6e989b48ed75f0dfc914eaabcf88e2ac5f5ccb03eab23141836",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:12:07.307Z"
+      },
+      "current": {
+        "src": "/icons/abilities/zasloniecie-helmu.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 105 · Zasłonięcie hełmu",
+          "src": "candidates/batch-105/zasloniecie-helmu.png",
+          "note": "ONE complete modern industrial HELMET in three-quarter SIDE PROFILE with ONE large CLOSED PROTECTIVE FACEPLATE. One thick side hinge and ONE broad black visor opening, with ONE broad curved motion stroke above the faceplate showing closure. No person, neck armor, skull, tiny screws, circuitry, gauge, text or fine reflections."
+        }
+      ]
+    },
+    {
+      "id": "style105-zawziety-sukinkot",
+      "name": "Zawzięty sukinkot",
+      "tier": "Batch 105 · Style review",
+      "batch": 105,
+      "target": "icons/abilities/zawziety-sukinkot.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawziety-sukinkot.svg",
+          "variant": "default",
+          "sourceSha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3"
+        }
+      ],
+      "context": "Ability: Zawzięty sukinkot. A fallen person gets back up despite severe injury. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "ONE complete generic adult rises from ONE knee: one boot planted, one knee still touching the ground, ONE palm braced on the ground and the other hand pressing the planted thigh. Smooth featureless head, natural ordinary build, broad simple clothing. A determined rising pose without an arrow. No beard portrait, injuries, blood, torn fine fabric, texture or extra limb.",
+      "styleReview": {
+        "iconId": "abilities/zawziety-sukinkot",
+        "status": "redo",
+        "source": "icons/abilities/zawziety-sukinkot.svg",
+        "sourceSha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:12:20.232Z"
+      },
+      "current": {
+        "src": "/icons/abilities/zawziety-sukinkot.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither"
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 105 · Zawzięty sukinkot",
+          "src": "candidates/batch-105/zawziety-sukinkot.png",
+          "note": "ONE complete generic adult rises from ONE knee: one boot planted, one knee still touching the ground, ONE palm braced on the ground and the other hand pressing the planted thigh. Smooth featureless head, natural ordinary build, broad simple clothing. A determined rising pose without an arrow. No beard portrait, injuries, blood, torn fine fabric, texture or extra limb."
+        }
+      ]
+    }
+  ]
+}

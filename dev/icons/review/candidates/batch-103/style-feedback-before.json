@@ -1,0 +1,102 @@
+{
+  "abilities/prog-awarii": {
+    "iconId": "abilities/prog-awarii",
+    "status": "redo",
+    "source": "icons/abilities/prog-awarii.svg",
+    "sourceSha256": "c75daa7d763f1c448fb5412573766513450334e031c6ace1469662f163cc17b2",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:08:48.702Z"
+  },
+  "abilities/przyspieszenie": {
+    "iconId": "abilities/przyspieszenie",
+    "status": "redo",
+    "source": "icons/abilities/przyspieszenie.svg",
+    "sourceSha256": "f294bc506fa503f8d73b051f0a6d3e134a799b9cb992567df13ca672c36a47ee",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:08:53.765Z"
+  },
+  "abilities/rozkaz-likwidacji": {
+    "iconId": "abilities/rozkaz-likwidacji",
+    "status": "redo",
+    "source": "icons/abilities/rozkaz-likwidacji.svg",
+    "sourceSha256": "01a3e9d892437d576716d91fb43a5ebbb8256fa6fb7c525a88e3bdcc13c41f93",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:09:09.031Z"
+  },
+  "abilities/roznorodne-ataki": {
+    "iconId": "abilities/roznorodne-ataki",
+    "status": "redo",
+    "source": "icons/abilities/roznorodne-ataki.svg",
+    "sourceSha256": "4e5fc009bd91c06ca413e362fa4bfc486d715f37d7ebd471f211a977e22c10da",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:09:13.127Z"
+  },
+  "abilities/siodme-poty": {
+    "iconId": "abilities/siodme-poty",
+    "status": "redo",
+    "source": "icons/abilities/siodme-poty.svg",
+    "sourceSha256": "3c151c5f915b0e845f6dcf2f0b9b69c7c22df023e0eb7fd048d76cfadce77c59",
+    "reasons": [
+      "detail",
+      "dither"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:09:35.615Z"
+  },
+  "abilities/skakun": {
+    "iconId": "abilities/skakun",
+    "status": "redo",
+    "source": "icons/abilities/skakun.svg",
+    "sourceSha256": "6616be2a54fe7dd9ffef7b11dc3f5001982aeccbad8ec078d197bbaabc401883",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:09:39.296Z"
+  },
+  "abilities/szara-eminencja": {
+    "iconId": "abilities/szara-eminencja",
+    "status": "redo",
+    "source": "icons/abilities/szara-eminencja.svg",
+    "sourceSha256": "26f2c1ad6c13b50274bc07252608dbe2a3a8fa8adc68204157e411276abafb29",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:10:04.311Z"
+  },
+  "abilities/szarpanie": {
+    "iconId": "abilities/szarpanie",
+    "status": "redo",
+    "source": "icons/abilities/szarpanie.svg",
+    "sourceSha256": "fe1f81639adf52e3b99e7a43efd7abaf1714e4ca0039011cb394ae2c146d0245",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:10:09.023Z"
+  },
+  "abilities/taca-i-w-nogi": {
+    "iconId": "abilities/taca-i-w-nogi",
+    "status": "redo",
+    "source": "icons/abilities/taca-i-w-nogi.svg",
+    "sourceSha256": "4272d8941f5ceb46ec0963b746f990623449e02aaa632ef8c4c8b46f9fa89645",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:10:22.846Z"
+  }
+}
