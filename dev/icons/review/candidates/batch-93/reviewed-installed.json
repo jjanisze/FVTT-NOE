@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-16",
+  "batch": 93,
+  "approvedSubjects": 3,
+  "remainingSubjects": 19,
+  "installed": [
+    {
+      "itemId": "batch91-cwaniak",
+      "candidateId": "batch93-a",
+      "source": "candidates/batch-93-a/cwaniak.png",
+      "sourceSha256": "13bc149bfa39182e8ce7bb484531be9c27c7ba388fd4024bb0c9180e47251a12",
+      "files": [
+        "icons/klasy/cwaniak.svg",
+        "icons/klasy/cwaniak.webp"
+      ],
+      "svgSha256": "d1c636f2b1501160224b416f6aa76d9c28bb9dbb271c780de0b184c69be40852",
+      "webpSha256": "64cd61efa01d1a16e82e6d9e1bb4979cef6ec055ee569d147cedf719df85d68d"
+    },
+    {
+      "itemId": "batch91-twardziel",
+      "candidateId": "batch93-b",
+      "source": "candidates/batch-93-b/twardziel.png",
+      "sourceSha256": "8a646bdfdf473d959b5a2dff76c891608dd786f4c709d7d0b6168f65ce558128",
+      "files": [
+        "icons/klasy/twardziel.svg",
+        "icons/klasy/twardziel.webp"
+      ],
+      "svgSha256": "c9b8a0567a520b028da77cf19393640ed24203386e21a766fd6e526d73cc8668",
+      "webpSha256": "0612aa0be41be113cba2b06e9e38a907e1648380f12277d70d61bf91117ac3c3"
+    },
+    {
+      "itemId": "batch91-zwiadowca",
+      "candidateId": "batch93-b",
+      "source": "candidates/batch-93-b/zwiadowca.png",
+      "sourceSha256": "5f65afb1fc61159f648ea48ebd79742ac45d4eda82f93d7e34241ebe123267df",
+      "files": [
+        "icons/klasy/zwiadowca.svg",
+        "icons/klasy/zwiadowca.webp"
+      ],
+      "svgSha256": "203d9ed9e4a169bfe7abcc25970e134977aba1f61b8a474e919dc3f565f0e93d",
+      "webpSha256": "2c2a98cea237376bf64a71ca035a25d183b47ed1242484f10f3bcf3e71fd4c22"
+    }
+  ]
+}

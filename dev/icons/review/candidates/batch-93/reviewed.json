@@ -1,0 +1,99 @@
+{
+  "date": "2026-10-16",
+  "batch": 93,
+  "feedbackBeforeSha256": "d42de0f281aff00840847b21961c644eef77992878fdb76d7bea921e367c8a7f",
+  "active": [
+    {
+      "id": "batch90-brutal",
+      "name": "Brutal",
+      "decision": "revise",
+      "candidateId": "batch93-a",
+      "selectedSource": "candidates/batch-93-a/brutal.png",
+      "sourceSha256": "67ad02f016af625ebaa7373308050b0f219a383eaef526ae93ff2056e8e2f646",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/brutal.svg",
+          "variant": "default",
+          "sourceSha256": "83bf2a94a6a88bb853e8e3de117926e3e503d06a79bbd186bc69e8f9ecaeb915"
+        }
+      ],
+      "notes": "Replace the hammer with a halligan bar",
+      "feedback": {
+        "itemId": "batch90-brutal",
+        "decision": "revise",
+        "candidateId": "batch93-a",
+        "notes": "Replace the hammer with a halligan bar",
+        "updatedAt": "2026-10-16T00:42:09.038Z"
+      }
+    },
+    {
+      "id": "batch91-cwaniak",
+      "name": "Cwaniak",
+      "decision": "approve",
+      "candidateId": "batch93-a",
+      "selectedSource": "candidates/batch-93-a/cwaniak.png",
+      "sourceSha256": "13bc149bfa39182e8ce7bb484531be9c27c7ba388fd4024bb0c9180e47251a12",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/cwaniak.svg",
+          "variant": "default",
+          "sourceSha256": "aa8669e1745b216b6ab4e23aeb55fc20df54d4922261d3e37210e95491e1f57c"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch91-cwaniak",
+        "decision": "approve",
+        "candidateId": "batch93-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:42:15.122Z"
+      }
+    },
+    {
+      "id": "batch91-twardziel",
+      "name": "Twardziel",
+      "decision": "approve",
+      "candidateId": "batch93-b",
+      "selectedSource": "candidates/batch-93-b/twardziel.png",
+      "sourceSha256": "8a646bdfdf473d959b5a2dff76c891608dd786f4c709d7d0b6168f65ce558128",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/twardziel.svg",
+          "variant": "default",
+          "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch91-twardziel",
+        "decision": "approve",
+        "candidateId": "batch93-b",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:42:29.369Z"
+      }
+    },
+    {
+      "id": "batch91-zwiadowca",
+      "name": "Zwiadowca",
+      "decision": "approve",
+      "candidateId": "batch93-b",
+      "selectedSource": "candidates/batch-93-b/zwiadowca.png",
+      "sourceSha256": "5f65afb1fc61159f648ea48ebd79742ac45d4eda82f93d7e34241ebe123267df",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/zwiadowca.svg",
+          "variant": "default",
+          "sourceSha256": "67b410b391ee6dda233c64b0bbdf051d8d4bc1909260d06ef79fa3e6c328307a"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch91-zwiadowca",
+        "decision": "approve",
+        "candidateId": "batch93-b",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:42:48.249Z"
+      }
+    }
+  ]
+}

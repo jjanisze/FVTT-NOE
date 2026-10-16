@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-16",
+  "batch": 94,
+  "approvedSubjects": 6,
+  "remainingSubjects": 13,
+  "installed": [
+    {
+      "itemId": "batch90-zryw",
+      "candidateId": "batch94-revision",
+      "source": "candidates/batch-94/zryw.png",
+      "sourceSha256": "096459ab64eaa6c73078cf621d9b1dca2689b794bc7468e007f2ca1641a0f644",
+      "files": [
+        "icons/abilities/zryw.svg",
+        "icons/abilities/zryw.webp"
+      ],
+      "svgSha256": "07c364df1dd7b1d907c547fb3ab96014e05c7b28ee6dd0e9ce8f8a3a2ee1c238",
+      "webpSha256": "0814125355db952dce1164bd06c7d93e70eb972293701fb3e3a55db1ac563713"
+    },
+    {
+      "itemId": "batch94-kaznodzieja",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-94/kaznodzieja.png",
+      "sourceSha256": "d0b93cee93f2459d036a9e2d5299e8b099870fbd4244fa5926c801760a8899cd",
+      "files": [
+        "icons/profesje/kaznodzieja.svg",
+        "icons/profesje/kaznodzieja.webp"
+      ],
+      "svgSha256": "d61b2bc05a93423e7e8cb27aa88618c5144f9c57d4fba2d7896f32b3c8e4de43",
+      "webpSha256": "e3b8eee2c2531c8f2044b454cf782402eb2ff4b37fb32057260600ab0f37aea7"
+    },
+    {
+      "itemId": "batch94-kowboj",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-94/kowboj.png",
+      "sourceSha256": "3dfafe61dbeccc325badabbbdd2d5fd22a3aa2898826a4d5ba8b473152ec68d2",
+      "files": [
+        "icons/profesje/kowboj.svg",
+        "icons/profesje/kowboj.webp"
+      ],
+      "svgSha256": "fa16f83f04a4b83fcc4f2f0e33c6d6ecaab731b3bc961718b1ac6efef1d5e103",
+      "webpSha256": "5fbcbb4e057cb70a1a8c24630cc42ba9aad416de48b9963f2c9950521eef9c66"
+    },
+    {
+      "itemId": "batch94-kurier",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-94/kurier.png",
+      "sourceSha256": "1daf6f2a68dc54355119ca184914f96c97be71d5415e5545c0060d5776c02dc7",
+      "files": [
+        "icons/profesje/kurier.svg",
+        "icons/profesje/kurier.webp"
+      ],
+      "svgSha256": "56853c8317a3edc03ca7b1d6b44ff3db6f6e081d2ee3c47670c33ce2b60bfc76",
+      "webpSha256": "3c7411ff81e6bbb2ea177ce95437a54bc26d6b18384c38d459f29af371c0c75a"
+    },
+    {
+      "itemId": "batch94-lowca-mutantow",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-94/lowca-mutantow.png",
+      "sourceSha256": "bb25d9644d22702c8e64d3cd30646f93f7d782307e2548458bbe66c638c55873",
+      "files": [
+        "icons/profesje/lowca-mutantow.svg",
+        "icons/profesje/lowca-mutantow.webp"
+      ],
+      "svgSha256": "f6e251f60be1c3f2ef875042e16393eac3462bc89260a16d84b5bdf43cd1f0b2",
+      "webpSha256": "11aaf1831dae63dc09a614f4926794517e04f99b12178c31aee168d267910e0e"
+    },
+    {
+      "itemId": "batch94-mafiozo",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-94/mafiozo.png",
+      "sourceSha256": "19b18e805398c0e17ee22c204754267c3747fe5fc33f78ee3fc9ee2b6a8ae9e1",
+      "files": [
+        "icons/profesje/mafiozo.svg",
+        "icons/profesje/mafiozo.webp"
+      ],
+      "svgSha256": "9f1ffc950db97db070dfbb0ba045a4d1fe1a59ad471c6efb4ef5ef81fe17aec0",
+      "webpSha256": "6c4cdc78a601027ecd252cb68b834f62b95803e3637db75a57e878cf9f35ec22"
+    }
+  ]
+}

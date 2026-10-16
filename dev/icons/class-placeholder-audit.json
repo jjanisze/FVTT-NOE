@@ -1,18 +1,18 @@
 {
   "stats": {
     "date": "2026-10-16",
-    "confirmedPlaceholderFiles": 22,
-    "referencedPlaceholderFiles": 22,
+    "confirmedPlaceholderFiles": 9,
+    "referencedPlaceholderFiles": 9,
     "unmappedPlaceholderFiles": 0,
     "activeVariants": 0,
     "referencedActiveVariants": 0,
-    "abilityPlaceholderFiles": 2,
+    "abilityPlaceholderFiles": 1,
     "missingExpectedFiles": 0,
-    "artSubjects": 22,
+    "artSubjects": 9,
     "byKind": {
-      "class": 4,
-      "profession": 16,
-      "feature": 2
+      "class": 1,
+      "profession": 7,
+      "feature": 1
     },
     "scope": "Exact generator signature plus canonical class/profession definitions; no world or pack reads"
   },
@@ -28,16 +28,6 @@
       "referenced": true
     },
     {
-      "kind": "feature",
-      "id": "zryw",
-      "label": "Zryw",
-      "owner": "twardziel",
-      "variant": "default",
-      "source": "icons/abilities/zryw.svg",
-      "sourceSha256": "f566600e180e85a4ce1d0e5cad346aa40e8038faf41d5ec23b4906fb7cdd00f2",
-      "referenced": true
-    },
-    {
       "kind": "class",
       "id": "brutal",
       "label": "Brutal",
@@ -45,36 +35,6 @@
       "variant": "default",
       "source": "icons/klasy/brutal.svg",
       "sourceSha256": "83bf2a94a6a88bb853e8e3de117926e3e503d06a79bbd186bc69e8f9ecaeb915",
-      "referenced": true
-    },
-    {
-      "kind": "class",
-      "id": "cwaniak",
-      "label": "Cwaniak",
-      "owner": "cwaniak",
-      "variant": "default",
-      "source": "icons/klasy/cwaniak.svg",
-      "sourceSha256": "aa8669e1745b216b6ab4e23aeb55fc20df54d4922261d3e37210e95491e1f57c",
-      "referenced": true
-    },
-    {
-      "kind": "class",
-      "id": "twardziel",
-      "label": "Twardziel",
-      "owner": "twardziel",
-      "variant": "default",
-      "source": "icons/klasy/twardziel.svg",
-      "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac",
-      "referenced": true
-    },
-    {
-      "kind": "class",
-      "id": "zwiadowca",
-      "label": "Zwiadowca",
-      "owner": "zwiadowca",
-      "variant": "default",
-      "source": "icons/klasy/zwiadowca.svg",
-      "sourceSha256": "67b410b391ee6dda233c64b0bbdf051d8d4bc1909260d06ef79fa3e6c328307a",
       "referenced": true
     },
     {
@@ -99,56 +59,6 @@
     },
     {
       "kind": "profession",
-      "id": "kaznodzieja",
-      "label": "Kaznodzieja Nowej Ery",
-      "owner": "cwaniak",
-      "variant": "default",
-      "source": "icons/profesje/kaznodzieja.svg",
-      "sourceSha256": "138bbdbdc8637e3e936dd2e1a3d07183dcb20d37f4b66a0c9b4087b482e3eef0",
-      "referenced": true
-    },
-    {
-      "kind": "profession",
-      "id": "kowboj",
-      "label": "Kowboj",
-      "owner": "twardziel",
-      "variant": "default",
-      "source": "icons/profesje/kowboj.svg",
-      "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f",
-      "referenced": true
-    },
-    {
-      "kind": "profession",
-      "id": "kurier",
-      "label": "Kurier",
-      "owner": "zlodziej",
-      "variant": "default",
-      "source": "icons/profesje/kurier.svg",
-      "sourceSha256": "96d9ac95260eca111c41639200ccefe8132a864cee353706bd089fc5693a30d7",
-      "referenced": true
-    },
-    {
-      "kind": "profession",
-      "id": "lowca-mutantow",
-      "label": "Łowca Mutantów",
-      "owner": "zwiadowca",
-      "variant": "default",
-      "source": "icons/profesje/lowca-mutantow.svg",
-      "sourceSha256": "8c35340f8fbd1ef9b1d1fa0c63d40e02a4fc8fc32a6e390441711fe48b637bc0",
-      "referenced": true
-    },
-    {
-      "kind": "profession",
-      "id": "mafiozo",
-      "label": "Mafiozo",
-      "owner": "cwaniak",
-      "variant": "default",
-      "source": "icons/profesje/mafiozo.svg",
-      "sourceSha256": "91d52d1ffa320d4542e393e155df7810d01868b46b3dd9a5f75500eb65f36c88",
-      "referenced": true
-    },
-    {
-      "kind": "profession",
       "id": "medyk",
       "label": "Medyk",
       "owner": "spec",
@@ -159,32 +69,12 @@
     },
     {
       "kind": "profession",
-      "id": "monter",
-      "label": "Monter",
-      "owner": "spec",
-      "variant": "default",
-      "source": "icons/profesje/monter.svg",
-      "sourceSha256": "a266c80a0c3a394ac90455249a8599e49ebaff0d4d35577f630f8810913c801a",
-      "referenced": true
-    },
-    {
-      "kind": "profession",
       "id": "najemnik",
       "label": "Najemnik",
       "owner": "brutal",
       "variant": "default",
       "source": "icons/profesje/najemnik.svg",
       "sourceSha256": "2a4d32936b801162e47078613bb8694d9e2fb05dcc24e13752a64f657fa18716",
-      "referenced": true
-    },
-    {
-      "kind": "profession",
-      "id": "sedzia",
-      "label": "Sędzia",
-      "owner": "zwiadowca",
-      "variant": "default",
-      "source": "icons/profesje/sedzia.svg",
-      "sourceSha256": "874c3e1ff80a895921e5675d617b0e8528280017b875614f1aeaef321f650eeb",
       "referenced": true
     },
     {
@@ -209,32 +99,12 @@
     },
     {
       "kind": "profession",
-      "id": "zabojca",
-      "label": "Zabójca",
-      "owner": "zlodziej",
-      "variant": "default",
-      "source": "icons/profesje/zabojca.svg",
-      "sourceSha256": "f2ab1c6f403e02b4faddbdae54b60e69cc65fcfe9af70ba39eae69a2259618fd",
-      "referenced": true
-    },
-    {
-      "kind": "profession",
       "id": "zabojca-maszyn",
       "label": "Zabójca Maszyn",
       "owner": "zwiadowca",
       "variant": "default",
       "source": "icons/profesje/zabojca-maszyn.svg",
       "sourceSha256": "0c741cf9f957a63bc5ccc664ec9c16c5709904676a638e76017979b364a811d5",
-      "referenced": true
-    },
-    {
-      "kind": "profession",
-      "id": "zolnierz",
-      "label": "Żołnierz",
-      "owner": "twardziel",
-      "variant": "default",
-      "source": "icons/profesje/zolnierz.svg",
-      "sourceSha256": "5ea9f370436a15b721d359267424f0cff11887f5f11ceca09e09944336492654",
       "referenced": true
     }
   ],
@@ -254,19 +124,6 @@
       ]
     },
     {
-      "kind": "feature",
-      "id": "zryw",
-      "label": "Zryw",
-      "owner": "twardziel",
-      "files": [
-        {
-          "source": "icons/abilities/zryw.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
       "kind": "class",
       "id": "brutal",
       "label": "Brutal",
@@ -274,45 +131,6 @@
       "files": [
         {
           "source": "icons/klasy/brutal.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "class",
-      "id": "cwaniak",
-      "label": "Cwaniak",
-      "owner": "cwaniak",
-      "files": [
-        {
-          "source": "icons/klasy/cwaniak.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "class",
-      "id": "twardziel",
-      "label": "Twardziel",
-      "owner": "twardziel",
-      "files": [
-        {
-          "source": "icons/klasy/twardziel.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "class",
-      "id": "zwiadowca",
-      "label": "Zwiadowca",
-      "owner": "zwiadowca",
-      "files": [
-        {
-          "source": "icons/klasy/zwiadowca.svg",
           "variant": "default",
           "status": "generated placeholder"
         }
@@ -346,71 +164,6 @@
     },
     {
       "kind": "profession",
-      "id": "kaznodzieja",
-      "label": "Kaznodzieja Nowej Ery",
-      "owner": "cwaniak",
-      "files": [
-        {
-          "source": "icons/profesje/kaznodzieja.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "profession",
-      "id": "kowboj",
-      "label": "Kowboj",
-      "owner": "twardziel",
-      "files": [
-        {
-          "source": "icons/profesje/kowboj.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "profession",
-      "id": "kurier",
-      "label": "Kurier",
-      "owner": "zlodziej",
-      "files": [
-        {
-          "source": "icons/profesje/kurier.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "profession",
-      "id": "lowca-mutantow",
-      "label": "Łowca Mutantów",
-      "owner": "zwiadowca",
-      "files": [
-        {
-          "source": "icons/profesje/lowca-mutantow.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "profession",
-      "id": "mafiozo",
-      "label": "Mafiozo",
-      "owner": "cwaniak",
-      "files": [
-        {
-          "source": "icons/profesje/mafiozo.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "profession",
       "id": "medyk",
       "label": "Medyk",
       "owner": "spec",
@@ -424,38 +177,12 @@
     },
     {
       "kind": "profession",
-      "id": "monter",
-      "label": "Monter",
-      "owner": "spec",
-      "files": [
-        {
-          "source": "icons/profesje/monter.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "profession",
       "id": "najemnik",
       "label": "Najemnik",
       "owner": "brutal",
       "files": [
         {
           "source": "icons/profesje/najemnik.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "profession",
-      "id": "sedzia",
-      "label": "Sędzia",
-      "owner": "zwiadowca",
-      "files": [
-        {
-          "source": "icons/profesje/sedzia.svg",
           "variant": "default",
           "status": "generated placeholder"
         }
@@ -489,38 +216,12 @@
     },
     {
       "kind": "profession",
-      "id": "zabojca",
-      "label": "Zabójca",
-      "owner": "zlodziej",
-      "files": [
-        {
-          "source": "icons/profesje/zabojca.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "profession",
       "id": "zabojca-maszyn",
       "label": "Zabójca Maszyn",
       "owner": "zwiadowca",
       "files": [
         {
           "source": "icons/profesje/zabojca-maszyn.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "profession",
-      "id": "zolnierz",
-      "label": "Żołnierz",
-      "owner": "twardziel",
-      "files": [
-        {
-          "source": "icons/profesje/zolnierz.svg",
           "variant": "default",
           "status": "generated placeholder"
         }

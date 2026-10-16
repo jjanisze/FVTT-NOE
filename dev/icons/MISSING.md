@@ -37,12 +37,12 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 96** (22 subjects await GM review;
-primary class revisions retain two options each).
+**Next batch number: 96** (the previous 342-card queue is resolved; the newly
+audited class/profession placeholder backlog remains and is listed below).
 
 **Icon coverage correction, 2026-10-16:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
-22 generated initials badges (22 canonically referenced art subjects).
+9 generated initials badges (9 canonically referenced art subjects).
 Origins, Sztuczki, M5 actions and fuel-grade deliveries from the earlier pass
 remain delivered; these counts do not cover all module icons. See the class
 placeholder backlog and `class-placeholder-audit.json`. GM wiring and painted
@@ -1106,87 +1106,69 @@ Evidence: `review/candidates/batch-90/reviewed.json`,
 <!-- placeholder-batch-92:end -->
 
 <!-- placeholder-batch-93:start -->
-## Queue (A) — Batch 93 — 4 classes, two revision options each
+## Reviewed (A) — Batch 93 — 3 delivered, 1 revisions
 
-Each class has two new choices with two main elements. All selected-source
-hashes and verbatim feedback are archived alongside exact generic prompts.
-Older candidates remain selectable; production files require saved approval.
+Saved GM review: 3 subjects installed as exact approved SVG/WEBP pairs.
+The 1 remaining requests carry their exact notes into Batch 96.
+Evidence: `review/candidates/batch-93/reviewed.json` and `reviewed-installed.json`.
 
-| Class | Requested correction | Native SVG (+ WEBP) |
-|---|---|---|
-| Brutal | Add a scar on the chest, replace the knife with a hand-held rail piledriver | `icons/klasy/brutal.svg` |
-| Cwaniak | Relace the megaphone with a microphone | `icons/klasy/cwaniak.svg` |
-| Twardziel | Replace the SMG with an LMG | `icons/klasy/twardziel.svg` |
-| Zwiadowca | The barrel of the gun is crooked - fix it. | `icons/klasy/zwiadowca.svg` |
-
-Sources, prompts and review records: `review/candidates/batch-93/`.
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Brutal | `icons/klasy/brutal.svg` | Revision in Batch 96 |
+| 2 | Cwaniak | `icons/klasy/cwaniak.svg` | **done** |
+| 3 | Twardziel | `icons/klasy/twardziel.svg` | **done** |
+| 4 | Zwiadowca | `icons/klasy/zwiadowca.svg` | **done** |
 
 <!-- placeholder-batch-93:end -->
 
 <!-- placeholder-batch-94:start -->
-## Queue (A) — Batch 94 — 9 awaiting GM review
+## Reviewed (A) — Batch 94 — 6 delivered, 3 revisions
 
-One 3×3 atlas in the established white-glyph style; native initials badges remain
-until the GM approves a selected candidate. Exact sources/hashes, generic prompts
-and targets: `review/candidates/batch-94/`.
+Saved GM review: 6 subjects installed as exact approved SVG/WEBP pairs.
+The 3 remaining requests carry their exact notes into Batch 97.
+Evidence: `review/candidates/batch-94/reviewed.json` and `reviewed-installed.json`.
 
-| Cell | Item | Exact SVG delivery targets (+ WEBP) |
-|---|---|---|
-| 1 | Zawołajcie kolegów (revision) | `icons/abilities/zawolajcie-kolegow.svg` |
-| 2 | Zryw (revision) | `icons/abilities/zryw.svg` |
-| 3 | Chemik (revision) | `icons/profesje/chemik.svg` |
-| 4 | Ganger (revision) | `icons/profesje/ganger.svg` |
-| 5 | Kaznodzieja Nowej Ery | `icons/profesje/kaznodzieja.svg` |
-| 6 | Kowboj | `icons/profesje/kowboj.svg` |
-| 7 | Kurier | `icons/profesje/kurier.svg` |
-| 8 | Łowca Mutantów | `icons/profesje/lowca-mutantow.svg` |
-| 9 | Mafiozo | `icons/profesje/mafiozo.svg` |
-
-Saved revision notes and original selected-source hashes are retained in batch.json
-and revision-feedback-before.json. Old candidates remain available; only these
-revision cards are reset to pending with the new candidate selected.
-
-The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
-nine). Later batch numbers are provisional: saved revisions take priority and
-may add batches. Base/active files share approved pixels; the existing active
-hotbar pulse remains in the code. Old unused active filenames are compatibility
-targets, without new mechanics or wiring. Code, packs and world state are untouched.
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Zawołajcie kolegów | `icons/abilities/zawolajcie-kolegow.svg` | Revision in Batch 97 |
+| 2 | Zryw | `icons/abilities/zryw.svg` | **done** |
+| 3 | Chemik | `icons/profesje/chemik.svg` | Revision in Batch 97 |
+| 4 | Ganger | `icons/profesje/ganger.svg` | Revision in Batch 97 |
+| 5 | Kaznodzieja Nowej Ery | `icons/profesje/kaznodzieja.svg` | **done** |
+| 6 | Kowboj | `icons/profesje/kowboj.svg` | **done** |
+| 7 | Kurier | `icons/profesje/kurier.svg` | **done** |
+| 8 | Łowca Mutantów | `icons/profesje/lowca-mutantow.svg` | **done** |
+| 9 | Mafiozo | `icons/profesje/mafiozo.svg` | **done** |
 
 <!-- placeholder-batch-94:end -->
 
 <!-- placeholder-batch-95:start -->
-## Queue (A) — Batch 95 — 9 awaiting GM review
+## Reviewed (A) — Batch 95 — 4 delivered, 5 revisions
 
-One 3×3 atlas in the established white-glyph style; native initials badges remain
-until the GM approves a selected candidate. Exact sources/hashes, generic prompts
-and targets: `review/candidates/batch-95/`.
+Saved GM review: 4 subjects installed as exact approved SVG/WEBP pairs.
+The 5 remaining requests carry their exact notes into Batch 97.
+Evidence: `review/candidates/batch-95/reviewed.json` and `reviewed-installed.json`.
 
-| Cell | Item | Exact SVG delivery targets (+ WEBP) |
-|---|---|---|
-| 1 | Medyk | `icons/profesje/medyk.svg` |
-| 2 | Monter | `icons/profesje/monter.svg` |
-| 3 | Najemnik | `icons/profesje/najemnik.svg` |
-| 4 | Sędzia | `icons/profesje/sedzia.svg` |
-| 5 | Szczur | `icons/profesje/szczur.svg` |
-| 6 | Wojownik Autostrady | `icons/profesje/wojownik-autostrady.svg` |
-| 7 | Zabójca | `icons/profesje/zabojca.svg` |
-| 8 | Zabójca Maszyn | `icons/profesje/zabojca-maszyn.svg` |
-| 9 | Żołnierz | `icons/profesje/zolnierz.svg` |
-
-The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
-nine). Later batch numbers are provisional: saved revisions take priority and
-may add batches. Base/active files share approved pixels; the existing active
-hotbar pulse remains in the code. Old unused active filenames are compatibility
-targets, without new mechanics or wiring. Code, packs and world state are untouched.
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Medyk | `icons/profesje/medyk.svg` | Revision in Batch 97 |
+| 2 | Monter | `icons/profesje/monter.svg` | **done** |
+| 3 | Najemnik | `icons/profesje/najemnik.svg` | Revision in Batch 97 |
+| 4 | Sędzia | `icons/profesje/sedzia.svg` | **done** |
+| 5 | Szczur | `icons/profesje/szczur.svg` | Revision in Batch 97 |
+| 6 | Wojownik Autostrady | `icons/profesje/wojownik-autostrady.svg` | Revision in Batch 97 |
+| 7 | Zabójca | `icons/profesje/zabojca.svg` | **done** |
+| 8 | Zabójca Maszyn | `icons/profesje/zabojca-maszyn.svg` | Revision in Batch 97 |
+| 9 | Żołnierz | `icons/profesje/zolnierz.svg` | **done** |
 
 <!-- placeholder-batch-95:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source
 
-Audit 2026-10-16: **22 generated initials SVGs**, including 4 classes,
-16 professions and 2 ability files. 0 ability files are active-state
-variants. Canonically referenced art requests below represent **22 subjects**;
+Audit 2026-10-16: **9 generated initials SVGs**, including 1 classes,
+7 professions and 1 ability files. 0 ability files are active-state
+variants. Canonically referenced art requests below represent **9 subjects**;
 base/active variants share a subject and must keep their existing exact filenames.
 These were outside the previous 342-card generation queue. File existence was not
 evidence of finished artwork. Native badges were confirmed against the exact
@@ -1200,27 +1182,14 @@ and the next free batch; fresh GM approval is required before replacement.
 | Kind | Subject | Owner | Exact SVG targets (+ WEBP after approval) | Status |
 |---|---|---|---|---|
 | feature | Zawołajcie kolegów | gladiator | `icons/abilities/zawolajcie-kolegow.svg` | Needs art |
-| feature | Zryw | twardziel | `icons/abilities/zryw.svg` | Needs art |
 | class | Brutal | brutal | `icons/klasy/brutal.svg` | Needs art |
-| class | Cwaniak | cwaniak | `icons/klasy/cwaniak.svg` | Needs art |
-| class | Twardziel | twardziel | `icons/klasy/twardziel.svg` | Needs art |
-| class | Zwiadowca | zwiadowca | `icons/klasy/zwiadowca.svg` | Needs art |
 | profession | Chemik | spec | `icons/profesje/chemik.svg` | Needs art |
 | profession | Ganger | brutal | `icons/profesje/ganger.svg` | Needs art |
-| profession | Kaznodzieja Nowej Ery | cwaniak | `icons/profesje/kaznodzieja.svg` | Needs art |
-| profession | Kowboj | twardziel | `icons/profesje/kowboj.svg` | Needs art |
-| profession | Kurier | zlodziej | `icons/profesje/kurier.svg` | Needs art |
-| profession | Łowca Mutantów | zwiadowca | `icons/profesje/lowca-mutantow.svg` | Needs art |
-| profession | Mafiozo | cwaniak | `icons/profesje/mafiozo.svg` | Needs art |
 | profession | Medyk | spec | `icons/profesje/medyk.svg` | Needs art |
-| profession | Monter | spec | `icons/profesje/monter.svg` | Needs art |
 | profession | Najemnik | brutal | `icons/profesje/najemnik.svg` | Needs art |
-| profession | Sędzia | zwiadowca | `icons/profesje/sedzia.svg` | Needs art |
 | profession | Szczur | zlodziej | `icons/profesje/szczur.svg` | Needs art |
 | profession | Wojownik Autostrady | twardziel | `icons/profesje/wojownik-autostrady.svg` | Needs art |
-| profession | Zabójca | zlodziej | `icons/profesje/zabojca.svg` | Needs art |
 | profession | Zabójca Maszyn | zwiadowca | `icons/profesje/zabojca-maszyn.svg` | Needs art |
-| profession | Żołnierz | twardziel | `icons/profesje/zolnierz.svg` | Needs art |
 
 <!-- class-placeholder-audit:end -->
 

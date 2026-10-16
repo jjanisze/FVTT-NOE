@@ -45,3 +45,7 @@ All older choices and unrelated decisions are preserved. Evidence:
 Whole-component splitting preserves 635 source pixels of the motorcycle's
 overhang; its complete wheels and controls were inspected in the preview.
 No explicit ownership override was needed.
+
+Saved GM review: six approvals installed. Zawołajcie kolegów, Chemik and
+Ganger carry exact finger, pipette and six-spoke requests into Batch 97.
+`reviewed.json` and `reviewed-installed.json` preserve every selection.

@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-16",
+  "batch": 94,
+  "feedbackBeforeSha256": "d42de0f281aff00840847b21961c644eef77992878fdb76d7bea921e367c8a7f",
+  "active": [
+    {
+      "id": "batch89-zawolajcie-kolegow",
+      "name": "Zawołajcie kolegów",
+      "decision": "revise",
+      "candidateId": "batch94-revision",
+      "selectedSource": "candidates/batch-94/zawolajcie-kolegow.png",
+      "sourceSha256": "ee2f824e119375254ce916f7be1e7782f4ab8762d39eb51fc6b11a15c5b48edf",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawolajcie-kolegow.svg",
+          "variant": "default",
+          "sourceSha256": "abfc18f9af0e406acc37d35e09766a779dad7eeabed31cf74d1f1a8e14b3748d"
+        }
+      ],
+      "notes": "Wrong finger. Fix the hand.",
+      "feedback": {
+        "itemId": "batch89-zawolajcie-kolegow",
+        "decision": "revise",
+        "candidateId": "batch94-revision",
+        "notes": "Wrong finger. Fix the hand.",
+        "updatedAt": "2026-10-16T00:43:08.961Z"
+      }
+    },
+    {
+      "id": "batch90-zryw",
+      "name": "Zryw",
+      "decision": "approve",
+      "candidateId": "batch94-revision",
+      "selectedSource": "candidates/batch-94/zryw.png",
+      "sourceSha256": "096459ab64eaa6c73078cf621d9b1dca2689b794bc7468e007f2ca1641a0f644",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zryw.svg",
+          "variant": "default",
+          "sourceSha256": "f566600e180e85a4ce1d0e5cad346aa40e8038faf41d5ec23b4906fb7cdd00f2"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch90-zryw",
+        "decision": "approve",
+        "candidateId": "batch94-revision",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:43:16.079Z"
+      }
+    },
+    {
+      "id": "batch91-chemik",
+      "name": "Chemik",
+      "decision": "revise",
+      "candidateId": "batch94-revision",
+      "selectedSource": "candidates/batch-94/chemik.png",
+      "sourceSha256": "da3e2c044c36f42b1d6869abbaf435d809f9ba51f675f7a04a906978abd7704a",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/chemik.svg",
+          "variant": "default",
+          "sourceSha256": "4662220129374902fd41b90cf730c337c276df09c02f494defe3e6bbf31b6c27"
+        }
+      ],
+      "notes": "Better, but the pipette still has an unnatural shape. Simplify it and draw it straight.",
+      "feedback": {
+        "itemId": "batch91-chemik",
+        "decision": "revise",
+        "candidateId": "batch94-revision",
+        "notes": "Better, but the pipette still has an unnatural shape. Simplify it and draw it straight.",
+        "updatedAt": "2026-10-16T00:43:48.132Z"
+      }
+    },
+    {
+      "id": "batch91-ganger",
+      "name": "Ganger",
+      "decision": "revise",
+      "candidateId": "batch94-revision",
+      "selectedSource": "candidates/batch-94/ganger.png",
+      "sourceSha256": "40ebbf6bb5620c062a90d4acb6e0310c6dafed594b17099ccb5599f67c49bd0d",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/ganger.svg",
+          "variant": "default",
+          "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+        }
+      ],
+      "notes": "Change the THREE spokes to SIX",
+      "feedback": {
+        "itemId": "batch91-ganger",
+        "decision": "revise",
+        "candidateId": "batch94-revision",
+        "notes": "Change the THREE spokes to SIX",
+        "updatedAt": "2026-10-16T00:44:19.716Z"
+      }
+    },
+    {
+      "id": "batch94-kaznodzieja",
+      "name": "Kaznodzieja Nowej Ery",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-94/kaznodzieja.png",
+      "sourceSha256": "d0b93cee93f2459d036a9e2d5299e8b099870fbd4244fa5926c801760a8899cd",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/kaznodzieja.svg",
+          "variant": "default",
+          "sourceSha256": "138bbdbdc8637e3e936dd2e1a3d07183dcb20d37f4b66a0c9b4087b482e3eef0"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch94-kaznodzieja",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:44:29.382Z"
+      }
+    },
+    {
+      "id": "batch94-kowboj",
+      "name": "Kowboj",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-94/kowboj.png",
+      "sourceSha256": "3dfafe61dbeccc325badabbbdd2d5fd22a3aa2898826a4d5ba8b473152ec68d2",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/kowboj.svg",
+          "variant": "default",
+          "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch94-kowboj",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:44:33.488Z"
+      }
+    },
+    {
+      "id": "batch94-kurier",
+      "name": "Kurier",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-94/kurier.png",
+      "sourceSha256": "1daf6f2a68dc54355119ca184914f96c97be71d5415e5545c0060d5776c02dc7",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/kurier.svg",
+          "variant": "default",
+          "sourceSha256": "96d9ac95260eca111c41639200ccefe8132a864cee353706bd089fc5693a30d7"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch94-kurier",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:44:39.021Z"
+      }
+    },
+    {
+      "id": "batch94-lowca-mutantow",
+      "name": "Łowca Mutantów",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-94/lowca-mutantow.png",
+      "sourceSha256": "bb25d9644d22702c8e64d3cd30646f93f7d782307e2548458bbe66c638c55873",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/lowca-mutantow.svg",
+          "variant": "default",
+          "sourceSha256": "8c35340f8fbd1ef9b1d1fa0c63d40e02a4fc8fc32a6e390441711fe48b637bc0"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch94-lowca-mutantow",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:44:47.737Z"
+      }
+    },
+    {
+      "id": "batch94-mafiozo",
+      "name": "Mafiozo",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-94/mafiozo.png",
+      "sourceSha256": "19b18e805398c0e17ee22c204754267c3747fe5fc33f78ee3fc9ee2b6a8ae9e1",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/mafiozo.svg",
+          "variant": "default",
+          "sourceSha256": "91d52d1ffa320d4542e393e155df7810d01868b46b3dd9a5f75500eb65f36c88"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch94-mafiozo",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:44:52.254Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-16",
+  "batch": 95,
+  "feedbackBeforeSha256": "d42de0f281aff00840847b21961c644eef77992878fdb76d7bea921e367c8a7f",
+  "active": [
+    {
+      "id": "batch95-medyk",
+      "name": "Medyk",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-95/medyk.png",
+      "sourceSha256": "94f9d1e4feaf4f87d92800e8cc44428cea6c37cd6e3e42acb91413f2d168561e",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/medyk.svg",
+          "variant": "default",
+          "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037"
+        }
+      ],
+      "notes": "The medkit reads as flat. Add depth to the medkit",
+      "feedback": {
+        "itemId": "batch95-medyk",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "The medkit reads as flat. Add depth to the medkit",
+        "updatedAt": "2026-10-16T00:45:09.785Z"
+      }
+    },
+    {
+      "id": "batch95-monter",
+      "name": "Monter",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-95/monter.png",
+      "sourceSha256": "ae0325d0326fab0c3299d3356e8c9b91da2626279ee9d2b31a9730820b034835",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/monter.svg",
+          "variant": "default",
+          "sourceSha256": "a266c80a0c3a394ac90455249a8599e49ebaff0d4d35577f630f8810913c801a"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch95-monter",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:45:15.119Z"
+      }
+    },
+    {
+      "id": "batch95-najemnik",
+      "name": "Najemnik",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-95/najemnik.png",
+      "sourceSha256": "ed2ba97a5d2e13d0fa89d19211e74567a8aadd38cbfa1192d2d6e2875500b8aa",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/najemnik.svg",
+          "variant": "default",
+          "sourceSha256": "2a4d32936b801162e47078613bb8694d9e2fb05dcc24e13752a64f657fa18716"
+        }
+      ],
+      "notes": "Clean up the contours. Good concept",
+      "feedback": {
+        "itemId": "batch95-najemnik",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Clean up the contours. Good concept",
+        "updatedAt": "2026-10-16T00:45:27.467Z"
+      }
+    },
+    {
+      "id": "batch95-sedzia",
+      "name": "Sędzia",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-95/sedzia.png",
+      "sourceSha256": "196bca45f2cfafd7b460579dc1e5c34b674b977f6f263c1a1dbe3a15e4deac0b",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/sedzia.svg",
+          "variant": "default",
+          "sourceSha256": "874c3e1ff80a895921e5675d617b0e8528280017b875614f1aeaef321f650eeb"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch95-sedzia",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:45:31.952Z"
+      }
+    },
+    {
+      "id": "batch95-szczur",
+      "name": "Szczur",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-95/szczur.png",
+      "sourceSha256": "06b9e64e1348d2eca9ff508090963ac0c25896363c48f7fc8f921c7faf5548b0",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/szczur.svg",
+          "variant": "default",
+          "sourceSha256": "4bd810a23039817a14513e84ba592a708fcc8b78f385cd35e6d7916c79b7cae5"
+        }
+      ],
+      "notes": "It's not a LITERAL rat, but a subclass that relies on pretending to be homeless, blending into the crowd, becoming the beggar. Research and revise.",
+      "feedback": {
+        "itemId": "batch95-szczur",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "It's not a LITERAL rat, but a subclass that relies on pretending to be homeless, blending into the crowd, becoming the beggar. Research and revise.",
+        "updatedAt": "2026-10-16T00:46:38.879Z"
+      }
+    },
+    {
+      "id": "batch95-wojownik-autostrady",
+      "name": "Wojownik Autostrady",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-95/wojownik-autostrady.png",
+      "sourceSha256": "e5da08039463499c1a29214bb840303d6ce42b36dc6154c6557be4e4c064f8ad",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/wojownik-autostrady.svg",
+          "variant": "default",
+          "sourceSha256": "e01f31847380231e9d631e52c4abeb248ae3d4926c2bc01f16c05a20e1f6961a"
+        }
+      ],
+      "notes": "Slightly correct the shotgun, it looks weird.",
+      "feedback": {
+        "itemId": "batch95-wojownik-autostrady",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Slightly correct the shotgun, it looks weird.",
+        "updatedAt": "2026-10-16T00:46:52.731Z"
+      }
+    },
+    {
+      "id": "batch95-zabojca",
+      "name": "Zabójca",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-95/zabojca.png",
+      "sourceSha256": "151736685b4c10439406e89f7aba2f6de42494c17f9d0d8964e2eccbb912b89f",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/zabojca.svg",
+          "variant": "default",
+          "sourceSha256": "f2ab1c6f403e02b4faddbdae54b60e69cc65fcfe9af70ba39eae69a2259618fd"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch95-zabojca",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:46:59.564Z"
+      }
+    },
+    {
+      "id": "batch95-zabojca-maszyn",
+      "name": "Zabójca Maszyn",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-95/zabojca-maszyn.png",
+      "sourceSha256": "d4e27de0dcb4169a5a1546e8926b55265ffe828b4c1dbf48eb9035f8d4364f75",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/zabojca-maszyn.svg",
+          "variant": "default",
+          "sourceSha256": "0c741cf9f957a63bc5ccc664ec9c16c5709904676a638e76017979b364a811d5"
+        }
+      ],
+      "notes": "Correct the anatomy of the bot, or conversely, make it's right side busted",
+      "feedback": {
+        "itemId": "batch95-zabojca-maszyn",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Correct the anatomy of the bot, or conversely, make it's right side busted",
+        "updatedAt": "2026-10-16T00:47:33.534Z"
+      }
+    },
+    {
+      "id": "batch95-zolnierz",
+      "name": "Żołnierz",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-95/zolnierz.png",
+      "sourceSha256": "46d7112f527376b9d6359d75783efc4502dbffb76017d1c3fbcb63f75ab7d9df",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/zolnierz.svg",
+          "variant": "default",
+          "sourceSha256": "5ea9f370436a15b721d359267424f0cff11887f5f11ceca09e09944336492654"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch95-zolnierz",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:47:37.705Z"
+      }
+    }
+  ]
+}

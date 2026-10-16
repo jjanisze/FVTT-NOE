@@ -3258,10 +3258,10 @@
     },
     "batch89-zawolajcie-kolegow": {
       "itemId": "batch89-zawolajcie-kolegow",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch94-revision",
-      "notes": "",
-      "updatedAt": "2026-10-16T00:39:16.836Z"
+      "notes": "Wrong finger. Fix the hand.",
+      "updatedAt": "2026-10-16T00:43:08.961Z"
     },
     "batch89-zawsze-w-siodle": {
       "itemId": "batch89-zawsze-w-siodle",
@@ -3286,10 +3286,10 @@
     },
     "batch90-zryw": {
       "itemId": "batch90-zryw",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch94-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T00:39:16.837Z"
+      "updatedAt": "2026-10-16T00:43:16.079Z"
     },
     "batch90-zwinnosc-szczura": {
       "itemId": "batch90-zwinnosc-szczura",
@@ -3300,17 +3300,17 @@
     },
     "batch90-brutal": {
       "itemId": "batch90-brutal",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch93-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T00:39:17.219Z"
+      "notes": "Replace the hammer with a halligan bar",
+      "updatedAt": "2026-10-16T00:42:09.038Z"
     },
     "batch91-cwaniak": {
       "itemId": "batch91-cwaniak",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch93-a",
       "notes": "",
-      "updatedAt": "2026-10-16T00:39:17.219Z"
+      "updatedAt": "2026-10-16T00:42:15.122Z"
     },
     "batch91-spec": {
       "itemId": "batch91-spec",
@@ -3321,10 +3321,10 @@
     },
     "batch91-twardziel": {
       "itemId": "batch91-twardziel",
-      "decision": "pending",
-      "candidateId": "batch93-a",
+      "decision": "approve",
+      "candidateId": "batch93-b",
       "notes": "",
-      "updatedAt": "2026-10-16T00:39:17.219Z"
+      "updatedAt": "2026-10-16T00:42:29.369Z"
     },
     "batch91-zlodziej": {
       "itemId": "batch91-zlodziej",
@@ -3335,24 +3335,24 @@
     },
     "batch91-zwiadowca": {
       "itemId": "batch91-zwiadowca",
-      "decision": "pending",
-      "candidateId": "batch93-a",
+      "decision": "approve",
+      "candidateId": "batch93-b",
       "notes": "",
-      "updatedAt": "2026-10-16T00:39:17.219Z"
+      "updatedAt": "2026-10-16T00:42:48.249Z"
     },
     "batch91-chemik": {
       "itemId": "batch91-chemik",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch94-revision",
-      "notes": "",
-      "updatedAt": "2026-10-16T00:39:16.838Z"
+      "notes": "Better, but the pipette still has an unnatural shape. Simplify it and draw it straight.",
+      "updatedAt": "2026-10-16T00:43:48.132Z"
     },
     "batch91-ganger": {
       "itemId": "batch91-ganger",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch94-revision",
-      "notes": "",
-      "updatedAt": "2026-10-16T00:39:16.838Z"
+      "notes": "Change the THREE spokes to SIX",
+      "updatedAt": "2026-10-16T00:44:19.716Z"
     },
     "batch91-gladiator": {
       "itemId": "batch91-gladiator",
@@ -3367,6 +3367,104 @@
       "candidateId": "atlas-a",
       "notes": "",
       "updatedAt": "2026-10-16T00:03:05.776Z"
+    },
+    "batch94-kaznodzieja": {
+      "itemId": "batch94-kaznodzieja",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:44:29.382Z"
+    },
+    "batch94-kowboj": {
+      "itemId": "batch94-kowboj",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:44:33.488Z"
+    },
+    "batch94-kurier": {
+      "itemId": "batch94-kurier",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:44:39.021Z"
+    },
+    "batch94-lowca-mutantow": {
+      "itemId": "batch94-lowca-mutantow",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:44:47.737Z"
+    },
+    "batch94-mafiozo": {
+      "itemId": "batch94-mafiozo",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:44:52.254Z"
+    },
+    "batch95-medyk": {
+      "itemId": "batch95-medyk",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "The medkit reads as flat. Add depth to the medkit",
+      "updatedAt": "2026-10-16T00:45:09.785Z"
+    },
+    "batch95-monter": {
+      "itemId": "batch95-monter",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:45:15.119Z"
+    },
+    "batch95-najemnik": {
+      "itemId": "batch95-najemnik",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Clean up the contours. Good concept",
+      "updatedAt": "2026-10-16T00:45:27.467Z"
+    },
+    "batch95-sedzia": {
+      "itemId": "batch95-sedzia",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:45:31.952Z"
+    },
+    "batch95-szczur": {
+      "itemId": "batch95-szczur",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "It's not a LITERAL rat, but a subclass that relies on pretending to be homeless, blending into the crowd, becoming the beggar. Research and revise.",
+      "updatedAt": "2026-10-16T00:46:38.879Z"
+    },
+    "batch95-wojownik-autostrady": {
+      "itemId": "batch95-wojownik-autostrady",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Slightly correct the shotgun, it looks weird.",
+      "updatedAt": "2026-10-16T00:46:52.731Z"
+    },
+    "batch95-zabojca": {
+      "itemId": "batch95-zabojca",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:46:59.564Z"
+    },
+    "batch95-zabojca-maszyn": {
+      "itemId": "batch95-zabojca-maszyn",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Correct the anatomy of the bot, or conversely, make it's right side busted",
+      "updatedAt": "2026-10-16T00:47:33.534Z"
+    },
+    "batch95-zolnierz": {
+      "itemId": "batch95-zolnierz",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:47:37.705Z"
     }
   }
 }

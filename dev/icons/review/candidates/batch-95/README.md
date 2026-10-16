@@ -41,3 +41,8 @@ errors; none await their first generation. Evidence:
 Whole-component splitting preserves 50 source pixels of the robot/lightning
 overhang. Only tiny normalization fragments were removed (ten pixels from
 Zabójca and two from Zabójca Maszyn); no ownership override was needed.
+
+Saved GM review: four approvals installed. Medyk, Najemnik, Szczur,
+Wojownik Autostrady and Zabójca Maszyn carry exact notes into Batch 97.
+Szczur requires a human disguise concept rather than a literal animal.
+`reviewed.json` and `reviewed-installed.json` retain the original feedback.

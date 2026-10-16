@@ -217,6 +217,11 @@ This includes the selected Spec and Złodziej class options. Sources and hashes
 are in `dev/icons/review/candidates/batch-90/reviewed-installed.json` and
 `dev/icons/review/candidates/batch-91/reviewed-installed.json`.
 
+Thirteen further GM selections from Batches 93–95 were installed on
+2026-10-16 as exact SVG/WEBP masks generated with OpenAI's built-in image tool.
+Sources, selected variants and delivered hashes are recorded in those batches'
+`reviewed-installed.json` files under `dev/icons/review/candidates/`.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

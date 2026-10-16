@@ -49,3 +49,7 @@ remaining placeholder is represented; all 22 native hashes are unchanged.
 All 26 new choices resolve through the existing approval provenance helper.
 Evidence: `raw/review-preview.png` and
 `../../../placeholder-pass/progress-93-95.json`.
+
+Saved GM review: Cwaniak A, Twardziel B and Zwiadowca B are installed.
+Brutal A carries the exact Halligan-bar request into Batch 96. `reviewed.json`
+and `reviewed-installed.json` preserve the selections and delivered hashes.
