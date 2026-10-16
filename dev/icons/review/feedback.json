@@ -3300,10 +3300,10 @@
     },
     "batch90-brutal": {
       "itemId": "batch90-brutal",
-      "decision": "revise",
-      "candidateId": "batch96-a",
-      "notes": "On second thought, I missed it with the halligan bar. Find a suitable weapon from the weapons tab. Something suitable for an unsophisticated brute to bash skulls in, but not the fantasy hammer.",
-      "updatedAt": "2026-10-16T21:19:44.338Z"
+      "decision": "pending",
+      "candidateId": "batch98-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T21:29:29.149Z"
     },
     "batch91-cwaniak": {
       "itemId": "batch91-cwaniak",
@@ -3349,10 +3349,10 @@
     },
     "batch91-ganger": {
       "itemId": "batch91-ganger",
-      "decision": "revise",
-      "candidateId": "batch97-revision",
-      "notes": "The lower right side of the wheel is does not form a circle with the rest, and it is missing part of the spoke. Redo just the lower right part to match the upper right. Otherwise I'll hand-edit (give path)",
-      "updatedAt": "2026-10-16T21:20:44.518Z"
+      "decision": "pending",
+      "candidateId": "batch99-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T21:29:29.243Z"
     },
     "batch91-gladiator": {
       "itemId": "batch91-gladiator",

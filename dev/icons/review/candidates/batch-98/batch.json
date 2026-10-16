@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-16",
+  "batch": 98,
+  "mode": "two-options-per-primary-class",
+  "subjects": [
+    {
+      "kind": "class",
+      "key": "brutal",
+      "name": "Brutal",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/klasy/brutal.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/brutal.svg",
+          "variant": "default",
+          "sourceSha256": "83bf2a94a6a88bb853e8e3de117926e3e503d06a79bbd186bc69e8f9ecaeb915"
+        }
+      ],
+      "ruleContext": "",
+      "context": "class: Brutal; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "Preserve the exact selected headless bare adult torso on the LEFT, its shape, broad anatomical cuts and ONE healed diagonal chest scar. Replace ONLY the Halligan at RIGHT with the specified ordinary blunt weapon. Keep torso and weapon as TWO distinct main elements with a generous black separating gap. No head, hands, extra prop, fantasy hammer, axe, blade, gun, blood, wounds or fine muscle detail. ",
+      "itemId": "batch90-brutal",
+      "revisionOf": {
+        "id": "batch90-brutal",
+        "name": "Brutal",
+        "decision": "revise",
+        "candidateId": "batch96-a",
+        "selectedSource": "candidates/batch-96-a/brutal.png",
+        "sourceSha256": "a1458c52068c8d17c13806756e92f95014b73a5e4ffedba2345d42de43778d1f",
+        "deliveryTargets": [
+          {
+            "source": "icons/klasy/brutal.svg",
+            "variant": "default",
+            "sourceSha256": "83bf2a94a6a88bb853e8e3de117926e3e503d06a79bbd186bc69e8f9ecaeb915"
+          }
+        ],
+        "notes": "On second thought, I missed it with the halligan bar. Find a suitable weapon from the weapons tab. Something suitable for an unsophisticated brute to bash skulls in, but not the fantasy hammer.",
+        "feedback": {
+          "itemId": "batch90-brutal",
+          "decision": "revise",
+          "candidateId": "batch96-a",
+          "notes": "On second thought, I missed it with the halligan bar. Find a suitable weapon from the weapons tab. Something suitable for an unsophisticated brute to bash skulls in, but not the fantasy hammer.",
+          "updatedAt": "2026-10-16T21:19:44.338Z"
+        }
+      },
+      "options": {
+        "a": "Preserve the exact selected headless bare adult torso on the LEFT, its shape, broad anatomical cuts and ONE healed diagonal chest scar. Replace ONLY the Halligan at RIGHT with the specified ordinary blunt weapon. Keep torso and weapon as TWO distinct main elements with a generous black separating gap. No head, hands, extra prop, fantasy hammer, axe, blade, gun, blood, wounds or fine muscle detail. ONE plain heavy STEEL PIPE from the canonical Bejsbol/Rurka weapon entry. Straight stout cylindrical metal tube, blunt flat cut upper end with ONE broad black oval opening, lower end covered by ONE short plain grip wrap. Diagonal bottom-left to upper-right at the torso's RIGHT. No curved elbow, fork, adze, crossbar, spikes, studs, tool head, chained hardware or little wrap lines.",
+        "b": "Preserve the exact selected headless bare adult torso on the LEFT, its shape, broad anatomical cuts and ONE healed diagonal chest scar. Replace ONLY the Halligan at RIGHT with the specified ordinary blunt weapon. Keep torso and weapon as TWO distinct main elements with a generous black separating gap. No head, hands, extra prop, fantasy hammer, axe, blade, gun, blood, wounds or fine muscle detail. ONE ordinary BASEBALL BAT, the other form of the same Bejsbol/Rurka catalog weapon. Broad smooth rounded blunt barrel tapering continuously to ONE narrow complete handle ending in ONE small rounded knob. Diagonal bottom-left to upper-right at the torso's RIGHT. Natural recognizable bat proportions. No nails, spikes, bands, branding, wood grain or texture."
+      }
+    }
+  ]
+}

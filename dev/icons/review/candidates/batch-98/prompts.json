@@ -1,0 +1,25 @@
+{
+  "generator": "OpenAI built-in image generation",
+  "date": "2026-10-16",
+  "canonicalWeapon": {
+    "source": "scripts/config/weapons-data.mjs",
+    "id": "bejsbol-rurka",
+    "name": "Bejsbol/Rurka",
+    "forms": [
+      "plain steel pipe",
+      "ordinary baseball bat"
+    ]
+  },
+  "pairs": [
+    {
+      "key": "brutal",
+      "reference": [
+        "raw/reference-brutal.png",
+        "raw/catalog-pipe.png",
+        "raw/catalog-bat.png"
+      ],
+      "output": "raw/brutal-pair.png",
+      "prompt": "Use case: stylized-concept. Asset: pivotal primary-class icons for a post-apocalyptic tabletop interface. Create ONE LANDSCAPE image containing exactly TWO independent glyphs, LEFT option A and RIGHT option B, in two equal side-by-side cells. No visible grid, captions, labels, letters, numbers, logos or border. Both options must use PURE SOLID WHITE #FFFFFF on perfectly clean PURE BLACK #000000. Match the reference's sober broad stencil weight, with large black negative-space cuts. Each complete glyph occupies the middle 60 percent of its own cell, with generous blank space on ALL sides and a wide empty black gutter between the two options. No part crosses the middle division. Each option contains exactly TWO distinct main elements, covering different sides of the class. They are two alternative emblems for the SAME class, not two halves of one combined emblem. Readability at 16/24/32 pixels matters: broad silhouettes, very few internal cuts, complete coherent objects. No shading, grey, gradients, hatching, dithering, texture, distressing, hair strands, tiny fittings or thin detail. No anime, cartoon anatomy, gruff survivor busts, giant generic cogs, decorative frames or gore. Reference 1 is the exact selected TORSO EDIT TARGET; retain its torso and scar, replace only the Halligan. References 2 and 3 are existing catalog pipe and bat shapes, not additional props. Simplify their detail.\n\nCLASS: Brutal. LEFT OPTION A: Preserve the exact selected headless bare adult torso on the LEFT, its shape, broad anatomical cuts and ONE healed diagonal chest scar. Replace ONLY the Halligan at RIGHT with the specified ordinary blunt weapon. Keep torso and weapon as TWO distinct main elements with a generous black separating gap. No head, hands, extra prop, fantasy hammer, axe, blade, gun, blood, wounds or fine muscle detail. ONE plain heavy STEEL PIPE from the canonical Bejsbol/Rurka weapon entry. Straight stout cylindrical metal tube, blunt flat cut upper end with ONE broad black oval opening, lower end covered by ONE short plain grip wrap. Diagonal bottom-left to upper-right at the torso's RIGHT. No curved elbow, fork, adze, crossbar, spikes, studs, tool head, chained hardware or little wrap lines.\nRIGHT OPTION B: Preserve the exact selected headless bare adult torso on the LEFT, its shape, broad anatomical cuts and ONE healed diagonal chest scar. Replace ONLY the Halligan at RIGHT with the specified ordinary blunt weapon. Keep torso and weapon as TWO distinct main elements with a generous black separating gap. No head, hands, extra prop, fantasy hammer, axe, blade, gun, blood, wounds or fine muscle detail. ONE ordinary BASEBALL BAT, the other form of the same Bejsbol/Rurka catalog weapon. Broad smooth rounded blunt barrel tapering continuously to ONE narrow complete handle ending in ONE small rounded knob. Diagonal bottom-left to upper-right at the torso's RIGHT. Natural recognizable bat proportions. No nails, spikes, bands, branding, wood grain or texture."
+    }
+  ]
+}

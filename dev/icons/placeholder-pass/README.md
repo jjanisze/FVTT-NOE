@@ -151,6 +151,12 @@ other revisions, with the spare ninth atlas cell empty. No fresh subjects
 remain. The next free batch number is 98. The Szczur profession now uses
 its canonical beggar-disguise role instead of a literal animal.
 
+After the Batch 96–97 review, seven approvals are delivered: **151/153 subjects
+and 153/155 native SVG targets**. Only Brutal and Ganger remain. Batch 98 gives
+Brutal two choices using the canonical Bejsbol/Rurka weapon: plain pipe or
+baseball bat. Batch 99 repairs only Ganger's lower-right wheel arc and spoke.
+No subjects await first generation. The next free batch number is 100.
+
 The GM's durable direction is to avoid repeated gruff male survivor portraits:
 prefer the actual objects, hands, actions and generic adults, with no anime.
 That instruction is also recorded in Pipeline.md.
@@ -211,6 +217,10 @@ That instruction is also recorded in Pipeline.md.
   [exact prompts](../review/candidates/batch-96/prompts.json).
 - [Batch 97 revisions](../review/candidates/batch-97/README.md) and
   [exact prompts](../review/candidates/batch-97/prompts.json).
+- [Batch 98 class choices](../review/candidates/batch-98/README.md) and
+  [exact prompt](../review/candidates/batch-98/prompts.json).
+- [Batch 99 wheel repair](../review/candidates/batch-99/README.md) and
+  [exact prompt](../review/candidates/batch-99/prompts.json).
 
 The numbered `prepare_*.py` files freeze their actual
 allocations and

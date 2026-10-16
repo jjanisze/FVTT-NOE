@@ -1,0 +1,9 @@
+{
+  "batch91-ganger": {
+    "itemId": "batch91-ganger",
+    "decision": "revise",
+    "candidateId": "batch97-revision",
+    "notes": "The lower right side of the wheel is does not form a circle with the rest, and it is missing part of the spoke. Redo just the lower right part to match the upper right. Otherwise I'll hand-edit (give path)",
+    "updatedAt": "2026-10-16T21:20:44.518Z"
+  }
+}

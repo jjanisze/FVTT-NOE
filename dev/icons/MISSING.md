@@ -37,8 +37,8 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 98** (the previous 342-card queue is resolved; the newly
-audited class/profession placeholder backlog remains and is listed below).
+**Next batch number: 100** (2 candidates in 2 batches await GM review;
+production replacements require a saved approval).
 
 **Icon coverage correction, 2026-10-16:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
@@ -1195,6 +1195,46 @@ Evidence: `review/candidates/batch-97/reviewed.json` and `reviewed-installed.jso
 | 8 | Zabójca Maszyn | `icons/profesje/zabojca-maszyn.svg` | **done** |
 
 <!-- placeholder-batch-97:end -->
+
+<!-- placeholder-batch-98:start -->
+## Queue (A) — Batch 98 — 1 class, two revision options each
+
+Each class has two new choices with two main elements. All selected-source
+hashes and verbatim feedback are archived alongside exact generic prompts.
+Older candidates remain selectable; production files require saved approval.
+
+| Class | Requested correction | Native SVG (+ WEBP) |
+|---|---|---|
+| Brutal | On second thought, I missed it with the halligan bar. Find a suitable weapon from the weapons tab. Something suitable for an unsophisticated brute to bash skulls in, but not the fantasy hammer. | `icons/klasy/brutal.svg` |
+
+Sources, prompts and review records: `review/candidates/batch-98/`.
+
+<!-- placeholder-batch-98:end -->
+
+<!-- placeholder-batch-99:start -->
+## Queue (A) — Batch 99 — 1 awaiting GM review
+
+One targeted standalone repair of Ganger's lower-right wheel, in the established
+white-glyph style. The existing badge remains until saved GM approval. Exact
+sources/hashes, prompts and targets: `review/candidates/batch-99/`. Editable source:
+`review/candidates/batch-99/raw/standalone-ganger.png`. Eight compatibility cells
+stay empty; no filler subjects are generated.
+
+| Cell | Item | Exact SVG delivery targets (+ WEBP) |
+|---|---|---|
+| 1 | Ganger (revision) | `icons/profesje/ganger.svg` |
+
+Saved revision notes and original selected-source hashes are retained in batch.json
+and revision-feedback-before.json. Old candidates remain available; only these
+revision cards are reset to pending with the new candidate selected.
+
+The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
+nine). Later batch numbers are provisional: saved revisions take priority and
+may add batches. Base/active files share approved pixels; the existing active
+hotbar pulse remains in the code. Old unused active filenames are compatibility
+targets, without new mechanics or wiring. Code, packs and world state are untouched.
+
+<!-- placeholder-batch-99:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source

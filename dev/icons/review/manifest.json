@@ -1,13 +1,13 @@
 {
   "version": 1,
-  "title": "Batch 97 · 7 approved subjects delivered; 2 awaiting revision",
+  "title": "Batches 98 + 99 · 2 awaiting GM review",
   "updated": "2026-10-16",
   "items": [
     {
       "id": "batch90-brutal",
       "name": "Brutal",
-      "tier": "Batch 96 · Brutal",
-      "batch": 96,
+      "tier": "Batch 98 · Brutal",
+      "batch": 98,
       "placeholderKey": "class:brutal",
       "target": "icons/klasy/brutal.svg",
       "deliveryTargets": [
@@ -18,12 +18,24 @@
         }
       ],
       "context": "class: Brutal; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "Keep the same headless bare torso with its single healed diagonal chest scar. Replace the ENTIRE HAMMER with ONE proper HALLIGAN FORCIBLE-ENTRY BAR. The Halligan has ONE long stout straight steel shaft, a TWO-PRONGED FORK with a deep U-shaped gap at ONE end, and a compact ADZE-AND-PIKE HEAD at the OTHER end: one short broad flat adze blade projecting to one side and one short pointed spike projecting to the opposite side at the SAME junction. Complete unmistakable fork, shaft, adze and pike, broad simplified white silhouette. No hammer block, sledge head, axe blade, knife, gun, labels or fine machining. Exactly torso and Halligan bar, no extra prop, wound, blood, gore or detailed muscles.",
+      "request": "Preserve the exact selected headless bare adult torso on the LEFT, its shape, broad anatomical cuts and ONE healed diagonal chest scar. Replace ONLY the Halligan at RIGHT with the specified ordinary blunt weapon. Keep torso and weapon as TWO distinct main elements with a generous black separating gap. No head, hands, extra prop, fantasy hammer, axe, blade, gun, blood, wounds or fine muscle detail. ",
       "current": {
         "src": "/icons/klasy/brutal.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch98-a",
+          "label": "Batch 98 · Brutal · A",
+          "src": "candidates/batch-98-a/brutal.png",
+          "note": "Preserve the exact selected headless bare adult torso on the LEFT, its shape, broad anatomical cuts and ONE healed diagonal chest scar. Replace ONLY the Halligan at RIGHT with the specified ordinary blunt weapon. Keep torso and weapon as TWO distinct main elements with a generous black separating gap. No head, hands, extra prop, fantasy hammer, axe, blade, gun, blood, wounds or fine muscle detail. ONE plain heavy STEEL PIPE from the canonical Bejsbol/Rurka weapon entry. Straight stout cylindrical metal tube, blunt flat cut upper end with ONE broad black oval opening, lower end covered by ONE short plain grip wrap. Diagonal bottom-left to upper-right at the torso's RIGHT. No curved elbow, fork, adze, crossbar, spikes, studs, tool head, chained hardware or little wrap lines."
+        },
+        {
+          "id": "batch98-b",
+          "label": "Batch 98 · Brutal · B",
+          "src": "candidates/batch-98-b/brutal.png",
+          "note": "Preserve the exact selected headless bare adult torso on the LEFT, its shape, broad anatomical cuts and ONE healed diagonal chest scar. Replace ONLY the Halligan at RIGHT with the specified ordinary blunt weapon. Keep torso and weapon as TWO distinct main elements with a generous black separating gap. No head, hands, extra prop, fantasy hammer, axe, blade, gun, blood, wounds or fine muscle detail. ONE ordinary BASEBALL BAT, the other form of the same Bejsbol/Rurka catalog weapon. Broad smooth rounded blunt barrel tapering continuously to ONE narrow complete handle ending in ONE small rounded knob. Diagonal bottom-left to upper-right at the torso's RIGHT. Natural recognizable bat proportions. No nails, spikes, bands, branding, wood grain or texture."
+        },
         {
           "id": "batch96-a",
           "label": "Batch 96 · Brutal · A",
@@ -13164,8 +13176,8 @@
     {
       "id": "batch91-ganger",
       "name": "Ganger",
-      "tier": "Batch 97 · Brutal",
-      "batch": 97,
+      "tier": "Batch 99 · Brutal",
+      "batch": 99,
       "placeholderKey": "profession:ganger",
       "target": "icons/profesje/ganger.svg",
       "deliveryTargets": [
@@ -13176,12 +13188,18 @@
         }
       ],
       "context": "profession: Ganger; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zyskujesz biegłość w kategorii broń palna pośrednia oraz biegłość w umiejętności Pojazdy. DWÓCH NA JEDNEGO; JA I MÓJ GANG!; JEDEN Z NICH; ODWAŻNY CZY GŁUPI Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "REVISION of reference cell 3. Keep the studded baseball bat and complete circular motorcycle tire. Replace the three spokes with EXACTLY SIX broad STRAIGHT SPOKES, evenly spaced around ONE centered circular HUB. Six spokes point toward the positions of twelve, two, four, six, eight and ten o'clock. Six spokes make SIX large black wedge openings; no numbers are drawn. Keep all six spokes visible: move the diagonal bat just to the RIGHT of the wheel so it may overlap the OUTER RIGHT RIM but does NOT cover the hub or inner spokes. Both objects stay compact and complete. Natural coherent concentric wheel geometry, thick sober white cuts, no seventh spoke, tiny hub bolts, extra wheel, text or fine tread.",
+      "request": "Use case: precise-object-edit. Edit the supplied Ganger glyph. Change ONLY the LOWER-RIGHT QUADRANT OF THE WHEEL, approximately the three-to-six o'clock arc and its four-o'clock spoke. Keep the entire upper half, left half, centered hub, other five spokes, tire tread, diagonal studded baseball bat, framing and relative scale unchanged. The current lower-right rim bulges and the four-o'clock spoke is broken. Repair the rim into a smooth concentric circular continuation of the UPPER-RIGHT arc: same center, radius and rim thickness. Restore ONE continuous broad straight radial spoke from hub toward four o'clock until it meets that inner rim. Keep exactly SIX spokes in total and six broad black wedge openings. Preserve the black separating cut where the bat lies in front of the outer rim. No seventh spoke, extra ring, bolt, lettering, grey, gradients, dithering, decoration or texture. Pure white sober flat glyph on pure black. This is a local geometric repair, not a redesign. One centered complete icon, generous blank margins, square output.",
       "current": {
         "src": "/icons/profesje/ganger.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch99-revision",
+          "label": "Batch 99 · revised Ganger",
+          "src": "candidates/batch-99/ganger.png",
+          "note": "Use case: precise-object-edit. Edit the supplied Ganger glyph. Change ONLY the LOWER-RIGHT QUADRANT OF THE WHEEL, approximately the three-to-six o'clock arc and its four-o'clock spoke. Keep the entire upper half, left half, centered hub, other five spokes, tire tread, diagonal studded baseball bat, framing and relative scale unchanged. The current lower-right rim bulges and the four-o'clock spoke is broken. Repair the rim into a smooth concentric circular continuation of the UPPER-RIGHT arc: same center, radius and rim thickness. Restore ONE continuous broad straight radial spoke from hub toward four o'clock until it meets that inner rim. Keep exactly SIX spokes in total and six broad black wedge openings. Preserve the black separating cut where the bat lies in front of the outer rim. No seventh spoke, extra ring, bolt, lettering, grey, gradients, dithering, decoration or texture. Pure white sober flat glyph on pure black. This is a local geometric repair, not a redesign. One centered complete icon, generous blank margins, square output."
+        },
         {
           "id": "batch97-revision",
           "label": "Batch 97 · revised Ganger",

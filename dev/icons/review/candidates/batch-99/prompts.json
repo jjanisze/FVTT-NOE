@@ -1,0 +1,23 @@
+{
+  "generator": "OpenAI built-in image generation",
+  "date": "2026-10-16",
+  "reference": "raw/reference-ganger.png",
+  "atlas": "Use case: precise-object-edit. Edit the supplied Ganger glyph. Change ONLY the LOWER-RIGHT QUADRANT OF THE WHEEL, approximately the three-to-six o'clock arc and its four-o'clock spoke. Keep the entire upper half, left half, centered hub, other five spokes, tire tread, diagonal studded baseball bat, framing and relative scale unchanged. The current lower-right rim bulges and the four-o'clock spoke is broken. Repair the rim into a smooth concentric circular continuation of the UPPER-RIGHT arc: same center, radius and rim thickness. Restore ONE continuous broad straight radial spoke from hub toward four o'clock until it meets that inner rim. Keep exactly SIX spokes in total and six broad black wedge openings. Preserve the black separating cut where the bat lies in front of the outer rim. No seventh spoke, extra ring, bolt, lettering, grey, gradients, dithering, decoration or texture. Pure white sober flat glyph on pure black. This is a local geometric repair, not a redesign. One centered complete icon, generous blank margins, square output.",
+  "layout": "One targeted standalone edit, composited unchanged into cell 1 of a black 3x3 canvas only for existing processor compatibility; no extra generation or subjects.",
+  "targetedCorrections": [
+    {
+      "key": "ganger",
+      "reference": "raw/ganger-first-attempt.png",
+      "output": "raw/standalone-ganger.png",
+      "prompt": "Use case: precise-object-edit. Repair ONLY the lower-right wheel quadrant in this image; do not redesign it. The missing detail is the INNER BLACK CIRCULAR CHANNEL and the outer part of the four-o'clock spoke, in the white crescent to the RIGHT of the diagonal bat. Do NOT just smooth the outer tire edge. Wheel geometry in a normalized 256-square: center approximately (107,128); outer tire radius about 85; black channel radius about 65. Continue the existing thin broad BLACK circular channel from the upper-right wheel, behind the bat, through the visible LOWER-RIGHT white crescent at about x=170..186,y=145..183, and down to meet the bottom circular channel. It must be a concentric arc of the SAME circle as the upper and left channel. Inside that channel, a white rim surrounds six BLACK wedge spaces. In the black lower-right wedge, restore the exposed short continuation of the FOUR-O'CLOCK WHITE SPOKE on the RIGHT side of the foreground bat: it aligns radially with the spoke coming from the hub and joins the inner white rim. The bat naturally OCCLUDES the middle of that spoke; the aligned exposed piece must remain visible beyond its right edge. Exactly SIX spokes, not seven. Everything outside this lower-right quadrant stays unchanged: hub, all other spokes, upper and left tire, tread teeth, the entire studded bat and grip, and relative positions. Pure white broad sober silhouette on pure black, no grey, gradients, lettering, tiny detail or extra objects. One square icon with the same framing."
+    }
+  ],
+  "attempts": [
+    {
+      "reference": "raw/reference-ganger.png",
+      "output": "raw/ganger-first-attempt.png",
+      "prompt": "Use case: precise-object-edit. Edit the supplied Ganger glyph. Change ONLY the LOWER-RIGHT QUADRANT OF THE WHEEL, approximately the three-to-six o'clock arc and its four-o'clock spoke. Keep the entire upper half, left half, centered hub, other five spokes, tire tread, diagonal studded baseball bat, framing and relative scale unchanged. The current lower-right rim bulges and the four-o'clock spoke is broken. Repair the rim into a smooth concentric circular continuation of the UPPER-RIGHT arc: same center, radius and rim thickness. Restore ONE continuous broad straight radial spoke from hub toward four o'clock until it meets that inner rim. Keep exactly SIX spokes in total and six broad black wedge openings. Preserve the black separating cut where the bat lies in front of the outer rim. No seventh spoke, extra ring, bolt, lettering, grey, gradients, dithering, decoration or texture. Pure white sober flat glyph on pure black. This is a local geometric repair, not a redesign. One centered complete icon, generous blank margins, square output.",
+      "review": "Still missing the lower-right black circular channel and exposed spoke continuation; not registered."
+    }
+  ]
+}

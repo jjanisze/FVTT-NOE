@@ -1,0 +1,9 @@
+{
+  "batch": 98,
+  "variant": "a",
+  "validatedMasks": 1,
+  "prospectiveDeliveryTargets": 1,
+  "candidateHashes": {
+    "brutal": "ccd072df5591417e0d52cbb68e1b7092d629b3b4011a507b829a2efc870027b1"
+  }
+}

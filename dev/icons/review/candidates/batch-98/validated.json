@@ -1,0 +1,10 @@
+{
+  "batch": 98,
+  "validatedMasks": 2,
+  "classSubjects": 1,
+  "prospectiveDeliveryTargets": 1,
+  "candidateHashes": {
+    "a:brutal": "ccd072df5591417e0d52cbb68e1b7092d629b3b4011a507b829a2efc870027b1",
+    "b:brutal": "9f6c28a4f980f54cc8b929a2247f1b6b1b83bd5c2ffa102e9d7672a46a501c3a"
+  }
+}

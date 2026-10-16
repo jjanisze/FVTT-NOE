@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-16",
+  "batch": 99,
+  "partialAtlas": true,
+  "emptyCells": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "subjects": [
+    {
+      "kind": "profession",
+      "key": "ganger",
+      "name": "Ganger",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/profesje/ganger.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/ganger.svg",
+          "variant": "default",
+          "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+        }
+      ],
+      "ruleContext": "Zyskujesz biegłość w kategorii broń palna pośrednia oraz biegłość w umiejętności Pojazdy. DWÓCH NA JEDNEGO; JA I MÓJ GANG!; JEDEN Z NICH; ODWAŻNY CZY GŁUPI",
+      "context": "profession: Ganger; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "Use case: precise-object-edit. Edit the supplied Ganger glyph. Change ONLY the LOWER-RIGHT QUADRANT OF THE WHEEL, approximately the three-to-six o'clock arc and its four-o'clock spoke. Keep the entire upper half, left half, centered hub, other five spokes, tire tread, diagonal studded baseball bat, framing and relative scale unchanged. The current lower-right rim bulges and the four-o'clock spoke is broken. Repair the rim into a smooth concentric circular continuation of the UPPER-RIGHT arc: same center, radius and rim thickness. Restore ONE continuous broad straight radial spoke from hub toward four o'clock until it meets that inner rim. Keep exactly SIX spokes in total and six broad black wedge openings. Preserve the black separating cut where the bat lies in front of the outer rim. No seventh spoke, extra ring, bolt, lettering, grey, gradients, dithering, decoration or texture. Pure white sober flat glyph on pure black. This is a local geometric repair, not a redesign. One centered complete icon, generous blank margins, square output.",
+      "itemId": "batch91-ganger",
+      "revisionOf": {
+        "id": "batch91-ganger",
+        "name": "Ganger",
+        "decision": "revise",
+        "candidateId": "batch97-revision",
+        "selectedSource": "candidates/batch-97/ganger.png",
+        "sourceSha256": "40007371c291d651eba072483b4bcefecf5e3eb4e85dab0aaefbbcebb8231d04",
+        "deliveryTargets": [
+          {
+            "source": "icons/profesje/ganger.svg",
+            "variant": "default",
+            "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+          }
+        ],
+        "notes": "The lower right side of the wheel is does not form a circle with the rest, and it is missing part of the spoke. Redo just the lower right part to match the upper right. Otherwise I'll hand-edit (give path)",
+        "feedback": {
+          "itemId": "batch91-ganger",
+          "decision": "revise",
+          "candidateId": "batch97-revision",
+          "notes": "The lower right side of the wheel is does not form a circle with the rest, and it is missing part of the spoke. Redo just the lower right part to match the upper right. Otherwise I'll hand-edit (give path)",
+          "updatedAt": "2026-10-16T21:20:44.518Z"
+        }
+      },
+      "canonicalAbilities": [
+        "DWÓCH NA JEDNEGO",
+        "JA I MÓJ GANG!",
+        "JEDEN Z NICH",
+        "ODWAŻNY CZY GŁUPI"
+      ]
+    }
+  ]
+}
