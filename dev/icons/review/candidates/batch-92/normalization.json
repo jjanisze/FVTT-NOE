@@ -1,0 +1,194 @@
+[
+  {
+    "key": "brutal",
+    "variant": "a",
+    "source": "raw/brutal-pair.png",
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "crop": [
+      0,
+      0,
+      887,
+      887
+    ],
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "brutal",
+    "variant": "b",
+    "source": "raw/brutal-pair.png",
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "crop": [
+      887,
+      0,
+      1774,
+      887
+    ],
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "cwaniak",
+    "variant": "a",
+    "source": "raw/cwaniak-pair.png",
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "crop": [
+      0,
+      0,
+      887,
+      887
+    ],
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "cwaniak",
+    "variant": "b",
+    "source": "raw/cwaniak-pair.png",
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "crop": [
+      887,
+      0,
+      1774,
+      887
+    ],
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "spec",
+    "variant": "a",
+    "source": "raw/spec-pair.png",
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "crop": [
+      0,
+      0,
+      887,
+      887
+    ],
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "spec",
+    "variant": "b",
+    "source": "raw/spec-pair.png",
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "crop": [
+      887,
+      0,
+      1774,
+      887
+    ],
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "twardziel",
+    "variant": "a",
+    "source": "raw/twardziel-pair.png",
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "crop": [
+      0,
+      0,
+      887,
+      887
+    ],
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "twardziel",
+    "variant": "b",
+    "source": "raw/twardziel-pair.png",
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "crop": [
+      887,
+      0,
+      1774,
+      887
+    ],
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "zlodziej",
+    "variant": "a",
+    "source": "raw/zlodziej-pair.png",
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "crop": [
+      0,
+      0,
+      887,
+      887
+    ],
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "zlodziej",
+    "variant": "b",
+    "source": "raw/zlodziej-pair.png",
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "crop": [
+      887,
+      0,
+      1774,
+      887
+    ],
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "zwiadowca",
+    "variant": "a",
+    "source": "raw/zwiadowca-pair.png",
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "crop": [
+      0,
+      0,
+      887,
+      887
+    ],
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "zwiadowca",
+    "variant": "b",
+    "source": "raw/zwiadowca-pair.png",
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "crop": [
+      887,
+      0,
+      1774,
+      887
+    ],
+    "removedTinyPixels": 0
+  }
+]

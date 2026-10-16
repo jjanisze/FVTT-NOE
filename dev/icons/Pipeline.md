@@ -22,6 +22,12 @@ Generate an item separately only for a targeted revision, an isolated replacemen
 or a subject whose silhouette failed in the atlas. A separately generated icon
 gets extra scrutiny at 16 px because large canvases encourage excess detail.
 
+Primary class emblems have an explicit GM exception (2026-10-16): prepare TWO
+candidate designs per class from the first pass, each containing TWO distinct
+elements. Generate each class as its own two-option comparison image and
+inspect both options at inventory sizes. The GM selects one or requests
+revisions; class emblems require the same approval gate as other icons.
+
 Copy the selected generated file into `in/` before running the pipeline.
 Transparent alpha is preferred; a clean solid black background is also supported
 by the normalization step. Reject speckled or distressed backgrounds.
@@ -76,6 +82,11 @@ Use the following structured prompt for generation:
   a person is needed, use a generic adult figure with restrained facial detail
   and natural proportions. Androgynous figures are appropriate for general
   abilities. Avoid anime styling, spiky hair and exaggerated faces.
+- Class emblems (GM feedback, 2026-10-16) show TWO distinct elements covering
+  different sides of the class. Read the class's canonical description and
+  abilities in `dev/classes/classes.json` before choosing them. For Spec,
+  engineering plus medicine spans the role better than two engineering props.
+  Keep the composition broad enough for inventory-size use.
 - Contents: Input text, e.g. "Revolver", "Semi-automatic pistol", "Short Automatic Weapon", "Medium Automatic Weapon", "Long Automatic Weapon", "Support Weapon", "Scoped Long Weapon", "Special", "Shotgun", "Lever-action".
 
 Prompt with reference file(s) should be executed, and raw results placed into `in/`.

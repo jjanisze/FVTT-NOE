@@ -1,0 +1,335 @@
+{
+  "date": "2026-10-16",
+  "batch": 92,
+  "mode": "two-options-per-primary-class",
+  "subjects": [
+    {
+      "kind": "class",
+      "key": "brutal",
+      "name": "Brutal",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/klasy/brutal.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/brutal.svg",
+          "variant": "default",
+          "sourceSha256": "83bf2a94a6a88bb853e8e3de117926e3e503d06a79bbd186bc69e8f9ecaeb915"
+        }
+      ],
+      "ruleContext": "",
+      "context": "class: Brutal; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "Choose one of two complete class emblems, each with two distinct elements.",
+      "itemId": "batch90-brutal",
+      "rationale": "Berserk and Strength-based melee define the class; Bare Chest rewards fighting without armor. Starting equipment includes a heavy hammer and tactical knife. Represent physical force and melee equipment rather than unrelated freedom symbolism.",
+      "options": {
+        "a": "ONE powerful complete BARE CLENCHED FIST beside ONE heavy industrial SLEDGEHAMMER angled upward-right behind it. Coherent thumb and four folded fingers, short bare wrist; hammer has one broad rectangular steel head and one stout complete handle. Clear broad black separation keeps fist and hammer separately readable. Unarmed force plus heavy melee; no chain, armor, face, tiny knuckles or debris.",
+        "b": "ONE plain HEADLESS BARE ADULT UPPER TORSO beside ONE complete practical TACTICAL KNIFE pointing upward. Torso ends at base of neck and above waist; ordinary strong adult proportions, shoulders and chest as one broad modest solid mass with only TWO large anatomical cuts. Knife has one broad blade, short guard and stout handle; black separation from torso. Unarmored toughness plus melee precision. No nipples, bodybuilder detail, person portrait, extra limbs, fine serrations, injuries or gore."
+      },
+      "canonicalAbilities": [
+        "BERSERK",
+        "GOŁA KLATA",
+        "WŚCIEKŁY CIOS",
+        "Z BARA!",
+        "SZÓSTY ZMYSŁ",
+        "ZDOLNOŚĆ Z PROFESJI",
+        "SZTUCZKA",
+        "BRUTALNY CIOS",
+        "DRUGI ATAK",
+        "SOLÓWA",
+        "SZALEŃCZA SZARŻA",
+        "PARANOJA",
+        "ZABÓJCZY CIOS"
+      ],
+      "revisionOf": {
+        "id": "batch90-brutal",
+        "feedback": {
+          "itemId": "batch90-brutal",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Class icons are pivotal, and should show TWO elements. Research something better for Brutal.",
+          "updatedAt": "2026-10-16T00:01:19.006Z"
+        },
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-90/brutal.png",
+        "sourceSha256": "e2de016d5a162663b137803b2c5a92517b3c2b78eaf97243b9d5277d9491917d",
+        "notes": "Class icons are pivotal, and should show TWO elements. Research something better for Brutal."
+      }
+    },
+    {
+      "kind": "class",
+      "key": "cwaniak",
+      "name": "Cwaniak",
+      "owner": "cwaniak",
+      "ownerLabel": "Cwaniak",
+      "target": "icons/klasy/cwaniak.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/cwaniak.svg",
+          "variant": "default",
+          "sourceSha256": "aa8669e1745b216b6ab4e23aeb55fc20df54d4922261d3e37210e95491e1f57c"
+        }
+      ],
+      "ruleContext": "",
+      "context": "class: Cwaniak; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "request": "Choose one of two complete class emblems, each with two distinct elements.",
+      "itemId": "batch91-cwaniak",
+      "rationale": "The class's central pairing is Charisma-based influence and extraordinary luck. Motivation and Quick Talk affect people; Luck changes rolls. Two playing cards express only the luck side.",
+      "options": {
+        "a": "ONE coherent isometric SIX-SIDED DIE paired with ONE complete handheld MICROPHONE leaning diagonally beside it. Die has three broad planar faces meeting at consistent shared vertices, just one, two and three large round black pips on its faces. Microphone has a stout handle and rounded grille with only TWO broad grille cuts. Clear black gap between objects. Luck plus persuasive speech or motivation, no star, cables, text or fine mesh.",
+        "b": "ONE complete PLAYING CARD with ONE large black SPADES pip paired with ONE sturdy handheld MEGAPHONE angled upward-right. Card is a thick white rectangular mass with no corner indices. Megaphone has a broad flared cone, short complete grip and ONE large black mouth opening. Separate the two objects with broad black space or one clean overlap cut. Luck plus leadership and rapid persuasion, no face, dice, sound-ray clutter, letters, numbers or tiny switches."
+      },
+      "canonicalAbilities": [
+        "MOTYWACJA",
+        "SZCZĘŚCIE",
+        "KOLEJKA",
+        "SPIEPRZYSZ TO!",
+        "SZYBKA GADKA",
+        "ZDOLNOŚĆ Z PROFESJI",
+        "EKSPERT",
+        "SZTUCZKA",
+        "CWANIACKI ZWÓD",
+        "OBELGA",
+        "GŁOWA DO GÓRY!",
+        "SAMOUK",
+        "ŚMIERTELNA OBELGA"
+      ],
+      "revisionOf": {
+        "id": "batch91-cwaniak",
+        "feedback": {
+          "itemId": "batch91-cwaniak",
+          "decision": "approve",
+          "candidateId": "atlas-a",
+          "notes": "Class icons are pivotal, and should show TWO elements. Research something better for Cwaniak.",
+          "updatedAt": "2026-10-16T00:01:33.485Z"
+        },
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-91/cwaniak.png",
+        "sourceSha256": "7e8b4413dee98eb034978626415365c684258a17e5c13a8251f797847ea76b00",
+        "notes": "Class icons are pivotal, and should show TWO elements. Research something better for Cwaniak."
+      }
+    },
+    {
+      "kind": "class",
+      "key": "spec",
+      "name": "Spec",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/klasy/spec.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/spec.svg",
+          "variant": "default",
+          "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+        }
+      ],
+      "ruleContext": "",
+      "context": "class: Spec; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "request": "Choose one of two complete class emblems, each with two distinct elements.",
+      "itemId": "batch91-spec",
+      "rationale": "The class description explicitly spans a hospital, distillery and professional workshop. The GM asks for engineering plus medicine, suggesting wrench and syringe; two technical props underrepresent the class.",
+      "options": {
+        "a": "ONE complete OPEN-END WRENCH and ONE complete MEDICAL SYRINGE cross as a compact balanced X. Wrench open jaw at upper-left and broad handle at lower-right; syringe plunger at upper-right and short intact needle at lower-left. Syringe has a thick barrel, clear finger flange and complete plunger. ONE broad black cut separates the crossing. Exactly two complete tools, engineering plus medicine; no microchip, cog, labels, measurement ticks, droplets or hair-thin needle.",
+        "b": "ONE complete OPEN-END WRENCH stands slightly tilted on the LEFT; ONE complete MEDICAL SYRINGE stands slightly tilted on the RIGHT, angled gently apart at the top. Wrench jaw and syringe plunger remain complete and clearly distinct. Broad syringe barrel, finger flange, stout plunger and short needle; wrench has an open jaw and one large handle hole. Stagger heights slightly for a compact emblem, broad black gap between tools. Engineering plus medicine, no crossing, chip, extra tool, labels, tiny graduations or fine detail."
+      },
+      "canonicalAbilities": [
+        "DOBRA RADA",
+        "INTELIGENTNA OBRONA",
+        "SZYBKIE BADANIE",
+        "ŁEB JAK SKLEP",
+        "SZYBKA PRODUKCJA",
+        "ZDOLNOŚĆ Z PROFESJI",
+        "SZTUCZKA",
+        "SZYBKIE RĘCE",
+        "WYKSZTAŁCIUCH",
+        "ZDOLNOŚĆ Z POCHODZENIA",
+        "SPECJALIZACJA",
+        "TRAJEKTORIA",
+        "BYSTRZACHA",
+        "W CZUŁY PUNKT"
+      ],
+      "revisionOf": {
+        "id": "batch91-spec",
+        "feedback": {
+          "itemId": "batch91-spec",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "A wrench and microchip are both from the same subtree - electronics. Maybe a wrench and syringe?",
+          "updatedAt": "2026-10-15T23:59:47.423Z"
+        },
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-91/spec.png",
+        "sourceSha256": "87a8c6502b0d938c4b44704b069ee5a541e9026a3926357a62dd904d3ea60d4e",
+        "notes": "A wrench and microchip are both from the same subtree - electronics. Maybe a wrench and syringe?"
+      }
+    },
+    {
+      "kind": "class",
+      "key": "twardziel",
+      "name": "Twardziel",
+      "owner": "twardziel",
+      "ownerLabel": "Twardziel",
+      "target": "icons/klasy/twardziel.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/twardziel.svg",
+          "variant": "default",
+          "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac"
+        }
+      ],
+      "ruleContext": "",
+      "context": "class: Twardziel; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "request": "Choose one of two complete class emblems, each with two distinct elements.",
+      "itemId": "batch91-twardziel",
+      "rationale": "The class specializes in all weapons and armor, maximizing firepower and defense. The GM approves the vest-and-gun concept and requires the upper and lower armor pieces to align. Starting equipment includes a plate carrier and submachine gun.",
+      "options": {
+        "a": "ONE complete BODY-ARMOR VEST behind ONE practical PUMP SHOTGUN angled upward-right. Keep the earlier vest-and-shotgun concept, but FIX THE VEST GEOMETRY: shoulder straps, neck opening, upper chest plate, lower plate and hem all share ONE VERTICAL CENTERLINE. The concealed left and right side contours continue smoothly behind the shotgun, with no sideways step or offset. Exactly TWO broad plate cuts. Shotgun has complete stock, barrel, pump grip and empty trigger guard, no tiny fittings. One broad black overlap cut; firepower plus defense.",
+        "b": "ONE complete symmetrical PLATE CARRIER behind ONE complete practical COMPACT SUBMACHINE GUN held HORIZONTALLY across its lower chest, muzzle RIGHT. Armor shoulder straps, neck opening, chest plates and hem share ONE VERTICAL CENTERLINE and continuous aligned side contours; TWO broad horizontal plate cuts only. Gun has one short straight barrel, simple receiver, complete shoulder stock, one grip, one thick short magazine and empty trigger guard. Clear broad black overlap cut. Exactly vest and gun, firepower plus defense, no floating armor piece, offset panels or fine mechanical detail."
+      },
+      "canonicalAbilities": [
+        "KONDYCHA",
+        "ULUBIONA BROŃ",
+        "WYJADACZ",
+        "PRZYCELOWANIE",
+        "ZRYW",
+        "TWARDOŚĆ",
+        "ZDOLNOŚĆ Z PROFESJI",
+        "SZTUCZKA",
+        "DRUGI ATAK",
+        "NIE KLĘKAM",
+        "TRZECI ATAK"
+      ],
+      "revisionOf": {
+        "id": "batch91-twardziel",
+        "feedback": {
+          "itemId": "batch91-twardziel",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "The armor is shifted. Align the upper and lower pieces of the armor. Good concept.",
+          "updatedAt": "2026-10-16T00:01:43.170Z"
+        },
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-91/twardziel.png",
+        "sourceSha256": "b4ddb9d0fd571dc75160bd687fba571eff850b7f2a5b4a0aaf51619637be90bd",
+        "notes": "The armor is shifted. Align the upper and lower pieces of the armor. Good concept."
+      }
+    },
+    {
+      "kind": "class",
+      "key": "zlodziej",
+      "name": "Złodziej",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/klasy/zlodziej.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/zlodziej.svg",
+          "variant": "default",
+          "sourceSha256": "a66384a8f44176c0f6fa824edd1758ceabfbe9645b1370870ec07d93179b50d2"
+        }
+      ],
+      "ruleContext": "",
+      "context": "class: Złodziej; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 5,
+      "request": "Choose one of two complete class emblems, each with two distinct elements.",
+      "itemId": "batch91-zlodziej",
+      "rationale": "The class combines infiltration and bypassing security with precise, sudden attacks. Its description covers opening locks and finding weaknesses; starting equipment includes a crowbar, tactical knife and throwing knives. Show two roles rather than two parts of one lock operation.",
+      "options": {
+        "a": "ONE sturdy OPEN PADLOCK paired with ONE complete practical TACTICAL DAGGER angled upward-right beside it. Lock shackle is clearly lifted free at one side, broad body with one large black keyhole. Dagger has a complete broad straight blade, short guard and stout handle. Broad black separation, exactly two objects. Security bypass plus precise close combat. No inserted lockpick, hooded portrait, fine key teeth, serrations, text, numerals, injury or gore.",
+        "b": "ONE complete practical CROWBAR and ONE complete THROWING KNIFE cross in a compact X. Crowbar has a thick curved hooked claw at upper-left, broad straight shaft and short flattened lower end. Throwing knife has a broad pointed blade, simple balanced one-piece handle and ONE broad round handle hole, tip upper-right. One large black cut separates the crossing. Exactly two full objects, infiltration tool plus precise stealth attack; no padlock, face, hood, delicate fittings, labels, blood or gore."
+      },
+      "canonicalAbilities": [
+        "BOLESNY ATAK",
+        "SPECJALIZACJA",
+        "SZYBKIE NOGI",
+        "KOCIE KOŚCI",
+        "ULUBIONA BROŃ",
+        "PODSTĘPNY ATAK",
+        "ZŁODZIEJSKA PROFESJA",
+        "ELEKTRONIK",
+        "SZTUCZKA",
+        "SZYBKOŚĆ KOTA",
+        "MATRIX",
+        "DZIEWIĘĆ ŻYĆ",
+        "SAPER"
+      ],
+      "revisionOf": {
+        "id": "batch91-zlodziej",
+        "feedback": {
+          "itemId": "batch91-zlodziej",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Class icons are pivotal, and should show TWO elements. Research something better for Zlodziej.",
+          "updatedAt": "2026-10-16T00:01:53.723Z"
+        },
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-91/zlodziej.png",
+        "sourceSha256": "e1a87307b65de029bf6e44229ff030452a328c077e3af0c69eb57e2ed2ec99ac",
+        "notes": "Class icons are pivotal, and should show TWO elements. Research something better for Zlodziej."
+      }
+    },
+    {
+      "kind": "class",
+      "key": "zwiadowca",
+      "name": "Zwiadowca",
+      "owner": "zwiadowca",
+      "ownerLabel": "Zwiadowca",
+      "target": "icons/klasy/zwiadowca.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/zwiadowca.svg",
+          "variant": "default",
+          "sourceSha256": "67b410b391ee6dda233c64b0bbdf051d8d4bc1909260d06ef79fa3e6c328307a"
+        }
+      ],
+      "ruleContext": "",
+      "context": "class: Zwiadowca; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 6,
+      "request": "Choose one of two complete class emblems, each with two distinct elements.",
+      "itemId": "batch91-zwiadowca",
+      "rationale": "The class is a wilderness traveler, hunter and guide. My Biome and My Enemy combine environmental knowledge with hunting. Compass plus rifle or observation plus survival knife spans those roles better than a generic footprint.",
+      "options": {
+        "a": "ONE stout round COMPASS paired with ONE complete practical SCOPED HUNTING RIFLE angled upward-right. Compass has a thick open circular rim and ONE bold two-ended compass needle with one long north point and a shorter south point, NO letters or ticks. Rifle has a complete shoulder stock, straight barrel, simple scope and empty trigger guard, no fine fittings. Broad black overlap separation; exactly navigation instrument and rifle. Wilderness navigation plus hunting, no favorite star badge, person, text or numerals.",
+        "b": "ONE complete practical pair of BINOCULARS paired with ONE complete stout SURVIVAL KNIFE angled upward-right beside it. Binoculars have two thick barrels, two large round lens openings and one broad central hinge. Knife has a complete broad blade, small guard and stout handle with TWO broad grip cuts. Clear broad black separation. Exactly two objects, careful observation plus wilderness survival; no footprint, map, face, thin straps, fine serrations, labels or extra gear."
+      },
+      "canonicalAbilities": [
+        "MÓJ BIOM",
+        "MÓJ WRÓG",
+        "ULUBIONA BROŃ",
+        "KŁUSOWNIK",
+        "WYJADACZ",
+        "CICHY KROK",
+        "ZDOLNOŚĆ Z PROFESJI",
+        "SZTUCZKA",
+        "DRUGI ATAK",
+        "SPORTOWIEC",
+        "WYCZULONE ZMYSŁY",
+        "POGOŃ"
+      ],
+      "revisionOf": {
+        "id": "batch91-zwiadowca",
+        "feedback": {
+          "itemId": "batch91-zwiadowca",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Not bad, see if you can research something else. Two elements.",
+          "updatedAt": "2026-10-16T00:02:26.336Z"
+        },
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-91/zwiadowca.png",
+        "sourceSha256": "88364f7f2c2e6eb22077a6907df520624090cad6f19708d8ef62aeb1fc38cb8e",
+        "notes": "Not bad, see if you can research something else. Two elements."
+      }
+    }
+  ]
+}

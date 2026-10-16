@@ -37,8 +37,8 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 92** (18 candidates in 2 batches await GM review;
-production replacements require a saved approval).
+**Next batch number: 93** (18 subjects await GM review;
+Batch 92 adds two options for each of the six primary classes).
 
 **Icon coverage correction, 2026-10-16:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
@@ -1097,6 +1097,30 @@ hotbar pulse remains in the code. Old unused active filenames are compatibility
 targets, without new mechanics or wiring. Code, packs and world state are untouched.
 
 <!-- placeholder-batch-91:end -->
+
+<!-- placeholder-batch-92:start -->
+## Queue (A) — Batch 92 — six primary classes, two options each
+
+Each emblem contains two distinct elements. Six generated comparison images
+supply twelve candidates. Both new options and every older candidate remain
+available in the existing six cards. Exact prompts, canonical rationale and
+verbatim saved feedback: `review/candidates/batch-92/`.
+
+| Class | Option A / option B | Exact SVG target (+ WEBP) |
+|---|---|---|
+| Brutal | `batch-92-a/brutal.png` / `batch-92-b/brutal.png` | `icons/klasy/brutal.svg` |
+| Cwaniak | `batch-92-a/cwaniak.png` / `batch-92-b/cwaniak.png` | `icons/klasy/cwaniak.svg` |
+| Spec | `batch-92-a/spec.png` / `batch-92-b/spec.png` | `icons/klasy/spec.svg` |
+| Twardziel | `batch-92-a/twardziel.png` / `batch-92-b/twardziel.png` | `icons/klasy/twardziel.svg` |
+| Złodziej | `batch-92-a/zlodziej.png` / `batch-92-b/zlodziej.png` | `icons/klasy/zlodziej.svg` |
+| Zwiadowca | `batch-92-a/zwiadowca.png` / `batch-92-b/zwiadowca.png` | `icons/klasy/zwiadowca.svg` |
+
+The earlier Cwaniak approval also requested a new concept. That exact saved
+decision is archived; the explicit request for two new choices reopens its
+review alongside the other five classes. Unrelated decisions and all native
+production files remain unchanged. No class candidate is installed yet.
+
+<!-- placeholder-batch-92:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source

@@ -125,6 +125,16 @@ start the class/profession emblems. The first 139 unique roadmap subjects are
 allocated; Kaznodzieja Nowej Ery is next at zero-based index 139. Fourteen
 subjects await their first generation. The next free batch number is 92.
 
+Batch 92 is a focused class review requested by the GM: all six primary
+classes receive TWO new candidate designs, each with TWO distinct elements.
+One generated comparison image per class supplies options A and B. These
+reopen the existing six cards and retain every older candidate; unrelated
+decisions and production icons remain unchanged. Cwaniak's earlier approval
+also requested a new concept, so its exact decision is archived while two
+new choices are prepared. This allocates no new roadmap subjects. The next
+free batch number is 93. Primary classes keep this two-option policy for
+their first generation in future asset work.
+
 The GM's durable direction is to avoid repeated gruff male survivor portraits:
 prefer the actual objects, hands, actions and generic adults, with no anime.
 That instruction is also recorded in Pipeline.md.
@@ -173,6 +183,8 @@ That instruction is also recorded in Pipeline.md.
   [exact prompts](../review/candidates/batch-90/prompts.json).
 - [Batch 91 candidates](../review/candidates/batch-91/README.md) and
   [exact prompts](../review/candidates/batch-91/prompts.json).
+- [Batch 92 class options](../review/candidates/batch-92/README.md) and
+  [exact prompts](../review/candidates/batch-92/prompts.json).
 
 The numbered `prepare_*.py` files freeze their actual
 allocations and

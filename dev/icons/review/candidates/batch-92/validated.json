@@ -1,0 +1,20 @@
+{
+  "batch": 92,
+  "validatedMasks": 12,
+  "classSubjects": 6,
+  "prospectiveDeliveryTargets": 6,
+  "candidateHashes": {
+    "a:brutal": "aa29fb85a3d14600aca935fe820e7246aba01ec1985f70678cdee3f6c3f8dd22",
+    "b:brutal": "201aad26aa372662bafc52b8c47284a3cd5c8ae2577f1370a27cb065462c39f1",
+    "a:cwaniak": "e34ecfa69c44e4e6f02f29e8f0072781aa64d3d583bfccc1c34d2df941f5785c",
+    "b:cwaniak": "f3d8bfb1769264bd7f0973f237afc3c233961373ab5edeeae17a49f8328f0164",
+    "a:spec": "7bf9d35cae3c5c2d9b087fa641d0a75d45764fa548e7691d55eec341d4b39807",
+    "b:spec": "58dba9d2f8d5679a152d52d67fd2ce6de8e76a7f1f5ce7b3ad3ec69abacf6a86",
+    "a:twardziel": "7a4b0865838de6a8db1f8877fcb2791609ebdee427368c5b0a03111b32f09b46",
+    "b:twardziel": "9f59f69b221af27510dc8977e6d299853311e3f79c25034b1eeab0b65ee0cd9d",
+    "a:zlodziej": "b37434010596564b2fc0aacd7afb61ffcf2a4a4e437bc3bc4730c57dda1c01df",
+    "b:zlodziej": "3a0ea3dbd31dccc3e67069eae99b844f862a94270bd46c15e131f78c13b0209b",
+    "a:zwiadowca": "9bb22cb0eda9aaea1bbf69663c5bcf953744be39c04f6abe99bf376018e68bf3",
+    "b:zwiadowca": "c1f502a39885d0f1bd2367a59e34c70dd121842f18dc871ce1879dd9cecf996d"
+  }
+}

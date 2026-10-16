@@ -1,0 +1,44 @@
+{
+  "batch90-brutal": {
+    "itemId": "batch90-brutal",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Class icons are pivotal, and should show TWO elements. Research something better for Brutal.",
+    "updatedAt": "2026-10-16T00:01:19.006Z"
+  },
+  "batch91-cwaniak": {
+    "itemId": "batch91-cwaniak",
+    "decision": "approve",
+    "candidateId": "atlas-a",
+    "notes": "Class icons are pivotal, and should show TWO elements. Research something better for Cwaniak.",
+    "updatedAt": "2026-10-16T00:01:33.485Z"
+  },
+  "batch91-spec": {
+    "itemId": "batch91-spec",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "A wrench and microchip are both from the same subtree - electronics. Maybe a wrench and syringe?",
+    "updatedAt": "2026-10-15T23:59:47.423Z"
+  },
+  "batch91-twardziel": {
+    "itemId": "batch91-twardziel",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "The armor is shifted. Align the upper and lower pieces of the armor. Good concept.",
+    "updatedAt": "2026-10-16T00:01:43.170Z"
+  },
+  "batch91-zlodziej": {
+    "itemId": "batch91-zlodziej",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Class icons are pivotal, and should show TWO elements. Research something better for Zlodziej.",
+    "updatedAt": "2026-10-16T00:01:53.723Z"
+  },
+  "batch91-zwiadowca": {
+    "itemId": "batch91-zwiadowca",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Not bad, see if you can research something else. Two elements.",
+    "updatedAt": "2026-10-16T00:02:26.336Z"
+  }
+}
