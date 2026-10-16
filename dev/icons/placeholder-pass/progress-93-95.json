@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-16",
+  "preparedBatches": [
+    93,
+    94,
+    95
+  ],
+  "nextFreeBatch": 96,
+  "originalPlaceholderSubjects": 153,
+  "approvedSubjectsDelivered": 131,
+  "nativeSvgTargetsReplaced": 133,
+  "remainingPlaceholderSubjects": 22,
+  "remainingPlaceholderFiles": 22,
+  "pendingReviewSubjects": 22,
+  "generatedCandidates": 26,
+  "classRevisionSubjects": 4,
+  "classRevisionOptions": 8,
+  "otherRevisionSubjects": 4,
+  "freshProfessionSubjects": 14,
+  "subjectsAwaitingFirstGeneration": 0,
+  "roadmapSubjectsCovered": 153,
+  "reviewCardsTotal": 495,
+  "reviewCardsResolved": 473,
+  "candidateCollectionValidatedPairs": 784,
+  "approvalProvenanceOptionsVerified": 26,
+  "exactReworkDecisionsArchived": 8,
+  "unrelatedDecisionsPreserved": true,
+  "unrelatedCardsPreserved": true,
+  "remainingProductionHashesUnchanged": 22,
+  "newCandidatesInstalledBeforeApproval": 0,
+  "targetedGeneratedCorrections": [
+    "chemik"
+  ],
+  "browser": {
+    "cards": 22,
+    "options": 65,
+    "brokenImages": 0,
+    "errors": 0,
+    "newCandidatesSelected": 22,
+    "pendingDecisions": 22,
+    "classCardsFirst": true,
+    "screenshot": "../review/candidates/batch-93/raw/review-preview.png"
+  }
+}

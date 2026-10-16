@@ -1,0 +1,267 @@
+{
+  "title": "Batches 92 + 94 + 95 · 22 awaiting GM review",
+  "updated": "2026-10-16",
+  "items": [
+    {
+      "id": "batch95-medyk",
+      "name": "Medyk",
+      "tier": "Batch 95 · Spec",
+      "batch": 95,
+      "placeholderKey": "profession:medyk",
+      "target": "icons/profesje/medyk.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/medyk.svg",
+          "variant": "default",
+          "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037"
+        }
+      ],
+      "context": "profession: Medyk; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zyskujesz biegłość w Medycynie i w narzędziach małego chemika lub małego medyka. DOKTOR BRAIN; KRWAWY ANIOŁ; ŁAPIDUCH; FARMACJA Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE sturdy MEDICAL BAG with a complete handle, one broad black PLUS mark on its white front and TWO simple lid cuts, paired with ONE complete STETHOSCOPE with a thick U-shaped tube and one large round chest piece. Clear broad black gap, practical field medicine, compact white silhouettes. No person, face, lettering, labels, tiny clasps, fine tubing, extra drugs or gore.",
+      "current": {
+        "src": "/icons/profesje/medyk.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 95 · Medyk",
+          "src": "candidates/batch-95/medyk.png",
+          "note": "ONE sturdy MEDICAL BAG with a complete handle, one broad black PLUS mark on its white front and TWO simple lid cuts, paired with ONE complete STETHOSCOPE with a thick U-shaped tube and one large round chest piece. Clear broad black gap, practical field medicine, compact white silhouettes. No person, face, lettering, labels, tiny clasps, fine tubing, extra drugs or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch95-monter",
+      "name": "Monter",
+      "tier": "Batch 95 · Spec",
+      "batch": 95,
+      "placeholderKey": "profession:monter",
+      "target": "icons/profesje/monter.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/monter.svg",
+          "variant": "default",
+          "sourceSha256": "a266c80a0c3a394ac90455249a8599e49ebaff0d4d35577f630f8810913c801a"
+        }
+      ],
+      "context": "profession: Monter; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zyskujesz biegłość w umiejętności Technika i biegłość w dwóch wybranych zestawach narzędzi. MECHANIKA; HAKERSTWO; SERWISOWANIE Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete practical OPEN-END WRENCH crosses ONE stout ENGINE PISTON with a broad cylindrical crown, TWO large piston-ring cuts and one complete connecting rod with large round end. Broad black separation at crossing. Repair and mechanical construction, sober compact white equipment emblem. No person, face, giant cog, fine wiring, tiny parts, text, numerals or logo.",
+      "current": {
+        "src": "/icons/profesje/monter.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 95 · Monter",
+          "src": "candidates/batch-95/monter.png",
+          "note": "ONE complete practical OPEN-END WRENCH crosses ONE stout ENGINE PISTON with a broad cylindrical crown, TWO large piston-ring cuts and one complete connecting rod with large round end. Broad black separation at crossing. Repair and mechanical construction, sober compact white equipment emblem. No person, face, giant cog, fine wiring, tiny parts, text, numerals or logo."
+        }
+      ]
+    },
+    {
+      "id": "batch95-najemnik",
+      "name": "Najemnik",
+      "tier": "Batch 95 · Brutal",
+      "batch": 95,
+      "placeholderKey": "profession:najemnik",
+      "target": "icons/profesje/najemnik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/najemnik.svg",
+          "variant": "default",
+          "sourceSha256": "2a4d32936b801162e47078613bb8694d9e2fb05dcc24e13752a64f657fa18716"
+        }
+      ],
+      "context": "profession: Najemnik; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zyskujesz biegłość w dwóch wybranych kategoriach broni i biegłość w jednym dowolnym zestawie narzędzi. MASZYNA DO ZABIJANIA; REPUTACJA; SKUTECZNY CIOS Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "TWO broad blank MILITARY DOG TAGS hang together from ONE short thick loop, behind ONE complete practical COMBAT KNIFE angled upward-right. Complete blade, simple guard and stout handle with TWO broad grip cuts, large black separation. Professional hired fighter, equipment and service. No names, numbers, readable tags, real insignia, fine chain, face, camouflage texture or gore.",
+      "current": {
+        "src": "/icons/profesje/najemnik.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 95 · Najemnik",
+          "src": "candidates/batch-95/najemnik.png",
+          "note": "TWO broad blank MILITARY DOG TAGS hang together from ONE short thick loop, behind ONE complete practical COMBAT KNIFE angled upward-right. Complete blade, simple guard and stout handle with TWO broad grip cuts, large black separation. Professional hired fighter, equipment and service. No names, numbers, readable tags, real insignia, fine chain, face, camouflage texture or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch95-sedzia",
+      "name": "Sędzia",
+      "tier": "Batch 95 · Zwiadowca",
+      "batch": 95,
+      "placeholderKey": "profession:sedzia",
+      "target": "icons/profesje/sedzia.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/sedzia.svg",
+          "variant": "default",
+          "sourceSha256": "874c3e1ff80a895921e5675d617b0e8528280017b875614f1aeaef321f650eeb"
+        }
+      ],
+      "context": "profession: Sędzia; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Otrzymujesz biegłość w umiejętności Śledztwo i Zastraszanie oraz biegłość w jednym dowolnym zestawie narzędzi. Zyskujesz biegłość w jednej wybranej kategorii broni. JEDEN Z NAS; RZUĆ BROŃ I GLEBA!; PARTNER Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE plain sturdy SHIELD-SHAPED LAW BADGE with ONE bold FIVE-POINT STAR cut in black, paired with ONE complete pair of HANDCUFFS consisting of TWO broad open rings joined by ONE thick short connector. Field law enforcer, not a courtroom judge. Broad compact white masses and black gaps, no gavel, scale, text, numerals, real police logo, tiny chain or person.",
+      "current": {
+        "src": "/icons/profesje/sedzia.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 95 · Sędzia",
+          "src": "candidates/batch-95/sedzia.png",
+          "note": "ONE plain sturdy SHIELD-SHAPED LAW BADGE with ONE bold FIVE-POINT STAR cut in black, paired with ONE complete pair of HANDCUFFS consisting of TWO broad open rings joined by ONE thick short connector. Field law enforcer, not a courtroom judge. Broad compact white masses and black gaps, no gavel, scale, text, numerals, real police logo, tiny chain or person."
+        }
+      ]
+    },
+    {
+      "id": "batch95-szczur",
+      "name": "Szczur",
+      "tier": "Batch 95 · Złodziej",
+      "batch": 95,
+      "placeholderKey": "profession:szczur",
+      "target": "icons/profesje/szczur.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/szczur.svg",
+          "variant": "default",
+          "sourceSha256": "4bd810a23039817a14513e84ba592a708fcc8b78f385cd35e6d7916c79b7cae5"
+        }
+      ],
+      "context": "profession: Szczur; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zyskujesz biegłość w posługiwaniu się narzędziami małego chemika oraz w umiejętności Akrobatyka lub Zwinne dłonie. A CO MI TAM!; SZARY; TRUCICIEL; ZWINNOŚĆ SZCZURA Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE realistically proportioned adult RAT crouches low beside ONE squat STOPPERED CHEMICAL VIAL bearing ONE large black DROP-shaped mark. Rat has one long tail, rounded ears, pointed muzzle, one eye and natural paws, very sparse anatomy. Unnoticed scavenger and poison resistance/craft, broad compact white glyph. No cute mascot, anime, fine fur, formula, labels, skull clutter, extra limbs or gore.",
+      "current": {
+        "src": "/icons/profesje/szczur.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 95 · Szczur",
+          "src": "candidates/batch-95/szczur.png",
+          "note": "ONE realistically proportioned adult RAT crouches low beside ONE squat STOPPERED CHEMICAL VIAL bearing ONE large black DROP-shaped mark. Rat has one long tail, rounded ears, pointed muzzle, one eye and natural paws, very sparse anatomy. Unnoticed scavenger and poison resistance/craft, broad compact white glyph. No cute mascot, anime, fine fur, formula, labels, skull clutter, extra limbs or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch95-wojownik-autostrady",
+      "name": "Wojownik Autostrady",
+      "tier": "Batch 95 · Twardziel",
+      "batch": 95,
+      "placeholderKey": "profession:wojownik-autostrady",
+      "target": "icons/profesje/wojownik-autostrady.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/wojownik-autostrady.svg",
+          "variant": "default",
+          "sourceSha256": "e01f31847380231e9d631e52c4abeb248ae3d4926c2bc01f16c05a20e1f6961a"
+        }
+      ],
+      "context": "profession: Wojownik Autostrady; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Otrzymujesz biegłość w umiejętności Pojazdy oraz biegłość w używaniu narzędzi małego mechanika. Jeśli posiadasz już te biegłości, otrzymujesz w nich Specjalizację. DRZWI W DRZWI; KASKADER; PANCERNA FURA Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete stout STEERING WHEEL with THREE broad spokes around one center hub, paired with ONE complete SAWED-OFF DOUBLE-BARREL SHOTGUN angled upward-right. Two thick parallel short barrels, complete grip, simple receiver and empty trigger guard. Vehicle combat, sober compact white silhouette with broad black separation. No driver, face, cars, numerals, letters, fine wheel stitching or gun engraving.",
+      "current": {
+        "src": "/icons/profesje/wojownik-autostrady.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 95 · Wojownik Autostrady",
+          "src": "candidates/batch-95/wojownik-autostrady.png",
+          "note": "ONE complete stout STEERING WHEEL with THREE broad spokes around one center hub, paired with ONE complete SAWED-OFF DOUBLE-BARREL SHOTGUN angled upward-right. Two thick parallel short barrels, complete grip, simple receiver and empty trigger guard. Vehicle combat, sober compact white silhouette with broad black separation. No driver, face, cars, numerals, letters, fine wheel stitching or gun engraving."
+        }
+      ]
+    },
+    {
+      "id": "batch95-zabojca",
+      "name": "Zabójca",
+      "tier": "Batch 95 · Złodziej",
+      "batch": 95,
+      "placeholderKey": "profession:zabojca",
+      "target": "icons/profesje/zabojca.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/zabojca.svg",
+          "variant": "default",
+          "sourceSha256": "f2ab1c6f403e02b4faddbdae54b60e69cc65fcfe9af70ba39eae69a2259618fd"
+        }
+      ],
+      "context": "profession: Zabójca; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zyskujesz biegłość w posługiwaniu się narzędziami małego charakteryzatora oraz biegłość we wszystkich broniach. JEDEN STRZAŁ; KAMUFLAŻ; STRZELEC Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete practical SCOPED RIFLE fitted with ONE stout cylindrical SUPPRESSOR at the muzzle, paired with ONE broad simple TARGET CROSSHAIR beside the stock. Rifle stock, straight barrel, scope and empty trigger guard remain complete. Four thick reticle ticks and one central dot, precise concealed ranged attack. No person, hooded portrait, text, labels, measurements, fine fittings, blood or gore.",
+      "current": {
+        "src": "/icons/profesje/zabojca.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 95 · Zabójca",
+          "src": "candidates/batch-95/zabojca.png",
+          "note": "ONE complete practical SCOPED RIFLE fitted with ONE stout cylindrical SUPPRESSOR at the muzzle, paired with ONE broad simple TARGET CROSSHAIR beside the stock. Rifle stock, straight barrel, scope and empty trigger guard remain complete. Four thick reticle ticks and one central dot, precise concealed ranged attack. No person, hooded portrait, text, labels, measurements, fine fittings, blood or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch95-zabojca-maszyn",
+      "name": "Zabójca Maszyn",
+      "tier": "Batch 95 · Zwiadowca",
+      "batch": 95,
+      "placeholderKey": "profession:zabojca-maszyn",
+      "target": "icons/profesje/zabojca-maszyn.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/zabojca-maszyn.svg",
+          "variant": "default",
+          "sourceSha256": "0c741cf9f957a63bc5ccc664ec9c16c5709904676a638e76017979b364a811d5"
+        }
+      ],
+      "context": "profession: Zabójca Maszyn; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Otrzymujesz biegłość w umiejętności Technika i jedną wybraną biegłość w narzędziach. Jeśli masz już biegłość w umiejętności Technika, otrzymujesz w niej Specjalizację. Zyskujesz biegłość w jednej wybranej kategorii broni oraz wyszkolenie w ciężkich pancerzach. EMITER EMP; EMPIRYK; SŁABY PUNKT Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE plain industrial ROBOT HEAD with a squared casing, TWO large dark rectangular eye openings and ONE broad jaw slot, crossed by ONE bold LIGHTNING BOLT with broad black separation. Electromagnetic attack against machines, sober compact white stencil. No human face, gruff portrait, cartoon expression, generic cog, fine circuits, tiny cables, readable text or logo.",
+      "current": {
+        "src": "/icons/profesje/zabojca-maszyn.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 95 · Zabójca Maszyn",
+          "src": "candidates/batch-95/zabojca-maszyn.png",
+          "note": "ONE plain industrial ROBOT HEAD with a squared casing, TWO large dark rectangular eye openings and ONE broad jaw slot, crossed by ONE bold LIGHTNING BOLT with broad black separation. Electromagnetic attack against machines, sober compact white stencil. No human face, gruff portrait, cartoon expression, generic cog, fine circuits, tiny cables, readable text or logo."
+        }
+      ]
+    },
+    {
+      "id": "batch95-zolnierz",
+      "name": "Żołnierz",
+      "tier": "Batch 95 · Twardziel",
+      "batch": 95,
+      "placeholderKey": "profession:zolnierz",
+      "target": "icons/profesje/zolnierz.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/zolnierz.svg",
+          "variant": "default",
+          "sourceSha256": "5ea9f370436a15b721d359267424f0cff11887f5f11ceca09e09944336492654"
+        }
+      ],
+      "context": "profession: Żołnierz; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zostając żołnierzem, decydujesz się służyć sprawie obrony ojczyzny. Otrzymujesz biegłość w umiejętności Technika oraz biegłość w używaniu narzędzi małego rusznikarza lub kowala. JAK DBASZ, TAK MASZ; RUTYNA; TRENING W ZBROI Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete practical FIELD COMBAT HELMET above ONE complete ASSAULT RIFLE angled upward-right, with broad stock, straight barrel, short thick magazine, one grip and empty trigger guard. Helmet has one broad rim and TWO large panel cuts only, no face or head. Military discipline and weapon proficiency, sober compact white glyph. No real military insignia, star badge, text, numerals, fine straps, tiny fittings or camouflage texture.",
+      "current": {
+        "src": "/icons/profesje/zolnierz.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 95 · Żołnierz",
+          "src": "candidates/batch-95/zolnierz.png",
+          "note": "ONE complete practical FIELD COMBAT HELMET above ONE complete ASSAULT RIFLE angled upward-right, with broad stock, straight barrel, short thick magazine, one grip and empty trigger guard. Helmet has one broad rim and TWO large panel cuts only, no face or head. Military discipline and weapon proficiency, sober compact white glyph. No real military insignia, star badge, text, numerals, fine straps, tiny fittings or camouflage texture."
+        }
+      ]
+    }
+  ]
+}

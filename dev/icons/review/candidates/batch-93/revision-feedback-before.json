@@ -1,0 +1,30 @@
+{
+  "batch90-brutal": {
+    "itemId": "batch90-brutal",
+    "decision": "revise",
+    "candidateId": "batch92-b",
+    "notes": "Add a scar on the chest, replace the knife with a hand-held rail piledriver",
+    "updatedAt": "2026-10-16T00:24:14.397Z"
+  },
+  "batch91-cwaniak": {
+    "itemId": "batch91-cwaniak",
+    "decision": "revise",
+    "candidateId": "batch92-b",
+    "notes": "Relace the megaphone with a microphone",
+    "updatedAt": "2026-10-16T00:24:34.550Z"
+  },
+  "batch91-twardziel": {
+    "itemId": "batch91-twardziel",
+    "decision": "revise",
+    "candidateId": "batch92-b",
+    "notes": "Replace the SMG with an LMG",
+    "updatedAt": "2026-10-16T00:25:06.265Z"
+  },
+  "batch91-zwiadowca": {
+    "itemId": "batch91-zwiadowca",
+    "decision": "revise",
+    "candidateId": "batch92-a",
+    "notes": "The barrel of the gun is crooked - fix it.",
+    "updatedAt": "2026-10-16T00:25:33.762Z"
+  }
+}

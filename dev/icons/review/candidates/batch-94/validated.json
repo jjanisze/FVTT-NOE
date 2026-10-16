@@ -1,0 +1,16 @@
+{
+  "batch": 94,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "zawolajcie-kolegow": "ee2f824e119375254ce916f7be1e7782f4ab8762d39eb51fc6b11a15c5b48edf",
+    "zryw": "096459ab64eaa6c73078cf621d9b1dca2689b794bc7468e007f2ca1641a0f644",
+    "chemik": "da3e2c044c36f42b1d6869abbaf435d809f9ba51f675f7a04a906978abd7704a",
+    "ganger": "40ebbf6bb5620c062a90d4acb6e0310c6dafed594b17099ccb5599f67c49bd0d",
+    "kaznodzieja": "d0b93cee93f2459d036a9e2d5299e8b099870fbd4244fa5926c801760a8899cd",
+    "kowboj": "3dfafe61dbeccc325badabbbdd2d5fd22a3aa2898826a4d5ba8b473152ec68d2",
+    "kurier": "1daf6f2a68dc54355119ca184914f96c97be71d5415e5545c0060d5776c02dc7",
+    "lowca-mutantow": "bb25d9644d22702c8e64d3cd30646f93f7d782307e2548458bbe66c638c55873",
+    "mafiozo": "19b18e805398c0e17ee22c204754267c3747fe5fc33f78ee3fc9ee2b6a8ae9e1"
+  }
+}

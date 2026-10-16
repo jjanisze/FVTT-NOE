@@ -37,8 +37,8 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 93** (eight saved revisions remain;
-fourteen untouched profession subjects are also queued).
+**Next batch number: 96** (22 subjects await GM review;
+primary class revisions retain two options each).
 
 **Icon coverage correction, 2026-10-16:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
@@ -1104,6 +1104,82 @@ Evidence: `review/candidates/batch-90/reviewed.json`,
 `review/candidates/batch-91/reviewed.json` and their installation records.
 
 <!-- placeholder-batch-92:end -->
+
+<!-- placeholder-batch-93:start -->
+## Queue (A) — Batch 93 — 4 classes, two revision options each
+
+Each class has two new choices with two main elements. All selected-source
+hashes and verbatim feedback are archived alongside exact generic prompts.
+Older candidates remain selectable; production files require saved approval.
+
+| Class | Requested correction | Native SVG (+ WEBP) |
+|---|---|---|
+| Brutal | Add a scar on the chest, replace the knife with a hand-held rail piledriver | `icons/klasy/brutal.svg` |
+| Cwaniak | Relace the megaphone with a microphone | `icons/klasy/cwaniak.svg` |
+| Twardziel | Replace the SMG with an LMG | `icons/klasy/twardziel.svg` |
+| Zwiadowca | The barrel of the gun is crooked - fix it. | `icons/klasy/zwiadowca.svg` |
+
+Sources, prompts and review records: `review/candidates/batch-93/`.
+
+<!-- placeholder-batch-93:end -->
+
+<!-- placeholder-batch-94:start -->
+## Queue (A) — Batch 94 — 9 awaiting GM review
+
+One 3×3 atlas in the established white-glyph style; native initials badges remain
+until the GM approves a selected candidate. Exact sources/hashes, generic prompts
+and targets: `review/candidates/batch-94/`.
+
+| Cell | Item | Exact SVG delivery targets (+ WEBP) |
+|---|---|---|
+| 1 | Zawołajcie kolegów (revision) | `icons/abilities/zawolajcie-kolegow.svg` |
+| 2 | Zryw (revision) | `icons/abilities/zryw.svg` |
+| 3 | Chemik (revision) | `icons/profesje/chemik.svg` |
+| 4 | Ganger (revision) | `icons/profesje/ganger.svg` |
+| 5 | Kaznodzieja Nowej Ery | `icons/profesje/kaznodzieja.svg` |
+| 6 | Kowboj | `icons/profesje/kowboj.svg` |
+| 7 | Kurier | `icons/profesje/kurier.svg` |
+| 8 | Łowca Mutantów | `icons/profesje/lowca-mutantow.svg` |
+| 9 | Mafiozo | `icons/profesje/mafiozo.svg` |
+
+Saved revision notes and original selected-source hashes are retained in batch.json
+and revision-feedback-before.json. Old candidates remain available; only these
+revision cards are reset to pending with the new candidate selected.
+
+The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
+nine). Later batch numbers are provisional: saved revisions take priority and
+may add batches. Base/active files share approved pixels; the existing active
+hotbar pulse remains in the code. Old unused active filenames are compatibility
+targets, without new mechanics or wiring. Code, packs and world state are untouched.
+
+<!-- placeholder-batch-94:end -->
+
+<!-- placeholder-batch-95:start -->
+## Queue (A) — Batch 95 — 9 awaiting GM review
+
+One 3×3 atlas in the established white-glyph style; native initials badges remain
+until the GM approves a selected candidate. Exact sources/hashes, generic prompts
+and targets: `review/candidates/batch-95/`.
+
+| Cell | Item | Exact SVG delivery targets (+ WEBP) |
+|---|---|---|
+| 1 | Medyk | `icons/profesje/medyk.svg` |
+| 2 | Monter | `icons/profesje/monter.svg` |
+| 3 | Najemnik | `icons/profesje/najemnik.svg` |
+| 4 | Sędzia | `icons/profesje/sedzia.svg` |
+| 5 | Szczur | `icons/profesje/szczur.svg` |
+| 6 | Wojownik Autostrady | `icons/profesje/wojownik-autostrady.svg` |
+| 7 | Zabójca | `icons/profesje/zabojca.svg` |
+| 8 | Zabójca Maszyn | `icons/profesje/zabojca-maszyn.svg` |
+| 9 | Żołnierz | `icons/profesje/zolnierz.svg` |
+
+The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
+nine). Later batch numbers are provisional: saved revisions take priority and
+may add batches. Base/active files share approved pixels; the existing active
+hotbar pulse remains in the code. Old unused active filenames are compatibility
+targets, without new mechanics or wiring. Code, packs and world state are untouched.
+
+<!-- placeholder-batch-95:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source

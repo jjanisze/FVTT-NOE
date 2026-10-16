@@ -1,0 +1,199 @@
+{
+  "date": "2026-10-16",
+  "batch": 93,
+  "mode": "two-options-per-primary-class",
+  "subjects": [
+    {
+      "kind": "class",
+      "key": "brutal",
+      "name": "Brutal",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/klasy/brutal.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/brutal.svg",
+          "variant": "default",
+          "sourceSha256": "83bf2a94a6a88bb853e8e3de117926e3e503d06a79bbd186bc69e8f9ecaeb915"
+        }
+      ],
+      "ruleContext": "",
+      "context": "class: Brutal; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "Preserve the selected headless bare torso. Add ONE broad short diagonal HEALED SCAR CUT on the upper chest, a closed old scar only, no wound, blood, tissue or gore. REPLACE THE KNIFE entirely with ONE complete HAND-HELD RAIL PILEDRIVER / HEAVY KAFAR following the supporting weapon reference: a massive blunt industrial rail-section striking tool, thick complete body and practical grip, NOT a rifle, railgun, knife or long thin spear. Exactly torso and piledriver as the two main elements. Keep natural adult proportions and sparse large anatomical cuts.",
+      "itemId": "batch90-brutal",
+      "revisionOf": {
+        "id": "batch90-brutal",
+        "name": "Brutal",
+        "decision": "revise",
+        "candidateId": "batch92-b",
+        "selectedSource": "candidates/batch-92-b/brutal.png",
+        "sourceSha256": "201aad26aa372662bafc52b8c47284a3cd5c8ae2577f1370a27cb065462c39f1",
+        "deliveryTargets": [
+          {
+            "source": "icons/klasy/brutal.svg",
+            "variant": "default",
+            "sourceSha256": "83bf2a94a6a88bb853e8e3de117926e3e503d06a79bbd186bc69e8f9ecaeb915"
+          }
+        ],
+        "notes": "Add a scar on the chest, replace the knife with a hand-held rail piledriver",
+        "feedback": {
+          "itemId": "batch90-brutal",
+          "decision": "revise",
+          "candidateId": "batch92-b",
+          "notes": "Add a scar on the chest, replace the knife with a hand-held rail piledriver",
+          "updatedAt": "2026-10-16T00:24:14.397Z"
+        }
+      },
+      "options": {
+        "a": "Apply this exact correction while preserving the reference composition: Preserve the selected headless bare torso. Add ONE broad short diagonal HEALED SCAR CUT on the upper chest, a closed old scar only, no wound, blood, tissue or gore. REPLACE THE KNIFE entirely with ONE complete HAND-HELD RAIL PILEDRIVER / HEAVY KAFAR following the supporting weapon reference: a massive blunt industrial rail-section striking tool, thick complete body and practical grip, NOT a rifle, railgun, knife or long thin spear. Exactly torso and piledriver as the two main elements. Keep natural adult proportions and sparse large anatomical cuts.",
+        "b": "A second clean version of the SAME corrected two-element emblem. Keep both objects and their general positions; adjust their spacing and tilt slightly for a more compact balanced composition. Preserve the selected headless bare torso. Add ONE broad short diagonal HEALED SCAR CUT on the upper chest, a closed old scar only, no wound, blood, tissue or gore. REPLACE THE KNIFE entirely with ONE complete HAND-HELD RAIL PILEDRIVER / HEAVY KAFAR following the supporting weapon reference: a massive blunt industrial rail-section striking tool, thick complete body and practical grip, NOT a rifle, railgun, knife or long thin spear. Exactly torso and piledriver as the two main elements. Keep natural adult proportions and sparse large anatomical cuts."
+      }
+    },
+    {
+      "kind": "class",
+      "key": "cwaniak",
+      "name": "Cwaniak",
+      "owner": "cwaniak",
+      "ownerLabel": "Cwaniak",
+      "target": "icons/klasy/cwaniak.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/cwaniak.svg",
+          "variant": "default",
+          "sourceSha256": "aa8669e1745b216b6ab4e23aeb55fc20df54d4922261d3e37210e95491e1f57c"
+        }
+      ],
+      "ruleContext": "",
+      "context": "class: Cwaniak; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "request": "Keep the same complete tilted playing card with one large SPADES pip. Replace ONLY the megaphone with ONE complete handheld MICROPHONE: rounded grille with TWO broad grille cuts and one stout complete handle. Exactly card and microphone, no die, megaphone cone, star, cable, labels, numbers or fine mesh.",
+      "itemId": "batch91-cwaniak",
+      "revisionOf": {
+        "id": "batch91-cwaniak",
+        "name": "Cwaniak",
+        "decision": "revise",
+        "candidateId": "batch92-b",
+        "selectedSource": "candidates/batch-92-b/cwaniak.png",
+        "sourceSha256": "f3d8bfb1769264bd7f0973f237afc3c233961373ab5edeeae17a49f8328f0164",
+        "deliveryTargets": [
+          {
+            "source": "icons/klasy/cwaniak.svg",
+            "variant": "default",
+            "sourceSha256": "aa8669e1745b216b6ab4e23aeb55fc20df54d4922261d3e37210e95491e1f57c"
+          }
+        ],
+        "notes": "Relace the megaphone with a microphone",
+        "feedback": {
+          "itemId": "batch91-cwaniak",
+          "decision": "revise",
+          "candidateId": "batch92-b",
+          "notes": "Relace the megaphone with a microphone",
+          "updatedAt": "2026-10-16T00:24:34.550Z"
+        }
+      },
+      "options": {
+        "a": "Apply this exact correction while preserving the reference composition: Keep the same complete tilted playing card with one large SPADES pip. Replace ONLY the megaphone with ONE complete handheld MICROPHONE: rounded grille with TWO broad grille cuts and one stout complete handle. Exactly card and microphone, no die, megaphone cone, star, cable, labels, numbers or fine mesh.",
+        "b": "A second clean version of the SAME corrected two-element emblem. Keep both objects and their general positions; adjust their spacing and tilt slightly for a more compact balanced composition. Keep the same complete tilted playing card with one large SPADES pip. Replace ONLY the megaphone with ONE complete handheld MICROPHONE: rounded grille with TWO broad grille cuts and one stout complete handle. Exactly card and microphone, no die, megaphone cone, star, cable, labels, numbers or fine mesh."
+      }
+    },
+    {
+      "kind": "class",
+      "key": "twardziel",
+      "name": "Twardziel",
+      "owner": "twardziel",
+      "ownerLabel": "Twardziel",
+      "target": "icons/klasy/twardziel.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/twardziel.svg",
+          "variant": "default",
+          "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac"
+        }
+      ],
+      "ruleContext": "",
+      "context": "class: Twardziel; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "request": "Keep the complete aligned plate carrier with its single vertical centerline and continuous matching side contours. Replace ONLY the SMG with ONE complete LIGHT MACHINE GUN: a clearly longer STRAIGHT BARREL, broad receiver, complete shoulder stock, grip, empty trigger guard, ONE box ammunition container below the receiver and one broad FOLDED BIPOD under the forward barrel. Sober compact broad silhouette, no intricate belt links, tiny fittings, lettering or shifted armor panels. Exactly armor and LMG.",
+      "itemId": "batch91-twardziel",
+      "revisionOf": {
+        "id": "batch91-twardziel",
+        "name": "Twardziel",
+        "decision": "revise",
+        "candidateId": "batch92-b",
+        "selectedSource": "candidates/batch-92-b/twardziel.png",
+        "sourceSha256": "9f59f69b221af27510dc8977e6d299853311e3f79c25034b1eeab0b65ee0cd9d",
+        "deliveryTargets": [
+          {
+            "source": "icons/klasy/twardziel.svg",
+            "variant": "default",
+            "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac"
+          }
+        ],
+        "notes": "Replace the SMG with an LMG",
+        "feedback": {
+          "itemId": "batch91-twardziel",
+          "decision": "revise",
+          "candidateId": "batch92-b",
+          "notes": "Replace the SMG with an LMG",
+          "updatedAt": "2026-10-16T00:25:06.265Z"
+        }
+      },
+      "options": {
+        "a": "Apply this exact correction while preserving the reference composition: Keep the complete aligned plate carrier with its single vertical centerline and continuous matching side contours. Replace ONLY the SMG with ONE complete LIGHT MACHINE GUN: a clearly longer STRAIGHT BARREL, broad receiver, complete shoulder stock, grip, empty trigger guard, ONE box ammunition container below the receiver and one broad FOLDED BIPOD under the forward barrel. Sober compact broad silhouette, no intricate belt links, tiny fittings, lettering or shifted armor panels. Exactly armor and LMG.",
+        "b": "A second clean version of the SAME corrected two-element emblem. Keep both objects and their general positions; adjust their spacing and tilt slightly for a more compact balanced composition. Keep the complete aligned plate carrier with its single vertical centerline and continuous matching side contours. Replace ONLY the SMG with ONE complete LIGHT MACHINE GUN: a clearly longer STRAIGHT BARREL, broad receiver, complete shoulder stock, grip, empty trigger guard, ONE box ammunition container below the receiver and one broad FOLDED BIPOD under the forward barrel. Sober compact broad silhouette, no intricate belt links, tiny fittings, lettering or shifted armor panels. Exactly armor and LMG."
+      }
+    },
+    {
+      "kind": "class",
+      "key": "zwiadowca",
+      "name": "Zwiadowca",
+      "owner": "zwiadowca",
+      "ownerLabel": "Zwiadowca",
+      "target": "icons/klasy/zwiadowca.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/zwiadowca.svg",
+          "variant": "default",
+          "sourceSha256": "67b410b391ee6dda233c64b0bbdf051d8d4bc1909260d06ef79fa3e6c328307a"
+        }
+      ],
+      "ruleContext": "",
+      "context": "class: Zwiadowca; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "request": "Keep the compass and rifle composition. FIX THE CROOKED RIFLE BARREL: receiver bore, whole barrel and muzzle all lie on ONE perfectly STRAIGHT axis angled upward-right. The barrel has parallel straight edges with NO kink or bend at the front sight, scope or muzzle. The scope remains straight and PARALLEL above the barrel, and the complete shoulder stock and trigger guard remain intact. Keep compass circle and bold needle, no letters, additional gear or tiny fittings. Exactly compass and hunting rifle.",
+      "itemId": "batch91-zwiadowca",
+      "revisionOf": {
+        "id": "batch91-zwiadowca",
+        "name": "Zwiadowca",
+        "decision": "revise",
+        "candidateId": "batch92-a",
+        "selectedSource": "candidates/batch-92-a/zwiadowca.png",
+        "sourceSha256": "9bb22cb0eda9aaea1bbf69663c5bcf953744be39c04f6abe99bf376018e68bf3",
+        "deliveryTargets": [
+          {
+            "source": "icons/klasy/zwiadowca.svg",
+            "variant": "default",
+            "sourceSha256": "67b410b391ee6dda233c64b0bbdf051d8d4bc1909260d06ef79fa3e6c328307a"
+          }
+        ],
+        "notes": "The barrel of the gun is crooked - fix it.",
+        "feedback": {
+          "itemId": "batch91-zwiadowca",
+          "decision": "revise",
+          "candidateId": "batch92-a",
+          "notes": "The barrel of the gun is crooked - fix it.",
+          "updatedAt": "2026-10-16T00:25:33.762Z"
+        }
+      },
+      "options": {
+        "a": "Apply this exact correction while preserving the reference composition: Keep the compass and rifle composition. FIX THE CROOKED RIFLE BARREL: receiver bore, whole barrel and muzzle all lie on ONE perfectly STRAIGHT axis angled upward-right. The barrel has parallel straight edges with NO kink or bend at the front sight, scope or muzzle. The scope remains straight and PARALLEL above the barrel, and the complete shoulder stock and trigger guard remain intact. Keep compass circle and bold needle, no letters, additional gear or tiny fittings. Exactly compass and hunting rifle.",
+        "b": "A second clean version of the SAME corrected two-element emblem. Keep both objects and their general positions; adjust their spacing and tilt slightly for a more compact balanced composition. Keep the compass and rifle composition. FIX THE CROOKED RIFLE BARREL: receiver bore, whole barrel and muzzle all lie on ONE perfectly STRAIGHT axis angled upward-right. The barrel has parallel straight edges with NO kink or bend at the front sight, scope or muzzle. The scope remains straight and PARALLEL above the barrel, and the complete shoulder stock and trigger guard remain intact. Keep compass circle and bold needle, no letters, additional gear or tiny fittings. Exactly compass and hunting rifle."
+      }
+    }
+  ]
+}

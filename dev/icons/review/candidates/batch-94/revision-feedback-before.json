@@ -1,0 +1,30 @@
+{
+  "batch89-zawolajcie-kolegow": {
+    "itemId": "batch89-zawolajcie-kolegow",
+    "decision": "revise",
+    "candidateId": "batch90-revision",
+    "notes": "Good. Now restore the index finger gesture of the front hand, \"follow me\"",
+    "updatedAt": "2026-10-15T23:57:02.705Z"
+  },
+  "batch90-zryw": {
+    "itemId": "batch90-zryw",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Try a different concept. This is analogous to Action Surge.",
+    "updatedAt": "2026-10-15T23:57:50.539Z"
+  },
+  "batch91-chemik": {
+    "itemId": "batch91-chemik",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "The tip of the pipette is melted. Sharpen it.",
+    "updatedAt": "2026-10-16T00:02:40.629Z"
+  },
+  "batch91-ganger": {
+    "itemId": "batch91-ganger",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Correct the spokes on the wheel.",
+    "updatedAt": "2026-10-16T00:02:58.770Z"
+  }
+}

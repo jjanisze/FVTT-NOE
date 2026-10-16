@@ -1,0 +1,297 @@
+{
+  "title": "Batches 92 + 94 · 13 awaiting GM review",
+  "updated": "2026-10-16",
+  "items": [
+    {
+      "id": "batch89-zawolajcie-kolegow",
+      "name": "Zawołajcie kolegów",
+      "tier": "Batch 94 · Gladiator",
+      "batch": 94,
+      "placeholderKey": "feature:zawolajcie-kolegow",
+      "target": "icons/abilities/zawolajcie-kolegow.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawolajcie-kolegow.svg",
+          "variant": "default",
+          "sourceSha256": "abfc18f9af0e406acc37d35e09766a779dad7eeabed31cf74d1f1a8e14b3748d"
+        }
+      ],
+      "context": "Class/profession ability: Zawołajcie kolegów; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Jeśli w zasięgu 1,5 metra od ciebie znajduje się co najmniej dwóch przeciwników, otrzymujesz Ułatwienie do Testów Ataków wręcz. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 1. Keep the TWO small opposing fists above and the large foreground hand with its PALM FACING VIEWER and thumb at viewer RIGHT. Restore a single clear COME-HERE / FOLLOW-ME INDEX-FINGER BECKON: unfold ONLY the INDEX finger upward above the other knuckles, then curl its tip inward toward the viewer as a natural hook. The middle, ring and little fingers remain folded into the palm. One thumb, four fingers total, natural coherent adult anatomy. Keep palm crease and both upper fists unchanged. Exactly three hands, no extra finger, fingernails on palm, upside-down hand, face or text.",
+      "current": {
+        "src": "/icons/abilities/zawolajcie-kolegow.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch94-revision",
+          "label": "Batch 94 · revised Zawołajcie kolegów",
+          "src": "candidates/batch-94/zawolajcie-kolegow.png",
+          "note": "REVISION of reference cell 1. Keep the TWO small opposing fists above and the large foreground hand with its PALM FACING VIEWER and thumb at viewer RIGHT. Restore a single clear COME-HERE / FOLLOW-ME INDEX-FINGER BECKON: unfold ONLY the INDEX finger upward above the other knuckles, then curl its tip inward toward the viewer as a natural hook. The middle, ring and little fingers remain folded into the palm. One thumb, four fingers total, natural coherent adult anatomy. Keep palm crease and both upper fists unchanged. Exactly three hands, no extra finger, fingernails on palm, upside-down hand, face or text."
+        },
+        {
+          "id": "batch90-revision",
+          "label": "Batch 90 · revised Zawołajcie kolegów",
+          "src": "candidates/batch-90/zawolajcie-kolegow.png",
+          "note": "REVISION of reference cell 4. Preserve both small opposing fists above and the foreground beckoning gesture. Rotate ONLY the LARGE FOREGROUND HAND around its VERTICAL AXIS so its PALM FACES THE VIEWER. Do NOT turn the hand upside down. Wrist remains below, fingertips curl inward at the top in the same beckoning gesture, but show the broad PALM and one palm crease, NOT the backs of fingers or fingernails. Thumb is on the viewer's RIGHT after the rotation. Exactly one coherent thumb and four coherent fingers, some fingers may overlap naturally. Two upper fists stay unchanged. Large black gaps and natural adult anatomy, no extra hands, whole person, face, lettering or gore."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 89 · Zawołajcie kolegów",
+          "src": "candidates/batch-89/zawolajcie-kolegow.png",
+          "note": "ONE large complete BARE HAND BECKONS confidently upward, fingers curling inward once, with TWO smaller opposing CLENCHED FISTS above-left and above-right. Exactly three hands with coherent thumbs/fingers and short complete wrists, clear broad black gaps. A fighter challenges multiple opponents to come closer. No whole person, portrait, extra hands, text, numbers, weapons, wounds, gore or decorative arrows."
+        }
+      ]
+    },
+    {
+      "id": "batch90-zryw",
+      "name": "Zryw",
+      "tier": "Batch 94 · Twardziel",
+      "batch": 94,
+      "placeholderKey": "feature:zryw",
+      "target": "icons/abilities/zryw.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zryw.svg",
+          "variant": "default",
+          "sourceSha256": "f566600e180e85a4ce1d0e5cad346aa40e8038faf41d5ec23b4906fb7cdd00f2"
+        }
+      ],
+      "context": "Class/profession ability: Zryw; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Wspinasz się na szczyt swoich możliwości. W swojej turze możesz wykonać jeszcze jedną Akcję lub Akcję Bonusową. Po użyciu tej zdolności musisz ukończyć Krótki lub Długi odpoczynek, zanim będziesz mógł jej ponownie użyć. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "NEW CONCEPT for extra-action ACTION SURGE, replacing the old stopwatch entirely: ONE powerful complete BARE CLENCHED FIST thrusts upward in front of ONE bold LIGHTNING BOLT, with TWO short thick horizontal AFTERIMAGE STROKES trailing the wrist to the left. Physical burst of renewed effort grants another action. Broad coherent fingers and thumb, short complete wrist, clear black separation from the bolt. Compact sober white glyph, no clock, stopwatch, dial, running person, gruff portrait, words, numerals, extra hands or tiny sparks.",
+      "current": {
+        "src": "/icons/abilities/zryw.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch94-revision",
+          "label": "Batch 94 · revised Zryw",
+          "src": "candidates/batch-94/zryw.png",
+          "note": "NEW CONCEPT for extra-action ACTION SURGE, replacing the old stopwatch entirely: ONE powerful complete BARE CLENCHED FIST thrusts upward in front of ONE bold LIGHTNING BOLT, with TWO short thick horizontal AFTERIMAGE STROKES trailing the wrist to the left. Physical burst of renewed effort grants another action. Broad coherent fingers and thumb, short complete wrist, clear black separation from the bolt. Compact sober white glyph, no clock, stopwatch, dial, running person, gruff portrait, words, numerals, extra hands or tiny sparks."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 90 · Zryw",
+          "src": "candidates/batch-90/zryw.png",
+          "note": "ONE stout complete STOPWATCH with ONE thick LIGHTNING BOLT cut in black inside its broad white circular face. One broad top button and two short shoulder buttons; no hands or other face markings. Action burst and extra effort as a compact sober object emblem. Large simple shapes and clear negative space, no person, running legs, arrows, dice, numerals, letters, thin chain or detailed clockwork."
+        }
+      ]
+    },
+    {
+      "id": "batch91-chemik",
+      "name": "Chemik",
+      "tier": "Batch 94 · Spec",
+      "batch": 94,
+      "placeholderKey": "profession:chemik",
+      "target": "icons/profesje/chemik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/chemik.svg",
+          "variant": "default",
+          "sourceSha256": "4662220129374902fd41b90cf730c337c276df09c02f494defe3e6bbf31b6c27"
+        }
+      ],
+      "context": "profession: Chemik; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zyskujesz biegłość w narzędziach małego chemika i małego rusznikarza. SMAKUJE JAK ARSZENIK; PIROTECHNIKA; RUSZNIKARSTWO Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 3. Keep the laboratory flask, its bubbles and the diagonal dropper in the same composition. FIX ONLY THE MELTED PIPETTE TIP: the narrow glass tube has two smooth straight sides tapering into ONE clean SHARP POINT. Remove the rounded white blob/drop attached to the old tip. The pipette remains complete from rubber bulb to sharp glass tip, separated clearly from the flask and liquid by broad black cuts. No detached droplet, text, labels, formula, measurements or tiny details.",
+      "current": {
+        "src": "/icons/profesje/chemik.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch94-revision",
+          "label": "Batch 94 · revised Chemik",
+          "src": "candidates/batch-94/chemik.png",
+          "note": "REVISION of reference cell 3. Keep the laboratory flask, its bubbles and the diagonal dropper in the same composition. FIX ONLY THE MELTED PIPETTE TIP: the narrow glass tube has two smooth straight sides tapering into ONE clean SHARP POINT. Remove the rounded white blob/drop attached to the old tip. The pipette remains complete from rubber bulb to sharp glass tip, separated clearly from the flask and liquid by broad black cuts. No detached droplet, text, labels, formula, measurements or tiny details."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 91 · Chemik",
+          "src": "candidates/batch-91/chemik.png",
+          "note": "PROFESSION EMBLEM: ONE stout ROUND-BOTTOM LAB FLASK with a short neck, thick rim and TWO large bubble holes in its broad liquid mass. ONE complete DROPPER PIPETTE with a broad rubber bulb lies diagonally across the flask, separated by a broad black cut. Practical chemistry, sparse compact white object glyph. No formulas, recipes, labels, measurements, person, face, skull, tiny bubbles, extra glassware or lettering."
+        }
+      ]
+    },
+    {
+      "id": "batch91-ganger",
+      "name": "Ganger",
+      "tier": "Batch 94 · Brutal",
+      "batch": 94,
+      "placeholderKey": "profession:ganger",
+      "target": "icons/profesje/ganger.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/ganger.svg",
+          "variant": "default",
+          "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+        }
+      ],
+      "context": "profession: Ganger; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zyskujesz biegłość w kategorii broń palna pośrednia oraz biegłość w umiejętności Pojazdy. DWÓCH NA JEDNEGO; JA I MÓJ GANG!; JEDEN Z NICH; ODWAŻNY CZY GŁUPI Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 4. Preserve the studded baseball bat and complete tire. REDRAW THE WHEEL AS A COHERENT WHEEL: ONE round central HUB on the exact tire center, with exactly THREE equally spaced thick STRAIGHT SPOKES radiating from that SAME hub to the inner rim, at 120-degree intervals. Their hidden portions align continuously behind the bat, not at different offsets. Three large black wedge-shaped openings, intact concentric circular rim and tire, broad black separation from the bat. No floating or shifted spoke, extra hub, fine tread, text or extra prop.",
+      "current": {
+        "src": "/icons/profesje/ganger.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch94-revision",
+          "label": "Batch 94 · revised Ganger",
+          "src": "candidates/batch-94/ganger.png",
+          "note": "REVISION of reference cell 4. Preserve the studded baseball bat and complete tire. REDRAW THE WHEEL AS A COHERENT WHEEL: ONE round central HUB on the exact tire center, with exactly THREE equally spaced thick STRAIGHT SPOKES radiating from that SAME hub to the inner rim, at 120-degree intervals. Their hidden portions align continuously behind the bat, not at different offsets. Three large black wedge-shaped openings, intact concentric circular rim and tire, broad black separation from the bat. No floating or shifted spoke, extra hub, fine tread, text or extra prop."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 91 · Ganger",
+          "src": "candidates/batch-91/ganger.png",
+          "note": "PROFESSION EMBLEM: ONE complete improvised BASEBALL BAT bearing THREE broad blunt STUDS crosses ONE MOTORCYCLE WHEEL with THREE thick spokes. Bat has a complete broad grip and knob; wheel is a sturdy tire ring with clear open gaps. Road gang equipment, sober compact white silhouette with strong black separation. No person, face, real gang insignia, swastika, text, logos, fine tire tread, tiny nails, thin chains or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch94-kaznodzieja",
+      "name": "Kaznodzieja Nowej Ery",
+      "tier": "Batch 94 · Cwaniak",
+      "batch": 94,
+      "placeholderKey": "profession:kaznodzieja",
+      "target": "icons/profesje/kaznodzieja.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/kaznodzieja.svg",
+          "variant": "default",
+          "sourceSha256": "138bbdbdc8637e3e936dd2e1a3d07183dcb20d37f4b66a0c9b4087b482e3eef0"
+        }
+      ],
+      "context": "profession: Kaznodzieja Nowej Ery; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Otrzymujesz biegłość w broni palnej długiej oraz w jednej dowolnej umiejętności i jednym dowolnym zestawie narzędzi. AMEN; ŁASKA BOŻA; MÓJ BÓG KULE NOSI; TARCZA WIARY Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE sturdy closed PRAYER BOOK with ONE large plain CROSS cut in black on its white cover, paired with ONE complete simple LEVER-ACTION RIFLE angled beside it. Broad book spine and complete rifle stock, barrel and empty trigger guard, very few internal cuts. Faith and armed preaching in a sober wasteland emblem. No writing, scripture, letters, numerals, ornate religious art, real insignia, person or fine engraving.",
+      "current": {
+        "src": "/icons/profesje/kaznodzieja.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 94 · Kaznodzieja Nowej Ery",
+          "src": "candidates/batch-94/kaznodzieja.png",
+          "note": "ONE sturdy closed PRAYER BOOK with ONE large plain CROSS cut in black on its white cover, paired with ONE complete simple LEVER-ACTION RIFLE angled beside it. Broad book spine and complete rifle stock, barrel and empty trigger guard, very few internal cuts. Faith and armed preaching in a sober wasteland emblem. No writing, scripture, letters, numerals, ornate religious art, real insignia, person or fine engraving."
+        }
+      ]
+    },
+    {
+      "id": "batch94-kowboj",
+      "name": "Kowboj",
+      "tier": "Batch 94 · Twardziel",
+      "batch": 94,
+      "placeholderKey": "profession:kowboj",
+      "target": "icons/profesje/kowboj.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/kowboj.svg",
+          "variant": "default",
+          "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f"
+        }
+      ],
+      "context": "profession: Kowboj; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Otrzymujesz biegłość w umiejętności Pojazdy lub Tresura oraz biegłość w używaniu narzędzi małego kowala i biegłość w jednym dowolnym instrumencie. CLINT; REWOLWEROWIEC; ZAWSZE W SIODLE Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE broad-brimmed WESTERN HAT above ONE complete practical REVOLVER angled upward-right, with broad cylinder, complete barrel, grip and empty trigger guard. Two simple large black hat-crease cuts. Strong compact sober white silhouette, no rider or face, portrait likeness, star badge, labels, numerals, fine leather tooling or engraving.",
+      "current": {
+        "src": "/icons/profesje/kowboj.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 94 · Kowboj",
+          "src": "candidates/batch-94/kowboj.png",
+          "note": "ONE broad-brimmed WESTERN HAT above ONE complete practical REVOLVER angled upward-right, with broad cylinder, complete barrel, grip and empty trigger guard. Two simple large black hat-crease cuts. Strong compact sober white silhouette, no rider or face, portrait likeness, star badge, labels, numerals, fine leather tooling or engraving."
+        }
+      ]
+    },
+    {
+      "id": "batch94-kurier",
+      "name": "Kurier",
+      "tier": "Batch 94 · Złodziej",
+      "batch": 94,
+      "placeholderKey": "profession:kurier",
+      "target": "icons/profesje/kurier.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/kurier.svg",
+          "variant": "default",
+          "sourceSha256": "96d9ac95260eca111c41639200ccefe8132a864cee353706bd089fc5693a30d7"
+        }
+      ],
+      "context": "profession: Kurier; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zyskujesz biegłość w posługiwaniu się narzędziami małego mechanika i otrzymujesz biegłość w umiejętności Pojazdy. Jeżeli masz już te umiejętności, otrzymujesz w nich Specjalizację. SKRYTKA; SLANG; ZNAJOMOŚCI Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE complete rugged MOTORCYCLE in clear side profile with TWO intact round wheels, short saddle and simple handlebars. ONE stout SEALED PARCEL is strapped on the rear rack with ONE broad plain band. Courier transport and hidden cargo, broad compact white glyph with large black gaps. No rider, face, writing, labels, logo, fine spokes, chain texture, extra wheels or tiny cargo.",
+      "current": {
+        "src": "/icons/profesje/kurier.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 94 · Kurier",
+          "src": "candidates/batch-94/kurier.png",
+          "note": "ONE complete rugged MOTORCYCLE in clear side profile with TWO intact round wheels, short saddle and simple handlebars. ONE stout SEALED PARCEL is strapped on the rear rack with ONE broad plain band. Courier transport and hidden cargo, broad compact white glyph with large black gaps. No rider, face, writing, labels, logo, fine spokes, chain texture, extra wheels or tiny cargo."
+        }
+      ]
+    },
+    {
+      "id": "batch94-lowca-mutantow",
+      "name": "Łowca Mutantów",
+      "tier": "Batch 94 · Zwiadowca",
+      "batch": 94,
+      "placeholderKey": "profession:lowca-mutantow",
+      "target": "icons/profesje/lowca-mutantow.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/lowca-mutantow.svg",
+          "variant": "default",
+          "sourceSha256": "8c35340f8fbd1ef9b1d1fa0c63d40e02a4fc8fc32a6e390441711fe48b637bc0"
+        }
+      ],
+      "context": "profession: Łowca Mutantów; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Otrzymujesz biegłość w umiejętności Przyroda lub Tresura i biegłość w jednym dowolnym zestawie narzędzi. Zyskujesz biegłość w jednej wybranej kategorii broni. BEZ TAJEMNIC; MUTANT NA ŚNIADANIE; POGROMCA; OSWAJANIE ZWIERZĄT Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE simple living MUTANT ANIMAL HEAD in profile with ONE blunt forehead horn, one eye cut and a coherent short neck, paired with ONE complete broad SYRINGE DART angled beside it. The dart has a stout barrel, simple tail cap and one short intact pointed tip. Mutant knowledge plus specialized chemical ammunition, broad compact white glyph. No human portrait, severed tissue, wound, blood, gore, fine scales, formula, labels or extra horns.",
+      "current": {
+        "src": "/icons/profesje/lowca-mutantow.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 94 · Łowca Mutantów",
+          "src": "candidates/batch-94/lowca-mutantow.png",
+          "note": "ONE simple living MUTANT ANIMAL HEAD in profile with ONE blunt forehead horn, one eye cut and a coherent short neck, paired with ONE complete broad SYRINGE DART angled beside it. The dart has a stout barrel, simple tail cap and one short intact pointed tip. Mutant knowledge plus specialized chemical ammunition, broad compact white glyph. No human portrait, severed tissue, wound, blood, gore, fine scales, formula, labels or extra horns."
+        }
+      ]
+    },
+    {
+      "id": "batch94-mafiozo",
+      "name": "Mafiozo",
+      "tier": "Batch 94 · Cwaniak",
+      "batch": 94,
+      "placeholderKey": "profession:mafiozo",
+      "target": "icons/profesje/mafiozo.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/mafiozo.svg",
+          "variant": "default",
+          "sourceSha256": "91d52d1ffa320d4542e393e155df7810d01868b46b3dd9a5f75500eb65f36c88"
+        }
+      ],
+      "context": "profession: Mafiozo; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zyskujesz biegłość w dwóch kategoriach broni i w narzędziach małego tatuażysty. Jeśli masz wspomniany zestaw narzędzi, możesz przyjąć do swojej mafii sojuszników, wykonując im odpowiednie tatuaże. BEZLITOSNY PRZYWÓDCA; RENOMA; MOJA PRAWA RĘKA Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "ONE plain formal SUIT LAPEL AND NECKTIE emblem, cropped without any head, behind ONE complete compact PISTOL angled upward-right. Broad jacket lapels and large tie knot; pistol has a complete short barrel, slide, grip and empty trigger guard. Criminal leadership and armed authority, sober compact white masses. No person, face, real gang mark, hat, lettering, numerals, fine suit fabric or engraving.",
+      "current": {
+        "src": "/icons/profesje/mafiozo.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 94 · Mafiozo",
+          "src": "candidates/batch-94/mafiozo.png",
+          "note": "ONE plain formal SUIT LAPEL AND NECKTIE emblem, cropped without any head, behind ONE complete compact PISTOL angled upward-right. Broad jacket lapels and large tie knot; pistol has a complete short barrel, slide, grip and empty trigger guard. Criminal leadership and armed authority, sober compact white masses. No person, face, real gang mark, hat, lettering, numerals, fine suit fabric or engraving."
+        }
+      ]
+    }
+  ]
+}

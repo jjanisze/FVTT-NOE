@@ -1,0 +1,60 @@
+{
+  "files": [
+    {
+      "key": "medyk",
+      "source": "icons/profesje/medyk.svg",
+      "variant": "default",
+      "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037"
+    },
+    {
+      "key": "monter",
+      "source": "icons/profesje/monter.svg",
+      "variant": "default",
+      "sourceSha256": "a266c80a0c3a394ac90455249a8599e49ebaff0d4d35577f630f8810913c801a"
+    },
+    {
+      "key": "najemnik",
+      "source": "icons/profesje/najemnik.svg",
+      "variant": "default",
+      "sourceSha256": "2a4d32936b801162e47078613bb8694d9e2fb05dcc24e13752a64f657fa18716"
+    },
+    {
+      "key": "sedzia",
+      "source": "icons/profesje/sedzia.svg",
+      "variant": "default",
+      "sourceSha256": "874c3e1ff80a895921e5675d617b0e8528280017b875614f1aeaef321f650eeb"
+    },
+    {
+      "key": "szczur",
+      "source": "icons/profesje/szczur.svg",
+      "variant": "default",
+      "sourceSha256": "4bd810a23039817a14513e84ba592a708fcc8b78f385cd35e6d7916c79b7cae5"
+    },
+    {
+      "key": "wojownik-autostrady",
+      "source": "icons/profesje/wojownik-autostrady.svg",
+      "variant": "default",
+      "sourceSha256": "e01f31847380231e9d631e52c4abeb248ae3d4926c2bc01f16c05a20e1f6961a"
+    },
+    {
+      "key": "zabojca",
+      "source": "icons/profesje/zabojca.svg",
+      "variant": "default",
+      "sourceSha256": "f2ab1c6f403e02b4faddbdae54b60e69cc65fcfe9af70ba39eae69a2259618fd"
+    },
+    {
+      "key": "zabojca-maszyn",
+      "source": "icons/profesje/zabojca-maszyn.svg",
+      "variant": "default",
+      "sourceSha256": "0c741cf9f957a63bc5ccc664ec9c16c5709904676a638e76017979b364a811d5"
+    },
+    {
+      "key": "zolnierz",
+      "source": "icons/profesje/zolnierz.svg",
+      "variant": "default",
+      "sourceSha256": "5ea9f370436a15b721d359267424f0cff11887f5f11ceca09e09944336492654"
+    }
+  ],
+  "canonicalProfessionSource": "dev/classes/professions.json",
+  "canonicalSha256": "0e85bef09aba8adb812fe922f20b4363007877dc9337880bac6b3389dbbcadb8"
+}

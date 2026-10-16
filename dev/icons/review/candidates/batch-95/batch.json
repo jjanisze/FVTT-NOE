@@ -1,0 +1,243 @@
+{
+  "date": "2026-10-16",
+  "batch": 95,
+  "generalFeedback": "Broad sober white glyphs, no anime, no repeated gruff portraits; apply exact saved revisions.",
+  "subjects": [
+    {
+      "kind": "profession",
+      "key": "medyk",
+      "name": "Medyk",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/profesje/medyk.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/medyk.svg",
+          "variant": "default",
+          "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037"
+        }
+      ],
+      "ruleContext": "Zyskujesz biegłość w Medycynie i w narzędziach małego chemika lub małego medyka. DOKTOR BRAIN; KRWAWY ANIOŁ; ŁAPIDUCH; FARMACJA",
+      "context": "profession: Medyk; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "ONE sturdy MEDICAL BAG with a complete handle, one broad black PLUS mark on its white front and TWO simple lid cuts, paired with ONE complete STETHOSCOPE with a thick U-shaped tube and one large round chest piece. Clear broad black gap, practical field medicine, compact white silhouettes. No person, face, lettering, labels, tiny clasps, fine tubing, extra drugs or gore.",
+      "itemId": "batch95-medyk",
+      "canonicalAbilities": [
+        "DOKTOR BRAIN",
+        "KRWAWY ANIOŁ",
+        "ŁAPIDUCH",
+        "FARMACJA"
+      ]
+    },
+    {
+      "kind": "profession",
+      "key": "monter",
+      "name": "Monter",
+      "owner": "spec",
+      "ownerLabel": "Spec",
+      "target": "icons/profesje/monter.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/monter.svg",
+          "variant": "default",
+          "sourceSha256": "a266c80a0c3a394ac90455249a8599e49ebaff0d4d35577f630f8810913c801a"
+        }
+      ],
+      "ruleContext": "Zyskujesz biegłość w umiejętności Technika i biegłość w dwóch wybranych zestawach narzędzi. MECHANIKA; HAKERSTWO; SERWISOWANIE",
+      "context": "profession: Monter; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 2,
+      "request": "ONE complete practical OPEN-END WRENCH crosses ONE stout ENGINE PISTON with a broad cylindrical crown, TWO large piston-ring cuts and one complete connecting rod with large round end. Broad black separation at crossing. Repair and mechanical construction, sober compact white equipment emblem. No person, face, giant cog, fine wiring, tiny parts, text, numerals or logo.",
+      "itemId": "batch95-monter",
+      "canonicalAbilities": [
+        "MECHANIKA",
+        "HAKERSTWO",
+        "SERWISOWANIE"
+      ]
+    },
+    {
+      "kind": "profession",
+      "key": "najemnik",
+      "name": "Najemnik",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/profesje/najemnik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/najemnik.svg",
+          "variant": "default",
+          "sourceSha256": "2a4d32936b801162e47078613bb8694d9e2fb05dcc24e13752a64f657fa18716"
+        }
+      ],
+      "ruleContext": "Zyskujesz biegłość w dwóch wybranych kategoriach broni i biegłość w jednym dowolnym zestawie narzędzi. MASZYNA DO ZABIJANIA; REPUTACJA; SKUTECZNY CIOS",
+      "context": "profession: Najemnik; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 3,
+      "request": "TWO broad blank MILITARY DOG TAGS hang together from ONE short thick loop, behind ONE complete practical COMBAT KNIFE angled upward-right. Complete blade, simple guard and stout handle with TWO broad grip cuts, large black separation. Professional hired fighter, equipment and service. No names, numbers, readable tags, real insignia, fine chain, face, camouflage texture or gore.",
+      "itemId": "batch95-najemnik",
+      "canonicalAbilities": [
+        "MASZYNA DO ZABIJANIA",
+        "REPUTACJA",
+        "SKUTECZNY CIOS"
+      ]
+    },
+    {
+      "kind": "profession",
+      "key": "sedzia",
+      "name": "Sędzia",
+      "owner": "zwiadowca",
+      "ownerLabel": "Zwiadowca",
+      "target": "icons/profesje/sedzia.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/sedzia.svg",
+          "variant": "default",
+          "sourceSha256": "874c3e1ff80a895921e5675d617b0e8528280017b875614f1aeaef321f650eeb"
+        }
+      ],
+      "ruleContext": "Otrzymujesz biegłość w umiejętności Śledztwo i Zastraszanie oraz biegłość w jednym dowolnym zestawie narzędzi. Zyskujesz biegłość w jednej wybranej kategorii broni. JEDEN Z NAS; RZUĆ BROŃ I GLEBA!; PARTNER",
+      "context": "profession: Sędzia; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 4,
+      "request": "ONE plain sturdy SHIELD-SHAPED LAW BADGE with ONE bold FIVE-POINT STAR cut in black, paired with ONE complete pair of HANDCUFFS consisting of TWO broad open rings joined by ONE thick short connector. Field law enforcer, not a courtroom judge. Broad compact white masses and black gaps, no gavel, scale, text, numerals, real police logo, tiny chain or person.",
+      "itemId": "batch95-sedzia",
+      "canonicalAbilities": [
+        "JEDEN Z NAS",
+        "RZUĆ BROŃ I GLEBA!",
+        "PARTNER"
+      ]
+    },
+    {
+      "kind": "profession",
+      "key": "szczur",
+      "name": "Szczur",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/profesje/szczur.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/szczur.svg",
+          "variant": "default",
+          "sourceSha256": "4bd810a23039817a14513e84ba592a708fcc8b78f385cd35e6d7916c79b7cae5"
+        }
+      ],
+      "ruleContext": "Zyskujesz biegłość w posługiwaniu się narzędziami małego chemika oraz w umiejętności Akrobatyka lub Zwinne dłonie. A CO MI TAM!; SZARY; TRUCICIEL; ZWINNOŚĆ SZCZURA",
+      "context": "profession: Szczur; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 5,
+      "request": "ONE realistically proportioned adult RAT crouches low beside ONE squat STOPPERED CHEMICAL VIAL bearing ONE large black DROP-shaped mark. Rat has one long tail, rounded ears, pointed muzzle, one eye and natural paws, very sparse anatomy. Unnoticed scavenger and poison resistance/craft, broad compact white glyph. No cute mascot, anime, fine fur, formula, labels, skull clutter, extra limbs or gore.",
+      "itemId": "batch95-szczur",
+      "canonicalAbilities": [
+        "A CO MI TAM!",
+        "SZARY",
+        "TRUCICIEL",
+        "ZWINNOŚĆ SZCZURA"
+      ]
+    },
+    {
+      "kind": "profession",
+      "key": "wojownik-autostrady",
+      "name": "Wojownik Autostrady",
+      "owner": "twardziel",
+      "ownerLabel": "Twardziel",
+      "target": "icons/profesje/wojownik-autostrady.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/wojownik-autostrady.svg",
+          "variant": "default",
+          "sourceSha256": "e01f31847380231e9d631e52c4abeb248ae3d4926c2bc01f16c05a20e1f6961a"
+        }
+      ],
+      "ruleContext": "Otrzymujesz biegłość w umiejętności Pojazdy oraz biegłość w używaniu narzędzi małego mechanika. Jeśli posiadasz już te biegłości, otrzymujesz w nich Specjalizację. DRZWI W DRZWI; KASKADER; PANCERNA FURA",
+      "context": "profession: Wojownik Autostrady; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 6,
+      "request": "ONE complete stout STEERING WHEEL with THREE broad spokes around one center hub, paired with ONE complete SAWED-OFF DOUBLE-BARREL SHOTGUN angled upward-right. Two thick parallel short barrels, complete grip, simple receiver and empty trigger guard. Vehicle combat, sober compact white silhouette with broad black separation. No driver, face, cars, numerals, letters, fine wheel stitching or gun engraving.",
+      "itemId": "batch95-wojownik-autostrady",
+      "canonicalAbilities": [
+        "DRZWI W DRZWI",
+        "KASKADER",
+        "PANCERNA FURA"
+      ]
+    },
+    {
+      "kind": "profession",
+      "key": "zabojca",
+      "name": "Zabójca",
+      "owner": "zlodziej",
+      "ownerLabel": "Złodziej",
+      "target": "icons/profesje/zabojca.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/zabojca.svg",
+          "variant": "default",
+          "sourceSha256": "f2ab1c6f403e02b4faddbdae54b60e69cc65fcfe9af70ba39eae69a2259618fd"
+        }
+      ],
+      "ruleContext": "Zyskujesz biegłość w posługiwaniu się narzędziami małego charakteryzatora oraz biegłość we wszystkich broniach. JEDEN STRZAŁ; KAMUFLAŻ; STRZELEC",
+      "context": "profession: Zabójca; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 7,
+      "request": "ONE complete practical SCOPED RIFLE fitted with ONE stout cylindrical SUPPRESSOR at the muzzle, paired with ONE broad simple TARGET CROSSHAIR beside the stock. Rifle stock, straight barrel, scope and empty trigger guard remain complete. Four thick reticle ticks and one central dot, precise concealed ranged attack. No person, hooded portrait, text, labels, measurements, fine fittings, blood or gore.",
+      "itemId": "batch95-zabojca",
+      "canonicalAbilities": [
+        "JEDEN STRZAŁ",
+        "KAMUFLAŻ",
+        "STRZELEC"
+      ]
+    },
+    {
+      "kind": "profession",
+      "key": "zabojca-maszyn",
+      "name": "Zabójca Maszyn",
+      "owner": "zwiadowca",
+      "ownerLabel": "Zwiadowca",
+      "target": "icons/profesje/zabojca-maszyn.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/zabojca-maszyn.svg",
+          "variant": "default",
+          "sourceSha256": "0c741cf9f957a63bc5ccc664ec9c16c5709904676a638e76017979b364a811d5"
+        }
+      ],
+      "ruleContext": "Otrzymujesz biegłość w umiejętności Technika i jedną wybraną biegłość w narzędziach. Jeśli masz już biegłość w umiejętności Technika, otrzymujesz w niej Specjalizację. Zyskujesz biegłość w jednej wybranej kategorii broni oraz wyszkolenie w ciężkich pancerzach. EMITER EMP; EMPIRYK; SŁABY PUNKT",
+      "context": "profession: Zabójca Maszyn; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 8,
+      "request": "ONE plain industrial ROBOT HEAD with a squared casing, TWO large dark rectangular eye openings and ONE broad jaw slot, crossed by ONE bold LIGHTNING BOLT with broad black separation. Electromagnetic attack against machines, sober compact white stencil. No human face, gruff portrait, cartoon expression, generic cog, fine circuits, tiny cables, readable text or logo.",
+      "itemId": "batch95-zabojca-maszyn",
+      "canonicalAbilities": [
+        "EMITER EMP",
+        "EMPIRYK",
+        "SŁABY PUNKT"
+      ]
+    },
+    {
+      "kind": "profession",
+      "key": "zolnierz",
+      "name": "Żołnierz",
+      "owner": "twardziel",
+      "ownerLabel": "Twardziel",
+      "target": "icons/profesje/zolnierz.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/zolnierz.svg",
+          "variant": "default",
+          "sourceSha256": "5ea9f370436a15b721d359267424f0cff11887f5f11ceca09e09944336492654"
+        }
+      ],
+      "ruleContext": "Zostając żołnierzem, decydujesz się służyć sprawie obrony ojczyzny. Otrzymujesz biegłość w umiejętności Technika oraz biegłość w używaniu narzędzi małego rusznikarza lub kowala. JAK DBASZ, TAK MASZ; RUTYNA; TRENING W ZBROI",
+      "context": "profession: Żołnierz; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 9,
+      "request": "ONE complete practical FIELD COMBAT HELMET above ONE complete ASSAULT RIFLE angled upward-right, with broad stock, straight barrel, short thick magazine, one grip and empty trigger guard. Helmet has one broad rim and TWO large panel cuts only, no face or head. Military discipline and weapon proficiency, sober compact white glyph. No real military insignia, star badge, text, numerals, fine straps, tiny fittings or camouflage texture.",
+      "itemId": "batch95-zolnierz",
+      "canonicalAbilities": [
+        "JAK DBASZ, TAK MASZ",
+        "RUTYNA",
+        "TRENING W ZBROI"
+      ]
+    }
+  ]
+}

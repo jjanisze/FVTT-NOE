@@ -1,0 +1,12 @@
+{
+  "batch": 93,
+  "variant": "b",
+  "validatedMasks": 4,
+  "prospectiveDeliveryTargets": 4,
+  "candidateHashes": {
+    "brutal": "4438b41826776f60f2404f1521a2cd52cf83f5eddbf01c69dc936f420690da1f",
+    "cwaniak": "d96295bbc2fedcba1f040008754945c1b743150125347b5a3d0741c25846c71c",
+    "twardziel": "8a646bdfdf473d959b5a2dff76c891608dd786f4c709d7d0b6168f65ce558128",
+    "zwiadowca": "5f65afb1fc61159f648ea48ebd79742ac45d4eda82f93d7e34241ebe123267df"
+  }
+}

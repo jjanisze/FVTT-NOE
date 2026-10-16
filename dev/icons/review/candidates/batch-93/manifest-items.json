@@ -1,0 +1,218 @@
+{
+  "title": "Batches 93 + 94 + 95 · 22 awaiting GM review",
+  "updated": "2026-10-16",
+  "items": [
+    {
+      "id": "batch90-brutal",
+      "name": "Brutal",
+      "tier": "Batch 93 · Brutal",
+      "batch": 93,
+      "placeholderKey": "class:brutal",
+      "target": "icons/klasy/brutal.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/brutal.svg",
+          "variant": "default",
+          "sourceSha256": "83bf2a94a6a88bb853e8e3de117926e3e503d06a79bbd186bc69e8f9ecaeb915"
+        }
+      ],
+      "context": "class: Brutal; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "Preserve the selected headless bare torso. Add ONE broad short diagonal HEALED SCAR CUT on the upper chest, a closed old scar only, no wound, blood, tissue or gore. REPLACE THE KNIFE entirely with ONE complete HAND-HELD RAIL PILEDRIVER / HEAVY KAFAR following the supporting weapon reference: a massive blunt industrial rail-section striking tool, thick complete body and practical grip, NOT a rifle, railgun, knife or long thin spear. Exactly torso and piledriver as the two main elements. Keep natural adult proportions and sparse large anatomical cuts.",
+      "current": {
+        "src": "/icons/klasy/brutal.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch93-a",
+          "label": "Batch 93 · Brutal · A",
+          "src": "candidates/batch-93-a/brutal.png",
+          "note": "Apply this exact correction while preserving the reference composition: Preserve the selected headless bare torso. Add ONE broad short diagonal HEALED SCAR CUT on the upper chest, a closed old scar only, no wound, blood, tissue or gore. REPLACE THE KNIFE entirely with ONE complete HAND-HELD RAIL PILEDRIVER / HEAVY KAFAR following the supporting weapon reference: a massive blunt industrial rail-section striking tool, thick complete body and practical grip, NOT a rifle, railgun, knife or long thin spear. Exactly torso and piledriver as the two main elements. Keep natural adult proportions and sparse large anatomical cuts."
+        },
+        {
+          "id": "batch93-b",
+          "label": "Batch 93 · Brutal · B",
+          "src": "candidates/batch-93-b/brutal.png",
+          "note": "A second clean version of the SAME corrected two-element emblem. Keep both objects and their general positions; adjust their spacing and tilt slightly for a more compact balanced composition. Preserve the selected headless bare torso. Add ONE broad short diagonal HEALED SCAR CUT on the upper chest, a closed old scar only, no wound, blood, tissue or gore. REPLACE THE KNIFE entirely with ONE complete HAND-HELD RAIL PILEDRIVER / HEAVY KAFAR following the supporting weapon reference: a massive blunt industrial rail-section striking tool, thick complete body and practical grip, NOT a rifle, railgun, knife or long thin spear. Exactly torso and piledriver as the two main elements. Keep natural adult proportions and sparse large anatomical cuts."
+        },
+        {
+          "id": "batch92-a",
+          "label": "Batch 92 · Brutal · A",
+          "src": "candidates/batch-92-a/brutal.png",
+          "note": "ONE powerful complete BARE CLENCHED FIST beside ONE heavy industrial SLEDGEHAMMER angled upward-right behind it. Coherent thumb and four folded fingers, short bare wrist; hammer has one broad rectangular steel head and one stout complete handle. Clear broad black separation keeps fist and hammer separately readable. Unarmed force plus heavy melee; no chain, armor, face, tiny knuckles or debris."
+        },
+        {
+          "id": "batch92-b",
+          "label": "Batch 92 · Brutal · B",
+          "src": "candidates/batch-92-b/brutal.png",
+          "note": "ONE plain HEADLESS BARE ADULT UPPER TORSO beside ONE complete practical TACTICAL KNIFE pointing upward. Torso ends at base of neck and above waist; ordinary strong adult proportions, shoulders and chest as one broad modest solid mass with only TWO large anatomical cuts. Knife has one broad blade, short guard and stout handle; black separation from torso. Unarmored toughness plus melee precision. No nipples, bodybuilder detail, person portrait, extra limbs, fine serrations, injuries or gore."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 90 · Brutal",
+          "src": "candidates/batch-90/brutal.png",
+          "note": "CLASS EMBLEM: ONE powerful complete BARE CLENCHED FIST wrapped in THREE broad BROKEN CHAIN LINKS, with TWO clearly snapped chain ends beside the short wrist. Strong natural hand anatomy, coherent thumb and folded fingers, solid masses and broad black separations. Brute strength and berserk freedom, sober compact glyph. No person, head, beard portrait, armor, fine chain, text, real insignia, blood or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch91-cwaniak",
+      "name": "Cwaniak",
+      "tier": "Batch 93 · Cwaniak",
+      "batch": 93,
+      "placeholderKey": "class:cwaniak",
+      "target": "icons/klasy/cwaniak.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/cwaniak.svg",
+          "variant": "default",
+          "sourceSha256": "aa8669e1745b216b6ab4e23aeb55fc20df54d4922261d3e37210e95491e1f57c"
+        }
+      ],
+      "context": "class: Cwaniak; owner Cwaniak. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "Keep the same complete tilted playing card with one large SPADES pip. Replace ONLY the megaphone with ONE complete handheld MICROPHONE: rounded grille with TWO broad grille cuts and one stout complete handle. Exactly card and microphone, no die, megaphone cone, star, cable, labels, numbers or fine mesh.",
+      "current": {
+        "src": "/icons/klasy/cwaniak.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch93-a",
+          "label": "Batch 93 · Cwaniak · A",
+          "src": "candidates/batch-93-a/cwaniak.png",
+          "note": "Apply this exact correction while preserving the reference composition: Keep the same complete tilted playing card with one large SPADES pip. Replace ONLY the megaphone with ONE complete handheld MICROPHONE: rounded grille with TWO broad grille cuts and one stout complete handle. Exactly card and microphone, no die, megaphone cone, star, cable, labels, numbers or fine mesh."
+        },
+        {
+          "id": "batch93-b",
+          "label": "Batch 93 · Cwaniak · B",
+          "src": "candidates/batch-93-b/cwaniak.png",
+          "note": "A second clean version of the SAME corrected two-element emblem. Keep both objects and their general positions; adjust their spacing and tilt slightly for a more compact balanced composition. Keep the same complete tilted playing card with one large SPADES pip. Replace ONLY the megaphone with ONE complete handheld MICROPHONE: rounded grille with TWO broad grille cuts and one stout complete handle. Exactly card and microphone, no die, megaphone cone, star, cable, labels, numbers or fine mesh."
+        },
+        {
+          "id": "batch92-a",
+          "label": "Batch 92 · Cwaniak · A",
+          "src": "candidates/batch-92-a/cwaniak.png",
+          "note": "ONE coherent isometric SIX-SIDED DIE paired with ONE complete handheld MICROPHONE leaning diagonally beside it. Die has three broad planar faces meeting at consistent shared vertices, just one, two and three large round black pips on its faces. Microphone has a stout handle and rounded grille with only TWO broad grille cuts. Clear black gap between objects. Luck plus persuasive speech or motivation, no star, cables, text or fine mesh."
+        },
+        {
+          "id": "batch92-b",
+          "label": "Batch 92 · Cwaniak · B",
+          "src": "candidates/batch-92-b/cwaniak.png",
+          "note": "ONE complete PLAYING CARD with ONE large black SPADES pip paired with ONE sturdy handheld MEGAPHONE angled upward-right. Card is a thick white rectangular mass with no corner indices. Megaphone has a broad flared cone, short complete grip and ONE large black mouth opening. Separate the two objects with broad black space or one clean overlap cut. Luck plus leadership and rapid persuasion, no face, dice, sound-ray clutter, letters, numbers or tiny switches."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 91 · Cwaniak",
+          "src": "candidates/batch-91/cwaniak.png",
+          "note": "CLASS EMBLEM: TWO overlapping complete PLAYING CARDS angled slightly apart. The FRONT card carries ONE large black CLUBS pip; the rear card shows ONE large black SPADES pip in its exposed portion. Thick white card masses with broad black separation at overlap. Cunning and luck in a sober compact practical emblem. No letters, numbers, joker face, person, dice, tiny corner indices, textures or decorative frame."
+        }
+      ]
+    },
+    {
+      "id": "batch91-twardziel",
+      "name": "Twardziel",
+      "tier": "Batch 93 · Twardziel",
+      "batch": 93,
+      "placeholderKey": "class:twardziel",
+      "target": "icons/klasy/twardziel.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/twardziel.svg",
+          "variant": "default",
+          "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac"
+        }
+      ],
+      "context": "class: Twardziel; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "Keep the complete aligned plate carrier with its single vertical centerline and continuous matching side contours. Replace ONLY the SMG with ONE complete LIGHT MACHINE GUN: a clearly longer STRAIGHT BARREL, broad receiver, complete shoulder stock, grip, empty trigger guard, ONE box ammunition container below the receiver and one broad FOLDED BIPOD under the forward barrel. Sober compact broad silhouette, no intricate belt links, tiny fittings, lettering or shifted armor panels. Exactly armor and LMG.",
+      "current": {
+        "src": "/icons/klasy/twardziel.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch93-a",
+          "label": "Batch 93 · Twardziel · A",
+          "src": "candidates/batch-93-a/twardziel.png",
+          "note": "Apply this exact correction while preserving the reference composition: Keep the complete aligned plate carrier with its single vertical centerline and continuous matching side contours. Replace ONLY the SMG with ONE complete LIGHT MACHINE GUN: a clearly longer STRAIGHT BARREL, broad receiver, complete shoulder stock, grip, empty trigger guard, ONE box ammunition container below the receiver and one broad FOLDED BIPOD under the forward barrel. Sober compact broad silhouette, no intricate belt links, tiny fittings, lettering or shifted armor panels. Exactly armor and LMG."
+        },
+        {
+          "id": "batch93-b",
+          "label": "Batch 93 · Twardziel · B",
+          "src": "candidates/batch-93-b/twardziel.png",
+          "note": "A second clean version of the SAME corrected two-element emblem. Keep both objects and their general positions; adjust their spacing and tilt slightly for a more compact balanced composition. Keep the complete aligned plate carrier with its single vertical centerline and continuous matching side contours. Replace ONLY the SMG with ONE complete LIGHT MACHINE GUN: a clearly longer STRAIGHT BARREL, broad receiver, complete shoulder stock, grip, empty trigger guard, ONE box ammunition container below the receiver and one broad FOLDED BIPOD under the forward barrel. Sober compact broad silhouette, no intricate belt links, tiny fittings, lettering or shifted armor panels. Exactly armor and LMG."
+        },
+        {
+          "id": "batch92-a",
+          "label": "Batch 92 · Twardziel · A",
+          "src": "candidates/batch-92-a/twardziel.png",
+          "note": "ONE complete BODY-ARMOR VEST behind ONE practical PUMP SHOTGUN angled upward-right. Keep the earlier vest-and-shotgun concept, but FIX THE VEST GEOMETRY: shoulder straps, neck opening, upper chest plate, lower plate and hem all share ONE VERTICAL CENTERLINE. The concealed left and right side contours continue smoothly behind the shotgun, with no sideways step or offset. Exactly TWO broad plate cuts. Shotgun has complete stock, barrel, pump grip and empty trigger guard, no tiny fittings. One broad black overlap cut; firepower plus defense."
+        },
+        {
+          "id": "batch92-b",
+          "label": "Batch 92 · Twardziel · B",
+          "src": "candidates/batch-92-b/twardziel.png",
+          "note": "ONE complete symmetrical PLATE CARRIER behind ONE complete practical COMPACT SUBMACHINE GUN held HORIZONTALLY across its lower chest, muzzle RIGHT. Armor shoulder straps, neck opening, chest plates and hem share ONE VERTICAL CENTERLINE and continuous aligned side contours; TWO broad horizontal plate cuts only. Gun has one short straight barrel, simple receiver, complete shoulder stock, one grip, one thick short magazine and empty trigger guard. Clear broad black overlap cut. Exactly vest and gun, firepower plus defense, no floating armor piece, offset panels or fine mechanical detail."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 91 · Twardziel",
+          "src": "candidates/batch-91/twardziel.png",
+          "note": "CLASS EMBLEM: ONE sturdy BODY-ARMOR VEST with TWO broad horizontal plate cuts, behind ONE complete practical SHOTGUN lying diagonally across it. Shotgun has a clear shoulder stock, one straight barrel, thick pump grip and empty trigger guard, simplified into broad masses. Durable martial survivor represented by equipment, compact white glyph. No person, face, helmet, lettering, numbers, engraved parts, tiny fittings, blood or injury."
+        }
+      ]
+    },
+    {
+      "id": "batch91-zwiadowca",
+      "name": "Zwiadowca",
+      "tier": "Batch 93 · Zwiadowca",
+      "batch": 93,
+      "placeholderKey": "class:zwiadowca",
+      "target": "icons/klasy/zwiadowca.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/zwiadowca.svg",
+          "variant": "default",
+          "sourceSha256": "67b410b391ee6dda233c64b0bbdf051d8d4bc1909260d06ef79fa3e6c328307a"
+        }
+      ],
+      "context": "class: Zwiadowca; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.  Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "Keep the compass and rifle composition. FIX THE CROOKED RIFLE BARREL: receiver bore, whole barrel and muzzle all lie on ONE perfectly STRAIGHT axis angled upward-right. The barrel has parallel straight edges with NO kink or bend at the front sight, scope or muzzle. The scope remains straight and PARALLEL above the barrel, and the complete shoulder stock and trigger guard remain intact. Keep compass circle and bold needle, no letters, additional gear or tiny fittings. Exactly compass and hunting rifle.",
+      "current": {
+        "src": "/icons/klasy/zwiadowca.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch93-a",
+          "label": "Batch 93 · Zwiadowca · A",
+          "src": "candidates/batch-93-a/zwiadowca.png",
+          "note": "Apply this exact correction while preserving the reference composition: Keep the compass and rifle composition. FIX THE CROOKED RIFLE BARREL: receiver bore, whole barrel and muzzle all lie on ONE perfectly STRAIGHT axis angled upward-right. The barrel has parallel straight edges with NO kink or bend at the front sight, scope or muzzle. The scope remains straight and PARALLEL above the barrel, and the complete shoulder stock and trigger guard remain intact. Keep compass circle and bold needle, no letters, additional gear or tiny fittings. Exactly compass and hunting rifle."
+        },
+        {
+          "id": "batch93-b",
+          "label": "Batch 93 · Zwiadowca · B",
+          "src": "candidates/batch-93-b/zwiadowca.png",
+          "note": "A second clean version of the SAME corrected two-element emblem. Keep both objects and their general positions; adjust their spacing and tilt slightly for a more compact balanced composition. Keep the compass and rifle composition. FIX THE CROOKED RIFLE BARREL: receiver bore, whole barrel and muzzle all lie on ONE perfectly STRAIGHT axis angled upward-right. The barrel has parallel straight edges with NO kink or bend at the front sight, scope or muzzle. The scope remains straight and PARALLEL above the barrel, and the complete shoulder stock and trigger guard remain intact. Keep compass circle and bold needle, no letters, additional gear or tiny fittings. Exactly compass and hunting rifle."
+        },
+        {
+          "id": "batch92-a",
+          "label": "Batch 92 · Zwiadowca · A",
+          "src": "candidates/batch-92-a/zwiadowca.png",
+          "note": "ONE stout round COMPASS paired with ONE complete practical SCOPED HUNTING RIFLE angled upward-right. Compass has a thick open circular rim and ONE bold two-ended compass needle with one long north point and a shorter south point, NO letters or ticks. Rifle has a complete shoulder stock, straight barrel, simple scope and empty trigger guard, no fine fittings. Broad black overlap separation; exactly navigation instrument and rifle. Wilderness navigation plus hunting, no favorite star badge, person, text or numerals."
+        },
+        {
+          "id": "batch92-b",
+          "label": "Batch 92 · Zwiadowca · B",
+          "src": "candidates/batch-92-b/zwiadowca.png",
+          "note": "ONE complete practical pair of BINOCULARS paired with ONE complete stout SURVIVAL KNIFE angled upward-right beside it. Binoculars have two thick barrels, two large round lens openings and one broad central hinge. Knife has a complete broad blade, small guard and stout handle with TWO broad grip cuts. Clear broad black separation. Exactly two objects, careful observation plus wilderness survival; no footprint, map, face, thin straps, fine serrations, labels or extra gear."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 91 · Zwiadowca",
+          "src": "candidates/batch-91/zwiadowca.png",
+          "note": "CLASS EMBLEM: ONE complete practical pair of BINOCULARS above ONE broad BOOTPRINT. Binoculars have two thick barrels, two round objective lenses and one central hinge. Bootprint has a large heel, broad sole and only TWO black tread cuts. Scouting and tracking, sturdy compact white glyph with clear black separation between objects. No person, face, dangling thin straps, tiny fittings, letters, numbers or map labels."
+        }
+      ]
+    }
+  ]
+}

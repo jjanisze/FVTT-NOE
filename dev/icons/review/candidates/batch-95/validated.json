@@ -1,0 +1,16 @@
+{
+  "batch": 95,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "medyk": "94f9d1e4feaf4f87d92800e8cc44428cea6c37cd6e3e42acb91413f2d168561e",
+    "monter": "ae0325d0326fab0c3299d3356e8c9b91da2626279ee9d2b31a9730820b034835",
+    "najemnik": "ed2ba97a5d2e13d0fa89d19211e74567a8aadd38cbfa1192d2d6e2875500b8aa",
+    "sedzia": "196bca45f2cfafd7b460579dc1e5c34b674b977f6f263c1a1dbe3a15e4deac0b",
+    "szczur": "06b9e64e1348d2eca9ff508090963ac0c25896363c48f7fc8f921c7faf5548b0",
+    "wojownik-autostrady": "e5da08039463499c1a29214bb840303d6ce42b36dc6154c6557be4e4c064f8ad",
+    "zabojca": "151736685b4c10439406e89f7aba2f6de42494c17f9d0d8964e2eccbb912b89f",
+    "zabojca-maszyn": "d4e27de0dcb4169a5a1546e8926b55265ffe828b4c1dbf48eb9035f8d4364f75",
+    "zolnierz": "46d7112f527376b9d6359d75783efc4502dbffb76017d1c3fbcb63f75ab7d9df"
+  }
+}

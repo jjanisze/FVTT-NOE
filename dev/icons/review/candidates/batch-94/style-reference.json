@@ -1,0 +1,41 @@
+{
+  "role": "Reference cells 1-4 are exact revision sources: restore hooked beckoning index while keeping palm forward; replace stopwatch with action-surge effort emblem; sharpen pipette tip and remove melted blob; rebuild three wheel spokes at one center. Cells 5-9 are STYLE ONLY for five new professions. ",
+  "sources": [
+    {
+      "source": "dev/icons/review/candidates/batch-90/zawolajcie-kolegow.png",
+      "sha256": "9398ff9fda6a2ed0539e691b0d58b687c52b04635b9057f9c2a327880f2acc07"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-90/zryw.png",
+      "sha256": "3e0312df08df360d0068131c2529e13a03c393d2df92e42abdf8360c14bf7682"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-91/chemik.png",
+      "sha256": "6cf24f60ee4ac5bc90ba5d32940b93f5ab68e543329ca7044daa5bb3752b9c36"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-91/ganger.png",
+      "sha256": "a4ab1a5b11abe47ec0204d4e1a159418ecc50f218094551713987934137bfb43"
+    },
+    {
+      "source": "icons/abilities/ulubiona-bron-twardziel.webp",
+      "sha256": "d5ee0b6859d1ed1d5453d3fdef5a028407546fc9faae7807fea132c9598ad98c"
+    },
+    {
+      "source": "icons/abilities/emiter-emp.webp",
+      "sha256": "e052c015b34c427698455fc79fac5cff36d25211fff085141a02440c157a1fdc"
+    },
+    {
+      "source": "icons/abilities/bez-tajemnic.webp",
+      "sha256": "1c6544d59989a4dd08c9faf2728da3f5d902adabf1886f080627ea5d90013eb7"
+    },
+    {
+      "source": "icons/abilities/kocie-kosci.webp",
+      "sha256": "ee5d25740ab235e515c3e32405a25e41eceba7005bcd83cc2a6ebae4d52e30db"
+    },
+    {
+      "source": "icons/abilities/dziewiec-zyc.webp",
+      "sha256": "0cf20df0e99b7078ccc55a513e67d81a2672d09a49374eca0815731a2aa34317"
+    }
+  ]
+}

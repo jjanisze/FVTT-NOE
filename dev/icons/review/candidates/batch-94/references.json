@@ -1,0 +1,60 @@
+{
+  "files": [
+    {
+      "key": "zawolajcie-kolegow",
+      "source": "icons/abilities/zawolajcie-kolegow.svg",
+      "variant": "default",
+      "sourceSha256": "abfc18f9af0e406acc37d35e09766a779dad7eeabed31cf74d1f1a8e14b3748d"
+    },
+    {
+      "key": "zryw",
+      "source": "icons/abilities/zryw.svg",
+      "variant": "default",
+      "sourceSha256": "f566600e180e85a4ce1d0e5cad346aa40e8038faf41d5ec23b4906fb7cdd00f2"
+    },
+    {
+      "key": "chemik",
+      "source": "icons/profesje/chemik.svg",
+      "variant": "default",
+      "sourceSha256": "4662220129374902fd41b90cf730c337c276df09c02f494defe3e6bbf31b6c27"
+    },
+    {
+      "key": "ganger",
+      "source": "icons/profesje/ganger.svg",
+      "variant": "default",
+      "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+    },
+    {
+      "key": "kaznodzieja",
+      "source": "icons/profesje/kaznodzieja.svg",
+      "variant": "default",
+      "sourceSha256": "138bbdbdc8637e3e936dd2e1a3d07183dcb20d37f4b66a0c9b4087b482e3eef0"
+    },
+    {
+      "key": "kowboj",
+      "source": "icons/profesje/kowboj.svg",
+      "variant": "default",
+      "sourceSha256": "718f017b283bb5b2cf35f46ea8f691d62df8f1afe97834cf1b08cd4723f0e13f"
+    },
+    {
+      "key": "kurier",
+      "source": "icons/profesje/kurier.svg",
+      "variant": "default",
+      "sourceSha256": "96d9ac95260eca111c41639200ccefe8132a864cee353706bd089fc5693a30d7"
+    },
+    {
+      "key": "lowca-mutantow",
+      "source": "icons/profesje/lowca-mutantow.svg",
+      "variant": "default",
+      "sourceSha256": "8c35340f8fbd1ef9b1d1fa0c63d40e02a4fc8fc32a6e390441711fe48b637bc0"
+    },
+    {
+      "key": "mafiozo",
+      "source": "icons/profesje/mafiozo.svg",
+      "variant": "default",
+      "sourceSha256": "91d52d1ffa320d4542e393e155df7810d01868b46b3dd9a5f75500eb65f36c88"
+    }
+  ],
+  "canonicalProfessionSource": "dev/classes/professions.json",
+  "canonicalSha256": "0e85bef09aba8adb812fe922f20b4363007877dc9337880bac6b3389dbbcadb8"
+}

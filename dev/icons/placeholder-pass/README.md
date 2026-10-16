@@ -135,6 +135,15 @@ new choices are prepared. This allocates no new roadmap subjects. The next
 free batch number is 93. Primary classes keep this two-option policy for
 their first generation in future asset work.
 
+After the Batch 90–92 review, ten approvals are delivered: 131 of the 153
+original subjects, at 133 native SVG filenames with WEBP sidecars. The 22
+remaining placeholders comprise eight revisions and fourteen untouched
+professions. Batch 93 gives the four class revisions two new options each.
+Batch 94 contains four other revisions and five fresh professions; Batch 95
+contains the last nine professions. Every original roadmap subject now has
+a candidate in review or an approved delivery; none await first generation.
+The next free batch number is 96. Further batches depend on saved revisions.
+
 The GM's durable direction is to avoid repeated gruff male survivor portraits:
 prefer the actual objects, hands, actions and generic adults, with no anime.
 That instruction is also recorded in Pipeline.md.
@@ -185,6 +194,12 @@ That instruction is also recorded in Pipeline.md.
   [exact prompts](../review/candidates/batch-91/prompts.json).
 - [Batch 92 class options](../review/candidates/batch-92/README.md) and
   [exact prompts](../review/candidates/batch-92/prompts.json).
+- [Batch 93 class revisions](../review/candidates/batch-93/README.md) and
+  [exact prompts](../review/candidates/batch-93/prompts.json).
+- [Batch 94 candidates](../review/candidates/batch-94/README.md) and
+  [exact prompts](../review/candidates/batch-94/prompts.json).
+- [Batch 95 candidates](../review/candidates/batch-95/README.md) and
+  [exact prompts](../review/candidates/batch-95/prompts.json).
 
 The numbered `prepare_*.py` files freeze their actual
 allocations and

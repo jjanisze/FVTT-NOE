@@ -3258,10 +3258,10 @@
     },
     "batch89-zawolajcie-kolegow": {
       "itemId": "batch89-zawolajcie-kolegow",
-      "decision": "revise",
-      "candidateId": "batch90-revision",
-      "notes": "Good. Now restore the index finger gesture of the front hand, \"follow me\"",
-      "updatedAt": "2026-10-15T23:57:02.705Z"
+      "decision": "pending",
+      "candidateId": "batch94-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:39:16.836Z"
     },
     "batch89-zawsze-w-siodle": {
       "itemId": "batch89-zawsze-w-siodle",
@@ -3286,10 +3286,10 @@
     },
     "batch90-zryw": {
       "itemId": "batch90-zryw",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Try a different concept. This is analogous to Action Surge.",
-      "updatedAt": "2026-10-15T23:57:50.539Z"
+      "decision": "pending",
+      "candidateId": "batch94-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:39:16.837Z"
     },
     "batch90-zwinnosc-szczura": {
       "itemId": "batch90-zwinnosc-szczura",
@@ -3300,17 +3300,17 @@
     },
     "batch90-brutal": {
       "itemId": "batch90-brutal",
-      "decision": "revise",
-      "candidateId": "batch92-b",
-      "notes": "Add a scar on the chest, replace the knife with a hand-held rail piledriver",
-      "updatedAt": "2026-10-16T00:24:14.397Z"
+      "decision": "pending",
+      "candidateId": "batch93-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:39:17.219Z"
     },
     "batch91-cwaniak": {
       "itemId": "batch91-cwaniak",
-      "decision": "revise",
-      "candidateId": "batch92-b",
-      "notes": "Relace the megaphone with a microphone",
-      "updatedAt": "2026-10-16T00:24:34.550Z"
+      "decision": "pending",
+      "candidateId": "batch93-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:39:17.219Z"
     },
     "batch91-spec": {
       "itemId": "batch91-spec",
@@ -3321,10 +3321,10 @@
     },
     "batch91-twardziel": {
       "itemId": "batch91-twardziel",
-      "decision": "revise",
-      "candidateId": "batch92-b",
-      "notes": "Replace the SMG with an LMG",
-      "updatedAt": "2026-10-16T00:25:06.265Z"
+      "decision": "pending",
+      "candidateId": "batch93-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:39:17.219Z"
     },
     "batch91-zlodziej": {
       "itemId": "batch91-zlodziej",
@@ -3335,24 +3335,24 @@
     },
     "batch91-zwiadowca": {
       "itemId": "batch91-zwiadowca",
-      "decision": "revise",
-      "candidateId": "batch92-a",
-      "notes": "The barrel of the gun is crooked - fix it.",
-      "updatedAt": "2026-10-16T00:25:33.762Z"
+      "decision": "pending",
+      "candidateId": "batch93-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:39:17.219Z"
     },
     "batch91-chemik": {
       "itemId": "batch91-chemik",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "The tip of the pipette is melted. Sharpen it.",
-      "updatedAt": "2026-10-16T00:02:40.629Z"
+      "decision": "pending",
+      "candidateId": "batch94-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:39:16.838Z"
     },
     "batch91-ganger": {
       "itemId": "batch91-ganger",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Correct the spokes on the wheel.",
-      "updatedAt": "2026-10-16T00:02:58.770Z"
+      "decision": "pending",
+      "candidateId": "batch94-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:39:16.838Z"
     },
     "batch91-gladiator": {
       "itemId": "batch91-gladiator",
