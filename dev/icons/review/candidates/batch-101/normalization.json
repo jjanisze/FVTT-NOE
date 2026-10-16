@@ -1,0 +1,9 @@
+[
+  {
+    "key": "ganger",
+    "source": "raw/standalone-ganger.png",
+    "removedTinyPixels": 0,
+    "recoveredOverhangPixels": 0,
+    "split": "whole components; majority cell or explicit source-space ownership region"
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "role": "Exact selected edit target; only stud tips change",
+  "sources": [
+    {
+      "source": "dev/icons/review/candidates/batch-100/ganger.png",
+      "sha256": "ffb67d84f116bd9e92fdcc1608d703c057a0d739f9e66f2e26c5bb90bd036c6e"
+    }
+  ]
+}

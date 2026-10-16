@@ -1,5 +1,9 @@
 # Batch 100 — Ganger, biker vest and studded bat
 
+Review outcome: the GM keeps the composition and requests sharper, nail-like
+studs on the bat. That exact note is archived in `reviewed.json` and carried
+into Batch 101. This candidate has not been installed.
+
 The GM requests a different concept without the wheel alignment problem.
 This replacement pairs an empty sleeveless biker vest with a separate
 studded baseball bat. It follows Ganger's canonical gang membership and

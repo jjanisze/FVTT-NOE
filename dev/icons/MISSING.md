@@ -37,7 +37,7 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 101** (1 candidates in 1 batches await GM review;
+**Next batch number: 102** (1 candidates in 1 batches await GM review;
 production replacements require a saved approval).
 
 **Icon coverage correction, 2026-10-16:** the previous 342 review cards are resolved,
@@ -1223,13 +1223,26 @@ Evidence: `review/candidates/batch-99/reviewed.json` and `reviewed-installed.jso
 <!-- placeholder-batch-99:end -->
 
 <!-- placeholder-batch-100:start -->
-## Queue (A) — Batch 100 — 1 awaiting GM review
+## Reviewed (A) — Batch 100 — 0 delivered, 1 revisions
 
-Ganger is the sole remaining native placeholder: 152/153 subjects and 154/155
-SVG targets are delivered, including all primary classes. One isolated new
-concept pairs an empty biker vest with a separate studded bat. Exact sources,
-hashes, generic prompt and target: `review/candidates/batch-100/`. Eight
-compatibility cells stay empty. Production still requires saved GM approval.
+Saved GM review: 0 subjects installed as exact approved SVG/WEBP pairs.
+The 1 remaining requests carry their exact notes into Batch 101.
+Evidence: `review/candidates/batch-100/reviewed.json` and `reviewed-installed.json`.
+
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Ganger | `icons/profesje/ganger.svg` | Revision in Batch 101 |
+
+<!-- placeholder-batch-100:end -->
+
+<!-- placeholder-batch-101:start -->
+## Queue (A) — Batch 101 — 1 awaiting GM review
+
+One targeted Ganger correction turns the bat's three blunt studs into pointed
+spikes, retaining the vest-and-bat layout. Exact source, hashes, prompt and
+target: `review/candidates/batch-101/`. Eight compatibility cells stay empty.
+Ganger remains the final placeholder: 152/153 subjects and 154/155 native SVG
+targets are delivered. Production still requires saved GM approval.
 
 | Cell | Item | Exact SVG delivery targets (+ WEBP) |
 |---|---|---|
@@ -1245,7 +1258,7 @@ may add batches. Base/active files share approved pixels; the existing active
 hotbar pulse remains in the code. Old unused active filenames are compatibility
 targets, without new mechanics or wiring. Code, packs and world state are untouched.
 
-<!-- placeholder-batch-100:end -->
+<!-- placeholder-batch-101:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source

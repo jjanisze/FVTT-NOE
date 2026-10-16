@@ -163,6 +163,11 @@ classes. Ganger is the sole remaining placeholder. Batch 100 replaces the
 wheel concept with an empty biker vest beside a studded bat, following the
 GM's request for a different composition. The next free batch number is 101.
 
+Batch 100 review retains Ganger's vest-and-bat concept and asks only for
+pointed, nail-like bat studs. Batch 101 makes that targeted correction.
+Progress remains 152/153 subjects and 154/155 native targets delivered;
+Ganger is the final placeholder. The next free batch number is 102.
+
 The GM's durable direction is to avoid repeated gruff male survivor portraits:
 prefer the actual objects, hands, actions and generic adults, with no anime.
 That instruction is also recorded in Pipeline.md.
@@ -229,6 +234,8 @@ That instruction is also recorded in Pipeline.md.
   [exact prompt](../review/candidates/batch-99/prompts.json).
 - [Batch 100 new Ganger concept](../review/candidates/batch-100/README.md) and
   [exact prompt](../review/candidates/batch-100/prompts.json).
+- [Batch 101 spike correction](../review/candidates/batch-101/README.md) and
+  [exact prompt](../review/candidates/batch-101/prompts.json).
 
 The numbered `prepare_*.py` files freeze their actual
 allocations and

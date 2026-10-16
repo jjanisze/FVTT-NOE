@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-16",
+  "batch": 101,
+  "partialAtlas": true,
+  "emptyCells": [
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "subjects": [
+    {
+      "kind": "profession",
+      "key": "ganger",
+      "name": "Ganger",
+      "owner": "brutal",
+      "ownerLabel": "Brutal",
+      "target": "icons/profesje/ganger.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/ganger.svg",
+          "variant": "default",
+          "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+        }
+      ],
+      "ruleContext": "Zyskujesz biegłość w kategorii broń palna pośrednia oraz biegłość w umiejętności Pojazdy. DWÓCH NA JEDNEGO; JA I MÓJ GANG!; JEDEN Z NICH; ODWAŻNY CZY GŁUPI",
+      "context": "profession: Ganger; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px.",
+      "note": "Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "cell": 1,
+      "request": "Use case: precise-object-edit. This image is the exact Ganger icon EDIT TARGET. Change ONLY the THREE blunt cylindrical STUDS projecting from the baseball bat into THREE sharp NAIL-LIKE METAL SPIKES. Each spike has a broad attached base, a short straight tapering triangular side profile and ONE unmistakably SHARP POINT at its outer end. Keep the same three attachment positions and outward directions, with enough projection for the pointed silhouette to read at 16-32 pixels. No flat round ends, oval caps, hollow tubes, bolts, screw threads or disconnected fragments. The spikes belong to the bat and remain attached. PRESERVE EVERYTHING ELSE: the entire empty sleeveless biker vest, both lapels, armhole, front panels and open center gap; the bat's barrel, taper, grip and rounded end knob; both objects' positions, scale, angle, white silhouette weight, wide separating black gap and generous blank framing. Do not add a wheel, person, hand, extra object, extra spike, lettering, logo or border. Exactly the same two-object composition. Pure SOLID WHITE on perfectly clean SOLID BLACK. Broad sober flat glyph, sparse large negative spaces, no grey, shading, gradients, texture, dithering, fine detail, anime or gore. One square icon. This is only a spike-tip correction, not a redesign.",
+      "itemId": "batch91-ganger",
+      "revisionOf": {
+        "id": "batch91-ganger",
+        "name": "Ganger",
+        "decision": "revise",
+        "candidateId": "batch100-revision",
+        "selectedSource": "candidates/batch-100/ganger.png",
+        "sourceSha256": "ffb67d84f116bd9e92fdcc1608d703c057a0d739f9e66f2e26c5bb90bd036c6e",
+        "deliveryTargets": [
+          {
+            "source": "icons/profesje/ganger.svg",
+            "variant": "default",
+            "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+          }
+        ],
+        "notes": "Revise the studs on the baseball to be more spike or nail-like",
+        "feedback": {
+          "itemId": "batch91-ganger",
+          "decision": "revise",
+          "candidateId": "batch100-revision",
+          "notes": "Revise the studs on the baseball to be more spike or nail-like",
+          "updatedAt": "2026-10-16T21:56:41.201Z"
+        }
+      },
+      "canonicalAbilities": [
+        "DWÓCH NA JEDNEGO",
+        "JA I MÓJ GANG!",
+        "JEDEN Z NICH",
+        "ODWAŻNY CZY GŁUPI"
+      ]
+    }
+  ]
+}

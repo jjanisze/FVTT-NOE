@@ -3350,9 +3350,9 @@
     "batch91-ganger": {
       "itemId": "batch91-ganger",
       "decision": "pending",
-      "candidateId": "batch100-revision",
+      "candidateId": "batch101-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T21:54:56.978Z"
+      "updatedAt": "2026-10-16T21:59:28.189Z"
     },
     "batch91-gladiator": {
       "itemId": "batch91-gladiator",

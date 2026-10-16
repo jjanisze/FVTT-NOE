@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-16",
+  "batch": 100,
+  "feedbackBeforeSha256": "e0f7f05830d38e55c91700f2e14d91b41459004d016417c2fd0f5a0464a3ea43",
+  "active": [
+    {
+      "id": "batch91-ganger",
+      "name": "Ganger",
+      "decision": "revise",
+      "candidateId": "batch100-revision",
+      "selectedSource": "candidates/batch-100/ganger.png",
+      "sourceSha256": "ffb67d84f116bd9e92fdcc1608d703c057a0d739f9e66f2e26c5bb90bd036c6e",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/ganger.svg",
+          "variant": "default",
+          "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+        }
+      ],
+      "notes": "Revise the studs on the baseball to be more spike or nail-like",
+      "feedback": {
+        "itemId": "batch91-ganger",
+        "decision": "revise",
+        "candidateId": "batch100-revision",
+        "notes": "Revise the studs on the baseball to be more spike or nail-like",
+        "updatedAt": "2026-10-16T21:56:41.201Z"
+      }
+    }
+  ]
+}

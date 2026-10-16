@@ -1,0 +1,15 @@
+{
+  "generator": "OpenAI built-in image generation",
+  "date": "2026-10-16",
+  "reference": "raw/reference-ganger.png",
+  "atlas": "Use case: precise-object-edit. This image is the exact Ganger icon EDIT TARGET. Change ONLY the THREE blunt cylindrical STUDS projecting from the baseball bat into THREE sharp NAIL-LIKE METAL SPIKES. Each spike has a broad attached base, a short straight tapering triangular side profile and ONE unmistakably SHARP POINT at its outer end. Keep the same three attachment positions and outward directions, with enough projection for the pointed silhouette to read at 16-32 pixels. No flat round ends, oval caps, hollow tubes, bolts, screw threads or disconnected fragments. The spikes belong to the bat and remain attached. PRESERVE EVERYTHING ELSE: the entire empty sleeveless biker vest, both lapels, armhole, front panels and open center gap; the bat's barrel, taper, grip and rounded end knob; both objects' positions, scale, angle, white silhouette weight, wide separating black gap and generous blank framing. Do not add a wheel, person, hand, extra object, extra spike, lettering, logo or border. Exactly the same two-object composition. Pure SOLID WHITE on perfectly clean SOLID BLACK. Broad sober flat glyph, sparse large negative spaces, no grey, shading, gradients, texture, dithering, fine detail, anime or gore. One square icon. This is only a spike-tip correction, not a redesign.",
+  "layout": "One targeted standalone edit, pasted unchanged into cell 1 of a black 3x3 canvas for processor compatibility; eight empty cells.",
+  "targetedCorrections": [
+    {
+      "key": "ganger",
+      "reference": "raw/reference-ganger.png",
+      "output": "raw/standalone-ganger.png",
+      "prompt": "Use case: precise-object-edit. This image is the exact Ganger icon EDIT TARGET. Change ONLY the THREE blunt cylindrical STUDS projecting from the baseball bat into THREE sharp NAIL-LIKE METAL SPIKES. Each spike has a broad attached base, a short straight tapering triangular side profile and ONE unmistakably SHARP POINT at its outer end. Keep the same three attachment positions and outward directions, with enough projection for the pointed silhouette to read at 16-32 pixels. No flat round ends, oval caps, hollow tubes, bolts, screw threads or disconnected fragments. The spikes belong to the bat and remain attached. PRESERVE EVERYTHING ELSE: the entire empty sleeveless biker vest, both lapels, armhole, front panels and open center gap; the bat's barrel, taper, grip and rounded end knob; both objects' positions, scale, angle, white silhouette weight, wide separating black gap and generous blank framing. Do not add a wheel, person, hand, extra object, extra spike, lettering, logo or border. Exactly the same two-object composition. Pure SOLID WHITE on perfectly clean SOLID BLACK. Broad sober flat glyph, sparse large negative spaces, no grey, shading, gradients, texture, dithering, fine detail, anime or gore. One square icon. This is only a spike-tip correction, not a redesign."
+    }
+  ]
+}

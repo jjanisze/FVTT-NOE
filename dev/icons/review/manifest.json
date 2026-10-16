@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batch 100 · 1 awaiting GM review",
+  "title": "Batch 101 · 1 awaiting GM review",
   "updated": "2026-10-16",
   "items": [
     {
@@ -13177,8 +13177,8 @@
     {
       "id": "batch91-ganger",
       "name": "Ganger",
-      "tier": "Batch 100 · Brutal",
-      "batch": 100,
+      "tier": "Batch 101 · Brutal",
+      "batch": 101,
       "placeholderKey": "profession:ganger",
       "target": "icons/profesje/ganger.svg",
       "deliveryTargets": [
@@ -13189,12 +13189,18 @@
         }
       ],
       "context": "profession: Ganger; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zyskujesz biegłość w kategorii broń palna pośrednia oraz biegłość w umiejętności Pojazdy. DWÓCH NA JEDNEGO; JA I MÓJ GANG!; JEDEN Z NICH; ODWAŻNY CZY GŁUPI Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
-      "request": "Use case: stylized-concept. Asset: Ganger profession icon for a post-apocalyptic tabletop interface, displayed at 16-64 pixels. Create ONE square image containing ONE compact emblem with exactly TWO complete objects: an EMPTY SLEEVELESS BIKER LEATHER VEST at LEFT, and ONE STUDDED BASEBALL BAT standing diagonally beside it at RIGHT. The reference is STYLE ONLY: match its sober broad white stencil weight and simplicity, never its subjects or nine-cell layout. Vest: simple slightly turned THREE-QUARTER FRONT VIEW, showing two broad white front panels, an open black center gap, two broad turned lapels and clearly open armholes. EMPTY garment, no body, head, arms, hanger or person inside it. Keep the garment silhouette coherent, with a simple hem and very few large black cuts; no pockets, buttons, zipper teeth, stitching, badge, lettering or logo. Bat: ONE recognizable complete smooth broad blunt barrel tapering into ONE short stout grip with ONE rounded end knob. Only THREE short broad studs project from the upper barrel, clearly part of that object; no tiny nails or holes. Angle the bat from LOWER-LEFT to UPPER-RIGHT on the vest's RIGHT, with a generous uninterrupted BLACK GAP separating the two objects. They do NOT cross or overlap. This conveys gang membership and blunt close combat. Pure SOLID WHITE #FFFFFF on perfectly clean SOLID BLACK #000000; no grey, shading, gradients, dithering, texture or speckling. Broad sober utilitarian silhouettes with sparse large negative spaces, readable at 16/24/32 pixels. Center both complete objects together in the middle 65 percent of the image with generous blank margins on all sides. No wheel, tire, spokes, circular frame, geometric alignment puzzle, motorcycle, skull, extra prop, gruff face, anime, cartoon anatomy, blood, gore, text, numbers, decorative border or grid.",
+      "request": "Use case: precise-object-edit. This image is the exact Ganger icon EDIT TARGET. Change ONLY the THREE blunt cylindrical STUDS projecting from the baseball bat into THREE sharp NAIL-LIKE METAL SPIKES. Each spike has a broad attached base, a short straight tapering triangular side profile and ONE unmistakably SHARP POINT at its outer end. Keep the same three attachment positions and outward directions, with enough projection for the pointed silhouette to read at 16-32 pixels. No flat round ends, oval caps, hollow tubes, bolts, screw threads or disconnected fragments. The spikes belong to the bat and remain attached. PRESERVE EVERYTHING ELSE: the entire empty sleeveless biker vest, both lapels, armhole, front panels and open center gap; the bat's barrel, taper, grip and rounded end knob; both objects' positions, scale, angle, white silhouette weight, wide separating black gap and generous blank framing. Do not add a wheel, person, hand, extra object, extra spike, lettering, logo or border. Exactly the same two-object composition. Pure SOLID WHITE on perfectly clean SOLID BLACK. Broad sober flat glyph, sparse large negative spaces, no grey, shading, gradients, texture, dithering, fine detail, anime or gore. One square icon. This is only a spike-tip correction, not a redesign.",
       "current": {
         "src": "/icons/profesje/ganger.svg",
         "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
       },
       "candidates": [
+        {
+          "id": "batch101-revision",
+          "label": "Batch 101 · revised Ganger",
+          "src": "candidates/batch-101/ganger.png",
+          "note": "Use case: precise-object-edit. This image is the exact Ganger icon EDIT TARGET. Change ONLY the THREE blunt cylindrical STUDS projecting from the baseball bat into THREE sharp NAIL-LIKE METAL SPIKES. Each spike has a broad attached base, a short straight tapering triangular side profile and ONE unmistakably SHARP POINT at its outer end. Keep the same three attachment positions and outward directions, with enough projection for the pointed silhouette to read at 16-32 pixels. No flat round ends, oval caps, hollow tubes, bolts, screw threads or disconnected fragments. The spikes belong to the bat and remain attached. PRESERVE EVERYTHING ELSE: the entire empty sleeveless biker vest, both lapels, armhole, front panels and open center gap; the bat's barrel, taper, grip and rounded end knob; both objects' positions, scale, angle, white silhouette weight, wide separating black gap and generous blank framing. Do not add a wheel, person, hand, extra object, extra spike, lettering, logo or border. Exactly the same two-object composition. Pure SOLID WHITE on perfectly clean SOLID BLACK. Broad sober flat glyph, sparse large negative spaces, no grey, shading, gradients, texture, dithering, fine detail, anime or gore. One square icon. This is only a spike-tip correction, not a redesign."
+        },
         {
           "id": "batch100-revision",
           "label": "Batch 100 · revised Ganger",
