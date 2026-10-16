@@ -1,5 +1,11 @@
 # Batch 98 — Brutal, ordinary catalog blunt weapons
 
+Review outcome: option B, bare torso with an ordinary baseball bat, was
+approved and installed as exact SVG/WEBP masks. `reviewed-installed.json`
+records the source and delivered hashes. All six primary classes now have
+approved replacement art. Overall progress is 152/153 subjects and 154/155
+native SVG targets delivered; only Ganger remains.
+
 Two options retain the selected bare torso and healed chest scar. Option A
 uses a plain steel pipe; option B uses an ordinary baseball bat. Both are
 forms of the canonical `Bejsbol/Rurka` entry in `scripts/config/weapons-data.mjs`.

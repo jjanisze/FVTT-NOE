@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-16",
+  "batch": 98,
+  "approvedSubjects": 1,
+  "remainingSubjects": 1,
+  "installed": [
+    {
+      "itemId": "batch90-brutal",
+      "candidateId": "batch98-b",
+      "source": "candidates/batch-98-b/brutal.png",
+      "sourceSha256": "9f6c28a4f980f54cc8b929a2247f1b6b1b83bd5c2ffa102e9d7672a46a501c3a",
+      "files": [
+        "icons/klasy/brutal.svg",
+        "icons/klasy/brutal.webp"
+      ],
+      "svgSha256": "f0c353055dc2a914f68058790ea9fb7fda45829b2c3878484112e18bd13f751c",
+      "webpSha256": "3c2982212923c6552370c3bf69e6bc4fbfc59b79dc0dc288fd548a762c7ede90"
+    }
+  ]
+}

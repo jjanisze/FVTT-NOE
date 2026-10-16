@@ -1,32 +1,22 @@
 {
   "stats": {
     "date": "2026-10-16",
-    "confirmedPlaceholderFiles": 2,
-    "referencedPlaceholderFiles": 2,
+    "confirmedPlaceholderFiles": 1,
+    "referencedPlaceholderFiles": 1,
     "unmappedPlaceholderFiles": 0,
     "activeVariants": 0,
     "referencedActiveVariants": 0,
     "abilityPlaceholderFiles": 0,
     "missingExpectedFiles": 0,
-    "artSubjects": 2,
+    "artSubjects": 1,
     "byKind": {
-      "class": 1,
+      "class": 0,
       "profession": 1,
       "feature": 0
     },
     "scope": "Exact generator signature plus canonical class/profession definitions; no world or pack reads"
   },
   "placeholders": [
-    {
-      "kind": "class",
-      "id": "brutal",
-      "label": "Brutal",
-      "owner": "brutal",
-      "variant": "default",
-      "source": "icons/klasy/brutal.svg",
-      "sourceSha256": "83bf2a94a6a88bb853e8e3de117926e3e503d06a79bbd186bc69e8f9ecaeb915",
-      "referenced": true
-    },
     {
       "kind": "profession",
       "id": "ganger",
@@ -40,19 +30,6 @@
   ],
   "missing": [],
   "subjects": [
-    {
-      "kind": "class",
-      "id": "brutal",
-      "label": "Brutal",
-      "owner": "brutal",
-      "files": [
-        {
-          "source": "icons/klasy/brutal.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
     {
       "kind": "profession",
       "id": "ganger",

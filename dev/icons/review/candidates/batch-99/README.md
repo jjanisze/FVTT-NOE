@@ -1,5 +1,9 @@
 # Batch 99 — Ganger, local wheel repair
 
+Review outcome: the GM requests a different concept whose composition does
+not depend on a symmetrical wheel. The exact saved note is archived in
+`reviewed.json` and carried into Batch 100. This repair was not installed.
+
 The saved note requests only a lower-right rim and spoke correction. OpenAI's
 built-in image tool edits that quadrant of the exact selected Ganger image,
 retaining the six-spoke wheel, centered hub, tire and diagonal studded bat.

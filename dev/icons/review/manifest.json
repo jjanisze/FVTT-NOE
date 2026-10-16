@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batches 98 + 99 · 2 awaiting GM review",
+  "title": "Batch 99 · 0 approved subjects delivered; 1 awaiting revision",
   "updated": "2026-10-16",
   "items": [
     {
@@ -78,7 +78,8 @@
           "src": "candidates/batch-90/brutal.png",
           "note": "CLASS EMBLEM: ONE powerful complete BARE CLENCHED FIST wrapped in THREE broad BROKEN CHAIN LINKS, with TWO clearly snapped chain ends beside the short wrist. Strong natural hand anatomy, coherent thumb and folded fingers, solid masses and broad black separations. Brute strength and berserk freedom, sober compact glyph. No person, head, beard portrait, armor, fine chain, text, real insignia, blood or gore."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch91-cwaniak",

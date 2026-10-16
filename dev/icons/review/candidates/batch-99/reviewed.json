@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-16",
+  "batch": 99,
+  "feedbackBeforeSha256": "918f37dd53fdfb4a65b3a59108ccf92a3e210fb6f587ee107e8dda42189c5973",
+  "active": [
+    {
+      "id": "batch91-ganger",
+      "name": "Ganger",
+      "decision": "revise",
+      "candidateId": "batch99-revision",
+      "selectedSource": "candidates/batch-99/ganger.png",
+      "sourceSha256": "2dccd77c3721e116df3fa9fe08e7ae9dfd1d7dcc4e4d5c9d628324e3ba84af0d",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/ganger.svg",
+          "variant": "default",
+          "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+        }
+      ],
+      "notes": "Well since we can't make the baseball bat line up with the wheel, let's try a different composition that doesn't rely on such a symmetrical part. Try a different concept.",
+      "feedback": {
+        "itemId": "batch91-ganger",
+        "decision": "revise",
+        "candidateId": "batch99-revision",
+        "notes": "Well since we can't make the baseball bat line up with the wheel, let's try a different composition that doesn't rely on such a symmetrical part. Try a different concept.",
+        "updatedAt": "2026-10-16T21:51:31.902Z"
+      }
+    }
+  ]
+}

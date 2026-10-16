@@ -37,12 +37,12 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 100** (2 candidates in 2 batches await GM review;
-production replacements require a saved approval).
+**Next batch number: 100** (the previous 342-card queue is resolved; the newly
+audited class/profession placeholder backlog remains and is listed below).
 
 **Icon coverage correction, 2026-10-16:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
-2 generated initials badges (2 canonically referenced art subjects).
+1 generated initials badges (1 canonically referenced art subjects).
 Origins, Sztuczki, M5 actions and fuel-grade deliveries from the earlier pass
 remain delivered; these counts do not cover all module icons. See the class
 placeholder backlog and `class-placeholder-audit.json`. GM wiring and painted
@@ -1197,51 +1197,37 @@ Evidence: `review/candidates/batch-97/reviewed.json` and `reviewed-installed.jso
 <!-- placeholder-batch-97:end -->
 
 <!-- placeholder-batch-98:start -->
-## Queue (A) — Batch 98 — 1 class, two revision options each
+## Reviewed (A) — Batch 98 — 1 delivered, 0 revisions
 
-Each class has two new choices with two main elements. All selected-source
-hashes and verbatim feedback are archived alongside exact generic prompts.
-Older candidates remain selectable; production files require saved approval.
+Saved GM review: 1 subjects installed as exact approved SVG/WEBP pairs.
+The 0 remaining requests carry their exact notes into Batch 100.
+Evidence: `review/candidates/batch-98/reviewed.json` and `reviewed-installed.json`.
 
-| Class | Requested correction | Native SVG (+ WEBP) |
-|---|---|---|
-| Brutal | On second thought, I missed it with the halligan bar. Find a suitable weapon from the weapons tab. Something suitable for an unsophisticated brute to bash skulls in, but not the fantasy hammer. | `icons/klasy/brutal.svg` |
-
-Sources, prompts and review records: `review/candidates/batch-98/`.
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Brutal | `icons/klasy/brutal.svg` | **done** |
 
 <!-- placeholder-batch-98:end -->
 
 <!-- placeholder-batch-99:start -->
-## Queue (A) — Batch 99 — 1 awaiting GM review
+## Reviewed (A) — Batch 99 — 0 delivered, 1 revisions
 
-One targeted standalone repair of Ganger's lower-right wheel, in the established
-white-glyph style. The existing badge remains until saved GM approval. Exact
-sources/hashes, prompts and targets: `review/candidates/batch-99/`. Editable source:
-`review/candidates/batch-99/raw/standalone-ganger.png`. Eight compatibility cells
-stay empty; no filler subjects are generated.
+Saved GM review: 0 subjects installed as exact approved SVG/WEBP pairs.
+The 1 remaining requests carry their exact notes into Batch 100.
+Evidence: `review/candidates/batch-99/reviewed.json` and `reviewed-installed.json`.
 
-| Cell | Item | Exact SVG delivery targets (+ WEBP) |
-|---|---|---|
-| 1 | Ganger (revision) | `icons/profesje/ganger.svg` |
-
-Saved revision notes and original selected-source hashes are retained in batch.json
-and revision-feedback-before.json. Old candidates remain available; only these
-revision cards are reset to pending with the new candidate selected.
-
-The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
-nine). Later batch numbers are provisional: saved revisions take priority and
-may add batches. Base/active files share approved pixels; the existing active
-hotbar pulse remains in the code. Old unused active filenames are compatibility
-targets, without new mechanics or wiring. Code, packs and world state are untouched.
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Ganger | `icons/profesje/ganger.svg` | Revision in Batch 100 |
 
 <!-- placeholder-batch-99:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source
 
-Audit 2026-10-16: **2 generated initials SVGs**, including 1 classes,
+Audit 2026-10-16: **1 generated initials SVGs**, including 0 classes,
 1 professions and 0 ability files. 0 ability files are active-state
-variants. Canonically referenced art requests below represent **2 subjects**;
+variants. Canonically referenced art requests below represent **1 subjects**;
 base/active variants share a subject and must keep their existing exact filenames.
 These were outside the previous 342-card generation queue. File existence was not
 evidence of finished artwork. Native badges were confirmed against the exact
@@ -1254,7 +1240,6 @@ and the next free batch; fresh GM approval is required before replacement.
 
 | Kind | Subject | Owner | Exact SVG targets (+ WEBP after approval) | Status |
 |---|---|---|---|---|
-| class | Brutal | brutal | `icons/klasy/brutal.svg` | Needs art |
 | profession | Ganger | brutal | `icons/profesje/ganger.svg` | Needs art |
 
 <!-- class-placeholder-audit:end -->

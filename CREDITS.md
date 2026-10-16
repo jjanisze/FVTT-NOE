@@ -226,6 +226,10 @@ Seven further GM selections from Batch 97 were installed on 2026-10-16 as
 exact SVG/WEBP masks generated with OpenAI's built-in image tool. Sources and
 delivered hashes are in `dev/icons/review/candidates/batch-97/reviewed-installed.json`.
 
+The GM-selected Brutal class emblem (Batch 98, option B) was installed on
+2026-10-16 as exact SVG/WEBP masks generated with OpenAI's built-in image tool.
+Source and delivered hashes: `dev/icons/review/candidates/batch-98/reviewed-installed.json`.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only
