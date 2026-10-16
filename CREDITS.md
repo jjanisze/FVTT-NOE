@@ -230,6 +230,11 @@ The GM-selected Brutal class emblem (Batch 98, option B) was installed on
 2026-10-16 as exact SVG/WEBP masks generated with OpenAI's built-in image tool.
 Source and delivered hashes: `dev/icons/review/candidates/batch-98/reviewed-installed.json`.
 
+The GM-approved Ganger profession emblem (Batch 101) was installed on
+2026-10-17 as exact SVG/WEBP masks generated with OpenAI's built-in image tool.
+Source and delivered hashes: `dev/icons/review/candidates/batch-101/reviewed-installed.json`.
+This completes the original 153-subject native-placeholder replacement pass.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

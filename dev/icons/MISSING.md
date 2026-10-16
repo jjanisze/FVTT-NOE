@@ -37,12 +37,12 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 102** (1 candidates in 1 batches await GM review;
-production replacements require a saved approval).
+**Next batch number: 102** (the previous 342-card queue is resolved; the newly
+audited class/profession placeholder backlog remains and is listed below).
 
-**Icon coverage correction, 2026-10-16:** the previous 342 review cards are resolved,
+**Icon coverage correction, 2026-10-17:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
-1 generated initials badges (1 canonically referenced art subjects).
+0 generated initials badges (0 canonically referenced art subjects).
 Origins, Sztuczki, M5 actions and fuel-grade deliveries from the earlier pass
 remain delivered; these counts do not cover all module icons. See the class
 placeholder backlog and `class-placeholder-audit.json`. GM wiring and painted
@@ -1236,36 +1236,24 @@ Evidence: `review/candidates/batch-100/reviewed.json` and `reviewed-installed.js
 <!-- placeholder-batch-100:end -->
 
 <!-- placeholder-batch-101:start -->
-## Queue (A) — Batch 101 — 1 awaiting GM review
+## Reviewed (A) — Batch 101 — 1 delivered, 0 revisions
 
-One targeted Ganger correction turns the bat's three blunt studs into pointed
-spikes, retaining the vest-and-bat layout. Exact source, hashes, prompt and
-target: `review/candidates/batch-101/`. Eight compatibility cells stay empty.
-Ganger remains the final placeholder: 152/153 subjects and 154/155 native SVG
-targets are delivered. Production still requires saved GM approval.
+Saved GM review: 1 subjects installed as exact approved SVG/WEBP pairs.
+The 0 remaining requests carry their exact notes into Batch 102.
+Evidence: `review/candidates/batch-101/reviewed.json` and `reviewed-installed.json`.
 
-| Cell | Item | Exact SVG delivery targets (+ WEBP) |
-|---|---|---|
-| 1 | Ganger (revision) | `icons/profesje/ganger.svg` |
-
-Saved revision notes and original selected-source hashes are retained in batch.json
-and revision-feedback-before.json. Old candidates remain available; only these
-revision cards are reset to pending with the new candidate selected.
-
-The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
-nine). Later batch numbers are provisional: saved revisions take priority and
-may add batches. Base/active files share approved pixels; the existing active
-hotbar pulse remains in the code. Old unused active filenames are compatibility
-targets, without new mechanics or wiring. Code, packs and world state are untouched.
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Ganger | `icons/profesje/ganger.svg` | **done** |
 
 <!-- placeholder-batch-101:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source
 
-Audit 2026-10-16: **1 generated initials SVGs**, including 0 classes,
-1 professions and 0 ability files. 0 ability files are active-state
-variants. Canonically referenced art requests below represent **1 subjects**;
+Audit 2026-10-17: **0 generated initials SVGs**, including 0 classes,
+0 professions and 0 ability files. 0 ability files are active-state
+variants. Canonically referenced art requests below represent **0 subjects**;
 base/active variants share a subject and must keep their existing exact filenames.
 These were outside the previous 342-card generation queue. File existence was not
 evidence of finished artwork. Native badges were confirmed against the exact
@@ -1278,9 +1266,49 @@ and the next free batch; fresh GM approval is required before replacement.
 
 | Kind | Subject | Owner | Exact SVG targets (+ WEBP after approval) | Status |
 |---|---|---|---|---|
-| profession | Ganger | brutal | `icons/profesje/ganger.svg` | Needs art |
 
 <!-- class-placeholder-audit:end -->
+
+<!-- icon-style-review:start -->
+## Style review — icons flagged for redo
+
+Saved in the icon browser. Generate replacements from the exact selected source;
+keep the final target name and require fresh GM approval before installation.
+
+| Icon / selected source | Reasons | Requested change |
+|---|---|---|
+| icons/abilities/doktor-quinn.svg | Too detailed, Dithered / speckled |  |
+| icons/abilities/fart.svg | Too detailed, Dithered / speckled, Wrong subject | Also dice. That takes out of the game by directly suggesting mechanics. |
+| icons/abilities/ja-juz-swoje-odchorowalem.svg | Too detailed, Dithered / speckled |  |
+| icons/abilities/kuchenny-terror.svg | Too detailed, Dithered / speckled |  |
+| icons/abilities/logika-roznoboczna.svg | Too detailed, Dithered / speckled |  |
+| icons/abilities/mlynek.svg | Too detailed, Dithered / speckled |  |
+| icons/abilities/naprawianie.svg | Too detailed |  |
+| icons/abilities/odporny.svg | Too detailed |  |
+| icons/abilities/patriota.svg | Too detailed |  |
+| icons/abilities/prog-awarii.svg | Too detailed |  |
+| icons/abilities/przyspieszenie.svg | Too detailed |  |
+| icons/abilities/rozkaz-likwidacji.svg | Too detailed |  |
+| icons/abilities/roznorodne-ataki.svg | Too detailed |  |
+| icons/abilities/siodme-poty.svg | Too detailed, Dithered / speckled |  |
+| icons/abilities/skakun.svg | Too detailed |  |
+| icons/abilities/szara-eminencja.svg | Too detailed |  |
+| icons/abilities/szarpanie.svg | Too detailed |  |
+| icons/abilities/taca-i-w-nogi.svg | Too detailed |  |
+| icons/abilities/tanczace-pily.svg | Too detailed |  |
+| icons/abilities/tryb-turbo.svg | Too detailed |  |
+| icons/abilities/twierdzenie-kata-prostego.svg | Too detailed, Other | Unclear graphical intent. |
+| icons/abilities/tylko-zwarcie.svg | Too detailed |  |
+| icons/abilities/wielonozny.svg | Too detailed, Dithered / speckled |  |
+| icons/abilities/wierze.svg | Too detailed |  |
+| icons/abilities/wirujace-kiscienie.svg | Too detailed |  |
+| icons/abilities/wrazliwosc-na-swiatlo.svg | Too detailed, Dithered / speckled |  |
+| icons/abilities/wymagania.svg | Too detailed, Dithered / speckled |  |
+| icons/abilities/zasloniecie-helmu.svg | Too detailed |  |
+| icons/abilities/zawziety-sukinkot.svg | Too detailed, Dithered / speckled |  |
+
+Exact source hashes and saved decisions: `review/style-feedback.json` (local).
+<!-- icon-style-review:end -->
 
 ## How an item gets added here
 

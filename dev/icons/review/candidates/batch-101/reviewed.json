@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-16",
+  "batch": 101,
+  "feedbackBeforeSha256": "85a1fc1cc0107bfe1c174abd6a014586310be9ccb976222c36f916382833a207",
+  "active": [
+    {
+      "id": "batch91-ganger",
+      "name": "Ganger",
+      "decision": "approve",
+      "candidateId": "batch101-revision",
+      "selectedSource": "candidates/batch-101/ganger.png",
+      "sourceSha256": "513e8a9bb4dc599144ae3e165b26f3aaa9b0c3a446b8133de0b910109db2f645",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/ganger.svg",
+          "variant": "default",
+          "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch91-ganger",
+        "decision": "approve",
+        "candidateId": "batch101-revision",
+        "notes": "",
+        "updatedAt": "2026-10-16T22:05:04.904Z"
+      }
+    }
+  ]
+}

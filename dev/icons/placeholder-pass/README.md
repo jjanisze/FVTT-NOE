@@ -1,5 +1,11 @@
 # Native placeholder replacement pass
 
+Completed 2026-10-17: **153/153 subjects and 155/155 native SVG targets**
+have approved replacement masks and WEBP sidecars. The final selection is
+Ganger in Batch 101. The source audit finds zero generated initials badges.
+Subsequent browser style flags are a separate revision pass; they do not
+reopen the completed placeholder roadmap.
+
 The 2026-10-15 audit found 155 generated initials SVG files representing 153
 class, profession and ability subjects. `roadmap.json` freezes their canonical
 mechanics, exact filenames and incoming SHA-256 hashes in 17 groups of nine.

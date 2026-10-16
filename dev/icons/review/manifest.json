@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batch 101 · 1 awaiting GM review",
+  "title": "Batch 101 · 1 approved subjects delivered; 0 awaiting revision",
   "updated": "2026-10-16",
   "items": [
     {
@@ -13231,7 +13231,8 @@
           "src": "candidates/batch-91/ganger.png",
           "note": "PROFESSION EMBLEM: ONE complete improvised BASEBALL BAT bearing THREE broad blunt STUDS crosses ONE MOTORCYCLE WHEEL with THREE thick spokes. Bat has a complete broad grip and knob; wheel is a sturdy tire ring with clear open gaps. Road gang equipment, sober compact white silhouette with strong black separation. No person, face, real gang insignia, swastika, text, logos, fine tire tread, tiny nails, thin chains or gore."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch91-gladiator",

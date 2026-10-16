@@ -3349,10 +3349,10 @@
     },
     "batch91-ganger": {
       "itemId": "batch91-ganger",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch101-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T21:59:28.189Z"
+      "updatedAt": "2026-10-16T22:05:04.904Z"
     },
     "batch91-gladiator": {
       "itemId": "batch91-gladiator",

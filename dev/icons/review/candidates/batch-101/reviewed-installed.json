@@ -1,0 +1,20 @@
+{
+  "date": "2026-10-16",
+  "batch": 101,
+  "approvedSubjects": 1,
+  "remainingSubjects": 0,
+  "installed": [
+    {
+      "itemId": "batch91-ganger",
+      "candidateId": "batch101-revision",
+      "source": "candidates/batch-101/ganger.png",
+      "sourceSha256": "513e8a9bb4dc599144ae3e165b26f3aaa9b0c3a446b8133de0b910109db2f645",
+      "files": [
+        "icons/profesje/ganger.svg",
+        "icons/profesje/ganger.webp"
+      ],
+      "svgSha256": "b619e46a518d7930ef1d124135e2f4e73db801eae2817673437c04548869685d",
+      "webpSha256": "89b6e5914e53f1a2a7feabdd74b983114829263b8beeac3f26762437cdb4fc87"
+    }
+  ]
+}

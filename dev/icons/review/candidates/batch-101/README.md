@@ -1,5 +1,10 @@
 # Batch 101 — Ganger, pointed bat spikes
 
+Review outcome: approved and installed on 2026-10-17 as exact SVG/WEBP
+masks. `reviewed-installed.json` records source and delivered hashes.
+The original native-placeholder pass is complete: 153/153 subjects and
+155/155 SVG targets replaced, with no generated initials badges remaining.
+
 The saved GM correction changes only the three blunt bat studs into pointed
 nail-like spikes. The empty biker vest, bat, their layout and broad white
 glyph style are retained. The exact selected edit target is

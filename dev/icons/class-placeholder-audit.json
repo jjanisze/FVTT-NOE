@@ -1,47 +1,22 @@
 {
   "stats": {
-    "date": "2026-10-16",
-    "confirmedPlaceholderFiles": 1,
-    "referencedPlaceholderFiles": 1,
+    "date": "2026-10-17",
+    "confirmedPlaceholderFiles": 0,
+    "referencedPlaceholderFiles": 0,
     "unmappedPlaceholderFiles": 0,
     "activeVariants": 0,
     "referencedActiveVariants": 0,
     "abilityPlaceholderFiles": 0,
     "missingExpectedFiles": 0,
-    "artSubjects": 1,
+    "artSubjects": 0,
     "byKind": {
       "class": 0,
-      "profession": 1,
+      "profession": 0,
       "feature": 0
     },
     "scope": "Exact generator signature plus canonical class/profession definitions; no world or pack reads"
   },
-  "placeholders": [
-    {
-      "kind": "profession",
-      "id": "ganger",
-      "label": "Ganger",
-      "owner": "brutal",
-      "variant": "default",
-      "source": "icons/profesje/ganger.svg",
-      "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685",
-      "referenced": true
-    }
-  ],
+  "placeholders": [],
   "missing": [],
-  "subjects": [
-    {
-      "kind": "profession",
-      "id": "ganger",
-      "label": "Ganger",
-      "owner": "brutal",
-      "files": [
-        {
-          "source": "icons/profesje/ganger.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    }
-  ]
+  "subjects": []
 }
