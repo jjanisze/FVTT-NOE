@@ -1,0 +1,225 @@
+{
+  "date": "2026-10-17",
+  "batch": 102,
+  "pass": "browser-style-revisions",
+  "feedbackBeforeSha256": "c2bdbafe203e256c2a656275b8d74855fdd346d3a19881a694a5a4f69e9d9a78",
+  "styleFeedbackBeforeSha256": "016b0e81129a1ab6c74dd1bb66468ead46bfdea7ff2a0850a1715ce9e830bbb9",
+  "active": [
+    {
+      "id": "style102-logika-roznoboczna",
+      "name": "Logika Różnoboczna",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-102/logika-roznoboczna.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "5a2a12f5b60c3c0a7125e59c8f6375b3079cc6d03b6350aa0d35da7ea74cdf75",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/logika-roznoboczna.svg",
+          "variant": "default",
+          "sourceSha256": "dc44d931476838d92105b526a834f1ba640ccd13743e3ed1dc8d62e021c52efb"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style102-logika-roznoboczna",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T22:30:22.845Z"
+      }
+    },
+    {
+      "id": "style102-doktor-quinn",
+      "name": "Doktor Quinn",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-102/doktor-quinn.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "a5f7c025f0151b65179b4f84c5640f99de81da32eb48913f1c57c181bff74315",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/doktor-quinn.svg",
+          "variant": "default",
+          "sourceSha256": "2d2c62da17b68d3a5b47c160d98c8d8ac3e68e46868aaeb90a5edec3503f4e73"
+        }
+      ],
+      "notes": "Modify the angles so the positons of the hands imply bandaging someone else",
+      "feedback": {
+        "itemId": "style102-doktor-quinn",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Modify the angles so the positons of the hands imply bandaging someone else",
+        "updatedAt": "2026-10-16T22:30:53.202Z"
+      }
+    },
+    {
+      "id": "style102-fart",
+      "name": "Fart",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-102/fart.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "9de381fc3216a849b6bf2520f81035c5b1a858f0929b2fd501de5c76ccd3deb1",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/fart.svg",
+          "variant": "default",
+          "sourceSha256": "e859293a7c7cdfd65610d16e6042104a590f47f2a9673289c3d06aa5c01269ea"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style102-fart",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T22:30:56.534Z"
+      }
+    },
+    {
+      "id": "style102-ja-juz-swoje-odchorowalem",
+      "name": "Ja już swoje odchorowałem",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-102/ja-juz-swoje-odchorowalem.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "eff1e5b59f09967dcb18bb6b2039d23e4d25cf7dcf0884c7aaa303c6c3a7818f",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ja-juz-swoje-odchorowalem.svg",
+          "variant": "default",
+          "sourceSha256": "005386cdc9cb9b29df7a3bd967ecda88fae2c9e561bf71835d44ced92532dbc5"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style102-ja-juz-swoje-odchorowalem",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T22:31:01.295Z"
+      }
+    },
+    {
+      "id": "style102-kuchenny-terror",
+      "name": "Kuchenny Terror",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-102/kuchenny-terror.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "80b059e1f8d1b9da744c19334714f0e01a519f86bfd4fde6859993ab42655a2e",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/kuchenny-terror.svg",
+          "variant": "default",
+          "sourceSha256": "49d5f51e50496194dfd944a83a980c35ba79902f0bf7ce6255b1a33e10920f27"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style102-kuchenny-terror",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T22:31:05.339Z"
+      }
+    },
+    {
+      "id": "style102-mlynek",
+      "name": "Młynek",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-102/mlynek.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "d51c36cae4580848c1fff3fde7504013a0a7cb139e248e9629ee1aefc3740075",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/mlynek.svg",
+          "variant": "default",
+          "sourceSha256": "c0c2389b2c428a7888224e39695bdc5d92f888c8cbc98684443bd9f743b12ce8"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style102-mlynek",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T22:31:16.285Z"
+      }
+    },
+    {
+      "id": "style102-naprawianie",
+      "name": "Naprawianie",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-102/naprawianie.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "a18efbbc50cebb725a546481a3b41fce2a01ff2318791a98bd7c2434cc9dba6d",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/naprawianie.svg",
+          "variant": "default",
+          "sourceSha256": "2a46fa053ff7b86452f7e13b78a8267e43655f52dd0524d84af1e7113383e1f1"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style102-naprawianie",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T22:31:20.329Z"
+      }
+    },
+    {
+      "id": "style102-odporny",
+      "name": "Odporny",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-102/odporny.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "fb7d2e9aa1202474c843d539848581e836e383ca043c2f212f03caff107df99d",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/odporny.svg",
+          "variant": "default",
+          "sourceSha256": "5dfe6297fc4d7d0fa012f6129dc6a6dc24417e94a461b29d3d0ca5ea88c529c2"
+        }
+      ],
+      "notes": "Need to somehow indicate the water is poisoned/bad",
+      "feedback": {
+        "itemId": "style102-odporny",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Need to somehow indicate the water is poisoned/bad",
+        "updatedAt": "2026-10-16T22:31:59.736Z"
+      }
+    },
+    {
+      "id": "style102-patriota",
+      "name": "Patriota",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-102/patriota.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "4bce2aa0bcdcbe8f672ead4f8458775cbaeeac852f606a9d563f0882b75b145f",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/patriota.svg",
+          "variant": "default",
+          "sourceSha256": "9151ff746b0ebc0c3c86b20fb9511a946cc86bf7fef4e1e6b7ec2822c27ebb06"
+        }
+      ],
+      "notes": "Change the flag to a confederate flag and refine the contours of the shoulder",
+      "feedback": {
+        "itemId": "style102-patriota",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Change the flag to a confederate flag and refine the contours of the shoulder",
+        "updatedAt": "2026-10-16T22:32:21.937Z"
+      }
+    }
+  ]
+}

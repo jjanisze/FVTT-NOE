@@ -1,5 +1,9 @@
 # Batch 102 — 9 browser style revisions
 
+Review outcome: **6 approved replacements installed; 3 revisions remain**.
+Exact saved decisions and delivered SVG/WEBP hashes are in `reviewed.json`
+and `reviewed-installed.json`. Remaining notes continue in Batches 106–107.
+
 | Cell | Subject | Replacement motif |
 |---|---|---|
 | 1 | Logika Różnoboczna | One plain broad SHIELD at center flanked by TWO complete short combat KNIVES pointing inward from opposite sides. The two knives approach the defender from different directions, showing coordinated flanking. Thick black gaps keep all three objects distinct. No people, triangular wall, angles, diagram, runes or measurements. |

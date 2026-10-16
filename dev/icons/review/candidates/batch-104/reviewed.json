@@ -1,0 +1,225 @@
+{
+  "date": "2026-10-17",
+  "batch": 104,
+  "pass": "browser-style-revisions",
+  "feedbackBeforeSha256": "c2bdbafe203e256c2a656275b8d74855fdd346d3a19881a694a5a4f69e9d9a78",
+  "styleFeedbackBeforeSha256": "016b0e81129a1ab6c74dd1bb66468ead46bfdea7ff2a0850a1715ce9e830bbb9",
+  "active": [
+    {
+      "id": "style104-tanczace-pily",
+      "name": "Tańczące piły",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-104/tanczace-pily.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "e5793be06916d7ab9212a65281e67a9959dc953fd46fb9323b2c4cd4063002fd",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/tanczace-pily.svg",
+          "variant": "default",
+          "sourceSha256": "bc10bf45e8c50157464d4d784c069a08139e10da323f800c1ae196386084b51a"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style104-tanczace-pily",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T22:35:16.921Z"
+      }
+    },
+    {
+      "id": "style104-tryb-turbo",
+      "name": "Tryb Turbo",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-104/tryb-turbo.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "5df931eb18328cf1c26da893c89fb2604d70c32151b43f38dbdab70719b00b88",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/tryb-turbo.svg",
+          "variant": "default",
+          "sourceSha256": "ca5c334cb1ac92b5ca2c8ecb2990ad504167e31bcbbd1b3f373fc2735ba55118"
+        }
+      ],
+      "notes": "Needs visual elements indicating TURBO/OVERDRIVE",
+      "feedback": {
+        "itemId": "style104-tryb-turbo",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Needs visual elements indicating TURBO/OVERDRIVE",
+        "updatedAt": "2026-10-16T22:35:31.735Z"
+      }
+    },
+    {
+      "id": "style104-twierdzenie-kata-prostego",
+      "name": "Twierdzenie Kąta Prostego",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-104/twierdzenie-kata-prostego.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "920287fc0a80daa92dfa9bd642bddf273947571a79668eb45b4b97f4dc52cac9",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/twierdzenie-kata-prostego.svg",
+          "variant": "default",
+          "sourceSha256": "31e78fa56154b4104741b6b7cc6ebd831656095c90b6cd27fdf369ecaf312725"
+        }
+      ],
+      "notes": "Somehow incorporate visually the geometric pun",
+      "feedback": {
+        "itemId": "style104-twierdzenie-kata-prostego",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Somehow incorporate visually the geometric pun",
+        "updatedAt": "2026-10-16T22:35:52.233Z"
+      }
+    },
+    {
+      "id": "style104-tylko-zwarcie",
+      "name": "Tylko zwarcie",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-104/tylko-zwarcie.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "3366bbdd46851d4e2e0b69c2329d72555f02825a88d9bbd545a5a3ee595714d3",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/tylko-zwarcie.svg",
+          "variant": "default",
+          "sourceSha256": "ce21c07be39d4e6477f48757e1a010d594233f496644d906a4f674e5665069fa"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style104-tylko-zwarcie",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T22:36:03.195Z"
+      }
+    },
+    {
+      "id": "style104-wierze",
+      "name": "Wierzę",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-104/wierze.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "8822e33a53b8b94aac73578619427fbc787befa5d5d57311cdea008bd7f1142f",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wierze.svg",
+          "variant": "default",
+          "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c"
+        }
+      ],
+      "notes": "Style is better, but doesn't communicate idea well. Try a different idea.",
+      "feedback": {
+        "itemId": "style104-wierze",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Style is better, but doesn't communicate idea well. Try a different idea.",
+        "updatedAt": "2026-10-16T22:36:36.830Z"
+      }
+    },
+    {
+      "id": "style104-wielonozny",
+      "name": "Wielonożny",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-104/wielonozny.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "517c9938c77ca9c664ff5a591b51d2d6ed4fafb4c1bc69a3af53d1c472fe6d1c",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wielonozny.svg",
+          "variant": "default",
+          "sourceSha256": "588eb40f2878962ff870a67c4cbeb761ac8b899f2cf5e708280ac8898f64d27d"
+        }
+      ],
+      "notes": "The legs should connect to the hilly terrain, indicating the robot can move over it gracefully, not just exist over it.",
+      "feedback": {
+        "itemId": "style104-wielonozny",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "The legs should connect to the hilly terrain, indicating the robot can move over it gracefully, not just exist over it.",
+        "updatedAt": "2026-10-16T22:37:14.507Z"
+      }
+    },
+    {
+      "id": "style104-wirujace-kiscienie",
+      "name": "Wirujące kiścienie",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-104/wirujace-kiscienie.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "b8b812933b7fc2894a41f617d053c292bd8ad33a7c22034f62aba5d68955ba7b",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wirujace-kiscienie.svg",
+          "variant": "default",
+          "sourceSha256": "2b8bb6f73adb3b502a185d6aee31173171af229f0e131d04936f1735d612093d"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style104-wirujace-kiscienie",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T22:37:18.277Z"
+      }
+    },
+    {
+      "id": "style104-wrazliwosc-na-swiatlo",
+      "name": "Wrażliwość na światło",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-104/wrazliwosc-na-swiatlo.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "6b75817f899ac007d526fab0137e17a96cef8f2747d014a9d0846ae174e99c92",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+          "variant": "default",
+          "sourceSha256": "e48c8aedc3ef8941ac486c2ea64f2d97499f31242ba40d030be30898431e65a7"
+        }
+      ],
+      "notes": "Better style, but the rodent's legs are facing opposite directions. Decide on a direction the lower body is facing.",
+      "feedback": {
+        "itemId": "style104-wrazliwosc-na-swiatlo",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Better style, but the rodent's legs are facing opposite directions. Decide on a direction the lower body is facing.",
+        "updatedAt": "2026-10-16T22:37:44.660Z"
+      }
+    },
+    {
+      "id": "style104-wymagania",
+      "name": "Wymagania",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-104/wymagania.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "734f9122610490b0e8be72ca606feedd17b29acc1e5fa9222ee53f3481115105",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wymagania.svg",
+          "variant": "default",
+          "sourceSha256": "7a93fc83a0710411564860ca13fb3bc50c5769c95c11f9755ae3caf7120012c1"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style104-wymagania",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T22:37:48.941Z"
+      }
+    }
+  ]
+}

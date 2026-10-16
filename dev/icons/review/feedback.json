@@ -3475,199 +3475,199 @@
     },
     "style102-doktor-quinn": {
       "itemId": "style102-doktor-quinn",
-      "decision": "approve",
+      "decision": "revise",
       "candidateId": "atlas-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T22:30:31.155Z"
+      "notes": "Modify the angles so the positons of the hands imply bandaging someone else",
+      "updatedAt": "2026-10-16T22:30:53.202Z"
     },
     "style102-fart": {
       "itemId": "style102-fart",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.078Z"
+      "updatedAt": "2026-10-16T22:30:56.534Z"
     },
     "style102-ja-juz-swoje-odchorowalem": {
       "itemId": "style102-ja-juz-swoje-odchorowalem",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.078Z"
+      "updatedAt": "2026-10-16T22:31:01.295Z"
     },
     "style102-kuchenny-terror": {
       "itemId": "style102-kuchenny-terror",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.078Z"
+      "updatedAt": "2026-10-16T22:31:05.339Z"
     },
     "style102-mlynek": {
       "itemId": "style102-mlynek",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.078Z"
+      "updatedAt": "2026-10-16T22:31:16.285Z"
     },
     "style102-naprawianie": {
       "itemId": "style102-naprawianie",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.079Z"
+      "updatedAt": "2026-10-16T22:31:20.329Z"
     },
     "style102-odporny": {
       "itemId": "style102-odporny",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "atlas-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.079Z"
+      "notes": "Need to somehow indicate the water is poisoned/bad",
+      "updatedAt": "2026-10-16T22:31:59.736Z"
     },
     "style102-patriota": {
       "itemId": "style102-patriota",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "atlas-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.079Z"
+      "notes": "Change the flag to a confederate flag and refine the contours of the shoulder",
+      "updatedAt": "2026-10-16T22:32:21.937Z"
     },
     "style103-prog-awarii": {
       "itemId": "style103-prog-awarii",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "atlas-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.082Z"
+      "notes": "Add lines or sparks indicating an active/undergoing fault, remove the loose unreadable thing at the bottom left",
+      "updatedAt": "2026-10-16T22:33:10.492Z"
     },
     "style103-przyspieszenie": {
       "itemId": "style103-przyspieszenie",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.082Z"
+      "updatedAt": "2026-10-16T22:33:13.823Z"
     },
     "style103-rozkaz-likwidacji": {
       "itemId": "style103-rozkaz-likwidacji",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.083Z"
+      "updatedAt": "2026-10-16T22:33:23.880Z"
     },
     "style103-roznorodne-ataki": {
       "itemId": "style103-roznorodne-ataki",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.083Z"
+      "updatedAt": "2026-10-16T22:33:28.339Z"
     },
     "style103-siodme-poty": {
       "itemId": "style103-siodme-poty",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "atlas-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.083Z"
+      "notes": "That's not how a gas pedal looks like from the side. It is not a hinge. Redraw to show a simplified version of an actual gas pedal.",
+      "updatedAt": "2026-10-16T22:34:02.261Z"
     },
     "style103-skakun": {
       "itemId": "style103-skakun",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "atlas-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.083Z"
+      "notes": "The style is better, but the icon does not indicate movement",
+      "updatedAt": "2026-10-16T22:34:22.225Z"
     },
     "style103-szara-eminencja": {
       "itemId": "style103-szara-eminencja",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.083Z"
+      "updatedAt": "2026-10-16T22:34:31.232Z"
     },
     "style103-szarpanie": {
       "itemId": "style103-szarpanie",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.084Z"
+      "updatedAt": "2026-10-16T22:34:43.124Z"
     },
     "style103-taca-i-w-nogi": {
       "itemId": "style103-taca-i-w-nogi",
-      "decision": "pending",
-      "candidateId": "atlas-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.084Z"
+      "decision": "reject",
+      "candidateId": "current",
+      "notes": "Try again, something between those two",
+      "updatedAt": "2026-10-16T22:35:03.986Z"
     },
     "style104-tanczace-pily": {
       "itemId": "style104-tanczace-pily",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.087Z"
+      "updatedAt": "2026-10-16T22:35:16.921Z"
     },
     "style104-tryb-turbo": {
       "itemId": "style104-tryb-turbo",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "atlas-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.087Z"
+      "notes": "Needs visual elements indicating TURBO/OVERDRIVE",
+      "updatedAt": "2026-10-16T22:35:31.735Z"
     },
     "style104-twierdzenie-kata-prostego": {
       "itemId": "style104-twierdzenie-kata-prostego",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "atlas-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.087Z"
+      "notes": "Somehow incorporate visually the geometric pun",
+      "updatedAt": "2026-10-16T22:35:52.233Z"
     },
     "style104-tylko-zwarcie": {
       "itemId": "style104-tylko-zwarcie",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.088Z"
+      "updatedAt": "2026-10-16T22:36:03.195Z"
     },
     "style104-wierze": {
       "itemId": "style104-wierze",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "atlas-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.088Z"
+      "notes": "Style is better, but doesn't communicate idea well. Try a different idea.",
+      "updatedAt": "2026-10-16T22:36:36.830Z"
     },
     "style104-wielonozny": {
       "itemId": "style104-wielonozny",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "atlas-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.088Z"
+      "notes": "The legs should connect to the hilly terrain, indicating the robot can move over it gracefully, not just exist over it.",
+      "updatedAt": "2026-10-16T22:37:14.507Z"
     },
     "style104-wirujace-kiscienie": {
       "itemId": "style104-wirujace-kiscienie",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.088Z"
+      "updatedAt": "2026-10-16T22:37:18.277Z"
     },
     "style104-wrazliwosc-na-swiatlo": {
       "itemId": "style104-wrazliwosc-na-swiatlo",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "atlas-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.089Z"
+      "notes": "Better style, but the rodent's legs are facing opposite directions. Decide on a direction the lower body is facing.",
+      "updatedAt": "2026-10-16T22:37:44.660Z"
     },
     "style104-wymagania": {
       "itemId": "style104-wymagania",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.089Z"
+      "updatedAt": "2026-10-16T22:37:48.941Z"
     },
     "style105-zasloniecie-helmu": {
       "itemId": "style105-zasloniecie-helmu",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.090Z"
+      "updatedAt": "2026-10-16T22:37:53.557Z"
     },
     "style105-zawziety-sukinkot": {
       "itemId": "style105-zawziety-sukinkot",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "atlas-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T22:28:16.090Z"
+      "notes": "Add the arrow back",
+      "updatedAt": "2026-10-16T22:38:03.662Z"
     }
   }
 }

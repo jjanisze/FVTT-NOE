@@ -1,0 +1,94 @@
+{
+  "date": "2026-10-17",
+  "batch": 103,
+  "pass": "browser-style-revisions",
+  "approvedSubjects": 5,
+  "remainingSubjects": 13,
+  "installed": [
+    {
+      "itemId": "style103-przyspieszenie",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-103/przyspieszenie.png",
+      "sourceSha256": "c3a38f484ed043ef6e1c7682c4998b42f3b5ce51f671de525e375eb47e6e695b",
+      "files": [
+        "icons/abilities/przyspieszenie.svg",
+        "icons/abilities/przyspieszenie.webp"
+      ],
+      "svgSha256": "f9f94007ca56ab2f56d2b2ac34de8c4873b2463cfd45b02da5655d9e67e5b43f",
+      "webpSha256": "c5cdc3fe73d584e386f552e2c7d20ceb077282ec1f556643d3936a6a78eec336",
+      "retiredLegacyPng": {
+        "source": "icons/abilities/przyspieszenie.png",
+        "sha256": "dc4ab62f58ea939a292d4d7acab253e34f381a9bd755361325f65a4d92ee980c",
+        "archive": "dev/icons/review/candidates/batch-103/raw/legacy/przyspieszenie.png"
+      }
+    },
+    {
+      "itemId": "style103-rozkaz-likwidacji",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-103/rozkaz-likwidacji.png",
+      "sourceSha256": "bae51c69fa751b4c218d6cedb0a8a1512d02bd96dfedbdf4a41112f30ca66d3b",
+      "files": [
+        "icons/abilities/rozkaz-likwidacji.svg",
+        "icons/abilities/rozkaz-likwidacji.webp"
+      ],
+      "svgSha256": "e34d0480d5ad50a42b130ca64e43fa7e5062796cbb24012732558bb5d3c93926",
+      "webpSha256": "0c9e54eec926e3d745c5ae79501d837f6a187f6494477481cb57aabd576c7718",
+      "retiredLegacyPng": {
+        "source": "icons/abilities/rozkaz-likwidacji.png",
+        "sha256": "1ab5f5f3139fb60719efd4df9d0207ef15315c9405634adff3d4ba2b01941e9b",
+        "archive": "dev/icons/review/candidates/batch-103/raw/legacy/rozkaz-likwidacji.png"
+      }
+    },
+    {
+      "itemId": "style103-roznorodne-ataki",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-103/roznorodne-ataki.png",
+      "sourceSha256": "c83a8fd33136c3f6624102904cc56c32b9d67f591eb3b643f6b7217ed5b3ff2d",
+      "files": [
+        "icons/abilities/roznorodne-ataki.svg",
+        "icons/abilities/roznorodne-ataki.webp"
+      ],
+      "svgSha256": "9e2f23e81109142d6e27360073aa1a455ece59157fc8028756ccc636882f4b91",
+      "webpSha256": "f0c8d0a855961800e0314ce6f8ccb38a2d3fe2bfde174a95392c9435fbbdb459",
+      "retiredLegacyPng": {
+        "source": "icons/abilities/roznorodne-ataki.png",
+        "sha256": "31161947d10883ae638ff6f0f3fe58114c6e6461af974efcdd5e15a3b55c2f75",
+        "archive": "dev/icons/review/candidates/batch-103/raw/legacy/roznorodne-ataki.png"
+      }
+    },
+    {
+      "itemId": "style103-szara-eminencja",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-103/szara-eminencja.png",
+      "sourceSha256": "2b2e90b9ce9fa320d39caeefd79154ecba46b15cda7dc2e625968a7a5a033c02",
+      "files": [
+        "icons/abilities/szara-eminencja.svg",
+        "icons/abilities/szara-eminencja.webp"
+      ],
+      "svgSha256": "fd3aa4232ef518ba2b15363a9f131b2db6173c7964d2352945c816c642844eb9",
+      "webpSha256": "a134dd4ca3e70d52085662612cc31ba7d3961847bf3910cf1d26099473847528",
+      "retiredLegacyPng": {
+        "source": "icons/abilities/szara-eminencja.png",
+        "sha256": "3b925d17b4007a522b6ef0b2fce6f39a896cc51914705d304fd750d5c6b06a99",
+        "archive": "dev/icons/review/candidates/batch-103/raw/legacy/szara-eminencja.png"
+      }
+    },
+    {
+      "itemId": "style103-szarpanie",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-103/szarpanie.png",
+      "sourceSha256": "7445637419c141b4a7722a6147a64e23108be298864a36e120da49792f609a3b",
+      "files": [
+        "icons/abilities/szarpanie.svg",
+        "icons/abilities/szarpanie.webp"
+      ],
+      "svgSha256": "35d197e920b622642bcc18505f512042e84d98133b0fd6d26af11ee6725634ec",
+      "webpSha256": "cfc2fe347e9c5d4db714504a7154039198e167ec1b06049884a6a1b7b0ad6d9a",
+      "retiredLegacyPng": {
+        "source": "icons/abilities/szarpanie.png",
+        "sha256": "4225a0271b7a3efe75cd66a6c5b970b2526d871853cb12f40684835e272469b5",
+        "archive": "dev/icons/review/candidates/batch-103/raw/legacy/szarpanie.png"
+      }
+    }
+  ]
+}

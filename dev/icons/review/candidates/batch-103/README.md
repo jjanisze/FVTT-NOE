@@ -1,5 +1,9 @@
 # Batch 103 — 9 browser style revisions
 
+Review outcome: **5 approved replacements installed; 4 revisions remain**.
+Exact saved decisions and delivered SVG/WEBP hashes are in `reviewed.json`
+and `reviewed-installed.json`. Remaining notes continue in Batches 106–107.
+
 | Cell | Subject | Replacement motif |
 |---|---|---|
 | 1 | Próg awarii | ONE squat industrial MOTOR HOUSING split by ONE broad zigzag BLACK CRACK, with ONE large loose bolt lying below. Thick simple casing, two broad cooling-slot cuts, no gauge, scale, numeral, little wires, smoke, debris cloud or fine damage texture. |

@@ -1,0 +1,225 @@
+{
+  "date": "2026-10-17",
+  "batch": 103,
+  "pass": "browser-style-revisions",
+  "feedbackBeforeSha256": "c2bdbafe203e256c2a656275b8d74855fdd346d3a19881a694a5a4f69e9d9a78",
+  "styleFeedbackBeforeSha256": "016b0e81129a1ab6c74dd1bb66468ead46bfdea7ff2a0850a1715ce9e830bbb9",
+  "active": [
+    {
+      "id": "style103-prog-awarii",
+      "name": "Próg awarii",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-103/prog-awarii.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "89002c90e137114ded15079dca0c8051b604704cddc900dc3c3dc04a8c378cd2",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/prog-awarii.svg",
+          "variant": "default",
+          "sourceSha256": "c75daa7d763f1c448fb5412573766513450334e031c6ace1469662f163cc17b2"
+        }
+      ],
+      "notes": "Add lines or sparks indicating an active/undergoing fault, remove the loose unreadable thing at the bottom left",
+      "feedback": {
+        "itemId": "style103-prog-awarii",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Add lines or sparks indicating an active/undergoing fault, remove the loose unreadable thing at the bottom left",
+        "updatedAt": "2026-10-16T22:33:10.492Z"
+      }
+    },
+    {
+      "id": "style103-przyspieszenie",
+      "name": "Przyspieszenie",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-103/przyspieszenie.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "c3a38f484ed043ef6e1c7682c4998b42f3b5ce51f671de525e375eb47e6e695b",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/przyspieszenie.svg",
+          "variant": "default",
+          "sourceSha256": "f294bc506fa503f8d73b051f0a6d3e134a799b9cb992567df13ca672c36a47ee"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style103-przyspieszenie",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T22:33:13.823Z"
+      }
+    },
+    {
+      "id": "style103-rozkaz-likwidacji",
+      "name": "Rozkaz Likwidacji",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-103/rozkaz-likwidacji.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "bae51c69fa751b4c218d6cedb0a8a1512d02bd96dfedbdf4a41112f30ca66d3b",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/rozkaz-likwidacji.svg",
+          "variant": "default",
+          "sourceSha256": "01a3e9d892437d576716d91fb43a5ebbb8256fa6fb7c525a88e3bdcc13c41f93"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style103-rozkaz-likwidacji",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T22:33:23.880Z"
+      }
+    },
+    {
+      "id": "style103-roznorodne-ataki",
+      "name": "Różnorodne ataki",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-103/roznorodne-ataki.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "c83a8fd33136c3f6624102904cc56c32b9d67f591eb3b643f6b7217ed5b3ff2d",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/roznorodne-ataki.svg",
+          "variant": "default",
+          "sourceSha256": "4e5fc009bd91c06ca413e362fa4bfc486d715f37d7ebd471f211a977e22c10da"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style103-roznorodne-ataki",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T22:33:28.339Z"
+      }
+    },
+    {
+      "id": "style103-siodme-poty",
+      "name": "Siódme poty",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-103/siodme-poty.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "e8ad544dea3a146ad48eaabf7a232313e8aef5dd2854ff44f5f2c13db3f74470",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/siodme-poty.svg",
+          "variant": "default",
+          "sourceSha256": "3c151c5f915b0e845f6dcf2f0b9b69c7c22df023e0eb7fd048d76cfadce77c59"
+        }
+      ],
+      "notes": "That's not how a gas pedal looks like from the side. It is not a hinge. Redraw to show a simplified version of an actual gas pedal.",
+      "feedback": {
+        "itemId": "style103-siodme-poty",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "That's not how a gas pedal looks like from the side. It is not a hinge. Redraw to show a simplified version of an actual gas pedal.",
+        "updatedAt": "2026-10-16T22:34:02.261Z"
+      }
+    },
+    {
+      "id": "style103-skakun",
+      "name": "Skakun",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-103/skakun.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "9ea1f85e1a5317c1ec497b362167147c59aa699e1e70df0256d2a946480ae7c9",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/skakun.svg",
+          "variant": "default",
+          "sourceSha256": "6616be2a54fe7dd9ffef7b11dc3f5001982aeccbad8ec078d197bbaabc401883"
+        }
+      ],
+      "notes": "The style is better, but the icon does not indicate movement",
+      "feedback": {
+        "itemId": "style103-skakun",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "The style is better, but the icon does not indicate movement",
+        "updatedAt": "2026-10-16T22:34:22.225Z"
+      }
+    },
+    {
+      "id": "style103-szara-eminencja",
+      "name": "Szara Eminencja",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-103/szara-eminencja.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "2b2e90b9ce9fa320d39caeefd79154ecba46b15cda7dc2e625968a7a5a033c02",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szara-eminencja.svg",
+          "variant": "default",
+          "sourceSha256": "26f2c1ad6c13b50274bc07252608dbe2a3a8fa8adc68204157e411276abafb29"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style103-szara-eminencja",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T22:34:31.232Z"
+      }
+    },
+    {
+      "id": "style103-szarpanie",
+      "name": "Szarpanie",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-103/szarpanie.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "7445637419c141b4a7722a6147a64e23108be298864a36e120da49792f609a3b",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szarpanie.svg",
+          "variant": "default",
+          "sourceSha256": "fe1f81639adf52e3b99e7a43efd7abaf1714e4ca0039011cb394ae2c146d0245"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style103-szarpanie",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T22:34:43.124Z"
+      }
+    },
+    {
+      "id": "style103-taca-i-w-nogi",
+      "name": "Tacą i w nogi",
+      "decision": "reject",
+      "candidateId": "current",
+      "selectedSource": "/icons/abilities/taca-i-w-nogi.svg",
+      "sourceKind": "production",
+      "sourceSha256": "4272d8941f5ceb46ec0963b746f990623449e02aaa632ef8c4c8b46f9fa89645",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/taca-i-w-nogi.svg",
+          "variant": "default",
+          "sourceSha256": "4272d8941f5ceb46ec0963b746f990623449e02aaa632ef8c4c8b46f9fa89645"
+        }
+      ],
+      "notes": "Try again, something between those two",
+      "feedback": {
+        "itemId": "style103-taca-i-w-nogi",
+        "decision": "reject",
+        "candidateId": "current",
+        "notes": "Try again, something between those two",
+        "updatedAt": "2026-10-16T22:35:03.986Z"
+      }
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "date": "2026-10-17",
+  "batch": 102,
+  "pass": "browser-style-revisions",
+  "approvedSubjects": 6,
+  "remainingSubjects": 13,
+  "installed": [
+    {
+      "itemId": "style102-logika-roznoboczna",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-102/logika-roznoboczna.png",
+      "sourceSha256": "5a2a12f5b60c3c0a7125e59c8f6375b3079cc6d03b6350aa0d35da7ea74cdf75",
+      "files": [
+        "icons/abilities/logika-roznoboczna.svg",
+        "icons/abilities/logika-roznoboczna.webp"
+      ],
+      "svgSha256": "1b90176472189eaf5cfa8ba3dcc0821fe6f44bcedb529abc175d5cc33989e77e",
+      "webpSha256": "2cda810f30244e352543c8e4a3d3f4a263dabbafe6f452e125288c9d87a467fc",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "style102-fart",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-102/fart.png",
+      "sourceSha256": "9de381fc3216a849b6bf2520f81035c5b1a858f0929b2fd501de5c76ccd3deb1",
+      "files": [
+        "icons/abilities/fart.svg",
+        "icons/abilities/fart.webp"
+      ],
+      "svgSha256": "49ed1595717c3c2566357e8514f5bd01fbbb3b4518076f0bc1789a86592222b6",
+      "webpSha256": "adea8763b7261fdac6c1c3d83e96a281a6c4345831a6f6c52d5a88faa285d501",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "style102-ja-juz-swoje-odchorowalem",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-102/ja-juz-swoje-odchorowalem.png",
+      "sourceSha256": "eff1e5b59f09967dcb18bb6b2039d23e4d25cf7dcf0884c7aaa303c6c3a7818f",
+      "files": [
+        "icons/abilities/ja-juz-swoje-odchorowalem.svg",
+        "icons/abilities/ja-juz-swoje-odchorowalem.webp"
+      ],
+      "svgSha256": "50e1e8f5d997662f79cf21a95228f59f4b3603df420f6ba3191a1fa9b7356829",
+      "webpSha256": "32296c945712dce766185ed0606e7e781963b065fb672b41d27b883187803abe",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "style102-kuchenny-terror",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-102/kuchenny-terror.png",
+      "sourceSha256": "80b059e1f8d1b9da744c19334714f0e01a519f86bfd4fde6859993ab42655a2e",
+      "files": [
+        "icons/abilities/kuchenny-terror.svg",
+        "icons/abilities/kuchenny-terror.webp"
+      ],
+      "svgSha256": "27dc084a8f542b73a9cc7d21f5005576e7e6cb8afa1bd9c1f73792cd5becdb1d",
+      "webpSha256": "68b217e2a1585b55c4528cf2c4867d21a04f535475651fb1d66cbe0384e9c8f7",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "style102-mlynek",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-102/mlynek.png",
+      "sourceSha256": "d51c36cae4580848c1fff3fde7504013a0a7cb139e248e9629ee1aefc3740075",
+      "files": [
+        "icons/abilities/mlynek.svg",
+        "icons/abilities/mlynek.webp"
+      ],
+      "svgSha256": "0d44c060bd62c243d6e09d592f2952969a1a180d05f6922597e16a07499ebb8f",
+      "webpSha256": "131fcd7020fe3a47449e732477d48a692b45a5f49717e87a75d8c7fe73385578",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "style102-naprawianie",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-102/naprawianie.png",
+      "sourceSha256": "a18efbbc50cebb725a546481a3b41fce2a01ff2318791a98bd7c2434cc9dba6d",
+      "files": [
+        "icons/abilities/naprawianie.svg",
+        "icons/abilities/naprawianie.webp"
+      ],
+      "svgSha256": "971f552faed7c45db2261b5c0a15ce39d9d6192d60a0a88fc639a5748ea0bda1",
+      "webpSha256": "3e0a5cd1ae5df718aea337e5841d15e5f07b66ca6c486183737eabb78cc90b79",
+      "retiredLegacyPng": {
+        "source": "icons/abilities/naprawianie.png",
+        "sha256": "434edcdf427754aaf3329d373157606ec72f68d0f7cc011f252da2501cc674fb",
+        "archive": "dev/icons/review/candidates/batch-102/raw/legacy/naprawianie.png"
+      }
+    }
+  ]
+}

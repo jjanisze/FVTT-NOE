@@ -1,5 +1,9 @@
 # Batch 105 — 2 browser style revisions
 
+Review outcome: **1 approved replacements installed; 1 revisions remain**.
+Exact saved decisions and delivered SVG/WEBP hashes are in `reviewed.json`
+and `reviewed-installed.json`. Remaining notes continue in Batches 106–107.
+
 | Cell | Subject | Replacement motif |
 |---|---|---|
 | 1 | Zasłonięcie hełmu | ONE complete modern industrial HELMET in three-quarter SIDE PROFILE with ONE large CLOSED PROTECTIVE FACEPLATE. One thick side hinge and ONE broad black visor opening, with ONE broad curved motion stroke above the faceplate showing closure. No person, neck armor, skull, tiny screws, circuitry, gauge, text or fine reflections. |

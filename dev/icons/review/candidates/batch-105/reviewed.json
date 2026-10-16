@@ -1,0 +1,57 @@
+{
+  "date": "2026-10-17",
+  "batch": 105,
+  "pass": "browser-style-revisions",
+  "feedbackBeforeSha256": "c2bdbafe203e256c2a656275b8d74855fdd346d3a19881a694a5a4f69e9d9a78",
+  "styleFeedbackBeforeSha256": "016b0e81129a1ab6c74dd1bb66468ead46bfdea7ff2a0850a1715ce9e830bbb9",
+  "active": [
+    {
+      "id": "style105-zasloniecie-helmu",
+      "name": "Zasłonięcie hełmu",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-105/zasloniecie-helmu.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "48f997e66c3b353a4014c9a1bbeb8cf544c1cf207ad866c97203ece325c5bc08",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zasloniecie-helmu.svg",
+          "variant": "default",
+          "sourceSha256": "ef104c0f5efdc6e989b48ed75f0dfc914eaabcf88e2ac5f5ccb03eab23141836"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style105-zasloniecie-helmu",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T22:37:53.557Z"
+      }
+    },
+    {
+      "id": "style105-zawziety-sukinkot",
+      "name": "Zawzięty sukinkot",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-105/zawziety-sukinkot.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "2a7d48d2155b88ee380b98f60b7e25884656f8fdf6caab83ec29a0e603c81352",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawziety-sukinkot.svg",
+          "variant": "default",
+          "sourceSha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3"
+        }
+      ],
+      "notes": "Add the arrow back",
+      "feedback": {
+        "itemId": "style105-zawziety-sukinkot",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Add the arrow back",
+        "updatedAt": "2026-10-16T22:38:03.662Z"
+      }
+    }
+  ]
+}

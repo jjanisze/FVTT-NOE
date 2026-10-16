@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-17",
+  "batch": 105,
+  "pass": "browser-style-revisions",
+  "approvedSubjects": 1,
+  "remainingSubjects": 13,
+  "installed": [
+    {
+      "itemId": "style105-zasloniecie-helmu",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-105/zasloniecie-helmu.png",
+      "sourceSha256": "48f997e66c3b353a4014c9a1bbeb8cf544c1cf207ad866c97203ece325c5bc08",
+      "files": [
+        "icons/abilities/zasloniecie-helmu.svg",
+        "icons/abilities/zasloniecie-helmu.webp"
+      ],
+      "svgSha256": "9742bec0e23f23b2bd00e028b3b218105f2493f93d1b0f6f9a9ac64d3608cd61",
+      "webpSha256": "b6153aaf63f4731b4be44d87d9f8784d6e7bf4d6636945bd18be23dbecfbd158",
+      "retiredLegacyPng": {
+        "source": "icons/abilities/zasloniecie-helmu.png",
+        "sha256": "2ae6eb53f6f6e4cb12fa89fff89a38d40b3b922701892cb31f210e0c0eaf8456",
+        "archive": "dev/icons/review/candidates/batch-105/raw/legacy/zasloniecie-helmu.png"
+      }
+    }
+  ]
+}

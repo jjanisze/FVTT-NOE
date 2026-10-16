@@ -37,7 +37,7 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 106** (29 style revisions await GM review;
+**Next batch number: 106** (13 style revisions queued after 16 approvals;
 the original 153-subject placeholder pass is complete).
 
 **Icon coverage correction, 2026-10-17:** the previous 342 review cards are resolved,
@@ -1270,87 +1270,75 @@ and the next free batch; fresh GM approval is required before replacement.
 <!-- class-placeholder-audit:end -->
 
 <!-- style-batch-102:start -->
-## Queue (A) — Batch 102 — 9 style revisions
+## Reviewed (A) — Batch 102 — 6 delivered
 
-Broad white-glyph replacements for saved browser flags; existing art stays
-until fresh GM approval. Exact source and sidecar hashes, verbatim feedback
-and prompts: `review/candidates/batch-102/`.
+Exact saved decisions and approved masks: `reviewed.json` and
+`reviewed-installed.json` under `review/candidates/batch-102/`.
 
-| Cell | Subject | Exact SVG target (+ WEBP) |
+| Subject | Native SVG (+ WEBP) | Result |
 |---|---|---|
-| 1 | Logika Różnoboczna | `icons/abilities/logika-roznoboczna.svg` |
-| 2 | Doktor Quinn | `icons/abilities/doktor-quinn.svg` |
-| 3 | Fart | `icons/abilities/fart.svg` |
-| 4 | Ja już swoje odchorowałem | `icons/abilities/ja-juz-swoje-odchorowalem.svg` |
-| 5 | Kuchenny Terror | `icons/abilities/kuchenny-terror.svg` |
-| 6 | Młynek | `icons/abilities/mlynek.svg` |
-| 7 | Naprawianie | `icons/abilities/naprawianie.svg` |
-| 8 | Odporny | `icons/abilities/odporny.svg` |
-| 9 | Patriota | `icons/abilities/patriota.svg` |
-
-Browser style flags remain unchanged while candidates await approval.
+| Logika Różnoboczna | `icons/abilities/logika-roznoboczna.svg` | **done** |
+| Doktor Quinn | `icons/abilities/doktor-quinn.svg` | Revision queued |
+| Fart | `icons/abilities/fart.svg` | **done** |
+| Ja już swoje odchorowałem | `icons/abilities/ja-juz-swoje-odchorowalem.svg` | **done** |
+| Kuchenny Terror | `icons/abilities/kuchenny-terror.svg` | **done** |
+| Młynek | `icons/abilities/mlynek.svg` | **done** |
+| Naprawianie | `icons/abilities/naprawianie.svg` | **done** |
+| Odporny | `icons/abilities/odporny.svg` | Revision queued |
+| Patriota | `icons/abilities/patriota.svg` | Revision queued |
 
 <!-- style-batch-102:end -->
 
 <!-- style-batch-103:start -->
-## Queue (A) — Batch 103 — 9 style revisions
+## Reviewed (A) — Batch 103 — 5 delivered
 
-Broad white-glyph replacements for saved browser flags; existing art stays
-until fresh GM approval. Exact source and sidecar hashes, verbatim feedback
-and prompts: `review/candidates/batch-103/`.
+Exact saved decisions and approved masks: `reviewed.json` and
+`reviewed-installed.json` under `review/candidates/batch-103/`.
 
-| Cell | Subject | Exact SVG target (+ WEBP) |
+| Subject | Native SVG (+ WEBP) | Result |
 |---|---|---|
-| 1 | Próg awarii | `icons/abilities/prog-awarii.svg` |
-| 2 | Przyspieszenie | `icons/abilities/przyspieszenie.svg` |
-| 3 | Rozkaz Likwidacji | `icons/abilities/rozkaz-likwidacji.svg` |
-| 4 | Różnorodne ataki | `icons/abilities/roznorodne-ataki.svg` |
-| 5 | Siódme poty | `icons/abilities/siodme-poty.svg` |
-| 6 | Skakun | `icons/abilities/skakun.svg` |
-| 7 | Szara Eminencja | `icons/abilities/szara-eminencja.svg` |
-| 8 | Szarpanie | `icons/abilities/szarpanie.svg` |
-| 9 | Tacą i w nogi | `icons/abilities/taca-i-w-nogi.svg` |
-
-Browser style flags remain unchanged while candidates await approval.
+| Próg awarii | `icons/abilities/prog-awarii.svg` | Revision queued |
+| Przyspieszenie | `icons/abilities/przyspieszenie.svg` | **done** |
+| Rozkaz Likwidacji | `icons/abilities/rozkaz-likwidacji.svg` | **done** |
+| Różnorodne ataki | `icons/abilities/roznorodne-ataki.svg` | **done** |
+| Siódme poty | `icons/abilities/siodme-poty.svg` | Revision queued |
+| Skakun | `icons/abilities/skakun.svg` | Revision queued |
+| Szara Eminencja | `icons/abilities/szara-eminencja.svg` | **done** |
+| Szarpanie | `icons/abilities/szarpanie.svg` | **done** |
+| Tacą i w nogi | `icons/abilities/taca-i-w-nogi.svg` | Revision queued |
 
 <!-- style-batch-103:end -->
 
 <!-- style-batch-104:start -->
-## Queue (A) — Batch 104 — 9 style revisions
+## Reviewed (A) — Batch 104 — 4 delivered
 
-Broad white-glyph replacements for saved browser flags; existing art stays
-until fresh GM approval. Exact source and sidecar hashes, verbatim feedback
-and prompts: `review/candidates/batch-104/`.
+Exact saved decisions and approved masks: `reviewed.json` and
+`reviewed-installed.json` under `review/candidates/batch-104/`.
 
-| Cell | Subject | Exact SVG target (+ WEBP) |
+| Subject | Native SVG (+ WEBP) | Result |
 |---|---|---|
-| 1 | Tańczące piły | `icons/abilities/tanczace-pily.svg` |
-| 2 | Tryb Turbo | `icons/abilities/tryb-turbo.svg` |
-| 3 | Twierdzenie Kąta Prostego | `icons/abilities/twierdzenie-kata-prostego.svg` |
-| 4 | Tylko zwarcie | `icons/abilities/tylko-zwarcie.svg` |
-| 5 | Wierzę | `icons/abilities/wierze.svg` |
-| 6 | Wielonożny | `icons/abilities/wielonozny.svg` |
-| 7 | Wirujące kiścienie | `icons/abilities/wirujace-kiscienie.svg` |
-| 8 | Wrażliwość na światło | `icons/abilities/wrazliwosc-na-swiatlo.svg` |
-| 9 | Wymagania | `icons/abilities/wymagania.svg` |
-
-Browser style flags remain unchanged while candidates await approval.
+| Tańczące piły | `icons/abilities/tanczace-pily.svg` | **done** |
+| Tryb Turbo | `icons/abilities/tryb-turbo.svg` | Revision queued |
+| Twierdzenie Kąta Prostego | `icons/abilities/twierdzenie-kata-prostego.svg` | Revision queued |
+| Tylko zwarcie | `icons/abilities/tylko-zwarcie.svg` | **done** |
+| Wierzę | `icons/abilities/wierze.svg` | Revision queued |
+| Wielonożny | `icons/abilities/wielonozny.svg` | Revision queued |
+| Wirujące kiścienie | `icons/abilities/wirujace-kiscienie.svg` | **done** |
+| Wrażliwość na światło | `icons/abilities/wrazliwosc-na-swiatlo.svg` | Revision queued |
+| Wymagania | `icons/abilities/wymagania.svg` | **done** |
 
 <!-- style-batch-104:end -->
 
 <!-- style-batch-105:start -->
-## Queue (A) — Batch 105 — 2 style revisions
+## Reviewed (A) — Batch 105 — 1 delivered
 
-Broad white-glyph replacements for saved browser flags; existing art stays
-until fresh GM approval. Exact source and sidecar hashes, verbatim feedback
-and prompts: `review/candidates/batch-105/`.
+Exact saved decisions and approved masks: `reviewed.json` and
+`reviewed-installed.json` under `review/candidates/batch-105/`.
 
-| Cell | Subject | Exact SVG target (+ WEBP) |
+| Subject | Native SVG (+ WEBP) | Result |
 |---|---|---|
-| 1 | Zasłonięcie hełmu | `icons/abilities/zasloniecie-helmu.svg` |
-| 2 | Zawzięty sukinkot | `icons/abilities/zawziety-sukinkot.svg` |
-
-Browser style flags remain unchanged while candidates await approval.
+| Zasłonięcie hełmu | `icons/abilities/zasloniecie-helmu.svg` | **done** |
+| Zawzięty sukinkot | `icons/abilities/zawziety-sukinkot.svg` | Revision queued |
 
 <!-- style-batch-105:end -->
 
@@ -1363,33 +1351,17 @@ keep the final target name and require fresh GM approval before installation.
 | Icon / selected source | Reasons | Requested change |
 |---|---|---|
 | icons/abilities/doktor-quinn.svg | Too detailed, Dithered / speckled |  |
-| icons/abilities/fart.svg | Too detailed, Dithered / speckled, Wrong subject | Also dice. That takes out of the game by directly suggesting mechanics. |
-| icons/abilities/ja-juz-swoje-odchorowalem.svg | Too detailed, Dithered / speckled |  |
-| icons/abilities/kuchenny-terror.svg | Too detailed, Dithered / speckled |  |
-| icons/abilities/logika-roznoboczna.svg | Too detailed, Dithered / speckled |  |
-| icons/abilities/mlynek.svg | Too detailed, Dithered / speckled |  |
-| icons/abilities/naprawianie.svg | Too detailed |  |
 | icons/abilities/odporny.svg | Too detailed |  |
 | icons/abilities/patriota.svg | Too detailed |  |
 | icons/abilities/prog-awarii.svg | Too detailed |  |
-| icons/abilities/przyspieszenie.svg | Too detailed |  |
-| icons/abilities/rozkaz-likwidacji.svg | Too detailed |  |
-| icons/abilities/roznorodne-ataki.svg | Too detailed |  |
 | icons/abilities/siodme-poty.svg | Too detailed, Dithered / speckled |  |
 | icons/abilities/skakun.svg | Too detailed |  |
-| icons/abilities/szara-eminencja.svg | Too detailed |  |
-| icons/abilities/szarpanie.svg | Too detailed |  |
 | icons/abilities/taca-i-w-nogi.svg | Too detailed |  |
-| icons/abilities/tanczace-pily.svg | Too detailed |  |
 | icons/abilities/tryb-turbo.svg | Too detailed |  |
 | icons/abilities/twierdzenie-kata-prostego.svg | Too detailed, Other | Unclear graphical intent. |
-| icons/abilities/tylko-zwarcie.svg | Too detailed |  |
 | icons/abilities/wielonozny.svg | Too detailed, Dithered / speckled |  |
 | icons/abilities/wierze.svg | Too detailed |  |
-| icons/abilities/wirujace-kiscienie.svg | Too detailed |  |
 | icons/abilities/wrazliwosc-na-swiatlo.svg | Too detailed, Dithered / speckled |  |
-| icons/abilities/wymagania.svg | Too detailed, Dithered / speckled |  |
-| icons/abilities/zasloniecie-helmu.svg | Too detailed |  |
 | icons/abilities/zawziety-sukinkot.svg | Too detailed, Dithered / speckled |  |
 
 Exact source hashes and saved decisions: `review/style-feedback.json` (local).

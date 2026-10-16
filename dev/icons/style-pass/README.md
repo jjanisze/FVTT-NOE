@@ -1,5 +1,12 @@
 # Browser style revisions — Batches 102–105
 
+Review outcome, 2026-10-17: **16 approved replacements installed; 13 revisions
+remain**. Exact decisions and chosen pixels are archived in each batch's
+`reviewed.json` and `reviewed-installed.json`. Approved browser flags now
+record the new SVG hash as kept; remaining flags retain their original
+notes. Nine unreferenced PNG siblings were archived in dev and retired in
+favor of WEBP. Revisions continue in Batches 106–107.
+
 The 2026-10-17 browser review flagged 29 existing ability icons for excess
 detail, dithering or unclear subject matter. All 29 requests are frozen in
 `incoming-style-feedback.json`, with original source hashes and verbatim
@@ -25,11 +32,14 @@ and validated candidate hashes, then adds fresh review cards. Earlier cards
 and decisions remain unchanged. Browser flags remain marked for redo while
 candidates await fresh approval. Production art stays unchanged.
 
-After approval, installation must preflight every `incoming.json` production
-file hash and preserve the exact selected mask. Existing WEBP sidecars need
-replacement too; the placeholder accept helper intentionally rejects existing
-sidecars and cannot be used unchanged for this pass. No runtime wiring,
-compendium rebuild or world write is needed for exact native filenames.
+`accept.py --batches <numbers>` preflights every captured production variant,
+the exact selected candidate, clean native targets and saved decisions.
+It copies the exact approved SVG/WEBP pairs, updates only approved style flags,
+and archives all completed decisions. Unreferenced legacy PNG siblings are
+preserved under dev before retirement; referenced PNGs block that cleanup.
+Use `--preflight` to inspect without writes and `--check` to verify delivered
+pixels and retired-source archives. No runtime wiring, compendium rebuild
+or world write is needed for exact native filenames.
 
 - [Batch 102 assets](../review/candidates/batch-102/README.md) and [exact prompt](../review/candidates/batch-102/prompts.json).
 - [Batch 103 assets](../review/candidates/batch-103/README.md) and [exact prompt](../review/candidates/batch-103/prompts.json).

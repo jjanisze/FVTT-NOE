@@ -235,6 +235,13 @@ The GM-approved Ganger profession emblem (Batch 101) was installed on
 Source and delivered hashes: `dev/icons/review/candidates/batch-101/reviewed-installed.json`.
 This completes the original 153-subject native-placeholder replacement pass.
 
+Sixteen GM-approved style replacements from Batches 102–105 were installed
+on 2026-10-17 as exact SVG/WEBP masks generated with OpenAI's built-in image
+tool. Exact prompts and selected-source/delivery hashes are under those
+batches in `dev/icons/review/candidates/`. Nine unreferenced legacy PNG
+siblings were archived under their batches' dev-only `raw/legacy/` folders
+and retired in favor of WEBP.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

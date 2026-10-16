@@ -1,5 +1,9 @@
 # Batch 104 — 9 browser style revisions
 
+Review outcome: **4 approved replacements installed; 5 revisions remain**.
+Exact saved decisions and delivered SVG/WEBP hashes are in `reviewed.json`
+and `reviewed-installed.json`. Remaining notes continue in Batches 106–107.
+
 | Cell | Subject | Replacement motif |
 |---|---|---|
 | 1 | Tańczące piły | TWO complete CIRCULAR SAW BLADES on TWO short stout articulated TOOL ARMS, sweeping opposite sides of ONE small central mechanical mounting block. Each blade is a plain disk with EIGHT large teeth and ONE large central hole. ONE broad curved sweep behind each blade. No entire robot, tracks, fine teeth, tiny bolts, blood or extra blade. |

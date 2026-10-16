@@ -1,0 +1,69 @@
+{
+  "date": "2026-10-17",
+  "batch": 104,
+  "pass": "browser-style-revisions",
+  "approvedSubjects": 4,
+  "remainingSubjects": 13,
+  "installed": [
+    {
+      "itemId": "style104-tanczace-pily",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-104/tanczace-pily.png",
+      "sourceSha256": "e5793be06916d7ab9212a65281e67a9959dc953fd46fb9323b2c4cd4063002fd",
+      "files": [
+        "icons/abilities/tanczace-pily.svg",
+        "icons/abilities/tanczace-pily.webp"
+      ],
+      "svgSha256": "31ccbcf0dfaaf256c09a7594f78c94e6368f590b4a0f3f70ee510ac38e685b55",
+      "webpSha256": "2df826fadf005713f3366e484fd66162437a1f44fc6b609ccb6b589187907760",
+      "retiredLegacyPng": {
+        "source": "icons/abilities/tanczace-pily.png",
+        "sha256": "91d050c4d126f4e09d754a5ecc50728e0d5b864fb127e841a435c07b0216d1fa",
+        "archive": "dev/icons/review/candidates/batch-104/raw/legacy/tanczace-pily.png"
+      }
+    },
+    {
+      "itemId": "style104-tylko-zwarcie",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-104/tylko-zwarcie.png",
+      "sourceSha256": "3366bbdd46851d4e2e0b69c2329d72555f02825a88d9bbd545a5a3ee595714d3",
+      "files": [
+        "icons/abilities/tylko-zwarcie.svg",
+        "icons/abilities/tylko-zwarcie.webp"
+      ],
+      "svgSha256": "62337b4338f1f9f33e4c406c34d8c0eee3e478c1517fbb59f1bb42664276abfb",
+      "webpSha256": "50bc0d1890f5a02b7b17c7ba5875260e01552a95e8fa105730d292f125110554",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "style104-wirujace-kiscienie",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-104/wirujace-kiscienie.png",
+      "sourceSha256": "b8b812933b7fc2894a41f617d053c292bd8ad33a7c22034f62aba5d68955ba7b",
+      "files": [
+        "icons/abilities/wirujace-kiscienie.svg",
+        "icons/abilities/wirujace-kiscienie.webp"
+      ],
+      "svgSha256": "1578ebad9f98bf41b5ccff853689a245b106c0ed347ddca2e21b68707dc0ae61",
+      "webpSha256": "8f6ccff51275a4a7fefb296b1a36602b0308417ec68e00b566b02e440b965f6b",
+      "retiredLegacyPng": {
+        "source": "icons/abilities/wirujace-kiscienie.png",
+        "sha256": "1adcd4fc37d6de9dc042f51e7720563c5cf3a768e7f94bb8f334c09190ae48f3",
+        "archive": "dev/icons/review/candidates/batch-104/raw/legacy/wirujace-kiscienie.png"
+      }
+    },
+    {
+      "itemId": "style104-wymagania",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-104/wymagania.png",
+      "sourceSha256": "734f9122610490b0e8be72ca606feedd17b29acc1e5fa9222ee53f3481115105",
+      "files": [
+        "icons/abilities/wymagania.svg",
+        "icons/abilities/wymagania.webp"
+      ],
+      "svgSha256": "31cc2d9895519346fdf083fb829b63ba22f8f6ffb85b612cd692d804f0823071",
+      "webpSha256": "86ebfbbb93156cb5ef724e68f232b54a85dda1085d1680389d017f8a833e4780",
+      "retiredLegacyPng": null
+    }
+  ]
+}
