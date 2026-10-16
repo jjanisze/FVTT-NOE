@@ -3475,10 +3475,10 @@
     },
     "style102-doktor-quinn": {
       "itemId": "style102-doktor-quinn",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Modify the angles so the positons of the hands imply bandaging someone else",
-      "updatedAt": "2026-10-16T22:30:53.202Z"
+      "decision": "pending",
+      "candidateId": "batch106-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T23:18:27.133Z"
     },
     "style102-fart": {
       "itemId": "style102-fart",
@@ -3517,24 +3517,24 @@
     },
     "style102-odporny": {
       "itemId": "style102-odporny",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Need to somehow indicate the water is poisoned/bad",
-      "updatedAt": "2026-10-16T22:31:59.736Z"
+      "decision": "pending",
+      "candidateId": "batch106-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T23:18:27.134Z"
     },
     "style102-patriota": {
       "itemId": "style102-patriota",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Change the flag to a confederate flag and refine the contours of the shoulder",
-      "updatedAt": "2026-10-16T22:32:21.937Z"
+      "decision": "pending",
+      "candidateId": "batch106-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T23:18:27.134Z"
     },
     "style103-prog-awarii": {
       "itemId": "style103-prog-awarii",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Add lines or sparks indicating an active/undergoing fault, remove the loose unreadable thing at the bottom left",
-      "updatedAt": "2026-10-16T22:33:10.492Z"
+      "decision": "pending",
+      "candidateId": "batch106-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T23:18:27.134Z"
     },
     "style103-przyspieszenie": {
       "itemId": "style103-przyspieszenie",
@@ -3559,17 +3559,17 @@
     },
     "style103-siodme-poty": {
       "itemId": "style103-siodme-poty",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "That's not how a gas pedal looks like from the side. It is not a hinge. Redraw to show a simplified version of an actual gas pedal.",
-      "updatedAt": "2026-10-16T22:34:02.261Z"
+      "decision": "pending",
+      "candidateId": "batch106-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T23:18:27.135Z"
     },
     "style103-skakun": {
       "itemId": "style103-skakun",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "The style is better, but the icon does not indicate movement",
-      "updatedAt": "2026-10-16T22:34:22.225Z"
+      "decision": "pending",
+      "candidateId": "batch106-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T23:18:27.135Z"
     },
     "style103-szara-eminencja": {
       "itemId": "style103-szara-eminencja",
@@ -3587,10 +3587,10 @@
     },
     "style103-taca-i-w-nogi": {
       "itemId": "style103-taca-i-w-nogi",
-      "decision": "reject",
-      "candidateId": "current",
-      "notes": "Try again, something between those two",
-      "updatedAt": "2026-10-16T22:35:03.986Z"
+      "decision": "pending",
+      "candidateId": "batch106-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T23:18:27.135Z"
     },
     "style104-tanczace-pily": {
       "itemId": "style104-tanczace-pily",
@@ -3601,17 +3601,17 @@
     },
     "style104-tryb-turbo": {
       "itemId": "style104-tryb-turbo",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Needs visual elements indicating TURBO/OVERDRIVE",
-      "updatedAt": "2026-10-16T22:35:31.735Z"
+      "decision": "pending",
+      "candidateId": "batch106-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T23:18:27.136Z"
     },
     "style104-twierdzenie-kata-prostego": {
       "itemId": "style104-twierdzenie-kata-prostego",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Somehow incorporate visually the geometric pun",
-      "updatedAt": "2026-10-16T22:35:52.233Z"
+      "decision": "pending",
+      "candidateId": "batch106-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T23:18:27.136Z"
     },
     "style104-tylko-zwarcie": {
       "itemId": "style104-tylko-zwarcie",
@@ -3622,17 +3622,17 @@
     },
     "style104-wierze": {
       "itemId": "style104-wierze",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Style is better, but doesn't communicate idea well. Try a different idea.",
-      "updatedAt": "2026-10-16T22:36:36.830Z"
+      "decision": "pending",
+      "candidateId": "batch107-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T23:18:27.153Z"
     },
     "style104-wielonozny": {
       "itemId": "style104-wielonozny",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "The legs should connect to the hilly terrain, indicating the robot can move over it gracefully, not just exist over it.",
-      "updatedAt": "2026-10-16T22:37:14.507Z"
+      "decision": "pending",
+      "candidateId": "batch107-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T23:18:27.154Z"
     },
     "style104-wirujace-kiscienie": {
       "itemId": "style104-wirujace-kiscienie",
@@ -3643,10 +3643,10 @@
     },
     "style104-wrazliwosc-na-swiatlo": {
       "itemId": "style104-wrazliwosc-na-swiatlo",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Better style, but the rodent's legs are facing opposite directions. Decide on a direction the lower body is facing.",
-      "updatedAt": "2026-10-16T22:37:44.660Z"
+      "decision": "pending",
+      "candidateId": "batch107-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T23:18:27.154Z"
     },
     "style104-wymagania": {
       "itemId": "style104-wymagania",
@@ -3664,10 +3664,10 @@
     },
     "style105-zawziety-sukinkot": {
       "itemId": "style105-zawziety-sukinkot",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Add the arrow back",
-      "updatedAt": "2026-10-16T22:38:03.662Z"
+      "decision": "pending",
+      "candidateId": "batch107-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T23:18:27.154Z"
     }
   }
 }

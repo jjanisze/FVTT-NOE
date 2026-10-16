@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Style review · 16 approved replacements delivered; 13 awaiting revision",
+  "title": "Batches 106 + 107 · 13 style revisions awaiting GM review",
   "updated": "2026-10-17",
   "items": [
     {
@@ -13788,8 +13788,8 @@
     {
       "id": "style102-doktor-quinn",
       "name": "Doktor Quinn",
-      "tier": "Batch 102 · Style review",
-      "batch": 102,
+      "tier": "Batch 106 · Style revision",
+      "batch": 106,
       "target": "icons/abilities/doktor-quinn.svg",
       "deliveryTargets": [
         {
@@ -13799,7 +13799,7 @@
         }
       ],
       "context": "Ability: Doktor Quinn. Medical training improves treatment checks. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
-      "request": "ONE complete bare adult HAND wraps ONE broad clean BANDAGE around ONE intact forearm. A short loose bandage roll remains visible beside the wrist. Natural anatomy, broad overlapping cloth strips with just TWO black dividing cuts. Medical care without a portrait, needles, blood, tiny fingers or fabric texture.",
+      "request": "REVISION cell 1. Make it unmistakable that a caregiver is BANDAGING SOMEONE ELSE. The PATIENT'S forearm enters HORIZONTALLY FROM THE RIGHT, ending in ONE complete relaxed hand pointing LEFT. TWO caregiver hands enter FROM THE LEFT: the LOWER hand supports the patient's wrist from below, and the UPPER hand wraps ONE broad bandage around that wrist. Exactly THREE natural complete hands from TWO people, three distinct forearms, broad black gaps and only two broad bandage strip cuts. Opposing entry directions, no self-bandaging, face, person portrait, thin fingers, extra digit or blood.",
       "styleReview": {
         "iconId": "abilities/doktor-quinn",
         "status": "redo",
@@ -13817,6 +13817,12 @@
         "note": "Existing shipped art flagged for style revision: detail, dither"
       },
       "candidates": [
+        {
+          "id": "batch106-revision",
+          "label": "Batch 106 · revised Doktor Quinn",
+          "src": "candidates/batch-106/doktor-quinn.png",
+          "note": "REVISION cell 1. Make it unmistakable that a caregiver is BANDAGING SOMEONE ELSE. The PATIENT'S forearm enters HORIZONTALLY FROM THE RIGHT, ending in ONE complete relaxed hand pointing LEFT. TWO caregiver hands enter FROM THE LEFT: the LOWER hand supports the patient's wrist from below, and the UPPER hand wraps ONE broad bandage around that wrist. Exactly THREE natural complete hands from TWO people, three distinct forearms, broad black gaps and only two broad bandage strip cuts. Opposing entry directions, no self-bandaging, face, person portrait, thin fingers, extra digit or blood."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 102 · Doktor Quinn",
@@ -14033,8 +14039,8 @@
     {
       "id": "style102-odporny",
       "name": "Odporny",
-      "tier": "Batch 102 · Style review",
-      "batch": 102,
+      "tier": "Batch 106 · Style revision",
+      "batch": 106,
       "target": "icons/abilities/odporny.svg",
       "deliveryTargets": [
         {
@@ -14044,7 +14050,7 @@
         }
       ],
       "context": "Ability: Odporny. A hardy horse tolerates polluted water and poor feed. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
-      "request": "ONE natural HORSE HEAD and neck in simple side profile, muzzle lowered toward ONE small water bowl. One broad black mane separation and ONE small eye cut only. Two broad concentric water arcs in the bowl. No human, bridle fittings, hair strands, bubbles, mushrooms, textured fur or skull.",
+      "request": "REVISION cell 2. Preserve the calm natural horse head drinking from the bowl. Make the water visibly BAD by placing ONE large clear BLACK POISON SKULL-AND-CROSSBONES mark on the WHITE FRONT of an enlarged WATER BOWL. Two broad simple wavy fume strokes rise just beside the water, separate from the horse's muzzle. Skull has only two large eye openings and crossed broad bones, sober warning-label shape. Horse remains healthy and calm despite the contaminated water. No fine mane, tiny bubbles, human, writing, label border or gore.",
       "styleReview": {
         "iconId": "abilities/odporny",
         "status": "redo",
@@ -14062,6 +14068,12 @@
       },
       "candidates": [
         {
+          "id": "batch106-revision",
+          "label": "Batch 106 · revised Odporny",
+          "src": "candidates/batch-106/odporny.png",
+          "note": "REVISION cell 2. Preserve the calm natural horse head drinking from the bowl. Make the water visibly BAD by placing ONE large clear BLACK POISON SKULL-AND-CROSSBONES mark on the WHITE FRONT of an enlarged WATER BOWL. Two broad simple wavy fume strokes rise just beside the water, separate from the horse's muzzle. Skull has only two large eye openings and crossed broad bones, sober warning-label shape. Horse remains healthy and calm despite the contaminated water. No fine mane, tiny bubbles, human, writing, label border or gore."
+        },
+        {
           "id": "atlas-a",
           "label": "Batch 102 · Odporny",
           "src": "candidates/batch-102/odporny.png",
@@ -14072,8 +14084,8 @@
     {
       "id": "style102-patriota",
       "name": "Patriota",
-      "tier": "Batch 102 · Style review",
-      "batch": 102,
+      "tier": "Batch 106 · Style revision",
+      "batch": 106,
       "target": "icons/abilities/patriota.svg",
       "deliveryTargets": [
         {
@@ -14083,7 +14095,7 @@
         }
       ],
       "context": "Ability: Patriota. Pride in one's origin grants additional training. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
-      "request": "ONE complete bare adult HAND presses flat over ONE large plain CLOTH PATCH attached to a simple shoulder-shaped panel. The patch is a broad blank rectangle with ONE large diagonal black stripe. Natural hand with grouped fingers and one separate thumb. No face, flag of any real nation, insignia, text, stitching or game token.",
+      "request": "REVISION cell 3. Keep the hand-over-shoulder PATCH motif, but REDRAW THE SHOULDER as one clean natural curved shoulder and upper arm, with a coherent uninterrupted outside contour. The cloth patch is a recognizable monochrome CONFEDERATE BATTLE FLAG: a rectangular field with a broad diagonal SALTIRE CROSS bearing simple FIVE-POINTED STARS. Enlarge the patch so its crossed diagonals and stars read clearly, use only broad black and white shapes, no fine stitching or texture. One complete natural bare hand lies across the edge of the patch without hiding its identity. No face, real person, slogans, lettering, extra insignia or decorative rays.",
       "styleReview": {
         "iconId": "abilities/patriota",
         "status": "redo",
@@ -14101,6 +14113,12 @@
       },
       "candidates": [
         {
+          "id": "batch106-revision",
+          "label": "Batch 106 · revised Patriota",
+          "src": "candidates/batch-106/patriota.png",
+          "note": "REVISION cell 3. Keep the hand-over-shoulder PATCH motif, but REDRAW THE SHOULDER as one clean natural curved shoulder and upper arm, with a coherent uninterrupted outside contour. The cloth patch is a recognizable monochrome CONFEDERATE BATTLE FLAG: a rectangular field with a broad diagonal SALTIRE CROSS bearing simple FIVE-POINTED STARS. Enlarge the patch so its crossed diagonals and stars read clearly, use only broad black and white shapes, no fine stitching or texture. One complete natural bare hand lies across the edge of the patch without hiding its identity. No face, real person, slogans, lettering, extra insignia or decorative rays."
+        },
+        {
           "id": "atlas-a",
           "label": "Batch 102 · Patriota",
           "src": "candidates/batch-102/patriota.png",
@@ -14111,8 +14129,8 @@
     {
       "id": "style103-prog-awarii",
       "name": "Próg awarii",
-      "tier": "Batch 103 · Style review",
-      "batch": 103,
+      "tier": "Batch 106 · Style revision",
+      "batch": 106,
       "target": "icons/abilities/prog-awarii.svg",
       "deliveryTargets": [
         {
@@ -14122,7 +14140,7 @@
         }
       ],
       "context": "Ability: Próg awarii. A machine malfunctions after enough accumulated damage. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
-      "request": "ONE squat industrial MOTOR HOUSING split by ONE broad zigzag BLACK CRACK, with ONE large loose bolt lying below. Thick simple casing, two broad cooling-slot cuts, no gauge, scale, numeral, little wires, smoke, debris cloud or fine damage texture.",
+      "request": "REVISION cell 4. Keep ONE coherent industrial motor housing split by ONE broad black zigzag crack. REMOVE the entire loose nut/bolt object at bottom-left. Show an ACTIVE ELECTRICAL FAULT with THREE short broad white ZIGZAG SPARK STROKES emerging from the crack, separated by black gaps. Strong simple motor outline, two broad cooling cuts only. No gauge, numeral, loose part, debris, tiny spark cloud, texture or shading.",
       "styleReview": {
         "iconId": "abilities/prog-awarii",
         "status": "redo",
@@ -14139,6 +14157,12 @@
         "note": "Existing shipped art flagged for style revision: detail"
       },
       "candidates": [
+        {
+          "id": "batch106-revision",
+          "label": "Batch 106 · revised Próg awarii",
+          "src": "candidates/batch-106/prog-awarii.png",
+          "note": "REVISION cell 4. Keep ONE coherent industrial motor housing split by ONE broad black zigzag crack. REMOVE the entire loose nut/bolt object at bottom-left. Show an ACTIVE ELECTRICAL FAULT with THREE short broad white ZIGZAG SPARK STROKES emerging from the crack, separated by black gaps. Strong simple motor outline, two broad cooling cuts only. No gauge, numeral, loose part, debris, tiny spark cloud, texture or shading."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 103 · Próg awarii",
@@ -14270,8 +14294,8 @@
     {
       "id": "style103-siodme-poty",
       "name": "Siódme poty",
-      "tier": "Batch 103 · Style review",
-      "batch": 103,
+      "tier": "Batch 106 · Style revision",
+      "batch": 106,
       "target": "icons/abilities/siodme-poty.svg",
       "deliveryTargets": [
         {
@@ -14281,7 +14305,7 @@
         }
       ],
       "context": "Ability: Siódme poty. Skilled driving pushes a vehicle to greater speed. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
-      "request": "ONE complete rugged GAS PEDAL being pressed by ONE sturdy complete BOOT, in simple side profile, with TWO broad short speed strokes behind the heel. Thick sole, simple pedal hinge and base, one broad tread cut only. No steering wheel, hands, sweat drops, fine laces, numeral or gauge.",
+      "request": "REVISION cell 5. Replace the floor hinge with a recognizable TOP-HUNG CAR ACCELERATOR in SIDE VIEW. A narrow near-VERTICAL RUBBER PEDAL PAD hangs at the RIGHT on ONE slender CURVED METAL LEVER that rises BEHIND the pad into a small FIXED MOUNT ABOVE it, as beneath a dashboard. ONE complete sturdy boot rests its HEEL ON THE FLOOR at lower-left and presses the pad with its TOE at the RIGHT. Heel stays down; toe points forward and slightly up. One short floor line, thick sole, one broad tread cut, simple hanging lever. No hinge at floor level, seesaw, lever beneath the sole, round floor pivot, fine laces, gauge, writing or extra foot.",
       "styleReview": {
         "iconId": "abilities/siodme-poty",
         "status": "redo",
@@ -14300,6 +14324,12 @@
       },
       "candidates": [
         {
+          "id": "batch106-revision",
+          "label": "Batch 106 · revised Siódme poty",
+          "src": "candidates/batch-106/siodme-poty.png",
+          "note": "REVISION cell 5. Replace the floor hinge with a recognizable TOP-HUNG CAR ACCELERATOR in SIDE VIEW. A narrow near-VERTICAL RUBBER PEDAL PAD hangs at the RIGHT on ONE slender CURVED METAL LEVER that rises BEHIND the pad into a small FIXED MOUNT ABOVE it, as beneath a dashboard. ONE complete sturdy boot rests its HEEL ON THE FLOOR at lower-left and presses the pad with its TOE at the RIGHT. Heel stays down; toe points forward and slightly up. One short floor line, thick sole, one broad tread cut, simple hanging lever. No hinge at floor level, seesaw, lever beneath the sole, round floor pivot, fine laces, gauge, writing or extra foot."
+        },
+        {
           "id": "atlas-a",
           "label": "Batch 103 · Siódme poty",
           "src": "candidates/batch-103/siodme-poty.png",
@@ -14310,8 +14340,8 @@
     {
       "id": "style103-skakun",
       "name": "Skakun",
-      "tier": "Batch 103 · Style review",
-      "batch": 103,
+      "tier": "Batch 106 · Style revision",
+      "batch": 106,
       "target": "icons/abilities/skakun.svg",
       "deliveryTargets": [
         {
@@ -14321,7 +14351,7 @@
         }
       ],
       "context": "Ability: Skakun. A giant spider makes a powerful long leap. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
-      "request": "ONE SPIDER in a clear sideways LEAP over ONE low rock: ONE oval abdomen, one smaller connected cephalothorax, EIGHT thick complete bent legs and two short fangs. Four legs visible on each side, natural spider anatomy. One broad short launch streak behind it. No hair, tiny eyes, intricate joints or extra legs.",
+      "request": "REVISION cell 6. Preserve the broad sober EIGHT-LEGGED SPIDER, four complete legs on each side, but make its LEAP unmistakable. Tilt the whole spider diagonally UPWARD-RIGHT, place it above and ahead of ONE low rock at BOTTOM-LEFT, with a clear large black AIR GAP between spider and rock. ONE bold broad CURVED LEAP ARROW rises from the rock behind the abdomen toward the spider's upper-right direction, with a clear single arrowhead and no contact with the legs. Body stays coherent: one abdomen connected to one smaller front body, eight broad complete legs and two short fangs. No extra leg, fur, fine eyes, thin motion marks, letters or cartoon face.",
       "styleReview": {
         "iconId": "abilities/skakun",
         "status": "redo",
@@ -14338,6 +14368,12 @@
         "note": "Existing shipped art flagged for style revision: detail"
       },
       "candidates": [
+        {
+          "id": "batch106-revision",
+          "label": "Batch 106 · revised Skakun",
+          "src": "candidates/batch-106/skakun.png",
+          "note": "REVISION cell 6. Preserve the broad sober EIGHT-LEGGED SPIDER, four complete legs on each side, but make its LEAP unmistakable. Tilt the whole spider diagonally UPWARD-RIGHT, place it above and ahead of ONE low rock at BOTTOM-LEFT, with a clear large black AIR GAP between spider and rock. ONE bold broad CURVED LEAP ARROW rises from the rock behind the abdomen toward the spider's upper-right direction, with a clear single arrowhead and no contact with the legs. Body stays coherent: one abdomen connected to one smaller front body, eight broad complete legs and two short fangs. No extra leg, fur, fine eyes, thin motion marks, letters or cartoon face."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 103 · Skakun",
@@ -14429,8 +14465,8 @@
     {
       "id": "style103-taca-i-w-nogi",
       "name": "Tacą i w nogi",
-      "tier": "Batch 103 · Style review",
-      "batch": 103,
+      "tier": "Batch 106 · Style revision",
+      "batch": 106,
       "target": "icons/abilities/taca-i-w-nogi.svg",
       "deliveryTargets": [
         {
@@ -14440,7 +14476,7 @@
         }
       ],
       "context": "Ability: Tacą i w nogi. A waiter strikes with a tray then escapes quickly. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
-      "request": "ONE complete generic adult in a compact running pose carries ONE broad SERVING TRAY raised upright at the leading hand like a shield. Natural complete arms and legs, smooth featureless head, plain shirt and trousers. TWO short broad speed strokes behind the back foot. No victim, face, beard, apron detail, crockery, text or gore.",
+      "request": "REVISION cell 7. Find a MIDDLE GROUND between the detailed original and the overly generic running pictogram in the extra comparison reference. ONE ordinary generic ADULT WAITER in a plain shirt, trousers and a short tied APRON turns and runs RIGHT while extending the rear arm LEFT to strike or parry with ONE upright broad SERVING TRAY. ONE incoming opponent FOREARM reaches from far LEFT toward the tray; show one broad contact wedge where they meet. Natural full-body running pose, complete limbs, smooth ordinary head with one simple short hair shape and no facial detail. Three broad clothing folds at most, two broad speed strokes behind the trailing foot. Clear attack-and-escape action, no gruff portrait, beard, anime, texture, fine wrinkles, whole second person, crockery, lettering or gore.",
       "styleReview": {
         "iconId": "abilities/taca-i-w-nogi",
         "status": "redo",
@@ -14457,6 +14493,12 @@
         "note": "Existing shipped art flagged for style revision: detail"
       },
       "candidates": [
+        {
+          "id": "batch106-revision",
+          "label": "Batch 106 · revised Tacą i w nogi",
+          "src": "candidates/batch-106/taca-i-w-nogi.png",
+          "note": "REVISION cell 7. Find a MIDDLE GROUND between the detailed original and the overly generic running pictogram in the extra comparison reference. ONE ordinary generic ADULT WAITER in a plain shirt, trousers and a short tied APRON turns and runs RIGHT while extending the rear arm LEFT to strike or parry with ONE upright broad SERVING TRAY. ONE incoming opponent FOREARM reaches from far LEFT toward the tray; show one broad contact wedge where they meet. Natural full-body running pose, complete limbs, smooth ordinary head with one simple short hair shape and no facial detail. Three broad clothing folds at most, two broad speed strokes behind the trailing foot. Clear attack-and-escape action, no gruff portrait, beard, anime, texture, fine wrinkles, whole second person, crockery, lettering or gore."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 103 · Tacą i w nogi",
@@ -14508,8 +14550,8 @@
     {
       "id": "style104-tryb-turbo",
       "name": "Tryb Turbo",
-      "tier": "Batch 104 · Style review",
-      "batch": 104,
+      "tier": "Batch 106 · Style revision",
+      "batch": 106,
       "target": "icons/abilities/tryb-turbo.svg",
       "deliveryTargets": [
         {
@@ -14519,7 +14561,7 @@
         }
       ],
       "context": "Ability: Tryb Turbo. A multi-legged combat machine temporarily moves and strikes faster. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
-      "request": "ONE compact SIX-LEGGED INDUSTRIAL WALKER in three-quarter side view, moving forward with TWO broad speed strokes behind it. One plain rectangular body, SIX stout legs each with ONE simple elbow and ONE complete broad foot, three legs on each side. One broad side panel cut. No gun, smoke plume, microdetail, cables, people or text.",
+      "request": "REVISION cell 8. Retain the compact multi-legged industrial walker but make OVERDRIVE visible: ONE large black LIGHTNING BOLT cut into the broad white BODY PANEL, ONE strong short white EXHAUST FLAME blasting BACKWARD-LEFT from a small rear exhaust port, and TWO broad straight SPEED STROKES behind the machine. Clear intact broad articulated legs and feet, body moving RIGHT. The flame has one broad base and two blunt tongues, no little sparks or smoke cloud. No gun, cables, fine vents, tiny bolts, labels, numeral or extra vehicle.",
       "styleReview": {
         "iconId": "abilities/tryb-turbo",
         "status": "redo",
@@ -14537,6 +14579,12 @@
       },
       "candidates": [
         {
+          "id": "batch106-revision",
+          "label": "Batch 106 · revised Tryb Turbo",
+          "src": "candidates/batch-106/tryb-turbo.png",
+          "note": "REVISION cell 8. Retain the compact multi-legged industrial walker but make OVERDRIVE visible: ONE large black LIGHTNING BOLT cut into the broad white BODY PANEL, ONE strong short white EXHAUST FLAME blasting BACKWARD-LEFT from a small rear exhaust port, and TWO broad straight SPEED STROKES behind the machine. Clear intact broad articulated legs and feet, body moving RIGHT. The flame has one broad base and two blunt tongues, no little sparks or smoke cloud. No gun, cables, fine vents, tiny bolts, labels, numeral or extra vehicle."
+        },
+        {
           "id": "atlas-a",
           "label": "Batch 104 · Tryb Turbo",
           "src": "candidates/batch-104/tryb-turbo.png",
@@ -14547,8 +14595,8 @@
     {
       "id": "style104-twierdzenie-kata-prostego",
       "name": "Twierdzenie Kąta Prostego",
-      "tier": "Batch 104 · Style review",
-      "batch": 104,
+      "tier": "Batch 106 · Style revision",
+      "batch": 106,
       "target": "icons/abilities/twierdzenie-kata-prostego.svg",
       "deliveryTargets": [
         {
@@ -14558,7 +14606,7 @@
         }
       ],
       "context": "Ability: Twierdzenie Kąta Prostego. A timely melee interception halts an approaching enemy. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
-      "request": "ONE plain generic adult GUARD at LEFT braces and thrusts ONE short broad BATON horizontally toward the upper torso of ONE approaching generic adult at RIGHT. The approaching figure visibly STOPS, leaning back with one foot firmly planted and palms raised. Exactly two complete natural adult silhouettes, featureless heads and broad black separation. Clear melee interception; no geometric wall, right-angle symbol, diagram, arrow, blood or tiny details.",
+      "request": "REVISION cell 9. Retain the two plain generic adults in a clear MELEE INTERCEPTION: guard at LEFT stops the approaching person at RIGHT with a short horizontal baton. Add the GEOMETRIC PUN as ONE LARGE CLEAN RIGHT-ANGLE L SHAPE just ABOVE the guard's baton arm, with ONE broad inset SQUARE CORNER MARK inside the ninety-degree angle. Two thick perpendicular white strokes, unmistakably a RIGHT ANGLE, no letters or measurements. The guard's braced pose and planted foot align with this L-shaped motif, while the other figure leans back and stops with raised palms. Complete natural adult silhouettes and broad black gaps. No triangle, complex wall, fine geometry diagram, gruff faces, texture, blood or gore.",
       "styleReview": {
         "iconId": "abilities/twierdzenie-kata-prostego",
         "status": "redo",
@@ -14576,6 +14624,12 @@
         "note": "Existing shipped art flagged for style revision: detail, other. Unclear graphical intent."
       },
       "candidates": [
+        {
+          "id": "batch106-revision",
+          "label": "Batch 106 · revised Twierdzenie Kąta Prostego",
+          "src": "candidates/batch-106/twierdzenie-kata-prostego.png",
+          "note": "REVISION cell 9. Retain the two plain generic adults in a clear MELEE INTERCEPTION: guard at LEFT stops the approaching person at RIGHT with a short horizontal baton. Add the GEOMETRIC PUN as ONE LARGE CLEAN RIGHT-ANGLE L SHAPE just ABOVE the guard's baton arm, with ONE broad inset SQUARE CORNER MARK inside the ninety-degree angle. Two thick perpendicular white strokes, unmistakably a RIGHT ANGLE, no letters or measurements. The guard's braced pose and planted foot align with this L-shaped motif, while the other figure leans back and stops with raised palms. Complete natural adult silhouettes and broad black gaps. No triangle, complex wall, fine geometry diagram, gruff faces, texture, blood or gore."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 104 · Twierdzenie Kąta Prostego",
@@ -14627,8 +14681,8 @@
     {
       "id": "style104-wierze",
       "name": "Wierzę",
-      "tier": "Batch 104 · Style review",
-      "batch": 104,
+      "tier": "Batch 107 · Style revision",
+      "batch": 107,
       "target": "icons/abilities/wierze.svg",
       "deliveryTargets": [
         {
@@ -14638,7 +14692,7 @@
         }
       ],
       "context": "Ability: Wierzę. A small everyday object unexpectedly becomes available. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
-      "request": "ONE complete open adult PALM holds ONE small sturdy plain KEY and ONE short lit CANDLE stands beside the wrist. Key has a broad rounded bow, short shaft and TWO broad teeth. Candle has one simple steady flame. Quiet hopeful discovery, not magic. No person, face, thought bubble, rays, particles, game token, text or fine wick.",
+      "request": "REPLACE cell 1's candle-and-hand idea. Show an ordinary useful object being IMAGINED INTO EXISTENCE: ONE plain generic adult HEAD in SIDE PROFILE at LEFT; ONE broad THOUGHT BUBBLE above-right containing ONE large simple KEY; and ONE complete open PALM below-right holding the SAME simple KEY now tangible. Two large round thought dots connect head and thought bubble. Both keys have one broad round bow, one short thick shaft and two broad teeth. Head is a smooth natural featureless profile with no portrait, beard or hair detail. Compact clear thought-to-real-object composition with broad black separation. No candle, prayer, religious symbol, glitter, tiny rays, magical runes, lettering, numbers or game token.",
       "styleReview": {
         "iconId": "abilities/wierze",
         "status": "redo",
@@ -14656,6 +14710,12 @@
       },
       "candidates": [
         {
+          "id": "batch107-revision",
+          "label": "Batch 107 · revised Wierzę",
+          "src": "candidates/batch-107/wierze.png",
+          "note": "REPLACE cell 1's candle-and-hand idea. Show an ordinary useful object being IMAGINED INTO EXISTENCE: ONE plain generic adult HEAD in SIDE PROFILE at LEFT; ONE broad THOUGHT BUBBLE above-right containing ONE large simple KEY; and ONE complete open PALM below-right holding the SAME simple KEY now tangible. Two large round thought dots connect head and thought bubble. Both keys have one broad round bow, one short thick shaft and two broad teeth. Head is a smooth natural featureless profile with no portrait, beard or hair detail. Compact clear thought-to-real-object composition with broad black separation. No candle, prayer, religious symbol, glitter, tiny rays, magical runes, lettering, numbers or game token."
+        },
+        {
           "id": "atlas-a",
           "label": "Batch 104 · Wierzę",
           "src": "candidates/batch-104/wierze.png",
@@ -14666,8 +14726,8 @@
     {
       "id": "style104-wielonozny",
       "name": "Wielonożny",
-      "tier": "Batch 104 · Style review",
-      "batch": 104,
+      "tier": "Batch 107 · Style revision",
+      "batch": 107,
       "target": "icons/abilities/wielonozny.svg",
       "deliveryTargets": [
         {
@@ -14677,7 +14737,7 @@
         }
       ],
       "context": "Ability: Wielonożny. A multi-legged machine moves across difficult ground. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
-      "request": "ONE simple rectangular INDUSTRIAL WALKER BODY on SIX broad articulated LEGS steps over TWO low jagged ROCKS. Three legs on each side, each with one thick elbow and a complete broad foot, all feet visible and clear of rocks. One broad side panel cut. No guns, smoke, bolts, cables, rubble pile, thin joints or extra legs.",
+      "request": "REVISION cell 2. Keep the broad industrial walker body LEVEL while its articulated legs GRACEFULLY FOLLOW ONE CONTINUOUS HILLY GROUND RIDGE at the bottom. The visible feet REST DIRECTLY ON THE TERRAIN at DIFFERENT HEIGHTS: front foot on a higher crest, middle foot in a lower valley, rear foot on a lower ledge. Each supporting foot's sole touches its own actual ground surface with NO BLACK AIR GAP underneath. One front leg can be lifted mid-step over the next crest; the other feet visibly support the machine. Broad coherent connected legs, simple large joints, complete feet. Terrain is one smooth angular hill ridge, not disconnected rocks below a hovering robot. No gun, fine rubble, bolts, smoke, writing or extra machine.",
       "styleReview": {
         "iconId": "abilities/wielonozny",
         "status": "redo",
@@ -14695,6 +14755,12 @@
         "note": "Existing shipped art flagged for style revision: detail, dither"
       },
       "candidates": [
+        {
+          "id": "batch107-revision",
+          "label": "Batch 107 · revised Wielonożny",
+          "src": "candidates/batch-107/wielonozny.png",
+          "note": "REVISION cell 2. Keep the broad industrial walker body LEVEL while its articulated legs GRACEFULLY FOLLOW ONE CONTINUOUS HILLY GROUND RIDGE at the bottom. The visible feet REST DIRECTLY ON THE TERRAIN at DIFFERENT HEIGHTS: front foot on a higher crest, middle foot in a lower valley, rear foot on a lower ledge. Each supporting foot's sole touches its own actual ground surface with NO BLACK AIR GAP underneath. One front leg can be lifted mid-step over the next crest; the other feet visibly support the machine. Broad coherent connected legs, simple large joints, complete feet. Terrain is one smooth angular hill ridge, not disconnected rocks below a hovering robot. No gun, fine rubble, bolts, smoke, writing or extra machine."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 104 · Wielonożny",
@@ -14746,8 +14812,8 @@
     {
       "id": "style104-wrazliwosc-na-swiatlo",
       "name": "Wrażliwość na światło",
-      "tier": "Batch 104 · Style review",
-      "batch": 104,
+      "tier": "Batch 107 · Style revision",
+      "batch": 107,
       "target": "icons/abilities/wrazliwosc-na-swiatlo.svg",
       "deliveryTargets": [
         {
@@ -14757,7 +14823,7 @@
         }
       ],
       "context": "Ability: Wrażliwość na światło. A large rat recoils from strong light. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
-      "request": "ONE natural RAT in simple side profile recoils from ONE plain FLASHLIGHT at RIGHT. The rat crouches low, one forepaw covering its eye, ears folded back; complete body and ONE long curved tail. The light is ONE broad clean cone separated from the rat. No facial expression, fur texture, teeth, tiny whiskers or cartoon anatomy.",
+      "request": "REVISION cell 3. Retain the natural rat recoiling from the flashlight at RIGHT, but REDRAW ITS WHOLE BODY IN ONE COHERENT SIDE VIEW FACING RIGHT. Head and shoulders at RIGHT, rump at LEFT, ONE tail curling out of the rump to the LEFT. BOTH HIND FEET under the rump point their TOES TO THE RIGHT in parallel; both knees bend coherently in the same side-view anatomy. Forepaws at the FRONT-RIGHT rise to shield the eye from the flashlight cone coming from RIGHT. Natural crouched rat, one large ear, smooth broad silhouette, no leg pointing backward, twisted hips, human expression, fur texture, extra limb, fine whiskers or lettering.",
       "styleReview": {
         "iconId": "abilities/wrazliwosc-na-swiatlo",
         "status": "redo",
@@ -14775,6 +14841,12 @@
         "note": "Existing shipped art flagged for style revision: detail, dither"
       },
       "candidates": [
+        {
+          "id": "batch107-revision",
+          "label": "Batch 107 · revised Wrażliwość na światło",
+          "src": "candidates/batch-107/wrazliwosc-na-swiatlo.png",
+          "note": "REVISION cell 3. Retain the natural rat recoiling from the flashlight at RIGHT, but REDRAW ITS WHOLE BODY IN ONE COHERENT SIDE VIEW FACING RIGHT. Head and shoulders at RIGHT, rump at LEFT, ONE tail curling out of the rump to the LEFT. BOTH HIND FEET under the rump point their TOES TO THE RIGHT in parallel; both knees bend coherently in the same side-view anatomy. Forepaws at the FRONT-RIGHT rise to shield the eye from the flashlight cone coming from RIGHT. Natural crouched rat, one large ear, smooth broad silhouette, no leg pointing backward, twisted hips, human expression, fur texture, extra limb, fine whiskers or lettering."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 104 · Wrażliwość na światło",
@@ -14867,8 +14939,8 @@
     {
       "id": "style105-zawziety-sukinkot",
       "name": "Zawzięty sukinkot",
-      "tier": "Batch 105 · Style review",
-      "batch": 105,
+      "tier": "Batch 107 · Style revision",
+      "batch": 107,
       "target": "icons/abilities/zawziety-sukinkot.svg",
       "deliveryTargets": [
         {
@@ -14878,7 +14950,7 @@
         }
       ],
       "context": "Ability: Zawzięty sukinkot. A fallen person gets back up despite severe injury. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
-      "request": "ONE complete generic adult rises from ONE knee: one boot planted, one knee still touching the ground, ONE palm braced on the ground and the other hand pressing the planted thigh. Smooth featureless head, natural ordinary build, broad simple clothing. A determined rising pose without an arrow. No beard portrait, injuries, blood, torn fine fabric, texture or extra limb.",
+      "request": "REVISION cell 4. Preserve the exact generic adult rising from one knee: one planted boot, one knee on ground, one palm braced on ground and other hand on thigh. ADD ONE LARGE BOLD UPWARD ARROW behind and slightly LEFT of the upper back, rising vertically from shoulder height toward the top of the cell. The arrow has one broad straight shaft and one clear triangular arrowhead. Keep a broad black gap so it does not merge with the head or shoulder. Same natural complete anatomy and broad sparse clothing cuts. No beard, face detail, injury, gore, texture, tiny debris, second arrow or extra limb.",
       "styleReview": {
         "iconId": "abilities/zawziety-sukinkot",
         "status": "redo",
@@ -14896,6 +14968,12 @@
         "note": "Existing shipped art flagged for style revision: detail, dither"
       },
       "candidates": [
+        {
+          "id": "batch107-revision",
+          "label": "Batch 107 · revised Zawzięty sukinkot",
+          "src": "candidates/batch-107/zawziety-sukinkot.png",
+          "note": "REVISION cell 4. Preserve the exact generic adult rising from one knee: one planted boot, one knee on ground, one palm braced on ground and other hand on thigh. ADD ONE LARGE BOLD UPWARD ARROW behind and slightly LEFT of the upper back, rising vertically from shoulder height toward the top of the cell. The arrow has one broad straight shaft and one clear triangular arrowhead. Keep a broad black gap so it does not merge with the head or shoulder. Same natural complete anatomy and broad sparse clothing cuts. No beard, face detail, injury, gore, texture, tiny debris, second arrow or extra limb."
+        },
         {
           "id": "atlas-a",
           "label": "Batch 105 · Zawzięty sukinkot",

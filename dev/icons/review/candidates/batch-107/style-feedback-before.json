@@ -1,0 +1,49 @@
+{
+  "abilities/wierze": {
+    "iconId": "abilities/wierze",
+    "status": "redo",
+    "source": "icons/abilities/wierze.svg",
+    "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:11:24.996Z"
+  },
+  "abilities/wielonozny": {
+    "iconId": "abilities/wielonozny",
+    "status": "redo",
+    "source": "icons/abilities/wielonozny.svg",
+    "sourceSha256": "588eb40f2878962ff870a67c4cbeb761ac8b899f2cf5e708280ac8898f64d27d",
+    "reasons": [
+      "detail",
+      "dither"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:11:33.403Z"
+  },
+  "abilities/wrazliwosc-na-swiatlo": {
+    "iconId": "abilities/wrazliwosc-na-swiatlo",
+    "status": "redo",
+    "source": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+    "sourceSha256": "e48c8aedc3ef8941ac486c2ea64f2d97499f31242ba40d030be30898431e65a7",
+    "reasons": [
+      "detail",
+      "dither"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:11:46.135Z"
+  },
+  "abilities/zawziety-sukinkot": {
+    "iconId": "abilities/zawziety-sukinkot",
+    "status": "redo",
+    "source": "icons/abilities/zawziety-sukinkot.svg",
+    "sourceSha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3",
+    "reasons": [
+      "detail",
+      "dither"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:12:20.232Z"
+  }
+}

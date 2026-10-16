@@ -1,0 +1,88 @@
+{
+  "date": "2026-10-17",
+  "batch": 107,
+  "productionFiles": [
+    {
+      "source": "icons/abilities/wierze.svg",
+      "sha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c"
+    },
+    {
+      "source": "icons/abilities/wierze.webp",
+      "sha256": "5f958a3a42194d1895931d5ef430f3f434b3675c40bb3f8a9e5decbd8333ba61"
+    },
+    {
+      "source": "icons/abilities/wielonozny.svg",
+      "sha256": "588eb40f2878962ff870a67c4cbeb761ac8b899f2cf5e708280ac8898f64d27d"
+    },
+    {
+      "source": "icons/abilities/wielonozny.png",
+      "sha256": "c2d2a8dffca7d4df0045d083c00421819da33d6fd176e48713d2e2162a32e576"
+    },
+    {
+      "source": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+      "sha256": "e48c8aedc3ef8941ac486c2ea64f2d97499f31242ba40d030be30898431e65a7"
+    },
+    {
+      "source": "icons/abilities/wrazliwosc-na-swiatlo.webp",
+      "sha256": "b4edcea7ece3d2acc97d1a7299b5ae934d7918f7a09312320594ecaf4e5bfef3"
+    },
+    {
+      "source": "icons/abilities/zawziety-sukinkot.svg",
+      "sha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3"
+    },
+    {
+      "source": "icons/abilities/zawziety-sukinkot.webp",
+      "sha256": "7052773e36e81bd97a2cfd0bae56e6ea450cd49edd5f1e1d57c1c2d75481a4a7"
+    }
+  ],
+  "styleReviews": [
+    {
+      "iconId": "abilities/wierze",
+      "status": "redo",
+      "source": "icons/abilities/wierze.svg",
+      "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c",
+      "reasons": [
+        "detail"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:11:24.996Z"
+    },
+    {
+      "iconId": "abilities/wielonozny",
+      "status": "redo",
+      "source": "icons/abilities/wielonozny.svg",
+      "sourceSha256": "588eb40f2878962ff870a67c4cbeb761ac8b899f2cf5e708280ac8898f64d27d",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:11:33.403Z"
+    },
+    {
+      "iconId": "abilities/wrazliwosc-na-swiatlo",
+      "status": "redo",
+      "source": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+      "sourceSha256": "e48c8aedc3ef8941ac486c2ea64f2d97499f31242ba40d030be30898431e65a7",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:11:46.135Z"
+    },
+    {
+      "iconId": "abilities/zawziety-sukinkot",
+      "status": "redo",
+      "source": "icons/abilities/zawziety-sukinkot.svg",
+      "sourceSha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3",
+      "reasons": [
+        "detail",
+        "dither"
+      ],
+      "notes": "",
+      "updatedAt": "2026-10-16T22:12:20.232Z"
+    }
+  ],
+  "feedbackSha256": "c2bdbafe203e256c2a656275b8d74855fdd346d3a19881a694a5a4f69e9d9a78"
+}

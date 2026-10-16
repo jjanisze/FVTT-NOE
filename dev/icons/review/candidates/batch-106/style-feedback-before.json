@@ -1,0 +1,104 @@
+{
+  "abilities/doktor-quinn": {
+    "iconId": "abilities/doktor-quinn",
+    "status": "redo",
+    "source": "icons/abilities/doktor-quinn.svg",
+    "sourceSha256": "2d2c62da17b68d3a5b47c160d98c8d8ac3e68e46868aaeb90a5edec3503f4e73",
+    "reasons": [
+      "detail",
+      "dither"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:06:38.962Z"
+  },
+  "abilities/odporny": {
+    "iconId": "abilities/odporny",
+    "status": "redo",
+    "source": "icons/abilities/odporny.svg",
+    "sourceSha256": "5dfe6297fc4d7d0fa012f6129dc6a6dc24417e94a461b29d3d0ca5ea88c529c2",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:08:23.605Z"
+  },
+  "abilities/patriota": {
+    "iconId": "abilities/patriota",
+    "status": "redo",
+    "source": "icons/abilities/patriota.svg",
+    "sourceSha256": "9151ff746b0ebc0c3c86b20fb9511a946cc86bf7fef4e1e6b7ec2822c27ebb06",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:08:36.385Z"
+  },
+  "abilities/prog-awarii": {
+    "iconId": "abilities/prog-awarii",
+    "status": "redo",
+    "source": "icons/abilities/prog-awarii.svg",
+    "sourceSha256": "c75daa7d763f1c448fb5412573766513450334e031c6ace1469662f163cc17b2",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:08:48.702Z"
+  },
+  "abilities/siodme-poty": {
+    "iconId": "abilities/siodme-poty",
+    "status": "redo",
+    "source": "icons/abilities/siodme-poty.svg",
+    "sourceSha256": "3c151c5f915b0e845f6dcf2f0b9b69c7c22df023e0eb7fd048d76cfadce77c59",
+    "reasons": [
+      "detail",
+      "dither"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:09:35.615Z"
+  },
+  "abilities/skakun": {
+    "iconId": "abilities/skakun",
+    "status": "redo",
+    "source": "icons/abilities/skakun.svg",
+    "sourceSha256": "6616be2a54fe7dd9ffef7b11dc3f5001982aeccbad8ec078d197bbaabc401883",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:09:39.296Z"
+  },
+  "abilities/taca-i-w-nogi": {
+    "iconId": "abilities/taca-i-w-nogi",
+    "status": "redo",
+    "source": "icons/abilities/taca-i-w-nogi.svg",
+    "sourceSha256": "4272d8941f5ceb46ec0963b746f990623449e02aaa632ef8c4c8b46f9fa89645",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:10:22.846Z"
+  },
+  "abilities/tryb-turbo": {
+    "iconId": "abilities/tryb-turbo",
+    "status": "redo",
+    "source": "icons/abilities/tryb-turbo.svg",
+    "sourceSha256": "ca5c334cb1ac92b5ca2c8ecb2990ad504167e31bcbbd1b3f373fc2735ba55118",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:10:40.212Z"
+  },
+  "abilities/twierdzenie-kata-prostego": {
+    "iconId": "abilities/twierdzenie-kata-prostego",
+    "status": "redo",
+    "source": "icons/abilities/twierdzenie-kata-prostego.svg",
+    "sourceSha256": "31e78fa56154b4104741b6b7cc6ebd831656095c90b6cd27fdf369ecaf312725",
+    "reasons": [
+      "detail",
+      "other"
+    ],
+    "notes": "Unclear graphical intent.",
+    "updatedAt": "2026-10-16T22:11:04.278Z"
+  }
+}

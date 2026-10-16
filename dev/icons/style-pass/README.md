@@ -7,6 +7,21 @@ record the new SVG hash as kept; remaining flags retain their original
 notes. Nine unreferenced PNG siblings were archived in dev and retired in
 favor of WEBP. Revisions continue in Batches 106–107.
 
+The thirteen saved revisions are frozen by `prepare_106_107.py` and returned
+to the same cards by `register_revisions.py`. Batch 106 has nine subjects;
+Batch 107 has four with five empty cells. The waiter preserves the GM's
+selected **current** icon as its primary reference and also supplies the
+rejected candidate for the requested middle ground. All older choices and
+verbatim notes remain available.
+
+Validation for Batches 106–107: all 13 exact corrections are archived, 26
+remaining production files retain their hashes, and 511 unrelated cards and
+decisions are unchanged. The 16 approved deliveries and nine retired PNG
+archives still match their recorded hashes. All 841 candidate pairs pass.
+The published gallery has 13 cards and 39 options, with the new candidates
+selected, no broken images and no browser errors. Evidence:
+`progress-106-107.json` and `../review/candidates/batch-106/raw/review-preview.png`.
+
 The 2026-10-17 browser review flagged 29 existing ability icons for excess
 detail, dithering or unclear subject matter. All 29 requests are frozen in
 `incoming-style-feedback.json`, with original source hashes and verbatim
@@ -45,6 +60,8 @@ or world write is needed for exact native filenames.
 - [Batch 103 assets](../review/candidates/batch-103/README.md) and [exact prompt](../review/candidates/batch-103/prompts.json).
 - [Batch 104 assets](../review/candidates/batch-104/README.md) and [exact prompt](../review/candidates/batch-104/prompts.json).
 - [Batch 105 assets](../review/candidates/batch-105/README.md) and [exact prompt](../review/candidates/batch-105/prompts.json).
+- [Batch 106 revisions](../review/candidates/batch-106/README.md) and [exact prompt](../review/candidates/batch-106/prompts.json).
+- [Batch 107 revisions](../review/candidates/batch-107/README.md) and [exact prompt](../review/candidates/batch-107/prompts.json).
 
 Validation and browser evidence: `progress-102-105.json`.
 

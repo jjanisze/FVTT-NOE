@@ -1,0 +1,16 @@
+{
+  "batch": 106,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "doktor-quinn": "97536dc051960dcf2db14b17479f29cf6a2046723b432854b02f04e096c2cda4",
+    "odporny": "d56ad280b17fb5f37821849cd051e5b3d0bf36c9d9bac0a0240c53c09229ffbd",
+    "patriota": "ea3b7dd0074b1b9ccb8df2c02430f1d13fab11e8194438ae0b6f1bc0908e2f2d",
+    "prog-awarii": "5e093f9a68f84aeaafa9a2eef8b762c8de9df4f030f0c8f945b82b79d67b4e5c",
+    "siodme-poty": "17d9b05aa7bb76683cbf68c20ac4f2cc9842b25fb9d7aa18aa2dfacddd840a87",
+    "skakun": "6f19fcf33ee2692e623a7780f6d12ac6a3746e4d08dd17d6935f1549fd66df31",
+    "taca-i-w-nogi": "10f6fe878ff9760ef80e837d55ece6a984bc95793ba0cffcd6e104dcf395b44a",
+    "tryb-turbo": "7be74c56c84d6a11387ea57f194a7372f4a344e3428704d0ec25ca911f510e80",
+    "twierdzenie-kata-prostego": "03b4950d34b70d48cbee266e9f326679795fdb734c68ebe92d4bfd603fbb6977"
+  }
+}

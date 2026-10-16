@@ -1,0 +1,11 @@
+{
+  "batch": 107,
+  "validatedMasks": 4,
+  "prospectiveDeliveryTargets": 4,
+  "candidateHashes": {
+    "wierze": "a69f1c0e9841a9f29351015c75b6c8ea7a1db77a2f8a4b9790bdec180a254d72",
+    "wielonozny": "d4fadee32684f8f5569dcf074b520451cf1b5ef60f07087da589d2f826e809cf",
+    "wrazliwosc-na-swiatlo": "55a02c605fb5f0171ba85fc3af0ab3a276cd3801ac538d1989917a22099d881b",
+    "zawziety-sukinkot": "a084e57ed2a6a940db233092ed1ee1a13ae78b237b23d2befae14bb9272230ca"
+  }
+}

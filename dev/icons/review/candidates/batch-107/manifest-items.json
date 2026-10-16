@@ -1,0 +1,189 @@
+{
+  "title": "Batches 106 + 107 · 13 style revisions awaiting GM review",
+  "updated": "2026-10-17",
+  "items": [
+    {
+      "id": "style104-wierze",
+      "name": "Wierzę",
+      "tier": "Batch 107 · Style revision",
+      "batch": 107,
+      "target": "icons/abilities/wierze.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wierze.svg",
+          "variant": "default",
+          "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c"
+        }
+      ],
+      "context": "Ability: Wierzę. A small everyday object unexpectedly becomes available. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "REPLACE cell 1's candle-and-hand idea. Show an ordinary useful object being IMAGINED INTO EXISTENCE: ONE plain generic adult HEAD in SIDE PROFILE at LEFT; ONE broad THOUGHT BUBBLE above-right containing ONE large simple KEY; and ONE complete open PALM below-right holding the SAME simple KEY now tangible. Two large round thought dots connect head and thought bubble. Both keys have one broad round bow, one short thick shaft and two broad teeth. Head is a smooth natural featureless profile with no portrait, beard or hair detail. Compact clear thought-to-real-object composition with broad black separation. No candle, prayer, religious symbol, glitter, tiny rays, magical runes, lettering, numbers or game token.",
+      "styleReview": {
+        "iconId": "abilities/wierze",
+        "status": "redo",
+        "source": "icons/abilities/wierze.svg",
+        "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:24.996Z"
+      },
+      "current": {
+        "src": "/icons/abilities/wierze.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "batch107-revision",
+          "label": "Batch 107 · revised Wierzę",
+          "src": "candidates/batch-107/wierze.png",
+          "note": "REPLACE cell 1's candle-and-hand idea. Show an ordinary useful object being IMAGINED INTO EXISTENCE: ONE plain generic adult HEAD in SIDE PROFILE at LEFT; ONE broad THOUGHT BUBBLE above-right containing ONE large simple KEY; and ONE complete open PALM below-right holding the SAME simple KEY now tangible. Two large round thought dots connect head and thought bubble. Both keys have one broad round bow, one short thick shaft and two broad teeth. Head is a smooth natural featureless profile with no portrait, beard or hair detail. Compact clear thought-to-real-object composition with broad black separation. No candle, prayer, religious symbol, glitter, tiny rays, magical runes, lettering, numbers or game token."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Wierzę",
+          "src": "candidates/batch-104/wierze.png",
+          "note": "ONE complete open adult PALM holds ONE small sturdy plain KEY and ONE short lit CANDLE stands beside the wrist. Key has a broad rounded bow, short shaft and TWO broad teeth. Candle has one simple steady flame. Quiet hopeful discovery, not magic. No person, face, thought bubble, rays, particles, game token, text or fine wick."
+        }
+      ]
+    },
+    {
+      "id": "style104-wielonozny",
+      "name": "Wielonożny",
+      "tier": "Batch 107 · Style revision",
+      "batch": 107,
+      "target": "icons/abilities/wielonozny.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wielonozny.svg",
+          "variant": "default",
+          "sourceSha256": "588eb40f2878962ff870a67c4cbeb761ac8b899f2cf5e708280ac8898f64d27d"
+        }
+      ],
+      "context": "Ability: Wielonożny. A multi-legged machine moves across difficult ground. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "REVISION cell 2. Keep the broad industrial walker body LEVEL while its articulated legs GRACEFULLY FOLLOW ONE CONTINUOUS HILLY GROUND RIDGE at the bottom. The visible feet REST DIRECTLY ON THE TERRAIN at DIFFERENT HEIGHTS: front foot on a higher crest, middle foot in a lower valley, rear foot on a lower ledge. Each supporting foot's sole touches its own actual ground surface with NO BLACK AIR GAP underneath. One front leg can be lifted mid-step over the next crest; the other feet visibly support the machine. Broad coherent connected legs, simple large joints, complete feet. Terrain is one smooth angular hill ridge, not disconnected rocks below a hovering robot. No gun, fine rubble, bolts, smoke, writing or extra machine.",
+      "styleReview": {
+        "iconId": "abilities/wielonozny",
+        "status": "redo",
+        "source": "icons/abilities/wielonozny.svg",
+        "sourceSha256": "588eb40f2878962ff870a67c4cbeb761ac8b899f2cf5e708280ac8898f64d27d",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:33.403Z"
+      },
+      "current": {
+        "src": "/icons/abilities/wielonozny.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither"
+      },
+      "candidates": [
+        {
+          "id": "batch107-revision",
+          "label": "Batch 107 · revised Wielonożny",
+          "src": "candidates/batch-107/wielonozny.png",
+          "note": "REVISION cell 2. Keep the broad industrial walker body LEVEL while its articulated legs GRACEFULLY FOLLOW ONE CONTINUOUS HILLY GROUND RIDGE at the bottom. The visible feet REST DIRECTLY ON THE TERRAIN at DIFFERENT HEIGHTS: front foot on a higher crest, middle foot in a lower valley, rear foot on a lower ledge. Each supporting foot's sole touches its own actual ground surface with NO BLACK AIR GAP underneath. One front leg can be lifted mid-step over the next crest; the other feet visibly support the machine. Broad coherent connected legs, simple large joints, complete feet. Terrain is one smooth angular hill ridge, not disconnected rocks below a hovering robot. No gun, fine rubble, bolts, smoke, writing or extra machine."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Wielonożny",
+          "src": "candidates/batch-104/wielonozny.png",
+          "note": "ONE simple rectangular INDUSTRIAL WALKER BODY on SIX broad articulated LEGS steps over TWO low jagged ROCKS. Three legs on each side, each with one thick elbow and a complete broad foot, all feet visible and clear of rocks. One broad side panel cut. No guns, smoke, bolts, cables, rubble pile, thin joints or extra legs."
+        }
+      ]
+    },
+    {
+      "id": "style104-wrazliwosc-na-swiatlo",
+      "name": "Wrażliwość na światło",
+      "tier": "Batch 107 · Style revision",
+      "batch": 107,
+      "target": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+          "variant": "default",
+          "sourceSha256": "e48c8aedc3ef8941ac486c2ea64f2d97499f31242ba40d030be30898431e65a7"
+        }
+      ],
+      "context": "Ability: Wrażliwość na światło. A large rat recoils from strong light. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "REVISION cell 3. Retain the natural rat recoiling from the flashlight at RIGHT, but REDRAW ITS WHOLE BODY IN ONE COHERENT SIDE VIEW FACING RIGHT. Head and shoulders at RIGHT, rump at LEFT, ONE tail curling out of the rump to the LEFT. BOTH HIND FEET under the rump point their TOES TO THE RIGHT in parallel; both knees bend coherently in the same side-view anatomy. Forepaws at the FRONT-RIGHT rise to shield the eye from the flashlight cone coming from RIGHT. Natural crouched rat, one large ear, smooth broad silhouette, no leg pointing backward, twisted hips, human expression, fur texture, extra limb, fine whiskers or lettering.",
+      "styleReview": {
+        "iconId": "abilities/wrazliwosc-na-swiatlo",
+        "status": "redo",
+        "source": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+        "sourceSha256": "e48c8aedc3ef8941ac486c2ea64f2d97499f31242ba40d030be30898431e65a7",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:46.135Z"
+      },
+      "current": {
+        "src": "/icons/abilities/wrazliwosc-na-swiatlo.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither"
+      },
+      "candidates": [
+        {
+          "id": "batch107-revision",
+          "label": "Batch 107 · revised Wrażliwość na światło",
+          "src": "candidates/batch-107/wrazliwosc-na-swiatlo.png",
+          "note": "REVISION cell 3. Retain the natural rat recoiling from the flashlight at RIGHT, but REDRAW ITS WHOLE BODY IN ONE COHERENT SIDE VIEW FACING RIGHT. Head and shoulders at RIGHT, rump at LEFT, ONE tail curling out of the rump to the LEFT. BOTH HIND FEET under the rump point their TOES TO THE RIGHT in parallel; both knees bend coherently in the same side-view anatomy. Forepaws at the FRONT-RIGHT rise to shield the eye from the flashlight cone coming from RIGHT. Natural crouched rat, one large ear, smooth broad silhouette, no leg pointing backward, twisted hips, human expression, fur texture, extra limb, fine whiskers or lettering."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Wrażliwość na światło",
+          "src": "candidates/batch-104/wrazliwosc-na-swiatlo.png",
+          "note": "ONE natural RAT in simple side profile recoils from ONE plain FLASHLIGHT at RIGHT. The rat crouches low, one forepaw covering its eye, ears folded back; complete body and ONE long curved tail. The light is ONE broad clean cone separated from the rat. No facial expression, fur texture, teeth, tiny whiskers or cartoon anatomy."
+        }
+      ]
+    },
+    {
+      "id": "style105-zawziety-sukinkot",
+      "name": "Zawzięty sukinkot",
+      "tier": "Batch 107 · Style revision",
+      "batch": 107,
+      "target": "icons/abilities/zawziety-sukinkot.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawziety-sukinkot.svg",
+          "variant": "default",
+          "sourceSha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3"
+        }
+      ],
+      "context": "Ability: Zawzięty sukinkot. A fallen person gets back up despite severe injury. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "REVISION cell 4. Preserve the exact generic adult rising from one knee: one planted boot, one knee on ground, one palm braced on ground and other hand on thigh. ADD ONE LARGE BOLD UPWARD ARROW behind and slightly LEFT of the upper back, rising vertically from shoulder height toward the top of the cell. The arrow has one broad straight shaft and one clear triangular arrowhead. Keep a broad black gap so it does not merge with the head or shoulder. Same natural complete anatomy and broad sparse clothing cuts. No beard, face detail, injury, gore, texture, tiny debris, second arrow or extra limb.",
+      "styleReview": {
+        "iconId": "abilities/zawziety-sukinkot",
+        "status": "redo",
+        "source": "icons/abilities/zawziety-sukinkot.svg",
+        "sourceSha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:12:20.232Z"
+      },
+      "current": {
+        "src": "/icons/abilities/zawziety-sukinkot.svg",
+        "note": "Existing shipped art flagged for style revision: detail, dither"
+      },
+      "candidates": [
+        {
+          "id": "batch107-revision",
+          "label": "Batch 107 · revised Zawzięty sukinkot",
+          "src": "candidates/batch-107/zawziety-sukinkot.png",
+          "note": "REVISION cell 4. Preserve the exact generic adult rising from one knee: one planted boot, one knee on ground, one palm braced on ground and other hand on thigh. ADD ONE LARGE BOLD UPWARD ARROW behind and slightly LEFT of the upper back, rising vertically from shoulder height toward the top of the cell. The arrow has one broad straight shaft and one clear triangular arrowhead. Keep a broad black gap so it does not merge with the head or shoulder. Same natural complete anatomy and broad sparse clothing cuts. No beard, face detail, injury, gore, texture, tiny debris, second arrow or extra limb."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 105 · Zawzięty sukinkot",
+          "src": "candidates/batch-105/zawziety-sukinkot.png",
+          "note": "ONE complete generic adult rises from ONE knee: one boot planted, one knee still touching the ground, ONE palm braced on the ground and the other hand pressing the planted thigh. Smooth featureless head, natural ordinary build, broad simple clothing. A determined rising pose without an arrow. No beard portrait, injuries, blood, torn fine fabric, texture or extra limb."
+        }
+      ]
+    }
+  ]
+}

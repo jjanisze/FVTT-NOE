@@ -1,0 +1,30 @@
+{
+  "style104-wierze": {
+    "itemId": "style104-wierze",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Style is better, but doesn't communicate idea well. Try a different idea.",
+    "updatedAt": "2026-10-16T22:36:36.830Z"
+  },
+  "style104-wielonozny": {
+    "itemId": "style104-wielonozny",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "The legs should connect to the hilly terrain, indicating the robot can move over it gracefully, not just exist over it.",
+    "updatedAt": "2026-10-16T22:37:14.507Z"
+  },
+  "style104-wrazliwosc-na-swiatlo": {
+    "itemId": "style104-wrazliwosc-na-swiatlo",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Better style, but the rodent's legs are facing opposite directions. Decide on a direction the lower body is facing.",
+    "updatedAt": "2026-10-16T22:37:44.660Z"
+  },
+  "style105-zawziety-sukinkot": {
+    "itemId": "style105-zawziety-sukinkot",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Add the arrow back",
+    "updatedAt": "2026-10-16T22:38:03.662Z"
+  }
+}

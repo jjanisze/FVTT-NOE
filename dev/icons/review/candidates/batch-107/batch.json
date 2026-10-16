@@ -1,0 +1,242 @@
+{
+  "date": "2026-10-17",
+  "batch": 107,
+  "pass": "browser-style-revisions",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "wierze",
+      "name": "Wierzę",
+      "owner": "style-review",
+      "ownerLabel": "Style review",
+      "cell": 1,
+      "target": "icons/abilities/wierze.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wierze.svg",
+          "variant": "default",
+          "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c"
+        }
+      ],
+      "itemId": "style104-wierze",
+      "ruleContext": "A small everyday object unexpectedly becomes available.",
+      "context": "Ability: Wierzę. A small everyday object unexpectedly becomes available. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "note": "Style replacement at the exact existing filename; fresh GM approval required. No wiring or world writes.",
+      "styleFeedback": {
+        "iconId": "abilities/wierze",
+        "status": "redo",
+        "source": "icons/abilities/wierze.svg",
+        "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:24.996Z"
+      },
+      "request": "REPLACE cell 1's candle-and-hand idea. Show an ordinary useful object being IMAGINED INTO EXISTENCE: ONE plain generic adult HEAD in SIDE PROFILE at LEFT; ONE broad THOUGHT BUBBLE above-right containing ONE large simple KEY; and ONE complete open PALM below-right holding the SAME simple KEY now tangible. Two large round thought dots connect head and thought bubble. Both keys have one broad round bow, one short thick shaft and two broad teeth. Head is a smooth natural featureless profile with no portrait, beard or hair detail. Compact clear thought-to-real-object composition with broad black separation. No candle, prayer, religious symbol, glitter, tiny rays, magical runes, lettering, numbers or game token.",
+      "revisionOf": {
+        "id": "style104-wierze",
+        "name": "Wierzę",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-104/wierze.png",
+        "sourceKind": "candidate",
+        "sourceSha256": "8822e33a53b8b94aac73578619427fbc787befa5d5d57311cdea008bd7f1142f",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/wierze.svg",
+            "variant": "default",
+            "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c"
+          }
+        ],
+        "notes": "Style is better, but doesn't communicate idea well. Try a different idea.",
+        "feedback": {
+          "itemId": "style104-wierze",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Style is better, but doesn't communicate idea well. Try a different idea.",
+          "updatedAt": "2026-10-16T22:36:36.830Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "wielonozny",
+      "name": "Wielonożny",
+      "owner": "style-review",
+      "ownerLabel": "Style review",
+      "cell": 2,
+      "target": "icons/abilities/wielonozny.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wielonozny.svg",
+          "variant": "default",
+          "sourceSha256": "588eb40f2878962ff870a67c4cbeb761ac8b899f2cf5e708280ac8898f64d27d"
+        }
+      ],
+      "itemId": "style104-wielonozny",
+      "ruleContext": "A multi-legged machine moves across difficult ground.",
+      "context": "Ability: Wielonożny. A multi-legged machine moves across difficult ground. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "note": "Style replacement at the exact existing filename; fresh GM approval required. No wiring or world writes.",
+      "styleFeedback": {
+        "iconId": "abilities/wielonozny",
+        "status": "redo",
+        "source": "icons/abilities/wielonozny.svg",
+        "sourceSha256": "588eb40f2878962ff870a67c4cbeb761ac8b899f2cf5e708280ac8898f64d27d",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:33.403Z"
+      },
+      "request": "REVISION cell 2. Keep the broad industrial walker body LEVEL while its articulated legs GRACEFULLY FOLLOW ONE CONTINUOUS HILLY GROUND RIDGE at the bottom. The visible feet REST DIRECTLY ON THE TERRAIN at DIFFERENT HEIGHTS: front foot on a higher crest, middle foot in a lower valley, rear foot on a lower ledge. Each supporting foot's sole touches its own actual ground surface with NO BLACK AIR GAP underneath. One front leg can be lifted mid-step over the next crest; the other feet visibly support the machine. Broad coherent connected legs, simple large joints, complete feet. Terrain is one smooth angular hill ridge, not disconnected rocks below a hovering robot. No gun, fine rubble, bolts, smoke, writing or extra machine.",
+      "revisionOf": {
+        "id": "style104-wielonozny",
+        "name": "Wielonożny",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-104/wielonozny.png",
+        "sourceKind": "candidate",
+        "sourceSha256": "517c9938c77ca9c664ff5a591b51d2d6ed4fafb4c1bc69a3af53d1c472fe6d1c",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/wielonozny.svg",
+            "variant": "default",
+            "sourceSha256": "588eb40f2878962ff870a67c4cbeb761ac8b899f2cf5e708280ac8898f64d27d"
+          }
+        ],
+        "notes": "The legs should connect to the hilly terrain, indicating the robot can move over it gracefully, not just exist over it.",
+        "feedback": {
+          "itemId": "style104-wielonozny",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "The legs should connect to the hilly terrain, indicating the robot can move over it gracefully, not just exist over it.",
+          "updatedAt": "2026-10-16T22:37:14.507Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "wrazliwosc-na-swiatlo",
+      "name": "Wrażliwość na światło",
+      "owner": "style-review",
+      "ownerLabel": "Style review",
+      "cell": 3,
+      "target": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+          "variant": "default",
+          "sourceSha256": "e48c8aedc3ef8941ac486c2ea64f2d97499f31242ba40d030be30898431e65a7"
+        }
+      ],
+      "itemId": "style104-wrazliwosc-na-swiatlo",
+      "ruleContext": "A large rat recoils from strong light.",
+      "context": "Ability: Wrażliwość na światło. A large rat recoils from strong light. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "note": "Style replacement at the exact existing filename; fresh GM approval required. No wiring or world writes.",
+      "styleFeedback": {
+        "iconId": "abilities/wrazliwosc-na-swiatlo",
+        "status": "redo",
+        "source": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+        "sourceSha256": "e48c8aedc3ef8941ac486c2ea64f2d97499f31242ba40d030be30898431e65a7",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:46.135Z"
+      },
+      "request": "REVISION cell 3. Retain the natural rat recoiling from the flashlight at RIGHT, but REDRAW ITS WHOLE BODY IN ONE COHERENT SIDE VIEW FACING RIGHT. Head and shoulders at RIGHT, rump at LEFT, ONE tail curling out of the rump to the LEFT. BOTH HIND FEET under the rump point their TOES TO THE RIGHT in parallel; both knees bend coherently in the same side-view anatomy. Forepaws at the FRONT-RIGHT rise to shield the eye from the flashlight cone coming from RIGHT. Natural crouched rat, one large ear, smooth broad silhouette, no leg pointing backward, twisted hips, human expression, fur texture, extra limb, fine whiskers or lettering.",
+      "revisionOf": {
+        "id": "style104-wrazliwosc-na-swiatlo",
+        "name": "Wrażliwość na światło",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-104/wrazliwosc-na-swiatlo.png",
+        "sourceKind": "candidate",
+        "sourceSha256": "6b75817f899ac007d526fab0137e17a96cef8f2747d014a9d0846ae174e99c92",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+            "variant": "default",
+            "sourceSha256": "e48c8aedc3ef8941ac486c2ea64f2d97499f31242ba40d030be30898431e65a7"
+          }
+        ],
+        "notes": "Better style, but the rodent's legs are facing opposite directions. Decide on a direction the lower body is facing.",
+        "feedback": {
+          "itemId": "style104-wrazliwosc-na-swiatlo",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Better style, but the rodent's legs are facing opposite directions. Decide on a direction the lower body is facing.",
+          "updatedAt": "2026-10-16T22:37:44.660Z"
+        }
+      }
+    },
+    {
+      "kind": "feature",
+      "key": "zawziety-sukinkot",
+      "name": "Zawzięty sukinkot",
+      "owner": "style-review",
+      "ownerLabel": "Style review",
+      "cell": 4,
+      "target": "icons/abilities/zawziety-sukinkot.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawziety-sukinkot.svg",
+          "variant": "default",
+          "sourceSha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3"
+        }
+      ],
+      "itemId": "style105-zawziety-sukinkot",
+      "ruleContext": "A fallen person gets back up despite severe injury.",
+      "context": "Ability: Zawzięty sukinkot. A fallen person gets back up despite severe injury. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "note": "Style replacement at the exact existing filename; fresh GM approval required. No wiring or world writes.",
+      "styleFeedback": {
+        "iconId": "abilities/zawziety-sukinkot",
+        "status": "redo",
+        "source": "icons/abilities/zawziety-sukinkot.svg",
+        "sourceSha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:12:20.232Z"
+      },
+      "request": "REVISION cell 4. Preserve the exact generic adult rising from one knee: one planted boot, one knee on ground, one palm braced on ground and other hand on thigh. ADD ONE LARGE BOLD UPWARD ARROW behind and slightly LEFT of the upper back, rising vertically from shoulder height toward the top of the cell. The arrow has one broad straight shaft and one clear triangular arrowhead. Keep a broad black gap so it does not merge with the head or shoulder. Same natural complete anatomy and broad sparse clothing cuts. No beard, face detail, injury, gore, texture, tiny debris, second arrow or extra limb.",
+      "revisionOf": {
+        "id": "style105-zawziety-sukinkot",
+        "name": "Zawzięty sukinkot",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-105/zawziety-sukinkot.png",
+        "sourceKind": "candidate",
+        "sourceSha256": "2a7d48d2155b88ee380b98f60b7e25884656f8fdf6caab83ec29a0e603c81352",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/zawziety-sukinkot.svg",
+            "variant": "default",
+            "sourceSha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3"
+          }
+        ],
+        "notes": "Add the arrow back",
+        "feedback": {
+          "itemId": "style105-zawziety-sukinkot",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Add the arrow back",
+          "updatedAt": "2026-10-16T22:38:03.662Z"
+        }
+      }
+    }
+  ],
+  "partialAtlas": true,
+  "emptyCells": [
+    5,
+    6,
+    7,
+    8,
+    9
+  ]
+}

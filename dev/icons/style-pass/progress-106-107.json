@@ -1,0 +1,37 @@
+{
+  "date": "2026-10-17",
+  "preparedBatches": [
+    106,
+    107
+  ],
+  "nextFreeBatch": 108,
+  "styleSubjectsApprovedAndDelivered": 16,
+  "remainingStyleRevisions": 13,
+  "newCandidates": 13,
+  "subjectsPerBatch": [
+    9,
+    4
+  ],
+  "retiredUnreferencedPngSiblings": 9,
+  "retiredSourcesArchivedWithExactHashes": true,
+  "unchangedRemainingProductionFiles": 26,
+  "verbatimReworkDecisionsArchived": 13,
+  "selectedCurrentArtReferencesPreserved": 1,
+  "olderCandidatesRetained": true,
+  "unrelatedCardsAndDecisionsPreserved": 511,
+  "reviewCardsTotal": 524,
+  "reviewCardsResolved": 511,
+  "candidateCollectionValidatedPairs": 841,
+  "newCandidatesInstalledBeforeApproval": 0,
+  "originalPlaceholderSubjectsDelivered": 153,
+  "originalNativeTargetsDelivered": 155,
+  "browserAtPublication": {
+    "cards": 13,
+    "options": 39,
+    "brokenImages": 0,
+    "errors": 0,
+    "newCandidatesSelected": 13,
+    "pendingDecisions": 13,
+    "screenshot": "../review/candidates/batch-106/raw/review-preview.png"
+  }
+}

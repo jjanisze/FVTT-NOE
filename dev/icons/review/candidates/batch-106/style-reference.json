@@ -1,0 +1,96 @@
+{
+  "sources": [
+    {
+      "source": "icons/abilities/amen.webp",
+      "sha256": "8608e8e9b504db587616a2bcdfe844dd8efb02644e186d78ffc1566f852a11fc"
+    },
+    {
+      "source": "icons/abilities/hakerstwo.webp",
+      "sha256": "7f7cc2647762b2521bd22f0c0fecd23378688928841a4f3842fcdad0b84935fc"
+    },
+    {
+      "source": "icons/abilities/krwawy-aniol.webp",
+      "sha256": "63a9259db68a4f0c16bbf42a2e315ce98a82c43701874391ddccf399325d28f8"
+    },
+    {
+      "source": "icons/abilities/jeden-strzal.webp",
+      "sha256": "630483b1cfd0de31820e70b6e48466f05ab060509c2fe979b56125f1174c2272"
+    },
+    {
+      "source": "icons/abilities/ulubiona-bron-twardziel.webp",
+      "sha256": "d5ee0b6859d1ed1d5453d3fdef5a028407546fc9faae7807fea132c9598ad98c"
+    },
+    {
+      "source": "icons/abilities/emiter-emp.webp",
+      "sha256": "e052c015b34c427698455fc79fac5cff36d25211fff085141a02440c157a1fdc"
+    },
+    {
+      "source": "icons/abilities/bez-tajemnic.webp",
+      "sha256": "1c6544d59989a4dd08c9faf2728da3f5d902adabf1886f080627ea5d90013eb7"
+    },
+    {
+      "source": "icons/abilities/kocie-kosci.webp",
+      "sha256": "ee5d25740ab235e515c3e32405a25e41eceba7005bcd83cc2a6ebae4d52e30db"
+    },
+    {
+      "source": "icons/abilities/dziewiec-zyc.webp",
+      "sha256": "0cf20df0e99b7078ccc55a513e67d81a2672d09a49374eca0815731a2aa34317"
+    }
+  ],
+  "selectedSources": [
+    {
+      "key": "doktor-quinn",
+      "source": "dev/icons/review/candidates/batch-102/doktor-quinn.png",
+      "sha256": "a5f7c025f0151b65179b4f84c5640f99de81da32eb48913f1c57c181bff74315",
+      "kind": "candidate"
+    },
+    {
+      "key": "odporny",
+      "source": "dev/icons/review/candidates/batch-102/odporny.png",
+      "sha256": "fb7d2e9aa1202474c843d539848581e836e383ca043c2f212f03caff107df99d",
+      "kind": "candidate"
+    },
+    {
+      "key": "patriota",
+      "source": "dev/icons/review/candidates/batch-102/patriota.png",
+      "sha256": "4bce2aa0bcdcbe8f672ead4f8458775cbaeeac852f606a9d563f0882b75b145f",
+      "kind": "candidate"
+    },
+    {
+      "key": "prog-awarii",
+      "source": "dev/icons/review/candidates/batch-103/prog-awarii.png",
+      "sha256": "89002c90e137114ded15079dca0c8051b604704cddc900dc3c3dc04a8c378cd2",
+      "kind": "candidate"
+    },
+    {
+      "key": "siodme-poty",
+      "source": "dev/icons/review/candidates/batch-103/siodme-poty.png",
+      "sha256": "e8ad544dea3a146ad48eaabf7a232313e8aef5dd2854ff44f5f2c13db3f74470",
+      "kind": "candidate"
+    },
+    {
+      "key": "skakun",
+      "source": "dev/icons/review/candidates/batch-103/skakun.png",
+      "sha256": "9ea1f85e1a5317c1ec497b362167147c59aa699e1e70df0256d2a946480ae7c9",
+      "kind": "candidate"
+    },
+    {
+      "key": "taca-i-w-nogi",
+      "source": "icons/abilities/taca-i-w-nogi.svg",
+      "sha256": "4272d8941f5ceb46ec0963b746f990623449e02aaa632ef8c4c8b46f9fa89645",
+      "kind": "production"
+    },
+    {
+      "key": "tryb-turbo",
+      "source": "dev/icons/review/candidates/batch-104/tryb-turbo.png",
+      "sha256": "5df931eb18328cf1c26da893c89fb2604d70c32151b43f38dbdab70719b00b88",
+      "kind": "candidate"
+    },
+    {
+      "key": "twierdzenie-kata-prostego",
+      "source": "dev/icons/review/candidates/batch-104/twierdzenie-kata-prostego.png",
+      "sha256": "920287fc0a80daa92dfa9bd642bddf273947571a79668eb45b4b97f4dc52cac9",
+      "kind": "candidate"
+    }
+  ]
+}

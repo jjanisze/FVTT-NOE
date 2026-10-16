@@ -37,7 +37,7 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 106** (13 style revisions queued after 16 approvals;
+**Next batch number: 108** (13 style revisions await GM review;
 the original 153-subject placeholder pass is complete).
 
 **Icon coverage correction, 2026-10-17:** the previous 342 review cards are resolved,
@@ -1341,6 +1341,45 @@ Exact saved decisions and approved masks: `reviewed.json` and
 | Zawzięty sukinkot | `icons/abilities/zawziety-sukinkot.svg` | Revision queued |
 
 <!-- style-batch-105:end -->
+
+<!-- style-batch-106:start -->
+## Queue (A) — Batch 106 — 9 saved style revisions
+
+Exact selected sources and verbatim notes are archived with the prompts.
+Older choices remain selectable; production requires fresh saved approval.
+
+| Cell | Subject | Requested correction | Native SVG (+ WEBP) |
+|---|---|---|---|
+| 1 | Doktor Quinn | Modify the angles so the positons of the hands imply bandaging someone else | `icons/abilities/doktor-quinn.svg` |
+| 2 | Odporny | Need to somehow indicate the water is poisoned/bad | `icons/abilities/odporny.svg` |
+| 3 | Patriota | Change the flag to a confederate flag and refine the contours of the shoulder | `icons/abilities/patriota.svg` |
+| 4 | Próg awarii | Add lines or sparks indicating an active/undergoing fault, remove the loose unreadable thing at the bottom left | `icons/abilities/prog-awarii.svg` |
+| 5 | Siódme poty | That's not how a gas pedal looks like from the side. It is not a hinge. Redraw to show a simplified version of an actual gas pedal. | `icons/abilities/siodme-poty.svg` |
+| 6 | Skakun | The style is better, but the icon does not indicate movement | `icons/abilities/skakun.svg` |
+| 7 | Tacą i w nogi | Try again, something between those two | `icons/abilities/taca-i-w-nogi.svg` |
+| 8 | Tryb Turbo | Needs visual elements indicating TURBO/OVERDRIVE | `icons/abilities/tryb-turbo.svg` |
+| 9 | Twierdzenie Kąta Prostego | Somehow incorporate visually the geometric pun | `icons/abilities/twierdzenie-kata-prostego.svg` |
+
+Evidence and exact prompts: `review/candidates/batch-106/`.
+
+<!-- style-batch-106:end -->
+
+<!-- style-batch-107:start -->
+## Queue (A) — Batch 107 — 4 saved style revisions
+
+Exact selected sources and verbatim notes are archived with the prompts.
+Older choices remain selectable; production requires fresh saved approval.
+
+| Cell | Subject | Requested correction | Native SVG (+ WEBP) |
+|---|---|---|---|
+| 1 | Wierzę | Style is better, but doesn't communicate idea well. Try a different idea. | `icons/abilities/wierze.svg` |
+| 2 | Wielonożny | The legs should connect to the hilly terrain, indicating the robot can move over it gracefully, not just exist over it. | `icons/abilities/wielonozny.svg` |
+| 3 | Wrażliwość na światło | Better style, but the rodent's legs are facing opposite directions. Decide on a direction the lower body is facing. | `icons/abilities/wrazliwosc-na-swiatlo.svg` |
+| 4 | Zawzięty sukinkot | Add the arrow back | `icons/abilities/zawziety-sukinkot.svg` |
+
+Evidence and exact prompts: `review/candidates/batch-107/`.
+
+<!-- style-batch-107:end -->
 
 <!-- icon-style-review:start -->
 ## Style review — icons flagged for redo
