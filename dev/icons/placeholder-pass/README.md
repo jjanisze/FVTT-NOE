@@ -144,6 +144,13 @@ contains the last nine professions. Every original roadmap subject now has
 a candidate in review or an approved delivery; none await first generation.
 The next free batch number is 96. Further batches depend on saved revisions.
 
+After the Batch 93–95 review, thirteen approvals are delivered: 144/153
+subjects replaced at 146 native SVG filenames, leaving nine revisions.
+Batch 96 gives Brutal two Halligan-bar choices. Batch 97 covers the eight
+other revisions, with the spare ninth atlas cell empty. No fresh subjects
+remain. The next free batch number is 98. The Szczur profession now uses
+its canonical beggar-disguise role instead of a literal animal.
+
 The GM's durable direction is to avoid repeated gruff male survivor portraits:
 prefer the actual objects, hands, actions and generic adults, with no anime.
 That instruction is also recorded in Pipeline.md.
@@ -200,6 +207,10 @@ That instruction is also recorded in Pipeline.md.
   [exact prompts](../review/candidates/batch-94/prompts.json).
 - [Batch 95 candidates](../review/candidates/batch-95/README.md) and
   [exact prompts](../review/candidates/batch-95/prompts.json).
+- [Batch 96 class choices](../review/candidates/batch-96/README.md) and
+  [exact prompts](../review/candidates/batch-96/prompts.json).
+- [Batch 97 revisions](../review/candidates/batch-97/README.md) and
+  [exact prompts](../review/candidates/batch-97/prompts.json).
 
 The numbered `prepare_*.py` files freeze their actual
 allocations and

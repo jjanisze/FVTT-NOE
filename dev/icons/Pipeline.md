@@ -28,6 +28,12 @@ elements. Generate each class as its own two-option comparison image and
 inspect both options at inventory sizes. The GM selects one or requests
 revisions; class emblems require the same approval gate as other icons.
 
+When fewer than nine ordinary subjects remain, keep the 3×3 layout and leave
+unused final cells empty black. Declare `partialAtlas: true` and their
+one-based `emptyCells` in the frozen batch. The processor rejects an extra
+glyph in unused cells and still requires every active subject; registration
+requires the matching validated count. Do not invent filler subjects.
+
 Copy the selected generated file into `in/` before running the pipeline.
 Transparent alpha is preferred; a clean solid black background is also supported
 by the normalization step. Reject speckled or distressed backgrounds.

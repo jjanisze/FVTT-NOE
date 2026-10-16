@@ -1,0 +1,15 @@
+{
+  "batch": 97,
+  "validatedMasks": 8,
+  "prospectiveDeliveryTargets": 8,
+  "candidateHashes": {
+    "zawolajcie-kolegow": "36757868547f7051e31d6e6a011b179db79244f9742aa6d21accdcc28755715b",
+    "chemik": "8e877a695b50515b112e77aa9924b2db421349512afabeda973a80761f1af8f1",
+    "ganger": "40007371c291d651eba072483b4bcefecf5e3eb4e85dab0aaefbbcebb8231d04",
+    "medyk": "de1d5639de1756b4a9b2cfe833c05d76dd4ac79292f17e00c1baa1c28115dc31",
+    "najemnik": "de6eeba1aae897b3968d2f037eacf68907a8c38a8713274dc908987a94268a85",
+    "szczur": "45c171ed4fb0c1bcbf528f31329378c12d96bc25972f3d3964dc65ac795a9675",
+    "wojownik-autostrady": "ea55dbf57de7987b339c56093a45c8d4c4971767e1e2073dcd75769cad06a560",
+    "zabojca-maszyn": "aea26cf7efd17e8d4b38fcd95397c3ad6dd33df5cc87ecee7af685acd6b35c15"
+  }
+}

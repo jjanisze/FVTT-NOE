@@ -1,0 +1,22 @@
+{
+  "generator": "OpenAI built-in image generation",
+  "date": "2026-10-16",
+  "research": [
+    {
+      "title": "Fire Hooks Unlimited Pro-Bar",
+      "url": "https://www.firehooksunlimited.net/probars.html",
+      "purpose": "Halligan fork, adze and pike form; text-only geometry reference, no product photography copied"
+    }
+  ],
+  "pairs": [
+    {
+      "key": "brutal",
+      "reference": [
+        "raw/reference-brutal.png",
+        "raw/style-reference.png"
+      ],
+      "output": "raw/brutal-pair.png",
+      "prompt": "Use case: stylized-concept. Asset: pivotal primary-class icons for a post-apocalyptic tabletop interface. Create ONE LANDSCAPE image containing exactly TWO independent glyphs, LEFT option A and RIGHT option B, in two equal side-by-side cells. No visible grid, captions, labels, letters, numbers, logos or border. Both options must use PURE SOLID WHITE #FFFFFF on perfectly clean PURE BLACK #000000. Match the reference's sober broad stencil weight, with large black negative-space cuts. Each complete glyph occupies the middle 60 percent of its own cell, with generous blank space on ALL sides and a wide empty black gutter between the two options. No part crosses the middle division. Each option contains exactly TWO distinct main elements, covering different sides of the class. They are two alternative emblems for the SAME class, not two halves of one combined emblem. Readability at 16/24/32 pixels matters: broad silhouettes, very few internal cuts, complete coherent objects. No shading, grey, gradients, hatching, dithering, texture, distressing, hair strands, tiny fittings or thin detail. No anime, cartoon anatomy, gruff survivor busts, giant generic cogs, decorative frames or gore. The FIRST reference is the exact torso EDIT TARGET; retain its torso and scar, replacing only its hammer. The SECOND reference is STYLE ONLY.\n\nCLASS: Brutal. LEFT OPTION A: Preserve torso LEFT and place the complete Halligan diagonally at RIGHT, adze-and-pike head at UPPER-RIGHT and fork at LOWER-RIGHT. Keep the same headless bare torso with its single healed diagonal chest scar. Replace the ENTIRE HAMMER with ONE proper HALLIGAN FORCIBLE-ENTRY BAR. The Halligan has ONE long stout straight steel shaft, a TWO-PRONGED FORK with a deep U-shaped gap at ONE end, and a compact ADZE-AND-PIKE HEAD at the OTHER end: one short broad flat adze blade projecting to one side and one short pointed spike projecting to the opposite side at the SAME junction. Complete unmistakable fork, shaft, adze and pike, broad simplified white silhouette. No hammer block, sledge head, axe blade, knife, gun, labels or fine machining. Exactly torso and Halligan bar, no extra prop, wound, blood, gore or detailed muscles.\nRIGHT OPTION B: Preserve torso LEFT and place the complete Halligan at RIGHT with its FORK at the TOP and adze-and-pike head at the BOTTOM, a compact alternative layout. Keep the same headless bare torso with its single healed diagonal chest scar. Replace the ENTIRE HAMMER with ONE proper HALLIGAN FORCIBLE-ENTRY BAR. The Halligan has ONE long stout straight steel shaft, a TWO-PRONGED FORK with a deep U-shaped gap at ONE end, and a compact ADZE-AND-PIKE HEAD at the OTHER end: one short broad flat adze blade projecting to one side and one short pointed spike projecting to the opposite side at the SAME junction. Complete unmistakable fork, shaft, adze and pike, broad simplified white silhouette. No hammer block, sledge head, axe blade, knife, gun, labels or fine machining. Exactly torso and Halligan bar, no extra prop, wound, blood, gore or detailed muscles."
+    }
+  ]
+}

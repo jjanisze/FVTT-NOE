@@ -95,3 +95,33 @@ test("a newer GM correction aborts before manifest, feedback or queue writes", t
   assert.match(result.stderr, /GM revision feedback changed/);
   files.forEach((file, index) => assert.deepEqual(fs.readFileSync(file), before[index]));
 });
+
+test("an explicitly partial eight-subject atlas retains review history", t => {
+  const f = fixture(t);
+  const batchFile = path.join(f.batch, "batch.json"), validationFile = path.join(f.batch, "validated.json");
+  const batch = JSON.parse(fs.readFileSync(batchFile, "utf8"));
+  batch.subjects = batch.subjects.slice(0, 8);
+  batch.partialAtlas = true;
+  batch.emptyCells = [9];
+  json(batchFile, batch);
+  const validation = JSON.parse(fs.readFileSync(validationFile, "utf8"));
+  validation.validatedMasks = 8;
+  delete validation.candidateHashes["test-8"];
+  json(validationFile, validation);
+  const result = f.run();
+  assert.equal(result.status, 0, result.stderr);
+  assert.equal(f.read("manifest.json").items.filter(item => item.status !== "resolved").length, 8);
+  assert.deepEqual(f.read("feedback.json").items.approved, f.decisions.approved);
+  assert.match(fs.readFileSync(path.join(f.root, "dev/icons/MISSING.md"), "utf8"), /8 awaiting GM review/);
+});
+
+test("an undeclared short batch aborts without changing feedback or manifest", t => {
+  const f = fixture(t);
+  const batchFile = path.join(f.batch, "batch.json"), batch = JSON.parse(fs.readFileSync(batchFile, "utf8"));
+  batch.subjects.pop();
+  json(batchFile, batch);
+  const files = [path.join(f.review, "manifest.json"), path.join(f.review, "feedback.json")];
+  const before = files.map(file => fs.readFileSync(file));
+  assert.notEqual(f.run().status, 0);
+  files.forEach((file, index) => assert.deepEqual(fs.readFileSync(file), before[index]));
+});

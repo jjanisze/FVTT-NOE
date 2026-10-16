@@ -1,0 +1,310 @@
+{
+  "title": "Batches 93 + 97 · 9 awaiting GM review",
+  "updated": "2026-10-16",
+  "items": [
+    {
+      "id": "batch89-zawolajcie-kolegow",
+      "name": "Zawołajcie kolegów",
+      "tier": "Batch 97 · Gladiator",
+      "batch": 97,
+      "placeholderKey": "feature:zawolajcie-kolegow",
+      "target": "icons/abilities/zawolajcie-kolegow.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawolajcie-kolegow.svg",
+          "variant": "default",
+          "sourceSha256": "abfc18f9af0e406acc37d35e09766a779dad7eeabed31cf74d1f1a8e14b3748d"
+        }
+      ],
+      "context": "Class/profession ability: Zawołajcie kolegów; owner Gladiator. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Jeśli w zasięgu 1,5 metra od ciebie znajduje się co najmniej dwóch przeciwników, otrzymujesz Ułatwienie do Testów Ataków wręcz. Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 1. Keep both small upper fists unchanged and keep the foreground PALM FACING VIEWER with THUMB at viewer RIGHT. The current raised finger on the LEFT of the hand is the WRONG finger. Fold that LEFTMOST LITTLE FINGER down. Raise ONLY the INDEX FINGER immediately NEXT TO THE THUMB, on the RIGHT SIDE of the four fingers. The three other fingers form THREE folded knuckles across the LEFT half of the palm. The raised INDEX grows from the knuckle beside the thumb on the RIGHT, rises above the three folded fingers, and bends its fingertip inward as a COME-HERE beckon. Thumb stays separate on the far RIGHT. Exactly ONE thumb and FOUR fingers; no finger arising from the left edge, extra knuckle or extra digit. Natural adult hand anatomy, broad sparse palm crease, exactly three complete hands total.",
+      "current": {
+        "src": "/icons/abilities/zawolajcie-kolegow.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch97-revision",
+          "label": "Batch 97 · revised Zawołajcie kolegów",
+          "src": "candidates/batch-97/zawolajcie-kolegow.png",
+          "note": "REVISION of reference cell 1. Keep both small upper fists unchanged and keep the foreground PALM FACING VIEWER with THUMB at viewer RIGHT. The current raised finger on the LEFT of the hand is the WRONG finger. Fold that LEFTMOST LITTLE FINGER down. Raise ONLY the INDEX FINGER immediately NEXT TO THE THUMB, on the RIGHT SIDE of the four fingers. The three other fingers form THREE folded knuckles across the LEFT half of the palm. The raised INDEX grows from the knuckle beside the thumb on the RIGHT, rises above the three folded fingers, and bends its fingertip inward as a COME-HERE beckon. Thumb stays separate on the far RIGHT. Exactly ONE thumb and FOUR fingers; no finger arising from the left edge, extra knuckle or extra digit. Natural adult hand anatomy, broad sparse palm crease, exactly three complete hands total."
+        },
+        {
+          "id": "batch94-revision",
+          "label": "Batch 94 · revised Zawołajcie kolegów",
+          "src": "candidates/batch-94/zawolajcie-kolegow.png",
+          "note": "REVISION of reference cell 1. Keep the TWO small opposing fists above and the large foreground hand with its PALM FACING VIEWER and thumb at viewer RIGHT. Restore a single clear COME-HERE / FOLLOW-ME INDEX-FINGER BECKON: unfold ONLY the INDEX finger upward above the other knuckles, then curl its tip inward toward the viewer as a natural hook. The middle, ring and little fingers remain folded into the palm. One thumb, four fingers total, natural coherent adult anatomy. Keep palm crease and both upper fists unchanged. Exactly three hands, no extra finger, fingernails on palm, upside-down hand, face or text."
+        },
+        {
+          "id": "batch90-revision",
+          "label": "Batch 90 · revised Zawołajcie kolegów",
+          "src": "candidates/batch-90/zawolajcie-kolegow.png",
+          "note": "REVISION of reference cell 4. Preserve both small opposing fists above and the foreground beckoning gesture. Rotate ONLY the LARGE FOREGROUND HAND around its VERTICAL AXIS so its PALM FACES THE VIEWER. Do NOT turn the hand upside down. Wrist remains below, fingertips curl inward at the top in the same beckoning gesture, but show the broad PALM and one palm crease, NOT the backs of fingers or fingernails. Thumb is on the viewer's RIGHT after the rotation. Exactly one coherent thumb and four coherent fingers, some fingers may overlap naturally. Two upper fists stay unchanged. Large black gaps and natural adult anatomy, no extra hands, whole person, face, lettering or gore."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 89 · Zawołajcie kolegów",
+          "src": "candidates/batch-89/zawolajcie-kolegow.png",
+          "note": "ONE large complete BARE HAND BECKONS confidently upward, fingers curling inward once, with TWO smaller opposing CLENCHED FISTS above-left and above-right. Exactly three hands with coherent thumbs/fingers and short complete wrists, clear broad black gaps. A fighter challenges multiple opponents to come closer. No whole person, portrait, extra hands, text, numbers, weapons, wounds, gore or decorative arrows."
+        }
+      ]
+    },
+    {
+      "id": "batch91-chemik",
+      "name": "Chemik",
+      "tier": "Batch 97 · Spec",
+      "batch": 97,
+      "placeholderKey": "profession:chemik",
+      "target": "icons/profesje/chemik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/chemik.svg",
+          "variant": "default",
+          "sourceSha256": "4662220129374902fd41b90cf730c337c276df09c02f494defe3e6bbf31b6c27"
+        }
+      ],
+      "context": "profession: Chemik; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zyskujesz biegłość w narzędziach małego chemika i małego rusznikarza. SMAKUJE JAK ARSZENIK; PIROTECHNIKA; RUSZNIKARSTWO Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 2. Preserve the flask, liquid and two bubbles. REDRAW THE DROPPER as a much simpler STRAIGHT PIPETTE: ONE oval rubber bulb centered on ONE long slim straight glass tube. Bulb center, tube and pointed tip lie on ONE continuous diagonal axis from upper-RIGHT to lower-LEFT. The tube has PARALLEL STRAIGHT sides and CONSTANT width along almost its whole length, with only a SHORT tapered sharp tip. No offset neck, stepped shoulder, bulge, bend, blade shape, connecting flange, detached drop or round melted endpoint. Broad black space separates the pipette from flask and liquid. Exactly flask and simple straight dropper, no formula, measurements, writing or fine detail.",
+      "current": {
+        "src": "/icons/profesje/chemik.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch97-revision",
+          "label": "Batch 97 · revised Chemik",
+          "src": "candidates/batch-97/chemik.png",
+          "note": "REVISION of reference cell 2. Preserve the flask, liquid and two bubbles. REDRAW THE DROPPER as a much simpler STRAIGHT PIPETTE: ONE oval rubber bulb centered on ONE long slim straight glass tube. Bulb center, tube and pointed tip lie on ONE continuous diagonal axis from upper-RIGHT to lower-LEFT. The tube has PARALLEL STRAIGHT sides and CONSTANT width along almost its whole length, with only a SHORT tapered sharp tip. No offset neck, stepped shoulder, bulge, bend, blade shape, connecting flange, detached drop or round melted endpoint. Broad black space separates the pipette from flask and liquid. Exactly flask and simple straight dropper, no formula, measurements, writing or fine detail."
+        },
+        {
+          "id": "batch94-revision",
+          "label": "Batch 94 · revised Chemik",
+          "src": "candidates/batch-94/chemik.png",
+          "note": "REVISION of reference cell 3. Keep the laboratory flask, its bubbles and the diagonal dropper in the same composition. FIX ONLY THE MELTED PIPETTE TIP: the narrow glass tube has two smooth straight sides tapering into ONE clean SHARP POINT. Remove the rounded white blob/drop attached to the old tip. The pipette remains complete from rubber bulb to sharp glass tip, separated clearly from the flask and liquid by broad black cuts. No detached droplet, text, labels, formula, measurements or tiny details."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 91 · Chemik",
+          "src": "candidates/batch-91/chemik.png",
+          "note": "PROFESSION EMBLEM: ONE stout ROUND-BOTTOM LAB FLASK with a short neck, thick rim and TWO large bubble holes in its broad liquid mass. ONE complete DROPPER PIPETTE with a broad rubber bulb lies diagonally across the flask, separated by a broad black cut. Practical chemistry, sparse compact white object glyph. No formulas, recipes, labels, measurements, person, face, skull, tiny bubbles, extra glassware or lettering."
+        }
+      ]
+    },
+    {
+      "id": "batch91-ganger",
+      "name": "Ganger",
+      "tier": "Batch 97 · Brutal",
+      "batch": 97,
+      "placeholderKey": "profession:ganger",
+      "target": "icons/profesje/ganger.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/ganger.svg",
+          "variant": "default",
+          "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+        }
+      ],
+      "context": "profession: Ganger; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zyskujesz biegłość w kategorii broń palna pośrednia oraz biegłość w umiejętności Pojazdy. DWÓCH NA JEDNEGO; JA I MÓJ GANG!; JEDEN Z NICH; ODWAŻNY CZY GŁUPI Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 3. Keep the studded baseball bat and complete circular motorcycle tire. Replace the three spokes with EXACTLY SIX broad STRAIGHT SPOKES, evenly spaced around ONE centered circular HUB. Six spokes point toward the positions of twelve, two, four, six, eight and ten o'clock. Six spokes make SIX large black wedge openings; no numbers are drawn. Keep all six spokes visible: move the diagonal bat just to the RIGHT of the wheel so it may overlap the OUTER RIGHT RIM but does NOT cover the hub or inner spokes. Both objects stay compact and complete. Natural coherent concentric wheel geometry, thick sober white cuts, no seventh spoke, tiny hub bolts, extra wheel, text or fine tread.",
+      "current": {
+        "src": "/icons/profesje/ganger.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch97-revision",
+          "label": "Batch 97 · revised Ganger",
+          "src": "candidates/batch-97/ganger.png",
+          "note": "REVISION of reference cell 3. Keep the studded baseball bat and complete circular motorcycle tire. Replace the three spokes with EXACTLY SIX broad STRAIGHT SPOKES, evenly spaced around ONE centered circular HUB. Six spokes point toward the positions of twelve, two, four, six, eight and ten o'clock. Six spokes make SIX large black wedge openings; no numbers are drawn. Keep all six spokes visible: move the diagonal bat just to the RIGHT of the wheel so it may overlap the OUTER RIGHT RIM but does NOT cover the hub or inner spokes. Both objects stay compact and complete. Natural coherent concentric wheel geometry, thick sober white cuts, no seventh spoke, tiny hub bolts, extra wheel, text or fine tread."
+        },
+        {
+          "id": "batch94-revision",
+          "label": "Batch 94 · revised Ganger",
+          "src": "candidates/batch-94/ganger.png",
+          "note": "REVISION of reference cell 4. Preserve the studded baseball bat and complete tire. REDRAW THE WHEEL AS A COHERENT WHEEL: ONE round central HUB on the exact tire center, with exactly THREE equally spaced thick STRAIGHT SPOKES radiating from that SAME hub to the inner rim, at 120-degree intervals. Their hidden portions align continuously behind the bat, not at different offsets. Three large black wedge-shaped openings, intact concentric circular rim and tire, broad black separation from the bat. No floating or shifted spoke, extra hub, fine tread, text or extra prop."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 91 · Ganger",
+          "src": "candidates/batch-91/ganger.png",
+          "note": "PROFESSION EMBLEM: ONE complete improvised BASEBALL BAT bearing THREE broad blunt STUDS crosses ONE MOTORCYCLE WHEEL with THREE thick spokes. Bat has a complete broad grip and knob; wheel is a sturdy tire ring with clear open gaps. Road gang equipment, sober compact white silhouette with strong black separation. No person, face, real gang insignia, swastika, text, logos, fine tire tread, tiny nails, thin chains or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch95-medyk",
+      "name": "Medyk",
+      "tier": "Batch 97 · Spec",
+      "batch": 97,
+      "placeholderKey": "profession:medyk",
+      "target": "icons/profesje/medyk.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/medyk.svg",
+          "variant": "default",
+          "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037"
+        }
+      ],
+      "context": "profession: Medyk; owner Spec. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zyskujesz biegłość w Medycynie i w narzędziach małego chemika lub małego medyka. DOKTOR BRAIN; KRWAWY ANIOŁ; ŁAPIDUCH; FARMACJA Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 4. Keep the medical bag and complete stethoscope. Give the MEDKIT REAL BOX DEPTH in a simple THREE-QUARTER VIEW: one broad FRONT plane bearing the large black plus mark, one narrower RIGHT SIDE plane and one visible TOP plane, all meeting at coherent shared corners. Use broad BLACK SEAM CUTS between the white planes, NOT grey shading. The handle sits correctly on the top plane, corners and lid follow the same perspective. A solid box-shaped field medkit, not a flat briefcase drawing. Stethoscope remains complete and separate, no tiny clasps, text or texture.",
+      "current": {
+        "src": "/icons/profesje/medyk.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch97-revision",
+          "label": "Batch 97 · revised Medyk",
+          "src": "candidates/batch-97/medyk.png",
+          "note": "REVISION of reference cell 4. Keep the medical bag and complete stethoscope. Give the MEDKIT REAL BOX DEPTH in a simple THREE-QUARTER VIEW: one broad FRONT plane bearing the large black plus mark, one narrower RIGHT SIDE plane and one visible TOP plane, all meeting at coherent shared corners. Use broad BLACK SEAM CUTS between the white planes, NOT grey shading. The handle sits correctly on the top plane, corners and lid follow the same perspective. A solid box-shaped field medkit, not a flat briefcase drawing. Stethoscope remains complete and separate, no tiny clasps, text or texture."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 95 · Medyk",
+          "src": "candidates/batch-95/medyk.png",
+          "note": "ONE sturdy MEDICAL BAG with a complete handle, one broad black PLUS mark on its white front and TWO simple lid cuts, paired with ONE complete STETHOSCOPE with a thick U-shaped tube and one large round chest piece. Clear broad black gap, practical field medicine, compact white silhouettes. No person, face, lettering, labels, tiny clasps, fine tubing, extra drugs or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch95-najemnik",
+      "name": "Najemnik",
+      "tier": "Batch 97 · Brutal",
+      "batch": 97,
+      "placeholderKey": "profession:najemnik",
+      "target": "icons/profesje/najemnik.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/najemnik.svg",
+          "variant": "default",
+          "sourceSha256": "2a4d32936b801162e47078613bb8694d9e2fb05dcc24e13752a64f657fa18716"
+        }
+      ],
+      "context": "profession: Najemnik; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zyskujesz biegłość w dwóch wybranych kategoriach broni i biegłość w jednym dowolnym zestawie narzędzi. MASZYNA DO ZABIJANIA; REPUTACJA; SKUTECZNY CIOS Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 5. Preserve TWO blank dog tags on ONE short thick loop and ONE complete combat knife. CLEAN UP ALL CONTOURS: dog tags are smooth complete rounded rectangles with uninterrupted outside edges and ONE clear round suspension hole each. Knife has a clean broad blade, simple straight guard and coherent complete handle; smooth straight/curved blade edges meet at ONE crisp tip, without bites, melted lumps, dangling fragments or jagged artifacts. A broad black gap separates knife and tags. Keep the same overall equipment composition, no writing, numbers, chain microdetail, scratches, tiny teeth or gore.",
+      "current": {
+        "src": "/icons/profesje/najemnik.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch97-revision",
+          "label": "Batch 97 · revised Najemnik",
+          "src": "candidates/batch-97/najemnik.png",
+          "note": "REVISION of reference cell 5. Preserve TWO blank dog tags on ONE short thick loop and ONE complete combat knife. CLEAN UP ALL CONTOURS: dog tags are smooth complete rounded rectangles with uninterrupted outside edges and ONE clear round suspension hole each. Knife has a clean broad blade, simple straight guard and coherent complete handle; smooth straight/curved blade edges meet at ONE crisp tip, without bites, melted lumps, dangling fragments or jagged artifacts. A broad black gap separates knife and tags. Keep the same overall equipment composition, no writing, numbers, chain microdetail, scratches, tiny teeth or gore."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 95 · Najemnik",
+          "src": "candidates/batch-95/najemnik.png",
+          "note": "TWO broad blank MILITARY DOG TAGS hang together from ONE short thick loop, behind ONE complete practical COMBAT KNIFE angled upward-right. Complete blade, simple guard and stout handle with TWO broad grip cuts, large black separation. Professional hired fighter, equipment and service. No names, numbers, readable tags, real insignia, fine chain, face, camouflage texture or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch95-szczur",
+      "name": "Szczur",
+      "tier": "Batch 97 · Złodziej",
+      "batch": 97,
+      "placeholderKey": "profession:szczur",
+      "target": "icons/profesje/szczur.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/szczur.svg",
+          "variant": "default",
+          "sourceSha256": "4bd810a23039817a14513e84ba592a708fcc8b78f385cd35e6d7916c79b7cae5"
+        }
+      ],
+      "context": "profession: Szczur; owner Złodziej. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zyskujesz biegłość w posługiwaniu się narzędziami małego chemika oraz w umiejętności Akrobatyka lub Zwinne dłonie. A CO MI TAM!; SZARY; TRUCICIEL; ZWINNOŚĆ SZCZURA Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REPLACE reference cell 6's LITERAL RAT AND VIAL ENTIRELY. This is a HUMAN INFILTRATOR using an unnoticed HOMELESS/Beggar DISGUISE. Show ONE ordinary generic ADULT huddled in a worn HOODED OVERCOAT, seated in a compact natural crouch with knees bent, holding ONE plain TIN BEGGING CUP in a complete hand extended slightly forward. Hood frames a small smooth featureless natural adult head; other hand stays tucked under the coat. Two broad irregular hem cuts suggest worn clothing, no fine rags. Quiet unobtrusive disguise, natural ordinary proportions, restrained dignified depiction, broad white masses and large black gaps. No animal, rat tail, ears, chemical vial, gruff beard portrait, anime, huge eyes, logos, writing, gore or caricature. The canonical Szary ability concerns blending into society as an ignored beggar.",
+      "current": {
+        "src": "/icons/profesje/szczur.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch97-revision",
+          "label": "Batch 97 · revised Szczur",
+          "src": "candidates/batch-97/szczur.png",
+          "note": "REPLACE reference cell 6's LITERAL RAT AND VIAL ENTIRELY. This is a HUMAN INFILTRATOR using an unnoticed HOMELESS/Beggar DISGUISE. Show ONE ordinary generic ADULT huddled in a worn HOODED OVERCOAT, seated in a compact natural crouch with knees bent, holding ONE plain TIN BEGGING CUP in a complete hand extended slightly forward. Hood frames a small smooth featureless natural adult head; other hand stays tucked under the coat. Two broad irregular hem cuts suggest worn clothing, no fine rags. Quiet unobtrusive disguise, natural ordinary proportions, restrained dignified depiction, broad white masses and large black gaps. No animal, rat tail, ears, chemical vial, gruff beard portrait, anime, huge eyes, logos, writing, gore or caricature. The canonical Szary ability concerns blending into society as an ignored beggar."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 95 · Szczur",
+          "src": "candidates/batch-95/szczur.png",
+          "note": "ONE realistically proportioned adult RAT crouches low beside ONE squat STOPPERED CHEMICAL VIAL bearing ONE large black DROP-shaped mark. Rat has one long tail, rounded ears, pointed muzzle, one eye and natural paws, very sparse anatomy. Unnoticed scavenger and poison resistance/craft, broad compact white glyph. No cute mascot, anime, fine fur, formula, labels, skull clutter, extra limbs or gore."
+        }
+      ]
+    },
+    {
+      "id": "batch95-wojownik-autostrady",
+      "name": "Wojownik Autostrady",
+      "tier": "Batch 97 · Twardziel",
+      "batch": 97,
+      "placeholderKey": "profession:wojownik-autostrady",
+      "target": "icons/profesje/wojownik-autostrady.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/wojownik-autostrady.svg",
+          "variant": "default",
+          "sourceSha256": "e01f31847380231e9d631e52c4abeb248ae3d4926c2bc01f16c05a20e1f6961a"
+        }
+      ],
+      "context": "profession: Wojownik Autostrady; owner Twardziel. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Otrzymujesz biegłość w umiejętności Pojazdy oraz biegłość w używaniu narzędzi małego mechanika. Jeśli posiadasz już te biegłości, otrzymujesz w nich Specjalizację. DRZWI W DRZWI; KASKADER; PANCERNA FURA Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 7. Keep the steering wheel and the same general sawed-off shotgun composition. REDRAW THE SHOTGUN COHERENTLY in simple SIDE PROFILE: TWO short straight PARALLEL BARRELS both join ONE solid shared BREECH and both end at the SAME straight perpendicular muzzle line. No floating oval rings at the muzzle. One broad wooden FORE-END lies beneath the barrels; ONE continuous short bird's-head grip curves from the breech; ONE complete empty trigger guard sits below the receiver, with a single small trigger inside. All gun parts align naturally on the same axis. Broad black separation from the wheel, no crooked barrels, melted receiver, extra grip, disconnected trigger, tiny screws, text or logo.",
+      "current": {
+        "src": "/icons/profesje/wojownik-autostrady.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch97-revision",
+          "label": "Batch 97 · revised Wojownik Autostrady",
+          "src": "candidates/batch-97/wojownik-autostrady.png",
+          "note": "REVISION of reference cell 7. Keep the steering wheel and the same general sawed-off shotgun composition. REDRAW THE SHOTGUN COHERENTLY in simple SIDE PROFILE: TWO short straight PARALLEL BARRELS both join ONE solid shared BREECH and both end at the SAME straight perpendicular muzzle line. No floating oval rings at the muzzle. One broad wooden FORE-END lies beneath the barrels; ONE continuous short bird's-head grip curves from the breech; ONE complete empty trigger guard sits below the receiver, with a single small trigger inside. All gun parts align naturally on the same axis. Broad black separation from the wheel, no crooked barrels, melted receiver, extra grip, disconnected trigger, tiny screws, text or logo."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 95 · Wojownik Autostrady",
+          "src": "candidates/batch-95/wojownik-autostrady.png",
+          "note": "ONE complete stout STEERING WHEEL with THREE broad spokes around one center hub, paired with ONE complete SAWED-OFF DOUBLE-BARREL SHOTGUN angled upward-right. Two thick parallel short barrels, complete grip, simple receiver and empty trigger guard. Vehicle combat, sober compact white silhouette with broad black separation. No driver, face, cars, numerals, letters, fine wheel stitching or gun engraving."
+        }
+      ]
+    },
+    {
+      "id": "batch95-zabojca-maszyn",
+      "name": "Zabójca Maszyn",
+      "tier": "Batch 97 · Zwiadowca",
+      "batch": 97,
+      "placeholderKey": "profession:zabojca-maszyn",
+      "target": "icons/profesje/zabojca-maszyn.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/zabojca-maszyn.svg",
+          "variant": "default",
+          "sourceSha256": "0c741cf9f957a63bc5ccc664ec9c16c5709904676a638e76017979b364a811d5"
+        }
+      ],
+      "context": "profession: Zabójca Maszyn; owner Zwiadowca. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Otrzymujesz biegłość w umiejętności Technika i jedną wybraną biegłość w narzędziach. Jeśli masz już biegłość w umiejętności Technika, otrzymujesz w niej Specjalizację. Zyskujesz biegłość w jednej wybranej kategorii broni oraz wyszkolenie w ciężkich pancerzach. EMITER EMP; EMPIRYK; SŁABY PUNKT Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "REVISION of reference cell 8. Correct the ROBOT HEAD into a coherent SYMMETRICAL FRONT VIEW: ONE intact squared casing, TWO equally sized rectangular eye openings on the SAME horizontal line, TWO identical side ear modules at the SAME height, ONE centered lower jaw with ONE broad straight horizontal mouth slot, and ONE centered short neck block. All facial components share one vertical centerline and fit inside the casing. Place the retained LIGHTNING BOLT beside the head on its RIGHT, separated by a broad black gap, so it no longer hides or distorts either eye or the right contour. Exactly robot head and bolt, broad sober industrial shapes, no human face, cartoon expression, tiny wires, text, gore or extra fragments.",
+      "current": {
+        "src": "/icons/profesje/zabojca-maszyn.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch97-revision",
+          "label": "Batch 97 · revised Zabójca Maszyn",
+          "src": "candidates/batch-97/zabojca-maszyn.png",
+          "note": "REVISION of reference cell 8. Correct the ROBOT HEAD into a coherent SYMMETRICAL FRONT VIEW: ONE intact squared casing, TWO equally sized rectangular eye openings on the SAME horizontal line, TWO identical side ear modules at the SAME height, ONE centered lower jaw with ONE broad straight horizontal mouth slot, and ONE centered short neck block. All facial components share one vertical centerline and fit inside the casing. Place the retained LIGHTNING BOLT beside the head on its RIGHT, separated by a broad black gap, so it no longer hides or distorts either eye or the right contour. Exactly robot head and bolt, broad sober industrial shapes, no human face, cartoon expression, tiny wires, text, gore or extra fragments."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 95 · Zabójca Maszyn",
+          "src": "candidates/batch-95/zabojca-maszyn.png",
+          "note": "ONE plain industrial ROBOT HEAD with a squared casing, TWO large dark rectangular eye openings and ONE broad jaw slot, crossed by ONE bold LIGHTNING BOLT with broad black separation. Electromagnetic attack against machines, sober compact white stencil. No human face, gruff portrait, cartoon expression, generic cog, fine circuits, tiny cables, readable text or logo."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "role": "Reference cells 1-8 are EXACT SELECTED revision targets. Cell 6 is a failed literal-animal concept and must be REPLACED by the human beggar disguise described below. Output cell 9, BOTTOM-RIGHT, stays completely PURE BLACK and EMPTY, with no glyph, mark, label or decorative content. All eight corrections must stay inside their own cells. ",
+  "sources": [
+    {
+      "source": "dev/icons/review/candidates/batch-94/zawolajcie-kolegow.png",
+      "sha256": "ee2f824e119375254ce916f7be1e7782f4ab8762d39eb51fc6b11a15c5b48edf"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-94/chemik.png",
+      "sha256": "da3e2c044c36f42b1d6869abbaf435d809f9ba51f675f7a04a906978abd7704a"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-94/ganger.png",
+      "sha256": "40ebbf6bb5620c062a90d4acb6e0310c6dafed594b17099ccb5599f67c49bd0d"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-95/medyk.png",
+      "sha256": "94f9d1e4feaf4f87d92800e8cc44428cea6c37cd6e3e42acb91413f2d168561e"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-95/najemnik.png",
+      "sha256": "ed2ba97a5d2e13d0fa89d19211e74567a8aadd38cbfa1192d2d6e2875500b8aa"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-95/szczur.png",
+      "sha256": "06b9e64e1348d2eca9ff508090963ac0c25896363c48f7fc8f921c7faf5548b0"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-95/wojownik-autostrady.png",
+      "sha256": "e5da08039463499c1a29214bb840303d6ce42b36dc6154c6557be4e4c064f8ad"
+    },
+    {
+      "source": "dev/icons/review/candidates/batch-95/zabojca-maszyn.png",
+      "sha256": "d4e27de0dcb4169a5a1546e8926b55265ffe828b4c1dbf48eb9035f8d4364f75"
+    }
+  ]
+}

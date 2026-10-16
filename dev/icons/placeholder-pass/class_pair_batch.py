@@ -117,7 +117,8 @@ def register(number):
     missing = missing_before[:start] + f"**Next batch number: {max(next_number, number + 1)}** ({len(active)} subjects await GM review;\nprimary class revisions retain two options each)." + missing_before[finish:]
     begin, end = f"<!-- placeholder-batch-{number}:start -->", f"<!-- placeholder-batch-{number}:end -->"
     assert begin not in missing and end not in missing
-    lines = [begin, f"## Queue (A) — Batch {number} — {len(subjects)} classes, two revision options each", "",
+    class_label = "class" if len(subjects) == 1 else "classes"
+    lines = [begin, f"## Queue (A) — Batch {number} — {len(subjects)} {class_label}, two revision options each", "",
              "Each class has two new choices with two main elements. All selected-source",
              "hashes and verbatim feedback are archived alongside exact generic prompts.",
              "Older candidates remain selectable; production files require saved approval.", "",

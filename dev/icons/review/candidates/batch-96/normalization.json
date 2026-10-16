@@ -1,0 +1,34 @@
+[
+  {
+    "key": "brutal",
+    "variant": "a",
+    "source": "raw/brutal-pair.png",
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "crop": [
+      0,
+      0,
+      887,
+      887
+    ],
+    "removedTinyPixels": 0
+  },
+  {
+    "key": "brutal",
+    "variant": "b",
+    "source": "raw/brutal-pair.png",
+    "sourceSize": [
+      1774,
+      887
+    ],
+    "crop": [
+      887,
+      0,
+      1774,
+      887
+    ],
+    "removedTinyPixels": 0
+  }
+]

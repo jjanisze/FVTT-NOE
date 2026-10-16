@@ -1,0 +1,54 @@
+{
+  "files": [
+    {
+      "key": "zawolajcie-kolegow",
+      "source": "icons/abilities/zawolajcie-kolegow.svg",
+      "variant": "default",
+      "sourceSha256": "abfc18f9af0e406acc37d35e09766a779dad7eeabed31cf74d1f1a8e14b3748d"
+    },
+    {
+      "key": "chemik",
+      "source": "icons/profesje/chemik.svg",
+      "variant": "default",
+      "sourceSha256": "4662220129374902fd41b90cf730c337c276df09c02f494defe3e6bbf31b6c27"
+    },
+    {
+      "key": "ganger",
+      "source": "icons/profesje/ganger.svg",
+      "variant": "default",
+      "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+    },
+    {
+      "key": "medyk",
+      "source": "icons/profesje/medyk.svg",
+      "variant": "default",
+      "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037"
+    },
+    {
+      "key": "najemnik",
+      "source": "icons/profesje/najemnik.svg",
+      "variant": "default",
+      "sourceSha256": "2a4d32936b801162e47078613bb8694d9e2fb05dcc24e13752a64f657fa18716"
+    },
+    {
+      "key": "szczur",
+      "source": "icons/profesje/szczur.svg",
+      "variant": "default",
+      "sourceSha256": "4bd810a23039817a14513e84ba592a708fcc8b78f385cd35e6d7916c79b7cae5"
+    },
+    {
+      "key": "wojownik-autostrady",
+      "source": "icons/profesje/wojownik-autostrady.svg",
+      "variant": "default",
+      "sourceSha256": "e01f31847380231e9d631e52c4abeb248ae3d4926c2bc01f16c05a20e1f6961a"
+    },
+    {
+      "key": "zabojca-maszyn",
+      "source": "icons/profesje/zabojca-maszyn.svg",
+      "variant": "default",
+      "sourceSha256": "0c741cf9f957a63bc5ccc664ec9c16c5709904676a638e76017979b364a811d5"
+    }
+  ],
+  "szczurCanonicalSource": "dev/classes/professions.json",
+  "canonicalSha256": "0e85bef09aba8adb812fe922f20b4363007877dc9337880bac6b3389dbbcadb8"
+}

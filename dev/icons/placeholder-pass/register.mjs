@@ -1,4 +1,4 @@
-/** Add nine review candidates, archiving saved revisions before selecting replacements. */
+/** Add a validated full or explicitly partial atlas, retaining saved review history. */
 import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
@@ -13,7 +13,10 @@ if (!Number.isInteger(number) || number < 69) throw new Error("Specify --batch=<
 const directory = path.join(REVIEW, "candidates", `batch-${number}`);
 const batch = JSON.parse(fs.readFileSync(path.join(directory, "batch.json"), "utf8"));
 const validation = JSON.parse(fs.readFileSync(path.join(directory, "validated.json"), "utf8"));
-if (validation.batch !== number || validation.validatedMasks !== 9 || batch.subjects.length !== 9) throw new Error("Unvalidated or incomplete batch");
+const subjectCount = batch.subjects.length;
+const emptyCells = Array.from({ length: 9 - subjectCount }, (_, index) => subjectCount + index + 1);
+if (subjectCount < 1 || subjectCount > 9 || validation.batch !== number || validation.validatedMasks !== subjectCount
+    || (subjectCount < 9 && (batch.partialAtlas !== true || JSON.stringify(batch.emptyCells) !== JSON.stringify(emptyCells)))) throw new Error("Unvalidated or incomplete batch");
 const manifestFile = path.join(REVIEW, "manifest.json");
 const feedbackFile = path.join(REVIEW, "feedback.json");
 const manifest = JSON.parse(fs.readFileSync(manifestFile, "utf8"));
@@ -79,7 +82,7 @@ if (!next) throw new Error("Next free batch is missing");
 missing = replaceQueueParagraph(missing, "**Next batch number:",
   `**Next batch number: ${Math.max(next, number + 1)}** (${active.length} candidates in ${batchNumbers.length} batches await GM review;\nproduction replacements require a saved approval).`);
 const begin = `<!-- placeholder-batch-${number}:start -->`, end = `<!-- placeholder-batch-${number}:end -->`;
-const lines = [begin, `## Queue (A) — Batch ${number} — 9 awaiting GM review`, "",
+const lines = [begin, `## Queue (A) — Batch ${number} — ${subjectCount} awaiting GM review`, "",
   "One 3×3 atlas in the established white-glyph style; native initials badges remain",
   "until the GM approves a selected candidate. Exact sources/hashes, generic prompts",
   `and targets: \`review/candidates/batch-${number}/\`.`, "",
@@ -101,4 +104,4 @@ else {
   missing = missing.slice(0, anchor) + section + "\n\n" + missing.slice(anchor);
 }
 fs.writeFileSync(missingFile, missing);
-console.log(`Registered nine Batch ${number} candidates; ${revisions.size} revision selections reset with exact feedback archived; unrelated decisions retained`);
+console.log(`Registered ${subjectCount} Batch ${number} candidates; ${revisions.size} revision selections reset with exact feedback archived; unrelated decisions retained`);

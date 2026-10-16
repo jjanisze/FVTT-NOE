@@ -1,4 +1,4 @@
-"""Normalize and validate a nine-cell placeholder atlas for GM review."""
+"""Normalize and validate a full or explicitly partial 3x3 placeholder atlas."""
 import argparse
 import base64
 import hashlib
@@ -47,7 +47,7 @@ def clean(icon):
     return icon, removed
 
 
-def split_components(atlas, ownership_regions=()):
+def split_components(atlas, ownership_regions=(), expected_cells=9):
     """Recover small cell overhangs without clipping limbs or importing neighbours."""
     width, height = atlas.size
     gray = atlas.convert("L").tobytes()
@@ -94,22 +94,35 @@ def split_components(atlas, ownership_regions=()):
         for point in component:
             groups[owner][point] = gray[point]
     result = []
-    for group in groups:
+    for index, group in enumerate(groups):
         image = Image.new("RGBA", atlas.size, "white")
         image.putalpha(Image.frombytes("L", atlas.size, bytes(group)))
+        if index >= expected_cells:
+            if image.getchannel("A").getbbox():
+                raise ValueError("Unexpected foreground in unused atlas cell")
+            continue
         if not image.getchannel("A").getbbox():
             raise ValueError("Empty atlas cell")
         result.append(image)
-    return result, overhangs
+    return result, overhangs[:expected_cells]
+
+
+def subject_count(batch):
+    count = len(batch["subjects"])
+    assert 1 <= count <= 9 and len({s["key"] for s in batch["subjects"]}) == count
+    if count < 9:
+        assert batch.get("partialAtlas") is True and batch.get("emptyCells") == list(range(count + 1, 10)), "Declare every unused final cell"
+    return count
 
 
 def process(here, batch):
+    count = subject_count(batch)
     preview = Image.new("RGBA", (768, 768), (34, 34, 34, 255))
-    inventory = Image.new("RGB", (650, 810), (34, 34, 34))
+    inventory = Image.new("RGB", (650, 90 * count), (34, 34, 34))
     draw = ImageDraw.Draw(inventory)
     report = []
     with Image.open(here / f"raw/batch-{batch['batch']}-atlas-a.png") as atlas:
-        cells, overhangs = split_components(atlas, batch.get("ownershipRegions", []))
+        cells, overhangs = split_components(atlas, batch.get("ownershipRegions", []), count)
         for index, subject in enumerate(batch["subjects"]):
             row, column = divmod(index, 3)
             cell = cells[index]
@@ -139,7 +152,7 @@ def process(here, batch):
 
 def validate(here, batch):
     subjects = batch["subjects"]
-    assert len(subjects) == 9 and len({subject["key"] for subject in subjects}) == 9
+    count = subject_count(batch)
     prompts = json.loads((here / "prompts.json").read_text(encoding="utf-8"))
     assert prompts["atlas"] and (here / prompts["reference"]).is_file()
     normal = json.loads((here / "normalization.json").read_text(encoding="utf-8"))
@@ -164,11 +177,11 @@ def validate(here, batch):
         assert href.startswith("data:image/webp;base64,"), key
         with Image.open(io.BytesIO(base64.b64decode(href.split(",", 1)[1]))) as embedded:
             assert embedded.format == "WEBP" and embedded.convert("RGBA").tobytes() == png.tobytes(), key
-    report = {"batch": batch["batch"], "validatedMasks": 9,
+    report = {"batch": batch["batch"], "validatedMasks": count,
               "prospectiveDeliveryTargets": sum(len(subject["deliveryTargets"]) for subject in subjects),
               "candidateHashes": {subject["key"]: hashlib.sha256((here / f"{subject['key']}.png").read_bytes()).hexdigest() for subject in subjects}}
     (here / "validated.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
-    print(f"Batch {batch['batch']} validated: nine exact PNG/WEBP/embedded-WEBP SVG masks; production unchanged")
+    print(f"Batch {batch['batch']} validated: {count} exact PNG/WEBP/embedded-WEBP SVG masks; production unchanged")
 
 
 def main():

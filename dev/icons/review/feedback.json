@@ -3258,10 +3258,10 @@
     },
     "batch89-zawolajcie-kolegow": {
       "itemId": "batch89-zawolajcie-kolegow",
-      "decision": "revise",
-      "candidateId": "batch94-revision",
-      "notes": "Wrong finger. Fix the hand.",
-      "updatedAt": "2026-10-16T00:43:08.961Z"
+      "decision": "pending",
+      "candidateId": "batch97-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:58:07.652Z"
     },
     "batch89-zawsze-w-siodle": {
       "itemId": "batch89-zawsze-w-siodle",
@@ -3300,10 +3300,10 @@
     },
     "batch90-brutal": {
       "itemId": "batch90-brutal",
-      "decision": "revise",
-      "candidateId": "batch93-a",
-      "notes": "Replace the hammer with a halligan bar",
-      "updatedAt": "2026-10-16T00:42:09.038Z"
+      "decision": "pending",
+      "candidateId": "batch96-a",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:58:07.869Z"
     },
     "batch91-cwaniak": {
       "itemId": "batch91-cwaniak",
@@ -3342,17 +3342,17 @@
     },
     "batch91-chemik": {
       "itemId": "batch91-chemik",
-      "decision": "revise",
-      "candidateId": "batch94-revision",
-      "notes": "Better, but the pipette still has an unnatural shape. Simplify it and draw it straight.",
-      "updatedAt": "2026-10-16T00:43:48.132Z"
+      "decision": "pending",
+      "candidateId": "batch97-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:58:07.653Z"
     },
     "batch91-ganger": {
       "itemId": "batch91-ganger",
-      "decision": "revise",
-      "candidateId": "batch94-revision",
-      "notes": "Change the THREE spokes to SIX",
-      "updatedAt": "2026-10-16T00:44:19.716Z"
+      "decision": "pending",
+      "candidateId": "batch97-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:58:07.654Z"
     },
     "batch91-gladiator": {
       "itemId": "batch91-gladiator",
@@ -3405,10 +3405,10 @@
     },
     "batch95-medyk": {
       "itemId": "batch95-medyk",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "The medkit reads as flat. Add depth to the medkit",
-      "updatedAt": "2026-10-16T00:45:09.785Z"
+      "decision": "pending",
+      "candidateId": "batch97-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:58:07.654Z"
     },
     "batch95-monter": {
       "itemId": "batch95-monter",
@@ -3419,10 +3419,10 @@
     },
     "batch95-najemnik": {
       "itemId": "batch95-najemnik",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Clean up the contours. Good concept",
-      "updatedAt": "2026-10-16T00:45:27.467Z"
+      "decision": "pending",
+      "candidateId": "batch97-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:58:07.654Z"
     },
     "batch95-sedzia": {
       "itemId": "batch95-sedzia",
@@ -3433,17 +3433,17 @@
     },
     "batch95-szczur": {
       "itemId": "batch95-szczur",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "It's not a LITERAL rat, but a subclass that relies on pretending to be homeless, blending into the crowd, becoming the beggar. Research and revise.",
-      "updatedAt": "2026-10-16T00:46:38.879Z"
+      "decision": "pending",
+      "candidateId": "batch97-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:58:07.655Z"
     },
     "batch95-wojownik-autostrady": {
       "itemId": "batch95-wojownik-autostrady",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Slightly correct the shotgun, it looks weird.",
-      "updatedAt": "2026-10-16T00:46:52.731Z"
+      "decision": "pending",
+      "candidateId": "batch97-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:58:07.655Z"
     },
     "batch95-zabojca": {
       "itemId": "batch95-zabojca",
@@ -3454,10 +3454,10 @@
     },
     "batch95-zabojca-maszyn": {
       "itemId": "batch95-zabojca-maszyn",
-      "decision": "revise",
-      "candidateId": "atlas-a",
-      "notes": "Correct the anatomy of the bot, or conversely, make it's right side busted",
-      "updatedAt": "2026-10-16T00:47:33.534Z"
+      "decision": "pending",
+      "candidateId": "batch97-revision",
+      "notes": "",
+      "updatedAt": "2026-10-16T00:58:07.655Z"
     },
     "batch95-zolnierz": {
       "itemId": "batch95-zolnierz",
