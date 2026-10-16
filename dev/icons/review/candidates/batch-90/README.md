@@ -61,3 +61,8 @@ cards, 45 options, every new candidate selected, no broken images and no
 browser errors. Evidence: `raw/review-preview.png` and
 `../../../placeholder-pass/progress-90-91.json`. All 32 remaining native
 placeholder hashes and unrelated review cards/decisions are preserved.
+
+Saved GM review after the class comparison: six approvals installed.
+Brutal carries its exact request into the class-pair Batch 93; Zawołajcie
+kolegów and Zryw carry into Batch 94. `reviewed.json` preserves the decisions
+and selected sources; `reviewed-installed.json` records exact delivered hashes.

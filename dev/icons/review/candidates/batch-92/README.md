@@ -74,3 +74,8 @@ errors. Six class decisions are pending; eight unrelated approvals and four
 revision requests remain exactly as saved. All 32 native placeholder hashes
 are unchanged. Evidence: `raw/review-preview.png` and
 `../../../placeholder-pass/progress-92.json`.
+
+Saved GM review: Spec A and Złodziej B are installed through the original
+Batch 91 delivery record. Brutal B, Cwaniak B, Twardziel B and Zwiadowca A
+carry exact revision notes into Batch 93. Both original review groups have
+now been consumed; do not run another delivery pass for this supplement.

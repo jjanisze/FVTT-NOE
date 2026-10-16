@@ -1,52 +1,22 @@
 {
   "stats": {
     "date": "2026-10-16",
-    "confirmedPlaceholderFiles": 32,
-    "referencedPlaceholderFiles": 32,
+    "confirmedPlaceholderFiles": 22,
+    "referencedPlaceholderFiles": 22,
     "unmappedPlaceholderFiles": 0,
     "activeVariants": 0,
     "referencedActiveVariants": 0,
-    "abilityPlaceholderFiles": 8,
+    "abilityPlaceholderFiles": 2,
     "missingExpectedFiles": 0,
-    "artSubjects": 32,
+    "artSubjects": 22,
     "byKind": {
-      "class": 6,
-      "profession": 18,
-      "feature": 8
+      "class": 4,
+      "profession": 16,
+      "feature": 2
     },
     "scope": "Exact generator signature plus canonical class/profession definitions; no world or pack reads"
   },
   "placeholders": [
-    {
-      "kind": "feature",
-      "id": "szybkie-nogi",
-      "label": "Szybkie nogi",
-      "owner": "zlodziej",
-      "variant": "default",
-      "source": "icons/abilities/szybkie-nogi.svg",
-      "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "trajektoria",
-      "label": "Trajektoria",
-      "owner": "spec",
-      "variant": "default",
-      "source": "icons/abilities/trajektoria.svg",
-      "sourceSha256": "ee9e7f28b3d095225871f6ef754ef95dd68cfd7c6c16ed99f6344663f6453e9f",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "za-garsc-gambli",
-      "label": "Za garść gambli",
-      "owner": "gwiazda",
-      "variant": "default",
-      "source": "icons/abilities/za-garsc-gambli.svg",
-      "sourceSha256": "cde71508cf8b7d7d178fb4e178ed549c877817d5ff504315a1e4682cb3c634dc",
-      "referenced": true
-    },
     {
       "kind": "feature",
       "id": "zawolajcie-kolegow",
@@ -59,42 +29,12 @@
     },
     {
       "kind": "feature",
-      "id": "zawsze-w-siodle",
-      "label": "Zawsze w siodle",
-      "owner": "kowboj",
-      "variant": "default",
-      "source": "icons/abilities/zawsze-w-siodle.svg",
-      "sourceSha256": "5e64e1f696dd5bdd4d4b71e08d22eaa07280cd5ed0b88c6ff05b3ebe43f1881f",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "zew-areny",
-      "label": "Zew areny",
-      "owner": "gladiator",
-      "variant": "default",
-      "source": "icons/abilities/zew-areny.svg",
-      "sourceSha256": "7524b5d3e92bf9189e5964e1b4a5065a2986e42c5cb8af9fbee57f0f8d06f987",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
       "id": "zryw",
       "label": "Zryw",
       "owner": "twardziel",
       "variant": "default",
       "source": "icons/abilities/zryw.svg",
       "sourceSha256": "f566600e180e85a4ce1d0e5cad346aa40e8038faf41d5ec23b4906fb7cdd00f2",
-      "referenced": true
-    },
-    {
-      "kind": "feature",
-      "id": "zwinnosc-szczura",
-      "label": "Zwinność szczura",
-      "owner": "szczur",
-      "variant": "default",
-      "source": "icons/abilities/zwinnosc-szczura.svg",
-      "sourceSha256": "20a0205b2ab30b9c8623635c37168cd1a87b5bc3f8394660576357d9defd58d7",
       "referenced": true
     },
     {
@@ -119,32 +59,12 @@
     },
     {
       "kind": "class",
-      "id": "spec",
-      "label": "Spec",
-      "owner": "spec",
-      "variant": "default",
-      "source": "icons/klasy/spec.svg",
-      "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7",
-      "referenced": true
-    },
-    {
-      "kind": "class",
       "id": "twardziel",
       "label": "Twardziel",
       "owner": "twardziel",
       "variant": "default",
       "source": "icons/klasy/twardziel.svg",
       "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac",
-      "referenced": true
-    },
-    {
-      "kind": "class",
-      "id": "zlodziej",
-      "label": "Złodziej",
-      "owner": "zlodziej",
-      "variant": "default",
-      "source": "icons/klasy/zlodziej.svg",
-      "sourceSha256": "a66384a8f44176c0f6fa824edd1758ceabfbe9645b1370870ec07d93179b50d2",
       "referenced": true
     },
     {
@@ -175,26 +95,6 @@
       "variant": "default",
       "source": "icons/profesje/ganger.svg",
       "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685",
-      "referenced": true
-    },
-    {
-      "kind": "profession",
-      "id": "gladiator",
-      "label": "Gladiator",
-      "owner": "brutal",
-      "variant": "default",
-      "source": "icons/profesje/gladiator.svg",
-      "sourceSha256": "3433cbb512a34091de6d3a17e330060f24df47337d2253a38bd345c0787f80a9",
-      "referenced": true
-    },
-    {
-      "kind": "profession",
-      "id": "gwiazda",
-      "label": "Gwiazda",
-      "owner": "cwaniak",
-      "variant": "default",
-      "source": "icons/profesje/gwiazda.svg",
-      "sourceSha256": "997555ee74146e5b8f1f2c6fc7becca90ebb51a404117b24454afee28df7fca7",
       "referenced": true
     },
     {
@@ -342,45 +242,6 @@
   "subjects": [
     {
       "kind": "feature",
-      "id": "szybkie-nogi",
-      "label": "Szybkie nogi",
-      "owner": "zlodziej",
-      "files": [
-        {
-          "source": "icons/abilities/szybkie-nogi.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "trajektoria",
-      "label": "Trajektoria",
-      "owner": "spec",
-      "files": [
-        {
-          "source": "icons/abilities/trajektoria.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "za-garsc-gambli",
-      "label": "Za garść gambli",
-      "owner": "gwiazda",
-      "files": [
-        {
-          "source": "icons/abilities/za-garsc-gambli.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "zawolajcie-kolegow",
       "label": "Zawołajcie kolegów",
       "owner": "gladiator",
@@ -394,51 +255,12 @@
     },
     {
       "kind": "feature",
-      "id": "zawsze-w-siodle",
-      "label": "Zawsze w siodle",
-      "owner": "kowboj",
-      "files": [
-        {
-          "source": "icons/abilities/zawsze-w-siodle.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "zew-areny",
-      "label": "Zew areny",
-      "owner": "gladiator",
-      "files": [
-        {
-          "source": "icons/abilities/zew-areny.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
       "id": "zryw",
       "label": "Zryw",
       "owner": "twardziel",
       "files": [
         {
           "source": "icons/abilities/zryw.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "feature",
-      "id": "zwinnosc-szczura",
-      "label": "Zwinność szczura",
-      "owner": "szczur",
-      "files": [
-        {
-          "source": "icons/abilities/zwinnosc-szczura.svg",
           "variant": "default",
           "status": "generated placeholder"
         }
@@ -472,38 +294,12 @@
     },
     {
       "kind": "class",
-      "id": "spec",
-      "label": "Spec",
-      "owner": "spec",
-      "files": [
-        {
-          "source": "icons/klasy/spec.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "class",
       "id": "twardziel",
       "label": "Twardziel",
       "owner": "twardziel",
       "files": [
         {
           "source": "icons/klasy/twardziel.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "class",
-      "id": "zlodziej",
-      "label": "Złodziej",
-      "owner": "zlodziej",
-      "files": [
-        {
-          "source": "icons/klasy/zlodziej.svg",
           "variant": "default",
           "status": "generated placeholder"
         }
@@ -543,32 +339,6 @@
       "files": [
         {
           "source": "icons/profesje/ganger.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "profession",
-      "id": "gladiator",
-      "label": "Gladiator",
-      "owner": "brutal",
-      "files": [
-        {
-          "source": "icons/profesje/gladiator.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "profession",
-      "id": "gwiazda",
-      "label": "Gwiazda",
-      "owner": "cwaniak",
-      "files": [
-        {
-          "source": "icons/profesje/gwiazda.svg",
           "variant": "default",
           "status": "generated placeholder"
         }

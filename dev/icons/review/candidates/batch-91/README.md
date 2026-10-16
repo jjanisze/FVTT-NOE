@@ -48,3 +48,9 @@ and 45 options, all new candidates selected and no broken images or browser
 errors. Evidence: `../batch-90/raw/review-preview.png` and
 `../../../placeholder-pass/progress-90-91.json`. Production hashes and all
 unrelated decisions remain unchanged.
+
+Saved GM review after the class comparison: four approvals installed,
+including Spec option A and Złodziej option B from Batch 92. Cwaniak,
+Twardziel and Zwiadowca carry exact requests into Batch 93; Chemik and
+Ganger carry into Batch 94. `reviewed.json` and `reviewed-installed.json`
+preserve every decision, selected source and delivered hash.

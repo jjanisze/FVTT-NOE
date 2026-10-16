@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batches 90 + 91 + 92 · 18 awaiting GM review",
+  "title": "Batch 91 · 4 approved subjects delivered; 8 awaiting revision",
   "updated": "2026-10-16",
   "items": [
     {
@@ -124,7 +124,8 @@
           "src": "candidates/batch-91/spec.png",
           "note": "CLASS EMBLEM: ONE complete practical OPEN-END WRENCH lies diagonally across ONE square CIRCUIT CHIP with exactly TWO thick short connector pins on each of its four sides. Wrench has a broad open jaw and complete handle; broad black cut separates the overlapping objects. Technical expertise, simple sturdy white masses. No fine circuitry, giant cog, person, face, lettering, numbers, labels or extra tools."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch91-twardziel",
@@ -206,7 +207,8 @@
           "src": "candidates/batch-91/zlodziej.png",
           "note": "CLASS EMBLEM: ONE sturdy OPEN PADLOCK with its thick shackle visibly lifted free at one side. ONE broad simple LOCKPICK is inserted into the large keyhole from lower-right. Complete coherent lock and pick, generous black separation and thick white masses. Sober thief's tools emblem, no hooded portrait, hand, person, fine key teeth, actual lock instructions, letters, numerals or extra props."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch91-zwiadowca",
@@ -12169,7 +12171,8 @@
           "src": "candidates/batch-85/szybkie-nogi.png",
           "note": "TWO complete rugged BOOTS AND SHORT LOWER TROUSER LEGS in a fast evasive STEP: the leading boot points right and lands toe-first, while the rear boot lifts with heel high. Upper calf hems end cleanly inside the cell; no cropped border. TWO short broad horizontal motion strokes trail left. Natural foot/ankle proportions, broad sparse sole cuts and clear black gap. No full person, face, tiny laces, extra feet, text or arrow."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch85-szybkie-rece",
@@ -12348,7 +12351,8 @@
           "src": "candidates/batch-87/trajektoria.png",
           "note": "ONE complete pointed BULLET follows ONE broad curved BALLISTIC ARC that ends at ONE simple TARGET CROSSHAIR on the right. Bullet sits along the arc near its high middle section and points down-right along the curve; complete short projectile with flat base, no cartridge casing. Large black gaps and a single clear path. Sober generic aim-calculation emblem, no actual measurements, formula, numerals, coordinates, diagram labels, gun, face or decorative arrows."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch87-trening-w-zbroi",
@@ -12803,7 +12807,8 @@
           "src": "candidates/batch-89/za-garsc-gambli.png",
           "note": "ONE complete practical SAXOPHONE with a broad flared bell and curved neck above ONE open BUSKER'S HAT containing TWO thick blank COINS. Saxophone has only THREE broad key cuts, sturdy coherent tube and complete mouthpiece. A street performance earns tips, sober compact object emblem. Clear black gaps, no player, face, musical-note lettering, logo, numerals, tiny keys, fine engraving or extra instruments."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch89-zabojczy-cios",
@@ -12903,7 +12908,8 @@
           "src": "candidates/batch-89/zawsze-w-siodle.png",
           "note": "ONE complete sturdy WESTERN RIDING SADDLE in clear side profile, broad seat, simple pommel and cantle, ONE large hanging STIRRUP and ONE rolled blanket secured behind. Practical adult horse tack, coherent straps simplified into two broad bands. Strong compact silhouette, generous negative space, no rider, horse, portrait, fine leather tooling, tiny stitching, logos or text."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch89-zew-areny",
@@ -12938,7 +12944,8 @@
           "src": "candidates/batch-89/zew-areny.png",
           "note": "ONE sturdy hanging ARENA BELL with a large visible clapper and ONE simple broad mounting bracket, flanked by TWO complete raised BARE CLENCHED FISTS. Intact short wrists and natural fingers, thick iron bell rim with one broad black cut. The ring calls combat and crowd energy, sober salvaged equipment. Clear black gaps, no audience faces, gruff fighter portrait, ornate architecture, text, numerals, tiny fittings or gore."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch89-znajomosci",
@@ -13026,7 +13033,8 @@
           "src": "candidates/batch-90/zwinnosc-szczura.png",
           "note": "ONE realistically proportioned adult RAT climbing ONE thick vertical ROPE, body viewed from the side, head upward, exactly four natural small paws gripping the rope. One rounded ear, one small eye, pointed muzzle and one long curved tail complete its silhouette. Broad simple masses, two large rope cuts at most, generous black gaps. Agile climbing animal, no cute mascot, anime face, fine fur, whisker texture, extra limbs, decorative frame, writing or numbers."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch91-chemik",
@@ -13113,7 +13121,8 @@
           "src": "candidates/batch-91/gladiator.png",
           "note": "PROFESSION EMBLEM: ONE salvaged ARENA HELMET with a practical CAGE FACEGUARD made of THREE broad vertical bars and one thick brow, beside ONE complete BARE CLENCHED FIST with short wrist. Helmet contains no visible face. Strong compact white masses, natural coherent fist, broad black gaps. Improvised arena fighter equipment, no fantasy ornament, feather, horns, gruff portrait, fine mesh, tiny rivets, lettering, blood or gore."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch91-gwiazda",
@@ -13142,7 +13151,8 @@
           "src": "candidates/batch-91/gwiazda.png",
           "note": "PROFESSION EMBLEM: ONE complete handheld MICROPHONE lies diagonally across ONE bold FIVE-POINT STAR. Microphone has a broad rounded grille with only TWO thick black grille cuts, a complete stout handle and one short broad cable curve. Stage performance and fame, compact sober white object silhouette with broad black separation. No person, face, fine grille mesh, lettering, musical notes, logo, numbers, sparkle clutter or decorative frame."
         }
-      ]
+      ],
+      "status": "resolved"
     }
   ]
 }

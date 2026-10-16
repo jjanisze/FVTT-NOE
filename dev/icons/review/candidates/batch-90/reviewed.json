@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-16",
+  "batch": 90,
+  "feedbackBeforeSha256": "a795d3d7b893f4da36d495cbd44faa2c6de9fbe92fc87456f586d820d697259d",
+  "active": [
+    {
+      "id": "batch85-szybkie-nogi",
+      "name": "Szybkie nogi",
+      "decision": "approve",
+      "candidateId": "batch90-revision",
+      "selectedSource": "candidates/batch-90/szybkie-nogi.png",
+      "sourceSha256": "8067b5637b361bbd1f6299e379a20b29d29a58324e91047d33ebb9a44832ea97",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/szybkie-nogi.svg",
+          "variant": "default",
+          "sourceSha256": "e898d31311d5c16bce4a5c80882ab7641532f270930da0a8450acb59c16ff398"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch85-szybkie-nogi",
+        "decision": "approve",
+        "candidateId": "batch90-revision",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:25:41.318Z"
+      }
+    },
+    {
+      "id": "batch87-trajektoria",
+      "name": "Trajektoria",
+      "decision": "approve",
+      "candidateId": "batch90-revision",
+      "selectedSource": "candidates/batch-90/trajektoria.png",
+      "sourceSha256": "9e0d68498fb787852ed84e1bc8e31e2c7d02b0e3270efd540799c5d82667cc0e",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/trajektoria.svg",
+          "variant": "default",
+          "sourceSha256": "ee9e7f28b3d095225871f6ef754ef95dd68cfd7c6c16ed99f6344663f6453e9f"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch87-trajektoria",
+        "decision": "approve",
+        "candidateId": "batch90-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:56:26.535Z"
+      }
+    },
+    {
+      "id": "batch89-za-garsc-gambli",
+      "name": "Za garść gambli",
+      "decision": "approve",
+      "candidateId": "batch90-revision",
+      "selectedSource": "candidates/batch-90/za-garsc-gambli.png",
+      "sourceSha256": "c40f77e44c203c5b45ef9a9e4505196bbc3af44c3d9a7f38108f7810b908df3e",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/za-garsc-gambli.svg",
+          "variant": "default",
+          "sourceSha256": "cde71508cf8b7d7d178fb4e178ed549c877817d5ff504315a1e4682cb3c634dc"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch89-za-garsc-gambli",
+        "decision": "approve",
+        "candidateId": "batch90-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:56:31.722Z"
+      }
+    },
+    {
+      "id": "batch89-zawolajcie-kolegow",
+      "name": "Zawołajcie kolegów",
+      "decision": "revise",
+      "candidateId": "batch90-revision",
+      "selectedSource": "candidates/batch-90/zawolajcie-kolegow.png",
+      "sourceSha256": "9398ff9fda6a2ed0539e691b0d58b687c52b04635b9057f9c2a327880f2acc07",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawolajcie-kolegow.svg",
+          "variant": "default",
+          "sourceSha256": "abfc18f9af0e406acc37d35e09766a779dad7eeabed31cf74d1f1a8e14b3748d"
+        }
+      ],
+      "notes": "Good. Now restore the index finger gesture of the front hand, \"follow me\"",
+      "feedback": {
+        "itemId": "batch89-zawolajcie-kolegow",
+        "decision": "revise",
+        "candidateId": "batch90-revision",
+        "notes": "Good. Now restore the index finger gesture of the front hand, \"follow me\"",
+        "updatedAt": "2026-10-15T23:57:02.705Z"
+      }
+    },
+    {
+      "id": "batch89-zawsze-w-siodle",
+      "name": "Zawsze w siodle",
+      "decision": "approve",
+      "candidateId": "batch90-revision",
+      "selectedSource": "candidates/batch-90/zawsze-w-siodle.png",
+      "sourceSha256": "58aef67d9e9465f24885f61c7a8d7e5c078b701e6bb8cc8a47b72c2a502e9e71",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawsze-w-siodle.svg",
+          "variant": "default",
+          "sourceSha256": "5e64e1f696dd5bdd4d4b71e08d22eaa07280cd5ed0b88c6ff05b3ebe43f1881f"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch89-zawsze-w-siodle",
+        "decision": "approve",
+        "candidateId": "batch90-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:57:10.106Z"
+      }
+    },
+    {
+      "id": "batch89-zew-areny",
+      "name": "Zew areny",
+      "decision": "approve",
+      "candidateId": "batch90-revision",
+      "selectedSource": "candidates/batch-90/zew-areny.png",
+      "sourceSha256": "3c559f4d909952c86f8e710e2498fd7abdc02ae54fa59d98e534558088740cde",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zew-areny.svg",
+          "variant": "default",
+          "sourceSha256": "7524b5d3e92bf9189e5964e1b4a5065a2986e42c5cb8af9fbee57f0f8d06f987"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch89-zew-areny",
+        "decision": "approve",
+        "candidateId": "batch90-revision",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:57:18.938Z"
+      }
+    },
+    {
+      "id": "batch90-zryw",
+      "name": "Zryw",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-90/zryw.png",
+      "sourceSha256": "3e0312df08df360d0068131c2529e13a03c393d2df92e42abdf8360c14bf7682",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zryw.svg",
+          "variant": "default",
+          "sourceSha256": "f566600e180e85a4ce1d0e5cad346aa40e8038faf41d5ec23b4906fb7cdd00f2"
+        }
+      ],
+      "notes": "Try a different concept. This is analogous to Action Surge.",
+      "feedback": {
+        "itemId": "batch90-zryw",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Try a different concept. This is analogous to Action Surge.",
+        "updatedAt": "2026-10-15T23:57:50.539Z"
+      }
+    },
+    {
+      "id": "batch90-zwinnosc-szczura",
+      "name": "Zwinność szczura",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-90/zwinnosc-szczura.png",
+      "sourceSha256": "bd4305db1ae6cd702c9285f868ac2e45f8035b5bd673ac775e9eae097f6b5a5b",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zwinnosc-szczura.svg",
+          "variant": "default",
+          "sourceSha256": "20a0205b2ab30b9c8623635c37168cd1a87b5bc3f8394660576357d9defd58d7"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch90-zwinnosc-szczura",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-15T23:58:00.271Z"
+      }
+    },
+    {
+      "id": "batch90-brutal",
+      "name": "Brutal",
+      "decision": "revise",
+      "candidateId": "batch92-b",
+      "selectedSource": "candidates/batch-92-b/brutal.png",
+      "sourceSha256": "201aad26aa372662bafc52b8c47284a3cd5c8ae2577f1370a27cb065462c39f1",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/brutal.svg",
+          "variant": "default",
+          "sourceSha256": "83bf2a94a6a88bb853e8e3de117926e3e503d06a79bbd186bc69e8f9ecaeb915"
+        }
+      ],
+      "notes": "Add a scar on the chest, replace the knife with a hand-held rail piledriver",
+      "feedback": {
+        "itemId": "batch90-brutal",
+        "decision": "revise",
+        "candidateId": "batch92-b",
+        "notes": "Add a scar on the chest, replace the knife with a hand-held rail piledriver",
+        "updatedAt": "2026-10-16T00:24:14.397Z"
+      }
+    }
+  ]
+}

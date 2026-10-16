@@ -1,0 +1,214 @@
+{
+  "date": "2026-10-16",
+  "batch": 91,
+  "feedbackBeforeSha256": "a795d3d7b893f4da36d495cbd44faa2c6de9fbe92fc87456f586d820d697259d",
+  "active": [
+    {
+      "id": "batch91-cwaniak",
+      "name": "Cwaniak",
+      "decision": "revise",
+      "candidateId": "batch92-b",
+      "selectedSource": "candidates/batch-92-b/cwaniak.png",
+      "sourceSha256": "f3d8bfb1769264bd7f0973f237afc3c233961373ab5edeeae17a49f8328f0164",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/cwaniak.svg",
+          "variant": "default",
+          "sourceSha256": "aa8669e1745b216b6ab4e23aeb55fc20df54d4922261d3e37210e95491e1f57c"
+        }
+      ],
+      "notes": "Relace the megaphone with a microphone",
+      "feedback": {
+        "itemId": "batch91-cwaniak",
+        "decision": "revise",
+        "candidateId": "batch92-b",
+        "notes": "Relace the megaphone with a microphone",
+        "updatedAt": "2026-10-16T00:24:34.550Z"
+      }
+    },
+    {
+      "id": "batch91-spec",
+      "name": "Spec",
+      "decision": "approve",
+      "candidateId": "batch92-a",
+      "selectedSource": "candidates/batch-92-a/spec.png",
+      "sourceSha256": "7bf9d35cae3c5c2d9b087fa641d0a75d45764fa548e7691d55eec341d4b39807",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/spec.svg",
+          "variant": "default",
+          "sourceSha256": "3cf87c41ceff2220fc984220e0dd0481539ebb1e96ccc14e55f25c51f7a2e4b7"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch91-spec",
+        "decision": "approve",
+        "candidateId": "batch92-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:24:38.964Z"
+      }
+    },
+    {
+      "id": "batch91-twardziel",
+      "name": "Twardziel",
+      "decision": "revise",
+      "candidateId": "batch92-b",
+      "selectedSource": "candidates/batch-92-b/twardziel.png",
+      "sourceSha256": "9f59f69b221af27510dc8977e6d299853311e3f79c25034b1eeab0b65ee0cd9d",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/twardziel.svg",
+          "variant": "default",
+          "sourceSha256": "29b07cc8366e74df6fae5a8fdfa027edbc16102f7c6c44dd41014f33de214dac"
+        }
+      ],
+      "notes": "Replace the SMG with an LMG",
+      "feedback": {
+        "itemId": "batch91-twardziel",
+        "decision": "revise",
+        "candidateId": "batch92-b",
+        "notes": "Replace the SMG with an LMG",
+        "updatedAt": "2026-10-16T00:25:06.265Z"
+      }
+    },
+    {
+      "id": "batch91-zlodziej",
+      "name": "Złodziej",
+      "decision": "approve",
+      "candidateId": "batch92-b",
+      "selectedSource": "candidates/batch-92-b/zlodziej.png",
+      "sourceSha256": "3a0ea3dbd31dccc3e67069eae99b844f862a94270bd46c15e131f78c13b0209b",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/zlodziej.svg",
+          "variant": "default",
+          "sourceSha256": "a66384a8f44176c0f6fa824edd1758ceabfbe9645b1370870ec07d93179b50d2"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch91-zlodziej",
+        "decision": "approve",
+        "candidateId": "batch92-b",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:25:13.035Z"
+      }
+    },
+    {
+      "id": "batch91-zwiadowca",
+      "name": "Zwiadowca",
+      "decision": "revise",
+      "candidateId": "batch92-a",
+      "selectedSource": "candidates/batch-92-a/zwiadowca.png",
+      "sourceSha256": "9bb22cb0eda9aaea1bbf69663c5bcf953744be39c04f6abe99bf376018e68bf3",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/zwiadowca.svg",
+          "variant": "default",
+          "sourceSha256": "67b410b391ee6dda233c64b0bbdf051d8d4bc1909260d06ef79fa3e6c328307a"
+        }
+      ],
+      "notes": "The barrel of the gun is crooked - fix it.",
+      "feedback": {
+        "itemId": "batch91-zwiadowca",
+        "decision": "revise",
+        "candidateId": "batch92-a",
+        "notes": "The barrel of the gun is crooked - fix it.",
+        "updatedAt": "2026-10-16T00:25:33.762Z"
+      }
+    },
+    {
+      "id": "batch91-chemik",
+      "name": "Chemik",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-91/chemik.png",
+      "sourceSha256": "6cf24f60ee4ac5bc90ba5d32940b93f5ab68e543329ca7044daa5bb3752b9c36",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/chemik.svg",
+          "variant": "default",
+          "sourceSha256": "4662220129374902fd41b90cf730c337c276df09c02f494defe3e6bbf31b6c27"
+        }
+      ],
+      "notes": "The tip of the pipette is melted. Sharpen it.",
+      "feedback": {
+        "itemId": "batch91-chemik",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "The tip of the pipette is melted. Sharpen it.",
+        "updatedAt": "2026-10-16T00:02:40.629Z"
+      }
+    },
+    {
+      "id": "batch91-ganger",
+      "name": "Ganger",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-91/ganger.png",
+      "sourceSha256": "a4ab1a5b11abe47ec0204d4e1a159418ecc50f218094551713987934137bfb43",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/ganger.svg",
+          "variant": "default",
+          "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+        }
+      ],
+      "notes": "Correct the spokes on the wheel.",
+      "feedback": {
+        "itemId": "batch91-ganger",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Correct the spokes on the wheel.",
+        "updatedAt": "2026-10-16T00:02:58.770Z"
+      }
+    },
+    {
+      "id": "batch91-gladiator",
+      "name": "Gladiator",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-91/gladiator.png",
+      "sourceSha256": "9490b3e4144eeacc061295471468ba1817701c1ba19ad8a2f255c7f5a78dd5cf",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/gladiator.svg",
+          "variant": "default",
+          "sourceSha256": "3433cbb512a34091de6d3a17e330060f24df47337d2253a38bd345c0787f80a9"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch91-gladiator",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:03:01.944Z"
+      }
+    },
+    {
+      "id": "batch91-gwiazda",
+      "name": "Gwiazda",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-91/gwiazda.png",
+      "sourceSha256": "6f734af1fb465b7e5c61ee70bd17ff9b8977203523a9ed2a5e37b1d8efef44fb",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/gwiazda.svg",
+          "variant": "default",
+          "sourceSha256": "997555ee74146e5b8f1f2c6fc7becca90ebb51a404117b24454afee28df7fca7"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "batch91-gwiazda",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-16T00:03:05.776Z"
+      }
+    }
+  ]
+}

@@ -3107,7 +3107,7 @@
       "decision": "approve",
       "candidateId": "batch90-revision",
       "notes": "",
-      "updatedAt": "2026-10-15T23:56:22.402Z"
+      "updatedAt": "2026-10-16T00:25:41.318Z"
     },
     "batch85-szybkie-rece": {
       "itemId": "batch85-szybkie-rece",
@@ -3300,45 +3300,45 @@
     },
     "batch90-brutal": {
       "itemId": "batch90-brutal",
-      "decision": "pending",
-      "candidateId": "batch92-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T00:15:11.145Z"
+      "decision": "revise",
+      "candidateId": "batch92-b",
+      "notes": "Add a scar on the chest, replace the knife with a hand-held rail piledriver",
+      "updatedAt": "2026-10-16T00:24:14.397Z"
     },
     "batch91-cwaniak": {
       "itemId": "batch91-cwaniak",
-      "decision": "pending",
-      "candidateId": "batch92-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T00:15:11.146Z"
+      "decision": "revise",
+      "candidateId": "batch92-b",
+      "notes": "Relace the megaphone with a microphone",
+      "updatedAt": "2026-10-16T00:24:34.550Z"
     },
     "batch91-spec": {
       "itemId": "batch91-spec",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch92-a",
       "notes": "",
-      "updatedAt": "2026-10-16T00:15:11.146Z"
+      "updatedAt": "2026-10-16T00:24:38.964Z"
     },
     "batch91-twardziel": {
       "itemId": "batch91-twardziel",
-      "decision": "pending",
-      "candidateId": "batch92-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T00:15:11.146Z"
+      "decision": "revise",
+      "candidateId": "batch92-b",
+      "notes": "Replace the SMG with an LMG",
+      "updatedAt": "2026-10-16T00:25:06.265Z"
     },
     "batch91-zlodziej": {
       "itemId": "batch91-zlodziej",
-      "decision": "pending",
-      "candidateId": "batch92-a",
+      "decision": "approve",
+      "candidateId": "batch92-b",
       "notes": "",
-      "updatedAt": "2026-10-16T00:15:11.146Z"
+      "updatedAt": "2026-10-16T00:25:13.035Z"
     },
     "batch91-zwiadowca": {
       "itemId": "batch91-zwiadowca",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch92-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T00:15:11.146Z"
+      "notes": "The barrel of the gun is crooked - fix it.",
+      "updatedAt": "2026-10-16T00:25:33.762Z"
     },
     "batch91-chemik": {
       "itemId": "batch91-chemik",

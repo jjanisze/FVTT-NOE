@@ -1,0 +1,56 @@
+{
+  "date": "2026-10-16",
+  "batch": 91,
+  "approvedSubjects": 4,
+  "remainingSubjects": 8,
+  "installed": [
+    {
+      "itemId": "batch91-spec",
+      "candidateId": "batch92-a",
+      "source": "candidates/batch-92-a/spec.png",
+      "sourceSha256": "7bf9d35cae3c5c2d9b087fa641d0a75d45764fa548e7691d55eec341d4b39807",
+      "files": [
+        "icons/klasy/spec.svg",
+        "icons/klasy/spec.webp"
+      ],
+      "svgSha256": "6c978ffeb7ddaab59d19e10468f4521de6ee53092f702b3a972e17de07691b64",
+      "webpSha256": "156f980a3f2493983f300b4a8da962b391fb276f34a69b9251991af3861c5993"
+    },
+    {
+      "itemId": "batch91-zlodziej",
+      "candidateId": "batch92-b",
+      "source": "candidates/batch-92-b/zlodziej.png",
+      "sourceSha256": "3a0ea3dbd31dccc3e67069eae99b844f862a94270bd46c15e131f78c13b0209b",
+      "files": [
+        "icons/klasy/zlodziej.svg",
+        "icons/klasy/zlodziej.webp"
+      ],
+      "svgSha256": "261911924be123b0bc8291bc5587d5a549e1a08efa113e108aeb965282ab8187",
+      "webpSha256": "3d27e972dcceaf6bc380e2ac334458b2c31a6bc80819d0c92f68068457c29128"
+    },
+    {
+      "itemId": "batch91-gladiator",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-91/gladiator.png",
+      "sourceSha256": "9490b3e4144eeacc061295471468ba1817701c1ba19ad8a2f255c7f5a78dd5cf",
+      "files": [
+        "icons/profesje/gladiator.svg",
+        "icons/profesje/gladiator.webp"
+      ],
+      "svgSha256": "f5c425f4800b002cfa827b23f965a720226a63e0674887f530716dea35c19adb",
+      "webpSha256": "a4052db62bc2a66757310d01f6ff41b28efb80e28f191412025c927e45168249"
+    },
+    {
+      "itemId": "batch91-gwiazda",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-91/gwiazda.png",
+      "sourceSha256": "6f734af1fb465b7e5c61ee70bd17ff9b8977203523a9ed2a5e37b1d8efef44fb",
+      "files": [
+        "icons/profesje/gwiazda.svg",
+        "icons/profesje/gwiazda.webp"
+      ],
+      "svgSha256": "7f51776246bb2810eb367ad086914efaad98563814f87aa27470e3a118f2a21f",
+      "webpSha256": "9865c35dac65a7a653946f4cb1f295a7858ca71013e6d80bd038f962243772a8"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "date": "2026-10-16",
+  "batch": 90,
+  "approvedSubjects": 6,
+  "remainingSubjects": 12,
+  "installed": [
+    {
+      "itemId": "batch85-szybkie-nogi",
+      "candidateId": "batch90-revision",
+      "source": "candidates/batch-90/szybkie-nogi.png",
+      "sourceSha256": "8067b5637b361bbd1f6299e379a20b29d29a58324e91047d33ebb9a44832ea97",
+      "files": [
+        "icons/abilities/szybkie-nogi.svg",
+        "icons/abilities/szybkie-nogi.webp"
+      ],
+      "svgSha256": "1de4a0986781ebe7d7ae4a374ff80ceb179f1ab65ee4b0e2ef871ed5bade5770",
+      "webpSha256": "11a2ce9262b04926e43e9cef746d73c2900847dd6a5471a21a7edf3fd09132c6"
+    },
+    {
+      "itemId": "batch87-trajektoria",
+      "candidateId": "batch90-revision",
+      "source": "candidates/batch-90/trajektoria.png",
+      "sourceSha256": "9e0d68498fb787852ed84e1bc8e31e2c7d02b0e3270efd540799c5d82667cc0e",
+      "files": [
+        "icons/abilities/trajektoria.svg",
+        "icons/abilities/trajektoria.webp"
+      ],
+      "svgSha256": "9a68d8a8ffa0a131f7a2de7c5f3187abff3371d2b58a2aa187600096ddbb3267",
+      "webpSha256": "67a85b0873cbf184b62c3d9925af1308d99aff851e0b1126d538c81a1ae5f6db"
+    },
+    {
+      "itemId": "batch89-za-garsc-gambli",
+      "candidateId": "batch90-revision",
+      "source": "candidates/batch-90/za-garsc-gambli.png",
+      "sourceSha256": "c40f77e44c203c5b45ef9a9e4505196bbc3af44c3d9a7f38108f7810b908df3e",
+      "files": [
+        "icons/abilities/za-garsc-gambli.svg",
+        "icons/abilities/za-garsc-gambli.webp"
+      ],
+      "svgSha256": "1d9540ecf63e3b6ed4939b5ffaac1710dc30619db36e3e2fc1aa39e02f9cd95d",
+      "webpSha256": "2c2c4bed285fb195f59f419744c2cc524b8836837eaa249c24612d186529d10e"
+    },
+    {
+      "itemId": "batch89-zawsze-w-siodle",
+      "candidateId": "batch90-revision",
+      "source": "candidates/batch-90/zawsze-w-siodle.png",
+      "sourceSha256": "58aef67d9e9465f24885f61c7a8d7e5c078b701e6bb8cc8a47b72c2a502e9e71",
+      "files": [
+        "icons/abilities/zawsze-w-siodle.svg",
+        "icons/abilities/zawsze-w-siodle.webp"
+      ],
+      "svgSha256": "1fe51f2eaad6a41f0325881da3cf96475ee99b220a2e03a84f99a007c8c202a7",
+      "webpSha256": "3c6da7c187a619199c0a60df74ca6270d166e6ab83c6ace689cbf1e6022e36c7"
+    },
+    {
+      "itemId": "batch89-zew-areny",
+      "candidateId": "batch90-revision",
+      "source": "candidates/batch-90/zew-areny.png",
+      "sourceSha256": "3c559f4d909952c86f8e710e2498fd7abdc02ae54fa59d98e534558088740cde",
+      "files": [
+        "icons/abilities/zew-areny.svg",
+        "icons/abilities/zew-areny.webp"
+      ],
+      "svgSha256": "b25b9f11cfb1bb51947a52d93f82da0cbd097989a8ab0a8abd5c3ea0143e4665",
+      "webpSha256": "9cb84d413b08f46067c78c3fbef8c3c222c23eba3a15b02d4fa5c83d756b19f0"
+    },
+    {
+      "itemId": "batch90-zwinnosc-szczura",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-90/zwinnosc-szczura.png",
+      "sourceSha256": "bd4305db1ae6cd702c9285f868ac2e45f8035b5bd673ac775e9eae097f6b5a5b",
+      "files": [
+        "icons/abilities/zwinnosc-szczura.svg",
+        "icons/abilities/zwinnosc-szczura.webp"
+      ],
+      "svgSha256": "f6f9ab4df3b6d59dc9315901427c6f24e688b673c0e33528835663b8ebd37581",
+      "webpSha256": "fbc34e3c9d898efafba0cec3bf470fe65e5e1ff11cecd3eea99e9c08c7806a05"
+    }
+  ]
+}

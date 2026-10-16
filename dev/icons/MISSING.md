@@ -37,12 +37,12 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 93** (18 subjects await GM review;
-Batch 92 adds two options for each of the six primary classes).
+**Next batch number: 93** (eight saved revisions remain;
+fourteen untouched profession subjects are also queued).
 
 **Icon coverage correction, 2026-10-16:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
-32 generated initials badges (32 canonically referenced art subjects).
+22 generated initials badges (22 canonically referenced art subjects).
 Origins, Sztuczki, M5 actions and fuel-grade deliveries from the earlier pass
 remain delivered; these counts do not cover all module icons. See the class
 placeholder backlog and `class-placeholder-audit.json`. GM wiring and painted
@@ -1041,93 +1041,76 @@ Evidence: `review/candidates/batch-89/reviewed.json` and `reviewed-installed.jso
 <!-- placeholder-batch-89:end -->
 
 <!-- placeholder-batch-90:start -->
-## Queue (A) — Batch 90 — 9 awaiting GM review
+## Reviewed (A) — Batch 90 — 6 delivered, 3 revisions
 
-One 3×3 atlas in the established white-glyph style; native initials badges remain
-until the GM approves a selected candidate. Exact sources/hashes, generic prompts
-and targets: `review/candidates/batch-90/`.
+Saved GM review: 6 subjects installed as exact approved SVG/WEBP pairs.
+The 3 remaining requests carry exact notes into Batch 93 (classes) and Batch 94 (other icons).
+Evidence: `review/candidates/batch-90/reviewed.json` and `reviewed-installed.json`.
 
-| Cell | Item | Exact SVG delivery targets (+ WEBP) |
-|---|---|---|
-| 1 | Szybkie nogi (revision) | `icons/abilities/szybkie-nogi.svg` |
-| 2 | Trajektoria (revision) | `icons/abilities/trajektoria.svg` |
-| 3 | Za garść gambli (revision) | `icons/abilities/za-garsc-gambli.svg` |
-| 4 | Zawołajcie kolegów (revision) | `icons/abilities/zawolajcie-kolegow.svg` |
-| 5 | Zawsze w siodle (revision) | `icons/abilities/zawsze-w-siodle.svg` |
-| 6 | Zew areny (revision) | `icons/abilities/zew-areny.svg` |
-| 7 | Zryw | `icons/abilities/zryw.svg` |
-| 8 | Zwinność szczura | `icons/abilities/zwinnosc-szczura.svg` |
-| 9 | Brutal | `icons/klasy/brutal.svg` |
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Szybkie nogi | `icons/abilities/szybkie-nogi.svg` | **done** |
+| 2 | Trajektoria | `icons/abilities/trajektoria.svg` | **done** |
+| 3 | Za garść gambli | `icons/abilities/za-garsc-gambli.svg` | **done** |
+| 4 | Zawołajcie kolegów | `icons/abilities/zawolajcie-kolegow.svg` | Revision in Batch 94 |
+| 5 | Zawsze w siodle | `icons/abilities/zawsze-w-siodle.svg` | **done** |
+| 6 | Zew areny | `icons/abilities/zew-areny.svg` | **done** |
+| 7 | Zryw | `icons/abilities/zryw.svg` | Revision in Batch 94 |
+| 8 | Zwinność szczura | `icons/abilities/zwinnosc-szczura.svg` | **done** |
+| 9 | Brutal | `icons/klasy/brutal.svg` | Revision in Batch 93 |
 
-Saved revision notes and original selected-source hashes are retained in batch.json
-and revision-feedback-before.json. Old candidates remain available; only these
-revision cards are reset to pending with the new candidate selected.
-
-The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
-nine). Later batch numbers are provisional: saved revisions take priority and
-may add batches. Base/active files share approved pixels; the existing active
-hotbar pulse remains in the code. Old unused active filenames are compatibility
-targets, without new mechanics or wiring. Code, packs and world state are untouched.
 
 <!-- placeholder-batch-90:end -->
 
 <!-- placeholder-batch-91:start -->
-## Queue (A) — Batch 91 — 9 awaiting GM review
+## Reviewed (A) — Batch 91 — 4 delivered, 5 revisions
 
-One 3×3 atlas in the established white-glyph style; native initials badges remain
-until the GM approves a selected candidate. Exact sources/hashes, generic prompts
-and targets: `review/candidates/batch-91/`.
+Saved GM review: 4 subjects installed as exact approved SVG/WEBP pairs.
+The 5 remaining requests carry exact notes into Batch 93 (classes) and Batch 94 (other icons).
+Evidence: `review/candidates/batch-91/reviewed.json` and `reviewed-installed.json`.
 
-| Cell | Item | Exact SVG delivery targets (+ WEBP) |
-|---|---|---|
-| 1 | Cwaniak | `icons/klasy/cwaniak.svg` |
-| 2 | Spec | `icons/klasy/spec.svg` |
-| 3 | Twardziel | `icons/klasy/twardziel.svg` |
-| 4 | Złodziej | `icons/klasy/zlodziej.svg` |
-| 5 | Zwiadowca | `icons/klasy/zwiadowca.svg` |
-| 6 | Chemik | `icons/profesje/chemik.svg` |
-| 7 | Ganger | `icons/profesje/ganger.svg` |
-| 8 | Gladiator | `icons/profesje/gladiator.svg` |
-| 9 | Gwiazda | `icons/profesje/gwiazda.svg` |
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Cwaniak | `icons/klasy/cwaniak.svg` | Revision in Batch 93 |
+| 2 | Spec | `icons/klasy/spec.svg` | **done** |
+| 3 | Twardziel | `icons/klasy/twardziel.svg` | Revision in Batch 93 |
+| 4 | Złodziej | `icons/klasy/zlodziej.svg` | **done** |
+| 5 | Zwiadowca | `icons/klasy/zwiadowca.svg` | Revision in Batch 93 |
+| 6 | Chemik | `icons/profesje/chemik.svg` | Revision in Batch 94 |
+| 7 | Ganger | `icons/profesje/ganger.svg` | Revision in Batch 94 |
+| 8 | Gladiator | `icons/profesje/gladiator.svg` | **done** |
+| 9 | Gwiazda | `icons/profesje/gwiazda.svg` | **done** |
 
-The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
-nine). Later batch numbers are provisional: saved revisions take priority and
-may add batches. Base/active files share approved pixels; the existing active
-hotbar pulse remains in the code. Old unused active filenames are compatibility
-targets, without new mechanics or wiring. Code, packs and world state are untouched.
 
 <!-- placeholder-batch-91:end -->
 
 <!-- placeholder-batch-92:start -->
-## Queue (A) — Batch 92 — six primary classes, two options each
+## Reviewed (A) — Batch 92 class choices — two delivered, four revisions
 
-Each emblem contains two distinct elements. Six generated comparison images
-supply twelve candidates. Both new options and every older candidate remain
-available in the existing six cards. Exact prompts, canonical rationale and
-verbatim saved feedback: `review/candidates/batch-92/`.
+Spec A and Złodziej B are installed through the original Batch 91 delivery
+record. Four class requests carry exact notes into Batch 93, with two new
+options per class. All older choices and verbatim review records are retained.
 
-| Class | Option A / option B | Exact SVG target (+ WEBP) |
+| Class | Selected candidate | Status |
 |---|---|---|
-| Brutal | `batch-92-a/brutal.png` / `batch-92-b/brutal.png` | `icons/klasy/brutal.svg` |
-| Cwaniak | `batch-92-a/cwaniak.png` / `batch-92-b/cwaniak.png` | `icons/klasy/cwaniak.svg` |
-| Spec | `batch-92-a/spec.png` / `batch-92-b/spec.png` | `icons/klasy/spec.svg` |
-| Twardziel | `batch-92-a/twardziel.png` / `batch-92-b/twardziel.png` | `icons/klasy/twardziel.svg` |
-| Złodziej | `batch-92-a/zlodziej.png` / `batch-92-b/zlodziej.png` | `icons/klasy/zlodziej.svg` |
-| Zwiadowca | `batch-92-a/zwiadowca.png` / `batch-92-b/zwiadowca.png` | `icons/klasy/zwiadowca.svg` |
+| Brutal | `candidates/batch-92-b/brutal.png` | Revision in Batch 93 |
+| Cwaniak | `candidates/batch-92-b/cwaniak.png` | Revision in Batch 93 |
+| Spec | `candidates/batch-92-a/spec.png` | **done** |
+| Twardziel | `candidates/batch-92-b/twardziel.png` | Revision in Batch 93 |
+| Złodziej | `candidates/batch-92-b/zlodziej.png` | **done** |
+| Zwiadowca | `candidates/batch-92-a/zwiadowca.png` | Revision in Batch 93 |
 
-The earlier Cwaniak approval also requested a new concept. That exact saved
-decision is archived; the explicit request for two new choices reopens its
-review alongside the other five classes. Unrelated decisions and all native
-production files remain unchanged. No class candidate is installed yet.
+Evidence: `review/candidates/batch-90/reviewed.json`,
+`review/candidates/batch-91/reviewed.json` and their installation records.
 
 <!-- placeholder-batch-92:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source
 
-Audit 2026-10-16: **32 generated initials SVGs**, including 6 classes,
-18 professions and 8 ability files. 0 ability files are active-state
-variants. Canonically referenced art requests below represent **32 subjects**;
+Audit 2026-10-16: **22 generated initials SVGs**, including 4 classes,
+16 professions and 2 ability files. 0 ability files are active-state
+variants. Canonically referenced art requests below represent **22 subjects**;
 base/active variants share a subject and must keep their existing exact filenames.
 These were outside the previous 342-card generation queue. File existence was not
 evidence of finished artwork. Native badges were confirmed against the exact
@@ -1140,24 +1123,14 @@ and the next free batch; fresh GM approval is required before replacement.
 
 | Kind | Subject | Owner | Exact SVG targets (+ WEBP after approval) | Status |
 |---|---|---|---|---|
-| feature | Szybkie nogi | zlodziej | `icons/abilities/szybkie-nogi.svg` | Needs art |
-| feature | Trajektoria | spec | `icons/abilities/trajektoria.svg` | Needs art |
-| feature | Za garść gambli | gwiazda | `icons/abilities/za-garsc-gambli.svg` | Needs art |
 | feature | Zawołajcie kolegów | gladiator | `icons/abilities/zawolajcie-kolegow.svg` | Needs art |
-| feature | Zawsze w siodle | kowboj | `icons/abilities/zawsze-w-siodle.svg` | Needs art |
-| feature | Zew areny | gladiator | `icons/abilities/zew-areny.svg` | Needs art |
 | feature | Zryw | twardziel | `icons/abilities/zryw.svg` | Needs art |
-| feature | Zwinność szczura | szczur | `icons/abilities/zwinnosc-szczura.svg` | Needs art |
 | class | Brutal | brutal | `icons/klasy/brutal.svg` | Needs art |
 | class | Cwaniak | cwaniak | `icons/klasy/cwaniak.svg` | Needs art |
-| class | Spec | spec | `icons/klasy/spec.svg` | Needs art |
 | class | Twardziel | twardziel | `icons/klasy/twardziel.svg` | Needs art |
-| class | Złodziej | zlodziej | `icons/klasy/zlodziej.svg` | Needs art |
 | class | Zwiadowca | zwiadowca | `icons/klasy/zwiadowca.svg` | Needs art |
 | profession | Chemik | spec | `icons/profesje/chemik.svg` | Needs art |
 | profession | Ganger | brutal | `icons/profesje/ganger.svg` | Needs art |
-| profession | Gladiator | brutal | `icons/profesje/gladiator.svg` | Needs art |
-| profession | Gwiazda | cwaniak | `icons/profesje/gwiazda.svg` | Needs art |
 | profession | Kaznodzieja Nowej Ery | cwaniak | `icons/profesje/kaznodzieja.svg` | Needs art |
 | profession | Kowboj | twardziel | `icons/profesje/kowboj.svg` | Needs art |
 | profession | Kurier | zlodziej | `icons/profesje/kurier.svg` | Needs art |
