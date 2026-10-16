@@ -1,32 +1,22 @@
 {
   "stats": {
     "date": "2026-10-16",
-    "confirmedPlaceholderFiles": 9,
-    "referencedPlaceholderFiles": 9,
+    "confirmedPlaceholderFiles": 2,
+    "referencedPlaceholderFiles": 2,
     "unmappedPlaceholderFiles": 0,
     "activeVariants": 0,
     "referencedActiveVariants": 0,
-    "abilityPlaceholderFiles": 1,
+    "abilityPlaceholderFiles": 0,
     "missingExpectedFiles": 0,
-    "artSubjects": 9,
+    "artSubjects": 2,
     "byKind": {
       "class": 1,
-      "profession": 7,
-      "feature": 1
+      "profession": 1,
+      "feature": 0
     },
     "scope": "Exact generator signature plus canonical class/profession definitions; no world or pack reads"
   },
   "placeholders": [
-    {
-      "kind": "feature",
-      "id": "zawolajcie-kolegow",
-      "label": "Zawołajcie kolegów",
-      "owner": "gladiator",
-      "variant": "default",
-      "source": "icons/abilities/zawolajcie-kolegow.svg",
-      "sourceSha256": "abfc18f9af0e406acc37d35e09766a779dad7eeabed31cf74d1f1a8e14b3748d",
-      "referenced": true
-    },
     {
       "kind": "class",
       "id": "brutal",
@@ -39,16 +29,6 @@
     },
     {
       "kind": "profession",
-      "id": "chemik",
-      "label": "Chemik",
-      "owner": "spec",
-      "variant": "default",
-      "source": "icons/profesje/chemik.svg",
-      "sourceSha256": "4662220129374902fd41b90cf730c337c276df09c02f494defe3e6bbf31b6c27",
-      "referenced": true
-    },
-    {
-      "kind": "profession",
       "id": "ganger",
       "label": "Ganger",
       "owner": "brutal",
@@ -56,73 +36,10 @@
       "source": "icons/profesje/ganger.svg",
       "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685",
       "referenced": true
-    },
-    {
-      "kind": "profession",
-      "id": "medyk",
-      "label": "Medyk",
-      "owner": "spec",
-      "variant": "default",
-      "source": "icons/profesje/medyk.svg",
-      "sourceSha256": "8b6e08e94745c8065380653230db08b3c9ad594abe74dcbd6be2f6c2fe3a1037",
-      "referenced": true
-    },
-    {
-      "kind": "profession",
-      "id": "najemnik",
-      "label": "Najemnik",
-      "owner": "brutal",
-      "variant": "default",
-      "source": "icons/profesje/najemnik.svg",
-      "sourceSha256": "2a4d32936b801162e47078613bb8694d9e2fb05dcc24e13752a64f657fa18716",
-      "referenced": true
-    },
-    {
-      "kind": "profession",
-      "id": "szczur",
-      "label": "Szczur",
-      "owner": "zlodziej",
-      "variant": "default",
-      "source": "icons/profesje/szczur.svg",
-      "sourceSha256": "4bd810a23039817a14513e84ba592a708fcc8b78f385cd35e6d7916c79b7cae5",
-      "referenced": true
-    },
-    {
-      "kind": "profession",
-      "id": "wojownik-autostrady",
-      "label": "Wojownik Autostrady",
-      "owner": "twardziel",
-      "variant": "default",
-      "source": "icons/profesje/wojownik-autostrady.svg",
-      "sourceSha256": "e01f31847380231e9d631e52c4abeb248ae3d4926c2bc01f16c05a20e1f6961a",
-      "referenced": true
-    },
-    {
-      "kind": "profession",
-      "id": "zabojca-maszyn",
-      "label": "Zabójca Maszyn",
-      "owner": "zwiadowca",
-      "variant": "default",
-      "source": "icons/profesje/zabojca-maszyn.svg",
-      "sourceSha256": "0c741cf9f957a63bc5ccc664ec9c16c5709904676a638e76017979b364a811d5",
-      "referenced": true
     }
   ],
   "missing": [],
   "subjects": [
-    {
-      "kind": "feature",
-      "id": "zawolajcie-kolegow",
-      "label": "Zawołajcie kolegów",
-      "owner": "gladiator",
-      "files": [
-        {
-          "source": "icons/abilities/zawolajcie-kolegow.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
     {
       "kind": "class",
       "id": "brutal",
@@ -138,90 +55,12 @@
     },
     {
       "kind": "profession",
-      "id": "chemik",
-      "label": "Chemik",
-      "owner": "spec",
-      "files": [
-        {
-          "source": "icons/profesje/chemik.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "profession",
       "id": "ganger",
       "label": "Ganger",
       "owner": "brutal",
       "files": [
         {
           "source": "icons/profesje/ganger.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "profession",
-      "id": "medyk",
-      "label": "Medyk",
-      "owner": "spec",
-      "files": [
-        {
-          "source": "icons/profesje/medyk.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "profession",
-      "id": "najemnik",
-      "label": "Najemnik",
-      "owner": "brutal",
-      "files": [
-        {
-          "source": "icons/profesje/najemnik.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "profession",
-      "id": "szczur",
-      "label": "Szczur",
-      "owner": "zlodziej",
-      "files": [
-        {
-          "source": "icons/profesje/szczur.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "profession",
-      "id": "wojownik-autostrady",
-      "label": "Wojownik Autostrady",
-      "owner": "twardziel",
-      "files": [
-        {
-          "source": "icons/profesje/wojownik-autostrady.svg",
-          "variant": "default",
-          "status": "generated placeholder"
-        }
-      ]
-    },
-    {
-      "kind": "profession",
-      "id": "zabojca-maszyn",
-      "label": "Zabójca Maszyn",
-      "owner": "zwiadowca",
-      "files": [
-        {
-          "source": "icons/profesje/zabojca-maszyn.svg",
           "variant": "default",
           "status": "generated placeholder"
         }

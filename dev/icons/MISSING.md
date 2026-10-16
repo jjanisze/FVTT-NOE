@@ -37,12 +37,12 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 98** (9 subjects await GM review;
-primary class revisions retain two options each).
+**Next batch number: 98** (the previous 342-card queue is resolved; the newly
+audited class/profession placeholder backlog remains and is listed below).
 
 **Icon coverage correction, 2026-10-16:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
-9 generated initials badges (9 canonically referenced art subjects).
+2 generated initials badges (2 canonically referenced art subjects).
 Origins, Sztuczki, M5 actions and fuel-grade deliveries from the earlier pass
 remain delivered; these counts do not cover all module icons. See the class
 placeholder backlog and `class-placeholder-audit.json`. GM wiring and painted
@@ -1164,56 +1164,44 @@ Evidence: `review/candidates/batch-95/reviewed.json` and `reviewed-installed.jso
 <!-- placeholder-batch-95:end -->
 
 <!-- placeholder-batch-96:start -->
-## Queue (A) — Batch 96 — 1 class, two revision options each
+## Reviewed (A) — Batch 96 — 0 delivered, 1 revisions
 
-Each class has two new choices with two main elements. All selected-source
-hashes and verbatim feedback are archived alongside exact generic prompts.
-Older candidates remain selectable; production files require saved approval.
+Saved GM review: 0 subjects installed as exact approved SVG/WEBP pairs.
+The 1 remaining requests carry their exact notes into Batch 98.
+Evidence: `review/candidates/batch-96/reviewed.json` and `reviewed-installed.json`.
 
-| Class | Requested correction | Native SVG (+ WEBP) |
-|---|---|---|
-| Brutal | Replace the hammer with a halligan bar | `icons/klasy/brutal.svg` |
-
-Sources, prompts and review records: `review/candidates/batch-96/`.
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Brutal | `icons/klasy/brutal.svg` | Revision in Batch 98 |
 
 <!-- placeholder-batch-96:end -->
 
 <!-- placeholder-batch-97:start -->
-## Queue (A) — Batch 97 — 8 awaiting GM review
+## Reviewed (A) — Batch 97 — 7 delivered, 1 revisions
 
-One 3×3 atlas in the established white-glyph style; native initials badges remain
-until the GM approves a selected candidate. Exact sources/hashes, generic prompts
-and targets: `review/candidates/batch-97/`.
+Saved GM review: 7 subjects installed as exact approved SVG/WEBP pairs.
+The 1 remaining requests carry their exact notes into Batch 99.
+Evidence: `review/candidates/batch-97/reviewed.json` and `reviewed-installed.json`.
 
-| Cell | Item | Exact SVG delivery targets (+ WEBP) |
-|---|---|---|
-| 1 | Zawołajcie kolegów (revision) | `icons/abilities/zawolajcie-kolegow.svg` |
-| 2 | Chemik (revision) | `icons/profesje/chemik.svg` |
-| 3 | Ganger (revision) | `icons/profesje/ganger.svg` |
-| 4 | Medyk (revision) | `icons/profesje/medyk.svg` |
-| 5 | Najemnik (revision) | `icons/profesje/najemnik.svg` |
-| 6 | Szczur (revision) | `icons/profesje/szczur.svg` |
-| 7 | Wojownik Autostrady (revision) | `icons/profesje/wojownik-autostrady.svg` |
-| 8 | Zabójca Maszyn (revision) | `icons/profesje/zabojca-maszyn.svg` |
-
-Saved revision notes and original selected-source hashes are retained in batch.json
-and revision-feedback-before.json. Old candidates remain available; only these
-revision cards are reset to pending with the new candidate selected.
-
-The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
-nine). Later batch numbers are provisional: saved revisions take priority and
-may add batches. Base/active files share approved pixels; the existing active
-hotbar pulse remains in the code. Old unused active filenames are compatibility
-targets, without new mechanics or wiring. Code, packs and world state are untouched.
+| Cell | Item | Exact SVG targets (+ WEBP) | Status |
+|---|---|---|---|
+| 1 | Zawołajcie kolegów | `icons/abilities/zawolajcie-kolegow.svg` | **done** |
+| 2 | Chemik | `icons/profesje/chemik.svg` | **done** |
+| 3 | Ganger | `icons/profesje/ganger.svg` | Revision in Batch 99 |
+| 4 | Medyk | `icons/profesje/medyk.svg` | **done** |
+| 5 | Najemnik | `icons/profesje/najemnik.svg` | **done** |
+| 6 | Szczur | `icons/profesje/szczur.svg` | **done** |
+| 7 | Wojownik Autostrady | `icons/profesje/wojownik-autostrady.svg` | **done** |
+| 8 | Zabójca Maszyn | `icons/profesje/zabojca-maszyn.svg` | **done** |
 
 <!-- placeholder-batch-97:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source
 
-Audit 2026-10-16: **9 generated initials SVGs**, including 1 classes,
-7 professions and 1 ability files. 0 ability files are active-state
-variants. Canonically referenced art requests below represent **9 subjects**;
+Audit 2026-10-16: **2 generated initials SVGs**, including 1 classes,
+1 professions and 0 ability files. 0 ability files are active-state
+variants. Canonically referenced art requests below represent **2 subjects**;
 base/active variants share a subject and must keep their existing exact filenames.
 These were outside the previous 342-card generation queue. File existence was not
 evidence of finished artwork. Native badges were confirmed against the exact
@@ -1226,15 +1214,8 @@ and the next free batch; fresh GM approval is required before replacement.
 
 | Kind | Subject | Owner | Exact SVG targets (+ WEBP after approval) | Status |
 |---|---|---|---|---|
-| feature | Zawołajcie kolegów | gladiator | `icons/abilities/zawolajcie-kolegow.svg` | Needs art |
 | class | Brutal | brutal | `icons/klasy/brutal.svg` | Needs art |
-| profession | Chemik | spec | `icons/profesje/chemik.svg` | Needs art |
 | profession | Ganger | brutal | `icons/profesje/ganger.svg` | Needs art |
-| profession | Medyk | spec | `icons/profesje/medyk.svg` | Needs art |
-| profession | Najemnik | brutal | `icons/profesje/najemnik.svg` | Needs art |
-| profession | Szczur | zlodziej | `icons/profesje/szczur.svg` | Needs art |
-| profession | Wojownik Autostrady | twardziel | `icons/profesje/wojownik-autostrady.svg` | Needs art |
-| profession | Zabójca Maszyn | zwiadowca | `icons/profesje/zabojca-maszyn.svg` | Needs art |
 
 <!-- class-placeholder-audit:end -->
 

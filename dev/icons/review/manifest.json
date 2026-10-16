@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batches 96 + 97 · 9 awaiting GM review",
+  "title": "Batch 97 · 7 approved subjects delivered; 2 awaiting revision",
   "updated": "2026-10-16",
   "items": [
     {
@@ -12948,7 +12948,8 @@
           "src": "candidates/batch-89/zawolajcie-kolegow.png",
           "note": "ONE large complete BARE HAND BECKONS confidently upward, fingers curling inward once, with TWO smaller opposing CLENCHED FISTS above-left and above-right. Exactly three hands with coherent thumbs/fingers and short complete wrists, clear broad black gaps. A fighter challenges multiple opponents to come closer. No whole person, portrait, extra hands, text, numbers, weapons, wounds, gore or decorative arrows."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch89-zawsze-w-siodle",
@@ -13157,7 +13158,8 @@
           "src": "candidates/batch-91/chemik.png",
           "note": "PROFESSION EMBLEM: ONE stout ROUND-BOTTOM LAB FLASK with a short neck, thick rim and TWO large bubble holes in its broad liquid mass. ONE complete DROPPER PIPETTE with a broad rubber bulb lies diagonally across the flask, separated by a broad black cut. Practical chemistry, sparse compact white object glyph. No formulas, recipes, labels, measurements, person, face, skull, tiny bubbles, extra glassware or lettering."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch91-ganger",
@@ -13443,7 +13445,8 @@
           "src": "candidates/batch-95/medyk.png",
           "note": "ONE sturdy MEDICAL BAG with a complete handle, one broad black PLUS mark on its white front and TWO simple lid cuts, paired with ONE complete STETHOSCOPE with a thick U-shaped tube and one large round chest piece. Clear broad black gap, practical field medicine, compact white silhouettes. No person, face, lettering, labels, tiny clasps, fine tubing, extra drugs or gore."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch95-monter",
@@ -13508,7 +13511,8 @@
           "src": "candidates/batch-95/najemnik.png",
           "note": "TWO broad blank MILITARY DOG TAGS hang together from ONE short thick loop, behind ONE complete practical COMBAT KNIFE angled upward-right. Complete blade, simple guard and stout handle with TWO broad grip cuts, large black separation. Professional hired fighter, equipment and service. No names, numbers, readable tags, real insignia, fine chain, face, camouflage texture or gore."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch95-sedzia",
@@ -13573,7 +13577,8 @@
           "src": "candidates/batch-95/szczur.png",
           "note": "ONE realistically proportioned adult RAT crouches low beside ONE squat STOPPERED CHEMICAL VIAL bearing ONE large black DROP-shaped mark. Rat has one long tail, rounded ears, pointed muzzle, one eye and natural paws, very sparse anatomy. Unnoticed scavenger and poison resistance/craft, broad compact white glyph. No cute mascot, anime, fine fur, formula, labels, skull clutter, extra limbs or gore."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch95-wojownik-autostrady",
@@ -13608,7 +13613,8 @@
           "src": "candidates/batch-95/wojownik-autostrady.png",
           "note": "ONE complete stout STEERING WHEEL with THREE broad spokes around one center hub, paired with ONE complete SAWED-OFF DOUBLE-BARREL SHOTGUN angled upward-right. Two thick parallel short barrels, complete grip, simple receiver and empty trigger guard. Vehicle combat, sober compact white silhouette with broad black separation. No driver, face, cars, numerals, letters, fine wheel stitching or gun engraving."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch95-zabojca",
@@ -13673,7 +13679,8 @@
           "src": "candidates/batch-95/zabojca-maszyn.png",
           "note": "ONE plain industrial ROBOT HEAD with a squared casing, TWO large dark rectangular eye openings and ONE broad jaw slot, crossed by ONE bold LIGHTNING BOLT with broad black separation. Electromagnetic attack against machines, sober compact white stencil. No human face, gruff portrait, cartoon expression, generic cog, fine circuits, tiny cables, readable text or logo."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "batch95-zolnierz",

@@ -1,5 +1,9 @@
 # Batch 96 — Brutal with a Halligan bar, two choices
 
+Review outcome: neither choice was approved. The GM requests a plain blunt
+weapon from the module's weapons catalog instead of the Halligan. The exact
+saved note is archived in `reviewed.json`; Batch 98 carries the revision.
+
 The GM selected the bare torso with its healed chest scar and asks to replace
 the hammer with a Halligan bar. Both new choices retain that torso and show
 the complete tool, with its fork, shaft, adze and pike. Option A puts the

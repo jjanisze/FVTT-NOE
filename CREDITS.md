@@ -222,6 +222,10 @@ Thirteen further GM selections from Batches 93–95 were installed on
 Sources, selected variants and delivered hashes are recorded in those batches'
 `reviewed-installed.json` files under `dev/icons/review/candidates/`.
 
+Seven further GM selections from Batch 97 were installed on 2026-10-16 as
+exact SVG/WEBP masks generated with OpenAI's built-in image tool. Sources and
+delivered hashes are in `dev/icons/review/candidates/batch-97/reviewed-installed.json`.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

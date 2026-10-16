@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-16",
+  "batch": 96,
+  "feedbackBeforeSha256": "9cdff694fe652a0010b6f52a7c47a48b33a8e4ceff6b937f5449add224e08e00",
+  "active": [
+    {
+      "id": "batch90-brutal",
+      "name": "Brutal",
+      "decision": "revise",
+      "candidateId": "batch96-a",
+      "selectedSource": "candidates/batch-96-a/brutal.png",
+      "sourceSha256": "a1458c52068c8d17c13806756e92f95014b73a5e4ffedba2345d42de43778d1f",
+      "deliveryTargets": [
+        {
+          "source": "icons/klasy/brutal.svg",
+          "variant": "default",
+          "sourceSha256": "83bf2a94a6a88bb853e8e3de117926e3e503d06a79bbd186bc69e8f9ecaeb915"
+        }
+      ],
+      "notes": "On second thought, I missed it with the halligan bar. Find a suitable weapon from the weapons tab. Something suitable for an unsophisticated brute to bash skulls in, but not the fantasy hammer.",
+      "feedback": {
+        "itemId": "batch90-brutal",
+        "decision": "revise",
+        "candidateId": "batch96-a",
+        "notes": "On second thought, I missed it with the halligan bar. Find a suitable weapon from the weapons tab. Something suitable for an unsophisticated brute to bash skulls in, but not the fantasy hammer.",
+        "updatedAt": "2026-10-16T21:19:44.338Z"
+      }
+    }
+  ]
+}

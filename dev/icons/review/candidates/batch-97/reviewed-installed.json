@@ -1,0 +1,92 @@
+{
+  "date": "2026-10-16",
+  "batch": 97,
+  "approvedSubjects": 7,
+  "remainingSubjects": 2,
+  "installed": [
+    {
+      "itemId": "batch89-zawolajcie-kolegow",
+      "candidateId": "batch97-revision",
+      "source": "candidates/batch-97/zawolajcie-kolegow.png",
+      "sourceSha256": "36757868547f7051e31d6e6a011b179db79244f9742aa6d21accdcc28755715b",
+      "files": [
+        "icons/abilities/zawolajcie-kolegow.svg",
+        "icons/abilities/zawolajcie-kolegow.webp"
+      ],
+      "svgSha256": "6a714ff1cd0d8cfe33bc58fd0478bbb0ad44368256d1f8437deaff660f10f27d",
+      "webpSha256": "a03dc344fd43c259d78a2ee9d51bc699df99af3c82390caca0e3835c4c87e0cc"
+    },
+    {
+      "itemId": "batch91-chemik",
+      "candidateId": "batch97-revision",
+      "source": "candidates/batch-97/chemik.png",
+      "sourceSha256": "8e877a695b50515b112e77aa9924b2db421349512afabeda973a80761f1af8f1",
+      "files": [
+        "icons/profesje/chemik.svg",
+        "icons/profesje/chemik.webp"
+      ],
+      "svgSha256": "13023af1a885cec4eb082eb33884ac228cff18d735b25220956999578d2142e6",
+      "webpSha256": "6530758b73c1b7d9cee682dfbda9b34de296b1730e03d7e8f0f0b8982906d730"
+    },
+    {
+      "itemId": "batch95-medyk",
+      "candidateId": "batch97-revision",
+      "source": "candidates/batch-97/medyk.png",
+      "sourceSha256": "de1d5639de1756b4a9b2cfe833c05d76dd4ac79292f17e00c1baa1c28115dc31",
+      "files": [
+        "icons/profesje/medyk.svg",
+        "icons/profesje/medyk.webp"
+      ],
+      "svgSha256": "7aeb1bafcb6511f529a6bae450ac95a775afa4c136f78b80c7178e68279860a5",
+      "webpSha256": "9ef1af725d92ff87d11b1776568ce34d6f3394d38b57221151bb1771d3e055f2"
+    },
+    {
+      "itemId": "batch95-najemnik",
+      "candidateId": "batch97-revision",
+      "source": "candidates/batch-97/najemnik.png",
+      "sourceSha256": "de6eeba1aae897b3968d2f037eacf68907a8c38a8713274dc908987a94268a85",
+      "files": [
+        "icons/profesje/najemnik.svg",
+        "icons/profesje/najemnik.webp"
+      ],
+      "svgSha256": "d4637fab9c1a9284cd1bf4453f339066b0f6cd3869930dd066a60ae6d245e624",
+      "webpSha256": "54118d047f88040b3a28bd1cb6ac006efc667b8e82177c30e6df7e0c492500d3"
+    },
+    {
+      "itemId": "batch95-szczur",
+      "candidateId": "batch97-revision",
+      "source": "candidates/batch-97/szczur.png",
+      "sourceSha256": "45c171ed4fb0c1bcbf528f31329378c12d96bc25972f3d3964dc65ac795a9675",
+      "files": [
+        "icons/profesje/szczur.svg",
+        "icons/profesje/szczur.webp"
+      ],
+      "svgSha256": "911d0e72a837478423c8830cbb9714b503dfea3acc7a4474af270d4cfa29f604",
+      "webpSha256": "7e29e67bfdc8d5eb58b13f0df27704f4389577e54bca37b8fc23cb7eae5b55a8"
+    },
+    {
+      "itemId": "batch95-wojownik-autostrady",
+      "candidateId": "batch97-revision",
+      "source": "candidates/batch-97/wojownik-autostrady.png",
+      "sourceSha256": "ea55dbf57de7987b339c56093a45c8d4c4971767e1e2073dcd75769cad06a560",
+      "files": [
+        "icons/profesje/wojownik-autostrady.svg",
+        "icons/profesje/wojownik-autostrady.webp"
+      ],
+      "svgSha256": "4828c8036d82c8278efbe8625fc04132ae1fdc6e37467bf942eb2227bac9340b",
+      "webpSha256": "09ea3fccc08fd4bb762f81bda5dec8df5a400658e40db8e318f0be6d6cbd15f2"
+    },
+    {
+      "itemId": "batch95-zabojca-maszyn",
+      "candidateId": "batch97-revision",
+      "source": "candidates/batch-97/zabojca-maszyn.png",
+      "sourceSha256": "aea26cf7efd17e8d4b38fcd95397c3ad6dd33df5cc87ecee7af685acd6b35c15",
+      "files": [
+        "icons/profesje/zabojca-maszyn.svg",
+        "icons/profesje/zabojca-maszyn.webp"
+      ],
+      "svgSha256": "bf36b93e8860afedb086ab61b34ca73e753cefe34da0dfec285e1e32dd48d9e3",
+      "webpSha256": "91d4ed60daa9e09bbe91ed4adb938abc83aa6951031ecf5156a2b38e7f2eefff"
+    }
+  ]
+}

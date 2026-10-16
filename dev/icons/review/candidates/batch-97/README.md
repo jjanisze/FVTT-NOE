@@ -1,5 +1,11 @@
 # Batch 97 — eight saved revisions, no filler subject
 
+Review outcome: seven selections were installed as exact approved SVG/WEBP
+masks; `reviewed-installed.json` records their hashes. Ganger needs only its
+lower-right wheel arc and spoke repaired. That exact note is archived in
+`reviewed.json` and carried into Batch 99. Overall progress is 151/153 subjects
+and 153/155 native SVG targets delivered.
+
 | Cell | Subject | Saved correction |
 |---|---|---|
 | 1 | Zawołajcie kolegów | Raise index beside thumb, folding the wrong little finger |

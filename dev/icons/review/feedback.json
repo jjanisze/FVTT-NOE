@@ -3258,10 +3258,10 @@
     },
     "batch89-zawolajcie-kolegow": {
       "itemId": "batch89-zawolajcie-kolegow",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch97-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T00:58:07.652Z"
+      "updatedAt": "2026-10-16T21:19:50.096Z"
     },
     "batch89-zawsze-w-siodle": {
       "itemId": "batch89-zawsze-w-siodle",
@@ -3300,10 +3300,10 @@
     },
     "batch90-brutal": {
       "itemId": "batch90-brutal",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch96-a",
-      "notes": "",
-      "updatedAt": "2026-10-16T00:58:07.869Z"
+      "notes": "On second thought, I missed it with the halligan bar. Find a suitable weapon from the weapons tab. Something suitable for an unsophisticated brute to bash skulls in, but not the fantasy hammer.",
+      "updatedAt": "2026-10-16T21:19:44.338Z"
     },
     "batch91-cwaniak": {
       "itemId": "batch91-cwaniak",
@@ -3342,17 +3342,17 @@
     },
     "batch91-chemik": {
       "itemId": "batch91-chemik",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch97-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T00:58:07.653Z"
+      "updatedAt": "2026-10-16T21:19:56.086Z"
     },
     "batch91-ganger": {
       "itemId": "batch91-ganger",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch97-revision",
-      "notes": "",
-      "updatedAt": "2026-10-16T00:58:07.654Z"
+      "notes": "The lower right side of the wheel is does not form a circle with the rest, and it is missing part of the spoke. Redo just the lower right part to match the upper right. Otherwise I'll hand-edit (give path)",
+      "updatedAt": "2026-10-16T21:20:44.518Z"
     },
     "batch91-gladiator": {
       "itemId": "batch91-gladiator",
@@ -3405,10 +3405,10 @@
     },
     "batch95-medyk": {
       "itemId": "batch95-medyk",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch97-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T00:58:07.654Z"
+      "updatedAt": "2026-10-16T21:20:49.195Z"
     },
     "batch95-monter": {
       "itemId": "batch95-monter",
@@ -3419,10 +3419,10 @@
     },
     "batch95-najemnik": {
       "itemId": "batch95-najemnik",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch97-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T00:58:07.654Z"
+      "updatedAt": "2026-10-16T21:20:54.521Z"
     },
     "batch95-sedzia": {
       "itemId": "batch95-sedzia",
@@ -3433,17 +3433,17 @@
     },
     "batch95-szczur": {
       "itemId": "batch95-szczur",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch97-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T00:58:07.655Z"
+      "updatedAt": "2026-10-16T21:21:08.830Z"
     },
     "batch95-wojownik-autostrady": {
       "itemId": "batch95-wojownik-autostrady",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch97-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T00:58:07.655Z"
+      "updatedAt": "2026-10-16T21:21:21.415Z"
     },
     "batch95-zabojca": {
       "itemId": "batch95-zabojca",
@@ -3454,10 +3454,10 @@
     },
     "batch95-zabojca-maszyn": {
       "itemId": "batch95-zabojca-maszyn",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch97-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T00:58:07.655Z"
+      "updatedAt": "2026-10-16T21:21:31.369Z"
     },
     "batch95-zolnierz": {
       "itemId": "batch95-zolnierz",
