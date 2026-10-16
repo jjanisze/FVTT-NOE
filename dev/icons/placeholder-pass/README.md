@@ -157,6 +157,12 @@ Brutal two choices using the canonical Bejsbol/Rurka weapon: plain pipe or
 baseball bat. Batch 99 repairs only Ganger's lower-right wheel arc and spoke.
 No subjects await first generation. The next free batch number is 100.
 
+After the Batch 98–99 review, Brutal option B is delivered. **152/153 subjects
+and 154/155 native SVG targets** are replaced, including all six primary
+classes. Ganger is the sole remaining placeholder. Batch 100 replaces the
+wheel concept with an empty biker vest beside a studded bat, following the
+GM's request for a different composition. The next free batch number is 101.
+
 The GM's durable direction is to avoid repeated gruff male survivor portraits:
 prefer the actual objects, hands, actions and generic adults, with no anime.
 That instruction is also recorded in Pipeline.md.
@@ -221,6 +227,8 @@ That instruction is also recorded in Pipeline.md.
   [exact prompt](../review/candidates/batch-98/prompts.json).
 - [Batch 99 wheel repair](../review/candidates/batch-99/README.md) and
   [exact prompt](../review/candidates/batch-99/prompts.json).
+- [Batch 100 new Ganger concept](../review/candidates/batch-100/README.md) and
+  [exact prompt](../review/candidates/batch-100/prompts.json).
 
 The numbered `prepare_*.py` files freeze their actual
 allocations and

@@ -37,8 +37,8 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 100** (the previous 342-card queue is resolved; the newly
-audited class/profession placeholder backlog remains and is listed below).
+**Next batch number: 101** (1 candidates in 1 batches await GM review;
+production replacements require a saved approval).
 
 **Icon coverage correction, 2026-10-16:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
@@ -1221,6 +1221,31 @@ Evidence: `review/candidates/batch-99/reviewed.json` and `reviewed-installed.jso
 | 1 | Ganger | `icons/profesje/ganger.svg` | Revision in Batch 100 |
 
 <!-- placeholder-batch-99:end -->
+
+<!-- placeholder-batch-100:start -->
+## Queue (A) — Batch 100 — 1 awaiting GM review
+
+Ganger is the sole remaining native placeholder: 152/153 subjects and 154/155
+SVG targets are delivered, including all primary classes. One isolated new
+concept pairs an empty biker vest with a separate studded bat. Exact sources,
+hashes, generic prompt and target: `review/candidates/batch-100/`. Eight
+compatibility cells stay empty. Production still requires saved GM approval.
+
+| Cell | Item | Exact SVG delivery targets (+ WEBP) |
+|---|---|---|
+| 1 | Ganger (revision) | `icons/profesje/ganger.svg` |
+
+Saved revision notes and original selected-source hashes are retained in batch.json
+and revision-feedback-before.json. Old candidates remain available; only these
+revision cards are reset to pending with the new candidate selected.
+
+The roadmap covers all 155 native badge files in 153 subjects (17 fresh groups of
+nine). Later batch numbers are provisional: saved revisions take priority and
+may add batches. Base/active files share approved pixels; the existing active
+hotbar pulse remains in the code. Old unused active filenames are compatibility
+targets, without new mechanics or wiring. Code, packs and world state are untouched.
+
+<!-- placeholder-batch-100:end -->
 
 <!-- class-placeholder-audit:start -->
 ## Class/profession placeholder backlog — confirmed from source

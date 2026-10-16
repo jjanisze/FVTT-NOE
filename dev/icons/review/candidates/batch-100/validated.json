@@ -1,0 +1,8 @@
+{
+  "batch": 100,
+  "validatedMasks": 1,
+  "prospectiveDeliveryTargets": 1,
+  "candidateHashes": {
+    "ganger": "ffb67d84f116bd9e92fdcc1608d703c057a0d739f9e66f2e26c5bb90bd036c6e"
+  }
+}

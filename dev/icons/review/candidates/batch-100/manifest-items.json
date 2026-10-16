@@ -1,0 +1,59 @@
+{
+  "title": "Batch 100 · 1 awaiting GM review",
+  "updated": "2026-10-16",
+  "items": [
+    {
+      "id": "batch91-ganger",
+      "name": "Ganger",
+      "tier": "Batch 100 · Brutal",
+      "batch": 100,
+      "placeholderKey": "profession:ganger",
+      "target": "icons/profesje/ganger.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/profesje/ganger.svg",
+          "variant": "default",
+          "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+        }
+      ],
+      "context": "profession: Ganger; owner Brutal. Character sheet, inventory row, hotbar/macro and chat-card icon, typically 16–64 px. Zyskujesz biegłość w kategorii broń palna pośrednia oraz biegłość w umiejętności Pojazdy. DWÓCH NA JEDNEGO; JA I MÓJ GANG!; JEDEN Z NICH; ODWAŻNY CZY GŁUPI Replace the exact existing SVG name with the approved glyph and a WEBP sidecar; no code wiring.",
+      "request": "Use case: stylized-concept. Asset: Ganger profession icon for a post-apocalyptic tabletop interface, displayed at 16-64 pixels. Create ONE square image containing ONE compact emblem with exactly TWO complete objects: an EMPTY SLEEVELESS BIKER LEATHER VEST at LEFT, and ONE STUDDED BASEBALL BAT standing diagonally beside it at RIGHT. The reference is STYLE ONLY: match its sober broad white stencil weight and simplicity, never its subjects or nine-cell layout. Vest: simple slightly turned THREE-QUARTER FRONT VIEW, showing two broad white front panels, an open black center gap, two broad turned lapels and clearly open armholes. EMPTY garment, no body, head, arms, hanger or person inside it. Keep the garment silhouette coherent, with a simple hem and very few large black cuts; no pockets, buttons, zipper teeth, stitching, badge, lettering or logo. Bat: ONE recognizable complete smooth broad blunt barrel tapering into ONE short stout grip with ONE rounded end knob. Only THREE short broad studs project from the upper barrel, clearly part of that object; no tiny nails or holes. Angle the bat from LOWER-LEFT to UPPER-RIGHT on the vest's RIGHT, with a generous uninterrupted BLACK GAP separating the two objects. They do NOT cross or overlap. This conveys gang membership and blunt close combat. Pure SOLID WHITE #FFFFFF on perfectly clean SOLID BLACK #000000; no grey, shading, gradients, dithering, texture or speckling. Broad sober utilitarian silhouettes with sparse large negative spaces, readable at 16/24/32 pixels. Center both complete objects together in the middle 65 percent of the image with generous blank margins on all sides. No wheel, tire, spokes, circular frame, geometric alignment puzzle, motorcycle, skull, extra prop, gruff face, anime, cartoon anatomy, blood, gore, text, numbers, decorative border or grid.",
+      "current": {
+        "src": "/icons/profesje/ganger.svg",
+        "note": "Generated initials placeholder; all exact delivery filenames are recorded above."
+      },
+      "candidates": [
+        {
+          "id": "batch100-revision",
+          "label": "Batch 100 · revised Ganger",
+          "src": "candidates/batch-100/ganger.png",
+          "note": "Use case: stylized-concept. Asset: Ganger profession icon for a post-apocalyptic tabletop interface, displayed at 16-64 pixels. Create ONE square image containing ONE compact emblem with exactly TWO complete objects: an EMPTY SLEEVELESS BIKER LEATHER VEST at LEFT, and ONE STUDDED BASEBALL BAT standing diagonally beside it at RIGHT. The reference is STYLE ONLY: match its sober broad white stencil weight and simplicity, never its subjects or nine-cell layout. Vest: simple slightly turned THREE-QUARTER FRONT VIEW, showing two broad white front panels, an open black center gap, two broad turned lapels and clearly open armholes. EMPTY garment, no body, head, arms, hanger or person inside it. Keep the garment silhouette coherent, with a simple hem and very few large black cuts; no pockets, buttons, zipper teeth, stitching, badge, lettering or logo. Bat: ONE recognizable complete smooth broad blunt barrel tapering into ONE short stout grip with ONE rounded end knob. Only THREE short broad studs project from the upper barrel, clearly part of that object; no tiny nails or holes. Angle the bat from LOWER-LEFT to UPPER-RIGHT on the vest's RIGHT, with a generous uninterrupted BLACK GAP separating the two objects. They do NOT cross or overlap. This conveys gang membership and blunt close combat. Pure SOLID WHITE #FFFFFF on perfectly clean SOLID BLACK #000000; no grey, shading, gradients, dithering, texture or speckling. Broad sober utilitarian silhouettes with sparse large negative spaces, readable at 16/24/32 pixels. Center both complete objects together in the middle 65 percent of the image with generous blank margins on all sides. No wheel, tire, spokes, circular frame, geometric alignment puzzle, motorcycle, skull, extra prop, gruff face, anime, cartoon anatomy, blood, gore, text, numbers, decorative border or grid."
+        },
+        {
+          "id": "batch99-revision",
+          "label": "Batch 99 · revised Ganger",
+          "src": "candidates/batch-99/ganger.png",
+          "note": "Use case: precise-object-edit. Edit the supplied Ganger glyph. Change ONLY the LOWER-RIGHT QUADRANT OF THE WHEEL, approximately the three-to-six o'clock arc and its four-o'clock spoke. Keep the entire upper half, left half, centered hub, other five spokes, tire tread, diagonal studded baseball bat, framing and relative scale unchanged. The current lower-right rim bulges and the four-o'clock spoke is broken. Repair the rim into a smooth concentric circular continuation of the UPPER-RIGHT arc: same center, radius and rim thickness. Restore ONE continuous broad straight radial spoke from hub toward four o'clock until it meets that inner rim. Keep exactly SIX spokes in total and six broad black wedge openings. Preserve the black separating cut where the bat lies in front of the outer rim. No seventh spoke, extra ring, bolt, lettering, grey, gradients, dithering, decoration or texture. Pure white sober flat glyph on pure black. This is a local geometric repair, not a redesign. One centered complete icon, generous blank margins, square output."
+        },
+        {
+          "id": "batch97-revision",
+          "label": "Batch 97 · revised Ganger",
+          "src": "candidates/batch-97/ganger.png",
+          "note": "REVISION of reference cell 3. Keep the studded baseball bat and complete circular motorcycle tire. Replace the three spokes with EXACTLY SIX broad STRAIGHT SPOKES, evenly spaced around ONE centered circular HUB. Six spokes point toward the positions of twelve, two, four, six, eight and ten o'clock. Six spokes make SIX large black wedge openings; no numbers are drawn. Keep all six spokes visible: move the diagonal bat just to the RIGHT of the wheel so it may overlap the OUTER RIGHT RIM but does NOT cover the hub or inner spokes. Both objects stay compact and complete. Natural coherent concentric wheel geometry, thick sober white cuts, no seventh spoke, tiny hub bolts, extra wheel, text or fine tread."
+        },
+        {
+          "id": "batch94-revision",
+          "label": "Batch 94 · revised Ganger",
+          "src": "candidates/batch-94/ganger.png",
+          "note": "REVISION of reference cell 4. Preserve the studded baseball bat and complete tire. REDRAW THE WHEEL AS A COHERENT WHEEL: ONE round central HUB on the exact tire center, with exactly THREE equally spaced thick STRAIGHT SPOKES radiating from that SAME hub to the inner rim, at 120-degree intervals. Their hidden portions align continuously behind the bat, not at different offsets. Three large black wedge-shaped openings, intact concentric circular rim and tire, broad black separation from the bat. No floating or shifted spoke, extra hub, fine tread, text or extra prop."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 91 · Ganger",
+          "src": "candidates/batch-91/ganger.png",
+          "note": "PROFESSION EMBLEM: ONE complete improvised BASEBALL BAT bearing THREE broad blunt STUDS crosses ONE MOTORCYCLE WHEEL with THREE thick spokes. Bat has a complete broad grip and knob; wheel is a sturdy tire ring with clear open gaps. Road gang equipment, sober compact white silhouette with strong black separation. No person, face, real gang insignia, swastika, text, logos, fine tire tread, tiny nails, thin chains or gore."
+        }
+      ]
+    }
+  ]
+}

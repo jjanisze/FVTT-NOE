@@ -1,0 +1,10 @@
+{
+  "files": [
+    {
+      "key": "ganger",
+      "source": "icons/profesje/ganger.svg",
+      "variant": "default",
+      "sourceSha256": "7fbc3ae3970dc5a1780169526960d44ffbd8e075a93ccf392b2535cd91dcf685"
+    }
+  ]
+}
