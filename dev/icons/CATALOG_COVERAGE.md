@@ -1,4 +1,21 @@
-# Canonical item icon coverage — 2026-10-12
+# Canonical item icon coverage — refreshed 2026-10-17
+
+Fresh source audit: **333 physical-item results, zero missing artwork**.
+329 entries already resolve to custom module art. Four retain core fallback
+images even though their approved assets exist: the three fuel grades and
+the medic toolkit refill. These are the four existing GM wiring tasks under
+MISSING's "Do podpięcia"; no further image generation is required for them.
+All 35 chemistry entries have custom art; all 23 medicines have distinct
+icon paths and hashes, including Reminex.
+
+Current evidence: [catalog-icons-2026-10-17.json](catalog-icons-2026-10-17.json).
+Run `node dev/icons/audit-catalog-icons.mjs --date=2026-10-17` to reproduce.
+This covers canonical physical items, not origin backgrounds, arbitrary
+older world copies or already-built compendia. See
+[ORIGIN_COVERAGE.md](ORIGIN_COVERAGE.md) for the separately discovered
+twelve missing region emblems. Historical results below retain their dates.
+
+## Original audit — 2026-10-12
 
 Audit source: the module's `KATALOG` item-result entries and the image fields/rules
 used by its data builders. The audit reads source definitions and local files;

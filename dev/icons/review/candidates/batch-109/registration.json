@@ -1,0 +1,12 @@
+{
+  "date": "2026-10-17",
+  "batch": 109,
+  "subjects": 7,
+  "productionUnchanged": true,
+  "coreComparison": {
+    "source": "Foundry core icons/svg/village.svg",
+    "sha256": "16de100d62800a904b5520e388bdc6b478de1cb4cbd81757ffc9ceeb641f7fec",
+    "devOnly": true
+  },
+  "unrelatedCardsAndDecisionsPreserved": 523
+}

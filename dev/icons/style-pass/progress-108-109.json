@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-17",
+  "preparedBatches": [
+    108,
+    109
+  ],
+  "nextFreeBatch": 110,
+  "newCandidates": 16,
+  "subjectsPerBatch": [
+    9,
+    7
+  ],
+  "newOriginEmblems": 12,
+  "newStyleFlags": 3,
+  "savedStyleRevisions": 1,
+  "approvedReplacementsInstalledThisReview": 11,
+  "keptCurrentSelections": 1,
+  "originalStyleReplacementsDelivered": 27,
+  "originalStyleSubjectsResolved": 28,
+  "originalStyleSubjectsTotal": 29,
+  "unchangedCleanupProductionVariants": 8,
+  "missingOriginVariantsPreserved": 36,
+  "unrelatedCardsAndDecisionsPreserved": 523,
+  "reviewCardsTotal": 539,
+  "reviewCardsResolved": 523,
+  "candidateCollectionValidatedPairs": 857,
+  "physicalCatalogItems": 333,
+  "physicalItemArtGaps": 0,
+  "physicalItemWiringGaps": 4,
+  "originAbilityIconsPresent": 36,
+  "originBackgroundArtGaps": 12,
+  "newCandidatesInstalledBeforeApproval": 0,
+  "browserAtPublication": {
+    "title": "Neuroshima icon review",
+    "cards": 16,
+    "options": 34,
+    "brokenImages": 0,
+    "errors": 0,
+    "pendingDecisions": 16,
+    "newCandidatesSelected": 16
+  }
+}

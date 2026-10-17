@@ -1,0 +1,16 @@
+{
+  "batch": 108,
+  "validatedMasks": 9,
+  "prospectiveDeliveryTargets": 9,
+  "candidateHashes": {
+    "bolesny-atak": "354d0fadc831daa3ab5fc1a783f0a26a2cf1f06aeb15ee942711a2bcb9eadc0c",
+    "czas-patriotow": "8820650ec5314f47153433170ce3fa539551215b0c7116dc8ab54d50f9c66138",
+    "pajecza-wspinaczka": "100b1303cd7b5b5fbb639da78605ed64071db9c27fcf73433d1585d09bda2b94",
+    "wierze": "036a4f5d691a5b015388c349ab7128986c39d73bf28b4f09dd7b4e9012ab2e80",
+    "asgard": "7c4a56f73e0e8a5299eee58015797203cf2924c674817d8a3c538d5c89d903c4",
+    "czlowiek-pustyni": "1355ad0714cdc99c830697954f11aa9a41308cd091458e8c29228fa4371f3b7d",
+    "detroit": "c7a2aec62acb9e8a34fa6e510f321bf7d5a2d6a9e0f4e1b8759c9938cf1409c9",
+    "appalachy": "6c006cec4de111aa3f7eec517c99581bac76ebdcbb9774b6952c24005a887cc2",
+    "miami": "43fd7f60e241811c4499ceb5a59a8c2fef320cde38b78d8214fc90be8bc893e0"
+  }
+}

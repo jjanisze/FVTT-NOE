@@ -1,0 +1,75 @@
+{
+  "files": [
+    {
+      "source": "icons/abilities/bolesny-atak.svg",
+      "sha256": "d9a04ac5c56d675d499618f94d887ca6526d69a5d3ac8af4cb1d452940148320"
+    },
+    {
+      "source": "icons/abilities/bolesny-atak.png",
+      "sha256": "35dcc7ab886a77688983486c11e1fda5f1dbe9d3c7fea1d757c3c895ea5fa06b"
+    },
+    {
+      "source": "icons/abilities/czas-patriotow.svg",
+      "sha256": "f77d767f40d7f80bfe6ce4619ec88181da9f95336174203bf5a95bb5de7e4b81"
+    },
+    {
+      "source": "icons/abilities/czas-patriotow.webp",
+      "sha256": "7f939963fd858564a50a5ebea90d7e38c5807493124b3f5fdc5be55c3609ac79"
+    },
+    {
+      "source": "icons/abilities/pajecza-wspinaczka.svg",
+      "sha256": "87a5baf218dba48c2e6140db3212f0327505cbb98e01952f144eaa465dedeee5"
+    },
+    {
+      "source": "icons/abilities/pajecza-wspinaczka.png",
+      "sha256": "3861e1d623dc87d5db403a0578f393f7cc03a3541f120dbe3e239109ace543fb"
+    },
+    {
+      "source": "icons/abilities/wierze.svg",
+      "sha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c"
+    },
+    {
+      "source": "icons/abilities/wierze.webp",
+      "sha256": "5f958a3a42194d1895931d5ef430f3f434b3675c40bb3f8a9e5decbd8333ba61"
+    }
+  ],
+  "expectedAbsent": [
+    "icons/pochodzenia/asgard.svg",
+    "icons/pochodzenia/asgard.webp",
+    "icons/pochodzenia/asgard.png",
+    "icons/pochodzenia/czlowiek-pustyni.svg",
+    "icons/pochodzenia/czlowiek-pustyni.webp",
+    "icons/pochodzenia/czlowiek-pustyni.png",
+    "icons/pochodzenia/detroit.svg",
+    "icons/pochodzenia/detroit.webp",
+    "icons/pochodzenia/detroit.png",
+    "icons/pochodzenia/appalachy.svg",
+    "icons/pochodzenia/appalachy.webp",
+    "icons/pochodzenia/appalachy.png",
+    "icons/pochodzenia/miami.svg",
+    "icons/pochodzenia/miami.webp",
+    "icons/pochodzenia/miami.png"
+  ],
+  "selectedSources": [
+    {
+      "key": "bolesny-atak",
+      "source": "icons/abilities/bolesny-atak.svg",
+      "sha256": "d9a04ac5c56d675d499618f94d887ca6526d69a5d3ac8af4cb1d452940148320"
+    },
+    {
+      "key": "czas-patriotow",
+      "source": "icons/abilities/czas-patriotow.svg",
+      "sha256": "f77d767f40d7f80bfe6ce4619ec88181da9f95336174203bf5a95bb5de7e4b81"
+    },
+    {
+      "key": "pajecza-wspinaczka",
+      "source": "icons/abilities/pajecza-wspinaczka.svg",
+      "sha256": "87a5baf218dba48c2e6140db3212f0327505cbb98e01952f144eaa465dedeee5"
+    },
+    {
+      "key": "wierze",
+      "source": "dev/icons/review/candidates/batch-107/wierze.png",
+      "sha256": "a69f1c0e9841a9f29351015c75b6c8ea7a1db77a2f8a4b9790bdec180a254d72"
+    }
+  ]
+}

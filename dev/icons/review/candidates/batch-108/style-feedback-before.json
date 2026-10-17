@@ -1,0 +1,47 @@
+{
+  "abilities/bolesny-atak": {
+    "iconId": "abilities/bolesny-atak",
+    "status": "redo",
+    "source": "icons/abilities/bolesny-atak.svg",
+    "sourceSha256": "d9a04ac5c56d675d499618f94d887ca6526d69a5d3ac8af4cb1d452940148320",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T23:29:19.076Z"
+  },
+  "abilities/czas-patriotow": {
+    "iconId": "abilities/czas-patriotow",
+    "status": "redo",
+    "source": "icons/abilities/czas-patriotow.svg",
+    "sourceSha256": "f77d767f40d7f80bfe6ce4619ec88181da9f95336174203bf5a95bb5de7e4b81",
+    "reasons": [
+      "detail",
+      "dither"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T23:29:34.154Z"
+  },
+  "abilities/pajecza-wspinaczka": {
+    "iconId": "abilities/pajecza-wspinaczka",
+    "status": "redo",
+    "source": "icons/abilities/pajecza-wspinaczka.svg",
+    "sourceSha256": "87a5baf218dba48c2e6140db3212f0327505cbb98e01952f144eaa465dedeee5",
+    "reasons": [
+      "other"
+    ],
+    "notes": "There is a fragment of a stray icon on the left side of the image",
+    "updatedAt": "2026-10-16T23:39:59.801Z"
+  },
+  "abilities/wierze": {
+    "iconId": "abilities/wierze",
+    "status": "redo",
+    "source": "icons/abilities/wierze.svg",
+    "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c",
+    "reasons": [
+      "detail"
+    ],
+    "notes": "",
+    "updatedAt": "2026-10-16T22:11:24.996Z"
+  }
+}

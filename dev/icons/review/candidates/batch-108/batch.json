@@ -1,0 +1,243 @@
+{
+  "date": "2026-10-17",
+  "batch": 108,
+  "pass": "origin-coverage-and-style",
+  "subjects": [
+    {
+      "kind": "feature",
+      "key": "bolesny-atak",
+      "name": "Bolesny atak",
+      "target": "icons/abilities/bolesny-atak.svg",
+      "itemId": "style108-bolesny-atak",
+      "ruleContext": "An opportunistic precise weapon strike exploits a vulnerable enemy.",
+      "context": "Ability: Bolesny atak. An opportunistic precise weapon strike exploits a vulnerable enemy. Inventory, sheet, hotbar and chat; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/bolesny-atak.svg",
+          "variant": "default",
+          "sourceSha256": "d9a04ac5c56d675d499618f94d887ca6526d69a5d3ac8af4cb1d452940148320"
+        }
+      ],
+      "styleFeedback": {
+        "iconId": "abilities/bolesny-atak",
+        "status": "redo",
+        "source": "icons/abilities/bolesny-atak.svg",
+        "sourceSha256": "d9a04ac5c56d675d499618f94d887ca6526d69a5d3ac8af4cb1d452940148320",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T23:29:19.076Z"
+      },
+      "request": "ONE complete plain COMBAT KNIFE held by ONE bare adult HAND, blade angled upward-right toward ONE broad TARGET RING with a single central black gap. Two short broad contact strokes show the precise strike. Only two broad finger separations. No full person, face, scars, texture, thin crosshairs, writing, blood or gore.",
+      "cell": 1
+    },
+    {
+      "kind": "feature",
+      "key": "czas-patriotow",
+      "name": "Czas patriotów",
+      "target": "icons/abilities/czas-patriotow.svg",
+      "itemId": "style108-czas-patriotow",
+      "ruleContext": "Patriotic resolve improves one crucial effort.",
+      "context": "Ability: Czas patriotów. Patriotic resolve improves one crucial effort. Inventory, sheet, hotbar and chat; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/czas-patriotow.svg",
+          "variant": "default",
+          "sourceSha256": "f77d767f40d7f80bfe6ce4619ec88181da9f95336174203bf5a95bb5de7e4b81"
+        }
+      ],
+      "styleFeedback": {
+        "iconId": "abilities/czas-patriotow",
+        "status": "redo",
+        "source": "icons/abilities/czas-patriotow.svg",
+        "sourceSha256": "f77d767f40d7f80bfe6ce4619ec88181da9f95336174203bf5a95bb5de7e4b81",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T23:29:34.154Z"
+      },
+      "request": "ONE complete bare clenched FIST raised in front of ONE broad plain WIND-BLOWN FLAG on a short stout pole. Flag has three broad alternating black and white horizontal bands, no stars or emblems. Complete natural fist and wrist, two broad knuckle cuts only. Sober resolve, no portrait, hair, fabric texture, stitching, lettering, numerals or fine rays.",
+      "cell": 2
+    },
+    {
+      "kind": "feature",
+      "key": "pajecza-wspinaczka",
+      "name": "Pajęcza wspinaczka",
+      "target": "icons/abilities/pajecza-wspinaczka.svg",
+      "itemId": "style108-pajecza-wspinaczka",
+      "ruleContext": "A spider-like machine can climb rough surfaces and ceilings.",
+      "context": "Ability: Pajęcza wspinaczka. A spider-like machine can climb rough surfaces and ceilings. Inventory, sheet, hotbar and chat; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pajecza-wspinaczka.svg",
+          "variant": "default",
+          "sourceSha256": "87a5baf218dba48c2e6140db3212f0327505cbb98e01952f144eaa465dedeee5"
+        }
+      ],
+      "styleFeedback": {
+        "iconId": "abilities/pajecza-wspinaczka",
+        "status": "redo",
+        "source": "icons/abilities/pajecza-wspinaczka.svg",
+        "sourceSha256": "87a5baf218dba48c2e6140db3212f0327505cbb98e01952f144eaa465dedeee5",
+        "reasons": [
+          "other"
+        ],
+        "notes": "There is a fragment of a stray icon on the left side of the image",
+        "updatedAt": "2026-10-16T23:39:59.801Z"
+      },
+      "request": "TARGETED CLEANUP of reference cell 3. Preserve the existing central spider-climbing-the-wall glyph and its broad silhouette. REMOVE the stray fragment at the far LEFT of that cell completely. Keep just ONE intact spider-like climber against ONE vertical wall and short ceiling corner. Eight complete legs, four per side; no unrelated shapes, texture, fine wires or extra legs.",
+      "cell": 3
+    },
+    {
+      "kind": "feature",
+      "key": "wierze",
+      "name": "Wierzę",
+      "target": "icons/abilities/wierze.svg",
+      "itemId": "style104-wierze",
+      "ruleContext": "A small useful object unexpectedly becomes available.",
+      "context": "Ability: Wierzę. A small useful object unexpectedly becomes available. Inventory, sheet, hotbar and chat; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wierze.svg",
+          "variant": "default",
+          "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c"
+        }
+      ],
+      "styleFeedback": {
+        "iconId": "abilities/wierze",
+        "status": "redo",
+        "source": "icons/abilities/wierze.svg",
+        "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:24.996Z"
+      },
+      "request": "TARGETED EDIT of reference cell 4. Preserve the smooth featureless HEAD at LEFT facing RIGHT, and the THOUGHT BUBBLE with its KEY above-right. Change ONLY the real key's OFFERING HAND below-right: the FOREARM must ENTER FROM THE RIGHT EDGE of the composition, its WRIST on the RIGHT and FINGERTIPS pointing LEFT toward the wishing person. The hand comes FROM SOMEONE ELSE on the right, offering the tangible key TO the head on the left. One natural open palm faces upward, key rests above its fingers. Do not flip the head, thought bubble or entire image. No wrist entering from the left, extra hand, texture, portrait or tiny marks.",
+      "revisionOf": {
+        "id": "style104-wierze",
+        "name": "Wierzę",
+        "decision": "revise",
+        "candidateId": "batch107-revision",
+        "selectedSource": "candidates/batch-107/wierze.png",
+        "sourceKind": "candidate",
+        "sourceSha256": "a69f1c0e9841a9f29351015c75b6c8ea7a1db77a2f8a4b9790bdec180a254d72",
+        "deliveryTargets": [
+          {
+            "source": "icons/abilities/wierze.svg",
+            "variant": "default",
+            "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c"
+          }
+        ],
+        "notes": "Better, but the hand should be in a different position - coming to, not from the person wishing the key",
+        "feedback": {
+          "itemId": "style104-wierze",
+          "decision": "revise",
+          "candidateId": "batch107-revision",
+          "notes": "Better, but the hand should be in a different position - coming to, not from the person wishing the key",
+          "updatedAt": "2026-10-17T00:04:06.868Z"
+        }
+      },
+      "cell": 4
+    },
+    {
+      "kind": "origin",
+      "key": "asgard",
+      "name": "Asgard",
+      "target": "icons/pochodzenia/asgard.svg",
+      "itemId": "origin-asgard",
+      "ruleContext": "Potomkowie elitarnych bunkrów projektu Ragnarok. Technologicznie zaawansowani, naiwni wobec realiów pustkowi.",
+      "context": "Pochodzenie background: Asgard. Potomkowie elitarnych bunkrów projektu Ragnarok. Technologicznie zaawansowani, naiwni wobec realiów pustkowi. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/asgard.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "ONE heavy ROUND BUNKER VAULT DOOR in a thick simple rectangular frame, with ONE broad three-spoke locking wheel. Two large hinge blocks, solid uninterrupted steel silhouette, no numbers, runes, fine rivets, tiny circuitry, texture or lettering. Technological underground refuge, not a fantasy castle.",
+      "cell": 5
+    },
+    {
+      "kind": "origin",
+      "key": "czlowiek-pustyni",
+      "name": "Człowiek Pustyni",
+      "target": "icons/pochodzenia/czlowiek-pustyni.svg",
+      "itemId": "origin-czlowiek-pustyni",
+      "ruleContext": "Indywidualiści zdolni przeżyć tam, gdzie inni giną. Zaradni, gardzący miejskim życiem.",
+      "context": "Pochodzenie background: Człowiek Pustyni. Indywidualiści zdolni przeżyć tam, gdzie inni giną. Zaradni, gardzący miejskim życiem. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/czlowiek-pustyni.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "ONE plain wrapped DESERT HEADSCARF around a smooth featureless adult head in side profile, paired with ONE squat CLOSED WATER CANTEEN. Broad cloth overlap cuts only, no beard, expressive face, eyes, hair strands, dither, dunes, stars or fine seams. Practical desert survival emblem.",
+      "cell": 6
+    },
+    {
+      "kind": "origin",
+      "key": "detroit",
+      "name": "Detroit",
+      "target": "icons/pochodzenia/detroit.svg",
+      "itemId": "origin-detroit",
+      "ruleContext": "Uzależnieni od adrenaliny kierowcy i mechanicy. Życie kręci się wokół samochodów.",
+      "context": "Pochodzenie background: Detroit. Uzależnieni od adrenaliny kierowcy i mechanicy. Życie kręci się wokół samochodów. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/detroit.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "ONE upright thick AUTOMOBILE TIRE behind ONE large complete ENGINE PISTON with its stout connecting rod angled across the lower half. Two broad tire-tread cuts and one piston groove only. Clear car-mechanic identity; no gear wheel, little bolts, spokes, lettering, racing logos or texture.",
+      "cell": 7
+    },
+    {
+      "kind": "origin",
+      "key": "appalachy",
+      "name": "Federacja Appalachów",
+      "target": "icons/pochodzenia/appalachy.svg",
+      "itemId": "origin-appalachy",
+      "ruleContext": "Górnicy i zarządcy kopalń. Twardzi lub szlachetni — rzadko coś pomiędzy.",
+      "context": "Pochodzenie background: Federacja Appalachów. Górnicy i zarządcy kopalń. Twardzi lub szlachetni — rzadko coś pomiędzy. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/appalachy.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "ONE complete sturdy MINING PICK crossed diagonally in front of ONE broad angular MOUNTAIN PEAK. Clearly separate broad white head and intact handle, one wide black mountain ridge cut. A sober miners' emblem, no little rocks, dust, rays, tiny hatching, writing or fantasy ornament.",
+      "cell": 8
+    },
+    {
+      "kind": "origin",
+      "key": "miami",
+      "name": "Miami",
+      "target": "icons/pochodzenia/miami.svg",
+      "itemId": "origin-miami",
+      "ruleContext": "Zawadiaccy i odporni mieszkańcy bagien. Piraci, śmiałkowie i ci, którym Neodżungla nie robi wrażenia.",
+      "context": "Pochodzenie background: Miami. Zawadiaccy i odporni mieszkańcy bagien. Piraci, śmiałkowie i ci, którym Neodżungla nie robi wrażenia. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/miami.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "ONE small SHALLOW-DRAFT SKIFF in clean side profile, bow pointing RIGHT, with ONE broad PALMETTO FROND curving above its stern. Three wide waterline cuts beneath the hull. Swamp-pirate and marsh identity; no people, skull flag, intricate rigging, many thin leaves, tropical holiday decoration, text or logos.",
+      "cell": 9
+    }
+  ]
+}

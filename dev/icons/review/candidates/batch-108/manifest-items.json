@@ -1,0 +1,315 @@
+{
+  "title": "Batches 108 + 109 · 12 origin emblems + 4 cleanup icons awaiting GM review",
+  "updated": "2026-10-17",
+  "items": [
+    {
+      "id": "style108-bolesny-atak",
+      "name": "Bolesny atak",
+      "batch": 108,
+      "tier": "Batch 108 · Style review",
+      "target": "icons/abilities/bolesny-atak.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/bolesny-atak.svg",
+          "variant": "default",
+          "sourceSha256": "d9a04ac5c56d675d499618f94d887ca6526d69a5d3ac8af4cb1d452940148320"
+        }
+      ],
+      "context": "Ability: Bolesny atak. An opportunistic precise weapon strike exploits a vulnerable enemy. Inventory, sheet, hotbar and chat; 16–64 px.",
+      "request": "ONE complete plain COMBAT KNIFE held by ONE bare adult HAND, blade angled upward-right toward ONE broad TARGET RING with a single central black gap. Two short broad contact strokes show the precise strike. Only two broad finger separations. No full person, face, scars, texture, thin crosshairs, writing, blood or gore.",
+      "current": {
+        "src": "/icons/abilities/bolesny-atak.svg",
+        "note": "Existing shipped art flagged for cleanup."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 108 · Bolesny atak",
+          "src": "candidates/batch-108/bolesny-atak.png",
+          "note": "ONE complete plain COMBAT KNIFE held by ONE bare adult HAND, blade angled upward-right toward ONE broad TARGET RING with a single central black gap. Two short broad contact strokes show the precise strike. Only two broad finger separations. No full person, face, scars, texture, thin crosshairs, writing, blood or gore."
+        }
+      ],
+      "styleReview": {
+        "iconId": "abilities/bolesny-atak",
+        "status": "redo",
+        "source": "icons/abilities/bolesny-atak.svg",
+        "sourceSha256": "d9a04ac5c56d675d499618f94d887ca6526d69a5d3ac8af4cb1d452940148320",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T23:29:19.076Z"
+      }
+    },
+    {
+      "id": "style108-czas-patriotow",
+      "name": "Czas patriotów",
+      "batch": 108,
+      "tier": "Batch 108 · Style review",
+      "target": "icons/abilities/czas-patriotow.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/czas-patriotow.svg",
+          "variant": "default",
+          "sourceSha256": "f77d767f40d7f80bfe6ce4619ec88181da9f95336174203bf5a95bb5de7e4b81"
+        }
+      ],
+      "context": "Ability: Czas patriotów. Patriotic resolve improves one crucial effort. Inventory, sheet, hotbar and chat; 16–64 px.",
+      "request": "ONE complete bare clenched FIST raised in front of ONE broad plain WIND-BLOWN FLAG on a short stout pole. Flag has three broad alternating black and white horizontal bands, no stars or emblems. Complete natural fist and wrist, two broad knuckle cuts only. Sober resolve, no portrait, hair, fabric texture, stitching, lettering, numerals or fine rays.",
+      "current": {
+        "src": "/icons/abilities/czas-patriotow.svg",
+        "note": "Existing shipped art flagged for cleanup."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 108 · Czas patriotów",
+          "src": "candidates/batch-108/czas-patriotow.png",
+          "note": "ONE complete bare clenched FIST raised in front of ONE broad plain WIND-BLOWN FLAG on a short stout pole. Flag has three broad alternating black and white horizontal bands, no stars or emblems. Complete natural fist and wrist, two broad knuckle cuts only. Sober resolve, no portrait, hair, fabric texture, stitching, lettering, numerals or fine rays."
+        }
+      ],
+      "styleReview": {
+        "iconId": "abilities/czas-patriotow",
+        "status": "redo",
+        "source": "icons/abilities/czas-patriotow.svg",
+        "sourceSha256": "f77d767f40d7f80bfe6ce4619ec88181da9f95336174203bf5a95bb5de7e4b81",
+        "reasons": [
+          "detail",
+          "dither"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T23:29:34.154Z"
+      }
+    },
+    {
+      "id": "style108-pajecza-wspinaczka",
+      "name": "Pajęcza wspinaczka",
+      "batch": 108,
+      "tier": "Batch 108 · Style review",
+      "target": "icons/abilities/pajecza-wspinaczka.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pajecza-wspinaczka.svg",
+          "variant": "default",
+          "sourceSha256": "87a5baf218dba48c2e6140db3212f0327505cbb98e01952f144eaa465dedeee5"
+        }
+      ],
+      "context": "Ability: Pajęcza wspinaczka. A spider-like machine can climb rough surfaces and ceilings. Inventory, sheet, hotbar and chat; 16–64 px.",
+      "request": "TARGETED CLEANUP of reference cell 3. Preserve the existing central spider-climbing-the-wall glyph and its broad silhouette. REMOVE the stray fragment at the far LEFT of that cell completely. Keep just ONE intact spider-like climber against ONE vertical wall and short ceiling corner. Eight complete legs, four per side; no unrelated shapes, texture, fine wires or extra legs.",
+      "current": {
+        "src": "/icons/abilities/pajecza-wspinaczka.svg",
+        "note": "Existing shipped art flagged for cleanup."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 108 · Pajęcza wspinaczka",
+          "src": "candidates/batch-108/pajecza-wspinaczka.png",
+          "note": "TARGETED CLEANUP of reference cell 3. Preserve the existing central spider-climbing-the-wall glyph and its broad silhouette. REMOVE the stray fragment at the far LEFT of that cell completely. Keep just ONE intact spider-like climber against ONE vertical wall and short ceiling corner. Eight complete legs, four per side; no unrelated shapes, texture, fine wires or extra legs."
+        }
+      ],
+      "styleReview": {
+        "iconId": "abilities/pajecza-wspinaczka",
+        "status": "redo",
+        "source": "icons/abilities/pajecza-wspinaczka.svg",
+        "sourceSha256": "87a5baf218dba48c2e6140db3212f0327505cbb98e01952f144eaa465dedeee5",
+        "reasons": [
+          "other"
+        ],
+        "notes": "There is a fragment of a stray icon on the left side of the image",
+        "updatedAt": "2026-10-16T23:39:59.801Z"
+      }
+    },
+    {
+      "id": "style104-wierze",
+      "name": "Wierzę",
+      "tier": "Batch 108 · Style correction",
+      "batch": 108,
+      "target": "icons/abilities/wierze.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wierze.svg",
+          "variant": "default",
+          "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c"
+        }
+      ],
+      "context": "Ability: Wierzę. A small everyday object unexpectedly becomes available. Inventory, item sheet, hotbar and chat icon, typically 16-64 px.",
+      "request": "TARGETED EDIT of reference cell 4. Preserve the smooth featureless HEAD at LEFT facing RIGHT, and the THOUGHT BUBBLE with its KEY above-right. Change ONLY the real key's OFFERING HAND below-right: the FOREARM must ENTER FROM THE RIGHT EDGE of the composition, its WRIST on the RIGHT and FINGERTIPS pointing LEFT toward the wishing person. The hand comes FROM SOMEONE ELSE on the right, offering the tangible key TO the head on the left. One natural open palm faces upward, key rests above its fingers. Do not flip the head, thought bubble or entire image. No wrist entering from the left, extra hand, texture, portrait or tiny marks.",
+      "styleReview": {
+        "iconId": "abilities/wierze",
+        "status": "redo",
+        "source": "icons/abilities/wierze.svg",
+        "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c",
+        "reasons": [
+          "detail"
+        ],
+        "notes": "",
+        "updatedAt": "2026-10-16T22:11:24.996Z"
+      },
+      "current": {
+        "src": "/icons/abilities/wierze.svg",
+        "note": "Existing shipped art flagged for style revision: detail"
+      },
+      "candidates": [
+        {
+          "id": "batch108-revision",
+          "label": "Batch 108 · Wierzę",
+          "src": "candidates/batch-108/wierze.png",
+          "note": "TARGETED EDIT of reference cell 4. Preserve the smooth featureless HEAD at LEFT facing RIGHT, and the THOUGHT BUBBLE with its KEY above-right. Change ONLY the real key's OFFERING HAND below-right: the FOREARM must ENTER FROM THE RIGHT EDGE of the composition, its WRIST on the RIGHT and FINGERTIPS pointing LEFT toward the wishing person. The hand comes FROM SOMEONE ELSE on the right, offering the tangible key TO the head on the left. One natural open palm faces upward, key rests above its fingers. Do not flip the head, thought bubble or entire image. No wrist entering from the left, extra hand, texture, portrait or tiny marks."
+        },
+        {
+          "id": "batch107-revision",
+          "label": "Batch 107 · revised Wierzę",
+          "src": "candidates/batch-107/wierze.png",
+          "note": "REPLACE cell 1's candle-and-hand idea. Show an ordinary useful object being IMAGINED INTO EXISTENCE: ONE plain generic adult HEAD in SIDE PROFILE at LEFT; ONE broad THOUGHT BUBBLE above-right containing ONE large simple KEY; and ONE complete open PALM below-right holding the SAME simple KEY now tangible. Two large round thought dots connect head and thought bubble. Both keys have one broad round bow, one short thick shaft and two broad teeth. Head is a smooth natural featureless profile with no portrait, beard or hair detail. Compact clear thought-to-real-object composition with broad black separation. No candle, prayer, religious symbol, glitter, tiny rays, magical runes, lettering, numbers or game token."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 104 · Wierzę",
+          "src": "candidates/batch-104/wierze.png",
+          "note": "ONE complete open adult PALM holds ONE small sturdy plain KEY and ONE short lit CANDLE stands beside the wrist. Key has a broad rounded bow, short shaft and TWO broad teeth. Candle has one simple steady flame. Quiet hopeful discovery, not magic. No person, face, thought bubble, rays, particles, game token, text or fine wick."
+        }
+      ]
+    },
+    {
+      "id": "origin-asgard",
+      "name": "Asgard",
+      "batch": 108,
+      "tier": "Batch 108 · Pochodzenie",
+      "target": "icons/pochodzenia/asgard.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/asgard.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Pochodzenie background: Asgard. Potomkowie elitarnych bunkrów projektu Ragnarok. Technologicznie zaawansowani, naiwni wobec realiów pustkowi. Character origin, background sheet and compendium; 16–64 px.",
+      "request": "ONE heavy ROUND BUNKER VAULT DOOR in a thick simple rectangular frame, with ONE broad three-spoke locking wheel. Two large hinge blocks, solid uninterrupted steel silhouette, no numbers, runes, fine rivets, tiny circuitry, texture or lettering. Technological underground refuge, not a fantasy castle.",
+      "current": {
+        "src": "candidates/batch-108/raw/core-origin-placeholder.svg",
+        "note": "Shared Foundry core village placeholder; dedicated origin art is missing."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 108 · Asgard",
+          "src": "candidates/batch-108/asgard.png",
+          "note": "ONE heavy ROUND BUNKER VAULT DOOR in a thick simple rectangular frame, with ONE broad three-spoke locking wheel. Two large hinge blocks, solid uninterrupted steel silhouette, no numbers, runes, fine rivets, tiny circuitry, texture or lettering. Technological underground refuge, not a fantasy castle."
+        }
+      ]
+    },
+    {
+      "id": "origin-czlowiek-pustyni",
+      "name": "Człowiek Pustyni",
+      "batch": 108,
+      "tier": "Batch 108 · Pochodzenie",
+      "target": "icons/pochodzenia/czlowiek-pustyni.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/czlowiek-pustyni.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Pochodzenie background: Człowiek Pustyni. Indywidualiści zdolni przeżyć tam, gdzie inni giną. Zaradni, gardzący miejskim życiem. Character origin, background sheet and compendium; 16–64 px.",
+      "request": "ONE plain wrapped DESERT HEADSCARF around a smooth featureless adult head in side profile, paired with ONE squat CLOSED WATER CANTEEN. Broad cloth overlap cuts only, no beard, expressive face, eyes, hair strands, dither, dunes, stars or fine seams. Practical desert survival emblem.",
+      "current": {
+        "src": "candidates/batch-108/raw/core-origin-placeholder.svg",
+        "note": "Shared Foundry core village placeholder; dedicated origin art is missing."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 108 · Człowiek Pustyni",
+          "src": "candidates/batch-108/czlowiek-pustyni.png",
+          "note": "ONE plain wrapped DESERT HEADSCARF around a smooth featureless adult head in side profile, paired with ONE squat CLOSED WATER CANTEEN. Broad cloth overlap cuts only, no beard, expressive face, eyes, hair strands, dither, dunes, stars or fine seams. Practical desert survival emblem."
+        }
+      ]
+    },
+    {
+      "id": "origin-detroit",
+      "name": "Detroit",
+      "batch": 108,
+      "tier": "Batch 108 · Pochodzenie",
+      "target": "icons/pochodzenia/detroit.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/detroit.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Pochodzenie background: Detroit. Uzależnieni od adrenaliny kierowcy i mechanicy. Życie kręci się wokół samochodów. Character origin, background sheet and compendium; 16–64 px.",
+      "request": "ONE upright thick AUTOMOBILE TIRE behind ONE large complete ENGINE PISTON with its stout connecting rod angled across the lower half. Two broad tire-tread cuts and one piston groove only. Clear car-mechanic identity; no gear wheel, little bolts, spokes, lettering, racing logos or texture.",
+      "current": {
+        "src": "candidates/batch-108/raw/core-origin-placeholder.svg",
+        "note": "Shared Foundry core village placeholder; dedicated origin art is missing."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 108 · Detroit",
+          "src": "candidates/batch-108/detroit.png",
+          "note": "ONE upright thick AUTOMOBILE TIRE behind ONE large complete ENGINE PISTON with its stout connecting rod angled across the lower half. Two broad tire-tread cuts and one piston groove only. Clear car-mechanic identity; no gear wheel, little bolts, spokes, lettering, racing logos or texture."
+        }
+      ]
+    },
+    {
+      "id": "origin-appalachy",
+      "name": "Federacja Appalachów",
+      "batch": 108,
+      "tier": "Batch 108 · Pochodzenie",
+      "target": "icons/pochodzenia/appalachy.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/appalachy.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Pochodzenie background: Federacja Appalachów. Górnicy i zarządcy kopalń. Twardzi lub szlachetni — rzadko coś pomiędzy. Character origin, background sheet and compendium; 16–64 px.",
+      "request": "ONE complete sturdy MINING PICK crossed diagonally in front of ONE broad angular MOUNTAIN PEAK. Clearly separate broad white head and intact handle, one wide black mountain ridge cut. A sober miners' emblem, no little rocks, dust, rays, tiny hatching, writing or fantasy ornament.",
+      "current": {
+        "src": "candidates/batch-108/raw/core-origin-placeholder.svg",
+        "note": "Shared Foundry core village placeholder; dedicated origin art is missing."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 108 · Federacja Appalachów",
+          "src": "candidates/batch-108/appalachy.png",
+          "note": "ONE complete sturdy MINING PICK crossed diagonally in front of ONE broad angular MOUNTAIN PEAK. Clearly separate broad white head and intact handle, one wide black mountain ridge cut. A sober miners' emblem, no little rocks, dust, rays, tiny hatching, writing or fantasy ornament."
+        }
+      ]
+    },
+    {
+      "id": "origin-miami",
+      "name": "Miami",
+      "batch": 108,
+      "tier": "Batch 108 · Pochodzenie",
+      "target": "icons/pochodzenia/miami.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/miami.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Pochodzenie background: Miami. Zawadiaccy i odporni mieszkańcy bagien. Piraci, śmiałkowie i ci, którym Neodżungla nie robi wrażenia. Character origin, background sheet and compendium; 16–64 px.",
+      "request": "ONE small SHALLOW-DRAFT SKIFF in clean side profile, bow pointing RIGHT, with ONE broad PALMETTO FROND curving above its stern. Three wide waterline cuts beneath the hull. Swamp-pirate and marsh identity; no people, skull flag, intricate rigging, many thin leaves, tropical holiday decoration, text or logos.",
+      "current": {
+        "src": "candidates/batch-108/raw/core-origin-placeholder.svg",
+        "note": "Shared Foundry core village placeholder; dedicated origin art is missing."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 108 · Miami",
+          "src": "candidates/batch-108/miami.png",
+          "note": "ONE small SHALLOW-DRAFT SKIFF in clean side profile, bow pointing RIGHT, with ONE broad PALMETTO FROND curving above its stern. Three wide waterline cuts beneath the hull. Swamp-pirate and marsh identity; no people, skull flag, intricate rigging, many thin leaves, tropical holiday decoration, text or logos."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "files": [],
+  "expectedAbsent": [
+    "icons/pochodzenia/missisipi.svg",
+    "icons/pochodzenia/missisipi.webp",
+    "icons/pochodzenia/missisipi.png",
+    "icons/pochodzenia/nowy-jork.svg",
+    "icons/pochodzenia/nowy-jork.webp",
+    "icons/pochodzenia/nowy-jork.png",
+    "icons/pochodzenia/hegemonia.svg",
+    "icons/pochodzenia/hegemonia.webp",
+    "icons/pochodzenia/hegemonia.png",
+    "icons/pochodzenia/posterunek.svg",
+    "icons/pochodzenia/posterunek.webp",
+    "icons/pochodzenia/posterunek.png",
+    "icons/pochodzenia/salt-lake-city.svg",
+    "icons/pochodzenia/salt-lake-city.webp",
+    "icons/pochodzenia/salt-lake-city.png",
+    "icons/pochodzenia/teksas.svg",
+    "icons/pochodzenia/teksas.webp",
+    "icons/pochodzenia/teksas.png",
+    "icons/pochodzenia/vegas.svg",
+    "icons/pochodzenia/vegas.webp",
+    "icons/pochodzenia/vegas.png"
+  ],
+  "selectedSources": []
+}

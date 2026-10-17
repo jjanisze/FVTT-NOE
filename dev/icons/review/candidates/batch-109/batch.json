@@ -1,0 +1,145 @@
+{
+  "date": "2026-10-17",
+  "batch": 109,
+  "pass": "origin-coverage-and-style",
+  "subjects": [
+    {
+      "kind": "origin",
+      "key": "missisipi",
+      "name": "Missisipi",
+      "target": "icons/pochodzenia/missisipi.svg",
+      "itemId": "origin-missisipi",
+      "ruleContext": "Najlepsi łowcy mutantów w Stanach. Skażeni, uodpornieni, fanatycznie nienawidzący wynaturzeń.",
+      "context": "Pochodzenie background: Missisipi. Najlepsi łowcy mutantów w Stanach. Skażeni, uodpornieni, fanatycznie nienawidzący wynaturzeń. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/missisipi.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "ONE plain utilitarian GAS MASK in front view, paired with TWO thick MARSH REEDS at one side. Two broad black eye lenses, one large round front filter with two broad cuts; three blunt reed leaves only. Grim contaminated-swamp hunter emblem, no face inside, hoses, fine filter mesh, radiation lettering, skulls, blood or texture.",
+      "cell": 1
+    },
+    {
+      "kind": "origin",
+      "key": "nowy-jork",
+      "name": "Nowy Jork",
+      "target": "icons/pochodzenia/nowy-jork.svg",
+      "itemId": "origin-nowy-jork",
+      "ruleContext": "Optymistyczni, wyedukowani i nastawieni na handel. Mają lepszy dostęp do wiedzy niż większość świata.",
+      "context": "Pochodzenie background: Nowy Jork. Optymistyczni, wyedukowani i nastawieni na handel. Mają lepszy dostęp do wiedzy niż większość świata. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/nowy-jork.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "ONE large OPEN BOOK with only TWO wide black page-fold cuts, above ONE simple THREE-TOWER CITY SKYLINE. Broad solid city blocks without tiny windows, clean black gap between book and skyline. Education, civilization and trade; no torch statue, letters, dollar sign, logos, rays or fine architectural detail.",
+      "cell": 2
+    },
+    {
+      "kind": "origin",
+      "key": "hegemonia",
+      "name": "Południowa Hegemonia",
+      "target": "icons/pochodzenia/hegemonia.svg",
+      "itemId": "origin-hegemonia",
+      "ruleContext": "Twardzi jak skała, lojalni jak psy. Potomkowie kryminalistów, którzy znaleźli sens w walce za Bano.",
+      "context": "Pochodzenie background: Południowa Hegemonia. Twardzi jak skała, lojalni jak psy. Potomkowie kryminalistów, którzy znaleźli sens w walce za Bano. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/hegemonia.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "ONE natural bare CLENCHED FIST raised above ONE short BROKEN HEAVY CHAIN with exactly TWO broad oval links separated at center. Two wide finger cuts, one complete wrist. Harsh strength and loyalty born from prison ancestry, no face, portrait, gang initials, tattoo, weapon, gore, fine texture or tiny chain links.",
+      "cell": 3
+    },
+    {
+      "kind": "origin",
+      "key": "posterunek",
+      "name": "Posterunek",
+      "target": "icons/pochodzenia/posterunek.svg",
+      "itemId": "origin-posterunek",
+      "ruleContext": "Najlepsi specjaliści od walki z Molochem. Zdyscyplinowani eksperci od elektroniki, wszczepów i cybernetyki.",
+      "context": "Pochodzenie background: Posterunek. Najlepsi specjaliści od walki z Molochem. Zdyscyplinowani eksperci od elektroniki, wszczepów i cybernetyki. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/posterunek.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "ONE large solid SHIELD containing ONE simple square MICROCHIP with three broad pins on each side and one black central square. Disciplined high-technology defense against machines. No helmet, person, little circuit traces, writing, crosshair, stars, electrical sparks or decorative cogs.",
+      "cell": 4
+    },
+    {
+      "kind": "origin",
+      "key": "salt-lake-city",
+      "name": "Salt Lake City",
+      "target": "icons/pochodzenia/salt-lake-city.svg",
+      "itemId": "origin-salt-lake-city",
+      "ruleContext": "Wierzący fanatycy, charyzmatyczni kaznodzieje, znawcy historii sprzed wojny.",
+      "context": "Pochodzenie background: Salt Lake City. Wierzący fanatycy, charyzmatyczni kaznodzieje, znawcy historii sprzed wojny. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/salt-lake-city.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "ONE thick OPEN BOOK with ONE large clean upright CROSS rising from its center fold. Two broad black page separations only. Sober religious faith and old-world history, no person, fine page lines, lettering, decorative rays, cathedral, ornament or texture.",
+      "cell": 5
+    },
+    {
+      "kind": "origin",
+      "key": "teksas",
+      "name": "Teksas",
+      "target": "icons/pochodzenia/teksas.svg",
+      "itemId": "origin-teksas",
+      "ruleContext": "Uparci, tradycyjni, zdrowi. Ziemia, konie i bydło to ich świat. SMART-a nienawidzą szczególnie.",
+      "context": "Pochodzenie background: Teksas. Uparci, tradycyjni, zdrowi. Ziemia, konie i bydło to ich świat. SMART-a nienawidzą szczególnie. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/teksas.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "ONE complete broad-brimmed COWBOY HAT above ONE large HORSESHOE with its opening upward. One broad hatband cut and two large horseshoe nail holes only. Plain ranching and horse-country identity, no skull, gun, face, beard, star badge, letters, ornamental tooling or texture.",
+      "cell": 6
+    },
+    {
+      "kind": "origin",
+      "key": "vegas",
+      "name": "Vegas",
+      "target": "icons/pochodzenia/vegas.svg",
+      "itemId": "origin-vegas",
+      "ruleContext": "Gładcy, cwani, uśmiechnięci. Czytają w myślach, blefują doskonale. Nie siadaj z nimi do kart.",
+      "context": "Pochodzenie background: Vegas. Gładcy, cwani, uśmiechnięci. Czytają w myślach, blefują doskonale. Nie siadaj z nimi do kart. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/vegas.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "THREE complete PLAYING CARDS fanned compactly, each a thick rounded rectangle with a wide black separation. The front card contains ONE large BLACK SPADE shape, other cards remain blank. Plain physical gambling cards as regional identity, no dice, numerals, letters, suit corner labels, tiny pips, casino logo, sparkle or texture.",
+      "cell": 7
+    }
+  ],
+  "partialAtlas": true,
+  "emptyCells": [
+    8,
+    9
+  ]
+}

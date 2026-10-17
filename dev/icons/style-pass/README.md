@@ -7,6 +7,16 @@ record the new SVG hash as kept; remaining flags retain their original
 notes. Nine unreferenced PNG siblings were archived in dev and retired in
 favor of WEBP. Revisions continue in Batches 106–107.
 
+Current queue: Batches 108–109 contain twelve newly discovered main origin
+emblems and four cleanup icons (three new browser flags plus the saved
+Wierzę hand correction). The separate 36 origin abilities already have art.
+`prepare_108_109.py` freezes existing source variants and absent origin
+paths; `register_108_109.py` preserves 523 unrelated reviews and earlier
+Wierzę choices. All 16 candidates require fresh approval. The 333-item
+physical catalog has zero art gaps and four existing-art wiring tasks.
+See `../ORIGIN_COVERAGE.md`, `../CATALOG_COVERAGE.md` and
+`progress-108-109.json`.
+
 Batches 106–107 review outcome: eleven exact approved replacements delivered,
 one current-art selection retained unchanged (Tacą i w nogi), and one saved
 hand-position correction queued for Wierzę. Six unreferenced PNG siblings

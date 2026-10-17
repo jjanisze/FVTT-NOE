@@ -37,8 +37,18 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 108** (13 style revisions await GM review;
+**Next batch number: 110** (16 origin / cleanup glyphs await GM review;
 the original 153-subject placeholder pass is complete).
+
+**Source audit refresh, 2026-10-17:** all 36 origin ability icons exist, but
+the 12 main Pochodzenie background emblems were omitted from earlier queues.
+They still use the core village fallback. New artwork is queued in Batches
+108–109 at `icons/pochodzenia/<canonical-id>.svg` (+ WEBP).
+See `ORIGIN_COVERAGE.md` and `origin-icons-2026-10-17.json`.
+The 333 physical catalog items have **zero art gaps**; four remaining
+fallbacks need GM wiring to existing art (three fuel grades and medic
+toolkit refill). All 23 medicines, including Reminex, have distinct art.
+Current evidence: `catalog-icons-2026-10-17.json` and `CATALOG_COVERAGE.md`.
 
 **Icon coverage correction, 2026-10-17:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
@@ -1343,43 +1353,81 @@ Exact saved decisions and approved masks: `reviewed.json` and
 <!-- style-batch-105:end -->
 
 <!-- style-batch-106:start -->
-## Queue (A) — Batch 106 — 9 saved style revisions
+## Reviewed (A) — Batch 106 — 8 delivered
 
-Exact selected sources and verbatim notes are archived with the prompts.
-Older choices remain selectable; production requires fresh saved approval.
+Exact saved decisions and approved masks: `reviewed.json` and
+`reviewed-installed.json` under `review/candidates/batch-106/`.
 
-| Cell | Subject | Requested correction | Native SVG (+ WEBP) |
-|---|---|---|---|
-| 1 | Doktor Quinn | Modify the angles so the positons of the hands imply bandaging someone else | `icons/abilities/doktor-quinn.svg` |
-| 2 | Odporny | Need to somehow indicate the water is poisoned/bad | `icons/abilities/odporny.svg` |
-| 3 | Patriota | Change the flag to a confederate flag and refine the contours of the shoulder | `icons/abilities/patriota.svg` |
-| 4 | Próg awarii | Add lines or sparks indicating an active/undergoing fault, remove the loose unreadable thing at the bottom left | `icons/abilities/prog-awarii.svg` |
-| 5 | Siódme poty | That's not how a gas pedal looks like from the side. It is not a hinge. Redraw to show a simplified version of an actual gas pedal. | `icons/abilities/siodme-poty.svg` |
-| 6 | Skakun | The style is better, but the icon does not indicate movement | `icons/abilities/skakun.svg` |
-| 7 | Tacą i w nogi | Try again, something between those two | `icons/abilities/taca-i-w-nogi.svg` |
-| 8 | Tryb Turbo | Needs visual elements indicating TURBO/OVERDRIVE | `icons/abilities/tryb-turbo.svg` |
-| 9 | Twierdzenie Kąta Prostego | Somehow incorporate visually the geometric pun | `icons/abilities/twierdzenie-kata-prostego.svg` |
-
-Evidence and exact prompts: `review/candidates/batch-106/`.
+| Subject | Native SVG (+ WEBP) | Result |
+|---|---|---|
+| Doktor Quinn | `icons/abilities/doktor-quinn.svg` | **done** |
+| Odporny | `icons/abilities/odporny.svg` | **done** |
+| Patriota | `icons/abilities/patriota.svg` | **done** |
+| Próg awarii | `icons/abilities/prog-awarii.svg` | **done** |
+| Siódme poty | `icons/abilities/siodme-poty.svg` | **done** |
+| Skakun | `icons/abilities/skakun.svg` | **done** |
+| Tacą i w nogi | `icons/abilities/taca-i-w-nogi.svg` | Kept current — **done** |
+| Tryb Turbo | `icons/abilities/tryb-turbo.svg` | **done** |
+| Twierdzenie Kąta Prostego | `icons/abilities/twierdzenie-kata-prostego.svg` | **done** |
 
 <!-- style-batch-106:end -->
 
 <!-- style-batch-107:start -->
-## Queue (A) — Batch 107 — 4 saved style revisions
+## Reviewed (A) — Batch 107 — 3 delivered
 
-Exact selected sources and verbatim notes are archived with the prompts.
-Older choices remain selectable; production requires fresh saved approval.
+Exact saved decisions and approved masks: `reviewed.json` and
+`reviewed-installed.json` under `review/candidates/batch-107/`.
 
-| Cell | Subject | Requested correction | Native SVG (+ WEBP) |
-|---|---|---|---|
-| 1 | Wierzę | Style is better, but doesn't communicate idea well. Try a different idea. | `icons/abilities/wierze.svg` |
-| 2 | Wielonożny | The legs should connect to the hilly terrain, indicating the robot can move over it gracefully, not just exist over it. | `icons/abilities/wielonozny.svg` |
-| 3 | Wrażliwość na światło | Better style, but the rodent's legs are facing opposite directions. Decide on a direction the lower body is facing. | `icons/abilities/wrazliwosc-na-swiatlo.svg` |
-| 4 | Zawzięty sukinkot | Add the arrow back | `icons/abilities/zawziety-sukinkot.svg` |
-
-Evidence and exact prompts: `review/candidates/batch-107/`.
+| Subject | Native SVG (+ WEBP) | Result |
+|---|---|---|
+| Wierzę | `icons/abilities/wierze.svg` | Revision queued |
+| Wielonożny | `icons/abilities/wielonozny.svg` | **done** |
+| Wrażliwość na światło | `icons/abilities/wrazliwosc-na-swiatlo.svg` | **done** |
+| Zawzięty sukinkot | `icons/abilities/zawziety-sukinkot.svg` | **done** |
 
 <!-- style-batch-107:end -->
+
+<!-- style-batch-108:start -->
+## Queue (A) — Batch 108 — 9 origin / cleanup glyphs
+
+Broad white glyphs, 256×256, 20 px margins; SVG + lossless WEBP.
+Candidates await fresh GM approval. Current files and unrelated reviews remain unchanged.
+
+| Cell | Subject | Native SVG (+ WEBP) | Source / correction |
+|---|---|---|---|
+| 1 | Bolesny atak | `icons/abilities/bolesny-atak.svg` | detail:  |
+| 2 | Czas patriotów | `icons/abilities/czas-patriotow.svg` | detail, dither:  |
+| 3 | Pajęcza wspinaczka | `icons/abilities/pajecza-wspinaczka.svg` | other: There is a fragment of a stray icon on the left side of the image |
+| 4 | Wierzę | `icons/abilities/wierze.svg` | Better, but the hand should be in a different position - coming to, not from the person wishing the key |
+| 5 | Asgard | `icons/pochodzenia/asgard.svg` | Missing main origin emblem; core village fallback |
+| 6 | Człowiek Pustyni | `icons/pochodzenia/czlowiek-pustyni.svg` | Missing main origin emblem; core village fallback |
+| 7 | Detroit | `icons/pochodzenia/detroit.svg` | Missing main origin emblem; core village fallback |
+| 8 | Federacja Appalachów | `icons/pochodzenia/appalachy.svg` | Missing main origin emblem; core village fallback |
+| 9 | Miami | `icons/pochodzenia/miami.svg` | Missing main origin emblem; core village fallback |
+
+Exact prompts, source/absence checks and feedback: `review/candidates/batch-108/`.
+
+<!-- style-batch-108:end -->
+
+<!-- style-batch-109:start -->
+## Queue (A) — Batch 109 — 7 origin / cleanup glyphs
+
+Broad white glyphs, 256×256, 20 px margins; SVG + lossless WEBP.
+Candidates await fresh GM approval. Current files and unrelated reviews remain unchanged.
+
+| Cell | Subject | Native SVG (+ WEBP) | Source / correction |
+|---|---|---|---|
+| 1 | Missisipi | `icons/pochodzenia/missisipi.svg` | Missing main origin emblem; core village fallback |
+| 2 | Nowy Jork | `icons/pochodzenia/nowy-jork.svg` | Missing main origin emblem; core village fallback |
+| 3 | Południowa Hegemonia | `icons/pochodzenia/hegemonia.svg` | Missing main origin emblem; core village fallback |
+| 4 | Posterunek | `icons/pochodzenia/posterunek.svg` | Missing main origin emblem; core village fallback |
+| 5 | Salt Lake City | `icons/pochodzenia/salt-lake-city.svg` | Missing main origin emblem; core village fallback |
+| 6 | Teksas | `icons/pochodzenia/teksas.svg` | Missing main origin emblem; core village fallback |
+| 7 | Vegas | `icons/pochodzenia/vegas.svg` | Missing main origin emblem; core village fallback |
+
+Exact prompts, source/absence checks and feedback: `review/candidates/batch-109/`.
+
+<!-- style-batch-109:end -->
 
 <!-- icon-style-review:start -->
 ## Style review — icons flagged for redo
@@ -1389,19 +1437,10 @@ keep the final target name and require fresh GM approval before installation.
 
 | Icon / selected source | Reasons | Requested change |
 |---|---|---|
-| icons/abilities/doktor-quinn.svg | Too detailed, Dithered / speckled |  |
-| icons/abilities/odporny.svg | Too detailed |  |
-| icons/abilities/patriota.svg | Too detailed |  |
-| icons/abilities/prog-awarii.svg | Too detailed |  |
-| icons/abilities/siodme-poty.svg | Too detailed, Dithered / speckled |  |
-| icons/abilities/skakun.svg | Too detailed |  |
-| icons/abilities/taca-i-w-nogi.svg | Too detailed |  |
-| icons/abilities/tryb-turbo.svg | Too detailed |  |
-| icons/abilities/twierdzenie-kata-prostego.svg | Too detailed, Other | Unclear graphical intent. |
-| icons/abilities/wielonozny.svg | Too detailed, Dithered / speckled |  |
+| icons/abilities/bolesny-atak.svg | Too detailed |  |
+| icons/abilities/czas-patriotow.svg | Too detailed, Dithered / speckled |  |
+| icons/abilities/pajecza-wspinaczka.svg | Other | There is a fragment of a stray icon on the left side of the image |
 | icons/abilities/wierze.svg | Too detailed |  |
-| icons/abilities/wrazliwosc-na-swiatlo.svg | Too detailed, Dithered / speckled |  |
-| icons/abilities/zawziety-sukinkot.svg | Too detailed, Dithered / speckled |  |
 
 Exact source hashes and saved decisions: `review/style-feedback.json` (local).
 <!-- icon-style-review:end -->
@@ -1677,6 +1716,12 @@ Po autodestrukcji maszyny żeton podmienia grafikę na wrak w rozmiarze żetonu.
 ---
 
 ## Do podpięcia — przez MG
+
+- **Pochodzenia — audyt 2026-10-17:** 12 emblematów głównych regionów jest
+  w kolejce Batch 108–109; 36 ikon zdolności już istnieje. Po zatwierdzeniu
+  i dostarczeniu emblematów MG przebudowuje `pochodzenia`; obecny builder
+  sam wybierze dokładne ścieżki `icons/pochodzenia/<id>.svg`. Bez zmian kodu.
+  Starsze dokumenty świata aktualizuje osobno MG.
 
 - **Starsze dźwięki produkcji (§C 1–9):** pliki w `sounds/produkcja/` są gotowe.
   Przepointować odpowiednie sloty `PRACA` i `ZDARZENIA` w
