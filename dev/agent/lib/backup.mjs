@@ -48,7 +48,10 @@ function sha256(file) {
   return h.digest("hex");
 }
 
-/** Top-level documents per world database (`!actors!<id>` — embedded keys have more segments). */
+/**
+ * Top-level documents per world database: `!actors!<id>`. Embedded ones live in the same database under a dotted
+ * collection (`!actors.items!<actor>.<item>`, `!scenes.walls!…`) and are not counted.
+ */
 async function countWorldRecords(worldDir, installApp) {
   const dataDir = path.join(worldDir, "data");
   const out = {};
@@ -62,7 +65,10 @@ async function countWorldRecords(worldDir, installApp) {
     await db.open();
     try {
       let n = 0;
-      for await (const key of db.keys()) if (key.split("!").length === 3) n++;
+      for await (const key of db.keys()) {
+        const parts = key.split("!");
+        if (parts.length === 3 && !parts[1].includes(".")) n++;
+      }
       out[name] = n;
     } finally {
       await db.close().catch(() => {});
