@@ -93,11 +93,17 @@ to stderr. Exit code `0` ok · `1` failed · `2` refused by a guard · `3` usage
 ## Extending
 
 E2e initializes an empty scene on every client before the first fixture, so optional canvas modules
-cannot race the initial wall draw ahead of Foundry's render queues. It also cascades the client windows
-(`cascadeWindows` in `lib/cdp.mjs`): each isolated context is its own window, and one fully covered by another
-is hidden to Chrome, which throttles its timers — steps 3–30× slower, core animation and notification errors
-(2026-10-17). Chrome ignores window moves while a window-modal dialog is open (its search engine choice
-screen after an update); a human dismisses that once. `logs/e2e/<run>/report.json` is
+cannot race the initial wall draw ahead of Foundry's render queues. Each isolated context is its own window,
+and a covered window is hidden to Chrome, which throttles its timers — steps 3–30× slower, core animation and
+notification errors (2026-10-17). So clients run **in the background** when Chrome has the no-throttle flags
+(`NO_THROTTLE_FLAGS` in `lib/proc.mjs`; the vault's chrome-debug launcher passes them, `doctor` reports
+`chrome.noThrottle` and a problem without them): no `Page.bringToFront`, focus emulated, windows stay behind the
+GM's work and out of reach of the GM's mouse. Without the flags clients come to the front for clicks, keys and
+screenshots. A suite that needs a client "in front" calls `client.front(ms)` — never `Page.bringToFront` directly,
+which would pop the window under the GM's cursor; `front` keeps its settle wait in both modes (two clicks on one
+spot without it count as a double-click). Either way the windows are cascaded (`cascadeWindows` in `lib/cdp.mjs`) so none fully covers
+another. Chrome ignores window moves while a window-modal dialog is open (its search engine choice screen after
+an update); a human dismisses that once. TESTING.md, warstwa 6. `logs/e2e/<run>/report.json` is
 updated after every suite (`running: true` until the final report); failed assertions and console
 errors are available while later suites continue. Suite actor names must not collide with Poligon
 station names when both run in the same throwaway world.

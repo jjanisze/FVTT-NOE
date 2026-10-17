@@ -117,6 +117,20 @@ serwera liczą się jak porażka, zrzuty ekranu w `logs/e2e/<przebieg>/` (dowód
 do porównywania pikseli). Zielony przebieg kasuje świat; czerwony zostawia świat i karty do
 obejrzenia. Narzędzie i zasady: `dev/agent/README.md`, plan: `PLAN_agentic_improvements.md` §5 D.
 
+**Okna w tle — domyślny sposób (od 2026-10-17).** Każdy klient to osobne okno Chrome, a e2e i bramka wydania
+idą, kiedy MG pracuje obok. Chrome uznaje zasłonięte okno za ukryte i dławi jego timery (do raz na minutę): kroki
+wolniejsze 3–30×, błędy rdzenia przy animacjach i powiadomieniach (`#postNotification`, `PreciseText.destroy`),
+a prawdziwa mysz nad wysuniętym oknem testu przestawia kliknięcia w kanwę. Dlatego:
+- Chrome startuje z launchera vaultu (`Integracje/chrome-debug/Start-ChromeDebug.cmd`), który dodaje
+  `--disable-backgrounding-occluded-windows --disable-renderer-backgrounding --disable-background-timer-throttling`;
+  `fvtt doctor` zgłasza problem, gdy ich brak (`chrome.noThrottle`).
+- Z flagami klienci działają w tle: e2e nie wysuwa ich okien (`Page.bringToFront`), tylko emuluje fokus, więc
+  okna zostają za tym, nad czym pracuje MG, a mysz MG do nich nie dociera. Bez flag — stary tryb: okno na
+  wierzch przy kliknięciu, klawiszu i zrzucie, a układ kaskadą (`cascadeWindows`) pilnuje, żeby okna testu nie
+  zasłaniały się nawzajem.
+- Wolny przebieg najpierw porównaj z czasami ostatniej bramki (`logs/e2e/<przebieg>/report.json`) — równe
+  spowolnienie wszystkiego to środowisko, nie kod.
+
 Paczka steruje klientami jak człowiek: gracz strzela przez `activity.use()` z dialogami
 wyłączonymi (`configure: false`) i kośćmi ustawionymi `CONFIG.Dice.randomUniform` (v14 liczy
 `ceil((1 − u) · ścianki)`, więc `u = 0.00001` daje 20), MG nakłada obrażenia tą samą drogą co tacka

@@ -1178,6 +1178,14 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### Po v0.19.1 — testy w oknach w tle (2026-10-17, narzędzia, bez wydania)
+
+- **Domyślny sposób warstwy 6: okna w tle.** Chrome z launchera vaultu dostaje
+  `--disable-backgrounding-occluded-windows --disable-renderer-backgrounding --disable-background-timer-throttling`;
+  `fvtt doctor` zgłasza problem, gdy ich brak (`chrome.noThrottle`). Z flagami klienci e2e nie wysuwają okien
+  (fokus emulowany), więc działają za tym, nad czym pracuje MG, a jego mysz do nich nie dociera; bez flag — stary tryb
+  z oknem na wierzchu. Paczki wołają `client.front()` zamiast `Page.bringToFront` (12 miejsc). TESTING.md, warstwa 6.
+
 ### v0.19.1 — Ikony, portrety Bestiariusza, Złomiarz; porządki przed migracją (2026-10-17)
 
 Hand-off `HANDOFF_przed_migracja.md`; to wydanie jest punktem odniesienia migracji na Foundry 14.369 i dnd5e 6.0.x.

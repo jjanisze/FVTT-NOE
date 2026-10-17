@@ -3,7 +3,7 @@ import path from "node:path";
 export default {
   name: "poscig-baseline", clients: ["gm"], fixture: "poscig",
   async run(t) {
-    await t.gm.send("Page.bringToFront");
+    await t.gm.front(0);
     await t.gm.eval(() => { document.querySelector('.tour [data-action="exit"]')?.click(); canvas.pan({x:1400,y:900,scale:.52}); });
     await t.screenshot("gm", "before");
     const r = await t.gm.eval(async () => {

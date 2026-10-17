@@ -58,7 +58,9 @@ night: lifecycle and test commands refuse; the GM switches modes by saying so.
 - **Logins** go through `fvtt login` (any user, D8) — never type a password into a page.
 - **Tests:** `npm test` (static), `npm run test:agent`, `fvtt quench`, `fvtt e2e`. A change touching
   UI, canvas, combat, dialogs or player permissions is not done without a layer-6 run or sandbox
-  check — screenshot in the hand-off ([TESTING.md](TESTING.md) §3).
+  check — screenshot in the hand-off ([TESTING.md](TESTING.md) §3). Layer 6 runs in background windows while
+  the GM works: Chrome needs the no-throttle flags (the vault's chrome-debug launcher; `fvtt doctor` checks).
+  A run slower than the last gate report across the board is the environment, not the code.
 - **Never test in the campaign world** — no test actors, scenes or items there, no Zbrojownia/Piekarz
   experiments; `fvtt doctor` counts test-looking campaign documents as a problem. Agents test in the
   sandbox; the GM tests on the **Poligon**. A change touching UI, canvas, VFX, sound or a multi-step flow

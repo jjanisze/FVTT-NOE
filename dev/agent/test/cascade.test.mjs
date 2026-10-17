@@ -1,11 +1,22 @@
 /**
  * e2e client windows: none fully covered by another (Chrome throttles a covered window as hidden), none below
- * Foundry's minimum size. `npm run test:agent`.
+ * Foundry's minimum size; background mode only when Chrome has all three no-throttle flags. `npm run test:agent`.
  */
 
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { cascadeLayout } from "../lib/cdp.mjs";
+import { missingNoThrottleFlags, NO_THROTTLE_FLAGS } from "../lib/proc.mjs";
+
+test("no-throttle flags: all three present, or each one missing is named", () => {
+  const all = `"chrome.exe" --remote-debugging-port=1 --user-data-dir="x" ${NO_THROTTLE_FLAGS.join(" ")} --restore-last-session`;
+  assert.deepEqual(missingNoThrottleFlags(all), []);
+  assert.deepEqual(missingNoThrottleFlags(`"chrome.exe" --remote-debugging-port=1`), [...NO_THROTTLE_FLAGS]);
+  const two = all.replace(" --disable-renderer-backgrounding", "");
+  assert.deepEqual(missingNoThrottleFlags(two), ["--disable-renderer-backgrounding"]);
+  // A longer flag that merely starts with one of ours does not count.
+  assert.deepEqual(missingNoThrottleFlags("--disable-background-timer-throttling-x"), [...NO_THROTTLE_FLAGS]);
+});
 
 const covers = (a, b) => a.left <= b.left && a.top <= b.top
   && a.left + a.width >= b.left + b.width && a.top + a.height >= b.top + b.height;

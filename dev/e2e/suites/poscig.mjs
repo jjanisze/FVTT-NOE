@@ -66,7 +66,7 @@ export default {
 
     for (const [label, client] of [["GM", t.gm], ["player", player]]) {
       await t.step(`${label}: only the six snapped meshes sway; stored coordinates stay stable`, async () => {
-        await client.send("Page.bringToFront");
+        await client.front(0);
         const result = await client.eval(sampleMotion);
         t.assert(result.documentsStable, "sway changed stored documents", result);
         for (const m of result.motion) {
@@ -96,7 +96,7 @@ export default {
     });
 
     await t.step("setting off restores meshes immediately and is independent on GM/player", async () => {
-      await player.send("Page.bringToFront");
+      await player.front(0);
       await t.waitFor(player, () => {
         const tk=canvas.tokens.placeables.find(t=>t.name==='Pojazd 1');
         return tk.document._source.x===600 && Math.abs(tk.mesh.x-tk.center.x)<2;
@@ -109,14 +109,14 @@ export default {
       const off = await player.eval(sampleMotion);
       t.assert(off.restored && off.motion.every(m => !m.x && !m.y && !m.rotation), "player meshes still move with setting off", off);
       t.equal(await t.gm.eval(id => game.settings.get(id, "poscigVehicleSway"), MOD), true, "GM setting stays on");
-      await t.gm.send("Page.bringToFront");
+      await t.gm.front(0);
       const gmMotion = await t.gm.eval(sampleMotion,600);
       t.equal(gmMotion.motion.filter(m=>m.y>.02).length,6,"GM meshes still sway while the player's setting is off");
       await player.eval(id => game.settings.set(id, "poscigVehicleSway", true), MOD);
     });
 
     await t.step("stopped road stops sway; normal animation and recentering preserve lane geometry", async () => {
-      await t.gm.send("Page.bringToFront");
+      await t.gm.front(0);
       await t.gm.eval(() => game.neuroshima.poscig.konfiguruj(canvas.scene,{tempoTla:0}));
       const still = await t.gm.eval(sampleMotion);
       t.assert(still.restored && still.motion.every(m => !m.x && !m.y && !m.rotation), "stopped road still sways", still);
@@ -204,7 +204,7 @@ export default {
     const measurements = [], baseline=latestBaseline(t.moduleRoot);
     for (const theme of ["pustynia", "przedmiescia", "zima"]) {
       await t.step(`${theme}: settings dialog, GM/player render and 60 s foreground performance`, async () => {
-        await t.gm.send("Page.bringToFront");
+        await t.gm.front(0);
         await t.gm.eval(() => {game.neuroshima.poscig.oknoUstawienia();});
         await t.waitFor(t.gm,()=>Boolean(document.querySelector('select[name="motyw"]')),{message:"settings theme selector"});
         await t.gm.eval(theme=>{
@@ -215,7 +215,7 @@ export default {
         await t.waitFor(player,theme=>{const s=game.neuroshima.poscig.tlo.stats();return s.theme===theme&&s.ready;},{args:[theme],message:"player theme artwork loaded"});
         await t.gm.eval(()=>game.neuroshima.poscig.konfiguruj(canvas.scene,{tempoTla:2}));
         await t.screenshot("gm",theme);await t.screenshot("Gracz 1",theme);
-        await t.gm.send("Page.bringToFront");
+        await t.gm.front(0);
         await t.gm.send("HeapProfiler.collectGarbage");
         const documentsBefore=await t.gm.eval(()=>canvas.scene.tokens.map(d=>({id:d.id,x:d._source.x,y:d._source.y,rotation:d._source.rotation})).sort((a,b)=>a.id.localeCompare(b.id)));
         const result=await t.gm.eval(async()=>{

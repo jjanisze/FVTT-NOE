@@ -214,8 +214,10 @@ wierzchu — wtedy wracać do tego, nie wcześniej. `fvtt doctor`: bez problemó
   2026-09-22, magazynki). (4) `fvtt poligon:clone` — pełna kopia świata na ścieżkę Poligonu (ostatnia 2026-10-12),
   ale to robocza kopia do prób, nadpisywana przez `--refresh`, nie kopia zapasowa. Świat nie jest w gicie ani w
   synchronizacji. `guards.COMMAND_CLASS` ma klasę dla polecenia `backup`, którego `fvtt` nie implementuje.
-- **Z7:** warunek spełniony — Codex skończył, MG przebudował paczki (`2881386`). Bramka `release:check -- --tag`
-  uruchamia e2e i Quench w piaskownicy wydania, więc potrzebuje Chrome; czeka na MG.
+- **Z7:** zrobione na słowo MG. `release: v0.19.1` (`703d277`), bramka zielona i tag **`v0.19.1` na `11b32d7`**
+  (zip `972f629dc9ec`): statyka, generatory, zip, paczki, wersje, piaskownica wydania 40/40 e2e, Quench 1185/1185.
+  Po drodze dwie poprawki: kaskada okien e2e (`93137d4`) i wyścig w Quench autodestrukcji (`11b32d7`). **Push — MG:**
+  `git push origin master v0.19.1`. Potem: testy w oknach w tle jako domyślne (wpis „Po v0.19.1” w changelogu).
 - **Dla MG:**
   1. ~~Prywatny moduł grafik Bestiariusza~~ — rozstrzygnięte: portrety w module (Z3).
   2. ~~Paczka `pochodzenia` nieaktualna~~ — przebudowana przez MG po zakończeniu pracy Codexa (`2881386`).

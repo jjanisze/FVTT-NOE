@@ -26,6 +26,34 @@ function powershellJson(script) {
   return Array.isArray(parsed) ? parsed : [parsed];
 }
 
+/**
+ * Chrome flags that keep a covered or background window at full speed. Agent test windows (e2e, the release gate)
+ * run behind whatever the GM works on; without these Chrome throttles them as hidden (TESTING.md, warstwa 6). The
+ * campaign vault's chrome-debug launcher passes them.
+ */
+export const NO_THROTTLE_FLAGS = Object.freeze([
+  "--disable-backgrounding-occluded-windows", "--disable-renderer-backgrounding", "--disable-background-timer-throttling"
+]);
+
+/** The no-throttle flags missing from a Chrome browser-process command line. */
+export function missingNoThrottleFlags(cmd) {
+  return NO_THROTTLE_FLAGS.filter(f => !String(cmd ?? "").split(/\s+/).includes(f));
+}
+
+/**
+ * The debug Chrome's browser process (the one with a remote-debugging port, not a `--type=` child) and the
+ * no-throttle flags it lacks; null when none runs. The command line itself is not returned (it holds the port).
+ */
+export function debugChrome() {
+  const rows = powershellJson(
+    "Get-CimInstance Win32_Process -Filter \"Name='chrome.exe'\" | "
+    + "Where-Object { $_.CommandLine -match '--remote-debugging-port' -and $_.CommandLine -notmatch ' --type=' } | "
+    + "Select-Object ProcessId, CommandLine"
+  );
+  if (!rows.length) return null;
+  return { pid: rows[0].ProcessId, missing: missingNoThrottleFlags(rows[0].CommandLine) };
+}
+
 /** All candidate processes, with command lines. One PowerShell round-trip. */
 export function listProcesses() {
   return powershellJson(

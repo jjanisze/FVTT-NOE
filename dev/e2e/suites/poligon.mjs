@@ -85,7 +85,7 @@ export default {
 
     await t.step("the Obsada builds through dnd5e's AdvancementManager", async () => {
       // A visible window keeps Chrome from throttling its timers (lib/advancement.mjs copes either way).
-      await t.gm.send("Page.bringToFront").catch(() => {});
+      await t.gm.front(0);
       const failed = [];
       let built = 0;
       for (let i = 0; i < roster.length; i += 4) {

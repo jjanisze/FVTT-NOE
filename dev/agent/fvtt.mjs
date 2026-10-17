@@ -24,7 +24,7 @@ import { serverState, startServer, stopServer } from "./lib/server.mjs";
 import { holders, lockExclusive, lockShared } from "./lib/mutex.mjs";
 import { readLog } from "./lib/logs.mjs";
 import { FoundryClient } from "./lib/foundry-http.mjs";
-import { killTree } from "./lib/proc.mjs";
+import { debugChrome, killTree } from "./lib/proc.mjs";
 import { heldDatabases } from "./lib/leveldb.mjs";
 import { initSandbox } from "./lib/sandbox.mjs";
 import { bootstrapWorld, createWorld, deleteWorld, launchWorld, listWorlds, shutdownWorldAndWait, DEFAULT_MODULES, DEFAULT_PLAYERS } from "./lib/worlds.mjs";
@@ -258,6 +258,12 @@ command("doctor", "Everything at once: config, mode, secret, servers, Chrome, mu
     problems.push("Chrome DevTools port not answering.");
     hints.push("Human: start Chrome with remote debugging (the campaign vault's chrome-debug launcher). If it answers but chrome-devtools MCP still fails, reconnect it with /mcp — no Chrome restart needed.");
   } else {
+    const dc = (() => { try { return debugChrome(); } catch { return null; } })();
+    out.chrome.noThrottle = dc ? dc.missing.length === 0 : null;
+    if (dc?.missing.length) {
+      problems.push(`Chrome runs without ${dc.missing.join(" ")} — agent test windows behind other windows are throttled as hidden (e2e steps 3–30× slower, spurious core errors).`);
+      hints.push("Close Chrome and start it with the campaign vault's chrome-debug launcher, which adds the flags (TESTING.md, warstwa 6).");
+    }
     const browser = await browserSession(ctx.cdp);
     try {
       out.chrome.foundryPages = {};

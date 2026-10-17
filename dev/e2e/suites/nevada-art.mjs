@@ -12,7 +12,7 @@ async function mouse(client, at, button = "left", clickCount = 1) {
 }
 
 async function clickAt(client, point) {
-  await client.send("Page.bringToFront");
+  await client.front(0);
   const at = await client.eval(async p => {
     canvas.pan(p);
     // PIXI's world transform is refreshed on the next rendered frame, not by canvas.pan itself.
@@ -112,7 +112,7 @@ export function bitmapArtSuite(name, theme, prefix) { return {
     for(const [label,client] of [["gm",t.gm],["Gracz 1",player]]) {
       await t.waitFor(client,()=>game.neuroshima.poscig.tlo.stats().ready && canvas.scene.tokens.getName("Pojazd 1")?._source.y===970,
         {message:"loaded bitmap scenery and replicated input test position"});
-      await client.send("Page.bringToFront");
+      await client.front(0);
       await client.eval(async()=>{document.querySelector('.tour [data-action="exit"]')?.click();canvas.tokens.activate({tool:"select"});await ui.controls.activate({control:"tokens",tool:"select"});canvas.pan({x:1400,y:900,scale:.52});});
       await t.step(`${label}: opaque foreground permits select, HUD, sheet and target`,async()=>{
         const coverage = await client.eval(overlap,{});
@@ -171,7 +171,7 @@ export function bitmapArtSuite(name, theme, prefix) { return {
         await t.gm.eval(s=>canvas.pan({x:1400,y:900,scale:s}),scale);await t.screenshot("gm",`zoom-${scale}`);
       }
       await t.gm.eval(()=>{canvas.pan({x:1400,y:800,scale:.65});return game.neuroshima.poscig.konfiguruj(canvas.scene,{tempoTla:2});});
-      await t.screenshot("gm","bitmap-final");await t.gm.send("Page.bringToFront");
+      await t.screenshot("gm","bitmap-final");await t.gm.front(0);
       await t.gm.eval(()=>{
         const roots=canvas.primary.children.filter(c=>c.name?.startsWith(window.__bitmapArtPrefix));const bases=new Set();
         const collect=c=>{for(const base of c.neuroshimaTextureBases?.()??[])bases.add(base);if(c.texture)bases.add(c.texture.baseTexture);for(const child of c.children??[])collect(child);};roots.forEach(collect);

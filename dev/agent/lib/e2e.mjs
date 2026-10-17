@@ -27,6 +27,7 @@ import { FILES, MODULE_ID, readJson } from "./config.mjs";
 import { browserSession, cascadeWindows, waitGameReady } from "./cdp.mjs";
 import { duplicateSessions, loginInContext, namedContext, resolveUser, foundryPages } from "./browser.mjs";
 import { CliError, note, sleep } from "./output.mjs";
+import { debugChrome } from "./proc.mjs";
 import { FoundryClient } from "./foundry-http.mjs";
 import { createWorld, deleteWorld, listWorlds, shutdownWorldAndWait, DEFAULT_MODULES } from "./worlds.mjs";
 import { disposeContexts } from "./browser.mjs";
@@ -56,8 +57,20 @@ export class AssertionError extends Error {
 
 /** One logged-in browser tab with a persistent flat CDP session: eval, console capture, screenshots. */
 export class Client {
-  constructor(browser, { name, user, targetId, trace = false }) {
-    Object.assign(this, { browser, name, user, targetId, trace, errors: [] });
+  constructor(browser, { name, user, targetId, trace = false, background = false }) {
+    Object.assign(this, { browser, name, user, targetId, trace, background, errors: [] });
+  }
+
+  /**
+   * Make this window the one that takes input and renders. In the background (Chrome runs with the no-throttle
+   * flags, `proc.mjs`) nothing moves: the page keeps rendering behind the GM's windows and believes it has focus
+   * (`attach`), so a real mouse never reaches it. Otherwise the window comes to the front and its ticker restarts.
+   * The settle wait stays in both modes: suites lean on it — two clicks on one spot without it fall inside core's
+   * double-click window and open a sheet instead of selecting (nevada-art, 2026-10-17).
+   */
+  async front(settleMs = 150) {
+    if (!this.background) await this.send("Page.bringToFront").catch(() => {});
+    if (settleMs) await sleep(settleMs);
   }
 
   /** `window.__e2e` in this page (after every load — a reload drops it). */
@@ -86,6 +99,7 @@ export class Client {
     });
     await this.send("Runtime.enable");
     await this.send("Page.enable");
+    if (this.background) await this.send("Emulation.setFocusEmulationEnabled", { enabled: true }).catch(() => {});
   }
 
   send(method, params = {}, opts = {}) {
@@ -112,8 +126,7 @@ export class Client {
   }
 
   async screenshot(file) {
-    await this.send("Page.bringToFront").catch(() => {});
-    await sleep(300);
+    await this.front(300);
     const { data } = await this.send("Page.captureScreenshot", { format: "jpeg", quality: 70 }, { timeoutMs: 20_000 });
     fs.writeFileSync(file, Buffer.from(data, "base64"));
     return file;
@@ -125,8 +138,7 @@ export class Client {
    * canvas view need (a synthetic DOM event would not carry the right target/coordinates).
    */
   async clickCanvas(point) {
-    await this.send("Page.bringToFront").catch(() => {});
-    await sleep(150); // a tab just made visible starts its ticker and resizes — let that land first
+    await this.front(); // a tab just made visible starts its ticker and resizes — let that land first
     const at = await this.eval(p => {
       canvas.pan({ x: p.x, y: p.y });
       // `pan` only moves the pivot; world transforms follow on the next render, which a hidden tab (every
@@ -159,8 +171,7 @@ export class Client {
       ArrowDown: ["ArrowDown", 40], KeyW: ["w", 87], KeyA: ["a", 65], KeyS: ["s", 83], KeyD: ["d", 68]
     };
     const [key, kc] = KEYS[code] ?? [code, 0];
-    await this.send("Page.bringToFront").catch(() => {});
-    await sleep(150);
+    await this.front();
     // No `text`: a character would also be typed into whatever input has focus.
     const base = { key, code, windowsVirtualKeyCode: kc, nativeVirtualKeyCode: kc };
     await this.send("Input.dispatchKeyEvent", { type: "rawKeyDown", ...base });
@@ -263,12 +274,17 @@ async function quietAll(clients, opts = {}) {
 /** Log every needed user in, each in its own isolated context, and attach a Client. */
 async function openClients(ctx, browser, names, { trace = false } = {}) {
   const clients = new Map();
+  // Background windows need Chrome's no-throttle flags; without them a client must come to the front to run.
+  const chrome = (() => { try { return debugChrome(); } catch { return null; } })();
+  const background = Boolean(chrome && !chrome.missing.length);
+  note(background ? "clients run in the background (Chrome without throttling)"
+    : `Chrome lacks ${chrome?.missing.join(" ") ?? "the no-throttle flags"} — clients come to the front for input and screenshots, and a covered one runs throttled (start Chrome with the vault's chrome-debug launcher)`);
   for (const name of names) {
     const user = name === "gm" ? await resolveUser(ctx, null) : await resolveUser(ctx, name);
     const { id } = await namedContext(browser, ctx.profile.name, contextName(name));
     const inCtx = (await foundryPages(ctx, browser)).filter(p => p.context === id);
     const res = await loginInContext(ctx, browser, { userId: user.id, browserContextId: id, targetIds: inCtx.map(p => p.targetId), urls: inCtx.map(p => p.url) });
-    const client = new Client(browser, { name, user: user.name, targetId: res.pages[0], trace });
+    const client = new Client(browser, { name, user: user.name, targetId: res.pages[0], trace, background });
     await client.attach();
     // The working tree's current code, not whatever ES modules the tab cached earlier.
     await client.reload();
