@@ -31,6 +31,7 @@ import { resolveHit, creatureKindOf, isHitVerdict } from "../config/defense-rule
 import { coverAcBonus } from "./cover.mjs";
 // Cykl z `okolicznosci.mjs` bezpieczny — obie strony wołają się tylko z ciał funkcji.
 import { autoKrytykZRzutu } from "./okolicznosci.mjs";
+import { rollTypeOf, activityRefOf } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 export const OBRONA_FLAG = "obrona";
@@ -286,12 +287,12 @@ function _stampReroll(message, sourceId) {
 
 function _onPreCreateMessage(message, data, _options, userId) {
   if (userId !== game.user.id) return;
-  if (foundry.utils.getProperty(data, "flags.dnd5e.roll.type") !== "attack") return;
+  if (rollTypeOf(message) !== "attack") return;
   const rerollOf = foundry.utils.getProperty(data, `flags.${MODULE_ID}.rerollOf`);
   if (rerollOf) return _stampReroll(message, rerollOf);
   const roll = message.rolls?.[0];
   if (!roll) return;
-  const activityUuid = foundry.utils.getProperty(data, "flags.dnd5e.activity.uuid");
+  const activityUuid = activityRefOf(message)?.uuid;
   const activity = activityUuid ? fromUuidSync(activityUuid) : null;
   const obrona = buildObrona(roll, activity);
   const tokens = [...(game.user.targets ?? [])];

@@ -88,7 +88,7 @@ export async function migrujTowarzysza({
   const bio = comp._source.system.details?.biography?.value ?? "";
   if (NOTKA_BIOGRAFII.test(bio)) plan.push(`${comp.name}: notka „brak automatyzacji przywołania” z biografii — usunięta`);
   if (comp.getFlag(MODULE_ID, "kreator")?.cechy !== true) plan.push(`${comp.name}: kreator — oznaczony jako zrobiony`);
-  const bezSzybkosci = !(Number(comp._source.system.attributes?.movement?.walk) > 0);
+  const bezSzybkosci = !(Number(comp._source.system.attributes?.movement?.speeds?.walk) > 0);
   if (bezSzybkosci) plan.push(`${comp.name}: Szybkość — → 9 m (każdy człowiek startuje z 9 m)`);
 
   // 3. Sztuczka
@@ -123,7 +123,7 @@ export async function migrujTowarzysza({
     [`flags.${MODULE_ID}.kreator.cechy`]: true,
     "system.attributes.hp.max": null
   };
-  if (bezSzybkosci) Object.assign(zmiany, { "system.attributes.movement.walk": 9, "system.attributes.movement.units": "m" });
+  if (bezSzybkosci) Object.assign(zmiany, { "system.attributes.movement.speeds.walk": 9, "system.attributes.movement.units": "m" });
   for (const [k, c] of Object.entries(CECHY_UMIEJETNOSCI)) zmiany[`system.skills.${k}.ability`] = c;
   if (NOTKA_BIOGRAFII.test(bio)) zmiany["system.details.biography.value"] = bio.replace(NOTKA_BIOGRAFII, "");
   for (const u of bezPraw) zmiany[`ownership.${u.id}`] = CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER;

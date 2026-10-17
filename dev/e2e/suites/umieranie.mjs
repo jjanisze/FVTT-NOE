@@ -158,11 +158,11 @@ export default {
         try {
           // Bez `subsequentActions`: łatka osłony (`combat/cover.mjs`) otworzyłaby okno ataku, którego test nie użyje.
           const usage = await activity.use({ subsequentActions: false }, { configure: false }, {});
-          const link = { data: { flags: { dnd5e: { originatingMessage: usage.message.id } } } };
+          const link = { data: { system: { origin: usage.message.id } } };
           await activity.rollAttack({}, { configure: false }, link);
           await activity.rollDamage({ isCritical: false }, { configure: false }, link);
-          const dmg = game.messages.contents.findLast(m => m.getFlag("dnd5e", "originatingMessage") === usage.message.id && m.getFlag("dnd5e", "roll.type") === "damage");
-          const atk = game.messages.contents.findLast(m => m.getFlag("dnd5e", "originatingMessage") === usage.message.id && m.flags[MOD]?.obrona);
+          const dmg = game.messages.contents.findLast(m => m._source.system?.origin === usage.message.id && m.type === "damage");
+          const atk = game.messages.contents.findLast(m => m._source.system?.origin === usage.message.id && m.flags[MOD]?.obrona);
           const entry = atk?.flags[MOD].obrona.targets?.[0] ?? null;
           return {
             damageMessage: dmg?.id ?? null, melee: atk?.flags[MOD].obrona.melee ?? null,
@@ -190,7 +190,7 @@ export default {
     await t.step("Gracz 1 rolls a death save: pure d20 despite +5/+3, no Fuks bar", async () => {
       await t.gm.eval(async () => {
         const a = game.actors.getName("PC Gracz 1");
-        await a.update({ "system.bonuses.abilities.save": "+5", "system.attributes.death.bonuses.save": "+3" });
+        await a.update({ "system.rolls.ability.save.bonus": "+5", "system.attributes.death.roll.bonus": "+3" });
       });
       const r = await p1.eval(async () => {
         const orig = CONFIG.Dice.randomUniform;
@@ -198,7 +198,7 @@ export default {
         try {
           const rolls = await game.user.character.rollDeathSave();
           await new Promise(res => setTimeout(res, 900));
-          const msg = game.messages.contents.findLast(m => m.getFlag("dnd5e", "roll.type") === "death");
+          const msg = game.messages.contents.findLast(m => (m.type === "save" && m.system?.type === "death"));
           const el = ui.chat.element?.querySelector(`[data-message-id="${msg?.id}"]`);
           return { formula: rolls?.[0]?.formula, total: rolls?.[0]?.total, fuks: Boolean(el?.querySelector(".neuroshima-reroll-bar")) };
         } finally {

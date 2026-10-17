@@ -18,6 +18,7 @@
 
 import { isDollActor, heldItems, drop } from "../actors/doll.mjs";
 import { BESTIARY } from "../config/bestiary-data.mjs";
+import { itemUuidOf } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -34,7 +35,7 @@ function _itemOf(message) {
     const item = message.getAssociatedItem?.();
     if (item) return item;
   } catch (_e) { /* brak powiązania */ }
-  const uuid = message.getFlag("dnd5e", "item")?.uuid ?? message.getFlag("dnd5e", "use")?.itemUuid;
+  const uuid = itemUuidOf(message);
   try { return uuid ? fromUuidSync(uuid) : null; } catch (_e) { return null; }
 }
 

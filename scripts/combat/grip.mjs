@@ -39,6 +39,7 @@ import { handgunPerkFor } from "../actors/rewolwerowiec.mjs";
 import { ABILITY_KEYS, hasAbility } from "../actors/abilities.mjs";
 import { WEAPONS } from "../config/weapons-data.mjs";
 import { zarejestrujZrodloOkolicznosci } from "./okolicznosci.mjs";
+import { rollTypeOf } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -243,7 +244,7 @@ function zrodloJednaReka(ctx) {
 
 /** Hook: `dnd5e.renderChatMessage` — pigułki chwytu na karcie ataku. */
 function onRenderChatMessage(message, html) {
-  if (message.getFlag("dnd5e", "roll")?.type !== "attack") return;
+  if (rollTypeOf(message) !== "attack") return;
   const notes = message.rolls?.[0]?.options?.neuroGrip?.notes;
   if (!notes?.length || html.querySelector(".neuro-grip-badge")) return;
   let pillList = html.querySelector("ul.card-footer.pills");

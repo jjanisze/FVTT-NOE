@@ -1503,7 +1503,7 @@ async function _rollExplosiveDamageFromCard(card, payload, message) {
   await CONFIG.Dice.DamageRoll.toMessage(rolls, {
     speaker: message?.speaker,
     flavor: `<i class="fa-solid fa-burst"></i> ${payload?.itemName ?? "Ładunek"} — ${summary}`,
-    flags: { dnd5e: { roll: { type: "damage" } } }
+    type: "damage" // dnd5e 6.0: a damage card is a typed message (5.3 marked it with a roll flag)
   });
 }
 

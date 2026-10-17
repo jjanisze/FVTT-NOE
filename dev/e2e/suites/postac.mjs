@@ -128,7 +128,7 @@ function snapshot({ name }) {
     saves: Object.entries(a.system.abilities).filter(([, s]) => s.proficient).map(([k]) => k).sort(),
     abilities: Object.fromEntries(Object.entries(a.system.abilities).map(([k, v]) => [k, v.value])),
     hp: { value: a.system.attributes.hp.value, max: a.system.attributes.hp.max },
-    speed: `${a.system.attributes.movement.walk} ${a.system.attributes.movement.units}`,
+    speed: `${a.system.attributes.movement.speeds.walk} ${a.system.attributes.movement.units}`,
     level: a.system.details.level, statuses: [...a.statuses]
   };
 }

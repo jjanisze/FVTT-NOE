@@ -99,6 +99,30 @@ export function registerConfigTests(quench) {
         expect(CONFIG.DND5E.conditionEffects.halfMovement).to.be.empty;
       });
 
+      it("`conditionEffects` scalone z dnd5e 6.0: żaden klucz systemu nie znika (PLAN_migracja_dnd5e6.md §3.5)", function () {
+        // Klucze dnd5e 6.0.6 (`config.mjs` DND5E.conditionEffects); dnd5e czyta je po nazwie.
+        const dnd5eKeys = ["noMovement", "halfMovement", "crawl", "petrification", "halfHealth", "dehydrated", "malnourished",
+          "abilityCheckDisadvantage", "physicalCheckDisadvantage", "abilitySaveDisadvantage", "physicalSaveDisadvantage",
+          "physicalAttackDisadvantage", "attackDisadvantage", "dexteritySaveDisadvantage", "dexteritySaveAdvantage",
+          "initiativeAdvantage", "initiativeDisadvantage"];
+        for (const key of dnd5eKeys) expect(CONFIG.DND5E.conditionEffects[key], key).to.be.an.instanceOf(Set);
+        // Decyzje 1:1 z 5.3 (D4): przeciążenie dnd5e 2024 i Ułatwienie RO ZRC przy Unikaniu — puste.
+        for (const key of ["physicalCheckDisadvantage", "physicalSaveDisadvantage", "physicalAttackDisadvantage", "dexteritySaveAdvantage"]) {
+          expect(CONFIG.DND5E.conditionEffects[key], key).to.be.empty;
+        }
+      });
+
+      it("ikony stanów z poziomami istnieją dla każdego poziomu (dnd5e 6.0 skleja `<img>-N`)", async function () {
+        for (const [id, cfg] of Object.entries(CONFIG.DND5E.conditionTypes)) {
+          if (!(cfg.levels > 1)) continue;
+          const [path, ext] = [cfg.img.slice(0, cfg.img.lastIndexOf(".")), cfg.img.slice(cfg.img.lastIndexOf(".") + 1)];
+          for (let n = 1; n <= cfg.levels; n++) {
+            const res = await fetch(foundry.utils.getRoute(`${path}-${n}.${ext}`), { method: "HEAD", cache: "no-store" });
+            expect(res.ok, `${id}: brak ${path}-${n}.${ext}`).to.equal(true);
+          }
+        }
+      });
+
       it("Zakrwawiony jest wyłączony na rzecz Stopnia Zranienia", function () {
         expect(CONFIG.DND5E.bloodied.threshold).to.equal(0);
       });

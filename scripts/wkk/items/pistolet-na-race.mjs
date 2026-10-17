@@ -93,6 +93,7 @@ import { getMag, spendRound, setChamber } from "../../weapons/magazine.mjs";
 import { playShotSound } from "../../weapons/sounds.mjs";
 import { requestFlareLight, FLARE_LIGHT, BURN_SECONDS } from "./flara.mjs";
 import { pickCanvasPoint, measureMeters, metersToPx } from "../../scenes/area-picker.mjs";
+import { itemUuidOf, activityRefOf } from "../../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const LAUNCH_ID = "pistolet-race-wystrzel";
@@ -316,10 +317,10 @@ async function _rollPodpalenieSave() {
 /** Injects the "RO Podpalenie" button into this weapon's ATAK chat cards — deferred render
  * (dnd5e builds its cards via async microtasks; `setTimeout(0)` runs after they've settled). */
 function onRenderPodpalenieButton(message, html) {
-  const activityType = message.flags?.dnd5e?.activity?.type;
+  const activityType = activityRefOf(message)?.type;
   if (activityType !== "attack") return;
 
-  const itemUuid = message.flags?.dnd5e?.item?.uuid;
+  const itemUuid = itemUuidOf(message);
   if (!itemUuid) return;
   const item = fromUuidSync(itemUuid);
   if (!item || !_isPistoletRace(item)) return;

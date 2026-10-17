@@ -1,6 +1,7 @@
 import { hasWeaponProperty } from "../config/weapons.mjs";
 // Cykl z `trafienie.mjs` bezpieczny — wołane tylko z ciał funkcji.
 import { isMeleeAttack } from "./trafienie.mjs";
+import { rollTypeOf } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const LAST_ATTACK_COVER_FLAG = "lastAttackCover";
@@ -104,7 +105,7 @@ export function registerCoverSystem() {
  */
 function _registerTargetsTrayEnrichment() {
   Hooks.on("dnd5e.renderChatMessage", (message, html) => {
-    if (message.getFlag("dnd5e", "roll")?.type !== "attack") return;
+    if (rollTypeOf(message) !== "attack") return;
 
     const attackRoll = message.rolls?.[0];
     const neuroCover = attackRoll?.options?.neuroCover;
@@ -268,7 +269,7 @@ function registerAttackCoverIntegration() {
       const rolls = await this.rollAttack(
         { event: config.event },
         {},
-        { data: { "flags.dnd5e.originatingMessage": messageId } }
+        { data: { system: { origin: messageId } } }
       );
       const cancelled = !rolls || (Array.isArray(rolls) && rolls.length === 0);
       if (cancelled && messageId) {

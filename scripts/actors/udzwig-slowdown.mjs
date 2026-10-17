@@ -39,11 +39,10 @@
  * states (Normalna/Przeciążenie/Unieruchomienie) but only two produce an effect, and
  * each needs a DIFFERENT change: ×0.5 (MULTIPLY) at Przeciążenie, override to 0 at
  * Unieruchomienie — RAW's "spada do 0" is an absolute floor, not a further reduction,
- * so OVERRIDE (not another MULTIPLY/ADD) is the correct mode. `system.attributes.
- * movement.walk` is dnd5e's own canonical key for this — confirmed via
- * `documents/active-effect.mjs`'s `SHIM_FIELDS`, which forwards the older
- * "movement.speed" spelling forward to this exact path, meaning core itself treats
- * `movement.walk` as the current name.
+ * so OVERRIDE (not another MULTIPLY/ADD) is the correct mode. The key is
+ * `system.attributes.movement.speeds.walk` since dnd5e 6.0: its `ActiveEffect5e.SHIM_FIELDS`
+ * forwards the older spellings (5.3's walking-speed key and the 2.x one before it) to this
+ * path, with a compatibility warning.
  *
  * Reads `actor.system.attributes.encumbrance` — already computed by dnd5e's own
  * `prepareEncumbrance()` per the RAW thresholds `../config/encumbrance-config.mjs`
@@ -74,8 +73,8 @@ const EFFECT_ID = "neuroUdzwigSlow0";
 const EFFECT_FLAG = "udzwigSlowZone";
 
 const ZONE_CHANGES = {
-  przeciazenie: [change("system.attributes.movement.walk", CHANGE_TYPE.multiply, 0.5)],
-  nieruchomienie: [change("system.attributes.movement.walk", CHANGE_TYPE.override, 0)]
+  przeciazenie: [change("system.attributes.movement.speeds.walk", CHANGE_TYPE.multiply, 0.5)],
+  nieruchomienie: [change("system.attributes.movement.speeds.walk", CHANGE_TYPE.override, 0)]
 };
 
 const ZONE_NAMES = {

@@ -1,4 +1,5 @@
 import { useGate, redirectUse } from "../actors/doll.mjs";
+import { activityRefOf } from "./chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -58,10 +59,10 @@ export function registerValidation() {
 
   // Also hook chat rendering to warn if damage button is present but will fail
   Hooks.on("renderChatMessageHTML", (message, html) => {
-    const activityInfo = message.flags?.dnd5e?.activity;
+    const activityInfo = activityRefOf(message);
     if (!activityInfo) return;
     
-    const itemId = message.flags?.dnd5e?.item?.id || activityInfo.item?.id;
+    const itemId = message.system?.item?.id;
     if (!itemId) return;
     
     // We defer slightly if we need DOM

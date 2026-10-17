@@ -65,7 +65,7 @@ export function computeFovAngle({ blindsightRange = 0, typeValue = "", typeSubty
 /** Same computation straight off a dnd5e Actor (character or npc) — the common case. */
 export function computeFovAngleForActor(actor) {
   const senses = actor?.system?.attributes?.senses;
-  const blindsightRange = senses?.ranges?.blindsight ?? senses?.blindsight ?? 0;
+  const blindsightRange = senses?.ranges?.blindsight ?? 0;
   const type = actor?.system?.details?.type ?? {};
   return computeFovAngle({
     blindsightRange,

@@ -71,9 +71,9 @@ export function registerEffectChangesTests(quench) {
 
     describe("normalizeChanges", function () {
       it("zrównuje zapis z bazy ze świeżo zbudowanym (phase, liczba vs string)", function () {
-        const fresh = [change("system.attributes.movement.walk", CHANGE_TYPE.multiply, 0.5)];
+        const fresh = [change("system.attributes.movement.speeds.walk", CHANGE_TYPE.multiply, 0.5)];
         const stored = [{
-          key: "system.attributes.movement.walk", type: "multiply",
+          key: "system.attributes.movement.speeds.walk", type: "multiply",
           value: "0.5", priority: CHANGE_PRIORITY.multiply, phase: "initial"
         }];
         expect(normalizeChanges(stored)).to.equal(normalizeChanges(fresh));
@@ -99,14 +99,14 @@ export function registerEffectChangesTests(quench) {
         const actor = await walker(70);
         await slowdown.syncUdzwigSlowEffect(actor);
         await setZranienie(actor, 1);
-        expect(actor.system.attributes.movement.walk).to.equal(2.25);
+        expect(actor.system.attributes.movement.speeds.walk).to.equal(2.25);
       });
 
       it("Unieruchomienie wygrywa ze wszystkim — Szybkość 0", async function () {
         const actor = await walker(130);
         await slowdown.syncUdzwigSlowEffect(actor);
         await setZranienie(actor, 1);
-        expect(actor.system.attributes.movement.walk).to.equal(0);
+        expect(actor.system.attributes.movement.speeds.walk).to.equal(0);
       });
     });
 

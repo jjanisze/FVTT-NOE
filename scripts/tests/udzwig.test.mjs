@@ -122,7 +122,7 @@ export function registerUdzwigTests(quench) {
         const actor = await heavyActor(30);
         await slowdown.syncUdzwigSlowEffect(actor);
         expect(actor.effects.get(slowdown.EFFECT_ID)).to.be.undefined;
-        expect(actor.system.attributes.movement.walk).to.equal(9);
+        expect(actor.system.attributes.movement.speeds.walk).to.equal(9);
       });
 
       it("Przeciążenie (50–100 kg) → efekt ×0.5 na Szybkości", async function () {
@@ -132,11 +132,11 @@ export function registerUdzwigTests(quench) {
         expect(effect, "efekt utworzony").to.exist;
         expect(effect.getFlag(MODULE_ID, slowdown.EFFECT_FLAG)).to.equal("przeciazenie");
         expect(effect.system.changes[0]).to.include({
-          key: "system.attributes.movement.walk",
+          key: "system.attributes.movement.speeds.walk",
           type: "multiply",
           value: 0.5
         });
-        expect(actor.system.attributes.movement.walk).to.equal(4.5);
+        expect(actor.system.attributes.movement.speeds.walk).to.equal(4.5);
       });
 
       it("Unieruchomienie (powyżej 100 kg) → Szybkość nadpisana na 0, nie tylko zmniejszona", async function () {
@@ -145,11 +145,11 @@ export function registerUdzwigTests(quench) {
         const effect = actor.effects.get(slowdown.EFFECT_ID);
         expect(effect.getFlag(MODULE_ID, slowdown.EFFECT_FLAG)).to.equal("nieruchomienie");
         expect(effect.system.changes[0]).to.include({
-          key: "system.attributes.movement.walk",
+          key: "system.attributes.movement.speeds.walk",
           type: "override",
           value: 0
         });
-        expect(actor.system.attributes.movement.walk).to.equal(0);
+        expect(actor.system.attributes.movement.speeds.walk).to.equal(0);
       });
 
       it("przejście Przeciążenie → Unieruchomienie AKTUALIZUJE istniejący efekt, nie dokłada drugiego", async function () {
@@ -164,7 +164,7 @@ export function registerUdzwigTests(quench) {
         expect(actor.effects.size, "wciąż jeden efekt, nie dwa").to.equal(1);
         expect(actor.effects.get(slowdown.EFFECT_ID).getFlag(MODULE_ID, slowdown.EFFECT_FLAG))
           .to.equal("nieruchomienie");
-        expect(actor.system.attributes.movement.walk).to.equal(0);
+        expect(actor.system.attributes.movement.speeds.walk).to.equal(0);
       });
 
       it("powrót do Normalnej USUWA efekt — Szybkość wraca do bazowej", async function () {
@@ -176,7 +176,7 @@ export function registerUdzwigTests(quench) {
         await slowdown.syncUdzwigSlowEffect(actor);
 
         expect(actor.effects.get(slowdown.EFFECT_ID)).to.be.undefined;
-        expect(actor.system.attributes.movement.walk).to.equal(9);
+        expect(actor.system.attributes.movement.speeds.walk).to.equal(9);
       });
     });
   }, { displayName: "Neuroshima: Udźwig — strefy i progi RAW" });

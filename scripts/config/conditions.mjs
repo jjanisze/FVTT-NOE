@@ -382,7 +382,17 @@ function buildConditionEffects() {
     attackDisadvantage: new Set(),
     dexteritySaveDisadvantage: new Set(["restrained"]),
     initiativeAdvantage: new Set(["ambush"]),
-    initiativeDisadvantage: new Set(["incapacitated", "surprised"])
+    initiativeDisadvantage: new Set(["incapacitated", "surprised"]),
+    // dnd5e 6.0 keys, empty on purpose (port 1:1, PLAN_migracja_dnd5e6.md D4):
+    //  - `physical*` put dnd5e's `heavilyEncumbered` (2024 rules) on STR/DEX/CON tests; Udźwig has its own NOE
+    //    penalties (`actors/udzwig-slowdown.mjs`, `combat/udzwig-attack-disadvantage.mjs`).
+    //  - `dexteritySaveAdvantage` gives Unikanie (`dodging`) Ułatwienie on RO ZRC — that IS NOE s. 30, but RAW also
+    //    takes it away under Obezwładnienie, at Szybkość 0 and without sight of the enemy, which a blanket set
+    //    cannot see; the 5.3 build never granted it. A RAW reading for the GM (E9), not a port.
+    physicalCheckDisadvantage: new Set(),
+    physicalSaveDisadvantage: new Set(),
+    physicalAttackDisadvantage: new Set(),
+    dexteritySaveAdvantage: new Set()
   };
 }
 
@@ -445,8 +455,14 @@ export function registerConditions() {
   // 3. Neuroshima-only levelled conditions (Upojenie, Skażenie radioaktywne).
   registerLevelledConditionConfig(conditions);
 
-  // 4. Fix the blanket-effect table (see buildConditionEffects for why).
-  CONFIG.DND5E.conditionEffects = buildConditionEffects();
+  // 4. Fix the blanket-effect table (see buildConditionEffects for why). Merged into dnd5e's object, not
+  //    replaced: dnd5e reads keys by name, and a key a newer dnd5e adds must not vanish unnoticed — it keeps
+  //    dnd5e's value and is reported for review (PLAN_migracja_dnd5e6.md §3.5).
+  const table = CONFIG.DND5E.conditionEffects ??= {};
+  const ours = buildConditionEffects();
+  const unknown = Object.keys(table).filter(key => !(key in ours));
+  if (unknown.length) console.warn(`${MODULE_ID} | conditionEffects: klucze dnd5e bez decyzji NOE (zostają jak w dnd5e): ${unknown.join(", ")}`);
+  Object.assign(table, ours);
 
   // 5. Zakrwawiony is dnd5e's ≤50% PW marker. Neuroshima tracks injury through
   //    Stopień Zranienia instead, and two competing "how hurt am I" readouts on one
@@ -494,12 +510,14 @@ function registerLevelledConditionConfig(conditions) {
   //
   // The icon is dnd5e's Zakrwawiony art, which this module frees up by zeroing
   // `bloodied.threshold`: Neuroshima measures injury with Stopień Zranienia instead,
-  // so the icon lands on the mechanic that replaced it. Reusing `bleeding.svg` — as
+  // so the icon lands on the mechanic that replaced it. Our own copy: dnd5e 6.0 builds a
+  // levelled condition's icon as `<img>-N` (`ConditionData.getIconByLevel`), and the
+  // numbered set lives in this module (`dev/icons/gen_status_numerals.mjs`). Reusing `bleeding.svg` — as
   // `zranienie.mjs` did before conditions existed — would now be indistinguishable
   // from Krwawienie on the token.
   conditions.zranienie = {
     name: "Stopień Zranienia",
-    img: `${SVG}/bloodied.svg`,
+    img: `${OWN}/zranienie.svg`,
     description: "<p>Kumulatywne stopnie 1–4: Lekki, Znaczny, Poważny, Krytyczny.</p>"
       + "<p><strong>Szybkość</strong> −4,5 m (od 1). <strong>Brak Reakcji</strong> (od 2). "
       + "<strong>Brak Akcji Bonusowej</strong> (od 3). <strong>+1 Wyczerpanie</strong> (na 4).</p>"

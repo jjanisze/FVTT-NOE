@@ -18,7 +18,7 @@
 
 import { CLASS_FEATURES } from "../config/class-features-data.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
-import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
+import { CHANGE_TYPE, change, effectOrigin } from "../config/effect-changes.mjs";
 import { ttSource } from "./tt.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
@@ -85,7 +85,7 @@ const STATE_CONFIG = {
       // Obrażenia Berserkera — extra damage die on Strength-based attacks (weapon
       // or unarmed), scaling with Brutal level. Same dnd5e bonus path (`mwak`)
       // stock Rage uses, and the same scope limitation: melee only, not thrown.
-      change("system.bonuses.mwak.damage", CHANGE_TYPE.add, "+@scale.brutal.obrazeniaBerserkera"),
+      change("system.rolls.damage.mwak.bonus", CHANGE_TYPE.add, "+@scale.brutal.obrazeniaBerserkera"),
       // Siła Berserkera — advantage on Strength checks and Strength saves.
       change("system.abilities.str.check.roll.mode", CHANGE_TYPE.add, 1),
       change("system.abilities.str.save.roll.mode", CHANGE_TYPE.add, 1)
@@ -214,9 +214,8 @@ export async function toggleClassState(actor, abilityId, { spendUse = true } = {
     name: cfg.label,
     img: cfg.icon ?? item?.img ?? "icons/svg/upgrade.svg",
     tint: cfg.tint ?? null,
-    origin: item?.uuid ?? actor.uuid,
     duration,
-    system: { changes },
+    system: { changes, origin: effectOrigin(item?.uuid ?? actor.uuid) },
     flags: {
       [MODULE_ID]: {
         classState: effectId,

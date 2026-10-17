@@ -34,6 +34,7 @@ import { normalizeChanges } from "../config/effect-changes.mjs";
 import { getChoroby } from "./health-panel.mjs";
 import { DISEASE_STAGES, NO_REST_FLAG, getDisease, diseaseStages, isBaselineChronic } from "../config/diseases-data.mjs";
 import { zarejestrujZrodloOkolicznosci } from "../combat/okolicznosci.mjs";
+import { rollInfo } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const EFFECT_FLAG = "diseaseEffect";
@@ -302,7 +303,7 @@ function zrodloChoroby(ctx) {
  *
  * dnd5e stores only `skillId` for a skill check, never the ability actually used,
  * so a check rolled with a swapped ability is attributed to the skill's default.
- * @param {object} rollData  `message.flags.dnd5e.roll`
+ * @param {object} rollData  `rollInfo(message)` (`config/chat-message-data.mjs`)
  * @returns {string[]}
  */
 function _rollModeKeys(rollData) {
@@ -361,7 +362,7 @@ function _rollInfluences(actor, rollData, roll) {
  * Shown to everyone, not just the GM — the player is the one who needs reminding.
  */
 function _onAnnotateRoll(message, html) {
-  const rollData = message.flags?.dnd5e?.roll;
+  const rollData = rollInfo(message);
   if (!rollData) return;
   if (html.querySelector(".neuro-disease-note")) return;
 
@@ -418,7 +419,7 @@ function _rageStage(actor) {
  */
 function _onRenderRollMessage(message, html) {
   if (!game.user.isGM) return;
-  const rollData = message.flags?.dnd5e?.roll;
+  const rollData = rollInfo(message);
   if (!rollData || !RAGE_ROLL_TYPES.includes(rollData.type)) return;
   if (message.flags?.[MODULE_ID]?.rageOffered) return;
   if (html.querySelector(".neuro-rage-bar")) return;

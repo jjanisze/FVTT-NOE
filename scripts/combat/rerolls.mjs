@@ -31,6 +31,7 @@ import { seqScrollText } from "../weapons/sequencer.mjs";
 import { jestTowarzyszem } from "../actors/towarzysze.mjs";
 import { MAX_FUKSY } from "../config/fuksy-rules.mjs";
 import { liczbaFuksow, zuzyjFuksa, przyznajFuksa, ustawLiczbeFuksow } from "../actors/fuksy.mjs";
+import { rollInfo, rollTypeOf } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -149,7 +150,7 @@ function _przerzucony(message, actor) {
  * Injects subtle Forsuj / Fuks buttons under d20 roll results.
  */
 function onRenderChatMessage(message, html) {
-  const rollData = message.flags?.dnd5e?.roll;
+  const rollData = rollInfo(message);
   if (!rollData) return;
 
   // Skip reroll result messages and already-rerolled source messages
@@ -270,7 +271,7 @@ function _getAbilityKey(rollData, actor) {
  * Build a human-readable description of what a roll tested.
  */
 function _describeRoll(message) {
-  const rollData = message.flags?.dnd5e?.roll;
+  const rollData = rollInfo(message);
   if (!rollData) return message.rolls?.[0]?.formula ?? "k20";
 
   switch (rollData.type) {
@@ -379,24 +380,22 @@ async function _onClickForsowanie(event) {
 }
 
 /**
- * Flagi karty przerzutu Fuksem. Przerzucony **Test Ataku** zostaje Testem Ataku: dostaje powiązania
- * dnd5e karty źródłowej (karta użycia, aktywność, przedmiot, cele), więc „Obrażenia” z karty użycia
- * czytają już przerzut, oraz `rerollOf` — rozstrzygacz trafienia (`combat/trafienie.mjs`) przenosi
- * na nią werdykt i reakcje celu (PLAN_tt §4.8.7), a stara karta pokazuje „zastąpione przerzutem”.
+ * Dane karty przerzutu Fuksem. Przerzucony **Test Ataku** zostaje Testem Ataku: w dnd5e 6.0 to wiadomość typu
+ * `attack` z powiązaniami karty źródłowej w `system` (karta użycia, aktywność, przedmiot, cele, tryb ataku), więc
+ * „Obrażenia” z karty użycia czytają już przerzut, oraz flaga `rerollOf` — rozstrzygacz trafienia
+ * (`combat/trafienie.mjs`) przenosi na nią werdykt i reakcje celu (PLAN_tt §4.8.7), a stara karta pokazuje
+ * „zastąpione przerzutem”. (dnd5e 5.3 trzymało te powiązania we flagach `flags.dnd5e`.)
  */
-function _fuksRerollFlags(originalMessage) {
+function _fuksRerollData(originalMessage) {
   const flags = { [MODULE_ID]: { fuks: true } };
-  const src = originalMessage?.flags?.dnd5e;
-  if (src?.roll?.type !== "attack") return flags;
+  if (rollTypeOf(originalMessage) !== "attack") return { flags };
   flags[MODULE_ID].rerollOf = originalMessage.id;
-  flags.dnd5e = {
-    roll: { type: "attack" },
-    ...(src.originatingMessage ? { originatingMessage: src.originatingMessage } : {}),
-    ...(src.activity ? { activity: src.activity } : {}),
-    ...(src.item ? { item: src.item } : {}),
-    ...(src.targets ? { targets: src.targets } : {})
-  };
-  return flags;
+  const src = originalMessage._source?.system ?? {};
+  const system = foundry.utils.deepClone({
+    origin: src.origin, activity: src.activity, item: src.item, targets: src.targets,
+    ability: src.ability, mode: src.mode, ammunition: src.ammunition
+  });
+  return { flags, type: "attack", system };
 }
 
 /* -------------------------------------------- */
@@ -475,7 +474,7 @@ async function _onClickFuks(event) {
         <div style="font-size: 11px; color: var(--color-text-secondary, #aaa);">${rollDesc} — przerzut</div>
       </div>
     `,
-    flags: _fuksRerollFlags(originalMessage)
+    ..._fuksRerollData(originalMessage)
   });
 
   // Zużyj Fuksa, który wygasa najwcześniej (Fuksy v2, U24).

@@ -178,7 +178,7 @@ async function _onCommit(message, root, count) {
   await roll.toMessage({
     speaker: ChatMessage.getSpeaker({ actor }),
     flavor: `${feature.label} — ${formula} ${typeLabel}`,
-    flags: { dnd5e: { roll: { type: "damage" } } }
+    type: "damage" // dnd5e 6.0: a damage card is a typed message (5.3 marked it with a roll flag)
   });
 
   const attackerToken = actor?.getActiveTokens?.()[0] ?? null;

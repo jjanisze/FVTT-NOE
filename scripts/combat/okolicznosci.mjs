@@ -19,6 +19,7 @@
 import { rozstrzygnijOkolicznosci, autoKrytyk, OBOK } from "../config/okolicznosci-ataku.mjs";
 import { isMeleeAttack } from "./trafienie.mjs";
 import { HAND_OCCUPANTS_FLAG } from "../actors/doll.mjs";
+import { rollTypeOf } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 /** Klucz rozkładu na `roll.options`. */
@@ -226,7 +227,7 @@ export function autoKrytykZRzutu(roll, tokenUuid) {
 const TRYB_LABEL = { 1: "Ułatwienie", 0: "Ułatwienie i Utrudnienie — znoszą się", [-1]: "Utrudnienie" };
 
 function _onRenderChatMessage(message, html) {
-  if (message.getFlag("dnd5e", "roll")?.type !== "attack") return;
+  if (rollTypeOf(message) !== "attack") return;
   const z = message.rolls?.[0]?.options?.[OKOLICZNOSCI_OPT];
   if (!z || html.querySelector(".neuro-okolicznosci")) return;
   let pills = html.querySelector("ul.card-footer.pills");

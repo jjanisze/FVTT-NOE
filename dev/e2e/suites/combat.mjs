@@ -46,13 +46,13 @@ async function shoot({ targetName, uniform }) {
       if (!usage) await new Promise(r => setTimeout(r, 250));
     }
     if (!usage) throw new Error("attack.use() was cancelled every time");
-    const link = { data: { flags: { dnd5e: { originatingMessage: usage.message.id } } } };
+    const link = { data: { system: { origin: usage.message.id } } };
     const attackRolls = await attack.rollAttack({}, { configure: false }, link);
     // As dnd5e's damage button does: crit from the last attack roll, same originating card.
     const isCritical = attackRolls?.[0]?.isCritical ?? false;
     await attack.rollDamage({ isCritical }, { configure: false }, link);
-    const attackMsg = game.messages.contents.findLast(m => m.getFlag("dnd5e", "originatingMessage") === usage.message.id && m.flags[MOD]?.obrona);
-    const damageMsg = game.messages.contents.findLast(m => m.getFlag("dnd5e", "originatingMessage") === usage.message.id && m.getFlag("dnd5e", "roll.type") === "damage");
+    const attackMsg = game.messages.contents.findLast(m => m._source.system?.origin === usage.message.id && m.flags[MOD]?.obrona);
+    const damageMsg = game.messages.contents.findLast(m => m._source.system?.origin === usage.message.id && m.type === "damage");
     return {
       natural: attackMsg?.flags[MOD].obrona.natural ?? null,
       verdict: attackMsg?.flags[MOD].obrona.targets?.[0]?.verdict ?? null,
@@ -77,10 +77,10 @@ async function shootCircumstances({ targetName, uniform }) {
   CONFIG.Dice.randomUniform = () => uniform;
   try {
     const usage = await attack.use({ subsequentActions: false }, { configure: false }, {});
-    const link = { data: { flags: { dnd5e: { originatingMessage: usage.message.id } } } };
+    const link = { data: { system: { origin: usage.message.id } } };
     const rolls = await attack.rollAttack({}, { configure: false }, link);
     await new Promise(r => setTimeout(r, 600));
-    const msg = game.messages.contents.findLast(m => m.getFlag("dnd5e", "originatingMessage") === usage.message.id && m.getFlag("dnd5e", "roll.type") === "attack");
+    const msg = game.messages.contents.findLast(m => m._source.system?.origin === usage.message.id && m.type === "attack");
     const z = rolls?.[0]?.options?.neuroOkolicznosci ?? null;
     const el = ui.chat.element?.querySelector(`[data-message-id="${msg?.id}"]`);
     const groups = el ? [...el.querySelectorAll(".neuro-okolicznosci:not(.neuro-okolicznosci-uwaga):not(.neuro-okolicznosci-autokrytyk)")] : [];
@@ -147,7 +147,7 @@ async function burst({ targetName }) {
     const pressed = await __e2e.pressRollDialog("disadvantage");
     await __e2e.until(() => mag() < before, { timeoutMs: 8000, message: "the burst's rounds to be spent" }).catch(() => {});
     await __e2e.quiet();
-    const attack = game.messages.contents.slice(since).findLast(m => m.getFlag("dnd5e", "roll.type") === "attack");
+    const attack = game.messages.contents.slice(since).findLast(m => m.type === "attack");
     const afterFirst = mag();
     // Same round again: refused before any dialog (use() returns nothing). Were it accepted, its
     // dialog is answered so nothing hangs, and the spent rounds show it.
@@ -234,12 +234,12 @@ async function strzalEmp({ empId, uniform }) {
       usage = await attack.use({ subsequentActions: false }, { configure: false }, {});
       if (!usage) await new Promise(r => setTimeout(r, 250));
     }
-    const link = { data: { flags: { dnd5e: { originatingMessage: usage.message.id } } } };
+    const link = { data: { system: { origin: usage.message.id } } };
     await attack.rollAttack({}, { configure: false }, link);
     canvas.tokens.setTargets([ob.id, cyw.id]);
     await attack.rollDamage({}, { configure: false }, link);
-    const attackMsg = game.messages.contents.findLast(m => m.getFlag("dnd5e", "originatingMessage") === usage.message.id && m.flags[MOD]?.obrona);
-    const damageMsg = game.messages.contents.findLast(m => m.getFlag("dnd5e", "originatingMessage") === usage.message.id && m.getFlag("dnd5e", "roll.type") === "damage");
+    const attackMsg = game.messages.contents.findLast(m => m._source.system?.origin === usage.message.id && m.flags[MOD]?.obrona);
+    const damageMsg = game.messages.contents.findLast(m => m._source.system?.origin === usage.message.id && m.type === "damage");
     return { usage: usage.message.id, damage: damageMsg?.id ?? null, tt: attackMsg?.flags[MOD].obrona.targets?.[0]?.tt ?? null };
   } finally {
     CONFIG.Dice.randomUniform = orig;

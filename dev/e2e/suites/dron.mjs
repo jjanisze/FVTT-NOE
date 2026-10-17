@@ -205,7 +205,7 @@ async function atakDrona() {
   window.__e2e.forceD20([10], { fallback: 3 });
   try {
     const usage = await attack.use({ subsequentActions: false }, { configure: false }, {});
-    const link = { data: { flags: { dnd5e: { originatingMessage: usage.message.id } } } };
+    const link = { data: { system: { origin: usage.message.id } } };
     const [roll] = await attack.rollAttack({}, { configure: false }, link);
     return { plakietki: usage.message.flags?.[MOD]?.dronPlakietki ?? [], total: roll?.total ?? null, natural: roll?.d20?.total ?? null };
   } finally {

@@ -67,11 +67,11 @@ const allSaves = (v = -1) => ALL_ABILITIES.map(a => save(a, v));
 const wplywanie = (v = -1) => [skill("zas", v), skill("osz", v), skill("per", v)];
 
 /** Speed to zero / halved. */
-const speedZero = change("system.attributes.movement.walk", CHANGE_TYPE.override, 0);
-const speedHalf = change("system.attributes.movement.walk", CHANGE_TYPE.multiply, 0.5);
+const speedZero = change("system.attributes.movement.speeds.walk", CHANGE_TYPE.override, 0);
+const speedHalf = change("system.attributes.movement.speeds.walk", CHANGE_TYPE.multiply, 0.5);
 
 /** Syndrom Draculi's night sight, identical at every stage. */
-const darkvision = () => change("system.attributes.senses.darkvision", CHANGE_TYPE.upgrade, 18);
+const darkvision = () => change("system.attributes.senses.ranges.darkvision", CHANGE_TYPE.upgrade, 18);
 
 /**
  * Paranoja's stage effects, shared verbatim with the WKK-only `schizofreniaParanoidalna`

@@ -85,7 +85,7 @@ export function ttSnapshot(actor) {
     .map(k => [k, _num(abilities[k]?.mod)]));
   const hands = heldItems(actor).filter(h => h.item).map(h => h.item);
   const statuses = actor.statuses ?? new Set();
-  const walk = actor.system?.attributes?.movement?.walk;
+  const walk = actor.system?.attributes?.movement?.speeds?.walk;
   return {
     mods,
     prof: _num(actor.system?.attributes?.prof),

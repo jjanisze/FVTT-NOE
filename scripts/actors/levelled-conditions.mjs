@@ -313,10 +313,13 @@ function _buildEffect(id, level) {
   const text = rows.map(r => `<p><strong>Stopień ${r.level}.</strong> ${r.text}</p>`).join("");
   const manual = rows.filter(r => r.manual).map(r => r.manual);
 
+  // dnd5e 6.0: a status whose condition type has `levels` is a `condition` effect — `system.type` names the
+  // condition, `system.level` is the level, and dnd5e derives name and icon (`<img>-N`) from them.
   return {
+    type: "condition",
     name: `${def.label} ${level}`,
     img: `modules/${MODULE_ID}/icons/statuses/${id}.svg`,
-    system: { changes },
+    system: { type: id, level, changes },
     statuses: [...new Set(statuses)],
     // FVTT v14: `isTemporary` liczy tylko czas trwania, a domyślne `CONDITIONAL`
     // znaczy „rysuj tylko, jeśli tymczasowy" — bez tego ikona nie wchodzi na żeton.
@@ -350,6 +353,8 @@ export async function syncLevelledConditions(actor) {
     const { id } = effect.getFlag(MODULE_ID, EFFECT_FLAG);
     const target = wanted.get(id);
     if (!target) { toDelete.push(effect.id); continue; }
+    // A 5.3 effect is not a `condition` one, and a type cannot be changed by update: replace it.
+    if (effect.type !== "condition") { toDelete.push(effect.id); continue; }
     wanted.delete(id);
 
     // Only write on a real difference — this runs on every level change, and a
@@ -358,10 +363,11 @@ export async function syncLevelledConditions(actor) {
     // literally (see that function's own note).
     const current = effect.toObject();
     const differs = current.name !== target.name
+      || current.system?.level !== target.system.level
       || current.showIcon !== target.showIcon
       || normalizeChanges(current.system?.changes) !== normalizeChanges(target.system.changes)
       || JSON.stringify([...(current.statuses ?? [])].sort()) !== JSON.stringify([...target.statuses].sort());
-    if (differs) toUpdate.push({ _id: effect.id, ...target });
+    if (differs) { const { type: _type, ...update } = target; toUpdate.push({ _id: effect.id, ...update }); }
   }
 
   if (toDelete.length) await actor.deleteEmbeddedDocuments("ActiveEffect", toDelete);

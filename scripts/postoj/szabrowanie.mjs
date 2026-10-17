@@ -411,7 +411,7 @@ function _rejestrujAkcje() {
     const wzor = kom.obrazenia.map(o => `${o.wzor}[${o.typ}]`).join(" + ");
     const roll = await new CONFIG.Dice.DamageRoll(wzor, {}, { type: kom.obrazenia[0].typ }).evaluate();
     await roll.toMessage({ speaker: ChatMessage.getSpeaker({ alias: s.nazwa }), flavor: `${kom.label} — obrażenia${kom.polowa ? " (połowa przy udanym RO)" : ""}`,
-      flags: { dnd5e: { roll: { type: "damage" } } } });
+      type: "damage" }); // dnd5e 6.0: typed damage message (5.3 marked it with a roll flag)
   });
   zarejestrujAkcje("szabrowanieOpary", async (_ev, btn) => {
     const { s } = await _zPrzycisku(btn);

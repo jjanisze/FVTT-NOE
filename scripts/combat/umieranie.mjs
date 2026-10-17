@@ -49,6 +49,7 @@ import { obronaOf, attackMessageFor, isMeleeAttack } from "./trafienie.mjs";
 import { seqScrollText } from "../weapons/sequencer.mjs";
 import { maStopnieZranienia, rodzajTowarzysza } from "../actors/towarzysze.mjs";
 import { wylacz, wlacz } from "./maszyny.mjs";
+import { rollInfo } from "../config/chat-message-data.mjs";
 
 /** Dron (towarzysz-maszyna): 0 PW → Wyłączony, Olbrzymie obrażenia → zniszczenie (PLAN_m3 §7.4). */
 const _dron = actor => !!rodzajTowarzysza(actor)?.maszyna;
@@ -237,7 +238,7 @@ function _wrecz(options) {
   const obrona = obronaOf(attackMessageFor(message));
   if (obrona) return !!obrona.melee;
   const activity = message.getAssociatedActivity?.() ?? null;
-  if (activity?.type === "attack") return isMeleeAttack(activity, message.flags?.dnd5e?.roll?.attackMode);
+  if (activity?.type === "attack") return isMeleeAttack(activity, rollInfo(message)?.attackMode);
   return null;
 }
 

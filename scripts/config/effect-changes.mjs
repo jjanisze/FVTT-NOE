@@ -109,3 +109,17 @@ export function normalizeChanges(changes) {
     c.priority ?? CHANGE_PRIORITY[c.type] ?? 0
   ]));
 }
+
+/**
+ * Where an effect came from, the dnd5e 6.0 way: `system.origin.{activity|effect|item|actor|behavior}` (one uuid),
+ * core's own `origin` left empty — the split dnd5e's world migration makes of old data (`migration.mjs`
+ * `_migrateEffectOrigin`), so effects made after it read the same as effects migrated by it.
+ * @param {string|null} uuid
+ * @returns {Record<string, string>}  for `system.origin`
+ */
+export function effectOrigin(uuid) {
+  if (!uuid) return {};
+  const kind = uuid.includes("Activity") ? "activity" : uuid.includes("ActiveEffect") ? "effect"
+    : uuid.includes("Item") ? "item" : uuid.includes("Actor") ? "actor" : uuid.includes("RegionBehavior") ? "behavior" : null;
+  return kind ? { [kind]: uuid } : {};
+}

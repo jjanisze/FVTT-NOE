@@ -28,6 +28,7 @@ import {
 import { wejdz, sygnalDrona } from "./drony-zdalne.mjs";
 import { TRYB_AKTYWNOSCI, jestKontrolerem, rodzajKontrolera } from "../items/kontroler.mjs";
 import { isDollActor, inHand, equip } from "./doll.mjs";
+import { activityRefOf, isUsageCard } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const FLAG_OSTATNI = "kontrolerOstatni";
@@ -263,9 +264,9 @@ async function _karta(operator, dron, tryb, { druga, kontroler }) {
 function _onPreCreateChatMessage(message, data) {
   const actor = ChatMessage.getSpeakerActor(data.speaker ?? message.speaker ?? {});
   if (!actor || !jestDronem(actor)) return;
-  const typ = foundry.utils.getProperty(data, "flags.dnd5e.activity.type");
+  const typ = activityRefOf(message)?.type;
   // Karta użycia, nie wiadomość z rzutem — inaczej plakietka stałaby dwa razy.
-  if (!ATAKI.has(typ) || foundry.utils.getProperty(data, "flags.dnd5e.roll")) return;
+  if (!ATAKI.has(typ) || !isUsageCard(message)) return;
   const combat = _walka();
   if (!combat) return;
   const z = aktywacjaWRundzie(actor, combat);

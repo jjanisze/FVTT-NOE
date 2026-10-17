@@ -47,7 +47,7 @@ import {
 } from "../config/exhaustion.mjs";
 import { dzienSwiata } from "../world-clock.mjs";
 import { applyZranienie, getZranienieLvl, setZranienie } from "../combat/zranienie.mjs";
-import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
+import { CHANGE_TYPE, change, effectOrigin } from "../config/effect-changes.mjs";
 import { krokNaprzod, tikRaz } from "../combat/tiki.mjs";
 
 import { provenanceBadge, isAtHand } from "../actors/handy-items.mjs";
@@ -221,7 +221,7 @@ async function _applyPainkillerDose(actor, def, key, item, lines) {
 
   const p = m.dosePenalty;
   const penalty = doses * p.perDose;
-  const changes = [change(`system.abilities.${p.ability}.bonuses.check`, CHANGE_TYPE.add, String(penalty))];
+  const changes = [change(`system.abilities.${p.ability}.check.roll.bonus`, CHANGE_TYPE.add, String(penalty))];
 
   const existing = _actorEffect(actor, key, "dosePenalty");
   if (existing) await existing.update({ system: { changes } });
@@ -293,7 +293,7 @@ async function _applyEffect(actor, key, role, item, lines, overrides = {}) {
   if (!source) return null;
 
   const data = foundry.utils.mergeObject(source, {
-    origin: item?.uuid ?? actor.uuid,
+    system: { origin: effectOrigin(item?.uuid ?? actor.uuid) },
     duration: source.duration?.seconds || source.duration?.rounds
       ? { ...source.duration, startTime: game.time.worldTime }
       : source.duration

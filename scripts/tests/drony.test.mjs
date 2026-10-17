@@ -367,7 +367,8 @@ export function registerDronyTests(quench) {
         restore.push(stub(game, "combat", { id: "quench-dron", round: 4, started: true, turns: [], combatant: null, getCombatantsByActor: () => [] }));
         const karta = () => ChatMessage.implementation.create({
           speaker: ChatMessage.getSpeaker({ actor: wynik.dron }), content: "<p>atak</p>",
-          flags: { dnd5e: { activity: { type: "attack" } } }
+          // dnd5e 6.0: karta użycia to wiadomość typu `usage` z aktywnością w `system`.
+          type: "usage", system: { activity: { type: "attack" } }
         });
         const bez = await karta();
         expect(bez.getFlag(MODULE_ID, "dronPlakietki")?.[0]).to.match(/Steruj \[A\]/);

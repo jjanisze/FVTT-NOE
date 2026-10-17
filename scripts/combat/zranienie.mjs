@@ -294,7 +294,7 @@ export async function setZranienie(actor, level) {
 /*  Active Effect Management                     */
 /* -------------------------------------------- */
 
-const ZRANIENIE_ICON = "systems/dnd5e/icons/svg/statuses/bloodied.svg";
+const ZRANIENIE_ICON = `modules/${MODULE_ID}/icons/statuses/zranienie.svg`;
 
 /**
  * Ikona z wrysowaną czerwoną cyfrą rzymską — dokładnie ten mechanizm, którym dnd5e
@@ -362,14 +362,18 @@ async function _syncZranieniEffect(actor, level) {
   const changes = [];
   if (info.speedPenalty) {
     for (const moveType of ["walk", "fly", "swim", "climb", "burrow"]) {
-      changes.push(change(`system.attributes.movement.${moveType}`, CHANGE_TYPE.add, -info.speedPenalty));
+      changes.push(change(`system.attributes.movement.speeds.${moveType}`, CHANGE_TYPE.add, -info.speedPenalty));
     }
   }
 
+  // dnd5e 6.0: a status whose condition type has `levels` is a `condition` effect, and its level is `system.level`
+  // — dnd5e derives the effect's name and icon from it (`ConditionData.prepareDerivedData`); without it every
+  // Stopień showed as level 1.
   const effectData = {
+    type: "condition",
     name: `Zranienie: ${info.label}`,
     img: _zranienieImage(level),
-    system: { changes },
+    system: { type: "zranienie", level, changes },
     // Lights the token icon. The status id is what makes this effect and the HUD
     // button the same thing rather than two things that look alike.
     statuses: ["zranienie"],
@@ -382,13 +386,15 @@ async function _syncZranieniEffect(actor, level) {
     }
   };
 
-  if (existing && (!staticId || existing.id === staticId)) {
-    await existing.update(effectData);
+  if (existing && existing.type === "condition" && (!staticId || existing.id === staticId)) {
+    const { type: _type, ...update } = effectData;
+    await existing.update(update);
     return;
   }
 
   // Either nothing existed, or an effect from before the status did — one created
-  // with a random id cannot be given the static one, so it is replaced. The delete
+  // with a random id cannot be given the static one, and a 5.3 one is not a `condition` effect (a type cannot be
+  // changed by update), so it is replaced. The delete
   // would normally zero the flag via onDeleteActiveEffect; `zranienieMigration`
   // tells that handler this is a swap, not a heal.
   if (existing) {

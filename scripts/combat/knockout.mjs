@@ -15,6 +15,7 @@
  */
 
 import { zglosObrazenia } from "./umieranie.mjs";
+import { rollInfo, activityRefOf } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -54,7 +55,7 @@ const _damageContext = new Map();
  * Fires BEFORE resistance/vulnerability processing. The `damages` array
  * has full DamageDescription objects with `.type` for each damage component.
  * The `options.originatingMessage` points to the DAMAGE roll message,
- * which has `flags.dnd5e.activity.uuid` for looking up the activity.
+ * which has `system.activity.uuid` (dnd5e 6.0) for looking up the activity.
  *
  * We capture: are ALL damage types bludgeoning? Is the attack melee?
  * Store the result for preApplyDamage to read.
@@ -78,7 +79,7 @@ function onPreCalculateDamage(actor, damages, options) {
   let attackerActorId = msg.speaker?.actor ?? null;
 
   // Method 1: Check the DAMAGE message's linked activity for attack.type
-  const activityUuid = msg.flags?.dnd5e?.activity?.uuid;
+  const activityUuid = activityRefOf(msg)?.uuid;
   if (activityUuid) {
     try {
       const activity = fromUuidSync(activityUuid);
@@ -89,7 +90,7 @@ function onPreCalculateDamage(actor, damages, options) {
   }
 
   // Method 2: Check if the damage message itself has attackMode
-  const rollFlags = msg.flags?.dnd5e?.roll;
+  const rollFlags = rollInfo(msg);
   if (rollFlags?.attackMode) {
     isMelee = ["oneHanded", "twoHanded", "offhand"].includes(rollFlags.attackMode);
   }
@@ -99,7 +100,7 @@ function onPreCalculateDamage(actor, damages, options) {
     const recentMessages = game.messages.contents.slice(-10);
     for (let i = recentMessages.length - 1; i >= 0; i--) {
       const m = recentMessages[i];
-      const mRoll = m.flags?.dnd5e?.roll;
+      const mRoll = rollInfo(m);
       if (mRoll?.type === "attack" && m.speaker?.actor === attackerActorId) {
         if (["oneHanded", "twoHanded", "offhand"].includes(mRoll.attackMode)) {
           isMelee = true;

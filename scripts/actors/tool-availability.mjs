@@ -3,7 +3,7 @@
  *
  * Every tool check (whether rolled from the tool item's activity OR from the
  * "biegłość w narzędziach" entry in the proficiencies list) produces a chat
- * message flagged with `flags.dnd5e.roll.type === "tool"` and `roll.toolId`.
+ * tool check message (`rollInfo(message)`: `type === "tool"` and `toolId`).
  *
  * This module appends a small note to that chat card stating whether the rolling
  * actor actually carries the matching tool kit in their inventory — because the
@@ -21,6 +21,7 @@
  * (patrz `config/gear-data.mjs`, typedef `ToolSubstitute`) i liczą się tu na równi z zestawem.
  */
 
+import { rollInfo } from "../config/chat-message-data.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 
 export function registerToolAvailability() {
@@ -65,7 +66,7 @@ function _messageActor(message) {
 /* -------------------------------------------- */
 
 function _onRenderToolCheck(message, html) {
-  const roll = message.flags?.dnd5e?.roll;
+  const roll = rollInfo(message);
   if ( roll?.type !== "tool" ) return;
   const toolId = roll.toolId;
   if ( !toolId || !CONFIG.DND5E.tools?.[toolId] ) return;

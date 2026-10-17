@@ -32,7 +32,7 @@
  * `combat/zranienie.mjs` reads `skipsZranienie` so a finger does not also cost
  * the victim a Stopień Zranienia, exactly as the rulebook says.
  */
-import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
+import { CHANGE_TYPE, change, effectOrigin } from "../config/effect-changes.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -142,12 +142,11 @@ async function applyRider(victim, source, item, rider) {
   await victim.createEmbeddedDocuments("ActiveEffect", [{
     name: detail ? `${rider.effect.label} (${detail})` : rider.effect.label,
     img: item.img,
-    origin: source.uuid,
     disabled: false,
     // Permanent: it lasts "do czasu zastąpienia lub odrośnięcia" — there is no
     // duration that expresses that, so it is removed by hand when treated.
     duration: {},
-    system: { changes },
+    system: { changes, origin: effectOrigin(source.uuid) },
     flags: {
       [MODULE_ID]: {
         critRider: rider.rider,

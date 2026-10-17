@@ -1,10 +1,11 @@
-﻿const MODULE_ID = "neuroshima-2026-overrides";
+import { itemUuidOf } from "../config/chat-message-data.mjs";
+const MODULE_ID = "neuroshima-2026-overrides";
 
 export function registerObalajaca() {
   // `dnd5e.renderChatMessage`, nie `renderChatMessageHTML`: to drugie leci przed
   // `ChatMessageDataModel#getHTML`, które nadpisuje całe `.message-content`.
   Hooks.on('dnd5e.renderChatMessage', (message, html) => {
-    const itemUuid = message.getFlag('dnd5e', 'item')?.uuid || message.getFlag('dnd5e', 'roll')?.itemUuid || message.getFlag('dnd5e', 'use')?.itemUuid;
+    const itemUuid = itemUuidOf(message);
     if (!itemUuid) return;
     
     let item;

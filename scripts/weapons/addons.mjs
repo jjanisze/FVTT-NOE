@@ -13,6 +13,7 @@ import {
   hasAddon, getAddon, getAddons, countSMSlots,
 } from "../config/addons-data.mjs";
 import { initDose, clearDose } from "./dozownik.mjs";
+import { itemUuidOf, activityRefOf } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const ADDONS_FLAG = "addons";
@@ -834,11 +835,11 @@ function _onRenderAttackDialog(app, html) {
 
 function _onRenderAddonsChatMessage(message, html) {
   // Only activity cards (attack, damage, etc.)
-  if (!message.flags?.dnd5e?.activity) return;
+  if (!activityRefOf(message)) return;
 
   // item.uuid is set on roll cards; usage cards only have activity.uuid — extract item from it
-  const itemUuid = message.flags?.dnd5e?.item?.uuid
-    ?? message.flags?.dnd5e?.activity?.uuid?.split(".Activity.")[0];
+  const itemUuid = itemUuidOf(message)
+    ?? activityRefOf(message)?.uuid?.split(".Activity.")[0];
   if (!itemUuid) return;
 
   const item = fromUuidSync(itemUuid);

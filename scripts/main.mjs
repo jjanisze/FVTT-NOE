@@ -199,6 +199,7 @@ import { registerPostoj, handelApi, postojApi, fuksyApi, fantyApi } from "./post
 import { registerQuenchTests, testsApi } from "./tests/index.mjs";
 import { monsterClosetApi } from "./dev/monster-closet.mjs";
 import { characterClosetApi } from "./dev/character-closet.mjs";
+import { activityRefOf } from "./config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -426,11 +427,11 @@ Hooks.once("init", () => {
 
   // Clean up activity chat card pills: remove NaN range, duration, empty strings for weapon cards
   Hooks.on("renderChatMessageHTML", (message, html) => {
-    const activityType = message.flags?.dnd5e?.activity?.type;
+    const activityType = activityRefOf(message)?.type;
     if (!activityType) return;
 
     // Only clean weapon-based activities
-    const itemType = message.flags?.dnd5e?.item?.type;
+    const itemType = message.system?.item?.type;
     if (itemType !== "weapon") return;
 
     const el = html instanceof HTMLElement ? html : html?.[0];

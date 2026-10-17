@@ -37,9 +37,10 @@ import { getResolvedAbility } from "../actors/abilities.mjs";
 import { heldItems, familyOf } from "../actors/doll.mjs";
 import { isProficientIn } from "../actors/armor-rules.mjs";
 import { TT_EFFECT_FLAG } from "../actors/tt.mjs";
-import { CHANGE_TYPE, change } from "../config/effect-changes.mjs";
+import { CHANGE_TYPE, change, effectOrigin } from "../config/effect-changes.mjs";
 import { isKobaltEnabled } from "../config/settings.mjs";
 import { dziurawyHelmData } from "../wkk/config/dziurawy-helm.mjs";
+import { activityRefOf, isUsageCard } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const PROSBA_FLAG = "obronaProsba";
@@ -192,9 +193,8 @@ async function _createTurnEffect(actor, row, bonus) {
   return actor.createEmbeddedDocuments("ActiveEffect", [{
     name: `${row.label} (TT +${bonus})`,
     img: item?.img ?? "icons/svg/shield.svg",
-    origin: item?.uuid ?? actor.uuid,
     duration: { value: 1, units: "turns", expiry: "turnStart" },
-    system: { changes: [change("system.attributes.ac.bonus", CHANGE_TYPE.add, bonus)] },
+    system: { changes: [change("system.attributes.ac.bonus", CHANGE_TYPE.add, bonus)], origin: effectOrigin(item?.uuid ?? actor.uuid) },
     flags: { [MODULE_ID]: { [TT_EFFECT_FLAG]: { source: row.id } } }
   }]);
 }
@@ -206,8 +206,8 @@ async function _createAttackerMarker(actor, row, bonus, obrona) {
   return actor.createEmbeddedDocuments("ActiveEffect", [{
     name: `${row.label} (TT +${bonus} wobec: ${attacker?.name ?? "atakujący"})`,
     img: shield?.img ?? "icons/svg/shield.svg",
-    origin: shield?.uuid ?? actor.uuid,
     duration: { value: 1, units: "turns", expiry: "turnStart" },
+    system: { origin: effectOrigin(shield?.uuid ?? actor.uuid) },
     flags: {
       [MODULE_ID]: {
         [TT_EFFECT_FLAG]: { source: row.id },
@@ -402,7 +402,7 @@ export async function setTargets(message) {
   const tokens = game.user.targets.size ? [...game.user.targets] : [...(canvas.tokens?.controlled ?? [])];
   if (!tokens.length) return ui.notifications.warn("Wyceluj albo zaznacz żeton celu, potem „Ustaw cel”.");
   const roll = message.rolls?.[0];
-  const activity = fromUuidSync(message.flags?.dnd5e?.activity?.uuid ?? "");
+  const activity = fromUuidSync(activityRefOf(message)?.uuid ?? "");
   const obrona = foundry.utils.deepClone(obronaOf(message)) ?? buildObrona(roll, activity);
   const attacker = fromUuidSync(obrona.attackerUuid ?? "") ?? activity?.actor ?? null;
   const cover = tokens.length === 1 ? coverAcBonus(roll?.options?.neuroCover) : 0;
@@ -442,7 +442,7 @@ export function shouldUpgradeCrit(obrona) {
 function _onPreRollDamage(config, dialog, message) {
   // Przycisk na karcie niesie zdarzenie; rzut z API (makro, e2e) — tylko link do karty w wiadomości.
   const messageId = config?.event?.target?.closest?.("[data-message-id]")?.dataset?.messageId
-    ?? foundry.utils.getProperty(message ?? {}, "data.flags.dnd5e.originatingMessage")
+    ?? foundry.utils.getProperty(message ?? {}, "data.system.origin")
     ?? null;
   const obrona = obronaOf(attackMessageFor(messageId ? game.messages.get(messageId) : null));
   const critical = shouldDowngradeCrit(obrona) ? false : shouldUpgradeCrit(obrona) ? true : null;
@@ -619,7 +619,7 @@ function _onRenderMessage(message, html) {
   const obrona = obronaOf(message);
   if (obrona) _renderReactions(message, html, obrona);
   // Karta użycia: w dnd5e 5.3 to podtyp wiadomości (`type: "usage"`), nie flaga.
-  else if (message.type === "usage" || message.flags?.dnd5e?.messageType === "usage") _renderHourglass(message, html);
+  else if (isUsageCard(message)) _renderHourglass(message, html);
 }
 
 /** Karta ataku zmieniona przez MG → odśwież kartę użycia (⏳). */

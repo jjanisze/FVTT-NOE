@@ -197,7 +197,7 @@ function registerShortBurstActivityType() {
       const rolls = await this.rollAttack(
         { event: config.event },
         {},
-        { data: { "flags.dnd5e.originatingMessage": results.message?.id } }
+        { data: { system: { origin: results.message?.id } } }
       );
       if (!rolls?.length) return;
 
@@ -283,7 +283,7 @@ function registerDubletActivityType() {
       const rolls = await this.rollAttack(
         { event: config.event },
         {},
-        { data: { "flags.dnd5e.originatingMessage": results.message?.id } }
+        { data: { system: { origin: results.message?.id } } }
       );
       if (!rolls?.length) return;
 

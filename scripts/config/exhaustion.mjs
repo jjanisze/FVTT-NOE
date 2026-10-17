@@ -41,6 +41,7 @@ import { seqScrollText } from "../weapons/sequencer.mjs";
 import { STATE_COLORS } from "./state-colors.mjs";
 import { isKobaltEnabled, isKobaltSen } from "./settings.mjs";
 import { formatWorldTime } from "../world-clock.mjs";
+import { isDocumentLive } from "../doc-liveness.mjs";
 import {
   REGULY_ZDEJMOWANIA, KRYTYCZNY, kolejnoscDO, normalizujZrodla, widokWyczerpania, zrodlaPoWyjsciu
 } from "./rekonwalescencja-rules.mjs";
@@ -200,12 +201,36 @@ async function _zapiszZrodla(actor, sources) {
   const updateData = { "system.attributes.exhaustion": lista.length };
   if (lista.length) updateData[`flags.${MODULE_ID}.exhaustionSources`] = lista;
   else updateData[`flags.${MODULE_ID}.exhaustionSources`] = _del;
+  const przed = poziomWyczerpania(actor);
   _apiUpdate = true;
   try {
     await actor.update(updateData);
   } finally {
     _apiUpdate = false;
   }
+  await _zsynchronizujEfekt(actor, lista.length, { replay: przed !== lista.length });
+}
+
+/**
+ * dnd5e 6.0 keeps Wyczerpanie twice: the stored `system.attributes.exhaustion` and a levelled `condition` effect
+ * whose level the prepared value is read from. A write to the stored level is replayed onto the effect as a delta
+ * against the *prepared* level, without being awaited (`Actor5e#_onUpdateExhaustion`) — so two writes in a row
+ * (Krytyczny Zranienie, then Kac) stacked: stored 2, effect 3, and dnd5e rolled with −6 instead of −4 (E3, found by
+ * the Rekonwalescencja e2e). Our write waits for that replay and then puts the effect on the stored level itself.
+ * @param {Actor} actor
+ * @param {number} poziom
+ * @param {{replay: boolean}} opts  the write changed the stored level, so dnd5e replays a delta — wait for it
+ */
+async function _zsynchronizujEfekt(actor, poziom, { replay = true } = {}) {
+  const id = globalThis.dnd5e?.utils?.staticID?.("dnd5eexhaustion");
+  if (!id) return;
+  const lvl = () => actor.effects.get(id)?.system?.level ?? 0;
+  for (let i = 0; replay && i < 20 && lvl() !== poziom; i++) await new Promise(r => setTimeout(r, 50));
+  const effect = actor.effects.get(id);
+  if (lvl() === poziom || !isDocumentLive(actor)) return;
+  if (poziom <= 0) await effect?.delete();
+  else if (effect) await effect.update({ "system.level": poziom }, { dnd5e: { originalLevel: effect.system.level } });
+  else await actor.toggleStatusEffect("exhaustion", { active: true, levels: poziom });
 }
 
 /**

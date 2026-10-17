@@ -17,6 +17,7 @@ import { RODZAJE } from "../config/towarzysze-data.mjs";
 import { AWARIE, rssiOsd, zakresAktywacji } from "../config/towarzysze-rules.mjs";
 import { ukladOsd, ostrzezeniaOsd } from "../config/osd.mjs";
 import { weaponEntry, readState } from "../weapons/magazine-model.mjs";
+import { rollTypeOf } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 export const ATLAS_OSD = `modules/${MODULE_ID}/fonts/osd/betaflight-default.webp`;
@@ -211,7 +212,7 @@ function _onCreateChatMessage(message) {
   if (!_osd) return;
   const dron = fromUuidSync(_osd.sesja.dronUuid);
   if (!dron || ChatMessage.getSpeakerActor(message.speaker) !== dron) return;
-  if (message.flags?.dnd5e?.roll?.type === "attack") _osd.zaatakowal = true;
+  if (rollTypeOf(message) === "attack") _osd.zaatakowal = true;
 }
 
 /** OSD tego klienta (testy, diagnostyka): napisy z bieżącego układu. */

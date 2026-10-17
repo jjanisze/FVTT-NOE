@@ -20,6 +20,7 @@
  * tę samą flagę. Niewrażliwość (immunity) zostaje — RAW mówi o odpornościach.
  */
 
+import { activityRefOf } from "../config/chat-message-data.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 
 /** Właściwości broni i amunicji, które przebijają odporności i progi. */
@@ -35,7 +36,7 @@ const _piercing = props => ARMOUR_PIERCING_PROPS.some(p => props?.has?.(p) || (A
  */
 export function isArmourPiercing(damages, options = {}) {
   if ((damages ?? []).some(d => _piercing(d?.properties))) return true;
-  const uuid = options?.originatingMessage?.flags?.dnd5e?.activity?.uuid;
+  const uuid = activityRefOf(options?.origin ?? options?.originatingMessage)?.uuid;
   if (!uuid) return false;
   try {
     return _piercing(fromUuidSync(uuid)?.item?.system?.properties);

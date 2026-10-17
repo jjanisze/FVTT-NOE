@@ -17,6 +17,7 @@ import {
   getCompatibleAddonsForWeapon, toggleSetup, getSetup,
 } from "../weapons/addons.mjs";
 import { hasDose, refillDose, applyDose } from "../weapons/dozownik.mjs";
+import { rollTypeOf, activityRefOf } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -365,9 +366,9 @@ function _onRenderActorSheetHighlightAddons(app, html) {
 
 function _onRenderChatMessage(message, html) {
   // Only attack rolls; skip activity cards — addons.mjs handles those
-  const rollType = message.getFlag("dnd5e", "roll.type");
+  const rollType = rollTypeOf(message);
   if (rollType !== "attack") return;
-  if (message.flags?.dnd5e?.activity) return;  // addons.mjs covers this
+  if (activityRefOf(message)) return;  // addons.mjs covers this
 
   const root = html instanceof HTMLElement ? html : html?.[0];
   if (!root) return;

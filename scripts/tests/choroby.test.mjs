@@ -28,7 +28,7 @@ import { CHEMIA, chemiaForDisease } from "../config/chemia-data.mjs";
 import { CHANGE_TYPE } from "../config/effect-changes.mjs";
 import { MODULE_ID } from "./helpers.mjs";
 
-const SPEED_KEY = "system.attributes.movement.walk";
+const SPEED_KEY = "system.attributes.movement.speeds.walk";
 
 /** Ranga kary do Szybkości: brak < połowa < zero. */
 function speedRank(changes = []) {

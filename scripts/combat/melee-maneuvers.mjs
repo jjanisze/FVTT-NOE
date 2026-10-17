@@ -15,6 +15,7 @@
 import { isDollActor, heldItems, takeOff, drop as dollDrop, HAND_OCCUPANTS_FLAG } from "../actors/doll.mjs";
 import { slotLabel } from "../actors/doll-model.mjs";
 import { freeHandCheck } from "./grip.mjs";
+import { itemUuidOf } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -469,7 +470,7 @@ export function registerMeleeManeuvers() {
   // `dnd5e.renderChatMessage`, nie `renderChatMessageHTML`: to drugie leci przed
   // `ChatMessageDataModel#getHTML`, które nadpisuje całe `.message-content`.
   Hooks.on("dnd5e.renderChatMessage", (message, html) => {
-    const uuid = message.getFlag("dnd5e", "item")?.uuid ?? message.getFlag("dnd5e", "use")?.itemUuid;
+    const uuid = itemUuidOf(message);
     if (!uuid) return;
     let item;
     try { item = fromUuidSync(uuid); } catch { return; }

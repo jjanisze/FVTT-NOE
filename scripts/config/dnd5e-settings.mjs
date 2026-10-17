@@ -25,6 +25,7 @@ export const ENFORCED_DND5E_SETTINGS = Object.freeze({
   disableConcentration: { value: true, why: "w NOE nie ma koncentracji" },
   autoApplyDowned: { value: "none", why: "0 PW rozstrzyga karta MG „Śmierć” / „BN pada”, nie automat" },
   senseVisionSync: { value: false, why: "tryby wzroku żetonów (noktowizor, termowizor, kamera drona) ustawia moduł" },
+  tokenSizeSync: { value: false, why: "rozmiar i skalę żetonów (Bestiariusz, drony) kalibruje moduł", reload: true },
   metricWeightUnits: { value: true, why: "NOE liczy w kilogramach (Udźwig)" },
   metricLengthUnits: { value: true, why: "NOE liczy w metrach" },
   metricVolumeUnits: { value: true, why: "NOE liczy w litrach" }
@@ -47,6 +48,9 @@ export async function enforceDnd5eSettings() {
   for (const s of enforcedSettingsState()) {
     if (s.ok) continue;
     await game.settings.set("dnd5e", s.key, s.required);
+    // dnd5e caches world settings once (`settings.mjs` `cacheSettings`) and refreshes only those without
+    // `requiresReload`; this client would go on with the old value until F5. Other clients load the new one.
+    if (globalThis.dnd5e?.settings && (s.key in dnd5e.settings)) dnd5e.settings[s.key] = s.required;
     changed.push(s);
   }
   if (!changed.length) return changed;

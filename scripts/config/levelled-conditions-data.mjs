@@ -31,7 +31,7 @@ const ALL_ABILITIES = ["str", "dex", "con", "int", "wis", "cha"];
 const allChecks = (v = -1) => ALL_ABILITIES.map(a => check(a, v));
 
 /** Szybkość spada o połowę. */
-const speedHalf = change("system.attributes.movement.walk", CHANGE_TYPE.multiply, 0.5);
+const speedHalf = change("system.attributes.movement.speeds.walk", CHANGE_TYPE.multiply, 0.5);
 
 /* -------------------------------------------- */
 /*  Upojenie                                     */

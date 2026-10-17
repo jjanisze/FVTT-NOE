@@ -28,6 +28,7 @@ import { NEUROSHIMA_CREATURE_TYPES } from "../config/creature-types.mjs";
 import { ROZRYWAJACA } from "../wkk/combat/weapon-save-properties.mjs";
 import { jestMaszyna } from "../actors/towarzysze.mjs";
 import { startNaKombatanta } from "./czas-efektu.mjs";
+import { itemUuidOf } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -149,9 +150,7 @@ export function registerWeaponSaveProperties() {
 
 /** Wyciąga przedmiot (broń) z wiadomości czatu. */
 function _getItemFromMessage(message) {
-  const itemUuid = message.getFlag("dnd5e", "item")?.uuid
-    || message.getFlag("dnd5e", "roll")?.itemUuid
-    || message.getFlag("dnd5e", "use")?.itemUuid;
+  const itemUuid = itemUuidOf(message);
   if (!itemUuid) return null;
 
   let item;

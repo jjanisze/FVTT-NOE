@@ -14,6 +14,7 @@
 
 import { hasAddon } from "../config/addons-data.mjs";
 import { hitTargetsForDamage } from "../combat/trafienie.mjs";
+import { itemUuidOf, activityRefOf } from "../config/chat-message-data.mjs";
 
 const MODULE_ID  = "neuroshima-2026-overrides";
 const DOSE_FLAG  = "dozownik-dose";   // 0 = pusta, 1 = załadowana
@@ -143,10 +144,11 @@ export async function applyDose(weapon, target = null) {
   const targetActor = tokenDoc?.actor ?? null;
   const targetName = tokenDoc?.name ?? targetActor?.name ?? "cel";
   const targetActorUuid = targetActor?.uuid;
-  // Tacka dnd5e w trybie „Wycelowane” czyta `flags.dnd5e.targets` (UUID aktora).
+  // Tacka dnd5e w trybie „Wycelowane” czyta cele zapisane w wiadomości: w dnd5e 6.0 wiadomość typu `damage` z
+  // `system.targets` (deskryptory `{actor, token, name, img, ac}`; 5.3 trzymało je we flagach).
   const trayTargets = targetActor ? [{
-    name: targetName, img: tokenDoc?.texture?.src ?? targetActor.img, uuid: targetActor.uuid,
-    ac: targetActor.system?.attributes?.ac?.value ?? null
+    name: targetName, img: tokenDoc?.texture?.src ?? targetActor.img, actor: targetActor.uuid,
+    token: tokenDoc?.uuid ?? null, ac: targetActor.system?.attributes?.ac?.value ?? null
   }] : [];
 
   const content = `
@@ -174,7 +176,8 @@ export async function applyDose(weapon, target = null) {
     speaker: ChatMessage.getSpeaker({ actor: weapon.actor }),
     content,
     rolls: [dmgRoll],
-    flags: { dnd5e: { roll: { type: "damage" }, targets: trayTargets } },
+    type: "damage",
+    system: { targets: trayTargets }
   });
 }
 
@@ -240,10 +243,10 @@ async function _applyPoisoned(actor) {
  * ============================================================ */
 
 function _onRenderDozownikCard(message, html) {
-  if (!message.flags?.dnd5e?.activity) return;
+  if (!activityRefOf(message)) return;
 
-  const itemUuid = message.flags?.dnd5e?.item?.uuid
-    ?? message.flags?.dnd5e?.activity?.uuid?.split(".Activity.")[0];
+  const itemUuid = itemUuidOf(message)
+    ?? activityRefOf(message)?.uuid?.split(".Activity.")[0];
   if (!itemUuid) return;
 
   const item = fromUuidSync(itemUuid);

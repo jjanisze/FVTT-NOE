@@ -70,7 +70,7 @@ export const CHEMIA_SUBTYPES = Object.freeze({
 /** Disadvantage (-1) / advantage (+1) on a named skill. */
 const skill = (id, v = -1) => change(`system.skills.${id}.roll.mode`, CHANGE_TYPE.add, v);
 /** Flat numeric bonus to an ability's checks — Neuroshima's penalties are numbers, not Utrudnienie. */
-const checkBonus = (abl, v) => change(`system.abilities.${abl}.bonuses.check`, CHANGE_TYPE.add, String(v));
+const checkBonus = (abl, v) => change(`system.abilities.${abl}.check.roll.bonus`, CHANGE_TYPE.add, String(v));
 /** Advantage / disadvantage on an ability's saving throws. */
 const save = (abl, v = -1) => change(`system.abilities.${abl}.save.roll.mode`, CHANGE_TYPE.add, v);
 

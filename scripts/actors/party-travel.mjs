@@ -167,7 +167,7 @@ const BASE_SPEED = 9;
 function slowestWalker(groupActor) {
   let slowest = null;
   for (const actor of partyCreatures(groupActor)) {
-    const walk = Number(actor.system.attributes?.movement?.walk);
+    const walk = Number(actor.system.attributes?.movement?.speeds?.walk);
     if (!Number.isFinite(walk)) continue;
     if (!slowest || walk < slowest.walk) slowest = { actor, walk };
   }

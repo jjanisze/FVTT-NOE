@@ -111,7 +111,7 @@ function onCalculateDamage(actor, damages, options) {
     .filter(d => d.type !== "healing" && d.type !== "temphp")
     .reduce((sum, d) => sum + (d.value ?? 0), 0);
 
-  // `flags.dnd5e.roll.critical` nie istnieje w dnd5e 5.3 — krytyk z werdyktu karty ataku albo z rzutu
+  // dnd5e nie zapisuje krytyka w danych wiadomości — krytyk z werdyktu karty ataku albo z rzutu
   // obrażeń, ten sam co dla Stopnia Zranienia i wytrzymałości pancerza (`combat/trafienie.mjs`).
   const wasCritical = isCriticalHitOn(actor, options);
 

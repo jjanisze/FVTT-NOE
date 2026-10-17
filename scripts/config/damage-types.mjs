@@ -79,17 +79,14 @@ export function registerDamageTypes() {
     }
   };
 
-  // Healing types remain the same mechanically
-  CONFIG.DND5E.healingTypes = {
-    healing: {
-      label: "Leczenie",
-      color: new Color(0x46C252)
-    },
-    temphp: {
-      label: "Tymczasowe PW",
-      color: new Color(0x4B8DC2)
-    }
-  };
+  // Healing types remain the same mechanically — merged, not replaced: dnd5e 6.0 added `maximum` (raises max PW)
+  // and its weapon sheet reads `healingTypes.maximum.label`; replacing the table broke every weapon sheet.
+  const heal = CONFIG.DND5E.healingTypes ??= {};
+  foundry.utils.mergeObject(heal, {
+    healing: { label: "Leczenie", labelShort: "Leczenie", color: new Color(0x46C252) },
+    temphp: { label: "Tymczasowe PW", labelShort: "Tymcz. PW", color: new Color(0x4B8DC2) },
+    ...(heal.maximum ? { maximum: { label: "Maksymalne PW", labelShort: "Maks. PW" } } : {})
+  });
 
   console.log("Neuroshima 5e | Damage types overridden (12 Neuroshima types)");
 }
