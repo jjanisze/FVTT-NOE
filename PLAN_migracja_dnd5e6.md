@@ -508,3 +508,34 @@ bramka. E0 bez `installDir` (PM11). Następny krok: E0 i E1 (niezależne).
   rdzenia, `HTMLAutocompleteTagsElement`, jedna zmiana bazy). Po E2: `--dnd5e=C:/Git/fvtt-dnd5e-6.0.6` (albo checkout
   głównego klonu na `release-6.0.6`) i ścieżka w skillu `fvtt-api`.
 - Nowe e2e (koszyki, ostrzeżenia) potwierdzi pierwszy przebieg na żywo — bramka E1.
+
+**2026-10-17 — E1 w toku: część bez przeglądarki zielona; czeka na Chrome** (port DevTools nie odpowiada przez całą
+sesję; Chrome uruchamia tylko człowiek).
+- `release:check -- --skip-sandbox` na 14.369: static, generators, zip, packs, versions — zielone. Jedyna różnica
+  paczek: `_stats.coreVersion` 14.364 → 14.369 na 1717 rekordach; przebudowane i zacommitowane (`Packs: rebuild on
+  Foundry 14.369`). Zamrożona kampania odmawia `fvtt packs`; dla `packs/` w drzewie: `npm run build:packs`.
+- Serwer: świat piaskownicy (`agent-m3e4`) na 14.369 — migracja rdzenia, wszystkie 18 paczek modułu i dnd5e 5.3.0
+  załadowane, log bez ostrzeżeń.
+- Statyczny diff rdzenia 14.364 → 14.369 (`client/`, `common/`; 14.364 z kopii przed migracją): 172 + 22 pliki. Dla
+  nas: `ActiveEffect` czyta wreszcie `CHANGE_TYPES[type].defaultPriority` — zmiany bez priorytetu idą drabiną
+  rdzenia (multiply 10 < add 20); nasze mają jawne priorytety (`effect-changes.mjs` to przewidział), cudze
+  (ręczne efekty świata, dnd5e) zmieniają kolejność. `combatTurnChange` tylko przy zmianie rundy/tury/walczącego, a
+  `combat.previous` aktualizowany w miejscu (my: bez `turnEvents: false`, odczyt w `updateCombat` bez zmian).
+  `nextCombatant` pomija pokonanych (`skipDefeated`). `notify(…, {format})` lokalizuje także bez `localize` (nie
+  używamy). `DetectionMode` woła `this.constructor._testCollision` (nie nadpisujemy). `Token#getSnappedPosition` —
+  bez zmian w sygnaturze. Nic, co wymagałoby poprawki przed bramką.
+- **Liczby §3 wg `npm run scan:dnd5e6`** (nowy skaner, `dev/migration/`; `--list` daje miejsca, `--fail-on` trzyma
+  zero): flagi wiadomości 36 miejsc / 20 plików (z `dev/e2e`); **`effect.origin` — 0 odczytów**, tylko 5 zapisów
+  `origin: <uuid>` przy tworzeniu efektów (4 pliki; §3.6 zawyżało); `changes` na górze 38/12; ruch 31/13; zmysły
+  9/4; `system.bonuses.*` 3/3 (w tym wygenerowany `bestiary-data.mjs` — poprawka w generatorze Bestiariusza, E8);
+  premie check/save/death/init 6/5; KP 3/2 (`tt.mjs` pisze `ac.base`); tabele `CONFIG.DND5E` 103 użycia / 34
+  pliki; API aktywności 8/2; tacka 20/5; DOM kart 21/10. Tłumaczenie: 508 kluczy `DND5E.*` w `pl.json`, z nich
+  **19 dnd5e usunął** (jak w §3.13), a **47 to nasze własne klucze w przestrzeni `DND5E.`** (cechy broni, grupy) —
+  test z §3.13 musi sprawdzać „klucze dnd5e, które zniknęły” (`--lang-before`), nie „każdy `DND5E.*` istnieje”.
+- **Dla E3:** `getAssociatedItem/Activity/Actor/Rolls` i `getOriginatingMessage` są już w dnd5e 5.3, a w 6.0.6
+  czytają `message.system.*` z powrotem do starych flag — port odczytów flag wiadomości na te metody działa w obu
+  wersjach. Nasze zapisy `{ data: { "flags.dnd5e.originatingMessage": id } }` w konfiguracji rzutów (`cover.mjs`,
+  `fire-modes.mjs`) → w 6.0 `system.origin` (tak robi `basic-roll.mjs:171`); `flags.dnd5e.roll.type` → typ
+  wiadomości (`message.type`).
+- Zostaje (Chrome): pełna bramka `npm run release:check` (piaskownica wydania na 14.369 + dnd5e 5.3.0: e2e w świecie
+  gołym i zalecanym, Quench), potem `module.json` `compatibility.verified` = 14.369 i wpis „E1 zrobione”.
