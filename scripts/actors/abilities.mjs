@@ -66,6 +66,8 @@ export const ABILITY_KEYS = {
   PRZYDASIE: "przydasie",
   NANO_TECH: "nanoTech",
   JESLI_MA_SILNIK: "jesliMaSilnik",
+  // Postój (PLAN_m5_postoj U11) — Ułatwienie przy szabrowaniu czyta `postoj/szabrowanie.mjs`.
+  ZLOMIARZ: "zlomiarz",
   // Trudność Trafienia (PLAN_tt §4.11) — metody, limit i premie czyta `config/tt-rules.mjs`,
   // reakcje po trafieniu `config/defense-rules.mjs`.
   GOLA_KLATA: "golaKlata",
@@ -187,6 +189,13 @@ export const ABILITY_DEFINITIONS = {
     label: "Jeśli ma silnik, to ruszy",
     aliases: ["jeśli ma silnik", "jesli ma silnik"],
     noticeColor: "#6d4a2f"
+  },
+  [ABILITY_KEYS.ZLOMIARZ]: {
+    label: "Złomiarz",
+    // NOE s. 108: Śmieciarz i Antykwariusz to dwie części Złomiarza; „Śmieciarz" bywa osobnym featem.
+    aliases: ["złomiarz", "zlomiarz"],
+    exactAliases: ["śmieciarz", "smieciarz"],
+    noticeColor: "#5d5a3f"
   },
   /* ── Trudność Trafienia (PLAN_tt) ── */
   [ABILITY_KEYS.GOLA_KLATA]: {

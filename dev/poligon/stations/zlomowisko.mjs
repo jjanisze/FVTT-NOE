@@ -9,7 +9,7 @@ import { p, zabij } from "./_wspolne.mjs";
 
 export default {
   id: "zlomowisko", name: "Złomowisko", prio: "P1", icon: "fa-solid fa-recycle",
-  opis: "Ruiny przy torach: trup Psa mutka i Cywila (bebeszenie), Gladiator (autodestrukcja 80%) do zbicia, drużyna w miejscu „Magazyn przy torach” (szabrowanie). Szczur (Gracz 1) z narzędziami rzeźnika, wykrywaczem metalu i zaciętym Batem; Łowca (Gracz 2).",
+  opis: "Ruiny przy torach: trup Psa mutka i Cywila (bebeszenie), Gladiator (autodestrukcja 80%) do zbicia, drużyna w miejscu „Magazyn przy torach” (szabrowanie). Szczur (Gracz 1, Sztuczka Złomiarz) z narzędziami rzeźnika, wykrywaczem metalu i zaciętym Batem; Łowca (Gracz 2).",
   gracze: 2,
   async build(k) {
     const s = await k.scene("zlom", { name: "Złomowisko · Tory", w: 36, h: 24, color: "#57524a", main: true });
@@ -36,7 +36,7 @@ export default {
     return { trupy: 2, autodestrukcja: game.neuroshima.postoj.autodestrukcja?.dane?.(s.tokens.find(t => t.actorId === gladiator?.id)?.actor) ?? null };
   },
   proby: [
-    p("szabrowanie", "Szabrowanie", "Szabrowanie: okno MG, komplikacja tylko dla MG, karta prośby dla poszukiwaczy, czas", "Postój → [Szabrowanie] → Niewielki magazyn."),
+    p("szabrowanie", "Szabrowanie", "Szabrowanie: okno MG, komplikacja tylko dla MG, karta prośby dla poszukiwaczy, czas; Złomiarz Szczura — Ułatwienie do Percepcji i Śledztwa, Łowca bez", "Postój → [Szabrowanie] → Niewielki magazyn."),
     p("bebeszenie", "Bebeszenie", "Bebeszenie celu (zwierzę) z menu narzędzi rzeźnika; człowiek przez HUD — komunikat publiczny przed rzutem", "Gracz 1 celuje w Psa; MG → HUD Cywila."),
     p("rozbiorka", "Rozbiórka", "Rozbierz na surowce: propozycja do MG → [Zatwierdź…] → surowce", "Gracz 1: Bat → Rozbierz."),
     p("autodestrukcja", "Autodestrukcja", "Gladiator do 0 PW → „BN pada”, szept MG [Rzuć k100], wybuch w następnej rundzie, wrak", "Walka z Gladiatorem; Kości ustaw na MG.")

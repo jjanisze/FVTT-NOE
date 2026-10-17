@@ -593,7 +593,14 @@ export const SZTUCZKI = Object.freeze({
     text: "+1 INT lub MDR; Ułatwienie w Testach Śledztwa przy wycenianiu przedmiotów; "
       + "Ułatwienie w Testach MDR/INT podczas szabrowania.",
     category: "produkcja",
-    auto: []
+    legacyAbilityKeys: ["zlomiarz"],
+    auto: [{
+      what: "Szabrowanie (Śmieciarz): Ułatwienie do testu szukania — Percepcja i Śledztwo — w prośbie do "
+        + "gracza; okno MG pokazuje je przy szukającym.",
+      where: "postoj/szabrowanie.mjs"
+    }],
+    manual: "Wycena (Antykwariusz): Ułatwienie w Testach Śledztwa przy wycenianiu — wycenia MG "
+      + "(PLAN_m5_postoj D4). Rozwój Cechy (+1 INT lub MDR) wybiera się przy awansie."
   }
 });
 

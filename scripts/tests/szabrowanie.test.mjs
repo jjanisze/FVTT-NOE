@@ -33,11 +33,19 @@ export function registerSzabrowanieTests(quench) {
         expect(ruinaZ("apteka").surowce.CH).to.equal("4d8");
       });
 
-      it("Ułatwienia (U11): wykrywacz metalu — tylko Percepcja; Śmieciarz — oba testy", async function () {
+      it("Ułatwienia (U11): wykrywacz metalu — tylko Percepcja; Złomiarz — oba testy", async function () {
         const a = await scratchActor({ items: [{ name: "Wykrywacz metalu", type: "loot" }] });
-        expect(ulatwieniaSzabrowania(a)).to.include({ prc: true, sle: false, wykrywacz: true, smieciarz: false });
+        expect(ulatwieniaSzabrowania(a)).to.include({ prc: true, sle: false, wykrywacz: true, zlomiarz: false });
         const b = await scratchActor({ items: [{ name: "Śmieciarz", type: "feat" }] });
-        expect(ulatwieniaSzabrowania(b)).to.include({ prc: true, sle: true });
+        expect(ulatwieniaSzabrowania(b), "„Śmieciarz” wpisany ręcznie — alias").to.include({ prc: true, sle: true, zlomiarz: true });
+      });
+
+      it("Ułatwienia (U11): Sztuczka Złomiarz z paczki — oba testy", async function () {
+        const pack = game.packs.get(`${MODULE_ID}.sztuczki`);
+        const doc = pack && (await pack.getDocuments()).find(d => d.getFlag(MODULE_ID, "sztuczka") === "zlomiarz");
+        expect(doc, "Złomiarz w paczce sztuczki").to.exist;
+        const a = await scratchActor({ items: [game.items.fromCompendium(doc)] });
+        expect(ulatwieniaSzabrowania(a)).to.include({ prc: true, sle: true, wykrywacz: false, zlomiarz: true });
       });
     });
 

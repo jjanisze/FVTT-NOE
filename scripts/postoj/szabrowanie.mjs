@@ -9,7 +9,7 @@
  *      Bestiariusza, pułapki ([Poproś o RO], [Obrażenia]), opary ([Nałóż Zatrucie]), skażenie ([Oznacz poziom]),
  *      [Kontynuuj szabrowanie] — komplikacja jest przed szabrowaniem. Szepty MG bez rzutów (wynik w treści).
  *   3. Karta prośby dnd5e (`request`, handler `neuroSzabrowanie`) do szukających: Percepcja albo Śledztwo (MDR)
- *      ST 10, Ułatwienie z wykrywacza metalu (tylko Percepcja) i Śmieciarza (U11).
+ *      ST 10, Ułatwienie z wykrywacza metalu (tylko Percepcja) i Sztuczki Złomiarz — jej część Śmieciarz (U11).
  *   4. Klient MG rozlicza przez przekaźnik: sukces — kości surowców na rodzaj (rzuty na karcie), ≥ 20 — podwójnie
  *      i losowy przedmiot (U13), naturalna 20 — także Fant; porażka — [Spróbuj za …] dla innych szukających.
  *   5. Zdobycz do szukającego, karta podsumowania; na koniec karta MG z [Przesuń czas].
@@ -26,7 +26,7 @@ import { idFantu } from "../config/fanty-data.mjs";
 import { BESTIARY } from "../config/bestiary-data.mjs";
 import { giveSurowce } from "../actors/surowce-store.mjs";
 import { setTrackLevel } from "../actors/levelled-conditions.mjs";
-import { maZdolnosc } from "../production/wykonawca.mjs";
+import { ABILITY_KEYS, hasAbility } from "../actors/abilities.mjs";
 import { utworzWynik, idKompendium } from "../production/wynik.mjs";
 import { dajFant } from "../items/fanty.mjs";
 import { ilustracja } from "../config/ilustracje.mjs";
@@ -95,12 +95,15 @@ async function _zapiszSesje(grupa, s) {
   await grupa.update({ [`flags.${MODULE_ID}.postoj.szabrowania.${s.id}`]: s });
 }
 
-/** Ułatwienia (U11): wykrywacz metalu — tylko Percepcja (RAW); Śmieciarz — testy MDR i INT. */
+/**
+ * Ułatwienia (U11): wykrywacz metalu — tylko Percepcja (RAW); Złomiarz (NOE s. 108, część Śmieciarz) — oba testy.
+ * Złomiarz przez most zdolności: Sztuczka z paczki albo ręcznie wpisany feat „Złomiarz” / „Śmieciarz”.
+ */
 export function ulatwieniaSzabrowania(actor) {
   const wykrywacz = actor.items.some(i => i.flags?.[MODULE_ID]?.produktZastepczy === SZABROWANIE.wykrywaczMetalu
     || /wykrywacz metalu/i.test(i.name));
-  const smieciarz = maZdolnosc(actor, "smieciarz") || actor.items.some(i => /^śmieciarz$/i.test(i.name.trim()));
-  return { prc: wykrywacz || smieciarz, sle: smieciarz, wykrywacz, smieciarz };
+  const zlomiarz = hasAbility(actor, ABILITY_KEYS.ZLOMIARZ);
+  return { prc: wykrywacz || zlomiarz, sle: zlomiarz, wykrywacz, zlomiarz };
 }
 
 /* -------------------------------------------- */
@@ -207,7 +210,7 @@ async function _handlerSzabrowanie(actor, request, data, { event } = {}) {
     window: { title: "Szabrowanie — czego szukasz?" },
     content: `<p>Test Mądrości ST ${SZABROWANIE.st}: którą umiejętnością?</p>`
       + (u.wykrywacz ? "<p class=\"hint\">Wykrywacz metalu: Ułatwienie do Percepcji.</p>" : "")
-      + (u.smieciarz ? "<p class=\"hint\">Śmieciarz: Ułatwienie do testu.</p>" : ""),
+      + (u.zlomiarz ? "<p class=\"hint\">Złomiarz: Ułatwienie do testu.</p>" : ""),
     buttons: [
       { action: "prc", label: `${sk.prc?.label ?? "Percepcja"} (${actor.system.skills.prc?.total ?? 0})${u.prc ? " · Ułatwienie" : ""}`, default: true },
       { action: "sle", label: `${sk.sle?.label ?? "Śledztwo"} (${actor.system.skills.sle?.total ?? 0})${u.sle ? " · Ułatwienie" : ""}` }
@@ -476,7 +479,7 @@ export class SzabrowanieOkno extends HandlebarsApplicationMixin(ApplicationV2) {
     ctx.osoby = postacie.map(a => ({
       id: a.id, nazwa: a.name, img: a.img, wybrany: st.szukajacy.includes(a.id),
       rodzaje: RODZAJE_SZABROWANIA.map(x => ({ k: x, label: ETYKIETY_SUROWCOW[x], zaznaczony: (st.przydzial[a.id] ?? []).includes(x) })),
-      ulatwienia: (() => { const u = ulatwieniaSzabrowania(a); return [u.wykrywacz && "wykrywacz metalu", u.smieciarz && "Śmieciarz"].filter(Boolean).join(", "); })()
+      ulatwienia: (() => { const u = ulatwieniaSzabrowania(a); return [u.wykrywacz && "wykrywacz metalu", u.zlomiarz && "Złomiarz"].filter(Boolean).join(", "); })()
     }));
     ctx.minuty = st.minuty ?? czasSzabrowania(r, wybrani.length || 1);
     ctx.minutyDomyslne = czasSzabrowania(r, wybrani.length || 1);

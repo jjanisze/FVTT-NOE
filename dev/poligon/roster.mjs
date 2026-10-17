@@ -65,6 +65,8 @@ const AUTO_SZTUCZKI = ["Siekierezada", "Pulp Fiction", "Aspiryna i Miętusy", "R
   "Samuraj", "Mistrz walki wręcz", "Pakowanie"];
 const AUTO_ORIGIN = { "Nowy Jork": "Gambling we krwi", Asgard: "Nano-Tech", Detroit: "Jeśli ma silnik, to ruszy", "Federacja Appalachów": "Wychuchana spluwa" };
 const originPick = origin => (AUTO_ORIGIN[origin] ? { "Zdolność z Pochodzenia": AUTO_ORIGIN[origin] } : {});
+/** A Sztuczka a station needs on a given profession persona; the rotation still advances, so nobody else shifts. */
+const PROF_SZTUCZKA = { Szczur: "Złomiarz" };
 
 /** Level-1 choices that put an automated ability on the class set (the rest take the first option). */
 const L1_PICKS = { twardziel: { "Wyjadacz — wybierz jedną": "Stalowy nadgarstek" } };
@@ -87,14 +89,15 @@ for (const k of Object.keys(CLASS_LABEL)) {
 }
 
 // One per profession at level 5 (the mid-level set; with the six above: every class twice). Level 4's
-// Sztuczka pick takes the next automated one.
+// Sztuczka pick takes the next automated one (or PROF_SZTUCZKA — Szczur scavenges on the Złomowisko).
 for (const [k, list] of Object.entries(PROFESSIONS)) {
   for (const prof of list) {
     const origin = ORIGINS[o++ % ORIGINS.length];
+    const sztuczka = nextSztuczka();
     roster.push({
       id: `${slug(prof)}-5`, name: `${prof} (5)`, rola: `${CLASS_LABEL[k]} 5 · ${prof} · ${PROF_PICKS[prof]}`,
       klasa: k, poziom: 5, profesja: prof, pochodzenie: origin, cechy: CECHY[k],
-      picks: { "Zdolność z profesji": PROF_PICKS[prof], Sztuczka: nextSztuczka(), ...originPick(origin) },
+      picks: { "Zdolność z profesji": PROF_PICKS[prof], Sztuczka: PROF_SZTUCZKA[prof] ?? sztuczka, ...originPick(origin) },
       ekwipunek: LOADOUTS[k], grupa: "profesje"
     });
   }
