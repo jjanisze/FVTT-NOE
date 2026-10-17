@@ -104,7 +104,8 @@ export function registerAutodestrukcjaTests(quench) {
         await waitFor(() => stanAutodestrukcji(g).stan === "wybuch", { label: "wybuch" });
         await waitFor(() => w.scena.tokens.contents.some(t => /\(wrak\)$/.test(t.name)), { label: "wrak" });
         expect(stanAutodestrukcji(g).zniszczone).to.deep.equal(["CE", "CH", "CZ"]);
-        expect(g.statuses.has("dead")).to.equal(true);
+        // `wybuch` nadaje „martwy” dopiero po zapisie wraku — nazwa wraku bywa widoczna przed stanem (ze Splatterem częściej).
+        await waitFor(() => g.statuses.has("dead"), { label: "martwy po wybuchu" });
         expect(wiadomosci.some(m => m.content.includes("neuro-explosive-card")), "karta wybuchu").to.equal(true);
         await waitFor(() => w.scena.drawings.filter(d => d.flags?.[MODULE_ID]?.explosive).length === 1, { label: "ślad wybuchu" });
         await new Promise(r => setTimeout(r, 500));
