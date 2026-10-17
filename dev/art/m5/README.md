@@ -1,8 +1,13 @@
 # M5 artwork hand-off
 
 The GM generates and hand-edits the painted artwork. Ready-to-paste English prompts,
-crop diagrams in numbers, purposes and exact source/drop paths are in [BRIEFS.md](BRIEFS.md).
-All subjects are generic and suitable for this public repository.
+crop instructions, purposes and exact source/drop paths are split by delivery status:
+
+- [BRIEFS_MISSING.md](BRIEFS_MISSING.md) — 31 undelivered catalog images.
+- [BRIEFS_DELIVERED.md](BRIEFS_DELIVERED.md) — 10 delivered images, retained for reference.
+
+All subjects are generic and suitable for this public repository. After a delivery,
+move its full brief to BRIEFS_DELIVERED and remove its row from the asset queue.
 
 Order: traders and upkeep, camps, ruins, then wrecks. Older object and companion
 requests from MISSING sections B and E follow the M5 briefs. White glyphs use the

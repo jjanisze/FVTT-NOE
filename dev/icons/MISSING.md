@@ -18,7 +18,7 @@ batch approvals are under [review/candidates/](review/candidates/).
 ## G. Ilustracje teatru wyobraźni — 14
 
 Ready-to-paste prompts, purposes, crop instructions and source drop points:
-[BRIEFS.md](../art/m5/BRIEFS.md), sets `oboz` and `ruiny`.
+[BRIEFS_MISSING.md](../art/m5/BRIEFS_MISSING.md), sets `oboz` and `ruiny`.
 Specs: `PLAN_m5_postoj.md` §7.23, D42–D45.
 
 The GM generates and hand-edits each image. Shared style: painterly, Baldur's
@@ -60,7 +60,7 @@ Edited sources: `dev/art/m5/in/ruiny/<key>.png`.
 ## H. Żetony wraków — 4
 
 After machine self-destruction (`PLAN_m5_postoj.md` §7.18).
-Prompts: [BRIEFS.md](../art/m5/BRIEFS.md), set `wraki`.
+Prompts: [BRIEFS_MISSING.md](../art/m5/BRIEFS_MISSING.md), set `wraki`.
 Edited sources: `dev/art/m5/in/wraki/<key>.png`.
 Top-down WEBP with genuine alpha; no ground, cast shadow or crater.
 Preserve the authored square frame and clear transparent margins.
@@ -75,7 +75,7 @@ Preserve the authored square frame and clear transparent margins.
 ## B. In-world objects — 9
 
 Physical objects seen directly from above on map Tiles, rather than sheet glyphs.
-Prompts: [BRIEFS.md](../art/m5/BRIEFS.md), set `objekty`.
+Prompts: [BRIEFS_MISSING.md](../art/m5/BRIEFS_MISSING.md), set `objekty`.
 Edited sources: `dev/art/m5/in/objekty/<key>.png`.
 Final files: **128 px long side, native aspect ratio, WEBP with alpha**;
 no ground or cast shadow. Reference: `vfx/grenade-thrown.webp`.
@@ -96,7 +96,7 @@ The exact filename is picked up by the existing Tile code.
 ## E. Żetony towarzyszy — 4
 
 Animal companion templates (`PLAN_m3_towarzysze.md` §7.13).
-Prompts: [BRIEFS.md](../art/m5/BRIEFS.md), set `towarzysze`;
+Prompts: [BRIEFS_MISSING.md](../art/m5/BRIEFS_MISSING.md), set `towarzysze`;
 format: [tokens/PROMPT.md](../../tokens/PROMPT.md).
 Edited sources: `dev/art/m5/in/towarzysze/<key>.png`.
 Top-down WEBP with alpha; preserve size-specific frame fill and margins.
