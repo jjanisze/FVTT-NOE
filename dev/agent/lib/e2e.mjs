@@ -40,7 +40,7 @@ import { disposeContexts } from "./browser.mjs";
 import { startServer } from "./server.mjs";
 import { agentWorldId } from "./guards.mjs";
 import { installE2E } from "./e2e-page.mjs";
-import { knownCoreError, parseCompatWarning, stripOrigins, summariseCompat } from "./compat.mjs";
+import { DEEP_STACKS, knownCoreError, parseCompatWarning, stripOrigins, summariseCompat } from "./compat.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MODULE_ROOT = path.resolve(HERE, "../../..");
@@ -111,6 +111,8 @@ export class Client {
     });
     await this.send("Runtime.enable");
     await this.send("Page.enable");
+    // Deep enough stacks to name who read a deprecated getter through core's plumbing — from the next load on.
+    await this.send("Page.addScriptToEvaluateOnNewDocument", { source: DEEP_STACKS }).catch(() => {});
     if (this.background) await this.send("Emulation.setFocusEmulationEnabled", { enabled: true }).catch(() => {});
   }
 

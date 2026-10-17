@@ -37,7 +37,7 @@ import {
 import { seedFixture } from "./lib/fixtures.mjs";
 import { runE2E, suiteNames } from "./lib/e2e.mjs";
 import { browserSession, browserVersion, evaluate, hardReload, waitGameReady, withConsole } from "./lib/cdp.mjs";
-import { parseCompatWarning, summariseCompat } from "./lib/compat.mjs";
+import { DEEP_STACKS, parseCompatWarning, summariseCompat } from "./lib/compat.mjs";
 import {
   disposeContexts, duplicateSessions, foundryPages, loginInContext, namedContext, rememberSessions, resolveUser, restoreSessions
 } from "./lib/browser.mjs";
@@ -633,6 +633,7 @@ command("quench", "Run the module's Quench batches in a GM page. [--filter=<key 
     // Compatibility warnings the page logs — from its load (replayed) and from the batches (E0, reported only).
     const compat = [];
     await withConsole(browser, p.targetId, m => { const w = parseCompatWarning(m.type, m.args); if (w) compat.push(w); }, async () => {
+      await evaluate(browser, p.targetId, DEEP_STACKS).catch(() => {});
       try {
         summary = await run();
       } catch (err) {

@@ -276,6 +276,16 @@ test("compat: dnd5e calling a deprecated core API is dnd5e's, even with this mod
   assert.equal(w.involvesModule, true);
 });
 
+test("compat: core plumbing between a shim and its reader (deepClone, native frames) is skipped to the real caller", () => {
+  const w = parseCompatWarning(...warn("senses.darkvision has moved to \"senses.ranges.darkvision\".\nDeprecated since Version DnD5e 5.0", [
+    HELPER, "Object.get [as darkvision] (/systems/dnd5e/dnd5e.mjs:25642:25)", "_deepClone (/scripts/foundry.mjs:1862:19)",
+    "_deepClone (/scripts/foundry.mjs:1863:16)", "Array.map (<anonymous>)", `snapshot (/modules/${MODULE_ID}/scripts/items/gogle.mjs:12:3)`
+  ]));
+  assert.equal(w.caller, "module");
+  assert.match(w.callerFrame, /gogle\.mjs/);
+  assert.equal(parseCompatWarning(...warn("x\nDeprecated since Version 13", [HELPER, "get x (/scripts/foundry.mjs:1:1)", "<anonymous>:3:18"])).caller, "harness");
+});
+
 test("compat: core's ERROR mode is still a compatibility warning; ordinary warnings are not", () => {
   assert.equal(parseCompatWarning(...warn("old\nDeprecated since Version 13", [HELPER, "get x (/scripts/foundry.mjs:1:1)", "y (/scripts/foundry.mjs:2:2)"], "error")).caller, "core");
   assert.equal(parseCompatWarning("warning", [{ type: "string", value: "Sequencer | something" }]), null);

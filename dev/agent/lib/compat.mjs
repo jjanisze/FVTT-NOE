@@ -38,10 +38,15 @@ export function frameOwner(frame) {
   if (f.includes(`/modules/${MODULE_ID}/`)) return "module";
   if (f.includes("/systems/dnd5e/")) return "dnd5e";
   if (/\/(modules|systems)\//.test(f)) return "other";
-  if (f.includes("/agent-e2e/") || f.includes("/agent-poligon/")) return "harness";
-  if (/\/scripts\/|\/common\/|\/client\//.test(f)) return "core";
-  return "unknown"; // evaluated code (`<anonymous>`), native frames
+  // Code the harness evaluated over CDP has no URL (`<anonymous>:3:18`); a native frame is `Array.map (<anonymous>)`.
+  if (f.includes("/agent-e2e/") || f.includes("/agent-poligon/") || /<anonymous>:\d+/.test(f)) return "harness";
+  if (/\/scripts\/|\/common\/|\/client\//.test(f) || /\(<anonymous>\)$|\(native\)$/.test(f)) return "core";
+  return "unknown";
 }
+
+/** Raise V8's stack depth (10) before any page script runs: a deprecated getter read through `deepClone`'s recursion
+ * otherwise loses its caller below the cut. For `Page.addScriptToEvaluateOnNewDocument`. */
+export const DEEP_STACKS = "Error.stackTraceLimit = Math.max(Error.stackTraceLimit || 0, 50);";
 
 const isFrame = line => /^\s*at\s/.test(line);
 
@@ -58,16 +63,18 @@ export function parseCompatWarning(type, args = []) {
   const lines = text.split("\n");
   const message = lines.filter(l => !isFrame(l)).join("\n").replace(/^Error:\s*/, "").trim();
   const frames = lines.filter(isFrame).map(l => l.trim().replace(/^at\s+/, ""));
-  // [helper, deprecated API, caller, …] — the caller is the frame right after the deprecated API.
+  // [helper, deprecated API, caller, …]. The caller is the first frame after the deprecated API that is not core's
+  // own plumbing (`deepClone`, `mergeObject` reading a shimmed getter on someone's behalf); all core → core's.
   const at = frames.findIndex(f => /logCompatibilityWarning/.test(f));
+  const from = at >= 0 ? at + 2 : 1;
   const deprecated = at >= 0 ? frames[at + 1] ?? null : null;
-  const callerFrame = (at >= 0 ? frames[at + 2] : frames[1]) ?? null;
+  const callerFrame = frames.slice(from).find(f => frameOwner(f) !== "core") ?? frames[from] ?? null;
   return {
     message,
     caller: callerFrame ? frameOwner(callerFrame) : "unknown",
     callerFrame,
     deprecated,
-    frames: frames.slice(Math.max(0, at), Math.max(0, at) + 6),
+    frames: frames.slice(Math.max(0, at), Math.max(0, at) + 16),
     involvesModule: frames.some(f => frameOwner(f) === "module")
   };
 }
