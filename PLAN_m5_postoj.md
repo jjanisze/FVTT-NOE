@@ -1,7 +1,9 @@
 # PLAN — M5: Handel, postój, szabrowanie i bebeszenie
 
-> Status: **PROJEKT** (2026-10-11). Decyzje MG D1–D45 z czterech rund pytań (§6.1); ustalenia projektu U1–U58 do
-> weta MG (§6.2); otwarte P1–P8 rozstrzygnięte w rundzie 3 (§6.3). Rozmiar: **L** (`PLAN_beta.md` zakładał M — urosło o model Fuksów,
+> Status: **WDROŻONE** (E0–E11, 2026-10-12; wydane w v0.19.0 2026-10-15; projekt 2026-10-11, postęp — §11).
+> Decyzje MG D1–D45 z czterech rund pytań (§6.1); ustalenia projektu U1–U58 do weta MG (§6.2); otwarte P1–P8
+> rozstrzygnięte w rundzie 3 (§6.3). **Weto (2026-10-17):** MG przeszedł M5 slice po slice'ie przy wdrażaniu;
+> formalnego przejścia sond (U1–U58, stanowiska Bazar i Złomowisko) przed migracją nie będzie — „musi wystarczyć”. Rozmiar: **L** (`PLAN_beta.md` zakładał M — urosło o model Fuksów,
 > Fanty, autodestrukcję maszyn, dobę postoju z zatwierdzaniem i przeskok czasu). Wywołanie: `PLAN_beta.md` M5.
 >
 > **Metoda (prośba MG).** Najpierw RAW, gdzie RAW ma dziurę — RAI, a gdy nie ma RAI („tę zagadkę zostawiam

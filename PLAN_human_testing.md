@@ -3,6 +3,8 @@
 > Status: **code in place for H0–H5, H7 and most of H6 (2026-10-12, §12)**. The
 > stages' "done when" items that are GM sessions — §5.0's veto verdicts and Scenariusz zero, the E7 pass in
 > Lazaret, a Ciemnia session, the closet calibration, production played once — are the GM's next step.
+> **Veto (2026-10-17):** the GM walked M3 and M5 slice by slice as they were deployed; there will be no formal pass
+> over the probes (Hangar ~45, M5's U1–U58) before the Foundry 14.369 / dnd5e 6.0 migration — "it has to do".
 > Recommended answers to §10 adopted provisionally, GM may veto. Benchmark: **M3 (companions and drones) is the first
 > station** (§5.0). Campaign cleanup done 2026-10-11 (§8).
 > Code: `dev/poligon/` (README there), `fvtt poligon:*` (`dev/agent/lib/poligon.mjs`), e2e suite `poligon`.
@@ -336,6 +338,11 @@ and the Robota, a clock jump and a battery swap, a Long rest with the medic pool
 triaged into `PLAN_m3_towarzysze.md` §11 or a follow-up plan. It is also the Poligon's own acceptance test
 (H1).
 
+**Veto, 2026-10-17:** the GM walked M3 slice by slice as it was deployed; the formal verdict pass over these
+probes is not happening before the Foundry 14.369 / dnd5e 6.0 migration — "it has to do". The two findings the
+Hangar did file (2026-10-12: Cichy krok written from a player client, power sync on a deleted drone) are fixed in
+v0.19.0 (`1d4cf2e`) and closed in "Poligon · Uwagi".
+
 **Before the Poligon exists:** write the builder first, as a sandbox fixture (`fvtt world:create hangar
 --fixture=hangar`). When the Poligon exists, the same builder becomes the station. Until then no agent runs
 `e2e` or `world:*` on the sandbox while the GM is in it — that is H-D1's whole argument.
@@ -542,11 +549,16 @@ the most unjudged calls. H2–H3 make it a loop.
   them. `build-packs.mjs` then drops the world path and the hardcoded data path (below). Original
   portraits for public users can come later; the module is not on the official listing, so the Foundry
   AI policy does not constrain that.
+  **2026-10-17 (pre-migration hand-off, Z3):** the public half is done — every portrait is `tokens/portraits/<id>.webp`
+  or the token art, the world path is gone from the builder. The private art module still awaits the GM; until
+  then the campaign keeps the book art on actors already imported, new imports get the token art.
 - **Detection:** a `validate-packs` rule — every image path in every pack must sit in `modules/<id>/`,
   `systems/dnd5e/` or core `icons/`, and a module path must exist on disk. It would have caught all 37,
-  plus any icon pointing at a missing file, at the release gate.
+  plus any icon pointing at a missing file, at the release gate. **Done 2026-10-17** (core and dnd5e files
+  are checked too where installed, i.e. locally, not on the CI runner).
 - `dev/packs/build-packs.mjs` hardcodes the campaign's absolute data path in two constants — a
   machine-specific path in a public repo (AGENTS.md rule). It should come from the local `fvtt` config.
+  **Done 2026-10-17:** the world constant is gone; the data root is derived from the module's own folder.
 - The campaign world carried test and agent leftovers (§1.1) — removed 2026-10-11 (§8).
 - Human-only items that should move into the Poligon instead of waiting for the campaign: the monster
   closet calibration (PLAN_monster_closet §11), the E7 manual pass (PLAN_m1_walka), the first play of

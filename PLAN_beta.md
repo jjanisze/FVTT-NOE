@@ -1,9 +1,13 @@
 # PLAN — Droga do wczesnej bety
 
 > Status: **AKTYWNY** (2026-09-26, moduł v0.16.0; przegląd 2026-10-03, v0.17.1; v0.18.0 2026-10-08 —
-> M0, M1 i M2 zrobione; M3 2026-10-10, jeszcze bez wydania). Etap bieżący: **alfa** — późna dla walki,
-> ekwipunku, przetrwania, produkcji i towarzyszy, wczesna dla pojazdów i ekonomii. Bramki spełnione: B3,
-> B5, B6 (z dziurą: biegłości profesji — M6).
+> M0, M1 i M2 zrobione; **v0.19.0 2026-10-15 — M3 i M5 wydane**; przegląd 2026-10-17 przed migracją). Etap
+> bieżący: **alfa** — późna dla walki, ekwipunku, przetrwania, produkcji, towarzyszy i postoju (handel,
+> szabrowanie, doba), wczesna dla pojazdów. Bramki spełnione: B3, B5, B6 (z dziurą: biegłości profesji — M6);
+> bramka wydania v0.19.0 zielona (e2e 20/20 w świecie gołym i zalecanym, Quench 1184/1184). B2 zacznie liczyć się od
+> nowa — migracja (§0) przepisuje modele. **Poligon** (warstwa 7, `PLAN_human_testing.md`) działa od 2026-10-12;
+> weto M3 i M5: MG przeszedł je slice po slice'ie przy wdrażaniu, formalne przejście sond odłożone.
+> Kolejność do bety — **§0**.
 >
 > Skąd ten plan: przegląd IMPLEMENTATION.md ↔ RAW z 2026-09-26. Macierz pokrycia RAW mieszka
 > w [IMPLEMENTATION.md § Stan projektu](IMPLEMENTATION.md#stan-projektu) i to ona jest źródłem
@@ -13,6 +17,33 @@
 > RAW = `Neuro 5e/Podrecznik/NOE/` — konwersja PDF-a „październik” (jedyne źródło; stare zrzuty
 > `source.txt` / `podrecznik.md` usunięte 2026-09-26). Odwołania `s. N` niżej to strony drukowane
 > tego wydania; różnice względem marca: `Neuro 5e/Podrecznik/CHANGELOG.md`.
+
+---
+
+## 0. Kolejność do bety (od 2026-10-17)
+
+M0–M3 i M5 są wydane (v0.19.0). Dalsza droga idzie w tej kolejności — ona wiąże, graf zależności w §3 mówi tylko,
+co od czego zależy.
+
+```mermaid
+flowchart LR
+  D["1. Drobiazgi"] --> MIG["2. Migracja: Foundry 14.369 + dnd5e 6.0.x"]
+  MIG --> M6["3. M6 z Biegłościami profesji"]
+  M6 --> M4["4. M4 Pojazdy (decyzja MG)"]
+  M4 --> ST["5. Style i motywy"]
+  M6 -. "M4 po becie (§4)" .-> ST
+  ST --> BETA{{"6. Wydanie bety: B1–B8 + dwie sesje na nowej wersji"}}
+```
+
+1. **Drobiazgi** — `HANDOFF_przed_migracja.md` (2026-10-17): znaleziska Poligonu, Złomiarz w szabrowaniu, obrazy
+   z bramki v0.19.0, CI, dokumenty, inwentarz wersji. Zostawia czysty punkt wyjścia; punktem odniesienia migracji
+   jest v0.19.0 (bramka zielona).
+2. **Migracja na Foundry 14.369 i dnd5e 6.0.x** — osobny plan, pisany po drobiazgach.
+3. **M6 z Biegłościami profesji** (dziura w B6) — po migracji, bo awans postaci w dnd5e się zmienia.
+4. **M4 Pojazdy** — miejsce w kolejce czeka na decyzję MG: tutaj, przed betą, albo w §4 „po becie”.
+5. **Style i motywy** — stanowiska Poligonu Garderoba i Galeria, reszta ilustracji M5 (`dev/icons/MISSING.md`).
+6. **Wydanie bety** — bramki B1–B8. Migracja zeruje zegar B2 (modele bez przepisania przez dwie sesje), więc przed
+   nazwaniem bety — dwie rozegrane sesje na nowej wersji.
 
 ---
 
@@ -248,7 +279,7 @@ Cel: pościg od startu do mety bez notatek MG. Projekt: `PLAN_poscigi.md` §10.
 
 **Gotowe gdy:** wiersz Pojazdy i pościgi w macierzy = ✅/🟡.
 
-### M5 — Szabrowanie, bebeszenie, handel, postój (M → L)
+### M5 — Szabrowanie, bebeszenie, handel, postój (M → L) — ZROBIONE 2026-10-12
 
 Cel: dzień w mieście i wyprawa po ruinach mają narzędzia w Foundry. Zależy od M2 (surowce muszą
 mieć odbiorcę). **Plan: [PLAN_m5_postoj.md](PLAN_m5_postoj.md)** (projekt 2026-10-11, decyzje MG D1–D45,
@@ -276,8 +307,8 @@ plan.
 - [x] **Fuksy trwałe i ulotne** (źródło, termin — Gotowanie 24 h dziś nie wygasa) i **Fanty** (s. 132–133)
 
 **Gotowe gdy:** wiersze Eksploracja (gambling), Postój i Teczka MG (szabrowanie) bez ❌. — **Spełnione 2026-10-12.**
-Zostaje: stanowiska Bazar i Złomowisko w Poligonie (czekają na sam Poligon, `PLAN_human_testing.md`), dźwięki i
-część ilustracji (zamówienia w `dev/icons/MISSING.md`), test przy stole (B7).
+Zostaje: dźwięki i część ilustracji (zamówienia w `dev/icons/MISSING.md`), test przy stole (B7). Stanowiska Bazar
+i Złomowisko stoją na Poligonie od 2026-10-12. Wydane w v0.19.0 (2026-10-15).
 
 ### M6 — Drobne zasady RAW (S każda)
 

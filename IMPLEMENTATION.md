@@ -47,7 +47,7 @@ M# = kamień milowy w `PLAN_beta.md`.
 | | Automatyka zdolności | 🟡 | 33/133 — 10 pełnych, 23 częściowe (`game.neuroshima.zdolnosci.report()`, `config/class-features-coverage.mjs`) — M7 |
 | | Towarzysze (Partner, Oswajanie zwierząt, Prawa ręka) i drony | ✅ | `actors/towarzysze*.mjs`, `combat/towarzysze-walka.mjs`, `actors/drony*.mjs`, `items/kontroler.mjs`, paczka `towarzysze`; `PLAN_m3_towarzysze.md`, `docs/Towarzysze-i-drony.md`. Wartości z właściciela, tura po nim i Komenda, umieranie jak BG; drony z produkcji, kontrolery, tryb zdalny z kamerą i OSD, zasilanie, awarie, naprawy, wrak; Emiter EMP. Szukanie nowego towarzysza — zajęcie doby postoju (M5) |
 | Sztuczki | 53 Sztuczki (dane) | ✅ | paczka `sztuczki` |
-| | Automatyka | 🟡 | 18/53 — 5 pełnych, 13 częściowych (`game.neuroshima.sztuczki.report()`) — M7 |
+| | Automatyka | 🟡 | 19/53 — 5 pełnych, 14 częściowych (`game.neuroshima.sztuczki.report()`) — M7 |
 | Choroby i fobie | Choroby przewlekłe i popularne, fobie, leki, Zachód słońca | ✅ | 22/24 stanów egzekwowanych, `actors/health-panel.mjs`, `disease-effects.mjs` |
 | Ekwipunek | Broń, kalibry, magazynki symulacyjne, tryby ognia, granaty, miny i ładunki, ulepszenia | ✅ | `weapons/*`, `actors/grenade-inventory.mjs`, `placed-charges.mjs` |
 | | Właściwości broni | 🟡 | brak: `dluga`, `ciezka`, `jednorazowa` (M6) — `PLAN_weapon_properties.md`; `ppanc`/`przebijająca` — `combat/armour-piercing.mjs` |
@@ -964,6 +964,8 @@ Phase 5, teraz skreślony). Pełny opis pipeline'u: `DEV_GUIDE.md` §11.
   Adventures zabrania kopiowania plików), 12/51 wygenerowane placeholdery
   (`tokens/_placeholder/`, żółto-czarny pas + kod literowy + trójkąt kierunku). Token art
   z Roll20 świadomie zignorowany (okrągłe kadry, nie top-down)
+- [x] Portret aktora (`img`): `tokens/portraits/<id>.webp`, a bez niego grafika żetonu — od 2026-10-17 nigdy ścieżka
+  świata kampanii (ilustracje z podręcznika); `validate-packs` pilnuje obrazów w paczkach
 - [x] **Skala żetonu per istota** — `tokens/scale-overrides.json` jako jedyne źródło
   `prototypeToken.texture.scaleX/scaleY`, zasiewane pomiarem obwiedni alfy
   (`npm run seed:token-scales`), kalibrowane ręcznie w Szafie z potworami
@@ -1175,6 +1177,33 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ---
 
 ## Changelog
+
+### Po v0.19.0 — porządki przed migracją (2026-10-17, bez wydania)
+
+Hand-off `HANDOFF_przed_migracja.md`; punkt odniesienia migracji na Foundry 14.369 i dnd5e 6.0.x zostaje v0.19.0.
+
+- **Złomiarz w szabrowaniu (błąd).** Ułatwienie szabrowania szukało zdolności `smieciarz` albo przedmiotu
+  „Śmieciarz”, a Sztuczka w danych to **Złomiarz** (NOE s. 108; Śmieciarz i Antykwariusz to jej części) — postać
+  ze Złomiarzem z paczki nie dostawała Ułatwienia. Teraz most zdolności: klucz `zlomiarz` (`actors/abilities.mjs`,
+  `legacyAbilityKeys` w `sztuczki-data.mjs`), „Śmieciarz” zostaje dokładnym aliasem dla ręcznie wpisanych featów.
+  Okno MG i prośba gracza mówią „Złomiarz”. Plakietka: szabrowanie — automatycznie; wycena (Antykwariusz) — MG
+  (D4). Sztuczki 19/53. Quench `szabrowanie`: Sztuczka z paczki → Ułatwienie do obu testów. Poligon: Szczur (5)
+  z Obsady niesie Złomiarza (stanowisko Złomowisko, sonda `szabrowanie`) — Obsada do przebudowy.
+- **Portrety Bestiariusza bez ścieżki świata.** Bramka v0.19.0 zgłosiła dwa 404 (Cywil, Gangus żołnierz); w paczce
+  było ich **37 z 51** — `build-packs` brał portrety z folderów Roll20 świata kampanii (ilustracje z podręcznika,
+  nie do publikacji), więc działały tylko w kampanii, a pozostałe 35 po prostu nie trafiły na ekran w tej próbie.
+  Portret to teraz `tokens/portraits/<id>.webp`, a bez niego grafika żetonu; builder nie czyta świata ani nie ma
+  zaszytej ścieżki danych (`PLAN_human_testing.md` §11). Aktorzy już zaimportowani w kampanii zachowują portrety.
+- **`validate-packs`: obrazy.** Każdy obraz w paczkach (pola i `<img src>` w HTML) musi leżeć w module,
+  `systems/dnd5e/` albo rdzennych `icons/`, nigdy w `worlds/`; plik musi istnieć (rdzeń i dnd5e — gdy są
+  zainstalowane, czyli lokalnie, nie w CI).
+- **Rdzenne ikony v14.** Dziewięć odwołań do plików, których v14 nie ma: `search.svg` (karta zamówienia → ikona
+  akcji Handel modułu), `anvil.svg`, `clover.svg`, `gears.svg`, `wheel.svg` i cztery ikony umiejętności
+  (`config/skills.mjs`) — zamienione na istniejące odpowiedniki.
+- **CI:** akcje na Node 24 (`checkout@v7`, `setup-node@v7`, `setup-python@v7`, `action-gh-release@v3`), runner
+  przypięty do `ubuntu-26.04` (etykieta `ubuntu-latest` przechodzi na 26.04 od 2026-10-19).
+- Poligon: dwie uwagi Hangaru (2026-10-12) zamknięte odnośnikiem do `1d4cf2e`. Plany: `PLAN_beta.md` §0 — kolejność
+  do bety; statusy i weto M3/M5 w `PLAN_m3_towarzysze.md`, `PLAN_m5_postoj.md`, `PLAN_human_testing.md`.
 
 ### v0.19.0 — Towarzysze, drony, handel i postój (2026-10-15)
 

@@ -1,7 +1,9 @@
 # PLAN — M3: Towarzysze i drony
 
-> Status: **WDROŻONE** (E0–E11, 2026-10-10; projekt zamknięty 2026-10-08, rundy trzecia–szósta 2026-10-09).
-> Decyzje MG D1–D39 (§6.1); rozstrzygnięcia z wdrożenia do weta MG — §11. Rozmiar: **L–XL** (`PLAN_beta.md` zakładał M — drony
+> Status: **WDROŻONE** (E0–E11, 2026-10-10; wydane w v0.19.0 2026-10-15; projekt zamknięty 2026-10-08, rundy
+> trzecia–szósta 2026-10-09). Decyzje MG D1–D39 (§6.1); rozstrzygnięcia z wdrożenia do weta MG — §11. **Weto
+> (2026-10-17):** MG przeszedł M3 slice po slice'ie przy wdrażaniu; formalnego przejścia sond (Hangar, ~45
+> rozstrzygnięć) przed migracją nie będzie — „musi wystarczyć”. Rozmiar: **L–XL** (`PLAN_beta.md` zakładał M — drony
 > urosły do pełnego wsparcia z trybem zdalnego sterowania, D6, a przegląd znalazł lukę M1 w RAW s. 205,
 > D3). Wywołanie: `PLAN_beta.md` M3.
 >
@@ -1431,5 +1433,10 @@ lista kontrolna; `PLAN_beta.md` — M3 odhaczone z zakresem, M5 — Szukanie tow
 pliki WKK M3 i tabela odczytów MG luk w RAW (osobno od RAI autora); `README.md` — czcionka OSD wśród zasobów o odrębnych
 warunkach. Plakietki pokrycia, `CREDITS.md`, `build-zip.mjs` i `AGENTS.md` — w etapach E8c–E10. Notatka kampanii o Evie
 (vault) — MG.
+
+**2026-10-17 — weto.** M3 wydane w v0.19.0 (2026-10-15). MG przeszedł M3 slice po slice'ie przy wdrażaniu; formalnego
+przejścia sond Hangaru (rozstrzygnięcia z tej sekcji, ~45) przed migracją na Foundry 14.369 i dnd5e 6.0 nie będzie —
+„musi wystarczyć”. Dwa błędy, które Hangar znalazł 2026-10-12 (Cichy krok z klienta gracza, zasilanie skasowanego
+drona), naprawione w v0.19.0; uwagi Poligonu zamknięte.
 
 *(dalej etapy dopisują tu rozstrzygnięcia z wdrożenia, jak w `PLAN_m1_walka.md` §11)*
