@@ -19,6 +19,7 @@ import path from "node:path";
 import { MODULE_ID } from "./config.mjs";
 import { CliError, note } from "./output.mjs";
 import { readZip } from "../../release/zip.mjs";
+import { installSystem, packageVersion } from "./systems.mjs";
 
 /** Never junctioned into the sandbox copy of this module. */
 const MODULE_SKIP = new Set([".git", ".github", ".vscode", "node_modules", "dev", "dist", "logs", "packs"]);
@@ -99,10 +100,11 @@ function copyPackage(src, dst, id) {
 
 /**
  * Create or refresh the sandbox data path. Idempotent: existing config, worlds and copies are
- * kept; links and module.json are refreshed.
- * @param {{campaignData: string, sandboxData: string, moduleRoot: string, modules?: string[]}} p
+ * kept; links and module.json are refreshed. A missing dnd5e comes from `dnd5eSource` (the local
+ * config's `dnd5e.source`, PLAN_migracja_dnd5e6.md E0) when one is set, else from the campaign.
+ * @param {{campaignData: string, sandboxData: string, moduleRoot: string, modules?: string[], dnd5eSource?: string}} p
  */
-export async function initSandbox({ campaignData, sandboxData, moduleRoot, modules = DEFAULT_MODULES, moduleZip = null }) {
+export async function initSandbox({ campaignData, sandboxData, moduleRoot, modules = DEFAULT_MODULES, moduleZip = null, dnd5eSource = null }) {
   if (path.resolve(campaignData).toLowerCase() === path.resolve(sandboxData).toLowerCase()) {
     throw new CliError("The sandbox data path is the campaign data path.", { code: "sandbox-layout" });
   }
@@ -134,9 +136,16 @@ export async function initSandbox({ campaignData, sandboxData, moduleRoot, modul
   }
 
   const dnd5e = path.join(data, "systems", "dnd5e");
-  if (!fs.existsSync(dnd5e)) note("copying dnd5e (once)");
-  copyPackage(path.join(campaignData, "Data", "systems", "dnd5e"), dnd5e, "dnd5e");
-  report.system = { dnd5e: JSON.parse(fs.readFileSync(path.join(dnd5e, "system.json"), "utf8")).version };
+  let from = "kept";
+  if (!fs.existsSync(dnd5e) && dnd5eSource) {
+    note(`installing dnd5e from ${path.basename(dnd5eSource)} (once)`);
+    installSystem({ source: dnd5eSource, dataPath: sandboxData });
+    from = "source";
+  } else {
+    if (!fs.existsSync(dnd5e)) { note("copying dnd5e from the campaign (once) — no dnd5e source configured"); from = "campaign"; }
+    copyPackage(path.join(campaignData, "Data", "systems", "dnd5e"), dnd5e, "dnd5e");
+  }
+  report.system = { dnd5e: packageVersion(dnd5e), from };
 
   report.modules[MODULE_ID] = moduleZip
     ? installFromZip(moduleZip, path.join(data, "modules", MODULE_ID), sandboxData)

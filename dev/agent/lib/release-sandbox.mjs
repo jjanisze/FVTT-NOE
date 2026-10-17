@@ -1,7 +1,8 @@
 /**
  * Release sandbox run (§5 E step 3): the module exactly as a user installs it — extracted from the
  * release zip into the `release` data path (own port, concurrent with campaign and dev sandbox),
- * dnd5e copied from the campaign install (the version the module claims to verify), then:
+ * dnd5e as the data path already has it (a new one: the configured dnd5e source, else the campaign's;
+ * `fvtt system:install --profile=release` moves it — the boot suite checks it is module.json's verified), then:
  *   - "bare" world: the module alone — every e2e suite;
  *   - "recommended" world: + Quench, Sequencer, Splatter — every e2e suite and the Quench batches.
  * Green worlds are deleted; a red one is kept with its server running, for inspection.
@@ -33,7 +34,7 @@ export async function runReleaseSandbox({ zipPath, moduleRoot }) {
 
   const init = await initSandbox({
     campaignData: profileDataPath(cfg, "campaign"), sandboxData: profileDataPath(cfg, "release"),
-    moduleRoot, moduleZip: zipPath, modules: RECOMMENDED
+    moduleRoot, moduleZip: zipPath, modules: RECOMMENDED, dnd5eSource: cfg.dnd5e?.source ?? null
   });
   const ctx = { ...base, profile: resolveProfile(cfg, "release") };
 

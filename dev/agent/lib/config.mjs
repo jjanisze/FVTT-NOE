@@ -20,6 +20,7 @@ export const STATE_DIR = process.env.FVTT_AGENT_STATE_DIR ?? path.join(LOCALAPPD
 export const FILES = {
   config: path.join(STATE_DIR, "config.json"),
   mode: path.join(STATE_DIR, "mode.json"),
+  freeze: path.join(STATE_DIR, "freeze.json"),
   secret: path.join(STATE_DIR, "secrets.clixml"),
   locks: path.join(STATE_DIR, "locks"),
   contexts: path.join(STATE_DIR, "contexts.json")
@@ -69,6 +70,19 @@ export function loadConfig() {
 /** `{mode, since, by}`; a missing file means development (D2: the state since the migration began). */
 export function readMode() {
   return readJson(FILES.mode) ?? { mode: "development", since: null, by: "default" };
+}
+
+/**
+ * The campaign freeze (PLAN_migracja_dnd5e6.md D2, E0): `{frozen, since, by, reason, until}`. While frozen, fvtt
+ * never brings the campaign world up and every command without `--profile` addresses the sandbox.
+ */
+export function readFreeze() {
+  return readJson(FILES.freeze) ?? { frozen: false };
+}
+
+/** The profile a command addresses when it names none: the campaign — the sandbox while the campaign is frozen. */
+export function defaultProfileName(freeze = readFreeze()) {
+  return freeze?.frozen ? "sandbox" : "campaign";
 }
 
 /** Foundry server options of a data path; the port, prefix and TLS come from here. */

@@ -474,3 +474,37 @@ poza wyłączonym Chrome; profile nieaktywne). Dopisane: podklasy aktywności i 
 wszystko istnieje (§3.11), przemianowane ścieżki danych i podkładki efektów (§3.12), tłumaczenie (§3.13), ustawienia
 już pilnowane (§3.14), źródło dnd5e piaskownic, blokada w ekranie ustawień, mapy (§3.15), ostrzeżenia zgodności jako
 bramka. E0 bez `installDir` (PM11). Następny krok: E0 i E1 (niezależne).
+
+**2026-10-17 — E0 zrobione** (Claude Code). `npm test` zielone, testy narzędzi 46/46 (było 29; nowy
+`dev/agent/test/migration.test.mjs`), `check_doc_paths` 0 martwych.
+- **Zamrożenie** (`fvtt freeze on|off`, stan w lokalnym `freeze.json`): **włączone** 2026-10-17 do E11. Bez `--profile`
+  każde polecenie idzie do piaskownicy; `start`, `restart`, `packs`, `login`, `reload`, `eval`, `quench`,
+  `system:install` na kampanii — odmowa; `stop`, odczyty, `backup`, `poligon:clone` — wolno. `dnd5e.lock` na ścieżce
+  kampanii już był (D7) — Foundry czyta go jako `locked`, „Aktualizuj wszystko” go omija. `options.json` kampanii nie
+  ma `world`, więc ręczne uruchomienie Foundry staje na ekranie ustawień. `doctor`: zamrożenie, wersja rdzenia,
+  zainstalowane dnd5e i moduł na każdej ścieżce wobec `module.json` (problem, gdy dnd5e poniżej minimum — dla
+  zamrożonej kampanii tylko notatka) oraz **kopia `module.json` w piaskownicy/na Poligonie różna od drzewa**
+  (Poligon ma dziś kopię z 0.18.0 — przy zmianie `module.json` w E2 trzeba ją odświeżyć: `poligon:init`).
+- **Źródło dnd5e:** `init --dnd5e-source=<zip|folder>` (ustawione: zip wydania 6.0.6 w lokalnym folderze `fvtt`,
+  `packages/`); nowa ścieżka danych dostaje dnd5e stamtąd, nie z kampanii. `fvtt system:install --profile=<p>` wymienia
+  dnd5e zatrzymanej ścieżki (stary folder do `<dataPath>/agent-state/systems/`, nowy z blokadą); odrzuca checkout
+  źródeł (paczki bez LevelDB) i inny system; kampania tylko z `--campaign` i nie w zamrożeniu. Sprawdzone na zipie
+  6.0.6 w folderze tymczasowym (1478 plików, 2 s). `init --force` nie gubi już `loginUser` (scala, nie zeruje).
+- **`fvtt backup --profile=<p>`** (katalog: `init --backup-dir`, ustawiony na dysk kopii): zip na świat, dnd5e, cudze
+  moduły, `Data/assets` (opcjonalnie `--app`), `Config-options.json`, `manifest.json` (wersje, commit, liczby
+  dokumentów), `SHA256SUMS`, `README.md` z odtwarzaniem; CRC każdego archiwum i każdy świat rozpakowany do folderu
+  tymczasowego i otwarty. Archiwizator: `lib/archive.py` (zipfile, ZIP64). Sprawdzony na piaskownicy (świat
+  `agent-m3e4`, 117 MB, 13 s, `sha256sum -c` OK; 27 dowiązań cudzych modułów piaskownicy wypisanych, nie śledzonych).
+- **e2e — błędy konsoli w czterech koszykach** (boot, seed, paczka, late — „late” doliczane do paczki, która je
+  zostawiła); lista dozwolona na poziomie przebiegu: `KNOWN_CORE_ERRORS` (`#postNotification`, scrolling text — w
+  starych raportach `set y`/`#animateFrame` zawsze szło z `PreciseText.destroy`, 15/15), tylko bez ramek pakietów.
+  **Znalezisko:** błędy z ładowania klientów były dotąd po cichu wyrzucane (opróżnienie przed pierwszą paczką), choć
+  `boot` obiecuje zero błędów — teraz koszyk `boot` i porażka przebiegu. **Ostrzeżenia zgodności** (rdzeń i dnd5e)
+  z CDP: `caller` = właściciel ramki wołającej przestarzałe API (dnd5e woła `logCompatibilityWarning` wprost z
+  gettera/settera, sprawdzone w 6.0.6), plus `involvesModule`; w raporcie e2e i w wyniku `fvtt quench`. Uwaga na
+  E10: ostrzeżenia z podkładki kluczy efektów (`SHIM_FIELDS`) przychodzą z przygotowania danych aktora — w stosie
+  nie ma naszego kodu, tylko nasze dane; łapie je test statyczny z §7, nie stos.
+- **`index-sources`:** mapa w vaulcie przegenerowana dla 14.369 + dnd5e 5.3.0 (14.364 → 14.369: jedna nowa klasa
+  rdzenia, `HTMLAutocompleteTagsElement`, jedna zmiana bazy). Po E2: `--dnd5e=C:/Git/fvtt-dnd5e-6.0.6` (albo checkout
+  głównego klonu na `release-6.0.6`) i ścieżka w skillu `fvtt-api`.
+- Nowe e2e (koszyki, ostrzeżenia) potwierdzi pierwszy przebieg na żywo — bramka E1.

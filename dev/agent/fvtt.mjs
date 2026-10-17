@@ -14,11 +14,13 @@ import path from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
 import {
-  FILES, MODULE_ID, POLIGON_WORLD, PROFILES, STATE_DIR, cdpUrl, defaultFoundryDataPath, installPaths, loadConfig,
-  profileDataPath, readJson, readMode, readServerOptions, resolveProfile, writeJson
+  FILES, MODULE_ID, POLIGON_WORLD, PROFILES, STATE_DIR, cdpUrl, defaultFoundryDataPath, defaultProfileName, installPaths, loadConfig,
+  profileDataPath, readFreeze, readJson, readMode, readServerOptions, resolveProfile, writeJson
 } from "./lib/config.mjs";
 import { CliError, EXIT, errorResult, note, print, refuse } from "./lib/output.mjs";
-import { checkCloneTarget, checkMode, checkSandboxOnly, COMMAND_CLASS } from "./lib/guards.mjs";
+import { checkCloneTarget, checkFreeze, checkMode, checkQuiet, checkSandboxOnly, checkSystemInstall, COMMAND_CLASS } from "./lib/guards.mjs";
+import { defaultWorlds, runBackup } from "./lib/backup.mjs";
+import { checkSystemFolder, installSystem, olderThan, packageVersion, resolveSource } from "./lib/systems.mjs";
 import { hasSecret, verifyAgainstDataPath } from "./lib/secret.mjs";
 import { serverState, startServer, stopServer } from "./lib/server.mjs";
 import { holders, lockExclusive, lockShared } from "./lib/mutex.mjs";
@@ -34,7 +36,8 @@ import {
 } from "./lib/poligon.mjs";
 import { seedFixture } from "./lib/fixtures.mjs";
 import { runE2E, suiteNames } from "./lib/e2e.mjs";
-import { browserSession, browserVersion, evaluate, hardReload, waitGameReady } from "./lib/cdp.mjs";
+import { browserSession, browserVersion, evaluate, hardReload, waitGameReady, withConsole } from "./lib/cdp.mjs";
+import { parseCompatWarning, summariseCompat } from "./lib/compat.mjs";
 import {
   disposeContexts, duplicateSessions, foundryPages, loginInContext, namedContext, rememberSessions, resolveUser, restoreSessions
 } from "./lib/browser.mjs";
@@ -57,8 +60,12 @@ function parseArgs(argv) {
 
 function context(opts, { needProfile = true } = {}) {
   const cfg = loadConfig();
-  const ctx = { cfg, install: installPaths(cfg), cdp: cdpUrl(cfg), mode: readMode(), opts };
-  if (needProfile) ctx.profile = resolveProfile(cfg, opts.profile ?? "campaign");
+  const freeze = readFreeze();
+  const ctx = { cfg, install: installPaths(cfg), cdp: cdpUrl(cfg), mode: readMode(), freeze, opts };
+  if (needProfile) {
+    if (!opts.profile && freeze.frozen) note(`campaign frozen until ${freeze.until ?? "the switch-over"} — this addresses the sandbox (--profile=… for another)`);
+    ctx.profile = resolveProfile(cfg, opts.profile ?? defaultProfileName(freeze));
+  }
   return ctx;
 }
 
@@ -66,6 +73,7 @@ const seconds = (v, dflt) => (v === undefined || v === true ? dflt : Number(v) *
 
 function guard(ctx, command, extra) {
   checkMode(ctx.mode, command, { profile: ctx.profile?.name, ...extra });
+  checkFreeze(ctx.freeze, command, ctx.profile?.name);
   checkSandboxOnly(command, ctx.profile?.name);
 }
 
@@ -154,9 +162,25 @@ function command(name, help, fn) {
   HELP[name] = help;
 }
 
-command("init", "Create the local config.json/mode.json. --mcp-json=<path> --install-dir=<path> --campaign-world=<id> [--force]", async opts => {
+command("init", "Create the local config.json/mode.json. --mcp-json=<path> --install-dir=<path> --campaign-world=<id> [--force]; on an existing config, set one entry: --dnd5e-source=<release zip|unpacked folder> --backup-dir=<folder>", async opts => {
   const existing = readJson(FILES.config);
-  if (existing && !opts.force) return { ok: true, created: false, file: FILES.config, config: existing, hint: "Already initialised; --force rewrites it." };
+  // Single entries merge into an existing config; nothing else in it changes.
+  const updates = {};
+  if (typeof opts["dnd5e-source"] === "string") {
+    const src = resolveSource(opts["dnd5e-source"]);
+    if (src.kind === "folder") checkSystemFolder(src.path, "dnd5e");
+    updates.dnd5e = { ...(existing?.dnd5e ?? {}), source: src.path.replaceAll("\\", "/") };
+  }
+  if (typeof opts["backup-dir"] === "string") {
+    if (!fs.existsSync(opts["backup-dir"])) throw new CliError(`${opts["backup-dir"]} does not exist.`, { code: "usage", hint: "Create the folder (or connect the drive) first." });
+    updates.backup = { ...(existing?.backup ?? {}), dir: path.resolve(opts["backup-dir"]).replaceAll("\\", "/") };
+  }
+  if (existing && !opts.force) {
+    if (!Object.keys(updates).length) return { ok: true, created: false, file: FILES.config, config: existing, hint: "Already initialised; --force rewrites it." };
+    const merged = { ...existing, ...updates };
+    writeJson(FILES.config, merged);
+    return { ok: true, created: false, updated: Object.keys(updates), file: FILES.config, config: merged };
+  }
   const installDir = opts["install-dir"] ?? existing?.installDir ?? "C:/Program Files/Foundry Virtual Tabletop";
   if (!fs.existsSync(path.join(installDir, "Foundry Virtual Tabletop.exe"))) {
     throw new CliError(`No Foundry Virtual Tabletop.exe in ${installDir}.`, { code: "usage", hint: "Pass --install-dir=<folder of the desktop app>." });
@@ -166,12 +190,15 @@ command("init", "Create the local config.json/mode.json. --mcp-json=<path> --ins
     .filter(d => d.isDirectory() && !d.name.startsWith("agent-")).map(d => d.name);
   const world = opts["campaign-world"] ?? existing?.campaign?.world ?? (worlds.length === 1 ? worlds[0] : null);
   if (!world) throw new CliError(`Several worlds (${worlds.join(", ")}); pass --campaign-world=<id>.`, { code: "usage" });
+  // --force rewrites what init owns and keeps the rest (loginUser, other profiles' sections, sources).
   const cfg = {
+    ...(existing ?? {}),
     installDir: installDir.replaceAll("\\", "/"),
-    campaign: { world },
-    sandbox: { dataPath: path.join(STATE_DIR, "..", "FoundryVTT-Agent").replaceAll("\\", "/") },
+    campaign: { ...(existing?.campaign ?? {}), world },
+    sandbox: { ...(existing?.sandbox ?? {}), dataPath: existing?.sandbox?.dataPath ?? path.join(STATE_DIR, "..", "FoundryVTT-Agent").replaceAll("\\", "/") },
     protectedWorlds: [...new Set([world, ...(existing?.protectedWorlds ?? [])])],
-    cdp: { mcpJson: (opts["mcp-json"] ?? existing?.cdp?.mcpJson ?? null)?.replaceAll("\\", "/") ?? null }
+    cdp: { ...(existing?.cdp ?? {}), mcpJson: (opts["mcp-json"] ?? existing?.cdp?.mcpJson ?? null)?.replaceAll("\\", "/") ?? null },
+    ...updates
   };
   writeJson(FILES.config, cfg);
   if (!fs.existsSync(FILES.mode)) writeJson(FILES.mode, { mode: "development", since: new Date().toISOString(), by: "fvtt init" });
@@ -201,8 +228,16 @@ command("doctor", "Everything at once: config, mode, secret, servers, Chrome, mu
     return { ok: false, problems: [err.message], hints: [err.hint] };
   }
   out.mode = ctx.mode;
-  out.install = { dir: ctx.install.dir, exe: fs.existsSync(ctx.install.exe), headless: fs.existsSync(ctx.install.mainJs) };
+  out.freeze = ctx.freeze;
+  const release = readJson(path.join(ctx.install.app, "package.json"))?.release ?? {};
+  out.install = { dir: ctx.install.dir, exe: fs.existsSync(ctx.install.exe), headless: fs.existsSync(ctx.install.mainJs), foundry: release.build ? `${release.generation}.${release.build}` : null };
   if (!out.install.exe) problems.push("Foundry desktop app not found at installDir.");
+  // What the working tree's module.json asks of every data path (the migration moves both, PLAN_migracja_dnd5e6.md).
+  const wanted = requirements(readJson(path.join(MODULE_ROOT, "module.json")));
+  out.moduleRequires = wanted;
+  if (wanted.foundry.minimum && out.install.foundry && olderThan(out.install.foundry, wanted.foundry.minimum)) {
+    problems.push(`Foundry ${out.install.foundry} is older than module.json's minimum ${wanted.foundry.minimum}.`);
+  }
 
   out.secret = { stored: hasSecret() };
   if (!out.secret.stored) {
@@ -229,9 +264,30 @@ command("doctor", "Everything at once: config, mode, secret, servers, Chrome, mu
       dataPath: profile.dataPath, reachable: s.status.reachable, active: Boolean(s.status.active),
       world: s.status.world ?? null, foundry: s.status.version ?? null,
       system: s.status.system ? `${s.status.system} ${s.status.systemVersion}` : null,
+      // On disk, whether or not a server runs: what the next start of this data path gets.
+      installed: { dnd5e: packageVersion(path.join(profile.data, "systems", "dnd5e")), module: packageVersion(path.join(profile.data, "modules", MODULE_ID), "module.json") },
       connectedUsers: s.status.users ?? null, servers: s.servers,
       heldDbs: s.held.length, packageLocks: locks, mutex: holders(name)
     };
+    // Linked data paths carry a copy of module.json (sandbox:init / poligon:init write it); a stale copy loads the
+    // module with yesterday's compatibility, packs and scripts.
+    if (name === "sandbox" || name === "poligon") {
+      const copy = path.join(profile.data, "modules", MODULE_ID, "module.json");
+      const tree = path.join(MODULE_ROOT, "module.json");
+      const same = fs.existsSync(copy) && fs.readFileSync(copy, "utf8").replace(/\r\n/g, "\n") === fs.readFileSync(tree, "utf8").replace(/\r\n/g, "\n");
+      p.moduleJsonCurrent = same;
+      if (!same) hints.push(`${name}: its copy of module.json differs from the working tree's — \`npm run fvtt -- ${name === "poligon" ? "poligon:init --skip-packs" : "sandbox:init --skip-packs"}\` refreshes it${name === "poligon" ? " (the GM's ground: with their OK while they are in it)" : ""}.`);
+    }
+    const frozenCampaign = name === "campaign" && ctx.freeze.frozen;
+    if (frozenCampaign && s.status.reachable) problems.push(`campaign: a server runs during the freeze (until ${ctx.freeze.until ?? "the switch-over"}) — nobody should open the campaign before then.`);
+    if (p.installed.dnd5e && wanted.dnd5e.minimum && olderThan(p.installed.dnd5e, wanted.dnd5e.minimum)) {
+      const line = `${name}: dnd5e ${p.installed.dnd5e} is older than module.json's minimum ${wanted.dnd5e.minimum}`;
+      if (frozenCampaign) p.note = `${line} — expected while frozen (switch-over in ${ctx.freeze.until ?? "E11"}).`;
+      else {
+        problems.push(`${line}.`);
+        hints.push(`${name}: \`npm run fvtt -- system:install --profile=${name}\` (server stopped) installs the configured dnd5e source.`);
+      }
+    }
     if (out.secret.stored) {
       try {
         p.adminPassword = await verifyAgainstDataPath(profile.dataPath, ctx.install.app);
@@ -325,6 +381,13 @@ const CAMPAIGN_HYGIENE = `(() => {
   return out;
 })()`;
 
+/** Foundry and dnd5e versions module.json declares. */
+function requirements(manifest) {
+  const sys = manifest?.relationships?.systems?.find(s => s.id === "dnd5e")?.compatibility ?? {};
+  const core = manifest?.compatibility ?? {};
+  return { foundry: { minimum: core.minimum ?? null, verified: core.verified ?? null }, dnd5e: { minimum: sys.minimum ?? null, verified: sys.verified ?? null } };
+}
+
 /** The Poligon's line in `doctor`: initialised? world, marker, the freshness stamp. */
 function poligonDoctor(ctx, profileState) {
   if (!profileState?.dataPath) return { initialised: false, hint: "`npm run fvtt -- poligon:init` sets it up (PLAN_human_testing.md)." };
@@ -392,6 +455,23 @@ command("mode", "Show or set development/runtime (D2, D9). Set runtime only when
   const next = { mode: want, since: new Date().toISOString(), by: process.env.FVTT_AGENT ?? "fvtt mode", reason: opts.reason ?? null };
   writeJson(FILES.mode, next);
   return { ok: true, previous: prev.mode, ...next };
+});
+
+command("freeze", "Show, set or lift the campaign freeze (PLAN_migracja_dnd5e6.md D2): `on [--reason=<text>] [--until=<stage>]` | `off` — off only on the GM's word.", async opts => {
+  const want = opts._[0];
+  const prev = readFreeze();
+  if (!want) return { ok: true, ...prev, defaultProfile: defaultProfileName(prev) };
+  if (!["on", "off"].includes(want)) throw new CliError("freeze is `on` or `off`.", { code: "usage" });
+  const next = want === "on"
+    ? { frozen: true, since: new Date().toISOString(), by: process.env.FVTT_AGENT ?? "fvtt freeze", reason: opts.reason ?? prev.reason ?? null, until: opts.until ?? prev.until ?? null }
+    : { frozen: false, since: new Date().toISOString(), by: process.env.FVTT_AGENT ?? "fvtt freeze", reason: opts.reason ?? null, previous: prev.frozen ? prev : null };
+  writeJson(FILES.freeze, next);
+  return {
+    ok: true, ...next, defaultProfile: defaultProfileName(next),
+    hint: next.frozen
+      ? "The campaign world is not started by fvtt now; commands without --profile address the sandbox. The dnd5e package lock on the campaign path stops Foundry's Update all."
+      : "The campaign is the default profile again."
+  };
 });
 
 command("logs", "Server log tail. --since=<minutes|ISO> (default 60) --level=error|warn|info|debug --grep=<re> --limit=<n>", async opts => {
@@ -550,17 +630,25 @@ command("quench", "Run the module's Quench batches in a GM page. [--filter=<key 
     if (opts.reload) await hardReload(browser, p.targetId);
     let summary;
     let reloaded = Boolean(opts.reload);
-    try {
-      summary = await run();
-    } catch (err) {
-      // A crashed previous run leaves mocha busy until F5 (scripts/tests/runner.mjs); one reload, once.
-      if (reloaded || !/Mocha|zajęta/i.test(err.message)) throw err;
-      note("mocha busy — hard reload and retry once");
-      await hardReload(browser, p.targetId);
-      reloaded = true;
-      summary = await run();
-    }
-    return { ok: summary.failed === 0, profile: ctx.profile.name, targetId: p.targetId, reloaded, ...(warnings.length ? { warnings } : {}), ...summary };
+    // Compatibility warnings the page logs — from its load (replayed) and from the batches (E0, reported only).
+    const compat = [];
+    await withConsole(browser, p.targetId, m => { const w = parseCompatWarning(m.type, m.args); if (w) compat.push(w); }, async () => {
+      try {
+        summary = await run();
+      } catch (err) {
+        // A crashed previous run leaves mocha busy until F5 (scripts/tests/runner.mjs); one reload, once.
+        if (reloaded || !/Mocha|zajęta/i.test(err.message)) throw err;
+        note("mocha busy — hard reload and retry once");
+        await hardReload(browser, p.targetId);
+        reloaded = true;
+        summary = await run();
+      }
+    });
+    const c = summariseCompat(compat);
+    return {
+      ok: summary.failed === 0, profile: ctx.profile.name, targetId: p.targetId, reloaded, ...(warnings.length ? { warnings } : {}), ...summary,
+      compat: { total: c.total, byCaller: c.byCaller, module: c.unique.filter(w => w.caller === "module").slice(0, 30) }
+    };
   } finally {
     browser.close();
   }
@@ -651,7 +739,7 @@ command("sandbox:init", "Create/refresh the sandbox data path: own Config (free 
   await lockExclusive("sandbox", "sandbox:init", seconds(opts.wait, 0));
   const report = await initSandbox({
     campaignData: resolveProfile(cfg, "campaign").dataPath, sandboxData: path.resolve(cfg.sandbox.dataPath), moduleRoot: MODULE_ROOT,
-    modules: cfg.sandbox.modules
+    modules: cfg.sandbox.modules, dnd5eSource: cfg.dnd5e?.source ?? null
   });
   ctx.profile = resolveProfile(cfg, "sandbox");
   let build = null;
@@ -666,6 +754,38 @@ command("sandbox:init", "Create/refresh the sandbox data path: own Config (free 
     }
   }
   return { ok: build?.ok !== false && build?.validate?.ok !== false, ...report, build };
+});
+
+command("backup", "Full backup of a stopped data path: world(s), dnd5e, third-party modules, Data/assets, options.json → <backup dir>/<date>_<profile>[-<reason>]/ with manifest, SHA256SUMS, restore check. --profile=<p> (required) [--world=a,b] [--reason=<word>] [--dest=<dir>] (default: config backup.dir) [--app] (also the Foundry install)", async opts => {
+  if (!opts.profile || opts.profile === true) throw new CliError("backup needs an explicit --profile.", { code: "usage", hint: "e.g. `fvtt backup --profile=campaign --reason=przed-e11`." });
+  const ctx = context(opts);
+  guard(ctx, "backup");
+  await lockExclusive(ctx.profile.name, "backup", seconds(opts.wait, 0));
+  const s = await serverState(ctx);
+  checkQuiet({ status: s.status, servers: s.servers, held: s.held }, "a backup needs every database closed");
+  return {
+    profile: ctx.profile.name,
+    ...(await runBackup({
+      profile: ctx.profile, install: ctx.install, root: typeof opts.dest === "string" ? opts.dest : ctx.cfg.backup?.dir,
+      worlds: list(opts.world) ?? defaultWorlds(ctx.profile, ctx.cfg), reason: typeof opts.reason === "string" ? opts.reason : null, app: Boolean(opts.app)
+    }))
+  };
+});
+
+command("system:install","Replace a stopped profile's dnd5e from a release zip or unpacked folder (the old one is kept under agent-state/). --profile=<p> (required) [--from=<zip|folder>] (default: config dnd5e.source) [--campaign] (the switch-over, GM's word)", async opts => {
+  if (!opts.profile || opts.profile === true) throw new CliError("system:install needs an explicit --profile.", { code: "usage", hint: "e.g. `fvtt system:install --profile=sandbox`." });
+  const ctx = context(opts);
+  guard(ctx, "system:install");
+  const source = typeof opts.from === "string" ? opts.from : ctx.cfg.dnd5e?.source;
+  resolveSource(source); // usage errors before any lock or server probe
+  await lockExclusive(ctx.profile.name, "system:install", seconds(opts.wait, 0));
+  const s = await serverState(ctx);
+  checkSystemInstall({ profileName: ctx.profile.name, campaignFlag: Boolean(opts.campaign), status: s.status, servers: s.servers, held: s.held });
+  const res = installSystem({ source, dataPath: ctx.profile.dataPath });
+  return {
+    ok: true, profile: ctx.profile.name, ...res, keptAt: res.keptAt ? path.relative(ctx.profile.dataPath, res.keptAt).replaceAll("\\", "/") : null,
+    hint: "Worlds on this data path migrate to the new version the next time they open — `fvtt start` / `fvtt e2e` as usual."
+  };
 });
 
 const list = v => (v && v !== true ? String(v).split(",").map(s => s.trim()).filter(Boolean) : null);
@@ -791,7 +911,8 @@ command("poligon:init", "Create/refresh the Poligon: own data path and port, mod
   }
 
   const report = await initSandbox({
-    campaignData: campaign.dataPath, sandboxData: dataPath, moduleRoot: MODULE_ROOT, modules: modules.filter(m => m !== MODULE_ID)
+    campaignData: campaign.dataPath, sandboxData: dataPath, moduleRoot: MODULE_ROOT, modules: modules.filter(m => m !== MODULE_ID),
+    dnd5eSource: cfg.dnd5e?.source ?? null
   });
   ctx = { ...base, profile: resolveProfile(cfg, "poligon") };
 

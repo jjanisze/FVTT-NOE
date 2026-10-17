@@ -19,7 +19,9 @@ export const COMMAND_CLASS = {
   // eval runs arbitrary code in a live client — it can write, so it is testing, not read.
   quench: "testing", reload: "testing", e2e: "testing", eval: "testing",
   start: "lifecycle", stop: "lifecycle", restart: "lifecycle", kill: "lifecycle", packs: "lifecycle",
-  backup: "lifecycle", "sandbox:init": "lifecycle", "sandbox:sync": "lifecycle",
+  backup: "lifecycle", "sandbox:init": "lifecycle", "sandbox:sync": "lifecycle", "system:install": "lifecycle",
+  // Like `mode`: it only changes fvtt's own guard state. Lifted only on the GM's word (E11).
+  freeze: "read",
   "world:create": "lifecycle", "world:launch": "lifecycle", "world:delete": "lifecycle", "world:seed": "testing",
   "release:check": "lifecycle",
   // The Poligon (PLAN_human_testing.md §6): findings are a read; a station reset or the persona build
@@ -39,6 +41,47 @@ export function checkSandboxOnly(command, profileName) {
   if (profileName === "poligon") {
     throw refuse(`\`${command}\` never runs on the Poligon (the GM's testing ground).`, "poligon",
       "Agent worlds and e2e runs live on the sandbox (`--profile=sandbox`, the default). The Poligon has `poligon:*`.");
+  }
+}
+
+/**
+ * Commands that bring the campaign world up or act inside it. While the campaign is frozen (the migration,
+ * PLAN_migracja_dnd5e6.md D2) they are refused on the campaign profile; stopping it, reading it, backing it up
+ * and cloning it onto the Poligon stay allowed.
+ */
+const FROZEN_CAMPAIGN = new Set(["start", "restart", "packs", "login", "reload", "eval", "quench", "world:launch", "system:install"]);
+
+export function checkFreeze(freeze, command, profileName) {
+  if (!freeze?.frozen || profileName !== "campaign" || !FROZEN_CAMPAIGN.has(command)) return;
+  throw refuse(`The campaign is frozen until ${freeze.until ?? "the switch-over"} (${freeze.reason ?? "migration"}): no \`${command}\` on it.`, "frozen",
+    "Work in the sandbox — the default profile while frozen. Only the GM lifts the freeze (`npm run fvtt -- freeze off`).",
+    { since: freeze.since ?? null, until: freeze.until ?? null });
+}
+
+/**
+ * `system:install` replaces a profile's dnd5e: only on a quiet data path, and on the campaign only when asked for
+ * by name (`--campaign`, the switch-over, E11) — the freeze above refuses it before that.
+ */
+export function checkSystemInstall({ profileName, campaignFlag = false, status, servers = [], held = [] }) {
+  if (profileName === "campaign" && !campaignFlag) {
+    throw refuse("Replacing the campaign's dnd5e is the switch-over (E11), not a routine step.", "campaign",
+      "Pass `--campaign` only on the GM's word, after a fresh `fvtt backup`.");
+  }
+  checkQuiet({ status, servers, held }, "its dnd5e cannot be replaced");
+}
+
+/**
+ * Nothing serves the data path and nothing holds its databases — for operations that read or replace files a
+ * running server keeps open (backup, system:install).
+ */
+export function checkQuiet({ status, servers = [], held = [] }, why) {
+  if (status?.reachable || servers.length) {
+    throw refuse(`A Foundry server runs on this data path${status?.world ? ` (world ${status.world})` : ""} — ${why}.`, "running",
+      "Stop it first (`npm run fvtt -- stop --profile=…`).", { status, servers: servers.map(s => s.pid) });
+  }
+  if (held.length) {
+    throw refuse(`LevelDB still held: ${held.slice(0, 5).join(", ")}${held.length > 5 ? ` (+${held.length - 5})` : ""} — ${why}.`, "db-held",
+      "Wait for the holder to exit; `npm run fvtt -- doctor` names it.", { held });
   }
 }
 

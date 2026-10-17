@@ -135,6 +135,25 @@ export async function withPage(browser, targetId, fn) {
   }
 }
 
+/**
+ * Hear one page's console (`Runtime.consoleAPICalled` params) while `fn` runs. The session survives reloads;
+ * enabling Runtime first replays what the current document already logged.
+ */
+export async function withConsole(browser, targetId, onMessage, fn) {
+  const { sessionId } = await browser.send("Target.attachToTarget", { targetId, flatten: true });
+  const listener = msg => {
+    if (msg.sessionId === sessionId && msg.method === "Runtime.consoleAPICalled") onMessage(msg.params);
+  };
+  browser.listeners.add(listener);
+  try {
+    await browser.send("Runtime.enable", {}, { sessionId });
+    return await fn();
+  } finally {
+    browser.listeners.delete(listener);
+    await browser.send("Target.detachFromTarget", { sessionId }).catch(() => {});
+  }
+}
+
 /** Evaluate an expression (awaiting promises) in a page; returns the JSON value. */
 export async function evaluate(browser, targetId, expression, { timeoutMs = 60_000 } = {}) {
   return withPage(browser, targetId, async page => {

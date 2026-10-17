@@ -18,6 +18,12 @@
  * Between suites the harness waits for every client to go quiet and ends all combats before the
  * next fixture reseeds (a reseed racing the previous suite's last writes errored on the dead scene).
  * `traceWrites` records every document write with a short stack, per suite, next to the report.
+ *
+ * Console errors (PLAN_migracja_dnd5e6.md E0): every phase is drained into its own bucket — boot (clients
+ * loading), late (after a suite ended, charged to that suite), seed (the fixture reseeding) and the suite
+ * itself. Only the run-level allowlist (`KNOWN_CORE_ERRORS`, core teardown errors a reseed provokes) and a
+ * suite's own `allowConsoleErrors` pass; any other error fails. Compatibility warnings (core and dnd5e
+ * `logCompatibilityWarning`) are collected per phase with their caller — reported, not yet a failure (E10).
  */
 
 import fs from "node:fs";
@@ -34,6 +40,7 @@ import { disposeContexts } from "./browser.mjs";
 import { startServer } from "./server.mjs";
 import { agentWorldId } from "./guards.mjs";
 import { installE2E } from "./e2e-page.mjs";
+import { knownCoreError, parseCompatWarning, stripOrigins, summariseCompat } from "./compat.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MODULE_ROOT = path.resolve(HERE, "../../..");
@@ -58,7 +65,7 @@ export class AssertionError extends Error {
 /** One logged-in browser tab with a persistent flat CDP session: eval, console capture, screenshots. */
 export class Client {
   constructor(browser, { name, user, targetId, trace = false, background = false }) {
-    Object.assign(this, { browser, name, user, targetId, trace, background, errors: [] });
+    Object.assign(this, { browser, name, user, targetId, trace, background, errors: [], compat: [] });
   }
 
   /**
@@ -87,14 +94,19 @@ export class Client {
     const { sessionId } = await this.browser.send("Target.attachToTarget", { targetId: this.targetId, flatten: true });
     this.sessionId = sessionId;
     // Origins (host:port) stripped from everything that lands in a report — paths are enough.
-    const clean = s => String(s).replace(/https?:\/\/[^/\s)]+/g, "").slice(0, 1500);
+    const clean = s => stripOrigins(s).slice(0, 1500);
     this.browser.listeners.add(msg => {
       if (msg.sessionId !== this.sessionId) return;
       if (msg.method === "Runtime.exceptionThrown") {
         const d = msg.params.exceptionDetails;
         this.errors.push({ kind: "exception", text: clean(d.exception?.description ?? d.text ?? "") });
-      } else if (msg.method === "Runtime.consoleAPICalled" && msg.params.type === "error") {
-        this.errors.push({ kind: "console.error", text: clean(msg.params.args.map(a => a.value ?? a.description ?? "").join(" ")) });
+      } else if (msg.method === "Runtime.consoleAPICalled") {
+        // A compatibility warning is never a console error, even in core's ERROR compatibility mode.
+        const compat = parseCompatWarning(msg.params.type, msg.params.args);
+        if (compat) this.compat.push({ ...compat, client: this.name });
+        else if (msg.params.type === "error") {
+          this.errors.push({ kind: "console.error", text: clean(msg.params.args.map(a => a.value ?? a.description ?? "").join(" ")) });
+        }
       }
     });
     await this.send("Runtime.enable");
@@ -188,6 +200,10 @@ export class Client {
 
   drainErrors() {
     return this.errors.splice(0);
+  }
+
+  drainCompat() {
+    return this.compat.splice(0);
   }
 }
 
@@ -286,6 +302,9 @@ async function openClients(ctx, browser, names, { trace = false } = {}) {
     const res = await loginInContext(ctx, browser, { userId: user.id, browserContextId: id, targetIds: inCtx.map(p => p.targetId), urls: inCtx.map(p => p.url) });
     const client = new Client(browser, { name, user: user.name, targetId: res.pages[0], trace, background });
     await client.attach();
+    // Runtime.enable replays the console of the document already loaded — the tab's earlier life, not this run.
+    client.drainErrors();
+    client.drainCompat();
     // The working tree's current code, not whatever ES modules the tab cached earlier.
     await client.reload();
     clients.set(name, client);
@@ -366,6 +385,51 @@ async function seed(gm, fixture) {
   return gm.eval(`(url, moduleId) => import(url).then(m => m.default({ moduleId }))`, url, MODULE_ID);
 }
 
+/** Every client's console errors since the last drain, by client name (clients with none left out). */
+function drainAllErrors(clients) {
+  return Object.fromEntries([...clients.values()].map(c => [c.name, c.drainErrors()]).filter(([, e]) => e.length));
+}
+
+function drainAllCompat(clients, phase) {
+  return [...clients.values()].flatMap(c => c.drainCompat().map(w => ({ ...w, phase })));
+}
+
+/**
+ * Split errors into those the run tolerates and the rest: the run-level allowlist of known core errors, then
+ * the suite's own `allowConsoleErrors` patterns.
+ * @returns {{unexpected: object[], allowed: Record<string, number>}}
+ */
+function sortErrors(byClient, suiteAllowed = []) {
+  const unexpected = [];
+  const allowed = {};
+  for (const e of Object.values(byClient).flat()) {
+    const known = knownCoreError(e.text) ?? (suiteAllowed.some(re => re.test(e.text)) ? "suite" : null);
+    if (known) allowed[known] = (allowed[known] ?? 0) + 1;
+    else unexpected.push(e);
+  }
+  return { unexpected, allowed };
+}
+
+/** `{client: errors}` → `{"<phase>:<client>": errors}`, so two phases can share one sort. */
+const prefixed = (byClient, phase) => Object.fromEntries(Object.entries(byClient).map(([k, v]) => [`${phase}:${k}`, v]));
+
+/**
+ * What arrives after a suite ended (its last animations and broadcasts, the harness ending its combats) is that
+ * suite's: recorded on its report entry, and an unexpected error turns it red.
+ */
+function chargeLate(entry, suite, errors, compat) {
+  if (!entry) return;
+  entry.lateConsoleErrors = errors;
+  entry.compat = [...(entry.compat ?? []), ...compat];
+  const { unexpected, allowed } = sortErrors(errors, suite?.allowConsoleErrors ?? []);
+  entry.allowedConsoleErrors ??= {};
+  for (const [k, n] of Object.entries(allowed)) entry.allowedConsoleErrors[k] = (entry.allowedConsoleErrors[k] ?? 0) + n;
+  if (unexpected.length && suite?.failOnConsoleErrors !== false && entry.ok) {
+    entry.ok = false;
+    note(`FAIL ${entry.name}: ${unexpected.length} console error(s) after the suite ended`);
+  }
+}
+
 /**
  * Run suites against the running sandbox world.
  * @returns {Promise<object>} the report (also written to logs/e2e/<run>/report.json)
@@ -407,6 +471,13 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
         { timeoutMs: 30_000, message: "the initial canvas render queues" });
     }, initialScene);
     report.clients = [...clients.values()].map(c => ({ name: c.name, user: c.user }));
+    // Errors while the clients logged in, reloaded and drew the first canvas: the module's own start-up.
+    {
+      const consoleErrors = drainAllErrors(clients);
+      const { unexpected, allowed } = sortErrors(consoleErrors);
+      report.boot = { ok: unexpected.length === 0, consoleErrors, allowedConsoleErrors: allowed, compat: drainAllCompat(clients, "boot") };
+      if (unexpected.length) note(`FAIL boot: ${unexpected.length} console error(s) while the clients loaded`);
+    }
     for (const [i, suite] of loaded.entries()) {
       const t0 = Date.now();
       if (i > 0) {
@@ -423,11 +494,14 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
           break;
         }
       }
-      for (const c of clients.values()) c.drainErrors();
+      if (i > 0) chargeLate(report.suites.at(-1), loaded[i - 1], drainAllErrors(clients), drainAllCompat(clients, "late"));
       if (traceWrites) for (const c of clients.values()) await c.eval(() => { window.__e2e.writes.length = 0; });
       const fixture = suite.fixture === null ? null : await seed(clients.get("gm"), suite.fixture ?? "skirmish");
       await sleep(500); // let the seed's broadcasts (character assignment, scene) reach every client
       for (const c of clients.values()) await settle(c);
+      // The reseed tears down the previous scene, its animations included — its own bucket, not the suite's.
+      const seedErrors = drainAllErrors(clients);
+      const compat = drainAllCompat(clients, "seed");
       const t = new SuiteContext({ run, suite, clients, ctx, fixture });
       let error = null;
       try {
@@ -436,10 +510,10 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
         error = { message: err.message, details: err.details, assertion: err instanceof AssertionError };
         try { await t.screenshot("gm", "failure"); } catch { /* best effort */ }
       }
-      const consoleErrors = Object.fromEntries([...clients.values()].map(c => [c.name, c.drainErrors()]).filter(([, e]) => e.length));
-      const allowed = suite.allowConsoleErrors ?? [];
-      const unexpected = Object.values(consoleErrors).flat().filter(e => !allowed.some(re => re.test(e.text)));
-      const ok = !error && (suite.failOnConsoleErrors === false || unexpected.length === 0);
+      const consoleErrors = drainAllErrors(clients);
+      compat.push(...drainAllCompat(clients, "suite"));
+      const sorted = sortErrors({ ...prefixed(seedErrors, "seed"), ...consoleErrors }, suite.allowConsoleErrors ?? []);
+      const ok = !error && (suite.failOnConsoleErrors === false || sorted.unexpected.length === 0);
       let writes = null;
       if (traceWrites) {
         const all = {};
@@ -450,9 +524,16 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
       }
       report.suites.push({
         name: suite.name, ok, ms: Date.now() - t0, error, steps: t.steps,
-        consoleErrors, screenshots: t.screenshots, notes: t.notes, ...(writes ? { writes } : {})
+        consoleErrors, seedConsoleErrors: seedErrors, allowedConsoleErrors: sorted.allowed, compat,
+        screenshots: t.screenshots, notes: t.notes, ...(writes ? { writes } : {})
       });
       note(`${ok ? "PASS" : "FAIL"} ${suite.name} (${Date.now() - t0} ms)`);
+      saveProgress();
+    }
+    // The last suite's tail, as every other suite's: once the clients are quiet.
+    if (report.suites.length) {
+      await quietAll(clients.values()).catch(() => null);
+      chargeLate(report.suites.at(-1), loaded[report.suites.length - 1], drainAllErrors(clients), drainAllCompat(clients, "late"));
       saveProgress();
     }
     if (quench) {
@@ -464,12 +545,17 @@ export async function runSuites(ctx, { suites, world, quench = false, logSince =
       } catch (err) {
         report.quench = { ok: false, error: err.message, ms: Date.now() - t0 };
       }
+      // Quench provokes errors on purpose; its console is evidence, not a verdict.
+      report.quench.consoleErrors = drainAllErrors(clients);
+      report.quench.compat = drainAllCompat(clients, "quench");
       note(`${report.quench.ok ? "PASS" : "FAIL"} quench ${report.quench.passed ?? "?"}/${report.quench.total ?? "?"}`);
     }
   } finally {
     browser.close();
   }
-  report.ok = report.suites.every(s => s.ok) && (report.quench?.ok ?? true);
+  const compat = [...(report.boot?.compat ?? []), ...report.suites.flatMap(s => s.compat ?? []), ...(report.quench?.compat ?? [])];
+  report.compat = summariseCompat(compat);
+  report.ok = (report.boot?.ok ?? true) && report.suites.every(s => s.ok) && (report.quench?.ok ?? true);
   report.finishedAt = new Date().toISOString();
   report.reportFile = path.relative(MODULE_ROOT, path.join(run.dir, "report.json")).replaceAll("\\", "/");
   fs.writeFileSync(path.join(run.dir, "report.json"), JSON.stringify(report, null, 2));
@@ -503,11 +589,18 @@ export async function runE2E(ctx, { suites = suiteNames(), slug = "e2e", modules
     await shutdownWorldAndWait(ctx, client);
     cleanup = { world: (await deleteWorld(ctx, id)).deleted, contexts: await disposeContexts(ctx) };
   }
+  const count = byClient => Object.fromEntries(Object.entries(byClient ?? {}).map(([k, v]) => [k, v.length]));
+  const quenchSummary = report.quench ? { ...report.quench, consoleErrors: count(report.quench.consoleErrors), compat: report.quench.compat?.length ?? 0 } : null;
   return {
-    ok: report.ok, world: id, kept: !cleanup, report: report.reportFile, quench: report.quench ?? null,
+    ok: report.ok, world: id, kept: !cleanup, report: report.reportFile, quench: quenchSummary,
+    boot: report.boot ? { ok: report.boot.ok, consoleErrors: count(report.boot.consoleErrors) } : null,
+    compat: { total: report.compat.total, byCaller: report.compat.byCaller },
     suites: report.suites.map(x => ({
       name: x.name, ok: x.ok, ms: x.ms, failedStep: x.steps.find(y => !y.ok)?.label ?? null,
-      error: x.error?.message ?? null, consoleErrors: Object.fromEntries(Object.entries(x.consoleErrors).map(([k, v]) => [k, v.length])),
+      error: x.error?.message ?? (x.ok ? null : "console errors — see the report"), consoleErrors: count(x.consoleErrors),
+      ...(Object.keys(x.seedConsoleErrors ?? {}).length ? { seedConsoleErrors: count(x.seedConsoleErrors) } : {}),
+      ...(Object.keys(x.lateConsoleErrors ?? {}).length ? { lateConsoleErrors: count(x.lateConsoleErrors) } : {}),
+      ...(Object.keys(x.allowedConsoleErrors ?? {}).length ? { allowedConsoleErrors: x.allowedConsoleErrors } : {}),
       screenshots: x.screenshots.length
     }))
   };

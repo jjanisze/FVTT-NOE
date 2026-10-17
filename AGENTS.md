@@ -31,6 +31,10 @@ CDP snippets, not process kills, not asking the GM to close Foundry:
 Mode: `development` (default) — agents may stop/start/restart Foundry unprompted. `runtime` = game
 night: lifecycle and test commands refuse; the GM switches modes by saying so.
 
+**Freeze** (`fvtt freeze`, since 2026-10-17 until stage E11 of [PLAN_migracja_dnd5e6.md](PLAN_migracja_dnd5e6.md)):
+the campaign stays closed while the module moves to dnd5e 6. Commands without `--profile` address the
+sandbox; nothing starts or acts in the campaign. Only the GM lifts it.
+
 ## Pipelines — never hand-edit the output, run the generator
 
 | Output | Source of truth | Run |

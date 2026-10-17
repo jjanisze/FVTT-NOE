@@ -117,6 +117,17 @@ serwera liczą się jak porażka, zrzuty ekranu w `logs/e2e/<przebieg>/` (dowód
 do porównywania pikseli). Zielony przebieg kasuje świat; czerwony zostawia świat i karty do
 obejrzenia. Narzędzie i zasady: `dev/agent/README.md`, plan: `PLAN_agentic_improvements.md` §5 D.
 
+**Błędy konsoli — w czterech koszykach (od 2026-10-17, `PLAN_migracja_dnd5e6.md` E0).** `boot` — gdy klienci się
+logują i ładują (błąd = cały przebieg czerwony; wcześniej te błędy były po cichu wyrzucane, choć paczka `boot`
+obiecuje zero błędów); `seed` — w czasie odtwarzania fixture'a przed paczką; sama paczka; `late` — co przyszło po
+końcu paczki (jej ostatnie animacje i broadcasty), doliczone do tej paczki. Przepuszcza tylko lista na poziomie
+przebiegu, `KNOWN_CORE_ERRORS` w `dev/agent/lib/compat.mjs` — błędy rdzenia przy zwijaniu sceny w oknie w tle
+(`#postNotification` na `null`, `createScrollingText` / `PreciseText.destroy`), i to tylko bez żadnej ramki pakietu w
+stosie — oraz `allowConsoleErrors` danej paczki. Każdy inny błąd = porażka. **Ostrzeżenia zgodności** (rdzeń i dnd5e,
+`logCompatibilityWarning`) zbierane są w tych samych koszykach razem z tym, kto wywołał przestarzałe API (`caller`:
+`module` / `dnd5e` / `core` / `other`), w raporcie (`compat`) i w wyniku `fvtt quench`; od E10 migracji ostrzeżenie z
+`caller: "module"` będzie porażką.
+
 **Okna w tle — domyślny sposób (od 2026-10-17).** Każdy klient to osobne okno Chrome, a e2e i bramka wydania
 idą, kiedy MG pracuje obok. Chrome uznaje zasłonięte okno za ukryte i dławi jego timery (do raz na minutę): kroki
 wolniejsze 3–30×, błędy rdzenia przy animacjach i powiadomieniach (`#postNotification`, `PreciseText.destroy`),
