@@ -1,0 +1,476 @@
+# PLAN — Migracja: Foundry 14.369 i dnd5e 6.0.x
+
+> Status: **PROJEKT** (2026-10-17). Decyzje MG D1–D11 (§1). Rozmiar: **L–XL**. Wywołanie: `PLAN_beta.md` §0, krok 2.
+> **Foundry 14.369 zainstalowany przez MG 2026-10-17** w ten sam folder (`Program Files`) — ścieżki bez zmian; E1 zaczyna
+> się od bramki. Workspace „FVTT v14 Source” to już 14.369 (numery linii rdzenia z 14.364 w tym planie — do odświeżenia).
+> Punkt odniesienia: **v0.19.1** (bramka: Quench 1185/1185, e2e 40/40 w świecie gołym i zalecanym; Foundry 14.364,
+> dnd5e 5.3.0). Kopia kampanii sprzed migracji: 2026-10-17 (opis w vaulcie, `Integracje/backups/`).
+>
+> **Metoda.** Inwentarz statyczny z dwóch drzew źródeł dnd5e (`C:\Git\fvtt-dnd5e` na `release-5.3.0`, worktree
+> `C:\Git\fvtt-dnd5e-6.0.6` na `release-6.0.6`; różnice: `git -C C:\Git\fvtt-dnd5e diff release-5.3.0 release-6.0.6`),
+> notatek wydań Foundry 14.365–14.369 i dnd5e 6.0.0–6.0.6 oraz naszego kodu. Liczby w §3 to stan na 2026-10-17 —
+> etap, który je dotyka, zaczyna od ich odświeżenia. Wszystko, co wymaga uruchomienia, jest w etapach albo na liście PM
+> (§9), nie zgadywane tutaj.
+
+---
+
+## 0. W skrócie
+
+- **Kolejność (D1):** narzędzia → rdzeń 14.369 dla wszystkich (na dnd5e 5.3, bramka = regresja samego rdzenia) →
+  dnd5e 6.0.6 w piaskownicach i na Poligonie → port warstwa po warstwie → próba generalna na klonie kampanii →
+  przełączenie kampanii → v0.20.0.
+- **Gdzie boli:** karty czatu (szablony 12 → 33, karty renderowane z `message.system`, stare flagi wiadomości kasowane
+  migracją), tacka obrażeń (przepisana; metoda, którą nadpisujemy, zniknęła), **9 naszych typów aktywności** (tryby
+  ognia, magazynki, test zestawem — klasa bazowa przepisana), 12 tabel `CONFIG.DND5E`, które zmieniły kształt,
+  **przemianowane ścieżki danych** (ruch, zmysły, premie do rzutów), karty postaci (84 pliki szablonów i klas; nasze
+  arkusze i okna KO/DO to podklasy dnd5e), **tłumaczenie** (dnd5e ma tylko angielski: 19 naszych kluczy znika, 697
+  nowych), paczki (budowniczy pisze dane w kształcie 5.3).
+- **Co się nie psuje:** wszystkie 25 hooków `dnd5e.*`, których używamy, istnieją; dynamiczne hooki rzutów działają tak
+  samo; większość metod, które nadpisujemy, jest na miejscu; wszystkie 20 odwołań do API `dnd5e.*` (klasy, funkcje,
+  elementy HTML) istnieje w 6.0.6; 21 ścieżek grafik i szablonów `systems/dnd5e/…` istnieje; rdzeń v14 sam przenosi
+  `changes` efektu do `system.changes` (z podkładką).
+- **Podkładki to nie rozwiązanie:** dnd5e 6 ma 41 ostrzeżeń zgodności (stare klucze efektów, flagi, metody) — działają
+  dziś, znikną w 6.1+. Bramka E10: zero ostrzeżeń zgodności z naszego kodu (§7).
+- **Zasada (D4, D6):** przenosimy zachowanie 1:1; mechanizm dnd5e 6 bierzemy od razu tylko tam, gdzie nasz punkt
+  zaczepienia zniknął albo statyczna analiza daje czystą linię wzroku; reszta — dokładnie prowadzona lista PM (§9).
+
+```mermaid
+flowchart LR
+  E0[E0 Narzędzia] --> E2
+  E1[E1 Rdzeń 14.369<br/>wszędzie, dnd5e 5.3] --> E2[E2 dnd5e 6.0.6 + moduły<br/>piaskownice + Poligon]
+  E2 --> E3[E3 Dane, config, efekty]
+  E3 --> E4[E4 Rzuty i aktywności]
+  E3 --> E5[E5 Tacki]
+  E4 --> E6[E6 Karty czatu]
+  E5 --> E6
+  E3 --> E7[E7 Karty postaci, okna,<br/>tłumaczenie]
+  E3 --> E8[E8 Paczki]
+  E6 --> E9[E9 Automatyka dnd5e 6]
+  E7 --> E9
+  E8 --> E10[E10 Testy i Poligon]
+  E9 --> E10
+  E10 --> E11[E11 Kampania:<br/>próba na klonie, przełączenie]
+  E11 --> E12[E12 Dokumenty, v0.20.0]
+```
+
+---
+
+## 1. Decyzje MG (2026-10-17)
+
+**D1 — W miejscu, rdzeń najpierw.** Wspólna instalacja Foundry idzie na 14.369 dla wszystkich ścieżek danych, jeszcze na
+dnd5e 5.3; potem dnd5e 6.0.6. Sesji nie ma do bety — „jedyna droga wiedzie przez środek”.
+
+**D2 — Master w miejscu.** Bez gałęzi i drugiego drzewa roboczego. Kampania jest zamrożona do przełączenia (E11).
+
+**D3 — Twarde cięcie.** `module.json`: dnd5e `minimum` = `verified` = 6.0.6; Foundry `minimum` 14.367 (wymóg dnd5e
+6.0.6), `verified` 14.369. Bez równoległego wsparcia 5.3 — użytkowników praktycznie nie ma, lepiej teraz niż później.
+
+**D4 — Port 1:1 i plan przejęcia funkcji.** W migracji przenosimy zachowanie. Mechanizm dnd5e 6 zastępuje nasz od razu
+tylko tam, gdzie nasz punkt zaczepienia zniknął (karty czatu, tacki) albo statyczna analiza daje czystą linię wzroku i
+niskie ryzyko. Wszystko, co wymaga uruchomienia i opłaca się dopiero po migracji, trafia na listę PM (§9) — prowadzoną
+dokładnie, razem z innymi znaleziskami po drodze.
+
+**D5 — Karty czatu: port i kompakt teraz.** Nasze karty i wstawki budujemy od razu na modelu danych kart 6.0 i w ich
+zwartym stylu; dopieszczenie wyglądu — w etapie stylów.
+
+**D6 — Automatyka dnd5e 6: najpierw ponowne użycie.** Każde zderzenie przeglądamy. Jeśli mechanizm dnd5e daje ten sam
+efekt RAW, bierzemy go — mniej nadpisywania karty 5e jest lepsze. Twardy konflikt z zasadami → moduł wymusza wartości
+ustawień i domyślne (§5).
+
+**D7 — Tacki tylko dla MG** (było O1). `allowPlayerDamageTray`, `allowPlayerEffectsTray` zostają `false` (domyślne,
+nie wymuszane): obrażenia i efekty nakłada MG, jak dziś. E5 i testy obejmują tylko klienta MG. Powrót po becie (PM12).
+
+**D8 — Najpierw działanie, potem wygląd** (było O2). Cała praca nad wyglądem idzie po fazie funkcjonalnej. D5 w migracji
+znaczy: struktura i dane kart 6.0, nie stylizacja. CSS w E6–E7 tylko tam, gdzie bez niego coś nie działa albo jest
+nieczytelne. Ustawienia wyglądu czatu (`chatCardSummary`, `chatLogTheme`, `autoCollapseChatTrays`) — domyślne do etapu
+stylów.
+
+**D9 — Bez koncentracji** (było O3). NOE nie ma koncentracji ani jej odpowiednika (sterowanie dronem jej nie wymaga;
+autor jej nie lubi). **Wymuś `disableConcentration = true`** (§5).
+
+**D10 — Tłumaczenie: wszystko, co widać na naszych ekranach.** Tacka, karty czatu, okna rzutów, karty postaci i
+przedmiotów, TT, KO/DO, efekty, ustawienia pilnowane przez NOE. Funkcje czysto fantasy (bastiony, czary, pobożność,
+okno powitalne) zostają po angielsku (§3.13).
+
+**D11 — Moduły innych autorów w E2** razem z dnd5e 6 (Dice So Nice 6.4.4, JB2A 0.9.4, Sequencer 4.3.0, Splatter 6.0.2).
+E1 testuje 14.369 na dzisiejszych wersjach. **Push na koniec każdego etapu** — użytkownicy instalują z wydań
+(`releases/latest`), więc master może wyprzedzać v0.19.1.
+
+---
+
+## 2. Co się zmienia u źródła
+
+### 2.1 Foundry 14.365–14.369
+
+| Zmiana | Wersja | Dla nas |
+|---|---|---|
+| Instalator Windows domyślnie w `%LOCALAPPDATA%\Programs`, nie w `Program Files`; wersja przenośna ma własne dane Electrona | 14.366 | Ścieżka instalacji jest zaszyta w 8 miejscach narzędzi (§3.9) — 14.369 stoi w tym samym folderze, więc PM11 |
+| Świat nie ładuje po cichu niezgodnych modułów | 14.369 | Po D3 kampania na 5.3 nie załaduje modułu — dlatego zamrożenie kampanii (E0) |
+| Nowe, nadpisywalne API „czy zmiana efektu ma się zastosować”; `getReplacementData` efektów | 14.365–366 | Do PM (warunkowe efekty) |
+| `ChatMessage` bez powiadomienia, `options.scroll` | 14.365 | Do E6 (szepty MG, karty pomocnicze) |
+| `ContextMenu` z klasą CSS; poprawki menu kontekstowych przy przyciskach | 14.369 | Do E7 |
+| Wygasłe efekty bez zdarzeń wygaśnięcia nie wiszą do przesunięcia czasu | 14.368 | E3 — sprawdzić efekty z czasem |
+| Poprawki: `setProperty(…, undefined)`, `expandObject` z `undefined`, `ObjectField#clean` ze starymi kluczami `-=` | 14.369 | E3 — nasze flagi kasujemy kluczem `-=` (znalezisko M5 E8) |
+
+Bez zmian łamiących API w notatkach 14.365–14.369. E1 to sprawdza bramką.
+
+### 2.2 dnd5e 6.0.0–6.0.6 (wymaga Foundry ≥ 14.367)
+
+| Obszar | Zmiana | Dla nas |
+|---|---|---|
+| Karty czatu | modele danych `ChatMessage` (20 typów, m.in. `attack`, `damage`, `save`, `check`, `usage`, `request`, `timePassed`); dane przedmiotu i aktywności w `message.system`; karty renderowane z danych; HTML zmieniony; flagi `flags.dnd5e.item/activity/targets/originatingMessage` → `system.item/activity/targets/origin` (migracja kasuje stare); `_usageChatButtons` jako deskryptory, `activateChatListeners` przestarzałe, `getCardData` zwraca dane; karta rzutu przeciw śmierci jest jedną kartą | E3 (flagi), E6 (karty) |
+| Tacki | tacka obrażeń i efektów przepisana: cele grupowane, korekty z menu kontekstowego; `DamageApplicationElement#_onChangeOptions` nie istnieje, `buildTargetListEntry` przeniesione (`recorded-targets.mjs`) | E5 |
+| KP | `system.attributes.ac.calcs` i `ac.formulas` (lista), wybór najlepszego; `ac.base` → `ac.armor` | E3 (port), PM1 (TT) |
+| Efekty | warunki efektów i zmian, zmiany typu „rule” stosowane przy rzucie, czasy „do początku następnej tury”, zdarzenia wygaśnięcia (KO/DO), pochodzenie w `system.origin.*`, wygasłe efekty usuwane poza walką | E3, PM |
+| Konfiguracja | `senses` jako obiekty; `bloodied.threshold` w procentach; `requests` dostał `save`; 12 tabel, których dotykamy, zmieniło kształt (§3.5) | E3 |
+| Automatyka | spadanie z Levels, wyczerpanie (ustawienie), stan przy 0 PW (`autoApplyDowned`), grupowanie inicjatywy, rozmiar żetonu z rozmiaru aktora, zmysły → wzrok żetonu, ciężki pancerz → prędkość, przeciążenie, koncentracja z komunikatem, kalendarz (odnawianie „dzień/świt/zmierzch”, karta upływu czasu) | E9 (§4, §5) |
+| Ścieżki danych | `attributes.movement.<rodzaj>` → `movement.speeds.<rodzaj>`; `senses.<zmysł>` → `senses.ranges.<zmysł>`; `system.bonuses.{mwak,rwak,msak,rsak}.{attack,damage}` → `system.rolls.{attack,damage}.*.bonus`; `bonuses.abilities.*` → `rolls.ability.*.bonus`; `abilities/skills/tools.*.bonuses.{check,save}` → `….roll.bonus`; `init.bonus`, `death.bonuses.save`, `concentration.bonuses.save` → `….roll.bonus`; `rarity` → `rarities`. Dane źródłowe przenosi `_migrateData`; **klucze zmian efektów tylko podkładka** (`ActiveEffect5e.SHIM_FIELDS`, z ostrzeżeniem zgodności) — migracja świata ich nie przepisuje | E3 (kod), E8 (paczki), E11 (efekty w świecie) |
+| Język | `en.json`: +697 kluczy, −205, 53 ze zmienioną treścią; innych języków dnd5e nie ma | E7 (§3.13) |
+| Paczki systemu | nowa paczka `dnd5e.effects` | E8 (`srd-cleanup.mjs`) |
+| Ustawienia | nowe: `toggleSheetMode`, `openCompendiumBrowser`, `firstRun`, `disableFalling`, `tokenSizeSync`, `senseVisionSync`, `pietyScore`, `disableExhaustion`, `chatCardSummary`, `chatLogTheme`, `allowPlayerDamageTray`, `allowPlayerEffectsTray`, `bastionTurns`, `encounterPlacementBehavior`, `initiativeGroupCombatants`, `initiativeGroupRoll`, `autoApplyDowned`, `defaultDocumentSubtypes`; usunięte: `theme`, `moduleArtConfiguration` (nie używamy) | §5 |
+| Migracja świata | `needsMigrationVersion` 6.0.0: aktorzy (KP, flagi, ruch i zmysły, grafika żetonu), przedmioty (`uses`), efekty (zmiany, pochodzenie, przeniesienie), wiadomości, sceny, makra, tabele, ustawienia | E11 |
+| Inne | okno powitalne nowego świata (`firstRun`), identyfikatory aktorów, wielopoziomowe stany dla modułów, mnożnik ruchu, własne rodzaje ruchu, obszary działania z zachowaniami regionów, podział stosu z menu | E10 (`firstRun`), PM |
+
+---
+
+## 3. Nasza powierzchnia styku (stan 2026-10-17)
+
+### 3.1 Hooki
+
+Wszystkie 25 hooków `dnd5e.*` istnieje w 6.0.6; dynamiczne `preRoll*`/`postBuild*RollConfig` idą tym samym mechanizmem
+(`hookNames` w `roll-configuration-dialog.mjs`). Do sprawdzenia w E2–E4 są **argumenty**, nie nazwy — najczęstsze:
+`preUseActivity` ×28, `postUseActivity` ×16, `restCompleted` ×8, `postRollAttack` ×6, `applyDamage` ×4,
+`preRollAttack` ×4, `calculateDamage` / `preCalculateDamage` / `rollDamage` ×3, `renderChatMessage` ×13. Render hooki:
+`renderChatMessageHTML` ×22, `renderItemSheet5e` ×11, `renderCharacterActorSheet` ×10, `renderChatLog` ×4,
+`renderVehicleActorSheet` ×3 i pojedyncze (grupa, okna rzutów, HUD-y, ustawienia).
+
+### 3.2 Nadpisania metod dnd5e
+
+| Plik | Cel | 6.0.6 | Werdykt |
+|---|---|---|---|
+| `weapons/damage-reduction.mjs` | `DamageApplicationElement#buildTargetListEntry`, `_onChangeOptions`, `refreshListEntry`, `_onApplyDamage` | `_onChangeOptions` **nie istnieje**; reszta przeniesiona (`damage-application.mjs:357/443/601`) | przepisać (E5) |
+| `weapons/emiter-emp.mjs` | `buildTargetListEntry` (tacka efektów) | mixin celów zastąpiony `recorded-targets.mjs` | przepisać (E5) |
+| `combat/cover.mjs` | `AttackActivity#_triggerSubsequentActions`, `rollAttack`, `getDamageConfig`, `rollDamage`; okna ataku i obrażeń `_prepareConfigurationContext`, `_buildConfig`, `_onRender` | wszystkie są (`attack.mjs:68/83`, `attack-data.mjs:303`, `attack-configuration-dialog.mjs:25`, `damage-configuration-dialog.mjs:84`) | porównać ciała, dostosować (E4) |
+| `weapons/ammo.mjs` | `_processDamagePart`, `rollDamage` | są (`attack-data.mjs:407`, `base-activity.mjs:903`); krytyki przepisane | dostosować (E4) |
+| `weapons/magazine.mjs` | `AttackActivity#rollAttack` (drugie owinięcie) | jest | dostosować razem z `cover.mjs` (E4) |
+| `config/validation.mjs` | `Item#use` | jest (`item.mjs:750`) | sprawdzić (E4) |
+| `actors/drony-bron.mjs` | `getAttackData` | jest (`attack-data.mjs:274`) | sprawdzić (E4) |
+| `actors/armor-rules.mjs`, `pw.mjs`, `sp.mjs` | `Actor#prepareDerivedData` (trzy owinięcia) | kolejność przygotowania i KP zmienione; `prepareFinalAttributes` automatyczne | dostosować (E3, KP) |
+| `actors/inventory-toggle-fix.mjs` | `InventoryElement#_onToggleExpand` | jest (`inventory.mjs:744`) | sprawdzić, czy błąd naprawiony u źródła (E7) |
+| `actors/drony.mjs`, `production/przenoszenie.mjs` | `_onDropCreateItems`, `_onDropItemContainer` | są | sprawdzić (E7) |
+| `actors/towarzysze-tworzenie.mjs` | `_onDropSingleItem` | jest | sprawdzić (E7) |
+| `actors/kobalt-advancement.mjs` | `Flow#_prepareContentContext` | jest (`advancement-flow-v2.mjs:139`) | sprawdzić (E7) |
+| `scenes/poscig-snap.mjs` | `Token#getSnappedPosition` (rdzeń) | rdzeń | E1 |
+
+### 3.3 Czat
+
+- **DOM kart dnd5e** czyta 21 plików (`.chat-card`, `.card-tray`, `.card-header`, `damage-application`…): m.in.
+  `combat/okolicznosci.mjs`, `obalajaca.mjs`, `melee-maneuvers.mjs`, `drop-on-fail.mjs`, `weapon-save-properties.mjs`,
+  `grip.mjs`, `weapons/dozownik.mjs` (4), `damage-reduction.mjs` (3), `addons.mjs` (2), `jams.mjs`, `ammo.mjs`,
+  `emiter-emp.mjs`, `items/toolkit-medyk.mjs` (3), `kolczatka.mjs`, `toolkit-check-activity.mjs`, `actors/*-inventory.mjs`.
+- **Flagi wiadomości** `flags.dnd5e.item|activity|targets|originatingMessage` czyta 17 plików (28 miejsc): `combat/obrona`,
+  `knockout`, `trafienie`, `armour-piercing`, `cover`, `drop-on-fail`, `melee-maneuvers`, `weapon-save-properties`,
+  `weapons/addons`, `dozownik`, `fire-modes`, `emiter-emp`, `config/validation`, `actors/addons-inventory`,
+  `drony-sterowanie`, `wkk/items/pistolet-na-race`, `main.mjs`. Migracja świata **kasuje** te flagi — zamiana na
+  `message.system.*`, `getAssociatedItem()`, `getAssociatedActivity()`, `getOriginatingMessage()` (E3).
+- **Prośby o rzut** (`CONFIG.DND5E.requests`: `neuroSzabrowanie`, `neuroPulapkaRO`, `neuroGamblingRO`, `neuroSenRO`,
+  `neuroWodaRO`) — mechanizm i model `request` bez większych zmian (`request-message-data.mjs`: +13/−4); doszedł
+  handler `save` (PM8).
+- **Nasze karty** (werdykt ataku i TT, Reakcje celu, umieranie, wybuchy, M5) i e2e, które ich szukają — E6, E10.
+
+### 3.4 Karty postaci i okna
+
+Szablony aktorów i klasy arkuszy: 84 pliki zmienione (+2329/−1776); części (`PARTS`) karty postaci stoją; kotwice
+`.currency` w ekwipunku są. Wstawki do sprawdzenia w E7: sekcje ekwipunku (amunicja, granaty, magazynki, prowiant,
+surowce, leki), lalka, pas, Zasoby, pipki Wyczerpania i Fuksów, ukryty portfel, nagłówek, okna KO/DO z Zajęciami i polem
+snu, karta drużyny (zastąpiona), karta pojazdu, karty przedmiotów, HUD-y. CSS: 47 selektorów na klasach dnd5e.
+
+### 3.5 `CONFIG.DND5E`
+
+Zmieniony kształt w 12 tabelach, które ruszamy: `activityTypes`, `itemProperties`, `actorSizes`, `conditionTypes`,
+`validProperties`, `requests`, `conditionEffects`, `restTypes`, `bloodied`, `shieldIds`, `itemRarity`,
+`armorProficienciesMap`. Pewne już teraz:
+
+- `conditionEffects` **podmieniamy w całości** (`config/conditions.mjs:449`) — 6.0.6 ma nowe klucze (`crawl`,
+  `dehydrated`, `malnourished`, `physical*`, `dodging`…), które kod systemu czyta; trzeba scalać, nie podmieniać.
+- `bloodied.threshold = 0` (`config/conditions.mjs:454`) — w procentach 0 to nadal „wyłączone”; zostaje.
+- `restTypes.long` ma teraz `exhaustionDelta` w konfiguracji — czytamy go już tak (`config/exhaustion.mjs:397`).
+
+### 3.6 Efekty aktywne
+
+- 27 miejsc tworzy efekty z `changes` na górze, 21 z `system.changes`. Rdzeń v14 przenosi i podkłada (`common/documents/
+  active-effect.mjs:171–258`) — działa, ale jednolicie `system.changes` z `_id` (E3).
+- `effect.origin` czyta 9 plików (13 miejsc) — po migracji `origin` = `null`, dane w `system.origin.{activity,effect,
+  item,actor,behavior}` (E3).
+- Wygasłe efekty są usuwane poza walką; zdarzenia wygaśnięcia przy KO/DO — sprawdzić nasze efekty z czasem
+  (Bieganie, trucizny, Zatrucie z oparów) (E3).
+
+### 3.7 Dane świata i migracja
+
+`migrateWorld` (6.0.6): `_migrateActorAC`, `_migrateActorFlags`, `_migrateActorMovementSenses`, `_migrateTokenImage`,
+`_migrateEffectChanges` (`ac.base` → `ac.armor`, identyfikatory zmian), `_migrateEffectOrigin`, `_migrateEffectTransfer`,
+`_migrateItemUses`, `migrateMessageData` (flagi → `system`), sceny, makra, tabele, ustawienia. Nasze flagi
+(`flags.neuroshima-2026-overrides.*`) nie są celem — ryzyko jest pośrednie: dane, które trzymamy obok pól dnd5e
+(pochodzenie efektów, wiadomości z naszymi znacznikami, `uses`), i kolejność pierwszego ładowania (migracja dnd5e vs
+nasze migracje przy `ready`). Szczegóły i skrypt weryfikujący — E11.
+
+### 3.8 Paczki
+
+Budowniczy (`dev/packs/build-packs.mjs`) pisze dane w kształcie 5.3 i stempluje `_stats.coreVersion` wersją z instalacji
+(`:1635–1638`); nagłówek mówi „zweryfikowane z 14.364 / 5.3.0”. Czy dnd5e migruje **paczki modułów** (a nie tylko
+świata) — do sprawdzenia w E8; zakładamy, że nie, więc budowniczy musi pisać dane 6.0 wprost (KP, efekty, `uses`,
+awanse z `name`/`img`, aktywności).
+
+### 3.9 Narzędzia i testy (inwentarz 2026-10-17)
+
+- Ścieżka instalacji zaszyta: `dev/agent/fvtt.mjs:160`, `lib/config.mjs:139–147`, `dev/packs/build-packs.mjs:67`,
+  `validate-packs.mjs:29`, `diff-packs.mjs:19`, `dev/release/build-zip.mjs:159–164`, `release-check.mjs:38`,
+  `dev/validate-templates.js:3` (i narzędzia ikon). Jedno źródło prawdy — `cfg.installDir` (E0).
+- `release-check.mjs:170` wymaga `minimum === verified` dla dnd5e; `dev/e2e/suites/boot.mjs:30–31` porównuje wersję
+  systemu z `verified` — po D3 to celowo czerwone wszędzie, gdzie jest 5.3.
+- Błędy konsoli w e2e: zbierane z `Runtime.exceptionThrown` i `console.error` (`dev/agent/lib/e2e.mjs:93–97`),
+  opróżniane przed zasianiem paczki (`:426`), oceniane po niej (`:439–442`); lista dozwolonych tylko per suite, nikt jej
+  nie używa. Łańcuch suite'ów w oknach w tle łapie dwa błędy rdzenia (`#postNotification` na `null`,
+  `PreciseText.destroy`) z poprzedniej paczki (E0).
+- Najbardziej narażone suite'y e2e: `postac`, `towarzysz-tworzenie`, `combat`, `rekonwalescencja`, `handel`, `postoj`,
+  `dron`, `umieranie`, `towarzysz`, `zagrozenia`, `poligon`; Quench: `config`, `ekwipunek-dane`, `sztuczki-combat`,
+  `rekonwalescencja-dzien`, `produkcja`, `drony`, `obrona`, `magazynki`, `stany-broni`, `wyczerpanie`.
+- Moduły innych autorów w piaskownicach to dowiązania do folderów kampanii — aktualizacja Sequencera, Splattera,
+  Quench dotyczy wszystkich naraz (zgodne z D1).
+
+### 3.10 Nasze podklasy klas dnd5e
+
+| Plik | Klasy | Baza | Co się zmieniło |
+|---|---|---|---|
+| `weapons/fire-modes.mjs` | krótka seria, dublet (atak); długa seria, ogień zaporowy, seria miażdżąca (RO) | `activityTypes.attack/save.documentClass` | mixin aktywności: 582 zmienione linie; `_usageChatButtons` zwraca deskryptory (`action`, `label: {value, hidden}`, `icon` jako klasa, `visibility`, `canGroup`); akcje z `metadata.usage.actions`; nowe `targetPhase`, `hasOutcomes` |
+| `weapons/magazine.mjs` | przeładowanie, ładowanie pojedyncze, wymiana magazynka | `utility` | jw. |
+| `items/toolkit-check-activity.mjs` | test zestawem | `check` | jw.; `check.mjs`: 60 zmienionych linii |
+| `actors/sheet-shell.mjs` | nasze arkusze aktorów | arkusze dnd5e (`_stockSheetClass`) | `base-actor-sheet.mjs`: 358 zmienionych linii, `character-sheet.mjs`: 109 |
+| `actors/party-sheet.mjs` | karta drużyny | `GroupActorSheet` | 33 zmienione linie; doszło `PartyRequestDialog` |
+| `config/rest.mjs`, `actors/rest-activities.mjs` | okno DO, Zajęcia | `LongRestDialog` | `base-rest-dialog.mjs`: 167 zmienionych linii |
+| `config/detection-termowizja.mjs`, `items/gogle.mjs` | tryb wykrywania, shadery wzroku | rdzeń | E1 |
+
+Nadpisane w 9 aktywnościach: `metadata` ×9, `use` ×9, `rollSave` (akcja czatu, 3 klasy RO), `rollDamage` ×4, `_usageChatButtons` ×3,
+`rollAttack` ×2, `_triggerSubsequentActions` ×2 — **E4**. Arkusze i okna — **E7**.
+
+### 3.11 API `dnd5e.*`
+
+20 odwołań, wszystkie istnieją w 6.0.6 (sygnatury do porównania w etapie właściciela): `applications.Award` (+
+`awardCurrency`), `actor.BaseActorSheet`, `actor.CharacterActorSheet`, `advancement.AdvancementManager(.forNewItem)`,
+`advancement.ItemChoiceFlow`, `compendium`, `components.ProficiencyCycleElement`, `dice.{D20,Attack,Damage}RollConfigurationDialog`,
+`documents.Trait.keyLabel`, `documents.Proficiency`, `utils.getSceneTargets`, `canvas.TokenPlacement`,
+`dataModels.fields.AdvantageModeField.setMode`, `dataModels.activity.AttackActivityData`; elementy `damage-application`,
+`dnd5e-inventory`, `proficiency-cycle`.
+
+### 3.12 Przemianowane ścieżki danych (§2.2)
+
+W naszym kodzie (`scripts/`, `dev/`): ruch (`movement.walk|fly|…`) — 31 miejsc w 12 plikach (Bieganie, udźwig, drony,
+pościg); zmysły (`senses.darkvision|…`) — 9 w 4 (noktowizor, termowizor); `system.bonuses.*` — 3 w 3;
+`death|concentration.bonuses` — 2 w 2; `ac.base|flat|calc|formula` — 3 w 2. Kod czytający dane przygotowane nie ma
+podkładki — po starym kluczu dostaje `undefined`. Klucze zmian efektów działają przez podkładkę, ale z ostrzeżeniem —
+przepisujemy je w kodzie (E3), w paczkach (E8) i w efektach już zapisanych w świecie (E11, nasza migracja).
+
+### 3.13 Tłumaczenie
+
+`lang/pl.json` tłumaczy 527 kluczy dnd5e (najwięcej `ACTIVATION` 46, `ATTACK` 38, `REST` 32, `SAVE` 24, `MOVEMENT` 16).
+W 6.0.6 **znika 19** z nich — w tym nazwy obliczeń KP (`ArmorClassEquipment|Unarmored|Natural` — nasze nazwy TT),
+odporności (`DamImm|DamRes|DamVuln|ConImm`), rzuty przeciw śmierci (`DeathSave*`), rzadkości (`ItemRarity*`), `Effects`;
+ich następcy wyświetlą się po angielsku. 2 zmieniły treść (`ABILITY.SECTIONS.*.Hint` — premie z cechy obejmują teraz
+ataki). **697 nowych** (m.in. `EFFECT` 83, `ROLL` 67, `TRAIT` 47, `ARMORCLASS` 44, `ADVANCEMENT` 41, `SETTINGS` 38,
+`CHATMESSAGE` 19). Zakres wg D10; test statyczny: każdy klucz dnd5e w `pl.json` istnieje w `en.json` zainstalowanej wersji.
+
+### 3.14 Ustawienia dnd5e, które już pilnujemy
+
+- `metricWeightUnits|metricLengthUnits|metricVolumeUnits` = `true` — `config/encumbrance-config.mjs` (raz, przy `ready`).
+- `packSourceConfiguration` — `config/srd-cleanup.mjs` ukrywa paczki fantasy; 6.0.6 dodaje `dnd5e.effects`.
+- `rulesVersion` — tylko ostrzeżenie (`main.mjs`).
+- Czytamy: `attackRollVisibility` ×4, `primaryParty`, `autoCollapseChatTrays` — istnieją w 6.0.6.
+
+Wszystkie trafiają do jednego pliku z §5.
+
+### 3.15 Poza modułem
+
+- **Źródło dnd5e dla piaskownic:** `fvtt sandbox:init` kopiuje dnd5e **z kampanii**, raz (`sandbox.mjs` `copyPackage`).
+  Istniejące piaskownice da się podnieść osobno; każda nowa ścieżka danych założona w czasie zamrożenia (czysta
+  instalacja B6, odtworzona piaskownica wydania) dostałaby 5.3 — E0.
+- **Ekran ustawień Foundry na ścieżce kampanii:** „Aktualizuj wszystko” podniesie dnd5e kampanii do 6.0.6, a następne
+  otwarcie świata uruchomi migrację — E0 zakłada blokadę pakietu (`dnd5e.lock`, ten sam mechanizm co w piaskownicach).
+- **Mapy** (`Maps/tools/push.py`): kopiuje tła wprost do `worlds/output`, a `game.neuroshima.maps.update()` działa w
+  uruchomionym świecie — zamrożenie `fvtt` go nie obejmuje. Do E11 mapy powstają w Tiled; wypychanie do kampanii czeka.
+- **Vault:** `foundry-mcp` czyta LevelDB ogólnie (bez ścieżek dnd5e) — bez zmian; skille FVTT (`index-sources`) po E1 i E2.
+
+---
+
+## 4. Funkcje: nasze ↔ dnd5e 6
+
+Kolumna „Kiedy”: **E#** — w migracji; **PM#** — po migracji (§9); **Wymuś** — ustawienie pilnowane przez moduł (§5).
+
+| Funkcja | Dziś u nas | dnd5e 6 | Ten sam efekt RAW? | Kiedy |
+|---|---|---|---|---|
+| Karty ataku, werdykt TT, Reakcje celu, wstawki do kart (amunicja, zacięcia, dozownik, chwyt, okoliczności) | wstawki w DOM kart 5.3 | karty z `message.system`, deskryptory przycisków, `content` | — (nasza treść) | **E6** na modelu 6.0 (D5) |
+| Tacka obrażeń: pancerz, progi, przebicie | nadpisane metody tacki (tylko MG) | tacka z grupami celów, korekty per cel; opcjonalnie dla graczy | tak, po porcie | **E5** (tylko MG, D7); gracze — **PM12** |
+| Tacka efektów: EMP | nadpisanie listy celów | `recorded-targets` | tak | **E5** |
+| Prośby o RO (sen, woda, pułapki, gambling) | własne handlery `requests` | jest handler `save` | częściowo (nasze skutki po rzucie) | E3 port; **PM8** |
+| KP / TT „metody konkurują, premie się sumują” | owinięcie `prepareDerivedData` | lista obliczeń KP, wybór najlepszego | prawdopodobnie tak | E3 port 1:1; **PM1** |
+| Bieganie, okoliczności, warunkowe premie ulepszeń | efekty + hooki rzutów | zmiany „rule”, warunki, czasy turowe | tak | E3 port; **PM2** |
+| Wyczerpanie (−2 na poziom do k20, DO −1) | źródła w flagach + reguły „modern” dnd5e | to samo + ustawienie `disableExhaustion` | tak (już używamy) | **Wymuś** `disableExhaustion = false` |
+| Odwodnienie, Niedożywienie | stany `dehydration`, `malnutrition` (te same id co dnd5e) | `conditionEffects.dehydrated/malnourished` | do sprawdzenia | **E3** (scalanie `conditionEffects`) |
+| Zranienie (4 stopnie), Skażenie (poziomy) | własne tory i pipki | wielopoziomowe stany dla modułów | prawdopodobnie tak | **PM3** |
+| Stan przy 0 PW, BN pada | `combat/umieranie.mjs` (karta MG, D1/D2 M1) | `autoApplyDowned` | nie (u nas decyduje karta MG) | **Wymuś** `none` |
+| Spadanie | `combat/falling.mjs` (1k6 na 1,5 m, woda, Powalenie, Osteoporoza) | wykrywanie z Levels + `CONFIG.DND5E.falling` (kość / odległość / maks.) | liczby — tak przez konfigurację; dodatki — nie | **E9**: konfiguracja NOE + nasze dodatki na hooku; jeśli nie da się — **Wymuś** `disableFalling` |
+| Grupy inicjatywy towarzyszy (M3) | własny porządek tury po właścicielu | `initiativeGroupCombatants`, `initiativeGroupRoll` | do sprawdzenia | **E9**; konflikt → Wymuś; **PM4** |
+| Skala żetonów (Bestiariusz, drony) | kalibracja żetonów | `tokenSizeSync` | do sprawdzenia | **E9**; konflikt → Wymuś `false` |
+| Noktowizor, termowizor, 220° | tryby wzroku żetonu ustawiane przez nas | `senseVisionSync` (zmysły aktora → żeton) | do sprawdzenia | **E9**; konflikt → Wymuś `false`; **PM5** |
+| Ciężki pancerz, przeciążenie | `armor-rules.mjs`, udźwig | prędkość z ciężkiego pancerza, stany przeciążenia | do sprawdzenia z RAW | **E9** |
+| Koncentracja | — | RO koncentracji po obrażeniach, zrywanie efektów | NOE jej nie ma (D9) | **Wymuś** `disableConcentration = true` |
+| Krytyki | zasady NOE w potoku obrażeń | przepisane obliczanie krytyków | do sprawdzenia | **E4** |
+| Wybór cechy w oknie ataku | cecha z broni | wybór cechy w oknie | oznaczać, nie blokować | **E4** (domyślna z naszych reguł) |
+| Kalendarz, doba, przeskok | `world-clock.mjs`, doba M5 | odnawianie dzień/świt/zmierzch, karta upływu czasu | do sprawdzenia (szum na czacie) | **E9** (`dnd5e.preCreateTimePassedMessage`) |
+| Strefy dymu, gazu, kolczatki | szablony i własne kafelki | obszary działania z zachowaniami regionów | prawdopodobnie tak | **PM6** |
+| Identyfikatory istot | id w flagach | `identifier` aktora | tak | **PM7** |
+| Szybkość ×2 (Bieganie), spowolnienie (udźwig) | efekty / kod | `attributes.movement.multiplier` | tak | **PM2** |
+| Podział stosu w wymianie | własny | podział stosu z menu | częściowo | **PM9** |
+| Okno powitalne nowego świata | — | `firstRun` | — | **E10** (harness, czysta instalacja B6) |
+
+---
+
+## 5. Ustawienia dnd5e 6
+
+Wymuszanie: przy `ready`, aktywny MG, tylko gdy wartość różni się od wymaganej; linia w konsoli i jednorazowa karta MG
+z listą zmian; ustawienie zablokowane w oknie ustawień (podpowiedź „pilnuje NOE”). Jeden plik (`config/dnd5e-settings.mjs`)
+i test warstwy 1 dla tabeli. Plik przejmuje dzisiejsze wymuszenia z §3.14 (jednostki metryczne, źródła paczek).
+
+| Ustawienie | Domyślne | NOE | Polityka |
+|---|---|---|---|
+| `disableExhaustion` | `false` | nasze Wyczerpanie stoi na regułach dnd5e | **Wymuś `false`** |
+| `autoApplyDowned` | `none` | 0 PW rozstrzyga nasza karta | **Wymuś `none`** |
+| `disableFalling` | `false` | E9: konfiguracja NOE albo wyłączenie | **Wymuś** wg wyniku E9 |
+| `initiativeGroupCombatants`, `initiativeGroupRoll` | `true` | M3: tura towarzysza po właścicielu | E9: zostaw, jeśli nie psuje M3; inaczej **Wymuś `false`** |
+| `tokenSizeSync` | `true` | kalibracja żetonów | E9 → prawdopodobnie **Wymuś `false`** |
+| `senseVisionSync` | `true` | nasze tryby wzroku | E9 → prawdopodobnie **Wymuś `false`** |
+| `disableConcentration` | `false` | NOE nie ma koncentracji (D9) | **Wymuś `true`** |
+| `rulesVersion` | — | „modern” (Wyczerpanie) | **Wymuś `modern`** (dziś tylko ostrzeżenie, `main.mjs:679`) |
+| `metricWeightUnits`, `metricLengthUnits`, `metricVolumeUnits` | `false` | NOE jest metryczny | **Wymuś `true`** (już dziś, `encumbrance-config.mjs`) |
+| `packSourceConfiguration` | — | paczki fantasy ukryte | jak dziś (`srd-cleanup.mjs`) + decyzja o `dnd5e.effects` w E8 |
+| `defaultDocumentSubtypes` | — | nasze tworzenie przedmiotów i aktorów | E9: sprawdzić, czy nie zmienia domyślnego typu w naszych oknach |
+| `encounterPlacementBehavior` | — | `TokenPlacement` przy towarzyszach i dronach | E9: sprawdzić |
+| `bastionTurns`, `pietyScore` | — | brak w NOE | domyślne |
+| `bloodied` | — | brak w NOE | zostaje (próg 0) |
+| `allowPlayerDamageTray`, `allowPlayerEffectsTray` | `false` | tacki tylko dla MG (D7) | domyślne, nie wymuszamy; PM12 |
+| `chatCardSummary`, `chatLogTheme`, `autoCollapseChatTrays` | różne | wygląd (D8) | domyślne do etapu stylów |
+
+---
+
+## 6. Etapy
+
+| Etap | Zakres | Rozmiar | Gotowe gdy |
+|---|---|---|---|
+| **E0** | **Narzędzia przed dnd5e 6** (warunek E2; równolegle z E1). (1) **Zamrożenie kampanii**: tryb, w którym `fvtt` nie uruchamia świata kampanii do E11, a polecenia domyślnie celujące w kampanię (`packs`, `reload`, `quench`) idą do piaskownicy; blokada `dnd5e.lock` na ścieżce kampanii (§3.15); `doctor` pokazuje zamrożenie oraz wersje rdzenia i dnd5e w każdym profilu. (2) **Źródło dnd5e** dla nowych ścieżek danych z konfiguracji (folder albo zip wydania), nie kopia z kampanii; polecenie wymiany dnd5e w istniejącym profilu (folder, blokada). (3) `fvtt backup` (cicha ścieżka danych, archiwum świata, systemu, cudzych modułów, `Data/assets`, `options.json`; SHA256, manifest wersji; katalog z lokalnej konfiguracji). (4) e2e: ponowne opróżnienie błędów po `settleBetweenSuites`; lista dozwolona na poziomie przebiegu tylko dla dwóch znanych błędów rdzenia; **zbieranie ostrzeżeń zgodności** (rdzeń i dnd5e: `logCompatibilityWarning`) z podziałem wg źródła w stosie (nasz moduł / dnd5e / rdzeń / inne) — w raporcie, bez porażki do E10. (5) Skrypt `index-sources` gotowy do uruchomienia po E1/E2. Jedno źródło ścieżki instalacji — odroczone (PM11): 14.369 stoi w tym samym folderze. | M | `npm test` i testy narzędzi zielone; `fvtt backup` sprawdzony na piaskownicy; `doctor` pokazuje zamrożenie i wersje; nowa piaskownica dostaje dnd5e ze źródła z konfiguracji |
+| **E1** | **Rdzeń 14.369 w miejscu (D1).** Instalacja zrobiona (MG, 2026-10-17, ten sam folder). Wszystkie profile na dnd5e 5.3.0 i dzisiejszych modułach innych autorów (D11). Bramka wydania v0.19.1 na 14.369 = regresja samego rdzenia (w tym tryby wzroku i shadery, §3.10; `Token#getSnappedPosition`); poprawki; ewentualnie v0.19.2. `index-sources` dla 14.369. | S–M | bramka zielona na 14.369 + dnd5e 5.3 (Quench, e2e w obu światach); `module.json` `verified` 14.369 |
+| **E2** | **dnd5e 6.0.6 i moduły innych autorów** (warunek: E0, E1). dnd5e z zipa wydania GitHub do piaskownicy, piaskownicy wydania i na Poligon (polecenie z E0). Moduły (D11): Dice So Nice 6.4.4, JB2A 0.9.4, Sequencer 4.3.0, Splatter 6.0.2 — leżą w folderach kampanii, więc zmieniają się wszędzie naraz (stare wersje są w kopii). Kampania zostaje na dnd5e 5.3 i zamrożona. `module.json` wg D3. `index-sources` dla 6.0.6. Triaż: start, błędy konsoli, ostrzeżenia zgodności z naszego kodu, pełny Quench → **mapa awarii** (§11), podział na E3–E9; lista kluczy z §3.13 widocznych na naszych ekranach. | S + triaż | mapa awarii w §11; każdy czerwony test i każde ostrzeżenie zgodności z naszego kodu ma etap |
+| **E3** | **Dane, konfiguracja, efekty** (§3.5–3.7, §3.12): scalanie `conditionEffects` i pozostałych 11 tabel; efekty na `system.changes` i **nowych kluczach** (ruch, zmysły, premie do rzutów); kod czytający dane przygotowane — na nowe ścieżki; pochodzenie z `system.origin`; flagi wiadomości → `message.system` i metody `ChatMessage5e` (17 plików); KP (`ac.armor`, owinięcia `prepareDerivedData`); ścieżki Wyczerpania; efekty z czasem wobec usuwania wygasłych. **Plik ustawień (§5)** z wymuszeniami już pewnymi (`disableExhaustion`, `autoApplyDowned`, `disableConcentration`, `rulesVersion`, jednostki), żeby automatyka dnd5e 6 nie mieszała w testach E4–E8. | M–L | Quench `config`, `wyczerpanie`, `rekonwalescencja*`, `lalka`, `tt`, `zdolnosci-dane`, `drony` zielone; zero ostrzeżeń zgodności o kluczach efektów i flagach wiadomości z naszego kodu |
+| **E4** | **Rzuty, aktywności, obrażenia** (§3.2, §3.10): **9 naszych aktywności** (tryby ognia, magazynki, test zestawem) na nowym mixinie — `metadata`, `use`, przyciski jako deskryptory, akcje czatu (`rollSave`), `targetPhase`; `cover.mjs`, `ammo.mjs`, `magazine.mjs`, `validation.mjs`, `drony-bron.mjs` — ciała porównane z 6.0.6, owinięcia dopasowane; argumenty hooków użycia aktywności i rzutów; krytyki NOE; wybór cechy w oknie ataku. | L | Quench `sztuczki-combat`, `obrona`, `magazynki`, `amunicja`, `stany-broni`, `przebicie`; każdy z 9 typów aktywności użyty w teście; e2e `combat` |
+| **E5** | **Tacki** (tylko klient MG, D7): `damage-reduction.mjs` i `emiter-emp.mjs` na nowej tacce (grupy celów, korekty per cel), `armour-piercing.mjs`. | M | Quench `przebicie`, `emiter-emp`; e2e `combat` (obrażenia przez tackę MG) |
+| **E6** | **Karty czatu — port i kompakt (D5, D8).** Nasze karty (werdykt ataku i TT, Reakcje celu, umieranie i karta rzutu przeciw śmierci, wybuchy, M5, szepty MG) na danych i strukturze 6.0; wstawki do kart dnd5e przez dane wiadomości i deskryptory przycisków zamiast DOM; mniej osobnych wiadomości tam, gdzie 6.0 dopina wyniki do karty. Bez pracy nad wyglądem. | L | e2e `combat`, `umieranie`, `handel`, `postoj`, `szabrowanie`, `bebeszenie`, `autodestrukcja`; zrzuty kart przed / po w przekazaniu |
+| **E7** | **Karty postaci, okna, tłumaczenie**: podklasy arkuszy, karty drużyny i okien KO/DO (§3.10); render hooki, sekcje ekwipunku, lalka, pas, Zasoby, pipki, portfel, okna KO/DO (Zajęcia, sen, odsypianie), karta pojazdu, przedmiotów, HUD-y; nadpisania upuszczania i rozwijania; 47 selektorów CSS — tylko tam, gdzie bez nich coś nie działa (D8). **Tłumaczenie wg D10** (§3.13) i test statyczny kluczy. | L | e2e `postac`, `towarzysz*`, `dron`, `rekonwalescencja`, `postoj`; test kluczy zielony; zrzuty bez angielskich napisów na ekranach z D10 |
+| **E8** | **Paczki**: budowniczy pisze dane 6.0 (KP, efekty z nowymi kluczami, `uses`, awanse, aktywności); `validate-packs` sprawdza kształt 6.0 i odrzuca stare klucze efektów; przebudowa 18 paczek; po starcie rekordy = świeży build (B3); `srd-cleanup.mjs` wobec nowej paczki `dnd5e.effects`. | M | `validate-packs` zielone; `diff-packs` 0 różnic po starcie |
+| **E9** | **Automatyka dnd5e 6** (§4, §5): reszta pliku ustawień; przegląd każdego zderzenia na żywo; konfiguracja spadania NOE albo wyłączenie; wiersze §5 „E9: sprawdzić”. Zmiana odczytu RAW → pytanie do MG. | M | tabela §5 bez „sprawdzić”; testy warstwy 1 dla tabeli |
+| **E10** | **Testy i Poligon**: selektory e2e, okno `firstRun` w harnessie, Quench poprawiony, stanowiska i Obsada Poligonu przebudowane na 6.0 (awans przez prawdziwy AdvancementManager). **Ostrzeżenia zgodności z naszego kodu = porażka** (Quench i e2e). Pełna bramka w piaskownicy wydania. | M–L | Quench 100%; e2e 40/40 w obu światach; `poligon` zielony; 0 ostrzeżeń zgodności z naszego kodu |
+| **E11** | **Kampania.** Świeży `fvtt backup`. Próba: `poligon:clone --refresh` → otwarcie na Poligonie (6.0.6) → migracja dnd5e → **nasza migracja** efektów w świecie ze starymi kluczami (§3.12; dnd5e ich nie przepisuje) → skrypt weryfikujący (liczby dokumentów, nasze flagi: Fuksy, źródła Wyczerpania, magazynki, towarzysze i drony, stan M5: szkice doby, handlarze, pamięć ruin; wiadomości; sceny; ostrzeżenia zgodności po załadowaniu) → przejście MG po stanowiskach. Potem przełączenie: dnd5e 6.0.6 na ścieżce kampanii (zdjęcie blokady), otwarcie, te same kroki, koniec zamrożenia, wypychanie map wraca. Wycofanie = kopia. | M | skrypt bez rozbieżności na klonie i w kampanii; MG potwierdza |
+| **E12** | **Dokumenty i v0.20.0**: `DEV_GUIDE.md` (rozdziały integracji z dnd5e), `ARCHITECTURE.md` §11, `AGENTS.md`, `TESTING.md`, `RELEASING.md`, `IMPLEMENTATION.md` (macierz, pliki, changelog), `docs/` (co gracz zobaczy inaczej), `PLAN_beta.md` §0. Notatka wydania: wymaga dnd5e 6.0.6 i Foundry 14.367+; na dnd5e 5.3 zostań przy v0.19.1. `npm run release:check -- --tag`; tag wydania — MG. | S–M | wydanie v0.20.0 |
+
+**Sesje (orientacyjnie):** E0–E1, E2–E3, E4–E5, E6, E7, E8–E9, E10, E11–E12.
+
+### 6.1 Przekazanie i punkty zatrzymania
+
+- Każdy etap kończy się wpisem w §11 (co zrobione, liczby testów, nowe pozycje PM, zrzuty dla UI), commitami
+  `Obszar: co` i pushem (D11). Znalezisko spoza etapu → §9 albo mapa awarii, nie „przy okazji”.
+- Etap zaczyna od odświeżenia swoich liczb z §3 (stan z 2026-10-17).
+- **MG potrzebny:** E9 — tylko gdy przegląd zderzenia zmienia odczyt RAW; E10 — przejście po Poligonie (warstwa 7);
+  E11 — przejście po klonie i zgoda na przełączenie kampanii; E12 — tag. Reszta bez MG.
+- Nigdy: otwieranie świata kampanii przed E11, aktualizacje w ekranie ustawień Foundry na ścieżce kampanii, testy w
+  kampanii (AGENTS.md).
+
+---
+
+## 7. Testy
+
+- **Punkt odniesienia:** v0.19.1 — Quench 1185/1185, e2e 40/40 (goły i zalecany), testy narzędzi. Po E1 ten sam zestaw na
+  14.369; po E10 — na dnd5e 6.0.6. Spadek liczby testów tylko z wpisem „usunięty, bo…” w §11.
+- **Warstwy 1–5 (Quench):** każdy etap zaczyna od czerwonej listy z mapy awarii (E2) i kończy zielono na swoich
+  paczkach. Nowe testy: scalanie `conditionEffects` (nic z kluczy 6.0.6 nie znika), tabela ustawień (§5), flagi
+  wiadomości (stare odczyty nie istnieją w kodzie — test statyczny), KP po migracji (`ac.armor`), stare ścieżki danych z
+  §3.12 (test statyczny: ani w kodzie, ani w kluczach efektów paczek), klucze tłumaczenia (§3.13).
+- **Ostrzeżenia zgodności:** zbierane od E0, raportowane od E2, od E10 każde ze stosem w naszym module = porażka. To
+  one mówią, co pęknie przy dnd5e 6.1+ i v15.
+- **Warstwa 6 (e2e):** mutacje dla przepisanych miejsc — tacka (próg pancerza nie zadziałał → czerwone), karta ataku
+  (werdykt bez danych z `message.system` → czerwone), wymuszanie ustawień (ręczna zmiana `autoApplyDowned` → moduł ją
+  cofa). Błędy konsoli: lista dozwolona tylko dla dwóch znanych błędów rdzenia (E0) — każdy nowy błąd = porażka.
+- **Warstwa 7 (Poligon):** po E10 przejście MG po stanowiskach: Strzelnica (karty ataku, tacka), Garderoba (karta
+  postaci), Lazaret (KO/DO, umieranie), Bazar i Złomowisko (karty M5), Hangar (drony), Kreator (awans). Werdykt MG o
+  kompakcie kart (D5) zapisywany jako Uwagi.
+- **Kampania (E11):** skrypt weryfikujący jest testem — uruchomiony na klonie i w kampanii, wynik w §11.
+
+---
+
+## 8. Ryzyka i wycofanie
+
+| Ryzyko | Ograniczenie |
+|---|---|
+| Migracja świata jest jednokierunkowa | kopia z 2026-10-17 (przed 14.369); `fvtt backup` przed E2 i przed E11; próba na klonie; wycofanie = odtworzenie kopii (aplikacja 14.364, dnd5e 5.3.0, świat) |
+| Aktualizacja rdzenia dotyka wszystkich ścieżek naraz (D1) | kopia aplikacji w backupie z 2026-10-17; bramka E1 przed jakąkolwiek zmianą dnd5e |
+| Ktoś otworzy kampanię przed E11 (migracja dnd5e albo świat bez modułu) | zamrożenie kampanii w `fvtt` (E0) |
+| „Aktualizuj wszystko” w ekranie ustawień Foundry podnosi dnd5e kampanii | `dnd5e.lock` na ścieżce kampanii (E0); zdjęcie w E11 |
+| Podkładki dnd5e 6 ukrywają stare klucze i metody, a znikną w 6.1+ | ostrzeżenia zgodności jako bramka E10; nasza migracja efektów świata w E11 |
+| Nowa piaskownica w czasie zamrożenia dostaje dnd5e 5.3 z kampanii | źródło dnd5e z konfiguracji (E0) |
+| Mapy wypychane do kampanii w czasie zamrożenia | wypychanie czeka do E11 (§3.15); notatka w dokumentacji repo map |
+| dnd5e nie migruje paczek modułu | budowniczy pisze dane 6.0 wprost; `validate-packs` sprawdza kształt (E8) |
+| Moduły innych autorów nieprzetestowane z dnd5e 6 | świat „zalecany” bramki (Quench, Sequencer, Splatter); w razie niezgodności — notatka w wydaniu i wyłączenie w świecie zalecanym |
+| Zegar B2 wraca do zera | wliczone w `PLAN_beta.md` §0 (dwie sesje przed betą) |
+| Rozrost zakresu przez „skoro już tu jesteśmy” | D4: przejęcia funkcji tylko z linią wzroku; reszta na liście PM z rozmiarem i warunkiem wejścia |
+| Wydajność kart i czatu po kompakcie | zrzuty i stopery w przekazaniach E6; uwagi MG w E10 |
+
+---
+
+## 9. Po migracji — lista PM
+
+Prowadzona przez cały czas migracji: każde znalezisko spoza zakresu etapu dopisuje się tutaj z datą, etapem, w którym
+wyszło, i warunkiem wejścia. Kolejność — według stosunku zysku do kosztu po migracji.
+
+| # | Co | Dlaczego | Warunek wejścia | Rozmiar |
+|---|---|---|---|---|
+| PM1 | TT jako obliczenia KP dnd5e 6 (`ac.calcs`: 10 + ZRC, pancerz, Goła klata, Tarcza wiary; premie stałe jako premie KP) | koniec owinięcia `prepareDerivedData`; arkusz 5e pokazuje prawdziwe KP i okno konfiguracji | E3 zielone; dymek z rozkładem TT odtworzony z danych dnd5e | M |
+| PM2 | Bieganie, okoliczności, warunkowe premie ulepszeń jako zmiany „rule” i czasy turowe; szybkość przez `movement.multiplier` | mniej hooków rzutów i ręcznego zdejmowania efektów | E4 zielone; testy wzorcowe na obecnym zachowaniu | M–L |
+| PM3 | Zranienie i Skażenie jako wielopoziomowe stany dnd5e | mniej własnych pipek i HUD-ów | E7 zielone; decyzja MG o wyglądzie | M |
+| PM4 | Grupy inicjatywy towarzyszy przez mechanizm dnd5e | mniej własnego porządku walki | wynik E9 | S–M |
+| PM5 | Noktowizor i termowizor przez zmysły aktora i `senseVisionSync` | mniej ręcznego ustawiania wzroku żetonu | wynik E9; `PLAN_nvg_thermal.md` | M |
+| PM6 | Dym, gaz, kolczatka, ogień jako obszary działania z zachowaniami regionów (efekt w strefie, trudny teren) | mniej kafelków i własnych stref; spójne z mapami (Tiled) | E5–E6 zielone | M |
+| PM7 | Identyfikatory istot Bestiariusza w `identifier` aktora | mniej flag, wyszukiwanie przez system | E8 | S |
+| PM8 | Prośby o RO przez handler `save` dnd5e + hook skutków | mniej własnych handlerów | E6 | S |
+| PM9 | Podział stosu w wymianie przez menu dnd5e | mniej kodu M5 | E7 | S |
+| PM10 | Wydajność Pościgu (doradcze progi z bramki v0.19.0) | odłożone z v0.19.0 | po E10 | S–M |
+| PM11 | `fvtt` i skrypty z §3.9: jedno źródło ścieżki instalacji (`cfg.installDir`, `FOUNDRY_APP` w `runNode`), potem instalacja per profil (wersja przenośna obok) | dziś 8 zaszytych ścieżek; przyszłe aktualizacje bez zatrzymywania kampanii | po E12 | S–M |
+| PM12 | Tacki obrażeń i efektów dla graczy (`allowPlayerDamageTray`, `allowPlayerEffectsTray`) | gracz nakłada na własny żeton; mniej klikania MG | po becie, decyzja stołu (D7); testy klienta gracza, ochrona przed podwójnym nałożeniem | S–M |
+
+---
+
+## 10. Po wdrożeniu — do zaktualizowania
+
+- `PLAN_beta.md` §0 (krok 2 odhaczony, link do tego planu), B2 (data resetu), B6 (czysta instalacja na dnd5e 6).
+- `DEV_GUIDE.md`, `ARCHITECTURE.md` §11 (pułapki v14 i dnd5e 6), `AGENTS.md` (wersje, zamrożenie, `fvtt backup`),
+  `TESTING.md`, `RELEASING.md` („Version policy”: dnd5e 6.0.6, Foundry 14.367+).
+- `IMPLEMENTATION.md`: macierz (wiersze, które zmieniły realizację), tabela plików, changelog v0.20.0.
+- `docs/`: co gracz zobaczy inaczej (karty czatu, tacki), ustawienia pilnowane przez NOE.
+- `scripts/wkk/README.md`: jeśli któreś przejęcie funkcji zmienia odczyt RAW.
+- Vault: `Integracje/backups/` (nowe kopie), skille FVTT (`index-sources`).
+
+## 11. Postęp
+
+**2026-10-17 — projekt.** Inwentarz statyczny (§2–§4), decyzje MG D1–D6. Środowisko: worktree dnd5e 6.0.6 obok 5.3.0;
+narzędzia sprawdzone pod kątem ścieżek i wersji (§3.9). Następny krok: E0; MG — instalacja 14.369 na początku E1.
+
+**2026-10-17 — przegląd luk, decyzje D7–D11.** MG zainstalował 14.369 w ten sam folder (`fvtt doctor`: bez problemów
+poza wyłączonym Chrome; profile nieaktywne). Dopisane: podklasy aktywności i arkuszy (§3.10), API `dnd5e.*` —
+wszystko istnieje (§3.11), przemianowane ścieżki danych i podkładki efektów (§3.12), tłumaczenie (§3.13), ustawienia
+już pilnowane (§3.14), źródło dnd5e piaskownic, blokada w ekranie ustawień, mapy (§3.15), ostrzeżenia zgodności jako
+bramka. E0 bez `installDir` (PM11). Następny krok: E0 i E1 (niezależne).
