@@ -1,5 +1,11 @@
 # Batch 110 — seven saved origin revisions
 
+Review outcome, 2026-10-17: five exact selected candidates are approved
+and installed. Nowy Jork and Południowa Hegemonia continue in Batch 111;
+the latter keeps the approved helmet and replaces the spatula-like blade.
+Exact decisions and delivered hashes are in `reviewed.json` and
+`reviewed-installed.json`. Publication evidence below is historical.
+
 | Cell | Pochodzenie | Requested change |
 |---|---|---|
 | 1 | Człowiek Pustyni | Replace canteen with dunes and a dead tree |

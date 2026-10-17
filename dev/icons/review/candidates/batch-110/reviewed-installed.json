@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-17",
+  "batch": 110,
+  "pass": "origin-revisions",
+  "approvedSubjects": 5,
+  "remainingSubjects": 2,
+  "installed": [
+    {
+      "itemId": "origin-czlowiek-pustyni",
+      "candidateId": "batch110-revision",
+      "source": "candidates/batch-110/czlowiek-pustyni.png",
+      "sourceSha256": "ac5ac1bc334cd9338014d933f14110197aa3fa9a736b9bd0ca8ca950053e8f38",
+      "files": [
+        "icons/pochodzenia/czlowiek-pustyni.svg",
+        "icons/pochodzenia/czlowiek-pustyni.webp"
+      ],
+      "svgSha256": "cdbefbe0a4e767157f20d1ac303d1bc58dc817ad0d48a3a8403b6a5cdd759099",
+      "webpSha256": "484091ac1471f72becdc1a198c3ecef0c6145c1bd5876d7d03dbb8c03099fcdc",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "origin-detroit",
+      "candidateId": "batch110-revision",
+      "source": "candidates/batch-110/detroit.png",
+      "sourceSha256": "a6a0689bdf684e09c6dc72b2d978f813d5641716b4e5ca9d96ca05f4b101436d",
+      "files": [
+        "icons/pochodzenia/detroit.svg",
+        "icons/pochodzenia/detroit.webp"
+      ],
+      "svgSha256": "80a51e85ac69971c4ab369d6727aaf78ee898630a4cba4eb4aae5e1b2e2ba3a7",
+      "webpSha256": "80f61d0d793aa926f24fddd2fdc776c5dbc50eed8f12070f4e844e65f1a63866",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "origin-appalachy",
+      "candidateId": "batch110-revision",
+      "source": "candidates/batch-110/appalachy.png",
+      "sourceSha256": "66b35439ec2c8f3d1a068a074c6088611a39fbf1434a372dcb08edebee675a60",
+      "files": [
+        "icons/pochodzenia/appalachy.svg",
+        "icons/pochodzenia/appalachy.webp"
+      ],
+      "svgSha256": "aee04bad2bff9621ce7f2491c92436c64ad3b89d6f9c07b6b644247515eb6f5d",
+      "webpSha256": "19f24feae2d9f98b247a3bd656381f2ddf7351ae9692c27a28014568b8ae1de8",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "origin-posterunek",
+      "candidateId": "batch110-revision",
+      "source": "candidates/batch-110/posterunek.png",
+      "sourceSha256": "cdb7ab0c68b3cbb65776f26bd49e4f5b5aa5a06cf1df41bb3268fd4dbd7576a4",
+      "files": [
+        "icons/pochodzenia/posterunek.svg",
+        "icons/pochodzenia/posterunek.webp"
+      ],
+      "svgSha256": "f3ce690921329042a7f664a4c3308fc57eee1700675c3ea92470dbc2baf7d065",
+      "webpSha256": "e671dce537f95f8d6432882abf93046a2f1411425c2f6dbc51142ad2870f25fd",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "origin-vegas",
+      "candidateId": "batch110-revision",
+      "source": "candidates/batch-110/vegas.png",
+      "sourceSha256": "1cebfb08335fdaf6687dc083cf15159d4f72dac949ff20b81368ccd213e624f2",
+      "files": [
+        "icons/pochodzenia/vegas.svg",
+        "icons/pochodzenia/vegas.webp"
+      ],
+      "svgSha256": "9b265e3b999b36c294d2e0a612933c828dbafaf8c39b62cc45c2acde745b78ca",
+      "webpSha256": "62f947902ac23ce0596cae27f6009748bb0a45438224258cf1d9803e4e5c4a5d",
+      "retiredLegacyPng": null
+    }
+  ],
+  "keptCurrent": []
+}

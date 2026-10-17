@@ -42,9 +42,9 @@ the original 153-subject placeholder pass is complete).
 
 **Source audit refresh, 2026-10-17:** all 36 origin ability icons exist, but
 the 12 main Pochodzenie background emblems were omitted from earlier queues.
-Five main emblems from Batches 108–109 are now approved and installed:
-Asgard, Miami, Missisipi, Salt Lake City and Teksas. Seven revisions continue
-in Batch 110 at `icons/pochodzenia/<canonical-id>.svg` (+ WEBP).
+Ten main emblems from Batches 108–110 are now approved and installed.
+Only Nowy Jork and Południowa Hegemonia continue in Batch 111 at
+`icons/pochodzenia/<canonical-id>.svg` (+ WEBP).
 See `ORIGIN_COVERAGE.md` and `origin-icons-2026-10-17.json`.
 The 333 physical catalog items have **zero art gaps**; four remaining
 fallbacks need GM wiring to existing art (three fuel grades and medic
@@ -1427,22 +1427,20 @@ Exact saved decisions and approved masks: `reviewed.json` and
 <!-- style-batch-109:end -->
 
 <!-- style-batch-110:start -->
-## Queue (A) — Batch 110 — 7 saved icon revisions
+## Reviewed (A) — Batch 110 — 5 delivered
 
-Exact selected sources and verbatim notes are archived with the prompts.
-Older choices remain selectable; production requires fresh saved approval.
+Exact saved decisions and approved masks: `reviewed.json` and
+`reviewed-installed.json` under `review/candidates/batch-110/`.
 
-| Cell | Subject | Requested correction | Native SVG (+ WEBP) |
-|---|---|---|---|
-| 1 | Człowiek Pustyni | Replace the canteen with dunes and a dead tree in the background | `icons/pochodzenia/czlowiek-pustyni.svg` |
-| 2 | Detroit | This includes the motor part, but not the city part.  | `icons/pochodzenia/detroit.svg` |
-| 3 | Federacja Appalachów | Not bad, it includes the primary themes, but not the aristocratic flair. Include that somehow. | `icons/pochodzenia/appalachy.svg` |
-| 4 | Nowy Jork | Ditch the book and reference one of the many tropes or locations of New York City. | `icons/pochodzenia/nowy-jork.svg` |
-| 5 | Południowa Hegemonia | Try a different concept. Not bad, but need to accentuate that they're glorified raiders. | `icons/pochodzenia/hegemonia.svg` |
-| 6 | Posterunek | [local reference] - clean it up and use that instead | `icons/pochodzenia/posterunek.svg` |
-| 7 | Vegas | A little bit too bland - need more than just cards | `icons/pochodzenia/vegas.svg` |
-
-Evidence and exact prompts: `review/candidates/batch-110/`.
+| Subject | Native SVG (+ WEBP) | Result |
+|---|---|---|
+| Człowiek Pustyni | `icons/pochodzenia/czlowiek-pustyni.svg` | **done** |
+| Detroit | `icons/pochodzenia/detroit.svg` | **done** |
+| Federacja Appalachów | `icons/pochodzenia/appalachy.svg` | **done** |
+| Nowy Jork | `icons/pochodzenia/nowy-jork.svg` | Revision queued |
+| Południowa Hegemonia | `icons/pochodzenia/hegemonia.svg` | Revision queued |
+| Posterunek | `icons/pochodzenia/posterunek.svg` | **done** |
+| Vegas | `icons/pochodzenia/vegas.svg` | **done** |
 
 <!-- style-batch-110:end -->
 
@@ -1730,8 +1728,8 @@ Po autodestrukcji maszyny żeton podmienia grafikę na wrak w rozmiarze żetonu.
 ## Do podpięcia — przez MG
 
 - **Pochodzenia — audyt 2026-10-17:** 12 emblematów głównych regionów jest
-  objętych kolejką. Pięć jest dostarczonych (Asgard, Miami, Missisipi,
-  Salt Lake City, Teksas); siedem wymaga rewizji w Batch 110.
+  objętych kolejką. Dziesięć jest dostarczonych; Nowy Jork i Południowa
+  Hegemonia wymagają rewizji w Batch 111.
   36 ikon zdolności już istnieje. MG przebudowuje `pochodzenia`; obecny builder
   sam wybierze dokładne ścieżki `icons/pochodzenia/<id>.svg`. Bez zmian kodu.
   Starsze dokumenty świata aktualizuje osobno MG.

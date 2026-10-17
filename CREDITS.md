@@ -256,6 +256,14 @@ Salt Lake City and Teksas. Selected-source and delivery hashes are in
 those batches' `reviewed-installed.json` files. The seven revised origin
 candidates remain dev-only until approval.
 
+Four further original AI-generated origin emblems from Batch 110 were
+approved and installed on 2026-10-17: Człowiek Pustyni, Detroit, Federacja
+Appalachów and Vegas. Posterunek uses the GM-supplied insignia, cleaned
+with OpenAI's built-in image tool; the reference's original creator/source
+was not specified. Exact selected masks and hashes for all five deliveries
+are recorded in `dev/icons/review/candidates/batch-110/reviewed-installed.json`.
+The unchanged supplied reference stays in dev-only raw files.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

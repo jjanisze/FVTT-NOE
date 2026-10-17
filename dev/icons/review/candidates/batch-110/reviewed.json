@@ -1,0 +1,185 @@
+{
+  "date": "2026-10-17",
+  "batch": 110,
+  "pass": "origin-revisions",
+  "feedbackBeforeSha256": "94bc8fe54b7c72be15c6bb9e658fdd81fd487cb8d77e9c1fb15056186bbda82c",
+  "styleFeedbackBeforeSha256": "f779b69589ec11c0d415a4d141ba7428763f7ded8a4f66f80ddbaab1499b964a",
+  "localReferenceLocationsRedacted": true,
+  "active": [
+    {
+      "id": "origin-czlowiek-pustyni",
+      "name": "Człowiek Pustyni",
+      "decision": "approve",
+      "candidateId": "batch110-revision",
+      "selectedSource": "candidates/batch-110/czlowiek-pustyni.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "ac5ac1bc334cd9338014d933f14110197aa3fa9a736b9bd0ca8ca950053e8f38",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/czlowiek-pustyni.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "origin-czlowiek-pustyni",
+        "decision": "approve",
+        "candidateId": "batch110-revision",
+        "notes": "",
+        "updatedAt": "2026-10-17T00:37:01.065Z"
+      },
+      "feedbackSha256": "eb1c060760e36942f393113fa818d3718a00ea2428e20f0904058428c6498f3b"
+    },
+    {
+      "id": "origin-detroit",
+      "name": "Detroit",
+      "decision": "approve",
+      "candidateId": "batch110-revision",
+      "selectedSource": "candidates/batch-110/detroit.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "a6a0689bdf684e09c6dc72b2d978f813d5641716b4e5ca9d96ca05f4b101436d",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/detroit.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "origin-detroit",
+        "decision": "approve",
+        "candidateId": "batch110-revision",
+        "notes": "",
+        "updatedAt": "2026-10-17T00:37:07.184Z"
+      },
+      "feedbackSha256": "4afcffeb788de6fa43a9c11a50723fd0cb01198d1c786f7916781106b99c4ee9"
+    },
+    {
+      "id": "origin-appalachy",
+      "name": "Federacja Appalachów",
+      "decision": "approve",
+      "candidateId": "batch110-revision",
+      "selectedSource": "candidates/batch-110/appalachy.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "66b35439ec2c8f3d1a068a074c6088611a39fbf1434a372dcb08edebee675a60",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/appalachy.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "origin-appalachy",
+        "decision": "approve",
+        "candidateId": "batch110-revision",
+        "notes": "",
+        "updatedAt": "2026-10-17T00:37:11.158Z"
+      },
+      "feedbackSha256": "f2c33eaebff59cc7e44cb4ecfc518645a1988040a4190131c9e65edd4e5e96b9"
+    },
+    {
+      "id": "origin-nowy-jork",
+      "name": "Nowy Jork",
+      "decision": "revise",
+      "candidateId": "batch110-revision",
+      "selectedSource": "candidates/batch-110/nowy-jork.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "7da54fdc917d81cc85d5f4689dcdb9c796dfc4c9e53d26f06e1307c9e0d4eb81",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/nowy-jork.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "origin-nowy-jork",
+        "decision": "revise",
+        "candidateId": "batch110-revision",
+        "notes": "",
+        "updatedAt": "2026-10-17T00:37:15.854Z"
+      },
+      "feedbackSha256": "429a72b5dd136dbf683ff6f7606346934c42423b69cf1bcefa08075de329c1c4"
+    },
+    {
+      "id": "origin-hegemonia",
+      "name": "Południowa Hegemonia",
+      "decision": "revise",
+      "candidateId": "batch110-revision",
+      "selectedSource": "candidates/batch-110/hegemonia.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "5c41f85d2b2892e299243b64aa1e63b54cc2810d20119699efe9f64bd606a952",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/hegemonia.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "Not bad, the helmet is good, but the machette looks like a spatula. Maybe a kukri or a chain with a hook on the end?",
+      "feedback": {
+        "itemId": "origin-hegemonia",
+        "decision": "revise",
+        "candidateId": "batch110-revision",
+        "notes": "Not bad, the helmet is good, but the machette looks like a spatula. Maybe a kukri or a chain with a hook on the end?",
+        "updatedAt": "2026-10-17T00:38:16.107Z"
+      },
+      "feedbackSha256": "fba1949e6537d80174d88f3fd33fe36d8bb430b8d934ea57c5472ded7a6f61cd"
+    },
+    {
+      "id": "origin-posterunek",
+      "name": "Posterunek",
+      "decision": "approve",
+      "candidateId": "batch110-revision",
+      "selectedSource": "candidates/batch-110/posterunek.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "cdb7ab0c68b3cbb65776f26bd49e4f5b5aa5a06cf1df41bb3268fd4dbd7576a4",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/posterunek.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "origin-posterunek",
+        "decision": "approve",
+        "candidateId": "batch110-revision",
+        "notes": "",
+        "updatedAt": "2026-10-17T00:38:22.131Z"
+      },
+      "feedbackSha256": "22d59d2a435ed176d95bd221dc8dfacf2b5394bf713ae64042338321a670854b"
+    },
+    {
+      "id": "origin-vegas",
+      "name": "Vegas",
+      "decision": "approve",
+      "candidateId": "batch110-revision",
+      "selectedSource": "candidates/batch-110/vegas.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "1cebfb08335fdaf6687dc083cf15159d4f72dac949ff20b81368ccd213e624f2",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/vegas.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "origin-vegas",
+        "decision": "approve",
+        "candidateId": "batch110-revision",
+        "notes": "",
+        "updatedAt": "2026-10-17T00:38:26.889Z"
+      },
+      "feedbackSha256": "3f9ff121eb1ea29442fb402359c693dfd9f02e4207edfad25f29a3c17eb54dc4"
+    }
+  ]
+}

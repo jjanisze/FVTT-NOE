@@ -3699,24 +3699,24 @@
     },
     "origin-czlowiek-pustyni": {
       "itemId": "origin-czlowiek-pustyni",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch110-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:31:23.979Z"
+      "updatedAt": "2026-10-17T00:37:01.065Z"
     },
     "origin-detroit": {
       "itemId": "origin-detroit",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch110-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:31:23.979Z"
+      "updatedAt": "2026-10-17T00:37:07.184Z"
     },
     "origin-appalachy": {
       "itemId": "origin-appalachy",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch110-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:31:23.980Z"
+      "updatedAt": "2026-10-17T00:37:11.158Z"
     },
     "origin-miami": {
       "itemId": "origin-miami",
@@ -3734,24 +3734,24 @@
     },
     "origin-nowy-jork": {
       "itemId": "origin-nowy-jork",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch110-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:31:23.980Z"
+      "updatedAt": "2026-10-17T00:37:15.854Z"
     },
     "origin-hegemonia": {
       "itemId": "origin-hegemonia",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch110-revision",
-      "notes": "",
-      "updatedAt": "2026-10-17T00:31:23.981Z"
+      "notes": "Not bad, the helmet is good, but the machette looks like a spatula. Maybe a kukri or a chain with a hook on the end?",
+      "updatedAt": "2026-10-17T00:38:16.107Z"
     },
     "origin-posterunek": {
       "itemId": "origin-posterunek",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch110-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:31:23.981Z"
+      "updatedAt": "2026-10-17T00:38:22.131Z"
     },
     "origin-salt-lake-city": {
       "itemId": "origin-salt-lake-city",
@@ -3769,10 +3769,10 @@
     },
     "origin-vegas": {
       "itemId": "origin-vegas",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch110-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:31:23.981Z"
+      "updatedAt": "2026-10-17T00:38:26.889Z"
     }
   }
 }

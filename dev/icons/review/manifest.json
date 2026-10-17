@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batches 110 · 7 icon revisions awaiting GM review",
+  "title": "Asset review · 5 approved icons delivered, 0 kept current; 2 awaiting revision",
   "updated": "2026-10-17",
   "items": [
     {
@@ -15183,7 +15183,8 @@
           "src": "candidates/batch-108/czlowiek-pustyni.png",
           "note": "ONE plain wrapped DESERT HEADSCARF around a smooth featureless adult head in side profile, paired with ONE squat CLOSED WATER CANTEEN. Broad cloth overlap cuts only, no beard, expressive face, eyes, hair strands, dither, dunes, stars or fine seams. Practical desert survival emblem."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "origin-detroit",
@@ -15217,7 +15218,8 @@
           "src": "candidates/batch-108/detroit.png",
           "note": "ONE upright thick AUTOMOBILE TIRE behind ONE large complete ENGINE PISTON with its stout connecting rod angled across the lower half. Two broad tire-tread cuts and one piston groove only. Clear car-mechanic identity; no gear wheel, little bolts, spokes, lettering, racing logos or texture."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "origin-appalachy",
@@ -15251,7 +15253,8 @@
           "src": "candidates/batch-108/appalachy.png",
           "note": "ONE complete sturdy MINING PICK crossed diagonally in front of ONE broad angular MOUNTAIN PEAK. Clearly separate broad white head and intact handle, one wide black mountain ridge cut. A sober miners' emblem, no little rocks, dust, rays, tiny hatching, writing or fantasy ornament."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "origin-miami",
@@ -15411,7 +15414,8 @@
           "src": "candidates/batch-109/posterunek.png",
           "note": "ONE large solid SHIELD containing ONE simple square MICROCHIP with three broad pins on each side and one black central square. Disciplined high-technology defense against machines. No helmet, person, little circuit traces, writing, crosshair, stars, electrical sparks or decorative cogs."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "origin-salt-lake-city",
@@ -15503,7 +15507,8 @@
           "src": "candidates/batch-109/vegas.png",
           "note": "THREE complete PLAYING CARDS fanned compactly, each a thick rounded rectangle with a wide black separation. The front card contains ONE large BLACK SPADE shape, other cards remain blank. Plain physical gambling cards as regional identity, no dice, numerals, letters, suit corner labels, tiny pips, casino logo, sparkle or texture."
         }
-      ]
+      ],
+      "status": "resolved"
     }
   ]
 }

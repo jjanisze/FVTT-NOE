@@ -1,9 +1,9 @@
 # Origin icon coverage — 2026-10-17
 
-Delivery update: **5 of 12 main origin emblems are approved and installed**:
-Asgard, Miami, Missisipi, Salt Lake City and Teksas. The seven other origins
-have saved revision requests and continue in Batch 110. All four cleanup
-icons from Batches 108–109 are also delivered.
+Delivery update: **10 of 12 main origin emblems are approved and installed**.
+The latest five are Człowiek Pustyni, Detroit, Federacja Appalachów,
+Posterunek and Vegas. Nowy Jork and Południowa Hegemonia continue in Batch
+111. All four cleanup icons from Batches 108–109 are also delivered.
 
 The previous completed origin queue covered **36 origin abilities**, all of
 which have existing custom SVGs. It omitted the **12 main Pochodzenie
@@ -24,8 +24,9 @@ wiring is needed. Existing world backgrounds are updated separately by the
 GM. This audit neither reads pack databases nor accesses campaign documents.
 
 Reproduce the delivery audit without overwriting the initial snapshot:
-`node dev/icons/audit-origin-icons.mjs --output=origin-icons-2026-10-17-delivery.json`.
-Current evidence: [origin-icons-2026-10-17-delivery.json](origin-icons-2026-10-17-delivery.json).
+`node dev/icons/audit-origin-icons.mjs --output=origin-icons-2026-10-17-progress-111.json`.
+Current evidence: [origin-icons-2026-10-17-progress-111.json](origin-icons-2026-10-17-progress-111.json).
+Earlier delivery evidence: [origin-icons-2026-10-17-delivery.json](origin-icons-2026-10-17-delivery.json).
 Initial evidence: [origin-icons-2026-10-17.json](origin-icons-2026-10-17.json).
 
 | Batch | Main origin emblems |

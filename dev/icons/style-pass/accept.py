@@ -40,9 +40,9 @@ def consume(numbers, preflight_only=False):
             if flag:
                 assert style["items"][flag["iconId"]] == flag, "Newer browser style feedback"
             else:
-                assert subject["kind"] == "origin" and subject["deliveryTargets"][0]["sourceSha256"] is None
+                assert subject["kind"] in ("origin", "companion") and subject["deliveryTargets"][0]["sourceSha256"] is None
             if saved["candidateId"] == "current":
-                assert flag, "A missing origin emblem cannot be approved as existing production art"
+                assert flag, "A missing glyph cannot be approved as existing production art"
                 selected_path = card["current"]["src"]
                 source = (ROOT / selected_path.lstrip("/")).resolve()
                 assert source == (ROOT / subject["target"]).resolve()
