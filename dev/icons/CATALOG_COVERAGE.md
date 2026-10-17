@@ -1,5 +1,11 @@
 # Canonical item icon coverage — refreshed 2026-10-17
 
+Expanded audit: [BROAD_COVERAGE.md](BROAD_COVERAGE.md) also checks classes,
+professions, Sztuczki, bestiary entries, companions, Fant groups and status
+images. It found five companion glyph subjects outside this physical-item
+scope; they are now in Batch 111. Fresh item evidence remains zero art
+gaps and four wiring gaps in `catalog-icons-2026-10-17-final-audit.json`.
+
 Fresh source audit: **333 physical-item results, zero missing artwork**.
 329 entries already resolve to custom module art. Four retain core fallback
 images even though their approved assets exist: the three fuel grades and

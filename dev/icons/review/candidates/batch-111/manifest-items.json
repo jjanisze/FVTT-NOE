@@ -1,0 +1,243 @@
+{
+  "title": "Batches 111 · 7 icon revisions awaiting GM review",
+  "updated": "2026-10-17",
+  "items": [
+    {
+      "id": "origin-nowy-jork",
+      "name": "Nowy Jork",
+      "batch": 111,
+      "tier": "Batch 111 · Origin revision",
+      "target": "icons/pochodzenia/nowy-jork.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/nowy-jork.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Pochodzenie background: Nowy Jork. Optymistyczni, wyedukowani i nastawieni na handel. Mają lepszy dostęp do wiedzy niż większość świata. Character origin, background sheet and compendium; 16–64 px.",
+      "request": "NEW NEW YORK CITY concept instead of the rejected separate torch and crown. ONE compact BROOKLYN-BRIDGE-LIKE SUSPENSION BRIDGE in front view: TWO broad stone towers, each with ONE large pointed Gothic arch opening, joined by ONE thick shallow curved suspension cable and ONE continuous broad roadway. Behind the roadway, ONE simple STEPPED SKYSCRAPER with a stout centered SPIRE rises between the towers, recalling Manhattan. Only TWO broad diagonal suspension struts on each side, no thin cable mesh, tiny windows, book, torch, crown, lettering, logos, skyline clutter or texture. A sober compact city-and-bridge silhouette that reads at 16 px.",
+      "current": {
+        "src": "candidates/batch-109/raw/core-origin-placeholder.svg",
+        "note": "Shared Foundry core village placeholder; dedicated origin art is missing."
+      },
+      "candidates": [
+        {
+          "id": "batch111-revision",
+          "label": "Batch 111 · revised Nowy Jork",
+          "src": "candidates/batch-111/nowy-jork.png",
+          "note": "NEW NEW YORK CITY concept instead of the rejected separate torch and crown. ONE compact BROOKLYN-BRIDGE-LIKE SUSPENSION BRIDGE in front view: TWO broad stone towers, each with ONE large pointed Gothic arch opening, joined by ONE thick shallow curved suspension cable and ONE continuous broad roadway. Behind the roadway, ONE simple STEPPED SKYSCRAPER with a stout centered SPIRE rises between the towers, recalling Manhattan. Only TWO broad diagonal suspension struts on each side, no thin cable mesh, tiny windows, book, torch, crown, lettering, logos, skyline clutter or texture. A sober compact city-and-bridge silhouette that reads at 16 px."
+        },
+        {
+          "id": "batch110-revision",
+          "label": "Batch 110 · revised Nowy Jork",
+          "src": "candidates/batch-110/nowy-jork.png",
+          "note": "Completely REMOVE the BOOK and generic skyline. Show recognizable NEW YORK CITY iconography: ONE complete upright LIBERTY TORCH with a broad flame and simple stout handle at LEFT, next to ONE broad SEVEN-SPIKED LIBERTY CROWN at lower-RIGHT. Crown band has only THREE broad rectangular black openings; seven stout clean triangular rays are widely spaced. Clear black separation between torch and crown. No person, face, full statue, book, letters, tourism logo, tiny windows, shading, texture or intricate flame tongues."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 109 · Nowy Jork",
+          "src": "candidates/batch-109/nowy-jork.png",
+          "note": "ONE large OPEN BOOK with only TWO wide black page-fold cuts, above ONE simple THREE-TOWER CITY SKYLINE. Broad solid city blocks without tiny windows, clean black gap between book and skyline. Education, civilization and trade; no torch statue, letters, dollar sign, logos, rays or fine architectural detail."
+        }
+      ]
+    },
+    {
+      "id": "origin-hegemonia",
+      "name": "Południowa Hegemonia",
+      "batch": 111,
+      "tier": "Batch 111 · Origin revision",
+      "target": "icons/pochodzenia/hegemonia.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/hegemonia.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Pochodzenie background: Południowa Hegemonia. Twardzi jak skała, lojalni jak psy. Potomkowie kryminalistów, którzy znaleźli sens w walce za Bano. Character origin, background sheet and compendium; 16–64 px.",
+      "request": "TARGETED EDIT of reference cell 2. KEEP the SAME good broad SPIKED RAIDER HELMET, its T-shaped dark face opening, three short spikes and all broad contours. REPLACE ONLY the bad spatula-shaped weapon behind it with ONE complete recognizable KUKRI KNIFE angled upward-right. The kukri has a LONG forward-CURVING BLADE with an asymmetric heavy convex belly and a tapered pointed tip; the blade is at least THREE TIMES as long as its widest part. One thick curved cutting edge, a narrow intact neck and one stout short grip. No rectangular cleaver head, spatula shape, paddle, blade hole, extra knife, serrations, chain, blood, tiny scratches or fine grip texture.",
+      "current": {
+        "src": "candidates/batch-109/raw/core-origin-placeholder.svg",
+        "note": "Shared Foundry core village placeholder; dedicated origin art is missing."
+      },
+      "candidates": [
+        {
+          "id": "batch111-revision",
+          "label": "Batch 111 · revised Południowa Hegemonia",
+          "src": "candidates/batch-111/hegemonia.png",
+          "note": "TARGETED EDIT of reference cell 2. KEEP the SAME good broad SPIKED RAIDER HELMET, its T-shaped dark face opening, three short spikes and all broad contours. REPLACE ONLY the bad spatula-shaped weapon behind it with ONE complete recognizable KUKRI KNIFE angled upward-right. The kukri has a LONG forward-CURVING BLADE with an asymmetric heavy convex belly and a tapered pointed tip; the blade is at least THREE TIMES as long as its widest part. One thick curved cutting edge, a narrow intact neck and one stout short grip. No rectangular cleaver head, spatula shape, paddle, blade hole, extra knife, serrations, chain, blood, tiny scratches or fine grip texture."
+        },
+        {
+          "id": "batch110-revision",
+          "label": "Batch 110 · revised Południowa Hegemonia",
+          "src": "candidates/batch-110/hegemonia.png",
+          "note": "NEW CONCEPT emphasizing brutal post-apocalyptic RAIDERS. ONE crude broad STEEL HELMET with THREE short stout spikes on its crown, paired with ONE heavy NOTCHED MACHETE angled upward behind it. Helmet has a broad dark face opening and two broad plate cuts only; blade has one broad notch, intact stout handle. Rough improvised raider equipment conveyed by silhouette, no little scratches or rivets. No face, gruff bearded survivor, skull, blood, gore, chain emblem, fine buckles, text, decorative rays or anime."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 109 · Południowa Hegemonia",
+          "src": "candidates/batch-109/hegemonia.png",
+          "note": "ONE natural bare CLENCHED FIST raised above ONE short BROKEN HEAVY CHAIN with exactly TWO broad oval links separated at center. Two wide finger cuts, one complete wrist. Harsh strength and loyalty born from prison ancestry, no face, portrait, gang initials, tattoo, weapon, gore, fine texture or tiny chain links."
+        }
+      ]
+    },
+    {
+      "id": "coverage111-kopacz",
+      "name": "Kopacz",
+      "target": "icons/abilities/kopacz.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/kopacz.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Companion feature: Kopacz. Burrowing prevents opportunity attacks. Companion sheet, action card and hotbar; typically 16–64 px.",
+      "companionMappings": [
+        "zmutowany-owad.kopacz"
+      ],
+      "current": {
+        "src": "candidates/batch-111/raw/core-upgrade-placeholder.svg",
+        "note": "Core upgrade placeholder; dedicated companion glyph is missing."
+      },
+      "candidates": [
+        {
+          "id": "batch111-revision",
+          "label": "Batch 111 · revised Kopacz",
+          "src": "candidates/batch-111/kopacz.png",
+          "note": "ONE stout natural BEETLE-LIKE INSECT digging diagonally DOWN into ONE broad EARTH MOUND with a large dark semicircular BURROW OPENING. One oval body, one smaller connected head, three pairs of thick complete legs; the FRONT pair are broad SHOVEL-LIKE CLAWS entering the mound. Just two broad soil contour cuts, no scattered soil specks, tiny hairs, veins, extra legs, lettering or humanoid face. Clear burrowing-insect action rather than a mining tool."
+        }
+      ],
+      "batch": 111,
+      "tier": "Batch 111 · Companion glyph",
+      "request": "ONE stout natural BEETLE-LIKE INSECT digging diagonally DOWN into ONE broad EARTH MOUND with a large dark semicircular BURROW OPENING. One oval body, one smaller connected head, three pairs of thick complete legs; the FRONT pair are broad SHOVEL-LIKE CLAWS entering the mound. Just two broad soil contour cuts, no scattered soil specks, tiny hairs, veins, extra legs, lettering or humanoid face. Clear burrowing-insect action rather than a mining tool."
+    },
+    {
+      "id": "coverage111-ziemnowodny",
+      "name": "Ziemnowodny",
+      "target": "icons/abilities/ziemnowodny.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ziemnowodny.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Companion feature: Ziemnowodny. A reptilian companion breathes both on land and underwater. Companion sheet, action card and hotbar; typically 16–64 px.",
+      "companionMappings": [
+        "zmutowany-gad.ziemnowodny"
+      ],
+      "current": {
+        "src": "candidates/batch-111/raw/core-upgrade-placeholder.svg",
+        "note": "Core upgrade placeholder; dedicated companion glyph is missing."
+      },
+      "candidates": [
+        {
+          "id": "batch111-revision",
+          "label": "Batch 111 · revised Ziemnowodny",
+          "src": "candidates/batch-111/ziemnowodny.png",
+          "note": "ONE natural CROCODILE HEAD in clean side profile facing RIGHT, partly submerged across ONE broad horizontal WATER WAVE. One smooth closed jaw, one small broad eye cut and two LARGE round AIR BUBBLES below the wave beside the snout. Head and neck remain one coherent complete silhouette, no whole body needed. Breathing both above and below water; no scuba gear, person, angry expression, jagged teeth, scales, fine bubbles, thin ripples, cartoon face or texture."
+        }
+      ],
+      "batch": 111,
+      "tier": "Batch 111 · Companion glyph",
+      "request": "ONE natural CROCODILE HEAD in clean side profile facing RIGHT, partly submerged across ONE broad horizontal WATER WAVE. One smooth closed jaw, one small broad eye cut and two LARGE round AIR BUBBLES below the wave beside the snout. Head and neck remain one coherent complete silhouette, no whole body needed. Breathing both above and below water; no scuba gear, person, angry expression, jagged teeth, scales, fine bubbles, thin ripples, cartoon face or texture."
+    },
+    {
+      "id": "coverage111-psi-bohater",
+      "name": "Psi bohater",
+      "target": "icons/abilities/psi-bohater.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/psi-bohater.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Companion feature: Psi bohater. A dog uses injury levels and death saves like a player character. Companion sheet, action card and hotbar; typically 16–64 px.",
+      "companionMappings": [
+        "psi-partner.psi-bohater"
+      ],
+      "current": {
+        "src": "candidates/batch-111/raw/core-upgrade-placeholder.svg",
+        "note": "Core upgrade placeholder; dedicated companion glyph is missing."
+      },
+      "candidates": [
+        {
+          "id": "batch111-revision",
+          "label": "Batch 111 · revised Psi bohater",
+          "src": "candidates/batch-111/psi-bohater.png",
+          "note": "ONE ordinary natural DOG HEAD and short neck in calm SIDE PROFILE facing RIGHT, paired with ONE stout small SHIELD bearing a large BLACK MEDICAL PLUS cutout. Dog has one upright ear and one slightly folded ear, one broad eye cut only, smooth coat and complete muzzle. A loyal dog surviving injury like its human allies. No cape, medal, superhero costume, human face, wolf snarl, teeth, fur strands, anime eyes, heart rays, lettering or texture."
+        }
+      ],
+      "batch": 111,
+      "tier": "Batch 111 · Companion glyph",
+      "request": "ONE ordinary natural DOG HEAD and short neck in calm SIDE PROFILE facing RIGHT, paired with ONE stout small SHIELD bearing a large BLACK MEDICAL PLUS cutout. Dog has one upright ear and one slightly folded ear, one broad eye cut only, smooth coat and complete muzzle. A loyal dog surviving injury like its human allies. No cape, medal, superhero costume, human face, wolf snarl, teeth, fur strands, anime eyes, heart rays, lettering or texture."
+    },
+    {
+      "id": "coverage111-modyfikacje-drona",
+      "name": "Modyfikacje drona",
+      "target": "icons/abilities/modyfikacje-drona.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/modyfikacje-drona.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Companion feature: Modyfikacje drona. A drone can mount weapons, cameras, lighting and other equipment. Companion sheet, action card and hotbar; typically 16–64 px.",
+      "companionMappings": [
+        "dron-kroczacy.modyfikacje",
+        "dron-latajacy.modyfikacje"
+      ],
+      "current": {
+        "src": "candidates/batch-111/raw/core-upgrade-placeholder.svg",
+        "note": "Core upgrade placeholder; dedicated companion glyph is missing."
+      },
+      "candidates": [
+        {
+          "id": "batch111-revision",
+          "label": "Batch 111 · revised Modyfikacje drona",
+          "src": "candidates/batch-111/modyfikacje-drona.png",
+          "note": "ONE simple compact DRONE CHASSIS: a broad rectangular body on TWO stout articulated support legs, with ONE large detachable rectangular CAMERA MODULE raised just above its open TOP MOUNT. ONE complete broad OPEN-END WRENCH lies diagonally beside the mount. Module has one large black circular lens opening and one broad plug tab, no tiny connector pins. A coherent physical equipment-installation icon with generous black gaps. No giant cog, scattered components, fine wires, panel screws, numbers, arrows, lettering or texture."
+        }
+      ],
+      "batch": 111,
+      "tier": "Batch 111 · Companion glyph",
+      "request": "ONE simple compact DRONE CHASSIS: a broad rectangular body on TWO stout articulated support legs, with ONE large detachable rectangular CAMERA MODULE raised just above its open TOP MOUNT. ONE complete broad OPEN-END WRENCH lies diagonally beside the mount. Module has one large black circular lens opening and one broad plug tab, no tiny connector pins. A coherent physical equipment-installation icon with generous black gaps. No giant cog, scattered components, fine wires, panel screws, numbers, arrows, lettering or texture."
+    },
+    {
+      "id": "coverage111-atak-drona",
+      "name": "Atak drona",
+      "target": "icons/abilities/atak-drona.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/atak-drona.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Companion feature: Atak drona. A drone attacks with its installed weapon. Companion sheet, action card and hotbar; typically 16–64 px.",
+      "companionMappings": [
+        "dron-kroczacy.atak",
+        "dron-latajacy.atak"
+      ],
+      "current": {
+        "src": "candidates/batch-111/raw/core-upgrade-placeholder.svg",
+        "note": "Core upgrade placeholder; dedicated companion glyph is missing."
+      },
+      "candidates": [
+        {
+          "id": "batch111-revision",
+          "label": "Batch 111 · revised Atak drona",
+          "src": "candidates/batch-111/atak-drona.png",
+          "note": "ONE compact unmanned GUN TURRET in SIDE PROFILE aimed RIGHT: a broad squat body with ONE large square OPTICAL LENS cutout, ONE complete short stout gun barrel, and ONE small broad mounting pedestal. Ahead of the muzzle sits ONE large simple AIM RETICLE made from an open ring and four broad ticks, clearly separated from the barrel. Generic mounted-weapon attack shared by flying and walking drones; no vehicle wheels, legs, propellers, human operator, tiny bullets, muzzle-fire spray, panel texture, text or logo."
+        }
+      ],
+      "batch": 111,
+      "tier": "Batch 111 · Companion glyph",
+      "request": "ONE compact unmanned GUN TURRET in SIDE PROFILE aimed RIGHT: a broad squat body with ONE large square OPTICAL LENS cutout, ONE complete short stout gun barrel, and ONE small broad mounting pedestal. Ahead of the muzzle sits ONE large simple AIM RETICLE made from an open ring and four broad ticks, clearly separated from the barrel. Generic mounted-weapon attack shared by flying and walking drones; no vehicle wheels, legs, propellers, human operator, tiny bullets, muzzle-fire spray, panel texture, text or logo."
+    }
+  ]
+}

@@ -1,6 +1,15 @@
 # Icon style and origin revisions
 
-Current queue: **Batch 110 contains seven saved origin revisions**. The
+Current queue: **Batch 111 contains two origin revisions and five new
+companion glyphs**. The expanded audit found no other artwork gaps in
+the inspected canonical categories; existing-art wiring remains for
+Sztuczki, bestiary/companion entries and four physical item fallbacks.
+See `../BROAD_COVERAGE.md` and `progress-111.json`.
+Five approved Batch 110 origins are installed, bringing the main origins
+to 10/12 delivered. `prepare_111.py` freezes exact correction history and
+absent targets; the shared registrar also supports new companion cards.
+
+Earlier queue: **Batch 110 contains seven saved origin revisions**. The
 latest review delivered nine exact icons: all four cleanup subjects and
 five main origins (Asgard, Miami, Missisipi, Salt Lake City and Teksas).
 All 36 origin ability icons exist. Seven main origin emblems still await

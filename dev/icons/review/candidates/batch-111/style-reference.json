@@ -1,0 +1,52 @@
+{
+  "sources": [
+    {
+      "source": "icons/abilities/amen.webp",
+      "sha256": "8608e8e9b504db587616a2bcdfe844dd8efb02644e186d78ffc1566f852a11fc"
+    },
+    {
+      "source": "icons/abilities/hakerstwo.webp",
+      "sha256": "7f7cc2647762b2521bd22f0c0fecd23378688928841a4f3842fcdad0b84935fc"
+    },
+    {
+      "source": "icons/abilities/krwawy-aniol.webp",
+      "sha256": "63a9259db68a4f0c16bbf42a2e315ce98a82c43701874391ddccf399325d28f8"
+    },
+    {
+      "source": "icons/abilities/jeden-strzal.webp",
+      "sha256": "630483b1cfd0de31820e70b6e48466f05ab060509c2fe979b56125f1174c2272"
+    },
+    {
+      "source": "icons/abilities/ulubiona-bron-twardziel.webp",
+      "sha256": "d5ee0b6859d1ed1d5453d3fdef5a028407546fc9faae7807fea132c9598ad98c"
+    },
+    {
+      "source": "icons/abilities/emiter-emp.webp",
+      "sha256": "e052c015b34c427698455fc79fac5cff36d25211fff085141a02440c157a1fdc"
+    },
+    {
+      "source": "icons/abilities/bez-tajemnic.webp",
+      "sha256": "1c6544d59989a4dd08c9faf2728da3f5d902adabf1886f080627ea5d90013eb7"
+    },
+    {
+      "source": "icons/abilities/kocie-kosci.webp",
+      "sha256": "ee5d25740ab235e515c3e32405a25e41eceba7005bcd83cc2a6ebae4d52e30db"
+    },
+    {
+      "source": "icons/abilities/dziewiec-zyc.webp",
+      "sha256": "0cf20df0e99b7078ccc55a513e67d81a2672d09a49374eca0815731a2aa34317"
+    }
+  ],
+  "selectedSources": [
+    {
+      "key": "nowy-jork",
+      "source": "dev/icons/review/candidates/batch-110/nowy-jork.png",
+      "sha256": "7da54fdc917d81cc85d5f4689dcdb9c796dfc4c9e53d26f06e1307c9e0d4eb81"
+    },
+    {
+      "key": "hegemonia",
+      "source": "dev/icons/review/candidates/batch-110/hegemonia.png",
+      "sha256": "5c41f85d2b2892e299243b64aa1e63b54cc2810d20119699efe9f64bd606a952"
+    }
+  ]
+}

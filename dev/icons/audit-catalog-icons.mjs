@@ -28,6 +28,8 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "../..");
 const auditDate = process.argv.find(arg => arg.startsWith("--date="))?.slice(7) ?? new Date().toISOString().slice(0, 10);
 if (!/^\d{4}-\d{2}-\d{2}$/.test(auditDate)) throw new Error("Expected --date=YYYY-MM-DD");
+const output = process.argv.find(arg => arg.startsWith("--output="))?.slice(9) ?? `catalog-icons-${auditDate}.json`;
+if (path.basename(output) !== output || !output.endsWith(".json")) throw new Error("Expected a JSON report filename under dev/icons");
 const modulePrefix = "modules/neuroshima-2026-overrides/";
 const custom = relative => modulePrefix + relative;
 const source = fs.readFileSync(path.join(root, "scripts/production/wynik.mjs"), "utf8");
@@ -94,5 +96,5 @@ const stats = {date:auditDate, scope:"Canonical item results in KATALOG; no live
   medicineIconHashes:new Set(audit.filter(item=>item.ref.startsWith("chemia:")&&item.category==="leki").map(item=>item.iconSha256)).size,
   artGaps:audit.filter(item=>item.artGap).length, wiringGaps:audit.filter(item=>item.wiringGap).length,
   sharingNote:"Shared image paths across magazine families and unit sizes do not by themselves indicate missing art."};
-fs.writeFileSync(path.join(here,`catalog-icons-${auditDate}.json`),JSON.stringify({stats,items:audit},null,2)+"\n");
+fs.writeFileSync(path.join(here,output),JSON.stringify({stats,items:audit},null,2)+"\n");
 console.log(JSON.stringify({stats, problems:audit.filter(item=>item.status!=="module art")},null,2));

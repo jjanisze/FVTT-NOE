@@ -37,7 +37,7 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 111** (7 icon revisions await GM review;
+**Next batch number: 112** (7 icon revisions await GM review;
 the original 153-subject placeholder pass is complete).
 
 **Source audit refresh, 2026-10-17:** all 36 origin ability icons exist, but
@@ -50,6 +50,15 @@ The 333 physical catalog items have **zero art gaps**; four remaining
 fallbacks need GM wiring to existing art (three fuel grades and medic
 toolkit refill). All 23 medicines, including Reminex, have distinct art.
 Current evidence: `catalog-icons-2026-10-17.json` and `CATALOG_COVERAGE.md`.
+
+**Expanded source audit, 2026-10-17:** five companion subjects were outside
+the previous audits: Kopacz, Ziemnowodny, Psi bohater, Modyfikacje drona
+and Atak drona (seven companion entries share those five glyphs).
+They are in Batch 111 alongside the two remaining origin revisions.
+All 53 Sztuczki, 85 weapons, 135 class-feature variants, 10 Fant groups
+and 36 origin abilities have existing art. Bestiary fallbacks can reuse
+existing art. Many builders still use core upgrade icons; see
+`BROAD_COVERAGE.md` and `module-coverage-2026-10-17.json` for exact paths.
 
 **Icon coverage correction, 2026-10-17:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
@@ -1444,6 +1453,26 @@ Exact saved decisions and approved masks: `reviewed.json` and
 
 <!-- style-batch-110:end -->
 
+<!-- style-batch-111:start -->
+## Queue (A) — Batch 111 — 7 saved icon revisions
+
+Exact selected sources and verbatim notes are archived with the prompts.
+Older choices remain selectable; production requires fresh saved approval.
+
+| Cell | Subject | Requested correction | Native SVG (+ WEBP) |
+|---|---|---|---|
+| 1 | Nowy Jork |  | `icons/pochodzenia/nowy-jork.svg` |
+| 2 | Południowa Hegemonia | Not bad, the helmet is good, but the machette looks like a spatula. Maybe a kukri or a chain with a hook on the end? | `icons/pochodzenia/hegemonia.svg` |
+| 3 | Kopacz | New companion glyph: Burrowing prevents opportunity attacks. | `icons/abilities/kopacz.svg` |
+| 4 | Ziemnowodny | New companion glyph: A reptilian companion breathes both on land and underwater. | `icons/abilities/ziemnowodny.svg` |
+| 5 | Psi bohater | New companion glyph: A dog uses injury levels and death saves like a player character. | `icons/abilities/psi-bohater.svg` |
+| 6 | Modyfikacje drona | New companion glyph: A drone can mount weapons, cameras, lighting and other equipment. | `icons/abilities/modyfikacje-drona.svg` |
+| 7 | Atak drona | New companion glyph: A drone attacks with its installed weapon. | `icons/abilities/atak-drona.svg` |
+
+Evidence and exact prompts: `review/candidates/batch-111/`.
+
+<!-- style-batch-111:end -->
+
 <!-- icon-style-review:start -->
 ## Style review — icons flagged for redo
 
@@ -1726,6 +1755,16 @@ Po autodestrukcji maszyny żeton podmienia grafikę na wrak w rozmiarze żetonu.
 ---
 
 ## Do podpięcia — przez MG
+
+- **Rozszerzony audyt glifów, 2026-10-17:** `BROAD_COVERAGE.md` i
+  `module-coverage-2026-10-17.json` rozdzielają brak grafiki od braku mapy.
+  53 Sztuczki i 80 wpisów Bestiariusza nadal dostają ikonę upgrade mimo
+  istniejącej grafiki. Towarzysze: 11 wpisów ma taki fallback; cztery
+  mogą użyć istniejących grafik, siedem dzieli pięć nowych glifów Batch 111.
+  Po zatwierdzeniu podpiąć `kopacz`, `ziemnowodny`, `psi-bohater` oraz
+  `modyfikacje-drona` / `atak-drona` dla obu dronów według tabeli w raporcie.
+  Propozycje ponownego użycia grafik ocenia MG / agent kodowy. Ten agent
+  nie zmienia builderów, paczek ani dokumentów świata.
 
 - **Pochodzenia — audyt 2026-10-17:** 12 emblematów głównych regionów jest
   objętych kolejką. Dziesięć jest dostarczonych; Nowy Jork i Południowa

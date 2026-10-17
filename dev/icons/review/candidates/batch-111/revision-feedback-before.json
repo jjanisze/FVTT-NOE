@@ -1,0 +1,16 @@
+{
+  "origin-nowy-jork": {
+    "itemId": "origin-nowy-jork",
+    "decision": "revise",
+    "candidateId": "batch110-revision",
+    "notes": "",
+    "updatedAt": "2026-10-17T00:37:15.854Z"
+  },
+  "origin-hegemonia": {
+    "itemId": "origin-hegemonia",
+    "decision": "revise",
+    "candidateId": "batch110-revision",
+    "notes": "Not bad, the helmet is good, but the machette looks like a spatula. Maybe a kukri or a chain with a hook on the end?",
+    "updatedAt": "2026-10-17T00:38:16.107Z"
+  }
+}

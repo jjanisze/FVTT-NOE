@@ -1,0 +1,79 @@
+{
+  "files": [
+    {
+      "source": "icons/pochodzenia/czlowiek-pustyni.svg",
+      "sha256": "cdbefbe0a4e767157f20d1ac303d1bc58dc817ad0d48a3a8403b6a5cdd759099"
+    },
+    {
+      "source": "icons/pochodzenia/czlowiek-pustyni.webp",
+      "sha256": "484091ac1471f72becdc1a198c3ecef0c6145c1bd5876d7d03dbb8c03099fcdc"
+    },
+    {
+      "source": "icons/pochodzenia/detroit.svg",
+      "sha256": "80a51e85ac69971c4ab369d6727aaf78ee898630a4cba4eb4aae5e1b2e2ba3a7"
+    },
+    {
+      "source": "icons/pochodzenia/detroit.webp",
+      "sha256": "80f61d0d793aa926f24fddd2fdc776c5dbc50eed8f12070f4e844e65f1a63866"
+    },
+    {
+      "source": "icons/pochodzenia/appalachy.svg",
+      "sha256": "aee04bad2bff9621ce7f2491c92436c64ad3b89d6f9c07b6b644247515eb6f5d"
+    },
+    {
+      "source": "icons/pochodzenia/appalachy.webp",
+      "sha256": "19f24feae2d9f98b247a3bd656381f2ddf7351ae9692c27a28014568b8ae1de8"
+    },
+    {
+      "source": "icons/pochodzenia/posterunek.svg",
+      "sha256": "f3ce690921329042a7f664a4c3308fc57eee1700675c3ea92470dbc2baf7d065"
+    },
+    {
+      "source": "icons/pochodzenia/posterunek.webp",
+      "sha256": "e671dce537f95f8d6432882abf93046a2f1411425c2f6dbc51142ad2870f25fd"
+    },
+    {
+      "source": "icons/pochodzenia/vegas.svg",
+      "sha256": "9b265e3b999b36c294d2e0a612933c828dbafaf8c39b62cc45c2acde745b78ca"
+    },
+    {
+      "source": "icons/pochodzenia/vegas.webp",
+      "sha256": "62f947902ac23ce0596cae27f6009748bb0a45438224258cf1d9803e4e5c4a5d"
+    }
+  ],
+  "expectedAbsent": [
+    "icons/pochodzenia/nowy-jork.svg",
+    "icons/pochodzenia/nowy-jork.webp",
+    "icons/pochodzenia/nowy-jork.png",
+    "icons/pochodzenia/hegemonia.svg",
+    "icons/pochodzenia/hegemonia.webp",
+    "icons/pochodzenia/hegemonia.png",
+    "icons/abilities/kopacz.svg",
+    "icons/abilities/kopacz.webp",
+    "icons/abilities/kopacz.png",
+    "icons/abilities/ziemnowodny.svg",
+    "icons/abilities/ziemnowodny.webp",
+    "icons/abilities/ziemnowodny.png",
+    "icons/abilities/psi-bohater.svg",
+    "icons/abilities/psi-bohater.webp",
+    "icons/abilities/psi-bohater.png",
+    "icons/abilities/modyfikacje-drona.svg",
+    "icons/abilities/modyfikacje-drona.webp",
+    "icons/abilities/modyfikacje-drona.png",
+    "icons/abilities/atak-drona.svg",
+    "icons/abilities/atak-drona.webp",
+    "icons/abilities/atak-drona.png"
+  ],
+  "selectedSources": [
+    {
+      "key": "nowy-jork",
+      "source": "dev/icons/review/candidates/batch-110/nowy-jork.png",
+      "sha256": "7da54fdc917d81cc85d5f4689dcdb9c796dfc4c9e53d26f06e1307c9e0d4eb81"
+    },
+    {
+      "key": "hegemonia",
+      "source": "dev/icons/review/candidates/batch-110/hegemonia.png",
+      "sha256": "5c41f85d2b2892e299243b64aa1e63b54cc2810d20119699efe9f64bd606a952"
+    }
+  ]
+}

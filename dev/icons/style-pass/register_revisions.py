@@ -1,6 +1,7 @@
-"""Add validated style revisions to existing cards, preserving selected-current history."""
+"""Add validated revisions and new companion cards, preserving review history."""
 import argparse
 import json
+import os
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -33,24 +34,39 @@ def register(numbers):
             assert not (ROOT / relative).exists(), "A missing target has appeared"
         fragments[number] = []
         for subject in batch["subjects"]:
-            card, saved, key = cards[subject["itemId"]], subject["revisionOf"], subject["key"]
-            assert card.get("status") != "resolved" and public_copy(feedback["items"][card["id"]]) == saved["feedback"]
-            if "feedbackSha256" in saved:
-                assert feedback_hash(feedback["items"][card["id"]]) == saved["feedbackSha256"]
-            if "styleFeedback" in subject:
-                assert style["items"][subject["styleFeedback"]["iconId"]] == subject["styleFeedback"]
-            assert sha(selected_path(saved)) == saved["sourceSha256"]
-            if saved["candidateId"] == "current":
-                assert saved["sourceKind"] == "production" and card["current"]["src"] == saved["selectedSource"]
+            key = subject["key"]
+            if "revisionOf" in subject:
+                card, saved = cards[subject["itemId"]], subject["revisionOf"]
+                assert card.get("status") != "resolved" and public_copy(feedback["items"][card["id"]]) == saved["feedback"]
+                if "feedbackSha256" in saved:
+                    assert feedback_hash(feedback["items"][card["id"]]) == saved["feedbackSha256"]
+                if "styleFeedback" in subject:
+                    assert style["items"][subject["styleFeedback"]["iconId"]] == subject["styleFeedback"]
+                assert sha(selected_path(saved)) == saved["sourceSha256"]
+                if saved["candidateId"] == "current":
+                    assert saved["sourceKind"] == "production" and card["current"]["src"] == saved["selectedSource"]
+                else:
+                    assert next(c for c in card["candidates"] if c["id"] == saved["candidateId"])["src"] == saved["selectedSource"]
+                assert read(here / "revision-feedback-before.json")[card["id"]] == saved["feedback"]
             else:
-                assert next(c for c in card["candidates"] if c["id"] == saved["candidateId"])["src"] == saved["selectedSource"]
-            assert read(here / "revision-feedback-before.json")[card["id"]] == saved["feedback"]
+                assert subject["kind"] == "companion" and subject["itemId"] not in cards and subject["itemId"] not in feedback["items"]
+                assert subject["deliveryTargets"][0]["sourceSha256"] is None
+                assert not (ROOT / subject["target"]).exists()
+                core = Path(os.environ["ProgramFiles"]) / "Foundry Virtual Tabletop/resources/app/public/icons/svg/upgrade.svg"
+                assert core.is_file()
+                (here / "raw/core-upgrade-placeholder.svg").write_bytes(core.read_bytes())
+                card = {"id": subject["itemId"], "name": subject["name"], "target": subject["target"],
+                    "deliveryTargets": subject["deliveryTargets"], "context": subject["context"], "companionMappings": subject["companionMappings"],
+                    "current": {"src": f"candidates/batch-{number}/raw/core-upgrade-placeholder.svg", "note": "Core upgrade placeholder; dedicated companion glyph is missing."},
+                    "candidates": []}
+                cards[card["id"]] = card
+                manifest["items"].append(card)
             assert sha(here / f"{key}.png") == validation["candidateHashes"][key]
             candidate_id = f"batch{number}-revision"
             assert not any(c["id"] == candidate_id for c in card["candidates"])
             card["candidates"].insert(0, {"id": candidate_id, "label": f"Batch {number} · revised {subject['name']}",
                 "src": f"candidates/batch-{number}/{key}.png", "note": subject["request"]})
-            card.update(batch=number, tier=f"Batch {number} · " + ("Origin revision" if subject["kind"] == "origin" else "Style revision"), request=subject["request"])
+            card.update(batch=number, tier=f"Batch {number} · " + ("Origin revision" if subject["kind"] == "origin" else "Companion glyph" if subject["kind"] == "companion" else "Style revision"), request=subject["request"])
             feedback["items"][card["id"]] = {"itemId": card["id"], "decision": "pending", "candidateId": candidate_id, "notes": "",
                 "updatedAt": datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")}
             fragments[number].append(card)
@@ -61,7 +77,7 @@ def register(numbers):
             "Exact selected sources and verbatim notes are archived with the prompts.",
             "Older choices remain selectable; production requires fresh saved approval.", "",
             "| Cell | Subject | Requested correction | Native SVG (+ WEBP) |", "|---|---|---|---|"]
-        lines += [f"| {s['cell']} | {s['name']} | {s['revisionOf']['notes'].replace('|', '/')} | `{s['target']}` |" for s in batch["subjects"]]
+        lines += [f"| {s['cell']} | {s['name']} | {(s['revisionOf']['notes'] if 'revisionOf' in s else 'New companion glyph: ' + s['ruleContext']).replace('|', '/')} | `{s['target']}` |" for s in batch["subjects"]]
         lines += ["", f"Evidence and exact prompts: `review/candidates/batch-{number}/`.", "", end, ""]
         sections.append("\n".join(lines))
     active = [c for c in manifest["items"] if c.get("status") != "resolved"]

@@ -3734,17 +3734,17 @@
     },
     "origin-nowy-jork": {
       "itemId": "origin-nowy-jork",
-      "decision": "revise",
-      "candidateId": "batch110-revision",
+      "decision": "pending",
+      "candidateId": "batch111-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:37:15.854Z"
+      "updatedAt": "2026-10-17T00:59:28.513Z"
     },
     "origin-hegemonia": {
       "itemId": "origin-hegemonia",
-      "decision": "revise",
-      "candidateId": "batch110-revision",
-      "notes": "Not bad, the helmet is good, but the machette looks like a spatula. Maybe a kukri or a chain with a hook on the end?",
-      "updatedAt": "2026-10-17T00:38:16.107Z"
+      "decision": "pending",
+      "candidateId": "batch111-revision",
+      "notes": "",
+      "updatedAt": "2026-10-17T00:59:28.513Z"
     },
     "origin-posterunek": {
       "itemId": "origin-posterunek",
@@ -3773,6 +3773,41 @@
       "candidateId": "batch110-revision",
       "notes": "",
       "updatedAt": "2026-10-17T00:38:26.889Z"
+    },
+    "coverage111-kopacz": {
+      "itemId": "coverage111-kopacz",
+      "decision": "pending",
+      "candidateId": "batch111-revision",
+      "notes": "",
+      "updatedAt": "2026-10-17T00:59:28.514Z"
+    },
+    "coverage111-ziemnowodny": {
+      "itemId": "coverage111-ziemnowodny",
+      "decision": "pending",
+      "candidateId": "batch111-revision",
+      "notes": "",
+      "updatedAt": "2026-10-17T00:59:28.514Z"
+    },
+    "coverage111-psi-bohater": {
+      "itemId": "coverage111-psi-bohater",
+      "decision": "pending",
+      "candidateId": "batch111-revision",
+      "notes": "",
+      "updatedAt": "2026-10-17T00:59:28.515Z"
+    },
+    "coverage111-modyfikacje-drona": {
+      "itemId": "coverage111-modyfikacje-drona",
+      "decision": "pending",
+      "candidateId": "batch111-revision",
+      "notes": "",
+      "updatedAt": "2026-10-17T00:59:28.516Z"
+    },
+    "coverage111-atak-drona": {
+      "itemId": "coverage111-atak-drona",
+      "decision": "pending",
+      "candidateId": "batch111-revision",
+      "notes": "",
+      "updatedAt": "2026-10-17T00:59:28.516Z"
     }
   }
 }

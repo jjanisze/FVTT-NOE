@@ -1,0 +1,207 @@
+{
+  "date": "2026-10-17",
+  "batch": 111,
+  "pass": "final-coverage-and-origin-revisions",
+  "partialAtlas": true,
+  "emptyCells": [
+    8,
+    9
+  ],
+  "subjects": [
+    {
+      "kind": "origin",
+      "key": "nowy-jork",
+      "name": "Nowy Jork",
+      "target": "icons/pochodzenia/nowy-jork.svg",
+      "itemId": "origin-nowy-jork",
+      "ruleContext": "Optymistyczni, wyedukowani i nastawieni na handel. Mają lepszy dostęp do wiedzy niż większość świata.",
+      "context": "Pochodzenie background: Nowy Jork. Optymistyczni, wyedukowani i nastawieni na handel. Mają lepszy dostęp do wiedzy niż większość świata. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/nowy-jork.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "NEW NEW YORK CITY concept instead of the rejected separate torch and crown. ONE compact BROOKLYN-BRIDGE-LIKE SUSPENSION BRIDGE in front view: TWO broad stone towers, each with ONE large pointed Gothic arch opening, joined by ONE thick shallow curved suspension cable and ONE continuous broad roadway. Behind the roadway, ONE simple STEPPED SKYSCRAPER with a stout centered SPIRE rises between the towers, recalling Manhattan. Only TWO broad diagonal suspension struts on each side, no thin cable mesh, tiny windows, book, torch, crown, lettering, logos, skyline clutter or texture. A sober compact city-and-bridge silhouette that reads at 16 px.",
+      "cell": 1,
+      "revisionOf": {
+        "id": "origin-nowy-jork",
+        "name": "Nowy Jork",
+        "decision": "revise",
+        "candidateId": "batch110-revision",
+        "selectedSource": "candidates/batch-110/nowy-jork.png",
+        "sourceKind": "candidate",
+        "sourceSha256": "7da54fdc917d81cc85d5f4689dcdb9c796dfc4c9e53d26f06e1307c9e0d4eb81",
+        "deliveryTargets": [
+          {
+            "source": "icons/pochodzenia/nowy-jork.svg",
+            "variant": "default",
+            "sourceSha256": null
+          }
+        ],
+        "notes": "",
+        "feedback": {
+          "itemId": "origin-nowy-jork",
+          "decision": "revise",
+          "candidateId": "batch110-revision",
+          "notes": "",
+          "updatedAt": "2026-10-17T00:37:15.854Z"
+        },
+        "feedbackSha256": "429a72b5dd136dbf683ff6f7606346934c42423b69cf1bcefa08075de329c1c4"
+      }
+    },
+    {
+      "kind": "origin",
+      "key": "hegemonia",
+      "name": "Południowa Hegemonia",
+      "target": "icons/pochodzenia/hegemonia.svg",
+      "itemId": "origin-hegemonia",
+      "ruleContext": "Twardzi jak skała, lojalni jak psy. Potomkowie kryminalistów, którzy znaleźli sens w walce za Bano.",
+      "context": "Pochodzenie background: Południowa Hegemonia. Twardzi jak skała, lojalni jak psy. Potomkowie kryminalistów, którzy znaleźli sens w walce za Bano. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/hegemonia.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "TARGETED EDIT of reference cell 2. KEEP the SAME good broad SPIKED RAIDER HELMET, its T-shaped dark face opening, three short spikes and all broad contours. REPLACE ONLY the bad spatula-shaped weapon behind it with ONE complete recognizable KUKRI KNIFE angled upward-right. The kukri has a LONG forward-CURVING BLADE with an asymmetric heavy convex belly and a tapered pointed tip; the blade is at least THREE TIMES as long as its widest part. One thick curved cutting edge, a narrow intact neck and one stout short grip. No rectangular cleaver head, spatula shape, paddle, blade hole, extra knife, serrations, chain, blood, tiny scratches or fine grip texture.",
+      "cell": 2,
+      "revisionOf": {
+        "id": "origin-hegemonia",
+        "name": "Południowa Hegemonia",
+        "decision": "revise",
+        "candidateId": "batch110-revision",
+        "selectedSource": "candidates/batch-110/hegemonia.png",
+        "sourceKind": "candidate",
+        "sourceSha256": "5c41f85d2b2892e299243b64aa1e63b54cc2810d20119699efe9f64bd606a952",
+        "deliveryTargets": [
+          {
+            "source": "icons/pochodzenia/hegemonia.svg",
+            "variant": "default",
+            "sourceSha256": null
+          }
+        ],
+        "notes": "Not bad, the helmet is good, but the machette looks like a spatula. Maybe a kukri or a chain with a hook on the end?",
+        "feedback": {
+          "itemId": "origin-hegemonia",
+          "decision": "revise",
+          "candidateId": "batch110-revision",
+          "notes": "Not bad, the helmet is good, but the machette looks like a spatula. Maybe a kukri or a chain with a hook on the end?",
+          "updatedAt": "2026-10-17T00:38:16.107Z"
+        },
+        "feedbackSha256": "fba1949e6537d80174d88f3fd33fe36d8bb430b8d934ea57c5472ded7a6f61cd"
+      }
+    },
+    {
+      "kind": "companion",
+      "key": "kopacz",
+      "name": "Kopacz",
+      "itemId": "coverage111-kopacz",
+      "target": "icons/abilities/kopacz.svg",
+      "cell": 3,
+      "ruleContext": "Burrowing prevents opportunity attacks.",
+      "companionMappings": [
+        "zmutowany-owad.kopacz"
+      ],
+      "context": "Companion feature: Kopacz. Burrowing prevents opportunity attacks. Companion sheet, action card and hotbar; typically 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/kopacz.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "request": "ONE stout natural BEETLE-LIKE INSECT digging diagonally DOWN into ONE broad EARTH MOUND with a large dark semicircular BURROW OPENING. One oval body, one smaller connected head, three pairs of thick complete legs; the FRONT pair are broad SHOVEL-LIKE CLAWS entering the mound. Just two broad soil contour cuts, no scattered soil specks, tiny hairs, veins, extra legs, lettering or humanoid face. Clear burrowing-insect action rather than a mining tool."
+    },
+    {
+      "kind": "companion",
+      "key": "ziemnowodny",
+      "name": "Ziemnowodny",
+      "itemId": "coverage111-ziemnowodny",
+      "target": "icons/abilities/ziemnowodny.svg",
+      "cell": 4,
+      "ruleContext": "A reptilian companion breathes both on land and underwater.",
+      "companionMappings": [
+        "zmutowany-gad.ziemnowodny"
+      ],
+      "context": "Companion feature: Ziemnowodny. A reptilian companion breathes both on land and underwater. Companion sheet, action card and hotbar; typically 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ziemnowodny.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "request": "ONE natural CROCODILE HEAD in clean side profile facing RIGHT, partly submerged across ONE broad horizontal WATER WAVE. One smooth closed jaw, one small broad eye cut and two LARGE round AIR BUBBLES below the wave beside the snout. Head and neck remain one coherent complete silhouette, no whole body needed. Breathing both above and below water; no scuba gear, person, angry expression, jagged teeth, scales, fine bubbles, thin ripples, cartoon face or texture."
+    },
+    {
+      "kind": "companion",
+      "key": "psi-bohater",
+      "name": "Psi bohater",
+      "itemId": "coverage111-psi-bohater",
+      "target": "icons/abilities/psi-bohater.svg",
+      "cell": 5,
+      "ruleContext": "A dog uses injury levels and death saves like a player character.",
+      "companionMappings": [
+        "psi-partner.psi-bohater"
+      ],
+      "context": "Companion feature: Psi bohater. A dog uses injury levels and death saves like a player character. Companion sheet, action card and hotbar; typically 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/psi-bohater.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "request": "ONE ordinary natural DOG HEAD and short neck in calm SIDE PROFILE facing RIGHT, paired with ONE stout small SHIELD bearing a large BLACK MEDICAL PLUS cutout. Dog has one upright ear and one slightly folded ear, one broad eye cut only, smooth coat and complete muzzle. A loyal dog surviving injury like its human allies. No cape, medal, superhero costume, human face, wolf snarl, teeth, fur strands, anime eyes, heart rays, lettering or texture."
+    },
+    {
+      "kind": "companion",
+      "key": "modyfikacje-drona",
+      "name": "Modyfikacje drona",
+      "itemId": "coverage111-modyfikacje-drona",
+      "target": "icons/abilities/modyfikacje-drona.svg",
+      "cell": 6,
+      "ruleContext": "A drone can mount weapons, cameras, lighting and other equipment.",
+      "companionMappings": [
+        "dron-kroczacy.modyfikacje",
+        "dron-latajacy.modyfikacje"
+      ],
+      "context": "Companion feature: Modyfikacje drona. A drone can mount weapons, cameras, lighting and other equipment. Companion sheet, action card and hotbar; typically 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/modyfikacje-drona.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "request": "ONE simple compact DRONE CHASSIS: a broad rectangular body on TWO stout articulated support legs, with ONE large detachable rectangular CAMERA MODULE raised just above its open TOP MOUNT. ONE complete broad OPEN-END WRENCH lies diagonally beside the mount. Module has one large black circular lens opening and one broad plug tab, no tiny connector pins. A coherent physical equipment-installation icon with generous black gaps. No giant cog, scattered components, fine wires, panel screws, numbers, arrows, lettering or texture."
+    },
+    {
+      "kind": "companion",
+      "key": "atak-drona",
+      "name": "Atak drona",
+      "itemId": "coverage111-atak-drona",
+      "target": "icons/abilities/atak-drona.svg",
+      "cell": 7,
+      "ruleContext": "A drone attacks with its installed weapon.",
+      "companionMappings": [
+        "dron-kroczacy.atak",
+        "dron-latajacy.atak"
+      ],
+      "context": "Companion feature: Atak drona. A drone attacks with its installed weapon. Companion sheet, action card and hotbar; typically 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/atak-drona.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "request": "ONE compact unmanned GUN TURRET in SIDE PROFILE aimed RIGHT: a broad squat body with ONE large square OPTICAL LENS cutout, ONE complete short stout gun barrel, and ONE small broad mounting pedestal. Ahead of the muzzle sits ONE large simple AIM RETICLE made from an open ring and four broad ticks, clearly separated from the barrel. Generic mounted-weapon attack shared by flying and walking drones; no vehicle wheels, legs, propellers, human operator, tiny bullets, muzzle-fire spray, panel texture, text or logo."
+    }
+  ]
+}

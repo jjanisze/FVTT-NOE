@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-17",
+  "preparedBatch": 111,
+  "nextFreeBatch": 112,
+  "approvedOriginEmblemsDeliveredThisReview": 5,
+  "originEmblemsDeliveredTotal": 10,
+  "originRevisionsPrepared": 2,
+  "newCompanionArtSubjects": 5,
+  "companionEntriesCoveredByNewArt": 7,
+  "newCandidatesInstalledBeforeApproval": 0,
+  "approvedVariantsUnchanged": 10,
+  "unrelatedCardsAndDecisionsPreserved": 537,
+  "reviewCardsTotal": 544,
+  "reviewCardsResolved": 537,
+  "candidateCollectionValidatedPairs": 871,
+  "physicalItemArtGaps": 0,
+  "physicalItemWiringGaps": 4,
+  "sztuczkiWithExistingArt": 53,
+  "bestiaryEntriesWithArtReadyForWiring": 80,
+  "companionFallbackEntries": 11,
+  "generatedInitialsRemaining": 0,
+  "brokenLiteralIconReferences": 0,
+  "browserAtPublication": {
+    "cards": 7,
+    "options": 18,
+    "brokenImages": 0,
+    "errors": 0,
+    "newCandidatesSelected": 7,
+    "pendingDecisions": 7
+  }
+}

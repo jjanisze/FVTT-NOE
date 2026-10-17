@@ -1,0 +1,14 @@
+{
+  "batch": 111,
+  "validatedMasks": 7,
+  "prospectiveDeliveryTargets": 7,
+  "candidateHashes": {
+    "nowy-jork": "7c510c77785717eb20373cc2c6f6f7dbe19df0e33ce21fc8108498df43d14b03",
+    "hegemonia": "1d29b04dd952b979899a4c2f07a59e10374f2b77c843db4896f808b07ae9e174",
+    "kopacz": "9bb7b4bedd05ab3fccd15313708ce0e56fe1908c1328d089139acb9c97262b43",
+    "ziemnowodny": "243ff183bf913ebdfe8d38dfddcdaacffe683cdd1615c74d7392bc34e28d2a4c",
+    "psi-bohater": "261e73227401c082cc0f0b09f7b9d50e4bc971e6407164ce19445428d41e07c7",
+    "modyfikacje-drona": "4354778559277c67c349b9386dc1e80fa74b94b994ce85779141f647e927bdcc",
+    "atak-drona": "eefa973e30d3fbda63523153ac01e5e5c47841afe014fdacd08b048a3a8c5875"
+  }
+}
