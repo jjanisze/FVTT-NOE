@@ -59,7 +59,9 @@ export function checkPackageFolder(dir, { type = "systems", id, label = dir }) {
   if (!fs.existsSync(manifest)) throw new CliError(`No ${MANIFEST[type]} in ${label}.`, { code: "bad-source" });
   const m = JSON.parse(fs.readFileSync(manifest, "utf8"));
   if (id && m.id !== id) throw new CliError(`${label} holds the ${type === "systems" ? "system" : "module"} "${m.id}", not "${id}".`, { code: "bad-source" });
-  const unbuilt = (m.packs ?? []).filter(p => !fs.existsSync(path.join(dir, p.path, "CURRENT"))).map(p => p.name);
+  // A legacy NeDB pack (`packs/<name>.db`, JB2A 0.9.4) counts as built: Foundry converts it on first load.
+  const built = p => fs.existsSync(path.join(dir, p.path, "CURRENT")) || (/\.db$/i.test(p.path) && fs.existsSync(path.join(dir, p.path)));
+  const unbuilt = (m.packs ?? []).filter(p => !built(p)).map(p => p.name);
   if (unbuilt.length) {
     throw new CliError(`${label} is not a built release: ${unbuilt.length} pack(s) without a LevelDB (${unbuilt.slice(0, 3).join(", ")}).`, {
       code: "bad-source", hint: "Use the release zip (GitHub release asset) or a folder unpacked from it, not a source checkout."

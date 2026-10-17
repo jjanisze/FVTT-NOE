@@ -72,9 +72,14 @@ export function linkPackage(src, dst, { id, skip = new Set(), ownPacks = false, 
     if (entry.name === `${id}.lock`) continue;
     if (entry.isDirectory() && entry.name === "packs") {
       if (ownPacks) continue;
-      for (const pack of fs.readdirSync(from, { withFileTypes: true }).filter(d => d.isDirectory())) {
+      for (const pack of fs.readdirSync(from, { withFileTypes: true })) {
         const target = path.join(to, pack.name);
-        if (!fs.existsSync(target)) { copyDb(path.join(from, pack.name), target); made.packs++; }
+        if (fs.existsSync(target)) continue;
+        // A LevelDB folder, or a legacy NeDB file (`<name>.db`) Foundry converts in this data path on first load.
+        if (pack.isDirectory()) copyDb(path.join(from, pack.name), target);
+        else if (pack.isFile()) { fs.mkdirSync(to, { recursive: true }); fs.copyFileSync(path.join(from, pack.name), target); }
+        else continue;
+        made.packs++;
       }
       continue;
     }
