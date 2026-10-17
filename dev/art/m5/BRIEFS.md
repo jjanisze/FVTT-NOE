@@ -1,6 +1,6 @@
 # Painted artwork briefs — M5 and carried requests
 
-The GM generates these images in DALL-E and hand-edits the sources. An agent only packages approved source pixels. Specs: [MISSING](../../icons/MISSING.md) §G/§H and [PLAN_m5_postoj.md](../../../PLAN_m5_postoj.md) §7.23, D42–D45; token proportions: [tokens/PROMPT.md](../../../tokens/PROMPT.md). Older §B and §E requests follow the M5 queue. No source or final artwork has been delivered yet.
+The GM generates these images in DALL-E and hand-edits the sources. An agent only packages approved source pixels. Specs: [MISSING](../../icons/MISSING.md) §G/§H and [PLAN_m5_postoj.md](../../../PLAN_m5_postoj.md) §7.23, D42–D45; token proportions: [tokens/PROMPT.md](../../../tokens/PROMPT.md). Older §B and §E requests follow the M5 queue. Seven trader portraits and three upkeep banners were delivered on 2026-10-12; their briefs remain as references. MISSING lists only undelivered artwork.
 
 Display sizes below are composition targets, not a claim about unfinished UI code. Every prompt includes the shared §G style block and can be pasted on its own. Generate one image per prompt; do not put painted art into a nine-cell icon atlas.
 

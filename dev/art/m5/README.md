@@ -35,15 +35,15 @@ pixels; tokens and objects require genuine transparent PNGs. Token frame margins
 are preserved, while small map objects are trimmed to their alpha bounds.
 
 After packaging, inspect the finished picture at its intended display size, confirm
-the crop and alpha, mark only that delivered MISSING row done, and add this credit
+the crop and alpha, remove only that delivered row from MISSING, and add this credit
 for the exact delivered path in `CREDITS.md`:
 
 > `<final path>` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
 
 Do not credit prompts or undelivered pictures as finished artwork. M5 uses exact
 filenames and needs no code repoint, pack rebuild or live world change. Older B/E
-assets that need a compendium rebuild or live update go under "Do podpięcia" in
-MISSING for the GM.
+assets that need a compendium rebuild or live update go in the
+[asset handoff](../../icons/FINAL_HANDOFF.md) for the GM.
 
 `record_delivery.py` validates outputs with present edited sources, records their
 provenance/hashes and produces a local `out/delivery-preview.png` contact sheet.
