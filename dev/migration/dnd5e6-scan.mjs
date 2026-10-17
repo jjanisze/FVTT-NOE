@@ -1,0 +1,136 @@
+#!/usr/bin/env node
+/**
+ * Where this module still speaks dnd5e 5.3 (PLAN_migracja_dnd5e6.md §3, §7): every data path, flag, API and DOM
+ * hook that dnd5e 6.0 renamed, moved or removed, found statically in the module's code, templates and styles.
+ *
+ *   node dev/migration/dnd5e6-scan.mjs                     # counts per rule (JSON)
+ *   node dev/migration/dnd5e6-scan.mjs --list[=rule,…]     # with every place (file:line and the line)
+ *   node dev/migration/dnd5e6-scan.mjs --fail-on=rule,…    # exit 1 while a named rule still finds anything
+ *   node dev/migration/dnd5e6-scan.mjs --lang=<new en.json> [--lang-before=<old en.json>]  # + pl.json DND5E keys gone
+ *
+ * Each stage starts by refreshing its numbers from here (§6.1) and, once its rules reach zero, adds them to
+ * `--fail-on` in `npm test` so they stay at zero (§7: "stare odczyty nie istnieją w kodzie — test statyczny").
+ * Patterns are deliberately literal: a hit is a place to look at, not a verdict.
+ */
+
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "../..");
+const SCAN = [
+  { dir: "scripts", ext: /\.m?js$/ },
+  { dir: "dev/e2e", ext: /\.m?js$/ },
+  { dir: "dev/poligon", ext: /\.m?js$/ },
+  { dir: "dev/packs", ext: /\.m?js$/ },
+  { dir: "templates", ext: /\.(hbs|html)$/ },
+  { dir: "styles", ext: /\.css$/ }
+];
+// This scanner's own rule table would match itself.
+const SKIP_FILES = new Set(["dev/migration/dnd5e6-scan.mjs"]);
+
+/** @type {{id: string, stage: string, what: string, test: RegExp, files?: RegExp}[]} */
+export const RULES = [
+  // §3.3 — chat message flags the dnd5e 6 world migration deletes (→ message.system.*, getAssociated*()).
+  { id: "message-flags", stage: "E3", what: "flags.dnd5e.item|activity|targets|originatingMessage on chat messages → message.system.* / getAssociatedItem() / getAssociatedActivity() / getOriginatingMessage()",
+    test: /flags\??\.dnd5e\??\.(item|activity|targets|originatingMessage)\b|getFlag\(\s*["']dnd5e["']\s*,\s*["'](item|activity|targets|originatingMessage)["']|["']flags\.dnd5e\.(item|activity|targets|originatingMessage)\b/ },
+  // §3.6 — effect origin moves to system.origin.{activity,effect,item,actor,behavior}.
+  { id: "effect-origin", stage: "E3", what: "top-level ActiveEffect origin written from a uuid → system.origin",
+    test: /^\s*origin:\s*[\w?.]+\.uuid\b/ },
+  // §3.6 — effects created with top-level `changes` (core v14 shim, removed in v16).
+  { id: "effect-top-changes", stage: "E3", what: "`changes: [` outside `system` (core v14 shim) → system.changes",
+    test: /(^|[{,(\s])changes\s*:\s*\[/, files: /\.m?js$/ },
+  // §3.12 — renamed prepared-data paths: no shim for reads, `undefined` under the old key.
+  { id: "movement", stage: "E3", what: "attributes.movement.<type> → attributes.movement.speeds.<type>",
+    test: /movement\??\.(walk|fly|swim|climb|burrow|hover)\b|["']system\.attributes\.movement\.(walk|fly|swim|climb|burrow)["']/ },
+  { id: "senses", stage: "E3", what: "attributes.senses.<sense> → attributes.senses.ranges.<sense>",
+    test: /senses\??\.(darkvision|blindsight|tremorsense|truesight)\b/ },
+  { id: "roll-bonuses", stage: "E3", what: "system.bonuses.{mwak,rwak,msak,rsak,abilities} → system.rolls.*",
+    test: /bonuses\??\.(mwak|rwak|msak|rsak|abilities)\b/ },
+  { id: "check-save-bonuses", stage: "E3", what: "abilities/skills/tools.*.bonuses.{check,save}, death/concentration bonuses, init.bonus → *.roll.bonus",
+    test: /\.bonuses\??\.(check|save)\b|(death|concentration)\??\.bonuses\b|\binit\??\.bonus\b/ },
+  { id: "armor-class", stage: "E3", what: "ac.base|flat|calc|formula → ac.armor / ac.calcs",
+    test: /\bac\??\.(base|flat|calc|formula)\b|["']system\.attributes\.ac\.(base|flat|calc|formula)["']/ },
+  { id: "rarity", stage: "E3", what: "system.rarity → system.rarities",
+    test: /system\??\.rarity\b(?!ies)/ },
+  // §3.5 — CONFIG.DND5E tables whose shape changed in 6.0.
+  { id: "config-tables", stage: "E3", what: "CONFIG.DND5E tables reshaped in 6.0 (check each use)",
+    test: /CONFIG\.DND5E\.(activityTypes|itemProperties|actorSizes|conditionTypes|validProperties|requests|conditionEffects|restTypes|bloodied|shieldIds|itemRarity|armorProficienciesMap)\b/ },
+  // §3.2, §3.10 — methods and APIs rewritten or gone.
+  { id: "activity-api", stage: "E4", what: "activity chat API: _usageChatButtons (now descriptors), activateChatListeners, getCardData",
+    test: /\b_usageChatButtons\b|\bactivateChatListeners\b|\bgetCardData\b/ },
+  { id: "damage-tray-api", stage: "E5", what: "damage/effects tray internals: _onChangeOptions (gone), buildTargetListEntry, refreshListEntry, _onApplyDamage",
+    test: /\b_onChangeOptions\b|\bbuildTargetListEntry\b|\brefreshListEntry\b|\b_onApplyDamage\b/ },
+  // §3.3 — dnd5e chat card DOM (cards render from message.system now; HTML changed).
+  { id: "chat-card-dom", stage: "E6", what: "dnd5e chat card DOM: .chat-card, .card-tray, .card-header, .card-buttons, damage-application, effect-application",
+    test: /\.chat-card\b|card-tray|\.card-header\b|\.card-buttons\b|damage-application|effect-application/ }
+];
+
+function* files() {
+  for (const { dir, ext } of SCAN) {
+    const base = path.join(ROOT, dir);
+    if (!fs.existsSync(base)) continue;
+    const walk = function* (d) {
+      for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+        const p = path.join(d, e.name);
+        if (e.isDirectory()) { if (e.name !== "node_modules") yield* walk(p); continue; }
+        if (ext.test(e.name)) yield path.relative(ROOT, p).replaceAll("\\", "/");
+      }
+    };
+    yield* walk(base);
+  }
+}
+
+export function scan(rules = RULES) {
+  const hits = Object.fromEntries(rules.map(r => [r.id, []]));
+  for (const file of files()) {
+    if (SKIP_FILES.has(file)) continue;
+    const lines = fs.readFileSync(path.join(ROOT, file), "utf8").split(/\r?\n/);
+    for (const r of rules) {
+      if (r.files && !r.files.test(file)) continue;
+      lines.forEach((line, i) => { if (r.test.test(line)) hits[r.id].push({ file, line: i + 1, text: line.trim().slice(0, 160) }); });
+    }
+  }
+  return hits;
+}
+
+/**
+ * DND5E.* keys in lang/pl.json against a dnd5e en.json (§3.13). The module also defines keys of its own in that
+ * namespace (item properties, weapon groups — 47 on 2026-10-17); with `beforePath` (the previous dnd5e's en.json)
+ * those are told apart from dnd5e keys that the new version dropped, whose successors now show in English.
+ */
+export function staleLangKeys(enJsonPath, beforePath = null) {
+  const flat = (obj, prefix = "") => Object.entries(obj).flatMap(([k, v]) => (v && typeof v === "object" ? flat(v, `${prefix}${k}.`) : [`${prefix}${k}`]));
+  const keys = file => new Set(flat(JSON.parse(fs.readFileSync(file, "utf8"))));
+  const pl = [...keys(path.join(ROOT, "lang", "pl.json"))].filter(k => k.startsWith("DND5E."));
+  const en = keys(enJsonPath);
+  const missing = pl.filter(k => !en.has(k)).sort();
+  if (!beforePath) return { translated: pl.length, missing };
+  const before = keys(beforePath);
+  return { translated: pl.length, dropped: missing.filter(k => before.has(k)), ownKeys: missing.filter(k => !before.has(k)).length };
+}
+
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const arg = name => process.argv.slice(2).find(a => a === `--${name}` || a.startsWith(`--${name}=`));
+  const value = name => arg(name)?.split("=").slice(1).join("=") || null;
+  const hits = scan();
+  const listed = arg("list") ? (value("list")?.split(",") ?? Object.keys(hits)) : [];
+  const out = {
+    rules: RULES.map(r => {
+      const h = hits[r.id];
+      return {
+        id: r.id, stage: r.stage, places: h.length, files: new Set(h.map(x => x.file)).size, what: r.what,
+        ...(listed.includes(r.id) ? { at: h.map(x => `${x.file}:${x.line}  ${x.text}`) } : {})
+      };
+    })
+  };
+  if (value("lang")) out.lang = staleLangKeys(value("lang"), value("lang-before"));
+  const failOn = value("fail-on")?.split(",").filter(Boolean) ?? [];
+  const failing = failOn.filter(id => hits[id]?.length);
+  const unknown = failOn.filter(id => !hits[id]);
+  out.ok = failing.length === 0 && unknown.length === 0;
+  if (failing.length) out.failing = failing;
+  if (unknown.length) out.unknownRules = unknown;
+  process.stdout.write(`${JSON.stringify(out, null, 2)}\n`);
+  process.exitCode = out.ok ? 0 : 1;
+}

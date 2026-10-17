@@ -13,6 +13,7 @@
     "bump:version": "node dev/bump-version.mjs",
     "validate:css": "node dev/validate-css.mjs",
     "validate:recipes": "node dev/validate-recipes.mjs",
+    "scan:dnd5e6": "node dev/migration/dnd5e6-scan.mjs",
     "build:packs": "node dev/packs/build-packs.mjs",
     "validate:packs": "node dev/packs/validate-packs.mjs",
     "build:icons": "node dev/icons/gen_class_placeholders.mjs",

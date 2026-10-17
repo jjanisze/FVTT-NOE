@@ -20,14 +20,15 @@
  * ## 2. Priority — a house rule, and the reason this file exists at all
  *
  * Foundry sorts every change by `priority` ascending and leaves ties in document
- * order, which `createEmbeddedDocuments` does not guarantee. Unprioritised changes
- * therefore apply in a nondeterministic order, and in 14.364 that is *every*
- * unprioritised change: `ActiveEffect#prepareBaseData` falls back to
+ * order, which `createEmbeddedDocuments` does not guarantee. Up to 14.364 that was
+ * *every* unprioritised change: `ActiveEffect#prepareBaseData` fell back to
  * `CHANGE_TYPES[type]?.priority`, but those entries store the number under
- * `defaultPriority`, so the lookup is always `undefined` and the fallback `0` wins.
- * Per-type default ordering is currently inert, and will switch on silently whenever
- * core fixes that. Every change this module writes carries an explicit priority so
- * that day is a no-op.
+ * `defaultPriority`, so the lookup was always `undefined` and the fallback `0` won.
+ * 14.369 reads `defaultPriority`: an unprioritised change now takes its type's
+ * default (multiply 10, add 20, …). Every change this module writes carries an
+ * explicit priority, so that switch-on was a no-op here — but an unprioritised
+ * change from elsewhere (a hand-made world effect, dnd5e) now sorts by core's
+ * ladder, which puts multiply *before* add, unlike ours below.
  *
  * The ladder is Foundry's own (custom 0, multiply 10, add/subtract 20, downgrade 30,
  * upgrade 40, override 50) with **add and multiply swapped**. That inversion is a
