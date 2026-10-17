@@ -20,7 +20,7 @@ import {
 import { CliError, EXIT, errorResult, note, print, refuse } from "./lib/output.mjs";
 import { checkCloneTarget, checkFreeze, checkMode, checkQuiet, checkSandboxOnly, checkSystemInstall, COMMAND_CLASS } from "./lib/guards.mjs";
 import { defaultWorlds, runBackup } from "./lib/backup.mjs";
-import { checkSystemFolder, installSystem, olderThan, packageVersion, resolveSource } from "./lib/systems.mjs";
+import { checkSystemFolder, installPackage, installSystem, olderThan, packageVersion, resolveSource } from "./lib/systems.mjs";
 import { hasSecret, verifyAgainstDataPath } from "./lib/secret.mjs";
 import { serverState, startServer, stopServer } from "./lib/server.mjs";
 import { holders, lockExclusive, lockShared } from "./lib/mutex.mjs";
@@ -28,7 +28,7 @@ import { readLog } from "./lib/logs.mjs";
 import { FoundryClient } from "./lib/foundry-http.mjs";
 import { debugChrome, killTree } from "./lib/proc.mjs";
 import { heldDatabases } from "./lib/leveldb.mjs";
-import { initSandbox } from "./lib/sandbox.mjs";
+import { initSandbox, relinkPackage } from "./lib/sandbox.mjs";
 import { bootstrapWorld, createWorld, deleteWorld, launchWorld, listWorlds, shutdownWorldAndWait, DEFAULT_MODULES, DEFAULT_PLAYERS } from "./lib/worlds.mjs";
 import {
   callPoligon, campaignModules, cloneCampaign, guardHumans, mirrorCampaignSettings, openSeat, readCloneMarker, poligonExists, poligonGmPage, presence, readPoligonMarker,
@@ -786,6 +786,31 @@ command("system:install","Replace a stopped profile's dnd5e from a release zip o
     ok: true, profile: ctx.profile.name, ...res, keptAt: res.keptAt ? path.relative(ctx.profile.dataPath, res.keptAt).replaceAll("\\", "/") : null,
     hint: "Worlds on this data path migrate to the new version the next time they open — `fvtt start` / `fvtt e2e` as usual."
   };
+});
+
+command("module:install", "Replace a third-party module from a release zip or unpacked folder: in the campaign's modules (every other data path links to them — D11), the old folder kept under the campaign's agent-state/, then the sandbox, release and Poligon copies re-linked. Every Foundry server must be stopped. --from=<zip|folder>", async opts => {
+  const cfg = loadConfig();
+  const base = { cfg, install: installPaths(cfg), cdp: cdpUrl(cfg), mode: readMode(), freeze: readFreeze(), opts };
+  checkMode(base.mode, "module:install");
+  if (typeof opts.from !== "string") throw new CliError("module:install needs --from=<zip|folder>.", { code: "usage" });
+  const campaign = resolveProfile(cfg, "campaign");
+  // Every server reads these folders (directly or through a link): all of them down, nothing held.
+  const profiles = [];
+  for (const name of PROFILES) {
+    let profile;
+    try { profile = resolveProfile(cfg, name); } catch { continue; }
+    await lockExclusive(name, "module:install", seconds(opts.wait, 0));
+    const s = await serverState({ ...base, profile });
+    checkQuiet({ status: s.status, servers: s.servers, held: s.held }, `${name} uses the shared module folders`);
+    profiles.push(profile);
+  }
+  const res = installPackage({ source: opts.from, dataPath: campaign.dataPath, type: "modules", lock: false, refuse: [MODULE_ID] });
+  const relinked = {};
+  for (const p of profiles.filter(x => !x.isCampaign)) {
+    const dst = path.join(p.data, "modules", res.id);
+    if (fs.existsSync(dst)) relinked[p.name] = relinkPackage(path.join(campaign.data, "modules", res.id), dst, { id: res.id });
+  }
+  return { ok: true, ...res, keptAt: res.keptAt ? path.relative(campaign.dataPath, res.keptAt).replaceAll("\\", "/") : null, relinked };
 });
 
 const list = v => (v && v !== true ? String(v).split(",").map(s => s.trim()).filter(Boolean) : null);

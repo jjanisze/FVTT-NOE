@@ -1,20 +1,27 @@
 /**
- * The game system of a data path (PLAN_migracja_dnd5e6.md E0 (2)). Every data path — campaign, sandbox, release,
- * Poligon — has its own dnd5e folder. A new one used to be copied from the campaign, so during the migration a
- * fresh sandbox would have started on the campaign's old dnd5e; now it comes from the source the local config
- * names (`dnd5e.source`: a release zip or an unpacked release folder), and `system:install` replaces the dnd5e of
- * an existing data path from the same kind of source.
+ * Packages of a data path (PLAN_migracja_dnd5e6.md E0 (2), D11).
  *
- * The replaced folder is kept, renamed, under `<dataPath>/agent-state/systems/` — outside `Data/`, so Foundry
- * never sees two packages with one id — and the new one is package-locked like every agent-managed package.
+ * dnd5e: every data path — campaign, sandbox, release, Poligon — has its own folder. A new one used to be copied
+ * from the campaign, so during the migration a fresh sandbox would have started on the campaign's old dnd5e; now
+ * it comes from the source the local config names (`dnd5e.source`: a release zip or an unpacked release folder),
+ * and `system:install` replaces the dnd5e of an existing data path from the same kind of source.
+ *
+ * Third-party modules live once, in the campaign's folders; the other data paths link to them (sandbox.mjs), so
+ * `module:install` replaces the campaign's folder and re-links the others.
+ *
+ * A replaced folder is kept, renamed, under `<dataPath>/agent-state/<systems|modules>/` — outside `Data/`, so
+ * Foundry never sees two packages with one id. Zips are unpacked by `archive.py` (streamed; JB2A is 1.6 GB).
  */
 
 import fs from "node:fs";
 import path from "node:path";
+import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
 import { CliError } from "./output.mjs";
-import { readZip } from "../../release/zip.mjs";
 
+const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SKIP = new Set(["LOCK", ".git", "node_modules"]);
+const MANIFEST = { systems: "system.json", modules: "module.json" };
 
 /** `version` from a package folder's manifest, or null. */
 export function packageVersion(dir, manifest = "system.json") {
@@ -44,100 +51,108 @@ function isLink(p) {
 const stamp = (d = new Date()) => d.toISOString().replace(/[:.]/g, "-").slice(0, 19);
 
 /**
- * A release, not a source checkout: the manifest names the system, and every compendium it declares is a built
+ * A release, not a source checkout: the manifest names the package, and every compendium it declares is a built
  * LevelDB (a git checkout has JSON sources there and no CURRENT file).
  */
-export function checkSystemFolder(dir, id, label = dir) {
-  const manifest = path.join(dir, "system.json");
-  if (!fs.existsSync(manifest)) throw new CliError(`No system.json in ${label}.`, { code: "bad-source" });
+export function checkPackageFolder(dir, { type = "systems", id, label = dir }) {
+  const manifest = path.join(dir, MANIFEST[type]);
+  if (!fs.existsSync(manifest)) throw new CliError(`No ${MANIFEST[type]} in ${label}.`, { code: "bad-source" });
   const m = JSON.parse(fs.readFileSync(manifest, "utf8"));
-  if (m.id !== id) throw new CliError(`${label} holds the system "${m.id}", not "${id}".`, { code: "bad-source" });
+  if (id && m.id !== id) throw new CliError(`${label} holds the ${type === "systems" ? "system" : "module"} "${m.id}", not "${id}".`, { code: "bad-source" });
   const unbuilt = (m.packs ?? []).filter(p => !fs.existsSync(path.join(dir, p.path, "CURRENT"))).map(p => p.name);
   if (unbuilt.length) {
     throw new CliError(`${label} is not a built release: ${unbuilt.length} pack(s) without a LevelDB (${unbuilt.slice(0, 3).join(", ")}).`, {
       code: "bad-source", hint: "Use the release zip (GitHub release asset) or a folder unpacked from it, not a source checkout."
     });
   }
-  return m.version;
+  return { id: m.id, version: m.version };
 }
 
-/** Unpack a release zip into `dir`: the entries under the folder that holds `system.json` (often the zip root). */
-function extractZip(zipPath, dir) {
-  const entries = readZip(fs.readFileSync(zipPath));
-  const manifest = [...entries.keys()].filter(n => n === "system.json" || n.endsWith("/system.json"))
-    .sort((a, b) => a.split("/").length - b.split("/").length)[0];
-  if (!manifest) throw new CliError(`${path.basename(zipPath)} has no system.json.`, { code: "bad-source" });
-  const root = manifest.slice(0, -"system.json".length);
-  let files = 0;
-  for (const [name, data] of entries) {
-    if (!name.startsWith(root) || name === root) continue;
-    const rel = name.slice(root.length);
-    const target = path.join(dir, ...rel.split("/"));
-    if (!path.resolve(target).startsWith(`${path.resolve(dir)}${path.sep}`)) throw new CliError(`zip entry escapes the folder: ${name}`, { code: "bad-source" });
-    if (rel.endsWith("/")) { fs.mkdirSync(target, { recursive: true }); continue; }
-    fs.mkdirSync(path.dirname(target), { recursive: true });
-    fs.writeFileSync(target, data);
-    files++;
-  }
-  return files;
-}
+export const checkSystemFolder = (dir, id, label = dir) => checkPackageFolder(dir, { type: "systems", id, label }).version;
 
 function copyFolder(src, dir) {
-  let files = 0;
   fs.cpSync(src, dir, {
     recursive: true,
-    filter: s => {
-      const base = path.basename(s);
-      if (SKIP.has(base) || base.endsWith(".lock")) return false;
-      if (fs.statSync(s).isFile()) files++;
-      return true;
-    }
+    filter: s => !SKIP.has(path.basename(s)) && !path.basename(s).endsWith(".lock")
   });
-  return files;
 }
 
-/** What a configured source is: `{kind: "zip"|"folder", path}`; refuses anything else. */
-export function resolveSource(source) {
-  if (!source) throw new CliError("No dnd5e source.", { code: "usage", hint: "`npm run fvtt -- init --dnd5e-source=<release zip or unpacked folder>` (once), or --from=<…>." });
+function extractZip(zipPath, dir) {
+  const res = spawnSync("python", ["-I", path.join(HERE, "archive.py"), "extract", zipPath, dir], {
+    encoding: "utf8", windowsHide: true, maxBuffer: 16 * 1024 * 1024, env: { ...process.env, PYTHONUTF8: "1" }
+  });
+  if (res.status !== 0) throw new CliError(`Unpacking ${path.basename(zipPath)} failed: ${(res.stderr ?? "").trim().split(/\r?\n/).slice(-3).join(" | ")}`, { code: "bad-source" });
+}
+
+function countFiles(dir) {
+  let n = 0;
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) n += e.isDirectory() ? countFiles(path.join(dir, e.name)) : 1;
+  return n;
+}
+
+/** What a source is: `{kind: "zip"|"folder", path}`; refuses anything else. */
+export function resolveSource(source, what = "dnd5e") {
+  if (!source) throw new CliError(`No ${what} source.`, { code: "usage", hint: "`npm run fvtt -- init --dnd5e-source=<release zip or unpacked folder>` (once), or --from=<…>." });
   const p = path.resolve(String(source));
-  if (!fs.existsSync(p)) throw new CliError(`dnd5e source ${p} does not exist.`, { code: "bad-source" });
+  if (!fs.existsSync(p)) throw new CliError(`${what} source ${p} does not exist.`, { code: "bad-source" });
   if (fs.statSync(p).isDirectory()) return { kind: "folder", path: p };
   if (/\.zip$/i.test(p)) return { kind: "zip", path: p };
-  throw new CliError(`dnd5e source ${p} is neither a folder nor a .zip.`, { code: "bad-source" });
+  throw new CliError(`${what} source ${p} is neither a folder nor a .zip.`, { code: "bad-source" });
+}
+
+/** The folder of an unpacked release that holds its manifest: the root, or its only subfolder that has one. */
+function packageRoot(dir, type) {
+  if (fs.existsSync(path.join(dir, MANIFEST[type]))) return dir;
+  const subs = fs.readdirSync(dir, { withFileTypes: true }).filter(e => e.isDirectory() && fs.existsSync(path.join(dir, e.name, MANIFEST[type])));
+  return subs.length === 1 ? path.join(dir, subs[0].name) : null;
 }
 
 /**
- * Install `id` into `dataPath/Data/systems/<id>` from `source`. Staged under `agent-state/` first, checked, then
- * swapped in; an existing folder moves to `agent-state/systems/<id>-<version>-<stamp>`. The caller has made sure
- * no server uses the data path.
+ * Install a package into `dataPath/Data/<type>/<id>` from `source`. Unpacked under `agent-state/staging/` first,
+ * checked, then swapped in; an existing folder moves to `agent-state/<type>/<id>-<version>-<stamp>`. The caller
+ * has made sure no server uses the data path. `id` defaults to the manifest's; ids in `refuse` are never installed.
  * @returns {{id: string, version: string, previous: string|null, keptAt: string|null, source: object, files: number}}
  */
-export function installSystem({ source, dataPath, id = "dnd5e" }) {
-  const src = resolveSource(source);
+export function installPackage({ source, dataPath, type = "systems", id = null, lock = true, refuse = [] }) {
+  const src = resolveSource(source, id ?? type);
   const state = path.join(dataPath, "agent-state");
-  const staging = path.join(state, "staging", id);
-  const dst = path.join(dataPath, "Data", "systems", id);
-  if (isLink(dst)) throw new CliError(`${dst} is a link; refusing to replace it.`, { code: "sandbox-layout" });
+  const staging = path.join(state, "staging", `${id ?? "package"}-${stamp()}`);
   fs.rmSync(staging, { recursive: true, force: true });
   fs.mkdirSync(staging, { recursive: true });
-  const files = src.kind === "zip" ? extractZip(src.path, staging) : copyFolder(src.path, staging);
-  let version;
+  let root;
+  let found;
   try {
-    version = checkSystemFolder(staging, id, src.path);
+    if (src.kind === "zip") extractZip(src.path, staging);
+    else copyFolder(src.path, staging);
+    root = packageRoot(staging, type);
+    if (!root) throw new CliError(`${path.basename(src.path)} has no ${MANIFEST[type]}.`, { code: "bad-source" });
+    found = checkPackageFolder(root, { type, id, label: src.path });
+    if (refuse.includes(found.id)) throw new CliError(`${found.id} is not installed this way.`, { code: "refused-package", refused: true });
   } catch (err) {
     fs.rmSync(staging, { recursive: true, force: true });
     throw err;
   }
+  const dst = path.join(dataPath, "Data", type, found.id);
+  if (isLink(dst)) {
+    fs.rmSync(staging, { recursive: true, force: true });
+    throw new CliError(`${dst} is a link; refusing to replace it.`, { code: "sandbox-layout" });
+  }
   let previous = null;
   let keptAt = null;
   if (fs.existsSync(dst)) {
-    previous = packageVersion(dst);
-    keptAt = path.join(state, "systems", `${id}-${previous ?? "unknown"}-${stamp()}`);
+    previous = packageVersion(dst, MANIFEST[type]);
+    keptAt = path.join(state, type, `${found.id}-${previous ?? "unknown"}-${stamp()}`);
     fs.mkdirSync(path.dirname(keptAt), { recursive: true });
     fs.renameSync(dst, keptAt);
   }
   fs.mkdirSync(path.dirname(dst), { recursive: true });
-  fs.renameSync(staging, dst);
-  fs.writeFileSync(path.join(dst, `${id}.lock`), "🔒");
-  return { id, version, previous, keptAt, source: { kind: src.kind, file: path.basename(src.path) }, files };
+  fs.renameSync(root, dst);
+  fs.rmSync(staging, { recursive: true, force: true });
+  if (lock) fs.writeFileSync(path.join(dst, `${found.id}.lock`), "🔒");
+  return { id: found.id, version: found.version, previous, keptAt, source: { kind: src.kind, file: path.basename(src.path) }, files: countFiles(dst) };
+}
+
+/** dnd5e (or another system) of one data path, package-locked like every agent-managed package. */
+export function installSystem({ source, dataPath, id = "dnd5e" }) {
+  return installPackage({ source, dataPath, type: "systems", id, lock: true });
 }

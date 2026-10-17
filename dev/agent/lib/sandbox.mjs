@@ -90,6 +90,23 @@ export function linkPackage(src, dst, { id, skip = new Set(), ownPacks = false, 
   return made;
 }
 
+/**
+ * Link a package folder anew after its source was replaced (`module:install`): its junctions are removed (the
+ * links, never what they point to), its copied files and its own `packs/` copies too, then `linkPackage` builds it
+ * again — so a file or folder the new version dropped does not linger, and the packs are the new version's.
+ */
+export function relinkPackage(src, dst, { id }) {
+  if (!fs.existsSync(dst)) return linkPackage(src, dst, { id });
+  if (isLink(dst)) throw new CliError(`${dst} is itself a link; refusing to work inside it.`, { code: "sandbox-layout" });
+  for (const entry of fs.readdirSync(dst, { withFileTypes: true })) {
+    const p = path.join(dst, entry.name);
+    if (isLink(p)) fs.rmdirSync(p);
+    else if (entry.isDirectory() && entry.name === "packs") fs.rmSync(p, { recursive: true, force: true });
+    else if (entry.isFile() && entry.name !== `${id}.lock`) fs.unlinkSync(p);
+  }
+  return linkPackage(src, dst, { id });
+}
+
 /** Copy a whole package (systems: the sandbox's dnd5e is its own, upgradeable first, §5 C). */
 function copyPackage(src, dst, id) {
   if (!fs.existsSync(dst)) {

@@ -17,9 +17,12 @@ const { checkFreeze, checkMode, checkQuiet, checkSystemInstall, COMMAND_CLASS } 
 const { defaultProfileName, readFreeze, FILES, MODULE_ID } = await import("../lib/config.mjs");
 const { knownCoreError, parseCompatWarning, summariseCompat, frameOwner } = await import("../lib/compat.mjs");
 const { installSystem, checkSystemFolder, olderThan, packageVersion } = await import("../lib/systems.mjs");
-const { initSandbox } = await import("../lib/sandbox.mjs");
+const { initSandbox, linkPackage, relinkPackage } = await import("../lib/sandbox.mjs");
+const { installPackage } = await import("../lib/systems.mjs");
 const { createZip } = await import("../../release/zip.mjs");
 
+const hasPython = spawnSync("python", ["-c", "import sys, os; sys.exit(0 if sys.version_info >= (3, 12) else 1)"], { windowsHide: true }).status === 0;
+const needsPython = !hasPython && "python ≥ 3.12 not on PATH";
 const refusedWith = code => err => err.refused === true && err.code === `refused-${code}`;
 const frozen = { frozen: true, since: "2026-10-17T00:00:00Z", until: "E11", reason: "migration" };
 
@@ -105,7 +108,7 @@ function writeFolder(dir, entries) {
   return dir;
 }
 
-test("system:install from a release zip; a second install keeps the first outside Data/", () => {
+test("system:install from a release zip; a second install keeps the first outside Data/", { skip: needsPython }, () => {
   const dataPath = path.join(tmp, "dp-zip");
   const zip = writeZip(path.join(tmp, "dnd5e-6.0.6.zip"), fakeSystem("6.0.6"));
   const first = installSystem({ source: zip, dataPath });
@@ -122,7 +125,7 @@ test("system:install from a release zip; a second install keeps the first outsid
   assert.deepEqual(fs.readdirSync(path.join(dataPath, "Data", "systems")), ["dnd5e"], "Foundry sees one dnd5e");
 });
 
-test("system:install refuses a source checkout, another system, and leaves the installed one alone", () => {
+test("system:install refuses a source checkout, another system, and leaves the installed one alone", { skip: needsPython }, () => {
   const dataPath = path.join(tmp, "dp-refuse");
   installSystem({ source: writeFolder(path.join(tmp, "rel-5.3.0"), fakeSystem("5.3.0")), dataPath });
   assert.throws(() => installSystem({ source: writeFolder(path.join(tmp, "checkout"), fakeSystem("6.0.6", { built: false })), dataPath }), /not a built release/);
@@ -144,7 +147,7 @@ function fakeCampaign(name) {
   return { campaign, moduleRoot };
 }
 
-test("a new data path gets dnd5e from the configured source, not the campaign's (E0 (2))", async () => {
+test("a new data path gets dnd5e from the configured source, not the campaign's (E0 (2))", { skip: needsPython }, async () => {
   const { campaign, moduleRoot } = fakeCampaign("init-source");
   const zip = writeZip(path.join(tmp, "init-source", "dnd5e.zip"), fakeSystem("6.0.6"));
   const sandboxData = path.join(tmp, "init-source", "sandbox");
@@ -160,13 +163,50 @@ test("without a configured source a new data path still copies the campaign's dn
   assert.deepEqual(report.system, { dnd5e: "5.3.0", from: "campaign" });
 });
 
+
+test("module:install: a third-party module from a zip with a top folder, unlocked; this module never", { skip: needsPython }, () => {
+  const dataPath = path.join(tmp, "dp-module");
+  const mod = (version, id = "sequencer") => [
+    { name: `${id}/module.json`, data: Buffer.from(JSON.stringify({ id, version, packs: [] })) },
+    { name: `${id}/scripts/x.js`, data: Buffer.from(version) }
+  ];
+  const first = installPackage({ source: writeZip(path.join(tmp, "seq-1.zip"), mod("4.2.2")), dataPath, type: "modules", lock: false });
+  assert.equal(first.id, "sequencer");
+  const dst = path.join(dataPath, "Data", "modules", "sequencer");
+  assert.ok(!fs.existsSync(path.join(dst, "sequencer.lock")), "third-party modules stay unlocked");
+  const second = installPackage({ source: writeZip(path.join(tmp, "seq-2.zip"), mod("4.3.0")), dataPath, type: "modules", lock: false });
+  assert.deepEqual([second.version, second.previous], ["4.3.0", "4.2.2"]);
+  assert.equal(fs.readFileSync(path.join(dst, "scripts", "x.js"), "utf8"), "4.3.0");
+  assert.throws(() => installPackage({ source: writeZip(path.join(tmp, "ours.zip"), mod("9", MODULE_ID)), dataPath, type: "modules", refuse: [MODULE_ID] }), refusedWith("package"));
+  assert.ok(!fs.existsSync(path.join(dataPath, "Data", "modules", MODULE_ID)));
+});
+
+test("re-linking a package: links removed without touching their targets, dropped files gone, packs copied anew", () => {
+  const src = writeFolder(path.join(tmp, "relink", "src"), [
+    { name: "module.json", data: Buffer.from("{\"version\":\"1\"}") }, { name: "old.txt", data: Buffer.from("x") },
+    { name: "scripts/a.js", data: Buffer.from("a") }, { name: "packs/p/CURRENT", data: Buffer.from("1") }
+  ]);
+  const dst = path.join(tmp, "relink", "dst");
+  linkPackage(src, dst, { id: "m" });
+  assert.ok(fs.existsSync(path.join(dst, "old.txt")));
+  fs.rmSync(path.join(src, "old.txt"));
+  fs.writeFileSync(path.join(src, "module.json"), "{\"version\":\"2\"}");
+  fs.writeFileSync(path.join(src, "packs", "p", "CURRENT"), "2");
+  relinkPackage(src, dst, { id: "m" });
+  assert.ok(!fs.existsSync(path.join(dst, "old.txt")), "a file the new version dropped is gone");
+  assert.equal(fs.readFileSync(path.join(dst, "module.json"), "utf8"), "{\"version\":\"2\"}");
+  assert.equal(fs.readFileSync(path.join(dst, "packs", "p", "CURRENT"), "utf8"), "2");
+  assert.equal(fs.readFileSync(path.join(src, "scripts", "a.js"), "utf8"), "a", "the link target survives");
+  assert.equal(fs.readFileSync(path.join(dst, "scripts", "a.js"), "utf8"), "a");
+  assert.ok(fs.existsSync(path.join(dst, "m.lock")));
+});
+
 /* ---------------------------------------------------------------------------------- */
 /*  Backup                                                                             */
 /* ---------------------------------------------------------------------------------- */
 
-const hasPython = spawnSync("python", ["-c", "import sys, os; sys.exit(0 if sys.version_info >= (3, 12) else 1)"], { windowsHide: true }).status === 0;
 
-test("backup: archives, options.json, manifest, SHA256SUMS; links listed, not followed; never this module", { skip: !hasPython && "python ≥ 3.12 not on PATH" }, async () => {
+test("backup: archives, options.json, manifest, SHA256SUMS; links listed, not followed; never this module", { skip: needsPython }, async () => {
   const { runBackup, defaultWorlds } = await import("../lib/backup.mjs");
   const dataPath = path.join(tmp, "backup-dp");
   const data = path.join(dataPath, "Data");

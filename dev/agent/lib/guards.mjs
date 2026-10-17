@@ -19,7 +19,7 @@ export const COMMAND_CLASS = {
   // eval runs arbitrary code in a live client — it can write, so it is testing, not read.
   quench: "testing", reload: "testing", e2e: "testing", eval: "testing",
   start: "lifecycle", stop: "lifecycle", restart: "lifecycle", kill: "lifecycle", packs: "lifecycle",
-  backup: "lifecycle", "sandbox:init": "lifecycle", "sandbox:sync": "lifecycle", "system:install": "lifecycle",
+  backup: "lifecycle", "sandbox:init": "lifecycle", "sandbox:sync": "lifecycle", "system:install": "lifecycle", "module:install": "lifecycle",
   // Like `mode`: it only changes fvtt's own guard state. Lifted only on the GM's word (E11).
   freeze: "read",
   "world:create": "lifecycle", "world:launch": "lifecycle", "world:delete": "lifecycle", "world:seed": "testing",
