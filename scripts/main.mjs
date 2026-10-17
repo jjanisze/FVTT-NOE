@@ -11,6 +11,7 @@
  * - Movement in meters
  */
 
+import "./config/dnd5e-fixes.mjs"; // first: workarounds for dnd5e bugs, before any document update can run
 import { registerDocLiveness } from "./doc-liveness.mjs";
 import { registerSkills } from "./config/skills.mjs";
 import { registerTools } from "./config/tools.mjs";

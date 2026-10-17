@@ -133,11 +133,27 @@ export function ttSource(actor, id) {
 /*  Dane pochodne                                */
 /* -------------------------------------------- */
 
+/** dnd5e 6.0's default AC setup (`attributes.ac.calcs` initial). */
+const DEFAULT_AC_CALCS = ["unarmored", "armored"];
+
+/**
+ * „NOE (automatycznie)” = the AC window left as dnd5e's default. dnd5e 6.0 keeps the setup as `calcs` (a set,
+ * default unarmored + armored), custom `formulas` and an `override`; 5.3's single `calc: "default"` migrates into
+ * exactly that. Any other choice is the GM's own TT (D6). Read off `_source`: effects may add formulas while preparing.
+ */
+export function isAutoTT(actor) {
+  const src = actor?._source?.system?.attributes?.ac ?? {};
+  if (Number.isFinite(src.override)) return false;
+  if ((src.formulas ?? []).length) return false;
+  const calcs = new Set(src.calcs ?? DEFAULT_AC_CALCS);
+  return calcs.size === DEFAULT_AC_CALCS.length && DEFAULT_AC_CALCS.every(c => calcs.has(c));
+}
+
 function _applyTT(actor) {
   if (actor.type !== "character") return;
   const ac = actor.system?.attributes?.ac;
   if (!ac) return;
-  if (ac.calc !== "default") { ac.neuroshima = null; return; }
+  if (!isAutoTT(actor)) { ac.neuroshima = null; return; }
   const tt = computeTT(ttSnapshot(actor));
   ac.neuroshima = tt;
   ac.base = tt.method.value;
@@ -236,8 +252,9 @@ function _patchAttribution() {
 
 function _configureArmorClasses() {
   const classes = CONFIG.DND5E?.armorClasses;
-  if (!classes?.default) return;
-  classes.default.label = "NOE (automatycznie)";
+  if (!classes) return;
+  // dnd5e 6.0 has no `default` entry (the default is the unarmored + armored pair, `isAutoTT`); 5.3 had one.
+  if (classes.default) classes.default.label = "NOE (automatycznie)";
   for (const key of REMOVED_AC_METHODS) delete classes[key];
 }
 

@@ -90,7 +90,7 @@ export function registerSP() {
       // totals, passive scores — was computed before this point, so shift the
       // proficient ones by the difference rather than recomputing from scratch.
       // The rolls themselves read the Proficiency objects (`skill.prof.term`,
-      // `ability.saveProf.term`), not the totals: those are rebuilt on the new PB,
+      // `ability.save.prof.term`), not the totals: those are rebuilt on the new PB,
       // or the card would show one number and the dice add another.
       const Prof = globalThis.dnd5e?.documents?.Proficiency;
       const reprof = p => (Prof && p instanceof Prof ? new Prof(pb, p.multiplier, p.rounding !== "up") : p);
@@ -106,9 +106,11 @@ export function registerSP() {
         // dnd5e 5.x: `save` is an object (`save.value` is the total, `save.roll` the roll mode). The old
         // `ability.save += n` turned it into the string "[object Object]-6" and every saving throw of such
         // a monster threw in `rollSavingThrow` (found by the Emiter EMP e2e, PLAN_m3_towarzysze.md E10).
+        // dnd5e 6.0: the save's Proficiency is `save.prof` (`saveProf` is a getter-only shim — assigning it threw
+        // for every Bestiariusz NPC), and `attack` is `{value, bonus}`, no longer a number.
         if (ability.proficient && Number.isFinite(ability.save?.value)) ability.save.value += Math.floor(delta * ability.proficient);
-        ability.saveProf = reprof(ability.saveProf);
-        if (Number.isFinite(ability.attack)) ability.attack += delta;
+        if (ability.save?.prof) ability.save.prof = reprof(ability.save.prof);
+        if (Number.isFinite(ability.attack?.value)) ability.attack.value += delta;
         if (Number.isFinite(ability.dc)) ability.dc += delta;
       }
     } catch (err) {
