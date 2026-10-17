@@ -89,10 +89,13 @@ function _owinAtak() {
     const premia = premiaAtakuDrona(dron);
     if (premia === null) return orig.call(this, config);
     const rollData = this.getRollData();
-    // Premie aktora zostają: tędy wchodzą kary awarii celowania (−2/−4, `combat/maszyny.mjs`).
+    // Premie aktora zostają: tędy wchodzą kary awarii celowania (−2/−4, `combat/maszyny.mjs`). dnd5e 6.0 trzyma je w
+    // `system.rolls.attack.bonus` (wszystkie ataki) i `system.rolls.attack.<mwak|rwak|…>.bonus` (było `system.bonuses.*`).
+    const premie = this.actor?.system.rolls?.attack;
     return CONFIG.Dice.BasicRoll.constructParts({
       toHit: premia,
-      actorBonus: this.actor?.system.bonuses?.[this.getActionType(config.attackMode)]?.attack,
+      actorBonus: premie?.[this.getActionType(config.attackMode)]?.bonus,
+      globalBonus: premie?.bonus,
       situational: config.situational
     }, rollData);
   };

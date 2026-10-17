@@ -199,7 +199,7 @@ async function _zapiszZrodla(actor, sources) {
   const lista = sources.slice(0, 6);
   const updateData = { "system.attributes.exhaustion": lista.length };
   if (lista.length) updateData[`flags.${MODULE_ID}.exhaustionSources`] = lista;
-  else updateData[`flags.${MODULE_ID}.-=exhaustionSources`] = null;
+  else updateData[`flags.${MODULE_ID}.exhaustionSources`] = _del;
   _apiUpdate = true;
   try {
     await actor.update(updateData);
@@ -422,7 +422,7 @@ function onPreRestCompleted(actor, result, config) {
     // Ta sama składnia co w `_zapiszZrodla`: pusta tablica bywa gubiona przez diff,
     // więc ostatnie źródło kasujemy kluczem `-=`, a nie zapisem `[]`.
     if (sources.length) result.updateData[`flags.${MODULE_ID}.exhaustionSources`] = sources;
-    else result.updateData[`flags.${MODULE_ID}.-=exhaustionSources`] = null;
+    else result.updateData[`flags.${MODULE_ID}.exhaustionSources`] = _del;
   }
 
   const zostaje = sources.length
@@ -471,8 +471,8 @@ function onPreUpdateActor(actor, changes, options, userId) {
   if (newExhaustion === undefined) return true;
 
   // If our flags are also in the update, it came from our API (addExhaustion/removeExhaustion)
-  // or from the rest interception. Both spellings count — `removeExhaustion` clears the last
-  // source with the `-=` deletion key, which `getProperty` would never see under the plain name.
+  // or from the rest interception. `removeExhaustion` clears the last source with the v14 deletion operator
+  // (`_del`, seen under the plain name); the `-=` spelling is what older callers sent.
   const flagUpdate = foundry.utils.getProperty(changes, `flags.${MODULE_ID}.exhaustionSources`);
   const flagDelete = foundry.utils.getProperty(changes, `flags.${MODULE_ID}.-=exhaustionSources`);
   if ((flagUpdate !== undefined) || (flagDelete !== undefined)) return true;

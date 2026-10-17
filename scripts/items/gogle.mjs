@@ -421,8 +421,8 @@ export async function turnOff(item, { silent = false, reason = null } = {}) {
   await item.update({
     [`flags.${MODULE_ID}.${FLAG_ON}`]: false,
     [`flags.${MODULE_ID}.${FLAG_CHARGE}`]: _liveChargePercent(item),
-    [`flags.${MODULE_ID}.-=${FLAG_START}`]: null,
-    [`flags.${MODULE_ID}.-=${FLAG_BURNOUT_AT}`]: null,
+    [`flags.${MODULE_ID}.${FLAG_START}`]: _del,
+    [`flags.${MODULE_ID}.${FLAG_BURNOUT_AT}`]: _del,
   });
 
   await syncActorVision(item.actor);
@@ -483,8 +483,8 @@ async function _goDark(item) {
     [`flags.${MODULE_ID}.${FLAG_ON}`]: false,
     [`flags.${MODULE_ID}.${FLAG_HAS_BATTERY}`]: false,
     [`flags.${MODULE_ID}.${FLAG_CHARGE}`]: 0,
-    [`flags.${MODULE_ID}.-=${FLAG_START}`]: null,
-    [`flags.${MODULE_ID}.-=${FLAG_BURNOUT_AT}`]: null,
+    [`flags.${MODULE_ID}.${FLAG_START}`]: _del,
+    [`flags.${MODULE_ID}.${FLAG_BURNOUT_AT}`]: _del,
   });
 
   await syncActorVision(item.actor);

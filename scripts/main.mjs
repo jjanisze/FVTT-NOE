@@ -65,6 +65,7 @@ import { registerEffectPrioritiesMigration } from "./migration/migrate-effect-pr
 import { registerDniSwiataMigration } from "./migration/migrate-dni-swiata.mjs";
 import { registerOznaczReakcjeBN } from "./migration/oznacz-reakcje-bn.mjs";
 import { registerSrdCleanup } from "./config/srd-cleanup.mjs";
+import { registerDnd5eSettings, dnd5eSettingsApi } from "./config/dnd5e-settings.mjs";
 import { registerClassRules } from "./actors/class-rules.mjs";
 import { registerKobaltAdvancement } from "./actors/kobalt-advancement.mjs";
 import { registerCichyKrok } from "./actors/cichy-krok.mjs";
@@ -273,6 +274,7 @@ Hooks.once("init", () => {
   registerDniSwiataMigration();
   registerOznaczReakcjeBN();
   registerSrdCleanup();
+  registerDnd5eSettings();
   registerClassRules();
   registerKobaltAdvancement();
   registerCichyKrok();
@@ -489,6 +491,7 @@ Hooks.once("ready", () => {
   // Broń i pancerze — dane z tabel są źródłem prawdy dla kompendiów i dla
   // odtworzenia zawartości Zbrojowni: game.neuroshima.createWeapons()
   game.neuroshima.WEAPONS = WEAPONS;
+  game.neuroshima.dnd5eSettings = dnd5eSettingsApi;
   game.neuroshima.createWeapons = createWeapons;
   // game.neuroshima.auditWeapons() — read-only drift report (console + return value).
   // game.neuroshima.repairWeapons() — applies exactly what the audit finds.
@@ -676,11 +679,7 @@ Hooks.once("ready", () => {
   // conditions.mjs's NEUROSHIMA_ZAGROZENIA) + Upojenie + Skażenie + Zranienie
   if (conditionCount !== 26) console.warn(`${MODULE_ID} | Expected 26 conditions, got ${conditionCount}`);
 
-  // Warn if not using modern rules (needed for exhaustion -2 per level)
-  if (globalThis.dnd5e?.settings?.rulesVersion !== "modern") {
-    console.warn(`${MODULE_ID} | ⚠ Rules version is "${globalThis.dnd5e?.settings?.rulesVersion}", not "modern". Exhaustion -2/level penalty requires modern rules.`);
-    ui.notifications?.warn("Neuroshima: Ustaw Rules Version na 'Modern (2024)' w ustawieniach dnd5e, aby Wyczerpanie dawało -2 do testów.");
-  }
+  // Rules version (modern: Wyczerpanie −2/level) is enforced by config/dnd5e-settings.mjs.
 });
 
 

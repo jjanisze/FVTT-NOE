@@ -128,5 +128,5 @@ export async function nadajWprawe(actor, przepis, { nota = "" } = {}) {
 /** Odbiera Wprawę od MG. */
 export async function odbierzWprawe(actor, przepisId) {
   if (!game.user.isGM) throw new Error("Wprawę odbiera MG.");
-  await actor.update({ [`flags.${MODULE_ID}.${WPRAWA_FLAG}.-=${kluczWprawy(przepisId)}`]: null });
+  await actor.update({ [`flags.${MODULE_ID}.${WPRAWA_FLAG}.${kluczWprawy(przepisId)}`]: _del });
 }

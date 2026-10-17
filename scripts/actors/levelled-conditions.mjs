@@ -61,9 +61,9 @@ export function registerLevelledConditions() {
   }
 
   // One hook covers every path that can move a level: HUD click, API, macro.
-  // Clearing a level deletes the flag rather than writing 0, and Foundry spells a
-  // deletion `-=key` — matching only the bare key would leave the effect behind
-  // on exactly the transition that is supposed to remove it.
+  // Clearing a level deletes the flag rather than writing 0. A v14 deletion is the operator under the
+  // bare key (`_del`); older callers spell it `-=key` — matching only one form would leave the effect
+  // behind on exactly the transition that is supposed to remove it.
   Hooks.on("updateActor", (actor, changed) => {
     const flags = foundry.utils.getProperty(changed, `flags.${MODULE_ID}`) ?? {};
     const touched = Object.keys(LEVELLED_CONDITIONS)
@@ -259,7 +259,7 @@ async function setLevel(actor, id, level, { chat = true } = {}) {
 
   await actor.update(next > 0
     ? { [`flags.${MODULE_ID}.${id}`]: next }
-    : { [`flags.${MODULE_ID}.-=${id}`]: null });
+    : { [`flags.${MODULE_ID}.${id}`]: _del });
 
   if (chat) {
     const verb = next > previous ? "otrzymuje" : "traci";
@@ -658,7 +658,7 @@ function getRadiationFailures(actor) {
 async function clearRadiation(actor) {
   if (!actor) return;
   await setLevel(actor, "skazenie", 0, { chat: false });
-  await actor.update({ [`flags.${MODULE_ID}.-=${RAD_FAILURES_FLAG}`]: null });
+  await actor.update({ [`flags.${MODULE_ID}.${RAD_FAILURES_FLAG}`]: _del });
   await ChatMessage.create({
     content: `<strong>${actor.name}</strong> przyjmuje RadOff — skażenie ustępuje.`,
     speaker: ChatMessage.getSpeaker({ actor })

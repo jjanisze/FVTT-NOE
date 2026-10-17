@@ -482,7 +482,7 @@ async function _reverseDelta(weapon, def, delta) {
     try {
       // dnd5e 5.3: remove from the activities collection (not deleteEmbeddedDocuments).
       if (weapon.system.activities?.has?.(delta.activityId)) {
-        await weapon.update({ [`system.activities.-=${delta.activityId}`]: null });
+        await weapon.update({ [`system.activities.${delta.activityId}`]: _del });
       }
     } catch (_) {
       // Activity may already be gone

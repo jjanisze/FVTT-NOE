@@ -42,13 +42,16 @@ export const RULES = [
     test: /(^|[{,(\s])changes\s*:\s*\[/, files: /\.m?js$/ },
   // §2.1 — core v14: `{-=key: null}` deletion → `{key: new foundry.data.operators.ForcedDeletion()}` (removed in v16;
   // `unsetFlag` already uses the operator). Triage E2: ~60 warnings with core as the last frame — the calls are ours.
-  { id: "deletion-syntax", stage: "E3", what: "`-=key` forced deletion in update data → foundry.data.operators.ForcedDeletion (or unsetFlag)",
-    test: /["'`.]-=[\w$]|\.-=\$\{/, files: /\.m?js$/ },
+  { id: "deletion-syntax", stage: "E3", what: "`-=key` forced deletion written in update data → `_del` (foundry.data.operators.ForcedDeletion) or unsetFlag; reading a `-=` key from hook changes stays for older callers",
+    test: /\.-=[^"'`\n]*["'`]\]?\s*[:=,]\s*null\b/, files: /\.m?js$/ },
   // Core v14: MeasuredTemplate merged into Region (memory: v14 templates are Regions).
   { id: "scene-templates", stage: "E4", what: "Scene#templates (deprecated, MeasuredTemplate merged into Region) → the paired Region",
     test: /\b\w*[sS]cene\??\.templates\b|ogladana\??\.templates\b|getEmbeddedCollection\(\s*["']MeasuredTemplate["']/, files: /\.m?js$/ },
   { id: "effect-modes", stage: "E3", what: "CONST.ACTIVE_EFFECT_MODES (numeric modes) → string change types",
     test: /ACTIVE_EFFECT_MODES/ },
+  // Core v14: the V1 Application framework is deprecated (Dialog → foundry.applications.api.DialogV2).
+  { id: "v1-dialog", stage: "E7", what: "V1 Dialog / Application → DialogV2 / ApplicationV2 (core v14 deprecation)",
+    test: /new Dialog\(|\bDialog\.(confirm|prompt|wait)\(|extends (Application|FormApplication|Dialog)\b|new FormApplication/, files: /\.m?js$/ },
   // §3.12 — renamed prepared-data paths: no shim for reads, `undefined` under the old key.
   { id: "movement", stage: "E3", what: "attributes.movement.<type> → attributes.movement.speeds.<type>",
     test: /movement\??\.(walk|fly|swim|climb|burrow|hover)\b|["']system\.attributes\.movement\.(walk|fly|swim|climb|burrow)["']/ },

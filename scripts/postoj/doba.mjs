@@ -158,7 +158,7 @@ export async function zapiszSzkic(actor, patch, { zostawStan = false } = {}) {
   if (patch.towarzysze) nowy.towarzysze = patch.towarzysze;
   if (patch.doloz) nowy.doloz = patch.doloz;
   if (!zostawStan && !("stan" in patch)) nowy.stan = "szkic";
-  await actor.update({ [`flags.${MODULE_ID}.-=${FLAGA_SZKICU}`]: null });
+  await actor.update({ [`flags.${MODULE_ID}.${FLAGA_SZKICU}`]: _del });
   await actor.update({ [`flags.${MODULE_ID}.${FLAGA_SZKICU}`]: nowy });
   return szkic(actor);
 }
@@ -424,7 +424,7 @@ export async function zatwierdzDobe(grupa) {
   // 5. Zegar +24 h raz; szkice zamknięte; archiwum; karty.
   const dzien = formatWorldDate();
   await game.time.advance(DOBA_S);
-  for (const w of wyniki) await w.actor.update({ [`flags.${MODULE_ID}.-=${FLAGA_SZKICU}`]: null });
+  for (const w of wyniki) await w.actor.update({ [`flags.${MODULE_ID}.${FLAGA_SZKICU}`]: _del });
   const historia = [...(grupa.getFlag(MODULE_ID, "postoj")?.historia ?? []), {
     id: d.id, dzien, miejsce: opisMiejsca(m), czas: game.time.worldTime,
     postacie: wyniki.map(w => ({ uuid: w.actor.uuid, nazwa: w.actor.name, sen: w.s.sen, utrzymanie: w.s.utrzymanie, saldo: w.r.saldo, godziny: godzinyZajec(w.s) }))

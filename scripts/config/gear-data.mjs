@@ -332,8 +332,8 @@ export async function createRealGear(actor) {
       // `.update()` deep-merges `flags` by default — it does NOT drop a stale key just because
       // the new data doesn't mention it. Confirmed live (2026-09-06): updating a migrated item
       // with `buildRealGearItemData`'s output left the old `craftingPlaceholder: true` flag
-      // sitting there untouched. Foundry's own `-=key` update syntax deletes it explicitly.
-      data[`flags.${MODULE_ID}.-=craftingPlaceholder`] = null;
+      // sitting there untouched. Foundry's deletion operator (`_del`, v14; was `-=key`) deletes it explicitly.
+      data[`flags.${MODULE_ID}.craftingPlaceholder`] = _del;
       await item.update(data);
     }
     else [item] = await actor.createEmbeddedDocuments("Item", [data]);

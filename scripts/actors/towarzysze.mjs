@@ -23,6 +23,7 @@
 
 import { RODZAJE } from "../config/towarzysze-data.mjs";
 import { migawka, wartosciPochodne, stopnieZranienia } from "../config/towarzysze-rules.mjs";
+import { change, CHANGE_TYPE, normalizeChanges } from "../config/effect-changes.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -361,7 +362,7 @@ export function efektPB(pb = 2) {
     name: "Premia Biegłości towarzysza",
     img: "icons/skills/trades/academics-study-reading-book.webp",
     description: `<p>Premia Biegłości towarzysza: +${pb}, nie rośnie z poziomem (NOE s. 76, 101).</p>`,
-    changes: [{ key: "system.attributes.prof", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: String(pb), priority: 50 }],
+    system: { changes: [change("system.attributes.prof", CHANGE_TYPE.override, String(pb))] },
     flags: { [MODULE_ID]: { [FLAG]: "pb" } }
   };
 }
@@ -376,10 +377,9 @@ export async function zapewnijEfektPB(actor) {
     await actor.createEmbeddedDocuments("ActiveEffect", [dane], { keepId: true });
     return true;
   }
-  const zgodny = jest.changes.length === 1 && jest.changes[0].key === dane.changes[0].key
-    && Number(jest.changes[0].value) === pb && jest.changes[0].mode === dane.changes[0].mode && !jest.disabled;
+  const zgodny = normalizeChanges(jest.system?.changes) === normalizeChanges(dane.system.changes) && !jest.disabled;
   if (zgodny) return false;
-  await jest.update({ changes: dane.changes, disabled: false });
+  await jest.update({ "system.changes": dane.system.changes, disabled: false });
   return true;
 }
 

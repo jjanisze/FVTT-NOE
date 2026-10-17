@@ -124,7 +124,8 @@ export function registerPoscigMotion() {
   Hooks.on("updateScene", (scene, changes) => {
     if (scene.id !== canvas.scene?.id) return;
     const changed = changes.flags?.[MODULE_ID];
-    if (changed?.["-=poscig"] !== undefined) stop();
+    // Deleted: the v14 operator under the key, or (older callers) a `-=` key.
+    if (changed?.["-=poscig"] !== undefined || changed?.poscig instanceof foundry.data.operators.ForcedDeletion) stop();
     else if (changed?.poscig && !ticker && canvas.ready) start();
     if (changed?.poscig?.tempoTla === 0) beforeFrame();
   });

@@ -122,7 +122,7 @@ export async function otworzWymiane(actor, handlarz = null, { zamowienie = false
 }
 
 export async function zamknijWymiane(actor) {
-  await actor.update({ [`flags.${MODULE_ID}.-=${FLAGA_WYMIANY}`]: null });
+  await actor.update({ [`flags.${MODULE_ID}.${FLAGA_WYMIANY}`]: _del });
 }
 
 /** „Daję”: przedmiot gracza z ilością (scala z tym samym przedmiotem). */

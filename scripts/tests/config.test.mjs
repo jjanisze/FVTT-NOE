@@ -160,9 +160,28 @@ export function registerConfigTests(quench) {
 
     /* ---------------------------------------------------------------- */
 
+    describe("Ustawienia dnd5e pilnowane przez NOE (PLAN_migracja_dnd5e6.md §5)", function () {
+      it("każde ustawienie z tabeli istnieje w dnd5e i ma wartość wymaganą przez NOE", function () {
+        const { table, state } = game.neuroshima.dnd5eSettings;
+        const rows = state();
+        expect(rows.map(r => r.key).sort(), "ustawienia nieznane tej wersji dnd5e").to.deep.equal(Object.keys(table).sort());
+        // Wymuszane na `ready` aktywnego MG — świat testów to ten sam klient.
+        for (const r of rows) expect(r.current, `${r.key}: ${r.why}`).to.equal(r.required);
+      });
+
+      it("koncentracja wyłączona, Wyczerpanie włączone, 0 PW bez automatu (D9, §5)", function () {
+        expect(game.settings.get("dnd5e", "disableConcentration")).to.equal(true);
+        expect(game.settings.get("dnd5e", "disableExhaustion")).to.equal(false);
+        expect(game.settings.get("dnd5e", "autoApplyDowned")).to.equal("none");
+      });
+    });
+
     describe("Broń, obrażenia, stworzenia", function () {
       it("rzucanie czarów jest wyłączone", function () {
-        expect(Object.keys(CONFIG.DND5E.spellcastingTypes)).to.be.empty;
+        // dnd5e 6.0 has no `spellcastingTypes` (it was a 5.3 alias of `spellcasting`, which stays — see spellcasting.mjs).
+        expect(Object.keys(CONFIG.DND5E.spellSchools)).to.be.empty;
+        expect(Object.keys(CONFIG.DND5E.spellLevels)).to.be.empty;
+        expect(Object.keys(CONFIG.DND5E.spellComponents ?? {})).to.be.empty;
       });
 
       it("`validProperties.weapon` zawiera wszystkie właściwości Neuroshimy", function () {

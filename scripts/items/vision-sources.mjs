@@ -38,7 +38,7 @@
  * array shape `dev/packs/build-packs.mjs`'s bestiary builder writes into an offline-imported
  * LevelDB source doc — a different pipeline, irrelevant to a live `update()` call), so a dot-path
  * partial write reaches exactly one key without disturbing its siblings — same mechanism this
- * project already relies on for flags (`flags.MOD.-=key` deletion, used throughout
+ * project already relies on for flags (`flags.MOD.key: _del` deletion, used throughout
  * `latarka.mjs`/`gogle.mjs`), just applied to `sight.*`/`detectionModes.*` instead. Writing only
  * `sight.visionMode`/`sight.color` this way leaves whatever `range`/`angle`/`attenuation` dnd5e's
  * own sense computation (darkvision, etc.) already set completely untouched.
@@ -220,7 +220,7 @@ async function _doSyncActorVision(actor) {
       if (doc.sight?.range !== desired.sightRange) update["sight.range"] = desired.sightRange;
     } else if (hasBackup) {
       update["sight.range"] = rangeBackup;
-      update[`flags.${MODULE_ID}.-=${VISION_RANGE_BACKUP_FLAG}`] = null;
+      update[`flags.${MODULE_ID}.${VISION_RANGE_BACKUP_FLAG}`] = _del;
     }
 
     // `detectionModes` is a `TypedObjectField` (confirmed live against v14's schema,
@@ -230,13 +230,13 @@ async function _doSyncActorVision(actor) {
     // offline-imported LevelDB source doc, a different pipeline that may tolerate/migrate a
     // different shape — irrelevant here, this runs against a live `TokenDocument#update()`).
     // Dot-path partial writes are the correct tool for a keyed object field, same as this
-    // project already relies on for flags (`flags.MOD.-=key` deletion) — no need to read-merge-
+    // project already relies on for flags (`flags.MOD.key: _del` deletion) — no need to read-merge-
     // rewrite the whole object.
     const prevOurs = doc.getFlag(MODULE_ID, VISION_DETECTION_FLAG) ?? null;
     const nextId = desired?.detectionModeId ?? null;
     const nextRange = desired?.detectionRange ?? 0;
 
-    if (prevOurs && prevOurs !== nextId) update[`detectionModes.-=${prevOurs}`] = null;
+    if (prevOurs && prevOurs !== nextId) update[`detectionModes.${prevOurs}`] = _del;
     if (nextId) {
       const cur = doc.detectionModes?.[nextId];
       if (!cur || cur.enabled !== true || cur.range !== nextRange) {

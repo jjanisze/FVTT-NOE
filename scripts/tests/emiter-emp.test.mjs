@@ -89,11 +89,11 @@ export function registerEmiterEmpTests(quench) {
         const con = ob.system.abilities.con;
         expect(con.proficient, "Obrońca ma biegły RO na KON").to.be.above(0);
         expect(typeof con.save, "nie napis „[object Object]-6”").to.equal("object");
-        expect(con.saveProf.flat).to.equal(Math.floor(pb * con.proficient));
-        expect(con.save.value).to.equal(con.mod + con.saveBonus + con.saveProf.flat);
+        expect(con.save.prof.flat).to.equal(Math.floor(pb * con.proficient));
+        expect(con.save.value).to.equal(con.mod + con.save.bonus + con.save.prof.flat);
         const rolls = await ob.rollSavingThrow({ ability: "con" }, { configure: false }, { create: false });
         const roll = Array.isArray(rolls) ? rolls[0] : rolls;
-        expect(roll?.formula, "rzut przeszedł").to.include(String(con.saveProf.flat));
+        expect(roll?.formula, "rzut przeszedł").to.include(String(con.save.prof.flat));
       });
     });
 

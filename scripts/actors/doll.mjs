@@ -392,7 +392,7 @@ function _stateWithPending(actor) {
 
 function _slotsUpdate(item, d, slots) {
   const u = { _id: item.id, [`flags.${MODULE_ID}.${SLOTS_FLAG}`]: slots };
-  if (item.flags?.[MODULE_ID]?.[LEGACY_BELT_FLAG] !== undefined) u[`flags.${MODULE_ID}.-=${LEGACY_BELT_FLAG}`] = null;
+  if (item.flags?.[MODULE_ID]?.[LEGACY_BELT_FLAG] !== undefined) u[`flags.${MODULE_ID}.${LEGACY_BELT_FLAG}`] = _del;
   if (governsEquipped(d.family)) {
     const eq = slots.some(isActiveSlot);
     if (eq !== !!item.system?.equipped) u["system.equipped"] = eq;
@@ -718,7 +718,7 @@ function _onPreUpdateItem(item, changes, options, userId) {
       if (next.length !== d.slots.length || d.legacy) {
         foundry.utils.setProperty(changes, `flags.${MODULE_ID}.${SLOTS_FLAG}`, next);
         if (item.flags?.[MODULE_ID]?.[LEGACY_BELT_FLAG] !== undefined) {
-          foundry.utils.setProperty(changes, `flags.${MODULE_ID}.-=${LEGACY_BELT_FLAG}`, null);
+          foundry.utils.setProperty(changes, `flags.${MODULE_ID}.${LEGACY_BELT_FLAG}`, _del);
         }
         if (governsEquipped(d.family)) foundry.utils.setProperty(changes, "system.equipped", next.some(isActiveSlot));
       }
@@ -760,8 +760,8 @@ function _onPreCreateItem(item, data, options) {
   if (options?.neuroDoll) return;
   const f = data?.flags?.[MODULE_ID] ?? {};
   const patch = {};
-  if (f[SLOTS_FLAG] !== undefined) patch[`flags.${MODULE_ID}.-=${SLOTS_FLAG}`] = null;
-  if (f[LEGACY_BELT_FLAG] !== undefined) patch[`flags.${MODULE_ID}.-=${LEGACY_BELT_FLAG}`] = null;
+  if (f[SLOTS_FLAG] !== undefined) patch[`flags.${MODULE_ID}.${SLOTS_FLAG}`] = _del;
+  if (f[LEGACY_BELT_FLAG] !== undefined) patch[`flags.${MODULE_ID}.${LEGACY_BELT_FLAG}`] = _del;
   const actor = item.parent;
   if (actor && isDollActor(actor) && item.system?.equipped && governsEquipped(familyOf(item))) {
     patch["system.equipped"] = false;
@@ -832,7 +832,7 @@ export async function migrateDoll({ commit = false, actors = null } = {}) {
       if (family === "belt") {
         if (f[LEGACY_BELT_FLAG] === undefined) continue;
         const slots = belt.get(item.id) ?? [];
-        updates.push({ _id: item.id, [`flags.${MODULE_ID}.${SLOTS_FLAG}`]: slots, [`flags.${MODULE_ID}.-=${LEGACY_BELT_FLAG}`]: null });
+        updates.push({ _id: item.id, [`flags.${MODULE_ID}.${SLOTS_FLAG}`]: slots, [`flags.${MODULE_ID}.${LEGACY_BELT_FLAG}`]: _del });
         rows.push(`${item.name}: pas ${JSON.stringify(f[LEGACY_BELT_FLAG])} → ${slots.join(", ") || "(plecak)"}`);
         continue;
       }

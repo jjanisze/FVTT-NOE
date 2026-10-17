@@ -501,16 +501,16 @@ export function registerDronyTests(quench) {
       });
 
       it("2 — Szybkość ½; 13 — TT −2; 5 — Sparaliżowanie; 11 — Podpalenie; 19 — Wyłączony do naprawy", async function () {
-        const szybkosc = wynik.dron.system.attributes.movement.walk;
+        const szybkosc = wynik.dron.system.attributes.movement.speeds.walk;
         const tt = wynik.dron.system.attributes.ac.value;
         await zastosujAwarie(wynik.dron, 2);
-        expect(wynik.dron.system.attributes.movement.walk).to.equal(szybkosc / 2);
+        expect(wynik.dron.system.attributes.movement.speeds.walk).to.equal(szybkosc / 2);
         await zastosujAwarie(wynik.dron, 13);
         expect(wynik.dron.system.attributes.ac.value).to.equal(tt - 2);
         await zastosujAwarie(wynik.dron, 5);
         await zastosujAwarie(wynik.dron, 11);
         await zastosujAwarie(wynik.dron, 19);
-        expect(wynik.dron.system.attributes.movement.walk, "Sparaliżowanie i Wyłączony — Szybkość 0").to.equal(0);
+        expect(wynik.dron.system.attributes.movement.speeds.walk, "Sparaliżowanie i Wyłączony — Szybkość 0").to.equal(0);
         expect(wynik.dron.statuses.has("paralyzed")).to.equal(true);
         expect(wynik.dron.statuses.has("burning")).to.equal(true);
         expect(przyczynyWylaczenia(wynik.dron)).to.include("awaria");
@@ -1124,7 +1124,7 @@ export function registerDronyTests(quench) {
 
       it("uchwyt sprzed E9 dostaje aktywności naprawy przy synchronizacji", async function () {
         const { dron, uchwyt: u } = await nowyDron(haker, "dron-latajacy");
-        await haker.items.get(u.id).update({ [`system.activities.-=${AKT_NAPRAW_AWARIE}`]: null });
+        await haker.items.get(u.id).update({ [`system.activities.${AKT_NAPRAW_AWARIE}`]: _del });
         expect(haker.items.get(u.id).system.activities.get(AKT_NAPRAW_AWARIE)).to.not.be.ok;
         await dron.update({ name: `${dron.name} II` });
         await waitFor(() => haker.items.get(u.id).system.activities.get(AKT_NAPRAW_AWARIE), { label: "aktywność wróciła" });

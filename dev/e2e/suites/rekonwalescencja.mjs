@@ -36,8 +36,8 @@ async function przygotuj({ kobalt }) {
     const a = game.actors.getName(name);
     await a.update({
       "system.attributes.hp.max": 12, "system.attributes.hp.value": 12, "system.attributes.exhaustion": 0,
-      [`flags.${MOD}.-=exhaustionSources`]: null, [`flags.${MOD}.-=rekonwalescencja`]: null,
-      [`flags.${MOD}.-=rekonwalescencjaProsba`]: null
+      [`flags.${MOD}.exhaustionSources`]: _del, [`flags.${MOD}.rekonwalescencja`]: _del,
+      [`flags.${MOD}.rekonwalescencjaProsba`]: _del
     });
     for (const s of ["dehydration", "malnutrition"]) await a.toggleStatusEffect(s, { active: false });
     await setZranienie(a, 0);

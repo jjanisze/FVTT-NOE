@@ -22,20 +22,10 @@ export function removeSpellcasting() {
     CONFIG.DND5E.spellTags = {};
   }
 
-  // Empty out spell progression
-  if (CONFIG.DND5E.spellProgression) {
-    CONFIG.DND5E.spellProgression = {};
-  }
-
-  // Empty out spellcasting types
-  if (CONFIG.DND5E.spellcastingTypes) {
-    CONFIG.DND5E.spellcastingTypes = {};
-  }
-
-  // Remove spell preparation modes
-  if (CONFIG.DND5E.spellPreparationModes) {
-    CONFIG.DND5E.spellPreparationModes = {};
-  }
+  // `spellProgression`, `spellcastingTypes` and `spellPreparationModes` were deprecated proxies over
+  // `CONFIG.DND5E.spellcasting` in 5.3 and are gone in 6.0; emptying them never touched the real table. That table
+  // (casting methods, slot progressions) stays: dnd5e reads it in ~20 places while preparing any actor, and
+  // nothing in Neuroshima has a spellcasting class to use it.
 
   console.log("Neuroshima 5e | Spellcasting config removed");
 }

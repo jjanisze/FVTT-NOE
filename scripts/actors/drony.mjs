@@ -254,7 +254,7 @@ export function zmianyOdebrania(dron, userIds = null, { rodzaj = null } = {}) {
     const u = game.users.get(id);
     if (u && holder?.testUserPermission(u, "OWNER")) own[id] = lv.OWNER;
     else delete own[id];
-    zmiany[`flags.${MODULE_ID}.${FLAG_NADANE}.-=${id}`] = null;
+    zmiany[`flags.${MODULE_ID}.${FLAG_NADANE}.${id}`] = _del;
   }
   // Jak arkusz własności rdzenia: całe pole naraz (`_replace`), bo usunięty klucz ma zniknąć, nie zostać.
   zmiany.ownership = _replace(own);
@@ -368,7 +368,7 @@ async function _obsluzProsby(actor) {
     } finally {
       // Zawsze — prośba jest jednorazowa; błąd nie może jej zostawić do powtórki przy następnej zmianie.
       if (isDocumentLive(actor)) {
-        try { await actor.update({ [`flags.${MODULE_ID}.${FLAG_PROSBY}.-=${nonce}`]: null }); } catch { /* aktor zniknął */ }
+        try { await actor.update({ [`flags.${MODULE_ID}.${FLAG_PROSBY}.${nonce}`]: _del }); } catch { /* aktor zniknął */ }
       }
       _wToku.delete(nonce);
     }
@@ -412,9 +412,9 @@ async function _zabierz({ uchwyt: uuid }) {
   // Złożony dron nie ma operatora ani aktywacji (E7b) — kolejne wejście zaczyna od zera.
   await dron.update({
     [`flags.${MODULE_ID}.${FLAG}.operator`]: null,
-    [`flags.${MODULE_ID}.-=${FLAG_AKTYWACJA}`]: null,
-    [`flags.${MODULE_ID}.-=${FLAG_REAKCJA}`]: null,
-    [`flags.${MODULE_ID}.-=${FLAG_STEROWANIE}`]: null,
+    [`flags.${MODULE_ID}.${FLAG_AKTYWACJA}`]: _del,
+    [`flags.${MODULE_ID}.${FLAG_REAKCJA}`]: _del,
+    [`flags.${MODULE_ID}.${FLAG_STEROWANIE}`]: _del,
     ...(zmianyOdebrania(dron) ?? {})
   });
   for (const [scene, ids] of naScenach) await scene.deleteEmbeddedDocuments("Token", ids);

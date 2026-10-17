@@ -20,6 +20,7 @@ import { posiadaczDrona } from "../actors/drony.mjs";
 import { ignite } from "./podpalenie.mjs";
 import { getMag, setMag } from "../weapons/magazine.mjs";
 import { startNaKombatanta } from "./czas-efektu.mjs";
+import { change, CHANGE_TYPE } from "../config/effect-changes.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -149,7 +150,7 @@ function _efektAwarii(pozycja, { nazwa, img = "icons/svg/hazard.svg", changes = 
     name: `Awaria: ${nazwa}`,
     img,
     description: `<p>${esc(RAW_AWARII[pozycja] ?? "")}</p><p><em>Tabela awarii maszyn, ${pozycja} (s. 214).</em></p>`,
-    changes,
+    system: { changes },
     statuses,
     flags: { [MODULE_ID]: { [FLAG_AWARIA]: pozycja, ...(czasowa ? { [FLAG_CZASOWA]: true } : {}) } }
   };
@@ -198,16 +199,16 @@ export async function zastosujAwarie(actor, pozycja) {
   };
 
   if (s.szybkosc) {
-    await efekt({ changes: MOVE.map(m => ({ key: `system.attributes.movement.${m}`, mode: CONST.ACTIVE_EFFECT_MODES.MULTIPLY, value: String(s.szybkosc) })) });
+    await efekt({ changes: MOVE.map(m => change(`system.attributes.movement.speeds.${m}`, CHANGE_TYPE.multiply, String(s.szybkosc))) });
     zrobione.push("Szybkość ×½ do naprawy");
   }
   if (s.atak) {
     const v = String(s.atak);
-    await efekt({ changes: ["mwak", "rwak"].map(k => ({ key: `system.bonuses.${k}.attack`, mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: v })) });
+    await efekt({ changes: ["mwak", "rwak"].map(k => change(`system.rolls.attack.${k}.bonus`, CHANGE_TYPE.add, v)) });
     zrobione.push(`${v} do Testów Ataku do naprawy`);
   }
   if (s.tt) {
-    await efekt({ changes: [{ key: "system.attributes.ac.bonus", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: String(s.tt) }] });
+    await efekt({ changes: [change("system.attributes.ac.bonus", CHANGE_TYPE.add, String(s.tt))] });
     zrobione.push(`TT ${s.tt} do naprawy`);
   }
   if (s.znacznik) {

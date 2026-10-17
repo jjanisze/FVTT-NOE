@@ -51,7 +51,7 @@ export async function migrateDniSwiata({ commit = false } = {}) {
 
     const blokada = actor.getFlag(MODULE_ID, LEGACY_NO_REST_FLAG);
     if (blokada !== undefined) {
-      zmiany[`flags.${MODULE_ID}.-=${LEGACY_NO_REST_FLAG}`] = null;
+      zmiany[`flags.${MODULE_ID}.${LEGACY_NO_REST_FLAG}`] = _del;
       if (blokada === stary) {
         zmiany[`flags.${MODULE_ID}.${NO_REST_FLAG}`] = game.time.worldTime + sekundyDoby();
         opis.push("odpoczynek bez korzyści: następna doba gry");

@@ -133,18 +133,21 @@ export function applyArmorPenalties(actor) {
   if (!worn.length) return;
 
   /* ── Kara Szybkości ──
-     dnd5e ma pole `system.strength` w schemacie ekwipunku, ale w 5.3 nic z nim
-     nie robi. Neuroshima: SIŁA niższa niż wymagana → Szybkość −4,5 m. */
+     Neuroshima: SIŁA niższa niż wymagana przez pancerz albo tarczę → Szybkość −4,5 m. dnd5e 6.0
+     ma własną regułę (`CONFIG.DND5E.armorSpeedReduction`, tylko pancerz, przed mnożnikiem) —
+     wyłączoną w `registerArmorRules`, żeby kara nie szła podwójnie. Prędkości są w
+     `movement.speeds` (było `movement.<rodzaj>`); `speed` i `max` dnd5e liczy z nich. */
   const str = actor.system.abilities.str?.value ?? 10;
   const tooWeak = worn.some(i => i.system?.strength && (str < i.system.strength));
-  if (tooWeak) {
-    const movement = actor.system.attributes?.movement;
-    if (movement) {
-      const penalty = movement.units === "ft" ? 15 : LOW_STRENGTH_SPEED_PENALTY;
-      for (const key of ["walk", "swim", "climb", "fly", "burrow"]) {
-        if (typeof movement[key] === "number") movement[key] = Math.max(0, movement[key] - penalty);
-      }
+  const movement = actor.system.attributes?.movement;
+  if (tooWeak && movement?.speeds) {
+    const penalty = movement.units === "ft" ? 15 : LOW_STRENGTH_SPEED_PENALTY;
+    const types = ["walk", "swim", "climb", "fly", "burrow"];
+    for (const key of types) {
+      if (typeof movement.speeds[key] === "number") movement.speeds[key] = Math.max(0, movement.speeds[key] - penalty);
     }
+    movement.speed = movement.speeds.walk;
+    movement.max = Math.max(0, ...types.map(k => movement.speeds[k] ?? 0));
   }
 
   /* ── Brak wyszkolenia ──
@@ -323,6 +326,8 @@ export function report() {
 /* -------------------------------------------- */
 
 export function registerArmorRules() {
+  // dnd5e 6.0's own "armor too heavy" speed rule (10 ft, armor only); Neuroshima's is `applyArmorPenalties`.
+  if ("armorSpeedReduction" in CONFIG.DND5E) CONFIG.DND5E.armorSpeedReduction = 0;
   patchPrepareDerivedData();
   zarejestrujZrodloOkolicznosci("pancerzBezWyszkolenia", zrodloBrakWyszkolenia);
   Hooks.on("dnd5e.calculateDamage", onCalculateDamage);

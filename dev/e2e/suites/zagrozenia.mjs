@@ -37,7 +37,7 @@ async function przygotuj() {
     for (const e of a.effects.filter(e => e.statuses.has("suffocation"))) await e.delete();
     await a.update({
       "system.attributes.hp.max": 12, "system.attributes.hp.value": 12, "system.attributes.exhaustion": 0,
-      [`flags.${MOD}.-=exhaustionSources`]: null, [`flags.${MOD}.-=przerzucone`]: null
+      [`flags.${MOD}.exhaustionSources`]: _del, [`flags.${MOD}.przerzucone`]: _del
     });
     await game.neuroshima.fuksy.ustawLiczbe(a, name === "PC Gracz 1" ? 1 : 0);
   }

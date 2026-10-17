@@ -379,8 +379,8 @@ export async function extinguishTorch(item, { silent = false, reason = null } = 
   const update = {
     [`flags.${MODULE_ID}.${FLAG_LIT}`]: false,
     [`flags.${MODULE_ID}.${FLAG_FUEL}`]: remaining,
-    [`flags.${MODULE_ID}.-=${FLAG_START}`]: null,
-    [`flags.${MODULE_ID}.-=${FLAG_BURNOUT_AT}`]: null,
+    [`flags.${MODULE_ID}.${FLAG_START}`]: _del,
+    [`flags.${MODULE_ID}.${FLAG_BURNOUT_AT}`]: _del,
   };
   if (attack) update[`system.activities.${attack._id}.damage.parts`] = _baseParts(attack);
   await item.update(update);
@@ -461,8 +461,8 @@ export async function burnOut(item, { failedIgnition = false } = {}) {
     [`flags.${MODULE_ID}.${FLAG_LIT}`]: false,
     [`flags.${MODULE_ID}.${FLAG_FUEL}`]: 0,
     [`flags.${MODULE_ID}.${FLAG_BURNT}`]: true,
-    [`flags.${MODULE_ID}.-=${FLAG_START}`]: null,
-    [`flags.${MODULE_ID}.-=${FLAG_BURNOUT_AT}`]: null,
+    [`flags.${MODULE_ID}.${FLAG_START}`]: _del,
+    [`flags.${MODULE_ID}.${FLAG_BURNOUT_AT}`]: _del,
   };
   if (attack) update[`system.activities.${attack._id}.damage.parts`] = _baseParts(attack);
   await item.update(update);

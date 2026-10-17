@@ -129,7 +129,7 @@ export async function migrateGearGraduation({ commit = false, actors = null } = 
           data.system.quantity = quantity;
           // See `gear-data.mjs`'s `createRealGear` for why this explicit deletion is needed —
           // `.update()` merges `flags` by default, it won't drop the old placeholder flag on its own.
-          data[`flags.${MODULE_ID}.-=craftingPlaceholder`] = null;
+          data[`flags.${MODULE_ID}.craftingPlaceholder`] = _del;
           await item.update(data);
         }
       } catch (e) {

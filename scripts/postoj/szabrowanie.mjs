@@ -357,7 +357,7 @@ export async function sprobujZaKogos(grupa, sesjaId, aktor, rodzaje) {
   if (!s || !rodzaje?.length) return null;
   const kto = _klucz(aktor);
   const sciezka = `flags.${MODULE_ID}.postoj.szabrowania.${s.id}`;
-  await grupa.update({ [`${sciezka}.przydzial.${kto}`]: [...rodzaje], [`${sciezka}.wyniki.-=${kto}`]: null });
+  await grupa.update({ [`${sciezka}.przydzial.${kto}`]: [...rodzaje], [`${sciezka}.wyniki.${kto}`]: _del });
   return wyslijProsby(grupa, s.id, { tylko: kto });
 }
 

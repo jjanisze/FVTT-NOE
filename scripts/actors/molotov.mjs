@@ -220,7 +220,7 @@ async function _burst(item) {
     const qty = Number(item.system.quantity ?? 0);
     await item.update({
       "system.quantity": Math.max(0, qty - 1),
-      [`flags.${MODULE_ID}.-=${FLAG_LIT}`]: null
+      [`flags.${MODULE_ID}.${FLAG_LIT}`]: _del
     });
     if (actor) syncActorLight(actor);
     playExplosiveSoundForSubtype(MOLOTOV_SUBTYPE);

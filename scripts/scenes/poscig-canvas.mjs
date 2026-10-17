@@ -172,7 +172,9 @@ export function registerPoscigCanvas() {
     if (scene.id !== canvas.scene?.id) return;
     const flag = changes.flags?.[MODULE_ID]?.[FLAG_POSCIG];
     // Tempo and round do not change art: avoid baking textures on every slider change.
-    if (flag && (!_layer || ["motyw", "-=motyw", "tory", "offset"].some(key => key in flag))) refresh();
+    // A deletion arrives as the v14 operator (`flag` itself, or `flag.motyw`) or, from older callers, as a `-=` key.
+    const usuniety = flag instanceof foundry.data.operators.ForcedDeletion;
+    if (flag && (usuniety || !_layer || ["motyw", "-=motyw", "tory", "offset"].some(key => key in flag))) refresh();
     if (changes.flags?.[MODULE_ID]?.[`-=${FLAG_POSCIG}`] !== undefined) refresh();
   });
   refresh();

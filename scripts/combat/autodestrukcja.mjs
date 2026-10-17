@@ -199,7 +199,7 @@ export async function wrak(tokenDoc, rozmiar) {
 export async function przywrocZeton(tokenDoc) {
   const orig = tokenDoc?.getFlag(MODULE_ID, FLAGA_WRAKU);
   if (!orig) return false;
-  await tokenDoc.update({ "texture.src": orig.src, "texture.tint": orig.tint ?? "#ffffff", name: orig.name, [`flags.${MODULE_ID}.-=${FLAGA_WRAKU}`]: null });
+  await tokenDoc.update({ "texture.src": orig.src, "texture.tint": orig.tint ?? "#ffffff", name: orig.name, [`flags.${MODULE_ID}.${FLAGA_WRAKU}`]: _del });
   return true;
 }
 

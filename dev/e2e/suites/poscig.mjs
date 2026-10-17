@@ -176,7 +176,7 @@ export default {
           const created=await scene.createEmbeddedDocuments("Token",[data]);
           const doc=scene.tokens.get(created[0].id);
           await doc.update({rotation:123},{animate:false});
-          await canvas.scene.update({[`flags.${id}.poscig.-=motyw`]:null});
+          await canvas.scene.update({[`flags.${id}.poscig.motyw`]:_del});
           return {rotation:doc.rotation,theme:game.neuroshima.poscig.tlo.stats().theme};
         } finally {await scene.delete();}
       }, MOD);

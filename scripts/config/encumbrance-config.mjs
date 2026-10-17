@@ -45,25 +45,12 @@ export function registerEncumbranceConfig() {
 const METRIC_SETTINGS = ["metricWeightUnits", "metricLengthUnits", "metricVolumeUnits"];
 
 /**
- * Neuroshima is metric: RAW gives kilograms and metres, and the overrides above change only
- * dnd5e's `.metric` constants. A fresh dnd5e world starts imperial, so on a new install Udźwig came
- * out in pounds — Użytkowy equal to the imperial "heavily encumbered" line, labelled as kg. Caught
- * 2026-10-05 by the release gate (module installed from the zip into a fresh world: 8 Udźwig tests
- * red; the campaign world had metric set by hand). GM decision: the module switches it on itself.
- *
- * Once, on the active GM's `ready`, with a notice. dnd5e registers these settings without
- * `onChange`, so encumbrance stays computed in the old units until the actor is prepared again —
- * every client re-prepares its actors when one of them is created or changed.
+ * Neuroshima is metric: RAW gives kilograms and metres, and the overrides above change only dnd5e's `.metric`
+ * constants. The switches themselves are enforced with the other dnd5e settings in `config/dnd5e-settings.mjs`
+ * (a fresh dnd5e world starts imperial — release gate 2026-10-05). dnd5e registers them without `onChange`, so
+ * encumbrance stays computed in the old units until the actor is prepared again: re-prepare on a change.
  */
 function registerMetricUnits() {
-  Hooks.once("ready", async () => {
-    if (!game.users.activeGM?.isSelf) return;
-    const off = METRIC_SETTINGS.filter(key => !game.settings.get("dnd5e", key));
-    if (!off.length) return;
-    for (const key of off) await game.settings.set("dnd5e", key, true);
-    ui.notifications.info("Neuroshima: włączono jednostki metryczne (kg, m, l) — Udźwig i odległości "
-      + "w podręczniku są metryczne. Ustawienia systemu dnd5e → Jednostki.", { permanent: true });
-  });
   const onUnitsChanged = setting => {
     if (!METRIC_SETTINGS.some(key => setting.key === `dnd5e.${key}`)) return;
     for (const actor of game.actors ?? []) actor.reset();

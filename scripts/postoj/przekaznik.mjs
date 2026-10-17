@@ -66,7 +66,7 @@ async function _onUpdateActor(actor, changes) {
     try { await _wykonaj(p.typ, actor, p.dane ?? {}, game.users.get(p.by) ?? null); } catch (err) {
       console.error(`${MODULE_ID} | przekaźnik M5: ${p.typ}`, err);
     } finally {
-      await actor.update({ [`flags.${MODULE_ID}.${FLAGA}.-=${nonce}`]: null });
+      await actor.update({ [`flags.${MODULE_ID}.${FLAGA}.${nonce}`]: _del });
     }
   }
 }
