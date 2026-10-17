@@ -54,7 +54,9 @@ const FROZEN_CAMPAIGN = new Set(["start", "restart", "packs", "login", "reload",
 export function checkFreeze(freeze, command, profileName) {
   if (!freeze?.frozen || profileName !== "campaign" || !FROZEN_CAMPAIGN.has(command)) return;
   throw refuse(`The campaign is frozen until ${freeze.until ?? "the switch-over"} (${freeze.reason ?? "migration"}): no \`${command}\` on it.`, "frozen",
-    "Work in the sandbox — the default profile while frozen. Only the GM lifts the freeze (`npm run fvtt -- freeze off`).",
+    command === "packs"
+      ? "The committed packs/ (the campaign's copy is this working tree) build without a server: `npm run build:packs && npm run validate:packs`. Sandbox packs: drop --profile."
+      : "Work in the sandbox — the default profile while frozen. Only the GM lifts the freeze (`npm run fvtt -- freeze off`).",
     { since: freeze.since ?? null, until: freeze.until ?? null });
 }
 
