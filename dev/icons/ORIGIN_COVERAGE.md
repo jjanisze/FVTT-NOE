@@ -19,9 +19,11 @@ region descriptions, generic prompts, source/absence checks and review
 history are archived with each batch.
 
 The existing `buildPochodzenie` already calls `iconFor("pochodzenia", key)`.
-After approval and delivery, the GM rebuilds `pochodzenia`; no new code
-wiring is needed. Existing world backgrounds are updated separately by the
-GM. This audit neither reads pack databases nor accesses campaign documents.
+With Foundry closed and the GM's explicit authorization, all 18 packs were
+rebuilt and validated, including `pochodzenia` and its twelve new images.
+Every record ID is preserved. See `pack-rebuild-2026-10-17.json`.
+Existing world backgrounds are updated separately by the GM. The delivery
+audit itself neither reads pack databases nor accesses campaign documents.
 
 Reproduce the delivery audit without overwriting the initial snapshot:
 `node dev/icons/audit-origin-icons.mjs --output=origin-icons-2026-10-17-complete.json`.

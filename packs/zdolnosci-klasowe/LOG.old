@@ -1,5 +1,5 @@
-2026/10/14-23:12:39.007 1e0 Recovering log #3
-2026/10/14-23:12:39.007 1e0 Level-0 table #5: started
-2026/10/14-23:12:39.013 1e0 Level-0 table #5: 123726 bytes OK
-2026/10/14-23:12:39.017 1e0 Delete type=0 #3
-2026/10/14-23:12:39.017 1e0 Delete type=3 #2
+2026/10/17-12:35:54.825 b2ac Recovering log #3
+2026/10/17-12:35:54.825 b2ac Level-0 table #5: started
+2026/10/17-12:35:54.831 b2ac Level-0 table #5: 123726 bytes OK
+2026/10/17-12:35:54.835 b2ac Delete type=0 #3
+2026/10/17-12:35:54.835 b2ac Delete type=3 #2

@@ -1,5 +1,5 @@
-2026/10/14-23:12:39.007 e198 Recovering log #3
-2026/10/14-23:12:39.007 e198 Level-0 table #5: started
-2026/10/14-23:12:39.012 e198 Level-0 table #5: 37572 bytes OK
-2026/10/14-23:12:39.015 e198 Delete type=0 #3
-2026/10/14-23:12:39.017 e198 Delete type=3 #2
+2026/10/17-12:35:54.825 c634 Recovering log #3
+2026/10/17-12:35:54.825 c634 Level-0 table #5: started
+2026/10/17-12:35:54.829 c634 Level-0 table #5: 37572 bytes OK
+2026/10/17-12:35:54.834 c634 Delete type=0 #3
+2026/10/17-12:35:54.834 c634 Delete type=3 #2

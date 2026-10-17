@@ -16,6 +16,11 @@ older world copies or already-built compendia. See
 [ORIGIN_COVERAGE.md](ORIGIN_COVERAGE.md) for the separately discovered
 twelve missing region emblems. Historical results below retain their dates.
 
+Pack integration, 2026-10-17: with Foundry closed and the GM's explicit
+authorization, all 18 packs were rebuilt and passed validation. All 907
+documents and record IDs are preserved; only 151 `img` fields changed.
+See `pack-rebuild-2026-10-17.json`. Older world copies remain a GM task.
+
 ## Original audit — 2026-10-12
 
 Audit source: the module's `KATALOG` item-result entries and the image fields/rules

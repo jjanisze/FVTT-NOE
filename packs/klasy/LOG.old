@@ -1,5 +1,5 @@
-2026/10/14-23:12:39.007 3224 Recovering log #3
-2026/10/14-23:12:39.007 3224 Level-0 table #5: started
-2026/10/14-23:12:39.012 3224 Level-0 table #5: 28604 bytes OK
-2026/10/14-23:12:39.015 3224 Delete type=0 #3
-2026/10/14-23:12:39.015 3224 Delete type=3 #2
+2026/10/17-12:35:54.825 edbc Recovering log #3
+2026/10/17-12:35:54.825 edbc Level-0 table #5: started
+2026/10/17-12:35:54.829 edbc Level-0 table #5: 28604 bytes OK
+2026/10/17-12:35:54.834 edbc Delete type=0 #3
+2026/10/17-12:35:54.834 edbc Delete type=3 #2

@@ -41,7 +41,7 @@ The GM explicitly expanded the asset scope to apply these icon mappings:
   dedicated icons. All 333 physical catalog entries resolve to module art.
 - **Wyłączony** now uses its native status glyph.
 - **Origin backgrounds** already discover exact filenames; all twelve
-  emblems now exist for the next GM pack rebuild.
+  emblems are included in the rebuilt `pochodzenia` pack.
 
 The source audit now records actual configured images. Integration source
 hashes and selected mappings are in `integration-2026-10-17.json`.
@@ -58,10 +58,11 @@ Installed companion mappings:
 | `dron-kroczacy.modyfikacje`, `dron-latajacy.modyfikacje` | `icons/abilities/modyfikacje-drona.svg` |
 | `dron-kroczacy.atak`, `dron-latajacy.atak` | `icons/abilities/atak-drona.svg` |
 
-This verifies source and filesystem paths. No pack build or live repoint
-was run. The GM still rebuilds affected packs, especially `pochodzenia`,
-`sztuczki`, `bestiariusz` and `towarzysze`, and updates older world copies.
-Painted art remains a separate GM queue.
+With Foundry closed and the GM's explicit authorization, all 18 packs
+were rebuilt and passed validation. The recovery-snapshot comparison
+preserves all 907 documents and every record ID; only 151 `img` fields
+changed. Evidence: `pack-rebuild-2026-10-17.json`. Foundry remains closed.
+Older world copies and painted art remain separate GM tasks.
 
 Reproduce the expanded audit: `node dev/icons/audit-module-coverage.mjs`.
 Evidence: [module-coverage-2026-10-17.json](module-coverage-2026-10-17.json).

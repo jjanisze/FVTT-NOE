@@ -40,6 +40,12 @@ Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 **Next batch number: 112** (no open glyph reviews; all 544 review cards
 are resolved and source icon wiring is complete).
 
+**Pack integration complete, 2026-10-17:** after the GM closed Foundry and
+authorized the rebuild, all 18 packs rebuilt and passed validation.
+All 907 documents and every record ID are preserved; only 151 `img`
+fields changed. Foundry remains closed and the campaign world is untouched.
+Evidence: `pack-rebuild-2026-10-17.json`.
+
 **Source audit refresh, 2026-10-17:** all 36 origin ability icons exist, but
 the 12 main Pochodzenie background emblems were omitted from earlier queues.
 All twelve main emblems are approved and installed at
@@ -1759,10 +1765,10 @@ Po autodestrukcji maszyny żeton podmienia grafikę na wrak w rozmiarze żetonu.
   mapowania źródłowe są dostarczone. Nie trzeba ponownie przepinać kodu
   Sztuczek, Bestiariusza, towarzyszy, trzech paliw, uzupełnienia medyka ani
   stanu Wyłączony. Szczegóły: `FINAL_HANDOFF.md`, `BROAD_COVERAGE.md`.
-- **Paczki:** MG przebudowuje zwłaszcza `pochodzenia`, `sztuczki`,
-  `bestiariusz` i `towarzysze`; starsze paczki zdolności pochodzenia również
-  mogą wymagać odświeżenia. Same podmiany grafik pod istniejącą ścieżką SVG
-  nie wymagają zmiany kodu ani dodatkowej generacji.
+- **Paczki — gotowe, 2026-10-17:** na zgodę MG przebudowano wszystkie
+  18 paczek przy zamkniętym Foundry. Walidacja przeszła; 907 dokumentów
+  i wszystkie identyfikatory zachowane. Zmieniło się tylko 151 pól `img`.
+  Raport: `pack-rebuild-2026-10-17.json`. Kopia bezpieczeństwa jest lokalna.
 - **Istniejące dokumenty:** starsze przedmioty i efekty w świecie nadal
   mogą mieć dawne `img`; ich aktualizację i bezpieczne odświeżenie modułu
   wykonuje MG. Agent nie modyfikował świata ani otwartych baz paczek.
