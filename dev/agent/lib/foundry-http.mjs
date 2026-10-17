@@ -13,6 +13,10 @@
  *  - socket.io "getJoinData"                 the user list (there is no HTTP route for it)
  * Sessions are in-memory and expire 24 h after creation (sessions.mjs), so every restart
  * logs every client out.
+ *
+ * Since 14.369 the server refuses every POST that is not same-origin (`server/express.mjs`): with no
+ * `Sec-Fetch-Site`, the `Origin` header must equal the server's own origin, else 400 "The request could
+ * not be processed." Node's fetch sends no Origin, so every request here carries the server's.
  */
 
 import { CliError } from "./output.mjs";
@@ -26,7 +30,7 @@ export class FoundryClient {
   }
 
   async #fetch(route, { method = "GET", body, timeoutMs = 15_000 } = {}) {
-    const headers = {};
+    const headers = { origin: new URL(this.base).origin };
     if (this.session) headers.cookie = `session=${this.session}`;
     if (body !== undefined) headers["content-type"] = "application/json";
     const res = await fetch(`${this.base}${route}`, {
@@ -69,6 +73,11 @@ export class FoundryClient {
     if (this.admin) return;
     const worldActive = (await this.status()).active;
     const res = await this.#fetch("/auth", { method: "POST", body: { adminPassword: readAdminPassword() } });
+    // Success and a wrong password both redirect; a 4xx is the request itself refused (14.369's
+    // same-origin check took the old client for a success and failed one call later).
+    if (res.status >= 400) {
+      throw new CliError(`Foundry refused the admin login request (HTTP ${res.status}): ${(await res.text()).slice(0, 200)}`, { code: "auth-failed" });
+    }
     const where = res.headers.get("location") ?? "";
     // No world: success redirects to /setup, failure back to /auth. With a world active it
     // redirects to /auth either way (auth.mjs: `!world && success ? setup : auth`) — the
