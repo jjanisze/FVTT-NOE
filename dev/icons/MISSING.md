@@ -37,7 +37,7 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 110** (9 approved glyphs delivered; 7 origin revisions queued;
+**Next batch number: 111** (7 icon revisions await GM review;
 the original 153-subject placeholder pass is complete).
 
 **Source audit refresh, 2026-10-17:** all 36 origin ability icons exist, but
@@ -1425,6 +1425,26 @@ Exact saved decisions and approved masks: `reviewed.json` and
 | Vegas | `icons/pochodzenia/vegas.svg` | Revision queued |
 
 <!-- style-batch-109:end -->
+
+<!-- style-batch-110:start -->
+## Queue (A) — Batch 110 — 7 saved icon revisions
+
+Exact selected sources and verbatim notes are archived with the prompts.
+Older choices remain selectable; production requires fresh saved approval.
+
+| Cell | Subject | Requested correction | Native SVG (+ WEBP) |
+|---|---|---|---|
+| 1 | Człowiek Pustyni | Replace the canteen with dunes and a dead tree in the background | `icons/pochodzenia/czlowiek-pustyni.svg` |
+| 2 | Detroit | This includes the motor part, but not the city part.  | `icons/pochodzenia/detroit.svg` |
+| 3 | Federacja Appalachów | Not bad, it includes the primary themes, but not the aristocratic flair. Include that somehow. | `icons/pochodzenia/appalachy.svg` |
+| 4 | Nowy Jork | Ditch the book and reference one of the many tropes or locations of New York City. | `icons/pochodzenia/nowy-jork.svg` |
+| 5 | Południowa Hegemonia | Try a different concept. Not bad, but need to accentuate that they're glorified raiders. | `icons/pochodzenia/hegemonia.svg` |
+| 6 | Posterunek | [local reference] - clean it up and use that instead | `icons/pochodzenia/posterunek.svg` |
+| 7 | Vegas | A little bit too bland - need more than just cards | `icons/pochodzenia/vegas.svg` |
+
+Evidence and exact prompts: `review/candidates/batch-110/`.
+
+<!-- style-batch-110:end -->
 
 <!-- icon-style-review:start -->
 ## Style review — icons flagged for redo

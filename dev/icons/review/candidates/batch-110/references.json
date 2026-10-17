@@ -1,0 +1,141 @@
+{
+  "files": [
+    {
+      "source": "icons/abilities/bolesny-atak.svg",
+      "sha256": "727c98e1f1993ba8799344b58743f3b56c3c2562e148a23ca88d68818cf652bc"
+    },
+    {
+      "source": "icons/abilities/bolesny-atak.webp",
+      "sha256": "ee14eda11a4668a40a624b8fcf902cd50ee2e992ed6b884b5d22799eadce5f5e"
+    },
+    {
+      "source": "icons/abilities/czas-patriotow.svg",
+      "sha256": "4e8200c6e95a560d19acf14dd719529c9413fbd5438629a16e55514e313ff5d3"
+    },
+    {
+      "source": "icons/abilities/czas-patriotow.webp",
+      "sha256": "550d06b95122896954723326d7cab4525b82d412730fca177259296a2f87da9f"
+    },
+    {
+      "source": "icons/abilities/pajecza-wspinaczka.svg",
+      "sha256": "cdbc806fbff45c53f2adee9fa776221b3f6985d80a9569d9f02856c351f1e512"
+    },
+    {
+      "source": "icons/abilities/pajecza-wspinaczka.webp",
+      "sha256": "56b8ab88846c39642dcc14a94b1d2e8b9b500e043230e79d96fed3fbf1cef1cd"
+    },
+    {
+      "source": "icons/abilities/wierze.svg",
+      "sha256": "a5d84dcddfcd33fec333ef3b23a03311bb98037d8eba6e11cda9b46b4de10fda"
+    },
+    {
+      "source": "icons/abilities/wierze.webp",
+      "sha256": "fe229ea9eafd16bbb3f268ead7dd17f0c4b761cf721de91c75d0f09831e784c8"
+    },
+    {
+      "source": "icons/pochodzenia/asgard.svg",
+      "sha256": "80bdcfcc8f734bd4ea576bb88f46e004f1b6182d3e71f220eeb36a83f3647f0d"
+    },
+    {
+      "source": "icons/pochodzenia/asgard.webp",
+      "sha256": "2864d81a09c7c40ff3966ef396be330dccb51aba83d91b5fd3c9f7d933d5d7cd"
+    },
+    {
+      "source": "icons/pochodzenia/miami.svg",
+      "sha256": "b1423bccb49bbb9705cc1f1f9958873cf9949c67adb0ae2093de57bbb49fb61c"
+    },
+    {
+      "source": "icons/pochodzenia/miami.webp",
+      "sha256": "cab249ee2af124e1c6158d8366107fb824e3466e333d360c35717c065b1f20d7"
+    },
+    {
+      "source": "icons/pochodzenia/missisipi.svg",
+      "sha256": "e71b8dcc126248f710aede378ab08a2d32705ca0b1bbaf8f491cec8f483e85ba"
+    },
+    {
+      "source": "icons/pochodzenia/missisipi.webp",
+      "sha256": "1ac8dee9278ece7784205a0d12d085ae3b84f2b29c4bdd7ddc89ee7b13fcfb61"
+    },
+    {
+      "source": "icons/pochodzenia/salt-lake-city.svg",
+      "sha256": "bd982e444c6ad2dea8b259b4f5ffe61b126a4dcaea0dc9340fab7502a7683089"
+    },
+    {
+      "source": "icons/pochodzenia/salt-lake-city.webp",
+      "sha256": "bb6d8b5d49b117fdd7da83cc1699035a21a475981429c0623c3470647a1601a0"
+    },
+    {
+      "source": "icons/pochodzenia/teksas.svg",
+      "sha256": "cb695383c0d9a5f7a69209f96621dd5faecdb6407322336f2c377556a607cbe3"
+    },
+    {
+      "source": "icons/pochodzenia/teksas.webp",
+      "sha256": "d69dfa68c081d7db2bc8a8b6861945fee2c736c0c34d2d0b13890903dde75df3"
+    }
+  ],
+  "expectedAbsent": [
+    "icons/pochodzenia/czlowiek-pustyni.svg",
+    "icons/pochodzenia/czlowiek-pustyni.webp",
+    "icons/pochodzenia/czlowiek-pustyni.png",
+    "icons/pochodzenia/detroit.svg",
+    "icons/pochodzenia/detroit.webp",
+    "icons/pochodzenia/detroit.png",
+    "icons/pochodzenia/appalachy.svg",
+    "icons/pochodzenia/appalachy.webp",
+    "icons/pochodzenia/appalachy.png",
+    "icons/pochodzenia/nowy-jork.svg",
+    "icons/pochodzenia/nowy-jork.webp",
+    "icons/pochodzenia/nowy-jork.png",
+    "icons/pochodzenia/hegemonia.svg",
+    "icons/pochodzenia/hegemonia.webp",
+    "icons/pochodzenia/hegemonia.png",
+    "icons/pochodzenia/posterunek.svg",
+    "icons/pochodzenia/posterunek.webp",
+    "icons/pochodzenia/posterunek.png",
+    "icons/pochodzenia/vegas.svg",
+    "icons/pochodzenia/vegas.webp",
+    "icons/pochodzenia/vegas.png"
+  ],
+  "selectedSources": [
+    {
+      "key": "czlowiek-pustyni",
+      "source": "dev/icons/review/candidates/batch-108/czlowiek-pustyni.png",
+      "sha256": "1355ad0714cdc99c830697954f11aa9a41308cd091458e8c29228fa4371f3b7d"
+    },
+    {
+      "key": "detroit",
+      "source": "dev/icons/review/candidates/batch-108/detroit.png",
+      "sha256": "c7a2aec62acb9e8a34fa6e510f321bf7d5a2d6a9e0f4e1b8759c9938cf1409c9"
+    },
+    {
+      "key": "appalachy",
+      "source": "dev/icons/review/candidates/batch-108/appalachy.png",
+      "sha256": "6c006cec4de111aa3f7eec517c99581bac76ebdcbb9774b6952c24005a887cc2"
+    },
+    {
+      "key": "nowy-jork",
+      "source": "dev/icons/review/candidates/batch-109/nowy-jork.png",
+      "sha256": "55c9f9aac6503a7868521d1bb1640cceaa29055129f7565d65f2305785483ba7"
+    },
+    {
+      "key": "hegemonia",
+      "source": "dev/icons/review/candidates/batch-109/hegemonia.png",
+      "sha256": "75a206900bb613820518e5b1cfc8921cf6fe669b5da42aec2085f62bbc3e9542"
+    },
+    {
+      "key": "posterunek",
+      "source": "dev/icons/review/candidates/batch-109/posterunek.png",
+      "sha256": "cde531a72bba59b41b9015fdea2c5441f1c961dc2ba57741e267eda18972cfcb"
+    },
+    {
+      "key": "vegas",
+      "source": "dev/icons/review/candidates/batch-109/vegas.png",
+      "sha256": "c720c7e0dfe70f18827b988d46c87edddc229ac58e970e678de59ea767022079"
+    }
+  ],
+  "suppliedInsignia": {
+    "source": "raw/posterunek-reference.png",
+    "sha256": "384a812cb0c80749eae1ec1381b65189c9b22623c7e11222181e771d575ff683",
+    "provenance": "GM-supplied Posterunek emblem; original creator/source not specified"
+  }
+}

@@ -1,0 +1,320 @@
+{
+  "date": "2026-10-17",
+  "batch": 110,
+  "pass": "origin-revisions",
+  "partialAtlas": true,
+  "emptyCells": [
+    8,
+    9
+  ],
+  "subjects": [
+    {
+      "kind": "origin",
+      "key": "czlowiek-pustyni",
+      "name": "Człowiek Pustyni",
+      "target": "icons/pochodzenia/czlowiek-pustyni.svg",
+      "itemId": "origin-czlowiek-pustyni",
+      "ruleContext": "Indywidualiści zdolni przeżyć tam, gdzie inni giną. Zaradni, gardzący miejskim życiem.",
+      "context": "Pochodzenie background: Człowiek Pustyni. Indywidualiści zdolni przeżyć tam, gdzie inni giną. Zaradni, gardzący miejskim życiem. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/czlowiek-pustyni.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "Preserve the plain wrapped HEADSCARF and smooth featureless adult head in side profile at LEFT. REMOVE the WATER CANTEEN completely. Behind the head to the RIGHT show TWO broad clean SAND DUNE silhouettes and ONE small DEAD TREE with a thick bare trunk and exactly THREE stout leafless branches. Two broad cloth overlap cuts only. Complete coherent head, dunes and barren tree, strong black gaps; no beard, facial detail, extra bottle, tiny twigs, fine sand texture or rays.",
+      "cell": 1,
+      "revisionOf": {
+        "id": "origin-czlowiek-pustyni",
+        "name": "Człowiek Pustyni",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-108/czlowiek-pustyni.png",
+        "sourceKind": "candidate",
+        "sourceSha256": "1355ad0714cdc99c830697954f11aa9a41308cd091458e8c29228fa4371f3b7d",
+        "deliveryTargets": [
+          {
+            "source": "icons/pochodzenia/czlowiek-pustyni.svg",
+            "variant": "default",
+            "sourceSha256": null
+          }
+        ],
+        "notes": "Replace the canteen with dunes and a dead tree in the background",
+        "feedback": {
+          "itemId": "origin-czlowiek-pustyni",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Replace the canteen with dunes and a dead tree in the background",
+          "updatedAt": "2026-10-17T00:18:38.466Z"
+        },
+        "feedbackSha256": "879133c13840d1110949ee8c000490feba4ca3a2d63ae5c9a7510af1578757bf"
+      }
+    },
+    {
+      "kind": "origin",
+      "key": "detroit",
+      "name": "Detroit",
+      "target": "icons/pochodzenia/detroit.svg",
+      "itemId": "origin-detroit",
+      "ruleContext": "Uzależnieni od adrenaliny kierowcy i mechanicy. Życie kręci się wokół samochodów.",
+      "context": "Pochodzenie background: Detroit. Uzależnieni od adrenaliny kierowcy i mechanicy. Życie kręci się wokół samochodów. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/detroit.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "Keep ONE broad CAR TIRE and ONE large ENGINE PISTON as the foreground motif, but make the CITY equally clear: behind them rises ONE compact INDUSTRIAL CITY SKYLINE of THREE broad factory blocks with a sawtooth roof and TWO stout chimneys. One piston groove and two broad tire-tread cuts only. City silhouette is at least as wide as the tire, clearly visible above it. No tiny windows, fumes, little gears, fine machine parts, writing, automobile logos or texture.",
+      "cell": 2,
+      "revisionOf": {
+        "id": "origin-detroit",
+        "name": "Detroit",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-108/detroit.png",
+        "sourceKind": "candidate",
+        "sourceSha256": "c7a2aec62acb9e8a34fa6e510f321bf7d5a2d6a9e0f4e1b8759c9938cf1409c9",
+        "deliveryTargets": [
+          {
+            "source": "icons/pochodzenia/detroit.svg",
+            "variant": "default",
+            "sourceSha256": null
+          }
+        ],
+        "notes": "This includes the motor part, but not the city part. ",
+        "feedback": {
+          "itemId": "origin-detroit",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "This includes the motor part, but not the city part. ",
+          "updatedAt": "2026-10-17T00:19:00.808Z"
+        },
+        "feedbackSha256": "3269be3abb6ef7d348172464618dbcc8158651ad358f5f186ea5e6e8b81e36f3"
+      }
+    },
+    {
+      "kind": "origin",
+      "key": "appalachy",
+      "name": "Federacja Appalachów",
+      "target": "icons/pochodzenia/appalachy.svg",
+      "itemId": "origin-appalachy",
+      "ruleContext": "Górnicy i zarządcy kopalń. Twardzi lub szlachetni — rzadko coś pomiędzy.",
+      "context": "Pochodzenie background: Federacja Appalachów. Górnicy i zarządcy kopalń. Twardzi lub szlachetni — rzadko coś pomiędzy. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/appalachy.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "Keep ONE complete sturdy MINING PICK diagonally across ONE angular MOUNTAIN PEAK. Add aristocratic ownership as ONE large plain THREE-POINT CROWN centered ABOVE the mountain, separated by a generous black gap. Broad crown band with ONE clean black cut only; the crown reads at thumbnail size and is at least half the mountain width. A sober aristocratic mining crest with three complete strong shapes, no tiny jewels, heraldic flourishes, writing, fine hatching, texture or fantasy ornaments.",
+      "cell": 3,
+      "revisionOf": {
+        "id": "origin-appalachy",
+        "name": "Federacja Appalachów",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-108/appalachy.png",
+        "sourceKind": "candidate",
+        "sourceSha256": "6c006cec4de111aa3f7eec517c99581bac76ebdcbb9774b6952c24005a887cc2",
+        "deliveryTargets": [
+          {
+            "source": "icons/pochodzenia/appalachy.svg",
+            "variant": "default",
+            "sourceSha256": null
+          }
+        ],
+        "notes": "Not bad, it includes the primary themes, but not the aristocratic flair. Include that somehow.",
+        "feedback": {
+          "itemId": "origin-appalachy",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Not bad, it includes the primary themes, but not the aristocratic flair. Include that somehow.",
+          "updatedAt": "2026-10-17T00:19:29.179Z"
+        },
+        "feedbackSha256": "ca44d1bb0870e32361ec3ece6e94de9f37019554ccb36d7c092b0214b9059175"
+      }
+    },
+    {
+      "kind": "origin",
+      "key": "nowy-jork",
+      "name": "Nowy Jork",
+      "target": "icons/pochodzenia/nowy-jork.svg",
+      "itemId": "origin-nowy-jork",
+      "ruleContext": "Optymistyczni, wyedukowani i nastawieni na handel. Mają lepszy dostęp do wiedzy niż większość świata.",
+      "context": "Pochodzenie background: Nowy Jork. Optymistyczni, wyedukowani i nastawieni na handel. Mają lepszy dostęp do wiedzy niż większość świata. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/nowy-jork.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "Completely REMOVE the BOOK and generic skyline. Show recognizable NEW YORK CITY iconography: ONE complete upright LIBERTY TORCH with a broad flame and simple stout handle at LEFT, next to ONE broad SEVEN-SPIKED LIBERTY CROWN at lower-RIGHT. Crown band has only THREE broad rectangular black openings; seven stout clean triangular rays are widely spaced. Clear black separation between torch and crown. No person, face, full statue, book, letters, tourism logo, tiny windows, shading, texture or intricate flame tongues.",
+      "cell": 4,
+      "revisionOf": {
+        "id": "origin-nowy-jork",
+        "name": "Nowy Jork",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-109/nowy-jork.png",
+        "sourceKind": "candidate",
+        "sourceSha256": "55c9f9aac6503a7868521d1bb1640cceaa29055129f7565d65f2305785483ba7",
+        "deliveryTargets": [
+          {
+            "source": "icons/pochodzenia/nowy-jork.svg",
+            "variant": "default",
+            "sourceSha256": null
+          }
+        ],
+        "notes": "Ditch the book and reference one of the many tropes or locations of New York City.",
+        "feedback": {
+          "itemId": "origin-nowy-jork",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Ditch the book and reference one of the many tropes or locations of New York City.",
+          "updatedAt": "2026-10-17T00:20:41.472Z"
+        },
+        "feedbackSha256": "8952d4d1db50f5f12c6d647d9c87aa7890336c1c2370b2690a7391d289761b54"
+      }
+    },
+    {
+      "kind": "origin",
+      "key": "hegemonia",
+      "name": "Południowa Hegemonia",
+      "target": "icons/pochodzenia/hegemonia.svg",
+      "itemId": "origin-hegemonia",
+      "ruleContext": "Twardzi jak skała, lojalni jak psy. Potomkowie kryminalistów, którzy znaleźli sens w walce za Bano.",
+      "context": "Pochodzenie background: Południowa Hegemonia. Twardzi jak skała, lojalni jak psy. Potomkowie kryminalistów, którzy znaleźli sens w walce za Bano. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/hegemonia.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "NEW CONCEPT emphasizing brutal post-apocalyptic RAIDERS. ONE crude broad STEEL HELMET with THREE short stout spikes on its crown, paired with ONE heavy NOTCHED MACHETE angled upward behind it. Helmet has a broad dark face opening and two broad plate cuts only; blade has one broad notch, intact stout handle. Rough improvised raider equipment conveyed by silhouette, no little scratches or rivets. No face, gruff bearded survivor, skull, blood, gore, chain emblem, fine buckles, text, decorative rays or anime.",
+      "cell": 5,
+      "revisionOf": {
+        "id": "origin-hegemonia",
+        "name": "Południowa Hegemonia",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-109/hegemonia.png",
+        "sourceKind": "candidate",
+        "sourceSha256": "75a206900bb613820518e5b1cfc8921cf6fe669b5da42aec2085f62bbc3e9542",
+        "deliveryTargets": [
+          {
+            "source": "icons/pochodzenia/hegemonia.svg",
+            "variant": "default",
+            "sourceSha256": null
+          }
+        ],
+        "notes": "Try a different concept. Not bad, but need to accentuate that they're glorified raiders.",
+        "feedback": {
+          "itemId": "origin-hegemonia",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Try a different concept. Not bad, but need to accentuate that they're glorified raiders.",
+          "updatedAt": "2026-10-17T00:21:46.612Z"
+        },
+        "feedbackSha256": "f8c6d0ae9f1b8ab6b7ac395b8432cfb5c2369f35de428770ade18df4d67d809a"
+      }
+    },
+    {
+      "kind": "origin",
+      "key": "posterunek",
+      "name": "Posterunek",
+      "target": "icons/pochodzenia/posterunek.svg",
+      "itemId": "origin-posterunek",
+      "ruleContext": "Najlepsi specjaliści od walki z Molochem. Zdyscyplinowani eksperci od elektroniki, wszczepów i cybernetyki.",
+      "context": "Pochodzenie background: Posterunek. Najlepsi specjaliści od walki z Molochem. Zdyscyplinowani eksperci od elektroniki, wszczepów i cybernetyki. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/posterunek.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "Use Reference 3, the supplied POSTERUNEK INSIGNIA, instead of the shield-and-chip concept. Clean and reproduce that SAME geometric emblem faithfully. Its original BLACK shape becomes solid WHITE, and the original WHITE background and negative spaces become BLACK. Preserve the large CENTRAL FIVE-POINT STAR as a BLACK cutout in the white body, the broad segmented angular/octagonal enclosure, the top tab with a BLACK PLUS cutout and bottom tab with a BLACK MINUS cutout. Preserve all angular breaks and broad internal channels. Symmetric, crisp, bold, flat; no shield, microchip, lettering, added symbol, texture, bevel, glow or ornament. This requested supplied insignia is the only allowed logo.",
+      "cell": 6,
+      "revisionOf": {
+        "id": "origin-posterunek",
+        "name": "Posterunek",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-109/posterunek.png",
+        "sourceKind": "candidate",
+        "sourceSha256": "cde531a72bba59b41b9015fdea2c5441f1c961dc2ba57741e267eda18972cfcb",
+        "deliveryTargets": [
+          {
+            "source": "icons/pochodzenia/posterunek.svg",
+            "variant": "default",
+            "sourceSha256": null
+          }
+        ],
+        "notes": "[local reference] - clean it up and use that instead",
+        "feedback": {
+          "itemId": "origin-posterunek",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "[local reference] - clean it up and use that instead",
+          "updatedAt": "2026-10-17T00:23:38.114Z"
+        },
+        "feedbackSha256": "bb8f03eebd6fc57542e2d718e97f7daef2caa3e2a23c1f37b670b50320b394da"
+      }
+    },
+    {
+      "kind": "origin",
+      "key": "vegas",
+      "name": "Vegas",
+      "target": "icons/pochodzenia/vegas.svg",
+      "itemId": "origin-vegas",
+      "ruleContext": "Gładcy, cwani, uśmiechnięci. Czytają w myślach, blefują doskonale. Nie siadaj z nimi do kart.",
+      "context": "Pochodzenie background: Vegas. Gładcy, cwani, uśmiechnięci. Czytają w myślach, blefują doskonale. Nie siadaj z nimi do kart. Character origin, background sheet and compendium; 16–64 px.",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/vegas.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "fallback": "icons/svg/village.svg",
+      "request": "Make the regional GAMBLING motif richer than cards alone: ONE squat upright CLASSIC SLOT MACHINE with ONE large dark window showing THREE broad blank white REEL DISCS, one thick PAYOUT SLOT near its base, and ONE complete SIDE LEVER with a large ROUND KNOB. TWO plain fanned PLAYING CARDS overlap its lower-left corner; front card bears ONE large BLACK SPADE cutout. Machine body and lever remain complete. No letters, digits, reel numerals, casino logos, little buttons, sparkle, neon glow, dither, tiny pips or face.",
+      "cell": 7,
+      "revisionOf": {
+        "id": "origin-vegas",
+        "name": "Vegas",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-109/vegas.png",
+        "sourceKind": "candidate",
+        "sourceSha256": "c720c7e0dfe70f18827b988d46c87edddc229ac58e970e678de59ea767022079",
+        "deliveryTargets": [
+          {
+            "source": "icons/pochodzenia/vegas.svg",
+            "variant": "default",
+            "sourceSha256": null
+          }
+        ],
+        "notes": "A little bit too bland - need more than just cards",
+        "feedback": {
+          "itemId": "origin-vegas",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "A little bit too bland - need more than just cards",
+          "updatedAt": "2026-10-17T00:24:24.441Z"
+        },
+        "feedbackSha256": "d3f61fed3103ece0a6e7d063c04124b60727ded87e69887f83650490de456272"
+      }
+    }
+  ]
+}

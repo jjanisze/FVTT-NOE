@@ -1,0 +1,51 @@
+{
+  "origin-czlowiek-pustyni": {
+    "itemId": "origin-czlowiek-pustyni",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Replace the canteen with dunes and a dead tree in the background",
+    "updatedAt": "2026-10-17T00:18:38.466Z"
+  },
+  "origin-detroit": {
+    "itemId": "origin-detroit",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "This includes the motor part, but not the city part. ",
+    "updatedAt": "2026-10-17T00:19:00.808Z"
+  },
+  "origin-appalachy": {
+    "itemId": "origin-appalachy",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Not bad, it includes the primary themes, but not the aristocratic flair. Include that somehow.",
+    "updatedAt": "2026-10-17T00:19:29.179Z"
+  },
+  "origin-nowy-jork": {
+    "itemId": "origin-nowy-jork",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Ditch the book and reference one of the many tropes or locations of New York City.",
+    "updatedAt": "2026-10-17T00:20:41.472Z"
+  },
+  "origin-hegemonia": {
+    "itemId": "origin-hegemonia",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Try a different concept. Not bad, but need to accentuate that they're glorified raiders.",
+    "updatedAt": "2026-10-17T00:21:46.612Z"
+  },
+  "origin-posterunek": {
+    "itemId": "origin-posterunek",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "[local reference] - clean it up and use that instead",
+    "updatedAt": "2026-10-17T00:23:38.114Z"
+  },
+  "origin-vegas": {
+    "itemId": "origin-vegas",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "A little bit too bland - need more than just cards",
+    "updatedAt": "2026-10-17T00:24:24.441Z"
+  }
+}

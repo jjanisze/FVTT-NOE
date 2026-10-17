@@ -3622,10 +3622,10 @@
     },
     "style104-wierze": {
       "itemId": "style104-wierze",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch108-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:13:29.268Z"
+      "updatedAt": "2026-10-17T00:17:23.554Z"
     },
     "style104-wielonozny": {
       "itemId": "style104-wielonozny",
@@ -3671,108 +3671,108 @@
     },
     "style108-bolesny-atak": {
       "itemId": "style108-bolesny-atak",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-17T00:13:29.268Z"
+      "updatedAt": "2026-10-17T00:17:41.753Z"
     },
     "style108-czas-patriotow": {
       "itemId": "style108-czas-patriotow",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-17T00:13:29.268Z"
+      "updatedAt": "2026-10-17T00:17:46.491Z"
     },
     "style108-pajecza-wspinaczka": {
       "itemId": "style108-pajecza-wspinaczka",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-17T00:13:29.268Z"
+      "updatedAt": "2026-10-17T00:17:58.337Z"
     },
     "origin-asgard": {
       "itemId": "origin-asgard",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-17T00:13:29.268Z"
+      "updatedAt": "2026-10-17T00:18:11.711Z"
     },
     "origin-czlowiek-pustyni": {
       "itemId": "origin-czlowiek-pustyni",
       "decision": "pending",
-      "candidateId": "atlas-a",
+      "candidateId": "batch110-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:13:29.268Z"
+      "updatedAt": "2026-10-17T00:31:23.979Z"
     },
     "origin-detroit": {
       "itemId": "origin-detroit",
       "decision": "pending",
-      "candidateId": "atlas-a",
+      "candidateId": "batch110-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:13:29.268Z"
+      "updatedAt": "2026-10-17T00:31:23.979Z"
     },
     "origin-appalachy": {
       "itemId": "origin-appalachy",
       "decision": "pending",
-      "candidateId": "atlas-a",
+      "candidateId": "batch110-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:13:29.268Z"
+      "updatedAt": "2026-10-17T00:31:23.980Z"
     },
     "origin-miami": {
       "itemId": "origin-miami",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-17T00:13:29.268Z"
+      "updatedAt": "2026-10-17T00:19:53.300Z"
     },
     "origin-missisipi": {
       "itemId": "origin-missisipi",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-17T00:13:29.268Z"
+      "updatedAt": "2026-10-17T00:19:57.231Z"
     },
     "origin-nowy-jork": {
       "itemId": "origin-nowy-jork",
       "decision": "pending",
-      "candidateId": "atlas-a",
+      "candidateId": "batch110-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:13:29.268Z"
+      "updatedAt": "2026-10-17T00:31:23.980Z"
     },
     "origin-hegemonia": {
       "itemId": "origin-hegemonia",
       "decision": "pending",
-      "candidateId": "atlas-a",
+      "candidateId": "batch110-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:13:29.268Z"
+      "updatedAt": "2026-10-17T00:31:23.981Z"
     },
     "origin-posterunek": {
       "itemId": "origin-posterunek",
       "decision": "pending",
-      "candidateId": "atlas-a",
+      "candidateId": "batch110-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:13:29.268Z"
+      "updatedAt": "2026-10-17T00:31:23.981Z"
     },
     "origin-salt-lake-city": {
       "itemId": "origin-salt-lake-city",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-17T00:13:29.268Z"
+      "updatedAt": "2026-10-17T00:23:48.960Z"
     },
     "origin-teksas": {
       "itemId": "origin-teksas",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "atlas-a",
       "notes": "",
-      "updatedAt": "2026-10-17T00:13:29.268Z"
+      "updatedAt": "2026-10-17T00:23:56.896Z"
     },
     "origin-vegas": {
       "itemId": "origin-vegas",
       "decision": "pending",
-      "candidateId": "atlas-a",
+      "candidateId": "batch110-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:13:29.268Z"
+      "updatedAt": "2026-10-17T00:31:23.981Z"
     }
   }
 }

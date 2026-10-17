@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-17",
+  "preparedBatch": 110,
+  "nextFreeBatch": 111,
+  "approvedIconsDeliveredThisReview": 9,
+  "approvedCleanupIcons": 4,
+  "approvedMainOrigins": 5,
+  "originEmblemsTotal": 12,
+  "originAbilitiesWithArt": 36,
+  "originRevisionsPrepared": 7,
+  "exactSelectedReferencesPreserved": 7,
+  "suppliedInsigniaReferenceHashPreserved": true,
+  "localReferenceLocationRedactedInPublicMetadata": true,
+  "originalFeedbackArchivedPrivatelyWithHashes": true,
+  "unrelatedCardsAndDecisionsPreserved": 532,
+  "deliveredVariantsUnchanged": 18,
+  "unreferencedPngSiblingsArchivedAndRetired": 2,
+  "newCandidatesInstalledBeforeApproval": 0,
+  "reviewCardsTotal": 539,
+  "reviewCardsResolved": 532,
+  "candidateCollectionValidatedPairs": 864,
+  "browserStyleFlagsRemaining": 0,
+  "physicalItemArtGaps": 0,
+  "physicalItemWiringGaps": 4,
+  "browserAtPublication": {
+    "cards": 7,
+    "options": 21,
+    "brokenImages": 0,
+    "errors": 0,
+    "newCandidatesSelected": 7,
+    "pendingDecisions": 7
+  }
+}

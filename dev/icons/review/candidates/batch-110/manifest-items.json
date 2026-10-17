@@ -1,0 +1,244 @@
+{
+  "title": "Batches 110 · 7 icon revisions awaiting GM review",
+  "updated": "2026-10-17",
+  "items": [
+    {
+      "id": "origin-czlowiek-pustyni",
+      "name": "Człowiek Pustyni",
+      "batch": 110,
+      "tier": "Batch 110 · Origin revision",
+      "target": "icons/pochodzenia/czlowiek-pustyni.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/czlowiek-pustyni.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Pochodzenie background: Człowiek Pustyni. Indywidualiści zdolni przeżyć tam, gdzie inni giną. Zaradni, gardzący miejskim życiem. Character origin, background sheet and compendium; 16–64 px.",
+      "request": "Preserve the plain wrapped HEADSCARF and smooth featureless adult head in side profile at LEFT. REMOVE the WATER CANTEEN completely. Behind the head to the RIGHT show TWO broad clean SAND DUNE silhouettes and ONE small DEAD TREE with a thick bare trunk and exactly THREE stout leafless branches. Two broad cloth overlap cuts only. Complete coherent head, dunes and barren tree, strong black gaps; no beard, facial detail, extra bottle, tiny twigs, fine sand texture or rays.",
+      "current": {
+        "src": "candidates/batch-108/raw/core-origin-placeholder.svg",
+        "note": "Shared Foundry core village placeholder; dedicated origin art is missing."
+      },
+      "candidates": [
+        {
+          "id": "batch110-revision",
+          "label": "Batch 110 · revised Człowiek Pustyni",
+          "src": "candidates/batch-110/czlowiek-pustyni.png",
+          "note": "Preserve the plain wrapped HEADSCARF and smooth featureless adult head in side profile at LEFT. REMOVE the WATER CANTEEN completely. Behind the head to the RIGHT show TWO broad clean SAND DUNE silhouettes and ONE small DEAD TREE with a thick bare trunk and exactly THREE stout leafless branches. Two broad cloth overlap cuts only. Complete coherent head, dunes and barren tree, strong black gaps; no beard, facial detail, extra bottle, tiny twigs, fine sand texture or rays."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 108 · Człowiek Pustyni",
+          "src": "candidates/batch-108/czlowiek-pustyni.png",
+          "note": "ONE plain wrapped DESERT HEADSCARF around a smooth featureless adult head in side profile, paired with ONE squat CLOSED WATER CANTEEN. Broad cloth overlap cuts only, no beard, expressive face, eyes, hair strands, dither, dunes, stars or fine seams. Practical desert survival emblem."
+        }
+      ]
+    },
+    {
+      "id": "origin-detroit",
+      "name": "Detroit",
+      "batch": 110,
+      "tier": "Batch 110 · Origin revision",
+      "target": "icons/pochodzenia/detroit.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/detroit.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Pochodzenie background: Detroit. Uzależnieni od adrenaliny kierowcy i mechanicy. Życie kręci się wokół samochodów. Character origin, background sheet and compendium; 16–64 px.",
+      "request": "Keep ONE broad CAR TIRE and ONE large ENGINE PISTON as the foreground motif, but make the CITY equally clear: behind them rises ONE compact INDUSTRIAL CITY SKYLINE of THREE broad factory blocks with a sawtooth roof and TWO stout chimneys. One piston groove and two broad tire-tread cuts only. City silhouette is at least as wide as the tire, clearly visible above it. No tiny windows, fumes, little gears, fine machine parts, writing, automobile logos or texture.",
+      "current": {
+        "src": "candidates/batch-108/raw/core-origin-placeholder.svg",
+        "note": "Shared Foundry core village placeholder; dedicated origin art is missing."
+      },
+      "candidates": [
+        {
+          "id": "batch110-revision",
+          "label": "Batch 110 · revised Detroit",
+          "src": "candidates/batch-110/detroit.png",
+          "note": "Keep ONE broad CAR TIRE and ONE large ENGINE PISTON as the foreground motif, but make the CITY equally clear: behind them rises ONE compact INDUSTRIAL CITY SKYLINE of THREE broad factory blocks with a sawtooth roof and TWO stout chimneys. One piston groove and two broad tire-tread cuts only. City silhouette is at least as wide as the tire, clearly visible above it. No tiny windows, fumes, little gears, fine machine parts, writing, automobile logos or texture."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 108 · Detroit",
+          "src": "candidates/batch-108/detroit.png",
+          "note": "ONE upright thick AUTOMOBILE TIRE behind ONE large complete ENGINE PISTON with its stout connecting rod angled across the lower half. Two broad tire-tread cuts and one piston groove only. Clear car-mechanic identity; no gear wheel, little bolts, spokes, lettering, racing logos or texture."
+        }
+      ]
+    },
+    {
+      "id": "origin-appalachy",
+      "name": "Federacja Appalachów",
+      "batch": 110,
+      "tier": "Batch 110 · Origin revision",
+      "target": "icons/pochodzenia/appalachy.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/appalachy.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Pochodzenie background: Federacja Appalachów. Górnicy i zarządcy kopalń. Twardzi lub szlachetni — rzadko coś pomiędzy. Character origin, background sheet and compendium; 16–64 px.",
+      "request": "Keep ONE complete sturdy MINING PICK diagonally across ONE angular MOUNTAIN PEAK. Add aristocratic ownership as ONE large plain THREE-POINT CROWN centered ABOVE the mountain, separated by a generous black gap. Broad crown band with ONE clean black cut only; the crown reads at thumbnail size and is at least half the mountain width. A sober aristocratic mining crest with three complete strong shapes, no tiny jewels, heraldic flourishes, writing, fine hatching, texture or fantasy ornaments.",
+      "current": {
+        "src": "candidates/batch-108/raw/core-origin-placeholder.svg",
+        "note": "Shared Foundry core village placeholder; dedicated origin art is missing."
+      },
+      "candidates": [
+        {
+          "id": "batch110-revision",
+          "label": "Batch 110 · revised Federacja Appalachów",
+          "src": "candidates/batch-110/appalachy.png",
+          "note": "Keep ONE complete sturdy MINING PICK diagonally across ONE angular MOUNTAIN PEAK. Add aristocratic ownership as ONE large plain THREE-POINT CROWN centered ABOVE the mountain, separated by a generous black gap. Broad crown band with ONE clean black cut only; the crown reads at thumbnail size and is at least half the mountain width. A sober aristocratic mining crest with three complete strong shapes, no tiny jewels, heraldic flourishes, writing, fine hatching, texture or fantasy ornaments."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 108 · Federacja Appalachów",
+          "src": "candidates/batch-108/appalachy.png",
+          "note": "ONE complete sturdy MINING PICK crossed diagonally in front of ONE broad angular MOUNTAIN PEAK. Clearly separate broad white head and intact handle, one wide black mountain ridge cut. A sober miners' emblem, no little rocks, dust, rays, tiny hatching, writing or fantasy ornament."
+        }
+      ]
+    },
+    {
+      "id": "origin-nowy-jork",
+      "name": "Nowy Jork",
+      "batch": 110,
+      "tier": "Batch 110 · Origin revision",
+      "target": "icons/pochodzenia/nowy-jork.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/nowy-jork.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Pochodzenie background: Nowy Jork. Optymistyczni, wyedukowani i nastawieni na handel. Mają lepszy dostęp do wiedzy niż większość świata. Character origin, background sheet and compendium; 16–64 px.",
+      "request": "Completely REMOVE the BOOK and generic skyline. Show recognizable NEW YORK CITY iconography: ONE complete upright LIBERTY TORCH with a broad flame and simple stout handle at LEFT, next to ONE broad SEVEN-SPIKED LIBERTY CROWN at lower-RIGHT. Crown band has only THREE broad rectangular black openings; seven stout clean triangular rays are widely spaced. Clear black separation between torch and crown. No person, face, full statue, book, letters, tourism logo, tiny windows, shading, texture or intricate flame tongues.",
+      "current": {
+        "src": "candidates/batch-109/raw/core-origin-placeholder.svg",
+        "note": "Shared Foundry core village placeholder; dedicated origin art is missing."
+      },
+      "candidates": [
+        {
+          "id": "batch110-revision",
+          "label": "Batch 110 · revised Nowy Jork",
+          "src": "candidates/batch-110/nowy-jork.png",
+          "note": "Completely REMOVE the BOOK and generic skyline. Show recognizable NEW YORK CITY iconography: ONE complete upright LIBERTY TORCH with a broad flame and simple stout handle at LEFT, next to ONE broad SEVEN-SPIKED LIBERTY CROWN at lower-RIGHT. Crown band has only THREE broad rectangular black openings; seven stout clean triangular rays are widely spaced. Clear black separation between torch and crown. No person, face, full statue, book, letters, tourism logo, tiny windows, shading, texture or intricate flame tongues."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 109 · Nowy Jork",
+          "src": "candidates/batch-109/nowy-jork.png",
+          "note": "ONE large OPEN BOOK with only TWO wide black page-fold cuts, above ONE simple THREE-TOWER CITY SKYLINE. Broad solid city blocks without tiny windows, clean black gap between book and skyline. Education, civilization and trade; no torch statue, letters, dollar sign, logos, rays or fine architectural detail."
+        }
+      ]
+    },
+    {
+      "id": "origin-hegemonia",
+      "name": "Południowa Hegemonia",
+      "batch": 110,
+      "tier": "Batch 110 · Origin revision",
+      "target": "icons/pochodzenia/hegemonia.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/hegemonia.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Pochodzenie background: Południowa Hegemonia. Twardzi jak skała, lojalni jak psy. Potomkowie kryminalistów, którzy znaleźli sens w walce za Bano. Character origin, background sheet and compendium; 16–64 px.",
+      "request": "NEW CONCEPT emphasizing brutal post-apocalyptic RAIDERS. ONE crude broad STEEL HELMET with THREE short stout spikes on its crown, paired with ONE heavy NOTCHED MACHETE angled upward behind it. Helmet has a broad dark face opening and two broad plate cuts only; blade has one broad notch, intact stout handle. Rough improvised raider equipment conveyed by silhouette, no little scratches or rivets. No face, gruff bearded survivor, skull, blood, gore, chain emblem, fine buckles, text, decorative rays or anime.",
+      "current": {
+        "src": "candidates/batch-109/raw/core-origin-placeholder.svg",
+        "note": "Shared Foundry core village placeholder; dedicated origin art is missing."
+      },
+      "candidates": [
+        {
+          "id": "batch110-revision",
+          "label": "Batch 110 · revised Południowa Hegemonia",
+          "src": "candidates/batch-110/hegemonia.png",
+          "note": "NEW CONCEPT emphasizing brutal post-apocalyptic RAIDERS. ONE crude broad STEEL HELMET with THREE short stout spikes on its crown, paired with ONE heavy NOTCHED MACHETE angled upward behind it. Helmet has a broad dark face opening and two broad plate cuts only; blade has one broad notch, intact stout handle. Rough improvised raider equipment conveyed by silhouette, no little scratches or rivets. No face, gruff bearded survivor, skull, blood, gore, chain emblem, fine buckles, text, decorative rays or anime."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 109 · Południowa Hegemonia",
+          "src": "candidates/batch-109/hegemonia.png",
+          "note": "ONE natural bare CLENCHED FIST raised above ONE short BROKEN HEAVY CHAIN with exactly TWO broad oval links separated at center. Two wide finger cuts, one complete wrist. Harsh strength and loyalty born from prison ancestry, no face, portrait, gang initials, tattoo, weapon, gore, fine texture or tiny chain links."
+        }
+      ]
+    },
+    {
+      "id": "origin-posterunek",
+      "name": "Posterunek",
+      "batch": 110,
+      "tier": "Batch 110 · Origin revision",
+      "target": "icons/pochodzenia/posterunek.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/posterunek.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Pochodzenie background: Posterunek. Najlepsi specjaliści od walki z Molochem. Zdyscyplinowani eksperci od elektroniki, wszczepów i cybernetyki. Character origin, background sheet and compendium; 16–64 px.",
+      "request": "Use Reference 3, the supplied POSTERUNEK INSIGNIA, instead of the shield-and-chip concept. Clean and reproduce that SAME geometric emblem faithfully. Its original BLACK shape becomes solid WHITE, and the original WHITE background and negative spaces become BLACK. Preserve the large CENTRAL FIVE-POINT STAR as a BLACK cutout in the white body, the broad segmented angular/octagonal enclosure, the top tab with a BLACK PLUS cutout and bottom tab with a BLACK MINUS cutout. Preserve all angular breaks and broad internal channels. Symmetric, crisp, bold, flat; no shield, microchip, lettering, added symbol, texture, bevel, glow or ornament. This requested supplied insignia is the only allowed logo.",
+      "current": {
+        "src": "candidates/batch-109/raw/core-origin-placeholder.svg",
+        "note": "Shared Foundry core village placeholder; dedicated origin art is missing."
+      },
+      "candidates": [
+        {
+          "id": "batch110-revision",
+          "label": "Batch 110 · revised Posterunek",
+          "src": "candidates/batch-110/posterunek.png",
+          "note": "Use Reference 3, the supplied POSTERUNEK INSIGNIA, instead of the shield-and-chip concept. Clean and reproduce that SAME geometric emblem faithfully. Its original BLACK shape becomes solid WHITE, and the original WHITE background and negative spaces become BLACK. Preserve the large CENTRAL FIVE-POINT STAR as a BLACK cutout in the white body, the broad segmented angular/octagonal enclosure, the top tab with a BLACK PLUS cutout and bottom tab with a BLACK MINUS cutout. Preserve all angular breaks and broad internal channels. Symmetric, crisp, bold, flat; no shield, microchip, lettering, added symbol, texture, bevel, glow or ornament. This requested supplied insignia is the only allowed logo."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 109 · Posterunek",
+          "src": "candidates/batch-109/posterunek.png",
+          "note": "ONE large solid SHIELD containing ONE simple square MICROCHIP with three broad pins on each side and one black central square. Disciplined high-technology defense against machines. No helmet, person, little circuit traces, writing, crosshair, stars, electrical sparks or decorative cogs."
+        }
+      ]
+    },
+    {
+      "id": "origin-vegas",
+      "name": "Vegas",
+      "batch": 110,
+      "tier": "Batch 110 · Origin revision",
+      "target": "icons/pochodzenia/vegas.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/vegas.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "context": "Pochodzenie background: Vegas. Gładcy, cwani, uśmiechnięci. Czytają w myślach, blefują doskonale. Nie siadaj z nimi do kart. Character origin, background sheet and compendium; 16–64 px.",
+      "request": "Make the regional GAMBLING motif richer than cards alone: ONE squat upright CLASSIC SLOT MACHINE with ONE large dark window showing THREE broad blank white REEL DISCS, one thick PAYOUT SLOT near its base, and ONE complete SIDE LEVER with a large ROUND KNOB. TWO plain fanned PLAYING CARDS overlap its lower-left corner; front card bears ONE large BLACK SPADE cutout. Machine body and lever remain complete. No letters, digits, reel numerals, casino logos, little buttons, sparkle, neon glow, dither, tiny pips or face.",
+      "current": {
+        "src": "candidates/batch-109/raw/core-origin-placeholder.svg",
+        "note": "Shared Foundry core village placeholder; dedicated origin art is missing."
+      },
+      "candidates": [
+        {
+          "id": "batch110-revision",
+          "label": "Batch 110 · revised Vegas",
+          "src": "candidates/batch-110/vegas.png",
+          "note": "Make the regional GAMBLING motif richer than cards alone: ONE squat upright CLASSIC SLOT MACHINE with ONE large dark window showing THREE broad blank white REEL DISCS, one thick PAYOUT SLOT near its base, and ONE complete SIDE LEVER with a large ROUND KNOB. TWO plain fanned PLAYING CARDS overlap its lower-left corner; front card bears ONE large BLACK SPADE cutout. Machine body and lever remain complete. No letters, digits, reel numerals, casino logos, little buttons, sparkle, neon glow, dither, tiny pips or face."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 109 · Vegas",
+          "src": "candidates/batch-109/vegas.png",
+          "note": "THREE complete PLAYING CARDS fanned compactly, each a thick rounded rectangle with a wide black separation. The front card contains ONE large BLACK SPADE shape, other cards remain blank. Plain physical gambling cards as regional identity, no dice, numerals, letters, suit corner labels, tiny pips, casino logo, sparkle or texture."
+        }
+      ]
+    }
+  ]
+}

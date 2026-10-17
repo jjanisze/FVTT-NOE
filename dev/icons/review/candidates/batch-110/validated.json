@@ -1,0 +1,14 @@
+{
+  "batch": 110,
+  "validatedMasks": 7,
+  "prospectiveDeliveryTargets": 7,
+  "candidateHashes": {
+    "czlowiek-pustyni": "ac5ac1bc334cd9338014d933f14110197aa3fa9a736b9bd0ca8ca950053e8f38",
+    "detroit": "a6a0689bdf684e09c6dc72b2d978f813d5641716b4e5ca9d96ca05f4b101436d",
+    "appalachy": "66b35439ec2c8f3d1a068a074c6088611a39fbf1434a372dcb08edebee675a60",
+    "nowy-jork": "7da54fdc917d81cc85d5f4689dcdb9c796dfc4c9e53d26f06e1307c9e0d4eb81",
+    "hegemonia": "5c41f85d2b2892e299243b64aa1e63b54cc2810d20119699efe9f64bd606a952",
+    "posterunek": "cdb7ab0c68b3cbb65776f26bd49e4f5b5aa5a06cf1df41bb3268fd4dbd7576a4",
+    "vegas": "1cebfb08335fdaf6687dc083cf15159d4f72dac949ff20b81368ccd213e624f2"
+  }
+}

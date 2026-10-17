@@ -1,0 +1,77 @@
+{
+  "sources": [
+    {
+      "source": "icons/abilities/amen.webp",
+      "sha256": "8608e8e9b504db587616a2bcdfe844dd8efb02644e186d78ffc1566f852a11fc"
+    },
+    {
+      "source": "icons/abilities/hakerstwo.webp",
+      "sha256": "7f7cc2647762b2521bd22f0c0fecd23378688928841a4f3842fcdad0b84935fc"
+    },
+    {
+      "source": "icons/abilities/krwawy-aniol.webp",
+      "sha256": "63a9259db68a4f0c16bbf42a2e315ce98a82c43701874391ddccf399325d28f8"
+    },
+    {
+      "source": "icons/abilities/jeden-strzal.webp",
+      "sha256": "630483b1cfd0de31820e70b6e48466f05ab060509c2fe979b56125f1174c2272"
+    },
+    {
+      "source": "icons/abilities/ulubiona-bron-twardziel.webp",
+      "sha256": "d5ee0b6859d1ed1d5453d3fdef5a028407546fc9faae7807fea132c9598ad98c"
+    },
+    {
+      "source": "icons/abilities/emiter-emp.webp",
+      "sha256": "e052c015b34c427698455fc79fac5cff36d25211fff085141a02440c157a1fdc"
+    },
+    {
+      "source": "icons/abilities/bez-tajemnic.webp",
+      "sha256": "1c6544d59989a4dd08c9faf2728da3f5d902adabf1886f080627ea5d90013eb7"
+    },
+    {
+      "source": "icons/abilities/kocie-kosci.webp",
+      "sha256": "ee5d25740ab235e515c3e32405a25e41eceba7005bcd83cc2a6ebae4d52e30db"
+    },
+    {
+      "source": "icons/abilities/dziewiec-zyc.webp",
+      "sha256": "0cf20df0e99b7078ccc55a513e67d81a2672d09a49374eca0815731a2aa34317"
+    }
+  ],
+  "selectedSources": [
+    {
+      "key": "czlowiek-pustyni",
+      "source": "dev/icons/review/candidates/batch-108/czlowiek-pustyni.png",
+      "sha256": "1355ad0714cdc99c830697954f11aa9a41308cd091458e8c29228fa4371f3b7d"
+    },
+    {
+      "key": "detroit",
+      "source": "dev/icons/review/candidates/batch-108/detroit.png",
+      "sha256": "c7a2aec62acb9e8a34fa6e510f321bf7d5a2d6a9e0f4e1b8759c9938cf1409c9"
+    },
+    {
+      "key": "appalachy",
+      "source": "dev/icons/review/candidates/batch-108/appalachy.png",
+      "sha256": "6c006cec4de111aa3f7eec517c99581bac76ebdcbb9774b6952c24005a887cc2"
+    },
+    {
+      "key": "nowy-jork",
+      "source": "dev/icons/review/candidates/batch-109/nowy-jork.png",
+      "sha256": "55c9f9aac6503a7868521d1bb1640cceaa29055129f7565d65f2305785483ba7"
+    },
+    {
+      "key": "hegemonia",
+      "source": "dev/icons/review/candidates/batch-109/hegemonia.png",
+      "sha256": "75a206900bb613820518e5b1cfc8921cf6fe669b5da42aec2085f62bbc3e9542"
+    },
+    {
+      "key": "posterunek",
+      "source": "dev/icons/review/candidates/batch-109/posterunek.png",
+      "sha256": "cde531a72bba59b41b9015fdea2c5441f1c961dc2ba57741e267eda18972cfcb"
+    },
+    {
+      "key": "vegas",
+      "source": "dev/icons/review/candidates/batch-109/vegas.png",
+      "sha256": "c720c7e0dfe70f18827b988d46c87edddc229ac58e970e678de59ea767022079"
+    }
+  ]
+}
