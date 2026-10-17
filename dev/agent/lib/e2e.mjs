@@ -24,7 +24,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { FILES, MODULE_ID, readJson } from "./config.mjs";
-import { browserSession, waitGameReady } from "./cdp.mjs";
+import { browserSession, cascadeWindows, waitGameReady } from "./cdp.mjs";
 import { duplicateSessions, loginInContext, namedContext, resolveUser, foundryPages } from "./browser.mjs";
 import { CliError, note, sleep } from "./output.mjs";
 import { FoundryClient } from "./foundry-http.mjs";
@@ -273,6 +273,14 @@ async function openClients(ctx, browser, names, { trace = false } = {}) {
     // The working tree's current code, not whatever ES modules the tab cached earlier.
     await client.reload();
     clients.set(name, client);
+  }
+  // No client window may sit fully covered by another — Chrome would throttle it as hidden (`cascadeWindows`).
+  try {
+    const first = clients.values().next().value;
+    const area = await first.eval(() => ({ left: screen.availLeft ?? 0, top: screen.availTop ?? 0, width: screen.availWidth, height: screen.availHeight }));
+    await cascadeWindows(browser, [...clients.values()].map(c => c.targetId), area);
+  } catch (err) {
+    note(`client windows left as they opened: ${err.message}`);
   }
   return clients;
 }

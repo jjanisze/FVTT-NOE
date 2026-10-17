@@ -178,6 +178,34 @@ export async function contextExists(browser, browserContextId) {
   return browserContextIds.includes(browserContextId);
 }
 
+/**
+ * Cascade for `n` windows over one screen's work area: each offset by `step` from the previous, all the same size,
+ * no smaller than Foundry's minimum (1024 × 700). A later window starts right and below an earlier one, so every
+ * window keeps a visible strip on its left and top — never fully covered.
+ * @returns {{left: number, top: number, width: number, height: number}[]}
+ */
+export function cascadeLayout(n, area, step = { x: 160, y: 48 }) {
+  const width = Math.max(1024, area.width - step.x * (n - 1));
+  const height = Math.max(700, area.height - step.y * (n - 1));
+  return Array.from({ length: n }, (_, i) => ({ left: area.left + step.x * i, top: area.top + step.y * i, width, height }));
+}
+
+/**
+ * Lay the windows of these targets out as `cascadeLayout`. Isolated contexts open as separate windows, maximized on
+ * one spot when Chrome's last window was: every window but the front one is then fully covered, which Chrome treats
+ * as hidden — timers throttled to about once a minute, and a 2-second e2e step took 58 (release gate, 2026-10-17).
+ */
+export async function cascadeWindows(browser, targetIds, area) {
+  const bounds = cascadeLayout(targetIds.length, area);
+  for (const [i, targetId] of targetIds.entries()) {
+    const { windowId } = await browser.send("Browser.getWindowForTarget", { targetId });
+    // A maximized or minimized window ignores position and size until it is normal again.
+    await browser.send("Browser.setWindowBounds", { windowId, bounds: { windowState: "normal" } });
+    await browser.send("Browser.setWindowBounds", { windowId, bounds: bounds[i] });
+  }
+  return bounds;
+}
+
 export async function openPage(browser, url, browserContextId) {
   const { targetId } = await browser.send("Target.createTarget", {
     url, ...(browserContextId ? { browserContextId } : {})

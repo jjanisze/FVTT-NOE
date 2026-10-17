@@ -93,7 +93,11 @@ to stderr. Exit code `0` ok · `1` failed · `2` refused by a guard · `3` usage
 ## Extending
 
 E2e initializes an empty scene on every client before the first fixture, so optional canvas modules
-cannot race the initial wall draw ahead of Foundry's render queues. `logs/e2e/<run>/report.json` is
+cannot race the initial wall draw ahead of Foundry's render queues. It also cascades the client windows
+(`cascadeWindows` in `lib/cdp.mjs`): each isolated context is its own window, and one fully covered by another
+is hidden to Chrome, which throttles its timers — steps 3–30× slower, core animation and notification errors
+(2026-10-17). Chrome ignores window moves while a window-modal dialog is open (its search engine choice
+screen after an update); a human dismisses that once. `logs/e2e/<run>/report.json` is
 updated after every suite (`running: true` until the final report); failed assertions and console
 errors are available while later suites continue. Suite actor names must not collide with Poligon
 station names when both run in the same throwaway world.

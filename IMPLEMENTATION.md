@@ -1186,6 +1186,10 @@ Hand-off `HANDOFF_przed_migracja.md`; to wydanie jest punktem odniesienia migrac
   wymienionych plików w `icons/` od v0.19.0 — dwanaście godeł Pochodzeń, ikony 53 Sztuczek, Bestiariusza,
   towarzyszy, paliw, uzupełniania apteczki i stanu Wyłączony. Wszystkie 18 paczek przebudowane; zmieniło się 151
   rekordów, tylko pole `img`. Szczegóły i dowody: `dev/icons/FINAL_HANDOFF.md`.
+- **e2e: okna klientów kaskadą.** Każdy klient e2e to osobne okno; zmaksymalizowane w jednym miejscu zasłaniały się
+  całkiem, Chrome uznawał je za ukryte i dławił timery — kroki 3–30× wolniej, błędy rdzenia przy animacjach i
+  powiadomieniach (to był „łańcuch paczek sypie się” z `PLAN_m5_postoj.md` §11). `cascadeWindows` układa je z
+  przesunięciem, każde z widocznym paskiem; test `npm run test:agent` (`cascade.test.mjs`).
 
 - **Złomiarz w szabrowaniu (błąd).** Ułatwienie szabrowania szukało zdolności `smieciarz` albo przedmiotu
   „Śmieciarz”, a Sztuczka w danych to **Złomiarz** (NOE s. 108; Śmieciarz i Antykwariusz to jej części) — postać
