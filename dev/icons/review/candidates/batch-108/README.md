@@ -1,5 +1,11 @@
 # Batch 108 — 4 cleanup icons and 5 origin emblems
 
+Review outcome, 2026-10-17: six exact approved candidates are installed:
+all four cleanup icons plus Asgard and Miami. Człowiek Pustyni, Detroit
+and Federacja Appalachów continue in Batch 110 with the saved corrections.
+Exact choices and hashes are in `reviewed.json` and
+`reviewed-installed.json`. The preparation evidence below is historical.
+
 | Cell | Subject | Purpose |
 |---|---|---|
 | 1 | Bolesny atak | Simplify the detailed action icon |

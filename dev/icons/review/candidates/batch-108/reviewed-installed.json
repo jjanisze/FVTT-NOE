@@ -1,0 +1,96 @@
+{
+  "date": "2026-10-17",
+  "batch": 108,
+  "pass": "origin-coverage-and-style",
+  "approvedSubjects": 6,
+  "remainingSubjects": 7,
+  "installed": [
+    {
+      "itemId": "style108-bolesny-atak",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-108/bolesny-atak.png",
+      "sourceSha256": "354d0fadc831daa3ab5fc1a783f0a26a2cf1f06aeb15ee942711a2bcb9eadc0c",
+      "files": [
+        "icons/abilities/bolesny-atak.svg",
+        "icons/abilities/bolesny-atak.webp"
+      ],
+      "svgSha256": "727c98e1f1993ba8799344b58743f3b56c3c2562e148a23ca88d68818cf652bc",
+      "webpSha256": "ee14eda11a4668a40a624b8fcf902cd50ee2e992ed6b884b5d22799eadce5f5e",
+      "retiredLegacyPng": {
+        "source": "icons/abilities/bolesny-atak.png",
+        "sha256": "35dcc7ab886a77688983486c11e1fda5f1dbe9d3c7fea1d757c3c895ea5fa06b",
+        "archive": "dev/icons/review/candidates/batch-108/raw/legacy/bolesny-atak.png"
+      }
+    },
+    {
+      "itemId": "style108-czas-patriotow",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-108/czas-patriotow.png",
+      "sourceSha256": "8820650ec5314f47153433170ce3fa539551215b0c7116dc8ab54d50f9c66138",
+      "files": [
+        "icons/abilities/czas-patriotow.svg",
+        "icons/abilities/czas-patriotow.webp"
+      ],
+      "svgSha256": "4e8200c6e95a560d19acf14dd719529c9413fbd5438629a16e55514e313ff5d3",
+      "webpSha256": "550d06b95122896954723326d7cab4525b82d412730fca177259296a2f87da9f",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "style108-pajecza-wspinaczka",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-108/pajecza-wspinaczka.png",
+      "sourceSha256": "100b1303cd7b5b5fbb639da78605ed64071db9c27fcf73433d1585d09bda2b94",
+      "files": [
+        "icons/abilities/pajecza-wspinaczka.svg",
+        "icons/abilities/pajecza-wspinaczka.webp"
+      ],
+      "svgSha256": "cdbc806fbff45c53f2adee9fa776221b3f6985d80a9569d9f02856c351f1e512",
+      "webpSha256": "56b8ab88846c39642dcc14a94b1d2e8b9b500e043230e79d96fed3fbf1cef1cd",
+      "retiredLegacyPng": {
+        "source": "icons/abilities/pajecza-wspinaczka.png",
+        "sha256": "3861e1d623dc87d5db403a0578f393f7cc03a3541f120dbe3e239109ace543fb",
+        "archive": "dev/icons/review/candidates/batch-108/raw/legacy/pajecza-wspinaczka.png"
+      }
+    },
+    {
+      "itemId": "style104-wierze",
+      "candidateId": "batch108-revision",
+      "source": "candidates/batch-108/wierze.png",
+      "sourceSha256": "036a4f5d691a5b015388c349ab7128986c39d73bf28b4f09dd7b4e9012ab2e80",
+      "files": [
+        "icons/abilities/wierze.svg",
+        "icons/abilities/wierze.webp"
+      ],
+      "svgSha256": "a5d84dcddfcd33fec333ef3b23a03311bb98037d8eba6e11cda9b46b4de10fda",
+      "webpSha256": "fe229ea9eafd16bbb3f268ead7dd17f0c4b761cf721de91c75d0f09831e784c8",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "origin-asgard",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-108/asgard.png",
+      "sourceSha256": "7c4a56f73e0e8a5299eee58015797203cf2924c674817d8a3c538d5c89d903c4",
+      "files": [
+        "icons/pochodzenia/asgard.svg",
+        "icons/pochodzenia/asgard.webp"
+      ],
+      "svgSha256": "80bdcfcc8f734bd4ea576bb88f46e004f1b6182d3e71f220eeb36a83f3647f0d",
+      "webpSha256": "2864d81a09c7c40ff3966ef396be330dccb51aba83d91b5fd3c9f7d933d5d7cd",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "origin-miami",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-108/miami.png",
+      "sourceSha256": "43fd7f60e241811c4499ceb5a59a8c2fef320cde38b78d8214fc90be8bc893e0",
+      "files": [
+        "icons/pochodzenia/miami.svg",
+        "icons/pochodzenia/miami.webp"
+      ],
+      "svgSha256": "b1423bccb49bbb9705cc1f1f9958873cf9949c67adb0ae2093de57bbb49fb61c",
+      "webpSha256": "cab249ee2af124e1c6158d8366107fb824e3466e333d360c35717c065b1f20d7",
+      "retiredLegacyPng": null
+    }
+  ],
+  "keptCurrent": []
+}

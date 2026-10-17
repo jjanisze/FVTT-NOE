@@ -1,18 +1,28 @@
-# Browser style revisions — Batches 102–105
+# Icon style and origin revisions
 
-Review outcome, 2026-10-17: **16 approved replacements installed; 13 revisions
+Current queue: **Batch 110 contains seven saved origin revisions**. The
+latest review delivered nine exact icons: all four cleanup subjects and
+five main origins (Asgard, Miami, Missisipi, Salt Lake City and Teksas).
+All 36 origin ability icons exist. Seven main origin emblems still await
+approval. `prepare_110.py` supplies the selected candidates and the
+GM-provided Posterunek insignia; exact reference hashes and sanitized
+feedback are archived beside the new candidates. Local reference locations
+remain only in ignored raw feedback; public records preserve their hashes.
+
+First style review outcome, 2026-10-17: **16 approved replacements installed; 13 revisions
 remain**. Exact decisions and chosen pixels are archived in each batch's
 `reviewed.json` and `reviewed-installed.json`. Approved browser flags now
 record the new SVG hash as kept; remaining flags retain their original
 notes. Nine unreferenced PNG siblings were archived in dev and retired in
 favor of WEBP. Revisions continue in Batches 106–107.
 
-Current queue: Batches 108–109 contain twelve newly discovered main origin
+Earlier preparation: Batches 108–109 contain twelve newly discovered main origin
 emblems and four cleanup icons (three new browser flags plus the saved
 Wierzę hand correction). The separate 36 origin abilities already have art.
 `prepare_108_109.py` freezes existing source variants and absent origin
 paths; `register_108_109.py` preserves 523 unrelated reviews and earlier
-Wierzę choices. All 16 candidates require fresh approval. The 333-item
+Wierzę choices. Nine candidates are now approved and delivered; seven
+origins continue in Batch 110. The 333-item
 physical catalog has zero art gaps and four existing-art wiring tasks.
 See `../ORIGIN_COVERAGE.md`, `../CATALOG_COVERAGE.md` and
 `progress-108-109.json`.

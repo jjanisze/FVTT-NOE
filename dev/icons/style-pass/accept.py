@@ -10,6 +10,7 @@ sys.dont_write_bytecode = True
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "placeholder-pass"))
 from prepare_70_71 import ROOT, REVIEW, read, write, sha
 from class_options_92 import validate_mask
+from public_review import public_copy, feedback_hash
 spec = importlib.util.spec_from_file_location("placeholder_accept", ROOT / "dev/icons/placeholder-pass/accept.py")
 approval = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(approval)
@@ -30,12 +31,18 @@ def consume(numbers, preflight_only=False):
         kept[number] = []
         for original in read(here / "incoming.json")["productionFiles"]:
             assert sha(ROOT / original["source"]) == original["sha256"], "Production variant changed"
+        for relative in read(here / "incoming.json").get("expectedAbsent", []):
+            assert not (ROOT / relative).exists(), "An expected-absent target appeared"
         for subject in batch["subjects"]:
             card, saved = cards[subject["itemId"]], feedback["items"][subject["itemId"]]
             assert card.get("status") != "resolved" and saved["decision"] in ("approve", "revise", "reject")
-            flag = subject["styleFeedback"]
-            assert style["items"][flag["iconId"]] == flag, "Newer browser style feedback"
+            flag = subject.get("styleFeedback")
+            if flag:
+                assert style["items"][flag["iconId"]] == flag, "Newer browser style feedback"
+            else:
+                assert subject["kind"] == "origin" and subject["deliveryTargets"][0]["sourceSha256"] is None
             if saved["candidateId"] == "current":
+                assert flag, "A missing origin emblem cannot be approved as existing production art"
                 selected_path = card["current"]["src"]
                 source = (ROOT / selected_path.lstrip("/")).resolve()
                 assert source == (ROOT / subject["target"]).resolve()
@@ -45,9 +52,10 @@ def consume(numbers, preflight_only=False):
                 selected = next(c for c in card["candidates"] if c["id"] == saved["candidateId"])
                 source = approval.selected_source(subject, selected)
                 selected_path, kind = selected["src"], "candidate"
-            snapshots[number].append({"id": card["id"], "name": card["name"], "decision": saved["decision"], "candidateId": saved["candidateId"],
+            snapshot = {"id": card["id"], "name": card["name"], "decision": saved["decision"], "candidateId": saved["candidateId"],
                 "selectedSource": selected_path, "sourceKind": kind, "sourceSha256": sha(source), "deliveryTargets": subject["deliveryTargets"],
-                "notes": saved.get("notes", ""), "feedback": saved})
+                "notes": saved.get("notes", ""), "feedback": saved, "feedbackSha256": feedback_hash(saved)}
+            snapshots[number].append(public_copy(snapshot))
             if saved["decision"] != "approve":
                 continue
             if kind == "production":
@@ -61,11 +69,17 @@ def consume(numbers, preflight_only=False):
             validate_mask(source.parent, subject["key"])
             destination = (ROOT / subject["target"]).resolve()
             assert destination.is_relative_to(ROOT / "icons") and destination.suffix == ".svg"
-            assert sha(destination) == flag["sourceSha256"]
+            if flag:
+                assert sha(destination) == flag["sourceSha256"]
+            else:
+                assert not destination.exists()
             bitmap = destination.with_suffix(".webp")
             legacy = destination.with_suffix(".png")
             captured = {p["source"] for p in read(here / "incoming.json")["productionFiles"]}
-            if not bitmap.exists():
+            if not flag:
+                assert all(not destination.with_suffix(ext).exists() for ext in (".svg", ".webp", ".png"))
+                assert destination.relative_to(ROOT).as_posix() in read(here / "incoming.json")["expectedAbsent"]
+            elif not bitmap.exists():
                 assert bitmap.relative_to(ROOT).as_posix() not in captured
                 assert legacy.is_file() and legacy.relative_to(ROOT).as_posix() in captured, "Missing uncaptured raster"
             if legacy.is_file():
@@ -90,8 +104,11 @@ def consume(numbers, preflight_only=False):
     installed = {number: [] for number in numbers}
     timestamp = datetime.now(timezone.utc).isoformat(timespec="milliseconds").replace("+00:00", "Z")
     for number in numbers:
-        write(REVIEW / f"candidates/batch-{number}/reviewed.json", {"date": "2026-10-17", "batch": number, "pass": "browser-style-revisions",
-            "feedbackBeforeSha256": sha(feedback_file), "styleFeedbackBeforeSha256": sha(style_file), "active": snapshots[number]})
+        here = REVIEW / f"candidates/batch-{number}"
+        write(here / "raw/reviewed-private.json", {"feedback": {s["itemId"]: feedback["items"][s["itemId"]] for s in batches[number]["subjects"]}})
+        write(here / "reviewed.json", {"date": "2026-10-17", "batch": number, "pass": batches[number]["pass"],
+            "feedbackBeforeSha256": sha(feedback_file), "styleFeedbackBeforeSha256": sha(style_file),
+            "localReferenceLocationsRedacted": True, "active": snapshots[number]})
     for number, subject, source, destination, bitmap, files, legacy in prepared:
         retired = None
         if legacy:
@@ -99,14 +116,16 @@ def consume(numbers, preflight_only=False):
             archive.parent.mkdir(parents=True, exist_ok=True)
             archive.write_bytes(legacy.read_bytes())
             retired = {"source": legacy.relative_to(ROOT).as_posix(), "sha256": sha(legacy), "archive": archive.relative_to(ROOT).as_posix()}
+        destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_bytes(source.with_suffix(".svg").read_bytes())
         bitmap.write_bytes(source.with_suffix(".webp").read_bytes())
         if legacy:
             legacy.unlink()
         card = cards[subject["itemId"]]
         card["status"] = "resolved"
-        flag = style["items"][subject["styleFeedback"]["iconId"]]
-        flag.update(status="keep", sourceSha256=sha(destination), reasons=[], updatedAt=timestamp)
+        if "styleFeedback" in subject:
+            flag = style["items"][subject["styleFeedback"]["iconId"]]
+            flag.update(status="keep", sourceSha256=sha(destination), reasons=[], updatedAt=timestamp)
         installed[number].append({"itemId": card["id"], "candidateId": feedback["items"][card["id"]]["candidateId"],
             "source": source.relative_to(REVIEW).as_posix(), "sourceSha256": sha(source), "files": files,
             "svgSha256": sha(destination), "webpSha256": sha(bitmap), "retiredLegacyPng": retired})
@@ -117,7 +136,7 @@ def consume(numbers, preflight_only=False):
             flag = style["items"][card["styleReview"]["iconId"]]
             flag.update(status="keep", sourceSha256=item["sourceSha256"], reasons=[], updatedAt=timestamp)
     remaining = sum(card.get("status") != "resolved" for card in manifest["items"])
-    manifest.update(title=f"Style review · {len(prepared)} replacements delivered, {kept_count} kept current; {remaining} awaiting revision", updated="2026-10-17")
+    manifest.update(title=f"Asset review · {len(prepared)} approved icons delivered, {kept_count} kept current; {remaining} awaiting revision", updated="2026-10-17")
     assert feedback_file.read_bytes() == originals[feedback_file] and style_file.read_bytes() == originals[style_file]
     write(manifest_file, manifest)
     write(style_file, style)
@@ -125,7 +144,7 @@ def consume(numbers, preflight_only=False):
     newline = "\r\n" if b"\r\n" in originals[missing_file] else "\n"
     for number in numbers:
         here = REVIEW / f"candidates/batch-{number}"
-        write(here / "reviewed-installed.json", {"date": "2026-10-17", "batch": number, "pass": "browser-style-revisions",
+        write(here / "reviewed-installed.json", {"date": "2026-10-17", "batch": number, "pass": batches[number]["pass"],
             "approvedSubjects": len(installed[number]) + len(kept[number]), "remainingSubjects": remaining,
             "installed": installed[number], "keptCurrent": kept[number]})
         begin, end = f"<!-- style-batch-{number}:start -->", f"<!-- style-batch-{number}:end -->"

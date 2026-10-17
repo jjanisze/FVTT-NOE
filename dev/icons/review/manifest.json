@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batches 108 + 109 · 12 origin emblems + 4 cleanup icons awaiting GM review",
+  "title": "Asset review · 9 approved icons delivered, 0 kept current; 7 awaiting revision",
   "updated": "2026-10-17",
   "items": [
     {
@@ -14736,7 +14736,8 @@
           "src": "candidates/batch-104/wierze.png",
           "note": "ONE complete open adult PALM holds ONE small sturdy plain KEY and ONE short lit CANDLE stands beside the wrist. Key has a broad rounded bow, short shaft and TWO broad teeth. Candle has one simple steady flame. Quiet hopeful discovery, not magic. No person, face, thought bubble, rays, particles, game token, text or fine wick."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "style104-wielonozny",
@@ -15037,7 +15038,8 @@
         ],
         "notes": "",
         "updatedAt": "2026-10-16T23:29:19.076Z"
-      }
+      },
+      "status": "resolved"
     },
     {
       "id": "style108-czas-patriotow",
@@ -15077,7 +15079,8 @@
         ],
         "notes": "",
         "updatedAt": "2026-10-16T23:29:34.154Z"
-      }
+      },
+      "status": "resolved"
     },
     {
       "id": "style108-pajecza-wspinaczka",
@@ -15116,7 +15119,8 @@
         ],
         "notes": "There is a fragment of a stray icon on the left side of the image",
         "updatedAt": "2026-10-16T23:39:59.801Z"
-      }
+      },
+      "status": "resolved"
     },
     {
       "id": "origin-asgard",
@@ -15144,7 +15148,8 @@
           "src": "candidates/batch-108/asgard.png",
           "note": "ONE heavy ROUND BUNKER VAULT DOOR in a thick simple rectangular frame, with ONE broad three-spoke locking wheel. Two large hinge blocks, solid uninterrupted steel silhouette, no numbers, runes, fine rivets, tiny circuitry, texture or lettering. Technological underground refuge, not a fantasy castle."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "origin-czlowiek-pustyni",
@@ -15256,7 +15261,8 @@
           "src": "candidates/batch-108/miami.png",
           "note": "ONE small SHALLOW-DRAFT SKIFF in clean side profile, bow pointing RIGHT, with ONE broad PALMETTO FROND curving above its stern. Three wide waterline cuts beneath the hull. Swamp-pirate and marsh identity; no people, skull flag, intricate rigging, many thin leaves, tropical holiday decoration, text or logos."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "origin-missisipi",
@@ -15284,7 +15290,8 @@
           "src": "candidates/batch-109/missisipi.png",
           "note": "ONE plain utilitarian GAS MASK in front view, paired with TWO thick MARSH REEDS at one side. Two broad black eye lenses, one large round front filter with two broad cuts; three blunt reed leaves only. Grim contaminated-swamp hunter emblem, no face inside, hoses, fine filter mesh, radiation lettering, skulls, blood or texture."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "origin-nowy-jork",
@@ -15396,7 +15403,8 @@
           "src": "candidates/batch-109/salt-lake-city.png",
           "note": "ONE thick OPEN BOOK with ONE large clean upright CROSS rising from its center fold. Two broad black page separations only. Sober religious faith and old-world history, no person, fine page lines, lettering, decorative rays, cathedral, ornament or texture."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "origin-teksas",
@@ -15424,7 +15432,8 @@
           "src": "candidates/batch-109/teksas.png",
           "note": "ONE complete broad-brimmed COWBOY HAT above ONE large HORSESHOE with its opening upward. One broad hatband cut and two large horseshoe nail holes only. Plain ranching and horse-country identity, no skull, gun, face, beard, star badge, letters, ornamental tooling or texture."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "origin-vegas",

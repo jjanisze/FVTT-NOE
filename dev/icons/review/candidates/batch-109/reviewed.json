@@ -1,0 +1,185 @@
+{
+  "date": "2026-10-17",
+  "batch": 109,
+  "pass": "origin-coverage-and-style",
+  "feedbackBeforeSha256": "66fa47c7dadf9e5624b748f43c1bb7d98cfdad68d1c9c20cbdc296e96312852d",
+  "styleFeedbackBeforeSha256": "a7bd826553add5f7b418d0a51430db9aea30061260affa308f49e8a734c8d96e",
+  "localReferenceLocationsRedacted": true,
+  "active": [
+    {
+      "id": "origin-missisipi",
+      "name": "Missisipi",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-109/missisipi.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "ff6e10e16d1aedd46a3e3610adbb91ab0f1e817b396c95fdc418672f2c417ce2",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/missisipi.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "origin-missisipi",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-17T00:19:57.231Z"
+      },
+      "feedbackSha256": "19faf1880fe8d4f9d96e8fbbea652e03947397a63e8300004e5b0950bb66ccff"
+    },
+    {
+      "id": "origin-nowy-jork",
+      "name": "Nowy Jork",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-109/nowy-jork.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "55c9f9aac6503a7868521d1bb1640cceaa29055129f7565d65f2305785483ba7",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/nowy-jork.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "Ditch the book and reference one of the many tropes or locations of New York City.",
+      "feedback": {
+        "itemId": "origin-nowy-jork",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Ditch the book and reference one of the many tropes or locations of New York City.",
+        "updatedAt": "2026-10-17T00:20:41.472Z"
+      },
+      "feedbackSha256": "8952d4d1db50f5f12c6d647d9c87aa7890336c1c2370b2690a7391d289761b54"
+    },
+    {
+      "id": "origin-hegemonia",
+      "name": "Południowa Hegemonia",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-109/hegemonia.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "75a206900bb613820518e5b1cfc8921cf6fe669b5da42aec2085f62bbc3e9542",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/hegemonia.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "Try a different concept. Not bad, but need to accentuate that they're glorified raiders.",
+      "feedback": {
+        "itemId": "origin-hegemonia",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Try a different concept. Not bad, but need to accentuate that they're glorified raiders.",
+        "updatedAt": "2026-10-17T00:21:46.612Z"
+      },
+      "feedbackSha256": "f8c6d0ae9f1b8ab6b7ac395b8432cfb5c2369f35de428770ade18df4d67d809a"
+    },
+    {
+      "id": "origin-posterunek",
+      "name": "Posterunek",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-109/posterunek.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "cde531a72bba59b41b9015fdea2c5441f1c961dc2ba57741e267eda18972cfcb",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/posterunek.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "[local reference] - clean it up and use that instead",
+      "feedback": {
+        "itemId": "origin-posterunek",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "[local reference] - clean it up and use that instead",
+        "updatedAt": "2026-10-17T00:23:38.114Z"
+      },
+      "feedbackSha256": "bb8f03eebd6fc57542e2d718e97f7daef2caa3e2a23c1f37b670b50320b394da"
+    },
+    {
+      "id": "origin-salt-lake-city",
+      "name": "Salt Lake City",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-109/salt-lake-city.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "520a83274a81440c5de689d5255505ec69449ed2670b4d8bc78e0e612f3f57e2",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/salt-lake-city.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "origin-salt-lake-city",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-17T00:23:48.960Z"
+      },
+      "feedbackSha256": "cd3e99b7ecc30ccf126cd7c30c867f59ab517591778b1a335decfa65c2e839e6"
+    },
+    {
+      "id": "origin-teksas",
+      "name": "Teksas",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-109/teksas.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "18fad9ed94cb3faa00295fadb98ef8b6379488fe882522ec1f826f5c1872c15a",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/teksas.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "origin-teksas",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-17T00:23:56.896Z"
+      },
+      "feedbackSha256": "f84cdbaa02fc44d3fbae192768161b107600b436f1752ef1b332fcb7ee2d771f"
+    },
+    {
+      "id": "origin-vegas",
+      "name": "Vegas",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-109/vegas.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "c720c7e0dfe70f18827b988d46c87edddc229ac58e970e678de59ea767022079",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/vegas.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "A little bit too bland - need more than just cards",
+      "feedback": {
+        "itemId": "origin-vegas",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "A little bit too bland - need more than just cards",
+        "updatedAt": "2026-10-17T00:24:24.441Z"
+      },
+      "feedbackSha256": "d3f61fed3103ece0a6e7d063c04124b60727ded87e69887f83650490de456272"
+    }
+  ]
+}

@@ -249,6 +249,13 @@ built-in image tool. Sources and delivered hashes are in each batch's
 archived under dev and retired. The GM chose to retain the existing
 Tacą i w nogi artwork; that selection changes no asset or attribution.
 
+Nine GM-approved glyphs from Batches 108–109 were installed on 2026-10-17
+as exact SVG/WEBP masks generated with OpenAI's built-in image tool:
+four cleanup icons and the five origin emblems Asgard, Miami, Missisipi,
+Salt Lake City and Teksas. Selected-source and delivery hashes are in
+those batches' `reviewed-installed.json` files. The seven revised origin
+candidates remain dev-only until approval.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

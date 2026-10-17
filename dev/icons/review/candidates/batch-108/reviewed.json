@@ -1,0 +1,235 @@
+{
+  "date": "2026-10-17",
+  "batch": 108,
+  "pass": "origin-coverage-and-style",
+  "feedbackBeforeSha256": "66fa47c7dadf9e5624b748f43c1bb7d98cfdad68d1c9c20cbdc296e96312852d",
+  "styleFeedbackBeforeSha256": "a7bd826553add5f7b418d0a51430db9aea30061260affa308f49e8a734c8d96e",
+  "localReferenceLocationsRedacted": true,
+  "active": [
+    {
+      "id": "style108-bolesny-atak",
+      "name": "Bolesny atak",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-108/bolesny-atak.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "354d0fadc831daa3ab5fc1a783f0a26a2cf1f06aeb15ee942711a2bcb9eadc0c",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/bolesny-atak.svg",
+          "variant": "default",
+          "sourceSha256": "d9a04ac5c56d675d499618f94d887ca6526d69a5d3ac8af4cb1d452940148320"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style108-bolesny-atak",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-17T00:17:41.753Z"
+      },
+      "feedbackSha256": "fd371da7164b7ba787ad0ff96c3f8a7a502bb05c9b31f4a095c3b128fd303a3c"
+    },
+    {
+      "id": "style108-czas-patriotow",
+      "name": "Czas patriotów",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-108/czas-patriotow.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "8820650ec5314f47153433170ce3fa539551215b0c7116dc8ab54d50f9c66138",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/czas-patriotow.svg",
+          "variant": "default",
+          "sourceSha256": "f77d767f40d7f80bfe6ce4619ec88181da9f95336174203bf5a95bb5de7e4b81"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style108-czas-patriotow",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-17T00:17:46.491Z"
+      },
+      "feedbackSha256": "f191163eb0a13636a278ab8a45604799fa77e154eec1673ce070c92189ae851e"
+    },
+    {
+      "id": "style108-pajecza-wspinaczka",
+      "name": "Pajęcza wspinaczka",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-108/pajecza-wspinaczka.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "100b1303cd7b5b5fbb639da78605ed64071db9c27fcf73433d1585d09bda2b94",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/pajecza-wspinaczka.svg",
+          "variant": "default",
+          "sourceSha256": "87a5baf218dba48c2e6140db3212f0327505cbb98e01952f144eaa465dedeee5"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style108-pajecza-wspinaczka",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-17T00:17:58.337Z"
+      },
+      "feedbackSha256": "d4992ae56a5303d54e063aa13b0140566b68595372b08b1a5c7b03a9d731f9cd"
+    },
+    {
+      "id": "style104-wierze",
+      "name": "Wierzę",
+      "decision": "approve",
+      "candidateId": "batch108-revision",
+      "selectedSource": "candidates/batch-108/wierze.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "036a4f5d691a5b015388c349ab7128986c39d73bf28b4f09dd7b4e9012ab2e80",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wierze.svg",
+          "variant": "default",
+          "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style104-wierze",
+        "decision": "approve",
+        "candidateId": "batch108-revision",
+        "notes": "",
+        "updatedAt": "2026-10-17T00:17:23.554Z"
+      },
+      "feedbackSha256": "05dcbb6cfbf31fc636f8414a7f46620f186d956b062ff223a1b32dfeea1d210e"
+    },
+    {
+      "id": "origin-asgard",
+      "name": "Asgard",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-108/asgard.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "7c4a56f73e0e8a5299eee58015797203cf2924c674817d8a3c538d5c89d903c4",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/asgard.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "origin-asgard",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-17T00:18:11.711Z"
+      },
+      "feedbackSha256": "8744a0040bd6cb009c4bfde7db4172c4d2285de23df2f0724d1416deb7f324a4"
+    },
+    {
+      "id": "origin-czlowiek-pustyni",
+      "name": "Człowiek Pustyni",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-108/czlowiek-pustyni.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "1355ad0714cdc99c830697954f11aa9a41308cd091458e8c29228fa4371f3b7d",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/czlowiek-pustyni.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "Replace the canteen with dunes and a dead tree in the background",
+      "feedback": {
+        "itemId": "origin-czlowiek-pustyni",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Replace the canteen with dunes and a dead tree in the background",
+        "updatedAt": "2026-10-17T00:18:38.466Z"
+      },
+      "feedbackSha256": "879133c13840d1110949ee8c000490feba4ca3a2d63ae5c9a7510af1578757bf"
+    },
+    {
+      "id": "origin-detroit",
+      "name": "Detroit",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-108/detroit.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "c7a2aec62acb9e8a34fa6e510f321bf7d5a2d6a9e0f4e1b8759c9938cf1409c9",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/detroit.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "This includes the motor part, but not the city part. ",
+      "feedback": {
+        "itemId": "origin-detroit",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "This includes the motor part, but not the city part. ",
+        "updatedAt": "2026-10-17T00:19:00.808Z"
+      },
+      "feedbackSha256": "3269be3abb6ef7d348172464618dbcc8158651ad358f5f186ea5e6e8b81e36f3"
+    },
+    {
+      "id": "origin-appalachy",
+      "name": "Federacja Appalachów",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-108/appalachy.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "6c006cec4de111aa3f7eec517c99581bac76ebdcbb9774b6952c24005a887cc2",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/appalachy.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "Not bad, it includes the primary themes, but not the aristocratic flair. Include that somehow.",
+      "feedback": {
+        "itemId": "origin-appalachy",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "notes": "Not bad, it includes the primary themes, but not the aristocratic flair. Include that somehow.",
+        "updatedAt": "2026-10-17T00:19:29.179Z"
+      },
+      "feedbackSha256": "ca44d1bb0870e32361ec3ece6e94de9f37019554ccb36d7c092b0214b9059175"
+    },
+    {
+      "id": "origin-miami",
+      "name": "Miami",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "selectedSource": "candidates/batch-108/miami.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "43fd7f60e241811c4499ceb5a59a8c2fef320cde38b78d8214fc90be8bc893e0",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/miami.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "origin-miami",
+        "decision": "approve",
+        "candidateId": "atlas-a",
+        "notes": "",
+        "updatedAt": "2026-10-17T00:19:53.300Z"
+      },
+      "feedbackSha256": "cec87f2b7dac97a8cd0c5a94e814ca6c7c82fab5005befc0cdee3254f8f706bb"
+    }
+  ]
+}

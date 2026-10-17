@@ -37,13 +37,14 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 110** (16 origin / cleanup glyphs await GM review;
+**Next batch number: 110** (9 approved glyphs delivered; 7 origin revisions queued;
 the original 153-subject placeholder pass is complete).
 
 **Source audit refresh, 2026-10-17:** all 36 origin ability icons exist, but
 the 12 main Pochodzenie background emblems were omitted from earlier queues.
-They still use the core village fallback. New artwork is queued in Batches
-108–109 at `icons/pochodzenia/<canonical-id>.svg` (+ WEBP).
+Five main emblems from Batches 108–109 are now approved and installed:
+Asgard, Miami, Missisipi, Salt Lake City and Teksas. Seven revisions continue
+in Batch 110 at `icons/pochodzenia/<canonical-id>.svg` (+ WEBP).
 See `ORIGIN_COVERAGE.md` and `origin-icons-2026-10-17.json`.
 The 333 physical catalog items have **zero art gaps**; four remaining
 fallbacks need GM wiring to existing art (three fuel grades and medic
@@ -1388,44 +1389,40 @@ Exact saved decisions and approved masks: `reviewed.json` and
 <!-- style-batch-107:end -->
 
 <!-- style-batch-108:start -->
-## Queue (A) — Batch 108 — 9 origin / cleanup glyphs
+## Reviewed (A) — Batch 108 — 6 delivered
 
-Broad white glyphs, 256×256, 20 px margins; SVG + lossless WEBP.
-Candidates await fresh GM approval. Current files and unrelated reviews remain unchanged.
+Exact saved decisions and approved masks: `reviewed.json` and
+`reviewed-installed.json` under `review/candidates/batch-108/`.
 
-| Cell | Subject | Native SVG (+ WEBP) | Source / correction |
-|---|---|---|---|
-| 1 | Bolesny atak | `icons/abilities/bolesny-atak.svg` | detail:  |
-| 2 | Czas patriotów | `icons/abilities/czas-patriotow.svg` | detail, dither:  |
-| 3 | Pajęcza wspinaczka | `icons/abilities/pajecza-wspinaczka.svg` | other: There is a fragment of a stray icon on the left side of the image |
-| 4 | Wierzę | `icons/abilities/wierze.svg` | Better, but the hand should be in a different position - coming to, not from the person wishing the key |
-| 5 | Asgard | `icons/pochodzenia/asgard.svg` | Missing main origin emblem; core village fallback |
-| 6 | Człowiek Pustyni | `icons/pochodzenia/czlowiek-pustyni.svg` | Missing main origin emblem; core village fallback |
-| 7 | Detroit | `icons/pochodzenia/detroit.svg` | Missing main origin emblem; core village fallback |
-| 8 | Federacja Appalachów | `icons/pochodzenia/appalachy.svg` | Missing main origin emblem; core village fallback |
-| 9 | Miami | `icons/pochodzenia/miami.svg` | Missing main origin emblem; core village fallback |
-
-Exact prompts, source/absence checks and feedback: `review/candidates/batch-108/`.
+| Subject | Native SVG (+ WEBP) | Result |
+|---|---|---|
+| Bolesny atak | `icons/abilities/bolesny-atak.svg` | **done** |
+| Czas patriotów | `icons/abilities/czas-patriotow.svg` | **done** |
+| Pajęcza wspinaczka | `icons/abilities/pajecza-wspinaczka.svg` | **done** |
+| Wierzę | `icons/abilities/wierze.svg` | **done** |
+| Asgard | `icons/pochodzenia/asgard.svg` | **done** |
+| Człowiek Pustyni | `icons/pochodzenia/czlowiek-pustyni.svg` | Revision queued |
+| Detroit | `icons/pochodzenia/detroit.svg` | Revision queued |
+| Federacja Appalachów | `icons/pochodzenia/appalachy.svg` | Revision queued |
+| Miami | `icons/pochodzenia/miami.svg` | **done** |
 
 <!-- style-batch-108:end -->
 
 <!-- style-batch-109:start -->
-## Queue (A) — Batch 109 — 7 origin / cleanup glyphs
+## Reviewed (A) — Batch 109 — 3 delivered
 
-Broad white glyphs, 256×256, 20 px margins; SVG + lossless WEBP.
-Candidates await fresh GM approval. Current files and unrelated reviews remain unchanged.
+Exact saved decisions and approved masks: `reviewed.json` and
+`reviewed-installed.json` under `review/candidates/batch-109/`.
 
-| Cell | Subject | Native SVG (+ WEBP) | Source / correction |
-|---|---|---|---|
-| 1 | Missisipi | `icons/pochodzenia/missisipi.svg` | Missing main origin emblem; core village fallback |
-| 2 | Nowy Jork | `icons/pochodzenia/nowy-jork.svg` | Missing main origin emblem; core village fallback |
-| 3 | Południowa Hegemonia | `icons/pochodzenia/hegemonia.svg` | Missing main origin emblem; core village fallback |
-| 4 | Posterunek | `icons/pochodzenia/posterunek.svg` | Missing main origin emblem; core village fallback |
-| 5 | Salt Lake City | `icons/pochodzenia/salt-lake-city.svg` | Missing main origin emblem; core village fallback |
-| 6 | Teksas | `icons/pochodzenia/teksas.svg` | Missing main origin emblem; core village fallback |
-| 7 | Vegas | `icons/pochodzenia/vegas.svg` | Missing main origin emblem; core village fallback |
-
-Exact prompts, source/absence checks and feedback: `review/candidates/batch-109/`.
+| Subject | Native SVG (+ WEBP) | Result |
+|---|---|---|
+| Missisipi | `icons/pochodzenia/missisipi.svg` | **done** |
+| Nowy Jork | `icons/pochodzenia/nowy-jork.svg` | Revision queued |
+| Południowa Hegemonia | `icons/pochodzenia/hegemonia.svg` | Revision queued |
+| Posterunek | `icons/pochodzenia/posterunek.svg` | Revision queued |
+| Salt Lake City | `icons/pochodzenia/salt-lake-city.svg` | **done** |
+| Teksas | `icons/pochodzenia/teksas.svg` | **done** |
+| Vegas | `icons/pochodzenia/vegas.svg` | Revision queued |
 
 <!-- style-batch-109:end -->
 
@@ -1435,12 +1432,7 @@ Exact prompts, source/absence checks and feedback: `review/candidates/batch-109/
 Saved in the icon browser. Generate replacements from the exact selected source;
 keep the final target name and require fresh GM approval before installation.
 
-| Icon / selected source | Reasons | Requested change |
-|---|---|---|
-| icons/abilities/bolesny-atak.svg | Too detailed |  |
-| icons/abilities/czas-patriotow.svg | Too detailed, Dithered / speckled |  |
-| icons/abilities/pajecza-wspinaczka.svg | Other | There is a fragment of a stray icon on the left side of the image |
-| icons/abilities/wierze.svg | Too detailed |  |
+No icons currently flagged for redo.
 
 Exact source hashes and saved decisions: `review/style-feedback.json` (local).
 <!-- icon-style-review:end -->
@@ -1718,8 +1710,9 @@ Po autodestrukcji maszyny żeton podmienia grafikę na wrak w rozmiarze żetonu.
 ## Do podpięcia — przez MG
 
 - **Pochodzenia — audyt 2026-10-17:** 12 emblematów głównych regionów jest
-  w kolejce Batch 108–109; 36 ikon zdolności już istnieje. Po zatwierdzeniu
-  i dostarczeniu emblematów MG przebudowuje `pochodzenia`; obecny builder
+  objętych kolejką. Pięć jest dostarczonych (Asgard, Miami, Missisipi,
+  Salt Lake City, Teksas); siedem wymaga rewizji w Batch 110.
+  36 ikon zdolności już istnieje. MG przebudowuje `pochodzenia`; obecny builder
   sam wybierze dokładne ścieżki `icons/pochodzenia/<id>.svg`. Bez zmian kodu.
   Starsze dokumenty świata aktualizuje osobno MG.
 

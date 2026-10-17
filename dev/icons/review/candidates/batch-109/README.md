@@ -1,5 +1,12 @@
 # Batch 109 — 7 main origin emblems
 
+Review outcome, 2026-10-17: Missisipi, Salt Lake City and Teksas are
+approved and installed. Nowy Jork, Południowa Hegemonia, Posterunek and
+Vegas continue in Batch 110. Local reference locations are removed from
+public metadata; exact original feedback is archived under ignored raw,
+with hashes retained in `reviewed.json`. Delivery hashes are in
+`reviewed-installed.json`. Preparation evidence below is historical.
+
 | Cell | Pochodzenie | Motif |
 |---|---|---|
 | 1 | Missisipi | Gas mask and marsh reeds |

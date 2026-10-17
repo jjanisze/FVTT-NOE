@@ -7,6 +7,8 @@ import { POCHODZENIA, ORIGIN_ABILITIES, pochodzenieItemData } from "../../script
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "../..");
 const date = new Date().toISOString().slice(0, 10);
+const output = process.argv.find(arg => arg.startsWith("--output="))?.slice(9) ?? `origin-icons-${date}.json`;
+if (path.basename(output) !== output || !output.endsWith(".json")) throw new Error("Expected a JSON report filename under dev/icons");
 function asset(source) {
   const absolute = path.join(root, source);
   const exists = fs.existsSync(absolute);
@@ -25,5 +27,5 @@ const stats = { date, scope: "Canonical origin definitions and local assets; no 
   originAbilities: abilities.length, abilityIconsPresent: abilities.filter(i => i.exists).length,
   abilityArtGaps: abilities.filter(i => !i.exists).length,
   wiring: "Existing buildPochodzenie/buildOriginAbility use exact filenames at the next GM pack rebuild. No code repoint needed." };
-fs.writeFileSync(path.join(here, `origin-icons-${date}.json`), JSON.stringify({ stats, origins, abilities }, null, 2) + "\n");
+fs.writeFileSync(path.join(here, output), JSON.stringify({ stats, origins, abilities }, null, 2) + "\n");
 console.log(JSON.stringify(stats, null, 2));

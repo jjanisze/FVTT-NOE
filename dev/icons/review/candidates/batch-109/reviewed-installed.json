@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-17",
+  "batch": 109,
+  "pass": "origin-coverage-and-style",
+  "approvedSubjects": 3,
+  "remainingSubjects": 7,
+  "installed": [
+    {
+      "itemId": "origin-missisipi",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-109/missisipi.png",
+      "sourceSha256": "ff6e10e16d1aedd46a3e3610adbb91ab0f1e817b396c95fdc418672f2c417ce2",
+      "files": [
+        "icons/pochodzenia/missisipi.svg",
+        "icons/pochodzenia/missisipi.webp"
+      ],
+      "svgSha256": "e71b8dcc126248f710aede378ab08a2d32705ca0b1bbaf8f491cec8f483e85ba",
+      "webpSha256": "1ac8dee9278ece7784205a0d12d085ae3b84f2b29c4bdd7ddc89ee7b13fcfb61",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "origin-salt-lake-city",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-109/salt-lake-city.png",
+      "sourceSha256": "520a83274a81440c5de689d5255505ec69449ed2670b4d8bc78e0e612f3f57e2",
+      "files": [
+        "icons/pochodzenia/salt-lake-city.svg",
+        "icons/pochodzenia/salt-lake-city.webp"
+      ],
+      "svgSha256": "bd982e444c6ad2dea8b259b4f5ffe61b126a4dcaea0dc9340fab7502a7683089",
+      "webpSha256": "bb6d8b5d49b117fdd7da83cc1699035a21a475981429c0623c3470647a1601a0",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "origin-teksas",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-109/teksas.png",
+      "sourceSha256": "18fad9ed94cb3faa00295fadb98ef8b6379488fe882522ec1f826f5c1872c15a",
+      "files": [
+        "icons/pochodzenia/teksas.svg",
+        "icons/pochodzenia/teksas.webp"
+      ],
+      "svgSha256": "cb695383c0d9a5f7a69209f96621dd5faecdb6407322336f2c377556a607cbe3",
+      "webpSha256": "d69dfa68c081d7db2bc8a8b6861945fee2c736c0c34d2d0b13890903dde75df3",
+      "retiredLegacyPng": null
+    }
+  ],
+  "keptCurrent": []
+}
