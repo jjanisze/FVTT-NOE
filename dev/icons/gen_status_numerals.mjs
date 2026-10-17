@@ -3,7 +3,9 @@
  * z `scripts/config/state-colors.mjs`.
  *
  * Wynik:
+ *   icons/statuses/zranienie.svg          sylwetka `bloodied.svg`   (poziom 0, bez cyfry)
  *   icons/statuses/zranienie-1..4.svg     sylwetka `bloodied.svg`   + cyfra w kolorze Zranienia
+ *   icons/statuses/upojenie-1..4.svg, skazenie-1..4.svg   sylwetka modułu + cyfra w kolorze stanu
  *   icons/statuses/wyczerpanie.svg        kopia `exhaustion.svg`    (poziom 0, bez cyfry)
  *   icons/statuses/wyczerpanie-1..6.svg   kopia `exhaustion-N.svg`  + cyfra przemalowana
  *
@@ -102,6 +104,42 @@ ${BANNER}
 ${numeral}
 </svg>
 `);
+}
+
+/* ---- Zranienie: plik bazowy (HUD, poziom 0) ----
+   dnd5e 6.0 robi z każdego stanu z `levels` stan wielopoziomowy i sam skleja ikonę poziomu z `img` stanu:
+   `ConditionData.getIconByLevel` → `<img>-N.<ext>`. `img` Zranienia wskazuje więc ten plik, a poziomy — pliki wyżej. */
+
+write("zranienie.svg", `<?xml version="1.0" encoding="UTF-8"?>
+${BANNER}
+<svg width="512" height="512" version="1.1" viewBox="0 0 1866.7 1866.7" xmlns="http://www.w3.org/2000/svg">
+<g transform="scale(${BLOODIED_SCALE.toFixed(5)})">${bloodiedPath}</g>
+</svg>
+`);
+
+/* ---- Upojenie, Skażenie: sylwetka modułu (ręczna, 512 × 512) + cyfra dnd5e w kolorze stanu ----
+   Te same powody co wyżej: dnd5e 6.0 szuka `upojenie-N.svg` / `skazenie-N.svg` obok pliku bazowego. */
+
+for (const [id, levels] of [["upojenie", 4], ["skazenie", 4]]) {
+  const base = fs.readFileSync(path.join(OUT_DIR, `${id}.svg`), "utf8");
+  if (!/viewBox="0 0 512 512"/.test(base)) {
+    console.error(`${id}.svg nie ma viewBox 0 0 512 512 — skala cyfry by się rozjechała.`);
+    process.exit(1);
+  }
+  const inner = extract(base, /(?<=<svg\b[^>]*>)[\s\S]*(?=<\/svg>)/, "zawartości", `${id}.svg`);
+  for (let level = 1; level <= levels; level++) {
+    const src = `exhaustion-${level}.svg`;
+    const numeral = recolor(
+      extract(read(dir, src), /<path id="Numeral"[^>]*\/?>(?:<\/path>)?/, "cyfry", src),
+      STATE_COLORS[id], src);
+    write(`${id}-${level}.svg`, `<?xml version="1.0" encoding="UTF-8"?>
+${BANNER}
+<svg width="512" height="512" version="1.1" viewBox="0 0 1866.7 1866.7" xmlns="http://www.w3.org/2000/svg">
+<g transform="scale(${BLOODIED_SCALE.toFixed(5)})">${inner}</g>
+${numeral}
+</svg>
+`);
+  }
 }
 
 /* ---- Wyczerpanie: całe pliki dnd5e, zmieniona tylko barwa cyfry ---- */
