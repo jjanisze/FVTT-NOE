@@ -67,6 +67,14 @@ export function registerPrzebicieTests(quench) {
         }
       });
 
+      it("redukcja materiału z tacki schodzi przed odpornością (`weapons/damage-reduction.mjs`)", function () {
+        // Opcja celu z tacki dnd5e 6.0; hak `preCalculateDamage` robi z niej przeskalowany mnożnik.
+        expect(memoryNpc().calculateDamage(hit(30), { neuroReduction: 10 }).amount, "bez odporności").to.equal(20);
+        expect(memoryNpc({ resist: ["piercing"] }).calculateDamage(hit(30), { neuroReduction: 10 }).amount, "(30 − 10) × ½").to.equal(10);
+        expect(memoryNpc().calculateDamage(hit(8), { neuroReduction: 10 }).amount, "redukcja ponad obrażenia").to.equal(0);
+        expect(memoryNpc().calculateDamage(hit(30), { neuroReduction: 10, multiplier: 2 }).amount, "60 − 10").to.equal(50);
+      });
+
       it("niewrażliwość zostaje — RAW mówi o odpornościach", function () {
         const npc = new Actor.implementation({
           name: `${SCRATCH_PREFIX} cel`, type: "npc", system: { traits: { di: { value: ["piercing"] } } }

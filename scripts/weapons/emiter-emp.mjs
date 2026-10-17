@@ -21,6 +21,7 @@ import { maZdolnosc } from "../production/wykonawca.mjs";
 import { zarejestrujTTWobecBroni } from "../combat/trafienie.mjs";
 import { weaponIdOf, weaponEntry } from "./magazine-model.mjs";
 import { setMag } from "./magazine.mjs";
+import { itemUuidOf } from "../config/chat-message-data.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 export const EMITER_ID = "emiter-emp";
@@ -72,7 +73,7 @@ function _owinBieglosc() {
 /* -------------------------------------------- */
 
 function _przedmiotWiadomosci(message) {
-  const uuid = message?.getFlag?.("dnd5e", "item")?.uuid ?? message?.flags?.dnd5e?.item?.uuid;
+  const uuid = itemUuidOf(message);
   try { return uuid ? fromUuidSync(uuid) : null; } catch { return null; }
 }
 
@@ -94,15 +95,17 @@ function _owinTacke() {
   const cls = customElements.get("damage-application");
   if (!cls) return console.warn(`${MODULE_ID} | Emiter EMP: brak elementu tacki obrażeń dnd5e`);
   const oryginal = cls.prototype.buildTargetListEntry;
-  cls.prototype.buildTargetListEntry = function ({ uuid, name }) {
-    const zero = _domyslnieZero(this, uuid);
-    const li = oryginal.call(this, { uuid, name });
-    if (li && zero) {
+  // dnd5e 6.0: `(targetList, {uuid, name})` — the tray groups targets with the same result into one pill and returns
+  // an entry only for a new group; living targets at ×0 form their own group, so the badge describes all of it.
+  cls.prototype.buildTargetListEntry = function (targetList, entry = {}) {
+    const zero = _domyslnieZero(this, entry.uuid);
+    const li = oryginal.call(this, targetList, entry);
+    if (li && zero && !li.querySelector(".neuro-emp-plakietka")) {
       const p = document.createElement("span");
       p.className = "neuro-emp-plakietka";
       p.dataset.tooltip = "Emiter EMP nie działa na istoty żywe (s. 101) — domyślnie ×0; ×1, jeśli MG uzna inaczej.";
       p.innerHTML = `<i class="fa-solid fa-bolt-lightning" inert></i> EMP nie działa na istoty żywe`;
-      li.querySelector(".name-stacked")?.append(p);
+      li.append(p);
     }
     return li;
   };
