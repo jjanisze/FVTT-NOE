@@ -5,7 +5,7 @@
  * Shapes verified in `resources/app/dist/server/views/*.mjs` (v14):
  *  - GET  /api/status                       no auth; {active, version, world, system, systemVersion, users, uptime}
  *  - POST /auth     {adminPassword}         sets session.admin even while a world runs; always redirects
- *  - POST /join     {action:"shutdown"}     admin session; world → setup
+ *  - POST /setup    {action:"worldShutdown"} admin session; world → setup (14.369; was /join "shutdown")
  *  - POST /join     {action:"loginAs", userId}   admin (or GM) session → that session joins as userId
  *  - POST /setup    {action:"launchWorld", world} | {action, …}   admin, only while no world is active
  *  - POST /create   {action:"createWorld", id, title, system}     admin
@@ -68,22 +68,31 @@ export class FoundryClient {
     }
   }
 
-  /** Admin session for this client. Success is proven by the first admin-only call. */
+  /**
+   * Admin session for this client. Success is proven by the first admin-only call.
+   *
+   * No world: POST /auth, as Foundry's own setup login. With a world running, 14.369's /auth no longer
+   * authenticates (it only renders the page), and the one check of the admin password left is the strict one
+   * every POST /setup runs before anything else: the session becomes admin even though /setup then answers any
+   * action but `worldShutdown` with a 400 while a world runs. A wrong password shows up on the next admin call
+   * (`loginAs` 403, shutdown landing on /join); `doctor` checks it offline against Config/admin.txt.
+   */
   async adminAuth() {
     if (this.admin) return;
     const worldActive = (await this.status()).active;
+    if (worldActive) {
+      await this.#fetch("/setup", { method: "POST", body: { adminPassword: readAdminPassword() } });
+      this.admin = true;
+      return;
+    }
     const res = await this.#fetch("/auth", { method: "POST", body: { adminPassword: readAdminPassword() } });
     // Success and a wrong password both redirect; a 4xx is the request itself refused (14.369's
     // same-origin check took the old client for a success and failed one call later).
     if (res.status >= 400) {
       throw new CliError(`Foundry refused the admin login request (HTTP ${res.status}): ${(await res.text()).slice(0, 200)}`, { code: "auth-failed" });
     }
-    const where = res.headers.get("location") ?? "";
-    // No world: success redirects to /setup, failure back to /auth. With a world active it
-    // redirects to /auth either way (auth.mjs: `!world && success ? setup : auth`) — the
-    // session still gets its admin flag, and a wrong password shows up as 403 on the next
-    // admin call (`doctor` also checks the password offline against Config/admin.txt).
-    if (!worldActive && where.endsWith("/auth")) {
+    // No world: success redirects to /setup, failure back to /auth.
+    if ((res.headers.get("location") ?? "").endsWith("/auth")) {
       throw new CliError("Foundry rejected the stored administrator password.", {
         code: "auth-failed", hint: "The password changed? Ask the GM to re-run dev/agent/Set-AgentSecret.ps1."
       });
@@ -91,11 +100,20 @@ export class FoundryClient {
     this.admin = true;
   }
 
+  /**
+   * 14.369 moved this from `/join {action:"shutdown"}` (which now answers `{}`) to `/setup {action:"worldShutdown"}`.
+   * It redirects either way: to /setup when the world went down, to /join when the session was not allowed.
+   */
   async shutdownWorld() {
     await this.adminAuth();
-    const r = await this.#json("/join", { method: "POST", body: { action: "shutdown" }, timeoutMs: 60_000 });
-    if (r.status !== "success") throw new CliError(`World shutdown failed: ${r.message ?? JSON.stringify(r)}`, { code: "shutdown-failed" });
-    return r;
+    const res = await this.#fetch("/setup", { method: "POST", body: { action: "worldShutdown" }, timeoutMs: 60_000 });
+    const where = res.headers.get("location") ?? "";
+    if (res.status >= 400 || !where.endsWith("/setup")) {
+      throw new CliError(`World shutdown failed (HTTP ${res.status}${where ? ` → ${where}` : ""}): ${(await res.text()).slice(0, 200)}`, {
+        code: "shutdown-failed", hint: "Landing on /join means the session was not admin — is the stored password current (`fvtt doctor`)?"
+      });
+    }
+    return { status: "success", redirect: where };
   }
 
   async quit() {
