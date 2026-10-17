@@ -123,8 +123,8 @@ w piaskownicy; `fvtt doctor` bez problemów; drzewo czyste w twoich ścieżkach.
 
 ## 5. Wynik (wypełnia agent)
 
-Agent: Claude Code, 2026-10-17. Commity: `e2fa759` (Z2), `6a4c7c8` i `a3e9ec3` (Z3), `df95e94` (Z4), dokumenty (Z5) —
-ostatni commit z tym plikiem. Nic nie wypchnięte.
+Agent: Claude Code, 2026-10-17. Commity: `e2fa759` (Z2), `6a4c7c8` i `a3e9ec3` (Z3), `df95e94` (Z4), `e4fd268`
+(Z5), a portrety po decyzji MG (Z3) — commit z tą wersją pliku. Nic nie wypchnięte.
 
 Testy: `npm test` zielone; `validate-packs` zielone (na buildzie sprzed zmiany — 37 błędów `worlds/`, jak ma być);
 pełny Quench w piaskownicy **1185/1185** (o jeden więcej niż v0.19.0 — nowy test Złomiarza); e2e w piaskownicy:
@@ -153,12 +153,14 @@ wierzchu — wtedy wracać do tego, nie wcześniej. `fvtt doctor`: bez problemó
     jedna walki) — wszystkie zamienione na istniejące; każde odwołanie `icons/…` w `scripts/`, `templates/`,
     `dev/packs/`, `dev/poligon/` sprawdzone z instalacją.
   - Portrety: „czemu te dwa” — nie te dwa. **37 z 51** aktorów Bestiariusza miało `img` w `worlds/output/characters/…`;
-    bramka zobaczyła tylko dwa, bo tylko one trafiły na ekran w tamtej próbie. Pochodzenie jest znane, nie niejasne:
-    to ilustracje z podręcznika wycięte z PDF-a (`PLAN_human_testing.md` §11, z 2026-10-11) — nie do publikacji. Zrobione
-    to, co tam zaproponowano po stronie publicznej: portret = `tokens/portraits/<id>.webp`, a bez niego grafika żetonu
-    (własna 25, dnd5e 14, atrapa 12); builder nie czyta świata, zaszyte ścieżki `C:/Users/…` usunięte (katalog danych
-    liczony z położenia modułu). `PORTRAIT_ALIASES` i dekoder nazw folderów Roll20 są w historii gita (przydadzą się do
-    prywatnego modułu grafik). Wydane `module.zip` v0.19.0 ma te 37 ścieżek — u każdego poza kampanią to 404.
+    bramka zobaczyła tylko dwa, bo tylko one trafiły na ekran w tamtej próbie. Wydane `module.zip` v0.19.0 ma te 37
+    ścieżek — u każdego poza kampanią to 404. Builder nie czyta już świata, zaszyte ścieżki `C:/Users/…` usunięte
+    (katalog danych liczony z położenia modułu); portret = `tokens/portraits/<id>.webp`, a bez niego grafika żetonu.
+    **Decyzja MG (2026-10-17): portrety idą do modułu**, bez prywatnego modułu grafik. Przegląd 37: 24 ilustracje z
+    podręcznika, 11 grafik AI MG (OpenAI, trochę Gemini), 2 grafiki z sieci bez licencji (genotyp wilczy, gigantyczny
+    pająk) — te dwie zostają poza modułem, zastąpi je później grafika fana. **35** portretów w `tokens/portraits/`
+    (WEBP ≤ 1536 px, razem 6 MB), źródła i warunki w `CREDITS.md` („Bestiariusz portraits”). Paczka `bestiariusz`:
+    35 rekordów różni się od `HEAD` tylko polem `img`.
   - `validate-packs`: każdy obraz w każdej paczce (pola i `<img src>`) musi być w module, `systems/dnd5e/` albo
     rdzennym `icons/` i istnieć; `worlds/` zawsze odrzucone. Na starym buildzie: 37 błędów, na nowym zielono. W CI
     sprawdza ścieżki i pliki modułu; rdzeń i dnd5e tylko lokalnie (runner ich nie ma).
@@ -175,7 +177,7 @@ wierzchu — wtedy wracać do tego, nie wcześniej. `fvtt doctor`: bez problemó
 - **Z5:** zrobione. `PLAN_beta.md`: nagłówek i nowa **§0 „Kolejność do bety (od 2026-10-17)”** z diagramem
   (numer 0, żeby odwołania „§4 po becie” się nie przesunęły); M5 oznaczone jak M3. `PLAN_m5_postoj.md`: PROJEKT →
   WDROŻONE + weto. `PLAN_m3_towarzysze.md`: status + wpis w §11. `PLAN_human_testing.md`: status + §5.0 (i w §11
-  odhaczona publiczna połowa portretów, reguła `validate-packs`, zaszyta ścieżka). `IMPLEMENTATION.md`: wpis „Po
+  decyzja o portretach, reguła `validate-packs`, zaszyta ścieżka). `IMPLEMENTATION.md`: wpis „Po
   v0.19.0” w changelogu, licznik Sztuczek, portret w Bestiariuszu. Też `AGENTS.md`, `DEV_GUIDE.md` §11.7,
   `tokens/README.md` (źródło portretu). `check_doc_paths.mjs`: 0 martwych.
 - **Z6 — inwentarz** (stan 2026-10-17; zgodność = deklaracja w manifeście najnowszego wydania):
@@ -212,23 +214,14 @@ wierzchu — wtedy wracać do tego, nie wcześniej. `fvtt doctor`: bez problemó
   2026-09-22, magazynki). (4) `fvtt poligon:clone` — pełna kopia świata na ścieżkę Poligonu (ostatnia 2026-10-12),
   ale to robocza kopia do prób, nadpisywana przez `--refresh`, nie kopia zapasowa. Świat nie jest w gicie ani w
   synchronizacji. `guards.COMMAND_CLASS` ma klasę dla polecenia `backup`, którego `fvtt` nie implementuje.
-- **Z7:** pominięte — brak słowa MG. Przed ewentualnym v0.19.1: Codex musi zacommitować ikony, potem przebudowa
-  `pochodzenia` (punkt 2 niżej), bo `release:check` porównuje paczki ze świeżym buildem.
+- **Z7:** warunek spełniony — Codex skończył, MG przebudował paczki (`2881386`). Bramka `release:check -- --tag`
+  uruchamia e2e i Quench w piaskownicy wydania, więc potrzebuje Chrome; czeka na MG.
 - **Dla MG:**
-  1. **Prywatny moduł grafik Bestiariusza** (`PLAN_human_testing.md` §11, propozycja z 2026-10-11): ilustracje z
-     podręcznika jako niepublikowany moduł z mapowaniem `CompendiumArt` (rdzeń v14) na stałe id aktorów — kampania i
-     Poligon znów miałyby te portrety przy imporcie. Do decyzji: robimy (przed migracją czy po?) czy portrety =
-     żetony na stałe. Do tego czasu w kampanii: aktorzy już zaimportowani mają stare portrety, nowe importy z
-     Bestiariusza — grafikę żetonu.
-  2. **Paczka `pochodzenia` jest nieaktualna** względem źródeł: godła Pochodzeń od Codexa (`24fe617`, `43f071b`) —
-     w paczce wciąż `icons/svg/village.svg`. Codex dokłada dalej (dziś w drzewie niezacommitowane `hegemonia`,
-     `nowy-jork` i nowe `icons/abilities/*`), więc nie przebudowałem jej, żeby paczka nie wskazywała na pliki spoza
-     gita. Gdy kolejka Codexa się uspokoi: `npm run fvtt -- packs`, porównanie ze świeżym buildem
-     (`release:check` robi to sam) i commit zmienionych paczek.
-  3. **Poligon** (był podłączony MG, więc nie ruszałem): paczki Poligonu z drzewa (`fvtt packs --profile=poligon`,
-     Złomiarz i portrety) i przebudowa Obsady (Świeżość → Obsada → Przebuduj albo
-     `fvtt poligon:obsada --rebuild --only=szczur-5`). Sonda: Złomowisko → `szabrowanie` (Szczur ma Ułatwienie do
-     Percepcji i Śledztwa, Łowca nie).
+  1. ~~Prywatny moduł grafik Bestiariusza~~ — rozstrzygnięte: portrety w module (Z3).
+  2. ~~Paczka `pochodzenia` nieaktualna~~ — przebudowana przez MG po zakończeniu pracy Codexa (`2881386`).
+  3. **Poligon:** paczki przebudowane z drzewa (offline, 2026-10-17, z portretami). Zostaje przebudowa Obsady w
+     przeglądarce (Świeżość → Obsada → Przebuduj albo `fvtt poligon:obsada --rebuild --only=szczur-5`). Sonda:
+     Złomowisko → `szabrowanie` (Szczur ma Ułatwienie do Percepcji i Śledztwa, Łowca nie).
   4. **Kopia zapasowa kampanii przed migracją** — ostatnia wbudowana jest z maja (Z6). Zrobić świeżą (Setup →
      Backups) przed aktualizacją Foundry; plan migracji może dodać `fvtt backup`, skoro klasa już czeka.
   5. Dla planu migracji: dnd5e 6.0.6 wymaga Foundry ≥ 14.367; kampania stoi na dnd5e 5.3.0, a linia 5.3 ma 5.3.3.

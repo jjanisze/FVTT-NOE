@@ -824,12 +824,13 @@ function tokenScaleFor(c) {
 }
 
 /**
- * The portrait shipped with the module (`tokens/portraits/<id>.webp`) — art made for this module, e.g. the
- * drone templates (PLAN_m3_towarzysze.md). Without one the actor's portrait is its token art.
+ * The portrait shipped with the module (`tokens/portraits/<id>.webp`): the drone templates
+ * (PLAN_m3_towarzysze.md) and the Bestiariusz creatures' portraits from the campaign's Roll20 import, each
+ * with its source in CREDITS.md. Without one the actor's portrait is its token art.
  *
- * Never the campaign world's Roll20 folders (`worlds/<world>/characters/`): those are the rulebook's own
- * illustrations, not publishable, and a world path is a 404 in every other world (PLAN_human_testing.md §11).
- * `validate-packs` refuses any pack image outside this module, `systems/dnd5e/` and core `icons/`.
+ * Never a world path (`worlds/<world>/characters/` is where those portraits used to be read from): it is a
+ * 404 in every other world (PLAN_human_testing.md §11). `validate-packs` refuses any pack image outside this
+ * module, `systems/dnd5e/` and core `icons/`.
  */
 function portraitFor(c) {
   const own = `tokens/portraits/${c.id}.webp`;

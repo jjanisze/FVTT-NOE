@@ -549,9 +549,12 @@ the most unjudged calls. H2–H3 make it a loop.
   them. `build-packs.mjs` then drops the world path and the hardcoded data path (below). Original
   portraits for public users can come later; the module is not on the official listing, so the Foundry
   AI policy does not constrain that.
-  **2026-10-17 (pre-migration hand-off, Z3):** the public half is done — every portrait is `tokens/portraits/<id>.webp`
-  or the token art, the world path is gone from the builder. The private art module still awaits the GM; until
-  then the campaign keeps the book art on actors already imported, new imports get the token art.
+  **2026-10-17 (pre-migration hand-off, Z3):** the world path is gone from the builder — every portrait is
+  `tokens/portraits/<id>.webp` or the token art. **GM decision, same day: no private art module — the portraits ship
+  in this module**, credited in `CREDITS.md` ("Bestiariusz portraits") and removed if a rights holder asks. A closer
+  look corrected the premise above: of the 37, 24 are rulebook illustrations, 11 are AI images the GM generated for
+  the campaign, and 2 were web images of unknown licence — those two stay out (token art until a fan's permitted
+  art replaces them). So 35 of 51 actors have a portrait.
 - **Detection:** a `validate-packs` rule — every image path in every pack must sit in `modules/<id>/`,
   `systems/dnd5e/` or core `icons/`, and a module path must exist on disk. It would have caught all 37,
   plus any icon pointing at a missing file, at the release gate. **Done 2026-10-17** (core and dnd5e files

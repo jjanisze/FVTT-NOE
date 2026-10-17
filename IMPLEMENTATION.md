@@ -964,8 +964,8 @@ Phase 5, teraz skreślony). Pełny opis pipeline'u: `DEV_GUIDE.md` §11.
   Adventures zabrania kopiowania plików), 12/51 wygenerowane placeholdery
   (`tokens/_placeholder/`, żółto-czarny pas + kod literowy + trójkąt kierunku). Token art
   z Roll20 świadomie zignorowany (okrągłe kadry, nie top-down)
-- [x] Portret aktora (`img`): `tokens/portraits/<id>.webp`, a bez niego grafika żetonu — od 2026-10-17 nigdy ścieżka
-  świata kampanii (ilustracje z podręcznika); `validate-packs` pilnuje obrazów w paczkach
+- [x] Portret aktora (`img`): `tokens/portraits/<id>.webp` (35/51 od 2026-10-17, źródła w `CREDITS.md`), a bez niego
+  grafika żetonu — nigdy ścieżka świata kampanii; `validate-packs` pilnuje obrazów w paczkach
 - [x] **Skala żetonu per istota** — `tokens/scale-overrides.json` jako jedyne źródło
   `prototypeToken.texture.scaleX/scaleY`, zasiewane pomiarem obwiedni alfy
   (`npm run seed:token-scales`), kalibrowane ręcznie w Szafie z potworami
@@ -1189,11 +1189,13 @@ Hand-off `HANDOFF_przed_migracja.md`; punkt odniesienia migracji na Foundry 14.3
   Okno MG i prośba gracza mówią „Złomiarz”. Plakietka: szabrowanie — automatycznie; wycena (Antykwariusz) — MG
   (D4). Sztuczki 19/53. Quench `szabrowanie`: Sztuczka z paczki → Ułatwienie do obu testów. Poligon: Szczur (5)
   z Obsady niesie Złomiarza (stanowisko Złomowisko, sonda `szabrowanie`) — Obsada do przebudowy.
-- **Portrety Bestiariusza bez ścieżki świata.** Bramka v0.19.0 zgłosiła dwa 404 (Cywil, Gangus żołnierz); w paczce
-  było ich **37 z 51** — `build-packs` brał portrety z folderów Roll20 świata kampanii (ilustracje z podręcznika,
-  nie do publikacji), więc działały tylko w kampanii, a pozostałe 35 po prostu nie trafiły na ekran w tej próbie.
-  Portret to teraz `tokens/portraits/<id>.webp`, a bez niego grafika żetonu; builder nie czyta świata ani nie ma
-  zaszytej ścieżki danych (`PLAN_human_testing.md` §11). Aktorzy już zaimportowani w kampanii zachowują portrety.
+- **Portrety Bestiariusza w module, bez ścieżki świata.** Bramka v0.19.0 zgłosiła dwa 404 (Cywil, Gangus
+  żołnierz); w paczce było ich **37 z 51** — `build-packs` brał portrety z folderów Roll20 świata kampanii, więc
+  działały tylko w kampanii, a pozostałe 35 po prostu nie trafiły na ekran w tej próbie. Builder nie czyta już świata
+  ani nie ma zaszytej ścieżki danych; portret to `tokens/portraits/<id>.webp`, a bez niego grafika żetonu. Decyzja MG:
+  portrety idą do modułu — **35** (24 ilustracje z podręcznika, 11 grafik AI MG; WEBP ≤ 1536 px, 6 MB), źródła i
+  warunki w `CREDITS.md`; dwie grafiki z sieci bez licencji (genotyp wilczy, gigantyczny pająk) zostają poza modułem
+  (`PLAN_human_testing.md` §11).
 - **`validate-packs`: obrazy.** Każdy obraz w paczkach (pola i `<img src>` w HTML) musi leżeć w module,
   `systems/dnd5e/` albo rdzennych `icons/`, nigdy w `worlds/`; plik musi istnieć (rdzeń i dnd5e — gdy są
   zainstalowane, czyli lokalnie, nie w CI).

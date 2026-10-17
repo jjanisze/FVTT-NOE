@@ -919,10 +919,10 @@ per-token wygrywa z globalnym `bloodColor` i z `BloodSheetData`.
 
 - **Portrety** (`img`): `tokens/portraits/<id>.webp`, a bez niego grafika żetonu (niżej) — nigdy ścieżka
   świata. Do 2026-10-17 builder zbierał portrety z folderów Roll20 świata kampanii
-  (`worlds/<świat>/characters/<NNN>_-_<NAZWA>/avatar.*`): to ilustracje z podręcznika, nie do publikacji, a w
-  każdym innym świecie 404 (`PLAN_human_testing.md` §11). Dekodowanie nazw tych folderów i `PORTRAIT_ALIASES`
-  są w historii gita, gdyby trafiły do prywatnego modułu grafik. `validate-packs` odrzuca każdy obraz w
-  paczkach spoza modułu, `systems/dnd5e/` i rdzennych `icons/` oraz plik, którego nie ma na dysku.
+  (`worlds/<świat>/characters/<NNN>_-_<NAZWA>/avatar.*`) — w każdym innym świecie 404 (`PLAN_human_testing.md`
+  §11). Od 2026-10-17 35 z nich leży w module jako `tokens/portraits/<id>.webp` (pochodzenie w `CREDITS.md`);
+  dekodowanie nazw folderów Roll20 i `PORTRAIT_ALIASES` zostały w historii gita. `validate-packs` odrzuca każdy
+  obraz w paczkach spoza modułu, `systems/dnd5e/` i rdzennych `icons/` oraz plik, którego nie ma na dysku.
 - **Token art z Roll20 jest świadomie ignorowany.** To okrągłe kadry portretu z Roll20,
   gdzie żetony się nie obracają; FVTT je obraca.
 - **Żetony top-down** — cztery warstwy, sprawdzane w tej kolejności (`tokenArtSource`):

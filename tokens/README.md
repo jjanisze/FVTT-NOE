@@ -91,11 +91,13 @@ Obecnie zaalias­owane: **14 z 51** istot (stan 2026-09-20).
 
 Portret aktora (`img`) builder bierze z **`tokens/portraits/<id>.webp`**, a bez niego z grafiki żetonu (poziomy
 1–4 wyżej). Dziś mają go szablony dronów (`towarzysz-dron-kroczacy`, `towarzysz-dron-latajacy`, paczka
-`towarzysze`). Te same reguły co dla żetonów: WEBP, nazwa = id istoty, grafika o znanym pochodzeniu (`CREDITS.md`).
+`towarzysze`) i **35 z 51** istot Bestiariusza (od 2026-10-17: ilustracje z podręcznika i grafiki AI MG z importu
+Roll20 — lista i warunki w `CREDITS.md`, „Bestiariusz portraits”). Te same reguły co dla żetonów: WEBP (dłuższy bok
+≤ 1536 px), nazwa = id istoty, a pochodzenie każdego nowego pliku zapisane w `CREDITS.md`. Bez portretu: Generacja II –
+genotyp wilczy i Gigantyczny pająk (grafiki z sieci bez licencji zostały w świecie kampanii).
 
-**Nigdy ścieżka świata.** Portrety z migracji Roll20 w świecie kampanii to ilustracje z podręcznika — nie do
-publikacji, a w każdym innym świecie 404. `validate-packs` odrzuca każdy obraz w paczkach spoza modułu,
-`systems/dnd5e/` i rdzennych `icons/` (`PLAN_human_testing.md` §11).
+**Nigdy ścieżka świata** — w każdym innym świecie to 404. `validate-packs` odrzuca każdy obraz w paczkach spoza
+modułu, `systems/dnd5e/` i rdzennych `icons/` (`PLAN_human_testing.md` §11).
 
 ## Co się zmienia, gdy plik się pojawi
 
