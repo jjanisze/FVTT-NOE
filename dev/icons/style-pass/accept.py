@@ -21,12 +21,13 @@ def consume(numbers, preflight_only=False):
     originals = {file: file.read_bytes() for file in (manifest_file, feedback_file, style_file, missing_file)}
     manifest, feedback, style = (json.loads(originals[file]) for file in (manifest_file, feedback_file, style_file))
     cards = {card["id"]: card for card in manifest["items"]}
-    prepared, snapshots, batches, production_paths = [], {}, {}, []
+    prepared, snapshots, batches, production_paths, kept = [], {}, {}, [], {}
     for number in numbers:
         here = REVIEW / f"candidates/batch-{number}"
         assert not (here / "reviewed-installed.json").exists(), "Review already consumed; use --check"
         batch = batches[number] = read(here / "batch.json")
         snapshots[number] = []
+        kept[number] = []
         for original in read(here / "incoming.json")["productionFiles"]:
             assert sha(ROOT / original["source"]) == original["sha256"], "Production variant changed"
         for subject in batch["subjects"]:
@@ -35,7 +36,6 @@ def consume(numbers, preflight_only=False):
             flag = subject["styleFeedback"]
             assert style["items"][flag["iconId"]] == flag, "Newer browser style feedback"
             if saved["candidateId"] == "current":
-                assert saved["decision"] != "approve", "Keeping current art needs explicit handling"
                 selected_path = card["current"]["src"]
                 source = (ROOT / selected_path.lstrip("/")).resolve()
                 assert source == (ROOT / subject["target"]).resolve()
@@ -49,6 +49,14 @@ def consume(numbers, preflight_only=False):
                 "selectedSource": selected_path, "sourceKind": kind, "sourceSha256": sha(source), "deliveryTargets": subject["deliveryTargets"],
                 "notes": saved.get("notes", ""), "feedback": saved})
             if saved["decision"] != "approve":
+                continue
+            if kind == "production":
+                files = [p for p in read(here / "incoming.json")["productionFiles"]
+                         if Path(p["source"]).with_suffix(".svg").as_posix() == subject["target"]]
+                assert files and any(p["source"] == subject["target"] for p in files)
+                production_paths.extend(p["source"] for p in files)
+                kept[number].append({"itemId": card["id"], "candidateId": "current",
+                    "source": selected_path, "sourceSha256": sha(source), "files": files})
                 continue
             validate_mask(source.parent, subject["key"])
             destination = (ROOT / subject["target"]).resolve()
@@ -75,7 +83,8 @@ def consume(numbers, preflight_only=False):
     assert not status, "Dirty approved production target"
     for file, original in originals.items():
         assert file.read_bytes() == original, "Review changed during preflight"
-    print(f"Preflight: {len(prepared)} approvals, {sum(len(v) for v in snapshots.values()) - len(prepared)} revisions/rejections.")
+    kept_count = sum(map(len, kept.values()))
+    print(f"Preflight: {len(prepared)} replacements, {kept_count} kept current, {sum(len(v) for v in snapshots.values()) - len(prepared) - kept_count} revisions/rejections.")
     if preflight_only:
         return
     installed = {number: [] for number in numbers}
@@ -101,8 +110,14 @@ def consume(numbers, preflight_only=False):
         installed[number].append({"itemId": card["id"], "candidateId": feedback["items"][card["id"]]["candidateId"],
             "source": source.relative_to(REVIEW).as_posix(), "sourceSha256": sha(source), "files": files,
             "svgSha256": sha(destination), "webpSha256": sha(bitmap), "retiredLegacyPng": retired})
+    for number in numbers:
+        for item in kept[number]:
+            card = cards[item["itemId"]]
+            card["status"] = "resolved"
+            flag = style["items"][card["styleReview"]["iconId"]]
+            flag.update(status="keep", sourceSha256=item["sourceSha256"], reasons=[], updatedAt=timestamp)
     remaining = sum(card.get("status") != "resolved" for card in manifest["items"])
-    manifest.update(title=f"Style review · {len(prepared)} approved replacements delivered; {remaining} awaiting revision", updated="2026-10-17")
+    manifest.update(title=f"Style review · {len(prepared)} replacements delivered, {kept_count} kept current; {remaining} awaiting revision", updated="2026-10-17")
     assert feedback_file.read_bytes() == originals[feedback_file] and style_file.read_bytes() == originals[style_file]
     write(manifest_file, manifest)
     write(style_file, style)
@@ -111,7 +126,8 @@ def consume(numbers, preflight_only=False):
     for number in numbers:
         here = REVIEW / f"candidates/batch-{number}"
         write(here / "reviewed-installed.json", {"date": "2026-10-17", "batch": number, "pass": "browser-style-revisions",
-            "approvedSubjects": len(installed[number]), "remainingSubjects": remaining, "installed": installed[number]})
+            "approvedSubjects": len(installed[number]) + len(kept[number]), "remainingSubjects": remaining,
+            "installed": installed[number], "keptCurrent": kept[number]})
         begin, end = f"<!-- style-batch-{number}:start -->", f"<!-- style-batch-{number}:end -->"
         start, finish = queue.index(begin), queue.index(end)
         lines = [begin, f"## Reviewed (A) — Batch {number} — {len(installed[number])} delivered", "",
@@ -119,7 +135,7 @@ def consume(numbers, preflight_only=False):
             f"`reviewed-installed.json` under `review/candidates/batch-{number}/`.", "",
             "| Subject | Native SVG (+ WEBP) | Result |", "|---|---|---|"]
         for subject, saved in zip(batches[number]["subjects"], snapshots[number]):
-            result = "**done**" if saved["decision"] == "approve" else "Revision queued"
+            result = ("Kept current — **done**" if saved["candidateId"] == "current" else "**done**") if saved["decision"] == "approve" else "Revision queued"
             lines.append(f"| {subject['name']} | `{subject['target']}` | {result} |")
         lines += ["", end]
         queue = queue[:start] + "\n".join(lines) + queue[finish + len(end):]
@@ -132,6 +148,11 @@ def consume(numbers, preflight_only=False):
 def check(number):
     here = REVIEW / f"candidates/batch-{number}"
     approval.check(here)
+    for item in read(here / "reviewed-installed.json").get("keptCurrent", []):
+        assert sha(ROOT / item["source"].lstrip("/")) == item["sourceSha256"]
+        for file in item["files"]:
+            assert sha(ROOT / file["source"]) == file["sha256"], "Kept-current variant changed"
+    print(f"Verified {len(read(here / 'reviewed-installed.json').get('keptCurrent', []))} kept-current decisions without changing their files")
     for item in read(here / "reviewed-installed.json")["installed"]:
         retired = item.get("retiredLegacyPng")
         if retired:

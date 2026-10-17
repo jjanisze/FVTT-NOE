@@ -242,6 +242,13 @@ batches in `dev/icons/review/candidates/`. Nine unreferenced legacy PNG
 siblings were archived under their batches' dev-only `raw/legacy/` folders
 and retired in favor of WEBP.
 
+Eleven further GM-approved style replacements from Batches 106–107 were
+installed on 2026-10-17 as exact SVG/WEBP masks generated with OpenAI's
+built-in image tool. Sources and delivered hashes are in each batch's
+`reviewed-installed.json`. Six unreferenced legacy PNG siblings were
+archived under dev and retired. The GM chose to retain the existing
+Tacą i w nogi artwork; that selection changes no asset or attribution.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

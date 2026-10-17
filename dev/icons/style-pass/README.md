@@ -7,6 +7,12 @@ record the new SVG hash as kept; remaining flags retain their original
 notes. Nine unreferenced PNG siblings were archived in dev and retired in
 favor of WEBP. Revisions continue in Batches 106–107.
 
+Batches 106–107 review outcome: eleven exact approved replacements delivered,
+one current-art selection retained unchanged (Tacą i w nogi), and one saved
+hand-position correction queued for Wierzę. Six unreferenced PNG siblings
+were archived before retirement. `accept.py` records kept-current variants
+and verifies their hashes without installing a candidate.
+
 The thirteen saved revisions are frozen by `prepare_106_107.py` and returned
 to the same cards by `register_revisions.py`. Batch 106 has nine subjects;
 Batch 107 has four with five empty cells. The waiter preserves the GM's

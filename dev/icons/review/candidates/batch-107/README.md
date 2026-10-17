@@ -1,5 +1,12 @@
 # Batch 107 — 4 saved style revisions
 
+Review outcome, 2026-10-17: three exact approved candidates installed.
+Wierzę retains its current production art and moves to Batch 108 for the
+saved correction: the key-offering hand must come toward the wishing
+person from the right. Exact decisions and delivery hashes are in
+`reviewed.json` and `reviewed-installed.json`. Preparation and publication
+evidence below is historical.
+
 | Cell | Subject | Requested visual correction |
 |---|---|---|
 | 1 | wierze | REPLACE cell 1's candle-and-hand idea. Show an ordinary useful object being IMAGINED INTO EXISTENCE: ONE plain generic adult HEAD in SIDE PROFILE at LEFT; ONE broad THOUGHT BUBBLE above-right containing ONE large simple KEY; and ONE complete open PALM below-right holding the SAME simple KEY now tangible. Two large round thought dots connect head and thought bubble. Both keys have one broad round bow, one short thick shaft and two broad teeth. Head is a smooth natural featureless profile with no portrait, beard or hair detail. Compact clear thought-to-real-object composition with broad black separation. No candle, prayer, religious symbol, glitter, tiny rays, magical runes, lettering, numbers or game token. |

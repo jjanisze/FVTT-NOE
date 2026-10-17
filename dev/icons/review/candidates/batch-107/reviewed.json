@@ -1,0 +1,105 @@
+{
+  "date": "2026-10-17",
+  "batch": 107,
+  "pass": "browser-style-revisions",
+  "feedbackBeforeSha256": "effe4df938f8d80eb66a37c0d59ef7e87a6cf7cd22ee996001b926d085885f59",
+  "styleFeedbackBeforeSha256": "5d607f0e3fc398c8501a8fa05758ddf88511c95c34b24f5ed5d543a458ba52f4",
+  "active": [
+    {
+      "id": "style104-wierze",
+      "name": "Wierzę",
+      "decision": "revise",
+      "candidateId": "batch107-revision",
+      "selectedSource": "candidates/batch-107/wierze.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "a69f1c0e9841a9f29351015c75b6c8ea7a1db77a2f8a4b9790bdec180a254d72",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wierze.svg",
+          "variant": "default",
+          "sourceSha256": "0ff2b1c2604f5099714dd5371fffcfc6212b216bce2ba54d848c32a07639797c"
+        }
+      ],
+      "notes": "Better, but the hand should be in a different position - coming to, not from the person wishing the key",
+      "feedback": {
+        "itemId": "style104-wierze",
+        "decision": "revise",
+        "candidateId": "batch107-revision",
+        "notes": "Better, but the hand should be in a different position - coming to, not from the person wishing the key",
+        "updatedAt": "2026-10-17T00:04:06.868Z"
+      }
+    },
+    {
+      "id": "style104-wielonozny",
+      "name": "Wielonożny",
+      "decision": "approve",
+      "candidateId": "batch107-revision",
+      "selectedSource": "candidates/batch-107/wielonozny.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "d4fadee32684f8f5569dcf074b520451cf1b5ef60f07087da589d2f826e809cf",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wielonozny.svg",
+          "variant": "default",
+          "sourceSha256": "588eb40f2878962ff870a67c4cbeb761ac8b899f2cf5e708280ac8898f64d27d"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style104-wielonozny",
+        "decision": "approve",
+        "candidateId": "batch107-revision",
+        "notes": "",
+        "updatedAt": "2026-10-16T23:28:42.916Z"
+      }
+    },
+    {
+      "id": "style104-wrazliwosc-na-swiatlo",
+      "name": "Wrażliwość na światło",
+      "decision": "approve",
+      "candidateId": "batch107-revision",
+      "selectedSource": "candidates/batch-107/wrazliwosc-na-swiatlo.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "55a02c605fb5f0171ba85fc3af0ab3a276cd3801ac538d1989917a22099d881b",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/wrazliwosc-na-swiatlo.svg",
+          "variant": "default",
+          "sourceSha256": "e48c8aedc3ef8941ac486c2ea64f2d97499f31242ba40d030be30898431e65a7"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style104-wrazliwosc-na-swiatlo",
+        "decision": "approve",
+        "candidateId": "batch107-revision",
+        "notes": "",
+        "updatedAt": "2026-10-16T23:28:50.268Z"
+      }
+    },
+    {
+      "id": "style105-zawziety-sukinkot",
+      "name": "Zawzięty sukinkot",
+      "decision": "approve",
+      "candidateId": "batch107-revision",
+      "selectedSource": "candidates/batch-107/zawziety-sukinkot.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "a084e57ed2a6a940db233092ed1ee1a13ae78b237b23d2befae14bb9272230ca",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/zawziety-sukinkot.svg",
+          "variant": "default",
+          "sourceSha256": "01789bb0c238bac7894c87fa8e792505ee7c9ec6ec6734002a92cbac1666d0f3"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style105-zawziety-sukinkot",
+        "decision": "approve",
+        "candidateId": "batch107-revision",
+        "notes": "",
+        "updatedAt": "2026-10-16T23:39:16.120Z"
+      }
+    }
+  ]
+}

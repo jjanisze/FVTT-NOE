@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batches 106 + 107 · 13 style revisions awaiting GM review",
+  "title": "Style review · 11 replacements delivered, 1 kept current; 1 awaiting revision",
   "updated": "2026-10-17",
   "items": [
     {
@@ -13829,7 +13829,8 @@
           "src": "candidates/batch-102/doktor-quinn.png",
           "note": "ONE complete bare adult HAND wraps ONE broad clean BANDAGE around ONE intact forearm. A short loose bandage roll remains visible beside the wrist. Natural anatomy, broad overlapping cloth strips with just TWO black dividing cuts. Medical care without a portrait, needles, blood, tiny fingers or fabric texture."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "style102-fart",
@@ -14079,7 +14080,8 @@
           "src": "candidates/batch-102/odporny.png",
           "note": "ONE natural HORSE HEAD and neck in simple side profile, muzzle lowered toward ONE small water bowl. One broad black mane separation and ONE small eye cut only. Two broad concentric water arcs in the bowl. No human, bridle fittings, hair strands, bubbles, mushrooms, textured fur or skull."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "style102-patriota",
@@ -14124,7 +14126,8 @@
           "src": "candidates/batch-102/patriota.png",
           "note": "ONE complete bare adult HAND presses flat over ONE large plain CLOTH PATCH attached to a simple shoulder-shaped panel. The patch is a broad blank rectangle with ONE large diagonal black stripe. Natural hand with grouped fingers and one separate thumb. No face, flag of any real nation, insignia, text, stitching or game token."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "style103-prog-awarii",
@@ -14169,7 +14172,8 @@
           "src": "candidates/batch-103/prog-awarii.png",
           "note": "ONE squat industrial MOTOR HOUSING split by ONE broad zigzag BLACK CRACK, with ONE large loose bolt lying below. Thick simple casing, two broad cooling-slot cuts, no gauge, scale, numeral, little wires, smoke, debris cloud or fine damage texture."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "style103-przyspieszenie",
@@ -14335,7 +14339,8 @@
           "src": "candidates/batch-103/siodme-poty.png",
           "note": "ONE complete rugged GAS PEDAL being pressed by ONE sturdy complete BOOT, in simple side profile, with TWO broad short speed strokes behind the heel. Thick sole, simple pedal hinge and base, one broad tread cut only. No steering wheel, hands, sweat drops, fine laces, numeral or gauge."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "style103-skakun",
@@ -14380,7 +14385,8 @@
           "src": "candidates/batch-103/skakun.png",
           "note": "ONE SPIDER in a clear sideways LEAP over ONE low rock: ONE oval abdomen, one smaller connected cephalothorax, EIGHT thick complete bent legs and two short fangs. Four legs visible on each side, natural spider anatomy. One broad short launch streak behind it. No hair, tiny eyes, intricate joints or extra legs."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "style103-szara-eminencja",
@@ -14505,7 +14511,8 @@
           "src": "candidates/batch-103/taca-i-w-nogi.png",
           "note": "ONE complete generic adult in a compact running pose carries ONE broad SERVING TRAY raised upright at the leading hand like a shield. Natural complete arms and legs, smooth featureless head, plain shirt and trousers. TWO short broad speed strokes behind the back foot. No victim, face, beard, apron detail, crockery, text or gore."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "style104-tanczace-pily",
@@ -14590,7 +14597,8 @@
           "src": "candidates/batch-104/tryb-turbo.png",
           "note": "ONE compact SIX-LEGGED INDUSTRIAL WALKER in three-quarter side view, moving forward with TWO broad speed strokes behind it. One plain rectangular body, SIX stout legs each with ONE simple elbow and ONE complete broad foot, three legs on each side. One broad side panel cut. No gun, smoke plume, microdetail, cables, people or text."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "style104-twierdzenie-kata-prostego",
@@ -14636,7 +14644,8 @@
           "src": "candidates/batch-104/twierdzenie-kata-prostego.png",
           "note": "ONE plain generic adult GUARD at LEFT braces and thrusts ONE short broad BATON horizontally toward the upper torso of ONE approaching generic adult at RIGHT. The approaching figure visibly STOPS, leaning back with one foot firmly planted and palms raised. Exactly two complete natural adult silhouettes, featureless heads and broad black separation. Clear melee interception; no geometric wall, right-angle symbol, diagram, arrow, blood or tiny details."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "style104-tylko-zwarcie",
@@ -14767,7 +14776,8 @@
           "src": "candidates/batch-104/wielonozny.png",
           "note": "ONE simple rectangular INDUSTRIAL WALKER BODY on SIX broad articulated LEGS steps over TWO low jagged ROCKS. Three legs on each side, each with one thick elbow and a complete broad foot, all feet visible and clear of rocks. One broad side panel cut. No guns, smoke, bolts, cables, rubble pile, thin joints or extra legs."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "style104-wirujace-kiscienie",
@@ -14853,7 +14863,8 @@
           "src": "candidates/batch-104/wrazliwosc-na-swiatlo.png",
           "note": "ONE natural RAT in simple side profile recoils from ONE plain FLASHLIGHT at RIGHT. The rat crouches low, one forepaw covering its eye, ears folded back; complete body and ONE long curved tail. The light is ONE broad clean cone separated from the rat. No facial expression, fur texture, teeth, tiny whiskers or cartoon anatomy."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "style104-wymagania",
@@ -14980,7 +14991,8 @@
           "src": "candidates/batch-105/zawziety-sukinkot.png",
           "note": "ONE complete generic adult rises from ONE knee: one boot planted, one knee still touching the ground, ONE palm braced on the ground and the other hand pressing the planted thigh. Smooth featureless head, natural ordinary build, broad simple clothing. A determined rising pose without an arrow. No beard portrait, injuries, blood, torn fine fabric, texture or extra limb."
         }
-      ]
+      ],
+      "status": "resolved"
     }
   ]
 }

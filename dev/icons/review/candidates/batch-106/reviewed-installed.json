@@ -1,0 +1,151 @@
+{
+  "date": "2026-10-17",
+  "batch": 106,
+  "pass": "browser-style-revisions",
+  "approvedSubjects": 9,
+  "remainingSubjects": 1,
+  "installed": [
+    {
+      "itemId": "style102-doktor-quinn",
+      "candidateId": "batch106-revision",
+      "source": "candidates/batch-106/doktor-quinn.png",
+      "sourceSha256": "97536dc051960dcf2db14b17479f29cf6a2046723b432854b02f04e096c2cda4",
+      "files": [
+        "icons/abilities/doktor-quinn.svg",
+        "icons/abilities/doktor-quinn.webp"
+      ],
+      "svgSha256": "6890f73454acd6e1ff2bcc9b5a2e0bea9fd0dfb1709da2308029610d1dd25d95",
+      "webpSha256": "e280a17c5a4f5b39ed8aa66bfba6b99b9ed2ca9fc7b4c868a4df075a01c3cb3f",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "style102-odporny",
+      "candidateId": "batch106-revision",
+      "source": "candidates/batch-106/odporny.png",
+      "sourceSha256": "d56ad280b17fb5f37821849cd051e5b3d0bf36c9d9bac0a0240c53c09229ffbd",
+      "files": [
+        "icons/abilities/odporny.svg",
+        "icons/abilities/odporny.webp"
+      ],
+      "svgSha256": "b5835b1b2713c3f4227357c0d3935359b932e63f8c73b832815c09f7b3c6e9de",
+      "webpSha256": "56b25f53147a9d5619593016d0037d7ad392cd2f789a2b4b374f0d17b547d698",
+      "retiredLegacyPng": {
+        "source": "icons/abilities/odporny.png",
+        "sha256": "66c5b5e362a92ebbe3df717c6d7a31ca286c50d54096d5837b89a00e8d472478",
+        "archive": "dev/icons/review/candidates/batch-106/raw/legacy/odporny.png"
+      }
+    },
+    {
+      "itemId": "style102-patriota",
+      "candidateId": "batch106-revision",
+      "source": "candidates/batch-106/patriota.png",
+      "sourceSha256": "ea3b7dd0074b1b9ccb8df2c02430f1d13fab11e8194438ae0b6f1bc0908e2f2d",
+      "files": [
+        "icons/abilities/patriota.svg",
+        "icons/abilities/patriota.webp"
+      ],
+      "svgSha256": "5be00a799304a23fce8f7b16964cbce129ff7f4f416fa9fa05107d20e79d26ea",
+      "webpSha256": "9d7841250788058484c24edaf44037fb83bfbc1c47c193a00e2ca91be7293633",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "style103-prog-awarii",
+      "candidateId": "batch106-revision",
+      "source": "candidates/batch-106/prog-awarii.png",
+      "sourceSha256": "5e093f9a68f84aeaafa9a2eef8b762c8de9df4f030f0c8f945b82b79d67b4e5c",
+      "files": [
+        "icons/abilities/prog-awarii.svg",
+        "icons/abilities/prog-awarii.webp"
+      ],
+      "svgSha256": "8fb08f9b3b95ca6c70583b72bd7a5c686c04a86d2897dd04cc872f734864f931",
+      "webpSha256": "52f7124421aacb8aec5ade0a5fb4dc5505c96a42cbb123716c373a0acc576f72",
+      "retiredLegacyPng": {
+        "source": "icons/abilities/prog-awarii.png",
+        "sha256": "c227cc060a81c3adaffee025353d0521d8f11afa91b60866244a09e8feaac527",
+        "archive": "dev/icons/review/candidates/batch-106/raw/legacy/prog-awarii.png"
+      }
+    },
+    {
+      "itemId": "style103-siodme-poty",
+      "candidateId": "batch106-revision",
+      "source": "candidates/batch-106/siodme-poty.png",
+      "sourceSha256": "17d9b05aa7bb76683cbf68c20ac4f2cc9842b25fb9d7aa18aa2dfacddd840a87",
+      "files": [
+        "icons/abilities/siodme-poty.svg",
+        "icons/abilities/siodme-poty.webp"
+      ],
+      "svgSha256": "9e182ae552fd39168716a3bf72afb9e8162572567ef6cb8f7f30058eb536d134",
+      "webpSha256": "6e6670ac312fac9e3bd84620ec13291032a17840c7bb67a45951982a919d1927",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "style103-skakun",
+      "candidateId": "batch106-revision",
+      "source": "candidates/batch-106/skakun.png",
+      "sourceSha256": "6f19fcf33ee2692e623a7780f6d12ac6a3746e4d08dd17d6935f1549fd66df31",
+      "files": [
+        "icons/abilities/skakun.svg",
+        "icons/abilities/skakun.webp"
+      ],
+      "svgSha256": "283c58077d33ad4efb9feefcf184dc694e0ebbede20a8918195d52c47427d9e4",
+      "webpSha256": "b931a85ff363ecd8631633366a4042f607414c557b2e2e0c8f02a72d5f591ed0",
+      "retiredLegacyPng": {
+        "source": "icons/abilities/skakun.png",
+        "sha256": "c9212501ff3ab897a08eeb5771929ea905398892af925deddb58864dbc014aeb",
+        "archive": "dev/icons/review/candidates/batch-106/raw/legacy/skakun.png"
+      }
+    },
+    {
+      "itemId": "style104-tryb-turbo",
+      "candidateId": "batch106-revision",
+      "source": "candidates/batch-106/tryb-turbo.png",
+      "sourceSha256": "7be74c56c84d6a11387ea57f194a7372f4a344e3428704d0ec25ca911f510e80",
+      "files": [
+        "icons/abilities/tryb-turbo.svg",
+        "icons/abilities/tryb-turbo.webp"
+      ],
+      "svgSha256": "80aef11182652cfde5c1daaae2b02632016bdd973a2ed1ff6b1fc9faf53a1202",
+      "webpSha256": "1e9beeb6087fc6f52ff102a8f3478c1a1e7f703812e38eed858dea9e926c2b2b",
+      "retiredLegacyPng": {
+        "source": "icons/abilities/tryb-turbo.png",
+        "sha256": "47de4f96e3caf68449068ad360223e60489bd6126a8eb0475d8b2933dd645c92",
+        "archive": "dev/icons/review/candidates/batch-106/raw/legacy/tryb-turbo.png"
+      }
+    },
+    {
+      "itemId": "style104-twierdzenie-kata-prostego",
+      "candidateId": "batch106-revision",
+      "source": "candidates/batch-106/twierdzenie-kata-prostego.png",
+      "sourceSha256": "03b4950d34b70d48cbee266e9f326679795fdb734c68ebe92d4bfd603fbb6977",
+      "files": [
+        "icons/abilities/twierdzenie-kata-prostego.svg",
+        "icons/abilities/twierdzenie-kata-prostego.webp"
+      ],
+      "svgSha256": "7f7da3449d4cf5789a4e46790fd796abcf1e64e106b9d77a20b536d79edab030",
+      "webpSha256": "85cf157b35547c476f021dfe50a2ce13976c417e5ae55f21af63eed56dd625c0",
+      "retiredLegacyPng": {
+        "source": "icons/abilities/twierdzenie-kata-prostego.png",
+        "sha256": "677cc7047131bd33136b9b27e0be9848696804fc380117b8af741dbd59b60ed7",
+        "archive": "dev/icons/review/candidates/batch-106/raw/legacy/twierdzenie-kata-prostego.png"
+      }
+    }
+  ],
+  "keptCurrent": [
+    {
+      "itemId": "style103-taca-i-w-nogi",
+      "candidateId": "current",
+      "source": "/icons/abilities/taca-i-w-nogi.svg",
+      "sourceSha256": "4272d8941f5ceb46ec0963b746f990623449e02aaa632ef8c4c8b46f9fa89645",
+      "files": [
+        {
+          "source": "icons/abilities/taca-i-w-nogi.svg",
+          "sha256": "4272d8941f5ceb46ec0963b746f990623449e02aaa632ef8c4c8b46f9fa89645"
+        },
+        {
+          "source": "icons/abilities/taca-i-w-nogi.png",
+          "sha256": "261632435fa1e80a1a01d0f2b391df08ed9b8bf3786e61de2997d217ae290be7"
+        }
+      ]
+    }
+  ]
+}

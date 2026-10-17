@@ -1,5 +1,13 @@
 # Batch 106 — 9 saved style revisions
 
+Review outcome, 2026-10-17: eight exact approved candidates installed.
+The ninth subject, Tacą i w nogi, was approved with **current** selected;
+its existing SVG and PNG remain byte-for-byte unchanged. All nine cards
+are resolved. `reviewed.json` archives the exact choices and
+`reviewed-installed.json` verifies eight deliveries and one kept-current
+selection. Six legacy PNGs across Batches 106–107 were archived and retired.
+The preparation and publication evidence below is historical.
+
 | Cell | Subject | Requested visual correction |
 |---|---|---|
 | 1 | doktor-quinn | REVISION cell 1. Make it unmistakable that a caregiver is BANDAGING SOMEONE ELSE. The PATIENT'S forearm enters HORIZONTALLY FROM THE RIGHT, ending in ONE complete relaxed hand pointing LEFT. TWO caregiver hands enter FROM THE LEFT: the LOWER hand supports the patient's wrist from below, and the UPPER hand wraps ONE broad bandage around that wrist. Exactly THREE natural complete hands from TWO people, three distinct forearms, broad black gaps and only two broad bandage strip cuts. Opposing entry directions, no self-bandaging, face, person portrait, thin fingers, extra digit or blood. |

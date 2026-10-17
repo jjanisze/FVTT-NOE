@@ -1,0 +1,53 @@
+{
+  "date": "2026-10-17",
+  "batch": 107,
+  "pass": "browser-style-revisions",
+  "approvedSubjects": 3,
+  "remainingSubjects": 1,
+  "installed": [
+    {
+      "itemId": "style104-wielonozny",
+      "candidateId": "batch107-revision",
+      "source": "candidates/batch-107/wielonozny.png",
+      "sourceSha256": "d4fadee32684f8f5569dcf074b520451cf1b5ef60f07087da589d2f826e809cf",
+      "files": [
+        "icons/abilities/wielonozny.svg",
+        "icons/abilities/wielonozny.webp"
+      ],
+      "svgSha256": "c030e1a6a227dbc67f022cee03500bccd1fbc5412b42425efa7abb87e687afb7",
+      "webpSha256": "d94dc173f2eb47cc46a8d2ea1bf2209e297a5ab43557c09810c073c58b6e6f76",
+      "retiredLegacyPng": {
+        "source": "icons/abilities/wielonozny.png",
+        "sha256": "c2d2a8dffca7d4df0045d083c00421819da33d6fd176e48713d2e2162a32e576",
+        "archive": "dev/icons/review/candidates/batch-107/raw/legacy/wielonozny.png"
+      }
+    },
+    {
+      "itemId": "style104-wrazliwosc-na-swiatlo",
+      "candidateId": "batch107-revision",
+      "source": "candidates/batch-107/wrazliwosc-na-swiatlo.png",
+      "sourceSha256": "55a02c605fb5f0171ba85fc3af0ab3a276cd3801ac538d1989917a22099d881b",
+      "files": [
+        "icons/abilities/wrazliwosc-na-swiatlo.svg",
+        "icons/abilities/wrazliwosc-na-swiatlo.webp"
+      ],
+      "svgSha256": "e8170a344b649c32dff1c4e3db0d1c8fdb777ec155e94dae797d383747170681",
+      "webpSha256": "cd8af1fb51a10bd40626ae38540e98ac5b9455a3f2c53668bc84266d53cd6493",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "style105-zawziety-sukinkot",
+      "candidateId": "batch107-revision",
+      "source": "candidates/batch-107/zawziety-sukinkot.png",
+      "sourceSha256": "a084e57ed2a6a940db233092ed1ee1a13ae78b237b23d2befae14bb9272230ca",
+      "files": [
+        "icons/abilities/zawziety-sukinkot.svg",
+        "icons/abilities/zawziety-sukinkot.webp"
+      ],
+      "svgSha256": "ee5716bdf14b7bf03dcffe2e55ac37f67944bba46b964906d8f53d6127e7ae69",
+      "webpSha256": "70de92db079efbcdd78a3cc836c6094eca86b68be570c981c8d834950bf2535c",
+      "retiredLegacyPng": null
+    }
+  ],
+  "keptCurrent": []
+}

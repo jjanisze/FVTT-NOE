@@ -3475,10 +3475,10 @@
     },
     "style102-doktor-quinn": {
       "itemId": "style102-doktor-quinn",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch106-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T23:18:27.133Z"
+      "updatedAt": "2026-10-16T23:26:52.800Z"
     },
     "style102-fart": {
       "itemId": "style102-fart",
@@ -3517,24 +3517,24 @@
     },
     "style102-odporny": {
       "itemId": "style102-odporny",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch106-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T23:18:27.134Z"
+      "updatedAt": "2026-10-16T23:26:57.205Z"
     },
     "style102-patriota": {
       "itemId": "style102-patriota",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch106-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T23:18:27.134Z"
+      "updatedAt": "2026-10-16T23:27:07.775Z"
     },
     "style103-prog-awarii": {
       "itemId": "style103-prog-awarii",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch106-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T23:18:27.134Z"
+      "updatedAt": "2026-10-16T23:27:14.762Z"
     },
     "style103-przyspieszenie": {
       "itemId": "style103-przyspieszenie",
@@ -3559,17 +3559,17 @@
     },
     "style103-siodme-poty": {
       "itemId": "style103-siodme-poty",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch106-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T23:18:27.135Z"
+      "updatedAt": "2026-10-16T23:27:44.120Z"
     },
     "style103-skakun": {
       "itemId": "style103-skakun",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch106-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T23:18:27.135Z"
+      "updatedAt": "2026-10-16T23:27:52.888Z"
     },
     "style103-szara-eminencja": {
       "itemId": "style103-szara-eminencja",
@@ -3587,10 +3587,10 @@
     },
     "style103-taca-i-w-nogi": {
       "itemId": "style103-taca-i-w-nogi",
-      "decision": "pending",
-      "candidateId": "batch106-revision",
+      "decision": "approve",
+      "candidateId": "current",
       "notes": "",
-      "updatedAt": "2026-10-16T23:18:27.135Z"
+      "updatedAt": "2026-10-16T23:28:03.545Z"
     },
     "style104-tanczace-pily": {
       "itemId": "style104-tanczace-pily",
@@ -3601,17 +3601,17 @@
     },
     "style104-tryb-turbo": {
       "itemId": "style104-tryb-turbo",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch106-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T23:18:27.136Z"
+      "updatedAt": "2026-10-16T23:28:18.486Z"
     },
     "style104-twierdzenie-kata-prostego": {
       "itemId": "style104-twierdzenie-kata-prostego",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch106-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T23:18:27.136Z"
+      "updatedAt": "2026-10-16T23:28:26.476Z"
     },
     "style104-tylko-zwarcie": {
       "itemId": "style104-tylko-zwarcie",
@@ -3622,17 +3622,17 @@
     },
     "style104-wierze": {
       "itemId": "style104-wierze",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch107-revision",
-      "notes": "",
-      "updatedAt": "2026-10-16T23:18:27.153Z"
+      "notes": "Better, but the hand should be in a different position - coming to, not from the person wishing the key",
+      "updatedAt": "2026-10-17T00:04:06.868Z"
     },
     "style104-wielonozny": {
       "itemId": "style104-wielonozny",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch107-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T23:18:27.154Z"
+      "updatedAt": "2026-10-16T23:28:42.916Z"
     },
     "style104-wirujace-kiscienie": {
       "itemId": "style104-wirujace-kiscienie",
@@ -3643,10 +3643,10 @@
     },
     "style104-wrazliwosc-na-swiatlo": {
       "itemId": "style104-wrazliwosc-na-swiatlo",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch107-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T23:18:27.154Z"
+      "updatedAt": "2026-10-16T23:28:50.268Z"
     },
     "style104-wymagania": {
       "itemId": "style104-wymagania",
@@ -3664,10 +3664,10 @@
     },
     "style105-zawziety-sukinkot": {
       "itemId": "style105-zawziety-sukinkot",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch107-revision",
       "notes": "",
-      "updatedAt": "2026-10-16T23:18:27.154Z"
+      "updatedAt": "2026-10-16T23:39:16.120Z"
     }
   }
 }

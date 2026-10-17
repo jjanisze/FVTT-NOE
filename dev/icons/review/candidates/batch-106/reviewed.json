@@ -1,0 +1,225 @@
+{
+  "date": "2026-10-17",
+  "batch": 106,
+  "pass": "browser-style-revisions",
+  "feedbackBeforeSha256": "effe4df938f8d80eb66a37c0d59ef7e87a6cf7cd22ee996001b926d085885f59",
+  "styleFeedbackBeforeSha256": "5d607f0e3fc398c8501a8fa05758ddf88511c95c34b24f5ed5d543a458ba52f4",
+  "active": [
+    {
+      "id": "style102-doktor-quinn",
+      "name": "Doktor Quinn",
+      "decision": "approve",
+      "candidateId": "batch106-revision",
+      "selectedSource": "candidates/batch-106/doktor-quinn.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "97536dc051960dcf2db14b17479f29cf6a2046723b432854b02f04e096c2cda4",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/doktor-quinn.svg",
+          "variant": "default",
+          "sourceSha256": "2d2c62da17b68d3a5b47c160d98c8d8ac3e68e46868aaeb90a5edec3503f4e73"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style102-doktor-quinn",
+        "decision": "approve",
+        "candidateId": "batch106-revision",
+        "notes": "",
+        "updatedAt": "2026-10-16T23:26:52.800Z"
+      }
+    },
+    {
+      "id": "style102-odporny",
+      "name": "Odporny",
+      "decision": "approve",
+      "candidateId": "batch106-revision",
+      "selectedSource": "candidates/batch-106/odporny.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "d56ad280b17fb5f37821849cd051e5b3d0bf36c9d9bac0a0240c53c09229ffbd",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/odporny.svg",
+          "variant": "default",
+          "sourceSha256": "5dfe6297fc4d7d0fa012f6129dc6a6dc24417e94a461b29d3d0ca5ea88c529c2"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style102-odporny",
+        "decision": "approve",
+        "candidateId": "batch106-revision",
+        "notes": "",
+        "updatedAt": "2026-10-16T23:26:57.205Z"
+      }
+    },
+    {
+      "id": "style102-patriota",
+      "name": "Patriota",
+      "decision": "approve",
+      "candidateId": "batch106-revision",
+      "selectedSource": "candidates/batch-106/patriota.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "ea3b7dd0074b1b9ccb8df2c02430f1d13fab11e8194438ae0b6f1bc0908e2f2d",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/patriota.svg",
+          "variant": "default",
+          "sourceSha256": "9151ff746b0ebc0c3c86b20fb9511a946cc86bf7fef4e1e6b7ec2822c27ebb06"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style102-patriota",
+        "decision": "approve",
+        "candidateId": "batch106-revision",
+        "notes": "",
+        "updatedAt": "2026-10-16T23:27:07.775Z"
+      }
+    },
+    {
+      "id": "style103-prog-awarii",
+      "name": "Próg awarii",
+      "decision": "approve",
+      "candidateId": "batch106-revision",
+      "selectedSource": "candidates/batch-106/prog-awarii.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "5e093f9a68f84aeaafa9a2eef8b762c8de9df4f030f0c8f945b82b79d67b4e5c",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/prog-awarii.svg",
+          "variant": "default",
+          "sourceSha256": "c75daa7d763f1c448fb5412573766513450334e031c6ace1469662f163cc17b2"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style103-prog-awarii",
+        "decision": "approve",
+        "candidateId": "batch106-revision",
+        "notes": "",
+        "updatedAt": "2026-10-16T23:27:14.762Z"
+      }
+    },
+    {
+      "id": "style103-siodme-poty",
+      "name": "Siódme poty",
+      "decision": "approve",
+      "candidateId": "batch106-revision",
+      "selectedSource": "candidates/batch-106/siodme-poty.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "17d9b05aa7bb76683cbf68c20ac4f2cc9842b25fb9d7aa18aa2dfacddd840a87",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/siodme-poty.svg",
+          "variant": "default",
+          "sourceSha256": "3c151c5f915b0e845f6dcf2f0b9b69c7c22df023e0eb7fd048d76cfadce77c59"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style103-siodme-poty",
+        "decision": "approve",
+        "candidateId": "batch106-revision",
+        "notes": "",
+        "updatedAt": "2026-10-16T23:27:44.120Z"
+      }
+    },
+    {
+      "id": "style103-skakun",
+      "name": "Skakun",
+      "decision": "approve",
+      "candidateId": "batch106-revision",
+      "selectedSource": "candidates/batch-106/skakun.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "6f19fcf33ee2692e623a7780f6d12ac6a3746e4d08dd17d6935f1549fd66df31",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/skakun.svg",
+          "variant": "default",
+          "sourceSha256": "6616be2a54fe7dd9ffef7b11dc3f5001982aeccbad8ec078d197bbaabc401883"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style103-skakun",
+        "decision": "approve",
+        "candidateId": "batch106-revision",
+        "notes": "",
+        "updatedAt": "2026-10-16T23:27:52.888Z"
+      }
+    },
+    {
+      "id": "style103-taca-i-w-nogi",
+      "name": "Tacą i w nogi",
+      "decision": "approve",
+      "candidateId": "current",
+      "selectedSource": "/icons/abilities/taca-i-w-nogi.svg",
+      "sourceKind": "production",
+      "sourceSha256": "4272d8941f5ceb46ec0963b746f990623449e02aaa632ef8c4c8b46f9fa89645",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/taca-i-w-nogi.svg",
+          "variant": "default",
+          "sourceSha256": "4272d8941f5ceb46ec0963b746f990623449e02aaa632ef8c4c8b46f9fa89645"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style103-taca-i-w-nogi",
+        "decision": "approve",
+        "candidateId": "current",
+        "notes": "",
+        "updatedAt": "2026-10-16T23:28:03.545Z"
+      }
+    },
+    {
+      "id": "style104-tryb-turbo",
+      "name": "Tryb Turbo",
+      "decision": "approve",
+      "candidateId": "batch106-revision",
+      "selectedSource": "candidates/batch-106/tryb-turbo.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "7be74c56c84d6a11387ea57f194a7372f4a344e3428704d0ec25ca911f510e80",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/tryb-turbo.svg",
+          "variant": "default",
+          "sourceSha256": "ca5c334cb1ac92b5ca2c8ecb2990ad504167e31bcbbd1b3f373fc2735ba55118"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style104-tryb-turbo",
+        "decision": "approve",
+        "candidateId": "batch106-revision",
+        "notes": "",
+        "updatedAt": "2026-10-16T23:28:18.486Z"
+      }
+    },
+    {
+      "id": "style104-twierdzenie-kata-prostego",
+      "name": "Twierdzenie Kąta Prostego",
+      "decision": "approve",
+      "candidateId": "batch106-revision",
+      "selectedSource": "candidates/batch-106/twierdzenie-kata-prostego.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "03b4950d34b70d48cbee266e9f326679795fdb734c68ebe92d4bfd603fbb6977",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/twierdzenie-kata-prostego.svg",
+          "variant": "default",
+          "sourceSha256": "31e78fa56154b4104741b6b7cc6ebd831656095c90b6cd27fdf369ecaf312725"
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "style104-twierdzenie-kata-prostego",
+        "decision": "approve",
+        "candidateId": "batch106-revision",
+        "notes": "",
+        "updatedAt": "2026-10-16T23:28:26.476Z"
+      }
+    }
+  ]
+}
