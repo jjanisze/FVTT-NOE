@@ -3734,17 +3734,17 @@
     },
     "origin-nowy-jork": {
       "itemId": "origin-nowy-jork",
-      "decision": "pending",
-      "candidateId": "batch111-revision",
+      "decision": "approve",
+      "candidateId": "batch110-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:59:28.513Z"
+      "updatedAt": "2026-10-17T01:14:16.386Z"
     },
     "origin-hegemonia": {
       "itemId": "origin-hegemonia",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch111-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:59:28.513Z"
+      "updatedAt": "2026-10-17T01:11:48.991Z"
     },
     "origin-posterunek": {
       "itemId": "origin-posterunek",
@@ -3776,38 +3776,38 @@
     },
     "coverage111-kopacz": {
       "itemId": "coverage111-kopacz",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch111-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:59:28.514Z"
+      "updatedAt": "2026-10-17T01:13:31.113Z"
     },
     "coverage111-ziemnowodny": {
       "itemId": "coverage111-ziemnowodny",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch111-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:59:28.514Z"
+      "updatedAt": "2026-10-17T01:13:29.484Z"
     },
     "coverage111-psi-bohater": {
       "itemId": "coverage111-psi-bohater",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch111-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:59:28.515Z"
+      "updatedAt": "2026-10-17T01:13:39.874Z"
     },
     "coverage111-modyfikacje-drona": {
       "itemId": "coverage111-modyfikacje-drona",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch111-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:59:28.516Z"
+      "updatedAt": "2026-10-17T01:13:45.010Z"
     },
     "coverage111-atak-drona": {
       "itemId": "coverage111-atak-drona",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch111-revision",
       "notes": "",
-      "updatedAt": "2026-10-17T00:59:28.516Z"
+      "updatedAt": "2026-10-17T01:13:49.927Z"
     }
   }
 }

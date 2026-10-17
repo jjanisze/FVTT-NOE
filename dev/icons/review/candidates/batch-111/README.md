@@ -1,5 +1,13 @@
 # Batch 111 — two origin revisions and five companion gaps
 
+Final outcome, 2026-10-17: **all seven selections approved and installed**.
+Nowy Jork uses the explicitly selected earlier `batch110-revision`; the
+other six use `batch111-revision`. Exact saved choices and delivered hashes
+are in `reviewed.json` and `reviewed-installed.json`. The complete gallery
+has 544 resolved cards and no pending reviews. Source icon wiring is also
+complete; only GM pack rebuilds and older world repoints remain.
+Preparation/publication evidence below is historical.
+
 | Cell | Subject | Motif |
 |---|---|---|
 | 1 | Nowy Jork | Suspension bridge and stepped Manhattan skyscraper |

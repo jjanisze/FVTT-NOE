@@ -1,0 +1,185 @@
+{
+  "date": "2026-10-17",
+  "batch": 111,
+  "pass": "final-coverage-and-origin-revisions",
+  "feedbackBeforeSha256": "2942d638250b96b5eef922041d65e159373ebf9573eee263ef0c752eee43d649",
+  "styleFeedbackBeforeSha256": "f779b69589ec11c0d415a4d141ba7428763f7ded8a4f66f80ddbaab1499b964a",
+  "localReferenceLocationsRedacted": true,
+  "active": [
+    {
+      "id": "origin-nowy-jork",
+      "name": "Nowy Jork",
+      "decision": "approve",
+      "candidateId": "batch110-revision",
+      "selectedSource": "candidates/batch-110/nowy-jork.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "7da54fdc917d81cc85d5f4689dcdb9c796dfc4c9e53d26f06e1307c9e0d4eb81",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/nowy-jork.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "origin-nowy-jork",
+        "decision": "approve",
+        "candidateId": "batch110-revision",
+        "notes": "",
+        "updatedAt": "2026-10-17T01:14:16.386Z"
+      },
+      "feedbackSha256": "9fb4cca6ee199414e2a32c872c46baec16764449e17eda3f2b26f6e7db13ea10"
+    },
+    {
+      "id": "origin-hegemonia",
+      "name": "Południowa Hegemonia",
+      "decision": "approve",
+      "candidateId": "batch111-revision",
+      "selectedSource": "candidates/batch-111/hegemonia.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "1d29b04dd952b979899a4c2f07a59e10374f2b77c843db4896f808b07ae9e174",
+      "deliveryTargets": [
+        {
+          "source": "icons/pochodzenia/hegemonia.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "origin-hegemonia",
+        "decision": "approve",
+        "candidateId": "batch111-revision",
+        "notes": "",
+        "updatedAt": "2026-10-17T01:11:48.991Z"
+      },
+      "feedbackSha256": "4329d806da4aff2556511bbe81ee31054f39c401c0bc824fb0ab2407e062c914"
+    },
+    {
+      "id": "coverage111-kopacz",
+      "name": "Kopacz",
+      "decision": "approve",
+      "candidateId": "batch111-revision",
+      "selectedSource": "candidates/batch-111/kopacz.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "9bb7b4bedd05ab3fccd15313708ce0e56fe1908c1328d089139acb9c97262b43",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/kopacz.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "coverage111-kopacz",
+        "decision": "approve",
+        "candidateId": "batch111-revision",
+        "notes": "",
+        "updatedAt": "2026-10-17T01:13:31.113Z"
+      },
+      "feedbackSha256": "6307c3cbb4a643c06afae6fb674380b00e3735791cdab927a7344b1664eb662d"
+    },
+    {
+      "id": "coverage111-ziemnowodny",
+      "name": "Ziemnowodny",
+      "decision": "approve",
+      "candidateId": "batch111-revision",
+      "selectedSource": "candidates/batch-111/ziemnowodny.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "243ff183bf913ebdfe8d38dfddcdaacffe683cdd1615c74d7392bc34e28d2a4c",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/ziemnowodny.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "coverage111-ziemnowodny",
+        "decision": "approve",
+        "candidateId": "batch111-revision",
+        "notes": "",
+        "updatedAt": "2026-10-17T01:13:29.484Z"
+      },
+      "feedbackSha256": "71139c3221835ceb542295e39310709302fcaf0fbb33ae47d28dacbff2be6db3"
+    },
+    {
+      "id": "coverage111-psi-bohater",
+      "name": "Psi bohater",
+      "decision": "approve",
+      "candidateId": "batch111-revision",
+      "selectedSource": "candidates/batch-111/psi-bohater.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "261e73227401c082cc0f0b09f7b9d50e4bc971e6407164ce19445428d41e07c7",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/psi-bohater.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "coverage111-psi-bohater",
+        "decision": "approve",
+        "candidateId": "batch111-revision",
+        "notes": "",
+        "updatedAt": "2026-10-17T01:13:39.874Z"
+      },
+      "feedbackSha256": "0b5eeb7b4c189aa3e43423c88e4281487e885703d1e311faabba7a9955aef0cb"
+    },
+    {
+      "id": "coverage111-modyfikacje-drona",
+      "name": "Modyfikacje drona",
+      "decision": "approve",
+      "candidateId": "batch111-revision",
+      "selectedSource": "candidates/batch-111/modyfikacje-drona.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "4354778559277c67c349b9386dc1e80fa74b94b994ce85779141f647e927bdcc",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/modyfikacje-drona.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "coverage111-modyfikacje-drona",
+        "decision": "approve",
+        "candidateId": "batch111-revision",
+        "notes": "",
+        "updatedAt": "2026-10-17T01:13:45.010Z"
+      },
+      "feedbackSha256": "3ba4b8856e257dd09b1dbb5c0de59dd25ae3c8954c92b505b1d12d6dbcfdad85"
+    },
+    {
+      "id": "coverage111-atak-drona",
+      "name": "Atak drona",
+      "decision": "approve",
+      "candidateId": "batch111-revision",
+      "selectedSource": "candidates/batch-111/atak-drona.png",
+      "sourceKind": "candidate",
+      "sourceSha256": "eefa973e30d3fbda63523153ac01e5e5c47841afe014fdacd08b048a3a8c5875",
+      "deliveryTargets": [
+        {
+          "source": "icons/abilities/atak-drona.svg",
+          "variant": "default",
+          "sourceSha256": null
+        }
+      ],
+      "notes": "",
+      "feedback": {
+        "itemId": "coverage111-atak-drona",
+        "decision": "approve",
+        "candidateId": "batch111-revision",
+        "notes": "",
+        "updatedAt": "2026-10-17T01:13:49.927Z"
+      },
+      "feedbackSha256": "12eed50e3879748ae4d01962908bb9216055e37f013813c6162708cde0cccad9"
+    }
+  ]
+}

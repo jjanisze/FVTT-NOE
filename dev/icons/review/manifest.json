@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batches 111 · 7 icon revisions awaiting GM review",
+  "title": "Asset review · 7 approved icons delivered, 0 kept current; 0 awaiting revision",
   "updated": "2026-10-17",
   "items": [
     {
@@ -15352,7 +15352,8 @@
           "src": "candidates/batch-109/nowy-jork.png",
           "note": "ONE large OPEN BOOK with only TWO wide black page-fold cuts, above ONE simple THREE-TOWER CITY SKYLINE. Broad solid city blocks without tiny windows, clean black gap between book and skyline. Education, civilization and trade; no torch statue, letters, dollar sign, logos, rays or fine architectural detail."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "origin-hegemonia",
@@ -15392,7 +15393,8 @@
           "src": "candidates/batch-109/hegemonia.png",
           "note": "ONE natural bare CLENCHED FIST raised above ONE short BROKEN HEAVY CHAIN with exactly TWO broad oval links separated at center. Two wide finger cuts, one complete wrist. Harsh strength and loyalty born from prison ancestry, no face, portrait, gang initials, tattoo, weapon, gore, fine texture or tiny chain links."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "origin-posterunek",
@@ -15551,7 +15553,8 @@
       ],
       "batch": 111,
       "tier": "Batch 111 · Companion glyph",
-      "request": "ONE stout natural BEETLE-LIKE INSECT digging diagonally DOWN into ONE broad EARTH MOUND with a large dark semicircular BURROW OPENING. One oval body, one smaller connected head, three pairs of thick complete legs; the FRONT pair are broad SHOVEL-LIKE CLAWS entering the mound. Just two broad soil contour cuts, no scattered soil specks, tiny hairs, veins, extra legs, lettering or humanoid face. Clear burrowing-insect action rather than a mining tool."
+      "request": "ONE stout natural BEETLE-LIKE INSECT digging diagonally DOWN into ONE broad EARTH MOUND with a large dark semicircular BURROW OPENING. One oval body, one smaller connected head, three pairs of thick complete legs; the FRONT pair are broad SHOVEL-LIKE CLAWS entering the mound. Just two broad soil contour cuts, no scattered soil specks, tiny hairs, veins, extra legs, lettering or humanoid face. Clear burrowing-insect action rather than a mining tool.",
+      "status": "resolved"
     },
     {
       "id": "coverage111-ziemnowodny",
@@ -15582,7 +15585,8 @@
       ],
       "batch": 111,
       "tier": "Batch 111 · Companion glyph",
-      "request": "ONE natural CROCODILE HEAD in clean side profile facing RIGHT, partly submerged across ONE broad horizontal WATER WAVE. One smooth closed jaw, one small broad eye cut and two LARGE round AIR BUBBLES below the wave beside the snout. Head and neck remain one coherent complete silhouette, no whole body needed. Breathing both above and below water; no scuba gear, person, angry expression, jagged teeth, scales, fine bubbles, thin ripples, cartoon face or texture."
+      "request": "ONE natural CROCODILE HEAD in clean side profile facing RIGHT, partly submerged across ONE broad horizontal WATER WAVE. One smooth closed jaw, one small broad eye cut and two LARGE round AIR BUBBLES below the wave beside the snout. Head and neck remain one coherent complete silhouette, no whole body needed. Breathing both above and below water; no scuba gear, person, angry expression, jagged teeth, scales, fine bubbles, thin ripples, cartoon face or texture.",
+      "status": "resolved"
     },
     {
       "id": "coverage111-psi-bohater",
@@ -15613,7 +15617,8 @@
       ],
       "batch": 111,
       "tier": "Batch 111 · Companion glyph",
-      "request": "ONE ordinary natural DOG HEAD and short neck in calm SIDE PROFILE facing RIGHT, paired with ONE stout small SHIELD bearing a large BLACK MEDICAL PLUS cutout. Dog has one upright ear and one slightly folded ear, one broad eye cut only, smooth coat and complete muzzle. A loyal dog surviving injury like its human allies. No cape, medal, superhero costume, human face, wolf snarl, teeth, fur strands, anime eyes, heart rays, lettering or texture."
+      "request": "ONE ordinary natural DOG HEAD and short neck in calm SIDE PROFILE facing RIGHT, paired with ONE stout small SHIELD bearing a large BLACK MEDICAL PLUS cutout. Dog has one upright ear and one slightly folded ear, one broad eye cut only, smooth coat and complete muzzle. A loyal dog surviving injury like its human allies. No cape, medal, superhero costume, human face, wolf snarl, teeth, fur strands, anime eyes, heart rays, lettering or texture.",
+      "status": "resolved"
     },
     {
       "id": "coverage111-modyfikacje-drona",
@@ -15645,7 +15650,8 @@
       ],
       "batch": 111,
       "tier": "Batch 111 · Companion glyph",
-      "request": "ONE simple compact DRONE CHASSIS: a broad rectangular body on TWO stout articulated support legs, with ONE large detachable rectangular CAMERA MODULE raised just above its open TOP MOUNT. ONE complete broad OPEN-END WRENCH lies diagonally beside the mount. Module has one large black circular lens opening and one broad plug tab, no tiny connector pins. A coherent physical equipment-installation icon with generous black gaps. No giant cog, scattered components, fine wires, panel screws, numbers, arrows, lettering or texture."
+      "request": "ONE simple compact DRONE CHASSIS: a broad rectangular body on TWO stout articulated support legs, with ONE large detachable rectangular CAMERA MODULE raised just above its open TOP MOUNT. ONE complete broad OPEN-END WRENCH lies diagonally beside the mount. Module has one large black circular lens opening and one broad plug tab, no tiny connector pins. A coherent physical equipment-installation icon with generous black gaps. No giant cog, scattered components, fine wires, panel screws, numbers, arrows, lettering or texture.",
+      "status": "resolved"
     },
     {
       "id": "coverage111-atak-drona",
@@ -15677,7 +15683,8 @@
       ],
       "batch": 111,
       "tier": "Batch 111 · Companion glyph",
-      "request": "ONE compact unmanned GUN TURRET in SIDE PROFILE aimed RIGHT: a broad squat body with ONE large square OPTICAL LENS cutout, ONE complete short stout gun barrel, and ONE small broad mounting pedestal. Ahead of the muzzle sits ONE large simple AIM RETICLE made from an open ring and four broad ticks, clearly separated from the barrel. Generic mounted-weapon attack shared by flying and walking drones; no vehicle wheels, legs, propellers, human operator, tiny bullets, muzzle-fire spray, panel texture, text or logo."
+      "request": "ONE compact unmanned GUN TURRET in SIDE PROFILE aimed RIGHT: a broad squat body with ONE large square OPTICAL LENS cutout, ONE complete short stout gun barrel, and ONE small broad mounting pedestal. Ahead of the muzzle sits ONE large simple AIM RETICLE made from an open ring and four broad ticks, clearly separated from the barrel. Generic mounted-weapon attack shared by flying and walking drones; no vehicle wheels, legs, propellers, human operator, tiny bullets, muzzle-fire spray, panel texture, text or logo.",
+      "status": "resolved"
     }
   ]
 }

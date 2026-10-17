@@ -264,6 +264,13 @@ was not specified. Exact selected masks and hashes for all five deliveries
 are recorded in `dev/icons/review/candidates/batch-110/reviewed-installed.json`.
 The unchanged supplied reference stays in dev-only raw files.
 
+The final seven approved selections were installed on 2026-10-17 as exact
+SVG/WEBP masks: Nowy Jork, Południowa Hegemonia and five companion glyphs.
+They were generated with OpenAI's built-in image tool. Nowy Jork uses the
+GM-selected earlier Batch 110 design; the other six use Batch 111.
+Exact choices and delivery hashes are in
+`dev/icons/review/candidates/batch-111/reviewed-installed.json`.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

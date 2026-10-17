@@ -1,0 +1,101 @@
+{
+  "date": "2026-10-17",
+  "batch": 111,
+  "pass": "final-coverage-and-origin-revisions",
+  "approvedSubjects": 7,
+  "remainingSubjects": 0,
+  "installed": [
+    {
+      "itemId": "origin-nowy-jork",
+      "candidateId": "batch110-revision",
+      "source": "candidates/batch-110/nowy-jork.png",
+      "sourceSha256": "7da54fdc917d81cc85d5f4689dcdb9c796dfc4c9e53d26f06e1307c9e0d4eb81",
+      "files": [
+        "icons/pochodzenia/nowy-jork.svg",
+        "icons/pochodzenia/nowy-jork.webp"
+      ],
+      "svgSha256": "bf44a44eea5771074d73e9b83056293da977cd1aa2ed672fa32596c5f76aec9b",
+      "webpSha256": "d017573904c2ee06b22efb633dabb450aad21566c6dd421e5d8e60e95da5ace7",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "origin-hegemonia",
+      "candidateId": "batch111-revision",
+      "source": "candidates/batch-111/hegemonia.png",
+      "sourceSha256": "1d29b04dd952b979899a4c2f07a59e10374f2b77c843db4896f808b07ae9e174",
+      "files": [
+        "icons/pochodzenia/hegemonia.svg",
+        "icons/pochodzenia/hegemonia.webp"
+      ],
+      "svgSha256": "24f87fe468465a9cf03c129959c7d1816fb86258312232ae3bed9a86a7a2a0ef",
+      "webpSha256": "23f316a709bfa069ae708146369cf5c27c9134cfd8962e5fcb14a9784ab708f5",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "coverage111-kopacz",
+      "candidateId": "batch111-revision",
+      "source": "candidates/batch-111/kopacz.png",
+      "sourceSha256": "9bb7b4bedd05ab3fccd15313708ce0e56fe1908c1328d089139acb9c97262b43",
+      "files": [
+        "icons/abilities/kopacz.svg",
+        "icons/abilities/kopacz.webp"
+      ],
+      "svgSha256": "1e4f89934d03e7d0707092aef9e45818260e63a6f3fe185922068c8ec407cebf",
+      "webpSha256": "ab120691c063ab00fcd6db740eeba007bbdbee521afde198fa56ac775627f769",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "coverage111-ziemnowodny",
+      "candidateId": "batch111-revision",
+      "source": "candidates/batch-111/ziemnowodny.png",
+      "sourceSha256": "243ff183bf913ebdfe8d38dfddcdaacffe683cdd1615c74d7392bc34e28d2a4c",
+      "files": [
+        "icons/abilities/ziemnowodny.svg",
+        "icons/abilities/ziemnowodny.webp"
+      ],
+      "svgSha256": "b5ae0219a0b8593f8d5f4b4d68ad98180d425d2c1ffc14e00401d1581025c5d6",
+      "webpSha256": "5ef002cb33787979aabfa24ba3ef3ae3891fccd5179ab34fad9e15cecaef4a51",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "coverage111-psi-bohater",
+      "candidateId": "batch111-revision",
+      "source": "candidates/batch-111/psi-bohater.png",
+      "sourceSha256": "261e73227401c082cc0f0b09f7b9d50e4bc971e6407164ce19445428d41e07c7",
+      "files": [
+        "icons/abilities/psi-bohater.svg",
+        "icons/abilities/psi-bohater.webp"
+      ],
+      "svgSha256": "cb70cc3d9e6b528517d13931fd3debd0c0129b5ad82725bc8216df0bc67f391d",
+      "webpSha256": "2274a43e278101a2c86f7e27e33ce4b52e8c79156dd59a35a6966a8c58c5b4b9",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "coverage111-modyfikacje-drona",
+      "candidateId": "batch111-revision",
+      "source": "candidates/batch-111/modyfikacje-drona.png",
+      "sourceSha256": "4354778559277c67c349b9386dc1e80fa74b94b994ce85779141f647e927bdcc",
+      "files": [
+        "icons/abilities/modyfikacje-drona.svg",
+        "icons/abilities/modyfikacje-drona.webp"
+      ],
+      "svgSha256": "ef5291dbc1b64b09b64343dc4e61ab5ed10195faf79f2ae1df75ad6512c18e40",
+      "webpSha256": "58fd9cea2747152d1afa35633c71b59732448ae502599cc3c57ad9f26c2514c5",
+      "retiredLegacyPng": null
+    },
+    {
+      "itemId": "coverage111-atak-drona",
+      "candidateId": "batch111-revision",
+      "source": "candidates/batch-111/atak-drona.png",
+      "sourceSha256": "eefa973e30d3fbda63523153ac01e5e5c47841afe014fdacd08b048a3a8c5875",
+      "files": [
+        "icons/abilities/atak-drona.svg",
+        "icons/abilities/atak-drona.webp"
+      ],
+      "svgSha256": "e3ac31b88a34f8b91adc901a5cb80b106ab79bc686ed80193d217b2a4e1c06f2",
+      "webpSha256": "3cd76efe2dcc3815f75fa366e9908d4bd8929050e620b1c5f2aecc00bb01993c",
+      "retiredLegacyPng": null
+    }
+  ],
+  "keptCurrent": []
+}
