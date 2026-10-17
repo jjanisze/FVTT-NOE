@@ -1178,9 +1178,14 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
-### Po v0.19.0 — porządki przed migracją (2026-10-17, bez wydania)
+### v0.19.1 — Ikony, portrety Bestiariusza, Złomiarz; porządki przed migracją (2026-10-17)
 
-Hand-off `HANDOFF_przed_migracja.md`; punkt odniesienia migracji na Foundry 14.369 i dnd5e 6.0.x zostaje v0.19.0.
+Hand-off `HANDOFF_przed_migracja.md`; to wydanie jest punktem odniesienia migracji na Foundry 14.369 i dnd5e 6.0.x.
+
+- **Ikony (sesja zakończona 2026-10-17).** Wszystkie 544 karty przeglądu rozstrzygnięte: 206 nowych i 200
+  wymienionych plików w `icons/` od v0.19.0 — dwanaście godeł Pochodzeń, ikony 53 Sztuczek, Bestiariusza,
+  towarzyszy, paliw, uzupełniania apteczki i stanu Wyłączony. Wszystkie 18 paczek przebudowane; zmieniło się 151
+  rekordów, tylko pole `img`. Szczegóły i dowody: `dev/icons/FINAL_HANDOFF.md`.
 
 - **Złomiarz w szabrowaniu (błąd).** Ułatwienie szabrowania szukało zdolności `smieciarz` albo przedmiotu
   „Śmieciarz”, a Sztuczka w danych to **Złomiarz** (NOE s. 108; Śmieciarz i Antykwariusz to jej części) — postać
