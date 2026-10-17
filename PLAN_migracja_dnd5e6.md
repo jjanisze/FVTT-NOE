@@ -560,3 +560,49 @@ modułu bez zmian; zepsuło się tylko nasze narzędzie:
   dostają `Error.stackTraceLimit = 50` przed pierwszym skryptem — E2 pokaże, czyj to odczyt.
 - Do E2 gotowe: `fvtt module:install` (moduły innych autorów w folderach kampanii + ponowne dowiązanie piaskownic),
   zipy DsN 6.4.4, JB2A 0.9.4, Sequencer 4.3.0, Splatter 6.0.2 pobrane i sprawdzone (CRC).
+
+**2026-10-17 — E2 zrobione: dnd5e 6.0.6 w piaskownicach, mapa awarii.**
+- Kopie przed E2 (`fvtt backup`, dysk kopii): kampania `2026-10-17_campaign-przed-e2` (2,4 GB, 55 s, CRC i świat
+  otwarty) i Poligon `2026-10-17_poligon-przed-e2`. Liczby dokumentów w tych dwóch manifestach liczą też osadzone
+  (poprawione później: `fvtt backup: count top-level documents only`).
+- Moduły innych autorów (D11, `fvtt module:install`, w folderach kampanii, stare w `agent-state/modules/`
+  kampanii): Dice So Nice 6.3.1 → 6.4.4, Sequencer 4.2.2 → 4.3.0, Splatter 6.0.1 → 6.0.2, JB2A 0.9.0 → 0.9.4 (paczki
+  NeDB `.db`, Foundry konwertuje przy pierwszym załadowaniu — `fvtt` je przyjmuje i kopiuje do dowiązań).
+- dnd5e 6.0.6 (`fvtt system:install`): piaskownica, piaskownica wydania, Poligon (5.3.0 w `agent-state/systems/`).
+  Kampania odmówiona (zamrożenie). `module.json` wg D3 (`1fabd61`). Poligon po `poligon:init`: świat wstaje, moduł
+  ładuje się; log serwera — 388× `{-=riders: null}` (dnd5e 5.x zapisało dosłowne klucze `-=riders` w danych;
+  w kampanii są w `actors` — **E11**: nasza migracja usuwa dosłowne klucze `-=…` z danych).
+- Źródła: główny klon `C:\Git\fvtt-dnd5e` na `release-6.0.6`, worktree `C:\Git\fvtt-dnd5e-5.3.0` (worktree
+  `-6.0.6` zostaje, zbędny); mapa źródeł przegenerowana (14.369 + 6.0.6: 397 klas dnd5e); skille vaultu zaktualizowane.
+- **Triaż** (`fvtt e2e --quench --keep`, świat `agent-e2e-20261017` zostawiony; raport `logs/e2e/2026-10-17T17-45-29`):
+  boot **bez błędów** (moduł ładuje się na 6.0.6), e2e **5/20** zielone (`nevada-*`, `urban-*`, `poscig`), Quench
+  **1155/1185**. Ostrzeżenia zgodności: 377, z tego **243 z naszym kodem**.
+
+**Mapa awarii (E2 → etapy)**
+
+| # | Objaw | Gdzie / przyczyna | Etap |
+|---|---|---|---|
+| A1 | 37 błędów przy **każdym** zasianiu, w każdej paczce; ~1500 w `poligon` | `actors/sp.mjs:110` pisze `abilities.*.saveProf` — w 6.0 tylko getter (→ `save.prof`); SP/PB każdej istoty z Bestiariusza pada; 108 ostrzeżeń | **E3** |
+| A2 | Quench `emiter-emp` „PB z podręcznika w rzutach” (11 ≠ 5) | to samo co A1 | **E3** |
+| A3 | Quench `tt-karta` ×13, `sztuczki-walka` Samuraj ×2 (timeout) | KP/TT: `ac.calc`/metoda `null`, premie; nasze owinięcie `prepareDerivedData` wobec `ac.calcs` 6.0 | **E3** (KP) |
+| A4 | Quench `wyczerpanie` ×2, `rekonwalescencja-dzien` ×8: `Infinite is not defined` | **błąd dnd5e 6.0.6** (`data/active-effect/condition.mjs:173` — `Infinite` zamiast `Infinity`; też na `master` i `6.0.x`): każda zmiana stanu z poziomami bez `options.dnd5e.originalLevel` rzuca na wszystkich klientach (także wyłączenie, zmiana nazwy, wygaśnięcie Wyczerpania) | **E3** — podkładka `globalThis.Infinite ??= Infinity` (do zdjęcia, gdy dnd5e naprawi); zgłoszenie u autorów — MG |
+| A5 | e2e `rekonwalescencja`: dwie pipki zamiast trzech | Wyczerpanie / stany z poziomami (A4 i `conditionEffects`) | **E3** |
+| A6 | `Invalid Asset systems/dnd5e/icons/svg/statuses/bloodied-1.svg` (44×, `Token5e._drawEffect`) | ikona stanu z poziomem — konfiguracja stanów (`conditions.mjs`) wobec wielopoziomowych stanów 6.0 | **E3** |
+| A7 | Quench `konfiguracja`: „rzucanie czarów jest wyłączone” (`Cannot convert undefined or null to object`) | tabela `CONFIG.DND5E` zmieniła kształt | **E3** |
+| A8 | `WeaponData.getSheetData` — `label` z `undefined` (`handel`, `poligon`) | nasze typy/cechy broni wobec tabel 6.0 | **E3** (konfiguracja), sprawdzić w **E7** |
+| A9 | ruch `movement.*` (`armor-rules.mjs:145`, 20 ostrz.), `CONST.ACTIVE_EFFECT_MODES` (`towarzysze.mjs:364`, `maszyny.mjs:210`), `{-=klucz: null}` (~60 ostrz., 58 miejsc w kodzie) | przemianowane ścieżki i składnia usuwania | **E3** |
+| A10 | Quench `drony` „kara −2 do ataku drona” (4 ≠ 2) | premie do ataku: `system.bonuses.*` → `system.rolls.*` | **E3**/**E4** |
+| A11 | e2e `combat`: naturalny wynik `null` w werdykcie krytyka | dane rzutu/wiadomości ataku (flagi → `message.system`) | **E4** |
+| A12 | e2e `umieranie`: karta ataku bez znacznika „wręcz” | flagi wiadomości / karta ataku | **E3** (flagi) → **E6** |
+| A13 | `DamageApplicationElement.buildTargetListEntry` — `uuid` z `undefined` (`combat`, `umieranie`) | nasze nadpisanie tacki | **E5** |
+| A14 | e2e `zagrozenia`: przycisk Fuksa i potwierdzenie | karta czatu rzutu MG | **E6** |
+| A15 | e2e `dron`: żeton po kliknięciu w (-1200, -800) zamiast obok PC | `TokenPlacement` w 6.0 / `encounterPlacementBehavior` | **E9** |
+| A16 | Quench `drony` „kamera drona”: `darkvision` zamiast `neuroshimaKameraDrona` | **`senseVisionSync`** nadpisuje tryb wzroku żetonu — przewidziane w §4/§5 | **E9** → Wymuś `false` (w pliku ustawień już w E3) |
+| A17 | `Scene#templates` (97 ostrz., `fire-modes.mjs:2272/2276`, `grenade-inventory.mjs:208`, testy) | rdzeń v14: MeasuredTemplate wchłonięty przez Region | **E4** |
+| A18 | `ClientDocument#getRelativeUUID` (`surowce-inventory.mjs:354`) | rdzeń v14 | **E7** |
+| A19 | harness: `CONST.WALL_SENSE_TYPES` (`dev/poligon/lib/kit.mjs:211`), `togglePause(push)`, `BasePlaceableHUD#clear` (paczki e2e) | rdzeń v14, nasze narzędzia | **E10** |
+| A20 | pozostałe czerwone paczki e2e tylko z błędów konsoli (`autodestrukcja`, `bebeszenie`, `boot`, `handel`, `postac`, `postoj`, `szabrowanie`, `towarzysz*`) | zasiew (A1) | **E3** — ponowny triaż po A1 |
+
+Klucze §3.13 widoczne na naszych ekranach: wszystkie 19 usuniętych (nazwy obliczeń KP = TT na karcie, odporności
+na karcie postaci, rzuty przeciw śmierci przy umieraniu, rzadkości na kartach przedmiotów, zakładka „Efekty”) — **E7**.
+Skaner: nowe reguły `deletion-syntax` (58/29), `scene-templates` (6/4), `effect-modes` (5/3).
