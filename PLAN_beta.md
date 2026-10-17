@@ -36,8 +36,9 @@ flowchart LR
 ```
 
 1. **Drobiazgi** — `HANDOFF_przed_migracja.md` (2026-10-17): znaleziska Poligonu, Złomiarz w szabrowaniu, obrazy
-   z bramki v0.19.0, CI, dokumenty, inwentarz wersji. Zostawia czysty punkt wyjścia; punktem odniesienia migracji
-   jest v0.19.0 (bramka zielona).
+   z bramki v0.19.0, CI, dokumenty, inwentarz wersji. **Zrobione 2026-10-17: wydane jako v0.19.1** (bramka zielona,
+   CI bez ostrzeżeń) — to punkt odniesienia migracji. Pełna kopia kampanii sprzed migracji zrobiona i sprawdzona
+   (opis w vaulcie).
 2. **Migracja na Foundry 14.369 i dnd5e 6.0.x** — osobny plan, pisany po drobiazgach.
 3. **M6 z Biegłościami profesji** (dziura w B6) — po migracji, bo awans postaci w dnd5e się zmienia.
 4. **M4 Pojazdy** — miejsce w kolejce czeka na decyzję MG: tutaj, przed betą, albo w §4 „po becie”.

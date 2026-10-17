@@ -224,6 +224,20 @@ wierzchu — wtedy wracać do tego, nie wcześniej. `fvtt doctor`: bez problemó
   3. **Poligon:** paczki przebudowane z drzewa (offline, 2026-10-17, z portretami). Zostaje przebudowa Obsady w
      przeglądarce (Świeżość → Obsada → Przebuduj albo `fvtt poligon:obsada --rebuild --only=szczur-5`). Sonda:
      Złomowisko → `szabrowanie` (Szczur ma Ułatwienie do Percepcji i Śledztwa, Łowca nie).
-  4. **Kopia zapasowa kampanii przed migracją** — ostatnia wbudowana jest z maja (Z6). Zrobić świeżą (Setup →
-     Backups) przed aktualizacją Foundry; plan migracji może dodać `fvtt backup`, skoro klasa już czeka.
-  5. Dla planu migracji: dnd5e 6.0.6 wymaga Foundry ≥ 14.367; kampania stoi na dnd5e 5.3.0, a linia 5.3 ma 5.3.3.
+  4. ~~Kopia zapasowa kampanii przed migracją~~ — **zrobiona 2026-10-17** przy zatrzymanym serwerze: świat, dnd5e
+     5.3.0, moduły innych autorów, `Data\assets`, aplikacja Foundry 14.364 i `options.json`, na osobnym dysku kopii;
+     sprawdzona (CRC, świat rozpakowany i otwarty). Miejsce, odtwarzanie i skrypty: vault, `Integracje/backups/`.
+     `fvtt backup` (klasa czeka w `guards`) — kandydat do planu migracji.
+  5. **Przygotowanie do aktualizacji** (wejście dla planu migracji):
+     - Rdzeń Foundry to jedna instalacja dla wszystkich ścieżek danych (kampania, Poligon, piaskownica, piaskownica
+       wydania) — jego aktualizacja dotyka wszystkich naraz. dnd5e jest osobną kopią na każdej ścieżce.
+     - dnd5e 6.0.6 wymaga Foundry ≥ 14.367, więc kolejność: (a) rdzeń 14.364 → 14.369, wszędzie jeszcze dnd5e 5.3.0,
+       bramka wydania v0.19.1 na 14.369; (b) dnd5e 6.0.x najpierw tylko w piaskownicy wydania (RELEASING.md, „Version
+       policy”) — tu cała praca migracyjna; (c) kampania na końcu, po zielonej bramce.
+     - Cofnięcie każdego kroku: kopia z 2026-10-17 ma aplikację 14.364 i dnd5e 5.3.0 (instalator niepotrzebny).
+     - Źródła: klon referencyjny dnd5e ma już tagi `release-6.0.0`…`release-6.0.6` (5.3.0 → 6.0.6: 400 plików w
+       `module/`, +22,7 tys. / −7,9 tys. linii), wiki odświeżone; notatki wydań 6.0.x — `gh api repos/foundryvtt/dnd5e/releases`.
+       Po aktualizacji: `node dev/agent/index-sources.mjs` (mapa „klasa → plik”).
+     - Nasze `module.json`: dnd5e `minimum` = `verified` = 5.3.0, bez maksimum; 14.369 nie ładuje po cichu niezgodnych
+       powiązanych modułów (Z6) — podniesienie zgodności to część planu, nie tego hand-offu.
+     - Testy: domyślnie okna w tle (TESTING.md, warstwa 6); Chrome z launchera vaultu.
