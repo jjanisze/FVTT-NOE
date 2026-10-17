@@ -110,7 +110,7 @@ const IKONA_KATEGORII = Object.freeze({
   "chemia-uzytkowa": "icons/svg/pill.svg",
   leki: "icons/svg/pill.svg",
   "materialy-wybuchowe": "icons/svg/fire.svg",
-  uslugi: "icons/svg/gears.svg",
+  uslugi: "icons/svg/clockwork.svg",
   pojazdy: "icons/svg/wing.svg"
 });
 

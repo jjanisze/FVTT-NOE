@@ -25,7 +25,7 @@ export default {
       await a.createEmbeddedDocuments("Item", food.map(([id, q]) => { try { return buildProwiantItemData(id, q); } catch { return null; } }).filter(Boolean));
     }
     await k.give(party[1], [{ ref: "narzedzia:{klusownika}" }, { ref: "narzedzia:{kucharza}" }]);
-    const auto = await k.actor("pojazd", { name: "Pickup Poligonu", type: "vehicle", img: "icons/svg/wheel.svg" }, { owner: ["Gracz 1", "Gracz 2", "Gracz 3", "Gracz 4"] });
+    const auto = await k.actor("pojazd", { name: "Pickup Poligonu", type: "vehicle", img: "icons/commodities/tech/wheel.webp" }, { owner: ["Gracz 1", "Gracz 2", "Gracz 3", "Gracz 4"] });
     const g = await k.party([...party, auto]);
     await k.tokens(s, [...party.map((a, i) => [a, 6 + i * 2, 9]), [auto, 14, 13]]);
     return { druzyna: g?.name ?? null, czlonkowie: party.filter(Boolean).length + 1 };

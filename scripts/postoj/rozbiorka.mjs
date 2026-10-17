@@ -108,7 +108,7 @@ export async function rozbierz(item, { surowce = null } = {}) {
   await item.delete();
   const czas = await rzucCzas("troche");
   await wyslijKarte(kartaPostoju({
-    ikona: "icons/svg/anvil.svg", tytul: `Rozbiórka: ${nazwa}`, podtytul: actor.name,
+    ikona: "icons/tools/smithing/anvil.webp", tytul: `Rozbiórka: ${nazwa}`, podtytul: actor.name,
     linie: [`Odzyskane: <strong>${esc(_surowceTekst(s))}</strong>.`, `Czas: ${Math.round(czas.minuty / 60 * 10) / 10} h (${NAPRAWA.troche.kosci} h).`]
   }), { actor });
   return s;

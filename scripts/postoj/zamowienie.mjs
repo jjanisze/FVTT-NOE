@@ -82,7 +82,7 @@ export async function rzucZamowienie(actor, wpis, { miejsce, k100 = null, kobalt
     ...(krew ? ["Gambling we krwi +5"] : [])
   ];
   const wiadomosc = await wyslijKarte(kartaPostoju({
-    ikona: "icons/svg/search.svg",
+    ikona: `modules/${MODULE_ID}/icons/actions/handel.webp`,
     tytul: `Zamówienie: ${wpis.nazwa}`,
     podtytul: actor.name,
     rodzaj: z.jest ? "sukces" : "porazka",

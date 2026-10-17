@@ -58,13 +58,13 @@ export function registerSkills() {
       label: "Pojazdy",
       ability: "wis",
       fullKey: "pojazdy",
-      icon: "icons/commodities/tech/wheel-cog-gold.webp"
+      icon: "icons/commodities/tech/cog-gear-wheel-gold.webp"
     },
     prz: {
       label: "Przyroda",
       ability: "int",
       fullKey: "przyroda",
-      icon: "icons/magic/nature/tree-growth-green.webp"
+      icon: "icons/magic/nature/plant-sprout-snow-green.webp"
     },
     skr: {
       label: "Skradanie się",
@@ -88,7 +88,7 @@ export function registerSkills() {
       label: "Technika",
       ability: "int",
       fullKey: "technika",
-      icon: "icons/tools/smithing/wrench-steel-grey.webp"
+      icon: "icons/tools/hand/wrench-steel-grey.webp"
     },
     tre: {
       label: "Tresura",
@@ -112,7 +112,7 @@ export function registerSkills() {
       label: "Zwinne dłonie",
       ability: "dex",
       fullKey: "zwinne_dlonie",
-      icon: "icons/skills/melee/hand-grip-sword-white.webp"
+      icon: "icons/skills/melee/hand-grip-sword-white-brown.webp"
     }
   };
 

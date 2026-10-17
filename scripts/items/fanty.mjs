@@ -69,7 +69,7 @@ export async function uzyjFantu(actor, { nazwa, fant, item = null }, { uczestnic
     await item.setFlag(MODULE_ID, "fant", { ...fant, uzyli: [...new Set([...juz, ...nowi.map(a => a.id)])] });
   }
   await wyslijKarte(kartaPostoju({
-    ikona: item?.img ?? "icons/svg/clover.svg",
+    ikona: item?.img ?? "icons/magic/symbols/clover-luck-white-green.webp",
     tytul: `${czynnosc}: ${nazwa}`,
     podtytul: lista.map(a => a.name).join(", "),
     rodzaj: nowi.length ? "sukces" : "info",

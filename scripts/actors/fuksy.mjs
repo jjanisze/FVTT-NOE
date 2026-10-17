@@ -78,7 +78,7 @@ export async function przyznajFuksa(actor, zrodlo, { etykieta, termin, karta = t
   const r = przyznaj(fuksy(actor), zrodlo, game.time.worldTime, opcje);
   if (r.odmowa) {
     await wyslijKarte(kartaPostoju({
-      ikona: "icons/svg/clover.svg",
+      ikona: "icons/magic/symbols/clover-luck-white-green.webp",
       tytul: `${actor.name}: komplet Fuksów`,
       podtytul: `${ZRODLA_FUKSOW[zrodlo]?.label ?? zrodlo} — odmowa (s. 17)`,
       rodzaj: "braki",
