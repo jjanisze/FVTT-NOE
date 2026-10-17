@@ -6,6 +6,7 @@
  *   node dev/migration/dnd5e6-scan.mjs                     # counts per rule (JSON)
  *   node dev/migration/dnd5e6-scan.mjs --list[=rule,…]     # with every place (file:line and the line)
  *   node dev/migration/dnd5e6-scan.mjs --fail-on=rule,…    # exit 1 while a named rule still finds anything
+ *   node dev/migration/dnd5e6-scan.mjs --fail-on=… --quiet  # only the failing places (`npm test`)
  *   node dev/migration/dnd5e6-scan.mjs --lang=<new en.json> [--lang-before=<old en.json>]  # + pl.json DND5E keys gone
  *
  * Each stage starts by refreshing its numbers from here (§6.1) and, once its rules reach zero, adds them to
@@ -27,19 +28,20 @@ const SCAN = [
   { dir: "styles", ext: /\.css$/ }
 ];
 // This scanner's own rule table would match itself.
-const SKIP_FILES = new Set(["dev/migration/dnd5e6-scan.mjs"]);
+// The adapter (chat-message-data.mjs) documents the 5.3 flags it replaces.
+const SKIP_FILES = new Set(["dev/migration/dnd5e6-scan.mjs", "scripts/config/chat-message-data.mjs"]);
 
 /** @type {{id: string, stage: string, what: string, test: RegExp, files?: RegExp}[]} */
 export const RULES = [
   // §3.3 — chat message flags the dnd5e 6 world migration deletes (→ message.system.*, getAssociated*()).
-  { id: "message-flags", stage: "E3", what: "flags.dnd5e.item|activity|targets|originatingMessage on chat messages → message.system.* / getAssociatedItem() / getAssociatedActivity() / getOriginatingMessage()",
-    test: /flags\??\.dnd5e\??\.(item|activity|targets|originatingMessage)\b|getFlag\(\s*["']dnd5e["']\s*,\s*["'](item|activity|targets|originatingMessage)["']|["']flags\.dnd5e\.(item|activity|targets|originatingMessage)\b/ },
+  { id: "message-flags", stage: "E3", what: "flags.dnd5e.roll|use|messageType|item|activity|targets|originatingMessage on chat messages → scripts/config/chat-message-data.mjs (message.type, message.system.*)",
+    test: /flags\??\.dnd5e\??\.(roll|use|messageType|item|activity|targets|originatingMessage)\b|getFlag\(\s*["']dnd5e["']\s*,\s*["'](roll|use|messageType|item|activity|targets|originatingMessage)\b|["']flags\.dnd5e\.(roll|use|messageType|item|activity|targets|originatingMessage)\b|\bdnd5e:\s*\{\s*(roll|use|messageType|item|activity|targets|originatingMessage)\s*:/ },
   // §3.6 — effect origin moves to system.origin.{activity,effect,item,actor,behavior}.
   { id: "effect-origin", stage: "E3", what: "top-level ActiveEffect origin written from a uuid → system.origin",
     test: /^\s*origin:\s*[\w?.]+\.uuid\b/ },
-  // §3.6 — effects created with top-level `changes` (core v14 shim, removed in v16).
-  { id: "effect-top-changes", stage: "E3", what: "`changes: [` outside `system` (core v14 shim) → system.changes",
-    test: /(^|[{,(\s])changes\s*:\s*\[/, files: /\.m?js$/ },
+  // §3.6 — top-level `changes` in new effect data: core v14 migrates it silently (no compatibility warning) until
+  // v16. Not a static rule: rule tables (diseases, conditions, chemistry) legitimately hold `changes` lists that
+  // builders put under `system.changes` (verified 2026-10-18); a runtime check of creation data belongs to E10.
   // §2.1 — core v14: `{-=key: null}` deletion → `{key: new foundry.data.operators.ForcedDeletion()}` (removed in v16;
   // `unsetFlag` already uses the operator). Triage E2: ~60 warnings with core as the last frame — the calls are ours.
   { id: "deletion-syntax", stage: "E3", what: "`-=key` forced deletion written in update data → `_del` (foundry.data.operators.ForcedDeletion) or unsetFlag; reading a `-=` key from hook changes stays for older callers",
@@ -54,7 +56,7 @@ export const RULES = [
     test: /new Dialog\(|\bDialog\.(confirm|prompt|wait)\(|extends (Application|FormApplication|Dialog)\b|new FormApplication/, files: /\.m?js$/ },
   // §3.12 — renamed prepared-data paths: no shim for reads, `undefined` under the old key.
   { id: "movement", stage: "E3", what: "attributes.movement.<type> → attributes.movement.speeds.<type>",
-    test: /movement\??\.(walk|fly|swim|climb|burrow|hover)\b|["']system\.attributes\.movement\.(walk|fly|swim|climb|burrow)["']/ },
+    test: /movement\??\.(walk|fly|swim|climb|burrow|hover)\b|["']system\.attributes\.movement\.(walk|fly|swim|climb|burrow)["']|movement\.\$\{(?!.*speeds)/ },
   { id: "senses", stage: "E3", what: "attributes.senses.<sense> → attributes.senses.ranges.<sense>",
     test: /senses\??\.(darkvision|blindsight|tremorsense|truesight)\b/ },
   { id: "roll-bonuses", stage: "E3", what: "system.bonuses.{mwak,rwak,msak,rsak,abilities} → system.rolls.*",
@@ -143,6 +145,10 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   out.ok = failing.length === 0 && unknown.length === 0;
   if (failing.length) out.failing = failing;
   if (unknown.length) out.unknownRules = unknown;
-  process.stdout.write(`${JSON.stringify(out, null, 2)}\n`);
+  if (arg("quiet")) {
+    for (const id of failing) for (const h of hits[id]) process.stdout.write(`dnd5e6-scan ${id}: ${h.file}:${h.line}  ${h.text}\n`);
+    for (const id of unknown) process.stdout.write(`dnd5e6-scan: unknown rule ${id}\n`);
+    if (out.ok) process.stdout.write(`dnd5e6-scan: ${failOn.length} rule(s) at zero\n`);
+  } else process.stdout.write(`${JSON.stringify(out, null, 2)}\n`);
   process.exitCode = out.ok ? 0 : 1;
 }

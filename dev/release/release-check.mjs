@@ -75,7 +75,10 @@ await step("static", async () => {
     node("--test", ...testFiles),
     run(PYTHON, ["dev/art/m5/test_pack.py"]),
     node("dev/validate-css.mjs"),
-    node("dev/validate-recipes.mjs")
+    node("dev/validate-recipes.mjs"),
+    // dnd5e 5.3 idioms that must stay gone (PLAN_migracja_dnd5e6.md §7) — the rule list lives in `npm run test:dnd5e6`.
+    node("dev/migration/dnd5e6-scan.mjs", "--quiet",
+      JSON.parse(fs.readFileSync(path.join(MODULE_ROOT, "package.json"), "utf8")).scripts["test:dnd5e6"].match(/--fail-on=\S+/)[0])
   ];
   return { ok: runs.every(r => r.ok), runs };
 });
