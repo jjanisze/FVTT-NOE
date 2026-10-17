@@ -539,3 +539,24 @@ sesję; Chrome uruchamia tylko człowiek).
   wiadomości (`message.type`).
 - Zostaje (Chrome): pełna bramka `npm run release:check` (piaskownica wydania na 14.369 + dnd5e 5.3.0: e2e w świecie
   gołym i zalecanym, Quench), potem `module.json` `compatibility.verified` = 14.369 i wpis „E1 zrobione”.
+
+**2026-10-17 — E1 zrobione.** Bramka `release:check` zielona na Foundry 14.369 + dnd5e 5.3.0 (raport
+`logs/release/0.19.1-2026-10-17T17-37-27.json`): e2e **40/40** (świat goły i zalecany), Quench **1185/1185**, czasy
+jak w bramce v0.19.1 (`poligon` 556 s, strumienie ~182 s). `module.json` `verified` = 14.369. Bez v0.19.2 — kod
+modułu bez zmian; zepsuło się tylko nasze narzędzie:
+- **14.369 zmienił trasy HTTP serwera** (wszystko w `dev/agent/lib/foundry-http.mjs`): (1) każdy POST musi być
+  same-origin — `Origin` serwera, inaczej 400 „The request could not be processed.”; (2) `/auth` przy działającym
+  świecie już nie loguje admina (tylko renderuje stronę) — hasło sprawdza jedynie ścisła kontrola na początku każdego
+  `POST /setup`, więc tędy idzie sesja admina dla `loginAs` (logowania `fvtt login`, klientów e2e, przywracania
+  sesji); (3) zamknięcie świata przeniesione z `/join {action:"shutdown"}` na `/setup {action:"worldShutdown"}`
+  (przekierowanie na `/setup` = sukces, na `/join` = odmowa). Stary klient brał odrzucone logowanie za sukces.
+- **Koszyki błędów konsoli:** `boot`, `seed`, `late` — puste w obu światach; lista dozwolona rdzenia nie zadziałała ani
+  razu (okna w tle bez dławienia). Ostrzeżenia zgodności — **0 z naszym kodem jako wywołującym**; 117 w świecie
+  zalecanym: Quench (globalne `Game`, `SearchFilter`, `FilePicker`), harness (`CONST.WALL_SENSE_TYPES` w
+  `dev/poligon/lib/kit.mjs`, `togglePause(push)`, `BasePlaceableHUD#clear` w paczkach e2e), V1 `Dialog` rdzenia oraz
+  **`senses.<zmysł>` → `senses.ranges.<zmysł>` już w dnd5e 5.3** (72×, klient gracza; czytane przez `deepClone`
+  — prawdziwy wywołujący był pod obciętym stosem V8). Poprawione po bramce: atrybucja pomija ramki rdzenia (np.
+  `deepClone`) do pierwszego pakietu, kod ewaluowany przez harness (`<anonymous>:l:k`) to `harness`, a strony e2e
+  dostają `Error.stackTraceLimit = 50` przed pierwszym skryptem — E2 pokaże, czyj to odczyt.
+- Do E2 gotowe: `fvtt module:install` (moduły innych autorów w folderach kampanii + ponowne dowiązanie piaskownic),
+  zipy DsN 6.4.4, JB2A 0.9.4, Sequencer 4.3.0, Splatter 6.0.2 pobrane i sprawdzone (CRC).
