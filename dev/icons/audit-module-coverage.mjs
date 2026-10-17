@@ -5,14 +5,14 @@ import crypto from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { CLASSES, PROFESSIONS } from "../../scripts/config/classes-data.mjs";
 import { CLASS_FEATURES } from "../../scripts/config/class-features-data.mjs";
-import { SZTUCZKI } from "../../scripts/config/sztuczki-data.mjs";
+import { SZTUCZKI, sztuczkaItemData } from "../../scripts/config/sztuczki-data.mjs";
 import { POCHODZENIA, ORIGIN_ABILITIES } from "../../scripts/config/pochodzenia-data.mjs";
 import { GRUPY_FANTOW, FANTY, ikonaFantu } from "../../scripts/config/fanty-data.mjs";
 import { BESTIARY } from "../../scripts/config/bestiary-data.mjs";
-import { STATBLOKI } from "../../scripts/config/towarzysze-data.mjs";
 import { WEAPONS } from "../../scripts/config/weapons-data.mjs";
 import { NEUROSHIMA_STANY, NEUROSHIMA_ZAGROZENIA, NEUROSHIMA_MARKERS } from "../../scripts/config/conditions.mjs";
 import { isGeneratedPlaceholder } from "./review/placeholders.mjs";
+import { szablonyTowarzyszy } from "../packs/build-towarzysze.mjs";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
 const root = path.resolve(here, "../..");
@@ -56,7 +56,17 @@ for (const [id, def] of Object.entries(ORIGIN_ABILITIES)) add("origin ability", 
 for (const id of Object.keys(GRUPY_FANTOW)) add("Fant group", id, id, `icons/fanty/${id}.svg`);
 for (const weapon of WEAPONS) add("weapon", weapon.id, weapon.name, `icons/weapons/${weapon.icon}`);
 const sztuczki = Object.entries(SZTUCZKI).map(([id, def]) => ({ id, label: def.label,
-  configured: "icons/svg/upgrade.svg", existingArt: candidates(id, def.label) }));
+  configured: sztuczkaItemData(id).img, existingArt: candidates(id, def.label) }));
+
+// Capture the real IDs produced by the companion builder, using plain in-memory data only.
+const observedCompanions = [];
+const builtCompanions = szablonyTowarzyszy({ MODULE_ID: "neuroshima-2026-overrides", idFor: (...parts) => parts.join(":"),
+  buildNpc: creature => {
+    observedCompanions.push(creature);
+    return { actor: { system: { attributes: {} }, prototypeToken: {}, flags: { "neuroshima-2026-overrides": {} } }, items: [] };
+  } });
+const companionDefinitions = Object.fromEntries(builtCompanions.entries.map((entry, index) =>
+  [entry.actor.flags["neuroshima-2026-overrides"].towarzyszSzablon, observedCompanions[index]]));
 
 function iconMap(name) {
   const block = build.match(new RegExp(`const ${name} = Object\\.freeze\\(\\{([\\s\\S]*?)\\n\\}\\);`))?.[1];
@@ -86,15 +96,17 @@ const aliases = {
 };
 const specificReuse = { "biodroid.karabin-dluga-seria-4-walke": "icons/weapons/karabin_laserowy.svg" };
 const bestiary = [];
-for (const [scope, creatures] of [["bestiary", BESTIARY], ["companion", STATBLOKI]]) for (const [creatureId, creature] of Object.entries(creatures)) {
+for (const [scope, creatures] of [["bestiary", BESTIARY], ["companion", companionDefinitions]]) for (const [creatureId, creature] of Object.entries(creatures)) {
   for (const entry of [...(creature.features ?? []), ...(creature.attacks ?? [])]) {
-    const configured = exact.get(`${creatureId}.${entry.id}`) ?? shared.get(entry.id) ?? null;
+    const builderId = scope === "companion" ? creature.id : creatureId;
+    const configured = exact.get(`${builderId}.${entry.id}`) ?? shared.get(entry.id) ?? null;
     const base = entry.id.replace(/-(?:dluga|krotka)-seria.*$/, "");
     const existing = [...candidates(entry.id, entry.name), ...candidates(base, entry.name)];
+    for (const card of review.items) if (card.companionMappings?.includes(`${creatureId}.${entry.id}`) && exists(card.target)) existing.unshift(card.target);
     if (aliases[entry.id]) existing.push(aliases[entry.id]);
     if (specificReuse[`${creatureId}.${entry.id}`]) existing.unshift(specificReuse[`${creatureId}.${entry.id}`]);
     if (entry.dropsAs?.id) existing.push(...candidates(entry.dropsAs.id, entry.dropsAs.id));
-    bestiary.push({ scope, creatureId, id: entry.id, label: entry.name, kind: entry.kind ? "attack" : "feature",
+    bestiary.push({ scope, creatureId, builderId, id: entry.id, label: entry.name, kind: entry.kind ? "attack" : "feature",
       configured: configured ? prefix + configured : "icons/svg/upgrade.svg",
       configuredExists: configured ? exists(configured) : true,
       existingArt: [...new Set(existing)].filter(exists), needsWiring: !configured,
@@ -121,7 +133,8 @@ const groups = [...new Set(expected.map(item => item.kind))].map(kind => ({ kind
   placeholders: expected.filter(item => item.kind === kind && item.generatedPlaceholder).length }));
 const summary = { date: new Date().toISOString().slice(0, 10), scope: "Working-tree source and filesystem audit; no pack, world or Foundry writes",
   groups, sztuczki: sztuczki.length, sztuczkiWithExistingArt: sztuczki.filter(item => item.existingArt.length).length,
-  sztuczkiBuilderUsesCoreFallback: true,
+  sztuczkiBuilderUsesCoreFallback: sztuczki.some(item => item.configured === "icons/svg/upgrade.svg"),
+  sztuczkiFallbackEntries: sztuczki.filter(item => !item.configured.startsWith(prefix)).length,
   bestiaryEntries: bestiary.filter(item => item.scope === "bestiary").length,
   bestiaryFallbackEntries: bestiary.filter(item => item.scope === "bestiary" && item.needsWiring).length,
   companionEntries: bestiary.filter(item => item.scope === "companion").length,
@@ -137,7 +150,7 @@ const summary = { date: new Date().toISOString().slice(0, 10), scope: "Working-t
   fantEntriesWithDedicatedGroupArt: FANTY.filter(f => exists(ikonaFantu(f, { istnieje: exists }).replace(prefix, ""))).length };
 const report = { summary, expected, sztuczki, bestiary, coreStatuses, literalMissing,
   sourceHashes: Object.fromEntries(["dev/packs/build-packs.mjs", "scripts/config/classes-data.mjs", "scripts/config/class-features-data.mjs",
-    "scripts/config/sztuczki-data.mjs", "scripts/config/bestiary-data.mjs", "scripts/config/towarzysze-data.mjs", "scripts/config/conditions.mjs"].map(file => [file, hash(file)])) };
+    "scripts/config/sztuczki-data.mjs", "scripts/config/bestiary-data.mjs", "scripts/config/towarzysze-data.mjs", "scripts/config/conditions.mjs", "dev/packs/build-towarzysze.mjs"].map(file => [file, hash(file)])) };
 if (report.sourceHashes["dev/packs/build-packs.mjs"] !== buildHash) throw new Error("Pack source changed during audit; rerun for a consistent snapshot");
 fs.writeFileSync(path.join(here, "module-coverage-2026-10-17.json"), JSON.stringify(report, null, 2) + "\n");
 console.log(JSON.stringify({ summary, missing: expected.filter(item => !item.exists), missingSztuczkaArt: sztuczki.filter(item => !item.existingArt.length),

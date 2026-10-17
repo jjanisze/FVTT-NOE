@@ -37,28 +37,29 @@ an actor-portrait icon across the whole party is just two homebrew feats:
 Victor's `Siódme poty.` and Laffitte's `Mizoofobia`. `Siódme poty` enters the
 Batch 60 review; `Mizoofobia` remains to be verified against the current world.
 
-**Next batch number: 112** (7 icon revisions await GM review;
-the original 153-subject placeholder pass is complete).
+**Next batch number: 112** (no open glyph reviews; all 544 review cards
+are resolved and source icon wiring is complete).
 
 **Source audit refresh, 2026-10-17:** all 36 origin ability icons exist, but
 the 12 main Pochodzenie background emblems were omitted from earlier queues.
-Ten main emblems from Batches 108–110 are now approved and installed.
-Only Nowy Jork and Południowa Hegemonia continue in Batch 111 at
+All twelve main emblems are approved and installed at
 `icons/pochodzenia/<canonical-id>.svg` (+ WEBP).
 See `ORIGIN_COVERAGE.md` and `origin-icons-2026-10-17.json`.
-The 333 physical catalog items have **zero art gaps**; four remaining
-fallbacks need GM wiring to existing art (three fuel grades and medic
-toolkit refill). All 23 medicines, including Reminex, have distinct art.
-Current evidence: `catalog-icons-2026-10-17.json` and `CATALOG_COVERAGE.md`.
+The 333 physical catalog items have **zero art or source wiring gaps**.
+All three fuel grades and medic toolkit refill are connected. All 23
+medicines, including Reminex, have distinct art. Current evidence:
+`catalog-icons-2026-10-17-integrated.json` and `CATALOG_COVERAGE.md`.
 
 **Expanded source audit, 2026-10-17:** five companion subjects were outside
 the previous audits: Kopacz, Ziemnowodny, Psi bohater, Modyfikacje drona
 and Atak drona (seven companion entries share those five glyphs).
-They are in Batch 111 alongside the two remaining origin revisions.
+They are approved and installed from Batch 111, alongside both final
+origin selections. Nowy Jork uses the chosen earlier Batch 110 design.
 All 53 Sztuczki, 85 weapons, 135 class-feature variants, 10 Fant groups
 and 36 origin abilities have existing art. Bestiary fallbacks can reuse
-existing art. Many builders still use core upgrade icons; see
-`BROAD_COVERAGE.md` and `module-coverage-2026-10-17.json` for exact paths.
+existing art. Source mapping is complete for Sztuczki, bestiary/companion
+entries, item fallbacks and Wyłączony. See `FINAL_HANDOFF.md`,
+`BROAD_COVERAGE.md` and `completed-2026-10-17.json`.
 
 **Icon coverage correction, 2026-10-17:** the previous 342 review cards are resolved,
 but that queue omitted class/profession artwork. The source audit confirms
@@ -1454,22 +1455,20 @@ Exact saved decisions and approved masks: `reviewed.json` and
 <!-- style-batch-110:end -->
 
 <!-- style-batch-111:start -->
-## Queue (A) — Batch 111 — 7 saved icon revisions
+## Reviewed (A) — Batch 111 — 7 delivered
 
-Exact selected sources and verbatim notes are archived with the prompts.
-Older choices remain selectable; production requires fresh saved approval.
+Exact saved decisions and approved masks: `reviewed.json` and
+`reviewed-installed.json` under `review/candidates/batch-111/`.
 
-| Cell | Subject | Requested correction | Native SVG (+ WEBP) |
-|---|---|---|---|
-| 1 | Nowy Jork |  | `icons/pochodzenia/nowy-jork.svg` |
-| 2 | Południowa Hegemonia | Not bad, the helmet is good, but the machette looks like a spatula. Maybe a kukri or a chain with a hook on the end? | `icons/pochodzenia/hegemonia.svg` |
-| 3 | Kopacz | New companion glyph: Burrowing prevents opportunity attacks. | `icons/abilities/kopacz.svg` |
-| 4 | Ziemnowodny | New companion glyph: A reptilian companion breathes both on land and underwater. | `icons/abilities/ziemnowodny.svg` |
-| 5 | Psi bohater | New companion glyph: A dog uses injury levels and death saves like a player character. | `icons/abilities/psi-bohater.svg` |
-| 6 | Modyfikacje drona | New companion glyph: A drone can mount weapons, cameras, lighting and other equipment. | `icons/abilities/modyfikacje-drona.svg` |
-| 7 | Atak drona | New companion glyph: A drone attacks with its installed weapon. | `icons/abilities/atak-drona.svg` |
-
-Evidence and exact prompts: `review/candidates/batch-111/`.
+| Subject | Native SVG (+ WEBP) | Result |
+|---|---|---|
+| Nowy Jork | `icons/pochodzenia/nowy-jork.svg` | **done** |
+| Południowa Hegemonia | `icons/pochodzenia/hegemonia.svg` | **done** |
+| Kopacz | `icons/abilities/kopacz.svg` | **done** |
+| Ziemnowodny | `icons/abilities/ziemnowodny.svg` | **done** |
+| Psi bohater | `icons/abilities/psi-bohater.svg` | **done** |
+| Modyfikacje drona | `icons/abilities/modyfikacje-drona.svg` | **done** |
+| Atak drona | `icons/abilities/atak-drona.svg` | **done** |
 
 <!-- style-batch-111:end -->
 
@@ -1756,76 +1755,23 @@ Po autodestrukcji maszyny żeton podmienia grafikę na wrak w rozmiarze żetonu.
 
 ## Do podpięcia — przez MG
 
-- **Rozszerzony audyt glifów, 2026-10-17:** `BROAD_COVERAGE.md` i
-  `module-coverage-2026-10-17.json` rozdzielają brak grafiki od braku mapy.
-  53 Sztuczki i 80 wpisów Bestiariusza nadal dostają ikonę upgrade mimo
-  istniejącej grafiki. Towarzysze: 11 wpisów ma taki fallback; cztery
-  mogą użyć istniejących grafik, siedem dzieli pięć nowych glifów Batch 111.
-  Po zatwierdzeniu podpiąć `kopacz`, `ziemnowodny`, `psi-bohater` oraz
-  `modyfikacje-drona` / `atak-drona` dla obu dronów według tabeli w raporcie.
-  Propozycje ponownego użycia grafik ocenia MG / agent kodowy. Ten agent
-  nie zmienia builderów, paczek ani dokumentów świata.
-
-- **Pochodzenia — audyt 2026-10-17:** 12 emblematów głównych regionów jest
-  objętych kolejką. Dziesięć jest dostarczonych; Nowy Jork i Południowa
-  Hegemonia wymagają rewizji w Batch 111.
-  36 ikon zdolności już istnieje. MG przebudowuje `pochodzenia`; obecny builder
-  sam wybierze dokładne ścieżki `icons/pochodzenia/<id>.svg`. Bez zmian kodu.
-  Starsze dokumenty świata aktualizuje osobno MG.
-
-- **Starsze dźwięki produkcji (§C 1–9):** pliki w `sounds/produkcja/` są gotowe.
-  Przepointować odpowiednie sloty `PRACA` i `ZDARZENIA` w
-  `scripts/production/oprawa.mjs`; agent assetowy nie zmienia tego kodu.
-- **Glify zatwierdzone 2026-10-12 (31 par WEBP/SVG):** pliki są zainstalowane.
-  Lista wszystkich ścieżek: `review/candidates/batch-63/installed.json`.
-  Zdolności pochodzenia biorą nazwę z pliku przy następnym rebuildzie
-  `zdolnosci-pochodzenia`; Sztuczki mogą wymagać repointu `img` i rebuildu
-  `sztuczki`. Karabin laserowy: `icons/weapons/karabin_laserowy.svg` — repoint
-  ataku Biodroida i rebuild Bestiariusza. Emiter EMP: repoint `img` / rebuild
-  `towarzysze`; Wyłączony: repoint definicji stanu. Istniejące przedmioty i
-  efekty w świecie podmienia osobno MG. Bez przebudów ani migracji świata.
-  Nazwy M5 Doba / Rozbiórka / Fanty są gotowe bez dodatkowego okablowania.
-- **Dodatkowe 19 glifów zatwierdzonych 2026-10-12 (Batch 63):** zainstalowane
-  ścieżki w `review/candidates/batch-64/installed.json`. Handel i Zabawka używają
-  nazw M5 bez dodatkowego okablowania; starsze Sztuczki, zdolności pochodzenia
-  i ataki Bestiariusza wymagające repointu / rebuildów pozostają dla MG, jak wyżej.
-- **Dodatkowe 16 glifów zatwierdzonych 2026-10-12 (Batch 64):** zainstalowane
-  ścieżki i wybrane źródła w `review/candidates/batch-64/reviewed-installed.json`
-  oraz `review/candidates/batch-64/reviewed-addendum-installed.json`.
-  Zdolności pochodzenia: następny rebuild `zdolnosci-pochodzenia`. Sztuczki:
-  repoint `img` na wymienione pliki i rebuild `sztuczki`; istniejące przedmioty
-  w świecie podmienia osobno MG. Agent assetowy nie wykonuje tych operacji.
-- **Dodatkowe 18 glifów zatwierdzonych 2026-10-12 (Batch 65):** ścieżki w
-  `review/candidates/batch-66/installed.json`. Szabrowanie używa dokładnej nazwy M5,
-  bez dodatkowego okablowania. Wszystkie zdolności pochodzenia mają teraz pliki;
-  ich rebuild oraz repoint `img` / rebuild starszych Sztuczek i migracje istniejących
-  przedmiotów pozostają dla MG. Agent assetowy nie wykonuje tych operacji.
-- **Dodatkowe 10 glifów zatwierdzonych 2026-10-12 (Batch 66):** ścieżki i
-  wybrane źródła w `review/candidates/batch-66/reviewed-installed.json`.
-  Starsze Sztuczki wymagające repointu `img` / rebuildu i aktualizacji istniejących
-  przedmiotów w świecie pozostają dla MG. Agent assetowy nie wykonuje migracji.
-- **Audyt katalogu 2026-10-12 — paliwo (wszystkie trzy grafiki gotowe):** dodać do
-  `RAW_IKONY` w `scripts/production/wynik.mjs` mapy `paliwo-dobre` →
-  `paliwo_dobre.svg`, `paliwo-przecietne` → `paliwo_przecietne.svg`,
-  `paliwo-chrzczone` → `paliwo_chrzczone.svg` (wszystkie w `icons/items/loot/`).
-  Zachować istniejące refy `raw:paliwo-*`; następnie przepointować starsze
-  przedmioty przez MG. Agent assetowy nie edytuje tego resolvera ani świata.
-- **Audyt katalogu 2026-10-12 — uzupełnienie medyka (gotowa grafika):** zmienić
-  `REFILL_IMG` w `scripts/items/toolkit-medyk.mjs` z `icons/svg/heal.svg` na
-  `modules/neuroshima-2026-overrides/icons/items/loot/uzupelnienie_medyka.svg`.
-  Aktualizację istniejących przedmiotów wykonuje MG. Nowa generacja zbędna.
-- **Dodatkowe 7 glifów zatwierdzonych 2026-10-13 (Batch 67):** dokładne ścieżki
-  i źródła w `review/candidates/batch-67/reviewed-installed.json`. Bebeszenie
-  używa nazwy M5 i nie wymaga wiring. Cztery starsze Sztuczki pozostają do
-  repointu / rebuildu i aktualizacji przez MG; agent nie zmienia świata.
+- **Glify — kod gotowy, 2026-10-17:** wszystkie zatwierdzone grafiki oraz
+  mapowania źródłowe są dostarczone. Nie trzeba ponownie przepinać kodu
+  Sztuczek, Bestiariusza, towarzyszy, trzech paliw, uzupełnienia medyka ani
+  stanu Wyłączony. Szczegóły: `FINAL_HANDOFF.md`, `BROAD_COVERAGE.md`.
+- **Paczki:** MG przebudowuje zwłaszcza `pochodzenia`, `sztuczki`,
+  `bestiariusz` i `towarzysze`; starsze paczki zdolności pochodzenia również
+  mogą wymagać odświeżenia. Same podmiany grafik pod istniejącą ścieżką SVG
+  nie wymagają zmiany kodu ani dodatkowej generacji.
+- **Istniejące dokumenty:** starsze przedmioty i efekty w świecie nadal
+  mogą mieć dawne `img`; ich aktualizację i bezpieczne odświeżenie modułu
+  wykonuje MG. Agent nie modyfikował świata ani otwartych baz paczek.
+- **Starsze dźwięki produkcji (§C 1–9):** gotowe pliki są w
+  `sounds/produkcja/`; pozostałe podpięcia slotów `PRACA` i `ZDARZENIA`
+  w `scripts/production/oprawa.mjs` są osobnym zadaniem.
 - **Malowane obrazy (§B/§E/§G/§H):** handlarze i utrzymanie są dostarczone;
-  pozostałe obrazy oczekują na źródła MG w
-  `dev/art/m5/in/<zestaw>/<klucz>.png`. Packer → kontrola gotowego WEBP → oznaczenie
-  dostarczonego wiersza → wpis w CREDITS: „AI-generated with OpenAI DALL-E,
-  hand-edited by the GM”. M5 używa dokładnych nazw, bez dodatkowego okablowania.
+  reszta czeka na źródła MG w `dev/art/m5/in/<zestaw>/<klucz>.png`.
+  Packer → kontrola WEBP → oznaczenie wiersza → CREDITS: AI-generated with
+  OpenAI DALL-E, hand-edited by the GM. M5 używa dokładnych nazw plików.
 
-Nowe briefy, katalog i skrypty oraz dźwięki są w commitach `Assets: …`.
-`MISSING.md` i główny `review/manifest.json` były już zmodyfikowane na starcie;
-aktualizacje kolejki pozostawiono w drzewie roboczym, bez włączania wcześniejszych
-zmian do commitów tej sesji. Metadata Batch 62 są niezależnie zachowane w
-`review/candidates/batch-62/manifest-items.json`; importer tylko dopisuje karty.
+Kolejka glifów jest zamknięta; Batch 112 pozostaje wolny dla nowych zadań.

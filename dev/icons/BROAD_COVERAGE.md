@@ -1,25 +1,24 @@
 # Expanded icon coverage — 2026-10-17
 
-The physical-item audit omitted companion-specific traits. The expanded
-source audit found **five additional art subjects**, covering seven
-companion feature entries: Kopacz, Ziemnowodny, Psi bohater, Modyfikacje
-drona and Atak drona. Batch 111 includes those five plus the saved Nowy
-Jork and Południowa Hegemonia revisions. None of these candidates is
-installed before fresh approval.
+Final status: **all approved glyphs are delivered and source wiring is
+complete**. The five companion subjects and both remaining origin
+selections are installed. All 544 review cards are resolved; no generated
+initials, missing artwork or audited source wiring gaps remain.
+Completion evidence: [completed-2026-10-17.json](completed-2026-10-17.json).
 
 | Source scope | Artwork available | Remaining artwork |
 |---|---|---|
 | Primary classes | 6/6 | None |
 | Professions | 18/18 | None |
 | Class-feature file variants | 135/135 | None |
-| Main origins | 10/12 installed | Two revisions in Batch 111 |
+| Main origins | 12/12 installed | None |
 | Origin abilities | 36/36 | None |
 | Sztuczki | 53/53 have existing matching art | None |
 | Weapons, including merged WKK definitions | 85/85 | None |
 | Physical item catalog | All 333 have art available | None |
 | Fant groups / table entries | 10/10 groups, covering 51 rows | None |
-| Bestiary actions and traits | Existing art available for all 342 entries | None; semantic reuse mappings need GM review |
-| Companion actions and traits | Existing or mapped art for 16/23 entries | Seven entries share the five new glyphs above |
+| Bestiary actions and traits | 342/342 configured to native art | None |
+| Companion actions and traits | 23/23 configured to native art | None |
 | Canonical conditions, hazards and markers | 30 referenced images exist | None |
 
 No generated initials badges remain anywhere in the SVG library. The
@@ -28,30 +27,28 @@ scripts, including module-prefixed references. Existing stock condition,
 skill and helper-class art is not automatically counted as missing art.
 Painted scenery, portraits and tokens remain in the separate GM art queue.
 
-## Wiring still needed
+## Completed source wiring
 
-Artwork availability does not mean every source builder uses it:
+The GM explicitly expanded the asset scope to apply these icon mappings:
 
-- **53 Sztuczki** still get the core upgrade icon from `sztuczkaItemData`
-  and its pack wrapper. Existing matched SVG paths are listed per entry
-  in the report. Update the shared builder or pack icon selection, then
-  rebuild through the GM/code agent.
-- **80 bestiary entries** and **11 companion entries** still get the
-  same core upgrade fallback from `buildBestiaryItem`. All 80 bestiary
-  entries and four companion entries can reuse existing art. The other
-  seven companion entries share the five new Batch 111 subjects.
-- **Four physical items** retain their existing previously recorded
-  wiring gaps: the three fuel grades and the medic toolkit refill.
-- **Origin backgrounds** already use exact filename discovery; the GM
-  rebuilds `pochodzenia` after delivery. Older world copies may still
-  retain images from before these asset deliveries.
+- **53 Sztuczki** now use explicit approved filename mappings, preserving
+  original rule IDs including camelCase keys.
+- **80 bestiary entries** and **11 companion entries** now use native
+  art through 89 distinct exact keys. Two duplicate canonical action IDs
+  intentionally share an icon. Companion mappings use the real
+  `towarzysz-<id>` builder prefix, verified through the companion factory.
+- **Three fuel grades and the medic toolkit refill** now use approved
+  dedicated icons. All 333 physical catalog entries resolve to module art.
+- **Wyłączony** now uses its native status glyph.
+- **Origin backgrounds** already discover exact filenames; all twelve
+  emblems now exist for the next GM pack rebuild.
 
-The report distinguishes configured images from proposed reuse paths.
-Matching filenames and semantic aliases are suggestions for the GM/code
-agent, not edits or newly granted image approvals. The asset agent changed
-no runtime source, pack database or world document.
+The source audit now records actual configured images. Integration source
+hashes and selected mappings are in `integration-2026-10-17.json`.
+`node dev/icons/verify_final_integration.mjs` checks canonical builders,
+all resolved reviews and preservation of 537 unrelated decisions.
 
-New companion mappings after approval:
+Installed companion mappings:
 
 | Companion entry | Target SVG (+ WEBP) |
 |---|---|
@@ -61,12 +58,13 @@ New companion mappings after approval:
 | `dron-kroczacy.modyfikacje`, `dron-latajacy.modyfikacje` | `icons/abilities/modyfikacje-drona.svg` |
 | `dron-kroczacy.atak`, `dron-latajacy.atak` | `icons/abilities/atak-drona.svg` |
 
-This is a working-tree source/filesystem snapshot while code work is in
-progress. Source hashes are recorded; it does not inspect built pack
-contents or live campaign copies. No pack build or live repoint was run.
+This verifies source and filesystem paths. No pack build or live repoint
+was run. The GM still rebuilds affected packs, especially `pochodzenia`,
+`sztuczki`, `bestiariusz` and `towarzysze`, and updates older world copies.
+Painted art remains a separate GM queue.
 
 Reproduce the expanded audit: `node dev/icons/audit-module-coverage.mjs`.
 Evidence: [module-coverage-2026-10-17.json](module-coverage-2026-10-17.json).
 Fresh physical catalog audit:
-`node dev/icons/audit-catalog-icons.mjs --date=2026-10-17 --output=catalog-icons-2026-10-17-final-audit.json`.
-Evidence: [catalog-icons-2026-10-17-final-audit.json](catalog-icons-2026-10-17-final-audit.json).
+`node dev/icons/audit-catalog-icons.mjs --date=2026-10-17 --output=catalog-icons-2026-10-17-integrated.json`.
+Evidence: [catalog-icons-2026-10-17-integrated.json](catalog-icons-2026-10-17-integrated.json).

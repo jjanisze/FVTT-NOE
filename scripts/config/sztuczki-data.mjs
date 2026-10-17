@@ -29,6 +29,63 @@ import { createCoverageLedger } from "./coverage-ledger.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
+/** Approved native art; rule IDs retain their original spelling. */
+const SZTUCZKA_ICONS = Object.freeze({
+  "aramis": "aramis.svg",
+  "aspirynaIMietusy": "aspiryna-i-mietusy.svg",
+  "barbarka": "barbarka.svg",
+  "benzynaZamiastKrwi": "benzyna-zamiast-krwi.svg",
+  "bezTrzymanki": "bez-trzymanki.svg",
+  "ciszejNizCien": "ciszej-niz-cien.svg",
+  "cwiczenieCzyniMistrza": "cwiczenie-czyni-mistrza.svg",
+  "czlowiekPajak": "czlowiek-pajak.svg",
+  "fabrykator": "fabrykator.svg",
+  "fachowiec": "fachowiec.svg",
+  "gradOlowiu": "grad-olowiu.svg",
+  "grenadier": "grenadier.svg",
+  "gunfight": "gunfight.svg",
+  "immunitet": "immunitet.svg",
+  "jestZajebiscie": "jest-zajebiscie.svg",
+  "karateka": "karateka.svg",
+  "kuloodpornosc": "kuloodpornosc.svg",
+  "lawnik": "lawnik.svg",
+  "miotacz": "miotacz.svg",
+  "mistrzBroniBialej": "mistrz-broni-bialej.svg",
+  "mistrzWalkiWrecz": "mistrz-walki-wrecz.svg",
+  "muzyk": "muzyk.svg",
+  "neo": "neo.svg",
+  "nozownik": "nozownik.svg",
+  "padnijPowstan": "padnij-powstan.svg",
+  "pakowanie": "pakowanie.svg",
+  "panPlaster": "pan-plaster.svg",
+  "pancerny": "pancerny.svg",
+  "patriota": "patriota.svg",
+  "pewnaReka": "pewna-reka.svg",
+  "pierwotnyInstynkt": "pierwotny-instynkt.svg",
+  "plugAndPlay": "plug-and-play.svg",
+  "przycelowanie": "przycelowanie.svg",
+  "przydasie": "przydasie.svg",
+  "pulpFiction": "pulp-fiction.svg",
+  "robinHood": "robin-hood.svg",
+  "rodeo": "rodeo.svg",
+  "rozroba": "rozroba.svg",
+  "ruchomeGniazdoCkm": "ruchome-gniazdo-ckm.svg",
+  "samuraj": "samuraj.svg",
+  "siekierezada": "siekierezada.svg",
+  "snajper": "snajper.svg",
+  "szachista": "szachista.svg",
+  "szkolenieWBroni": "szkolenie-w-broni.svg",
+  "szkolenieWCiezkimPancerzu": "szkolenie-w-ciezkim-pancerzu.svg",
+  "szkolenieWSrednimPancerzu": "szkolenie-w-srednim-pancerzu.svg",
+  "szturmowiec": "szturmowiec.svg",
+  "szybkiBill": "szybki-bill.svg",
+  "szybkiePalce": "szybkie-palce.svg",
+  "uczSieUcz": "ucz-sie-ucz.svg",
+  "ukrytyCel": "ukryty-cel.svg",
+  "wrestler": "wrestler.svg",
+  "zlomiarz": "zlomiarz.svg"
+});
+
 /** Where a Sztuczka's rules live in the rulebook material. */
 export const SZTUCZKI_SOURCE = "Tabele/Sztuczki.md";
 
@@ -663,7 +720,7 @@ export function sztuczkaItemData(key, { _id } = {}) {
   const data = {
     name: def.label,
     type: "feat",
-    img: "icons/svg/upgrade.svg",
+    img: SZTUCZKA_ICONS[key] ? `modules/${MODULE_ID}/icons/abilities/${SZTUCZKA_ICONS[key]}` : "icons/svg/upgrade.svg",
     system: {
       description: {
         value: `<p>${def.text}</p>${sztuczkaCoverageHtml(key)}`,

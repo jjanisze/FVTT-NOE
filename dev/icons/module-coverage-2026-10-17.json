@@ -24,7 +24,7 @@
       {
         "kind": "origin",
         "files": 12,
-        "missing": 2,
+        "missing": 0,
         "placeholders": 0
       },
       {
@@ -48,13 +48,14 @@
     ],
     "sztuczki": 53,
     "sztuczkiWithExistingArt": 53,
-    "sztuczkiBuilderUsesCoreFallback": true,
+    "sztuczkiBuilderUsesCoreFallback": false,
+    "sztuczkiFallbackEntries": 0,
     "bestiaryEntries": 342,
-    "bestiaryFallbackEntries": 80,
+    "bestiaryFallbackEntries": 0,
     "companionEntries": 23,
-    "companionFallbackEntries": 11,
-    "unresolvedBestiaryArtEntries": 7,
-    "newCompanionArtSubjects": 5,
+    "companionFallbackEntries": 0,
+    "unresolvedBestiaryArtEntries": 0,
+    "newCompanionArtSubjects": 0,
     "brokenConfiguredBestiaryPaths": 0,
     "checkedConditionAndMarkerImages": 30,
     "missingCanonicalStatusImages": 0,
@@ -1555,7 +1556,7 @@
       "label": "Nowy Jork",
       "source": "icons/pochodzenia/nowy-jork.svg",
       "variant": "default",
-      "exists": false,
+      "exists": true,
       "generatedPlaceholder": false
     },
     {
@@ -1564,7 +1565,7 @@
       "label": "Południowa Hegemonia",
       "source": "icons/pochodzenia/hegemonia.svg",
       "variant": "default",
-      "exists": false,
+      "exists": true,
       "generatedPlaceholder": false
     },
     {
@@ -2787,7 +2788,7 @@
     {
       "id": "aramis",
       "label": "Aramis",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/aramis.svg",
       "existingArt": [
         "icons/abilities/aramis.svg"
       ]
@@ -2795,7 +2796,7 @@
     {
       "id": "aspirynaIMietusy",
       "label": "Aspiryna i Miętusy",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/aspiryna-i-mietusy.svg",
       "existingArt": [
         "icons/abilities/aspiryna-i-mietusy.svg"
       ]
@@ -2803,7 +2804,7 @@
     {
       "id": "barbarka",
       "label": "Barbarka",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/barbarka.svg",
       "existingArt": [
         "icons/abilities/barbarka.svg"
       ]
@@ -2811,7 +2812,7 @@
     {
       "id": "bezTrzymanki",
       "label": "Bez trzymanki",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/bez-trzymanki.svg",
       "existingArt": [
         "icons/abilities/bez-trzymanki.svg"
       ]
@@ -2819,7 +2820,7 @@
     {
       "id": "benzynaZamiastKrwi",
       "label": "Benzyna zamiast krwi",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/benzyna-zamiast-krwi.svg",
       "existingArt": [
         "icons/abilities/benzyna-zamiast-krwi.svg"
       ]
@@ -2827,7 +2828,7 @@
     {
       "id": "ciszejNizCien",
       "label": "Ciszej niż cień",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/ciszej-niz-cien.svg",
       "existingArt": [
         "icons/abilities/ciszej-niz-cien.svg"
       ]
@@ -2835,7 +2836,7 @@
     {
       "id": "czlowiekPajak",
       "label": "Człowiek-pająk",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/czlowiek-pajak.svg",
       "existingArt": [
         "icons/abilities/czlowiek-pajak.svg"
       ]
@@ -2843,7 +2844,7 @@
     {
       "id": "cwiczenieCzyniMistrza",
       "label": "Ćwiczenie czyni mistrza",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/cwiczenie-czyni-mistrza.svg",
       "existingArt": [
         "icons/abilities/cwiczenie-czyni-mistrza.svg"
       ]
@@ -2851,7 +2852,7 @@
     {
       "id": "fabrykator",
       "label": "Fabrykator",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/fabrykator.svg",
       "existingArt": [
         "icons/abilities/fabrykator.svg"
       ]
@@ -2859,7 +2860,7 @@
     {
       "id": "fachowiec",
       "label": "Fachowiec",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/fachowiec.svg",
       "existingArt": [
         "icons/abilities/fachowiec.svg"
       ]
@@ -2867,7 +2868,7 @@
     {
       "id": "gradOlowiu",
       "label": "Grad ołowiu",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/grad-olowiu.svg",
       "existingArt": [
         "icons/abilities/grad-olowiu.svg"
       ]
@@ -2875,7 +2876,7 @@
     {
       "id": "grenadier",
       "label": "Grenadier",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/grenadier.svg",
       "existingArt": [
         "icons/abilities/grenadier.svg"
       ]
@@ -2883,7 +2884,7 @@
     {
       "id": "gunfight",
       "label": "Gunfight",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/gunfight.svg",
       "existingArt": [
         "icons/abilities/gunfight.svg"
       ]
@@ -2891,7 +2892,7 @@
     {
       "id": "immunitet",
       "label": "Immunitet",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/immunitet.svg",
       "existingArt": [
         "icons/abilities/immunitet.svg"
       ]
@@ -2899,7 +2900,7 @@
     {
       "id": "jestZajebiscie",
       "label": "Jest zajebiście",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/jest-zajebiscie.svg",
       "existingArt": [
         "icons/abilities/jest-zajebiscie.svg"
       ]
@@ -2907,7 +2908,7 @@
     {
       "id": "karateka",
       "label": "Karateka",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/karateka.svg",
       "existingArt": [
         "icons/abilities/karateka.svg"
       ]
@@ -2915,7 +2916,7 @@
     {
       "id": "kuloodpornosc",
       "label": "Kuloodporność",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/kuloodpornosc.svg",
       "existingArt": [
         "icons/abilities/kuloodpornosc.svg"
       ]
@@ -2923,7 +2924,7 @@
     {
       "id": "lawnik",
       "label": "Ławnik",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/lawnik.svg",
       "existingArt": [
         "icons/abilities/lawnik.svg"
       ]
@@ -2931,7 +2932,7 @@
     {
       "id": "miotacz",
       "label": "Miotacz",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/miotacz.svg",
       "existingArt": [
         "icons/abilities/miotacz.svg"
       ]
@@ -2939,7 +2940,7 @@
     {
       "id": "mistrzBroniBialej",
       "label": "Mistrz broni białej",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/mistrz-broni-bialej.svg",
       "existingArt": [
         "icons/abilities/mistrz-broni-bialej.svg"
       ]
@@ -2947,7 +2948,7 @@
     {
       "id": "mistrzWalkiWrecz",
       "label": "Mistrz walki wręcz",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/mistrz-walki-wrecz.svg",
       "existingArt": [
         "icons/abilities/mistrz-walki-wrecz.svg"
       ]
@@ -2955,7 +2956,7 @@
     {
       "id": "muzyk",
       "label": "Muzyk",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/muzyk.svg",
       "existingArt": [
         "icons/abilities/muzyk.svg"
       ]
@@ -2963,7 +2964,7 @@
     {
       "id": "neo",
       "label": "Neo",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/neo.svg",
       "existingArt": [
         "icons/abilities/neo.svg"
       ]
@@ -2971,7 +2972,7 @@
     {
       "id": "nozownik",
       "label": "Nożownik",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/nozownik.svg",
       "existingArt": [
         "icons/abilities/nozownik.svg"
       ]
@@ -2979,7 +2980,7 @@
     {
       "id": "padnijPowstan",
       "label": "Padnij/Powstań",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/padnij-powstan.svg",
       "existingArt": [
         "icons/abilities/padnij-powstan.svg"
       ]
@@ -2987,7 +2988,7 @@
     {
       "id": "pakowanie",
       "label": "Pakowanie",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/pakowanie.svg",
       "existingArt": [
         "icons/abilities/pakowanie.svg"
       ]
@@ -2995,7 +2996,7 @@
     {
       "id": "pancerny",
       "label": "Pancerny",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/pancerny.svg",
       "existingArt": [
         "icons/abilities/pancerny.svg"
       ]
@@ -3003,7 +3004,7 @@
     {
       "id": "panPlaster",
       "label": "Pan Plaster",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/pan-plaster.svg",
       "existingArt": [
         "icons/abilities/pan-plaster.svg"
       ]
@@ -3011,7 +3012,7 @@
     {
       "id": "patriota",
       "label": "Patriota",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/patriota.svg",
       "existingArt": [
         "icons/abilities/patriota.svg"
       ]
@@ -3019,7 +3020,7 @@
     {
       "id": "pewnaReka",
       "label": "Pewna ręka",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/pewna-reka.svg",
       "existingArt": [
         "icons/abilities/pewna-reka.svg"
       ]
@@ -3027,7 +3028,7 @@
     {
       "id": "pierwotnyInstynkt",
       "label": "Pierwotny instynkt",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/pierwotny-instynkt.svg",
       "existingArt": [
         "icons/abilities/pierwotny-instynkt.svg"
       ]
@@ -3035,7 +3036,7 @@
     {
       "id": "plugAndPlay",
       "label": "Plug & Play",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/plug-and-play.svg",
       "existingArt": [
         "icons/abilities/plug-and-play.svg"
       ]
@@ -3043,7 +3044,7 @@
     {
       "id": "przycelowanie",
       "label": "Przycelowanie",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/przycelowanie.svg",
       "existingArt": [
         "icons/abilities/przycelowanie.svg"
       ]
@@ -3051,7 +3052,7 @@
     {
       "id": "przydasie",
       "label": "Przydasie",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/przydasie.svg",
       "existingArt": [
         "icons/abilities/przydasie.svg"
       ]
@@ -3059,7 +3060,7 @@
     {
       "id": "pulpFiction",
       "label": "Pulp Fiction",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/pulp-fiction.svg",
       "existingArt": [
         "icons/abilities/pulp-fiction.svg"
       ]
@@ -3067,7 +3068,7 @@
     {
       "id": "robinHood",
       "label": "Robin Hood",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/robin-hood.svg",
       "existingArt": [
         "icons/abilities/robin-hood.svg"
       ]
@@ -3075,7 +3076,7 @@
     {
       "id": "rodeo",
       "label": "Rodeo",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/rodeo.svg",
       "existingArt": [
         "icons/abilities/rodeo.svg"
       ]
@@ -3083,7 +3084,7 @@
     {
       "id": "rozroba",
       "label": "Rozróba",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/rozroba.svg",
       "existingArt": [
         "icons/abilities/rozroba.svg"
       ]
@@ -3091,7 +3092,7 @@
     {
       "id": "ruchomeGniazdoCkm",
       "label": "Ruchome gniazdo CKM",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/ruchome-gniazdo-ckm.svg",
       "existingArt": [
         "icons/abilities/ruchome-gniazdo-ckm.svg"
       ]
@@ -3099,7 +3100,7 @@
     {
       "id": "samuraj",
       "label": "Samuraj",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/samuraj.svg",
       "existingArt": [
         "icons/abilities/samuraj.svg"
       ]
@@ -3107,7 +3108,7 @@
     {
       "id": "siekierezada",
       "label": "Siekierezada",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/siekierezada.svg",
       "existingArt": [
         "icons/abilities/siekierezada.svg"
       ]
@@ -3115,7 +3116,7 @@
     {
       "id": "snajper",
       "label": "Snajper",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/snajper.svg",
       "existingArt": [
         "icons/abilities/snajper.svg"
       ]
@@ -3123,7 +3124,7 @@
     {
       "id": "szachista",
       "label": "Szachista",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/szachista.svg",
       "existingArt": [
         "icons/abilities/szachista.svg"
       ]
@@ -3131,7 +3132,7 @@
     {
       "id": "szkolenieWBroni",
       "label": "Szkolenie w broni",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/szkolenie-w-broni.svg",
       "existingArt": [
         "icons/abilities/szkolenie-w-broni.svg"
       ]
@@ -3139,7 +3140,7 @@
     {
       "id": "szkolenieWCiezkimPancerzu",
       "label": "Szkolenie w ciężkim pancerzu",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/szkolenie-w-ciezkim-pancerzu.svg",
       "existingArt": [
         "icons/abilities/szkolenie-w-ciezkim-pancerzu.svg"
       ]
@@ -3147,7 +3148,7 @@
     {
       "id": "szkolenieWSrednimPancerzu",
       "label": "Szkolenie w średnim pancerzu",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/szkolenie-w-srednim-pancerzu.svg",
       "existingArt": [
         "icons/abilities/szkolenie-w-srednim-pancerzu.svg"
       ]
@@ -3155,7 +3156,7 @@
     {
       "id": "szturmowiec",
       "label": "Szturmowiec",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/szturmowiec.svg",
       "existingArt": [
         "icons/abilities/szturmowiec.svg"
       ]
@@ -3163,7 +3164,7 @@
     {
       "id": "szybkiBill",
       "label": "Szybki Bill",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/szybki-bill.svg",
       "existingArt": [
         "icons/abilities/szybki-bill.svg"
       ]
@@ -3171,7 +3172,7 @@
     {
       "id": "szybkiePalce",
       "label": "Szybkie palce",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/szybkie-palce.svg",
       "existingArt": [
         "icons/abilities/szybkie-palce.svg"
       ]
@@ -3179,7 +3180,7 @@
     {
       "id": "uczSieUcz",
       "label": "Ucz się, ucz",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/ucz-sie-ucz.svg",
       "existingArt": [
         "icons/abilities/ucz-sie-ucz.svg"
       ]
@@ -3187,7 +3188,7 @@
     {
       "id": "ukrytyCel",
       "label": "Ukryty cel",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/ukryty-cel.svg",
       "existingArt": [
         "icons/abilities/ukryty-cel.svg"
       ]
@@ -3195,7 +3196,7 @@
     {
       "id": "wrestler",
       "label": "Wrestler",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/wrestler.svg",
       "existingArt": [
         "icons/abilities/wrestler.svg"
       ]
@@ -3203,7 +3204,7 @@
     {
       "id": "zlomiarz",
       "label": "Złomiarz",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/zlomiarz.svg",
       "existingArt": [
         "icons/abilities/zlomiarz.svg"
       ]
@@ -3213,6 +3214,7 @@
     {
       "scope": "bestiary",
       "creatureId": "alahama",
+      "builderId": "alahama",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -3227,6 +3229,7 @@
     {
       "scope": "bestiary",
       "creatureId": "alahama",
+      "builderId": "alahama",
       "id": "czaszkohelm",
       "label": "Czaszkohełm",
       "kind": "feature",
@@ -3241,6 +3244,7 @@
     {
       "scope": "bestiary",
       "creatureId": "alahama",
+      "builderId": "alahama",
       "id": "furia",
       "label": "Furia",
       "kind": "feature",
@@ -3255,6 +3259,7 @@
     {
       "scope": "bestiary",
       "creatureId": "alahama",
+      "builderId": "alahama",
       "id": "regeneracja",
       "label": "Regeneracja",
       "kind": "feature",
@@ -3269,6 +3274,7 @@
     {
       "scope": "bestiary",
       "creatureId": "alahama",
+      "builderId": "alahama",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -3283,6 +3289,7 @@
     {
       "scope": "bestiary",
       "creatureId": "alahama",
+      "builderId": "alahama",
       "id": "miazdzenie",
       "label": "Miażdżenie",
       "kind": "feature",
@@ -3297,6 +3304,7 @@
     {
       "scope": "bestiary",
       "creatureId": "alahama",
+      "builderId": "alahama",
       "id": "szarza",
       "label": "Szarża",
       "kind": "feature",
@@ -3311,20 +3319,22 @@
     {
       "scope": "bestiary",
       "creatureId": "alahama",
+      "builderId": "alahama",
       "id": "piesc",
       "label": "Pięść",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/atak_bez_broni.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "alahama",
+      "builderId": "alahama",
       "id": "ryjossawka",
       "label": "Ryjossawka",
       "kind": "attack",
@@ -3339,6 +3349,7 @@
     {
       "scope": "bestiary",
       "creatureId": "biodroid",
+      "builderId": "biodroid",
       "id": "algorytm-czuwania",
       "label": "Algorytm czuwania",
       "kind": "feature",
@@ -3353,6 +3364,7 @@
     {
       "scope": "bestiary",
       "creatureId": "biodroid",
+      "builderId": "biodroid",
       "id": "autodestrukcja-30",
       "label": "Autodestrukcja (30%)",
       "kind": "feature",
@@ -3365,6 +3377,7 @@
     {
       "scope": "bestiary",
       "creatureId": "biodroid",
+      "builderId": "biodroid",
       "id": "brak-glowy",
       "label": "Brak głowy",
       "kind": "feature",
@@ -3379,6 +3392,7 @@
     {
       "scope": "bestiary",
       "creatureId": "biodroid",
+      "builderId": "biodroid",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -3393,6 +3407,7 @@
     {
       "scope": "bestiary",
       "creatureId": "biodroid",
+      "builderId": "biodroid",
       "id": "regeneracja",
       "label": "Regeneracja",
       "kind": "feature",
@@ -3407,6 +3422,7 @@
     {
       "scope": "bestiary",
       "creatureId": "biodroid",
+      "builderId": "biodroid",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -3421,21 +3437,23 @@
     {
       "scope": "bestiary",
       "creatureId": "biodroid",
+      "builderId": "biodroid",
       "id": "karabin-dluga-seria-4-walke",
       "label": "Karabin długa seria (4/walkę)",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/karabin_laserowy.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/karabin_laserowy.svg",
         "icons/weapons/heavy_machine_gun.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "biodroid",
+      "builderId": "biodroid",
       "id": "wycofanie-sie",
       "label": "Wycofanie się",
       "kind": "feature",
@@ -3450,34 +3468,37 @@
     {
       "scope": "bestiary",
       "creatureId": "biodroid",
+      "builderId": "biodroid",
       "id": "zadlo",
       "label": "Żądło",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/zadlo.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/zadlo.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "biodroid",
+      "builderId": "biodroid",
       "id": "karabin-laserowy",
       "label": "Karabin laserowy",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/karabin_laserowy.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/karabin_laserowy.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "bit-boy-przewodnik",
+      "builderId": "bit-boy-przewodnik",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -3492,6 +3513,7 @@
     {
       "scope": "bestiary",
       "creatureId": "bit-boy-przewodnik",
+      "builderId": "bit-boy-przewodnik",
       "id": "telepatia",
       "label": "Telepatia",
       "kind": "feature",
@@ -3506,6 +3528,7 @@
     {
       "scope": "bestiary",
       "creatureId": "bit-boy-przewodnik",
+      "builderId": "bit-boy-przewodnik",
       "id": "swiatlowstret",
       "label": "Światłowstręt",
       "kind": "feature",
@@ -3520,6 +3543,7 @@
     {
       "scope": "bestiary",
       "creatureId": "bit-boy-przewodnik",
+      "builderId": "bit-boy-przewodnik",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -3534,6 +3558,7 @@
     {
       "scope": "bestiary",
       "creatureId": "bit-boy-przewodnik",
+      "builderId": "bit-boy-przewodnik",
       "id": "psychiczny-krzyk",
       "label": "Psychiczny krzyk",
       "kind": "feature",
@@ -3548,6 +3573,7 @@
     {
       "scope": "bestiary",
       "creatureId": "bit-boy-przewodnik",
+      "builderId": "bit-boy-przewodnik",
       "id": "zauroczenie",
       "label": "Zauroczenie",
       "kind": "feature",
@@ -3562,20 +3588,22 @@
     {
       "scope": "bestiary",
       "creatureId": "bit-boy-przewodnik",
+      "builderId": "bit-boy-przewodnik",
       "id": "pazury",
       "label": "Pazury",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/pazury.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "bit-boys",
+      "builderId": "bit-boys",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -3590,6 +3618,7 @@
     {
       "scope": "bestiary",
       "creatureId": "bit-boys",
+      "builderId": "bit-boys",
       "id": "palcozerca",
       "label": "Palcożerca",
       "kind": "feature",
@@ -3604,6 +3633,7 @@
     {
       "scope": "bestiary",
       "creatureId": "bit-boys",
+      "builderId": "bit-boys",
       "id": "wspolpraca",
       "label": "Współpraca",
       "kind": "feature",
@@ -3618,6 +3648,7 @@
     {
       "scope": "bestiary",
       "creatureId": "bit-boys",
+      "builderId": "bit-boys",
       "id": "skok",
       "label": "Skok",
       "kind": "feature",
@@ -3632,6 +3663,7 @@
     {
       "scope": "bestiary",
       "creatureId": "bit-boys",
+      "builderId": "bit-boys",
       "id": "swiatlowstret",
       "label": "Światłowstręt",
       "kind": "feature",
@@ -3646,6 +3678,7 @@
     {
       "scope": "bestiary",
       "creatureId": "bit-boys",
+      "builderId": "bit-boys",
       "id": "unieruchomienie",
       "label": "Unieruchomienie",
       "kind": "feature",
@@ -3660,34 +3693,37 @@
     {
       "scope": "bestiary",
       "creatureId": "bit-boys",
+      "builderId": "bit-boys",
       "id": "pazury",
       "label": "Pazury",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/pazury.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "bit-boys",
+      "builderId": "bit-boys",
       "id": "ugryzienie",
       "label": "Ugryzienie",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/ugryzienie.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "cyngiel",
+      "builderId": "cyngiel",
       "id": "kuloodporny",
       "label": "Kuloodporny",
       "kind": "feature",
@@ -3702,6 +3738,7 @@
     {
       "scope": "bestiary",
       "creatureId": "cyngiel",
+      "builderId": "cyngiel",
       "id": "bolesny-atak",
       "label": "Bolesny atak",
       "kind": "feature",
@@ -3716,6 +3753,7 @@
     {
       "scope": "bestiary",
       "creatureId": "cyngiel",
+      "builderId": "cyngiel",
       "id": "pulp-fiction",
       "label": "Pulp Fiction",
       "kind": "feature",
@@ -3730,6 +3768,7 @@
     {
       "scope": "bestiary",
       "creatureId": "cyngiel",
+      "builderId": "cyngiel",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -3744,6 +3783,7 @@
     {
       "scope": "bestiary",
       "creatureId": "cyngiel",
+      "builderId": "cyngiel",
       "id": "celowanie",
       "label": "Celowanie",
       "kind": "feature",
@@ -3758,6 +3798,7 @@
     {
       "scope": "bestiary",
       "creatureId": "cyngiel",
+      "builderId": "cyngiel",
       "id": "tylko-drasniecie",
       "label": "Tylko draśnięcie",
       "kind": "feature",
@@ -3772,48 +3813,52 @@
     {
       "scope": "bestiary",
       "creatureId": "cyngiel",
+      "builderId": "cyngiel",
       "id": "szabla",
       "label": "Szabla",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/saber.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/saber.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "cyngiel",
+      "builderId": "cyngiel",
       "id": "noz-taktyczny",
       "label": "Nóż taktyczny",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/combat_knife.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/combat_knife.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "cyngiel",
+      "builderId": "cyngiel",
       "id": "desert-eagle",
       "label": "Desert Eagle",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/desert_eagle.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/desert_eagle.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "cywil",
+      "builderId": "cywil",
       "id": "potega-tlumu",
       "label": "Potęga tłumu",
       "kind": "feature",
@@ -3828,49 +3873,53 @@
     {
       "scope": "bestiary",
       "creatureId": "cywil",
+      "builderId": "cywil",
       "id": "rura-stalowa",
       "label": "Rura stalowa",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/iron_pipe_club.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/iron_pipe_club.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "cywil",
+      "builderId": "cywil",
       "id": "widly-tylko-farmer",
       "label": "Widły (tylko farmer)",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/pitchfork.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/pitchfork.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "cywil",
+      "builderId": "cywil",
       "id": "trzydziestka-osemka",
       "label": "Trzydziestka ósemka",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/m642_revolver.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/m642_revolver.svg",
         "icons/weapons/revolver.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "gangus-boss",
+      "builderId": "gangus-boss",
       "id": "brutalny-cios",
       "label": "Brutalny cios",
       "kind": "feature",
@@ -3885,6 +3934,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gangus-boss",
+      "builderId": "gangus-boss",
       "id": "szosty-zmysl",
       "label": "Szósty zmysł",
       "kind": "feature",
@@ -3899,6 +3949,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gangus-boss",
+      "builderId": "gangus-boss",
       "id": "gola-klata",
       "label": "Goła klata",
       "kind": "feature",
@@ -3913,6 +3964,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gangus-boss",
+      "builderId": "gangus-boss",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -3927,6 +3979,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gangus-boss",
+      "builderId": "gangus-boss",
       "id": "manewry",
       "label": "Manewry",
       "kind": "feature",
@@ -3941,34 +3994,37 @@
     {
       "scope": "bestiary",
       "creatureId": "gangus-boss",
+      "builderId": "gangus-boss",
       "id": "atak-bez-broni",
       "label": "Atak bez broni",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/atak_bez_broni.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/atak_bez_broni.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "gangus-boss",
+      "builderId": "gangus-boss",
       "id": "utwardzony-crash",
       "label": "Utwardzony Crash",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/crash_halberd.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/crash_halberd.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "gangus-kapo",
+      "builderId": "gangus-kapo",
       "id": "ofiara",
       "label": "Ofiara",
       "kind": "feature",
@@ -3983,6 +4039,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gangus-kapo",
+      "builderId": "gangus-kapo",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -3997,20 +4054,22 @@
     {
       "scope": "bestiary",
       "creatureId": "gangus-kapo",
+      "builderId": "gangus-kapo",
       "id": "uzi-dluga-seria-2-walke",
       "label": "UZI długa seria (2/walkę)",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/uzi.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/uzi.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "gangus-kapo",
+      "builderId": "gangus-kapo",
       "id": "manewry",
       "label": "Manewry",
       "kind": "feature",
@@ -4025,34 +4084,37 @@
     {
       "scope": "bestiary",
       "creatureId": "gangus-kapo",
+      "builderId": "gangus-kapo",
       "id": "bejsbol",
       "label": "Bejsbol",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/baseball_bat.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "gangus-kapo",
+      "builderId": "gangus-kapo",
       "id": "uzi",
       "label": "UZI",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/uzi.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/uzi.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "gangus-zolnierz",
+      "builderId": "gangus-zolnierz",
       "id": "wspolpraca",
       "label": "Współpraca",
       "kind": "feature",
@@ -4067,34 +4129,37 @@
     {
       "scope": "bestiary",
       "creatureId": "gangus-zolnierz",
+      "builderId": "gangus-zolnierz",
       "id": "bejsbol",
       "label": "Bejsbol",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/baseball_bat.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/baseball_bat.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "gangus-zolnierz",
+      "builderId": "gangus-zolnierz",
       "id": "peacemaker",
       "label": "Peacemaker",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/peacemaker_revolver.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/peacemaker_revolver.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "generacja-i-nocny-ghul",
+      "builderId": "generacja-i-nocny-ghul",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -4109,6 +4174,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-i-nocny-ghul",
+      "builderId": "generacja-i-nocny-ghul",
       "id": "niezniszczalnosc",
       "label": "Niezniszczalność",
       "kind": "feature",
@@ -4123,6 +4189,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-i-nocny-ghul",
+      "builderId": "generacja-i-nocny-ghul",
       "id": "poswiata",
       "label": "Poświata",
       "kind": "feature",
@@ -4137,6 +4204,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-i-nocny-ghul",
+      "builderId": "generacja-i-nocny-ghul",
       "id": "swiatlowstret",
       "label": "Światłowstręt",
       "kind": "feature",
@@ -4151,6 +4219,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-i-nocny-ghul",
+      "builderId": "generacja-i-nocny-ghul",
       "id": "pochwycenie",
       "label": "Pochwycenie",
       "kind": "feature",
@@ -4165,20 +4234,22 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-i-nocny-ghul",
+      "builderId": "generacja-i-nocny-ghul",
       "id": "ugryzienie",
       "label": "Ugryzienie",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/ugryzienie.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "generacja-ii-genotyp-gadzi",
+      "builderId": "generacja-ii-genotyp-gadzi",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -4193,6 +4264,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-ii-genotyp-gadzi",
+      "builderId": "generacja-ii-genotyp-gadzi",
       "id": "skora-gekona",
       "label": "Skóra gekona",
       "kind": "feature",
@@ -4207,6 +4279,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-ii-genotyp-gadzi",
+      "builderId": "generacja-ii-genotyp-gadzi",
       "id": "kamuflaz",
       "label": "Kamuflaż",
       "kind": "feature",
@@ -4221,6 +4294,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-ii-genotyp-gadzi",
+      "builderId": "generacja-ii-genotyp-gadzi",
       "id": "wstrzymanie-oddechu",
       "label": "Wstrzymanie oddechu",
       "kind": "feature",
@@ -4235,6 +4309,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-ii-genotyp-gadzi",
+      "builderId": "generacja-ii-genotyp-gadzi",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -4249,20 +4324,22 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-ii-genotyp-gadzi",
+      "builderId": "generacja-ii-genotyp-gadzi",
       "id": "ogon",
       "label": "Ogon",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/atak_ogonem.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/atak_ogonem.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "generacja-ii-genotyp-gadzi",
+      "builderId": "generacja-ii-genotyp-gadzi",
       "id": "jadowite-zeby",
       "label": "Jadowite zęby",
       "kind": "attack",
@@ -4277,6 +4354,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-ii-genotyp-wilczy",
+      "builderId": "generacja-ii-genotyp-wilczy",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -4291,6 +4369,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-ii-genotyp-wilczy",
+      "builderId": "generacja-ii-genotyp-wilczy",
       "id": "wspolpraca",
       "label": "Współpraca",
       "kind": "feature",
@@ -4305,6 +4384,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-ii-genotyp-wilczy",
+      "builderId": "generacja-ii-genotyp-wilczy",
       "id": "zmysly",
       "label": "Zmysły",
       "kind": "feature",
@@ -4319,6 +4399,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-ii-genotyp-wilczy",
+      "builderId": "generacja-ii-genotyp-wilczy",
       "id": "wataha",
       "label": "Wataha",
       "kind": "feature",
@@ -4333,6 +4414,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-ii-genotyp-wilczy",
+      "builderId": "generacja-ii-genotyp-wilczy",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -4347,6 +4429,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-ii-genotyp-wilczy",
+      "builderId": "generacja-ii-genotyp-wilczy",
       "id": "upiorne-wycie",
       "label": "Upiorne wycie",
       "kind": "feature",
@@ -4361,34 +4444,37 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-ii-genotyp-wilczy",
+      "builderId": "generacja-ii-genotyp-wilczy",
       "id": "pazury",
       "label": "Pazury",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/pazury.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "generacja-ii-genotyp-wilczy",
+      "builderId": "generacja-ii-genotyp-wilczy",
       "id": "zeby",
       "label": "Zęby",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/zeby.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/zeby.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-grubas",
+      "builderId": "generacja-iii-grubas",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -4403,6 +4489,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-grubas",
+      "builderId": "generacja-iii-grubas",
       "id": "nie-do-zabicia",
       "label": "Nie do zabicia",
       "kind": "feature",
@@ -4417,6 +4504,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-grubas",
+      "builderId": "generacja-iii-grubas",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -4431,20 +4519,22 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-grubas",
+      "builderId": "generacja-iii-grubas",
       "id": "lancuch",
       "label": "Łańcuch",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/chain.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/chain.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-grubas",
+      "builderId": "generacja-iii-grubas",
       "id": "agresja",
       "label": "Agresja",
       "kind": "feature",
@@ -4459,48 +4549,52 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-grubas",
+      "builderId": "generacja-iii-grubas",
       "id": "maczuga",
       "label": "Maczuga",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/maczuga.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/maczuga.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-grubas",
+      "builderId": "generacja-iii-grubas",
       "id": "oszczep-wrecz",
       "label": "Oszczep (wręcz)",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/spear.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/spear.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-grubas",
+      "builderId": "generacja-iii-grubas",
       "id": "oszczep-dystans",
       "label": "Oszczep (dystans)",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/spear.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/spear.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-szpieg",
+      "builderId": "generacja-iii-szpieg",
       "id": "wiele-twarzy",
       "label": "Wiele twarzy",
       "kind": "feature",
@@ -4515,6 +4609,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-szpieg",
+      "builderId": "generacja-iii-szpieg",
       "id": "kontakt-molocha",
       "label": "Kontakt Molocha",
       "kind": "feature",
@@ -4529,6 +4624,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-szpieg",
+      "builderId": "generacja-iii-szpieg",
       "id": "nadludzki-refleks",
       "label": "Nadludzki refleks",
       "kind": "feature",
@@ -4543,6 +4639,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-szpieg",
+      "builderId": "generacja-iii-szpieg",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -4557,6 +4654,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-szpieg",
+      "builderId": "generacja-iii-szpieg",
       "id": "ucieczka",
       "label": "Ucieczka",
       "kind": "feature",
@@ -4571,6 +4669,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-szpieg",
+      "builderId": "generacja-iii-szpieg",
       "id": "dmuchawka",
       "label": "Dmuchawka",
       "kind": "attack",
@@ -4586,6 +4685,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-szpieg",
+      "builderId": "generacja-iii-szpieg",
       "id": "stalowe-piesci",
       "label": "Stalowe pięści",
       "kind": "attack",
@@ -4600,6 +4700,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-techmutas",
+      "builderId": "generacja-iii-techmutas",
       "id": "przewidywanie",
       "label": "Przewidywanie",
       "kind": "feature",
@@ -4614,6 +4715,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-techmutas",
+      "builderId": "generacja-iii-techmutas",
       "id": "nie-do-zabicia",
       "label": "Nie do zabicia",
       "kind": "feature",
@@ -4628,6 +4730,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-techmutas",
+      "builderId": "generacja-iii-techmutas",
       "id": "nadludzki-refleks",
       "label": "Nadludzki refleks",
       "kind": "feature",
@@ -4642,6 +4745,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-techmutas",
+      "builderId": "generacja-iii-techmutas",
       "id": "atak-psychiczny",
       "label": "Atak psychiczny",
       "kind": "feature",
@@ -4656,6 +4760,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-techmutas",
+      "builderId": "generacja-iii-techmutas",
       "id": "paraliz-umyslu",
       "label": "Paraliż umysłu",
       "kind": "feature",
@@ -4670,6 +4775,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iii-techmutas",
+      "builderId": "generacja-iii-techmutas",
       "id": "druga-linia",
       "label": "Druga linia",
       "kind": "feature",
@@ -4684,6 +4790,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iv-mesmeryta",
+      "builderId": "generacja-iv-mesmeryta",
       "id": "sluga-molocha",
       "label": "Sługa Molocha",
       "kind": "feature",
@@ -4698,6 +4805,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iv-mesmeryta",
+      "builderId": "generacja-iv-mesmeryta",
       "id": "tarcza-umyslu",
       "label": "Tarcza umysłu",
       "kind": "feature",
@@ -4712,6 +4820,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iv-mesmeryta",
+      "builderId": "generacja-iv-mesmeryta",
       "id": "nadludzki-refleks",
       "label": "Nadludzki refleks",
       "kind": "feature",
@@ -4726,6 +4835,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iv-mesmeryta",
+      "builderId": "generacja-iv-mesmeryta",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -4740,6 +4850,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iv-mesmeryta",
+      "builderId": "generacja-iv-mesmeryta",
       "id": "szum-mentalny",
       "label": "Szum mentalny",
       "kind": "feature",
@@ -4754,6 +4865,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iv-mesmeryta",
+      "builderId": "generacja-iv-mesmeryta",
       "id": "paralizujacy-bol",
       "label": "Paraliżujący ból",
       "kind": "feature",
@@ -4768,6 +4880,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iv-mesmeryta",
+      "builderId": "generacja-iv-mesmeryta",
       "id": "posilki-2-dzien",
       "label": "Posiłki (2/dzień)",
       "kind": "feature",
@@ -4780,6 +4893,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iv-mesmeryta",
+      "builderId": "generacja-iv-mesmeryta",
       "id": "sciana-zaru",
       "label": "Ściana żaru",
       "kind": "feature",
@@ -4794,6 +4908,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iv-mesmeryta",
+      "builderId": "generacja-iv-mesmeryta",
       "id": "iluzoryczny-cel",
       "label": "Iluzoryczny cel",
       "kind": "feature",
@@ -4808,6 +4923,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iv-mesmeryta",
+      "builderId": "generacja-iv-mesmeryta",
       "id": "iluzoryczna-niewidzialnosc",
       "label": "Iluzoryczna niewidzialność",
       "kind": "feature",
@@ -4822,6 +4938,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iv-mesmeryta",
+      "builderId": "generacja-iv-mesmeryta",
       "id": "poklon-sie",
       "label": "Pokłoń się!",
       "kind": "feature",
@@ -4836,6 +4953,7 @@
     {
       "scope": "bestiary",
       "creatureId": "generacja-iv-mesmeryta",
+      "builderId": "generacja-iv-mesmeryta",
       "id": "stoj",
       "label": "Stój!",
       "kind": "feature",
@@ -4850,6 +4968,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gigamut",
+      "builderId": "gigamut",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -4864,6 +4983,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gigamut",
+      "builderId": "gigamut",
       "id": "taranowanie",
       "label": "Taranowanie",
       "kind": "attack",
@@ -4878,20 +4998,22 @@
     {
       "scope": "bestiary",
       "creatureId": "gigamut",
+      "builderId": "gigamut",
       "id": "rogi",
       "label": "Rogi",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/atak_glowa.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/atak_glowa.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "gigantyczny-pajak",
+      "builderId": "gigantyczny-pajak",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -4906,6 +5028,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gigantyczny-pajak",
+      "builderId": "gigantyczny-pajak",
       "id": "pajecza-wspinaczka",
       "label": "Pajęcza wspinaczka",
       "kind": "feature",
@@ -4920,6 +5043,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gigantyczny-pajak",
+      "builderId": "gigantyczny-pajak",
       "id": "tkacz-sieci",
       "label": "Tkacz sieci",
       "kind": "feature",
@@ -4934,6 +5058,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gigantyczny-pajak",
+      "builderId": "gigantyczny-pajak",
       "id": "skakun-opcjonalnie",
       "label": "Skakun (opcjonalnie)",
       "kind": "feature",
@@ -4946,6 +5071,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gigantyczny-pajak",
+      "builderId": "gigantyczny-pajak",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -4960,6 +5086,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gigantyczny-pajak",
+      "builderId": "gigantyczny-pajak",
       "id": "oplatanie",
       "label": "Oplątanie",
       "kind": "feature",
@@ -4974,34 +5101,37 @@
     {
       "scope": "bestiary",
       "creatureId": "gigantyczny-pajak",
+      "builderId": "gigantyczny-pajak",
       "id": "odnoze",
       "label": "Odnóże",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/odnoze_gigantyczny_pajak.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/odnoze_gigantyczny_pajak.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "gigantyczny-pajak",
+      "builderId": "gigantyczny-pajak",
       "id": "ugryzienie",
       "label": "Ugryzienie",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/ugryzienie.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "gladiator",
+      "builderId": "gladiator",
       "id": "algorytm-czuwania",
       "label": "Algorytm czuwania",
       "kind": "feature",
@@ -5016,6 +5146,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gladiator",
+      "builderId": "gladiator",
       "id": "autodestrukcja-80",
       "label": "Autodestrukcja (80%)",
       "kind": "feature",
@@ -5028,6 +5159,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gladiator",
+      "builderId": "gladiator",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -5042,6 +5174,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gladiator",
+      "builderId": "gladiator",
       "id": "stabilizator",
       "label": "Stabilizator",
       "kind": "feature",
@@ -5056,6 +5189,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gladiator",
+      "builderId": "gladiator",
       "id": "roznorodne-ataki",
       "label": "Różnorodne ataki",
       "kind": "feature",
@@ -5070,6 +5204,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gladiator",
+      "builderId": "gladiator",
       "id": "wirujace-kiscienie",
       "label": "Wirujące kiścienie",
       "kind": "feature",
@@ -5084,6 +5219,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gladiator",
+      "builderId": "gladiator",
       "id": "tanczace-pily",
       "label": "Tańczące piły",
       "kind": "feature",
@@ -5098,6 +5234,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gladiator",
+      "builderId": "gladiator",
       "id": "stalowe-maczugi",
       "label": "Stalowe maczugi",
       "kind": "feature",
@@ -5112,6 +5249,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gladiator",
+      "builderId": "gladiator",
       "id": "pily",
       "label": "Piły",
       "kind": "feature",
@@ -5126,6 +5264,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gladiator",
+      "builderId": "gladiator",
       "id": "stratowanie",
       "label": "Stratowanie",
       "kind": "feature",
@@ -5140,6 +5279,7 @@
     {
       "scope": "bestiary",
       "creatureId": "gladiator",
+      "builderId": "gladiator",
       "id": "parowanie",
       "label": "Parowanie",
       "kind": "feature",
@@ -5154,6 +5294,7 @@
     {
       "scope": "bestiary",
       "creatureId": "harpie-aka-wampiry",
+      "builderId": "harpie-aka-wampiry",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -5168,6 +5309,7 @@
     {
       "scope": "bestiary",
       "creatureId": "harpie-aka-wampiry",
+      "builderId": "harpie-aka-wampiry",
       "id": "wspolpraca",
       "label": "Współpraca",
       "kind": "feature",
@@ -5182,6 +5324,7 @@
     {
       "scope": "bestiary",
       "creatureId": "harpie-aka-wampiry",
+      "builderId": "harpie-aka-wampiry",
       "id": "pikowanie",
       "label": "Pikowanie",
       "kind": "feature",
@@ -5196,6 +5339,7 @@
     {
       "scope": "bestiary",
       "creatureId": "harpie-aka-wampiry",
+      "builderId": "harpie-aka-wampiry",
       "id": "swiatlowstret",
       "label": "Światłowstręt",
       "kind": "feature",
@@ -5210,6 +5354,7 @@
     {
       "scope": "bestiary",
       "creatureId": "harpie-aka-wampiry",
+      "builderId": "harpie-aka-wampiry",
       "id": "atak-wielokrotny",
       "label": "Atak Wielokrotny",
       "kind": "feature",
@@ -5224,6 +5369,7 @@
     {
       "scope": "bestiary",
       "creatureId": "harpie-aka-wampiry",
+      "builderId": "harpie-aka-wampiry",
       "id": "odstapienie",
       "label": "Odstąpienie",
       "kind": "feature",
@@ -5238,34 +5384,37 @@
     {
       "scope": "bestiary",
       "creatureId": "harpie-aka-wampiry",
+      "builderId": "harpie-aka-wampiry",
       "id": "pazury",
       "label": "Pazury",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/pazury.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "harpie-aka-wampiry",
+      "builderId": "harpie-aka-wampiry",
       "id": "ugryzienie-jesli-cel-jest-pochwycony",
       "label": "Ugryzienie (jeśli cel jest Pochwycony)",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/ugryzienie.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "juggernaut",
+      "builderId": "juggernaut",
       "id": "algorytm-czuwania",
       "label": "Algorytm czuwania",
       "kind": "feature",
@@ -5280,6 +5429,7 @@
     {
       "scope": "bestiary",
       "creatureId": "juggernaut",
+      "builderId": "juggernaut",
       "id": "autodestrukcja-100",
       "label": "Autodestrukcja (100%)",
       "kind": "feature",
@@ -5292,6 +5442,7 @@
     {
       "scope": "bestiary",
       "creatureId": "juggernaut",
+      "builderId": "juggernaut",
       "id": "burzyciel",
       "label": "Burzyciel",
       "kind": "feature",
@@ -5306,6 +5457,7 @@
     {
       "scope": "bestiary",
       "creatureId": "juggernaut",
+      "builderId": "juggernaut",
       "id": "groza",
       "label": "Groza",
       "kind": "feature",
@@ -5320,6 +5472,7 @@
     {
       "scope": "bestiary",
       "creatureId": "juggernaut",
+      "builderId": "juggernaut",
       "id": "malo-zwrotny",
       "label": "Mało zwrotny",
       "kind": "feature",
@@ -5334,6 +5487,7 @@
     {
       "scope": "bestiary",
       "creatureId": "juggernaut",
+      "builderId": "juggernaut",
       "id": "slaby-punkt",
       "label": "Słaby punkt",
       "kind": "feature",
@@ -5348,6 +5502,7 @@
     {
       "scope": "bestiary",
       "creatureId": "juggernaut",
+      "builderId": "juggernaut",
       "id": "wszedolaz",
       "label": "Wszędołaz",
       "kind": "feature",
@@ -5362,6 +5517,7 @@
     {
       "scope": "bestiary",
       "creatureId": "juggernaut",
+      "builderId": "juggernaut",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -5376,20 +5532,22 @@
     {
       "scope": "bestiary",
       "creatureId": "juggernaut",
+      "builderId": "juggernaut",
       "id": "karabin-dluga-seria-4-walke",
       "label": "Karabin długa seria (4/walkę)",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/heavy_machine_gun.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/heavy_machine_gun.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "juggernaut",
+      "builderId": "juggernaut",
       "id": "miotacz-ognia-4-walke",
       "label": "Miotacz ognia (4/walkę)",
       "kind": "feature",
@@ -5402,6 +5560,7 @@
     {
       "scope": "bestiary",
       "creatureId": "juggernaut",
+      "builderId": "juggernaut",
       "id": "najechanie",
       "label": "Najechanie",
       "kind": "feature",
@@ -5416,6 +5575,7 @@
     {
       "scope": "bestiary",
       "creatureId": "juggernaut",
+      "builderId": "juggernaut",
       "id": "zadymienie",
       "label": "Zadymienie",
       "kind": "feature",
@@ -5430,20 +5590,22 @@
     {
       "scope": "bestiary",
       "creatureId": "juggernaut",
+      "builderId": "juggernaut",
       "id": "pila-tarczowa",
       "label": "Piła tarczowa",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/pily.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/pily.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "juggernaut",
+      "builderId": "juggernaut",
       "id": "przejechanie",
       "label": "Przejechanie",
       "kind": "feature",
@@ -5458,20 +5620,22 @@
     {
       "scope": "bestiary",
       "creatureId": "juggernaut",
+      "builderId": "juggernaut",
       "id": "pila-tarczowa",
       "label": "Piła tarczowa",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/pily.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/pily.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "juggernaut",
+      "builderId": "juggernaut",
       "id": "dzialo-ppanc",
       "label": "Działo ppanc",
       "kind": "attack",
@@ -5486,20 +5650,22 @@
     {
       "scope": "bestiary",
       "creatureId": "juggernaut",
+      "builderId": "juggernaut",
       "id": "karabin-krotka-seria-6-walke",
       "label": "Karabin krótka seria (6/walkę)",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/heavy_machine_gun.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/heavy_machine_gun.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "kanibal",
+      "builderId": "kanibal",
       "id": "wspolpraca",
       "label": "Współpraca",
       "kind": "feature",
@@ -5514,63 +5680,68 @@
     {
       "scope": "bestiary",
       "creatureId": "kanibal",
+      "builderId": "kanibal",
       "id": "maczuga",
       "label": "Maczuga",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/maczuga.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/maczuga.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "kanibal",
+      "builderId": "kanibal",
       "id": "kamienny-noz",
       "label": "Kamienny nóż",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/kamienny_noz.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/kamienny_noz.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "kanibal",
+      "builderId": "kanibal",
       "id": "luk-tradycyjny",
       "label": "Łuk tradycyjny",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/bow.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/bow.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "kanibal",
+      "builderId": "kanibal",
       "id": "oszczep",
       "label": "Oszczep",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/javelin.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/javelin.svg",
         "icons/weapons/spear.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "kidnaper",
+      "builderId": "kidnaper",
       "id": "algorytm-czuwania",
       "label": "Algorytm czuwania",
       "kind": "feature",
@@ -5585,6 +5756,7 @@
     {
       "scope": "bestiary",
       "creatureId": "kidnaper",
+      "builderId": "kidnaper",
       "id": "autodestrukcja-70",
       "label": "Autodestrukcja (70%)",
       "kind": "feature",
@@ -5597,6 +5769,7 @@
     {
       "scope": "bestiary",
       "creatureId": "kidnaper",
+      "builderId": "kidnaper",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -5611,6 +5784,7 @@
     {
       "scope": "bestiary",
       "creatureId": "kidnaper",
+      "builderId": "kidnaper",
       "id": "porywacz",
       "label": "Porywacz",
       "kind": "feature",
@@ -5625,6 +5799,7 @@
     {
       "scope": "bestiary",
       "creatureId": "kidnaper",
+      "builderId": "kidnaper",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -5639,6 +5814,7 @@
     {
       "scope": "bestiary",
       "creatureId": "kidnaper",
+      "builderId": "kidnaper",
       "id": "taranowanie",
       "label": "Taranowanie",
       "kind": "feature",
@@ -5653,6 +5829,7 @@
     {
       "scope": "bestiary",
       "creatureId": "kidnaper",
+      "builderId": "kidnaper",
       "id": "ucieczka",
       "label": "Ucieczka",
       "kind": "feature",
@@ -5667,20 +5844,22 @@
     {
       "scope": "bestiary",
       "creatureId": "kidnaper",
+      "builderId": "kidnaper",
       "id": "paralizator",
       "label": "Paralizator",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/paralyzer.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/paralyzer.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "kidnaper",
+      "builderId": "kidnaper",
       "id": "miotacz-strzalek",
       "label": "Miotacz strzałek",
       "kind": "attack",
@@ -5695,6 +5874,7 @@
     {
       "scope": "bestiary",
       "creatureId": "kitchin",
+      "builderId": "kitchin",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -5709,6 +5889,7 @@
     {
       "scope": "bestiary",
       "creatureId": "kitchin",
+      "builderId": "kitchin",
       "id": "zamarcie",
       "label": "Zamarcie",
       "kind": "feature",
@@ -5723,6 +5904,7 @@
     {
       "scope": "bestiary",
       "creatureId": "kitchin",
+      "builderId": "kitchin",
       "id": "malutki",
       "label": "Malutki",
       "kind": "feature",
@@ -5737,20 +5919,22 @@
     {
       "scope": "bestiary",
       "creatureId": "kitchin",
+      "builderId": "kitchin",
       "id": "zadlo",
       "label": "Żądło",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/zadlo.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/zadlo.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "kon-skazony",
+      "builderId": "kon-skazony",
       "id": "odporny",
       "label": "Odporny",
       "kind": "feature",
@@ -5765,20 +5949,22 @@
     {
       "scope": "bestiary",
       "creatureId": "kon-skazony",
+      "builderId": "kon-skazony",
       "id": "kopyta",
       "label": "Kopyta",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/atak_kopytem.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/atak_kopytem.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "kon-teksanczyk",
+      "builderId": "kon-teksanczyk",
       "id": "wymagania",
       "label": "Wymagania",
       "kind": "feature",
@@ -5793,20 +5979,22 @@
     {
       "scope": "bestiary",
       "creatureId": "kon-teksanczyk",
+      "builderId": "kon-teksanczyk",
       "id": "kopyta",
       "label": "Kopyta",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/atak_kopytem.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/atak_kopytem.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "kon-zdrowy",
+      "builderId": "kon-zdrowy",
       "id": "wymagania",
       "label": "Wymagania",
       "kind": "feature",
@@ -5821,62 +6009,67 @@
     {
       "scope": "bestiary",
       "creatureId": "kon-zdrowy",
+      "builderId": "kon-zdrowy",
       "id": "kopyta",
       "label": "Kopyta",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/atak_kopytem.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/atak_kopytem.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "konwojent-straznik",
+      "builderId": "konwojent-straznik",
       "id": "tommy-gun-dluga-seria-2-walke",
       "label": "Tommy gun długa seria (2/walkę)",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/tommy_gun.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/tommy_gun.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "konwojent-straznik",
+      "builderId": "konwojent-straznik",
       "id": "palka-policyjna",
       "label": "Pałka policyjna",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/palka_policyjna.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/palka_policyjna.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "konwojent-straznik",
+      "builderId": "konwojent-straznik",
       "id": "tommy-gun",
       "label": "Tommy gun",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/tommy_gun.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/tommy_gun.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "korzec",
+      "builderId": "korzec",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -5891,6 +6084,7 @@
     {
       "scope": "bestiary",
       "creatureId": "korzec",
+      "builderId": "korzec",
       "id": "kamuflaz",
       "label": "Kamuflaż",
       "kind": "feature",
@@ -5905,6 +6099,7 @@
     {
       "scope": "bestiary",
       "creatureId": "korzec",
+      "builderId": "korzec",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -5919,6 +6114,7 @@
     {
       "scope": "bestiary",
       "creatureId": "korzec",
+      "builderId": "korzec",
       "id": "rzut",
       "label": "Rzut",
       "kind": "feature",
@@ -5933,6 +6129,7 @@
     {
       "scope": "bestiary",
       "creatureId": "korzec",
+      "builderId": "korzec",
       "id": "konar",
       "label": "Konar",
       "kind": "attack",
@@ -5947,6 +6144,7 @@
     {
       "scope": "bestiary",
       "creatureId": "korzec",
+      "builderId": "korzec",
       "id": "korzen",
       "label": "Korzeń",
       "kind": "attack",
@@ -5961,6 +6159,7 @@
     {
       "scope": "bestiary",
       "creatureId": "kurczak",
+      "builderId": "kurczak",
       "id": "algorytm-czuwania",
       "label": "Algorytm czuwania",
       "kind": "feature",
@@ -5975,6 +6174,7 @@
     {
       "scope": "bestiary",
       "creatureId": "kurczak",
+      "builderId": "kurczak",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -5989,6 +6189,7 @@
     {
       "scope": "bestiary",
       "creatureId": "kurczak",
+      "builderId": "kurczak",
       "id": "wspinaczka-po-metalu",
       "label": "Wspinaczka po metalu",
       "kind": "feature",
@@ -6003,20 +6204,22 @@
     {
       "scope": "bestiary",
       "creatureId": "kurczak",
+      "builderId": "kurczak",
       "id": "karabin-krotka-seria-10-walke",
       "label": "Karabin krótka seria (10/walkę)",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/mag_assault_rifle.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/mag_assault_rifle.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "lowca",
+      "builderId": "lowca",
       "id": "algorytm-czuwania",
       "label": "Algorytm czuwania",
       "kind": "feature",
@@ -6031,6 +6234,7 @@
     {
       "scope": "bestiary",
       "creatureId": "lowca",
+      "builderId": "lowca",
       "id": "autodestrukcja-50",
       "label": "Autodestrukcja (50%)",
       "kind": "feature",
@@ -6043,6 +6247,7 @@
     {
       "scope": "bestiary",
       "creatureId": "lowca",
+      "builderId": "lowca",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -6057,6 +6262,7 @@
     {
       "scope": "bestiary",
       "creatureId": "lowca",
+      "builderId": "lowca",
       "id": "skok-lowcy",
       "label": "Skok łowcy",
       "kind": "feature",
@@ -6071,6 +6277,7 @@
     {
       "scope": "bestiary",
       "creatureId": "lowca",
+      "builderId": "lowca",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -6085,6 +6292,7 @@
     {
       "scope": "bestiary",
       "creatureId": "lowca",
+      "builderId": "lowca",
       "id": "pochwycenie",
       "label": "Pochwycenie",
       "kind": "feature",
@@ -6099,20 +6307,22 @@
     {
       "scope": "bestiary",
       "creatureId": "lowca",
+      "builderId": "lowca",
       "id": "ostre-odnoze",
       "label": "Ostre odnóże",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/atak_odnogiem_spawacz.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/atak_odnogiem_spawacz.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "lowca",
+      "builderId": "lowca",
       "id": "spluniecie-kwasem",
       "label": "Splunięcie kwasem",
       "kind": "attack",
@@ -6127,6 +6337,7 @@
     {
       "scope": "bestiary",
       "creatureId": "megator",
+      "builderId": "megator",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -6141,6 +6352,7 @@
     {
       "scope": "bestiary",
       "creatureId": "megator",
+      "builderId": "megator",
       "id": "wstrzymanie-oddechu",
       "label": "Wstrzymanie oddechu",
       "kind": "feature",
@@ -6155,6 +6367,7 @@
     {
       "scope": "bestiary",
       "creatureId": "megator",
+      "builderId": "megator",
       "id": "legendarna-odpornosc-3-dzien",
       "label": "Legendarna odporność (3/dzień)",
       "kind": "feature",
@@ -6167,6 +6380,7 @@
     {
       "scope": "bestiary",
       "creatureId": "megator",
+      "builderId": "megator",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -6181,6 +6395,7 @@
     {
       "scope": "bestiary",
       "creatureId": "megator",
+      "builderId": "megator",
       "id": "zioniecie-2-walke",
       "label": "Zionięcie (2/walkę)",
       "kind": "feature",
@@ -6193,6 +6408,7 @@
     {
       "scope": "bestiary",
       "creatureId": "megator",
+      "builderId": "megator",
       "id": "polkniecie",
       "label": "Połknięcie",
       "kind": "feature",
@@ -6207,20 +6423,22 @@
     {
       "scope": "bestiary",
       "creatureId": "megator",
+      "builderId": "megator",
       "id": "ruch",
       "label": "Ruch",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/ruch.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/abilities/ruch.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "megator",
+      "builderId": "megator",
       "id": "atak-ogonem",
       "label": "Atak ogonem",
       "kind": "feature",
@@ -6235,34 +6453,37 @@
     {
       "scope": "bestiary",
       "creatureId": "megator",
+      "builderId": "megator",
       "id": "ogon",
       "label": "Ogon",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/atak_ogonem.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/atak_ogonem.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "megator",
+      "builderId": "megator",
       "id": "paszcza",
       "label": "Paszcza",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/paszcza.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/abilities/paszcza.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "mobsprzet",
+      "builderId": "mobsprzet",
       "id": "algorytm-czuwania",
       "label": "Algorytm czuwania",
       "kind": "feature",
@@ -6277,6 +6498,7 @@
     {
       "scope": "bestiary",
       "creatureId": "mobsprzet",
+      "builderId": "mobsprzet",
       "id": "autodestrukcja-100",
       "label": "Autodestrukcja (100%)",
       "kind": "feature",
@@ -6289,6 +6511,7 @@
     {
       "scope": "bestiary",
       "creatureId": "mobsprzet",
+      "builderId": "mobsprzet",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -6303,6 +6526,7 @@
     {
       "scope": "bestiary",
       "creatureId": "mobsprzet",
+      "builderId": "mobsprzet",
       "id": "atak",
       "label": "Atak",
       "kind": "feature",
@@ -6315,6 +6539,7 @@
     {
       "scope": "bestiary",
       "creatureId": "mrokoszczur",
+      "builderId": "mrokoszczur",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -6329,6 +6554,7 @@
     {
       "scope": "bestiary",
       "creatureId": "mrokoszczur",
+      "builderId": "mrokoszczur",
       "id": "czuly-wech",
       "label": "Czuły węch",
       "kind": "feature",
@@ -6343,6 +6569,7 @@
     {
       "scope": "bestiary",
       "creatureId": "mrokoszczur",
+      "builderId": "mrokoszczur",
       "id": "neozmysly",
       "label": "Neozmysły",
       "kind": "feature",
@@ -6357,6 +6584,7 @@
     {
       "scope": "bestiary",
       "creatureId": "mrokoszczur",
+      "builderId": "mrokoszczur",
       "id": "wrazliwosc-na-swiatlo",
       "label": "Wrażliwość na światło",
       "kind": "feature",
@@ -6371,6 +6599,7 @@
     {
       "scope": "bestiary",
       "creatureId": "mrokoszczur",
+      "builderId": "mrokoszczur",
       "id": "wspolpraca",
       "label": "Współpraca",
       "kind": "feature",
@@ -6385,6 +6614,7 @@
     {
       "scope": "bestiary",
       "creatureId": "mrokoszczur",
+      "builderId": "mrokoszczur",
       "id": "zakazenie",
       "label": "Zakażenie",
       "kind": "feature",
@@ -6399,20 +6629,22 @@
     {
       "scope": "bestiary",
       "creatureId": "mrokoszczur",
+      "builderId": "mrokoszczur",
       "id": "ugryzienie",
       "label": "Ugryzienie",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/ugryzienie.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "myslacy-szczur",
+      "builderId": "myslacy-szczur",
       "id": "neozmysly",
       "label": "Neozmysły",
       "kind": "feature",
@@ -6427,6 +6659,7 @@
     {
       "scope": "bestiary",
       "creatureId": "myslacy-szczur",
+      "builderId": "myslacy-szczur",
       "id": "telepatia",
       "label": "Telepatia",
       "kind": "feature",
@@ -6441,6 +6674,7 @@
     {
       "scope": "bestiary",
       "creatureId": "myslacy-szczur",
+      "builderId": "myslacy-szczur",
       "id": "wspolpraca",
       "label": "Współpraca",
       "kind": "feature",
@@ -6455,6 +6689,7 @@
     {
       "scope": "bestiary",
       "creatureId": "myslacy-szczur",
+      "builderId": "myslacy-szczur",
       "id": "szczurze-nozki",
       "label": "Szczurze nóżki",
       "kind": "feature",
@@ -6469,34 +6704,37 @@
     {
       "scope": "bestiary",
       "creatureId": "myslacy-szczur",
+      "builderId": "myslacy-szczur",
       "id": "luk",
       "label": "Łuk",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/bow.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/bow.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "myslacy-szczur",
+      "builderId": "myslacy-szczur",
       "id": "sztylet",
       "label": "Sztylet",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/sztylet.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/sztylet.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "neogator",
+      "builderId": "neogator",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -6511,6 +6749,7 @@
     {
       "scope": "bestiary",
       "creatureId": "neogator",
+      "builderId": "neogator",
       "id": "wstrzymanie-oddechu",
       "label": "Wstrzymanie oddechu",
       "kind": "feature",
@@ -6525,6 +6764,7 @@
     {
       "scope": "bestiary",
       "creatureId": "neogator",
+      "builderId": "neogator",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -6539,6 +6779,7 @@
     {
       "scope": "bestiary",
       "creatureId": "neogator",
+      "builderId": "neogator",
       "id": "miazdzenie",
       "label": "Miażdżenie",
       "kind": "feature",
@@ -6553,34 +6794,37 @@
     {
       "scope": "bestiary",
       "creatureId": "neogator",
+      "builderId": "neogator",
       "id": "ogon",
       "label": "Ogon",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/atak_ogonem.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/atak_ogonem.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "neogator",
+      "builderId": "neogator",
       "id": "paszcza",
       "label": "Paszcza",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/paszcza.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/abilities/paszcza.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "neokot",
+      "builderId": "neokot",
       "id": "skoczek",
       "label": "Skoczek",
       "kind": "feature",
@@ -6595,6 +6839,7 @@
     {
       "scope": "bestiary",
       "creatureId": "neokot",
+      "builderId": "neokot",
       "id": "wspolpraca",
       "label": "Współpraca",
       "kind": "feature",
@@ -6609,20 +6854,22 @@
     {
       "scope": "bestiary",
       "creatureId": "neokot",
+      "builderId": "neokot",
       "id": "pazury",
       "label": "Pazury",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/pazury.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/pazury.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "neoniedzwiedz",
+      "builderId": "neoniedzwiedz",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -6637,6 +6884,7 @@
     {
       "scope": "bestiary",
       "creatureId": "neoniedzwiedz",
+      "builderId": "neoniedzwiedz",
       "id": "zamaszysty-atak",
       "label": "Zamaszysty atak",
       "kind": "feature",
@@ -6651,6 +6899,7 @@
     {
       "scope": "bestiary",
       "creatureId": "neoniedzwiedz",
+      "builderId": "neoniedzwiedz",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -6665,6 +6914,7 @@
     {
       "scope": "bestiary",
       "creatureId": "neoniedzwiedz",
+      "builderId": "neoniedzwiedz",
       "id": "rozszarpanie",
       "label": "Rozszarpanie",
       "kind": "feature",
@@ -6679,6 +6929,7 @@
     {
       "scope": "bestiary",
       "creatureId": "neoniedzwiedz",
+      "builderId": "neoniedzwiedz",
       "id": "lapa",
       "label": "Łapa",
       "kind": "attack",
@@ -6691,20 +6942,22 @@
     {
       "scope": "bestiary",
       "creatureId": "neoniedzwiedz",
+      "builderId": "neoniedzwiedz",
       "id": "ugryzienie",
       "label": "Ugryzienie",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/ugryzienie.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "obronca",
+      "builderId": "obronca",
       "id": "algorytm-czuwania",
       "label": "Algorytm czuwania",
       "kind": "feature",
@@ -6719,6 +6972,7 @@
     {
       "scope": "bestiary",
       "creatureId": "obronca",
+      "builderId": "obronca",
       "id": "autodestrukcja-80",
       "label": "Autodestrukcja (80%)",
       "kind": "feature",
@@ -6731,6 +6985,7 @@
     {
       "scope": "bestiary",
       "creatureId": "obronca",
+      "builderId": "obronca",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -6745,6 +7000,7 @@
     {
       "scope": "bestiary",
       "creatureId": "obronca",
+      "builderId": "obronca",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -6759,20 +7015,22 @@
     {
       "scope": "bestiary",
       "creatureId": "obronca",
+      "builderId": "obronca",
       "id": "karabin-ppanc-dluga-seria-3-walke",
       "label": "Karabin ppanc długa seria (3/walkę)",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/heavy_sniper_rifle.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/heavy_sniper_rifle.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "obronca",
+      "builderId": "obronca",
       "id": "szarza",
       "label": "Szarża",
       "kind": "feature",
@@ -6787,6 +7045,7 @@
     {
       "scope": "bestiary",
       "creatureId": "obronca",
+      "builderId": "obronca",
       "id": "chwytak",
       "label": "Chwytak",
       "kind": "attack",
@@ -6801,20 +7060,22 @@
     {
       "scope": "bestiary",
       "creatureId": "obronca",
+      "builderId": "obronca",
       "id": "karabin-ppanc",
       "label": "Karabin ppanc",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/heavy_sniper_rifle.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/heavy_sniper_rifle.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "pajak",
+      "builderId": "pajak",
       "id": "algorytm-czuwania",
       "label": "Algorytm czuwania",
       "kind": "feature",
@@ -6829,6 +7090,7 @@
     {
       "scope": "bestiary",
       "creatureId": "pajak",
+      "builderId": "pajak",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -6843,6 +7105,7 @@
     {
       "scope": "bestiary",
       "creatureId": "pajak",
+      "builderId": "pajak",
       "id": "pokrycie-maskujace",
       "label": "Pokrycie maskujące",
       "kind": "feature",
@@ -6857,6 +7120,7 @@
     {
       "scope": "bestiary",
       "creatureId": "pajak",
+      "builderId": "pajak",
       "id": "zasadzka",
       "label": "Zasadzka",
       "kind": "feature",
@@ -6871,6 +7135,7 @@
     {
       "scope": "bestiary",
       "creatureId": "pajak",
+      "builderId": "pajak",
       "id": "pelna-obrona",
       "label": "Pełna obrona",
       "kind": "feature",
@@ -6885,20 +7150,22 @@
     {
       "scope": "bestiary",
       "creatureId": "pajak",
+      "builderId": "pajak",
       "id": "uklucie",
       "label": "Ukłucie",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/zadlo.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/zadlo.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "pies-bojowy",
+      "builderId": "pies-bojowy",
       "id": "wymagania",
       "label": "Wymagania",
       "kind": "feature",
@@ -6913,6 +7180,7 @@
     {
       "scope": "bestiary",
       "creatureId": "pies-bojowy",
+      "builderId": "pies-bojowy",
       "id": "doskonale-zmysly",
       "label": "Doskonałe zmysły",
       "kind": "feature",
@@ -6927,6 +7195,7 @@
     {
       "scope": "bestiary",
       "creatureId": "pies-bojowy",
+      "builderId": "pies-bojowy",
       "id": "wspolpraca",
       "label": "Współpraca",
       "kind": "feature",
@@ -6941,20 +7210,22 @@
     {
       "scope": "bestiary",
       "creatureId": "pies-bojowy",
+      "builderId": "pies-bojowy",
       "id": "ugryzienie",
       "label": "Ugryzienie",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/ugryzienie.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "pies-mutek",
+      "builderId": "pies-mutek",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -6969,6 +7240,7 @@
     {
       "scope": "bestiary",
       "creatureId": "pies-mutek",
+      "builderId": "pies-mutek",
       "id": "wspolpraca",
       "label": "Współpraca",
       "kind": "feature",
@@ -6983,6 +7255,7 @@
     {
       "scope": "bestiary",
       "creatureId": "pies-mutek",
+      "builderId": "pies-mutek",
       "id": "czuly-wech",
       "label": "Czuły węch",
       "kind": "feature",
@@ -6997,6 +7270,7 @@
     {
       "scope": "bestiary",
       "creatureId": "pies-mutek",
+      "builderId": "pies-mutek",
       "id": "szarpanie",
       "label": "Szarpanie",
       "kind": "feature",
@@ -7011,6 +7285,7 @@
     {
       "scope": "bestiary",
       "creatureId": "pies-mutek",
+      "builderId": "pies-mutek",
       "id": "pochwycenie",
       "label": "Pochwycenie",
       "kind": "feature",
@@ -7025,20 +7300,22 @@
     {
       "scope": "bestiary",
       "creatureId": "pies-mutek",
+      "builderId": "pies-mutek",
       "id": "ugryzienie",
       "label": "Ugryzienie",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/ugryzienie.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "pulser",
+      "builderId": "pulser",
       "id": "algorytm-czuwania",
       "label": "Algorytm czuwania",
       "kind": "feature",
@@ -7053,6 +7330,7 @@
     {
       "scope": "bestiary",
       "creatureId": "pulser",
+      "builderId": "pulser",
       "id": "autodestrukcja-20",
       "label": "Autodestrukcja (20%)",
       "kind": "feature",
@@ -7065,6 +7343,7 @@
     {
       "scope": "bestiary",
       "creatureId": "pulser",
+      "builderId": "pulser",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -7079,6 +7358,7 @@
     {
       "scope": "bestiary",
       "creatureId": "pulser",
+      "builderId": "pulser",
       "id": "eksplodujace-czyraki-10-dzien",
       "label": "Eksplodujące czyraki (10/dzień)",
       "kind": "feature",
@@ -7091,6 +7371,7 @@
     {
       "scope": "bestiary",
       "creatureId": "pulser",
+      "builderId": "pulser",
       "id": "przyspieszenie",
       "label": "Przyspieszenie",
       "kind": "feature",
@@ -7105,6 +7386,7 @@
     {
       "scope": "bestiary",
       "creatureId": "roj-szczurow",
+      "builderId": "roj-szczurow",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -7119,6 +7401,7 @@
     {
       "scope": "bestiary",
       "creatureId": "roj-szczurow",
+      "builderId": "roj-szczurow",
       "id": "czuly-wech",
       "label": "Czuły węch",
       "kind": "feature",
@@ -7133,6 +7416,7 @@
     {
       "scope": "bestiary",
       "creatureId": "roj-szczurow",
+      "builderId": "roj-szczurow",
       "id": "oblazenie",
       "label": "Obłażenie",
       "kind": "feature",
@@ -7147,6 +7431,7 @@
     {
       "scope": "bestiary",
       "creatureId": "roj-szczurow",
+      "builderId": "roj-szczurow",
       "id": "strach-przed-ogniem",
       "label": "Strach przed ogniem",
       "kind": "feature",
@@ -7161,6 +7446,7 @@
     {
       "scope": "bestiary",
       "creatureId": "roj-szczurow",
+      "builderId": "roj-szczurow",
       "id": "zacieklosc",
       "label": "Zaciekłość",
       "kind": "feature",
@@ -7175,6 +7461,7 @@
     {
       "scope": "bestiary",
       "creatureId": "roj-szczurow",
+      "builderId": "roj-szczurow",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -7189,34 +7476,37 @@
     {
       "scope": "bestiary",
       "creatureId": "roj-szczurow",
+      "builderId": "roj-szczurow",
       "id": "ugryzienie-pw-50",
       "label": "Ugryzienie (PW > 50%)",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/ugryzienie.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "roj-szczurow",
+      "builderId": "roj-szczurow",
       "id": "ugryzienie-pw-50",
       "label": "Ugryzienie (PW < 50%)",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/ugryzienie.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "spawacz",
+      "builderId": "spawacz",
       "id": "algorytm-czuwania",
       "label": "Algorytm czuwania",
       "kind": "feature",
@@ -7231,6 +7521,7 @@
     {
       "scope": "bestiary",
       "creatureId": "spawacz",
+      "builderId": "spawacz",
       "id": "naprawianie",
       "label": "Naprawianie",
       "kind": "feature",
@@ -7245,6 +7536,7 @@
     {
       "scope": "bestiary",
       "creatureId": "spawacz",
+      "builderId": "spawacz",
       "id": "spawanie",
       "label": "Spawanie",
       "kind": "feature",
@@ -7259,6 +7551,7 @@
     {
       "scope": "bestiary",
       "creatureId": "szczekowij",
+      "builderId": "szczekowij",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -7273,6 +7566,7 @@
     {
       "scope": "bestiary",
       "creatureId": "szczekowij",
+      "builderId": "szczekowij",
       "id": "brak-glowy",
       "label": "Brak głowy",
       "kind": "feature",
@@ -7287,6 +7581,7 @@
     {
       "scope": "bestiary",
       "creatureId": "szczekowij",
+      "builderId": "szczekowij",
       "id": "kamuflaz",
       "label": "Kamuflaż",
       "kind": "feature",
@@ -7301,6 +7596,7 @@
     {
       "scope": "bestiary",
       "creatureId": "szczekowij",
+      "builderId": "szczekowij",
       "id": "zasadzka",
       "label": "Zasadzka",
       "kind": "feature",
@@ -7315,6 +7611,7 @@
     {
       "scope": "bestiary",
       "creatureId": "szczekowij",
+      "builderId": "szczekowij",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -7329,6 +7626,7 @@
     {
       "scope": "bestiary",
       "creatureId": "szczekowij",
+      "builderId": "szczekowij",
       "id": "pochwycenie",
       "label": "Pochwycenie",
       "kind": "feature",
@@ -7343,6 +7641,7 @@
     {
       "scope": "bestiary",
       "creatureId": "szczekowij",
+      "builderId": "szczekowij",
       "id": "szczeki",
       "label": "Szczęki",
       "kind": "attack",
@@ -7357,6 +7656,7 @@
     {
       "scope": "bestiary",
       "creatureId": "szczekowij",
+      "builderId": "szczekowij",
       "id": "kolec-jadowy",
       "label": "Kolec jadowy",
       "kind": "attack",
@@ -7371,6 +7671,7 @@
     {
       "scope": "bestiary",
       "creatureId": "szeryf",
+      "builderId": "szeryf",
       "id": "to-moje-miasto",
       "label": "To moje miasto",
       "kind": "feature",
@@ -7385,6 +7686,7 @@
     {
       "scope": "bestiary",
       "creatureId": "szeryf",
+      "builderId": "szeryf",
       "id": "zastepcy-szeryfa",
       "label": "Zastępcy szeryfa",
       "kind": "feature",
@@ -7399,6 +7701,7 @@
     {
       "scope": "bestiary",
       "creatureId": "szeryf",
+      "builderId": "szeryf",
       "id": "gunfight",
       "label": "Gunfight",
       "kind": "feature",
@@ -7413,6 +7716,7 @@
     {
       "scope": "bestiary",
       "creatureId": "szeryf",
+      "builderId": "szeryf",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -7427,6 +7731,7 @@
     {
       "scope": "bestiary",
       "creatureId": "szeryf",
+      "builderId": "szeryf",
       "id": "poddaj-sie",
       "label": "Poddaj się!",
       "kind": "feature",
@@ -7441,48 +7746,52 @@
     {
       "scope": "bestiary",
       "creatureId": "szeryf",
+      "builderId": "szeryf",
       "id": "kastet",
       "label": "Kastet",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/brass_knuckles.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/brass_knuckles.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "szeryf",
+      "builderId": "szeryf",
       "id": "44-magnum",
       "label": ".44 Magnum",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/magnum_44.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/magnum_44.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "szeryf",
+      "builderId": "szeryf",
       "id": "lewar-m95",
       "label": "Lewar M95",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/lever_action_rifle.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/lever_action_rifle.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "taran",
+      "builderId": "taran",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -7497,6 +7806,7 @@
     {
       "scope": "bestiary",
       "creatureId": "taran",
+      "builderId": "taran",
       "id": "tropiciel",
       "label": "Tropiciel",
       "kind": "feature",
@@ -7511,6 +7821,7 @@
     {
       "scope": "bestiary",
       "creatureId": "taran",
+      "builderId": "taran",
       "id": "wytrwaly",
       "label": "Wytrwały",
       "kind": "feature",
@@ -7525,6 +7836,7 @@
     {
       "scope": "bestiary",
       "creatureId": "taran",
+      "builderId": "taran",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -7539,6 +7851,7 @@
     {
       "scope": "bestiary",
       "creatureId": "taran",
+      "builderId": "taran",
       "id": "natarcie",
       "label": "Natarcie",
       "kind": "feature",
@@ -7553,6 +7866,7 @@
     {
       "scope": "bestiary",
       "creatureId": "taran",
+      "builderId": "taran",
       "id": "szarza",
       "label": "Szarża",
       "kind": "feature",
@@ -7567,20 +7881,22 @@
     {
       "scope": "bestiary",
       "creatureId": "taran",
+      "builderId": "taran",
       "id": "ogon",
       "label": "Ogon",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/atak_ogonem.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/atak_ogonem.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "techmorwa-malutka",
+      "builderId": "techmorwa-malutka",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -7595,6 +7911,7 @@
     {
       "scope": "bestiary",
       "creatureId": "techmorwa-malutka",
+      "builderId": "techmorwa-malutka",
       "id": "niewykrywalnosc",
       "label": "Niewykrywalność",
       "kind": "feature",
@@ -7609,6 +7926,7 @@
     {
       "scope": "bestiary",
       "creatureId": "techmorwa-malutka",
+      "builderId": "techmorwa-malutka",
       "id": "macki",
       "label": "Macki",
       "kind": "feature",
@@ -7623,6 +7941,7 @@
     {
       "scope": "bestiary",
       "creatureId": "techmorwa-malutka",
+      "builderId": "techmorwa-malutka",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -7637,6 +7956,7 @@
     {
       "scope": "bestiary",
       "creatureId": "techmorwa-malutka",
+      "builderId": "techmorwa-malutka",
       "id": "kamuflaz",
       "label": "Kamuflaż",
       "kind": "feature",
@@ -7651,6 +7971,7 @@
     {
       "scope": "bestiary",
       "creatureId": "techmorwa-malutka",
+      "builderId": "techmorwa-malutka",
       "id": "owipozycja",
       "label": "Owipozycja",
       "kind": "feature",
@@ -7665,20 +7986,22 @@
     {
       "scope": "bestiary",
       "creatureId": "techmorwa-malutka",
+      "builderId": "techmorwa-malutka",
       "id": "macka",
       "label": "Macka",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/macka.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/macka.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "techmorwa-srednia",
+      "builderId": "techmorwa-srednia",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -7693,6 +8016,7 @@
     {
       "scope": "bestiary",
       "creatureId": "techmorwa-srednia",
+      "builderId": "techmorwa-srednia",
       "id": "kamuflaz",
       "label": "Kamuflaż",
       "kind": "feature",
@@ -7707,6 +8031,7 @@
     {
       "scope": "bestiary",
       "creatureId": "techmorwa-srednia",
+      "builderId": "techmorwa-srednia",
       "id": "macki",
       "label": "Macki",
       "kind": "feature",
@@ -7721,6 +8046,7 @@
     {
       "scope": "bestiary",
       "creatureId": "techmorwa-srednia",
+      "builderId": "techmorwa-srednia",
       "id": "niewykrywalnosc",
       "label": "Niewykrywalność",
       "kind": "feature",
@@ -7735,6 +8061,7 @@
     {
       "scope": "bestiary",
       "creatureId": "techmorwa-srednia",
+      "builderId": "techmorwa-srednia",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -7749,6 +8076,7 @@
     {
       "scope": "bestiary",
       "creatureId": "techmorwa-srednia",
+      "builderId": "techmorwa-srednia",
       "id": "pochwycenie",
       "label": "Pochwycenie",
       "kind": "feature",
@@ -7763,20 +8091,22 @@
     {
       "scope": "bestiary",
       "creatureId": "techmorwa-srednia",
+      "builderId": "techmorwa-srednia",
       "id": "macka",
       "label": "Macka",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/macka.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/macka.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "zolnierz-posterunku",
+      "builderId": "zolnierz-posterunku",
       "id": "taktyka",
       "label": "Taktyka",
       "kind": "feature",
@@ -7791,6 +8121,7 @@
     {
       "scope": "bestiary",
       "creatureId": "zolnierz-posterunku",
+      "builderId": "zolnierz-posterunku",
       "id": "wrog-molocha",
       "label": "Wróg Molocha",
       "kind": "feature",
@@ -7805,6 +8136,7 @@
     {
       "scope": "bestiary",
       "creatureId": "zolnierz-posterunku",
+      "builderId": "zolnierz-posterunku",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -7819,20 +8151,22 @@
     {
       "scope": "bestiary",
       "creatureId": "zolnierz-posterunku",
+      "builderId": "zolnierz-posterunku",
       "id": "ar-dluga-seria-2-walke",
       "label": "AR długa seria (2/walkę)",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/armalite_carbine.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/armalite_carbine.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "zolnierz-posterunku",
+      "builderId": "zolnierz-posterunku",
       "id": "szybkie-palce",
       "label": "Szybkie palce",
       "kind": "feature",
@@ -7847,34 +8181,37 @@
     {
       "scope": "bestiary",
       "creatureId": "zolnierz-posterunku",
+      "builderId": "zolnierz-posterunku",
       "id": "mlotek",
       "label": "Młotek",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/mlotek.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/mlotek.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "zolnierz-posterunku",
+      "builderId": "zolnierz-posterunku",
       "id": "ar",
       "label": "AR",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/armalite_carbine.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/armalite_carbine.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "zombie-nakladka-death-breath",
+      "builderId": "zombie-nakladka-death-breath",
       "id": "pierwsze-spotkanie",
       "label": "Pierwsze spotkanie",
       "kind": "feature",
@@ -7889,20 +8226,22 @@
     {
       "scope": "bestiary",
       "creatureId": "zombie-nakladka-death-breath",
+      "builderId": "zombie-nakladka-death-breath",
       "id": "macki",
       "label": "Macki",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/macki.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/macki.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "zombie-nakladka-death-breath",
+      "builderId": "zombie-nakladka-death-breath",
       "id": "tylko-zwarcie",
       "label": "Tylko zwarcie",
       "kind": "feature",
@@ -7917,6 +8256,7 @@
     {
       "scope": "bestiary",
       "creatureId": "zombie-nakladka-death-breath",
+      "builderId": "zombie-nakladka-death-breath",
       "id": "trzeba-dobic",
       "label": "Trzeba dobić",
       "kind": "feature",
@@ -7931,6 +8271,7 @@
     {
       "scope": "bestiary",
       "creatureId": "zombie-nakladka-death-breath",
+      "builderId": "zombie-nakladka-death-breath",
       "id": "atak-wielokrotny",
       "label": "Atak wielokrotny",
       "kind": "feature",
@@ -7945,46 +8286,52 @@
     {
       "scope": "bestiary",
       "creatureId": "zombie-nakladka-death-breath",
+      "builderId": "zombie-nakladka-death-breath",
       "id": "macka",
       "label": "Macka",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/macka.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/macka.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "bestiary",
       "creatureId": "zombie-nakladka-death-breath",
+      "builderId": "zombie-nakladka-death-breath",
       "id": "ugryzienie",
       "label": "Ugryzienie",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/ugryzienie.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "companion",
       "creatureId": "zmutowany-owad",
+      "builderId": "towarzysz-zmutowany-owad",
       "id": "kopacz",
       "label": "Kopacz",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/kopacz.svg",
       "configuredExists": true,
-      "existingArt": [],
-      "needsWiring": true,
-      "unresolvedArt": true
+      "existingArt": [
+        "icons/abilities/kopacz.svg"
+      ],
+      "needsWiring": false,
+      "unresolvedArt": false
     },
     {
       "scope": "companion",
       "creatureId": "zmutowany-owad",
+      "builderId": "towarzysz-zmutowany-owad",
       "id": "pajecza-wspinaczka",
       "label": "Pajęcza wspinaczka",
       "kind": "feature",
@@ -7999,6 +8346,7 @@
     {
       "scope": "companion",
       "creatureId": "zmutowany-owad",
+      "builderId": "towarzysz-zmutowany-owad",
       "id": "udzwig",
       "label": "Udźwig",
       "kind": "feature",
@@ -8013,20 +8361,22 @@
     {
       "scope": "companion",
       "creatureId": "zmutowany-owad",
+      "builderId": "towarzysz-zmutowany-owad",
       "id": "ukaszenie",
       "label": "Ukąszenie",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/ugryzienie.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "companion",
       "creatureId": "zmutowany-ssak",
+      "builderId": "towarzysz-zmutowany-ssak",
       "id": "doskonale-zmysly",
       "label": "Doskonałe zmysły",
       "kind": "feature",
@@ -8041,6 +8391,7 @@
     {
       "scope": "companion",
       "creatureId": "zmutowany-ssak",
+      "builderId": "towarzysz-zmutowany-ssak",
       "id": "wspolpraca",
       "label": "Współpraca",
       "kind": "feature",
@@ -8055,6 +8406,7 @@
     {
       "scope": "companion",
       "creatureId": "zmutowany-ssak",
+      "builderId": "towarzysz-zmutowany-ssak",
       "id": "udzwig",
       "label": "Udźwig",
       "kind": "feature",
@@ -8069,32 +8421,37 @@
     {
       "scope": "companion",
       "creatureId": "zmutowany-ssak",
+      "builderId": "towarzysz-zmutowany-ssak",
       "id": "atak-konczyna",
       "label": "Atak kończyną",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/lapa_neoniedzwiedzia.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/lapa_neoniedzwiedzia.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "companion",
       "creatureId": "zmutowany-gad",
+      "builderId": "towarzysz-zmutowany-gad",
       "id": "ziemnowodny",
       "label": "Ziemnowodny",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/ziemnowodny.svg",
       "configuredExists": true,
-      "existingArt": [],
-      "needsWiring": true,
-      "unresolvedArt": true
+      "existingArt": [
+        "icons/abilities/ziemnowodny.svg"
+      ],
+      "needsWiring": false,
+      "unresolvedArt": false
     },
     {
       "scope": "companion",
       "creatureId": "zmutowany-gad",
+      "builderId": "towarzysz-zmutowany-gad",
       "id": "udzwig",
       "label": "Udźwig",
       "kind": "feature",
@@ -8109,20 +8466,22 @@
     {
       "scope": "companion",
       "creatureId": "zmutowany-gad",
+      "builderId": "towarzysz-zmutowany-gad",
       "id": "ugryzienie",
       "label": "Ugryzienie",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/ugryzienie.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "companion",
       "creatureId": "psi-partner",
+      "builderId": "towarzysz-psi-partner",
       "id": "doskonale-zmysly",
       "label": "Doskonałe zmysły",
       "kind": "feature",
@@ -8137,6 +8496,7 @@
     {
       "scope": "companion",
       "creatureId": "psi-partner",
+      "builderId": "towarzysz-psi-partner",
       "id": "wspolpraca",
       "label": "Współpraca",
       "kind": "feature",
@@ -8151,18 +8511,22 @@
     {
       "scope": "companion",
       "creatureId": "psi-partner",
+      "builderId": "towarzysz-psi-partner",
       "id": "psi-bohater",
       "label": "Psi bohater",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/psi-bohater.svg",
       "configuredExists": true,
-      "existingArt": [],
-      "needsWiring": true,
-      "unresolvedArt": true
+      "existingArt": [
+        "icons/abilities/psi-bohater.svg"
+      ],
+      "needsWiring": false,
+      "unresolvedArt": false
     },
     {
       "scope": "companion",
       "creatureId": "psi-partner",
+      "builderId": "towarzysz-psi-partner",
       "id": "wymagania",
       "label": "Wymagania",
       "kind": "feature",
@@ -8177,6 +8541,7 @@
     {
       "scope": "companion",
       "creatureId": "psi-partner",
+      "builderId": "towarzysz-psi-partner",
       "id": "udzwig",
       "label": "Udźwig",
       "kind": "feature",
@@ -8191,32 +8556,37 @@
     {
       "scope": "companion",
       "creatureId": "psi-partner",
+      "builderId": "towarzysz-psi-partner",
       "id": "ugryzienie",
       "label": "Ugryzienie",
       "kind": "attack",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/weapons/ugryzienie.svg",
       "configuredExists": true,
       "existingArt": [
         "icons/weapons/ugryzienie.svg"
       ],
-      "needsWiring": true,
+      "needsWiring": false,
       "unresolvedArt": false
     },
     {
       "scope": "companion",
       "creatureId": "dron-kroczacy",
+      "builderId": "towarzysz-dron-kroczacy",
       "id": "modyfikacje",
       "label": "Modyfikacje",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/modyfikacje-drona.svg",
       "configuredExists": true,
-      "existingArt": [],
-      "needsWiring": true,
-      "unresolvedArt": true
+      "existingArt": [
+        "icons/abilities/modyfikacje-drona.svg"
+      ],
+      "needsWiring": false,
+      "unresolvedArt": false
     },
     {
       "scope": "companion",
       "creatureId": "dron-kroczacy",
+      "builderId": "towarzysz-dron-kroczacy",
       "id": "udzwig",
       "label": "Udźwig",
       "kind": "feature",
@@ -8231,30 +8601,37 @@
     {
       "scope": "companion",
       "creatureId": "dron-kroczacy",
+      "builderId": "towarzysz-dron-kroczacy",
       "id": "atak",
       "label": "Atak",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/atak-drona.svg",
       "configuredExists": true,
-      "existingArt": [],
-      "needsWiring": true,
-      "unresolvedArt": true
+      "existingArt": [
+        "icons/abilities/atak-drona.svg"
+      ],
+      "needsWiring": false,
+      "unresolvedArt": false
     },
     {
       "scope": "companion",
       "creatureId": "dron-latajacy",
+      "builderId": "towarzysz-dron-latajacy",
       "id": "modyfikacje",
       "label": "Modyfikacje",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/modyfikacje-drona.svg",
       "configuredExists": true,
-      "existingArt": [],
-      "needsWiring": true,
-      "unresolvedArt": true
+      "existingArt": [
+        "icons/abilities/modyfikacje-drona.svg"
+      ],
+      "needsWiring": false,
+      "unresolvedArt": false
     },
     {
       "scope": "companion",
       "creatureId": "dron-latajacy",
+      "builderId": "towarzysz-dron-latajacy",
       "id": "udzwig",
       "label": "Udźwig",
       "kind": "feature",
@@ -8269,14 +8646,17 @@
     {
       "scope": "companion",
       "creatureId": "dron-latajacy",
+      "builderId": "towarzysz-dron-latajacy",
       "id": "atak",
       "label": "Atak",
       "kind": "feature",
-      "configured": "icons/svg/upgrade.svg",
+      "configured": "modules/neuroshima-2026-overrides/icons/abilities/atak-drona.svg",
       "configuredExists": true,
-      "existingArt": [],
-      "needsWiring": true,
-      "unresolvedArt": true
+      "existingArt": [
+        "icons/abilities/atak-drona.svg"
+      ],
+      "needsWiring": false,
+      "unresolvedArt": false
     }
   ],
   "coreStatuses": [
@@ -8457,18 +8837,19 @@
     {
       "id": "wylaczony",
       "label": "Wyłączony",
-      "source": "icons/svg/lightning.svg",
+      "source": "modules/neuroshima-2026-overrides/icons/statuses/wylaczony.svg",
       "exists": true
     }
   ],
   "literalMissing": [],
   "sourceHashes": {
-    "dev/packs/build-packs.mjs": "225e78c7dbc778ca80a6a44426051123dc58ad6385e2fdde4a3daef6bdd9a65e",
+    "dev/packs/build-packs.mjs": "056fd2b3ca79bae4b54a9e6538e38986ad9b8523794c6d0cfde5c900bbb78609",
     "scripts/config/classes-data.mjs": "6f8c88ef699a930f6f6bd2608e590a01889b1e87a5b22cd1b2884806fb0997ef",
     "scripts/config/class-features-data.mjs": "ecf7c493a1480986242213d02fd58ab0245808556ac5a75fc257f071fbd69457",
-    "scripts/config/sztuczki-data.mjs": "89f74e85e2c5c696a8bd8bfc044d619ce36d6c22445e38fcc6969f0c223188bc",
+    "scripts/config/sztuczki-data.mjs": "0ab992794aeaa4be4d8fd750e676f7872102515a5e4b55ea5964a2d7bb5bb843",
     "scripts/config/bestiary-data.mjs": "62faa722a9af96d80eca49cc4755fa8e646d4b0ab3a48004d9bef8cad2534939",
     "scripts/config/towarzysze-data.mjs": "5e7d8ff3e63e6c1128fdd9baa1c2c853bb625c8436cf98ca6e155f6768bda2ee",
-    "scripts/config/conditions.mjs": "08c60ebecfd2b819fdf60031d2dfe7e2583d1cc845cf7f40f420fe2f744e1043"
+    "scripts/config/conditions.mjs": "dab67639cc464a16b606647bf1c556545cf7e864ba956de04b78ea609c3627c5",
+    "dev/packs/build-towarzysze.mjs": "744cd3ac9e68b555f776a180a2b799fd6913422038c0646d05e360651603ce84"
   }
 }

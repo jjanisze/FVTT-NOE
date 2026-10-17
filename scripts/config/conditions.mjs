@@ -299,7 +299,7 @@ export const NEUROSHIMA_MARKERS = Object.freeze({
   // naprawy”, s. 214), wyczerpany akumulator (s. 83). Przyczyny i zdejmowanie — `combat/maszyny.mjs`.
   wylaczony: {
     name: "Wyłączony",
-    img: "icons/svg/lightning.svg",
+    img: `${OWN}/wylaczony.svg`,
     description: "<p>Maszyna nie działa: nie wykonuje akcji ani reakcji i nie porusza się. Wraca, gdy zniknie przyczyna — "
       + "naprawa ponad 0 PW, naprawa awarii 19 albo nowy akumulator.</p>",
     statuses: ["incapacitated"]

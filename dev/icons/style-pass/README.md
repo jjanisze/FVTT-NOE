@@ -1,6 +1,14 @@
 # Icon style and origin revisions
 
-Current queue: **Batch 111 contains two origin revisions and five new
+**Complete, 2026-10-17:** all seven final selections are installed and all
+544 review cards resolved. Source wiring is complete for Sztuczki,
+bestiary/companion entries, fuel grades, medic refill and Wyłączony.
+No additional glyph generation is queued. Nowy Jork preserves the chosen
+earlier Batch 110 design. See `../completed-2026-10-17.json` and
+`../BROAD_COVERAGE.md`. Only GM pack rebuilds and old-world repoints remain.
+The preparation and publication notes below are historical.
+
+Final prepared queue: **Batch 111 contains two origin revisions and five new
 companion glyphs**. The expanded audit found no other artwork gaps in
 the inspected canonical categories; existing-art wiring remains for
 Sztuczki, bestiary/companion entries and four physical item fallbacks.

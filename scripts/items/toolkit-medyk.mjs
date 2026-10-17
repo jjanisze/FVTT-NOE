@@ -61,11 +61,8 @@ const HEAL_COLOR = "#39ff14";     // bright green
 const REFILL_MARKER = "medykRefill";          // bool — identifies a refill-kit item
 const REFILL_USE_ID = "medyk-refill-uzyj";
 const REFILL_NAME = "Uzupełnienie Narzędzi Małego Medyka";
-// TODO(icons): no dedicated art commissioned yet — core Foundry heal icon as an honest interim
-// placeholder (same "not a finished-art claim" role `hazard.svg` plays for gear-data.mjs's own
-// TODO stubs), rather than borrowing Medpak's specific icon and risking two different items
-// reading as the same thing in an inventory list that could plausibly hold both at once.
-const REFILL_IMG = "icons/svg/heal.svg";
+// Approved refill-kit art stays distinct from Medpak's treatment icon.
+const REFILL_IMG = "modules/neuroshima-2026-overrides/icons/items/loot/uzupelnienie_medyka.svg";
 const REFILL_PRICE = REFILL_COST; // 5 gb — RAW, same number the doc comment above already quoted.
 const REFILL_WEIGHT = 0.5;        // kg — GM estimate, not in RAW (book gives no weight for this kit).
 const REFILL_AVAIL = 50;          // % — GM estimate, not in RAW.

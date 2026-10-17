@@ -1,21 +1,16 @@
 # Canonical item icon coverage — refreshed 2026-10-17
 
-Expanded audit: [BROAD_COVERAGE.md](BROAD_COVERAGE.md) also checks classes,
-professions, Sztuczki, bestiary entries, companions, Fant groups and status
-images. It found five companion glyph subjects outside this physical-item
-scope; they are now in Batch 111. Fresh item evidence remains zero art
-gaps and four wiring gaps in `catalog-icons-2026-10-17-final-audit.json`.
+Final integration: **333/333 catalog entries resolve to native module art**.
+The three fuel grades and medic toolkit refill are now wired to their
+existing approved assets. There are zero art gaps and zero source wiring
+gaps. The expanded audit in [BROAD_COVERAGE.md](BROAD_COVERAGE.md) also
+confirms complete class, origin, feat, bestiary and companion artwork.
 
-Fresh source audit: **333 physical-item results, zero missing artwork**.
-329 entries already resolve to custom module art. Four retain core fallback
-images even though their approved assets exist: the three fuel grades and
-the medic toolkit refill. These are the four existing GM wiring tasks under
-MISSING's "Do podpięcia"; no further image generation is required for them.
 All 35 chemistry entries have custom art; all 23 medicines have distinct
 icon paths and hashes, including Reminex.
 
-Current evidence: [catalog-icons-2026-10-17.json](catalog-icons-2026-10-17.json).
-Run `node dev/icons/audit-catalog-icons.mjs --date=2026-10-17` to reproduce.
+Current evidence: [catalog-icons-2026-10-17-integrated.json](catalog-icons-2026-10-17-integrated.json).
+Run `node dev/icons/audit-catalog-icons.mjs --date=2026-10-17 --output=catalog-icons-2026-10-17-integrated.json` to reproduce.
 This covers canonical physical items, not origin backgrounds, arbitrary
 older world copies or already-built compendia. See
 [ORIGIN_COVERAGE.md](ORIGIN_COVERAGE.md) for the separately discovered

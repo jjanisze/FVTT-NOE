@@ -68,6 +68,9 @@ const PRODUCTION_SPRZET = Object.freeze(Object.fromEntries(
 
 /** Ikony przedmiotów z cennika, które już mają grafikę; reszta — `dev/icons/MISSING.md`. */
 const RAW_IKONY = Object.freeze({
+  "paliwo-dobre": "paliwo_dobre.svg",
+  "paliwo-przecietne": "paliwo_przecietne.svg",
+  "paliwo-chrzczone": "paliwo_chrzczone.svg",
   "radio": "radio.svg",
   "akumulator": "akumulator.svg",
   "agregat": "agregat.svg",
