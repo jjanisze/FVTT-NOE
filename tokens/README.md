@@ -89,16 +89,19 @@ Obecnie zaalias­owane: **14 z 51** istot (stan 2026-09-20).
 
 ## Portret z modułu (`portraits/`)
 
-Portret aktora (`img`) builder bierze najpierw z **`tokens/portraits/<id>.webp`**, dopiero potem z folderu
-świata (`worlds/output/characters/`, migracja z Roll20). Dla istot i szablonów, które folderu z Roll20 nie mają
-i dostają grafikę zrobioną dla modułu — dziś szablony dronów (`towarzysz-dron-kroczacy`, `towarzysz-dron-latajacy`,
-paczka `towarzysze`). Te same reguły co dla żetonów: WEBP, nazwa = id istoty.
+Portret aktora (`img`) builder bierze z **`tokens/portraits/<id>.webp`**, a bez niego z grafiki żetonu (poziomy
+1–4 wyżej). Dziś mają go szablony dronów (`towarzysz-dron-kroczacy`, `towarzysz-dron-latajacy`, paczka
+`towarzysze`). Te same reguły co dla żetonów: WEBP, nazwa = id istoty, grafika o znanym pochodzeniu (`CREDITS.md`).
+
+**Nigdy ścieżka świata.** Portrety z migracji Roll20 w świecie kampanii to ilustracje z podręcznika — nie do
+publikacji, a w każdym innym świecie 404. `validate-packs` odrzuca każdy obraz w paczkach spoza modułu,
+`systems/dnd5e/` i rdzennych `icons/` (`PLAN_human_testing.md` §11).
 
 ## Co się zmienia, gdy plik się pojawi
 
 | | bez pliku (stan obecny) | z plikiem |
 |---|---|---|
-| `texture.src` | portret z `worlds/output/characters/` | `modules/neuroshima-2026-overrides/tokens/<id>.webp` |
+| `texture.src` | alias, atrapa albo portret (poziomy 2–4) | `modules/neuroshima-2026-overrides/tokens/<id>.webp` |
 | `lockRotation` | `true` — portret nie może się obracać | **`false`** — żeton obraca się normalnie |
 | `ring.enabled` | `true` — pierścień maskuje portret | `false` — grafika ma własną sylwetkę |
 | flaga `tokenArtPending` | `true` | `false` |

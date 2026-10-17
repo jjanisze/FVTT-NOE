@@ -89,10 +89,6 @@ const PACK = {
   tabele: "tabele"
 };
 
-/** Portrait art migrated from Roll20 lives here, one folder per character. */
-const CHARACTER_ART = "C:/Users/archo/AppData/Local/FoundryVTT/Data/worlds/output/characters";
-const CHARACTER_ART_REL = "worlds/output/characters";
-
 /* -------------------------------------------- */
 /*  Deterministic ids                            */
 /* -------------------------------------------- */
@@ -746,46 +742,6 @@ function abilityMod(score) {
   return Math.floor((Number(score ?? 10) - 10) / 2);
 }
 
-/**
- * Roll20 exported character folders with a hex-escaped, underscore-joined name
- * ("009_-__C5_BBo_C5_82nierz_Posterunku" -> "Żołnierz Posterunku"). Decode them
- * once so portraits can be matched to creatures by name.
- */
-function decodeArtFolder(folder) {
-  const name = folder.replace(/^\d+_-_/, "");
-  const utf8 = new TextDecoder("utf8", { fatal: true });
-
-  // The escape and the word separator are the same character, and hex digits
-  // are letters, so "_CA" is ambiguous: byte 0xCA, or a space before "CA..."?
-  // ("GANGUS_CAPO" is exactly this collision.) UTF-8 resolves it — Roll20 only
-  // escaped non-ASCII bytes, so a genuine escape run must decode as valid
-  // UTF-8. A lone 0xCA does not; "_C5_BB" ("Ż") does.
-  const RUN = /^(?:_[0-9A-F]{2})+/;
-  let out = "";
-  for (let i = 0; i < name.length;) {
-    const run = RUN.exec(name.slice(i))?.[0];
-    if (run) {
-      const bytes = Buffer.from(run.split("_").filter(Boolean).map(h => parseInt(h, 16)));
-      try {
-        out += utf8.decode(bytes);
-        i += run.length;
-        continue;
-      } catch {
-        // not an escape run after all — fall through and treat "_" as a space
-      }
-    }
-    out += name[i] === "_" ? " " : name[i];
-    i++;
-  }
-  return out;
-}
-
-function slugify(s) {
-  return String(s).toLowerCase()
-    .normalize("NFD").replace(/[̀-ͯ]/g, "")
-    .replace(/ł/g, "l").replace(/[^a-z0-9]+/g, "");
-}
-
 /** Skill -> governing ability, mirroring scripts/config/skills.mjs. */
 const SKILL_ABILITY = {
   akr: "dex", atl: "str", his: "int", int: "wis", med: "int", osz: "cha",
@@ -793,43 +749,12 @@ const SKILL_ABILITY = {
   sle: "int", tch: "int", tre: "wis", wys: "cha", zas: "cha", zwi: "dex"
 };
 
-/**
- * Art folders whose name differs from the Bestiariusz name by more than
- * punctuation. Listed explicitly rather than fuzzy-matched: a wrong portrait is
- * worse than a missing one, and there are few enough to enumerate.
- * Keys are creature ids from bestiary-data.mjs.
- */
-const PORTRAIT_ALIASES = {
-  juggernaut: "Jaggernaut",                        // misspelled at migration
-  kidnaper: "Kidnapper",
-  "gangus-kapo": "GANGUS CAPO",                    // capo/kapo
-  cywil: "Cywil 2",
-  "generacja-i-nocny-ghul": "NOCNY GHUL",          // art predates the Generacja naming
-  "generacja-ii-genotyp-wilczy": "WILKOLUD",
-  mobsprzet: "Mobsprzęt Karabin",
-};
-
-/** Build slug -> "worlds/output/characters/<folder>" once. */
-function buildArtIndex() {
-  const index = new Map();
-  if (!fs.existsSync(CHARACTER_ART)) return index;
-  for (const folder of fs.readdirSync(CHARACTER_ART)) {
-    // Roll20 exported portraits as either .png or .jpg.
-    const file = ["avatar.png", "avatar.jpg", "avatar.jpeg", "avatar.webp"]
-      .find(f => fs.existsSync(path.join(CHARACTER_ART, folder, f)));
-    if (!file) continue;
-    const key = slugify(decodeArtFolder(folder));
-    if (!index.has(key)) index.set(key, `${CHARACTER_ART_REL}/${folder}/${file}`);
-  }
-  return index;
-}
-
-const ART_INDEX = buildArtIndex();
 const artMisses = [];
 const tokenSources = { own: [], alias: [], placeholder: [] };
 const aliasMisses = [];
 
-const FVTT_DATA = "C:/Users/archo/AppData/Local/FoundryVTT/Data";
+/** The Foundry data root this module is installed in (`<data>/modules/<id>`) — where `systems/dnd5e/` lives. */
+const FVTT_DATA = path.resolve(MODULE_ROOT, "../..");
 
 /**
  * Optional map of creature id -> token image path, relative to the Foundry data
@@ -899,33 +824,17 @@ function tokenScaleFor(c) {
 }
 
 /**
- * Find the migrated portrait for a creature.
+ * The portrait shipped with the module (`tokens/portraits/<id>.webp`) — art made for this module, e.g. the
+ * drone templates (PLAN_m3_towarzysze.md). Without one the actor's portrait is its token art.
  *
- * Only the portrait is harvested. The sibling `token.png` is deliberately
- * ignored everywhere: those are circular crops of the portrait made for Roll20,
- * where tokens never rotate. FoundryVTT rotates tokens on movement, which
- * leaves them upside down and unreadable.
+ * Never the campaign world's Roll20 folders (`worlds/<world>/characters/`): those are the rulebook's own
+ * illustrations, not publishable, and a world path is a 404 in every other world (PLAN_human_testing.md §11).
+ * `validate-packs` refuses any pack image outside this module, `systems/dnd5e/` and core `icons/`.
  */
 function portraitFor(c) {
-  // Portrait shipped with the module (`tokens/portraits/<id>.webp`) — art made for this module, e.g. the
-  // drone templates (PLAN_m3_towarzysze.md), which have no Roll20 folder in the world.
   const own = `tokens/portraits/${c.id}.webp`;
   if (fs.existsSync(path.join(MODULE_ROOT, own))) return `modules/${MODULE_ID}/${own}`;
-  const candidates = [
-    PORTRAIT_ALIASES[c.id],
-    c.name,
-    c.name.replace(/\(.*?\)/g, ""),               // "TECHMORWA (MALUTKA)" -> "TECHMORWA"
-    c.id.replace(/-/g, " ")
-  ].filter(Boolean);
-
-  for (const cand of candidates) {
-    const key = slugify(cand);
-    if (!key) continue;
-    if (ART_INDEX.has(key)) return ART_INDEX.get(key);
-    // "BIT-BOYS" vs folder "BIT-BOY" — tolerate a trailing plural.
-    if (key.endsWith("s") && ART_INDEX.has(key.slice(0, -1))) return ART_INDEX.get(key.slice(0, -1));
-  }
-  artMisses.push(c.name);
+  artMisses.push(c.id);
   return null;
 }
 
@@ -1481,7 +1390,7 @@ function buildNpc(c) {
     _id,
     name: c.name,
     type: "npc",
-    img: art ?? "icons/svg/mystery-man.svg",
+    img: art ?? tokenArt ?? "icons/svg/mystery-man.svg",
     system: {
       abilities,
       skills,
@@ -1943,9 +1852,8 @@ if (wanted(PACK.bestiariusz)) {
   if (aliasMisses.length) {
     console.log(`    aliasy wskazujące na brakujące pliki (${aliasMisses.length}): ${aliasMisses.join(", ")}`);
   }
-  if (artMisses.length) {
-    console.log(`  portrety nieznalezione (${artMisses.length}): ${artMisses.join(", ")}`);
-  }
+  console.log(`  portret z tokens/portraits/: ${n - artMisses.length}/${n}`
+    + (artMisses.length ? `; reszta bierze grafikę żetonu (${artMisses.length})` : ""));
   const scaled = n - scaleMisses.length;
   console.log(`  skala żetonów: ${scaled}/${n} z tokens/scale-overrides.json`);
   if (scaleMisses.length) {

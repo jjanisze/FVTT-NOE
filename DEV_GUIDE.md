@@ -917,12 +917,12 @@ per-token wygrywa z globalnym `bloodColor` i z `BloodSheetData`.
 
 ### 11.7 Grafika
 
-- **Portrety**: zbierane z `worlds/output/characters/<NNN>_-_<NAZWA>/avatar.{png,jpg}`.
-  Trafia **23 z 51**; reszta dostaje `icons/svg/mystery-man.svg`. Builder wypisuje listę braków.
-- Nazwy folderów są hex-escapowane, a separator i escape to ten sam znak `_` —
-  „GANGUS_CAPO" rozjeżdża się, bo `_CA` to poprawny hex. Rozstrzyga poprawność UTF-8.
-  Rozbieżności nazw (Jaggernaut, Kidnapper, WILKOLUD) są w `PORTRAIT_ALIASES` — jawnie,
-  bo zły portret jest gorszy niż brak portretu.
+- **Portrety** (`img`): `tokens/portraits/<id>.webp`, a bez niego grafika żetonu (niżej) — nigdy ścieżka
+  świata. Do 2026-10-17 builder zbierał portrety z folderów Roll20 świata kampanii
+  (`worlds/<świat>/characters/<NNN>_-_<NAZWA>/avatar.*`): to ilustracje z podręcznika, nie do publikacji, a w
+  każdym innym świecie 404 (`PLAN_human_testing.md` §11). Dekodowanie nazw tych folderów i `PORTRAIT_ALIASES`
+  są w historii gita, gdyby trafiły do prywatnego modułu grafik. `validate-packs` odrzuca każdy obraz w
+  paczkach spoza modułu, `systems/dnd5e/` i rdzennych `icons/` oraz plik, którego nie ma na dysku.
 - **Token art z Roll20 jest świadomie ignorowany.** To okrągłe kadry portretu z Roll20,
   gdzie żetony się nie obracają; FVTT je obraca.
 - **Żetony top-down** — cztery warstwy, sprawdzane w tej kolejności (`tokenArtSource`):

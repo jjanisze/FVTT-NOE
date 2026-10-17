@@ -10,6 +10,7 @@
  */
 
 import { fileURLToPath } from "node:url";
+import fs from "node:fs";
 import path from "node:path";
 import { classicLevel } from "../agent/lib/packs.mjs";
 
@@ -25,8 +26,9 @@ import { bledyTabel } from "./tabele.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MODULE_ROOT = path.resolve(HERE, "../..");
+const FOUNDRY_APP = "C:/Program Files/Foundry Virtual Tabletop/resources/app";
 // Foundry's copy locally; an npm-installed one on the Linux release runner (dev/agent/lib/packs.mjs).
-const ClassicLevel = classicLevel("C:/Program Files/Foundry Virtual Tabletop/resources/app");
+const ClassicLevel = classicLevel(FOUNDRY_APP);
 
 const failures = [];
 const notes = [];
@@ -294,6 +296,45 @@ notes.push(`advancements: ${[...klasy, ...profesje, ...origins].reduce((n, d) =>
     linki++;
   }
   notes.push(`tabele: ${tabele.length} tabel, ${wyniki.size} wyników, ${linki} odnośników`);
+}
+
+/* ---- images: only this module, dnd5e and core icons; never a world path (PLAN_human_testing §11) ---- */
+{
+  const IMG = /\.(webp|png|jpe?g|svg|gif|avif)$/i;
+  const DATA_ROOT = path.resolve(MODULE_ROOT, "../..");
+  // On disk where it can be checked: the working tree always, core and dnd5e only with a local install.
+  const ROOTS = [
+    { prefix: `modules/${MODULE_ID}/`, dir: MODULE_ROOT, n: 0 },
+    { prefix: "systems/dnd5e/", dir: path.join(DATA_ROOT, "systems/dnd5e"), n: 0 },
+    { prefix: "icons/", dir: path.join(FOUNDRY_APP, "public/icons"), n: 0 }
+  ];
+  const zle = new Map();
+  const sprawdz = (src, pack, doc) => {
+    const p = src.replace(/^\//, "");
+    const root = ROOTS.find(r => p.startsWith(r.prefix));
+    const powod = p.startsWith("worlds/") ? "ścieżka świata"
+      : !root ? "poza modułem, dnd5e i rdzeniem"
+        : fs.existsSync(root.dir) && !fs.existsSync(path.join(root.dir, p.slice(root.prefix.length))) ? "brak pliku"
+          : null;
+    if (root) root.n++;
+    if (powod && !zle.has(p)) zle.set(p, `${pack}: ${doc} — ${p} (${powod})`);
+  };
+  const przejdz = (v, pack, doc) => {
+    if (typeof v === "string") {
+      if (IMG.test(v) && !/^(https?:|data:)/.test(v)) sprawdz(v, pack, doc);
+      for (const m of v.matchAll(/src=["']([^"']+)["']/g)) if (!/^(https?:|data:)/.test(m[1])) sprawdz(m[1], pack, doc);
+    } else if (Array.isArray(v)) for (const x of v) przejdz(x, pack, doc);
+    else if (v && typeof v === "object") for (const x of Object.values(v)) przejdz(x, pack, doc);
+  };
+  const manifest = JSON.parse(fs.readFileSync(path.join(MODULE_ROOT, "module.json"), "utf8"));
+  for (const { path: p } of manifest.packs) {
+    const pack = path.basename(p);
+    for (const d of await load(pack)) przejdz(d, pack, d.name ?? d._id);
+  }
+  for (const z of zle.values()) fail(`obrazy: ${z}`);
+  const niesprawdzone = ROOTS.filter(r => !fs.existsSync(r.dir)).map(r => r.prefix);
+  notes.push(`obrazy: ${ROOTS.map(r => `${r.prefix} ${r.n}`).join(", ")}`
+    + (niesprawdzone.length ? ` (istnienie plików niesprawdzone: ${niesprawdzone.join(", ")})` : ""));
 }
 
 /* ---- report ---- */
