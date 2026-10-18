@@ -44,6 +44,15 @@ function isLink(p) {
   }
 }
 
+/**
+ * Remove a link itself, never what it points to. A Windows junction goes with `rmdir`; on Linux (the release runner)
+ * the "junction" is a plain symlink, which `rmdir` refuses (ENOTDIR) — `unlink` it.
+ */
+function removeLink(p) {
+  if (process.platform === "win32") fs.rmdirSync(p);
+  else fs.unlinkSync(p);
+}
+
 function lockPackage(dir, id) {
   const lock = path.join(dir, `${id}.lock`);
   if (!fs.existsSync(lock)) fs.writeFileSync(lock, "🔒");
@@ -105,7 +114,7 @@ export function relinkPackage(src, dst, { id }) {
   if (isLink(dst)) throw new CliError(`${dst} is itself a link; refusing to work inside it.`, { code: "sandbox-layout" });
   for (const entry of fs.readdirSync(dst, { withFileTypes: true })) {
     const p = path.join(dst, entry.name);
-    if (isLink(p)) fs.rmdirSync(p);
+    if (isLink(p)) removeLink(p);
     else if (entry.isDirectory() && entry.name === "packs") fs.rmSync(p, { recursive: true, force: true });
     else if (entry.isFile() && entry.name !== `${id}.lock`) fs.unlinkSync(p);
   }
@@ -200,7 +209,7 @@ export function installFromZip(zipPath, dst, dataRoot) {
     // A folder that once was a dev-sandbox copy holds junctions: unlink them, never recurse through them.
     for (const entry of fs.readdirSync(resolved)) {
       const p = path.join(resolved, entry);
-      if (isLink(p)) fs.rmdirSync(p);
+      if (isLink(p)) removeLink(p);
     }
     fs.rmSync(resolved, { recursive: true, force: true });
   }
@@ -227,7 +236,7 @@ export function installFromZip(zipPath, dst, dataRoot) {
  */
 export function linkE2E(dataRoot, moduleRoot) {
   const old = path.join(dataRoot, "modules", MODULE_ID, "e2e");
-  if (isLink(old)) fs.rmdirSync(old); // removes the junction itself, never what it points to
+  if (isLink(old)) removeLink(old); // the junction itself, never what it points to
   const src = path.join(moduleRoot, "dev", "e2e");
   const dst = path.join(dataRoot, "agent-e2e");
   if (fs.existsSync(src) && !fs.existsSync(dst)) fs.symlinkSync(src, dst, "junction");
