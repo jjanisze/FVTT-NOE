@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>dnd5e style reference · Icon browser</title>
+  <link rel="stylesheet" href="review.css">
+  <link rel="stylesheet" href="dnd5e.css">
+</head>
+<body data-sheet-theme="dark" data-framing="on">
+  <header>
+    <div><p class="eyebrow">Neuroshima asset pipeline</p><h1>5e style reference</h1></div>
+    <nav class="asset-tabs" aria-label="Asset tools"><a href="/">Review queue</a><a href="browser.html">Browse icons</a><a href="dnd5e.html" aria-current="page">5e styles</a></nav>
+  </header>
+  <section class="reference-tools" aria-label="Reference display">
+    <p class="reference-intro">Four real examples per group. Compare the original artwork with small sheet previews. Several groups share the same stock illustration style; their separate rows show where dnd5e reuses it.</p>
+    <div class="reference-controls">
+      <label>Show group<select id="reference-group"><option value="">All groups</option></select></label>
+      <label>Sheet surface<select id="sheet-theme"><option value="dark">Dark sheet</option><option value="light">Light sheet</option></select></label>
+      <label class="check-label"><input id="sheet-framing" type="checkbox" checked> Sheet framing</label>
+      <label class="check-label"><input id="reference-grayscale" type="checkbox"> Grayscale</label>
+    </div>
+    <p id="reference-status" class="reference-status" role="status">Loading local dnd5e artwork…</p>
+    <p class="reference-explanation">Originals retain their own colors, backgrounds and shadows. Sheet previews add the native 1 px gold rim, 4 px corners and backing to raster images. Monochrome SVGs inherit sheet ink and stay unframed, matching the inventory icon component. The 16 px preview is a readability check; inventory icons normally display at 32 px.</p>
+  </section>
+  <main id="reference-gallery" class="reference-gallery" aria-label="dnd5e artwork groups"></main>
+  <footer class="reference-footer">Read-only reference from the local Foundry installation. Modern identity images and legacy/content image assignments are labeled separately. Artwork belongs to its respective creators; no reference images are copied into the module or submitted to the review queue.</footer>
+  <dialog id="reference-dialog" aria-labelledby="reference-dialog-title">
+    <div class="reference-dialog-heading"><h2 id="reference-dialog-title"></h2><button id="reference-close" type="button">Close</button></div>
+    <div id="reference-detail"></div>
+    <p id="reference-detail-source" class="reference-source"></p>
+  </dialog>
+  <script type="module" src="dnd5e.mjs"></script>
+</body>
+</html>

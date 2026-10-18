@@ -67,6 +67,40 @@ The next asset pass reads the flagged rows and `style-feedback.json`, verifies
 the selected source hashes, and generates the next free batch using Pipeline.md.
 New replacements return to the normal candidate reviewer for GM approval.
 
+## dnd5e style reference
+
+The **5e styles** tab (`dnd5e.html`) shows 44 actual dnd5e reference images,
+four per group: class emblems, subclass variations, background scenes, species
+portraits, class features, feats, spells, equipment, activity glyphs, condition
+glyphs and legacy class art. Several content groups share the stock illustration
+style; the page labels that relationship instead of implying eleven independent
+art directions.
+
+Each card shows the original at 96 px and sheet previews at 64/32/16 px. Click
+the original for a 256 px inspection. Controls select a group, light/dark sheet
+surface, native raster framing and grayscale. SVG previews inherit native sheet
+ink and remain unframed, reflecting the inventory component's `display: contents`
+host. These are isolated style samples rather than a full Foundry sheet render.
+
+The server reads only the curated images from the local dnd5e/core installation,
+using the existing per-user `fvtt` configuration and its default profile. The
+catalog and image routes are read-only; images are neither copied into the
+module nor added to the GM's review queue. Missing installations are reported on
+the page. Restart the review server after updating its backend, then open the
+tab from either the review queue or icon browser.
+
+```powershell
+node --test dev/icons/review/browser.test.mjs dev/icons/review/dnd5e-reference.test.mjs
+```
+
+Validation, 2026-10-18: all nine targeted checks pass. Chrome loaded all 44
+examples (152 raster-image elements and 24 themed inline SVG previews) without
+broken images. Group filtering, sheet surface, framing, grayscale and the
+enlargement dialog work. Desktop and narrow layouts have no horizontal overflow.
+Local screenshots are in `audits/dnd5e-reference-dark.png` and
+`audits/dnd5e-reference-light.png`; no Foundry world or review decision is changed
+by this check.
+
 Checks (all within the asset tools):
 
 ```powershell

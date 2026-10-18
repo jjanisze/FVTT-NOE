@@ -9,6 +9,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildCatalog, saveStyleFeedback } from "./catalog.mjs";
+import { buildReferenceCatalog, referenceAsset, referenceRoots } from "./dnd5e-reference.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MODULE_ROOT = path.resolve(HERE, "../../..");
@@ -72,11 +73,13 @@ function validateFeedback(input, manifest) {
   return { itemId: item.id, decision: input.decision, candidateId, notes, updatedAt: new Date().toISOString() };
 }
 
-export function createReviewServer({ moduleRoot = MODULE_ROOT, reviewRoot = path.join(moduleRoot, "dev/icons/review") } = {}) {
+export function createReviewServer({ moduleRoot = MODULE_ROOT, reviewRoot = path.join(moduleRoot, "dev/icons/review"), dnd5eRoots } = {}) {
 const ICON_ROOT = path.join(moduleRoot, "icons");
 const MANIFEST = path.join(reviewRoot, "manifest.json");
 const FEEDBACK = path.join(reviewRoot, "feedback.json");
 const FEEDBACK_BACKUP = path.join(reviewRoot, "feedback.json.bak");
+let localReferenceRoots = dnd5eRoots;
+const getReferenceRoots = () => localReferenceRoots ??= referenceRoots(moduleRoot);
 const server = http.createServer(async (req, res) => {
   try {
     const url = new URL(req.url, `http://${HOST}:${PORT}`);
@@ -85,6 +88,11 @@ const server = http.createServer(async (req, res) => {
       if (req.headers.origin && req.headers.origin !== `http://${HOST}:${req.socket.localPort}`) throw new Error("Invalid request origin");
     }
     if (req.method === "GET" && url.pathname === "/api/catalog") return json(res, 200, buildCatalog(moduleRoot, reviewRoot));
+    if (req.method === "GET" && url.pathname === "/api/dnd5e-reference") return json(res, 200, buildReferenceCatalog(getReferenceRoots()));
+    if (req.method === "GET" && url.pathname.startsWith("/reference-assets/")) {
+      const file = referenceAsset(decodeURIComponent(url.pathname.slice("/reference-assets/".length)), getReferenceRoots());
+      return file ? sendFile(res, file) : json(res, 404, { error: "Reference image is not installed" });
+    }
     if (req.method === "POST" && url.pathname === "/api/style-feedback") {
       return json(res, 200, saveStyleFeedback(moduleRoot, reviewRoot, await bodyJson(req)));
     }
