@@ -1178,7 +1178,7 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
-### v0.20.0 — dnd5e 6.0.6 i Foundry 14.369 (w przygotowaniu; wydanie po E11 — tag MG)
+### v0.20.0 — dnd5e 6.0.6 i Foundry 14.369 (2026-10-18)
 
 Wymaga **dnd5e 6.0.6** i Foundry **14.367+** (zweryfikowane na 14.369); na dnd5e 5.3 zostaje v0.19.1. Przebieg, decyzje
 MG i każde znalezisko: `PLAN_migracja_dnd5e6.md` §11. Stan na 2026-10-18 (E10, bramka wydania na 14.369 +
@@ -1199,8 +1199,15 @@ Co zobaczy stół:
   z paskiem Fuksa (podsumowania kart dnd5e wyłączone na każdym kliencie).
 - Dozownik znowu ma przycisk „Rzuć RO” na karcie trucizny; serie DS/MS i Ogień zaporowy znowu wygasają i wyzwalają
   RO strefy; nazwy cech przedmiotów i ~230 napisów dnd5e po polsku (34 tłumaczenia wcześniej nie działały).
+- **Ikony biegłości:** umiejętności oraz biegłości w pancerzach, broni i narzędziach mają własne glify NOE
+  (`config/proficiency-icons.mjs`), na natywnym wyświetlaniu dnd5e 6.
 - Nowy świat: okno powitalne dnd5e 6 może się pokazać, ale nie przestawia już jednostek na funty i stopy ani nie
   odsłania paczek fantasy — moduł przywraca swoje ustawienia, gdy cokolwiek je zmieni.
+
+Aktualizacja świata z v0.19.x: kopia świata → dnd5e 6.0.6 → otwarcie świata (dnd5e migruje sam) → jako MG
+`game.modules.get("neuroshima-2026-overrides").api.migration.migrateDnd5e6()` (raport w konsoli), potem
+`migrateDnd5e6({ commit: true })`: stare klucze efektów, Palcożerca, TT towarzyszy (`docs/Instalacja.md`). Kampania
+autora przeszła tę drogę 2026-10-18 (E11).
 
 Pod spodem: wiadomości czatu jako typowane dane (`config/chat-message-data.mjs`), ścieżki 6.0 (`movement.speeds`,
 `senses.ranges`, `rolls.*`), TT przez `calcs`/`formulas`, stany z poziomami jako efekty `condition`, tacka z grupami

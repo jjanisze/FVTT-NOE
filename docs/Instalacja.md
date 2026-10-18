@@ -37,6 +37,23 @@ wydanie).
    (tak, żeby `module.json` leżał bezpośrednio w tym folderze, nie w podfolderze).
 3. Zrestartuj Foundry (albo odśwież listę modułów), moduł pojawi się na liście.
 
+## Aktualizacja z wersji 0.19.x (dnd5e 5.3 → 6.0.6)
+
+1. Zrób kopię świata (Setup → Backups albo kopia folderu `worlds/<świat>`).
+2. Zaktualizuj system `dnd5e` do 6.0.6 i moduł do 0.20.0.
+3. Otwórz świat. Foundry poprosi o potwierdzenie migracji, potem `dnd5e` przepisze dane świata sam — poczekaj na
+   komunikat „Migration … completed".
+4. Jako MG otwórz konsolę (F12) i uruchom raport — nic jeszcze nie zapisuje:
+   ```js
+   await game.modules.get("neuroshima-2026-overrides").api.migration.migrateDnd5e6()
+   ```
+   Potem zapis:
+   ```js
+   await game.modules.get("neuroshima-2026-overrides").api.migration.migrateDnd5e6({ commit: true })
+   ```
+   Przepisuje to, czego `dnd5e` nie ruszy: stare klucze efektów, „Odgryziony palec” Palcożercy (tylko testy ZRC, jak
+   w podręczniku) i TT towarzyszy (sam wzór). Drugie uruchomienie raportu powinno być puste.
+
 ## Deinstalacja
 
 **Add-on Modules → Uninstall** przy pozycji „Neuroshima: Ostatnia Era", albo ręcznie usuń folder

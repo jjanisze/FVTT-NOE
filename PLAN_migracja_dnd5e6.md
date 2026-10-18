@@ -455,6 +455,7 @@ wyszło, i warunkiem wejścia. Kolejność — według stosunku zysku do kosztu 
 | PM12 | Tacki obrażeń i efektów dla graczy (`allowPlayerDamageTray`, `allowPlayerEffectsTray`) | gracz nakłada na własny żeton; mniej klikania MG | po becie, decyzja stołu (D7); testy klienta gracza, ochrona przed podwójnym nałożeniem | S–M |
 | PM13 | Podsumowania kart dnd5e 6 (`chatCardSummary`): pasek Fuksa i Forsowania, adnotacje rzutów (choroby, chemia, dostępność narzędzi) i nasze RO/testy z `system.origin` w podsumowaniu na karcie użycia (2026-10-18, E6) | mniej osobnych wiadomości — cel E6, odłożony, bo dziś podsumowanie chowa kartę rzutu z naszym paskiem | po etapie stylów (D8); testy paska na karcie użycia | M |
 | PM14 | Budowniczy paczek pisze aktywności zestawów jak `createToolkits()`: `nativeCheck` → `NeuroToolCheckActivity` z bramkami (kowal: Naostrzenie, Naprawa) (2026-10-18, E4) | zestaw kowala z kompendium i z Produkcji nie ma bramek | **zrobione w E8** (`f855fda`) | S |
+| PM15 | Skrypt świata kampanii `worlds/output/templates/roll20-templates.js` (podpowiedzi szablonów Roll20): `renderChatMessage` → `renderChatMessageHTML` (HTMLElement zamiast jQuery) albo usunięcie, jeśli w czacie nie ma już wiadomości z Roll20 (2026-10-18, E11) | ostrzeżenie zgodności przy każdym starcie; hak znika w v15 | decyzja MG (treść świata, nie moduł) | S |
 
 ---
 
@@ -831,3 +832,23 @@ tam, gdzie daje dokładnie RAW; ponad RAW — wyłączone bez pytania.
 Quench prowadzi ją na aktorach testowych (1211/1211 w świeżym świecie). Kolejność w E11: kopia → klon na Poligonie →
 otwarcie na 6.0.6 (migracja dnd5e) → `migrateDnd5e6()` na sucho, raport do MG → `{ commit: true }` → skrypt
 weryfikujący → przejście MG.
+
+**2026-10-18 — E11 zrobione** (`0d9d9fc`, `d252168`). MG: przejście po Poligonie zrobione (minimalne, wystarczy);
+nowej kopii nie robimy — punktem powrotu zostaje kopia sprzed migracji (2026-10-17, rejestr w vaulcie
+`Integracje/backups/`).
+- **Próba na klonie** (`poligon:clone --refresh`, `poligon:start --klon`): migracja dnd5e 6.0.6 — 100%. Odcisk świata
+  (`dev/migration/weryfikacja-dnd5e6.js`) przed i po naszej migracji: **0 dokumentów odrzuconych** przez schemat 6.0
+  (kolekcje i osadzone), 0 błędów przygotowania aktorów, 12/12 pilnowanych ustawień, drużyna główna jest.
+  `migrateDnd5e6`: **3 efekty** na starych kluczach (lot i chód; premie do ataków i RO) — Palcożerca i TT towarzyszy
+  bez pracy. Po zapisie odcisk bez zmian poza kluczami, drugi przebieg pusty; świeże wczytanie — 0 błędów, 0 ostrzeżeń
+  zgodności z naszego kodu.
+- **Kampania:** `freeze off` (słowo MG), `system:install --campaign` (5.3.0 zachowany w `agent-state/systems/`),
+  start, migracja dnd5e — 100%, te same 3 efekty, `{ commit: true }`. Odcisk = klon (jedyna różnica: dziennik, który
+  ładowarka Poligonu dokłada w klonie). Świeże wczytanie: 0 błędów, 0 ostrzeżeń zgodności z naszego kodu. Serwer
+  kampanii zatrzymany po weryfikacji, jak przed E11.
+- **Narzędzia:** Foundry nie uruchamia sam świata ze starszym rdzeniem albo systemem (czeka w Setup na potwierdzenie
+  migracji) — `startServer` uruchamia go wtedy przez Setup. Paczki modułu: Foundry przepisał pliki LevelDB przy
+  otwarciu kampanii, rekordy bez zmian (`diff-packs` 0) — przebudowane.
+- **Poza modułem:** skrypt świata kampanii `worlds/output/templates/roll20-templates.js` (import z Roll20) słucha
+  `renderChatMessage` — ostrzeżenie przy każdym starcie, zniknie w v15 (PM15).
+- Koniec zamrożenia: kampania znowu domyślnym profilem `fvtt`, wypychanie map (`Maps/tools/push.py`) działa.
