@@ -96,20 +96,88 @@
     "ItemEdit": "Edycja",
     "ItemWeaponDetails": "Szczegóły Broni",
     "ItemWeaponType": "Typ Broni",
-    "Proficient": "Premia z Biegłości",
+    "Proficient": "Biegłość",
     "ItemWeaponProperties": "Właściwości Broni",
     "WEAPON": {
       "FIELDS": {
         "ammunition": {
           "type": {
-            "label": "Typ Amunicji"
+            "label": "Typ amunicji"
           }
+        },
+        "armor": {
+          "value": {
+            "label": "Trudność Trafienia"
+          }
+        },
+        "damage": {
+          "hint": "Bazowe kości obrażeń broni. Modyfikator cechy i dodatkowe obrażenia są dodawane automatycznie."
+        },
+        "mastery": {
+          "hint": "Specjalna zdolność broni odblokowana przez Biegłość w Broni.",
+          "label": "Mistrzostwo"
         }
+      },
+      "Mastery": {
+        "Cleave": "Rozłupanie",
+        "Flavor": "Mistrzostwo",
+        "Graze": "Draśnięcie",
+        "Label": "Mistrzostwo broni",
+        "Nick": "Nacięcie",
+        "Push": "Odepchnięcie",
+        "Sap": "Osłabienie",
+        "Slow": "Spowolnienie",
+        "Topple": "Powalenie",
+        "Vex": "Irytacja"
       }
     },
     "ITEM": {
-      "Tab": {
-        "Details": "Szczegóły"
+      "Property": {
+        "Adamantine": "Adamantynowy",
+        "Ammunition": "Amunicja",
+        "Concentration": "Koncentracja",
+        "Finesse": "Finezja",
+        "Firearm": "Broń palna",
+        "Focus": "Ogniskująca",
+        "Gear": "Sprzęt",
+        "Heavy": "Ciężka",
+        "Light": "Lekka",
+        "Loading": "Ładowanie",
+        "Magical": "Magiczna",
+        "Material": "Materialna",
+        "Reach": "Zasięg",
+        "Reload": "Przeładowanie",
+        "Returning": "Powracająca",
+        "Ritual": "Rytuał",
+        "Sidekick": "Pomocnik",
+        "Silvered": "Posrebrzana",
+        "Somatic": "Somatyczna",
+        "Special": "Specjalna",
+        "StealthDisadvantage": "Utrudnienie Skradania",
+        "Thrown": "Rzucana",
+        "Trait": "Cecha pasywna",
+        "TwoHanded": "Dwuręczna",
+        "Verbal": "Werbalna",
+        "Versatile": "Uniwersalna",
+        "WeightlessContents": "Lekka zawartość"
+      },
+      "SECTIONS": {
+        "Activities": "Aktywności",
+        "Advancement": "Rozwój",
+        "Contents": "Zawartość",
+        "Description": "Opis",
+        "Details": "Szczegóły",
+        "Effects": "Efekty"
+      },
+      "Rarity": {
+        "Artifact": "Artefakt",
+        "Common": "Zwykły",
+        "Legendary": "Legendarny",
+        "Mundane": "Pospolity",
+        "Rare": "Rzadki",
+        "Uncommon": "Niepospolity",
+        "VeryRare": "Bardzo rzadki",
+        "Varies": "Różna"
       }
     },
     "CALENDAR": {
@@ -139,7 +207,6 @@
     "AbilityScore": "Wartość Cechy",
     "AbilityModifier": "Modyfikator Cechy",
     "AbilityModifierShort": "Mod",
-
     "ABILITY": {
       "Configure": {
         "CheckLabel": "Test {ability}",
@@ -158,36 +225,16 @@
         "Score": "Wartość {ability}"
       }
     },
-
     "Skills": "Umiejętności",
     "Skill": "Umiejętność",
     "PassivePerception": "Pasywna Percepcja",
-
-    "SKILL_CONFIG": {
-      "SECTIONS": {
-        "Bonuses": {
-          "Hint": "Te premie dotyczą pasywnych wyników i testów {label}.",
-          "Label": "Premie {label}"
-        },
-        "Details": "Szczegóły {label}",
-        "Global": {
-          "Hint": "Te premie dotyczą testów z dowolnej umiejętności.",
-          "Label": "Premie globalne"
-        }
-      }
-    },
-
     "ArmorClass": "Trudność Trafienia",
     "AC": "TT",
     "Armor": "Pancerz",
-    "ArmorClassUnarmored": "Bez pancerza",
-    "ArmorClassNatural": "Naturalny pancerz",
-    "ArmorClassEquipment": "Założony pancerz",
     "ArmorHeavyProficiency": "Ciężki",
     "ArmorLightProficiency": "Lekki",
     "ArmorMediumProficiency": "Średni",
     "EquipmentShield": "Tarcza",
-
     "HitPoints": "Punkty Wytrzymałości",
     "HP": "PW",
     "HitPointsCurrent": "Aktualne Punkty Wytrzymałości",
@@ -198,7 +245,6 @@
     "HitDice": "Kości Wytrzymałości",
     "HitDie": "Kość Wytrzymałości",
     "HitDiceRoll": "Rzuć Kośćmi Wytrzymałości",
-
     "HITDICE": {
       "Abbreviation": "KW",
       "Action": {
@@ -212,31 +258,36 @@
         "other": "{number} kości wytrzymałości"
       }
     },
-
     "Initiative": "Inicjatywa",
     "InitiativeAbbr": "Ini",
-
     "Proficiency": "Biegłość",
     "ProficiencyBonus": "Premia z Biegłości",
     "ProficiencyBonusAbbr": "PB",
-    "Proficient": "Biegłość",
     "NotProficient": "Brak biegłości",
     "HalfProficient": "Połowa biegłości",
     "Expertise": "Specjalizacja",
-
     "Speed": "Szybkość",
     "Movement": "Ruch",
-
     "MOVEMENT": {
       "Action": {
         "Configure": "Konfiguruj szybkość ruchu"
       },
       "FIELDS": {
-        "bonus": { "label": "Premia do ruchu" },
-        "ignoredDifficultTerrain": { "label": "Ignorowany trudny teren" },
-        "special": { "label": "Ruch specjalny" },
-        "speeds": { "label": "Szybkości ruchu" },
-        "units": { "label": "Jednostka" }
+        "bonus": {
+          "label": "Premia do ruchu"
+        },
+        "ignoredDifficultTerrain": {
+          "label": "Ignorowany trudny teren"
+        },
+        "special": {
+          "label": "Ruch specjalny"
+        },
+        "speeds": {
+          "label": "Szybkości ruchu"
+        },
+        "units": {
+          "label": "Jednostka"
+        }
       },
       "Hover": "Lewitacja",
       "HoverSpeed": "{speed} (lewitacja)",
@@ -251,32 +302,25 @@
         "Walk": "Chód"
       }
     },
-
     "Senses": "Zmysły",
     "SenseDarkvision": "Widzenie w ciemności",
     "SenseBlindsight": "Widzenie bez wzroku",
     "SenseTremorsense": "Wyczucie wibracji",
     "SenseTruesight": "Prawdziwe widzenie",
-
     "SavingThrow": "Rzut Obronny",
     "SavingThrowShort": "Obronny",
-    "SavingThrows": "Rzuty Obronne",
     "ClassSaves": "Rzuty Obronne",
     "ActionSave": "Rzut Obronny",
     "DeathSave": "Rzuty Przeciw Śmierci",
     "DeathSavingThrow": "Rzut Przeciw Śmierci",
-    "DeathSaveBonus": "Bonus do Rzutu Przeciw Śmierci",
     "DeathSaveConfigure": "Konfiguracja Rzutów Przeciw Śmierci",
-    "DeathSaveCriticalSuccess": "{name} — krytyczny sukces Rzutu Przeciw Śmierci! Odzyskuje 1 PW!",
     "DeathSaveHide": "Ukryj Rzuty Przeciw Śmierci",
     "DeathSaveShow": "Pokaż Rzuty Przeciw Śmierci",
-    "DeathSaveSuccess": "{name} przeżył z 3 sukcesami — stan stabilny!",
     "DeathSaveSuccessLabel": "Sukces Rzutu Przeciw Śmierci",
     "DeathSaveSuccessLabelN.one": "1. sukces Rzutu Przeciw Śmierci",
     "DeathSaveSuccessLabelN.two": "2. sukces Rzutu Przeciw Śmierci",
     "DeathSaveSuccessLabelN.few": "3. sukces Rzutu Przeciw Śmierci",
     "DeathSaveSuccesses": "Sukcesy",
-    "DeathSaveFailure": "{name} umiera z 3 porażkami Rzutu Przeciw Śmierci!",
     "DeathSaveFailureLabel": "Porażka Rzutu Przeciw Śmierci",
     "DeathSaveFailureLabelN.one": "1. porażka Rzutu Przeciw Śmierci",
     "DeathSaveFailureLabelN.two": "2. porażka Rzutu Przeciw Śmierci",
@@ -285,7 +329,6 @@
     "DeathSaveRoll": "Wykonaj Rzut Przeciw Śmierci",
     "DeathSaveUnnecessary": "Nie musisz wykonywać Rzutu Przeciw Śmierci — masz dodatnie PW lub osiągnąłeś już 3 sukcesy/porażki.",
     "SavePromptTitle": "Rzut Obronny — {ability}",
-
     "SAVE": {
       "FIELDS": {
         "damage": {
@@ -336,12 +379,10 @@
         "other": "Obronne"
       }
     },
-
     "Advantage": "Ułatwienie",
     "Disadvantage": "Utrudnienie",
     "Inspiration": "Fuks",
     "Exhaustion": "Wyczerpanie",
-
     "Attack": "Atak",
     "AttackRoll": "Test Ataku",
     "Damage": "Obrażenia",
@@ -350,7 +391,6 @@
     "CriticalHit": "Trafienie krytyczne",
     "ToHit": "Trafienie",
     "Cover": "Osłona",
-
     "ATTACK": {
       "Attack": {
         "mwak": "Atak wręcz",
@@ -431,7 +471,6 @@
         "Ranged": "Broń dystansowa"
       }
     },
-
     "DAMAGE": {
       "Type": {
         "Acid": "Od kwasu",
@@ -447,9 +486,21 @@
         "Radiant": "Radioaktywne",
         "Slashing": "Cięte",
         "Thunder": "Wybuchowe"
+      },
+      "Title": "Obrażenia",
+      "FIELDS": {
+        "damage": {
+          "label": "Obrażenia",
+          "parts": {
+            "FIELDS": {
+              "modifiers": {
+                "label": "Modyfikatory"
+              }
+            }
+          }
+        }
       }
     },
-
     "HEAL": {
       "FIELDS": {
         "healing": {
@@ -477,7 +528,6 @@
         "TemporaryShort": "Tymcz. PW"
       }
     },
-
     "ACTIVATION": {
       "Category": {
         "Combat": "Walka",
@@ -578,7 +628,6 @@
         }
       }
     },
-
     "REST": {
       "Configuration": "Konfiguracja odpoczynku",
       "HitDice": {
@@ -635,23 +684,16 @@
       },
       "Warning": {
         "OnlyByRequest": "Odpoczynek może być wykonany tylko na polecenie MG."
+      },
+      "Duration": {
+        "Label": "Czas trwania"
       }
     },
-
     "Action": "Akcja",
     "ActionPl": "Akcje",
     "BonusAction": "Akcja dodatkowa",
     "Reaction": "Reakcja",
     "ReactionPl": "Reakcje",
-    "ActionAction": "Akcja",
-    "ActionBonus": "Akcja dodatkowa",
-    "ActionReaction": "Reakcja",
-    "ActionFree": "Darmowa interakcja",
-    "ActionSpecial": "Specjalna",
-    "ActionLegendary": "Akcja legendarna",
-    "ActionLair": "Akcja legowiska",
-    "ActionMythic": "Akcja mityczna",
-
     "NPC": {
       "SECTIONS": {
         "Actions": "Akcje",
@@ -660,9 +702,29 @@
         "MythicActions": "Akcje mityczne",
         "Reactions": "Reakcje",
         "Traits": "Cechy"
+      },
+      "Label": "BN",
+      "FIELDS": {
+        "traits": {
+          "important": {
+            "label": "Ważny BN",
+            "hint": "Ważny BN rzuca przeciw śmierci, ma kości wytrzymałości i lojalność (jeśli włączona). BN z poziomami klasy jest ważny bez względu na to ustawienie."
+          }
+        },
+        "attributes": {
+          "price": {
+            "label": "Koszt",
+            "value": {
+              "label": "Ilość"
+            },
+            "denomination": {
+              "label": "Waluta"
+            },
+            "hint": "Stawka za dzień najmu albo cena zakupu zwierzęcia."
+          }
+        }
       }
     },
-
     "Conditions": "Stany",
     "ConBlinded": "Oślepiony",
     "ConCharmed": "Oczarowany",
@@ -680,151 +742,35 @@
     "ConRestrained": "Unieruchomiony",
     "ConStunned": "Oszołomiony",
     "ConUnconscious": "Nieprzytomny",
-    "ConImm": "Odporność na stany",
-
-    "DamImm": "Odporności na obrażenia (immunitet)",
-    "DamRes": "Odporności na obrażenia",
-    "DamVuln": "Podatności na obrażenia",
     "Immunities": "Odporności",
     "Resistances": "Odporności",
     "Vulnerabilities": "Podatności",
-
     "Inventory": "Ekwipunek",
     "Features": "Zdolności",
     "Spellbook": "Księga zaklęć",
     "Biography": "Biografia",
-    "Effects": "Efekty",
-    "Details": "Szczegóły",
     "Attributes": "Atrybuty",
     "Favorites": "Ulubione",
     "Resources": "Zasoby",
     "Notes": "Notatki",
     "Traits": "Cechy",
     "Description": "Opis",
-
-    "ItemTypeWeapon": "Broń",
-    "ItemTypeArmor": "Pancerz",
-    "ItemTypeEquipment": "Ekwipunek",
-    "ItemTypeConsumable": "Używka",
-    "ItemTypeTool": "Narzędzia",
-    "ItemTypeLoot": "Łup",
-
-    "ITEM": {
-      "Property": {
-        "Adamantine": "Adamantynowy",
-        "Ammunition": "Amunicja",
-        "Concentration": "Koncentracja",
-        "Finesse": "Finezja",
-        "Firearm": "Broń palna",
-        "Focus": "Ogniskująca",
-        "Gear": "Sprzęt",
-        "Heavy": "Ciężka",
-        "Light": "Lekka",
-        "Loading": "Ładowanie",
-        "Magical": "Magiczna",
-        "Material": "Materialna",
-        "Reach": "Zasięg",
-        "Reload": "Przeładowanie",
-        "Returning": "Powracająca",
-        "Ritual": "Rytuał",
-        "Sidekick": "Pomocnik",
-        "Silvered": "Posrebrzana",
-        "Somatic": "Somatyczna",
-        "Special": "Specjalna",
-        "StealthDisadvantage": "Utrudnienie Skradania",
-        "Thrown": "Rzucana",
-        "Trait": "Cecha pasywna",
-        "TwoHanded": "Dwuręczna",
-        "Verbal": "Werbalna",
-        "Versatile": "Uniwersalna",
-        "WeightlessContents": "Lekka zawartość"
-      },
-      "SECTIONS": {
-        "Activities": "Aktywności",
-        "Advancement": "Rozwój",
-        "Contents": "Zawartość",
-        "Description": "Opis",
-        "Details": "Szczegóły",
-        "Effects": "Efekty"
-      }
-    },
-
-    "WEAPON": {
-      "FIELDS": {
-        "ammunition": {
-          "type": { "label": "Typ amunicji" }
-        },
-        "armor": {
-          "value": { "label": "Trudność Trafienia" }
-        },
-        "damage": {
-          "hint": "Bazowe kości obrażeń broni. Modyfikator cechy i dodatkowe obrażenia są dodawane automatycznie."
-        },
-        "mastery": {
-          "hint": "Specjalna zdolność broni odblokowana przez Biegłość w Broni.",
-          "label": "Mistrzostwo"
-        }
-      },
-      "Mastery": {
-        "Cleave": "Rozłupanie",
-        "Flavor": "Mistrzostwo",
-        "Graze": "Draśnięcie",
-        "Label": "Mistrzostwo broni",
-        "Nick": "Nacięcie",
-        "Push": "Odepchnięcie",
-        "Sap": "Osłabienie",
-        "Slow": "Spowolnienie",
-        "Topple": "Powalenie",
-        "Vex": "Irytacja"
-      }
-    },
-
     "WeaponSimpleM": "Prosta biała",
     "WeaponSimpleR": "Prosta dystansowa",
     "WeaponMartialM": "Wojenna biała",
     "WeaponMartialR": "Wojenna dystansowa",
     "WeaponNatural": "Naturalna",
     "WeaponSiege": "Broń oblężnicza",
-
-    "WeaponBiala": "Broń biała",
-    "WeaponMiotana": "Broń miotana",
-    "WeaponPalnaKrotka": "Broń palna krótka",
-    "WeaponPalnaPosr": "Broń palna pośrednia",
-    "WeaponPalnaDluga": "Broń palna długa",
-    "WeaponPalnaCiezka": "Broń palna ciężka",
-    "WeaponSpecjalna": "Broń specjalna",
-
-    "ITEM": {
-      "Property": {
-        "Wmag": "Wmag.",
-        "Beb": "Bęb.",
-        "TrybP": "P (Ogień Pojedynczy)",
-        "TrybKS": "KS (Krótka Seria)",
-        "TrybDS": "DS (Długa Seria)",
-        "TrybMS": "MS (Miażdżąca Seria)",
-        "TrybOZ": "OZ (Ogień Zaporowy)",
-        "Obalajaca": "Obalająca",
-        "Burzaca": "Burząca",
-        "Finezyjna": "Finezyjna",
-        "Cicha": "Cicha",
-        "Unieruchamiajaca": "Unieruchamiająca",
-        "Powracajaca": "Powracająca"
-      }
-    },
-
     "Spellcasting": "Rzucanie zaklęć",
     "SpellAbility": "Cecha zaklęć",
     "SpellDC": "ST zaklęć",
-    "SpellSaveDC": "ST rzutu obronnego",
     "Prepared": "Przygotowane",
     "Concentration": "Koncentracja",
     "Ritual": "Rytuał",
-
     "Equipped": "Wyposażone",
     "Unequipped": "Niewyposażone",
     "Attuned": "Dostrojone",
     "Attunement": "Dostrojenie",
-
     "Quantity": "Ilość",
     "QuantityAbbr": "Il.",
     "Weight": "Waga",
@@ -845,17 +791,12 @@
     "Spent": "Wydane",
     "Identified": "Zidentyfikowane",
     "None": "Brak",
-
     "SheetModeEdit": "Edycja",
     "SheetModePlay": "Gra",
-
     "Level": "Poziom",
-    "LevelUp": "Awans",
-    "Experience": "Punkty Doświadczenia",
     "ExperiencePoints": {
       "Label": "Punkty Doświadczenia"
     },
-
     "Name": "Imię postaci",
     "Background": "Pochodzenie",
     "Alignment": "Charakter",
@@ -871,7 +812,6 @@
     "Skin": "Skóra",
     "Hair": "Włosy",
     "Faith": "Wiara",
-
     "Size": "Rozmiar",
     "SizeTiny": "Malutki",
     "SizeSmall": "Mały",
@@ -879,7 +819,6 @@
     "SizeLarge": "Duży",
     "SizeHuge": "Ogromny",
     "SizeGargantuan": "Gigantyczny",
-
     "CreatureType": "Typ stworzenia",
     "CreatureAberration": "Aberracja",
     "CreatureBeast": "Bestia",
@@ -895,16 +834,7 @@
     "CreatureOoze": "Szlam",
     "CreaturePlant": "Roślina",
     "CreatureUndead": "Nieumarły",
-
     "Rarity": "Rzadkość",
-    "ItemRarityMundane": "pospolity",
-    "ItemRarityCommon": "zwykły",
-    "ItemRarityUncommon": "niepospolity",
-    "ItemRarityRare": "rzadki",
-    "ItemRarityVeryRare": "bardzo rzadki",
-    "ItemRarityLegendary": "legendarny",
-    "ItemRarityArtifact": "artefakt",
-
     "Currency": "Waluta",
     "CurrencyGP": "Gamble",
     "CurrencyAbbrGP": "gb",
@@ -916,12 +846,467 @@
     "CurrencyAbbrEP": "gb",
     "CurrencyPP": "Gamble",
     "CurrencyAbbrPP": "gb",
-
-    "Rest": "Odpoczynek",
-    "ShortRest": "Krótki odpoczynek",
-    "LongRest": "Długi odpoczynek",
-
-    "Healing": "Leczenie"
+    "ARMORCLASS": {
+      "Calculation": {
+        "Armored": "Założony pancerz",
+        "Natural": "Naturalny pancerz",
+        "Unarmored": "Bez pancerza"
+      },
+      "Configuration": "Konfiguracja",
+      "Formula": "Wzór",
+      "FIELDS": {
+        "attributes": {
+          "ac": {
+            "formulas": {
+              "element": {
+                "formula": {
+                  "label": "Wzór"
+                }
+              }
+            },
+            "override": {
+              "label": "Nadpisanie"
+            }
+          }
+        }
+      },
+      "Action": {
+        "Configure": "Konfiguruj TT"
+      }
+    },
+    "TRAIT": {
+      "Condition": {
+        "Immunity": {
+          "title": "Odporność na stany",
+          "other": "Odporność na stany"
+        }
+      },
+      "Damage": {
+        "Immunity": {
+          "title": "Odporności na obrażenia (immunitet)",
+          "other": "Odporności na obrażenia (immunitet)"
+        },
+        "Resistance": {
+          "title": "Odporności na obrażenia",
+          "other": "Odporności na obrażenia"
+        },
+        "Vulnerability": {
+          "title": "Podatności na obrażenia",
+          "other": "Podatności na obrażenia"
+        },
+        "Modification": {
+          "title": "Modyfikacja obrażeń",
+          "one": "Modyfikacja obrażeń"
+        }
+      },
+      "Language": {
+        "title": "Języki",
+        "other": "Języki"
+      },
+      "Action": {
+        "Configure": "Konfiguruj: {trait}"
+      }
+    },
+    "DamageModification": {
+      "Label": "Modyfikacja obrażeń"
+    },
+    "DEATH": {
+      "FIELDS": {
+        "attributes": {
+          "death": {
+            "roll": {
+              "bonus": {
+                "label": "Premia do Rzutu Przeciw Śmierci"
+              }
+            }
+          }
+        }
+      },
+      "Outcome": {
+        "revive": "{name} — krytyczny sukces Rzutu Przeciw Śmierci! Odzyskuje 1 PW!",
+        "death": "{name} umiera z 3 porażkami Rzutu Przeciw Śmierci!",
+        "stable": "{name} przeżył z 3 sukcesami — stan stabilny!"
+      }
+    },
+    "EFFECT": {
+      "Tab": "Efekty",
+      "Application": {
+        "Header": "Efekty"
+      },
+      "Action": {
+        "Search": "Szukaj efektów",
+        "EditChange": "Edytuj zmianę",
+        "DeleteChange": "Usuń zmianę",
+        "DisableEffect": "Wyłącz efekt"
+      },
+      "BASE": {
+        "FIELDS": {
+          "magical": {
+            "label": "Magiczny"
+          },
+          "changes": {
+            "element": {
+              "type": {
+                "label": "Typ"
+              },
+              "value": {
+                "label": "Wartość"
+              }
+            }
+          },
+          "conditions": {
+            "label": "Warunki efektu",
+            "hint": "Warunki, od których zależy, kiedy efekt działa."
+          }
+        }
+      },
+      "Change": {
+        "Label": "Zmiana"
+      },
+      "AdditionalChanges": "Dodatkowe zmiany",
+      "RIDER": {
+        "FIELDS": {
+          "rider": {
+            "statuses": {
+              "label": "Osobne stany",
+              "hint": "Gdy ten efekt zostanie nałożony, te stany zostaną nałożone osobno."
+            }
+          }
+        }
+      },
+      "Category": {
+        "Temporary": "Efekty tymczasowe",
+        "Passive": "Efekty stałe",
+        "Inactive": "Efekty nieaktywne",
+        "Unavailable": "Efekty niedostępne"
+      },
+      "Status": {
+        "ChangeActive": "Przełącz aktywność"
+      },
+      "FIELDS": {
+        "statuses": {
+          "label": "Stany",
+          "hint": "Pod wpływem tego efektu cel jest traktowany, jakby miał też te stany."
+        }
+      }
+    },
+    "ACTIVITY": {
+      "FIELDS": {
+        "description": {
+          "label": "Opis"
+        }
+      },
+      "Title": {
+        "other": "Aktywności"
+      }
+    },
+    "CHATMESSAGE": {
+      "Activities": "Aktywności",
+      "Button": {
+        "rollFormula": "Rzut",
+        "rollDamage": "Obrażenia",
+        "rollCheck": "Test cechy"
+      },
+      "Row": {
+        "Roll": "Rzut kością"
+      },
+      "Deltas": {
+        "Recovery": "Odnowienie"
+      }
+    },
+    "ADVANCEMENT": {
+      "Label": "Rozwój",
+      "Level": {
+        "Specific": "Poziom {level}"
+      },
+      "Manager": {
+        "Title": {
+          "LevelNewClass": "Dodaj klasę"
+        }
+      }
+    },
+    "TMP": "TYMCZ.",
+    "UNITS": {
+      "WEIGHT": {
+        "Kilogram": {
+          "Label": "Kilogram"
+        }
+      }
+    },
+    "FilterClear": "Wyczyść filtry",
+    "Filter": "Filtr",
+    "FILTER": {
+      "Empty": "Brak filtrów",
+      "Action": {
+        "Edit": "Edytuj filtry"
+      }
+    },
+    "FilterGroupCategory": "Grupuj według kategorii",
+    "FilterGroupOrigin": "Grupuj według pochodzenia",
+    "FeatureSearch": "Szukaj zdolności",
+    "FavoriteDrop": "Upuść tu ulubione",
+    "LevelNumber": "Poziom {level}",
+    "AdditionalControls": "Dodatkowe opcje",
+    "Identifier": "Identyfikator",
+    "IdentifierError": "Identyfikator może zawierać tylko litery (a-z), cyfry (0-9), myślniki (-) i podkreślenia (_).",
+    "Normal": "Normalnie",
+    "RollConfiguration": {
+      "Configuration": "Konfiguracja",
+      "Title": "Konfiguruj rzut"
+    },
+    "SavingThrowRoll": "Rzut Obronny ({ability})",
+    "ConsumeAmmunition": "Amunicja",
+    "CONSUMABLE": {
+      "Type": {
+        "Ammunition": {
+          "Label": "Amunicja"
+        }
+      },
+      "FIELDS": {
+        "damage": {
+          "label": "Obrażenia amunicji",
+          "replace": {
+            "label": "Zastąp obrażenia broni",
+            "hint": "Te obrażenia zastępują podstawowe obrażenia broni, zamiast się do nich dodawać."
+          }
+        },
+        "uses": {
+          "autoDestroy": {
+            "label": "Zniszcz po wyczerpaniu",
+            "hint": "Zmniejsza ilość przedmiotu o 1, gdy wyczerpią się wszystkie jego użycia."
+          }
+        }
+      }
+    },
+    "RollMode": "Tryb rzutu",
+    "RollSituationalBonus": "Premia sytuacyjna?",
+    "ClassOriginal": "Klasa pierwotna",
+    "ClassMakeOriginal": "Klasa pierwotna",
+    "ClassMakeOriginalHint": "Pierwsza klasa postaci — przy wieloklasowości decyduje o niektórych cechach klasowych.",
+    "FlagsWeaponCritThreshold": "Próg trafienia krytycznego bronią",
+    "FlagsWeaponCritThresholdHint": "Rozszerzony próg trafienia krytycznego dla ataków bronią.",
+    "FlagsMeleeCriticalDice": "Dodatkowe kości obrażeń krytyka wręcz",
+    "FlagsMeleeCriticalDiceHint": "Liczba dodatkowych kości obrażeń przy trafieniu krytycznym bronią do walki wręcz.",
+    "FLAGS": {
+      "IgnoreArmorSpeedReduction": {
+        "Name": "Ignoruj spowolnienie od pancerza",
+        "Hint": "Pancerz bez spełnionego wymogu Siły nie zmniejsza Szybkości."
+      }
+    },
+    "BONUSES": {
+      "FIELDS": {
+        "bonuses": {
+          "label": "Premie ogólne"
+        }
+      }
+    },
+    "SKILL": {
+      "SECTIONS": {
+        "Global": {
+          "Label": "Premie ogólne"
+        }
+      }
+    },
+    "TOOL": {
+      "SECTIONS": {
+        "Global": {
+          "Label": "Premie ogólne"
+        }
+      }
+    },
+    "ROLL": {
+      "FIELDS": {
+        "rolls": {
+          "ability": {
+            "check": {
+              "bonus": {
+                "label": "Ogólna premia do Testów cech"
+              }
+            },
+            "save": {
+              "bonus": {
+                "label": "Ogólna premia do Rzutów Obronnych"
+              }
+            },
+            "skill": {
+              "bonus": {
+                "label": "Ogólna premia do Testów umiejętności"
+              }
+            },
+            "tool": {
+              "bonus": {
+                "label": "Ogólna premia do Testów narzędzi"
+              }
+            }
+          },
+          "attack": {
+            "bonus": {
+              "label": "Ogólna premia do ataku"
+            },
+            "mwak": {
+              "bonus": {
+                "label": "Premia do ataku bronią wręcz"
+              }
+            },
+            "rwak": {
+              "bonus": {
+                "label": "Premia do ataku bronią dystansową"
+              }
+            }
+          },
+          "damage": {
+            "mwak": {
+              "bonus": {
+                "label": "Premia do obrażeń bronią wręcz"
+              }
+            },
+            "rwak": {
+              "bonus": {
+                "label": "Premia do obrażeń bronią dystansową"
+              }
+            }
+          }
+        }
+      }
+    },
+    "SOURCE": {
+      "Action": {
+        "Configure": "Konfiguruj źródło"
+      },
+      "FIELDS": {
+        "source": {
+          "label": "Źródło"
+        }
+      }
+    },
+    "DescriptionChat": "Opis na czacie",
+    "DescriptionEdit": "Edytuj: {description}",
+    "DescriptionUnidentified": "Opis przed identyfikacją",
+    "Type": "Typ",
+    "Usage": "Użycie",
+    "LimitedUses": "Ograniczone użycia",
+    "Max": "Maks.",
+    "DURATION": {
+      "FIELDS": {
+        "duration": {
+          "label": "Czas trwania",
+          "expiry": {
+            "label": "Moment wygaśnięcia"
+          },
+          "value": {
+            "label": "Długość"
+          },
+          "units": {
+            "label": "Jednostka czasu"
+          }
+        }
+      }
+    },
+    "DurationValue": "Długość",
+    "DurationUnits": "Jednostka czasu",
+    "ToggleDescription": "Pokaż / ukryj opis",
+    "ItemCreate": "Utwórz przedmiot",
+    "Amount": "Ilość",
+    "Denomination": "Waluta",
+    "ItemLootDetails": "Szczegóły łupu",
+    "ItemLootType": "Typ łupu",
+    "ItemLootProperties": "Właściwości łupu",
+    "AbilityPromptTitle": "Test cechy: {ability}",
+    "SkillPromptTitle": "Test: {ability} ({skill})",
+    "ToolPromptTitle": "Test: {tool}",
+    "Roll": "Rzut",
+    "UTILITY": {
+      "FIELDS": {
+        "roll": {
+          "label": "Rzut"
+        }
+      }
+    },
+    "Portrait": "Portret",
+    "InitiativeConfig": "Konfiguruj inicjatywę",
+    "HitPointsConfig": "Konfiguruj PW",
+    "HitDiceConfig": "Dostosuj Kości Wytrzymałości",
+    "Number": "Liczba",
+    "Die": "Kość",
+    "RollModifiers": "Modyfikatory",
+    "Value": "Wartość",
+    "SkillSur": "Przetrwanie",
+    "BackgroundAdd": "Dodaj pochodzenie",
+    "ClassAdd": "Dodaj klasę",
+    "Public": "Jawne",
+    "BiographyPublicEdit": "Edytuj jawną biografię",
+    "DetailsEdit": "Edytuj szczegóły",
+    "Languages": "Języki",
+    "Gear": {
+      "Label": "Wyposażenie"
+    },
+    "CreatureTypeTitle": "Konfiguruj typ istoty",
+    "CreatureTypeConfig": "Konfiguruj typ istoty",
+    "AbilityConfigure": "Konfiguruj: {ability}",
+    "ProficiencyConfigureTitle": "Konfiguruj: {label}",
+    "SkillConfigureTitle": "Konfiguruj: {skill}",
+    "ItemConsumableDetails": "Szczegóły używki",
+    "ItemConsumableType": "Typ używki",
+    "ItemConsumableSubtype": "Typ: {category}",
+    "ItemFeatureSubtype": "Typ: {category}",
+    "ItemLootSubtype": "Typ: {category}",
+    "ItemAmmoProperties": "Właściwości amunicji",
+    "ProficiencyLevel": "Poziom biegłości",
+    "RangeDistance": "Odległość",
+    "Long": "Daleki",
+    "Unit": "Jednostka",
+    "Recovery": "Odnowienie",
+    "USES": {
+      "Recovery": {
+        "Action": {
+          "Create": "Dodaj sposób odnowienia"
+        }
+      }
+    },
+    "DistSelf": "Na siebie",
+    "TARGET": {
+      "Type": {
+        "Self": {
+          "Label": "Na siebie"
+        }
+      }
+    },
+    "ItemToolProperties": "Właściwości narzędzi",
+    "ItemToolType": "Typ narzędzi",
+    "ItemToolBonus": "Premia narzędzi",
+    "ActionAbil": "Test cechy",
+    "Ability": "Cecha",
+    "ItemFeatureDetails": "Szczegóły zdolności",
+    "ItemFeatureProperties": "Właściwości zdolności",
+    "FEATURE": {
+      "FIELDS": {
+        "properties": {
+          "label": "Właściwości zdolności"
+        }
+      }
+    },
+    "Prerequisites": {
+      "FIELDS": {
+        "prerequisites": {
+          "level": {
+            "label": "Wymagany poziom",
+            "hint": "Poziom postaci albo klasy wymagany, by wybrać tę zdolność przy awansie."
+          },
+          "items": {
+            "label": "Wymagane przedmioty",
+            "hint": "Identyfikatory przedmiotów, które postać musi mieć, zanim wybierze ten."
+          },
+          "repeatable": {
+            "label": "Powtarzalna",
+            "hint": "Tę zdolność można wybrać więcej niż raz."
+          }
+        }
+      }
+    },
+    "SpellHeader": {
+      "Roll": "Rzut",
+      "Formula": "Wzór"
+    }
   },
 
   "CALENDAR": {
@@ -969,6 +1354,58 @@
       "Fall": "Jesień",
       "Winter": "Zima"
     }
+  },
+
+  "SETTINGS": {
+    "DND5E": {
+      "RULESVERSION": {
+        "Name": "Wersja reguł",
+        "Hint": "Wybór między zbiorami reguł 2024 i 2014 w różnych mechanikach.",
+        "Modern": "Nowe reguły (2024)",
+        "Legacy": "Dawne reguły (2014)"
+      },
+      "COMBAT": {
+        "AutoApplyDowned": {
+          "Name": "Automatyczne powalenie przy 0 PW",
+          "Hint": "Istota sprowadzona w walce do 0 PW automatycznie dostaje stan Martwy albo Nieprzytomność.",
+          "None": "Nigdy",
+          "DeadOnly": "Dla BN (tylko śmierć)",
+          "NPCs": "Dla BN (śmierć i Nieprzytomność)",
+          "All": "Zawsze"
+        }
+      },
+      "AUTOMATION": {
+        "SenseVision": {
+          "Name": "Wzrok żetonu ze zmysłów",
+          "Hint": "Zasięg i tryb widzenia oraz tryby wykrywania żetonu ustawiane automatycznie ze zmysłów aktora."
+        },
+        "Autosize": {
+          "Name": "Rozmiar żetonu z kategorii rozmiaru",
+          "Hint": "Wymiary i skala żetonu ustawiane automatycznie z kategorii rozmiaru istoty."
+        }
+      },
+      "METRIC": {
+        "WeightUnits": {
+          "Name": "Metryczne jednostki wagi",
+          "Hint": "Kilogramy zamiast funtów, także w obliczeniach udźwigu."
+        },
+        "LengthUnits": {
+          "Name": "Metryczne jednostki długości",
+          "Hint": "Metry zamiast stóp dla ruchu i zmysłów."
+        },
+        "VolumeUnits": {
+          "Name": "Metryczne jednostki objętości",
+          "Hint": "Litry zamiast stóp sześciennych dla pojemności pojemników."
+        }
+      },
+      "SUMMARIZECHAT": {
+        "Name": "Podsumowania na kartach czatu",
+        "Hint": "Niektóre wyniki dopisywane jako podsumowanie na karcie zamiast osobnej wiadomości."
+      }
+    },
+    "5eNoExhaustionN": "Wyłącz automatykę Wyczerpania",
+    "5eNoExhaustionL": "Wyłącza automatyczne skutki Wyczerpania w systemie.",
+    "5eNoConcentrationN": "Wyłącz śledzenie koncentracji",
+    "5eNoConcentrationL": "Wyłącza automatyczne śledzenie koncentracji w systemie."
   }
 }
-

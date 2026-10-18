@@ -222,6 +222,27 @@ export function registerConfigTests(quench) {
       });
     });
 
+    // D10 (PLAN_migracja_dnd5e6.md §3.13): nasz `pl.json` przykrywa angielskie napisy dnd5e. Klucz, którego
+    // zainstalowany dnd5e już nie ma, nic nie tłumaczy — a jego następca świeci po angielsku (w 6.0 tak zniknęło 19).
+    describe("Tłumaczenie dnd5e (D10)", function () {
+      it("każdy klucz DND5E.* z naszego pl.json istnieje w en.json zainstalowanego dnd5e", async function () {
+        const flat = (o, p = "") => Object.entries(o ?? {}).flatMap(([k, v]) => (v && typeof v === "object" ? flat(v, `${p}${k}.`) : [`${p}${k}`]));
+        const en = new Set(flat(await (await fetch(foundry.utils.getRoute("systems/dnd5e/lang/en.json"), { cache: "no-store" })).json()));
+        const pl = flat(await (await fetch(foundry.utils.getRoute(`modules/${MODULE_ID}/lang/pl.json`), { cache: "no-store" })).json());
+        const stale = pl.filter(k => k.startsWith("DND5E.") && !en.has(k));
+        expect(stale, `klucze, których dnd5e ${game.system.version} nie ma`).to.deep.equal([]);
+      });
+
+      it("napisy dnd5e 6 z naszych ekranów są po polsku (i nazwy cech przedmiotów spod martwego bloku)", async function () {
+        const en = foundry.utils.flattenObject(await (await fetch(foundry.utils.getRoute("systems/dnd5e/lang/en.json"), { cache: "no-store" })).json());
+        for (const key of ["DND5E.ITEM.Property.Ammunition", "DND5E.ITEM.Property.Finesse", "DND5E.ARMORCLASS.Calculation.Armored",
+          "DND5E.DEATH.Outcome.stable", "DND5E.EFFECT.Tab", "DND5E.TRAIT.Damage.Resistance.title", "DND5E.RollConfiguration.Title"]) {
+          expect(en[key], `${key} w en.json`).to.be.a("string");
+          expect(game.i18n.localize(key), key).to.not.equal(en[key]);
+        }
+      });
+    });
+
     describe("Broń, obrażenia, stworzenia", function () {
       it("rzucanie czarów jest wyłączone", function () {
         // dnd5e 6.0 has no `spellcastingTypes` (it was a 5.3 alias of `spellcasting`, which stays — see spellcasting.mjs).
