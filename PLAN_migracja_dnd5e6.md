@@ -124,7 +124,7 @@ Bez zmian łamiących API w notatkach 14.365–14.369. E1 to sprawdza bramką.
 | Efekty | warunki efektów i zmian, zmiany typu „rule” stosowane przy rzucie, czasy „do początku następnej tury”, zdarzenia wygaśnięcia (KO/DO), pochodzenie w `system.origin.*`, wygasłe efekty usuwane poza walką | E3, PM |
 | Konfiguracja | `senses` jako obiekty; `bloodied.threshold` w procentach; `requests` dostał `save`; 12 tabel, których dotykamy, zmieniło kształt (§3.5) | E3 |
 | Automatyka | spadanie z Levels, wyczerpanie (ustawienie), stan przy 0 PW (`autoApplyDowned`), grupowanie inicjatywy, rozmiar żetonu z rozmiaru aktora, zmysły → wzrok żetonu, ciężki pancerz → prędkość, przeciążenie, koncentracja z komunikatem, kalendarz (odnawianie „dzień/świt/zmierzch”, karta upływu czasu) | E9 (§4, §5) |
-| Ścieżki danych | `attributes.movement.<rodzaj>` → `movement.speeds.<rodzaj>`; `senses.<zmysł>` → `senses.ranges.<zmysł>`; `system.bonuses.{mwak,rwak,msak,rsak}.{attack,damage}` → `system.rolls.{attack,damage}.*.bonus`; `bonuses.abilities.*` → `rolls.ability.*.bonus`; `abilities/skills/tools.*.bonuses.{check,save}` → `….roll.bonus`; `init.bonus`, `death.bonuses.save`, `concentration.bonuses.save` → `….roll.bonus`; `rarity` → `rarities`. Dane źródłowe przenosi `_migrateData`; **klucze zmian efektów tylko podkładka** (`ActiveEffect5e.SHIM_FIELDS`, z ostrzeżeniem zgodności) — migracja świata ich nie przepisuje | E3 (kod), E8 (paczki), E11 (efekty w świecie) |
+| Ścieżki danych | `attributes.movement.<rodzaj>` → `movement.speeds.<rodzaj>`; `senses.<zmysł>` → `senses.ranges.<zmysł>`; `system.bonuses.{mwak,rwak,msak,rsak}.{attack,damage}` → `system.rolls.{attack,damage}.*.bonus`; `bonuses.abilities.*` → `rolls.ability.*.bonus`; `abilities/skills/tools.*.bonuses.{check,save}` → `….roll.bonus`; `init.bonus`, `death.bonuses.save`, `concentration.bonuses.save` → `….roll.bonus`; `rarity` → `rarities`. Dane źródłowe przenosi `_migrateData`; **klucze zmian efektów tylko podkładka** (`ActiveEffect5e.SHIM_FIELDS`; w 6.0.6 bez ostrzeżenia — poprawka z E10) — migracja świata ich nie przepisuje | E3 (kod), E8 (paczki), E11 (efekty w świecie) |
 | Język | `en.json`: +697 kluczy, −205, 53 ze zmienioną treścią; innych języków dnd5e nie ma | E7 (§3.13) |
 | Paczki systemu | nowa paczka `dnd5e.effects` | E8 (`srd-cleanup.mjs`) |
 | Ustawienia | nowe: `toggleSheetMode`, `openCompendiumBrowser`, `firstRun`, `disableFalling`, `tokenSizeSync`, `senseVisionSync`, `pietyScore`, `disableExhaustion`, `chatCardSummary`, `chatLogTheme`, `allowPlayerDamageTray`, `allowPlayerEffectsTray`, `bastionTurns`, `encounterPlacementBehavior`, `initiativeGroupCombatants`, `initiativeGroupRoll`, `autoApplyDowned`, `defaultDocumentSubtypes`; usunięte: `theme`, `moduleArtConfiguration` (nie używamy) | §5 |
@@ -267,8 +267,8 @@ Nadpisane w 9 aktywnościach: `metadata` ×9, `use` ×9, `rollSave` (akcja czatu
 W naszym kodzie (`scripts/`, `dev/`): ruch (`movement.walk|fly|…`) — 31 miejsc w 12 plikach (Bieganie, udźwig, drony,
 pościg); zmysły (`senses.darkvision|…`) — 9 w 4 (noktowizor, termowizor); `system.bonuses.*` — 3 w 3;
 `death|concentration.bonuses` — 2 w 2; `ac.base|flat|calc|formula` — 3 w 2. Kod czytający dane przygotowane nie ma
-podkładki — po starym kluczu dostaje `undefined`. Klucze zmian efektów działają przez podkładkę, ale z ostrzeżeniem —
-przepisujemy je w kodzie (E3), w paczkach (E8) i w efektach już zapisanych w świecie (E11, nasza migracja).
+podkładki — po starym kluczu dostaje `undefined`. Klucze zmian efektów działają przez podkładkę (w 6.0.6 cichą —
+poprawka z E10: żaden wpis `SHIM_FIELDS` nie ma `warning`) — przepisujemy je w kodzie (E3), w paczkach (E8) i w efektach już zapisanych w świecie (E11, nasza migracja).
 
 ### 3.13 Tłumaczenie
 
@@ -766,8 +766,8 @@ Foundry otworzył w piaskownicy — 18 paczek, 0 różnic (B3).
   `calcs: []` i jeden wzór. (2) Palcożerca (RAW: −1 do Testów Cech opartych na ZRC) stał na
   `bonuses.abilities.check` — od zawsze −1 do **każdego** testu cechy; teraz `abilities.dex.check.roll.bonus` (klucz
   6.0 dla jednej cechy). Test na żywo: −1 do testu ZRC i umiejętności ZRC, nic na SIŁ. Quench pilnuje też, że żaden
-  efekt w paczkach nie stoi na kluczu-podkładce 6.0 (`abilities.*.bonuses.check|save` — ostrzeżenie przy każdym
-  nałożeniu).
+  efekt w paczkach nie stoi na kluczu-podkładce 6.0 (`SHIM_FIELDS`, `abilities.*.bonuses.check|save`) — w 6.0.6
+  podkładki są ciche (żaden wpis nie ma `warning`, sprawdzone w E10), więc bramka ostrzeżeń ich nie łapie.
 - **PM14 zrobione:** zestawy z `nativeCheck` dostają w budowniczym `NeuroToolCheckActivity` z bramkami (wspólne
   `buildToolkitCheckActivity` z `createToolkits()`); e2e `aktywnosci` bierze zestaw kowala z paczki.
 - `dnd5e.effects` zostaje widoczna (§5). `towarzysz-tworzenie` w świecie używanym ponownie: stary Lucky z

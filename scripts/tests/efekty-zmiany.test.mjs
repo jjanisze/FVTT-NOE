@@ -76,8 +76,9 @@ export function registerEffectChangesTests(quench) {
         }
       });
 
-      // dnd5e 6.0 przekierowuje stare klucze (`ActiveEffect5e.SHIM_FIELDS`) z ostrzeżeniem zgodności przy każdym
-      // nałożeniu — a klucze spoza listy (np. `abilities.*.bonuses.check`) po cichu nie robią nic. Dane piszą nowe.
+      // dnd5e 6.0 przekierowuje stare klucze (`ActiveEffect5e.SHIM_FIELDS` i wzorzec
+      // `abilities|skills|tools.*.bonuses.check|save`) po cichu: w 6.0.6 żaden wpis nie ma `warning`, więc bramka
+      // ostrzeżeń zgodności (E10) ich nie złapie — ten test tak. Dane piszą nowe klucze.
       it("żaden klucz zmiany w danych modułu nie jest starym kluczem dnd5e (podkładka 6.0)", function () {
         const shim = CONFIG.ActiveEffect.documentClass.SHIM_FIELDS ?? {};
         const keys = [...allDataChanges(), ...nestedChanges(BESTIARY), ...nestedChanges(CHEMIA)].map(c => c.key);
