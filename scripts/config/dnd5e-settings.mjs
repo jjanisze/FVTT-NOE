@@ -16,6 +16,7 @@ const MODULE_ID = "neuroshima-2026-overrides";
  * @property {*} value             What Neuroshima needs.
  * @property {string} why          Shown in the GM's card and as the lock hint.
  * @property {boolean} [reload]    dnd5e reads it only at start-up (`requiresReload`).
+ * @property {boolean} [client]    A client setting: each client sets its own, quietly, at its `ready`.
  */
 
 /** @type {Readonly<Record<string, EnforcedSetting>>} */
@@ -28,7 +29,11 @@ export const ENFORCED_DND5E_SETTINGS = Object.freeze({
   tokenSizeSync: { value: false, why: "rozmiar i skalę żetonów (Bestiariusz, drony) kalibruje moduł", reload: true },
   metricWeightUnits: { value: true, why: "NOE liczy w kilogramach (Udźwig)" },
   metricLengthUnits: { value: true, why: "NOE liczy w metrach" },
-  metricVolumeUnits: { value: true, why: "NOE liczy w litrach" }
+  metricVolumeUnits: { value: true, why: "NOE liczy w litrach" },
+  // dnd5e 6.0 hides a save or check rolled from a usage card and shows a summary on the card instead; our
+  // Fuks/Forsowanie bar and the roll annotations (choroby, chemia, dostępność narzędzi) live on the roll's own card,
+  // so they vanished from the log. Separate cards as in 5.3 until the bar is ported into the summary (§9).
+  chatCardSummary: { value: false, why: "pasek Fuksa i Forsowania oraz adnotacje rzutów są na karcie rzutu, nie w podsumowaniu", client: true }
 });
 
 /** Each enforced setting this dnd5e registers, with its current value. */
@@ -37,16 +42,16 @@ export function enforcedSettingsState() {
     .filter(([key]) => game.settings.settings.has(`dnd5e.${key}`))
     .map(([key, s]) => {
       const current = game.settings.get("dnd5e", key);
-      return { key, required: s.value, current, ok: current === s.value, why: s.why, reload: !!s.reload };
+      return { key, required: s.value, current, ok: current === s.value, why: s.why, reload: !!s.reload, client: !!s.client };
     });
 }
 
-/** Set every enforced setting that differs; the active GM only. Returns what changed. */
+/** Set every enforced setting that differs — world settings on the active GM, client ones on every client. */
 export async function enforceDnd5eSettings() {
-  if (!game.users.activeGM?.isSelf) return [];
+  const gm = !!game.users.activeGM?.isSelf;
   const changed = [];
   for (const s of enforcedSettingsState()) {
-    if (s.ok) continue;
+    if (s.ok || (!s.client && !gm)) continue;
     await game.settings.set("dnd5e", s.key, s.required);
     // dnd5e caches world settings once (`settings.mjs` `cacheSettings`) and refreshes only those without
     // `requiresReload`; this client would go on with the old value until F5. Other clients load the new one.
@@ -54,14 +59,20 @@ export async function enforceDnd5eSettings() {
     changed.push(s);
   }
   if (!changed.length) return changed;
+  // The log rendered before `ready` with linked rolls hidden; dnd5e does not re-render on this setting's change.
+  if (changed.some(c => c.key === "chatCardSummary")) {
+    for (const m of game.messages) if (m.system?.summaryTemplate && m._source.system?.origin) void ui.chat?.updateMessage?.(m);
+  }
+  const world = changed.filter(c => !c.client);
   console.log(`${MODULE_ID} | ustawienia dnd5e pilnowane przez NOE: ${changed.map(c => `${c.key} ${JSON.stringify(c.current)} → ${JSON.stringify(c.required)}`).join(", ")}`);
   const label = key => game.i18n.localize(game.settings.settings.get(`dnd5e.${key}`)?.name ?? key);
-  const reload = changed.some(c => c.reload);
+  if (!world.length) return changed;
+  const reload = world.some(c => c.reload);
   await ChatMessage.create({
     whisper: game.users.filter(u => u.isGM).map(u => u.id),
     speaker: { alias: "Neuroshima" },
     content: `<p><strong>Ustawienia dnd5e przestawione przez moduł</strong> — reguły NOE od nich zależą:</p>
-      <ul>${changed.map(c => `<li><strong>${foundry.utils.escapeHTML(label(c.key))}</strong>: ${foundry.utils.escapeHTML(c.why)}</li>`).join("")}</ul>
+      <ul>${world.map(c => `<li><strong>${foundry.utils.escapeHTML(label(c.key))}</strong>: ${foundry.utils.escapeHTML(c.why)}</li>`).join("")}</ul>
       ${reload ? "<p>Część działa dopiero po przeładowaniu świata (F5).</p>" : ""}`
   });
   return changed;

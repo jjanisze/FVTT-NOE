@@ -346,8 +346,8 @@ i test warstwy 1 dla tabeli. Plik przejmuje dzisiejsze wymuszenia z §3.14 (jedn
 | `autoApplyDowned` | `none` | 0 PW rozstrzyga nasza karta | **Wymuś `none`** |
 | `disableFalling` | `false` | E9: konfiguracja NOE albo wyłączenie | **Wymuś** wg wyniku E9 |
 | `initiativeGroupCombatants`, `initiativeGroupRoll` | `true` | M3: tura towarzysza po właścicielu | E9: zostaw, jeśli nie psuje M3; inaczej **Wymuś `false`** |
-| `tokenSizeSync` | `true` | kalibracja żetonów | E9 → prawdopodobnie **Wymuś `false`** |
-| `senseVisionSync` | `true` | nasze tryby wzroku | E9 → prawdopodobnie **Wymuś `false`** |
+| `tokenSizeSync` | `true` | kalibracja żetonów | **Wymuś `false`** (E3: dron 2×2, skale żetonów — A15) |
+| `senseVisionSync` | `true` | nasze tryby wzroku | **Wymuś `false`** (E3: kamera drona — A16) |
 | `disableConcentration` | `false` | NOE nie ma koncentracji (D9) | **Wymuś `true`** |
 | `rulesVersion` | — | „modern” (Wyczerpanie) | **Wymuś `modern`** (dziś tylko ostrzeżenie, `main.mjs:679`) |
 | `metricWeightUnits`, `metricLengthUnits`, `metricVolumeUnits` | `false` | NOE jest metryczny | **Wymuś `true`** (już dziś, `encumbrance-config.mjs`) |
@@ -357,7 +357,8 @@ i test warstwy 1 dla tabeli. Plik przejmuje dzisiejsze wymuszenia z §3.14 (jedn
 | `bastionTurns`, `pietyScore` | — | brak w NOE | domyślne |
 | `bloodied` | — | brak w NOE | zostaje (próg 0) |
 | `allowPlayerDamageTray`, `allowPlayerEffectsTray` | `false` | tacki tylko dla MG (D7) | domyślne, nie wymuszamy; PM12 |
-| `chatCardSummary`, `chatLogTheme`, `autoCollapseChatTrays` | różne | wygląd (D8) | domyślne do etapu stylów |
+| `chatCardSummary` (klienta) | `true` | RO i test rzucone z karty użycia znikają z dziennika (zostaje podsumowanie na karcie) — a z nimi pasek Fuksa i Forsowania i adnotacje rzutów | **Wymuś `false`** na każdym kliencie (E6); przyjąć razem z portem paska do podsumowania (§9) |
+| `chatLogTheme`, `autoCollapseChatTrays` | różne | wygląd (D8) | domyślne do etapu stylów |
 
 ---
 
@@ -451,6 +452,8 @@ wyszło, i warunkiem wejścia. Kolejność — według stosunku zysku do kosztu 
 | PM10 | Wydajność Pościgu (doradcze progi z bramki v0.19.0) | odłożone z v0.19.0 | po E10 | S–M |
 | PM11 | `fvtt` i skrypty z §3.9: jedno źródło ścieżki instalacji (`cfg.installDir`, `FOUNDRY_APP` w `runNode`), potem instalacja per profil (wersja przenośna obok) | dziś 8 zaszytych ścieżek; przyszłe aktualizacje bez zatrzymywania kampanii | po E12 | S–M |
 | PM12 | Tacki obrażeń i efektów dla graczy (`allowPlayerDamageTray`, `allowPlayerEffectsTray`) | gracz nakłada na własny żeton; mniej klikania MG | po becie, decyzja stołu (D7); testy klienta gracza, ochrona przed podwójnym nałożeniem | S–M |
+| PM13 | Podsumowania kart dnd5e 6 (`chatCardSummary`): pasek Fuksa i Forsowania, adnotacje rzutów (choroby, chemia, dostępność narzędzi) i nasze RO/testy z `system.origin` w podsumowaniu na karcie użycia (2026-10-18, E6) | mniej osobnych wiadomości — cel E6, odłożony, bo dziś podsumowanie chowa kartę rzutu z naszym paskiem | po etapie stylów (D8); testy paska na karcie użycia | M |
+| PM14 | Budowniczy paczek pisze aktywności zestawów jak `createToolkits()`: `nativeCheck` → `NeuroToolCheckActivity` z bramkami (kowal: Naostrzenie, Naprawa) (2026-10-18, E4) | zestaw kowala z kompendium i z Produkcji nie ma bramek | E8 | S |
 
 ---
 
