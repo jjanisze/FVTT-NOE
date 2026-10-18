@@ -40,3 +40,15 @@ Intimidation and Sleight of Hand. Intimidation has two requested alternatives
 on the same card. Older candidates remain selectable. The atlas repeated the
 bad hand silhouette, so an isolated correction uses a clearer open five-digit
 pose with the same hand/coin motif; its prompt and source remain with the batch.
+
+Batch 113 review consumed: Intuition and the looming-face Intimidation design
+are installed. `accept.py --batch 113 --check` verifies the exact files. The
+hand was returned because the tossed coin reads as clumsiness; that feedback
+is preserved verbatim in `batch-113/reviewed.json`.
+
+Batch 114 (`prepare_114.py`, `register_114.py`) offers three controlled coin-hand
+poses with physical coin contact and one different-concept sleeve-card backup.
+They share one delivery target and one review card; only the selected approved
+candidate is installed. Earlier options remain selectable.
+The atlas palming pose had an extra digit; an isolated image edit removes it.
+Its exact prompt, source crop and corrected output are preserved with Batch 114.

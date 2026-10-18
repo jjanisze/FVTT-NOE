@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Asset review · Batch 113 approved choices delivered; 1 awaiting revision",
+  "title": "Batch 114 · Sleight of Hand: three coin variants + one backup awaiting GM review",
   "updated": "2026-10-18",
   "items": [
     {
@@ -15859,8 +15859,8 @@
     {
       "id": "proficiency-zwinne-dlonie",
       "name": "Zwinne dłonie",
-      "batch": 113,
-      "tier": "Batch 113 · Proficiency revisions",
+      "batch": 114,
+      "tier": "Batch 114 · Sleight of Hand alternatives",
       "target": "icons/proficiencies/zwinne-dlonie.svg",
       "deliveryTargets": [
         {
@@ -15871,12 +15871,36 @@
       ],
       "wiringKey": "skills.zwi",
       "context": "Native character creation, advancement and trait UI: Zwinne dłonie; 16–64 px beside Polish labels. skills.zwi.",
-      "request": "Retain the bare hand / single coin motif. Correct the malformed claw with a coherent open five-digit hand deftly tossing one coin; all fingertips visible and separated. Exact targeted correction prompt is archived with the batch.",
+      "request": "Three dexterous coin-control poses with the coin securely touching the hand, plus a different sleeve-card backup. Keep anatomy coherent and avoid an airborne/dropped coin. Earlier options remain available.",
       "current": {
         "src": "/icons/items/loot/zetony.svg",
         "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
       },
       "candidates": [
+        {
+          "id": "batch114-zwinne-dlonie-chwyt",
+          "label": "Batch 114 · Zwinne dłonie — precyzyjny chwyt",
+          "src": "candidates/batch-114/zwinne-dlonie-chwyt.png",
+          "note": "COIN CONTROL VARIANT 1: ONE complete anatomically natural adult RIGHT HAND in three-quarter PALM view, precisely pinching ONE upright plain coin by its rim BETWEEN THE THUMB PAD AND INDEX FINGERTIP. Both pads visibly TOUCH opposite edges of the same coin; no gap, the coin is securely held. The middle, ring and little fingers curl gently toward the palm in three clearly distinct natural arcs, all three rounded fingertips still visible. Exactly four fingers plus one thumb, each growing from one coherent palm, stout wrist intact. Natural adult proportions, broad black separation, sparse cuts. No extra finger, missing finger, fused digit, dislocated joint, claw, flying coin, second coin, motion marks, text, currency mark, glove or nail detail."
+        },
+        {
+          "id": "batch114-zwinne-dlonie-knykcie",
+          "label": "Batch 114 · Zwinne dłonie — przekładanie monety",
+          "src": "candidates/batch-114/zwinne-dlonie-knykcie.png",
+          "note": "COIN CONTROL VARIANT 2: ONE complete anatomically natural adult RIGHT HAND viewed from the BACK at a shallow three-quarter angle, fingers loosely curled, FOUR distinct finger knuckles in a gentle descending row and ONE separate thumb at the side. ONE large plain coin is securely balanced ON AND IN CONTACT WITH the index and middle finger knuckles, tilted while being dexterously rolled from one knuckle to the next. The lower coin rim visibly touches BOTH supporting finger surfaces; no floating gap. Each of the four fingers follows a single coherent bend from its knuckle to its own visible rounded tip. One palm and one intact stout wrist. No extra digits, fused fingers, branching joint, pointed talon, airborne coin, second coin, arrow, speed line, texture, skin creases, nail detail or currency symbol."
+        },
+        {
+          "id": "batch114-zwinne-dlonie-ukrycie",
+          "label": "Batch 114 · Zwinne dłonie — ukrycie w dłoni",
+          "src": "candidates/batch-114/zwinne-dlonie-ukrycie.png",
+          "note": "COIN CONTROL VARIANT 3: ONE complete adult RIGHT HAND in FRONT PALM view performing a controlled classic COIN PALM concealment. ONE plain coin lies FLAT AGAINST THE CENTER OF THE PALM; the gently bent RING AND LITTLE FINGERS overlap and hold its lower rim, visibly keeping it secure. The middle and index fingers extend loosely upward, thumb relaxed outward at the side. Exactly FOUR fingers and ONE thumb with natural bases and coherent joints, all five fingertip ends distinguishable. The coin is partially concealed by the fingers but its broad upper half remains visible; no airborne coin. One coherent palm, complete wrist, ordinary adult proportions. No fused or extra digits, twisted thumb, claw, skin texture, nail detail, duplicate coin, motion rays or text."
+        },
+        {
+          "id": "batch114-zwinne-dlonie-rekaw",
+          "label": "Batch 114 · Zwinne dłonie — karta w rękawie (zapas)",
+          "src": "candidates/batch-114/zwinne-dlonie-rekaw.png",
+          "note": "DIFFERENT-CONCEPT BACKUP, WITHOUT A VISIBLE HAND: ONE plain SHIRT SLEEVE CUFF, a compact folded fabric band seen at a three-quarter angle with ONE broad BLACK OPENING. ONE large PLAYING CARD is discreetly concealed inside the cuff, its upper half protruding diagonally from that opening. The card has ONE large BLACK SPADE cutout on its white face, no letter, numeral or tiny corner pip. A sober practical sleight-of-hand / cheating motif: an ace up the sleeve. Card is in firm contact with and visibly held inside the cuff, not falling or flying. Broad clear silhouettes, one fold cut only. No hand or arm beyond the short cuff, coin, face, ornament, magical aura, smoke, stars, logo or writing."
+        },
         {
           "id": "batch113-zwinne-dlonie",
           "label": "Batch 113 · Zwinne dłonie — poprawiona anatomia",

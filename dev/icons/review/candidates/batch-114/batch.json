@@ -1,0 +1,171 @@
+{
+  "date": "2026-10-18",
+  "batch": 114,
+  "pass": "sleight-of-hand-options",
+  "partialAtlas": true,
+  "emptyCells": [
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "subjects": [
+    {
+      "cell": 1,
+      "kind": "proficiency",
+      "key": "zwinne-dlonie-chwyt",
+      "name": "Zwinne dłonie — precyzyjny chwyt",
+      "itemId": "proficiency-zwinne-dlonie",
+      "target": "icons/proficiencies/zwinne-dlonie.svg",
+      "wiringKey": "skills.zwi",
+      "fallback": "icons/items/loot/zetony.svg",
+      "fallbackSha256": "c79fd9938245ea2a73515466dd05e4098ca4f02b742b8415f2c0528096ee69f6",
+      "request": "COIN CONTROL VARIANT 1: ONE complete anatomically natural adult RIGHT HAND in three-quarter PALM view, precisely pinching ONE upright plain coin by its rim BETWEEN THE THUMB PAD AND INDEX FINGERTIP. Both pads visibly TOUCH opposite edges of the same coin; no gap, the coin is securely held. The middle, ring and little fingers curl gently toward the palm in three clearly distinct natural arcs, all three rounded fingertips still visible. Exactly four fingers plus one thumb, each growing from one coherent palm, stout wrist intact. Natural adult proportions, broad black separation, sparse cuts. No extra finger, missing finger, fused digit, dislocated joint, claw, flying coin, second coin, motion marks, text, currency mark, glove or nail detail.",
+      "context": "Native character creation, advancement and trait UI: Zwinne dłonie; 16–64 px beside Polish labels. skills.zwi.",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/zwinne-dlonie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "revisionOf": {
+        "id": "proficiency-zwinne-dlonie",
+        "name": "Zwinne dłonie",
+        "decision": "revise",
+        "candidateId": "batch113-zwinne-dlonie",
+        "selectedSource": "candidates/batch-113/zwinne-dlonie.png",
+        "sourceSha256": "66bb9a38c482d7d1d50f4b56a97b9d1d0be390d6e5faebc7c5abb38a4eed2efe",
+        "sourceKind": "candidate",
+        "target": "icons/proficiencies/zwinne-dlonie.svg",
+        "notes": "It's more like clumsy hands now, with the icon showing the coin flying out of the hand. Generate 3 more versions of the hand dextriously manipulating the coin, and let's see if we can generate it without the AI hands syndrome. Create another backup image based on a different concept just in case.",
+        "feedback": {
+          "itemId": "proficiency-zwinne-dlonie",
+          "decision": "revise",
+          "candidateId": "batch113-zwinne-dlonie",
+          "notes": "It's more like clumsy hands now, with the icon showing the coin flying out of the hand. Generate 3 more versions of the hand dextriously manipulating the coin, and let's see if we can generate it without the AI hands syndrome. Create another backup image based on a different concept just in case.",
+          "updatedAt": "2026-10-18T15:51:16.914Z"
+        },
+        "feedbackSha256": "bfc7b7257e25b0a66990edaf001cedbebc6802110755f3e343e32bc11d3eb0bf"
+      }
+    },
+    {
+      "cell": 2,
+      "kind": "proficiency",
+      "key": "zwinne-dlonie-knykcie",
+      "name": "Zwinne dłonie — przekładanie monety",
+      "itemId": "proficiency-zwinne-dlonie",
+      "target": "icons/proficiencies/zwinne-dlonie.svg",
+      "wiringKey": "skills.zwi",
+      "fallback": "icons/items/loot/zetony.svg",
+      "fallbackSha256": "c79fd9938245ea2a73515466dd05e4098ca4f02b742b8415f2c0528096ee69f6",
+      "request": "COIN CONTROL VARIANT 2: ONE complete anatomically natural adult RIGHT HAND viewed from the BACK at a shallow three-quarter angle, fingers loosely curled, FOUR distinct finger knuckles in a gentle descending row and ONE separate thumb at the side. ONE large plain coin is securely balanced ON AND IN CONTACT WITH the index and middle finger knuckles, tilted while being dexterously rolled from one knuckle to the next. The lower coin rim visibly touches BOTH supporting finger surfaces; no floating gap. Each of the four fingers follows a single coherent bend from its knuckle to its own visible rounded tip. One palm and one intact stout wrist. No extra digits, fused fingers, branching joint, pointed talon, airborne coin, second coin, arrow, speed line, texture, skin creases, nail detail or currency symbol.",
+      "context": "Native character creation, advancement and trait UI: Zwinne dłonie; 16–64 px beside Polish labels. skills.zwi.",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/zwinne-dlonie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "revisionOf": {
+        "id": "proficiency-zwinne-dlonie",
+        "name": "Zwinne dłonie",
+        "decision": "revise",
+        "candidateId": "batch113-zwinne-dlonie",
+        "selectedSource": "candidates/batch-113/zwinne-dlonie.png",
+        "sourceSha256": "66bb9a38c482d7d1d50f4b56a97b9d1d0be390d6e5faebc7c5abb38a4eed2efe",
+        "sourceKind": "candidate",
+        "target": "icons/proficiencies/zwinne-dlonie.svg",
+        "notes": "It's more like clumsy hands now, with the icon showing the coin flying out of the hand. Generate 3 more versions of the hand dextriously manipulating the coin, and let's see if we can generate it without the AI hands syndrome. Create another backup image based on a different concept just in case.",
+        "feedback": {
+          "itemId": "proficiency-zwinne-dlonie",
+          "decision": "revise",
+          "candidateId": "batch113-zwinne-dlonie",
+          "notes": "It's more like clumsy hands now, with the icon showing the coin flying out of the hand. Generate 3 more versions of the hand dextriously manipulating the coin, and let's see if we can generate it without the AI hands syndrome. Create another backup image based on a different concept just in case.",
+          "updatedAt": "2026-10-18T15:51:16.914Z"
+        },
+        "feedbackSha256": "bfc7b7257e25b0a66990edaf001cedbebc6802110755f3e343e32bc11d3eb0bf"
+      }
+    },
+    {
+      "cell": 3,
+      "kind": "proficiency",
+      "key": "zwinne-dlonie-ukrycie",
+      "name": "Zwinne dłonie — ukrycie w dłoni",
+      "itemId": "proficiency-zwinne-dlonie",
+      "target": "icons/proficiencies/zwinne-dlonie.svg",
+      "wiringKey": "skills.zwi",
+      "fallback": "icons/items/loot/zetony.svg",
+      "fallbackSha256": "c79fd9938245ea2a73515466dd05e4098ca4f02b742b8415f2c0528096ee69f6",
+      "request": "COIN CONTROL VARIANT 3: ONE complete adult RIGHT HAND in FRONT PALM view performing a controlled classic COIN PALM concealment. ONE plain coin lies FLAT AGAINST THE CENTER OF THE PALM; the gently bent RING AND LITTLE FINGERS overlap and hold its lower rim, visibly keeping it secure. The middle and index fingers extend loosely upward, thumb relaxed outward at the side. Exactly FOUR fingers and ONE thumb with natural bases and coherent joints, all five fingertip ends distinguishable. The coin is partially concealed by the fingers but its broad upper half remains visible; no airborne coin. One coherent palm, complete wrist, ordinary adult proportions. No fused or extra digits, twisted thumb, claw, skin texture, nail detail, duplicate coin, motion rays or text.",
+      "context": "Native character creation, advancement and trait UI: Zwinne dłonie; 16–64 px beside Polish labels. skills.zwi.",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/zwinne-dlonie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "revisionOf": {
+        "id": "proficiency-zwinne-dlonie",
+        "name": "Zwinne dłonie",
+        "decision": "revise",
+        "candidateId": "batch113-zwinne-dlonie",
+        "selectedSource": "candidates/batch-113/zwinne-dlonie.png",
+        "sourceSha256": "66bb9a38c482d7d1d50f4b56a97b9d1d0be390d6e5faebc7c5abb38a4eed2efe",
+        "sourceKind": "candidate",
+        "target": "icons/proficiencies/zwinne-dlonie.svg",
+        "notes": "It's more like clumsy hands now, with the icon showing the coin flying out of the hand. Generate 3 more versions of the hand dextriously manipulating the coin, and let's see if we can generate it without the AI hands syndrome. Create another backup image based on a different concept just in case.",
+        "feedback": {
+          "itemId": "proficiency-zwinne-dlonie",
+          "decision": "revise",
+          "candidateId": "batch113-zwinne-dlonie",
+          "notes": "It's more like clumsy hands now, with the icon showing the coin flying out of the hand. Generate 3 more versions of the hand dextriously manipulating the coin, and let's see if we can generate it without the AI hands syndrome. Create another backup image based on a different concept just in case.",
+          "updatedAt": "2026-10-18T15:51:16.914Z"
+        },
+        "feedbackSha256": "bfc7b7257e25b0a66990edaf001cedbebc6802110755f3e343e32bc11d3eb0bf"
+      }
+    },
+    {
+      "cell": 4,
+      "kind": "proficiency",
+      "key": "zwinne-dlonie-rekaw",
+      "name": "Zwinne dłonie — karta w rękawie (zapas)",
+      "itemId": "proficiency-zwinne-dlonie",
+      "target": "icons/proficiencies/zwinne-dlonie.svg",
+      "wiringKey": "skills.zwi",
+      "fallback": "icons/items/loot/zetony.svg",
+      "fallbackSha256": "c79fd9938245ea2a73515466dd05e4098ca4f02b742b8415f2c0528096ee69f6",
+      "request": "DIFFERENT-CONCEPT BACKUP, WITHOUT A VISIBLE HAND: ONE plain SHIRT SLEEVE CUFF, a compact folded fabric band seen at a three-quarter angle with ONE broad BLACK OPENING. ONE large PLAYING CARD is discreetly concealed inside the cuff, its upper half protruding diagonally from that opening. The card has ONE large BLACK SPADE cutout on its white face, no letter, numeral or tiny corner pip. A sober practical sleight-of-hand / cheating motif: an ace up the sleeve. Card is in firm contact with and visibly held inside the cuff, not falling or flying. Broad clear silhouettes, one fold cut only. No hand or arm beyond the short cuff, coin, face, ornament, magical aura, smoke, stars, logo or writing.",
+      "context": "Native character creation, advancement and trait UI: Zwinne dłonie; 16–64 px beside Polish labels. skills.zwi.",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/zwinne-dlonie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "revisionOf": {
+        "id": "proficiency-zwinne-dlonie",
+        "name": "Zwinne dłonie",
+        "decision": "revise",
+        "candidateId": "batch113-zwinne-dlonie",
+        "selectedSource": "candidates/batch-113/zwinne-dlonie.png",
+        "sourceSha256": "66bb9a38c482d7d1d50f4b56a97b9d1d0be390d6e5faebc7c5abb38a4eed2efe",
+        "sourceKind": "candidate",
+        "target": "icons/proficiencies/zwinne-dlonie.svg",
+        "notes": "It's more like clumsy hands now, with the icon showing the coin flying out of the hand. Generate 3 more versions of the hand dextriously manipulating the coin, and let's see if we can generate it without the AI hands syndrome. Create another backup image based on a different concept just in case.",
+        "feedback": {
+          "itemId": "proficiency-zwinne-dlonie",
+          "decision": "revise",
+          "candidateId": "batch113-zwinne-dlonie",
+          "notes": "It's more like clumsy hands now, with the icon showing the coin flying out of the hand. Generate 3 more versions of the hand dextriously manipulating the coin, and let's see if we can generate it without the AI hands syndrome. Create another backup image based on a different concept just in case.",
+          "updatedAt": "2026-10-18T15:51:16.914Z"
+        },
+        "feedbackSha256": "bfc7b7257e25b0a66990edaf001cedbebc6802110755f3e343e32bc11d3eb0bf"
+      }
+    }
+  ]
+}

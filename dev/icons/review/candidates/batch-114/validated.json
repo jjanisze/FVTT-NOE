@@ -1,0 +1,11 @@
+{
+  "batch": 114,
+  "validatedMasks": 4,
+  "prospectiveDeliveryTargets": 4,
+  "candidateHashes": {
+    "zwinne-dlonie-chwyt": "a7404f89d06bc3f7d27b02eea02c1e5d2f364b3783917f350289f5b4e7738b78",
+    "zwinne-dlonie-knykcie": "e6cf478671a80ce37251efec4859623f0e6860c46e8d586834e3537d8b1bccd9",
+    "zwinne-dlonie-ukrycie": "7ca5105a05773d2160f0050503f900a70e5eb730dc30c7128e693786c437ddbc",
+    "zwinne-dlonie-rekaw": "bc363f51ce737238bf4edb0be63251569db23456765baa270c77b607c22ede56"
+  }
+}

@@ -1,7 +1,7 @@
 # Missing-asset queue
 
-Checked against files on disk, 2026-10-18: **39 missing final images** —
-3 proficiency glyphs awaiting revision review, 7 banners,
+Checked against files on disk, 2026-10-18: **37 missing final images** —
+1 proficiency glyph awaiting revision review, 7 banners,
 4 wrecks, 9 map objects, 4 companion tokens and 12 bestiary tokens currently
 using generated placeholders. Every final path listed below is absent.
 
@@ -9,25 +9,23 @@ Only outstanding asset requests belong here. Delivery history and remaining
 wiring/world-update tasks are in [FINAL_HANDOFF.md](FINAL_HANDOFF.md);
 batch approvals are under [review/candidates/](review/candidates/).
 
-**Next batch number: 114**. Batch 113: three subjects / four candidates await GM review.
+**Next batch number: 115**. Batch 114: four candidates for the last proficiency glyph await GM review.
 
-<!-- proficiency-batch-113:start -->
-## A. Proficiency UI glyphs — 3 awaiting revision review
+<!-- proficiency-batch-114:start -->
+## A. Proficiency UI glyph — 1 awaiting revision review
 
-Batch 113: four new candidates for three remaining subjects. Intimidation has
-two requested alternatives: a looming face and a collar-grab scene. Existing
-approved glyphs remain wired until the GM approves the replacements.
+Batch 114: three controlled coin-hand poses plus one different-concept
+sleeve-card backup, together on the remaining review card. The existing
+approved substitute stays wired until the GM selects and approves a design.
 
 | Subject | Missing SVG (+ WEBP) | Wiring |
 |---|---|---|
-| Intuicja | `icons/proficiencies/intuicja.svg` | `skills.int` |
-| Zastraszanie | `icons/proficiencies/zastraszanie.svg` | `skills.zas` |
 | Zwinne dłonie | `icons/proficiencies/zwinne-dlonie.svg` | `skills.zwi` |
 
-Generic prompts, exact selected sources and saved revision notes:
-`review/candidates/batch-113/`. Earlier candidates remain selectable.
+Generic prompts, exact selected-source hash and saved revision notes:
+`review/candidates/batch-114/`. Earlier candidates remain selectable.
 
-<!-- proficiency-batch-113:end -->
+<!-- proficiency-batch-114:end -->
 
 <!-- class-placeholder-audit:start -->
 <!-- class-placeholder-audit:end -->

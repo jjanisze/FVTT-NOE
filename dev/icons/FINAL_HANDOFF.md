@@ -4,13 +4,14 @@
 were outside the item-art completion scope. Live inspection found 51
 colored stock rows plus six header lookups. Existing glyph candidates
 were checked visually and are now wired through the native Trait UI. All 51
-rows and six headers use module glyphs. Four approved Batch 112 designs are
-installed, and Acrobatics keeps its current glyph by GM choice. Three subjects
-remain in revision in Batch 113, with approved-art substitutes still wired.
+rows and six headers use module glyphs. Six approved designs from Batches
+112–113 are installed, including the chosen looming-face Intimidation icon.
+Acrobatics keeps its current glyph by GM choice. Only Sleight of Hand remains
+in revision in Batch 114, with an approved-art substitute still wired.
 Evidence: `PROFICIENCY_COVERAGE.md` and
 `proficiency-icons-2026-10-18-approved.json`.
 
-There are 549 resolved cards and three remaining revision cards (four candidates).
+There are 551 resolved cards and one remaining revision card (four new candidates).
 The last seven exact selections from the earlier pass are
 installed as SVG/WEBP pairs, including the earlier Batch 110 Nowy Jork
 design chosen by the GM. All twelve main origin emblems and five new
@@ -43,9 +44,10 @@ Foundry remains closed; no campaign repoint was run.
 - **Biegłości / umiejętności — podpięte, 2026-10-18:** 51 wierszy i sześć
   nagłówków korzysta z zatwierdzonych glifów modułu. Batch 112: Historia,
   Pojazdy i dwa nagłówki dostarczone; Akrobatyka zachowuje obecny glif zgodnie
-  z wyborem MG. Batch 113: Intuicja, Zastraszanie (dwie alternatywy) i Zwinne
-  dłonie czekają na ocenę. Po akceptacji dostarczyć pary SVG/WEBP i zmienić
-  mapowania opisane w MISSING.
+  z wyborem MG. Batch 113: Intuicja i Zastraszanie (wybrana groźna twarz)
+  dostarczone. Batch 114: tylko Zwinne dłonie czekają na ocenę — trzy chwyty
+  monety i zapasowa karta w rękawie. Po akceptacji dostarczyć parę SVG/WEBP
+  i zmienić mapowanie opisane w MISSING.
   Sandbox: natywne listy wyborów i etykiety bez zmian, 57 slotów TraitFlow
   sprawdzonych w obu motywach. Poligon: Kreator → ikony-bieglosci.
   Raport i lokalne zrzuty: `PROFICIENCY_COVERAGE.md`. Świata nie zmieniano.

@@ -1,0 +1,13 @@
+{
+  "date": "2026-10-18",
+  "generator": "OpenAI built-in image generation",
+  "key": "zwinne-dlonie-ukrycie",
+  "reason": "Atlas palming hand has six digits; remove the shortest rightmost upright finger while preserving the coin-control pose.",
+  "reference": "raw/palming-reference.png",
+  "references": [
+    "raw/palming-reference.png",
+    "raw/style-reference.png"
+  ],
+  "output": "raw/standalone-zwinne-dlonie-ukrycie.png",
+  "prompt": "Use case: precise-object-edit. Reference 1 is the EDIT TARGET: the cropped white palming-hand glyph. Reference 2 supplies the approved broad WHITE-GLYPH STYLE only. Fix ONLY the anatomical digit count while keeping the same palm-facing pose, one coin pressed securely to the palm, two fingers curled over the coin, left-side thumb, complete wrist and sparse stencil treatment. The target currently has THREE UPRIGHT FINGERS, TWO FOLDED FINGERS AND A THUMB: six digits, which is wrong. REMOVE THE SHORTEST RIGHTMOST UPRIGHT FINGER completely, including its base. Keep the TWO tallest upright fingers as INDEX and MIDDLE. Keep exactly TWO folded fingers as RING and LITTLE, and ONE left-side THUMB. Final count must be EXACTLY FIVE digits total: two extended + two folded + one thumb. No leftover nub where the removed finger was, no new fingertip, extra finger, double joint or branch. One coherent anatomically natural adult hand. Coin remains partly covered and firmly in contact with the palm and folded fingers, no floating or tossing. Deliver ONLY this corrected isolated glyph centered on a square pure BLACK background, no atlas or other subjects. Pure solid WHITE, broad black gaps, at least 20% blank margin all sides, readable at 64/32/16 px. No letters, numerals, currency marks, shading, grey, gradients, hatching, dithering, texture, skin lines, extra props or border. Do not add more fine detail."
+}
