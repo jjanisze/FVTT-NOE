@@ -47,8 +47,10 @@ export const RULES = [
   { id: "deletion-syntax", stage: "E3", what: "`-=key` forced deletion written in update data → `_del` (foundry.data.operators.ForcedDeletion) or unsetFlag; reading a `-=` key from hook changes stays for older callers",
     test: /\.-=[^"'`\n]*["'`]\]?\s*[:=,]\s*null\b/, files: /\.m?js$/ },
   // Core v14: MeasuredTemplate merged into Region (memory: v14 templates are Regions).
-  { id: "scene-templates", stage: "E4", what: "Scene#templates (deprecated, MeasuredTemplate merged into Region) → the paired Region",
-    test: /\b\w*[sS]cene\??\.templates\b|ogladana\??\.templates\b|getEmbeddedCollection\(\s*["']MeasuredTemplate["']/, files: /\.m?js$/ },
+  // dnd5e 6.0 places activity templates as Regions through TemplatePlacement: its hooks are
+  // dnd5e.{pre,post,}CreateMeasuredTemplate; the *ActivityTemplate ones fire only from the deprecated AbilityTemplate.
+  { id: "scene-templates", stage: "E4", what: "Scene#templates / MeasuredTemplate documents (merged into Region in v14) and dnd5e 5.3's *ActivityTemplate hooks → Regions, dnd5e.createMeasuredTemplate",
+    test: /\b\w*[sS]cene\??\.templates\b|ogladana\??\.templates\b|(getEmbeddedCollection|createEmbeddedDocuments|updateEmbeddedDocuments|deleteEmbeddedDocuments)\(\s*["']MeasuredTemplate["']|dnd5e\.(preCreate|create)ActivityTemplate\b/, files: /\.m?js$/ },
   { id: "effect-modes", stage: "E3", what: "CONST.ACTIVE_EFFECT_MODES (numeric modes) → string change types",
     test: /ACTIVE_EFFECT_MODES/ },
   // Core v14: the V1 Application framework is deprecated (Dialog → foundry.applications.api.DialogV2).
@@ -63,18 +65,25 @@ export const RULES = [
     test: /bonuses\??\.(mwak|rwak|msak|rsak|abilities)\b/ },
   { id: "check-save-bonuses", stage: "E3", what: "abilities/skills/tools.*.bonuses.{check,save}, death/concentration bonuses, init.bonus → *.roll.bonus",
     test: /\.bonuses\??\.(check|save)\b|(death|concentration)\??\.bonuses\b|\binit\??\.bonus\b/ },
-  { id: "armor-class", stage: "E3", what: "ac.base|flat|calc|formula → ac.armor / ac.calcs",
-    test: /\bac\??\.(base|flat|calc|formula)\b|["']system\.attributes\.ac\.(base|flat|calc|formula)["']/ },
+  // `ac.base` stays: 6.0 still prepares it (not persisted, attributes.mjs); `ac.calc` is now the winning formula id.
+  { id: "armor-class", stage: "E3", what: "ac.flat|calc|formula as 5.3 stored the setup → ac.calcs / ac.formulas / ac.override",
+    test: /\bac\??\.(flat|calc|formula)\b|["']system\.attributes\.ac\.(flat|calc|formula)["']/ },
   { id: "rarity", stage: "E3", what: "system.rarity → system.rarities",
     test: /system\??\.rarity\b(?!ies)/ },
   // §3.5 — CONFIG.DND5E tables whose shape changed in 6.0.
   { id: "config-tables", stage: "E3", what: "CONFIG.DND5E tables reshaped in 6.0 (check each use)",
     test: /CONFIG\.DND5E\.(activityTypes|itemProperties|actorSizes|conditionTypes|validProperties|requests|conditionEffects|restTypes|bloodied|shieldIds|itemRarity|armorProficienciesMap)\b/ },
   // §3.2, §3.10 — methods and APIs rewritten or gone.
+  // dnd5e 6.0: `dnd5e.rollDeathSave` details carry `outcome` ("stable"/"revive"/"death"), no `chatString`.
+  { id: "death-save-details", stage: "E4", what: "dnd5e.rollDeathSave details.chatString (5.3) → details.outcome",
+    test: /\bchatString\b|DND5E\.DeathSave(Success|CriticalSuccess|Failure)\b/, files: /\.m?js$/ },
   { id: "activity-api", stage: "E4", what: "activity chat API: _usageChatButtons (now descriptors), activateChatListeners, getCardData",
     test: /\b_usageChatButtons\b|\bactivateChatListeners\b|\bgetCardData\b/ },
-  { id: "damage-tray-api", stage: "E5", what: "damage/effects tray internals: _onChangeOptions (gone), buildTargetListEntry, refreshListEntry, _onApplyDamage",
-    test: /\b_onChangeOptions\b|\bbuildTargetListEntry\b|\brefreshListEntry\b|\b_onApplyDamage\b/ },
+  // 6.0 groups targets (`buildTargetListEntry(targetList, {uuid, name})`, wrapped in damage-reduction/emiter-emp
+  // since E3); what stays flagged is the 5.3 API the tray no longer has. Our own `_onApplyDamage` functions are
+  // `dnd5e.applyDamage` listeners (unchanged hook), not the tray's method.
+  { id: "damage-tray-api", stage: "E5", what: "damage tray 5.3 internals: _onChangeOptions (gone), the per-target list entry signature, the tray's _onApplyDamage",
+    test: /\b_onChangeOptions\b|\.(refreshListEntry|_onApplyDamage)\b|buildTargetListEntry\s*=\s*function\s*\(\s*(li|uuid|target|token)\b/ },
   // §3.3 — dnd5e chat card DOM (cards render from message.system now; HTML changed).
   { id: "chat-card-dom", stage: "E6", what: "dnd5e chat card DOM: .chat-card, .card-tray, .card-header, .card-buttons, damage-application, effect-application",
     test: /\.chat-card\b|card-tray|\.card-header\b|\.card-buttons\b|damage-application|effect-application/ }

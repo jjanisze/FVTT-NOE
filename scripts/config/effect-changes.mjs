@@ -6,7 +6,7 @@
  *
  * ## 1. Change type
  *
- * FVTT 14 replaced the numeric `mode` (`CONST.ACTIVE_EFFECT_MODES`) with a string
+ * FVTT 14 replaced the numeric `mode` (v13's mode constants) with a string
  * `type`, and moved the array itself from `changes` to `system.changes`; both shims
  * are removed in v16. The strings below are the whole API — they are their own values,
  * deliberately NOT taken from `CONST.ACTIVE_EFFECT_CHANGE_TYPES`, whose values are

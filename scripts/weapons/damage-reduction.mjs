@@ -13,9 +13,9 @@
  *
  * ## dnd5e 6.0 (PLAN_migracja_dnd5e6.md E5)
  *
- * 5.3's tray had one list entry per target and a `_onChangeOptions` handler; this file patched four of its
+ * 5.3's tray had one list entry per target and an options-change handler; this file patched four of its
  * methods. 6.0 rewrote the tray: targets with the same result share one pill (grouping by computed damage),
- * corrections live in a private per-group pane, `_onChangeOptions` is gone, and every number — the pill, the
+ * corrections live in a private per-group pane, that handler is gone, and every number — the pill, the
  * pane, the grouping key, the applied damage — comes from `actor.calculateDamage(damages, options)` with the
  * target's options. So the reduction now sits in the target options and one `dnd5e.preCalculateDamage` hook turns
  * it into the scaled multiplier: display, grouping and application agree by construction, and only
