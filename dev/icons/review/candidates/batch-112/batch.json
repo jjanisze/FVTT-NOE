@@ -1,0 +1,171 @@
+{
+  "date": "2026-10-18",
+  "batch": 112,
+  "pass": "proficiency-ui",
+  "partialAtlas": true,
+  "emptyCells": [
+    9
+  ],
+  "subjects": [
+    {
+      "cell": 1,
+      "kind": "proficiency",
+      "key": "akrobatyka",
+      "name": "Akrobatyka",
+      "itemId": "proficiency-akrobatyka",
+      "target": "icons/proficiencies/akrobatyka.svg",
+      "wiringKey": "skills.akr",
+      "fallback": "icons/abilities/sportowiec.svg",
+      "fallbackSha256": "5257f866b310d097a1de4b444b351054aad2328b60c79ad9bc0667ef60e205a8",
+      "request": "ONE complete generic adult in plain close-fitting practical clothes performing a compact CARTWHEEL. Both arms straight, ONE palm planted on the ground, other arm extended, both legs clearly separated overhead. Featureless head, natural adult proportions. A clean complete human acrobat silhouette, no animal, facial detail, hair strands, costume, motion trails or extra limbs.",
+      "context": "Native character creation, advancement and trait UI: Akrobatyka; 16–64 px beside Polish labels. skills.akr.",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/akrobatyka.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 2,
+      "kind": "proficiency",
+      "key": "historia",
+      "name": "Historia",
+      "itemId": "proficiency-historia",
+      "target": "icons/proficiencies/historia.svg",
+      "wiringKey": "skills.his",
+      "fallback": "icons/abilities/przedwojenna-edukacja.svg",
+      "fallbackSha256": "9e8725e10e3cc1c5d3f94fc180af76d6f7d60ab50e1ab97963aab4e3bda2575f",
+      "request": "ONE broad CLOSED HISTORY BOOK with a simple stout spine, paired with ONE large simple HOURGLASS in front at lower right. Hourglass has broad top and bottom and TWO triangular sand masses separated by a black gap. No lettering, page texture, medical cross, engineering diagram, magic symbol or ornate book decoration.",
+      "context": "Native character creation, advancement and trait UI: Historia; 16–64 px beside Polish labels. skills.his.",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/historia.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 3,
+      "kind": "proficiency",
+      "key": "intuicja",
+      "name": "Intuicja",
+      "itemId": "proficiency-intuicja",
+      "target": "icons/proficiencies/intuicja.svg",
+      "wiringKey": "skills.int",
+      "fallback": "icons/abilities/wyczulone-zmysly.svg",
+      "fallbackSha256": "3b644368686cd60a817470a4ac84f8be0cadfaefbab42326f2961eb760c66ec6",
+      "request": "ONE smooth generic adult HEAD IN PROFILE facing RIGHT, containing ONE large simple EYE and ONE broad question-mark-like curved black negative-space cut ABOVE the eye inside the head, suggesting a quiet hunch. Ordinary head and neck, no beard, hair texture, wrinkles, incoming bullets, psychic aura, glow, floating symbols or fantasy crystal.",
+      "context": "Native character creation, advancement and trait UI: Intuicja; 16–64 px beside Polish labels. skills.int.",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/intuicja.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 4,
+      "kind": "proficiency",
+      "key": "pojazdy",
+      "name": "Pojazdy",
+      "itemId": "proficiency-pojazdy",
+      "target": "icons/proficiencies/pojazdy.svg",
+      "wiringKey": "skills.poj",
+      "fallback": "icons/abilities/kaskader.svg",
+      "fallbackSha256": "7236077e89f00bfb27b778d21bda94be0ab95d86f94ee768d4edf554e9ae61d3",
+      "request": "ONE large complete utilitarian THREE-SPOKE STEERING WHEEL viewed straight on, gripped at left and right by TWO complete plain adult hands. Coherent fingers wrapped around rim, stout spokes and central hub. Vehicle driving skill, no car body, dashboard, logo, tiny controls, speed lines or machinery repair.",
+      "context": "Native character creation, advancement and trait UI: Pojazdy; 16–64 px beside Polish labels. skills.poj.",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/pojazdy.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 5,
+      "kind": "proficiency",
+      "key": "zastraszanie",
+      "name": "Zastraszanie",
+      "itemId": "proficiency-zastraszanie",
+      "target": "icons/proficiencies/zastraszanie.svg",
+      "wiringKey": "skills.zas",
+      "fallback": "icons/abilities/poddaj-sie.svg",
+      "fallbackSha256": "b6a95883e6baf7a7c94a27efb8a7795dfac1a8c508edd6426f6008e716b3644a",
+      "request": "ONE large adult CLENCHED FIST in foreground at LEFT, with a simple sleeve cuff, facing ONE smaller generic adult HEAD AND SHOULDERS at RIGHT recoiling slightly away. The smaller head has only ONE broad eye cut and no hair detail. Threatening posture without contact or injury. Broad coherent anatomy; no monster, devil, skull, fangs, weapon, blood, gruff male portrait or anime expression.",
+      "context": "Native character creation, advancement and trait UI: Zastraszanie; 16–64 px beside Polish labels. skills.zas.",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/zastraszanie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 6,
+      "kind": "proficiency",
+      "key": "zwinne-dlonie",
+      "name": "Zwinne dłonie",
+      "itemId": "proficiency-zwinne-dlonie",
+      "target": "icons/proficiencies/zwinne-dlonie.svg",
+      "wiringKey": "skills.zwi",
+      "fallback": "icons/items/loot/zetony.svg",
+      "fallbackSha256": "c79fd9938245ea2a73515466dd05e4098ca4f02b742b8415f2c0528096ee69f6",
+      "request": "ONE complete bare adult HAND dexterously rolling ONE large plain COIN across the knuckles. Back of hand visible, fingers slightly bent and clearly separated with broad black gaps, thumb complete. The single coin is balanced above two knuckles, a simple white disc with one broad black rim cut. No currency symbols, digits, pistol, knife, extra hands, extra coins or tiny skin detail.",
+      "context": "Native character creation, advancement and trait UI: Zwinne dłonie; 16–64 px beside Polish labels. skills.zwi.",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/zwinne-dlonie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 7,
+      "kind": "proficiency",
+      "key": "umiejetnosci",
+      "name": "Umiejętności / biegłości mieszane",
+      "itemId": "proficiency-umiejetnosci",
+      "target": "icons/proficiencies/umiejetnosci.svg",
+      "wiringKey": "traits.skills + mixed Trait",
+      "fallback": "icons/abilities/ucz-sie-ucz.svg",
+      "fallbackSha256": "169958a4bcf8430eb4501a4c61b07da8c771ceff4c8f7082e48f64102fc242c5",
+      "request": "ONE broad OPEN PRACTICAL INSTRUCTION BOOK, viewed from the front with two white page blocks separated by ONE broad central black fold. ONE large white CHECKMARK overlaps its lower-right corner, separated from the page by a thick black outline gap. Only TWO broad black page lines. General learned skills and proficiency, no lettering, magic, medical cross, specific tool, ornate border or tiny marks.",
+      "context": "Native character creation, advancement and trait UI: Umiejętności / biegłości mieszane; 16–64 px beside Polish labels. traits.skills + mixed Trait.",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/umiejetnosci.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    },
+    {
+      "cell": 8,
+      "kind": "proficiency",
+      "key": "rzuty-obronne",
+      "name": "Rzuty obronne — nagłówek",
+      "itemId": "proficiency-rzuty-obronne",
+      "target": "icons/proficiencies/rzuty-obronne.svg",
+      "wiringKey": "traits.saves",
+      "fallback": "icons/abilities/kuloodporny.svg",
+      "fallbackSha256": "40486c7dea79b2ea807b69a8d6ef04763b1c47d0bda429ca9a1f03fcecefdf16",
+      "request": "ONE broad plain utilitarian SHIELD in front view, with ONE large thick white CURVED DEFLECTION STROKE sweeping around its upper-right edge and ending in a stout simple arrowhead pointing away. Clear black gap between shield and stroke. General successful resistance / avoidance, a sober functional protective symbol. No person, bullets, sword, heraldry, cross, rivets, fantasy ornament or fine lines.",
+      "context": "Native character creation, advancement and trait UI: Rzuty obronne — nagłówek; 16–64 px beside Polish labels. traits.saves.",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/rzuty-obronne.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ]
+    }
+  ]
+}

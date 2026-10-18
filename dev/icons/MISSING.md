@@ -1,6 +1,7 @@
 # Missing-asset queue
 
-Checked against files on disk, 2026-10-18: **36 missing images** — 7 banners,
+Checked against files on disk, 2026-10-18: **44 missing final images** —
+8 proficiency glyphs awaiting review, 7 banners,
 4 wrecks, 9 map objects, 4 companion tokens and 12 bestiary tokens currently
 using generated placeholders. Every final path listed below is absent.
 
@@ -8,7 +9,31 @@ Only outstanding asset requests belong here. Delivery history and remaining
 wiring/world-update tasks are in [FINAL_HANDOFF.md](FINAL_HANDOFF.md);
 batch approvals are under [review/candidates/](review/candidates/).
 
-**Next batch number: 112**.
+**Next batch number: 113**. Batch 112: eight dedicated glyphs await GM review.
+
+<!-- proficiency-batch-112:start -->
+## A. Proficiency UI glyphs — 8 awaiting review
+
+Batch 112 is generated and validated in the icon review browser. Existing approved
+glyphs are wired as temporary substitutes; these dedicated final files remain absent.
+Install only the GM-selected, approved candidates, then update
+`scripts/config/proficiency-icons-data.mjs` for the listed keys.
+
+| Subject | Missing SVG (+ WEBP) | Wiring |
+|---|---|---|
+| Akrobatyka | `icons/proficiencies/akrobatyka.svg` | `skills.akr` |
+| Historia | `icons/proficiencies/historia.svg` | `skills.his` |
+| Intuicja | `icons/proficiencies/intuicja.svg` | `skills.int` |
+| Pojazdy | `icons/proficiencies/pojazdy.svg` | `skills.poj` |
+| Zastraszanie | `icons/proficiencies/zastraszanie.svg` | `skills.zas` |
+| Zwinne dłonie | `icons/proficiencies/zwinne-dlonie.svg` | `skills.zwi` |
+| Umiejętności / biegłości mieszane | `icons/proficiencies/umiejetnosci.svg` | `traits.skills + mixed Trait` |
+| Rzuty obronne — nagłówek | `icons/proficiencies/rzuty-obronne.svg` | `traits.saves` |
+
+Prompts and exact targets: `review/candidates/batch-112/`.
+Candidate generation: OpenAI built-in image generation; no GM hand-edit claimed.
+
+<!-- proficiency-batch-112:end -->
 
 <!-- class-placeholder-audit:start -->
 <!-- class-placeholder-audit:end -->

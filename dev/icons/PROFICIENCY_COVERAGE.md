@@ -1,47 +1,60 @@
 # Proficiency and advancement icon coverage — 2026-10-18
 
-**Confirmed gap:** the item-art pass did not cover system-level proficiency UI.
-Read-only inspection of the live dnd5e 6.0.6 sandbox called the real
-`dnd5e.documents.Trait.keyIcon`, rather than inferring icons from item images.
+**Wiring complete:** all 51 proficiency/skill rows and six header lookups now
+resolve to existing approved module glyphs. Eight dedicated designs are in
+Batch 112 for GM review; those slots currently use approved-art substitutes.
 
-| UI surface | Confirmed result | Existing-art route |
+| UI surface | Installed wiring | Dedicated artwork still awaiting review |
 |---|---|---|
-| Armor proficiency rows | 4 rows share the colored breastplate/helmet | Leather armor, tactical vest, composite armor and shield glyphs |
-| Weapon proficiency rows | 7 groups share colored crossed swords | Existing per-type weapon fallback glyphs |
-| Tool proficiency rows | All 22 share the colored smithing anvil | All 22 `icons/tools/<id>.svg` files exist |
-| Skill rows | All 18 explicitly use colored stock artwork | Existing skill-related feat/item glyphs are reuse candidates |
-| Category headers | Armor, weapons, tools, skills and saves use colored stock art | Five existing native glyph candidates |
-| Mixed Trait advancement header | Colored parchment scroll | Existing training glyph candidate |
-| Saving-throw rows | 6 existing monochrome ability SVGs | No colored-art replacement queued |
+| Armor proficiency rows | 4 distinct armor/shield glyphs | None |
+| Weapon proficiency rows | 7 matching weapon-type glyphs | None |
+| Tool proficiency rows | All 22 matching toolkit glyphs | None |
+| Skill rows | All 18 use native glyphs | Acrobatics, history, intuition, vehicles, intimidation, sleight of hand |
+| Category headers | Armor, weapons, tools, skills and saves use native glyphs | Skills and saves |
+| Mixed Trait advancement header | Shares the native skills header | Shares the new skills design |
+| Saving-throw rows | 6 existing monochrome ability SVGs retained | None |
 
-That is **51 colored proficiency/skill rows plus six header lookups**.
-All 52 distinct proposed reuse files exist. Suggestions are recorded per key in
-[proficiency-icons-2026-10-18.json](proficiency-icons-2026-10-18.json); skill and
-header choices still need semantic/visual review before being treated as final.
-No new image generation is established as necessary, so these are not added to
-MISSING as absent files.
+The original item-art pass did not cover this system UI. Historical evidence:
+[proficiency-icons-2026-10-18.json](proficiency-icons-2026-10-18.json).
+Initial reuse suggestions were checked visually: a leaping rat, pistol hand,
+repair scene and monster face were unsuitable for the corresponding skills.
+The final mapping uses more suitable substitutes while dedicated designs await approval.
 
-The code path explains why correct inventory icons did not fix this UI:
+The native renderer reads `CONFIG.DND5E.traits[type].configKey`. The new
+[registration](../../scripts/config/proficiency-icons.mjs) supplies separate
+`{label, icon}` display maps for armor, weapons and tools. Original proficiency
+maps remain string-valued with the same keys and labels. No resolver patch or
+proficiency-data migration is needed. [skills.mjs](../../scripts/config/skills.mjs)
+uses the [shared glyph mapping](../../scripts/config/proficiency-icons-data.mjs).
 
-- [skills.mjs](../../scripts/config/skills.mjs) sets all 18 stock icons explicitly.
-- [armor.mjs](../../scripts/config/armor.mjs) and
-  [weapons.mjs](../../scripts/config/weapons.mjs) change proficiency labels and
-  categories while leaving `CONFIG.DND5E.traits.*.icon` untouched.
-- [tools.mjs](../../scripts/config/tools.mjs) supplies custom labels and empty
-  base-item IDs, but the trait renderer falls back to the category anvil.
-  Adding only `tools[key].icon` would not fix that renderer: its first lookup
-  uses `toolProficiencies[key].icon`, where these entries are currently strings.
-- `TraitFlow.#prepareTraitSlots` calls `Trait.keyIcon` for every selected row.
-  `TraitAdvancement.prepareData` uses the category icon for a single trait type,
-  or its metadata scroll for mixed types, unless an explicit image is supplied.
+Category images cover single-type Trait advancements. Mixed Trait advancements
+read a fresh static metadata object, so a guarded metadata getter wrapper changes
+only its default image, preserving the native title, applications and other metadata.
+Explicit advancement images remain authoritative. Packs need no rebuild for these
+runtime defaults; stored custom images are outside this change.
 
-Keep existing proficiency keys and labels intact when wiring icons. The follow-up
-needs to cover row lookups, category headers and the mixed advancement image;
-changing only the inventory-item builders will miss them again.
+Verification on dnd5e 6.0.6:
 
-The JSON also records other stock advancement metadata defaults as an adjacent
-scope. Their presence does not establish that every advancement type is used.
-Existing damage/condition immunity symbols are monochrome SVGs and are not
-classified as colored-art gaps.
+- `npm test` passes, as do syntax and whitespace checks.
+- Native `Trait.keyIcon` resolves all 57 rows to SVGs; every asset fetch succeeds.
+- Native armor/weapon/tool choice lists are identical before and after using the
+  rich display maps, including wildcard choices and the legacy tool category.
+- Original label maps survive repeated registration unchanged.
+- A transient Actor/Class with real Trait advancements renders all 57 native
+  TraitFlow slots with matching labels and images; single and mixed headers resolve.
+- Dark and light UI checks confirm theme-aware glyph contrast. No stored Foundry
+  documents were created or changed.
 
-This audit changed no production configuration, packs or Foundry documents.
+Reproducible browser check: `proficiency-pass/check-sandbox.mjs` (evaluate its
+function in an agent sandbox). Machine evidence:
+[proficiency-icons-2026-10-18-integrated.json](proficiency-icons-2026-10-18-integrated.json).
+Local screenshots: `review/audits/native-proficiencies.png`,
+`review/audits/native-skills.png`, `review/audits/native-skills-light.png`.
+Poligon follow-up: **Kreator → ikony-bieglosci**; the station was not reseeded.
+
+Batch 112 prompts, targets, normalization and hashes are under
+`review/candidates/batch-112/`. Its eight cards are open in the review browser.
+Only saved GM approvals authorize installation of those new designs.
+
+Other advancement types' metadata defaults are recorded in the historical JSON
+as an adjacent scope; this change covers Trait proficiencies and skills.

@@ -4,7 +4,8 @@
 not include proficiency/skill UI or advancement header defaults. A live
 dnd5e 6.0.6 check confirms 51 colored stock proficiency/skill rows, five
 category headers and the mixed Trait advancement header. Existing native
-glyph reuse candidates are available; this UI wiring remains open. See
+glyphs are now wired for every audited row and header. Eight dedicated designs
+await GM review in Batch 112, with approved-art substitutes installed. See
 [PROFICIENCY_COVERAGE.md](PROFICIENCY_COVERAGE.md) and its per-key JSON.
 
 For the item-art scopes below, **reviewed glyph delivery and source wiring

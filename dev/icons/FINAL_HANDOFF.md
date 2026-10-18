@@ -3,10 +3,14 @@
 **Follow-up, 2026-10-18:** proficiency/skill UI and advancement headers
 were outside the item-art completion scope. Live inspection found 51
 colored stock rows plus six header lookups. Existing glyph candidates
-are recorded in `PROFICIENCY_COVERAGE.md` and
-`proficiency-icons-2026-10-18.json`; production wiring is still pending.
+were checked visually and are now wired through the native Trait UI. All 51
+rows and six headers use module glyphs. Eight dedicated designs await review
+in Batch 112; approved-art substitutes cover them until installation.
+Evidence: `PROFICIENCY_COVERAGE.md` and
+`proficiency-icons-2026-10-18-integrated.json`.
 
-All 544 review cards are resolved. The last seven exact selections are
+All 544 earlier review cards are resolved; Batch 112 adds eight pending cards.
+The last seven exact selections from the earlier pass are
 installed as SVG/WEBP pairs, including the earlier Batch 110 Nowy Jork
 design chosen by the GM. All twelve main origin emblems and five new
 companion glyphs are delivered.
@@ -35,12 +39,13 @@ Foundry remains closed; no campaign repoint was run.
 <!-- gm-remaining:start -->
 ## Do podpięcia — przez MG
 
-- **Biegłości / umiejętności / nagłówki rozwoju — otwarte, 2026-10-18:**
-  4 pancerze, 7 grup broni, 22 narzędzia i 18 umiejętności nadal używają
-  kolorowych ikon rdzenia, podobnie jak 5 nagłówków kategorii i mieszany
-  nagłówek Biegłości. Grafiki kandydackie są już w module; potrzebne jest
-  podpięcie renderera UI, nie ponowne generowanie ikon przedmiotów.
-  Raport: `PROFICIENCY_COVERAGE.md`. Audyt nie zmienił kodu ani świata.
+- **Biegłości / umiejętności — podpięte, 2026-10-18:** 51 wierszy i sześć
+  nagłówków korzysta z zatwierdzonych glifów modułu. Batch 112: osiem nowych
+  projektów czeka na ocenę MG; w kodzie są na razie zastępcze istniejące glify.
+  Po akceptacji dostarczyć pary SVG/WEBP i zmienić mapowania opisane w MISSING.
+  Sandbox: natywne listy wyborów i etykiety bez zmian, 57 slotów TraitFlow
+  sprawdzonych w obu motywach. Poligon: Kreator → ikony-bieglosci.
+  Raport i lokalne zrzuty: `PROFICIENCY_COVERAGE.md`. Świata nie zmieniano.
 - **Glify — kod gotowy, 2026-10-17:** wszystkie zatwierdzone grafiki oraz
   mapowania źródłowe są dostarczone. Nie trzeba ponownie przepinać kodu
   Sztuczek, Bestiariusza, towarzyszy, trzech paliw, uzupełnienia medyka ani

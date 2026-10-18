@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "title": "Asset review · 7 approved icons delivered, 0 kept current; 0 awaiting revision",
-  "updated": "2026-10-17",
+  "title": "Batch 112 · 8 proficiency icons awaiting GM review",
+  "updated": "2026-10-18",
   "items": [
     {
       "id": "batch90-brutal",
@@ -15685,6 +15685,238 @@
       "tier": "Batch 111 · Companion glyph",
       "request": "ONE compact unmanned GUN TURRET in SIDE PROFILE aimed RIGHT: a broad squat body with ONE large square OPTICAL LENS cutout, ONE complete short stout gun barrel, and ONE small broad mounting pedestal. Ahead of the muzzle sits ONE large simple AIM RETICLE made from an open ring and four broad ticks, clearly separated from the barrel. Generic mounted-weapon attack shared by flying and walking drones; no vehicle wheels, legs, propellers, human operator, tiny bullets, muzzle-fire spray, panel texture, text or logo.",
       "status": "resolved"
+    },
+    {
+      "id": "proficiency-akrobatyka",
+      "name": "Akrobatyka",
+      "batch": 112,
+      "tier": "Batch 112 · Proficiency UI",
+      "target": "icons/proficiencies/akrobatyka.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/akrobatyka.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "wiringKey": "skills.akr",
+      "context": "Native character creation, advancement and trait UI: Akrobatyka; 16–64 px beside Polish labels. skills.akr.",
+      "request": "ONE complete generic adult in plain close-fitting practical clothes performing a compact CARTWHEEL. Both arms straight, ONE palm planted on the ground, other arm extended, both legs clearly separated overhead. Featureless head, natural adult proportions. A clean complete human acrobat silhouette, no animal, facial detail, hair strands, costume, motion trails or extra limbs.",
+      "current": {
+        "src": "/icons/abilities/sportowiec.svg",
+        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 112 · Akrobatyka",
+          "src": "candidates/batch-112/akrobatyka.png",
+          "note": "ONE complete generic adult in plain close-fitting practical clothes performing a compact CARTWHEEL. Both arms straight, ONE palm planted on the ground, other arm extended, both legs clearly separated overhead. Featureless head, natural adult proportions. A clean complete human acrobat silhouette, no animal, facial detail, hair strands, costume, motion trails or extra limbs."
+        }
+      ]
+    },
+    {
+      "id": "proficiency-historia",
+      "name": "Historia",
+      "batch": 112,
+      "tier": "Batch 112 · Proficiency UI",
+      "target": "icons/proficiencies/historia.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/historia.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "wiringKey": "skills.his",
+      "context": "Native character creation, advancement and trait UI: Historia; 16–64 px beside Polish labels. skills.his.",
+      "request": "ONE broad CLOSED HISTORY BOOK with a simple stout spine, paired with ONE large simple HOURGLASS in front at lower right. Hourglass has broad top and bottom and TWO triangular sand masses separated by a black gap. No lettering, page texture, medical cross, engineering diagram, magic symbol or ornate book decoration.",
+      "current": {
+        "src": "/icons/abilities/przedwojenna-edukacja.svg",
+        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 112 · Historia",
+          "src": "candidates/batch-112/historia.png",
+          "note": "ONE broad CLOSED HISTORY BOOK with a simple stout spine, paired with ONE large simple HOURGLASS in front at lower right. Hourglass has broad top and bottom and TWO triangular sand masses separated by a black gap. No lettering, page texture, medical cross, engineering diagram, magic symbol or ornate book decoration."
+        }
+      ]
+    },
+    {
+      "id": "proficiency-intuicja",
+      "name": "Intuicja",
+      "batch": 112,
+      "tier": "Batch 112 · Proficiency UI",
+      "target": "icons/proficiencies/intuicja.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/intuicja.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "wiringKey": "skills.int",
+      "context": "Native character creation, advancement and trait UI: Intuicja; 16–64 px beside Polish labels. skills.int.",
+      "request": "ONE smooth generic adult HEAD IN PROFILE facing RIGHT, containing ONE large simple EYE and ONE broad question-mark-like curved black negative-space cut ABOVE the eye inside the head, suggesting a quiet hunch. Ordinary head and neck, no beard, hair texture, wrinkles, incoming bullets, psychic aura, glow, floating symbols or fantasy crystal.",
+      "current": {
+        "src": "/icons/abilities/wyczulone-zmysly.svg",
+        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 112 · Intuicja",
+          "src": "candidates/batch-112/intuicja.png",
+          "note": "ONE smooth generic adult HEAD IN PROFILE facing RIGHT, containing ONE large simple EYE and ONE broad question-mark-like curved black negative-space cut ABOVE the eye inside the head, suggesting a quiet hunch. Ordinary head and neck, no beard, hair texture, wrinkles, incoming bullets, psychic aura, glow, floating symbols or fantasy crystal."
+        }
+      ]
+    },
+    {
+      "id": "proficiency-pojazdy",
+      "name": "Pojazdy",
+      "batch": 112,
+      "tier": "Batch 112 · Proficiency UI",
+      "target": "icons/proficiencies/pojazdy.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/pojazdy.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "wiringKey": "skills.poj",
+      "context": "Native character creation, advancement and trait UI: Pojazdy; 16–64 px beside Polish labels. skills.poj.",
+      "request": "ONE large complete utilitarian THREE-SPOKE STEERING WHEEL viewed straight on, gripped at left and right by TWO complete plain adult hands. Coherent fingers wrapped around rim, stout spokes and central hub. Vehicle driving skill, no car body, dashboard, logo, tiny controls, speed lines or machinery repair.",
+      "current": {
+        "src": "/icons/abilities/kaskader.svg",
+        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 112 · Pojazdy",
+          "src": "candidates/batch-112/pojazdy.png",
+          "note": "ONE large complete utilitarian THREE-SPOKE STEERING WHEEL viewed straight on, gripped at left and right by TWO complete plain adult hands. Coherent fingers wrapped around rim, stout spokes and central hub. Vehicle driving skill, no car body, dashboard, logo, tiny controls, speed lines or machinery repair."
+        }
+      ]
+    },
+    {
+      "id": "proficiency-zastraszanie",
+      "name": "Zastraszanie",
+      "batch": 112,
+      "tier": "Batch 112 · Proficiency UI",
+      "target": "icons/proficiencies/zastraszanie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/zastraszanie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "wiringKey": "skills.zas",
+      "context": "Native character creation, advancement and trait UI: Zastraszanie; 16–64 px beside Polish labels. skills.zas.",
+      "request": "ONE large adult CLENCHED FIST in foreground at LEFT, with a simple sleeve cuff, facing ONE smaller generic adult HEAD AND SHOULDERS at RIGHT recoiling slightly away. The smaller head has only ONE broad eye cut and no hair detail. Threatening posture without contact or injury. Broad coherent anatomy; no monster, devil, skull, fangs, weapon, blood, gruff male portrait or anime expression.",
+      "current": {
+        "src": "/icons/abilities/poddaj-sie.svg",
+        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 112 · Zastraszanie",
+          "src": "candidates/batch-112/zastraszanie.png",
+          "note": "ONE large adult CLENCHED FIST in foreground at LEFT, with a simple sleeve cuff, facing ONE smaller generic adult HEAD AND SHOULDERS at RIGHT recoiling slightly away. The smaller head has only ONE broad eye cut and no hair detail. Threatening posture without contact or injury. Broad coherent anatomy; no monster, devil, skull, fangs, weapon, blood, gruff male portrait or anime expression."
+        }
+      ]
+    },
+    {
+      "id": "proficiency-zwinne-dlonie",
+      "name": "Zwinne dłonie",
+      "batch": 112,
+      "tier": "Batch 112 · Proficiency UI",
+      "target": "icons/proficiencies/zwinne-dlonie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/zwinne-dlonie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "wiringKey": "skills.zwi",
+      "context": "Native character creation, advancement and trait UI: Zwinne dłonie; 16–64 px beside Polish labels. skills.zwi.",
+      "request": "ONE complete bare adult HAND dexterously rolling ONE large plain COIN across the knuckles. Back of hand visible, fingers slightly bent and clearly separated with broad black gaps, thumb complete. The single coin is balanced above two knuckles, a simple white disc with one broad black rim cut. No currency symbols, digits, pistol, knife, extra hands, extra coins or tiny skin detail.",
+      "current": {
+        "src": "/icons/items/loot/zetony.svg",
+        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 112 · Zwinne dłonie",
+          "src": "candidates/batch-112/zwinne-dlonie.png",
+          "note": "ONE complete bare adult HAND dexterously rolling ONE large plain COIN across the knuckles. Back of hand visible, fingers slightly bent and clearly separated with broad black gaps, thumb complete. The single coin is balanced above two knuckles, a simple white disc with one broad black rim cut. No currency symbols, digits, pistol, knife, extra hands, extra coins or tiny skin detail."
+        }
+      ]
+    },
+    {
+      "id": "proficiency-umiejetnosci",
+      "name": "Umiejętności / biegłości mieszane",
+      "batch": 112,
+      "tier": "Batch 112 · Proficiency UI",
+      "target": "icons/proficiencies/umiejetnosci.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/umiejetnosci.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "wiringKey": "traits.skills + mixed Trait",
+      "context": "Native character creation, advancement and trait UI: Umiejętności / biegłości mieszane; 16–64 px beside Polish labels. traits.skills + mixed Trait.",
+      "request": "ONE broad OPEN PRACTICAL INSTRUCTION BOOK, viewed from the front with two white page blocks separated by ONE broad central black fold. ONE large white CHECKMARK overlaps its lower-right corner, separated from the page by a thick black outline gap. Only TWO broad black page lines. General learned skills and proficiency, no lettering, magic, medical cross, specific tool, ornate border or tiny marks.",
+      "current": {
+        "src": "/icons/abilities/ucz-sie-ucz.svg",
+        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 112 · Umiejętności / biegłości mieszane",
+          "src": "candidates/batch-112/umiejetnosci.png",
+          "note": "ONE broad OPEN PRACTICAL INSTRUCTION BOOK, viewed from the front with two white page blocks separated by ONE broad central black fold. ONE large white CHECKMARK overlaps its lower-right corner, separated from the page by a thick black outline gap. Only TWO broad black page lines. General learned skills and proficiency, no lettering, magic, medical cross, specific tool, ornate border or tiny marks."
+        }
+      ]
+    },
+    {
+      "id": "proficiency-rzuty-obronne",
+      "name": "Rzuty obronne — nagłówek",
+      "batch": 112,
+      "tier": "Batch 112 · Proficiency UI",
+      "target": "icons/proficiencies/rzuty-obronne.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/rzuty-obronne.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "wiringKey": "traits.saves",
+      "context": "Native character creation, advancement and trait UI: Rzuty obronne — nagłówek; 16–64 px beside Polish labels. traits.saves.",
+      "request": "ONE broad plain utilitarian SHIELD in front view, with ONE large thick white CURVED DEFLECTION STROKE sweeping around its upper-right edge and ending in a stout simple arrowhead pointing away. Clear black gap between shield and stroke. General successful resistance / avoidance, a sober functional protective symbol. No person, bullets, sword, heraldry, cross, rivets, fantasy ornament or fine lines.",
+      "current": {
+        "src": "/icons/abilities/kuloodporny.svg",
+        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+      },
+      "candidates": [
+        {
+          "id": "atlas-a",
+          "label": "Batch 112 · Rzuty obronne — nagłówek",
+          "src": "candidates/batch-112/rzuty-obronne.png",
+          "note": "ONE broad plain utilitarian SHIELD in front view, with ONE large thick white CURVED DEFLECTION STROKE sweeping around its upper-right edge and ending in a stout simple arrowhead pointing away. Clear black gap between shield and stroke. General successful resistance / avoidance, a sober functional protective symbol. No person, bullets, sword, heraldry, cross, rivets, fantasy ornament or fine lines."
+        }
+      ]
     }
   ]
 }

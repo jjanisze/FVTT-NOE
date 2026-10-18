@@ -1,0 +1,15 @@
+{
+  "batch": 112,
+  "validatedMasks": 8,
+  "prospectiveDeliveryTargets": 8,
+  "candidateHashes": {
+    "akrobatyka": "d554b1afd7864735936b36621005112f3ec0d091fd066c5ab0a20c12f844abbc",
+    "historia": "7578351096605878f97892f14f7dcf19dc322cd7707fceb14caf35bd403df00d",
+    "intuicja": "f9d0c2863537223b576310150f0f34e4f1ed56a6a314e247df1654ce03cd5ee0",
+    "pojazdy": "89b798cd45e255d899e66f981803375cb60a981dfe63365d4691104b2f04fa1c",
+    "zastraszanie": "f1fc1682c5ccbcc8bc40de9de56ed1427db2630886c2a0218ab20f24025dba06",
+    "zwinne-dlonie": "52ebc1ea03983aecae06f83e27d98539e11340871575c66128a5d4a5b60cdc06",
+    "umiejetnosci": "18c2f97d697c86754089d41e36edcddd89d0b4af0ad80ff66d9cc5ca23371262",
+    "rzuty-obronne": "9c68d46e1675588527a8f81a84e4580f70452e3b9b5d5ae88db05cb9e2da7b59"
+  }
+}
