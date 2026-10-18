@@ -77,6 +77,15 @@ const ZONE_CHANGES = {
   nieruchomienie: [change("system.attributes.movement.speeds.walk", CHANGE_TYPE.override, 0)]
 };
 
+// Unieruchomienie carries a status in `CONFIG.DND5E.conditionEffects.noMovement` (`config/conditions.mjs`): dnd5e
+// reads Szybkość 0 off it, and its native Unikanie rule (`dodging` → Ułatwienie on RO ZRC, s. 30) ends there, as
+// RAW says. An id of its own: „Unieruchomienie” is also NOE's name for the restrained condition.
+export const UDZWIG_MAX_STATUS = "udzwigMaksymalny";
+const ZONE_STATUSES = {
+  przeciazenie: [],
+  nieruchomienie: [UDZWIG_MAX_STATUS]
+};
+
 const ZONE_NAMES = {
   przeciazenie: "Przeciążenie (Udźwig) — ×½ Szybkości",
   nieruchomienie: "Unieruchomienie (Udźwig) — Szybkość 0"
@@ -117,6 +126,7 @@ async function _syncUdzwigSlowEffect(actor) {
     _id: EFFECT_ID,
     name: ZONE_NAMES[zone],
     img: "icons/svg/downgrade.svg",
+    statuses: ZONE_STATUSES[zone],
     system: { changes: ZONE_CHANGES[zone] },
     flags: { [MODULE_ID]: { [EFFECT_FLAG]: zone } }
   };

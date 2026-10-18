@@ -367,7 +367,9 @@ export const REMOVED_STATUSES = Object.freeze([
  */
 function buildConditionEffects() {
   return {
-    noMovement: new Set(["grappled", "paralyzed", "restrained", "unconscious", "wylaczony"]),
+    // `udzwigMaksymalny`: the status of Udźwig's Unieruchomienie effect (`actors/udzwig-slowdown.mjs`) — Szybkość 0
+    // (s. 258), so dnd5e also ends Unikanie's Ułatwienie there (it drops `dodging` under any noMovement condition).
+    noMovement: new Set(["grappled", "paralyzed", "restrained", "unconscious", "wylaczony", "udzwigMaksymalny"]),
     halfMovement: new Set(),
     crawl: new Set(["prone", "exceedingCarryingCapacity"]),
     petrification: new Set(),
@@ -383,16 +385,17 @@ function buildConditionEffects() {
     dexteritySaveDisadvantage: new Set(["restrained"]),
     initiativeAdvantage: new Set(["ambush"]),
     initiativeDisadvantage: new Set(["incapacitated", "surprised"]),
-    // dnd5e 6.0 keys, empty on purpose (port 1:1, PLAN_migracja_dnd5e6.md D4):
-    //  - `physical*` put dnd5e's `heavilyEncumbered` (2024 rules) on STR/DEX/CON tests; Udźwig has its own NOE
-    //    penalties (`actors/udzwig-slowdown.mjs`, `combat/udzwig-attack-disadvantage.mjs`).
-    //  - `dexteritySaveAdvantage` gives Unikanie (`dodging`) Ułatwienie on RO ZRC — that IS NOE s. 30, but RAW also
-    //    takes it away under Obezwładnienie, at Szybkość 0 and without sight of the enemy, which a blanket set
-    //    cannot see; the 5.3 build never granted it. A RAW reading for the GM (E9), not a port.
+    // dnd5e 6.0 keys:
+    //  - `physical*` stay empty: they put dnd5e's `heavilyEncumbered` (2024 rules) on STR/DEX/CON tests, saves and
+    //    attacks — beyond RAW; Udźwig has exactly its NOE penalties (`actors/udzwig-slowdown.mjs`,
+    //    `combat/udzwig-attack-disadvantage.mjs`). GM, 2026-10-18: RAW only.
+    //  - `dexteritySaveAdvantage` is dnd5e's own rule and exactly NOE s. 30: Unikanie (`dodging`) gives Ułatwienie
+    //    on RO ZRC, lost under Obezwładnienie or at Szybkość 0 — dnd5e drops `dodging` while `incapacitated` or under
+    //    any `noMovement` condition (above). GM, 2026-10-18: native mechanism instead of our own code.
     physicalCheckDisadvantage: new Set(),
     physicalSaveDisadvantage: new Set(),
     physicalAttackDisadvantage: new Set(),
-    dexteritySaveAdvantage: new Set()
+    dexteritySaveAdvantage: new Set(["dodging"])
   };
 }
 

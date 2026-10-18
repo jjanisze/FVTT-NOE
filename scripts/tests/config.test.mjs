@@ -22,7 +22,8 @@ import { pwGainOnAdvancement } from "../actors/pw.mjs";
 import { SZYBKOSC_STARTOWA_M, potrzebujeSzybkosci } from "../actors/character-defaults.mjs";
 import { KOBALT_CLASS_FEATURES } from "../wkk/config/class-features-data.mjs";
 import { filterKobaltPool } from "../actors/kobalt-advancement.mjs";
-import { MODULE_ID } from "./helpers.mjs";
+import { MODULE_ID, scratchActor, scratchCleanup } from "./helpers.mjs";
+import { UDZWIG_MAX_STATUS } from "../actors/udzwig-slowdown.mjs";
 
 /** Sprawdza, że plik istnieje na serwerze — literówka w ścieżce ikony jest niewidoczna w UI. */
 async function assetExists(path) {
@@ -32,7 +33,8 @@ async function assetExists(path) {
 
 export function registerConfigTests(quench) {
   quench.registerBatch(`${MODULE_ID}.konfiguracja`, context => {
-    const { describe, it, expect } = context;
+    const { describe, it, after, expect } = context;
+    after(scratchCleanup);
 
     /* ---------------------------------------------------------------- */
 
@@ -106,10 +108,30 @@ export function registerConfigTests(quench) {
           "physicalAttackDisadvantage", "attackDisadvantage", "dexteritySaveDisadvantage", "dexteritySaveAdvantage",
           "initiativeAdvantage", "initiativeDisadvantage"];
         for (const key of dnd5eKeys) expect(CONFIG.DND5E.conditionEffects[key], key).to.be.an.instanceOf(Set);
-        // Decyzje 1:1 z 5.3 (D4): przeciążenie dnd5e 2024 i Ułatwienie RO ZRC przy Unikaniu — puste.
-        for (const key of ["physicalCheckDisadvantage", "physicalSaveDisadvantage", "physicalAttackDisadvantage", "dexteritySaveAdvantage"]) {
+        // MG, 2026-10-18: kary przeciążenia dnd5e 2024 wykraczają poza RAW Udźwigu — puste.
+        for (const key of ["physicalCheckDisadvantage", "physicalSaveDisadvantage", "physicalAttackDisadvantage"]) {
           expect(CONFIG.DND5E.conditionEffects[key], key).to.be.empty;
         }
+        // …a Ułatwienie RO ZRC przy Unikaniu (s. 30) to natywna reguła dnd5e — dokładnie RAW.
+        expect([...CONFIG.DND5E.conditionEffects.dexteritySaveAdvantage]).to.deep.equal(["dodging"]);
+      });
+
+      // s. 30: „Otrzymujesz też Ułatwienie do RO na Zręczność. Tracisz te korzyści, jeśli masz stan Obezwładnienie lub
+      // twoja Szybkość wynosi 0.” — natywnie: `dodging` → `dexteritySaveAdvantage`, gaśnie przy `incapacitated` i
+      // stanach `noMovement` (w tym Udźwig maksymalny, s. 258).
+      it("Unikanie daje Ułatwienie RO ZRC i traci je przy Obezwładnieniu i Szybkości 0 (s. 30)", async function () {
+        const a = await scratchActor();
+        const tryb = () => a.system.abilities.dex.save.roll.mode;
+        expect(tryb(), "bez Unikania").to.equal(0);
+        await a.toggleStatusEffect("dodging", { active: true });
+        expect(tryb(), "Unikanie").to.equal(1);
+        expect(a.system.abilities.str.save.roll.mode, "tylko ZRC").to.equal(0);
+        await a.toggleStatusEffect("incapacitated", { active: true });
+        expect(tryb(), "Obezwładnienie").to.equal(0);
+        await a.toggleStatusEffect("incapacitated", { active: false });
+        await a.createEmbeddedDocuments("ActiveEffect", [{ name: "Udźwig maksymalny (test)", statuses: [UDZWIG_MAX_STATUS] }]);
+        expect(tryb(), "Szybkość 0 z Udźwigu").to.equal(0);
+        expect(a.system.attributes.movement.speeds.walk, "Szybkość przy Udźwigu maksymalnym").to.equal(0);
       });
 
       it("ikony stanów z poziomami istnieją dla każdego poziomu (dnd5e 6.0 skleja `<img>-N`)", async function () {
