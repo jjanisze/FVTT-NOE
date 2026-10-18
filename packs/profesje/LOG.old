@@ -1,3 +1,5 @@
-2026/10/18-12:25:31.613 7e24 Recovering log #8
-2026/10/18-12:25:31.619 7e24 Delete type=0 #8
-2026/10/18-12:25:31.619 7e24 Delete type=3 #7
+2026/10/18-19:29:38.581 8ecc Recovering log #3
+2026/10/18-19:29:38.581 8ecc Level-0 table #5: started
+2026/10/18-19:29:38.585 8ecc Level-0 table #5: 37981 bytes OK
+2026/10/18-19:29:38.591 8ecc Delete type=0 #3
+2026/10/18-19:29:38.591 8ecc Delete type=3 #2
