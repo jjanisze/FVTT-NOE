@@ -1,6 +1,6 @@
 # PLAN — M4: Pojazdy (część 1) i pościgi (część 2)
 
-> Status: **PROJEKT** (2026-10-18, rundy 1–3). Decyzje MG D1–D18 (§1); otwarte — §10. Rozmiar: **L–XL**
+> Status: **PROJEKT** (2026-10-18/19, rundy 1–4). Decyzje MG D1–D19 (§1); otwarte — §10. Rozmiar: **L–XL**
 > (część 1: L, część 2: M). Wywołanie: `PLAN_beta.md` §0, krok 6 — przesunięty przed M6 (MG, 2026-10-18).
 > Zastępuje §4–§7 `PLAN_poscigi.md` (karta pojazdu, manewry, awarie); plansza pościgu (§2 tamtego planu) zostaje.
 >
@@ -52,14 +52,15 @@ flowchart LR
 | D8 | **Efekty silnika:** dym i drgania dla pojazdów silnikowych, trzy zestawy (benzyna, diesel, motocykl), ustawienie klienta wyłączające drgania. Ten sam efekt później dla maszyn Molocha. **Dźwięk: tylko uruchomienie i zgaszenie.** |
 | D9 | **Tura pojazdu = tura kierowcy** (RAW: inicjatywa kierowcy). Pojazd nie wchodzi do trackera walki. |
 | D10 | **Skręty wykrywane z ruchu:** zmiana kierunku ≥ 90° w turze kierowcy → karta MG z Testem MDR (Pojazdy). |
-| D11 | **Dostęp i własność — dwie warstwy.** Własność stała (zwykła własność Foundry, ustawia MG) — pełny dostęp, z ładownią. Dostęp z obecności (postać siedzi w środku) — przesuwanie żetonu, karta, uruchamianie, **bez ładowni**. Bez stanów „kradziony” i „sporny”. (§4.4) |
+| D11 | **Dostęp i własność — dwie warstwy.** Własność stała (zwykła własność Foundry, ustawia MG) — dostęp także spoza pojazdu. Dostęp z obecności (postać siedzi w środku) — przesuwanie żetonu, karta, uruchamianie **i ładownia** pojazdu, w którym siedzisz (MG, 2026-10-19: upraszczamy). Bez stanów „kradziony” i „sporny”. (§4.4) |
 | D12 | **Kluczyki i odpalanie na krótko (WKK).** Kluczyki pasują do jednego pojazdu (nie do innych tego typu; kopia żetonu tego samego pojazdu na innej scenie — pasują). MG tworzy kluczyki z karty pojazdu i ustawia stan: na kluczyk / odpalony na krótko. Na krótko wymaga narzędzi małego mechanika **albo** elektronika, ST wg klasy pojazdu; porażka — alarm, duża porażka — awaria 17, a gdzie nie ma awarii — obrażenia pojazdu; sukces trwale przełącza pojazd na „odpalony na krótko”. (§4.5) |
 | D13 | **Obrys:** najpierw próba E0 z prostokątami; jeśli zawiedzie — kwadraty wg rozmiaru dnd5e. (§4.3) |
 | D14 | **Kropki to uchwyty celowania:** wycelowanie w kropkę celuje w (dalej ukrytego) jadącego; karta ataku poda jego imię — to akceptowalne. (§4.2) |
 | D15 | **Przesiądź się:** odległość między miejscami ×2 bez testu albo ×1 z ZRC (Akrobatyka) ST 10 (tylko w jadącym pojeździe; porażka o 5+ — Powalenie); stojący pojazd zawsze ×2. **WKK:** w jadącym pojeździe zmiana rzędu (przód↔tył, kabina↔paka) zawsze wymaga Akrobatyki. (§4.10) |
-| D16 | **Broń montowana:** gdy strzelec siedzi na stanowisku, broń przechodzi do niego (flaga „zamontowana”: bez wagi, ręce na broni) i wraca do pojazdu, gdy opuści stanowisko — magazynki, tryby ognia i zacięcia działają bez zmian. Browning na GMT400 leży dziś w bagażniku, nie jest zamontowany. (§4.11) |
+| D16 | **Broń montowana:** gdy strzelec siedzi na stanowisku, broń przechodzi do niego (flaga „zamontowana”: bez wagi, ręce na broni) i wraca do pojazdu, gdy opuści stanowisko — magazynki, tryby ognia i zacięcia działają bez zmian. **Montaż to Robota produkcji** zakładana przyciskiem MG na karcie pojazdu; moduł liczy godziny, surowce i test (MG, 2026-10-19). Browning na GMT400 leży dziś w bagażniku, nie jest zamontowany. (§4.11) |
 | D17 | **Pojazd przy 0 PW:** wrak (grafika wraku, jadący wysadzeni obok, bez uruchamiania i ruchu); płonący (awaria 1) z paliwem w baku — odliczanie k4 rund i wybuch baku (ogień wg rozmiaru, RO ZRC — połowa). (§4.12) |
 | D18 | **Światła:** przełącznik na pojeździe silnikowym (kierowca i MG), stożek do przodu; działają też przy zgaszonym silniku; awaria 17 je gasi. (§4.5) |
+| D19 | **Naprawy, PW i wrak — improwizacja** (MG, 2026-10-19: „improwizuj”). Wzór: naprawa drona z M3 i tabela Naprawiania s. 146; liczby w §4.9, do weta przy E6. |
 
 ---
 
@@ -157,15 +158,11 @@ Wariant zapasowy, jeśli próba E0 się nie uda: kwadratowy obrys wg rozmiaru dn
 Pojazd nie ma lojalności — to samobieżna skrzynia. Dwie warstwy:
 1. **Własność stała** — zwykła własność Foundry, ustawiana przez MG; pełny dostęp, z ładownią.
 2. **Dostęp z obecności** — gracz, którego postać siedzi w środku, ma na czas jazdy prawa właściciela (przesuwa
-   żeton, widzi kartę, uruchamia, przesiada się), ale karta ukrywa mu ładownię. Wysiadka przywraca poprzednie prawa
-   (zapis we fladze, zapis przez MG). Ukrycie ładowni jest w interfejsie, nie w uprawnieniach Foundry — wystarcza
-   przy stole, któremu MG ufa.
+   żeton, widzi kartę i ładownię, uruchamia, przesiada się). Wysiadka przywraca poprzednie prawa (zapis we fladze,
+   zapis przez MG).
 
-Cudzy pojazd z graczem w środku to po prostu warstwa 2; MG robi z niego własny, nadając własność.
-
-**Luka do zamknięcia (WKK z D3 rundy 1):** jadący, który upuści karabin w cudzym pojeździe, nie miałby go jak
-podnieść — ładownia jest ukryta. Propozycja: przedmioty upuszczone przez jadących leżą w osobnej grupie
-**„Na siedzeniach”**, widocznej dla każdego jadącego, poza resztą ładowni.
+Cudzy pojazd z graczem w środku to po prostu warstwa 2; MG robi z niego własny, nadając własność. Upuszczone w
+pojeździe (WKK) ląduje w ładowni, którą jadący i tak widzi.
 
 ### 4.5 Silnik (D7, D8)
 
@@ -239,12 +236,27 @@ tworzy efekt na pojeździe:
 | 19 Jadący | losowy jadący: połowa obrażeń pojazdu, min. 2k10 (karta) |
 | 20 Broń | broń montowana uszkodzona; bez broni — awaria 19 |
 
-### 4.9 Naprawy
+### 4.9 Naprawy, PW i wrak (D19 — improwizacja do weta)
 
-- **Tymczasowa** (w jeździe): akcja + test o ST „jazda” z tabeli, sukces zawiesza skutek na 1 minutę (10 rund),
-  potem wraca. Bez kolumny „jazda” — tylko na postoju.
-- **Fachowa** (postój): ścieżka Naprawy z M2 — narzędzia małego mechanika, biegłość, części; ST z tabeli. Koszt w
-  surowcach i czas — pytanie na E6.
+Wzór: naprawa drona z M3 (`actors/drony-naprawa.mjs` — „Napraw PW” i „Napraw awarię” przez Robotę M2) i tabela
+Naprawiania (s. 146), która sama podaje przykłady samochodowe: świece — Drobnostka, sprzęgło — Trochę roboty,
+silnik — Skomplikowana harówa.
+
+- **Cena części** = 10% ceny pojazdu. Od niej liczą się procenty z tabeli s. 146 — inaczej wymiana sprzęgła w
+  Osobówce kosztowałaby 300 gb.
+- **Tymczasowa** (w jeździe): akcja + test o ST „jazda”, sukces zawiesza skutek na 1 minutę (10 rund), potem
+  wraca. Narzędzia małego mechanika albo przedmiot, który MG uzna; bez kolumny „jazda” — tylko na postoju.
+- **Fachowa** (postój): ST awarii z kolumny „postój” wyznacza stopień — 10 Drobnostka, 15 Trochę roboty, 20
+  Skomplikowana harówa. Koszt: 10 / 30 / 50% ceny części w surowcach (Osobówka 10 / 30 / 50 gb, Czołg 30 / 90 /
+  150 gb). Czas: 1k4 min / 1k4 h / 2k4 h. Narzędzia małego mechanika i biegłość (RAW); awaria 17 — mechanika
+  albo elektronika. Drobnostka to od razu test; wyższe stopnie — Robota M2 (godziny, surowce, test na końcu,
+  zajęcie w Postoju). Skutek Roboty zdejmuje awarię (przekaźnik MG).
+- **PW** („Napraw karoserię”, wzór drona): godzina pracy = 2k6 + mod. INT naprawiającego, narzędzia małego
+  mechanika; koszt w surowcach: przywrócone PW × 10% ceny pojazdu / maks. PW — cała karoseria za 10% ceny
+  (Osobówka ok. 100 gb i ok. 8 h, Czołg ok. 300 gb i kilka dni). W Postoju — zajęcie w budżecie pracy.
+- **Wrak** (D17): najpierw **Odbudowa** — Skomplikowana harówa liczona od ceny pojazdu (ST 20, 50% ceny,
+  2k4 h × rozmiar: Duża ×1, Wielka ×2, Ogromna ×4), potem pojazd ma 1 PW i jedną losową awarię „pamiątkę” (k20)
+  do naprawy zwykłym trybem. Grafika wraku wraca do oryginału.
 
 ### 4.10 Przesiadka (D15)
 
@@ -256,18 +268,30 @@ pojazd = ruszył się w tej albo poprzedniej turze kierowcy.
 
 ### 4.11 Broń montowana (D16)
 
-Zakładka Uzbrojenie: MG **montuje** broń z ładowni na stanowisku (i zdejmuje). Zajęcie stanowiska przenosi broń do
+**Montaż i demontaż to Roboty produkcji.** Produkcja już dziś ma Robotę ad hoc MG (dowolny przedmiot, cena i
+narzędzia od MG — `production/okna.mjs` `oknoAdHoc`) i wyniki trzech rodzajów: przedmiot, aktor (dron), naprawa z
+wtyczkami (`zarejestrujNaprawe` — tak naprawia się dron). Brakuje wyniku, który jest **skutkiem na innym
+dokumencie**. E2 dodaje rejestr `zarejestrujSkutek(klucz, fn)` obok `zarejestrujNaprawe`: Robota niesie klucz i
+dane, a po udanym teście woła skutek przez przekaźnik MG. Ten sam rejestr posłuży innym „projektom” MG.
+
+- **Zamontuj (Robota)** na zakładce Uzbrojenie (MG): broń z ładowni, stanowisko, wykonawca. Domyślnie Trochę
+  roboty liczone od ceny broni — ST 15, 30% ceny broni w surowcach, 1k4 h; narzędzia małego mechanika albo
+  rusznikarza. MG zmienia wszystko w oknie, jak w Robocie ad hoc. Skutek: broń na stanowisku.
+- **Zdejmij** — Drobnostka bez kosztów (1k4 × 10 min), skutek: broń w ładowni.
+- MG może też zamontować od ręki (bez Roboty) — pojazd z katalogu albo z fabuły.
+
+Zajęcie stanowiska przenosi broń do
 strzelca ścieżką przenoszenia przedmiotów (`production/przenoszenie.mjs`), z flagą `zamontowana: <uuid pojazdu>`:
 Udźwig jej nie liczy, lalka pokazuje ręce na broni montowanej, upuścić ani schować jej nie można. Opuszczenie
 stanowiska, wysiadka, wypadnięcie, śmierć strzelca i przycisk MG oddają ją pojazdowi; sprawdzenie przy starcie
-świata zwraca broń, której strzelec nie siedzi już na stanowisku. Montaż jako przeróbka u fachowca (M5) — później.
+świata zwraca broń, której strzelec nie siedzi już na stanowisku.
 
 ### 4.12 Wrak i wybuch (D17)
 
 Przy 0 PW: wzorzec wraku z M5 (`combat/autodestrukcja.mjs` — grafika wg rozmiaru, oryginał we fladze, [Przywróć]
 u MG), jadący wysadzeni na wolne pola obok, silnik zgaszony, Uruchom i ruch oznaczane. Płonący pojazd z paliwem:
 odliczanie k4 rund i wybuch tym samym kodem co autodestrukcja — ogień wg rozmiaru (Duża 3k6 / 3 m, Wielka 4k6 /
-4,5 m, Ogromna 6k6 / 6 m; RO ZRC ST 15 — połowa); wrak zostaje. Naprawa wraku — tylko fachowa, decyzja MG.
+4,5 m, Ogromna 6k6 / 6 m; RO ZRC ST 15 — połowa); wrak zostaje. Odbudowa wraku — §4.9.
 
 ### 4.13 Pojazdy, które nie są pojazdami
 
@@ -314,11 +338,11 @@ karta z RO — nic, co wymaga nowej geometrii. Cechy pościgowe (Rajdowiec, Stuk
 |---|---|---|---|
 | **E0** | **Próba w piaskownicy**: obrys prostokątny z zamianą w czterech kierunkach (§4.3), jadący w animacji (pozycja, obrót, wizja, FOV), drgania wspólne, ukrycie i prześwietlenie, Alt+klik. Osobówka z czterema jadącymi, jazda po łuku i obrót o 180°. | S–M | nagranie i zrzuty w przekazaniu; decyzja MG: prostokąt czy wariant zapasowy |
 | **E1** | **Katalog i dane**: 14 pojazdów → paczka `pojazdy` (cechy jako zdolności pojazdu z aktywnościami tam, gdzie tanio), obrysy, miejsca, zestaw silnika, punkt rury, flaga podwozia (§4.13); `validate-packs`; GMT400 i Hammer Posterunku — nasza migracja (podwozie, miejsca, obrys). | M | paczka zbudowana, Quench danych |
-| **E2** | **Karta pojazdu**: podklasa z zakładkami Pojazd, Załoga, Ładownia, Uzbrojenie, Awarie, Opis; stan własności (§4.4); martwe pola dnd5e ukryte; obie dotychczasowe wstawki działają. | M–L | e2e karty, zrzuty |
+| **E2** | **Karta pojazdu**: podklasa z zakładkami Pojazd, Załoga, Ładownia, Uzbrojenie, Awarie, Opis; stan własności (§4.4); martwe pola dnd5e ukryte; obie dotychczasowe wstawki działają; rejestr skutków Roboty i montaż broni (§4.11). | M–L | e2e karty, zrzuty; Robota montażu kończy się bronią na stanowisku |
 | **E3** | **Wsiadanie i miejsca**: okno miejsc, Wsiądź / Wysiądź / Przesiądź się (koszty z RAW, §2), jadący i ich rozmiar, kropki, prześwietlenie, dostęp z obecności, **WKK:** upuszczone w pojeździe ląduje w ładowni, wypadanie. | L | e2e: gracz wsiada, jedzie, przesiada się, wysiada; drugi gracz widzi kropki |
 | **E4** | **Silnik**: Uruchom/Zgaś, kluczyki i na krótko, oznaczenia, zestawy efektów, ustawienie drgań, dźwięki, światła, paliwo i wyciek. | M | e2e i Quench; zrzuty efektów |
 | **E5** | **Jazda w walce**: tura kierowcy, budżet ruchu, wsteczny, skręty i obrót, trudny teren, atak z jadącego pojazdu, osłona jadących, potrącenie, broń montowana. | L | e2e `pojazd` w walce |
-| **E6** | **Awarie, naprawy, wrak**: dane k20, wyzwalacze, skutki z §4.8, zegary, naprawy tymczasowe i fachowe, wrak i wybuch (§4.12). | L | Quench każdej awarii; e2e naprawy i wraku |
+| **E6** | **Awarie, naprawy, wrak**: dane k20, wyzwalacze, skutki z §4.8, zegary, naprawy tymczasowe i fachowe, „Napraw karoserię”, wrak, wybuch i Odbudowa (§4.9, §4.12). | L | Quench każdej awarii i kosztów; e2e naprawy i wraku |
 | **E7** | **Wojownik autostrady** poza pościgiem: Konwojent, Taranowanie, Kaskader (karty testów), Pancerna fura (OC, AC [B]); Rajdowiec — Ułatwienie w walce i +50% Szybkości. Plakietki pokrycia. | S–M | rejestr zdolności zaktualizowany |
 | **E8** | **Grafika, Poligon, testy**: zamówienia w `dev/icons/MISSING.md` (14 żetonów z góry, 14 portretów, dźwięki), stanowisko Poligonu **Garaż**, pełna bramka. | M | bramka zielona; stanowisko z sondami |
 
@@ -360,7 +384,8 @@ wybuch — z JB2A.
 
 ## 10. Otwarte pytania
 
-- **Na E6:** koszt i czas naprawy fachowej awarii; naprawa PW pojazdu.
+Brak blokujących. Do weta MG przy wdrożeniu: katalog i własne cechy (§5), ST na krótko i wybuch baku (§4.5, §4.12),
+liczby napraw, PW i odbudowy (§4.9), montaż (§4.11). Część 2 — osobna runda pytań.
 
 ## 11. Postęp
 
@@ -371,3 +396,7 @@ sprawdzona w źródłach rdzenia 14.369 (wzorzec Regionów przypiętych do żeto
 uchwyty celowania, przesiadka z WKK dla zmiany rzędu, broń montowana u strzelca, wrak i wybuch baku, światła.
 Znalezione po drodze: rdzeń nie obraca obrysu żetonu (§4.3); typ `vehicle` służy też za pojemnik (§4.13); darmowy
 JB2A nie ma kłębów spalin — dym z natywnego `ParticleGenerator` (§4.5). Następny krok: E0.
+
+**2026-10-19 — runda 4.** Dostęp z obecności obejmuje ładownię (bez osobnej grupy „Na siedzeniach”); montaż broni
+jako Robota produkcji z nowym rejestrem skutków; naprawy, PW i odbudowa wraku zaimprowizowane wg naprawy drona i
+tabeli s. 146 (D19).
