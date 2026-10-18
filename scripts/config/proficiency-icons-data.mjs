@@ -1,4 +1,4 @@
-/** Approved native glyphs for trait UI. Dedicated Batch 112 designs await GM review. */
+/** Approved native glyphs for trait UI. Three dedicated skill designs await revision. */
 const ROOT = "modules/neuroshima-2026-overrides/icons";
 const ability = name => `${ROOT}/abilities/${name}.svg`;
 
@@ -18,13 +18,13 @@ export const WEAPON_PROFICIENCY_ICONS = Object.fromEntries(Object.entries({
 export const SKILL_ICONS = {
   akr: ability("sportowiec"),
   atl: ability("sportowiec"),
-  his: ability("przedwojenna-edukacja"),
+  his: `${ROOT}/proficiencies/historia.svg`,
   int: ability("wyczulone-zmysly"),
   med: `${ROOT}/items/drugs/medpak.svg`,
   osz: ability("szybka-gadka"),
   prc: ability("wyczulone-zmysly"),
   per: ability("dobra-rada"),
-  poj: ability("kaskader"),
+  poj: `${ROOT}/proficiencies/pojazdy.svg`,
   prz: ability("moj-biom"),
   skr: ability("cichy-krok"),
   sur: `${ROOT}/items/loot/kompas.svg`,
@@ -40,8 +40,8 @@ export const TRAIT_CATEGORY_ICONS = {
   armor: ARMOR_PROFICIENCY_ICONS.med,
   weapon: ability("szkolenie-w-broni"),
   tool: `${ROOT}/weapons/klucz_francuski.svg`,
-  skills: ability("ucz-sie-ucz"),
-  saves: ability("kuloodporny")
+  skills: `${ROOT}/proficiencies/umiejetnosci.svg`,
+  saves: `${ROOT}/proficiencies/rzuty-obronne.svg`
 };
 
 export const MIXED_TRAIT_ICON = TRAIT_CATEGORY_ICONS.skills;

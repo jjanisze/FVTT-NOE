@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batch 112 · 8 proficiency icons awaiting GM review",
+  "title": "Asset review · five Batch 112 choices delivered/retained; three subjects awaiting revision",
   "updated": "2026-10-18",
   "items": [
     {
@@ -15691,12 +15691,12 @@
       "name": "Akrobatyka",
       "batch": 112,
       "tier": "Batch 112 · Proficiency UI",
-      "target": "icons/proficiencies/akrobatyka.svg",
+      "target": "icons/abilities/sportowiec.svg",
       "deliveryTargets": [
         {
-          "source": "icons/proficiencies/akrobatyka.svg",
-          "sourceSha256": null,
-          "variant": "default"
+          "source": "icons/abilities/sportowiec.svg",
+          "sourceSha256": "5257f866b310d097a1de4b444b351054aad2328b60c79ad9bc0667ef60e205a8",
+          "variant": "retained"
         }
       ],
       "wiringKey": "skills.akr",
@@ -15713,7 +15713,10 @@
           "src": "candidates/batch-112/akrobatyka.png",
           "note": "ONE complete generic adult in plain close-fitting practical clothes performing a compact CARTWHEEL. Both arms straight, ONE palm planted on the ground, other arm extended, both legs clearly separated overhead. Featureless head, natural adult proportions. A clean complete human acrobat silhouette, no animal, facial detail, hair strands, costume, motion trails or extra limbs."
         }
-      ]
+      ],
+      "requestedTarget": "icons/proficiencies/akrobatyka.svg",
+      "retainedCurrent": true,
+      "status": "resolved"
     },
     {
       "id": "proficiency-historia",
@@ -15732,8 +15735,8 @@
       "context": "Native character creation, advancement and trait UI: Historia; 16–64 px beside Polish labels. skills.his.",
       "request": "ONE broad CLOSED HISTORY BOOK with a simple stout spine, paired with ONE large simple HOURGLASS in front at lower right. Hourglass has broad top and bottom and TWO triangular sand masses separated by a black gap. No lettering, page texture, medical cross, engineering diagram, magic symbol or ornate book decoration.",
       "current": {
-        "src": "/icons/abilities/przedwojenna-edukacja.svg",
-        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+        "src": "/icons/proficiencies/historia.svg",
+        "note": "Exact GM-approved Batch 112 glyph, installed as SVG/WEBP."
       },
       "candidates": [
         {
@@ -15742,7 +15745,8 @@
           "src": "candidates/batch-112/historia.png",
           "note": "ONE broad CLOSED HISTORY BOOK with a simple stout spine, paired with ONE large simple HOURGLASS in front at lower right. Hourglass has broad top and bottom and TWO triangular sand masses separated by a black gap. No lettering, page texture, medical cross, engineering diagram, magic symbol or ornate book decoration."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "proficiency-intuicja",
@@ -15790,8 +15794,8 @@
       "context": "Native character creation, advancement and trait UI: Pojazdy; 16–64 px beside Polish labels. skills.poj.",
       "request": "ONE large complete utilitarian THREE-SPOKE STEERING WHEEL viewed straight on, gripped at left and right by TWO complete plain adult hands. Coherent fingers wrapped around rim, stout spokes and central hub. Vehicle driving skill, no car body, dashboard, logo, tiny controls, speed lines or machinery repair.",
       "current": {
-        "src": "/icons/abilities/kaskader.svg",
-        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+        "src": "/icons/proficiencies/pojazdy.svg",
+        "note": "Exact GM-approved Batch 112 glyph, installed as SVG/WEBP."
       },
       "candidates": [
         {
@@ -15800,7 +15804,8 @@
           "src": "candidates/batch-112/pojazdy.png",
           "note": "ONE large complete utilitarian THREE-SPOKE STEERING WHEEL viewed straight on, gripped at left and right by TWO complete plain adult hands. Coherent fingers wrapped around rim, stout spokes and central hub. Vehicle driving skill, no car body, dashboard, logo, tiny controls, speed lines or machinery repair."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "proficiency-zastraszanie",
@@ -15877,8 +15882,8 @@
       "context": "Native character creation, advancement and trait UI: Umiejętności / biegłości mieszane; 16–64 px beside Polish labels. traits.skills + mixed Trait.",
       "request": "ONE broad OPEN PRACTICAL INSTRUCTION BOOK, viewed from the front with two white page blocks separated by ONE broad central black fold. ONE large white CHECKMARK overlaps its lower-right corner, separated from the page by a thick black outline gap. Only TWO broad black page lines. General learned skills and proficiency, no lettering, magic, medical cross, specific tool, ornate border or tiny marks.",
       "current": {
-        "src": "/icons/abilities/ucz-sie-ucz.svg",
-        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+        "src": "/icons/proficiencies/umiejetnosci.svg",
+        "note": "Exact GM-approved Batch 112 glyph, installed as SVG/WEBP."
       },
       "candidates": [
         {
@@ -15887,7 +15892,8 @@
           "src": "candidates/batch-112/umiejetnosci.png",
           "note": "ONE broad OPEN PRACTICAL INSTRUCTION BOOK, viewed from the front with two white page blocks separated by ONE broad central black fold. ONE large white CHECKMARK overlaps its lower-right corner, separated from the page by a thick black outline gap. Only TWO broad black page lines. General learned skills and proficiency, no lettering, magic, medical cross, specific tool, ornate border or tiny marks."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "proficiency-rzuty-obronne",
@@ -15906,8 +15912,8 @@
       "context": "Native character creation, advancement and trait UI: Rzuty obronne — nagłówek; 16–64 px beside Polish labels. traits.saves.",
       "request": "ONE broad plain utilitarian SHIELD in front view, with ONE large thick white CURVED DEFLECTION STROKE sweeping around its upper-right edge and ending in a stout simple arrowhead pointing away. Clear black gap between shield and stroke. General successful resistance / avoidance, a sober functional protective symbol. No person, bullets, sword, heraldry, cross, rivets, fantasy ornament or fine lines.",
       "current": {
-        "src": "/icons/abilities/kuloodporny.svg",
-        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+        "src": "/icons/proficiencies/rzuty-obronne.svg",
+        "note": "Exact GM-approved Batch 112 glyph, installed as SVG/WEBP."
       },
       "candidates": [
         {
@@ -15916,7 +15922,8 @@
           "src": "candidates/batch-112/rzuty-obronne.png",
           "note": "ONE broad plain utilitarian SHIELD in front view, with ONE large thick white CURVED DEFLECTION STROKE sweeping around its upper-right edge and ending in a stout simple arrowhead pointing away. Clear black gap between shield and stroke. General successful resistance / avoidance, a sober functional protective symbol. No person, bullets, sword, heraldry, cross, rivets, fantasy ornament or fine lines."
         }
-      ]
+      ],
+      "status": "resolved"
     }
   ]
 }

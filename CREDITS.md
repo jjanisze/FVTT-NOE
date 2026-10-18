@@ -273,6 +273,13 @@ GM-selected earlier Batch 110 design; the other six use Batch 111.
 Exact choices and delivery hashes are in
 `dev/icons/review/candidates/batch-111/reviewed-installed.json`.
 
+Four GM-approved proficiency glyphs from Batch 112 were installed on 2026-10-18
+as exact SVG/WEBP masks: `historia`, `pojazdy`, `umiejetnosci` and `rzuty-obronne`
+under `icons/proficiencies/`. They were AI-generated with OpenAI's built-in image
+tool and normalized without redrawing. Acrobatics retains the existing approved
+`sportowiec` glyph, as selected by the GM. Exact selections and delivery hashes:
+`dev/icons/review/candidates/batch-112/reviewed-installed.json`.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

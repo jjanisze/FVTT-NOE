@@ -3808,6 +3808,62 @@
       "candidateId": "batch111-revision",
       "notes": "",
       "updatedAt": "2026-10-17T01:13:49.927Z"
+    },
+    "proficiency-akrobatyka": {
+      "itemId": "proficiency-akrobatyka",
+      "decision": "approve",
+      "candidateId": "current",
+      "notes": "",
+      "updatedAt": "2026-10-18T15:32:32.669Z"
+    },
+    "proficiency-historia": {
+      "itemId": "proficiency-historia",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-18T15:33:00.866Z"
+    },
+    "proficiency-intuicja": {
+      "itemId": "proficiency-intuicja",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Try a different concept.",
+      "updatedAt": "2026-10-18T15:33:27.876Z"
+    },
+    "proficiency-pojazdy": {
+      "itemId": "proficiency-pojazdy",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-18T15:33:32.258Z"
+    },
+    "proficiency-zastraszanie": {
+      "itemId": "proficiency-zastraszanie",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Try a different concept, an angry intimidating face looking down at something. Second batch, a gruff man holding a smaller man by their shirt collar, other hand menacing",
+      "updatedAt": "2026-10-18T15:34:41.883Z"
+    },
+    "proficiency-zwinne-dlonie": {
+      "itemId": "proficiency-zwinne-dlonie",
+      "decision": "revise",
+      "candidateId": "atlas-a",
+      "notes": "Not bad, but you need to correct the hand silhouette. AI hands syndrome. ",
+      "updatedAt": "2026-10-18T15:35:18.165Z"
+    },
+    "proficiency-umiejetnosci": {
+      "itemId": "proficiency-umiejetnosci",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-18T15:35:25.495Z"
+    },
+    "proficiency-rzuty-obronne": {
+      "itemId": "proficiency-rzuty-obronne",
+      "decision": "approve",
+      "candidateId": "atlas-a",
+      "notes": "",
+      "updatedAt": "2026-10-18T15:35:31.921Z"
     }
   }
 }

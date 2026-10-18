@@ -1,0 +1,83 @@
+{
+  "date": "2026-10-18",
+  "batch": 112,
+  "installed": [
+    {
+      "itemId": "proficiency-historia",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-112/historia.png",
+      "sourceSha256": "7578351096605878f97892f14f7dcf19dc322cd7707fceb14caf35bd403df00d",
+      "files": [
+        {
+          "source": "icons/proficiencies/historia.svg",
+          "sha256": "fd045d0cc83c2c280efd60a18c84d187c234bf10100dabde14d5abee4190de02"
+        },
+        {
+          "source": "icons/proficiencies/historia.webp",
+          "sha256": "9d1d08da6144493fb56cc14d7e6670ed8def4c5ebff4183945a10879b1cd9c26"
+        }
+      ]
+    },
+    {
+      "itemId": "proficiency-pojazdy",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-112/pojazdy.png",
+      "sourceSha256": "89b798cd45e255d899e66f981803375cb60a981dfe63365d4691104b2f04fa1c",
+      "files": [
+        {
+          "source": "icons/proficiencies/pojazdy.svg",
+          "sha256": "d1d00e6a256c3d3b590c5006cc9e5ccb7adf517ffad98e354a25f6a74e14bf2c"
+        },
+        {
+          "source": "icons/proficiencies/pojazdy.webp",
+          "sha256": "22fddc8a86012732ec82a1ced18a326984041cd48ea8e0e209cce4f40cff4835"
+        }
+      ]
+    },
+    {
+      "itemId": "proficiency-umiejetnosci",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-112/umiejetnosci.png",
+      "sourceSha256": "18c2f97d697c86754089d41e36edcddd89d0b4af0ad80ff66d9cc5ca23371262",
+      "files": [
+        {
+          "source": "icons/proficiencies/umiejetnosci.svg",
+          "sha256": "b1e1204822d828844f9146508b9968f4260d47f9337b30aacf295adf053883ed"
+        },
+        {
+          "source": "icons/proficiencies/umiejetnosci.webp",
+          "sha256": "320107cddcd2ba94f71294d2102b9825fed5e3cb11a959422f3c61cc5dc7abbc"
+        }
+      ]
+    },
+    {
+      "itemId": "proficiency-rzuty-obronne",
+      "candidateId": "atlas-a",
+      "source": "candidates/batch-112/rzuty-obronne.png",
+      "sourceSha256": "9c68d46e1675588527a8f81a84e4580f70452e3b9b5d5ae88db05cb9e2da7b59",
+      "files": [
+        {
+          "source": "icons/proficiencies/rzuty-obronne.svg",
+          "sha256": "bf27d1ae2e02d707db45b4f2bf87ef90fdcc18036c6a8edfa9f2e45e3902d8ed"
+        },
+        {
+          "source": "icons/proficiencies/rzuty-obronne.webp",
+          "sha256": "b66dd4736e98d95b39a7524bc1e67b65a11d61b9e730c9b38c8b23d173ed1867"
+        }
+      ]
+    }
+  ],
+  "keptCurrent": [
+    {
+      "itemId": "proficiency-akrobatyka",
+      "files": [
+        {
+          "source": "icons/abilities/sportowiec.svg",
+          "sha256": "5257f866b310d097a1de4b444b351054aad2328b60c79ad9bc0667ef60e205a8"
+        }
+      ]
+    }
+  ],
+  "approvedSubjects": 5,
+  "remainingSubjects": 3
+}
