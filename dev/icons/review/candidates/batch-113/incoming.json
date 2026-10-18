@@ -1,0 +1,41 @@
+{
+  "productionFiles": [
+    {
+      "source": "icons/proficiencies/historia.svg",
+      "sha256": "fd045d0cc83c2c280efd60a18c84d187c234bf10100dabde14d5abee4190de02"
+    },
+    {
+      "source": "icons/proficiencies/historia.webp",
+      "sha256": "9d1d08da6144493fb56cc14d7e6670ed8def4c5ebff4183945a10879b1cd9c26"
+    },
+    {
+      "source": "icons/proficiencies/pojazdy.svg",
+      "sha256": "d1d00e6a256c3d3b590c5006cc9e5ccb7adf517ffad98e354a25f6a74e14bf2c"
+    },
+    {
+      "source": "icons/proficiencies/pojazdy.webp",
+      "sha256": "22fddc8a86012732ec82a1ced18a326984041cd48ea8e0e209cce4f40cff4835"
+    },
+    {
+      "source": "icons/proficiencies/umiejetnosci.svg",
+      "sha256": "b1e1204822d828844f9146508b9968f4260d47f9337b30aacf295adf053883ed"
+    },
+    {
+      "source": "icons/proficiencies/umiejetnosci.webp",
+      "sha256": "320107cddcd2ba94f71294d2102b9825fed5e3cb11a959422f3c61cc5dc7abbc"
+    },
+    {
+      "source": "icons/proficiencies/rzuty-obronne.svg",
+      "sha256": "bf27d1ae2e02d707db45b4f2bf87ef90fdcc18036c6a8edfa9f2e45e3902d8ed"
+    },
+    {
+      "source": "icons/proficiencies/rzuty-obronne.webp",
+      "sha256": "b66dd4736e98d95b39a7524bc1e67b65a11d61b9e730c9b38c8b23d173ed1867"
+    }
+  ],
+  "expectedAbsent": [
+    "icons/proficiencies/intuicja.svg",
+    "icons/proficiencies/zastraszanie.svg",
+    "icons/proficiencies/zwinne-dlonie.svg"
+  ]
+}

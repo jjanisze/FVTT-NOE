@@ -1,0 +1,167 @@
+{
+  "date": "2026-10-18",
+  "batch": 113,
+  "pass": "proficiency-revisions",
+  "partialAtlas": true,
+  "emptyCells": [
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "subjects": [
+    {
+      "cell": 1,
+      "kind": "proficiency",
+      "key": "intuicja",
+      "name": "Intuicja — przeczucie",
+      "itemId": "proficiency-intuicja",
+      "target": "icons/proficiencies/intuicja.svg",
+      "wiringKey": "skills.int",
+      "fallback": "icons/abilities/wyczulone-zmysly.svg",
+      "fallbackSha256": "3b644368686cd60a817470a4ac84f8be0cadfaefbab42326f2961eb760c66ec6",
+      "request": "A NEW GUT-INSTINCT concept, completely replacing the head with question mark. ONE generic adult shown waist-up in plain practical clothes, head turned slightly RIGHT, with ONE complete open hand resting over their UPPER ABDOMEN as if sensing something is wrong. Beside the torso at LEFT, ONE broad simple warning TRIANGLE with ONE large black exclamation-shaped cutout. The hand, sleeve and body remain anatomically coherent with broad simple folds only. Featureless generic adult head, natural proportions. A quiet hunch before conscious evidence; no question mark, eye symbol, magic, psychic glow, beard, hair detail or injury.",
+      "context": "Native character creation, advancement and trait UI: Intuicja; 16–64 px beside Polish labels. skills.int.",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/intuicja.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "revisionOf": {
+        "id": "proficiency-intuicja",
+        "name": "Intuicja",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-112/intuicja.png",
+        "sourceSha256": "f9d0c2863537223b576310150f0f34e4f1ed56a6a314e247df1654ce03cd5ee0",
+        "sourceKind": "candidate",
+        "notes": "Try a different concept.",
+        "feedback": {
+          "itemId": "proficiency-intuicja",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Try a different concept.",
+          "updatedAt": "2026-10-18T15:33:27.876Z"
+        },
+        "feedbackSha256": "3749b6e2a6f64828e8919551bef482b1a0b737ab047112ab2ded7f29c240486c"
+      }
+    },
+    {
+      "cell": 2,
+      "kind": "proficiency",
+      "key": "zastraszanie-twarz",
+      "name": "Zastraszanie — groźna twarz",
+      "itemId": "proficiency-zastraszanie",
+      "target": "icons/proficiencies/zastraszanie.svg",
+      "wiringKey": "skills.zas",
+      "fallback": "icons/abilities/poddaj-sie.svg",
+      "fallbackSha256": "b6a95883e6baf7a7c94a27efb8a7795dfac1a8c508edd6426f6008e716b3644a",
+      "request": "FIRST REQUESTED ALTERNATIVE: ONE angry intimidating ADULT HUMAN FACE in a looming THREE-QUARTER VIEW, angled DOWN and slightly RIGHT toward someone below the frame. Broad heavy furrowed brow, narrowed ordinary eyes, firm downturned mouth and strong jaw; ONE plain cropped neck and shoulder silhouette. Convey menace through head angle and THREE broad black face cuts, not fine wrinkles. Sober rough adult human, realistic proportions. No other person or fist in this cell, no snarling monster, fangs, skull, gore, anime eyes, spiky hair, stipple, portrait texture or tiny scratches.",
+      "context": "Native character creation, advancement and trait UI: Zastraszanie; 16–64 px beside Polish labels. skills.zas.",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/zastraszanie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "revisionOf": {
+        "id": "proficiency-zastraszanie",
+        "name": "Zastraszanie",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-112/zastraszanie.png",
+        "sourceSha256": "f1fc1682c5ccbcc8bc40de9de56ed1427db2630886c2a0218ab20f24025dba06",
+        "sourceKind": "candidate",
+        "notes": "Try a different concept, an angry intimidating face looking down at something. Second batch, a gruff man holding a smaller man by their shirt collar, other hand menacing",
+        "feedback": {
+          "itemId": "proficiency-zastraszanie",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Try a different concept, an angry intimidating face looking down at something. Second batch, a gruff man holding a smaller man by their shirt collar, other hand menacing",
+          "updatedAt": "2026-10-18T15:34:41.883Z"
+        },
+        "feedbackSha256": "5f4dd538af32bd222cfa3459f80a8238067038d14cc9ee97ef90fe2d45ffcc24"
+      }
+    },
+    {
+      "cell": 3,
+      "kind": "proficiency",
+      "key": "zastraszanie-kolnierz",
+      "name": "Zastraszanie — chwyt za kołnierz",
+      "itemId": "proficiency-zastraszanie",
+      "target": "icons/proficiencies/zastraszanie.svg",
+      "wiringKey": "skills.zas",
+      "fallback": "icons/abilities/poddaj-sie.svg",
+      "fallbackSha256": "b6a95883e6baf7a7c94a27efb8a7795dfac1a8c508edd6426f6008e716b3644a",
+      "request": "SECOND REQUESTED ALTERNATIVE: TWO adult men shown from WAIST UP. A broad GRUFF MAN at LEFT grips the SHIRT COLLAR of a visibly SMALLER ADULT MAN at RIGHT with ONE hand, pulling that collar taut. His OTHER hand is raised as ONE clenched fist in a menacing threat. Exactly TWO complete arms and TWO hands belong to the larger man: collar-gripping hand and raised fist. The smaller adult recoils with shoulders drawn in and both hands lowered; an ordinary adult, NOT a child. One broad beard silhouette on the larger man, faces simplified to broad restrained cuts. Clear negative-space separation between heads, fist, forearms and torso. No contact from the fist, injury, blood, extra arms, hands, weapon, thin fingers, fine fabric texture or anime.",
+      "context": "Native character creation, advancement and trait UI: Zastraszanie; 16–64 px beside Polish labels. skills.zas.",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/zastraszanie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "revisionOf": {
+        "id": "proficiency-zastraszanie",
+        "name": "Zastraszanie",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-112/zastraszanie.png",
+        "sourceSha256": "f1fc1682c5ccbcc8bc40de9de56ed1427db2630886c2a0218ab20f24025dba06",
+        "sourceKind": "candidate",
+        "notes": "Try a different concept, an angry intimidating face looking down at something. Second batch, a gruff man holding a smaller man by their shirt collar, other hand menacing",
+        "feedback": {
+          "itemId": "proficiency-zastraszanie",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Try a different concept, an angry intimidating face looking down at something. Second batch, a gruff man holding a smaller man by their shirt collar, other hand menacing",
+          "updatedAt": "2026-10-18T15:34:41.883Z"
+        },
+        "feedbackSha256": "5f4dd538af32bd222cfa3459f80a8238067038d14cc9ee97ef90fe2d45ffcc24"
+      }
+    },
+    {
+      "cell": 4,
+      "kind": "proficiency",
+      "key": "zwinne-dlonie",
+      "name": "Zwinne dłonie — poprawiona anatomia",
+      "itemId": "proficiency-zwinne-dlonie",
+      "target": "icons/proficiencies/zwinne-dlonie.svg",
+      "wiringKey": "skills.zwi",
+      "fallback": "icons/items/loot/zetony.svg",
+      "fallbackSha256": "c79fd9938245ea2a73515466dd05e4098ca4f02b742b8415f2c0528096ee69f6",
+      "request": "CORRECT Reference 2 while keeping its BARE HAND AND SINGLE COIN motif. Show ONE complete anatomically coherent RIGHT ADULT HAND from a clear BACK-OF-HAND THREE-QUARTER VIEW, wrist at lower-left and fingertips pointing upper-right. Exactly FOUR distinct fingers emerge in natural order from ONE palm, each with two coherent bends; ONE separate thumb emerges from the side of that same palm. Index and middle fingers slightly raised; ring and little fingers gently curled underneath with BOTH distinct rounded fingertips still visible. ONE plain coin rests across the index and middle KNUCKLES. Strong broad black separation between all visible digits. Keep the coin plain and round, generous negative space, broad clean shapes. No extra or fused fingers, branching finger, detached thumb, duplicated joint, impossible bend, glove, skin creases, currency text, nails or added coin.",
+      "context": "Native character creation, advancement and trait UI: Zwinne dłonie; 16–64 px beside Polish labels. skills.zwi.",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/zwinne-dlonie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "revisionOf": {
+        "id": "proficiency-zwinne-dlonie",
+        "name": "Zwinne dłonie",
+        "decision": "revise",
+        "candidateId": "atlas-a",
+        "selectedSource": "candidates/batch-112/zwinne-dlonie.png",
+        "sourceSha256": "52ebc1ea03983aecae06f83e27d98539e11340871575c66128a5d4a5b60cdc06",
+        "sourceKind": "candidate",
+        "notes": "Not bad, but you need to correct the hand silhouette. AI hands syndrome. ",
+        "feedback": {
+          "itemId": "proficiency-zwinne-dlonie",
+          "decision": "revise",
+          "candidateId": "atlas-a",
+          "notes": "Not bad, but you need to correct the hand silhouette. AI hands syndrome. ",
+          "updatedAt": "2026-10-18T15:35:18.165Z"
+        },
+        "feedbackSha256": "326969fa2df16ba102eb2100fde660fc9f7c607772485e26bedfcbbb3c1377e0"
+      }
+    }
+  ]
+}

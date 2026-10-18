@@ -1,0 +1,117 @@
+{
+  "title": "Batch 113 · three subjects / four candidates awaiting GM review",
+  "updated": "2026-10-18",
+  "items": [
+    {
+      "id": "proficiency-intuicja",
+      "name": "Intuicja",
+      "batch": 113,
+      "tier": "Batch 113 · Proficiency revisions",
+      "target": "icons/proficiencies/intuicja.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/intuicja.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "wiringKey": "skills.int",
+      "context": "Native character creation, advancement and trait UI: Intuicja; 16–64 px beside Polish labels. skills.int.",
+      "request": "A NEW GUT-INSTINCT concept, completely replacing the head with question mark. ONE generic adult shown waist-up in plain practical clothes, head turned slightly RIGHT, with ONE complete open hand resting over their UPPER ABDOMEN as if sensing something is wrong. Beside the torso at LEFT, ONE broad simple warning TRIANGLE with ONE large black exclamation-shaped cutout. The hand, sleeve and body remain anatomically coherent with broad simple folds only. Featureless generic adult head, natural proportions. A quiet hunch before conscious evidence; no question mark, eye symbol, magic, psychic glow, beard, hair detail or injury.",
+      "current": {
+        "src": "/icons/abilities/wyczulone-zmysly.svg",
+        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+      },
+      "candidates": [
+        {
+          "id": "batch113-intuicja",
+          "label": "Batch 113 · Intuicja — przeczucie",
+          "src": "candidates/batch-113/intuicja.png",
+          "note": "A NEW GUT-INSTINCT concept, completely replacing the head with question mark. ONE generic adult shown waist-up in plain practical clothes, head turned slightly RIGHT, with ONE complete open hand resting over their UPPER ABDOMEN as if sensing something is wrong. Beside the torso at LEFT, ONE broad simple warning TRIANGLE with ONE large black exclamation-shaped cutout. The hand, sleeve and body remain anatomically coherent with broad simple folds only. Featureless generic adult head, natural proportions. A quiet hunch before conscious evidence; no question mark, eye symbol, magic, psychic glow, beard, hair detail or injury."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 112 · Intuicja",
+          "src": "candidates/batch-112/intuicja.png",
+          "note": "ONE smooth generic adult HEAD IN PROFILE facing RIGHT, containing ONE large simple EYE and ONE broad question-mark-like curved black negative-space cut ABOVE the eye inside the head, suggesting a quiet hunch. Ordinary head and neck, no beard, hair texture, wrinkles, incoming bullets, psychic aura, glow, floating symbols or fantasy crystal."
+        }
+      ]
+    },
+    {
+      "id": "proficiency-zastraszanie",
+      "name": "Zastraszanie",
+      "batch": 113,
+      "tier": "Batch 113 · Proficiency revisions",
+      "target": "icons/proficiencies/zastraszanie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/zastraszanie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "wiringKey": "skills.zas",
+      "context": "Native character creation, advancement and trait UI: Zastraszanie; 16–64 px beside Polish labels. skills.zas.",
+      "request": "FIRST REQUESTED ALTERNATIVE: ONE angry intimidating ADULT HUMAN FACE in a looming THREE-QUARTER VIEW, angled DOWN and slightly RIGHT toward someone below the frame. Broad heavy furrowed brow, narrowed ordinary eyes, firm downturned mouth and strong jaw; ONE plain cropped neck and shoulder silhouette. Convey menace through head angle and THREE broad black face cuts, not fine wrinkles. Sober rough adult human, realistic proportions. No other person or fist in this cell, no snarling monster, fangs, skull, gore, anime eyes, spiky hair, stipple, portrait texture or tiny scratches.\n\nSECOND REQUESTED ALTERNATIVE: TWO adult men shown from WAIST UP. A broad GRUFF MAN at LEFT grips the SHIRT COLLAR of a visibly SMALLER ADULT MAN at RIGHT with ONE hand, pulling that collar taut. His OTHER hand is raised as ONE clenched fist in a menacing threat. Exactly TWO complete arms and TWO hands belong to the larger man: collar-gripping hand and raised fist. The smaller adult recoils with shoulders drawn in and both hands lowered; an ordinary adult, NOT a child. One broad beard silhouette on the larger man, faces simplified to broad restrained cuts. Clear negative-space separation between heads, fist, forearms and torso. No contact from the fist, injury, blood, extra arms, hands, weapon, thin fingers, fine fabric texture or anime.",
+      "current": {
+        "src": "/icons/abilities/poddaj-sie.svg",
+        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+      },
+      "candidates": [
+        {
+          "id": "batch113-zastraszanie-twarz",
+          "label": "Batch 113 · Zastraszanie — groźna twarz",
+          "src": "candidates/batch-113/zastraszanie-twarz.png",
+          "note": "FIRST REQUESTED ALTERNATIVE: ONE angry intimidating ADULT HUMAN FACE in a looming THREE-QUARTER VIEW, angled DOWN and slightly RIGHT toward someone below the frame. Broad heavy furrowed brow, narrowed ordinary eyes, firm downturned mouth and strong jaw; ONE plain cropped neck and shoulder silhouette. Convey menace through head angle and THREE broad black face cuts, not fine wrinkles. Sober rough adult human, realistic proportions. No other person or fist in this cell, no snarling monster, fangs, skull, gore, anime eyes, spiky hair, stipple, portrait texture or tiny scratches."
+        },
+        {
+          "id": "batch113-zastraszanie-kolnierz",
+          "label": "Batch 113 · Zastraszanie — chwyt za kołnierz",
+          "src": "candidates/batch-113/zastraszanie-kolnierz.png",
+          "note": "SECOND REQUESTED ALTERNATIVE: TWO adult men shown from WAIST UP. A broad GRUFF MAN at LEFT grips the SHIRT COLLAR of a visibly SMALLER ADULT MAN at RIGHT with ONE hand, pulling that collar taut. His OTHER hand is raised as ONE clenched fist in a menacing threat. Exactly TWO complete arms and TWO hands belong to the larger man: collar-gripping hand and raised fist. The smaller adult recoils with shoulders drawn in and both hands lowered; an ordinary adult, NOT a child. One broad beard silhouette on the larger man, faces simplified to broad restrained cuts. Clear negative-space separation between heads, fist, forearms and torso. No contact from the fist, injury, blood, extra arms, hands, weapon, thin fingers, fine fabric texture or anime."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 112 · Zastraszanie",
+          "src": "candidates/batch-112/zastraszanie.png",
+          "note": "ONE large adult CLENCHED FIST in foreground at LEFT, with a simple sleeve cuff, facing ONE smaller generic adult HEAD AND SHOULDERS at RIGHT recoiling slightly away. The smaller head has only ONE broad eye cut and no hair detail. Threatening posture without contact or injury. Broad coherent anatomy; no monster, devil, skull, fangs, weapon, blood, gruff male portrait or anime expression."
+        }
+      ]
+    },
+    {
+      "id": "proficiency-zwinne-dlonie",
+      "name": "Zwinne dłonie",
+      "batch": 113,
+      "tier": "Batch 113 · Proficiency revisions",
+      "target": "icons/proficiencies/zwinne-dlonie.svg",
+      "deliveryTargets": [
+        {
+          "source": "icons/proficiencies/zwinne-dlonie.svg",
+          "sourceSha256": null,
+          "variant": "default"
+        }
+      ],
+      "wiringKey": "skills.zwi",
+      "context": "Native character creation, advancement and trait UI: Zwinne dłonie; 16–64 px beside Polish labels. skills.zwi.",
+      "request": "Retain the bare hand / single coin motif. Correct the malformed claw with a coherent open five-digit hand deftly tossing one coin; all fingertips visible and separated. Exact targeted correction prompt is archived with the batch.",
+      "current": {
+        "src": "/icons/items/loot/zetony.svg",
+        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+      },
+      "candidates": [
+        {
+          "id": "batch113-zwinne-dlonie",
+          "label": "Batch 113 · Zwinne dłonie — poprawiona anatomia",
+          "src": "candidates/batch-113/zwinne-dlonie.png",
+          "note": "Retain the bare hand / single coin motif. Correct the malformed claw with a coherent open five-digit hand deftly tossing one coin; all fingertips visible and separated. Exact targeted correction prompt is archived with the batch."
+        },
+        {
+          "id": "atlas-a",
+          "label": "Batch 112 · Zwinne dłonie",
+          "src": "candidates/batch-112/zwinne-dlonie.png",
+          "note": "ONE complete bare adult HAND dexterously rolling ONE large plain COIN across the knuckles. Back of hand visible, fingers slightly bent and clearly separated with broad black gaps, thumb complete. The single coin is balanced above two knuckles, a simple white disc with one broad black rim cut. No currency symbols, digits, pistol, knife, extra hands, extra coins or tiny skin detail."
+        }
+      ]
+    }
+  ]
+}

@@ -1,17 +1,18 @@
 # Proficiency and advancement icon coverage — 2026-10-18
 
 **Wiring complete:** all 51 proficiency/skill rows and six header lookups now
-resolve to existing approved module glyphs. Eight dedicated designs are in
-Batch 112 for GM review; those slots currently use approved-art substitutes.
+resolve to approved module glyphs. Four dedicated Batch 112 designs are now
+installed, and the GM chose to retain the current Acrobatics glyph. Three
+skill subjects remain in revision; those slots use approved-art substitutes.
 
 | UI surface | Installed wiring | Dedicated artwork still awaiting review |
 |---|---|---|
 | Armor proficiency rows | 4 distinct armor/shield glyphs | None |
 | Weapon proficiency rows | 7 matching weapon-type glyphs | None |
 | Tool proficiency rows | All 22 matching toolkit glyphs | None |
-| Skill rows | All 18 use native glyphs | Acrobatics, history, intuition, vehicles, intimidation, sleight of hand |
-| Category headers | Armor, weapons, tools, skills and saves use native glyphs | Skills and saves |
-| Mixed Trait advancement header | Shares the native skills header | Shares the new skills design |
+| Skill rows | All 18 use native glyphs; new History and Vehicles delivered; current Acrobatics retained | Intuition, intimidation, sleight of hand |
+| Category headers | Armor, weapons, tools, skills and saves use native glyphs; new skills/saves headers delivered | None |
+| Mixed Trait advancement header | Shares the approved new skills header | None |
 | Saving-throw rows | 6 existing monochrome ability SVGs retained | None |
 
 The original item-art pass did not cover this system UI. Historical evidence:
@@ -47,14 +48,19 @@ Verification on dnd5e 6.0.6:
 
 Reproducible browser check: `proficiency-pass/check-sandbox.mjs` (evaluate its
 function in an agent sandbox). Machine evidence:
-[proficiency-icons-2026-10-18-integrated.json](proficiency-icons-2026-10-18-integrated.json).
+[proficiency-icons-2026-10-18-approved.json](proficiency-icons-2026-10-18-approved.json).
 Local screenshots: `review/audits/native-proficiencies.png`,
 `review/audits/native-skills.png`, `review/audits/native-skills-light.png`.
+The installed Batch 112 designs passed the same native check after reload;
+new screenshot: `review/audits/native-batch-112-approved.png`.
 Poligon follow-up: **Kreator → ikony-bieglosci**; the station was not reseeded.
 
-Batch 112 prompts, targets, normalization and hashes are under
-`review/candidates/batch-112/`. Its eight cards are open in the review browser.
-Only saved GM approvals authorize installation of those new designs.
+Batch 112 exact decisions and delivered hashes are under
+`review/candidates/batch-112/reviewed-installed.json`. Batch 113 has four revision
+candidates for the remaining three cards: a new Intuition concept, two requested
+Intimidation alternatives, and corrected Sleight of Hand anatomy. Earlier
+choices remain selectable; saved notes and selected-source hashes are retained.
+Only saved GM approvals authorize installation of those revisions.
 
 Other advancement types' metadata defaults are recorded in the historical JSON
 as an adjacent scope; this change covers Trait proficiencies and skills.

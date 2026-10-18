@@ -1,0 +1,23 @@
+{
+  "proficiency-intuicja": {
+    "itemId": "proficiency-intuicja",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Try a different concept.",
+    "updatedAt": "2026-10-18T15:33:27.876Z"
+  },
+  "proficiency-zastraszanie": {
+    "itemId": "proficiency-zastraszanie",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Try a different concept, an angry intimidating face looking down at something. Second batch, a gruff man holding a smaller man by their shirt collar, other hand menacing",
+    "updatedAt": "2026-10-18T15:34:41.883Z"
+  },
+  "proficiency-zwinne-dlonie": {
+    "itemId": "proficiency-zwinne-dlonie",
+    "decision": "revise",
+    "candidateId": "atlas-a",
+    "notes": "Not bad, but you need to correct the hand silhouette. AI hands syndrome. ",
+    "updatedAt": "2026-10-18T15:35:18.165Z"
+  }
+}

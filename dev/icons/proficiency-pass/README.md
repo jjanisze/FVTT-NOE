@@ -29,3 +29,14 @@ and constructs an in-memory Actor/Class with native TraitFlow rows. It creates
 no stored documents. Close `__proficiencyCheck.flow` after inspecting it.
 The evidence JSON and screenshot locations are listed in
 [PROFICIENCY_COVERAGE.md](../PROFICIENCY_COVERAGE.md).
+
+Batch 112 review consumed: four new SVG/WEBP pairs delivered, current Acrobatics
+explicitly retained. `accept_112.py --check` verifies the exact delivered hashes.
+`reviewed.json` retains all eight decisions; the feedback file is unchanged by
+installation. No unused dedicated Acrobatics file is installed.
+
+Batch 113 (`prepare_113.py`, `register_113.py`) revises only Intuition,
+Intimidation and Sleight of Hand. Intimidation has two requested alternatives
+on the same card. Older candidates remain selectable. The atlas repeated the
+bad hand silhouette, so an isolated correction uses a clearer open five-digit
+pose with the same hand/coin motif; its prompt and source remain with the batch.

@@ -1,0 +1,11 @@
+{
+  "batch": 113,
+  "validatedMasks": 4,
+  "prospectiveDeliveryTargets": 4,
+  "candidateHashes": {
+    "intuicja": "c366a3c49df9b63c55d4dd94d829b31f1b259a72371342a6c661c6b9189d4772",
+    "zastraszanie-twarz": "b6b61a23be5b548e7a1a9b819b5e383c304a1dc46aac69bd0ca7d1790e51b05d",
+    "zastraszanie-kolnierz": "a7b76a370e038819719fd506001d4ab44e4ec661cf13a764a79c15f6d89e8925",
+    "zwinne-dlonie": "66bb9a38c482d7d1d50f4b56a97b9d1d0be390d6e5faebc7c5abb38a4eed2efe"
+  }
+}

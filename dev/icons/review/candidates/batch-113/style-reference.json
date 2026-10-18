@@ -1,0 +1,44 @@
+{
+  "sources": [
+    {
+      "source": "icons/items/drugs/medpak.svg",
+      "sha256": "497528097890f85c4077bf9abc3611df76719fef9874b3a67c0b7a7d165161ba"
+    },
+    {
+      "source": "icons/weapons/klucz_francuski.svg",
+      "sha256": "7f0eac13e03affbf127e8ed80c07b77f7084f25919d47331e8638e6da63f1326"
+    },
+    {
+      "source": "icons/items/loot/kompas.svg",
+      "sha256": "3c3edbe8cf834b6ffb2cc9718be85ac804ee1f56653910dc56e8a1d674d93a7c"
+    },
+    {
+      "source": "icons/abilities/wyczulone-zmysly.svg",
+      "sha256": "3b644368686cd60a817470a4ac84f8be0cadfaefbab42326f2961eb760c66ec6"
+    },
+    {
+      "source": "icons/abilities/cichy-krok.svg",
+      "sha256": "5603fbf48cd2f6a8c2e635d2ce46786a90c71ab27178d1b76144b8bc8d48140e"
+    },
+    {
+      "source": "icons/weapons/magnifying_glass.svg",
+      "sha256": "3d923ae6fc8238ea1afa568918e6c5f03ca9bad254acbc41cbb7986719dbbb9f"
+    },
+    {
+      "source": "icons/abilities/sportowiec.svg",
+      "sha256": "5257f866b310d097a1de4b444b351054aad2328b60c79ad9bc0667ef60e205a8"
+    },
+    {
+      "source": "icons/abilities/ucz-sie-ucz.svg",
+      "sha256": "169958a4bcf8430eb4501a4c61b07da8c771ceff4c8f7082e48f64102fc242c5"
+    },
+    {
+      "source": "icons/abilities/oswajanie-zwierzat.svg",
+      "sha256": "525ae36004f276ccdd2d595ae408a877c0f3a9b6862bdfaf7e8e3a94645b06d4"
+    }
+  ],
+  "handReference": {
+    "source": "candidates/batch-112/zwinne-dlonie.png",
+    "sha256": "52ebc1ea03983aecae06f83e27d98539e11340871575c66128a5d4a5b60cdc06"
+  }
+}

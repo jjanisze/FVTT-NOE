@@ -4,12 +4,13 @@
 were outside the item-art completion scope. Live inspection found 51
 colored stock rows plus six header lookups. Existing glyph candidates
 were checked visually and are now wired through the native Trait UI. All 51
-rows and six headers use module glyphs. Eight dedicated designs await review
-in Batch 112; approved-art substitutes cover them until installation.
+rows and six headers use module glyphs. Four approved Batch 112 designs are
+installed, and Acrobatics keeps its current glyph by GM choice. Three subjects
+remain in revision in Batch 113, with approved-art substitutes still wired.
 Evidence: `PROFICIENCY_COVERAGE.md` and
-`proficiency-icons-2026-10-18-integrated.json`.
+`proficiency-icons-2026-10-18-approved.json`.
 
-All 544 earlier review cards are resolved; Batch 112 adds eight pending cards.
+There are 549 resolved cards and three remaining revision cards (four candidates).
 The last seven exact selections from the earlier pass are
 installed as SVG/WEBP pairs, including the earlier Batch 110 Nowy Jork
 design chosen by the GM. All twelve main origin emblems and five new
@@ -40,9 +41,11 @@ Foundry remains closed; no campaign repoint was run.
 ## Do podpięcia — przez MG
 
 - **Biegłości / umiejętności — podpięte, 2026-10-18:** 51 wierszy i sześć
-  nagłówków korzysta z zatwierdzonych glifów modułu. Batch 112: osiem nowych
-  projektów czeka na ocenę MG; w kodzie są na razie zastępcze istniejące glify.
-  Po akceptacji dostarczyć pary SVG/WEBP i zmienić mapowania opisane w MISSING.
+  nagłówków korzysta z zatwierdzonych glifów modułu. Batch 112: Historia,
+  Pojazdy i dwa nagłówki dostarczone; Akrobatyka zachowuje obecny glif zgodnie
+  z wyborem MG. Batch 113: Intuicja, Zastraszanie (dwie alternatywy) i Zwinne
+  dłonie czekają na ocenę. Po akceptacji dostarczyć pary SVG/WEBP i zmienić
+  mapowania opisane w MISSING.
   Sandbox: natywne listy wyborów i etykiety bez zmian, 57 slotów TraitFlow
   sprawdzonych w obu motywach. Poligon: Kreator → ikony-bieglosci.
   Raport i lokalne zrzuty: `PROFICIENCY_COVERAGE.md`. Świata nie zmieniano.
