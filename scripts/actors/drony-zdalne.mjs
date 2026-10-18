@@ -292,9 +292,14 @@ function _zamknijKarty(...docs) {
   }
 }
 
-/** Żeton i percepcja po zmianie bramki wizji. */
+/**
+ * Żetony i percepcja po zmianie bramki wizji. Wszystkie żetony, jak rdzeń w `_onControl`: bramka decyduje też, czy
+ * patrzą inne (postać operatora gaśnie, gdy dron patrzy). Samo `control()` tego nie zrobi, gdy dron był już wybrany —
+ * rdzeń wtedy nie woła `_onControl`; tak jest po [Rozłóż] na dnd5e 6.0, a w grze po kliknięciu drona przed Steruj.
+ */
 function _odswiezWizje(token) {
   token.initializeVisionSource?.();
+  for (const t of canvas.tokens.placeables) if (t !== token) t.initializeVisionSource?.();
   canvas.perception.update({ initializeVision: true, refreshVision: true, refreshLighting: true });
 }
 

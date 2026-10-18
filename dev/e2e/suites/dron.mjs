@@ -406,6 +406,9 @@ export default {
 
     await t.step("[Rozłóż] → token preview → a real click next to the PC: the GM places the token, the handle turns 0 kg", async () => {
       await p1.eval(przycisk, { akcja: "rozloz" });
+      // dnd5e 6.0's placement first minimises every open window (animated) and only then starts core's
+      // `placeTokens`; a click before that moves nothing and confirms the preview where it started.
+      await t.waitFor(p1, () => (canvas.tokens._placementContext ? true : null), { message: "the token placement to start" });
       await p1.clickCanvas({ x: 550, y: 650 });
       const s = await t.waitFor(p1, () => {
         const MOD = "neuroshima-2026-overrides";

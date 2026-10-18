@@ -466,7 +466,11 @@ export async function rozloz(item, { pozycja = null, scena = null } = {}) {
   if (!p) {
     const TokenPlacement = globalThis.dnd5e?.canvas?.TokenPlacement;
     if (!TokenPlacement) return ui.notifications.error("Brak podglądu żetonu dnd5e."), null;
+    // dnd5e 6.0's placement (core `placeTokens`) releases every token first. Give the player their selection back,
+    // or core takes the next owned token to appear — the drone — under control (`Token#_onCreate`), as 5.3 never did.
+    const wybrane = canvas.tokens.controlled.map(t => t.id);
     [p] = await TokenPlacement.place({ origin: origin?.document, tokens: [dron.prototypeToken] });
+    for (const id of wybrane) canvas.tokens.get(id)?.control({ releaseOthers: false });
     if (!p) return null;
   }
   if (origin) {
