@@ -90,7 +90,7 @@ export function registerAutodestrukcjaTests(quench) {
         const w = await walkaTestowa([pc, g], { nazwa: "autodestrukcja" });
         sprzatanie.push(w.sprzatnij);
         const ogladana = canvas.scene;
-        const naOgladanej = () => (ogladana?.templates.size ?? 0) + (ogladana?.drawings.size ?? 0);
+        const naOgladanej = () => (ogladana?.regions.size ?? 0) + (ogladana?.drawings.size ?? 0);
         const przedOgladana = naOgladanej();
         await rzutAutodestrukcji(g, { k100: 5, k4: 2 });
         expect(stanAutodestrukcji(g)).to.include({ stan: "odlicza", rundy: 2, poza: false });

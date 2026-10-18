@@ -275,7 +275,7 @@ export function openTracerDebugPanel() {
       const [, rounds, hit, fireMode, area] = FIRE_BUTTONS[Number(btn.dataset.fire)];
       const { shooter, target } = _resolveShooterTarget();
       if (!shooter) return ui.notifications?.warn("Brak żetonu strzelca (zaznacz token).");
-      const template = area ? canvas.templates?.placeables.at(-1)?.document : null;
+      const template = area ? (canvas.scene?.regions.contents.at(-1) ?? null) : null; // v14: a placed template is a Region
       if (area && !template) {
         return ui.notifications?.warn("Postaw najpierw szablon (linia/strefa) na scenie — tryby obszarowe strzelają w szablon.");
       }

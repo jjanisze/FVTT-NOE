@@ -235,6 +235,41 @@ export function registerSztuczkiCombatTests(quench) {
         expect(activitiesOfType(seria, "neuroMs")).to.be.empty;
       });
 
+      // dnd5e 6.0 places templates as Regions and fires `dnd5e.createMeasuredTemplate` with the region data;
+      // the 5.3 hook (`preCreateActivityTemplate`) is gone from `activity.use()`, and with it, silently, every
+      // DS/MS template's expiry and every Ogień zaporowy zone (E4).
+      it("szablon DS dostaje flagę serii z haka dnd5e 6 (dane regionu, nie MeasuredTemplate)", async function () {
+        await waitFor(() => activitiesOfType(seria, "neuroDs").length === 1, { label: "aktywność DS" });
+        const ds = activitiesOfType(seria, "neuroDs")[0];
+        const regionData = [{ name: `${SCRATCH_PREFIX} szablon DS`, shapes: [] }];
+        Hooks.call("dnd5e.createMeasuredTemplate", ds, regionData);
+        const flag = regionData[0].flags[MODULE_ID]?.[fire.BURST_TEMPLATE_FLAG];
+        expect(flag, "flaga serii na danych regionu").to.be.an("object");
+        expect(flag.sourceActorId).to.equal(actor.id);
+        expect(regionData[0].flags[MODULE_ID]?.[fire.SUPPRESSIVE_ZONE_FLAG], "OZ nie dotyczy DS").to.be.undefined;
+      });
+
+      it("szablony serii to Regiony sceny; trafienie żetonu liczone na kształcie regionu", async function () {
+        const scene = canvas.scene;
+        if (!scene) return this.skip();
+        const size = scene.grid.size;
+        const [region] = await scene.createEmbeddedDocuments("Region", [{
+          name: `${SCRATCH_PREFIX} szablon`,
+          shapes: [{ type: "circle", x: size * 2, y: size * 2, radius: size }],
+          flags: { [MODULE_ID]: { [fire.BURST_TEMPLATE_FLAG]: { sourceActorId: actor.id } } }
+        }]);
+        try {
+          expect(fire.burstTemplates(scene).map(r => r.id)).to.include(region.id);
+          expect(fire.suppressiveFireTemplates(scene).map(r => r.id)).to.not.include(region.id);
+          const inside = { object: { center: { x: size * 2, y: size * 2 } }, elevation: 0 };
+          const outside = { object: { center: { x: size * 5, y: size * 5 } }, elevation: 0 };
+          expect(fire.templateContainsToken(region, inside), "środek koła").to.be.true;
+          expect(fire.templateContainsToken(region, outside), "poza kołem").to.be.false;
+        } finally {
+          await region.delete();
+        }
+      });
+
       it("zdjęcie właściwości kasuje aktywność", async function () {
         const item = actor.items.get(seria.id);
         await item.update({ "system.properties": ["tryb_p", "tryb_ds"] }, { render: false });

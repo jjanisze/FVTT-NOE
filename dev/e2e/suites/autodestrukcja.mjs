@@ -71,7 +71,7 @@ async function runda({ token, scena }) {
   const scene = game.scenes.get(scena);
   const n0 = game.messages.size;
   const rysunki0 = scene.drawings.filter(d => d.flags?.[MOD]?.explosive).length;
-  const szablony0 = scene.templates.size;
+  const szablony0 = scene.regions.size; // v14: templates are Regions
   await game.combat.nextRound();
   await window.__e2e.until(() => t.actor.getFlag(MOD, "autodestrukcja")?.stan === "wybuch", { timeoutMs: 15000, message: "the blast" });
   await window.__e2e.until(() => /\(wrak\)$/.test(t.name), { message: "the wreck" });
@@ -84,7 +84,7 @@ async function runda({ token, scena }) {
   const wynik = {
     karta: kartaWybuchu?.id ?? null, kartaPubliczna: kartaWybuchu ? !kartaWybuchu.whisper.length : null,
     nazwa: t.name, martwy: t.actor.statuses.has("dead"), zniszczone: stan.zniszczone, wrakFlaga: !!t.getFlag(MOD, "wrak"),
-    slady: scene.drawings.filter(d => d.flags?.[MOD]?.explosive).length - rysunki0, szablony: scene.templates.size - szablony0
+    slady: scene.drawings.filter(d => d.flags?.[MOD]?.explosive).length - rysunki0, szablony: scene.regions.size - szablony0
   };
   await window.__e2e.clickChat(mg.id, '[data-neuro-postoj="autodestrukcjaPrzywroc"]');
   await window.__e2e.until(() => !/wrak/.test(t.name), { message: "restored" });

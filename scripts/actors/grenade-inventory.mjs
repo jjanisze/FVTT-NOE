@@ -205,9 +205,10 @@ async function _sweepExpiredExplosiveMarkers() {
         .catch(e => console.warn(`${MODULE_ID} | grenade-inventory: drawing expiry cleanup failed`, e));
     }
 
-    const templateIds = scene.templates.filter(isExpired).map(t => t.id);
+    // Foundry v14: a template is a Region (`Scene#templates` is a deprecated view of them).
+    const templateIds = scene.regions.filter(isExpired).map(t => t.id);
     if (templateIds.length) {
-      await scene.deleteEmbeddedDocuments("MeasuredTemplate", templateIds)
+      await scene.deleteEmbeddedDocuments("Region", templateIds)
         .catch(e => console.warn(`${MODULE_ID} | grenade-inventory: template expiry cleanup failed`, e));
     }
   }
@@ -1101,17 +1102,22 @@ async function _spawnExplosiveMarker(actor, pending) {
       // damaging grenade is cube-shaped; the only circle is the non-damaging
       // signal flare) — kept visually as before rather than chasing the same
       // bare-marker treatment through MeasuredTemplate's more limited styling
-      // fields for a combination nothing today actually creates.
-      const [created] = await scene.createEmbeddedDocuments("MeasuredTemplate", [{
-        user: game.user.id,
-        x: pending.x,
-        y: pending.y,
-        direction: 0,
-        t: "circle",
-        distance: Math.max(0.5, Number(area.radius ?? 1.5)),
-        fillColor: pending.color,
-        borderColor: pending.color,
+      // fields for a combination nothing today actually creates. Foundry v14:
+      // the circle template is created as the Region core would convert it to
+      // (`BaseRegion._migrateMeasuredTemplateData`), not through the deprecated
+      // MeasuredTemplateDocument.
+      const radius = Math.max(0.5, Number(area.radius ?? 1.5)) * scene.grid.size / scene.grid.distance;
+      const [created] = await scene.createEmbeddedDocuments("Region", [{
+        name: `Circle Template [${game.user.name}]`,
+        color: pending.color,
+        shapes: [{ type: "circle", x: Math.round(pending.x), y: Math.round(pending.y), radius, gridBased: false }],
+        elevation: { bottom: 0, top: null },
+        visibility: CONST.REGION_VISIBILITY.ALWAYS,
+        highlightMode: "coverage",
+        displayMeasurements: true,
+        ownership: { default: CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE, [game.user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER },
         flags: {
+          core: { MeasuredTemplate: true },
           [MODULE_ID]: {
             explosive: true,
             explosiveAreaText: pending.areaText ?? "",

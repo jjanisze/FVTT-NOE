@@ -336,8 +336,8 @@ function registerLongBurstActivityType() {
         return;
       }
 
-      const dc = parseInt(target.dataset.dc);
-      const ability = target.dataset.ability ?? this.save.ability.first();
+      const dc = parseInt(_buttonData(target, message).dc);
+      const ability = _buttonData(target, message).ability ?? this.save.ability.first();
       for (const token of targets) {
         const actor = token instanceof Actor ? token : token.actor;
         const speaker = ChatMessage.getSpeaker({ actor, scene: canvas.scene, token: token.document });
@@ -556,7 +556,7 @@ function registerSuppressiveFireActivityType() {
         return;
       }
 
-      const dc = parseInt(target.dataset.dc);
+      const dc = parseInt(_buttonData(target, message).dc);
       const zoneData = _buildSuppressiveZoneData(this.item, { dc: Number.isFinite(dc) ? dc : _resolveActivitySaveDc(this) });
       for (const token of targets) {
         await _resolveSuppressiveFireSave(token, zoneData, { event, fromChat: true });
@@ -682,7 +682,7 @@ function registerCrushingBurstActivityType() {
         return;
       }
 
-      const dc = parseInt(target.dataset.dc);
+      const dc = parseInt(_buttonData(target, message).dc);
       const baseDc = Number.isFinite(dc) ? dc : _resolveActivitySaveDc(this);
       for (const token of targets) {
         const actor = token instanceof Actor ? token : token.actor;
@@ -888,8 +888,8 @@ function registerSuppressiveFireHooks() {
   if (suppressiveHooksRegistered) return;
   suppressiveHooksRegistered = true;
 
-  Hooks.on("dnd5e.preCreateActivityTemplate", onPreCreateBurstTemplate);
-  Hooks.on("dnd5e.preCreateActivityTemplate", onPreCreateSuppressiveFireTemplate);
+  Hooks.on("dnd5e.createMeasuredTemplate", onCreateBurstTemplate);
+  Hooks.on("dnd5e.createMeasuredTemplate", onCreateSuppressiveFireTemplate);
   Hooks.on("dnd5e.preUseActivity", onPreUseSuppressiveFireEffect);
   Hooks.on("updateCombat", combat => {
     void onUpdateCombatSuppressiveFire(combat);
@@ -1679,10 +1679,26 @@ function _resolveActivitySaveDc(activity) {
   return base;
 }
 
+/*
+ * dnd5e 6.0 chat buttons are descriptors stored on the usage message: `action` at the top, `label` as
+ * `{ value, hidden }` (`hidden` = the text shown while the DC is concealed). 5.3 kept the action in `dataset.action`
+ * and the label as `visible-dc`/`hidden-dc` HTML; matching on `dataset.action` silently skipped every button.
+ */
+const _isSaveButton = button => (button.action ?? button.dataset?.action) === "rollSave";
+
+/**
+ * A clicked chat button's parameters (`dc`, `ability`). dnd5e 6.0 keeps them in the descriptor on the message
+ * (`message.system.getButton`, by `data-index`); buttons it groups (several abilities) render as one element
+ * without them, so the element's own dataset is only the fallback.
+ */
+function _buttonData(target, message) {
+  return message?.system?.getButton?.(target)?.dataset ?? target?.dataset ?? {};
+}
+
 function _localizeSaveButtons(activity, buttons) {
   const dc = _resolveActivitySaveDc(activity);
   return buttons.map(button => {
-    if (button.dataset?.action !== "rollSave") return button;
+    if (!_isSaveButton(button)) return button;
     const abilityId = button.dataset?.ability ?? activity.save.ability.first();
     return {
       ...button,
@@ -1698,13 +1714,10 @@ function _localizeSaveButtons(activity, buttons) {
 function _localizeMultiSaveButtons(activity, buttons, { visibleLabel, hiddenLabel }) {
   const dc = _resolveActivitySaveDc(activity);
   return buttons.map(button => {
-    if (button.dataset?.action !== "rollSave") return button;
+    if (!_isSaveButton(button)) return button;
     return {
       ...button,
-      label: `
-        <span class="visible-dc">${visibleLabel(dc)}</span>
-        <span class="hidden-dc">${hiddenLabel}</span>
-      `,
+      label: { value: visibleLabel(dc), hidden: hiddenLabel },
       dataset: {
         ...button.dataset,
         dc
@@ -1715,10 +1728,7 @@ function _localizeMultiSaveButtons(activity, buttons, { visibleLabel, hiddenLabe
 
 function _getSaveButtonLabel(dc, abilityId) {
   const abilityLabel = CONFIG.DND5E.abilities[abilityId]?.label ?? abilityId ?? "";
-  return `
-    <span class="visible-dc">ST ${dc} - ${abilityLabel}</span>
-    <span class="hidden-dc">Rzut obronny - ${abilityLabel}</span>
-  `;
+  return { value: `ST ${dc} - ${abilityLabel}`, hidden: `Rzut obronny - ${abilityLabel}` };
 }
 
 function _getLongBurstSelection(activity) {
@@ -2088,13 +2098,16 @@ function _buildBurstTemplateData(activity) {
   };
 }
 
-function onPreCreateBurstTemplate(activity, templateData) {
+/**
+ * dnd5e 6.0 places an activity's templates as Regions (`TemplatePlacement.fromActivity`) and hands the region data,
+ * one entry per region, to `dnd5e.createMeasuredTemplate` before creating them; 5.3's `preCreateActivityTemplate`
+ * is fired only by the deprecated `AbilityTemplate`, which `activity.use()` no longer calls.
+ */
+function onCreateBurstTemplate(activity, regionData) {
   const fireMode = _getActivityModuleFlag(activity, "fireMode");
   if (![DS_FIRE_MODE, MS_FIRE_MODE].includes(fireMode)) return;
-
-  templateData.flags ??= {};
-  templateData.flags[MODULE_ID] ??= {};
-  templateData.flags[MODULE_ID][BURST_TEMPLATE_FLAG] = _buildBurstTemplateData(activity);
+  const burst = _buildBurstTemplateData(activity);
+  for (const data of regionData ?? []) foundry.utils.setProperty(data, `flags.${MODULE_ID}.${BURST_TEMPLATE_FLAG}`, burst);
 }
 
 async function _flagSuppressiveFireTemplates(templates, zoneData) {
@@ -2105,14 +2118,13 @@ async function _flagSuppressiveFireTemplates(templates, zoneData) {
   }
 }
 
-function onPreCreateSuppressiveFireTemplate(activity, templateData) {
+function onCreateSuppressiveFireTemplate(activity, regionData) {
   if (activity?.type !== OZ_ACTIVITY_TYPE) return;
-  templateData.flags ??= {};
-  templateData.flags[MODULE_ID] ??= {};
-  templateData.flags[MODULE_ID][SUPPRESSIVE_ZONE_FLAG] = _buildSuppressiveZoneData(activity.item, {
+  const zone = _buildSuppressiveZoneData(activity.item, {
     dc: _getSuppressiveFireDc(activity.item),
     selection: _getSuppressiveFireSelection(activity)
   });
+  for (const data of regionData ?? []) foundry.utils.setProperty(data, `flags.${MODULE_ID}.${SUPPRESSIVE_ZONE_FLAG}`, zone);
 }
 
 async function _resolveSuppressiveFireSave(token, zoneData, { event = null, fromChat = false } = {}) {
@@ -2204,7 +2216,7 @@ async function onUpdateCombatSuppressiveFire(combat) {
     return !_isSuppressiveFireEffectActive(zone, combat);
   });
   if (expiredTemplates.length) {
-    await canvas.scene.deleteEmbeddedDocuments("MeasuredTemplate", expiredTemplates.map(template => template.id));
+    await canvas.scene.deleteEmbeddedDocuments("Region", expiredTemplates.map(template => template.id));
   }
 
   const expiredBurstTemplates = _getBurstTemplates(canvas.scene).filter(template => {
@@ -2212,7 +2224,7 @@ async function onUpdateCombatSuppressiveFire(combat) {
     return !_isBurstTemplateActive(burst, combat);
   });
   if (expiredBurstTemplates.length) {
-    await canvas.scene.deleteEmbeddedDocuments("MeasuredTemplate", expiredBurstTemplates.map(template => template.id));
+    await canvas.scene.deleteEmbeddedDocuments("Region", expiredBurstTemplates.map(template => template.id));
   }
 }
 
@@ -2223,12 +2235,12 @@ async function onDeleteCombatSuppressiveFire(combat) {
   if (!canvas.scene) return;
   const templates = _getSuppressiveFireTemplates(canvas.scene).filter(template => template.getFlag(MODULE_ID, SUPPRESSIVE_ZONE_FLAG)?.combatId === combat?.id);
   if (templates.length) {
-    await canvas.scene.deleteEmbeddedDocuments("MeasuredTemplate", templates.map(template => template.id));
+    await canvas.scene.deleteEmbeddedDocuments("Region", templates.map(template => template.id));
   }
 
   const burstTemplates = _getBurstTemplates(canvas.scene).filter(template => template.getFlag(MODULE_ID, BURST_TEMPLATE_FLAG)?.combatId === combat?.id);
   if (burstTemplates.length) {
-    await canvas.scene.deleteEmbeddedDocuments("MeasuredTemplate", burstTemplates.map(template => template.id));
+    await canvas.scene.deleteEmbeddedDocuments("Region", burstTemplates.map(template => template.id));
   }
 }
 
@@ -2268,22 +2280,22 @@ function _isBurstTemplateActive(effect, combat) {
     && (combat.combatant?.id === effect.sourceCombatantId);
 }
 
+/* Foundry v14: templates are Regions (MeasuredTemplate merged into Region; `Scene#templates` is a deprecated view of
+   the regions flagged `core.MeasuredTemplate`, which dnd5e 6.0's activity templates do not even carry). Ours are
+   told apart by our own flag. */
 function _getSuppressiveFireTemplates(scene) {
-  return Array.from(scene?.templates ?? []).filter(template => !!template.getFlag(MODULE_ID, SUPPRESSIVE_ZONE_FLAG));
+  return Array.from(scene?.regions ?? []).filter(region => !!region.getFlag(MODULE_ID, SUPPRESSIVE_ZONE_FLAG));
 }
 
 function _getBurstTemplates(scene) {
-  return Array.from(scene?.templates ?? []).filter(template => !!template.getFlag(MODULE_ID, BURST_TEMPLATE_FLAG));
+  return Array.from(scene?.regions ?? []).filter(region => !!region.getFlag(MODULE_ID, BURST_TEMPLATE_FLAG));
 }
 
-function _templateContainsToken(templateDocument, tokenDocument) {
-  const template = canvas.templates.get(templateDocument.id);
+function _templateContainsToken(region, tokenDocument) {
   const token = tokenDocument.object ?? canvas.tokens.get(tokenDocument.id);
   const center = token?.center;
-  if (!template?.shape || !center) return false;
-
-  const localPoint = template.worldTransform.applyInverse(new PIXI.Point(center.x, center.y));
-  return template.shape.contains(localPoint.x, localPoint.y);
+  if (!center || typeof region?.testPoint !== "function") return false;
+  return region.testPoint({ x: center.x, y: center.y, elevation: tokenDocument.elevation ?? 0 });
 }
 
 /**
@@ -2300,5 +2312,10 @@ export const __testing = Object.freeze({
   longBurstOptionLabel: _getLongBurstOptionLabel,
   hasLeadHail: _hasLeadHail,
   hasAssaulter: _hasAssaulter,
-  hasMobileHmgNest: _hasMobileHmgNest
+  hasMobileHmgNest: _hasMobileHmgNest,
+  BURST_TEMPLATE_FLAG,
+  SUPPRESSIVE_ZONE_FLAG,
+  burstTemplates: _getBurstTemplates,
+  suppressiveFireTemplates: _getSuppressiveFireTemplates,
+  templateContainsToken: _templateContainsToken
 });

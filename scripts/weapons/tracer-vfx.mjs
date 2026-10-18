@@ -904,11 +904,11 @@ export function registerTracerVfx() {
      * template on the scene — place one by hand, then call this.
      */
     testFireArea(rounds = 20, caliber = null) {
-      const tpl = canvas.templates.placeables.at(-1);
+      const tpl = canvas.scene?.regions.contents.at(-1); // v14: a placed template is a Region
       if (!tpl) return ui.notifications.warn("Place a template on the scene first.");
       const shooter = canvas.tokens.controlled[0] ?? canvas.tokens.placeables[0];
       if (!shooter) return ui.notifications.warn("Need a token on the scene.");
-      tracerFireArea({ shooter, template: tpl.document, rounds, caliber });
+      tracerFireArea({ shooter, template: tpl, rounds, caliber });
     },
   };
 

@@ -130,7 +130,9 @@ export function registerToolkitCheckActivity() {
       if ( !targets.length && game.user.character ) targets.push(game.user.character);
       if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
 
-      let { ability, dc, skill, tool } = target.dataset;
+      // dnd5e 6.0: the button's parameters are in its descriptor on the message (by `data-index`); a grouped
+      // button (several skills or tools) is one element without them.
+      let { ability, dc, skill, tool } = message?.system?.getButton?.(target)?.dataset ?? target.dataset;
       dc = parseInt(dc);
       const rollData = { event, target: Number.isFinite(dc) ? dc : this.check.dc.value };
       if ( ability in CONFIG.DND5E.abilities ) rollData.ability = ability;
