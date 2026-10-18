@@ -1181,9 +1181,9 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 ### v0.20.0 — dnd5e 6.0.6 i Foundry 14.369 (w przygotowaniu; wydanie po E11 — tag MG)
 
 Wymaga **dnd5e 6.0.6** i Foundry **14.367+** (zweryfikowane na 14.369); na dnd5e 5.3 zostaje v0.19.1. Przebieg, decyzje
-MG i każde znalezisko: `PLAN_migracja_dnd5e6.md` §11. Stan na 2026-10-18 (E10, piaskownica agenta): Quench
-1208/1208, e2e 21/21 (nowa paczka `aktywnosci`), **0 ostrzeżeń zgodności z naszego kodu** — od E10 każde takie
-ostrzeżenie oblewa przebieg.
+MG i każde znalezisko: `PLAN_migracja_dnd5e6.md` §11. Stan na 2026-10-18 (E10, bramka wydania na 14.369 +
+dnd5e 6.0.6): Quench 1211/1211, e2e 21/21 w świecie gołym i 21/21 w zalecanym (nowa paczka `aktywnosci`), **0
+ostrzeżeń zgodności z naszego kodu** — od E10 każde takie ostrzeżenie oblewa przebieg.
 
 Co zobaczy stół:
 - **Unikanie daje Ułatwienie w RO na Zręczność** (s. 30) — natywna reguła dnd5e; gaśnie przy Obezwładnieniu i

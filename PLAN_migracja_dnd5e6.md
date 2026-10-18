@@ -815,6 +815,9 @@ tam, gdzie daje dokładnie RAW; ponad RAW — wyłączone bez pytania.
   jednostki przeliczała wszystkich aktorów (`encumbrance-config.mjs`, ~2 s) — trzy przełączniki w tę i z powrotem to
   6 przeliczeń, ~12 s. Teraz jedno przeliczenie na serię zmian (debounce), test ma 30 s. W świeżym świecie
   (tylko `boot`) tego nie widać.
+- **Bramka wydania zielona** (`b210621`, `logs/release/0.19.1-2026-10-18T13-28-29.json`): wszystkie kroki; e2e
+  **21/21 + 21/21** (goły, zalecany), Quench **1211/1211**, **0 ostrzeżeń zgodności z naszego kodu**. Kryteria E10
+  spełnione poza przejściem MG po Poligonie.
 - **Poprawka inwentarza:** podkładki kluczy efektów dnd5e 6.0.6 są **ciche** (żaden wpis `SHIM_FIELDS` nie ma
   `warning`) — bramka ostrzeżeń ich nie złapie; pilnuje test kluczy w Quenchu (`70e3779`).
 - Zostaje: przejście MG po Poligonie (warstwa 7).
