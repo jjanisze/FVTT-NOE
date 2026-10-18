@@ -15,6 +15,7 @@ import "./config/dnd5e-fixes.mjs"; // first: workarounds for dnd5e bugs, before 
 import { registerDocLiveness } from "./doc-liveness.mjs";
 import { registerSkills } from "./config/skills.mjs";
 import { registerTools } from "./config/tools.mjs";
+import { registerProficiencyIcons } from "./config/proficiency-icons.mjs";
 import { registerToolProficiency } from "./config/tool-proficiency.mjs";
 import { registerDamageTypes } from "./config/damage-types.mjs";
 import { registerCreatureTypes } from "./config/creature-types.mjs";
@@ -326,6 +327,7 @@ Hooks.once("init", () => {
   registerDropOnFail();
   registerWeapons();
   registerArmor();
+  registerProficiencyIcons();
   registerArmorRules();
   // Po pancerzach: owinięcie danych pochodnych TT widzi już ich karę Szybkości (Roszada, P4).
   registerTT();

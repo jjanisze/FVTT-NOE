@@ -4,115 +4,117 @@
  * Labels are direct Polish strings — no i18n indirection (Polish-only game).
  * Ability key mapping: str=SIŁ, dex=ZRC, con=KON, int=INT, wis=MDR, cha=CHA
  */
+import { SKILL_ICONS } from "./proficiency-icons-data.mjs";
+
 export function registerSkills() {
   CONFIG.DND5E.skills = {
     akr: {
       label: "Akrobatyka",
       ability: "dex",
       fullKey: "akrobatyka",
-      icon: "icons/equipment/feet/shoes-simple-leaf-green.webp"
+      icon: SKILL_ICONS.akr
     },
     atl: {
       label: "Atletyka",
       ability: "str",
       fullKey: "atletyka",
-      icon: "icons/magic/control/buff-strength-muscle-damage-orange.webp"
+      icon: SKILL_ICONS.atl
     },
     his: {
       label: "Historia",
       ability: "int",
       fullKey: "historia",
-      icon: "icons/sundries/books/book-embossed-bound-brown.webp"
+      icon: SKILL_ICONS.his
     },
     int: {
       label: "Intuicja",
       ability: "wis",
       fullKey: "intuicja",
-      icon: "icons/magic/perception/orb-crystal-ball-scrying-blue.webp"
+      icon: SKILL_ICONS.int
     },
     med: {
       label: "Medycyna",
       ability: "int",
       fullKey: "medycyna",
-      icon: "icons/tools/cooking/mortar-herbs-yellow.webp"
+      icon: SKILL_ICONS.med
     },
     osz: {
       label: "Oszustwo",
       ability: "cha",
       fullKey: "oszustwo",
-      icon: "icons/magic/control/mouth-smile-deception-purple.webp"
+      icon: SKILL_ICONS.osz
     },
     prc: {
       label: "Percepcja",
       ability: "wis",
       fullKey: "percepcja",
-      icon: "icons/magic/perception/eye-ringed-glow-angry-small-red.webp"
+      icon: SKILL_ICONS.prc
     },
     per: {
       label: "Perswazja",
       ability: "cha",
       fullKey: "perswazja",
-      icon: "icons/skills/social/diplomacy-handshake.webp"
+      icon: SKILL_ICONS.per
     },
     poj: {
       label: "Pojazdy",
       ability: "wis",
       fullKey: "pojazdy",
-      icon: "icons/commodities/tech/cog-gear-wheel-gold.webp"
+      icon: SKILL_ICONS.poj
     },
     prz: {
       label: "Przyroda",
       ability: "int",
       fullKey: "przyroda",
-      icon: "icons/magic/nature/plant-sprout-snow-green.webp"
+      icon: SKILL_ICONS.prz
     },
     skr: {
       label: "Skradanie się",
       ability: "dex",
       fullKey: "skradanie",
-      icon: "icons/magic/perception/shadow-stealth-eyes-purple.webp"
+      icon: SKILL_ICONS.skr
     },
     sur: {
       label: "Survival",
       ability: "wis",
       fullKey: "survival",
-      icon: "icons/magic/nature/leaf-glow-triple-green.webp"
+      icon: SKILL_ICONS.sur
     },
     sle: {
       label: "Śledztwo",
       ability: "int",
       fullKey: "sledztwo",
-      icon: "icons/tools/scribal/magnifying-glass.webp"
+      icon: SKILL_ICONS.sle
     },
     tch: {
       label: "Technika",
       ability: "int",
       fullKey: "technika",
-      icon: "icons/tools/hand/wrench-steel-grey.webp"
+      icon: SKILL_ICONS.tch
     },
     tre: {
       label: "Tresura",
       ability: "wis",
       fullKey: "tresura",
-      icon: "icons/environment/creatures/horse-brown.webp"
+      icon: SKILL_ICONS.tre
     },
     wys: {
       label: "Występy",
       ability: "cha",
       fullKey: "wystepy",
-      icon: "icons/skills/social/wave-halt-stop.webp"
+      icon: SKILL_ICONS.wys
     },
     zas: {
       label: "Zastraszanie",
       ability: "cha",
       fullKey: "zastraszanie",
-      icon: "icons/skills/social/intimidation-impressing.webp"
+      icon: SKILL_ICONS.zas
     },
     zwi: {
       label: "Zwinne dłonie",
       ability: "dex",
       fullKey: "zwinne_dlonie",
-      icon: "icons/skills/melee/hand-grip-sword-white-brown.webp"
+      icon: SKILL_ICONS.zwi
     }
   };
 

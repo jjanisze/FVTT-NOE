@@ -1,0 +1,372 @@
+{
+  "date": "2026-10-18",
+  "system": "6.0.6",
+  "rows": [
+    {
+      "group": "armor",
+      "key": "lgt",
+      "label": "Pancerz lekki",
+      "icon": "modules/neuroshima-2026-overrides/icons/armor/pancerz-skorzany.svg"
+    },
+    {
+      "group": "armor",
+      "key": "med",
+      "label": "Pancerz średni",
+      "icon": "modules/neuroshima-2026-overrides/icons/armor/kamizelka-taktyczna.svg"
+    },
+    {
+      "group": "armor",
+      "key": "hvy",
+      "label": "Pancerz ciężki",
+      "icon": "modules/neuroshima-2026-overrides/icons/armor/pancerz-kompozytowy.svg"
+    },
+    {
+      "group": "armor",
+      "key": "shl",
+      "label": "Tarcze",
+      "icon": "modules/neuroshima-2026-overrides/icons/armor/tarcza.svg"
+    },
+    {
+      "group": "weapon",
+      "key": "biala",
+      "label": "Broń biała",
+      "icon": "modules/neuroshima-2026-overrides/icons/weapons/machete.svg"
+    },
+    {
+      "group": "weapon",
+      "key": "miotana",
+      "label": "Broń miotana",
+      "icon": "modules/neuroshima-2026-overrides/icons/weapons/javelin.svg"
+    },
+    {
+      "group": "weapon",
+      "key": "palnaKrotka",
+      "label": "Broń palna krótka",
+      "icon": "modules/neuroshima-2026-overrides/icons/weapons/semi_auto_pistol.svg"
+    },
+    {
+      "group": "weapon",
+      "key": "palnaPosr",
+      "label": "Broń palna pośrednia",
+      "icon": "modules/neuroshima-2026-overrides/icons/weapons/submachinegun.svg"
+    },
+    {
+      "group": "weapon",
+      "key": "palnaDluga",
+      "label": "Broń palna długa",
+      "icon": "modules/neuroshima-2026-overrides/icons/weapons/bolt_action_rifle.svg"
+    },
+    {
+      "group": "weapon",
+      "key": "palnaCiezka",
+      "label": "Broń palna ciężka",
+      "icon": "modules/neuroshima-2026-overrides/icons/weapons/heavy_machine_gun.svg"
+    },
+    {
+      "group": "weapon",
+      "key": "specjalna",
+      "label": "Broń specjalna",
+      "icon": "modules/neuroshima-2026-overrides/icons/weapons/flamethrower.svg"
+    },
+    {
+      "group": "tool",
+      "key": "aptekarza",
+      "label": "Narzędzia małego aptekarza",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/aptekarza.svg"
+    },
+    {
+      "group": "tool",
+      "key": "charakteryzatora",
+      "label": "Narzędzia małego charakteryzatora",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/charakteryzatora.svg"
+    },
+    {
+      "group": "tool",
+      "key": "chemika",
+      "label": "Narzędzia małego chemika",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/chemika.svg"
+    },
+    {
+      "group": "tool",
+      "key": "elektronika",
+      "label": "Narzędzia małego elektronika",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/elektronika.svg"
+    },
+    {
+      "group": "tool",
+      "key": "falszerza",
+      "label": "Narzędzia małego fałszerza",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/falszerza.svg"
+    },
+    {
+      "group": "tool",
+      "key": "gorzelnika",
+      "label": "Narzędzia małego gorzelnika",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/gorzelnika.svg"
+    },
+    {
+      "group": "tool",
+      "key": "hakera",
+      "label": "Narzędzia małego hakera",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/hakera.svg"
+    },
+    {
+      "group": "tool",
+      "key": "jubilera",
+      "label": "Narzędzia małego jubilera",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/jubilera.svg"
+    },
+    {
+      "group": "tool",
+      "key": "kartografa",
+      "label": "Narzędzia małego kartografa",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/kartografa.svg"
+    },
+    {
+      "group": "tool",
+      "key": "klusownika",
+      "label": "Narzędzia małego kłusownika",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/klusownika.svg"
+    },
+    {
+      "group": "tool",
+      "key": "kowala",
+      "label": "Narzędzia małego kowala",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/kowala.svg"
+    },
+    {
+      "group": "tool",
+      "key": "krawca",
+      "label": "Narzędzia małego krawca",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/krawca.svg"
+    },
+    {
+      "group": "tool",
+      "key": "kucharza",
+      "label": "Narzędzia małego kucharza",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/kucharza.svg"
+    },
+    {
+      "group": "tool",
+      "key": "mechanika",
+      "label": "Narzędzia małego mechanika",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/mechanika.svg"
+    },
+    {
+      "group": "tool",
+      "key": "medyka",
+      "label": "Narzędzia małego medyka",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/medyka.svg"
+    },
+    {
+      "group": "tool",
+      "key": "rusznikarza",
+      "label": "Narzędzia małego rusznikarza",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/rusznikarza.svg"
+    },
+    {
+      "group": "tool",
+      "key": "rzeznika",
+      "label": "Narzędzia małego rzeźnika",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/rzeznika.svg"
+    },
+    {
+      "group": "tool",
+      "key": "stolarza",
+      "label": "Narzędzia małego stolarza",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/stolarza.svg"
+    },
+    {
+      "group": "tool",
+      "key": "szulera",
+      "label": "Narzędzia małego szulera",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/szulera.svg"
+    },
+    {
+      "group": "tool",
+      "key": "szklarza",
+      "label": "Narzędzia małego szklarza",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/szklarza.svg"
+    },
+    {
+      "group": "tool",
+      "key": "slusarza",
+      "label": "Narzędzia małego ślusarza",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/slusarza.svg"
+    },
+    {
+      "group": "tool",
+      "key": "tatuazysty",
+      "label": "Narzędzia małego tatuażysty",
+      "icon": "modules/neuroshima-2026-overrides/icons/tools/tatuazysty.svg"
+    },
+    {
+      "group": "skills",
+      "key": "akr",
+      "label": "Akrobatyka",
+      "icon": "modules/neuroshima-2026-overrides/icons/abilities/sportowiec.svg"
+    },
+    {
+      "group": "skills",
+      "key": "atl",
+      "label": "Atletyka",
+      "icon": "modules/neuroshima-2026-overrides/icons/abilities/sportowiec.svg"
+    },
+    {
+      "group": "skills",
+      "key": "his",
+      "label": "Historia",
+      "icon": "modules/neuroshima-2026-overrides/icons/abilities/przedwojenna-edukacja.svg"
+    },
+    {
+      "group": "skills",
+      "key": "int",
+      "label": "Intuicja",
+      "icon": "modules/neuroshima-2026-overrides/icons/abilities/wyczulone-zmysly.svg"
+    },
+    {
+      "group": "skills",
+      "key": "med",
+      "label": "Medycyna",
+      "icon": "modules/neuroshima-2026-overrides/icons/items/drugs/medpak.svg"
+    },
+    {
+      "group": "skills",
+      "key": "osz",
+      "label": "Oszustwo",
+      "icon": "modules/neuroshima-2026-overrides/icons/abilities/szybka-gadka.svg"
+    },
+    {
+      "group": "skills",
+      "key": "prc",
+      "label": "Percepcja",
+      "icon": "modules/neuroshima-2026-overrides/icons/abilities/wyczulone-zmysly.svg"
+    },
+    {
+      "group": "skills",
+      "key": "per",
+      "label": "Perswazja",
+      "icon": "modules/neuroshima-2026-overrides/icons/abilities/dobra-rada.svg"
+    },
+    {
+      "group": "skills",
+      "key": "poj",
+      "label": "Pojazdy",
+      "icon": "modules/neuroshima-2026-overrides/icons/abilities/kaskader.svg"
+    },
+    {
+      "group": "skills",
+      "key": "prz",
+      "label": "Przyroda",
+      "icon": "modules/neuroshima-2026-overrides/icons/abilities/moj-biom.svg"
+    },
+    {
+      "group": "skills",
+      "key": "skr",
+      "label": "Skradanie się",
+      "icon": "modules/neuroshima-2026-overrides/icons/abilities/cichy-krok.svg"
+    },
+    {
+      "group": "skills",
+      "key": "sle",
+      "label": "Śledztwo",
+      "icon": "modules/neuroshima-2026-overrides/icons/weapons/magnifying_glass.svg"
+    },
+    {
+      "group": "skills",
+      "key": "sur",
+      "label": "Survival",
+      "icon": "modules/neuroshima-2026-overrides/icons/items/loot/kompas.svg"
+    },
+    {
+      "group": "skills",
+      "key": "tch",
+      "label": "Technika",
+      "icon": "modules/neuroshima-2026-overrides/icons/weapons/klucz_francuski.svg"
+    },
+    {
+      "group": "skills",
+      "key": "tre",
+      "label": "Tresura",
+      "icon": "modules/neuroshima-2026-overrides/icons/abilities/oswajanie-zwierzat.svg"
+    },
+    {
+      "group": "skills",
+      "key": "wys",
+      "label": "Występy",
+      "icon": "modules/neuroshima-2026-overrides/icons/abilities/muzyk.svg"
+    },
+    {
+      "group": "skills",
+      "key": "zas",
+      "label": "Zastraszanie",
+      "icon": "modules/neuroshima-2026-overrides/icons/abilities/poddaj-sie.svg"
+    },
+    {
+      "group": "skills",
+      "key": "zwi",
+      "label": "Zwinne dłonie",
+      "icon": "modules/neuroshima-2026-overrides/icons/items/loot/zetony.svg"
+    },
+    {
+      "group": "saves",
+      "key": "str",
+      "label": "Siła",
+      "icon": "systems/dnd5e/icons/svg/abilities/strength.svg"
+    },
+    {
+      "group": "saves",
+      "key": "dex",
+      "label": "Zręczność",
+      "icon": "systems/dnd5e/icons/svg/abilities/dexterity.svg"
+    },
+    {
+      "group": "saves",
+      "key": "con",
+      "label": "Kondycja",
+      "icon": "systems/dnd5e/icons/svg/abilities/constitution.svg"
+    },
+    {
+      "group": "saves",
+      "key": "int",
+      "label": "Inteligencja",
+      "icon": "systems/dnd5e/icons/svg/abilities/intelligence.svg"
+    },
+    {
+      "group": "saves",
+      "key": "wis",
+      "label": "Mądrość",
+      "icon": "systems/dnd5e/icons/svg/abilities/wisdom.svg"
+    },
+    {
+      "group": "saves",
+      "key": "cha",
+      "label": "Charyzma",
+      "icon": "systems/dnd5e/icons/svg/abilities/charisma.svg"
+    }
+  ],
+  "categories": {
+    "armor": "modules/neuroshima-2026-overrides/icons/armor/kamizelka-taktyczna.svg",
+    "weapon": "modules/neuroshima-2026-overrides/icons/abilities/szkolenie-w-broni.svg",
+    "tool": "modules/neuroshima-2026-overrides/icons/weapons/klucz_francuski.svg",
+    "skills": "modules/neuroshima-2026-overrides/icons/abilities/ucz-sie-ucz.svg",
+    "saves": "modules/neuroshima-2026-overrides/icons/abilities/kuloodporny.svg"
+  },
+  "mixedTraitAdvancement": {
+    "icon": "modules/neuroshima-2026-overrides/icons/abilities/ucz-sie-ucz.svg"
+  },
+  "nativeChoiceCounts": {
+    "armor": 5,
+    "weapon": 8,
+    "tool": 24
+  },
+  "checks": {
+    "nativeChoicesUnchanged": true,
+    "stringLabelMapsUnchanged": true,
+    "repeatedRegistrationStable": true,
+    "allAssetsFetch": true,
+    "nativeTraitFlowSlots": 57,
+    "mixedAndSingleHeaders": true,
+    "storedDocumentsCreated": 0
+  }
+}

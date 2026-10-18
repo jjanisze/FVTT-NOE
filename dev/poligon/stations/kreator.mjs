@@ -25,6 +25,7 @@ export default {
     return { puste: empty.length };
   },
   proby: [
+    p("ikony-bieglosci", "Tworzenie", "Biegłości pancerza, broni, narzędzi i umiejętności mają własne jednobarwne ikony", "Gracz: wybory biegłości przy tworzeniu i awansie. Sprawdź małe ikony, nagłówki pojedynczej i mieszanej grupy oraz niezmienione nazwy i wybory."),
     p("od-zera", "Tworzenie", "Postać od zera: klasa, Pochodzenie, Sztuczka z kompendiów na kartę — z Pierwszymi krokami obok", "Gracz 1: Kompendium → przeciągnij na kartę; docs/Pierwsze-kroki.md."),
     p("awans", "Awans", "Poziom 1 → 3 (profesja) → 5: wybory, zdolności, skale", "Gracz 2: przycisk awansu na karcie."),
     p("cichy-krok", "Awans", "Zwiadowca 3 dostaje jeden efekt Cichy krok bez błędów uprawnień przy podłączonych graczach", "MG awansuje Zwiadowcę, potem powtórz w oknie właściciela; sprawdź efekt i konsolę."),
