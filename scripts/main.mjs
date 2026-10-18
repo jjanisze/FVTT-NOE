@@ -63,6 +63,7 @@ import { registerRescaleSurowceMigration } from "./migration/rescale-surowce-uni
 import { registerGadzetyMigration } from "./migration/migrate-gadzety.mjs";
 import { registerToolSubstitutesMigration } from "./migration/migrate-tool-substitutes.mjs";
 import { registerEffectPrioritiesMigration } from "./migration/migrate-effect-priorities.mjs";
+import { registerDnd5e6Migration } from "./migration/migrate-dnd5e6.mjs";
 import { registerDniSwiataMigration } from "./migration/migrate-dni-swiata.mjs";
 import { registerOznaczReakcjeBN } from "./migration/oznacz-reakcje-bn.mjs";
 import { registerSrdCleanup } from "./config/srd-cleanup.mjs";
@@ -274,6 +275,8 @@ Hooks.once("init", () => {
   registerGadzetyMigration();
   registerToolSubstitutesMigration();
   registerEffectPrioritiesMigration();
+  // Dane świata po dnd5e 6.0 (E11): klucze efektów, Palcożerca, TT towarzyszy — ręcznie, sucha próba domyślnie.
+  registerDnd5e6Migration();
   // Dni chorób i dawek na zegar świata (2026-10-07) — raz, sama, u aktywnego MG.
   registerDniSwiataMigration();
   registerOznaczReakcjeBN();

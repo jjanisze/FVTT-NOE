@@ -27,6 +27,7 @@ import { setZranienie } from "../combat/zranienie.mjs";
 import { BESTIARY } from "../config/bestiary-data.mjs";
 import { CHEMIA } from "../config/chemia-data.mjs";
 import { MODULE_ID, scratchActor, scratchCleanup, setCarriedWeight } from "./helpers.mjs";
+import { migrateDnd5e6, PALCOZERCA } from "../migration/migrate-dnd5e6.mjs";
 
 /** Każda tablica `changes` w danych modułu, spłaszczona do jednej listy. */
 function allDataChanges() {
@@ -115,6 +116,45 @@ export function registerEffectChangesTests(quench) {
         expect(zrc, "test ZRC").to.match(/- 1\b/);
         expect(sil, "test SIŁ").to.not.match(/- 1\b/);
         if (skill) expect(umiejetnosc, `umiejętność ${skill} (ZRC)`).to.match(/- 1\b/);
+      });
+    });
+
+    describe("migracja świata na dnd5e 6 (E11, `migration/migrate-dnd5e6.mjs`)", function () {
+      const zakres = actors => ({ actors, items: [] });
+
+      it("stare klucze efektów → klucze 6.0 (odwzorowanie dnd5e), Palcożerca → tylko ZRC; sucha próba nic nie pisze", async function () {
+        const a = await scratchActor();
+        await a.createEmbeddedDocuments("ActiveEffect", [
+          { name: "[Quench] stare klucze", system: { changes: [
+            change("system.attributes.movement.walk", CHANGE_TYPE.add, "5"),
+            change("system.abilities.dex.bonuses.save", CHANGE_TYPE.add, "1"),
+            change("system.attributes.ac.bonus", CHANGE_TYPE.add, "1")
+          ] } },
+          { name: "[Quench] palec", flags: { [MODULE_ID]: { critRider: PALCOZERCA.rider } },
+            system: { changes: [change(PALCOZERCA.oldKey, CHANGE_TYPE.add, "-1")] } }
+        ]);
+        // Kolejność wyniku createEmbeddedDocuments jest niestabilna — po nazwie.
+        const klucze = name => a.effects.getName(name).toObject().system.changes.map(c => c.key);
+        expect(await migrateDnd5e6(zakres([a])), "sucha próba").to.have.length(2);
+        expect(klucze("[Quench] stare klucze"), "sucha próba nie pisze").to.include("system.attributes.movement.walk");
+        await migrateDnd5e6({ commit: true, ...zakres([a]) });
+        expect(klucze("[Quench] stare klucze")).to.deep.equal([
+          "system.attributes.movement.speeds.walk", "system.abilities.dex.save.roll.bonus", "system.attributes.ac.bonus"
+        ]);
+        expect(klucze("[Quench] palec"), "RAW: tylko testy ZRC, nie podkładka `rolls.ability.check`").to.deep.equal([PALCOZERCA.key]);
+        expect(await migrateDnd5e6(zakres([a])), "drugi przebieg").to.be.empty;
+      });
+
+      it("TT towarzysza: sam wzór właściciela, bez domyślnych obliczeń dnd5e", async function () {
+        const t = await scratchActor({
+          type: "npc", flags: { [MODULE_ID]: { towarzysz: { rodzaj: "quench" } } },
+          system: { attributes: { ac: { calc: "custom", formula: "8" } } } // kształt z 5.3
+        });
+        expect(t._source.system.attributes.ac.calcs, "6.0 dokłada domyślne obliczenia").to.not.be.empty;
+        await migrateDnd5e6({ commit: true, ...zakres([t]) });
+        expect(t._source.system.attributes.ac.calcs).to.deep.equal([]);
+        expect(t.system.attributes.ac.value, "TT = wzór").to.equal(8);
+        expect(await migrateDnd5e6(zakres([t])), "drugi przebieg").to.be.empty;
       });
     });
 
