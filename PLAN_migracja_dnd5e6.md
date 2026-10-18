@@ -812,4 +812,16 @@ tam, gdzie daje dokładnie RAW; ponad RAW — wyłączone bez pytania.
   1207/1208 — nowy test okna powitalnego przekroczył 10 s: okno pobiera listę oficjalnych modułów z GitHuba bez
   limitu czasu, a izolowany kontekst przeglądarki nie ma jej w pamięci. Test podstawia tę listę; świeży świat:
   Quench **1209/1209**. Powtórka bramki na nowym commicie — niżej.
+- **Poprawka inwentarza:** podkładki kluczy efektów dnd5e 6.0.6 są **ciche** (żaden wpis `SHIM_FIELDS` nie ma
+  `warning`) — bramka ostrzeżeń ich nie złapie; pilnuje test kluczy w Quenchu (`70e3779`).
 - Zostaje: przejście MG po Poligonie (warstwa 7).
+
+**2026-10-18 — E11 przygotowane** (`94388b9`, bez MG — kampania nietknięta). Nasza migracja danych świata:
+`game.modules.get("neuroshima-2026-overrides").api.migration.migrateDnd5e6()` — sucha próba (raport w konsoli),
+`{ commit: true }` zapisuje; drugi przebieg pusty. Robi to, czego `migrateWorld` dnd5e nie zrobi:
+- stare klucze zmian efektów → klucze 6.0 tym samym odwzorowaniem, którego używa dnd5e (`_applyChangeShim`);
+- Palcożerca: „Odgryziony palec” na ofiarach i jeździec na kopiach Palcożercy w świecie → tylko testy ZRC (RAW);
+- towarzysze z wzorem TT → `calcs: []` (5.3 `calc: "custom"` wraca w 6.0 obok domyślnych obliczeń, wygrywa wyższe).
+Quench prowadzi ją na aktorach testowych (1211/1211 w świeżym świecie). Kolejność w E11: kopia → klon na Poligonie →
+otwarcie na 6.0.6 (migracja dnd5e) → `migrateDnd5e6()` na sucho, raport do MG → `{ commit: true }` → skrypt
+weryfikujący → przejście MG.
