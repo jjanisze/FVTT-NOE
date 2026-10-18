@@ -246,16 +246,23 @@ async function strzalEmp({ empId, uniform }) {
   }
 }
 
-/** GM: the damage tray of a message — per target: pressed multiplier and the EMP badge. */
+/**
+ * GM: the damage tray of a message — per target: its multiplier and the EMP badge. dnd5e 6.0 groups targets with
+ * the same result into one pill (an `li` with a `datalist` of token uuids) and builds them only while the tray is
+ * open and on screen; a background e2e window is neither, so the probe opens it and marks it visible.
+ */
 async function tackaEmp({ messageId }) {
   const el = await window.__e2e.until(() => {
     const t = document.querySelector(`#chat [data-message-id="${messageId}"] damage-application, .chat-log [data-message-id="${messageId}"] damage-application`);
-    return t?.querySelectorAll("li.target").length >= 2 ? t : null;
+    if (!t?.targetList) return null;
+    t.open = true;
+    t.targetList.visible = true;
+    return t.targetList.querySelectorAll("datalist > option").length >= 2 ? t : null;
   }, { message: "the damage tray with two targets" });
-  return [...el.querySelectorAll("li.target")].map(li => ({
-    name: li.querySelector(".title")?.textContent.trim(),
-    mnoznik: li.querySelector('.multiplier-button[aria-pressed="true"]')?.value ?? null,
-    plakietka: !!li.querySelector(".neuro-emp-plakietka")
+  return [...el.targetList.querySelectorAll("datalist > option")].map(o => ({
+    name: o.textContent.trim(),
+    mnoznik: String(el.getMergedOptions(o.value).multiplier),
+    plakietka: !!o.closest("li")?.querySelector(".neuro-emp-plakietka")
   }));
 }
 
