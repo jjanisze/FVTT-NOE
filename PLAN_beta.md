@@ -5,10 +5,10 @@
 > 2026-10-18 — migracja na Foundry 14.369 i dnd5e 6.0.6, kampania przeniesiona**). Etap bieżący: **alfa** — późna
 > dla walki, ekwipunku, przetrwania, produkcji, towarzyszy i postoju (handel, szabrowanie, doba), wczesna dla
 > pojazdów. Bramki spełnione: B3, B5, B6 (z dziurą: biegłości profesji — M6); bramka wydania v0.20.0 zielona (e2e
-> 21/21 w świecie gołym i zalecanym, Quench 1211/1211). B2 liczy się od nowa od v0.20.0 — dwie sesje na nowej
-> wersji bez przepisywania modeli. **Poligon** (warstwa 7, `PLAN_human_testing.md`) działa od 2026-10-12;
+> 21/21 w świecie gołym i zalecanym, Quench 1211/1211). B2 (zmieniona 2026-10-18) — zamrożenie modeli od kandydata
+> do wydania; sesje przy stole to styczniowa kampania testowa na becie. **Poligon** (warstwa 7, `PLAN_human_testing.md`) działa od 2026-10-12;
 > weto M3 i M5: MG przeszedł je slice po slice'ie przy wdrażaniu, formalne przejście sond odłożone.
-> Kolejność do bety — **§0**.
+> Kolejność do bety — **§0**. **Cel (2026-10-18): beta i zwiastun przed świętami, w styczniu kampania testowa.**
 >
 > Skąd ten plan: przegląd IMPLEMENTATION.md ↔ RAW z 2026-09-26. Macierz pokrycia RAW mieszka
 > w [IMPLEMENTATION.md § Stan projektu](IMPLEMENTATION.md#stan-projektu) i to ona jest źródłem
@@ -21,36 +21,46 @@
 
 ---
 
-## 0. Kolejność do bety (od 2026-10-17)
+## 0. Kolejność do bety (od 2026-10-18)
 
-M0–M3 i M5 są wydane (v0.19.0). Dalsza droga idzie w tej kolejności — ona wiąże, graf zależności w §3 mówi tylko,
-co od czego zależy.
+**Cel (MG, 2026-10-18): beta i zwiastun przed świętami; w styczniu krótka kampania testowa „Za garść gambli”**
+(scenariusz wprowadzający NOE) — testy przy stole i materiały promocyjne. Nazwa wydania jest drugorzędna; bramki
+służą temu celowi (B2 zmieniona — §1). Dotychczasowe kamienie podobnej wielkości (M3, M5, migracja) szły w 1–2
+dni pracy agentów — wąskim gardłem są decyzje i przeglądy MG oraz grafika, nie kod.
 
 ```mermaid
 flowchart LR
-  D["1. Drobiazgi"] --> MIG["2. Migracja: Foundry 14.369 + dnd5e 6.0.x"]
-  MIG --> M6["3. M6 z Biegłościami profesji"]
-  M6 --> M4["4. M4 Pojazdy (decyzja MG)"]
-  M4 --> ST["5. Style i motywy"]
-  M6 -. "M4 po becie (§4)" .-> ST
-  ST --> BETA{{"6. Wydanie bety: B1–B8 + dwie sesje na nowej wersji"}}
+  P["3. Porządki"] --> M6["4. M6 + Biegłości profesji<br/>(+ ikony, Codex)"]
+  M6 --> PM["5. PM1, PM7<br/>(zmieniają dane)"]
+  PM --> M4["6. M4 Pojazdy — w całości"]
+  M4 --> ST["7. Style i motywy"]
+  ST --> RC{{"8. Kandydat: zamrożenie modeli, B1–B8<br/>beta + zwiastun przed świętami"}}
+  RC --> GG["9. Styczeń: kampania testowa<br/>„Za garść gambli”"]
 ```
 
-1. **Drobiazgi** — `HANDOFF_przed_migracja.md` (2026-10-17): znaleziska Poligonu, Złomiarz w szabrowaniu, obrazy
-   z bramki v0.19.0, CI, dokumenty, inwentarz wersji. **Zrobione 2026-10-17: wydane jako v0.19.1** (bramka zielona,
-   CI bez ostrzeżeń) — to punkt odniesienia migracji. Pełna kopia kampanii sprzed migracji zrobiona i sprawdzona
-   (opis w vaulcie).
-2. **Migracja na Foundry 14.369 i dnd5e 6.0.x** — **plan: [PLAN_migracja_dnd5e6.md](PLAN_migracja_dnd5e6.md)**
-   (projekt 2026-10-17; decyzje MG: rdzeń w miejscu najpierw, master w miejscu, sesje zamrożone do bety, twarde cięcie
-   na dnd5e 6.0.6, port 1:1 z listą przejęć funkcji po migracji; tacki tylko dla MG, bez koncentracji, wygląd po fazie
-   funkcjonalnej). Foundry 14.369 zainstalowany 2026-10-17. **Zrobione 2026-10-18: wydane jako v0.20.0** (bramka
-   zielona: e2e 21/21 w świecie gołym i zalecanym, Quench 1211/1211, 0 ostrzeżeń zgodności z naszego kodu); kampania
-   zmigrowana na dnd5e 6.0.6 (najpierw próba na klonie), zamrożenie zdjęte. Plan zamknięty; reszta — jego lista PM.
-3. **M6 z Biegłościami profesji** (dziura w B6) — po migracji, bo awans postaci w dnd5e się zmienia.
-4. **M4 Pojazdy** — miejsce w kolejce czeka na decyzję MG: tutaj, przed betą, albo w §4 „po becie”.
-5. **Style i motywy** — stanowiska Poligonu Garderoba i Galeria, reszta ilustracji M5 (`dev/icons/MISSING.md`).
-6. **Wydanie bety** — bramki B1–B8. Migracja zeruje zegar B2 (modele bez przepisania przez dwie sesje), więc przed
-   nazwaniem bety — dwie rozegrane sesje na nowej wersji.
+1. **Drobiazgi** — `HANDOFF_przed_migracja.md`. **Zrobione 2026-10-17: v0.19.1.**
+2. **Migracja na Foundry 14.369 i dnd5e 6.0.6** — [PLAN_migracja_dnd5e6.md](PLAN_migracja_dnd5e6.md). **Zrobione
+   2026-10-18: v0.20.0** (e2e 21/21 w świecie gołym i zalecanym, Quench 1211/1211, 0 ostrzeżeń zgodności z naszego
+   kodu); kampania na dnd5e 6.0.6. Reszta — lista PM tego planu (§9).
+3. **Porządki po migracji** (S): prace Codexa nad ikonami zacommitowane jako propozycja (`PLAN_icon_design.md`,
+   tablica wzorców dnd5e); PM15 — skrypt i style Roll20 usunięte ze świata kampanii (MG, 2026-10-18); test
+   `dev/icons/review/browser.test.mjs` czasem dostaje port, który Node odrzuca; walidacja paczek przepisuje pliki w
+   `packs/` (rekordy bez zmian) — ma sprawdzać kopię tymczasową; nagłówek „Stan projektu” w IMPLEMENTATION.md;
+   Poligon z powrotem na zwykły świat (`poligon:start`). **MG:** zgłoszenie błędu dnd5e `Infinite`
+   (`data/active-effect/condition.mjs`, nadal na `master`; 6.0.6 to wciąż najnowsze wydanie) — nasza podładka
+   `config/dnd5e-fixes.mjs` do zdjęcia po poprawce.
+4. **M6 z Biegłościami profesji** (dziura w B6) i pozostałymi drobnymi zasadami (§3). Pod-etap: ikony biegłości i
+   język ikon — Codex (multimodalny), kod przegląda i integruje Claude.
+5. **PM1 i PM7** — zmieniają zapisane dane (TT jako obliczenia KP dnd5e, identyfikatory istot), więc przed
+   zamrożeniem modeli. Pozostałe PM po becie, chyba że coś blokują (MG, 2026-10-18).
+6. **M4 Pojazdy — w całości, przed betą** (MG, 2026-10-18). Projekt `PLAN_poscigi.md` §10 sprzed migracji — odświeżyć
+   pod karty pojazdów dnd5e 6.
+7. **Style i motywy** — przed betą, bo zwiastun pokazuje karty, czat (ciemne karty dnd5e 6 po D8 migracji) i
+   pościg; PM13 (podsumowania kart) tutaj. Stanowiska Poligonu Garderoba i Galeria, reszta ilustracji M5
+   (`dev/icons/MISSING.md`).
+8. **Kandydat do wydania → beta i zwiastun przed świętami** — zamrożenie modeli (B2), bramki B1–B8, dokumenty.
+9. **Styczeń: kampania testowa „Za garść gambli”** — świat MG (poza repo); znaleziska jako wydania bety bez
+   niszczących migracji.
 
 ---
 
@@ -64,7 +74,7 @@ zdolności.
 | # | Bramka | Jak sprawdzamy |
 |---|---|---|
 | B1 | **Pokrycie RAW** — w macierzy w IMPLEMENTATION.md każdy wiersz ma ✅ albo 🟡 z opisaną częścią ręczną; ❌ tylko na liście z §4 („po becie") | Przegląd macierzy |
-| B2 | **Stabilne modele** — magazynki, przedmioty podręczne, Zranienie, paczki: bez przepisania przez dwie kolejne sesje, żadnej niszczącej migracji w kolejce | Changelog |
+| B2 | **Stabilne modele** — od kandydata do wydania modele danych (magazynki, przedmioty podręczne, Zranienie, KP/TT, pojazdy, paczki) się nie zmieniają; żadnej niszczącej migracji w kolejce. *Zmiana 2026-10-18 (MG): sesji przed betą nie ma — test przy stole to styczniowa kampania „Za garść gambli” na becie* | Changelog od kandydata; lista PM bez pozycji zmieniających dane |
 | B3 | **Paczki** — wszystkie 15 zbudowane z bieżących danych, `npm run validate:packs` zielone, po starcie Foundry rekordy identyczne z świeżym buildem (zmiany plików `.log`/`MANIFEST`/`LOG` to kompaktowanie LevelDB przy otwarciu, nie migracja) | `build:packs` przy zamkniętym Foundry, start, `build-packs.mjs --out=<tmp>` + `node dev/packs/diff-packs.mjs <tmp>` |
 | B4 | **Testy** — `npm test` i pełny Quench zielone; każda mechanika z §3 ma testy warstwy 1 (czyste funkcje, `TESTING.md`) | `game.neuroshima.tests.run()` |
 | B5 | **Rejestr automatyki dla zdolności klasowych** — jak dla Sztuczek i Pochodzeń; każda zdolność, Sztuczka i zdolność Pochodzenia ma plakietkę pokrycia (auto / częściowo / brak + „Nie automatyzujemy: …") | `game.neuroshima.<rejestr>.report()` |
@@ -269,7 +279,7 @@ ze Stopniem Zranienia umierają jak BG, **Emiter EMP** z D27. Szukanie nowego to
 
 **Gotowe gdy:** towarzysz stoi na scenie, rośnie z awansem właściciela, ginie według zasad BG.
 
-### M4 — Pojazdy: domknięcie rozdziału (M–L)
+### M4 — Pojazdy: domknięcie rozdziału (M–L) — przed betą, w całości (MG, 2026-10-18)
 
 Cel: pościg od startu do mety bez notatek MG. Projekt: `PLAN_poscigi.md` §10.
 
