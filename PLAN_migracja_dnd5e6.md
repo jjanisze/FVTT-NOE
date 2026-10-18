@@ -689,3 +689,27 @@ poprawkach: e2e `dron`, `combat`, `umieranie`, `handel`, `autodestrukcja` zielon
 - Zostaje w E4: każdy z 9 typów aktywności użyty w teście (dziś `.use()` tylko KS w e2e `combat`; DS/MS/OZ mają
   testy typu, dublet, trzy aktywności magazynków i test zestawem — nic); rozmieszczenie szablonu w teście przez
   podstawienie `TemplatePlacement.prototype._place`.
+
+**2026-10-18 — E4 zrobione** (commity jw. oraz `33bd9b9`, `f5d61f7`). Quench **1193/1193**; e2e `combat`, `dron`,
+`umieranie`, `handel`, `autodestrukcja`, `poligon` zielone po poprawkach (osobne przebiegi `--reuse`), nowa paczka
+**`aktywnosci`** zielona.
+- **Każdy z 9 typów aktywności użyty w teście:** KS w `combat`; paczka `aktywnosci` — MS (Minimi, szablon-Region z
+  flagą serii), dublet (dwururka), Doładuj 1 nabój, Przeładowanie (R700), Wymiana magazynka (zapas z okna), test
+  zestawem (kowal: przycisk karty → test, ST 20); w walce DS (cele na karcie, deskryptory przycisków, RO celu z karty
+  przez okno osłony, wygasanie szablonu z końcem tury strzelca) i Ogień zaporowy (strefa przeżywa turę strzelca,
+  wejście CYWILA → RO MDR u MG, przygwożdżenie, koniec strefy i przygwożdżenia na następnej turze strzelca).
+  Rozmieszczenie szablonu dnd5e 6 jest interaktywne — test podstawia tylko ostatni krok (`_place`).
+- **Znaleziska:** (1) karty użycia DS/MS/OZ nie miały celów — 5.3 niosło je w `Activity#messageFlags`, którego 6.0
+  nie ma; teraz `system.targets` jak w `use()` 6.0. (2) Ogień zaporowy: haki walki i żetonów szły na każdym kliencie
+  (każdy kasował te same regiony, gracze padali na cudzych dokumentach, RO strefy rzucał każdy klient) — pisze aktywny
+  MG. (3) Przygwożdżenie na niepowiązanym żetonie (większość BN-ów na mapie) nie schodziło nigdy — zamiatanie czytało
+  tylko `game.actors`. (4) Okna wyboru serii i osłony — DialogV2 (V1 `Dialog` z E7 wcześniej, bo test musi je klikać).
+- **Dla E8:** budowniczy paczek pisze dla każdego zestawu zwykłe aktywności `check` i pomija `nativeCheck` oraz
+  bramki — zestaw kowala z kompendium (i z Produkcji) nie ma bramek Naostrzenia i Naprawy; ma je tylko kopia z
+  `createToolkits()`. Stan sprzed migracji.
+- **Dla E9:** rzuty upadku 6.0 idą przez haki `damage` — nasze `preRollDamage` je zobaczą (ustawienie
+  `disableFalling` w §5).
+
+**2026-10-18 — E5 zrobione** (w E3, `408e14d`): tacka obrażeń na grupach celów 6.0 — redukcja materiałowa w opcjach
+celu i `dnd5e.preCalculateDamage`, EMP ×0 dla żywych z plakietką na grupie. Quench `przebicie`, `emiter-emp`; e2e
+`combat` (tacka MG, sonda czyta scalone opcje celu — `31bed53`). Skaner: `damage-tray-api` na zerze, pilnowany.
