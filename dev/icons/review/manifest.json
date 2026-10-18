@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batch 113 · three subjects / four candidates awaiting GM review",
+  "title": "Asset review · Batch 113 approved choices delivered; 1 awaiting revision",
   "updated": "2026-10-18",
   "items": [
     {
@@ -15765,8 +15765,8 @@
       "context": "Native character creation, advancement and trait UI: Intuicja; 16–64 px beside Polish labels. skills.int.",
       "request": "A NEW GUT-INSTINCT concept, completely replacing the head with question mark. ONE generic adult shown waist-up in plain practical clothes, head turned slightly RIGHT, with ONE complete open hand resting over their UPPER ABDOMEN as if sensing something is wrong. Beside the torso at LEFT, ONE broad simple warning TRIANGLE with ONE large black exclamation-shaped cutout. The hand, sleeve and body remain anatomically coherent with broad simple folds only. Featureless generic adult head, natural proportions. A quiet hunch before conscious evidence; no question mark, eye symbol, magic, psychic glow, beard, hair detail or injury.",
       "current": {
-        "src": "/icons/abilities/wyczulone-zmysly.svg",
-        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+        "src": "/icons/proficiencies/intuicja.svg",
+        "note": "Exact GM-approved Batch 113 selection, installed as SVG/WEBP."
       },
       "candidates": [
         {
@@ -15781,7 +15781,8 @@
           "src": "candidates/batch-112/intuicja.png",
           "note": "ONE smooth generic adult HEAD IN PROFILE facing RIGHT, containing ONE large simple EYE and ONE broad question-mark-like curved black negative-space cut ABOVE the eye inside the head, suggesting a quiet hunch. Ordinary head and neck, no beard, hair texture, wrinkles, incoming bullets, psychic aura, glow, floating symbols or fantasy crystal."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "proficiency-pojazdy",
@@ -15830,8 +15831,8 @@
       "context": "Native character creation, advancement and trait UI: Zastraszanie; 16–64 px beside Polish labels. skills.zas.",
       "request": "FIRST REQUESTED ALTERNATIVE: ONE angry intimidating ADULT HUMAN FACE in a looming THREE-QUARTER VIEW, angled DOWN and slightly RIGHT toward someone below the frame. Broad heavy furrowed brow, narrowed ordinary eyes, firm downturned mouth and strong jaw; ONE plain cropped neck and shoulder silhouette. Convey menace through head angle and THREE broad black face cuts, not fine wrinkles. Sober rough adult human, realistic proportions. No other person or fist in this cell, no snarling monster, fangs, skull, gore, anime eyes, spiky hair, stipple, portrait texture or tiny scratches.\n\nSECOND REQUESTED ALTERNATIVE: TWO adult men shown from WAIST UP. A broad GRUFF MAN at LEFT grips the SHIRT COLLAR of a visibly SMALLER ADULT MAN at RIGHT with ONE hand, pulling that collar taut. His OTHER hand is raised as ONE clenched fist in a menacing threat. Exactly TWO complete arms and TWO hands belong to the larger man: collar-gripping hand and raised fist. The smaller adult recoils with shoulders drawn in and both hands lowered; an ordinary adult, NOT a child. One broad beard silhouette on the larger man, faces simplified to broad restrained cuts. Clear negative-space separation between heads, fist, forearms and torso. No contact from the fist, injury, blood, extra arms, hands, weapon, thin fingers, fine fabric texture or anime.",
       "current": {
-        "src": "/icons/abilities/poddaj-sie.svg",
-        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+        "src": "/icons/proficiencies/zastraszanie.svg",
+        "note": "Exact GM-approved Batch 113 selection, installed as SVG/WEBP."
       },
       "candidates": [
         {
@@ -15852,7 +15853,8 @@
           "src": "candidates/batch-112/zastraszanie.png",
           "note": "ONE large adult CLENCHED FIST in foreground at LEFT, with a simple sleeve cuff, facing ONE smaller generic adult HEAD AND SHOULDERS at RIGHT recoiling slightly away. The smaller head has only ONE broad eye cut and no hair detail. Threatening posture without contact or injury. Broad coherent anatomy; no monster, devil, skull, fangs, weapon, blood, gruff male portrait or anime expression."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "proficiency-zwinne-dlonie",

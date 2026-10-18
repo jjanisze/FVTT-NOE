@@ -3825,10 +3825,10 @@
     },
     "proficiency-intuicja": {
       "itemId": "proficiency-intuicja",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch113-intuicja",
       "notes": "",
-      "updatedAt": "2026-10-18T15:45:57.742Z"
+      "updatedAt": "2026-10-18T15:49:37.762Z"
     },
     "proficiency-pojazdy": {
       "itemId": "proficiency-pojazdy",
@@ -3839,17 +3839,17 @@
     },
     "proficiency-zastraszanie": {
       "itemId": "proficiency-zastraszanie",
-      "decision": "pending",
+      "decision": "approve",
       "candidateId": "batch113-zastraszanie-twarz",
       "notes": "",
-      "updatedAt": "2026-10-18T15:45:57.742Z"
+      "updatedAt": "2026-10-18T15:49:55.348Z"
     },
     "proficiency-zwinne-dlonie": {
       "itemId": "proficiency-zwinne-dlonie",
-      "decision": "pending",
+      "decision": "revise",
       "candidateId": "batch113-zwinne-dlonie",
-      "notes": "",
-      "updatedAt": "2026-10-18T15:45:57.742Z"
+      "notes": "It's more like clumsy hands now, with the icon showing the coin flying out of the hand. Generate 3 more versions of the hand dextriously manipulating the coin, and let's see if we can generate it without the AI hands syndrome. Create another backup image based on a different concept just in case.",
+      "updatedAt": "2026-10-18T15:51:16.914Z"
     },
     "proficiency-umiejetnosci": {
       "itemId": "proficiency-umiejetnosci",

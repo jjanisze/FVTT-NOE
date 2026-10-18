@@ -1,0 +1,63 @@
+{
+  "date": "2026-10-18",
+  "batch": 113,
+  "active": [
+    {
+      "id": "proficiency-intuicja",
+      "name": "Intuicja",
+      "decision": "approve",
+      "candidateId": "batch113-intuicja",
+      "selectedSource": "candidates/batch-113/intuicja.png",
+      "sourceSha256": "c366a3c49df9b63c55d4dd94d829b31f1b259a72371342a6c661c6b9189d4772",
+      "sourceKind": "candidate",
+      "target": "icons/proficiencies/intuicja.svg",
+      "notes": "",
+      "feedback": {
+        "itemId": "proficiency-intuicja",
+        "decision": "approve",
+        "candidateId": "batch113-intuicja",
+        "notes": "",
+        "updatedAt": "2026-10-18T15:49:37.762Z"
+      },
+      "feedbackSha256": "3f58412ab5cd3e78a7c51be77cfa3f7ef2c0c8cb037555346ad64f8b942afbb0"
+    },
+    {
+      "id": "proficiency-zastraszanie",
+      "name": "Zastraszanie",
+      "decision": "approve",
+      "candidateId": "batch113-zastraszanie-twarz",
+      "selectedSource": "candidates/batch-113/zastraszanie-twarz.png",
+      "sourceSha256": "b6b61a23be5b548e7a1a9b819b5e383c304a1dc46aac69bd0ca7d1790e51b05d",
+      "sourceKind": "candidate",
+      "target": "icons/proficiencies/zastraszanie.svg",
+      "notes": "",
+      "feedback": {
+        "itemId": "proficiency-zastraszanie",
+        "decision": "approve",
+        "candidateId": "batch113-zastraszanie-twarz",
+        "notes": "",
+        "updatedAt": "2026-10-18T15:49:55.348Z"
+      },
+      "feedbackSha256": "8ecf4acf728ea7ed499f170332e354f5d6512d68d7299605757f32f53d82d2fa"
+    },
+    {
+      "id": "proficiency-zwinne-dlonie",
+      "name": "Zwinne dłonie",
+      "decision": "revise",
+      "candidateId": "batch113-zwinne-dlonie",
+      "selectedSource": "candidates/batch-113/zwinne-dlonie.png",
+      "sourceSha256": "66bb9a38c482d7d1d50f4b56a97b9d1d0be390d6e5faebc7c5abb38a4eed2efe",
+      "sourceKind": "candidate",
+      "target": "icons/proficiencies/zwinne-dlonie.svg",
+      "notes": "It's more like clumsy hands now, with the icon showing the coin flying out of the hand. Generate 3 more versions of the hand dextriously manipulating the coin, and let's see if we can generate it without the AI hands syndrome. Create another backup image based on a different concept just in case.",
+      "feedback": {
+        "itemId": "proficiency-zwinne-dlonie",
+        "decision": "revise",
+        "candidateId": "batch113-zwinne-dlonie",
+        "notes": "It's more like clumsy hands now, with the icon showing the coin flying out of the hand. Generate 3 more versions of the hand dextriously manipulating the coin, and let's see if we can generate it without the AI hands syndrome. Create another backup image based on a different concept just in case.",
+        "updatedAt": "2026-10-18T15:51:16.914Z"
+      },
+      "feedbackSha256": "bfc7b7257e25b0a66990edaf001cedbebc6802110755f3e343e32bc11d3eb0bf"
+    }
+  ]
+}

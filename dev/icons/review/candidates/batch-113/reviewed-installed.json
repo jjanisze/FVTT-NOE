@@ -1,0 +1,41 @@
+{
+  "date": "2026-10-18",
+  "batch": 113,
+  "installed": [
+    {
+      "itemId": "proficiency-intuicja",
+      "candidateId": "batch113-intuicja",
+      "source": "candidates/batch-113/intuicja.png",
+      "sourceSha256": "c366a3c49df9b63c55d4dd94d829b31f1b259a72371342a6c661c6b9189d4772",
+      "files": [
+        {
+          "source": "icons/proficiencies/intuicja.svg",
+          "sha256": "6ec735cf3682ec131141df402bb7dce9be9d227bb6f25d4b64bd9c968d91cc77"
+        },
+        {
+          "source": "icons/proficiencies/intuicja.webp",
+          "sha256": "05cb458d60a337af4dcf45d87afaae84f82ee22cbb98b6b50f184914224d277a"
+        }
+      ]
+    },
+    {
+      "itemId": "proficiency-zastraszanie",
+      "candidateId": "batch113-zastraszanie-twarz",
+      "source": "candidates/batch-113/zastraszanie-twarz.png",
+      "sourceSha256": "b6b61a23be5b548e7a1a9b819b5e383c304a1dc46aac69bd0ca7d1790e51b05d",
+      "files": [
+        {
+          "source": "icons/proficiencies/zastraszanie.svg",
+          "sha256": "64ad9344f81325d351788aa9b364cb85f571294a20b1ed942bcf5e008cfd96a4"
+        },
+        {
+          "source": "icons/proficiencies/zastraszanie.webp",
+          "sha256": "261e9f0d63996347aa184d1956b8e95e4454fda7a3abb8617a115a432e08fade"
+        }
+      ]
+    }
+  ],
+  "keptCurrent": [],
+  "approvedSubjects": 2,
+  "remainingSubjects": 1
+}

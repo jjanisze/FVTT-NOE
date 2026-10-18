@@ -280,6 +280,13 @@ tool and normalized without redrawing. Acrobatics retains the existing approved
 `sportowiec` glyph, as selected by the GM. Exact selections and delivery hashes:
 `dev/icons/review/candidates/batch-112/reviewed-installed.json`.
 
+Two further GM-approved proficiency glyphs from Batch 113 were installed on
+2026-10-18 as exact SVG/WEBP masks: `intuicja` and `zastraszanie` under
+`icons/proficiencies/`. Intimidation uses the selected looming-face variant.
+They were AI-generated with OpenAI's built-in image tool and normalized without
+redrawing. Exact choices and hashes:
+`dev/icons/review/candidates/batch-113/reviewed-installed.json`.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

@@ -222,7 +222,7 @@
       "group": "skills",
       "key": "int",
       "label": "Intuicja",
-      "icon": "modules/neuroshima-2026-overrides/icons/abilities/wyczulone-zmysly.svg"
+      "icon": "modules/neuroshima-2026-overrides/icons/proficiencies/intuicja.svg"
     },
     {
       "group": "skills",
@@ -300,7 +300,7 @@
       "group": "skills",
       "key": "zas",
       "label": "Zastraszanie",
-      "icon": "modules/neuroshima-2026-overrides/icons/abilities/poddaj-sie.svg"
+      "icon": "modules/neuroshima-2026-overrides/icons/proficiencies/zastraszanie.svg"
     },
     {
       "group": "skills",
@@ -369,21 +369,28 @@
     "mixedAndSingleHeaders": true,
     "storedDocumentsCreated": 0
   },
-  "approvedBatch112": {
-    "delivered": [
-      "historia",
-      "pojazdy",
-      "umiejetnosci",
-      "rzuty-obronne"
-    ],
-    "keptCurrent": {
-      "akrobatyka": "icons/abilities/sportowiec.svg"
+  "approvedBatches": {
+    "112": {
+      "delivered": [
+        "historia",
+        "pojazdy",
+        "umiejetnosci",
+        "rzuty-obronne"
+      ],
+      "keptCurrent": {
+        "akrobatyka": "icons/abilities/sportowiec.svg"
+      }
     },
-    "pendingRevisions": [
-      "intuicja",
-      "zastraszanie",
-      "zwinne-dlonie"
-    ]
+    "113": {
+      "delivered": [
+        "intuicja",
+        "zastraszanie"
+      ],
+      "intimidationSelection": "batch113-zastraszanie-twarz"
+    }
   },
-  "localScreenshot": "review/audits/native-batch-112-approved.png"
+  "pendingRevisions": [
+    "zwinne-dlonie"
+  ],
+  "localScreenshot": "review/audits/native-batch-113-approved.png"
 }
