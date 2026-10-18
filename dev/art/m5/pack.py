@@ -68,7 +68,7 @@ def validate(path: Path, spec: dict) -> dict:
             if spec["kind"] == "token":
                 if min(bounds[0], bounds[1], image.width - bounds[2], image.height - bounds[3]) < 1:
                     raise ValueError(f"{path}: token touches the frame")
-                fill = max(bounds[2] - bounds[0], bounds[3] - bounds[1]) / image.width * 100
+                fill = max(bounds[2] - bounds[0], bounds[3] - bounds[1]) / max(image.size) * 100
                 if abs(fill - spec["fill"]) > 8:
                     print(f"Review frame fill for {spec['id']}: {fill:.1f}% (brief: {spec['fill']}%)")
         return {"asset": spec["id"], "file": spec["output"], "width": image.width,
@@ -109,7 +109,7 @@ def main() -> None:
         source = HERE / "in" / spec["set"] / f"{spec['key']}.png"
         destination = ROOT / spec["output"]
         if args.list:
-            print(f"{spec['id']}: dev/art/m5/in/{spec['set']}/{spec['key']}.png -> {spec['output']}")
+            print(f"{spec['id']}: {source.relative_to(ROOT).as_posix()} -> {spec['output']}")
             continue
         path = destination if args.check else source
         if not path.is_file():

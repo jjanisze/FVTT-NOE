@@ -22,6 +22,7 @@
     "build:classes": "python dev/classes/gen_features.py && python dev/classes/gen_companions.py && npm run build:icons && npm run build:packs && npm run validate:packs",
     "build:token-templates": "python dev/icons/gen_token_template.py",
     "build:token-placeholders": "python dev/icons/gen_token_placeholders.py",
+    "build:vehicle-placeholders": "python dev/icons/gen_vehicle_placeholders.py",
     "review:icons": "node dev/icons/review/server.mjs",
     "audit:icons": "node dev/icons/audit-live-items.mjs",
     "validate:icon-candidates": "python dev/icons/review/validate_candidates.py",

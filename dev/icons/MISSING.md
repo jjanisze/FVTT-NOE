@@ -3,6 +3,7 @@
 Checked against files on disk, 2026-10-18: **36 missing final images** — 7 banners,
 4 wrecks, 9 map objects, 4 companion tokens and 12 bestiary tokens currently
 using generated placeholders. Every final path listed below is absent.
+Added 2026-10-19: **M4 vehicles, 32 images and 7 sounds** (§P).
 
 Only outstanding asset requests belong here. Delivery history and remaining
 wiring/world-update tasks are in [FINAL_HANDOFF.md](FINAL_HANDOFF.md);
@@ -14,6 +15,50 @@ batch approvals are under [review/candidates/](review/candidates/).
 <!-- class-placeholder-audit:end -->
 <!-- icon-style-review:start -->
 <!-- icon-style-review:end -->
+
+## P. Pojazdy (M4) — 32 obrazy, 7 dźwięków
+
+Requested 2026-10-19 for `PLAN_m4_pojazdy.md` §8. Ready-to-paste prompts, exhaust points and the
+vehicle exceptions to the token rules: [dev/art/m4/BRIEFS_MISSING.md](../art/m4/BRIEFS_MISSING.md);
+sizes and paths: `dev/art/m4/catalog.json`. Drops: `dev/art/m4/in/<set>/<key>.png`, then
+`python dev/art/m4/pack.py`. Until a final file exists the module uses generated placeholders
+(`tokens/pojazdy/_placeholder/`); a delivered file wins at the next `fvtt packs` without code changes.
+
+**Tokens — 14.** Top-down, **front toward the bottom**, rectangular frame = footprint at 300 px per
+square, 94% fill, transparent margins, exhaust outlet at the briefed point, no riders or weapons.
+
+| Missing final file | Final size | Subject |
+|---|---|---|
+| `tokens/pojazdy/osobowka.webp` | 450×900 | Sedan z lat 80., wyblakły lakier, bagażnik dachowy |
+| `tokens/pojazdy/autobus.webp` | 600×2400 | Autobus miejski, sklejka w oknach, łatany dach |
+| `tokens/pojazdy/motocykl.webp` | 150×450 | Ciężki cruiser bez jeźdźca, sakwy |
+| `tokens/pojazdy/rower.webp` | 150×300 | Rower stalowy, koszyk na bagażniku |
+| `tokens/pojazdy/buggy.webp` | 300×600 | Buggy z ramą rurową, silnik z tyłu |
+| `tokens/pojazdy/hammer.webp` | 450×900 | Wojskowy 4×4, pierścień włazu bez broni |
+| `tokens/pojazdy/ciezarowka.webp` | 600×1800 | Ciężarówka z paką, komin za kabiną |
+| `tokens/pojazdy/woz-strazacki.webp` | 600×1800 | Wóz strażacki, działko wodne na dachu |
+| `tokens/pojazdy/buldozer.webp` | 750×1200 | Spycharka gąsienicowa z lemieszem |
+| `tokens/pojazdy/czolg.webp` | 750×1500 | Czołg, lufa w dół kadru, bez oznaczeń |
+| `tokens/pojazdy/bwp.webp` | 600×1350 | Bojowy wóz piechoty, rampa z tyłu |
+| `tokens/pojazdy/traktor.webp` | 450×750 | Traktor rolniczy, komin na masce |
+| `tokens/pojazdy/motorower.webp` | 150×300 | Motorower, skrzynka na bagażniku |
+| `tokens/pojazdy/deskorolka.webp` | 150×150 | Deskorolka z góry, nos w dół |
+
+**Wrecks — 4.** Same rules, no exhaust; fitted inside the destroyed vehicle's footprint.
+
+| Missing final file | Final size | Subject |
+|---|---|---|
+| `tokens/wraki/pojazd-jednoslad.webp` | 150×450 | Spalony motocykl (też motorower, rower, deskorolka) |
+| `tokens/wraki/pojazd-osobowy.webp` | 450×900 | Spalona skorupa osobówki (też Hammer, buggy) |
+| `tokens/wraki/pojazd-ciezki.webp` | 600×1800 | Spalone podwozie ciężarówki (też autobus, wóz, traktor) |
+| `tokens/wraki/pojazd-gasienicowy.webp` | 750×1500 | Rozbity kadłub gąsienicowy (też BWP, buldożer) |
+
+**Portraits — 14.** `tokens/portraits/pojazd-<key>.webp` for the 14 token keys above, **1024×1024
+WEBP, RGB, no alpha**, three-quarter front view on a highway shoulder.
+
+**Sounds — 7.** `sounds/pojazdy/`: `start-benzyna.ogg`, `start-diesel.ogg`, `start-motocykl.ogg`,
+`zgaszenie.ogg`, `nieudane-odpalenie.ogg`, `alarm.ogg`, `syrena.ogg` (optional) — mono 44.1 kHz
+Vorbis, CC0, M5 loudness rules; cues and lengths in the brief.
 
 ## G. Ilustracje teatru wyobraźni — 7
 

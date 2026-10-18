@@ -1,0 +1,589 @@
+{
+ "version": 1,
+ "assets": [
+  {
+   "id": "pojazdy/osobowka",
+   "set": "pojazdy",
+   "key": "osobowka",
+   "kind": "token",
+   "output": "tokens/pojazdy/osobowka.webp",
+   "size": [
+    450,
+    900
+   ],
+   "fill": 94,
+   "vehicle": "osobowka",
+   "cells": [
+    1.5,
+    3
+   ],
+   "exhaust": [
+    0.3,
+    0.03
+   ],
+   "subject": "a generic late-1980s American four-door sedan, sun-faded paint, rust on the wheel arches, one mismatched grey door, a roof rack with a tarp-wrapped bundle strapped down",
+   "purpose": "Top-down vehicle token, 1.5x3 grid squares (1.5 m each), front toward the bottom of the frame. Seats, passenger dots and exhaust smoke are drawn over it by the module."
+  },
+  {
+   "id": "pojazdy/autobus",
+   "set": "pojazdy",
+   "key": "autobus",
+   "kind": "token",
+   "output": "tokens/pojazdy/autobus.webp",
+   "size": [
+    600,
+    2400
+   ],
+   "fill": 94,
+   "vehicle": "autobus",
+   "cells": [
+    2,
+    8
+   ],
+   "exhaust": [
+    0.78,
+    0.02
+   ],
+   "subject": "a generic 1980s American city transit bus, faded two-tone paint, plywood bolted over two side windows, patched sheet metal on the roof, roof hatches closed",
+   "purpose": "Top-down vehicle token, 2x8 grid squares (1.5 m each), front toward the bottom of the frame. Seats, passenger dots and exhaust smoke are drawn over it by the module."
+  },
+  {
+   "id": "pojazdy/motocykl",
+   "set": "pojazdy",
+   "key": "motocykl",
+   "kind": "token",
+   "output": "tokens/pojazdy/motocykl.webp",
+   "size": [
+    150,
+    450
+   ],
+   "fill": 94,
+   "vehicle": "motocykl",
+   "cells": [
+    0.5,
+    1.5
+   ],
+   "exhaust": [
+    0.3,
+    0.05
+   ],
+   "subject": "a generic heavy American cruiser motorcycle without a rider, wide handlebars, teardrop fuel tank, worn leather saddlebags, chrome dulled by dust",
+   "purpose": "Top-down vehicle token, 0.5x1.5 grid squares (1.5 m each), front toward the bottom of the frame. Seats, passenger dots and exhaust smoke are drawn over it by the module."
+  },
+  {
+   "id": "pojazdy/rower",
+   "set": "pojazdy",
+   "key": "rower",
+   "kind": "token",
+   "output": "tokens/pojazdy/rower.webp",
+   "size": [
+    150,
+    300
+   ],
+   "fill": 94,
+   "vehicle": "rower",
+   "cells": [
+    0.5,
+    1
+   ],
+   "exhaust": null,
+   "subject": "a generic steel-frame road bicycle without a rider, flat handlebars wrapped in tape, a small wire basket on the rear rack",
+   "purpose": "Top-down vehicle token, 0.5x1 grid squares (1.5 m each), front toward the bottom of the frame. Seats, passenger dots and exhaust smoke are drawn over it by the module."
+  },
+  {
+   "id": "pojazdy/buggy",
+   "set": "pojazdy",
+   "key": "buggy",
+   "kind": "token",
+   "output": "tokens/pojazdy/buggy.webp",
+   "size": [
+    300,
+    600
+   ],
+   "fill": 94,
+   "vehicle": "buggy",
+   "cells": [
+    1,
+    2
+   ],
+   "exhaust": [
+    0.5,
+    0.03
+   ],
+   "subject": "a generic open-frame dune buggy: welded tube roll cage, two bucket seats, exposed rear engine, fat off-road tyres, no body panels",
+   "purpose": "Top-down vehicle token, 1x2 grid squares (1.5 m each), front toward the bottom of the frame. Seats, passenger dots and exhaust smoke are drawn over it by the module."
+  },
+  {
+   "id": "pojazdy/hammer",
+   "set": "pojazdy",
+   "key": "hammer",
+   "kind": "token",
+   "output": "tokens/pojazdy/hammer.webp",
+   "size": [
+    450,
+    900
+   ],
+   "fill": 94,
+   "vehicle": "hammer",
+   "cells": [
+    1.5,
+    3
+   ],
+   "exhaust": [
+    0.25,
+    0.03
+   ],
+   "subject": "a generic wide military four-by-four utility vehicle with a flat bonnet and a roof hatch ring with no weapon on it, sand-coloured paint worn to primer, no markings",
+   "purpose": "Top-down vehicle token, 1.5x3 grid squares (1.5 m each), front toward the bottom of the frame. Seats, passenger dots and exhaust smoke are drawn over it by the module."
+  },
+  {
+   "id": "pojazdy/ciezarowka",
+   "set": "pojazdy",
+   "key": "ciezarowka",
+   "kind": "token",
+   "output": "tokens/pojazdy/ciezarowka.webp",
+   "size": [
+    600,
+    1800
+   ],
+   "fill": 94,
+   "vehicle": "ciezarowka",
+   "cells": [
+    2,
+    6
+   ],
+   "exhaust": [
+    0.1,
+    0.7
+   ],
+   "subject": "a generic medium-duty American stake-bed cargo truck: conventional cab with a long bonnet at the front, a vertical exhaust stack behind the cab on the image-left side, an empty open cargo bed with low wooden sideboards",
+   "purpose": "Top-down vehicle token, 2x6 grid squares (1.5 m each), front toward the bottom of the frame. Seats, passenger dots and exhaust smoke are drawn over it by the module."
+  },
+  {
+   "id": "pojazdy/woz-strazacki",
+   "set": "pojazdy",
+   "key": "woz-strazacki",
+   "kind": "token",
+   "output": "tokens/pojazdy/woz-strazacki.webp",
+   "size": [
+    600,
+    1800
+   ],
+   "fill": 94,
+   "vehicle": "wozStrazacki",
+   "cells": [
+    2,
+    6
+   ],
+   "exhaust": [
+    0.9,
+    0.72
+   ],
+   "subject": "a generic American fire engine pumper, faded red paint, a roof-mounted water monitor (deck gun) in the middle of the roof, rolled hose beds at the rear, an aluminium ladder along the top, no text or emblems",
+   "purpose": "Top-down vehicle token, 2x6 grid squares (1.5 m each), front toward the bottom of the frame. Seats, passenger dots and exhaust smoke are drawn over it by the module."
+  },
+  {
+   "id": "pojazdy/buldozer",
+   "set": "pojazdy",
+   "key": "buldozer",
+   "kind": "token",
+   "output": "tokens/pojazdy/buldozer.webp",
+   "size": [
+    750,
+    1200
+   ],
+   "fill": 94,
+   "vehicle": "buldozer",
+   "cells": [
+    2.5,
+    4
+   ],
+   "exhaust": [
+    0.4,
+    0.62
+   ],
+   "subject": "a generic tracked crawler bulldozer: a wide curved steel blade across the front, an open operator cab with a roll-over frame, a vertical exhaust stack on the engine hood, a rear ripper tooth, flaking yellow paint",
+   "purpose": "Top-down vehicle token, 2.5x4 grid squares (1.5 m each), front toward the bottom of the frame. Seats, passenger dots and exhaust smoke are drawn over it by the module."
+  },
+  {
+   "id": "pojazdy/czolg",
+   "set": "pojazdy",
+   "key": "czolg",
+   "kind": "token",
+   "output": "tokens/pojazdy/czolg.webp",
+   "size": [
+    750,
+    1500
+   ],
+   "fill": 94,
+   "vehicle": "czolg",
+   "cells": [
+    2.5,
+    5
+   ],
+   "exhaust": [
+    0.5,
+    0.03
+   ],
+   "subject": "a generic main battle tank in worn olive paint, no insignia: a central turret with the main gun pointing toward the bottom of the frame, side skirts over the tracks, engine deck grilles at the rear",
+   "purpose": "Top-down vehicle token, 2.5x5 grid squares (1.5 m each), front toward the bottom of the frame. Seats, passenger dots and exhaust smoke are drawn over it by the module."
+  },
+  {
+   "id": "pojazdy/bwp",
+   "set": "pojazdy",
+   "key": "bwp",
+   "kind": "token",
+   "output": "tokens/pojazdy/bwp.webp",
+   "size": [
+    600,
+    1350
+   ],
+   "fill": 94,
+   "vehicle": "bwp",
+   "cells": [
+    2,
+    4.5
+   ],
+   "exhaust": [
+    0.12,
+    0.7
+   ],
+   "subject": "a generic tracked infantry fighting vehicle: a small turret with a slim autocannon pointing toward the bottom, roof hatches, a rear ramp door at the top of the frame, worn olive-drab paint, no insignia",
+   "purpose": "Top-down vehicle token, 2x4.5 grid squares (1.5 m each), front toward the bottom of the frame. Seats, passenger dots and exhaust smoke are drawn over it by the module."
+  },
+  {
+   "id": "pojazdy/traktor",
+   "set": "pojazdy",
+   "key": "traktor",
+   "kind": "token",
+   "output": "tokens/pojazdy/traktor.webp",
+   "size": [
+    450,
+    750
+   ],
+   "fill": 94,
+   "vehicle": "traktor",
+   "cells": [
+    1.5,
+    2.5
+   ],
+   "exhaust": [
+    0.55,
+    0.68
+   ],
+   "subject": "a generic American farm tractor: large rear wheels, small front wheels, an open seat under a roll-over frame, a vertical exhaust stack on the bonnet, rust-red paint gone chalky",
+   "purpose": "Top-down vehicle token, 1.5x2.5 grid squares (1.5 m each), front toward the bottom of the frame. Seats, passenger dots and exhaust smoke are drawn over it by the module."
+  },
+  {
+   "id": "pojazdy/motorower",
+   "set": "pojazdy",
+   "key": "motorower",
+   "kind": "token",
+   "output": "tokens/pojazdy/motorower.webp",
+   "size": [
+    150,
+    300
+   ],
+   "fill": 94,
+   "vehicle": "motorower",
+   "cells": [
+    0.5,
+    1
+   ],
+   "exhaust": [
+    0.35,
+    0.06
+   ],
+   "subject": "a generic small step-through moped without a rider, a scuffed plastic front shield, a milk crate tied to the rear rack",
+   "purpose": "Top-down vehicle token, 0.5x1 grid squares (1.5 m each), front toward the bottom of the frame. Seats, passenger dots and exhaust smoke are drawn over it by the module."
+  },
+  {
+   "id": "pojazdy/deskorolka",
+   "set": "pojazdy",
+   "key": "deskorolka",
+   "kind": "token",
+   "output": "tokens/pojazdy/deskorolka.webp",
+   "size": [
+    150,
+    150
+   ],
+   "fill": 94,
+   "vehicle": "deskorolka",
+   "cells": [
+    0.5,
+    0.5
+   ],
+   "exhaust": null,
+   "subject": "a worn wooden skateboard seen from directly above, chipped grip tape, the long axis vertical in the frame, nose toward the bottom",
+   "purpose": "Top-down vehicle token, 0.5x0.5 grid squares (1.5 m each), front toward the bottom of the frame. Seats, passenger dots and exhaust smoke are drawn over it by the module."
+  },
+  {
+   "id": "wraki/pojazd-jednoslad",
+   "set": "wraki",
+   "key": "pojazd-jednoslad",
+   "kind": "token",
+   "output": "tokens/wraki/pojazd-jednoslad.webp",
+   "size": [
+    150,
+    450
+   ],
+   "fill": 94,
+   "cells": [
+    0.5,
+    1.5
+   ],
+   "subject": "a burned-out motorcycle wreck lying flat: bent front forks, melted tyres, a scorched frame and a split fuel tank",
+   "purpose": "Replaces the token art of a destroyed vehicle (motorcycles, mopeds, bicycles and skateboards); front toward the bottom. Fitted inside the original footprint, so other aspect ratios get transparent margins."
+  },
+  {
+   "id": "wraki/pojazd-osobowy",
+   "set": "wraki",
+   "key": "pojazd-osobowy",
+   "kind": "token",
+   "output": "tokens/wraki/pojazd-osobowy.webp",
+   "size": [
+    450,
+    900
+   ],
+   "fill": 94,
+   "cells": [
+    1.5,
+    3
+   ],
+   "subject": "a burned-out sedan shell: no glass, caved-in roof, bare wheel rims, scorched and rusted panels",
+   "purpose": "Replaces the token art of a destroyed vehicle (sedans, utility four-by-fours and buggies); front toward the bottom. Fitted inside the original footprint, so other aspect ratios get transparent margins."
+  },
+  {
+   "id": "wraki/pojazd-ciezki",
+   "set": "wraki",
+   "key": "pojazd-ciezki",
+   "kind": "token",
+   "output": "tokens/wraki/pojazd-ciezki.webp",
+   "size": [
+    600,
+    1800
+   ],
+   "fill": 94,
+   "cells": [
+    2,
+    6
+   ],
+   "subject": "the burned-out chassis of a heavy truck: a gutted cab at the bottom of the frame, a bare ladder frame, blown-out tyres, buckled cargo bed",
+   "purpose": "Replaces the token art of a destroyed vehicle (buses, trucks, fire engines and tractors); front toward the bottom. Fitted inside the original footprint, so other aspect ratios get transparent margins."
+  },
+  {
+   "id": "wraki/pojazd-gasienicowy",
+   "set": "wraki",
+   "key": "pojazd-gasienicowy",
+   "kind": "token",
+   "output": "tokens/wraki/pojazd-gasienicowy.webp",
+   "size": [
+    750,
+    1500
+   ],
+   "fill": 94,
+   "cells": [
+    2.5,
+    5
+   ],
+   "subject": "a knocked-out tracked armoured hull: a thrown track lying beside the hull, blackened plates, open hatches, a turret ring with no turret",
+   "purpose": "Replaces the token art of a destroyed vehicle (tanks, infantry fighting vehicles and bulldozers); front toward the bottom. Fitted inside the original footprint, so other aspect ratios get transparent margins."
+  },
+  {
+   "id": "portrety/osobowka",
+   "set": "portrety",
+   "key": "osobowka",
+   "kind": "portrait",
+   "output": "tokens/portraits/pojazd-osobowka.webp",
+   "size": [
+    1024,
+    1024
+   ],
+   "vehicle": "osobowka",
+   "subject": "a generic late-1980s American four-door sedan, sun-faded paint, rust on the wheel arches, one mismatched grey door, a roof rack with a tarp-wrapped bundle strapped down",
+   "purpose": "Actor portrait on the vehicle sheet and in the compendium: a three-quarter front view on the ground."
+  },
+  {
+   "id": "portrety/autobus",
+   "set": "portrety",
+   "key": "autobus",
+   "kind": "portrait",
+   "output": "tokens/portraits/pojazd-autobus.webp",
+   "size": [
+    1024,
+    1024
+   ],
+   "vehicle": "autobus",
+   "subject": "a generic 1980s American city transit bus, faded two-tone paint, plywood bolted over two side windows, patched sheet metal on the roof, roof hatches closed",
+   "purpose": "Actor portrait on the vehicle sheet and in the compendium: a three-quarter front view on the ground."
+  },
+  {
+   "id": "portrety/motocykl",
+   "set": "portrety",
+   "key": "motocykl",
+   "kind": "portrait",
+   "output": "tokens/portraits/pojazd-motocykl.webp",
+   "size": [
+    1024,
+    1024
+   ],
+   "vehicle": "motocykl",
+   "subject": "a generic heavy American cruiser motorcycle without a rider, wide handlebars, teardrop fuel tank, worn leather saddlebags, chrome dulled by dust",
+   "purpose": "Actor portrait on the vehicle sheet and in the compendium: a three-quarter front view on the ground."
+  },
+  {
+   "id": "portrety/rower",
+   "set": "portrety",
+   "key": "rower",
+   "kind": "portrait",
+   "output": "tokens/portraits/pojazd-rower.webp",
+   "size": [
+    1024,
+    1024
+   ],
+   "vehicle": "rower",
+   "subject": "a generic steel-frame road bicycle without a rider, flat handlebars wrapped in tape, a small wire basket on the rear rack",
+   "purpose": "Actor portrait on the vehicle sheet and in the compendium: a three-quarter front view on the ground."
+  },
+  {
+   "id": "portrety/buggy",
+   "set": "portrety",
+   "key": "buggy",
+   "kind": "portrait",
+   "output": "tokens/portraits/pojazd-buggy.webp",
+   "size": [
+    1024,
+    1024
+   ],
+   "vehicle": "buggy",
+   "subject": "a generic open-frame dune buggy: welded tube roll cage, two bucket seats, exposed rear engine, fat off-road tyres, no body panels",
+   "purpose": "Actor portrait on the vehicle sheet and in the compendium: a three-quarter front view on the ground."
+  },
+  {
+   "id": "portrety/hammer",
+   "set": "portrety",
+   "key": "hammer",
+   "kind": "portrait",
+   "output": "tokens/portraits/pojazd-hammer.webp",
+   "size": [
+    1024,
+    1024
+   ],
+   "vehicle": "hammer",
+   "subject": "a generic wide military four-by-four utility vehicle with a flat bonnet and a roof hatch ring with no weapon on it, sand-coloured paint worn to primer, no markings",
+   "purpose": "Actor portrait on the vehicle sheet and in the compendium: a three-quarter front view on the ground."
+  },
+  {
+   "id": "portrety/ciezarowka",
+   "set": "portrety",
+   "key": "ciezarowka",
+   "kind": "portrait",
+   "output": "tokens/portraits/pojazd-ciezarowka.webp",
+   "size": [
+    1024,
+    1024
+   ],
+   "vehicle": "ciezarowka",
+   "subject": "a generic medium-duty American stake-bed cargo truck: conventional cab with a long bonnet at the front, a vertical exhaust stack behind the cab on the image-left side, an empty open cargo bed with low wooden sideboards",
+   "purpose": "Actor portrait on the vehicle sheet and in the compendium: a three-quarter front view on the ground."
+  },
+  {
+   "id": "portrety/woz-strazacki",
+   "set": "portrety",
+   "key": "woz-strazacki",
+   "kind": "portrait",
+   "output": "tokens/portraits/pojazd-woz-strazacki.webp",
+   "size": [
+    1024,
+    1024
+   ],
+   "vehicle": "wozStrazacki",
+   "subject": "a generic American fire engine pumper, faded red paint, a roof-mounted water monitor (deck gun) in the middle of the roof, rolled hose beds at the rear, an aluminium ladder along the top, no text or emblems",
+   "purpose": "Actor portrait on the vehicle sheet and in the compendium: a three-quarter front view on the ground."
+  },
+  {
+   "id": "portrety/buldozer",
+   "set": "portrety",
+   "key": "buldozer",
+   "kind": "portrait",
+   "output": "tokens/portraits/pojazd-buldozer.webp",
+   "size": [
+    1024,
+    1024
+   ],
+   "vehicle": "buldozer",
+   "subject": "a generic tracked crawler bulldozer: a wide curved steel blade across the front, an open operator cab with a roll-over frame, a vertical exhaust stack on the engine hood, a rear ripper tooth, flaking yellow paint",
+   "purpose": "Actor portrait on the vehicle sheet and in the compendium: a three-quarter front view on the ground."
+  },
+  {
+   "id": "portrety/czolg",
+   "set": "portrety",
+   "key": "czolg",
+   "kind": "portrait",
+   "output": "tokens/portraits/pojazd-czolg.webp",
+   "size": [
+    1024,
+    1024
+   ],
+   "vehicle": "czolg",
+   "subject": "a generic main battle tank in worn olive paint, no insignia: a central turret with the main gun pointing toward the bottom of the frame, side skirts over the tracks, engine deck grilles at the rear",
+   "purpose": "Actor portrait on the vehicle sheet and in the compendium: a three-quarter front view on the ground."
+  },
+  {
+   "id": "portrety/bwp",
+   "set": "portrety",
+   "key": "bwp",
+   "kind": "portrait",
+   "output": "tokens/portraits/pojazd-bwp.webp",
+   "size": [
+    1024,
+    1024
+   ],
+   "vehicle": "bwp",
+   "subject": "a generic tracked infantry fighting vehicle: a small turret with a slim autocannon pointing toward the bottom, roof hatches, a rear ramp door at the top of the frame, worn olive-drab paint, no insignia",
+   "purpose": "Actor portrait on the vehicle sheet and in the compendium: a three-quarter front view on the ground."
+  },
+  {
+   "id": "portrety/traktor",
+   "set": "portrety",
+   "key": "traktor",
+   "kind": "portrait",
+   "output": "tokens/portraits/pojazd-traktor.webp",
+   "size": [
+    1024,
+    1024
+   ],
+   "vehicle": "traktor",
+   "subject": "a generic American farm tractor: large rear wheels, small front wheels, an open seat under a roll-over frame, a vertical exhaust stack on the bonnet, rust-red paint gone chalky",
+   "purpose": "Actor portrait on the vehicle sheet and in the compendium: a three-quarter front view on the ground."
+  },
+  {
+   "id": "portrety/motorower",
+   "set": "portrety",
+   "key": "motorower",
+   "kind": "portrait",
+   "output": "tokens/portraits/pojazd-motorower.webp",
+   "size": [
+    1024,
+    1024
+   ],
+   "vehicle": "motorower",
+   "subject": "a generic small step-through moped without a rider, a scuffed plastic front shield, a milk crate tied to the rear rack",
+   "purpose": "Actor portrait on the vehicle sheet and in the compendium: a three-quarter front view on the ground."
+  },
+  {
+   "id": "portrety/deskorolka",
+   "set": "portrety",
+   "key": "deskorolka",
+   "kind": "portrait",
+   "output": "tokens/portraits/pojazd-deskorolka.webp",
+   "size": [
+    1024,
+    1024
+   ],
+   "vehicle": "deskorolka",
+   "subject": "a worn wooden skateboard seen from directly above, chipped grip tape, the long axis vertical in the frame, nose toward the bottom",
+   "purpose": "Actor portrait on the vehicle sheet and in the compendium: a three-quarter front view on the ground."
+  }
+ ]
+}
