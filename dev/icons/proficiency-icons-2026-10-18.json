@@ -1,0 +1,630 @@
+{
+  "date": "2026-10-18",
+  "system": "6.0.6",
+  "inspection": "Read-only live sandbox configuration and actual dnd5e.documents.Trait.keyIcon output",
+  "status": "UI icon wiring gap confirmed; reuse candidates recorded, no production changes applied",
+  "scopeCorrection": "Earlier item/icon coverage did not include engine trait UI lookups, skill icons or advancement metadata defaults.",
+  "counts": {
+    "armorRows": 4,
+    "weaponRows": 7,
+    "toolRows": 22,
+    "skillRows": 18,
+    "colouredProficiencyAndSkillRows": 51,
+    "colouredCategoryHeaders": 5,
+    "mixedTraitAdvancementHeader": 1,
+    "existingMonochromeSaveRows": 6,
+    "distinctExistingReuseCandidateFiles": 52,
+    "missingReuseCandidateFiles": 0
+  },
+  "rows": [
+    {
+      "group": "armor",
+      "key": "lgt",
+      "traitKey": "armor:lgt",
+      "label": "Pancerz lekki",
+      "icon": "icons/equipment/chest/breastplate-helmet-metal.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/armor/pancerz-skorzany.svg"
+    },
+    {
+      "group": "armor",
+      "key": "med",
+      "traitKey": "armor:med",
+      "label": "Pancerz średni",
+      "icon": "icons/equipment/chest/breastplate-helmet-metal.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/armor/kamizelka-taktyczna.svg"
+    },
+    {
+      "group": "armor",
+      "key": "hvy",
+      "traitKey": "armor:hvy",
+      "label": "Pancerz ciężki",
+      "icon": "icons/equipment/chest/breastplate-helmet-metal.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/armor/pancerz-kompozytowy.svg"
+    },
+    {
+      "group": "armor",
+      "key": "shl",
+      "traitKey": "armor:shl",
+      "label": "Tarcze",
+      "icon": "icons/equipment/chest/breastplate-helmet-metal.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/armor/tarcza.svg"
+    },
+    {
+      "group": "weapon",
+      "key": "biala",
+      "traitKey": "weapon:biala",
+      "label": "Broń biała",
+      "icon": "icons/skills/melee/weapons-crossed-swords-purple.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/weapons/machete.svg"
+    },
+    {
+      "group": "weapon",
+      "key": "miotana",
+      "traitKey": "weapon:miotana",
+      "label": "Broń miotana",
+      "icon": "icons/skills/melee/weapons-crossed-swords-purple.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/weapons/javelin.svg"
+    },
+    {
+      "group": "weapon",
+      "key": "palnaKrotka",
+      "traitKey": "weapon:palnaKrotka",
+      "label": "Broń palna krótka",
+      "icon": "icons/skills/melee/weapons-crossed-swords-purple.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/weapons/semi_auto_pistol.svg"
+    },
+    {
+      "group": "weapon",
+      "key": "palnaPosr",
+      "traitKey": "weapon:palnaPosr",
+      "label": "Broń palna pośrednia",
+      "icon": "icons/skills/melee/weapons-crossed-swords-purple.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/weapons/submachinegun.svg"
+    },
+    {
+      "group": "weapon",
+      "key": "palnaDluga",
+      "traitKey": "weapon:palnaDluga",
+      "label": "Broń palna długa",
+      "icon": "icons/skills/melee/weapons-crossed-swords-purple.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/weapons/bolt_action_rifle.svg"
+    },
+    {
+      "group": "weapon",
+      "key": "palnaCiezka",
+      "traitKey": "weapon:palnaCiezka",
+      "label": "Broń palna ciężka",
+      "icon": "icons/skills/melee/weapons-crossed-swords-purple.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/weapons/heavy_machine_gun.svg"
+    },
+    {
+      "group": "weapon",
+      "key": "specjalna",
+      "traitKey": "weapon:specjalna",
+      "label": "Broń specjalna",
+      "icon": "icons/skills/melee/weapons-crossed-swords-purple.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/weapons/flamethrower.svg"
+    },
+    {
+      "group": "tool",
+      "key": "aptekarza",
+      "traitKey": "tool:aptekarza",
+      "label": "Narzędzia małego aptekarza",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/aptekarza.svg"
+    },
+    {
+      "group": "tool",
+      "key": "charakteryzatora",
+      "traitKey": "tool:charakteryzatora",
+      "label": "Narzędzia małego charakteryzatora",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/charakteryzatora.svg"
+    },
+    {
+      "group": "tool",
+      "key": "chemika",
+      "traitKey": "tool:chemika",
+      "label": "Narzędzia małego chemika",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/chemika.svg"
+    },
+    {
+      "group": "tool",
+      "key": "elektronika",
+      "traitKey": "tool:elektronika",
+      "label": "Narzędzia małego elektronika",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/elektronika.svg"
+    },
+    {
+      "group": "tool",
+      "key": "falszerza",
+      "traitKey": "tool:falszerza",
+      "label": "Narzędzia małego fałszerza",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/falszerza.svg"
+    },
+    {
+      "group": "tool",
+      "key": "gorzelnika",
+      "traitKey": "tool:gorzelnika",
+      "label": "Narzędzia małego gorzelnika",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/gorzelnika.svg"
+    },
+    {
+      "group": "tool",
+      "key": "hakera",
+      "traitKey": "tool:hakera",
+      "label": "Narzędzia małego hakera",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/hakera.svg"
+    },
+    {
+      "group": "tool",
+      "key": "jubilera",
+      "traitKey": "tool:jubilera",
+      "label": "Narzędzia małego jubilera",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/jubilera.svg"
+    },
+    {
+      "group": "tool",
+      "key": "kartografa",
+      "traitKey": "tool:kartografa",
+      "label": "Narzędzia małego kartografa",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/kartografa.svg"
+    },
+    {
+      "group": "tool",
+      "key": "klusownika",
+      "traitKey": "tool:klusownika",
+      "label": "Narzędzia małego kłusownika",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/klusownika.svg"
+    },
+    {
+      "group": "tool",
+      "key": "kowala",
+      "traitKey": "tool:kowala",
+      "label": "Narzędzia małego kowala",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/kowala.svg"
+    },
+    {
+      "group": "tool",
+      "key": "krawca",
+      "traitKey": "tool:krawca",
+      "label": "Narzędzia małego krawca",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/krawca.svg"
+    },
+    {
+      "group": "tool",
+      "key": "kucharza",
+      "traitKey": "tool:kucharza",
+      "label": "Narzędzia małego kucharza",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/kucharza.svg"
+    },
+    {
+      "group": "tool",
+      "key": "mechanika",
+      "traitKey": "tool:mechanika",
+      "label": "Narzędzia małego mechanika",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/mechanika.svg"
+    },
+    {
+      "group": "tool",
+      "key": "medyka",
+      "traitKey": "tool:medyka",
+      "label": "Narzędzia małego medyka",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/medyka.svg"
+    },
+    {
+      "group": "tool",
+      "key": "rusznikarza",
+      "traitKey": "tool:rusznikarza",
+      "label": "Narzędzia małego rusznikarza",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/rusznikarza.svg"
+    },
+    {
+      "group": "tool",
+      "key": "rzeznika",
+      "traitKey": "tool:rzeznika",
+      "label": "Narzędzia małego rzeźnika",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/rzeznika.svg"
+    },
+    {
+      "group": "tool",
+      "key": "stolarza",
+      "traitKey": "tool:stolarza",
+      "label": "Narzędzia małego stolarza",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/stolarza.svg"
+    },
+    {
+      "group": "tool",
+      "key": "szulera",
+      "traitKey": "tool:szulera",
+      "label": "Narzędzia małego szulera",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/szulera.svg"
+    },
+    {
+      "group": "tool",
+      "key": "szklarza",
+      "traitKey": "tool:szklarza",
+      "label": "Narzędzia małego szklarza",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/szklarza.svg"
+    },
+    {
+      "group": "tool",
+      "key": "slusarza",
+      "traitKey": "tool:slusarza",
+      "label": "Narzędzia małego ślusarza",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/slusarza.svg"
+    },
+    {
+      "group": "tool",
+      "key": "tatuazysty",
+      "traitKey": "tool:tatuazysty",
+      "label": "Narzędzia małego tatuażysty",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/tatuazysty.svg"
+    },
+    {
+      "group": "skills",
+      "key": "akr",
+      "traitKey": "skills:akr",
+      "label": "Akrobatyka",
+      "icon": "icons/equipment/feet/shoes-simple-leaf-green.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/abilities/skoczek.svg"
+    },
+    {
+      "group": "skills",
+      "key": "atl",
+      "traitKey": "skills:atl",
+      "label": "Atletyka",
+      "icon": "icons/magic/control/buff-strength-muscle-damage-orange.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/abilities/sportowiec.svg"
+    },
+    {
+      "group": "skills",
+      "key": "his",
+      "traitKey": "skills:his",
+      "label": "Historia",
+      "icon": "icons/sundries/books/book-embossed-bound-brown.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/abilities/edukacja.svg"
+    },
+    {
+      "group": "skills",
+      "key": "int",
+      "traitKey": "skills:int",
+      "label": "Intuicja",
+      "icon": "icons/magic/perception/orb-crystal-ball-scrying-blue.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/abilities/przewidywanie.svg"
+    },
+    {
+      "group": "skills",
+      "key": "med",
+      "traitKey": "skills:med",
+      "label": "Medycyna",
+      "icon": "icons/tools/cooking/mortar-herbs-yellow.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/medyka.svg"
+    },
+    {
+      "group": "skills",
+      "key": "osz",
+      "traitKey": "skills:osz",
+      "label": "Oszustwo",
+      "icon": "icons/magic/control/mouth-smile-deception-purple.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/abilities/szybka-gadka.svg"
+    },
+    {
+      "group": "skills",
+      "key": "prc",
+      "traitKey": "skills:prc",
+      "label": "Percepcja",
+      "icon": "icons/magic/perception/eye-ringed-glow-angry-small-red.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/abilities/sokole-oko.svg"
+    },
+    {
+      "group": "skills",
+      "key": "per",
+      "traitKey": "skills:per",
+      "label": "Perswazja",
+      "icon": "icons/skills/social/diplomacy-handshake.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/abilities/dobra-rada.svg"
+    },
+    {
+      "group": "skills",
+      "key": "poj",
+      "traitKey": "skills:poj",
+      "label": "Pojazdy",
+      "icon": "icons/commodities/tech/cog-gear-wheel-gold.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/abilities/jesli-ma-silnik-to-ruszy.svg"
+    },
+    {
+      "group": "skills",
+      "key": "prz",
+      "traitKey": "skills:prz",
+      "label": "Przyroda",
+      "icon": "icons/magic/nature/plant-sprout-snow-green.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/abilities/moj-biom.svg"
+    },
+    {
+      "group": "skills",
+      "key": "skr",
+      "traitKey": "skills:skr",
+      "label": "Skradanie się",
+      "icon": "icons/magic/perception/shadow-stealth-eyes-purple.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/abilities/cichy-krok.svg"
+    },
+    {
+      "group": "skills",
+      "key": "sle",
+      "traitKey": "skills:sle",
+      "label": "Śledztwo",
+      "icon": "icons/tools/scribal/magnifying-glass.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/weapons/magnifying_glass.svg"
+    },
+    {
+      "group": "skills",
+      "key": "sur",
+      "traitKey": "skills:sur",
+      "label": "Survival",
+      "icon": "icons/magic/nature/leaf-glow-triple-green.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/items/loot/kompas.svg"
+    },
+    {
+      "group": "skills",
+      "key": "tch",
+      "traitKey": "skills:tch",
+      "label": "Technika",
+      "icon": "icons/tools/hand/wrench-steel-grey.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/tools/mechanika.svg"
+    },
+    {
+      "group": "skills",
+      "key": "tre",
+      "traitKey": "skills:tre",
+      "label": "Tresura",
+      "icon": "icons/environment/creatures/horse-brown.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/abilities/oswajanie-zwierzat.svg"
+    },
+    {
+      "group": "skills",
+      "key": "wys",
+      "traitKey": "skills:wys",
+      "label": "Występy",
+      "icon": "icons/skills/social/wave-halt-stop.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/abilities/muzyk.svg"
+    },
+    {
+      "group": "skills",
+      "key": "zas",
+      "traitKey": "skills:zas",
+      "label": "Zastraszanie",
+      "icon": "icons/skills/social/intimidation-impressing.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/abilities/groza.svg"
+    },
+    {
+      "group": "skills",
+      "key": "zwi",
+      "traitKey": "skills:zwi",
+      "label": "Zwinne dłonie",
+      "icon": "icons/skills/melee/hand-grip-sword-white-brown.webp",
+      "classification": "stock-coloured-ui-icon",
+      "reuseCandidate": "icons/abilities/szybkie-palce.svg"
+    },
+    {
+      "group": "saves",
+      "key": "str",
+      "traitKey": "saves:str",
+      "label": "Siła",
+      "icon": "systems/dnd5e/icons/svg/abilities/strength.svg",
+      "classification": "existing-system-monochrome-svg",
+      "reuseCandidate": null
+    },
+    {
+      "group": "saves",
+      "key": "dex",
+      "traitKey": "saves:dex",
+      "label": "Zręczność",
+      "icon": "systems/dnd5e/icons/svg/abilities/dexterity.svg",
+      "classification": "existing-system-monochrome-svg",
+      "reuseCandidate": null
+    },
+    {
+      "group": "saves",
+      "key": "con",
+      "traitKey": "saves:con",
+      "label": "Kondycja",
+      "icon": "systems/dnd5e/icons/svg/abilities/constitution.svg",
+      "classification": "existing-system-monochrome-svg",
+      "reuseCandidate": null
+    },
+    {
+      "group": "saves",
+      "key": "int",
+      "traitKey": "saves:int",
+      "label": "Inteligencja",
+      "icon": "systems/dnd5e/icons/svg/abilities/intelligence.svg",
+      "classification": "existing-system-monochrome-svg",
+      "reuseCandidate": null
+    },
+    {
+      "group": "saves",
+      "key": "wis",
+      "traitKey": "saves:wis",
+      "label": "Mądrość",
+      "icon": "systems/dnd5e/icons/svg/abilities/wisdom.svg",
+      "classification": "existing-system-monochrome-svg",
+      "reuseCandidate": null
+    },
+    {
+      "group": "saves",
+      "key": "cha",
+      "traitKey": "saves:cha",
+      "label": "Charyzma",
+      "icon": "systems/dnd5e/icons/svg/abilities/charisma.svg",
+      "classification": "existing-system-monochrome-svg",
+      "reuseCandidate": null
+    }
+  ],
+  "categories": [
+    {
+      "key": "armor",
+      "icon": "icons/equipment/chest/breastplate-helmet-metal.webp",
+      "reuseCandidate": "icons/armor/kamizelka-taktyczna.svg"
+    },
+    {
+      "key": "weapon",
+      "icon": "icons/skills/melee/weapons-crossed-swords-purple.webp",
+      "reuseCandidate": "icons/abilities/szkolenie-w-broni.svg"
+    },
+    {
+      "key": "tool",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "reuseCandidate": "icons/tools/mechanika.svg"
+    },
+    {
+      "key": "skills",
+      "icon": "icons/tools/instruments/harp-yellow-teal.webp",
+      "reuseCandidate": "icons/abilities/cwiczenie-czyni-mistrza.svg"
+    },
+    {
+      "key": "saves",
+      "icon": "icons/magic/life/ankh-gold-blue.webp",
+      "reuseCandidate": "icons/abilities/wytrwaly.svg"
+    }
+  ],
+  "mixedTraitAdvancement": {
+    "icon": "icons/sundries/scrolls/scroll-yellow-teal.webp",
+    "reuseCandidate": "icons/abilities/cwiczenie-czyni-mistrza.svg"
+  },
+  "adjacentAdvancementDefaults": [
+    {
+      "key": "AbilityScoreImprovement",
+      "icon": "icons/magic/symbols/star-solid-gold.webp",
+      "typeIcon": "systems/dnd5e/icons/svg/ability-score-improvement.svg"
+    },
+    {
+      "key": "HitPoints",
+      "icon": "icons/magic/life/heart-pink.webp",
+      "typeIcon": "systems/dnd5e/icons/svg/hit-points.svg"
+    },
+    {
+      "key": "ItemChoice",
+      "icon": "icons/magic/symbols/cog-orange-red.webp",
+      "typeIcon": "systems/dnd5e/icons/svg/item-choice.svg"
+    },
+    {
+      "key": "ItemGrant",
+      "icon": "icons/sundries/books/book-open-purple.webp",
+      "typeIcon": "systems/dnd5e/icons/svg/item-grant.svg"
+    },
+    {
+      "key": "ModifyItem",
+      "icon": "icons/skills/trades/smithing-anvil-silver-red.webp",
+      "typeIcon": "systems/dnd5e/icons/svg/advancement/modify-item.svg"
+    },
+    {
+      "key": "ScaleValue",
+      "icon": "icons/sundries/gaming/dice-pair-white-green.webp",
+      "typeIcon": "systems/dnd5e/icons/svg/scale-value.svg"
+    },
+    {
+      "key": "Size",
+      "icon": "icons/environment/wilderness/tree-ash.webp",
+      "typeIcon": "systems/dnd5e/icons/svg/size.svg"
+    },
+    {
+      "key": "Subclass",
+      "icon": "icons/skills/trades/mining-pickaxe-yellow-blue.webp",
+      "typeIcon": "systems/dnd5e/icons/svg/subclass.svg"
+    },
+    {
+      "key": "Trait",
+      "icon": "icons/sundries/scrolls/scroll-yellow-teal.webp",
+      "typeIcon": "systems/dnd5e/icons/svg/trait.svg"
+    }
+  ],
+  "implementationNotes": [
+    "Skill rows read CONFIG.DND5E.skills[key].icon directly.",
+    "Armor and weapon proficiency labels remain string maps; Trait.keyIcon falls back to the trait category icon when no subtype image resolves.",
+    "Tool labels are mirrored into toolProficiencies as strings; adding tools[key].icon alone does not satisfy Trait.keyIcon's first lookup, which reads toolProficiencies[key].icon. Trace the renderer before wiring.",
+    "Category headers read CONFIG.DND5E.traits[type].icon. Mixed-type Trait advancements use TraitAdvancement.metadata.icon unless explicitly given their own image.",
+    "Reuse choices are suggestions for visual/semantic review. They are not saved GM artwork approvals or applied icon mappings.",
+    "Saving-throw row icons and damage/condition immunity symbols are existing monochrome system SVGs, not counted as coloured-art gaps.",
+    "Other advancement metadata defaults are listed as an adjacent audit scope; not all are used by this module."
+  ],
+  "sourceReferences": [
+    "scripts/config/armor.mjs",
+    "scripts/config/weapons.mjs",
+    "scripts/config/tools.mjs",
+    "scripts/config/skills.mjs",
+    "dnd5e 6.0.6: module/documents/actor/trait.mjs:keyIcon",
+    "dnd5e 6.0.6: module/applications/advancement/trait-flow.mjs:#prepareTraitSlots",
+    "dnd5e 6.0.6: module/documents/advancement/trait.mjs:prepareData"
+  ]
+}

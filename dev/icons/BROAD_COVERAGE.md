@@ -1,7 +1,14 @@
 # Expanded icon coverage — 2026-10-17
 
-Final status: **all approved glyphs are delivered and source wiring is
-complete**. The five companion subjects and both remaining origin
+**UI scope correction, 2026-10-18:** the completed item-art audit below did
+not include proficiency/skill UI or advancement header defaults. A live
+dnd5e 6.0.6 check confirms 51 colored stock proficiency/skill rows, five
+category headers and the mixed Trait advancement header. Existing native
+glyph reuse candidates are available; this UI wiring remains open. See
+[PROFICIENCY_COVERAGE.md](PROFICIENCY_COVERAGE.md) and its per-key JSON.
+
+For the item-art scopes below, **reviewed glyph delivery and source wiring
+are complete**. The five companion subjects and both remaining origin
 selections are installed. All 544 review cards are resolved; no generated
 initials, missing artwork or audited source wiring gaps remain.
 Completion evidence: [completed-2026-10-17.json](completed-2026-10-17.json).

@@ -1,5 +1,11 @@
 # Icon session complete — 2026-10-17
 
+**Follow-up, 2026-10-18:** proficiency/skill UI and advancement headers
+were outside the item-art completion scope. Live inspection found 51
+colored stock rows plus six header lookups. Existing glyph candidates
+are recorded in `PROFICIENCY_COVERAGE.md` and
+`proficiency-icons-2026-10-18.json`; production wiring is still pending.
+
 All 544 review cards are resolved. The last seven exact selections are
 installed as SVG/WEBP pairs, including the earlier Batch 110 Nowy Jork
 design chosen by the GM. All twelve main origin emblems and five new
@@ -29,6 +35,12 @@ Foundry remains closed; no campaign repoint was run.
 <!-- gm-remaining:start -->
 ## Do podpięcia — przez MG
 
+- **Biegłości / umiejętności / nagłówki rozwoju — otwarte, 2026-10-18:**
+  4 pancerze, 7 grup broni, 22 narzędzia i 18 umiejętności nadal używają
+  kolorowych ikon rdzenia, podobnie jak 5 nagłówków kategorii i mieszany
+  nagłówek Biegłości. Grafiki kandydackie są już w module; potrzebne jest
+  podpięcie renderera UI, nie ponowne generowanie ikon przedmiotów.
+  Raport: `PROFICIENCY_COVERAGE.md`. Audyt nie zmienił kodu ani świata.
 - **Glify — kod gotowy, 2026-10-17:** wszystkie zatwierdzone grafiki oraz
   mapowania źródłowe są dostarczone. Nie trzeba ponownie przepinać kodu
   Sztuczek, Bestiariusza, towarzyszy, trzech paliw, uzupełnienia medyka ani
