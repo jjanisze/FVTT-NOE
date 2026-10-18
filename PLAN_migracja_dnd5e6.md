@@ -606,3 +606,86 @@ modułu bez zmian; zepsuło się tylko nasze narzędzie:
 Klucze §3.13 widoczne na naszych ekranach: wszystkie 19 usuniętych (nazwy obliczeń KP = TT na karcie, odporności
 na karcie postaci, rzuty przeciw śmierci przy umieraniu, rzadkości na kartach przedmiotów, zakładka „Efekty”) — **E7**.
 Skaner: nowe reguły `deletion-syntax` (58/29), `scene-templates` (6/4), `effect-modes` (5/3).
+
+**2026-10-18 — E3 zrobione: dane, konfiguracja, efekty na dnd5e 6.0.6** (Claude Code; commity `c01ef79`, `1253a8e`,
+`09039f3`, `408e14d`, `12f58a0`, `d5f0217`). Pełny przebieg `fvtt e2e --quench` (raport `logs/e2e/2026-10-17T21-34-01`):
+Quench **1190/1190** (po E2: 1155/1185), e2e **15/20** (po E2: 5/20). Czerwone: `combat` i `umieranie` — poprawione
+na początku E4 (niżej), `dron` — też, a `handel` i `poligon` padały tylko od pozostałości po `dron` (błąd serwera
+rdzenia przy zapisie do skasowanego dokumentu, gdy sesja zdalna drona została otwarta). Ostrzeżenia zgodności z
+naszym kodem: 113 — 110 to `Scene#templates` (A17, E4), reszta E7.
+- **Wiadomości czatu** (§3.3): dnd5e 6.0 zrobił z nich typowane modele danych (`attack`, `damage`, `save`, `check`,
+  `usage`…; przedmiot, aktywność, cele i pochodzenie w `message.system`), a jego migracja świata kasuje flagi 5.3.
+  Jeden adapter — `config/chat-message-data.mjs` (`rollInfo`, `rollTypeOf`, `itemUuidOf`, `activityRefOf`,
+  `originIdOf`, `targetsOf`, `isUsageCard`) — zastąpił każdy odczyt flag w 24 plikach; powiązania rzutów piszemy jako
+  `system.origin`; nasze karty obrażeń mają typ `damage`; przerzut Fuksem ataku znów jest wiadomością ataku z
+  powiązaniami oryginału (przestał nią być — werdykt i Reakcje go nie widziały; A14).
+- **Ścieżki** (§3.12): `movement.speeds`, `senses.ranges`, `rolls.*.bonus`, `abilities.*.check.roll.bonus`,
+  `death.roll.bonus`, `save.prof` (A1/A2 — SP i PB każdej istoty z Bestiariusza), `ability.attack.value`, premia
+  ataku drona (A10). **Znalezisko:** kary Chemii do testów cech celowały w `bonuses.check`, którego podkładka
+  efektów 6.0 nie przekierowuje — po cichu nic nie robiły. Usuwanie `{-=k: null}` → `_del` (58 miejsc), tryby
+  efektów → typy zmian, pochodzenie efektów w `system.origin` (`effectOrigin`).
+- **KP / TT** (A3): „NOE (automatycznie)” = domyślne `calcs` (unarmored + armored) bez `formulas` i `override`;
+  `ac.base` zostaje (6.0 nadal go przygotowuje), `ac.calc` to teraz identyfikator zwycięskiej formuły.
+- **Konfiguracja:** `conditionEffects` scalane z tabelą dnd5e (A6); `healingTypes` scalane (nowy typ `maximum` 6.0
+  łamał każdą kartę broni, A8); rzucanie czarów (A7); `armorSpeedReduction = 0` (kara Udźwigu jest nasza).
+- **Stany z poziomami** (A5, A6): Zranienie, Upojenie, Skażenie to efekty dnd5e typu `condition` z
+  `system.type`/`system.level`; wcześniej każdy pokazywał poziom 1 i złą ikonę. Ikony per poziom (`09039f3`).
+- **Wyczerpanie:** błąd dnd5e 6.0.6 `Infinite` (A4) — podkładka `config/dnd5e-fixes.mjs`, do zdjęcia, gdy dnd5e
+  naprawi (zgłoszenie u autorów — MG). **Znalezisko (e2e `rekonwalescencja`):** 6.0 odtwarza zapis poziomu na
+  efekcie stanu bez `await`; dwa zapisy z rzędu dawały efekt 3 przy zapisanym 2 (kara −6 zamiast −4). Nasza jedyna
+  ścieżka zapisu czeka na to odtworzenie i poprawia efekt (`exhaustion.mjs`).
+- **Plik ustawień** (§5, `config/dnd5e-settings.mjs`): `rulesVersion` modern, `disableExhaustion` false,
+  `disableConcentration` true (D9), `autoApplyDowned` none, `senseVisionSync` false (A16), `tokenSizeSync` false
+  (A15: dron 2×2 i skale żetonów), jednostki metryczne. Pilnowane u aktywnego MG przy starcie, z szeptem do MG; pola
+  zablokowane w obu oknach ustawień; dla ustawień „wymaga przeładowania” poprawiany też bufor `dnd5e.settings`.
+- **Tacka obrażeń** (A13, z E5): 6.0 grupuje cele o tym samym wyniku w jedną pigułkę i liczy wszystko z
+  `calculateDamage`; redukcja materiałowa siedzi w opcjach celu, a hak `dnd5e.preCalculateDamage` robi z niej
+  mnożnik — wyświetlanie, grupowanie i zastosowanie zgadzają się z konstrukcji (`408e14d`). EMP: ×0 dla żywych.
+- **Skaner:** reguły na zerze pilnowane przez `npm test` (`test:dnd5e6`). Zostają do E8 (generator Bestiariusza,
+  budowniczy paczek, `validate-packs`): `movement` 1 (odczyt zapasowy w `character-defaults.mjs`), `senses` 7,
+  `roll-bonuses` 1, `check-save-bonuses` 3, `armor-class` 1.
+- Błędy konsoli klientów graczy w Quench (`#postNotification` rdzenia, „Nie możesz tak po prostu wcisnąć tego
+  komuś!”, odmowa uprawnień) są takie same jak w bramce E1 na 5.3 — nie z migracji.
+
+**Decyzje MG (2026-10-18), zamiast pytań z E9:** (1) **Unikanie** — Ułatwienie w RO ZRC (NOE s. 30) przez natywną
+regułę dnd5e 6 (`dodging` → `conditionEffects.dexteritySaveAdvantage`), bo daje dokładnie RAW: dnd5e gasi ją przy
+`incapacitated` i stanach `noMovement`; efekt Udźwigu przy maksymalnym obciążeniu (s. 258, Szybkość 0) niesie stan
+`udzwigMaksymalny` z tej listy (`5efd6be`; w 5.3 Unikanie tego Ułatwienia nie dawało wcale). (2) **Przeciążenie
+dnd5e 2024** (`heavilyEncumbered` → Utrudnienie fizycznych testów, RO i ataków) — wyłączone: Udźwig ma być RAW NOE,
+a mechanika dnd5e ponad RAW nie jest pytaniem do MG, tylko zawsze „nie”.
+
+**Stan mapy awarii:** A1–A11, A13–A16 — zrobione (A11: naturalny wynik w werdykcie wrócił z portem powiązań rzutów);
+A12 (znacznik „wręcz” na karcie ataku) — zielone; A20 — wszystkie paczki z samymi błędami zasiewu zielone; A17 —
+zrobione w E4; A18 → E7; A19 → E10.
+
+**Dla E11 (dane kampanii):** dosłowne klucze `-=riders` w aktorach (dnd5e 5.x); zapisane efekty z kluczami
+`abilities.*.bonuses.check` — podkładka 6.0 ich nie przekierowuje, nasza migracja musi je przepisać.
+
+**Dla E6:** wiadomość typu `damage` renderuje wyłącznie szablon dnd5e — jej `content` przepada. **Dozownik traci
+przycisk „Rzuć RO”** (trucizna, ST Kondycji); w 6.0 jest na to wiadomość `prompt` z przyciskiem `save` (D6). Nasze
+`rollSave`/`rollCheck` nie łączą rzutów z kartą użycia (`system.origin`) ani nie dodają premii aktywności — 5.3 też
+tego nie robiło; 6.0 tak (dopina wyniki do karty). Karty czatu 6.0 są ciemne (D8: wygląd później).
+
+**2026-10-18 — E4 w toku** (commity `df691a0`, `57b5525`, `1e533a5`, `c60867d`, `31bed53`, `e84bca5`). Po
+poprawkach: e2e `dron`, `combat`, `umieranie`, `handel`, `autodestrukcja` zielone; Quench **1193/1193**.
+- **Szablony** (A17): dnd5e 6.0 stawia szablony aktywności jako Regiony (`TemplatePlacement`) i woła
+  `dnd5e.createMeasuredTemplate` z danymi regionów; hak 5.3 `preCreateActivityTemplate` odpala już tylko przestarzały
+  `AbilityTemplate`. **Znalezisko:** każdy szablon DS/MS i strefa Ognia zaporowego po cichu straciły flagę — bez
+  wygasania i bez RO przy wejściu w strefę. Flagi na danych regionu, szukanie po naszej fladze w `scene.regions`
+  (regiony dnd5e nie mają nawet `core.MeasuredTemplate`), kasowanie jako Region, obecność żetonu `region.testPoint`.
+  Ostrzeżeń `Scene#templates` było 110 na przebieg — zero.
+- **Przyciski czatu:** 6.0 trzyma deskryptory (`action`, `label: {value, hidden}`) w wiadomości; nasza lokalizacja
+  ST i etykiet RO szukała `dataset.action` i nigdy nie działała. Kliknięty przycisk czytany przez
+  `message.system.getButton` — przycisk zgrupowany (MS: dwie cechy) nie ma własnego `data-dc` (też test zestawem).
+- **Owinięcia z nowymi argumentami:** `_processDamagePart` (`ammo.mjs`) i `getDamageConfig` (`cover.mjs`) gubiły
+  `{formulaOptions, rules}` 6.0 — każdy atak bez kalibru tracił premie obrażeń z reguł (AppliedRules), etykiety
+  obrażeń dane rzutu. Pozostałe owinięte metody — sygnatury jak w 6.0.6; wszystkie słuchane haki `dnd5e.*` istnieją.
+- **Umieranie:** `dnd5e.rollDeathSave` daje w 6.0 `details.outcome` („stable”/„revive”/„death”), nie klucz napisu —
+  trzeci własny sukces zostawiał postać umierającą.
+- **Drony:** rozmieszczenie 6.0 (core `placeTokens`) zwalnia wszystkie żetony, więc rdzeń brał żeton drona stworzony
+  przez MG pod kontrolę gracza; wejście w tryb zdalny z dronem już wybranym nie przeliczało wzroku innych żetonów
+  (postać operatora widziała dalej — także w grze, po kliknięciu drona przed Steruj). Bramka przelicza wszystkie
+  żetony, [Rozłóż] oddaje graczowi wybór. Test czeka na start rozmieszczenia (dnd5e najpierw minimalizuje okna).
+- Zostaje w E4: każdy z 9 typów aktywności użyty w teście (dziś `.use()` tylko KS w e2e `combat`; DS/MS/OZ mają
+  testy typu, dublet, trzy aktywności magazynków i test zestawem — nic); rozmieszczenie szablonu w teście przez
+  podstawienie `TemplatePlacement.prototype._place`.
