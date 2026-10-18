@@ -516,7 +516,8 @@ function _onPreRollDeathSave(config, dialog) {
 function _onRollDeathSave(rolls, details) {
   const actor = details?.subject;
   if (!actor || !wMaszynie(actor)) return;
-  if (details.chatString !== "DND5E.DeathSaveSuccess") return;
+  // dnd5e 6.0: `details.outcome` ("stable" | "revive" | "death" | null); 5.3 sent a chat string key instead.
+  if (details.outcome !== "stable") return;
   details.updates ??= {};
   details.updates[`flags.${MODULE_ID}.${PROSBA}`] = {
     typ: "stabilizuj", zrodlo: "rzuty", nonce: foundry.utils.randomID(), by: game.user.id
