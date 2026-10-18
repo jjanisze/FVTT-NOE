@@ -6,11 +6,12 @@
  * Reads the built LevelDB packs and asserts the invariants that have actually
  * broken during development. Exits non-zero on any failure so it can gate a build.
  *
- * Requires FoundryVTT to be closed (it holds the LevelDB open).
+ * Reads copies: opening a LevelDB rewrites its files, and a check must not churn `packs/`.
  */
 
 import { fileURLToPath } from "node:url";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import { classicLevel } from "../agent/lib/packs.mjs";
 
@@ -40,10 +41,16 @@ const fail = m => failures.push(m);
 // `--out=<dir>` validates a build written with `build-packs.mjs --out=<dir>`.
 const OUT = process.argv.slice(2).find(a => a.startsWith("--out="))?.slice("--out=".length);
 const PACKS_ROOT = OUT ? path.resolve(OUT) : path.join(MODULE_ROOT, "packs");
+const SCRATCH = fs.mkdtempSync(path.join(os.tmpdir(), "neuro-validate-"));
+process.on("exit", () => fs.rmSync(SCRATCH, { recursive: true, force: true }));
 
 async function load(name) {
-  const db = new ClassicLevel(path.join(PACKS_ROOT, name),
-    { keyEncoding: "utf8", valueEncoding: "json" });
+  const copy = fs.mkdtempSync(path.join(SCRATCH, `${name}-`));
+  // Files only (a repaired LevelDB keeps a `lost/` folder); no LOCK, so a running Foundry is no obstacle.
+  for (const f of fs.readdirSync(path.join(PACKS_ROOT, name), { withFileTypes: true })) {
+    if (f.isFile() && f.name !== "LOCK") fs.copyFileSync(path.join(PACKS_ROOT, name, f.name), path.join(copy, f.name));
+  }
+  const db = new ClassicLevel(copy, { keyEncoding: "utf8", valueEncoding: "json", createIfMissing: false });
   await db.open();
   const docs = [];
   for await (const [, v] of db.iterator()) docs.push(v);
@@ -51,19 +58,8 @@ async function load(name) {
   return docs;
 }
 
-let klasyWszystkie, profesje, features, sztuczki, pochodzenia, origins, towarzysze;
-try {
-  [klasyWszystkie, profesje, features, sztuczki, pochodzenia, origins, towarzysze] = await Promise.all(
-    ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "zdolnosci-pochodzenia", "pochodzenia", "towarzysze"].map(load));
-} catch (err) {
-  // classic-level wraps the lock error, so the code lives on `cause`, not on `err`.
-  const code = err.cause?.code ?? err.code;
-  if (code === "LEVEL_LOCKED" || /lock/i.test(err.cause?.message ?? err.message)) {
-    console.error("FoundryVTT is running — close it before validating packs.");
-    process.exit(2);
-  }
-  throw err;
-}
+let [klasyWszystkie, profesje, features, sztuczki, pochodzenia, origins, towarzysze] = await Promise.all(
+  ["klasy", "profesje", "zdolnosci-klasowe", "sztuczki", "zdolnosci-pochodzenia", "pochodzenia", "towarzysze"].map(load));
 
 // Klasa „Towarzysz” (PLAN_m3 §7.8) leży w paczce klas, ale nie jest klasą BG — osobne sprawdzenia niżej.
 // Paczka klas ma też rekord folderu (bez `system`) — liczą się tylko dokumenty klas.
