@@ -6,7 +6,8 @@ dnd5e 6.0.6 check confirms 51 colored stock proficiency/skill rows, five
 category headers and the mixed Trait advancement header. Existing native
 glyphs are now wired for every audited row and header. Four approved Batch 112
 designs plus the two selected Batch 113 designs are delivered; current Acrobatics
-is retained. Only Sleight of Hand awaits revision review in Batch 114. See
+is retained. The selected Batch 114 Sleight of Hand glyph is installed and wired.
+All proficiency/skill UI artwork is complete. See
 [PROFICIENCY_COVERAGE.md](PROFICIENCY_COVERAGE.md) and its per-key JSON.
 
 For the item-art scopes below, **reviewed glyph delivery and source wiring

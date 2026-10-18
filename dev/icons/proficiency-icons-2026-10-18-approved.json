@@ -306,7 +306,7 @@
       "group": "skills",
       "key": "zwi",
       "label": "Zwinne dłonie",
-      "icon": "modules/neuroshima-2026-overrides/icons/items/loot/zetony.svg"
+      "icon": "modules/neuroshima-2026-overrides/icons/proficiencies/zwinne-dlonie.svg"
     },
     {
       "group": "saves",
@@ -387,10 +387,18 @@
         "zastraszanie"
       ],
       "intimidationSelection": "batch113-zastraszanie-twarz"
+    },
+    "114": {
+      "delivered": [
+        "zwinne-dlonie"
+      ],
+      "selection": "batch114-zwinne-dlonie-knykcie"
     }
   },
-  "pendingRevisions": [
-    "zwinne-dlonie"
-  ],
-  "localScreenshot": "review/audits/native-batch-113-approved.png"
+  "pendingRevisions": [],
+  "reviewCards": {
+    "resolved": 552,
+    "pending": 0
+  },
+  "localScreenshot": "review/audits/native-proficiency-final.png"
 }

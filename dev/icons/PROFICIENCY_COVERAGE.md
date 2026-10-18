@@ -1,16 +1,16 @@
 # Proficiency and advancement icon coverage — 2026-10-18
 
 **Wiring complete:** all 51 proficiency/skill rows and six header lookups now
-resolve to approved module glyphs. Six dedicated designs from Batches 112–113
+resolve to approved module glyphs. Seven dedicated designs from Batches 112–114
 are installed, and the GM chose to retain the current Acrobatics glyph.
-Sleight of Hand is the only subject still in revision, using an approved-art substitute.
+All eight proficiency review cards are resolved; no proficiency artwork is pending.
 
 | UI surface | Installed wiring | Dedicated artwork still awaiting review |
 |---|---|---|
 | Armor proficiency rows | 4 distinct armor/shield glyphs | None |
 | Weapon proficiency rows | 7 matching weapon-type glyphs | None |
 | Tool proficiency rows | All 22 matching toolkit glyphs | None |
-| Skill rows | All 18 use native glyphs; History, Vehicles, Intuition and Intimidation delivered; current Acrobatics retained | Sleight of hand |
+| Skill rows | All 18 use native glyphs; five dedicated skill glyphs delivered; current Acrobatics retained | None |
 | Category headers | Armor, weapons, tools, skills and saves use native glyphs; new skills/saves headers delivered | None |
 | Mixed Trait advancement header | Shares the approved new skills header | None |
 | Saving-throw rows | 6 existing monochrome ability SVGs retained | None |
@@ -19,7 +19,7 @@ The original item-art pass did not cover this system UI. Historical evidence:
 [proficiency-icons-2026-10-18.json](proficiency-icons-2026-10-18.json).
 Initial reuse suggestions were checked visually: a leaping rat, pistol hand,
 repair scene and monster face were unsuitable for the corresponding skills.
-The final mapping uses more suitable substitutes while dedicated designs await approval.
+The final mapping uses approved existing glyphs and the seven selected new designs.
 
 The native renderer reads `CONFIG.DND5E.traits[type].configKey`. The new
 [registration](../../scripts/config/proficiency-icons.mjs) supplies separate
@@ -53,16 +53,17 @@ Local screenshots: `review/audits/native-proficiencies.png`,
 `review/audits/native-skills.png`, `review/audits/native-skills-light.png`.
 The installed Batch 112 designs passed the same native check after reload;
 screenshots: `review/audits/native-batch-112-approved.png` and
-`review/audits/native-batch-113-approved.png`.
+`review/audits/native-batch-113-approved.png`. Final Batch 114 wiring:
+`review/audits/native-proficiency-final.png`.
 Poligon follow-up: **Kreator → ikony-bieglosci**; the station was not reseeded.
 
 Exact decisions and delivered hashes are in `reviewed-installed.json` under
-`review/candidates/batch-112/` and `batch-113/`. The GM chose the looming-face
-Intimidation design. Sleight of Hand was returned because the airborne coin
-suggested clumsiness. Batch 114 offers the requested three controlled coin-hand
-variants and one different-concept sleeve-card backup on the same review card.
-Earlier choices remain selectable; saved notes and selected-source hashes are
-retained. Only saved GM approval authorizes the final installation.
+`review/candidates/batch-112/`, `batch-113/` and `batch-114/`. The GM chose the
+looming-face Intimidation design and the Batch 114 knuckle-roll Sleight of Hand
+design. Exact approved masks are installed as SVG/WEBP pairs, and the mapping
+uses every delivered file. All 552 review cards are resolved. Earlier choices,
+saved notes and selected-source hashes remain archived; MISSING contains only
+the 36 outstanding painted images/tokens.
 
 Other advancement types' metadata defaults are recorded in the historical JSON
 as an adjacent scope; this change covers Trait proficiencies and skills.

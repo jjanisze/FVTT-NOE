@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "title": "Batch 114 · Sleight of Hand: three coin variants + one backup awaiting GM review",
+  "title": "Asset review · Batch 114 approved choices delivered; 0 awaiting revision",
   "updated": "2026-10-18",
   "items": [
     {
@@ -15873,8 +15873,8 @@
       "context": "Native character creation, advancement and trait UI: Zwinne dłonie; 16–64 px beside Polish labels. skills.zwi.",
       "request": "Three dexterous coin-control poses with the coin securely touching the hand, plus a different sleeve-card backup. Keep anatomy coherent and avoid an airborne/dropped coin. Earlier options remain available.",
       "current": {
-        "src": "/icons/items/loot/zetony.svg",
-        "note": "Approved existing-art fallback, already wired; dedicated subject pending review."
+        "src": "/icons/proficiencies/zwinne-dlonie.svg",
+        "note": "Exact GM-approved Batch 114 selection, installed as SVG/WEBP."
       },
       "candidates": [
         {
@@ -15913,7 +15913,8 @@
           "src": "candidates/batch-112/zwinne-dlonie.png",
           "note": "ONE complete bare adult HAND dexterously rolling ONE large plain COIN across the knuckles. Back of hand visible, fingers slightly bent and clearly separated with broad black gaps, thumb complete. The single coin is balanced above two knuckles, a simple white disc with one broad black rim cut. No currency symbols, digits, pistol, knife, extra hands, extra coins or tiny skin detail."
         }
-      ]
+      ],
+      "status": "resolved"
     },
     {
       "id": "proficiency-umiejetnosci",

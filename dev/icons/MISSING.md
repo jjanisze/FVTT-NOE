@@ -1,7 +1,6 @@
 # Missing-asset queue
 
-Checked against files on disk, 2026-10-18: **37 missing final images** —
-1 proficiency glyph awaiting revision review, 7 banners,
+Checked against files on disk, 2026-10-18: **36 missing final images** — 7 banners,
 4 wrecks, 9 map objects, 4 companion tokens and 12 bestiary tokens currently
 using generated placeholders. Every final path listed below is absent.
 
@@ -9,23 +8,7 @@ Only outstanding asset requests belong here. Delivery history and remaining
 wiring/world-update tasks are in [FINAL_HANDOFF.md](FINAL_HANDOFF.md);
 batch approvals are under [review/candidates/](review/candidates/).
 
-**Next batch number: 115**. Batch 114: four candidates for the last proficiency glyph await GM review.
-
-<!-- proficiency-batch-114:start -->
-## A. Proficiency UI glyph — 1 awaiting revision review
-
-Batch 114: three controlled coin-hand poses plus one different-concept
-sleeve-card backup, together on the remaining review card. The existing
-approved substitute stays wired until the GM selects and approves a design.
-
-| Subject | Missing SVG (+ WEBP) | Wiring |
-|---|---|---|
-| Zwinne dłonie | `icons/proficiencies/zwinne-dlonie.svg` | `skills.zwi` |
-
-Generic prompts, exact selected-source hash and saved revision notes:
-`review/candidates/batch-114/`. Earlier candidates remain selectable.
-
-<!-- proficiency-batch-114:end -->
+**Next batch number: 115**.
 
 <!-- class-placeholder-audit:start -->
 <!-- class-placeholder-audit:end -->

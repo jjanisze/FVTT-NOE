@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-18",
+  "batch": 114,
+  "active": [
+    {
+      "id": "proficiency-zwinne-dlonie",
+      "name": "Zwinne dłonie",
+      "decision": "approve",
+      "candidateId": "batch114-zwinne-dlonie-knykcie",
+      "selectedSource": "candidates/batch-114/zwinne-dlonie-knykcie.png",
+      "sourceSha256": "e6cf478671a80ce37251efec4859623f0e6860c46e8d586834e3537d8b1bccd9",
+      "sourceKind": "candidate",
+      "target": "icons/proficiencies/zwinne-dlonie.svg",
+      "notes": "Almost good.",
+      "feedback": {
+        "itemId": "proficiency-zwinne-dlonie",
+        "decision": "approve",
+        "candidateId": "batch114-zwinne-dlonie-knykcie",
+        "notes": "Almost good.",
+        "updatedAt": "2026-10-18T16:36:05.877Z"
+      },
+      "feedbackSha256": "abfa231aa8fdb579ff2b27ec697ddd0e90f25b712c1bdbce2683de52d2f512ed"
+    }
+  ]
+}

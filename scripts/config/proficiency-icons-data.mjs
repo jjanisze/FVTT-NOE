@@ -1,4 +1,4 @@
-/** Approved native glyphs for trait UI. Sleight of Hand awaits its final design. */
+/** GM-approved native glyphs for all proficiency and skill UI. */
 const ROOT = "modules/neuroshima-2026-overrides/icons";
 const ability = name => `${ROOT}/abilities/${name}.svg`;
 
@@ -33,7 +33,7 @@ export const SKILL_ICONS = {
   tre: ability("oswajanie-zwierzat"),
   wys: ability("muzyk"),
   zas: `${ROOT}/proficiencies/zastraszanie.svg`,
-  zwi: `${ROOT}/items/loot/zetony.svg`
+  zwi: `${ROOT}/proficiencies/zwinne-dlonie.svg`
 };
 
 export const TRAIT_CATEGORY_ICONS = {

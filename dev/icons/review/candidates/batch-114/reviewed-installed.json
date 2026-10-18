@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-18",
+  "batch": 114,
+  "installed": [
+    {
+      "itemId": "proficiency-zwinne-dlonie",
+      "candidateId": "batch114-zwinne-dlonie-knykcie",
+      "source": "candidates/batch-114/zwinne-dlonie-knykcie.png",
+      "sourceSha256": "e6cf478671a80ce37251efec4859623f0e6860c46e8d586834e3537d8b1bccd9",
+      "files": [
+        {
+          "source": "icons/proficiencies/zwinne-dlonie.svg",
+          "sha256": "2f9d745ef1b49b7a7341cb7edb29e368fb5abf72c5928a42a878f098c5e01c65"
+        },
+        {
+          "source": "icons/proficiencies/zwinne-dlonie.webp",
+          "sha256": "8f05430ce59dd051dc268c3d4b7b26ea4ac6011a401c96655544bbe39de2ee22"
+        }
+      ]
+    }
+  ],
+  "keptCurrent": [],
+  "approvedSubjects": 1,
+  "remainingSubjects": 0
+}

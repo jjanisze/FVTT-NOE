@@ -287,6 +287,12 @@ They were AI-generated with OpenAI's built-in image tool and normalized without
 redrawing. Exact choices and hashes:
 `dev/icons/review/candidates/batch-113/reviewed-installed.json`.
 
+The GM-selected Batch 114 knuckle-roll design for Sleight of Hand was installed
+on 2026-10-18 as `icons/proficiencies/zwinne-dlonie.svg` and `.webp`. It was
+AI-generated with OpenAI's built-in image tool; the approved mask is unchanged.
+Exact selection and hashes:
+`dev/icons/review/candidates/batch-114/reviewed-installed.json`.
+
 ## M5 trader and upkeep illustrations
 
 Delivered 2026-10-12 from the GM's edited PNG sources. The existing packer only

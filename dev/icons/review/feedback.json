@@ -3846,10 +3846,10 @@
     },
     "proficiency-zwinne-dlonie": {
       "itemId": "proficiency-zwinne-dlonie",
-      "decision": "pending",
-      "candidateId": "batch114-zwinne-dlonie-chwyt",
-      "notes": "",
-      "updatedAt": "2026-10-18T16:00:48.867Z"
+      "decision": "approve",
+      "candidateId": "batch114-zwinne-dlonie-knykcie",
+      "notes": "Almost good.",
+      "updatedAt": "2026-10-18T16:36:05.877Z"
     },
     "proficiency-umiejetnosci": {
       "itemId": "proficiency-umiejetnosci",

@@ -52,3 +52,8 @@ They share one delivery target and one review card; only the selected approved
 candidate is installed. Earlier options remain selectable.
 The atlas palming pose had an extra digit; an isolated image edit removes it.
 Its exact prompt, source crop and corrected output are preserved with Batch 114.
+
+Batch 114 review consumed: the GM chose `batch114-zwinne-dlonie-knykcie`.
+Its exact SVG/WEBP pair is installed at `icons/proficiencies/zwinne-dlonie.*`
+and wired to `skills.zwi`. `accept.py --batch 114 --check` verifies the delivery.
+All eight proficiency cards are resolved; no further generation or wiring remains.
