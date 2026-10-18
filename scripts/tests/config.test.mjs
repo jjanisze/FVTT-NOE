@@ -218,21 +218,23 @@ export function registerConfigTests(quench) {
       // Świeży świat: okno powitalne dnd5e 6 otwiera się po naszym `ready`, pokazuje jednostki sprzed wymuszenia
       // i zamknięte (choćby krzyżykiem) zapisuje je z powrotem, a źródła kompendiów — pod wybrane reguły.
       it("zamknięcie okna powitalnego dnd5e nie zostawia stóp, funtów ani paczek fantasy (E10)", async function () {
-        this.timeout(10000);
+        // Każda zmiana jednostek przelicza wszystkich aktorów (`encumbrance-config.mjs`) — po pełnym e2e w świecie wydania
+        // to ~2 s na przeliczenie (200 aktorów); okno i nasze przywrócenie zmieniają je dwa razy.
+        this.timeout(30000);
         const metric = ["metricWeightUnits", "metricLengthUnits", "metricVolumeUnits"];
         await game.settings.set("dnd5e", "firstRun", true);
         dnd5e.settings.firstRun = true;
         try {
           for (const key of metric) dnd5e.settings[key] = false; // to, co okno pokazałoby przed wymuszeniem
           const app = new dnd5e.applications.WelcomeScreen();
-          // Lista oficjalnych modułów idzie z GitHuba (bez limitu czasu) — w świeżym świecie test czekał na sieć.
+          // Lista oficjalnych modułów idzie z GitHuba bez limitu czasu — test nie zależy od sieci.
           app.getModules = async () => ({});
           await app.render({ force: true });
           await app.close({ animate: false });
-          await waitFor(() => game.settings.get("dnd5e", "firstRun") === false, { label: "okno zapisało ustawienia" });
-          await waitFor(() => metric.every(key => game.settings.get("dnd5e", key) === true), { label: "jednostki metryczne z powrotem" });
+          await waitFor(() => game.settings.get("dnd5e", "firstRun") === false, { label: "okno zapisało ustawienia", timeout: 12000 });
+          await waitFor(() => metric.every(key => game.settings.get("dnd5e", key) === true), { label: "jednostki metryczne z powrotem", timeout: 12000 });
           await waitFor(() => ["dnd5e.classes24", "dnd5e.spells24"].every(k => game.settings.get("dnd5e", "packSourceConfiguration")?.[k] === false),
-            { label: "paczki fantasy 2024 znowu ukryte" });
+            { label: "paczki fantasy 2024 znowu ukryte", timeout: 12000 });
         } finally {
           for (const key of metric) dnd5e.settings[key] = game.settings.get("dnd5e", key);
           if (game.settings.get("dnd5e", "firstRun")) await game.settings.set("dnd5e", "firstRun", false);

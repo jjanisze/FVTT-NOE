@@ -809,9 +809,12 @@ tam, gdzie daje dokładnie RAW; ponad RAW — wyłączone bez pytania.
 - Dokumenty tymczasowe w 6.0 działają (postać z klasą przygotowuje się bez błędu) — TESTING.md §5 poprawione.
 - **Bramka wydania** (`239d70b`, `logs/release/0.19.1-2026-10-18T11-44-28.json`): static, generatory, zip, paczki,
   wersje zielone; e2e **21/21 w świecie gołym i 21/21 w zalecanym**, 0 ostrzeżeń zgodności z naszego kodu; Quench
-  1207/1208 — nowy test okna powitalnego przekroczył 10 s: okno pobiera listę oficjalnych modułów z GitHuba bez
-  limitu czasu, a izolowany kontekst przeglądarki nie ma jej w pamięci. Test podstawia tę listę; świeży świat:
-  Quench **1209/1209**. Powtórka bramki na nowym commicie — niżej.
+  1207/1208 — nowy test okna powitalnego przekroczył 10 s. Pierwsze podejrzenie (lista modułów z GitHuba, `ea6626b`)
+  było złe: powtórka (`ea6626b`, `logs/release/0.19.1-2026-10-18T12-36-22.json`) — znowu 1208/1209, ten sam test.
+  Przyczyna: w świecie zalecanym Quench idzie **po** 21 paczkach e2e (202 aktorów, 3001 przedmiotów), a każda zmiana
+  jednostki przeliczała wszystkich aktorów (`encumbrance-config.mjs`, ~2 s) — trzy przełączniki w tę i z powrotem to
+  6 przeliczeń, ~12 s. Teraz jedno przeliczenie na serię zmian (debounce), test ma 30 s. W świeżym świecie
+  (tylko `boot`) tego nie widać.
 - **Poprawka inwentarza:** podkładki kluczy efektów dnd5e 6.0.6 są **ciche** (żaden wpis `SHIM_FIELDS` nie ma
   `warning`) — bramka ostrzeżeń ich nie złapie; pilnuje test kluczy w Quenchu (`70e3779`).
 - Zostaje: przejście MG po Poligonie (warstwa 7).

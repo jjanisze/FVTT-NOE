@@ -51,10 +51,14 @@ const METRIC_SETTINGS = ["metricWeightUnits", "metricLengthUnits", "metricVolume
  * encumbrance stays computed in the old units until the actor is prepared again: re-prepare on a change.
  */
 function registerMetricUnits() {
-  const onUnitsChanged = setting => {
-    if (!METRIC_SETTINGS.some(key => setting.key === `dnd5e.${key}`)) return;
+  // The three switches change together (our enforcement, dnd5e's welcome window): one re-preparation per burst — a
+  // full reset is ~2 s in a world of 200 actors, and it used to run once per switch.
+  const resetAll = foundry.utils.debounce(() => {
     for (const actor of game.actors ?? []) actor.reset();
     for (const token of canvas?.tokens?.placeables ?? []) if (!token.document.actorLink) token.actor?.reset();
+  }, 50);
+  const onUnitsChanged = setting => {
+    if (METRIC_SETTINGS.some(key => setting.key === `dnd5e.${key}`)) resetAll();
   };
   Hooks.on("createSetting", onUnitsChanged);
   Hooks.on("updateSetting", onUnitsChanged);
