@@ -1,1 +1,5 @@
-2026/10/18-19:29:26.123 a680 Delete type=3 #1
+2026/10/18-19:29:38.879 8ecc Recovering log #3
+2026/10/18-19:29:38.879 8ecc Level-0 table #5: started
+2026/10/18-19:29:38.881 8ecc Level-0 table #5: 11108 bytes OK
+2026/10/18-19:29:38.884 8ecc Delete type=0 #3
+2026/10/18-19:29:38.884 8ecc Delete type=3 #2
