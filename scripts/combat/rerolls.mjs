@@ -313,34 +313,21 @@ async function _onClickForsowanie(event) {
     : "";
 
   // Confirmation dialog
-  const confirmed = await new Promise(resolve => {
-    new Dialog({
-      title: "Forsowanie",
-      content: `
-        <div style="padding: 4px 0;">
-          <p><strong>${actor.name}</strong> forsuje test.</p>
-          <p>Przerzut: <strong>k20 + ${abilityLabel} (${abilityScore})</strong></p>
-          <p style="color: #e67e22; font-weight: bold;">
-            Koszt: +1 Wyczerpanie (${currentExhaustion} → ${currentExhaustion + 1}/6)
-          </p>
-          ${deathWarning}
-        </div>
-      `,
-      buttons: {
-        yes: {
-          icon: '<i class="fas fa-bolt"></i>',
-          label: "Forsuj!",
-          callback: () => resolve(true)
-        },
-        no: {
-          icon: '<i class="fas fa-times"></i>',
-          label: "Anuluj",
-          callback: () => resolve(false)
-        }
-      },
-      default: "no",
-      close: () => resolve(false)
-    }).render(true);
+  const confirmed = await foundry.applications.api.DialogV2.confirm({
+    window: { title: "Forsowanie" },
+    content: `
+      <div style="padding: 4px 0;">
+        <p><strong>${actor.name}</strong> forsuje test.</p>
+        <p>Przerzut: <strong>k20 + ${abilityLabel} (${abilityScore})</strong></p>
+        <p style="color: #e67e22; font-weight: bold;">
+          Koszt: +1 Wyczerpanie (${currentExhaustion} → ${currentExhaustion + 1}/6)
+        </p>
+        ${deathWarning}
+      </div>
+    `,
+    yes: { icon: "fas fa-bolt", label: "Forsuj!" },
+    no: { icon: "fas fa-times", label: "Anuluj", default: true },
+    rejectClose: false
   });
 
   if (!confirmed) return;
@@ -424,34 +411,21 @@ async function _onClickFuks(event) {
   const rollDesc = _describeRoll(originalMessage);
 
   // Confirmation dialog
-  const confirmed = await new Promise(resolve => {
-    new Dialog({
-      title: "Fuks",
-      content: `
-        <div style="padding: 4px 0;">
-          <p><strong>${actor.name}</strong> używa Fuksa!</p>
-          <p>Przerzut: <strong>${rollDesc}</strong> (${originalRoll.formula})</p>
-          <p style="color: #27ae60; font-weight: bold;">
-            Koszt: 1 Fuks (${fuksy} → ${fuksy - 1}/${MAX_FUKSY})
-          </p>
-          <p style="font-size: 11px; color: var(--color-text-secondary, #aaa);">Nowy wynik musisz zaakceptować.</p>
-        </div>
-      `,
-      buttons: {
-        yes: {
-          icon: '<i class="fas fa-dice"></i>',
-          label: "Użyj Fuksa!",
-          callback: () => resolve(true)
-        },
-        no: {
-          icon: '<i class="fas fa-times"></i>',
-          label: "Anuluj",
-          callback: () => resolve(false)
-        }
-      },
-      default: "no",
-      close: () => resolve(false)
-    }).render(true);
+  const confirmed = await foundry.applications.api.DialogV2.confirm({
+    window: { title: "Fuks" },
+    content: `
+      <div style="padding: 4px 0;">
+        <p><strong>${actor.name}</strong> używa Fuksa!</p>
+        <p>Przerzut: <strong>${rollDesc}</strong> (${originalRoll.formula})</p>
+        <p style="color: #27ae60; font-weight: bold;">
+          Koszt: 1 Fuks (${fuksy} → ${fuksy - 1}/${MAX_FUKSY})
+        </p>
+        <p style="font-size: 11px; color: var(--color-text-secondary, #aaa);">Nowy wynik musisz zaakceptować.</p>
+      </div>
+    `,
+    yes: { icon: "fas fa-dice", label: "Użyj Fuksa!" },
+    no: { icon: "fas fa-times", label: "Anuluj", default: true },
+    rejectClose: false
   });
 
   if (!confirmed) return;

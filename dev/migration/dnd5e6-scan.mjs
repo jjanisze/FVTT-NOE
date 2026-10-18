@@ -56,6 +56,8 @@ export const RULES = [
   // Core v14: the V1 Application framework is deprecated (Dialog → foundry.applications.api.DialogV2).
   { id: "v1-dialog", stage: "E7", what: "V1 Dialog / Application → DialogV2 / ApplicationV2 (core v14 deprecation)",
     test: /new Dialog\(|\bDialog\.(confirm|prompt|wait)\(|extends (Application|FormApplication|Dialog)\b|new FormApplication/, files: /\.m?js$/ },
+  { id: "relative-uuid", stage: "E7", what: "ClientDocument#getRelativeUUID (core v14 deprecation) → foundry.utils.buildRelativeUuid(doc, relativeTo)",
+    test: /\.getRelativeUUID\(/, files: /\.m?js$/ },
   // §3.12 — renamed prepared-data paths: no shim for reads, `undefined` under the old key.
   { id: "movement", stage: "E3", what: "attributes.movement.<type> → attributes.movement.speeds.<type>",
     test: /movement\??\.(walk|fly|swim|climb|burrow|hover)\b|["']system\.attributes\.movement\.(walk|fly|swim|climb|burrow)["']|movement\.\$\{(?!.*speeds)/ },

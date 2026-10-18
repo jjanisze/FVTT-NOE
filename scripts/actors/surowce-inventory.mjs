@@ -351,7 +351,7 @@ function _qtyCellHtml(item, totalQty) {
 function _controlsCellHtml(actor, item) {
   if (!item) return `<div class="item-detail" style="flex:0 0 132px;"></div>`;
   const equipped = !!item.system.equipped;
-  const favorited = !!actor.system.hasFavorite?.(item.getRelativeUUID(actor));
+  const favorited = !!actor.system.hasFavorite?.(foundry.utils.buildRelativeUuid(item, actor));
   return `
     <div class="item-detail item-controls always-visible" style="flex:0 0 132px; display:flex; align-items:center; justify-content:flex-end; gap:6px;">
       <button type="button" class="unbutton config-button surowiec-chat" title="Wyświetl w czacie" style="color:#ccc;"><i class="fa-solid fa-message" inert></i></button>
@@ -404,7 +404,7 @@ function _wireRow(li, actor, item, type) {
   });
   li.querySelector(".surowiec-favorite")?.addEventListener("click", async (e) => {
     e.preventDefault();
-    const uuid = item.getRelativeUUID(actor);
+    const uuid = foundry.utils.buildRelativeUuid(item, actor);
     if (actor.system.hasFavorite?.(uuid)) await actor.system.removeFavorite(uuid);
     else await actor.system.addFavorite({ type: "item", id: uuid });
   });

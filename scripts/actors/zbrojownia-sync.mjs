@@ -231,8 +231,8 @@ function _onRenderActorSheet(app, html) {
   btn.addEventListener("click", async (ev) => {
     ev.preventDefault();
     ev.stopPropagation();
-    const confirmed = await Dialog.confirm({
-      title: "Synchronizuj zbrojownię",
+    const confirmed = await foundry.applications.api.DialogV2.confirm({
+      window: { title: "Synchronizuj zbrojownię" },
       content: `<p>Wypchnąć wszystkie bronie, amunicję i ładunki z <strong>${actor.name}</strong> do katalogu Items?</p>
                 <p><em>Istniejące world items zostaną nadpisane. Operacja nie usuwa przedmiotów.</em></p>`,
     });

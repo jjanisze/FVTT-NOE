@@ -538,19 +538,23 @@ async function promptExhaustionSource(actor, count) {
     `).join("")}
   `;
 
-  new Dialog({
-    title: "Źródło Wyczerpania",
+  // DialogV2 (core v14 deprecates V1 `Dialog`); fire-and-forget as before — the raw update was already blocked.
+  void foundry.applications.api.DialogV2.wait({
+    window: { title: "Źródło Wyczerpania" },
     content,
-    buttons: {
-      confirm: {
-        icon: '<i class="fas fa-check"></i>',
+    rejectClose: false,
+    buttons: [{
+        action: "confirm",
+        icon: "fas fa-check",
         label: "Zatwierdź",
-        callback: async (html) => {
+        default: true,
+        callback: async (_event, button) => {
+          const html = button.form;
           // Collect all sources and apply in a single batched update
           // to avoid race conditions with sequential actor.update() calls
           const keys = [];
           for (let i = 0; i < count; i++) {
-            keys.push(html.find(`[name="source-${i}"]`).val());
+            keys.push(html.querySelector(`[name="source-${i}"]`)?.value);
           }
 
           const currentLevel = poziomWyczerpania(actor);
@@ -576,15 +580,13 @@ async function promptExhaustionSource(actor, count) {
             });
           }
         }
-      },
-      cancel: {
-        icon: '<i class="fas fa-times"></i>',
+      }, {
+        action: "cancel",
+        icon: "fas fa-times",
         label: "Anuluj"
         // Do nothing — the raw update was already blocked
-      }
-    },
-    default: "confirm"
-  }).render(true);
+      }]
+  });
 }
 
 /**
@@ -618,17 +620,20 @@ async function promptExhaustionRemoval(actor, count) {
     ${sourceRows}
   `;
 
-  new Dialog({
-    title: "Usunięcie Wyczerpania",
+  // DialogV2 (core v14 deprecates V1 `Dialog`); fire-and-forget as before — the raw update was already blocked.
+  void foundry.applications.api.DialogV2.wait({
+    window: { title: "Usunięcie Wyczerpania" },
     content,
-    buttons: {
-      confirm: {
-        icon: '<i class="fas fa-check"></i>',
+    rejectClose: false,
+    buttons: [{
+        action: "confirm",
+        icon: "fas fa-check",
         label: "Zatwierdź",
-        callback: async (html) => {
-          const checked = html.find('[name="remove"]:checked')
-            .map((_, el) => Number(el.value))
-            .get()
+        default: true,
+        callback: async (_event, button) => {
+          const html = button.form;
+          const checked = [...html.querySelectorAll('[name="remove"]:checked')]
+            .map(el => Number(el.value))
             .sort((a, b) => b - a); // reverse order so splice indices stay valid
 
           if (!checked.length) return;
@@ -653,13 +658,11 @@ async function promptExhaustionRemoval(actor, count) {
             });
           }
         }
-      },
-      cancel: {
-        icon: '<i class="fas fa-times"></i>',
+      }, {
+        action: "cancel",
+        icon: "fas fa-times",
         label: "Anuluj"
         // Do nothing — the raw update was already blocked
-      }
-    },
-    default: "confirm"
-  }).render(true);
+      }]
+  });
 }

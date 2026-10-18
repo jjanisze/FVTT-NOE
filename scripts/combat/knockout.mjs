@@ -160,37 +160,24 @@ function onPreApplyDamage(actor, amount, updates, options) {
  */
 async function _showKnockoutDialog(actor, amount, updates, options, attackerName) {
   try {
-    const confirmed = await new Promise(resolve => {
-      new Dialog({
-        title: "Nokautowanie",
-        content: `
-          <div style="padding: 4px 0;">
-            <p><strong>${attackerName}</strong> właśnie zredukował PW
-              <strong>${actor.name}</strong> do 0 atakiem obuchowym.</p>
-            <hr>
-            <p>Możesz <strong>znokautować</strong> cel zamiast go zabić:</p>
-            <ul style="margin: 4px 0; padding-left: 20px; font-size: 12px;">
-              <li>PW celu ustawione na <strong>1</strong></li>
-              <li>Cel otrzymuje stan <strong>Nieprzytomność</strong></li>
-              <li>Budzi się po Krótkim odpoczynku lub leczeniu</li>
-            </ul>
-          </div>
-        `,
-        buttons: {
-          knockout: {
-            icon: '<i class="fas fa-fist-raised"></i>',
-            label: "Nokautuj",
-            callback: () => resolve(true)
-          },
-          kill: {
-            icon: '<i class="fas fa-skull"></i>',
-            label: "Normalne obrażenia",
-            callback: () => resolve(false)
-          }
-        },
-        default: "knockout",
-        close: () => resolve(false)
-      }).render(true);
+    const confirmed = await foundry.applications.api.DialogV2.confirm({
+      window: { title: "Nokautowanie" },
+      content: `
+        <div style="padding: 4px 0;">
+          <p><strong>${attackerName}</strong> właśnie zredukował PW
+            <strong>${actor.name}</strong> do 0 atakiem obuchowym.</p>
+          <hr>
+          <p>Możesz <strong>znokautować</strong> cel zamiast go zabić:</p>
+          <ul style="margin: 4px 0; padding-left: 20px; font-size: 12px;">
+            <li>PW celu ustawione na <strong>1</strong></li>
+            <li>Cel otrzymuje stan <strong>Nieprzytomność</strong></li>
+            <li>Budzi się po Krótkim odpoczynku lub leczeniu</li>
+          </ul>
+        </div>
+      `,
+      yes: { icon: "fas fa-fist-raised", label: "Nokautuj", default: true },
+      no: { icon: "fas fa-skull", label: "Normalne obrażenia" },
+      rejectClose: false
     });
 
     if (confirmed) {
