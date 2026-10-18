@@ -30,10 +30,10 @@ dni pracy agentów — wąskim gardłem są decyzje i przeglądy MG oraz grafika
 
 ```mermaid
 flowchart LR
-  P["3. Porządki"] --> M6["4. M6 + Biegłości profesji"]
-  M6 --> PM["5. PM1, PM7<br/>(zmieniają dane)"]
-  PM --> M4["6. M4 Pojazdy — w całości"]
-  M4 --> ST["7. Style i motywy"]
+  P["3. Porządki"] --> M4["4. M4 Pojazdy (część 1 i 2)"]
+  M4 --> M6["5. M6 + Biegłości profesji"]
+  M6 --> PM["6. PM1, PM7<br/>(zmieniają dane)"]
+  PM --> ST["7. Style i motywy"]
   ST --> RC{{"8. Kandydat: zamrożenie modeli, B1–B8<br/>beta + zwiastun przed świętami"}}
   RC --> GG["9. Styczeń: kampania testowa<br/>„Za garść gambli”"]
 ```
@@ -51,11 +51,12 @@ flowchart LR
    `poligon:start` (bez `--klon`) otwiera świat Poligonu. **MG:** zgłoszenie błędu dnd5e `Infinite`
    (`data/active-effect/condition.mjs`, nadal na `master`; 6.0.6 to wciąż najnowsze wydanie) — nasza podkładka
    `config/dnd5e-fixes.mjs` do zdjęcia po poprawce.
-4. **M6 z Biegłościami profesji** (dziura w B6) i pozostałymi drobnymi zasadami (§3).
-5. **PM1 i PM7** — zmieniają zapisane dane (TT jako obliczenia KP dnd5e, identyfikatory istot), więc przed
+4. **M4 Pojazdy — w całości, przed betą; przed M6** (MG, 2026-10-18) — **plan:
+   [PLAN_m4_pojazdy.md](PLAN_m4_pojazdy.md)**: część 1 (pojazdy na mapie taktycznej, jadący, silnik, awarie, naprawy),
+   część 2 (pościg).
+5. **M6 z Biegłościami profesji** (dziura w B6) i pozostałymi drobnymi zasadami (§3).
+6. **PM1 i PM7** — zmieniają zapisane dane (TT jako obliczenia KP dnd5e, identyfikatory istot), więc przed
    zamrożeniem modeli. Pozostałe PM po becie, chyba że coś blokują (MG, 2026-10-18).
-6. **M4 Pojazdy — w całości, przed betą** (MG, 2026-10-18). Projekt `PLAN_poscigi.md` §10 sprzed migracji — odświeżyć
-   pod karty pojazdów dnd5e 6.
 7. **Style i motywy (graficzne odświeżenie)** — przed betą, bo zwiastun to przekrój wszystkiego, co NOE ma w
    Foundry: pościg, drony z kamerą i OSD, walka z efektami, karty postaci, handel (MG, 2026-10-18). Czat (ciemne karty
    dnd5e 6 po D8 migracji), PM13 (podsumowania kart), stanowiska Poligonu Garderoba i Galeria, reszta ilustracji M5

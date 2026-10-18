@@ -5,6 +5,9 @@
 > i recentrowanie pola, GMT400 i ścigający. Nie ma jeszcze: karty pojazdu, manewrów,
 > tabel k20. Stan po punktach — §10.
 >
+> **2026-10-18: karta pojazdu, manewry, awarie i komplikacje (§4–§7) projektuje od nowa
+> [PLAN_m4_pojazdy.md](PLAN_m4_pojazdy.md)** — tamten plan wygrywa przy rozbieżności. Plansza (§2) zostaje tutaj.
+>
 > Dokument projektowy — pisz tutaj, implementuj w `scripts/scenes/poscig-*.mjs`,
 > `scripts/actors/vehicle-sheet.mjs`, `scripts/config/vehicles-data.mjs`.
 >
