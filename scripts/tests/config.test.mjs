@@ -22,7 +22,7 @@ import { pwGainOnAdvancement } from "../actors/pw.mjs";
 import { SZYBKOSC_STARTOWA_M, potrzebujeSzybkosci } from "../actors/character-defaults.mjs";
 import { KOBALT_CLASS_FEATURES } from "../wkk/config/class-features-data.mjs";
 import { filterKobaltPool } from "../actors/kobalt-advancement.mjs";
-import { MODULE_ID, scratchActor, scratchCleanup } from "./helpers.mjs";
+import { MODULE_ID, scratchActor, scratchCleanup, waitFor } from "./helpers.mjs";
 import { UDZWIG_MAX_STATUS } from "../actors/udzwig-slowdown.mjs";
 
 /** Sprawdza, że plik istnieje na serwerze — literówka w ścieżce ikony jest niewidoczna w UI. */
@@ -213,6 +213,28 @@ export function registerConfigTests(quench) {
         expect(rows.map(r => r.key).sort(), "ustawienia nieznane tej wersji dnd5e").to.deep.equal(Object.keys(table).sort());
         // Wymuszane na `ready` aktywnego MG — świat testów to ten sam klient.
         for (const r of rows) expect(r.current, `${r.key}: ${r.why}`).to.equal(r.required);
+      });
+
+      // Świeży świat: okno powitalne dnd5e 6 otwiera się po naszym `ready`, pokazuje jednostki sprzed wymuszenia
+      // i zamknięte (choćby krzyżykiem) zapisuje je z powrotem, a źródła kompendiów — pod wybrane reguły.
+      it("zamknięcie okna powitalnego dnd5e nie zostawia stóp, funtów ani paczek fantasy (E10)", async function () {
+        this.timeout(10000);
+        const metric = ["metricWeightUnits", "metricLengthUnits", "metricVolumeUnits"];
+        await game.settings.set("dnd5e", "firstRun", true);
+        dnd5e.settings.firstRun = true;
+        try {
+          for (const key of metric) dnd5e.settings[key] = false; // to, co okno pokazałoby przed wymuszeniem
+          const app = new dnd5e.applications.WelcomeScreen();
+          await app.render({ force: true });
+          await app.close({ animate: false });
+          await waitFor(() => game.settings.get("dnd5e", "firstRun") === false, { label: "okno zapisało ustawienia" });
+          await waitFor(() => metric.every(key => game.settings.get("dnd5e", key) === true), { label: "jednostki metryczne z powrotem" });
+          await waitFor(() => ["dnd5e.classes24", "dnd5e.spells24"].every(k => game.settings.get("dnd5e", "packSourceConfiguration")?.[k] === false),
+            { label: "paczki fantasy 2024 znowu ukryte" });
+        } finally {
+          for (const key of metric) dnd5e.settings[key] = game.settings.get("dnd5e", key);
+          if (game.settings.get("dnd5e", "firstRun")) await game.settings.set("dnd5e", "firstRun", false);
+        }
       });
 
       // NOE, Eksploracja, „Spadanie”: 1k6 za każde 1,5 m, bez górnej granicy (5e 2024: 1k6 za 3 m, najwyżej 20k6).

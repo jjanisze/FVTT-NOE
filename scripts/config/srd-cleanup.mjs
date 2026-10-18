@@ -86,6 +86,13 @@ export function registerSrdCleanup() {
     // Second mechanism (see file header): drop the same packs out of dnd5e's own
     // Compendium Browser source list, one GM write, idempotent.
     if (game.user.isGM) await hideFromCompendiumBrowser();
+    // dnd5e 6's first-run welcome window (fresh world, after `ready`) submits on close and rewrites the sources for
+    // the rules version it offers — the 2024 fantasy packs come back. Hide them again after any such write.
+    const onSources = setting => {
+      if (setting.key === "dnd5e.packSourceConfiguration" && game.users.activeGM?.isSelf) void hideFromCompendiumBrowser();
+    };
+    Hooks.on("createSetting", onSources);
+    Hooks.on("updateSetting", onSources);
 
     console.log(`${MODULE_ID} | SRD fantasy packs hidden: ${hidden}`);
   });

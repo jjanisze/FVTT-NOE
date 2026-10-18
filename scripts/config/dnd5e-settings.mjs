@@ -48,8 +48,19 @@ export function enforcedSettingsState() {
     });
 }
 
-/** Set every enforced setting that differs — world settings on the active GM, client ones on every client. */
-export async function enforceDnd5eSettings() {
+let _queue = Promise.resolve();
+
+/**
+ * Set every enforced setting that differs — world settings on the active GM, client ones on every client. Runs one
+ * at a time: a write made while a pass is still running waits for it instead of setting the same keys twice.
+ */
+export function enforceDnd5eSettings() {
+  const run = _queue.then(_enforce);
+  _queue = run.catch(err => console.error(`${MODULE_ID} | ustawienia dnd5e`, err));
+  return run;
+}
+
+async function _enforce() {
   const gm = !!game.users.activeGM?.isSelf;
   const changed = [];
   for (const s of enforcedSettingsState()) {
@@ -99,8 +110,24 @@ function _lockFields(app, element) {
   }
 }
 
+/**
+ * Puts back an enforced world setting that something else changed. dnd5e 6's first-run welcome window opens on a fresh
+ * world after our `ready`, renders the units as they were (imperial) and submits on close — closing it unanswered
+ * included — writing them over ours. On the active GM only; client settings are never written by another client.
+ */
+function _onSettingChanged(setting) {
+  const [ns, key] = [setting.key.slice(0, setting.key.indexOf(".")), setting.key.slice(setting.key.indexOf(".") + 1)];
+  const s = ns === "dnd5e" ? ENFORCED_DND5E_SETTINGS[key] : null;
+  if (!s || s.client || !game.users.activeGM?.isSelf) return;
+  if (game.settings.get("dnd5e", key) !== s.value) void enforceDnd5eSettings();
+}
+
 export function registerDnd5eSettings() {
-  Hooks.once("ready", () => { void enforceDnd5eSettings(); });
+  Hooks.once("ready", () => {
+    void enforceDnd5eSettings();
+    Hooks.on("createSetting", _onSettingChanged);
+    Hooks.on("updateSetting", _onSettingChanged);
+  });
   Hooks.on("renderSettingsConfig", _lockFields);
   Hooks.on("renderApplicationV2", (app, element) => {
     const Base = globalThis.dnd5e?.applications?.settings?.BaseSettingsConfig;
