@@ -737,3 +737,19 @@ celu i `dnd5e.preCalculateDamage`, EMP ×0 dla żywych z plakietką na grupie. Q
   przebiegi E4–E6 w `logs/e2e/2026-10-18*`. Karty 6.0 są ciemne i wyżej upakowane (D8: wygląd później).
 - Niestabilne w świecie używanym ponownie (`--reuse`), zielone przy powtórce: `bebeszenie` (wiadomość D10 przed
   rzutem) i błąd zasiewu „Scene … does not exist” w pierwszej paczce przebiegu — do E10.
+
+**2026-10-18 — E7 zrobione** (`dd616b4`, `40a6f78`, e2e `zagrozenia` dopasowane). Pełny przebieg w świeżym świecie
+(`logs/e2e/2026-10-18T03-01-20`): Quench **1204/1204**, e2e **20/21** — jedyna czerwona `zagrozenia` szukała okna
+Fuksa V1; po poprawce zielona (21/21). **Ostrzeżenia zgodności z naszego kodu: 0** (po E2: 243, po E3: 113).
+- **Okna:** ostatnie V1 `Dialog` → DialogV2 (Fuks, Forsowanie, Nokautowanie, źródło i usunięcie Wyczerpania,
+  synchronizacja zbrojowni; wcześniej w E4 wybór serii i osłona); `getRelativeUUID` → `buildRelativeUuid` (A18).
+  Skaner pilnuje `v1-dialog` i `relative-uuid` na zerze.
+- **Tłumaczenie (D10):** 19 kluczy usuniętych przez dnd5e na następcach; audyt naszych ekranów (karty postaci i BN
+  z zakładkami i trybem edycji, karty przedmiotów, okna rzutów, odpoczynki, efekt, karty czatu 6.0 z tacką, ustawienia
+  dnd5e) — z 221 angielskich napisów po polsku wszystkie poza funkcjami czysto fantasy (cechy specjalne D&D, akcje
+  legendarne, kryjówki, siedliska, skarby, czary) i napisami rdzenia. **Znalezisko:** `pl.json` miał zdublowane klucze
+  (trzy bloki `DND5E.ITEM`, dwa `DND5E.WEAPON`) — JSON bierze ostatni, więc 34 tłumaczenia (m.in. nazwy cech przedmiotów)
+  nigdy się nie wyświetlały; scalone, a 48 kluczy, których żaden dnd5e od 5.3 nie ma, usunięte. `npm test` łapie
+  duplikaty (`dev/lang-check.mjs`), Quench — klucze `DND5E.*` spoza zainstalowanego `en.json`.
+- Arkusze, okna KO/DO, lalka, pas, Zasoby, karta pojazdu, HUD-y: e2e `postac`, `towarzysz*`, `dron`,
+  `rekonwalescencja`, `postoj` zielone; audyt otworzył każdą zakładkę bez błędu. Selektory CSS — bez zmian (D8).
