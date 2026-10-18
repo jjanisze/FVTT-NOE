@@ -19,6 +19,7 @@
 import { isDollActor, heldItems, drop } from "../actors/doll.mjs";
 import { BESTIARY } from "../config/bestiary-data.mjs";
 import { itemUuidOf } from "../config/chat-message-data.mjs";
+import { cardButtonHost } from "../config/chat-card-dom.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -83,7 +84,7 @@ function _onRenderChatMessage(message, html) {
   let buttons = [...root.querySelectorAll('button[data-action="rollSave"]')];
   if (!buttons.length) {
     const label = CONFIG.DND5E.abilities?.[auto.ability]?.label ?? auto.ability;
-    const host = root.querySelector(".card-buttons") ?? root.querySelector(".message-content");
+    const host = cardButtonHost(root);
     host?.insertAdjacentHTML("beforeend", `<button type="button" data-action="rollSave"
       data-ability="${auto.ability}" data-dc="${auto.dc}">
       <i class="fas fa-shield-heart" inert></i> RO: ${label} ST ${auto.dc}</button>`);

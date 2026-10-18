@@ -15,6 +15,7 @@
 import { hasAddon } from "../config/addons-data.mjs";
 import { hitTargetsForDamage } from "../combat/trafienie.mjs";
 import { itemUuidOf, activityRefOf } from "../config/chat-message-data.mjs";
+import { cardPillList } from "../config/chat-card-dom.mjs";
 
 const MODULE_ID  = "neuroshima-2026-overrides";
 const DOSE_FLAG  = "dozownik-dose";   // 0 = pusta, 1 = załadowana
@@ -146,7 +147,8 @@ export async function applyDose(weapon, target = null) {
   const targetActorUuid = targetActor?.uuid;
   // Tacka dnd5e w trybie „Wycelowane” czyta cele zapisane w wiadomości: w dnd5e 6.0 wiadomość typu `damage` z
   // `system.targets` (deskryptory `{actor, token, name, img, ac}`; 5.3 trzymało je we flagach).
-  const trayTargets = targetActor ? [{
+  // Tylko z żetonem: tacka 6.0 rozwiązuje uuid celu i czyta z niego `.actor` — sam aktor ją wywraca.
+  const trayTargets = (targetActor && tokenDoc?.uuid) ? [{
     name: targetName, img: tokenDoc?.texture?.src ?? targetActor.img, actor: targetActor.uuid,
     token: tokenDoc?.uuid ?? null, ac: targetActor.system?.attributes?.ac?.value ?? null
   }] : [];
@@ -172,9 +174,13 @@ export async function applyDose(weapon, target = null) {
     </div>
   `;
 
+  // Dwie wiadomości: dnd5e 6.0 renderuje wiadomość typu `damage` wyłącznie własnym szablonem (jej `content` przepada),
+  // więc karta z przyciskiem RO idzie osobno, a obrażenia — jako wiadomość obrażeń z tacką MG.
+  const speaker = ChatMessage.getSpeaker({ actor: weapon.actor });
+  await ChatMessage.create({ speaker, content });
   await ChatMessage.create({
-    speaker: ChatMessage.getSpeaker({ actor: weapon.actor }),
-    content,
+    speaker,
+    flavor: `${weapon.name} — Trucizna (Dozownik)`,
     rolls: [dmgRoll],
     type: "damage",
     system: { targets: trayTargets }
@@ -259,7 +265,7 @@ function _onRenderDozownikCard(message, html) {
   if (!el) return;
 
   setTimeout(() => {
-    const pillsList = el.querySelector("ul.card-footer.pills");
+    const pillsList = cardPillList(el);
     if (!pillsList) return;
     // Nie wstrzykuj drugi raz
     if (pillsList.querySelector(".neuro-dozownik-pill")) return;

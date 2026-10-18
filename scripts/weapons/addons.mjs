@@ -14,6 +14,7 @@ import {
 } from "../config/addons-data.mjs";
 import { initDose, clearDose } from "./dozownik.mjs";
 import { itemUuidOf, activityRefOf } from "../config/chat-message-data.mjs";
+import { cardPillList } from "../config/chat-card-dom.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 const ADDONS_FLAG = "addons";
@@ -862,7 +863,7 @@ function _injectAddonBadges(html, addons) {
   if (el.querySelector(".neuro-addon-pill")) return;
 
   // Try to find the existing native dnd5e footer pill list and append there
-  const pillsList = el.querySelector("ul.card-footer.pills");
+  const pillsList = cardPillList(el);
 
   for (const a of addons) {
     const def = ADDON_DEFS[a.id];

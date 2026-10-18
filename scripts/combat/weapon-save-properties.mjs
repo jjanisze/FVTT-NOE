@@ -29,6 +29,7 @@ import { ROZRYWAJACA } from "../wkk/combat/weapon-save-properties.mjs";
 import { jestMaszyna } from "../actors/towarzysze.mjs";
 import { startNaKombatanta } from "./czas-efektu.mjs";
 import { itemUuidOf } from "../config/chat-message-data.mjs";
+import { cardButtonHost } from "../config/chat-card-dom.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -208,7 +209,7 @@ function _injectButton(el, propId, config, dc) {
       <i class="fas ${config.icon}"></i> Cecha: ${config.label} [RO ${abilityLabel} ST ${dc}]
     </button>`;
 
-  const container = el.querySelector(".card-buttons") ?? el.querySelector(".message-content");
+  const container = cardButtonHost(el);
   if (container) container.insertAdjacentHTML("beforeend", buttonHtml);
 }
 

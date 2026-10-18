@@ -1,4 +1,5 @@
 import { itemUuidOf } from "../config/chat-message-data.mjs";
+import { cardButtonHost } from "../config/chat-card-dom.mjs";
 const MODULE_ID = "neuroshima-2026-overrides";
 
 export function registerObalajaca() {
@@ -60,7 +61,7 @@ export function registerObalajaca() {
         `;
         
         const el = html instanceof HTMLElement ? html : html[0];
-        const buttonsContainer = el.querySelector('.card-buttons') ?? el.querySelector('.message-content');
+        const buttonsContainer = cardButtonHost(el);
         if (buttonsContainer) buttonsContainer.insertAdjacentHTML('beforeend', buttonHtml);
     }
   });

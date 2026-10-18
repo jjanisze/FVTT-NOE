@@ -18,6 +18,7 @@ import {
 } from "../weapons/addons.mjs";
 import { hasDose, refillDose, applyDose } from "../weapons/dozownik.mjs";
 import { rollTypeOf, activityRefOf } from "../config/chat-message-data.mjs";
+import { cardPillList } from "../config/chat-card-dom.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -396,7 +397,7 @@ function _onRenderChatMessage(message, html) {
   if (!tags.length) return;
 
   // Inject into existing pills list (usage card) or append a new one after it (attack card)
-  const existingPills = root.querySelector("ul.card-footer.pills");
+  const existingPills = cardPillList(root, { create: false });
   if (existingPills) {
     existingPills.insertAdjacentHTML("beforeend", tags.join(""));
   } else {

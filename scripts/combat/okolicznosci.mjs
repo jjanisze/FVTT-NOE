@@ -20,6 +20,7 @@ import { rozstrzygnijOkolicznosci, autoKrytyk, OBOK } from "../config/okolicznos
 import { isMeleeAttack } from "./trafienie.mjs";
 import { HAND_OCCUPANTS_FLAG } from "../actors/doll.mjs";
 import { rollTypeOf } from "../config/chat-message-data.mjs";
+import { cardPillList } from "../config/chat-card-dom.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 /** Klucz rozkładu na `roll.options`. */
@@ -230,12 +231,8 @@ function _onRenderChatMessage(message, html) {
   if (rollTypeOf(message) !== "attack") return;
   const z = message.rolls?.[0]?.options?.[OKOLICZNOSCI_OPT];
   if (!z || html.querySelector(".neuro-okolicznosci")) return;
-  let pills = html.querySelector("ul.card-footer.pills");
-  if (!pills) {
-    pills = document.createElement("ul");
-    pills.className = "card-footer pills unlist";
-    (html.querySelector(".chat-card") ?? html).appendChild(pills);
-  }
+  const pills = cardPillList(html);
+  if (!pills) return;
   const linia = w => `${esc(w.label)}${w.strona ? ` <span class="neuro-okolicznosci-strona">(${esc(w.strona)})</span>` : ""}`;
   if (z.ulatwienia.length || z.utrudnienia.length) {
     const dymek = [

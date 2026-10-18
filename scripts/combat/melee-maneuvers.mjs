@@ -16,6 +16,7 @@ import { isDollActor, heldItems, takeOff, drop as dollDrop, HAND_OCCUPANTS_FLAG 
 import { slotLabel } from "../actors/doll-model.mjs";
 import { freeHandCheck } from "./grip.mjs";
 import { itemUuidOf } from "../config/chat-message-data.mjs";
+import { cardButtonHost } from "../config/chat-card-dom.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -481,7 +482,7 @@ export function registerMeleeManeuvers() {
     if (!el || el.querySelector(".neuro-maneuver-btn")) return;
 
     const def = MANEUVERS[maneuverId];
-    const container = el.querySelector(".card-buttons") ?? el.querySelector(".message-content");
+    const container = cardButtonHost(el);
     container?.insertAdjacentHTML("beforeend", `
       <button class="neuro-maneuver-btn" data-maneuver="${maneuverId}" data-actor="${item.actor?.id ?? ""}"
         style="margin-top:5px;color:${def.color};border:1px solid ${def.color};background:rgba(139,69,19,0.1);">

@@ -40,6 +40,7 @@ import { ABILITY_KEYS, hasAbility } from "../actors/abilities.mjs";
 import { WEAPONS } from "../config/weapons-data.mjs";
 import { zarejestrujZrodloOkolicznosci } from "./okolicznosci.mjs";
 import { rollTypeOf } from "../config/chat-message-data.mjs";
+import { cardPillList } from "../config/chat-card-dom.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -247,12 +248,8 @@ function onRenderChatMessage(message, html) {
   if (rollTypeOf(message) !== "attack") return;
   const notes = message.rolls?.[0]?.options?.neuroGrip?.notes;
   if (!notes?.length || html.querySelector(".neuro-grip-badge")) return;
-  let pillList = html.querySelector("ul.card-footer.pills");
-  if (!pillList) {
-    pillList = document.createElement("ul");
-    pillList.className = "card-footer pills unlist";
-    (html.querySelector(".chat-card") ?? html).appendChild(pillList);
-  }
+  const pillList = cardPillList(html);
+  if (!pillList) return;
   for (const n of notes) {
     const pill = document.createElement("li");
     pill.className = `pill neuro-grip-badge${n.level === "warn" ? " maroon" : ""}`;

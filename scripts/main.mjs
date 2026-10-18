@@ -200,6 +200,7 @@ import { registerQuenchTests, testsApi } from "./tests/index.mjs";
 import { monsterClosetApi } from "./dev/monster-closet.mjs";
 import { characterClosetApi } from "./dev/character-closet.mjs";
 import { activityRefOf } from "./config/chat-message-data.mjs";
+import { cardPillLists } from "./config/chat-card-dom.mjs";
 
 const MODULE_ID = "neuroshima-2026-overrides";
 
@@ -439,10 +440,7 @@ Hooks.once("init", () => {
 
     // Defer via macrotask — same reason as ammo.mjs: dnd5e renders pills async
     setTimeout(() => {
-      const footer = el.querySelector("ul.card-footer.pills");
-      if (!footer) return;
-
-      for (const pill of [...footer.querySelectorAll("li.pill")]) {
+      for (const pill of cardPillLists(el).flatMap(list => [...list.querySelectorAll("li.pill")])) {
         const text = pill.querySelector(".label")?.textContent?.trim() ?? "";
         if (
           !text ||
@@ -455,8 +453,10 @@ Hooks.once("init", () => {
         }
       }
 
-      // Hide footer if nothing left
-      if (!footer.querySelector("li.pill")) footer.remove();
+      // Hide a pill row left empty (dnd5e 6.0: the row is a `section.icon-row` around the list).
+      for (const list of cardPillLists(el)) {
+        if (!list.querySelector("li.pill")) (list.closest("section.icon-row") ?? list).remove();
+      }
     });
   });
 

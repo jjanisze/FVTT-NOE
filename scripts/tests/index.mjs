@@ -45,6 +45,7 @@ import { registerPrzeskokTests } from "./przeskok.test.mjs";
 import { registerSzabrowanieTests } from "./szabrowanie.test.mjs";
 import { registerAutodestrukcjaTests } from "./autodestrukcja.test.mjs";
 import { registerBebeszenieTests } from "./bebeszenie.test.mjs";
+import { registerKartyCzatuTests } from "./karty-czatu.test.mjs";
 import { registerFuksyTests } from "./fuksy.test.mjs";
 import { registerConfigTests } from "./config.test.mjs";
 import { registerEquipmentDataTests } from "./ekwipunek-dane.test.mjs";
@@ -108,6 +109,7 @@ export function registerQuenchTests() {
     registerSzabrowanieTests(quench);
     registerAutodestrukcjaTests(quench);
     registerBebeszenieTests(quench);
+    registerKartyCzatuTests(quench);
     console.log("Neuroshima 5e | Quench batches registered");
   });
 }
