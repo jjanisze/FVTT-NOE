@@ -47,7 +47,9 @@ export function szablonyTowarzyszy({ buildNpc, idFor, MODULE_ID }) {
     a.name = wpis.nazwa;
     a.folder = idFor("towarzysze-folder", wpis.zrodlo);
     a.sort = Object.keys(STATBLOKI).indexOf(rodzaj) * 1000;
-    a.system.attributes.ac = { flat: s.ac, calc: "custom", formula: wpis.wzory.tt };
+    // dnd5e 6.0: TT only from the owner's formula — `calcs: []`, or 6.0 would also weigh unarmored/armored (5.3's
+    // `calc: "custom"` meant the formula alone; its migration keeps the default calcs).
+    a.system.attributes.ac = { flat: s.ac, calcs: [], formulas: [{ armored: null, formula: wpis.wzory.tt, label: "", shielded: null }], override: null };
     a.prototypeToken.name = wpis.nazwa;
     a.prototypeToken.actorLink = true;
     // Dron patrzy przez „Kamerę drona” (U16) — id z `scripts/actors/drony-obraz.mjs` (`KAMERA_ID`).
@@ -70,9 +72,9 @@ export function szablonyTowarzyszy({ buildNpc, idFor, MODULE_ID }) {
 
 /**
  * Klasa „Towarzysz” i jej folder w paczce `klasy`.
- * @param {{advancement: Function, idFor: Function, html: Function, SZTUCZKI_POOL: object[], MODULE_ID: string}} h
+ * @param {{advancement: Function, advancementById: Function, idFor: Function, html: Function, SZTUCZKI_POOL: object[], MODULE_ID: string}} h
  */
-export function klasaTowarzysza({ advancement, idFor, html, SZTUCZKI_POOL, MODULE_ID }) {
+export function klasaTowarzysza({ advancement, advancementById, idFor, html, SZTUCZKI_POOL, MODULE_ID }) {
   const cid = KLASA_TOWARZYSZA;
   const folder = {
     _id: idFor("klasy-folder", "towarzysze"), name: "Towarzysze", type: "Item", folder: null,
@@ -113,7 +115,7 @@ export function klasaTowarzysza({ advancement, idFor, html, SZTUCZKI_POOL, MODUL
       levels: 1,
       hd: { denomination: "d6", spent: 0, additional: "" },
       primaryAbility: { value: [], all: false },
-      advancement: adv,
+      advancement: advancementById(adv),
       startingEquipment: [],
       spellcasting: { progression: "none", ability: "", preparation: {} },
       properties: []

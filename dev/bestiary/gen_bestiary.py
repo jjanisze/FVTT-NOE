@@ -187,8 +187,9 @@ AUTOMATION = {
             "label": "Odgryziony palec",
             "permanent": True,
             "changes": [
-                # -1 to every Dex-based ability check, until regrown or replaced.
-                {"key": "system.bonuses.abilities.check", "mode": "add", "value": "-1"}
+                # -1 to every Dex-based ability check (RAW: „Testów Cech opartych na Zręczności”) until regrown or
+                # replaced. dnd5e 6 per-ability key — the 5.3 one (`system.bonuses.abilities.check`) hit every check.
+                {"key": "system.abilities.dex.check.roll.bonus", "mode": "add", "value": "-1"}
             ],
         },
         "skipsZranienie": True,   # "Atak nie powoduje otrzymania Stopnia Zranienia"

@@ -269,7 +269,7 @@ export function buildRealGearItemData(gear) {
 
 /**
  * Aktywności Testu dla sprzętu zastępującego zestaw narzędzi: jeden ogólny test bez ST plus po
- * jednym na każdą akcję zastępowanego zestawu. Kształt celowo taki sam jak `_buildCheckActivity`
+ * jednym na każdą akcję zastępowanego zestawu. Kształt celowo taki sam jak `buildToolkitCheckActivity` (`config/toolkits-data.mjs`)
  * w `toolkits-data.mjs` — to ma rzucać identycznie jak prawdziwy zestaw, bo taki jest sens zapisu
  * „może zastąpić".
  *

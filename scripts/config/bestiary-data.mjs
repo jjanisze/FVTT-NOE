@@ -564,7 +564,7 @@ export const BESTIARY = {
           "effect": {
             "changes": [
               {
-                "key": "system.bonuses.abilities.check",
+                "key": "system.abilities.dex.check.roll.bonus",
                 "mode": "add",
                 "value": "-1"
               }

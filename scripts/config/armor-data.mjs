@@ -323,7 +323,7 @@ export function buildArmorItemData(a, extra = {}) {
       quantity: 1,
       weight: { value: a.weight, units: "kg" },
       price: { value: a.price, denomination: "gb" },
-      armor: { value: a.ac ?? null, magicalBonus: null, dex: a.dex ?? null },
+      armor: { value: a.ac ?? null, dex: a.dex ?? null }, // dnd5e 6.0 dropped `magicalBonus`
       strength: a.strength ?? null,
       proficient: null,
       properties,

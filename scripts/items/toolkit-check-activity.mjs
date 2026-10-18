@@ -35,7 +35,7 @@
  * `items/toolkit-kowal.mjs`) hook into that, keeping THIS file generic:
  *
  *   - an activity opts in via `flags.<module>.checkGate = "<key>"` (set in
- *     `_buildCheckActivity` from a `gate` on its `ToolkitAction` entry);
+ *     `buildToolkitCheckActivity` (`config/toolkits-data.mjs`) from a `gate` on its `ToolkitAction` entry);
  *   - `gate.canUse(activity)` is a synchronous eligibility check — wired into
  *     `canUse` below, it makes an action with nothing to act on disappear from the
  *     item-choice dialog (and block a single-activity item click) BEFORE any roll,

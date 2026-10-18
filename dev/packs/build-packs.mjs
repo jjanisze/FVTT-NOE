@@ -9,7 +9,7 @@
  *
  * Uses `classic-level` from the FoundryVTT install (no npm install needed).
  *
- * Schemas verified live against FVTT 14.364 / dnd5e 5.3.0:
+ * Schemas verified live against FVTT 14.369 / dnd5e 6.0.6 (actor records equal `new Actor(record).toObject()`):
  *   ItemGrant   { items: [{uuid, optional}], optional, spell }
  *   ItemChoice  { allowDrops, choices: {<lvl>:{count}}, pool: [{uuid}], restriction, type }
  *   ScaleValue  { identifier, type, scale: {<lvl>: <entry>} }   dice entry = {number, faces}
@@ -48,7 +48,8 @@ import { KONTROLERY } from "../../scripts/config/towarzysze-data.mjs";
 import { PRODUCTION_GEAR, buildProductionGearItemData } from "../../scripts/items/production-gear.mjs";
 import { FANTY, fantItemData, ikonaFantu, idFantu } from "../../scripts/config/fanty-data.mjs";
 import { ARMORS, buildArmorItemData } from "../../scripts/config/armor-data.mjs";
-import { TOOLKITS, buildToolkitItemData } from "../../scripts/config/toolkits-data.mjs";
+import { TOOLKITS, buildToolkitItemData, buildToolkitCheckActivity } from "../../scripts/config/toolkits-data.mjs";
+import { TOOLKIT_CHECK_ACTIVITY_TYPE } from "../../scripts/items/toolkit-check-activity.mjs";
 import { przepisySchematow, schematItemData, kategoriaSchematu } from "../../scripts/config/schematy-data.mjs";
 import { BESTIARY } from "../../scripts/config/bestiary-data.mjs";
 import { BLOOD_TYPES, NEUROSHIMA_CREATURE_TYPES } from "../../scripts/config/creature-types.mjs";
@@ -157,6 +158,11 @@ function scaleMap(type, values) {
   return scale;
 }
 
+/** dnd5e 6.0 stores advancement as an object keyed by id (`AdvancementCollectionField`), 5.3 as an array. */
+function advancementById(list) {
+  return Object.fromEntries(list.map(a => [a._id, a]));
+}
+
 function advancement(type, level, title, configuration, seed) {
   return {
     _id: idFor("adv", seed),
@@ -164,8 +170,11 @@ function advancement(type, level, title, configuration, seed) {
     configuration,
     value: {},
     level,
-    title,
-    icon: null
+    // dnd5e 6.0 names these `name`/`img` (5.3: `title`/`icon`).
+    name: title,
+    img: null,
+    hint: "",
+    flags: {}
   };
 }
 
@@ -298,7 +307,7 @@ function buildProfession(pid, p) {
       source: { custom: "Neuroshima RPG", rules: "2024" },
       identifier: pid,
       classIdentifier: p.klasa,
-      advancement: advancements,
+      advancement: advancementById(advancements),
       spellcasting: { progression: "none", ability: "" }
     },
     flags: { [MODULE_ID]: { professionId: pid, klasa: p.klasa } },
@@ -456,7 +465,7 @@ function buildClass(cid, c) {
       levels: 1,
       hd: { denomination: c.pw.hd, spent: 0, additional: "" },
       primaryAbility: { value: [c.primaryAbility], all: false },
-      advancement: adv,
+      advancement: advancementById(adv),
       startingEquipment: [],
       spellcasting: { progression: "none", ability: "", preparation: {} },
       properties: []
@@ -531,7 +540,7 @@ function buildOriginAbility(key) {
 function buildPochodzenie(key) {
   const doc = pochodzenieItemData(key, { _id: idFor("origin", key) });
 
-  doc.system.advancement = [
+  doc.system.advancement = advancementById([
     advancement("AbilityScoreImprovement", 0, "Premia do Cech Bazowych", {
       cap: 1, fixed: attrBonus(key), locked: [], points: 0
     }, `${key}-asi`),
@@ -542,7 +551,7 @@ function buildPochodzenie(key) {
       restriction: { type: "feat" },
       type: "feat"
     }, `${key}-ability`)
-  ];
+  ]);
 
   const icon = iconFor("pochodzenia", key);
   return { ...doc, img: icon.includes(MODULE_ID) ? icon : doc.img, _key: null };
@@ -595,7 +604,9 @@ function buildGrenade(g) {
 /**
  * Zestawy narzędzi. Kształt itemu pochodzi z `buildToolkitItemData`, żeby pack i
  * `createToolkits()` nie rozjechały się w opisach; tutaj dochodzą deterministyczne
- * id oraz aktywności typu `check` — po jednej na każde ST z tabeli użycia.
+ * id oraz aktywności typu `check` — po jednej na każde ST z tabeli użycia. Zestaw z `nativeCheck` (kowal) dostaje
+ * to samo co z `createToolkits()`: `NeuroToolCheckActivity` z bramkami (Naostrzenie, Naprawa) — bez tego kopia
+ * z kompendium albo z Produkcji wołała gołe testy (PLAN_migracja_dnd5e6.md, PM14).
  */
 function buildToolkit(kit) {
   const base = buildToolkitItemData(kit);
@@ -604,6 +615,16 @@ function buildToolkit(kit) {
   const actions = kit.actions?.length ? kit.actions : [{ name: "Test narzędzi", dc: null }];
   for (const action of actions) {
     const aid = idFor("activity", `tool:${kit.id}:${action.name}`);
+    if (kit.nativeCheck) {
+      activities[aid] = {
+        ...buildToolkitCheckActivity(kit, action),
+        _id: aid,
+        type: TOOLKIT_CHECK_ACTIVITY_TYPE,
+        activation: { type: "action", value: 1, condition: "" },
+        consumption: { targets: [], scaling: { allowed: false } }
+      };
+      continue;
+    }
     activities[aid] = {
       _id: aid,
       type: "check",
@@ -1430,7 +1451,9 @@ function buildNpc(c) {
   const abilities = {};
   for (const key of ["str", "dex", "con", "int", "wis", "cha"]) {
     const value = c.abilities?.[key] ?? 10;
-    const entry = { value, proficient: 0, bonuses: { check: "", save: "" } };
+    // dnd5e 6.0 shape: per-roll config under `attack|check|save.roll` (5.3 had `bonuses: {check, save}`).
+    const roll = () => ({ min: null, max: null, mode: 0 });
+    const entry = { value, proficient: 0, max: null, attack: { roll: roll() }, check: { roll: roll() }, save: { roll: roll() } };
     const printed = c.saves?.[key];
     if (printed != null) {
       entry.proficient = 1;
@@ -1438,7 +1461,7 @@ function buildNpc(c) {
       // mod + PB, carry the difference as a bonus rather than silently
       // shipping a save that doesn't match the book.
       const delta = printed - (abilityMod(value) + pb);
-      if (delta !== 0) entry.bonuses.save = String(delta);
+      if (delta !== 0) entry.save.roll = { bonus: String(delta), ...roll() };
     }
     abilities[key] = entry;
   }
@@ -1451,9 +1474,10 @@ function buildNpc(c) {
     let value = 1;
     if (printed === mod + 2 * pb) value = 2;              // expertise
     else if (printed === mod) value = 0;
-    const entry = { value, ability, bonuses: { check: "", passive: "" } };
+    // dnd5e 6.0 shape: the check bonus under `roll`, `bonuses` keeps only the passive one.
+    const entry = { value, ability, bonuses: { passive: "" }, roll: { min: null, max: null, mode: 0 } };
     const delta = printed - (mod + value * pb);
-    if (delta !== 0) entry.bonuses.check = String(delta);
+    if (delta !== 0) entry.roll = { bonus: String(delta), ...entry.roll };
     skills[key] = entry;
   }
 
@@ -1486,14 +1510,19 @@ function buildNpc(c) {
       abilities,
       skills,
       attributes: {
-        ac: { flat: c.ac ?? 10, calc: "flat", formula: "" },
+        // dnd5e 6.0 shape of 5.3's `calc: "flat"` (its own migration): the printed TT as an override.
+        ac: { flat: c.ac ?? 10, calcs: ["unarmored", "armored"], formulas: [], override: c.ac ?? 10 },
         hp: { value: c.hp.avg, max: c.hp.avg, temp: 0, tempmax: 0, formula: c.hp.formula ?? "" },
         // dnd5e adds the Dex modifier itself; the book prints the total.
-        init: { ability: "", bonus: String((c.initiative ?? 0) - dexMod), roll: { min: null, max: null, mode: 0 } },
+        init: { ability: "", roll: { min: null, max: null, mode: 0, bonus: String((c.initiative ?? 0) - dexMod) } },
+        // dnd5e 6.0 shape: speeds under `speeds`, as formulas.
         movement: {
-          walk: c.speed?.walk ?? 0, climb: c.speed?.climb ?? 0, swim: c.speed?.swim ?? 0,
-          fly: c.speed?.fly ?? 0, burrow: c.speed?.burrow ?? 0,
-          units: "m", hover: false
+          units: "m", hover: false,
+          speeds: {
+            walk: String(c.speed?.walk ?? 0), burrow: String(c.speed?.burrow ?? 0), climb: String(c.speed?.climb ?? 0),
+            fly: String(c.speed?.fly ?? 0), swim: String(c.speed?.swim ?? 0)
+          },
+          ignoredDifficultTerrain: []
         },
         // dnd5e 5.3 nests these under `ranges`; the flat keys on the shipped
         // 2014 monster packs are legacy data that gets migrated on load. Write
@@ -1811,7 +1840,7 @@ const featureDocs = Object.values(CLASS_FEATURES).map(buildFeature);
 const professionDocs = Object.entries(PROFESSIONS).map(([pid, p]) => buildProfession(pid, p));
 const classDocs = Object.entries(CLASSES).map(([cid, c]) => buildClass(cid, c));
 // Klasa „Towarzysz” (PLAN_m3 §7.8) — w folderze „Towarzysze”, poza wyborem klasy BG.
-const towarzyszKlasa = klasaTowarzysza({ advancement, idFor, html, SZTUCZKI_POOL, MODULE_ID });
+const towarzyszKlasa = klasaTowarzysza({ advancement, advancementById, idFor, html, SZTUCZKI_POOL, MODULE_ID });
 classDocs.push(towarzyszKlasa.doc);
 const medicineDocs = Object.keys(CHEMIA).map(buildChemia);
 const sztuczkaDocs = Object.keys(SZTUCZKI).map(buildSztuczka);
@@ -1878,7 +1907,7 @@ const built = new Set([
 ]);
 const dangling = [];
 for (const doc of [...classDocs, ...professionDocs, ...originDocs]) {
-  for (const a of doc.system.advancement ?? []) {
+  for (const a of Object.values(doc.system.advancement ?? {})) {
     const uuids = [
       ...(a.configuration.items ?? []).map(i => i.uuid),
       ...(a.configuration.pool ?? []).map(i => i.uuid)
@@ -1970,9 +1999,9 @@ if (wanted(PACK.tabele)) {
   await zapiszTabele(path.join(PACKS_ROOT, PACK.tabele), tabele, { ClassicLevel, stats: v14Stats });
 }
 
-const advCount = classDocs.reduce((n, d) => n + d.system.advancement.length, 0)
-  + professionDocs.reduce((n, d) => n + d.system.advancement.length, 0)
-  + originDocs.reduce((n, d) => n + d.system.advancement.length, 0);
+const advCount = classDocs.reduce((n, d) => n + Object.keys(d.system.advancement).length, 0)
+  + professionDocs.reduce((n, d) => n + Object.keys(d.system.advancement).length, 0)
+  + originDocs.reduce((n, d) => n + Object.keys(d.system.advancement).length, 0);
 console.log(`\n  advancements built: ${advCount}`);
 console.log("  dangling uuids    : none");
 console.log("\nDone. Reload the world to see the packs.");

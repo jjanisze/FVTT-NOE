@@ -24,6 +24,8 @@ import { UPOJENIE_LEVELS, SKAZENIE_LEVELS } from "../config/levelled-conditions-
 import { syncLevelledConditions } from "../actors/levelled-conditions.mjs";
 import { __testing as slowdown } from "../actors/udzwig-slowdown.mjs";
 import { setZranienie } from "../combat/zranienie.mjs";
+import { BESTIARY } from "../config/bestiary-data.mjs";
+import { CHEMIA } from "../config/chemia-data.mjs";
 import { MODULE_ID, scratchActor, scratchCleanup, setCarriedWeight } from "./helpers.mjs";
 
 /** Każda tablica `changes` w danych modułu, spłaszczona do jednej listy. */
@@ -35,6 +37,21 @@ function allDataChanges() {
     }
   }
   for (const row of [...UPOJENIE_LEVELS, ...SKAZENIE_LEVELS]) out.push(...(row.changes ?? []));
+  return out;
+}
+
+/** Every `changes` entry anywhere in a data table (Bestiariusz riders and automation, Chemia), however deep. */
+function nestedChanges(root) {
+  const out = [];
+  const walk = node => {
+    if (Array.isArray(node)) { node.forEach(walk); return; }
+    if (!node || typeof node !== "object") return;
+    for (const [k, v] of Object.entries(node)) {
+      if (k === "changes" && Array.isArray(v)) out.push(...v.filter(c => c && typeof c.key === "string"));
+      else walk(v);
+    }
+  };
+  walk(root);
   return out;
 }
 
@@ -59,6 +76,15 @@ export function registerEffectChangesTests(quench) {
         }
       });
 
+      // dnd5e 6.0 przekierowuje stare klucze (`ActiveEffect5e.SHIM_FIELDS`) z ostrzeżeniem zgodności przy każdym
+      // nałożeniu — a klucze spoza listy (np. `abilities.*.bonuses.check`) po cichu nie robią nic. Dane piszą nowe.
+      it("żaden klucz zmiany w danych modułu nie jest starym kluczem dnd5e (podkładka 6.0)", function () {
+        const shim = CONFIG.ActiveEffect.documentClass.SHIM_FIELDS ?? {};
+        const keys = [...allDataChanges(), ...nestedChanges(BESTIARY), ...nestedChanges(CHEMIA)].map(c => c.key);
+        expect(keys.length, "zmiany w danych").to.be.above(0);
+        expect(keys.filter(k => k in shim || /\.bonuses\.(check|save)$/.test(k))).to.deep.equal([]);
+      });
+
       it("`change()` odmawia nieznanego typu zamiast po cichu wstawić `add`", function () {
         expect(() => change("system.foo", "addd", 1)).to.throw(/addd/);
       });
@@ -66,6 +92,28 @@ export function registerEffectChangesTests(quench) {
       it("kary płaskie mają niższy priorytet niż połowienie", function () {
         expect(CHANGE_PRIORITY.add).to.be.below(CHANGE_PRIORITY.multiply);
         expect(CHANGE_PRIORITY.multiply).to.be.below(CHANGE_PRIORITY.override);
+      });
+    });
+
+    // Bit-Boys, Palcożerca: „-1 wszystkich Testów Cech opartych na Zręczności”. Klucz 5.3 (`bonuses.abilities.check`)
+    // dawał -1 każdemu testowi cechy; klucz 6.0 na cesze trafia też w umiejętności oparte na niej.
+    describe("Palcożerca — tylko Testy cech na Zręczności", function () {
+      it("-1 do testu ZRC i umiejętności z ZRC, nic do testu SIŁ", async function () {
+        const rider = BESTIARY["bit-boys"]?.features?.find(f => f.automation?.rider === "palcozerca")?.automation;
+        expect(rider?.effect?.changes, "dane jeźdźca z generatora").to.be.an("array").that.is.not.empty;
+        const a = await scratchActor();
+        await a.createEmbeddedDocuments("ActiveEffect", [{
+          name: rider.effect.label,
+          system: { changes: rider.effect.changes.map(c => change(c.key, CHANGE_TYPE[c.mode] ?? CHANGE_TYPE.add, c.value)) }
+        }]);
+        const wzor = async fn => (await fn())?.[0]?.formula ?? "";
+        const zrc = await wzor(() => a.rollAbilityCheck({ ability: "dex" }, { configure: false }, { create: false }));
+        const sil = await wzor(() => a.rollAbilityCheck({ ability: "str" }, { configure: false }, { create: false }));
+        const skill = Object.entries(a.system.skills).find(([, s]) => s.ability === "dex")?.[0];
+        const umiejetnosc = skill ? await wzor(() => a.rollSkill({ skill }, { configure: false }, { create: false })) : "";
+        expect(zrc, "test ZRC").to.match(/- 1\b/);
+        expect(sil, "test SIŁ").to.not.match(/- 1\b/);
+        if (skill) expect(umiejetnosc, `umiejętność ${skill} (ZRC)`).to.match(/- 1\b/);
       });
     });
 

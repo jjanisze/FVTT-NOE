@@ -23,6 +23,9 @@ import { ORIGIN_ABILITIES, POCHODZENIA, attrBonus } from "../../scripts/config/p
 import { STATBLOKI, RODZAJE } from "../../scripts/config/towarzysze-data.mjs";
 import { bledyTabel } from "./tabele.mjs";
 
+/** Advancement as a list — dnd5e 6.0 stores it as an object keyed by id (5.3: an array). */
+const advOf = doc => Object.values(doc?.system?.advancement ?? {});
+
 const MODULE_ID = "neuroshima-2026-overrides";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const MODULE_ROOT = path.resolve(HERE, "../..");
@@ -85,7 +88,7 @@ for (const doc of origins) {
   const def = POCHODZENIA[key];
   if (!def) { fail(`unknown origin identifier in pack: ${key}`); continue; }
 
-  const asi = doc.system.advancement.find(a => a.type === "AbilityScoreImprovement");
+  const asi = advOf(doc).find(a => a.type === "AbilityScoreImprovement");
   if (!asi) fail(`${key}: missing AbilityScoreImprovement`);
   else {
     const want = attrBonus(key);
@@ -97,7 +100,7 @@ for (const doc of origins) {
     if (asi.configuration.points) fail(`${key}: ASI points ${asi.configuration.points}, expected 0`);
   }
 
-  const choice = doc.system.advancement.find(a => a.type === "ItemChoice");
+  const choice = advOf(doc).find(a => a.type === "ItemChoice");
   if (!choice) { fail(`${key}: missing ItemChoice`); continue; }
   const pool = choice.configuration.pool ?? [];
   const expected = Object.values(ORIGIN_ABILITIES).filter(a => a.origin === key).length;
@@ -112,7 +115,7 @@ if (orphanAbilities.length) fail(`zdolności bez Pochodzenia: ${orphanAbilities.
 
 /* ---- every advancement uuid resolves to a built document ---- */
 for (const doc of [...klasy, ...profesje, ...(klasaTowarzysza ? [klasaTowarzysza] : [])]) {
-  for (const a of doc.system.advancement ?? []) {
+  for (const a of advOf(doc) ?? []) {
     const uuids = [
       ...(a.configuration.items ?? []).map(i => i.uuid),
       ...(a.configuration.pool ?? []).map(i => i.uuid)
@@ -132,19 +135,19 @@ for (const doc of klasy) {
   if (doc.system.hd.denomination !== def.pw.hd) fail(`${cid}: hd ${doc.system.hd.denomination} != ${def.pw.hd}`);
   if (doc.system.spellcasting?.progression !== "none") fail(`${cid}: spellcasting not disabled`);
 
-  const types = doc.system.advancement.reduce((m, a) => (m[a.type] = (m[a.type] ?? 0) + 1, m), {});
+  const types = advOf(doc).reduce((m, a) => (m[a.type] = (m[a.type] ?? 0) + 1, m), {});
   if (!types.HitPoints) fail(`${cid}: missing HitPoints advancement`);
   if (!types.Subclass) fail(`${cid}: missing Subclass advancement`);
   if (!types.Trait) fail(`${cid}: missing Trait advancement`);
 
-  const sub = doc.system.advancement.find(a => a.type === "Subclass");
+  const sub = advOf(doc).find(a => a.type === "Subclass");
   if (sub && sub.level !== def.professionLevels[0]) {
     fail(`${cid}: Subclass at L${sub.level}, expected L${def.professionLevels[0]}`);
   }
 
   // scale values complete and monotonic in level keys
   for (const [key, sv] of Object.entries(def.scale ?? {})) {
-    const a = doc.system.advancement.find(x => x.type === "ScaleValue" && x.configuration.identifier === key);
+    const a = advOf(doc).find(x => x.type === "ScaleValue" && x.configuration.identifier === key);
     if (!a) { fail(`${cid}: missing ScaleValue ${key}`); continue; }
     const levels = Object.keys(a.configuration.scale).map(Number).sort((x, y) => x - y);
     if (!levels.length) fail(`${cid}.${key}: empty scale`);
@@ -163,8 +166,8 @@ for (const doc of klasy) {
   if (subs.length !== 3) fail(`${cid}: ${subs.length} professions, expected 3`);
 
   for (let lvl = 1; lvl <= 12; lvl++) {
-    const fromClass = doc.system.advancement.filter(a => a.level === lvl && a.type === "ItemChoice");
-    const fromSub = subs[0].system.advancement.filter(a => a.level === lvl && a.type === "ItemChoice");
+    const fromClass = advOf(doc).filter(a => a.level === lvl && a.type === "ItemChoice");
+    const fromSub = advOf(subs[0]).filter(a => a.level === lvl && a.type === "ItemChoice");
     const total = fromClass.length + fromSub.length;
 
     const entry = def.levels[lvl] ?? [];
@@ -187,10 +190,10 @@ for (const doc of klasy) {
 
     if (total !== expected) {
       fail(`${cid} L${lvl}: ${total} ItemChoice(s), rulebook grants ${expected} `
-         + `[${[...fromClass, ...fromSub].map(a => a.title).join(" | ")}]`);
+         + `[${[...fromClass, ...fromSub].map(a => a.name ?? a.title).join(" | ")}]`);
     }
 
-    const traits = doc.system.advancement.filter(a => a.level === lvl && a.type === "Trait").length;
+    const traits = advOf(doc).filter(a => a.level === lvl && a.type === "Trait").length;
     if (expectedTraits && traits < expectedTraits) {
       fail(`${cid} L${lvl}: ${traits} Trait advancement(s), expected ${expectedTraits}`);
     }
@@ -205,12 +208,12 @@ for (const doc of profesje) {
   if (doc.system.classIdentifier !== def.klasa) {
     fail(`${pid}: classIdentifier ${doc.system.classIdentifier} != ${def.klasa}`);
   }
-  const levels = doc.system.advancement.map(a => a.level).sort((a, b) => a - b);
+  const levels = advOf(doc).map(a => a.level).sort((a, b) => a - b);
   const want = CLASSES[def.klasa].professionLevels;
   if (levels.join(",") !== want.join(",")) {
     fail(`${pid}: choices at ${levels.join("/")}, expected ${want.join("/")}`);
   }
-  for (const a of doc.system.advancement) {
+  for (const a of advOf(doc)) {
     // "Zdolność z profesji / Sztuczka" is one either/or pick, so its pool is the
     // profession's own abilities plus every Sztuczka.
     const entry = CLASSES[def.klasa].levels[a.level] ?? [];
@@ -243,7 +246,7 @@ for (const doc of features) {
 /* ---- towarzysze (PLAN_m3 §7.8) ---- */
 if (!klasaTowarzysza) fail("klasy: brak klasy „Towarzysz”");
 else {
-  const adv = klasaTowarzysza.system.advancement;
+  const adv = advOf(klasaTowarzysza);
   const ile = t => adv.filter(a => a.type === t && a.level === 1).length;
   if (klasaTowarzysza.system.hd?.denomination !== "d6") fail(`towarzysz: hd ${klasaTowarzysza.system.hd?.denomination} != d6`);
   if (adv.some(a => a.type === "HitPoints")) fail("towarzysz: HitPoints advancement — PW liczy moduł (U5)");
@@ -256,7 +259,8 @@ for (const a of szablony) {
   const rodzaj = a.flags?.[MODULE_ID]?.towarzyszSzablon;
   const wpis = RODZAJE[rodzaj];
   if (!wpis) { fail(`towarzysze: ${a.name} bez znanej flagi szablonu`); continue; }
-  if (a.system.attributes.ac.calc !== "custom" || a.system.attributes.ac.formula !== wpis.wzory.tt) fail(`towarzysze: ${a.name} — TT nie z formuły właściciela`);
+  const ac = a.system.attributes.ac;
+  if ((ac.calcs ?? []).length || ac.formulas?.length !== 1 || ac.formulas[0].formula !== wpis.wzory.tt) fail(`towarzysze: ${a.name} — TT nie z samej formuły właściciela`);
   if (!a.prototypeToken.actorLink) fail(`towarzysze: ${a.name} — żeton niepowiązany`);
   if (a.flags[MODULE_ID].bestiary?.usesZranienie !== !wpis.maszyna) fail(`towarzysze: ${a.name} — Stopnie Zranienia: istota tak (s. 205), maszyna nie (s. 214)`);
   if (wpis.maszyna) {
@@ -271,7 +275,7 @@ notes.push(`towarzysze: klasa ${klasaTowarzysza ? "jest" : "BRAK"}, ${szablony.l
 
 notes.push(`features: ${features.length} (uses ${withUses}, activities ${withActivity}, art ${withArt})`);
 notes.push(`sztuczki: ${sztuczki.length} docs; Pochodzenia: ${origins.length}, ich zdolności: ${pochodzenia.length}`);
-notes.push(`advancements: ${[...klasy, ...profesje, ...origins].reduce((n, d) => n + d.system.advancement.length, 0)}`);
+notes.push(`advancements: ${[...klasy, ...profesje, ...origins].reduce((n, d) => n + advOf(d).length, 0)}`);
 
 /* ---- tabele (PLAN_m5_postoj §7.17, U14): domknięcia zakresów i odnośniki do istniejących dokumentów ---- */
 {

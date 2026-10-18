@@ -43,12 +43,9 @@ async function przygotuj() {
   const minimi = await nowy("weapon:minimi");
   const dwururka = await nowy("weapon:dwururka");
   const r700 = await nowy("weapon:r700");
-  // The kit with `nativeCheck` (NeuroToolCheckActivity) as `createToolkits` builds it — the pack builder still writes
-  // stock `check` activities for every kit (PLAN_migracja_dnd5e6.md, E8).
-  const { createToolkits } = await import(`/modules/${MOD}/scripts/config/toolkits-data.mjs`);
-  await createToolkits(pc, { only: ["kowala"] });
-  const kit = pc.items.find(i => i.type === "tool" && i.system.type?.baseItem === "kowala");
-  await kit.setFlag(MOD, "e2eAktywnosci", true);
+  // The kit with `nativeCheck` from the compendium, as Produkcja hands it out: since E8 the pack builder writes its
+  // NeuroToolCheckActivity and check gates like `createToolkits()` (PM14).
+  const kit = await nowy("toolkit:kowala");
   const [naboje] = await P.utworzWynik(pc, { ref: "ammo:12ga_s", ilosc: 4 });
   await naboje.setFlag(MOD, "e2eAktywnosci", true);
 

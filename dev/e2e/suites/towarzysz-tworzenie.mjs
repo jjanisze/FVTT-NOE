@@ -20,6 +20,10 @@
 async function przygotuj() {
   const MOD = "neuroshima-2026-overrides";
   for (const c of [...game.combats]) await c.delete();
+  // The module makes the companions without the fixture flag, so a reseed keeps them; a reused world's
+  // leftover Lucky (party long deleted) would answer `getName` before this run's.
+  const stare = game.actors.filter(a => /^Agent · .+ — tworzenie$/.test(a.name)).map(a => a.id);
+  if (stare.length) await Actor.implementation.deleteDocuments(stare);
   const klasy = await game.packs.get(`${MOD}.klasy`).getDocuments();
   const zdolnosci = await game.packs.get(`${MOD}.zdolnosci-klasowe`).getDocuments();
   const daj = async (pcName, klasa, zdolnosc, poziom = 3) => {

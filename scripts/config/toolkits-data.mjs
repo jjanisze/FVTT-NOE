@@ -175,7 +175,7 @@ export const TOOLKITS = [
       { name: "Wyważenie drzwi lub otwarcie skrzyni", dc: 20 },
       // `gate` wires these into toolkit-kowal.mjs's check gate: a weapon-picker
       // dialog before the roll, and an early block (no card, no roll) when there's
-      // nothing eligible to act on — see _buildCheckActivity below.
+      // nothing eligible to act on — see buildToolkitCheckActivity below.
       { name: "Naostrzenie broni", dc: 10, gate: "kowalaNaostrzenie" },
       { name: "Naprawa zdegradowanej broni białej", dc: 15, gate: "kowalaNaprawa" }
     ],
@@ -398,7 +398,7 @@ function _toolkitDescription(kit, links) {
  * card falls back to the full reference description (Cecha/Używanie list/Produkcja
  * links/special note) — correct on the item sheet, way too much to repeat on every roll.
  * Which action was actually used is instead carried by the per-activity `chatFlavor`
- * (→ card subtitle, see `_buildCheckActivity`) and the roll button's own DC label.
+ * (→ card subtitle, see `buildToolkitCheckActivity`) and the roll button's own DC label.
  */
 function _toolkitChatDescription(kit) {
   const abil = ABILITY_LABEL[kit.ability] ?? kit.ability;
@@ -437,7 +437,7 @@ export function buildToolkitItemData(kit, links) {
 }
 
 /** Build the check-activity payload for one ST action (or the generic test). */
-function _buildCheckActivity(kit, { name, dc, gate }) {
+export function buildToolkitCheckActivity(kit, { name, dc, gate }) {
   return {
     name,
     // `chatFlavor` becomes the chat card's SUBTITLE (see ActivityMixin#_usageChatContext:
@@ -499,9 +499,9 @@ export async function createToolkits(actor, { only } = {}) {
     for ( const a of Array.from(item.system.activities) ) await item.deleteActivity(a.id);
 
     // Generic "Test narzędzi" (no DC) + one Check per ST action.
-    await item.createActivity(activityType, _buildCheckActivity(kit, { name: "Test narzędzi", dc: null }), { renderSheet: false });
+    await item.createActivity(activityType, buildToolkitCheckActivity(kit, { name: "Test narzędzi", dc: null }), { renderSheet: false });
     for ( const action of kit.actions ) {
-      await item.createActivity(activityType, _buildCheckActivity(kit, action), { renderSheet: false });
+      await item.createActivity(activityType, buildToolkitCheckActivity(kit, action), { renderSheet: false });
     }
 
     // Mały medyk: special "Przywracanie PW" utility activity (tiered heal handled by
