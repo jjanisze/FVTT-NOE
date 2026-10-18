@@ -1178,6 +1178,35 @@ Mechanika mieszka osobno od tekstu (`diseases-data.mjs` cytuje podręcznik i nie
 
 ## Changelog
 
+### v0.20.0 — dnd5e 6.0.6 i Foundry 14.369 (w przygotowaniu; wydanie po E11 — tag MG)
+
+Wymaga **dnd5e 6.0.6** i Foundry **14.367+** (zweryfikowane na 14.369); na dnd5e 5.3 zostaje v0.19.1. Przebieg, decyzje
+MG i każde znalezisko: `PLAN_migracja_dnd5e6.md` §11. Stan na 2026-10-18 (E10, piaskownica agenta): Quench
+1208/1208, e2e 21/21 (nowa paczka `aktywnosci`), **0 ostrzeżeń zgodności z naszego kodu** — od E10 każde takie
+ostrzeżenie oblewa przebieg.
+
+Co zobaczy stół:
+- **Unikanie daje Ułatwienie w RO na Zręczność** (s. 30) — natywna reguła dnd5e; gaśnie przy Obezwładnieniu i
+  Szybkości 0, także przy Udźwigu maksymalnym. W 5.3 tego Ułatwienia nie było wcale (decyzja MG 2026-10-18).
+- **Spadanie** (s. 43): żeton zostawiony nad niższą powierzchnią dostaje stan Spadanie; MG klika jego ikonę na żetonie
+  → żeton spada, a MG dostaje kartę obrażeń 1k6 za każde 1,5 m (bez limitu) z celem na tacce, Powalenie przy
+  obrażeniach. Kto ma szybkość lotu (drony latające), nie spada — chyba
+  że leży albo jest Obezwładniony. Działa tylko na scenach z poziomami i powierzchniami (v14).
+- **Inicjatywa:** grupa identycznych przeciwników ma jeden rzut (s. 25) — wymuszone ustawienie dnd5e.
+- **Palcożerca** (Bit-Boys) daje −1 tylko do Testów Cech na Zręczności, jak w RAW (wcześniej do wszystkich testów).
+- Karty czatu dnd5e są ciemne i bardziej zwarte (wygląd — później, D8). Wyniki RO i testów zostają osobnymi kartami
+  z paskiem Fuksa (podsumowania kart dnd5e wyłączone na każdym kliencie).
+- Dozownik znowu ma przycisk „Rzuć RO” na karcie trucizny; serie DS/MS i Ogień zaporowy znowu wygasają i wyzwalają
+  RO strefy; nazwy cech przedmiotów i ~230 napisów dnd5e po polsku (34 tłumaczenia wcześniej nie działały).
+- Nowy świat: okno powitalne dnd5e 6 może się pokazać, ale nie przestawia już jednostek na funty i stopy ani nie
+  odsłania paczek fantasy — moduł przywraca swoje ustawienia, gdy cokolwiek je zmieni.
+
+Pod spodem: wiadomości czatu jako typowane dane (`config/chat-message-data.mjs`), ścieżki 6.0 (`movement.speeds`,
+`senses.ranges`, `rolls.*`), TT przez `calcs`/`formulas`, stany z poziomami jako efekty `condition`, tacka z grupami
+celów, szablony jako Regiony, przyciski czatu jako deskryptory, okna DialogV2, plik ustawień dnd5e pilnowanych przez
+NOE (`config/dnd5e-settings.mjs`), paczki zapisywane w kształcie 6.0, skaner `dev/migration/dnd5e6-scan.mjs` w
+`npm test`.
+
 ### Po v0.19.1 — testy w oknach w tle (2026-10-17, narzędzia, bez wydania)
 
 - **Domyślny sposób warstwy 6: okna w tle.** Chrome z launchera vaultu dostaje

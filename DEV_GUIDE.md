@@ -10,8 +10,8 @@
 
 | Komponent | Wersja | Uwagi |
 |-----------|--------|-------|
-| FoundryVTT | 14.360 | Stable, coreVersion w world.json |
-| dnd5e | 5.3.0 (installed) / 5.3.2 (latest) | Compiled bundle `dnd5e.mjs` ~2.8 MB |
+| FoundryVTT | 14.369 (minimum 14.367) | Stable, coreVersion w world.json |
+| dnd5e | 6.0.6 (minimum = zweryfikowana) | Od v0.20.0; v0.19.1 — ostatnia na 5.3. Przejście: `PLAN_migracja_dnd5e6.md` (§3 — co się zmieniło, §11 — znaleziska) |
 | Node.js | 18+ wymagany | Przez foundry-mcp i skrypty w `dev/` |
 | Moduł | patrz `module.json` (`version`) | Etap: **alfa** (`PLAN_beta.md`). ~180 plików `.mjs` poza testami, 15 paczek. Bump + wpis w `IMPLEMENTATION.md` § Changelog przy każdej znaczącej dostawie funkcji; status mechaniki zmieniaj w macierzy § Stan projektu. |
 
@@ -122,7 +122,13 @@ npm run validate:css             # alias w package.json
 
 ---
 
-## 3. Architektura dnd5e v5.3.0 — co trzeba wiedzieć
+## 3. Architektura dnd5e — co trzeba wiedzieć
+
+> Rozdział powstał na dnd5e 5.3. Co dnd5e 6.0 zmienił (wiadomości czatu jako typowane dane, ścieżki
+> `movement.speeds`/`senses.ranges`/`rolls.*`, KP przez `calcs`/`formulas`, stany z poziomami, tacka z grupami,
+> szablony jako Regiony, przyciski czatu jako deskryptory, rozmieszczenie `TokenPlacement`/`TemplatePlacement`) —
+> `PLAN_migracja_dnd5e6.md` §3 i §11; adapter wiadomości: `scripts/config/chat-message-data.mjs`, wstawki do kart:
+> `scripts/config/chat-card-dom.mjs`, ustawienia dnd5e pilnowane przez NOE: `scripts/config/dnd5e-settings.mjs`.
 
 ### 3.1 CONFIG.DND5E — centralny punkt konfiguracji
 
@@ -1119,12 +1125,12 @@ dźwięku, zawartości kompendiów (testuj generator). Uzasadnienie: TESTING.md 
 
 ### 12.3 Higiena
 
-Testy chodzą w **prawdziwym świecie kampanii**. `scratchActor()` do tworzenia,
+Testy chodzą w **prawdziwym świecie** — piaskownica agenta albo Poligon, nigdy kampania (AGENTS.md). `scratchActor()` do tworzenia,
 `scratchCleanup()` w `after()`, `stub()` do podmiany stanu globalnego z przywróceniem
 w `afterEach()`. Wszystko z `scripts/tests/helpers.mjs`.
 
-Dokumenty tymczasowe w dnd5e 5.3 **nie działają** — `prepareData` rzuca w `new HitDice`,
-bo `actor.classes` jeszcze nie istnieje. Stąd prawdziwe dokumenty z prefiksem `[Quench]`.
+Dokumenty tymczasowe w dnd5e 5.3 **nie działały** (`prepareData` rzucał w `new HitDice`); w 6.0 działają (TESTING.md
+§5). Prawdziwe dokumenty z prefiksem `[Quench]` zostają tam, gdzie liczą się hooki tworzenia i aktualizacji.
 
 ### 12.4 Dwie pułapki, które kosztują czas
 

@@ -283,7 +283,8 @@ to nie jest test Quencha. Należy do warstwy 6 (piaskownica), nie do świata kam
 
 ## 5. Izolacja — obowiązkowa
 
-Testy chodzą w **prawdziwym świecie kampanii**. Zostawiony śmieć to śmieć w sesji.
+Testy chodzą w **prawdziwym świecie** — w piaskownicy agenta (`fvtt quench`) albo na Poligonie, nigdy w kampanii
+(AGENTS.md). Zostawiony śmieć psuje następny przebieg w tym samym świecie.
 
 ```js
 import { scratchActor, scratchCleanup, stub, captureWarnings } from "./helpers.mjs";
@@ -297,9 +298,12 @@ import { scratchActor, scratchCleanup, stub, captureWarnings } from "./helpers.m
 
 ### Dlaczego prawdziwe dokumenty, a nie tymczasowe
 
-W dnd5e 5.3 dokument tymczasowy (`new Actor(data)`) **rzuca wyjątkiem** w `prepareData`:
-`new HitDice(this)` czyta `actor.classes`, a `_lazy` inicjalizuje się dopiero po
-`_initialize()`. Dokumenty tymczasowe są w tym systemie nieużywalne — stąd `scratchActor`.
+W dnd5e 5.3 dokument tymczasowy (`new Actor(data)`) **rzucał wyjątkiem** w `prepareData`:
+`new HitDice(this)` czyta `actor.classes`, a `_lazy` inicjalizował się dopiero po
+`_initialize()`. dnd5e 6.0 zakłada `_lazy` na starcie `prepareData` (`_clearCachedValues`) — tymczasowa postać z
+klasą przygotowuje się bez błędu (sprawdzone 2026-10-18: KW, premia z biegłości, PW). Do czystych obliczeń na
+danych przygotowanych wolno go więc użyć. `scratchActor` zostaje wszędzie, gdzie test sprawdza hooki tworzenia i
+aktualizacji (`preCreate*`, `createItem`, `updateActor`) — idą tylko przy prawdziwych dokumentach.
 
 ### Walki nie da się zrobić naprawdę — w Quenchu
 

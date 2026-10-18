@@ -1,7 +1,7 @@
 # AGENTS.md — operating manual for agents in this repo
 
 For any agent harness (Claude Code, Copilot, Codex, …). This repo is the FoundryVTT module
-**Neuroshima: Ostatnia Era** (dnd5e 5.3 overrides) and it is **public** — see "Rules" before
+**Neuroshima: Ostatnia Era** (dnd5e 6.0 overrides) and it is **public** — see "Rules" before
 writing anything. Deep docs: [DEV_GUIDE.md](DEV_GUIDE.md) (dnd5e integration),
 [ARCHITECTURE.md](ARCHITECTURE.md), [TESTING.md](TESTING.md), [IMPLEMENTATION.md](IMPLEMENTATION.md)
 (status matrix + changelog), [RELEASING.md](RELEASING.md); topic plans `PLAN_*.md`; check for a

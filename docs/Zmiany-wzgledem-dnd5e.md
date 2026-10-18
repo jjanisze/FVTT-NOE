@@ -67,8 +67,10 @@ Effects, warunki przerwania, karty czatu).
   podręcznika da się jednoznacznie przełożyć na regułę.
 - **Krwawienie** (Hemofilia) — wyzwalane obrażeniami ciętymi/kłutymi, rzuty obronne co turę, trzy
   sposoby zatrzymania zgodne z RAW.
-- **Spadanie** — obrażenia, powalenie, test przy wejściu do cieczy — czego bazowy dnd5e w ogóle
-  nie liczy.
+- **Spadanie** — 1k6 obrażeń za każde 1,5 m, bez górnej granicy, i Powalenie (s. 43). Żeton zostawiony nad
+  niższą powierzchnią dostaje stan Spadanie (mechanizm dnd5e 6 z liczbami NOE); MG klika ikonę stanu na żetonie,
+  żeton spada, a MG dostaje kartę obrażeń z celem na tacce. Tylko na scenach z poziomami i powierzchniami.
+  Test przy wejściu do cieczy — jak dotąd.
 - **Głód, odwodnienie, podpalenie** — dzienne zapotrzebowanie z ekwipunku, konsekwencje przy braku
   zaopatrzenia.
 - **Przemarznięcie, brak snu, duszenie się** — narzędzie MG „Zagrożenia” w kontrolkach żetonów.

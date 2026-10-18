@@ -68,7 +68,8 @@ ze stroną podręcznika.
 krytyk (s. 35) — werdykt na karcie ataku, krytyczne kości obrażeń i Stopień Zranienia idą same.
 
 **Unikanie i Bieganie** to akcje: przełącza się je w panelu Stan na karcie (w trwającej walce) albo w
-HUD żetonu; schodzą na początku twojej następnej tury. Biegać nie można, leżąc.
+HUD żetonu; schodzą na początku twojej następnej tury. Biegać nie można, leżąc. Unikanie daje też Ułatwienie w Rzutach
+Obronnych na Zręczność (s. 30) — gaśnie przy Obezwładnieniu i przy Szybkości 0 (także przy Udźwigu maksymalnym).
 
 **Osłona** pytana jest też przy ataku wręcz — wiersz w oknie ataku, domyślnie „Brak”.
 

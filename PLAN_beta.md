@@ -42,7 +42,8 @@ flowchart LR
 2. **Migracja na Foundry 14.369 i dnd5e 6.0.x** — **plan: [PLAN_migracja_dnd5e6.md](PLAN_migracja_dnd5e6.md)**
    (projekt 2026-10-17; decyzje MG: rdzeń w miejscu najpierw, master w miejscu, sesje zamrożone do bety, twarde cięcie
    na dnd5e 6.0.6, port 1:1 z listą przejęć funkcji po migracji; tacki tylko dla MG, bez koncentracji, wygląd po fazie
-   funkcjonalnej). Foundry 14.369 zainstalowany 2026-10-17.
+   funkcjonalnej). Foundry 14.369 zainstalowany 2026-10-17. **Stan 2026-10-18:** E0–E9 zrobione, E10 (bramka
+   wydania) w toku; potem E11 — kampania z MG — i tag v0.20.0 (MG). Postęp: §11 planu.
 3. **M6 z Biegłościami profesji** (dziura w B6) — po migracji, bo awans postaci w dnd5e się zmienia.
 4. **M4 Pojazdy** — miejsce w kolejce czeka na decyzję MG: tutaj, przed betą, albo w §4 „po becie”.
 5. **Style i motywy** — stanowiska Poligonu Garderoba i Galeria, reszta ilustracji M5 (`dev/icons/MISSING.md`).

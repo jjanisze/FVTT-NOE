@@ -5,7 +5,7 @@ we FoundryVTT.**
 
 [![Licencja: MIT](https://img.shields.io/badge/licencja-MIT-blue.svg)](LICENSE)
 ![FoundryVTT v14](https://img.shields.io/badge/FoundryVTT-v14-informational)
-![dnd5e 5.3](https://img.shields.io/badge/dnd5e-5.3.x-informational)
+![dnd5e 6.0](https://img.shields.io/badge/dnd5e-6.0.6-informational)
 
 ![Written in Promptese](https://img.shields.io/badge/Written%20in-Promptese-ff69b4?style=for-the-badge)
 ![Artists exploited](https://img.shields.io/badge/Artists%20exploited-65535-critical?style=flat-square)
@@ -51,8 +51,10 @@ spodziewać zmian w danych między wersjami. Co jest zrobione — macierz w
 
 | Komponent | Wersja |
 |---|---|
-| FoundryVTT | v14+ |
-| System `dnd5e` | 5.3.x |
+| FoundryVTT | v14 (14.367 lub nowszy) |
+| System `dnd5e` | 6.0.6 |
+
+Od wersji 0.20.0 moduł wymaga `dnd5e` 6.0.6. Na `dnd5e` 5.3.x zostań przy wersji 0.19.1 (ostatnia dla 5.3).
 
 ## Instalacja w jednym kroku
 
