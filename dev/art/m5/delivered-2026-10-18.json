@@ -116,13 +116,33 @@
         "mode": "RGB",
         "bytes": 101588
       }
-    }
-  ],
-  "awaitingSourceEdit": [
+    },
     {
       "id": "oboz/podziemia",
       "source": "dev/art/m5/in/oboz/podziemia.png",
-      "reason": "Remove readable graffiti and lettering from the edited source before packaging."
+      "output": "ui/oboz/podziemia.webp",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "fc4c3769064c55931b8defaf5f1d12b36c7e91c289e7b52f29774f4db0875827",
+      "outputSha256": "e2cab99579ac710ef6b7b0d61d52aac31e280b505359fbd355a3472346fda8d3",
+      "validation": {
+        "asset": "oboz/podziemia",
+        "file": "ui/oboz/podziemia.webp",
+        "width": 1200,
+        "height": 400,
+        "mode": "RGB",
+        "bytes": 106448
+      }
+    }
+  ],
+  "awaitingSourceEdit": [],
+  "contentApprovals": [
+    {
+      "id": "oboz/podziemia",
+      "date": "2026-10-18",
+      "approval": "GM explicitly approved the existing source graffiti; retained without retouching."
     }
   ]
 }

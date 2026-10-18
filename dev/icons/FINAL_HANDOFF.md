@@ -43,7 +43,7 @@ Foundry remains closed; no campaign repoint was run.
 - **Starsze dźwięki produkcji (§C 1–9):** gotowe pliki są w
   `sounds/produkcja/`; pozostałe podpięcia slotów `PRACA` i `ZDARZENIA`
   w `scripts/production/oprawa.mjs` są osobnym zadaniem.
-- **Malowane obrazy (§B/§E/§G/§H):** handlarze, utrzymanie i sześć obozów są dostarczone;
+- **Malowane obrazy (§B/§E/§G/§H):** handlarze, utrzymanie i siedem obozów są dostarczone;
   reszta czeka na źródła MG w `dev/art/m5/in/<zestaw>/<klucz>.png`.
   Packer → kontrola WEBP → oznaczenie wiersza → CREDITS: AI-generated with
   OpenAI DALL-E, hand-edited by the GM. M5 używa dokładnych nazw plików.

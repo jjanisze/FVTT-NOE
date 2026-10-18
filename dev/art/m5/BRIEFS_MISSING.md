@@ -1,14 +1,12 @@
 # Missing artwork briefs — M5 and carried requests
 
-25 undelivered catalog images, updated 2026-10-18: one subway camp, seven ruin
-interiors, four wrecks, nine map objects and four animal companions.
+24 undelivered catalog images, updated 2026-10-18: seven ruin interiors,
+four wrecks, nine map objects and four animal companions.
 Delivered briefs: [BRIEFS_DELIVERED.md](BRIEFS_DELIVERED.md).
 The [asset queue](../../icons/MISSING.md) also lists outstanding bestiary tokens.
 
 The GM generates the images in DALL-E and hand-edits the sources; an agent
-only crops, resizes and converts approved pixels. Six camp sources were
-packaged on 2026-10-18. The subway source still contains readable graffiti;
-remove the lettering in `in/oboz/podziemia.png` before packaging it.
+only crops, resizes and converts approved pixels.
 
 **Current art direction (GM feedback, 2026-10-18):** grounded American
 post-apocalyptic survival art. Capture the material realism and desolation
@@ -31,29 +29,9 @@ feedback updates the earlier style direction. Token proportions:
 Display sizes are composition targets. Generate one image per prompt, not an atlas.
 For 3:1 banners, keep all decisive objects inside the central 1792×597 band of a
 1792×1024 source (approximately y=213–811). The packer center-crops and resizes.
-Keep medical packaging unlabelled, subway walls free of lettering and wreck
-craters in separate scene effects. Final filenames, sizes and alpha rules stay
+Keep medical packaging unlabelled and wreck craters in separate scene effects.
+Final filenames, sizes and alpha rules stay
 as specified below.
-
-## oboz/podziemia
-
-**Purpose:** Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery.
-
-**Prompt:**
-
-```text
-Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
-
-An improvised rest stop on an abandoned American city subway platform: rectangular concrete beams, utilitarian ceramic tiles, steel service doors and corroded electrical conduits. Two plain bedrolls and patched canvas sit beside a shielded carbide lamp and a very small contained fire. The weak practical light reaches only the immediate sleeping area; a black tunnel mouth and cold damp concrete dominate the rest of the scene. Walls have plain peeling paint with no graffiti or marks resembling writing. Empty of people; no vaulted stone dungeon, grand arches or furnished fantasy camp.
-
-Landscape scene. Compose the decisive subject and practical lighting inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
-```
-
-**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
-
-**Final spec and name:** **`ui/oboz/podziemia.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
-
-**Drop point:** `dev/art/m5/in/oboz/podziemia.png` — the GM's edited source; `dev/` is not shipped.
 
 ## ruiny/apteka
 

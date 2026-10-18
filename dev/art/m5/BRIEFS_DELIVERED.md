@@ -1,7 +1,7 @@
 # Delivered artwork briefs — M5 and carried requests
 
-16 delivered images: seven trader portraits and three upkeep banners packaged
-on 2026-10-12, plus six camp banners packaged on 2026-10-18. These historical
+17 delivered images: seven trader portraits and three upkeep banners packaged
+on 2026-10-12, plus seven camp banners packaged on 2026-10-18. These historical
 briefs are retained for reference; the GM's actual generation prompts may differ.
 For new images and revisions, use the updated art direction in BRIEFS_MISSING.
 Delivery evidence: [delivered-2026-10-12.json](delivered-2026-10-12.json) and
@@ -17,7 +17,7 @@ Display sizes below are composition targets, not a claim about unfinished UI cod
 
 For banners, a 1792×1024 source loses about 213 px above and below in the centered 3:1 crop (central 1792×597 band). For portraits, a 1024×1792 source loses about 213 px above and below in the centered 3:4 crop (central 1024×1365 band). The packer uses the same centered ratios for edited sources of any size. Arrange every important object inside these bands before hand-editing.
 
-The medical crosses in the queue become unlabelled medicine props, subway graffiti becomes abstract paint, and the giant wreck's crater stays a separate scene effect. These choices preserve the required no-logos/no-lettering rule and transparent, ground-free token format.
+Medical props and separate wreck effects retain their original specifications. The GM explicitly approved the subway source's existing graffiti on 2026-10-18; it is retained in the delivered image.
 
 ## handlarze/obwozny
 
@@ -338,3 +338,25 @@ Landscape scene. Compose the decisive subject, warm light and horizon inside the
 **Final spec and name:** **`ui/oboz/ruiny.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
 
 **Drop point:** `dev/art/m5/in/oboz/ruiny.png` — the GM's edited source; `dev/` is not shipped.
+
+## oboz/podziemia
+
+**Delivery note (2026-10-18):** The GM approved the existing source with its graffiti intact. The reference prompt below is archived as written; no lettering removal was applied.
+
+**Purpose:** Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery.
+
+**Prompt:**
+
+```text
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
+
+An improvised rest stop on an abandoned American city subway platform: rectangular concrete beams, utilitarian ceramic tiles, steel service doors and corroded electrical conduits. Two plain bedrolls and patched canvas sit beside a shielded carbide lamp and a very small contained fire. The weak practical light reaches only the immediate sleeping area; a black tunnel mouth and cold damp concrete dominate the rest of the scene. Walls have plain peeling paint with no graffiti or marks resembling writing. Empty of people; no vaulted stone dungeon, grand arches or furnished fantasy camp.
+
+Landscape scene. Compose the decisive subject and practical lighting inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
+```
+
+**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
+
+**Final spec and name:** **`ui/oboz/podziemia.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
+
+**Drop point:** `dev/art/m5/in/oboz/podziemia.png` — the GM's edited source; `dev/` is not shipped.

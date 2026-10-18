@@ -3,13 +3,13 @@
 The GM generates and hand-edits the painted artwork. Ready-to-paste English prompts,
 crop instructions, purposes and exact source/drop paths are split by delivery status:
 
-- [BRIEFS_MISSING.md](BRIEFS_MISSING.md) — 25 undelivered catalog images.
-- [BRIEFS_DELIVERED.md](BRIEFS_DELIVERED.md) — 16 delivered images, retained for reference.
+- [BRIEFS_MISSING.md](BRIEFS_MISSING.md) — 24 undelivered catalog images.
+- [BRIEFS_DELIVERED.md](BRIEFS_DELIVERED.md) — 17 delivered images, retained for reference.
 
 All subjects are generic and suitable for this public repository. After a delivery,
 move its full brief to BRIEFS_DELIVERED and remove its row from the asset queue.
 
-Current order: subway source cleanup, ruins, then wrecks. Older object and companion
+Current order: ruins, then wrecks. Older object and companion
 requests from MISSING sections B and E follow the M5 briefs. White glyphs use the
 separate icon review pipeline; this folder does not generate pictures.
 
@@ -22,9 +22,9 @@ Portraits are 600×800 RGB WEBP; upkeep banners are 1200×400 RGB WEBP.
 The three upkeep sources arrived under `in/handlarze/`; identical copies were placed
 under their canonical `in/postoj/` drop paths, preserving the original drops.
 Future upkeep edits should use the canonical drop paths recorded in the briefs.
-Six camp banners were packaged from new GM sources on 2026-10-18; hashes and
-validation are in `delivered-2026-10-18.json`. The subway source needs its readable
-graffiti removed before delivery.
+Seven camp banners were packaged from new GM sources on 2026-10-18; hashes and
+validation are in `delivered-2026-10-18.json`. The GM approved the subway source
+with its existing graffiti retained.
 
 Current prompt direction follows the GM's 2026-10-18 feedback: grounded American
 post-apocalyptic survival art, without fantasy styling or Eastern European
@@ -61,5 +61,5 @@ assets that need a compendium rebuild or live update go in the
 
 `record_delivery.py` validates outputs with present edited sources, records their
 provenance/hashes and produces a local `out/delivery-preview.png` contact sheet.
-It does not alter source art or final images. The subway camp, ruins, wrecks and
-older object/companion images remain queued until usable edited sources arrive.
+It does not alter source art or final images. Ruins, wrecks and older
+object/companion images remain queued until usable edited sources arrive.
