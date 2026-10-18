@@ -1,11 +1,12 @@
 # PLAN — Droga do wczesnej bety
 
 > Status: **AKTYWNY** (2026-09-26, moduł v0.16.0; przegląd 2026-10-03, v0.17.1; v0.18.0 2026-10-08 —
-> M0, M1 i M2 zrobione; **v0.19.0 2026-10-15 — M3 i M5 wydane**; przegląd 2026-10-17 przed migracją). Etap
-> bieżący: **alfa** — późna dla walki, ekwipunku, przetrwania, produkcji, towarzyszy i postoju (handel,
-> szabrowanie, doba), wczesna dla pojazdów. Bramki spełnione: B3, B5, B6 (z dziurą: biegłości profesji — M6);
-> bramka wydania v0.19.0 zielona (e2e 20/20 w świecie gołym i zalecanym, Quench 1184/1184). B2 zacznie liczyć się od
-> nowa — migracja (§0) przepisuje modele. **Poligon** (warstwa 7, `PLAN_human_testing.md`) działa od 2026-10-12;
+> M0, M1 i M2 zrobione; **v0.19.0 2026-10-15 — M3 i M5 wydane**; przegląd 2026-10-17 przed migracją; **v0.20.0
+> 2026-10-18 — migracja na Foundry 14.369 i dnd5e 6.0.6, kampania przeniesiona**). Etap bieżący: **alfa** — późna
+> dla walki, ekwipunku, przetrwania, produkcji, towarzyszy i postoju (handel, szabrowanie, doba), wczesna dla
+> pojazdów. Bramki spełnione: B3, B5, B6 (z dziurą: biegłości profesji — M6); bramka wydania v0.20.0 zielona (e2e
+> 21/21 w świecie gołym i zalecanym, Quench 1211/1211). B2 liczy się od nowa od v0.20.0 — dwie sesje na nowej
+> wersji bez przepisywania modeli. **Poligon** (warstwa 7, `PLAN_human_testing.md`) działa od 2026-10-12;
 > weto M3 i M5: MG przeszedł je slice po slice'ie przy wdrażaniu, formalne przejście sond odłożone.
 > Kolejność do bety — **§0**.
 >
@@ -42,8 +43,9 @@ flowchart LR
 2. **Migracja na Foundry 14.369 i dnd5e 6.0.x** — **plan: [PLAN_migracja_dnd5e6.md](PLAN_migracja_dnd5e6.md)**
    (projekt 2026-10-17; decyzje MG: rdzeń w miejscu najpierw, master w miejscu, sesje zamrożone do bety, twarde cięcie
    na dnd5e 6.0.6, port 1:1 z listą przejęć funkcji po migracji; tacki tylko dla MG, bez koncentracji, wygląd po fazie
-   funkcjonalnej). Foundry 14.369 zainstalowany 2026-10-17. **Stan 2026-10-18:** E0–E9 zrobione, E10 (bramka
-   wydania) w toku; potem E11 — kampania z MG — i tag v0.20.0 (MG). Postęp: §11 planu.
+   funkcjonalnej). Foundry 14.369 zainstalowany 2026-10-17. **Zrobione 2026-10-18: wydane jako v0.20.0** (bramka
+   zielona: e2e 21/21 w świecie gołym i zalecanym, Quench 1211/1211, 0 ostrzeżeń zgodności z naszego kodu); kampania
+   zmigrowana na dnd5e 6.0.6 (najpierw próba na klonie), zamrożenie zdjęte. Plan zamknięty; reszta — jego lista PM.
 3. **M6 z Biegłościami profesji** (dziura w B6) — po migracji, bo awans postaci w dnd5e się zmienia.
 4. **M4 Pojazdy** — miejsce w kolejce czeka na decyzję MG: tutaj, przed betą, albo w §4 „po becie”.
 5. **Style i motywy** — stanowiska Poligonu Garderoba i Galeria, reszta ilustracji M5 (`dev/icons/MISSING.md`).
@@ -66,7 +68,7 @@ zdolności.
 | B3 | **Paczki** — wszystkie 15 zbudowane z bieżących danych, `npm run validate:packs` zielone, po starcie Foundry rekordy identyczne z świeżym buildem (zmiany plików `.log`/`MANIFEST`/`LOG` to kompaktowanie LevelDB przy otwarciu, nie migracja) | `build:packs` przy zamkniętym Foundry, start, `build-packs.mjs --out=<tmp>` + `node dev/packs/diff-packs.mjs <tmp>` |
 | B4 | **Testy** — `npm test` i pełny Quench zielone; każda mechanika z §3 ma testy warstwy 1 (czyste funkcje, `TESTING.md`) | `game.neuroshima.tests.run()` |
 | B5 | **Rejestr automatyki dla zdolności klasowych** — jak dla Sztuczek i Pochodzeń; każda zdolność, Sztuczka i zdolność Pochodzenia ma plakietkę pokrycia (auto / częściowo / brak + „Nie automatyzujemy: …") | `game.neuroshima.<rejestr>.report()` |
-| B6 | **Czysta instalacja** — świeży świat dnd5e 5.3, sam moduł (+ opcjonalnie Sequencer): zero błędów w konsoli przy starcie, paczki się otwierają, postać powstaje od zera przez awans (klasa → Pochodzenie → Sztuczka), walka P/KS z amunicją i Zranieniem działa. *Uwaga 2026-10-10: profesja nie nadaje biegłości — M6 „Biegłości profesji”* | `npm run release:check` — moduł z `module.zip` w piaskownicy wydania, świat goły i zalecany, paczki e2e (lista kontrolna w M0) |
+| B6 | **Czysta instalacja** — świeży świat dnd5e 6.0.6 (do v0.19.1: 5.3), sam moduł (+ opcjonalnie Sequencer): zero błędów w konsoli przy starcie, paczki się otwierają, postać powstaje od zera przez awans (klasa → Pochodzenie → Sztuczka), walka P/KS z amunicją i Zranieniem działa. *Uwaga 2026-10-10: profesja nie nadaje biegłości — M6 „Biegłości profesji”* | `npm run release:check` — moduł z `module.zip` w piaskownicy wydania, świat goły i zalecany, paczki e2e (lista kontrolna w M0) |
 | B7 | **Dokumentacja** — IMPLEMENTATION.md zgodny z kodem (tabela plików, macierz), `docs/` opisuje z perspektywy gracza każdą mechanikę widoczną na karcie | Przegląd |
 | B8 | **Granica treści** — treść WKK tylko w `scripts/wkk/`, zero spoilerów fabularnych w repo | `scripts/wkk/README.md`, przegląd |
 

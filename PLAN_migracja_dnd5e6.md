@@ -1,6 +1,8 @@
 # PLAN — Migracja: Foundry 14.369 i dnd5e 6.0.x
 
-> Status: **PROJEKT** (2026-10-17). Decyzje MG D1–D11 (§1). Rozmiar: **L–XL**. Wywołanie: `PLAN_beta.md` §0, krok 2.
+> Status: **ZAKOŃCZONY** (2026-10-18, **v0.20.0**; projekt 2026-10-17). E0–E12 zrobione, kampania na dnd5e 6.0.6,
+> zamrożenie zdjęte. Co zostało — lista PM (§9); przebieg — §11. Decyzje MG D1–D11 (§1). Wywołanie: `PLAN_beta.md` §0,
+> krok 2.
 > **Foundry 14.369 zainstalowany przez MG 2026-10-17** w ten sam folder (`Program Files`) — ścieżki bez zmian; E1 zaczyna
 > się od bramki. Workspace „FVTT v14 Source” to już 14.369 (numery linii rdzenia z 14.364 w tym planie — do odświeżenia).
 > Punkt odniesienia: **v0.19.1** (bramka: Quench 1185/1185, e2e 40/40 w świecie gołym i zalecanym; Foundry 14.364,
@@ -852,3 +854,15 @@ nowej kopii nie robimy — punktem powrotu zostaje kopia sprzed migracji (2026-1
 - **Poza modułem:** skrypt świata kampanii `worlds/output/templates/roll20-templates.js` (import z Roll20) słucha
   `renderChatMessage` — ostrzeżenie przy każdym starcie, zniknie w v15 (PM15).
 - Koniec zamrożenia: kampania znowu domyślnym profilem `fvtt`, wypychanie map (`Maps/tools/push.py`) działa.
+
+**2026-10-18 — E12 zrobione: v0.20.0** (`2881904`, tag `v0.20.0` z bramki). Bramka wydania na tym commicie
+(`logs/release/0.20.0-2026-10-18T18-20-55.json`): wszystkie kroki zielone; e2e **21/21 + 21/21** (goły, zalecany),
+Quench **1211/1211**, 0 ostrzeżeń zgodności z naszego kodu. W wydaniu także partia ikon biegłości (Codex) — z kodem
+w `scripts/`, więc pełna bramka, nie skrót.
+- Dokumenty: `README.md`, `docs/Instalacja.md` (wymagania; aktualizacja świata z 0.19.x przez `migrateDnd5e6`),
+  `docs/Zmiany-wzgledem-dnd5e.md`, `docs/TT-i-reakcje.md`, `DEV_GUIDE.md`, `ARCHITECTURE.md` (pułapki dnd5e 6),
+  `AGENTS.md` (zamrożenie), `TESTING.md` (dokumenty tymczasowe w 6.0), `IMPLEMENTATION.md` (changelog v0.20.0),
+  `PLAN_beta.md` §0. `RELEASING.md` — polityka wersji bez zmian (ogólna). Mapa źródeł w vaulcie już na 6.0.6 (E2).
+- **Zamknięcie planu.** Kryteria wszystkich etapów spełnione; przejście MG po Poligonie — minimalne (MG: wystarczy,
+  dalsze przejścia bliżej bety). Odłożone świadomie: PM1–PM13, PM15 (§9), wygląd kart czatu (D8 — etap stylów).
+  Zegar B2 (`PLAN_beta.md`) liczy się od v0.20.0.
