@@ -858,7 +858,11 @@ nowej kopii nie robimy — punktem powrotu zostaje kopia sprzed migracji (2026-1
 **2026-10-18 — E12 zrobione: v0.20.0** (`2881904`, tag `v0.20.0` z bramki). Bramka wydania na tym commicie
 (`logs/release/0.20.0-2026-10-18T18-20-55.json`): wszystkie kroki zielone; e2e **21/21 + 21/21** (goły, zalecany),
 Quench **1211/1211**, 0 ostrzeżeń zgodności z naszego kodu. W wydaniu także partia ikon biegłości (Codex) — z kodem
-w `scripts/`, więc pełna bramka, nie skrót.
+w `scripts/`, więc pełna bramka, nie skrót. **Zadanie wydania na GitHubie padło** na teście narzędzi tylko pod Linuksem
+(`fs.rmdirSync` na dowiązaniu — junction w Windows, zwykły symlink na runnerze); poprawka `7141a54`, odtworzone i
+sprawdzone w WSL (Node 24, Python 3.13). Tag przeniesiony na `7141a54`: szybka bramka zielona, `module.zip`
+bajt w bajt ten sam co z pełnej bramki (sha256 `f46b9c0c…`). **v0.20.0 opublikowane** (Latest, `module.json` +
+`module.zip`).
 - Dokumenty: `README.md`, `docs/Instalacja.md` (wymagania; aktualizacja świata z 0.19.x przez `migrateDnd5e6`),
   `docs/Zmiany-wzgledem-dnd5e.md`, `docs/TT-i-reakcje.md`, `DEV_GUIDE.md`, `ARCHITECTURE.md` (pułapki dnd5e 6),
   `AGENTS.md` (zamrożenie), `TESTING.md` (dokumenty tymczasowe w 6.0), `IMPLEMENTATION.md` (changelog v0.20.0),
