@@ -1,0 +1,128 @@
+{
+  "date": "2026-10-18",
+  "provenance": "AI-generated with OpenAI DALL-E, hand-edited by the GM",
+  "processing": "Existing pack.py: centered crop, resize, WEBP conversion only",
+  "delivered": [
+    {
+      "id": "oboz/pustynia",
+      "source": "dev/art/m5/in/oboz/pustynia.png",
+      "output": "ui/oboz/pustynia.webp",
+      "sourceSize": [
+        1659,
+        948
+      ],
+      "sourceSha256": "68623d937069f47684d7e28299a9b893c432474ada38829c130e0e98bb35f301",
+      "outputSha256": "3b89193c886288c64189cea59afedbc86717ba71e2fd39ec11cacadc4e29ba89",
+      "validation": {
+        "asset": "oboz/pustynia",
+        "file": "ui/oboz/pustynia.webp",
+        "width": 1200,
+        "height": 400,
+        "mode": "RGB",
+        "bytes": 90276
+      }
+    },
+    {
+      "id": "oboz/preria",
+      "source": "dev/art/m5/in/oboz/preria.png",
+      "output": "ui/oboz/preria.webp",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "2f7106bc31d8ff35b237c6bf588af5a3ff8251ca1b92120ba039efd807c7214e",
+      "outputSha256": "a85ff232ff2a87889d93b7864ece8b1c6712a95c04aca89eb5cd2963ba8b275b",
+      "validation": {
+        "asset": "oboz/preria",
+        "file": "ui/oboz/preria.webp",
+        "width": 1200,
+        "height": 400,
+        "mode": "RGB",
+        "bytes": 76720
+      }
+    },
+    {
+      "id": "oboz/las",
+      "source": "dev/art/m5/in/oboz/las.png",
+      "output": "ui/oboz/las.webp",
+      "sourceSize": [
+        1659,
+        948
+      ],
+      "sourceSha256": "3c1b1a6960e09707e9e64c9c2d6929934bd568b3b1463e9a43a38ac4edc4177c",
+      "outputSha256": "9553afad99561fb8155bf90bd62407ce173994773a029b2897fb46947fa9aad2",
+      "validation": {
+        "asset": "oboz/las",
+        "file": "ui/oboz/las.webp",
+        "width": 1200,
+        "height": 400,
+        "mode": "RGB",
+        "bytes": 125798
+      }
+    },
+    {
+      "id": "oboz/gory",
+      "source": "dev/art/m5/in/oboz/gory.png",
+      "output": "ui/oboz/gory.webp",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "17f82f0f393c4e5ae2194bd2dfaf0d44bde17f19fcb765668307d8d8fa054fea",
+      "outputSha256": "901ec7b5cb6daa0ec04664a2355d3be84feae907b4ea398ac0bd48b2a77e7734",
+      "validation": {
+        "asset": "oboz/gory",
+        "file": "ui/oboz/gory.webp",
+        "width": 1200,
+        "height": 400,
+        "mode": "RGB",
+        "bytes": 93692
+      }
+    },
+    {
+      "id": "oboz/bagna",
+      "source": "dev/art/m5/in/oboz/bagna.png",
+      "output": "ui/oboz/bagna.webp",
+      "sourceSize": [
+        2172,
+        724
+      ],
+      "sourceSha256": "9cb93e1770aa92fb156172516535483427b770e9264e80cb90fe67c8e729df8a",
+      "outputSha256": "af49bd93eae088d371f43ac4bf52013166fab432d83b1e2677e644b8fd51c99d",
+      "validation": {
+        "asset": "oboz/bagna",
+        "file": "ui/oboz/bagna.webp",
+        "width": 1200,
+        "height": 400,
+        "mode": "RGB",
+        "bytes": 100402
+      }
+    },
+    {
+      "id": "oboz/ruiny",
+      "source": "dev/art/m5/in/oboz/ruiny.png",
+      "output": "ui/oboz/ruiny.webp",
+      "sourceSize": [
+        1659,
+        948
+      ],
+      "sourceSha256": "41e7ef4a1e05cb8bdc058ecc8355a1171853e574d3c8b8523eddc9c745aadfec",
+      "outputSha256": "868726efc984bd56b4243f599db0ce5970e08c78a16e6a3c636ffe0b9b069e57",
+      "validation": {
+        "asset": "oboz/ruiny",
+        "file": "ui/oboz/ruiny.webp",
+        "width": 1200,
+        "height": 400,
+        "mode": "RGB",
+        "bytes": 101588
+      }
+    }
+  ],
+  "awaitingSourceEdit": [
+    {
+      "id": "oboz/podziemia",
+      "source": "dev/art/m5/in/oboz/podziemia.png",
+      "reason": "Remove readable graffiti and lettering from the edited source before packaging."
+    }
+  ]
+}

@@ -219,7 +219,7 @@
         1200,
         400
       ],
-      "subject": "A night camp on an abandoned subway platform lit by a carbide lamp beside a small campfire. Dark tunnel mouth, cracked tiles and abstract paint stains on the walls. The stains must never resemble letters or readable graffiti.",
+      "subject": "An improvised rest stop on an abandoned American city subway platform: rectangular concrete beams, utilitarian ceramic tiles, steel service doors and corroded electrical conduits. Two plain bedrolls and patched canvas sit beside a shielded carbide lamp and a very small contained fire. The weak practical light reaches only the immediate sleeping area; a black tunnel mouth and cold damp concrete dominate the rest of the scene. Walls have plain peeling paint with no graffiti or marks resembling writing. Empty of people; no vaulted stone dungeon, grand arches or furnished fantasy camp.",
       "purpose": "Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery."
     },
     {
@@ -232,7 +232,7 @@
         1200,
         400
       ],
-      "subject": "The interior of a looted pharmacy: fallen shelving, scattered unlabelled blister packs and empty cabinets, a flashlight's warm beam against cold daylight from a cracked window. No shop sign, glowing green cross, emblem or readable packaging.",
+      "subject": "The interior of a looted American strip-mall pharmacy: fallen metal retail shelving, a glass dispensing counter, empty storage cabinets, scattered unlabelled blister packs, beige vinyl floor tiles and broken fluorescent fixtures. Cold grey daylight enters a cracked storefront window; a narrow neutral-white flashlight picks out the fallen shelves. Modern disposable medicine packaging only, no apothecary jars, potion bottles, shop signs, crosses, emblems or readable packaging.",
       "purpose": "Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size."
     },
     {
@@ -245,7 +245,7 @@
         1200,
         400
       ],
-      "subject": "An abandoned apartment that can also suggest a small office: dusty shelves and desk, faded picture frames with indistinct scenery rather than identifiable faces, vines entering through a broken window. A warm flashlight beam crosses the room.",
+      "subject": "An abandoned modest American apartment used as a small office: damaged drywall, a cheap laminate desk, a knocked-over steel filing cabinet, dusty shelves, faded picture frames with indistinct scenery and vines through a broken rectangular window. Cold overcast daylight and a tight neutral-white flashlight beam expose dust and water damage. Ordinary mass-produced furniture, no ornate woodwork, cosy study or recognizable faces.",
       "purpose": "Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size."
     },
     {
@@ -258,7 +258,7 @@
         1200,
         400
       ],
-      "subject": "A small ruined warehouse with tall storage racks, torn plain cardboard boxes and a forklift tipped on its side. Warm inspection light against dusty cool daylight; no readable shipping labels.",
+      "subject": "A small ruined American warehouse with a steel portal frame, corrugated roof, tall pallet racks, torn plain cardboard boxes, weathered wooden pallets and a forklift tipped on its side. Flat cold daylight falls through holes in the roof and loading-bay opening, with deep practical shadows between shelves. No readable shipping labels, ceremonial storage hall or treasure piles.",
       "purpose": "Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size."
     },
     {
@@ -271,7 +271,7 @@
         1200,
         400
       ],
-      "subject": "A cramped abandoned cellar with jars on shelves, exposed pipes and a thin shaft of daylight from a tiny high window. A warm flashlight pool picks out the central shelves. No labels on jars.",
+      "subject": "A cramped utility basement beneath an ordinary American house: poured-concrete walls, exposed pipes, timber ceiling joists, a dead water heater and cheap steel shelves holding dusty unlabelled preserving jars. A thin grey shaft from a small high window and a narrow neutral-white flashlight reveal damp stains and debris. No candles, torch sconces, medieval cellar masonry, alchemist equipment or labels.",
       "purpose": "Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size."
     },
     {
@@ -284,7 +284,7 @@
         1200,
         400
       ],
-      "subject": "A ruined neighbourhood shop: smashed display window, low counter and overturned drinks refrigerator with plain unlabelled bottles. Warm flashlight beam and cold daylight; no advertising, price tags or logos.",
+      "subject": "A ruined American convenience store: smashed plate-glass storefront, low metal retail shelves, a laminate checkout counter and an overturned glass-door drinks refrigerator with plain unlabelled bottles. Cold daylight enters from the street; a narrow neutral-white flashlight catches dust and broken floor tiles. No advertising, price tags, logos, tavern bar or inviting display of supplies.",
       "purpose": "Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size."
     },
     {
@@ -297,7 +297,7 @@
         1200,
         400
       ],
-      "subject": "A ruined car repair workshop with an inspection pit, broad tools hung on a board and a car supported without wheels. Warm inspection lamp, dusty cool daylight; no number plate, badges or shop lettering.",
+      "subject": "A derelict American roadside auto-repair garage: raised roll-up bay door, an inspection pit, a hydraulic floor jack, broad tools on pegboard and a battered pickup supported without wheels. Cracked concrete, dirty engine parts and corroded steel. Cold overcast light through the open bay and a neutral-white inspection flashlight; no licence plate, badges, shop lettering or blacksmith forge.",
       "purpose": "Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size."
     },
     {
@@ -310,7 +310,7 @@
         1200,
         400
       ],
-      "subject": "The torn fuselage of a generic passenger aircraft resting in sand, rows of battered seats visible inside and cables hanging from the ceiling. Warm flashlight beam against cold daylight through the breach. No airline livery, logos, lettering or bodies.",
+      "subject": "The torn fuselage of a generic American passenger aircraft resting in sand: battered rows of mass-produced seats, broken overhead panels, exposed aluminium ribs and hanging electrical cables. Cold diffuse daylight enters through a breach; a narrow neutral-white flashlight reaches the dark interior. Dry dust and corroded metal, no airline livery, logos, lettering, bodies, treasure or supernatural glow.",
       "purpose": "Public player scavenging request card, above the search prompt and roll controls. One 3:1 banner at approximately 300–360 × 100–120 CSS px; it depicts only the type of ruin, without revealing loot, hazards or hidden occupants. Keep the decisive objects legible at chat-card size."
     },
     {
@@ -488,7 +488,7 @@
         400
       ],
       "fill": 70,
-      "subject": "A scruffy short-haired wasteland mongrel dog, a simple collar with a short piece of chain, crouched forward, head toward the bottom of the frame, legs splayed enough to read from overhead.",
+      "subject": "A scruffy short-haired wasteland mongrel dog, a simple collar with a short piece of chain, crouched forward, head toward the bottom of the frame, legs splayed enough to read from overhead. Mutation is biological: plausible bones, skin, chitin and joints, with no magical aura, glowing eyes, fantasy mount equipment or ornamental armour.",
       "purpose": "Older section E request: Psi partner, Small companion token on a 1×1 grid beside the party's tokens. About 70 px per grid square, with the body filling 70% of the frame; this must be a usable overhead token, not a portrait."
     },
     {
@@ -502,7 +502,7 @@
         400
       ],
       "fill": 70,
-      "subject": "A dog-sized mutated burrowing insect, thick chitin armour, strong digging forelegs, side legs and broad mandibles. Head toward the bottom of the frame. No wings or upright humanoid pose.",
+      "subject": "A dog-sized mutated burrowing insect, thick chitin armour, strong digging forelegs, side legs and broad mandibles. Head toward the bottom of the frame. No wings or upright humanoid pose. Mutation is biological: plausible bones, skin, chitin and joints, with no magical aura, glowing eyes, fantasy mount equipment or ornamental armour.",
       "purpose": "Older section E request: mutated insect, Small companion token on a 1×1 grid, body filling about 70% of the frame; silhouette must distinguish it from the dog at roughly 70 screen px."
     },
     {
@@ -516,7 +516,7 @@
         800
       ],
       "fill": 90,
-      "subject": "A powerful Large mutated predator with a bear-like body, canine muzzle and sparse bare skin patches among coarse fur. Hunched forward, head toward the bottom of the frame, limbs splayed; no wounds or gore.",
+      "subject": "A powerful Large mutated predator with a bear-like body, canine muzzle and sparse bare skin patches among coarse fur. Hunched forward, head toward the bottom of the frame, limbs splayed; no wounds or gore. Mutation is biological: plausible bones, skin, chitin and joints, with no magical aura, glowing eyes, fantasy mount equipment or ornamental armour.",
       "purpose": "Older section E request: mutated mammal, Large companion token on a 2×2 grid, roughly 140 × 140 screen px; body occupies about 90% of the frame beside humanoid party tokens."
     },
     {
@@ -530,7 +530,7 @@
         400
       ],
       "fill": 90,
-      "subject": "A Medium amphibious mutated lizard, mud-coloured scales, broad paddled tail and splayed clawed feet. Hunched forward with its head toward the bottom of the frame; recognisable as a lizard from near-overhead.",
+      "subject": "A Medium amphibious mutated lizard, mud-coloured scales, broad paddled tail and splayed clawed feet. Hunched forward with its head toward the bottom of the frame; recognisable as a lizard from near-overhead. Mutation is biological: plausible bones, skin, chitin and joints, with no magical aura, glowing eyes, fantasy mount equipment or ornamental armour.",
       "purpose": "Older section E request: mutated reptile, Medium companion token on a 1×1 grid, roughly 70 × 70 screen px; body fills about 90% of the frame, visibly larger than the Small dog and insect."
     }
   ]

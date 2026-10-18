@@ -1,8 +1,11 @@
 # Delivered artwork briefs — M5 and carried requests
 
-Ten delivered images: seven trader portraits and three upkeep banners, packaged
-on 2026-10-12. These briefs are retained for reference and future edits.
-Delivery evidence: [delivered-2026-10-12.json](delivered-2026-10-12.json).
+16 delivered images: seven trader portraits and three upkeep banners packaged
+on 2026-10-12, plus six camp banners packaged on 2026-10-18. These historical
+briefs are retained for reference; the GM's actual generation prompts may differ.
+For new images and revisions, use the updated art direction in BRIEFS_MISSING.
+Delivery evidence: [delivered-2026-10-12.json](delivered-2026-10-12.json) and
+[delivered-2026-10-18.json](delivered-2026-10-18.json).
 Outstanding catalog briefs: [BRIEFS_MISSING.md](BRIEFS_MISSING.md).
 
 The GM generates these images in DALL-E and hand-edits the sources. An agent
@@ -215,3 +218,123 @@ Landscape scene. Compose the decisive subject, warm light and horizon inside the
 **Final spec and name:** **`ui/postoj/utrzymanie-bogaty.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
 
 **Drop point:** `dev/art/m5/in/postoj/utrzymanie-bogaty.png` — the GM's edited source; `dev/` is not shipped.
+
+## oboz/pustynia
+
+**Purpose:** Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery.
+
+**Prompt:**
+
+```text
+Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+
+A night campfire sheltered behind the wreck of a truck, sand dunes and a starry sky. Arrange the fire, truck silhouette and dune horizon inside the middle horizontal band; warm shelter in a cold empty desert.
+
+Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
+```
+
+**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
+
+**Final spec and name:** **`ui/oboz/pustynia.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
+
+**Drop point:** `dev/art/m5/in/oboz/pustynia.png` — the GM's edited source; `dev/` is not shipped.
+
+## oboz/preria
+
+**Purpose:** Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery.
+
+**Prompt:**
+
+```text
+Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+
+A night campfire in tall prairie grass near a rusted windmill, a distant storm visible as dark clouds and faint lightning. The fire and shelter read clearly in the central strip.
+
+Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
+```
+
+**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
+
+**Final spec and name:** **`ui/oboz/preria.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
+
+**Drop point:** `dev/art/m5/in/oboz/preria.png` — the GM's edited source; `dev/` is not shipped.
+
+## oboz/las
+
+**Purpose:** Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery.
+
+**Prompt:**
+
+```text
+Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+
+A night campfire between huge, sickly overgrown forest trees, plain hammocks strung nearby and low mist. Suitable for both forest and mutated jungle. Show the lower trunks, hammocks and fire in the central strip, with oppressive dark foliage beyond.
+
+Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
+```
+
+**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
+
+**Final spec and name:** **`ui/oboz/las.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
+
+**Drop point:** `dev/art/m5/in/oboz/las.png` — the GM's edited source; `dev/` is not shipped.
+
+## oboz/gory
+
+**Purpose:** Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery.
+
+**Prompt:**
+
+```text
+Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+
+A night campfire under a rock overhang beside a snowdrift and an abandoned cable-car station. Keep sheltered fire, snow edge and the station silhouette together in the central strip.
+
+Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
+```
+
+**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
+
+**Final spec and name:** **`ui/oboz/gory.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
+
+**Drop point:** `dev/art/m5/in/oboz/gory.png` — the GM's edited source; `dev/` is not shipped.
+
+## oboz/bagna
+
+**Purpose:** Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery.
+
+**Prompt:**
+
+```text
+Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+
+A night campfire safely contained on a rough plank jetty above black swamp water, a small moored boat and a few fireflies. The jetty, warm flame and boat stay in the middle strip; no glowing fantasy creatures.
+
+Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
+```
+
+**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
+
+**Final spec and name:** **`ui/oboz/bagna.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
+
+**Drop point:** `dev/art/m5/in/oboz/bagna.png` — the GM's edited source; `dev/` is not shipped.
+
+## oboz/ruiny
+
+**Purpose:** Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery.
+
+**Prompt:**
+
+```text
+Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+
+A night fire burning in a barrel inside a ruined office lobby, broken columns and distant unmarked machine lights beyond shattered windows. Suitable for city ruins and machine territory. No recognizable machines or factions.
+
+Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
+```
+
+**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
+
+**Final spec and name:** **`ui/oboz/ruiny.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
+
+**Drop point:** `dev/art/m5/in/oboz/ruiny.png` — the GM's edited source; `dev/` is not shipped.

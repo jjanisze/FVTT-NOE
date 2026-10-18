@@ -1,141 +1,39 @@
 # Missing artwork briefs — M5 and carried requests
 
-31 undelivered catalog images, checked against final files on 2026-10-17:
-seven camps, seven ruin interiors, four wrecks, nine map objects and four
-animal companions. Delivered briefs: [BRIEFS_DELIVERED.md](BRIEFS_DELIVERED.md).
+25 undelivered catalog images, updated 2026-10-18: one subway camp, seven ruin
+interiors, four wrecks, nine map objects and four animal companions.
+Delivered briefs: [BRIEFS_DELIVERED.md](BRIEFS_DELIVERED.md).
 The [asset queue](../../icons/MISSING.md) also lists outstanding bestiary tokens.
 
-The GM generates these images in DALL-E and hand-edits the sources. An agent
-only packages approved source pixels. Specs: [MISSING](../../icons/MISSING.md)
-§G/§H and [PLAN_m5_postoj.md](../../../PLAN_m5_postoj.md) §7.23, D42–D45;
-token proportions: [tokens/PROMPT.md](../../../tokens/PROMPT.md).
-Older §B and §E requests follow the M5 queue.
+The GM generates the images in DALL-E and hand-edits the sources; an agent
+only crops, resizes and converts approved pixels. Six camp sources were
+packaged on 2026-10-18. The subway source still contains readable graffiti;
+remove the lettering in `in/oboz/podziemia.png` before packaging it.
 
-Display sizes below are composition targets, not a claim about unfinished UI code. Every prompt includes the shared §G style block and can be pasted on its own. Generate one image per prompt; do not put painted art into a nine-cell icon atlas.
+**Current art direction (GM feedback, 2026-10-18):** grounded American
+post-apocalyptic survival art. Capture the material realism and desolation
+that make survival-horror imagery effective through concrete visual details,
+without using franchise names that import fantasy or Eastern European settings.
+Architecture, vehicles, fittings and everyday props should read as North American.
 
-For banners, a 1792×1024 source loses about 213 px above and below in the centered 3:1 crop (central 1792×597 band). For portraits, a 1024×1792 source loses about 213 px above and below in the centered 3:4 crop (central 1024×1365 band). The packer uses the same centered ratios for edited sources of any size. Arrange every important object inside these bands before hand-editing.
+**Lighting follows purpose:** camps can have a small, practical fire or lamp,
+with most of the environment cold and exposed. Looting scenes are deserted,
+uninviting search locations lit by cold daylight or neutral-white flashlights;
+no amber ambience, camp furniture or cosy refuge. Tokens and map objects use
+neutral upper-left lighting and retain their transparent backgrounds.
+Every ready-to-paste prompt below includes the complete restrictions.
 
-The medical crosses in the queue become unlabelled medicine props, subway graffiti becomes abstract paint, and the giant wreck's crater stays a separate scene effect. These choices preserve the required no-logos/no-lettering rule and transparent, ground-free token format.
+Specs: [MISSING](../../icons/MISSING.md) §G/§H and
+[PLAN_m5_postoj.md](../../../PLAN_m5_postoj.md) §7.23, D42–D45; this later GM
+feedback updates the earlier style direction. Token proportions:
+[tokens/PROMPT.md](../../../tokens/PROMPT.md). Older §B and §E requests follow M5.
 
-## oboz/pustynia
-
-**Purpose:** Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery.
-
-**Prompt:**
-
-```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
-
-A night campfire sheltered behind the wreck of a truck, sand dunes and a starry sky. Arrange the fire, truck silhouette and dune horizon inside the middle horizontal band; warm shelter in a cold empty desert.
-
-Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
-```
-
-**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
-
-**Final spec and name:** **`ui/oboz/pustynia.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
-
-**Drop point:** `dev/art/m5/in/oboz/pustynia.png` — the GM's edited source; `dev/` is not shipped.
-
-## oboz/preria
-
-**Purpose:** Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery.
-
-**Prompt:**
-
-```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
-
-A night campfire in tall prairie grass near a rusted windmill, a distant storm visible as dark clouds and faint lightning. The fire and shelter read clearly in the central strip.
-
-Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
-```
-
-**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
-
-**Final spec and name:** **`ui/oboz/preria.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
-
-**Drop point:** `dev/art/m5/in/oboz/preria.png` — the GM's edited source; `dev/` is not shipped.
-
-## oboz/las
-
-**Purpose:** Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery.
-
-**Prompt:**
-
-```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
-
-A night campfire between huge, sickly overgrown forest trees, plain hammocks strung nearby and low mist. Suitable for both forest and mutated jungle. Show the lower trunks, hammocks and fire in the central strip, with oppressive dark foliage beyond.
-
-Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
-```
-
-**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
-
-**Final spec and name:** **`ui/oboz/las.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
-
-**Drop point:** `dev/art/m5/in/oboz/las.png` — the GM's edited source; `dev/` is not shipped.
-
-## oboz/gory
-
-**Purpose:** Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery.
-
-**Prompt:**
-
-```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
-
-A night campfire under a rock overhang beside a snowdrift and an abandoned cable-car station. Keep sheltered fire, snow edge and the station silhouette together in the central strip.
-
-Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
-```
-
-**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
-
-**Final spec and name:** **`ui/oboz/gory.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
-
-**Drop point:** `dev/art/m5/in/oboz/gory.png` — the GM's edited source; `dev/` is not shipped.
-
-## oboz/bagna
-
-**Purpose:** Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery.
-
-**Prompt:**
-
-```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
-
-A night campfire safely contained on a rough plank jetty above black swamp water, a small moored boat and a few fireflies. The jetty, warm flame and boat stay in the middle strip; no glowing fantasy creatures.
-
-Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
-```
-
-**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
-
-**Final spec and name:** **`ui/oboz/bagna.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
-
-**Drop point:** `dev/art/m5/in/oboz/bagna.png` — the GM's edited source; `dev/` is not shipped.
-
-## oboz/ruiny
-
-**Purpose:** Player short-rest and long-rest windows, and Doba in the wilderness; the party travel biome selects the image. One banner above rest, supply and daily-plan controls, approximately 600–900 × 200–300 CSS px, or 300–360 × 100–120 px on a reused summary card. No rule information is encoded in the scenery.
-
-**Prompt:**
-
-```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
-
-A night fire burning in a barrel inside a ruined office lobby, broken columns and distant unmarked machine lights beyond shattered windows. Suitable for city ruins and machine territory. No recognizable machines or factions.
-
-Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
-```
-
-**Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
-
-**Final spec and name:** **`ui/oboz/ruiny.webp`** — **1200×400 WEBP**, RGB, opaque, no alpha.
-
-**Drop point:** `dev/art/m5/in/oboz/ruiny.png` — the GM's edited source; `dev/` is not shipped.
+Display sizes are composition targets. Generate one image per prompt, not an atlas.
+For 3:1 banners, keep all decisive objects inside the central 1792×597 band of a
+1792×1024 source (approximately y=213–811). The packer center-crops and resizes.
+Keep medical packaging unlabelled, subway walls free of lettering and wreck
+craters in separate scene effects. Final filenames, sizes and alpha rules stay
+as specified below.
 
 ## oboz/podziemia
 
@@ -144,11 +42,11 @@ Landscape scene. Compose the decisive subject, warm light and horizon inside the
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
-A night camp on an abandoned subway platform lit by a carbide lamp beside a small campfire. Dark tunnel mouth, cracked tiles and abstract paint stains on the walls. The stains must never resemble letters or readable graffiti.
+An improvised rest stop on an abandoned American city subway platform: rectangular concrete beams, utilitarian ceramic tiles, steel service doors and corroded electrical conduits. Two plain bedrolls and patched canvas sit beside a shielded carbide lamp and a very small contained fire. The weak practical light reaches only the immediate sleeping area; a black tunnel mouth and cold damp concrete dominate the rest of the scene. Walls have plain peeling paint with no graffiti or marks resembling writing. Empty of people; no vaulted stone dungeon, grand arches or furnished fantasy camp.
 
-Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
+Landscape scene. Compose the decisive subject and practical lighting inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
@@ -164,11 +62,13 @@ Landscape scene. Compose the decisive subject, warm light and horizon inside the
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
-The interior of a looted pharmacy: fallen shelving, scattered unlabelled blister packs and empty cabinets, a flashlight's warm beam against cold daylight from a cracked window. No shop sign, glowing green cross, emblem or readable packaging.
+The interior of a looted American strip-mall pharmacy: fallen metal retail shelving, a glass dispensing counter, empty storage cabinets, scattered unlabelled blister packs, beige vinyl floor tiles and broken fluorescent fixtures. Cold grey daylight enters a cracked storefront window; a narrow neutral-white flashlight picks out the fallen shelves. Modern disposable medicine packaging only, no apothecary jars, potion bottles, shop signs, crosses, emblems or readable packaging.
 
-Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
+An unwelcoming, unoccupied scavenging site, not a resting place. Cold overcast daylight, subdued neutral ambient light and a narrow neutral-white flashlight beam where needed. Dust, damp, rust, faded plastic and stained concrete; readable midtones and hard practical shadows. No amber mood lighting, campfire, candles, lanterns, bedrolls, cosy shelter, potion displays, treasure chests or theatrical fantasy glow.
+
+Landscape scene. Compose the decisive room features, debris and practical lighting inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
@@ -184,11 +84,13 @@ Landscape scene. Compose the decisive subject, warm light and horizon inside the
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
-An abandoned apartment that can also suggest a small office: dusty shelves and desk, faded picture frames with indistinct scenery rather than identifiable faces, vines entering through a broken window. A warm flashlight beam crosses the room.
+An abandoned modest American apartment used as a small office: damaged drywall, a cheap laminate desk, a knocked-over steel filing cabinet, dusty shelves, faded picture frames with indistinct scenery and vines through a broken rectangular window. Cold overcast daylight and a tight neutral-white flashlight beam expose dust and water damage. Ordinary mass-produced furniture, no ornate woodwork, cosy study or recognizable faces.
 
-Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
+An unwelcoming, unoccupied scavenging site, not a resting place. Cold overcast daylight, subdued neutral ambient light and a narrow neutral-white flashlight beam where needed. Dust, damp, rust, faded plastic and stained concrete; readable midtones and hard practical shadows. No amber mood lighting, campfire, candles, lanterns, bedrolls, cosy shelter, potion displays, treasure chests or theatrical fantasy glow.
+
+Landscape scene. Compose the decisive room features, debris and practical lighting inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
@@ -204,11 +106,13 @@ Landscape scene. Compose the decisive subject, warm light and horizon inside the
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
-A small ruined warehouse with tall storage racks, torn plain cardboard boxes and a forklift tipped on its side. Warm inspection light against dusty cool daylight; no readable shipping labels.
+A small ruined American warehouse with a steel portal frame, corrugated roof, tall pallet racks, torn plain cardboard boxes, weathered wooden pallets and a forklift tipped on its side. Flat cold daylight falls through holes in the roof and loading-bay opening, with deep practical shadows between shelves. No readable shipping labels, ceremonial storage hall or treasure piles.
 
-Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
+An unwelcoming, unoccupied scavenging site, not a resting place. Cold overcast daylight, subdued neutral ambient light and a narrow neutral-white flashlight beam where needed. Dust, damp, rust, faded plastic and stained concrete; readable midtones and hard practical shadows. No amber mood lighting, campfire, candles, lanterns, bedrolls, cosy shelter, potion displays, treasure chests or theatrical fantasy glow.
+
+Landscape scene. Compose the decisive room features, debris and practical lighting inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
@@ -224,11 +128,13 @@ Landscape scene. Compose the decisive subject, warm light and horizon inside the
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
-A cramped abandoned cellar with jars on shelves, exposed pipes and a thin shaft of daylight from a tiny high window. A warm flashlight pool picks out the central shelves. No labels on jars.
+A cramped utility basement beneath an ordinary American house: poured-concrete walls, exposed pipes, timber ceiling joists, a dead water heater and cheap steel shelves holding dusty unlabelled preserving jars. A thin grey shaft from a small high window and a narrow neutral-white flashlight reveal damp stains and debris. No candles, torch sconces, medieval cellar masonry, alchemist equipment or labels.
 
-Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
+An unwelcoming, unoccupied scavenging site, not a resting place. Cold overcast daylight, subdued neutral ambient light and a narrow neutral-white flashlight beam where needed. Dust, damp, rust, faded plastic and stained concrete; readable midtones and hard practical shadows. No amber mood lighting, campfire, candles, lanterns, bedrolls, cosy shelter, potion displays, treasure chests or theatrical fantasy glow.
+
+Landscape scene. Compose the decisive room features, debris and practical lighting inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
@@ -244,11 +150,13 @@ Landscape scene. Compose the decisive subject, warm light and horizon inside the
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
-A ruined neighbourhood shop: smashed display window, low counter and overturned drinks refrigerator with plain unlabelled bottles. Warm flashlight beam and cold daylight; no advertising, price tags or logos.
+A ruined American convenience store: smashed plate-glass storefront, low metal retail shelves, a laminate checkout counter and an overturned glass-door drinks refrigerator with plain unlabelled bottles. Cold daylight enters from the street; a narrow neutral-white flashlight catches dust and broken floor tiles. No advertising, price tags, logos, tavern bar or inviting display of supplies.
 
-Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
+An unwelcoming, unoccupied scavenging site, not a resting place. Cold overcast daylight, subdued neutral ambient light and a narrow neutral-white flashlight beam where needed. Dust, damp, rust, faded plastic and stained concrete; readable midtones and hard practical shadows. No amber mood lighting, campfire, candles, lanterns, bedrolls, cosy shelter, potion displays, treasure chests or theatrical fantasy glow.
+
+Landscape scene. Compose the decisive room features, debris and practical lighting inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
@@ -264,11 +172,13 @@ Landscape scene. Compose the decisive subject, warm light and horizon inside the
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
-A ruined car repair workshop with an inspection pit, broad tools hung on a board and a car supported without wheels. Warm inspection lamp, dusty cool daylight; no number plate, badges or shop lettering.
+A derelict American roadside auto-repair garage: raised roll-up bay door, an inspection pit, a hydraulic floor jack, broad tools on pegboard and a battered pickup supported without wheels. Cracked concrete, dirty engine parts and corroded steel. Cold overcast light through the open bay and a neutral-white inspection flashlight; no licence plate, badges, shop lettering or blacksmith forge.
 
-Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
+An unwelcoming, unoccupied scavenging site, not a resting place. Cold overcast daylight, subdued neutral ambient light and a narrow neutral-white flashlight beam where needed. Dust, damp, rust, faded plastic and stained concrete; readable midtones and hard practical shadows. No amber mood lighting, campfire, candles, lanterns, bedrolls, cosy shelter, potion displays, treasure chests or theatrical fantasy glow.
+
+Landscape scene. Compose the decisive room features, debris and practical lighting inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
@@ -284,11 +194,13 @@ Landscape scene. Compose the decisive subject, warm light and horizon inside the
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
-The torn fuselage of a generic passenger aircraft resting in sand, rows of battered seats visible inside and cables hanging from the ceiling. Warm flashlight beam against cold daylight through the breach. No airline livery, logos, lettering or bodies.
+The torn fuselage of a generic American passenger aircraft resting in sand: battered rows of mass-produced seats, broken overhead panels, exposed aluminium ribs and hanging electrical cables. Cold diffuse daylight enters through a breach; a narrow neutral-white flashlight reaches the dark interior. Dry dust and corroded metal, no airline livery, logos, lettering, bodies, treasure or supernatural glow.
 
-Landscape scene. Compose the decisive subject, warm light and horizon inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
+An unwelcoming, unoccupied scavenging site, not a resting place. Cold overcast daylight, subdued neutral ambient light and a narrow neutral-white flashlight beam where needed. Dust, damp, rust, faded plastic and stained concrete; readable midtones and hard practical shadows. No amber mood lighting, campfire, candles, lanterns, bedrolls, cosy shelter, potion displays, treasure chests or theatrical fantasy glow.
+
+Landscape scene. Compose the decisive room features, debris and practical lighting inside the central horizontal 1792×597 band of a 1792×1024 image, leaving expendable scenery above and below. The final picture is a wide 3:1 banner. No border.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape. Keep all essential objects in the central **3:1 band**, approximately y=213–811; the packer center-crops to 3:1 and resizes. Top and bottom are expendable.
@@ -304,11 +216,11 @@ Landscape scene. Compose the decisive subject, warm light and horizon inside the
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
 A torn small drone body: bent sheet metal, a few splayed cables and scorched panels, no intact rotors. A compact mechanical wreck, no living creature.
 
-Near-overhead battle-map token, no horizon, side view or three-quarter portrait. Square final frame: 400×400 px. Center the subject; its longest visible extent fills about 70% of the square, preserving clear transparent margins and corners. The wreck's former front points down, toward the bottom of the frame. Fully transparent background, no ring, base, pedestal, floor, ground or scene. Warm upper-left illumination on the subject itself, crisp readable painterly silhouette. No contact or cast shadow, no smoke cloud, no crater; any explosion decal is separate.
+Near-overhead battle-map token, no horizon, side view or three-quarter portrait. Square final frame: 400×400 px. Center the subject; its longest visible extent fills about 70% of the square, preserving clear transparent margins and corners. The wreck's former front points down, toward the bottom of the frame. Fully transparent background, no ring, base, pedestal, floor, ground or scene. Neutral upper-left illumination on the subject itself, crisp readable painterly silhouette. No contact or cast shadow, no smoke cloud, no crater; any explosion decal is separate.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape with the full subject inside the central **1024×1024 square**, x=384–1408, or use 1024×1792 with the central square y=384–1408. Preserve genuine alpha during hand-editing. Compose the longest subject extent at **70%** of that square, not of the original canvas. The packer center-crops and resizes without trimming these margins.
@@ -324,11 +236,11 @@ Near-overhead battle-map token, no horizon, side view or three-quarter portrait.
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
 The burnt skeleton of a human-sized machine, twisted mechanical limbs and charred joints. Scorching is painted on the metal; no smoke clouds or separate ground effects.
 
-Near-overhead battle-map token, no horizon, side view or three-quarter portrait. Square final frame: 400×400 px. Center the subject; its longest visible extent fills about 90% of the square, preserving clear transparent margins and corners. The wreck's former front points down, toward the bottom of the frame. Fully transparent background, no ring, base, pedestal, floor, ground or scene. Warm upper-left illumination on the subject itself, crisp readable painterly silhouette. No contact or cast shadow, no smoke cloud, no crater; any explosion decal is separate.
+Near-overhead battle-map token, no horizon, side view or three-quarter portrait. Square final frame: 400×400 px. Center the subject; its longest visible extent fills about 90% of the square, preserving clear transparent margins and corners. The wreck's former front points down, toward the bottom of the frame. Fully transparent background, no ring, base, pedestal, floor, ground or scene. Neutral upper-left illumination on the subject itself, crisp readable painterly silhouette. No contact or cast shadow, no smoke cloud, no crater; any explosion decal is separate.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape with the full subject inside the central **1024×1024 square**, x=384–1408, or use 1024×1792 with the central square y=384–1408. Preserve genuine alpha during hand-editing. Compose the longest subject extent at **90%** of that square, not of the original canvas. The packer center-crops and resizes without trimming these margins.
@@ -344,11 +256,11 @@ Near-overhead battle-map token, no horizon, side view or three-quarter portrait.
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
 The opened wreck hull of a heavy machine, cracked armour plates and exposed servos, with a few bent supports lying close to the hull. Mechanically distinct from the human-sized skeleton.
 
-Near-overhead battle-map token, no horizon, side view or three-quarter portrait. Square final frame: 800×800 px. Center the subject; its longest visible extent fills about 90% of the square, preserving clear transparent margins and corners. The wreck's former front points down, toward the bottom of the frame. Fully transparent background, no ring, base, pedestal, floor, ground or scene. Warm upper-left illumination on the subject itself, crisp readable painterly silhouette. No contact or cast shadow, no smoke cloud, no crater; any explosion decal is separate.
+Near-overhead battle-map token, no horizon, side view or three-quarter portrait. Square final frame: 800×800 px. Center the subject; its longest visible extent fills about 90% of the square, preserving clear transparent margins and corners. The wreck's former front points down, toward the bottom of the frame. Fully transparent background, no ring, base, pedestal, floor, ground or scene. Neutral upper-left illumination on the subject itself, crisp readable painterly silhouette. No contact or cast shadow, no smoke cloud, no crater; any explosion decal is separate.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape with the full subject inside the central **1024×1024 square**, x=384–1408, or use 1024×1792 with the central square y=384–1408. Preserve genuine alpha during hand-editing. Compose the longest subject extent at **90%** of that square, not of the original canvas. The packer center-crops and resizes without trimming these margins.
@@ -364,11 +276,11 @@ Near-overhead battle-map token, no horizon, side view or three-quarter portrait.
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
 The immense burned hull of a generic war machine with broken tracks and collapsed mechanical legs spread close to its body. Suggest the violent collapse with torn metal alone; no ground, crater, rubble terrain or recognisable franchise robot.
 
-Near-overhead battle-map token, no horizon, side view or three-quarter portrait. Square final frame: 1600×1600 px. Center the subject; its longest visible extent fills about 92% of the square, preserving clear transparent margins and corners. The wreck's former front points down, toward the bottom of the frame. Fully transparent background, no ring, base, pedestal, floor, ground or scene. Warm upper-left illumination on the subject itself, crisp readable painterly silhouette. No contact or cast shadow, no smoke cloud, no crater; any explosion decal is separate.
+Near-overhead battle-map token, no horizon, side view or three-quarter portrait. Square final frame: 1600×1600 px. Center the subject; its longest visible extent fills about 92% of the square, preserving clear transparent margins and corners. The wreck's former front points down, toward the bottom of the frame. Fully transparent background, no ring, base, pedestal, floor, ground or scene. Neutral upper-left illumination on the subject itself, crisp readable painterly silhouette. No contact or cast shadow, no smoke cloud, no crater; any explosion decal is separate.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape with the full subject inside the central **1024×1024 square**, x=384–1408, or use 1024×1792 with the central square y=384–1408. Preserve genuine alpha during hand-editing. Compose the longest subject extent at **92%** of that square, not of the original canvas. The packer center-crops and resizes without trimming these margins. For the large final master, the GM should save an edited square source at least 1600 px wide; conversion from 1024 px necessarily upscales and cannot add detail.
@@ -384,11 +296,11 @@ Near-overhead battle-map token, no horizon, side view or three-quarter portrait.
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
 A brown-tinted glass bottle lying on its side, viewed directly from above, with a cloth rag stuffed into its neck and a small bright flame burning at the rag. Liquid visible in the bottle. No label.
 
-Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Warm light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
+Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Neutral upper-left light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape, placing the complete object within the central square; a 1024×1792 source is also usable. During editing remove all matte background and baked shadows, preserving genuine alpha around flames/wisps. The packer trims to alpha bounds, keeps the native aspect, then sets the long side to 128 px; it never squares this object.
@@ -404,11 +316,11 @@ Directly overhead view of the physical object lying flat, with no horizon or per
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
 One red dynamite stick lying flat, directly overhead, a short fuse at one end with a small bright sparking tip. No printed warning or label.
 
-Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Warm light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
+Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Neutral upper-left light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape, placing the complete object within the central square; a 1024×1792 source is also usable. During editing remove all matte background and baked shadows, preserving genuine alpha around flames/wisps. The packer trims to alpha bounds, keeps the native aspect, then sets the long side to 128 px; it never squares this object.
@@ -424,11 +336,11 @@ Directly overhead view of the physical object lying flat, with no horizon or per
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
 An off-white plastic explosive block in olive wrapping, lying flat, an electric cap pushed into it and two short wires trailing from it. No markings.
 
-Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Warm light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
+Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Neutral upper-left light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape, placing the complete object within the central square; a 1024×1792 source is also usable. During editing remove all matte background and baked shadows, preserving genuine alpha around flames/wisps. The packer trims to alpha bounds, keeps the native aspect, then sets the long side to 128 px; it never squares this object.
@@ -444,11 +356,11 @@ Directly overhead view of the physical object lying flat, with no horizon or per
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
 A short steel pipe bomb with end caps and a small wind-up alarm clock taped to it with thick wires. Directly overhead, practical battered metal and duct tape; clock face has hands but no numerals.
 
-Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Warm light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
+Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Neutral upper-left light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape, placing the complete object within the central square; a 1024×1792 source is also usable. During editing remove all matte background and baked shadows, preserving genuine alpha around flames/wisps. The packer trims to alpha bounds, keeps the native aspect, then sets the long side to 128 px; it never squares this object.
@@ -464,11 +376,11 @@ Directly overhead view of the physical object lying flat, with no horizon or per
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
 The same compact steel pipe bomb form with a small radio receiver box and a short whip antenna replacing the clock. Directly overhead; no labels, readouts or lettering.
 
-Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Warm light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
+Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Neutral upper-left light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape, placing the complete object within the central square; a 1024×1792 source is also usable. During editing remove all matte background and baked shadows, preserving genuine alpha around flames/wisps. The packer trims to alpha bounds, keeps the native aspect, then sets the long side to 128 px; it never squares this object.
@@ -484,11 +396,11 @@ Directly overhead view of the physical object lying flat, with no horizon or per
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
 A cylindrical smoke grenade lying on its side, directly overhead, with a pull ring and a very small pale wisp at its opening. Preserve readable metal body edges and real alpha around the wisp.
 
-Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Warm light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
+Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Neutral upper-left light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape, placing the complete object within the central square; a 1024×1792 source is also usable. During editing remove all matte background and baked shadows, preserving genuine alpha around flames/wisps. The packer trims to alpha bounds, keeps the native aspect, then sets the long side to 128 px; it never squares this object.
@@ -504,11 +416,11 @@ Directly overhead view of the physical object lying flat, with no horizon or per
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
 A flashbang lying on its side, directly overhead, a perforated cylindrical body, spoon lever and pin ring. Broad clean holes; no markings.
 
-Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Warm light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
+Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Neutral upper-left light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape, placing the complete object within the central square; a 1024×1792 source is also usable. During editing remove all matte background and baked shadows, preserving genuine alpha around flames/wisps. The packer trims to alpha bounds, keeps the native aspect, then sets the long side to 128 px; it never squares this object.
@@ -524,11 +436,11 @@ Directly overhead view of the physical object lying flat, with no horizon or per
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
 An incendiary grenade canister lying on its side, directly overhead, one plain red identification band without lettering.
 
-Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Warm light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
+Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Neutral upper-left light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape, placing the complete object within the central square; a 1024×1792 source is also usable. During editing remove all matte background and baked shadows, preserving genuine alpha around flames/wisps. The packer trims to alpha bounds, keeps the native aspect, then sets the long side to 128 px; it never squares this object.
@@ -544,11 +456,11 @@ Directly overhead view of the physical object lying flat, with no horizon or per
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
 An improvised tin-can grenade lying on its side, directly overhead, broad nails and bolts visible at an opening, duct tape and a short fuse. No food brand or label.
 
-Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Warm light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
+Directly overhead view of the physical object lying flat, with no horizon or perspective tilt. Fully transparent background, no floor, ground, cast shadow, border, ring or base. Neutral upper-left light on weathered materials; broad clear silhouette readable at 20–30 px. Keep the complete object and any fuse, flame or antenna inside a central square.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape, placing the complete object within the central square; a 1024×1792 source is also usable. During editing remove all matte background and baked shadows, preserving genuine alpha around flames/wisps. The packer trims to alpha bounds, keeps the native aspect, then sets the long side to 128 px; it never squares this object.
@@ -564,11 +476,11 @@ Directly overhead view of the physical object lying flat, with no horizon or per
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
-A scruffy short-haired wasteland mongrel dog, a simple collar with a short piece of chain, crouched forward, head toward the bottom of the frame, legs splayed enough to read from overhead.
+A scruffy short-haired wasteland mongrel dog, a simple collar with a short piece of chain, crouched forward, head toward the bottom of the frame, legs splayed enough to read from overhead. Mutation is biological: plausible bones, skin, chitin and joints, with no magical aura, glowing eyes, fantasy mount equipment or ornamental armour.
 
-Near-overhead battle-map token, no horizon, side view or three-quarter portrait. Square final frame: 400×400 px. Center the subject; its longest visible extent fills about 70% of the square, preserving clear transparent margins and corners. Head toward the bottom of the frame; limbs splay outward. Fully transparent background, no ring, base, pedestal, floor, ground or scene. Warm upper-left illumination on the subject itself, crisp readable painterly silhouette. Only a very short soft contact shadow lower-right, on alpha and close to the body, following tokens/PROMPT.md; no long cast shadow.
+Near-overhead battle-map token, no horizon, side view or three-quarter portrait. Square final frame: 400×400 px. Center the subject; its longest visible extent fills about 70% of the square, preserving clear transparent margins and corners. Head toward the bottom of the frame; limbs splay outward. Fully transparent background, no ring, base, pedestal, floor, ground or scene. Neutral upper-left illumination on the subject itself, crisp readable painterly silhouette. Only a very short soft contact shadow lower-right, on alpha and close to the body, following tokens/PROMPT.md; no long cast shadow.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape with the full subject inside the central **1024×1024 square**, x=384–1408, or use 1024×1792 with the central square y=384–1408. Preserve genuine alpha during hand-editing. Compose the longest subject extent at **70%** of that square, not of the original canvas. The packer center-crops and resizes without trimming these margins.
@@ -584,11 +496,11 @@ Near-overhead battle-map token, no horizon, side view or three-quarter portrait.
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
-A dog-sized mutated burrowing insect, thick chitin armour, strong digging forelegs, side legs and broad mandibles. Head toward the bottom of the frame. No wings or upright humanoid pose.
+A dog-sized mutated burrowing insect, thick chitin armour, strong digging forelegs, side legs and broad mandibles. Head toward the bottom of the frame. No wings or upright humanoid pose. Mutation is biological: plausible bones, skin, chitin and joints, with no magical aura, glowing eyes, fantasy mount equipment or ornamental armour.
 
-Near-overhead battle-map token, no horizon, side view or three-quarter portrait. Square final frame: 400×400 px. Center the subject; its longest visible extent fills about 70% of the square, preserving clear transparent margins and corners. Head toward the bottom of the frame; limbs splay outward. Fully transparent background, no ring, base, pedestal, floor, ground or scene. Warm upper-left illumination on the subject itself, crisp readable painterly silhouette. Only a very short soft contact shadow lower-right, on alpha and close to the body, following tokens/PROMPT.md; no long cast shadow.
+Near-overhead battle-map token, no horizon, side view or three-quarter portrait. Square final frame: 400×400 px. Center the subject; its longest visible extent fills about 70% of the square, preserving clear transparent margins and corners. Head toward the bottom of the frame; limbs splay outward. Fully transparent background, no ring, base, pedestal, floor, ground or scene. Neutral upper-left illumination on the subject itself, crisp readable painterly silhouette. Only a very short soft contact shadow lower-right, on alpha and close to the body, following tokens/PROMPT.md; no long cast shadow.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape with the full subject inside the central **1024×1024 square**, x=384–1408, or use 1024×1792 with the central square y=384–1408. Preserve genuine alpha during hand-editing. Compose the longest subject extent at **70%** of that square, not of the original canvas. The packer center-crops and resizes without trimming these margins.
@@ -604,11 +516,11 @@ Near-overhead battle-map token, no horizon, side view or three-quarter portrait.
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
-A powerful Large mutated predator with a bear-like body, canine muzzle and sparse bare skin patches among coarse fur. Hunched forward, head toward the bottom of the frame, limbs splayed; no wounds or gore.
+A powerful Large mutated predator with a bear-like body, canine muzzle and sparse bare skin patches among coarse fur. Hunched forward, head toward the bottom of the frame, limbs splayed; no wounds or gore. Mutation is biological: plausible bones, skin, chitin and joints, with no magical aura, glowing eyes, fantasy mount equipment or ornamental armour.
 
-Near-overhead battle-map token, no horizon, side view or three-quarter portrait. Square final frame: 800×800 px. Center the subject; its longest visible extent fills about 90% of the square, preserving clear transparent margins and corners. Head toward the bottom of the frame; limbs splay outward. Fully transparent background, no ring, base, pedestal, floor, ground or scene. Warm upper-left illumination on the subject itself, crisp readable painterly silhouette. Only a very short soft contact shadow lower-right, on alpha and close to the body, following tokens/PROMPT.md; no long cast shadow.
+Near-overhead battle-map token, no horizon, side view or three-quarter portrait. Square final frame: 800×800 px. Center the subject; its longest visible extent fills about 90% of the square, preserving clear transparent margins and corners. Head toward the bottom of the frame; limbs splay outward. Fully transparent background, no ring, base, pedestal, floor, ground or scene. Neutral upper-left illumination on the subject itself, crisp readable painterly silhouette. Only a very short soft contact shadow lower-right, on alpha and close to the body, following tokens/PROMPT.md; no long cast shadow.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape with the full subject inside the central **1024×1024 square**, x=384–1408, or use 1024×1792 with the central square y=384–1408. Preserve genuine alpha during hand-editing. Compose the longest subject extent at **90%** of that square, not of the original canvas. The packer center-crops and resizes without trimming these margins.
@@ -624,11 +536,11 @@ Near-overhead battle-map token, no horizon, side view or three-quarter portrait.
 **Prompt:**
 
 ```text
-Painterly, hand-illustrated game art with the Baldur's Gate 3 camp-card feel: a warm light source against a grim post-apocalyptic wasteland, muted weathered materials and clear shapes. Entirely generic and reusable, no recognizable characters. No text, lettering, numbers, labels, logos, watermarks or gore.
+Grounded, painterly post-apocalyptic survival concept art set in the United States. Realistic proportions, believable construction, worn industrial materials, muted natural colours and clear shapes readable at small size. Use late-20th-century North American equipment and built environments. No medieval architecture, fantasy armour, magic, runes, glowing anomalies, luminous vegetation, steampunk ornament or heroic RPG styling. No Soviet insignia, Soviet uniforms or Eastern European landmark architecture. Entirely generic and reusable, no recognizable characters, text, lettering, numbers, labels, logos, watermarks or gore.
 
-A Medium amphibious mutated lizard, mud-coloured scales, broad paddled tail and splayed clawed feet. Hunched forward with its head toward the bottom of the frame; recognisable as a lizard from near-overhead.
+A Medium amphibious mutated lizard, mud-coloured scales, broad paddled tail and splayed clawed feet. Hunched forward with its head toward the bottom of the frame; recognisable as a lizard from near-overhead. Mutation is biological: plausible bones, skin, chitin and joints, with no magical aura, glowing eyes, fantasy mount equipment or ornamental armour.
 
-Near-overhead battle-map token, no horizon, side view or three-quarter portrait. Square final frame: 400×400 px. Center the subject; its longest visible extent fills about 90% of the square, preserving clear transparent margins and corners. Head toward the bottom of the frame; limbs splay outward. Fully transparent background, no ring, base, pedestal, floor, ground or scene. Warm upper-left illumination on the subject itself, crisp readable painterly silhouette. Only a very short soft contact shadow lower-right, on alpha and close to the body, following tokens/PROMPT.md; no long cast shadow.
+Near-overhead battle-map token, no horizon, side view or three-quarter portrait. Square final frame: 400×400 px. Center the subject; its longest visible extent fills about 90% of the square, preserving clear transparent margins and corners. Head toward the bottom of the frame; limbs splay outward. Fully transparent background, no ring, base, pedestal, floor, ground or scene. Neutral upper-left illumination on the subject itself, crisp readable painterly silhouette. Only a very short soft contact shadow lower-right, on alpha and close to the body, following tokens/PROMPT.md; no long cast shadow.
 ```
 
 **Generation and crop:** Generate **1792×1024** landscape with the full subject inside the central **1024×1024 square**, x=384–1408, or use 1024×1792 with the central square y=384–1408. Preserve genuine alpha during hand-editing. Compose the longest subject extent at **90%** of that square, not of the original canvas. The packer center-crops and resizes without trimming these margins.

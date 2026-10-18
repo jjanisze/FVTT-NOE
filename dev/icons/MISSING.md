@@ -1,6 +1,6 @@
 # Missing-asset queue
 
-Checked against files on disk, 2026-10-17: **43 missing images** — 14 banners,
+Checked against files on disk, 2026-10-18: **37 missing images** — 8 banners,
 4 wrecks, 9 map objects, 4 companion tokens and 12 bestiary tokens currently
 using generated placeholders. Every final path listed below is absent.
 
@@ -15,32 +15,30 @@ batch approvals are under [review/candidates/](review/candidates/).
 <!-- icon-style-review:start -->
 <!-- icon-style-review:end -->
 
-## G. Ilustracje teatru wyobraźni — 14
+## G. Ilustracje teatru wyobraźni — 8
 
 Ready-to-paste prompts, purposes, crop instructions and source drop points:
 [BRIEFS_MISSING.md](../art/m5/BRIEFS_MISSING.md), sets `oboz` and `ruiny`.
 Specs: `PLAN_m5_postoj.md` §7.23, D42–D45.
 
-The GM generates and hand-edits each image. Shared style: painterly, Baldur's
-Gate 3 camp-card feel, warm light against a grim post-apocalyptic wasteland.
+The GM generates and hand-edits each image. Art direction, updated by the GM
+2026-10-18: grounded, painterly American post-apocalyptic survival art;
+North American buildings and props, realistic materials, no fantasy elements.
+Camps use limited practical fire/lamp light. Looting scenes use cold daylight
+or neutral-white flashlights: deserted search locations, no amber camp ambience.
 No text, lettering, logos, recognizable characters or gore.
 Final files: **1200×400 WEBP, RGB, no alpha**. Compose the important subjects
 inside the middle band of the 1792×1024 source for the final 3:1 crop.
 
-### Obozy — 7
+### Obozy — 1
 
 KO / DO in the wilderness and Doba outside settlements; night, campfire.
-Edited sources: `dev/art/m5/in/oboz/<key>.png`.
+Edited source: `dev/art/m5/in/oboz/podziemia.png` is present, but its readable
+graffiti must be removed by the GM before delivery.
 
 | Missing final file | Biome / subject |
 |---|---|
-| `ui/oboz/pustynia.webp` | Pustynia — ognisko za wrakiem ciężarówki, wydmy, gwiazdy |
-| `ui/oboz/preria.webp` | Preria — wysoka trawa, zardzewiały wiatrak, burza na horyzoncie |
-| `ui/oboz/las.webp` | Las / Neodżungla — wyrośnięte drzewa, hamaki, mgła |
-| `ui/oboz/gory.webp` | Góry — skalny nawis, śnieg, opuszczona stacja kolejki |
-| `ui/oboz/bagna.webp` | Bagna — pomost nad czarną wodą, łódka, świetliki |
-| `ui/oboz/ruiny.webp` | Ruiny / Miasto / Tereny Maszyn — ognisko w beczce w zrujnowanym holu |
-| `ui/oboz/podziemia.webp` | Podziemia — peron metra, lampa karbidowa, abstrakcyjne ślady farby |
+| `ui/oboz/podziemia.webp` | Podziemia — amerykański peron metra, mała lampa / ognisko; źródło wymaga usunięcia czytelnych napisów |
 
 ### Ruiny — 7
 

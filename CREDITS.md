@@ -290,6 +290,19 @@ are recorded in `dev/art/m5/delivered-2026-10-12.json`.
 - `ui/postoj/utrzymanie-normalny.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
 - `ui/postoj/utrzymanie-bogaty.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
 
+### Camp banners — 2026-10-18
+
+Six GM-supplied camp sources were center-cropped, resized and converted to
+1200×400 RGB WEBP. Source/output hashes and validation:
+`dev/art/m5/delivered-2026-10-18.json`.
+
+- `ui/oboz/pustynia.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/oboz/preria.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/oboz/las.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/oboz/gory.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/oboz/bagna.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+- `ui/oboz/ruiny.webp` — AI-generated with OpenAI DALL-E, hand-edited by the GM.
+
 ## Token art
 
 Bestiary token art is original work, borrowed (by reference, not copy) from `dnd5e`'s own
