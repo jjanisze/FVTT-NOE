@@ -716,3 +716,24 @@ poprawkach: e2e `dron`, `combat`, `umieranie`, `handel`, `autodestrukcja` zielon
 **2026-10-18 — E5 zrobione** (w E3, `408e14d`): tacka obrażeń na grupach celów 6.0 — redukcja materiałowa w opcjach
 celu i `dnd5e.preCalculateDamage`, EMP ×0 dla żywych z plakietką na grupie. Quench `przebicie`, `emiter-emp`; e2e
 `combat` (tacka MG, sonda czyta scalone opcje celu — `31bed53`). Skaner: `damage-tray-api` na zerze, pilnowany.
+
+**2026-10-18 — E6 zrobione** (`c8e405c`, `bc6ab6d`). Quench **1202/1202** (nowa paczka `karty-czatu`); e2e `combat`,
+`umieranie`, `handel`, `postoj`, `szabrowanie`, `bebeszenie`, `autodestrukcja`, `aktywnosci`, `zagrozenia`,
+`rekonwalescencja` zielone.
+- **Nasze karty** (werdykt ataku i TT, Reakcje celu, umieranie, wybuchy, M5, szepty MG) to wiadomości z treścią —
+  w 6.0 typ `base` renderuje `content` jak w 5.3; karty próśb dnd5e (`request`: pomocnicy przy bebeszeniu, RO
+  gamblingu, doba, szabrowanie, stół wymiany) mają w 6.0 ten sam schemat. Bez zmian w danych.
+- **Wstawki do kart dnd5e:** 6.0 nie ma `.card-buttons` ani `ul.card-footer.pills` — nasze przyciski lądowały pod
+  kartą, a pigułka dozy Dozownika i czyszczenie pigułek aktywności nie znajdowały nic. Jeden pomocnik
+  (`config/chat-card-dom.mjs`): pigułki do wiersza karty (nigdy do listy celów ataku), przyciski na końcu
+  `.chat-card`. Przyciski przechwytujące akcję dnd5e (`drop-on-fail`) działają dalej: 6.0 słucha na elemencie
+  wiadomości w fazie bąbelkowania.
+- **Dozownik:** wiadomość typu `damage` renderuje tylko szablon dnd5e — przycisk „Rzuć RO” (trucizna) zniknął. Karta i
+  obrażenia znowu osobno; cel na tacce tylko z żetonem (tacka 6.0 wywraca się na samym aktorze).
+- **Podsumowania kart (`chatCardSummary`):** domyślnie 6.0 chowa RO i test rzucone z karty użycia (podsumowanie na
+  karcie) — a z nimi nasz pasek Fuksa/Forsowania i adnotacje rzutów. Wymuszone `false` na każdym kliencie (§5);
+  przeniesienie paska do podsumowania i mniej osobnych wiadomości — PM13. Ataki i obrażenia 6.0 nie są chowane.
+- **Zrzuty przed / po:** 5.3 — `logs/e2e/2026-10-17T16-49-49/` (bramka E1), 6.0 — `logs/e2e/2026-10-17T21-34-01/` i
+  przebiegi E4–E6 w `logs/e2e/2026-10-18*`. Karty 6.0 są ciemne i wyżej upakowane (D8: wygląd później).
+- Niestabilne w świecie używanym ponownie (`--reuse`), zielone przy powtórce: `bebeszenie` (wiadomość D10 przed
+  rzutem) i błąd zasiewu „Scene … does not exist” w pierwszej paczce przebiegu — do E10.
