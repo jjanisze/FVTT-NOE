@@ -2,11 +2,12 @@
 
 ## Stan projektu
 
-**Etap: alfa** (v0.16.0, przegląd 2026-09-26; v0.18.0 2026-10-08 — M0 i M1 zamknięte, czysta instalacja
-B6 sprawdzana przy każdym wydaniu). Walka, ekwipunek, stany i przetrwanie grają się od początku do końca
-przy żywym stole, walka i powrót do zdrowia wg RAW (M1); produkcja przedmiotów i naprawa (v0.17.0) czekają
-na pierwszą sesję; towarzysze, drony (M3) oraz handel i postój (M5) wchodzą do v0.19.0 (2026-10-15).
-Większość pojazdów nie istnieje. Droga do wczesnej bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
+**Etap: alfa** (v0.20.0, 2026-10-18 — Foundry 14.369, dnd5e 6.0.6; kampania przeniesiona). Zamknięte: M0, M1
+(walka i powrót do zdrowia wg RAW), M2 (produkcja i naprawa, v0.17.0), M3 (towarzysze i drony) i M5 (handel,
+szabrowanie, postój) — v0.19.0; migracja na dnd5e 6 — v0.20.0. Walka, ekwipunek, stany i przetrwanie grały się przy
+żywym stole; produkcja, towarzysze, drony, handel i postój czekają na pierwsze sesje (kampania testowa w styczniu).
+Czysta instalacja (B6) sprawdzana przy każdym wydaniu. Przed betą: M6 (z biegłościami profesji), M4 (większość
+pojazdów nie istnieje), style. Droga do bety, bramki i kolejność prac: **[PLAN_beta.md](PLAN_beta.md)**.
 
 RAW = `Neuro 5e/Podrecznik/NOE/` — konwersja PDF-a „październik” (jedyne źródło; numery stron to
 strony drukowane tego wydania). Zmiany względem marca: `Neuro 5e/Podrecznik/CHANGELOG.md`.

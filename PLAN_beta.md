@@ -30,7 +30,7 @@ dni pracy agentów — wąskim gardłem są decyzje i przeglądy MG oraz grafika
 
 ```mermaid
 flowchart LR
-  P["3. Porządki"] --> M6["4. M6 + Biegłości profesji<br/>(+ ikony, Codex)"]
+  P["3. Porządki"] --> M6["4. M6 + Biegłości profesji"]
   M6 --> PM["5. PM1, PM7<br/>(zmieniają dane)"]
   PM --> M4["6. M4 Pojazdy — w całości"]
   M4 --> ST["7. Style i motywy"]
@@ -42,25 +42,34 @@ flowchart LR
 2. **Migracja na Foundry 14.369 i dnd5e 6.0.6** — [PLAN_migracja_dnd5e6.md](PLAN_migracja_dnd5e6.md). **Zrobione
    2026-10-18: v0.20.0** (e2e 21/21 w świecie gołym i zalecanym, Quench 1211/1211, 0 ostrzeżeń zgodności z naszego
    kodu); kampania na dnd5e 6.0.6. Reszta — lista PM tego planu (§9).
-3. **Porządki po migracji** (S): prace Codexa nad ikonami zacommitowane jako propozycja (`PLAN_icon_design.md`,
-   tablica wzorców dnd5e); PM15 — skrypt i style Roll20 usunięte ze świata kampanii (MG, 2026-10-18); test
-   `dev/icons/review/browser.test.mjs` czasem dostaje port, który Node odrzuca; walidacja paczek przepisuje pliki w
-   `packs/` (rekordy bez zmian) — ma sprawdzać kopię tymczasową; nagłówek „Stan projektu” w IMPLEMENTATION.md;
-   Poligon z powrotem na zwykły świat (`poligon:start`). **MG:** zgłoszenie błędu dnd5e `Infinite`
-   (`data/active-effect/condition.mjs`, nadal na `master`; 6.0.6 to wciąż najnowsze wydanie) — nasza podładka
+3. **Porządki po migracji** (S) — **zrobione 2026-10-18**: prace Codexa nad ikonami zacommitowane jako propozycja
+   (`PLAN_icon_design.md`, tablica wzorców dnd5e); PM15 — skrypt i style Roll20 usunięte ze świata kampanii; porty:
+   zakres efemeryczny Windows zaczyna się tu od 1024, więc `listen(0)` dawał czasem port z listy „bad port” standardu
+   Fetch (Node i Chrome odmawiają) — `dev/agent/lib/ports.mjs` dla serwerów testów ikon i dla portu nowych
+   piaskownic; `validate-packs` czyta kopie (koniec commitów z obrotem logów LevelDB, działa też przy uruchomionym
+   Foundry); nagłówek „Stan projektu” w IMPLEMENTATION.md. Poligon: klon kampanii zostaje na dysku, zwykłe
+   `poligon:start` (bez `--klon`) otwiera świat Poligonu. **MG:** zgłoszenie błędu dnd5e `Infinite`
+   (`data/active-effect/condition.mjs`, nadal na `master`; 6.0.6 to wciąż najnowsze wydanie) — nasza podkładka
    `config/dnd5e-fixes.mjs` do zdjęcia po poprawce.
-4. **M6 z Biegłościami profesji** (dziura w B6) i pozostałymi drobnymi zasadami (§3). Pod-etap: ikony biegłości i
-   język ikon — Codex (multimodalny), kod przegląda i integruje Claude.
+4. **M6 z Biegłościami profesji** (dziura w B6) i pozostałymi drobnymi zasadami (§3).
 5. **PM1 i PM7** — zmieniają zapisane dane (TT jako obliczenia KP dnd5e, identyfikatory istot), więc przed
    zamrożeniem modeli. Pozostałe PM po becie, chyba że coś blokują (MG, 2026-10-18).
 6. **M4 Pojazdy — w całości, przed betą** (MG, 2026-10-18). Projekt `PLAN_poscigi.md` §10 sprzed migracji — odświeżyć
    pod karty pojazdów dnd5e 6.
-7. **Style i motywy** — przed betą, bo zwiastun pokazuje karty, czat (ciemne karty dnd5e 6 po D8 migracji) i
-   pościg; PM13 (podsumowania kart) tutaj. Stanowiska Poligonu Garderoba i Galeria, reszta ilustracji M5
-   (`dev/icons/MISSING.md`).
+7. **Style i motywy (graficzne odświeżenie)** — przed betą, bo zwiastun to przekrój wszystkiego, co NOE ma w
+   Foundry: pościg, drony z kamerą i OSD, walka z efektami, karty postaci, handel (MG, 2026-10-18). Czat (ciemne karty
+   dnd5e 6 po D8 migracji), PM13 (podsumowania kart), stanowiska Poligonu Garderoba i Galeria, reszta ilustracji M5
+   (`dev/icons/MISSING.md`); **język ikon** (`PLAN_icon_design.md`) — na samym końcu tego etapu. Plan zdjęć do
+   zwiastuna: sceny Poligonu, na których każdy podsystem da się pokazać od ręki.
 8. **Kandydat do wydania → beta i zwiastun przed świętami** — zamrożenie modeli (B2), bramki B1–B8, dokumenty.
-9. **Styczeń: kampania testowa „Za garść gambli”** — świat MG (poza repo); znaleziska jako wydania bety bez
-   niszczących migracji.
+9. **Styczeń: kampania testowa „Za garść gambli”** — świat MG (poza repo, obok świata kampanii na tej samej
+   instalacji), testerzy tylko przez przeglądarkę na serwer MG (przekierowany port). Przed pierwszą sesją: HTTPS
+   (hasła i ciasteczka sesji nie idą otwartym tekstem), hasło na każdym koncie, testerzy jako Gracz (nie Zaufany
+   — bez wgrywania plików), przekierowany **tylko** port kampanii (nie piaskownice, Poligon, port DevTools Chrome
+   ani serwer przeglądu ikon), `fvtt` w trybie `runtime` na czas sesji. Znaleziska jako wydania bety bez niszczących
+   migracji.
+
+**Poza kolejnością, przed betą (MG):** lepsze narzędzia przeglądu ręcznego — termin i zakres MG.
 
 ---
 
